@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Train Location</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/trains.css">
+</head>
+<body>
+<div id="app">
+<header class="pixel-header">
+<div class="header-container">
+<div class="header-text">
+<h1 class="pixel-title">Pixel Tetsudo</h1>
+</div>
+</div>
+</header>
+<nav class="pixel-tabs">
+<a href="home.html" class="tab-btn">Route Search</a>
+<a href="realtime.html" class="tab-btn">Status</a>
+<a href="trains.html" class="tab-btn active">Train Location</a>
+<a href="history.html" class="tab-btn">History</a>
+</nav>
+<section id="tab-trains" class="tab-content active">
+<div id="trainsContainer" class="trains-container pixel-card">
+<div id="trainsLineListContent" class="trains-list"></div>
+<div id="trainsDetailView" class="trains-detail hidden">
+<button id="trainsBackBtn" class="back-btn">Back</button>
+<div id="trainsDetailTitle" class="detail-title"></div>
+<div id="trainsMapContainer" class="trains-map"></div>
+</div>
+</div>
+</section>
+<footer class="pixel-footer">・ゑｽｩ 2026 Pixel Tetsudo</footer>
+</div>
+<script src="../data/railway/line-control.js"></script>
+<script src="../data/railway/train-data.js"></script>
+<script src="../js/data-layer.js"></script>
+<script src="../data/api/odpt-unified.js"></script>
+<script src="../js/translations.js"></script>
+<script src="../js/trains-page.js?v=26"></script>
+</body>
+</html>

@@ -1,0 +1,212 @@
+﻿<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ODPT API 密钥生成器</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #f5f5f7;
+    padding: 40px 20px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  h1 { font-size: 22px; margin-bottom: 10px; color: #1c1c1e; }
+  p { color: #8e8e93; margin-bottom: 24px; font-size: 14px; }
+  .card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    margin-bottom: 20px;
+  }
+  .form-group { margin-bottom: 20px; }
+  label { display: block; font-size: 13px; font-weight: 600; color: #1c1c1e; margin-bottom: 6px; }
+  input, textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #e5e5ea;
+    border-radius: 10px;
+    font-size: 14px;
+    font-family: monospace;
+    transition: border-color 0.2s;
+  }
+  input:focus, textarea:focus { outline: none; border-color: #00a859; }
+  textarea { height: 120px; resize: vertical; }
+  .btn {
+    width: 100%;
+    padding: 14px;
+    background: #00a859;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-bottom: 10px;
+  }
+  .btn:hover { background: #00904d; }
+  .btn-secondary { background: #f0f0f5; color: #1c1c1e; }
+  .btn-secondary:hover { background: #e5e5ea; }
+  .btn-danger { background: #ff4757; }
+  .btn-danger:hover { background: #e83e4d; }
+  .status {
+    padding: 12px;
+    border-radius: 10px;
+    margin-top: 16px;
+    font-size: 13px;
+    display: none;
+  }
+  .status.show { display: block; }
+  .status.success { background: rgba(0,168,89,0.1); color: #00a859; }
+  .status.error { background: rgba(255,71,87,0.1); color: #ff4757; }
+  .info { font-size: 12px; color: #8e8e93; margin-top: 6px; }
+  .code-block {
+    background: #1c1c1e;
+    color: #00a859;
+    padding: 16px;
+    border-radius: 10px;
+    font-family: monospace;
+    font-size: 12px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+    margin-top: 12px;
+  }
+</style>
+</head>
+<body>
+<h1>ODPT API 密钥生成器</h1>
+<p>生成加密后的 API 密钥配置</p>
+
+<div class="card">
+  <h3 style="margin-bottom: 16px; font-size: 16px;">输入 API 密钥</h3>
+  <div class="form-group">
+    <label>Center API 密钥</label>
+    <input type="text" id="centerKey" placeholder="输入 Center API 密钥">
+  </div>
+  <div class="form-group">
+    <label>Challenge API 密钥</label>
+    <input type="text" id="challengeKey" placeholder="输入 Challenge API 密钥">
+  </div>
+  <button class="btn" onclick="generateConfig()">生成加密配置</button>
+  <button class="btn btn-secondary" onclick="window.location.href='realtime.html'">返回运行状态</button>
+  <button class="btn btn-danger" onclick="clearKeys()">清除本地密钥</button>
+  <div id="status" class="status"></div>
+</div>
+
+<div class="card" id="resultCard" style="display: none;">
+  <h3 style="margin-bottom: 16px; font-size: 16px;">生成的加密配置</h3>
+  <p class="info">将以下内容复制到 data/api/odpt-unified.js 的 ENCRYPTED_KEYS 变量中</p>
+  <div class="code-block" id="encryptedOutput"></div>
+  <button class="btn btn-secondary" onclick="copyToClipboard()" style="margin-top: 12px;">复制到剪贴板</button>
+</div>
+
+<div class="card">
+  <h3 style="margin-bottom: 16px; font-size: 16px;">使用说明</h3>
+  <ol style="padding-left: 20px; line-height: 1.8; color: #555; font-size: 14px;">
+    <li>输入你的 ODPT API 密钥</li>
+    <li>点击"生成加密配置"</li>
+    <li>复制生成的代码</li>
+    <li>打开 <code>data/api/odpt-unified.js</code></li>
+    <li>将代码粘贴到 <code>var ENCRYPTED_KEYS = ''</code> 中</li>
+    <li>保存文件并刷新页面</li>
+  </ol>
+</div>
+
+<script>
+// XOR 加密函数
+function xorEncrypt(text, key) {
+    var result = '';
+    for (var i = 0; i < text.length; i++) {
+        result += String.fromCharCode(text.charCodeAt(i) ^ key.charCodeAt(i % key.length));
+    }
+    return btoa(result);
+}
+
+var ENCRYPTION_KEY = 'PixelTetsudo2026';
+
+function generateConfig() {
+    var centerKey = document.getElementById('centerKey').value.trim();
+    var challengeKey = document.getElementById('challengeKey').value.trim();
+    var statusEl = document.getElementById('status');
+    
+    if (!centerKey || !challengeKey) {
+        statusEl.className = 'status show error';
+        statusEl.textContent = '请输入完整的 API 密钥';
+        return;
+    }
+    
+    // 生成 Base64 编码
+    var encoded = btoa('ODPT_CENTER:' + centerKey + '|CHALLENGE_2026:' + challengeKey);
+    
+    // 生成 XOR 加密版本
+    var encrypted = xorEncrypt(encoded, ENCRYPTION_KEY);
+    
+    // 生成完整配置代码
+    var configCode = '/**\n * Pixel Tetsudo - ODPT API 配置\n * 自动生成，请勿手动修改\n */\n\n' +
+        '// 加密的 API 密钥\n' +
+        'var ENCRYPTED_KEYS = "' + encrypted + '";\n\n' +
+        '// 加密密钥\n' +
+        'var ENCRYPTION_KEY = "' + ENCRYPTION_KEY + '";\n';
+    
+    // 显示结果
+    document.getElementById('encryptedOutput').textContent = configCode;
+    document.getElementById('resultCard').style.display = 'block';
+    
+    // 保存到 localStorage
+    localStorage.setItem('odpt_keys_b64', encoded);
+    localStorage.setItem('odpt_keys_encrypted', encrypted);
+    
+    statusEl.className = 'status show success';
+    statusEl.textContent = '密钥已生成并保存到 localStorage';
+    
+    console.log('[KeyGenerator] Config generated');
+    console.log('[KeyGenerator] Encoded:', encoded);
+    console.log('[KeyGenerator] Encrypted:', encrypted);
+}
+
+function copyToClipboard() {
+    var code = document.getElementById('encryptedOutput').textContent;
+    navigator.clipboard.writeText(code).then(function() {
+        var statusEl = document.getElementById('status');
+        statusEl.className = 'status show success';
+        statusEl.textContent = '已复制到剪贴板';
+    });
+}
+
+function clearKeys() {
+    localStorage.removeItem('odpt_keys_b64');
+    localStorage.removeItem('odpt_keys_encrypted');
+    var statusEl = document.getElementById('status');
+    statusEl.className = 'status show success';
+    statusEl.textContent = '本地密钥已清除';
+    document.getElementById('centerKey').value = '';
+    document.getElementById('challengeKey').value = '';
+}
+
+// 检查是否有已保存的密钥
+window.addEventListener('DOMContentLoaded', function() {
+    var stored = localStorage.getItem('odpt_keys_b64');
+    if (stored) {
+        try {
+            var decoded = atob(stored);
+            var parts = decoded.split('|');
+            parts.forEach(function(pair) {
+                var idx = pair.indexOf(':');
+                if (idx > 0) {
+                    var name = pair.substring(0, idx).trim();
+                    var value = pair.substring(idx + 1).trim();
+                    if (name === 'ODPT_CENTER') document.getElementById('centerKey').value = value;
+                    if (name === 'CHALLENGE_2026') document.getElementById('challengeKey').value = value;
+                }
+            });
+        } catch(e) {}
+    }
+});
+</script>
+</body>
+</html>

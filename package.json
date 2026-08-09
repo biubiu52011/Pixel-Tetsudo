@@ -1,0 +1,13 @@
+{
+  "name": "pixel-tetsudo",
+  "description": "Pixel Tetsudo - Railway Map Web Application",
+  "main": "pages/home.html",
+  "scripts": {
+    "start": "live-server pages --port 8080",
+    "build": "npm run minify",
+    "minify": "cleancss *.css -o dist/css/"
+  },
+  "keywords": ["train", "railway", "metro", "transit", "pixel"],
+  "author": "Pixel Tetsudo Team",
+  "license": "MIT"
+}

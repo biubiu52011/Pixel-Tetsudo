@@ -1,0 +1,41 @@
+﻿# === Sakura Transit - Git Ignore ===
+
+# Build artifacts / temp files
+*.tmp
+*.bak
+*.orig
+*.log
+*.txt
+
+# Encrypted data (keep in repo but don't edit accidentally)
+data/api-keys.enc
+
+# Node.js server dependencies
+server/node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+
+# Screenshots
+screenshot_*.png
+
+# Helper scripts used for data generation (optional - keep if needed)
+_build_*
+_fix_*
+_write_*
+getinformation-jp-kanto.js
+jreast_kanto.html
+jreast_page.html
+kanto.json
+
+# Environment variables
+.env
+
+# Screenshots
+screenshots/

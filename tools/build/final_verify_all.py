@@ -1,0 +1,16 @@
+Yamanote (JY): 30/47 MISMATCH
+Yokosuka (JO): 8/25 MISMATCH
+Saikyo (JA): 53/17 MISMATCH
+SobuLocal (JB): 19/17 MISMATCH
+Musashino (JM): 24/21 MISMATCH
+Takasaki (JU): 45/11 MISMATCH
+Tokaido (JT): 27/19 MISMATCH
+Tozai (T): 19/16 MISMATCH
+Shinjuku (S): 17/42 MISMATCH
+Odawara (OD): 35/46 MISMATCH
+TobuSkytree (TS): 45/65 MISMATCH
+TokyuToyoko (TY): 16/30 MISMATCH
+Keisei (KS): 33/27 MISMATCH
+SeibuChichibu (SC): 5/8 MISMATCH
+
+OK: 0, MISMATCH: 14, TOTAL: 15
