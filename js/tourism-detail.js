@@ -15,6 +15,8 @@
     default:  { bg: "linear-gradient(135deg, #00a859 0%, #008847 100%)", accent: "#00a859" }
   };
 
+  const TAG_EMOJI = { all: "📍", night: "🌙", history: "🏛️", nature: "🌿", shrine: "⛩️", food: "🍜", seasonal: "🌸" };
+
   let currentStation = "Asakusa";
   let currentIndex = 0;
 
@@ -23,19 +25,19 @@
   const SPOT_DETAILS = {
     "Senso-ji Temple": {
       ja: {
-        intro: "浅草寺は东京最古老的寺庙，创建于645年。传说两位兄弟在sumida河中发现了一尊观音金像。",
+        intro: "東京最古の仏教寺院。628年創建。金色の観音菩薩像が_sumida川から見つかったという伝承があります。",
         highlights: [
-          { text: "雷门 - 巨大的红色灯笼是浅草的象征", icon: "" },
-          { text: "仲见世通 - 250米长的购物街，传统小吃云集", icon: "" },
-          { text: "五重塔 - 建于1649年，高31.25米", icon: "" },
-          { text: "本堂 - 信徒祈祷和点燃线香的地方", icon: "" },
-          { text: "手水舍 - 进入前的净手和漱口的地方", icon: "" },
-          { text: "御神签 - 在签筒前求签问吉凶", icon: "" }
+          { text: "雷門 - 大門の赤い提灯は浅草の象徴", icon: "" },
+          { text: "仲見世商店街 - 250mの伝統的飲食店が並ぶ参道", icon: "" },
+          { text: "五重塔 - 1649年建築、高さ31.25m", icon: "" },
+          { text: "本堂 - 祈りを捧げる中心の建物", icon: "" },
+          { text: "手水舎 - 入場前の清めの道具", icon: "" },
+          { text: "おみくじ - 運勢を占める紙片", icon: "" }
         ],
-        tips: "建议早上9点前到达以避开人流。寺庙庭院免费进入。",
-        bestTime: "全年皆宜，新年参拜（初诣）和夏季祭典时尤其美丽。",
+        tips: "朝早く（9時前）に訪れると混雑を避けられます。境内は無料で入れます。",
+        bestTime: "通年。特に新年（初詣）や夏祭り時期が美しい。",
         hours: "6:00-17:00（本堂 6:00-16:30）",
-        fee: "免费（特别展览可能收费）"
+        fee: "無料（特別展は有料あり）"
       },
       en: {
         intro: "Senso-ji is Tokyo's oldest temple, founded in 645 AD. Legend says two brothers found a golden statue of Kannon in the Sumida River.",
@@ -53,34 +55,34 @@
         fee: "Free (special exhibitions may have fees)"
       },
       zh: {
-        intro: "浅草寺是东京最古老的寺庙，创建于645年。传说两位兄弟在墨田河中发现了一尊观音金像。",
+        intro: "东京最古老的佛教寺院，建于628年。传说两位渔民在Sumida河中发现了一尊金色观音菩萨像。",
         highlights: [
-          { text: "雷门 - 巨大的红色灯笼是浅草的象征", icon: "" },
-          { text: "仲见世通 - 250米长的购物街，传统小吃云集", icon: "" },
-          { text: "五重塔 - 建于1649年，高31.25米", icon: "" },
-          { text: "本堂 - 信徒祈祷和点燃线香的地方", icon: "" },
-          { text: "手水舍 - 进入前的净手和漱口的地方", icon: "" },
-          { text: "御神签 - 在签筒前求签问吉凶", icon: "" }
+          { text: "雷门 - 大门的巨大红灯笼是浅草的象征", icon: "" },
+          { text: "仲见世商店街 - 250米长的传统小吃参道", icon: "" },
+          { text: "五重塔 - 1649年建造，高31.25米", icon: "" },
+          { text: "本堂 - 供奉观音菩萨的主殿", icon: "" },
+          { text: "手水舍 - 入场前的净手漱口处", icon: "" },
+          { text: "御签 - 在签卜处抽取运势", icon: "" }
         ],
-        tips: "建议早上9点前到达以避开人流。寺庙庭院免费进入。",
-        bestTime: "全年皆宜，新年参拜（初诣）和夏季祭典时尤其美丽。",
+        tips: "建议早上9点前来，避开人流。寺院免费入场。",
+        bestTime: "全年皆可，新年（初诣）和夏季祭典时尤为美丽。",
         hours: "6:00-17:00（本堂 6:00-16:30）",
-        fee: "免费（特别展览可能收费）"
+        fee: "免费（特别展览另收费）"
       },
       ko: {
-        intro: "Senso-ji is Tokyo's oldest temple, founded in 645 AD. Legend says two brothers found a golden statue of Kannon in the Sumida River.",
+        intro: "센소지는 도쿄에서 가장 오래된 불교 사원으로, 645년에 건립되었습니다. 두 형제가 스미다 강에서 관세음보살의 금상을 발견했다는 전설이 있습니다.",
         highlights: [
-          { text: "Kaminarimon Gate - The massive red lantern is the symbol of Asakusa", icon: "" },
-          { text: "Nakamise-dori - 250m shopping street with traditional snacks", icon: "" },
-          { text: "Five-story Pagoda - Built in 1649, 31.25 meters tall", icon: "" },
-          { text: "Main Hall - Where prayers are offered and incense smoke rises", icon: "" },
-          { text: "Chozuya - Purification fountain before entering", icon: "" },
-          { text: "Omikuji Fortune Slips - Draw your fortune at the fortune slip stand", icon: "" }
+          { text: "카미나리몬 - 거대한 붉은 등불은 아사쿠사의 상징입니다", icon: "" },
+          { text: "나카미세 거리 - 전통 간식이 있는 250m 쇼핑 거리", icon: "" },
+          { text: "오층 탑 - 1649년 건설, 높이 31.25m", icon: "" },
+          { text: "본당 - 기도를 바치는 중심 건물을", icon: "" },
+          { text: "초즈야 - 입장 전 정화의 분수", icon: "" },
+          { text: "오미쿠지 - 운세를 점치는 종이 조각", icon: "" }
         ],
-        tips: "Visit early morning (before 9am) to avoid crowds. The temple grounds are free to enter.",
-        bestTime: "Year-round, but especially beautiful during New Year (Hatsumode) and summer festivals.",
-        hours: "6:00-17:00 (Main Hall 6:00-16:30)",
-        fee: "Free (special exhibitions may have fees)"
+        tips: "군중을 피하려면 아침 일찍(9시 이전) 방문하세요. 사원은 무료로 입장할 수 있습니다.",
+        bestTime: "연중 언제든지, 특히 설날(하츠モード)과 여름 축제 때 아름답습니다.",
+        hours: "6:00-17:00 (본당 6:00-16:30)",
+        fee: "무료 (특별 전시는 유료일 수 있음)"
       }
     }
   };
@@ -109,7 +111,7 @@
     return {
       intro: spot.desc || t("detail.fallback_intro") + " " + stationName + t("detail.fallback_station"),
       highlights: [
-        { text: t("detail.location") + ": " + (spot.dir || t("detail.near_station")), icon: spot.emoji },
+        { text: t("detail.location") + ": " + (spot.dir || t("detail.near_station")), icon: "" },
         { text: t("detail.distance") + ": " + (spot.dist || t("detail.walking_distance")), icon: "" }
       ],
       tips: t("detail.fallback_tips"),
@@ -126,9 +128,12 @@
 
     const spots = getSpotsForStation(stationKey);
     const stationCoords = window.STATION_COORDS || {};
-    const coord = stationCoords[stationKey] || null;
+    const coord = (stationCoords[stationKey] || null) || (window.TOURISM_DATA && window.TOURISM_DATA[stationKey] && window.TOURISM_DATA[stationKey].coord) || null;
     const stationName = stationKey;
+    const spotKey = spot.name.toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "");
     const translatedName = t("spots." + spotKey) || spot.name;
+    const content = getArticleContent(spot, stationName, window.currentLang || "ja");
+    const spotEmoji = spot.emoji || TAG_EMOJI[(spot.tags && spot.tags[0]) || "default"] || "📍";
 
     var primaryTag = (spot.tags && spot.tags[0]) || "default";
     var theme = THEME_COLORS[primaryTag] || THEME_COLORS.default;
@@ -136,9 +141,8 @@
     // Build tag badges
     var tagsHtml = "";
     if (spot.tags && spot.tags.length > 0) {
-      var _labels = {all:"全部",night:"夜景",history:"历史",nature:"自然",shrine:"神社",food:"美食",seasonal:"季节"};
+      var _labels = {all:t("tourism.tag_all"),night:t("tourism.tag_night"),history:t("tourism.tag_history"),nature:t("tourism.tag_nature"),shrine:t("tourism.tag_shrine"),food:t("tourism.tag_food"),seasonal:t("tourism.tag_seasonal")};
       tagsHtml = "<div class=\"article-tags\">" + spot.tags.map(function(tag) {
-        var _cls = "tag-badge " + tag;
         var _txt = _labels[tag] || tag;
         var _q = String.fromCharCode(34);
         return "<span class=" + _q + "tag-badge " + tag + _q + ">" + _txt + "</span>";
@@ -152,7 +156,7 @@
     if (content.image) {
       imageHtml = "<div class=\"article-hero\"><img src=\"" + content.image + "\" alt=\"" + translatedName + "\" class=\"article-hero-img\"></div>";
     } else {
-      imageHtml = "<div class=\"article-hero\" style=\"background: " + theme.bg + "\"><div class=\"article-hero-content\"><span class=\"hero-emoji\">" + spot.emoji + "</span></div></div>";
+      imageHtml = "<div class=\"article-hero\" style=\"background: " + theme.bg + "\"><div class=\"article-hero-content\"><span class=\"hero-emoji\">" + spotEmoji + "</span></div></div>";
     }
 
     var infoHtml = "";
@@ -164,7 +168,7 @@
     }
 
     var html = "<div class=\"article-header\">" +
-      "<div class=\"article-emoji\">" + spot.emoji + "</div>" +
+      "<div class=\"article-emoji\">" + spotEmoji + "</div>" +
       "<div class=\"article-title-section\">" +
         "<h1 class=\"article-title\">" + translatedName + "</h1>" +
         "<div class=\"article-meta\">" +
@@ -196,7 +200,7 @@
           "<div class=\"map-direction\"><span class=\"map-icon\">📍</span><div><div class=\"map-label\">" + t("detail.direction") + "</div><div class=\"map-value\">" + (spot.dir || "Near station") + "</div></div></div>" +
           "<div class=\"map-distance\"><span class=\"map-icon\">🚶</span><div><div class=\"map-label\">" + t("detail.distance") + "</div><div class=\"map-value\">" + (spot.dist || "Walking distance") + "</div></div></div>" +
         "</div>" +
-        (coord ? "<div class=\"map-container\"><iframe src=\"https://www.openstreetmap.org/export/embed.html?bbox=" + (coord[1] - 0.01) + "%2C" + (coord[0] - 0.005) + "%2C" + (coord[1] + 0.01) + "%2C" + (coord[0] + 0.005) + "&layer=mapnik&marker=" + coord[0] + "%2C" + coord[1] + "\\" style=\"width:100%;height:200px;border:0;border-radius:0;\"></iframe></div>" : "") +
+        (coord ? "<div class=\"map-container\"><iframe src=\"https://www.openstreetmap.org/export/embed.html?bbox=" + (coord[1] - 0.01) + "%2C" + (coord[0] - 0.005) + "%2C" + (coord[1] + 0.01) + "%2C" + (coord[0] + 0.005) + "&layer=mapnik&marker=" + coord[0] + "%2C" + coord[1] + "\" style=\"width:100%;height:200px;border:0;border-radius:0;\"></iframe></div>" : "") +
       "</div>" +
     "</div>";
 
@@ -210,17 +214,13 @@
     return t("spots." + key) || spotName;
   }
 
-  
   function getSpotsForStation(stationKey) {
-    const allSpots = window.TOURISM_DATA || {};
-    const result = [];
-    for (const [spotName, spot] of Object.entries(allSpots)) {
-      if (spot.station === stationKey) {
-        result.push(spot);
-      }
-    }
-    return result;
+    const allData = window.TOURISM_DATA || {};
+    const station = allData[stationKey];
+    if (!station || !station.spots) return [];
+    return station.spots;
   }
+
   function updateNavigation(stationKey) {
     const spots = getSpotsForStation(stationKey);
     if (spots.length === 0) return;
@@ -269,13 +269,13 @@
 
   function translateUI() {
     const backBtnText = document.getElementById("backBtnText");
-    if (backBtnText) backBtnText.textContent = t("detail.back", "戻る");
+    if (backBtnText) backBtnText.textContent = t("detail.back");
 
     const prevLabel = document.getElementById("prevLabel");
-    if (prevLabel) prevLabel.textContent = t("detail.prev", "前へ");
+    if (prevLabel) prevLabel.textContent = t("detail.prev");
 
     const nextLabel = document.getElementById("nextLabel");
-    if (nextLabel) nextLabel.textContent = t("detail.next", "次へ");
+    if (nextLabel) nextLabel.textContent = t("detail.next");
   }
 
   function init() {

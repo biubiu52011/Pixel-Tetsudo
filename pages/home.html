@@ -1,4 +1,4 @@
-ï»¿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
@@ -8,11 +8,18 @@
 <meta name="theme-color" content="#00a04e">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="description" content="Pixel Tetsudo - Route Search">
-<title>è·¯ç·šæ¤œç´¢ | PIXEL TETSUDO</title>
+<title>˜HüŒŸõ | PIXEL TETSUDO</title>
 <link rel="icon" href="../pixel-tetsudo.ico" type="image/x-icon">
 <link rel="stylesheet" href="../css/style.css?">
 <link rel="stylesheet" href="../css/lang-bar.css">
 <link rel="stylesheet" href="../css/tourism-styles.css?">
+
+<style>
+/* Force single column for sm-grid on all screens up to 1000px */
+@media (max-width: 1000px) {
+  #smGrid { grid-template-columns: 1fr !important; }
+}
+</style>
 </head>
 <body>
 <div id="app">
@@ -24,67 +31,67 @@
 </button>
 <div id="langSwitcher" class="lang-switcher">
 <div class="lang-options" role="listbox" aria-label="Select language">
-<button class="lang-btn active" data-lang="ja" role="option" aria-selected="true">æ—¥æœ¬èª</button>
-<button class="lang-btn" data-lang="zh" role="option" aria-selected="false">ä¸­æ–‡</button>
-<button class="lang-btn" data-lang="ko" role="option" aria-selected="false">í•œêµ­ì–´</button>
+<button class="lang-btn active" data-lang="ja" role="option" aria-selected="true">“ú–{Œê</button>
+<button class="lang-btn" data-lang="zh" role="option" aria-selected="false">’†•¶</button>
+<button class="lang-btn" data-lang="ko" role="option" aria-selected="false">???</button>
 <button class="lang-btn" data-lang="en" role="option" aria-selected="false">English</button>
 </div>
 </div>
 </div>
 <div class="header-text">
 <h1 class="pixel-title" data-i18n="app.title">Pixel Tetsudo</h1>
-<p class="pixel-subtitle">PIXEL TETSUDO</p>
+
 </div>
 </div>
 </header>
 <nav class="pixel-tabs">
-<a href="home.html" class="tab-btn active" data-tab="search" data-i18n="tab.search">è·¯ç·šæ¤œç´¢</a>
-<a href="realtime.html" class="tab-btn" data-tab="status" data-i18n="tab.status">å®æ—¶ä¿¡æ¯</a>
-<a href="trains.html" class="tab-btn" data-tab="trains" data-i18n="tab.realtime">åˆ—è½¦æ—¶åˆ»</a>
-<a href="#" class="tab-btn" data-tab="history" data-i18n="tab.history">å†å²</a>
+<a href="home.html" class="tab-btn active" data-tab="search" data-i18n="tab.search">˜HüŒŸõ</a>
+<a href="realtime.html" class="tab-btn" data-tab="status" data-i18n="tab.status">??M‘§</a>
+<a href="trains.html" class="tab-btn" data-tab="trains" data-i18n="tab.realtime">—ñ??</a>
+<a href="#" class="tab-btn" data-tab="history" data-i18n="tab.history">?j</a>
 </nav>
 <section id="tab-search" class="tab-content active">
 <div id="searchContainer" class="search-card pixel-card">
 <div class="search-inputs">
 <div class="input-group">
-<label class="input-label" data-i18n="search.fromLabel">å‡ºå‘ç«™</label>
-<input type="text" id="searchFrom" class="search-input" data-i18n-placeholder="search.fromPlaceholder" placeholder="å‡ºç™ºé§…ã‚’å…¥åŠ›">
+<label class="input-label" data-i18n="search.fromLabel">o?â‹</label>
+<input type="text" id="searchFrom" class="search-input" data-i18n-placeholder="search.fromPlaceholder" placeholder="o”­‰w‚ğ“ü—Í">
 <div id="fromSuggestions" class="suggestions"></div>
 </div>
 <div class="input-group">
-<label class="input-label" data-i18n="search.toLabel">åˆ°è¾¾ç«™</label>
-<input type="text" id="searchTo" class="search-input" data-i18n-placeholder="search.toPlaceholder" placeholder="åˆ°ç€é§…ã‚’å…¥åŠ›">
+<label class="input-label" data-i18n="search.toLabel">“?â‹</label>
+<input type="text" id="searchTo" class="search-input" data-i18n-placeholder="search.toPlaceholder" placeholder="“’…‰w‚ğ“ü—Í">
 <div id="toSuggestions" class="suggestions"></div>
 </div>
-<button id="searchBtn" class="search-btn" data-i18n="search.btn">æœç´¢</button>
+<button id="searchBtn" class="search-btn" data-i18n="search.btn">rõ</button>
 </div>
 <div id="searchResults" class="search-results"></div>
 </div>
 <div id="smModule" class="sm-module pixel-card">
   <div class="sm-header">
-    <h2 data-i18n="tourism.title">è§‚å…‰æƒ…æŠ¥</h2>
+    <h2 data-i18n="tourism.title">?Œõî?</h2>
     <div id="smAutoBadge" class="sm-auto-badge hidden"></div>
   </div>
   <div class="sm-location-bar">
     <div class="sm-location-info">
-      <span class="sm-location-label" data-i18n="tourism.select_station">é§…</span>
+      <span class="sm-location-label" data-i18n="tourism.select_station">‰w</span>
       <span id="smStationDisplay" class="sm-station-display"></span>
     </div>
-    <button id="smRelocateBtn" class="sm-relocate-btn" title="é‡æ–°å®šä½">âŸ³</button>
+    <button id="smRelocateBtn" class="sm-relocate-btn" title="dV’èˆÊ">?</button>
   </div>
   <div id="smTagFilters" class="sm-tag-filters"></div>
   <div class="sm-content">
     <div id="smGrid" class="sm-grid"></div>
     <div id="smEmpty" class="sm-empty hidden">
       
-      <span data-i18n="tourism.no_spots">æ²¡æœ‰æ™¯ç‚¹</span>
+      <span data-i18n="tourism.no_spots">–v—LŒi“_</span>
     </div>
   </div>
 </div>
 <section id="tab-status" class="tab-content"></section>
 <section id="tab-trains" class="tab-content"></section>
 <section id="tab-history" class="tab-content"></section>
-<footer class="pixel-footer" data-i18n="app.footer">Â© 2026 Pixel Tetsudo</footer>
+<footer class="pixel-footer" data-i18n="app.footer">c 2026 Pixel Tetsudo</footer>
 </div>
 <script src="../data/railway/line-control.js"></script>
 <script src="../data/station-coords.js"></script><script src="../data/tourism-data.js"></script>
@@ -98,6 +105,8 @@
 <script src="../js/history.js"></script>
 </body>
 </html>
+
+
 
 
 

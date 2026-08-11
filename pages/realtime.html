@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
@@ -8,11 +8,11 @@
 <meta name="theme-color" content="#00a04e">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="description" content="Pixel Tetsudo - Running Status">
-<title>运行状态 | PIXEL TETSUDO</title>
+<title>?�s��? | PIXEL TETSUDO</title>
 <link rel="icon" href="../pixel-tetsudo.ico" type="image/x-icon">
 <link rel="stylesheet" href="../css/style.css?">
 <link rel="stylesheet" href="../css/lang-bar.css">
-<link rel="stylesheet" href="../css/realtime.css?">
+<link rel="stylesheet" href="../css/realtime.css?v=14">
 </head>
 <body>
 <div id="app">
@@ -24,24 +24,24 @@
 </button>
 <div id="langSwitcher" class="lang-switcher">
 <div class="lang-options" role="listbox" aria-label="Select language">
-<button class="lang-btn active" data-lang="ja" role="option" aria-selected="true">日本語</button>
-<button class="lang-btn" data-lang="zh" role="option" aria-selected="false">中文</button>
-<button class="lang-btn" data-lang="ko" role="option" aria-selected="false">한국어</button>
+<button class="lang-btn active" data-lang="ja" role="option" aria-selected="true">���{��</button>
+<button class="lang-btn" data-lang="zh" role="option" aria-selected="false">����</button>
+<button class="lang-btn" data-lang="ko" role="option" aria-selected="false">???</button>
 <button class="lang-btn" data-lang="en" role="option" aria-selected="false">English</button>
 </div>
 </div>
 </div>
 <div class="header-text">
 <h1 class="pixel-title" data-i18n="app.title">Pixel Tetsudo</h1>
-<p class="pixel-subtitle">PIXEL TETSUDO</p>
+
 </div>
 </div>
 </header>
 <nav class="pixel-tabs">
-<a href="home.html" class="tab-btn" data-tab="search" data-i18n="tab.search">线路搜索</a>
-<a href="realtime.html" class="tab-btn active" data-tab="status" data-i18n="tab.status">运行状态</a>
-<a href="trains.html" class="tab-btn" data-tab="trains" data-i18n="tab.realtime">列车信息</a>
-<a href="#" class="tab-btn" data-tab="history" data-i18n="tab.history">历史数据</a>
+<a href="home.html" class="tab-btn" data-tab="search" data-i18n="tab.search">?�H�r��</a>
+<a href="realtime.html" class="tab-btn active" data-tab="status" data-i18n="tab.status">?�s��?</a>
+<a href="trains.html" class="tab-btn" data-tab="trains" data-i18n="tab.realtime">��?�M��</a>
+<a href="#" class="tab-btn" data-tab="history" data-i18n="tab.history">?�j����</a>
 </nav>
 <section id="tab-status" class="tab-content active">
 <div id="realtimeStatusContainer" class="pixel-card"></div>
@@ -49,7 +49,7 @@
 <section id="tab-search" class="tab-content"></section>
 <section id="tab-trains" class="tab-content"></section>
 <section id="tab-history" class="tab-content"></section>
-<footer class="pixel-footer" data-i18n="app.footer">© 2026 Pixel Tetsudo</footer>
+<footer class="pixel-footer" data-i18n="app.footer">c 2026 Pixel Tetsudo</footer>
 <div id="lineDetailModal" class="rs-modal">
 <div class="rs-modal-content">
 <div class="rs-modal-header">
@@ -61,7 +61,7 @@
 </div>
 </div>
 <script src="../data/railway/line-control.js"></script>
-<script src="../data/railway/train-data.js"></script>
+
 <script src="../data/api/odpt-unified.js"></script>
 
 
@@ -69,6 +69,12 @@
 <script src="../js/common.js"></script>
 <script src="../js/lang-init.js"></script>
 <script src="../js/tab-switch.js" defer></script>
-</body>
+<script src="../js/data-fusion.js"></script><script src="../js/realtime-view.js"></script></body>
 </html>
+
+
+
+
+
+
 

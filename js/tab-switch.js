@@ -1,5 +1,5 @@
-/*
- * 标签页切换逻辑
+﻿/*
+ * Page tab switching with hash support
  */
 
 (function() {
@@ -23,6 +23,22 @@
         }
       });
     });
+
+    // Handle URL hash on page load
+    var hash = window.location.hash;
+    if (hash) {
+      var tabId = hash.replace('#', '');
+      var targetBtn = document.querySelector('.tab-btn[data-tab="' + tabId + '"]');
+      var targetContent = document.getElementById('tab-' + tabId);
+
+      if (targetBtn && targetContent) {
+        contents.forEach(function(c) { c.classList.remove('active'); });
+        btns.forEach(function(b) { b.classList.remove('active'); });
+
+        targetBtn.classList.add('active');
+        targetContent.classList.add('active');
+      }
+    }
   }
 
   if (document.readyState === 'loading') {

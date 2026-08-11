@@ -77,6 +77,7 @@
         if (SUPPORTED.indexOf(lang) === -1) return;
         if (!applyLang(lang)) return;
         localStorage.setItem(STORAGE_KEY, lang);
+        window.currentLang = lang;
         updateSwitcherUI(lang);
         updateTranslations();
         triggerLanguageChange();
@@ -168,6 +169,7 @@
         // Apply saved language
         var savedLang = localStorage.getItem(STORAGE_KEY);
         var currentLang = SUPPORTED.indexOf(savedLang) !== -1 ? savedLang : DEFAULT_LANG;
+        window.currentLang = currentLang;
         updateSwitcherUI(currentLang);
         updateTranslations();
     }

@@ -24,4 +24,14 @@
   if (typeof window.SearchHistory !== 'undefined') {
     window.SearchHistory.init();
   }
+
+  // Force single column for sm-grid based on viewport width
+  function ensureSingleColumn() {
+    const grid = document.getElementById('smGrid');
+    if (grid) {
+      grid.style.gridTemplateColumns = window.innerWidth <= 1000 ? '1fr' : 'repeat(auto-fill, minmax(280px, 1fr))';
+    }
+  }
+  ensureSingleColumn();
+  window.addEventListener('resize', ensureSingleColumn);
 })();
