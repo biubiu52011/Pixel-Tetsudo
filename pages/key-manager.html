@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ODPT API 密钥管理</title>
+<title>ODPT API 蟇・徴邂｡逅・/title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f7; padding: 40px 20px; max-width: 500px; margin: 0 auto; }
@@ -28,29 +28,29 @@ input:focus { outline: none; border-color: #00a859; }
 </style>
 </head>
 <body>
-<h1>ODPT API 密钥管理</h1>
-<p>密钥存储在浏览器本地，仅用于访问 ODPT API</p>
+<h1>ODPT API 蟇・徴邂｡逅・/h1>
+<p>蟇・徴蟄伜お蝨ｨ豬剰ｧ亥勣譛ｬ蝨ｰ・御ｻ・畑莠手ｮｿ髣ｮ ODPT API</p>
 <div class="card">
   <div class="form-group">
-    <label>Center API 密钥</label>
-    <input type="text" id="centerKey" placeholder="输入 Center API 密钥">
+    <label>Center API 蟇・徴</label>
+    <input type="text" id="centerKey" placeholder="霎灘・ Center API 蟇・徴">
   </div>
   <div class="form-group">
-    <label>Challenge API 密钥</label>
-    <input type="text" id="challengeKey" placeholder="输入 Challenge API 密钥">
+    <label>Challenge API 蟇・徴</label>
+    <input type="text" id="challengeKey" placeholder="霎灘・ Challenge API 蟇・徴">
   </div>
-  <button class="btn" onclick="saveKeys()">保存密钥</button>
-  <button class="btn btn-secondary" onclick="window.location.href='realtime.html'">返回运行状态</button>
-  <button class="btn btn-danger" id="clearBtn" onclick="clearKeys()" style="display:none;">清除所有密钥</button>
+  <button class="btn" onclick="saveKeys()">菫晏ｭ伜ｯ・徴</button>
+  <button class="btn btn-secondary" onclick="window.location.href='realtime.html'">霑泌屓霑占｡檎憾諤・/button>
+  <button class="btn btn-danger" id="clearBtn" onclick="clearKeys()" style="display:none;">貂・勁謇譛牙ｯ・徴</button>
   <div id="status" class="status"></div>
 </div>
 <div class="card">
-  <h3 style="margin-bottom:12px;font-size:16px;">如何获取 API 密钥？</h3>
+  <h3 style="margin-bottom:12px;font-size:16px;">螯ゆｽ戊執蜿・API 蟇・徴・・/h3>
   <ol style="padding-left:20px;line-height:1.8;color:#555;font-size:14px;">
-    <li>访问 <a href="https://odpt.org/" target="_blank">odpt.org</a> 注册账号</li>
-    <li>在控制台创建应用，获取 API 密钥</li>
-    <li>Center API 密钥用于地铁线路</li>
-    <li>Challenge API 密钥用于 JR 和私铁线路</li>
+    <li>隶ｿ髣ｮ <a href="https://odpt.org/" target="_blank" rel="noopener noreferrer">odpt.org</a> 豕ｨ蜀瑚ｴｦ蜿ｷ</li>
+    <li>蝨ｨ謗ｧ蛻ｶ蜿ｰ蛻帛ｻｺ蠎皮畑・瑚執蜿・API 蟇・徴</li>
+    <li>Center API 蟇・徴逕ｨ莠主慍體∫ｺｿ霍ｯ</li>
+    <li>Challenge API 蟇・徴逕ｨ莠・JR 蜥檎ｧ・刀郤ｿ霍ｯ</li>
   </ol>
 </div>
 <script>
@@ -58,19 +58,19 @@ function saveKeys() {
   var centerKey = document.getElementById('centerKey').value.trim();
   var challengeKey = document.getElementById('challengeKey').value.trim();
   var statusEl = document.getElementById('status');
-  if (!centerKey || !challengeKey) { statusEl.className = 'status show error'; statusEl.textContent = '请填写所有字段'; return; }
+  if (!centerKey || !challengeKey) { statusEl.className = 'status show error'; statusEl.textContent = '隸ｷ蝪ｫ蜀呎園譛牙ｭ玲ｮｵ'; return; }
   try {
     var encoded = btoa('ODPT_CENTER:' + centerKey + '|CHALLENGE_2026:' + challengeKey);
     localStorage.setItem('odpt_keys_b64', encoded);
-    statusEl.className = 'status show success'; statusEl.textContent = '密钥已保存';
+    statusEl.className = 'status show success'; statusEl.textContent = '蟇・徴蟾ｲ菫晏ｭ・;
     document.getElementById('clearBtn').style.display = 'block';
-  } catch(e) { statusEl.className = 'status show error'; statusEl.textContent = '保存失败: ' + e.message; }
+  } catch(e) { statusEl.className = 'status show error'; statusEl.textContent = '菫晏ｭ伜､ｱ雍･: ' + e.message; }
 }
 function clearKeys() {
   localStorage.removeItem('odpt_keys_b64');
   document.getElementById('clearBtn').style.display = 'none';
   var statusEl = document.getElementById('status');
-  statusEl.className = 'status show success'; statusEl.textContent = '密钥已清除';
+  statusEl.className = 'status show success'; statusEl.textContent = '蟇・徴蟾ｲ貂・勁';
   document.getElementById('centerKey').value = '';
   document.getElementById('challengeKey').value = '';
 }
