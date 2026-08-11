@@ -1,44 +1,19 @@
 ﻿/**
  * Pixel Tetsudo - Unified ODPT API Client & Realtime Module
  * 整合：加密密钥管理、API客户端、缓存、数据转换、运行状态显示
- * 密钥已加密存储，不暴露明文
+ * 密钥存储在浏览器本地
  */
 (function() {
     'use strict';
-
-    // ========== 加密/解密 ==========
-    var ENCRYPTION_KEY = 'PixelTetsudo2026';
-    var ENCRYPTED_KEYS = 'BFkqNDoSXDAhIFE6YGZ7ADEHLgkNOSANKhgMAn13A1gzWwhUDQwvQBYiE15XdHBOHgc2FQ0+LwQ9HwAGV10DTx89NlMIOQYDETEDWlBKVlw0LRASIWYJQhExDAJrZHBEHQMQFgk6HTAgMCIiZnVkeQJZLgMhPiQNPR8UAVd4XkAJEyEcNhwkQRIhPgd8d2cGCQQQHCMAP0cQIioEfWd4WzITHBUiA11EKTE1F393XkUKLSIVNWZUGT4xB1pXXWQEMwQAFyEcNwUXHyVfaHdeQw==';
-
-    function xorEncrypt(text, key) {
-        var result = '';
-        for (var i = 0; i < text.length; i++) {
-            result += String.fromCharCode(text.charCodeAt(i) ^ key.charCodeAt(i % key.length));
-        }
-        return btoa(result);
-    }
-
-    function xorDecrypt(encoded, key) {
-        try {
-            var binary = atob(encoded);
-            var result = '';
-            for (var i = 0; i < binary.length; i++) {
-                result += String.fromCharCode(binary.charCodeAt(i) ^ key.charCodeAt(i % key.length));
-            }
-            return result;
-        } catch (e) { return ''; }
-    }
 
     // ========== 密钥管理 ==========
     function parseKeys(encoded) {
         if (!encoded) return { CENTER: '', CHALLENGE: '' };
         try {
-            // Try to decode as base64 first (for localStorage stored keys), fall back to plain text
             var decoded = encoded;
-            try { decoded = atob(encoded); } catch(e) { /* already plain text */ }
-            var keys = { CENTER: '', CHALLENGE: '' }
-            var parts = decoded.split('|');
-            parts.forEach(function(pair) {
+            try { decoded = atob(encoded); } catch(e) { /* plain text */ }
+            var keys = { CENTER: '', CHALLENGE: '' };
+            decoded.split('|').forEach(function(pair) {
                 var idx = pair.indexOf(':');
                 if (idx > 0) {
                     var name = pair.substring(0, idx).trim();
@@ -52,20 +27,7 @@
     }
 
     function loadKeys() {
-        var stored = localStorage.getItem('odpt_keys_b64');
-        if (stored) return stored;
-        if (ENCRYPTED_KEYS) {
-            var intermediate = xorDecrypt(ENCRYPTED_KEYS, ENCRYPTION_KEY);
-            if (intermediate) {
-                try {
-                    var decoded = atob(intermediate);
-                    if (decoded && decoded.indexOf(':') > 0) return decoded;
-                } catch (e) {
-                    if (intermediate && intermediate.indexOf(':') > 0) return intermediate;
-                }
-            }
-        }
-        return null;
+        return localStorage.getItem('odpt_keys_b64');
     }
 
     function saveKeys(centerKey, challengeKey) {
@@ -74,9 +36,9 @@
         return encoded;
     }
 
-    // ========== API 配置 ==========
+// ========== API 配置 ==========
     window.ODPT_CONFIG = {
-        keys: parseKeys(loadKeys()),
+        keys: { CENTER: "", CHALLENGE: "" },
 
         endpoints: {
             CHALLENGE_BASE_URL: 'https://api-challenge.odpt.org/api/v4',
@@ -581,5 +543,5 @@
         init();
     }
 
-    console.log('[ODPT] Unified client initialized with encrypted keys');
+    console.log('[ODPT] Unified client initialized');
 })();
