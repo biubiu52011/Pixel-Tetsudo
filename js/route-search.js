@@ -7,11 +7,15 @@
 (function() {
   'use strict';
 
+  let _graphCache = null;
+  let _graphVersion = 0;
+
   /**
    * Build a bidirectional adjacency list from UNIFIED_LINES
    * Returns: Map<stationName, Set<connectedStationNames>>
    */
   function buildStationGraph() {
+    if (_graphCache) return _graphCache;
     const graph = new Map();
     
     for (const lineId of Object.keys(window.UNIFIED_LINES)) {
@@ -45,21 +49,22 @@
         for (const transfer of line.transferStations) {
           const station = transfer.station;
           if (graph.has(station)) {
-            for (const connectLine of (transfer.connects || [])) {
-              // Find the line that has this connected station name
-              // For simplicity, we'll add cross-line transfers by adding edges
-              // In a real implementation, you'd match station names across lines
+            for (const connectLineId of (transfer.connects || [])) {
+              const connectLine = window.UNIFIED_LINES[connectLineId];
+              // Transfer stations are already in the graph via line stations
+              // No need to add self-loops - BFS visited set handles this
             }
           }
         }
       }
     }
     
+    _graphCache = graph;
     return graph;
   }
 
   /**
-   * BFS to find shortest path between two stations
+   * Get cached graph, rebuilding if necessary between two stations
    * @param {string} fromStation - Starting station name
    * @param {string} toStation - Destination station name
    * @returns {Object|null} { path: string[], durationMin: number, lineInfo: Array[] } or null if no route
@@ -87,8 +92,26 @@
       
       // Check if destination reached
       if (currentStation === toStation) {
-        // Calculate approximate duration (assume 2 min per segment as in data)
-        const durationMin = (currentPath.length - 1) * 2;
+        // Calculate actual duration using line duration data
+        let durationMin = 0;
+        for (let i = 0; i < currentPath.length - 1; i++) {
+          const segLines = getLinesForSegment(currentPath[i], currentPath[i+1]);
+          if (segLines.length > 0) {
+            const line = window.UNIFIED_LINES[segLines[0]];
+            if (line && line.durations) {
+              const segIdx = line.stations.indexOf(currentPath[i]);
+              if (segIdx >= 0 && segIdx < line.durations.length) {
+                durationMin += line.durations[segIdx];
+              } else {
+                durationMin += 2;
+              }
+            } else {
+              durationMin += 2;
+            }
+          } else {
+            durationMin += 2;
+          }
+        }
         
         // Determine which lines are involved in each segment
         const lineInfo = [];
@@ -127,7 +150,11 @@
   /**
    * Get which lines connect two adjacent stations
    */
+  const _lineCache = new Map();
+
   function getLinesForSegment(station1, station2) {
+    const key = station1 + '||' + station2;
+    if (_lineCache.has(key)) return _lineCache.get(key);
     const lines = [];
     for (const lineId of Object.keys(window.UNIFIED_LINES)) {
       const line = window.UNIFIED_LINES[lineId];
@@ -139,6 +166,7 @@
         }
       }
     }
+    _lineCache.set(key, lines);
     return lines;
   }
 
@@ -172,7 +200,8 @@
     findRoute: findRoute,
     findStationsByTerm: findStationsByTerm,
     buildStationGraph: buildStationGraph,
-    getLinesForSegment: getLinesForSegment
+    getLinesForSegment: getLinesForSegment,
+    invalidateGraphCache: function() { _graphCache = null; }
   };
 
 })();

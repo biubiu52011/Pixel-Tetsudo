@@ -26,7 +26,7 @@
   };
 
   const RIVERS = [
-    { name: 'Sumida', lat: 35.710, lng: 139.803, width: 120 }
+    { name: 'Sumida', lat: 35.710, lng: 139.803, width: 120 } // width in meters
   ];
 
   let state = {
@@ -110,8 +110,12 @@
              '" data-tag="' + tag + '"><span class="tag-icon">' + icon + '</span><span class="tag-label">' + label + '</span></button>';
     }).join('');
 
-    dom.tagFilters.querySelectorAll('.sm-tag-btn').forEach(function(btn) {
-      btn.addEventListener('click', function(e) {
+    // Event delegation - bind once on the container
+    if (!dom.tagFilters.dataset.bound) {
+      dom.tagFilters.dataset.bound = '1';
+      dom.tagFilters.addEventListener('click', function(e) {
+        const btn = e.target.closest('.sm-tag-btn');
+        if (!btn) return;
         e.preventDefault();
         const tag = btn.getAttribute('data-tag');
         if (tag === 'all') {
@@ -126,7 +130,7 @@
         renderGrid();
         renderTagFilters();
       });
-    });
+    }
   }
 
   function renderGrid() {
@@ -251,11 +255,20 @@
 
   function findNearestStation() {
     // Use station-coords.js for all stations
+    var minDistance = Infinity;
+    var nearestStation = null;
+    var coords = getStationCoords();
     for (const stationKey of Object.keys(coords)) {
       const coord = coords[stationKey];
       const dist = haversineDistance(state.userLat, state.userLng, coord[0], coord[1]);
       if (dist < minDistance) { minDistance = dist; nearestStation = stationKey; }
     }
+    if (nearestStation) {
+      state.selectedStation = nearestStation;
+      state.autoDetected = true;
+      renderAll();
+    }
+  }
 
   function init(config) {
     config = config || {};

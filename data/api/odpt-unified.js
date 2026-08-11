@@ -33,8 +33,10 @@
     function parseKeys(encoded) {
         if (!encoded) return { CENTER: '', CHALLENGE: '' };
         try {
-            var decoded = atob(encoded);
-            var keys = { CENTER: '', CHALLENGE: '' };
+            // Try to decode as base64 first (for localStorage stored keys), fall back to plain text
+            var decoded = encoded;
+            try { decoded = atob(encoded); } catch(e) { /* already plain text */ }
+            var keys = { CENTER: '', CHALLENGE: '' }
             var parts = decoded.split('|');
             parts.forEach(function(pair) {
                 var idx = pair.indexOf(':');
@@ -53,8 +55,15 @@
         var stored = localStorage.getItem('odpt_keys_b64');
         if (stored) return stored;
         if (ENCRYPTED_KEYS) {
-            var decrypted = xorDecrypt(ENCRYPTED_KEYS, ENCRYPTION_KEY);
-            if (decrypted && decrypted.indexOf(':') > 0) return decrypted;
+            var intermediate = xorDecrypt(ENCRYPTED_KEYS, ENCRYPTION_KEY);
+            if (intermediate) {
+                try {
+                    var decoded = atob(intermediate);
+                    if (decoded && decoded.indexOf(':') > 0) return decoded;
+                } catch (e) {
+                    if (intermediate && intermediate.indexOf(':') > 0) return intermediate;
+                }
+            }
         }
         return null;
     }
@@ -197,6 +206,22 @@
         return data && data.value ? data.value : [];
     }
 
+    var GTFS_FEEDS = {
+        challenge: {
+            'jreast_odpt_train_vehicle': 'jreast_odpt_train_vehicle',
+            'tobu_odpt_train_alert': 'tobu_odpt_train_alert',
+            'keio_odpt_train_alert': 'keio_odpt_train_alert'
+        },
+        center: {
+            'toei_odpt_train_vehicle': 'toei_odpt_train_vehicle',
+            'twr_odpt_train_alert': 'twr_odpt_train_alert',
+            'tokyometro_odpt_train_alert': 'tokyometro_odpt_train_alert',
+            'tamamonorail_odpt_train_alert': 'tamamonorail_odpt_train_alert',
+            'mir_odpt_train_alert': 'mir_odpt_train_alert',
+            'YokohamaMunicipalTrain_vehicle': 'YokohamaMunicipalTrain_vehicle'
+        }
+    };
+
     window.ODPTClient = {
         challenge: {
             getTrains: challengeGetTrains,
@@ -213,7 +238,25 @@
         },
         LINE_TO_OPERATOR: window.ODPT_CONFIG.lineToOperator,
         CHALLENGE_BASE_URL: CHALLENGE_BASE_URL,
-        CENTER_BASE_URL: CENTER_BASE_URL
+        CENTER_BASE_URL: CENTER_BASE_URL,
+        gtfsRealtime: {
+            getChallengeFeed: async function(feedId) {
+                try { var r = await fetch(ODPT_CONFIG.endpoints.CHALLENGE_BASE_URL + '/gtfsrt/' + feedId, { headers: { 'Authorization': 'Bearer ' + (ODPT_CONFIG.keys.CHALLENGE || '') } , signal: AbortSignal.timeout(10000)}); if (!r.ok) return null; return await r.arrayBuffer(); } catch(e) { return null; }
+            },
+            getCenterFeed: async function(feedId) {
+                try { var r = await fetch(ODPT_CONFIG.endpoints.CENTER_BASE_URL + '/gtfsrt/' + feedId, { headers: { 'Authorization': 'Bearer ' + (ODPT_CONFIG.keys.CENTER || '') } , signal: AbortSignal.timeout(10000)}); if (!r.ok) return null; return await r.arrayBuffer(); } catch(e) { return null; }
+            },
+            getAll: async function() {
+                var results = [], feeds = [];
+                for (var f in GTFS_FEEDS.challenge) feeds.push({s: 'challenge', f: GTFS_FEEDS.challenge[f], n: f});
+                for (var f in GTFS_FEEDS.center) feeds.push({s: 'center', f: GTFS_FEEDS.center[f], n: f});
+                for (var i = 0; i < feeds.length; i++) {
+                    var d = feeds[i].s === 'challenge' ? await this.getChallengeFeed(feeds[i].f) : await this.getCenterFeed(feeds[i].f);
+                    if (d) results.push({name: feeds[i].n, data: d});
+                }
+                return results;
+            }
+        }
     };
 
     // ========== 缓存 ==========

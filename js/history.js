@@ -60,11 +60,12 @@
     const date = new Date(isoString);
     const now = new Date();
     const diff = now - date;
+    var lang = window.currentLang || 'ja';
     
     if (diff < 60000) return t('history.just_now');
     if (diff < 3600000) return Math.floor(diff / 60000) + ' ' + t('unit.minute') + ' 前';
     if (diff < 86400000) return Math.floor(diff / 3600000) + ' ' + t('unit.hour') + ' 前';
-    return date.toLocaleDateString(window.currentLang === 'ja' ? 'ja-JP' : window.currentLang === 'zh' ? 'zh-CN' : window.currentLang === 'ko' ? 'ko-KR' : 'en-US');
+    return date.toLocaleDateString(lang === 'ja' ? 'ja-JP' : lang === 'zh' ? 'zh-CN' : lang === 'ko' ? 'ko-KR' : 'en-US');
   }
 
   function renderHistory() {
@@ -111,20 +112,30 @@
     html += '</div>';
     container.innerHTML = html;
 
-    // Bind events
-    document.getElementById('clearHistoryBtn').addEventListener('click', clearHistory);
-    container.querySelectorAll('.history-delete-btn').forEach(function(btn) {
-      btn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        removeEntry(parseInt(this.dataset.id));
+    // Bind events using delegation - only once per container
+    if (!container.dataset.eventsBound) {
+      container.dataset.eventsBound = '1';
+      container.addEventListener('click', function(e) {
+        var clearBtn = document.getElementById('clearHistoryBtn');
+        if (e.target === clearBtn || (clearBtn && clearBtn.contains(e.target))) {
+          clearHistory();
+          return;
+        }
+        var delBtn = e.target.closest('.history-delete-btn');
+        if (delBtn) {
+          e.stopPropagation();
+          removeEntry(parseInt(delBtn.dataset.id));
+        }
       });
-    });
+    }
   }
 
   function escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
+    if (typeof text !== 'string') return String(text);
+    if (typeof window.escapeHtml === 'function') return window.escapeHtml(text);
+    var d = document.createElement('div');
+    d.textContent = text;
+    return d.innerHTML;
   }
 
   function init() {

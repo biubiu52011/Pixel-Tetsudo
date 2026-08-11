@@ -74,26 +74,46 @@
       });
     },
 
+    _suggestionCache: {},
+    _suggestionBindDone: {},
+
     showSuggestions: function(query, containerId, inputEl) {
       const container = document.getElementById(containerId);
       if (!container) return;
-      
+
       if (!query || query.length < 1) {
         container.classList.remove('active');
         container.innerHTML = '';
         return;
       }
 
-      const stations = window.RouteSearch ? window.RouteSearch.findStationsByTerm(query) : [];
+      // Cache suggestions to avoid re-querying
+      if (!this._suggestionCache[query]) {
+        this._suggestionCache[query] = window.RouteSearch ? window.RouteSearch.findStationsByTerm(query) : [];
+      }
+      const stations = this._suggestionCache[query];
       if (stations.length === 0) {
         container.classList.remove('active');
         container.innerHTML = '';
         return;
       }
 
-      container.innerHTML = stations.map(s => '<div class="suggestion-item">' + s + '</div>').join('');
+      // Use cached DOM if available for this query
+      const cachedKey = containerId + '_' + query;
+      if (this._suggestionBindDone[cachedKey]) {
+        container.innerHTML = this._suggestionCacheDOM[cachedKey] || '';
+        container.classList.add('active');
+        return;
+      }
+
+      container.innerHTML = stations.map(s => '<div class="suggestion-item"> + (typeof window.escapeHtml === 'function' ? window.escapeHtml(s) : s) + '</div>').join('');
       container.classList.add('active');
-      
+
+      // Cache the rendered HTML
+      this._suggestionCacheDOM = this._suggestionCacheDOM || {};
+      this._suggestionCacheDOM[cachedKey] = container.innerHTML;
+      this._suggestionBindDone[cachedKey] = true;
+
       container.querySelectorAll('.suggestion-item').forEach(item => {
         item.addEventListener('click', () => {
           inputEl.value = item.textContent;
@@ -136,7 +156,7 @@
 
       let html = '<div class="search-result">';
       html += '<div class="result-header">';
-      html += '<span class="result-duration">' + result.durationMin + '分</span>';
+      html += '<span class="result-duration">' + result.durationMin + ' ' + t('search.min_unit')</span>';
       html += '<span class="result-segments">' + result.segments + ' ' + t('search.segments') + '</span>';
       html += '</div>';
       
