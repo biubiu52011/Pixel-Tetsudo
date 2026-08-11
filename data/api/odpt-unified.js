@@ -397,7 +397,7 @@
         var maxDelay = getMaxDelay(line, apiInfo);
         var interval = getDelayInterval(line, apiInfo);
         var intervalText = interval || line.interval || "";
-        var iconHtml = line.image ? '<img class="rs-line-icon" src="' + line.image + '" alt="">' : '<div class="rs-code-badge">' + escapeHtml(line.code) + '</div>';
+        var iconHtml = line.image ? '<img class="rs-line-icon" src="' + escapeHtml(line.image) + '" alt="">' : '<div class="rs-code-badge">' + escapeHtml(line.code) + '</div>';
         return '<div class="rs-line-card" data-line="' + escapeHtml(lineId) + '"><div class="rs-line-header">'
             + iconHtml
             + '<div class="rs-line-info"><div class="rs-line-name">' + escapeHtml(line.name) + '</div>'
