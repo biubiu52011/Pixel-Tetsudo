@@ -20,7 +20,6 @@
   let currentStation = "Asakusa";
   let currentIndex = 0;
 
-  const t = function(key) { return (typeof window.t === "function") ? window.t(key) : key; };
 
   const SPOT_DETAILS = {
     "Senso-ji Temple": {

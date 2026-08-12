@@ -7,12 +7,6 @@
 
   var t = window.t || function(key) { return key; };
 
-  function escapeHtml(str) {
-    if (!str) return '';
-    var d = document.createElement('div');
-    d.textContent = str;
-    return d.innerHTML;
-  }
 
   function formatTime(minutes) {
     var h = Math.floor(minutes / 60);

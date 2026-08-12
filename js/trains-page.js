@@ -14,12 +14,6 @@
   var _renderScheduled = false;
   var t = window.t || function(key) { return key; };
 
-  function escapeHtml(str) {
-    if (!str) return "";
-    var d = document.createElement("div");
-    d.textContent = str;
-    return d.innerHTML;
-  }
 
   function formatInterval(mins) {
     if (!mins || mins <= 0) return "";

@@ -130,13 +130,6 @@
     }
   }
 
-  function escapeHtml(text) {
-    if (typeof text !== 'string') return String(text);
-    
-    var d = document.createElement('div');
-    d.textContent = text;
-    return d.innerHTML;
-  }
 
   function init() {
     renderHistory();
