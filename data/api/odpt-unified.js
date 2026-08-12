@@ -26,6 +26,36 @@
         } catch (e) { return { CENTER: '', CHALLENGE: '' }; }
     }
 
+  // ========== Request deduplication ==========
+  var _inFlight = {};
+  function dedup(key, fn) {
+    if (_inFlight[key]) return _inFlight[key];
+    var p = fn().finally(function() { delete _inFlight[key]; });
+    _inFlight[key] = p;
+    return p;
+  }
+
+  // ========== Cache-aware fetch wrapper ==========
+  function cacheFetch(cacheKey, url, opts) {
+    if (window.DataLayer && window.DataLayer.isCacheValid(cacheKey)) {
+      return Promise.resolve(window.DataLayer.cache[cacheKey]);
+    }
+    return fetch(url, opts).then(function(res) {
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      return res.json();
+    }).then(function(data) {
+      if (window.DataLayer) window.DataLayer.setCache(cacheKey, data);
+      return data;
+    }).catch(function(err) {
+      console.warn('[ODPT] Fetch failed:', err.message);
+      if (window.DataLayer && window.DataLayer.isCacheValid(cacheKey)) {
+        console.warn('[ODPT] Using cached fallback');
+        return window.DataLayer.cache[cacheKey];
+      }
+      throw err;
+    });
+  }
+
     function xorEncrypt(text, key) {
         var result = '';
         for (var i = 0; i < text.length; i++) {
@@ -225,24 +255,21 @@
             return null;
         }
         var paramStr = params ? '&' + params : '';
+        var cacheKey = 'odpt:' + entity + ':' + (operator || 'all') + ':' + baseURL;
         var url = baseURL + '/odpt:' + entity + '?acl:consumerKey=' + encodeURIComponent(key) + paramStr;
         if (operator) {
             url += '&odpt:operator=odpt.Operator:' + operator;
         }
-        try {
-            var resp = await fetch(url, {
+        return dedup(cacheKey, function() {
+            return cacheFetch(cacheKey, url, {
                 method: 'GET',
                 headers: { 'Accept': 'application/json' },
                 signal: AbortSignal.timeout(30000)
+            }).then(function(data) {
+                if (!data || !data.value) return { value: [] };
+                return data;
             });
-            if (!resp.ok) throw new Error('HTTP ' + resp.status);
-            var text = await resp.text();
-            if (!text || text.trim() === '') return { value: [] };
-            return JSON.parse(text);
-        } catch (e) {
-            console.warn('[ODPTClient] Fetch failed for ' + entity + '/' + (operator || 'all') + ':', e.message);
-            return null;
-        }
+        });
     }
 
     // Challenge API
@@ -651,8 +678,6 @@
             });
         }
 
-        setInterval(refreshData, REFRESH_INTERVAL);
-        console.log("[Realtime] Initialized with ODPT integration");
     }
 
     window.RealtimeModule = {

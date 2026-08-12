@@ -1,30 +1,25 @@
 /*
- * Pixel Tetsudo - DataFusion v9 (Stable)
- * 线路数据融合引擎 - 稳定性强化版
+ * Pixel Tetsudo - DataFusion v10 (Optimized)
+ * 线路数据融合引擎 - 被动订阅模式，由 odpt-unified.js 驱动刷新
  */
 (function() {
   "use strict";
 
-  var REFRESH_INTERVAL = 30000;
-  var FUSION_VERSION = 9;
-  var RETRY_DELAY = 5000;
+  var FUSION_VERSION = 10;
 
   var odptData = { trains: {}, stations: {}, delayInfo: {}, realtimePositions: {} };
   var subscribers = [];
   var localData = { lines: {}, statusMap: {} };
   var _lastFusedData = null;
-  var _retryCount = 0;
-  var _retryTimer = null;
   var _lineControlVersion = null;
+
   function emitUpdate(fusedData) {
     if (fusedData && fusedData.lines && Object.keys(fusedData.lines).length > 0) {
       _lastFusedData = fusedData;
-      _retryCount = 0;
-      if (_retryTimer) { clearTimeout(_retryTimer); _retryTimer = null; }
     }
     try {
       subscribers.forEach(function(cb) { cb(fusedData); });
-    } catch(e) { console.warn("[DataFusion] Subscriber error:", e.message); }
+    } catch(e) { console.warn('[DataFusion] Subscriber error:', e.message); }
     try { window.DATA_FUSION = fusedData; } catch(e) {}
   }
 
@@ -143,9 +138,8 @@
     }
   }
 
-  async function fuseAll() {
+  function fuseAll() {
     try {
-      var startTime = Date.now();
       var fusedLines = {};
       var allLineIds = {};
       if (window.UNIFIED_LINES) {
@@ -170,41 +164,21 @@
     } catch(e) {
       console.error("[DataFusion] fuseAll error:", e.message);
       if (_lastFusedData) { emitUpdate(_lastFusedData); return _lastFusedData; }
-      scheduleRetry();
       return null;
     }
   }
 
-  function scheduleRetry() {
-    if (_retryTimer) return;
-    _retryCount++;
-    _retryTimer = setTimeout(function() {
-      _retryTimer = null;
-      fuseAll().catch(function() {});
-    }, Math.min(RETRY_DELAY * _retryCount, 30000));
-  }
-
-  async function refresh() { return await fuseAll(); }
-
-  async function init() {
-    console.log("[DataFusion] Initializing v" + FUSION_VERSION + "...");
+  function init() {
+    console.log("[DataFusion] Initializing v" + FUSION_VERSION);
     loadLocalData();
     syncStatusMap();
     checkCacheStale();
-    try {
-      await fuseAll();
-    } catch(e) {
-      console.error("[DataFusion] Init error:", e.message);
-      scheduleRetry();
-    }
-    if (typeof initODPT === "function") {
-      initODPT().catch(function(e) { console.warn("[DataFusion] ODPT init error:", e.message); });
-    }
-    setInterval(function() { fuseAll().catch(function() {}); }, REFRESH_INTERVAL);
+    fuseAll();
   }
 
   window.DataFusion = {
-    init: init, fuseAll: fuseAll, refresh: refresh, subscribe: subscribe,
+    init: init, fuseAll: fuseAll,
+    subscribe: subscribe,
     getFusedData: function() { return window.DATA_FUSION || _lastFusedData || null; },
     getLine: function(lineId) {
       var data = window.DATA_FUSION || _lastFusedData;
@@ -214,7 +188,8 @@
     getOperatorTrains: function(operator) { return odptData.trains[operator] || []; },
     getOperatorStations: function(operator) { return odptData.stations[operator] || []; },
     getRealtimePositions: function(lineId) { return odptData.realtimePositions[lineId] || []; },
-    getCachedData: function() { return _lastFusedData; }
+    getCachedData: function() { return _lastFusedData; },
+    refresh: function() { return fuseAll(); }
   };
 
   if (document.readyState === "loading") {
