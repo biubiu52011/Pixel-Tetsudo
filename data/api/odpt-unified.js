@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Pixel Tetsudo - Unified ODPT API Client & Realtime Module
  * 整合：加密密钥管理、API客户端、缓存、数据转换、运行状态显示
  * 密钥存储在浏览器本地
@@ -91,14 +91,14 @@
         if (!stored) return null;
         // Try AES-GCM first (new format)
         try {
-            var decrypted = await cryptoDecrypt(stored, "pixel-tetsudo-v3");
+            var decrypted = await cryptoDecrypt(stored, "pixel-tetsudo-enc-key-v3");
             if (decrypted && decrypted.indexOf('ODPT_CENTER:') === 0) {
                 return decrypted;
             }
         } catch(e) {}
         // Fallback to XOR (legacy format)
         try {
-            var plain = xorDecrypt(stored, "pixel-tetsudo-v3");
+            var plain = xorDecrypt(stored, "pixel-tetsudo-enc-key-v3");
             if (plain && plain.indexOf('ODPT_CENTER:') === 0) {
                 return plain;
             }
@@ -109,12 +109,18 @@
     async function saveKeys(centerKey, challengeKey) {
         var plain = 'ODPT_CENTER:' + centerKey + '|CHALLENGE_2026:' + challengeKey;
         try {
-            var encrypted = await cryptoEncrypt(plain, centerKey + challengeKey);
+            var encrypted = await cryptoEncrypt(plain, "pixel-tetsudo-enc-key-v3");
             localStorage.setItem('odpt_keys_enc', encrypted);
             localStorage.removeItem('odpt_keys_b64');
         } catch(e) { console.error('[ODPT] Save keys error:', e.message); }
     }
             CHALLENGE_BASE_URL: 'https://api-challenge.odpt.org/api/v4',
+
+    // ========== API Configuration ==========
+    window.ODPT_CONFIG = {
+        keys: { CENTER: "", CHALLENGE: "" },
+
+        endpoints: {
             CENTER_BASE_URL: 'https://api.odpt.org/api/v4'
         },
 
@@ -159,10 +165,10 @@
             'TobuSkytree': 'Tobu'
         },
 
-        setKeys: function(c, ch) {
+        setKeys: async function(c, ch) {
             this.keys.CENTER = c;
             this.keys.CHALLENGE = ch;
-            saveKeys(c, ch);
+            await await saveKeys(c, ch);
         },
 
         getKey: function(type) {

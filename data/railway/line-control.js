@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Line Control - Unified Line Data
  * 线路数据控制
  */

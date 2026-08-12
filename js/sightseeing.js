@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Sightseeing Module - Coordinate-based Recommendation
  */
 

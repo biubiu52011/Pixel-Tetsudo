@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Pixel Tetsudo - Trains Page Controller
  * 列车位置页面控制器
  */

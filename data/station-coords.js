@@ -1,4 +1,4 @@
-﻿(function() {
+(function() {
   "use strict";
   window.STATION_COORDS = {
     "Oshiage": [35.7101, 139.8107],

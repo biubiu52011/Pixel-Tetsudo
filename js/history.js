@@ -132,7 +132,7 @@
 
   function escapeHtml(text) {
     if (typeof text !== 'string') return String(text);
-    if (typeof window.escapeHtml === 'function') return window.escapeHtml(text);
+    
     var d = document.createElement('div');
     d.textContent = text;
     return d.innerHTML;

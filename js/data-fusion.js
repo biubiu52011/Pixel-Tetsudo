@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Pixel Tetsudo - DataFusion v9 (Stable)
  * 线路数据融合引擎 - 稳定性强化版
  */
