@@ -1,4 +1,4 @@
-/**
+﻿﻿﻿﻿﻿/**
  * Pixel Tetsudo - Unified ODPT API Client & Realtime Module
  * 整合：加密密钥管理、API客户端、缓存、数据转换、运行状态显示
  * 密钥存储在浏览器本地
@@ -685,10 +685,14 @@
         loadODPT: loadODPTDelayData
     };
 
+        // Start ODPT polling + DataFusion push after initial load
+    initODPT().catch(function(e) { console.warn("[ODPT] initODPT error:", e.message); });
+
     if (document.readyState === "loading") {
         document.addEventListener("DOMContentLoaded", init);
     } else {
-        init();
+        // Only direct render if DataFusion is not handling it
+        if (!window.DataFusion) init();
     }
 
     async function initODPT() {

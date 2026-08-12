@@ -504,7 +504,13 @@
     getOperatorStations: function(operator) { return odptData.stations[operator] || []; },
     getRealtimePositions: function(lineId) { return odptData.realtimePositions[lineId] || []; },
     getCachedData: function() { return _lastFusedData; },
-    refresh: function() { return fuseAll(); }
+    refresh: function() { return fuseAll(); },
+    updateOdptData: function(delayData) {
+      if (delayData && typeof delayData === 'object') {
+        odptData.delayInfo = delayData;
+        try { fuseAll(); } catch(e) { console.warn('[DataFusion] updateOdptData->fuseAll error:', e.message); }
+      }
+    }
   };
 
   if (document.readyState === "loading") {
