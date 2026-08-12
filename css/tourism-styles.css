@@ -543,7 +543,7 @@
 .spot-nav-btn:hover:not(.disabled) { border-color: var(--green); background: var(--green-pale); }
 .spot-nav-btn.disabled { opacity: 0.35; cursor: not-allowed; }
 .nav-arrow { font-size: 24px; color: var(--text-muted); flex-shrink: 0; line-height: 1; }
-.nav-info { flex: 1; min-width: 0; }
+.nav-info { flex: 1; min-width: 0; }\n.nav-info--right { text-align: right; }
 .nav-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 500; }
 .nav-spot-name { font-size: 14px; font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .prev-btn { flex-direction: row; }
@@ -855,3 +855,5 @@
 .sm-tag-btn.active[data-tag="shrine"]::before    { content: "\269A"; }
 .sm-tag-btn.active[data-tag="food"]::before      { content: "\269A"; }
 .sm-tag-btn.active[data-tag="seasonal"]::before  { content: "\272E"; }
+.nav-info--right { text-align: right; }
+
