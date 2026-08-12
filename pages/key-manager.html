@@ -53,23 +53,24 @@ input:focus { outline: none; border-color: #00a859; }
   </ol>
 </div>
 <script>
-function saveKeys() {
+// Load ODPT module for cryptoEncrypt
+var _odptReady = false;
+(function checkODPT() {
+  if (typeof cryptoEncrypt === 'function') { _odptReady = true; }
+  else { setTimeout(checkODPT, 100); }
+})();
+
+async function saveKeys() {
   var centerKey = document.getElementById('centerKey').value.trim();
   var challengeKey = document.getElementById('challengeKey').value.trim();
   var statusEl = document.getElementById('status');
   if (!centerKey || !challengeKey) { statusEl.className = 'status show error'; statusEl.textContent = '両方のキーを入力してください'; return; }
+  if (!_odptReady) { statusEl.className = 'status show error'; statusEl.textContent = 'システム読み込み中…もう一度押してください'; return; }
   try {
     var plain = 'ODPT_CENTER:' + centerKey + '|CHALLENGE_2026:' + challengeKey;
-    cryptoEncrypt(plain, 'PixelTetsudo2026').then(function(encoded) {
-      localStorage.setItem('odpt_keys_enc', encoded);
-      localStorage.removeItem('odpt_keys_b64');
-  localStorage.removeItem('odpt_keys_enc');
-      statusEl.className = 'status show success'; statusEl.textContent = '?????????';
-      document.getElementById('clearBtn').style.display = 'block';
-    }).catch(function(e) {
-      statusEl.className = 'status show error'; statusEl.textContent = '?????: ' + e.message;
-    });
-    return;
+    var encoded = await cryptoEncrypt(plain, centerKey + challengeKey);
+    localStorage.setItem('odpt_keys_enc', encoded);
+    localStorage.removeItem('odpt_keys_b64');
     statusEl.className = 'status show success'; statusEl.textContent = 'キーを保存しました';
     document.getElementById('clearBtn').style.display = 'block';
   } catch(e) { statusEl.className = 'status show error'; statusEl.textContent = '保存エラー: ' + e.message; }

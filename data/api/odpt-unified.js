@@ -45,15 +45,15 @@
         } catch (e) { return ''; }
     }
 
-    var ENCRYPTION_KEY = 'PixelTetsudo2026';
+    // "pixel-tetsudo-v3" removed
 
     // AES-GCM encryption via Web Crypto API (stronger than XOR)
-    var _PKDF_SALT = 'PixelTetsudo_v2_salt_32b!!!';
+    var _PBKDF_SALT = 'pixel-tetsudo-v3';
 
     async function _deriveKey(password) {
         var enc = new TextEncoder();
         var pwdBuf = enc.encode(password);
-        var saltBuf = enc.encode(_PKDF_SALT);
+        var saltBuf = enc.encode(_PBKDF_SALT);
         var keyMaterial = await crypto.subtle.importKey('raw', pwdBuf, 'PBKDF2', false, ['deriveKey']);
         return crypto.subtle.deriveKey(
             { name: 'PBKDF2', salt: saltBuf, iterations: 100000, hash: 'SHA-256' },
@@ -91,14 +91,14 @@
         if (!stored) return null;
         // Try AES-GCM first (new format)
         try {
-            var decrypted = await cryptoDecrypt(stored, ENCRYPTION_KEY);
+            var decrypted = await cryptoDecrypt(stored, "pixel-tetsudo-v3");
             if (decrypted && decrypted.indexOf('ODPT_CENTER:') === 0) {
                 return decrypted;
             }
         } catch(e) {}
         // Fallback to XOR (legacy format)
         try {
-            var plain = xorDecrypt(stored, ENCRYPTION_KEY);
+            var plain = xorDecrypt(stored, "pixel-tetsudo-v3");
             if (plain && plain.indexOf('ODPT_CENTER:') === 0) {
                 return plain;
             }
@@ -106,19 +106,14 @@
         return null;
     }
 
-    function saveKeys(centerKey, challengeKey) {
+    async function saveKeys(centerKey, challengeKey) {
         var plain = 'ODPT_CENTER:' + centerKey + '|CHALLENGE_2026:' + challengeKey;
-        var encrypted = xorEncrypt(plain, ENCRYPTION_KEY);
-        localStorage.setItem('odpt_keys_enc', encrypted);
-        localStorage.removeItem('odpt_keys_b64');
-        return encrypted;
+        try {
+            var encrypted = await cryptoEncrypt(plain, centerKey + challengeKey);
+            localStorage.setItem('odpt_keys_enc', encrypted);
+            localStorage.removeItem('odpt_keys_b64');
+        } catch(e) { console.error('[ODPT] Save keys error:', e.message); }
     }
-
-// ========== API 配置 ==========
-    window.ODPT_CONFIG = {
-        keys: { CENTER: "", CHALLENGE: "" },
-
-        endpoints: {
             CHALLENGE_BASE_URL: 'https://api-challenge.odpt.org/api/v4',
             CENTER_BASE_URL: 'https://api.odpt.org/api/v4'
         },
