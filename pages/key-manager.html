@@ -1,12 +1,12 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ODPT API 蟇・徴邂｡逅・/title>
+<title>ODPT API キー管理</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f7; padding: 40px 20px; max-width: 500px; margin: 0 auto; }
+body { font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif; background: #f5f5f7; padding: 40px 20px; max-width: 500px; margin: 0 auto; }
 h1 { font-size: 22px; margin-bottom: 10px; color: #1c1c1e; }
 p { color: #8e8e93; margin-bottom: 24px; font-size: 14px; }
 .card { background: #fff; border-radius: 16px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-bottom: 20px; }
@@ -16,7 +16,7 @@ input { width: 100%; padding: 12px 14px; border: 1px solid #e5e5ea; border-radiu
 input:focus { outline: none; border-color: #00a859; }
 .btn { width: 100%; padding: 14px; background: #00a859; color: #fff; border: none; border-radius: 12px; font-size: 15px; font-weight: 600; cursor: pointer; transition: background 0.2s; margin-bottom: 10px; }
 .btn:hover { background: #00904d; }
-.btn-secondary { background: #f0f05; color: #1c1c1e; }
+.btn-secondary { background: #f0f0f0; color: #1c1c1e; }
 .btn-secondary:hover { background: #e5e5ea; }
 .btn-danger { background: #ff4757; }
 .btn-danger:hover { background: #e83e4d; }
@@ -24,33 +24,32 @@ input:focus { outline: none; border-color: #00a859; }
 .status.show { display: block; }
 .status.success { background: rgba(0,168,89,0.1); color: #00a859; }
 .status.error { background: rgba(255,71,87,0.1); color: #ff4757; }
-.info { font-size: 12px; color: #8e8e93; margin-top: 6px; }
 </style>
 </head>
 <body>
-<h1>ODPT API 蟇・徴邂｡逅・/h1>
-<p>蟇・徴蟄伜お蝨ｨ豬剰ｧ亥勣譛ｬ蝨ｰ・御ｻ・畑莠手ｮｿ髣ｮ ODPT API</p>
+<h1>ODPT API キー管理</h1>
+<p>ODPT APIのCenterキーとChallengeキーを設定・管理します</p>
 <div class="card">
   <div class="form-group">
-    <label>Center API 蟇・徴</label>
-    <input type="text" id="centerKey" placeholder="霎灘・ Center API 蟇・徴">
+    <label>Center API キー</label>
+    <input type="text" id="centerKey" placeholder="Center API キーを入力">
   </div>
   <div class="form-group">
-    <label>Challenge API 蟇・徴</label>
-    <input type="text" id="challengeKey" placeholder="霎灘・ Challenge API 蟇・徴">
+    <label>Challenge API キー</label>
+    <input type="text" id="challengeKey" placeholder="Challenge API キーを入力">
   </div>
-  <button class="btn" onclick="saveKeys()">菫晏ｭ伜ｯ・徴</button>
-  <button class="btn btn-secondary" onclick="window.location.href='realtime.html'">霑泌屓霑占｡檎憾諤・/button>
-  <button class="btn btn-danger" id="clearBtn" onclick="clearKeys()" style="display:none;">貂・勁謇譛牙ｯ・徴</button>
+  <button class="btn" onclick="saveKeys()">保存する</button>
+  <button class="btn btn-secondary" onclick="window.location.href='realtime.html'">ホームに戻る</button>
+  <button class="btn btn-danger" id="clearBtn" onclick="clearKeys()" style="display:none;">削除する</button>
   <div id="status" class="status"></div>
 </div>
 <div class="card">
-  <h3 style="margin-bottom:12px;font-size:16px;">螯ゆｽ戊執蜿・API 蟇・徴・・/h3>
+  <h3 style="margin-bottom:12px;font-size:16px;">ODPT API キーの取得方法</h3>
   <ol style="padding-left:20px;line-height:1.8;color:#555;font-size:14px;">
-    <li>隶ｿ髣ｮ <a href="https://odpt.org/" target="_blank" rel="noopener noreferrer">odpt.org</a> 豕ｨ蜀瑚ｴｦ蜿ｷ</li>
-    <li>蝨ｨ謗ｧ蛻ｶ蜿ｰ蛻帛ｻｺ蠎皮畑・瑚執蜿・API 蟇・徴</li>
-    <li>Center API 蟇・徴逕ｨ莠主慍體∫ｺｿ霍ｯ</li>
-    <li>Challenge API 蟇・徴逕ｨ莠・JR 蜥檎ｧ・刀郤ｿ霍ｯ</li>
+    <li>http://odpt.org/ に登録し、APIキーを発行してください</li>
+    <li>Center API と Challenge API の2種類のキーが必要です</li>
+    <li>Center API キーを下のフォームに入力して保存</li>
+    <li>Challenge API キーはJR東日本利用時のみ必要</li>
   </ol>
 </div>
 <script>
@@ -58,19 +57,29 @@ function saveKeys() {
   var centerKey = document.getElementById('centerKey').value.trim();
   var challengeKey = document.getElementById('challengeKey').value.trim();
   var statusEl = document.getElementById('status');
-  if (!centerKey || !challengeKey) { statusEl.className = 'status show error'; statusEl.textContent = '隸ｷ蝪ｫ蜀呎園譛牙ｭ玲ｮｵ'; return; }
+  if (!centerKey || !challengeKey) { statusEl.className = 'status show error'; statusEl.textContent = '両方のキーを入力してください'; return; }
   try {
-    var encoded = btoa('ODPT_CENTER:' + centerKey + '|CHALLENGE_2026:' + challengeKey);
-    localStorage.setItem('odpt_keys_b64', encoded);
-    statusEl.className = 'status show success'; statusEl.textContent = '蟇・徴蟾ｲ菫晏ｭ・;
+    var plain = 'ODPT_CENTER:' + centerKey + '|CHALLENGE_2026:' + challengeKey;
+    cryptoEncrypt(plain, 'PixelTetsudo2026').then(function(encoded) {
+      localStorage.setItem('odpt_keys_enc', encoded);
+      localStorage.removeItem('odpt_keys_b64');
+  localStorage.removeItem('odpt_keys_enc');
+      statusEl.className = 'status show success'; statusEl.textContent = '?????????';
+      document.getElementById('clearBtn').style.display = 'block';
+    }).catch(function(e) {
+      statusEl.className = 'status show error'; statusEl.textContent = '?????: ' + e.message;
+    });
+    return;
+    statusEl.className = 'status show success'; statusEl.textContent = 'キーを保存しました';
     document.getElementById('clearBtn').style.display = 'block';
-  } catch(e) { statusEl.className = 'status show error'; statusEl.textContent = '菫晏ｭ伜､ｱ雍･: ' + e.message; }
+  } catch(e) { statusEl.className = 'status show error'; statusEl.textContent = '保存エラー: ' + e.message; }
 }
 function clearKeys() {
   localStorage.removeItem('odpt_keys_b64');
+  localStorage.removeItem('odpt_keys_enc');
   document.getElementById('clearBtn').style.display = 'none';
   var statusEl = document.getElementById('status');
-  statusEl.className = 'status show success'; statusEl.textContent = '蟇・徴蟾ｲ貂・勁';
+  statusEl.className = 'status show success'; statusEl.textContent = 'キーを削除しました';
   document.getElementById('centerKey').value = '';
   document.getElementById('challengeKey').value = '';
 }

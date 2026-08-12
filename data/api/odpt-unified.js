@@ -26,14 +26,92 @@
         } catch (e) { return { CENTER: '', CHALLENGE: '' }; }
     }
 
-    function loadKeys() {
-        return localStorage.getItem('odpt_keys_b64');
+    function xorEncrypt(text, key) {
+        var result = '';
+        for (var i = 0; i < text.length; i++) {
+            result += String.fromCharCode(text.charCodeAt(i) ^ key.charCodeAt(i % key.length));
+        }
+        return btoa(result);
+    }
+
+    function xorDecrypt(encoded, key) {
+        try {
+            var binary = atob(encoded);
+            var result = '';
+            for (var i = 0; i < binary.length; i++) {
+                result += String.fromCharCode(binary.charCodeAt(i) ^ key.charCodeAt(i % key.length));
+            }
+            return result;
+        } catch (e) { return ''; }
+    }
+
+    var ENCRYPTION_KEY = 'PixelTetsudo2026';
+
+    // AES-GCM encryption via Web Crypto API (stronger than XOR)
+    var _PKDF_SALT = 'PixelTetsudo_v2_salt_32b!!!';
+
+    async function _deriveKey(password) {
+        var enc = new TextEncoder();
+        var pwdBuf = enc.encode(password);
+        var saltBuf = enc.encode(_PKDF_SALT);
+        var keyMaterial = await crypto.subtle.importKey('raw', pwdBuf, 'PBKDF2', false, ['deriveKey']);
+        return crypto.subtle.deriveKey(
+            { name: 'PBKDF2', salt: saltBuf, iterations: 100000, hash: 'SHA-256' },
+            keyMaterial, { name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']
+        );
+    }
+
+    async function cryptoEncrypt(text, password) {
+        var key = await _deriveKey(password);
+        var enc = new TextEncoder();
+        var iv = crypto.getRandomValues(new Uint8Array(12));
+        var ct = await crypto.subtle.encrypt({ name: 'AES-GCM', iv: iv }, key, enc.encode(text));
+        var ctArr = new Uint8Array(ct);
+        var result = new Uint8Array(iv.length + ctArr.length);
+        result.set(iv);
+        result.set(ctArr, iv.length);
+        return btoa(String.fromCharCode.apply(null, result));
+    }
+
+    async function cryptoDecrypt(encoded, password) {
+        try {
+            var binary = atob(encoded);
+            var bytes = new Uint8Array(binary.length);
+            for (var i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+            var iv = bytes.slice(0, 12);
+            var ct = bytes.slice(12);
+            var key = await _deriveKey(password);
+            var pt = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: iv }, key, ct);
+            return new TextDecoder().decode(pt);
+        } catch (e) { return ''; }
+    }
+
+    async function loadKeys() {
+        var stored = localStorage.getItem('odpt_keys_enc');
+        if (!stored) return null;
+        // Try AES-GCM first (new format)
+        try {
+            var decrypted = await cryptoDecrypt(stored, ENCRYPTION_KEY);
+            if (decrypted && decrypted.indexOf('ODPT_CENTER:') === 0) {
+                return decrypted;
+            }
+        } catch(e) {}
+        // Fallback to XOR (legacy format)
+        try {
+            var plain = xorDecrypt(stored, ENCRYPTION_KEY);
+            if (plain && plain.indexOf('ODPT_CENTER:') === 0) {
+                return plain;
+            }
+        } catch(e) {}
+        return null;
     }
 
     function saveKeys(centerKey, challengeKey) {
-        var encoded = btoa('ODPT_CENTER:' + centerKey + '|CHALLENGE_2026:' + challengeKey);
-        localStorage.setItem('odpt_keys_b64', encoded);
-        return encoded;
+        var plain = 'ODPT_CENTER:' + centerKey + '|CHALLENGE_2026:' + challengeKey;
+        var encrypted = xorEncrypt(plain, ENCRYPTION_KEY);
+        localStorage.setItem('odpt_keys_enc', encrypted);
+        localStorage.removeItem('odpt_keys_b64');
+        return encrypted;
     }
 
 // ========== API 配置 ==========
@@ -55,7 +133,7 @@
                 'TokyoMetro': 'TokyoMetro', 'Toei': 'Toei',
                 'YokohamaMunicipal': 'YokohamaMunicipal', 'TWR': 'TWR',
                 'MIR': 'MIR', 'TamaMonorail': 'TamaMonorail',
-                'Yurikamome': 'Yurikamome', 'Keisei': 'Keisei'
+                'Yurikamome': 'Yurikamome', 'Keisei': 'Keisei', 'MinatoMirai': 'MinatoMirai'
             }
         },
 
@@ -77,7 +155,13 @@
             'SeibuIkebukuro': 'Seibu', 'SeibuChichibu': 'Seibu', 'SeibuTamako': 'Seibu',
             'SeibuTamagawa': 'Seibu', 'OdakyuEnoshima': 'Odakyu', 'OdakyuOdawara': 'Odakyu',
             'TobuSkyTree': 'Tobu', 'TobuNikko': 'Tobu', 'TobuNoda': 'Tobu',
-            'Keisei': 'Keisei', 'Yurikamome': 'Yurikamome'
+            'Keisei': 'Keisei', 'Yurikamome': 'Yurikamome',
+            'Fukutoshin': 'TokyoMetro', 'Ome': 'JR-East', 'Itsukaichi': 'JR-East',
+            'SobuRapid': 'JR-East', 'Keikyu': 'Keikyu', 'Keio': 'Keio',
+            'Odawara': 'Odakyu', 'SeibuShinjuku': 'Seibu', 'SeibuYamaguchi': 'Seibu',
+            'SeibuNakagawa': 'Seibu', 'SeibuEn': 'Seibu', 'TobuIsesaki': 'Tobu',
+            'YokohamaBlue': 'YokohamaMunicipal', 'MinatoMirai': 'MinatoMirai',
+            'TobuSkytree': 'Tobu'
         },
 
         setKeys: function(c, ch) {
@@ -94,6 +178,30 @@
             return !!(this.keys.CENTER && this.keys.CHALLENGE);
         }
     };
+
+    // ========== Load saved keys ==========
+    (function() {
+        var saved = loadKeys();
+        if (saved && typeof saved.then === 'function') {
+            saved.then(function(decrypted) {
+                if (decrypted) {
+                    var parsed = parseKeys(decrypted);
+                    ODPT_CONFIG.keys.CENTER = parsed.CENTER;
+                    ODPT_CONFIG.keys.CHALLENGE = parsed.CHALLENGE;
+                    if (parsed.CENTER || parsed.CHALLENGE) {
+                        console.log('[ODPT] Keys loaded from storage');
+                    }
+                }
+            }).catch(function(e) { console.warn('[ODPT] Key load error:', e.message); });
+        } else if (saved) {
+            var parsed = parseKeys(saved);
+            ODPT_CONFIG.keys.CENTER = parsed.CENTER;
+            ODPT_CONFIG.keys.CHALLENGE = parsed.CHALLENGE;
+            if (parsed.CENTER || parsed.CHALLENGE) {
+                console.log('[ODPT] Keys loaded from storage');
+            }
+        }
+    })();
 
     // ========== API 客户端 ==========
     var CHALLENGE_BASE_URL = window.ODPT_CONFIG.endpoints.CHALLENGE_BASE_URL;
@@ -358,12 +466,22 @@
         return parseODPTDelay(data);
     }
 
+    async function challengeGetTrainInformation(operator) {
+        var data = await fetchFromODPT(CHALLENGE_BASE_URL, 'TrainInformation', operator);
+        return data && data.value ? data.value : [];
+    }
+
     async function loadODPTDelayData() {
         if (!window.ODPTClient) return;
         window.ODPT_DELAY_DATA = {};
-        for (var op in window.ODPTClient.center.OPERATORS) {
+        // Query both Center and Challenge APIs
+        var allOps = {};
+        for (var op in window.ODPTClient.center.OPERATORS) allOps[op] = 'center';
+        for (var op in window.ODPTClient.challenge.OPERATORS) allOps[op] = 'challenge';
+        for (var op in allOps) {
+            var client = allOps[op] === 'challenge' ? window.ODPTClient.challenge : window.ODPTClient.center;
             try {
-                var infos = await window.ODPTClient.center.getTrainInformation(op);
+                var infos = await client.getTrainInformation(op);
                 if (infos && infos.length > 0) {
                     window.ODPT_DELAY_DATA[op] = infos[0];
                 }
@@ -484,7 +602,11 @@
     }
 
     async function refreshData() {
-        await loadODPTDelayData();
+        if (ODPT_CONFIG.keys.CENTER || ODPT_CONFIG.keys.CHALLENGE) {
+            await loadODPTDelayData();
+        } else {
+            console.warn("[ODPT] No API keys, skipping remote data");
+        }
         var container = document.getElementById("realtimeStatusContainer");
         if (container && window.UNIFIED_LINES) {
             render(container, window.UNIFIED_LINES);
@@ -541,6 +663,24 @@
         document.addEventListener("DOMContentLoaded", init);
     } else {
         init();
+    }
+
+    async function initODPT() {
+        if (!ODPT_CONFIG.keys.CENTER && !ODPT_CONFIG.keys.CHALLENGE) {
+            console.warn('[ODPT] No API keys configured, skipping ODPT data load');
+            return;
+        }
+        await refreshODPTData();
+        setInterval(function() { refreshODPTData().catch(function(){}); }, 30000);
+        console.log('[ODPT] Client initialized');
+    }
+
+    async function refreshODPTData() {
+        await loadODPTDelayData();
+        if (window.DataFusion && window.DataFusion.refresh) {
+            try { await window.DataFusion.refresh(); }
+            catch(e) { console.warn('[ODPT] DataFusion refresh error:', e.message); }
+        }
     }
 
     console.log('[ODPT] Unified client initialized');
