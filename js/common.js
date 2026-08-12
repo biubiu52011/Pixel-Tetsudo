@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Pixel Tetsudo - Common Utilities
  */
 (function() {

@@ -71,27 +71,27 @@
    */
   function findRoute(fromStation, toStation) {
     if (!fromStation || !toStation) return null;
-    if (fromStation === toStation) {
+    if (fromStation.toLowerCase() === toStation.toLowerCase()) {
       return { path: [fromStation], durationMin: 0, lineInfo: [] };
     }
 
     const graph = buildStationGraph();
     
     // Check if both stations exist in the graph
-    if (!graph.has(fromStation) || !graph.has(toStation)) {
-      return null;
-    }
-
-    // BFS initialization
-    const queue = [[fromStation]]; // Each item is a path (array of stations)
-    const visited = new Set([fromStation]);
+    const fromLower = fromStation.toLowerCase();
+    const toLower = toStation.toLowerCase();
+    const fromMatch = Array.from(graph.keys()).find(s => s.toLowerCase() === fromLower);
+    const toMatch = Array.from(graph.keys()).find(s => s.toLowerCase() === toLower);
+    if (!fromMatch || !toMatch) return null;
+    const queue = [[fromMatch]];
+    const visited = new Set([fromMatch]);
     
     while (queue.length > 0) {
       const currentPath = queue.shift();
       const currentStation = currentPath[currentPath.length - 1];
       
       // Check if destination reached
-      if (currentStation === toStation) {
+      if (currentStation === toMatch) {
         // Calculate actual duration using line duration data
         let durationMin = 0;
         for (let i = 0; i < currentPath.length - 1; i++) {

@@ -15,20 +15,11 @@
     seasonal: 'tourism.tag_seasonal'
   };
 
-  const TAG_ICONS = {
-    all: '\uD83D\uDCCC',
-    night: '\uD83C\uDF19',
-    history: '\uD83C\uDFDB\uFE0F',
-    nature: '\uD83C\uDF3F',
-    shrine: '\u26E9\uFE0F',
-    food: '\uD83C\uDF5C',
-    seasonal: '\uD83C\uDF38'
-  };
+  const TAG_ICONS = {};
 
   const RIVERS = [
     { name: 'Sumida', lat: 35.710, lng: 139.803, width: 120 } // width in meters
   ];
-
   let state = {
     lang: 'ja',
     userLat: null,
@@ -310,3 +301,4 @@
     init();
   }
 })();
+

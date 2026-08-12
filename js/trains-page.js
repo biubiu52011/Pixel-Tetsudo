@@ -1,18 +1,16 @@
 ﻿/*
  * Pixel Tetsudo - Trains Page Controller
- * 使用 GTFS Realtime 实时位置数据
+ * 列车位置页面控制器
  */
 (function() {
   'use strict';
 
   let currentLine = null;
-
   let container = null;
   let viewElement = null;
   let titleElement = null;
   let mapElement = null;
   let backBtn = null;
-
   var t = window.t || function(key) { return key; };
 
   function escapeHtml(str) {
@@ -22,25 +20,100 @@
     return d.innerHTML;
   }
 
+  function formatInterval(mins) {
+    if (!mins) return '';
+    var h = Math.floor(mins / 60);
+    var m = mins % 60;
+    if (h > 0) return h + 'h' + (m > 0 ? m + 'm' : '');
+    return m + 'm';
+  }
+
+  var _baseData = null;
+
+  function buildBaseData() {
+    var lines = window.UNIFIED_LINES;
+    if (!lines) return null;
+    var result = { version: 0, timestamp: new Date().toISOString(), lines: {}, lineOrder: [], totalLines: 0 };
+    Object.keys(lines).forEach(function(id) {
+      var l = lines[id];
+      result.lines[id] = {
+        id: id, name: l.name, nameEn: l.nameEn || l.name, code: l.code,
+        color: l.color, operator: l.operator, region: l.region, type: l.type,
+        image: l.image, stations: l.stations || [], durations: l.durations || [],
+        intervalTotal: l.durationTotalMin || 0,
+        realtimePositions: []
+      };
+    });
+    result.lineOrder = Object.keys(lines);
+    result.totalLines = result.lineOrder.length;
+    return result;
+  }
+
+  function renderCard(line, lineId) {
+    var color = line.color || '#888';
+    var name = line.nameEn || line.name || lineId;
+    var selectedClass = currentLine === lineId ? ' selected' : '';
+    var iconHtml = line.image
+      ? '<img class="rs-line-icon" src="' + escapeHtml(line.image) + '" alt="">'
+      : '<div class="rs-code-badge" style="background:' + escapeHtml(color) + ';">' + escapeHtml(line.code) + '</div>';
+    var interval = formatInterval(line.intervalTotal);
+    return '<div class="rs-line-card' + selectedClass + '" data-line="' + escapeHtml(lineId)
+      + '" style="--line-color:' + escapeHtml(color) + ';">'
+      + '<div class="rs-line-header">'
+      + iconHtml
+      + '<div class="rs-line-info">'
+      + '<div class="rs-line-name">' + escapeHtml(name) + '</div>'
+      + (interval ? '<div class="rs-line-interval">' + escapeHtml(interval) + '</div>' : '')
+      + '</div>'
+      + '</div></div>';
+  }
+
+  function renderLineList(el, fusedData) {
+    if (!el || !fusedData || !fusedData.lines) return;
+    var lines = fusedData.lines;
+    var groups = {};
+    Object.keys(lines).forEach(function(id) {
+      var line = lines[id];
+      var op = line.operator || 'Unknown';
+      if (!groups[op]) groups[op] = [];
+      groups[op].push({ id: id, line: line });
+    });
+    var html = '';
+    Object.keys(groups).sort().forEach(function(op) {
+      html += '<div class="rs-operator-group">'
+        + '<div class="rs-operator-title">' + escapeHtml(op) + '</div>'
+        + '<div class="rs-cards-container">';
+      groups[op].forEach(function(item) {
+        html += renderCard(item.line, item.id);
+      });
+      html += '</div></div>';
+    });
+    el.innerHTML = html;
+  }
+
   function init() {
     container = document.getElementById('trainsLineListContent');
     viewElement = document.getElementById('trainsDetailView');
     titleElement = document.getElementById('trainsDetailTitle');
     mapElement = document.getElementById('trainsMapContainer');
     backBtn = document.getElementById('trainsBackBtn');
-
     if (!container) return;
 
-    // 订阅 DataFusion 融合数据
+    container.addEventListener('click', function(e) {
+      var card = e.target.closest('.rs-line-card');
+      if (card) showLineView(card.dataset.line);
+    });
+
+    _baseData = buildBaseData();
+    if (_baseData) renderLineList(container, _baseData);
+
     if (window.DataFusion) {
       window.DataFusion.subscribe(function(fusedData) {
         if (fusedData && fusedData.lines) {
           renderLineList(container, fusedData);
           if (currentLine) {
-            var fusedLine = DataFusion.getLine(currentLine);
-            if (fusedLine) {
-              renderTrainMap(mapElement, fusedLine, currentLine);
-            }
+            var fl = window.DataFusion.getLine(currentLine);
+            if (fl) renderTrainMap(mapElement, fl, currentLine);
           }
         }
       });
@@ -55,16 +128,11 @@
     }
 
     var hash = window.location.hash;
-    if (hash && hash.length > 1) {
-      var lineId = hash.substring(1);
-      showLineView(lineId);
-    }
-
+    if (hash && hash.length > 1) showLineView(hash.substring(1));
     window.addEventListener('hashchange', handleHashChange);
     if (typeof window.onLanguageChange === 'function') {
       window.onLanguageChange(function() { refreshUI(); });
     }
-
     console.log('[TrainsPage] Initialized');
   }
 
@@ -72,48 +140,23 @@
     var hash = window.location.hash;
     if (hash && hash.length > 1) {
       var lineId = hash.substring(1);
-      if (!currentLine) {
-        showLineView(lineId);
-      }
+      if (!currentLine) showLineView(lineId);
     } else if (!hash && currentLine) {
       hideLineView();
     }
   }
 
-  function renderLineList(container, fusedData) {
-    if (!container || !fusedData || !fusedData.lines) return;
-    var lines = fusedData.lines;
-    var html = '';
-    var lineIds = Object.keys(lines).sort();
-    for (var i = 0; i < lineIds.length; i++) {
-      var lid = lineIds[i];
-      var line = lines[lid];
-      var color = line.color || '#888';
-      var name = line.nameEn || line.name || lid;
-      var activeClass = currentLine === lid ? ' active' : '';
-
-      html += '<a href="#' + escapeHtml(lid) + '" class="tp-line-card' + activeClass + '" style="--line-color: ' + color + ';">';
-      html += '<img src="' + escapeHtml(line.image) + '" class="tp-line-icon" alt="' + escapeHtml(name) + '" loading="lazy">';
-      html += '<div class="tp-line-info">';
-      html += '<div class="tp-line-name">' + escapeHtml(name) + '</div>';
-      html += '</div></div>';
-      html += '</a>';
-    }
-
-    container.innerHTML = html;
-  }
-
   function showLineView(lineId) {
     currentLine = lineId;
-    var fusedLine = window.DataFusion ? DataFusion.getLine(lineId) : null;
+    var fusedLine = window.DataFusion ? window.DataFusion.getLine(lineId) : null;
+    if (!fusedLine && _baseData && _baseData.lines[lineId]) {
+      fusedLine = _baseData.lines[lineId];
+    }
     if (!fusedLine) return;
-
     window.location.hash = lineId;
-
-    if (container) { container.classList.add('hidden'); }
-    if (viewElement) { viewElement.classList.remove('hidden'); }
+    if (container) container.classList.add('hidden');
+    if (viewElement) viewElement.classList.remove('hidden');
     if (titleElement) titleElement.innerHTML = '' + escapeHtml(fusedLine.nameEn || fusedLine.name);
-
     if (mapElement) renderTrainMap(mapElement, fusedLine, lineId);
   }
 
@@ -121,80 +164,57 @@
     currentLine = null;
     if (container) container.classList.remove('hidden');
     if (viewElement) viewElement.classList.add('hidden');
-    var fusedData = window.DataFusion ? DataFusion.getFusedData() : null;
+    var fusedData = window.DataFusion ? window.DataFusion.getFusedData() : null;
     if (fusedData) renderLineList(container, fusedData);
   }
 
-  function renderTrainMap(container, line, lineId) {
+  function renderTrainMap(el, line, lineId) {
     var positions = line.realtimePositions || [];
-    var delayInfo = line.delayInfo || {};
-
-    if (!positions || positions.length === 0) {
-      // Show delay info instead of empty state
-      var statusText = delayInfo.status === 'suspended' ? '运休' : (delayInfo.status === 'delayed' ? '延误' : '正常运行');
-      var statusColor = delayInfo.status === 'suspended' ? '#ff4757' : (delayInfo.status === 'delayed' ? '#ffa502' : '#00a04e');
-      var html = '<div class="tp-delay-info">';
-      html += '<div class="tp-status-badge" style="color:' + statusColor + ';border:1px solid ' + statusColor + ';">' + statusText + '</div>';
-      if (delayInfo.maxDelay > 0) {
-        html += '<div class="tp-delay-text">最大延误 +' + delayInfo.maxDelay + '分</div>';
-      }
-      if (delayInfo.interval) {
-        html += '<div class="tp-interval-text">区间: ' + escapeHtml(delayInfo.interval) + '</div>';
-      }
-      if (delayInfo.cause) {
-        html += '<div class="tp-cause-text">' + escapeHtml(delayInfo.cause) + '</div>';
-      }
-      html += '</div>';
-      container.innerHTML = html;
-      return;
+    var color = line.color || '#00a04e';
+    var sp = 32, topPad = 18, botPad = 14;
+    var h = topPad + line.stations.length * sp + botPad;
+    var svgW = 155;
+    var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + svgW + ' ' + h + '" preserveAspectRatio="xMidYMid meet">';
+    svg += '<defs><filter id="tg_' + lineId + '"><feGaussianBlur stdDeviation="1.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>';
+    var lineY1 = topPad, lineY2 = topPad + (line.stations.length - 1) * sp;
+    svg += '<line x1="45" y1="' + lineY1 + '" x2="45" y2="' + lineY2 + '" stroke="' + color + '" stroke-width="4" stroke-linecap="round" opacity="0.4"/>';
+    line.stations.forEach(function(st, i) {
+      var y = topPad + i * sp;
+      svg += '<circle cx="45" cy="' + y + '" r="5" fill="#fff" stroke="' + color + '" stroke-width="2.5"/>';
+      var dn = st.length > 9 ? st.substring(0, 9) + '...' : st;
+      svg += '<text x="56" y="' + (y + 3.5) + '" font-size="9" fill="#444" font-family="sans-serif" font-weight="500">' + escapeHtml(dn) + '</text>';
+    });
+    if (positions && positions.length > 0) {
+      positions.forEach(function(pos) {
+        var py = topPad + (pos.stationIndex || 0) * sp;
+        var tx = 45;
+        svg += '<circle cx="' + tx + '" cy="' + py + '" r="6" fill="' + color + '" filter="url(#tg_' + lineId + ')" opacity="0.9"/>';
+        svg += '<circle cx="' + tx + '" cy="' + py + '" r="2.5" fill="#fff"/>';
+      });
     }
-
-    var stationSpacing = 45;
-    var totalHeight = 60 + line.stations.length * stationSpacing + 30;
-    var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 ' + totalHeight + '" preserveAspectRatio="xMidYMid meet">';
-    svg += '<defs><filter id="glow"><feGaussianBlur stdDeviation="2" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>';
-
-    svg += '<line x1="70" y1="60" x2="70" y2="' + (60 + (line.stations.length - 1) * stationSpacing) + '" stroke="#e0e0e0" stroke-width="4" stroke-linecap="round"/>';
-
-    line.stations.forEach(function(station, i) {
-      var y = 60 + i * stationSpacing;
-      svg += '<circle cx="70" cy="' + y + '" r="6" fill="#fff" stroke="' + (line.color || '#00a04e') + '" stroke-width="2"/>';
-      var displayName = station.length > 10 ? station.substring(0, 10) + '...' : station;
-      svg += '<text x="85" y="' + (y + 4) + '" font-size="10" fill="#555" font-family="sans-serif">' + escapeHtml(displayName) + '</text>';
-    });
-
-    positions.forEach(function(pos) {
-      var trainY = 60 + 5 * stationSpacing;
-      svg += '<circle cx="70" cy="' + trainY + '" r="8" fill="' + (line.color || '#00a04e') + '" class="tp-train" filter="url(#glow)"/>';
-      svg += '<text x="85" y="' + (trainY) + '" font-size="8" fill="#333">' + escapeHtml(pos.id) + '</text>';
-      svg += '<title>' + escapeHtml(pos.id) + (pos.stopId ? ' @ ' + escapeHtml(pos.stopId) : '') + '</title>';
-    });
-
     svg += '</svg>';
-    container.innerHTML = svg;
+    var statusHtml = '';
+    if (!positions || positions.length === 0) {
+      statusHtml = '<div class="tp-no-data">暂无实时数据</div>';
+    } else {
+      statusHtml = '<div class="tp-no-data tp-running">列车运行中</div>';
+    }
+    el.innerHTML = '<div class="tp-map-wrap">' + svg + '</div>' + statusHtml;
   }
 
   function refreshUI() {
-    if (backBtn) {
-      backBtn.textContent = '\u2190 ' + t('line_map.back');
-    }
+    if (backBtn) backBtn.textContent = '\u2190 ' + t('line_map.back');
     if (!currentLine && container && !container.classList.contains('hidden')) {
-      var fusedData = window.DataFusion ? DataFusion.getFusedData() : null;
-      if (fusedData) renderLineList(container, fusedData);
+      var fd = window.DataFusion ? window.DataFusion.getFusedData() : null;
+      if (fd) renderLineList(container, fd);
     }
     if (currentLine && window.DataFusion) {
-      var fusedLine = DataFusion.getLine(currentLine);
-      if (fusedLine) showLineView(currentLine);
+      var fl = window.DataFusion.getLine(currentLine);
+      if (fl) showLineView(currentLine);
     }
   }
 
-  window.TrainsPage = {
-    init: init,
-    refreshUI: refreshUI,
-    showLineView: showLineView,
-    hideLineView: hideLineView
-  };
-
+  window.TrainsPage = { init: init, refreshUI: refreshUI, showLineView: showLineView, hideLineView: hideLineView };
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {

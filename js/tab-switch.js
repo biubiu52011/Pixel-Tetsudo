@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Page tab switching with hash support
  */
 

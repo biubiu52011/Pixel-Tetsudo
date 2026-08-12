@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Pixel Tetsudo - Search History Module
  * Saves and displays search history in localStorage
  */

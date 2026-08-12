@@ -1,4 +1,4 @@
-/*
+﻿﻿/*
  * Tourism Data - Station-keyed structure
  * Auto-generated
  */
@@ -459,7 +459,7 @@
       coord: [35.6533, 139.6986],
       dist: "3 min walk",
       dir: "from station",
-      desc: "Beautiful open-air bookstore by鬯ｮ・ｦ繝ｻ・｡郢晢ｽｻ繝ｻ・ｦ鬮ｯ讖ｸ・ｽ・ｻ髯具ｽｹ繝ｻ・ｺ髯溷調髴懊・・ｰ陟托ｽｱ郢晢ｽｻ Perfect for browsing and coffee.",
+      desc: "Beautiful open-air bookstore by Daikanyama T-site. Perfect for browsing and coffee.",
       tags: ["all", "food"],
       station: "Daikanyama"},
         {
@@ -771,7 +771,7 @@
       coord: [35.2325, 139.1069],
       dist: "15 min walk",
       dir: "From station",
-      desc: "Traditional ryokan district with onsen baths. Soak in鬯ｩ蠅捺ｱ壹・・ｽ繝ｻ・ｫ鬯ｲ繝ｻ・ｺ蛟･繝ｻscented waters surrounded by mountains.",
+      desc: "Traditional ryokan district with onsen baths. Soak in aromatic, mineral-rich waters surrounded by mountains.",
       tags: ["nature", "all"],
       station: "Hakone"},
         {
@@ -3603,7 +3603,7 @@
       station: "Yurakucho"}
       ]
     },
-    "押上": {
+    "Oshiage": {
       coord: [35.7101, 139.8107],
       spots: [
         {
@@ -3612,9 +3612,10 @@
       dist: "2 min walk",
       dir: "from station",
       desc: "Japan's tallest structure at 634m. Two observation decks offer 360-degree views of Tokyo.",
-      image: "../images/観光地/浅草/浅草神社.jpg",
+      image: "../images/観光地/浅草/スカイツリー.jpg",
       tags: ["all", "night"],
-      station: "押上"},
+      station: "Oshiage"
+        },
         {
       name: "Tokyo Solamachi",
       coord: [35.7101, 139.8107],
@@ -3622,7 +3623,8 @@
       dir: "under Skytree",
       desc: "Large shopping complex at Skytree base. Over 300 shops and restaurants.",
       tags: ["food", "shopping"],
-      station: "押上"},
+      station: "Oshiage"
+        },
         {
       name: "Sumida Aquarium",
       coord: [35.7101, 139.8107],
@@ -3630,7 +3632,8 @@
       dir: "near station",
       desc: "Modern aquarium with dolphin shows and penguin feeding.",
       tags: ["nature", "all"],
-      station: "押上"},
+      station: "Oshiage"
+        },
         {
       name: "Soramachi Cherry Trees",
       coord: [35.7101, 139.8107],
@@ -3638,11 +3641,11 @@
       dir: "from station",
       desc: "Tree-lined approach to Skytree, beautiful in spring.",
       tags: ["nature", "seasonal"],
-      station: "押上"
-    },
+      station: "Oshiage"
+        }
       ]
-    }
-  },
+
+    },
 
   window.TOURISM_STATIONS = Object.keys(window.TOURISM_DATA);
 })();

@@ -1,7 +1,7 @@
-(function() {
+﻿(function() {
   "use strict";
   window.STATION_COORDS = {
-    "押上": [35.7101, 139.8107],
+    "Oshiage": [35.7101, 139.8107],
     "Adachi": [35.7753, 139.8047],
     "Akasaka": [35.6738, 139.7365],
     "Akihabara": [35.6984, 139.7731],
@@ -96,3 +96,4 @@
     "Yurakucho": [35.6751, 139.7633]
   };
 })();
+

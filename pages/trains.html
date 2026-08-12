@@ -1,44 +1,66 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Train Location</title>
 <link rel="stylesheet" href="../css/style.css">
-<link rel="stylesheet" href="../css/trains.css?v=20">
+<link rel="stylesheet" href="../css/lang-bar.css">
+<link rel="stylesheet" href="../css/trains.css">
 </head>
 <body>
 <div id="app">
 <header class="pixel-header">
 <div class="header-container">
+<div class="lang-switcher-wrapper">
+<button id="langToggleBtn" class="lang-toggle-btn" title="Switch Language" aria-haspopup="listbox" aria-expanded="false" aria-label="Switch language">
+<img src="../images/Language.png" alt="Language" class="lang-icon">
+</button>
+<div id="langSwitcher" class="lang-switcher">
+<div class="lang-options" role="listbox" aria-label="Select language">
+<button class="lang-btn active" data-lang="ja" role="option" aria-selected="true">日本語</button>
+<button class="lang-btn" data-lang="zh" role="option" aria-selected="false">中文</button>
+<button class="lang-btn" data-lang="ko" role="option" aria-selected="false">한국어</button>
+<button class="lang-btn" data-lang="en" role="option" aria-selected="false">English</button>
+</div>
+</div>
+</div>
 <div class="header-text">
-<h1 class="pixel-title">Pixel Tetsudo</h1>
+<h1 class="pixel-title" data-i18n="app.title">Pixel Tetsudo</h1>
 </div>
 </div>
 </header>
 <nav class="pixel-tabs">
-<a href="home.html" class="tab-btn">Route Search</a>
-<a href="realtime.html" class="tab-btn">Status</a>
-<a href="trains.html" class="tab-btn active">Train Location</a>
-<a href="history.html" class="tab-btn">History</a>
+<a href="home.html" class="tab-btn" data-tab="search" data-i18n="tab.search">Route Search</a>
+<a href="realtime.html" class="tab-btn" data-tab="status" data-i18n="tab.status">Status</a>
+<a href="trains.html" class="tab-btn active" data-tab="trains" data-i18n="tab.realtime">Train Location</a>
+<a href="history.html" class="tab-btn" data-tab="history" data-i18n="tab.history">History</a>
 </nav>
 <section id="tab-trains" class="tab-content active">
-<div id="trainsContainer" class="trains-container pixel-card">
+<div id="trainsContainer" class="pixel-card">
+<div id="trainsLoadingState" class="tp-loading-state hidden">
+<div class="tp-loading-spinner"></div>
+<span class="tp-loading-text">Loading...</span>
+</div>
 <div id="trainsLineListContent" class="trains-list"></div>
 <div id="trainsDetailView" class="trains-detail hidden">
-<button id="trainsBackBtn" class="back-btn">Back</button>
+<button id="trainsBackBtn" class="back-btn">← Back</button>
 <div id="trainsDetailTitle" class="detail-title"></div>
-<div id="trainsMapContainer" class="trains-map"></div>
+<div id="trainsMapContainer" class="tp-line-map"></div>
 </div>
 </div>
 </section>
-<footer class="pixel-footer">Copyright © 2026 Pixel Tetsudo</footer>
+<footer class="pixel-footer" data-i18n="app.footer">Copyright © 2026 Pixel Tetsudo</footer>
 </div>
 <script src="../data/railway/line-control.js"></script>
 <script src="../js/data-layer.js"></script>
-<script src="../data/api/odpt-unified.js?v=9"></script>
+<script src="../data/api/odpt-unified.js"></script>
+<script src="../js/local-railway-data.js"></script>
+<script src="../data/station-coords.js"></script>
 <script src="../js/data-fusion.js"></script>
 <script src="../js/translations.js"></script>
-<script src="../js/trains-page.js?v=40"></script>
+<script src="../js/common.js"></script>
+<script src="../js/lang-init.js"></script>
+<script src="../js/trains-page.js"></script>
 </body>
 </html>

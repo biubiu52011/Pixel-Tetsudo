@@ -831,3 +831,18 @@
 .sm-module {
   position: relative;
 }
+/* Pixel tag icons via CSS pseudo-elements */
+.sm-tag-btn[data-tag="all"]::before       { content: "\25A0"; }
+.sm-tag-btn[data-tag="night"]::before     { content: "\25CF"; }
+.sm-tag-btn[data-tag="history"]::before   { content: "\26EA"; }
+.sm-tag-btn[data-tag="nature"]::before    { content: "\2666"; }
+.sm-tag-btn[data-tag="shrine"]::before    { content: "\2699"; }
+.sm-tag-btn[data-tag="food"]::before      { content: "\269B"; }
+.sm-tag-btn[data-tag="seasonal"]::before  { content: "\2740"; }
+.sm-tag-btn.active[data-tag="all"]::before       { content: "\25AA"; }
+.sm-tag-btn.active[data-tag="night"]::before     { content: "\25CE"; }
+.sm-tag-btn.active[data-tag="history"]::before   { content: "\26DB"; }
+.sm-tag-btn.active[data-tag="nature"]::before    { content: "\2661"; }
+.sm-tag-btn.active[data-tag="shrine"]::before    { content: "\269A"; }
+.sm-tag-btn.active[data-tag="food"]::before      { content: "\269A"; }
+.sm-tag-btn.active[data-tag="seasonal"]::before  { content: "\272E"; }

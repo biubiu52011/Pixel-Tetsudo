@@ -2,10 +2,6 @@
  * 语言初始化脚本
  */
 
-/**
- * Language Switcher Module
- * Pixel-style language switcher with keyboard navigation
- */
 (function() {
     "use strict";
 
@@ -23,8 +19,12 @@
     var currentIndex = -1;
 
     function applyLang(lang) {
-        if (typeof window.S !== "function") return false;
-        return window.S(lang);
+        if (typeof window.t !== "function") return false;
+        window.currentLang = lang;
+        updateSwitcherUI(lang);
+        updateTranslations();
+        triggerLanguageChange();
+        return true;
     }
 
     function updateSwitcherUI(lang) {
@@ -56,7 +56,6 @@
         if (sw) sw.classList.add("expanded");
         var btn = document.getElementById("langToggleBtn");
         if (btn) btn.setAttribute("aria-expanded", "true");
-        // Focus first item or active item
         var opts = document.querySelectorAll(".lang-btn");
         if (opts.length > 0 && currentIndex >= 0) {
             opts[currentIndex].focus();
@@ -75,12 +74,8 @@
 
     function selectLanguage(lang) {
         if (SUPPORTED.indexOf(lang) === -1) return;
-        if (!applyLang(lang)) return;
+        applyLang(lang);
         localStorage.setItem(STORAGE_KEY, lang);
-        window.currentLang = lang;
-        updateSwitcherUI(lang);
-        updateTranslations();
-        triggerLanguageChange();
         closeSwitcher();
     }
 

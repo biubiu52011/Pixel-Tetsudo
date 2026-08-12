@@ -1,8 +1,11 @@
-xel Tetsudo - Realtime View
- * 线路数据融合视图
+/*
+ * Pixel Tetsudo - Realtime View
+ * Line Status View
  */
 (function() {
   'use strict';
+
+  var t = window.t || function(key) { return key; };
 
   function escapeHtml(str) {
     if (!str) return '';
@@ -48,12 +51,12 @@ xel Tetsudo - Realtime View
   }
 
   function render(container, fusedData) {
-    if (!container || !fusedData || !fusedData.lines) return;
+    if (!container || !fusedData || !fusedData.lines) { console.warn("[RealtimeView] Missing data:", {container: !!container, hasFusedData: !!fusedData, hasLines: !!(fusedData && fusedData.lines)}); return; }
     var lines = fusedData.lines;
     var groups = {};
     Object.keys(lines).forEach(function(id) {
       var line = lines[id];
-      var op = line.operator || '\u4e0d\u660e';
+      var op = line.operator || 'Unknown';
       if (!groups[op]) groups[op] = [];
       groups[op].push({ id: id, line: line });
     });
@@ -77,7 +80,7 @@ xel Tetsudo - Realtime View
     var status = getLineStatus(line);
     var interval = line.delayInfo.interval;
     var cause = line.delayInfo.cause;
-    var statusText = status === 'suspended' ? '\u904b\u4f11' : (status === 'delayed' ? '\u9045\u5ef6' : '\u6b63\u5e38');
+    var statusText = status === 'suspended' ? t('status.suspended') : (status === 'delayed' ? t('status.delayed') : t('status.normal'));
     var statusClass = status === 'suspended' ? 'rs-status-suspended' : (status === 'delayed' ? 'rs-status-delayed' : 'rs-status-normal');
     var body = modal.querySelector('.rs-modal-body');
     var title = modal.querySelector('.rs-modal-title');
@@ -89,8 +92,10 @@ xel Tetsudo - Realtime View
       + (status === 'suspended' ? 'red' : (status === 'delayed' ? 'orange' : 'green'))
       + ')"></span>' + statusText + '</span></div>';
 
-    if (interval) {
-      html += '<div class="rs-interval-section"><div class="rs-interval-header"><span class="rs-info-label">\u4ea4\u901a\u4e88\u5907\u8303\u56f2</span></div><div class="rs-interval-stations">';
+    html += '<div class="rs-interval-section"><div class="rs-interval-header"><span class="rs-info-label">' + t('status.interval') + '</span></div><div class="rs-interval-stations">';
+    if (!interval || status === 'normal') {
+      html += '<span class="rs-station-text">' + t('status.all_lines') + '</span>';
+    } else {
       var parts = interval.split('\u2192');
       if (parts.length >= 2) {
         html += '<span class="rs-station-start">' + escapeHtml(parts[0]) + '</span>'
@@ -99,29 +104,16 @@ xel Tetsudo - Realtime View
       } else {
         html += '<span class="rs-station-text">' + escapeHtml(interval) + '</span>';
       }
-      html += '</div></div>';
     }
+    html += '</div></div>';
 
-    if (cause) {
-      html += '<div class="rs-cause-section"><div class="rs-section-title">\u4e8b\u6545\u5185\u5bb9</div><div class="rs-cause-text">' + escapeHtml(cause) + '</div></div>';
+    html += '<div class="rs-cause-section"><div class="rs-section-title">' + t('status.delay_cause') + '</div><div class="rs-cause-text">';
+    if (cause && status !== 'normal') {
+      html += escapeHtml(cause);
+    } else {
+      html += '<span style="color:var(--text-muted)">' + t('status.none') + '</span>';
     }
-
-    if (line.realtimePositions && line.realtimePositions.length > 0) {
-      html += '<div class="rs-trains-section">'
-        + '<div class="rs-section-title">\u8fdd\u7d9a\u8eca\u4f4d (' + line.realtimePositions.length + '\u8f2a</div>'
-        + '<div class="rs-trains-list">';
-      line.realtimePositions.forEach(function(vp) {
-        html += '<div class="rs-train-item">'
-          + '<div class="rs-train-header">'
-          + '<span class="rs-train-id">' + escapeHtml(vp.id) + '</span>'
-          + '</div>'
-          + '<div class="rs-train-detail">'
-          + '<span class="rs-train-dest">\u884c\u5148\u7ad9: ' + escapeHtml(vp.stopId || '\u4e0d\u660e') + '</span>'
-          + '<span class="rs-train-coord">\u5ea7\u6a19: ' + (vp.position ? vp.position.lat.toFixed(4) : '?') + ', ' + (vp.position ? vp.position.lng.toFixed(4) : '?') + '</span>'
-          + '</div></div>';
-      });
-      html += '</div></div>';
-    }
+    html += '</div></div>';
 
     body.innerHTML = html;
     modal.classList.add('active');
@@ -140,10 +132,17 @@ xel Tetsudo - Realtime View
   function init() {
     var container = document.getElementById('realtimeStatusContainer');
     if (!container) return;
+    // Fallback: use cached data from previous load
+    var cachedData = (window.DataFusion && window.DataFusion.getCachedData) ? window.DataFusion.getCachedData() : null;
+    if (cachedData && cachedData.lines && Object.keys(cachedData.lines).length > 0) {
+      try { render(container, cachedData); }
+      catch(e) { console.error('[RealtimeView] Cached render error:', e.message); }
+    }
     if (window.DataFusion) {
-      window.DataFusion.subscribe(function(fusedData) {
-        _latestFusedData = fusedData;
-        render(container, fusedData);
+            window.DataFusion.subscribe(function(fusedData) {
+          _latestFusedData = fusedData;
+          try { render(container, fusedData); }
+          catch(e) { console.error('[RealtimeView] Render error:', e.message); }
       });
       container.addEventListener('click', function(e) {
         var card = e.target.closest('.rs-line-card');
@@ -177,10 +176,15 @@ xel Tetsudo - Realtime View
         window.onLanguageChange(function() {
           var data = window.DataFusion.getFusedData();
           if (data) render(container, data);
+          var modal = document.getElementById('lineDetailModal');
+          if (modal && modal.classList.contains('active') && _latestFusedData) {
+            var selectedCard = document.querySelector('.rs-line-card.selected');
+            if (selectedCard) openModal(selectedCard.dataset.line, _latestFusedData);
+          }
         });
       }
     } else {
-      container.innerHTML = '<div class="rs-error">\u30c7\u30fc\u30bf\u3092\u8aad\u307f\u8fbc\u307f\u3067\u304d\u307e\u305b\u3093</div>';
+      container.innerHTML = '<div class="rs-error">' + t('status.load_error') + '</div>';
       console.error('[RealtimeView] DataFusion not available');
     }
   }
@@ -191,4 +195,3 @@ xel Tetsudo - Realtime View
     init();
   }
 })();
-

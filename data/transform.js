@@ -1,4 +1,4 @@
-﻿const fs = require('fs');
+const fs = require('fs');
 const path = require('path');
 
 const baseDir = 'C:\\Users\\80996\\Documents\\项目\\像素铁道';
@@ -69,7 +69,8 @@ while ((m = stationPattern.exec(tourismContent)) !== null) {
   console.log(`Station ${stationKey}: ${spots.length} spots`);
 }
 
-console.log('\nTotal stations:', Object.keys(stations).length);
+console.log('
+Total stations:', Object.keys(stations).length);
 
 // Transform to new structure
 const newStructure = {};
@@ -89,7 +90,8 @@ for (const [stationKey, stationData] of Object.entries(stations)) {
   }
 }
 
-console.log('\nNew structure spots:', Object.keys(newStructure).length);
+console.log('
+New structure spots:', Object.keys(newStructure).length);
 
 // Generate new JS
 let newContent = `/*
@@ -131,5 +133,6 @@ newContent += `  };
 `;
 
 fs.writeFileSync(tourismFile, newContent, 'utf8');
-console.log('\nFile written successfully');
+console.log('
+File written successfully');
 console.log('New file size:', newContent.length);

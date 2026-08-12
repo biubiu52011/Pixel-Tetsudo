@@ -1,91 +1,61 @@
-﻿/* Train line cards - match realtime page style */
-.tp-line-card {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px 16px;
-  background: transparent !important;
-  border: 2px solid var(--border);
-  border-radius: 16px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  margin-bottom: 8px;
-  text-decoration: none !important;
-  position: relative;
-  overflow: hidden;
-  box-shadow: none !important;
-  transform: none !important;
-  animation: none !important;
-}
-.tp-line-icon {
-  width: 36px;
-  height: 36px;
-  object-fit: contain;
-  border-radius: 10px;
-  flex-shrink: 0;
-  background: none !important;
-  image-rendering: pixelated;
-}
-.tp-line-arrow { display: none; }
-.tp-line-card::before { content: none; }
-.tp-line-info { flex: 1; min-width: 0; }
-.tp-line-name { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.tp-line-operator, .tp-line-type { display: none !important; }
+﻿/* Pixel Tetsudo - Train Location Styles (matches realtime page) */
 
-/* Hover/active glow - match realtime page */
-.tp-line-card:hover,
-.tp-line-card.active {
-  background: transparent !important;
-  border-color: var(--line-color, var(--green)) !important;
-  box-shadow: 0 0 15px var(--line-color, var(--green)),
-              0 0 30px var(--line-color, var(--green)) !important;
-  transform: translateX(4px);
+/* Operator Group */
+.rs-operator-group { margin-bottom: 24px; }
+.rs-operator-title { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; padding: 4px 0 8px; text-align: left; }
+.rs-cards-container { display: flex; flex-direction: column; gap: 8px; }
+
+/* Line Card */
+.rs-line-card {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 16px; background: transparent;
+  border: 2px solid var(--border); border-radius: 16px;
+  cursor: pointer; transition: all 0.2s ease;
+}
+.rs-line-card:hover, .rs-line-card.selected {
+  box-shadow: 0 0 15px var(--line-color, var(--green)), 0 0 30px var(--line-color, var(--green));
+  border-color: var(--line-color, var(--green)); background: transparent; transform: translateX(4px);
+}
+.rs-line-header { display: flex; align-items: center; gap: 8px; flex: 1; }
+.rs-line-icon { width: 36px; height: 36px; object-fit: contain; border-radius: 10px; flex-shrink: 0; }
+.rs-code-badge { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 13px; font-weight: 700; border-radius: 10px; flex-shrink: 0; }
+.rs-line-info { min-width: 0; }
+.rs-line-name { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: left; }
+.rs-line-interval { font-size: 12px; color: var(--text-muted); }
+
+/* Live dot */
+.rs-live-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--green); display: inline-block; margin-right: 7px;
+  animation: trainsLivePulse 2s ease infinite;
+  box-shadow: 0 0 8px rgba(0,160,78,0.4);
+}
+@keyframes trainsLivePulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.85); }
 }
 
-/* Hide operator title/headers */
-.tp-operator-title { display: none !important; }
-.tp-operator-group { margin-bottom: 0; }
+/* Train detail map */
+.tp-map-wrap { padding: 12px; }
+.tp-map-wrap svg { width: 100%; height: auto; display: block; }
+.tp-no-data { padding: 16px; text-align: center; color: var(--text-muted); font-size: 13px; }
+.tp-no-data.tp-running { color: var(--green); }
+.tp-delay-bar { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 10px; font-size: 13px; flex-wrap: wrap; }
+.tp-delay-label { font-weight: 600; }
+.tp-delay-val { font-weight: 700; }
+.tp-delay-interval { margin-left: auto; color: var(--text-muted); }
 
-/* Kill underline */
-.tp-line-card * { text-decoration: none !important; border-bottom: none !important; }
+/* Back button */
+.back-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 16px; border: 2px solid var(--border); border-radius: 10px;
+  background: transparent; cursor: pointer; font-size: 14px; font-weight: 600;
+  color: var(--text); transition: all 0.2s ease; margin-bottom: 12px;
+}
+.back-btn:hover { border-color: var(--green); color: var(--green); transform: translateX(-2px); }
 
-/* Kill focus outline */
-.tp-line-card:focus,
-.tp-line-card:focus-visible {
-  outline: none !important;
-  box-shadow: none !important;
-  background: transparent !important;
-}
-/* Delay info in train detail view */
-.tp-delay-info {
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.tp-status-badge {
-  display: inline-block;
-  padding: 4px 12px;
-  border-radius: 12px;
-  font-size: 13px;
-  font-weight: 600;
-  background: transparent;
-}
-.tp-delay-text {
-  font-size: 12px;
-  color: var(--text-muted);
-}
-.tp-interval-text {
-  font-size: 12px;
-  color: var(--text);
-}
-.tp-cause-text {
-  font-size: 12px;
-  color: var(--text-muted);
-  line-height: 1.5;
-}
-.tp-empty-state {
-  padding: 40px;
-  text-align: center;
-  color: var(--text-muted);
-}
+/* Detail title */
+.detail-title { font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 12px; padding: 0 4px; }
+
+/* Hidden utility */
+.hidden { display: none !important; }
