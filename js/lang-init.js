@@ -169,6 +169,14 @@
         updateTranslations();
     }
 
+    // Move switcher outside header to avoid stacking-context clipping
+    var swWrapper = document.querySelector(".lang-switcher-wrapper");
+    var hdr = document.querySelector(".pixel-header");
+    if (swWrapper && hdr && hdr.contains(swWrapper)) {
+        document.body.appendChild(swWrapper);
+        swWrapper.classList.add("is-fixed");
+    }
+
     if (document.readyState === "loading") {
         document.addEventListener("DOMContentLoaded", init);
     } else {

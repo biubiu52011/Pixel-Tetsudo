@@ -703,6 +703,10 @@
 
     async function refreshODPTData() {
         await loadODPTDelayData();
+        // Sync ODPT delay data to DataFusion internal store
+        if (window.DataFusion && window.DataFusion.updateOdptData) {
+            window.DataFusion.updateOdptData(window.ODPT_DELAY_DATA);
+        }
         if (window.DataFusion && window.DataFusion.refresh) {
             try { await window.DataFusion.refresh(); }
             catch(e) { console.warn('[ODPT] DataFusion refresh error:', e.message); }

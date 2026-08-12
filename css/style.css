@@ -965,3 +965,7 @@ body.modal-open { overflow: hidden; }
     font-size: 18px;
   }
 }
+
+@media (max-width: 1000px) {
+  #smGrid { grid-template-columns: 1fr !important; }
+}

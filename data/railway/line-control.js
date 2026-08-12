@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Line Control - Unified Line Data
  * 线路数据控制
  */
@@ -232,28 +232,28 @@
       durations: Array(35).fill(2),
       branchOf: null
     },
-    "Chiyoda": { operator: "TokyoMetro", region: "Tokyo Area", type: "straight",
+    "Chiyoda": { name: "Chiyoda", nameEn: "Chiyoda Line", code: "C", operator: "TokyoMetro", region: "Tokyo Area", type: "straight",
        color: "#00BB85",image: "../images/鉄道/東京メトロ/千代田線.png", durationTotalMin: 40, throughServices: [],
       transferStations: [{"station": "Otemachi", "connects": ["Tozai"]}, {"station": "Yurakucho", "connects": ["Yurakucho"]}, {"station": "Akabane", "connects": ["Joban"]}, {"station": "Kita-Senju", "connects": ["Joban"]}],
       stations: ["Yoyogi-Uehara","Shinjuku","Hitotsubashi","Kudanshita","Jimbocho","Otemachi","Yurakucho","Hibiya","Kojimachi","Ichigaya","Nagatacho","Akasaka-mitsuke","Toranomon","Shimbashi","Kasumigaseki","Yokojimma","Takebashi","Kitasenju","Yanauchi","Harajuku"],
       durations: Array(20).fill(2),
       branchOf: null
     },
-    "Hanzomon": { operator: "TokyoMetro", region: "Tokyo Area", type: "straight",
+    "Hanzomon": { name: "Hanzomon", nameEn: "Hanzomon Line", code: "Z", operator: "TokyoMetro", region: "Tokyo Area", type: "straight",
        color: "#8F76D6",image: "../images/鉄道/東京メトロ/半蔵門線.png", durationTotalMin: 30, throughServices: [],
       transferStations: [{"station": "Shibuya", "connects": ["Ginza"]}, {"station": "Otemachi", "connects": ["Marunouchi"]}, {"station": "Shimoesaka", "connects": ["Asakusa"]}, {"station": "Oshiage", "connects": ["Asakusa"]}],
       stations: ["Shibuya","Omotesando","Aoyama-itchome","Kamiyacho","Hanzomon","Otemachi","Kudanshita","Jimbocho","Ichigaya","Nagatacho","Akasaka-mitsuke","Oshiage"],
       durations: Array(12).fill(2),
       branchOf: null
     },
-    "Namboku": { operator: "TokyoMetro", region: "Tokyo Area", type: "straight",
+    "Namboku": { name: "Namboku", nameEn: "Namboku Line", code: "N", operator: "TokyoMetro", region: "Tokyo Area", type: "straight",
        color: "#00AC9B",image: "../images/鉄道/東京メトロ/南北線.png", durationTotalMin: 35, throughServices: [{"line": "TokyoSakura", "code": "T", "note": "都営浅草線直通"}],
       transferStations: [{"station": "Meguro", "connects": ["Mita"]}, {"station": "Akabane-Iwabuchi", "connects": ["Marunouchi"]}, {"station": "Shin-Otsuka", "connects": ["Fukutoshin"]}],
       stations: ["Meguro","Meguro-Dai","Shirokanedai","Nakameguro","Shibuya","Omotesando","Aoyama-itchome","Kamiyacho","Hanzomon","Otemachi","Kudanshita","Jimbocho","Kojimachi","Ichigaya","Nagatacho","Akabane-Iwabuchi"],
       durations: Array(16).fill(2),
       branchOf: null
     },
-    "Fukutoshin": { operator: "TokyoMetro", region: "Tokyo Area", type: "straight",
+    "Fukutoshin": { name: "Fukutoshin", nameEn: "Fukutoshin Line", code: "F", operator: "TokyoMetro", region: "Tokyo Area", type: "straight",
        color: "#9C5E31",image: "../images/鉄道/東京メトロ/副都心線.png", durationTotalMin: 40, throughServices: [{"line": "TokyuToyoko", "code": "TY", "note": "東急東横線直通"}],
       transferStations: [{"station": "Shinjuku", "connects": ["Yamanote"]}, {"station": "Ikebukuro", "connects": ["Yamanote"]}, {"station": "Tokyo", "connects": ["Yamanote"]}, {"station": "Otemachi", "connects": ["Tozai"]}],
       stations: ["Wakoshi","Higashi-Ikebukuro","Ikebukuro","Yushima","Ueno","Okachimachi","Ginza","Yurakucho","Shimbashi","Hamamatsucho","Tokyo","Nihonbashi","Makuhari-hongo","Kayabacho","Tsukishima","Tokyo Dome-mae","Kacho-mae","Harumi-futago","Shin-Kiba"],

@@ -1,6 +1,5 @@
 /*
  * Pixel Tetsudo - Trains Page Controller
- * 列车位置页面控制器
  */
 (function() {
   "use strict";
@@ -12,6 +11,7 @@
   var mapElement = null;
   var backBtn = null;
   var _hashTimer = null;
+  var _renderScheduled = false;
   var t = window.t || function(key) { return key; };
 
   function escapeHtml(str) {
@@ -42,29 +42,6 @@
   }
 
   var _baseData = null;
-  var _renderScheduled = false;
-
-  function scheduleRender() {
-    if (_renderScheduled) return;
-    _renderScheduled = true;
-    setTimeout(function() {
-      _renderScheduled = false;
-      var fd = getSafeFusedData();
-      if (fd && container && !container.classList.contains("hidden")) {
-        renderLineList(container, fd);
-      }
-    }, 50);
-  }
-
-  function getSafeFusedData() {
-    try {
-      if (window.DataFusion) {
-        var d = window.DataFusion.getFusedData();
-        if (d) return d;
-      }
-    } catch(e) {}
-    return _baseData;
-  }
 
   function buildBaseData() {
     try {
@@ -91,6 +68,28 @@
       console.error("[TrainsPage] buildBaseData error:", e.message);
       return null;
     }
+  }
+
+  function getSafeFusedData() {
+    try {
+      if (window.DataFusion) {
+        var d = window.DataFusion.getFusedData();
+        if (d) return d;
+      }
+    } catch(e) {}
+    return _baseData;
+  }
+
+  function scheduleRender() {
+    if (_renderScheduled) return;
+    _renderScheduled = true;
+    setTimeout(function() {
+      _renderScheduled = false;
+      var fd = getSafeFusedData();
+      if (fd && container && !container.classList.contains("hidden")) {
+        renderLineList(container, fd);
+      }
+    }, 50);
   }
 
   function renderCard(line, lineId) {
@@ -156,20 +155,19 @@
       });
 
       if (backBtn) {
-        backBtn.addEventListener("click", function() {
-          window.location.hash = "";
-          hideLineView();
-        });
+        backBtn.addEventListener("click", function() { window.location.hash = ""; });
         backBtn.textContent = "\u2190 " + t("line_map.back");
       }
 
+      // Build base data and initial render
       _baseData = buildBaseData();
       if (_baseData) renderLineList(container, _baseData);
 
+      // Subscribe to real-time data updates
       if (window.DataFusion) {
         window.DataFusion.subscribe(function(fusedData) {
           if (!fusedData || !fusedData.lines) return;
-          renderLineList(container, fusedData);
+          scheduleRender();
           if (currentLine) {
             var fl = window.DataFusion.getLine(currentLine);
             if (fl) renderTrainMap(mapElement, fl, currentLine);
@@ -177,6 +175,7 @@
         });
       }
 
+      // Restore line from URL hash
       var hash = window.location.hash;
       if (hash && hash.length > 1) {
         clearTimeout(_hashTimer);
@@ -184,11 +183,11 @@
       }
       window.addEventListener("hashchange", handleHashChange);
 
+      // Language change handler
       if (typeof window.onLanguageChange === "function") {
         window.onLanguageChange(function() { refreshUI(); });
       }
-      console.log("[TrainsPage] Initialized");
-    } catch(e) { console.error("[TrainsPage] Init error:", e.message); }
+    } catch(e) { console.error("[TrainsPage] init error:", e.message); }
   }
 
   function handleHashChange() {
@@ -233,40 +232,47 @@
     try {
       var positions = line.realtimePositions || [];
       var color = line.color || "#00a04e";
-      var sp = 32, topPad = 18, botPad = 14;
-      var stationCount = line.stations ? line.stations.length : 0;
-      var h = topPad + stationCount * sp + botPad;
-      var svgW = 155;
+      var stations = line.stations || [];
+      var isLoop = line.type === "loop";
+      var sp = 30, topPad = 16, botPad = 14;
+      var h = topPad + stations.length * sp + botPad;
+      var svgW = isLoop ? 200 : 190;
       var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + svgW + " " + h + '" preserveAspectRatio="xMidYMid meet">';
-      svg += '<defs><filter id="tg_' + escapeHtml(lineId) + '"><feGaussianBlur stdDeviation="1.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>';
-      var lineY1 = topPad, lineY2 = topPad + Math.max(0, stationCount - 1) * sp;
-      svg += '<line x1="45" y1="' + lineY1 + '" x2="45" y2="' + lineY2 + '" stroke="' + escapeHtml(color) + '" stroke-width="4" stroke-linecap="round" opacity="0.4"/>';
-      if (line.stations) {
-        for (var i = 0; i < line.stations.length; i++) {
-          var st = line.stations[i];
-          var y = topPad + i * sp;
-          svg += '<circle cx="45" cy="' + y + '" r="5" fill="#fff" stroke="' + escapeHtml(color) + '" stroke-width="2.5"/>';
-          var dn = st.length > 9 ? st.substring(0, 9) + "..." : st;
-          svg += '<text x="56" y="' + (y + 3.5) + '" font-size="9" fill="#444" font-family="sans-serif" font-weight="500">' + escapeHtml(dn) + "</text>";
-        }
+      svg += '<defs><filter id="tg_' + escapeHtml(lineId) + '"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>';
+      svg += '<rect width="' + svgW + '" height="' + h + '" fill="var(--bg)" rx="8"/>';
+      var cx = svgW / 2;
+      var lineY1 = topPad, lineY2 = topPad + (stations.length - 1) * sp;
+      svg += '<line x1="' + cx + '" y1="' + lineY1 + '" x2="' + cx + '" y2="' + lineY2 + '" stroke="' + escapeHtml(color) + '" stroke-width="5" stroke-linecap="round" opacity="0.35"/>';
+      for (var i = 0; i < stations.length; i++) {
+        var st = stations[i];
+        var y = topPad + i * sp;
+        var isTrain = positions.some(function(p) { return p.stationIndex === i; });
+        svg += '<circle cx="' + cx + '" cy="' + y + '" r="' + (isTrain ? 6 : 4) + '" fill="' + (isTrain ? escapeHtml(color) : "#fff") + '" stroke="' + escapeHtml(color) + '" stroke-width="' + (isTrain ? 2.5 : 2) + '"/>';
+        var dn = st.length > 10 ? st.substring(0, 10) + "\u2026" : st;
+        var tx = cx + 14;
+        svg += '<text x="' + tx + '" y="' + (y + 3.5) + '" font-size="9" fill="#444" font-family="sans-serif" font-weight="500">' + escapeHtml(dn) + '</text>';
       }
       for (var j = 0; j < positions.length; j++) {
         var pos = positions[j];
-        var py = topPad + (pos.stationIndex || 0) * sp;
-        svg += '<circle cx="45" cy="' + py + '" r="6" fill="' + escapeHtml(color) + '" filter="url(#tg_' + escapeHtml(lineId) + ')" opacity="0.9"/>';
-        svg += '<circle cx="45" cy="' + py + '" r="2.5" fill="#fff"/>';
+        var py = topPad + Math.min(pos.stationIndex || 0, stations.length - 1) * sp;
+        svg += '<circle cx="' + cx + '" cy="' + py + '" r="8" fill="' + escapeHtml(color) + '" filter="url(#tg_' + escapeHtml(lineId) + ')" opacity="0.9"/>';
+        svg += '<circle cx="' + cx + '" cy="' + py + '" r="3" fill="#fff"/>';
       }
       svg += "</svg>";
+      var noDataText = t("trains.no_data");
+      var loadingText = t("trains.loading");
+      var runningText = t("trains.running");
+      var trainCountText = t("trains.train_count");
       var statusHtml = "";
-      if (!positions || positions.length === 0) {
-        statusHtml = '<div class="tp-no-data">暂无实时数据</div>';
+      if (positions.length === 0) {
+        statusHtml = '<div class="tp-no-data">' + noDataText + '<br><span style="font-size:11px;color:var(--text-muted)">' + loadingText + "</span></div>";
       } else {
-        statusHtml = '<div class="tp-no-data tp-running">列车运行中 (' + positions.length + ")</div>";
+        statusHtml = '<div class="tp-no-data tp-running">' + runningText + " (" + positions.length + " " + trainCountText + ")</div>";
       }
       el.innerHTML = '<div class="tp-map-wrap">' + svg + "</div>" + statusHtml;
     } catch(e) {
       console.error("[TrainsPage] renderTrainMap error:", e.message);
-      el.innerHTML = '<div class="tp-no-data">地图加载失败</div>';
+      el.innerHTML = '<div class="tp-no-data">' + t("trains.map_error") + "</div>";
     }
   }
 
@@ -277,9 +283,11 @@
         var fd = getSafeFusedData();
         if (fd) renderLineList(container, fd);
       }
-      if (currentLine && window.DataFusion) {
-        var fl = window.DataFusion.getLine(currentLine);
-        if (fl) showLineView(currentLine);
+      if (currentLine && mapElement) {
+        var fusedLine = null;
+        if (window.DataFusion) fusedLine = window.DataFusion.getLine(currentLine);
+        if (!fusedLine && _baseData && _baseData.lines[currentLine]) fusedLine = _baseData.lines[currentLine];
+        if (fusedLine) renderTrainMap(mapElement, fusedLine, currentLine);
       }
     } catch(e) { console.error("[TrainsPage] refreshUI error:", e.message); }
   }

@@ -75,7 +75,13 @@
       'detail.fallback_tips': '便利な情報はありません',
       'detail.fallback_best_time': '通年',
       'detail.near_station': '駅から徒歩圏内',
-      'detail.walking_distance': '徒歩圏内'
+      'detail.walking_distance': '徒歩圏内',
+      'trains.no_data': '实时列车データなし',
+      'trains.loading': 'データを更新中…',
+      'trains.map_error': '地図の読み込みに失敗しました',
+      'trains.running': '● 運行中',
+      'trains.train_count': '本',
+      'trains.back_label': '戻る'
     },
     en: {
       'app.title': 'Pixel Tetsudo',
@@ -148,7 +154,13 @@
       'detail.fallback_tips': 'No additional tips available',
       'detail.fallback_best_time': 'Year-round',
       'detail.near_station': 'Near station',
-      'detail.walking_distance': 'Walking distance'
+      'detail.walking_distance': 'Walking distance',
+      'trains.no_data': 'No real-time train data',
+      'trains.loading': 'Refreshing data…',
+      'trains.map_error': 'Map load failed',
+      'trains.running': '● Running',
+      'trains.train_count': 'trains',
+      'trains.back_label': 'Back'
     },
     zh: {
       'app.title': 'Pixel Tetsudo',
@@ -221,7 +233,13 @@
       'detail.fallback_tips': '暂无额外提示',
       'detail.fallback_best_time': '全年',
       'detail.near_station': '车站附近',
-      'detail.walking_distance': '步行距离'
+      'detail.walking_distance': '步行距离',
+      'trains.no_data': '暂无实时列车数据',
+      'trains.loading': '数据刷新中…',
+      'trains.map_error': '地图加载失败',
+      'trains.running': '● 运行中',
+      'trains.train_count': '辆',
+      'trains.back_label': '返回'
     },
     ko: {
       'app.title': 'Pixel Tetsudo',
@@ -294,7 +312,13 @@
       'detail.fallback_tips': '추가 팁이 없습니다',
       'detail.fallback_best_time': '연중무휴',
       'detail.near_station': '역 근처',
-      'detail.walking_distance': '도보 거리'
+      'detail.walking_distance': '도보 거리',
+      'trains.no_data': '실시간 열차 데이터 없음',
+      'trains.loading': '데이터 갱신 중…',
+      'trains.map_error': '지도 로드 실패',
+      'trains.running': '● 운행 중',
+      'trains.train_count': '편',
+      'trains.back_label': '뒤로'
     }
   };
   window.TRANSLATIONS = translations;

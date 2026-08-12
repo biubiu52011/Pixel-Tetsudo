@@ -1,25 +1,237 @@
-/*
- * Pixel Tetsudo - DataFusion v10 (Optimized)
- * 线路数据融合引擎 - 被动订阅模式，由 odpt-unified.js 驱动刷新
+﻿/*
+ * Pixel Tetsudo - DataFusion v11 (Position Support)
+ * 线路数据融合引擎 + GTFS-RT 列车位置
  */
 (function() {
   "use strict";
 
-  var FUSION_VERSION = 10;
+  var FUSION_VERSION = 11;
+  var REFRESH_INTERVAL = 30000;
+  var POSITION_INTERVAL = 60000;
 
   var odptData = { trains: {}, stations: {}, delayInfo: {}, realtimePositions: {} };
   var subscribers = [];
   var localData = { lines: {}, statusMap: {} };
   var _lastFusedData = null;
   var _lineControlVersion = null;
+  var _positionTimer = null;
 
+  // ========== GTFS-RT Protobuf Parser ==========
+  function parseVarint(bytes, pos) {
+    var result = 0, shift = 0;
+    while (pos < bytes.length && shift < 35) {
+      var b = bytes[pos++];
+      result |= (b & 0x7F) << shift;
+      shift += 7;
+      if ((b & 0x80) === 0) break;
+    }
+    return { value: result, pos: pos };
+  }
+
+  function parseFixed64(bytes, pos) {
+    if (pos + 8 > bytes.length) return { value: 0, pos: pos };
+    var view = new DataView(bytes.buffer, bytes.byteOffset + pos, 8);
+    return { value: view.getFloat64(0, true), pos: pos + 8 };
+  }
+
+  function parseLengthDelimited(bytes, pos) {
+    var lenResult = parseVarint(bytes, pos);
+    var len = lenResult.value;
+    var end = lenResult.pos + len;
+    if (end > bytes.length) end = bytes.length;
+    return { value: bytes.slice(lenResult.pos, end), pos: end };
+  }
+
+  function decodeStringBytes(bytes) {
+    var str = "";
+    for (var i = 0; i < bytes.length; i++) str += String.fromCharCode(bytes[i]);
+    return str;
+  }
+
+  // Parse Entity message (top-level GTFS-RT entity)
+  function parseEntity(bytes, offset, limit) {
+    var entity = null;
+    var pos = offset;
+    while (pos < limit) {
+      var fieldResult = parseVarint(bytes, pos);
+      var tag = fieldResult.value;
+      var fieldNum = tag >>> 3;
+      var wireType = tag & 0x07;
+      pos = fieldResult.pos;
+      if (wireType === 2) {
+        var innerResult = parseLengthDelimited(bytes, pos);
+        var innerBytes = innerResult.value;
+        var innerPos = 0;
+        while (innerPos < innerBytes.length) {
+          var innerFieldResult = parseVarint(innerBytes, innerPos);
+          var innerTag = innerFieldResult.value;
+          var innerFieldNum = innerTag >>> 3;
+          var innerWireType = innerTag & 0x07;
+          innerPos = innerFieldResult.pos;
+          if (innerWireType === 2) {
+            var subResult = parseLengthDelimited(innerBytes, innerPos);
+            if (innerFieldNum === 1) {
+              // entityId as string
+              entity = entity || {};
+              entity.entityId = decodeStringBytes(subResult.value);
+            } else if (innerFieldNum === 2) {
+              // VehiclePosition submessage
+              entity = entity || {};
+              entity.vehicle = parseVehicle(subResult.value, subResult.pos);
+            }
+            innerPos = subResult.pos;
+          } else if (innerWireType === 0) {
+            innerPos++;
+          } else {
+            break;
+          }
+        }
+        pos = innerResult.pos;
+      } else if (wireType === 0) {
+        pos++;
+      } else {
+        break;
+      }
+    }
+    return entity;
+  }
+
+  // Parse VehiclePosition message
+  function parseVehicle(bytes, limit) {
+    var result = { tripId: null, lineCode: null, lat: null, lon: null };
+    var pos = 0;
+    while (pos < limit) {
+      var fieldResult = parseVarint(bytes, pos);
+      var tag = fieldResult.value;
+      var fieldNum = tag >>> 3;
+      var wireType = tag & 0x07;
+      pos = fieldResult.pos;
+      if (wireType === 2) {
+        var innerResult = parseLengthDelimited(bytes, pos);
+        if (fieldNum === 1) {
+          // Trip submessage
+          var trip = parseTrip(innerResult.value, innerResult.pos);
+          result.tripId = trip.tripId;
+          result.lineCode = trip.lineCode;
+        } else if (fieldNum === 3) {
+          // Location submessage
+          var loc = parseLocation(innerResult.value, innerResult.pos);
+          if (loc) { result.lat = loc.lat; result.lon = loc.lon; }
+        }
+        pos = innerResult.pos;
+      } else if (wireType === 0) {
+        pos++;
+      } else if (wireType === 5) {
+        pos += 4;
+      } else {
+        break;
+      }
+    }
+    return result;
+  }
+
+  // Parse Trip message
+  function parseTrip(bytes, limit) {
+    var result = { tripId: null, lineCode: null };
+    var pos = 0;
+    while (pos < limit) {
+      var fieldResult = parseVarint(bytes, pos);
+      var tag = fieldResult.value;
+      var fieldNum = tag >>> 3;
+      var wireType = tag & 0x07;
+      pos = fieldResult.pos;
+      if (wireType === 2) {
+        var innerResult = parseLengthDelimited(bytes, pos);
+        if (fieldNum === 1) {
+          var td = decodeStringBytes(innerResult.value);
+          result.tripId = td;
+          var lm = td.match(/^(JR-East|TokyoMetro|Toei|YokohamaMunicipal)/);
+          if (lm) result.lineCode = lm[1];
+        }
+        pos = innerResult.pos;
+      } else if (wireType === 0) {
+        pos++;
+      } else {
+        break;
+      }
+    }
+    return result;
+  }
+
+  // Parse Location message
+  function parseLocation(bytes, limit) {
+    var result = { lat: null, lon: null };
+    var pos = 0;
+    while (pos < limit) {
+      var fieldResult = parseVarint(bytes, pos);
+      var tag = fieldResult.value;
+      var fieldNum = tag >>> 3;
+      var wireType = tag & 0x07;
+      pos = fieldResult.pos;
+      if (wireType === 5) {
+        if (fieldNum === 3) {
+          var lonResult = parseFixed64(bytes, pos);
+          result.lon = lonResult.value / 1E7;
+          pos = lonResult.pos;
+        } else if (fieldNum === 4) {
+          var latResult = parseFixed64(bytes, pos);
+          result.lat = latResult.value / 1E7;
+          pos = latResult.pos;
+        } else {
+          pos += 8;
+        }
+      } else if (wireType === 2) {
+        var s = parseLengthDelimited(bytes, pos);
+        pos = s.pos;
+      } else if (wireType === 0) {
+        pos++;
+      } else {
+        break;
+      }
+    }
+    return (result.lat !== null && result.lon !== null) ? result : null;
+  }
+
+  // ========== Station coordinate matching ==========
+  function findStationIndex(line, lat, lon) {
+    try {
+      if (!line || !line.stations || !window.STATION_COORDS) return 0;
+      var bestIdx = 0;
+      var bestDist = Infinity;
+      for (var i = 0; i < line.stations.length; i++) {
+        var stName = line.stations[i];
+        var coords = window.STATION_COORDS[stName];
+        if (!coords) continue;
+        var dlat = lat - coords[0];
+        var dlon = lon - coords[1];
+        var dist = dlat * dlat + dlon * dlon;
+        if (dist < bestDist) { bestDist = dist; bestIdx = i; }
+      }
+      return bestIdx;
+    } catch(e) { return 0; }
+  }
+
+  function mapLineCodeToLineId(lineCode, tripId) {
+    try {
+      if (!lineCode) return null;
+      var knownLines = window.UNIFIED_LINES;
+      if (!knownLines) return null;
+      var ids = Object.keys(knownLines);
+      for (var i = 0; i < ids.length; i++) {
+        if (knownLines[ids[i]].operator === lineCode) return ids[i];
+      }
+      return null;
+    } catch(e) { return null; }
+  }
+
+  // ========== Data Loading ==========
   function emitUpdate(fusedData) {
     if (fusedData && fusedData.lines && Object.keys(fusedData.lines).length > 0) {
       _lastFusedData = fusedData;
     }
     try {
       subscribers.forEach(function(cb) { cb(fusedData); });
-    } catch(e) { console.warn('[DataFusion] Subscriber error:', e.message); }
+    } catch(e) { console.warn("[DataFusion] Subscriber error:", e.message); }
     try { window.DATA_FUSION = fusedData; } catch(e) {}
   }
 
@@ -40,14 +252,10 @@
     try {
       if (window.LOCAL_RAILWAY_DATA) {
         localData = window.LOCAL_RAILWAY_DATA;
-        console.log("[DataFusion] Loaded local data:", Object.keys(localData.statusMap || {}).length, "status entries");
       } else {
         localData = { lines: {}, statusMap: {} };
       }
-    } catch(e) {
-      console.warn("[DataFusion] loadLocalData error:", e.message);
-      localData = { lines: {}, statusMap: {} };
-    }
+    } catch(e) { localData = { lines: {}, statusMap: {} }; }
   }
 
   function syncStatusMap() {
@@ -55,17 +263,13 @@
       if (!window.UNIFIED_LINES) return;
       var lineIds = Object.keys(window.UNIFIED_LINES);
       var statusMap = localData.statusMap || {};
-      var missing = [];
       for (var i = 0; i < lineIds.length; i++) {
         if (!statusMap[lineIds[i]]) {
-          missing.push(lineIds[i]);
           statusMap[lineIds[i]] = { status: "normal", maxDelay: 0, interval: null, cause: null };
         }
       }
-      if (missing.length > 0) {
-        localData.statusMap = statusMap;
-      }
-    } catch(e) { console.warn("[DataFusion] syncStatusMap error:", e.message); }
+      localData.statusMap = statusMap;
+    } catch(e) {}
   }
 
   function checkCacheStale() {
@@ -168,12 +372,123 @@
     }
   }
 
+  async function loadTrainPositions() {
+    try {
+      if (!window.ODPTClient || !window.ODPTClient.gtfsRealtime) return;
+      var feeds = [
+        { source: "challenge", feedId: "jreast_odpt_train_vehicle" },
+        { source: "center", feedId: "toei_odpt_train_vehicle" },
+        { source: "center", feedId: "YokohamaMunicipalTrain_vehicle" }
+      ];
+      var promises = [];
+      for (var i = 0; i < feeds.length; i++) {
+        (function(feed) {
+          var fetcher = feed.source === "challenge"
+            ? window.ODPTClient.gtfsRealtime.getChallengeFeed
+            : window.ODPTClient.gtfsRealtime.getCenterFeed;
+          promises.push(
+            fetcher.call(window.ODPTClient.gtfsRealtime, feed.feedId)
+              .then(function(data) {
+                if (!data) return;
+                try { processGTFSFeed(feed.feedId, data); } catch(e) {}
+              })
+              .catch(function() {})
+          );
+        })(feeds[i]);
+      }
+      await Promise.all(promises);
+      if (Object.keys(odptData.realtimePositions).length > 0) {
+        console.log("[DataFusion] Loaded positions for " + Object.keys(odptData.realtimePositions).length + " lines");
+        fuseAll();
+      }
+    } catch(e) { console.warn("[DataFusion] loadTrainPositions error:", e.message); }
+  }
+
+  function processGTFSFeed(feedId, data) {
+    try {
+      var decoder = new TextDecoder("utf-8");
+      var text = decoder.decode(data);
+      if (text.charCodeAt(0) < 32 && text.charCodeAt(0) !== 10) {
+        processBinaryFeed(feedId, data);
+      } else {
+        processTextFeed(feedId, text);
+      }
+    } catch(e) { console.warn("[DataFusion] processGTFSFeed error:", e.message); }
+  }
+
+  function processBinaryFeed(feedId, data) {
+    try {
+      var bytes = new Uint8Array(data);
+      var entities = [];
+      var pos = 0;
+      while (pos < bytes.length) {
+        var fieldResult = parseVarint(bytes, pos);
+        var tag = fieldResult.value;
+        var fieldNum = tag >>> 3;
+        var wireType = tag & 0x07;
+        pos = fieldResult.pos;
+        if (wireType === 2 && fieldNum === 2) {
+          var entityResult = parseLengthDelimited(bytes, pos);
+          var entity = parseEntity(entityResult.value, 0, entityResult.value.length);
+          if (entity && entity.vehicle) entities.push(entity);
+          pos = entityResult.pos;
+        } else if (wireType === 0) {
+          pos++;
+        } else {
+          break;
+        }
+      }
+      for (var i = 0; i < entities.length; i++) {
+        var entity = entities[i];
+        var v = entity.vehicle;
+        if (!v || !v.lineCode || v.lat === null) continue;
+        var lineKey = mapLineCodeToLineId(v.lineCode, v.tripId);
+        if (!lineKey) continue;
+        if (!odptData.realtimePositions[lineKey]) odptData.realtimePositions[lineKey] = [];
+        var line = window.UNIFIED_LINES && window.UNIFIED_LINES[lineKey];
+        var stationIndex = findStationIndex(line, v.lat, v.lon);
+        odptData.realtimePositions[lineKey].push({
+          lat: v.lat, lon: v.lon, stationIndex: stationIndex, tripId: v.tripId || ""
+        });
+      }
+    } catch(e) { console.warn("[DataFusion] processBinaryFeed error:", e.message); }
+  }
+
+  function processTextFeed(feedId, text) {
+    try {
+      var lines = text.split("\n");
+      for (var i = 0; i < lines.length; i++) {
+        var line = lines[i].trim();
+        if (!line || line[0] === "#") continue;
+        var parts = line.split(",");
+        if (parts.length < 8) continue;
+        var tripId = parts[1] || "";
+        var opMatch = tripId.match(/^(JR-East|TokyoMetro|Toei|YokohamaMunicipal)/);
+        if (!opMatch) continue;
+        var lat = parseFloat(parts[5]);
+        var lon = parseFloat(parts[6]);
+        if (isNaN(lat) || isNaN(lon)) continue;
+        var lineKey = mapLineCodeToLineId(opMatch[1], tripId);
+        if (!lineKey) continue;
+        if (!odptData.realtimePositions[lineKey]) odptData.realtimePositions[lineKey] = [];
+        var l = window.UNIFIED_LINES && window.UNIFIED_LINES[lineKey];
+        var si = findStationIndex(l, lat, lon);
+        odptData.realtimePositions[lineKey].push({ lat: lat, lon: lon, stationIndex: si, tripId: tripId });
+      }
+    } catch(e) { console.warn("[DataFusion] processTextFeed error:", e.message); }
+  }
+
   function init() {
     console.log("[DataFusion] Initializing v" + FUSION_VERSION);
     loadLocalData();
     syncStatusMap();
     checkCacheStale();
     fuseAll();
+    loadTrainPositions().catch(function() {});
+    if (_positionTimer) clearInterval(_positionTimer);
+    _positionTimer = setInterval(function() { loadTrainPositions().catch(function() {}); }, POSITION_INTERVAL);
+    setInterval(function() { fuseAll().catch(function() {}); }, REFRESH_INTERVAL);
+    console.log("[DataFusion] Ready");
   }
 
   window.DataFusion = {

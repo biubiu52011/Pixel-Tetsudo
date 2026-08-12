@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Tourism Detail Page
  */
 
@@ -149,32 +149,32 @@
       }).join("") + "</div>";
     }
     var highlightsHtml = (content.highlights || []).map(function(h) {
-      return "<div class="highlight-item"><div class="highlight-icon">" + h.icon + "</div><div class="highlight-text">" + h.text + "</div></div>";
+      return "<div class="highlight-item"><div class="highlight-icon">" + escapeHtml(h.icon) + "</div><div class="highlight-text">" + escapeHtml(h.text) + "</div></div>";
     }).join("");
 
     var imageHtml = "";
     if (content.image) {
-      imageHtml = "<div class="article-hero"><img src="" + content.image + "" alt="" + translatedName + "" class="article-hero-img"></div>";
+      imageHtml = "<div class="article-hero"><img src="" + escapeHtml(content.image) + "" alt="" + escapeHtml(translatedName) + "" class="article-hero-img"></div>";
     } else {
-      imageHtml = "<div class="article-hero" style="background: " + theme.bg + ""><div class="article-hero-content"><span class="hero-emoji">" + spotEmoji + "</span></div></div>";
+      imageHtml = "<div class="article-hero article-hero--gradient"><div class="article-hero-content"><span class="hero-emoji">" + escapeHtml(spotEmoji) + "</span></div></div>";
     }
 
     var infoHtml = "";
     if (content.hours || content.fee) {
       infoHtml = "<div class="article-info-row">";
-      if (content.hours) infoHtml += "<div class="article-info-item"><span class="info-label">" + t("detail.info_hours") + "</span><span class="info-value">" + content.hours + "</span></div>";
-      if (content.fee) infoHtml += "<div class="article-info-item"><span class="info-label">" + t("detail.info_fee") + "</span><span class="info-value">" + content.fee + "</span></div>";
+      if (content.hours) infoHtml += "<div class="article-info-item"><span class="info-label">" + t("detail.info_hours") + "</span><span class="info-value">" + escapeHtml(content.hours) + "</span></div>";
+      if (content.fee) infoHtml += "<div class="article-info-item"><span class="info-label">" + t("detail.info_fee") + "</span><span class="info-value">" + escapeHtml(content.fee) + "</span></div>";
       infoHtml += "</div>";
     }
 
     var html = "<div class="article-header">" +
-      "<div class="article-emoji">" + spotEmoji + "</div>" +
+      "<div class=\"article-emoji\">" + escapeHtml(spotEmoji) + "</div>" +
       "<div class="article-title-section">" +
-        "<h1 class="article-title">" + translatedName + "</h1>" +
+        "<h1 class="article-title">" + escapeHtml(translatedName) + "</h1>" +
         "<div class="article-meta">" +
-          "<span class="article-station">" + stationName + "</span>" +
+          "<span class=\"article-station\">" + escapeHtml(stationName) + "</span>" +
           "<span class="meta-sep">・</span>" +
-          "<span class="article-dist">" + (spot.dist || "") + " ・ " + (spot.dir || "") + "</span>" +
+          "<span class=\"article-dist\">" + escapeHtml(spot.dist || "") + " ・ " + escapeHtml(spot.dir || "") + "</span>" +
         "</div>" +
         tagsHtml +
       "</div>" +
@@ -184,15 +184,15 @@
     "<div class="article-body">" +
       "<div class="article-section">" +
         "<h3 class="section-heading">" + t("detail.overview") + "</h3>" +
-        "<p class="section-text">" + content.intro + "</p>" +
+        "<p class="section-text">" + escapeHtml(content.intro) + "</p>" +
       "</div>" +
       "<div class="article-section">" +
         "<h3 class="section-heading">" + t("detail.highlights") + "</h3>" +
         "<div class="highlights-grid">" + highlightsHtml + "</div>" +
       "</div>" +
       "<div class="article-section">" +
-        "<div class="tip-box"><span class="tip-icon">💡</span><div><strong>" + t("detail.tips") + "</strong><p class="tip-text">" + content.tips + "</p></div></div>" +
-        "<div class="best-time-box"><span class="best-time-icon">🕐</span><div><strong>" + t("detail.best_time") + "</strong><p class="best-time-text">" + content.bestTime + "</p></div></div>" +
+        "<div class="tip-box"><span class="tip-icon">💡</span><div><strong>" + t("detail.tips") + "</strong><p class="tip-text">" + escapeHtml(content.tips) + "</p></div></div>" +
+        "<div class="best-time-box"><span class="best-time-icon">🕐</span><div><strong>" + t("detail.best_time") + "</strong><p class="best-time-text">" + escapeHtml(content.bestTime) + "</p></div></div>" +
       "</div>" +
       "<div class="article-section">" +
         "<h3 class="section-heading">" + t("detail.location") + "</h3>" +
@@ -200,7 +200,7 @@
           "<div class="map-direction"><span class="map-icon">📍</span><div><div class="map-label">" + t("detail.direction") + "</div><div class="map-value">" + (spot.dir || t("detail.near_station")) + "</div></div></div>" +
           "<div class="map-distance"><span class="map-icon">🚶</span><div><div class="map-label">" + t("detail.distance") + "</div><div class="map-value">" + (spot.dist || t("detail.walking_distance")) + "</div></div></div>" +
         "</div>" +
-        (coord ? "<div class="map-container"><iframe src="https://www.openstreetmap.org/export/embed.html?bbox=" + (coord[1] - 0.01) + "%2C" + (coord[0] - 0.005) + "%2C" + (coord[1] + 0.01) + "%2C" + (coord[0] + 0.005) + "&layer=mapnik&marker=" + coord[0] + "%2C" + coord[1] + "" style="width:100%;height:200px;border:0;border-radius:0;"></iframe></div>" : "") +
+        (coord ? "<div class="map-container map-iframe-wrapper"><iframe src="https://www.openstreetmap.org/export/embed.html?bbox=" + (coord[1] - 0.01) + "%2C" + (coord[0] - 0.005) + "%2C" + (coord[1] + 0.01) + "%2C" + (coord[0] + 0.005) + "&layer=mapnik&marker=" + coord[0] + "%2C" + coord[1] + ""></iframe></div>" : "") +
       "</div>" +
     "</div>";
 
