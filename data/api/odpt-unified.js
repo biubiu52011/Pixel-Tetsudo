@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿/**
+/**
  * Pixel Tetsudo - Unified ODPT API Client & Realtime Module
  * 整合：加密密钥管理、API客户端、缓存、数据转换、运行状态显示
  * 密钥存储在浏览器本地
@@ -144,15 +144,11 @@
             localStorage.removeItem('odpt_keys_b64');
         } catch(e) { console.error('[ODPT] Save keys error:', e.message); }
     }
-            CHALLENGE_BASE_URL: 'https://api-challenge.odpt.org/api/v4',
-
     // ========== API Configuration ==========
     window.ODPT_CONFIG = {
         keys: { CENTER: "", CHALLENGE: "" },
 
-        endpoints: {
-            CENTER_BASE_URL: 'https://api.odpt.org/api/v4'
-        },
+        endpoints: { CHALLENGE_BASE_URL: 'https://api-challenge.odpt.org/api/v4', CENTER_BASE_URL: 'https://api.odpt.org/api/v4' },
 
         operators: {
             CHALLENGE: {
@@ -325,6 +321,7 @@
             getTrains: challengeGetTrains,
             getStations: challengeGetStations,
             getRailways: challengeGetRailways,
+            getTrainInformation: challengeGetTrainInformation,
             OPERATORS: CHALLENGE_OPERATORS
         },
         center: {
@@ -501,6 +498,7 @@
 
     async function loadODPTDelayData() {
         if (!window.ODPTClient) return;
+        if (!ODPT_CONFIG.keys.CENTER && !ODPT_CONFIG.keys.CHALLENGE) return;
         window.ODPT_DELAY_DATA = {};
         // Query both Center and Challenge APIs
         var allOps = {};
@@ -688,11 +686,13 @@
         // Start ODPT polling + DataFusion push after initial load
     initODPT().catch(function(e) { console.warn("[ODPT] initODPT error:", e.message); });
 
-    if (document.readyState === "loading") {
+    if (window.DataFusion) {
+        // DataFusion handles rendering, just start ODPT data polling
+        initODPT().catch(function(e) { console.warn("[ODPT] initODPT error:", e.message); });
+    } else if (document.readyState === "loading") {
         document.addEventListener("DOMContentLoaded", init);
     } else {
-        // Only direct render if DataFusion is not handling it
-        if (!window.DataFusion) init();
+        init();
     }
 
     async function initODPT() {

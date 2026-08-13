@@ -1,6 +1,6 @@
-﻿/*
+/*
  * Pixel Tetsudo - DataFusion v11 (Position Support)
- * 线路数据融合引擎 + GTFS-RT 列车位置
+ * 郤ｿ霍ｯ謨ｰ謐ｮ陞榊粋蠑墓梼 + GTFS-RT 蛻苓ｽｦ菴咲ｽｮ
  */
 (function() {
   "use strict";
@@ -226,7 +226,7 @@
 
   // ========== Data Loading ==========
   function emitUpdate(fusedData) {
-    if (fusedData && fusedData.lines && Object.keys(fusedData.lines).length > 0) {
+    if (fusedData) {
       _lastFusedData = fusedData;
     }
     try {
@@ -519,3 +519,4 @@
     init();
   }
 })();
+

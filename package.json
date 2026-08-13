@@ -4,10 +4,16 @@
   "main": "pages/home.html",
   "scripts": {
     "start": "live-server pages --port 8080",
-    "build": "npm run minify",
-    "minify": "cleancss *.css -o dist/css/"
+    "build": "python build.py",
+    "dev": "python -m http.server 8080 --directory pages"
   },
-  "keywords": ["train", "railway", "metro", "transit", "pixel"],
+  "keywords": [
+    "train",
+    "railway",
+    "metro",
+    "transit",
+    "pixel"
+  ],
   "author": "Pixel Tetsudo Team",
   "license": "MIT"
 }

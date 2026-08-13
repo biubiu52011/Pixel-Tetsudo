@@ -1,4 +1,4 @@
-﻿(function() {
+(function() {
   "use strict";
   window.STATION_COORDS = {
     // Tokyo Area Major Stations

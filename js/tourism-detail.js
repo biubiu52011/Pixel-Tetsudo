@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Tourism Detail Page
  */
 

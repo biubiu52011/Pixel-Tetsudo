@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Pixel Tetsudo - Security Utilities
  * Input validation, URL sanitization, and security helpers.
  */

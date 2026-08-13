@@ -1,5 +1,5 @@
 /*
- * 语言初始化脚本
+ * 隸ｭ險蛻晏ｧ句喧閼壽悽
  */
 
 (function() {
@@ -110,6 +110,8 @@
             var btn = e.target.closest(".lang-btn");
             if (btn) {
                 selectLanguage(btn.getAttribute("data-lang"));
+            } else {
+                closeSwitcher();
             }
         });
 

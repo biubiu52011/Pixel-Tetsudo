@@ -1,4 +1,4 @@
-﻿/* Pixel Tetsudo - Train Location Styles */
+/* Pixel Tetsudo - Train Location Styles */
 
 /* ========== List View ========== */
 .rs-operator-group { margin-bottom: 20px; }
@@ -39,10 +39,7 @@
   font-size: 13px; font-weight: 600; color: var(--text);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
-.rs-line-interval {
-  font-size: 11px; color: var(--text-muted); margin-top: 1px;
-  font-variant-numeric: tabular-nums;
-}
+
 
 /* ========== Detail View ========== */
 .tp-detail-view {

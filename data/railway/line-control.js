@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Line Control - Unified Line Data
  * 线路数据控制
  */
@@ -291,7 +291,7 @@
     "Keio": {
       name: "Keio", nameEn: "Keio Line", code: "KO", color: "#0078C1",
       operator: "Keio", region: "Tokyo Area", type: "straight",
-      image: "../images/鉄道/京王電鉄/京王線 京王新線 相模原線 競馬場線 動物園線 高尾線.png", durationTotalMin: 18, throughServices: [],
+      image: "", durationTotalMin: 18, throughServices: [],
       transferStations: [],
       stations: ["Mitaka","Nishi-Kichijoji","Kichijoji","Hachioji","Takaosanguchi","Hashimoto","Uenohara","Inokashira","Keio-Hachioji"],
       durations: Array(9).fill(2),
@@ -462,7 +462,7 @@
     "TokyuDenEn": {
       name: "TokyuDenEn", nameEn: "Den-en-toshi Line", code: "TD", color: "#40B3E5",
       operator: "Tokyu", region: "Kanagawa Area", type: "straight",
-      image: "../images/鉄道/東急電鉄/田園都市線.png", durationTotalMin: 28, throughServices: [],
+      image: "", durationTotalMin: 28, throughServices: [],
       transferStations: [],
       stations: ["Shibuya","Nakameguro","Daikanyama","Sangenjaya","Futamata-gawa","Nakatsu","Hachiman-gaika","Kichijoji","Musashi-Kosugi","Tama-plaza","Tsutsujigaoka","Midoridai","Seijo","Tsukamoto","Minami-Wakasu","Wakasu"],
       durations: Array(16).fill(2),
@@ -471,7 +471,7 @@
     "Keikyu": {
       name: "Keikyu", nameEn: "Keikyu Main Line", code: "KK", color: "#005AAA",
       operator: "Keikyu", region: "Kanagawa Area", type: "straight",
-      image: "../images/鉄道/京急電鉄/京急本線 久里浜線 逗子線 大師線 空港線.png", durationTotalMin: 22, throughServices: [],
+      image: "", durationTotalMin: 22, throughServices: [],
       transferStations: [],
       stations: ["Shinagawa","Osaki","Gotanda","Ebisu","Shibuya","Mejiro","Ikebukuro","Takashimadaira","Hikaridai","Kodaira","Nishi-takahashimadaira","Seijodai","Akatsuka","Musashinurare","Kokumin-kyogijo","Nishi-kokubunji","Kokubunji","Nakano-fujimicho","Nakano","Shinanomachi","Shibuya"],
       durations: Array(21).fill(1),
@@ -480,7 +480,7 @@
     "MinatoMirai": {
       name: "MinatoMirai", nameEn: "Minato Mirai Line", code: "MM", color: "#00B6C7",
       operator: "MinatoMirai", region: "Kanagawa Area", type: "straight",
-      image: "../images/鉄道/みなとみらい線/みなとみらい線.png", durationTotalMin: 9, throughServices: [],
+      image: "", durationTotalMin: 9, throughServices: [],
       transferStations: [],
       stations: ["Yokohama","Nihon-odori","Motomachi-Chukagai","Minato-Mirai-21","Bay-Cross"],
       durations: Array(5).fill(2),
@@ -498,7 +498,7 @@
     "Orange": {
       name: "Orange", nameEn: "Orange Line", code: "O", color: "#F39200",
       operator: "YokohamaMunicipal", region: "Kanagawa Area", type: "straight",
-      image: "../images/鉄道/横浜市交通局/橘線.png", durationTotalMin: 14, throughServices: [],
+      image: "", durationTotalMin: 14, throughServices: [],
       transferStations: [],
       stations: ["Shin-Yokohama","Nishi-Nakajima","Tsunashima","Higashi-Yamatokoji","Sakae","Kita-Yamato","Aoba-dori","Yokohama"],
       durations: Array(8).fill(2),
@@ -507,7 +507,7 @@
     "SotetsuMain": {
       name: "SotetsuMain", nameEn: "Sotetsu Main Line", code: "SO", color: "#0069A3",
       operator: "Sotetsu", region: "Kanagawa Area", type: "straight",
-      image: "../images/鉄道/相鉄/相模本線 いずみ野線 相鉄新横浜線 .png", durationTotalMin: 32, throughServices: [],
+      image: "", durationTotalMin: 32, throughServices: [],
       transferStations: [],
       stations: ["Shin-Yokohama","Horinouchi","Nishi-Totsuka","Sakuragi-cho","Yokohama","Higashi-Totsuka","Minami-Urawa","Oimachi","Aoba-dori","Ishikawadai","Umeda","Machida","Kanagawa-NewTown","Yokohama"],
       durations: Array(13).fill(2),
@@ -558,3 +558,4 @@
   };
 
 })();
+

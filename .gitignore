@@ -1,4 +1,4 @@
-﻿# === Sakura Transit - Git Ignore ===
+# === Sakura Transit - Git Ignore ===
 
 # Build artifacts / temp files
 *.tmp
@@ -39,3 +39,23 @@ kanto.json
 
 # Screenshots
 screenshots/
+
+# Build output directories
+dist/
+dist_backup_*/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Python dev scripts
+*.py
+
+# Base64 temp files
+_b*.b64
+_test.txt
+_write_build.py
+temp_*
+
+# Node build artifacts
+node_modules/

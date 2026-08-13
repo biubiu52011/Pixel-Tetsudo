@@ -92,9 +92,9 @@
     } else {
       var parts = interval.split('\u2192');
       if (parts.length >= 2) {
-        html += '<span class="rs-station-start">' + escapeHtml(parts[0]) + '</span>'
+        html += '<span class="rs-station-start">' + escapeHtml(tStation(parts[0])) + '</span>'
           + '<span class="rs-interval-arrow">\u2192</span>'
-          + '<span class="rs-station-end">' + escapeHtml(parts[1]) + '</span>';
+          + '<span class="rs-station-end">' + escapeHtml(tStation(parts[1])) + '</span>';
       } else {
         html += '<span class="rs-station-text">' + escapeHtml(interval) + '</span>';
       }
