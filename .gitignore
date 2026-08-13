@@ -1,4 +1,4 @@
-# === Sakura Transit - Git Ignore ===
+﻿# === Sakura Transit - Git Ignore ===
 
 # Build artifacts / temp files
 *.tmp
@@ -24,6 +24,7 @@ desktop.ini
 
 # Screenshots
 screenshot_*.png
+screenshots/
 
 # Helper scripts used for data generation (optional - keep if needed)
 _build_*
@@ -36,9 +37,6 @@ kanto.json
 
 # Environment variables
 .env
-
-# Screenshots
-screenshots/
 
 # Build output directories
 dist/
@@ -59,3 +57,18 @@ temp_*
 
 # Node build artifacts
 node_modules/
+
+# Generated data / mapping files
+data/station-coords-jp.js
+data/station-name-map.js
+js/railway-unified.js
+js/redirect-odpt.js
+
+# Python data files
+*.pkl
+
+# Dev/test artifacts
+oc.html
+API_KEYS_REFERENCE.md
+analyze.js
+data-fusion.b64
