@@ -1,56 +1,68 @@
 /* Pixel Tetsudo - Train Location Styles */
 
-/* ========== List View ========== */
+/* ========== Operator Group ========== */
 .rs-operator-group { margin-bottom: 20px; }
-.rs-operator-title {
-  font-size: 10px; font-weight: 700; color: var(--text-muted);
-  text-transform: uppercase; letter-spacing: 1.5px;
-  padding: 0 0 6px 4px; border-left: 3px solid var(--border);
-  margin-bottom: 8px;
-}
 .rs-cards-container { display: flex; flex-direction: column; gap: 6px; }
 
-/* Line Card */
+/* ========== Line Card ========== */
 .rs-line-card {
   display: flex; align-items: center; gap: 12px;
-  padding: 12px 14px; background: var(--card);
-  border: 2px solid var(--border); border-radius: 12px;
+  padding: 10px 14px; background: var(--card);
+  border: 2px solid var(--border); border-radius: 10px;
   cursor: pointer; transition: all 0.18s ease;
-  box-shadow: none;
 }
 .rs-line-card:hover, .rs-line-card.selected {
   border-color: var(--line-color, var(--green));
-  box-shadow: 0 0 0 1px var(--line-color, var(--green)), 0 2px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 0 0 1px var(--line-color, var(--green)), 0 2px 10px rgba(0,0,0,0.1);
   transform: translateY(-1px);
-  background: var(--card);
 }
 .rs-line-header { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0; }
+
+/* Icon / Code Badge */
 .rs-line-icon {
   width: 36px; height: 36px; object-fit: contain; border-radius: 8px;
-  flex-shrink: 0; background: var(--bg);
+  flex-shrink: 0; background: var(--bg); padding: 4px;
 }
 .rs-code-badge {
   width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
-  color: #fff; font-size: 12px; font-weight: 700; border-radius: 8px; flex-shrink: 0;
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.2);
+  color: #fff; font-size: 11px; font-weight: 700; border-radius: 8px; flex-shrink: 0;
 }
+.rs-code-badge span { line-height: 1; }
+
+/* Text */
 .rs-line-info { min-width: 0; flex: 1; }
 .rs-line-name {
   font-size: 13px; font-weight: 600; color: var(--text);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  display: flex; align-items: center; gap: 4px;
+}
+.rs-loop-badge {
+  font-size: 10px; padding: 1px 6px; border-radius: 4px;
+  background: var(--green-pale); color: var(--green-dim);
+  font-weight: 600; white-space: nowrap; flex-shrink: 0;
+}
+.rs-branch-indicator {
+  font-size: 12px; color: var(--text-muted); flex-shrink: 0;
 }
 
+/* Branch indentation */
+.rs-branch { padding-left: 20px; }
+
+/* ========== Empty State ========== */
+.tp-no-data {
+  padding: 16px; text-align: center; color: var(--text-muted);
+  font-size: 13px; background: var(--card); border-radius: 10px;
+  border: 2px dashed var(--border);
+}
+.tp-no-data.tp-running { color: var(--green); border-color: var(--green); background: var(--green-pale); }
 
 /* ========== Detail View ========== */
-.tp-detail-view {
-  animation: tpFadeIn 0.2s ease;
-}
+.tp-fade-in { animation: tpFadeIn 0.2s ease; }
 @keyframes tpFadeIn {
   from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Back button */
 .back-btn {
   display: inline-flex; align-items: center; gap: 5px;
   padding: 7px 14px; border: 2px solid var(--border); border-radius: 10px;
@@ -59,14 +71,12 @@
 }
 .back-btn:hover { border-color: var(--green); color: var(--green); transform: translateX(-2px); }
 
-/* Detail title */
 .detail-title {
   font-size: 16px; font-weight: 700; color: var(--text);
   padding: 4px 2px 10px; border-bottom: 2px solid var(--border);
   margin-bottom: 12px;
 }
 
-/* Map container */
 .tp-line-map {
   background: var(--bg); border: 2px solid var(--border);
   border-radius: 10px; padding: 14px; overflow-x: auto;
@@ -74,13 +84,4 @@
 .tp-map-wrap { min-width: 200px; }
 .tp-map-wrap svg { width: 100%; height: auto; display: block; }
 
-/* Status bar */
-.tp-no-data {
-  padding: 12px 14px; text-align: center; color: var(--text-muted);
-  font-size: 12px; border-radius: 8px; background: var(--card);
-  margin-top: 8px; line-height: 1.6;
-}
-.tp-no-data.tp-running { color: var(--green); background: rgba(0,160,78,0.06); }
-
-/* Hidden utility */
 .hidden { display: none !important; }

@@ -174,7 +174,7 @@
       const distRowHtml = s.distText ? '<p class="sm-dist">' + s.distText + (s.dir ? ' · ' + s.dir : '') + '</p>' : '';
       
       const tagsHtml = tags.filter(function(t) { return t !== 'all'; }).map(function(t) {
-        return '<span>' + (t.charAt(0).toUpperCase() + t.slice(1)) + '</span>';
+        return '<span>' + t('tourism.tag_' + t) + '</span>';
       }).join('');
 
       const detailUrl = 'tourism-detail.html?station=' + encodeURIComponent(stationKey) + '&index=' + idx;

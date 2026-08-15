@@ -63,8 +63,8 @@
     var lang = window.currentLang || 'ja';
     
     if (diff < 60000) return t('history.just_now');
-    if (diff < 3600000) return Math.floor(diff / 60000) + ' ' + t('unit.minute') + ' 前';
-    if (diff < 86400000) return Math.floor(diff / 3600000) + ' ' + t('unit.hour') + ' 前';
+    if (diff < 3600000) return Math.floor(diff / 60000) + ' ' + t('unit.minute') + ' ' + t('time.ago');
+    if (diff < 86400000) return Math.floor(diff / 3600000) + ' ' + t('unit.hour') + ' ' + t('time.ago');
     return date.toLocaleDateString(lang === 'ja' ? 'ja-JP' : lang === 'zh' ? 'zh-CN' : lang === 'ko' ? 'ko-KR' : 'en-US');
   }
 

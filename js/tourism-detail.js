@@ -12,7 +12,7 @@
     shrine:   { bg: "linear-gradient(135deg, #DC143C 0%, #FF6B6B 100%)", accent: "#DC143C" },
     night:    { bg: "linear-gradient(135deg, #191970 0%, #4169E1 100%)", accent: "#191970" },
     seasonal: { bg: "linear-gradient(135deg, #FF69B4 0%, #FFB6C1 100%)", accent: "#FF69B4" },
-    default:  { bg: "linear-gradient(135deg, #00a859 0%, #008847 100%)", accent: "#00a859" }
+    default:  { bg: "linear-gradient(135deg, #008803 0%, #006600 100%)", accent: "#008803" }
   };
 
   const TAG_EMOJI = { all: "📍", night: "🌙", history: "🏛️", nature: "🌿", shrine: "⛩️", food: "🍜", seasonal: "🌸" };

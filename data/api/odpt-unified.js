@@ -184,7 +184,7 @@
             'TobuSkyTree': 'Tobu', 'TobuNikko': 'Tobu', 'TobuNoda': 'Tobu',
             'Keisei': 'Keisei', 'Yurikamome': 'Yurikamome',
             'Fukutoshin': 'TokyoMetro', 'Ome': 'JR-East', 'Itsukaichi': 'JR-East',
-            'SobuRapid': 'JR-East', 'Keikyu': 'Keikyu', 'Keio': 'Keio',
+            'Keikyu': 'Keikyu', 'Keio': 'Keio',
             'Odawara': 'Odakyu', 'SeibuShinjuku': 'Seibu', 'SeibuYamaguchi': 'Seibu',
             'SeibuNakagawa': 'Seibu', 'SeibuEn': 'Seibu', 'TobuIsesaki': 'Tobu',
             'YokohamaBlue': 'YokohamaMunicipal', 'MinatoMirai': 'MinatoMirai',
@@ -686,12 +686,9 @@
         // Start ODPT polling + DataFusion push after initial load
     initODPT().catch(function(e) { console.warn("[ODPT] initODPT error:", e.message); });
 
-    if (window.DataFusion) {
-        // DataFusion handles rendering, just start ODPT data polling
-        initODPT().catch(function(e) { console.warn("[ODPT] initODPT error:", e.message); });
-    } else if (document.readyState === "loading") {
+    if (!window.DataFusion && document.readyState === "loading") {
         document.addEventListener("DOMContentLoaded", init);
-    } else {
+    } else if (!window.DataFusion) {
         init();
     }
 

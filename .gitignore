@@ -72,3 +72,9 @@ oc.html
 API_KEYS_REFERENCE.md
 analyze.js
 data-fusion.b64
+
+# Dev artifacts
+_chk.js
+data/sql/
+data/core/config
+

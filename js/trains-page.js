@@ -177,7 +177,7 @@
   function renderTrainMap(el, line, lineId) {
     try {
       var positions = getRealtimePositions(lineId);
-      var color = line.color || "#00a859";
+      var color = line.color || "#008803";
       var stations = line.stations || [];
       var branchLines = [];
       var allLines = getLinesData();
