@@ -4,7 +4,6 @@
   "main": "pages/home.html",
   "scripts": {
     "start": "live-server pages --port 8080",
-    "build": "python build.py",
     "dev": "python -m http.server 8080 --directory pages"
   },
   "keywords": [
