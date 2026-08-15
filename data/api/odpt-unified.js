@@ -218,6 +218,7 @@
                     if (parsed.CENTER || parsed.CHALLENGE) {
                         console.log('[ODPT] Keys loaded from storage');
                     }
+                        initODPT().catch(function(e) { console.warn("[ODPT] initODPT error:", e.message); });
                 }
             }).catch(function(e) { console.warn('[ODPT] Key load error:', e.message); });
         } else if (saved) {
@@ -227,6 +228,7 @@
             if (parsed.CENTER || parsed.CHALLENGE) {
                 console.log('[ODPT] Keys loaded from storage');
             }
+                        initODPT().catch(function(e) { console.warn("[ODPT] initODPT error:", e.message); });
         }
     })();
 
