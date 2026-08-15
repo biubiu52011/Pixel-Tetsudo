@@ -400,8 +400,25 @@
       if (Object.keys(odptData.realtimePositions).length > 0) {
         console.log("[DataFusion] Loaded positions for " + Object.keys(odptData.realtimePositions).length + " lines");
         fuseAll();
+        try { saveToCache(); } catch(e) { console.warn("[DataFusion] cache save error:", e.message); }
       }
     } catch(e) { console.warn("[DataFusion] loadTrainPositions error:", e.message); }
+  }
+
+  function saveToCache() {
+    try {
+      var positions = {}, delayInfo = {};
+      var fused = window.DATA_FUSION || _lastFusedData;
+      if (fused && fused.lines) {
+        Object.keys(fused.lines).forEach(function(lid) {
+          var line = fused.lines[lid];
+          if (line.realtimePositions && line.realtimePositions.length > 0) positions[lid] = line.realtimePositions;
+          if (line.delayInfo && line.delayInfo.status !== "normal") delayInfo[lid] = line.delayInfo;
+        });
+        if (Object.keys(positions).length > 0) window.RTCache.savePositions(positions).catch(function() {});
+        if (Object.keys(delayInfo).length > 0) window.RTCache.saveDelayInfo(delayInfo).catch(function() {});
+      }
+    } catch(e) {}
   }
 
   function processGTFSFeed(feedId, data) {
@@ -488,6 +505,7 @@
     if (_positionTimer) clearInterval(_positionTimer);
     _positionTimer = setInterval(function() { loadTrainPositions().catch(function() {}); }, POSITION_INTERVAL);
     setInterval(function() { fuseAll().catch(function() {}); }, REFRESH_INTERVAL);
+    setInterval(function() { try { saveToCache(); } catch(e) {} }, REFRESH_INTERVAL);
     console.log("[DataFusion] Ready");
   }
 
@@ -504,6 +522,7 @@
     getOperatorStations: function(operator) { return odptData.stations[operator] || []; },
     getRealtimePositions: function(lineId) { return odptData.realtimePositions[lineId] || []; },
     getCachedData: function() { return _lastFusedData; },
+    saveToCache: saveToCache,
     refresh: function() { return fuseAll(); },
     updateOdptData: function(delayData) {
       if (delayData && typeof delayData === 'object') {

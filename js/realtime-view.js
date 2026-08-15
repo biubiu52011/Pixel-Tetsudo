@@ -148,6 +148,24 @@
       return;
     }
 
+    // Fallback: try loading cached data from IndexedDB
+    if (window.RailwayRTC) {
+      window.RailwayRTC.loadDelayInfo().then(function(delayInfo) {
+        if (delayInfo && Object.keys(delayInfo).length > 0 && window.UNIFIED_LINES) {
+          const cachedData = { version: 0, timestamp: new Date().toISOString(), lines: {}, lineOrder: [], odptOperatorsLoaded: 0, totalLines: Object.keys(window.UNIFIED_LINES).length };
+          Object.keys(window.UNIFIED_LINES).forEach(function(lid) {
+            const line = window.UNIFIED_LINES[lid];
+            const delay = delayInfo[lid] || { status: "normal", maxDelay: 0, interval: null, cause: null };
+            cachedData.lines[lid] = Object.assign({}, line, { delayInfo: delay });
+          });
+          _latestFusedData = cachedData;
+          try { render(container, cachedData); }
+          catch (e) { console.error("[RealtimeView] Cache render error:", e.message); }
+          console.log("[RealtimeView] Loaded cached delay info for " + Object.keys(delayInfo).length + " lines");
+        }
+      }).catch(function(e) { console.warn("[RealtimeView] Cache load error:", e.message); });
+    }
+
     window.DataFusion.subscribe((fusedData) => {
       _latestFusedData = fusedData;
       try { render(container, fusedData); }

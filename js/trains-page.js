@@ -28,8 +28,6 @@
     "TsurumiUmigippu": "Tsurumi", "TsurumiOokawa": "Tsurumi"
   };
 
-  // JSON base path (relative to trains.html)
-  var JSON_DATA_PATH = "../data/railway_data.json?v=" + Date.now();
 
   function detectBranches(lines) {
     var byImage = {};
@@ -95,85 +93,14 @@
         var pos = window.DataFusion.getRealtimePositions(lineId);
         if (pos && pos.length > 0) return pos;
       }
+      // Fallback: check cached positions from IndexedDB
+      var ul = window.UNIFIED_LINES;
+      if (ul && ul[lineId] && ul[lineId].cachedPositions) {
+        return ul[lineId].cachedPositions;
+      }
     } catch(e) {}
     return [];
   }
-
-  function renderCard(line, lineId) {
-    try {
-      var color = line.color || "#888888";
-      var name = line.nameJa || line.nameEn || line.name || lineId;
-      var sel = currentLine === lineId ? " selected" : "";
-      var loopBadge = line.type === "loop" ? '<span class="rs-loop-badge">' + escapeHtml(t("line.loop")) + '</span>' : "";
-      var branchCls = line.branchOf ? " rs-branch" : "";
-      var branchHtml = line.branchOf ? '<span class="rs-branch-indicator">&#9733;</span>' : "";
-      var iconHtml = "";
-      if (line.image) {
-        iconHtml = '<img class="rs-line-icon" src="' + escapeHtml(line.image) + '" alt="" loading="lazy">';
-      } else {
-        iconHtml = '<div class="rs-code-badge" style="background:' + escapeHtml(color) + '"><span>' + escapeHtml(line.code) + '</span></div>';
-      }
-      return '<div class="rs-line-card' + sel + branchCls + '" data-line="' + escapeHtml(lineId) + '"'
-        + ' style="--line-color:' + escapeHtml(color) + '"'
-        + '>'
-        + '<div class="rs-line-header">'
-        + iconHtml
-        + '<div class="rs-line-info">'
-        + '<div class="rs-line-name">' + branchHtml + escapeHtml(name) + '</div>' + loopBadge
-        + '</div></div></div>';
-    } catch(e) { return ""; }
-  }
-
-  function renderList(el) {
-    if (!el) return;
-    try {
-      var lines = getLinesData();
-      if (!lines || Object.keys(lines).length === 0) {
-        el.innerHTML = '<div class="tp-no-data">No line data available</div>';
-        return;
-      }
-      var groups = {};
-      var ids = Object.keys(lines);
-      for (var i = 0; i < ids.length; i++) {
-        var l = lines[ids[i]];
-        var opKey = l.operator || "Unknown";
-        var op = (window.tOp && window.tOp(opKey)) || opKey;
-        if (!groups[op]) groups[op] = [];
-        groups[op].push({ id: ids[i], line: l });
-      }
-      var html = "";
-      var ops = Object.keys(groups).sort();
-      for (var j = 0; j < ops.length; j++) {
-        html += '<div class="rs-operator-group">'
-          + '<div class="rs-cards-container">';
-        var items = groups[ops[j]];
-        items.sort(function(a, b) { return (a.line.code || "").localeCompare(b.line.code || ""); });
-        var sorted = [];
-        var added = {};
-        for (var k = 0; k < items.length; k++) { added[items[k].id] = false; }
-        for (var k = 0; k < items.length; k++) {
-          var l = items[k].line;
-          if (!l.branchOf && !added[l.id]) {
-            sorted.push(items[k]);
-            added[l.id] = true;
-            for (var m = 0; m < items.length; m++) {
-              if (items[m].line.branchOf === l.id && !added[items[m].id]) {
-                sorted.push(items[m]);
-                added[items[m].id] = true;
-              }
-            }
-          }
-        }
-        for (var k = 0; k < items.length; k++) { if (!added[items[k].id]) sorted.push(items[k]); }
-        for (var k = 0; k < sorted.length; k++) { html += renderCard(sorted[k].line, sorted[k].id); }
-        html += '</div></div>';
-      }
-      el.innerHTML = html;
-    } catch(e) {
-      el.innerHTML = '<div class="tp-no-data">Error: ' + escapeHtml(e.message) + '</div>';
-    }
-  }
-
   function renderTrainMap(el, line, lineId) {
     try {
       var positions = getRealtimePositions(lineId);
@@ -318,54 +245,29 @@
     } catch(e) {}
   }
 
-  // ========== New data loading: merge JSON stations with JS metadata ==========
-  function loadJsonData(callback) {
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", JSON_DATA_PATH, true);
-    xhr.onload = function() {
-      if (xhr.status >= 200 && xhr.status < 300) {
-        try {
-          var data = JSON.parse(xhr.responseText);
-          var lines = data.lines || {};
-          var merged = {};
-          var ul = window.UNIFIED_LINES || {};
-          var ids = Object.keys(lines);
-          for (var i = 0; i < ids.length; i++) {
-            var jid = ids[i];
-            var meta = ul[jid] || {};
-            merged[jid] = {
-              name: meta.name || jid,
-              nameEn: meta.nameEn || meta.name || jid,
-              nameJa: meta.nameJa || meta.name || jid,
-              code: meta.code || jid,
-              color: meta.color || "#888888",
-              operator: meta.operator || "Unknown",
-              region: meta.region || "",
-              type: meta.type || "straight",
-              image: meta.image || "",
-              stations: lines[jid].stations || [],
-              durations: lines[jid].durations || [],
-              durationTotalMin: meta.durationTotalMin || 0,
-              branchOf: meta.branchOf || null
-            };
+  // ========== Load cached real-time positions from IndexedDB ==========
+  function loadCachedPositions(callback) {
+    try {
+      if (window.RailwayRTC && window.RailwayRTC.loadPositions) {
+        window.RailwayRTC.loadPositions().then(function(positions) {
+          if (positions && Object.keys(positions).length > 0) {
+            // Merge cached positions into UNIFIED_LINES
+            var ul = window.UNIFIED_LINES;
+            if (ul) {
+              Object.keys(positions).forEach(function(lid) {
+                if (ul[lid] && positions[lid].length > 0) {
+                  ul[lid].cachedPositions = positions[lid];
+                }
+              });
+              console.log("[trains] Loaded cached positions for " + Object.keys(positions).length + " lines");
+            }
           }
-          window.UNIFIED_LINES = merged;
-          console.log("[trains] Loaded " + Object.keys(merged).length + " lines from JSON + metadata");
           if (callback) callback();
-        } catch(e) {
-          console.error("[trains] Failed to parse JSON data:", e);
-          if (callback) callback();
-        }
+        }).catch(function(e) { console.warn("[trains] Cache load error:", e.message); if (callback) callback(); });
       } else {
-        console.warn("[trains] Failed to load JSON data, status:", xhr.status);
         if (callback) callback();
       }
-    };
-    xhr.onerror = function() {
-      console.error("[trains] Network error loading JSON data");
-      if (callback) callback();
-    };
-    xhr.send();
+    } catch(e) { if (callback) callback(); }
   }
 
   function init() {
@@ -386,9 +288,15 @@
           hideLineView();
         });
       }
-      // Load JSON data first, then render
-      loadJsonData(function() {
+      loadCachedPositions(function() {
         renderList(listEl);
+        // Restore hash-based navigation
+        var hash = window.location.hash;
+        if (hash && hash.length > 1) {
+          var lid = hash.substring(1);
+          var lines = getLinesData();
+          if (lines[lid]) showLineView(lid);
+        }
         if (backBtn) backBtn.textContent = "\u2190 " + t("line_map.back");
       });
     } catch(e) {}
