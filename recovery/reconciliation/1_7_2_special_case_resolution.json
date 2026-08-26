@@ -1,0 +1,21 @@
+{
+  "timestamp": "2026-08-27T04:29:13.635291",
+  "task": "1.7.2 Special Case Resolution",
+  "bakurōmae_dedup": {
+    "mojibake_id": "Bakurﾅ肯ae",
+    "correct_id": "Bakurōmae",
+    "action": "MERGE",
+    "resolution": "Replace all references from mojibake ID to correct ID; remove duplicate station entry",
+    "status": "PENDING_APPROVAL"
+  },
+  "daikanyama_orphan": {
+    "station_id": "Daikanyama",
+    "in_stations_dict": false,
+    "referenced_by": [
+      "TokyuToyoko"
+    ],
+    "action": "DOCUMENT_AS_ORPHAN",
+    "resolution": "Pre-existing orphan; do NOT create fake entity; keep line references as-is",
+    "status": "ACCEPTED"
+  }
+}
