@@ -38,18 +38,10 @@ jobs:
           fi
           echo "All JS files have balanced braces"
 
-      - name: Check Canonical Data
+      - name: Entity Preservation Guard
         run: |
-          echo "Checking railway_data.json SHA..."
-          expected="27ED38FC6910781268E231906ECC683367D1C93FCA725CBE803EB167B4B2240E"
-          actual=$(sha256sum data/core/railway_data.json | cut -d' ' -f1)
-          echo "Expected: $expected"
-          echo "Actual:   $actual"
-          if [ "$(echo "$actual" | tr [:upper:] [:lower:])" != "$(echo "$expected" | tr [:upper:] [:lower:])" ]; then
-            echo "::error::Canonical SHA mismatch! Do not modify railway_data.json"
-            exit 1
-          fi
-          echo "Canonical data OK"
+          echo Running canonical entity preservation guard...
+          python .github/workflows/ci_guard_check.py
 
       - name: Check No localhost
         run: |

@@ -1,1 +1,11 @@
-{"removed_entities": {"lines": ["Yamanote"], "stations": [], "relations": [], "tourism": []}, "reason": "test", "approved_by": "test", "approved_at": "2026-01-01"}
+{
+  "removed_entities": {
+    "lines": [],
+    "stations": [],
+    "relations": [],
+    "tourism": []
+  },
+  "reason": "none",
+  "approved_by": "system",
+  "approved_at": "2026-08-27"
+}
