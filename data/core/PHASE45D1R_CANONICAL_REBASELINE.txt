@@ -1,0 +1,44 @@
+# Phase 45-D-1R: Canonical Data Recovery Audit
+# Phase 45-D-1R-F: Canonical Re-baseline & Freeze
+
+## Audit Findings
+
+### Old Canonical SHA
+5663fee79165ead6d5874688836c0b96e68c866572b4ca4788034f45ea4b076d
+
+Status: NOT FOUND
+- Not in any git commit
+- Not in any git blob
+- Not in any backup file
+- Cannot be recovered
+
+### New Canonical SHA (Current Working Tree)
+D759E38E5F54C0077137F4E137D0F32CD4DEBB01C6FDB68D5658C2B421E7677B
+
+### Data Content Comparison (WORKING_TREE vs 71afda9)
+- stations: 503 == 503 (identical)
+- lines: 60 == 60 (identical)
+- tourism: 93 == 93 (identical)
+- stationLines: 0 == 0 (identical)
+- lineStationOrder: 0 == 0 (identical)
+- name_map: 1493 vs 1492 (1 added, encoding fix)
+
+### Root Cause of SHA Divergence
+name_map UTF-8 encoding correction
+- Bakuro-mae station entry (correct o-vs mojibake)
+- Entire name_map section rewritten with proper Japanese encoding
+- All railway entities (stations/lines/tourism) unchanged
+
+### CANONICAL_STATUS
+DATA_CHANGED (encoding fix only, no entity modification)
+
+## Re-baseline Decision
+Accepted D759E38E as new Canonical Baseline per user authorization.
+Old baseline 5663fee7 cannot be recovered and is superseded.
+
+## Changes Made
+- None (railway_data.json untouched, no code modified)
+- This file records the audit for reference
+
+## Next Step
+Phase 45-D: Real HTTPS Runtime Verification
