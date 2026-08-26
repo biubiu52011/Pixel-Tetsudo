@@ -4,6 +4,7 @@
 
 (function() {
   'use strict';
+  function getStationCoords() { return window.STATION_COORDS || {}; }
 
   const TAG_LABELS = {
     all: 'tourism.tag_all',

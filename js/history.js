@@ -33,7 +33,7 @@
             }
           }        }, 100);        // Store result for history capture
         this._lastSearchResult = result;
-        return result;      };    }    if (typeof window.onLanguageChange === "function") { window.onLanguageChange(() => renderHistory()); }  }  function getRecentRoutes(n) {
+        return result;      };    if (typeof window.onLanguageChange === "function") { window.onLanguageChange(() => renderHistory()); }  }  function getRecentRoutes(n) {
     n = n || 5;
     const history = getHistory();
     return history.slice(0, n).map(function(e) {
@@ -60,4 +60,4 @@
       if (window.SearchUI.toInput) window.SearchUI.toInput.dispatchEvent(new Event('input'));
     }
   }
-  window.SearchHistory = {    init: init,    getHistory: getHistory,    saveToHistory: saveToHistory,    clearHistory: clearHistory,    removeEntry: removeEntry,    renderHistory: renderHistory,    getRecentRoutes: getRecentRoutes,    restoreFromRecent: restoreFromRecent  };  if (document.readyState === 'loading') {    document.addEventListener('DOMContentLoaded', () => SearchHistory.init());  } else {    SearchHistory.init();  }})();
+  window.SearchHistory = {    init: init,    getHistory: getHistory,    saveToHistory: saveToHistory,    clearHistory: clearHistory,    removeEntry: removeEntry,    renderHistory: renderHistory,    getRecentRoutes: getRecentRoutes,    restoreFromRecent: restoreFromRecent  };  if (document.readyState === 'loading') {    document.addEventListener('DOMContentLoaded', () => SearchHistory.init());  } else {    SearchHistory.init();  }})();}

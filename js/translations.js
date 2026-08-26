@@ -160,7 +160,7 @@
       "config.save": "Save &amp; Update",
       "config.clear": "Clear Keys",
       "config.hint": "Enter your ODPT API keys to load real-time data.",
-      "config.hint_url": "odpt.org for free registration."
+      "config.hint_url": "odpt.org for free registration.",
     },
     zh: {
       "app.footer": "\u00a9 2026 \u50cf\u7d20\u94c1\u9053",
@@ -309,7 +309,7 @@
       "trains.train_count": "\u5217",
       "unit.hour": "\u5c0f\u65f6",
       "unit.minute": "\u5206\u949f",
-      "validate.input_required": "\u8bf7\u8f93\u5165\u51fa\u53d1\u7ad9\u548c\u5230\u8fbe\u7ad9"
+      "validate.input_required": "\u8bf7\u8f93\u5165\u51fa\u53d1\u7ad9\u548c\u5230\u8fbe\u7ad9",,
       "config.center_key_placeholder": "ODPT_CENTER 密钥",
       "config.challenge_key_placeholder": "CHALLENGE 密钥",
       "config.title": "API 密钥设置",
@@ -318,7 +318,7 @@
       "config.save": "保存并更新",
       "config.clear": "清除密钥",
       "config.hint": "输入您的 ODPT API 密钥以加载实时数据。",
-      "config.hint_url": "odpt.org 免费注册。"
+      "config.hint_url": "odpt.org 免费注册。",
     },
     ja: {
       "app.footer": "\u00a9 2026 Pixel Tetsudo",
@@ -467,7 +467,7 @@
       "trains.train_count": "\u4e24",
       "unit.hour": "\u65f6\u95f4",
       "unit.minute": "\u5206",
-      "validate.input_required": "\u51fa\u53d1\u7ad9\u3068\u5230\u7740\u7ad9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044"
+      "validate.input_required": "\u51fa\u53d1\u7ad9\u3068\u5230\u7740\u7ad9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044",
       "config.center_key_placeholder": "ODPT_CENTER キー",
       "config.challenge_key_placeholder": "CHALLENGE キー",
       "config.title": "APIキー設定",
@@ -476,7 +476,7 @@
       "config.save": "保存して更新",
       "config.clear": "キーを消去",
       "config.hint": "リアルタイムデータを加载するにはODPT APIキーを入力してください。",
-      "config.hint_url": "odpt.org で無料登録。"
+      "config.hint_url": "odpt.org で無料登録。",
     },
     ko: {
       "app.footer": "\u00a9 2026 Pixel Tetsudo",
@@ -626,7 +626,7 @@
       "trains.train_count": "\ub300",
       "unit.hour": "\uc2dc\uac04",
       "unit.minute": "\ubd84",
-      "validate.input_required": "\ucd9c\ubc1c\uc5ed\uacfc \ub3c4\ucc29\uc5ed\uc744 \uc785\ub825\ud558\uc138\uc694"
+      "validate.input_required": "\ucd9c\ubc1c\uc5ed\uacfc \ub3c4\ucc29\uc5ed\uc744 \uc785\ub825\ud558\uc138\uc694",
       "config.center_key_placeholder": "ODPT_CENTER 키",
       "config.challenge_key_placeholder": "CHALLENGE 키",
       "config.title": "API 키 설정",
@@ -635,7 +635,7 @@
       "config.save": "저장 및 업데이트",
       "config.clear": "키 지우기",
       "config.hint": "실시간 데이터를 로드하려면 ODPT API 키를 입력하세요.",
-      "config.hint_url": "odpt.org에서 무료 등록."
+      "config.hint_url": "odpt.org에서 무료 등록.",
     },
   };
   function t(key) {

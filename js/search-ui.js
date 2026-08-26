@@ -121,7 +121,7 @@
         return;
       }
 
-      container.innerHTML = stations.map(s => '<div class="suggestion-item"> + window.escapeHtml(s) + '</div>').join('');
+      container.innerHTML = stations.map(s => "<div class=\"suggestion-item\">" + window.escapeHtml(s) + "</div>").join("");
       container.classList.add('active');
 
       // Cache the rendered HTML
