@@ -1,0 +1,13 @@
+{
+  "timestamp": "2026-08-27T04:14:14.098577",
+  "head_sha": "5105df8f23f81aa6533e5673de887b74ffa17856",
+  "branch": "master",
+  "remote": "origin\thttps://github.com/biubiu52011/Pixel-Tetsudo.git (fetch)\norigin\thttps://github.com/biubiu52011/Pixel-Tetsudo.git (push)",
+  "working_tree_clean": false,
+  "untracked_count": 85,
+  "railway_data_json": {
+    "path": "data/core/railway_data.json",
+    "sha256": "D759E38E5F54C0077137F4E137D0F32CD4DEBB01C6FDB68D5658C2B421E7677B",
+    "size_bytes": 313327
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "timestamp": "2026-08-27T04:14:14.067616",
+  "primary_source": {
+    "file": "recovery/source/railway_152_raw.json",
+    "original_path": "data/core/railway_data_phase13_pre_coordinate_fix_backup.json",
+    "sha256": "44ADFC073E5368A87EC51C86724674513C9E4DC623DEC05475ED789239853A6F",
+    "size_bytes": 799580,
+    "source_commit": "phase13_pre_coordinate_fix",
+    "notes": "Closest match to AGENTS.md baseline (503 stations, 152 lines, 1864 stationLines, 152 lineStationOrder)"
+  }
+}
