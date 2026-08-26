@@ -135,7 +135,7 @@
           var angle = (i / stations.length) * 2 * Math.PI - Math.PI / 2;
           loopPts.push({ x: cx + rx * Math.cos(angle), y: cy + ry * Math.sin(angle), angle: angle });
         }
-        svg += "<ellipse cx=\"" + cx + "\" cy=\"" + cy + "\"" rx=\"" + rx + "\"" ry=\"" + ry + "\"" stroke=\"" + escapeHtml(color) + "\"" stroke-width=\"5\" fill=\"none\" opacity=\"0.35\"/>";
+        svg += "<ellipse cx=\"" + cx + "\" cy=\"" + cy + "\"" rx=\"" + rx + "\"" ry=\"" + ry + "\"" stroke=\"" + escapeHtml(color) + "\"" stroke-width=\"\" + \"5\" + \"\" fill=\"none\" opacity=\"0.35\"/>";
         for (var i = 0; i < stations.length; i++) {
           var p = loopPts[i];
           var st = stations[i];
@@ -145,7 +145,7 @@
           var tx = p.x + 12 * Math.cos(p.angle);
           var ty = p.y + 12 * Math.sin(p.angle);
           var anchor = Math.cos(p.angle) > 0.1 ? "start" : (Math.cos(p.angle) < -0.1 ? "end" : "middle");
-          svg += "<text x=\"" + tx + "\" y=\"" + (ty + 3.5) + "\"" font-size=\"9\" fill=\"#444\" font-family=\"sans-serif\" font-weight=\"500\" text-anchor=\"" + anchor + "\">" + escapeHtml(dn) + "</text>";
+          svg += "<text x=\"" + tx + "\" y=\"" + (ty + 3.5) + "\"" font-size=\"\" + \"9\" + \"\" fill=\"#444\" font-family=\"sans-serif\" font-weight=\"500\" text-anchor=\"" + anchor + "\">" + escapeHtml(dn) + "</text>";
         }
       } else {
         var y1 = topP, y2 = topP + (stations.length - 1) * sp;

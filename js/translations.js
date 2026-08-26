@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Pixel Tetsudo - Translations (en/zh/ja/ko)
  */
 (function() {
@@ -151,7 +151,7 @@
       "trains.train_count": "trains",
       "unit.hour": "hr",
       "unit.minute": "min",
-      "validate.input_required": "Please enter departure and arrival stations"
+      "validate.input_required": "Please enter departure and arrival stations",
       "config.center_key_placeholder": "ODPT_CENTER key",
       "config.challenge_key_placeholder": "CHALLENGE key",
       "config.title": "API Key Settings",

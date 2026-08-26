@@ -97,8 +97,14 @@
   }
 
   // Public API
+
+  // Station coordinate accessor
+  function getStationCoords() {
+    return window.STATION_COORDS || {};
+  }
+
   window.DataLayer = {
-    isCacheValid: isCacheValid,
+    getStationCoords: getStationCoords,
     setCache: setCache,
     fetchJSON: fetchJSON,
     getAllLines: getAllLines,
