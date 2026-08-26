@@ -1,0 +1,86 @@
+{
+  "task": "2.1 Canonical Candidate Validation",
+  "timestamp": "2026-08-27T04:36:02.967503",
+  "candidate_file": "recovery/output/railway_data_canonical_candidate.json",
+  "candidate_sha256": "2E939A066968698FB3F9E38BF1C0E237AFA775027755CBB2444E42098F2DD8CC",
+  "production_sha256": "D759E38E5F54C0077137F4E137D0F32CD4DEBB01C6FDB68D5658C2B421E7677B",
+  "checks": [
+    {
+      "id": "lines_gte_152",
+      "actual": 156,
+      "pass": true,
+      "expected": 152
+    },
+    {
+      "id": "stations_gte_503",
+      "actual": 503,
+      "pass": true,
+      "expected": 503
+    },
+    {
+      "id": "no_lost_lines",
+      "actual": 0,
+      "pass": true,
+      "expected": 0
+    },
+    {
+      "id": "no_real_station_losses",
+      "actual": 0,
+      "pass": true,
+      "expected": 0,
+      "note": "dedup:['Bakurﾅ肯ae'] real:[]"
+    },
+    {
+      "id": "relation_consistent",
+      "actual": 0,
+      "pass": true,
+      "expected": 0
+    },
+    {
+      "id": "production_unchanged",
+      "actual": "D759E38E5F54C0077137F4E137D0F32CD4DEBB01C6FDB68D5658C2B421E7677B",
+      "pass": true,
+      "expected": "D759E38E..."
+    },
+    {
+      "id": "orphan_documented",
+      "actual": 1383,
+      "pass": true,
+      "note": "1383 orphans pre-existing"
+    },
+    {
+      "id": "no_mojibake_nameJa",
+      "actual": 0,
+      "pass": true,
+      "expected": 0
+    },
+    {
+      "id": "no_mojibake_image",
+      "actual": 0,
+      "pass": true,
+      "expected": 0
+    },
+    {
+      "id": "all_lines_have_stations",
+      "actual": 0,
+      "pass": true,
+      "expected": 0
+    },
+    {
+      "id": "durations_match_stations",
+      "actual": 0,
+      "pass": true,
+      "expected": 0
+    }
+  ],
+  "overall_pass": true,
+  "summary": {
+    "lines": 156,
+    "stations": 503,
+    "stationLines": 1841,
+    "lineStationOrder": 156,
+    "orphans": 1383,
+    "checks_passed": 11,
+    "checks_total": 11
+  }
+}

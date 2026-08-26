@@ -1,0 +1,41 @@
+{
+  "task": "Task 2.1: Final Data Reconciliation",
+  "subtask": "2.1.1 Line Field Resolution",
+  "timestamp": "2026-08-27T04:36:17.107730",
+  "status": "COMPLETE",
+  "resolutions_applied": 83,
+  "resolution_summary": {
+    "ACCEPT_CURRENT": 50,
+    "RECOMPUTE": 31,
+    "ACCEPT_SOURCE": 2
+  },
+  "validation": {
+    "overall_pass": true,
+    "checks_passed": 11,
+    "checks_total": 11,
+    "candidate_sha256": "2E939A066968698FB3F9E38BF1C0E237AFA775027755CBB2444E42098F2DD8CC",
+    "production_sha256": "D759E38E5F54C0077137F4E137D0F32CD4DEBB01C6FDB68D5658C2B421E7677B",
+    "summary": {
+      "lines": 156,
+      "stations": 503,
+      "stationLines": 1841,
+      "lineStationOrder": 156,
+      "orphans": 1383,
+      "checks_passed": 11,
+      "checks_total": 11
+    }
+  },
+  "key_decisions": {
+    "stations": "ACCEPT_CURRENT for all 34 lines with station differences. Source has fundamentally different routes for many lines (e.g., Mita has 0 common stations with current).",
+    "durations": "RECOMPUTE from resolved station lists.",
+    "code": "ACCEPT_CURRENT for all 16 lines. Current uses standardized codes.",
+    "branchOf": "ACCEPT_SOURCE for 2 lines (Itsukaichi, Ome) where current is missing parent relationship."
+  },
+  "data_integrity": {
+    "lost_lines": 0,
+    "lost_stations_real": 0,
+    "orphans_documented": 1383,
+    "production_unchanged": true
+  },
+  "next_step": "Task 2.2: New Canonical Schema Validation against RailwayDB/db-loader.js"
+}
