@@ -1,0 +1,14 @@
+{
+  "version": "1.0",
+  "created_at": "",
+  "requested_by": "",
+  "reason": "",
+  "approvals": [],
+  "removed_entities": {
+    "lines": [],
+    "stations": [],
+    "relations": []
+  },
+  "notes": "",
+  "ci_bypass_code": ""
+}
