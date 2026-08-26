@@ -1,0 +1,103 @@
+{
+  "task": "Task 1: New Schema + 152 -> New Structure Migration Design",
+  "timestamp": "2026-08-27T04:20:46.221011",
+  "checklist": [
+    {
+      "id": "1-1",
+      "item": "Task 0 artifacts frozen (read-only input)",
+      "status": "PASS",
+      "detail": "recovery/source/ treated as read-only"
+    },
+    {
+      "id": "1-2",
+      "item": "New Schema defined",
+      "status": "PASS",
+      "detail": "5-layer: lines, stations, name_map, relations(stationLines+lineStationOrder), tourism"
+    },
+    {
+      "id": "1-3",
+      "item": "Entity identity rules defined",
+      "status": "PASS",
+      "detail": "line_id and station_id as stable string keys; names are display-only"
+    },
+    {
+      "id": "1-4",
+      "item": "152 lines migration rules",
+      "status": "PASS",
+      "detail": "All 152 source lines included; missing fields use null/empty; no line dropped for incomplete fields"
+    },
+    {
+      "id": "1-5",
+      "item": "4 current-only lines preserved",
+      "status": "PASS",
+      "detail": "Odawara, SeibuTamagawa, TobuNikko, TobuSkytree added from current production"
+    },
+    {
+      "id": "1-6",
+      "item": "Station merge logic",
+      "status": "PASS",
+      "detail": "Source 503 + Current 1 unique = 504 candidate stations; conflicts recorded"
+    },
+    {
+      "id": "1-7",
+      "item": "Relation layer rebuilt from lines",
+      "status": "PASS",
+      "detail": "stationLines (1864) and lineStationOrder (156) computed from lines.stations array"
+    },
+    {
+      "id": "1-8",
+      "item": "Conflict records created",
+      "status": "PASS",
+      "detail": "recovery/reconciliation/conflicts.json with 514 total conflicts"
+    },
+    {
+      "id": "1-9",
+      "item": "Missing field policy applied",
+      "status": "PASS",
+      "detail": "Missing fields use null/empty string; no guess values"
+    },
+    {
+      "id": "1-10",
+      "item": "Migration tool written",
+      "status": "PASS",
+      "detail": "recovery/tools/migrate-152-to-new-schema.py"
+    },
+    {
+      "id": "1-11",
+      "item": "Round 1 validation passed",
+      "status": "PASS",
+      "detail": "lines=156>=152, stations=504>=503"
+    },
+    {
+      "id": "1-12",
+      "item": "Data loss detection",
+      "status": "PASS",
+      "detail": "Lost lines=0, Lost stations=0"
+    },
+    {
+      "id": "1-13",
+      "item": "Production unchanged",
+      "status": "PASS",
+      "detail": "Production SHA=True"
+    }
+  ],
+  "outputs": {
+    "migration_tool": "recovery/tools/migrate-152-to-new-schema.py",
+    "candidate_data": "recovery/output/railway_data_candidate.json",
+    "migration_report": "recovery/output/migration_report.json",
+    "statistics": "recovery/output/statistics.json",
+    "conflicts": "recovery/reconciliation/conflicts.json",
+    "validation": "recovery/output/validation_report.json"
+  },
+  "candidate_summary": {
+    "lines": 156,
+    "stations": 504,
+    "name_map": 1493,
+    "tourism": 93,
+    "stationLines": 1864,
+    "lineStationOrder": 156,
+    "output_sha256": "A9AD660F36B19A8A57CF930298925692EF4AB3E6339B4F68EDBB7FBE23DF8788",
+    "output_size_bytes": 784936
+  },
+  "overall_pass": true
+}
