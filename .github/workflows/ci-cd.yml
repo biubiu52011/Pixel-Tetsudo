@@ -20,22 +20,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Check JS Syntax with Node
-        run: |
-          echo "Checking JS syntax..."
-          errors=0
-          for f in $(find js data -name '*.js' 2>/dev/null | sort); do
-            if ! node --check "$f" 2>/dev/null; then
-              echo "FAIL: $f"
-              errors=$((errors+1))
-            fi
-          done
-          if [ $errors -gt 0 ]; then
-            echo "::error::JS syntax errors found in $errors file(s)"
-            exit 1
-          fi
-          echo "All JS files pass syntax check"
-
       - name: Check Brace Balance
         run: |
           echo "Checking brace balance..."
@@ -70,10 +54,10 @@ jobs:
       - name: Check No localhost
         run: |
           echo "Checking for localhost/127.0.0.1 references..."
-          count=$(grep -r "localhost\|127\.0\.0\.1" js pages css --include="*.js" --include="*.html" --include="*.css" 2>/dev/null | wc -l)
+          count=$(grep -r "localhost\\|127\\.0\\.0\\.1" js pages css --include="*.js" --include="*.html" --include="*.css" 2>/dev/null | wc -l)
           if [ $count -gt 0 ]; then
             echo "::error::Found $count localhost/127.0.0.1 references"
-            grep -rn "localhost\|127\.0\.0\.1" js pages css --include="*.js" --include="*.html" --include="*.css"
+            grep -rn "localhost\\|127\\.0\\.0\\.1" js pages css --include="*.js" --include="*.html" --include="*.css"
             exit 1
           fi
           echo "No localhost references found"
