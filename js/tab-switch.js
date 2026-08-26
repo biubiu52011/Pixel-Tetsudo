@@ -38,9 +38,20 @@
         targetBtn.classList.add('active');
         targetContent.classList.add('active');
       }
+      // If hash doesn't match any tab (e.g. #Yamanote for line detail),
+      // fall back to the trains tab since we're on trains.html
+      else {
+        var trainsBtn = document.querySelector('.tab-btn[data-tab="trains"]');
+        var trainsContent = document.getElementById('tab-trains');
+        if (trainsBtn && trainsContent) {
+          contents.forEach(function(c) { c.classList.remove('active'); });
+          btns.forEach(function(b) { b.classList.remove('active'); });
+          trainsBtn.classList.add('active');
+          trainsContent.classList.add('active');
+        }
+      }
     }
   }
-
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initTabSwitching);
   } else {

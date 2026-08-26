@@ -1,5 +1,5 @@
-/*
- * 隸ｭ險蛻晏ｧ句喧閼壽悽
+﻿/*
+ * i18n Language Init
  */
 
 (function() {
@@ -7,11 +7,14 @@
 
     var STORAGE_KEY = "i18n_lang";
     var SUPPORTED = ["ja", "zh", "ko", "en"];
-    var DEFAULT_LANG = "ja";
+    var DEFAULT_LANG = "en";
 
     // Public API for other scripts
     var listeners = [];
-    window.onLanguageChange = function(callback) { listeners.push(callback); };
+    // Idempotent: preserve existing listeners when redefined
+    if (typeof window.onLanguageChange !== 'function') {
+        window.onLanguageChange = function(callback) { listeners.push(callback); };
+    }
     window.triggerLanguageChange = function() {
         listeners.forEach(function(cb) { cb(); });
     };
@@ -23,6 +26,7 @@
         window.currentLang = lang;
         updateSwitcherUI(lang);
         updateTranslations();
+        _updatePageTitle();
         triggerLanguageChange();
         return true;
     }
@@ -49,6 +53,45 @@
             var translated = window.t(key, el.placeholder);
             if (translated !== el.placeholder) el.placeholder = translated;
         });
+    }
+
+
+    // Update page title dynamically
+    var _pageTitleMap = {
+      ja: { home: '路線検索 | PIXEL TETSUDO', tourism: '観光詳細 - PIXEL TETSUDO', trains: '列車時刻 - PIXEL TETSUDO', realtime: '運行状況 - PIXEL TETSUDO', history: '履歴 - PIXEL TETSUDO' },
+      en: { home: 'Route Search | PIXEL TETSUDO', tourism: 'Tourism Detail - PIXEL TETSUDO', trains: 'Train Times - PIXEL TETSUDO', realtime: 'Realtime Status - PIXEL TETSUDO', history: 'History - PIXEL TETSUDO' },
+      zh: { home: '路线搜索 | PIXEL TETSUDO', tourism: '景点详情 - PIXEL TETSUDO', trains: '列车时刻 - PIXEL TETSUDO', realtime: '运行状态 - PIXEL TETSUDO', history: '历史记录 - PIXEL TETSUDO' },
+      ko: { home: '경로 검색 | PIXEL TETSUDO', tourism: '관광 상세 - PIXEL TETSUDO', trains: '열차 시간 - PIXEL TETSUDO', realtime: '운행 상태 - PIXEL TETSUDO', history: '검색 기록 - PIXEL TETSUDO' }
+    };
+    var _pageDescMap = {
+      ja: { home: 'JR・私鉄・地下鉄の路線検索と運行状況、東京の観光スポット案内', tourism: '東京の観光スポット詳細 - Pixel Tetsudo', trains: 'JR・私鉄の列車時刻表 - Pixel Tetsudo', realtime: '電車の実時間運行状況 - Pixel Tetsudo', history: '検索履歴 - Pixel Tetsudo' },
+      en: { home: 'JR, Private & Subway Route Search and Realtime Status, Tokyo Tourism', tourism: 'Tokyo Tourism Spot Details - Pixel Tetsudo', trains: 'Train Times for JR & Private Lines - Pixel Tetsudo', realtime: 'Realtime Train Status - Pixel Tetsudo', history: 'Search History - Pixel Tetsudo' },
+      zh: { home: 'JR、私铁、地铁路线搜索与运行状态，东京观光景点指南', tourism: '东京观光景点详情 - Pixel Tetsudo', trains: 'JR与私铁列车时刻表 - Pixel Tetsudo', realtime: '列车实时运行状态 - Pixel Tetsudo', history: '搜索历史 - Pixel Tetsudo' },
+      ko: { home: 'JR·사철·지하철 노선 검색 및 운행 상황, 도쿄 관광 명소 안내', tourism: '도쿄 관광지 상세 - Pixel Tetsudo', trains: 'JR·사철 열차 시간표 - Pixel Tetsudo', realtime: '열차 실시간 운행 상태 - Pixel Tetsudo', history: '검색 기록 - Pixel Tetsudo' }
+    };
+    function _updatePageTitle() {
+      if (!window.currentLang) return;
+      var hash = location.hash || '';
+      var pathname = location.pathname || '';
+      var page = 'home';
+      if (pathname.indexOf('tourism') !== -1 || hash.indexOf('tourism') !== -1) page = 'tourism';
+      else if (pathname.indexOf('trains') !== -1 || hash.indexOf('trains') !== -1) page = 'trains';
+      else if (pathname.indexOf('realtime') !== -1 || hash.indexOf('realtime') !== -1) page = 'realtime';
+      else if (pathname.indexOf('history') !== -1 || hash.indexOf('history') !== -1) page = 'history';
+      var map = (_pageTitleMap[window.currentLang] || _pageTitleMap.ja);
+      document.title = map[page] || map.home;
+      // Update pixel-title H1 element
+      var titleEl = document.querySelector('.pixel-title');
+      if (titleEl && typeof window.t === 'function') {
+        titleEl.textContent = window.t('app.title');
+      }
+      // Update meta description
+      var descMap = (_pageDescMap[window.currentLang] || _pageDescMap.ja);
+      var metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) metaDesc.setAttribute('content', descMap[page] || descMap.home);
+      // Update html lang attribute
+      var htmlEl = document.querySelector('html');
+      if (htmlEl) htmlEl.setAttribute('lang', window.currentLang);
     }
 
     function openSwitcher() {
@@ -98,9 +141,14 @@
             isExpanded ? closeSwitcher() : openSwitcher();
         });
 
-        // Close on outside click
+        // Close on outside click (skip search inputs to avoid focus theft)
         document.addEventListener("click", function(e) {
-            if (!toggleBtn.contains(e.target) && !switcher.contains(e.target)) {
+            var target = e.target;
+            var isSearchInput = target && (
+                target.id === "searchFrom" || target.id === "searchTo" ||
+                target.closest(".input-group") || target.closest(".suggestions")
+            );
+            if (!isSearchInput && !toggleBtn.contains(e.target) && !switcher.contains(e.target)) {
                 closeSwitcher();
             }
         });
@@ -169,6 +217,7 @@
         window.currentLang = currentLang;
         updateSwitcherUI(currentLang);
         updateTranslations();
+        _updatePageTitle();
     }
 
     // Move switcher outside header to avoid stacking-context clipping

@@ -30,13 +30,15 @@
   };
 
   let dom = {};
+  const DIST_CACHE_TTL_MS = 60000;
+  const DIST_CACHE_MIN_MOVE_M = 100;
+  let _distCache = {};
 
   function cacheDom() {
     dom.container = document.getElementById('smModule');
     dom.grid = document.getElementById('smGrid');
     dom.tagFilters = document.getElementById('smTagFilters');
     dom.empty = document.getElementById('smEmpty');
-    dom.autoBadge = document.getElementById('smAutoBadge');
     dom.stationDisplay = document.getElementById('smStationDisplay');
     dom.relocateBtn = document.getElementById('smRelocateBtn');
     dom.header = document.querySelector('.sm-header');
@@ -47,24 +49,6 @@
   }
 
   function getSPOTS() { return window.TOURISM_DATA || {}; }
-  function getStationCoords() { return window.STATION_COORDS || {}; }
-
-  function haversineDistance(lat1, lng1, lat2, lng2) {
-    const R = 6371000;
-    const dLat = (lat2 - lat1) * Math.PI / 180;
-    const dLng = (lng2 - lng1) * Math.PI / 180;
-    const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-              Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-              Math.sin(dLng/2) * Math.sin(dLng/2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    return R * c;
-  }
-
-  function formatDistance(meters) {
-    if (meters < 1000) return Math.round(meters) + 'm';
-    return (meters / 1000).toFixed(1) + 'km';
-  }
-
   function isAcrossRiver(stationLat, stationLng, spotLat, spotLng) {
     for (const river of RIVERS) {
       const distToRiver = Math.abs(spotLat - river.lat) * 111000;
@@ -83,11 +67,8 @@
   function renderHeader() {
     if (!dom.header) return;
     let html = '<h2 data-i18n="tourism.title">' + t('tourism.title') + '</h2>';
-    if (state.autoDetected && state.selectedStation) {
-      const stationLabel = t('station_names.' + state.selectedStation) || state.selectedStation;
-      html += '<div id="smAutoBadge" class="sm-auto-badge"><span>' + 
-              t('tourism.auto_detected') + ': ' + stationLabel + '</span></div>';
-    }
+    // Phase 43-A: removed sm-auto-badge
+
     dom.header.innerHTML = html;
   }
 
@@ -124,25 +105,105 @@
     }
   }
 
-  function renderGrid() {
-    if (!dom.grid) return;
-    const spots = getSPOTS();
+  
+  // Collect ALL spots from TOURISM_DATA and compute dynamic distances (cached)
+  function getAllSpotsDynamic() {
     const stationKey = state.selectedStation;
-    const station = spots[stationKey];
-    if (!station) {
+    const uLat = state.userLat;
+    const uLng = state.userLng;
+    const now = Date.now();
+
+    // Check cache validity
+    if (_distCache.results &&
+        _distCache.station === stationKey &&
+        _distCache.userLat === uLat &&
+        _distCache.userLng === uLng &&
+        (now - _distCache.timestamp) < DIST_CACHE_TTL_MS) {
+      return _distCache.results;
+    }
+
+    // Recompute if user moved significantly
+    if (_distCache.results && stationKey && uLat !== null && uLng !== null) {
+      const cachedCoord = getStationCoords()[_distCache.station];
+      if (cachedCoord) {
+        const moved = TourismProximity.getDistance(uLat, uLng, cachedCoord[0], cachedCoord[1]);
+        if (moved < DIST_CACHE_MIN_MOVE_M) {
+          return _distCache.results;
+        }
+      }
+    }
+
+    // Delegate to unified TourismProximity API
+    let nearby = [];
+    try {
+      nearby = TourismProximity.getNearbySpotsByStation(stationKey, { radius: 3000, limit: 10 });
+    } catch(e) {
+      console.warn('[Sightseeing] getNearbySpotsByStation failed:', e);
+    }
+
+    const result = nearby.map(function(item) {
+      const spot = item.spot;
+      const spotLat = spot.coord ? spot.coord[0] : null;
+      const spotLng = spot.coord ? spot.coord[1] : null;
+      const sCoord = getStationCoords()[stationKey];
+      const sLat = sCoord ? sCoord[0] : null;
+      const isAcross = sLat ? isAcrossRiver(sLat, sCoord[1], spotLat, spotLng) : false;
+      return {
+        ...spot,
+        stationKey: item.stationId || stationKey,
+        distM: item.distance,
+        distText: item.distanceText,
+        isAcross: isAcross
+      };
+    });
+
+    _distCache = {
+      station: stationKey,
+      userLat: uLat,
+      userLng: uLng,
+      results: result,
+      timestamp: now
+    };
+    return result;
+  }
+function renderGrid() {
+    if (!dom.grid) return;
+    const stationKey = state.selectedStation;
+    if (!stationKey) {
       dom.grid.innerHTML = '';
       if (dom.empty) dom.empty.classList.remove('hidden');
       return;
     }
-    
-    if (dom.empty) dom.empty.classList.add('hidden');
-    
-    let spotList = (station.spots || []).map(function(spot, idx) {
-      const distText = spot.dist || '';
-      const dir = spot.dir || '';
-      const isAcross = distText ? isAcrossRiver(station.coord[0], station.coord[1], spot.coord[0], spot.coord[1]) : false;
-      return { ...spot, distText, dir, isAcross, idx };
+    // Dynamic: collect all spots and compute distances from selected station
+    const allSpots = getAllSpotsDynamic();
+    const stationCoords = getStationCoords();
+    const sCoord = stationCoords[stationKey];
+    let spotList = allSpots;
+    if (sCoord && sCoord[0] && sCoord[1]) {
+      spotList = allSpots.filter(function(s) {
+        return s.distM !== null && s.distM <= 3000;
+      });
+    }
+    // Apply tag filter
+    if (state.activeTags.size > 0 && !state.activeTags.has('all')) {
+      spotList = spotList.filter(function(s) {
+        return s.tags && s.tags.some(function(t) { return state.activeTags.has(t); });
+      });
+    }
+    // Sort by distance
+    spotList.sort(function(a, b) {
+      if (a.distM === null) return 1;
+      if (b.distM === null) return -1;
+      return a.distM - b.distM;
     });
+    if (spotList.length === 0) {
+      dom.grid.innerHTML = '';
+      if (dom.empty) dom.empty.classList.remove('hidden');
+      return;
+    }
+    if (dom.empty) dom.empty.classList.add('hidden');
+    // Limit to top 10
+    spotList = spotList.slice(0, 10);
 
     if (state.activeTags.size > 0) {
       spotList = spotList.filter(function(s) {
@@ -206,7 +267,7 @@
       dom.stationDisplay.textContent = stationLabel;
       dom.stationDisplay.classList.add('sm-station-detected');
     } else {
-      dom.stationDisplay.textContent = t('tourism.locating') + '...';
+      dom.stationDisplay.textContent = t('tourism.locating');
       dom.stationDisplay.classList.remove('sm-station-detected');
     }
   }
@@ -221,11 +282,39 @@
     }
   }
 
+  // IP-based geolocation fallback
+  function fallbackToIPLocation() {
+    var apis = ['https://ip-api.com/json/?lang=zh-CN&fields=lat,lon,city', 'https://ipwho.is'];
+    var tryNext = function(idx) {
+      if (idx >= apis.length) {
+        var spots = getSPOTS();
+        state.selectedStation = Object.keys(spots)[0] || 'Asakusa';
+        renderAll();
+        return;
+      }
+      fetch(apis[idx], { mode: 'cors' })
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+          var lat = data.lat || data.latitude;
+          var lng = data.lon || data.longitude;
+          if (lat && lng && lat !== 0 && lng !== 0) {
+            state.userLat = parseFloat(lat);
+            state.userLng = parseFloat(lng);
+            findNearestStation();
+          } else {
+            tryNext(idx + 1);
+          }
+        })
+        .catch(function() { tryNext(idx + 1); });
+    };
+    tryNext(0);
+  }
+
   function initLocation() {
+    state.locStatus = 'locating';
+    renderHeader();
     if (typeof navigator === 'undefined' || !navigator.geolocation) {
-      const spots = getSPOTS();
-      state.selectedStation = Object.keys(spots)[0] || 'Asakusa';
-      renderAll();
+      fallbackToIPLocation();
       return;
     }
     navigator.geolocation.getCurrentPosition(
@@ -234,29 +323,38 @@
         state.userLng = position.coords.longitude;
         findNearestStation();
       },
-      function(error) {
-        console.log('[Sightseeing] Location denied:', error.message);
-        const spots = getSPOTS();
-        state.selectedStation = Object.keys(spots)[0] || 'Asakusa';
-        renderAll();
+      function(err) {
+        // Geolocation failed or denied - try IP fallback
+        if (err.code === err.PERMISSION_DENIED) {
+          state.locStatus = 'error';
+          // Default to a major station so user sees content
+          state.selectedStation = 'Shinjuku';
+          state.autoDetected = false;
+          renderAll();
+        } else {
+          fallbackToIPLocation();
+        }
       },
       { enableHighAccuracy: true, timeout: 10000, maximumAge: 300000 }
     );
   }
 
   function findNearestStation() {
-    // Use station-coords.js for all stations
     var minDistance = Infinity;
     var nearestStation = null;
     var coords = getStationCoords();
     for (const stationKey of Object.keys(coords)) {
       const coord = coords[stationKey];
-      const dist = haversineDistance(state.userLat, state.userLng, coord[0], coord[1]);
+      const dist = TourismProximity.getDistance(state.userLat, state.userLng, coord[0], coord[1]);
       if (dist < minDistance) { minDistance = dist; nearestStation = stationKey; }
     }
     if (nearestStation) {
       state.selectedStation = nearestStation;
       state.autoDetected = true;
+      state.locStatus = 'found';
+      renderAll();
+    } else {
+      state.locStatus = 'error';
       renderAll();
     }
   }

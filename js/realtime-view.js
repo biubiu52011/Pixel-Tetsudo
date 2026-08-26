@@ -1,6 +1,6 @@
 /*
  * Pixel Tetsudo - Realtime View
- * Line Status View
+ * 直接读取 RAILWAY_DATA，无需 DataFusion 依赖
  */
 (function() {
   "use strict";
@@ -10,214 +10,194 @@
   const tOp = (name) => (window.tOp ? window.tOp(name) : name) || name;
   const tStation = (name) => (window.tStation ? window.tStation(name) : name) || name;
 
-  // -- Status helpers --
-  const STATUS_META = {
-    normal:  { icon: "\u25cb", cls: "rs-status-icon-normal",  color: "green"  },
-    delayed: { icon: "\u25b3", cls: "rs-status-icon-delayed", color: "orange" },
-    suspended: { icon: "\u2717", cls: "rs-status-icon-suspended", color: "red" },
+  // STATUS_META is defined in data-state.js; use DataState.STATUS_META
+  const STATUS_META = window.DataState ? window.DataState.STATUS_META : {
+    normal:    { icon: "\u25cb", color: "green"  },
+    delayed:   { icon: "\u25b3", color: "orange" },
+    suspended: { icon: "\u00d7", color: "red"  },
+    no_data:   { icon: "\u25cc", color: "gray"   },
   };
 
-  function getLineStatus(line) {
-    return line.delayInfo?.status || "normal";
-  }
-
-  function getStatusIcon(status) {
-    const s = STATUS_META[status] || STATUS_META.normal;
-    return `<span class="rs-status-icon ${s.cls}">${s.icon}</span>`;
+  function getDelayInfo(line) {
+    if (line.delayInfo) return line.delayInfo;
+    if (line.status) return { status: line.status, interval: line.interval, cause: line.cause };
+    return null;
   }
 
   function clearSelectedCards() {
-    document.querySelectorAll(".rs-line-card.selected").forEach((c) => c.classList.remove("selected"));
+    document.querySelectorAll(".rs-line-card.selected").forEach(function(c) { c.classList.remove("selected"); });
   }
 
-  // -- Card rendering --
   function renderCard(line, lineId) {
-    const status = getLineStatus(line);
-    const interval = line.delayInfo?.interval || "";
-    const lineColor = line.color || "#00b643";
-    const displayName = tLine(line.id) || line.name || lineId;
-    const iconHtml = line.image
-      ? (line.image.indexOf("JRグループ.png") >= 0 ? `<div class="rs-line-icon-fallback" style="background:${line.color}"><img class="rs-line-icon" src="${escapeHtml(line.image)}" alt=""></div>` : `<img class="rs-line-icon" src="${escapeHtml(line.image)}" alt="">`)
-      : `<div class="rs-code-badge">${escapeHtml(line.code)}</div>`;
-
-    return `<div class="rs-line-card" data-line="${escapeHtml(lineId)}" style="--line-color:${escapeHtml(lineColor)}">
-      <div class="rs-line-header">
-        ${iconHtml}
-        <div class="rs-line-info">
-          <div class="rs-line-name">${escapeHtml(displayName)}</div>
-          <div class="rs-line-interval">${escapeHtml(interval)}</div>
-        </div>
-        ${getStatusIcon(status)}
-      </div>
-    </div>`;
+    return DataState.renderCard(line, lineId, { mode: "realtime" });
   }
 
-  // -- Main render --
-  function render(container, fusedData) {
-    if (!container || !fusedData?.lines) {
-      console.warn("[RealtimeView] Missing data:", { container: !!container, hasFusedData: !!fusedData, hasLines: !!(fusedData?.lines) });
-      return;
-    }
-
-    const groups = Object.values(fusedData.lines).reduce((acc, line) => {
-      const op = tOp(line.operator || "Unknown");
-      (acc[op] ??= []).push({ id: line.id, line });
-      return acc;
-    }, Object.create(null));
-
-    container.innerHTML = Object.keys(groups).sort().map((op) => `
-      <div class="rs-operator-group">
-        <div class="rs-operator-title">${escapeHtml(op)}</div>
-        <div class="rs-cards-container">
-          ${groups[op].map(({ line, id }) => renderCard(line, id)).join("")}
-        </div>
-      </div>
-    `).join("");
+  function renderLines(container, linesObj, lineOrderArr) {
+    DataState.renderList(container, linesObj, { mode: "realtime", lineOrder: lineOrderArr });
   }
 
-  // -- Modal --
-  function openModal(lineId, fusedData) {
-    const modal = document.getElementById("lineDetailModal");
-    if (!modal || !fusedData?.lines?.[lineId]) return;
-
-    const line = fusedData.lines[lineId];
-    const status = getLineStatus(line);
-    const interval = line.delayInfo?.interval;
-    const cause = line.delayInfo?.cause;
-    const s = STATUS_META[status] || STATUS_META.normal;
-    const statusText = t(`status.${status}`);
-
-    const titleEl = modal.querySelector(".rs-modal-title");
-    const bodyEl = modal.querySelector(".rs-modal-body");
-
-    titleEl.textContent = tLine(line.id) || line.name;
-
-    let intervalHtml;
-    if (!interval || status === "normal") {
-      intervalHtml = `<span class="rs-station-text">${t("status.all_lines")}</span>`;
+  function openModal(lineId, linesObj) {
+    var modal = document.getElementById("lineDetailModal");
+    if (!modal || !linesObj || !linesObj[lineId]) return;
+    var line = linesObj[lineId];
+    var delayInfo = getDelayInfo(line) || {};
+    // Use DataState.getStatus for consistent NO_DATA handling
+    var status = delayInfo && delayInfo.status ? delayInfo.status : (delayInfo ? "normal" : "no_data");
+    var interval = delayInfo.interval || "";
+    var cause = delayInfo.cause || "";
+    var s = window.DataState ? window.DataState.getStatus(status) : STATUS_META[status] || STATUS_META.no_data;
+    var statusText = t("status." + status) || status;
+    // Title
+    modal.querySelector(".rs-modal-title").textContent = tLine(line.id) || line.name;
+    // Status section
+    var statusSection = modal.querySelector(".rs-status-section");
+    statusSection.className = "rs-status-section rs-status-" + status;
+    statusSection.innerHTML = '<span class="rs-status-indicator"><span style="background:var(--' + s.color + ')"></span>' + statusText + '</span>';
+    // Interval section
+    var intervalSection = modal.querySelector(".rs-interval-section");
+    intervalSection.querySelector(".rs-info-label").textContent = t("status.interval");
+    var intervalHtml;
+    if (!interval || status === "normal" || status === "no_data") {
+      intervalHtml = '<span class="rs-station-text">' + t("status.all_lines") + '</span>';
     } else {
-      const parts = interval.split("→");
-      intervalHtml = parts.length >= 2
-        ? `<span class="rs-station-start">${escapeHtml(tStation(parts[0]))}</span>
-           <span class="rs-interval-arrow">→</span>
-           <span class="rs-station-end">${escapeHtml(tStation(parts[1]))}</span>`
-        : `<span class="rs-station-text">${escapeHtml(interval)}</span>`;
+      var parts = interval.split("\u2192");
+      if (parts.length >= 2) {
+        intervalHtml = '<span class="rs-station-start">' + escapeHtml(tStation(parts[0])) + '</span>'
+          + '<span class="rs-interval-arrow">\u2192</span>'
+          + '<span class="rs-station-end">' + escapeHtml(tStation(parts[1])) + '</span>';
+      } else {
+        intervalHtml = '<span class="rs-station-text">' + escapeHtml(interval) + '</span>';
+      }
     }
-
-    const causeHtml = cause && status !== "normal"
-      ? escapeHtml(cause)
-      : `<span style="color:var(--text-muted)">${t("status.none")}</span>`;
-
-    bodyEl.innerHTML = `
-      <div class="rs-status-section rs-status-${status}">
-        <span class="rs-status-indicator">
-          <span style="background:var(--${s.color})"></span>${statusText}
-        </span>
-      </div>
-      <div class="rs-interval-section">
-        <div class="rs-info-label">${t("status.interval")}</div>
-        <div class="rs-interval-stations">${intervalHtml}</div>
-      </div>
-      <div class="rs-cause-section">
-        <div class="rs-section-title">${t("status.delay_cause")}</div>
-        <div class="rs-cause-text">${causeHtml}</div>
-      </div>
-    `;
-
+    intervalSection.querySelector(".rs-interval-stations").innerHTML = intervalHtml;
+    // Cause section
+    var causeSection = modal.querySelector(".rs-cause-section");
+    causeSection.querySelector(".rs-section-title").textContent = t("status.delay_cause");
+    var causeHtml;
+    if (status === "no_data") {
+      causeHtml = '<span style="color:var(--text-muted)">' + t("status.no_data") + '</span>';
+    } else if (cause) {
+      causeHtml = escapeHtml(cause);
+    } else {
+      causeHtml = '<span style="color:var(--text-muted)">' + t("status.none") + '</span>';
+    }
+    causeSection.querySelector(".rs-cause-text").innerHTML = causeHtml;
+    // Updated time section
+    var updatedSection = modal.querySelector(".rs-updated-section");
+    updatedSection.querySelector(".rs-info-label").textContent = t("status.updated");
+    var fused = window.DataFusion ? window.DataFusion.getFusedData() : null;
+    var updateTime = "";
+    if (fused && fused.lastUpdate) {
+      var d = new Date(fused.lastUpdate);
+      updateTime = d.getHours().toString().padStart(2,"0") + ":" + d.getMinutes().toString().padStart(2,"0");
+    } else if (status === "no_data") {
+      updateTime = t("status.no_data");
+    } else {
+      updateTime = t("status.unknown");
+    }
+    updatedSection.querySelector(".rs-updated-time").textContent = updateTime;
+    // Show modal
     modal.classList.add("active");
     document.body.classList.add("modal-open");
   }
 
   function closeModal() {
-    const modal = document.getElementById("lineDetailModal");
+    var modal = document.getElementById("lineDetailModal");
     if (!modal) return;
     modal.classList.remove("active");
     document.body.classList.remove("modal-open");
   }
 
-  // -- Init --
-  let _latestFusedData = null;
+  let _latestLines = null;
+  let _latestOrder = null;
 
   function init() {
     const container = document.getElementById("realtimeStatusContainer");
     if (!container) return;
 
-    if (!window.DataFusion) {
-      container.innerHTML = `<div class="rs-error">${t("status.load_error")}</div>`;
-      console.error("[RealtimeView] DataFusion not available");
-      return;
+    function renderLinesList(container, linesObj, lineOrderArr) {
+      DataState.renderList(container, linesObj, { mode: "realtime", lineOrder: lineOrderArr });
     }
 
-    // Fallback: try loading cached data from IndexedDB
-    if (window.RailwayRTC) {
-      window.RailwayRTC.loadDelayInfo().then(function(delayInfo) {
-        if (delayInfo && Object.keys(delayInfo).length > 0 && window.UNIFIED_LINES) {
-          const cachedData = { version: 0, timestamp: new Date().toISOString(), lines: {}, lineOrder: [], odptOperatorsLoaded: 0, totalLines: Object.keys(window.UNIFIED_LINES).length };
-          Object.keys(window.UNIFIED_LINES).forEach(function(lid) {
-            const line = window.UNIFIED_LINES[lid];
-            const delay = delayInfo[lid] || { status: "normal", maxDelay: 0, interval: null, cause: null };
-            cachedData.lines[lid] = Object.assign({}, line, { delayInfo: delay });
-          });
-          _latestFusedData = cachedData;
-          try { render(container, cachedData); }
-          catch (e) { console.error("[RealtimeView] Cache render error:", e.message); }
-          console.log("[RealtimeView] Loaded cached delay info for " + Object.keys(delayInfo).length + " lines");
+    function getLines() {
+      // Priority 1: DataFusion fused data (has delay info)
+      if (window.DataFusion) {
+        var fused = window.DataFusion.getFusedData();
+        if (fused && fused.lines && Object.keys(fused.lines).length > 0) return fused;
+      }
+      // Priority 2: Direct UNIFIED_LINES (raw data, no delay info)
+      if (window.UNIFIED_LINES && Object.keys(window.UNIFIED_LINES).length > 0) {
+        var lpsOrder = (window.LinePresentationService && window.UNIFIED_LINES) ? window.LinePresentationService.getDisplayOrder(window.UNIFIED_LINES) : []; return { lines: window.UNIFIED_LINES, lineOrder: lpsOrder };
+      }
+      return null;
+    }
+
+    function render() {
+      var fused = getLines();
+      if (!fused || !fused.lines || Object.keys(fused.lines).length === 0) {
+        container.innerHTML = '<div class="rs-loading"><div class="rs-loading-spinner"></div><span>' + t("status.loading") + '</span></div>';
+        return;
+      }
+      _latestLines = fused.lines;
+      _latestOrder = fused.lineOrder || [];
+      try {
+        renderLinesList(container, fused.lines, _latestOrder);
+      } catch (e) {
+        container.innerHTML = '<div class="rs-error">' + t('status.render_error') + '</div>';
+      }
+    }
+
+    // Immediate check first
+    render();
+
+    // Poll for UNIFIED_LINES (handles async data loading)
+    var _pollCount = 0;
+    var _pollTimer = setInterval(function() {
+      _pollCount++;
+      var fused = getLines();
+      if (fused && fused.lines && Object.keys(fused.lines).length > 0) {
+        clearInterval(_pollTimer);
+        render();
+      } else if (_pollCount > 20) {
+        // After 6 seconds, give up polling
+        clearInterval(_pollTimer);
+        if (!container.querySelector(".rs-line-card")) {
+          container.innerHTML = '<div class="rs-empty">' + t("status.load_error") + '</div>';
         }
-      }).catch(function(e) { console.warn("[RealtimeView] Cache load error:", e.message); });
+      }
+    }, 300);
+
+    // Subscribe to DataFusion updates for live status
+    if (window.DataFusion) {
+      window.DataFusion.subscribe(function(fusedData) {
+        if (fusedData && fusedData.lines && Object.keys(fusedData.lines).length > 0) {
+          render();
+        }
+      });
     }
 
-    window.DataFusion.subscribe((fusedData) => {
-      _latestFusedData = fusedData;
-      try { render(container, fusedData); }
-      catch (e) { console.error("[RealtimeView] Render error:", e.message); }
-    });
-
-    // Card click -> open modal
-    container.addEventListener("click", (e) => {
-      const card = e.target.closest(".rs-line-card");
-      if (!card || !_latestFusedData) return;
-      clearSelectedCards();
-      card.classList.add("selected");
-      openModal(card.dataset.line, _latestFusedData);
-    });
-
-    // Modal close handlers
-    const modal = document.getElementById("lineDetailModal");
+    // Setup modal handlers
+    var modal = document.getElementById('lineDetailModal');
     if (modal) {
-      modal.querySelector(".rs-modal-close").addEventListener("click", () => {
-        closeModal();
+      modal.querySelector('.rs-modal-close').addEventListener('click', closeModal);
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) closeModal();
+      });
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeModal();
+      });
+    }
+
+    // Card click handler
+    container.addEventListener('click', function(e) {
+      var card = e.target.closest('.rs-line-card');
+      if (card && _latestLines) {
         clearSelectedCards();
-      });
-      modal.addEventListener("click", (e) => {
-        if (e.target === modal) {
-          closeModal();
-          clearSelectedCards();
-        }
-      });
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") {
-          closeModal();
-          clearSelectedCards();
-        }
-      });
+        card.classList.add('selected');
+        openModal(card.dataset.line, _latestLines);
+      }
+    });
     }
-
-    // Language change -> re-render
-    if (typeof window.onLanguageChange === "function") {
-      window.onLanguageChange(() => {
-        const data = window.DataFusion.getFusedData();
-        if (data) render(container, data);
-        if (modal?.classList.contains("active") && _latestFusedData) {
-          const selected = document.querySelector(".rs-line-card.selected");
-          if (selected) openModal(selected.dataset.line, _latestFusedData);
-        }
-      });
-    }
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", init);
-  } else {
-    init();
-  }
+    if (typeof window.onLanguageChange === "function") { window.onLanguageChange(function() { render(); }); }
+  init();
 })();

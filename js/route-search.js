@@ -151,6 +151,62 @@
    * Get which lines connect two adjacent stations
    */
   const _lineCache = new Map();
+  /**
+   * Build a reverse map: lineName -> lineId (for first match)
+   */
+  let _nameToIdCache = null;
+  function getNameToIdMap() {
+    if (_nameToIdCache) return _nameToIdCache;
+    _nameToIdCache = {};
+    for (const lineId of Object.keys(window.UNIFIED_LINES)) {
+      const line = window.UNIFIED_LINES[lineId];
+      if (line && line.name) { _nameToIdCache[line.name] = lineId; }
+    }
+    return _nameToIdCache;
+  }
+
+  /**
+   * Convert a BFS route result into RouteSegment[] array.
+   */
+  function buildRouteSegments(route) {
+    if (!route || !route.lineInfo || route.lineInfo.length === 0) return [];
+    const segments = [];
+    const nameToId = getNameToIdMap();
+    const lineOrder = window.LINE_STATION_ORDER || {};
+    for (let i = 0; i < route.lineInfo.length; i++) {
+      const seg = route.lineInfo[i];
+      const lineName = seg.lines[0] || null;
+      const lineId = lineName ? (nameToId[lineName] || null) : null;
+      let direction = 0;
+      if (lineId && lineOrder[lineId]) {
+        const o = lineOrder[lineId];
+        const fromIdx = o[seg.from], toIdx = o[seg.to];
+        direction = toIdx > fromIdx ? 1 : (toIdx < fromIdx ? -1 : 0);
+      }
+      let duration = null;
+      if (lineId && window.RailwayDB && lineOrder[lineId]) {
+        const durArr = window.RailwayDB.getLineDurations(lineId);
+        const o = lineOrder[lineId];
+        if (durArr && durArr.length > 0 && o[seg.from] != null && o[seg.to] != null) {
+          const fi = o[seg.from], ti = o[seg.to];
+          if (ti > fi && ti <= durArr.length) {
+            let d = 0;
+            for (let j = fi; j < ti; j++) d += durArr[j] || 2;
+            duration = d;
+          }
+        }
+      }
+      segments.push({ type: 'ride', lineId, lineName, fromStation: seg.from, toStation: seg.to, duration, direction, fare: null, walking: null });
+      if (i < route.lineInfo.length - 1) {
+        const nextLineName = route.lineInfo[i+1].lines[0] || null;
+        if (nextLineName && nextLineName !== lineName) {
+          segments.push({ type: 'transfer', station: seg.to, fromLine: lineName, toLines: route.lineInfo[i+1].lines, walking: null, walkingDuration: null });
+        }
+      }
+    }
+    return segments;
+  }
+
 
   function getLinesForSegment(station1, station2) {
     const key = station1 + '||' + station2;
@@ -201,7 +257,8 @@
     findStationsByTerm: findStationsByTerm,
     buildStationGraph: buildStationGraph,
     getLinesForSegment: getLinesForSegment,
-    invalidateGraphCache: function() { _graphCache = null; }
+    invalidateGraphCache: function() { _graphCache = null; },
+    buildRouteSegments: buildRouteSegments
   };
 
 })();

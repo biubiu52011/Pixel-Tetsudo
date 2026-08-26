@@ -1,1 +1,79 @@
-<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src https:; upgrade-insecure-requests; frame-src https://www.openstreetmap.org; object-src none;"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="theme-color" content="#008803"><meta name="mobile-web-app-capable" content="yes"><meta name="description" content="Pixel Tetsudo - Search History"><meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()"><meta name="referrer" content="strict-origin-when-cross-origin"><title> | PIXEL TETSUDO</title><link rel="icon" href="../pixel-tetsudo.ico" type="image/x-icon"><link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="../css/lang-bar.css"></head><body><div id="app"><header class="pixel-header"><div class="header-container"><div class="lang-switcher-wrapper"><button id="langToggleBtn" class="lang-toggle-btn" title="Switch Language" aria-haspopup="listbox" aria-expanded="false" aria-label="Switch language"><svg class="lang-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">        <circle cx="12" cy="12" r="10" stroke="white" stroke-width="2"/>        <ellipse cx="12" cy="12" rx="4" ry="10" stroke="white" stroke-width="2"/>        <line x1="2" y1="12" x2="22" y2="12" stroke="white" stroke-width="2"/>        <path d="M4.5 6h15M4.5 18h15" stroke="white" stroke-width="1.5"/>    </svg></button><div id="langSwitcher" class="lang-switcher"><div class="lang-options" role="listbox" aria-label="Select language"><button class="lang-btn active" data-lang="ja" role="option" aria-selected="true">{</button><button class="lang-btn" data-lang="zh" role="option" aria-selected="false"></button><button class="lang-btn" data-lang="ko" role="option" aria-selected="false">???</button><button class="lang-btn" data-lang="en" role="option" aria-selected="false">English</button></div></div></div><div class="header-text"><h1 class="pixel-title" data-i18n="app.title">Pixel Tetsudo</h1></div></div></header><nav class="pixel-tabs"><a href="home.html" class="tab-btn" data-tab="search" data-i18n="tab.search">H</a><a href="realtime.html" class="tab-btn" data-tab="status" data-i18n="tab.status">^s</a><a href="trains.html" class="tab-btn" data-tab="trains" data-i18n="tab.realtime">Ԉʒu</a><a href="history.html" class="tab-btn active" data-tab="history" data-i18n="tab.history"></a></nav><section id="tab-history" class="tab-content active"><div class="history-empty" data-i18n="history.empty">܂</div></section><footer class="pixel-footer" data-i18n="app.footer">c 2026 Pixel Tetsudo</footer></div><script src="../js/translations.js"></script><script src="../js/common.js"></script><script src="../js/lang-init.js"></script><script src="../js/history.js"></script></body></html>
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src https:; upgrade-insecure-requests; frame-src https://www.openstreetmap.org; object-src none;">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#008803">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="description" content="Pixel Tetsudo - Search History">
+<meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(self)">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Pixel Tetsudo</title>
+<link rel="icon" type="image/x-icon" href="../images/pixel-tetsudo.ico">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/lang-bar.css">
+</head>
+<body>
+<div id="app">
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src https:; upgrade-insecure-requests; frame-src https://www.openstreetmap.org; object-src none;"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="theme-color" content="#008803"><meta name="mobile-web-app-capable" content="yes"><meta name="description" content="Pixel Tetsudo - Route Search"><meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(self)"><meta name="referrer" content="strict-origin-when-cross-origin"><title>Pixel Tetsudo</title><link rel="icon" href="../images/pixel-tetsudo.ico" type="image/x-icon">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/lang-bar.css">
+<link rel="stylesheet" href="../css/tourism-styles.css">
+</head>
+<body>
+<div id="app">
+<header class="pixel-header">
+
+<div class="header-container">
+<div class="header-text">
+<h1 class="pixel-title" data-i18n="app.title">
+Pixel Tetsudo</h1>
+</div>
+<div class="lang-switcher-wrapper">
+<button id="langToggleBtn">
+<img src="../images/Language.png" alt="Language" class="lang-icon"></button>
+<div id="langSwitcher" class="lang-switcher">
+<div class="lang-options" role="listbox" aria-label="Select language">
+<button class="lang-btn active" data-lang="ja" role="option" aria-selected="true">
+日本語</button>
+<button class="lang-btn" data-lang="zh">
+中文</button>
+<button class="lang-btn" data-lang="ko" role="option" aria-selected="false">
+한국어</button>
+<button class="lang-btn" data-lang="en" role="option" aria-selected="false">
+English</button>
+</div>
+</div>
+</header>
+
+<nav class="pixel-tabs">
+<a href="home.html" class="tab-btn" data-tab="search" data-i18n="tab.search">
+線路検索</a><a href="realtime.html" class="tab-btn" data-tab="status" data-i18n="tab.status">
+運行状況</a>
+<a href="trains.html" class="tab-btn" data-tab="trains" data-i18n="tab.realtime">
+列車リアルタイム</a>
+<a href="history.html" class="tab-btn" data-tab="history" data-i18n="tab.history">
+履歴</a>
+</nav>
+<section id="tab-history" class="tab-content active">
+<div id="historyContainer" class="pixel-card">
+  <div id="historyEmpty" class="history-empty" data-i18n="history.empty">
+    検索履歴はありません
+  </div>
+  <div id="historyList" class="history-list"></div>
+</div>
+</section><footer class="pixel-footer" data-i18n="app.footer">
+© 2026 Pixel Tetsudo</footer>
+<script src="../data/core/db-loader.js"></script>
+<script src="../js/translations.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/lang-init.js"></script>
+<script src="../js/history.js"></script>
+</body>
+</html>
