@@ -1,14 +1,1 @@
-{
-  "version": "1.0",
-  "created_at": "",
-  "requested_by": "",
-  "reason": "",
-  "approvals": [],
-  "removed_entities": {
-    "lines": [],
-    "stations": [],
-    "relations": []
-  },
-  "notes": "",
-  "ci_bypass_code": ""
-}
+{"removed_entities": {"lines": ["Yamanote"], "stations": [], "relations": [], "tourism": []}, "reason": "test", "approved_by": "test", "approved_at": "2026-01-01"}
