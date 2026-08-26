@@ -45,7 +45,7 @@ jobs:
           actual=$(sha256sum data/core/railway_data.json | cut -d' ' -f1)
           echo "Expected: $expected"
           echo "Actual:   $actual"
-          if [ "$actual" != "$expected" ]; then
+          if [ "$(echo "$actual" | tr [:upper:] [:lower:])" != "$(echo "$expected" | tr [:upper:] [:lower:])" ]; then
             echo "::error::Canonical SHA mismatch! Do not modify railway_data.json"
             exit 1
           fi
