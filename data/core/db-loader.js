@@ -43,7 +43,7 @@
         var tx = db.transaction(RT_STORE_NAME, "readonly");
         var req = tx.objectStore(RT_STORE_NAME).get(key);
         req.onsuccess = function() { resolve(req.result ? req.result.value : null); };
-        req.onerror = function() { reject(req.error); };
+        req.onerror = function() { reject(tx.error); };
       });
     });
   }
@@ -61,55 +61,260 @@
   var loaded = false;
   var error = null;
 
-  function load() {
+  // Apply station data from an object with .stations, .lines, .tourism structure
+  function applyData(data) {
+    window.STATION_COORDS = {};
+    Object.keys(data.stations).forEach(function(id) {
+      var s = data.stations[id];
+      if (s.lat && s.lng) {
+        window.STATION_COORDS[id] = [s.lat, s.lng];
+      }
+    });
+
+    window.STATION_NAME_MAP = data.name_map || {};
+    window.EN_STATION_NAME_MAP = {};
+    Object.keys(window.STATION_NAME_MAP).forEach(function(jp) {
+      var v = window.STATION_NAME_MAP[jp];
+      if (v && v.en) window.EN_STATION_NAME_MAP[v.en] = jp;
+    });
+
+    window.UNIFIED_LINES = data.lines || {};
+    Object.keys(window.UNIFIED_LINES).forEach(function(lid) {
+      var l = window.UNIFIED_LINES[lid];
+      if (!l.durations) l.durations = [2] * (l.stations ? l.stations.length : 0);
+      if (!l.throughServices) l.throughServices = [];
+      if (!l.transferStations) l.transferStations = [];
+    });
+
+    window.TOURISM_DATA = data.tourism || {};
+    window.TOURISM_STATIONS = Object.keys(window.TOURISM_DATA);
+
+    // Build canonical StationLine relation
+    window.STATION_LINES = {};
+    if (data.stationLines) {
+      Object.assign(window.STATION_LINES, data.stationLines);
+    } else {
+      Object.keys(window.UNIFIED_LINES).forEach(function(lid) {
+        var line = window.UNIFIED_LINES[lid];
+        if (line.stations) {
+          line.stations.forEach(function(sid, order) {
+            if (!window.STATION_LINES[sid]) window.STATION_LINES[sid] = [];
+            window.STATION_LINES[sid].push({line_id: lid, station_order: order});
+          });
+        }
+      });
+    }
+
+    // Build line->station order map
+    window.LINE_STATION_ORDER = {};
+    if (data.lineStationOrder) {
+      Object.assign(window.LINE_STATION_ORDER, data.lineStationOrder);
+    } else {
+      Object.keys(window.UNIFIED_LINES).forEach(function(lid) {
+        var line = window.UNIFIED_LINES[lid];
+        if (line.stations) {
+          window.LINE_STATION_ORDER[lid] = {};
+          line.stations.forEach(function(sid, order) {
+            window.LINE_STATION_ORDER[lid][sid] = order;
+          });
+        }
+      });
+    }
+
+    // ========== Unified Railway Data Access Layer ==========
+    window.RailwayDB = {
+      // Station queries
+      getStation: function(id) { return data.stations[id] || null; },
+      getStations: function() { return data.stations; },
+      getStationLocation: function(id) {
+        var s = data.stations[id];
+        return s && s.lat && s.lng ? [s.lat, s.lng] : null;
+      },
+      getStationLines: function(id) { return window.STATION_LINES[id] || []; },
+      getStationName: function(id, lang) {
+        if (!id) return null;
+        var nm = window.STATION_NAME_MAP;
+        if (lang === 'en') {
+          var enMap = window.EN_STATION_NAME_MAP || {};
+          if (nm[id] && nm[id].en) return nm[id].en;
+          for (var k in nm) { if (nm[k].en === id) return nm[k].ja || k; }
+          return id;
+        }
+        return nm[id] && nm[id].ja ? nm[id].ja : id;
+      },
+
+      // Line queries
+      getLine: function(id) { return data.lines[id] || null; },
+      getAllLines: function() { return data.lines; },
+      getLineStations: function(id) {
+        var line = data.lines[id];
+        return line ? line.stations || [] : [];
+      },
+      getLineStationOrder: function(lineId, stationId) {
+        var orderMap = window.LINE_STATION_ORDER[lineId];
+        return orderMap ? orderMap[stationId] : null;
+      },
+      getLineColors: function() {
+        var colors = {};
+        Object.keys(data.lines).forEach(function(k){ colors[k] = data.lines[k].color; });
+        return colors;
+      },
+
+      // Transfer queries
+      getTransferStations: function(stationId) {
+        var lines = window.STATION_LINES[stationId] || [];
+        if (lines.length < 2) return [];
+        var transfers = [];
+        lines.forEach(function(sl){
+          var line = data.lines[sl.line_id];
+          if (line && line.transferStations) {
+            line.transferStations.forEach(function(ts){
+              if (ts.station === stationId) transfers.push(ts.connects || []);
+            });
+          }
+        });
+        return transfers.length > 0 ? transfers[0] : [];
+      },
+
+      // Nearby queries
+      getNearbyStations: function(lat, lng, radiusKm, limit) {
+        limit = limit || 10;
+        radiusKm = radiusKm || 2;
+        var results = [];
+        Object.keys(data.stations).forEach(function(id) {
+          var s = data.stations[id];
+          if (!s.lat || !s.lng) return;
+          var d = Math.sqrt(Math.pow(s.lat-lat,2)+Math.pow(s.lng-lng,2))*111;
+          if (d <= radiusKm) results.push({id: id, dist: d, name: s});
+        });
+        results.sort(function(a,b){return a.dist-b.dist;});
+        return results.slice(0, limit).map(function(r){return r.id;});
+      },
+      getNearbySpots: function(lat, lng, radiusKm, limit) {
+        limit = limit || 10;
+        radiusKm = radiusKm || 5;
+        var results = [];
+        Object.keys(data.tourism || {}).forEach(function(sid) {
+          var ts = data.tourism[sid];
+          if (!ts.spots) return;
+          ts.spots.forEach(function(sp){
+            var spLat = sp.lat || (sp.coord && sp.coord[0]);
+            var spLng = sp.lng || (sp.coord && sp.coord[1]);
+            if (!spLat || !spLng) return;
+            var d = Math.sqrt(Math.pow(spLat-lat,2)+Math.pow(spLng-lng,2))*111;
+            if (d <= radiusKm) results.push({stationId: sid, spot: sp, dist: d});
+          });
+        });
+        results.sort(function(a,b){return a.dist-b.dist;});
+        return results.slice(0, limit);
+      },
+
+      // Name map
+      getNameMap: function() { return data.name_map; },
+      resolveStationName: function(id, lang) {
+        if (!id) return null;
+        lang = lang || window.currentLang || 'ja';
+        // 1. Check station entity name fields
+        var s = data.stations[id];
+        if (s) {
+          var n = s['name' + lang.charAt(0).toUpperCase() + lang.slice(1)];
+          if (n) return n;
+          if (lang === 'en' && s.nameEn) return s.nameEn;
+          if (lang === 'zh' && s.nameZh) return s.nameZh;
+          if (lang === 'ko' && s.nameKo) return s.nameKo;
+        }
+        // 2. Check name_map directly (Japanese key == id)
+        var nm = data.name_map;
+        if (nm[id]) {
+          var v = nm[id];
+          if (typeof v === 'string') return v;
+          if (typeof v === 'object' && v[lang]) return v[lang];
+          if (typeof v === 'object' && v.ja) return v.ja;
+        }
+        // 3. Search name_map by value match (romanized -> Japanese key)
+        var valToKey = resolveStationName._valToKey;
+        if (!valToKey) {
+          valToKey = {};
+          Object.keys(nm).forEach(function(jpKey) {
+            var val = nm[jpKey];
+            if (typeof val === 'string') {
+              valToKey[val.toLowerCase()] = jpKey;
+            } else if (typeof val === 'object' && val.ja) {
+              valToKey[jpKey.toLowerCase()] = val.ja;
+            }
+          });
+          resolveStationName._valToKey = valToKey;
+        }
+        var matchedKey = valToKey[id.toLowerCase()];
+        if (matchedKey) {
+          var mv = nm[matchedKey];
+          if (typeof mv === 'string') return mv;
+          if (typeof mv === 'object' && mv[lang]) return mv[lang];
+          if (typeof mv === 'object' && mv.ja) return mv.ja;
+          return matchedKey;
+        }
+        // 4. Fallback: return id
+        return id;
+      },
+
+      // Tourism
+      getTourism: function() { return data.tourism; },
+      getSpot: function(station, spotName) {
+        var ts = data.tourism ? data.tourism[station] : null;
+        if (!ts) return null;
+        return ts.spots.find(function(s) { return s.name === spotName; }) || null;
+      },
+
+      // Line query helpers (compatibility for modules that used window.UNIFIED_LINES)
+      getLines: function() { return window.UNIFIED_LINES || {}; },
+      getAllLineIds: function() { return window.UNIFIED_LINES ? Object.keys(window.UNIFIED_LINES) : []; },
+      hasLine: function(id) { return !!(window.UNIFIED_LINES && window.UNIFIED_LINES[id]); },
+      getLineDurations: function(id) {
+        var l = window.UNIFIED_LINES ? window.UNIFIED_LINES[id] : null;
+        return l ? (l.durations || []) : [];
+      },
+      getLineTransferStations: function(id) {
+        var l = window.UNIFIED_LINES ? window.UNIFIED_LINES[id] : null;
+        return l ? (l.transferStations || []) : [];
+      },
+      getLineOrder: function(id) { return window.LINE_STATION_ORDER ? window.LINE_STATION_ORDER[id] : null; },
+
+      // Schema info
+      getSchema: function() {
+        return {
+          lineCount: Object.keys(data.lines).length,
+          stationCount: Object.keys(data.stations).length,
+          stationLineCount: Object.keys(window.STATION_LINES).length,
+          nameMapCount: Object.keys(data.name_map).length
+        };
+      }
+    };
+  }
+function load() {
     if (loaded) return Promise.resolve();
+
+    // Strategy A: if file:// protocol, skip fetch (CORS blocks it) and use script-based data directly.
+    // Strategy B: if http/https, try fetch first, fall back to script data on failure.
+    var isFileProtocol = (window.location.protocol === 'file:');
+
+    if (isFileProtocol) {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', '../data/core/railway_data.json', false);
+      try { xhr.send(null); if (xhr.status === 200 || xhr.status === 0) { var data = JSON.parse(xhr.responseText); applyData(data); loaded = true; console.log("[DbLoader] Data loaded from railway_data.json: " + Object.keys(window.STATION_COORDS).length + " stations, " + Object.keys(window.TOURISM_DATA).length + " tourism"); return Promise.resolve(); } } catch(e) {}
+      if (window.RAILWAY_DATA && window.RAILWAY_DATA.stations) { applyData(window.RAILWAY_DATA); loaded = true; return Promise.resolve(); }
+      error = new Error("No data source available under file:// protocol");
+      console.error("[DbLoader] Failed to load data under file:// protocol");
+      return Promise.reject(error);
+    }
+
+    // HTTP/HTTPS: try fetch first
     return fetch(DATA_FILE)
       .then(function(res) {
         if (!res.ok) throw new Error("HTTP " + res.status);
         return res.json();
       })
       .then(function(data) {
-        // Station coordinates
-        window.STATION_COORDS = {};
-        Object.keys(data.stations).forEach(function(id) {
-          var s = data.stations[id];
-          window.STATION_COORDS[id] = [s.lat, s.lng];
-        });
-
-        // Station name maps
-        window.STATION_NAME_MAP = data.name_map || {};
-        window.EN_STATION_NAME_MAP = {};
-        Object.keys(window.STATION_NAME_MAP).forEach(function(jp) {
-          window.EN_STATION_NAME_MAP[window.STATION_NAME_MAP[jp]] = jp;
-        });
-
-        // Railway lines
-        window.UNIFIED_LINES = data.lines || {};
-        Object.keys(window.UNIFIED_LINES).forEach(function(lid) {
-          var l = window.UNIFIED_LINES[lid];
-          if (!l.durations) l.durations = [2] * (l.stations ? l.stations.length : 0);
-          if (!l.throughServices) l.throughServices = [];
-          if (!l.transferStations) l.transferStations = [];
-        });
-
-        // Tourism data
-        window.TOURISM_DATA = data.tourism || {};
-        window.TOURISM_STATIONS = Object.keys(window.TOURISM_DATA);
-
-        // Raw data access for advanced features
-        window.RailwayDB = {
-          getStation: function(id) { return data.stations[id] || null; },
-          getNameMap: function() { return data.name_map; },
-          getLine: function(id) { return data.lines[id] || null; },
-          getAllLines: function() { return data.lines; },
-          getTourism: function() { return data.tourism; },
-          getSpot: function(station, spotName) {
-            var ts = data.tourism[station];
-            if (!ts) return null;
-            return ts.spots.find(function(s) { return s.name === spotName; }) || null;
-          }
-        };
-
+        applyData(data);
         loaded = true;
         console.log("[DbLoader] Data loaded: " +
           Object.keys(data.stations).length + " stations, " +
@@ -118,6 +323,33 @@
       })
       .catch(function(err) {
         error = err;
+        // Dynamic fallback: load railway-data.js only when needed
+        if (!window._railwayDataFallbackLoaded) {
+          window._railwayDataFallbackLoaded = true;
+          var fbScript = document.createElement('script');
+          fbScript.src = '../data/core/railway-data.js';
+          fbScript.onload = function() {
+            if (window.RAILWAY_DATA && window.RAILWAY_DATA.stations) {
+              applyData(window.RAILWAY_DATA);
+              loaded = true;
+              console.log("[DbLoader] Data loaded from railway-data.js (dynamic fallback): " +
+                Object.keys(window.STATION_COORDS).length + " stations, " +
+                Object.keys(window.UNIFIED_LINES).length + " lines");
+            } else {
+              console.error("[DbLoader] railway-data.js loaded but RAILWAY_DATA not found");
+              throw new Error("Fallback data unavailable");
+            }
+          };
+          fbScript.onerror = function() {
+            console.error("[DbLoader] Failed to load fallback railway-data.js");
+            throw err;
+          };
+          document.head.appendChild(fbScript);
+          return new Promise(function(resolve, reject) {
+            fbScript.onload = function() { resolve(); };
+            fbScript.onerror = function() { reject(err); };
+          });
+        }
         console.error("[DbLoader] Failed to load:", err.message);
         throw err;
       });
@@ -137,10 +369,17 @@
     loadDelayInfo: function() { return window.RTCache.loadDelayInfo(); }
   };
 
-  // Auto-load on DOM ready
+  // Auto-load on DOM ready, deferring one tick to let synchronous scripts finish.
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", load);
+    document.addEventListener("DOMContentLoaded", function() { setTimeout(load, 0); });
   } else {
-    load();
+    setTimeout(load, 0);
   }
+
+  // ========== Unhandled Promise Rejection Listener ==========
+  // Catches any ODPT fetch or async errors that escape internal catch blocks
+  window.addEventListener('unhandledrejection', function(event) {
+    console.warn('[PixelTetsudo] Unhandled promise rejection:', event.reason ? event.reason.message || event.reason : event.reason);
+    event.preventDefault();
+  });
 })();

@@ -1,80 +1,40 @@
-﻿# === Sakura Transit - Git Ignore ===
-
-# Build artifacts / temp files
-*.tmp
-*.bak
-*.orig
-*.log
-*.txt
-
-# Encrypted data (keep in repo but don't edit accidentally)
-data/api-keys.enc
-
-# Node.js server dependencies
-server/node_modules/
-
-# OS files
-.DS_Store
-Thumbs.db
-desktop.ini
-
-# IDE
-.vscode/
-.idea/
-
-# Screenshots
-screenshot_*.png
-screenshots/
-
-# Helper scripts used for data generation (optional - keep if needed)
-_build_*
-_fix_*
-_write_*
-getinformation-jp-kanto.js
-jreast_kanto.html
-jreast_page.html
-kanto.json
-
-# Environment variables
-.env
-
-# Build output directories
-dist/
-dist_backup_*/
-
-# Python cache
+# Python
+Python/
 __pycache__/
 *.pyc
+*.pyo
 
-# Python dev scripts
-*.py
+# Git
+.git/
 
-# Base64 temp files
-_b*.b64
-_test.txt
-_write_build.py
-temp_*
+# OS
+.DS_Store
+Thumbs.db
 
-# Node build artifacts
-node_modules/
+# Backup files
+*.bak
+*.orig
+*.tmp
 
-# Generated data / mapping files
-data/station-coords-jp.js
-data/station-name-map.js
-js/railway-unified.js
-js/redirect-odpt.js
+# Dev scripts
+scripts/
+_fix*.py
+clean_css.py
+fix_render.py
+rewrite_*.py
+update_html.py
+test.py
+api_doc.txt
+*_b64.txt
+*_debug.txt
+*_result.txt
 
-# Python data files
-*.pkl
+# Data artifacts
+data/core/railway.db
+data/geo_results.json
 
-# Dev/test artifacts
-oc.html
-API_KEYS_REFERENCE.md
-analyze.js
-data-fusion.b64
+# Images cache
+images/*/_files.txt
 
-# Dev artifacts
-_chk.js
-data/sql/
-data/core/config
-
+# VSCode
+.vscode/
