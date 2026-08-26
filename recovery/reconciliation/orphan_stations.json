@@ -1,0 +1,177 @@
+{
+  "timestamp": "2026-08-27T04:25:46.390801",
+  "total_orphan_stations": 1480,
+  "single_line_refs": 1239,
+  "multi_line_refs": 241,
+  "orphans_in_source": 0,
+  "orphans_not_in_source": 1480,
+  "sample_orphans": [
+    " Fujisawa",
+    "Abura-Jima",
+    "Aburazaka",
+    "Adachi_Kodai",
+    "Agano",
+    "Aida-Mejiro-Dai",
+    "Aiko",
+    "Aiko-Ishida",
+    "Aizu-Hinohara",
+    "Aizu-Hongō",
+    "Aizu-Kamo",
+    "Aizu-Kawaguchi",
+    "Aizu-Koshi",
+    "Aizu-Minamiwa",
+    "Aizu-Miyashita",
+    "Aizu-Nakagawa",
+    "Aizu-Nishikawa",
+    "Aizu-Oshio",
+    "Aizu-Sakamoto",
+    "Aizu-Sakashita",
+    "Aizu-Shiozawa",
+    "Aizu-Takada",
+    "Aizu-Toyogawa",
+    "Aizu-Wakamatsu",
+    "Aizu-Yanagi",
+    "Aizu-Yokota",
+    "Aizuwakamatsu",
+    "Akabuchi",
+    "Akagawa",
+    "Akagi",
+    "Akai",
+    "Akasaka-Gotsuji",
+    "Akayu",
+    "Akazuchi_Shgakko_Mae",
+    "Akita",
+    "Akita-Shirakami",
+    "Amori",
+    "Anamori-Inari",
+    "Anda",
+    "Anko-Gishima",
+    "Annaka",
+    "Aoba",
+    "Aodasai",
+    "Aohara",
+    "Aoi",
+    "Aojima-guchi",
+    "Aomigawa",
+    "Aomori",
+    "Aomori-Goshogawara",
+    "Aono"
+  ],
+  "top_multi_ref_orphans": {
+    "Morioka": [
+      "Nikko",
+      "Sanriku",
+      "Tazawako",
+      "TohokuMain",
+      "Tsugaru",
+      "Yonezawa"
+    ],
+    "Samukawa": [
+      "Tokaido",
+      "Kiryu",
+      "Sagami",
+      "Sano"
+    ],
+    "Kobayashi": [
+      "Ryomo",
+      "TohokuMain",
+      "Tsugaru",
+      "Yonezawa"
+    ],
+    "Chiba": [
+      "SobuRapid",
+      "ChuoSobuLocal",
+      "Sotobo",
+      "Uchibo"
+    ],
+    "Iriya": [
+      "Hibiya",
+      "Kiryu",
+      "Sagami",
+      "Sano"
+    ],
+    "Ishinomaki": [
+      "Ishinomaki",
+      "Senseki",
+      "SensekiTohoku",
+      "Yamagata"
+    ],
+    "Sendai": [
+      "Senseki",
+      "SensekiTohoku",
+      "Senzan",
+      "Yamagata"
+    ],
+    "Kita-Yamagata": [
+      "KeikyuMain",
+      "OuMain",
+      "Sakuragi",
+      "Senzan"
+    ],
+    "Niigata": [
+      "Echigo",
+      "Hakushin",
+      "Shinetsu",
+      "Shinonoi"
+    ],
+    "Nogi": [
+      "Suigun",
+      "TohokuMain",
+      "Tsugaru",
+      "Yonezawa"
+    ],
+    "Hanamaki": [
+      "Kamaishi",
+      "TohokuMain",
+      "Tsugaru",
+      "Yonezawa"
+    ],
+    "Nishi-Ogikubo": [
+      "ChuoRapid",
+      "Joban",
+      "Marunouchi",
+      "ChuoSobuLocal"
+    ],
+    "Atsugi": [
+      "Kiryu",
+      "OdakyuOdawara",
+      "Sagami",
+      "Sano"
+    ],
+    "Yamoto": [
+      "Senseki",
+      "SensekiTohoku",
+      "Yamagata"
+    ],
+    "Oi-Kubo": [
+      "ChuoRapid",
+      "Marunouchi",
+      "ChuoSobuLocal"
+    ],
+    "Shin-Shiroi": [
+      "TohokuMain",
+      "Tsugaru",
+      "Yonezawa"
+    ],
+    "Kurami": [
+      "Kiryu",
+      "Sagami",
+      "Sano"
+    ],
+    "Iwate-Funaoka": [
+      "TohokuMain",
+      "Tsugaru",
+      "Yonezawa"
+    ],
+    "Hōchaku-ji": [
+      "TohokuMain",
+      "Tsugaru",
+      "Yonezawa"
+    ],
+    "Rokuhara": [
+      "TohokuMain",
+      "Tsugaru",
+      "Yonezawa"
+    ]
+  }
+}
