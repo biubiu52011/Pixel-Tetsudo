@@ -309,7 +309,7 @@
       "trains.train_count": "\u5217",
       "unit.hour": "\u5c0f\u65f6",
       "unit.minute": "\u5206\u949f",
-      "validate.input_required": "\u8bf7\u8f93\u5165\u51fa\u53d1\u7ad9\u548c\u5230\u8fbe\u7ad9",,
+      "validate.input_required": "\u8bf7\u8f93\u5165\u51fa\u53d1\u7ad9\u548c\u5230\u8fbe\u7ad9",
       "config.center_key_placeholder": "ODPT_CENTER 密钥",
       "config.challenge_key_placeholder": "CHALLENGE 密钥",
       "config.title": "API 密钥设置",
