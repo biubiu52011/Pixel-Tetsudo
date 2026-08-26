@@ -1,6 +1,6 @@
 {
   "task": "2.2.4 Data Access API Validation",
-  "timestamp": "2026-08-27T04:42:51.464609",
+  "timestamp": "2026-08-27T04:55:02.509024",
   "pass": false,
   "issues": [
     "name_map missing for Shinjuku",
@@ -8,6 +8,7 @@
     "name_map missing for Tokyo",
     "name_map missing for Ueno",
     "name_map missing for Akihabara",
+    "SotetsuMain[Yokohama]: order=13, expected=4",
     "Yurakucho in Yurakucho: stationLines says 25, lineStationOrder says 30",
     "Kawasaki in Nambu: stationLines says 0, lineStationOrder says 22",
     "Yokohama in SotetsuMain: stationLines says 4, lineStationOrder says 13",
