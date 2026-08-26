@@ -1,0 +1,26 @@
+{
+  "task": "2.2.6 Candidate Runtime Validation",
+  "timestamp": "2026-08-27T04:45:44.570948",
+  "candidate_sha256": "27ED38FC6910781268E231906ECC683367D1C93FCA725CBE803EB167B4B2240E",
+  "production_sha256": "D759E38E5F54C0077137F4E137D0F32CD4DEBB01C6FDB68D5658C2B421E7677B",
+  "checks": {
+    "schema": true,
+    "lines_gte_152": true,
+    "stations_gte_503": true,
+    "no_lost_lines": true,
+    "no_lost_stations": true,
+    "relation_consistent": true,
+    "orphan_count": 1383,
+    "production_unchanged": true,
+    "no_mojibake": true,
+    "durations_match": true
+  },
+  "overall_pass": true,
+  "summary": {
+    "lines": 156,
+    "stations": 503,
+    "stationLines": 1841,
+    "lineStationOrder": 156,
+    "orphans": 1383
+  }
+}

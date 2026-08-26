@@ -1,0 +1,26 @@
+{
+  "entity_counts": {
+    "lines": 156,
+    "stations": 503,
+    "name_map": 1493,
+    "stationLines": 1841,
+    "lineStationOrder": 156,
+    "tourism": 93
+  },
+  "relations": {
+    "sl_mm": 0,
+    "lso_mm": 0
+  },
+  "quality": {
+    "bad_image": 0,
+    "bad_nameJa": 0,
+    "dur_mm": 0,
+    "null_region": 67
+  },
+  "orphans": {
+    "total_refs": 1686,
+    "unique_ids": 1383
+  },
+  "zero_coord": 139,
+  "pass": true
+}
