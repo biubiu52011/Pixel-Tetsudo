@@ -1,0 +1,55 @@
+{
+  "task": "2.10.1 Production Recovery Baseline Freeze",
+  "timestamp": "2026-08-27T05:12:54.301017",
+  "git": {
+    "head": "428c28b Task 2.10: GitHub Pages production verification complete",
+    "head_sha": "428c28b0df3f3e18a92a4766e30f3b41ff343504",
+    "branch": "master",
+    "remote": "https://github.com/biubiu52011/Pixel-Tetsudo.git"
+  },
+  "canonical": {
+    "file": "data/core/railway_data.json",
+    "sha256": "27ED38FC6910781268E231906ECC683367D1C93FCA725CBE803EB167B4B2240E",
+    "size_bytes": 809324
+  },
+  "entity_counts": {
+    "lines": 156,
+    "stations": 503,
+    "name_map": 1493,
+    "stationLines": 1841,
+    "lineStationOrder": 156,
+    "tourism_stations": 93,
+    "tourism_spots": 396
+  },
+  "github_pages": "https://biubiu52011.github.io/Pixel-Tetsudo",
+  "ci_status": "SHA validation updated to 27ED38FC...",
+  "recovery_summary": {
+    "original_production_lines": 60,
+    "restored_lines": 96,
+    "total_lines": 156,
+    "lost_lines": 0,
+    "lost_stations": 0,
+    "modifications_to_existing": 0
+  },
+  "known_limitations": {
+    "orphan_station_references": 1686,
+    "unique_orphan_station_ids": 1383,
+    "zero_coordinate_stations": 139,
+    "lines_missing_color": 14,
+    "tourism_orphan_refs": 36,
+    "major_cities_missing_name_map": [
+      "Tokyo",
+      "Ueno",
+      "Osaka",
+      "Nagoya",
+      "Kyoto"
+    ]
+  },
+  "source_artifacts": {
+    "phase13_backup": "data/core/railway_data_phase13_pre_coordinate_fix_backup.json",
+    "historical_source": "recovery/source/railway_152_raw.json",
+    "candidate": "recovery/output/railway_data_canonical_final_candidate.json",
+    "freeze_backup": "recovery/freeze/railway_data_pre_canonical_replacement.json"
+  },
+  "baseline_rule": "Monotonic Data Preservation: new Canonical must not reduce entity counts without approved removal manifest"
+}
