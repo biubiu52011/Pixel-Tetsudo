@@ -1,0 +1,11 @@
+{
+  "task": "2.6 Final",
+  "sha": "27ED38FC6910781268E231906ECC683367D1C93FCA725CBE803EB167B4B2240E",
+  "lines": 156,
+  "stations": 503,
+  "lost_lines": 0,
+  "lost_real_stations": 0,
+  "bakuro_dedup": 1,
+  "orphan_refs": 1686,
+  "overall_pass": true
+}
