@@ -1,0 +1,20 @@
+{
+  "task": "2.7 RailwayDB Post-Replacement Verification",
+  "timestamp": "2026-08-27T04:55:44.454956",
+  "issues": [],
+  "overall_pass": true,
+  "checks": {
+    "lines": 156,
+    "stations": 503,
+    "name_map": 1493,
+    "stationLines": 1841,
+    "lineStationOrder": 156,
+    "tourism": 93,
+    "prod_lines_preserved": true,
+    "relation_sl_mm": 0,
+    "relation_lso_mm": 0,
+    "orphan_refs": 1686,
+    "unique_orphans": 1383,
+    "new_lines": 96
+  }
+}
