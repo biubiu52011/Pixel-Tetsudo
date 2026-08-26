@@ -38,7 +38,7 @@ English</button>
 <a href="home.html" class="tab-btn active" data-tab="search" data-i18n="tab.search">
 線路検索</a><a href="realtime.html" class="tab-btn" data-tab="status" data-i18n="tab.status">
 運行状況</a>
-<a href="trains.html" class="tab-btn" data-tab="trains" data-i18n="tab.realtime">
+<a href="trains.html" class="tab-btn" data-tab="trains" data-i18n="tab.trains">
 列車リアルタイム</a>
 <a href="history.html" class="tab-btn" data-tab="history" data-i18n="tab.history">
 履歴</a>
@@ -49,13 +49,13 @@ English</button>
 <div class="input-group">
 <label class="input-label" data-i18n="search.fromLabel">
 出発駅</label>
-<input type="text" id="searchFrom" class="search-input" data-i18n-placeholder="search.fromPlaceholder" placeholder="出白駅を入力"><div id="fromSuggestions" class="suggestions">
+<input type="text" id="searchFrom" class="search-input" data-i18n-placeholder="search.fromPlaceholder" placeholder="出発駅を入力"><div id="fromSuggestions" class="suggestions">
 </div>
 </div>
 <div class="input-group">
 <label class="input-label" data-i18n="search.toLabel">
-着到駅</label>
-<input type="text" id="searchTo" class="search-input" data-i18n-placeholder="search.toPlaceholder" placeholder="着到駅を入力"><div id="toSuggestions" class="suggestions">
+到着駅</label>
+<input type="text" id="searchTo" class="search-input" data-i18n-placeholder="search.toPlaceholder" placeholder="到着駅を入力"><div id="toSuggestions" class="suggestions">
 </div>
 </div>
 <button id="searchBtn" class="search-btn" data-i18n="search.btn">
@@ -67,7 +67,7 @@ English</button>
 <div id="smModule" class="sm-module pixel-card">
   <div class="sm-header">
     <h2 data-i18n="tourism.title">
-觀光ギホード</h2>
+観光ガイド</h2>
   </div>
   <div class="sm-location-bar">
     <div class="sm-location-info">
@@ -76,7 +76,7 @@ English</button>
       <span id="smStationDisplay" class="sm-station-display">
 </span>
     </div>
-    <button id="smRelocateBtn" class="sm-relocate-btn" title="現在位置に改正" aria-label="Relocate to current position">
+    <button id="smRelocateBtn" class="sm-relocate-btn" title="現在位置に更新" aria-label="Relocate to current position">
 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/><line x1="8" y1="2" x2="8" y2="4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="8" y1="12" x2="8" y2="14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="8" x2="4" y2="8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="12" y1="8" x2="14" y2="8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
 </button>
   </div>
@@ -96,8 +96,7 @@ English</button>
 <section id="tab-trains" class="tab-content">
 </section>
 <section id="tab-history" class="tab-content">
-</section>
-<footer class="pixel-footer" data-i18n="app.footer">
+</section>\n</section>\n<footer class="pixel-footer" data-i18n="app.footer">
 © 2026 Pixel Tetsudo</footer>
 </div>
 <script src="../data/core/db-loader.js"></script><script src="../js/translations.js"></script><script src="../js/common.js"></script><script src="../js/lang-init.js"></script><script src="../js/route-search.js"></script><script src="../js/search-ui.js"></script><script src="../js/sightseeing.js"></script><script src="../js/tab-switch.js"></script><script src="../js/history.js"></script></body>
