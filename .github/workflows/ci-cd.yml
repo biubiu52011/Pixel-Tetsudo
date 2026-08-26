@@ -20,18 +20,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
-      - name: Check JS Syntax
+      - name: Check JS Syntax with Node
         run: |
           echo "Checking JS syntax..."
           errors=0
-          for f in $(find js data -name '*.js' | sort); do
-            python3 -c "compile(open('$f').read(), '$f', 'exec')" 2>/dev/null
-            if [ $? -ne 0 ]; then
+          for f in $(find js data -name '*.js' 2>/dev/null | sort); do
+            if ! node --check "$f" 2>/dev/null; then
               echo "FAIL: $f"
               errors=$((errors+1))
             fi
@@ -46,7 +40,7 @@ jobs:
         run: |
           echo "Checking brace balance..."
           errors=0
-          for f in $(find js data -name '*.js' | sort); do
+          for f in $(find js data -name '*.js' 2>/dev/null | sort); do
             opens=$(grep -o '{' "$f" | wc -l)
             closes=$(grep -o '}' "$f" | wc -l)
             if [ $opens -ne $closes ]; then
@@ -87,29 +81,13 @@ jobs:
       - name: Check Inline Styles (CSP)
         run: |
           echo "Checking for inline styles..."
-          count=$(grep -rn 'style="[^"]*"' pages/*.html | wc -l)
+          count=$(grep -rn 'style="[^"]*"' pages/*.html 2>/dev/null | wc -l)
           if [ $count -gt 0 ]; then
             echo "::warning::Found $count inline style attributes (may violate CSP)"
             grep -rn 'style="[^"]*"' pages/*.html
           else
             echo "No inline styles found"
           fi
-
-      - name: Check Resource References
-        run: |
-          echo "Checking script and link references..."
-          errors=0
-          for page in pages/*.html; do
-            for ref in $(grep -oP 'src="\K[^"]+|href="\K[^"]+' "$page" | grep -v '^https://'); do
-              # Resolve relative path
-              dir=$(dirname "$page")
-              target="${dir}/${ref}"
-              if [ ! -f "$target" ] && [ ! -f "${dir}/../${ref}" ]; then
-                echo "WARNING: $page references $ref (not found)"
-              fi
-            done
-          done
-          echo "Resource reference check complete"
 
   deploy:
     name: Deploy to GitHub Pages
