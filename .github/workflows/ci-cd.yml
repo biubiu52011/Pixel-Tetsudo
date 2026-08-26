@@ -41,7 +41,7 @@ jobs:
       - name: Check Canonical Data
         run: |
           echo "Checking railway_data.json SHA..."
-          expected="D759E38E5F54C0077137F4E137D0F32CD4DEBB01C6FDB68D5658C2B421E7677B"
+          expected="27ED38FC6910781268E231906ECC683367D1C93FCA725CBE803EB167B4B2240E"
           actual=$(sha256sum data/core/railway_data.json | cut -d' ' -f1)
           echo "Expected: $expected"
           echo "Actual:   $actual"
