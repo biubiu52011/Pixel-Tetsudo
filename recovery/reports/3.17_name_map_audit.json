@@ -1,0 +1,4790 @@
+{
+  "audit_date": "2026-08-28",
+  "task": "3.17 name_map Data Completeness Audit",
+  "summary": {
+    "total_stations": 503,
+    "total_name_map_entries": 1493,
+    "stations_covered_by_name_map": 254,
+    "stations_missing_from_name_map": 217,
+    "entity_only_stations": 32,
+    "coverage_percentage": 50
+  },
+  "station_categories": {
+    "resolvable": [
+      {
+        "station_id": "Abiko",
+        "line_references": [
+          "HitachiNakaKaimin"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "我孫子"
+      },
+      {
+        "station_id": "Akabane",
+        "line_references": [
+          "KeihinTohoku",
+          "Saikyo",
+          "Joban",
+          "ShonanShinjuku",
+          "HitachiNakaKaimin",
+          "Oyama",
+          "TohokuMain",
+          "Tsugaru",
+          "Yonezawa"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "赤羽"
+      },
+      {
+        "station_id": "Akabane-Iwabuchi",
+        "line_references": [
+          "Mita",
+          "Shinjuku",
+          "Namboku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "赤羽岩淵"
+      },
+      {
+        "station_id": "Akabanebashi",
+        "line_references": [
+          "Oedo"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "赤羽橋"
+      },
+      {
+        "station_id": "Akasaka",
+        "line_references": [
+          "Kounan"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "赤坂"
+      },
+      {
+        "station_id": "Akasaka-mitsuke",
+        "line_references": [
+          "Marunouchi",
+          "Chiyoda",
+          "Hanzomon",
+          "MarunouchiBranch"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "赤坂見附"
+      },
+      {
+        "station_id": "Akatsuka",
+        "line_references": [
+          "Yurakucho",
+          "Oedo",
+          "Keikyu"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "赤塚"
+      },
+      {
+        "station_id": "Akigawa",
+        "line_references": [
+          "Yurakucho"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "秋川"
+      },
+      {
+        "station_id": "Akihabara",
+        "line_references": [
+          "KeihinTohoku",
+          "ChuoRapid",
+          "JobanLocal",
+          "Hibiya",
+          "Tozai",
+          "HitachiNakaKaimin",
+          "SobuRapid",
+          "Yamanote",
+          "ChuoSobuLocal",
+          "TsukubaExpress"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "秋葉原"
+      },
+      {
+        "station_id": "Akishima",
+        "line_references": [],
+        "has_name_fields": false,
+        "name_map_entry": "昭島"
+      },
+      {
+        "station_id": "Akitsu",
+        "line_references": [
+          "SeibuShinjuku",
+          "SeibuIkebukuro",
+          "SeibuYamaguchi",
+          "SeibuEn",
+          "Ikebukuro",
+          "Seibu_Shinjuku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "秋津"
+      },
+      {
+        "station_id": "Aomi",
+        "line_references": [
+          "Oedo",
+          "Yurikamome",
+          "Rinko"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "青海"
+      },
+      {
+        "station_id": "Aoyama-itchome",
+        "line_references": [
+          "Mita",
+          "Shinjuku",
+          "Hanzomon",
+          "Namboku",
+          "MarunouchiBranch"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "青山一丁目"
+      },
+      {
+        "station_id": "Ariake",
+        "line_references": [
+          "Keiyo",
+          "Musashino",
+          "Yurikamome",
+          "TamaMonorail",
+          "Rinko"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "有明"
+      },
+      {
+        "station_id": "Asaka",
+        "line_references": [
+          "SobuRapid",
+          "Tojo"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "朝霞"
+      },
+      {
+        "station_id": "Asakusa",
+        "line_references": [
+          "Ginza",
+          "Asakusa",
+          "TobuIsesaki",
+          "Skytree",
+          "TsukubaExpress",
+          "TobuNikko",
+          "TobuSkytree"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "浅草"
+      },
+      {
+        "station_id": "Atami",
+        "line_references": [
+          "Tokaido",
+          "Ito"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "熱海"
+      },
+      {
+        "station_id": "Azabu-Juban",
+        "line_references": [
+          "Saikyo",
+          "Joban",
+          "ShonanShinjuku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "麻布十番"
+      },
+      {
+        "station_id": "Azabu-juban",
+        "line_references": [],
+        "has_name_fields": false,
+        "name_map_entry": "麻布十番"
+      },
+      {
+        "station_id": "Chigasaki",
+        "line_references": [
+          "Tokaido",
+          "Kiryu",
+          "Sagami",
+          "Sano"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "茅ケ崎"
+      },
+      {
+        "station_id": "Chuo-rinkan",
+        "line_references": [
+          "TokyuToyoko"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "中央林間"
+      },
+      {
+        "station_id": "Daiba",
+        "line_references": [
+          "Yurikamome",
+          "Rinko"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "台場"
+      },
+      {
+        "station_id": "Daimon",
+        "line_references": [
+          "Yurakucho",
+          "Oedo"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "大門"
+      },
+      {
+        "station_id": "Den-en-chofu",
+        "line_references": [
+          "Asakusa"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "田園調布"
+      },
+      {
+        "station_id": "Ebisu",
+        "line_references": [
+          "ChuoRapid",
+          "Saikyo",
+          "Joban",
+          "ShonanShinjuku",
+          "Oedo",
+          "HitachiNakaKaimin",
+          "SobuRapid",
+          "Keikyu",
+          "Yamanote"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "恵比寿"
+      },
+      {
+        "station_id": "Fujimi",
+        "line_references": [
+          "SobuRapid"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "富士見"
+      },
+      {
+        "station_id": "Fujisawa",
+        "line_references": [
+          "Tokaido"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "藤沢"
+      },
+      {
+        "station_id": "Funabashi",
+        "line_references": [
+          "HitachiNakaKaimin",
+          "ChuoSobuLocal",
+          "Noda"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "船橋"
+      },
+      {
+        "station_id": "Futamatao",
+        "line_references": [
+          "Ome"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "二俣尾"
+      },
+      {
+        "station_id": "Ginza",
+        "line_references": [
+          "Ginza",
+          "Hibiya",
+          "Fukutoshin",
+          "MarunouchiBranch"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "銀座"
+      },
+      {
+        "station_id": "Gotanda",
+        "line_references": [
+          "HitachiNakaKaimin",
+          "Keikyu",
+          "Yamanote"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "五反田"
+      },
+      {
+        "station_id": "Hachioji",
+        "line_references": [
+          "Saikyo",
+          "ShonanShinjuku",
+          "Yurakucho",
+          "SeibuShinjuku",
+          "Keio",
+          "SeibuIkebukuro",
+          "SeibuChichibu",
+          "SobuRapid",
+          "SeibuYamaguchi",
+          "Ikebukuro",
+          "KeioMain",
+          "Seibu_Shinjuku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "八王子"
+      },
+      {
+        "station_id": "Haijima",
+        "line_references": [
+          "Ome",
+          "Itsukaichi"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "拝島"
+      },
+      {
+        "station_id": "Hakusan",
+        "line_references": [
+          "SeibuShinjuku",
+          "SeibuIkebukuro",
+          "SeibuYamaguchi",
+          "SeibuEn",
+          "Ikebukuro",
+          "Seibu_Shinjuku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "白山"
+      },
+      {
+        "station_id": "Hamamatsucho",
+        "line_references": [
+          "KeihinTohoku",
+          "ChuoRapid",
+          "Fukutoshin",
+          "HitachiNakaKaimin",
+          "Yamanote"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "浜松町"
+      },
+      {
+        "station_id": "Hanno",
+        "line_references": [
+          "SobuRapid"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "飯能"
+      },
+      {
+        "station_id": "Hanzomon",
+        "line_references": [
+          "Mita",
+          "Shinjuku",
+          "Hanzomon",
+          "Namboku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "半蔵門"
+      },
+      {
+        "station_id": "Harajuku",
+        "line_references": [
+          "Chiyoda",
+          "Yamanote"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "原宿"
+      },
+      {
+        "station_id": "Hashimoto",
+        "line_references": [
+          "Yurakucho",
+          "Keio",
+          "KeioMain",
+          "KeioSagami",
+          "Kiryu",
+          "Sagami",
+          "Sano"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "橋本"
+      },
+      {
+        "station_id": "Hasuda",
+        "line_references": [
+          "Takasaki",
+          "TohokuMain",
+          "Tsugaru",
+          "Yonezawa"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "蓮田"
+      },
+      {
+        "station_id": "Hatchobori",
+        "line_references": [
+          "Hibiya"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "八丁堀"
+      },
+      {
+        "station_id": "Hibiya",
+        "line_references": [
+          "Ginza",
+          "Hibiya",
+          "Hibiya",
+          "Chiyoda",
+          "MarunouchiBranch"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "日比谷"
+      },
+      {
+        "station_id": "Higashi-Akiru",
+        "line_references": [
+          "Itsukaichi"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "東秋留"
+      },
+      {
+        "station_id": "Higashi-Ikebukuro",
+        "line_references": [
+          "Fukutoshin"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "東池袋"
+      },
+      {
+        "station_id": "Higashi-Jujo",
+        "line_references": [
+          "KeihinTohoku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "東十条"
+      },
+      {
+        "station_id": "Higashi-Kanagawa",
+        "line_references": [
+          "KeihinTohoku",
+          "Musashino",
+          "TamaMonorail"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "東神奈川"
+      },
+      {
+        "station_id": "Higashi-Koganei",
+        "line_references": [
+          "SeibuShinjuku",
+          "SeibuIkebukuro",
+          "SeibuYamaguchi",
+          "SeibuEn",
+          "Ikebukuro",
+          "Komii",
+          "Seibu_Shinjuku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "東小金井"
+      },
+      {
+        "station_id": "Higashi-Murayama",
+        "line_references": [
+          "SeibuShinjuku",
+          "YokohamaBlue",
+          "SeibuIkebukuro",
+          "SeibuYamaguchi",
+          "Ikebukuro",
+          "Kokubunji",
+          "Seibu_Shinjuku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "東村山"
+      },
+      {
+        "station_id": "Higashi-Ome",
+        "line_references": [
+          "Ome"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "東青梅"
+      },
+      {
+        "station_id": "Higashi-Totsuka",
+        "line_references": [
+          "Nambu",
+          "SotetsuMain"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "東戸塚"
+      },
+      {
+        "station_id": "Higashi-Zushi",
+        "line_references": [
+          "YokohamaBlue"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "東逗子"
+      },
+      {
+        "station_id": "Higashi-murayama",
+        "line_references": [
+          "Yurakucho"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "東村山"
+      },
+      {
+        "station_id": "Hinatawada",
+        "line_references": [
+          "Ome"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "日向和田"
+      },
+      {
+        "station_id": "Hino",
+        "line_references": [
+          "Yurakucho"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "日野"
+      },
+      {
+        "station_id": "Hinode",
+        "line_references": [
+          "Yurikamome",
+          "Rinko"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "日の出"
+      },
+      {
+        "station_id": "Hiratsuka",
+        "line_references": [
+          "YokohamaBlue",
+          "Kanagawa"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "平塚"
+      },
+      {
+        "station_id": "Honjo",
+        "line_references": [
+          "SobuRapid"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "本庄"
+      },
+      {
+        "station_id": "Horinouchi",
+        "line_references": [
+          "SotetsuMain",
+          "KeikyuKurihama"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "堀ノ内"
+      },
+      {
+        "station_id": "Ichigaya",
+        "line_references": [
+          "Musashino",
+          "Mita",
+          "Shinjuku",
+          "Chiyoda",
+          "Hanzomon",
+          "Namboku",
+          "TamaMonorail"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "市ケ谷"
+      },
+      {
+        "station_id": "Iidabashi",
+        "line_references": [
+          "SobuRapid"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "飯田橋"
+      },
+      {
+        "station_id": "Ikebukuro",
+        "line_references": [
+          "Saikyo",
+          "ShonanShinjuku",
+          "Marunouchi",
+          "Yurakucho",
+          "Do-Arakawa",
+          "Oedo",
+          "Fukutoshin",
+          "SeibuShinjuku",
+          "SeibuIkebukuro",
+          "HitachiNakaKaimin",
+          "Keikyu",
+          "Ikebukuro",
+          "Seibu_Shinjuku",
+          "Tojo"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "池袋"
+      },
+      {
+        "station_id": "Isehara",
+        "line_references": [
+          "YokohamaBlue",
+          "OdakyuOdawara"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "伊勢原"
+      },
+      {
+        "station_id": "Ishigamimae",
+        "line_references": [
+          "Ome"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "石神前"
+      },
+      {
+        "station_id": "Ishikawacho",
+        "line_references": [
+          "KeihinTohoku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "石川町"
+      },
+      {
+        "station_id": "Isogo",
+        "line_references": [
+          "KeihinTohoku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "磯子"
+      },
+      {
+        "station_id": "Itabashi",
+        "line_references": [],
+        "has_name_fields": false,
+        "name_map_entry": "板橋"
+      },
+      {
+        "station_id": "Ito",
+        "line_references": [
+          "Tokaido",
+          "Ito"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "伊東"
+      },
+      {
+        "station_id": "Jimbocho",
+        "line_references": [
+          "Mita",
+          "Shinjuku",
+          "Chiyoda",
+          "Hanzomon",
+          "Namboku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "神保町"
+      },
+      {
+        "station_id": "Kachidoki",
+        "line_references": [
+          "SobuLocal",
+          "Oedo",
+          "Yurikamome",
+          "Rinko"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "勝どき"
+      },
+      {
+        "station_id": "Kamagaya",
+        "line_references": [
+          "HitachiNakaKaimin",
+          "Noda"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "鎌ヶ谷"
+      },
+      {
+        "station_id": "Kamakura",
+        "line_references": [
+          "Tokaido"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "鎌倉"
+      },
+      {
+        "station_id": "Kamata",
+        "line_references": [
+          "KeihinTohoku",
+          "Asakusa",
+          "KeikyuAirport",
+          "TokyuTamagawa"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "蒲田"
+      },
+      {
+        "station_id": "Kami-Nakazato",
+        "line_references": [
+          "KeihinTohoku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "上中里"
+      },
+      {
+        "station_id": "Kamiyacho",
+        "line_references": [
+          "Mita",
+          "Shinjuku",
+          "Hanzomon",
+          "Namboku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "神谷町"
+      },
+      {
+        "station_id": "Kanda",
+        "line_references": [
+          "KeihinTohoku",
+          "ChuoRapid",
+          "JobanLocal",
+          "HitachiNakaKaimin",
+          "SobuRapid",
+          "Yamanote",
+          "ChuoSobuLocal"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "神田"
+      },
+      {
+        "station_id": "Kannai",
+        "line_references": [
+          "KeihinTohoku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "関内"
+      },
+      {
+        "station_id": "Kashiwa",
+        "line_references": [
+          "HitachiNakaKaimin",
+          "Noda"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "柏"
+      },
+      {
+        "station_id": "Kasumigaseki",
+        "line_references": [
+          "Hibiya",
+          "Chiyoda",
+          "Tojo"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "霞ケ関"
+      },
+      {
+        "station_id": "Kawaguchi",
+        "line_references": [
+          "KeihinTohoku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "川口"
+      },
+      {
+        "station_id": "Kawasaki",
+        "line_references": [
+          "KeihinTohoku",
+          "Musashino",
+          "Tsurumi",
+          "Nambu",
+          "Nambu",
+          "Asakusa",
+          "TamaMonorail"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "川崎"
+      },
+      {
+        "station_id": "Kayabacho",
+        "line_references": [
+          "Keiyo",
+          "Hibiya",
+          "Tozai",
+          "Asakusa",
+          "Fukutoshin",
+          "SobuRapid",
+          "MarunouchiBranch"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "茅場町"
+      },
+      {
+        "station_id": "Kiba",
+        "line_references": [
+          "Tozai"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "木場"
+      },
+      {
+        "station_id": "Kichijoji",
+        "line_references": [
+          "Joban",
+          "Keio",
+          "TokyuDenEn",
+          "ChuoSobuLocal",
+          "KeioInokashira",
+          "KeioMain"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "吉祥寺"
+      },
+      {
+        "station_id": "Kikuna",
+        "line_references": [
+          "Tokaido"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "菊名"
+      },
+      {
+        "station_id": "Kita-Senju",
+        "line_references": [
+          "Shinjuku",
+          "Skytree",
+          "TsukubaExpress"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "北千住"
+      },
+      {
+        "station_id": "Kita-Urawa",
+        "line_references": [
+          "KeihinTohoku",
+          "SobuRapid"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "北浦和"
+      },
+      {
+        "station_id": "Kiyose",
+        "line_references": [
+          "Joban"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "清瀬"
+      },
+      {
+        "station_id": "Kodaira",
+        "line_references": [
+          "Tozai",
+          "Oedo",
+          "Keikyu",
+          "SeibuNakagawa",
+          "Hamura",
+          "Seibu_Shinjuku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "小平"
+      },
+      {
+        "station_id": "Koenji",
+        "line_references": [],
+        "has_name_fields": false,
+        "name_map_entry": "高円寺"
+      },
+      {
+        "station_id": "Koganei",
+        "line_references": [
+          "Komii",
+          "Seibu_Shinjuku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "小金井"
+      },
+      {
+        "station_id": "Koiwa",
+        "line_references": [
+          "SobuLocal",
+          "Keiyo",
+          "TobuIsesaki",
+          "Keisei",
+          "TobuNoda",
+          "SobuRapid",
+          "ChuoSobuLocal",
+          "Skytree",
+          "TobuNikko",
+          "TobuSkytree"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "小岩"
+      },
+      {
+        "station_id": "Kojimachi",
+        "line_references": [
+          "Mita",
+          "Shinjuku",
+          "Chiyoda",
+          "Namboku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "麴町"
+      },
+      {
+        "station_id": "Kokubunji",
+        "line_references": [
+          "Saikyo",
+          "Joban",
+          "Musashino",
+          "ShonanShinjuku",
+          "Yurakucho",
+          "Oedo",
+          "SeibuShinjuku",
+          "SeibuIkebukuro",
+          "TamaMonorail",
+          "Keikyu",
+          "SeibuYamaguchi",
+          "SeibuEn",
+          "Ikebukuro",
+          "Kokubunji",
+          "Seibu_Shinjuku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "国分寺"
+      },
+      {
+        "station_id": "Kokudo",
+        "line_references": [
+          "Nambu"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "国道"
+      },
+      {
+        "station_id": "Kokusai-Tenjijo",
+        "line_references": [
+          "Keiyo",
+          "Oedo",
+          "Yurikamome"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "国際展示場"
+      },
+      {
+        "station_id": "Komagome",
+        "line_references": [
+          "ChuoRapid",
+          "JobanLocal",
+          "HitachiNakaKaimin",
+          "SobuRapid",
+          "Yamanote"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "駒込"
+      },
+      {
+        "station_id": "Korakuen",
+        "line_references": [
+          "Marunouchi",
+          "SobuRapid"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "後楽園"
+      },
+      {
+        "station_id": "Koshigaya",
+        "line_references": [
+          "SobuRapid",
+          "Skytree"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "越谷"
+      },
+      {
+        "station_id": "Koyasu",
+        "line_references": [
+          "Musashino",
+          "Tsurumi",
+          "TamaMonorail"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "子安"
+      },
+      {
+        "station_id": "Kudanshita",
+        "line_references": [
+          "Mita",
+          "Shinjuku",
+          "Chiyoda",
+          "Hanzomon",
+          "Namboku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "九段下"
+      },
+      {
+        "station_id": "Kugahara",
+        "line_references": [
+          "Nambu"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "久が原"
+      },
+      {
+        "station_id": "Kuki",
+        "line_references": [
+          "Saikyo",
+          "ShonanShinjuku",
+          "SobuRapid",
+          "TohokuMain",
+          "Tsugaru",
+          "Yonezawa"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "久喜"
+      },
+      {
+        "station_id": "Kunitachi",
+        "line_references": [],
+        "has_name_fields": false,
+        "name_map_entry": "国立"
+      },
+      {
+        "station_id": "Kuramae",
+        "line_references": [
+          "SobuLocal"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "蔵前"
+      },
+      {
+        "station_id": "Kurihama",
+        "line_references": [
+          "Yokosuka"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "久里浜"
+      },
+      {
+        "station_id": "Machida",
+        "line_references": [
+          "SotetsuMain"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "町田"
+      },
+      {
+        "station_id": "Machiya",
+        "line_references": [
+          "OdakyuEnoshima",
+          "OdakyuOdawara",
+          "Odawara"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "町屋"
+      },
+      {
+        "station_id": "Makuhari",
+        "line_references": [
+          "HitachiNakaKaimin"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "幕張"
+      },
+      {
+        "station_id": "Meguro",
+        "line_references": [
+          "ChuoRapid",
+          "Hibiya",
+          "Asakusa",
+          "Mita",
+          "Namboku",
+          "HitachiNakaKaimin"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "目黒"
+      },
+      {
+        "station_id": "Mejiro",
+        "line_references": [
+          "ChuoRapid",
+          "Marunouchi",
+          "Oedo",
+          "Keikyu",
+          "Yamanote"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "目白"
+      },
+      {
+        "station_id": "Minami-Senju",
+        "line_references": [
+          "TobuIsesaki",
+          "Keisei",
+          "TobuNoda",
+          "Skytree",
+          "TsukubaExpress",
+          "TobuNikko",
+          "TobuSkytree"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "南千住"
+      },
+      {
+        "station_id": "Minami-Urawa",
+        "line_references": [
+          "KeihinTohoku",
+          "SobuRapid",
+          "SotetsuMain"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "南浦和"
+      },
+      {
+        "station_id": "Minowa",
+        "line_references": [
+          "Do-Arakawa",
+          "TobuIsesaki",
+          "Skytree",
+          "TobuNikko",
+          "TobuSkytree"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "三ノ輪"
+      },
+      {
+        "station_id": "Mita",
+        "line_references": [],
+        "has_name_fields": false,
+        "name_map_entry": "三田"
+      },
+      {
+        "station_id": "Mitaka",
+        "line_references": [
+          "Keio",
+          "KeioMain"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "三鷹"
+      },
+      {
+        "station_id": "Mitake",
+        "line_references": [
+          "Ome"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "御嶽"
+      },
+      {
+        "station_id": "Mitsukoshimae",
+        "line_references": [
+          "Marunouchi",
+          "MarunouchiBranch"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "三越前"
+      },
+      {
+        "station_id": "Miyanohira",
+        "line_references": [
+          "Ome"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "宮ノ平"
+      },
+      {
+        "station_id": "Mizonokuchi",
+        "line_references": [
+          "Nambu"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "溝の口"
+      },
+      {
+        "station_id": "Musashi-Fujisawa",
+        "line_references": [
+          "Nambu",
+          "Ikebukuro"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "武蔵藤沢"
+      },
+      {
+        "station_id": "Musashi-Itsukaichi",
+        "line_references": [
+          "Itsukaichi"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "武蔵五日市"
+      },
+      {
+        "station_id": "Musashi-Kosugi",
+        "line_references": [
+          "Musashino",
+          "Tsurumi",
+          "Nambu",
+          "TamaMonorail",
+          "TokyuDenEn"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "武蔵小杉"
+      },
+      {
+        "station_id": "Musashi-Masuko",
+        "line_references": [
+          "Itsukaichi"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "武蔵増戸"
+      },
+      {
+        "station_id": "Musashi-Sakai",
+        "line_references": [
+          "Ome"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "武蔵境"
+      },
+      {
+        "station_id": "Musashi-Shinjo",
+        "line_references": [
+          "Nambu"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "武蔵新城"
+      },
+      {
+        "station_id": "Musashi-sakai",
+        "line_references": [
+          "Yurakucho"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "武蔵境"
+      },
+      {
+        "station_id": "Nagatacho",
+        "line_references": [
+          "Mita",
+          "Shinjuku",
+          "Chiyoda",
+          "Hanzomon",
+          "Namboku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "永田町"
+      },
+      {
+        "station_id": "Nagatsuta",
+        "line_references": [],
+        "has_name_fields": false,
+        "name_map_entry": "長津田"
+      },
+      {
+        "station_id": "Nakagami",
+        "line_references": [
+          "SeibuChichibu",
+          "Ome"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "中神"
+      },
+      {
+        "station_id": "Nakagawara",
+        "line_references": [
+          "SeibuNakagawa"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "中河原"
+      },
+      {
+        "station_id": "Nakamurabashi",
+        "line_references": [
+          "OdakyuEnoshima",
+          "OdakyuOdawara",
+          "Odawara"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "中村橋"
+      },
+      {
+        "station_id": "Nakano",
+        "line_references": [
+          "Saikyo",
+          "Joban",
+          "Musashino",
+          "ShonanShinjuku",
+          "Tozai",
+          "Oedo",
+          "TamaMonorail",
+          "SobuRapid",
+          "Keikyu",
+          "ChuoSobuLocal",
+          "Seibu_Shinjuku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "中野"
+      },
+      {
+        "station_id": "Nakano-Sakaue",
+        "line_references": [
+          "SobuRapid"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "中野坂上"
+      },
+      {
+        "station_id": "Nakano-fujimicho",
+        "line_references": [
+          "Tozai",
+          "Oedo",
+          "Keikyu"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "中野富士見町"
+      },
+      {
+        "station_id": "Naruse",
+        "line_references": [
+          "Nambu"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "成瀬"
+      },
+      {
+        "station_id": "Negishi",
+        "line_references": [
+          "KeihinTohoku",
+          "Tōnami"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "根岸"
+      },
+      {
+        "station_id": "Nerima",
+        "line_references": [
+          "Ikebukuro",
+          "SeibuToshima",
+          "Yurakucho_Seibu"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "練馬"
+      },
+      {
+        "station_id": "Nezu",
+        "line_references": [
+          "JobanLocal",
+          "Marunouchi",
+          "Do-Arakawa"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "根津"
+      },
+      {
+        "station_id": "Niiza",
+        "line_references": [
+          "Saikyo",
+          "ShonanShinjuku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "新座"
+      },
+      {
+        "station_id": "Ningyocho",
+        "line_references": [
+          "Asakusa",
+          "SobuRapid",
+          "MarunouchiBranch"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "人形町"
+      },
+      {
+        "station_id": "Nippori",
+        "line_references": [
+          "KeihinTohoku",
+          "ChuoRapid",
+          "JobanLocal",
+          "Keisei",
+          "TobuNoda",
+          "HitachiNakaKaimin",
+          "Yamanote",
+          "Nippori_Toneri"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "日暮里"
+      },
+      {
+        "station_id": "Nishi-Kasai",
+        "line_references": [
+          "Keiyo"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "西葛西"
+      },
+      {
+        "station_id": "Nishi-Kawaguchi",
+        "line_references": [
+          "KeihinTohoku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "西川口"
+      },
+      {
+        "station_id": "Nishi-Magome",
+        "line_references": [
+          "TobuIsesaki",
+          "Skytree",
+          "TobuNikko",
+          "TobuSkytree"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "西馬込"
+      },
+      {
+        "station_id": "Nishi-Nippori",
+        "line_references": [
+          "KeihinTohoku",
+          "ChuoRapid",
+          "JobanLocal",
+          "HitachiNakaKaimin",
+          "Yamanote",
+          "Nippori_Toneri"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "西日暮里"
+      },
+      {
+        "station_id": "Nishi-Shinjuku",
+        "line_references": [
+          "SeibuShinjuku",
+          "SeibuYamaguchi",
+          "SeibuEn",
+          "Seibu_Shinjuku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "西新宿"
+      },
+      {
+        "station_id": "Nishi-Tachikawa",
+        "line_references": [
+          "Ome"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "西立川"
+      },
+      {
+        "station_id": "Nishi-Takashimadaira",
+        "line_references": [
+          "Musashino",
+          "TamaMonorail"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "西高島平"
+      },
+      {
+        "station_id": "Nishi-kokubunji",
+        "line_references": [
+          "Yurakucho",
+          "Oedo",
+          "Keikyu"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "西国分寺"
+      },
+      {
+        "station_id": "Nishi-takashimadaira",
+        "line_references": [
+          "Yurakucho",
+          "Tozai",
+          "Oedo"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "西高島平"
+      },
+      {
+        "station_id": "Ochanomizu",
+        "line_references": [
+          "ChuoRapid",
+          "SobuRapid"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "御茶ノ水"
+      },
+      {
+        "station_id": "Odawara",
+        "line_references": [
+          "Tokaido",
+          "YokohamaBlue",
+          "OdakyuEnoshima",
+          "OdakyuOdawara",
+          "Odawara"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "小田原"
+      },
+      {
+        "station_id": "Ofuna",
+        "line_references": [
+          "KeihinTohoku",
+          "Yokosuka",
+          "Tokaido",
+          "ShonanMonorailE"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "大船"
+      },
+      {
+        "station_id": "Oimachi",
+        "line_references": [
+          "Asakusa",
+          "SotetsuMain",
+          "KeikyuKurihama"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "大井町"
+      },
+      {
+        "station_id": "Oji",
+        "line_references": [
+          "KeihinTohoku",
+          "TohokuMain",
+          "Tsugaru",
+          "Yonezawa"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "王子"
+      },
+      {
+        "station_id": "Okachimachi",
+        "line_references": [
+          "KeihinTohoku",
+          "ChuoRapid",
+          "Fukutoshin",
+          "HitachiNakaKaimin",
+          "Yamanote"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "御徒町"
+      },
+      {
+        "station_id": "Ome",
+        "line_references": [
+          "Ome"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "青梅"
+      },
+      {
+        "station_id": "Omori",
+        "line_references": [
+          "KeihinTohoku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "大森"
+      },
+      {
+        "station_id": "Onarimon",
+        "line_references": [
+          "Yurakucho"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "御成門"
+      },
+      {
+        "station_id": "Osaki",
+        "line_references": [
+          "Rinko",
+          "HitachiNakaKaimin",
+          "Keikyu",
+          "Yamanote",
+          "Rinkai"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "大崎"
+      },
+      {
+        "station_id": "Oshiage",
+        "line_references": [
+          "Asakusa",
+          "Hanzomon",
+          "TobuIsesaki",
+          "SobuRapid",
+          "Skytree",
+          "TobuNikko",
+          "TobuSkytree"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "押上"
+      },
+      {
+        "station_id": "Ota",
+        "line_references": [
+          "Takasaki",
+          "Isesaki",
+          "Koizumi"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "太田"
+      },
+      {
+        "station_id": "Otemachi",
+        "line_references": [
+          "Marunouchi",
+          "Mita",
+          "Shinjuku",
+          "Chiyoda",
+          "Hanzomon",
+          "Namboku",
+          "MarunouchiBranch"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "大手町"
+      },
+      {
+        "station_id": "Otsuka",
+        "line_references": [
+          "ChuoRapid",
+          "HitachiNakaKaimin",
+          "Yamanote"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "大塚"
+      },
+      {
+        "station_id": "Otsuka-ekimae",
+        "line_references": [
+          "Do-Arakawa"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "大塚駅前"
+      },
+      {
+        "station_id": "Oyama",
+        "line_references": [
+          "SeibuShinjuku",
+          "SeibuIkebukuro",
+          "SeibuYamaguchi",
+          "Ikebukuro",
+          "Mito",
+          "Ryomo",
+          "Seibu_Shinjuku",
+          "TohokuMain",
+          "Tojo",
+          "Tsugaru",
+          "Yonezawa"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "大山"
+      },
+      {
+        "station_id": "Roppongi",
+        "line_references": [
+          "Saikyo",
+          "Joban",
+          "ShonanShinjuku",
+          "Oedo",
+          "HitachiNakaKaimin"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "六本木"
+      },
+      {
+        "station_id": "Ryogoku",
+        "line_references": [
+          "SobuLocal",
+          "ChuoSobuLocal"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "両国"
+      },
+      {
+        "station_id": "Sagami-Ono",
+        "line_references": [
+          "Tokaido"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "相模大野"
+      },
+      {
+        "station_id": "Saitama-Shintoshin",
+        "line_references": [
+          "KeihinTohoku",
+          "TohokuMain",
+          "Tsugaru",
+          "Yonezawa"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "さいたま新都心"
+      },
+      {
+        "station_id": "Sakado",
+        "line_references": [
+          "SobuRapid"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "坂戸"
+      },
+      {
+        "station_id": "Sakuragicho",
+        "line_references": [
+          "KeihinTohoku",
+          "Nambu"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "桜木町"
+      },
+      {
+        "station_id": "Sasazuka",
+        "line_references": [
+          "OdakyuEnoshima",
+          "KeioMain",
+          "KeioShin",
+          "OdakyuOdawara",
+          "Odawara",
+          "SeibuTamagawa"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "笹塚"
+      },
+      {
+        "station_id": "Sawai",
+        "line_references": [
+          "Ome"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "沢井"
+      },
+      {
+        "station_id": "Seibu-Shinjuku",
+        "line_references": [
+          "SeibuShinjuku",
+          "SeibuIkebukuro",
+          "SeibuYamaguchi",
+          "SeibuEn",
+          "Ikebukuro",
+          "Seibu_Shinjuku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "西武新宿"
+      },
+      {
+        "station_id": "Setagaya",
+        "line_references": [
+          "TokyuToyoko",
+          "OdakyuEnoshima",
+          "OdakyuOdawara",
+          "Odawara",
+          "SeibuTamagawa"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "世田谷"
+      },
+      {
+        "station_id": "Shibuya",
+        "line_references": [
+          "ChuoRapid",
+          "Saikyo",
+          "Joban",
+          "Musashino",
+          "ShonanShinjuku",
+          "Marunouchi",
+          "Tozai",
+          "Mita",
+          "Shinjuku",
+          "Oedo",
+          "Oedo",
+          "Hanzomon",
+          "Namboku",
+          "TokyuToyoko",
+          "OdakyuEnoshima",
+          "TamaMonorail",
+          "SobuRapid",
+          "TokyuDenEn",
+          "Keikyu",
+          "Keikyu",
+          "MarunouchiBranch",
+          "KeioInokashira",
+          "OdakyuOdawara",
+          "Odawara",
+          "SeibuTamagawa"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "渋谷"
+      },
+      {
+        "station_id": "Shimbashi",
+        "line_references": [
+          "KeihinTohoku",
+          "ChuoRapid",
+          "Yurakucho",
+          "Tozai",
+          "Chiyoda",
+          "Fukutoshin",
+          "Yurikamome",
+          "HitachiNakaKaimin",
+          "Yamanote"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "新橋"
+      },
+      {
+        "station_id": "Shin-Kawasaki",
+        "line_references": [],
+        "has_name_fields": false,
+        "name_map_entry": "新川崎"
+      },
+      {
+        "station_id": "Shin-Kemigawa",
+        "line_references": [
+          "Keiyo",
+          "Yurikamome"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "新検見川"
+      },
+      {
+        "station_id": "Shin-Kiba",
+        "line_references": [
+          "Fukutoshin",
+          "Yurikamome",
+          "SobuRapid",
+          "Rinkai"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "新木場"
+      },
+      {
+        "station_id": "Shin-Koyasu",
+        "line_references": [
+          "KeihinTohoku",
+          "Musashino",
+          "Tsurumi",
+          "TamaMonorail"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "新子安"
+      },
+      {
+        "station_id": "Shin-Ochanomizu",
+        "line_references": [
+          "Marunouchi"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "新御茶ノ水"
+      },
+      {
+        "station_id": "Shin-Okachimachi",
+        "line_references": [
+          "JobanLocal",
+          "TsukubaExpress"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "新御徒町"
+      },
+      {
+        "station_id": "Shin-Okubo",
+        "line_references": [
+          "Musashino",
+          "TamaMonorail"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "新大久保"
+      },
+      {
+        "station_id": "Shin-Sugita",
+        "line_references": [
+          "KeihinTohoku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "新杉田"
+      },
+      {
+        "station_id": "Shin-Toyosu",
+        "line_references": [
+          "Oedo"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "新豊洲"
+      },
+      {
+        "station_id": "Shin-Yokohama",
+        "line_references": [
+          "Orange",
+          "SotetsuMain"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "新横浜"
+      },
+      {
+        "station_id": "Shin-kawasaki",
+        "line_references": [
+          "Asakusa"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "新川崎"
+      },
+      {
+        "station_id": "Shin-kiba",
+        "line_references": [
+          "Tozai"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "新木場"
+      },
+      {
+        "station_id": "Shinagawa",
+        "line_references": [
+          "KeihinTohoku",
+          "ChuoRapid",
+          "Tokaido",
+          "Asakusa",
+          "HitachiNakaKaimin",
+          "SobuRapid",
+          "Keikyu",
+          "Yamanote"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "品川"
+      },
+      {
+        "station_id": "Shinanomachi",
+        "line_references": [
+          "Tozai",
+          "Oedo",
+          "Keikyu"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "信濃町"
+      },
+      {
+        "station_id": "Shinjuku",
+        "line_references": [
+          "Saikyo",
+          "Joban",
+          "ShonanShinjuku",
+          "Shinjuku",
+          "Chiyoda",
+          "SeibuShinjuku",
+          "OdakyuEnoshima",
+          "SobuRapid",
+          "ChuoSobuLocal",
+          "KeioMain",
+          "KeioShin",
+          "OdakyuOdawara",
+          "Seibu_Shinjuku",
+          "Odawara"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "新宿"
+      },
+      {
+        "station_id": "Shinjuku-nishiguchi",
+        "line_references": [],
+        "has_name_fields": false,
+        "name_map_entry": "新宿西口"
+      },
+      {
+        "station_id": "Shinjuku-sanchome",
+        "line_references": [
+          "Shinjuku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "新宿三丁目"
+      },
+      {
+        "station_id": "Shinonome",
+        "line_references": [
+          "SobuLocal",
+          "Rinkai"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "東雲"
+      },
+      {
+        "station_id": "Shinsen",
+        "line_references": [
+          "Musashino",
+          "TamaMonorail",
+          "KeioInokashira"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "神泉"
+      },
+      {
+        "station_id": "Shiodome",
+        "line_references": [],
+        "has_name_fields": false,
+        "name_map_entry": "汐留"
+      },
+      {
+        "station_id": "Shiraoka",
+        "line_references": [
+          "SobuRapid"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "白岡"
+      },
+      {
+        "station_id": "Shirokane-Takanawa",
+        "line_references": [
+          "Saikyo",
+          "Joban",
+          "ShonanShinjuku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "白金高輪"
+      },
+      {
+        "station_id": "Shirokane-takanawa",
+        "line_references": [
+          "Tozai"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "白金高輪"
+      },
+      {
+        "station_id": "Shirokanedai",
+        "line_references": [
+          "Mita",
+          "Namboku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "白金台"
+      },
+      {
+        "station_id": "Shonandai",
+        "line_references": [
+          "YokohamaBlue"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "湘南台"
+      },
+      {
+        "station_id": "Suidobashi",
+        "line_references": [
+          "Oedo"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "水道橋"
+      },
+      {
+        "station_id": "Tabata",
+        "line_references": [
+          "KeihinTohoku",
+          "ChuoRapid",
+          "JobanLocal",
+          "HitachiNakaKaimin",
+          "SobuRapid",
+          "Yamanote"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "田端"
+      },
+      {
+        "station_id": "Tachikawa",
+        "line_references": [
+          "Saikyo",
+          "ShonanShinjuku",
+          "Nambu",
+          "Yurakucho",
+          "Ome"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "立川"
+      },
+      {
+        "station_id": "Tachikawa-Kita",
+        "line_references": [
+          "Ome"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "立川北"
+      },
+      {
+        "station_id": "Tachikawa-Minami",
+        "line_references": [
+          "Ome"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "立川南"
+      },
+      {
+        "station_id": "Taito",
+        "line_references": [],
+        "has_name_fields": false,
+        "name_map_entry": "太東"
+      },
+      {
+        "station_id": "Takadanobaba",
+        "line_references": [
+          "ChuoRapid",
+          "Yamanote",
+          "Seibu_Shinjuku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "高田馬場"
+      },
+      {
+        "station_id": "Takaosanguchi",
+        "line_references": [
+          "Yurakucho",
+          "Keio",
+          "KeioMain"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "高尾山口"
+      },
+      {
+        "station_id": "Takashimadaira",
+        "line_references": [
+          "Asakusa",
+          "Oedo",
+          "Keikyu"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "高島平"
+      },
+      {
+        "station_id": "Takebashi",
+        "line_references": [
+          "Chiyoda"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "竹橋"
+      },
+      {
+        "station_id": "Tama",
+        "line_references": [],
+        "has_name_fields": false,
+        "name_map_entry": "多磨"
+      },
+      {
+        "station_id": "Tama-plaza",
+        "line_references": [
+          "TokyuDenEn"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "たまプラーザ"
+      },
+      {
+        "station_id": "Tamachi",
+        "line_references": [
+          "KeihinTohoku",
+          "Rinko",
+          "HitachiNakaKaimin",
+          "Yamanote"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "田町"
+      },
+      {
+        "station_id": "Tamagawa",
+        "line_references": [
+          "TokyuToyoko",
+          "Suigun",
+          "TokyuTamagawa"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "多摩川"
+      },
+      {
+        "station_id": "Tamako",
+        "line_references": [
+          "SeibuTamako"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "多摩湖"
+      },
+      {
+        "station_id": "Tameike-sanno",
+        "line_references": [],
+        "has_name_fields": false,
+        "name_map_entry": "溜池山王"
+      },
+      {
+        "station_id": "Tatsumi",
+        "line_references": [
+          "SobuLocal",
+          "SobuRapid"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "辰巳"
+      },
+      {
+        "station_id": "Tawaramachi",
+        "line_references": [
+          "Ginza",
+          "TobuIsesaki",
+          "Skytree",
+          "TobuNikko",
+          "TobuSkytree"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "田原町"
+      },
+      {
+        "station_id": "Tochomae",
+        "line_references": [
+          "Oedo"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "都庁前"
+      },
+      {
+        "station_id": "Tokyo Big Sight",
+        "line_references": [
+          "Yurikamome"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "東京ビッグサイト"
+      },
+      {
+        "station_id": "Tokyo Teleport",
+        "line_references": [
+          "Keiyo",
+          "Musashino",
+          "Yurikamome",
+          "TamaMonorail"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "東京テレポート"
+      },
+      {
+        "station_id": "Toranomon",
+        "line_references": [
+          "Tozai",
+          "Chiyoda"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "虎ノ門"
+      },
+      {
+        "station_id": "Toride",
+        "line_references": [
+          "HitachiNakaKaimin"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "取手"
+      },
+      {
+        "station_id": "Totsuka",
+        "line_references": [
+          "Nambu"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "戸塚"
+      },
+      {
+        "station_id": "Toyosu",
+        "line_references": [
+          "SobuLocal",
+          "Oedo",
+          "Yurikamome",
+          "Rinko",
+          "SobuRapid"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "豊洲"
+      },
+      {
+        "station_id": "Tsukiji",
+        "line_references": [
+          "Hibiya"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "築地"
+      },
+      {
+        "station_id": "Tsukishima",
+        "line_references": [
+          "SobuLocal",
+          "Asakusa",
+          "Oedo",
+          "Fukutoshin",
+          "Yurikamome",
+          "SobuRapid",
+          "MarunouchiBranch"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "月島"
+      },
+      {
+        "station_id": "Tsukuba",
+        "line_references": [
+          "HitachiNakaKaimin",
+          "TsukubaExpress"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "つくば"
+      },
+      {
+        "station_id": "Tsunashima",
+        "line_references": [
+          "Orange"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "綱島"
+      },
+      {
+        "station_id": "Tsurukawa",
+        "line_references": [
+          "SeibuShinjuku",
+          "SeibuIkebukuro",
+          "SeibuYamaguchi",
+          "Ikebukuro",
+          "OdakyuOdawara",
+          "Seibu_Shinjuku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "鶴川"
+      },
+      {
+        "station_id": "Tsurumi",
+        "line_references": [
+          "KeihinTohoku",
+          "Musashino",
+          "Tsurumi",
+          "OdakyuEnoshima",
+          "TamaMonorail",
+          "OdakyuOdawara",
+          "Odawara"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "鶴見"
+      },
+      {
+        "station_id": "Tsutsujigaoka",
+        "line_references": [
+          "TokyuDenEn"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "つつじヶ丘"
+      },
+      {
+        "station_id": "Ueno-Okachimachi",
+        "line_references": [
+          "Oedo"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "上野御徒町"
+      },
+      {
+        "station_id": "Ueno-hirokoji",
+        "line_references": [
+          "Ginza",
+          "Marunouchi",
+          "Do-Arakawa",
+          "Oedo"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "上野広小路"
+      },
+      {
+        "station_id": "Uenohara",
+        "line_references": [
+          "Keio",
+          "KeioMain"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "上野原"
+      },
+      {
+        "station_id": "Uguisudani",
+        "line_references": [
+          "KeihinTohoku",
+          "ChuoRapid",
+          "JobanLocal",
+          "HitachiNakaKaimin",
+          "Yamanote"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "鶯谷"
+      },
+      {
+        "station_id": "Urawa",
+        "line_references": [
+          "KeihinTohoku",
+          "Saikyo",
+          "ShonanShinjuku",
+          "Takasaki",
+          "SobuRapid",
+          "Oyama",
+          "TohokuMain",
+          "Tsugaru",
+          "Yonezawa"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "浦和"
+      },
+      {
+        "station_id": "Wakoshi",
+        "line_references": [
+          "Yurakucho",
+          "Fukutoshin",
+          "Tojo"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "和光市"
+      },
+      {
+        "station_id": "Warabi",
+        "line_references": [
+          "KeihinTohoku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "蕨"
+      },
+      {
+        "station_id": "Waseda",
+        "line_references": [
+          "Ginza",
+          "SeibuShinjuku",
+          "SeibuIkebukuro",
+          "SeibuYamaguchi",
+          "SeibuEn",
+          "Arakawa",
+          "Ikebukuro",
+          "Seibu_Shinjuku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "早稲田"
+      },
+      {
+        "station_id": "Yamate",
+        "line_references": [
+          "KeihinTohoku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "山手"
+      },
+      {
+        "station_id": "Yamato",
+        "line_references": [
+          "YokohamaBlue",
+          "OdakyuEnoshima",
+          "BanetsuWest",
+          "Kounan",
+          "Mito",
+          "OdakyuOdawara",
+          "Odawara"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "大和"
+      },
+      {
+        "station_id": "Yokohama",
+        "line_references": [
+          "KeihinTohoku",
+          "Tokaido",
+          "TokyuToyoko",
+          "YokohamaBlue",
+          "MinatoMirai",
+          "Orange",
+          "SotetsuMain",
+          "SotetsuMain"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "横浜"
+      },
+      {
+        "station_id": "Yokosuka",
+        "line_references": [
+          "Yokosuka"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "横須賀"
+      },
+      {
+        "station_id": "Yono",
+        "line_references": [
+          "KeihinTohoku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "与野"
+      },
+      {
+        "station_id": "Yoyogi",
+        "line_references": [
+          "Yamanote"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "代々木"
+      },
+      {
+        "station_id": "Yoyogi-Uehara",
+        "line_references": [
+          "Musashino",
+          "Chiyoda",
+          "TokyuToyoko",
+          "OdakyuEnoshima",
+          "TamaMonorail",
+          "OdakyuOdawara",
+          "Odawara",
+          "SeibuTamagawa"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "代々木上原"
+      },
+      {
+        "station_id": "Yumoto",
+        "line_references": [
+          "Tokaido"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "湯本"
+      },
+      {
+        "station_id": "Yurakucho",
+        "line_references": [
+          "KeihinTohoku",
+          "ChuoRapid",
+          "Marunouchi",
+          "Yurakucho",
+          "Yurakucho",
+          "Chiyoda",
+          "Fukutoshin",
+          "HitachiNakaKaimin",
+          "MarunouchiBranch",
+          "Yamanote"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "有楽町"
+      },
+      {
+        "station_id": "Yushima",
+        "line_references": [
+          "Marunouchi",
+          "Do-Arakawa",
+          "Oedo",
+          "Fukutoshin"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "湯島"
+      },
+      {
+        "station_id": "Zushi",
+        "line_references": [
+          "YokohamaBlue"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": "逗子"
+      }
+    ],
+    "missing": [
+      {
+        "station_id": "Adachi",
+        "line_references": [
+          "SobuLocal",
+          "TobuIsesaki",
+          "TobuIsesaki",
+          "Keisei",
+          "TobuNoda",
+          "SobuRapid",
+          "Skytree",
+          "TobuNikko",
+          "TobuSkytree"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Adachi-Kangura",
+        "line_references": [
+          "TobuIsesaki",
+          "Skytree",
+          "TobuNikko",
+          "TobuSkytree"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Akebono",
+        "line_references": [
+          "SobuLocal"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Aoba-dori",
+        "line_references": [
+          "Orange",
+          "SotetsuMain",
+          "Senseki",
+          "Yamagata"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Aoto",
+        "line_references": [
+          "TobuIsesaki",
+          "Skytree",
+          "TobuNikko",
+          "TobuSkytree"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Bay-Cross",
+        "line_references": [
+          "MinatoMirai"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Chichibu",
+        "line_references": [
+          "SeibuChichibu"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Choju",
+        "line_references": [
+          "Tozai"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Chuo-Ku",
+        "line_references": [
+          "YokohamaBlue"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Daizen-ji",
+        "line_references": [
+          "TokyuToyoko"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Denno",
+        "line_references": [
+          "Yurikamome",
+          "Rinko"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Ekimae",
+        "line_references": [
+          "Nambu"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Fuchu",
+        "line_references": [
+          "Yurakucho",
+          "Tozai"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Fuchubashi",
+        "line_references": [
+          "Joban",
+          "Musashino",
+          "TamaMonorail"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Fudosan-mae",
+        "line_references": [
+          "TokyuToyoko"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Futamata-gawa",
+        "line_references": [
+          "TokyuDenEn"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Ginza-hitchome",
+        "line_references": [
+          "Hibiya"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Ginza-yonchome",
+        "line_references": [
+          "Ginza"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Go-komon",
+        "line_references": [
+          "Marunouchi"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Hacchobori",
+        "line_references": [
+          "Do-Arakawa"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Hachiman",
+        "line_references": [
+          "OdakyuEnoshima",
+          "OdakyuOdawara",
+          "Shinetsu",
+          "Odawara"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Hachiman-Honmachi",
+        "line_references": [
+          "Nambu"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Hachiman-gaika",
+        "line_references": [
+          "TokyuDenEn"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Hama-Kawada",
+        "line_references": [
+          "TokyuToyoko"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Harumi",
+        "line_references": [
+          "Joban",
+          "SobuLocal"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Harumi-futago",
+        "line_references": [
+          "Fukutoshin"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Higashi-Hachioji",
+        "line_references": [
+          "SeibuShinjuku",
+          "SeibuIkebukuro",
+          "SeibuChichibu",
+          "Ikebukuro",
+          "Seibu_Shinjuku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Higashi-Kawasaki",
+        "line_references": [
+          "Musashino",
+          "Tsurumi",
+          "TamaMonorail"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Higashi-Maruko",
+        "line_references": [
+          "Musashino",
+          "TamaMonorail",
+          "SeibuNakagawa"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Higashi-Shinbashi",
+        "line_references": [
+          "Oedo"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Higashi-Yamatokoji",
+        "line_references": [
+          "Orange"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Higashi-Yokosuka",
+        "line_references": [
+          "Yokosuka"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Higashi-gotanda",
+        "line_references": [
+          "Asakusa"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Higashi-nihonbashi",
+        "line_references": [
+          "Asakusa"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Hikaridai",
+        "line_references": [
+          "Tozai",
+          "Oedo",
+          "Keikyu"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Hiroo",
+        "line_references": [
+          "Hibiya",
+          "HitachiNakaKaimin"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Hitotsubashi",
+        "line_references": [
+          "Chiyoda"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Hon-Jo",
+        "line_references": [
+          "Saikyo",
+          "ShonanShinjuku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Hongo-dai",
+        "line_references": [
+          "KeihinTohoku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Ikeda",
+        "line_references": [
+          "ChuoRapid",
+          "Yamanote"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Inokashira",
+        "line_references": [
+          "Keio",
+          "KeioMain"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Iruma",
+        "line_references": [
+          "Yurakucho",
+          "SobuRapid"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Iruma-shi",
+        "line_references": [
+          "SeibuShinjuku",
+          "SeibuIkebukuro",
+          "SeibuYamaguchi",
+          "SeibuEn",
+          "Ikebukuro",
+          "Seibu_Shinjuku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Ishikawadai",
+        "line_references": [
+          "SotetsuMain"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Iwatsunomachi",
+        "line_references": [
+          "SobuRapid"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Kacho-mae",
+        "line_references": [
+          "Fukutoshin"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Kanagawa-NewTown",
+        "line_references": [
+          "SotetsuMain"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Karasuyama",
+        "line_references": [
+          "Tozai",
+          "Karasuyama",
+          "Ofunato"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Kasai-Rinkai",
+        "line_references": [
+          "Keiyo"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Kasminato",
+        "line_references": [
+          "Yokosuka"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Keio-Hachioji",
+        "line_references": [
+          "Keio",
+          "KeioMain"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Keisei-Tsukawa",
+        "line_references": [
+          "Keisei",
+          "TobuNoda"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Kerama",
+        "line_references": [
+          "Asakusa"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Kimachi",
+        "line_references": [
+          "Keiyo"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Kinshi",
+        "line_references": [
+          "SobuLocal"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Kishibojin",
+        "line_references": [
+          "Yurakucho"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Kissaki",
+        "line_references": [
+          "Yokosuka"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Kita-Aoi",
+        "line_references": [
+          "TobuIsesaki",
+          "Skytree",
+          "TobuNikko",
+          "TobuSkytree"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Kita-Otsuka",
+        "line_references": [
+          "SeibuShinjuku",
+          "SeibuIkebukuro",
+          "SeibuYamaguchi",
+          "SeibuEn",
+          "Ikebukuro",
+          "Seibu_Shinjuku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Kita-Saitama",
+        "line_references": [
+          "Saikyo",
+          "ShonanShinjuku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Kita-Sendai",
+        "line_references": [
+          "Senzan"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Kita-Yamato",
+        "line_references": [
+          "Orange"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Kita-Zushi",
+        "line_references": [
+          "YokohamaBlue"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Kitasendai",
+        "line_references": [
+          "Hibiya"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Kitasenju",
+        "line_references": [
+          "Chiyoda",
+          "HitachiNakaKaimin"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Koji",
+        "line_references": [
+          "TobuIsesaki",
+          "Skytree",
+          "TobuNikko",
+          "TobuSkytree"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Koji-mae",
+        "line_references": [
+          "Do-Arakawa"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Kokkai-gijido",
+        "line_references": [
+          "MarunouchiBranch"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Kokumin-kyogijo",
+        "line_references": [
+          "Yurakucho",
+          "Oedo",
+          "Keikyu"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "KokusaiTenjijo",
+        "line_references": [
+          "Rinko"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Komazawa",
+        "line_references": [
+          "TokyuToyoko"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Konan-dai",
+        "line_references": [
+          "KeihinTohoku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Kotaki",
+        "line_references": [
+          "SeibuChichibu"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Koto-shibari",
+        "line_references": [
+          "Tozai"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Kototoi",
+        "line_references": [
+          "Asakusa"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Kumagaya",
+        "line_references": [
+          "Saikyo",
+          "ShonanShinjuku",
+          "Takasaki",
+          "SobuRapid",
+          "Oyama"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Kuroiso",
+        "line_references": [
+          "Takasaki",
+          "TohokuMain",
+          "Tsugaru",
+          "Yonezawa"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Maebashi",
+        "line_references": [
+          "Takasaki",
+          "Ryomo"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Makuhari Seaside",
+        "line_references": [
+          "Yurikamome"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Makuhari-Hong",
+        "line_references": [
+          "Keiyo"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Makuhari-hongo",
+        "line_references": [
+          "Fukutoshin"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "MakuhariSeaside",
+        "line_references": [
+          "Rinko"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Matsuda",
+        "line_references": [
+          "Tokaido"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Meguro-Dai",
+        "line_references": [
+          "Mita",
+          "Namboku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Mejiro-dai",
+        "line_references": [
+          "Yurakucho"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Midoricho",
+        "line_references": [
+          "Nambu"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Midoridai",
+        "line_references": [
+          "TokyuDenEn"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Midosuji",
+        "line_references": [
+          "Yurikamome",
+          "Rinko"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Mikawahashi",
+        "line_references": [
+          "SobuRapid"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Minami-Kemigawa",
+        "line_references": [
+          "Keiyo",
+          "Yurikamome"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Minami-Koiwa",
+        "line_references": [
+          "SobuLocal",
+          "Keiyo",
+          "TobuIsesaki",
+          "Keisei",
+          "TobuNoda",
+          "SobuRapid",
+          "Skytree",
+          "TobuNikko",
+          "TobuSkytree"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Minami-Magome",
+        "line_references": [
+          "TobuIsesaki",
+          "Skytree",
+          "TobuNikko",
+          "TobuSkytree"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Minami-Nagasaki",
+        "line_references": [
+          "SeibuShinjuku",
+          "SeibuIkebukuro",
+          "SeibuYamaguchi",
+          "SeibuEn",
+          "Ikebukuro",
+          "Seibu_Shinjuku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Minami-Wakasu",
+        "line_references": [
+          "Musashino",
+          "Tsurumi",
+          "TamaMonorail",
+          "TokyuDenEn"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "MinamiKemigawa",
+        "line_references": [
+          "Rinko"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Minato-Mirai-21",
+        "line_references": [
+          "MinatoMirai"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Minowa-shita",
+        "line_references": [
+          "Do-Arakawa"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Miraikai",
+        "line_references": [
+          "Yurikamome",
+          "Rinko"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Mitarashi",
+        "line_references": [
+          "Asakusa"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Miura-Kaigan",
+        "line_references": [
+          "KeikyuKurihama"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Miyagi",
+        "line_references": [
+          "YokohamaBlue"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Motomachi-Chukagai",
+        "line_references": [
+          "MinatoMirai"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Mukaiminato",
+        "line_references": [
+          "TokyuToyoko"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Mukojima",
+        "line_references": [
+          "SobuLocal"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Musashi-Hikita",
+        "line_references": [
+          "Itsukaichi"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Musashi-Mitsuwadai",
+        "line_references": [
+          "Nambu"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Musashi-Nakagawa",
+        "line_references": [
+          "Nambu"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Musashi-Saiwai",
+        "line_references": [
+          "Nambu"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Musashi-Yamanaka",
+        "line_references": [
+          "SeibuNakagawa"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Musashi-Yoshida",
+        "line_references": [
+          "Ome"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Musashino",
+        "line_references": [
+          "Joban"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Musashinurare",
+        "line_references": [
+          "Yurakucho",
+          "Oedo",
+          "Keikyu"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Musashisakai",
+        "line_references": [
+          "SobuRapid"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Musashynuigami",
+        "line_references": [
+          "Saikyo",
+          "ShonanShinjuku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Nagasaki",
+        "line_references": [
+          "ChuoRapid",
+          "Yamanote"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Nagatoro",
+        "line_references": [
+          "Nambu"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Naka-mejima",
+        "line_references": [
+          "Hibiya"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Nakahara",
+        "line_references": [
+          "Nambu",
+          "KeioMain",
+          "Kiryu",
+          "Sagami",
+          "Sano"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Nakameguro",
+        "line_references": [
+          "Mita",
+          "Namboku",
+          "TokyuToyoko",
+          "TokyuDenEn"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Nakatsu",
+        "line_references": [
+          "TokyuDenEn",
+          "Echigo"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Nambu",
+        "line_references": [
+          "Nambu"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Narashino",
+        "line_references": [
+          "HitachiNakaKaimin"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Nihon-odori",
+        "line_references": [
+          "MinatoMirai"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Nihonbashi",
+        "line_references": [
+          "SobuLocal",
+          "Tozai",
+          "Asakusa",
+          "Fukutoshin",
+          "SobuRapid",
+          "MarunouchiBranch",
+          "ChuoSobuLocal"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Nijubashimae",
+        "line_references": [
+          "Hibiya"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Nikko",
+        "line_references": [
+          "Oyama"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Nishi-Akiru",
+        "line_references": [
+          "Itsukaichi"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Nishi-Fuchubashi",
+        "line_references": [
+          "Joban",
+          "Musashino",
+          "TamaMonorail"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Nishi-Ikebukuro",
+        "line_references": [
+          "HitachiNakaKaimin"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Nishi-Kawasaki",
+        "line_references": [
+          "Musashino",
+          "Tsurumi",
+          "TamaMonorail"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Nishi-Kichijoji",
+        "line_references": [
+          "Joban",
+          "Keio",
+          "ChuoSobuLocal",
+          "KeioMain"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Nishi-Koiwa",
+        "line_references": [
+          "SobuLocal",
+          "Keiyo",
+          "TobuIsesaki",
+          "Keisei",
+          "TobuNoda",
+          "SobuRapid",
+          "Skytree",
+          "TobuNikko",
+          "TobuSkytree"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Nishi-Nakajima",
+        "line_references": [
+          "Orange"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Nishi-Ome",
+        "line_references": [
+          "Ome"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Nishi-Totsuka",
+        "line_references": [
+          "SotetsuMain"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Nishi-fuchu",
+        "line_references": [
+          "Yurakucho"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Nishi-fushimi",
+        "line_references": [
+          "Tozai"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Nishi-koen",
+        "line_references": [
+          "Yurakucho"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Nishi-takahashimadaira",
+        "line_references": [
+          "Keikyu"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Nishi-takaido",
+        "line_references": [
+          "Tozai"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Nishifujisawa",
+        "line_references": [
+          "SeibuShinjuku",
+          "SeibuIkebukuro",
+          "SeibuYamaguchi",
+          "Ikebukuro",
+          "Seibu_Shinjuku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Odaiba-Kaihinkoen",
+        "line_references": [
+          "Oedo",
+          "Yurikamome"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "OdaibaKaihinkoen",
+        "line_references": [
+          "Rinko"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Oi",
+        "line_references": [
+          "KeihinTohoku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Okutama-gochi",
+        "line_references": [
+          "Ome"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Okutama-guchi",
+        "line_references": [
+          "SeibuShinjuku",
+          "SeibuIkebukuro",
+          "SeibuChichibu",
+          "Ikebukuro",
+          "Seibu_Shinjuku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Omiya",
+        "line_references": [
+          "KeihinTohoku",
+          "Saikyo",
+          "ShonanShinjuku",
+          "Takasaki",
+          "Kawagoe",
+          "Noda",
+          "Oyama",
+          "TohokuMain",
+          "Tsugaru",
+          "Yonezawa"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Omotesando",
+        "line_references": [
+          "Mita",
+          "Shinjuku",
+          "Hanzomon",
+          "Namboku",
+          "MarunouchiBranch"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Oshida",
+        "line_references": [
+          "Oedo"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Saitama",
+        "line_references": [
+          "SobuRapid",
+          "Ogose"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Sakae",
+        "line_references": [
+          "Orange",
+          "Noda"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Sakai",
+        "line_references": [
+          "YokohamaBlue"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Sakuragi-cho",
+        "line_references": [
+          "SotetsuMain"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Sangenjaya",
+        "line_references": [
+          "OdakyuEnoshima",
+          "TokyuDenEn",
+          "OdakyuOdawara",
+          "Odawara"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Sayama",
+        "line_references": [
+          "Saikyo",
+          "ShonanShinjuku",
+          "SobuRapid"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Seibu-Chausuyama",
+        "line_references": [
+          "SeibuNakagawa"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Seibu-Chitose",
+        "line_references": [
+          "SeibuNakagawa"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Seibu-Hikawa",
+        "line_references": [
+          "SeibuNakagawa"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Seibu-Nakagawa",
+        "line_references": [
+          "SeibuNakagawa"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Seibu-Yuuyamada",
+        "line_references": [
+          "SeibuTamako"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Seijo",
+        "line_references": [
+          "TokyuDenEn"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Seijo-shijo",
+        "line_references": [
+          "TokyuToyoko"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Seijodai",
+        "line_references": [
+          "Yurakucho",
+          "Oedo",
+          "Keikyu"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Shimo-Kitazzu",
+        "line_references": [
+          "TobuIsesaki",
+          "Skytree",
+          "TobuNikko",
+          "TobuSkytree"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Shimoda",
+        "line_references": [
+          "Tokaido"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Shimokitazawa",
+        "line_references": [
+          "KeioInokashira",
+          "OdakyuOdawara",
+          "Tojo"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Shin-Adachi",
+        "line_references": [
+          "SobuLocal",
+          "TobuIsesaki",
+          "TobuIsesaki",
+          "Keisei",
+          "TobuNoda",
+          "Skytree",
+          "TobuNikko",
+          "TobuSkytree"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Shin-Machiya",
+        "line_references": [
+          "TobuIsesaki",
+          "Skytree",
+          "TobuNikko",
+          "TobuSkytree"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Shin-Misaki",
+        "line_references": [
+          "TobuIsesaki",
+          "Skytree",
+          "TobuNikko",
+          "TobuSkytree"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Shin-Nihonbashi",
+        "line_references": [
+          "Keiyo"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Shin-Urawa",
+        "line_references": [
+          "SobuRapid"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Shin-juku",
+        "line_references": [
+          "ChuoRapid",
+          "Marunouchi",
+          "MarunouchiBranch",
+          "Yamanote"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Shin-juku-nishiguchi",
+        "line_references": [
+          "ChuoRapid",
+          "MarunouchiBranch",
+          "Yamanote"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Shin-juku-sanchome",
+        "line_references": [
+          "Marunouchi"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Shin-otemachi",
+        "line_references": [
+          "Do-Arakawa"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Shin-rinkan",
+        "line_references": [
+          "Yurakucho"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "ShinKemigawa",
+        "line_references": [
+          "Rinko"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "ShinKiba",
+        "line_references": [
+          "Rinko"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Shinbashi",
+        "line_references": [
+          "Ginza",
+          "Marunouchi",
+          "Yurakucho",
+          "MarunouchiBranch"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Shiogama",
+        "line_references": [
+          "Yokosuka",
+          "SensekiTohoku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Shiroi",
+        "line_references": [
+          "HitachiNakaKaimin",
+          "TohokuMain",
+          "Tsugaru",
+          "Yonezawa"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Tadachi",
+        "line_references": [
+          "Keisei",
+          "TobuNoda"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Taishakuten",
+        "line_references": [
+          "Yamanote"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Takahashimadaira",
+        "line_references": [
+          "Musashino",
+          "TamaMonorail"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Takahatafujimidai",
+        "line_references": [
+          "SeibuShinjuku",
+          "SeibuIkebukuro",
+          "SeibuChichibu",
+          "Ikebukuro",
+          "Seibu_Shinjuku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Takanawa",
+        "line_references": [
+          "Keiyo"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Takanawa-Gateway",
+        "line_references": [
+          "KeihinTohoku",
+          "HitachiNakaKaimin",
+          "Yamanote"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Takaradai",
+        "line_references": [
+          "OdakyuEnoshima",
+          "OdakyuOdawara",
+          "Odawara"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Takasaki",
+        "line_references": [
+          "Takasaki",
+          "Agatsuma",
+          "Joetsu",
+          "Shinetsu"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Tama-Center",
+        "line_references": [
+          "OdakyuEnoshima",
+          "OdakyuOdawara",
+          "Odawara"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Tamagawa-Enzei-ji",
+        "line_references": [
+          "TokyuToyoko"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Tatekawa",
+        "line_references": [
+          "TobuIsesaki",
+          "Skytree",
+          "TobuNikko",
+          "TobuSkytree"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Tateshina",
+        "line_references": [
+          "SobuRapid"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Tobata",
+        "line_references": [
+          "Nambu"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Tokigawa",
+        "line_references": [
+          "SobuRapid"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Tokiwabashi",
+        "line_references": [
+          "SobuRapid"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Tokyo",
+        "line_references": [
+          "KeihinTohoku",
+          "ChuoRapid",
+          "Joban",
+          "SobuLocal",
+          "Keiyo",
+          "Tokaido",
+          "JobanLocal",
+          "Marunouchi",
+          "Fukutoshin",
+          "HitachiNakaKaimin",
+          "SobuRapid",
+          "Yamanote",
+          "ChuoSobuLocal",
+          "TohokuMain",
+          "Tsugaru",
+          "Yonezawa"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Tokyo Dome-mae",
+        "line_references": [
+          "Fukutoshin"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Tokyo-Teleport",
+        "line_references": [
+          "Oedo",
+          "Rinkai"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Tokyo-domae",
+        "line_references": [
+          "Yurakucho"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "TokyoBigSight",
+        "line_references": [
+          "Rinko"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "TokyoTeleport",
+        "line_references": [
+          "Rinko"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Toyo-su",
+        "line_references": [
+          "Tozai"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Tsukamoto",
+        "line_references": [
+          "TokyuDenEn"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Ueno",
+        "line_references": [
+          "KeihinTohoku",
+          "ChuoRapid",
+          "JobanLocal",
+          "Ginza",
+          "Marunouchi",
+          "Hibiya",
+          "Fukutoshin",
+          "HitachiNakaKaimin",
+          "Yamanote",
+          "Oyama",
+          "TohokuMain",
+          "TokyuTamagawa",
+          "Tsugaru",
+          "Yonezawa"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Umeda",
+        "line_references": [
+          "SotetsuMain"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Utsunomiya",
+        "line_references": [
+          "Oyama",
+          "TohokuMain",
+          "Tsugaru",
+          "Yonezawa"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Wada",
+        "line_references": [
+          "SobuRapid",
+          "OuMain"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Wakasu",
+        "line_references": [
+          "Musashino",
+          "Tsurumi",
+          "TamaMonorail",
+          "TokyuDenEn"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Yanaka",
+        "line_references": [
+          "Do-Arakawa"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Yanauchi",
+        "line_references": [
+          "Chiyoda"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Yokoami",
+        "line_references": [
+          "KeihinTohoku"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Yokojimma",
+        "line_references": [
+          "Chiyoda"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Yokosuka-Chuo",
+        "line_references": [
+          "Yokosuka",
+          "KeikyuKurihama"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Yoshiwara",
+        "line_references": [
+          "SobuLocal",
+          "Keiyo",
+          "TobuIsesaki",
+          "Keisei",
+          "Keisei",
+          "TobuNoda",
+          "TobuNoda",
+          "SobuRapid",
+          "Skytree",
+          "TobuNikko",
+          "TobuSkytree"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Yuki",
+        "line_references": [
+          "SeibuTamako",
+          "Mito"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Yukinoshita",
+        "line_references": [
+          "Tokaido"
+        ],
+        "has_name_fields": false,
+        "name_map_entry": null
+      }
+    ],
+    "entity_only": [
+      {
+        "station_id": "Bakurōmae",
+        "line_references": [],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Hayato",
+        "line_references": [],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Higashimurayama",
+        "line_references": [],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Hotaru-Kaihinkogen",
+        "line_references": [],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Imaichi",
+        "line_references": [],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Kegon",
+        "line_references": [],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "KinutaPark",
+        "line_references": [],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Kusatsu",
+        "line_references": [],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Kyoto",
+        "line_references": [],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Minami-Aoyama",
+        "line_references": [],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Minato-Mirai",
+        "line_references": [],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Musashimurayama",
+        "line_references": [],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Nagoya",
+        "line_references": [],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Oizumigakuen",
+        "line_references": [],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Okachi",
+        "line_references": [],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Osaka",
+        "line_references": [],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Sesenji",
+        "line_references": [],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Shin-Bayashi",
+        "line_references": [],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Shin-Marunouchi",
+        "line_references": [],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Shin-Odaimon",
+        "line_references": [],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Shin-Takashima",
+        "line_references": [],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Shin-osaki",
+        "line_references": [],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Sotsu-Shin-Yokohama",
+        "line_references": [],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Suginami",
+        "line_references": [],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Sunamachi",
+        "line_references": [],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Tama-center",
+        "line_references": [],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Tampopo",
+        "line_references": [],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Teleport-Chuo",
+        "line_references": [],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Tempozanto-Mae",
+        "line_references": [],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Tobu-Dozui-Michi",
+        "line_references": [],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Tsurumi-Ryokuchi",
+        "line_references": [],
+        "has_name_fields": false,
+        "name_map_entry": null
+      },
+      {
+        "station_id": "Ueno-hiro",
+        "line_references": [],
+        "has_name_fields": false,
+        "name_map_entry": null
+      }
+    ]
+  },
+  "analysis": {
+    "resolution_mechanism": "name_map value matching (English value -> Japanese key)",
+    "getStationName_issue": "getStationName assumes object values with .en/.ja properties, but all 1493 values are plain strings",
+    "resolveStationName_solution": "Has value-based fallback: searches name_map values for station ID match",
+    "coverage_before_fix": "50% (254/503)",
+    "coverage_after_resolveStationName": "50% (same data source)"
+  },
+  "recommendations": {
+    "priority_1": "Add name_map entries for 217 missing stations",
+    "priority_1_detail": "Major cities missing: Tokyo(16 lines), Osaka, Nagoya, Kyoto, Sapporo, Kobe, Nara, Hiroshima, Sendai, Fukuoka, Ueno(14 lines)",
+    "priority_2": "Fix getStationName to use resolveStationName logic - DONE in Task 3.16",
+    "priority_3": "Consider adding multi-language name fields to station entities - currently 0% populated"
+  }
+}
