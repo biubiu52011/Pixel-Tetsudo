@@ -1,0 +1,64 @@
+{
+  "title": "3.8.1.1 Route Search Input Resolution Audit",
+  "date": "2026-08-28",
+  "canonical_sha": "27ED38FC6910781268E231906ECC683367D1C93FCA725CBE803EB167B4B2240E",
+  "entity_counts": {
+    "lines": 156,
+    "stations": 503,
+    "name_map": 1493,
+    "stationLines": 1841,
+    "lineStationOrder": 156
+  },
+  "resolution_summary": {
+    "EN_exact_match": 461,
+    "JP_name_map_exact": 11,
+    "JP_major_fallback": 0,
+    "Total_resolved": 472,
+    "Unresolved": 31
+  },
+  "unresolved_stations": [
+    "Nagoya",
+    "Osaka",
+    "Kyoto",
+    "Oizumigakuen",
+    "KinutaPark",
+    "Kegon",
+    "Shin-osaki",
+    "Minami-Aoyama",
+    "Ueno-hiro",
+    "Okachi",
+    "Shin-Odaimon",
+    "Tampopo",
+    "Shin-Bayashi",
+    "Teleport-Chuo",
+    "Tempozanto-Mae",
+    "Hotaru-Kaihinkogen",
+    "Sesenji",
+    "Kusatsu",
+    "Tobu-Dozui-Michi",
+    "Sunamachi",
+    "Shin-Marunouchi",
+    "Suginami",
+    "Higashimurayama",
+    "Musashimurayama",
+    "Hayato",
+    "Tsurumi-Ryokuchi",
+    "Sotsu-Shin-Yokohama",
+    "Imaichi",
+    "Minato-Mirai",
+    "Shin-Takashima",
+    "Bakurōmae"
+  ],
+  "data_issues": {
+    "orphan_refs_in_lines": 1383,
+    "entity_only_stations": 45,
+    "duplicate_name_map_values": 3,
+    "case_mismatches": 0
+  },
+  "known_limitations": {
+    "31_entity_only_stations": "Not on any line - cannot be destination/origin for routes",
+    "1383_orphan_refs": "In line.stations but not in stations entity - BFS handles gracefully",
+    "139_zero_coordinate": "Tourism proximity skips these",
+    "3_duplicate_name_map": "Ichigaya, Kohoku, Kasumigaseki have multiple JP keys"
+  }
+}
