@@ -1,8 +1,8 @@
 {
   "task": "3.27.2",
   "date": "2026-08-28",
-  "local_head": "dba9ec74c88691676c7bd3c3991509cc89b29392",
-  "origin_master": "dba9ec74c88691676c7bd3c3991509cc89b29392",
+  "local_head": "45bea1380fc2f9de1331480bad43c1fc62d1b4e2",
+  "origin_master": "45bea1380fc2f9de1331480bad43c1fc62d1b4e2",
   "sync": true,
   "working_tree_clean": true,
   "canonical_data_sha": "1ED8A6ED8E227807CF0C1D84E897CE2C1CFC57CC3E50C5FAD3D03CC00548E81B",
@@ -13,7 +13,10 @@
   "audit_report": "recovery/reports/3.27.2_tourism_naming_variant_audit.json",
   "changes": "No code or data changes - audit report only",
   "variant_resolution": {
-    "resolved": 2,
+    "resolved_map": [
+      "Aoyama->Aoyama-itchome",
+      "Odaiba->Daiba"
+    ],
     "hold": 10
   }
 }
