@@ -1,18 +1,20 @@
 {
   "task": "3.28.1-B",
   "date": "2026-08-27",
-  "local_head": "a73670f074318c302a83f63225b95922c0d4e2a0",
-  "origin_master": "a73670f074318c302a83f63225b95922c0d4e2a0",
+  "local_head": "19445a5d88d7d54b63e79a566e7387b06d12d1f0",
+  "origin_master": "19445a5d88d7d54b63e79a566e7387b06d12d1f0",
   "sync": true,
   "working_tree_clean": true,
   "mirror_consistency": true,
   "canonical_data_sha": "d2c88c7cac418c148ec46ec7e5bc2bb180d9dec3",
   "home_sha": "6feb3f2e3b667f7aa68423606d05ac0243f946f7",
-  "ci_guard": "PASS",
+  "ci_validate": "PASS",
+  "ci_deploy_pages": "FAIL (pre-existing)",
+  "entity_guard": "PASS",
   "architecture_guard": "PASS",
   "home_ui_guard": "PASS",
   "brace_balance": "PASS",
   "changes": "js/translations.js: fixed stray double-quote on tourism.loc_error key (line 592)",
   "root_cause": "extra leading double-quote caused SyntaxError, breaking all i18n on realtime.html",
-  "note": "Deploy to GitHub Pages failure is pre-existing (unrelated infrastructure issue)"
+  "browser_check": "All 9 realtime.html scripts pass syntax validation"
 }

@@ -9,6 +9,8 @@
   const tLine = (code) => (window.tLine ? window.tLine(code) : code) || code;
   const tOp = (name) => (window.tOp ? window.tOp(name) : name) || name;
   const tStation = (name) => (window.tStation ? window.tStation(name) : name) || name;
+  const getDisplayName = (line) => (line && line.nameJa) ? line.nameJa : (window.tLineName ? window.tLineName(line) : (line && line.nameEn) ? line.nameEn : (line && line.name) ? line.name : line && line.id);
+
 
   // STATUS_META is defined in data-state.js; use DataState.STATUS_META
   const STATUS_META = window.DataState ? window.DataState.STATUS_META : {
@@ -48,7 +50,7 @@
     var s = window.DataState ? window.DataState.getStatus(status) : STATUS_META[status] || STATUS_META.no_data;
     var statusText = t("status." + status) || status;
     // Title
-    modal.querySelector(".rs-modal-title").textContent = tLine(line.id) || line.name;
+    modal.querySelector(".rs-modal-title").textContent = getDisplayName(line) || tLine(line.id) || line.name;
     // Status section
     var statusSection = modal.querySelector(".rs-status-section");
     statusSection.className = "rs-status-section rs-status-" + status;
