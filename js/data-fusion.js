@@ -40,8 +40,8 @@
   function mapLineCodeToLineId(lineCode, tripId) {
     try {
       if (!lineCode) return null;
-      var knownLines = window.UNIFIED_LINES;
-      if (!knownLines) return null;
+      var knownLines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : (window.UNIFIED_LINES || {});
+      if (!knownLines || Object.keys(knownLines).length === 0) return null;
       var ids = Object.keys(knownLines);
       for (var i = 0; i < ids.length; i++) {
         if (knownLines[ids[i]].operator === lineCode) return ids[i];
@@ -71,9 +71,10 @@
 
   function syncStatusMap() {
     try {
-      if (!window.UNIFIED_LINES) return;
+      var allLines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : (window.UNIFIED_LINES || {});
+      if (!allLines || Object.keys(allLines).length === 0) return;
       var statusMap = localData.statusMap || {};
-      Object.keys(window.UNIFIED_LINES).forEach(function(id) {
+      Object.keys(allLines).forEach(function(id) {
         if (!statusMap[id]) statusMap[id] = { status: "normal", maxDelay: 0, interval: null, cause: null };
       });
       localData.statusMap = statusMap;
@@ -82,8 +83,9 @@
 
   function checkCacheStale() {
     try {
-      if (!window.UNIFIED_LINES) return;
-      var currentVersion = Object.keys(window.UNIFIED_LINES).length;
+      var rdbLines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : (window.UNIFIED_LINES || {});
+      if (!rdbLines || Object.keys(rdbLines).length === 0) return;
+      var currentVersion = Object.keys(rdbLines).length;
       if (_lineControlVersion !== null && _lineControlVersion !== currentVersion) { _lastFusedData = null; }
       _lineControlVersion = currentVersion;
     } catch(e) {}
@@ -138,7 +140,7 @@
 
   function fuseLine(lineId) {
     try {
-      var line = (window.UNIFIED_LINES && window.UNIFIED_LINES[lineId]) || (localData.lines && localData.lines[lineId]) || null;
+      var line = (window.DataLayer && window.DataLayer.getLine ? window.DataLayer.getLine(lineId) : null) || (localData.lines && localData.lines[lineId]) || (window.UNIFIED_LINES && window.UNIFIED_LINES[lineId]) || null;
       if (!line) return null;
       var apiInfo = getApiDelayInfo(line);
       var localStatus = localData.statusMap && localData.statusMap[lineId];
@@ -151,13 +153,15 @@
     try {
       var fusedLines = {};
       var allLineIds = {};
+      var dlLines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : null;
+      if (dlLines) Object.keys(dlLines).forEach(function(k) { allLineIds[k] = true; });
       if (window.UNIFIED_LINES) Object.keys(window.UNIFIED_LINES).forEach(function(k) { allLineIds[k] = true; });
       if (localData.lines) Object.keys(localData.lines).forEach(function(k) { allLineIds[k] = true; });
       Object.keys(allLineIds).forEach(function(lineId) {
         var fused = fuseLine(lineId);
         if (fused) fusedLines[fused.id] = fused;
       });
-      var fusedData = { version: FUSION_VERSION, timestamp: new Date().toISOString(), lines: fusedLines, lineOrder: (window.LinePresentationService && window.UNIFIED_LINES) ? window.LinePresentationService.getDisplayOrder(window.UNIFIED_LINES) : Object.keys(allLineIds), odptOperatorsLoaded: Object.keys(odptData.delayInfo).length, totalLines: Object.keys(allLineIds).length };
+      var fusedData = { version: FUSION_VERSION, timestamp: new Date().toISOString(), lines: fusedLines, lineOrder: (window.LinePresentationService && (dlLines || window.UNIFIED_LINES)) ? window.LinePresentationService.getDisplayOrder(dlLines || window.UNIFIED_LINES) : Object.keys(allLineIds), odptOperatorsLoaded: Object.keys(odptData.delayInfo).length, totalLines: Object.keys(allLineIds).length };
       emitUpdate(fusedData);
       return fusedData;
     } catch(e) { console.error("[DataFusion] fuseAll error:", e.message); if (_lastFusedData) { emitUpdate(_lastFusedData); return _lastFusedData; } return null; }
@@ -182,8 +186,9 @@
     _refreshTimer = setInterval(function() { try { fuseAll(); } catch(e) { console.debug("[DataFusion] fuseAll error:", e.message); } }, REFRESH_INTERVAL);
     _cacheTimer = setInterval(function() { try { saveToCache(); } catch(e) {} }, REFRESH_INTERVAL);
     (function pollUnified() {
-      if (window.UNIFIED_LINES && Object.keys(window.UNIFIED_LINES).length > 0) {
-        try { fuseAll(); console.log("[DataFusion] Late UNIFIED_LINES loaded, re-fused:", Object.keys(window.UNIFIED_LINES).length + " lines"); }
+      var checkLines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : (window.UNIFIED_LINES || {});
+      if (checkLines && Object.keys(checkLines).length > 0) {
+        try { fuseAll(); console.log("[DataFusion] Data ready (" + Object.keys(checkLines).length + " lines), re-fused"); }
         catch(e) { console.debug("[DataFusion] poll fuseAll error:", e.message); }
         return;
       }

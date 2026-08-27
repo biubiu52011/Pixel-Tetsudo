@@ -782,6 +782,34 @@
       "decision": "RETAIN",
       "reason": "StationResolver fallback for line station ID collection when RailwayDB not loaded",
       "railwaydb_equivalent": "RailwayDB.getAllLines()"
+    },
+    {
+      "file": "js/data-fusion.js",
+      "line": 143,
+      "decision": "RETAIN",
+      "reason": "DataLayer-first fallback chain: DataLayer.getLine -> localData -> UNIFIED_LINES",
+      "context": "var line = (window.DataLayer && window.DataLayer.getLine ? window.DataLayer.getLine(lineId) : null) || ... || (window.UNIFIED_LINES && window.UNIFIED_LINES[lineId]) || null;"
+    },
+    {
+      "file": "js/data-fusion.js",
+      "line": 158,
+      "decision": "RETAIN",
+      "reason": "Compat fallback: collect UNIFIED_LINES line IDs into allLineIds set",
+      "context": "if (window.UNIFIED_LINES) Object.keys(window.UNIFIED_LINES).forEach(function(k) { allLineIds[k] = true; });"
+    },
+    {
+      "file": "js/data-fusion.js",
+      "line": 164,
+      "decision": "RETAIN",
+      "reason": "lineOrder uses dlLines (DataLayer) || UNIFIED_LINES as fallback",
+      "context": "lineOrder: (window.LinePresentationService && (dlLines || window.UNIFIED_LINES)) ? ..."
+    },
+    {
+      "file": "js/data-fusion.js",
+      "line": 189,
+      "decision": "RETAIN",
+      "reason": "pollUnified checks DataLayer first, then UNIFIED_LINES for late load",
+      "context": "var checkLines = (window.DataLayer && window.DataLayer.getAllLines) ? ... : (window.UNIFIED_LINES || {});"
     }
   ]
 }
