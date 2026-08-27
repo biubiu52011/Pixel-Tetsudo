@@ -1,0 +1,172 @@
+{
+  "task": "3.29.1",
+  "date": "2026-08-28",
+  "title": "Realtime Data Quality Audit",
+  "summary": {
+    "total_lines": 156,
+    "total_operators": 21,
+    "odpt_covered_operators": 20,
+    "no_odpt_operators": 1,
+    "no_odpt_lines": [
+      "Rinkai"
+    ],
+    "lines_with_api_endpoint": 155,
+    "lines_without_api_endpoint": 1
+  },
+  "findings": [
+    {
+      "id": "F-001",
+      "severity": "HIGH",
+      "component": "realtime-view.js / data-fusion.js",
+      "issue": "Timestamp property mismatch: fusedData uses \"timestamp\" but UI reads \"fused.lastUpdate\"",
+      "impact": "Last Updated timestamp always shows \"No Realtime Data\" or \"Unknown\" instead of actual time",
+      "location_realtime_view": "js/realtime-view.js line 92 (modal) and updateTimestamp() function",
+      "location_data_fusion": "js/data-fusion.js line 164: fusedData.timestamp = new Date().toISOString()",
+      "fix": "Change fused.lastUpdate → fused.timestamp in both places"
+    },
+    {
+      "id": "F-002",
+      "severity": "INFO",
+      "component": "data-fusion.js fuseLine()",
+      "issue": "Lines with ODPT mapping but no API response get status=\"normal\" (assumed normal)",
+      "impact": "When ODPT API is unavailable/down, all covered lines show \"On Time\" instead of \"No Realtime Data\"",
+      "location": "js/data-fusion.js fuseLine(): LINE_TO_OPERATOR check returns {status:\"normal\"} when apiInfo is null but operator exists",
+      "fix": "Distinguish between \"has ODPT mapping\" and \"has live data\" — use no_odpt when apiInfo is null despite having mapping"
+    },
+    {
+      "id": "F-003",
+      "severity": "LOW",
+      "component": "data/api/odpt-unified.js",
+      "issue": "Rinkai operator has no ODPT endpoint in LINE_TO_OPERATOR",
+      "impact": "Rinkai line (東京臨海高速鉄道りんかい線) always shows no_odpt status",
+      "location": "data/api/odpt-unified.js LINE_TO_OPERATOR has no \"Rinkai\" key",
+      "fix": "Add Rinkai operator endpoint OR map it to an existing operator if data is shared"
+    },
+    {
+      "id": "F-004",
+      "severity": "INFO",
+      "component": "data-fusion.js parseODPTDelay()",
+      "issue": "Status detection relies on Japanese text keyword matching",
+      "impact": "False positives/negatives if ODPT returns unexpected text format",
+      "location": "js/data-fusion.js lines 119-122",
+      "fix": "No fix needed — this is a known limitation of the ODPT API response format"
+    },
+    {
+      "id": "F-005",
+      "severity": "INFO",
+      "component": "data/api/odpt-unified.js",
+      "issue": "updateOdptData function exists but is never called in the runtime",
+      "impact": "External code cannot inject ODPT delay data into DataFusion",
+      "location": "js/data-fusion.js line 210: updateOdptData defined but no callers found",
+      "fix": "Not a bug — may be a dead API or intended for future use"
+    }
+  ],
+  "operator_coverage": {
+    "JR_East": {
+      "railwaydb_lines": 74,
+      "odpt_mapped": 74,
+      "status": "FULL"
+    },
+    "Seibu": {
+      "railwaydb_lines": 15,
+      "odpt_mapped": 15,
+      "status": "FULL"
+    },
+    "Tobu": {
+      "railwaydb_lines": 14,
+      "odpt_mapped": 15,
+      "status": "FULL"
+    },
+    "TokyoMetro": {
+      "railwaydb_lines": 10,
+      "odpt_mapped": 10,
+      "status": "FULL"
+    },
+    "Keio": {
+      "railwaydb_lines": 8,
+      "odpt_mapped": 8,
+      "status": "FULL"
+    },
+    "Toei": {
+      "railwaydb_lines": 7,
+      "odpt_mapped": 7,
+      "status": "FULL"
+    },
+    "Keikyu": {
+      "railwaydb_lines": 7,
+      "odpt_mapped": 7,
+      "status": "FULL"
+    },
+    "Odakyu": {
+      "railwaydb_lines": 4,
+      "odpt_mapped": 4,
+      "status": "FULL"
+    },
+    "Tokyu": {
+      "railwaydb_lines": 3,
+      "odpt_mapped": 3,
+      "status": "FULL"
+    },
+    "YokohamaMunicipal": {
+      "railwaydb_lines": 3,
+      "odpt_mapped": 3,
+      "status": "FULL"
+    },
+    "TWR": {
+      "railwaydb_lines": 1,
+      "odpt_mapped": 2,
+      "status": "FULL"
+    },
+    "MIR": {
+      "railwaydb_lines": 1,
+      "odpt_mapped": 1,
+      "status": "FULL"
+    },
+    "JR_West": {
+      "railwaydb_lines": 1,
+      "odpt_mapped": 1,
+      "status": "FULL"
+    },
+    "Keisei": {
+      "railwaydb_lines": 1,
+      "odpt_mapped": 1,
+      "status": "FULL"
+    },
+    "MinatoMirai": {
+      "railwaydb_lines": 1,
+      "odpt_mapped": 1,
+      "status": "FULL"
+    },
+    "ShonanMonorail": {
+      "railwaydb_lines": 1,
+      "odpt_mapped": 1,
+      "status": "FULL"
+    },
+    "Sotetsu": {
+      "railwaydb_lines": 1,
+      "odpt_mapped": 1,
+      "status": "FULL"
+    },
+    "TamaMonorail": {
+      "railwaydb_lines": 1,
+      "odpt_mapped": 1,
+      "status": "FULL"
+    },
+    "TsukubaExpress": {
+      "railwaydb_lines": 1,
+      "odpt_mapped": 1,
+      "status": "FULL"
+    },
+    "Yurikamome": {
+      "railwaydb_lines": 1,
+      "odpt_mapped": 1,
+      "status": "FULL"
+    },
+    "Rinkai": {
+      "railwaydb_lines": 1,
+      "odpt_mapped": 0,
+      "status": "NO_ODPT"
+    }
+  },
+  "recommendation": "Fix F-001 (timestamp bug) immediately. F-002 is a design choice that may need review. F-003 is a data gap."
+}

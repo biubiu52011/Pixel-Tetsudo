@@ -89,8 +89,8 @@
     updatedSection.querySelector(".rs-info-label").textContent = t("status.updated");
     var fused = window.DataFusion ? window.DataFusion.getFusedData() : null;
     var updateTime = "";
-    if (fused && fused.lastUpdate) {
-      var d = new Date(fused.lastUpdate);
+    if (fused && fused.timestamp) {
+      var d = new Date(fused.timestamp);
       updateTime = d.getHours().toString().padStart(2,"0") + ":" + d.getMinutes().toString().padStart(2,"0");
     } else if (status === "no_data") {
       updateTime = t("status.no_data");
