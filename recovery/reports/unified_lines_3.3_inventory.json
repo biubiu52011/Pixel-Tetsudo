@@ -1,0 +1,884 @@
+{
+  "version": "1.0",
+  "generated_at": "2026-08-27",
+  "summary": {
+    "total_findings": 86,
+    "comment_doc": 10,
+    "runtime_code": 76,
+    "by_category": {
+      "COMPATIBILITY": 32,
+      "BUSINESS_RUNTIME": 44,
+      "COMMENT": 10
+    },
+    "by_decision": {
+      "RETAIN": 32,
+      "MIGRATE": 44,
+      "IGNORE": 10
+    },
+    "migrate_count": 44,
+    "retain_count": 32,
+    "ignore_count": 10
+  },
+  "findings": [
+    {
+      "id": null,
+      "file": "js\\data-fusion.js",
+      "line": 43,
+      "content": "var knownLines = window.UNIFIED_LINES;",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "DataFusion polling layer - compatibility shim",
+      "railwaydb_equivalent": ""
+    },
+    {
+      "id": null,
+      "file": "js\\data-fusion.js",
+      "line": 74,
+      "content": "if (!window.UNIFIED_LINES) return;",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "DataFusion null check",
+      "railwaydb_equivalent": ""
+    },
+    {
+      "id": null,
+      "file": "js\\data-fusion.js",
+      "line": 76,
+      "content": "Object.keys(window.UNIFIED_LINES).forEach(function(id) {",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "DataFusion sync loop",
+      "railwaydb_equivalent": ""
+    },
+    {
+      "id": null,
+      "file": "js\\data-fusion.js",
+      "line": 85,
+      "content": "if (!window.UNIFIED_LINES) return;",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "DataFusion cache check",
+      "railwaydb_equivalent": ""
+    },
+    {
+      "id": null,
+      "file": "js\\data-fusion.js",
+      "line": 86,
+      "content": "var currentVersion = Object.keys(window.UNIFIED_LINES).length;",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "DataFusion version check",
+      "railwaydb_equivalent": ""
+    },
+    {
+      "id": null,
+      "file": "js\\data-fusion.js",
+      "line": 141,
+      "content": "var line = (window.UNIFIED_LINES && window.UNIFIED_LINES[lineId]) || (localData.lines && localData.lines[lineId]) || nul",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "DataFusion fallback lookup",
+      "railwaydb_equivalent": ""
+    },
+    {
+      "id": null,
+      "file": "js\\data-fusion.js",
+      "line": 154,
+      "content": "if (window.UNIFIED_LINES) Object.keys(window.UNIFIED_LINES).forEach(function(k) { allLineIds[k] = true; });",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "DataFusion fusion logic",
+      "railwaydb_equivalent": ""
+    },
+    {
+      "id": null,
+      "file": "js\\data-fusion.js",
+      "line": 160,
+      "content": "var fusedData = { version: FUSION_VERSION, timestamp: new Date().toISOString(), lines: fusedLines, lineOrder: (window.Li",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "DataFusion fused data construction",
+      "railwaydb_equivalent": ""
+    },
+    {
+      "id": null,
+      "file": "js\\data-fusion.js",
+      "line": 185,
+      "content": "if (window.UNIFIED_LINES && Object.keys(window.UNIFIED_LINES).length > 0) {",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "DataFusion late-load poll",
+      "railwaydb_equivalent": ""
+    },
+    {
+      "id": null,
+      "file": "js\\data-fusion.js",
+      "line": 186,
+      "content": "try { fuseAll(); console.log(\"[DataFusion] Late UNIFIED_LINES loaded, re-fused:\", Object.keys(window.UNIFIED_LINES).leng",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "DataFusion re-fuse log",
+      "railwaydb_equivalent": ""
+    },
+    {
+      "id": null,
+      "file": "js\\data-layer.js",
+      "line": 74,
+      "content": "Object.keys(window.UNIFIED_LINES).forEach(function(id) {",
+      "category": "BUSINESS_RUNTIME",
+      "decision": "MIGRATE",
+      "reason": "getAllLines() reads UNIFIED_LINES not RailwayDB",
+      "railwaydb_equivalent": "RailwayDB.getAllLines()"
+    },
+    {
+      "id": null,
+      "file": "js\\data-layer.js",
+      "line": 75,
+      "content": "var l = window.UNIFIED_LINES[id];",
+      "category": "BUSINESS_RUNTIME",
+      "decision": "MIGRATE",
+      "reason": "getAllLines() direct UNIFIED_LINES[id]",
+      "railwaydb_equivalent": "RailwayDB.getAllLines()"
+    },
+    {
+      "id": null,
+      "file": "js\\data-layer.js",
+      "line": 82,
+      "content": "return window.UNIFIED_LINES[lineId] || null;",
+      "category": "BUSINESS_RUNTIME",
+      "decision": "MIGRATE",
+      "reason": "getLine() returns UNIFIED_LINES[id] not RailwayDB.getLine",
+      "railwaydb_equivalent": "RailwayDB.getLine(lineId)"
+    },
+    {
+      "id": null,
+      "file": "js\\data-state.js",
+      "line": 146,
+      "content": "var lineOrder = options.lineOrder || (window.LinePresentationService ? window.LinePresentationService.getDisplayOrder(wi",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "Presentation order conditional",
+      "railwaydb_equivalent": ""
+    },
+    {
+      "id": null,
+      "file": "js\\data-state.js",
+      "line": 175,
+      "content": "var presentationOrderMap = (window.LinePresentationService && window.UNIFIED_LINES)",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "Presentation order map fallback",
+      "railwaydb_equivalent": ""
+    },
+    {
+      "id": null,
+      "file": "js\\data-state.js",
+      "line": 176,
+      "content": "? window.LinePresentationService.getDisplayOrderMap(window.UNIFIED_LINES) : {};",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "Same ternary",
+      "railwaydb_equivalent": ""
+    },
+    {
+      "id": null,
+      "file": "js\\data-state.js",
+      "line": 251,
+      "content": "if (window.UNIFIED_LINES) setLines(window.UNIFIED_LINES);",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "Init fallback superseded by DataFusion",
+      "railwaydb_equivalent": ""
+    },
+    {
+      "id": null,
+      "file": "js\\realtime-view.js",
+      "line": 129,
+      "content": "if (window.UNIFIED_LINES && Object.keys(window.UNIFIED_LINES).length > 0) {",
+      "category": "BUSINESS_RUNTIME",
+      "decision": "MIGRATE",
+      "reason": "getLines() checks UNIFIED_LINES",
+      "railwaydb_equivalent": "RailwayDB.getLine(lineId)"
+    },
+    {
+      "id": null,
+      "file": "js\\realtime-view.js",
+      "line": 130,
+      "content": "var lpsOrder = (window.LinePresentationService && window.UNIFIED_LINES) ? window.LinePresentationService.getDisplayOrder",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "Presentation order conditional",
+      "railwaydb_equivalent": ""
+    },
+    {
+      "id": null,
+      "file": "js\\route-search.js",
+      "line": 21,
+      "content": "for (const lineId of Object.keys(window.UNIFIED_LINES)) {",
+      "category": "BUSINESS_RUNTIME",
+      "decision": "MIGRATE",
+      "reason": "buildStationGraph BFS iteration",
+      "railwaydb_equivalent": "RailwayDB.getAllLines()+RailwayDB.getLineStationOrder()"
+    },
+    {
+      "id": null,
+      "file": "js\\route-search.js",
+      "line": 22,
+      "content": "const line = window.UNIFIED_LINES[lineId];",
+      "category": "BUSINESS_RUNTIME",
+      "decision": "MIGRATE",
+      "reason": "buildStationGraph line access",
+      "railwaydb_equivalent": "RailwayDB.getAllLines()+RailwayDB.getLineStationOrder()"
+    },
+    {
+      "id": null,
+      "file": "js\\route-search.js",
+      "line": 53,
+      "content": "const connectLine = window.UNIFIED_LINES[connectLineId];",
+      "category": "BUSINESS_RUNTIME",
+      "decision": "MIGRATE",
+      "reason": "findRoute transfer lookup",
+      "railwaydb_equivalent": "RailwayDB.get*() API"
+    },
+    {
+      "id": null,
+      "file": "js\\route-search.js",
+      "line": 100,
+      "content": "const line = window.UNIFIED_LINES[segLines[0]];",
+      "category": "BUSINESS_RUNTIME",
+      "decision": "MIGRATE",
+      "reason": "findRoute duration lookup",
+      "railwaydb_equivalent": "RailwayDB.get*() API"
+    },
+    {
+      "id": null,
+      "file": "js\\route-search.js",
+      "line": 161,
+      "content": "for (const lineId of Object.keys(window.UNIFIED_LINES)) {",
+      "category": "BUSINESS_RUNTIME",
+      "decision": "MIGRATE",
+      "reason": "getNameToIdMap cache build",
+      "railwaydb_equivalent": "RailwayDB.get*() API"
+    },
+    {
+      "id": null,
+      "file": "js\\route-search.js",
+      "line": 162,
+      "content": "const line = window.UNIFIED_LINES[lineId];",
+      "category": "BUSINESS_RUNTIME",
+      "decision": "MIGRATE",
+      "reason": "Same",
+      "railwaydb_equivalent": "RailwayDB.get*() API"
+    },
+    {
+      "id": null,
+      "file": "js\\route-search.js",
+      "line": 215,
+      "content": "for (const lineId of Object.keys(window.UNIFIED_LINES)) {",
+      "category": "BUSINESS_RUNTIME",
+      "decision": "MIGRATE",
+      "reason": "getLinesForSegment iteration",
+      "railwaydb_equivalent": "RailwayDB.getLine(lineId)"
+    },
+    {
+      "id": null,
+      "file": "js\\route-search.js",
+      "line": 216,
+      "content": "const line = window.UNIFIED_LINES[lineId];",
+      "category": "BUSINESS_RUNTIME",
+      "decision": "MIGRATE",
+      "reason": "Same",
+      "railwaydb_equivalent": "RailwayDB.get*() API"
+    },
+    {
+      "id": null,
+      "file": "js\\route-search.js",
+      "line": 240,
+      "content": "for (const lineId of Object.keys(window.UNIFIED_LINES)) {",
+      "category": "BUSINESS_RUNTIME",
+      "decision": "MIGRATE",
+      "reason": "findStationsByTerm search",
+      "railwaydb_equivalent": "RailwayDB.get*() API"
+    },
+    {
+      "id": null,
+      "file": "js\\route-search.js",
+      "line": 241,
+      "content": "const line = window.UNIFIED_LINES[lineId];",
+      "category": "BUSINESS_RUNTIME",
+      "decision": "MIGRATE",
+      "reason": "Same",
+      "railwaydb_equivalent": "RailwayDB.get*() API"
+    },
+    {
+      "id": null,
+      "file": "js\\trains-detail.js",
+      "line": 29,
+      "content": "return (window.UNIFIED_LINES && window.UNIFIED_LINES[lineId]) || null;",
+      "category": "BUSINESS_RUNTIME",
+      "decision": "MIGRATE",
+      "reason": "getLineData returns UNIFIED_LINES[id]",
+      "railwaydb_equivalent": "RailwayDB.getLine(lineId)"
+    },
+    {
+      "id": null,
+      "file": "js\\trains-page.js",
+      "line": 62,
+      "content": "var ul = window.UNIFIED_LINES;",
+      "category": "BUSINESS_RUNTIME",
+      "decision": "MIGRATE",
+      "reason": "getLinesData direct access",
+      "railwaydb_equivalent": "RailwayDB.getLine(lineId)"
+    },
+    {
+      "id": null,
+      "file": "js\\trains-page.js",
+      "line": 97,
+      "content": "var ul = window.UNIFIED_LINES;",
+      "category": "BUSINESS_RUNTIME",
+      "decision": "MIGRATE",
+      "reason": "getRealtimePositions fallback",
+      "railwaydb_equivalent": "RailwayDB.get*() API"
+    },
+    {
+      "id": null,
+      "file": "js\\trains-page.js",
+      "line": 255,
+      "content": "var ul = window.UNIFIED_LINES;",
+      "category": "BUSINESS_RUNTIME",
+      "decision": "MIGRATE",
+      "reason": "loadCachedPositions merge",
+      "railwaydb_equivalent": "RailwayDB.get*() API"
+    },
+    {
+      "id": null,
+      "file": "js\\trains-render.js",
+      "line": 10,
+      "content": "var L = (data && data.lines) || (window.UNIFIED_LINES || {});",
+      "category": "BUSINESS_RUNTIME",
+      "decision": "MIGRATE",
+      "reason": "render fallback to UNIFIED_LINES",
+      "railwaydb_equivalent": "RailwayDB.getAllLines()"
+    },
+    {
+      "id": null,
+      "file": "js\\trains-render.js",
+      "line": 11,
+      "content": "var lineOrder = (window.LinePresentationService && window.UNIFIED_LINES) ? window.LinePresentationService.getDisplayOrde",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "Presentation order conditional",
+      "railwaydb_equivalent": ""
+    },
+    {
+      "id": null,
+      "file": "js\\trains-render.js",
+      "line": 36,
+      "content": "if (window.UNIFIED_LINES && Object.keys(window.UNIFIED_LINES).length > 0) { render({ lines: window.UNIFIED_LINES }); ret",
+      "category": "BUSINESS_RUNTIME",
+      "decision": "MIGRATE",
+      "reason": "init renders UNIFIED_LINES",
+      "railwaydb_equivalent": "RailwayDB.getAllLines()"
+    },
+    {
+      "id": null,
+      "file": "js\\trains-render.js",
+      "line": 40,
+      "content": "if (!d) d = { lines: window.UNIFIED_LINES || {} };",
+      "category": "BUSINESS_RUNTIME",
+      "decision": "MIGRATE",
+      "reason": "tryRender fallback",
+      "railwaydb_equivalent": "RailwayDB.get*() API"
+    },
+    {
+      "id": null,
+      "file": "js\\trains-render.js",
+      "line": 61,
+      "content": "if (!d) d = { lines: window.UNIFIED_LINES || {} };",
+      "category": "BUSINESS_RUNTIME",
+      "decision": "MIGRATE",
+      "reason": "tryRender fallback",
+      "railwaydb_equivalent": "RailwayDB.get*() API"
+    },
+    {
+      "id": null,
+      "file": "data\\铁道\\data-fusion.js",
+      "line": 43,
+      "content": "var knownLines = window.UNIFIED_LINES;",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "DataFusion polling layer - compatibility shim",
+      "railwaydb_equivalent": ""
+    },
+    {
+      "id": null,
+      "file": "data\\铁道\\data-fusion.js",
+      "line": 74,
+      "content": "if (!window.UNIFIED_LINES) return;",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "DataFusion null check",
+      "railwaydb_equivalent": ""
+    },
+    {
+      "id": null,
+      "file": "data\\铁道\\data-fusion.js",
+      "line": 76,
+      "content": "Object.keys(window.UNIFIED_LINES).forEach(function(id) {",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "DataFusion sync loop",
+      "railwaydb_equivalent": ""
+    },
+    {
+      "id": null,
+      "file": "data\\铁道\\data-fusion.js",
+      "line": 85,
+      "content": "if (!window.UNIFIED_LINES) return;",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "DataFusion cache check",
+      "railwaydb_equivalent": ""
+    },
+    {
+      "id": null,
+      "file": "data\\铁道\\data-fusion.js",
+      "line": 86,
+      "content": "var currentVersion = Object.keys(window.UNIFIED_LINES).length;",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "DataFusion version check",
+      "railwaydb_equivalent": ""
+    },
+    {
+      "id": null,
+      "file": "data\\铁道\\data-fusion.js",
+      "line": 141,
+      "content": "var line = (window.UNIFIED_LINES && window.UNIFIED_LINES[lineId]) || (localData.lines && localData.lines[lineId]) || nul",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "DataFusion fallback lookup",
+      "railwaydb_equivalent": ""
+    },
+    {
+      "id": null,
+      "file": "data\\铁道\\data-fusion.js",
+      "line": 154,
+      "content": "if (window.UNIFIED_LINES) Object.keys(window.UNIFIED_LINES).forEach(function(k) { allLineIds[k] = true; });",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "DataFusion fusion logic",
+      "railwaydb_equivalent": ""
+    },
+    {
+      "id": null,
+      "file": "data\\铁道\\data-fusion.js",
+      "line": 160,
+      "content": "var fusedData = { version: FUSION_VERSION, timestamp: new Date().toISOString(), lines: fusedLines, lineOrder: (window.Li",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "DataFusion fused data construction",
+      "railwaydb_equivalent": ""
+    },
+    {
+      "id": null,
+      "file": "data\\铁道\\data-fusion.js",
+      "line": 185,
+      "content": "if (window.UNIFIED_LINES && Object.keys(window.UNIFIED_LINES).length > 0) {",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "DataFusion late-load poll",
+      "railwaydb_equivalent": ""
+    },
+    {
+      "id": null,
+      "file": "data\\铁道\\data-fusion.js",
+      "line": 186,
+      "content": "try { fuseAll(); console.log(\"[DataFusion] Late UNIFIED_LINES loaded, re-fused:\", Object.keys(window.UNIFIED_LINES).leng",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "DataFusion re-fuse log",
+      "railwaydb_equivalent": ""
+    },
+    {
+      "id": null,
+      "file": "data\\铁道\\data-layer.js",
+      "line": 74,
+      "content": "",
+      "category": "BUSINESS_RUNTIME",
+      "decision": "MIGRATE",
+      "reason": "getAllLines() reads UNIFIED_LINES not RailwayDB",
+      "railwaydb_equivalent": "RailwayDB.getAllLines()"
+    },
+    {
+      "id": null,
+      "file": "data\\铁道\\data-layer.js",
+      "line": 75,
+      "content": "",
+      "category": "BUSINESS_RUNTIME",
+      "decision": "MIGRATE",
+      "reason": "getAllLines() direct UNIFIED_LINES[id]",
+      "railwaydb_equivalent": "RailwayDB.getAllLines()"
+    },
+    {
+      "id": null,
+      "file": "data\\铁道\\data-layer.js",
+      "line": 82,
+      "content": "",
+      "category": "BUSINESS_RUNTIME",
+      "decision": "MIGRATE",
+      "reason": "getLine() returns UNIFIED_LINES[id] not RailwayDB.getLine",
+      "railwaydb_equivalent": "RailwayDB.getLine(lineId)"
+    },
+    {
+      "id": null,
+      "file": "data\\铁道\\data-state.js",
+      "line": 146,
+      "content": "",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "Presentation order conditional",
+      "railwaydb_equivalent": ""
+    },
+    {
+      "id": null,
+      "file": "data\\铁道\\data-state.js",
+      "line": 175,
+      "content": "",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "Presentation order map fallback",
+      "railwaydb_equivalent": ""
+    },
+    {
+      "id": null,
+      "file": "data\\铁道\\data-state.js",
+      "line": 176,
+      "content": "",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "Same ternary",
+      "railwaydb_equivalent": ""
+    },
+    {
+      "id": null,
+      "file": "data\\铁道\\data-state.js",
+      "line": 251,
+      "content": "",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "Init fallback superseded by DataFusion",
+      "railwaydb_equivalent": ""
+    },
+    {
+      "id": null,
+      "file": "data\\铁道\\realtime-view.js",
+      "line": 129,
+      "content": "if (window.UNIFIED_LINES && Object.keys(window.UNIFIED_LINES).length > 0) {",
+      "category": "BUSINESS_RUNTIME",
+      "decision": "MIGRATE",
+      "reason": "getLines() checks UNIFIED_LINES",
+      "railwaydb_equivalent": "RailwayDB.getLine(lineId)"
+    },
+    {
+      "id": null,
+      "file": "data\\铁道\\realtime-view.js",
+      "line": 130,
+      "content": "var lpsOrder = (window.LinePresentationService && window.UNIFIED_LINES) ? window.LinePresentationService.getDisplayOrder",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "Presentation order conditional",
+      "railwaydb_equivalent": ""
+    },
+    {
+      "id": null,
+      "file": "data\\铁道\\route-search.js",
+      "line": 21,
+      "content": "for (const lineId of Object.keys(window.UNIFIED_LINES)) {",
+      "category": "BUSINESS_RUNTIME",
+      "decision": "MIGRATE",
+      "reason": "buildStationGraph BFS iteration",
+      "railwaydb_equivalent": "RailwayDB.getAllLines()+RailwayDB.getLineStationOrder()"
+    },
+    {
+      "id": null,
+      "file": "data\\铁道\\route-search.js",
+      "line": 22,
+      "content": "const line = window.UNIFIED_LINES[lineId];",
+      "category": "BUSINESS_RUNTIME",
+      "decision": "MIGRATE",
+      "reason": "buildStationGraph line access",
+      "railwaydb_equivalent": "RailwayDB.getAllLines()+RailwayDB.getLineStationOrder()"
+    },
+    {
+      "id": null,
+      "file": "data\\铁道\\route-search.js",
+      "line": 53,
+      "content": "const connectLine = window.UNIFIED_LINES[connectLineId];",
+      "category": "BUSINESS_RUNTIME",
+      "decision": "MIGRATE",
+      "reason": "findRoute transfer lookup",
+      "railwaydb_equivalent": "RailwayDB.get*() API"
+    },
+    {
+      "id": null,
+      "file": "data\\铁道\\route-search.js",
+      "line": 100,
+      "content": "const line = window.UNIFIED_LINES[segLines[0]];",
+      "category": "BUSINESS_RUNTIME",
+      "decision": "MIGRATE",
+      "reason": "findRoute duration lookup",
+      "railwaydb_equivalent": "RailwayDB.get*() API"
+    },
+    {
+      "id": null,
+      "file": "data\\铁道\\route-search.js",
+      "line": 161,
+      "content": "for (const lineId of Object.keys(window.UNIFIED_LINES)) {",
+      "category": "BUSINESS_RUNTIME",
+      "decision": "MIGRATE",
+      "reason": "getNameToIdMap cache build",
+      "railwaydb_equivalent": "RailwayDB.get*() API"
+    },
+    {
+      "id": null,
+      "file": "data\\铁道\\route-search.js",
+      "line": 162,
+      "content": "const line = window.UNIFIED_LINES[lineId];",
+      "category": "BUSINESS_RUNTIME",
+      "decision": "MIGRATE",
+      "reason": "Same",
+      "railwaydb_equivalent": "RailwayDB.get*() API"
+    },
+    {
+      "id": null,
+      "file": "data\\铁道\\route-search.js",
+      "line": 215,
+      "content": "for (const lineId of Object.keys(window.UNIFIED_LINES)) {",
+      "category": "BUSINESS_RUNTIME",
+      "decision": "MIGRATE",
+      "reason": "getLinesForSegment iteration",
+      "railwaydb_equivalent": "RailwayDB.getLine(lineId)"
+    },
+    {
+      "id": null,
+      "file": "data\\铁道\\route-search.js",
+      "line": 216,
+      "content": "const line = window.UNIFIED_LINES[lineId];",
+      "category": "BUSINESS_RUNTIME",
+      "decision": "MIGRATE",
+      "reason": "Same",
+      "railwaydb_equivalent": "RailwayDB.get*() API"
+    },
+    {
+      "id": null,
+      "file": "data\\铁道\\route-search.js",
+      "line": 240,
+      "content": "for (const lineId of Object.keys(window.UNIFIED_LINES)) {",
+      "category": "BUSINESS_RUNTIME",
+      "decision": "MIGRATE",
+      "reason": "findStationsByTerm search",
+      "railwaydb_equivalent": "RailwayDB.get*() API"
+    },
+    {
+      "id": null,
+      "file": "data\\铁道\\route-search.js",
+      "line": 241,
+      "content": "const line = window.UNIFIED_LINES[lineId];",
+      "category": "BUSINESS_RUNTIME",
+      "decision": "MIGRATE",
+      "reason": "Same",
+      "railwaydb_equivalent": "RailwayDB.get*() API"
+    },
+    {
+      "id": null,
+      "file": "data\\铁道\\trains-detail.js",
+      "line": 29,
+      "content": "return (window.UNIFIED_LINES && window.UNIFIED_LINES[lineId]) || null;",
+      "category": "BUSINESS_RUNTIME",
+      "decision": "MIGRATE",
+      "reason": "getLineData returns UNIFIED_LINES[id]",
+      "railwaydb_equivalent": "RailwayDB.getLine(lineId)"
+    },
+    {
+      "id": null,
+      "file": "data\\铁道\\trains-page.js",
+      "line": 62,
+      "content": "",
+      "category": "BUSINESS_RUNTIME",
+      "decision": "MIGRATE",
+      "reason": "getLinesData direct access",
+      "railwaydb_equivalent": "RailwayDB.getLine(lineId)"
+    },
+    {
+      "id": null,
+      "file": "data\\铁道\\trains-page.js",
+      "line": 97,
+      "content": "",
+      "category": "BUSINESS_RUNTIME",
+      "decision": "MIGRATE",
+      "reason": "getRealtimePositions fallback",
+      "railwaydb_equivalent": "RailwayDB.get*() API"
+    },
+    {
+      "id": null,
+      "file": "data\\铁道\\trains-page.js",
+      "line": 255,
+      "content": "",
+      "category": "BUSINESS_RUNTIME",
+      "decision": "MIGRATE",
+      "reason": "loadCachedPositions merge",
+      "railwaydb_equivalent": "RailwayDB.get*() API"
+    },
+    {
+      "id": null,
+      "file": "data\\铁道\\trains-render.js",
+      "line": 10,
+      "content": "var L = (data && data.lines) || (window.UNIFIED_LINES || {});",
+      "category": "BUSINESS_RUNTIME",
+      "decision": "MIGRATE",
+      "reason": "render fallback to UNIFIED_LINES",
+      "railwaydb_equivalent": "RailwayDB.getAllLines()"
+    },
+    {
+      "id": null,
+      "file": "data\\铁道\\trains-render.js",
+      "line": 11,
+      "content": "var lineOrder = (window.LinePresentationService && window.UNIFIED_LINES) ? window.LinePresentationService.getDisplayOrde",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "Presentation order conditional",
+      "railwaydb_equivalent": ""
+    },
+    {
+      "id": null,
+      "file": "data\\铁道\\trains-render.js",
+      "line": 36,
+      "content": "if (window.UNIFIED_LINES && Object.keys(window.UNIFIED_LINES).length > 0) { render({ lines: window.UNIFIED_LINES }); ret",
+      "category": "BUSINESS_RUNTIME",
+      "decision": "MIGRATE",
+      "reason": "init renders UNIFIED_LINES",
+      "railwaydb_equivalent": "RailwayDB.getAllLines()"
+    },
+    {
+      "id": null,
+      "file": "data\\铁道\\trains-render.js",
+      "line": 40,
+      "content": "if (!d) d = { lines: window.UNIFIED_LINES || {} };",
+      "category": "BUSINESS_RUNTIME",
+      "decision": "MIGRATE",
+      "reason": "tryRender fallback",
+      "railwaydb_equivalent": "RailwayDB.get*() API"
+    },
+    {
+      "id": null,
+      "file": "data\\铁道\\trains-render.js",
+      "line": 61,
+      "content": "if (!d) d = { lines: window.UNIFIED_LINES || {} };",
+      "category": "BUSINESS_RUNTIME",
+      "decision": "MIGRATE",
+      "reason": "tryRender fallback",
+      "railwaydb_equivalent": "RailwayDB.get*() API"
+    },
+    {
+      "id": null,
+      "file": "js\\route-search.js",
+      "line": 4,
+      "content": "* based on the UNIFIED_LINES data structure.",
+      "category": "COMMENT",
+      "decision": "IGNORE",
+      "reason": "Comment: based on UNIFIED_LINES",
+      "railwaydb_equivalent": ""
+    },
+    {
+      "id": null,
+      "file": "js\\route-search.js",
+      "line": 14,
+      "content": "* Build a bidirectional adjacency list from UNIFIED_LINES",
+      "category": "COMMENT",
+      "decision": "IGNORE",
+      "reason": "Comment: adjacency list from UNIFIED_LINES",
+      "railwaydb_equivalent": ""
+    },
+    {
+      "id": null,
+      "file": "js\\trains-page.js",
+      "line": 3,
+      "content": "* v4 - 从 railway_data.json 加载 stations/durations + line-control.js 元数据",
+      "category": "COMMENT",
+      "decision": "IGNORE",
+      "reason": "Comment: v4 from railway_data.json",
+      "railwaydb_equivalent": ""
+    },
+    {
+      "id": null,
+      "file": "js\\realtime-view.js",
+      "line": 127,
+      "content": "}",
+      "category": "COMMENT",
+      "decision": "IGNORE",
+      "reason": "Comment about realtime",
+      "railwaydb_equivalent": ""
+    },
+    {
+      "id": null,
+      "file": "js\\realtime-view.js",
+      "line": 128,
+      "content": "// Priority 2: Direct UNIFIED_LINES (raw data, no delay info)",
+      "category": "COMMENT",
+      "decision": "IGNORE",
+      "reason": "Comment about LinePresentationService",
+      "railwaydb_equivalent": ""
+    },
+    {
+      "id": null,
+      "file": "data\\铁道\\route-search.js",
+      "line": 4,
+      "content": "* based on the UNIFIED_LINES data structure.",
+      "category": "COMMENT",
+      "decision": "IGNORE",
+      "reason": "Same",
+      "railwaydb_equivalent": ""
+    },
+    {
+      "id": null,
+      "file": "data\\铁道\\route-search.js",
+      "line": 14,
+      "content": "* Build a bidirectional adjacency list from UNIFIED_LINES",
+      "category": "COMMENT",
+      "decision": "IGNORE",
+      "reason": "Same",
+      "railwaydb_equivalent": ""
+    },
+    {
+      "id": null,
+      "file": "data\\铁道\\trains-page.js",
+      "line": 3,
+      "content": "*/",
+      "category": "COMMENT",
+      "decision": "IGNORE",
+      "reason": "Same",
+      "railwaydb_equivalent": ""
+    },
+    {
+      "id": null,
+      "file": "data\\铁道\\realtime-view.js",
+      "line": 127,
+      "content": "}",
+      "category": "COMMENT",
+      "decision": "IGNORE",
+      "reason": "Same",
+      "railwaydb_equivalent": ""
+    },
+    {
+      "id": null,
+      "file": "data\\铁道\\realtime-view.js",
+      "line": 128,
+      "content": "// Priority 2: Direct UNIFIED_LINES (raw data, no delay info)",
+      "category": "COMMENT",
+      "decision": "IGNORE",
+      "reason": "Same",
+      "railwaydb_equivalent": ""
+    }
+  ]
+}
