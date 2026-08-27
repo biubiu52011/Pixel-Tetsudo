@@ -1,0 +1,115 @@
+{
+  "task": "3.21",
+  "date": "2026-08-28",
+  "canonical_sha": "E7277CA8892F2728",
+  "summary": {
+    "total_missing_referenced": 15,
+    "exact_match_count": 0
+  },
+  "classifications": {
+    "Jimbocho": {
+      "lines": [
+        "Mita",
+        "Shinjuku",
+        "Chiyoda",
+        "Hanzomon",
+        "Namboku"
+      ],
+      "exact_match": false
+    },
+    "KokusaiTenjijo": {
+      "lines": [
+        "Rinko"
+      ],
+      "exact_match": false
+    },
+    "MakuhariSeaside": {
+      "lines": [
+        "Rinko"
+      ],
+      "exact_match": false
+    },
+    "Musashi-sakai": {
+      "lines": [
+        "Yurakucho"
+      ],
+      "exact_match": false
+    },
+    "Musashisakai": {
+      "lines": [
+        "SobuRapid"
+      ],
+      "exact_match": false
+    },
+    "Nishi-kokubunji": {
+      "lines": [
+        "Yurakucho",
+        "Oedo",
+        "Keikyu"
+      ],
+      "exact_match": false
+    },
+    "Nishi-takashimadaira": {
+      "lines": [
+        "Yurakucho",
+        "Tozai",
+        "Oedo"
+      ],
+      "exact_match": false
+    },
+    "OdaibaKaihinkoen": {
+      "lines": [
+        "Rinko"
+      ],
+      "exact_match": false
+    },
+    "Shin-Kiba": {
+      "lines": [
+        "Fukutoshin",
+        "Yurikamome",
+        "SobuRapid",
+        "Rinkai"
+      ],
+      "exact_match": false
+    },
+    "ShinKemigawa": {
+      "lines": [
+        "Rinko"
+      ],
+      "exact_match": false
+    },
+    "ShinKiba": {
+      "lines": [
+        "Rinko"
+      ],
+      "exact_match": false
+    },
+    "Shinjuku-sanchome": {
+      "lines": [
+        "Shinjuku"
+      ],
+      "exact_match": false
+    },
+    "Tokyo Teleport": {
+      "lines": [
+        "Keiyo",
+        "Musashino",
+        "Yurikamome",
+        "TamaMonorail"
+      ],
+      "exact_match": false
+    },
+    "TokyoBigSight": {
+      "lines": [
+        "Rinko"
+      ],
+      "exact_match": false
+    },
+    "TokyoTeleport": {
+      "lines": [
+        "Rinko"
+      ],
+      "exact_match": false
+    }
+  }
+}
