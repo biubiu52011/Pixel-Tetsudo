@@ -1,8 +1,8 @@
 {
-  "task": "3.27.1",
+  "task": "3.27.2",
   "date": "2026-08-28",
-  "local_head": "472d29c",
-  "origin_master": "472d29c",
+  "local_head": "dba9ec74c88691676c7bd3c3991509cc89b29392",
+  "origin_master": "dba9ec74c88691676c7bd3c3991509cc89b29392",
   "sync": true,
   "working_tree_clean": true,
   "canonical_data_sha": "1ED8A6ED8E227807CF0C1D84E897CE2C1CFC57CC3E50C5FAD3D03CC00548E81B",
@@ -10,9 +10,10 @@
   "architecture_guard": "PASS",
   "home_ui_guard": "PASS",
   "brace_balance": "PASS",
-  "changes": "Added 6 REAL_STATION entities: Aomori, Daikanyama, Niigata, Sendai, Kawaguchiko, Kiyosumi-Shirakawa",
-  "stations_before": 503,
-  "stations_after": 509,
-  "tourism_orphans_before": 36,
-  "tourism_orphans_after": 30
+  "audit_report": "recovery/reports/3.27.2_tourism_naming_variant_audit.json",
+  "changes": "No code or data changes - audit report only",
+  "variant_resolution": {
+    "resolved": 2,
+    "hold": 10
+  }
 }
