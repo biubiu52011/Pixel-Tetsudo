@@ -1,20 +1,16 @@
 {
-  "task": "3.28.1-B",
-  "date": "2026-08-27",
-  "local_head": "19445a5d88d7d54b63e79a566e7387b06d12d1f0",
-  "origin_master": "19445a5d88d7d54b63e79a566e7387b06d12d1f0",
+  "task": "3.28.2",
+  "date": "2026-08-28",
+  "local_head": "fd025f684d0169151788bbb1661102b5e63b4de1",
+  "origin_master": "fd025f684d0169151788bbb1661102b5e63b4de1",
   "sync": true,
   "working_tree_clean": true,
   "mirror_consistency": true,
   "canonical_data_sha": "d2c88c7cac418c148ec46ec7e5bc2bb180d9dec3",
   "home_sha": "6feb3f2e3b667f7aa68423606d05ac0243f946f7",
-  "ci_validate": "PASS",
-  "ci_deploy_pages": "FAIL (pre-existing)",
-  "entity_guard": "PASS",
+  "ci_guard": "PASS",
   "architecture_guard": "PASS",
   "home_ui_guard": "PASS",
   "brace_balance": "PASS",
-  "changes": "js/translations.js: fixed stray double-quote on tourism.loc_error key (line 592)",
-  "root_cause": "extra leading double-quote caused SyntaxError, breaking all i18n on realtime.html",
-  "browser_check": "All 9 realtime.html scripts pass syntax validation"
+  "changes": "realtime.html: Modal DOM fixed (4 sections pre-built); realtime-view.js: Operator filter bar + last-updated timestamp + getDisplayName; data-state.js: no_odpt icon changed (hollow->filled circle); realtime.css: Filter bar styles + mobile responsive; Mirrors: HTML + JS synced to data/铁道/"
 }
