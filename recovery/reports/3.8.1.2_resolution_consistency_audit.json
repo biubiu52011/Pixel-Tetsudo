@@ -1,0 +1,62 @@
+{
+  "title": "3.8.1.2 Station Resolution Consistency Audit",
+  "date": "2026-08-28",
+  "canonical_sha": "27ED38FC6910781268E231906ECC683367D1C93FCA725CBE803EB167B4B2240E",
+  "three_category_classification": {
+    "ENTITY_AND_CONNECTED": 458,
+    "ENTITY_ONLY": 45,
+    "ORPHAN_REFERENCE": 1383
+  },
+  "resolution_by_category": {
+    "connected_458": {
+      "EN_exact": 458,
+      "JP_exact": 0,
+      "total_resolved": 458
+    },
+    "entity_only_45": {
+      "EN_exact": 3,
+      "EN_partial": 21,
+      "NOT_FOUND": 21,
+      "total_resolved": 24
+    }
+  },
+  "overall": {
+    "total_stations": 503,
+    "total_resolved": 482,
+    "total_unresolved": 21,
+    "resolution_rate": 95.8
+  },
+  "name_map_coverage": {
+    "stations_with_jp_name": 254,
+    "stations_without_jp_name": 249
+  },
+  "entity_only_not_found": [
+    "Akishima",
+    "Bakurōmae",
+    "Hayato",
+    "Kegon",
+    "KinutaPark",
+    "Koenji",
+    "Kunitachi",
+    "Kusatsu",
+    "Kyoto",
+    "Nagatsuta",
+    "Nagoya",
+    "Sesenji",
+    "Shin-Bayashi",
+    "Shin-Marunouchi",
+    "Suginami",
+    "Sunamachi",
+    "Tameike-sanno",
+    "Tampopo",
+    "Teleport-Chuo",
+    "Tempozanto-Mae",
+    "Tobu-Dozui-Michi"
+  ],
+  "known_limitations": {
+    "21_entity_only_not_found": "Stations in entity but not on any line and no partial match — expected, not a bug",
+    "1383_orphan_refs": "Station IDs in line.stations without entity — pre-existing, BFS handles gracefully",
+    "139_zero_coordinate": "Tourism proximity skips these",
+    "3_duplicate_name_map": "Ichigaya, Kohoku, Kasumigaseki have multiple JP keys"
+  }
+}
