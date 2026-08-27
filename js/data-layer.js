@@ -80,16 +80,10 @@
     });
     return lines;
   }
-    });
-    return lines;
-  }
 
   function getLine(lineId) {
     if (window.RailwayDB && window.RailwayDB.isLoaded() && window.RailwayDB.getLine) {
       return window.RailwayDB.getLine(lineId) || null;
-    }
-    return window.UNIFIED_LINES ? window.UNIFIED_LINES[lineId] : null;
-  }
     }
     return window.UNIFIED_LINES ? window.UNIFIED_LINES[lineId] : null;
   }
