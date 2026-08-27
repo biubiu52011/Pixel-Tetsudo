@@ -1,25 +1,16 @@
 {
   "task": "3.29",
   "date": "2026-08-28",
-  "local_head": "c3038c578cfd6c00b36fbe8903254861d61c443b",
-  "origin_master": "c3038c578cfd6c00b36fbe8903254861d61c443b",
+  "local_head": "97ccf898f40de35589d96ae75ef81f61fdd4b03d",
+  "origin_master": "97ccf898f40de35589d96ae75ef81f61fdd4b03d",
   "sync": true,
   "working_tree_clean": true,
   "mirror_consistency": true,
   "canonical_data_sha": "d2c88c7cac418c148ec46ec7e5bc2bb180d9dec3",
-  "ci_guard": "PASS",
+  "ci_validate": "PASS (pre-existing Pages deploy failure)",
+  "entity_guard": "PASS",
   "architecture_guard": "PASS",
   "home_ui_guard": "PASS",
   "brace_balance": "PASS",
-  "changes": "F-001 fix: fused.lastUpdate → fused.timestamp in realtime-view.js (modal + updateTimestamp). Audit report: recovery/reports/3.29_realtime_data_quality_audit.json",
-  "audit_findings": {
-    "total": 5,
-    "high": 1,
-    "info": 3,
-    "f001_fixed": "Timestamp property mismatch (lastUpdate→timestamp)",
-    "f002_open": "Lines with ODPT mapping but no API response default to normal status",
-    "f003_open": "Rinkai operator has no ODPT endpoint",
-    "f004_info": "parseODPTDelay keyword matching is format-dependent",
-    "f005_info": "updateOdptData function has no callers (dead API)"
-  }
+  "changes": "F-001 FIX: realtime-view.js fused.lastUpdate→fused.timestamp (modal + updateTimestamp); Audit report: recovery/reports/3.29_realtime_data_quality_audit.json (5 findings: 1 HIGH fixed, 3 INFO, 1 LOW)"
 }
