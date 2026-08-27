@@ -185,7 +185,8 @@
         "Yonezawa": "JR-East",
         "Yurakucho": "TokyoMetro",
         "Yurakucho_Seibu": "Seibu",
-        "Yurikamome": "Yurikamome"
+        "Yurikamome": "Yurikamome",
+        "Tōnami": "JR-East"
     };
 
     // ========== Fetch wrapper ==========
