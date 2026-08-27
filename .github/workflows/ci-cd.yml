@@ -43,6 +43,11 @@ jobs:
           echo Running canonical entity preservation guard...
           python .github/workflows/ci_guard_check.py
 
+      - name: Architecture Integrity Guard
+        run: |
+          echo Running architecture integrity guard...
+          python .github/workflows/ci_arch_guard.py
+
       - name: Check No localhost
         run: |
           echo "Checking for localhost/127.0.0.1 references..."
