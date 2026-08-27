@@ -1,0 +1,35 @@
+{
+  "title": "3.8.2.1 BFS Graph Construction Audit — Case Mismatch Fix",
+  "date": "2026-08-28",
+  "canonical_sha": "27ED38FC6910781268E231906ECC683367D1C93FCA725CBE803EB167B4B2240E",
+  "fix_applied": {
+    "file": "js/station-resolver.js",
+    "function_added": "_normalizeId(id)",
+    "description": "Normalizes resolved station IDs to canonical casing from line.stations",
+    "stations_fixed": [
+      "Azabu-juban -> Azabu-Juban",
+      "Tama-center -> Tama-Center",
+      "Shin-Kawasaki -> Shin-kawasaki"
+    ]
+  },
+  "pre_fix_classification": {
+    "EN_exact_connected": 458,
+    "CI_only_BFS_fails": 3,
+    "JP_exact_entity_only": 13,
+    "EN_partial_entity_only": 16,
+    "NOT_FOUND": 16,
+    "total": 503
+  },
+  "post_fix_classification": {
+    "EN_exact_connected": 461,
+    "JP_exact_entity_only": 13,
+    "EN_partial_entity_only": 16,
+    "NOT_FOUND": 13,
+    "total": 503
+  },
+  "resolution_rate_before": "487/503 (96.8%)",
+  "resolution_rate_after": "490/503 (97.4%)",
+  "ci_guard": "PASS",
+  "arch_guard": "PASS",
+  "canonical_sha_unchanged": true
+}

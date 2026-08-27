@@ -9,8 +9,21 @@
   var _enToJp = {};
   var _lineStationIds = null;
 
-  function _hasJapanese(s) {
-    return /[\u4e00-\u9fff\u3040-\u309f\u30a0-\u30ff]/.test(s);
+  function _hasJapanese(s) { return /[\\u4e00-\\u9fff\\u3040-\\u309f\\u30a0-\\u30ff]/.test(s); }
+
+  /**
+   * Normalize a resolved station ID to the canonical casing used in line.stations.
+   * Fixes case-mismatch where entity key differs from line references.
+   * E.g. "Azabu-juban" -> "Azabu-Juban", "Tama-center" -> "Tama-Center"
+   * Returns the original id if no canonical form is found (entity-only stations).
+   */
+  function _normalizeId(id) {
+    var lower = id.toLowerCase();
+    var arr = Array.from(_lineStationIds);
+    for (var j = 0; j < arr.length; j++) {
+      if (arr[j].toLowerCase() === lower) return arr[j];
+    }
+    return id;
   }
 
   function _buildIndex() {
@@ -72,10 +85,12 @@
     if (isJp) {
       if (_MAJOR_STATION_FALLBACK[q]) {
         var fid = _MAJOR_STATION_FALLBACK[q];
-        return [{ stationId: fid, displayName: fid, status: "EXACT" }];
+        var normFid = _normalizeId(fid);
+        return [{ stationId: normFid, displayName: fid, status: "EXACT" }];
       }
       if (_jpToEn[q]) {
-        return [{ stationId: _jpToEn[q], displayName: _jpToEn[q], status: "EXACT" }];
+        var normJp = _normalizeId(_jpToEn[q]);
+        return [{ stationId: normJp, displayName: _jpToEn[q], status: "EXACT" }];
       }
       var jpMatches = [];
       for (var jpKey in _jpToEn) {
@@ -92,7 +107,7 @@
     }
     if (_enToJp[qLower]) {
       var jk = _enToJp[qLower];
-      var jid = _jpToEn[jk] || qLower;
+      var jid = _normalizeId(_jpToEn[jk] || qLower);
       return [{ stationId: jid, displayName: jid, status: "ALIAS" }];
     }
     var partial = [];
