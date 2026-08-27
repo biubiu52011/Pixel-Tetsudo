@@ -1,0 +1,4529 @@
+[
+  {
+    "station_id": "Abiko",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Adachi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 5,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Adachi-Kangura",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Akabane",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Akabane-Iwabuchi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Akabanebashi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Akasaka",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 6,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Akasaka-mitsuke",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 5,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Akatsuka",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Akebono",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Akigawa",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Akihabara",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Akishima",
+    "entity_exists": true,
+    "route_reachable": false,
+    "en_exact_cs": false,
+    "jp_exact": true,
+    "en_partial_count": 0,
+    "resolver_status": "JP_exact"
+  },
+  {
+    "station_id": "Akitsu",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Aoba-dori",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Aomi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Aoto",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Aoyama-itchome",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 4,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Ariake",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Asaka",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 7,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Asakusa",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Atami",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Azabu-Juban",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Azabu-juban",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": false,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "JP_exact"
+  },
+  {
+    "station_id": "Bakurōmae",
+    "entity_exists": true,
+    "route_reachable": false,
+    "en_exact_cs": false,
+    "jp_exact": false,
+    "en_partial_count": 0,
+    "resolver_status": "NOT_FOUND"
+  },
+  {
+    "station_id": "Bay-Cross",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Chichibu",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Chigasaki",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Choju",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Chuo-Ku",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Chuo-rinkan",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Daiba",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Daimon",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Daizen-ji",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Den-en-chofu",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Denno",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Ebisu",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Ekimae",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Fuchu",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 7,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Fuchubashi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Fudosan-mae",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Fujimi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 7,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Fujisawa",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Funabashi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 5,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Futamata-gawa",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Futamatao",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Ginza",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Ginza-hitchome",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Ginza-yonchome",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Go-komon",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Gotanda",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 5,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Hacchobori",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Hachiman",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 7,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Hachiman-Honmachi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Hachiman-gaika",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Hachioji",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 4,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Haijima",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Hakusan",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Hama-Kawada",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Hamamatsucho",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Hanno",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Hanzomon",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Harajuku",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Harumi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Harumi-futago",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Hashimoto",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Hasuda",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Hatchobori",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Hayato",
+    "entity_exists": true,
+    "route_reachable": false,
+    "en_exact_cs": false,
+    "jp_exact": false,
+    "en_partial_count": 0,
+    "resolver_status": "NOT_FOUND"
+  },
+  {
+    "station_id": "Hibiya",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Higashi-Akiru",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Higashi-Hachioji",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Higashi-Ikebukuro",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Higashi-Jujo",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Higashi-Kanagawa",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Higashi-Kawasaki",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Higashi-Koganei",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 4,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Higashi-Maruko",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Higashi-Murayama",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Higashi-Ome",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Higashi-Shinbashi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Higashi-Totsuka",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 4,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Higashi-Yamatokoji",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 4,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Higashi-Yokosuka",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Higashi-Zushi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Higashi-gotanda",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 5,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Higashi-murayama",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Higashi-nihonbashi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Higashimurayama",
+    "entity_exists": true,
+    "route_reachable": false,
+    "en_exact_cs": false,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_partial(1)"
+  },
+  {
+    "station_id": "Hikaridai",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Hinatawada",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Hino",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 19,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Hinode",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Hiratsuka",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Hiroo",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Hitotsubashi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Hon-Jo",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Hongo-dai",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Honjo",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Horinouchi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Hotaru-Kaihinkogen",
+    "entity_exists": true,
+    "route_reachable": false,
+    "en_exact_cs": false,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_partial(1)"
+  },
+  {
+    "station_id": "Ichigaya",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Iidabashi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Ikebukuro",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 5,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Ikeda",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Imaichi",
+    "entity_exists": true,
+    "route_reachable": false,
+    "en_exact_cs": false,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_partial(1)"
+  },
+  {
+    "station_id": "Inokashira",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 4,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Iruma",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Iruma-shi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Isehara",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Ishigamimae",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Ishikawacho",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 5,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Ishikawadai",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 6,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Isogo",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Itabashi",
+    "entity_exists": true,
+    "route_reachable": false,
+    "en_exact_cs": false,
+    "jp_exact": true,
+    "en_partial_count": 3,
+    "resolver_status": "JP_exact"
+  },
+  {
+    "station_id": "Ito",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 11,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Iwatsunomachi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Jimbocho",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kachidoki",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kacho-mae",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kamagaya",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kamakura",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kamata",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kami-Nakazato",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kamiyacho",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kanagawa-NewTown",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kanda",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kannai",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Karasuyama",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kasai-Rinkai",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kashiwa",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 8,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kasminato",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kasumigaseki",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kawaguchi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 5,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kawasaki",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 7,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kayabacho",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kegon",
+    "entity_exists": true,
+    "route_reachable": false,
+    "en_exact_cs": false,
+    "jp_exact": false,
+    "en_partial_count": 0,
+    "resolver_status": "NOT_FOUND"
+  },
+  {
+    "station_id": "Keio-Hachioji",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Keisei-Tsukawa",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kerama",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kiba",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 5,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kichijoji",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kikuna",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kimachi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kinshi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "KinutaPark",
+    "entity_exists": true,
+    "route_reachable": false,
+    "en_exact_cs": false,
+    "jp_exact": false,
+    "en_partial_count": 0,
+    "resolver_status": "NOT_FOUND"
+  },
+  {
+    "station_id": "Kishibojin",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kissaki",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kita-Aoi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kita-Otsuka",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kita-Saitama",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kita-Sendai",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kita-Senju",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kita-Urawa",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kita-Yamato",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kita-Zushi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kitasendai",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kitasenju",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kiyose",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kodaira",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 4,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Koenji",
+    "entity_exists": true,
+    "route_reachable": false,
+    "en_exact_cs": false,
+    "jp_exact": true,
+    "en_partial_count": 0,
+    "resolver_status": "JP_exact"
+  },
+  {
+    "station_id": "Koganei",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 4,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Koiwa",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 7,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Koji",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 10,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Koji-mae",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kojimachi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 4,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kokkai-gijido",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kokubunji",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kokudo",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kokumin-kyogijo",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kokusai-Tenjijo",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "KokusaiTenjijo",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Komagome",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Komazawa",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Konan-dai",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Korakuen",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Koshigaya",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kotaki",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Koto-shibari",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kototoi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Koyasu",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kudanshita",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kugahara",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kuki",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kumagaya",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kunitachi",
+    "entity_exists": true,
+    "route_reachable": false,
+    "en_exact_cs": false,
+    "jp_exact": true,
+    "en_partial_count": 0,
+    "resolver_status": "JP_exact"
+  },
+  {
+    "station_id": "Kuramae",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kurihama",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kuroiso",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Kusatsu",
+    "entity_exists": true,
+    "route_reachable": false,
+    "en_exact_cs": false,
+    "jp_exact": false,
+    "en_partial_count": 0,
+    "resolver_status": "NOT_FOUND"
+  },
+  {
+    "station_id": "Kyoto",
+    "entity_exists": true,
+    "route_reachable": false,
+    "en_exact_cs": false,
+    "jp_exact": false,
+    "en_partial_count": 0,
+    "resolver_status": "NOT_FOUND"
+  },
+  {
+    "station_id": "Machida",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Machiya",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 5,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Maebashi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Makuhari",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 6,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Makuhari Seaside",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Makuhari-Hong",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Makuhari-hongo",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "MakuhariSeaside",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Matsuda",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Meguro",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Meguro-Dai",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Mejiro",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 4,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Mejiro-dai",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 4,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Midoricho",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Midoridai",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Midosuji",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Mikawahashi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 4,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Minami-Aoyama",
+    "entity_exists": true,
+    "route_reachable": false,
+    "en_exact_cs": false,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_partial(2)"
+  },
+  {
+    "station_id": "Minami-Kemigawa",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Minami-Koiwa",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Minami-Magome",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Minami-Nagasaki",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Minami-Senju",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Minami-Urawa",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Minami-Wakasu",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "MinamiKemigawa",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Minato-Mirai",
+    "entity_exists": true,
+    "route_reachable": false,
+    "en_exact_cs": false,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_partial(3)"
+  },
+  {
+    "station_id": "Minato-Mirai-21",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Minowa",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Minowa-shita",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Miraikai",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Mita",
+    "entity_exists": true,
+    "route_reachable": false,
+    "en_exact_cs": false,
+    "jp_exact": true,
+    "en_partial_count": 6,
+    "resolver_status": "JP_exact"
+  },
+  {
+    "station_id": "Mitaka",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Mitake",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Mitarashi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Mitsukoshimae",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Miura-Kaigan",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Miyagi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Miyanohira",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Mizonokuchi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Motomachi-Chukagai",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Mukaiminato",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Mukojima",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 4,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Musashi-Fujisawa",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Musashi-Hikita",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Musashi-Itsukaichi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Musashi-Kosugi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Musashi-Masuko",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Musashi-Mitsuwadai",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Musashi-Nakagawa",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 4,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Musashi-Saiwai",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Musashi-Sakai",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 4,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Musashi-Shinjo",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Musashi-Yamanaka",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Musashi-Yoshida",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Musashi-sakai",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 4,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Musashimurayama",
+    "entity_exists": true,
+    "route_reachable": false,
+    "en_exact_cs": false,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_partial(1)"
+  },
+  {
+    "station_id": "Musashino",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Musashinurare",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Musashisakai",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Musashynuigami",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Nagasaki",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Nagatacho",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Nagatoro",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Nagatsuta",
+    "entity_exists": true,
+    "route_reachable": false,
+    "en_exact_cs": false,
+    "jp_exact": true,
+    "en_partial_count": 0,
+    "resolver_status": "JP_exact"
+  },
+  {
+    "station_id": "Nagoya",
+    "entity_exists": true,
+    "route_reachable": false,
+    "en_exact_cs": false,
+    "jp_exact": false,
+    "en_partial_count": 0,
+    "resolver_status": "NOT_FOUND"
+  },
+  {
+    "station_id": "Naka-mejima",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Nakagami",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Nakagawara",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 4,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Nakahara",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Nakameguro",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Nakamurabashi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Nakano",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 7,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Nakano-Sakaue",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Nakano-fujimicho",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Nakatsu",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Nambu",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Narashino",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Naruse",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Negishi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Nerima",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Nezu",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Nihon-odori",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Nihonbashi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Niiza",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Nijubashimae",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Nikko",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Ningyocho",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Nippori",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Nishi-Akiru",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Nishi-Fuchubashi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 4,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Nishi-Ikebukuro",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Nishi-Kasai",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Nishi-Kawaguchi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Nishi-Kawasaki",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Nishi-Kichijoji",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Nishi-Koiwa",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 4,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Nishi-Magome",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Nishi-Nakajima",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Nishi-Nippori",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Nishi-Ome",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Nishi-Shinjuku",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Nishi-Tachikawa",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 5,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Nishi-Takashimadaira",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 5,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Nishi-Totsuka",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 4,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Nishi-fuchu",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Nishi-fushimi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Nishi-koen",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Nishi-kokubunji",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Nishi-takahashimadaira",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Nishi-takaido",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Nishi-takashimadaira",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 5,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Nishifujisawa",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Ochanomizu",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 4,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Odaiba-Kaihinkoen",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "OdaibaKaihinkoen",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 4,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Odawara",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Ofuna",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Oi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 38,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Oimachi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Oizumigakuen",
+    "entity_exists": true,
+    "route_reachable": false,
+    "en_exact_cs": false,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_partial(2)"
+  },
+  {
+    "station_id": "Oji",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 25,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Okachi",
+    "entity_exists": true,
+    "route_reachable": false,
+    "en_exact_cs": false,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_partial(3)"
+  },
+  {
+    "station_id": "Okachimachi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Okutama-gochi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Okutama-guchi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Ome",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 18,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Omiya",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 9,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Omori",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 5,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Omotesando",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Onarimon",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Osaka",
+    "entity_exists": true,
+    "route_reachable": false,
+    "en_exact_cs": false,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_partial(2)"
+  },
+  {
+    "station_id": "Osaki",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Oshiage",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Oshida",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 6,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Ota",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 21,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Otemachi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Otsuka",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 9,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Otsuka-ekimae",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 4,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Oyama",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 14,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Roppongi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Ryogoku",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Sagami-Ono",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Saitama",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 5,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Saitama-Shintoshin",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Sakado",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Sakae",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Sakai",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 9,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Sakuragi-cho",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 4,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Sakuragicho",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 4,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Sangenjaya",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Sasazuka",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Sawai",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Sayama",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Seibu-Chausuyama",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Seibu-Chitose",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Seibu-Hikawa",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Seibu-Nakagawa",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 4,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Seibu-Shinjuku",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Seibu-Yuuyamada",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Seijo",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 4,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Seijo-shijo",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Seijodai",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Sesenji",
+    "entity_exists": true,
+    "route_reachable": false,
+    "en_exact_cs": false,
+    "jp_exact": false,
+    "en_partial_count": 0,
+    "resolver_status": "NOT_FOUND"
+  },
+  {
+    "station_id": "Setagaya",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Shibuya",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Shimbashi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Shimo-Kitazzu",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Shimoda",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Shimokitazawa",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Shin-Adachi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Shin-Bayashi",
+    "entity_exists": true,
+    "route_reachable": false,
+    "en_exact_cs": false,
+    "jp_exact": false,
+    "en_partial_count": 0,
+    "resolver_status": "NOT_FOUND"
+  },
+  {
+    "station_id": "Shin-Kawasaki",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": false,
+    "jp_exact": true,
+    "en_partial_count": 3,
+    "resolver_status": "JP_exact"
+  },
+  {
+    "station_id": "Shin-Kemigawa",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Shin-Kiba",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Shin-Koyasu",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Shin-Machiya",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Shin-Marunouchi",
+    "entity_exists": true,
+    "route_reachable": false,
+    "en_exact_cs": false,
+    "jp_exact": false,
+    "en_partial_count": 0,
+    "resolver_status": "NOT_FOUND"
+  },
+  {
+    "station_id": "Shin-Misaki",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Shin-Nihonbashi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Shin-Ochanomizu",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 4,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Shin-Odaimon",
+    "entity_exists": true,
+    "route_reachable": false,
+    "en_exact_cs": false,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_partial(2)"
+  },
+  {
+    "station_id": "Shin-Okachimachi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Shin-Okubo",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Shin-Sugita",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Shin-Takashima",
+    "entity_exists": true,
+    "route_reachable": false,
+    "en_exact_cs": false,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_partial(1)"
+  },
+  {
+    "station_id": "Shin-Toyosu",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Shin-Urawa",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Shin-Yokohama",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Shin-juku",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Shin-juku-nishiguchi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Shin-juku-sanchome",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Shin-kawasaki",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Shin-kiba",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Shin-osaki",
+    "entity_exists": true,
+    "route_reachable": false,
+    "en_exact_cs": false,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_partial(1)"
+  },
+  {
+    "station_id": "Shin-otemachi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Shin-rinkan",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "ShinKemigawa",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "ShinKiba",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Shinagawa",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Shinanomachi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Shinbashi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Shinjuku",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 5,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Shinjuku-nishiguchi",
+    "entity_exists": true,
+    "route_reachable": false,
+    "en_exact_cs": false,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "JP_exact"
+  },
+  {
+    "station_id": "Shinjuku-sanchome",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Shinonome",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 5,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Shinsen",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Shiodome",
+    "entity_exists": true,
+    "route_reachable": false,
+    "en_exact_cs": false,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "JP_exact"
+  },
+  {
+    "station_id": "Shiogama",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 6,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Shiraoka",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Shiroi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Shirokane-Takanawa",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Shirokane-takanawa",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Shirokanedai",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Shonandai",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Sotsu-Shin-Yokohama",
+    "entity_exists": true,
+    "route_reachable": false,
+    "en_exact_cs": false,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_partial(2)"
+  },
+  {
+    "station_id": "Suginami",
+    "entity_exists": true,
+    "route_reachable": false,
+    "en_exact_cs": false,
+    "jp_exact": false,
+    "en_partial_count": 0,
+    "resolver_status": "NOT_FOUND"
+  },
+  {
+    "station_id": "Suidobashi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Sunamachi",
+    "entity_exists": true,
+    "route_reachable": false,
+    "en_exact_cs": false,
+    "jp_exact": false,
+    "en_partial_count": 0,
+    "resolver_status": "NOT_FOUND"
+  },
+  {
+    "station_id": "Tabata",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Tachikawa",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 9,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Tachikawa-Kita",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 5,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Tachikawa-Minami",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 5,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Tadachi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Taishakuten",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Taito",
+    "entity_exists": true,
+    "route_reachable": false,
+    "en_exact_cs": false,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "JP_exact"
+  },
+  {
+    "station_id": "Takadanobaba",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Takahashimadaira",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Takahatafujimidai",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Takanawa",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 4,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Takanawa-Gateway",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Takaosanguchi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Takaradai",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Takasaki",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 4,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Takashimadaira",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 5,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Takebashi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Tama",
+    "entity_exists": true,
+    "route_reachable": false,
+    "en_exact_cs": false,
+    "jp_exact": true,
+    "en_partial_count": 27,
+    "resolver_status": "JP_exact"
+  },
+  {
+    "station_id": "Tama-Center",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Tama-center",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": false,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_partial(3)"
+  },
+  {
+    "station_id": "Tama-plaza",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Tamachi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Tamagawa",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 4,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Tamagawa-Enzei-ji",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Tamako",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Tameike-sanno",
+    "entity_exists": true,
+    "route_reachable": false,
+    "en_exact_cs": false,
+    "jp_exact": true,
+    "en_partial_count": 0,
+    "resolver_status": "JP_exact"
+  },
+  {
+    "station_id": "Tampopo",
+    "entity_exists": true,
+    "route_reachable": false,
+    "en_exact_cs": false,
+    "jp_exact": false,
+    "en_partial_count": 0,
+    "resolver_status": "NOT_FOUND"
+  },
+  {
+    "station_id": "Tatekawa",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Tateshina",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Tatsumi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Tawaramachi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Teleport-Chuo",
+    "entity_exists": true,
+    "route_reachable": false,
+    "en_exact_cs": false,
+    "jp_exact": false,
+    "en_partial_count": 0,
+    "resolver_status": "NOT_FOUND"
+  },
+  {
+    "station_id": "Tempozanto-Mae",
+    "entity_exists": true,
+    "route_reachable": false,
+    "en_exact_cs": false,
+    "jp_exact": false,
+    "en_partial_count": 0,
+    "resolver_status": "NOT_FOUND"
+  },
+  {
+    "station_id": "Tobata",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Tobu-Dozui-Michi",
+    "entity_exists": true,
+    "route_reachable": false,
+    "en_exact_cs": false,
+    "jp_exact": false,
+    "en_partial_count": 0,
+    "resolver_status": "NOT_FOUND"
+  },
+  {
+    "station_id": "Tochomae",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Tokigawa",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Tokiwabashi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Tokyo",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 10,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Tokyo Big Sight",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Tokyo Dome-mae",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Tokyo Teleport",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Tokyo-Teleport",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Tokyo-domae",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "TokyoBigSight",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "TokyoTeleport",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Toranomon",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Toride",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Totsuka",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 5,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Toyo-su",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Toyosu",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Tsukamoto",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Tsukiji",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Tsukishima",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Tsukuba",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Tsunashima",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Tsurukawa",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Tsurumi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Tsurumi-Ryokuchi",
+    "entity_exists": true,
+    "route_reachable": false,
+    "en_exact_cs": false,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_partial(1)"
+  },
+  {
+    "station_id": "Tsutsujigaoka",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Ueno",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 4,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Ueno-Okachimachi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Ueno-hiro",
+    "entity_exists": true,
+    "route_reachable": false,
+    "en_exact_cs": false,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_partial(2)"
+  },
+  {
+    "station_id": "Ueno-hirokoji",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 4,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Uenohara",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Uguisudani",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Umeda",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Urawa",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 4,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Utsunomiya",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 4,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Wada",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 10,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Wakasu",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Wakoshi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Warabi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Waseda",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Yamate",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Yamato",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 5,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Yanaka",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Yanauchi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Yokoami",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Yokohama",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Yokojimma",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Yokosuka",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Yokosuka-Chuo",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 2,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Yono",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Yoshiwara",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Yoyogi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 5,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Yoyogi-Uehara",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Yuki",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Yukinoshita",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": false,
+    "en_partial_count": 3,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Yumoto",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Yurakucho",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Yushima",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 1,
+    "resolver_status": "EN_exact"
+  },
+  {
+    "station_id": "Zushi",
+    "entity_exists": true,
+    "route_reachable": true,
+    "en_exact_cs": true,
+    "jp_exact": true,
+    "en_partial_count": 4,
+    "resolver_status": "EN_exact"
+  }
+]

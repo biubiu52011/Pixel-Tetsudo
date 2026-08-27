@@ -1,0 +1,21 @@
+=== 3.8.1.3 NAME RESOLUTION MATRIX ===
+
+Total stations: 503
+Route reachable: 461
+
+Resolution categories:
+  EN_exact (case-sensitive in line.stations): 458
+  JP_exact (name_map exact, not EN_exact): 13
+  EN_partial (entity-only, partial match): 16
+  NOT_FOUND (entity-only, no match): 16
+
+Ambiguous JP keys (multiple keys -> same EN value):
+  Ichigaya, Kasumigaseki
+
+Orphan name_map values (no corresponding entity):
+  Kohoku
+
+Known limitations:
+  16 NOT_FOUND = entity-only stations with no route connection
+  1383 orphan refs = in line.stations but not in stations entity
+  139 zero-coordinate stations = tourism skips these
