@@ -46,7 +46,7 @@ jobs:
       - name: Architecture Integrity Guard
         run: |
           echo Running architecture integrity guard...
-          python .github/workflows/ci_arch_guard.py
+          python .github/workflows/arch_guard_check.py
 
       - name: Check No localhost
         run: |

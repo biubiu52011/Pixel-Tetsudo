@@ -1,0 +1,40 @@
+{
+  "task": "3.2 Architecture Integrity Guard",
+  "generated_at": "2026-08-27",
+  "guard_status": "WARNING (technical debt, not blocking)",
+  "violations": {
+    "unified_lines_business": 67,
+    "files_affected": [
+      "js/data-fusion.js",
+      "js/data-layer.js",
+      "js/data-state.js",
+      "js/realtime-view.js",
+      "js/route-search.js",
+      "js/trains-detail.js",
+      "js/trains-page.js",
+      "js/trains-render.js",
+      "data/铁道/data-fusion.js",
+      "data/铁道/realtime-view.js",
+      "data/铁道/route-search.js",
+      "data/铁道/train-timetable.js",
+      "data/铁道/trains-detail.js",
+      "data/铁道/trains-render.js"
+    ],
+    "allowed_files": [
+      "data/core/db-loader.js"
+    ],
+    "recommendation": "Migrate to RailwayDB.getLines(), RailwayDB.getLine(id), RailwayDB.getStations() etc."
+  },
+  "hard_failures": {
+    "localhost": 0,
+    "file_protocol": 0,
+    "second_db": 0,
+    "forbidden_files": 0
+  },
+  "files_added": [
+    ".github/workflows/ci_guard_check.py",
+    ".github/workflows/arch_guard_check.py",
+    "recovery/baseline/production_baseline.json",
+    "recovery/baseline/approved_removal_manifest.json"
+  ]
+}
