@@ -1,0 +1,33 @@
+{
+  "guard_version": "1.0",
+  "timestamp": "2026-08-27T05:18:33.045985",
+  "baseline_sha": "27ED38FC6910781268E231906ECC683367D1C93FCA725CBE803EB167B4B2240E",
+  "current_sha": "27ED38FC6910781268E231906ECC683367D1C93FCA725CBE803EB167B4B2240E",
+  "errors": 0,
+  "warnings": 0,
+  "issues": [],
+  "pass": true,
+  "summary": {
+    "lines": {
+      "baseline": 156,
+      "current": 156,
+      "removed": 0,
+      "added": 0
+    },
+    "stations": {
+      "baseline": 503,
+      "current": 503,
+      "removed": 0
+    },
+    "relations": {
+      "stationLines": {
+        "baseline": 2967,
+        "current": 2967
+      },
+      "lineStationOrder": {
+        "baseline": 2957,
+        "current": 2957
+      }
+    }
+  }
+}
