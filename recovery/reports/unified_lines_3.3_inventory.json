@@ -722,6 +722,66 @@
       "decision": "RETAIN",
       "reason": "3.4.4 migrated: DataLayer.getAllLines() RailwayDB-first with UNIFIED_LINES compat",
       "railwaydb_equivalent": "DataLayer.getAllLines()"
+    },
+    {
+      "id": "K-js_route-search-240",
+      "file": "js/route-search.js",
+      "line": 240,
+      "content": "fallback UNIFIED_LINES in findStationsByTerm",
+      "category": "ROUTE_SEARCH_FALLBACK",
+      "decision": "RETAIN",
+      "reason": "DataLayer fallback in findStationsByTerm",
+      "railwaydb_equivalent": "StationResolver.findStationIds()"
+    },
+    {
+      "id": "K-js_station-resolver-36",
+      "file": "js/station-resolver.js",
+      "line": 36,
+      "content": "UNIFIED_LINES fallback in _buildIndex",
+      "category": "DATALAYER_COMPAT",
+      "decision": "RETAIN",
+      "reason": "StationResolver fallback when RailwayDB not loaded",
+      "railwaydb_equivalent": "RailwayDB.getAllLines()"
+    },
+    {
+      "id": "K-js_route-search-240",
+      "file": "data/铁道/route-search.js",
+      "line": 240,
+      "content": "fallback UNIFIED_LINES in findStationsByTerm",
+      "category": "ROUTE_SEARCH_FALLBACK",
+      "decision": "RETAIN",
+      "reason": "DataLayer fallback in findStationsByTerm",
+      "railwaydb_equivalent": "StationResolver.findStationIds()"
+    },
+    {
+      "id": "K-js_station-resolver-36",
+      "file": "data/铁道/station-resolver.js",
+      "line": 36,
+      "content": "UNIFIED_LINES fallback in _buildIndex",
+      "category": "DATALAYER_COMPAT",
+      "decision": "RETAIN",
+      "reason": "StationResolver fallback when RailwayDB not loaded",
+      "railwaydb_equivalent": "RailwayDB.getAllLines()"
+    },
+    {
+      "id": "K-js_station-resolver-21",
+      "file": "js/station-resolver.js",
+      "line": 21,
+      "content": ": (window.UNIFIED_LINES || {});",
+      "category": "DATALAYER_COMPAT",
+      "decision": "RETAIN",
+      "reason": "StationResolver fallback for line station ID collection when RailwayDB not loaded",
+      "railwaydb_equivalent": "RailwayDB.getAllLines()"
+    },
+    {
+      "id": "K-data_铁道_station-resolver-21",
+      "file": "data/铁道/station-resolver.js",
+      "line": 21,
+      "content": ": (window.UNIFIED_LINES || {});",
+      "category": "DATALAYER_COMPAT",
+      "decision": "RETAIN",
+      "reason": "StationResolver fallback for line station ID collection when RailwayDB not loaded",
+      "railwaydb_equivalent": "RailwayDB.getAllLines()"
     }
   ]
 }
