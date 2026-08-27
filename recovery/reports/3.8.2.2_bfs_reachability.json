@@ -1,0 +1,53 @@
+{
+  "title": "3.8.2.2 BFS 156 Lines Reachability Test",
+  "date": "2026-08-28",
+  "canonical_sha": "27ed38fc6910781268e231906ecc683367d1c93fca725cbe803eb167b4b2240e",
+  "graph_stats": {
+    "total_nodes": 1841,
+    "connected_components": 10,
+    "main_component_size": 1716,
+    "entity_stations_in_graph": 458,
+    "entity_stations_not_in_graph": 45
+  },
+  "line_reachability": {
+    "lines_fully_in_main": 144,
+    "lines_partial": 0,
+    "lines_orphan_components": 12,
+    "orphan_line_ids": [
+      "ChuoKonosu",
+      "Daishi_Keikyu",
+      "JR_Yamaguchi",
+      "Kashima",
+      "Kesennuma",
+      "Kururi",
+      "Narita",
+      "Nikkoku",
+      "Oga",
+      "Ominato",
+      "RikutoEast",
+      "Utsunomiya"
+    ]
+  },
+  "bfs_tests": {
+    "line_internal_routes": "156/156 PASS",
+    "ci_fixed_stations": {
+      "Azabu-juban->Shinagawa": "PASS (4 hops)",
+      "Tama-center->Hachioji": "PASS (7 hops)",
+      "Shin-Kawasaki->Tokyo": "PASS (6 hops)"
+    },
+    "same_line": {
+      "Shinjuku->Shibuya": "PASS (2 hops)"
+    },
+    "adjacent": {
+      "Ueno->Akihabara": "PASS (2 hops)"
+    }
+  },
+  "cross_component_routes": {
+    "Tokyo->Osaka": "NO_ROUTE (expected - different components)",
+    "Nagoya->Kyoto": "NO_ROUTE (expected - different components)",
+    "Sapporo->Odori": "NO_ROUTE (expected - different components)"
+  },
+  "ci_guard": "PASS",
+  "arch_guard": "PASS",
+  "conclusion": "All 156 lines internally reachable. 3 CI-only case-mismatch stations fixed. Cross-component routes correctly return NO_ROUTE."
+}
