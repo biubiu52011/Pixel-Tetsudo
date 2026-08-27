@@ -158,9 +158,9 @@
   },
   "file_data_flow": {
     "js/data-fusion.js": {
-      "UNIFIED_LINES": 15,
+      "UNIFIED_LINES": 10,
       "RailwayDB": 0,
-      "DataLayer": 0,
+      "DataLayer": 18,
       "ODPTClient": 6,
       "DATA_FUSION": 10,
       "RailwayRTC": 3
