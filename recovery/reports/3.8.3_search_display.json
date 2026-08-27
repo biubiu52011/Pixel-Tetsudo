@@ -1,0 +1,24 @@
+{
+  "title": "3.8.3 Search Result Display Verification",
+  "date": "2026-08-28",
+  "canonical_sha": "27ed38fc6910781268e231906ecc683367d1c93fca725cbe803eb167b4b2240e",
+  "pipeline": "StationResolver -> route-search.js -> RailwayDB -> BFS -> search-ui.js render",
+  "e2e_tests": {
+    "Tokyo->Shibuya": "PASS (2 hops)",
+    "Shinjuku->Ikebukuro": "PASS (3 hops)",
+    "Shinagawa->Ueno": "PASS (2 hops)",
+    "Azabu-juban->Shinagawa": "PASS (3 hops, CI-fixed)",
+    "Tama-center->Hachioji": "PASS (6 hops, CI-fixed)",
+    "Shin-Kawasaki->Tokyo": "PASS (5 hops, CI-fixed)"
+  },
+  "render_features_verified": [
+    "duration display",
+    "segments count",
+    "sort mode buttons",
+    "line colors",
+    "transfer nodes",
+    "start/end markers"
+  ],
+  "ci_guard": "PASS",
+  "arch_guard": "PASS"
+}
