@@ -1,18 +1,17 @@
 {
-  "task": "3.22.1",
+  "task": "3.23",
   "date": "2026-08-28",
-  "local_head": "15a195abe98b8c93ed4baa351056eeac13767107",
-  "origin_master": "15a195abe98b8c93ed4baa351056eeac13767107",
+  "local_head": "9e33f28fc360a68d79b052e720ed9e0bb4968974",
+  "origin_master": "9e33f28fc360a68d79b052e720ed9e0bb4968974",
   "sync": true,
   "working_tree_clean": true,
   "mirror_consistency": {
-    "home.html": true,
-    "search-ui.js": true
+    "home.html": true
   },
   "canonical_data_sha": "60328163CF28540B86EFD59CF30E3FBADACF7056FCD49035095A6CECECC8B567",
   "ci_guard": "PASS",
   "architecture_guard": "PASS",
   "home_ui_guard": "PASS",
   "brace_balance": "PASS",
-  "changes": "js/search-ui.js + data/铁道/search-ui.js: resolveStationName for result path, transfer nodes, ride segments"
+  "audit_report": "recovery/reports/3.23_route_search_edge_audit.json"
 }
