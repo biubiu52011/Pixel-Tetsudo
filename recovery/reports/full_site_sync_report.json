@@ -1,8 +1,8 @@
 {
-  "task": "3.25",
+  "task": "3.26",
   "date": "2026-08-28",
-  "local_head": "46f18472f1b7821ae122b98ae06c5da3b3d73324",
-  "origin_master": "46f18472f1b7821ae122b98ae06c5da3b3d73324",
+  "local_head": "f407149c0242100c4334884f15d03a3f70fc0568",
+  "origin_master": "f407149c0242100c4334884f15d03a3f70fc0568",
   "sync": true,
   "working_tree_clean": true,
   "canonical_data_sha": "60328163CF28540B86EFD59CF30E3FBADACF7056FCD49035095A6CECECC8B567",
@@ -10,6 +10,13 @@
   "architecture_guard": "PASS",
   "home_ui_guard": "PASS",
   "brace_balance": "PASS",
-  "audit_report": "recovery/reports/3.25_sightseeing_recommendation_audit.json",
-  "changes": "No code changes - audit report only"
+  "audit_report": "recovery/reports/3.26_tourism_station_entity_audit.json",
+  "changes": "No code or data changes - audit report only",
+  "orphan_classification": {
+    "REAL_STATION": 6,
+    "NAMING_VARIANT": 12,
+    "POI_LANDMARK": 6,
+    "DISTRICT_NAME": 12,
+    "HOLD": 0
+  }
 }
