@@ -5,11 +5,11 @@
   "station_entity_count": 503,
   "resolution_contract": {
     "priority_order": [
-      "1. EN exact match (station_id in line.stations, case-sensitive)",
-      "2. JP exact match (name_map JP key -> EN value)",
-      "3. EN partial match (substring in station_id)",
-      "4. JP partial match (substring in name_map JP key)",
-      "5. NOT_FOUND (no match)"
+      "1. EN exact match",
+      "2. JP exact match",
+      "3. EN partial match",
+      "4. JP partial match",
+      "5. NOT_FOUND"
     ],
     "coverage": {
       "total_stations": 503,
