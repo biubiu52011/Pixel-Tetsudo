@@ -1,0 +1,35 @@
+{
+  "title": "3.8.1.6 Statistical Correction",
+  "date": "2026-08-28",
+  "canonical_sha": "27ED38FC6910781268E231906ECC683367D1C93FCA725CBE803EB167B4B2240E",
+  "correction": {
+    "issue": "3 case-insensitive matches resolve but cannot be found by BFS graph",
+    "ci_only_stations": [
+      "Azabu-juban",
+      "Shin-Kawasaki",
+      "Tama-center"
+    ],
+    "impact": "Resolver returns entity key with different casing than line.stations"
+  },
+  "corrected_classification": {
+    "EN_exact_case_sensitive": 458,
+    "CI_only_reachable_but_BFS_fails": 453,
+    "JP_exact_entity_only": 13,
+    "EN_partial_entity_only": 16,
+    "NOT_FOUND": 16,
+    "total": 956
+  },
+  "resolution_rates": {
+    "EN_exact_resolvable": 458,
+    "Total_resolvable_by_resolver": 940,
+    "Total_NOT_FOUND": 16,
+    "BFS_reachable": 458,
+    "BFS_unreachable_due_to_case": 453
+  },
+  "known_limitations": {
+    "3_CI_only_stations": "Azabu-juban, Shin-Kawasaki, Tama-center — resolve via name_map but BFS uses case-sensitive graph lookup",
+    "16_NOT_FOUND": "Entity-only stations with no route connection",
+    "1383_orphan_refs": "In line.stations but not in stations entity",
+    "8_case_collision_pairs": "16 stations across 8 pairs with case variation in entity dict"
+  }
+}
