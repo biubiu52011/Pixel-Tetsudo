@@ -55,48 +55,48 @@
         "unknown": 0
       },
       "Seibu": {
-        "realtime": 2,
-        "static": 13,
+        "realtime": 15,
+        "static": 0,
         "unknown": 0
       },
       "Tobu": {
-        "realtime": 2,
-        "static": 12,
+        "realtime": 14,
+        "static": 0,
         "unknown": 0
       },
       "TokyoMetro": {
-        "realtime": 9,
-        "static": 1,
+        "realtime": 10,
+        "static": 0,
         "unknown": 0
       },
       "Keio": {
-        "realtime": 2,
-        "static": 6,
+        "realtime": 8,
+        "static": 0,
         "unknown": 0
       },
       "Toei": {
-        "realtime": 4,
-        "static": 3,
+        "realtime": 6,
+        "static": 1,
         "unknown": 0
       },
       "Keikyu": {
-        "realtime": 2,
-        "static": 5,
+        "realtime": 7,
+        "static": 0,
         "unknown": 0
       },
       "Odakyu": {
-        "realtime": 2,
-        "static": 2,
+        "realtime": 4,
+        "static": 0,
         "unknown": 0
       },
       "YokohamaMunicipal": {
-        "realtime": 1,
-        "static": 2,
+        "realtime": 3,
+        "static": 0,
         "unknown": 0
       },
       "Tokyu": {
-        "realtime": 2,
-        "static": 1,
+        "realtime": 3,
+        "static": 0,
         "unknown": 0
       },
       "MIR": {
@@ -110,8 +110,8 @@
         "unknown": 0
       },
       "Keisei": {
-        "realtime": 0,
-        "static": 1,
+        "realtime": 1,
+        "static": 0,
         "unknown": 0
       },
       "MinatoMirai": {
@@ -125,18 +125,18 @@
         "unknown": 0
       },
       "TWR": {
-        "realtime": 0,
-        "static": 1,
+        "realtime": 1,
+        "static": 0,
         "unknown": 0
       },
       "ShonanMonorail": {
-        "realtime": 0,
-        "static": 1,
+        "realtime": 1,
+        "static": 0,
         "unknown": 0
       },
       "Sotetsu": {
-        "realtime": 0,
-        "static": 1,
+        "realtime": 1,
+        "static": 0,
         "unknown": 0
       },
       "TamaMonorail": {
