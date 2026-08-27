@@ -811,16 +811,6 @@
       "railwaydb_equivalent": "DataLayer.getAllLines()"
     },
     {
-      "id": "TD-29",
-      "file": "js/trains-detail.js",
-      "line": 29,
-      "content": "getLineData compat fallback",
-      "category": "COMPATIBILITY",
-      "decision": "RETAIN",
-      "reason": "3.4.5 migrated: DataLayer.getLine() primary, UNIFIED_LINES compat fallback",
-      "railwaydb_equivalent": "DataLayer.getLine(lineId)"
-    },
-    {
       "id": "TD-35",
       "file": "js/trains-detail.js",
       "line": 35,
