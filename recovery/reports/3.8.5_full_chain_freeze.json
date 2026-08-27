@@ -1,0 +1,29 @@
+{
+  "title": "3.8.5 Full Chain Verification & Freeze",
+  "date": "2026-08-28",
+  "canonical_sha": "27ed38fc6910781268e231906ecc683367d1c93fca725cbe803eb167b4b2240e",
+  "full_chain": {
+    "input": "User types station name (EN/JP/ZH/KO)",
+    "resolution": "StationResolver.resolve() -> normalizeId() -> canonical station_id",
+    "graph": "RailwayDB.getAllLines() -> lineStationOrder -> BFS adjacency graph",
+    "search": "BFS finds shortest path",
+    "render": "search-ui.js renderResults() -> HTML with duration, segments, line colors, transfers"
+  },
+  "verification_results": {
+    "3.8.2.1_case_mismatch_fix": "PASS — 3 CI stations now resolve correctly",
+    "3.8.2.2_bfs_reachability": "PASS — 156/156 lines internally reachable",
+    "3.8.2.3_transfer_verification": "PASS — 458 multi-line stations work as transfer points",
+    "3.8.2.4_orphan_isolation": "PASS — 1686 orphans handled gracefully",
+    "3.8.2.5_route_correctness": "PASS — 13/13 route tests PASS",
+    "3.8.2.6_performance": "PASS — sub-ms BFS queries",
+    "3.8.2.7_bfs_contract_freeze": "FROZEN",
+    "3.8.3_search_display": "PASS — E2E pipeline works",
+    "3.8.4_multilingual": "PASS — 4 languages present"
+  },
+  "ci_guards": {
+    "entity_preservation": "PASS",
+    "architecture_integrity": "PASS"
+  },
+  "freeze_status": "3.8 COMPLETE — Route Search business layer frozen",
+  "next_task": "3.9 or new feature work"
+}
