@@ -2011,6 +2011,30 @@
     "Bakurōmae": {
       "lat": 35.6778,
       "lng": 139.7617
+    },
+    "Aomori": {
+      "lat": 40.8244,
+      "lng": 140.74
+    },
+    "Daikanyama": {
+      "lat": 35.6533,
+      "lng": 139.6986
+    },
+    "Niigata": {
+      "lat": 37.9026,
+      "lng": 139.0232
+    },
+    "Sendai": {
+      "lat": 38.2682,
+      "lng": 140.8694
+    },
+    "Kawaguchiko": {
+      "lat": 35.5133,
+      "lng": 138.7658
+    },
+    "Kiyosumi-Shirakawa": {
+      "lat": 35.6944,
+      "lng": 139.7631
     }
   },
   "lines": {

@@ -2,11 +2,11 @@
   "version": "1.0",
   "created_at": "2026-08-27T05:16:56.717180",
   "canonical_file": "data/core/railway_data.json",
-  "canonical_sha256": "60328163CF28540B86EFD59CF30E3FBADACF7056FCD49035095A6CECECC8B567",
+  "canonical_sha256": "dab4729654578a4c981feae05994839dba11b3c341cf95fdab937b05fadb94b2",
   "git_head": "d80d285",
   "entity_counts": {
     "lines": 156,
-    "stations": 503,
+    "stations": 509,
     "name_map": 1703,
     "stationLines": 1841,
     "lineStationOrder": 156,
@@ -192,6 +192,7 @@
     "Akitsu",
     "Aoba-dori",
     "Aomi",
+    "Aomori",
     "Aoto",
     "Aoyama-itchome",
     "Ariake",
@@ -208,6 +209,7 @@
     "Chuo-Ku",
     "Chuo-rinkan",
     "Daiba",
+    "Daikanyama",
     "Daimon",
     "Daizen-ji",
     "Den-en-chofu",
@@ -310,6 +312,7 @@
     "Kasminato",
     "Kasumigaseki",
     "Kawaguchi",
+    "Kawaguchiko",
     "Kawasaki",
     "Kayabacho",
     "Kegon",
@@ -335,6 +338,7 @@
     "Kitasendai",
     "Kitasenju",
     "Kiyose",
+    "Kiyosumi-Shirakawa",
     "Kodaira",
     "Koenji",
     "Koganei",
@@ -451,6 +455,7 @@
     "Nezu",
     "Nihon-odori",
     "Nihonbashi",
+    "Niigata",
     "Niiza",
     "Nijubashimae",
     "Nikko",
@@ -530,6 +535,7 @@
     "Seijo",
     "Seijo-shijo",
     "Seijodai",
+    "Sendai",
     "Sesenji",
     "Setagaya",
     "Shibuya",
@@ -780,7 +786,7 @@
     "unique_orphan_station_ids": 1383,
     "zero_coordinate_stations": 139,
     "lines_missing_color": 14,
-    "tourism_orphan_refs": 36
+    "tourism_orphan_refs": 30
   },
   "recovery_context": {
     "original_production_lines": 60,
@@ -796,5 +802,5 @@
   },
   "file_note": "Committed LF format SHA (git autocrlf normalizes CRLF on checkout)",
   "last_updated": "2026-08-28",
-  "task": "3.20"
+  "task": "3.27.1"
 }
