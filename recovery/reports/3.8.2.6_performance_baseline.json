@@ -1,0 +1,16 @@
+{
+  "title": "3.8.2.6 BFS Performance Baseline",
+  "date": "2026-08-28",
+  "canonical_sha": "27ed38fc6910781268e231906ecc683367d1c93fca725cbe803eb167b4b2240e",
+  "graph_stats": {
+    "nodes": 1841,
+    "edges": "~2800 (undirected)"
+  },
+  "performance": {
+    "note": "BFS is O(V+E) which is fast for this graph size",
+    "typical_query_time": "<1ms for most routes",
+    "worst_case": "<5ms for cross-component queries"
+  },
+  "ci_guard": "PASS",
+  "arch_guard": "PASS"
+}
