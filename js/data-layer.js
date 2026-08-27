@@ -70,16 +70,28 @@
 
   // Line data helpers
   function getAllLines() {
+    if (window.RailwayDB && window.RailwayDB.isLoaded() && window.RailwayDB.getAllLines) {
+      return Object.values(window.RailwayDB.getAllLines());
+    }
     var lines = [];
-    Object.keys(window.UNIFIED_LINES).forEach(function(id) {
+    Object.keys(window.UNIFIED_LINES || {}).forEach(function(id) {
       var l = window.UNIFIED_LINES[id];
       if (l) lines.push(l);
     });
     return lines;
   }
+    });
+    return lines;
+  }
 
   function getLine(lineId) {
-    return window.UNIFIED_LINES[lineId] || null;
+    if (window.RailwayDB && window.RailwayDB.isLoaded() && window.RailwayDB.getLine) {
+      return window.RailwayDB.getLine(lineId) || null;
+    }
+    return window.UNIFIED_LINES ? window.UNIFIED_LINES[lineId] : null;
+  }
+    }
+    return window.UNIFIED_LINES ? window.UNIFIED_LINES[lineId] : null;
   }
 
   function getGroupedLines() {
