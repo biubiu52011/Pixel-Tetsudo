@@ -10,11 +10,12 @@
     "lineStationOrder": 156
   },
   "resolution_summary": {
-    "EN_exact_match": 461,
-    "JP_name_map_exact": 11,
+    "EN_exact_match": 458,
+    "EN_partial_match": 24,
+    "JP_name_map_exact": 0,
     "JP_major_fallback": 0,
-    "Total_resolved": 472,
-    "Unresolved": 31
+    "Total_resolved": 482,
+    "Unresolved": 21
   },
   "unresolved_stations": [
     "Nagoya",
@@ -53,12 +54,14 @@
     "orphan_refs_in_lines": 1383,
     "entity_only_stations": 45,
     "duplicate_name_map_values": 3,
-    "case_mismatches": 0
+    "case_mismatches": 0,
+    "entity_only_count": 45
   },
   "known_limitations": {
     "31_entity_only_stations": "Not on any line - cannot be destination/origin for routes",
     "1383_orphan_refs": "In line.stations but not in stations entity - BFS handles gracefully",
     "139_zero_coordinate": "Tourism proximity skips these",
-    "3_duplicate_name_map": "Ichigaya, Kohoku, Kasumigaseki have multiple JP keys"
+    "3_duplicate_name_map": "Ichigaya, Kohoku, Kasumigaseki have multiple JP keys",
+    "entity_only_unresolved": "21 stations in entity but not on any line and no partial match — expected, not a bug"
   }
 }
