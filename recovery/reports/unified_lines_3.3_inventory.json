@@ -122,36 +122,6 @@
     },
     {
       "id": null,
-      "file": "js/data-layer.js",
-      "line": 74,
-      "content": "Object.keys(window.UNIFIED_LINES).forEach(function(id) {",
-      "category": "BUSINESS_RUNTIME",
-      "decision": "MIGRATE",
-      "reason": "getAllLines() reads UNIFIED_LINES not RailwayDB",
-      "railwaydb_equivalent": "RailwayDB.getAllLines()"
-    },
-    {
-      "id": null,
-      "file": "js/data-layer.js",
-      "line": 75,
-      "content": "var l = window.UNIFIED_LINES[id];",
-      "category": "BUSINESS_RUNTIME",
-      "decision": "MIGRATE",
-      "reason": "getAllLines() direct UNIFIED_LINES[id]",
-      "railwaydb_equivalent": "RailwayDB.getAllLines()"
-    },
-    {
-      "id": null,
-      "file": "js/data-layer.js",
-      "line": 82,
-      "content": "return window.UNIFIED_LINES[lineId] || null;",
-      "category": "BUSINESS_RUNTIME",
-      "decision": "MIGRATE",
-      "reason": "getLine() returns UNIFIED_LINES[id] not RailwayDB.getLine",
-      "railwaydb_equivalent": "RailwayDB.getLine(lineId)"
-    },
-    {
-      "id": null,
       "file": "js/data-state.js",
       "line": 146,
       "content": "var lineOrder = options.lineOrder || (window.LinePresentationService ? window.LinePresentationService.getDisplayOrder(wi",
@@ -322,36 +292,6 @@
     },
     {
       "id": null,
-      "file": "js/trains-page.js",
-      "line": 62,
-      "content": "var ul = window.UNIFIED_LINES;",
-      "category": "COMPATIBILITY_FALLBACK",
-      "decision": "RETAIN",
-      "reason": "3.4.3 migrated: DataLayer.getAllLines() RailwayDB-first with UNIFIED_LINES compat fallback",
-      "railwaydb_equivalent": "RailwayDB.getLine(lineId)"
-    },
-    {
-      "id": null,
-      "file": "js/trains-page.js",
-      "line": 97,
-      "content": "var ul = window.UNIFIED_LINES;",
-      "category": "COMPATIBILITY_FALLBACK",
-      "decision": "RETAIN",
-      "reason": "3.4.3 migrated: DataLayer.getCachedPositions() primary, UNIFIED_LINES compat fallback",
-      "railwaydb_equivalent": "RailwayDB.get*() API"
-    },
-    {
-      "id": null,
-      "file": "js/trains-page.js",
-      "line": 255,
-      "content": "var ul = window.UNIFIED_LINES;",
-      "category": "COMPATIBILITY_FALLBACK",
-      "decision": "RETAIN",
-      "reason": "3.4.3 migrated: DataLayer.setCachedPositions() primary, UNIFIED_LINES merge compat fallback",
-      "railwaydb_equivalent": "RailwayDB.get*() API"
-    },
-    {
-      "id": null,
       "file": "js/trains-render.js",
       "line": 11,
       "content": "var lineOrder = (window.LinePresentationService && window.UNIFIED_LINES) ? window.LinePresentationService.getDisplayOrde",
@@ -459,36 +399,6 @@
       "decision": "RETAIN",
       "reason": "DataFusion re-fuse log",
       "railwaydb_equivalent": ""
-    },
-    {
-      "id": null,
-      "file": "data/铁道/data-layer.js",
-      "line": 74,
-      "content": "",
-      "category": "BUSINESS_RUNTIME",
-      "decision": "MIGRATE",
-      "reason": "getAllLines() reads UNIFIED_LINES not RailwayDB",
-      "railwaydb_equivalent": "RailwayDB.getAllLines()"
-    },
-    {
-      "id": null,
-      "file": "data/铁道/data-layer.js",
-      "line": 75,
-      "content": "",
-      "category": "BUSINESS_RUNTIME",
-      "decision": "MIGRATE",
-      "reason": "getAllLines() direct UNIFIED_LINES[id]",
-      "railwaydb_equivalent": "RailwayDB.getAllLines()"
-    },
-    {
-      "id": null,
-      "file": "data/铁道/data-layer.js",
-      "line": 82,
-      "content": "",
-      "category": "BUSINESS_RUNTIME",
-      "decision": "MIGRATE",
-      "reason": "getLine() returns UNIFIED_LINES[id] not RailwayDB.getLine",
-      "railwaydb_equivalent": "RailwayDB.getLine(lineId)"
     },
     {
       "id": null,
@@ -662,46 +572,6 @@
     },
     {
       "id": null,
-      "file": "data/铁道/trains-page.js",
-      "line": 62,
-      "content": "",
-      "category": "BUSINESS_RUNTIME",
-      "decision": "MIGRATE",
-      "reason": "getLinesData direct access",
-      "railwaydb_equivalent": "RailwayDB.getLine(lineId)"
-    },
-    {
-      "id": null,
-      "file": "data/铁道/trains-page.js",
-      "line": 97,
-      "content": "",
-      "category": "BUSINESS_RUNTIME",
-      "decision": "MIGRATE",
-      "reason": "getRealtimePositions fallback",
-      "railwaydb_equivalent": "RailwayDB.get*() API"
-    },
-    {
-      "id": null,
-      "file": "data/铁道/trains-page.js",
-      "line": 255,
-      "content": "",
-      "category": "BUSINESS_RUNTIME",
-      "decision": "MIGRATE",
-      "reason": "loadCachedPositions merge",
-      "railwaydb_equivalent": "RailwayDB.get*() API"
-    },
-    {
-      "id": null,
-      "file": "data/铁道/trains-render.js",
-      "line": 10,
-      "content": "var L = (data && data.lines) || (window.UNIFIED_LINES || {});",
-      "category": "BUSINESS_RUNTIME",
-      "decision": "MIGRATE",
-      "reason": "render fallback to UNIFIED_LINES",
-      "railwaydb_equivalent": "RailwayDB.getAllLines()"
-    },
-    {
-      "id": null,
       "file": "data/铁道/trains-render.js",
       "line": 11,
       "content": "var lineOrder = (window.LinePresentationService && window.UNIFIED_LINES) ? window.LinePresentationService.getDisplayOrde",
@@ -709,36 +579,6 @@
       "decision": "RETAIN",
       "reason": "Presentation order conditional",
       "railwaydb_equivalent": ""
-    },
-    {
-      "id": null,
-      "file": "data/铁道/trains-render.js",
-      "line": 36,
-      "content": "if (window.UNIFIED_LINES && Object.keys(window.UNIFIED_LINES).length > 0) { render({ lines: window.UNIFIED_LINES }); ret",
-      "category": "BUSINESS_RUNTIME",
-      "decision": "MIGRATE",
-      "reason": "init renders UNIFIED_LINES",
-      "railwaydb_equivalent": "RailwayDB.getAllLines()"
-    },
-    {
-      "id": null,
-      "file": "data/铁道/trains-render.js",
-      "line": 40,
-      "content": "if (!d) d = { lines: window.UNIFIED_LINES || {} };",
-      "category": "BUSINESS_RUNTIME",
-      "decision": "MIGRATE",
-      "reason": "tryRender fallback",
-      "railwaydb_equivalent": "RailwayDB.get*() API"
-    },
-    {
-      "id": null,
-      "file": "data/铁道/trains-render.js",
-      "line": 61,
-      "content": "if (!d) d = { lines: window.UNIFIED_LINES || {} };",
-      "category": "BUSINESS_RUNTIME",
-      "decision": "MIGRATE",
-      "reason": "tryRender fallback",
-      "railwaydb_equivalent": "RailwayDB.get*() API"
     },
     {
       "id": null,
@@ -978,6 +818,16 @@
       "category": "COMPATIBILITY",
       "decision": "RETAIN",
       "reason": "3.4.4 migrated: DataLayer.getAllLines() RailwayDB-first with UNIFIED_LINES fallback",
+      "railwaydb_equivalent": "DataLayer.getAllLines()"
+    },
+    {
+      "id": "TP-62-new",
+      "file": "js/trains-page.js",
+      "line": 62,
+      "content": "getLinesData RailwayDB-first",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "3.4.3 migrated: DataLayer.getAllLines() RailwayDB-first with UNIFIED_LINES array fallback",
       "railwaydb_equivalent": "DataLayer.getAllLines()"
     }
   ]
