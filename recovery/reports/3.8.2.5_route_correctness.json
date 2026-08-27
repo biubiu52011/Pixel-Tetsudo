@@ -1,0 +1,33 @@
+{
+  "title": "3.8.2.5 Route Result Correctness",
+  "date": "2026-08-28",
+  "canonical_sha": "27ed38fc6910781268e231906ecc683367d1c93fca725cbe803eb167b4b2240e",
+  "tests": {
+    "same_line": {
+      "Tokyo->Shinjuku": "PASS",
+      "Shinjuku->Shibuya": "PASS",
+      "Ueno->Akihabara": "PASS"
+    },
+    "cross_line_transfer": {
+      "Shinjuku->Ikebukuro": "PASS",
+      "Tokyo->Yokohama": "PASS",
+      "Shibuya->Ueno": "PASS"
+    },
+    "ci_fixed_stations": {
+      "Azabu-juban->Shinagawa": "PASS",
+      "Tama-center->Hachioji": "PASS",
+      "Shin-Kawasaki->Tokyo": "PASS"
+    },
+    "no_route_cases": {
+      "Tokyo->Nagoya": "CORRECT_NO_ROUTE",
+      "invalid_source": "CORRECT_NO_ROUTE",
+      "invalid_dest": "CORRECT_NO_ROUTE"
+    },
+    "edge_cases": {
+      "same_station": "PASS"
+    }
+  },
+  "overall": "ALL PASS",
+  "ci_guard": "PASS",
+  "arch_guard": "PASS"
+}
