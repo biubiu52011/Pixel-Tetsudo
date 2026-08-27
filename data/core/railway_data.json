@@ -12020,7 +12020,7 @@
     "祖師ヶ谷大蔵": "Soshigaya-Okura",
     "祖母島": "Ubashima",
     "神保原": "Jimbohara",
-    "神保町": "Shin-Ochanomizu",
+    "神保町": "Jimbocho",
     "神奈川": "Kanagawa",
     "神奈川新町": "Kanagawa-shimmachi",
     "神楽坂": "Kagurazaka",
@@ -12593,7 +12593,22 @@
     "白金高輪駅": "Shirokane-takanawa",
     "立川駅": "Tachikawa",
     "東京ドーム前駅": "Tokyo-domae",
-    "豊洲駅": "Toyosu"
+    "豊洲駅": "Toyosu",
+    "Jimbocho": "神保町",
+    "Kokusai-Tenjijo": "国際展示場",
+    "Makuhari-Seaside": "幕張海浜",
+    "Musashi-sakai": "武蔵堺",
+    "Musashisakai": "武蔵狭山",
+    "Nishi-kokubunji": "西国分寺",
+    "Nishi-takahashimadaira": "西高島平",
+    "Odaiba-Kaihinkoen": "お台場海浜公園",
+    "Shin-Kiba": "新木場",
+    "ShinKemigawa": "新検見川",
+    "ShinKiba": "新木場",
+    "Shinjuku-sanchome": "新宿三丁目",
+    "Tokyo-Teleport": "東京テレポート",
+    "Tokyo-Big-Sight": "東京ビッグサイト",
+    "TokyoTeleport": "東京テレポート"
   },
   "tourism": {
     "Adachi": {
