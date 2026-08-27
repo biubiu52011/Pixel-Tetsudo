@@ -1,0 +1,31 @@
+{
+  "file": "pages/home.html == data/铁道/home.html (synced, SHA=98ddc0e2eaf1)",
+  "sha256": "98ddc0e2eaf1f393c2cd1d10393a8b60131cd34d7bc3c0ad4c49e8c80f53b153",
+  "sha256_short": "98ddc0e2eaf1",
+  "modules": {
+    "route_search": {
+      "id": "searchContainer",
+      "class": "search-card pixel-card",
+      "title_i18n_key": "search.title",
+      "dom_path": "#tab-search > #searchContainer"
+    },
+    "sightseeing": {
+      "id": "smModule",
+      "class": "sm-module pixel-card",
+      "title_i18n_key": "tourism.title",
+      "relocate_btn_id": "smRelocateBtn",
+      "relocate_svg_viewBox": "0 0 1024 1024",
+      "dom_path": "#tab-search > #smModule"
+    }
+  },
+  "translations": {
+    "search.title": "Route Search",
+    "tourism.title": "Sightseeing Guide"
+  },
+  "constraints": {
+    "no_new_home_modules": true,
+    "no_realtime_trains_history_titles": true,
+    "relocate_svg_locked": true,
+    "railway_data_sha_frozen": "27ED38FC6910781268E231906ECC683367D1C93FCA725CBE803EB167B4B2240E"
+  }
+}

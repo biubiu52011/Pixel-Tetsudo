@@ -48,6 +48,11 @@ jobs:
           echo Running architecture integrity guard...
           python .github/workflows/arch_guard_check.py
 
+      - name: Home UI Integrity Guard
+        run: |
+          echo Running home UI integrity guard...
+          python .github/workflows/home_ui_guard_check.py
+
       - name: Check No localhost
         run: |
           echo "Checking for localhost/127.0.0.1 references..."
