@@ -1,0 +1,44 @@
+{
+  "title": "3.8.1.5 Resolution Contract Freeze",
+  "date": "2026-08-28",
+  "canonical_sha": "27ED38FC6910781268E231906ECC683367D1C93FCA725CBE803EB167B4B2240E",
+  "station_entity_count": 503,
+  "resolution_contract": {
+    "priority_order": [
+      "1. EN exact match (station_id in line.stations, case-sensitive)",
+      "2. JP exact match (name_map JP key -> EN value)",
+      "3. EN partial match (substring in station_id)",
+      "4. JP partial match (substring in name_map JP key)",
+      "5. NOT_FOUND (no match)"
+    ],
+    "coverage": {
+      "total_stations": 503,
+      "route_reachable": 461,
+      "resolved": 487,
+      "not_found": 16,
+      "resolution_rate_pct": 96.8
+    },
+    "categories": {
+      "EN_exact": 458,
+      "JP_exact": 13,
+      "EN_partial": 16,
+      "NOT_FOUND": 16
+    }
+  },
+  "known_limitations": {
+    "16_NOT_FOUND": "Entity-only stations with no route connection",
+    "1383_orphan_refs": "Station IDs in line.stations without entity",
+    "139_zero_coordinate": "Tourism proximity skips these",
+    "3_duplicate_name_map_values": "Ichigaya, Kohoku, Kasumigaseki — cosmetic"
+  },
+  "frozen_assets": {
+    "station_resolver": "js/station-resolver.js",
+    "relocate_icon_svg": "pages/home.html sm-relocate-icon (LOCKED)",
+    "canonical_data": "data/core/railway_data.json SHA=27ED38FC..."
+  },
+  "rules": {
+    "no_data_modification": "railway_data.json must never be modified by business code",
+    "no_second_database": "All business code must use RailwayDB -> DataLayer chain",
+    "entity_preservation": "New canonical must not reduce entity counts without manifest"
+  }
+}
