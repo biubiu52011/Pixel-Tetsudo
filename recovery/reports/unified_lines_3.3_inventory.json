@@ -163,16 +163,6 @@
     {
       "id": null,
       "file": "js/realtime-view.js",
-      "line": 129,
-      "content": "if (window.UNIFIED_LINES && Object.keys(window.UNIFIED_LINES).length > 0) {",
-      "category": "BUSINESS_RUNTIME",
-      "decision": "MIGRATE",
-      "reason": "getLines() checks UNIFIED_LINES",
-      "railwaydb_equivalent": "RailwayDB.getLine(lineId)"
-    },
-    {
-      "id": null,
-      "file": "js/realtime-view.js",
       "line": 130,
       "content": "var lpsOrder = (window.LinePresentationService && window.UNIFIED_LINES) ? window.LinePresentationService.getDisplayOrder",
       "category": "COMPATIBILITY",
@@ -429,16 +419,6 @@
       "decision": "RETAIN",
       "reason": "Init fallback superseded by DataFusion",
       "railwaydb_equivalent": ""
-    },
-    {
-      "id": null,
-      "file": "data/铁道/realtime-view.js",
-      "line": 129,
-      "content": "if (window.UNIFIED_LINES && Object.keys(window.UNIFIED_LINES).length > 0) {",
-      "category": "BUSINESS_RUNTIME",
-      "decision": "MIGRATE",
-      "reason": "getLines() checks UNIFIED_LINES",
-      "railwaydb_equivalent": "RailwayDB.getLine(lineId)"
     },
     {
       "id": null,
@@ -819,6 +799,76 @@
       "decision": "RETAIN",
       "reason": "3.4.5 migrated: UNIFIED_LINES compat fallback when DataLayer.getLine unavailable",
       "railwaydb_equivalent": "DataLayer.getLine(lineId)"
+    },
+    {
+      "id": "RV-129",
+      "file": "js/realtime-view.js",
+      "line": 129,
+      "content": "DataLayer getAllLines priority",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "3.4.6 migrated: DataLayer.getAllLines() RailwayDB-first, UNIFIED_LINES is priority 3 compat fallback",
+      "railwaydb_equivalent": "DataLayer.getAllLines()"
+    },
+    {
+      "id": "RV-153",
+      "file": "js/realtime-view.js",
+      "line": 153,
+      "content": "Poll comment",
+      "category": "COMMENT",
+      "decision": "IGNORE",
+      "reason": "Comment only, no runtime UNIFIED_LINES access",
+      "railwaydb_equivalent": ""
+    },
+    {
+      "id": "RV-138",
+      "file": "js/realtime-view.js",
+      "line": 138,
+      "content": "UNIFIED_LINES priority 3 fallback",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "3.4.6 migrated: UNIFIED_LINES is priority 3 compat fallback after DataLayer",
+      "railwaydb_equivalent": "DataLayer.getAllLines()"
+    },
+    {
+      "id": "RV-139",
+      "file": "js/realtime-view.js",
+      "line": 139,
+      "content": "UNIFIED_LINES lpsOrder",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "3.4.6 migrated: UNIFIED_LINES compat fallback lineOrder",
+      "railwaydb_equivalent": "DataLayer.getAllLines()"
+    },
+    {
+      "id": "DRV-138",
+      "file": "data/铁道/realtime-view.js",
+      "line": 138,
+      "content": "UNIFIED_LINES priority 3 fallback",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "3.4.6 migrated: UNIFIED_LINES priority 3 compat fallback",
+      "railwaydb_equivalent": "DataLayer.getAllLines()"
+    },
+    {
+      "id": "DRV-139",
+      "file": "data/铁道/realtime-view.js",
+      "line": 139,
+      "content": "UNIFIED_LINES lpsOrder",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "3.4.6 migrated: UNIFIED_LINES compat fallback lineOrder",
+      "railwaydb_equivalent": "DataLayer.getAllLines()"
+    },
+    {
+      "id": "DRV-153",
+      "file": "data/铁道/realtime-view.js",
+      "line": 153,
+      "content": "Poll comment",
+      "category": "COMMENT",
+      "decision": "IGNORE",
+      "reason": "Comment only",
+      "railwaydb_equivalent": ""
     }
   ]
 }
