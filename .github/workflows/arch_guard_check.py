@@ -23,7 +23,7 @@ def main():
     # Check for new unclassified findings
     SKIP = {'recovery', '.git', 'node_modules', '__pycache__', 'data/core'}
     SCAN = [os.path.join(REPO_ROOT, 'js'), os.path.join(REPO_ROOT, 'pages')]
-    known = {(x['file'], x['line']) for x in inv['findings']}
+    known = {(x['file'].replace('\\', '/'), x['line']) for x in inv['findings']}
     new_errors = []
     new_warnings = []
     for sd in SCAN:
@@ -33,7 +33,7 @@ def main():
             for fn in fns:
                 if not fn.endswith(('.js', '.html')): continue
                 fp = os.path.join(dp, fn)
-                rel = fp.replace(REPO_ROOT + os.sep, '')
+                rel = fp.replace(REPO_ROOT + os.sep, '').replace(chr(92), '/')
                 try:
                     with open(fp, 'r', encoding='utf-8') as f:
                         lines = f.readlines()

@@ -22,7 +22,7 @@
   "findings": [
     {
       "id": null,
-      "file": "js\\data-fusion.js",
+      "file": "js/data-fusion.js",
       "line": 43,
       "content": "var knownLines = window.UNIFIED_LINES;",
       "category": "COMPATIBILITY",
@@ -32,7 +32,7 @@
     },
     {
       "id": null,
-      "file": "js\\data-fusion.js",
+      "file": "js/data-fusion.js",
       "line": 74,
       "content": "if (!window.UNIFIED_LINES) return;",
       "category": "COMPATIBILITY",
@@ -42,7 +42,7 @@
     },
     {
       "id": null,
-      "file": "js\\data-fusion.js",
+      "file": "js/data-fusion.js",
       "line": 76,
       "content": "Object.keys(window.UNIFIED_LINES).forEach(function(id) {",
       "category": "COMPATIBILITY",
@@ -52,7 +52,7 @@
     },
     {
       "id": null,
-      "file": "js\\data-fusion.js",
+      "file": "js/data-fusion.js",
       "line": 85,
       "content": "if (!window.UNIFIED_LINES) return;",
       "category": "COMPATIBILITY",
@@ -62,7 +62,7 @@
     },
     {
       "id": null,
-      "file": "js\\data-fusion.js",
+      "file": "js/data-fusion.js",
       "line": 86,
       "content": "var currentVersion = Object.keys(window.UNIFIED_LINES).length;",
       "category": "COMPATIBILITY",
@@ -72,7 +72,7 @@
     },
     {
       "id": null,
-      "file": "js\\data-fusion.js",
+      "file": "js/data-fusion.js",
       "line": 141,
       "content": "var line = (window.UNIFIED_LINES && window.UNIFIED_LINES[lineId]) || (localData.lines && localData.lines[lineId]) || nul",
       "category": "COMPATIBILITY",
@@ -82,7 +82,7 @@
     },
     {
       "id": null,
-      "file": "js\\data-fusion.js",
+      "file": "js/data-fusion.js",
       "line": 154,
       "content": "if (window.UNIFIED_LINES) Object.keys(window.UNIFIED_LINES).forEach(function(k) { allLineIds[k] = true; });",
       "category": "COMPATIBILITY",
@@ -92,7 +92,7 @@
     },
     {
       "id": null,
-      "file": "js\\data-fusion.js",
+      "file": "js/data-fusion.js",
       "line": 160,
       "content": "var fusedData = { version: FUSION_VERSION, timestamp: new Date().toISOString(), lines: fusedLines, lineOrder: (window.Li",
       "category": "COMPATIBILITY",
@@ -102,7 +102,7 @@
     },
     {
       "id": null,
-      "file": "js\\data-fusion.js",
+      "file": "js/data-fusion.js",
       "line": 185,
       "content": "if (window.UNIFIED_LINES && Object.keys(window.UNIFIED_LINES).length > 0) {",
       "category": "COMPATIBILITY",
@@ -112,7 +112,7 @@
     },
     {
       "id": null,
-      "file": "js\\data-fusion.js",
+      "file": "js/data-fusion.js",
       "line": 186,
       "content": "try { fuseAll(); console.log(\"[DataFusion] Late UNIFIED_LINES loaded, re-fused:\", Object.keys(window.UNIFIED_LINES).leng",
       "category": "COMPATIBILITY",
@@ -122,7 +122,7 @@
     },
     {
       "id": null,
-      "file": "js\\data-layer.js",
+      "file": "js/data-layer.js",
       "line": 74,
       "content": "Object.keys(window.UNIFIED_LINES).forEach(function(id) {",
       "category": "BUSINESS_RUNTIME",
@@ -132,7 +132,7 @@
     },
     {
       "id": null,
-      "file": "js\\data-layer.js",
+      "file": "js/data-layer.js",
       "line": 75,
       "content": "var l = window.UNIFIED_LINES[id];",
       "category": "BUSINESS_RUNTIME",
@@ -142,7 +142,7 @@
     },
     {
       "id": null,
-      "file": "js\\data-layer.js",
+      "file": "js/data-layer.js",
       "line": 82,
       "content": "return window.UNIFIED_LINES[lineId] || null;",
       "category": "BUSINESS_RUNTIME",
@@ -152,7 +152,7 @@
     },
     {
       "id": null,
-      "file": "js\\data-state.js",
+      "file": "js/data-state.js",
       "line": 146,
       "content": "var lineOrder = options.lineOrder || (window.LinePresentationService ? window.LinePresentationService.getDisplayOrder(wi",
       "category": "COMPATIBILITY",
@@ -162,7 +162,7 @@
     },
     {
       "id": null,
-      "file": "js\\data-state.js",
+      "file": "js/data-state.js",
       "line": 175,
       "content": "var presentationOrderMap = (window.LinePresentationService && window.UNIFIED_LINES)",
       "category": "COMPATIBILITY",
@@ -172,7 +172,7 @@
     },
     {
       "id": null,
-      "file": "js\\data-state.js",
+      "file": "js/data-state.js",
       "line": 176,
       "content": "? window.LinePresentationService.getDisplayOrderMap(window.UNIFIED_LINES) : {};",
       "category": "COMPATIBILITY",
@@ -182,7 +182,7 @@
     },
     {
       "id": null,
-      "file": "js\\data-state.js",
+      "file": "js/data-state.js",
       "line": 251,
       "content": "if (window.UNIFIED_LINES) setLines(window.UNIFIED_LINES);",
       "category": "COMPATIBILITY",
@@ -192,7 +192,7 @@
     },
     {
       "id": null,
-      "file": "js\\realtime-view.js",
+      "file": "js/realtime-view.js",
       "line": 129,
       "content": "if (window.UNIFIED_LINES && Object.keys(window.UNIFIED_LINES).length > 0) {",
       "category": "BUSINESS_RUNTIME",
@@ -202,7 +202,7 @@
     },
     {
       "id": null,
-      "file": "js\\realtime-view.js",
+      "file": "js/realtime-view.js",
       "line": 130,
       "content": "var lpsOrder = (window.LinePresentationService && window.UNIFIED_LINES) ? window.LinePresentationService.getDisplayOrder",
       "category": "COMPATIBILITY",
@@ -212,7 +212,7 @@
     },
     {
       "id": null,
-      "file": "js\\route-search.js",
+      "file": "js/route-search.js",
       "line": 21,
       "content": "for (const lineId of Object.keys(window.UNIFIED_LINES)) {",
       "category": "BUSINESS_RUNTIME",
@@ -222,7 +222,7 @@
     },
     {
       "id": null,
-      "file": "js\\route-search.js",
+      "file": "js/route-search.js",
       "line": 22,
       "content": "const line = window.UNIFIED_LINES[lineId];",
       "category": "BUSINESS_RUNTIME",
@@ -232,7 +232,7 @@
     },
     {
       "id": null,
-      "file": "js\\route-search.js",
+      "file": "js/route-search.js",
       "line": 53,
       "content": "const connectLine = window.UNIFIED_LINES[connectLineId];",
       "category": "BUSINESS_RUNTIME",
@@ -242,7 +242,7 @@
     },
     {
       "id": null,
-      "file": "js\\route-search.js",
+      "file": "js/route-search.js",
       "line": 100,
       "content": "const line = window.UNIFIED_LINES[segLines[0]];",
       "category": "BUSINESS_RUNTIME",
@@ -252,7 +252,7 @@
     },
     {
       "id": null,
-      "file": "js\\route-search.js",
+      "file": "js/route-search.js",
       "line": 161,
       "content": "for (const lineId of Object.keys(window.UNIFIED_LINES)) {",
       "category": "BUSINESS_RUNTIME",
@@ -262,7 +262,7 @@
     },
     {
       "id": null,
-      "file": "js\\route-search.js",
+      "file": "js/route-search.js",
       "line": 162,
       "content": "const line = window.UNIFIED_LINES[lineId];",
       "category": "BUSINESS_RUNTIME",
@@ -272,7 +272,7 @@
     },
     {
       "id": null,
-      "file": "js\\route-search.js",
+      "file": "js/route-search.js",
       "line": 215,
       "content": "for (const lineId of Object.keys(window.UNIFIED_LINES)) {",
       "category": "BUSINESS_RUNTIME",
@@ -282,7 +282,7 @@
     },
     {
       "id": null,
-      "file": "js\\route-search.js",
+      "file": "js/route-search.js",
       "line": 216,
       "content": "const line = window.UNIFIED_LINES[lineId];",
       "category": "BUSINESS_RUNTIME",
@@ -292,7 +292,7 @@
     },
     {
       "id": null,
-      "file": "js\\route-search.js",
+      "file": "js/route-search.js",
       "line": 240,
       "content": "for (const lineId of Object.keys(window.UNIFIED_LINES)) {",
       "category": "BUSINESS_RUNTIME",
@@ -302,7 +302,7 @@
     },
     {
       "id": null,
-      "file": "js\\route-search.js",
+      "file": "js/route-search.js",
       "line": 241,
       "content": "const line = window.UNIFIED_LINES[lineId];",
       "category": "BUSINESS_RUNTIME",
@@ -312,7 +312,7 @@
     },
     {
       "id": null,
-      "file": "js\\trains-detail.js",
+      "file": "js/trains-detail.js",
       "line": 29,
       "content": "return (window.UNIFIED_LINES && window.UNIFIED_LINES[lineId]) || null;",
       "category": "BUSINESS_RUNTIME",
@@ -322,7 +322,7 @@
     },
     {
       "id": null,
-      "file": "js\\trains-page.js",
+      "file": "js/trains-page.js",
       "line": 62,
       "content": "var ul = window.UNIFIED_LINES;",
       "category": "BUSINESS_RUNTIME",
@@ -332,7 +332,7 @@
     },
     {
       "id": null,
-      "file": "js\\trains-page.js",
+      "file": "js/trains-page.js",
       "line": 97,
       "content": "var ul = window.UNIFIED_LINES;",
       "category": "BUSINESS_RUNTIME",
@@ -342,7 +342,7 @@
     },
     {
       "id": null,
-      "file": "js\\trains-page.js",
+      "file": "js/trains-page.js",
       "line": 255,
       "content": "var ul = window.UNIFIED_LINES;",
       "category": "BUSINESS_RUNTIME",
@@ -352,7 +352,7 @@
     },
     {
       "id": null,
-      "file": "js\\trains-render.js",
+      "file": "js/trains-render.js",
       "line": 10,
       "content": "var L = (data && data.lines) || (window.UNIFIED_LINES || {});",
       "category": "BUSINESS_RUNTIME",
@@ -362,7 +362,7 @@
     },
     {
       "id": null,
-      "file": "js\\trains-render.js",
+      "file": "js/trains-render.js",
       "line": 11,
       "content": "var lineOrder = (window.LinePresentationService && window.UNIFIED_LINES) ? window.LinePresentationService.getDisplayOrde",
       "category": "COMPATIBILITY",
@@ -372,7 +372,7 @@
     },
     {
       "id": null,
-      "file": "js\\trains-render.js",
+      "file": "js/trains-render.js",
       "line": 36,
       "content": "if (window.UNIFIED_LINES && Object.keys(window.UNIFIED_LINES).length > 0) { render({ lines: window.UNIFIED_LINES }); ret",
       "category": "BUSINESS_RUNTIME",
@@ -382,7 +382,7 @@
     },
     {
       "id": null,
-      "file": "js\\trains-render.js",
+      "file": "js/trains-render.js",
       "line": 40,
       "content": "if (!d) d = { lines: window.UNIFIED_LINES || {} };",
       "category": "BUSINESS_RUNTIME",
@@ -392,7 +392,7 @@
     },
     {
       "id": null,
-      "file": "js\\trains-render.js",
+      "file": "js/trains-render.js",
       "line": 61,
       "content": "if (!d) d = { lines: window.UNIFIED_LINES || {} };",
       "category": "BUSINESS_RUNTIME",
@@ -402,7 +402,7 @@
     },
     {
       "id": null,
-      "file": "data\\铁道\\data-fusion.js",
+      "file": "data/铁道/data-fusion.js",
       "line": 43,
       "content": "var knownLines = window.UNIFIED_LINES;",
       "category": "COMPATIBILITY",
@@ -412,7 +412,7 @@
     },
     {
       "id": null,
-      "file": "data\\铁道\\data-fusion.js",
+      "file": "data/铁道/data-fusion.js",
       "line": 74,
       "content": "if (!window.UNIFIED_LINES) return;",
       "category": "COMPATIBILITY",
@@ -422,7 +422,7 @@
     },
     {
       "id": null,
-      "file": "data\\铁道\\data-fusion.js",
+      "file": "data/铁道/data-fusion.js",
       "line": 76,
       "content": "Object.keys(window.UNIFIED_LINES).forEach(function(id) {",
       "category": "COMPATIBILITY",
@@ -432,7 +432,7 @@
     },
     {
       "id": null,
-      "file": "data\\铁道\\data-fusion.js",
+      "file": "data/铁道/data-fusion.js",
       "line": 85,
       "content": "if (!window.UNIFIED_LINES) return;",
       "category": "COMPATIBILITY",
@@ -442,7 +442,7 @@
     },
     {
       "id": null,
-      "file": "data\\铁道\\data-fusion.js",
+      "file": "data/铁道/data-fusion.js",
       "line": 86,
       "content": "var currentVersion = Object.keys(window.UNIFIED_LINES).length;",
       "category": "COMPATIBILITY",
@@ -452,7 +452,7 @@
     },
     {
       "id": null,
-      "file": "data\\铁道\\data-fusion.js",
+      "file": "data/铁道/data-fusion.js",
       "line": 141,
       "content": "var line = (window.UNIFIED_LINES && window.UNIFIED_LINES[lineId]) || (localData.lines && localData.lines[lineId]) || nul",
       "category": "COMPATIBILITY",
@@ -462,7 +462,7 @@
     },
     {
       "id": null,
-      "file": "data\\铁道\\data-fusion.js",
+      "file": "data/铁道/data-fusion.js",
       "line": 154,
       "content": "if (window.UNIFIED_LINES) Object.keys(window.UNIFIED_LINES).forEach(function(k) { allLineIds[k] = true; });",
       "category": "COMPATIBILITY",
@@ -472,7 +472,7 @@
     },
     {
       "id": null,
-      "file": "data\\铁道\\data-fusion.js",
+      "file": "data/铁道/data-fusion.js",
       "line": 160,
       "content": "var fusedData = { version: FUSION_VERSION, timestamp: new Date().toISOString(), lines: fusedLines, lineOrder: (window.Li",
       "category": "COMPATIBILITY",
@@ -482,7 +482,7 @@
     },
     {
       "id": null,
-      "file": "data\\铁道\\data-fusion.js",
+      "file": "data/铁道/data-fusion.js",
       "line": 185,
       "content": "if (window.UNIFIED_LINES && Object.keys(window.UNIFIED_LINES).length > 0) {",
       "category": "COMPATIBILITY",
@@ -492,7 +492,7 @@
     },
     {
       "id": null,
-      "file": "data\\铁道\\data-fusion.js",
+      "file": "data/铁道/data-fusion.js",
       "line": 186,
       "content": "try { fuseAll(); console.log(\"[DataFusion] Late UNIFIED_LINES loaded, re-fused:\", Object.keys(window.UNIFIED_LINES).leng",
       "category": "COMPATIBILITY",
@@ -502,7 +502,7 @@
     },
     {
       "id": null,
-      "file": "data\\铁道\\data-layer.js",
+      "file": "data/铁道/data-layer.js",
       "line": 74,
       "content": "",
       "category": "BUSINESS_RUNTIME",
@@ -512,7 +512,7 @@
     },
     {
       "id": null,
-      "file": "data\\铁道\\data-layer.js",
+      "file": "data/铁道/data-layer.js",
       "line": 75,
       "content": "",
       "category": "BUSINESS_RUNTIME",
@@ -522,7 +522,7 @@
     },
     {
       "id": null,
-      "file": "data\\铁道\\data-layer.js",
+      "file": "data/铁道/data-layer.js",
       "line": 82,
       "content": "",
       "category": "BUSINESS_RUNTIME",
@@ -532,7 +532,7 @@
     },
     {
       "id": null,
-      "file": "data\\铁道\\data-state.js",
+      "file": "data/铁道/data-state.js",
       "line": 146,
       "content": "",
       "category": "COMPATIBILITY",
@@ -542,7 +542,7 @@
     },
     {
       "id": null,
-      "file": "data\\铁道\\data-state.js",
+      "file": "data/铁道/data-state.js",
       "line": 175,
       "content": "",
       "category": "COMPATIBILITY",
@@ -552,7 +552,7 @@
     },
     {
       "id": null,
-      "file": "data\\铁道\\data-state.js",
+      "file": "data/铁道/data-state.js",
       "line": 176,
       "content": "",
       "category": "COMPATIBILITY",
@@ -562,7 +562,7 @@
     },
     {
       "id": null,
-      "file": "data\\铁道\\data-state.js",
+      "file": "data/铁道/data-state.js",
       "line": 251,
       "content": "",
       "category": "COMPATIBILITY",
@@ -572,7 +572,7 @@
     },
     {
       "id": null,
-      "file": "data\\铁道\\realtime-view.js",
+      "file": "data/铁道/realtime-view.js",
       "line": 129,
       "content": "if (window.UNIFIED_LINES && Object.keys(window.UNIFIED_LINES).length > 0) {",
       "category": "BUSINESS_RUNTIME",
@@ -582,7 +582,7 @@
     },
     {
       "id": null,
-      "file": "data\\铁道\\realtime-view.js",
+      "file": "data/铁道/realtime-view.js",
       "line": 130,
       "content": "var lpsOrder = (window.LinePresentationService && window.UNIFIED_LINES) ? window.LinePresentationService.getDisplayOrder",
       "category": "COMPATIBILITY",
@@ -592,7 +592,7 @@
     },
     {
       "id": null,
-      "file": "data\\铁道\\route-search.js",
+      "file": "data/铁道/route-search.js",
       "line": 21,
       "content": "for (const lineId of Object.keys(window.UNIFIED_LINES)) {",
       "category": "BUSINESS_RUNTIME",
@@ -602,7 +602,7 @@
     },
     {
       "id": null,
-      "file": "data\\铁道\\route-search.js",
+      "file": "data/铁道/route-search.js",
       "line": 22,
       "content": "const line = window.UNIFIED_LINES[lineId];",
       "category": "BUSINESS_RUNTIME",
@@ -612,7 +612,7 @@
     },
     {
       "id": null,
-      "file": "data\\铁道\\route-search.js",
+      "file": "data/铁道/route-search.js",
       "line": 53,
       "content": "const connectLine = window.UNIFIED_LINES[connectLineId];",
       "category": "BUSINESS_RUNTIME",
@@ -622,7 +622,7 @@
     },
     {
       "id": null,
-      "file": "data\\铁道\\route-search.js",
+      "file": "data/铁道/route-search.js",
       "line": 100,
       "content": "const line = window.UNIFIED_LINES[segLines[0]];",
       "category": "BUSINESS_RUNTIME",
@@ -632,7 +632,7 @@
     },
     {
       "id": null,
-      "file": "data\\铁道\\route-search.js",
+      "file": "data/铁道/route-search.js",
       "line": 161,
       "content": "for (const lineId of Object.keys(window.UNIFIED_LINES)) {",
       "category": "BUSINESS_RUNTIME",
@@ -642,7 +642,7 @@
     },
     {
       "id": null,
-      "file": "data\\铁道\\route-search.js",
+      "file": "data/铁道/route-search.js",
       "line": 162,
       "content": "const line = window.UNIFIED_LINES[lineId];",
       "category": "BUSINESS_RUNTIME",
@@ -652,7 +652,7 @@
     },
     {
       "id": null,
-      "file": "data\\铁道\\route-search.js",
+      "file": "data/铁道/route-search.js",
       "line": 215,
       "content": "for (const lineId of Object.keys(window.UNIFIED_LINES)) {",
       "category": "BUSINESS_RUNTIME",
@@ -662,7 +662,7 @@
     },
     {
       "id": null,
-      "file": "data\\铁道\\route-search.js",
+      "file": "data/铁道/route-search.js",
       "line": 216,
       "content": "const line = window.UNIFIED_LINES[lineId];",
       "category": "BUSINESS_RUNTIME",
@@ -672,7 +672,7 @@
     },
     {
       "id": null,
-      "file": "data\\铁道\\route-search.js",
+      "file": "data/铁道/route-search.js",
       "line": 240,
       "content": "for (const lineId of Object.keys(window.UNIFIED_LINES)) {",
       "category": "BUSINESS_RUNTIME",
@@ -682,7 +682,7 @@
     },
     {
       "id": null,
-      "file": "data\\铁道\\route-search.js",
+      "file": "data/铁道/route-search.js",
       "line": 241,
       "content": "const line = window.UNIFIED_LINES[lineId];",
       "category": "BUSINESS_RUNTIME",
@@ -692,7 +692,7 @@
     },
     {
       "id": null,
-      "file": "data\\铁道\\trains-detail.js",
+      "file": "data/铁道/trains-detail.js",
       "line": 29,
       "content": "return (window.UNIFIED_LINES && window.UNIFIED_LINES[lineId]) || null;",
       "category": "BUSINESS_RUNTIME",
@@ -702,7 +702,7 @@
     },
     {
       "id": null,
-      "file": "data\\铁道\\trains-page.js",
+      "file": "data/铁道/trains-page.js",
       "line": 62,
       "content": "",
       "category": "BUSINESS_RUNTIME",
@@ -712,7 +712,7 @@
     },
     {
       "id": null,
-      "file": "data\\铁道\\trains-page.js",
+      "file": "data/铁道/trains-page.js",
       "line": 97,
       "content": "",
       "category": "BUSINESS_RUNTIME",
@@ -722,7 +722,7 @@
     },
     {
       "id": null,
-      "file": "data\\铁道\\trains-page.js",
+      "file": "data/铁道/trains-page.js",
       "line": 255,
       "content": "",
       "category": "BUSINESS_RUNTIME",
@@ -732,7 +732,7 @@
     },
     {
       "id": null,
-      "file": "data\\铁道\\trains-render.js",
+      "file": "data/铁道/trains-render.js",
       "line": 10,
       "content": "var L = (data && data.lines) || (window.UNIFIED_LINES || {});",
       "category": "BUSINESS_RUNTIME",
@@ -742,7 +742,7 @@
     },
     {
       "id": null,
-      "file": "data\\铁道\\trains-render.js",
+      "file": "data/铁道/trains-render.js",
       "line": 11,
       "content": "var lineOrder = (window.LinePresentationService && window.UNIFIED_LINES) ? window.LinePresentationService.getDisplayOrde",
       "category": "COMPATIBILITY",
@@ -752,7 +752,7 @@
     },
     {
       "id": null,
-      "file": "data\\铁道\\trains-render.js",
+      "file": "data/铁道/trains-render.js",
       "line": 36,
       "content": "if (window.UNIFIED_LINES && Object.keys(window.UNIFIED_LINES).length > 0) { render({ lines: window.UNIFIED_LINES }); ret",
       "category": "BUSINESS_RUNTIME",
@@ -762,7 +762,7 @@
     },
     {
       "id": null,
-      "file": "data\\铁道\\trains-render.js",
+      "file": "data/铁道/trains-render.js",
       "line": 40,
       "content": "if (!d) d = { lines: window.UNIFIED_LINES || {} };",
       "category": "BUSINESS_RUNTIME",
@@ -772,7 +772,7 @@
     },
     {
       "id": null,
-      "file": "data\\铁道\\trains-render.js",
+      "file": "data/铁道/trains-render.js",
       "line": 61,
       "content": "if (!d) d = { lines: window.UNIFIED_LINES || {} };",
       "category": "BUSINESS_RUNTIME",
@@ -782,7 +782,7 @@
     },
     {
       "id": null,
-      "file": "js\\route-search.js",
+      "file": "js/route-search.js",
       "line": 4,
       "content": "* based on the UNIFIED_LINES data structure.",
       "category": "COMMENT",
@@ -792,7 +792,7 @@
     },
     {
       "id": null,
-      "file": "js\\route-search.js",
+      "file": "js/route-search.js",
       "line": 14,
       "content": "* Build a bidirectional adjacency list from UNIFIED_LINES",
       "category": "COMMENT",
@@ -802,7 +802,7 @@
     },
     {
       "id": null,
-      "file": "js\\trains-page.js",
+      "file": "js/trains-page.js",
       "line": 3,
       "content": "* v4 - 从 railway_data.json 加载 stations/durations + line-control.js 元数据",
       "category": "COMMENT",
@@ -812,7 +812,7 @@
     },
     {
       "id": null,
-      "file": "js\\realtime-view.js",
+      "file": "js/realtime-view.js",
       "line": 127,
       "content": "}",
       "category": "COMMENT",
@@ -822,7 +822,7 @@
     },
     {
       "id": null,
-      "file": "js\\realtime-view.js",
+      "file": "js/realtime-view.js",
       "line": 128,
       "content": "// Priority 2: Direct UNIFIED_LINES (raw data, no delay info)",
       "category": "COMMENT",
@@ -832,7 +832,7 @@
     },
     {
       "id": null,
-      "file": "data\\铁道\\route-search.js",
+      "file": "data/铁道/route-search.js",
       "line": 4,
       "content": "* based on the UNIFIED_LINES data structure.",
       "category": "COMMENT",
@@ -842,7 +842,7 @@
     },
     {
       "id": null,
-      "file": "data\\铁道\\route-search.js",
+      "file": "data/铁道/route-search.js",
       "line": 14,
       "content": "* Build a bidirectional adjacency list from UNIFIED_LINES",
       "category": "COMMENT",
@@ -852,7 +852,7 @@
     },
     {
       "id": null,
-      "file": "data\\铁道\\trains-page.js",
+      "file": "data/铁道/trains-page.js",
       "line": 3,
       "content": "*/",
       "category": "COMMENT",
@@ -862,7 +862,7 @@
     },
     {
       "id": null,
-      "file": "data\\铁道\\realtime-view.js",
+      "file": "data/铁道/realtime-view.js",
       "line": 127,
       "content": "}",
       "category": "COMMENT",
@@ -872,7 +872,7 @@
     },
     {
       "id": null,
-      "file": "data\\铁道\\realtime-view.js",
+      "file": "data/铁道/realtime-view.js",
       "line": 128,
       "content": "// Priority 2: Direct UNIFIED_LINES (raw data, no delay info)",
       "category": "COMMENT",
@@ -919,6 +919,56 @@
       "decision": "RETAIN",
       "reason": "RailwayDB fallback - getLine compat (duplicate?)",
       "railwaydb_equivalent": ""
+    },
+    {
+      "id": "RS-52",
+      "file": "js/route-search.js",
+      "line": 52,
+      "content": "connectLine fallback",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "3.4.2 migrated: DataLayer fallback for connectLine lookup",
+      "railwaydb_equivalent": "DataLayer.getLine(connectLineId)"
+    },
+    {
+      "id": "RS-99",
+      "file": "js/route-search.js",
+      "line": 99,
+      "content": "line fallback",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "3.4.2 migrated: DataLayer fallback for line duration lookup",
+      "railwaydb_equivalent": "DataLayer.getLine(segLines[0])"
+    },
+    {
+      "id": "RS-160",
+      "file": "js/route-search.js",
+      "line": 160,
+      "content": "getNameToIdMap loop",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "3.4.2 migrated: RailwayDB-first loop for name-to-id map",
+      "railwaydb_equivalent": "RailwayDB.getAllLines()"
+    },
+    {
+      "id": "RS-213",
+      "file": "js/route-search.js",
+      "line": 213,
+      "content": "getLinesForSegment loop",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "3.4.2 migrated: RailwayDB-first loop for segment line lookup",
+      "railwaydb_equivalent": "RailwayDB.getAllLines()"
+    },
+    {
+      "id": "RS-237",
+      "file": "js/route-search.js",
+      "line": 237,
+      "content": "findStationsByTerm loop",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "3.4.2 migrated: RailwayDB-first loop for station search",
+      "railwaydb_equivalent": "RailwayDB.getAllLines()"
     }
   ]
 }
