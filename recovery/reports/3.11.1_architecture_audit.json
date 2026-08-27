@@ -1,0 +1,297 @@
+{
+  "title": "3.11.1 Realtime Architecture Audit",
+  "date": "2026-08-28",
+  "canonical_sha": "27ed38fc6910781268e231906ecc683367d1c93fca725cbe803eb167b4b2240e",
+  "current_architecture": {
+    "description": "UNIFIED_LINES -> DataFusion -> DataState -> UI (bypasses RailwayDB)",
+    "data_sources": [
+      {
+        "name": "UNIFIED_LINES",
+        "role": "Legacy canonical line data",
+        "used_by": [
+          "DataFusion",
+          "realtime-view",
+          "data-layer",
+          "data-state",
+          "trains-page",
+          "trains-render",
+          "trains-detail"
+        ]
+      },
+      {
+        "name": "ODPT API",
+        "role": "Realtime delay/status",
+        "used_by": [
+          "DataFusion.getApiDelayInfo()"
+        ]
+      },
+      {
+        "name": "RailwayRTC",
+        "role": "IndexedDB cache for positions",
+        "used_by": [
+          "DataFusion.saveToCache()"
+        ]
+      },
+      {
+        "name": "RailwayDB",
+        "role": "NOT USED by DataFusion (gap)",
+        "used_by": [
+          "data-layer",
+          "realtime-view(partial)"
+        ]
+      }
+    ],
+    "critical_gap": "DataFusion reads UNIFIED_LINES directly with 0 RailwayDB references"
+  },
+  "capability_matrix": {
+    "total_lines": 156,
+    "REALTIME_ODPT_covered": 33,
+    "STATIC_no_odpt_but_has_data": 123,
+    "UNKNOWN_no_data": 0,
+    "by_operator": {
+      "JR-East": {
+        "realtime": 1,
+        "static": 73,
+        "unknown": 0
+      },
+      "Seibu": {
+        "realtime": 2,
+        "static": 13,
+        "unknown": 0
+      },
+      "Tobu": {
+        "realtime": 2,
+        "static": 12,
+        "unknown": 0
+      },
+      "TokyoMetro": {
+        "realtime": 9,
+        "static": 1,
+        "unknown": 0
+      },
+      "Keio": {
+        "realtime": 2,
+        "static": 6,
+        "unknown": 0
+      },
+      "Toei": {
+        "realtime": 4,
+        "static": 3,
+        "unknown": 0
+      },
+      "Keikyu": {
+        "realtime": 2,
+        "static": 5,
+        "unknown": 0
+      },
+      "Odakyu": {
+        "realtime": 2,
+        "static": 2,
+        "unknown": 0
+      },
+      "YokohamaMunicipal": {
+        "realtime": 1,
+        "static": 2,
+        "unknown": 0
+      },
+      "Tokyu": {
+        "realtime": 2,
+        "static": 1,
+        "unknown": 0
+      },
+      "MIR": {
+        "realtime": 1,
+        "static": 0,
+        "unknown": 0
+      },
+      "JR West": {
+        "realtime": 0,
+        "static": 1,
+        "unknown": 0
+      },
+      "Keisei": {
+        "realtime": 0,
+        "static": 1,
+        "unknown": 0
+      },
+      "MinatoMirai": {
+        "realtime": 1,
+        "static": 0,
+        "unknown": 0
+      },
+      "Rinkai": {
+        "realtime": 1,
+        "static": 0,
+        "unknown": 0
+      },
+      "TWR": {
+        "realtime": 0,
+        "static": 1,
+        "unknown": 0
+      },
+      "ShonanMonorail": {
+        "realtime": 0,
+        "static": 1,
+        "unknown": 0
+      },
+      "Sotetsu": {
+        "realtime": 0,
+        "static": 1,
+        "unknown": 0
+      },
+      "TamaMonorail": {
+        "realtime": 1,
+        "static": 0,
+        "unknown": 0
+      },
+      "TsukubaExpress": {
+        "realtime": 1,
+        "static": 0,
+        "unknown": 0
+      },
+      "Yurikamome": {
+        "realtime": 1,
+        "static": 0,
+        "unknown": 0
+      }
+    }
+  },
+  "file_data_flow": {
+    "js/data-fusion.js": {
+      "UNIFIED_LINES": 15,
+      "RailwayDB": 0,
+      "DataLayer": 0,
+      "ODPTClient": 6,
+      "DATA_FUSION": 10,
+      "RailwayRTC": 3
+    },
+    "js/realtime-view.js": {
+      "UNIFIED_LINES": 7,
+      "RailwayDB": 1,
+      "DataLayer": 3,
+      "ODPTClient": 0,
+      "DATA_FUSION": 0,
+      "RailwayRTC": 0
+    },
+    "js/data-layer.js": {
+      "UNIFIED_LINES": 4,
+      "RailwayDB": 8,
+      "DataLayer": 4,
+      "ODPTClient": 0,
+      "DATA_FUSION": 0,
+      "RailwayRTC": 0
+    },
+    "js/data-state.js": {
+      "UNIFIED_LINES": 5,
+      "RailwayDB": 0,
+      "DataLayer": 0,
+      "ODPTClient": 0,
+      "DATA_FUSION": 0,
+      "RailwayRTC": 0
+    },
+    "js/trains-page.js": {
+      "UNIFIED_LINES": 5,
+      "RailwayDB": 0,
+      "DataLayer": 9,
+      "ODPTClient": 0,
+      "DATA_FUSION": 0,
+      "RailwayRTC": 3
+    },
+    "js/trains-render.js": {
+      "UNIFIED_LINES": 5,
+      "RailwayDB": 0,
+      "DataLayer": 8,
+      "ODPTClient": 0,
+      "DATA_FUSION": 3,
+      "RailwayRTC": 0
+    },
+    "js/trains-detail.js": {
+      "UNIFIED_LINES": 2,
+      "RailwayDB": 1,
+      "DataLayer": 4,
+      "ODPTClient": 0,
+      "DATA_FUSION": 1,
+      "RailwayRTC": 0
+    }
+  },
+  "migration_targets": {
+    "HIGH_priority": [
+      {
+        "file": "js/data-fusion.js",
+        "issue": "fuseLine() reads UNIFIED_LINES[lineId] directly",
+        "fix": "Use DataLayer.getLine(lineId) or RailwayDB.getLine(lineId)"
+      },
+      {
+        "file": "js/data-fusion.js",
+        "issue": "fuseAll() iterates UNIFIED_LINES keys",
+        "fix": "Use DataLayer.getAllLines() or RailwayDB.getAllLines()"
+      },
+      {
+        "file": "js/data-fusion.js",
+        "issue": "checkCacheStale() uses UNIFIED_LINES.length",
+        "fix": "Use RailwayDB line count or DataLayer"
+      }
+    ],
+    "MEDIUM_priority": [
+      {
+        "file": "js/realtime-view.js",
+        "issue": "Fallback to UNIFIED_LINES in line order",
+        "fix": "Use DataLayer or RailwayDB relation layer"
+      },
+      {
+        "file": "js/data-state.js",
+        "issue": "getDisplayOrderMap uses UNIFIED_LINES",
+        "fix": "Use LINE_STATION_ORDER from RailwayDB"
+      },
+      {
+        "file": "js/trains-render.js",
+        "issue": "Partial UNIFIED_LINES fallback",
+        "fix": "Use DataLayer.getAllLines()"
+      }
+    ],
+    "LOW_priority": [
+      {
+        "file": "js/data-layer.js",
+        "issue": "getAllLines() has UNIFIED_LINES fallback",
+        "fix": "Already RailwayDB-first; fallback is acceptable compat layer"
+      },
+      {
+        "file": "js/trains-detail.js",
+        "issue": "Single UNIFIED_LINES compat return",
+        "fix": "Acceptable as last-resort compat"
+      }
+    ]
+  },
+  "ODPT_coverage_gap": {
+    "mapped_lines": 33,
+    "unmapped_lines": 123,
+    "top_unmapped_operators": [
+      {
+        "operator": "JR-East",
+        "unmapped": 73,
+        "note": "ODPT only covers main suburban lines, not all 74 JR-East lines"
+      },
+      {
+        "operator": "Seibu",
+        "unmapped": 13,
+        "note": "Partial ODPT coverage"
+      },
+      {
+        "operator": "Tobu",
+        "unmapped": 12,
+        "note": "Partial ODPT coverage"
+      }
+    ],
+    "recommendation": "Unmapped lines should show STATIC/NO_DATA status, not crash or fall back to wrong data"
+  },
+  "recommended_target_architecture": {
+    "canonical_source": "RailwayDB (getAllLines, getLine, getLineDurations)",
+    "data_access": "DataLayer (RailwayDB-first, UNIFIED_LINES compat fallback)",
+    "realtime_fusion": "DataFusion (use DataLayer instead of UNIFIED_LINES)",
+    "delay_source": "ODPTClient (for 33 mapped lines) + STATIC default (for 123 unmapped)",
+    "presentation": "DataState.renderCard/renderList (unchanged)"
+  },
+  "ci_guard": "PASS",
+  "arch_guard": "PASS",
+  "action": "AUDIT_ONLY — migration to follow in 3.11.2"
+}
