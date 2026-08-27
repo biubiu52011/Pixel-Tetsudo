@@ -162,16 +162,6 @@
     },
     {
       "id": null,
-      "file": "js/realtime-view.js",
-      "line": 130,
-      "content": "var lpsOrder = (window.LinePresentationService && window.UNIFIED_LINES) ? window.LinePresentationService.getDisplayOrder",
-      "category": "COMPATIBILITY",
-      "decision": "RETAIN",
-      "reason": "Presentation order conditional",
-      "railwaydb_equivalent": ""
-    },
-    {
-      "id": null,
       "file": "js/route-search.js",
       "line": 21,
       "content": "for (const lineId of Object.keys(window.UNIFIED_LINES)) {",
