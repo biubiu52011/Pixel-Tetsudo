@@ -216,8 +216,8 @@
       "line": 21,
       "content": "for (const lineId of Object.keys(window.UNIFIED_LINES)) {",
       "category": "BUSINESS_RUNTIME",
-      "decision": "MIGRATE",
-      "reason": "buildStationGraph BFS iteration",
+      "decision": "RETAIN",
+      "reason": "Migrated in 3.4.2: now uses RailwayDB-first fallback",
       "railwaydb_equivalent": "RailwayDB.getAllLines()+RailwayDB.getLineStationOrder()"
     },
     {
@@ -226,8 +226,8 @@
       "line": 22,
       "content": "const line = window.UNIFIED_LINES[lineId];",
       "category": "BUSINESS_RUNTIME",
-      "decision": "MIGRATE",
-      "reason": "buildStationGraph line access",
+      "decision": "RETAIN",
+      "reason": "Migrated in 3.4.2: now uses RailwayDB-first fallback",
       "railwaydb_equivalent": "RailwayDB.getAllLines()+RailwayDB.getLineStationOrder()"
     },
     {
@@ -236,8 +236,8 @@
       "line": 53,
       "content": "const connectLine = window.UNIFIED_LINES[connectLineId];",
       "category": "BUSINESS_RUNTIME",
-      "decision": "MIGRATE",
-      "reason": "findRoute transfer lookup",
+      "decision": "RETAIN",
+      "reason": "Migrated in 3.4.2: now uses RailwayDB-first fallback",
       "railwaydb_equivalent": "RailwayDB.get*() API"
     },
     {
@@ -246,8 +246,8 @@
       "line": 100,
       "content": "const line = window.UNIFIED_LINES[segLines[0]];",
       "category": "BUSINESS_RUNTIME",
-      "decision": "MIGRATE",
-      "reason": "findRoute duration lookup",
+      "decision": "RETAIN",
+      "reason": "Migrated in 3.4.2: now uses RailwayDB-first fallback",
       "railwaydb_equivalent": "RailwayDB.get*() API"
     },
     {
@@ -256,8 +256,8 @@
       "line": 161,
       "content": "for (const lineId of Object.keys(window.UNIFIED_LINES)) {",
       "category": "BUSINESS_RUNTIME",
-      "decision": "MIGRATE",
-      "reason": "getNameToIdMap cache build",
+      "decision": "RETAIN",
+      "reason": "Migrated in 3.4.2: now uses RailwayDB-first fallback",
       "railwaydb_equivalent": "RailwayDB.get*() API"
     },
     {
@@ -266,8 +266,8 @@
       "line": 162,
       "content": "const line = window.UNIFIED_LINES[lineId];",
       "category": "BUSINESS_RUNTIME",
-      "decision": "MIGRATE",
-      "reason": "Same",
+      "decision": "RETAIN",
+      "reason": "Migrated in 3.4.2: now uses RailwayDB-first fallback",
       "railwaydb_equivalent": "RailwayDB.get*() API"
     },
     {
@@ -276,8 +276,8 @@
       "line": 215,
       "content": "for (const lineId of Object.keys(window.UNIFIED_LINES)) {",
       "category": "BUSINESS_RUNTIME",
-      "decision": "MIGRATE",
-      "reason": "getLinesForSegment iteration",
+      "decision": "RETAIN",
+      "reason": "Migrated in 3.4.2: now uses RailwayDB-first fallback",
       "railwaydb_equivalent": "RailwayDB.getLine(lineId)"
     },
     {
@@ -286,8 +286,8 @@
       "line": 216,
       "content": "const line = window.UNIFIED_LINES[lineId];",
       "category": "BUSINESS_RUNTIME",
-      "decision": "MIGRATE",
-      "reason": "Same",
+      "decision": "RETAIN",
+      "reason": "Migrated in 3.4.2: now uses RailwayDB-first fallback",
       "railwaydb_equivalent": "RailwayDB.get*() API"
     },
     {
@@ -296,8 +296,8 @@
       "line": 240,
       "content": "for (const lineId of Object.keys(window.UNIFIED_LINES)) {",
       "category": "BUSINESS_RUNTIME",
-      "decision": "MIGRATE",
-      "reason": "findStationsByTerm search",
+      "decision": "RETAIN",
+      "reason": "Migrated in 3.4.2: now uses RailwayDB-first fallback",
       "railwaydb_equivalent": "RailwayDB.get*() API"
     },
     {
@@ -306,8 +306,8 @@
       "line": 241,
       "content": "const line = window.UNIFIED_LINES[lineId];",
       "category": "BUSINESS_RUNTIME",
-      "decision": "MIGRATE",
-      "reason": "Same",
+      "decision": "RETAIN",
+      "reason": "Migrated in 3.4.2: now uses RailwayDB-first fallback",
       "railwaydb_equivalent": "RailwayDB.get*() API"
     },
     {
@@ -596,8 +596,8 @@
       "line": 21,
       "content": "for (const lineId of Object.keys(window.UNIFIED_LINES)) {",
       "category": "BUSINESS_RUNTIME",
-      "decision": "MIGRATE",
-      "reason": "buildStationGraph BFS iteration",
+      "decision": "RETAIN",
+      "reason": "Migrated in 3.4.2: now uses RailwayDB-first fallback",
       "railwaydb_equivalent": "RailwayDB.getAllLines()+RailwayDB.getLineStationOrder()"
     },
     {
@@ -606,8 +606,8 @@
       "line": 22,
       "content": "const line = window.UNIFIED_LINES[lineId];",
       "category": "BUSINESS_RUNTIME",
-      "decision": "MIGRATE",
-      "reason": "buildStationGraph line access",
+      "decision": "RETAIN",
+      "reason": "Migrated in 3.4.2: now uses RailwayDB-first fallback",
       "railwaydb_equivalent": "RailwayDB.getAllLines()+RailwayDB.getLineStationOrder()"
     },
     {
@@ -616,8 +616,8 @@
       "line": 53,
       "content": "const connectLine = window.UNIFIED_LINES[connectLineId];",
       "category": "BUSINESS_RUNTIME",
-      "decision": "MIGRATE",
-      "reason": "findRoute transfer lookup",
+      "decision": "RETAIN",
+      "reason": "Migrated in 3.4.2: now uses RailwayDB-first fallback",
       "railwaydb_equivalent": "RailwayDB.get*() API"
     },
     {
@@ -626,8 +626,8 @@
       "line": 100,
       "content": "const line = window.UNIFIED_LINES[segLines[0]];",
       "category": "BUSINESS_RUNTIME",
-      "decision": "MIGRATE",
-      "reason": "findRoute duration lookup",
+      "decision": "RETAIN",
+      "reason": "Migrated in 3.4.2: now uses RailwayDB-first fallback",
       "railwaydb_equivalent": "RailwayDB.get*() API"
     },
     {
@@ -636,8 +636,8 @@
       "line": 161,
       "content": "for (const lineId of Object.keys(window.UNIFIED_LINES)) {",
       "category": "BUSINESS_RUNTIME",
-      "decision": "MIGRATE",
-      "reason": "getNameToIdMap cache build",
+      "decision": "RETAIN",
+      "reason": "Migrated in 3.4.2: now uses RailwayDB-first fallback",
       "railwaydb_equivalent": "RailwayDB.get*() API"
     },
     {
@@ -646,8 +646,8 @@
       "line": 162,
       "content": "const line = window.UNIFIED_LINES[lineId];",
       "category": "BUSINESS_RUNTIME",
-      "decision": "MIGRATE",
-      "reason": "Same",
+      "decision": "RETAIN",
+      "reason": "Migrated in 3.4.2: now uses RailwayDB-first fallback",
       "railwaydb_equivalent": "RailwayDB.get*() API"
     },
     {
@@ -656,8 +656,8 @@
       "line": 215,
       "content": "for (const lineId of Object.keys(window.UNIFIED_LINES)) {",
       "category": "BUSINESS_RUNTIME",
-      "decision": "MIGRATE",
-      "reason": "getLinesForSegment iteration",
+      "decision": "RETAIN",
+      "reason": "Migrated in 3.4.2: now uses RailwayDB-first fallback",
       "railwaydb_equivalent": "RailwayDB.getLine(lineId)"
     },
     {
@@ -666,8 +666,8 @@
       "line": 216,
       "content": "const line = window.UNIFIED_LINES[lineId];",
       "category": "BUSINESS_RUNTIME",
-      "decision": "MIGRATE",
-      "reason": "Same",
+      "decision": "RETAIN",
+      "reason": "Migrated in 3.4.2: now uses RailwayDB-first fallback",
       "railwaydb_equivalent": "RailwayDB.get*() API"
     },
     {
@@ -676,8 +676,8 @@
       "line": 240,
       "content": "for (const lineId of Object.keys(window.UNIFIED_LINES)) {",
       "category": "BUSINESS_RUNTIME",
-      "decision": "MIGRATE",
-      "reason": "findStationsByTerm search",
+      "decision": "RETAIN",
+      "reason": "Migrated in 3.4.2: now uses RailwayDB-first fallback",
       "railwaydb_equivalent": "RailwayDB.get*() API"
     },
     {
@@ -686,8 +686,8 @@
       "line": 241,
       "content": "const line = window.UNIFIED_LINES[lineId];",
       "category": "BUSINESS_RUNTIME",
-      "decision": "MIGRATE",
-      "reason": "Same",
+      "decision": "RETAIN",
+      "reason": "Migrated in 3.4.2: now uses RailwayDB-first fallback",
       "railwaydb_equivalent": "RailwayDB.get*() API"
     },
     {

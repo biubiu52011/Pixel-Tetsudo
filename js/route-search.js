@@ -18,8 +18,7 @@
     if (_graphCache) return _graphCache;
     const graph = new Map();
     
-    for (const lineId of Object.keys(window.UNIFIED_LINES)) {
-      const line = window.UNIFIED_LINES[lineId];
+    for (const [lineId, line] of Object.entries(window.RailwayDB ? window.RailwayDB.getAllLines() : (window.DataLayer ? window.DataLayer.getAllLines() : window.UNIFIED_LINES || {}))) {
       if (!line || !line.stations) continue;
       
       // Add all stations in this line to the graph (sequential connections)
@@ -50,7 +49,7 @@
           const station = transfer.station;
           if (graph.has(station)) {
             for (const connectLineId of (transfer.connects || [])) {
-              const connectLine = window.UNIFIED_LINES[connectLineId];
+              const connectLine = window.DataLayer ? window.DataLayer.getLine(connectLineId) : (window.UNIFIED_LINES ? window.UNIFIED_LINES[connectLineId] : null);
               // Transfer stations are already in the graph via line stations
               // No need to add self-loops - BFS visited set handles this
             }
@@ -97,7 +96,7 @@
         for (let i = 0; i < currentPath.length - 1; i++) {
           const segLines = getLinesForSegment(currentPath[i], currentPath[i+1]);
           if (segLines.length > 0) {
-            const line = window.UNIFIED_LINES[segLines[0]];
+            const line = window.DataLayer ? window.DataLayer.getLine(segLines[0]) : (window.UNIFIED_LINES ? window.UNIFIED_LINES[segLines[0]] : null);
             if (line && line.durations) {
               const segIdx = line.stations.indexOf(currentPath[i]);
               if (segIdx >= 0 && segIdx < line.durations.length) {
@@ -158,8 +157,7 @@
   function getNameToIdMap() {
     if (_nameToIdCache) return _nameToIdCache;
     _nameToIdCache = {};
-    for (const lineId of Object.keys(window.UNIFIED_LINES)) {
-      const line = window.UNIFIED_LINES[lineId];
+    for (const [lineId, line] of Object.entries(window.RailwayDB ? window.RailwayDB.getAllLines() : (window.DataLayer ? window.DataLayer.getAllLines() : window.UNIFIED_LINES || {}))) {
       if (line && line.name) { _nameToIdCache[line.name] = lineId; }
     }
     return _nameToIdCache;
@@ -212,8 +210,7 @@
     const key = station1 + '||' + station2;
     if (_lineCache.has(key)) return _lineCache.get(key);
     const lines = [];
-    for (const lineId of Object.keys(window.UNIFIED_LINES)) {
-      const line = window.UNIFIED_LINES[lineId];
+    for (const [lineId, line] of Object.entries(window.RailwayDB ? window.RailwayDB.getAllLines() : (window.DataLayer ? window.DataLayer.getAllLines() : window.UNIFIED_LINES || {}))) {
       if (line && line.stations) {
         const idx1 = line.stations.indexOf(station1);
         const idx2 = line.stations.indexOf(station2);
@@ -237,8 +234,7 @@
     const query = term.toLowerCase().trim();
     const matches = new Set();
     
-    for (const lineId of Object.keys(window.UNIFIED_LINES)) {
-      const line = window.UNIFIED_LINES[lineId];
+    for (const [lineId, line] of Object.entries(window.RailwayDB ? window.RailwayDB.getAllLines() : (window.DataLayer ? window.DataLayer.getAllLines() : window.UNIFIED_LINES || {}))) {
       if (line && line.stations) {
         for (const station of line.stations) {
           if (station.toLowerCase().includes(query)) {
