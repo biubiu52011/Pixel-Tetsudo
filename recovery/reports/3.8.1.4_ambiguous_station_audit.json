@@ -1,0 +1,56 @@
+{
+  "title": "3.8.1.4 Ambiguous Station Audit",
+  "date": "2026-08-28",
+  "canonical_sha": "27ED38FC6910781268E231906ECC683367D1C93FCA725CBE803EB167B4B2240E",
+  "total_duplicate_values": 3,
+  "ambiguity_cases": [
+    {
+      "en_value": "Ichigaya",
+      "jp_key_count": 2,
+      "jp_keys": [
+        "b'\\xe5\\xb8\\x82\\xe3\\x82\\xb1\\xe8\\xb0\\xb7'",
+        "b'\\xe5\\xb8\\x82\\xe3\\x83\\xb6\\xe8\\xb0\\xb7'"
+      ],
+      "in_station_entity": true,
+      "in_any_line": true,
+      "station_coords": {
+        "lat": 35.6978,
+        "lng": 139.7378
+      },
+      "assessment": "SAME_STATION_ALTERNATIVE_SPELLING"
+    },
+    {
+      "en_value": "Kohoku",
+      "jp_key_count": 2,
+      "jp_keys": [
+        "b'\\xe6\\xb1\\x9f\\xe5\\x8c\\x97'",
+        "b'\\xe6\\xb9\\x96\\xe5\\x8c\\x97'"
+      ],
+      "in_station_entity": false,
+      "in_any_line": false,
+      "station_coords": null,
+      "assessment": "ORPHAN_NAME_MAP_ENTRY"
+    },
+    {
+      "en_value": "Kasumigaseki",
+      "jp_key_count": 2,
+      "jp_keys": [
+        "b'\\xe9\\x9c\\x9e\\xe3\\x82\\xb1\\xe9\\x96\\xa2'",
+        "b'\\xe9\\x9c\\x9e\\xe3\\x83\\xb6\\xe9\\x96\\xa2'"
+      ],
+      "in_station_entity": true,
+      "in_any_line": true,
+      "station_coords": {
+        "lat": 35.6756,
+        "lng": 139.7517
+      },
+      "assessment": "SAME_STATION_ALTERNATIVE_SPELLING"
+    }
+  ],
+  "resolver_behavior": {
+    "en_to_jp": "last-write-wins (first lookup wins)",
+    "jp_partial_match": "returns ALL matching name_map entries (no ambiguity)",
+    "en_exact_match": "not affected by JP key duplicates"
+  },
+  "recommendation": "No code changes needed. Ambiguity is in name_map only, not in station entities. Resolver handles correctly."
+}
