@@ -1,0 +1,782 @@
+{
+  "task": "3.26",
+  "date": "2026-08-28",
+  "canonical_sha": "60328163CF28540B86EFD59CF30E3FBADACF7056FCD49035095A6CECECC8B567",
+  "summary": {
+    "total": 36,
+    "REAL_STATION": 6,
+    "NAMING_VARIANT": 12,
+    "POI_LANDMARK": 6,
+    "DISTRICT_NAME": 12,
+    "HOLD": 0
+  },
+  "classifications": [
+    {
+      "key": "Aomori",
+      "category": "REAL_STATION",
+      "in_stationLines": true,
+      "coord": [
+        40.8244,
+        140.74
+      ],
+      "spots": 5,
+      "reason": "stationLines ref + real station + valid coords"
+    },
+    {
+      "key": "Aoyama",
+      "category": "NAMING_VARIANT",
+      "in_stationLines": true,
+      "coord": [
+        35.6654,
+        139.7189
+      ],
+      "spots": 3,
+      "reason": "stationLines ref but likely district-level or legacy naming"
+    },
+    {
+      "key": "Azabu",
+      "category": "DISTRICT_NAME",
+      "in_stationLines": false,
+      "coord": [
+        35.654,
+        139.7307
+      ],
+      "spots": 5,
+      "reason": "Tokyo ward/district name, not a station entity"
+    },
+    {
+      "key": "Bunkyo",
+      "category": "DISTRICT_NAME",
+      "in_stationLines": false,
+      "coord": [
+        35.7089,
+        139.7528
+      ],
+      "spots": 3,
+      "reason": "Tokyo ward/district name, not a station entity"
+    },
+    {
+      "key": "Chiyoda",
+      "category": "DISTRICT_NAME",
+      "in_stationLines": false,
+      "coord": [
+        35.694,
+        139.7536
+      ],
+      "spots": 5,
+      "reason": "Tokyo ward/district name, not a station entity"
+    },
+    {
+      "key": "Chuo",
+      "category": "DISTRICT_NAME",
+      "in_stationLines": false,
+      "coord": [
+        35.6704,
+        139.7714
+      ],
+      "spots": 3,
+      "reason": "Tokyo ward/district name, not a station entity"
+    },
+    {
+      "key": "Daikanyama",
+      "category": "REAL_STATION",
+      "in_stationLines": true,
+      "coord": [
+        35.6533,
+        139.6986
+      ],
+      "spots": 3,
+      "reason": "stationLines ref + real station + valid coords"
+    },
+    {
+      "key": "Edogawa",
+      "category": "DISTRICT_NAME",
+      "in_stationLines": false,
+      "coord": [
+        35.7067,
+        139.8725
+      ],
+      "spots": 5,
+      "reason": "Tokyo ward/district name, not a station entity"
+    },
+    {
+      "key": "Fukuoka",
+      "category": "NAMING_VARIANT",
+      "in_stationLines": false,
+      "coord": [
+        33.5904,
+        130.4017
+      ],
+      "spots": 5,
+      "reason": "major city name, actual station may use different ID"
+    },
+    {
+      "key": "Hakone",
+      "category": "POI_LANDMARK",
+      "in_stationLines": false,
+      "coord": [
+        35.2325,
+        139.1069
+      ],
+      "spots": 5,
+      "reason": "tourist destination/festival/region name, not a railway station"
+    },
+    {
+      "key": "Hiroshima",
+      "category": "NAMING_VARIANT",
+      "in_stationLines": false,
+      "coord": [
+        34.3853,
+        132.4553
+      ],
+      "spots": 5,
+      "reason": "major city name, actual station may use different ID"
+    },
+    {
+      "key": "Kagoshima",
+      "category": "NAMING_VARIANT",
+      "in_stationLines": false,
+      "coord": [
+        31.5966,
+        130.5571
+      ],
+      "spots": 5,
+      "reason": "major city name, actual station may use different ID"
+    },
+    {
+      "key": "Kanazawa",
+      "category": "NAMING_VARIANT",
+      "in_stationLines": false,
+      "coord": [
+        36.5944,
+        136.6256
+      ],
+      "spots": 5,
+      "reason": "major city name, actual station may use different ID"
+    },
+    {
+      "key": "Katsushika",
+      "category": "DISTRICT_NAME",
+      "in_stationLines": false,
+      "coord": [
+        35.7431,
+        139.8481
+      ],
+      "spots": 5,
+      "reason": "Tokyo ward/district name, not a station entity"
+    },
+    {
+      "key": "Kawaguchiko",
+      "category": "REAL_STATION",
+      "in_stationLines": false,
+      "coord": [
+        35.5133,
+        138.7658
+      ],
+      "spots": 5,
+      "reason": "real station name, not in stationLines but valid station"
+    },
+    {
+      "key": "Kita",
+      "category": "DISTRICT_NAME",
+      "in_stationLines": false,
+      "coord": [
+        35.7355,
+        139.7836
+      ],
+      "spots": 3,
+      "reason": "Tokyo ward/district name, not a station entity"
+    },
+    {
+      "key": "Kiyosumi-Shirakawa",
+      "category": "REAL_STATION",
+      "in_stationLines": false,
+      "coord": [
+        35.6944,
+        139.7631
+      ],
+      "spots": 4,
+      "reason": "real station name, not in stationLines but valid station"
+    },
+    {
+      "key": "Kochi",
+      "category": "NAMING_VARIANT",
+      "in_stationLines": false,
+      "coord": [
+        33.5597,
+        133.5311
+      ],
+      "spots": 5,
+      "reason": "major city name, actual station may use different ID"
+    },
+    {
+      "key": "Koto",
+      "category": "DISTRICT_NAME",
+      "in_stationLines": false,
+      "coord": [
+        35.6733,
+        139.8176
+      ],
+      "spots": 5,
+      "reason": "Tokyo ward/district name, not a station entity"
+    },
+    {
+      "key": "Marunouchi",
+      "category": "DISTRICT_NAME",
+      "in_stationLines": false,
+      "coord": [
+        35.6812,
+        139.7671
+      ],
+      "spots": 4,
+      "reason": "Tokyo ward/district name, not a station entity"
+    },
+    {
+      "key": "Minato",
+      "category": "NAMING_VARIANT",
+      "in_stationLines": true,
+      "coord": [
+        35.6581,
+        139.7514
+      ],
+      "spots": 4,
+      "reason": "stationLines ref but likely district-level or legacy naming"
+    },
+    {
+      "key": "Miyajima",
+      "category": "POI_LANDMARK",
+      "in_stationLines": false,
+      "coord": [
+        34.2963,
+        132.3197
+      ],
+      "spots": 4,
+      "reason": "tourist destination/festival/region name, not a railway station"
+    },
+    {
+      "key": "Naoshima",
+      "category": "POI_LANDMARK",
+      "in_stationLines": false,
+      "coord": [
+        34.425,
+        133.9326
+      ],
+      "spots": 5,
+      "reason": "tourist destination/festival/region name, not a railway station"
+    },
+    {
+      "key": "Nara",
+      "category": "NAMING_VARIANT",
+      "in_stationLines": false,
+      "coord": [
+        34.6851,
+        135.8048
+      ],
+      "spots": 5,
+      "reason": "major city name, actual station may use different ID"
+    },
+    {
+      "key": "Niigata",
+      "category": "REAL_STATION",
+      "in_stationLines": true,
+      "coord": [
+        37.9026,
+        139.0232
+      ],
+      "spots": 5,
+      "reason": "stationLines ref + real station + valid coords"
+    },
+    {
+      "key": "Nishitokyo",
+      "category": "DISTRICT_NAME",
+      "in_stationLines": false,
+      "coord": [
+        35.7256,
+        139.495
+      ],
+      "spots": 3,
+      "reason": "Tokyo ward/district name, not a station entity"
+    },
+    {
+      "key": "Odaiba",
+      "category": "NAMING_VARIANT",
+      "in_stationLines": false,
+      "coord": [
+        35.6264,
+        139.7737
+      ],
+      "spots": 4,
+      "reason": "OdaibaKaihinkoen exists as station entity; Odaiba is district name"
+    },
+    {
+      "key": "Okayama",
+      "category": "NAMING_VARIANT",
+      "in_stationLines": false,
+      "coord": [
+        34.6551,
+        133.9195
+      ],
+      "spots": 5,
+      "reason": "major city name, actual station may use different ID"
+    },
+    {
+      "key": "Okinawa",
+      "category": "POI_LANDMARK",
+      "in_stationLines": false,
+      "coord": [
+        26.2124,
+        127.679
+      ],
+      "spots": 5,
+      "reason": "tourist destination/festival/region name, not a railway station"
+    },
+    {
+      "key": "Sapporo",
+      "category": "NAMING_VARIANT",
+      "in_stationLines": false,
+      "coord": [
+        43.0621,
+        141.3544
+      ],
+      "spots": 5,
+      "reason": "major city name, actual station may use different ID"
+    },
+    {
+      "key": "Sendai",
+      "category": "REAL_STATION",
+      "in_stationLines": true,
+      "coord": [
+        38.2682,
+        140.8694
+      ],
+      "spots": 5,
+      "reason": "stationLines ref + real station + valid coords"
+    },
+    {
+      "key": "Shikoku",
+      "category": "POI_LANDMARK",
+      "in_stationLines": false,
+      "coord": [
+        33.7439,
+        133.7628
+      ],
+      "spots": 5,
+      "reason": "tourist destination/festival/region name, not a railway station"
+    },
+    {
+      "key": "Sumida",
+      "category": "DISTRICT_NAME",
+      "in_stationLines": false,
+      "coord": [
+        35.7101,
+        139.8014
+      ],
+      "spots": 4,
+      "reason": "Tokyo ward/district name, not a station entity"
+    },
+    {
+      "key": "Takayama",
+      "category": "NAMING_VARIANT",
+      "in_stationLines": false,
+      "coord": [
+        36.1469,
+        136.9603
+      ],
+      "spots": 5,
+      "reason": "major city name, actual station may use different ID"
+    },
+    {
+      "key": "Tanabata",
+      "category": "POI_LANDMARK",
+      "in_stationLines": false,
+      "coord": [
+        35.6938,
+        139.7036
+      ],
+      "spots": 5,
+      "reason": "tourist destination/festival/region name, not a railway station"
+    },
+    {
+      "key": "Toshima",
+      "category": "DISTRICT_NAME",
+      "in_stationLines": false,
+      "coord": [
+        35.7321,
+        139.7153
+      ],
+      "spots": 2,
+      "reason": "Tokyo ward/district name, not a station entity"
+    }
+  ],
+  "categories": {
+    "REAL_STATION": [
+      {
+        "key": "Aomori",
+        "in_stationLines": true,
+        "coord": [
+          40.8244,
+          140.74
+        ],
+        "spots": 5,
+        "reason": "stationLines ref + real station + valid coords"
+      },
+      {
+        "key": "Daikanyama",
+        "in_stationLines": true,
+        "coord": [
+          35.6533,
+          139.6986
+        ],
+        "spots": 3,
+        "reason": "stationLines ref + real station + valid coords"
+      },
+      {
+        "key": "Kawaguchiko",
+        "in_stationLines": false,
+        "coord": [
+          35.5133,
+          138.7658
+        ],
+        "spots": 5,
+        "reason": "real station name, not in stationLines but valid station"
+      },
+      {
+        "key": "Kiyosumi-Shirakawa",
+        "in_stationLines": false,
+        "coord": [
+          35.6944,
+          139.7631
+        ],
+        "spots": 4,
+        "reason": "real station name, not in stationLines but valid station"
+      },
+      {
+        "key": "Niigata",
+        "in_stationLines": true,
+        "coord": [
+          37.9026,
+          139.0232
+        ],
+        "spots": 5,
+        "reason": "stationLines ref + real station + valid coords"
+      },
+      {
+        "key": "Sendai",
+        "in_stationLines": true,
+        "coord": [
+          38.2682,
+          140.8694
+        ],
+        "spots": 5,
+        "reason": "stationLines ref + real station + valid coords"
+      }
+    ],
+    "NAMING_VARIANT": [
+      {
+        "key": "Aoyama",
+        "in_stationLines": true,
+        "coord": [
+          35.6654,
+          139.7189
+        ],
+        "spots": 3,
+        "reason": "stationLines ref but likely district-level or legacy naming"
+      },
+      {
+        "key": "Fukuoka",
+        "in_stationLines": false,
+        "coord": [
+          33.5904,
+          130.4017
+        ],
+        "spots": 5,
+        "reason": "major city name, actual station may use different ID"
+      },
+      {
+        "key": "Hiroshima",
+        "in_stationLines": false,
+        "coord": [
+          34.3853,
+          132.4553
+        ],
+        "spots": 5,
+        "reason": "major city name, actual station may use different ID"
+      },
+      {
+        "key": "Kagoshima",
+        "in_stationLines": false,
+        "coord": [
+          31.5966,
+          130.5571
+        ],
+        "spots": 5,
+        "reason": "major city name, actual station may use different ID"
+      },
+      {
+        "key": "Kanazawa",
+        "in_stationLines": false,
+        "coord": [
+          36.5944,
+          136.6256
+        ],
+        "spots": 5,
+        "reason": "major city name, actual station may use different ID"
+      },
+      {
+        "key": "Kochi",
+        "in_stationLines": false,
+        "coord": [
+          33.5597,
+          133.5311
+        ],
+        "spots": 5,
+        "reason": "major city name, actual station may use different ID"
+      },
+      {
+        "key": "Minato",
+        "in_stationLines": true,
+        "coord": [
+          35.6581,
+          139.7514
+        ],
+        "spots": 4,
+        "reason": "stationLines ref but likely district-level or legacy naming"
+      },
+      {
+        "key": "Nara",
+        "in_stationLines": false,
+        "coord": [
+          34.6851,
+          135.8048
+        ],
+        "spots": 5,
+        "reason": "major city name, actual station may use different ID"
+      },
+      {
+        "key": "Odaiba",
+        "in_stationLines": false,
+        "coord": [
+          35.6264,
+          139.7737
+        ],
+        "spots": 4,
+        "reason": "OdaibaKaihinkoen exists as station entity; Odaiba is district name"
+      },
+      {
+        "key": "Okayama",
+        "in_stationLines": false,
+        "coord": [
+          34.6551,
+          133.9195
+        ],
+        "spots": 5,
+        "reason": "major city name, actual station may use different ID"
+      },
+      {
+        "key": "Sapporo",
+        "in_stationLines": false,
+        "coord": [
+          43.0621,
+          141.3544
+        ],
+        "spots": 5,
+        "reason": "major city name, actual station may use different ID"
+      },
+      {
+        "key": "Takayama",
+        "in_stationLines": false,
+        "coord": [
+          36.1469,
+          136.9603
+        ],
+        "spots": 5,
+        "reason": "major city name, actual station may use different ID"
+      }
+    ],
+    "POI_LANDMARK": [
+      {
+        "key": "Hakone",
+        "in_stationLines": false,
+        "coord": [
+          35.2325,
+          139.1069
+        ],
+        "spots": 5,
+        "reason": "tourist destination/festival/region name, not a railway station"
+      },
+      {
+        "key": "Miyajima",
+        "in_stationLines": false,
+        "coord": [
+          34.2963,
+          132.3197
+        ],
+        "spots": 4,
+        "reason": "tourist destination/festival/region name, not a railway station"
+      },
+      {
+        "key": "Naoshima",
+        "in_stationLines": false,
+        "coord": [
+          34.425,
+          133.9326
+        ],
+        "spots": 5,
+        "reason": "tourist destination/festival/region name, not a railway station"
+      },
+      {
+        "key": "Okinawa",
+        "in_stationLines": false,
+        "coord": [
+          26.2124,
+          127.679
+        ],
+        "spots": 5,
+        "reason": "tourist destination/festival/region name, not a railway station"
+      },
+      {
+        "key": "Shikoku",
+        "in_stationLines": false,
+        "coord": [
+          33.7439,
+          133.7628
+        ],
+        "spots": 5,
+        "reason": "tourist destination/festival/region name, not a railway station"
+      },
+      {
+        "key": "Tanabata",
+        "in_stationLines": false,
+        "coord": [
+          35.6938,
+          139.7036
+        ],
+        "spots": 5,
+        "reason": "tourist destination/festival/region name, not a railway station"
+      }
+    ],
+    "DISTRICT_NAME": [
+      {
+        "key": "Azabu",
+        "in_stationLines": false,
+        "coord": [
+          35.654,
+          139.7307
+        ],
+        "spots": 5,
+        "reason": "Tokyo ward/district name, not a station entity"
+      },
+      {
+        "key": "Bunkyo",
+        "in_stationLines": false,
+        "coord": [
+          35.7089,
+          139.7528
+        ],
+        "spots": 3,
+        "reason": "Tokyo ward/district name, not a station entity"
+      },
+      {
+        "key": "Chiyoda",
+        "in_stationLines": false,
+        "coord": [
+          35.694,
+          139.7536
+        ],
+        "spots": 5,
+        "reason": "Tokyo ward/district name, not a station entity"
+      },
+      {
+        "key": "Chuo",
+        "in_stationLines": false,
+        "coord": [
+          35.6704,
+          139.7714
+        ],
+        "spots": 3,
+        "reason": "Tokyo ward/district name, not a station entity"
+      },
+      {
+        "key": "Edogawa",
+        "in_stationLines": false,
+        "coord": [
+          35.7067,
+          139.8725
+        ],
+        "spots": 5,
+        "reason": "Tokyo ward/district name, not a station entity"
+      },
+      {
+        "key": "Katsushika",
+        "in_stationLines": false,
+        "coord": [
+          35.7431,
+          139.8481
+        ],
+        "spots": 5,
+        "reason": "Tokyo ward/district name, not a station entity"
+      },
+      {
+        "key": "Kita",
+        "in_stationLines": false,
+        "coord": [
+          35.7355,
+          139.7836
+        ],
+        "spots": 3,
+        "reason": "Tokyo ward/district name, not a station entity"
+      },
+      {
+        "key": "Koto",
+        "in_stationLines": false,
+        "coord": [
+          35.6733,
+          139.8176
+        ],
+        "spots": 5,
+        "reason": "Tokyo ward/district name, not a station entity"
+      },
+      {
+        "key": "Marunouchi",
+        "in_stationLines": false,
+        "coord": [
+          35.6812,
+          139.7671
+        ],
+        "spots": 4,
+        "reason": "Tokyo ward/district name, not a station entity"
+      },
+      {
+        "key": "Nishitokyo",
+        "in_stationLines": false,
+        "coord": [
+          35.7256,
+          139.495
+        ],
+        "spots": 3,
+        "reason": "Tokyo ward/district name, not a station entity"
+      },
+      {
+        "key": "Sumida",
+        "in_stationLines": false,
+        "coord": [
+          35.7101,
+          139.8014
+        ],
+        "spots": 4,
+        "reason": "Tokyo ward/district name, not a station entity"
+      },
+      {
+        "key": "Toshima",
+        "in_stationLines": false,
+        "coord": [
+          35.7321,
+          139.7153
+        ],
+        "spots": 2,
+        "reason": "Tokyo ward/district name, not a station entity"
+      }
+    ],
+    "HOLD": []
+  }
+}
