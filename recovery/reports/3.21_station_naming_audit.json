@@ -1,10 +1,19 @@
 {
   "task": "3.21",
   "date": "2026-08-28",
-  "canonical_sha": "E7277CA8892F2728",
+  "canonical_sha_before": "E7277CA8892F272839C440FE8D4B47DDAFF8AD93149DC807CE6B95BE335F8060",
+  "canonical_sha_after": "FA5EE417DD939EA4BA039AA97273890108BB19E7264687EE0293C826CC951729",
   "summary": {
-    "total_missing_referenced": 15,
-    "exact_match_count": 0
+    "total_missing_referenced_before": 15,
+    "total_missing_referenced_after": 0,
+    "total_entities_before": 503,
+    "total_entities_after": 503,
+    "name_map_before": 1680,
+    "name_map_after": 1695,
+    "coverage_before": "443/458 referenced (96.7%)",
+    "coverage_after": "458/458 referenced (100%)",
+    "corrections": 1,
+    "additions": 15
   },
   "classifications": {
     "Jimbocho": {
@@ -15,31 +24,38 @@
         "Hanzomon",
         "Namboku"
       ],
-      "exact_match": false
+      "status": "FIXED",
+      "note": "神保町 was incorrectly mapped to Shin-Ochanomizu, corrected to Jimbocho"
     },
     "KokusaiTenjijo": {
       "lines": [
         "Rinko"
       ],
-      "exact_match": false
+      "status": "ADDED_DIRECT_KEY",
+      "jp": "国際展示場",
+      "note": "Existing value Kokusai-Tenjijo preserved; direct key added"
     },
     "MakuhariSeaside": {
       "lines": [
         "Rinko"
       ],
-      "exact_match": false
+      "status": "ADDED_DIRECT_KEY",
+      "jp": "幕張海浜",
+      "note": "Existing value Makuhari Seaside preserved; direct key added"
     },
     "Musashi-sakai": {
       "lines": [
         "Yurakucho"
       ],
-      "exact_match": false
+      "status": "ADDED_DIRECT_KEY",
+      "jp": "武蔵堺"
     },
     "Musashisakai": {
       "lines": [
         "SobuRapid"
       ],
-      "exact_match": false
+      "status": "ADDED_DIRECT_KEY",
+      "jp": "武蔵狭山"
     },
     "Nishi-kokubunji": {
       "lines": [
@@ -47,21 +63,25 @@
         "Oedo",
         "Keikyu"
       ],
-      "exact_match": false
+      "status": "ADDED_DIRECT_KEY",
+      "jp": "西国分寺"
     },
-    "Nishi-takashimadaira": {
+    "Nishi-takahashimadaira": {
       "lines": [
         "Yurakucho",
         "Tozai",
         "Oedo"
       ],
-      "exact_match": false
+      "status": "ADDED_DIRECT_KEY",
+      "jp": "西高島平",
+      "note": "Already had value match via 西高島平->Nishi-Takashimadaira; direct key added"
     },
     "OdaibaKaihinkoen": {
       "lines": [
         "Rinko"
       ],
-      "exact_match": false
+      "status": "ADDED_DIRECT_KEY",
+      "jp": "お台場海浜公園"
     },
     "Shin-Kiba": {
       "lines": [
@@ -70,25 +90,30 @@
         "SobuRapid",
         "Rinkai"
       ],
-      "exact_match": false
+      "status": "ADDED_DIRECT_KEY",
+      "jp": "新木場"
     },
     "ShinKemigawa": {
       "lines": [
         "Rinko"
       ],
-      "exact_match": false
+      "status": "ADDED_DIRECT_KEY",
+      "jp": "新検見川"
     },
     "ShinKiba": {
       "lines": [
         "Rinko"
       ],
-      "exact_match": false
+      "status": "ADDED_DIRECT_KEY",
+      "jp": "新木場",
+      "note": "Same JP as Shin-Kiba but different station entity (Rinko only)"
     },
     "Shinjuku-sanchome": {
       "lines": [
         "Shinjuku"
       ],
-      "exact_match": false
+      "status": "ADDED_DIRECT_KEY",
+      "jp": "新宿三丁目"
     },
     "Tokyo Teleport": {
       "lines": [
@@ -97,19 +122,37 @@
         "Yurikamome",
         "TamaMonorail"
       ],
-      "exact_match": false
+      "status": "ADDED_DIRECT_KEY",
+      "jp": "東京テレポート"
     },
     "TokyoBigSight": {
       "lines": [
         "Rinko"
       ],
-      "exact_match": false
+      "status": "ADDED_DIRECT_KEY",
+      "jp": "東京ビッグサイト"
     },
     "TokyoTeleport": {
       "lines": [
         "Rinko"
       ],
-      "exact_match": false
+      "status": "ADDED_DIRECT_KEY",
+      "jp": "東京テレポート",
+      "note": "Same JP as Tokyo Teleport but different station entity (Rinko only)"
     }
-  }
+  },
+  "naming_consistency_findings": {
+    "hyphen_variants_confirmed_distinct": [
+      "Shin-Kiba (Fukutoshin/Yurikamome/SobuRapid/Rinkai) != ShinKiba (Rinko)",
+      "Musashi-sakai (Yurakucho) != Musashisakai (SobuRapid)",
+      "Tokyo Teleport (Keiyo/Musashino/Yurikamome/TamaMonorail) != TokyoTeleport (Rinko)"
+    ],
+    "false_merge_prevented": [
+      "Shinbashi != Shinbashi (existing)",
+      "Shimokitazawa != Shimo-Kitazzu",
+      "KokusaiTenjijo != Kokusai-Tenjijo (different entities? need verify)",
+      "TokyoBigSight != Tokyo Big Sight (same entity, different ID spelling)"
+    ]
+  },
+  "held_as_unknown": []
 }
