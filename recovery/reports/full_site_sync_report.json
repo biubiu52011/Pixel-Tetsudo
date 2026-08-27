@@ -1,22 +1,18 @@
 {
-  "task": "3.26",
+  "task": "3.27.1",
   "date": "2026-08-28",
-  "local_head": "f407149c0242100c4334884f15d03a3f70fc0568",
-  "origin_master": "f407149c0242100c4334884f15d03a3f70fc0568",
+  "local_head": "472d29c",
+  "origin_master": "472d29c",
   "sync": true,
   "working_tree_clean": true,
-  "canonical_data_sha": "60328163CF28540B86EFD59CF30E3FBADACF7056FCD49035095A6CECECC8B567",
+  "canonical_data_sha": "1ED8A6ED8E227807CF0C1D84E897CE2C1CFC57CC3E50C5FAD3D03CC00548E81B",
   "ci_guard": "PASS",
   "architecture_guard": "PASS",
   "home_ui_guard": "PASS",
   "brace_balance": "PASS",
-  "audit_report": "recovery/reports/3.26_tourism_station_entity_audit.json",
-  "changes": "No code or data changes - audit report only",
-  "orphan_classification": {
-    "REAL_STATION": 6,
-    "NAMING_VARIANT": 12,
-    "POI_LANDMARK": 6,
-    "DISTRICT_NAME": 12,
-    "HOLD": 0
-  }
+  "changes": "Added 6 REAL_STATION entities: Aomori, Daikanyama, Niigata, Sendai, Kawaguchiko, Kiyosumi-Shirakawa",
+  "stations_before": 503,
+  "stations_after": 509,
+  "tourism_orphans_before": 36,
+  "tourism_orphans_after": 30
 }
