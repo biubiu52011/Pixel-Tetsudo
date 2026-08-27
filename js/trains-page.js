@@ -276,7 +276,6 @@
               }
             }
               console.log("[trains] Loaded cached positions for " + Object.keys(positions).length + " lines");
-            }
           }
           if (callback) callback();
         }).catch(function(e) { console.warn("[trains] Cache load error:", e.message); if (callback) callback(); });

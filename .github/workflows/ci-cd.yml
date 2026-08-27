@@ -19,24 +19,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
       - name: Check Brace Balance
-        run: |
-          echo "Checking brace balance..."
-          errors=0
-          for f in $(find js data -name '*.js' 2>/dev/null | sort); do
-            opens=$(grep -o '{' "$f" | wc -l)
-            closes=$(grep -o '}' "$f" | wc -l)
-            if [ $opens -ne $closes ]; then
-              echo "FAIL: $f (open=$opens close=$closes)"
-              errors=$((errors+1))
-            fi
-          done
-          if [ $errors -gt 0 ]; then
-            echo "::error::Brace imbalance in $errors file(s)"
-            exit 1
-          fi
-          echo "All JS files have balanced braces"
+        run: python .github/workflows/brace_balance_check.py
 
       - name: Entity Preservation Guard
         run: |
@@ -81,7 +65,7 @@ jobs:
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
     environment:
-      name: pages
+      name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout
