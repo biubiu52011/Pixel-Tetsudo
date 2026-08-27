@@ -1,8 +1,8 @@
 {
-  "task": "3.27.2",
+  "task": "3.28.1",
   "date": "2026-08-28",
-  "local_head": "45bea1380fc2f9de1331480bad43c1fc62d1b4e2",
-  "origin_master": "45bea1380fc2f9de1331480bad43c1fc62d1b4e2",
+  "local_head": "1d5a16762e809a084606d399929e8a1a55057cf5",
+  "origin_master": "1d5a16762e809a084606d399929e8a1a55057cf5",
   "sync": true,
   "working_tree_clean": true,
   "canonical_data_sha": "1ED8A6ED8E227807CF0C1D84E897CE2C1CFC57CC3E50C5FAD3D03CC00548E81B",
@@ -10,13 +10,6 @@
   "architecture_guard": "PASS",
   "home_ui_guard": "PASS",
   "brace_balance": "PASS",
-  "audit_report": "recovery/reports/3.27.2_tourism_naming_variant_audit.json",
-  "changes": "No code or data changes - audit report only",
-  "variant_resolution": {
-    "resolved_map": [
-      "Aoyama->Aoyama-itchome",
-      "Odaiba->Daiba"
-    ],
-    "hold": 10
-  }
+  "changes": "js/data-state.js: fixed no_odpt icon syntax error",
+  "root_cause": "icon value missing quotes around Unicode escape sequence"
 }
