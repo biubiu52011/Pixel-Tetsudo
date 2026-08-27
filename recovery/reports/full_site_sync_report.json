@@ -1,16 +1,25 @@
 {
-  "task": "3.28.2",
+  "task": "3.29",
   "date": "2026-08-28",
-  "local_head": "fd025f684d0169151788bbb1661102b5e63b4de1",
-  "origin_master": "fd025f684d0169151788bbb1661102b5e63b4de1",
+  "local_head": "c3038c578cfd6c00b36fbe8903254861d61c443b",
+  "origin_master": "c3038c578cfd6c00b36fbe8903254861d61c443b",
   "sync": true,
   "working_tree_clean": true,
   "mirror_consistency": true,
   "canonical_data_sha": "d2c88c7cac418c148ec46ec7e5bc2bb180d9dec3",
-  "home_sha": "6feb3f2e3b667f7aa68423606d05ac0243f946f7",
   "ci_guard": "PASS",
   "architecture_guard": "PASS",
   "home_ui_guard": "PASS",
   "brace_balance": "PASS",
-  "changes": "realtime.html: Modal DOM fixed (4 sections pre-built); realtime-view.js: Operator filter bar + last-updated timestamp + getDisplayName; data-state.js: no_odpt icon changed (hollow->filled circle); realtime.css: Filter bar styles + mobile responsive; Mirrors: HTML + JS synced to data/铁道/"
+  "changes": "F-001 fix: fused.lastUpdate → fused.timestamp in realtime-view.js (modal + updateTimestamp). Audit report: recovery/reports/3.29_realtime_data_quality_audit.json",
+  "audit_findings": {
+    "total": 5,
+    "high": 1,
+    "info": 3,
+    "f001_fixed": "Timestamp property mismatch (lastUpdate→timestamp)",
+    "f002_open": "Lines with ODPT mapping but no API response default to normal status",
+    "f003_open": "Rinkai operator has no ODPT endpoint",
+    "f004_info": "parseODPTDelay keyword matching is format-dependent",
+    "f005_info": "updateOdptData function has no callers (dead API)"
+  }
 }
