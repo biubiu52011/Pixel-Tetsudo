@@ -1,15 +1,18 @@
 {
-  "task": "3.28.1",
-  "date": "2026-08-28",
-  "local_head": "1d5a16762e809a084606d399929e8a1a55057cf5",
-  "origin_master": "1d5a16762e809a084606d399929e8a1a55057cf5",
+  "task": "3.28.1-B",
+  "date": "2026-08-27",
+  "local_head": "a73670f074318c302a83f63225b95922c0d4e2a0",
+  "origin_master": "a73670f074318c302a83f63225b95922c0d4e2a0",
   "sync": true,
   "working_tree_clean": true,
-  "canonical_data_sha": "1ED8A6ED8E227807CF0C1D84E897CE2C1CFC57CC3E50C5FAD3D03CC00548E81B",
+  "mirror_consistency": true,
+  "canonical_data_sha": "d2c88c7cac418c148ec46ec7e5bc2bb180d9dec3",
+  "home_sha": "6feb3f2e3b667f7aa68423606d05ac0243f946f7",
   "ci_guard": "PASS",
   "architecture_guard": "PASS",
   "home_ui_guard": "PASS",
   "brace_balance": "PASS",
-  "changes": "js/data-state.js: fixed no_odpt icon syntax error",
-  "root_cause": "icon value missing quotes around Unicode escape sequence"
+  "changes": "js/translations.js: fixed stray double-quote on tourism.loc_error key (line 592)",
+  "root_cause": "extra leading double-quote caused SyntaxError, breaking all i18n on realtime.html",
+  "note": "Deploy to GitHub Pages failure is pre-existing (unrelated infrastructure issue)"
 }
