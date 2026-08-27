@@ -1,0 +1,82 @@
+{
+  "title": "3.10.2-3.10.8 Batch Realtime Audit",
+  "date": "2026-08-28",
+  "canonical_sha": "27ed38fc6910781268e231906ecc683367d1c93fca725cbe803eb167b4b2240e",
+  "3.10.2_operator_mapping": {
+    "total_operators": 21,
+    "total_lines": 156,
+    "operators": {
+      "JR-East": 74,
+      "Seibu": 15,
+      "Tobu": 14,
+      "TokyoMetro": 10,
+      "Keio": 8,
+      "Toei": 7,
+      "Keikyu": 7,
+      "Odakyu": 4,
+      "Tokyu": 3,
+      "YokohamaMunicipal": 3,
+      "Yurikamome": 1,
+      "Keisei": 1,
+      "TamaMonorail": 1,
+      "TWR": 1,
+      "MIR": 1,
+      "MinatoMirai": 1,
+      "Sotetsu": 1,
+      "JR West": 1,
+      "Rinkai": 1,
+      "ShonanMonorail": 1,
+      "TsukubaExpress": 1
+    }
+  },
+  "3.10.3_delay_resolution": {
+    "lines_with_durations": 156,
+    "lines_with_color": 142,
+    "lines_with_image": 136,
+    "lines_with_code": 104,
+    "realtime_delay_source": "ODPT API at runtime"
+  },
+  "3.10.4_train_positions": {
+    "indexeddb_cache": "RailwayRTC (if present)",
+    "position_source": "DataFusion.loadTrainPositions() (empty stub)"
+  },
+  "3.10.5_realtime_view": {
+    "page_exists": true,
+    "csp_configured": true,
+    "uses_DataState": true,
+    "uses_DataFusion": true
+  },
+  "3.10.6_trains_integration": {
+    "trains_page_uses_realtime": true,
+    "shared_rendering": "DataState.renderCard/renderList"
+  },
+  "3.10.7_failure_handling": {
+    "datafusion_error_handling": true,
+    "offline_mode": "Shows no_data status for all lines when ODPT unavailable",
+    "graceful_degradation": "All lines show normal/no_data when API fails"
+  },
+  "3.10.8_full_regression": {
+    "note": "Runtime verification requires browser"
+  },
+  "key_findings": [
+    {
+      "sev": "HIGH",
+      "finding": "DataFusion reads UNIFIED_LINES directly, bypassing RailwayDB"
+    },
+    {
+      "sev": "MEDIUM",
+      "finding": "123/156 lines not in ODPT LINE_TO_OPERATOR mapping"
+    },
+    {
+      "sev": "LOW",
+      "finding": "Train position tracking is empty stub"
+    },
+    {
+      "sev": "INFO",
+      "finding": "CSP properly configured on realtime.html"
+    }
+  ],
+  "ci_guard": "PASS",
+  "arch_guard": "PASS",
+  "action": "AUDIT_ONLY"
+}
