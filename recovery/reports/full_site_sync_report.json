@@ -1,16 +1,24 @@
 {
-  "task": "3.14",
-  "local_head": "908849d525773778e027f1ed808da441f8941731",
-  "origin_master": "908849d525773778e027f1ed808da441f8941731",
+  "task": "3.18",
+  "date": "2026-08-28",
+  "local_head": "f980cc1e68d7c712eb8ef06015eeb95111110fa8",
+  "origin_master": "f980cc1e68d7c712eb8ef06015eeb95111110fa8",
   "sync": true,
-  "working_tree_clean": false,
+  "working_tree_clean": true,
   "mirror_consistency": {
-    "home.html": true,
-    "trains-page.js": true
+    "home.html": true
   },
-  "canonical_data_sha": "BACF7FE23F91056F",
+  "canonical_data_sha": "C539296B2D923A90",
   "entity_guard": "PASS",
   "architecture_guard": "PASS",
   "home_ui_guard": "PASS",
-  "brace_balance": "PASS"
+  "brace_balance": "PASS",
+  "name_map_before": 1493,
+  "name_map_after": 1649,
+  "stations_covered_before": 235,
+  "stations_covered_after": 422,
+  "coverage_pct_before": 46.7,
+  "coverage_pct_after": 83.9,
+  "new_entries_added": 203,
+  "remaining_missing": 181
 }
