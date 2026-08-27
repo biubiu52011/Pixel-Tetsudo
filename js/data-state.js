@@ -12,6 +12,7 @@
     delayed:   { icon: "\u25b3", cls: "rs-status-icon-delayed",  label: "delayed"   },
     suspended: { icon: "\u00d7", cls: "rs-status-icon-suspended", label: "suspended" },
     no_data:   { icon: "\u25cc", cls: "rs-status-icon-no-data",   label: "no_data"  },
+    no_odpt:   { icon: \\u25cb, cls: "rs-status-icon-no-odpt",   label: "no_odpt"  }
   };
 
   // ========== Internal state ==========

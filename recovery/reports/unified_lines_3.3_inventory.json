@@ -810,6 +810,27 @@
       "decision": "RETAIN",
       "reason": "pollUnified checks DataLayer first, then UNIFIED_LINES for late load",
       "context": "var checkLines = (window.DataLayer && window.DataLayer.getAllLines) ? ... : (window.UNIFIED_LINES || {});"
+    },
+    {
+      "file": "js/data-state.js",
+      "line": 147,
+      "decision": "RETAIN",
+      "reason": "LinePresentationService fallback to UNIFIED_LINES for lineOrder when DataLayer not ready",
+      "context": "var lineOrder = options.lineOrder || (window.LinePresentationService ? window.LinePresentationService.getDisplayOrder(window.UNIFIED_LINES) : ...)"
+    },
+    {
+      "file": "js/data-state.js",
+      "line": 177,
+      "decision": "RETAIN",
+      "reason": "getDisplayOrderMap fallback to UNIFIED_LINES",
+      "context": "? window.LinePresentationService.getDisplayOrderMap(window.UNIFIED_LINES) : {}"
+    },
+    {
+      "file": "js/data-state.js",
+      "line": 252,
+      "decision": "RETAIN",
+      "reason": "setLines compatibility fallback to UNIFIED_LINES",
+      "context": "if (window.UNIFIED_LINES) setLines(window.UNIFIED_LINES);"
     }
   ]
 }

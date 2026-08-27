@@ -144,7 +144,7 @@
       if (!line) return null;
       var apiInfo = getApiDelayInfo(line);
       var localStatus = localData.statusMap && localData.statusMap[lineId];
-      var delayInfo = apiInfo || (localStatus && { status: localStatus.status, maxDelay: localStatus.maxDelay, interval: localStatus.interval, cause: localStatus.cause }) || { status: "normal", maxDelay: 0, interval: null, cause: null };
+      var delayInfo = apiInfo || (localStatus && { status: localStatus.status, maxDelay: localStatus.maxDelay, interval: localStatus.interval, cause: localStatus.cause }) || (window.ODPTClient && window.ODPTClient.LINE_TO_OPERATOR && (window.ODPTClient.LINE_TO_OPERATOR[lineId] || window.ODPTClient.LINE_TO_OPERATOR[line.name]) ? { status: "normal", maxDelay: 0, interval: null, cause: null } : { status: "no_odpt", maxDelay: 0, interval: null, cause: null });
       return { id: lineId, name: line.name, nameEn: line.nameEn || line.name, code: line.code, color: line.color, operator: line.operator, region: line.region, type: line.type, image: line.image, stations: line.stations || [], durations: line.durations || [], intervalTotal: line.durationTotalMin || 0, realtimePositions: odptData.realtimePositions[lineId] || [], delayInfo: delayInfo };
     } catch(e) { console.debug("[DataFusion] fuseLine error for " + lineId + ":", e.message); return null; }
   }
