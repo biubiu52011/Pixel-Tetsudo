@@ -1,7 +1,7 @@
 {
   "title": "3.8.2.1 BFS Graph Construction Audit — Case Mismatch Fix",
   "date": "2026-08-28",
-  "canonical_sha": "27ED38FC6910781268E231906ECC683367D1C93FCA725CBE803EB167B4B2240E",
+  "canonical_sha": "27ed38fc6910781268e231906ecc683367d1c93fca725cbe803eb167b4b2240e",
   "fix_applied": {
     "file": "js/station-resolver.js",
     "function_added": "_normalizeId(id)",
@@ -31,5 +31,6 @@
   "resolution_rate_after": "490/503 (97.4%)",
   "ci_guard": "PASS",
   "arch_guard": "PASS",
-  "canonical_sha_unchanged": true
+  "canonical_sha_unchanged": true,
+  "sha_verified": true
 }
