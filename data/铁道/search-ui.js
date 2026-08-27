@@ -209,7 +209,8 @@
 
       html += '<div class="result-stations">';
       result.path.forEach(function(station, i) {
-        html += '<div class="station-node">' + station;
+        var _r1 = (window.RailwayDB && window.RailwayDB.resolveStationName) ? window.RailwayDB.resolveStationName(station, window.currentLang || 'ja') : null;
+        html += '<div class="station-node">' + (window.escapeHtml(_r1 || station));
         if (i === 0) html += ' <span class="start">' + t('search_result.start') + '</span>';
         if (i === result.path.length - 1) html += ' <span class="end">' + t('search_result.end') + '</span>';
         html += '</div>';
@@ -225,7 +226,8 @@
         var rtCache = this.getRouteRealtime(result);
         renderSegs.forEach(function(seg) {
           if (seg.type === 'transfer') {
-            html += '<div class="transfer-node">' + t('search_result.transfer') + ' @ ' + window.escapeHtml(seg.station) + '</div>';
+            var _r2 = (window.RailwayDB && window.RailwayDB.resolveStationName) ? window.RailwayDB.resolveStationName(seg.station, window.currentLang || 'ja') : null;
+            html += '<div class="transfer-node">' + t('search_result.transfer') + ' @ ' + window.escapeHtml(_r2 || seg.station) + '</div>';
           } else {
             var lineId = seg.lineId || null;
             var lineName = seg.lineName || (seg.lines && seg.lines[0]) || '';
@@ -237,7 +239,9 @@
             } else if (seg.direction === -1) {
               html += '<span class="line-direction">\u2193</span>';
             }
-            html += '<span class="ride-route">' + window.escapeHtml(seg.fromStation) + ' \u2192 ' + window.escapeHtml(seg.toStation) + '</span>';
+            var _r3f = (window.RailwayDB && window.RailwayDB.resolveStationName) ? window.RailwayDB.resolveStationName(seg.fromStation, window.currentLang || 'ja') : null;
+            var _r3t = (window.RailwayDB && window.RailwayDB.resolveStationName) ? window.RailwayDB.resolveStationName(seg.toStation, window.currentLang || 'ja') : null;
+            html += '<span class="ride-route">' + window.escapeHtml(_r3f || seg.fromStation) + ' → ' + window.escapeHtml(_r3t || seg.toStation) + '</span>';
             if (seg.duration != null) {
               html += '<span class="line-duration">' + seg.duration + ' ' + t('search.min_unit') + '</span>';
             }
