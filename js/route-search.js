@@ -232,7 +232,17 @@
     if (!term || term.trim() === '') return [];
     // Use StationResolver if available (supports JP/EN/mixed input)
     if (window.StationResolver) {
-      return window.StationResolver.findStationIds(term, 10);
+      var results = window.StationResolver.resolve(term);
+      var lang = window.currentLang || 'en';
+      return results.slice(0, 10).map(function(r) {
+        var did = r.stationId;
+        var dn = r.displayName || did;
+        if (window.RailwayDB && window.RailwayDB.getStationName) {
+          var ln = window.RailwayDB.getStationName(did, lang);
+          if (ln && ln !== did) dn = ln;
+        }
+        return { stationId: did, displayName: dn };
+      });
     }
     // Fallback: substring match on line station IDs
     const query = term.toLowerCase().trim();
@@ -246,7 +256,15 @@
         }
       }
     }
-    return Array.from(matches).slice(0, 10);
+    var lang = window.currentLang || 'en';
+    return Array.from(matches).slice(0, 10).map(function(sid) {
+      var dn = sid;
+      if (window.RailwayDB && window.RailwayDB.getStationName) {
+        var ln = window.RailwayDB.getStationName(sid, lang);
+        if (ln && ln !== sid) dn = ln;
+      }
+      return { stationId: sid, displayName: dn };
+    });
   }
 
   // Public API
