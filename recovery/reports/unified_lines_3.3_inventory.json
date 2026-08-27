@@ -353,52 +353,12 @@
     {
       "id": null,
       "file": "js/trains-render.js",
-      "line": 10,
-      "content": "var L = (data && data.lines) || (window.UNIFIED_LINES || {});",
-      "category": "BUSINESS_RUNTIME",
-      "decision": "MIGRATE",
-      "reason": "render fallback to UNIFIED_LINES",
-      "railwaydb_equivalent": "RailwayDB.getAllLines()"
-    },
-    {
-      "id": null,
-      "file": "js/trains-render.js",
       "line": 11,
       "content": "var lineOrder = (window.LinePresentationService && window.UNIFIED_LINES) ? window.LinePresentationService.getDisplayOrde",
       "category": "COMPATIBILITY",
       "decision": "RETAIN",
       "reason": "Presentation order conditional",
       "railwaydb_equivalent": ""
-    },
-    {
-      "id": null,
-      "file": "js/trains-render.js",
-      "line": 36,
-      "content": "if (window.UNIFIED_LINES && Object.keys(window.UNIFIED_LINES).length > 0) { render({ lines: window.UNIFIED_LINES }); ret",
-      "category": "BUSINESS_RUNTIME",
-      "decision": "MIGRATE",
-      "reason": "init renders UNIFIED_LINES",
-      "railwaydb_equivalent": "RailwayDB.getAllLines()"
-    },
-    {
-      "id": null,
-      "file": "js/trains-render.js",
-      "line": 40,
-      "content": "if (!d) d = { lines: window.UNIFIED_LINES || {} };",
-      "category": "BUSINESS_RUNTIME",
-      "decision": "MIGRATE",
-      "reason": "tryRender fallback",
-      "railwaydb_equivalent": "RailwayDB.get*() API"
-    },
-    {
-      "id": null,
-      "file": "js/trains-render.js",
-      "line": 61,
-      "content": "if (!d) d = { lines: window.UNIFIED_LINES || {} };",
-      "category": "BUSINESS_RUNTIME",
-      "decision": "MIGRATE",
-      "reason": "tryRender fallback",
-      "railwaydb_equivalent": "RailwayDB.get*() API"
     },
     {
       "id": null,
@@ -989,6 +949,36 @@
       "decision": "RETAIN",
       "reason": "3.4.3 migrated: UNIFIED_LINES compat fallback when DataLayer.setCachedPositions unavailable",
       "railwaydb_equivalent": "DataLayer.setCachedPositions(lid, positions[lid])"
+    },
+    {
+      "id": "TR-10",
+      "file": "js/trains-render.js",
+      "line": 10,
+      "content": "render fallback to DataLayer",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "3.4.4 migrated: DataLayer.getAllLines() RailwayDB-first with UNIFIED_LINES array fallback",
+      "railwaydb_equivalent": "DataLayer.getAllLines()"
+    },
+    {
+      "id": "TR-41",
+      "file": "js/trains-render.js",
+      "line": 41,
+      "content": "tryRender fallback",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "3.4.4 migrated: DataLayer.getAllLines() RailwayDB-first with UNIFIED_LINES fallback",
+      "railwaydb_equivalent": "DataLayer.getAllLines()"
+    },
+    {
+      "id": "TR-62",
+      "file": "js/trains-render.js",
+      "line": 62,
+      "content": "onLanguageChange fallback",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "3.4.4 migrated: DataLayer.getAllLines() RailwayDB-first with UNIFIED_LINES fallback",
+      "railwaydb_equivalent": "DataLayer.getAllLines()"
     }
   ]
 }
