@@ -2,7 +2,7 @@
   "version": "1.0",
   "created_at": "2026-08-27T05:16:56.717180",
   "canonical_file": "data/core/railway_data.json",
-  "canonical_sha256": "dab4729654578a4c981feae05994839dba11b3c341cf95fdab937b05fadb94b2",
+  "canonical_sha256": "1ED8A6ED8E227807CF0C1D84E897CE2C1CFC57CC3E50C5FAD3D03CC00548E81B",
   "git_head": "d80d285",
   "entity_counts": {
     "lines": 156,
