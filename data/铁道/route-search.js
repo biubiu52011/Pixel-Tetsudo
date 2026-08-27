@@ -237,8 +237,8 @@
       return results.slice(0, 10).map(function(r) {
         var did = r.stationId;
         var dn = r.displayName || did;
-        if (window.RailwayDB && window.RailwayDB.getStationName) {
-          var ln = window.RailwayDB.getStationName(did, lang);
+        if (window.RailwayDB && window.RailwayDB.resolveStationName) {
+          var ln = window.RailwayDB.resolveStationName(did, lang);
           if (ln && ln !== did) dn = ln;
         }
         return { stationId: did, displayName: dn };
@@ -259,8 +259,8 @@
     var lang = window.currentLang || 'en';
     return Array.from(matches).slice(0, 10).map(function(sid) {
       var dn = sid;
-      if (window.RailwayDB && window.RailwayDB.getStationName) {
-        var ln = window.RailwayDB.getStationName(sid, lang);
+      if (window.RailwayDB && window.RailwayDB.resolveStationName) {
+        var ln = window.RailwayDB.resolveStationName(sid, lang);
         if (ln && ln !== sid) dn = ln;
       }
       return { stationId: sid, displayName: dn };
