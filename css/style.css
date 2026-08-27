@@ -560,3 +560,16 @@
   color: var(--text-muted);
   font-size: 13px;
 }
+
+/* === Module Title (unified) === */
+.module-title {
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.module-title h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.3px;
+}
