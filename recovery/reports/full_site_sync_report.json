@@ -1,17 +1,15 @@
 {
-  "task": "3.23",
+  "task": "3.25",
   "date": "2026-08-28",
-  "local_head": "9e33f28fc360a68d79b052e720ed9e0bb4968974",
-  "origin_master": "9e33f28fc360a68d79b052e720ed9e0bb4968974",
+  "local_head": "46f18472f1b7821ae122b98ae06c5da3b3d73324",
+  "origin_master": "46f18472f1b7821ae122b98ae06c5da3b3d73324",
   "sync": true,
   "working_tree_clean": true,
-  "mirror_consistency": {
-    "home.html": true
-  },
   "canonical_data_sha": "60328163CF28540B86EFD59CF30E3FBADACF7056FCD49035095A6CECECC8B567",
   "ci_guard": "PASS",
   "architecture_guard": "PASS",
   "home_ui_guard": "PASS",
   "brace_balance": "PASS",
-  "audit_report": "recovery/reports/3.23_route_search_edge_audit.json"
+  "audit_report": "recovery/reports/3.25_sightseeing_recommendation_audit.json",
+  "changes": "No code changes - audit report only"
 }
