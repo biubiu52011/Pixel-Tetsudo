@@ -589,7 +589,7 @@
       "tourism.at_station": "\uc5ed \ubc14\ub85c \uc55e",
       "tourism.auto_detected": "\uc790\ub3d9 \uac10\uc9c0",
       "tourism.locating": "\uc704\uce58 \uc815\ubcf4 \uc218\ucda9...",
-      ""tourism.loc_error": "위치 정보를 사용할 수 없습니다...",
+      "tourism.loc_error": "위치 정보를 사용할 수 없습니다...",
 
       "tourism.east": "\ub3d9",
       "tourism.min_walk": "\ub3c4\ubcf4 \ubd84",
