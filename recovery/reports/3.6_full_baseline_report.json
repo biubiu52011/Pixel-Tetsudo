@@ -1,0 +1,61 @@
+{
+  "task": "3.6",
+  "title": "Full Stack Architecture & Function Baseline",
+  "timestamp": "2026-08-28T00:54:00.010768",
+  "git_head": "d80d285",
+  "canonical_sha256": "27ed38fc6910781268e231906ecc683367d1c93fca725cbe803eb167b4b2240e",
+  "data_baseline": {
+    "lines": 156,
+    "stations": 503,
+    "name_map": 1493,
+    "stationLines": 1841,
+    "lineStationOrder": 156,
+    "tourism_districts": 93,
+    "tourism_spots": 396
+  },
+  "id_preservation": {
+    "lines_lost": 0,
+    "lines_new": 0,
+    "stations_lost": 0,
+    "stations_new": 0
+  },
+  "relation_consistency": {
+    "mismatches": 0
+  },
+  "architecture": {
+    "js_files_count": 39,
+    "html_files_count": 6,
+    "RailwayDB_loader": true,
+    "DataLayer_api": true,
+    "DataFusion": false
+  },
+  "guards": {
+    "ci_guard": "PASS",
+    "arch_guard": "PASS",
+    "migrate_count": 0,
+    "retain_count": 60,
+    "ignore_count": 12
+  },
+  "known_limitations": {
+    "orphan_station_refs": 1686,
+    "unique_orphan_station_ids": 1383,
+    "zero_coordinate_stations": 139,
+    "lines_missing_color": 14,
+    "tourism_orphan_refs": 36
+  },
+  "subtask_status": {
+    "3.6.1_canonical_baseline": "PASS",
+    "3.6.2_route_search": "PASS",
+    "3.6.3_realtime": "PASS",
+    "3.6.4_trains": "PASS",
+    "3.6.5_tourism": "PASS",
+    "3.6.6_history": "PASS",
+    "3.6.7_translation": "PASS",
+    "3.6.8_navigation": "PASS",
+    "3.6.9_csp": "PASS",
+    "3.6.10_github_pages": "PENDING",
+    "3.6.11_console_audit": "PASS"
+  },
+  "new_rule": "Code refactoring != data reconstruction. JS-only tasks must keep railway_data.json SHA at 27ED38FC...",
+  "status": "BASELINE_FROZEN"
+}
