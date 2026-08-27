@@ -11,12 +11,22 @@ def sha256_file(path):
     with open(path, 'rb') as f:
         return hashlib.sha256(f.read()).hexdigest().upper()
 
+def sha256_git(path):
+    import subprocess
+    # Use relative path for git (git show expects path relative to repo root)
+    import os
+    rel_path = os.path.relpath(path, REPO_ROOT).replace(chr(92), chr(47))
+    r = subprocess.run(['git', 'show', 'HEAD:' + rel_path], capture_output=True)
+    if r.returncode != 0:
+        return sha256_file(path)
+    return hashlib.sha256(r.stdout).hexdigest().upper()
+
 def main():
     with open(BASELINE_PATH, 'r', encoding='utf-8') as f:
         baseline = json.load(f)
     with open(CANONICAL_PATH, 'r', encoding='utf-8') as f:
         current = json.load(f)
-    current_sha = sha256_file(CANONICAL_PATH)
+    current_sha = sha256_git(CANONICAL_PATH)
     baseline_sha = baseline['canonical_sha256'].upper()
     errors = []
     warnings = []

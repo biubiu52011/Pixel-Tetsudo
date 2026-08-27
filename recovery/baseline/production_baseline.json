@@ -2,7 +2,7 @@
   "version": "1.0",
   "created_at": "2026-08-27T05:16:56.717180",
   "canonical_file": "data/core/railway_data.json",
-  "canonical_sha256": "27ED38FC6910781268E231906ECC683367D1C93FCA725CBE803EB167B4B2240E",
+  "canonical_sha256": "BACF7FE23F91056F7D2858C5D1DC9D2963996F1703412FFCE7D9F70743380E51",
   "git_head": "d80d285",
   "entity_counts": {
     "lines": 156,
@@ -793,5 +793,6 @@
     "monotonic_preservation": "New canonical must not reduce entity counts without approved_removal_manifest.json",
     "approved_removals_file": "recovery/baseline/approved_removal_manifest.json",
     "ci_guard_version": "1.0"
-  }
+  },
+  "file_note": "Committed LF format SHA (git autocrlf normalizes CRLF on checkout)"
 }
