@@ -2,12 +2,12 @@
   "version": "1.0",
   "created_at": "2026-08-27T05:16:56.717180",
   "canonical_file": "data/core/railway_data.json",
-  "canonical_sha256": "C539296B2D923A903803DB1035948D3E4CB70F608F4DAFB01160AF8D973E488C",
+  "canonical_sha256": "E7277CA8892F272839C440FE8D4B47DDAFF8AD93149DC807CE6B95BE335F8060",
   "git_head": "d80d285",
   "entity_counts": {
     "lines": 156,
     "stations": 503,
-    "name_map": 1649,
+    "name_map": 1680,
     "stationLines": 1841,
     "lineStationOrder": 156,
     "tourism_stations": 93,
@@ -796,5 +796,5 @@
   },
   "file_note": "Committed LF format SHA (git autocrlf normalizes CRLF on checkout)",
   "last_updated": "2026-08-28",
-  "task": "3.18"
+  "task": "3.20"
 }
