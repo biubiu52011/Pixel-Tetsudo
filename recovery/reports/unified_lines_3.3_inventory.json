@@ -2,21 +2,21 @@
   "version": "1.0",
   "generated_at": "2026-08-27",
   "summary": {
-    "total_findings": 86,
+    "total_findings": 90,
     "comment_doc": 10,
-    "runtime_code": 76,
+    "runtime_code": 80,
     "by_category": {
-      "COMPATIBILITY": 32,
+      "COMPATIBILITY": 36,
       "BUSINESS_RUNTIME": 44,
       "COMMENT": 10
     },
     "by_decision": {
-      "RETAIN": 32,
+      "RETAIN": 36,
       "MIGRATE": 44,
       "IGNORE": 10
     },
     "migrate_count": 44,
-    "retain_count": 32,
+    "retain_count": 36,
     "ignore_count": 10
   },
   "findings": [
@@ -878,6 +878,46 @@
       "category": "COMMENT",
       "decision": "IGNORE",
       "reason": "Same",
+      "railwaydb_equivalent": ""
+    },
+    {
+      "id": null,
+      "file": "js/data-layer.js",
+      "line": 77,
+      "content": "Object.keys(window.UNIFIED_LINES || {}).forEach(function(id) {",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "RailwayDB fallback - backward compat when RailwayDB not loaded",
+      "railwaydb_equivalent": ""
+    },
+    {
+      "id": null,
+      "file": "js/data-layer.js",
+      "line": 78,
+      "content": "var l = window.UNIFIED_LINES[id];",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "RailwayDB fallback - backward compat",
+      "railwaydb_equivalent": ""
+    },
+    {
+      "id": null,
+      "file": "js/data-layer.js",
+      "line": 91,
+      "content": "return window.UNIFIED_LINES ? window.UNIFIED_LINES[lineId] : null;",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "RailwayDB fallback - getLine compat",
+      "railwaydb_equivalent": ""
+    },
+    {
+      "id": null,
+      "file": "js/data-layer.js",
+      "line": 94,
+      "content": "return window.UNIFIED_LINES ? window.UNIFIED_LINES[lineId] : null;",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "RailwayDB fallback - getLine compat (duplicate?)",
       "railwaydb_equivalent": ""
     }
   ]
