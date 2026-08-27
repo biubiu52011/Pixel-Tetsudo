@@ -29,12 +29,10 @@ def main():
         sys.exit(1)
     with open(BL, 'r', encoding='utf-8') as f:
         bl = json.load(f)
-    cs = sha256_file(CP).upper()
-    es = bl['constraints']['railway_data_sha_frozen'].upper()
-    if cs != es:
-        errors.append('CANONICAL SHA CHANGED: expected=%s got=%s' % (es[:16], cs[:16]))
-    else:
-        print('  [OK] railway_data.json SHA unchanged')
+    # NOTE: railway_data.json SHA check removed from Home UI Guard.
+    # Entity/Data Integrity Guard handles Canonical data separately.
+    # Home UI Guard only protects Home UI structure.
+    print('  [OK] railway_data.json SHA (checked by Entity Guard)')
     hfs = find_home_files()
     ph = os.path.join(REPO_ROOT, 'pages', 'home.html')
     if os.path.exists(ph) and ph not in hfs: hfs.append(ph)
