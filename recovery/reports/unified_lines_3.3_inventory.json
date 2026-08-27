@@ -325,9 +325,9 @@
       "file": "js/trains-page.js",
       "line": 62,
       "content": "var ul = window.UNIFIED_LINES;",
-      "category": "BUSINESS_RUNTIME",
-      "decision": "MIGRATE",
-      "reason": "getLinesData direct access",
+      "category": "COMPATIBILITY_FALLBACK",
+      "decision": "RETAIN",
+      "reason": "3.4.3 migrated: DataLayer.getAllLines() RailwayDB-first with UNIFIED_LINES compat fallback",
       "railwaydb_equivalent": "RailwayDB.getLine(lineId)"
     },
     {
@@ -335,9 +335,9 @@
       "file": "js/trains-page.js",
       "line": 97,
       "content": "var ul = window.UNIFIED_LINES;",
-      "category": "BUSINESS_RUNTIME",
-      "decision": "MIGRATE",
-      "reason": "getRealtimePositions fallback",
+      "category": "COMPATIBILITY_FALLBACK",
+      "decision": "RETAIN",
+      "reason": "3.4.3 migrated: DataLayer.getCachedPositions() primary, UNIFIED_LINES compat fallback",
       "railwaydb_equivalent": "RailwayDB.get*() API"
     },
     {
@@ -345,9 +345,9 @@
       "file": "js/trains-page.js",
       "line": 255,
       "content": "var ul = window.UNIFIED_LINES;",
-      "category": "BUSINESS_RUNTIME",
-      "decision": "MIGRATE",
-      "reason": "loadCachedPositions merge",
+      "category": "COMPATIBILITY_FALLBACK",
+      "decision": "RETAIN",
+      "reason": "3.4.3 migrated: DataLayer.setCachedPositions() primary, UNIFIED_LINES merge compat fallback",
       "railwaydb_equivalent": "RailwayDB.get*() API"
     },
     {
@@ -969,6 +969,26 @@
       "decision": "RETAIN",
       "reason": "3.4.2 migrated: RailwayDB-first loop for station search",
       "railwaydb_equivalent": "RailwayDB.getAllLines()"
+    },
+    {
+      "id": "TP-103",
+      "file": "js/trains-page.js",
+      "line": 103,
+      "content": "getRealtimePositions compat fallback",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "3.4.3 migrated: UNIFIED_LINES compat fallback when DataLayer.getCachedPositions unavailable",
+      "railwaydb_equivalent": "DataLayer.getCachedPositions(lineId)"
+    },
+    {
+      "id": "TP-269",
+      "file": "js/trains-page.js",
+      "line": 269,
+      "content": "loadCachedPositions compat fallback",
+      "category": "COMPATIBILITY",
+      "decision": "RETAIN",
+      "reason": "3.4.3 migrated: UNIFIED_LINES compat fallback when DataLayer.setCachedPositions unavailable",
+      "railwaydb_equivalent": "DataLayer.setCachedPositions(lid, positions[lid])"
     }
   ]
 }

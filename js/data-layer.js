@@ -115,7 +115,19 @@
     return window.STATION_COORDS || {};
   }
 
-  window.DataLayer = {
+  // Cached train positions (lineId -> [{stationIndex, delayMin, ...}])
+var _cachedPositions = {};
+
+function getCachedPositions(lineId) {
+  return _cachedPositions[lineId] || [];
+}
+
+function setCachedPositions(lineId, positions) {
+  if (!positions || !Array.isArray(positions)) return;
+  _cachedPositions[lineId] = positions;
+}
+
+window.DataLayer = {
     getStationCoords: getStationCoords,
     setCache: setCache,
     fetchJSON: fetchJSON,
@@ -123,6 +135,8 @@
     getLine: getLine,
     getGroupedLines: getGroupedLines,
     getCacheSize: function() { return Object.keys(cache).length; },
+    getCachedPositions: getCachedPositions,
+    setCachedPositions: setCachedPositions,
     clearCache: function() {
       for (var key in cache) delete cache[key];
       for (var key in cacheTime) delete cacheTime[key];
