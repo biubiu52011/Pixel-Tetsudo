@@ -1,25 +1,18 @@
 {
-  "task": "3.20",
+  "task": "3.22.1",
   "date": "2026-08-28",
-  "local_head": "6845553",
-  "origin_master": "6845553",
+  "local_head": "15a195abe98b8c93ed4baa351056eeac13767107",
+  "origin_master": "15a195abe98b8c93ed4baa351056eeac13767107",
   "sync": true,
   "working_tree_clean": true,
   "mirror_consistency": {
-    "home.html": true
+    "home.html": true,
+    "search-ui.js": true
   },
-  "canonical_data_sha": "E7277CA8892F2728",
-  "entity_guard": "PASS",
+  "canonical_data_sha": "60328163CF28540B86EFD59CF30E3FBADACF7056FCD49035095A6CECECC8B567",
+  "ci_guard": "PASS",
   "architecture_guard": "PASS",
   "home_ui_guard": "PASS",
   "brace_balance": "PASS",
-  "name_map_before": 1649,
-  "name_map_after": 1680,
-  "stations_covered_before": 422,
-  "stations_covered_after": 443,
-  "coverage_before": 90.0,
-  "coverage_after": 88.1,
-  "new_entries_added": 31,
-  "remaining_missing": 15,
-  "held_aliases": 15
+  "changes": "js/search-ui.js + data/铁道/search-ui.js: resolveStationName for result path, transfer nodes, ride segments"
 }
