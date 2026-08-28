@@ -9,7 +9,7 @@
   var _enToJp = {};
   var _lineStationIds = null;
 
-  function _hasJapanese(s) { return /[\\u4e00-\\u9fff\\u3040-\\u309f\\u30a0-\\u30ff]/.test(s); }
+  function _hasJapanese(s) { return /[\u4e00-\u9fff\u3040-\u309f\u30a0-\u30ff]/.test(s); }
 
   /**
    * Normalize a resolved station ID to the canonical casing used in line.stations.
