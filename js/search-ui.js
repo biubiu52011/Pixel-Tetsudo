@@ -192,7 +192,7 @@
 
       let html = '<div class="search-result">';
       html += '<div class="result-header">';
-      html += '<span class="result-duration">' + result.durationMin + ' ' + t('search.min_unit')</span>';
+      html += '<span class="result-duration">' + result.durationMin + ' ' + t('search.min_unit') + '</span>';
       html += '<span class="result-segments">' + result.segments + ' ' + t('search.segments') + '</span>';
       html += '</div>';
       
@@ -366,7 +366,8 @@
 
       html += '</div>';
       return html;
-    }
+    },
+
 
     _setFromSourceHint: function(stationKey, displayName) {
       var existing = document.getElementById('fromSourceHint');

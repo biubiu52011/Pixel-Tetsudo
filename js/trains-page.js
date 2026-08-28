@@ -141,27 +141,27 @@
           var angle = (i / stations.length) * 2 * Math.PI - Math.PI / 2;
           loopPts.push({ x: cx + rx * Math.cos(angle), y: cy + ry * Math.sin(angle), angle: angle });
         }
-        svg += "<ellipse cx=\"" + cx + "\" cy=\"" + cy + "\"" rx=\"" + rx + "\"" ry=\"" + ry + "\"" stroke=\"" + escapeHtml(color) + "\"" stroke-width=\"\" + \"5\" + \"\" fill=\"none\" opacity=\"0.35\"/>";
+        svg += "<ellipse cx=\"" + cx + "\" cy=\"" + cy + "\""+ "  rx=\"" + rx + "\""+ "  ry=\"" + ry + "\""+ "  stroke=\"" + escapeHtml(color) + "\""+ "  stroke-width=\"\" + \"5\" + \"\" fill=\"none\" opacity=\"0.35\"/>";
         for (var i = 0; i < stations.length; i++) {
           var p = loopPts[i];
           var st = stations[i];
           var hasTrain = positions.some(function(pp) { return pp.stationIndex === i; });
-          svg += "<circle cx=\"" + p.x + "\" cy=\"" + p.y + "\"" r=\"" + (hasTrain ? 6 : 4) + "\"" fill=\"" + (hasTrain ? escapeHtml(color) : "#fff") + "\"" stroke=\"" + escapeHtml(color) + "\"" stroke-width=\"" + (hasTrain ? 2.5 : 2) + "\"/>";
+          svg += "<circle cx=\"" + p.x + "\" cy=\"" + p.y + "\""+ "  r=\"" + (hasTrain ? 6 : 4) + "\""+ "  fill=\"" + (hasTrain ? escapeHtml(color) : "#fff") + "\""+ "  stroke=\"" + escapeHtml(color) + "\""+ "  stroke-width=\"" + (hasTrain ? 2.5 : 2) + "\"/>";
           var dn = st;
           var tx = p.x + 12 * Math.cos(p.angle);
           var ty = p.y + 12 * Math.sin(p.angle);
           var anchor = Math.cos(p.angle) > 0.1 ? "start" : (Math.cos(p.angle) < -0.1 ? "end" : "middle");
-          svg += "<text x=\"" + tx + "\" y=\"" + (ty + 3.5) + "\"" font-size=\"\" + \"9\" + \"\" fill=\"#444\" font-family=\"sans-serif\" font-weight=\"500\" text-anchor=\"" + anchor + "\">" + escapeHtml(dn) + "</text>";
+          svg += "<text x=\"" + tx + "\" y=\"" + (ty + 3.5) + "\""+ "  font-size=\"\" + \"9\" + \"\" fill=\"#444\" font-family=\"sans-serif\" font-weight=\"500\" text-anchor=\"" + anchor + "\">" + escapeHtml(dn) + "</text>";
         }
       } else {
         var y1 = topP, y2 = topP + (stations.length - 1) * sp;
-        svg += "<line x1=\"" + mainCx + "\" y1=\"" + y1 + "\" x2=\"" + mainCx + "\" y2=\"" + y2 + "\"" stroke=\"" + escapeHtml(color) + "\"" stroke-width=\"5\" stroke-linecap=\"round\" opacity=\"0.35\"/>";
+        svg += "<line x1=\"" + mainCx + "\" y1=\"" + y1 + "\" x2=\"" + mainCx + "\" y2=\"" + y2 + "\""+ "  stroke=\"" + escapeHtml(color) + "\""+ "  stroke-width=\"5\" stroke-linecap=\"round\" opacity=\"0.35\"/>";
         for (var i = 0; i < stations.length; i++) {
           var st = stations[i];
           var y = topP + i * sp;
           var hasTrain = positions.some(function(p) { return p.stationIndex === i; });
-          svg += "<circle cx=\"" + mainCx + "\" cy=\"" + y + "\"" r=\"" + (hasTrain ? 6 : 4) + "\"" fill=\"" + (hasTrain ? escapeHtml(color) : "#fff") + "\"" stroke=\"" + escapeHtml(color) + "\"" stroke-width=\"" + (hasTrain ? 2.5 : 2) + "\"/>";
-          svg += "<text x=\"" + (mainCx + 14) + "\" y=\"" + (y + 3.5) + "\"" font-size=\"9\" fill=\"#444\" font-family=\"sans-serif\" font-weight=\"500\">" + escapeHtml(st) + "</text>";
+          svg += "<circle cx=\"" + mainCx + "\" cy=\"" + y + "\""+ "  r=\"" + (hasTrain ? 6 : 4) + "\""+ "  fill=\"" + (hasTrain ? escapeHtml(color) : "#fff") + "\""+ "  stroke=\"" + escapeHtml(color) + "\""+ "  stroke-width=\"" + (hasTrain ? 2.5 : 2) + "\"/>";
+          svg += "<text x=\"" + (mainCx + 14) + "\" y=\"" + (y + 3.5) + "\""+ "  font-size=\"9\" fill=\"#444\" font-family=\"sans-serif\" font-weight=\"500\">" + escapeHtml(st) + "</text>";
         }
       }
       for (var bi = 0; bi < branchLines.length; bi++) {
@@ -188,14 +188,14 @@
         }
         var branchTop = isLoop ? by : topP;
         var branchBot = isLoop ? by : topP + (bStations.length - 1) * sp;
-        svg += "<line x1=\"" + (isLoop ? loopPts[junctionIdx].x : mainCx) + "\" y1=\"" + by + "\" x2=\"" + bx + "\" y2=\"" + by + "\"" stroke=\"" + escapeHtml(bColor) + "\"" stroke-width=\"3\" opacity=\"0.5\"/>";
-        svg += "<line x1=\"" + bx + "\" y1=\"" + branchTop + "\" x2=\"" + bx + "\" y2=\"" + branchBot + "\"" stroke=\"" + escapeHtml(bColor) + "\"" stroke-width=\"4\" stroke-linecap=\"round\" opacity=\"0.4\"/>";
+        svg += "<line x1=\"" + (isLoop ? loopPts[junctionIdx].x : mainCx) + "\" y1=\"" + by + "\" x2=\"" + bx + "\" y2=\"" + by + "\""+ "  stroke=\"" + escapeHtml(bColor) + "\""+ "  stroke-width=\"3\" opacity=\"0.5\"/>";
+        svg += "<line x1=\"" + bx + "\" y1=\"" + branchTop + "\" x2=\"" + bx + "\" y2=\"" + branchBot + "\""+ "  stroke=\"" + escapeHtml(bColor) + "\""+ "  stroke-width=\"4\" stroke-linecap=\"round\" opacity=\"0.4\"/>";
         for (var bsi = 0; bsi < bStations.length; bsi++) {
           var bsy = branchTop + bsi * sp;
           var isJunc = (bsi === 0 && junctionIdx >= 0 && stations[junctionIdx] === bStations[0]);
-          svg += "<circle cx=\"" + bx + "\" cy=\"" + bsy + "\"" r=\"" + (isJunc ? 5 : 4) + "\"" fill=\"" + (isJunc ? escapeHtml(bColor) : "#fff") + "\"" stroke=\"" + escapeHtml(bColor) + "\"" stroke-width=\"2\"/>";
+          svg += "<circle cx=\"" + bx + "\" cy=\"" + bsy + "\""+ "  r=\"" + (isJunc ? 5 : 4) + "\""+ "  fill=\"" + (isJunc ? escapeHtml(bColor) : "#fff") + "\""+ "  stroke=\"" + escapeHtml(bColor) + "\""+ "  stroke-width=\"2\"/>";
         }
-        svg += "<text x=\"" + bx + "\" y=\"" + (branchTop - 6) + "\"" font-size=\"8\" fill=\"" + escapeHtml(bColor) + "\"" font-family=\"sans-serif\" font-weight=\"600\" text-anchor=\"middle\">" + escapeHtml(branch.name) + "</text>";
+        svg += "<text x=\"" + bx + "\" y=\"" + (branchTop - 6) + "\""+ "  font-size=\"8\" fill=\"" + escapeHtml(bColor) + "\""+ "  font-family=\"sans-serif\" font-weight=\"600\" text-anchor=\"middle\">" + escapeHtml(branch.name) + "</text>";
       }
       for (var j = 0; j < positions.length; j++) {
         var p = positions[j];
@@ -208,8 +208,8 @@
           px = mainCx;
           py = topP + idx * sp;
         }
-        svg += "<circle cx=\"" + px + "\" cy=\"" + py + "\"" r=\"8\" fill=\"" + escapeHtml(color) + "\"" filter=\"url(#tg_" + escapeHtml(lineId) + "")\" opacity=\"0.9\"/>";
-        svg += "<circle cx=\"" + px + "\" cy=\"" + py + "\"" r=\"3\" fill=\"#fff\"/>";
+        svg += "<circle cx=\"" + px + "\" cy=\"" + py + "\""+ "  r=\"8\" fill=\"" + escapeHtml(color) + "\""+ "  filter=\"url(#tg_" + escapeHtml(lineId) + ")\" opacity=\"0.9\"/>";
+        svg += "<circle cx=\"" + px + "\" cy=\"" + py + "\""+ "  r=\"3\" fill=\"#fff\"/>";
       }
       svg += "</svg>";
       var noData = t("trains.no_data");
