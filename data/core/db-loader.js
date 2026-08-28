@@ -122,7 +122,10 @@
     }
 
     // ========== Unified Railway Data Access Layer ==========
-    window.RailwayDB = {
+          // Name map cache
+      var _nameMapCache = {};
+
+      window.RailwayDB = {
       // Station queries
       getStation: function(id) { return data.stations[id] || null; },
       getStations: function() { return data.stations; },
@@ -232,7 +235,7 @@
           if (typeof v === 'object' && v.ja) return v.ja;
         }
         // 3. Search name_map by value match (romanized -> Japanese key)
-        var valToKey = resolveStationName._valToKey;
+        var valToKey = _nameMapCache.valToKey;
         if (!valToKey) {
           valToKey = {};
           Object.keys(nm).forEach(function(jpKey) {
@@ -243,7 +246,7 @@
               valToKey[jpKey.toLowerCase()] = val.ja;
             }
           });
-          resolveStationName._valToKey = valToKey;
+          _nameMapCache.valToKey = valToKey;
         }
         var matchedKey = valToKey[id.toLowerCase()];
         if (matchedKey) {
@@ -346,7 +349,8 @@ function load() {
           };
           document.head.appendChild(fbScript);
           return new Promise(function(resolve, reject) {
-            fbScript.onload = function() { resolve(); };
+            var origOnload = fbScript.onload;
+            fbScript.onload = function() { if (origOnload) origOnload(); resolve(); };
             fbScript.onerror = function() { reject(err); };
           });
         }
