@@ -16,19 +16,23 @@
           return;
         }
         var entry = e.target.closest('.history-entry');
-        if (entry) {
+        
+          if (entry.classList.contains('rs-loading')) return;
+if (entry) {
           var id = parseInt(entry.dataset.id);
           var hist = getHistory();
           var item = hist.find(function(e) { return e.id === id; });
           if (item) {
-            window.location.href = 'home.html?from=' + encodeURIComponent(item.from) + '&to=' + encodeURIComponent(item.to);
+            entry.classList.add('rs-loading');
+            setTimeout(function() {
+              window.location.href = 'home.html?from=' + encodeURIComponent(item.from) + '&to=' + encodeURIComponent(item.to);
+            }, 150);
           }
         }
-      });         if (item) {
-            window.location.href = 'home.html?from=' + encodeURIComponent(item.from) + '&to=' + encodeURIComponent(item.to);
-          }
-        }
-      });  }  }  function init() {    renderHistory();    // Intercept SearchUI results    const originalPerformSearch = window.SearchUI ? window.SearchUI.performSearch : null;    if (originalPerformSearch) {      window.SearchUI.performSearch = function() {        const result = originalPerformSearch.apply(this, arguments);        // Save to history after a short delay to capture the result        // Store result for history capture
+      });
+    }
+  }
+  function init() {    renderHistory();    // Intercept SearchUI results    const originalPerformSearch = window.SearchUI ? window.SearchUI.performSearch : null;    if (originalPerformSearch) {      window.SearchUI.performSearch = function() {        const result = originalPerformSearch.apply(this, arguments);        // Save to history after a short delay to capture the result        // Store result for history capture
         var _searchResult = result;
         setTimeout(() => {          const from = this.fromInput ? this.fromInput.value.trim() : '';          const to = this.toInput ? this.toInput.value.trim() : '';          if (from && to) {
             // P2-1: Skip saving if search failed

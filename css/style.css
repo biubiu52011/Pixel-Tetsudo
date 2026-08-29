@@ -381,6 +381,7 @@
 .history-time{font-size: 11px; color: var(--text-muted); margin-left: auto;}
 .history-delete-btn{font-size: 14px; padding: 2px 6px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: transparent; color: var(--text-muted); cursor: pointer; transition: var(--transition-fast); line-height: 1;}
 .history-delete-btn:hover{border-color: var(--red); color: var(--red); background: var(--red-pale);}
+.history-entry.rs-loading{opacity: 0.5; pointer-events: none;}
 
 /* Phase 32-C: Enhanced transfer visualization */
 .line-seg.ride-seg::before {
