@@ -177,8 +177,9 @@
         this.resultsDiv.innerHTML = '<div class="rs-loading"><div class="rs-loading-spinner"></div><span>' + t('status.loading') + '</span></div>';
       }
 
+      let result = null;
       if (window.RouteSearch) {
-        const result = window.RouteSearch.findRoute(from, to);
+        result = window.RouteSearch.findRoute(from, to);
         if (this.resultsDiv) {
           if (result) {
             this.renderResults(result, t);

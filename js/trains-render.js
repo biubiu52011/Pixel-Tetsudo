@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Pixel Tetsudo - Trains Render (uses DataState for rendering)
  */
 (function() {

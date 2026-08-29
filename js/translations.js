@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Pixel Tetsudo - Translations (en/zh/ja/ko)
  */
 (function() {
@@ -650,3 +650,4 @@
 })();
 
 
+ 

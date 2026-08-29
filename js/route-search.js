@@ -39,7 +39,7 @@
         if (i < line.stations.length - 1) {
           const next = line.stations[i + 1];
           graph.get(station).add(next);
-          graph.get(next).add(station);
+          if (graph.has(next)) { graph.get(next).add(station); }
         }
       }
       
