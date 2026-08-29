@@ -127,7 +127,8 @@
           path: currentPath,
           durationMin: durationMin,
           segments: currentPath.length - 1,
-          lineInfo: lineInfo
+          lineInfo: lineInfo,
+          routeSegments: buildRouteSegments({ lineInfo: lineInfo })
         };
       }
       
