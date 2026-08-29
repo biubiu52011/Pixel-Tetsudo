@@ -873,3 +873,25 @@
   color: var(--white, #fff);
   border-color: var(--accent, #0088ff);
 }
+
+@media (max-width: 640px) {
+  .sm-tag-btn,
+  .sm-picker-btn,
+  .go-here-btn,
+  .detail-back-btn {
+    min-height: 44px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .sm-relocate-btn {
+    min-width: 44px;
+    min-height: 44px;
+    width: 44px;
+    height: 44px;
+  }
+  .sm-card {
+    min-height: 72px;
+    padding: 12px;
+  }
+}
+

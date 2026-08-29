@@ -215,3 +215,15 @@
     pointer-events: auto;
     transform: none !important;
 }
+
+@media (max-width: 640px) {
+  .lang-btn {
+    min-height: 44px;
+    padding: 10px 16px;
+  }
+  .lang-toggle-btn {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+

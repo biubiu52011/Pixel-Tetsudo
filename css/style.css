@@ -574,3 +574,42 @@
   color: var(--text);
   letter-spacing: -0.3px;
 }
+
+/* === Mobile Touch Target Fix (min 44px) === */
+@media (max-width: 640px) {
+  .tab-btn,
+  .search-btn,
+  .back-btn,
+  .swap-btn,
+  .clear-btn,
+  .sort-mode-btn,
+  .history-delete-btn,
+  .history-clear-btn,
+  .btn-nearby-viewall,
+  .btn-nearby-route {
+    min-height: 44px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+  .suggestion-item,
+  .result-candidate,
+  .rs-line-card {
+    min-height: 48px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .rs-modal-close {
+    min-width: 44px;
+    min-height: 44px;
+    width: 44px;
+    height: 44px;
+  }
+  .pixel-header {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+  .history-entry {
+    min-height: 56px;
+  }
+}
+
