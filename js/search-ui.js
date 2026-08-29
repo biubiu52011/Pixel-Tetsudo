@@ -188,6 +188,7 @@
           }
         }
       }
+      return result;
     },
 
     getRouteRealtime: function(result) {
