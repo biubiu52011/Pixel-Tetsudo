@@ -12,7 +12,7 @@
   const getDisplayName = (line) => (line && line.nameJa) ? line.nameJa : (window.tLineName ? window.tLineName(line) : (line && line.nameEn) ? line.nameEn : (line && line.name) ? line.name : line && line.id);
 
 
-  // STATUS_META is defined in data-state.js; use DataState.STATUS_META
+  // STATUS_META is defined in data-state.js; use window.DataState.STATUS_META
   const STATUS_META = window.DataState ? window.DataState.STATUS_META : {
     normal:    { icon: "\u25cb", color: "green"  },
     delayed:   { icon: "\u25b3", color: "orange" },
@@ -31,11 +31,11 @@
   }
 
   function renderCard(line, lineId) {
-    return DataState.renderCard(line, lineId, { mode: "realtime" });
+    return window.DataState.renderCard(line, lineId, { mode: "realtime" });
   }
 
   function renderLines(container, linesObj, lineOrderArr) {
-    DataState.renderList(container, linesObj, { mode: "realtime", lineOrder: lineOrderArr });
+    window.DataState.renderList(container, linesObj, { mode: "realtime", lineOrder: lineOrderArr });
   }
 
   function openModal(lineId, linesObj) {
@@ -43,7 +43,7 @@
     if (!modal || !linesObj || !linesObj[lineId]) return;
     var line = linesObj[lineId];
     var delayInfo = getDelayInfo(line) || {};
-    // Use DataState.getStatus for consistent NO_DATA handling
+    // Use window.DataState.getStatus for consistent NO_DATA handling
     var status = delayInfo && delayInfo.status ? delayInfo.status : (delayInfo ? "normal" : "no_data");
     var interval = delayInfo.interval || "";
     var cause = delayInfo.cause || "";
@@ -118,7 +118,7 @@
     if (!container) return;
 
     function renderLinesList(container, linesObj, lineOrderArr) {
-      DataState.renderList(container, linesObj, { mode: "realtime", lineOrder: lineOrderArr });
+      window.DataState.renderList(container, linesObj, { mode: "realtime", lineOrder: lineOrderArr });
     }
 
     function getLines() {
