@@ -38,6 +38,16 @@
         window.history.replaceState({}, '', _cleanUrl);
       }
 
+      // Phase 42-E: Parse ?to=StationKey URL param
+      var _toParam = _params ? _params.get('to') : null;
+      if (_toParam && this.toInput) {
+        var _toResolvedName = null;
+        if (window.RailwayDB && window.RailwayDB.resolveStationName) {
+          _toResolvedName = window.RailwayDB.resolveStationName(_toParam, window.currentLang || 'ja');
+        }
+        this.toInput.value = _toResolvedName || _toParam;
+      }
+
       this.lastRouteResult = null;
       this.bindEvents();
       window.onLanguageChange(() => this.refreshUI());
