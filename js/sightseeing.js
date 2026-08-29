@@ -265,7 +265,7 @@ function renderGrid() {
   
   function updateStationDisplay() {
     if (!dom.stationDisplay) return;
-    if (state.autoDetected && state.selectedStation) {
+    if (state.selectedStation) {
       const stationLabel = t('station_names.' + state.selectedStation) || state.selectedStation;
       dom.stationDisplay.textContent = stationLabel;
       dom.stationDisplay.classList.add('sm-station-detected');
