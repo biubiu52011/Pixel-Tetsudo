@@ -285,6 +285,14 @@
     } catch(e) { if (callback) callback(); }
   }
 
+  function renderList(el) {
+    if (!el || !window.DataState) return;
+    var lines = window.DataLayer ? window.DataLayer.getAllLines() : (window.UNIFIED_LINES || {});
+    var ul = Array.isArray(lines) ? (function(){ var d={}; lines.forEach(function(l){ d[l.id||l.line_id]=l; }); return d; })() : lines;
+    if (!ul || Object.keys(ul).length === 0) { el.innerHTML = ''; return; }
+    try { window.DataState.renderList(el, ul, { mode: "trains" }); } catch(e) { el.innerHTML = "<div class=\"rs-error\">Render failed</div>"; }
+  }
+
   function init() {
     try {
       listEl = document.getElementById("trainsLineListContent");
