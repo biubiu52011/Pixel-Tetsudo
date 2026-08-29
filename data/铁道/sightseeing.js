@@ -18,6 +18,7 @@
 
   const TAG_ICONS = {};
 
+  const MAJOR_STATIONS = ['Shinjuku','Tokyo','Shibuya','Akihabara','Ueno','Ginza','Roppongi','Ikebukuro','Solamachi','Asakusa','TokyoSkytree','Omotesando'];
   const RIVERS = [
     { name: 'Sumida', lat: 35.710, lng: 139.803, width: 120 } // width in meters
   ];
@@ -43,6 +44,7 @@
     dom.stationDisplay = document.getElementById('smStationDisplay');
     dom.relocateBtn = document.getElementById('smRelocateBtn');
     dom.header = document.querySelector('.sm-header');
+    dom.stationPicker = document.getElementById('smStationPicker');
   }
 
   function t(key) {
@@ -278,44 +280,51 @@ function renderGrid() {
       dom.relocateBtn.addEventListener('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
+        hideStationPicker();
         initLocation();
+      });
+    }
+    if (dom.stationPicker) {
+      dom.stationPicker.addEventListener('click', function(e) {
+        var btn = e.target.closest('.sm-picker-btn');
+        if (!btn) return;
+        e.preventDefault();
+        e.stopPropagation();
+        var station = btn.getAttribute('data-station');
+        if (station) {
+          hideStationPicker();
+          setStation(station);
+        }
       });
     }
   }
 
-  // IP-based geolocation fallback
-  function fallbackToIPLocation() {
-    var apis = ['https://ip-api.com/json/?lang=zh-CN&fields=lat,lon,city', 'https://ipwho.is'];
-    var tryNext = function(idx) {
-      if (idx >= apis.length) {
-        var spots = getSPOTS();
-        state.selectedStation = Object.keys(spots)[0] || 'Asakusa';
-        renderAll();
-        return;
-      }
-      fetch(apis[idx], { mode: 'cors' })
-        .then(function(res) { return res.json(); })
-        .then(function(data) {
-          var lat = data.lat || data.latitude;
-          var lng = data.lon || data.longitude;
-          if (lat && lng && lat !== 0 && lng !== 0) {
-            state.userLat = parseFloat(lat);
-            state.userLng = parseFloat(lng);
-            findNearestStation();
-          } else {
-            tryNext(idx + 1);
-          }
-        })
-        .catch(function() { tryNext(idx + 1); });
-    };
-    tryNext(0);
+  // Station picker shown when geolocation is unavailable
+  function showStationPicker() {
+    if (!dom.stationPicker) return;
+    var html = '<div class="sm-picker-label">' + t('tourism.select_station') + '</div><div class="sm-picker-list">';
+    for (var i = 0; i < MAJOR_STATIONS.length; i++) {
+      var s = MAJOR_STATIONS[i];
+      var label = (typeof window.t === 'function') ? window.t('station_names.' + s) : s;
+      html += '<button class="sm-picker-btn" data-station="' + s + '">' + label + '</button>';
+    }
+    html += '</div>';
+    dom.stationPicker.innerHTML = html;
+    dom.stationPicker.classList.remove('hidden');
+  }
+
+  function hideStationPicker() {
+    if (dom.stationPicker) dom.stationPicker.classList.add('hidden');
   }
 
   function initLocation() {
     state.locStatus = 'locating';
     renderHeader();
     if (typeof navigator === 'undefined' || !navigator.geolocation) {
-      fallbackToIPLocation();
+      state.selectedStation = 'Shinjuku';
+      state.autoDetected = false;
+      showStationPicker();
+      renderAll();
       return;
     }
     navigator.geolocation.getCurrentPosition(
@@ -325,15 +334,19 @@ function renderGrid() {
         findNearestStation();
       },
       function(err) {
-        // Geolocation failed or denied - try IP fallback
-        if (err.code === err.PERMISSION_DENIED) {
+        // Geolocation failed or denied - show station picker
+        if (err.code === err.PERMISSION_DENIED || err.code === err.POSITION_UNAVAILABLE) {
           state.locStatus = 'error';
-          // Default to a major station so user sees content
           state.selectedStation = 'Shinjuku';
           state.autoDetected = false;
+          showStationPicker();
           renderAll();
         } else {
-          fallbackToIPLocation();
+          // No geolocation API available - show picker directly
+          state.selectedStation = 'Shinjuku';
+          state.autoDetected = false;
+          showStationPicker();
+          renderAll();
         }
       },
       { enableHighAccuracy: true, timeout: 10000, maximumAge: 300000 }
@@ -371,7 +384,7 @@ function renderGrid() {
     bindEvents();
     updateStationDisplay();
     renderAll();
-    setTimeout(initLocation, 500);
+    setTimeout(initLocation, 100);
   }
 
   function setLang(lang) {

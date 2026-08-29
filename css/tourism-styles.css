@@ -840,3 +840,36 @@
   content: '\2192';
   font-size: 16px;
 }
+
+.sm-station-picker {
+  padding: 12px 16px;
+  border-top: 1px solid var(--border, #e0e0e0);
+}
+.sm-picker-label {
+  font-size: 12px;
+  color: var(--text-secondary, #888);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.sm-picker-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.sm-picker-btn {
+  padding: 6px 12px;
+  font-size: 13px;
+  border: 1px solid var(--border, #e0e0e0);
+  border-radius: var(--radius, 6px);
+  background: var(--card, #fff);
+  color: var(--text, #333);
+  cursor: pointer;
+  transition: var(--transition-fast, background 0.15s);
+  font-family: inherit;
+}
+.sm-picker-btn:hover {
+  background: var(--accent, #0088ff);
+  color: var(--white, #fff);
+  border-color: var(--accent, #0088ff);
+}
