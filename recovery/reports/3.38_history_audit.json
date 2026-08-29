@@ -1,0 +1,98 @@
+{
+  "task": "3.38 — History User Chain Audit",
+  "status": "COMPLETE / FROZEN",
+  "baseline": {
+    "HEAD": "51a4d73",
+    "origin/master": "51a4d73",
+    "Stations": 509,
+    "Lines": 156,
+    "name_map": 1703
+  },
+  "L0_FILE": {
+    "history.html_exists": "PASS",
+    "history.js_exists": "PASS",
+    "CSS_history_styles_exist": "PASS",
+    "DOM_elements_present": "PASS"
+  },
+  "L1_PARSE": {
+    "JS_syntax_valid": "PASS",
+    "Brace_balance": "PASS (duplicate block but valid JS)"
+  },
+  "L2_LOAD": {
+    "history.html_scripts": "PARTIAL",
+    "note": "Missing: station-resolver.js, route-search.js, search-ui.js. Has: db-loader.js, translations.js, common.js, lang-init.js, history.js"
+  },
+  "L3_INIT": {
+    "HistoryManager_init": "PASS",
+    "renderHistory_on_load": "PASS",
+    "onLanguageChange_registered": "PASS"
+  },
+  "L4_USABILITY": {
+    "write_after_search": "PARTIAL",
+    "note_write": "_searchResult is undefined (performSearch returns nothing). Dedup passes but saved entries have durationMin=0 and lineInfo=[].",
+    "read_on_page": "PASS",
+    "click_to_navigate": "FAIL",
+    "note_click": "Redirect goes to home.html?from=X&to=Y but home.html only reads ?from= param. To station is lost.",
+    "delete_entry": "PASS (code present)",
+    "clear_all": "PASS (code present)",
+    "persistence": "UNVERIFIED"
+  },
+  "L5_INTERACTION": {
+    "click_feedback": "FAIL",
+    "note_feedback": "No loading state when clicking history item. Full page redirect with no indication.",
+    "delete_confirmation": "FAIL",
+    "note_delete": "Delete is instant with no undo or confirmation.",
+    "empty_state": "PASS"
+  },
+  "L6_ADAPTATION": {
+    "mobile_layout": "UNVERIFIED",
+    "font_size_readable": "PASS"
+  },
+  "L7_CONSISTENCY": {
+    "i18n_keys_present": "PASS",
+    "delete_btn_text": "FAIL",
+    "note_del_text": "Delete button shows raw Unicode character instead of translatable text",
+    "arrow_icon": "FAIL",
+    "note_arrow": "History arrow shows raw Unicode character instead of translatable symbol",
+    "cross_page_navigate": "FAIL",
+    "note_nav": "Redirects to home.html without keeping user on history tab or showing route"
+  },
+  "L8_INDUSTRY": {
+    "familiar_pattern": "PARTIAL",
+    "note": "List of recent searches is standard. Missing: route preview, quick-research button, visual hierarchy between from/to/duration"
+  },
+  "L9_PRODUCT": {
+    "completeness": "FAIL",
+    "critical_gaps": [
+      "Redirect URL drops to-station (home.html only reads ?from=)",
+      "Delete button text is raw Unicode (not translatable)",
+      "History arrow shows raw Unicode (not translatable)",
+      "No loading feedback on click",
+      "_searchResult is undefined — durationMin always 0"
+    ]
+  },
+  "P0_CRITICAL": [
+    "home.html?from=&to= redirect loses to-station"
+  ],
+  "P1_MAJOR": [
+    "Delete button text is raw Unicode",
+    "History arrow is raw Unicode",
+    "_searchResult is undefined — saved entries have durationMin=0"
+  ],
+  "P2_NORMAL": [
+    "No loading feedback on click",
+    "No delete confirmation",
+    "Duplicate dead code in history.js renderHistory()"
+  ],
+  "P3_POLISH": [
+    "history.html missing station-resolver.js dependency",
+    "Missing route preview on history entries"
+  ],
+  "recommended_next_tasks": [
+    "3.39 Fix redirect URL to preserve to-station",
+    "3.40 Fix Unicode text in delete button and arrow",
+    "3.41 Fix _searchResult capture in performSearch interception",
+    "3.42 Add loading state on history item click",
+    "3.43 E2E browser verification of full History flow"
+  ]
+}
