@@ -266,7 +266,14 @@ function renderGrid() {
   function updateStationDisplay() {
     if (!dom.stationDisplay) return;
     if (state.selectedStation) {
-      const stationLabel = t('station_names.' + state.selectedStation) || state.selectedStation;
+      var _snKey = 'station_names.' + state.selectedStation;
+      var _snLabel = t(_snKey);
+      if (_snLabel === _snKey && window.RailwayDB && window.RailwayDB.getStationName) {
+        _snLabel = window.RailwayDB.getStationName(state.selectedStation, state.lang) || state.selectedStation;
+      } else if (_snLabel === _snKey) {
+        _snLabel = state.selectedStation;
+      }
+      const stationLabel = _snLabel;
       dom.stationDisplay.textContent = stationLabel;
       dom.stationDisplay.classList.add('sm-station-detected');
     } else {
