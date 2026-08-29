@@ -34,8 +34,12 @@
           this.fromInput.value = _resolvedName || _fromParam;
         }
         this._setFromSourceHint(_fromParam, _resolvedName);
-        var _cleanUrl = window.location.pathname;
-        window.history.replaceState({}, '', _cleanUrl);
+        // Only clean URL when to param is absent — preserve both params for refresh
+        var _hasTo = _params ? !!_params.get('to') : false;
+        if (!_hasTo) {
+          var _cleanUrl = window.location.pathname;
+          window.history.replaceState({}, '', _cleanUrl);
+        }
       }
 
       // Phase 42-E: Parse ?to=StationKey URL param
