@@ -38,6 +38,7 @@
         window.history.replaceState({}, '', _cleanUrl);
       }
 
+      this.lastRouteResult = null;
       this.bindEvents();
       window.onLanguageChange(() => this.refreshUI());
     },
@@ -55,6 +56,10 @@
         const key = el.getAttribute('data-i18n-placeholder');
         el.placeholder = t(key, el.placeholder);
       });
+      // Re-render route results if a search has been performed
+      if (this.lastRouteResult && this.resultsDiv && this.resultsDiv.innerHTML.trim() !== '') {
+        this.renderResults(this.lastRouteResult, t);
+      }
     },
 
     bindEvents: function() {
@@ -167,6 +172,7 @@
         if (this.resultsDiv) {
           if (result) {
             this.renderResults(result, t);
+            this.lastRouteResult = result;
           } else {
             this.resultsDiv.innerHTML = '<div class="search-error">' + t('search.no_results') + '</div>';
           }
