@@ -1,7 +1,7 @@
 {
-  "file": "pages/home.html == data/铁道/home.html (synced, SHA=2e9081535be5)",
-  "sha256": "69b180b67e26a8b339ec6b1a35a0f34e8e7fdf6e4e47feb2983987b494678153",
-  "sha256_short": "69b180b67e26a8b3",
+  "file": "pages/home.html == data/铁道/home.html (synced, SHA=b6342605c044)",
+  "sha256": "b6342605c044c51fc51f1fb4832243463d48d9fd531517810624a9076c640095",
+  "sha256_short": "b6342605c044",
   "modules": {
     "route_search": {
       "id": "searchContainer",
