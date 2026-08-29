@@ -89,35 +89,35 @@
     const t = window.t || function(key) { return key; };
 
     if (history.length === 0) {
-      container.innerHTML = '<div class="history-empty">'' + t("history.empty") + "</div>";
+      container.innerHTML = '<div class="history-empty">' + t("history.empty") + "</div>";
       return;
     }
 
     let html = '<div class="history-container">';
     html += '<div class="history-header">';
     html += "<h3>" + t("history.title") + "</h3>";
-    html += '<button class="history-clear-btn" id="clearHistoryBtn">'' + t("history.clear") + "</button>";
+    html += '<button class="history-clear-btn" id="clearHistoryBtn">' + t("history.clear") + "</button>";
     html += "</div>";
 
     history.forEach(function(entry) {
       const timeStr = formatTime(entry.timestamp, t);
       const lines = entry.lineInfo ? [...new Set(entry.lineInfo.flat())].join(", ") : "";
 
-      html += '<div class="history-entry" data-id="'' + entry.id + '">';
+      html += '<div class="history-entry" data-id="' + entry.id + '">';
       html += '<div class="history-route">';
-      html += '<span class="history-from">'' + escapeHtml(window.RailwayDB ? window.RailwayDB.resolveStationName(entry.from, window.currentLang) || entry.from : entry.from) + "</span>";
+      html += '<span class="history-from">' + escapeHtml(window.RailwayDB ? window.RailwayDB.resolveStationName(entry.from, window.currentLang) || entry.from : entry.from) + "</span>";
       html += '<span class="history-arrow">→</span>';
-      html += '<span class="history-to">'' + escapeHtml(window.RailwayDB ? window.RailwayDB.resolveStationName(entry.to, window.currentLang) || entry.to : entry.to) + "</span>";
+      html += '<span class="history-to">' + escapeHtml(window.RailwayDB ? window.RailwayDB.resolveStationName(entry.to, window.currentLang) || entry.to : entry.to) + "</span>";
       html += "</div>";
       html += '<div class="history-meta">';
       if (entry.durationMin > 0) {
-        html += '<span class="history-duration">'' + entry.durationMin + " " + t("unit.minute") + "</span>";
+        html += '<span class="history-duration">' + entry.durationMin + " " + t("unit.minute") + "</span>";
       }
       if (lines) {
-        html += '<span class="history-lines">'' + escapeHtml(lines) + "</span>";
+        html += '<span class="history-lines">' + escapeHtml(lines) + "</span>";
       }
-      html += '<span class="history-time">'' + timeStr + "</span>";
-      html += '<button class="history-delete-btn" data-id="'' + entry.id + '">✕</button>';
+      html += '<span class="history-time">' + timeStr + "</span>";
+      html += '<button class="history-delete-btn" data-id="' + entry.id + '">✕</button>';
       html += "</div>";
       html += "</div>";
     });
@@ -146,6 +146,7 @@
           var id = parseInt(entryEl.dataset.id);
           var hist = getHistory();
           var item = hist.find(function(e) { return e.id === id; });
+          if (!item) { console.warn("[History] Item not found:", id); return; }
           if (item) {
             entryEl.classList.add("rs-loading");
             setTimeout(function() {
@@ -177,8 +178,8 @@
             const lang = window.currentLang || "ja";
             const dfrom = rid ? (rid(from, lang) || from) : from;
             const dto = rid ? (rid(to, lang) || to) : to;
-            const lastFrom = lastEntry && lastEntry.fromId ? lastEntry.fromId : (rid ? (rid(lastEntry.from, lang) || lastEntry.from) : lastEntry.from);
-            const lastTo = lastEntry && lastEntry.toId ? lastEntry.toId : (rid ? (rid(lastEntry.to, lang) || lastEntry.to) : lastEntry.to);
+            const lastFrom = lastEntry && lastEntry.fromId ? lastEntry.fromId : (lastEntry && rid ? (rid(lastEntry.from, lang) || lastEntry.from) : from);
+            const lastTo = lastEntry && lastEntry.toId ? lastEntry.toId : (lastEntry && rid ? (rid(lastEntry.to, lang) || lastEntry.to) : to);
             if (!lastEntry || lastFrom !== dfrom || lastTo !== dto) {
               saveToHistory(from, to, _searchResult);
               renderHistory();
@@ -235,9 +236,17 @@
     restoreFromRecent: restoreFromRecent
   };
 
+  function safeInit() {
+    if (typeof window.t === "function") {
+      SearchHistory.init();
+    } else {
+      setTimeout(safeInit, 50);
+    }
+  }
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", function() { SearchHistory.init(); });
+    document.addEventListener("DOMContentLoaded", safeInit);
   } else {
-    SearchHistory.init();
+    safeInit();
   }
 })();
+
