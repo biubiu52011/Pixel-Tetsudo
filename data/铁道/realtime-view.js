@@ -47,7 +47,7 @@
     var status = delayInfo && delayInfo.status ? delayInfo.status : (delayInfo ? "normal" : "no_data");
     var interval = delayInfo.interval || "";
     var cause = delayInfo.cause || "";
-    var s = window.DataState ? window.DataState.getStatus(status) : STATUS_META[status] || STATUS_META.no_data;
+    var s = window.DataState ? (window.DataState && window.DataState.STATUS_META && window.DataState.STATUS_META[status]) || STATUS_META[status] : STATUS_META[status] || STATUS_META.no_data;
     var statusText = t("status." + status) || status;
     // Title
     modal.querySelector(".rs-modal-title").textContent = getDisplayName(line) || tLine(line.id) || line.name;
@@ -112,6 +112,65 @@
 
   let _latestLines = null;
   let _latestOrder = null;
+  let _selectedOperator = null;
+
+
+  function escapeHtml(s) {
+    if (!s) return "";
+    return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+  }
+
+  function renderFilterBar(linesObj) {
+    var bar = document.getElementById("realtimeFilterBar");
+    if (!bar || !linesObj) return;
+    var ops = {};
+    Object.keys(linesObj).forEach(function(id) {
+      var line = linesObj[id];
+      if (line && line.operator) ops[line.operator] = true;
+    });
+    var opList = Object.keys(ops).sort();
+    var html = '<button class="rs-filter-btn' + (_selectedOperator === null ? ' active' : '') + '" data-operator="">';
+    html += (typeof window.t === "function" && window.t("filter.all")) ? window.t("filter.all") : "All";
+    html += "</button>";
+    opList.forEach(function(op) {
+      html += '<button class="rs-filter-btn' + (_selectedOperator === op ? ' active' : '') + '" data-operator="' + escapeHtml(op) + '">' + escapeHtml(op) + "</button>";
+    });
+    bar.innerHTML = html;
+    bar.querySelectorAll(".rs-filter-btn").forEach(function(btn) {
+      btn.addEventListener("click", function() {
+        setFilter(this.dataset.operator || null);
+      });
+    });
+  }
+
+  function setFilter(operator) {
+    _selectedOperator = operator;
+    if (_latestLines) {
+      renderFiltered();
+      renderFilterBar(_latestLines);
+    }
+  }
+
+  function renderFiltered() {
+    if (!_latestLines) return;
+    var filtered = _latestLines;
+    if (_selectedOperator) {
+      var f = {};
+      Object.keys(_latestLines).forEach(function(id) {
+        if (_latestLines[id] && _latestLines[id].operator === _selectedOperator) {
+          f[id] = _latestLines[id];
+        }
+      });
+      filtered = f;
+    }
+    var container = document.getElementById("realtimeStatusContainer");
+    if (!container) return;
+    if (Object.keys(filtered).length === 0) {
+      container.innerHTML = '<div class="rs-empty">' + (typeof window.t === "function" ? window.t("status.no_lines") : "No lines") + "</div>";
+      return;
+    }
+    window.DataState.renderList(container, filtered, { mode: "realtime", lineOrder: _latestOrder || [] });
+  }
 
   function init() {
     const container = document.getElementById("realtimeStatusContainer");
@@ -153,6 +212,7 @@
       _latestOrder = fused.lineOrder || [];
       try {
         renderLinesList(container, fused.lines, _latestOrder);
+        renderFilterBar(fused.lines);
       } catch (e) {
         container.innerHTML = '<div class="rs-error">' + t('status.render_error') + '</div>';
       }
@@ -183,6 +243,10 @@
       window.DataFusion.subscribe(function(fusedData) {
         if (fusedData && fusedData.lines && Object.keys(fusedData.lines).length > 0) {
           render();
+          if (_selectedOperator) {
+            renderFiltered();
+            renderFilterBar(_latestLines);
+          }
         }
       });
     }
@@ -209,6 +273,6 @@
       }
     });
     }
-    if (typeof window.onLanguageChange === "function") { window.onLanguageChange(function() { render(); }); }
+    if (typeof window.onLanguageChange === "function") { window.onLanguageChange(function() { render(); if (_selectedOperator) renderFiltered(); }); }
   init();
 })();
