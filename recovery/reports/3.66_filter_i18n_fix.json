@@ -1,0 +1,64 @@
+{
+  "task": "3.66 Realtime Filter/Status i18n Fix",
+  "timestamp": "2026-08-30T12:17:07.512598",
+  "commit": "4b68a13",
+  "pages_url": "https://biubiu52011.github.io/Pixel-Tetsudo/",
+  "changes": "Added filter.all and status.no_lines to all 4 languages in translations.js",
+  "L0": {
+    "status": "PASS",
+    "notes": "All 4 mirror files synced (js/, data/api/, data/core/, data/鉄道/)"
+  },
+  "L1": {
+    "status": "PASS",
+    "notes": "No syntax errors"
+  },
+  "L2": {
+    "status": "PASS",
+    "notes": "Realtime page loads correctly"
+  },
+  "L3": {
+    "status": "PASS",
+    "notes": "RailwayDB 509/156/1703 unaffected"
+  },
+  "L4": {
+    "status": "PASS",
+    "notes": "Filter buttons show proper text in all 4 languages, no raw keys"
+  },
+  "L5": {
+    "status": "PASS",
+    "notes": "Filter interaction works (click operator -> filtered, click All -> reset)"
+  },
+  "L6": {
+    "status": "PASS",
+    "notes": "Mobile 390px: no h-scroll, filter buttons fit, cards render"
+  },
+  "L7": {
+    "status": "PASS",
+    "notes": "JA/ZH/EN/KO all have matching keys with natural translations"
+  },
+  "L8": {
+    "status": "PASS",
+    "notes": "Japanese uses natural transit terms: すべて, 路線なし"
+  },
+  "L9": {
+    "status": "PASS",
+    "notes": "No new UI issues introduced"
+  },
+  "raw_keys_before": 2,
+  "raw_keys_after": 0,
+  "translations_added": {
+    "filter.all": {
+      "en": "All",
+      "ja": "すべて",
+      "zh": "全部",
+      "ko": "전체"
+    },
+    "status.no_lines": {
+      "en": "No lines",
+      "ja": "路線なし",
+      "zh": "无线路",
+      "ko": "노선 없음"
+    }
+  },
+  "verified": true
+}
