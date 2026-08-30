@@ -138,7 +138,9 @@
    * @param {Object} options - { mode, lineOrder }
    */
   function renderList(container, linesObj, options) {
+    console.log('[DataState.renderList] called, container=' + (!!container) + ', keys=' + Object.keys(linesObj||{}).length + ', mode=' + (options&&options.mode));
     if (!container || !linesObj || typeof linesObj !== "object" || Object.keys(linesObj).length === 0) {
+      console.log('[DataState.renderList] EARLY RETURN: container=' + (!!container) + ', keys=' + Object.keys(linesObj||{}).length);
       container.innerHTML = '<div class="rs-empty">' + (typeof window.t === "function" ? window.t("status.no_trains") : "No data") + '</div>';
       return;
     }
@@ -199,7 +201,9 @@
       }
       html += "</div></div>";
     }
+    console.log('[DataState.renderList] rendering ' + html.length + ' chars');
     container.innerHTML = html;
+    console.log('[DataState.renderList] done, innerHTML=' + container.innerHTML.length);
   }
 
   // ========== Data management ==========
