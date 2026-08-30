@@ -1,0 +1,222 @@
+{
+  "task": "3.79",
+  "title": "Product UI/UX & Legacy Residue Audit",
+  "type": "AUDIT ONLY - no code changes",
+  "timestamp": "2026-08-30T17:00:00+09:00",
+  "baseline": {
+    "head": "f451cd1",
+    "canonical": "509 stations / 156 lines / 1703 name_map"
+  },
+  "findings": {
+    "P0": [
+      {
+        "id": "none",
+        "status": "NONE FOUND",
+        "note": "All critical functionality verified PASS in 3.72/3.76"
+      }
+    ],
+    "P1": [
+      {
+        "id": "none",
+        "status": "NONE FOUND",
+        "note": "No P1 issues. All core user tasks complete."
+      }
+    ],
+    "P2": [
+      {
+        "id": "P2-01",
+        "element": ".rs-line-name-en",
+        "page": "Realtime / Trains",
+        "description": "English line name (nameEn) displayed below Japanese name on every card. Redundant for JA-dominant product.",
+        "evidence": "js/data-state.js:118-119 renders nameEn as .rs-line-name-en font-size:10px",
+        "recommendation": "Hide nameEn when default lang is JA. Show only in EN mode."
+      },
+      {
+        "id": "P2-02",
+        "element": "line images",
+        "page": "Trains",
+        "description": "20 of 156 lines have image paths with Japanese filenames that likely 404 on GitHub Pages CDN.",
+        "evidence": "136 lines have images, 20 do not. Path pattern: ../images/tetsudo/{Operator}/{LineNameJa}.png",
+        "recommendation": "Verify all 136 image URLs resolve on public URL. Fix or remove broken paths."
+      }
+    ],
+    "P3": [
+      {
+        "id": "P3-01",
+        "element": "rs-code-badge fallback",
+        "page": "Realtime / Trains",
+        "description": "Lines without OS symbol or legacy code show line_id (e.g. Do-Arakawa) as badge - internal DB ID visible to users.",
+        "recommendation": "Ensure all 156 lines have OS entry with symbol. Do-Arakawa is the only known case."
+      },
+      {
+        "id": "P3-02",
+        "element": "config modal",
+        "page": "Realtime",
+        "description": "Config button (gear icon) opens modal but saving API keys has no effect - keys are hardcoded in odpt-unified.js.",
+        "evidence": "configBtn exists in realtime.html:47-54, no click handler in realtime-view.js",
+        "recommendation": "Either wire up the modal to override ODPTClient.ENDPOINTS at runtime, or remove the button."
+      },
+      {
+        "id": "P3-03",
+        "element": "header duplication",
+        "page": "All pages",
+        "description": "Identical header+tab markup duplicated across 5 HTML files. Any header change requires 5 edits.",
+        "recommendation": "Extract to shared JS partial. Low priority - HTML is small."
+      },
+      {
+        "id": "P3-04",
+        "element": "empty tab sections",
+        "page": "Home",
+        "description": "home.html has empty #tab-status, #tab-trains, #tab-history placeholder sections. Only populated via tab-switch.js fetch.",
+        "recommendation": "Pre-populate or remove blank placeholders for better initial DOM state."
+      },
+      {
+        "id": "P3-05",
+        "element": "trains vs realtime asymmetry",
+        "page": "Trains / Realtime",
+        "description": "Trains has line images but no live status. Realtime has live status badges but no images. Different but complementary.",
+        "evidence": "Trains: line.image PNG per line. Realtime: rs-code-badge CSS only.",
+        "verdict": "ACCEPTABLE - different user goals (reference vs live monitoring)",
+        "recommendation": "Consider cross-linking or unified view in future."
+      },
+      {
+        "id": "P3-06",
+        "element": "detail title language",
+        "page": "Trains",
+        "description": "Detail page title uses fusedLine.nameEn || fusedLine.name (English fallback) instead of nameJa.",
+        "evidence": "js/trains-page.js:240",
+        "recommendation": "Use nameJa consistently: fusedLine.nameJa || fusedLine.nameEn || fusedLine.name"
+      }
+    ],
+    "LEGACY_UI": [
+      {
+        "id": "LU-01",
+        "severity": "P3",
+        "element": "configBtn",
+        "description": "Gear icon button in realtime.html header has no click handler. Modal is dead UI."
+      },
+      {
+        "id": "LU-02",
+        "severity": "P3",
+        "element": "empty tab sections",
+        "description": "Blank #tab-status/#tab-trains/#tab-history in home.html initial DOM."
+      }
+    ],
+    "DUPLICATED_INFO": [
+      {
+        "id": "DI-01",
+        "severity": "P2",
+        "element": ".rs-line-name-en",
+        "description": "Every line card shows JP name + EN name. For JA product, EN is redundant noise."
+      }
+    ],
+    "UX_INCONSISTENCY": [],
+    "WRONG_MAPPING": [],
+    "UNNECESSARY_INFO": [
+      {
+        "id": "UN-01",
+        "severity": "P3",
+        "element": "config modal",
+        "description": "Modal asks users to enter API keys that are already hardcoded. Creates false expectation of functionality."
+      }
+    ],
+    "COMPONENT_DUPLICATION": [
+      {
+        "id": "CD-01",
+        "severity": "P3",
+        "element": "pixel-header + pixel-tabs",
+        "description": "Identical header/nav in 5 HTML files. home.html, realtime.html, trains.html, history.html, tourism-detail.html all duplicate 40+ lines of markup."
+      }
+    ],
+    "TECHNICAL_LEAK": [
+      {
+        "id": "TL-01",
+        "severity": "P2",
+        "element": ".rs-line-name-en",
+        "description": "English line name redundant on JA product. Shows Chuo Rapid Line below 中央線快速 on every card."
+      },
+      {
+        "id": "TL-02",
+        "severity": "P3",
+        "element": "rs-code-badge fallback chain",
+        "description": "Falls back line.code -> line.symbol -> line.id. line_id as display name leaks internal DB identity."
+      },
+      {
+        "id": "TL-03",
+        "severity": "P3",
+        "element": "detail title",
+        "description": "Trains detail title prefers nameEn over nameJa."
+      }
+    ]
+  },
+  "consistency_matrix": {
+    "line_filter": {
+      "Trains": "None",
+      "Realtime": "Operator filter bar",
+      "verdict": "ACCEPTABLE"
+    },
+    "search": {
+      "Trains": "None",
+      "Realtime": "None",
+      "verdict": "SAME"
+    },
+    "OS_sorting": {
+      "Trains": "LPS via DataState",
+      "Realtime": "LPS via DataState",
+      "verdict": "SAME"
+    },
+    "line_card": {
+      "Trains": "pixel-card with image+code+name",
+      "Realtime": "rs-line-card with badge+name+nameEn",
+      "verdict": "ACCEPTABLE_DIFF"
+    },
+    "interval_info": {
+      "Trains": "SVG line map",
+      "Realtime": "Station list text",
+      "verdict": "ACCEPTABLE_DIFF"
+    },
+    "status_display": {
+      "Trains": "None",
+      "Realtime": "Status badge + delay",
+      "verdict": "ACCEPTABLE_DIFF"
+    },
+    "direction": {
+      "Trains": "Arrow in segment",
+      "Realtime": "None",
+      "verdict": "ACCEPTABLE_DIFF"
+    },
+    "images": {
+      "Trains": "PNG per line",
+      "Realtime": "CSS badge only",
+      "verdict": "ACCEPTABLE_DIFF"
+    },
+    "detail_modal": {
+      "Trains": "trains-detail.js with map",
+      "Realtime": "rs-modal with delay",
+      "verdict": "ACCEPTABLE_DIFF"
+    }
+  },
+  "home_modules_analysis": {
+    "module1": {
+      "id": "#searchContainer",
+      "class": "search-card pixel-card",
+      "title_i18n": "search.title",
+      "purpose": "Route search"
+    },
+    "module2": {
+      "id": "#smModule",
+      "class": "sm-module pixel-card",
+      "title_i18n": "tourism.title",
+      "purpose": "Nearby spots"
+    },
+    "verdict": "VALID SEPARATION - distinct user goals (search vs explore), not duplication"
+  },
+  "image_mapping_audit": {
+    "total_lines": 156,
+    "lines_with_image_field": 136,
+    "lines_without_image": 20,
+    "path_pattern": "../images/tetsudo/{OperatorJA}/{LineNameJa}.png",
+    "verified_on_public": "NOT YET CHECKED - needs browser verification",
+    "risk": "Japanese filenames in paths may 404 on GitHub Pages CDN"
+  }
+}
