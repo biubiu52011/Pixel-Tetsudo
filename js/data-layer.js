@@ -71,12 +71,12 @@
   // Line data helpers
   function getAllLines() {
     if (window.RailwayDB && window.DataLoader && window.DataLoader.isLoaded() && window.RailwayDB.getAllLines) {
-      return Object.values(window.RailwayDB.getAllLines());
+      return window.RailwayDB.getAllLines();
     }
-    var lines = [];
+    var lines = {};
     Object.keys(window.UNIFIED_LINES || {}).forEach(function(id) {
       var l = window.UNIFIED_LINES[id];
-      if (l) lines.push(l);
+      if (l) lines[id] = l;
     });
     return lines;
   }
@@ -91,7 +91,8 @@
   function getGroupedLines() {
     var result = { grouped: {}, regionOrder: [] };
     var lines = getAllLines();
-    lines.forEach(function(line) {
+    Object.keys(lines).forEach(function(id) {
+      var line = lines[id];
       var region = line.region || 'Unknown';
       if (!result.grouped[region]) {
         result.grouped[region] = [];
@@ -140,4 +141,5 @@ window.DataLayer = {
 
   console.log('[DataLayer] Initialized');
 })();
+
 
