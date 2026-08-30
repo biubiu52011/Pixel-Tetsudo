@@ -266,7 +266,14 @@ function renderGrid() {
   function updateStationDisplay() {
     if (!dom.stationDisplay) return;
     if (state.selectedStation) {
-      const stationLabel = t('station_names.' + state.selectedStation) || state.selectedStation;
+      var _snKey = 'station_names.' + state.selectedStation;
+      var _snLabel = t(_snKey);
+      if (_snLabel === _snKey && window.RailwayDB && window.RailwayDB.getStationName) {
+        _snLabel = window.RailwayDB.getStationName(state.selectedStation, state.lang) || state.selectedStation;
+      } else if (_snLabel === _snKey) {
+        _snLabel = state.selectedStation;
+      }
+      const stationLabel = _snLabel;
       dom.stationDisplay.textContent = stationLabel;
       dom.stationDisplay.classList.add('sm-station-detected');
     } else {
@@ -305,7 +312,12 @@ function renderGrid() {
     var html = '<div class="sm-picker-label">' + t('tourism.select_station') + '</div><div class="sm-picker-list">';
     for (var i = 0; i < MAJOR_STATIONS.length; i++) {
       var s = MAJOR_STATIONS[i];
-      var label = (typeof window.t === 'function') ? window.t('station_names.' + s) : s;
+      var label = s;
+      if (window.RailwayDB && window.RailwayDB.getNameMap) {
+        var nm = window.RailwayDB.getNameMap();
+        if (nm[s]) { label = nm[s]; }
+        else { for (var _k in nm) { if (nm[_k] === s) { label = _k; break; } } }
+      }
       html += '<button class="sm-picker-btn" data-station="' + s + '">' + label + '</button>';
     }
     html += '</div>';
