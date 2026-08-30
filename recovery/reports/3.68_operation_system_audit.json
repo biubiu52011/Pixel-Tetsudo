@@ -1,0 +1,672 @@
+{
+  "task": "3.68",
+  "title": "Line Operation Systems - Presentation Layer",
+  "status": "IMPLEMENTED",
+  "file": "data/core/line-operation-systems.js",
+  "canonical_baseline": {
+    "stations": 509,
+    "lines": 156,
+    "name_map": 1703,
+    "railway_data_json": "NOT MODIFIED"
+  },
+  "summary": {
+    "total_os_entries": 90,
+    "total_unique_line_ids": 156,
+    "all_lines_mapped": true,
+    "duplicates": "NONE",
+    "bad_refs": "NONE"
+  },
+  "os_by_operator": {
+    "null": [
+      {
+        "code": "JA',",
+        "lines": [
+          "[\"Saikyo",
+          "Kawagoe\"]"
+        ]
+      },
+      {
+        "code": "JB',",
+        "lines": [
+          "[\"ChuoSobuLocal",
+          "SobuLocal\"]"
+        ]
+      },
+      {
+        "code": "JE',",
+        "lines": [
+          "[\"Keiyo\"]"
+        ]
+      },
+      {
+        "code": "JH',",
+        "lines": [
+          "[\"Kanagawa\"]"
+        ]
+      },
+      {
+        "code": "JI',",
+        "lines": [
+          "[\"Tsurumi\"]"
+        ]
+      },
+      {
+        "code": "JJ',",
+        "lines": [
+          "[\"Joban\"]"
+        ]
+      },
+      {
+        "code": "JK',",
+        "lines": [
+          "[\"KeihinTohoku\"]"
+        ]
+      },
+      {
+        "code": "JL',",
+        "lines": [
+          "[\"JobanLocal\"]"
+        ]
+      },
+      {
+        "code": "JM',",
+        "lines": [
+          "[\"Musashino\"]"
+        ]
+      },
+      {
+        "code": "JN',",
+        "lines": [
+          "[\"Nambu\"]"
+        ]
+      },
+      {
+        "code": "JS',",
+        "lines": [
+          "[\"ShonanShinjuku\"]"
+        ]
+      },
+      {
+        "code": "JT',",
+        "lines": [
+          "[\"Tokaido",
+          "Tsugaru\"]"
+        ]
+      },
+      {
+        "code": "JY',",
+        "lines": [
+          "[\"Yamanote\"]"
+        ]
+      },
+      {
+        "code": "G',",
+        "lines": [
+          "[\"Ginza\"]"
+        ]
+      },
+      {
+        "code": "M',",
+        "lines": [
+          "[\"Marunouchi",
+          "MarunouchiBranch\"]"
+        ]
+      },
+      {
+        "code": "H',",
+        "lines": [
+          "[\"Hibiya\"]"
+        ]
+      },
+      {
+        "code": "T',",
+        "lines": [
+          "[\"Tozai\"]"
+        ]
+      },
+      {
+        "code": "C',",
+        "lines": [
+          "[\"Chiyoda\"]"
+        ]
+      },
+      {
+        "code": "Y',",
+        "lines": [
+          "[\"Yurakucho\"]"
+        ]
+      },
+      {
+        "code": "Z',",
+        "lines": [
+          "[\"Hanzomon\"]"
+        ]
+      },
+      {
+        "code": "N',",
+        "lines": [
+          "[\"Namboku\"]"
+        ]
+      },
+      {
+        "code": "F',",
+        "lines": [
+          "[\"Fukutoshin\"]"
+        ]
+      },
+      {
+        "code": "A',",
+        "lines": [
+          "[\"Asakusa\"]"
+        ]
+      },
+      {
+        "code": "M',",
+        "lines": [
+          "[\"Mita\"]"
+        ]
+      },
+      {
+        "code": "S',",
+        "lines": [
+          "[\"Shinjuku\"]"
+        ]
+      },
+      {
+        "code": "E',",
+        "lines": [
+          "[\"Oedo\"]"
+        ]
+      },
+      {
+        "code": "K',",
+        "lines": [
+          "[\"Arakawa\"]"
+        ]
+      },
+      {
+        "code": "DA',",
+        "lines": [
+          "[\"Do-Arakawa\"]"
+        ]
+      },
+      {
+        "code": "NT',",
+        "lines": [
+          "[\"Nippori_Toneri\"]"
+        ]
+      },
+      {
+        "code": "SN',",
+        "lines": [
+          "[\"SeibuShinjuku\"]"
+        ]
+      },
+      {
+        "code": "SM',",
+        "lines": [
+          "[\"SeibuTamagawa\"]"
+        ]
+      },
+      {
+        "code": "SA',",
+        "lines": [
+          "[\"SeibuNakagawa\"]"
+        ]
+      },
+      {
+        "code": "SC',",
+        "lines": [
+          "[\"SeibuChichibu\"]"
+        ]
+      },
+      {
+        "code": "ST',",
+        "lines": [
+          "[\"SeibuTamako\"]"
+        ]
+      },
+      {
+        "code": "SY',",
+        "lines": [
+          "[\"SeibuYamaguchi\"]"
+        ]
+      },
+      {
+        "code": "SHM',",
+        "lines": [
+          "[\"Hamura\"]"
+        ]
+      },
+      {
+        "code": "SKK',",
+        "lines": [
+          "[\"Kokubunji\"]"
+        ]
+      },
+      {
+        "code": "SS',",
+        "lines": [
+          "[\"Seibu_Sayama\"]"
+        ]
+      },
+      {
+        "code": "SSH',",
+        "lines": [
+          "[\"Seibu_Shinjuku\"]"
+        ]
+      },
+      {
+        "code": "YS',",
+        "lines": [
+          "[\"Yurakucho_Seibu\"]"
+        ]
+      },
+      {
+        "code": "SE',",
+        "lines": [
+          "[\"SeibuEn\"]"
+        ]
+      },
+      {
+        "code": "TI',",
+        "lines": [
+          "[\"TobuIsesaki",
+          "Isesaki\"]"
+        ]
+      },
+      {
+        "code": "TN',",
+        "lines": [
+          "[\"TobuNikko",
+          "Nikkoku\"]"
+        ]
+      },
+      {
+        "code": "TTJ',",
+        "lines": [
+          "[\"Tojo",
+          "Utsunomiya\"]"
+        ]
+      },
+      {
+        "code": "TKM',",
+        "lines": [
+          "[\"Tobu_Kameido\"]"
+        ]
+      },
+      {
+        "code": "TNOD',",
+        "lines": [
+          "[\"Noda\"]"
+        ]
+      },
+      {
+        "code": "TOG',",
+        "lines": [
+          "[\"Ogose\"]"
+        ]
+      },
+      {
+        "code": "TQZ',",
+        "lines": [
+          "[\"Koizumi\"]"
+        ]
+      },
+      {
+        "code": "DTB',",
+        "lines": [
+          "[\"Daishi_Tobu\"]"
+        ]
+      },
+      {
+        "code": "KK',",
+        "lines": [
+          "[\"Keikyu\"]"
+        ]
+      },
+      {
+        "code": "KM',",
+        "lines": [
+          "[\"KeikyuMain",
+          "Sakuragi\"]"
+        ]
+      },
+      {
+        "code": "KAP',",
+        "lines": [
+          "[\"KeikyuAirport\"]"
+        ]
+      },
+      {
+        "code": "KKH',",
+        "lines": [
+          "[\"KeikyuKurihama\"]"
+        ]
+      },
+      {
+        "code": "KZU',",
+        "lines": [
+          "[\"KeikyuZushi\"]"
+        ]
+      },
+      {
+        "code": "DK',",
+        "lines": [
+          "[\"Daishi_Keikyu\"]"
+        ]
+      },
+      {
+        "code": "KO',",
+        "lines": [
+          "[\"Keio\"]"
+        ]
+      },
+      {
+        "code": "KIN',",
+        "lines": [
+          "[\"KeioInokashira\"]"
+        ]
+      },
+      {
+        "code": "KSG',",
+        "lines": [
+          "[\"KeioSagami\"]"
+        ]
+      },
+      {
+        "code": "KSH',",
+        "lines": [
+          "[\"KeioShin\"]"
+        ]
+      },
+      {
+        "code": "KTK',",
+        "lines": [
+          "[\"KeioTakao\"]"
+        ]
+      },
+      {
+        "code": "KKJ',",
+        "lines": [
+          "[\"KeioKeibajo\"]"
+        ]
+      },
+      {
+        "code": "KMO',",
+        "lines": [
+          "[\"KeioMain\"]"
+        ]
+      },
+      {
+        "code": "KZO',",
+        "lines": [
+          "[\"KeioZoo\"]"
+        ]
+      },
+      {
+        "code": "TY',",
+        "lines": [
+          "[\"TokyuToyoko\"]"
+        ]
+      },
+      {
+        "code": "TD',",
+        "lines": [
+          "[\"TokyuDenEn\"]"
+        ]
+      },
+      {
+        "code": "TTM',",
+        "lines": [
+          "[\"TokyuTamagawa\"]"
+        ]
+      },
+      {
+        "code": "OD',",
+        "lines": [
+          "[\"OdakyuOdawara\"]"
+        ]
+      },
+      {
+        "code": "OE',",
+        "lines": [
+          "[\"OdakyuEnoshima\"]"
+        ]
+      },
+      {
+        "code": "OH',",
+        "lines": [
+          "[\"Odawara\"]"
+        ]
+      },
+      {
+        "code": "OTM',",
+        "lines": [
+          "[\"OdakyuTama\"]"
+        ]
+      },
+      {
+        "code": "KS',",
+        "lines": [
+          "[\"Keisei\"]"
+        ]
+      },
+      {
+        "code": "SO',",
+        "lines": [
+          "[\"SotetsuMain\"]"
+        ]
+      },
+      {
+        "code": "RL',",
+        "lines": [
+          "[\"Rinkai\"]"
+        ]
+      },
+      {
+        "code": "MM',",
+        "lines": [
+          "[\"MinatoMirai\"]"
+        ]
+      },
+      {
+        "code": "B',",
+        "lines": [
+          "[\"YokohamaBlue\"]"
+        ]
+      },
+      {
+        "code": "GR',",
+        "lines": [
+          "[\"YokohamaGreen\"]"
+        ]
+      },
+      {
+        "code": "O',",
+        "lines": [
+          "[\"Orange\"]"
+        ]
+      },
+      {
+        "code": "SME',",
+        "lines": [
+          "[\"ShonanMonorailE\"]"
+        ]
+      },
+      {
+        "code": "R',",
+        "lines": [
+          "[\"Rinko\"]"
+        ]
+      },
+      {
+        "code": "TM',",
+        "lines": [
+          "[\"TamaMonorail\"]"
+        ]
+      },
+      {
+        "code": "U',",
+        "lines": [
+          "[\"Yurikamome\"]"
+        ]
+      },
+      {
+        "code": "TX',",
+        "lines": [
+          "[\"TsukubaExpress\"]"
+        ]
+      },
+      {
+        "code": "TX',",
+        "lines": [
+          "[\"HitachiNakaKaimin\"]"
+        ]
+      },
+      {
+        "code": "YAM',",
+        "lines": [
+          "[\"JR_Yamaguchi\"]"
+        ]
+      }
+    ],
+    "JR-East": [
+      {
+        "code": "JC',",
+        "lines": [
+          "[\"ChuoRapid",
+          "Ome",
+          "Itsukaichi",
+          "ChuoKonosu\"]"
+        ]
+      },
+      {
+        "code": "JO',",
+        "lines": [
+          "[\"Yokosuka",
+          "SobuRapid",
+          "Sotobo",
+          "Uchibo\"]"
+        ]
+      },
+      {
+        "code": "JU',",
+        "lines": [
+          "[\"Oyama",
+          "Takasaki",
+          "TohokuMain\"]"
+        ]
+      },
+      {
+        "code": "REGIONAL',",
+        "lines": [
+          "[\"Agatsuma",
+          "BanetsuEast",
+          "BanetsuWest",
+          "Echigo",
+          "Gono",
+          "Hachinohe",
+          "Hakushin",
+          "Iiyama",
+          "Ishinomaki",
+          "Ito",
+          "Joetsu",
+          "Kamaishi",
+          "Kamiishi",
+          "Karasuyama",
+          "Kashima",
+          "Kesennuma",
+          "Kiryu",
+          "Komii",
+          "Kounan",
+          "Kururi",
+          "Mito",
+          "Miyo",
+          "Narita",
+          "Nikko",
+          "Ofunato",
+          "Oga",
+          "Oito",
+          "Ominato",
+          "OuMain",
+          "RikutoEast",
+          "RikutsuWest",
+          "Ryomo",
+          "Sagami",
+          "Sano",
+          "Sanriku",
+          "Senseki",
+          "SensekiTohoku",
+          "Senzan",
+          "Shinetsu",
+          "Shinonoi",
+          "Suigun",
+          "SuigunBranch",
+          "Tazawako",
+          "Tōnami",
+          "Uetsu",
+          "Yamagata",
+          "Yonezawa\"]"
+        ]
+      }
+    ],
+    "Seibu": [
+      {
+        "code": "SI',",
+        "lines": [
+          "[\"SeibuIkebukuro",
+          "Ikebukuro",
+          "SeibuToshima\"]"
+        ]
+      }
+    ],
+    "Tobu": [
+      {
+        "code": "TS',",
+        "lines": [
+          "[\"TobuSkytree",
+          "Skytree",
+          "TobuNoda\"]"
+        ]
+      }
+    ]
+  },
+  "legacy_code_conflicts": [
+    {
+      "line_id": "Ome",
+      "legacy_code": "JC",
+      "new_os_code": "JC',"
+    },
+    {
+      "line_id": "Itsukaichi",
+      "legacy_code": "JC",
+      "new_os_code": "JC',"
+    },
+    {
+      "line_id": "SobuRapid",
+      "legacy_code": "JR",
+      "new_os_code": "JO',"
+    },
+    {
+      "line_id": "Sotobo",
+      "legacy_code": "JO",
+      "new_os_code": "JO',"
+    },
+    {
+      "line_id": "Takasaki",
+      "legacy_code": "JU",
+      "new_os_code": "JU',"
+    },
+    {
+      "line_id": "Ikebukuro",
+      "legacy_code": "SI",
+      "new_os_code": "SI',"
+    },
+    {
+      "line_id": "Skytree",
+      "legacy_code": "TSK",
+      "new_os_code": "TS',"
+    }
+  ]
+}
