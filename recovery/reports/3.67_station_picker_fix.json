@@ -1,0 +1,85 @@
+{
+  "task": "3.67",
+  "title": "Tourism Station Picker Label Fix",
+  "commit": "61349e5",
+  "status": "COMPLETE / FROZEN",
+  "summary": "Fixed raw i18n keys in Tourism station picker by using RailwayDB.getNameMap() reverse lookup.",
+  "files_changed": [
+    "js/sightseeing.js",
+    "data/铁道/sightseeing.js",
+    "data/api/sightseeing.js",
+    "data/core/sightseeing.js"
+  ],
+  "L0": "PASS",
+  "L1": "PASS",
+  "L2": "PASS",
+  "L3": "PASS",
+  "L4": "PASS",
+  "L5": "PASS",
+  "L6": "PASS",
+  "L7": "PASS",
+  "L8": "UNVERIFIED",
+  "L9": "UNVERIFIED",
+  "e2e": {
+    "mobile_390": {
+      "labels": [
+        "新宿駅",
+        "東京",
+        "渋谷",
+        "秋葉原",
+        "上野"
+      ],
+      "raw_keys": []
+    },
+    "desktop_1366": {
+      "labels": [
+        "新宿駅",
+        "東京",
+        "渋谷",
+        "秋葉原",
+        "上野"
+      ],
+      "raw_keys": []
+    },
+    "JA": {
+      "labels": [
+        "新宿駅",
+        "東京",
+        "渋谷"
+      ],
+      "raw_keys": []
+    },
+    "ZH": {
+      "labels": [
+        "新宿駅",
+        "東京",
+        "渋谷"
+      ],
+      "raw_keys": []
+    },
+    "EN": {
+      "labels": [
+        "新宿駅",
+        "東京",
+        "渋谷"
+      ],
+      "raw_keys": []
+    },
+    "KO": {
+      "labels": [
+        "新宿駅",
+        "東京",
+        "渋谷"
+      ],
+      "raw_keys": []
+    }
+  },
+  "root_cause": "sightseeing.js used window.t(station_names.s) but no such i18n keys exist in translations.js. name_map has Japanese->English only, so reverse lookup resolves English ID to Japanese name.",
+  "fix": "Added getNameMap() forward lookup then reverse lookup to resolve station ID to Japanese name.",
+  "known_limitation": "Selected station display (sm-station-detected) still shows English name because getStationName returns English name from JP->EN name_map. Pre-existing, not introduced by 3.67.",
+  "data_constraints": {
+    "railway_data.json": "NOT MODIFIED",
+    "name_map": "NOT MODIFIED",
+    "BFS": "NOT MODIFIED"
+  }
+}
