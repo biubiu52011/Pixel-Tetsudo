@@ -1,0 +1,446 @@
+{
+  "task": "3.69",
+  "title": "Operation System Display Rules Freeze",
+  "status": "PENDING USER CONFIRMATION",
+  "canonical_baseline": {
+    "stations": 509,
+    "lines": 156,
+    "name_map": 1703,
+    "railway_data_json": "NOT MODIFIED",
+    "line-operation-systems.js": "CREATED in 3.68"
+  },
+  "operator_order": [
+    {
+      "order": 1,
+      "key": "JR_EAST",
+      "name_ja": "JR東日本",
+      "name_en": "JR East"
+    },
+    {
+      "order": 2,
+      "key": "TOKYO_METRO",
+      "name_ja": "東京メトロ",
+      "name_en": "Tokyo Metro"
+    },
+    {
+      "order": 3,
+      "key": "TOEI",
+      "name_ja": "都営地下鉄",
+      "name_en": "Toei Subway"
+    },
+    {
+      "order": 4,
+      "key": "SEIBU",
+      "name_ja": "西武鉄道",
+      "name_en": "Seibu Railway"
+    },
+    {
+      "order": 5,
+      "key": "TOBU",
+      "name_ja": "東武鉄道",
+      "name_en": "Tobu Railway"
+    },
+    {
+      "order": 6,
+      "key": "TOKYU",
+      "name_ja": "東急電鉄",
+      "name_en": "Tokyu Railway"
+    },
+    {
+      "order": 7,
+      "key": "KEIO",
+      "name_ja": "京王電鉄",
+      "name_en": "Keio Railway"
+    },
+    {
+      "order": 8,
+      "key": "ODAKYU",
+      "name_ja": "小田急電鉄",
+      "name_en": "Odakyu Railway"
+    },
+    {
+      "order": 9,
+      "key": "KEISEI",
+      "name_ja": "京成電鉄",
+      "name_en": "Keisei Railway"
+    },
+    {
+      "order": 10,
+      "key": "KEIKYU",
+      "name_ja": "京浜急行電鉄",
+      "name_en": "Keikyu Railway"
+    },
+    {
+      "order": 11,
+      "key": "SOTETSU",
+      "name_ja": "相鉄",
+      "name_en": "Sotetsu"
+    },
+    {
+      "order": 12,
+      "key": "RINKAI",
+      "name_ja": "臨海",
+      "name_en": "Rinkai"
+    },
+    {
+      "order": 13,
+      "key": "MINATO_MIRAI",
+      "name_ja": "港未来",
+      "name_en": "Minato Mirai"
+    },
+    {
+      "order": 14,
+      "key": "YOKOHAMA_MUNICIPAL",
+      "name_ja": "横浜市営",
+      "name_en": "Yokohama Municipal"
+    },
+    {
+      "order": 15,
+      "key": "SHONAN_MONORAIL",
+      "name_ja": "湘南モノレール",
+      "name_en": "Shonan Monorail"
+    },
+    {
+      "order": 16,
+      "key": "TWR",
+      "name_ja": "TWR",
+      "name_en": "TWR"
+    },
+    {
+      "order": 17,
+      "key": "TAMA_MONORAIL",
+      "name_ja": "多摩都市モノレール",
+      "name_en": "Tama Monorail"
+    },
+    {
+      "order": 18,
+      "key": "YURIKAMOME",
+      "name_ja": "ゆりかもめ",
+      "name_en": "Yurikamome"
+    },
+    {
+      "order": 19,
+      "key": "TSUKUBA_EXPRESS",
+      "name_ja": "つくばエクスプレス",
+      "name_en": "Tsukuba Express"
+    },
+    {
+      "order": 20,
+      "key": "MIR",
+      "name_ja": "ひたちなか海浜鉄道",
+      "name_en": "MIR"
+    },
+    {
+      "order": 21,
+      "key": "JR_WEST",
+      "name_ja": "JR西日本",
+      "name_en": "JR West"
+    }
+  ],
+  "jr_east_os": [
+    {
+      "code": "JA",
+      "name_ja": "埼京線・川越線",
+      "lines": [
+        "Saikyo",
+        "Kawagoe"
+      ],
+      "display": "merged (through-service)",
+      "order": 1
+    },
+    {
+      "code": "JB",
+      "name_ja": "中央・総武線（各駅停車）",
+      "lines": [
+        "ChuoSobuLocal",
+        "SobuLocal"
+      ],
+      "display": "merged (same service pattern)",
+      "order": 2
+    },
+    {
+      "code": "JC",
+      "name_ja": "中央線（快速）・青梅線・五日市線",
+      "lines": [
+        "ChuoRapid",
+        "Ome",
+        "Itsukaichi",
+        "ChuoKonosu"
+      ],
+      "display": "SPLIT per user: show as 3-4 individual rows",
+      "order": 3,
+      "split_display": true
+    },
+    {
+      "code": "JE",
+      "name_ja": "京葉線",
+      "lines": [
+        "Keiyo"
+      ],
+      "display": "single",
+      "order": 4
+    },
+    {
+      "code": "JH",
+      "name_ja": "横浜線",
+      "lines": [
+        "Kanagawa"
+      ],
+      "display": "single",
+      "order": 5
+    },
+    {
+      "code": "JI",
+      "name_ja": "鶴見線",
+      "lines": [
+        "Tsurumi"
+      ],
+      "display": "single",
+      "order": 6
+    },
+    {
+      "code": "JJ",
+      "name_ja": "常磐線（快速）",
+      "lines": [
+        "Joban"
+      ],
+      "display": "single",
+      "order": 7
+    },
+    {
+      "code": "JK",
+      "name_ja": "京浜東北線・根岸線",
+      "lines": [
+        "KeihinTohoku"
+      ],
+      "display": "single (Negishi already included in data)",
+      "order": 8
+    },
+    {
+      "code": "JL",
+      "name_ja": "常磐線（各駅停車）",
+      "lines": [
+        "JobanLocal"
+      ],
+      "display": "single",
+      "order": 9
+    },
+    {
+      "code": "JM",
+      "name_ja": "武蔵野線",
+      "lines": [
+        "Musashino"
+      ],
+      "display": "single",
+      "order": 10
+    },
+    {
+      "code": "JN",
+      "name_ja": "南武線",
+      "lines": [
+        "Nambu"
+      ],
+      "display": "single",
+      "order": 11
+    },
+    {
+      "code": "JO",
+      "name_ja": "横須賀線・総武快速線",
+      "lines": [
+        "Yokosuka",
+        "SobuRapid",
+        "Sotobo",
+        "Uchibo"
+      ],
+      "display": "MERGED via Chiba through-service",
+      "order": 12
+    },
+    {
+      "code": "JS",
+      "name_ja": "湘南新宿ライン",
+      "lines": [
+        "ShonanShinjuku"
+      ],
+      "display": "single",
+      "order": 13
+    },
+    {
+      "code": "JT",
+      "name_ja": "東海道線",
+      "lines": [
+        "Tokaido",
+        "Tsugaru"
+      ],
+      "display": "Tsugaru DATA_GAP (wrong station data in canonical)",
+      "order": 14,
+      "data_issue": "Tsugaru has same stations as TohokuMain (Tokyo-Morioka), likely canonical error"
+    },
+    {
+      "code": "JU",
+      "name_ja": "宇都宮線・高崎線",
+      "lines": [
+        "Oyama",
+        "Takasaki",
+        "TohokuMain"
+      ],
+      "display": "TohokuMain included (overlaps with KeihinTohoku services)",
+      "order": 15
+    },
+    {
+      "code": "JY",
+      "name_ja": "山手線",
+      "lines": [
+        "Yamanote"
+      ],
+      "display": "single",
+      "order": 16
+    },
+    {
+      "code": "REGIONAL",
+      "name_ja": "その他JR東日本",
+      "lines_count": 50,
+      "display": "collapse all regional lines under one group",
+      "order": 99,
+      "isRegional": true
+    }
+  ],
+  "legacy_code_conflicts": [
+    {
+      "code": "JB",
+      "lines": [
+        "ChuoSobuLocal",
+        "JobanLocal"
+      ],
+      "resolution": "SPLIT: JB=ChuoSobuLocal, JL=JobanLocal"
+    },
+    {
+      "code": "JC",
+      "lines": [
+        "ChuoRapid",
+        "Ome",
+        "Itsukaichi",
+        "ChuoKonosu"
+      ],
+      "resolution": "KEPT as JC but display SPLIT into individual rows"
+    },
+    {
+      "code": "JK",
+      "lines": [
+        "KeihinTohoku",
+        "Kanagawa"
+      ],
+      "resolution": "SPLIT: JK=KeihinTohoku, JH=Kanagawa"
+    },
+    {
+      "code": "JO",
+      "lines": [
+        "Yokosuka",
+        "Sotobo",
+        "Uchibo"
+      ],
+      "resolution": "KEPT merged (through-service at Chiba)"
+    },
+    {
+      "code": "JU",
+      "lines": [
+        "Takasaki",
+        "TohokuMain"
+      ],
+      "resolution": "KEPT merged (both serve Ueno-Takasaki corridor)"
+    },
+    {
+      "code": "M",
+      "lines": [
+        "Marunouchi",
+        "MarunouchiBranch"
+      ],
+      "resolution": "KEPT merged (branch of Marunouchi)"
+    },
+    {
+      "code": "NT",
+      "lines": [
+        "TobuNoda",
+        "Nippori_Toneri"
+      ],
+      "resolution": "SPLIT: NT=Nippori_Toneri, TNOD=Noda"
+    },
+    {
+      "code": "SI",
+      "lines": [
+        "SeibuIkebukuro",
+        "Ikebukuro",
+        "SeibuToshima"
+      ],
+      "resolution": "KEPT merged (same Ikebukuro system)"
+    },
+    {
+      "code": "TN",
+      "lines": [
+        "Noda",
+        "TobuNikko"
+      ],
+      "resolution": "SPLIT: TNOD=Noda, TN=TobuNikko+Nikkoku"
+    },
+    {
+      "code": "TX",
+      "lines": [
+        "HitachiNakaKaimin",
+        "TsukubaExpress"
+      ],
+      "resolution": "SPLIT: TX=TsukubaExpress, separate OS for MIR"
+    }
+  ],
+  "data_gaps": [
+    {
+      "line_id": "Tsugaru",
+      "issue": "lineStationOrder has Tokyo-Morioka (54 stations), should be Aomori-region line",
+      "severity": "P1"
+    },
+    {
+      "line_id": "TohokuMain",
+      "issue": "lineStationOrder identical to Tsugaru (likely copy error in canonical data)",
+      "severity": "P1"
+    },
+    {
+      "line_id": "Oyama",
+      "issue": "color=None in canonical data",
+      "severity": "P3"
+    },
+    {
+      "line_id": "Skytree",
+      "issue": "legacy code=TSK, now using TS in OS layer",
+      "severity": "P3 (display only)"
+    },
+    {
+      "line_id": "Utsunomiya",
+      "issue": "code=None in canonical data",
+      "severity": "P3"
+    }
+  ],
+  "decisions_needed": [
+    {
+      "id": "D1",
+      "question": "JC display: show as 1 merged entry or 4 individual rows?",
+      "recommendation": "4 individual rows (each line gets its own row with JC symbol)",
+      "status": "PENDING"
+    },
+    {
+      "id": "D2",
+      "question": "JT: keep Tsugaru (with wrong data) or move to REGIONAL?",
+      "recommendation": "Move Tsugaru to REGIONAL (data is incorrect anyway)",
+      "status": "PENDING"
+    },
+    {
+      "id": "D3",
+      "question": "JU: keep TohokuMain (overlaps with KeihinTohoku)?",
+      "recommendation": "Keep in JU (user provided this grouping)",
+      "status": "PENDING"
+    },
+    {
+      "id": "D4",
+      "question": "TS: Skytree uses legacy TSK code, new OS uses TS. OK?",
+      "recommendation": "OK - presentation layer override",
+      "status": "PENDING"
+    }
+  ]
+}
