@@ -1,0 +1,103 @@
+{
+  "task": "3.82",
+  "title": "UI Polish & Asset Integrity",
+  "status": "COMPLETE",
+  "commit": "88633ec",
+  "date": "2026-08-30T18:40:04.915469",
+  "changes_made": [
+    {
+      "file": "js/translations.js",
+      "change": "Removed 4 empty detail.fallback_intro entries (ZH/JA/EN/KO)",
+      "reason": "Dead keys — zero references in any JS file (tourism-detail.js, sightseeing.js, data-state.js)",
+      "impact": "Cleaner translation file, no functional change"
+    },
+    {
+      "file": "css/trains.css",
+      "change": "Added @media(max-width:640px) responsive breakpoint",
+      "reason": "realtime.css already had this; trains.css was missing it, causing potential layout issues on mobile",
+      "rules_added": [
+        ".rs-line-card: reduced padding/gap on mobile",
+        ".detail-header: tighter padding/gap",
+        ".info-row: stacked layout on mobile",
+        ".info-value: left-aligned on mobile",
+        ".tp-line-map: reduced padding"
+      ]
+    },
+    {
+      "file": "data/api/translations.js",
+      "change": "Synced mirror (removed fallback_intro)"
+    },
+    {
+      "file": "data/铁道/translations.js",
+      "change": "Synced mirror (removed fallback_intro)"
+    }
+  ],
+  "findings_reopened": {
+    "P2-03_status_unknown": {
+      "original_classification": "P2 — corrupted ZH/KO translations",
+      "actual_finding": "NOT CORRUPTED — PowerShell terminal (cp932) display artifact",
+      "hex_verification": {
+        "en": "556e6b6e6f776e = Unknown",
+        "zh": "e69caae79fa5 = 未知",
+        "ja": "e4b88de6988e = 不明",
+        "ko": "ec958cec889820ec9786ec9d8c = 알 수 없음"
+      },
+      "action": "NO FIX NEEDED — closed as false positive"
+    }
+  },
+  "findings_deferred": {
+    "P3-04_missing_images": {
+      "count": 13,
+      "lines": [
+        "ChuoRapid",
+        "Joban",
+        "SeibuShinjuku",
+        "Keisei",
+        "SeibuIkebukuro",
+        "SeibuChichibu",
+        "SeibuTamako",
+        "Ome",
+        "Itsukaichi",
+        "SeibuYamaguchi",
+        "SeibuNakagawa",
+        "SeibuEn",
+        "SeibuTamagawa"
+      ],
+      "reason": "Image path mapping issue — requires manual audit of file names vs railway_data.json entries",
+      "action": "Deferred to Task 3.83"
+    },
+    "P3-05_no_image_field": {
+      "count": 20,
+      "lines": [
+        "Keio",
+        "TokyuDenEn",
+        "Keikyu",
+        "MinatoMirai",
+        "Orange",
+        "SotetsuMain",
+        "Ikebukuro",
+        "KeioInokashira",
+        "KeioMain",
+        "KeioShin",
+        "Kokubunji",
+        "Nippori_Toneri",
+        "OdakyuOdawara",
+        "Oyama",
+        "Seibu_Shinjuku",
+        "Shinonoi",
+        "Skytree",
+        "TohokuMain",
+        "Tojo",
+        "TsukubaExpress"
+      ],
+      "reason": "Lines without image field fall back to operator group icon — intentional or data gap",
+      "action": "Deferred to Task 3.83"
+    }
+  },
+  "verification": {
+    "ci_guard": "PASS",
+    "canonical_data": "UNCHANGED",
+    "translations_synced": true,
+    "no_functional_change": true
+  }
+}

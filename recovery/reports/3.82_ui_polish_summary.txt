@@ -1,0 +1,19 @@
+Task 3.82 — UI Polish & Asset Integrity
+==========================================
+Status: COMPLETE / FROZEN
+Commit: 88633ec
+
+Changes Made:
+- Removed 4 empty detail.fallback_intro keys from translations (unused in code)
+- Added @media(max-width:640px) responsive breakpoints to trains.css
+- Synced translations.js mirror files
+
+Key Finding (Closed):
+- P2-03 status.unknown: NOT corrupted — PowerShell cp932 display artifact.
+  All 4 language hex values verified correct (en/zh/ja/ko).
+
+Deferred to 3.83:
+- P3-04: 13 lines with MISSING_ASSET images (wrong paths in railway_data.json)
+- P3-05: 20 lines with no image field (intentional or data gap)
+
+CI: PASS | Canonical Data: UNCHANGED | No functional changes
