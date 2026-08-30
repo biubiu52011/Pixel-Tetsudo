@@ -1,0 +1,23 @@
+Task 3.77 - status.no_odpt i18n Completion
+=============================================
+Status: COMPLETE
+Commit: 453778f
+
+CHANGES:
+---------------------------------------------
+Added status.no_odpt translation key to all 4 languages in translations.js
+and mirrored to data/api/ and data/铁道/ copies.
+
+Translations:
+  EN: No real-time information
+  ZH: 无实时信息
+  JA: リアルタイム情報ナシ
+  KO: 실시간 정보 없음
+
+VERIFICATION:
+  Deployed translations.js has no_odpt: PASS
+  CI Guard: PASS
+  Canonical data: UNCHANGED
+  No other keys affected
+
+3.74 segment duration (DATA-BLOCKED): P3, unchanged
