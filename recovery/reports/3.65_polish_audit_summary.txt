@@ -1,0 +1,44 @@
+Task 3.65 - Core Product Polish Audit
+Generated: 2026-08-30
+Commit: 57aeeee
+URL: https://biubiu52011.github.io/Pixel-Tetsudo/
+
+METHODOLOGY
+  Playwright browser automation against live GitHub Pages
+  Viewports: 1366x768, 390x844, 375x667, 768x1024
+  Real user flows: Route search, Realtime filter, Tourism, History, Trains, i18n
+
+L0-L3 TECHNICAL: ALL PASS
+  RailwayDB 509/156/1703 loads correctly on all pages
+  No JS syntax errors, no crashes
+
+L4-L9 PRODUCT
+  L4 Usability:    PARTIAL - Core works, P2 i18n issues
+  L5 Interaction:  PARTIAL - Filter labels broken, picker labels broken, duplicate train names
+  L6 Adaptation:   PASS - Mobile clean, no overflow, adequate touch targets
+  L7 Consistency:  PASS - Unified nav/i18n/CSS (except missing keys)
+  L8 Industry:     PARTIAL - Filter UX below standard, otherwise acceptable
+  L9 Product:      PARTIAL - Core functional, polish gaps remain
+
+ISSUES FOUND
+  P2a [Realtime] Filter bar shows raw i18n keys (filter.all) - 11 missing translation keys
+  P2b [Tourism] Station picker shows raw keys (station_names.Shinjuku) - not resolving to display names
+  P2c [Trains] Line names duplicated in list (each line shown twice)
+  P3a [i18n] Default language is EN, should be JA for Japanese railway app
+  P3b [Route] Per-segment duration shows N/A (needs investigation)
+
+NO ACTION NEEDED (already working or data-blocked)
+  - ODPT real-time data (external dependency - API key required)
+  - Mobile layout (no overflow, adequate touch targets)
+  - Navigation consistency (unified 4-tab nav across all pages)
+  - Suggestion dropdown (fixed in 3.55)
+  - Segments count (fixed in 3.62)
+  - History save/restore (verified in 3.43)
+  - Tourism spot rendering (10 cards render correctly with names/distances)
+
+RECOMMENDED NEXT
+  3.66: Fix P2a - Add missing filter/status i18n keys to translations.js
+  3.67: Fix P2b - Resolve station IDs to names in tourism picker
+  3.68: Fix P2c - Remove duplicate line rendering in trains-page.js
+  3.69: Fix P3a - Change DEFAULT_LANG from en to ja
+  3.70: Investigate P3b - Why per-segment duration is null
