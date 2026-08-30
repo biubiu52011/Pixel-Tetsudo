@@ -35,3 +35,28 @@
 }
 .tp-map-wrap { min-width: 200px; }
 .tp-map-wrap svg { width: 100%; height: auto; display: block; }
+
+
+/* Responsive — mobile */
+@media (max-width: 640px) {
+  .rs-line-card {
+    padding: 8px 10px;
+    gap: var(--space-4);
+  }
+  .detail-header {
+    padding: 4px 0 12px;
+    gap: 8px;
+  }
+  .info-row {
+    padding: 6px 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+  .info-value {
+    text-align: left;
+  }
+  .tp-line-map {
+    padding: 10px;
+  }
+}
