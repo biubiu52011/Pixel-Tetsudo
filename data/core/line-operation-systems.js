@@ -25,18 +25,38 @@ window.LineOperationSystems = {
       nameEn: 'Chuo-Sobu Local Line',
       nameKo: '추오-sobu 로컬 라인',
       color: '#00a0de',
-      lineIds: ["ChuoSobuLocal", "SobuLocal"],
+      lineIds: ["ChuoSobuLocal"],
       order: 2
     },
     {
       code: 'JC',
-      nameJa: '中央線（快速）・青梅線・五日市線',
-      nameZh: '中央线（快速）・青梅线・五日市线',
-      nameEn: 'Chuo Rapid Line / Ome Line / Itsukaichi Line',
-      nameKo: '추오 rapida 라인 / 오메선 / 이쓰카이치선',
+      nameJa: '中央線（快速）',
+      nameZh: '中央线（快速）',
+      nameEn: 'Chuo Rapid Line',
+      nameKo: '추오 rapida 라인',
       color: '#f15a00',
-      lineIds: ["ChuoRapid", "Ome", "Itsukaichi", "ChuoKonosu"],
+      lineIds: ["ChuoRapid", "ChuoKonosu"],
       order: 3
+    },
+    {
+      code: '',
+      nameJa: '青梅線',
+      nameZh: '青梅线',
+      nameEn: 'Ome Line',
+      nameKo: '오메선',
+      color: '#dd6935',
+      lineIds: ["Ome"],
+      order: 4
+    },
+    {
+      code: '',
+      nameJa: '五日市線',
+      nameZh: '五日市线',
+      nameEn: 'Itsukaichi Line',
+      nameKo: '이쓰카이치선',
+      color: '#dd6935',
+      lineIds: ["Itsukaichi"],
+      order: 5
     },
     {
       code: 'JE',
@@ -46,7 +66,7 @@ window.LineOperationSystems = {
       nameKo: '케이요선',
       color: '#c9252f',
       lineIds: ["Keiyo"],
-      order: 4
+      order: 6
     },
     {
       code: 'JH',
@@ -56,7 +76,7 @@ window.LineOperationSystems = {
       nameKo: '요코하마선',
       color: '#00a050',
       lineIds: ["Kanagawa"],
-      order: 5
+      order: 7
     },
     {
       code: 'JI',
@@ -66,7 +86,7 @@ window.LineOperationSystems = {
       nameKo: '츠루미선',
       color: '#fbd05d',
       lineIds: ["Tsurumi"],
-      order: 6
+      order: 8
     },
     {
       code: 'JJ',
@@ -76,7 +96,7 @@ window.LineOperationSystems = {
       nameKo: '_joban rapida 라인',
       color: '#00b261',
       lineIds: ["Joban"],
-      order: 7
+      order: 9
     },
     {
       code: 'JK',
@@ -86,7 +106,7 @@ window.LineOperationSystems = {
       nameKo: 'keihin-tohoku 라인 / negishi선',
       color: '#00b2e5',
       lineIds: ["KeihinTohoku"],
-      order: 8
+      order: 10
     },
     {
       code: 'JL',
@@ -96,7 +116,7 @@ window.LineOperationSystems = {
       nameKo: 'joban local 라인',
       color: '#a8a39d',
       lineIds: ["JobanLocal"],
-      order: 9
+      order: 11
     },
     {
       code: 'JM',
@@ -106,7 +126,7 @@ window.LineOperationSystems = {
       nameKo: '무사시노선',
       color: '#f15a22',
       lineIds: ["Musashino"],
-      order: 10
+      order: 12
     },
     {
       code: 'JN',
@@ -116,7 +136,7 @@ window.LineOperationSystems = {
       nameKo: '난부선',
       color: '#fbd05d',
       lineIds: ["Nambu"],
-      order: 11
+      order: 13
     },
     {
       code: 'JO',
@@ -125,8 +145,8 @@ window.LineOperationSystems = {
       nameEn: 'Yokosuka Line / Sobu Rapid Line',
       nameKo: '요코스카선 / sobu rapida 라인',
       color: '#007ac1',
-      lineIds: ["Yokosuka", "SobuRapid", "Sotobo", "Uchibo"],
-      order: 12
+      lineIds: ["Yokosuka", "SobuRapid"],
+      order: 14
     },
     {
       code: 'JS',
@@ -136,7 +156,7 @@ window.LineOperationSystems = {
       nameKo: 'shonan-shinjuku 라인',
       color: '#e31f26',
       lineIds: ["ShonanShinjuku"],
-      order: 13
+      order: 15
     },
     {
       code: 'JT',
@@ -145,8 +165,8 @@ window.LineOperationSystems = {
       nameEn: 'Tokaido Line',
       nameKo: '도카이도선',
       color: '#f0862b',
-      lineIds: ["Tokaido", "Tsugaru"],
-      order: 14
+      lineIds: ["Tokaido"],
+      order: 16
     },
     {
       code: 'JU',
@@ -155,8 +175,8 @@ window.LineOperationSystems = {
       nameEn: 'Utsunomiya Line / Takasaki Line',
       nameKo: '우치노미야선 / 타카사키선',
       color: '#f18e41',
-      lineIds: ["Oyama", "Takasaki", "TohokuMain"],
-      order: 15
+      lineIds: ["Oyama", "Takasaki"],
+      order: 17
     },
     {
       code: 'JY',
@@ -166,7 +186,7 @@ window.LineOperationSystems = {
       nameKo: '야마노테선',
       color: '#80c342',
       lineIds: ["Yamanote"],
-      order: 16
+      order: 18
     },
     {
       code: 'REGIONAL',
@@ -175,8 +195,8 @@ window.LineOperationSystems = {
       nameEn: 'Other JR-East (Regional)',
       nameKo: '기타 JR동일본',
       color: '#888888',
-      lineIds: ["Agatsuma", "BanetsuEast", "BanetsuWest", "Echigo", "Gono", "Hachinohe", "Hakushin", "Iiyama", "Ishinomaki", "Ito", "Joetsu", "Kamaishi", "Kamiishi", "Karasuyama", "Kashima", "Kesennuma", "Kiryu", "Komii", "Kounan", "Kururi", "Mito", "Miyo", "Narita", "Nikko", "Ofunato", "Oga", "Oito", "Ominato", "OuMain", "RikutoEast", "RikutsuWest", "Ryomo", "Sagami", "Sano", "Sanriku", "Senseki", "SensekiTohoku", "Senzan", "Shinetsu", "Shinonoi", "Suigun", "SuigunBranch", "Tazawako", "Tōnami", "Uetsu", "Yamagata", "Yonezawa"],
-      order: 99,
+      lineIds: ["Agatsuma", "BanetsuEast", "BanetsuWest", "Echigo", "Gono", "Hachinohe", "Hakushin", "Iiyama", "Ishinomaki", "Ito", "Joetsu", "Kamaishi", "Kamiishi", "Karasuyama", "Kashima", "Kesennuma", "Kiryu", "Komii", "Kounan", "Kururi", "Mito", "Miyo", "Narita", "Nikko", "Ofunato", "Oga", "Oito", "Ominato", "OuMain", "RikutoEast", "RikutsuWest", "Ryomo", "Sagami", "Sano", "Sanriku", "Senseki", "SensekiTohoku", "Senzan", "Shinetsu", "Shinonoi", "Suigun", "SuigunBranch", "Tazawako", "Tōnami", "Uetsu", "Yamagata", "Yonezawa", "Sotobo", "Uchibo", "Tsugaru", "TohokuMain", "SobuLocal"],
+      order: 19,
       isRegional: true
     },
   ],
@@ -426,7 +446,7 @@ window.LineOperationSystems = {
       order: 8
     },
     {
-      code: 'SKK',
+      code: 'SK',
       nameJa: '国分寺線',
       nameZh: '国分寺线',
       nameEn: 'Kokubunji Line',
@@ -951,3 +971,4 @@ window.LineOperationSystems = {
     },
   ],
 };
+
