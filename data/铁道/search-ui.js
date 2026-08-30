@@ -215,7 +215,7 @@
       let html = '<div class="search-result">';
       html += '<div class="result-header">';
       html += '<span class="result-duration">' + result.durationMin + ' ' + t('search.min_unit') + '</span>';
-      html += '<span class="result-segments">' + result.segments + ' ' + t('search.segments') + '</span>';
+      if (result.segments > 0) { html += '<span class="result-segments">' + result.segments + ' ' + t('search.segments') + '</span>'; }
       html += '</div>';
       
       // Phase 44-D: Sort mode buttons

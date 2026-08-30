@@ -71,7 +71,7 @@
   function findRoute(fromStation, toStation) {
     if (!fromStation || !toStation) return null;
     if (fromStation.toLowerCase() === toStation.toLowerCase()) {
-      return { path: [fromStation], durationMin: 0, lineInfo: [] };
+      return { path: [fromStation], durationMin: 0, segments: 0, lineInfo: [] };
     }
 
     const graph = buildStationGraph();
