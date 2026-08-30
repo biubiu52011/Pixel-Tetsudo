@@ -1,0 +1,27 @@
+{
+  "task": "3.63 Route Result Info Assessment",
+  "timestamp": "2026-08-30T11:06:34.511214",
+  "commit": "c5b37f8",
+  "assessment": {
+    "line_colors": "ALREADY IMPLEMENTED - border-left with line color from RailwayDB",
+    "direction_arrows": "ALREADY IMPLEMENTED - up/down arrows",
+    "from_to_stations": "ALREADY IMPLEMENTED - with i18n resolved names",
+    "segment_duration": "ALREADY IMPLEMENTED - per-segment ride time",
+    "status_badges": "PARTIAL - shows when ODPT data available, BLOCKED otherwise",
+    "departure_times": "BLOCKED - requires ODPT API or schedule data",
+    "platform_info": "NOT IN CANONICAL DATA - would require data addition",
+    "arrival_times": "BLOCKED - requires ODPT API"
+  },
+  "verdict": "P3a is DATA-BLOCKED, not CODE-BLOCKED. Core display pipeline is complete.",
+  "l0": "PASS",
+  "l1": "PASS",
+  "l2": "PASS",
+  "l3": "PASS",
+  "l4": "PASS",
+  "l5": "PARTIAL",
+  "l6": "PASS",
+  "l7": "PASS",
+  "l8": "PARTIAL",
+  "l9": "PARTIAL",
+  "blocked_by": "ODPT API key / external real-time data"
+}
