@@ -82,7 +82,23 @@
     } else if (line.symbol) {
       iconHtml = '<div class="rs-code-badge" style="background:' + escapeHtml(lineColor) + '">'+ escapeHtml(line.symbol) + '</div>';
     } else {
-      iconHtml = '<div class="rs-code-badge" style="background:' + escapeHtml(lineColor) + '">'+ escapeHtml(line.id || "?") + '</div>';
+      // OS symbol fallback: look up LineOperationSystems
+      var osCode = "";
+      if (window.LineOperationSystems) {
+        var _ops = window.LineOperationSystems;
+        var _opKeys = Object.keys(_ops);
+        for (var _oi = 0; _oi < _opKeys.length; _oi++) {
+          var _sysList = _ops[_opKeys[_oi]];
+          for (var _si = 0; _si < _sysList.length; _si++) {
+            if (_sysList[_si].lineIds && _sysList[_si].lineIds.indexOf(lineId) >= 0) {
+              osCode = _sysList[_si].code || "";
+              break;
+            }
+          }
+          if (osCode) break;
+        }
+      }
+      iconHtml = '<div class="rs-code-badge" style="background:"' + escapeHtml(lineColor) + '>' + escapeHtml(osCode || line.code || line.symbol || line.id || "?") + '</div>';
     }
 
     // Branch indicator (trains mode)
@@ -112,11 +128,25 @@
       }
     }
 
-    // English subtitle (trains mode)
+    // Route interval subtitle (trains mode)
     var subHtml = "";
     if (mode === "trains") {
-      var nameEn = line.nameEn || line.name || lineId;
-      subHtml = '<div class="rs-line-name-en">' + escapeHtml(nameEn) + '</div>';
+      var intervalText = "";
+      try {
+        var stations = (window.RailwayDB && window.RailwayDB.getLineStations) ? window.RailwayDB.getLineStations(lineId) : [];
+        if (stations && stations.length >= 2) {
+          var lang = window.currentLang || 'ja';
+          var resolveName = (window.RailwayDB && window.RailwayDB.resolveStationName) ? window.RailwayDB.resolveStationName : null;
+          if (resolveName) {
+            var first = resolveName(stations[0], lang) || stations[0];
+            var last = resolveName(stations[stations.length - 1], lang) || stations[stations.length - 1];
+            intervalText = first + '\u2194 ' + last;
+          }
+        }
+      } catch(e) {}
+      if (intervalText) {
+        subHtml = '<div class="rs-line-name-en">' + escapeHtml(intervalText) + '</div>';
+      }
     }
 
     return '<div class="rs-line-card" data-line="' + escapeHtml(lineId) + '" style="--line-color:' + escapeHtml(lineColor) + '">'

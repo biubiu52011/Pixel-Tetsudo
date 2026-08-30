@@ -35,13 +35,7 @@
             <button class="lang-btn" data-lang="ko" role="option" aria-selected="false">한국어</button>
             <button class="lang-btn" data-lang="en" role="option" aria-selected="false">English</button>
           </div>
-      <button id="configBtn" class="config-btn" title="API Keys" aria-label="config.title">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="12" cy="12" r="3"/>
-          <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
-        </svg>
-      </button>
-    </div>
+      </div>
 </div>
 </div>
 </header>
@@ -82,32 +76,7 @@
         </div>
       </div>
     </div>
-  </div>
-
-  <div id="keyConfigModal" class="rs-modal">
-    <div class="rs-modal-content rs-key-config">
-      <div class="rs-modal-header">
-        <span class="rs-modal-title" data-i18n="config.title">API Key Settings</span>
-        <button class="rs-modal-close" id="keyConfigClose" aria-label="close">×</button>
-      </div>
-      <div class="rs-modal-body">
-        <p class="rs-key-hint" data-i18n="config.hint">Enter your ODPT API keys to load real-time data.<br>
-          <a href="https://odpt.org" target="_blank" rel="noopener">odpt.org</a> for free registration.</p>
-        <div class="rs-key-field">
-          <label for="centerKey" data-i18n="config.center_key">Center Key</label>
-          <input type="password" id="centerKey" autocomplete="off" spellcheck="false" placeholder="ODPT_CENTER key" data-i18n-placeholder="config.center_key_placeholder">
-        </div>
-        <div class="rs-key-field">
-          <label for="challengeKey" data-i18n="config.challenge_key">Challenge Key</label>
-          <input type="password" id="challengeKey" autocomplete="off" spellcheck="false" placeholder="CHALLENGE key" data-i18n-placeholder="config.challenge_key_placeholder">
-        </div>
-        <div id="keyStatus" class="rs-key-status"></div>
-        <div class="rs-key-actions">
-          <button id="saveKeysBtn" class="rs-key-btn rs-key-save" data-i18n="config.save">Save &amp; Update</button>
-          <button id="clearKeysBtn" class="rs-key-btn rs-key-clear hidden" data-i18n="config.clear">Clear Keys</button>
-        </div>
-      </div>
-    </div>
+  </div>    </div>
   </div>
 </div>
 

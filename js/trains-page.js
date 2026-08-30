@@ -237,7 +237,7 @@
       window.location.hash = lineId;
       if (listEl) listEl.classList.add("hidden");
       if (detailEl) detailEl.classList.remove("hidden");
-      if (titleEl) titleEl.textContent = fusedLine.nameEn || fusedLine.name;
+      if (titleEl) titleEl.textContent = fusedLine.nameJa || fusedLine.nameEn || fusedLine.name;
       if (mapEl) renderTrainMap(mapEl, fusedLine, lineId);
     } catch(e) {}
   }
