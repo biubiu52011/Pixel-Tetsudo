@@ -1,0 +1,14 @@
+Task 3.74 - Route Segment Duration Audit
+==================================================
+Status: FROZEN (DATA-BLOCKED, no code change)
+Priority: P3
+
+ROOT CAUSE
+--------------------
+All 156 lines in railway_data.json have stub durations [2,2,2,...].
+Set by fallback in db-loader.js:84.
+
+No line has real travel-time data.
+
+VERDICT: DATA-BLOCKED. No code change. Mark FROZEN.
+Next: Task 3.75 - ODPT Infrastructure (independent P0).
