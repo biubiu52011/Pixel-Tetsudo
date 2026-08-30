@@ -70,7 +70,7 @@
 
   // Line data helpers
   function getAllLines() {
-    if (window.RailwayDB && window.RailwayDB.isLoaded() && window.RailwayDB.getAllLines) {
+    if (window.RailwayDB && window.DataLoader && window.DataLoader.isLoaded() && window.RailwayDB.getAllLines) {
       return Object.values(window.RailwayDB.getAllLines());
     }
     var lines = [];
@@ -82,7 +82,7 @@
   }
 
   function getLine(lineId) {
-    if (window.RailwayDB && window.RailwayDB.isLoaded() && window.RailwayDB.getLine) {
+    if (window.RailwayDB && window.DataLoader && window.DataLoader.isLoaded() && window.RailwayDB.getLine) {
       return window.RailwayDB.getLine(lineId) || null;
     }
     return window.UNIFIED_LINES ? window.UNIFIED_LINES[lineId] : null;
@@ -140,3 +140,4 @@ window.DataLayer = {
 
   console.log('[DataLayer] Initialized');
 })();
+
