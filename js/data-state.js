@@ -213,7 +213,10 @@
   function getPositions(lineId) { return _positions[lineId] || []; }
 
   function subscribe(listener) {
-    if (_listeners.indexOf(listener) === -1) _listeners.push(listener);
+    if (_listeners.indexOf(listener) === -1) {
+      _listeners.push(listener);
+      try { listener(_lines, _delayData, _positions); } catch(e) {}
+    }
   }
 
   function unsubscribe(listener) {
