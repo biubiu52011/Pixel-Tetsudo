@@ -312,6 +312,7 @@
         });
       }
       loadCachedPositions(function() {
+        console.log('[trains] callback fired, listEl=' + (listEl ? 'exists' : 'NULL'));
         renderList(listEl);
         // Restore hash-based navigation
         var hash = window.location.hash;
