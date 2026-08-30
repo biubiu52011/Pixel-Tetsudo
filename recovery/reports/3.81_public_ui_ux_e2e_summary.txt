@@ -1,0 +1,47 @@
+Task 3.81 — Public UI/UX E2E Audit
+====================================
+Status: COMPLETE
+Commit: 7dfec00
+
+L0-L9 Results:
+  L0 Resources:   PASS (all 200)
+  L1 Syntax:      PASS (CI Guard PASS, braces balanced)
+  L2 Public Load: PASS (all pages/CSS/JS accessible)
+  L3 Init:        PASS (DataLoader, RailwayDB, LPS all initialize)
+  L4 User Tasks:  PASS (search, realtime, trains, tourism, history, i18n)
+  L5-L9:          See findings below
+
+Findings:
+  P2 (1):
+    - P2-03: status.unknown translation corrupted in ZH and KO (mojibake)
+
+  P3 (4):
+    - P3-03: detail.fallback_intro empty in all 4 languages
+    - P3-04: 13 lines have MISSING_ASSET images
+    - P3-05: 20 lines have no image field
+    - P3-06: Trains CSS has no responsive breakpoints
+
+  Acceptable (5): tourism.html 404, no static filter buttons, index.html redirect,
+                 LPS partial coverage, segment.duration DATA-BLOCKED
+
+  Clean: No raw i18n keys, no dev comments, no tech ID leaks, no dead buttons,
+         default language JA, OS symbol fallback working, route interval working
+
+Image Audit:
+  123/156 images OK
+  13 MISSING_ASSET (path references non-existent files)
+  20 NO_IMAGE_FIELD (no image key in data)
+  0 HTTP_FAIL (all existing images return 200)
+
+i18n Audit:
+  542 total keys
+  4 empty (detail.fallback_intro x4)
+  2 corrupted (status.unknown ZH/KO)
+  0 raw keys in HTML
+
+Deployed Fixes Verified:
+  P2-01 Route interval subtitle: YES
+  P3-01 OS symbol badge fallback: YES
+  P3-02 Config button removed: YES
+  P3-06 Detail title prefers nameJa: YES
+  P3-77 no_odpt i18n key: YES
