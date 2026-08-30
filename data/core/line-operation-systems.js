@@ -46,7 +46,8 @@ window.LineOperationSystems = {
       nameKo: '오메선',
       color: '#dd6935',
       lineIds: ["Ome"],
-      order: 4
+      order: 4,
+      isStandalone: true
     },
     {
       code: '',
@@ -56,7 +57,8 @@ window.LineOperationSystems = {
       nameKo: '이쓰카이치선',
       color: '#dd6935',
       lineIds: ["Itsukaichi"],
-      order: 5
+      order: 5,
+      isStandalone: true
     },
     {
       code: 'JE',

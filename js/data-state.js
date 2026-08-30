@@ -159,8 +159,17 @@
       var line = linesObj[lid];
       if (!line) continue;
       // Skip branch lines - not shown as separate entries
-      if (line.branchOf) continue;
-      var op = tOp(line.operator || "Unknown");
+      if (line.branchOf) {
+        var _skip = true;
+        if (window.LineOperationSystems) {
+          Object.keys(window.LineOperationSystems).some(function(_op) {
+            return window.LineOperationSystems[_op].some(function(_sys) {
+              if (_sys.isStandalone && _sys.lineIds && _sys.lineIds.indexOf(lid) >= 0) { _skip = false; return true; }
+            });
+          });
+        }
+        if (_skip) continue;
+      }
       if (!groups[op]) {
         groups[op] = [];
         opOrder.push(op);
@@ -276,3 +285,5 @@
     window.DataState.init();
   }
 })();
+
+
