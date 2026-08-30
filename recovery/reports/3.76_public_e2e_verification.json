@@ -1,0 +1,69 @@
+{
+  "task": "3.76",
+  "title": "Public E2E Verification after ODPT CSP Unblock + OS Wiring Fix",
+  "status": "COMPLETE",
+  "verdict": "CRITICAL P0 BUG FOUND AND FIXED: line-operation-systems.js was never loaded by any HTML page",
+  "priority": "P0",
+  "discovered_issues": [
+    {
+      "id": "P0-critical",
+      "description": "data/core/line-operation-systems.js was created in 3.68 but never added to any HTML script tag. window.LineOperationSystems was undefined, causing LPS.getDisplayOrder() to silently fall back to alphabetical ordering.",
+      "impact": "OS ordering (3.69-3.71) was NOT working on public pages despite all CI checks passing",
+      "fix": "Added <script src='../data/core/line-operation-systems.js'> before line-presentation-service.js in realtime.html and trains.html",
+      "commit": "1b7d7e6"
+    }
+  ],
+  "verification_results": {
+    "L0_deployed_csp": {
+      "status": "PASS",
+      "details": "CSP includes api-challenge.odpt.org and api.odpt.org in both realtime.html and trains.html"
+    },
+    "L1_asset_loading": {
+      "status": "PASS",
+      "details": "All 10 JS assets + style.css return HTTP 200"
+    },
+    "L2_odpt_api": {
+      "status": "PASS",
+      "details": "JR-East: 392 items, TokyoMetro: 1000 items, Toei: 1000 items, Keikyu: 60 items, Seibu: 0 items (empty timetable - expected)"
+    },
+    "L3_data_integrity": {
+      "status": "PASS",
+      "details": "Stations=509, Lines=156, name_map=1703. DataState.STATUS_META includes no_odpt. DataFusion has LINE_TO_OPERATOR, fuseAll, 30s interval."
+    },
+    "L4_user_tasks": {
+      "status": "PASS",
+      "details": "Home: from/to inputs + search button + route-search.js present. Realtime: all scripts loaded in correct order. Trains: OS wiring now fixed. History: history.js + db-loader.js loaded. Tourism: sightseeing.js + tourism-proximity.js loaded."
+    },
+    "L5_interaction": {
+      "status": "PASS",
+      "details": "Filter buttons, modal, language switcher all structurally present. DataFusion subscribes to updates."
+    },
+    "L6_mobile": {
+      "status": "PASS",
+      "details": "All pages have viewport meta tag. No horizontal overflow detected in structure."
+    },
+    "L7_consistency": {
+      "status": "PASS",
+      "details": "All 5 pages use same db-loader.js, translations.js, common.js, lang-init.js chain."
+    },
+    "L8_industry": {
+      "status": "PASS",
+      "details": "OS ordering now active. JR-East lines ordered per 3.69 rules. Branch lines (Ome, Itsukaichi) shown as standalone."
+    },
+    "L9_product": {
+      "status": "PASS_WITH_NOTES",
+      "details": "Core product functional. One P2 note: status.no_odpt translation key missing from all 4 languages (shows raw 'no_odpt' label). Data segment durations still stub-based (P3 DATA-BLOCKED per 3.74)."
+    }
+  },
+  "i18n_findings": {
+    "missing_keys": ["status.no_odpt"],
+    "note": "P2 issue - no_odpt label shows raw key. Not blocking."
+  },
+  "ci_guard": "PASS",
+  "canonical_data": "UNCHANGED",
+  "files_changed": ["pages/realtime.html", "pages/trains.html"],
+  "commits": {
+    "3.75_csp_fix": "7341e43",
+    "3.76_os_wiring_fix": "1b7d7e6"
+  }
+}
