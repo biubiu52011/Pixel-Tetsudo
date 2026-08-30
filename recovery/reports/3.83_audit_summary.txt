@@ -1,0 +1,122 @@
+Total: 0
+VALID: 123
+MISSING_ASSET: 13
+NO_IMAGE: 20
+HTTP_FAIL: 0
+
+=== MISSING_ASSET ===
+  ChuoRapid (中央線快速) code=JC op=JR-East
+    path: ../images/鉄道/JR東日本/中央快速線 青梅線 五日市線.png
+    expected: 中央快速線 青梅線 五日市線.png
+
+  Joban (常磐快速線) code=JJ op=JR-East
+    path: ../images/鉄道/JR東日本/常盤線快速.png
+    expected: 常盤線快速.png
+
+  SeibuShinjuku (西福新宿線) code=SN op=Seibu
+    path: ../images/鉄道/西武鉄道/新宿線 ハイジマ線.png
+    expected: 新宿線 ハイジマ線.png
+
+  Keisei (京成線) code=KS op=Keisei
+    path: ../images/鉄道/京成電鉄/東条本線 おごせ線.png
+    expected: 東条本線 おごせ線.png
+
+  SeibuIkebukuro (西福池袋線) code=SI op=Seibu
+    path: ../images/鉄道/西武鉄道/池袋線 西武秩父線 西武有楽町線 豊島線 佐山線.png
+    expected: 池袋線 西武秩父線 西武有楽町線 豊島線 佐山線.png
+
+  SeibuChichibu (西武秩父線) code=SC op=Seibu
+    path: ../images/鉄道/西武鉄道/池袋線 西武秩父線 西武有楽町線 豊島線 佐山線.png
+    expected: 池袋線 西武秩父線 西武有楽町線 豊島線 佐山線.png
+
+  SeibuTamako (西武多摩湖線) code=ST op=Seibu
+    path: ../images/鉄道/西武鉄道/玉子線.png
+    expected: 玉子線.png
+
+  Ome (青梅線) code=JC op=JR-East
+    path: ../images/鉄道/JR東日本/中央快速線 青梅線 五日市線.png
+    expected: 中央快速線 青梅線 五日市線.png
+
+  Itsukaichi (五日市線) code=JC op=JR-East
+    path: ../images/鉄道/JR東日本/中央快速線 青梅線 五日市線.png
+    expected: 中央快速線 青梅線 五日市線.png
+
+  SeibuYamaguchi (西武山口線) code=SY op=Seibu
+    path: ../images/鉄道/西武鉄道/池袋線 西武秩父線 西武有楽町線 豊島線 佐山線.png
+    expected: 池袋線 西武秩父線 西武有楽町線 豊島線 佐山線.png
+
+  SeibuNakagawa (西武中和線) code=SA op=Seibu
+    path: ../images/鉄道/西武鉄道/玉子線.png
+    expected: 玉子線.png
+
+  SeibuEn (西武園線) code=SE op=Seibu
+    path: ../images/鉄道/西武鉄道/西武園線.png
+    expected: 西武園線.png
+    similar: ['西武西武園線.png']
+
+  SeibuTamagawa () code=SM op=Seibu
+    path: ../images/鉄道/西武鉄道/玉川線.png
+    expected: 玉川線.png
+
+=== NO_IMAGE ===
+  Keio (京王線) code=KO op=Keio
+
+  TokyuDenEn (東急田園都市線) code=TD op=Tokyu
+
+  Keikyu (京急本線) code=KK op=Keikyu
+
+  MinatoMirai (みなとみらい線) code=MM op=MinatoMirai
+
+  Orange (オレンジライナー) code=O op=YokohamaMunicipal
+
+  SotetsuMain (相鉄本線) code=SO op=Sotetsu
+
+  Ikebukuro (西武池袋線) code=SI op=Seibu
+
+  KeioInokashira (京王井の頭線) code=KIN op=Keio
+
+  KeioMain (京王線) code=KMO op=Keio
+
+  KeioShin (京王新線) code=KSH op=Keio
+
+  Kokubunji (西武国分寺線) code=SKK op=Seibu
+
+  Nippori_Toneri (日暮里・舎人ライナー) code=NT op=Toei
+
+  OdakyuOdawara (小田急小田原線) code=OD op=Odakyu
+
+  Oyama (小山線) code=None op=JR-East
+
+  Seibu_Shinjuku (西武新宿線) code=SSH op=Seibu
+
+  Shinonoi (篠ノ井線) code=None op=JR-East
+
+  Skytree (東武スカイツリーライン) code=TSK op=Tobu
+
+  TohokuMain (東北本線) code=JU op=JR-East
+
+  Tojo (東武東上線) code=TTJ op=Tobu
+
+  TsukubaExpress (つくばエクスプレス) code=TX op=TsukubaExpress
+
+=== VALID (first 20) ===
+  KeihinTohoku (京浜東北線) code=JK -> 京浜東北線.png
+  Yokosuka (横須賀・総武快速線) code=JO -> 総武線快速横須賀線.png
+  Saikyo (埼京線) code=JA -> 埼京線.png
+  SobuLocal (総武線各駅停車) code=JL -> 中央・総武線各駅停車.png
+  Keiyo (京葉線) code=JE -> 京葉線.png
+  Musashino (武蔵野線) code=JM -> 武蔵野線.png
+  ShonanShinjuku (湘南新宿ライン) code=JS -> 湘南新宿ライン.png
+  Takasaki (高崎線) code=JU -> 高崎線.png
+  Tsurumi (鶴見線) code=JV -> 鶴見線.png
+  Nambu (南武線) code=JN -> 南武線.png
+  Tokaido (東海道線) code=JD -> 東海道線.png
+  JobanLocal (常盤緩行線) code=JB -> 常盤緩行線.png
+  Ginza (東京メトロ銀座線) code=G -> 銀座線.png
+  Marunouchi (東京メトロ丸ノ内線) code=M -> 丸ノ内線.png
+  Hibiya (東京メトロ日比谷線) code=H -> 日比谷線.png
+  Yurakucho (東京メトロ有楽町線) code=Y -> 有楽町線.png
+  Tozai (東京メトロ東西線) code=T -> 東西線.png
+  Asakusa (都営浅草線) code=A -> 都営浅草線.png
+  Do-Arakawa (どぁーあらかわ) code=DA -> 都電荒川線.png
+  Mita (都営三田線) code=I -> 都営三田線.png
