@@ -323,6 +323,18 @@
         }
         if (backBtn) backBtn.textContent = "\u2190 " + t("line_map.back");
       });
+      // Subscribe to DataState changes to handle late data loading
+      if (window.DataState) {
+        window.DataState.subscribe(function(lines, delayData, positions) {
+          if (lines && Object.keys(lines).length > 0 && listEl) {
+            var currentLen = listEl.innerHTML.length;
+            if (currentLen === 0) {
+              console.log("[trains] DataState subscription: re-rendering with " + Object.keys(lines).length + " lines");
+              renderList(listEl);
+            }
+          }
+        });
+      }
     } catch(e) {}
   }
 
