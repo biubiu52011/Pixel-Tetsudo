@@ -7,7 +7,7 @@
 
     var STORAGE_KEY = "i18n_lang";
     var SUPPORTED = ["ja", "zh", "ko", "en"];
-    var DEFAULT_LANG = "en";
+    var DEFAULT_LANG = "ja";
 
     // Public API for other scripts
     var listeners = [];
@@ -234,3 +234,4 @@
         init();
     }
 })();
+
