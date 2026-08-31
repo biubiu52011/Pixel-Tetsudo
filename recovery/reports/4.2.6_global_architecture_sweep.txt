@@ -1,0 +1,318 @@
+# 4.2.6 Global Product Architecture Sweep (Read-Only)
+# Date: 2026-08-31
+# Base: da5f387 / 5dce9f9
+# RULE: NO CODE MODIFICATIONS
+
+============================================================
+A. MODULE INVENTORY & JS LOADING MAP
+============================================================
+
+Page          | Script Count | Key Modules
+--------------|-------------|------------------------------------------
+home.html     | 11 JS files | RouteSearch, SearchUI, StationResolver,
+              |             | TourismProximity, Sightseeing, TabSwitch,
+              |             | History, StationResolver
+realtime.html | 11 JS files | LinePresentationService, DataState,
+              |             | ODPTClient (API), DataFusion, RealtimeView
+trains.html   | 12 JS files | DataLayer, ODPTClient, LocalRailwayData,
+              |             | DataFusion, LinePresentationService,
+              |             | DataState, TrainsPage
+history.html  |  6 JS files | History only (lightweight)
+
+============================================================
+B. GLOBAL MODULE ASSIGNMENTS (window.* objects)
+============================================================
+
+Module                    | Owner File       | Purpose
+--------------------------|------------------|--------------------------------
+RailwayDB                 | db-loader.js     | Canonical data (read-only)
+UNIFIED_LINES             | db-loader.js     | Lines data alias
+TransitConstants          | common.js        | OP_ORDER, OP_NAMES
+tOp                       | lang-init.js     | Operator display resolver
+t (i18n)                  | translations.js  | Translation function
+currentLang               | lang-init.js     | Active language state
+RouteSearch               | route-search.js  | BFS route finder
+SearchUI                  | search-ui.js     | Home search form + results
+StationResolver           | station-resolver.js | Station name resolution
+DataLayer                 | data-layer.js    | Unified line access layer
+DataFusion                | data-fusion.js   | ODPT API + local data merger
+DATA_FUSION               | data-fusion.js   | Runtime fused data object
+LinePresentationService   | line-presentation-service.js | Line display ordering
+DataState                 | data-state.js    | Line rendering + delay data
+SearchHistory             | history.js       | Search history persistence
+TrainsPage                | trains-page.js   | Trains list + detail view
+TrainsDetail              | trains-detail.js | SVG map renderer
+TourismProximity          | tourism-proximity.js | Near-station spots
+SightseeingModule         | sightseeing.js   | Tourism spot detail
+TourismDetailPage         | tourism-detail.js | Tourism article rendering
+ValidateApiKey            | security.js      | [ORPHAN - not loaded]
+
+============================================================
+C. ORPHAN / DEAD CODE DETECTION
+============================================================
+
+FILE                    | STATUS    | EVIDENCE
+------------------------|-----------|------------------------------------------
+js/trains-render.js     | ORPHAN    | Not loaded on ANY HTML page. No JS file
+                        |           | imports or calls it. 3685 chars dead.
+js/security.js          | ORPHAN    | Not loaded on ANY HTML page. No JS file
+                        |           | references validateApiKey, sanitizeUrl, etc.
+                        |           | 2413 chars dead.
+js/local-railway-data.js| NARROW    | Only loaded on trains.html. Only used by
+                        | SCOPE     | data-fusion.js localData init. Not orphan
+                        |           | but extremely narrow scope (trains only).
+
+VERDICT: 2 confirmed orphans, 1 narrow-scope file.
+
+============================================================
+D. DUAL TRUTH ANALYSIS
+============================================================
+
+### D1: Line Data Access (3 sources)
+  Source A: window.RailwayDB.getAllLines()  -- canonical, preferred
+  Source B: window.DataLayer.getAllLines()  -- wrapper around A with fallback
+  Source C: window.UNIFIED_LINES            -- raw data, direct access
+
+  Consumers using A directly:  route-search.js, station-resolver.js, search-ui.js
+  Consumers using B:          data-fusion.js, data-layer.js callers, realtime-view.js
+  Consumers using C directly: data-state.js, trains-page.js, trains-render.js
+
+  VERDICT: Triple access path. RailwayDB is canonical but NOT universally used.
+  This creates maintenance risk: if RailwayDB schema changes, only A-path consumers
+  break. B and C paths may silently continue with stale assumptions.
+
+### D2: Delay/Status Data (2 sources)
+  Source A: DataFusion.computeDelayInfo() -- computes from ODPT API + local status
+  Source B: DataState._delayData          -- cached copy, updated via subscription
+
+  Flow: DataFusion.subscribe -> DataState.setDelayData -> DataState.getDelayInfo
+  VERDICT: Clean subscription chain. ONE source of truth (DataFusion), one cache
+  (DataState). No dual truth here.
+
+### D3: Realtime Positions (2 sources)
+  Source A: DataFusion.getRealtimePositions(lineId) -- from ODPT API
+  Source B: trains-page.js getRealtimePositions()     -- calls A with fallback to
+                                                   DataLayer.getCachedPositions
+
+  VERDICT: Minor dual path. trains-page.js has its own wrapper that adds a cache
+  layer on top of DataFusion. Low risk but adds indirection.
+
+### D4: Display Name Resolution (CHECKED CLEAN)
+  All 6 consumer sites use RailwayDB.resolveLineName() as primary.
+  Fallback chains exist but all degrade to line.id (not raw fields).
+  VERDICT: Clean. Single resolver, properly guarded fallbacks.
+
+### D5: Operator Display (CHECKED CLEAN after 4.2.3-FIX)
+  All 3 consumer sites use tOp(op) for display.
+  84 translation keys added (21 ops x 4 langs).
+  VERDICT: Clean.
+
+============================================================
+E. TIGHT COUPLING ANALYSIS
+============================================================
+
+### E1: history.js <-> SearchUI (TIGHT)
+  history.js directly accesses:
+    - window.SearchUI.performSearch (overrides it!)
+    - window.SearchUI.fromInput (DOM element)
+    - window.SearchUI.toInput (DOM element)
+    - window.SearchUI.refreshUI()
+
+  This is FUNCTIONAL COUPLING, not just dependency. History injects itself
+  into SearchUI by wrapping performSearch. If SearchUI refactors its
+  internal structure, history.js breaks.
+
+  RISK: MEDIUM-HIGH. This is an intentional architecture pattern (hook
+  injection) but it creates a bidirectional dependency that is fragile.
+
+### E2: trains-page.js <-> DataState (MEDIUM)
+  trains-page.js calls window.DataState.renderList() for line list rendering.
+  DataState renders using its own card template.
+  VERDICT: Acceptable. DataState is the designated renderer.
+
+### E3: All pages <-> RailwayDB (HEALTHY)
+  Every page uses RailwayDB.resolveLineName() and resolveStationName().
+  VERDICT: Clean single-source pattern.
+
+============================================================
+F. MODULE RESPONSIBILITY MAPPING
+============================================================
+
+Module             | Intended Role           | Actual Role             | Gap
+-------------------|------------------------|------------------------|-----
+RailwayDB          | Canonical data store   | Canonical data store   | NONE
+DataLayer          | Unified data access    | Data access with 3     | MEDIUM
+                   | layer                  | fallback paths         |
+DataFusion         | Realtime data merger   | Realtime data merger   | NONE
+DataState          | Line rendering engine  | Rendering + delay cache| NONE
+SearchUI           | Search form + results  | Search form + results  | NONE
+RouteSearch        | BFS route engine       | BFS route engine       | NONE
+StationResolver    | Station name resolve   | Station name resolve   | NONE
+TrainsPage         | Train list + detail    | Train list + SVG map   | NONE
+History            | History persistence    | History + SearchUI hook| LOW
+TourismProximity   | Near-station spots     | Near-station spots     | NONE
+SightseeingModule  | Spot detail pages      | Spot detail pages      | NONE
+LinePresentationSvc| Line display ordering  | Line display ordering  | NONE
+
+============================================================
+G. ARCHITECTURE CONFLICT MAP
+============================================================
+
+EXPECTED (ideal):
+  Canonical Data -> RailwayDB -> All Pages (read-only)
+       |
+       v
+  DataLayer (unified accessor)
+       |
+       v
+  DataFusion (realtime merger) -> DataState (rendering engine)
+       |
+       +--> TrainsPage (list + detail)
+       +--> RealtimeView (filter + list + modal)
+       +--> SearchUI (route results)
+       +--> History (re-render old searches)
+
+ACTUAL (observed):
+  Canonical Data -> db-loader.js -> UNIFIED_LINES (raw global) + RailwayDB
+       |
+       +--> DataLayer (wrapper with fallback to UNIFIED_LINES)
+       |       |
+       |       +--> DataFusion (reads DataLayer, ALSO reads UNIFIED_LINES directly)
+       |       |       |
+       |       |       +--> DATA_FUSION (runtime object, accessed directly)
+       |       |
+       |       +--> DataState (renders using DataFusion.subscribe)
+       |       |       |
+       |       |       +--> trains-page.js (calls DataState.renderList)
+       |       |       +--> realtime-view.js (reads DataFusion directly)
+       |       |
+       |       +--> route-search.js (reads RailwayDB directly)
+       |       +--> search-ui.js (reads RailwayDB directly)
+       |
+       +--> StationResolver (reads RailwayDB directly)
+       +--> History (reads RailwayDB directly, hooks SearchUI)
+       +--> TrainsDetail (reads DataLayer directly)
+       +--> trains-render.js (ORPHAN - never loaded)
+
+CONFLICTS:
+  1. UNIFIED_LINES exists as BOTH a raw global AND goes through DataLayer
+  2. DATA_FUSION (runtime data) and DataFusion (module) are different things
+  3. Some consumers read RailwayDB directly, some go through DataLayer
+  4. Trains page loads both DataFusion AND DataState; Realtime page loads both too
+  5. Security module is completely disconnected
+
+============================================================
+H. CSS ARCHITECTURE SWEEP
+============================================================
+
+File                    | Scope              | Lines | Issue
+------------------------|--------------------|-------|------
+style.css               | Global + 6 modules | ~800  | LARGE - dumping ground
+tourism-styles.css      | Tourism only       | ~600  | Self-contained, OK
+lang-bar.css            | Language switcher  | ~150  | Self-contained, OK
+realtime.css            | Realtime           | ~100  | ALMOST EMPTY - most RT styles in style.css
+trains.css              | Trains detail      | ~60   | Thin but focused, OK
+
+ISSUE: realtime.css exists but contains mostly duplicate/empty definitions.
+All realtime-specific styles ended up in style.css instead.
+
+============================================================
+I. PAGES VS MODULES MISMATCH
+============================================================
+
+home.html loads: route-search.js, search-ui.js, station-resolver.js,
+                 tourism-proximity.js, sightseeing.js, history.js
+  -> But history.js is ONLY needed on history.html
+  -> station-resolver.js is only used by route-search.js internally
+
+realtime.html loads: data-state.js, realtime-view.js, data-fusion.js,
+                     line-presentation-service.js
+  -> Clean. Only what it needs.
+
+trains.html loads: data-layer.js, data-fusion.js, local-railway-data.js,
+                   data-state.js, trains-page.js, trains-detail.js,
+                   line-presentation-service.js
+  -> Heavy. Loads 12 JS files. Could be optimized.
+
+history.html loads: history.js only (plus boilerplate)
+  -> Cleanest page.
+
+============================================================
+J. AI MAINTAINABILITY RISK ASSESSMENT
+============================================================
+
+RISK-01: Orphan trains-render.js (3685 chars)
+  Impact: New AI might re-discover it and think it is the trains renderer
+  Severity: HIGH
+
+RISK-02: Orphan security.js (2413 chars)
+  Impact: New AI might think it is loaded and try to use validateApiKey
+  Severity: MEDIUM
+
+RISK-03: Three line data access paths (RailwayDB / DataLayer / UNIFIED_LINES)
+  Impact: New AI might add a fourth path, creating future fragmentation
+  Severity: HIGH
+
+RISK-04: history.js wraps SearchUI.performSearch (functional coupling)
+  Impact: If SearchUI refactors, history breaks silently
+  Severity: MEDIUM
+
+RISK-05: DATA_FUSION vs DataFusion naming
+  Impact: New AI might confuse the data object with the module
+  Severity: LOW
+
+RISK-06: realtime.css is empty but exists
+  Impact: Developer expects realtime styles there, searches in vain
+  Severity: LOW
+
+RISK-07: style.css is 800+ lines mixing 6 feature areas
+  Impact: Hard to find where a style lives, easy to create duplicates
+  Severity: MEDIUM
+
+============================================================
+K. DECISION MATRIX FOR 4.2+
+============================================================
+
+Item                              | Decision   | Priority | Reason
+----------------------------------|------------|----------|---------------------------
+trains-render.js (orphan)         | REMOVE     | P1       | Dead code, confuses AI
+security.js (orphan)              | REMOVE     | P1       | Dead code, confuses AI
+Three line access paths           | REFACTOR   | P2       | Unify on RailwayDB
+history.js <-> SearchUI coupling  | document   | P3       | Intentional but fragile
+DATA_FUSION vs DataFusion         | document   | P3       | Naming confusion
+realtime.css (empty)              | REMOVE     | P3       | Misleading file
+style.css consolidation           | DEFER      | P4       | Large change, do in Design System phase
+tourism-styles.css separation     | KEEP       | -        | Good isolation
+Page JS loading optimization      | DEFER      | P4       | Not blocking
+
+============================================================
+L. FINAL PRODUCT JUDGMENT
+============================================================
+
+### 1. Does each module have a clear single responsibility?
+MOSTLY YES, with these exceptions:
+  - DataLayer tries to be both a wrapper AND a fallback provider
+  - History module has dual role (history + SearchUI hook)
+  - Trains page loads 12 JS files when 6 would suffice
+
+### 2. Is there a clear data flow from canonical data to UI?
+NO. Three parallel access paths exist:
+  RailwayDB -> some pages
+  DataLayer -> some pages
+  UNIFIED_LINES -> some pages
+  This creates maintenance debt.
+
+### 3. Are there orphan implementations that could trap a new AI?
+YES. Two confirmed orphans (trains-render.js, security.js) and one
+narrow-scope file (local-railway-data.js) that could be misunderstood.
+
+### 4. Is the product architecturally coherent?
+PARTIALLY. The core (RailwayDB -> resolveLineName -> all pages) is clean.
+But the periphery (fallback chains, orphan files, tight coupling) creates
+risk for future development.
+
+### 5. Recommended immediate actions before 4.2.7
+  1. Remove trains-render.js and security.js (orphan cleanup)
+  2. Document the three access paths and choose a canonical one
+  3. Consider extracting history.js SearchUI hook into a cleaner event system
+  4. Decide: keep or remove realtime.css
