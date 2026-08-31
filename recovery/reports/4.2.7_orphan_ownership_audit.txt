@@ -1,0 +1,99 @@
+# 4.2.7 Orphan Ownership Audit Report
+# Date: 2026-08-31
+# Scope: js/trains-render.js, js/security.js
+# Method: Read-only reverse dependency + git history audit
+
+============================================================
+FILE 1: js/trains-render.js
+============================================================
+
+## Current Status
+- Size: 3,685 characters
+- Loaded on ANY HTML page: NO
+- Referenced by ANY JS file: NO
+- Referenced by ANY CSS: NO
+- Referenced by build scripts: NO
+- Referenced by CI/CD: NO
+- Dynamic/script injection: NONE
+
+## Git History
+Commits (newest first):
+  ad77ffb  Task 3.43: Fix route-search graph crash + remove BOM
+  900c2dd  Task 3.4.4: Trains Render migration - RailwayDB-first
+  c52422f  Phase 45-C-R: UI integrity recovery
+
+At commit 900c2dd, trains.html LOADED trains-render.js.
+At current HEAD, trains.html loads trains-page.js INSTEAD.
+The migration replaced trains-render.js with trains-page.js + DataState.renderList().
+
+## What trains-render.js Did (Historical)
+1. Called DataState.renderList() to render line grid
+2. Subscribed to DataFusion for realtime updates
+3. Set up click handler on .rs-line-card -> TrainsDetail.show()
+4. Had a poll-based fallback for data loading
+
+## What Replaced It
+- trains-page.js:328 calls DataState.subscribe() (same as old trains-render)
+- trains-page.js:294 calls DataState.renderList() (same render function)
+- trains-page.js handles click events internally
+- trains-page.js handles language changes via onLanguageChange
+
+## Verdict
+CONFIRMED ORPHAN. The file was part of an old rendering system that was
+fully migrated to trains-page.js + DataState. No remaining product
+responsibility. Safe to delete.
+
+Risk if kept: A future AI scanning the codebase might find this file,
+see it calls DataState.renderList(), and think it is the trains renderer,
+then add new features to it instead of trains-page.js.
+
+============================================================
+FILE 2: js/security.js
+============================================================
+
+## Current Status
+- Size: 2,413 characters
+- Loaded on ANY HTML page: NO
+- Referenced by ANY JS file: NO
+- Referenced by ANY CSS: NO
+- Referenced by build scripts: NO
+- Referenced by CI/CD: NO
+- Dynamic/script injection: NONE
+
+## Git History
+Commits (newest first):
+  9c09378  clean: remove key-manager pages, API config tools, dev artifacts
+  1e75bd0  security: harden CSP, add input validation, encrypt key storage
+
+At commit 1e75bd0, security.js was added alongside key management UI.
+At commit 9c09378, the key management UI was removed (key-manager pages,
+API config tools). security.js was NOT removed at that time.
+It has never been loaded on any HTML page since.
+
+## What security.js Does
+1. validateApiKey() - validates ODPT API key format
+2. sanitizeUrl() - sanitizes URLs (rejects javascript:, data: etc.)
+3. sanitizeImageUrl() - sanitizes image URLs
+4. generateNonce() - generates random nonce strings
+
+## Where These Functions Would Be Used
+- validateApiKey: Used in API key input forms (now removed)
+- sanitizeUrl: Used when rendering user-provided URLs (none exist)
+- sanitizeImageUrl: Used when rendering spot images (already uses canonical paths)
+- generateNonce: Used for CSP nonce generation (CSP is static in meta tag)
+
+## Verdict
+CONFIRMED ORPHAN. These utility functions were created alongside the
+key management UI that no longer exists. No consumer remains.
+Safe to delete.
+
+Risk if kept: A future AI might see validateApiKey and think API key
+validation is still a feature, or try to use sanitizeUrl for URL inputs
+that don't exist.
+
+============================================================
+CLEANUP ACTION
+============================================================
+
+Delete both files.
+Then run global orphan sweep to confirm no new orphans created.
