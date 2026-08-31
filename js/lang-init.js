@@ -217,6 +217,17 @@
         window.currentLang = currentLang;
         updateSwitcherUI(currentLang);
         updateTranslations();
+        // Populate operator name translations for tOp()
+        if (typeof window.t === 'function' && typeof window.TransitConstants === 'object') {
+            var _opNames = {};
+            var _opIds = ['JR-East','JR-West','TokyoMetro','Toei','Seibu','Tobu','Tokyu','Keio','Odakyu','Keisei','Keikyu','Sotetsu','YokohamaMunicipal','TWR','MinatoMirai','MIR','Rinkai','TsukubaExpress','Yurikamome','TamaMonorail','ShonanMonorail'];
+            for (var _i = 0; _i < _opIds.length; _i++) {
+                var _key = 'op.' + _opIds[_i];
+                _opNames[_opIds[_i]] = window.t(_key) || _opIds[_i];
+            }
+            window.TransitConstants.OP_NAMES = _opNames;
+            window.tOp = function(name) { return (window.TransitConstants && window.TransitConstants.OP_NAMES && window.TransitConstants.OP_NAMES[name]) || name || ''; };
+        }
         _updatePageTitle();
     }
 

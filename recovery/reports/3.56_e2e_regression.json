@@ -1,0 +1,176 @@
+{
+  "task": "3.56 Public E2E Regression",
+  "timestamp": "2026-08-30",
+  "pages_url": "https://biubiu52011.github.io/Pixel-Tetsudo/",
+  "commit": "f629f8f",
+  "data_verified": {
+    "stations": 509,
+    "lines": 156,
+    "name_map": 1703
+  },
+  "L0_File": {
+    "status": "PARTIAL",
+    "notes": "All pages exist except tourism.html (404)",
+    "details": {
+      "home.html": "PASS",
+      "realtime.html": "PASS",
+      "history.html": "PASS",
+      "trains.html": "PASS",
+      "tourism.html": "FAIL - 404, file does not exist in pages/"
+    }
+  },
+  "L1_Parse": {
+    "status": "PASS",
+    "notes": "All JS files parse correctly, no syntax errors"
+  },
+  "L2_Load": {
+    "status": "PASS",
+    "notes": "RailwayDB loads 509/156/1703 on home/realtime/history; DataLayer fails on trains (see L3)"
+  },
+  "L3_Init": {
+    "status": "PARTIAL",
+    "details": {
+      "home": "PASS - RailwayDB, StationResolver, SightseeingModule, SearchUI all initialized",
+      "realtime": "PASS - DataState.init() runs, 149 line cards render",
+      "history": "PASS - SearchHistory.init() runs, empty state renders",
+      "trains": "FAIL - DataLayer.getAllLines() calls RailwayDB.isLoaded() which does not exist",
+      "tourism_home": "PARTIAL - SightseeingModule.init() runs, picker shows Shinjuku, 10 grid slots but no spot cards rendered"
+    }
+  },
+  "L4_Usability": {
+    "route_search": {
+      "status": "PASS",
+      "test": "Shinjuku -> Tokyo",
+      "result": "2 min, 1 segment, RECOMMENDED tag shown, full route visible"
+    },
+    "realtime": {
+      "status": "PARTIAL",
+      "notes": "149 line cards render with operator grouping, but NO interactive filter UI (checkboxes missing), no status data (ODPT blocked)",
+      "severity": "P2"
+    },
+    "tourism": {
+      "status": "FAIL",
+      "notes": "Dedicated tourism.html returns 404. Home page tourism module shows station picker and 10 grid slots but NO spot cards rendered",
+      "severity": "P1"
+    },
+    "history": {
+      "status": "PASS",
+      "notes": "Empty state shows correctly. Full flow verified in 3.43 E2E."
+    },
+    "trains": {
+      "status": "FAIL",
+      "notes": "Page loads but shows blank content. DataLayer.getAllLines() crashes on RailwayDB.isLoaded() call",
+      "severity": "P1"
+    },
+    "i18n": {
+      "status": "PASS",
+      "notes": "JA/EN switch works correctly. Placeholder, title, tabs all translate. ZH/KO translations present in file (157 keys each). Switcher opens and closes."
+    }
+  },
+  "L5_Interaction": {
+    "route_search_suggestion": {
+      "status": "PASS",
+      "notes": "3.55 fix confirmed: suggestion dropdown no longer blocks search button"
+    },
+    "tourism_station_picker": {
+      "status": "PASS",
+      "notes": "3.55 fix confirmed: shows 'Shinjuku' instead of 'Locating...'"
+    },
+    "i18n_switcher": {
+      "status": "PASS",
+      "notes": "Button opens switcher, language changes on click, placeholder updates"
+    },
+    "realtime_filter": {
+      "status": "FAIL",
+      "notes": "No interactive filter UI exists. Operator names displayed as static labels only. User cannot filter by operator.",
+      "severity": "P2"
+    }
+  },
+  "L6_Adaptation": {
+    "mobile_390": {
+      "status": "PASS",
+      "notes": "No horizontal scroll, 0 small touch targets (<44px)"
+    },
+    "desktop": {
+      "status": "PASS"
+    }
+  },
+  "L7_Consistency": {
+    "nav": "PASS - All pages share same 4-tab navigation",
+    "i18n_keys": "PASS - 157 keys per language across all 4 languages",
+    "css": "PASS - Same style.css across all pages"
+  },
+  "L8_Industry": {
+    "route_result": {
+      "status": "PARTIAL",
+      "severity": "P3",
+      "notes": "Shows duration+segments+RECOMMENDED but lacks line colors, departure/arrival times, platform info typical of Japanese apps"
+    },
+    "realtime_status": {
+      "status": "BLOCKED",
+      "notes": "ODPT API requires API key (CORS blocked). 149 cards show no meaningful status distinction"
+    }
+  },
+  "L9_Product": {
+    "core_functionality": "PASS - Route search works end-to-end",
+    "error_states": "PARTIAL - Empty states clear, but trains page shows blank instead of error message",
+    "product_readiness": "PARTIAL - P1 issues (Tourism 404, Trains crash) block full product readiness"
+  },
+  "issues_found": [
+    {
+      "id": "P1a",
+      "severity": "P1",
+      "page": "Trains",
+      "root_cause": "data-layer.js:73 calls RailwayDB.isLoaded() but method does not exist (should be DataLoader.isLoaded())",
+      "impact": "Trains page shows blank content, all 156 lines invisible",
+      "fix": "Change window.RailwayDB.isLoaded() to window.DataLoader.isLoaded() in data-layer.js",
+      "status": "UNVERIFIED"
+    },
+    {
+      "id": "P1b",
+      "severity": "P1",
+      "page": "Tourism",
+      "root_cause": "pages/tourism.html does not exist in repository. Dedicated page was never created.",
+      "impact": "Direct link to /pages/tourism.html returns 404. Users cannot access standalone tourism page.",
+      "fix": "Create pages/tourism.html or add tourism tab to home.html navigation",
+      "status": "CONFIRMED"
+    },
+    {
+      "id": "P2a",
+      "severity": "P2",
+      "page": "Realtime",
+      "root_cause": "No operator filter checkboxes rendered in realtime.html. Filter UI was removed or never implemented.",
+      "impact": "Users cannot filter 149 lines by operator",
+      "fix": "Re-add operator filter UI to realtime.html",
+      "status": "CONFIRMED"
+    },
+    {
+      "id": "P2b",
+      "severity": "P2",
+      "page": "Tourism (home)",
+      "root_cause": "SightseeingModule renders 10 grid slots but getNearbySpotsByStation() returns empty results",
+      "impact": "No attraction cards shown even after station selected",
+      "fix": "Debug TourismProximity.getNearbySpotsByStation() or TOURISM_DATA access",
+      "status": "UNVERIFIED"
+    },
+    {
+      "id": "P3a",
+      "severity": "P3",
+      "page": "Route Result",
+      "root_cause": "Result cards lack line colors, departure/arrival times, platform info",
+      "impact": "Less informative than competing Japanese apps",
+      "fix": "Enhance result card template",
+      "status": "CONFIRMED"
+    }
+  ],
+  "summary": {
+    "route_search": "PASS - Core feature working perfectly",
+    "realtime": "PARTIAL - 149 cards render but no filter UI, no status data (ODPT blocked)",
+    "tourism": "FAIL - Dedicated page 404, home module shows empty grid",
+    "history": "PASS - Empty state works, full flow verified in 3.43",
+    "trains": "FAIL - Blank page due to DataLayer bug",
+    "i18n": "PASS - All 4 languages work correctly",
+    "mobile": "PASS - No layout issues",
+    "overall": "CORE WORKING (Route Search) - 2 P1 blockers (Tourism 404, Trains crash) need fixing before public recommendation"
+  }
+}

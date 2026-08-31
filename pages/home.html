@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; upgrade-insecure-requests; frame-src https://www.openstreetmap.org; object-src none;"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="theme-color" content="#008803"><meta name="mobile-web-app-capable" content="yes"><meta name="description" content="Pixel Tetsudo - Route Search"><meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(self)"><meta name="referrer" content="strict-origin-when-cross-origin"><title>Pixel Tetsudo</title><link rel="icon" href="../images/pixel-tetsudo.ico" type="image/x-icon">
@@ -44,7 +44,8 @@ English</button>
 履歴</a>
 </nav>
 <section id="tab-search" class="tab-content active">
-<div id="searchContainer" class="search-card pixel-card">
+<div class="home-modules">
+<div id="searchContainer" class="search-card pixel-card home-search-priority">
 <div class="module-title">
     <h2 data-i18n="search.title">
 Route Search</h2>
@@ -101,7 +102,8 @@ Route Search</h2>
 <section id="tab-trains" class="tab-content">
 </section>
 <section id="tab-history" class="tab-content">
-</section></section><footer class="pixel-footer" data-i18n="app.footer">
+</section></div>
+</section><footer class="pixel-footer" data-i18n="app.footer">
 © 2026 Pixel Tetsudo</footer>
 </div>
 <script src="../data/core/db-loader.js"></script><script src="../js/station-resolver.js"></script><script src="../js/translations.js"></script><script src="../js/common.js"></script><script src="../js/lang-init.js"></script><script src="../js/route-search.js"></script><script src="../js/search-ui.js"></script><script src="../js/tourism-proximity.js"></script><script src="../js/sightseeing.js"></script><script src="../js/tab-switch.js"></script><script src="../js/history.js"></script></body>

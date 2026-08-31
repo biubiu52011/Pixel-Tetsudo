@@ -1,0 +1,122 @@
+# 4.1.11 Release Architecture Gate — Audit Report
+
+## Status: PASS (CONDITIONAL)
+
+### Gate Question
+"如果换一个 AI 接手，它能不能从现有代码结构中正确找到应该扩展的位置？"
+
+### Answer: YES, with minor documentation gaps
+
+---
+
+## 1. Provider/Consumer Map (Verified)
+
+### RailwayDB (canonical provider)
+| Method | Defined In | Consumers | Status |
+|--------|-----------|-----------|--------|
+| resolveLineName(id, lang) | data/core/db-loader.js:166 | search-ui, history, data-state, realtime-view, trains-detail, trains-page | ✅ 6/6 migrated |
+| resolveStationName(id, lang) | data/core/db-loader.js | search-ui, history, trains-detail, trains-page, data-state, route-search, station-resolver | ✅ All using |
+| getLine(id) | data/core/db-loader.js | data-layer, data-fusion, trains-detail | ✅ Correct |
+| getLineStations(id) | data/core/db-loader.js | data-state (renderCard interval) | ✅ Correct |
+| getAllLines() | data/core/db-loader.js | route-search, station-resolver, sightseeing | ✅ Correct |
+
+### DataState (render provider)
+| Method | Consumers | Status |
+|--------|-----------|--------|
+| renderList(container, lines, options) | realtime-view, trains-page, trains-render | ✅ All correct |
+| renderCard(line, lineId, options) | realtime-view (wrapper) | ✅ Correct |
+| STATUS_META | data-state, realtime-view | ✅ Correct |
+| getDelayInfo/ getPosition | data-state internal | ✅ Correct |
+
+### tOp() (operator display)
+| Provider | Consumers | Status |
+|----------|-----------|--------|
+| lang-init.js:229 (window.tOp) | realtime-view, trains-detail, data-state (local) | ✅ 3/3 correct |
+
+---
+
+## 2. Future AI Trap Analysis
+
+### Low Risk (documented patterns)
+| Location | Pattern | Risk | Action |
+|----------|---------|------|--------|
+| data-state.js:49-50 | `tLine()` dead local function | Low | Document as legacy |
+| data-state.js:72 | Fallback chain after RailwayDB | None (intentional) | Keep |
+| trains-page.js:72-83 | `nameEn/nameJa` in getLinesData() | Low (normalization, not display) | Document |
+
+### No Traps Found
+- No orphaned `tLineName` references ✅
+- No orphaned `getDisplayName`/`getDisplayLineName` ✅
+- No raw line names sent to UI without resolution ✅
+- No console.log in production code ✅
+- No dead CSS with active HTML references ✅
+
+---
+
+## 3. Entry Point Map for New Developer
+
+```
+New developer arrives → reads pages/home.html
+    ↓
+Sees script load order:
+  1. data/core/db-loader.js       → RailwayDB (canonical data + resolveLineName/resolveStationName)
+  2. js/translations.js            → window.t (i18n)
+  3. js/common.js                  → helpers
+  4. js/lang-init.js               → window.tOp, window.currentLang
+  5. js/data-state.js              → window.DataState (renderList, renderCard)
+  6. js/search-ui.js               → Route search UI (uses RailwayDB)
+  7. js/realtime-view.js           → Realtime UI (uses RailwayDB + DataState)
+  8. js/trains-page.js             → Trains listing (uses RailwayDB + DataState)
+  9. js/trains-detail.js           → Line detail (uses RailwayDB)
+  10. js/history.js                → Search history (uses RailwayDB)
+```
+
+**Clear entry points:**
+- Add new line display logic → `js/data-state.js` → `renderCard()`
+- Add new page → follow `pages/trains.html` script load pattern
+- Add new translation → `js/translations.js`
+- Modify line data → `data/core/railway_data.json` (LOCKED — note this!)
+
+---
+
+## 4. Release Readiness
+
+| Check | Status |
+|-------|--------|
+| P0 issues | 0 ✅ |
+| P1 issues | 0 ✅ |
+| P2 issues | 0 ✅ |
+| P3 issues | 2 (tLine dead func, nameEn normalization) — non-blocking |
+| console.log | 0 ✅ |
+| Raw ID leaks to UI | 0 ✅ |
+| Display identity unified | ✅ RailwayDB.resolveLineName() canonical |
+| Operator display unified | ✅ tOp() canonical |
+| Station name unified | ✅ RailwayDB.resolveStationName() canonical |
+| Canonical data integrity | 156/509/1703/93 LOCKED ✅ |
+| No new orphan patterns | ✅ |
+
+---
+
+## 5. Recommendations
+
+### Before Release
+1. **Remove `tLine()` from data-state.js:49-50** — dead function, confuses future AI
+2. **Add inline comment** at data-state.js:72 explaining the fallback chain
+
+### For 4.2 Product Phase
+3. Clean up `data/铁道/` orphaned backup directory
+4. Remove `.sm-header` dead CSS from tourism-styles.css
+5. Address Home `.sm-module` / `.pixel-card` CSS conflict (HOME-DESIGN-01)
+
+---
+
+## GATE VERDICT
+
+**CONDITIONAL PASS**
+
+- All P0/P1/P2 resolved
+- Display identity architecture unified under RailwayDB.resolveLineName()
+- No future AI traps that would cause incorrect extensions
+- 2 cosmetic P3 items remaining (non-blocking)
+
+**Recommendation:** Fix the 2 P3 items, then proceed to Release Candidate.

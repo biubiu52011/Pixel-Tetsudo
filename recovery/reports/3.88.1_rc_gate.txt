@@ -1,0 +1,41 @@
+# 3.88.1 — Console.log Cleanup + RC Gate
+
+**Date:** 2026-08-31
+**Status:** COMPLETE / RELEASE CANDIDATE
+
+## Changes
+Removed all console.log debug output from 6 JS files:
+- data-state.js: 4 lines removed
+- trains-page.js: 3 lines removed
+- data-fusion.js: 1 line removed
+- data-layer.js: 1 line removed
+- local-railway-data.js: 1 line removed
+- station-resolver.js: 2 lines removed (multi-line statement)
+
+Total: 12 console.log lines removed across 6 files.
+Note: console.debug / console.warn / console.error in data-fusion.js and data-layer.js are ERROR HANDLING output (not debug), retained intentionally.
+
+## RC Gate Verification
+
+| Check | Result |
+|-------|--------|
+| console.log (exact match) | 0 |
+| JS paren balance | All OK |
+| Stations / Lines / NameMap / Tourism | 509 / 156 / 1703 / 93 |
+| Canonical data unchanged | PASS |
+| OS / LPS unchanged | PASS |
+| translations.js 4-lang consistency | 180+ keys each, 21 op.* each |
+| tOp() chain wired | PASS (lang-init.js) |
+| displayName language-aware | PASS (data-state.js, realtime-view.js, trains-detail.js) |
+| getDisplayLineName() added | PASS (trains-detail.js) |
+| _rS() station resolver in SVG | PASS (trains-detail.js, trains-page.js) |
+| rs-line-subtitle CSS class | PASS (renamed from rs-line-name-en) |
+
+## Verdict
+
+**RELEASE CANDIDATE**
+
+P0 = 0, P1 = 0, P2 = 0, P3 = 0 (console.log cleaned)
+DATA-BLOCKED = 1 (segment duration, intentionally frozen)
+
+The product is ready for public release as a Release Candidate.

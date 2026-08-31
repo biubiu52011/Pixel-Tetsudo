@@ -46,9 +46,7 @@
     return (typeof window.t === "function") ? window.t(key) : (key || "");
   }
 
-  function tLine(code) {
-    return (window.tLine && window.tLine(code)) || code || "";
-  }
+  // tLine removed: use RailwayDB.resolveLineName(lineId, lang) instead
 
   function tOp(name) {
     return (window.tOp && window.tOp(name)) || name || "";
@@ -69,7 +67,8 @@
     var status = delayInfo && delayInfo.status ? delayInfo.status : (delayInfo ? "normal" : "no_data");
     var interval = delayInfo.interval || "";
     var lineColor = line.color || "#00b643";
-    var displayName = (window.tLineName && window.tLineName(line)) || line.nameEn || line.name || lineId;
+    var displayName = (window.RailwayDB && window.RailwayDB.resolveLineName) ? window.RailwayDB.resolveLineName(lineId, window.currentLang) : (line.nameEn || line.name || lineId);
+    // Fallback: RailwayDB unavailable (e.g., test/sandbox) — use raw fields
 
     // Icon
     var iconHtml = "";
@@ -101,12 +100,6 @@
       iconHtml = '<div class="rs-code-badge" style="background:"' + escapeHtml(lineColor) + '>' + escapeHtml(osCode || line.code || line.symbol || line.id || "?") + '</div>';
     }
 
-    // Branch indicator (trains mode)
-    var branchHtml = "";
-    if (mode === "trains" && line.branchOf) {
-      branchHtml = '<span class="rs-branch-indicator">\u21b3</span>';
-    }
-
     // Interval text (realtime mode)
     var intervalHtml = "";
     if (mode === "realtime" && interval) {
@@ -118,16 +111,7 @@
     var statusIconHtml = "";
     if (mode === "realtime") {
       statusIconHtml = '<span class="rs-status-icon ' + s.cls + '">' + s.icon + '</span>';
-    } else {
-      // Trains mode: show running count badge
-      var pos = getPositions(lineId);
-      var cnt = pos ? pos.length : 0;
-      if (cnt > 0) {
-      var badgeCls = (delayInfo.status === "delayed") ? "rs-status-delayed" : ((delayInfo.status === "suspended") ? "rs-status-suspended" : "rs-status-badge-default");
-      statusIconHtml = "<span class=\"rs-status-badge " + badgeCls + "\">" + cnt + "</span>";
-      }
     }
-
     // Route interval subtitle (trains mode)
     var subHtml = "";
     if (mode === "trains") {
@@ -153,7 +137,7 @@
       + '<div class="rs-line-header">'
       + iconHtml
       + '<div class="rs-line-info">'
-      + '<div class="rs-line-name">' + escapeHtml(displayName) + branchHtml + '</div>'
+      + '<div class="rs-line-name">' + escapeHtml(displayName)  '</div>'
       + subHtml
       + intervalHtml
       + '</div>'
@@ -168,9 +152,7 @@
    * @param {Object} options - { mode, lineOrder }
    */
   function renderList(container, linesObj, options) {
-    console.log('[DataState.renderList] called, container=' + (!!container) + ', keys=' + Object.keys(linesObj||{}).length + ', mode=' + (options&&options.mode));
     if (!container || !linesObj || typeof linesObj !== "object" || Object.keys(linesObj).length === 0) {
-      console.log('[DataState.renderList] EARLY RETURN: container=' + (!!container) + ', keys=' + Object.keys(linesObj||{}).length);
       container.innerHTML = '<div class="rs-empty">' + (typeof window.t === "function" ? window.t("status.no_trains") : "No data") + '</div>';
       return;
     }
@@ -240,9 +222,7 @@
       }
       html += "</div></div>";
     }
-    console.log('[DataState.renderList] rendering ' + html.length + ' chars');
     container.innerHTML = html;
-    console.log('[DataState.renderList] done, innerHTML=' + container.innerHTML.length);
   }
 
   // ========== Data management ==========

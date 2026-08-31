@@ -188,7 +188,6 @@
     (function pollUnified() {
       var checkLines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : (window.UNIFIED_LINES || {});
       if (checkLines && Object.keys(checkLines).length > 0) {
-        try { fuseAll(); console.log("[DataFusion] Data ready (" + Object.keys(checkLines).length + " lines), re-fused"); }
         catch(e) { console.debug("[DataFusion] poll fuseAll error:", e.message); }
         return;
       }

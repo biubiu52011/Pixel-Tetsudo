@@ -1,0 +1,75 @@
+Task 3.84 - First-Time User Information Architecture Audit
+============================================================
+AUDIT ONLY - NO CODE CHANGES
+
+P0=1 P1=0 P2=5 P3=6 DATA-BLOCKED=1
+
+STATUS: DO NOT ENTER RC UNTIL P0 AND P2 ARE RESOLVED
+
+=== P0: CRITICAL ===
+
+1. data-state.js L203: undefined variable op
+   renderList() uses groups[op] but op is never declared.
+   In strict mode this throws ReferenceError.
+   Both trains-page.js and realtime-view.js wrap calls in try-catch. Result: silent render failure.
+   File: js/data-state.js line 203
+   Fix: add var op = line.operator || Unknown before use
+
+=== P2: MAJOR ===
+
+2. tLineName is NEVER defined anywhere in the codebase
+   data-state.js renderCard() calls window.tLineName(line) but it does not exist.
+   Falls back to line.nameEn (internal ID like SeibuIkebukuro, ChuoRapid).
+   Users see database IDs as display names.
+   File: js/data-state.js renderCard() displayName line
+
+3. Display name inconsistency between Realtime and Trains pages
+   realtime-view.js: nameJa -> nameEn -> name -> id
+   data-state.js: tLineName(undef) -> nameEn -> name -> lineId
+   Same line shows different names on different pages.
+
+4. Station IDs leak into SVG line map (trains detail)
+   trains-detail.js renders stations[i] directly without resolveStationName.
+   Raw IDs like Kot手指, Shi nomi Cho appear in line map SVG.
+   Branch stations correctly use tStation() but main line does not.
+   File: js/trains-detail.js renderStationMap()
+
+5. CSS syntax error in icon badge fallback
+   data-state.js: style=background: + color generates invalid CSS with extra quote.
+   OS symbol badges show no background color.
+   File: js/data-state.js renderCard() icon fallback branch
+
+6. Raw operator names shown as group titles
+   escapeHtml(op) renders JR-East, Seibu, TokyoMetro directly to UI.
+   No translation lookup for operator display names.
+   File: js/data-state.js renderList() line 236
+
+=== P3: MINOR ===
+
+7. Dead CSS: config-btn styles in realtime.css (button removed in 3.80)
+8. CSS class rs-line-name-en misnamed (shows Japanese interval not English)
+9. Detail page shows technical fields: info_code, info_operator, info_type
+10. Home page search/tourism modules have slightly different heading structure
+11. Trains has no operator filter while Realtime has one (may be intentional design)
+12. Back button in Trains detail goes to list not Home (inconsistent nav pattern)
+
+=== PASS ===
+
+13. i18n: 134 keys defined, no raw keys in HTML, all t() calls resolve
+14. Default language: ja confirmed in lang-init.js
+15. Responsive: @media(max-width:640px) in trains.css and realtime.css
+16. CI Guard: PASS | Canonical: 509/156/1703/93 intact
+17. No raw i18n keys in DOM (verified 3.66/3.67 fixes hold)
+18. All 13 MISSING_ASSET images fixed in 3.83.1
+
+=== RECOMMENDATION ===
+
+Do NOT enter Release Candidate until:
+- P0: Fix undefined op variable in data-state.js renderList()
+- P2: Define tLineName or fix displayName fallback chain
+- P2: Fix station ID leak in trains-detail.js SVG rendering
+- P2: Fix CSS syntax error in icon badge
+- P2: Add operator name translation
+- P2: Unify display name logic between Realtime and Trains
+
+P3 items can wait for后续 polish pass.

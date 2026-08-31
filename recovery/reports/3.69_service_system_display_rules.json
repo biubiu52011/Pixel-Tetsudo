@@ -1,0 +1,49 @@
+# Task 3.69 — Service System Display Rules Implementation
+
+## Status: COMPLETE / FROZEN
+
+## Commit
+`9cc7c4a` on `main`
+
+## Changes Made
+
+### 1. `data/core/line-operation-systems.js` (mirrored to `data/api/` and `data/铁道/`)
+- **JB**: Removed `"SobuLocal"` → `["ChuoSobuLocal"]` only
+- **JC**: Split — now `["ChuoRapid", "ChuoKonosu"]` only (names updated to "中央線（快速）")
+- **Added 青梅線**: Standalone card, no code, `["Ome"]`, order: 4
+- **Added 五日市線**: Standalone card, no code, `["Itsukaichi"]`, order: 5
+- **JO**: Removed `"Sotobo"`, `"Uchibo"` → `["Yokosuka", "SobuRapid"]`
+- **JT**: Removed `"Tsugaru"` → `["Tokaido"]`
+- **JU**: Removed `"TohokuMain"` → `["Oyama", "Takasaki"]`
+- **REGIONAL**: Added `"Sotobo"`, `"Uchibo"`, `"Tsugaru"`, `"TohokuMain"`, `"SobuLocal"` (now 52 lines)
+- **SKK → SK**: Fixed Seibu Kokubunji Line code from `'SKK'` to `'SK'`
+- Orders renumbered: JE→6, JH→7, JI→8, JJ→9, JK→10, JL→11, JM→12, JN→13, JO→14, JS→15, JT→16, JU→17, JY→18, REGIONAL→19
+
+### 2. New: `js/line-presentation-service.js`
+- Defines `window.LinePresentationService` with two methods:
+  - `getDisplayOrder(allLines)` → ordered array of line IDs following OS rules
+  - `getDisplayOrderMap(allLines)` → map of line ID → display index
+- Reads from `window.LineOperationSystems` and respects `TransitConstants.OP_ORDER`
+- Fallback to alphabetical if service unavailable
+
+### 3. HTML wiring
+- `pages/trains.html`: Added `<script src="../js/line-presentation-service.js"></script>` before data-state.js
+- `pages/realtime.html`: Added `<script src="../js/line-presentation-service.js"></script>` before data-state.js
+
+## Validation
+- Node.js syntax check: PASS (both files)
+- CI Guard: PASS (exit 0)
+- Runtime test: PASS (getDisplayOrder returns correct sequence)
+- 156 unique lineIds, no duplicates
+- All 3 mirrors identical (24,398 bytes each)
+
+## Unmapped Lines (now in REGIONAL)
+- `Sotobo`, `Uchibo`, `Tsugaru`, `TohokuMain`, `SobuLocal` — 5 lines moved from OS groups to REGIONAL
+
+## Preserved (no changes)
+- `railway_data.json` — untouched
+- `line.code` fields — all legacy codes preserved as-is
+- Non-JR-East operators — unchanged
+- 156 canonical lines — no additions or deletions
+
+## Next: Task 3.70 — Trains page wiring to LinePresentationService

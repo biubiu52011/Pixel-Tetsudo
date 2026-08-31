@@ -1,0 +1,54 @@
+{
+  "initial_lang": "en",
+  "initial_tabs": [
+    "Route Search",
+    "Status",
+    "Real-time Trains",
+    "History"
+  ],
+  "initial_btn": "Search",
+  "initial_ph": "Enter departure station",
+  "switcher_open": true,
+  "lang_btn_count": 4,
+  "lang_btn_langs": [
+    "ja",
+    "zh",
+    "ko",
+    "en"
+  ],
+  "after_ja_lang": "ja",
+  "after_ja_tabs": [
+    "路線検索",
+    "運行状況",
+    "列車リアルタイム",
+    "検索履歴"
+  ],
+  "after_ja_btn": "検索",
+  "after_ja_ph": "出发駅を入力",
+  "after_zh_lang": "zh",
+  "after_zh_tabs": [
+    "路线搜索",
+    "运行状况",
+    "列车实时",
+    "历史"
+  ],
+  "after_zh_btn": "搜索",
+  "after_zh_ph": "输入出发站",
+  "after_ko_lang": "ko",
+  "after_ko_tabs": [
+    "노선 검색",
+    "운행 상태",
+    "시간화 열차",
+    "검색 기록"
+  ],
+  "after_ko_btn": "검색",
+  "after_ko_ph": "출발역을 입력하세요",
+  "stored_lang": null,
+  "after_refresh_lang": "en",
+  "after_refresh_tabs": [
+    "Route Search",
+    "Status",
+    "Real-time Trains",
+    "History"
+  ]
+}

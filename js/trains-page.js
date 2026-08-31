@@ -112,6 +112,8 @@
       var positions = getRealtimePositions(lineId);
       var color = line.color || "#008803";
       var stations = line.stations || [];
+      var _lang = window.currentLang || 'ja';
+      var _rS = (window.RailwayDB && window.RailwayDB.resolveStationName) ? function(id){ return window.RailwayDB.resolveStationName(id, _lang) || id; } : function(id){ return id; };
       var branchLines = [];
       var allLines = getLinesData();
       for (var lid in allLines) {
@@ -151,7 +153,7 @@
           var tx = p.x + 12 * Math.cos(p.angle);
           var ty = p.y + 12 * Math.sin(p.angle);
           var anchor = Math.cos(p.angle) > 0.1 ? "start" : (Math.cos(p.angle) < -0.1 ? "end" : "middle");
-          svg += "<text x=\"" + tx + "\" y=\"" + (ty + 3.5) + "\""+ "  font-size=\"\" + \"9\" + \"\" fill=\"#444\" font-family=\"sans-serif\" font-weight=\"500\" text-anchor=\"" + anchor + "\">" + escapeHtml(dn) + "</text>";
+          svg += "<text x=\"" + tx + "\" y=\"" + (ty + 3.5) + "\""+ "  font-size=\"\" + \"9\" + \"\" fill=\"#444\" font-family=\"sans-serif\" font-weight=\"500\" text-anchor=\"" + anchor + "\">" + escapeHtml(_rS(dn)) + "</text>";
         }
       } else {
         var y1 = topP, y2 = topP + (stations.length - 1) * sp;
@@ -161,7 +163,7 @@
           var y = topP + i * sp;
           var hasTrain = positions.some(function(p) { return p.stationIndex === i; });
           svg += "<circle cx=\"" + mainCx + "\" cy=\"" + y + "\""+ "  r=\"" + (hasTrain ? 6 : 4) + "\""+ "  fill=\"" + (hasTrain ? escapeHtml(color) : "#fff") + "\""+ "  stroke=\"" + escapeHtml(color) + "\""+ "  stroke-width=\"" + (hasTrain ? 2.5 : 2) + "\"/>";
-          svg += "<text x=\"" + (mainCx + 14) + "\" y=\"" + (y + 3.5) + "\""+ "  font-size=\"9\" fill=\"#444\" font-family=\"sans-serif\" font-weight=\"500\">" + escapeHtml(st) + "</text>";
+          svg += "<text x=\"" + (mainCx + 14) + "\" y=\"" + (y + 3.5) + "\""+ "  font-size=\"9\" fill=\"#444\" font-family=\"sans-serif\" font-weight=\"500\">" + escapeHtml(_rS(st)) + "</text>";
         }
       }
       for (var bi = 0; bi < branchLines.length; bi++) {
@@ -237,7 +239,7 @@
       window.location.hash = lineId;
       if (listEl) listEl.classList.add("hidden");
       if (detailEl) detailEl.classList.remove("hidden");
-      if (titleEl) titleEl.textContent = fusedLine.nameJa || fusedLine.nameEn || fusedLine.name;
+      if (titleEl) titleEl.textContent = (window.RailwayDB && window.RailwayDB.resolveLineName ? window.RailwayDB.resolveLineName(lineId, window.currentLang) : fusedLine.id);
       if (mapEl) renderTrainMap(mapEl, fusedLine, lineId);
     } catch(e) {}
   }
@@ -275,7 +277,6 @@
                 });
               }
             }
-              console.log("[trains] Loaded cached positions for " + Object.keys(positions).length + " lines");
           }
           if (callback) callback();
         }).catch(function(e) { console.warn("[trains] Cache load error:", e.message); if (callback) callback(); });
@@ -312,7 +313,6 @@
         });
       }
       loadCachedPositions(function() {
-        console.log('[trains] callback fired, listEl=' + (listEl ? 'exists' : 'NULL'));
         renderList(listEl);
         // Restore hash-based navigation
         var hash = window.location.hash;
@@ -329,7 +329,6 @@
           if (lines && Object.keys(lines).length > 0 && listEl) {
             var currentLen = listEl.innerHTML.length;
             if (currentLen === 0) {
-              console.log("[trains] DataState subscription: re-rendering with " + Object.keys(lines).length + " lines");
               renderList(listEl);
             }
           }

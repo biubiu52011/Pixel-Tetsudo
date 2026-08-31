@@ -101,7 +101,7 @@
 
     history.forEach(function(entry) {
       const timeStr = formatTime(entry.timestamp, t);
-      const lines = entry.lineInfo ? [...new Set(entry.lineInfo.flat())].join(", ") : "";
+      const _lang = window.currentLang || "ja"; const lines = entry.lineInfo ? [...new Set(entry.lineInfo.flat())].map(function(lid){ return (window.RailwayDB && window.RailwayDB.resolveLineName) ? window.RailwayDB.resolveLineName(lid, _lang) : lid; }).join(", ") : "";
 
       html += '<div class="history-entry" data-id="' + entry.id + '">';
       html += '<div class="history-route">';

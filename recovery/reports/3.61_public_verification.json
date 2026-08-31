@@ -1,0 +1,74 @@
+{
+  "task": "3.61 Public Deployment Verification",
+  "timestamp": "2026-08-30T10:53:50.093883",
+  "commit": "388b61a",
+  "pages_url": "https://biubiu52011.github.io/Pixel-Tetsudo/",
+  "data": {
+    "stations": 509,
+    "lines": 156,
+    "name_map": 1703
+  },
+  "l0": {
+    "status": "PASS",
+    "notes": "All pages return HTTP 200; all JS/CSS load"
+  },
+  "l1": {
+    "status": "PASS",
+    "notes": "No JS syntax errors"
+  },
+  "l2": {
+    "status": "PASS",
+    "notes": "RailwayDB loads 509/156/1703 on all pages"
+  },
+  "l3": {
+    "status": "PASS",
+    "notes": "All core modules initialized"
+  },
+  "l4": {
+    "status": "PASS",
+    "notes": "Core routes search, realtime filter, history, trains all working"
+  },
+  "l5": {
+    "status": "PARTIAL",
+    "notes": "Realtime lacks ODPT data (BLOCKED)"
+  },
+  "l6": {
+    "status": "PASS",
+    "notes": "Mobile layout clean"
+  },
+  "l7": {
+    "status": "PASS",
+    "notes": "Unified nav/i18n/CSS"
+  },
+  "l8": {
+    "status": "PARTIAL",
+    "notes": "Route results lack line colors/times (P3a)"
+  },
+  "l9": {
+    "status": "PARTIAL",
+    "notes": "Core functional; P1/P2 remain"
+  },
+  "ci_status": "SUCCESS",
+  "filter_bar_deployed": true,
+  "trains_fixed": true,
+  "issues_remaining": [
+    {
+      "id": "P1",
+      "page": "Route Search",
+      "desc": "segments count = 0 on same-station fallback",
+      "severity": "P1"
+    },
+    {
+      "id": "P3a",
+      "page": "Route Result",
+      "desc": "Lacks line colors/times/platform",
+      "severity": "P3"
+    },
+    {
+      "id": "P0",
+      "page": "Realtime",
+      "desc": "ODPT blocked — separate infra task",
+      "severity": "P0"
+    }
+  ]
+}

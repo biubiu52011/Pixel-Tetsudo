@@ -139,7 +139,6 @@ window.DataLayer = {
     }
   };
 
-  console.log('[DataLayer] Initialized');
 })();
 
 

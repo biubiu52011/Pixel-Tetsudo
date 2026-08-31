@@ -1,0 +1,59 @@
+# 4.1.10 — Pending Items Consolidation
+
+## Source: 4.1.3 IA Audit + 4.1.4 Simplification + 4.1.9 Architecture Sweep
+
+---
+
+## MUST FIX (P1/P2 — Block Release)
+
+| ID | Issue | File | Action |
+|----|-------|------|--------|
+| M1 | `data-state.js:72` broken `tLineName` → should use `RailwayDB.resolveLineName(lineId, lang)` | js/data-state.js | Fix |
+| M2 | `data-state.js:78` hardcoded `"JR-East"` → should use `tOp(line.operator)` | js/data-state.js | Fix |
+
+---
+
+## SHOULD FIX (P3 — Polish Before RC)
+
+| ID | Issue | File | Action |
+|----|-------|------|--------|
+| P3-01 | `.sm-header` dead CSS in tourism-styles.css | css/tourism-styles.css | Remove |
+| P3-02 | `window.tLine` circular self-reference in data-state.js:49 | js/data-state.js | Simplify or expose |
+| P3-03 | `data/铁道/` stale backup directory (14 JS + 1 CSS, 0 references) | data/铁道/ | REMOVE (confirm with user) |
+
+---
+
+## FOR LATER (4.2+ — Product Design Phase)
+
+| ID | Issue | Priority | Notes |
+|----|-------|----------|-------|
+| F1 | 4 of 6 display name consumers don't use RailwayDB.resolveLineName() | Low | Drift risk, not user-visible yet |
+| F2 | `data/铁道/style.css` duplicates main CSS (592 vs 536 lines) | Low | Removed with F3 |
+| F3 | Home `.sm-module` / `.pixel-card` CSS conflict (HOME-DESIGN-01) | Medium | Defer to 4.2 Design System |
+| F4 | Tourism data missing multi-language fields (DATA-BLOCKED) | Frozen | No canonical data changes |
+| F5 | segment.duration = 2 DATA-BLOCKED | Frozen | Out of release scope |
+
+---
+
+## RELEASE DECISION MATRIX
+
+| Category | Count | Action |
+|----------|-------|--------|
+| P0 (blocker) | 0 | — |
+| P1 (must fix) | 2 | Fix before gate |
+| P2 (should fix) | 0 | — |
+| P3 (polish) | 3 | Fix or defer |
+| DATA-BLOCKED | 2 | Frozen per policy |
+| LEGACY/ORPHAN | 3 | Remove or document |
+
+## 4.1 RELEASE GATE RECOMMENDATION
+
+**After M1+M2 fix: CONDITIONAL RELEASE**
+- P3 items can be deferred to 4.2
+- LEGACY items (data/铁道/) should be removed as cleanup, not feature work
+- DATA-BLOCKED items remain frozen
+
+---
+
+## Next Step
+User decision: Fix M1+M2 now, or defer to 4.2?

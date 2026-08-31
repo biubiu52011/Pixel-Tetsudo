@@ -162,7 +162,15 @@
         Object.keys(data.lines).forEach(function(k){ colors[k] = data.lines[k].color; });
         return colors;
       },
-
+      // Display name resolution
+      resolveLineName: function(id, lang) {
+        if (!id) return '';
+        lang = (lang || window.currentLang || 'ja').toLowerCase();
+        var line = data.lines ? data.lines[id] : null;
+        if (!line) return id;
+        var nameKey = 'name' + lang.charAt(0).toUpperCase() + lang.slice(1);
+        return line[nameKey] || line.nameJa || line.nameEn || line.name || id;
+      },
       // Transfer queries
       getTransferStations: function(stationId) {
         var lines = window.STATION_LINES[stationId] || [];

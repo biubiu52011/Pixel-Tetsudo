@@ -1,0 +1,155 @@
+# 4.0.7 — Cross-Page Consistency Audit
+# Date: 2026-08-31
+# Rule: AUDIT ONLY — NO CODE CHANGES
+
+---
+
+## Executive Summary
+
+Three pages (Trains, Realtime, Route Search) share the same DataState.renderList() / DataState.renderCard() pipeline, ensuring card-level consistency. However, **detail views and search results** each implement their own display name resolution — and some do it correctly while others don't. The inconsistency is not in the card list (which is consistent) but in the **secondary rendering paths**.
+
+---
+
+## Display Name Resolution Matrix
+
+| Rendering Context | Trains Card | Realtime Card | Route Search Result | Trains Detail | Realtime Modal | History List |
+|---|---|---|---|---|---|---|
+| Line name | ✅ | ✅ | 🔴 RAW | 🟠 JA-first | ✅ | 🔴 RAW |
+| Station name | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Operator name | ✅ (group title) | 🔴 RAW (filter) | N/A | 🟠 JA-first | ✅ (group title) | N/A |
+| Status badge | ✅ | ✅ | ✅ | N/A | ✅ | N/A |
+
+**Key:** ✅ = correct; 🟠 = partial bug (JA-first); 🔴 = critical raw ID leak
+
+---
+
+## Consistency Findings
+
+### F-C01 🔴 CRITICAL — Three Pages Leak Raw Line IDs
+
+Same root cause, different locations:
+
+| Page | Location | Shows |
+|---|---|---|
+| Route Search | search-ui.js:255 | ChuoRapid, KeihinTohoku |
+| History | history.js:104,117 | ChuoRapid, Sobu |
+| Trains Detail | 	rains-page.js:242 | 中央線快速 (JA only, even in EN mode) |
+
+**Systemic fix needed:** A unified getDisplayLineName(line, lang) function should be the single source of truth, used by ALL rendering paths. Currently:
+- data-state.js:72-74 has its own inline resolution
+- ealtime-view.js:13-18 has its own inline resolution  
+- 	rains-detail.js:13-18 has its own inline resolution
+- 	rains-page.js:242 hardcodes 
+ameJa || nameEn || name
+- search-ui.js:255 uses raw seg.lineName
+- history.js:104 uses raw lineInfo values
+
+**These are 5 independent implementations of the same logic.** This is a maintenance hazard.
+
+**Category:** TECHNICAL-LEAK (systemic)
+
+---
+
+### F-C02 🔴 CRITICAL — Realtime Filter Buttons Leak Raw Operator IDs
+
+**Location:** js/realtime-view.js:136
+`js
+html += '<button ...>' + escapeHtml(op) + '</button>';
+`
+vs.
+`js
+// data-state.js:237 (same page, different function)
+html += '<div class=\"rs-operator-title\">' + escapeHtml(tOp(op)) + '</div>'
+`
+
+**Inconsistency:** The same file uses 	Op() for group titles but NOT for filter buttons. This is an implementation gap, not a design decision.
+
+**Category:** TECHNICAL-LEAK
+
+---
+
+### F-C03 🟠 WEAK — Trains Detail Title JA-First Bias
+
+**Location:** js/trains-page.js:242
+`js
+titleEl.textContent = fusedLine.nameJa || fusedLine.nameEn || fusedLine.name;
+`
+
+The 
+ameJa first means:
+- JA user sees: 中央線快速 ✅
+- ZH user sees: 中央線快速 ❌ (should be 中央快速线 or similar)
+- EN user sees: 中央線快速 ❌ (should be Chuo Rapid Line)
+- KO user sees: 中央線快速 ❌ (should be 추오 신속선 or similar)
+
+The fix is to use the same language-aware pattern as data-state.js:
+`js
+var _lang = window.currentLang || 'ja';
+var _nameKey = 'name' + _lang.charAt(0).toUpperCase() + _lang.slice(1);
+titleEl.textContent = fusedLine[_nameKey] || fusedLine.nameJa || fusedLine.nameEn || fusedLine.name || fusedLine.id;
+`
+
+**Category:** i18n BUG
+
+---
+
+### F-C04 🟢 GOOD — Card Lists Are Consistent
+
+Both Trains and Realtime card lists use DataState.renderList() which applies the same:
+- OS badge positioning
+- Line color
+- Display name resolution (language-aware)
+- Branch indicator
+- Status badge
+
+A user sees the same line name on both pages.
+
+**Category:** GOOD
+
+---
+
+### F-C05 🔵 INTENTIONAL — Realtime Has Filter, Trains Does Not
+
+Realtime page has an operator filter bar. Trains page does not. This is a deliberate design choice:
+- Realtime = monitoring tool (filter by your operator)
+- Trains = reference tool (browse all lines)
+
+**Justification:** Valid. Different user tasks require different interaction models.
+
+**Category:** INTENTIONAL
+
+---
+
+### F-C06 🟢 GOOD — Modal Detail Views Are Consistent
+
+Both Realtime modal (ealtime-view.js:59) and Trains detail (	rains-detail.js not loaded, but 	rains-page.js detail view) resolve station names via esolveStationName(). No station ID leaks.
+
+**Category:** GOOD
+
+---
+
+## Visual Consistency Matrix
+
+| Element | Home | Trains | Realtime | History | Tourism |
+|---|---|---|---|---|---|
+| Card style | pixel-card | rs-line-card | rs-line-card | history-entry | sm-grid-card |
+| Font family | Fusion Pixel | Fusion Pixel | Fusion Pixel | Fusion Pixel | Fusion Pixel |
+| Border style | 2px solid | 2px solid | 2px solid | 2px solid | 1px solid |
+| Shadow | 3px 3px 0 | glow on hover | glow on hover | 2px 2px 0 | none |
+| Radius | var(--radius) | var(--radius) | var(--radius) | var(--radius) | var(--radius-sm) |
+
+**Verdict:** Visual language is consistent. Minor differences in shadow/border are acceptable — different card types serve different purposes.
+
+---
+
+## Recommendation
+
+**Priority 1:** Create a single getDisplayLineName(line, lang) function in a shared utility and use it everywhere. This eliminates the 5 independent implementations.
+
+**Priority 2:** Fix the 3 raw ID leaks (search UI, history, realtime filter) using the unified function.
+
+**Priority 3:** Fix Trains detail title to use language-aware resolution.
+
+---
+
+*End of 4.0.7 Cross-Page Consistency Audit — FINDINGS ONLY, NO CODE CHANGES*

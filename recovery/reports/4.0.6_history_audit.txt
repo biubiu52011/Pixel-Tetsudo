@@ -1,0 +1,91 @@
+﻿# 4.0.6 History Page Audit - FINDINGS ONLY NO CODE CHANGES
+
+## Executive Summary
+
+The History page is functionally correct but suffers from the same line name leakage pattern found in Route Search (F-01) and Realtime (F-R01). When users click a history entry to re-search, the lines displayed in the history list show raw English snake_case IDs instead of user-facing display names. All translation keys are present; the bug is in the rendering logic.
+
+---
+
+## Findings
+
+### F-H01 CRITICAL - Line Names in History Entries Show Raw IDs
+
+Location: js/history.js:104, 117
+
+Root cause: entry.lineInfo stores raw line.name values from railway_data.json (e.g. ChuoRapid, Sobu). These are internal engine IDs, NOT display names.
+
+What the user sees (JA mode):
+  Tokyo -> Takao    ChuoRapid, Sobu    15min    2 hours ago
+
+What it should show:
+  Tokyo -> Takao    Chuo Rapid Line, Sobo Line    15min    2 hours ago
+
+Evidence: Same bug exists in search-ui.js:255 (F-01). The fix pattern is proven: resolve via RailwayDB.getLine(lineId) + language-aware name key.
+
+User impact: High. Users cannot identify which lines they searched by raw IDs.
+
+Category: TECHNICAL-LEAK
+
+---
+
+### F-H02 GOOD - Station Names Use Language-Aware Resolution
+
+Location: js/history.js:108, 110
+All station names correctly resolved via RailwayDB.resolveStationName(entry.from, window.currentLang).
+
+Category: GOOD
+
+---
+
+### F-H03 GOOD - Translation Keys Complete
+
+All used keys exist in all 4 languages:
+- history.title, history.empty, history.clear, history.just_now
+- unit.minute, unit.hour, time.ago
+
+No raw keys visible in normal operation.
+
+Category: GOOD
+
+---
+
+### F-H04 QUESTIONABLE - Dead HTML Structure in history.html
+
+Location: pages/history.html:23-26
+
+The JS renderHistory() completely overwrites container.innerHTML, ignoring the pre-built HTML structure. The id=historyContainer, historyEmpty, and historyList elements are dead code.
+
+User impact: None. But creates confusion for future maintainers.
+
+Category: LEGACY-CODE
+
+---
+
+### F-H05 GOOD - Time Formatting Is Localized
+
+Recent searches show localized relative time. Older uses locale-aware date formatting.
+
+Category: GOOD
+
+---
+
+## Summary Table
+
+| ID | Severity | Category | Description |
+|----|----------|----------|-------------|
+| F-H01 | CRITICAL | TECHNICAL-LEAK | Line names show raw IDs (ChuoRapid) |
+| F-H02 | GOOD | — | Station names use resolveStationName |
+| F-H03 | GOOD | — | All translation keys present |
+| F-H04 | QUESTIONABLE | LEGACY-CODE | Dead HTML structure in history.html |
+| F-H05 | GOOD | — | Time formatting localized |
+
+---
+
+## Cross-Reference
+
+F-H01 is the exact same bug class as F-01 (Route Search). Same root cause: lineInfo stores raw line.name, not display names.
+
+Systemic pattern: The route search pipeline stores raw line IDs in lineInfo, and any UI that displays lineInfo content without resolving to display names will show raw IDs. This affects at least 3 pages (Route Search, History, and potentially others).
+
+---
+End of 4.0.6 History Audit - FINDINGS ONLY NO CODE CHANGES

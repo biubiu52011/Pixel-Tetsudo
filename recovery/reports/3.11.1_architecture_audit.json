@@ -161,7 +161,7 @@
       "UNIFIED_LINES": 10,
       "RailwayDB": 0,
       "DataLayer": 18,
-      "ODPTClient": 6,
+      "ODPTClient": 10,
       "DATA_FUSION": 10,
       "RailwayRTC": 3
     },
@@ -175,7 +175,7 @@
     },
     "js/data-layer.js": {
       "UNIFIED_LINES": 4,
-      "RailwayDB": 8,
+      "RailwayDB": 6,
       "DataLayer": 4,
       "ODPTClient": 0,
       "DATA_FUSION": 0,
@@ -183,16 +183,16 @@
     },
     "js/data-state.js": {
       "UNIFIED_LINES": 5,
-      "RailwayDB": 0,
+      "RailwayDB": 6,
       "DataLayer": 0,
       "ODPTClient": 0,
       "DATA_FUSION": 0,
       "RailwayRTC": 0
     },
     "js/trains-page.js": {
-      "UNIFIED_LINES": 5,
+      "UNIFIED_LINES": 6,
       "RailwayDB": 0,
-      "DataLayer": 9,
+      "DataLayer": 11,
       "ODPTClient": 0,
       "DATA_FUSION": 0,
       "RailwayRTC": 3

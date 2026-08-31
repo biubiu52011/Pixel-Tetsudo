@@ -1,0 +1,277 @@
+# 4.0.1 — Home Page Audit (READ-ONLY)
+
+**Date:** 2026-08-31
+**Scope:** READ-ONLY audit of Home page (pages/home.html) from first-time user perspective
+**URL:** https://biubiu52011.github.io/Pixel-Tetsudo/
+**Baseline:** RC-1 Engineering Baseline (HEAD 1e01d88)
+**Rule:** No code changes. Audit only.
+
+---
+
+## Executive Summary
+
+The Home page serves as the entry point for all users. It contains two main modules under the "Route Search" tab: a route search form and a tourism recommendation module. The page is functionally sound but has several information architecture and i18n issues that a first-time user would notice.
+
+| Category | Count |
+|----------|-------|
+| P0 (blocking) | 0 |
+| P1 (serious) | 0 |
+| P2 (user-visible) | 2 |
+| P3 (polish) | 4 |
+| GOOD (no action) | 8 |
+
+---
+
+## P2 Findings
+
+### P2-01: Tourism tag filter keys MISSING from translations
+
+**Category:** I18N_MISMATCH / UX_BREAKING
+**Severity:** P2 — Users see raw key names on 3 of 7 tag buttons in ALL languages
+**User impact:** Medium — tag buttons show untranslated internal identifiers
+
+**Root cause:**
+`sightseeing.js` defines tag labels using these keys:
+```js
+const TAG_LABELS = {
+  all:     "tourism.tag_all",     // MISSING from translations
+  night:   "tourism.tag_night",   // MISSING from translations
+  history: "tourism.tag_history", // FOUND
+  nature:  "tourism.tag_nature",  // FOUND
+  shrine:  "tourism.tag_shrine",  // FOUND
+  food:    "tourism.tag_food",    // FOUND
+  seasonal:"tourism.tag_seasonal" // MISSING from translations
+};
+```
+
+The `translations.js` file contains DIFFERENT tourism tag keys:
+```
+tourism.tag_anime, tourism.tag_discount, tourism.tag_food, tourism.tag_free,
+tourism.tag_history, tourism.tag_information, tourism.tag_museum, tourism.tag_nature,
+tourism.tag_park, tourism.tag_shopping, tourism.tag_shrine, tourism.tag_sightseeing, tourism.tag_temple
+```
+
+The 3 missing keys (`tag_all`, `tag_night`, `tag_seasonal`) will fall back to showing the raw key name in ALL 4 languages. For example, an English user sees "tourism.tag_all" instead of "All", a Japanese user sees "tourism.tag_all" instead of "すべて".
+
+**Evidence:**
+```powershell
+# Verified: these keys are NOT in translations.js
+tourism.tag_all     = MISSING
+tourism.tag_night   = MISSING
+tourism.tag_seasonal = MISSING
+```
+
+**Affected UI element:**
+```html
+<div id="smTagFilters" class="sm-tag-filters">
+  <!-- 7 tag buttons rendered by sightseeing.js -->
+  <!-- 3 buttons show raw key names, 4 show correct translations -->
+</div>
+```
+
+**Recommendation:**
+Add the 3 missing translation entries to all 4 language dictionaries in `translations.js`:
+```json
+"tourism.tag_all": "すべて",
+"tourism.tag_night": "夜景",
+"tourism.tag_seasonal": "季節"
+```
+(With proper ZH/EN/KO equivalents.)
+
+**Does a regular user care?** YES — tag buttons are the primary way to filter tourism spots. Showing raw keys breaks trust immediately.
+
+---
+
+### P2-02: Tab label "Route Search" misrepresents page content
+
+**Category:** INFORMATION_ARCHITECTURE / UX_WEAK
+**Severity:** P2 — First-time users may not discover the tourism feature
+**User impact:** Medium — navigation doesn't match actual page content
+
+**Root cause:**
+The nav bar has 4 tabs:
+```
+線路検索(Route Search) | 運行状況(Status) | 列車リアルタイム(Realtime) | 履歴(History)
+```
+
+But the "Route Search" tab contains TWO modules:
+1. Route Search (路线搜索 / Route Search)
+2. Tourism Guide (観光ガイド / Sightseeing Guide)
+
+A first-time user clicking "Route Search" expects ONLY route search functionality. They may not scroll down to find the tourism module, or may think it belongs to a different section.
+
+**Industry comparison:**
+- Google Maps Transit: single-purpose search, tourism is separate
+- NAVITIME: route search and sightseeing are clearly separated into different flows
+- Yahoo!乗換案内: purely routing-focused; tourism is external
+
+**Recommendation:**
+Consider either:
+(a) Renaming the tab to something broader like "ホーム" (Home) or "検索・観光" (Search & Tourism)
+(b) Moving the tourism module to its own tab (e.g., next to "History")
+(c) Adding a visual divider or clearer separation between the two modules on the same tab
+
+**Does a regular user care?** Some — a user looking for tourism info might not think to check the "Route Search" tab.
+
+---
+
+## P3 Findings
+
+### P3-01: Hardcoded Chinese fallback in search.from_source_hint
+
+**Category:** I18n_FALLBACK_LEAK
+**Severity:** P3 — Low impact, only appears when navigating from tourism
+**User impact:** Low — niche scenario
+
+**Root cause:**
+```js
+// js/search-ui.js:399
+hint.textContent = _t("search.from_source_hint", "来自观光景点") + ": " + ...
+```
+
+The fallback string `"来自观光景点"` (Chinese) is hardcoded in the JS code. If `search.from_source_hint` key is ever missing or the translation function fails, Chinese text appears in the UI regardless of the current language.
+
+**Current state:** The key `search.from_source_hint` IS present in all 4 language dictionaries, so this fallback is rarely triggered. But it is a latent bug.
+
+**Recommendation:** Remove the hardcoded Chinese fallback. Use empty string or key-based fallback:
+```js
+hint.textContent = _t("search.from_source_hint") + ": " + ...
+```
+
+**Does a regular user care?** Rarely — the key exists in all languages.
+
+---
+
+### P3-02: Dead translation keys (search.rec.*)
+
+**Category:** LEGACY_CODE / DEAD_TRANSLATION
+**Severity:** P3 — No user-visible impact, but creates maintenance debt
+**User impact:** None
+
+**Root cause:**
+The `translations.js` file contains these keys in ALL 4 languages:
+```
+search.rec.fewest_transfers = "乗換最少"
+search.rec.fastest = "最速"
+search.rec.recommended = "おすすめ"
+```
+
+These keys are hardcoded in Japanese across all 4 languages and are NEVER referenced by any JS code. A scan of all JS files confirms 0 matches.
+
+Meanwhile, the ACTUAL sort mode buttons use different keys that ARE properly translated:
+```
+search.mode.transfers = "Fewest Transfers" (EN) / "乗換最少" (JA)
+search.mode.duration = "Fastest" (EN) / "最速" (JA)
+search.mode.combo = "Recommended" (EN) / "おすすめ" (JA)
+```
+
+**Recommendation:** Remove the dead `search.rec.*` keys from all 4 language dictionaries.
+
+**Does a regular user care?** No — these keys are never displayed.
+
+---
+
+### P3-03: Dead translation key (tourism.auto_detected)
+
+**Category:** LEGACY_CODE / DEAD_TRANSLATION
+**Severity:** P3 — No user-visible impact
+**User impact:** None
+
+**Root cause:**
+The `tourism.auto_detected` key exists in all 4 language dictionaries:
+- EN: "Auto-detected"
+- JA: "自動検出"
+- ZH: "自动检测"
+- KO: "자동 감지"
+
+But the UI element that would display it (the `sm-auto-badge`) was removed in Phase 43-A (`// Phase 43-A: removed sm-auto-badge` in sightseeing.js:73). No code references this key anymore.
+
+**Recommendation:** Remove the `tourism.auto_detected` key from all 4 language dictionaries.
+
+**Does a regular user care?** No — the feature was intentionally removed.
+
+---
+
+### P3-04: Dead CSS (.swap-btn)
+
+**Category:** DEAD_CSS
+**Severity:** P3 — No user-visible impact, minor maintenance debt
+**User impact:** None
+
+**Root cause:**
+CSS defines `.swap-btn` styles in `style.css` (lines 238-239) and mobile responsive rules (line 529), but no HTML element uses this class in `home.html`. The swap button between From/To inputs does not exist in the current HTML.
+
+**Recommendation:** Remove `.swap-btn` CSS rules from `style.css` (optional, low priority).
+
+**Does a regular user care?** No.
+
+---
+
+## GOOD Findings (No Action Needed)
+
+### G-01: Module visual consistency
+Both `search-card` and `sm-module` use `.pixel-card` + `.module-title` + `<h2>` with identical styling. Same border, padding, typography. A first-time user sees one coherent product.
+
+### G-02: i18n coverage for USED keys
+All keys actually referenced in HTML/JS have translations in all 4 languages. No raw i18n keys visible in normal user flow.
+
+### G-03: Language switcher accessibility
+Full ARIA support: `role="listbox"`, `aria-haspopup`, `aria-expanded`, `aria-label`, keyboard navigation (Arrow keys, Home, End, Escape, Enter).
+
+### G-04: Default language = JA
+`DEFAULT_LANG = "ja"` in `lang-init.js`. First-time users see Japanese UI.
+
+### G-05: Mobile responsive
+Breakpoint at 640px. Touch targets min 44px. Search inputs stack vertically. No horizontal overflow.
+
+### G-06: No technical ID leaks
+No `line_id`, `station_id`, `operator` raw IDs visible in user-facing output. Station names resolved via `RailwayDB.resolveStationName()`.
+
+### G-07: Sort mode buttons properly translated
+Uses `search.mode.*` keys which ARE properly translated in all 4 languages. EN user sees "Fewest Transfers / Fastest / Recommended".
+
+### G-08: Nearby spots display correctly
+Spot names, distances, tags all use proper i18n. No raw keys in nearby spots section.
+
+---
+
+## Cross-Page Consistency Notes
+
+| Aspect | Home | Trains | Realtime |
+|--------|------|--------|----------|
+| Card visual language | pixel-card + module-title | rs-line-card + operator group | rs-line-card + operator group |
+| Different structure | Yes (2 modules on 1 page) | Line list by operator | Line list by operator with status |
+| This is intentional | Yes — Home is a landing page | Consistent with product purpose | Consistent with product purpose |
+
+**Verdict:** The visual difference between Home and Trains/Realtime is EXPECTED — Home is a landing page with search + tourism, while Trains/Realtime are dedicated data views. This is NOT an inconsistency.
+
+---
+
+## Recommendation
+
+**Do NOT rush to fix P2 issues before understanding the product vision.**
+
+P2-01 (tag key mismatch) is a clear bug that should be fixed in a dedicated i18n task.
+
+P2-02 (tab label mismatch) is a product design question. Should tourism be on the same tab as route search? This requires a design decision, not a code fix.
+
+**Suggested next steps:**
+1. Fix P2-01 (add 3 missing translation keys) — quick win, unblocks tourism UX
+2. Keep P2-02 for 4.0 Design Decision gate — requires product vision alignment
+3. Clean up P3 dead keys/CSS as part of general maintenance
+4. Continue with 4.0.2 Route Search audit
+
+---
+
+## Methodology
+
+- Read `pages/home.html` (full HTML structure)
+- Read `js/search-ui.js` (route search logic)
+- Read `js/sightseeing.js` (tourism module logic)
+- Read `js/translations.js` (all 4-language translation dictionaries)
+- Read `css/style.css` (shared styles)
+- Read `css/tourism-styles.css` (tourism-specific styles)
+- Read `css/lang-bar.css` (language switcher styles)
+- Verified public URL: https://biubiu52011.github.io/Pixel-Tetsudo/ returns 200
+- Scanned all JS files for key references to confirm dead keys
+- Compared TAG_LABELS in sightseeing.js against translation keys in translations.js

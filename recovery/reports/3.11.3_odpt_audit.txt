@@ -1,0 +1,11 @@
+=== 156-Line Realtime Capability Matrix ===
+
+REALTIME possible (operator has ODPT endpoint): 152
+STATIC only (operator has NO ODPT endpoint): 4
+Missing operator: 0
+
+STATIC-only lines:
+  JR_Yamaguchi / JR West
+  Rinkai / Rinkai
+  ShonanMonorailE / ShonanMonorail
+  TsukubaExpress / TsukubaExpress

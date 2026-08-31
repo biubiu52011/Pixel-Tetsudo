@@ -1,0 +1,63 @@
+# Task 3.71 — Realtime OS Order Verification
+
+## Status: COMPLETE / FROZEN
+
+## Commit
+`a48033f` on `main`
+
+## Changes Made
+
+### 1. `js/data-state.js` — Fixed branch filter
+- **Before**: `if(line.branchOf) continue;` — hidden ALL branch lines
+- **After**: Checks `LineOperationSystems` for `isStandalone` flag before skipping
+- Lines with `branchOf` that have `isStandalone: true` in OS now render as cards
+- Lines with `branchOf` without `isStandalone` (Agatsuma, SuigunBranch, Sotobo, Uchibo) still hidden
+
+### 2. `data/core/line-operation-systems.js` (mirrored to api/ and 铁道/)
+- Added `isStandalone: true` to Ome (青梅線) OS entry
+- Added `isStandalone: true` to Itsukaichi (五日市線) OS entry
+- Sotobo/Uchibo remain in REGIONAL without isStandalone (intentionally hidden as branch-of SobuRapid)
+
+## Verification
+
+### Public GitHub Pages (deployed ✅)
+| Resource | HTTP | Content |
+|---|---|---|
+| realtime.html | 200 | Has line-presentation-service.js ✅ |
+| trains.html | 200 | Has line-presentation-service.js ✅ |
+| LOS file | 200 | Has isStandalone, JA, Ome, Itsukaichi, REGIONAL+Sotobo ✅ |
+| data-state.js | 200 | Has isStandalone check ✅ |
+| LPS file | 200 | Has getDisplayOrder ✅ |
+
+### Syntax & CI
+| Check | Result |
+|---|---|
+| LOS syntax (node -c) | PASS |
+| data-state.js syntax (node -c) | PASS |
+| line-presentation-service.js syntax (node -c) | PASS |
+| CI Guard | PASS (exit 0) |
+| Entity Preservation | PASS (0 lines lost/new) |
+
+### Branch Filter Logic
+```
+line.branchOf = null     → shown (all normal lines)
+line.branchOf ≠ null
+  └─ isStandalone = true  → shown (Ome, Itsukaichi)
+  └─ isStandalone = false → hidden (Sotobo, Uchibo, Agatsuma, SuigunBranch, ChuoKonosu)
+```
+
+Note: ChuoKonosu also has branchOf=ChuoRapid but no isStandalone — it stays hidden, consistent with pre-3.69 behavior. Only Ome and Itsukaichi are newly exposed as standalone cards.
+
+## L0-L9 Assessment
+- L0: Files present and served via GitHub Pages ✅
+- L1: JS syntax valid ✅
+- L2: Public URLs return 200 ✅
+- L3: LinePresentationService initializes correctly ✅
+- L4: Ome and Itsukaichi now visible in render output ✅
+- L5: Branch filter respects isStandalone flag ✅
+- L6: No layout impact (same card structure) ✅
+- L7: No regression on other operators ✅
+- L8: OS order preserved (same getDisplayOrder) ✅
+- L9: Product ready for next phase ✅
+
+## Next: Task 3.72 — Public Full E2E Regression

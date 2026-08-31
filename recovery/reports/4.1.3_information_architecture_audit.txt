@@ -1,0 +1,464 @@
+# 4.1.3 — Information Architecture Audit
+# Date: 2026-08-31
+# Rule: AUDIT ONLY — NO CODE CHANGES
+# Perspective: First-time user, no technical knowledge
+
+---
+
+## Executive Summary
+
+After 4.1.1 fixed the display identity layer, the product now shows correct names across all pages. However, the **information architecture** still has significant problems from a first-time user perspective. Several UI elements exist because "the data has this field" rather than "the user needs this information."
+
+The product currently reads like **a developer documentation viewer**, not a **passenger navigation tool**.
+
+| Area | Key Problem | Product Action |
+|------|-------------|----------------|
+| Route Search | Sort mode buttons redundant with duration | SIMPLIFY |
+| Route Search | Direction arrows duplicate station order | REMOVE |
+| Route Search | Nearby spots injected into route card | MOVE |
+| Realtime | Filter bar exists but most users dont need it | SIMPLIFY |
+| Trains Detail | SVG map + text list shows same info twice | MERGE |
+| Trains | Branch indicator confusing for new users | SIMPLIFY |
+| OS Code Badges | Internal operator codes shown to tourists | SIMPLIFY |
+| Home Layout | Two modules compete for attention | REDESIGN |
+| Navigation Tabs | "Route Search" tab contains tourism | REDESIGN |
+| Tourism Grid | Shows raw English names (DATA-BLOCKED) | HIDE until fixed |
+
+---
+
+## 4.1.3-A: Home Page Audit
+
+### Current Structure
+```
+[Pixel Tetsudo Header]
+[Route Search | Status | Real-time Trains | History]  <-- TABS
+─────────────────────────────────────────────────────
+[Route Search Card]
+  Title: "路线搜索" / "Route Search"
+  From: [input]  To: [input]  [Search]
+  
+[Tourism Guide Card]  
+  Title: "観光ガイド" / "Sightseeing Guide"
+  Station picker + tag filters + spot grid
+─────────────────────────────────────────────────────
+[Footer]
+```
+
+### Findings
+
+#### H-01 🔴 P2 — Tab Label Misrepresents Content
+**Category:** INFORMATION_ARCHITECTURE
+**Action:** REDESIGN
+
+The "Route Search" tab contains TWO modules: route search AND tourism. A user clicking this tab expects only routing functionality. They must scroll to find tourism — and may never discover it.
+
+**Industry comparison:** Google Maps has one search box. NAVITIME has separate "Search" and "Guide" flows. Yahoo乗換案内 is purely routing.
+
+**What the user thinks:** "Why is there a tourist guide under my route search?"
+
+**Recommendation:** Rename tab to "検索・観光" (Search & Sightseeing) or move tourism to its own tab.
+
+**User value if removed:** Low — users would still find route search. But they might miss tourism entirely.
+
+---
+
+#### H-02 🟡 P2 — Two Modules Share Visual Weight
+**Category:** VISUAL_HIERARCHY
+**Action:** REDESIGN
+
+Both `search-card` and `sm-module` use `.pixel-card` with identical border, padding, shadow, and `module-title` h2. The user cannot visually distinguish which module is the primary action.
+
+On mobile (390px), both modules stack vertically with equal visual weight. The search form — the primary task — competes with tourism for attention.
+
+**Industry comparison:** Google Maps: search box dominates, everything else is secondary. NAVITIME: search is full-height, extras are collapsed.
+
+**Recommendation:** Make search the dominant element. Dim or collapse tourism into an expandable section.
+
+**User value if changed:** High — users should immediately know "type stations, hit search."
+
+---
+
+#### H-03 🟢 GOOD — Default Language = JA
+First-time users see Japanese UI. Language switcher is accessible (ARIA labels, keyboard navigation).
+
+---
+
+#### H-04 🟢 GOOD — Header Consistency
+Same pixel-header across all pages. Language switcher always visible. No technical leaks.
+
+---
+
+## 4.1.3-B: Route Search Audit
+
+### Current Result Card Structure
+```
+[Result Card]
+├── Header: "15 min" | "2 segments"
+├── Sort Mode Buttons: [Fewest Transfers] [Fastest] [Recommended]
+├── Station Timeline: 東京 [FROM] ─ 新宿 ─ 立川 ─ 高尾 [TO]
+├── Segment 1: [JC] 中央線快速 ↑ 東京 → 立川  8min  ○正常
+├── Segment 2: [JB] 甲府線    ↓ 立川 → 高尾  7min  ○正常
+└── Nearby Spots Section (injected)
+    ├── "Nearby Attractions at 高尾"
+    ├── Spot cards (grid)
+    └── "View All" / "Plan Route from Here" buttons
+```
+
+### Findings
+
+#### S-01 🔴 P1 — Sort Mode Buttons Are Redundant
+**Category:** INFORMATION_OVERLOAD
+**Action:** SIMPLIFY
+
+The three sort mode buttons (transfers/duration/combo) appear ON EVERY RESULT CARD. But:
+1. The default mode is already "fewest transfers" (most users want this)
+2. The result shows ONE route — not multiple options to compare
+3. Clicking a different mode re-runs the search, showing the same card again
+
+**What the user actually needs:** "How long? How many transfers? Which line?" — all visible without touching the buttons.
+
+**Industry comparison:** NAVITIME shows 3-5 route OPTIONS side by side with durations. Google Maps shows one route with alternate routes as separate cards. Neither uses toggle buttons INSIDE a single result.
+
+**User value if removed:** High — buttons add cognitive load without clear benefit. Most users will never click them.
+
+**Recommendation:** Remove sort mode buttons. Show the single best route. If multiple routes exist, show them as separate cards (like Google Maps).
+
+---
+
+#### S-02 🟠 P2 — Direction Arrows Are Redundant
+**Category:** REDUNDANCY
+**Action:** REMOVE
+
+Each ride segment shows:
+```
+中央線快速 ↑  東京 → 立川
+```
+
+The up arrow (↑) means "direction of travel." But the station sequence `東京 → 立川` already shows direction. The arrow adds zero information.
+
+**User value if removed:** None — the arrow conveys nothing the station order doesnt already show.
+
+**Recommendation:** Remove direction arrows entirely. If needed, replace with text like " toward Takao" — but even that is redundant with the station sequence.
+
+---
+
+#### S-03 🟠 P2 — Nearby Spots Injected Into Route Result
+**Category:** INFORMATION_ARCHITECTURE
+**Action:** MOVE
+
+The route search result card contains a "Nearby Attractions" section at the bottom. This mixes two different user intents:
+1. "How do I get from A to B?" (transit task)
+2. "What can I do near B?" (tourism task)
+
+**User value if moved:** The transit result becomes cleaner. Tourism becomes a separate flow (click destination → see spots).
+
+**Industry comparison:** Google Maps shows transit results WITHOUT tourism. You must explicitly search for "things to do near X." NAVITIME has a separate "Around Station" feature.
+
+**Recommendation:** Move nearby spots to a separate view. After showing the route, add a small "View spots near destination" link. Do NOT inject spots into the route card.
+
+---
+
+#### S-04 🟡 P3 — Station Timeline Is Visually Cluttered
+**Category:** MOBILE
+**Action:** SIMPLIFY
+
+The horizontal station timeline (`東京 [FROM] ─ 新宿 ─ 立川 ─ 高尾 [TO]`) works on desktop but on mobile (390px) it becomes a vertical list with connectors. The visual metaphor (timeline) breaks on small screens.
+
+**User value if simplified:** On mobile, a simple vertical list without connectors is sufficient. The connector lines add visual noise.
+
+---
+
+#### S-05 🟢 GOOD — Duration Is Prominent
+20px bold duration at the top of the result card. This is the first thing users see. Correct priority.
+
+---
+
+#### S-06 🟢 GOOD — Line Color Bars
+Each segment has a colored left border matching the line color. This is visually useful and consistent with industry practice.
+
+---
+
+#### S-07 🟡 P3 — "Segments" Count Adds Little Value
+The header shows "2 segments" next to "15 min." Most users understand "2 transfers" from the route itself. The segment count is redundant with the station timeline.
+
+**User value if removed:** Minimal — the timeline already shows 2 rides + 1 transfer.
+
+---
+
+## 4.1.3-C: Realtime Page Audit
+
+### Current Structure
+```
+[Filter Bar]: [All] [JR東日本] [東京メトロ] [西武] [小田急] ...
+[Line Cards grouped by operator]
+  Each card: [OS badge] [Line name] [Interval text]
+  Click → Modal with status/interval/cause/updated time
+```
+
+### Findings
+
+#### R-01 🟡 P2 — Operator Filter Bar Is Unnecessary for Most Users
+**Category:** NECESSITY
+**Action:** SIMPLIFY
+
+The filter bar shows ALL 21 operators. Most users care about 2-3 operators they use daily. But:
+1. The bar takes significant horizontal space
+2. On mobile, it wraps to multiple rows
+3. The default "All" view already shows everything sorted by OS order
+4. Users who want to filter their operator can scroll to find it
+
+**Industry comparison:** Google Maps Transit shows all lines. Yahoo乗換案内 has a separate "My Lines" feature (not a filter bar on the main page). NAVITIME shows lines grouped by operator without a filter bar.
+
+**User value if removed:** Low for casual users. Medium for daily commuters who only care about one operator.
+
+**Recommendation:** Keep the filter but make it collapsible. Show "My Lines" as a separate feature (requires user login/saving). Default view = all lines.
+
+---
+
+#### R-02 🟢 GOOD — Card Visual Language Matches Trains
+Same `.rs-line-card` CSS, same OS badge, same line color, same display name resolution. Cross-page consistency achieved.
+
+---
+
+#### R-03 🟡 P2 — Modal Shows Too Much Information
+**Category:** INFORMATION_OVERLOAD
+**Action:** SIMPLIFY
+
+The detail modal shows:
+```
+[Status: ○ Normal]
+[Interval: Shinjuku - Takao]
+[Delay Cause: Weather]
+[Last Updated: 14:32]
+```
+
+For a line running normally, the user only needs to see:
+```
+[Status: ○ Normal]
+```
+
+The interval, cause, and updated time are only relevant when there IS a problem. Showing them always adds visual clutter.
+
+**Recommendation:** Collapse non-essential sections when status is "normal." Only expand when there is delay/suspension data.
+
+---
+
+#### R-04 🟢 GOOD — Status Icons Are Intuitive
+Circle (green = normal), triangle (orange = delayed), X (red = suspended). These match universal traffic light conventions.
+
+---
+
+#### R-05 🔵 INTENTIONAL — Filter Bar Exists Because Purpose Differs
+Realtime page is a MONITORING tool. Users check "is my line delayed?" The filter helps them jump to their operator. This is a legitimate design difference from Trains (which is a REFERENCE tool).
+
+---
+
+## 4.1.3-D: Trains Page Audit
+
+### Current Structure
+```
+[Line List, grouped by operator]
+  Each card: [OS badge] [Line name] [Interval] [Branch indicator?] [Train count badge]
+  
+Click card → Detail View (replaces list):
+  [Back] [Line name title]
+  [SVG station map with train positions]
+```
+
+### Findings
+
+#### T-01 🟡 P2 — Branch Indicator Confuses New Users
+**Category:** COGNITIVE_COST
+**Action:** SIMPLIFY
+
+Some line cards show a `↳` branch indicator next to the name:
+```
+JR东日本
+中央線快速
+東京 ↔ 高尾
+↳
+```
+
+A first-time user has no idea what the `↳` means. It indicates "this line is a branch of another" — internal data structure exposed to users.
+
+**User value if removed:** None — the branch relationship is not something a passenger needs to know. They just need to know "this is the Ome Line."
+
+**Recommendation:** Remove branch indicator from card view. If branch relationships are important, show them in the detail view as "connects to: Chuo Line" — but only if it helps navigation.
+
+---
+
+#### T-02 🟡 P2 — Train Count Badge Is Obscure
+**Category:** COGNITIVE_COST
+**Action:** SIMPLIFY
+
+Cards show a badge with a number (e.g., "3") when ODPT position data is available. What does "3" mean?
+- 3 trains running?
+- 3 stations with trains?
+- 3 positions reported?
+
+A user has no way to know. The badge label is missing.
+
+**Industry comparison:** No major transit app shows a raw train count badge without explanation.
+
+**Recommendation:** Either remove the badge or add a label: "3 trains" / "3両". Better yet, show actual train positions on the SVG map (which already exists) and remove the badge.
+
+---
+
+#### T-03 🟠 P1 — Detail View Duplicates Information
+**Category:** REDUNDANCY
+**Action:** MERGE
+
+When clicking a line card, the detail view shows:
+1. A title with the line name
+2. An SVG station map with all stations listed vertically
+3. Train position dots on the map
+
+But the card ALREADY shows:
+- Line name
+- Interval (first ↔ last station)
+
+The detail view adds the full station list + SVG map. This is useful BUT the transition from list → detail is abrupt — the list disappears entirely, and there is no visual connection between what was clicked and what appears.
+
+**Industry comparison:** Google Maps: clicking a line shows a slide-in panel with details, list remains visible. NAVITIME: clicking a line opens a full-screen detail with back button.
+
+**Recommendation:** Keep the card list visible behind the detail view (overlay pattern) OR ensure the back button is very prominent. Currently the back button is small and easy to miss on mobile.
+
+---
+
+#### T-04 🟢 GOOD — No Operator Filter
+Trains page has no filter bar. Users browse all lines. This is appropriate for a reference/browsing tool.
+
+---
+
+#### T-05 🟢 GOOD — OS Code Badges Help Regular Commuters
+For daily commuters who know "JC = Chuo Rapid," the OS badge is a quick visual shortcut. For tourists, it is meaningless. This is an acceptable trade-off.
+
+---
+
+## 4.1.3-E: History Page Audit
+
+### Findings
+
+#### HIS-01 🟢 GOOD — Simple and Clear
+History shows: from station → to station, duration, lines used, time ago. Click to re-search. This is exactly what a user needs.
+
+#### HIS-02 🟡 P3 — "Lines" Field Shows Internal IDs Before 4.1.1 Fix
+Now fixed in 4.1.1. History entries will show proper display names.
+
+#### HIS-03 🟢 GOOD — Empty State Is Clear
+"No search history" message with icon. User understands they need to search first.
+
+---
+
+## 4.1.3-F: Tourism Page Audit
+
+### Findings
+
+#### TM-01 🔴 P2 — Spot Names Show Raw English
+**Category:** TECHNICAL_LEAK / DATA_GAP
+**Action:** HIDE (until data fixed)
+
+The tourism grid shows English names like "Local Shrines," "Station Area," "Shopping Street" to ALL users including Japanese and Chinese. The code has language-aware resolution (`getSpotName()`), but the DATA lacks multilingual fields.
+
+**User value if hidden:** Medium — showing English names to non-English users breaks trust immediately.
+
+**Recommendation:** Since data is DATA-BLOCKED (no multilingual tourism data in railway_data.json), consider hiding the tourism grid on Home until data is added. Or show a placeholder: "Coming soon in Japanese."
+
+---
+
+#### TM-02 🟡 P2 — Missing Tag Translations (3 keys)
+**Category:** I18N_GAP
+**Action:** FIX (quick win)
+
+`tourism.tag_all`, `tourism.tag_night`, `tourism.tag_seasonal` are missing from translations.js. These 3 buttons show raw keys.
+
+---
+
+#### TM-03 🟢 GOOD — Tag Filter Interaction Works
+Clicking tags filters the grid. "All" clears filters. Clean interaction.
+
+---
+
+## 4.1.3-G: Cross-Page Consistency Audit
+
+### Visual Language Comparison
+
+| Element | Home | Trains | Realtime | History | Tourism |
+|---------|------|--------|----------|---------|---------|
+| Card style | pixel-card | rs-line-card | rs-line-card | history-entry | sm-grid-card |
+| Border | 2px solid | 2px solid | 2px solid | 2px solid | 1px solid |
+| Shadow | 3px 3px 0 | glow on hover | glow on hover | 2px 2px 0 | none |
+| Radius | var(--radius) | var(--radius) | var(--radius) | var(--radius) | var(--radius-sm) |
+| Font | Fusion Pixel | Fusion Pixel | Fusion Pixel | Fusion Pixel | Fusion Pixel |
+
+**Verdict:** Core visual language IS consistent (same font, similar borders). Differences in shadow/radius are acceptable — different card types serve different purposes.
+
+### Functional Consistency
+
+| Feature | Trains | Realtime | Difference Justified? |
+|---------|--------|----------|----------------------|
+| Line name display | ✅ | ✅ | YES - same resolver |
+| OS badge | ✅ | ✅ | YES - same component |
+| Operator grouping | ✅ | ✅ | YES - same DataState |
+| Station name resolution | ✅ | ✅ | YES - same RailwayDB |
+| Modal/Detail | Partial | Full | PARTIALLY - Trains detail is minimal |
+| Filter bar | No | Yes | YES - different user tasks |
+| Branch indicator | Yes | No | QUESTIONABLE - why show branch in Trains but not Realtime? |
+| Train count badge | Yes | No | YES - Realtime shows status instead |
+
+**Key inconsistency:** Branch indicator (`↳`) appears on Trains cards but NOT on Realtime cards. Both pages use the same `DataState.renderCard()`, so this is actually consistent (the indicator is mode-dependent: `mode === "trains"`). But a user seeing it on Trains and not on Realtime might wonder why.
+
+---
+
+## 4.1.3-H: "Designed for Tasks" vs "Designed for Users"
+
+### Highest Priority Problems
+
+| # | Problem | Evidence | User Impact |
+|---|---------|----------|-------------|
+| 1 | Sort mode buttons in route result | 3 toggle buttons inside every result card | Users confused by what they do; never clicked |
+| 2 | Direction arrows | ↑↓ on every segment | Redundant with station order; visual noise |
+| 3 | Nearby spots in route card | Tourism injected into transit result | Mixes two user intents; clutters route info |
+| 4 | Train count badge | Unlabeled number on card | Users dont know what it means |
+| 5 | Branch indicator | ↳ symbol with no explanation | Users dont know what it means |
+| 6 | Tourism English names | Raw English in all languages | Breaks trust for non-EN users |
+| 7 | Tab label mismatch | "Route Search" contains tourism | Users miss tourism feature |
+| 8 | Home visual hierarchy | Search and tourism equal weight | Primary task competes with secondary |
+
+### Root Cause Pattern
+
+> **Every time a developer added a feature, they added UI for it — without asking whether the user would actually use it.**
+
+The sort mode buttons were added for "completeness." The direction arrows were added because "the data has direction." The nearby spots were added because "we have tourism data." None of these questions: "Will a user look at this?"
+
+---
+
+## Summary: 4.1.3 Findings by Action Type
+
+| Action | Count | Items |
+|--------|-------|-------|
+| **REMOVE** | 2 | Direction arrows (S-02), Segment count (S-07) |
+| **SIMPLIFY** | 5 | Sort mode buttons (S-01), Operator filter (R-01), Modal info (R-03), Branch indicator (T-01), Train badge (T-02) |
+| **MOVE** | 1 | Nearby spots (S-03) |
+| **REDESIGN** | 2 | Tab label (H-01), Home hierarchy (H-02) |
+| **HIDE** | 1 | Tourism grid until data fixed (TM-01) |
+| **FIX (quick)** | 1 | Missing tag translations (TM-02) |
+| **MERGE** | 1 | Detail view pattern (T-03) |
+| **KEEP** | 8 | Duration prominence, line colors, status icons, cross-page card consistency, OS badges, empty states, language switcher, default JA |
+
+---
+
+## Recommendation for 4.1.4
+
+Focus on the top 5 REMOVE/SIMPLIFY actions first. These are the highest-impact changes that make the product feel like a real navigation app rather than a data viewer.
+
+Do NOT touch:
+- railway_data.json
+- LineOperationSystems
+- LinePresentationService
+- OS ordering rules
+- Image mapping
+- i18n translation keys (except the 3 missing tourism tags)
+
+---
+End of 4.1.3 Information Architecture Audit

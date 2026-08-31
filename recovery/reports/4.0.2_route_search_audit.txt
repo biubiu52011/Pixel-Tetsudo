@@ -1,0 +1,433 @@
+# 4.0.2 — Route Search: First-Time User IA Audit
+# Date: 2026-08-31
+# Rule: AUDIT ONLY — NO CODE CHANGES
+
+---
+
+## Executive Summary
+
+The Route Search module is functionally complete (BFS algorithm, station graph, sort modes, nearby spots, sort mode persistence, URL param support) but suffers from a **critical information architecture problem**: line names in search results display internal engine IDs instead of user-facing display names. This is the single highest-impact IA flaw discovered in this audit phase.
+
+Additionally, 3 translation keys are completely missing (causing raw-key display), 3 translation keys are dead code, and the visual hierarchy could be significantly improved for first-time users.
+
+---
+
+## Finding Classification Legend
+
+- 🔴 **Wrong** — design direction itself is wrong; user is actively misled
+- 🟠 **Weak** — works but clearly not good product design
+- 🟡 **Questionable** — has controversial aspects, needs user testing
+- 🟢 **Good** — aligns with user habits and industry conventions
+- 🔵 **Intentional** — deliberate design with solid reasoning
+
+---
+
+## F-01 🔴 CRITICAL — Line Name Leakage: Raw Internal ID Shown to Users
+
+**Location:** `js/search-ui.js:255`
+```js
+var lineName = seg.lineName || (seg.lines && seg.lines[0]) || '';
+html += '<span class="line-name">' + window.escapeHtml(lineName) + '</span>';
+```
+
+**Root cause:** `seg.lineName` comes from `route-search.js:177` which assigns `seg.lines[0]` — this is `line.name` from `railway_data.json`, which is the **internal engine ID** (e.g., `ChuoRapid`, `KeihinTohoku`, `Musashino`), NOT the Japanese/English/ZH/KO display name.
+
+**What the user sees (JA mode):**
+```
+ChuoRapid  東京 → 高尾      ← raw ID, no Japanese shown
+```
+
+**What it should show:**
+```
+中央線快速  東京 → 高尾     ← proper display name
+```
+
+**Evidence:** `trains-detail.js:13-18` already has the correct pattern:
+```js
+function getDisplayLineName(line) {
+  var _lang = (window.currentLang || 'ja').toLowerCase();
+  var _nameKey = 'name' + _lang.charAt(0).toUpperCase() + _lang.slice(1);
+  return (line && line[_nameKey]) || (line && line.nameJa) || (line && line.nameEn) || (line && line.name) || (line && line.id);
+}
+```
+This same function exists in detail view but is **not used** in search results.
+
+**User impact:** High. A Japanese user sees "ChuoRapid" and has no idea what line that is. A Chinese user sees the same English snake_case. The search result is functionally useless for non-English-speaking users.
+
+**If deleted:** User cannot follow the route. Total functional failure for non-English users.
+
+**Recommendation:** Reuse `getDisplayLineName()` pattern in `search-ui.js` by resolving `lineName` via `RailwayDB.getLine(lineId)` + language-aware name key. Same approach as detail view.
+
+**Category:** TECHNICAL-LEAK / INFORMATION_OVERLOAD
+
+---
+
+## F-02 🟠 WEAK — Hardcoded Chinese Fallback in search.from_source_hint
+
+**Location:** `js/search-ui.js:402`
+```js
+hint.textContent = _t('search.from_source_hint', '来自观光景点') + ': ' + (displayName || stationKey);
+```
+
+**Problem:** The fallback string `'来自观光景点'` is hardcoded in Chinese. When the user is in JA or EN mode and the key is missing (or fails to resolve), the Chinese text appears as a last resort.
+
+**What the user sees (JA mode, if key missing):**
+```
+来自观光景点: 浅草
+```
+
+**All 4 language translations exist** in translations.js (JA: "観光スポットから", ZH: "来自观光景点", EN: "From sightseeing spot", KO: "관광 명소에서"). The key IS present in all 4 languages. This means the hardcoded fallback only triggers if `t()` function itself fails, which is rare — but it's still a latent bug waiting to surface.
+
+**User impact:** Low (latent). Would only trigger if translation system is broken.
+
+**If deleted:** No visible change under normal operation. Minor safety net removed.
+
+**Recommendation:** Remove the hardcoded fallback. Let `t('search.from_source_hint')` return the key itself if missing, which is already the graceful degradation pattern used elsewhere.
+
+**Category:** LEGACY-CODE / TECHNICAL-LEAK
+
+---
+
+## F-03 🟡 QUESTIONABLE — Missing Tourism Tag Translation Keys
+
+**Location:** `js/sightseeing.js:10-16` (TAG_LABELS), `js/sightseeing.js:80` (renderTagFilters)
+```js
+const TAG_LABELS = {
+  all: 'tourism.tag_all',
+  night: 'tourism.tag_night',
+  history: 'tourism.tag_history',    // ✅ exists
+  nature: 'tourism.tag_nature',      // ✅ exists
+  shrine: 'tourism.tag_shrine',      // ✅ exists
+  food: 'tourism.tag_food',          // ✅ exists
+  seasonal: 'tourism.tag_seasonal'
+};
+```
+
+**Problem:** `tourism.tag_all`, `tourism.tag_night`, and `tourism.tag_seasonal` are **not present** in `translations.js` in any language. These 3 tags will show raw keys like `tourism.tag_all` to all users.
+
+**Verified:** grep for `tourism.tag_all`, `tourism.tag_night`, `tourism.tag_seasonal` in translations.js returns 0 matches across all 4 language blocks.
+
+**User impact:** Medium. Any user who sees the tourism tag filter (Home page or search-result nearby spots) will see raw key names on 3 of 7 filter buttons.
+
+**If deleted:** These 3 tag buttons would still appear (as raw keys). Users might be confused but could still use the remaining 4 working tags.
+
+**Recommendation:** Add the 3 missing keys to all 4 language blocks. This is a straightforward i18n gap, not an IA problem.
+
+**Category:** TECHNICAL-LEAK / i18n GAP
+
+---
+
+## F-04 🟡 QUESTIONABLE — Dead Translation Keys: search.rec.*
+
+**Location:** `js/translations.js` lines 82-84, 262-264, 442-444, 622-624
+```js
+"search.rec.fewest_transfers": "乗換最少",
+"search.rec.fastest": "最速",
+"search.rec.recommended": "おすすめ",
+```
+
+**Problem:** These 12 keys (3 × 4 langs) are defined but **never referenced** in any JavaScript file. The actual sort mode buttons use `search.mode.transfers/duration/combo` (which DO exist in translations). The `search.rec.*` keys appear to be a leftover from an earlier implementation.
+
+**User impact:** None (dead code, no user-visible effect).
+
+**If deleted:** Zero user impact. Code base becomes cleaner.
+
+**Recommendation:** Remove these 12 dead keys. Low risk, high hygiene.
+
+**Category:** LEGACY-CODE
+
+---
+
+## F-05 🟡 QUESTIONABLE — Direction Arrows (↑/↓) Lack Meaning Without Context
+
+**Location:** `js/search-ui.js:259-263`
+```js
+if (seg.direction === 1) {
+  html += '<span class="line-direction">↑</span>';
+} else if (seg.direction === -1) {
+  html += '<span class="line-direction">↓</span>';
+}
+```
+
+**Problem:** The arrows indicate direction along the line's canonical station order (from `lineStationOrder`), but the user has no way to know which end of the line is "up" vs "down." A first-time user seeing "↑ 東京 → 高尾" cannot tell if ↑ means "toward Tokyo" or "toward Takao" without external knowledge.
+
+**What other transit apps do:** NAVITIME shows terminal station names (e.g., "高尾行"), Yahoo!乗換案内 shows the destination direction in text. Neither uses bare arrows.
+
+**User impact:** Low-medium. Users who know the line geometry can interpret the arrow; newcomers are confused.
+
+**If deleted:** No functional loss. The from→to station names already show direction implicitly.
+
+**Recommendation:** Replace arrows with text direction labels like "→ 高尾方面" (toward Takao) or simply remove them since the `from → to` segment already conveys direction. If keeping, use Japanese directional text instead of unicode arrows.
+
+**Category:** UX_INCONSISTENCY / INFORMATION_OVERLOAD
+
+---
+
+## F-06 🟢 GOOD — Result Header: Duration + Segments Count
+
+**Location:** `js/search-ui.js:215-219`
+```html
+<div class="result-header">
+  <span class="result-duration">22 分</span>
+  <span class="result-segments">3 区间</span>
+</div>
+<div class="search-sort-mode">...</div>
+```
+
+**Why it works:** The large duration number (22px bold) is the first thing the user sees — this matches NAVITIME/Yahoo乗換案内 pattern where travel time is the primary metric. The segment count provides quick scope. Sort mode buttons are secondary.
+
+**User value:** High. A first-time user immediately knows "this route takes 22 minutes with 3 transfers."
+
+**If deleted:** User loses the quick-scan summary. Would need to read through all segments to understand total duration.
+
+**Category:** GOOD
+
+---
+
+## F-07 🟢 GOOD — Line Color Badge on Ride Segments
+
+**Location:** `js/search-ui.js:257`
+```js
+html += '<div class="ride-seg"' + (lineColor ? ' style="border-left:4px solid ' + lineColor + '"' : '') + '>';
+```
+
+**Why it works:** Color-coding each segment with the line's official color helps users visually distinguish lines at a glance. This is a standard pattern in NAVITIME and Google Maps Transit.
+
+**User value:** High for visual scanning, especially on multi-line routes.
+
+**If deleted:** User would need to read each line name to distinguish segments. Slower scanning.
+
+**Category:** GOOD
+
+---
+
+## F-08 🟡 QUESTIONABLE — Nearby Spots Mixed into Search Results
+
+**Location:** `js/search-ui.js:288-295`
+```js
+// Phase 42-A: Nearby attractions for destination station
+var destStation = result.path[result.path.length - 1];
+if (destStation) {
+  var spotsHtml = this.renderNearbySpots(destStation, t);
+  if (spotsHtml) {
+    html += spotsHtml;
+  }
+}
+```
+
+**Problem:** The route search result panel mixes transit information (duration, segments, transfers) with tourism information (nearby spots). A user searching for "Shinjuku → Tokyo" gets transit directions PLUS a list of nearby attractions at Tokyo station.
+
+**User intent analysis:**
+- Primary intent: "How do I get from A to B?"
+- Secondary intent: "What's near B?"
+- These are different cognitive tasks. Mixing them may dilute focus on the primary task.
+
+**Industry comparison:** NAVITIME shows transit results cleanly. Tourism/nearby info is a separate feature. Yahoo!乗換案内 similarly keeps these separate.
+
+**User impact:** Low-medium. Some users may appreciate the bonus; others may find it noisy.
+
+**If deleted:** Search results become cleaner and more focused. Tourism remains accessible via the dedicated Tourism tab.
+
+**Recommendation:** Consider separating nearby spots into a collapsible section or moving them outside the search-result card. Not urgent for RC.
+
+**Category:** QUESTIONABLE / INFORMATION_ARCHITECTURE
+
+---
+
+## F-09 🟢 GOOD — Station Path Vertical Visualization
+
+**Location:** `js/search-ui.js:222-239`
+```html
+<div class="result-stations">
+  <div class="station-node">東京 <span class="start">From</span></div>
+  <div class="station-connector"></div>
+  <div class="station-node">四ツ谷</div>
+  ...
+  <div class="station-node">高尾 <span class="end">To</span></div>
+</div>
+```
+
+**Why it works:** Vertical station list with connectors gives a clear visual timeline of the journey. Start/end badges help orientation. This is intuitive and matches mental model of "journey from here to there."
+
+**User value:** High for understanding the full route at a glance.
+
+**If deleted:** User would still have segment-level info but lose the overall journey picture.
+
+**Category:** GOOD
+
+---
+
+## F-10 🟡 QUESTIONABLE — Sort Mode Buttons: Redundant or Useful?
+
+**Location:** `js/search-ui.js:222-229`
+
+Three sort modes: transfers (fewest), duration (fastest), combo (recommended).
+
+**Observation:** The default is "fewest transfers" which is the most common Japanese transit preference. The other two modes (fastest, recommended) are nice-to-have but may not be frequently used by casual users.
+
+**Industry comparison:** NAVITIME defaults to "recommended" (combo). Yahoo!乗換案内 defaults to "fastest." Both offer transfer-minimization as an option.
+
+**User impact:** Low. Buttons work correctly and are properly translated. The question is whether 3 sort modes add value or clutter.
+
+**Recommendation:** Keep for now. The functionality is correct and well-translated. Consider whether to simplify to 2 modes in a future polish pass.
+
+**Category:** QUESTIONABLE
+
+---
+
+## F-11 🟢 GOOD — Transfer Node Distinction
+
+**Location:** `js/search-ui.js:250-251`
+```js
+html += '<div class="transfer-node">' + t('search_result.transfer') + ' @ ' + window.escapeHtml(_r2 || seg.station) + '</div>';
+```
+
+**Why it works:** Transfer points are visually separated from ride segments. The "Transfer @ Shinjuku" format is clear and unambiguous.
+
+**User value:** High. Users need to know exactly where to switch lines.
+
+**Category:** GOOD
+
+---
+
+## F-12 🟠 WEAK — Search Result Information Hierarchy Could Be Tighter
+
+**Current structure per result card:**
+```
+┌─────────────────────────────┐
+│  22 分    3 区间            │  ← header: duration + count
+│  [乗換最少] [最速] [おすすめ]│  ← sort buttons
+├─────────────────────────────┤
+│  ● 東京  [From]             │
+│    │                        │  ← vertical station path
+│  ● 四ツ谷                   │
+│  ● 新宿                     │
+│     [End]                   │
+├─────────────────────────────┤
+│  │ 中央線快速  ↑  東京→高尾 │  ← segments with line name BUG
+│  │ 乗り換え @ 新宿          │
+│  │ 湘南Shinjuku  ↓  新宿→...│
+├─────────────────────────────┤
+│  🏯 近くの観光地 (3)        │  ← nearby spots mixed in
+│  #1 浅草寺  200m            │
+└─────────────────────────────┘
+```
+
+**Problems:**
+1. Line name in segment uses raw ID (F-01)
+2. Direction arrow is ambiguous (F-05)
+3. Nearby spots mixed with transit (F-10)
+4. Too much vertical space consumed by station path for short routes
+
+**User impact:** Medium. The card works but the information density could be better.
+
+**Recommendation:** For routes with ≤4 stations, consider showing just the segment list without the full station path. Keep the station path for longer routes where it adds value.
+
+**Category:** WEAK
+
+---
+
+## F-13 🟢 GOOD — Clear Empty State
+
+**Location:** `css/style.css:268-275`
+```css
+.search-error{padding: 16px; background: rgba(255,71,87,0.08);
+  border: 2px solid var(--red); border-radius: var(--radius);
+  color: var(--red); text-align: center; font-size: 13px;}
+```
+
+**What user sees:** "路線が見つかりません" (No routes found) in red box.
+
+**User value:** Clear feedback when no route exists. Matches error state conventions.
+
+**Category:** GOOD
+
+---
+
+## F-14 🟡 QUESTIONABLE — Home Page Two-Module Layout: Visual Inconsistency
+
+**Location:** `pages/home.html:48-96`
+
+The Home page has two modules in one tab:
+1. **Route Search** (search-card pixel-card) — with `module-title` h2
+2. **Sightseeing Guide** (sm-module pixel-card) — with `module-title` h2
+
+Both use the same `.pixel-card` class and `.module-title` h2 pattern. However, the sightseeing module includes location detection, tag filters, and a grid of spot cards — a substantially different interaction model.
+
+**Issue:** The two modules share visual language (good) but the sightseeing module's complexity (station picker, relocate button, tag filters, grid) makes it feel heavier than the search module. This isn't necessarily a problem, but the user may perceive them as different "types" of content despite being on the same page.
+
+**User impact:** Low. Both modules are useful and clearly labeled.
+
+**Category:** QUESTIONABLE (information architecture, not bug)
+
+---
+
+## F-15 🔵 INTENTIONAL — Suggestion Dropdown with Station ID Display
+
+**Location:** `css/style.css:402`
+```css
+.sug-id { font-size: 10px; color: var(--text-muted); margin-left: 6px; font-family: monospace; }
+```
+
+**Observation:** The station suggestion dropdown shows both the display name and the internal station ID (in monospace, muted color). E.g., "東京 [tokyo]".
+
+**Analysis:** This is useful for power users who know station IDs, but confusing for first-time users. However, the ID is rendered in a muted, small font and doesn't interfere with the primary display name. The `StationResolver` resolves names properly before showing them.
+
+**User value:** Low-positive (niche users). No harm to main users.
+
+**Category:** INTENTIONAL (acceptable as-is)
+
+---
+
+## Summary Table
+
+| ID | Severity | Category | Description | Delete Impact |
+|----|----------|----------|-------------|---------------|
+| F-01 | 🔴 CRITICAL | TECHNICAL-LEAK | Line names show raw internal IDs (ChuoRapid) | Total functional failure for non-EN users |
+| F-02 | 🟠 WEAK | LEGACY-CODE | Hardcoded Chinese fallback in hint | None (keys exist in all 4 langs) |
+| F-03 | 🟡 QUESTIONABLE | TECHNICAL-LEAK | 3 missing tourism tag translations | Raw keys shown on 3/7 tag buttons |
+| F-04 | 🟡 QUESTIONABLE | LEGACY-CODE | 12 dead search.rec.* translation keys | Zero (never used) |
+| F-05 | 🟡 QUESTIONABLE | UX_INCONSISTENCY | Direction arrows ambiguous without context | None (from→to already shows direction) |
+| F-06 | 🟢 GOOD | — | Duration + segments header | Would lose quick-scan summary |
+| F-07 | 🟢 GOOD | — | Line color badges on segments | Would lose visual line distinction |
+| F-08 | 🟡 QUESTIONABLE | INFORMATION_ARCH | Nearby spots mixed into search results | Would clean up result card |
+| F-09 | 🟢 GOOD | — | Vertical station path visualization | Would lose journey timeline |
+| F-10 | 🟡 QUESTIONABLE | — | 3 sort modes may be overkill | Functionality is correct |
+| F-11 | 🟢 GOOD | — | Transfer node distinction | Would lose clear transfer info |
+| F-12 | 🟠 WEAK | INFORMATION_OVERLOAD | Result card info hierarchy too dense | Would improve scanning speed |
+| F-13 | 🟢 GOOD | — | Clear empty/error state | Would lose clear no-result feedback |
+| F-14 | 🟡 QUESTIONABLE | INFORMATION_ARCH | Home two-module layout visual weight | Both modules are useful |
+| F-15 | 🔵 INTENTIONAL | — | Station ID in suggestion dropdown | Niche utility, no harm |
+
+---
+
+## Priority Actions for 4.0 Design Decision Gate
+
+### Must Fix Before RC (P0-equivalent IA issues)
+1. **F-01**: Line name leakage — This is the single most important fix. Without it, the search result is unusable for JA/ZH/KO users. Same `getDisplayLineName()` pattern already exists in trains-detail.js.
+
+### Should Fix (P1/P2)
+2. **F-03**: Add 3 missing tourism tag translation keys — quick win, eliminates raw key display
+3. **F-02**: Remove hardcoded Chinese fallback — cleanup, one line change
+
+### Consider in Future Polish (P3)
+4. **F-04**: Remove 12 dead translation keys
+5. **F-05**: Replace arrows with text direction labels or remove
+6. **F-08**: Consider moving nearby spots outside search result card
+7. **F-12**: Tighten result card information hierarchy for short routes
+
+### Accept As-Is
+8. F-06, F-07, F-09, F-11, F-13 — well-designed, no changes needed
+9. F-10, F-14, F-15 — acceptable current state
+
+---
+
+## Cross-Reference to 4.0.1 Home Audit
+
+F-03 (missing tourism tags) overlaps with 4.0.1's P2-01 finding. Both point to the same root cause: tourism tag filter keys were never added to translations.js.
+
+F-08 (nearby spots in search) connects to 4.0.1's observation about the Home page mixing transit and tourism in one tab.
+
+---
+
+*End of 4.0.2 Route Search Audit — FINDINGS ONLY, NO CODE CHANGES*

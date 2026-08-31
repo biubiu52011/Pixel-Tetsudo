@@ -144,7 +144,5 @@
     isKnownStation: isKnownStation
   };
 
-  console.log("[StationResolver] Ready — JP->EN:", Object.keys(_jpToEn).length,
-    "Line stations:", _lineStationIds ? _lineStationIds.size : "?");
 })();
 

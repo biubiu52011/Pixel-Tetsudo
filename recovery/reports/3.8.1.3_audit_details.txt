@@ -1,0 +1,36 @@
+=== 3.8.1.3 AUDIT DETAILS ===
+
+NOT_FOUND stations:
+  Bakurōmae (reachable=False)
+  Hayato (reachable=False)
+  Kegon (reachable=False)
+  KinutaPark (reachable=False)
+  Kusatsu (reachable=False)
+  Kyoto (reachable=False)
+  Nagoya (reachable=False)
+  Sesenji (reachable=False)
+  Shin-Bayashi (reachable=False)
+  Shin-Marunouchi (reachable=False)
+  Suginami (reachable=False)
+  Sunamachi (reachable=False)
+  Tampopo (reachable=False)
+  Teleport-Chuo (reachable=False)
+  Tempozanto-Mae (reachable=False)
+  Tobu-Dozui-Michi (reachable=False)
+
+Ambiguous JP key stations:
+  Ichigaya
+  Kasumigaseki
+
+JP exact only stations:
+  Akishima
+  Itabashi
+  Koenji
+  Kunitachi
+  Mita
+  Nagatsuta
+  Shinjuku-nishiguchi
+  Shiodome
+  Taito
+  Tama
+  Tameike-sanno

@@ -1,0 +1,214 @@
+{
+  "task": "3.44 Core Product L4-L9 Audit",
+  "date": "2026-08-29T23:08:27.309180",
+  "baseline": {
+    "head": "bdf243e",
+    "stations": 509,
+    "lines": 156,
+    "name_map": 1703,
+    "tourism_spots": 396
+  },
+  "pages": {
+    "home": {
+      "L0_file": "PASS",
+      "L1_parse": "PASS",
+      "L2_load": "PASS",
+      "L3_init": {
+        "SearchUI": "PASS",
+        "RailwayDB": "PASS",
+        "SightseeingModule": "PASS"
+      },
+      "L4_search": {
+        "status": "PASS",
+        "detail": "Shinjuku->Tokyo search returns 2min route with 3 sort options and nearby button",
+        "duration_shown": true,
+        "sort_buttons": 3,
+        "nearby_button": true
+      },
+      "L5_interaction": {
+        "status": "PARTIAL",
+        "detail": "Suggestions appear on typing; but 17/30 interactive elements have <44px touch targets on mobile",
+        "small_touch_targets": 17,
+        "total_interactive": 30
+      },
+      "L6_mobile": {
+        "overflow": "PASS",
+        "small_targets": "FAIL (17/30 < 44px)"
+      },
+      "L7_consistency": "PASS",
+      "L8_industry": "PASS",
+      "L9_quality": "PARTIAL - good core flow, touch target sizing needs work"
+    },
+    "route_search": {
+      "L0_file": "PASS (part of home.html tab)",
+      "L1_parse": "PASS",
+      "L2_load": "PASS",
+      "L3_init": "PASS",
+      "L4_result": {
+        "status": "PASS",
+        "detail": "Route shows duration, segments count, line info, sort modes, nearby button",
+        "readability": "GOOD - clear duration and transfer info"
+      },
+      "L5_interaction": "PASS",
+      "L6_mobile": "PASS (no overflow, results scroll)",
+      "issue": "Segments count shows 0 even when results exist - possible display bug"
+    },
+    "realtime": {
+      "L0_file": "PASS",
+      "L1_parse": "PASS",
+      "L2_load": "PASS",
+      "L3_init": {
+        "status": "FAIL",
+        "DataState": "object (available)",
+        "DATA_FUSION": "object (156 lines loaded)",
+        "RealtimeView": "undefined (NOT REGISTERED)"
+      },
+      "L4_render": {
+        "status": "FAIL",
+        "cards": 0,
+        "operators": 0,
+        "container_html": "<div class=\"rs-error\">Render error: </div>",
+        "root_cause": "realtime-view.js lines 34,38,121 use bare DataState instead of window.DataState"
+      },
+      "L5_interaction": "BLOCKED - no cards to interact with",
+      "L6_mobile": "UNVERIFIED - no content to test",
+      "L7_consistency": "FAIL - breaks user trust (page loads but shows error)",
+      "priority": "P0"
+    },
+    "tourism": {
+      "L0_file": "PASS (tab within home.html, no standalone page)",
+      "L1_parse": "PASS",
+      "L2_load": "PASS",
+      "L3_init": {
+        "status": "FAIL",
+        "SightseeingModule": "object (exists)",
+        "TOURISM_DATA_keys": 93,
+        "init_called": false
+      },
+      "L4_render": {
+        "status": "FAIL",
+        "spots": 0,
+        "location_status": "Locating... (stuck, geolocation not granted)",
+        "root_cause": "SightseeingModule.init() never called; location permission not granted in test"
+      },
+      "L5_interaction": "BLOCKED - no spots to interact with",
+      "priority": "P1"
+    },
+    "trains": {
+      "L0_file": "PASS",
+      "L1_parse": "PASS",
+      "L2_load": "PASS",
+      "L3_init": {
+        "status": "FAIL",
+        "DATA_FUSION": "object (0 lines - ODPT CORS failed)",
+        "DataState": "undefined",
+        "RailwayDB": "object"
+      },
+      "L4_render": {
+        "status": "FAIL",
+        "cards": 0,
+        "detail": "Page shows only back button + footer, no train data"
+      },
+      "priority": "P1"
+    },
+    "history": {
+      "L0_file": "PASS",
+      "L1_parse": "PASS",
+      "L2_load": "PASS",
+      "L3_init": {
+        "SearchHistory": "PASS",
+        "DataState": "undefined"
+      },
+      "L4_content": {
+        "entries": 0,
+        "empty_state": "PASS"
+      },
+      "note": "Empty because fresh browser - E2E verified in 3.43 PASS"
+    }
+  },
+  "i18n": {
+    "JA": "Pixel Tetsudo / Route Search / From / To",
+    "EN": "Pixel Tetsudo / Route Search / From / To",
+    "ZH": "像素铁道 / 路线搜索 / 出发 / 目的地",
+    "KO": "Pixel Tetsudo / 노선 검색 / 출발 / 목적지",
+    "issue": "JA and EN are IDENTICAL for app.title, tab labels, search labels. Only ZH/KO differ.",
+    "root_cause": "English translations may not be active, or JA defaults are being used for EN",
+    "priority": "P2"
+  },
+  "issues": [
+    {
+      "id": "P0-1",
+      "page": "realtime",
+      "severity": "P0",
+      "desc": "realtime-view.js uses bare DataState (lines 34,38,121) instead of window.DataState, causing ReferenceError and empty render",
+      "fix": "Replace DataState. with window.DataState. in realtime-view.js"
+    },
+    {
+      "id": "P0-2",
+      "page": "realtime",
+      "severity": "P0",
+      "desc": "ODPT API CORS failures prevent real-time data from loading (all operators fail)",
+      "fix": "Known limitation - requires proxy or CORS-enabled API endpoint"
+    },
+    {
+      "id": "P1-1",
+      "page": "tourism",
+      "severity": "P1",
+      "desc": "SightseeingModule.init() never called - spots never render",
+      "fix": "Call SightseeingModule.init() when sightseeing tab becomes active"
+    },
+    {
+      "id": "P1-2",
+      "page": "tourism",
+      "severity": "P1",
+      "desc": "Location status stuck on Locating... - geolocation permission not handled",
+      "fix": "Add permission denied / blocked state handling"
+    },
+    {
+      "id": "P1-3",
+      "page": "trains",
+      "severity": "P1",
+      "desc": "DataState undefined on trains.html; DATA_FUSION has 0 lines (CORS)",
+      "fix": "Ensure DataState initialized on trains page; handle no-data state gracefully"
+    },
+    {
+      "id": "P2-1",
+      "page": "home",
+      "severity": "P2",
+      "desc": "17/30 interactive elements have <44px touch targets on mobile",
+      "fix": "Increase minimum touch target size to 44px in CSS"
+    },
+    {
+      "id": "P2-2",
+      "page": "i18n",
+      "severity": "P2",
+      "desc": "JA and EN show identical text for app.title, tabs, search labels",
+      "fix": "Verify EN translation keys are loaded and applied correctly"
+    },
+    {
+      "id": "P3-1",
+      "page": "route_search",
+      "severity": "P3",
+      "desc": "Segments count shows 0 even when route has segments",
+      "fix": "Check segment rendering logic in search-ui.js"
+    }
+  ],
+  "summary": {
+    "total_issues": 8,
+    "P0": 2,
+    "P1": 3,
+    "P2": 2,
+    "P3": 1,
+    "pages_working": [
+      "home",
+      "route_search",
+      "history"
+    ],
+    "pages_broken": [
+      "realtime",
+      "tourism",
+      "trains"
+    ],
+    "recommendation": "Fix P0 realtime DataState reference first, then P1 tourism/trains init issues"
+  }
+}

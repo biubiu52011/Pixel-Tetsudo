@@ -19,7 +19,6 @@
         statusMap[lid] = delayInfo[lid];
       });
       window.LOCAL_RAILWAY_DATA.statusMap = statusMap;
-      console.log("[LocalData] Seeded statusMap from cache: " + Object.keys(statusMap).length + " lines");
     }).catch(function(e) {
       console.warn("[LocalData] Cache seed error:", e.message);
     });

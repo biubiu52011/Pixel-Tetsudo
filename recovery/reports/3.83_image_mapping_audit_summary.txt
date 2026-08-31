@@ -1,0 +1,91 @@
+Task 3.83 — Line Image Mapping Audit
+=====================================
+Status: COMPLETE / AUDIT ONLY
+Date: 2026-08-30T18:55:41.142991
+
+TOTAL LINES: 156
+
+CATEGORIES:
+-----------
+VALID (unique image):   49 lines
+VALID (shared image):   74 lines
+MISSING_ASSET:          13 lines
+NO_IMAGE:               20 lines
+MAJOR_SHARED (placeholder): 1 image groups
+
+MISSING_ASSET Details (13 lines):
+  These lines reference image files that do NOT exist on disk.
+  Most are Seibu operator lines with overly verbose filenames.
+
+  1. ChuoRapid (JC) - expects "中央快速線 青梅線 五日市線.png"
+     -> No disk candidate. Ome and Itsukaichi share this same path.
+     -> DISK HAS: 中央快速線.png (separate file)
+     
+  2. Joban (JJ) - expects "常磐線快速.png"
+     -> Disk has: 常磐緩行線.png (different line!)
+     -> CORRECT FILE EXISTS with different name
+     
+  3. SeibuShinjuku (SN) - expects "新宿・池袋・所沢を結ぶ西武の主力線.png"
+     -> Disk has: 西武新宿線.png (simpler name)
+     
+  4. Keisei (KS) - expects "京成本線・Skyliner運用車両.png"
+     -> Disk has: 京成本線.png (simpler name)
+     
+  5. SeibuIkebukuro (SI) - expects long descriptive name
+     -> Disk has: 池袋線.png (shorter name)
+     
+  6-13. Other Seibu lines with similarly verbose filenames
+     -> All have simpler equivalents on disk
+
+NO_IMAGE Details (20 lines):
+  These lines have NO image field in railway_data.json.
+
+  SHOULD_HAVE_IMAGE (has OS code, inconsistency):
+    - Keio (KO) - Keio operator main line
+    - TokyuDenEn (TD) - Tokyu operator
+    - Keikyu (KK) - Keikyu operator
+    - SotetsuMain (SO) - Sotetsu operator
+    - Ikebukuro (SI) - Seibu operator (duplicate code with SeibuIkebukuro!)
+    - Nippori_Toneri (NT) - Toei operator
+    - OdakyuOdawara (OD) - Odakyu operator
+    - TohokuMain (JU) - JR-East (note: JU code conflicts with JU宇都宮線)
+    - Tojo (TTJ) - Tobu operator
+    - MinatoMirai (MM) - single-line operator
+    
+  LIKELY_INTENTIONAL (no OS code, regional):
+    - Oyama (no code) - JR-East regional
+    - Shinonoi (no code) - JR-East regional
+
+MAJOR_SHARED_IMAGE (CRITICAL FINDING):
+  56 lines share a SINGLE placeholder image: jrグループ.png
+  These are mostly JR-East regional lines without individual assets.
+  
+  Affected lines include: Agatsuma, BanetsuEast, BanetsuWest, 
+  ChuoKonosu, Echigo, Gono, Hachinohe, Hakushin, Iiyama, 
+  Ishinomaki, Ito, Joetsu, Kamaishi, Kamiishi, Kanagawa, 
+  Karasuyama, Kashima, Kawagoe, Kesennuma, Kiryu, Komii, 
+  Kounan, Kururi, Mito, Miyo, Narita, Nikko, Ofunato, Oga, 
+  Oito, Ominato, OuMain, RikutoEast, RikutsuWest, Ryomo, 
+  Sagami, Sakuragi, Sano, Sanriku, Senseki, SensekiTohoku, 
+  Senzan, Shinetsu, Sotobo, Suigun, SuigunBranch, Tazawako...
+  
+  This is INTENTIONAL as a fallback but should be documented.
+
+RECOMMENDATIONS:
+----------------
+1. [HIGH] Fix 13 MISSING_ASSET paths - most are filename mismatches
+   where simpler files exist on disk. Update railway_data.json paths.
+   
+2. [MEDIUM] Add image fields for 10 NO_IMAGE lines that have OS codes
+   for visual consistency with the rest of the product.
+   
+3. [LOW] Document the 56-line shared placeholder as intentional fallback.
+   Consider creating simple placeholder images if needed.
+
+4. [INVESTIGATE] Ikebukuro (SI) and SeibuIkebukuro (SI) share the same
+   OS code - this may be a data issue.
+
+FILES PRODUCED:
+---------------
+- recovery/reports/3.83_image_mapping_audit.json (full data)
+- This summary

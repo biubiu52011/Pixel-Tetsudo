@@ -58,7 +58,7 @@
         var tx = x + 12 * Math.cos(angle);
         var ty = y + 12 * Math.sin(angle);
         var anchor = Math.cos(angle) > 0.1 ? "start" : (Math.cos(angle) < -0.1 ? "end" : "middle");
-        svg += '<text x="' + tx + '" y="' + (ty + 3) + '" font-size="8" fill="#444" font-family="sans-serif" text-anchor="' + anchor + '">' + escapeHtml(stations[i]) + '</text>';
+        svg += '<text x="' + tx + '" y="' + (ty + 3) + '" font-size="8" fill="#444" font-family="sans-serif" text-anchor="' + anchor + '">' + escapeHtml(_rS(stations[i])) + '</text>';
       }
       svg += '<ellipse cx="' + cx + '" cy="' + cy + '" rx="' + rx + '" ry="' + ry + '" stroke="' + color + '" stroke-width="4" fill="none" opacity="0.4"/>';
       // Branch stations
@@ -80,7 +80,7 @@
       for(var i = 0; i < stations.length; i++) {
         var y = topP + i * sp;
         svg += '<circle cx="' + cx2 + '" cy="' + y + '" r="4" fill="#fff" stroke="' + color + '" stroke-width="2.5"/>';
-        svg += '<text x="' + (cx2 + 12) + '" y="' + (y + 3) + '" font-size="9" fill="#444" font-family="sans-serif" font-weight="500">' + escapeHtml(stations[i]) + '</text>';
+        svg += '<text x="' + (cx2 + 12) + '" y="' + (y + 3) + '" font-size="9" fill="#444" font-family="sans-serif" font-weight="500">' + escapeHtml(_rS(stations[i])) + '</text>';
       }
     }
     svg += '</svg>';
@@ -105,7 +105,7 @@
         '<span class="detail-code-text">' + escapeHtml(line.code || "") + '</span>' +
       '</div>' +
       '<div class="detail-title-wrap">' +
-        '<h2 class="detail-title">' + escapeHtml(line.nameEn || line.name || lineId) + '</h2>' +
+        '<h2 class="detail-title">' + window.RailwayDB && window.RailwayDB.resolveLineName ? window.RailwayDB.resolveLineName(line.id, _lang) : line.id + '</h2>' +
       '</div>' +
       '<span class="status-badge ' + getStatusClass(ds) + '">' + getStatusText(ds) + (ds === "delayed" ? " +" + dm + "min" : "") + '</span>' +
     '</div>';

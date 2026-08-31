@@ -1,0 +1,275 @@
+# 4.0.4 — Trains Page: First-Time User IA Audit
+# Date: 2026-08-31
+# Rule: AUDIT ONLY — NO CODE CHANGES
+
+---
+
+## Executive Summary
+
+The Trains page has a **dual-detail-view architecture problem**: there are two competing implementations — `trains-page.js` (active, simpler) and `trains-detail.js` (unused, richer) — neither of which fully satisfies the user's needs. The active path has a critical language bug in the detail title, while the unused path has orphaned HTML references. Additionally, the region field shows untranslated English strings.
+
+---
+
+## F-T01 🔴 CRITICAL — Detail View Title Hardcodes Japanese Name
+
+**Location:** `js/trains-page.js:215`
+```js
+if (titleEl) titleEl.textContent = fusedLine.nameJa || fusedLine.nameEn || fusedLine.name;
+```
+
+**Problem:** When a user clicks a line card to see details, the detail page title is set to `nameJa` (the raw Japanese field) as the primary value, regardless of the user's selected language. If the user is in EN mode, they see:
+```
+中央線快速    ← Japanese name, wrong for EN user
+```
+
+Instead of:
+```
+Chuo Rapid Line    ← should be English
+```
+
+The fallback chain (`nameJa → nameEn → name`) means Japanese ALWAYS wins as the primary display. This is the same class of bug as F-01 in Route Search and F-R01 in Realtime.
+
+**Correct pattern** (from `trains-detail.js:13-18`):
+```js
+function getDisplayLineName(line) {
+  var _lang = (window.currentLang || 'ja').toLowerCase();
+  var _nameKey = 'name' + _lang.charAt(0).toUpperCase() + _lang.slice(1);
+  return (line && line[_nameKey]) || (line && line.nameJa) || (line && line.nameEn) || (line && line.name) || (line && line.id);
+}
+```
+
+**User impact:** High. Non-Japanese users see Japanese text as the primary title. This directly contradicts the i18n work completed in phases 3.73 and 3.87.
+
+**If fixed:** One-line change — replace `fusedLine.nameJa || fusedLine.nameEn || fusedLine.name` with a call to the existing `getDisplayLineName()` function or inline the same logic.
+
+**Category:** TECHNICAL-LEAK / i18n BUG
+
+---
+
+## F-T02 🟢 GOOD — Card List Uses DataState (Language-Aware)
+
+**Location:** `js/trains-page.js:295`
+```js
+window.DataState.renderList(el, ul, { mode: "trains" });
+```
+
+**Why it works:** `DataState.renderCard()` (in `data-state.js:72-74`) resolves display names via language-specific keys. The card list shows correct names in all 4 languages. Only the detail view title is broken.
+
+**Category:** GOOD
+
+---
+
+## F-T03 🟡 QUESTIONABLE — Orphaned trains-detail.js With Broken DOM References
+
+**Observation:** `js/trains-detail.js` exists with a richer detail view implementation including:
+- Header with line code badge + status badge
+- Info rows (code, operator, region, type, stations, duration)
+- SVG station map with loop/branch support
+
+However, this script is **NOT loaded** in `trains.html`. The active detail view comes from `trains-page.js` which has a much simpler implementation.
+
+Furthermore, `trains-detail.js` references DOM IDs that don't exist in `trains.html`:
+- `trainsDetailHeader` (not in HTML — HTML has `trainsDetailTitle`)
+- `trainsCard` (not in HTML — HTML has `trainsLineListContent`)
+
+If someone were to add `<script src="trains-detail.js">` to trains.html, it would throw JavaScript errors because those elements don't exist.
+
+**User impact:** None currently (script is not loaded). But this is dead code that creates confusion for future maintainers.
+
+**If removed:** No user impact. Code base becomes cleaner.
+
+**Recommendation:** Either integrate the richer detail view from `trains-detail.js` into the HTML, or remove the orphaned script. The current `trains-page.js` detail view is functional but minimal.
+
+**Category:** LEGACY-CODE
+
+---
+
+## F-T04 🟠 WEAK — Region Field Shows Raw English
+
+**Location:** `js/trains-detail.js:127`
+```js
+'<div class="info-row"><span class="info-label">' + t("detail.info_region") + '</span><span class="info-value">' + escapeHtml(line.region || "") + '</span></div>'
+```
+
+**Problem:** The `region` field in `railway_data.json` contains English strings like `"Tokyo Area"`, `"Saitama Area"`, `"Kanagawa Area"`. There are no translation entries for these values in `translations.js`. Users in JA/ZH/KO see English region names.
+
+**What the user sees (JA mode):**
+```
+地区: Tokyo Area    ← English in Japanese UI
+```
+
+**User impact:** Medium. Region is a secondary piece of information, but seeing English in a Japanese UI breaks the immersion and consistency established by the rest of the i18n system.
+
+**If fixed:** Add region translations to `translations.js` (e.g., `region.tokyo_area`: "東京地区"). Or better: make regions translatable via a lookup table keyed by the raw English value.
+
+**Category:** i18n GAP
+
+---
+
+## F-T05 🟢 GOOD — SVG Station Map Uses Language-Aware Resolution
+
+**Location:** `js/trains-page.js:136-137`
+```js
+var _rS = (window.RailwayDB && window.RailwayDB.resolveStationName)
+  ? function(id){ return window.RailwayDB.resolveStationName(id, _lang) || id; }
+  : function(id){ return id; };
+```
+
+**Why it works:** Station names in the SVG map are resolved through `RailwayDB.resolveStationName()` with the current language. A ZH user sees Chinese station names, a KO user sees Korean transliterations, etc.
+
+**Category:** GOOD
+
+---
+
+## F-T06 🟢 GOOD — Back Button Works Correctly
+
+**Location:** `js/trains-page.js:310-314`
+```js
+if (backBtn) {
+  backBtn.addEventListener("click", function() {
+    window.location.hash = "";
+    hideLineView();
+  });
+}
+```
+
+**Why it works:** The back button clears the hash and returns to the line list. The translation `detail.back` exists in all 4 languages (戻る / 返回 / Back / 뒤로).
+
+**Category:** GOOD
+
+---
+
+## F-T07 🟡 QUESTIONABLE — Detail View Lacks Rich Metadata
+
+**Comparison:** The active detail view (from `trains-page.js`) shows only:
+- Title (line name)
+- SVG station map
+
+The unused `trains-detail.js` would have shown:
+- Line code badge
+- Status badge (normal/delayed/suspended)
+- Info rows: code, operator, region, type, station count, total duration
+- SVG station map
+
+**User impact:** Medium. A user clicking into a line detail wants to know: "What line is this? How many stations? Who operates it? Is it running on time?" The current minimal detail view doesn't answer these questions.
+
+**Industry comparison:** NAVITIME and Yahoo!乗換案内 show line code, operator, station count, and operating status in the detail view.
+
+**Recommendation:** Consider integrating the richer detail view from `trains-detail.js` into the active code path (after fixing its DOM references). Not urgent for RC.
+
+**Category:** INFORMATION_ARCHITECTURE
+
+---
+
+## F-T08 🟢 GOOD — Branch Indicator Works
+
+**Location:** `js/data-state.js:108-110`
+```js
+var branchHtml = "";
+if (mode === "trains" && line.branchOf) {
+  branchHtml = '<span class="rs-branch-indicator">↳</span>';
+}
+```
+
+**Why it works:** Branch lines (e.g., Ome Line, Kita-Senju Branch) show a branch indicator symbol next to the name. This helps users understand the line hierarchy visually.
+
+**Category:** GOOD
+
+---
+
+## F-T09 🟢 GOOD — Status Badge in Card List
+
+**Location:** `js/data-state.js:112-120`
+```js
+if (mode === "trains") {
+  var pos = getPositions(lineId);
+  var cnt = pos ? pos.length : 0;
+  if (cnt > 0) {
+    var badgeCls = (delayInfo.status === "delayed") ? "rs-status-delayed"
+      : ((delayInfo.status === "suspended") ? "rs-status-suspended" : "rs-status-badge-default");
+    statusIconHtml = "<span class=\"rs-status-badge " + badgeCls + "\">" + cnt + "</span>";
+  }
+}
+```
+
+**Why it works:** Train cards show a running train count badge (e.g., "3") when ODPT position data is available. Delayed/suspended lines get colored badges. This gives users at-a-glance operational status.
+
+**Category:** GOOD
+
+---
+
+## F-T10 🟢 GOOD — No Raw Station IDs in Detail View
+
+**Verification:** All station names in the SVG map use `resolveStationName()`. No `station_id` or internal identifiers leak into the UI.
+
+**Category:** GOOD
+
+---
+
+## F-T11 🔵 INTENTIONAL — No Operator Filter on Trains Page
+
+**Observation:** Unlike Realtime, the Trains page has no operator filter bar. Lines are grouped by operator via `DataState.renderList()` (operator group titles), but there's no interactive filter.
+
+**Analysis:** The Trains page is a reference/browsing tool. Users scan all lines. The Realtime page is a monitoring tool where users filter to their operator. This is a deliberate and reasonable design distinction.
+
+**Category:** INTENTIONAL
+
+---
+
+## F-T12 🟢 GOOD — Cross-Page Consistency via DataState
+
+Both Trains and Realtime use the same `DataState.renderList()` and `DataState.renderCard()`. Card appearance, OS badge, line color, and display name resolution are consistent across pages.
+
+**Category:** GOOD
+
+---
+
+## Summary Table
+
+| ID | Severity | Category | Description | Delete Impact |
+|----|----------|----------|-------------|---------------|
+| F-T01 | 🔴 CRITICAL | TECHNICAL-LEAK | Detail title hardcodes Japanese name | Non-JA users see wrong language title |
+| F-T02 | 🟢 GOOD | — | Card list uses DataState correctly | N/A |
+| F-T03 | 🟡 QUESTIONABLE | LEGACY-CODE | trains-detail.js orphaned with broken DOM refs | None (not loaded) |
+| F-T04 | 🟠 WEAK | i18n GAP | Region field shows raw English | Minor: breaks i18n consistency |
+| F-T05 | 🟢 GOOD | — | SVG stations use resolveStationName | N/A |
+| F-T06 | 🟢 GOOD | — | Back button works correctly | N/A |
+| F-T07 | 🟡 QUESTIONABLE | INFORMATION_ARCH | Detail view lacks rich metadata | User gets less info than expected |
+| F-T08 | 🟢 GOOD | — | Branch indicator works | N/A |
+| F-T09 | 🟢 GOOD | — | Status badge in card list | N/A |
+| F-T10 | 🟢 GOOD | — | No station ID leaks | N/A |
+| F-T11 | 🔵 INTENTIONAL | — | No operator filter on Trains | N/A |
+| F-T12 | 🟢 GOOD | — | Cross-page DataState consistency | N/A |
+
+---
+
+## Priority Actions for 4.0 Design Decision Gate
+
+### Must Fix
+1. **F-T01**: Change `fusedLine.nameJa || fusedLine.nameEn || fusedLine.name` to use language-aware display name resolution (same pattern as `getDisplayLineName()` in trains-detail.js).
+
+### Should Fix
+2. **F-T03**: Decide — either integrate `trains-detail.js` into trains.html (with DOM fixes) or remove the orphaned script.
+3. **F-T04**: Add region translations or remove the region field from detail view.
+
+### Consider in Future Polish
+4. **F-T07**: Enrich detail view with metadata rows (operator, station count, duration, etc.) if user testing confirms this is valuable.
+
+### Accept As-Is
+5. F-T02, F-T05, F-T06, F-T08, F-T09, F-T10, F-T11, F-T12 — working correctly.
+
+---
+
+## Cross-Reference to Previous Audits
+
+F-T01 is the same class of bug as:
+- F-01 (Route Search): line names showing raw IDs
+- F-R01 (Realtime): operator filter showing raw IDs
+
+**Root pattern**: Translation/resolution functions exist in the codebase but are not applied consistently across all rendering paths. A systematic review of all `textContent` and `innerHTML` assignments that display user-facing text would catch these gaps.
+
+F-T03 (orphaned trains-detail.js) overlaps with the 3.85 legacy cleanup findings. The script should either be integrated or removed.
+
+---
+
+*End of 4.0.4 Trains Audit — FINDINGS ONLY, NO CODE CHANGES*

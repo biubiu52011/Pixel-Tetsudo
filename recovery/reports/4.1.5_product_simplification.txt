@@ -1,0 +1,114 @@
+# 4.1.5 — Product Simplification Implementation
+# Date: 2026-08-31
+# Rule: CODE CHANGE — REMOVE / SIMPLIFY / MOVE
+
+---
+
+## Summary
+
+Removed dead UI elements, simplified information density, and repositioned tourism content. All 4-language display identity fixes from 4.1.1 preserved. Canonical data unchanged.
+
+---
+
+## Changes Made
+
+### BATCH A: REMOVE (Dead / Redundant UI)
+
+#### A1: Sort Mode Buttons — REMOVED
+**File:** js/search-ui.js
+**Lines removed:** ~15 (HTML generation) + ~10 (event handler)
+**Reason:** RouteEvaluator is never defined. BFS returns single route. Buttons were dead UI.
+
+#### A2: Direction Arrows (↑↓) — REMOVED  
+**File:** js/search-ui.js
+**Lines removed:** ~5
+**Reason:** Station order already implies direction. Zero information added.
+
+#### A3: Branch Indicator (↳) — REMOVED
+**File:** js/data-state.js
+**Lines removed:** ~5
+**Reason:** Internal data structure exposed to users. Passengers don't need branch hierarchy.
+
+#### A4: Train Count Badge — REMOVED
+**File:** js/data-state.js
+**Lines removed:** ~8
+**Reason:** Unlabeled raw number. meaningless without context.
+
+### BATCH B: SIMPLIFY
+
+#### B1: Segment Count — REMOVED
+**File:** js/search-ui.js
+**Change:** Removed "X segments" span from result header
+**Reason:** Redundant with station timeline visualization
+
+#### B2: Realtime Modal — COLLAPSED by default
+**File:** js/realtime-view.js
+**Change:** When status is "normal" or "no_data", interval/cause/updated sections are hidden (display:none)
+**Reason:** Most users just want to know "is my line on time?"
+
+#### B3: Operator Filter — COLLAPSIBLE
+**File:** js/realtime-view.js + css/style.css
+**Change:** Filter bar starts collapsed. "Show all operators" toggle button appears. Click to expand.
+**Reason:** 21 operator buttons overwhelming on first view. Most users filter to 1-3 operators.
+
+### BATCH C: MOVE
+
+#### C1: Nearby Spots — MOVED outside route card
+**File:** js/search-ui.js
+**Change:** Spots section no longer injected inside .search-result. Now appended after using insertAdjacentHTML.
+**Reason:** Transit and tourism are different intents. Should not compete in same card.
+
+---
+
+## Files Changed
+
+| File | Lines Changed | Description |
+|------|--------------|-------------|
+| js/search-ui.js | -70 | Removed sort buttons, arrows, segment count; moved spots |
+| js/data-state.js | -17 | Removed branch indicator, train badge |
+| js/realtime-view.js | +29 | Added collapsible filter, modal collapse |
+| css/style.css | +26 | Added filter collapse CSS |
+
+## Files NOT Changed
+
+- railway_data.json (156/509/1703/93 locked)
+- LineOperationSystems
+- LinePresentationService
+- translations.js
+- history.js (4.1.1 fix preserved)
+- trains-page.js (4.1.1 fix preserved)
+- db-loader.js (4.1.1 resolveLineName preserved)
+
+---
+
+## Verification
+
+| Check | Result |
+|-------|--------|
+| search-ui: no sort-mode | PASS |
+| search-ui: no RouteEvaluator | PASS |
+| search-ui: no direction arrows | PASS |
+| search-ui: no segment count | PASS |
+| search-ui: spots moved out | PASS |
+| data-state: no branch indicator | PASS |
+| data-state: no train badge | PASS |
+| realtime: tOp(op) filter | PASS |
+| realtime: collapsible filter | PASS |
+| realtime: modal collapse | PASS |
+| css: filter styles | PASS |
+| All brace balance | PASS |
+| Canonical data 156/509/1703/93 | PASS |
+| 4.1.1 display identity preserved | PASS |
+
+---
+
+## What Remains for 4.1.6+
+
+- Home page visual hierarchy redesign (D-01)
+- Route result journey card redesign (D-02)
+- Tourism English names (DATA-BLOCKED)
+- Home .sm-module / .pixel-card CSS conflict (HOME-DESIGN-01)
+- Tab label "Route Search" misrepresentation (4.0.1 P2-02)
+
+---
+End of 4.1.5 Product Simplification

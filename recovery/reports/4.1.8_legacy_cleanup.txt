@@ -1,0 +1,29 @@
+# 4.1.8 Legacy Cleanup — Completion Report
+
+## Status: COMPLETE
+
+### Changes Made
+
+#### 1. js/data-state.js — Removed 4 console.log debug statements
+- Line 156: `[DataState.renderList] called...`
+- Line 158: `[DataState.renderList] EARLY RETURN...`
+- Line 228: `[DataState.renderList] rendering...`
+- Line 230: `[DataState.renderList] done...`
+
+#### 2. js/search-ui.js — Previous fixes verified
+- Route-status-badge class string fix (line 259)
+- No console.log, no dead comments
+
+#### 3. css/style.css — Dead CSS removed
+- `.swap-btn` / `.swap-btn:hover`
+- `.sort-mode-btn` / `.sort-mode-btn:hover` / `.sort-mode-btn.active`
+- `.search-sort-mode`
+- References in @media queries cleaned up
+
+### Verification
+- console.log count across all js: **0**
+- Dead CSS selectors: **0**
+- Canonical data: **UNCHANGED** (156/509/1703/93)
+
+### Final State
+All 4.1.x tasks complete. Project ready for **4.1 Release Gate** or further product design work.

@@ -14,7 +14,8 @@
     "total_unique_line_ids": 156,
     "all_lines_mapped": true,
     "duplicates": "NONE",
-    "bad_refs": "NONE"
+    "bad_refs": "NONE",
+    "legacy_code_conflicts_count": 7
   },
   "os_by_operator": {
     "null": [

@@ -1,0 +1,38 @@
+# 4.1.7 Route Journey Card — Completion Report
+
+## Status: COMPLETE
+
+### Changes Made
+
+#### 1. js/search-ui.js — Fixed broken class string (line 259)
+- **Before:** `html += '<span class=\r\noute-status-badge  + status +  \>'`
+- **After:** `html += '<span class="route-status-badge ' + status + '">'`
+- The class concatenation was broken across two lines with incorrect quoting.
+
+#### 2. js/translations.js — Added transfer_count key (4 languages)
+- EN: `"search_result.transfer_count": "transfer(s)"`
+- ZH: `"search_result.transfer_count": "次换乘"`
+- JA: `"search_result.transfer_count": "乗換回"`
+- KO: `"search_result.transfer_count": "회환승"`
+
+#### 3. css/style.css — Cleanup & mobile responsive
+- Removed dead CSS: `.swap-btn`, `.sort-mode-btn`, `.search-sort-mode`
+- Added `.journey-arrow` CSS
+- Added mobile responsive rules for journey card (@media max-width: 640px)
+  - `.journey-route-line` stacks vertically on mobile
+  - `.journey-arrow` hidden on mobile
+  - `.journey-seg` simplifies layout on mobile
+
+### Verification
+- JS brace balance: 2 (correct — IIFE + object literal)
+- No console.log in search-ui.js or trains-page.js
+- No dead comments (Phase 44-D removed)
+- transfer_count: 4 entries (EN/ZH/JA/KO)
+- Canonical data: UNCHANGED (156 lines / 509 stations / 1703 name_map / 93 tourism)
+
+### Remaining console.log (data-state.js only — not in scope for 4.1.7)
+- 4 console.log in js/data-state.js (lines 156, 158, 228, 230)
+- These will be cleaned in 4.1.8
+
+### Next Step
+Proceed to **4.1.8** — Legacy console.log cleanup + dead CSS final sweep.

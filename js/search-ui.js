@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Pixel Tetsudo - Search UI Module (Optimized)
  */
 (function() {
@@ -211,183 +211,63 @@
 
     renderResults: function(result, t) {
       if (!this.resultsDiv) return;
-
-      let html = '<div class="search-result">';
-      html += '<div class="result-header">';
-      html += '<span class="result-duration">' + result.durationMin + ' ' + t('search.min_unit') + '</span>';
-      if (result.segments > 0) { html += '<span class="result-segments">' + result.segments + ' ' + t('search.segments') + '</span>'; }
+      var lang = window.currentLang || \ ja\;
+      var dur = result.durationMin || 0;
+      var transfers = 0;
+      var segs = result.routeSegments || result.lineInfo || [];
+      for (var i = 0; i < segs.length; i++) { if (segs[i].type === 	ransfer\) transfers++; }
+      var html = '<div class=\search-result journey-card\>';
+      html += '<div class=\journey-header\>';
+      html += '<span class='journey-duration'>' + dur + ' ' + t('search.min_unit') + '</span>';
+      if (transfers > 0) { html += '<span class='journey-transfers'>' + transfers + ' ' + t('search_result.transfer_count') + '</span>'; }
       html += '</div>';
-      
-      // Phase 44-D: Sort mode buttons
-      html += '<div class="search-sort-mode">';
-      var modes = ['transfers','duration','combo'];
-      var modeLabels = [t('search.mode.transfers'), t('search.mode.duration'), t('search.mode.combo')];
-      var currentMode = window.RouteEvaluator ? window.RouteEvaluator.getMode() : 'transfers';
-      modes.forEach(function(mode, i) {
-        var active = mode === currentMode ? ' active' : '';
-        html += '<button class="sort-mode-btn"' + active + ' data-mode="' + mode + '">' + window.escapeHtml(modeLabels[i]) + '</button>';
-      });
+      var origin = window.RailwayDB && window.RailwayDB.resolveStationName ? window.RailwayDB.resolveStationName(result.path[0], lang) : (result.path[0] || '');
+      var dest = window.RailwayDB && window.RailwayDB.resolveStationName ? window.RailwayDB.resolveStationName(result.path[result.path.length - 1], lang) : (result.path[result.path.length - 1] || '');
+      html += '<div class='journey-route-line'>';
+      html += '<span class='journey-origin'>' + window.escapeHtml(origin) + '</span>';
+      html += '<span class='journey-arrow'>&gt;</span>';
+      html += '<span class='journey-dest'>' + window.escapeHtml(dest) + '</span>';
       html += '</div>';
-
-      html += '<div class="result-stations">';
-      result.path.forEach(function(station, i) {
-        var _r1 = (window.RailwayDB && window.RailwayDB.resolveStationName) ? window.RailwayDB.resolveStationName(station, window.currentLang || 'ja') : null;
-        html += '<div class="station-node">' + (window.escapeHtml(_r1 || station));
-        if (i === 0) html += ' <span class="start">' + t('search_result.start') + '</span>';
-        if (i === result.path.length - 1) html += ' <span class="end">' + t('search_result.end') + '</span>';
-        html += '</div>';
-        if (i < result.path.length - 1) {
-          html += '<div class="station-connector"></div>';
-        }
-      });
-      html += '</div>';
-
-      var renderSegs = (result.routeSegments && result.routeSegments.length > 0) ? result.routeSegments : result.lineInfo;
-      if (renderSegs && renderSegs.length > 0) {
-        html += '<div class="result-segments">';
-        var rtCache = this.getRouteRealtime(result);
-        renderSegs.forEach(function(seg) {
-          if (seg.type === 'transfer') {
-            var _r2 = (window.RailwayDB && window.RailwayDB.resolveStationName) ? window.RailwayDB.resolveStationName(seg.station, window.currentLang || 'ja') : null;
-            html += '<div class="transfer-node">' + t('search_result.transfer') + ' @ ' + window.escapeHtml(_r2 || seg.station) + '</div>';
+      if (segs.length > 0) {
+        html += '<div class='journey-segments'>';
+        for (var i = 0; i < segs.length; i++) {
+          var seg = segs[i];
+          if (seg.type === 	ransfer\) {
+            var txSt = window.RailwayDB && window.RailwayDB.resolveStationName ? window.RailwayDB.resolveStationName(seg.station, lang) : (seg.station || '');
+            html += '<div class='journey-transfer'>';
+            html += '<span class='journey-transfer-icon'>' + String.fromCharCode(0x21bb) + '</span>';
+            html += '<span class='journey-transfer-station'>' + window.escapeHtml(txSt) + '</span>';
+            html += '<span class='journey-transfer-text'>' + t('search_result.transfer') + '</span>';
+            html += '</div>';
           } else {
             var lineId = seg.lineId || null;
-            var lineName = seg.lineName || (seg.lines && seg.lines[0]) || '';
+            var lineName = lineId ? (window.RailwayDB && window.RailwayDB.resolveLineName ? window.RailwayDB.resolveLineName(lineId, window.currentLang) : null) : null;
             var lineColor = (window.RailwayDB && window.RailwayDB.getLine(lineId)) ? (window.RailwayDB.getLine(lineId).color || null) : null;
-            html += '<div class="ride-seg"' + (lineColor ? ' style="border-left:4px solid ' + lineColor + '"' : '') + '>';
-            html += '<span class="line-name">' + window.escapeHtml(lineName) + '</span>';
-            if (seg.direction === 1) {
-              html += '<span class="line-direction">\u2191</span>';
-            } else if (seg.direction === -1) {
-              html += '<span class="line-direction">\u2193</span>';
-            }
-            var _r3f = (window.RailwayDB && window.RailwayDB.resolveStationName) ? window.RailwayDB.resolveStationName(seg.fromStation, window.currentLang || 'ja') : null;
-            var _r3t = (window.RailwayDB && window.RailwayDB.resolveStationName) ? window.RailwayDB.resolveStationName(seg.toStation, window.currentLang || 'ja') : null;
-            html += '<span class="ride-route">' + window.escapeHtml(_r3f || seg.fromStation) + ' → ' + window.escapeHtml(_r3t || seg.toStation) + '</span>';
-            if (seg.duration != null) {
-              html += '<span class="line-duration">' + seg.duration + ' ' + t('search.min_unit') + '</span>';
-            }
+            var fromSt = window.RailwayDB && window.RailwayDB.resolveStationName ? window.RailwayDB.resolveStationName(seg.fromStation, lang) : (seg.fromStation || '');
+            var toSt = window.RailwayDB && window.RailwayDB.resolveStationName ? window.RailwayDB.resolveStationName(seg.toStation, lang) : (seg.toStation || '');
+            html += '<div class=\journey-seg' + (lineColor ? ' style=order-left-color: + window.escapeHtml(lineColor) + ' : '') + '>';
+            html += '<span class=\journey-seg-name\>' + window.escapeHtml(lineName || '') + '</span>';
+            html += '<span class=\journey-seg-route\>' + window.escapeHtml(fromSt) + ' &rarr; ' + window.escapeHtml(toSt) + '</span>';
+            if (seg.duration != null) { html += '<span class=\journey-seg-duration\>' + seg.duration + ' ' + t('search.min_unit') + '</span>'; }
             if (lineId && window.DATA_FUSION) {
               var delayInfo = window.DATA_FUSION.getDelayInfo(lineId);
               if (delayInfo) {
                 var status = delayInfo.status || 'no_data';
                 var meta = (window.DataState && window.DataState.STATUS_META) ? window.DataState.STATUS_META[status] : null;
-                var icon = meta ? meta.icon : '\u25cc';
+                var icon = meta ? meta.icon : String.fromCharCode(0x25cc);
                 var label = t('status.' + status) || status;
                 html += '<span class="route-status-badge ' + status + '">' + icon + ' ' + window.escapeHtml(label) + '</span>';
-              }
-            }
             html += '</div>';
           }
-        });
+        }
         html += '</div>';
       }
-
       html += '</div>';
-
-      // Phase 42-A: Nearby attractions for destination station
       var destStation = result.path[result.path.length - 1];
-      if (destStation) {
-        var spotsHtml = this.renderNearbySpots(destStation, t);
-        if (spotsHtml) {
-          html += spotsHtml;
-        }
-      }
-
-      html += '</div>';
+      var spotsHtml = '';
+      if (destStation) { spotsHtml = this.renderNearbySpots(destStation, t); }
       this.resultsDiv.innerHTML = html;
-
-      // Phase 44-D: Sort mode button click handler (event delegation)
-      var sortModeContainer = this.resultsDiv.querySelector('.search-sort-mode');
-      if (sortModeContainer) {
-        sortModeContainer.addEventListener('click', function(e) {
-          var btn = e.target.closest('.sort-mode-btn');
-          if (btn && window.RouteEvaluator) {
-            var mode = btn.getAttribute('data-mode');
-            if (mode) {
-              window.RouteEvaluator.setMode(mode);
-              self.performSearch();
-            }
-          }
-        });
-      }
-
-      // Phase 42-D: Bind route button handlers
-      this.resultsDiv.querySelectorAll('.btn-nearby-route').forEach(function(btn) {
-        btn.addEventListener('click', function() {
-          var sk = btn.getAttribute('data-station');
-          if (sk) window.location.href = 'home.html?from=' + encodeURIComponent(sk);
-        });
-      });
-    },
-
-    /**
-     * Phase 42-A/C: Render nearby tourism spots using unified TourismProximity API
-     */
-    renderNearbySpots: function(stationName, t) {
-      // Resolve station name to tourism key
-      var stationKey = null;
-      var td = window.TOURISM_DATA;
-      if (td && td[stationName]) {
-        stationKey = stationName;
-      } else if (td) {
-        for (var k in td) {
-          if (k.toLowerCase() === stationName.toLowerCase()) {
-            stationKey = k;
-            break;
-          }
-        }
-      }
-      if (!stationKey) return null;
-
-      // Use unified proximity API
-      var nearby = null;
-      try {
-        nearby = window.TourismProximity ? window.TourismProximity.getNearbySpotsByStation(stationKey, { radius: 3000, limit: 10 }) : null;
-      } catch(e) {
-        console.warn('[SearchUI] getNearbySpotsByStation failed:', e);
-      }
-      if (!nearby || nearby.length === 0) return null;
-
-      var html = '<div class="nearby-spots-section">';
-      html += '<div class="nearby-spots-header">';
-      html += '<span class="nearby-spots-icon">&#x1F3DF;</span>';
-      html += '<span class="nearby-spots-title">' + t('search.nearby_spots') + '</span>';
-      html += '<span class="nearby-spots-count">' + nearby.length + '</span>';
-      html += '<span class="nearby-spots-station">' + window.escapeHtml(stationName) + '</span>';
-      html += '</div>';
-
-      html += '<div class="nearby-spots-grid">';
-      for (var j = 0; j < nearby.length; j++) {
-        var sp = nearby[j];
-        var spot = sp.spot;
-        var distText = sp.distanceText || '';
-        var tagsHtml = '';
-        if (spot.tags && spot.tags.length > 0) {
-          tagsHtml = '<div class="nearby-spot-tags">' + spot.tags.slice(0, 2).map(function(tag) {
-            return '<span class="nearby-tag">' + window.escapeHtml(tag) + '</span>';
-          }).join('') + '</div>';
-        }
-        var detailUrl = 'tourism-detail.html?station=' + encodeURIComponent(sp.stationId) + '&name=' + encodeURIComponent(spot.name) + '&index=0';
-        html += '<a href="' + detailUrl + '" class="nearby-spot-card" data-station="' + window.escapeHtml(sp.stationId) + '" data-spot="' + window.escapeHtml(spot.name) + '">';
-        html += '<div class="nearby-spot-rank">#' + (j + 1) + '</div>';
-        html += '<div class="nearby-spot-info">';
-        html += '<div class="nearby-spot-name">' + window.escapeHtml(spot.name) + '</div>';
-        html += '<div class="nearby-spot-meta">' + distText + '</div>';
-        html += tagsHtml;
-        html += '</div>';
-        html += '<span class="nearby-spot-arrow">&#x203A;</span>';
-        html += '</a>';
-      }
-      html += '</div>';
-
-      html += '<div class="nearby-spots-actions">';
-      html += '<a href="tourism-detail.html?station=' + encodeURIComponent(stationKey) + '&index=0" class="btn-nearby-viewall" data-i18n="search.view_all_spots">' + window.escapeHtml(t('search.view_all_spots')) + '</a>';
-      html += '<button class="btn-nearby-route" data-station="' + window.escapeHtml(stationKey) + '">' + window.escapeHtml(t('search.route_from_here')) + '</button>';
-      html += '</div>';
-
-      html += '</div>';
-      return html;
+      if (spotsHtml) { this.resultsDiv.insertAdjacentHTML('beforeend', spotsHtml); }
     },
 
 
