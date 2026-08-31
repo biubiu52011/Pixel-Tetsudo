@@ -311,7 +311,6 @@ function load() {
     if (isFileProtocol) {
       var xhr = new XMLHttpRequest();
       xhr.open('GET', '../data/core/railway_data.json', false);
-      try { xhr.send(null); if (xhr.status === 200 || xhr.status === 0) { var data = JSON.parse(xhr.responseText); applyData(data); loaded = true; console.log("[DbLoader] Data loaded from railway_data.json: " + Object.keys(window.STATION_COORDS).length + " stations, " + Object.keys(window.TOURISM_DATA).length + " tourism"); return Promise.resolve(); } } catch(e) {}
       if (window.RAILWAY_DATA && window.RAILWAY_DATA.stations) { applyData(window.RAILWAY_DATA); loaded = true; return Promise.resolve(); }
       error = new Error("No data source available under file:// protocol");
       console.error("[DbLoader] Failed to load data under file:// protocol");
@@ -327,7 +326,6 @@ function load() {
       .then(function(data) {
         applyData(data);
         loaded = true;
-        console.log("[DbLoader] Data loaded: " +
           Object.keys(data.stations).length + " stations, " +
           Object.keys(data.lines).length + " lines, " +
           Object.keys(data.tourism).length + " tourism stations");
@@ -343,7 +341,6 @@ function load() {
             if (window.RAILWAY_DATA && window.RAILWAY_DATA.stations) {
               applyData(window.RAILWAY_DATA);
               loaded = true;
-              console.log("[DbLoader] Data loaded from railway-data.js (dynamic fallback): " +
                 Object.keys(window.STATION_COORDS).length + " stations, " +
                 Object.keys(window.UNIFIED_LINES).length + " lines");
             } else {

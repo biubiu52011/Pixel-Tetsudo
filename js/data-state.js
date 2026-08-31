@@ -215,7 +215,7 @@
     var html = "";
     for (var o = 0; o < opOrder.length; o++) {
       var op = opOrder[o];
-      html += '<div class="rs-operator-group"><div class="rs-operator-title">' + escapeHtml(op) + '</div>'
+      html += '<div class="rs-operator-group"><div class="rs-operator-title">' + escapeHtml(tOp(op)) + '</div>'
         + '<div class="rs-cards-container">';
       for (var k = 0; k < groups[op].length; k++) {
         html += renderCard(groups[op][k].line, groups[op][k].id, { mode: mode });

@@ -211,13 +211,13 @@
 
     renderResults: function(result, t) {
       if (!this.resultsDiv) return;
-      var lang = window.currentLang || \ ja\;
+      var lang = window.currentLang || 'ja';
       var dur = result.durationMin || 0;
       var transfers = 0;
       var segs = result.routeSegments || result.lineInfo || [];
-      for (var i = 0; i < segs.length; i++) { if (segs[i].type === 	ransfer\) transfers++; }
-      var html = '<div class=\search-result journey-card\>';
-      html += '<div class=\journey-header\>';
+      for (var i = 0; i < segs.length; i++) { if (segs[i].type === 'transfer') transfers++; }
+      var html = '<div class="search-result journey-card">';
+      html += '<div class="journey-header">';
       html += '<span class='journey-duration'>' + dur + ' ' + t('search.min_unit') + '</span>';
       if (transfers > 0) { html += '<span class='journey-transfers'>' + transfers + ' ' + t('search_result.transfer_count') + '</span>'; }
       html += '</div>';
@@ -232,7 +232,7 @@
         html += '<div class='journey-segments'>';
         for (var i = 0; i < segs.length; i++) {
           var seg = segs[i];
-          if (seg.type === 	ransfer\) {
+          if (seg.type === 'transfer') {
             var txSt = window.RailwayDB && window.RailwayDB.resolveStationName ? window.RailwayDB.resolveStationName(seg.station, lang) : (seg.station || '');
             html += '<div class='journey-transfer'>';
             html += '<span class='journey-transfer-icon'>' + String.fromCharCode(0x21bb) + '</span>';
@@ -245,10 +245,10 @@
             var lineColor = (window.RailwayDB && window.RailwayDB.getLine(lineId)) ? (window.RailwayDB.getLine(lineId).color || null) : null;
             var fromSt = window.RailwayDB && window.RailwayDB.resolveStationName ? window.RailwayDB.resolveStationName(seg.fromStation, lang) : (seg.fromStation || '');
             var toSt = window.RailwayDB && window.RailwayDB.resolveStationName ? window.RailwayDB.resolveStationName(seg.toStation, lang) : (seg.toStation || '');
-            html += '<div class=\journey-seg' + (lineColor ? ' style=order-left-color: + window.escapeHtml(lineColor) + ' : '') + '>';
-            html += '<span class=\journey-seg-name\>' + window.escapeHtml(lineName || '') + '</span>';
-            html += '<span class=\journey-seg-route\>' + window.escapeHtml(fromSt) + ' &rarr; ' + window.escapeHtml(toSt) + '</span>';
-            if (seg.duration != null) { html += '<span class=\journey-seg-duration\>' + seg.duration + ' ' + t('search.min_unit') + '</span>'; }
+            html += '<div class="journey-seg"+ (lineColor ? ' style="border-left-color: + window.escapeHtml(lineColor) + ' : '') + '>';
+            html += '<span class="journey-seg-name">' + window.escapeHtml(lineName || '') + '</span>';
+            html += '<span class="journey-seg-route">' + window.escapeHtml(fromSt) + ' &rarr; ' + window.escapeHtml(toSt) + '</span>';
+            if (seg.duration != null) { html += '<span class="journey-seg-duration">' + seg.duration + ' ' + t('search.min_unit') + '</span>'; }
             if (lineId && window.DATA_FUSION) {
               var delayInfo = window.DATA_FUSION.getDelayInfo(lineId);
               if (delayInfo) {

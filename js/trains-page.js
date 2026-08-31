@@ -239,7 +239,7 @@
       window.location.hash = lineId;
       if (listEl) listEl.classList.add("hidden");
       if (detailEl) detailEl.classList.remove("hidden");
-      if (titleEl) titleEl.textContent = (window.RailwayDB && window.RailwayDB.resolveLineName ? window.RailwayDB.resolveLineName(lineId, window.currentLang) : fusedLine.id);
+      if (titleEl) titleEl.textContent = (window.RailwayDB && window.RailwayDB.resolveLineName ? window.RailwayDB.resolveLineName(lineId, window.currentLang) : (fusedLine.nameEn || fusedLine.nameJa || lineId));
       if (mapEl) renderTrainMap(mapEl, fusedLine, lineId);
     } catch(e) {}
   }
