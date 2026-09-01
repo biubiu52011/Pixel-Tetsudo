@@ -54,7 +54,10 @@
     // Status section
     var statusSection = modal.querySelector(".rs-status-section");
     statusSection.className = "rs-status-section rs-status-" + status;
-    statusSection.innerHTML = '<span class="rs-status-indicator"><span style="background:var(--' + s.color + ')"></span>' + statusText + '</span>';
+    statusSection.innerHTML = '<span class="rs-status-indicator"><span class="rs-status-dot"></span>' + statusText + '</span>';
+    // Apply status dot color via DOM API (CSP-safe)
+    var dot = statusSection.querySelector(".rs-status-dot");
+    if (dot) dot.style.background = "var(--" + s.color + ")";
     // Interval section
     var intervalSection = modal.querySelector(".rs-interval-section");
     intervalSection.querySelector(".rs-info-label").textContent = t("status.interval");
