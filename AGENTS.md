@@ -159,6 +159,65 @@ After intake is complete and approved:
 9. Release Gate check
 
 Do not skip steps.
+
+---
+
+## Capability Ownership Check (MANDATORY for all feature development)
+
+After the 11-question intake, before any implementation decision, the agent MUST answer this question:
+
+**"Who does this capability belong to?"**
+
+### Capability ownership map (current RC-2 baseline)
+
+| Capability | Owner | Boundary |
+|-----------|-------|----------|
+| Line/station identity | RailwayDB | resolveLineName(), resolveStationName() |
+| Display name (i18n) | RailwayDB | resolveLineName(currentLang) |
+| Operator display | RailwayDB | tOp(operatorId) |
+| Runtime cache / position | DataLayer | positions, regions |
+| Realtime fusion | DataFusion | unified data from multiple sources |
+| Raw canonical data | UNIFIED_LINES | db-loader.js input |
+| Search interaction | SearchUI | form handling, results display |
+| History tracking | History | consumes SearchUI output, does NOT own search logic |
+| Route search UI | Route page | own main-heart: "How do I get there?" |
+| Realtime status | Realtime page | own main-heart: "Can I ride now?" |
+| Tourism / sights | Tourism page | own main-heart: "What to visit after arrival?" |
+
+### The stolen-logic rule
+
+If module B needs a capability that lives inside module A's internal code:
+
+**Case 1: The capability belongs to A's responsibility**
+- A SHOULD expose it as a public method / provider
+- B calls the public API, not A's internals
+- If A cannot reasonably expose it, extend A's responsibility map
+
+**Case 2: The capability does NOT belong to A**
+- B is depending on the wrong module
+- Find the correct owner in the map above
+- Redirect B's dependency to the correct owner
+- Never let B "sneak in" to A's internals as a shortcut
+
+### Anti-pattern: B borrows A's logic without giving back
+
+This pattern must never happen:
+`
+B needs X
+→ B copies/rewrites X from A's internals
+→ B works
+→ A never gains X
+→ A's Consumer loses access to X
+→ Future AI finds A's old X code, assumes it is still current
+→ New feature C attaches to A's orphaned X
+→ A+B+C framework collapse
+`
+
+**Check every change against this question:**
+> After this change, does the owning module still provide the same capability to all its original consumers?
+
+If the answer is NO, the change is REJECTED.
+
 ## Known Debt (Do Not Auto-Fix)
 
 | Debt | Priority | Reason for defer |
