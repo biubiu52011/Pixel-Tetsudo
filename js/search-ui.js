@@ -221,7 +221,7 @@
       var dest = window.RailwayDB && window.RailwayDB.resolveStationName ? window.RailwayDB.resolveStationName(result.path[result.path.length - 1], lang) : (result.path[result.path.length - 1] || '');
 
       var html = '<div class="search-result journey-card">';
-      // Compact header: duration + transfer count
+      // Header: total duration + transfer count
       html += '<div class="journey-header">';
       html += '<span class="journey-duration">' + dur + ' ' + t('search.min_unit') + '</span>';
       if (transfers > 0) { html += '<span class="journey-transfers">' + transfers + ' ' + t('search_result.transfer_count') + '</span>'; }
@@ -240,10 +240,19 @@
           var seg = segs[i];
           if (seg.type === 'transfer') {
             var txSt = window.RailwayDB && window.RailwayDB.resolveStationName ? window.RailwayDB.resolveStationName(seg.station, lang) : (seg.station || '');
+            var fromLineName = seg.fromLine ? (window.RailwayDB && window.RailwayDB.resolveLineName ? window.RailwayDB.resolveLineName(seg.fromLine, window.currentLang) : seg.fromLine) : null;
+            var toLineNames = seg.toLines ? seg.toLines.map(function(lid) {
+              return window.RailwayDB && window.RailwayDB.resolveLineName ? window.RailwayDB.resolveLineName(lid, window.currentLang) : lid;
+            }).join(', ') : null;
+            var lineChange = '';
+            if (fromLineName || toLineNames) {
+              lineChange = '<span class="journey-transfer-lines">' + window.escapeHtml(fromLineName || '') + ' &rarr; ' + window.escapeHtml(toLineNames || '') + '</span>';
+            }
             html += '<div class="journey-transfer">';
             html += '<span class="journey-transfer-icon">' + String.fromCharCode(0x21bb) + '</span>';
             html += '<span class="journey-transfer-station">' + window.escapeHtml(txSt) + '</span>';
             html += '<span class="journey-transfer-text">' + t('search_result.transfer') + '</span>';
+            if (lineChange) { html += lineChange; }
             html += '</div>';
           } else {
             var lineId = seg.lineId || null;
@@ -254,17 +263,6 @@
             html += '<div class="journey-seg" style="border-left-color:' + window.escapeHtml(lineColor || 'var(--border)') + ';">';
             html += '<span class="journey-seg-name">' + window.escapeHtml(lineName || '') + '</span>';
             html += '<span class="journey-seg-route">' + window.escapeHtml(fromSt) + ' &rarr; ' + window.escapeHtml(toSt) + '</span>';
-            if (seg.duration != null) { html += '<span class="journey-seg-duration">' + seg.duration + ' ' + t('search.min_unit') + '</span>'; }
-            if (lineId && window.DATA_FUSION) {
-              var delayInfo = window.DATA_FUSION.getDelayInfo(lineId);
-              if (delayInfo) {
-                var status = delayInfo.status || 'no_data';
-                var meta = (window.DataState && window.DataState.STATUS_META) ? window.DataState.STATUS_META[status] : null;
-                var icon = meta ? meta.icon : String.fromCharCode(0x25cc);
-                var label = t('status.' + status) || status;
-                html += '<span class="route-status-badge ' + status + '">' + icon + ' ' + window.escapeHtml(label) + '</span>';
-              }
-            }
             html += '</div>';
           }
         }
@@ -284,6 +282,7 @@
       this.resultsDiv.innerHTML = html;
       if (spotsHtml) { this.resultsDiv.insertAdjacentHTML('beforeend', spotsHtml); }
     },
+
 
 
 
