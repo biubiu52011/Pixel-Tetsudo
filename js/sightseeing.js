@@ -18,7 +18,7 @@
 
   const TAG_ICONS = {};
 
-  const MAJOR_STATIONS = ['Shinjuku','Tokyo','Shibuya','Akihabara','Ueno','Ginza','Roppongi','Ikebukuro','Solamachi','Asakusa','TokyoSkytree','Omotesando'];
+  function getMajorStations() { return (window.TOURISM_STATIONS && window.TOURISM_STATIONS.length > 0) ? Array.from(window.TOURISM_STATIONS) : ['Shinjuku']; }
   const RIVERS = [
     { name: 'Sumida', lat: 35.710, lng: 139.803, width: 120 } // width in meters
   ];
@@ -310,8 +310,9 @@ function renderGrid() {
   function showStationPicker() {
     if (!dom.stationPicker) return;
     var html = '<div class="sm-picker-label">' + t('tourism.select_station') + '</div><div class="sm-picker-list">';
-    for (var i = 0; i < MAJOR_STATIONS.length; i++) {
-      var s = MAJOR_STATIONS[i];
+    var _stations = getMajorStations();
+    for (var i = 0; i < _stations.length; i++) {
+      var s = _stations[i];
       var label = s;
       if (window.RailwayDB && window.RailwayDB.getNameMap) {
         var nm = window.RailwayDB.getNameMap();
@@ -333,7 +334,7 @@ function renderGrid() {
     state.locStatus = 'locating';
     renderHeader();
     if (typeof navigator === 'undefined' || !navigator.geolocation) {
-      state.selectedStation = 'Shinjuku';
+      state.selectedStation = (getMajorStations().length > 0) ? getMajorStations()[0] : 'Shinjuku';
       state.autoDetected = false;
       showStationPicker();
       renderAll();
@@ -349,13 +350,13 @@ function renderGrid() {
         // Geolocation failed or denied - show station picker
         if (err.code === err.PERMISSION_DENIED || err.code === err.POSITION_UNAVAILABLE) {
           state.locStatus = 'error';
-          state.selectedStation = 'Shinjuku';
+          state.selectedStation = (getMajorStations().length > 0) ? getMajorStations()[0] : 'Shinjuku';
           state.autoDetected = false;
           showStationPicker();
           renderAll();
         } else {
           // No geolocation API available - show picker directly
-          state.selectedStation = 'Shinjuku';
+          state.selectedStation = (getMajorStations().length > 0) ? getMajorStations()[0] : 'Shinjuku';
           state.autoDetected = false;
           showStationPicker();
           renderAll();
