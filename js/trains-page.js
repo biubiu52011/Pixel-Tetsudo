@@ -292,7 +292,7 @@
     var lines = window.DataLayer ? window.DataLayer.getAllLines() : (window.UNIFIED_LINES || {});
     var ul = Array.isArray(lines) ? (function(){ var d={}; lines.forEach(function(l){ d[l.id||l.line_id]=l; }); return d; })() : lines;
     if (!ul || Object.keys(ul).length === 0) { el.innerHTML = ''; return; }
-    try { window.DataState.renderList(el, ul, { mode: "trains" }); } catch(e) { el.innerHTML = "<div class=\"rs-error\">Render failed</div>"; }
+    var lineOrder = (window.LinePresentationService && window.UNIFIED_LINES) ? window.LinePresentationService.getDisplayOrder(window.UNIFIED_LINES) : []; try { window.DataState.renderList(el, ul, { mode: "trains", lineOrder: lineOrder }); } catch(e) { el.innerHTML = "<div class=\"rs-error\">Render failed</div>"; }
   }
 
   function init() {
@@ -392,7 +392,7 @@
     }
     var ul = Array.isArray(filtered) ? (function(){ var d={}; filtered.forEach(function(l){ d[l.id||l.line_id]=l; }); return d; })() : filtered;
     if (!ul || Object.keys(ul).length === 0) { el.innerHTML = ''; return; }
-    try { window.DataState.renderList(el, ul, { mode: "trains" }); } catch(e) { el.innerHTML = "<div class=\"rs-error\">Render failed</div>"; }
+    var lineOrder = (window.LinePresentationService && window.UNIFIED_LINES) ? window.LinePresentationService.getDisplayOrder(window.UNIFIED_LINES) : []; try { window.DataState.renderList(el, ul, { mode: "trains", lineOrder: lineOrder }); } catch(e) { el.innerHTML = "<div class=\"rs-error\">Render failed</div>"; }
   }
   window.TrainsPage = {
     init: init,

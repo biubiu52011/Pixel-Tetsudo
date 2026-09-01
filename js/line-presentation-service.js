@@ -10,6 +10,11 @@
 (function() {
   "use strict";
 
+  // Normalize OP_ORDER key (e.g. "JR-East") to LOS key (e.g. "JR_EAST")
+  function normalizeOpKey(op) {
+    return (op || "").replace(/-/g, "_").toUpperCase();
+  }
+
   function getDisplayOrder(allLines) {
     if (!window.LineOperationSystems) return Object.keys(allLines || {});
     var result = [];
@@ -26,8 +31,9 @@
       if (allOps.indexOf(op) === -1) allOps.push(op);
     });
     allOps.forEach(function(op) {
-      if (!window.LineOperationSystems[op]) return;
-      var systems = window.LineOperationSystems[op];
+      var losKey = normalizeOpKey(op);
+      if (!window.LineOperationSystems[losKey]) return;
+      var systems = window.LineOperationSystems[losKey];
       systems.sort(function(a, b) { return (a.order || 0) - (b.order || 0); });
       systems.forEach(function(sys) {
         if (!sys.lineIds) return;
