@@ -10,6 +10,7 @@
   var titleEl = null;
   var mapEl = null;
   var backBtn = null;
+  var _selectedOperator = null;
   var t = window.t || function(k) { return k; };
   var escapeHtml = window.escapeHtml || function(s) {
     if (!s) return "";
@@ -337,6 +338,62 @@
     } catch(e) {}
   }
 
+
+  function sortOperators(ops) {
+    var order = (window.TransitConstants && window.TransitConstants.OP_ORDER) ? window.TransitConstants.OP_ORDER : [];
+    return ops.sort(function(a, b) {
+      var ia = order.indexOf(a), ib = order.indexOf(b);
+      if (ia >= 0 && ib >= 0) return ia - ib;
+      if (ia >= 0) return -1;
+      if (ib >= 0) return 1;
+      return a.localeCompare(b);
+    });
+  }
+
+  function renderFilterBar(container) {
+    if (!container) return;
+    var lines = window.DataLayer ? window.DataLayer.getAllLines() : (window.UNIFIED_LINES || {});
+    var ops = {};
+    if (Array.isArray(lines)) {
+      lines.forEach(function(l) { if (l.operator) ops[l.operator] = true; });
+    } else {
+      Object.keys(lines).forEach(function(id) {
+        var line = lines[id];
+        if (line && line.operator) ops[line.operator] = true;
+      });
+    }
+    var opList = sortOperators(Object.keys(ops));
+    var html = '';
+    var allLabel = (typeof window.t === "function" && window.t("filter.all")) ? window.t("filter.all") : "All";
+    html += '<button class="rs-filter-btn' + (_selectedOperator === null ? ' active' : '') + '" data-operator="">' + allLabel + '</button>';
+    opList.forEach(function(op) {
+      var label = (typeof window.t === "function" && window.t("op." + op)) ? window.t("op." + op) : op;
+      html += '<button class="rs-filter-btn' + (_selectedOperator === op ? ' active' : '') + '" data-operator="' + op + '">' + label + '</button>';
+    });
+    container.innerHTML = html;
+    container.querySelectorAll('.rs-filter-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() { setFilter(btn.dataset.operator || null); });
+    });
+  }
+
+  function setFilter(op) {
+    _selectedOperator = op;
+    var container = document.getElementById('trainsFilterBar');
+    if (container) renderFilterBar(container);
+    if (listEl) renderFiltered(listEl);
+  }
+
+  function renderFiltered(el) {
+    if (!el || !window.DataState) return;
+    var allLines = getLinesData();
+    var filtered = allLines;
+    if (_selectedOperator) {
+      filtered = allLines.filter(function(l) { return l.operator === _selectedOperator; });
+    }
+    var ul = Array.isArray(filtered) ? (function(){ var d={}; filtered.forEach(function(l){ d[l.id||l.line_id]=l; }); return d; })() : filtered;
+    if (!ul || Object.keys(ul).length === 0) { el.innerHTML = ''; return; }
+    try { window.DataState.renderList(el, ul, { mode: "trains" }); } catch(e) { el.innerHTML = "<div class=\"rs-error\">Render failed</div>"; }
+  }
   window.TrainsPage = {
     init: init,
     refreshUI: function() { renderList(listEl); },

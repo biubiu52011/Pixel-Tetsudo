@@ -123,6 +123,17 @@
     return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
   }
 
+  function sortOperators(ops) {
+    var order = (window.TransitConstants && window.TransitConstants.OP_ORDER) ? window.TransitConstants.OP_ORDER : [];
+    return ops.sort(function(a, b) {
+      var ia = order.indexOf(a), ib = order.indexOf(b);
+      if (ia >= 0 && ib >= 0) return ia - ib;
+      if (ia >= 0) return -1;
+      if (ib >= 0) return 1;
+      return a.localeCompare(b);
+    });
+  }
+
   function renderFilterBar(linesObj) {
     var bar = document.getElementById("realtimeFilterBar");
     if (!bar || !linesObj) return;
@@ -131,7 +142,7 @@
       var line = linesObj[id];
       if (line && line.operator) ops[line.operator] = true;
     });
-    var opList = Object.keys(ops).sort();
+    var opList = sortOperators(Object.keys(ops));
     var html = '<button class="rs-filter-btn' + (_selectedOperator === null ? ' active' : '') + '" data-operator="">';
     html += (typeof window.t === "function" && window.t("filter.all")) ? window.t("filter.all") : "All";
     html += "</button>";
