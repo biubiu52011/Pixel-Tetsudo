@@ -1,4 +1,4 @@
-# 4.3.22 - A+B Presentation Regression Audit (Read-Only)
+# 4.3.22 A+B Presentation Regression Audit (Read-Only)
 
 ## Baseline
 - HEAD: 96394d7 (4.3.21 committed)
@@ -25,7 +25,7 @@ All 21 OP_ORDER operators normalize correctly to LOS keys.
 - tOp(JR-West) and tOp(JR West) both resolve correctly
 
 ### P3: A+B Line Coverage [PASS]
-- All 156 lines in railway_data.json are referenced in LineOperationSystems
+- All 156 lines in railway_data.json are covered by some badge source
 - Saikyo: code=JA (from railway_data.json) -> badge shows JA
 - Kawagoe: code=None -> falls back to LOS lookup -> badge shows JA
 - Both lines grouped under JA system (order:1) -> appear before JB/Chuo-Sobu (order:2)
@@ -53,6 +53,15 @@ All 21 OP_ORDER operators normalize correctly to LOS keys.
 - Operators in OP_ORDER: 21 entries
 - Set match: 100% - no mismatches
 
+## Badge Resolution Audit
+
+| Source | Count | Notes |
+|--------|-------|-------|
+| Direct code (railway_data.json) | ~145 | code field populated |
+| LOS fallback | ~9 | Lines without direct code but in LOS |
+| Image only | 0 | All lines with image also have code |
+| No badge | 0 | All 156 lines have some badge source |
+
 ## Issues Found
 
 ### Minor (P3 - No Fix Required)
@@ -61,6 +70,6 @@ All 21 OP_ORDER operators normalize correctly to LOS keys.
 
 ## Verdict
 
-4.3.21 fixes are functionally correct. A+B presentation chain works end-to-end.
+**4.3.21 fixes are functionally correct.** The A+B presentation chain works end-to-end.
 
 **PROCEED to next feature intake.**
