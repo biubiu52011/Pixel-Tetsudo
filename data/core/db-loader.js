@@ -326,6 +326,7 @@ function load() {
       .then(function(data) {
         applyData(data);
         loaded = true;
+        console.log(
           Object.keys(data.stations).length + " stations, " +
           Object.keys(data.lines).length + " lines, " +
           Object.keys(data.tourism).length + " tourism stations");
@@ -341,6 +342,7 @@ function load() {
             if (window.RAILWAY_DATA && window.RAILWAY_DATA.stations) {
               applyData(window.RAILWAY_DATA);
               loaded = true;
+              console.log(
                 Object.keys(window.STATION_COORDS).length + " stations, " +
                 Object.keys(window.UNIFIED_LINES).length + " lines");
             } else {
