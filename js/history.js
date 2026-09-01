@@ -218,8 +218,15 @@
     if (db && db.resolveStationName) {
       var fromName = db.resolveStationName(fromId, lang) || fromId;
       var toName = db.resolveStationName(toId, lang) || toId;
-      if (window.SearchUI.fromInput) window.SearchUI.fromInput.value = fromName;
-      if (window.SearchUI.toInput) window.SearchUI.toInput.value = toName;
+      if (window.SearchUI.fromInput) {
+        window.SearchUI.fromInput.value = fromName;
+        window.SearchUI.fromInput.setAttribute("data-station-id", fromId || "");
+      }
+      if (window.SearchUI.toInput) {
+        window.SearchUI.toInput.value = toName;
+        window.SearchUI.toInput.setAttribute("data-station-id", toId || "");
+      }
+
       if (window.SearchUI.fromInput) window.SearchUI.fromInput.dispatchEvent(new Event("input"));
       if (window.SearchUI.toInput) window.SearchUI.toInput.dispatchEvent(new Event("input"));
     }

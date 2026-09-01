@@ -33,6 +33,7 @@
         }
         if (this.fromInput) {
           this.fromInput.value = _resolvedName || _fromParam;
+          this.fromInput.setAttribute('data-station-id', _fromParam || '');
         }
         this._setFromSourceHint(_fromParam, _resolvedName);
         // Only clean URL when to param is absent — preserve both params for refresh
@@ -51,6 +52,7 @@
           _toResolvedName = window.RailwayDB.resolveStationName(_toParam, window.currentLang || 'ja');
         }
         this.toInput.value = _toResolvedName || _toParam;
+        this.toInput.setAttribute('data-station-id', _toParam || '');
       }
 
       this.lastRouteResult = null;
@@ -81,8 +83,16 @@
     _swapInputs: function() {
       var fromVal = this.fromInput ? this.fromInput.value : '';
       var toVal = this.toInput ? this.toInput.value : '';
-      if (this.fromInput) this.fromInput.value = toVal;
-      if (this.toInput) this.toInput.value = fromVal;
+      var fromId = this.fromInput ? (this.fromInput.getAttribute('data-station-id') || '') : '';
+      var toId = this.toInput ? (this.toInput.getAttribute('data-station-id') || '') : '';
+      if (this.fromInput) {
+        this.fromInput.value = toVal;
+        this.fromInput.setAttribute('data-station-id', toId || '');
+      }
+      if (this.toInput) {
+        this.toInput.value = fromVal;
+        this.toInput.setAttribute('data-station-id', fromId || '');
+      }
       // Trigger suggestion refresh
       if (this.fromInput && this.fromInput.value) {
         this.showSuggestions(this.fromInput.value, 'fromSuggestions', this.fromInput);
@@ -185,8 +195,9 @@
     },
 
     performSearch: function() {
-      const from = (this.fromInput ? this.fromInput.value.trim() : '');
-      const to = (this.toInput ? this.toInput.value.trim() : '');
+      // Prefer station ID from data-station-id (set by suggestion click); fall back to display name for direct input
+      const from = (this.fromInput ? (this.fromInput.getAttribute('data-station-id') || this.fromInput.value.trim()) : '');
+      const to = (this.toInput ? (this.toInput.getAttribute('data-station-id') || this.toInput.value.trim()) : '');
       const t = window.t || function(key) { return key; };
 
       if (!from || !to) {
