@@ -12,26 +12,32 @@
 
 
   // STATUS_META is defined in data-state.js; use window.DataState.STATUS_META
+  const STATUS_META = {
     normal:    { icon: "\u25cb", color: "green"  },
     delayed:   { icon: "\u25b3", color: "orange" },
     suspended: { icon: "\u00d7", color: "red"  },
     no_data:   { icon: "\u25cc", color: "gray"   },
   };
 
+  function getDelayInfo(line) {
     if (line.delayInfo) return line.delayInfo;
     if (line.status) return { status: line.status, interval: line.interval, cause: line.cause };
     return null;
   }
 
+  function clearSelectedCards() {
     document.querySelectorAll(".rs-line-card.selected").forEach(function(c) { c.classList.remove("selected"); });
   }
 
+  function renderLineCard(line, lineId) {
     return window.DataState.renderCard(line, lineId, { mode: "realtime" });
   }
 
+  function renderLinesList(container, linesObj, lineOrderArr) {
     window.DataState.renderList(container, linesObj, { mode: "realtime", lineOrder: lineOrderArr });
   }
 
+  function openModal(lineId, linesObj) {
     var modal = document.getElementById("lineDetailModal");
     if (!modal || !linesObj || !linesObj[lineId]) return;
     var line = linesObj[lineId];
@@ -104,6 +110,7 @@
     document.body.classList.add("modal-open");
   }
 
+  function closeModal() {
     var modal = document.getElementById("lineDetailModal");
     if (!modal) return;
     modal.classList.remove("active");
@@ -115,10 +122,12 @@
   let _selectedOperator = null;
 
 
+  function escapeHtml(s) {
     if (!s) return "";
     return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
   }
 
+  function renderFilterBar(linesObj) {
     var bar = document.getElementById("realtimeFilterBar");
     var toggleBtn = document.createElement("button");
     toggleBtn.className = "rs-filter-toggle";
@@ -144,12 +153,14 @@
     });
   }
 
+  function setFilter(operator) {
     _selectedOperator = operator;
       renderFiltered();
       renderFilterBar(_latestLines);
     }
   }
 
+  function renderFiltered() {
     if (!_latestLines) return;
     var filtered = _latestLines;
       var f = {};
@@ -166,6 +177,7 @@
     window.DataState.renderList(container, filtered, { mode: "realtime", lineOrder: _latestOrder || [] });
   }
 
+  function getLines() {
     const container = document.getElementById("realtimeStatusContainer");
     if (!container) return;
 
@@ -189,6 +201,7 @@
       return null;
     }
 
+  function render(container) {
       var fused = getLines();
         container.innerHTML = '<div class="rs-loading"><div class="rs-loading-spinner"></div><span>' + t("status.loading") + '</span></div>';
         return;
@@ -202,6 +215,7 @@
       }
     }
 
+  function init() {
     // Immediate check first
     render();
 

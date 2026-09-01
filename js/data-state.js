@@ -137,7 +137,7 @@
       + '<div class="rs-line-header">'
       + iconHtml
       + '<div class="rs-line-info">'
-      + '<div class="rs-line-name">' + escapeHtml(displayName)  '</div>'
+      + '<div class="rs-line-name">' + escapeHtml(displayName) + '</div>'
       + subHtml
       + intervalHtml
       + '</div>'
