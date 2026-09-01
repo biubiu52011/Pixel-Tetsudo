@@ -1,0 +1,66 @@
+# 4.3.22 - A+B Presentation Regression Audit (Read-Only)
+
+## Baseline
+- HEAD: 96394d7 (4.3.21 committed)
+- Canonical Data: 156 lines / 509 stations / 1703 name_map / 93 tourism
+- railway_data.json: UNCHANGED
+- line-operation-systems.js (data/core): UNCHANGED
+
+## Findings
+
+### P0: Script Loading Order [PASS]
+realtime.html / trains.html load order:
+  db-loader.js -> line-operation-systems.js -> line-presentation-service.js -> common.js -> data-state.js
+All dependencies resolve correctly.
+
+### P1: Key Normalization [PASS]
+normalizeOpKey(JR-West) = JR_WEST -> matches LineOperationSystems[JR_WEST]
+normalizeOpKey(JR East) = JR_EAST -> matches LineOperationSystems[JR_EAST]
+All 21 OP_ORDER operators normalize correctly to LOS keys.
+
+### P2: i18n Translation Coverage [PASS]
+- op.JR-West: 4 entries (EN/ZH/JA/KO) -- pre-existing
+- op.JR West: 4 entries (EN/ZH/JA/KO) -- added in 4.3.21
+- lang-init.js _opIds includes both JR-West and JR West
+- tOp(JR-West) and tOp(JR West) both resolve correctly
+
+### P3: A+B Line Coverage [PASS]
+- All 156 lines in railway_data.json are referenced in LineOperationSystems
+- Saikyo: code=JA (from railway_data.json) -> badge shows JA
+- Kawagoe: code=None -> falls back to LOS lookup -> badge shows JA
+- Both lines grouped under JA system (order:1) -> appear before JB/Chuo-Sobu (order:2)
+- No uncovered lines, no orphan LOS references
+
+### P4: isStandalone Handling [PASS]
+- Ome and Itsukaichi have isStandalone: true in data/core LOS
+- renderList skips them as branch lines of ChuoRapid
+- Do-Arakawa (Toei): code=DA -> renders normally
+
+### P5: Trains lineOrder Pass-Through [PASS]
+- trains-page.js renderList(): passes lineOrder from LinePresentationService
+- trains-page.js renderFiltered(): passes lineOrder from LinePresentationService
+- data-state.js renderList(): uses passed lineOrder with fallback
+- Insertion map + secondary presentation sort both functional
+
+### P6: data/api vs data/core LOS [INFO]
+- data/api/line-operation-systems.js: 20,479 bytes, NO isStandalone
+- data/core/line-operation-systems.js: 20,531 bytes, 2 isStandalone entries
+- HTML pages load data/core/ version only
+- data/api/ is NOT referenced by any HTML/JS - dead file, zero runtime impact
+
+### P7: Operator Name Consistency [PASS]
+- Operators in railway_data.json: 21 unique operators
+- Operators in OP_ORDER: 21 entries
+- Set match: 100% - no mismatches
+
+## Issues Found
+
+### Minor (P3 - No Fix Required)
+1. data/api/line-operation-systems.js is a stale duplicate (missing isStandalone). Zero runtime impact.
+2. TransitConstants accessed as bare global in data-state.js:194 (works in browser).
+
+## Verdict
+
+4.3.21 fixes are functionally correct. A+B presentation chain works end-to-end.
+
+**PROCEED to next feature intake.**
