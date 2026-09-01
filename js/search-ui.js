@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Pixel Tetsudo - Search UI Module (Optimized)
  */
 (function() {
@@ -245,7 +245,7 @@
             var lineColor = (window.RailwayDB && window.RailwayDB.getLine(lineId)) ? (window.RailwayDB.getLine(lineId).color || null) : null;
             var fromSt = window.RailwayDB && window.RailwayDB.resolveStationName ? window.RailwayDB.resolveStationName(seg.fromStation, lang) : (seg.fromStation || '');
             var toSt = window.RailwayDB && window.RailwayDB.resolveStationName ? window.RailwayDB.resolveStationName(seg.toStation, lang) : (seg.toStation || '');
-            html += '<div class="journey-seg"+ (lineColor ? ' style="border-left-color: + window.escapeHtml(lineColor) + ' : '') + '>';
+            html += '<div class="journey-seg' + (lineColor ? ' style="border-left-color:' + window.escapeHtml(lineColor) + '"' : '') + '>';
             html += '<span class="journey-seg-name">' + window.escapeHtml(lineName || '') + '</span>';
             html += '<span class="journey-seg-route">' + window.escapeHtml(fromSt) + ' &rarr; ' + window.escapeHtml(toSt) + '</span>';
             if (seg.duration != null) { html += '<span class="journey-seg-duration">' + seg.duration + ' ' + t('search.min_unit') + '</span>'; }
