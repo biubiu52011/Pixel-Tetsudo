@@ -297,7 +297,7 @@
 }
 
 /* === Responsive === */
-@media (max-width: 1000px) {
+@media (max-width: 768px) {
   .sm-grid {
     grid-template-columns: 1fr !important;
     padding: 16px;
