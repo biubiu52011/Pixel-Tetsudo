@@ -32,6 +32,51 @@ Can run does not equal correctly integrated into the system.
 If a local change conflicts with the system-wide design, redesign the change - never force-adapt the existing code.
 ---
 
+
+---
+
+## Rule 9 - Whole-System Consumer Preservation (HARD RULE)
+
+Any add, modify, migrate, or delete operation MUST start from the current full system Provider-Consumer-Boundary map, not from the target file alone.
+
+### Pre-change questionnaire (answer ALL before touching code)
+1. Which existing Provider currently supplies this capability?
+2. Who are all current Consumers (direct and indirect)?
+3. What is the main heart of each affected page?
+4. Which module does this feature belong to?
+5. Does an implementation already exist?
+6. Does a historical/abandoned implementation exist?
+7. Why was the historical implementation not used?
+8. Which Consumers will this change affect?
+9. Will this create new orphans?
+10. Will this create a second implementation of the same responsibility?
+11. What will the system responsibility map look like after this change?
+
+### Migration rule
+When moving a capability from Provider A to Provider B:
+- Migrate ALL Consumers from A to B first
+- Verify each Consumer works with B
+- Only THEN remove A
+- Run global orphan sweep
+
+### Deletion rule
+When removing a capability:
+- Confirm zero Consumers remain
+- Confirm no historical file can be mistaken for current implementation by future AI
+- Document the removal
+
+### No parallel implementation rule
+Never create a second Provider for the same responsibility just because it is convenient.
+If the existing Provider cannot serve the new requirement, EXTEND it - do not duplicate it.
+
+### Task prompt rule
+Future task prompts MUST be written as:
+Complete feature X using the current system as the reference. The target file is a candidate modification point, not the final implementation location.
+
+Never write: Modify xxx.js to implement xxx.
+
+---
+
 ## Development Workflow for New Features (Post RC-2)
 
 Every new feature MUST follow this chain:
