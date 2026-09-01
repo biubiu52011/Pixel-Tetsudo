@@ -370,7 +370,7 @@
 
     ja: {
       "app.footer": "\u00a9 2026 Pixel Tetsudo",
-      "app.title": "Pixel Tetsudo",
+      "app.title": "ピクセル鉄道",
       "detail.about": "\u6982\u8981",
       "detail.at_station": "\u99c5\u5185",
       "detail.back": "\u623b\u308b",
@@ -552,7 +552,7 @@
 
     ko: {
       "app.footer": "\u00a9 2026 Pixel Tetsudo",
-      "app.title": "Pixel Tetsudo",
+      "app.title": "픽셀 철도",
       "detail.about": "\uac1c\uc694",
       "detail.at_station": "\uc5ed \ubc14\ub85c \uc55e",
       "detail.back": "\ub4a4\ub85c",
