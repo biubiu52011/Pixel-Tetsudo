@@ -1,4 +1,4 @@
-# Pixel-Tetsudo - Agent Development Rules
+﻿# Pixel-Tetsudo - Agent Development Rules
 
 This file defines the hard rules for any AI agent working on this project.
 These rules take precedence over any per-task instructions.
@@ -95,6 +95,70 @@ Do not skip steps. Do not treat file-level changes as sufficient.
 
 ---
 
+---
+
+## 4.3.0 Feature Intake / System Impact Review (MANDATORY)
+
+Before ANY new feature development, the agent MUST complete this intake questionnaire.
+This is the fixed entry point for all future feature work.
+
+### Intake Questionnaire (answer ALL before touching code)
+
+1. **User task**: Which user task does this feature serve?
+2. **Page ownership**: Which page does this belong to?
+3. **Main-heart check**: What is the main heart of that page? Does this feature strengthen or dilute it?
+4. **Capability classification**: Is this a main-heart capability, auxiliary capability, or background capability?
+5. **Provider impact**: Which existing Provider will this affect? Will it extend or replace?
+6. **Consumer impact**: Which Consumers will be affected? List each one.
+7. **New data entry**: Will this create a new data entry point? If yes, which layer (UNIFIED_LINES / DataLayer / RailwayDB)?
+8. **Display resolver**: Will this create a new display name resolver? If yes, must it route through RailwayDB.
+9. **Orphan risk**: Could this cause any existing module to become orphaned?
+10. **A-for-B degradation**: After this change, does Module A still have all its original capabilities?
+11. **Legacy cleanup**: Which old code should be migrated, preserved, or deleted after this change?
+
+### A-for-B Degradation Check (CRITICAL)
+
+This is the most important rule. It prevents the pattern where:
+- B is built to work with a modified A
+- A's original Consumer is broken in the process
+- Later, AI finds A's old code and assumes it is still the current framework
+- New features attach to the orphaned A instead of the correct path
+
+**Check template**:
+`
+Before: A -> Provider -> Consumer_X, Consumer_Y
+After:  A -> Provider -> Consumer_X   (must still work)
+        A -> NewPath                   (B's new path)
+        Consumer_Y -> ?                (MUST NOT be orphaned)
+`
+
+If any Consumer loses access to its capability, the change is REJECTED until fixed.
+
+### Decision tree
+
+| Finding | Action |
+|---------|--------|
+| Existing Provider can serve the need | EXTEND existing Provider, do NOT create new |
+| New Provider needed | Define boundary explicitly, document in AGENTS.md |
+| Old Provider can be fully replaced | Migrate all Consumers first, then remove |
+| Risk of orphan creation | STOP - redesign with Consumer Preservation in mind |
+| Cannot answer question 10 | STOP - investigate full Consumer chain first |
+
+### 4.3.0 Post-Intake Workflow
+
+After intake is complete and approved:
+
+1. Read-only system audit (confirm baseline state)
+2. Check if existing capability can be reused
+3. If new capability needed: define Provider boundary clearly
+4. Define which module main-heart owns this feature
+5. Implement within system boundaries
+6. Consumer Chain Audit (all Consumers verified)
+7. Future AI Trap Scan (no new misleading entries)
+8. Global product walkthrough (no cross-module regression)
+9. Release Gate check
+
+Do not skip steps.
 ## Known Debt (Do Not Auto-Fix)
 
 | Debt | Priority | Reason for defer |
@@ -112,7 +176,7 @@ Do not skip steps. Do not treat file-level changes as sufficient.
 | Tag | Commit | Description |
 |-----|--------|-------------|
 | RC-1 | 63b388d | Engineering baseline: Display Identity unified, P0-3=0 |
-| RC-2 | pending | Product baseline: Architecture documented, rules enforced |
+| RC-2 \| 6e502f4 \| Product baseline: Architecture documented, rules enforced, Home visual consistency fixed |
 
 ---
 
