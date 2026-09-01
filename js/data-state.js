@@ -170,6 +170,7 @@
       var lid = ids[i];
       var line = linesObj[lid];
       if (!line) continue;
+      var op = line.operator || "Unknown";
       // Skip branch lines - not shown as separate entries
       if (line.branchOf) {
         var _skip = true;

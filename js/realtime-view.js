@@ -147,7 +147,7 @@
     html += (typeof window.t === "function" && window.t("filter.all")) ? window.t("filter.all") : "All";
     html += "</button>";
     opList.forEach(function(op) {
-      html += '<button class="rs-filter-btn' + (_selectedOperator === op ? ' active' : '') + '" data-operator="' + escapeHtml(op) + '">' + escapeHtml(op) + "</button>";
+      html += '<button class="rs-filter-btn' + (_selectedOperator === op ? ' active' : '') + '" data-operator="' + ((typeof window.t === 'function' && window.t('op.' + op)) || op) + '">' + ((typeof window.t === 'function' && window.t('op.' + op)) || op) + "</button>";
     });
     bar.innerHTML = html;
     bar.querySelectorAll(".rs-filter-btn").forEach(function(btn) {
