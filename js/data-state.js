@@ -75,11 +75,11 @@
     if (line.image) {
       iconHtml = '<img class="rs-line-icon" src="' + escapeHtml(line.image) + '" alt="" loading="lazy">';
     } else if (line.operator === "JR-East") {
-      iconHtml = '<div class="rs-line-icon-fallback" style="background:' + escapeHtml(lineColor) + '"><img src="../images/鉄道/JR東日本/JRグループ.png" alt="JR"></div>';
+      iconHtml = '<div class="rs-line-icon-fallback"><img src="../images/鉂逋/JR東日本/JRグループ.png" alt="JR"></div>';
     } else if (line.code) {
       iconHtml = '<div class="rs-code-badge">' + escapeHtml(line.code) + '</div>';
     } else if (line.symbol) {
-      iconHtml = '<div class="rs-code-badge" style="background:' + escapeHtml(lineColor) + '">'+ escapeHtml(line.symbol) + '</div>';
+      iconHtml = '<div class="rs-code-badge">' + escapeHtml(line.symbol) + '</div>';
     } else {
       // OS symbol fallback: look up LineOperationSystems
       var osCode = "";
@@ -97,7 +97,7 @@
           if (osCode) break;
         }
       }
-      iconHtml = '<div class="rs-code-badge" style="background:"' + escapeHtml(lineColor) + '>' + escapeHtml(osCode || line.code || line.symbol || line.id || "?") + '</div>';
+      iconHtml = '<div class="rs-code-badge">' + escapeHtml(osCode || line.code || line.symbol || line.id || "?") + '</div>';
     }
 
     // Interval text (realtime mode)
@@ -133,7 +133,7 @@
       }
     }
 
-    return '<div class="rs-line-card" data-line="' + escapeHtml(lineId) + '" style="--line-color:' + escapeHtml(lineColor) + '">'
+    return '<div class="rs-line-card" data-line="' + escapeHtml(lineId) + '" data-line-color="' + escapeHtml(lineColor) + '">'
       + '<div class="rs-line-header">'
       + iconHtml
       + '<div class="rs-line-info">'
@@ -223,6 +223,11 @@
       html += "</div></div>";
     }
     container.innerHTML = html;
+    // Apply line colors via DOM API (CSP-safe, bypasses style-src restriction)
+    container.querySelectorAll('.rs-line-card').forEach(function(card) {
+      var color = card.getAttribute('data-line-color');
+      if (color) card.style.setProperty('--line-color', color);
+    });
   }
 
   // ========== Data management ==========
