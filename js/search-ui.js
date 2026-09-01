@@ -19,6 +19,7 @@
       this.fromInput = document.getElementById('searchFrom');
       this.toInput = document.getElementById('searchTo');
       this.searchBtn = document.getElementById('searchBtn');
+      this.swapBtn = document.getElementById('swapBtn');
       this.resultsDiv = document.getElementById('searchResults');
 
       // Phase 42-D: Parse ?from=StationKey URL param
@@ -76,9 +77,27 @@
       }
     },
 
+
+    _swapInputs: function() {
+      var fromVal = this.fromInput ? this.fromInput.value : '';
+      var toVal = this.toInput ? this.toInput.value : '';
+      if (this.fromInput) this.fromInput.value = toVal;
+      if (this.toInput) this.toInput.value = fromVal;
+      // Trigger suggestion refresh
+      if (this.fromInput && this.fromInput.value) {
+        this.showSuggestions(this.fromInput.value, 'fromSuggestions', this.fromInput);
+      }
+      if (this.toInput && this.toInput.value) {
+        this.showSuggestions(this.toInput.value, 'toSuggestions', this.toInput);
+      }
+    },
+
     bindEvents: function() {
       const self = this;
 
+      if (this.swapBtn) {
+        this.swapBtn.addEventListener('click', () => this._swapInputs());
+      }
       if (this.searchBtn) {
         this.searchBtn.addEventListener('click', () => self.performSearch());
       }
