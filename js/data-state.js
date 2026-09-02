@@ -75,7 +75,7 @@
     if (line.image) {
       iconHtml = '<img class="rs-line-icon" src="' + escapeHtml(line.image) + '" alt="" loading="lazy">';
     } else if (line.operator === "JR-East") {
-      iconHtml = '<div class="rs-line-icon-fallback"><img src="../images/鉂逋/JR東日本/JRグループ.png" alt="JR"></div>';
+      iconHtml = '<div class="rs-line-icon-fallback"><img src="../images/鉄道/JR東日本/JRグループ.png" alt="JR"></div>';
     } else if (line.code) {
       iconHtml = '<div class="rs-code-badge">' + escapeHtml(line.code) + '</div>';
     } else if (line.symbol) {
