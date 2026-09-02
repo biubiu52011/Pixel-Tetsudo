@@ -163,7 +163,6 @@
       "config.clear": "Clear Keys",
       "config.hint": "Enter your ODPT API keys to load real-time data.",
       "config.hint_url": "odpt.org for free registration.",      "filter.all": "All",      "status.no_lines": "No lines",
-    },
       "op.JR-East": "JR East",
       "op.JR-West": "JR West",
       "op.JR West": "JR West",
@@ -186,7 +185,7 @@
       "op.Yurikamome": "Yurikamome",
       "op.TamaMonorail": "Tama Monorail",
       "op.ShonanMonorail": "Shonan Monorail",
-
+    },
     zh: {
       "app.footer": "\u00a9 2026 \u50cf\u7d20\u94c1\u9053",
       "app.title": "\u50cf\u7d20\u94c1\u9053",
@@ -346,7 +345,6 @@
       "config.clear": "清除密钥",
       "config.hint": "输入您的 ODPT API 密钥以加载实时数据。",
       "config.hint_url": "odpt.org 免费注册。",      "filter.all": "全部",      "status.no_lines": "无线路",
-    },
       "op.JR-East": "JR东日本",
       "op.JR-West": "JR西日本",
       "op.JR West": "JR西日本",
@@ -369,7 +367,7 @@
       "op.Yurikamome": "百合鸥号",
       "op.TamaMonorail": "多摩单轨电车",
       "op.ShonanMonorail": "湘南单轨电车",
-
+    },
     ja: {
       "app.footer": "\u00a9 2026 Pixel Tetsudo",
       "app.title": "ピクセル鉄道",
@@ -529,7 +527,6 @@
       "config.clear": "キーを消去",
       "config.hint": "リアルタイムデータを加载するにはODPT APIキーを入力してください。",
       "config.hint_url": "odpt.org で無料登録。",      "filter.all": "すべて",      "status.no_lines": "路線なし",
-    },
       "op.JR-East": "JR東日本",
       "op.JR-West": "JR西日本",
       "op.JR West": "JR西日本",
@@ -552,7 +549,7 @@
       "op.Yurikamome": "ゆりかもめ",
       "op.TamaMonorail": "多摩モノレール",
       "op.ShonanMonorail": "湘南モノレール",
-
+    },
     ko: {
       "app.footer": "\u00a9 2026 Pixel Tetsudo",
       "app.title": "픽셀 철도",
@@ -713,7 +710,6 @@
       "config.clear": "키 지우기",
       "config.hint": "실시간 데이터를 로드하려면 ODPT API 키를 입력하세요.",
       "config.hint_url": "odpt.org에서 무료 등록.",      "filter.all": "전체",      "status.no_lines": "노선 없음",
-    },      "filter.all": "All",      "status.no_lines": "No lines",
       "op.JR-East": "JR동일본",
       "op.JR-West": "JR서일본",
       "op.JR West": "JR서일본",
@@ -736,6 +732,7 @@
       "op.Yurikamome": "유리카모메",
       "op.TamaMonorail": "타마 모노레일",
       "op.ShonanMonorail": "쇼난 모노레일",
+    },
 
   };
   function t(key) {
