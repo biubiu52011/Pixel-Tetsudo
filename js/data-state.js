@@ -32,7 +32,31 @@
 
   function getDelayInfo(line) {
     if (line.delayInfo) return line.delayInfo;
-    if (line.status) return { status: line.status, interval: line.interval, cause: line.cause };
+    if (line.status) return { status: line.status, interval: line.interval, cause: line.cause }
+// Through-service chain delay aggregation (read-only, UI layer only)
+function getAggregatedDelay(lineId, line) {
+  try {
+    if (!window.RunningChainResolver) return null;
+    var ctx = window.RunningChainResolver.getResolutionContext(lineId, Object.keys(window.UNIFIED_LINES || {}));
+    if (!ctx || !ctx.isThroughService || !ctx.relatedLines || ctx.relatedLines.length === 0) return null;
+    var maxDelay = 0;
+    var maxReason = null;
+    ctx.relatedLines.forEach(function(relId) {
+      var relLine = (window.DataState && window.DataState.getLine) ? window.DataState.getLine(relId) : null;
+      if (!relLine || !relLine.delayInfo) return;
+      var d = relLine.delayInfo;
+      if (d && d.maxDelay != null && d.maxDelay > maxDelay) {
+        maxDelay = d.maxDelay;
+        maxReason = d.cause || null;
+      }
+    });
+    if (maxDelay > 0) {
+      return { status: "delayed", maxDelay: maxDelay, interval: null, cause: maxReason };
+    }
+  } catch(e) {}
+  return null;
+}
+;
     return null;
   }
 
@@ -64,6 +88,8 @@
     options = options || {};
     var mode = options.mode || "realtime";
     var delayInfo = getDelayInfo(line) || {};
+    var _aggDelay = getAggregatedDelay(lineId, line);
+    if (_aggDelay) delayInfo = _aggDelay;
     var status = delayInfo && delayInfo.status ? delayInfo.status : (delayInfo ? "normal" : "no_data");
     var interval = delayInfo.interval || "";
     var lineColor = line.color || "#00b643";
