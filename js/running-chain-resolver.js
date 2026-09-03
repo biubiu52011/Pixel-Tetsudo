@@ -97,7 +97,7 @@
     return ctx;
   }
 
-  function init(){if(!_initialized)return;buildIndexes();}
+  function init(){if(_initialized)return;buildIndexes();}
 
   window.RunningChainResolver={
     init:init,

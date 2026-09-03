@@ -32,7 +32,7 @@
 
   function getDelayInfo(line) {
     if (line.delayInfo) return line.delayInfo;
-    if (line.status) return { status: line.status, interval: line.interval, cause: line.cause }
+    if (line.status) return { status: line.status, interval: line.interval, cause: line.cause };
 // Through-service chain delay aggregation (read-only, UI layer only)
 function getAggregatedDelay(lineId, line) {
   try {
@@ -62,7 +62,7 @@ function getAggregatedDelay(lineId, line) {
   } catch(e) {}
   return null;
 }
-;
+
     return null;
   }
 
