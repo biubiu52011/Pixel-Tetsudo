@@ -1,4 +1,5 @@
-/*
+const fs = require("fs");
+const content = `/*
  * Pixel Tetsudo - Running-Chain Resolver
  * Transient ResolutionContext per line. Chain != canonical entity.
  */
@@ -112,3 +113,13 @@
     var _p=0;(function _c(){_p++;if(window.LineServiceRelations){init();}else if(_p<20){setTimeout(_c,100);}})();
   }
 })();
+`;
+fs.writeFileSync("js/running-chain-resolver.js", content, "utf8");
+console.log("File written");
+
+// Verify syntax
+try { new Function(content); console.log("Syntax: OK"); } catch(e) { console.log("Syntax ERROR:", e.message); }
+
+// Check no break-in-foreach
+const hasBadBreak = content.match(/forEach[\s\S]*?break;/);
+console.log("No break-in-foreach:", !hasBadBreak ? "OK" : "BROKEN");

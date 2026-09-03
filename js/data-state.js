@@ -41,6 +41,12 @@ function getAggregatedDelay(lineId, line) {
     if (!ctx || !ctx.isThroughService || !ctx.relatedLines || ctx.relatedLines.length === 0) return null;
     var maxDelay = 0;
     var maxReason = null;
+    // Include current line in aggregation
+    var curDelay = line && line.delayInfo;
+    if (curDelay && curDelay.maxDelay != null && curDelay.maxDelay > maxDelay) {
+      maxDelay = curDelay.maxDelay;
+      maxReason = curDelay.cause || null;
+    }
     ctx.relatedLines.forEach(function(relId) {
       var relLine = (window.DataState && window.DataState.getLine) ? window.DataState.getLine(relId) : null;
       if (!relLine || !relLine.delayInfo) return;
