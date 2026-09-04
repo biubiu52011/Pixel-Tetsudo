@@ -85,12 +85,14 @@
   // ========== Render functions ==========
 
   // Severity rank for system-level status aggregation (higher = more severe)
+  function statusRank(s) {
     if (s === "suspended") return 5;
     if (s === "delayed") return 4;
     if (s === "no_odpt") return 3;
     if (s === "no_data") return 2;
     if (s === "normal") return 1;
     return 0;
+  }
 
   /**
    * Render a running-system card (one LOS entry as a single card).
@@ -99,84 +101,62 @@
    * @param {Object} linesObj - line ID -> line data map
    * @param {Object} options - { mode: "realtime"|"trains" }
    */
-  function renderList(container, linesObj, options) {
-    if (!container || !linesObj || typeof linesObj !== "object" || Object.keys(linesObj).length === 0) {
-      container.innerHTML = '<div class="rs-empty">' + (typeof window.t === "function" ? window.t("status.no_trains") : "No data") + '</div>';
-      return;
-    }
+  function renderSystemCard(sys, memberIds, linesObj, options) {
     options = options || {};
     var mode = options.mode || "realtime";
-    var lineOrder = options.lineOrder || (window.LinePresentationService ? window.LinePresentationService.getDisplayOrder(window.UNIFIED_LINES) : []);
+    var lang = window.currentLang || "ja";
+    var name = sys.nameJa || "";
+    if (lang === "zh" && sys.nameZh) name = sys.nameZh;
+    else if (lang === "en" && sys.nameEn) name = sys.nameEn;
+    else if (lang === "ko" && sys.nameKo) name = sys.nameKo;
+    var color = sys.color || "#00b643";
+    var code = sys.code || "";
 
-    var insertMap = {};
-    for (var i = 0; i < lineOrder.length; i++) { insertMap[lineOrder[i]] = i; }
-
-        var groups = {};
-    var opOrder = [];
-    var ids = Object.keys(linesObj);
-    for (var i = 0; i < ids.length; i++) {
-      var lid = ids[i];
-      var line = linesObj[lid];
-      if (!line) continue;
-      var op = line.operator || "Unknown";
-      // Skip branch lines - not shown as separate entries
-      if (line.branchOf) {
-        var _skip = true;
-        if (window.LineOperationSystems) {
-          Object.keys(window.LineOperationSystems).some(function(_op) {
-            return window.LineOperationSystems[_op].some(function(_sys) {
-              if (_sys.isStandalone && _sys.lineIds && _sys.lineIds.indexOf(lid) >= 0) { _skip = false; return true; }
-            });
-          });
-        }
-        if (_skip) continue;
-      }
-      if (!groups[op]) {
-        groups[op] = [];
-        opOrder.push(op);
-      }
-      groups[op].push({ id: lid, line: line, sortIdx: insertMap[lid] || 99999 });
-    }
-
-    // Sort operator groups by OP_ORDER, unknown ops appended at end
-    var knownOps = TransitConstants.OP_ORDER || [];
-    var unknownOps = opOrder.filter(function(op){ return knownOps.indexOf(op) === -1; });
-    opOrder = knownOps.filter(function(op){ return groups[op]; }).concat(unknownOps);
-
-    // Sort lines within each operator group by lineOrder
-    // Secondary: use LinePresentationService for JR code order, metro order, etc.
-    var presentationOrderMap = (window.LinePresentationService && window.UNIFIED_LINES)
-      ? window.LinePresentationService.getDisplayOrderMap(window.UNIFIED_LINES) : {};
-    for (var op in groups) {
-      if (groups.hasOwnProperty(op)) {
-        groups[op].sort(function(a, b) {
-          var idxA = a.sortIdx;
-          var idxB = b.sortIdx;
-          if (idxA !== idxB) return idxA - idxB;
-          // Secondary sort by presentation service order
-          var pA = presentationOrderMap[a.id] || 99999;
-          var pB = presentationOrderMap[b.id] || 99999;
-          return pA - pB;
-        });
+    // Member line chips with per-line status (realtime) or plain names (trains)
+    var chipsHtml = "";
+    var worst = null;
+    var firstId = null;
+    for (var i = 0; i < memberIds.length; i++) {
+      var lid = memberIds[i];
+      if (firstId === null) firstId = lid;
+      var line = linesObj[lid] || {};
+      var dInfo = getDelayInfo(line) || {};
+      var agg = getAggregatedDelay(lid, line);
+      if (agg) dInfo = agg;
+      var status = dInfo.status ? dInfo.status : (dInfo ? "normal" : "no_data");
+      if (!worst || statusRank(status) > statusRank(worst)) worst = status;
+      var s = getStatus(status);
+      var lname = (window.RailwayDB && window.RailwayDB.resolveLineName) ? window.RailwayDB.resolveLineName(lid, lang) : lid;
+      if (mode === "realtime") {
+        var delayTxt = (status === "delayed" && dInfo.maxDelay != null) ? (" " + dInfo.maxDelay + (lang === "ja" ? "分" : " min")) : "";
+        chipsHtml += '<span class="rs-sys-chip" data-line="' + escapeHtml(lid) + '"><span class="rs-status-icon ' + s.cls + '">' + s.icon + '</span>' + escapeHtml(lname) + delayTxt + '</span>';
+      } else {
+        chipsHtml += '<span class="rs-sys-chip">' + escapeHtml(lname) + '</span>';
       }
     }
-
-    var html = "";
-    for (var o = 0; o < opOrder.length; o++) {
-      var op = opOrder[o];
-      html += '<div class="rs-operator-group"><div class="rs-operator-title">' + escapeHtml(tOp(op)) + '</div>'
-        + '<div class="rs-cards-container">';
-      for (var k = 0; k < groups[op].length; k++) {
-        html += renderCard(groups[op][k].line, groups[op][k].id, { mode: mode });
-      }
-      html += "</div></div>";
+    var worstS = getStatus(worst);
+    var statusHtml = "";
+    if (mode === "realtime") {
+      statusHtml = '<span class="rs-status-icon ' + worstS.cls + '">' + worstS.icon + '</span>';
     }
-    container.innerHTML = html;
-    // Apply line colors via DOM API (CSP-safe, bypasses style-src restriction)
-    container.querySelectorAll('.rs-line-card').forEach(function(card) {
-      var color = card.getAttribute('data-line-color');
-      if (color) card.style.setProperty('--line-color', color);
-    });
+
+    // Icon: gallery image when the system has one (build-time verified to exist),
+    // otherwise fall back to the 記号 badge.
+    var iconHtml = "";
+    if (sys.icon) {
+      iconHtml = '<img class="rs-line-icon" src="' + escapeHtml(sys.icon) + '" alt="" loading="lazy">';
+    } else {
+      iconHtml = '<div class="rs-system-badge">' + escapeHtml(code || "?") + '</div>';
+    }
+    return '<div class="rs-line-card rs-system-card" data-line="' + escapeHtml(firstId) + '" data-system="' + escapeHtml(code) + '" data-lines="' + escapeHtml(memberIds.join(",")) + '" data-line-color="' + escapeHtml(color) + '">'
+      + '<div class="rs-system-bar" style="background:' + escapeHtml(color) + '"></div>'
+      + iconHtml
+      + '<div class="rs-line-info">'
+      + '<div class="rs-line-name">' + escapeHtml(name) + '</div>'
+      + '<div class="rs-system-lines">' + chipsHtml + '</div>'
+      + '</div>'
+      + statusHtml
+      + '</div>';
   }
 
   /**
@@ -262,7 +242,24 @@
         subHtml = '<div class="rs-line-name-en">' + escapeHtml(intervalText) + '</div>';
       }
     }
-    return '<div class="rs-line-card" data-line="' + escapeHtml(lineId) + '" data-line-color="' + escapeHtml(lineColor) + '">'
+
+    // Read chain metadata for badge display (transient, runtime-only)
+    var _chainMeta = line._chainMeta || null;
+    var _chainBadgeHtml = "";
+    if (_chainMeta) {
+      if (_chainMeta.isThroughService) {
+        _chainBadgeHtml = "<span class=\"rs-chain-badge rs-chain-badge-through\" title=\"Through Service\"></span>";
+      } else if (_chainMeta.isAlias) {
+        _chainBadgeHtml = "<span class=\"rs-chain-badge rs-chain-badge-alias\" title=\"Alias\"></span>";
+      } else if (_chainMeta.isBranch) {
+        _chainBadgeHtml = "<span class=\"rs-chain-badge rs-chain-badge-branch\" title=\"Branch\"></span>";
+      } else if (_chainMeta.identity === "SEPARATE" && _chainMeta.reason === "CODE_COLLISION_DIFF_OP") {
+        _chainBadgeHtml = "<span class=\"rs-chain-badge rs-chain-badge-collision\" title=\"Code collision\"></span>";
+      } else if (_chainMeta.identity === "UNKNOWN") {
+        _chainBadgeHtml = "<span class=\"rs-chain-badge rs-chain-badge-unknown\" title=\"Unknown relation\"></span>";
+      }
+    }
+    return '<div class="rs-line-card" data-line="' + escapeHtml(lineId) + '" data-line-color="' + escapeHtml(lineColor) + '">' + _chainBadgeHtml
       + '<div class="rs-line-header">'
       + iconHtml
       + '<div class="rs-line-info">'
@@ -280,6 +277,92 @@
    * @param {Object} linesObj - line ID -> line data map
    * @param {Object} options - { mode, lineOrder }
    */
+  function renderList(container, linesObj, options) {
+    if (!container || !linesObj || typeof linesObj !== "object" || Object.keys(linesObj).length === 0) {
+      container.innerHTML = '<div class="rs-empty">' + (typeof window.t === "function" ? window.t("status.no_trains") : "No data") + '</div>';
+      return;
+    }
+    options = options || {};
+    var mode = options.mode || "realtime";
+    var lineOrder = options.lineOrder || (window.LinePresentationService ? window.LinePresentationService.getDisplayOrder(window.UNIFIED_LINES) : []);
+
+    var insertMap = {};
+    for (var i = 0; i < lineOrder.length; i++) { insertMap[lineOrder[i]] = i; }
+
+    var groups = {};
+    var opOrder = [];
+    var ids = Object.keys(linesObj);
+    for (var i = 0; i < ids.length; i++) {
+      var lid = ids[i];
+      var line = linesObj[lid];
+      if (!line) continue;
+      var op = line.operator || "Unknown";
+      if (!groups[op]) {
+        groups[op] = [];
+        opOrder.push(op);
+      }
+      groups[op].push({ id: lid, line: line, sortIdx: insertMap[lid] || 99999 });
+    }
+
+    // Sort operator groups by OP_ORDER, unknown ops appended at end
+    var knownOps = TransitConstants.OP_ORDER || [];
+    var unknownOps = opOrder.filter(function(op){ return knownOps.indexOf(op) === -1; });
+    opOrder = knownOps.filter(function(op){ return groups[op]; }).concat(unknownOps);
+
+    // Sort fallback lines within each operator group by lineOrder
+    var presentationOrderMap = (window.LinePresentationService && window.UNIFIED_LINES)
+      ? window.LinePresentationService.getDisplayOrderMap(window.UNIFIED_LINES) : {};
+    for (var op in groups) {
+      if (groups.hasOwnProperty(op)) {
+        groups[op].sort(function(a, b) {
+          var idxA = a.sortIdx;
+          var idxB = b.sortIdx;
+          if (idxA !== idxB) return idxA - idxB;
+          var pA = presentationOrderMap[a.id] || 99999;
+          var pB = presentationOrderMap[b.id] || 99999;
+          return pA - pB;
+        });
+      }
+    }
+
+    var html = "";
+    for (var o = 0; o < opOrder.length; o++) {
+      var op = opOrder[o];
+      html += '<div class="rs-operator-group"><div class="rs-operator-title">' + escapeHtml(tOp(op)) + '</div>'
+        + '<div class="rs-cards-container">';
+      // Running-system cards (LOS authority), then per-line fallback for uncovered lines
+      var losKey = null;
+      try {
+        if (window.TransitConstants && typeof window.TransitConstants.toLosKey === "function") losKey = window.TransitConstants.toLosKey(op);
+      } catch(_e) {}
+      var systems = (losKey && window.LineOperationSystems && window.LineOperationSystems[losKey]) ? window.LineOperationSystems[losKey] : null;
+      var covered = {};
+      if (systems) {
+        for (var s = 0; s < systems.length; s++) {
+          var sys = systems[s];
+          var sysIds = sys.lineIds || [];
+          var memberIds = [];
+          for (var m = 0; m < sysIds.length; m++) {
+            if (linesObj[sysIds[m]]) { memberIds.push(sysIds[m]); covered[sysIds[m]] = true; }
+          }
+          if (memberIds.length === 0) continue;
+          html += renderSystemCard(sys, memberIds, linesObj, { mode: mode });
+        }
+      }
+      for (var k = 0; k < groups[op].length; k++) {
+        var g = groups[op][k];
+        if (covered[g.id]) continue;
+        html += renderCard(g.line, g.id, { mode: mode });
+      }
+      html += "</div></div>";
+    }
+    container.innerHTML = html;
+    // Apply line colors via DOM API (CSP-safe, bypasses style-src restriction)
+    container.querySelectorAll('.rs-line-card').forEach(function(card) {
+      var color = card.getAttribute('data-line-color');
+      if (color) card.style.setProperty('--line-color', color);
+    });
+  }
 
   // ========== Data management ==========
 

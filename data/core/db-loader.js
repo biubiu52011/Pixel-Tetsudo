@@ -225,46 +225,64 @@
       resolveStationName: function(id, lang) {
         if (!id) return null;
         lang = lang || window.currentLang || 'ja';
-        // 1. Check station entity name fields
+        var nm = data.name_map;
+        var _hasJp = /[\u4e00-\u9fff\u3040-\u309f\u30a0-\u30ff]/.test(id);
+
+        // 0. If id is already Japanese, return it for ja mode;
+        //    for other languages try name_map for the English translation.
+        if (_hasJp) {
+          if (lang === 'ja') return id;
+          var direct = nm[id];
+          if (direct) {
+            if (typeof direct === 'string') return direct;
+            if (typeof direct === 'object' && direct[lang]) return direct[lang];
+            if (typeof direct === 'object' && direct.en) return direct.en;
+          }
+          return id;
+        }
+
+        // 1. Check station entity name fields (forward-compatible)
         var s = data.stations[id];
         if (s) {
           var n = s['name' + lang.charAt(0).toUpperCase() + lang.slice(1)];
           if (n) return n;
-          if (lang === 'en' && s.nameEn) return s.nameEn;
-          if (lang === 'zh' && s.nameZh) return s.nameZh;
-          if (lang === 'ko' && s.nameKo) return s.nameKo;
         }
-        // 2. Check name_map directly (Japanese key == id)
-        var nm = data.name_map;
-        if (nm[id]) {
-          var v = nm[id];
-          if (typeof v === 'string') return v;
-          if (typeof v === 'object' && v[lang]) return v[lang];
-          if (typeof v === 'object' && v.ja) return v.ja;
-        }
-        // 3. Search name_map by value match (romanized -> Japanese key)
+
+        // 2. Reverse lookup: romanized id -> Japanese key in name_map.
+        //    Prefer keys without trailing 駅 (display names omit the suffix).
         var valToKey = _nameMapCache.valToKey;
         if (!valToKey) {
           valToKey = {};
           Object.keys(nm).forEach(function(jpKey) {
             var val = nm[jpKey];
-            if (typeof val === 'string') {
-              valToKey[val.toLowerCase()] = jpKey;
-            } else if (typeof val === 'object' && val.ja) {
-              valToKey[jpKey.toLowerCase()] = val.ja;
+            if (typeof val !== 'string') return;
+            var lk = val.toLowerCase();
+            // Prefer the key without trailing 駅 when both exist
+            if (!valToKey[lk] || (jpKey.slice(-1) !== '\u99c5' && valToKey[lk].slice(-1) === '\u99c5')) {
+              valToKey[lk] = jpKey;
             }
           });
           _nameMapCache.valToKey = valToKey;
         }
         var matchedKey = valToKey[id.toLowerCase()];
         if (matchedKey) {
-          var mv = nm[matchedKey];
-          if (typeof mv === 'string') return mv;
-          if (typeof mv === 'object' && mv[lang]) return mv[lang];
-          if (typeof mv === 'object' && mv.ja) return mv.ja;
+          // Save the original English value before normalizing the key.
+          var _enVal = nm[matchedKey];
+          // Strip trailing 駅 when a bare station-name key also exists
+          // (e.g. "新宿駅" -> "新宿" because display names omit the suffix).
+          if (matchedKey.slice(-1) === '\u99c5' && nm[matchedKey.slice(0, -1)]) {
+            matchedKey = matchedKey.slice(0, -1);
+          }
+          if (lang === 'ja') return matchedKey;
+          if (lang === 'en') {
+            return typeof _enVal === 'string' ? _enVal : matchedKey;
+          }
+          // zh / ko: no translation data in canonical DB — fall back to
+          // Japanese kanji (readable for Chinese users) rather than English.
           return matchedKey;
         }
-        // 4. Fallback: return id
+
+        // 3. Fallback: return id
         return id;
       },
 
