@@ -226,6 +226,7 @@ If the answer is NO, the change is REJECTED.
 | data/铁道/ directory (P3) | P3 | Historical archive, zero runtime impact |
 | CSS orphan classes (5) | P3 | Low risk, covered by inheritance |
 | console.log in odpt-unified.js (2) | P3 | Non-product debug output |
+| js/trains-detail.js orphan | P3 | Zero consumers (not referenced by any page); contains unresolved _rS/tStation/_lang refs — do not enable |
 | 13 image path fixes | Deferred | Asset mapping, no product impact |
 
 ---

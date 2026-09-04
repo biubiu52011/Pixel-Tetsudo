@@ -225,21 +225,32 @@
 
     // ========== Global delay data store ==========
     window.ODPT_DELAY_DATA = {};
+    // Full per-operator train/timetable responses (consumed by DataFusion.loadTrainPositions)
+    window.ODPT_TRAINS = {};
 
     // ========== Load all realtime data ==========
     function loadAllDelayData() {
         window.ODPT_DELAY_DATA = {};
+        window.ODPT_TRAINS = {};
         var ops = Object.keys(ODPT_ENDPOINTS);
         var loaded = 0;
         var promises = ops.map(function(op) {
             return window.ODPTClient.getTrainInformation(op).then(function(data) {
                 if (data && data.length > 0) {
                     window.ODPT_DELAY_DATA[op] = data[0];
+                    window.ODPT_TRAINS[op] = data;
                     loaded++;
                 }
             });
         });
         return Promise.all(promises).then(function() {
+            // Push ODPT data into DataFusion: delay status + train positions
+            try {
+                if (window.DataFusion) {
+                    if (window.DataFusion.updateOdptData) window.DataFusion.updateOdptData(window.ODPT_DELAY_DATA);
+                    if (window.DataFusion.loadTrainPositions) window.DataFusion.loadTrainPositions();
+                }
+            } catch(e) { console.debug("[ODPT] DataFusion push error:", e.message); }
             console.log("[ODPT] Loaded delay data for:", loaded, "operators");
         });
     }

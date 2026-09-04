@@ -113,6 +113,11 @@
     var result = { status: "normal", maxDelay: 0, interval: null, cause: null };
     if (!raw) return result;
     try {
+      // Direct delay field first: odpt:Train responses carry odpt:delay (minutes)
+      if (raw["odpt:delay"] != null) {
+        var dMin0 = parseInt(raw["odpt:delay"], 10);
+        if (!isNaN(dMin0) && dMin0 > 0) { result.status = "delayed"; result.maxDelay = dMin0; }
+      }
       var ti = raw["odpt:trainInformationText"] || "";
       var text = typeof ti === "string" ? ti : (typeof ti === "object" && ti !== null ? (ti.ja || ti.en || ti.zh || JSON.stringify(ti)) : "");
       if (!text) return result;
@@ -184,7 +189,35 @@
     } catch(e) { console.error("[DataFusion] fuseAll error:", e.message); if (_lastFusedData) { emitUpdate(_lastFusedData); return _lastFusedData; } return null; }
   }
 
-  async function loadTrainPositions() { try { return; } catch(e) {} }
+  function loadTrainPositions() {
+    try {
+      if (!window.ODPT_TRAINS) return;
+      var allLines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : (window.UNIFIED_LINES || {});
+      if (!allLines || Object.keys(allLines).length === 0) return;
+      var posMap = {};
+      Object.keys(window.ODPT_TRAINS).forEach(function(op) {
+        var trains = window.ODPT_TRAINS[op] || [];
+        trains.forEach(function(t) {
+          if (!t) return;
+          var fromId = t["odpt:fromStation"] || "";
+          var stationKey = String(fromId).split(".").pop();
+          if (!stationKey) return;
+          var delayMin = t["odpt:delay"] != null ? (parseInt(t["odpt:delay"], 10) || 0) : 0;
+          var trainId = t["odpt:trainNumber"] || t["odpt:train"] || "";
+          Object.keys(allLines).forEach(function(lid) {
+            var line = allLines[lid];
+            if (!line || line.operator !== op || !line.stations) return;
+            var idx = line.stations.indexOf(stationKey);
+            if (idx < 0) return;
+            if (!posMap[lid]) posMap[lid] = [];
+            posMap[lid].push({ stationIndex: idx, trainId: trainId, delayMin: delayMin });
+          });
+        });
+      });
+      odptData.realtimePositions = posMap;
+      try { fuseAll(); } catch(e) { console.debug("[DataFusion] loadTrainPositions->fuseAll error:", e.message); }
+    } catch(e) { console.debug("[DataFusion] loadTrainPositions error:", e.message); }
+  }
 
   
   function saveToCache() {
@@ -219,6 +252,7 @@
     getOperatorTrains: function(operator) { return odptData.trains[operator] || []; },
     getOperatorStations: function(operator) { return odptData.stations[operator] || []; },
     getRealtimePositions: function(lineId) { return odptData.realtimePositions[lineId] || []; },
+    loadTrainPositions: loadTrainPositions,
     getCachedData: function() { return _lastFusedData; },
     saveToCache: saveToCache, refresh: function() { return fuseAll(); },
     updateOdptData: function(delayData) {

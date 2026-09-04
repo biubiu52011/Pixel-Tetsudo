@@ -9,7 +9,15 @@
   const tLine = (code) => (window.tLine ? window.tLine(code) : code) || code;
   const tOp = (name) => (window.tOp ? window.tOp(name) : name) || name;
   const tStation = (name) => (window.tStation ? window.tStation(name) : name) || name;
-  const getDisplayName = (line) => (line && line.nameJa) ? line.nameJa : (window.tLineName ? window.tLineName(line) : (line && line.nameEn) ? line.nameEn : (line && line.name) ? line.name : line && line.id);
+  const getDisplayName = (line) => {
+    if (!line) return "";
+    // Display Identity Rule: route through RailwayDB.resolveLineName
+    if (line.id && window.RailwayDB && window.RailwayDB.resolveLineName) {
+      var _n = window.RailwayDB.resolveLineName(line.id, window.currentLang);
+      if (_n) return _n;
+    }
+    return line.nameJa || line.nameEn || line.name || line.id || "";
+  };
 
 
   // STATUS_META is defined in data-state.js; use window.DataState.STATUS_META
@@ -47,7 +55,7 @@
     var status = delayInfo && delayInfo.status ? delayInfo.status : (delayInfo ? "normal" : "no_data");
     var interval = delayInfo.interval || "";
     var cause = delayInfo.cause || "";
-    var s = window.DataState ? (window.DataState && window.DataState.STATUS_META && window.DataState.STATUS_META[status]) || STATUS_META[status] : STATUS_META[status] || STATUS_META.no_data;
+    var s = window.DataState && window.DataState.STATUS_META && window.DataState.STATUS_META[status] ? window.DataState.STATUS_META[status] : STATUS_META[status] || STATUS_META.no_data;
     var statusText = t("status." + status) || status;
     // Title
     modal.querySelector(".rs-modal-title").textContent = getDisplayName(line) || tLine(line.id) || line.name;
@@ -57,7 +65,7 @@
     statusSection.innerHTML = '<span class="rs-status-indicator"><span class="rs-status-dot"></span>' + statusText + '</span>';
     // Apply status dot color via DOM API (CSP-safe)
     var dot = statusSection.querySelector(".rs-status-dot");
-    if (dot) dot.style.background = "var(--" + s.color + ")";
+    if (dot) dot.style.background = "var(--" + (s.color || ({ normal: "green", delayed: "orange", suspended: "red", no_data: "gray", no_odpt: "gray" }[status] || "gray")) + ")";
     // Interval section
     var intervalSection = modal.querySelector(".rs-interval-section");
     intervalSection.querySelector(".rs-info-label").textContent = t("status.interval");
@@ -147,7 +155,8 @@
     html += (typeof window.t === "function" && window.t("filter.all")) ? window.t("filter.all") : "All";
     html += "</button>";
     opList.forEach(function(op) {
-      html += '<button class="rs-filter-btn' + (_selectedOperator === op ? ' active' : '') + '" data-operator="' + ((typeof window.t === 'function' && window.t('op.' + op)) || op) + '">' + ((typeof window.t === 'function' && window.t('op.' + op)) || op) + "</button>";
+      var label = (typeof window.t === 'function' && window.t('op.' + op)) || op;
+      html += '<button class="rs-filter-btn' + (_selectedOperator === op ? ' active' : '') + '" data-operator="' + op + '">' + label + '</button>';
     });
     bar.innerHTML = html;
     bar.querySelectorAll(".rs-filter-btn").forEach(function(btn) {

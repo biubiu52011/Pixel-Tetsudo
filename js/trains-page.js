@@ -385,14 +385,18 @@
 
   function renderFiltered(el) {
     if (!el || !window.DataState) return;
-    var allLines = getLinesData();
+    var allLines = getLinesData(); // dict: lineId -> line
     var filtered = allLines;
     if (_selectedOperator) {
-      filtered = allLines.filter(function(l) { return l.operator === _selectedOperator; });
+      filtered = {};
+      Object.keys(allLines).forEach(function(id) {
+        if (allLines[id] && allLines[id].operator === _selectedOperator) {
+          filtered[id] = allLines[id];
+        }
+      });
     }
-    var ul = Array.isArray(filtered) ? (function(){ var d={}; filtered.forEach(function(l){ d[l.id||l.line_id]=l; }); return d; })() : filtered;
-    if (!ul || Object.keys(ul).length === 0) { el.innerHTML = ''; return; }
-    var lineOrder = (window.LinePresentationService && window.UNIFIED_LINES) ? window.LinePresentationService.getDisplayOrder(window.UNIFIED_LINES) : []; try { window.DataState.renderList(el, ul, { mode: "trains", lineOrder: lineOrder }); } catch(e) { el.innerHTML = "<div class=\"rs-error\">Render failed</div>"; }
+    if (!filtered || Object.keys(filtered).length === 0) { el.innerHTML = ''; return; }
+    var lineOrder = (window.LinePresentationService && window.UNIFIED_LINES) ? window.LinePresentationService.getDisplayOrder(window.UNIFIED_LINES) : []; try { window.DataState.renderList(el, filtered, { mode: "trains", lineOrder: lineOrder }); } catch(e) { el.innerHTML = "<div class=\"rs-error\">Render failed</div>"; }
   }
   window.TrainsPage = {
     init: init,
