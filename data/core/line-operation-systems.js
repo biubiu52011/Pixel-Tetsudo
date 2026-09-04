@@ -30,7 +30,7 @@ window.LineOperationSystems = {
       nameEn: "Chuo-Sobu Line (Local)",
       nameKo: "",
       color: "#ffd400",
-      lineIds: ["ChuoSobuLocal", "SobuLocal"],
+      lineIds: ["ChuoSobuLocal"],
       icon: "../images/鉄道/JR東日本/中央・総武線各駅停車.png",
       order: 2
     },
@@ -41,7 +41,7 @@ window.LineOperationSystems = {
       nameEn: "Chuo Line (Rapid)",
       nameKo: "",
       color: "#f15a22",
-      lineIds: ["ChuoRapid", "ChuoKonosu"],
+      lineIds: ["ChuoRapid"],
       icon: "../images/鉄道/JR東日本/中央快速線.png",
       order: 3
     },
