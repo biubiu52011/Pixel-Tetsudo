@@ -46,7 +46,7 @@ window.LineOperationSystems = {
       order: 3
     },
     {
-      code: "OM",
+      code: "JC",
       nameJa: "青梅線",
       nameZh: "青梅线",
       nameEn: "Ome Line",
@@ -57,7 +57,7 @@ window.LineOperationSystems = {
       order: 4
     },
     {
-      code: "II",
+      code: "JC",
       nameJa: "五日市線",
       nameZh: "五日市线",
       nameEn: "Itsukaichi Line",
