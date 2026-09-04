@@ -85,7 +85,7 @@ window.LineOperationSystems = {
       nameEn: "Yokohama Line",
       nameKo: "",
       color: "#9fc21b",
-      lineIds: ["Kanagawa"],
+      lineIds: ["Yokohama"],
       icon: "../images/鉄道/JR東日本/横浜線.png",
       order: 5
     },
@@ -631,7 +631,7 @@ window.LineOperationSystems = {
       nameEn: "Keikyu Main Line",
       nameKo: "",
       color: "#e60012",
-      lineIds: ["Keikyu", "KeikyuMain", "KeikyuAirport", "KeikyuKurihama", "KeikyuZushi", "Daishi_Keikyu", "Sakuragi"],
+      lineIds: ["Keikyu", "KeikyuMain", "KeikyuAirport", "KeikyuKurihama", "KeikyuZushi", "Daishi_Keikyu"],
       icon: "../images/鉄道/京急電鉄/空港線.png",
       order: 1
     }
