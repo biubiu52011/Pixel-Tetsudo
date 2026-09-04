@@ -58,11 +58,14 @@
   };
 
   var DATA_FILE = "../data/core/railway_data.json";
+  var STATION_I18N_FILE = "../data/core/station_i18n.json";
+  var _stationI18n = {};
   var loaded = false;
   var error = null;
 
   // Apply station data from an object with .stations, .lines, .tourism structure
-  function applyData(data) {
+function applyData(data, i18n) {
+    _stationI18n = i18n || {};
     window.STATION_COORDS = {};
     Object.keys(data.stations).forEach(function(id) {
       var s = data.stations[id];
@@ -225,6 +228,13 @@
       resolveStationName: function(id, lang) {
         if (!id) return null;
         lang = lang || window.currentLang || 'ja';
+        // 0. Check dedicated station_i18n data (zh/ko/ja) first
+        if (_stationI18n && _stationI18n[id]) {
+          var _i18n = _stationI18n[id];
+          if (lang === 'zh' && _i18n.zh) return _i18n.zh;
+          if (lang === 'ko' && _i18n.ko) return _i18n.ko;
+          if (lang === 'ja' && _i18n.ja) return _i18n.ja;
+        }
         var nm = data.name_map;
         var _hasJp = /[\u4e00-\u9fff\u3040-\u309f\u30a0-\u30ff]/.test(id);
 
@@ -336,13 +346,18 @@ function load() {
     }
 
     // HTTP/HTTPS: try fetch first
-    return fetch(DATA_FILE)
-      .then(function(res) {
+    return Promise.all([
+      fetch(DATA_FILE).then(function(res) {
         if (!res.ok) throw new Error("HTTP " + res.status);
         return res.json();
-      })
-      .then(function(data) {
-        applyData(data);
+      }),
+      fetch(STATION_I18N_FILE).then(function(res) {
+        if (!res.ok) return {};
+        return res.json();
+      }).catch(function() { return {}; })
+    ])
+      .then(function(results) {
+        applyData(results[0], results[1]);
         loaded = true;
         console.log(
           Object.keys(data.stations).length + " stations, " +
