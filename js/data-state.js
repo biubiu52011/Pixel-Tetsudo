@@ -112,8 +112,7 @@
     var color = sys.color || "#00b643";
     var code = sys.code || "";
 
-    // Member line chips with per-line status (realtime) or plain names (trains)
-    var chipsHtml = "";
+    // Aggregate worst status across member lines for the card-level icon
     var worst = null;
     var firstId = null;
     for (var i = 0; i < memberIds.length; i++) {
@@ -125,14 +124,6 @@
       if (agg) dInfo = agg;
       var status = dInfo.status ? dInfo.status : (dInfo ? "normal" : "no_data");
       if (!worst || statusRank(status) > statusRank(worst)) worst = status;
-      var s = getStatus(status);
-      var lname = (window.RailwayDB && window.RailwayDB.resolveLineName) ? window.RailwayDB.resolveLineName(lid, lang) : lid;
-      if (mode === "realtime") {
-        var delayTxt = (status === "delayed" && dInfo.maxDelay != null) ? (" " + dInfo.maxDelay + (lang === "ja" ? "分" : " min")) : "";
-        chipsHtml += '<span class="rs-sys-chip" data-line="' + escapeHtml(lid) + '"><span class="rs-status-icon ' + s.cls + '">' + s.icon + '</span>' + escapeHtml(lname) + delayTxt + '</span>';
-      } else {
-        chipsHtml += '<span class="rs-sys-chip">' + escapeHtml(lname) + '</span>';
-      }
     }
     var worstS = getStatus(worst);
     var statusHtml = "";
@@ -152,7 +143,6 @@
       + iconHtml
       + '<div class="rs-line-info">'
       + '<div class="rs-line-name">' + escapeHtml(name) + '</div>'
-      + '<div class="rs-system-lines">' + chipsHtml + '</div>'
       + '</div>'
       + statusHtml
       + '</div>';
