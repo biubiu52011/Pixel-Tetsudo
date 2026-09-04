@@ -115,6 +115,7 @@
     // Aggregate worst status across member lines for the card-level icon
     var worst = null;
     var firstId = null;
+    var chipsHtml = "";
     for (var i = 0; i < memberIds.length; i++) {
       var lid = memberIds[i];
       if (firstId === null) firstId = lid;
@@ -124,6 +125,10 @@
       if (agg) dInfo = agg;
       var status = dInfo.status ? dInfo.status : (dInfo ? "normal" : "no_data");
       if (!worst || statusRank(status) > statusRank(worst)) worst = status;
+      if (mode === "trains") {
+        var lname = (window.RailwayDB && window.RailwayDB.resolveLineName) ? window.RailwayDB.resolveLineName(lid, lang) : lid;
+        chipsHtml += '<span class="rs-sys-chip">' + escapeHtml(lname) + '</span>';
+      }
     }
     var worstS = getStatus(worst);
     var statusHtml = "";
@@ -143,6 +148,7 @@
       + iconHtml
       + '<div class="rs-line-info">'
       + '<div class="rs-line-name">' + escapeHtml(name) + '</div>'
+      + (mode === "trains" && chipsHtml ? '<div class="rs-system-lines">' + chipsHtml + '</div>' : '')
       + '</div>'
       + statusHtml
       + '</div>';
