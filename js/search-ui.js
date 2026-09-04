@@ -73,6 +73,26 @@
         const key = el.getAttribute('data-i18n-placeholder');
         el.placeholder = t(key, el.placeholder);
       });
+      // Clear suggestion caches so re-query resolves names in the new language
+      this._suggestionCache = {};
+      this._suggestionCacheDOM = {};
+      this._suggestionBindDone = {};
+      // Re-resolve selected station names in input boxes (only when stationId is known)
+      var _lang = window.currentLang || 'ja';
+      if (this.fromInput) {
+        var _fid = this.fromInput.getAttribute('data-station-id');
+        if (_fid && window.RailwayDB && window.RailwayDB.resolveStationName) {
+          var _fn = window.RailwayDB.resolveStationName(_fid, _lang);
+          if (_fn) this.fromInput.value = _fn;
+        }
+      }
+      if (this.toInput) {
+        var _tid = this.toInput.getAttribute('data-station-id');
+        if (_tid && window.RailwayDB && window.RailwayDB.resolveStationName) {
+          var _tn = window.RailwayDB.resolveStationName(_tid, _lang);
+          if (_tn) this.toInput.value = _tn;
+        }
+      }
       // Re-render route results if a search has been performed
       if (this.lastRouteResult && this.resultsDiv && this.resultsDiv.innerHTML.trim() !== '') {
         this.renderResults(this.lastRouteResult, t);
