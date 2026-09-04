@@ -40,10 +40,9 @@
     var color = line.color || "#008803";
     var isLoop = line.type === "loop";
     var sp = 28, topP = 20, botP = 16;
-    var loopRectW = Math.max(stations.length * 28 / 6, 100);
-    var loopRectH = Math.max(stations.length * 28 / 3, 200);
+    var loopRectH = Math.max(stations.length * 28 / 2 - 80, 120);
     var svgH = isLoop ? loopRectH + 80 : topP + stations.length * sp + botP;
-    var svgW = isLoop ? loopRectW + 200 : 160;
+    var svgW = isLoop ? 260 : 160;
 
     var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + svgW + ' ' + svgH + '" preserveAspectRatio="xMidYMid meet" class="tp-line-map">';
     svg += '<defs><filter id="tg_' + escapeHtml(line.id) + '"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></defs>';
@@ -51,7 +50,7 @@
 
     if(isLoop && stations.length > 2) {
       var spLoop = 28;
-      var rectW = loopRectW;
+      var rectW = 80;
       var rectH = loopRectH;
       var halfW = rectW / 2, halfH = rectH / 2;
       var perimeter = 2 * (rectW + rectH);
@@ -71,7 +70,8 @@
         else if (pos >= 2 * rectW + rectH) { tx = x - 12; anchor = "end"; ty = y + 3; }
         else if (pos < rectW) { ty = y - 10; tx = x; anchor = "middle"; }
         else { ty = y + 16; tx = x; anchor = "middle"; }
-        svg += '<text x="' + tx + '" y="' + ty + '" font-size="8" fill="#444" font-family="sans-serif" text-anchor="' + anchor + '">' + escapeHtml(_rS(stations[i])) + '</text>';
+        var fs = (pos < rectW || pos >= 2 * rectW + rectH) ? 6 : 8;
+        svg += '<text x="' + tx + '" y="' + ty + '" font-size="' + fs + '" fill="#444" font-family="sans-serif" text-anchor="' + anchor + '">' + escapeHtml(_rS(stations[i])) + '</text>';
       }
       svg += '<rect x="' + (cx - halfW) + '" y="' + (cy - halfH) + '" width="' + rectW + '" height="' + rectH + '" rx="12" ry="12" stroke="' + color + '" stroke-width="4" fill="none" opacity="0.4"/>';
       // Branch stations

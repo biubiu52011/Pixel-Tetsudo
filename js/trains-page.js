@@ -130,9 +130,8 @@
       var sp = 30, topP = 16, botP = 14;
       var numBranches = branchLines.length;
       var branchOffset = numBranches > 0 ? 70 * numBranches : 0;
-      var loopRectW = Math.max(stations.length * 28 / 6, 100);
-      var loopRectH = Math.max(stations.length * 28 / 3, 200);
-      var svgW = isLoop ? loopRectW + 200 : 190 + branchOffset;
+      var loopRectH = Math.max(stations.length * 28 / 2 - 80, 120);
+      var svgW = isLoop ? 260 : 190 + branchOffset;
       var svgH = isLoop ? loopRectH + 80 : topP + stations.length * sp + botP;
       var svg = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 " + svgW + " " + svgH + "\" preserveAspectRatio=\"xMidYMid meet\">";
       svg += "<defs><filter id=\"tg_" + escapeHtml(lineId) + "\"><feGaussianBlur stdDeviation=\"2\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs>";
@@ -141,7 +140,7 @@
       var mainCx = svgW / 2 - branchOffset / 2;
       if (isLoop && stations.length > 2) {
         var spLoop = 28;
-        var rectW = loopRectW;
+        var rectW = 80;
         var rectH = loopRectH;
         var halfW = rectW / 2, halfH = rectH / 2;
         var perimeter = 2 * (rectW + rectH);
@@ -170,7 +169,8 @@
           else if (side === "bottom") { tx = p.x; ty = p.y + 16; anchor = "middle"; }
           else if (side === "left") { tx = p.x - 10; ty = p.y + 3; anchor = "end"; }
           else { tx = p.x + 10; ty = p.y + 3; anchor = "start"; }
-          svg += "<text x=\"" + tx + "\" y=\"" + ty + "\""+ "  font-size=\"9\" fill=\"#444\" font-family=\"sans-serif\" font-weight=\"500\" text-anchor=\"" + anchor + "\">" + escapeHtml(_rS(dn)) + "</text>";
+          var fs = (side === "top" || side === "bottom") ? 7 : 9;
+          svg += "<text x=\"" + tx + "\" y=\"" + ty + "\""+ "  font-size=\"" + fs + "\" fill=\"#444\" font-family=\"sans-serif\" font-weight=\"500\" text-anchor=\"" + anchor + "\">" + escapeHtml(_rS(dn)) + "</text>";
         }
       } else {
         var y1 = topP, y2 = topP + (stations.length - 1) * sp;
