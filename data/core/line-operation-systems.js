@@ -64,7 +64,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#9fc21b",
       lineIds: ["Kanagawa"],
-      icon: "",
+      icon: "../images/鉄道/JR東日本/横浜線.png",
       order: 5
     },
     {
@@ -433,7 +433,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#002d62",
       lineIds: ["Tojo"],
-      icon: "",
+      icon: "../images/鉄道/東武鉄道/東武東上線.png",
       order: 3
     },
     {
@@ -468,7 +468,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#4da72a",
       lineIds: ["Kokubunji"],
-      icon: "",
+      icon: "../images/鉄道/西武鉄道/西武国分寺線.png",
       order: 2
     },
     {
@@ -525,7 +525,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#00a850",
       lineIds: ["TokyuDenEn"],
-      icon: "",
+      icon: "../images/鉄道/東急電鉄/田園都市線.png",
       order: 1
     },
     {
@@ -560,7 +560,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#00a0e9",
       lineIds: ["KeioInokashira"],
-      icon: "",
+      icon: "../images/鉄道/京王電鉄/井の頭線.png",
       order: 1
     },
     {
@@ -597,7 +597,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#0054a6",
       lineIds: ["Keisei"],
-      icon: "",
+      icon: "../images/鉄道/京成電鉄/京成本線.png",
       order: 1
     }
   ],
