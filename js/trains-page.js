@@ -86,7 +86,6 @@
         branchOf: l.branchOf || null
       };
     }
-    detectBranches(lines);
     return lines;
   }
 
