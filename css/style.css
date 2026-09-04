@@ -41,10 +41,3 @@
 }/* Phase 43-E: Unified empty/error states */.sm-empty {  text-align: center;  padding: 32px 16px;  color: var(--text-muted);  font-size: 14px;}.td-error-msg {  text-align: center;  padding: 24px;  color: var(--text-muted);  font-size: 13px;}/* === Module Title (unified) === */.home-modules{display:flex;flex-direction:column;gap:16px;}
 #searchContainer { background: transparent; }.module-title {  padding: 20px 24px 16px;  border-bottom: 1px solid var(--border);}.module-title h2 {  margin: 0;  font-size: 18px;  font-weight: 700;  color: var(--text);  letter-spacing: -0.3px;}/* === Mobile Touch Target Fix (min 44px) === */@media (max-width: 640px) {  .search-btn,  .back-btn,  .clear-btn,  .history-delete-btn,  .history-clear-btn,  .btn-nearby-viewall,  .btn-nearby-route,  .swap-btn {    min-height: 44px;    min-width: 44px;    padding-top: 8px;    padding-bottom: 8px;  }  .suggestion-item,  .result-candidate,  .rs-line-card {    min-height: 48px;    padding-top: 10px;    padding-bottom: 10px;  }  .rs-modal-close {    min-width: 44px;    min-height: 44px;    width: 44px;    height: 44px;  }  .pixel-header {    padding-top: 12px;    padding-bottom: 12px;  }  .history-entry {    min-height: 56px;  }}
 
-/* ========== Running-System Cards (shared: realtime + trains) ========== */
-.rs-system-card{flex-wrap:wrap;}
-.rs-system-bar{position:absolute;left:0;top:0;bottom:0;width:5px;border-radius:var(--radius) 0 0 var(--radius);flex-shrink:0;}
-.rs-system-badge{min-width:34px;height:22px;line-height:22px;text-align:center;background:var(--line-color,var(--green));color:var(--white);font-weight:800;font-size:12px;border-radius:6px;letter-spacing:0.5px;flex-shrink:0;}
-.rs-system-lines{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px;width:100%;}
-.rs-sys-chip{display:inline-flex;align-items:center;gap:3px;font-size:11px;color:var(--text);background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:2px 8px;line-height:1.5;}
-@media (max-width: 640px){.rs-system-lines{gap:3px;}.rs-sys-chip{font-size:10px;padding:2px 6px;}}
