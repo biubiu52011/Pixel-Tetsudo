@@ -12,7 +12,10 @@
 
   // Normalize OP_ORDER key (e.g. "JR-East") to LOS key (e.g. "JR_EAST")
   function normalizeOpKey(op) {
-    return (op || "").replace(/-/g, "_").toUpperCase();
+    if (window.TransitConstants && typeof window.TransitConstants.toLosKey === "function") {
+      return window.TransitConstants.toLosKey(op);
+    }
+    return (op || "").replace(/-/g, "_").replace(/ /g, "_").toUpperCase();
   }
 
   function getDisplayOrder(allLines) {

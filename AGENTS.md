@@ -224,6 +224,7 @@ If the answer is NO, the change is REJECTED.
 |------|----------|-----------------|
 | History <-> SearchUI coupling (P2) | P2 | Requires SearchUI public API redesign |
 | data/铁道/ directory (P3) | P3 | Historical archive, zero runtime impact |
+| ~~data/api/line-operation-systems.js~~ | REMOVED 4.3.41 | Orphan duplicate of data/core (zero page refs, missing isStandalone) — removed, keep data/core/line-operation-systems.js as single source |
 | CSS orphan classes (5) | P3 | Low risk, covered by inheritance |
 | console.log in odpt-unified.js (2) | P3 | Non-product debug output |
 | js/trains-detail.js orphan | P3 | Zero consumers (not referenced by any page); contains unresolved _rS/tStation/_lang refs — do not enable |

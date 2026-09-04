@@ -8,7 +8,7 @@
   var REFRESH_INTERVAL = 30000;
   var POSITION_INTERVAL = 60000;
 
-  var odptData = { trains: {}, stations: {}, delayInfo: {}, realtimePositions: {} };
+  var odptData = { trains: {}, delayInfo: {}, realtimePositions: {} };
   var subscribers = [];
   var localData = { lines: {}, statusMap: {} };
   var _lastFusedData = null;
@@ -35,19 +35,6 @@
       }
       return bestIdx;
     } catch(e) { return 0; }
-  }
-
-  function mapLineCodeToLineId(lineCode, tripId) {
-    try {
-      if (!lineCode) return null;
-      var knownLines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : (window.UNIFIED_LINES || {});
-      if (!knownLines || Object.keys(knownLines).length === 0) return null;
-      var ids = Object.keys(knownLines);
-      for (var i = 0; i < ids.length; i++) {
-        if (knownLines[ids[i]].operator === lineCode) return ids[i];
-      }
-      return null;
-    } catch(e) { return null; }
   }
 
   // ========== Data Loading ==========
@@ -98,17 +85,6 @@
     } catch(e) { return null; }
   }
 
-  function getFusionDelay(opId) {
-    try {
-      if (window.DATA_FUSION_DELAY && window.DATA_FUSION_DELAY[opId]) return window.DATA_FUSION_DELAY[opId];
-      if (window.ODPTClient && window.ODPTClient.LINE_TO_OPERATOR) {
-        var norm = TransitConstants ? (TransitConstants.NORMALIZE[opId] || opId) : opId;
-        if (window.DATA_FUSION_DELAY && window.DATA_FUSION_DELAY[norm]) return window.DATA_FUSION_DELAY[norm];
-      }
-    } catch(e) {}
-    return null;
-  }
-
   function parseODPTDelay(raw) {
     var result = { status: "normal", maxDelay: 0, interval: null, cause: null };
     if (!raw) return result;
@@ -136,10 +112,11 @@
   function getApiDelayInfo(line) {
     try {
       var op = getOperatorForLine(line.id, line.name);
-      var fusionDelay = op ? getFusionDelay(op) : null;
-      if (fusionDelay) return fusionDelay;
-      if (!odptData.delayInfo || !op || !odptData.delayInfo[op]) return null;
-      return parseODPTDelay(odptData.delayInfo[op]);
+      if (!odptData.delayInfo || !op) return null;
+      var norm = TransitConstants && typeof TransitConstants.normalizeOp === "function" ? TransitConstants.normalizeOp(op) : op;
+      var raw = odptData.delayInfo[norm] || odptData.delayInfo[op];
+      if (!raw) return null;
+      return parseODPTDelay(raw);
     } catch(e) { return null; }
   }
 
@@ -195,8 +172,11 @@
       var allLines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : (window.UNIFIED_LINES || {});
       if (!allLines || Object.keys(allLines).length === 0) return;
       var posMap = {};
+      odptData.trains = {};
       Object.keys(window.ODPT_TRAINS).forEach(function(op) {
         var trains = window.ODPT_TRAINS[op] || [];
+        odptData.trains[op] = trains;
+        var top = TransitConstants && typeof TransitConstants.normalizeOp === "function" ? TransitConstants.normalizeOp(op) : op;
         trains.forEach(function(t) {
           if (!t) return;
           var fromId = t["odpt:fromStation"] || "";
@@ -206,7 +186,8 @@
           var trainId = t["odpt:trainNumber"] || t["odpt:train"] || "";
           Object.keys(allLines).forEach(function(lid) {
             var line = allLines[lid];
-            if (!line || line.operator !== op || !line.stations) return;
+            var lop = TransitConstants && typeof TransitConstants.normalizeOp === "function" ? TransitConstants.normalizeOp(line.operator) : line.operator;
+            if (!line || lop !== top || !line.stations) return;
             var idx = line.stations.indexOf(stationKey);
             if (idx < 0) return;
             if (!posMap[lid]) posMap[lid] = [];
@@ -223,8 +204,20 @@
   function saveToCache() {
     try {
       if (!window.RailwayRTC || !_lastFusedData) return;
-      window.RailwayRTC.savePositions(_lastFusedData.positions || []);
-      window.RailwayRTC.saveDelayInfo(_lastFusedData.delayInfo || {});
+      var posList = [];
+      var delayMap = {};
+      var fusedLines = _lastFusedData.lines || {};
+      Object.keys(fusedLines).forEach(function(lid) {
+        var fl = fusedLines[lid];
+        if (fl && fl.realtimePositions && fl.realtimePositions.length > 0) {
+          posList.push({ lineId: lid, positions: fl.realtimePositions });
+        }
+        if (fl && fl.delayInfo) {
+          delayMap[lid] = { status: fl.delayInfo.status, maxDelay: fl.delayInfo.maxDelay, interval: fl.delayInfo.interval, cause: fl.delayInfo.cause };
+        }
+      });
+      window.RailwayRTC.savePositions(posList);
+      window.RailwayRTC.saveDelayInfo(delayMap);
     } catch(e) {}
   }function init() {
     if (_initialized) return;
@@ -249,8 +242,6 @@
     getFusedData: function() { return window.DATA_FUSION || _lastFusedData || null; },
     getLine: function(lineId) { var data = window.DATA_FUSION || _lastFusedData; return data && data.lines ? data.lines[lineId] : null; },
     getOdptData: function() { return odptData; },
-    getOperatorTrains: function(operator) { return odptData.trains[operator] || []; },
-    getOperatorStations: function(operator) { return odptData.stations[operator] || []; },
     getRealtimePositions: function(lineId) { return odptData.realtimePositions[lineId] || []; },
     loadTrainPositions: loadTrainPositions,
     getCachedData: function() { return _lastFusedData; },

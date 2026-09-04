@@ -25,6 +25,16 @@
   };
 })();
 
+  // Canonical operator key normalization: LOS-style (UNDERSCORE_UPPER) <-> standard (JR-East)
+  var TRANSIT_NORMALIZE = {
+    "JR_EAST": "JR-East", "JR_WEST": "JR West",
+    "TOKYO_METRO": "TokyoMetro", "TOEI": "Toei", "YOKOHAMA_MUNICIPAL": "YokohamaMunicipal",
+    "KEIO": "Keio", "ODAKYU": "Odakyu", "SEIBU": "Seibu", "TOBU": "Tobu", "TOKYU": "Tokyu",
+    "KEIKYU": "Keikyu", "KEISEI": "Keisei", "SOTETSU": "Sotetsu", "RINKAI": "Rinkai",
+    "MINATO_MIRAI": "MinatoMirai", "TWR": "TWR", "MIR": "MIR",
+    "TAMA_MONORAIL": "TamaMonorail", "SHONAN_MONORAIL": "ShonanMonorail",
+    "YURIKAMOME": "Yurikamome", "TSUKUBA_EXPRESS": "TsukubaExpress"
+  };
   window.TransitConstants = {
     OP_ORDER: [
       "JR-East", "JR West",
@@ -34,6 +44,17 @@
       "TWR", "MinatoMirai", "MIR", "Rinkai",
       "TsukubaExpress", "Yurikamome", "TamaMonorail", "ShonanMonorail"
     ],
-    NORMALIZE: {},
-    OP_NAMES: {}
+    NORMALIZE: TRANSIT_NORMALIZE,
+    OP_NAMES: {},
+    // Any format ("JR-East" / "JR_EAST" / "jr east") -> standard DB/ODPT key ("JR-East")
+    normalizeOp: function(op) {
+      if (!op) return op;
+      var key = String(op).replace(/-/g, "_").replace(/ /g, "_").toUpperCase();
+      return TRANSIT_NORMALIZE[key] || op;
+    },
+    // Standard/any format -> LOS key ("JR-East" -> "JR_EAST")
+    toLosKey: function(op) {
+      if (!op) return op;
+      return String(op).replace(/-/g, "_").replace(/ /g, "_").toUpperCase();
+    }
   };

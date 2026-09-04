@@ -78,7 +78,8 @@
       var other=r.lineA===lineId?r.lineB:r.lineA;
       if(other===lineId)return;
       ctx.relatedLines.push(other);
-      if(r.relation==="BRANCH_OF"){
+      if(r.relation==="BRANCH_OF" && r.lineA===lineId){
+        // Branch flag applies to the branch end (lineA) only; the trunk (lineB) stays standalone.
         ctx.isBranch=true;
         if(ctx.identity==="STANDALONE"){ctx.identity="SAME";ctx.confidence="LOW";ctx.reason="BRANCH_OF";}
       }else if(r.relation==="PHYSICAL_CONNECT"&&ctx.identity==="STANDALONE"){

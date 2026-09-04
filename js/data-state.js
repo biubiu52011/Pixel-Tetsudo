@@ -220,8 +220,17 @@
       var line = linesObj[lid];
       if (!line) continue;
       var op = line.operator || "Unknown";
-      // Skip branch lines - not shown as separate entries
-      if (line.branchOf) {
+      // Skip branch lines - not shown as separate entries.
+      // Branch authority: LineServiceRelations via RunningChainResolver (SOLE AUTHORITY);
+      // DB branchOf kept as defensive fallback. LOS isStandalone grants independent display.
+      var _isBranch = false;
+      try {
+        if (window.RunningChainResolver) {
+          var _rctx = window.RunningChainResolver.getResolutionContext(lid, Object.keys(linesObj));
+          _isBranch = !!(_rctx && _rctx.isBranch);
+        }
+      } catch(_e) {}
+      if (line.branchOf || _isBranch) {
         var _skip = true;
         if (window.LineOperationSystems) {
           Object.keys(window.LineOperationSystems).some(function(_op) {
