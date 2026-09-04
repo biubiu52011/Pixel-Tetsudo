@@ -329,7 +329,7 @@ window.LineOperationSystems = {
       nameEn: "Marunouchi Line",
       nameKo: "",
       color: "#f31630",
-      lineIds: ["Marunouchi", "MarunouchiBranch"],
+      lineIds: ["Marunouchi"],
       icon: "../images/鉄道/東京メトロ/丸ノ内線.png",
       order: 5
     },
