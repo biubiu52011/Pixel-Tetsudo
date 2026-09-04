@@ -68,8 +68,8 @@
         var anchor = "start";
         if (pos >= rectW && pos < rectW + rectH) { tx = x + 12; anchor = "start"; }
         else if (pos >= 2 * rectW + rectH) { tx = x - 12; anchor = "end"; ty = y + 3; }
-        else if (pos < rectW) { ty = y - 6; tx = x; anchor = "middle"; }
-        else { ty = y + 12; tx = x; anchor = "middle"; }
+        else if (pos < rectW) { ty = y - 10; tx = x; anchor = "middle"; }
+        else { ty = y + 16; tx = x; anchor = "middle"; }
         svg += '<text x="' + tx + '" y="' + ty + '" font-size="8" fill="#444" font-family="sans-serif" text-anchor="' + anchor + '">' + escapeHtml(_rS(stations[i])) + '</text>';
       }
       svg += '<rect x="' + (cx - halfW) + '" y="' + (cy - halfH) + '" width="' + rectW + '" height="' + rectH + '" rx="12" ry="12" stroke="' + color + '" stroke-width="4" fill="none" opacity="0.4"/>';

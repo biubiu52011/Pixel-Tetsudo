@@ -164,11 +164,12 @@
           svg += "<circle cx=\"" + p.x + "\" cy=\"" + p.y + "\""+ "  r=\"" + (hasTrain ? 6 : 4) + "\""+ "  fill=\"" + (hasTrain ? escapeHtml(color) : "#fff") + "\""+ "  stroke=\"" + escapeHtml(color) + "\""+ "  stroke-width=\"" + (hasTrain ? 2.5 : 2) + "\"/>";
           var dn = st;
           var side = p.side || "right";
-          var tx = p.x + (side === "left" ? -12 : 12);
-          var ty = p.y + (side === "top" ? -6 : (side === "bottom" ? 12 : 3.5));
-          var anchor = side === "left" ? "end" : "start";
+          var tx, ty, anchor;
+          if (side === "top") { tx = p.x; ty = p.y - 10; anchor = "middle"; }
+          else if (side === "bottom") { tx = p.x; ty = p.y + 16; anchor = "middle"; }
+          else if (side === "left") { tx = p.x - 10; ty = p.y + 3; anchor = "end"; }
+          else { tx = p.x + 10; ty = p.y + 3; anchor = "start"; }
           svg += "<text x=\"" + tx + "\" y=\"" + ty + "\""+ "  font-size=\"9\" fill=\"#444\" font-family=\"sans-serif\" font-weight=\"500\" text-anchor=\"" + anchor + "\">" + escapeHtml(_rS(dn)) + "</text>";
-        }
       } else {
         var y1 = topP, y2 = topP + (stations.length - 1) * sp;
         svg += "<line x1=\"" + mainCx + "\" y1=\"" + y1 + "\" x2=\"" + mainCx + "\" y2=\"" + y2 + "\""+ "  stroke=\"" + escapeHtml(color) + "\""+ "  stroke-width=\"5\" stroke-linecap=\"round\" opacity=\"0.35\"/>";
