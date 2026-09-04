@@ -343,6 +343,17 @@ window.LineOperationSystems = {
       lineIds: ["Yurakucho"],
       icon: "../images/鉄道/東京メトロ/有楽町線.png",
       order: 8
+    },
+    {
+      code: "Z",
+      nameJa: "半蔵門線",
+      nameZh: "半藏门线",
+      nameEn: "Hanzomon Line",
+      nameKo: "",
+      color: "#8f76d6",
+      lineIds: ["Hanzomon"],
+      icon: "../images/鉄道/東京メトロ/半蔵門線.png",
+      order: 9
     }
   ],
   "TOEI": [
@@ -421,7 +432,7 @@ window.LineOperationSystems = {
       nameEn: "Tojo Line",
       nameKo: "",
       color: "#002d62",
-      lineIds: ["Tojo", "Utsunomiya"],
+      lineIds: ["Tojo"],
       icon: "",
       order: 3
     },
