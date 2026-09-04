@@ -36,14 +36,36 @@ window.LineOperationSystems = {
     },
     {
       code: "JC",
-      nameJa: "中央線（快速）・青梅線・五日市線",
-      nameZh: "中央线（快速）・青梅线・五日市线",
-      nameEn: "Chuo Line (Rapid) / Ome Line / Itsukaichi Line",
+      nameJa: "中央線（快速）",
+      nameZh: "中央线（快速）",
+      nameEn: "Chuo Line (Rapid)",
       nameKo: "",
       color: "#f15a22",
-      lineIds: ["ChuoRapid", "ChuoKonosu", "Ome", "Itsukaichi"],
+      lineIds: ["ChuoRapid", "ChuoKonosu"],
       icon: "../images/鉄道/JR東日本/中央快速線.png",
       order: 3
+    },
+    {
+      code: "OM",
+      nameJa: "青梅線",
+      nameZh: "青梅线",
+      nameEn: "Ome Line",
+      nameKo: "",
+      color: "#dd6935",
+      lineIds: ["Ome"],
+      icon: null,
+      order: 4
+    },
+    {
+      code: "II",
+      nameJa: "五日市線",
+      nameZh: "五日市线",
+      nameEn: "Itsukaichi Line",
+      nameKo: "",
+      color: "#dd6935",
+      lineIds: ["Itsukaichi"],
+      icon: null,
+      order: 5
     },
     {
       code: "JE",
@@ -54,7 +76,7 @@ window.LineOperationSystems = {
       color: "#c9242f",
       lineIds: ["Keiyo"],
       icon: "../images/鉄道/JR東日本/京葉線.png",
-      order: 4
+      order: 6
     },
     {
       code: "JH",
