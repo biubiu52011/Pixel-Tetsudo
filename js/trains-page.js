@@ -165,6 +165,7 @@
           var tx = p.x + (side === "left" ? -12 : 12);
           var ty = p.y + (side === "top" ? -6 : (side === "bottom" ? 12 : 3.5));
           var anchor = side === "left" ? "end" : "start";
+          svg += "<text x=\"" + tx + "\" y=\"" + ty + "\""+ "  font-size=\"9\" fill=\"#444\" font-family=\"sans-serif\" font-weight=\"500\" text-anchor=\"" + anchor + "\">" + escapeHtml(_rS(dn)) + "</text>";
         }
       } else {
         var y1 = topP, y2 = topP + (stations.length - 1) * sp;
