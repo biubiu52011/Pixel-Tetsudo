@@ -35,6 +35,17 @@
     "TAMA_MONORAIL": "TamaMonorail", "SHONAN_MONORAIL": "ShonanMonorail",
     "YURIKAMOME": "Yurikamome", "TSUKUBA_EXPRESS": "TsukubaExpress"
   };
+  // Standard DB operator key -> LOS key (reverse of NORMALIZE; handles
+  // irregular spellings like TsukubaExpress -> TSUKUBA_EXPRESS)
+  var LOS_KEY_MAP = {
+    "JR-East": "JR_EAST", "JR West": "JR_WEST",
+    "TokyoMetro": "TOKYO_METRO", "Toei": "TOEI", "YokohamaMunicipal": "YOKOHAMA_MUNICIPAL",
+    "Keio": "KEIO", "Odakyu": "ODAKYU", "Seibu": "SEIBU", "Tobu": "TOBU", "Tokyu": "TOKYU",
+    "Keikyu": "KEIKYU", "Keisei": "KEISEI", "Sotetsu": "SOTETSU", "Rinkai": "RINKAI",
+    "MinatoMirai": "MINATO_MIRAI", "TWR": "TWR", "MIR": "MIR",
+    "TamaMonorail": "TAMA_MONORAIL", "ShonanMonorail": "SHONAN_MONORAIL",
+    "Yurikamome": "YURIKAMOME", "TsukubaExpress": "TSUKUBA_EXPRESS"
+  };
   window.TransitConstants = {
     OP_ORDER: [
       "JR-East", "JR West",
@@ -55,6 +66,7 @@
     // Standard/any format -> LOS key ("JR-East" -> "JR_EAST")
     toLosKey: function(op) {
       if (!op) return op;
+      if (LOS_KEY_MAP[op]) return LOS_KEY_MAP[op];
       return String(op).replace(/-/g, "_").replace(/ /g, "_").toUpperCase();
     }
   };

@@ -20,6 +20,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#00ac47",
       lineIds: ["Saikyo", "Kawagoe"],
+      icon: "../images/鉄道/JR東日本/埼京線.png",
       order: 1
     },
     {
@@ -30,6 +31,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#ffd400",
       lineIds: ["ChuoSobuLocal", "SobuLocal"],
+      icon: "../images/鉄道/JR東日本/中央・総武線各駅停車.png",
       order: 2
     },
     {
@@ -40,6 +42,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#f15a22",
       lineIds: ["ChuoRapid", "ChuoKonosu", "Ome", "Itsukaichi"],
+      icon: "../images/鉄道/JR東日本/中央快速線.png",
       order: 3
     },
     {
@@ -50,6 +53,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#c9242f",
       lineIds: ["Keiyo"],
+      icon: "../images/鉄道/JR東日本/京葉線.png",
       order: 4
     },
     {
@@ -60,6 +64,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#9fc21b",
       lineIds: ["Kanagawa"],
+      icon: "",
       order: 5
     },
     {
@@ -70,6 +75,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#ffd400",
       lineIds: ["Tsurumi"],
+      icon: "../images/鉄道/JR東日本/鶴見線.png",
       order: 6
     },
     {
@@ -80,6 +86,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#00a2e1",
       lineIds: ["Joban"],
+      icon: "../images/鉄道/JR東日本/常磐線快速.png",
       order: 7
     },
     {
@@ -90,6 +97,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#00b2e5",
       lineIds: ["KeihinTohoku"],
+      icon: "../images/鉄道/JR東日本/京浜東北線.png",
       order: 8
     },
     {
@@ -100,6 +108,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#00bb83",
       lineIds: ["JobanLocal"],
+      icon: "../images/鉄道/JR東日本/常盤緩行線.png",
       order: 9
     },
     {
@@ -110,6 +119,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#f15a22",
       lineIds: ["Musashino"],
+      icon: "../images/鉄道/JR東日本/武蔵野線.png",
       order: 10
     },
     {
@@ -120,6 +130,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#ffd400",
       lineIds: ["Nambu"],
+      icon: "../images/鉄道/JR東日本/南武線.png",
       order: 11
     },
     {
@@ -130,6 +141,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#00347a",
       lineIds: ["Yokosuka", "SobuRapid"],
+      icon: "../images/鉄道/JR東日本/総武線快速横須賀線.png",
       order: 12
     },
     {
@@ -140,6 +152,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#e71112",
       lineIds: ["ShonanShinjuku"],
+      icon: "../images/鉄道/JR東日本/湘南新宿ライン.png",
       order: 13
     },
     {
@@ -150,6 +163,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#f68b1e",
       lineIds: ["Tokaido"],
+      icon: "../images/鉄道/JR東日本/東海道線.png",
       order: 14
     },
     {
@@ -160,6 +174,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#f68b1e",
       lineIds: ["Oyama", "Takasaki"],
+      icon: "../images/鉄道/JR東日本/高崎線.png",
       order: 15
     },
     {
@@ -170,6 +185,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#99cc00",
       lineIds: ["Yamanote"],
+      icon: "../images/鉄道/JR東日本/山手線.png",
       order: 16
     },
     {
@@ -180,6 +196,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#f68b1e",
       lineIds: ["Ito"],
+      icon: "",
       order: 17
     },
     {
@@ -190,6 +207,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#fcc60d",
       lineIds: ["Sotobo"],
+      icon: "",
       order: 18
     },
     {
@@ -200,6 +218,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#fcc60d",
       lineIds: ["Uchibo"],
+      icon: "",
       order: 19
     },
     {
@@ -210,6 +229,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#fcc60d",
       lineIds: ["Narita"],
+      icon: "",
       order: 20
     },
     {
@@ -220,6 +240,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#00732f",
       lineIds: ["TohokuMain"],
+      icon: "",
       order: 21
     },
     {
@@ -230,6 +251,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#00a3af",
       lineIds: ["Sagami"],
+      icon: "",
       order: 22
     }
   ],
@@ -242,6 +264,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#009944",
       lineIds: ["Chiyoda"],
+      icon: "../images/鉄道/東京メトロ/千代田線.png",
       order: 1
     },
     {
@@ -252,6 +275,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#9c5e31",
       lineIds: ["Fukutoshin"],
+      icon: "../images/鉄道/東京メトロ/副都心線.png",
       order: 2
     },
     {
@@ -262,6 +286,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#ff9500",
       lineIds: ["Ginza"],
+      icon: "../images/鉄道/東京メトロ/銀座線.png",
       order: 3
     },
     {
@@ -272,6 +297,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#b5b5ac",
       lineIds: ["Hibiya"],
+      icon: "../images/鉄道/東京メトロ/日比谷線.png",
       order: 4
     },
     {
@@ -282,6 +308,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#f31630",
       lineIds: ["Marunouchi", "MarunouchiBranch"],
+      icon: "../images/鉄道/東京メトロ/丸ノ内線.png",
       order: 5
     },
     {
@@ -292,6 +319,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#00ac9a",
       lineIds: ["Namboku"],
+      icon: "../images/鉄道/東京メトロ/南北線.png",
       order: 6
     },
     {
@@ -302,6 +330,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#00a7db",
       lineIds: ["Tozai"],
+      icon: "../images/鉄道/東京メトロ/東西線.png",
       order: 7
     },
     {
@@ -312,6 +341,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#c1a46e",
       lineIds: ["Yurakucho"],
+      icon: "../images/鉄道/東京メトロ/有楽町線.png",
       order: 8
     }
   ],
@@ -324,6 +354,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#e8525b",
       lineIds: ["Asakusa"],
+      icon: "../images/鉄道/都営地下鉄/都営浅草線.png",
       order: 1
     },
     {
@@ -334,6 +365,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#b6006a",
       lineIds: ["Oedo"],
+      icon: "../images/鉄道/都営地下鉄/都営大江戸線.png",
       order: 2
     },
     {
@@ -344,6 +376,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#0079c2",
       lineIds: ["Mita"],
+      icon: "../images/鉄道/都営地下鉄/都営三田線.png",
       order: 3
     },
     {
@@ -354,6 +387,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#6cbb5a",
       lineIds: ["Shinjuku"],
+      icon: "../images/鉄道/都営地下鉄/都営新宿線.png",
       order: 4
     }
   ],
@@ -366,6 +400,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#0093d0",
       lineIds: ["Noda", "TobuNoda"],
+      icon: "../images/鉄道/東武鉄道/野田線.png",
       order: 1
     },
     {
@@ -376,6 +411,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#002d62",
       lineIds: ["TobuIsesaki", "Isesaki", "Skytree", "TobuSkytree"],
+      icon: "../images/鉄道/東武鉄道/伊勢崎線 佐野線 桐生線 小泉線 小泉線支線.png",
       order: 2
     },
     {
@@ -386,6 +422,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#002d62",
       lineIds: ["Tojo", "Utsunomiya"],
+      icon: "",
       order: 3
     },
     {
@@ -396,6 +433,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#e46c0a",
       lineIds: ["TobuNikko", "Nikkoku"],
+      icon: "../images/鉄道/東武鉄道/日光線 宇都宮線 鬼怒川線.png",
       order: 4
     }
   ],
@@ -408,6 +446,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#4da72a",
       lineIds: ["SeibuIkebukuro", "Ikebukuro", "SeibuToshima", "SeibuChichibu", "Yurakucho_Seibu", "Seibu_Sayama"],
+      icon: "../images/鉄道/西武鉄道/西武池袋線.png",
       order: 1
     },
     {
@@ -418,6 +457,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#4da72a",
       lineIds: ["Kokubunji"],
+      icon: "",
       order: 2
     },
     {
@@ -428,6 +468,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#0087c5",
       lineIds: ["SeibuShinjuku", "Seibu_Shinjuku", "Hamura"],
+      icon: "../images/鉄道/西武鉄道/西武新宿線.png",
       order: 3
     },
     {
@@ -438,6 +479,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#4da72a",
       lineIds: ["SeibuTamako", "SeibuNakagawa"],
+      icon: "../images/鉄道/西武鉄道/西武多摩湖線.png",
       order: 4
     },
     {
@@ -448,6 +490,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#4da72a",
       lineIds: ["SeibuTamagawa"],
+      icon: "../images/鉄道/西武鉄道/西武多摩川線.png",
       order: 5
     },
     {
@@ -458,6 +501,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#ffffff",
       lineIds: ["SeibuYamaguchi"],
+      icon: "../images/鉄道/西武鉄道/西武山口線.png",
       order: 6
     }
   ],
@@ -470,6 +514,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#00a850",
       lineIds: ["TokyuDenEn"],
+      icon: "",
       order: 1
     },
     {
@@ -480,6 +525,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#7f1180",
       lineIds: ["TokyuTamagawa"],
+      icon: "../images/鉄道/東急電鉄/東急多摩川線.png",
       order: 2
     },
     {
@@ -490,6 +536,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#da0442",
       lineIds: ["TokyuToyoko"],
+      icon: "../images/鉄道/東急電鉄/東横線.png",
       order: 3
     }
   ],
@@ -502,6 +549,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#00a0e9",
       lineIds: ["KeioInokashira"],
+      icon: "",
       order: 1
     },
     {
@@ -512,6 +560,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#dd057c",
       lineIds: ["Keio", "KeioMain", "KeioShin", "KeioSagami", "KeioTakao", "KeioKeibajo", "KeioZoo"],
+      icon: "../images/鉄道/京王電鉄/相模原線.png",
       order: 2
     }
   ],
@@ -524,6 +573,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#0067b0",
       lineIds: ["OdakyuOdawara", "Odawara", "OdakyuEnoshima", "OdakyuTama"],
+      icon: "../images/鉄道/小田急電鉄/小田原線.png",
       order: 1
     }
   ],
@@ -536,6 +586,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#0054a6",
       lineIds: ["Keisei"],
+      icon: "",
       order: 1
     }
   ],
@@ -548,6 +599,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#e60012",
       lineIds: ["Keikyu", "KeikyuMain", "KeikyuAirport", "KeikyuKurihama", "KeikyuZushi", "Daishi_Keikyu", "Sakuragi"],
+      icon: "../images/鉄道/京急電鉄/空港線.png",
       order: 1
     }
   ],
@@ -560,6 +612,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#003366",
       lineIds: ["SotetsuMain"],
+      icon: "",
       order: 1
     }
   ],
@@ -572,6 +625,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#d91e18",
       lineIds: ["TsukubaExpress"],
+      icon: "",
       order: 1
     }
   ],
@@ -584,6 +638,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#0073bb",
       lineIds: ["ShonanMonorailE"],
+      icon: "../images/鉄道/湘南モノレール/湘南モノレール江の島線.png",
       order: 1
     }
   ],
@@ -596,6 +651,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#ff9900",
       lineIds: ["TamaMonorail"],
+      icon: "../images/鉄道/多摩都市モノレール/多摩都市モノレール線.png",
       order: 1
     }
   ],
@@ -608,6 +664,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#009587",
       lineIds: ["Rinkai"],
+      icon: "../images/鉄道/東京臨海高速鉄道/臨海線.png",
       order: 1
     }
   ],
@@ -620,6 +677,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#003399",
       lineIds: ["MinatoMirai"],
+      icon: "",
       order: 1
     }
   ],
@@ -632,6 +690,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#004fa8",
       lineIds: ["Yurikamome"],
+      icon: "../images/鉄道/ゆりかもせ/ゆりかもせ.png",
       order: 1
     }
   ]

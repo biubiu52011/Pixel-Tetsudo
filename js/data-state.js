@@ -140,9 +140,17 @@
       statusHtml = '<span class="rs-status-icon ' + worstS.cls + '">' + worstS.icon + '</span>';
     }
 
+    // Icon: gallery image when the system has one (build-time verified to exist),
+    // otherwise fall back to the 記号 badge.
+    var iconHtml = "";
+    if (sys.icon) {
+      iconHtml = '<img class="rs-line-icon" src="' + escapeHtml(sys.icon) + '" alt="" loading="lazy">';
+    } else {
+      iconHtml = '<div class="rs-system-badge">' + escapeHtml(code || "?") + '</div>';
+    }
     return '<div class="rs-line-card rs-system-card" data-line="' + escapeHtml(firstId) + '" data-system="' + escapeHtml(code) + '" data-lines="' + escapeHtml(memberIds.join(",")) + '" data-line-color="' + escapeHtml(color) + '">'
       + '<div class="rs-system-bar" style="background:' + escapeHtml(color) + '"></div>'
-      + '<div class="rs-system-badge">' + escapeHtml(code || "?") + '</div>'
+      + iconHtml
       + '<div class="rs-line-info">'
       + '<div class="rs-line-name">' + escapeHtml(name) + '</div>'
       + '<div class="rs-system-lines">' + chipsHtml + '</div>'
