@@ -149,7 +149,6 @@
       iconHtml = '<div class="rs-system-badge">' + escapeHtml(code || "?") + '</div>';
     }
     return '<div class="rs-line-card rs-system-card" data-line="' + escapeHtml(firstId) + '" data-system="' + escapeHtml(code) + '" data-lines="' + escapeHtml(memberIds.join(",")) + '" data-line-color="' + escapeHtml(color) + '">'
-      + '<div class="rs-system-bar" style="background:' + escapeHtml(color) + '"></div>'
       + iconHtml
       + '<div class="rs-line-info">'
       + '<div class="rs-line-name">' + escapeHtml(name) + '</div>'
