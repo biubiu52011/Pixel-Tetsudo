@@ -130,20 +130,22 @@
       var sp = 30, topP = 16, botP = 14;
       var numBranches = branchLines.length;
       var branchOffset = numBranches > 0 ? 70 * numBranches : 0;
-      var svgW = isLoop ? 200 : 190 + branchOffset;
-      var svgH = topP + stations.length * sp + botP;
-      if (isLoop) { svgH = 200; }
+      var loopRectH = Math.max(stations.length * 28 / 2 - 80, 120);
+      var svgW = isLoop ? 260 : 190 + branchOffset;
+      var svgH = isLoop ? loopRectH + 80 : topP + stations.length * sp + botP;
       var svg = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 " + svgW + " " + svgH + "\" preserveAspectRatio=\"xMidYMid meet\">";
       svg += "<defs><filter id=\"tg_" + escapeHtml(lineId) + "\"><feGaussianBlur stdDeviation=\"2\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs>";
       svg += "<rect width=\"" + svgW + "\" height=\"" + svgH + "\" fill=\"var(--bg)\" rx=\"8\"/>";
       var loopPts = [];
       var mainCx = svgW / 2 - branchOffset / 2;
       if (isLoop && stations.length > 2) {
-        var cx = svgW / 2, cy = svgH / 2;
-        var rectW = 70, rectH = 150;
+        var spLoop = 28;
+        var rectW = 80;
+        var rectH = loopRectH;
         var halfW = rectW / 2, halfH = rectH / 2;
         var perimeter = 2 * (rectW + rectH);
         var startOffset = rectW / 2;
+        var cx = svgW / 2, cy = svgH / 2;
         for (var i = 0; i < stations.length; i++) {
           var pos = ((i / stations.length) * perimeter + startOffset) % perimeter;
           var lx, ly;
@@ -151,7 +153,7 @@
           else if (pos < rectW + rectH) { lx = cx + halfW; ly = cy - halfH + (pos - rectW); }
           else if (pos < 2 * rectW + rectH) { lx = cx + halfW - (pos - rectW - rectH); ly = cy + halfH; }
           else { lx = cx - halfW; ly = cy + halfH - (pos - 2 * rectW - rectH); }
-          var side = (pos < rectW) ? "top" : (t < rectW + rectH ? "right" : (t < 2 * rectW + rectH ? "bottom" : "left"));
+          var side = (pos < rectW) ? "top" : (pos < rectW + rectH ? "right" : (pos < 2 * rectW + rectH ? "bottom" : "left"));
           loopPts.push({ x: lx, y: ly, angle: 0, side: side });
         }
         svg += "<rect x=\"" + (cx - halfW) + "\" y=\"" + (cy - halfH) + "\" width=\"" + rectW + "\" height=\"" + rectH + "\" rx=\"10\" ry=\"10\" stroke=\"" + escapeHtml(color) + "\" stroke-width=\"5\" fill=\"none\" opacity=\"0.35\"/>";

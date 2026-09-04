@@ -40,19 +40,22 @@
     var color = line.color || "#008803";
     var isLoop = line.type === "loop";
     var sp = 28, topP = 20, botP = 16;
-    var svgH = isLoop ? 220 : topP + stations.length * sp + botP;
-    var svgW = isLoop ? 220 : 160;
+    var loopRectH = Math.max(stations.length * 28 / 2 - 80, 120);
+    var svgH = isLoop ? loopRectH + 80 : topP + stations.length * sp + botP;
+    var svgW = isLoop ? 260 : 160;
 
     var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + svgW + ' ' + svgH + '" preserveAspectRatio="xMidYMid meet" class="tp-line-map">';
     svg += '<defs><filter id="tg_' + escapeHtml(line.id) + '"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></defs>';
     svg += '<rect width="' + svgW + '" height="' + svgH + '" fill="var(--bg)" rx="8"/>';
 
     if(isLoop && stations.length > 2) {
-      var cx = svgW / 2, cy = svgH / 2;
-      var rectW = 80, rectH = 160;
+      var spLoop = 28;
+      var rectW = 80;
+      var rectH = loopRectH;
       var halfW = rectW / 2, halfH = rectH / 2;
       var perimeter = 2 * (rectW + rectH);
       var startOffset = rectW / 2;
+      var cx = svgW / 2, cy = svgH / 2;
       for(var i = 0; i < stations.length; i++) {
         var pos = ((i / stations.length) * perimeter + startOffset) % perimeter;
         var x, y;
@@ -63,14 +66,17 @@
         svg += '<circle cx="' + x + '" cy="' + y + '" r="4" fill="#fff" stroke="' + color + '" stroke-width="2.5"/>';
         var tx = x + 12, ty = y + 3;
         var anchor = "start";
-        if (x > cx + halfW - 2) { tx = x - 12; anchor = "end"; }
+        if (pos >= rectW && pos < rectW + rectH) { tx = x + 12; anchor = "start"; }
+        else if (pos >= 2 * rectW + rectH) { tx = x - 12; anchor = "end"; ty = y + 3; }
+        else if (pos < rectW) { ty = y - 6; tx = x; anchor = "middle"; }
+        else { ty = y + 12; tx = x; anchor = "middle"; }
         svg += '<text x="' + tx + '" y="' + ty + '" font-size="8" fill="#444" font-family="sans-serif" text-anchor="' + anchor + '">' + escapeHtml(_rS(stations[i])) + '</text>';
       }
       svg += '<rect x="' + (cx - halfW) + '" y="' + (cy - halfH) + '" width="' + rectW + '" height="' + rectH + '" rx="12" ry="12" stroke="' + color + '" stroke-width="4" fill="none" opacity="0.4"/>';
       // Branch stations
       if(line.branchStations && line.branchStations.length > 0) {
         var bx = cx + halfW + 15, by = cy;
-        svg += '<line x1="' + (cx + rx) + '" y1="' + cy + '" x2="' + bx + '" y2="' + by + '" stroke="' + color + '" stroke-width="2" stroke-dasharray="3,2" opacity="0.6"/>';
+        svg += '<line x1="' + (cx + halfW) + '" y1="' + cy + '" x2="' + bx + '" y2="' + by + '" stroke="' + color + '" stroke-width="2" stroke-dasharray="3,2" opacity="0.6"/>';
         for(var bi = 0; bi < line.branchStations.length; bi++) {
           var bs = line.branchStations[bi];
           var sx = bx + bi * 18;
