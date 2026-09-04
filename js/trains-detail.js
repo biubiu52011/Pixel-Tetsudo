@@ -49,21 +49,27 @@
 
     if(isLoop && stations.length > 2) {
       var cx = svgW / 2, cy = svgH / 2;
-      var rx = Math.min(cx - 20, 80), ry = Math.min(cy - 15, 90);
+      var rectW = 80, rectH = 160;
+      var halfW = rectW / 2, halfH = rectH / 2;
+      var perimeter = 2 * (rectW + rectH);
+      var startOffset = rectW / 2;
       for(var i = 0; i < stations.length; i++) {
-        var angle = (i / stations.length) * 2 * Math.PI - Math.PI / 2;
-        var x = cx + rx * Math.cos(angle);
-        var y = cy + ry * Math.sin(angle);
+        var t = ((i / stations.length) * perimeter + startOffset) % perimeter;
+        var x, y;
+        if (t < rectW) { x = cx - halfW + t; y = cy - halfH; }
+        else if (t < rectW + rectH) { x = cx + halfW; y = cy - halfH + (t - rectW); }
+        else if (t < 2 * rectW + rectH) { x = cx + halfW - (t - rectW - rectH); y = cy + halfH; }
+        else { x = cx - halfW; y = cy + halfH - (t - 2 * rectW - rectH); }
         svg += '<circle cx="' + x + '" cy="' + y + '" r="4" fill="#fff" stroke="' + color + '" stroke-width="2.5"/>';
-        var tx = x + 12 * Math.cos(angle);
-        var ty = y + 12 * Math.sin(angle);
-        var anchor = Math.cos(angle) > 0.1 ? "start" : (Math.cos(angle) < -0.1 ? "end" : "middle");
-        svg += '<text x="' + tx + '" y="' + (ty + 3) + '" font-size="8" fill="#444" font-family="sans-serif" text-anchor="' + anchor + '">' + escapeHtml(_rS(stations[i])) + '</text>';
+        var tx = x + 12, ty = y + 3;
+        var anchor = "start";
+        if (x > cx + halfW - 2) { tx = x - 12; anchor = "end"; }
+        svg += '<text x="' + tx + '" y="' + ty + '" font-size="8" fill="#444" font-family="sans-serif" text-anchor="' + anchor + '">' + escapeHtml(_rS(stations[i])) + '</text>';
       }
-      svg += '<ellipse cx="' + cx + '" cy="' + cy + '" rx="' + rx + '" ry="' + ry + '" stroke="' + color + '" stroke-width="4" fill="none" opacity="0.4"/>';
+      svg += '<rect x="' + (cx - halfW) + '" y="' + (cy - halfH) + '" width="' + rectW + '" height="' + rectH + '" rx="12" ry="12" stroke="' + color + '" stroke-width="4" fill="none" opacity="0.4"/>';
       // Branch stations
       if(line.branchStations && line.branchStations.length > 0) {
-        var bx = cx + rx + 15, by = cy;
+        var bx = cx + halfW + 15, by = cy;
         svg += '<line x1="' + (cx + rx) + '" y1="' + cy + '" x2="' + bx + '" y2="' + by + '" stroke="' + color + '" stroke-width="2" stroke-dasharray="3,2" opacity="0.6"/>';
         for(var bi = 0; bi < line.branchStations.length; bi++) {
           var bs = line.branchStations[bi];

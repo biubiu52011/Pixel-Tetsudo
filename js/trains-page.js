@@ -140,22 +140,31 @@
       var mainCx = svgW / 2 - branchOffset / 2;
       if (isLoop && stations.length > 2) {
         var cx = svgW / 2, cy = svgH / 2;
-        var rx = Math.min(cx - 18, 70), ry = Math.min(cy - 12, 80);
+        var rectW = 70, rectH = 150;
+        var halfW = rectW / 2, halfH = rectH / 2;
+        var perimeter = 2 * (rectW + rectH);
+        var startOffset = rectW / 2;
         for (var i = 0; i < stations.length; i++) {
-          var angle = (i / stations.length) * 2 * Math.PI - Math.PI / 2;
-          loopPts.push({ x: cx + rx * Math.cos(angle), y: cy + ry * Math.sin(angle), angle: angle });
+          var t = ((i / stations.length) * perimeter + startOffset) % perimeter;
+          var lx, ly;
+          if (t < rectW) { lx = cx - halfW + t; ly = cy - halfH; }
+          else if (t < rectW + rectH) { lx = cx + halfW; ly = cy - halfH + (t - rectW); }
+          else if (t < 2 * rectW + rectH) { lx = cx + halfW - (t - rectW - rectH); ly = cy + halfH; }
+          else { lx = cx - halfW; ly = cy + halfH - (t - 2 * rectW - rectH); }
+          var side = (t < rectW) ? "top" : (t < rectW + rectH ? "right" : (t < 2 * rectW + rectH ? "bottom" : "left"));
+          loopPts.push({ x: lx, y: ly, angle: 0, side: side });
         }
-        svg += "<ellipse cx=\"" + cx + "\" cy=\"" + cy + "\""+ "  rx=\"" + rx + "\""+ "  ry=\"" + ry + "\""+ "  stroke=\"" + escapeHtml(color) + "\""+ "  stroke-width=\"\" + \"5\" + \"\" fill=\"none\" opacity=\"0.35\"/>";
+        svg += "<rect x=\"" + (cx - halfW) + "\" y=\"" + (cy - halfH) + "\" width=\"" + rectW + "\" height=\"" + rectH + "\" rx=\"10\" ry=\"10\" stroke=\"" + escapeHtml(color) + "\" stroke-width=\"5\" fill=\"none\" opacity=\"0.35\"/>";
         for (var i = 0; i < stations.length; i++) {
           var p = loopPts[i];
           var st = stations[i];
           var hasTrain = positions.some(function(pp) { return pp.stationIndex === i; });
           svg += "<circle cx=\"" + p.x + "\" cy=\"" + p.y + "\""+ "  r=\"" + (hasTrain ? 6 : 4) + "\""+ "  fill=\"" + (hasTrain ? escapeHtml(color) : "#fff") + "\""+ "  stroke=\"" + escapeHtml(color) + "\""+ "  stroke-width=\"" + (hasTrain ? 2.5 : 2) + "\"/>";
           var dn = st;
-          var tx = p.x + 12 * Math.cos(p.angle);
-          var ty = p.y + 12 * Math.sin(p.angle);
-          var anchor = Math.cos(p.angle) > 0.1 ? "start" : (Math.cos(p.angle) < -0.1 ? "end" : "middle");
-          svg += "<text x=\"" + tx + "\" y=\"" + (ty + 3.5) + "\""+ "  font-size=\"\" + \"9\" + \"\" fill=\"#444\" font-family=\"sans-serif\" font-weight=\"500\" text-anchor=\"" + anchor + "\">" + escapeHtml(_rS(dn)) + "</text>";
+          var side = p.side || "right";
+          var tx = p.x + (side === "left" ? -12 : 12);
+          var ty = p.y + (side === "top" ? -6 : (side === "bottom" ? 12 : 3.5));
+          var anchor = side === "left" ? "end" : "start";
         }
       } else {
         var y1 = topP, y2 = topP + (stations.length - 1) * sp;
