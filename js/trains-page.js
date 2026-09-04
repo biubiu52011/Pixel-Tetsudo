@@ -130,8 +130,9 @@
       var sp = 30, topP = 16, botP = 14;
       var numBranches = branchLines.length;
       var branchOffset = numBranches > 0 ? 70 * numBranches : 0;
-      var loopRectH = Math.max(stations.length * 28 / 2 - 80, 120);
-      var svgW = isLoop ? 260 : 190 + branchOffset;
+      var loopRectW = Math.max(stations.length * 28 / 6, 100);
+      var loopRectH = Math.max(stations.length * 28 / 3, 200);
+      var svgW = isLoop ? loopRectW + 200 : 190 + branchOffset;
       var svgH = isLoop ? loopRectH + 80 : topP + stations.length * sp + botP;
       var svg = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 " + svgW + " " + svgH + "\" preserveAspectRatio=\"xMidYMid meet\">";
       svg += "<defs><filter id=\"tg_" + escapeHtml(lineId) + "\"><feGaussianBlur stdDeviation=\"2\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs>";
@@ -140,7 +141,7 @@
       var mainCx = svgW / 2 - branchOffset / 2;
       if (isLoop && stations.length > 2) {
         var spLoop = 28;
-        var rectW = 80;
+        var rectW = loopRectW;
         var rectH = loopRectH;
         var halfW = rectW / 2, halfH = rectH / 2;
         var perimeter = 2 * (rectW + rectH);
