@@ -53,7 +53,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#dd6935",
       lineIds: ["Ome"],
-      icon: null,
+      icon: "../images/鉄道/JR東日本/青梅線.png",
       order: 4
     },
     {
@@ -64,7 +64,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#dd6935",
       lineIds: ["Itsukaichi"],
-      icon: null,
+      icon: "../images/鉄道/JR東日本/五日市線.png",
       order: 5
     },
     {
