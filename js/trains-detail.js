@@ -40,7 +40,7 @@
     var color = line.color || "#008803";
     var isLoop = line.type === "loop";
     var sp = 28, topP = 20, botP = 16;
-    var loopRectH = Math.max(stations.length * 28 / 2 - 80, 120);
+    var loopRectH = Math.max(stations.length * 36 / 2 - 80, 140);
     var svgH = isLoop ? loopRectH + 80 : topP + stations.length * sp + botP;
     var svgW = isLoop ? 260 : 160;
 
@@ -49,7 +49,7 @@
     svg += '<rect width="' + svgW + '" height="' + svgH + '" fill="var(--bg)" rx="8"/>';
 
     if(isLoop && stations.length > 2) {
-      var spLoop = 28;
+      var spLoop = 36;
       var rectW = 80;
       var rectH = loopRectH;
       var halfW = rectW / 2, halfH = rectH / 2;
@@ -70,8 +70,7 @@
         else if (pos >= 2 * rectW + rectH) { tx = x - 12; anchor = "end"; ty = y + 3; }
         else if (pos < rectW) { ty = y - 10; tx = x; anchor = "middle"; }
         else { ty = y + 16; tx = x; anchor = "middle"; }
-        var fs = (pos < rectW || pos >= 2 * rectW + rectH) ? 6 : 8;
-        svg += '<text x="' + tx + '" y="' + ty + '" font-size="' + fs + '" fill="#444" font-family="sans-serif" text-anchor="' + anchor + '">' + escapeHtml(_rS(stations[i])) + '</text>';
+        svg += '<text x="' + tx + '" y="' + ty + '" font-size="8" fill="#444" font-family="sans-serif" text-anchor="' + anchor + '">' + escapeHtml(_rS(stations[i])) + '</text>';
       }
       svg += '<rect x="' + (cx - halfW) + '" y="' + (cy - halfH) + '" width="' + rectW + '" height="' + rectH + '" rx="12" ry="12" stroke="' + color + '" stroke-width="4" fill="none" opacity="0.4"/>';
       // Branch stations

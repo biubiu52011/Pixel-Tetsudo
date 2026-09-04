@@ -130,7 +130,7 @@
       var sp = 30, topP = 16, botP = 14;
       var numBranches = branchLines.length;
       var branchOffset = numBranches > 0 ? 70 * numBranches : 0;
-      var loopRectH = Math.max(stations.length * 28 / 2 - 80, 120);
+      var loopRectH = Math.max(stations.length * 36 / 2 - 80, 140);
       var svgW = isLoop ? 260 : 190 + branchOffset;
       var svgH = isLoop ? loopRectH + 80 : topP + stations.length * sp + botP;
       var svg = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 " + svgW + " " + svgH + "\" preserveAspectRatio=\"xMidYMid meet\">";
@@ -139,7 +139,7 @@
       var loopPts = [];
       var mainCx = svgW / 2 - branchOffset / 2;
       if (isLoop && stations.length > 2) {
-        var spLoop = 28;
+        var spLoop = 36;
         var rectW = 80;
         var rectH = loopRectH;
         var halfW = rectW / 2, halfH = rectH / 2;
@@ -169,8 +169,7 @@
           else if (side === "bottom") { tx = p.x; ty = p.y + 16; anchor = "middle"; }
           else if (side === "left") { tx = p.x - 10; ty = p.y + 3; anchor = "end"; }
           else { tx = p.x + 10; ty = p.y + 3; anchor = "start"; }
-          var fs = (side === "top" || side === "bottom") ? 7 : 9;
-          svg += "<text x=\"" + tx + "\" y=\"" + ty + "\""+ "  font-size=\"" + fs + "\" fill=\"#444\" font-family=\"sans-serif\" font-weight=\"500\" text-anchor=\"" + anchor + "\">" + escapeHtml(_rS(dn)) + "</text>";
+          svg += "<text x=\"" + tx + "\" y=\"" + ty + "\""+ "  font-size=\"9\" fill=\"#444\" font-family=\"sans-serif\" font-weight=\"500\" text-anchor=\"" + anchor + "\">" + escapeHtml(_rS(dn)) + "</text>";
         }
       } else {
         var y1 = topP, y2 = topP + (stations.length - 1) * sp;
