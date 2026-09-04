@@ -315,6 +315,7 @@
       }
       loadCachedPositions(function() {
         renderList(listEl);
+        renderFilterBar(document.getElementById("trainsFilterBar"));
         // Restore hash-based navigation
         var hash = window.location.hash;
         if (hash && hash.length > 1) {
@@ -331,8 +332,15 @@
             var currentLen = listEl.innerHTML.length;
             if (currentLen === 0) {
               renderList(listEl);
+              renderFilterBar(document.getElementById("trainsFilterBar"));
             }
           }
+        });
+      }
+      // Refresh filter bar labels on language switch
+      if (typeof window.onLanguageChange === "function") {
+        window.onLanguageChange(function() {
+          renderFilterBar(document.getElementById("trainsFilterBar"));
         });
       }
     } catch(e) {}
