@@ -170,6 +170,7 @@
           else if (side === "left") { tx = p.x - 10; ty = p.y + 3; anchor = "end"; }
           else { tx = p.x + 10; ty = p.y + 3; anchor = "start"; }
           svg += "<text x=\"" + tx + "\" y=\"" + ty + "\""+ "  font-size=\"9\" fill=\"#444\" font-family=\"sans-serif\" font-weight=\"500\" text-anchor=\"" + anchor + "\">" + escapeHtml(_rS(dn)) + "</text>";
+        }
       } else {
         var y1 = topP, y2 = topP + (stations.length - 1) * sp;
         svg += "<line x1=\"" + mainCx + "\" y1=\"" + y1 + "\" x2=\"" + mainCx + "\" y2=\"" + y2 + "\""+ "  stroke=\"" + escapeHtml(color) + "\""+ "  stroke-width=\"5\" stroke-linecap=\"round\" opacity=\"0.35\"/>";
