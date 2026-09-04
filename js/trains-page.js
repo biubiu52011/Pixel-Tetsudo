@@ -8,6 +8,7 @@
   var listEl = null;
   var detailEl = null;
   var titleEl = null;
+  var filterBarEl = null;
   var mapEl = null;
   var backBtn = null;
   var _selectedOperator = null;
@@ -239,6 +240,7 @@
       currentLine = lineId;
       window.location.hash = lineId;
       if (listEl) listEl.classList.add("hidden");
+      if (filterBarEl) filterBarEl.classList.add("hidden");
       if (detailEl) detailEl.classList.remove("hidden");
       if (titleEl) titleEl.textContent = (window.RailwayDB && window.RailwayDB.resolveLineName ? window.RailwayDB.resolveLineName(lineId, window.currentLang) : (fusedLine.nameEn || fusedLine.nameJa || lineId));
       if (mapEl) renderTrainMap(mapEl, fusedLine, lineId);
@@ -249,6 +251,7 @@
     try {
       currentLine = null;
       if (listEl) listEl.classList.remove("hidden");
+      if (filterBarEl) filterBarEl.classList.remove("hidden");
       if (detailEl) detailEl.classList.add("hidden");
       renderList(listEl);
     } catch(e) {}
@@ -301,6 +304,7 @@
       detailEl = document.getElementById("trainsDetailView");
       titleEl = document.getElementById("trainsDetailTitle");
       mapEl = document.getElementById("trainsMapContainer");
+      filterBarEl = document.getElementById("trainsFilterBar");
       backBtn = document.getElementById("trainsBackBtn");
       if (!listEl) return;
       listEl.addEventListener("click", function(e) {
