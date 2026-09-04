@@ -4498,7 +4498,6 @@
       "type": "straight",
       "image": "../images/鉄道/JR東日本/青梅線.png",
       "durationTotalMin": 60,
-      "branchOf": "ChuoRapid",
       "stations": [
         "Tachikawa",
         "Nishi-Tachikawa",
@@ -4567,7 +4566,6 @@
       "type": "straight",
       "image": "../images/鉄道/JR東日本/五日市線.png",
       "durationTotalMin": 20,
-      "branchOf": "ChuoRapid",
       "stations": [
         "Haijima",
         "Higashi-Akiru",
@@ -9496,7 +9494,6 @@
       "type": "straight",
       "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": 120,
-      "branchOf": "SobuRapid",
       "stations": [
         "Soga",
         "Hamano",
@@ -10251,7 +10248,6 @@
       "type": "straight",
       "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": 100,
-      "branchOf": "SobuRapid",
       "stations": [
         "Chiba",
         "Soga",
