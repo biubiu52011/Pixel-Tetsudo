@@ -145,13 +145,13 @@
         var perimeter = 2 * (rectW + rectH);
         var startOffset = rectW / 2;
         for (var i = 0; i < stations.length; i++) {
-          var t = ((i / stations.length) * perimeter + startOffset) % perimeter;
+          var pos = ((i / stations.length) * perimeter + startOffset) % perimeter;
           var lx, ly;
-          if (t < rectW) { lx = cx - halfW + t; ly = cy - halfH; }
-          else if (t < rectW + rectH) { lx = cx + halfW; ly = cy - halfH + (t - rectW); }
-          else if (t < 2 * rectW + rectH) { lx = cx + halfW - (t - rectW - rectH); ly = cy + halfH; }
-          else { lx = cx - halfW; ly = cy + halfH - (t - 2 * rectW - rectH); }
-          var side = (t < rectW) ? "top" : (t < rectW + rectH ? "right" : (t < 2 * rectW + rectH ? "bottom" : "left"));
+          if (pos < rectW) { lx = cx - halfW + pos; ly = cy - halfH; }
+          else if (pos < rectW + rectH) { lx = cx + halfW; ly = cy - halfH + (pos - rectW); }
+          else if (pos < 2 * rectW + rectH) { lx = cx + halfW - (pos - rectW - rectH); ly = cy + halfH; }
+          else { lx = cx - halfW; ly = cy + halfH - (pos - 2 * rectW - rectH); }
+          var side = (pos < rectW) ? "top" : (t < rectW + rectH ? "right" : (t < 2 * rectW + rectH ? "bottom" : "left"));
           loopPts.push({ x: lx, y: ly, angle: 0, side: side });
         }
         svg += "<rect x=\"" + (cx - halfW) + "\" y=\"" + (cy - halfH) + "\" width=\"" + rectW + "\" height=\"" + rectH + "\" rx=\"10\" ry=\"10\" stroke=\"" + escapeHtml(color) + "\" stroke-width=\"5\" fill=\"none\" opacity=\"0.35\"/>";

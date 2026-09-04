@@ -54,12 +54,12 @@
       var perimeter = 2 * (rectW + rectH);
       var startOffset = rectW / 2;
       for(var i = 0; i < stations.length; i++) {
-        var t = ((i / stations.length) * perimeter + startOffset) % perimeter;
+        var pos = ((i / stations.length) * perimeter + startOffset) % perimeter;
         var x, y;
-        if (t < rectW) { x = cx - halfW + t; y = cy - halfH; }
-        else if (t < rectW + rectH) { x = cx + halfW; y = cy - halfH + (t - rectW); }
-        else if (t < 2 * rectW + rectH) { x = cx + halfW - (t - rectW - rectH); y = cy + halfH; }
-        else { x = cx - halfW; y = cy + halfH - (t - 2 * rectW - rectH); }
+        if (pos < rectW) { x = cx - halfW + pos; y = cy - halfH; }
+        else if (pos < rectW + rectH) { x = cx + halfW; y = cy - halfH + (pos - rectW); }
+        else if (pos < 2 * rectW + rectH) { x = cx + halfW - (pos - rectW - rectH); y = cy + halfH; }
+        else { x = cx - halfW; y = cy + halfH - (pos - 2 * rectW - rectH); }
         svg += '<circle cx="' + x + '" cy="' + y + '" r="4" fill="#fff" stroke="' + color + '" stroke-width="2.5"/>';
         var tx = x + 12, ty = y + 3;
         var anchor = "start";
