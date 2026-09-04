@@ -178,6 +178,7 @@ After the 11-question intake, before any implementation decision, the agent MUST
 | Runtime cache / position | DataLayer | positions, regions |
 | Realtime fusion | DataFusion | unified data from multiple sources |
 | Raw canonical data | UNIFIED_LINES | db-loader.js input |
+| Running-system grouping | LineOperationSystems (LOS) | lineIds grouping + system name (i18n) + official HEX + 路線記号; single authority for system cards |
 | Search interaction | SearchUI | form handling, results display |
 | History tracking | History | consumes SearchUI output, does NOT own search logic |
 | Route search UI | Route page | own main-heart: "How do I get there?" |
@@ -228,6 +229,7 @@ If the answer is NO, the change is REJECTED.
 | CSS orphan classes (5) | P3 | Low risk, covered by inheritance |
 | console.log in odpt-unified.js (2) | P3 | Non-product debug output |
 | js/trains-detail.js orphan | P3 | Zero consumers (not referenced by any page); contains unresolved _rS/tStation/_lang refs — do not enable |
+| LOS isStandalone / REGIONAL pseudo-group | REMOVED 4.3.42 | Running-system rendering retired the branch-skip mechanism; LOS regenerated from authoritative 運行系統 table (branch lines live inside their system group, e.g. Ome/Itsukaichi in JC) |
 | 13 image path fixes | Deferred | Asset mapping, no product impact |
 
 ---

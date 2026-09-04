@@ -17,7 +17,6 @@
 
   // ========== Internal state ==========
   var _lines = {};
-  var _delayData = {};
   var _positions = {};
   var _listeners = [];
   var _initialized = false;
@@ -84,6 +83,73 @@
   }
 
   // ========== Render functions ==========
+
+  // Severity rank for system-level status aggregation (higher = more severe)
+  function statusRank(s) {
+    if (s === "suspended") return 5;
+    if (s === "delayed") return 4;
+    if (s === "no_odpt") return 3;
+    if (s === "no_data") return 2;
+    if (s === "normal") return 1;
+    return 0;
+  }
+
+  /**
+   * Render a running-system card (one LOS entry as a single card).
+   * @param {Object} sys - LOS system entry { code, nameJa/nameZh/nameEn/nameKo, color, lineIds }
+   * @param {Array} memberIds - DB line ids present in the current view
+   * @param {Object} linesObj - line ID -> line data map
+   * @param {Object} options - { mode: "realtime"|"trains" }
+   */
+  function renderSystemCard(sys, memberIds, linesObj, options) {
+    options = options || {};
+    var mode = options.mode || "realtime";
+    var lang = window.currentLang || "ja";
+    var name = sys.nameJa || "";
+    if (lang === "zh" && sys.nameZh) name = sys.nameZh;
+    else if (lang === "en" && sys.nameEn) name = sys.nameEn;
+    else if (lang === "ko" && sys.nameKo) name = sys.nameKo;
+    var color = sys.color || "#00b643";
+    var code = sys.code || "";
+
+    // Member line chips with per-line status (realtime) or plain names (trains)
+    var chipsHtml = "";
+    var worst = null;
+    var firstId = null;
+    for (var i = 0; i < memberIds.length; i++) {
+      var lid = memberIds[i];
+      if (firstId === null) firstId = lid;
+      var line = linesObj[lid] || {};
+      var dInfo = getDelayInfo(line) || {};
+      var agg = getAggregatedDelay(lid, line);
+      if (agg) dInfo = agg;
+      var status = dInfo.status ? dInfo.status : (dInfo ? "normal" : "no_data");
+      if (!worst || statusRank(status) > statusRank(worst)) worst = status;
+      var s = getStatus(status);
+      var lname = (window.RailwayDB && window.RailwayDB.resolveLineName) ? window.RailwayDB.resolveLineName(lid, lang) : lid;
+      if (mode === "realtime") {
+        var delayTxt = (status === "delayed" && dInfo.maxDelay != null) ? (" " + dInfo.maxDelay + (lang === "ja" ? "分" : " min")) : "";
+        chipsHtml += '<span class="rs-sys-chip" data-line="' + escapeHtml(lid) + '"><span class="rs-status-icon ' + s.cls + '">' + s.icon + '</span>' + escapeHtml(lname) + delayTxt + '</span>';
+      } else {
+        chipsHtml += '<span class="rs-sys-chip">' + escapeHtml(lname) + '</span>';
+      }
+    }
+    var worstS = getStatus(worst);
+    var statusHtml = "";
+    if (mode === "realtime") {
+      statusHtml = '<span class="rs-status-icon ' + worstS.cls + '">' + worstS.icon + '</span>';
+    }
+
+    return '<div class="rs-line-card rs-system-card" data-line="' + escapeHtml(firstId) + '" data-system="' + escapeHtml(code) + '" data-lines="' + escapeHtml(memberIds.join(",")) + '" data-line-color="' + escapeHtml(color) + '">'
+      + '<div class="rs-system-bar" style="background:' + escapeHtml(color) + '"></div>'
+      + '<div class="rs-system-badge">' + escapeHtml(code || "?") + '</div>'
+      + '<div class="rs-line-info">'
+      + '<div class="rs-line-name">' + escapeHtml(name) + '</div>'
+      + '<div class="rs-system-lines">' + chipsHtml + '</div>'
+      + '</div>'
+      + statusHtml
+      + '</div>';
+  }
 
   /**
    * Render a single line card
@@ -212,7 +278,7 @@
     var insertMap = {};
     for (var i = 0; i < lineOrder.length; i++) { insertMap[lineOrder[i]] = i; }
 
-        var groups = {};
+    var groups = {};
     var opOrder = [];
     var ids = Object.keys(linesObj);
     for (var i = 0; i < ids.length; i++) {
@@ -220,27 +286,6 @@
       var line = linesObj[lid];
       if (!line) continue;
       var op = line.operator || "Unknown";
-      // Skip branch lines - not shown as separate entries.
-      // Branch authority: LineServiceRelations via RunningChainResolver (SOLE AUTHORITY);
-      // DB branchOf kept as defensive fallback. LOS isStandalone grants independent display.
-      var _isBranch = false;
-      try {
-        if (window.RunningChainResolver) {
-          var _rctx = window.RunningChainResolver.getResolutionContext(lid, Object.keys(linesObj));
-          _isBranch = !!(_rctx && _rctx.isBranch);
-        }
-      } catch(_e) {}
-      if (line.branchOf || _isBranch) {
-        var _skip = true;
-        if (window.LineOperationSystems) {
-          Object.keys(window.LineOperationSystems).some(function(_op) {
-            return window.LineOperationSystems[_op].some(function(_sys) {
-              if (_sys.isStandalone && _sys.lineIds && _sys.lineIds.indexOf(lid) >= 0) { _skip = false; return true; }
-            });
-          });
-        }
-        if (_skip) continue;
-      }
       if (!groups[op]) {
         groups[op] = [];
         opOrder.push(op);
@@ -253,8 +298,7 @@
     var unknownOps = opOrder.filter(function(op){ return knownOps.indexOf(op) === -1; });
     opOrder = knownOps.filter(function(op){ return groups[op]; }).concat(unknownOps);
 
-    // Sort lines within each operator group by lineOrder
-    // Secondary: use LinePresentationService for JR code order, metro order, etc.
+    // Sort fallback lines within each operator group by lineOrder
     var presentationOrderMap = (window.LinePresentationService && window.UNIFIED_LINES)
       ? window.LinePresentationService.getDisplayOrderMap(window.UNIFIED_LINES) : {};
     for (var op in groups) {
@@ -263,7 +307,6 @@
           var idxA = a.sortIdx;
           var idxB = b.sortIdx;
           if (idxA !== idxB) return idxA - idxB;
-          // Secondary sort by presentation service order
           var pA = presentationOrderMap[a.id] || 99999;
           var pB = presentationOrderMap[b.id] || 99999;
           return pA - pB;
@@ -276,8 +319,29 @@
       var op = opOrder[o];
       html += '<div class="rs-operator-group"><div class="rs-operator-title">' + escapeHtml(tOp(op)) + '</div>'
         + '<div class="rs-cards-container">';
+      // Running-system cards (LOS authority), then per-line fallback for uncovered lines
+      var losKey = null;
+      try {
+        if (window.TransitConstants && typeof window.TransitConstants.toLosKey === "function") losKey = window.TransitConstants.toLosKey(op);
+      } catch(_e) {}
+      var systems = (losKey && window.LineOperationSystems && window.LineOperationSystems[losKey]) ? window.LineOperationSystems[losKey] : null;
+      var covered = {};
+      if (systems) {
+        for (var s = 0; s < systems.length; s++) {
+          var sys = systems[s];
+          var sysIds = sys.lineIds || [];
+          var memberIds = [];
+          for (var m = 0; m < sysIds.length; m++) {
+            if (linesObj[sysIds[m]]) { memberIds.push(sysIds[m]); covered[sysIds[m]] = true; }
+          }
+          if (memberIds.length === 0) continue;
+          html += renderSystemCard(sys, memberIds, linesObj, { mode: mode });
+        }
+      }
       for (var k = 0; k < groups[op].length; k++) {
-        html += renderCard(groups[op][k].line, groups[op][k].id, { mode: mode });
+        var g = groups[op][k];
+        if (covered[g.id]) continue;
+        html += renderCard(g.line, g.id, { mode: mode });
       }
       html += "</div></div>";
     }
@@ -292,17 +356,15 @@
   // ========== Data management ==========
 
   function setLines(lines) { _lines = lines || {}; notify(); }
-  function setDelayData(data) { _delayData = data || {}; notify(); }
   function setPositions(positions) { _positions = positions || {}; notify(); }
 
   function getLine(lineId) { return _lines[lineId] || null; }
-  function getDelayInfo(lineId) { return _delayData[lineId] || null; }
   function getPositions(lineId) { return _positions[lineId] || []; }
 
   function subscribe(listener) {
     if (_listeners.indexOf(listener) === -1) {
       _listeners.push(listener);
-      try { listener(_lines, _delayData, _positions); } catch(e) {}
+      try { listener(_lines, null, _positions); } catch(e) {}
     }
   }
 
@@ -313,7 +375,7 @@
 
   function notify() {
     for (var i = 0; i < _listeners.length; i++) {
-      try { _listeners[i](_lines, _delayData, _positions); } catch(e) {}
+      try { _listeners[i](_lines, null, _positions); } catch(e) {}
     }
   }
 
@@ -329,10 +391,8 @@
     renderCard: renderCard,
     renderList: renderList,
     setLines: setLines,
-    setDelayData: setDelayData,
     setPositions: setPositions,
     getLine: getLine,
-    getDelayInfo: getDelayInfo,
     getPositions: getPositions,
     subscribe: subscribe,
     unsubscribe: unsubscribe,
@@ -340,13 +400,13 @@
       if (_initialized) return;
       _initialized = true;
       if (window.UNIFIED_LINES) setLines(window.UNIFIED_LINES);
-      if (window.ODPT_DELAY_DATA) setDelayData(window.ODPT_DELAY_DATA);
+
       if (window.DataFusion) {
         var fused = window.DataFusion.getFusedData();
         if (fused && fused.lines) setLines(fused.lines);
         window.DataFusion.subscribe(function(fd) {
           if (fd && fd.lines) setLines(fd.lines);
-          if (fd && fd.delayInfo) setDelayData(fd.delayInfo);
+
         });
       }
       initLangSupport();
