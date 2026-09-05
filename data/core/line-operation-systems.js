@@ -1059,7 +1059,7 @@ window.LineOperationSystems = {
       nameZh: "机场线",
       nameEn: "Airport Line",
       nameKo: "",
-      color: "#e60012",
+      color: "#F15A22",
       lineIds: ["KeikyuAirport"],
       icon: "../images/鉄道/京急電鉄/空港線.png",
       order: 2
@@ -1070,9 +1070,9 @@ window.LineOperationSystems = {
       nameZh: "久里滨线",
       nameEn: "Kurihama Line",
       nameKo: "",
-      color: "#e60012",
+      color: "#00A0DC",
       lineIds: ["KeikyuKurihama"],
-      icon: "",
+      icon: "../images/鉄道/京急電鉄/久里浜線.png",
       order: 3
     },
     {
@@ -1081,9 +1081,9 @@ window.LineOperationSystems = {
       nameZh: "逗子线",
       nameEn: "Zushi Line",
       nameKo: "",
-      color: "#e60012",
+      color: "#00A0DC",
       lineIds: ["KeikyuZushi"],
-      icon: "",
+      icon: "../images/鉄道/京急電鉄/逗子線.png",
       order: 4
     },
     {
@@ -1092,9 +1092,9 @@ window.LineOperationSystems = {
       nameZh: "大师线",
       nameEn: "Daishi Line",
       nameKo: "",
-      color: "#e60012",
+      color: "#00A0E8",
       lineIds: ["Daishi_Keikyu"],
-      icon: "",
+      icon: "../images/鉄道/京急電鉄/大師線.png",
       order: 5
     }
   ],
