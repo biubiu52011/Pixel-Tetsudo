@@ -10706,6 +10706,108 @@
       ],
       "throughServices": [],
       "transferStations": []
+    },
+    "TokyuOimachi": {
+      "nameJa": "東急大井町線",
+      "nameEn": "Tokyu Oimachi Line",
+      "operator": "Tokyu",
+      "color": "#f39700",
+      "code": "OM",
+      "stations": [
+        "Oimachi",
+        "Shimo-shimmei",
+        "Togoshi-koen",
+        "Nakanobu",
+        "Ebara-machi",
+        "Hatanodai",
+        "Kita-senzoku",
+        "Ookayama",
+        "Midorigaoka",
+        "Jiyugaoka",
+        "Kuhombutsu",
+        "Oyamadai",
+        "Todoroki",
+        "Kaminoge",
+        "Futako-tamagawa",
+        "Mizonokuchi"
+      ]
+    },
+    "TokyuMeguro": {
+      "nameJa": "東急目黒線",
+      "nameEn": "Tokyu Meguro Line",
+      "operator": "Tokyu",
+      "color": "#009b9e",
+      "code": "MG",
+      "stations": [
+        "Meguro",
+        "Fudo-mae",
+        "Musashi-koyama",
+        "Nishi-koyama",
+        "Senzoku",
+        "Ookayama",
+        "Okusawa",
+        "Denen-chofu",
+        "Tamagawa",
+        "Shin-maruko",
+        "Musashi-kosugi",
+        "Moto-sumiyoshi",
+        "Hiyoshi"
+      ]
+    },
+    "TokyuIkegami": {
+      "nameJa": "東急池上線",
+      "nameEn": "Tokyu Ikegami Line",
+      "operator": "Tokyu",
+      "color": "#ee7b88",
+      "code": "IK",
+      "stations": [
+        "Gotanda",
+        "Osaki-hirokoji",
+        "Togoshi-ginza",
+        "Ebara-nakanobu",
+        "Hatanodai",
+        "Nagahara",
+        "Senzoku-ike",
+        "Ishikawa-dai",
+        "Yukigaya-otsuka",
+        "Ontakesan",
+        "Kugahara",
+        "Chidoricho",
+        "Ikegami",
+        "Hasunuma",
+        "Kamata"
+      ]
+    },
+    "TokyuSetagaya": {
+      "nameJa": "東急世田谷線",
+      "nameEn": "Tokyu Setagaya Line",
+      "operator": "Tokyu",
+      "color": "#fccc0a",
+      "code": "SG",
+      "stations": [
+        "Sangen-jaya",
+        "Nishi-taishido",
+        "Wakabayashi",
+        "Shoin-jinja-mae",
+        "Setagaya",
+        "Kamimachi",
+        "Miyanomachi",
+        "Yamashita",
+        "Matsubara",
+        "Shimo-takaido"
+      ]
+    },
+    "TokyuKodomonokuni": {
+      "nameJa": "東急こどもの国線",
+      "nameEn": "Tokyu Kodomonokuni Line",
+      "operator": "Tokyu",
+      "color": "#00a850",
+      "code": "KD",
+      "stations": [
+        "Nagatsuta",
+        "Onda",
+        "Kodomo-no-kuni"
+      ]
     }
   },
   "name_map": {

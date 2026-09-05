@@ -582,6 +582,61 @@ window.LineOperationSystems = {
       lineIds: ["TokyuToyoko"],
       icon: "../images/鉄道/東急電鉄/東横線.png",
       order: 3
+    },
+    {
+      code: "OM",
+      nameJa: "東急大井町線",
+      nameZh: "东急大井町线",
+      nameEn: "Tokyu Oimachi Line",
+      nameKo: "",
+      color: "#f39700",
+      lineIds: ["TokyuOimachi"],
+      icon: "../images/鉄道/東急電鉄/大井町線.png",
+      order: 4
+    },
+    {
+      code: "MG",
+      nameJa: "東急目黒線",
+      nameZh: "东急目黑线",
+      nameEn: "Tokyu Meguro Line",
+      nameKo: "",
+      color: "#009b9e",
+      lineIds: ["TokyuMeguro"],
+      icon: "../images/鉄道/東急電鉄/目黒線.png",
+      order: 5
+    },
+    {
+      code: "IK",
+      nameJa: "東急池上線",
+      nameZh: "东急池上线",
+      nameEn: "Tokyu Ikegami Line",
+      nameKo: "",
+      color: "#ee7b88",
+      lineIds: ["TokyuIkegami"],
+      icon: "../images/鉄道/東急電鉄/池上線.png",
+      order: 6
+    },
+    {
+      code: "SG",
+      nameJa: "東急世田谷線",
+      nameZh: "东急世田谷线",
+      nameEn: "Tokyu Setagaya Line",
+      nameKo: "",
+      color: "#fccc0a",
+      lineIds: ["TokyuSetagaya"],
+      icon: "../images/鉄道/東急電鉄/世田谷線.png",
+      order: 7
+    },
+    {
+      code: "KD",
+      nameJa: "東急こどもの国線",
+      nameZh: "东急儿童国线",
+      nameEn: "Tokyu Kodomonokuni Line",
+      nameKo: "",
+      color: "#00a850",
+      lineIds: ["TokyuKodomonokuni"],
+      icon: "../images/鉄道/東急電鉄/こどもの国線.png",
+      order: 8
     }
   ],
   "KEIO": [
