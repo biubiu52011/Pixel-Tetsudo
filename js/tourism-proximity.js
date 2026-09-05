@@ -1,4 +1,4 @@
-/**
+﻿/**
  * TourismProximity — Unified proximity API
  * Centralized Haversine + caching for all Tourism-related distance queries.
  *
@@ -40,6 +40,19 @@
     if (meters === Infinity || meters === null || isNaN(meters)) return null;
     if (meters < 1000) return Math.round(meters) + 'm';
     return (meters / 1000).toFixed(1) + 'km';
+  }
+
+  /**
+   * Format distance as walking minutes (user-facing display)
+   * Assumes average walking speed of 80m/min
+   */
+  function formatWalkMinutes(meters, i18n) {
+    if (meters === Infinity || meters === null || isNaN(meters)) return null;
+    var atStation = i18n && i18n.at_station ? i18n.at_station : '駅前';
+    var minWalk = i18n && i18n.min_walk ? i18n.min_walk : '分徒歩';
+    if (meters < 100) return atStation;
+    var mins = Math.round(meters / 80);
+    return mins + ' ' + minWalk;
   }
 
   /**
@@ -98,7 +111,7 @@
           results.push({
             spot: spot,
             distance: dist,
-            distanceText: formatDistance(dist),
+            distanceText: formatWalkMinutes(dist),
             stationId: sk
           });
         }
@@ -138,6 +151,7 @@
     getNearbySpotsByStation: getNearbySpotsByStation,
     getDistance: getDistance,
     formatDistance: formatDistance,
+    formatWalkMinutes: formatWalkMinutes,
     invalidateCache: invalidateCache,
     // Expose constants for backward compatibility
     DEFAULT_RADIUS: DEFAULT_RADIUS,

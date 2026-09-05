@@ -117,12 +117,6 @@ var currentStationKey = null;
     return "article-hero--landmark";
   }
 
-  function formatDistance(meters) {
-    if (meters < 100) return t('detail.at_station');
-    var mins = Math.round(meters / 80);
-    return mins + ' ' + t('detail.min_walk');
-  }
-
   // Find nearest station ID to a lat/lng (excludes 0,0 stations)
   function getNearestStationId(lat, lng) {
     var coords = window.STATION_COORDS || {};
@@ -168,7 +162,7 @@ var currentStationKey = null;
       var sLat = sc[0] || 0, sLng = sc[1] || 0;
       if (sLat && sLng) {
         var dist = TourismProximity.getDistance(sLat, sLng, mapLat, mapLng);
-        distText = formatDistance(dist);
+        distText = TourismProximity.formatWalkMinutes(dist, { at_station: t('detail.at_station'), min_walk: t('detail.min_walk') });
         }
     }
     // Fallback: use spot's own dist/dir

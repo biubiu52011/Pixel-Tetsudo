@@ -216,7 +216,11 @@ function renderGrid() {
     }
 
     spotList = spotList.filter(function(s) { return !s.isAcross; });
-    spotList.sort(function(a, b) { return (a.distText || '').localeCompare(b.distText || ''); });
+    spotList.sort(function(a, b) {
+      if (a.distM === null || a.distM === undefined) return 1;
+      if (b.distM === null || b.distM === undefined) return -1;
+      return a.distM - b.distM;
+    });
 
     if (spotList.length === 0) {
       dom.grid.innerHTML = '';
