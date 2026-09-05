@@ -497,7 +497,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#002d62",
       lineIds: ["TobuIsesaki"],
-      icon: "../images/鉄道/東武鉄道/伊勢崎線.png",
+      icon: "../images/鉄道/東武鉄道/伊勢崎線 佐野線 桐生線 小泉線 小泉線支線.png",
       order: 2
     },
     {
@@ -519,7 +519,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#e46c0a",
       lineIds: ["TobuNikko"],
-      icon: "../images/鉄道/東武鉄道/日光線.png",
+      icon: "../images/鉄道/東武鉄道/日光線 宇都宮線 鬼怒川線.png",
       order: 4
     },
     {
@@ -938,7 +938,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#e60012",
       lineIds: ["Keikyu"],
-      icon: "../images/鉄道/京浜急行電鉄/本線.png",
+      icon: "../images/鉄道/京急電鉄/京急本線.png",
       order: 1
     },
     {
@@ -949,7 +949,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#e60012",
       lineIds: ["KeikyuAirport"],
-      icon: "../images/鉄道/京浜急行電鉄/空港線.png",
+      icon: "../images/鉄道/京急電鉄/空港線.png",
       order: 2
     },
     {
