@@ -19,7 +19,7 @@
       "detail.dir_SE": "SE",
       "detail.dir_SW": "SW",
       "detail.dir_W": "W",
-      "detail.direction": "Direction",
+      "detail.direction": "Nearest Exit",
       "detail.distance": "Distance",
       "detail.fallback_best_time": "Year-round",
             "detail.fallback_station": "nearby attraction",
@@ -208,7 +208,7 @@
       "detail.dir_SE": "\u4e1c\u5357",
       "detail.dir_SW": "\u897f\u5357",
       "detail.dir_W": "\u897f",
-      "detail.direction": "\u65b9\u5411",
+      "detail.direction": "\u6700\u8fd1\u51fa\u5165\u53e3",
       "detail.distance": "\u8ddd\u79bb",
       "detail.fallback_best_time": "\u5168\u5e74",
             "detail.fallback_station": "\u9644\u8fd1\u666f\u70b9",
@@ -397,7 +397,7 @@
       "detail.dir_SE": "\u5357\u6771",
       "detail.dir_SW": "\u5357\u897f",
       "detail.dir_W": "\u897f",
-      "detail.direction": "\u65b9\u5411",
+      "detail.direction": "\u6700\u5bc4\u308a\u51fa\u5165\u53e3",
       "detail.distance": "\u8ddd\u96e2",
       "detail.fallback_best_time": "\u901a\u5e74",
             "detail.fallback_station": "\u5468\u8fb9\u306e\u89b3\u5149\u30b9\u30dd\u30c3\u30c8",
@@ -586,7 +586,7 @@
       "detail.dir_SE": "\ub0a8\ub3d9",
       "detail.dir_SW": "\ub0a8\uc11c",
       "detail.dir_W": "\uc11c",
-      "detail.direction": "\ubc29\ud5a5",
+      "detail.direction": "\uac00\uc7a5 \uac00\uae4c\uc6b4 \ucd9c\uad6c",
       "detail.distance": "\uac70\ub9ac",
       "detail.fallback_best_time": "\uc5f0\uc911\ubb34\ud734",
             "detail.fallback_station": "\uadfc\ucc98 \uad00\uad11\uc9c0",
@@ -773,6 +773,9 @@
 
 
  
+
+
+
 
 
 
