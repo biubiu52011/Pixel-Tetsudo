@@ -4,9 +4,7 @@
  * This file defines how lines are displayed, grouped, and ordered.
  * line_id references are canonical identifiers from railway_data.json
  *
- * v4.3.42: Regenerated from authoritative Tokyo-area running-system
- * table (運行系統名 / official HEX / 路線記号). DB lines not covered
- * by the table are rendered per-line by the UI fallback path.
+ * v4.3.122: Split all multi-line private railway systems into individual cards
  */
 
 /* global window */
@@ -332,7 +330,6 @@ window.LineOperationSystems = {
       order: 29
     }
   ],
-
   "TOKYO_METRO": [
     {
       code: "C",
@@ -488,7 +485,7 @@ window.LineOperationSystems = {
       nameEn: "Noda Line (Urban Park Line)",
       nameKo: "",
       color: "#0093d0",
-      lineIds: ["Noda", "TobuNoda"],
+      lineIds: ["TobuNoda"],
       icon: "../images/鉄道/東武鉄道/野田線.png",
       order: 1
     },
@@ -499,8 +496,8 @@ window.LineOperationSystems = {
       nameEn: "Isesaki Line (Skytree Line)",
       nameKo: "",
       color: "#002d62",
-      lineIds: ["TobuIsesaki", "Skytree", "TobuSkytree"],
-      icon: "../images/鉄道/東武鉄道/伊勢崎線 佐野線 桐生線 小泉線 小泉線支線.png",
+      lineIds: ["TobuIsesaki"],
+      icon: "../images/鉄道/東武鉄道/伊勢崎線.png",
       order: 2
     },
     {
@@ -521,9 +518,20 @@ window.LineOperationSystems = {
       nameEn: "Nikko Line",
       nameKo: "",
       color: "#e46c0a",
-      lineIds: ["TobuNikko", "Nikkoku"],
-      icon: "../images/鉄道/東武鉄道/日光線 宇都宮線 鬼怒川線.png",
+      lineIds: ["TobuNikko"],
+      icon: "../images/鉄道/東武鉄道/日光線.png",
       order: 4
+    },
+    {
+      code: "TK",
+      nameJa: "鬼怒川線",
+      nameZh: "鬼怒川线",
+      nameEn: "Kinugawa Line",
+      nameKo: "",
+      color: "#e46c0a",
+      lineIds: ["Nikkoku"],
+      icon: "",
+      order: 5
     }
   ],
   "SEIBU": [
@@ -534,9 +542,53 @@ window.LineOperationSystems = {
       nameEn: "Ikebukuro Line",
       nameKo: "",
       color: "#4da72a",
-      lineIds: ["Ikebukuro","SeibuToshima","SeibuChichibu","Yurakucho_Seibu","Seibu_Sayama"],
+      lineIds: ["Ikebukuro"],
       icon: "../images/鉄道/西武鉄道/西武池袋線.png",
       order: 1
+    },
+    {
+      code: "STO",
+      nameJa: "豊島線",
+      nameZh: "丰岛线",
+      nameEn: "Toshima Line",
+      nameKo: "",
+      color: "#4da72a",
+      lineIds: ["SeibuToshima"],
+      icon: "",
+      order: 2
+    },
+    {
+      code: "SCH",
+      nameJa: "秩父線",
+      nameZh: "秩父线",
+      nameEn: "Chichibu Line",
+      nameKo: "",
+      color: "#4da72a",
+      lineIds: ["SeibuChichibu"],
+      icon: "",
+      order: 3
+    },
+    {
+      code: "SYU",
+      nameJa: "西武有楽町線",
+      nameZh: "西武有乐町线",
+      nameEn: "Seibu Yurakucho Line",
+      nameKo: "",
+      color: "#4da72a",
+      lineIds: ["Yurakucho_Seibu"],
+      icon: "",
+      order: 4
+    },
+    {
+      code: "SSA",
+      nameJa: "狭山線",
+      nameZh: "狭山线",
+      nameEn: "Sayama Line",
+      nameKo: "",
+      color: "#4da72a",
+      lineIds: ["Seibu_Sayama"],
+      icon: "",
+      order: 5
     },
     {
       code: "SK",
@@ -547,7 +599,7 @@ window.LineOperationSystems = {
       color: "#4da72a",
       lineIds: ["Kokubunji"],
       icon: "../images/鉄道/西武鉄道/西武国分寺線.png",
-      order: 2
+      order: 6
     },
     {
       code: "SS",
@@ -556,9 +608,20 @@ window.LineOperationSystems = {
       nameEn: "Shinjuku Line",
       nameKo: "",
       color: "#0087c5",
-      lineIds: ["SeibuShinjuku","Hamura"],
+      lineIds: ["SeibuShinjuku"],
       icon: "../images/鉄道/西武鉄道/西武新宿線.png",
-      order: 3
+      order: 7
+    },
+    {
+      code: "SHM",
+      nameJa: "拝島線",
+      nameZh: "拜岛线",
+      nameEn: "Haijima Line",
+      nameKo: "",
+      color: "#0087c5",
+      lineIds: ["Hamura"],
+      icon: "",
+      order: 8
     },
     {
       code: "ST",
@@ -569,7 +632,7 @@ window.LineOperationSystems = {
       color: "#4da72a",
       lineIds: ["SeibuTamako"],
       icon: "../images/鉄道/西武鉄道/西武多摩湖線.png",
-      order: 4
+      order: 9
     },
     {
       code: "SW",
@@ -580,7 +643,7 @@ window.LineOperationSystems = {
       color: "#4da72a",
       lineIds: ["SeibuTamagawa"],
       icon: "../images/鉄道/西武鉄道/西武多摩川線.png",
-      order: 5
+      order: 10
     },
     {
       code: "SY",
@@ -591,10 +654,9 @@ window.LineOperationSystems = {
       color: "#ffffff",
       lineIds: ["SeibuYamaguchi"],
       icon: "../images/鉄道/西武鉄道/西武山口線.png",
-      order: 6
+      order: 11
     }
   ],
-
   "TOKYU": [
     {
       code: "DT",
@@ -704,9 +766,64 @@ window.LineOperationSystems = {
       nameEn: "Keio Line",
       nameKo: "",
       color: "#dd057c",
-      lineIds: ["KeioMain", "KeioShin", "KeioSagami", "KeioTakao", "KeioKeibajo", "KeioZoo"],
-      icon: "../images/鉄道/京王電鉄/相模原線.png",
+      lineIds: ["KeioMain"],
+      icon: "../images/鉄道/京王電鉄/京王線.png",
       order: 2
+    },
+    {
+      code: "KSN",
+      nameJa: "京王新線",
+      nameZh: "京王新线",
+      nameEn: "Keio New Line",
+      nameKo: "",
+      color: "#dd057c",
+      lineIds: ["KeioShin"],
+      icon: "",
+      order: 3
+    },
+    {
+      code: "KSM",
+      nameJa: "相模原線",
+      nameZh: "相模原线",
+      nameEn: "Sagamihara Line",
+      nameKo: "",
+      color: "#dd057c",
+      lineIds: ["KeioSagami"],
+      icon: "../images/鉄道/京王電鉄/相模原線.png",
+      order: 4
+    },
+    {
+      code: "KTK",
+      nameJa: "高尾線",
+      nameZh: "高尾线",
+      nameEn: "Takao Line",
+      nameKo: "",
+      color: "#dd057c",
+      lineIds: ["KeioTakao"],
+      icon: "",
+      order: 5
+    },
+    {
+      code: "KKB",
+      nameJa: "競馬場線",
+      nameZh: "竞马场线",
+      nameEn: "Keibajo Line",
+      nameKo: "",
+      color: "#dd057c",
+      lineIds: ["KeioKeibajo"],
+      icon: "",
+      order: 6
+    },
+    {
+      code: "KZO",
+      nameJa: "動物園線",
+      nameZh: "动物园线",
+      nameEn: "Dobutsuen Line",
+      nameKo: "",
+      color: "#dd057c",
+      lineIds: ["KeioZoo"],
+      icon: "",
+      order: 7
     }
   ],
   "ODAKYU": [
@@ -717,48 +834,191 @@ window.LineOperationSystems = {
       nameEn: "Odawara Line",
       nameKo: "",
       color: "#0067b0",
-      lineIds: ["OdakyuOdawara", "Odawara", "OdakyuEnoshima", "OdakyuTama"],
+      lineIds: ["OdakyuOdawara"],
       icon: "../images/鉄道/小田急電鉄/小田原線.png",
       order: 1
+    },
+    {
+      code: "OE",
+      nameJa: "江ノ島線",
+      nameZh: "江之岛线",
+      nameEn: "Enoshima Line",
+      nameKo: "",
+      color: "#0067b0",
+      lineIds: ["OdakyuEnoshima"],
+      icon: "",
+      order: 2
+    },
+    {
+      code: "OT",
+      nameJa: "多摩線",
+      nameZh: "多摩线",
+      nameEn: "Tama Line",
+      nameKo: "",
+      color: "#0067b0",
+      lineIds: ["OdakyuTama"],
+      icon: "",
+      order: 3
     }
   ],
   "KEISEI": [
     {
       code: "KS",
-      nameJa: "京成本線",
-      nameZh: "京成本线",
-      nameEn: "Keisei Main Line",
+      nameJa: "本線",
+      nameZh: "本线",
+      nameEn: "Main Line",
       nameKo: "",
       color: "#0054a6",
-      lineIds: ["Keisei", "KeiseiOshiage", "KeiseiKanamachi", "KeiseiChiba", "KeiseiChihara", "NaritaSkyAccess"],
+      lineIds: ["Keisei"],
       icon: "../images/鉄道/京成電鉄/京成本線.png",
       order: 1
+    },
+    {
+      code: "KOS",
+      nameJa: "押上線",
+      nameZh: "押上线",
+      nameEn: "Oshiage Line",
+      nameKo: "",
+      color: "#0054a6",
+      lineIds: ["KeiseiOshiage"],
+      icon: "",
+      order: 2
+    },
+    {
+      code: "KNS",
+      nameJa: "金町線",
+      nameZh: "金町线",
+      nameEn: "Kanamachi Line",
+      nameKo: "",
+      color: "#0054a6",
+      lineIds: ["KeiseiKanamachi"],
+      icon: "",
+      order: 3
+    },
+    {
+      code: "KCB",
+      nameJa: "千葉線",
+      nameZh: "千叶线",
+      nameEn: "Chiba Line",
+      nameKo: "",
+      color: "#0054a6",
+      lineIds: ["KeiseiChiba"],
+      icon: "",
+      order: 4
+    },
+    {
+      code: "KCH",
+      nameJa: "千原線",
+      nameZh: "千原线",
+      nameEn: "Chihara Line",
+      nameKo: "",
+      color: "#0054a6",
+      lineIds: ["KeiseiChihara"],
+      icon: "",
+      order: 5
+    },
+    {
+      code: "KSA",
+      nameJa: "成田スカイアクセス線",
+      nameZh: "成田机场Access线",
+      nameEn: "Narita Sky Access Line",
+      nameKo: "",
+      color: "#f39800",
+      lineIds: ["NaritaSkyAccess"],
+      icon: "",
+      order: 6
     }
   ],
   "KEIKYU": [
     {
       code: "KK",
-      nameJa: "京急本線",
-      nameZh: "京急本线",
-      nameEn: "Keikyu Main Line",
+      nameJa: "本線",
+      nameZh: "本线",
+      nameEn: "Main Line",
       nameKo: "",
       color: "#e60012",
-      lineIds: ["Keikyu", "KeikyuAirport", "KeikyuKurihama", "KeikyuZushi", "Daishi_Keikyu"],
-      icon: "../images/鉄道/京急電鉄/空港線.png",
+      lineIds: ["Keikyu"],
+      icon: "../images/鉄道/京浜急行電鉄/本線.png",
       order: 1
+    },
+    {
+      code: "KKA",
+      nameJa: "空港線",
+      nameZh: "机场线",
+      nameEn: "Airport Line",
+      nameKo: "",
+      color: "#e60012",
+      lineIds: ["KeikyuAirport"],
+      icon: "../images/鉄道/京浜急行電鉄/空港線.png",
+      order: 2
+    },
+    {
+      code: "KKU",
+      nameJa: "久里浜線",
+      nameZh: "久里滨线",
+      nameEn: "Kurihama Line",
+      nameKo: "",
+      color: "#e60012",
+      lineIds: ["KeikyuKurihama"],
+      icon: "",
+      order: 3
+    },
+    {
+      code: "KKZ",
+      nameJa: "逗子線",
+      nameZh: "逗子线",
+      nameEn: "Zushi Line",
+      nameKo: "",
+      color: "#e60012",
+      lineIds: ["KeikyuZushi"],
+      icon: "",
+      order: 4
+    },
+    {
+      code: "KKD",
+      nameJa: "大師線",
+      nameZh: "大师线",
+      nameEn: "Daishi Line",
+      nameKo: "",
+      color: "#e60012",
+      lineIds: ["Daishi_Keikyu"],
+      icon: "",
+      order: 5
     }
   ],
   "SOTETSU": [
     {
       code: "SO",
-      nameJa: "相鉄本線",
-      nameZh: "相铁本线",
-      nameEn: "Sotetsu Main Line",
+      nameJa: "本線",
+      nameZh: "本线",
+      nameEn: "Main Line",
       nameKo: "",
       color: "#003366",
-      lineIds: ["SotetsuMain", "SotetsuIzumino", "SotetsuShin-Yokohama"],
+      lineIds: ["SotetsuMain"],
       icon: "",
       order: 1
+    },
+    {
+      code: "SIZ",
+      nameJa: "いずみ野線",
+      nameZh: "泉野线",
+      nameEn: "Izumino Line",
+      nameKo: "",
+      color: "#003366",
+      lineIds: ["SotetsuIzumino"],
+      icon: "",
+      order: 2
+    },
+    {
+      code: "SSH",
+      nameJa: "相鉄新横浜線",
+      nameZh: "相铁新横滨线",
+      nameEn: "Sotetsu Shin-Yokohama Line",
+      nameKo: "",
+      color: "#003366",
+      lineIds: ["SotetsuShin-Yokohama"],
+      icon: "",
+      order: 3
     }
   ],
   "TSUKUBA_EXPRESS": [
@@ -877,5 +1137,5 @@ window.LineOperationSystems = {
       icon: "",
       order: 1
     }
-  ],
+  ]
 };
