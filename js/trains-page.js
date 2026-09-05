@@ -186,12 +186,25 @@
         }
         var _updatedIds = {};
         var _hasChanges = false;
+        // Count trains per station for offset
+        var _stationCount = {};
+        var _stationIdx = {};
+        for (var _pi0 = 0; _pi0 < positions.length; _pi0++) {
+          var _idx0 = Math.min(positions[_pi0].stationIndex || 0, _stations.length - 1);
+          _stationCount[_idx0] = (_stationCount[_idx0] || 0) + 1;
+        }
         for (var _pi = 0; _pi < positions.length; _pi++) {
           var _p = positions[_pi];
           var _idx = Math.min(_p.stationIndex || 0, _stations.length - 1);
           var _px, _py;
           if (_isLoop && _loopPts.length > _idx) { _px = _loopPts[_idx].x; _py = _loopPts[_idx].y; }
           else { _px = _mainCx; _py = _topP + _idx * _sp; }
+          // Offset multiple trains at same station horizontally
+          var _trainIdxAt = _stationIdx[_idx] || 0;
+          _stationIdx[_idx] = _trainIdxAt + 1;
+          var _totalAt = _stationCount[_idx] || 1;
+          var _offX = (_trainIdxAt - (_totalAt - 1) / 2) * 16;
+          _px += _offX;
           var _trainUid = (_p.trainId || ("train_" + _pi)) + "_" + (_p.stationIndex || 0);
           _updatedIds[_trainUid] = true;
           var _existingIcon = existingSvg.querySelector('[data-train-id="' + String(_trainUid).replace(/"/g, '') + '"]');
@@ -372,7 +385,14 @@
         }
         svg += "<text x=\"" + bx + "\" y=\"" + (branchTop - 6) + "\""+ "  font-size=\"8\" fill=\"" + escapeHtml(bColor) + "\""+ "  font-family=\"sans-serif\" font-weight=\"600\" text-anchor=\"middle\">" + escapeHtml(branch.name) + "</text>";
       }
-      for (var j = 0; j < positions.length; j++) {
+      // Count trains per station for horizontal offset
+      var _stCount = {};
+      var _stIdx = {};
+      for (var _j0 = 0; _j0 < positions.length; _j0++) {
+        var _i0 = Math.min(positions[_j0].stationIndex || 0, stations.length - 1);
+        _stCount[_i0] = (_stCount[_i0] || 0) + 1;
+      }
+for (var j = 0; j < positions.length; j++) {
         var p = positions[j];
         var idx = Math.min(p.stationIndex || 0, stations.length - 1);
         var px, py;
@@ -383,6 +403,11 @@
           px = mainCx;
           py = topP + idx * sp;
         }
+        // Offset multiple trains at same station
+        var _tIdx = _stIdx[idx] || 0;
+        _stIdx[idx] = _tIdx + 1;
+        var _total = _stCount[idx] || 1;
+        px += (_tIdx - (_total - 1) / 2) * 16;
         // Train icon (20x24, centered)
         var iconSrc = (window.TrainIcons && typeof window.TrainIcons.getTrainIcon === "function") ? window.TrainIcons.getTrainIcon(lineId, line.operator) : "";
         var isEstimated = p.estimated === true;
