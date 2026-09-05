@@ -160,7 +160,7 @@ window.TOURISM_OVERRIDE =
         "shopping",
         "landmark"
       ],
-      "image": "",
+      "image": "../images/観光地/阳光城 (Sunshine City).jpg",
       "bestTime": "10:00～22:00",
       "hours": "施設により異なる（概ね10:00～22:00）",
       "fee": "無料（入場）、各施設別途料金",
@@ -184,7 +184,7 @@ window.TOURISM_OVERRIDE =
         "shopping",
         "food"
       ],
-      "image": "",
+      "image": "../images/観光地/西武百货 池袋本店.jpg",
       "bestTime": "10:00～21:00",
       "hours": "10:00～21:00（一部店舗異なる）",
       "fee": "無料",
@@ -208,7 +208,7 @@ window.TOURISM_OVERRIDE =
         "shopping",
         "food"
       ],
-      "image": "",
+      "image": "../images/観光地/东武百货 池袋店.jpg",
       "bestTime": "10:00～21:00",
       "hours": "10:00～21:00（レストラン街は～23:00）",
       "fee": "無料",
@@ -232,7 +232,7 @@ window.TOURISM_OVERRIDE =
         "shopping",
         "modern"
       ],
-      "image": "",
+      "image": "../images/観光地/Animate 池袋本店.jpg",
       "bestTime": "10:00～21:00",
       "hours": "10:00～21:00",
       "fee": "無料",
@@ -256,7 +256,7 @@ window.TOURISM_OVERRIDE =
         "shopping",
         "modern"
       ],
-      "image": "",
+      "image": "../images/観光地/乙女路.jpg",
       "bestTime": "昼～夜",
       "hours": "各店異なる（概ね11:00～20:00）",
       "fee": "無料（自由散策）",
@@ -280,7 +280,7 @@ window.TOURISM_OVERRIDE =
         "park",
         "landmark"
       ],
-      "image": "",
+      "image": "../images/観光地/池袋西口公园.jpg",
       "bestTime": "日中～夜",
       "hours": "24時間開放",
       "fee": "無料",
@@ -305,7 +305,7 @@ window.TOURISM_OVERRIDE =
         "shrine",
         "nature"
       ],
-      "image": "",
+      "image": "../images/観光地/杂司谷鬼子母神堂.jpg",
       "bestTime": "日中",
       "hours": "境内自由（社務所9:00～17:00）",
       "fee": "無料",
@@ -328,7 +328,7 @@ window.TOURISM_OVERRIDE =
         "all",
         "shopping"
       ],
-      "image": "",
+      "image": "../images/観光地/LaLa Terrace 南千住.jpg",
       "bestTime": "10:00～21:00",
       "hours": "10:00～21:00（店舗により異なる）",
       "fee": "無料",
@@ -352,7 +352,7 @@ window.TOURISM_OVERRIDE =
         "shopping",
         "food"
       ],
-      "image": "",
+      "image": "../images/観光地/Bivi 南千住.jpg",
       "bestTime": "10:00～21:00",
       "hours": "10:00～21:00（店舗により異なる）",
       "fee": "無料",
@@ -375,7 +375,7 @@ window.TOURISM_OVERRIDE =
         "all",
         "nature"
       ],
-      "image": "",
+      "image": "../images/観光地/汐入公园 (Shioiri Park).jpg",
       "bestTime": "通年",
       "hours": "24時間開放",
       "fee": "無料",
@@ -398,7 +398,7 @@ window.TOURISM_OVERRIDE =
         "history",
         "all"
       ],
-      "image": "",
+      "image": "../images/観光地/延命寺 (首振地藏).jpg",
       "bestTime": "通年",
       "hours": "境内自由参拝",
       "fee": "無料",
@@ -421,7 +421,7 @@ window.TOURISM_OVERRIDE =
         "history",
         "all"
       ],
-      "image": "",
+      "image": "../images/観光地/回向院 (小冢原回向院).jpg",
       "bestTime": "通年",
       "hours": "境内自由参拝",
       "fee": "無料",
@@ -443,7 +443,7 @@ window.TOURISM_OVERRIDE =
       "tags": [
         "history"
       ],
-      "image": "",
+      "image": "../images/観光地/杉田玄白「解体新书」纪念碑.jpg",
       "bestTime": "通年",
       "hours": "境内自由参拝",
       "fee": "無料",
@@ -466,7 +466,7 @@ window.TOURISM_OVERRIDE =
         "nature",
         "all"
       ],
-      "image": "",
+      "image": "../images/観光地/荒川区立 瑞光公园.jpg",
       "bestTime": "通年",
       "hours": "24時間開放",
       "fee": "無料",
@@ -488,7 +488,7 @@ window.TOURISM_OVERRIDE =
       "tags": [
         "history"
       ],
-      "image": "",
+      "image": "../images/観光地/净闲寺 (投込寺).jpg",
       "bestTime": "通年",
       "hours": "境内自由参拝",
       "fee": "無料",
@@ -510,7 +510,7 @@ window.TOURISM_OVERRIDE =
       "tags": [
         "nature"
       ],
-      "image": "",
+      "image": "../images/観光地/隅田川 尾久桥附近步道.jpg",
       "bestTime": "通年",
       "hours": "24時間開放",
       "fee": "無料",
@@ -533,7 +533,7 @@ window.TOURISM_OVERRIDE =
         "food",
         "all"
       ],
-      "image": "",
+      "image": "../images/観光地/尾花 (Obana) 鳗鱼饭.jpg",
       "bestTime": "11:30～14:00 / 17:00～21:00",
       "hours": "11:30～14:00（L.O.13:30）/ 17:00～21:00（L.O.20:30）",
       "fee": "予算4000円～",
@@ -556,7 +556,7 @@ window.TOURISM_OVERRIDE =
         "history",
         "all"
       ],
-      "image": "",
+      "image": "../images/観光地/素盏雄神社.jpg",
       "bestTime": "通年",
       "hours": "境内自由参拝",
       "fee": "無料",
@@ -580,7 +580,7 @@ window.TOURISM_OVERRIDE =
         "history",
         "landmark"
       ],
-      "image": "",
+      "image": "../images/観光地/迭翠轩 (关屋之里碑).jpg",
       "bestTime": "",
       "hours": "",
       "fee": "無料",
@@ -600,7 +600,7 @@ window.TOURISM_OVERRIDE =
         "history",
         "shrine"
       ],
-      "image": "",
+      "image": "../images/観光地/吾妻稻荷神社.webp",
       "bestTime": "",
       "hours": "",
       "fee": "無料",
@@ -620,7 +620,7 @@ window.TOURISM_OVERRIDE =
         "nature",
         "park"
       ],
-      "image": "",
+      "image": "../images/観光地/柳原千草园.jpg",
       "bestTime": "",
       "hours": "",
       "fee": "無料",
@@ -640,7 +640,7 @@ window.TOURISM_OVERRIDE =
         "nature",
         "park"
       ],
-      "image": "",
+      "image": "../images/観光地/隅田川堤防步道 (千住发着场).jpg",
       "bestTime": "",
       "hours": "24時間開放",
       "fee": "無料",
@@ -660,7 +660,7 @@ window.TOURISM_OVERRIDE =
         "nature",
         "landmark"
       ],
-      "image": "",
+      "image": "../images/観光地/堀切大桥 (荒川河堤).jpg",
       "bestTime": "",
       "hours": "24時間開放",
       "fee": "無料",
@@ -679,7 +679,7 @@ window.TOURISM_OVERRIDE =
         "all",
         "shopping"
       ],
-      "image": "",
+      "image": "../images/観光地/大荣超市 千住曙町店.jpg",
       "bestTime": "",
       "hours": "",
       "fee": "",
@@ -699,7 +699,7 @@ window.TOURISM_OVERRIDE =
         "shopping",
         "food"
       ],
-      "image": "",
+      "image": "../images/観光地/柳原商荣会商店街.jpg",
       "bestTime": "",
       "hours": "",
       "fee": "",
@@ -719,7 +719,7 @@ window.TOURISM_OVERRIDE =
         "shopping",
         "food"
       ],
-      "image": "",
+      "image": "../images/観光地/学园街旭町商店街.jpg",
       "bestTime": "",
       "hours": "",
       "fee": "",
