@@ -213,22 +213,31 @@ var currentStationKey = null;
       + '<h3 class="section-heading">' + t('detail.tips') + '</h3>'
       + '<ul class="tips-list">';
     if (distText) tipsHtml += '<li>' + escapeHtml(t('detail.distance') + ': ' + distText) + '</li>';
-    tipsHtml += '<li>' + escapeHtml(t('detail.fallback_best_time')) + '</li>';
+    if (spot.tips && spot.tips.length > 0) {
+      for (var ti = 0; ti < spot.tips.length; ti++) {
+        tipsHtml += '<li>' + escapeHtml(spot.tips[ti]) + '</li>';
+      }
+    } else {
+      tipsHtml += '<li>' + escapeHtml(t('detail.fallback_best_time')) + '</li>';
+    }
     tipsHtml += '</ul></div>';
 
+    var spotHours = spot.hours || t('detail.unavailable');
+    var spotFee = spot.fee || t('detail.unavailable');
     // Info grid (hours, fees)
     var infoHtml = '<div class="article-section">'
       + '<h3 class="section-heading">' + t('detail.info_hours') + '</h3>'
       + '<div class="info-grid">'
-      + '<div class="info-row"><span class="info-label">' + t('detail.info_hours') + '</span><span class="info-value">' + escapeHtml(t('detail.unavailable')) + '</span></div>'
-      + '<div class="info-row"><span class="info-label">' + t('detail.info_fee') + '</span><span class="info-value">' + escapeHtml(t('detail.unavailable')) + '</span></div>'
+      + '<div class="info-row"><span class="info-label">' + t('detail.info_hours') + '</span><span class="info-value">' + escapeHtml(spotHours) + '</span></div>'
+      + '<div class="info-row"><span class="info-label">' + t('detail.info_fee') + '</span><span class="info-value">' + escapeHtml(spotFee) + '</span></div>'
       + '</div></div>';
 
     // Map container (OSM iframe)
     var mapHtml = '<div id="tourismMap" class="map-container"><div class="map-loading">' + (typeof t === 'function' ? t('detail.map_loading') : 'Loading map...') + '</div></div>';
 
     // Quick info bar
-    var quickInfo = '<div class="detail-quick-info">' + '<div class="qi-item"><div class="qi-label">' + t('detail.distance') + '</div><div class="qi-value">' + escapeHtml(distText || t('detail.near_station')) + '</div></div>' + '<div class="qi-item"><div class="qi-label">' + t('detail.best_time') + '</div><div class="qi-value">' + escapeHtml(t('detail.fallback_best_time')) + '</div></div>' + '</div>';
+    var spotBestTime = spot.bestTime || t('detail.fallback_best_time');
+    var quickInfo = '<div class="detail-quick-info">' + '<div class="qi-item"><div class="qi-label">' + t('detail.distance') + '</div><div class="qi-value">' + escapeHtml(distText || t('detail.near_station')) + '</div></div>' + '<div class="qi-item"><div class="qi-label">' + t('detail.best_time') + '</div><div class="qi-value">' + escapeHtml(spotBestTime) + '</div></div>' + '</div>';
 
     var heroClass = getHeroClassForGradient(gradient);
     var html = '<div class="article-hero ' + heroClass + '">'
