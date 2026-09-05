@@ -357,6 +357,66 @@
             this._timetableCache[key] = data;
         },
 
+        // 解析时间字符串为分钟数
+        _parseTimeToMinutes: function(timeStr) {
+            try {
+                if (!timeStr) return null;
+                var parts = timeStr.split(':');
+                if (parts.length < 2) return null;
+                var h = parseInt(parts[0], 10);
+                var m = parseInt(parts[1], 10);
+                if (h >= 24) h = h - 24;  // 处理跨午夜时间
+                return h * 60 + m;
+            } catch(e) { return null; }
+        },
+
+        // 获取当前时间（分钟数）
+        _getCurrentMinutes: function() {
+            try {
+                var now = new Date();
+                return now.getHours() * 60 + now.getMinutes();
+            } catch(e) { return 0; }
+        },
+
+        // 按当前时段过滤时刻表（只保留当前时间前后windowMinutes分钟内运行的列车）
+        filterTimetableByCurrentTime: function(data, windowMinutes) {
+            try {
+                if (!data || !Array.isArray(data) || data.length === 0) return [];
+                var window = windowMinutes || 90;  // 默认前后90分钟
+                var currentMin = this._getCurrentMinutes();
+                var self = this;
+
+                return data.filter(function(tt) {
+                    if (!tt) return false;
+                    var tto = tt['odpt:trainTimetableObject'];
+                    if (!tto || !Array.isArray(tto) || tto.length === 0) return false;
+
+                    // 获取第一站发车时间和最后一站到达时间
+                    var firstDep = self._parseTimeToMinutes(tto[0]['odpt:departureTime']);
+                    var lastArr = self._parseTimeToMinutes(tto[tto.length - 1]['odpt:arrivalTime'] || tto[tto.length - 1]['odpt:departureTime']);
+
+                    if (firstDep === null || lastArr === null) return true;  // 无法判断时保留
+
+                    // 检查列车是否在当前时段运行
+                    // 列车运行区间：[firstDep, lastArr]
+                    // 当前时段：[currentMin - window, currentMin + window]
+                    var inService = lastArr >= (currentMin - window) && firstDep <= (currentMin + window);
+                    return inService;
+                });
+            } catch(e) {
+                console.debug("[ODPT] filterTimetableByCurrentTime error:", e.message);
+                return data || [];
+            }
+        },
+
+        // 按线路获取时刻表（并按当前时段过滤）
+        getTimetableForRailwayFiltered: function(operator, railway, windowMinutes) {
+            var self = this;
+            return this.getTimetableForRailway(operator, railway).then(function(data) {
+                return self.filterTimetableByCurrentTime(data, windowMinutes);
+            });
+        },
+
         // 检查运营商是否支持某种API
         supports: function(operator, type) {
             var ep = ODPT_ENDPOINTS[operator];
