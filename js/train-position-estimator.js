@@ -12,6 +12,71 @@
 
   var ESTIMATOR_VERSION = 1;
 
+  // ========== Train type classification ==========
+  // 特急列车类型关键词
+  var LIMITED_EXPRESS_KEYWORDS = ['LimitedExpress', 'Limited Express', '特急', '快特', 'RapidLimitedExpress', 'AirportRapidLimitedExpress'];
+  
+  // 直通运行列车类型
+  var THROUGH_TRAIN_TYPES = {
+    'TH-LINER': 'Tobu-TokyoMetro through',
+    'TJ-LINER': 'Tobu Tojo line reserved',
+    'S-TRAIN': 'Seibu-TokyoMetro-Tokyu through',
+    'F-Liner': 'Tokyu-TokyoMetro-Seibu through',
+    'KeioLiner': 'Keio reserved train',
+    'CommuterSpecialRapid': 'JR commuter special rapid',
+    'ChuoSpecialRapid': 'JR Chuo special rapid',
+    'OmeSpecialRapid': 'JR Ome special rapid'
+  };
+
+  // 判断是否为特急列车
+  function isLimitedExpress(trainType) {
+    try {
+      if (!trainType) return false;
+      var typeStr = typeof trainType === 'object' ? JSON.stringify(trainType) : String(trainType);
+      for (var i = 0; i < LIMITED_EXPRESS_KEYWORDS.length; i++) {
+        if (typeStr.indexOf(LIMITED_EXPRESS_KEYWORDS[i]) >= 0) return true;
+      }
+      return false;
+    } catch(e) { return false; }
+  }
+
+  // 判断是否为直通运行列车
+  function isThroughTrain(trainType, trainNumber) {
+    try {
+      var typeStr = typeof trainType === 'object' ? JSON.stringify(trainType) : String(trainType);
+      // 检查列车类型
+      for (var key in THROUGH_TRAIN_TYPES) {
+        if (typeStr.indexOf(key) >= 0) return true;
+      }
+      // 检查列车编号（东武直通列车通常以特定字母结尾）
+      if (trainNumber) {
+        var numStr = String(trainNumber);
+        // 东武晴空塔线直通日比谷线的列车通常以S结尾
+        // 东武伊势崎线直通半藏门线的列车通常以K结尾
+        if (/[SK]$/.test(numStr)) return true;
+      }
+      return false;
+    } catch(e) { return false; }
+  }
+
+  // 获取列车类型分类
+  function classifyTrain(trainType, trainNumber) {
+    try {
+      var result = {
+        isLimitedExpress: isLimitedExpress(trainType),
+        isThroughTrain: isThroughTrain(trainType, trainNumber),
+        typeName: ''
+      };
+      var typeStr = typeof trainType === 'object' ? (trainType['odpt:trainType'] || JSON.stringify(trainType)) : String(trainType);
+      // 提取类型名称
+      var parts = typeStr.split(':');
+      result.typeName = parts.length > 1 ? parts[parts.length - 1] : typeStr;
+      return result;
+    } catch(e) {
+      return { isLimitedExpress: false, isThroughTrain: false, typeName: 'unknown' };
+    }
+  }
+
   // ========== Calendar detection ==========
   function getCurrentCalendars() {
     try {
@@ -193,11 +258,16 @@
           if (lastArrTime !== null && adjustedCurrentMin > lastArrTime + 5) continue; // 5 min grace
 
           processedTrainIds[trainNumber] = true;
+          var trainClassification = classifyTrain(tt['odpt:trainType'], trainNumber);
           positions.push({
             stationIndex: currentStationIndex,
             trainId: trainNumber,
             delayMin: delayMin,
-            estimated: true
+            estimated: true,
+            trainType: tt['odpt:trainType'] || '',
+            typeName: trainClassification.typeName,
+            isLimitedExpress: trainClassification.isLimitedExpress,
+            isThroughTrain: trainClassification.isThroughTrain
           });
         }
       }
