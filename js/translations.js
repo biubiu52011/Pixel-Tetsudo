@@ -544,10 +544,10 @@
       "op.TWR": "りんかい線",
       "op.MinatoMirai": "横浜高速鉄道",
       "op.MIR": "ひたちなか海浜鉄道",
-      "op.Rinkai": "臨海線",
+      "op.Rinkai": "東京臨海高速鉄道",
       "op.TsukubaExpress": "首都圏新都市鉄道",
       "op.Yurikamome": "ゆりかもめ",
-      "op.TamaMonorail": "多摩モノレール",
+      "op.TamaMonorail": "多摩都市モノレール",
       "op.ShonanMonorail": "湘南モノレール",
     },
     ko: {
