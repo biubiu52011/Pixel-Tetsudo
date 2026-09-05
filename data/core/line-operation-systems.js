@@ -1249,5 +1249,18 @@ window.LineOperationSystems = {
       icon: "",
       order: 1
     }
+  ],
+  "MIR": [
+    {
+      code: "MIR",
+      nameJa: "湊線",
+      nameZh: "凑线",
+      nameEn: "Minato Line",
+      nameKo: "",
+      color: "#0066B3",
+      lineIds: ["HitachiNakaKaimin"],
+      icon: "",
+      order: 1
+    }
   ]
 };
