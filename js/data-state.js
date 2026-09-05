@@ -142,7 +142,13 @@
     if (sys.icon) {
       iconHtml = '<img class="rs-line-icon" src="' + escapeHtml(sys.icon) + '" alt="" loading="lazy">';
     } else {
-      iconHtml = '<div class="rs-system-badge">' + escapeHtml(code || "?") + '</div>';
+      var _firstLine = memberIds.length > 0 ? (linesObj[memberIds[0]] || {}) : {};
+      var _sysOp = _firstLine.operator || sys.operator || "";
+      if (_sysOp === "JR-East") {
+        iconHtml = '<div class="rs-line-icon-fallback"><img src="../images/鉄道/JR東日本/JRグループ.png" alt="JR"></div>';
+      } else {
+        iconHtml = '<div class="rs-system-badge">' + escapeHtml(code || "?") + '</div>';
+      }
     }
     return '<div class="rs-line-card rs-system-card" data-line="' + escapeHtml(firstId) + '" data-system="' + escapeHtml(code) + '" data-lines="' + escapeHtml(memberIds.join(",")) + '" data-line-color="' + escapeHtml(color) + '">'
       + iconHtml
