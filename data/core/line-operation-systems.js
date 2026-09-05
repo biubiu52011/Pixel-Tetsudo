@@ -695,7 +695,7 @@ window.LineOperationSystems = {
       nameEn: "Keisei Main Line",
       nameKo: "",
       color: "#0054a6",
-      lineIds: ["Keisei"],
+      lineIds: ["Keisei", "KeiseiOshiage", "KeiseiKanamachi", "KeiseiChiba", "KeiseiChihara", "NaritaSkyAccess"],
       icon: "../images/鉄道/京成電鉄/京成本線.png",
       order: 1
     }

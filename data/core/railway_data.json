@@ -10841,6 +10841,84 @@
         "Kuragano",
         "Takasaki"
       ]
+    },
+    "KeiseiOshiage": {
+      "nameJa": "京成押上線",
+      "nameEn": "Keisei Oshiage Line",
+      "operator": "Keisei",
+      "color": "#0054a6",
+      "code": "KS",
+      "stations": [
+        "Oshiage",
+        "Keisei-Hikifune",
+        "Yahiro",
+        "Yotsugi",
+        "Keisei-Tateishi",
+        "Aoto"
+      ]
+    },
+    "KeiseiKanamachi": {
+      "nameJa": "京成金町線",
+      "nameEn": "Keisei Kanamachi Line",
+      "operator": "Keisei",
+      "color": "#0054a6",
+      "code": "KS",
+      "stations": [
+        "Keisei-Takasago",
+        "Shibamata",
+        "Keisei-Kanamachi"
+      ]
+    },
+    "KeiseiChiba": {
+      "nameJa": "京成千葉線",
+      "nameEn": "Keisei Chiba Line",
+      "operator": "Keisei",
+      "color": "#0054a6",
+      "code": "KS",
+      "stations": [
+        "Keisei-Tsudanuma",
+        "Keisei-Makuharihongō",
+        "Keisei-Makuhari",
+        "Kemigawa",
+        "Keisei-Inage",
+        "Midori-dai",
+        "Nishi-Nobuto",
+        "Shin-Chiba",
+        "Keisei-Chiba",
+        "Chiba-Chūō"
+      ]
+    },
+    "KeiseiChihara": {
+      "nameJa": "京成千原線",
+      "nameEn": "Keisei Chihara Line",
+      "operator": "Keisei",
+      "color": "#0054a6",
+      "code": "KS",
+      "stations": [
+        "Chiba-Chūō",
+        "Chiba-dera",
+        "Ōmoridai",
+        "Gakuen-mae",
+        "Oyumino",
+        "Chiharadai"
+      ]
+    },
+    "NaritaSkyAccess": {
+      "nameJa": "成田スカイアクセス線",
+      "nameEn": "Narita Sky Access Line",
+      "operator": "Keisei",
+      "color": "#f39800",
+      "code": "KS",
+      "stations": [
+        "Keisei-Takasago",
+        "Higashi-Matsudo",
+        "Shin-Kamagaya",
+        "Chiba-Newtown-Chūō",
+        "Inba-Nihon-Idai",
+        "Narita-Yukawa",
+        "Narita-Airport-Terminal-2-3",
+        "Narita-Airport-Terminal-1"
+      ]
     }
   },
   "name_map": {
