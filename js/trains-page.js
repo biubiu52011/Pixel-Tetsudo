@@ -433,10 +433,14 @@
           }
         });
       }
-      // Refresh filter bar labels and line detail view on language switch
+      // Refresh filter bar, list, and line detail view on language switch
       if (typeof window.onLanguageChange === "function") {
         window.onLanguageChange(function() {
           renderFilterBar(document.getElementById("trainsFilterBar"));
+          // Re-render list to update line names and operator titles (only if list is visible)
+          if (listEl && detailEl && detailEl.classList.contains("hidden")) {
+            renderList(listEl);
+          }
           // Re-render line detail view if open
           if (currentLine && detailEl && !detailEl.classList.contains("hidden")) {
             showLineView(currentLine);
