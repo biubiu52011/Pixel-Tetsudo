@@ -769,6 +769,30 @@ window.LineOperationSystems = {
       order: 8
     }
   ],
+  "YOKOHAMA_MUNICIPAL": [
+    {
+      code: "B",
+      nameJa: "ブルーライン",
+      nameZh: "蓝线",
+      nameEn: "Blue Line",
+      nameKo: "",
+      color: "#00A0C7",
+      lineIds: ["YokohamaBlue"],
+      icon: "../images/鉄道/横浜市交通局/ブルーライン.png",
+      order: 1
+    },
+    {
+      code: "GR",
+      nameJa: "グリーンライン",
+      nameZh: "绿线",
+      nameEn: "Green Line",
+      nameKo: "",
+      color: "#00A859",
+      lineIds: ["YokohamaGreen"],
+      icon: "../images/鉄道/横浜市交通局/グリーンライン.png",
+      order: 2
+    }
+  ],
   "KEIO": [
     {
       code: "IN",
