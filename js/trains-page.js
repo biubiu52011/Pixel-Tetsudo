@@ -61,6 +61,14 @@
   }
 
   function getLinesData() {
+    // Priority 1: DataFusion fused data (has delay info)
+    if (window.DataFusion) {
+      var fused = window.DataFusion.getFusedData();
+      if (fused && fused.lines && Object.keys(fused.lines).length > 0) {
+        return fused.lines;
+      }
+    }
+    // Priority 2: DataLayer (RailwayDB-first) raw data, no delay info
     var rawLines = window.DataLayer ? window.DataLayer.getAllLines() : (window.UNIFIED_LINES || {});
     var ul = Array.isArray(rawLines) ? (function() { var d = {}; rawLines.forEach(function(l) { d[l.id || l.line_id] = l; }); return d; })() : rawLines;
     if (!ul) return {};
@@ -397,10 +405,12 @@
       if (window.DataState) {
         window.DataState.subscribe(function(lines, delayData, positions) {
           if (lines && Object.keys(lines).length > 0 && listEl) {
-            var currentLen = listEl.innerHTML.length;
-            if (currentLen === 0) {
-              renderList(listEl);
-              renderFilterBar(document.getElementById("trainsFilterBar"));
+            // Always re-render to pick up delay info updates, not just initial load
+            renderList(listEl);
+            renderFilterBar(document.getElementById("trainsFilterBar"));
+            // Re-render line detail view if open
+            if (currentLine && detailEl && !detailEl.classList.contains("hidden")) {
+              showLineView(currentLine);
             }
           }
         });
