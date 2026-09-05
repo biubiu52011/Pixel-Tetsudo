@@ -292,6 +292,29 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#fcc60d",
       lineIds: ["SobuMain"],
+    {
+      code: "CHU",
+      nameJa: "中央本線",
+      nameZh: "中央本线",
+      nameEn: "Chuo Main Line",
+      nameKo: "",
+      color: "#0073bf",
+      lineIds: ["ChuoMain"],
+      icon: "",
+      order: 31
+    },
+    {
+      code: "TOK",
+      nameJa: "東海道本線",
+      nameZh: "东海道本线",
+      nameEn: "Tokaido Main Line",
+      nameKo: "",
+      color: "#f68b1e",
+      lineIds: ["TokaidoMain"],
+      icon: "",
+      order: 32
+    },
+
       icon: "",
       order: 30
     },
