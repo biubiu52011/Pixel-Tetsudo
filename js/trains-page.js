@@ -12,6 +12,7 @@
   var mapEl = null;
   var backBtn = null;
   var _selectedOperator = null;
+  var _lastPositionsHash = '';
   var t = window.t || function(k) { return k; };
   var escapeHtml = window.escapeHtml || function(s) {
     if (!s) return "";
@@ -61,6 +62,14 @@
   }
 
   function getLinesData() {
+    // Priority 1: DataFusion fused data (has realtimePositions for train location)
+    if (window.DataFusion) {
+      var fused = window.DataFusion.getFusedData();
+      if (fused && fused.lines && Object.keys(fused.lines).length > 0) {
+        return fused.lines;
+      }
+    }
+    // Priority 2: DataLayer (RailwayDB-first) raw data, no realtime positions
     var rawLines = window.DataLayer ? window.DataLayer.getAllLines() : (window.UNIFIED_LINES || {});
     var ul = Array.isArray(rawLines) ? (function() { var d = {}; rawLines.forEach(function(l) { d[l.id || l.line_id] = l; }); return d; })() : rawLines;
     if (!ul) return {};
@@ -396,11 +405,30 @@
       // Subscribe to DataState changes to handle late data loading
       if (window.DataState) {
         window.DataState.subscribe(function(lines, delayData, positions) {
-          if (lines && Object.keys(lines).length > 0 && listEl) {
-            var currentLen = listEl.innerHTML.length;
-            if (currentLen === 0) {
-              renderList(listEl);
-              renderFilterBar(document.getElementById("trainsFilterBar"));
+          if (!lines || Object.keys(lines).length === 0 || !listEl) return;
+          // Build hash of realtimePositions to detect changes (trains page only cares about train positions)
+          var posHash = '';
+          try {
+            var ids = Object.keys(lines);
+            for (var i = 0; i < ids.length; i++) {
+              var l = lines[ids[i]];
+              if (l && l.realtimePositions && l.realtimePositions.length > 0) {
+                posHash += ids[i] + ':' + l.realtimePositions.length + ';';
+              }
+            }
+          } catch(e) {}
+          var currentLen = listEl.innerHTML.length;
+          // Always render if list is empty (initial load), otherwise only render if positions changed
+          if (currentLen === 0) {
+            renderList(listEl);
+            renderFilterBar(document.getElementById("trainsFilterBar"));
+            _lastPositionsHash = posHash;
+          } else if (posHash !== _lastPositionsHash) {
+            _lastPositionsHash = posHash;
+            renderList(listEl);
+            // Re-render line detail view if open (to update train positions on map)
+            if (currentLine && detailEl && !detailEl.classList.contains("hidden")) {
+              showLineView(currentLine);
             }
           }
         });
