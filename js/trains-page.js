@@ -114,28 +114,34 @@
       var color = line.color || "#008803";
       var stations = line.stations || [];
       // Merge stations from same LOS running system
-      var _sysId = null;
+      var _sysInfo = null;
       if (window.LineOperationSystems) {
-        for (var _sid in window.LineOperationSystems) {
-          var _sys = window.LineOperationSystems[_sid];
-          if (_sys.lineIds && _sys.lineIds.indexOf(lineId) >= 0) { _sysId = _sid; break; }
+        for (var _opKey in window.LineOperationSystems) {
+          var _opSys = window.LineOperationSystems[_opKey];
+          if (!Array.isArray(_opSys)) continue;
+          for (var _si = 0; _si < _opSys.length; _si++) {
+            if (_opSys[_si].lineIds && _opSys[_si].lineIds.indexOf(lineId) >= 0) {
+              _sysInfo = _opSys[_si];
+              break;
+            }
+          }
+          if (_sysInfo) break;
         }
       }
-      if (_sysId && window.LineOperationSystems && window.LineOperationSystems[_sysId]) {
-        var _sys = window.LineOperationSystems[_sysId];
+      if (_sysInfo) {
         var _allLines = getLinesData();
         var _merged = [];
         var _seen = {};
-        for (var _li = 0; _li < _sys.lineIds.length; _li++) {
-          var _sub = _allLines[_sys.lineIds[_li]];
+        for (var _li = 0; _li < _sysInfo.lineIds.length; _li++) {
+          var _sub = _allLines[_sysInfo.lineIds[_li]];
           if (!_sub || !_sub.stations) continue;
-          for (var _si = 0; _si < _sub.stations.length; _si++) {
-            var _stid = _sub.stations[_si];
+          for (var _sj = 0; _sj < _sub.stations.length; _sj++) {
+            var _stid = _sub.stations[_sj];
             if (!_seen[_stid]) { _seen[_stid] = true; _merged.push(_stid); }
           }
         }
         if (_merged.length > stations.length) { stations = _merged; }
-        if (_sys.color) { color = _sys.color; }
+        if (_sysInfo.color) { color = _sysInfo.color; }
       }
       var _lang = window.currentLang || 'ja';
       var _rS = (window.RailwayDB && window.RailwayDB.resolveStationName) ? function(id){ return window.RailwayDB.resolveStationName(id, _lang) || id; } : function(id){ return id; };
@@ -281,16 +287,23 @@
       if (detailEl) detailEl.classList.remove("hidden");
       var _title = (window.RailwayDB && window.RailwayDB.resolveLineName ? window.RailwayDB.resolveLineName(lineId, window.currentLang) : (fusedLine.nameEn || fusedLine.nameJa || lineId));
       if (window.LineOperationSystems) {
-        for (var _sid in window.LineOperationSystems) {
-          var _sys = window.LineOperationSystems[_sid];
-          if (_sys.lineIds && _sys.lineIds.indexOf(lineId) >= 0) {
-            var _lang = window.currentLang || "ja";
-            if (_lang === "zh" && _sys.nameZh) _title = _sys.nameZh;
-            else if (_lang === "en" && _sys.nameEn) _title = _sys.nameEn;
-            else if (_lang === "ko" && _sys.nameKo) _title = _sys.nameKo;
-            else if (_sys.nameJa) _title = _sys.nameJa;
-            break;
+        for (var _opKey2 in window.LineOperationSystems) {
+          var _opSys2 = window.LineOperationSystems[_opKey2];
+          if (!Array.isArray(_opSys2)) continue;
+          var _found = false;
+          for (var _si2 = 0; _si2 < _opSys2.length; _si2++) {
+            var _sys2 = _opSys2[_si2];
+            if (_sys2.lineIds && _sys2.lineIds.indexOf(lineId) >= 0) {
+              var _lang2 = window.currentLang || "ja";
+              if (_lang2 === "zh" && _sys2.nameZh) _title = _sys2.nameZh;
+              else if (_lang2 === "en" && _sys2.nameEn) _title = _sys2.nameEn;
+              else if (_lang2 === "ko" && _sys2.nameKo) _title = _sys2.nameKo;
+              else if (_sys2.nameJa) _title = _sys2.nameJa;
+              _found = true;
+              break;
+            }
           }
+          if (_found) break;
         }
       }
       if (titleEl) titleEl.textContent = _title;
