@@ -291,16 +291,96 @@
         "Yurikamome": "Yurikamome"
     };
 
+    // ========== API Rate Limiting ==========
+    // 为每个API服务维护请求队列，确保不超过频率限制
+    var API_RATE_LIMIT = 1000;  // 每个API服务最小请求间隔（毫秒），即每秒1次，每分钟60次
+    var apiLastRequestTime = {
+        'api-challenge.odpt.org': 0,
+        'api.odpt.org': 0
+    };
+    var apiRequestQueue = {
+        'api-challenge.odpt.org': [],
+        'api.odpt.org': []
+    };
+    var apiQueueProcessing = {
+        'api-challenge.odpt.org': false,
+        'api.odpt.org': false
+    };
+
+    function getApiDomain(url) {
+        try {
+            var match = String(url).match(/https?:\/\/([^\/]+)/);
+            return match ? match[1] : 'unknown';
+        } catch(e) { return 'unknown'; }
+    }
+
+    function processApiQueue(domain) {
+        if (apiQueueProcessing[domain]) return;
+        if (apiRequestQueue[domain].length === 0) return;
+
+        apiQueueProcessing[domain] = true;
+
+        function processNext() {
+            if (apiRequestQueue[domain].length === 0) {
+                apiQueueProcessing[domain] = false;
+                return;
+            }
+
+            var now = Date.now();
+            var lastTime = apiLastRequestTime[domain] || 0;
+            var waitTime = Math.max(0, API_RATE_LIMIT - (now - lastTime));
+
+            setTimeout(function() {
+                var request = apiRequestQueue[domain].shift();
+                if (!request) {
+                    apiQueueProcessing[domain] = false;
+                    return;
+                }
+
+                apiLastRequestTime[domain] = Date.now();
+
+                // 执行实际的fetch
+                fetch(request.url, {
+                    headers: { "Accept": "application/json" },
+                    signal: AbortSignal.timeout(15000)
+                }).then(function(resp) {
+                    if (!resp.ok) throw new Error("HTTP " + resp.status);
+                    return resp.json();
+                }).then(function(data) {
+                    request.resolve(data);
+                }).catch(function(e) {
+                    console.warn("[ODPT] Rate-limited fetch failed:", e.message);
+                    request.reject(e);
+                }).finally(function() {
+                    processNext();
+                });
+            }, waitTime);
+        }
+
+        processNext();
+    }
+
+    function rateLimitedFetch(url) {
+        return new Promise(function(resolve, reject) {
+            var domain = getApiDomain(url);
+            if (!apiRequestQueue[domain]) {
+                // 未知域名，直接fetch
+                fetch(url, {
+                    headers: { "Accept": "application/json" },
+                    signal: AbortSignal.timeout(15000)
+                }).then(resolve).catch(reject);
+                return;
+            }
+
+            apiRequestQueue[domain].push({ url: url, resolve: resolve, reject: reject });
+            processApiQueue(domain);
+        });
+    }
+
     // ========== Fetch wrapper ==========
     function fetchODPT(url) {
         if (!url) return Promise.resolve(null);
-        return fetch(url, {
-            headers: { "Accept": "application/json" },
-            signal: AbortSignal.timeout(15000)
-        }).then(function(resp) {
-            if (!resp.ok) throw new Error("HTTP " + resp.status);
-            return resp.json();
-        }).catch(function(e) {
+        return rateLimitedFetch(url).catch(function(e) {
             console.warn("[ODPT] Failed:", e.message);
             return null;
         });
