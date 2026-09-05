@@ -9450,7 +9450,7 @@
         "Kazusa-Ichinomiya",
         "Mobara",
         "Daijima",
-        "Narutō",
+        "Naruto",
         "Sakura",
         "Yachimata",
         "Enokido",
@@ -10397,7 +10397,7 @@
       "code": "KS",
       "stations": [
         "Keisei-Tsudanuma",
-        "Keisei-Makuharihongō",
+        "Keisei-Makuharihongo",
         "Keisei-Makuhari",
         "Kemigawa",
         "Keisei-Inage",
@@ -10405,7 +10405,7 @@
         "Nishi-Nobuto",
         "Shin-Chiba",
         "Keisei-Chiba",
-        "Chiba-Chūō"
+        "Chiba-Chuo"
       ]
     },
     "KeiseiChihara": {
@@ -10415,9 +10415,9 @@
       "color": "#0054a6",
       "code": "KS",
       "stations": [
-        "Chiba-Chūō",
+        "Chiba-Chuo",
         "Chiba-dera",
-        "Ōmoridai",
+        "Omoridai",
         "Gakuen-mae",
         "Oyumino",
         "Chiharadai"
@@ -10433,7 +10433,7 @@
         "Keisei-Takasago",
         "Higashi-Matsudo",
         "Shin-Kamagaya",
-        "Chiba-Newtown-Chūō",
+        "Chiba-Newtown-Chuo",
         "Inba-Nihon-Idai",
         "Narita-Yukawa",
         "Narita-Airport-Terminal-2-3",
@@ -10452,9 +10452,9 @@
         "Ryokuen-toshi",
         "Yayoidai",
         "Izumino",
-        "Izumi-chūō",
+        "Izumi-chuo",
         "Yumegaoka",
-        "Shōnandai"
+        "Shonandai"
       ]
     },
     "SotetsuShin-Yokohama": {
@@ -10476,17 +10476,17 @@
       "color": "#ea5504",
       "code": "NS",
       "stations": [
-        "Ōmiya",
-        "Tetsudō-Hakubutsukan",
+        "Omiya",
+        "Tetsudo-Hakubutsukan",
         "Kamonomiya",
         "Higashi-Miyahara",
         "Konba",
         "Yoshinohara",
         "Haraichi",
-        "Shōnan",
+        "Shonan",
         "Maruyama",
         "Shiku",
-        "Ina-Chūō",
+        "Ina-Chuo",
         "Hanuki",
         "Uchijuku"
       ]
@@ -10501,10 +10501,10 @@
         "Chiba-Minato",
         "Shiyakusho-mae",
         "Chiba",
-        "Sakaechō",
-        "Yoshikawa-kōen",
-        "Kenchō-mae",
-        "Chiba-kōen",
+        "Sakaecho",
+        "Yoshikawa-koen",
+        "Kenchomae",
+        "Chiba-koen",
         "Sakusabe",
         "Tendai",
         "Anagawa",
