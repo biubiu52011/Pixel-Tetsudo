@@ -560,19 +560,25 @@ for (var j = 0; j < positions.length; j++) {
       if (window.DataState) {
         window.DataState.subscribe(function(lines, delayData, positions) {
           if (!lines || Object.keys(lines).length === 0 || !listEl) return;
-          // Build hash of realtimePositions to detect changes (trains page only cares about train positions)
+          // Build hash of positions to detect changes (check both realtimePositions and cachedPositions)
           var posHash = '';
           try {
             var ids = Object.keys(lines);
             for (var i = 0; i < ids.length; i++) {
               var l = lines[ids[i]];
+              var _pos = null;
               if (l && l.realtimePositions && l.realtimePositions.length > 0) {
-                posHash += ids[i] + ':' + l.realtimePositions.length + ':';
-                for (var _pi = 0; _pi < l.realtimePositions.length; _pi++) {
-                  var _tp = l.realtimePositions[_pi];
-                  posHash += (_tp.trainId || ('t' + _pi)) + '@' + (_tp.stationIndex || 0) + ',';
+                _pos = l.realtimePositions;
+              } else if (l && l.cachedPositions && l.cachedPositions.length > 0) {
+                _pos = l.cachedPositions;
+              }
+              if (_pos) {
+                posHash += ids[i] + ":" + _pos.length + ":";
+                for (var _pi = 0; _pi < _pos.length; _pi++) {
+                  var _tp = _pos[_pi];
+                  posHash += (_tp.trainId || ("t" + _pi)) + "@" + (_tp.stationIndex || 0) + ",";
                 }
-                posHash += ';';
+                posHash += ";";
               }
             }
           } catch(e) {}
