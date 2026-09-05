@@ -2573,6 +2573,12 @@
       "durationTotalMin": 70,
       "branchOf": null,
       "stations": [
+        "Tokyo",
+        "Ueno",
+        "Oku",
+        "Akabane",
+        "Urawa",
+        "Saitama-Shintoshin",
         "Omiya",
         "Miyahara",
         "Ageo",

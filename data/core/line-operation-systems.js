@@ -190,14 +190,25 @@ window.LineOperationSystems = {
     },
     {
       code: "JU",
-      nameJa: "宇都宮線・高崎線",
-      nameZh: "宇都宫线・高崎线",
-      nameEn: "Utsunomiya Line / Takasaki Line",
+      nameJa: "宇都宮線",
+      nameZh: "宇都宫线",
+      nameEn: "Utsunomiya Line",
+      nameKo: "",
+      color: "#00732f",
+      lineIds: ["Oyama"],
+      icon: "../images/鉄道/JR東日本/宇都宮線.png",
+      order: 15
+    },
+    {
+      code: "JU",
+      nameJa: "高崎線",
+      nameZh: "高崎线",
+      nameEn: "Takasaki Line",
       nameKo: "",
       color: "#f68b1e",
-      lineIds: ["Oyama", "Takasaki"],
+      lineIds: ["Takasaki"],
       icon: "../images/鉄道/JR東日本/高崎線.png",
-      order: 15
+      order: 16
     },
     {
       code: "JY",
