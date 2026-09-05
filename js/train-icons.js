@@ -50,7 +50,7 @@
     "Utsunomiya": "../images/列车/JR東日本/宇都宮線.png",
     "Takasaki": "../images/列车/JR東日本/高崎線.png",
     "JobanRapid": "../images/列车/JR東日本/常磐線快速.png",
-    "JobanLocal": "../images/列车/JR東日本/常磐線.png",
+    "JobanLocal": "../images/列车/JR東日本/千代田線.png",
     "Musashino": "../images/列车/JR東日本/武蔵野線.png",
     "Nambu": "../images/列车/JR東日本/南武線.png",
     "Yokohama": "../images/列车/JR東日本/横浜線.png",
