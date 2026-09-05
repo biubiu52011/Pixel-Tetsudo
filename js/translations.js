@@ -545,7 +545,7 @@
       "op.MinatoMirai": "横浜高速鉄道",
       "op.MIR": "ひたちなか海浜鉄道",
       "op.Rinkai": "臨海線",
-      "op.TsukubaExpress": "つくばエクスプレス",
+      "op.TsukubaExpress": "首都圏新都市鉄道",
       "op.Yurikamome": "ゆりかもめ",
       "op.TamaMonorail": "多摩モノレール",
       "op.ShonanMonorail": "湘南モノレール",
