@@ -240,7 +240,7 @@ function renderGrid() {
         return '<span>' + t('tourism.tag_' + tag) + '</span>';
       }).join('');
 
-      const detailUrl = 'tourism-detail.html?station=' + encodeURIComponent(stationKey) + '&index=' + idx;
+      const detailUrl = 'tourism-detail.html?station=' + encodeURIComponent(stationKey) + '&index=' + idx + '&name=' + encodeURIComponent(name);
 
       return '<a href="' + detailUrl + '" class="sm-card" data-index="' + idx + '">' +
         '<div class="sm-thumb">' + thumbHtml + '</div>' +
@@ -442,6 +442,7 @@ function renderGrid() {
     init();
   }
 })();
+
 
 
 
