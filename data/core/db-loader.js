@@ -116,6 +116,13 @@ function applyData(data, i18n) {
             window.STATION_COORDS[stationKey] = coord;
           }
         });
+
+    // Load station exits (only exits that actually exist at each station)
+    if (window.TOURISM_OVERRIDE.station_exits && typeof window.TOURISM_OVERRIDE.station_exits === 'object') {
+      window.STATION_EXITS = window.TOURISM_OVERRIDE.station_exits;
+    } else {
+      window.STATION_EXITS = {};
+    }
       }
       // Backward compat: old station-grouped override format
       Object.keys(window.TOURISM_OVERRIDE).forEach(function(key) {

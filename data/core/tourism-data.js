@@ -1,5 +1,5 @@
 ﻿// Tourism data override - loaded as JS to work under file:// protocol
-// Global spots pool (no station binding) + station coordinate corrections
+// Global spots pool (no station binding) + station coordinate corrections + station exits
 window.TOURISM_OVERRIDE = 
 {
   "spots": [
@@ -579,6 +579,22 @@ window.TOURISM_OVERRIDE =
     "Minami-Senju": [
       35.7345,
       139.7992
+    ]
+  },
+  "station_exits": {
+    "Kitasenju": [
+      "東口",
+      "西口"
+    ],
+    "Minami-Senju": [
+      "東口",
+      "西口"
+    ],
+    "Ikebukuro": [
+      "東口",
+      "西口",
+      "北口",
+      "南口"
     ]
   }
 }

@@ -110,7 +110,7 @@
           distance: dist,
           distanceText: formatWalkMinutes(dist),
           stationId: stationId,
-            exitDirection: getExitDirection(sLat, sLng, spot.coord[0], spot.coord[1]),
+            exitDirection: mapDirectionToExit(getExitDirection(sLat, sLng, spot.coord[0], spot.coord[1]), stationId),
         });
       }
     }
@@ -177,6 +177,34 @@
    * @param {number} userLng - User longitude
    * @returns {Object|null} { stationId, distance, coord } or null
    */
+
+  /**
+   * Map 8-direction to actual exit name based on station available exits
+   * Only returns exits that actually exist at the station
+   */
+  function mapDirectionToExit(directionKey, stationId) {
+    if (!directionKey || directionKey === 'STATION') return '駅直結';
+    var stationExits = (window.STATION_EXITS && window.STATION_EXITS[stationId]) || [];
+    if (stationExits.length === 0) return null;
+    var priorityMap = {
+      'N': ['北口', '東口', '西口'],
+      'NE': ['東口', '北口', '南口'],
+      'E': ['東口', '北口', '南口', '西口'],
+      'SE': ['東口', '南口', '西口'],
+      'S': ['南口', '西口', '東口'],
+      'SW': ['西口', '南口', '東口'],
+      'W': ['西口', '北口', '南口', '東口'],
+      'NW': ['西口', '北口', '東口']
+    };
+    var priorities = priorityMap[directionKey] || ['東口', '西口'];
+    for (var i = 0; i < priorities.length; i++) {
+      if (stationExits.indexOf(priorities[i]) >= 0) {
+        return priorities[i];
+      }
+    }
+    return stationExits[0] || null;
+  }
+
   function getNearestStation(userLat, userLng) {
     if (userLat == null || userLng == null) return null;
     var sc = window.STATION_COORDS || {};
@@ -201,6 +229,7 @@
     getDistance: getDistance,
     getNearestStation: getNearestStation,
     getExitDirection: getExitDirection,
+    mapDirectionToExit: mapDirectionToExit,
     formatDistance: formatDistance,
     formatWalkMinutes: formatWalkMinutes,
     invalidateCache: invalidateCache,

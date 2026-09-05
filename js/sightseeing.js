@@ -238,15 +238,9 @@ function renderGrid() {
         '<img class="sm-thumb-img" src="' + encodeURI(image) + '" alt="' + name + '">' :
         '<span class="sm-thumb-icon">&#x2699;</span>';
       
-      // Dynamic exit direction based on current station (not fixed to spot data)
-      var exitText = '';
-      if (s.exitDirection) {
-        if (s.exitDirection === 'STATION') {
-          exitText = t('tourism.station_direct') || '駅直結';
-        } else {
-          exitText = t('detail.dir_' + s.exitDirection) + (t('tourism.exit_suffix') || '口');
-        }
-      }
+      // Dynamic exit direction - already mapped to actual exit name (e.g. 東口, 西口, 駅直結)
+      // Only shows exits that actually exist at the current station
+      const exitText = s.exitDirection || '';
       const distRowHtml = s.distText ? '<p class="sm-dist">' + s.distText + (exitText ? ' · ' + exitText : '') + '</p>' : '';
       
       const tagsHtml = tags.filter(function(tag) { return tag !== 'all'; }).map(function(tag) {
