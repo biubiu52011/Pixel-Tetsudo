@@ -196,6 +196,29 @@
         });
       });
       odptData.realtimePositions = posMap;
+
+      // ===== Estimate positions for lines without realtime data =====
+      try {
+        if (window.TrainPositionEstimator && typeof window.TrainPositionEstimator.estimateAllPositions === "function") {
+          var estimated = window.TrainPositionEstimator.estimateAllPositions(
+            allLines,
+            window.ODPT_TRAINS,
+            odptData.delayInfo,
+            posMap
+          );
+          var estCount = 0;
+          Object.keys(estimated).forEach(function(lid) {
+            if (!posMap[lid] || posMap[lid].length === 0) {
+              posMap[lid] = estimated[lid];
+              estCount += estimated[lid].length;
+            }
+          });
+          if (estCount > 0) {
+            console.debug("[DataFusion] Estimated", estCount, "train positions for", Object.keys(estimated).length, "lines");
+          }
+        }
+      } catch(estErr) { console.debug("[DataFusion] Position estimation error:", estErr.message); }
+
       try { fuseAll(); } catch(e) { console.debug("[DataFusion] loadTrainPositions->fuseAll error:", e.message); }
     } catch(e) { console.debug("[DataFusion] loadTrainPositions error:", e.message); }
   }
