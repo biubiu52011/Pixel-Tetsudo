@@ -1142,7 +1142,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#d91e18",
       lineIds: ["TsukubaExpress"],
-      icon: "",
+      icon: "../images/鉄道/首都圏新都市鉄道/つくばエクスプレス.png",
       order: 1
     }
   ],
@@ -1259,7 +1259,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#0066B3",
       lineIds: ["HitachiNakaKaimin"],
-      icon: "",
+      icon: "../images/鉄道/ひたちなか海浜鉄道/湊線.png",
       order: 1
     }
   ]
