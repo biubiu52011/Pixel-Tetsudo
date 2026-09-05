@@ -880,7 +880,7 @@ window.LineOperationSystems = {
       nameEn: "Odawara Line",
       nameKo: "",
       color: "#0067b0",
-      lineIds: ["OdakyuOdawara"],
+      lineIds: ["Odawara"],
       icon: "../images/鉄道/小田急電鉄/小田原線.png",
       order: 1
     },
@@ -890,9 +890,9 @@ window.LineOperationSystems = {
       nameZh: "江之岛线",
       nameEn: "Enoshima Line",
       nameKo: "",
-      color: "#0067b0",
+      color: "#0078C1",
       lineIds: ["OdakyuEnoshima"],
-      icon: "",
+      icon: "../images/鉄道/小田急電鉄/江ノ島線.png",
       order: 2
     },
     {
@@ -901,9 +901,9 @@ window.LineOperationSystems = {
       nameZh: "多摩线",
       nameEn: "Tama Line",
       nameKo: "",
-      color: "#0067b0",
+      color: "#8B0000",
       lineIds: ["OdakyuTama"],
-      icon: "",
+      icon: "../images/鉄道/小田急電鉄/多摩線.png",
       order: 3
     }
   ],
