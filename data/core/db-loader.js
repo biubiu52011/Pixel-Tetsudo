@@ -384,9 +384,9 @@ function load() {
         window.TOURISM_STATIONS = Object.keys(window.TOURISM_DATA);
         loaded = true;
         console.log(
-          Object.keys(data.stations).length + " stations, " +
-          Object.keys(data.lines).length + " lines, " +
-          Object.keys(data.tourism).length + " tourism stations");
+          Object.keys(results[0].stations).length + " stations, " +
+          Object.keys(results[0].lines).length + " lines, " +
+          Object.keys(results[0].tourism).length + " tourism stations");
       })
       .catch(function(err) {
         error = err;
