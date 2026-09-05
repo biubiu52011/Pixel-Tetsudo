@@ -61,6 +61,27 @@
     } catch(e) { return ""; }
   }
 
+  // Normalize station key for matching (remove hyphens, handle common variants)
+  function normalizeStationKey(key) {
+    try {
+      if (!key) return "";
+      var k = String(key).toLowerCase();
+      // Remove hyphens and spaces
+      k = k.replace(/[-_\s]/g, "");
+      // Handle common naming variants
+      var aliases = {
+        "kokusaitenjijo": "tokyoshowacenter",
+        "shinagawaseaside": "shinagawaseaside",
+        "oimachi": "oimachi",
+        "tennozuisle": "tennozuisle",
+        "tokyoteleport": "tokyoteleport",
+        "shinkiba": "shinkiba",
+        "shinonome": "shinonome"
+      };
+      return aliases[k] || k;
+    } catch(e) { return String(key || "").toLowerCase().replace(/[-_\s]/g, ""); }
+  }
+
   function extractRailwayKey(railwayUrn) {
     try {
       if (!railwayUrn) return "";
@@ -103,9 +124,12 @@
       var delayMin = getDelayForOperator(operatorId, delayInfo);
       var adjustedCurrentMin = currentMin + delayMin;
 
-      // Build station index map for this line
+      // Build station index map for this line (using normalized keys)
       var stationIndexMap = {};
       for (var i = 0; i < line.stations.length; i++) {
+        var normKey = normalizeStationKey(line.stations[i]);
+        stationIndexMap[normKey] = i;
+        // Also store original key for fallback
         stationIndexMap[line.stations[i]] = i;
       }
 
@@ -142,7 +166,9 @@
           var depTime = parseTimeToMinutes(stop["odpt:departureTime"]);
           var arrTime = parseTimeToMinutes(stop["odpt:arrivalTime"]);
           var stationKey = extractStationKey(stop["odpt:departureStation"] || stop["odpt:arrivalStation"]);
-          var idx = stationIndexMap[stationKey];
+          var normStationKey = normalizeStationKey(stationKey);
+          var idx = stationIndexMap[normStationKey];
+          if (idx === undefined) idx = stationIndexMap[stationKey]; // fallback to original key
 
           if (idx === undefined || idx < 0) continue;
 
@@ -249,7 +275,8 @@
     estimateAllPositions: estimateAllPositions,
     getCurrentCalendar: getCurrentCalendar,
     getCurrentCalendars: getCurrentCalendars,
-    getCurrentMinutes: getCurrentMinutes
+    getCurrentMinutes: getCurrentMinutes,
+    normalizeStationKey: normalizeStationKey
   };
 
   console.log("[PositionEstimator] v" + ESTIMATOR_VERSION + " initialized");
