@@ -1,32 +1,135 @@
 /**
  * Pixel Tetsudo - Unified ODPT API Client
  * 完整 API URL（含 key）直接存储，无需分离管理。
+ * 
+ * 三种API类型：
+ * - trainInformation: 运行情报/延误信息 (odpt:TrainInformation)
+ * - train: 列车位置实时数据 (odpt:Train)
+ * - trainTimetable: 列车时刻表 (odpt:TrainTimetable)
  */
 (function() {
     'use strict';
 
-    // ========== 完整 API URL（URL + key 一体化） ==========
+    // ========== API Keys ==========
+    var CHALLENGE_KEY = "gxyoc62dp9i6a4e4bhr96wqcd9bfo7i5o4d410ild6icmf079zevrlk0tjv04din";
+    var CENTER_KEY = "jueja2bhf8mgsjuirxyl5x0q6sij2i67bzmr93zvg0l89o7ct8p3izl8fa0k28lz";
+
+    // ========== 完整 API URL（按运营商和类型区分） ==========
     var ODPT_ENDPOINTS = {
-        // Challenge API
-        "JR-East":     "https://api-challenge.odpt.org/api/v4/odpt:Train?odpt:operator=odpt.Operator:JR-East&acl:consumerKey=gxyoc62dp9i6a4e4bhr96wqcd9bfo7i5o4d410ild6icmf079zevrlk0tjv04din",
-        "Tobu":        "https://api-challenge.odpt.org/api/v4/odpt:Train?odpt:operator=odpt.Operator:Tobu&acl:consumerKey=gxyoc62dp9i6a4e4bhr96wqcd9bfo7i5o4d410ild6icmf079zevrlk0tjv04din",
-        "Keio":        "https://api-challenge.odpt.org/api/v4/odpt:TrainTimetable?odpt:operator=odpt.Operator:Keio&acl:consumerKey=gxyoc62dp9i6a4e4bhr96wqcd9bfo7i5o4d410ild6icmf079zevrlk0tjv04din",
-        "Keikyu":      "https://api-challenge.odpt.org/api/v4/odpt:Train?odpt:operator=odpt.Operator:Keikyu&acl:consumerKey=gxyoc62dp9i6a4e4bhr96wqcd9bfo7i5o4d410ild6icmf079zevrlk0tjv04din",
-        "Sotetsu":     "https://api-challenge.odpt.org/api/v4/odpt:Train?odpt:operator=odpt.Operator:Sotetsu&acl:consumerKey=gxyoc62dp9i6a4e4bhr96wqcd9bfo7i5o4d410ild6icmf079zevrlk0tjv04din",
-        "Tokyu":       "https://api-challenge.odpt.org/api/v4/odpt:Train?odpt:operator=odpt.Operator:Tokyu&acl:consumerKey=gxyoc62dp9i6a4e4bhr96wqcd9bfo7i5o4d410ild6icmf079zevrlk0tjv04din",
-        "Seibu":       "https://api-challenge.odpt.org/api/v4/odpt:TrainTimetable?odpt:operator=odpt.Operator:Seibu&acl:consumerKey=gxyoc62dp9i6a4e4bhr96wqcd9bfo7i5o4d410ild6icmf079zevrlk0tjv04din",
-        "Odakyu":      "https://api-challenge.odpt.org/api/v4/odpt:TrainTimetable?odpt:operator=odpt.Operator:Odakyu&acl:consumerKey=gxyoc62dp9i6a4e4bhr96wqcd9bfo7i5o4d410ild6icmf079zevrlk0tjv04din",
-        // Center API
-        "TokyoMetro":  "https://api.odpt.org/api/v4/odpt:TrainTimetable?odpt:operator=odpt.Operator:TokyoMetro&acl:consumerKey=jueja2bhf8mgsjuirxyl5x0q6sij2i67bzmr93zvg0l89o7ct8p3izl8fa0k28lz",
-        "Toei":        "https://api.odpt.org/api/v4/odpt:TrainTimetable?odpt:operator=odpt.Operator:Toei&acl:consumerKey=jueja2bhf8mgsjuirxyl5x0q6sij2i67bzmr93zvg0l89o7ct8p3izl8fa0k28lz",
-        "YokohamaMunicipal": "https://api.odpt.org/api/v4/odpt:TrainTimetable?odpt:operator=odpt.Operator:YokohamaMunicipal&acl:consumerKey=jueja2bhf8mgsjuirxyl5x0q6sij2i67bzmr93zvg0l89o7ct8p3izl8fa0k28lz",
-        "TWR":         "https://api.odpt.org/api/v4/odpt:TrainTimetable?odpt:operator=odpt.Operator:TWR&acl:consumerKey=jueja2bhf8mgsjuirxyl5x0q6sij2i67bzmr93zvg0l89o7ct8p3izl8fa0k28lz",
-        "MIR":         "https://api.odpt.org/api/v4/odpt:TrainTimetable?odpt:operator=odpt.Operator:MIR&acl:consumerKey=jueja2bhf8mgsjuirxyl5x0q6sij2i67bzmr93zvg0l89o7ct8p3izl8fa0k28lz",
-        "TamaMonorail":"https://api.odpt.org/api/v4/odpt:TrainTimetable?odpt:operator=odpt.Operator:TamaMonorail&acl:consumerKey=jueja2bhf8mgsjuirxyl5x0q6sij2i67bzmr93zvg0l89o7ct8p3izl8fa0k28lz",
-        "Yurikamome":  "https://api.odpt.org/api/v4/odpt:TrainTimetable?odpt:operator=odpt.Operator:Yurikamome&acl:consumerKey=jueja2bhf8mgsjuirxyl5x0q6sij2i67bzmr93zvg0l89o7ct8p3izl8fa0k28lz",
-        "Keisei":      "https://api.odpt.org/api/v4/odpt:TrainTimetable?odpt:operator=odpt.Operator:Keisei&acl:consumerKey=jueja2bhf8mgsjuirxyl5x0q6sij2i67bzmr93zvg0l89o7ct8p3izl8fa0k28lz",
-        "MinatoMirai": "https://api.odpt.org/api/v4/odpt:TrainTimetable?odpt:operator=odpt.Operator:MinatoMirai&acl:consumerKey=jueja2bhf8mgsjuirxyl5x0q6sij2i67bzmr93zvg0l89o7ct8p3izl8fa0k28lz"
+        // ===== Challenge API 运营商 =====
+        "JR-East": {
+            base: "https://api-challenge.odpt.org/api/v4/",
+            train: "odpt:Train?odpt:operator=odpt.Operator:JR-East",
+            trainTimetable: "odpt:TrainTimetable?odpt:operator=odpt.Operator:JR-East",
+            trainInformation: null  // JR东日本不提供运行情报API
+        },
+        "Tobu": {
+            base: "https://api-challenge.odpt.org/api/v4/",
+            train: "odpt:Train?odpt:operator=odpt.Operator:Tobu",
+            trainTimetable: "odpt:TrainTimetable?odpt:operator=odpt.Operator:Tobu",
+            trainInformation: "odpt:TrainInformation?odpt:operator=odpt.Operator:Tobu"
+        },
+        "Keio": {
+            base: "https://api-challenge.odpt.org/api/v4/",
+            train: null,  // 京王不提供列车位置API
+            trainTimetable: "odpt:TrainTimetable?odpt:operator=odpt.Operator:Keio",
+            trainInformation: "odpt:TrainInformation?odpt:operator=odpt.Operator:Keio"
+        },
+        "Keikyu": {
+            base: "https://api-challenge.odpt.org/api/v4/",
+            train: "odpt:Train?odpt:operator=odpt.Operator:Keikyu",
+            trainTimetable: null,  // 京急不提供列车时刻表API
+            trainInformation: "odpt:TrainInformation?odpt:operator=odpt.Operator:Keikyu"
+        },
+        "Sotetsu": {
+            base: "https://api-challenge.odpt.org/api/v4/",
+            train: null,  // 相铁不提供列车位置API
+            trainTimetable: "odpt:TrainTimetable?odpt:operator=odpt.Operator:Sotetsu",
+            trainInformation: "odpt:TrainInformation?odpt:operator=odpt.Operator:Sotetsu"
+        },
+        "Tokyu": {
+            base: "https://api-challenge.odpt.org/api/v4/",
+            train: null,  // 东急不提供列车位置API
+            trainTimetable: "odpt:TrainTimetable?odpt:operator=odpt.Operator:Tokyu",
+            trainInformation: "odpt:TrainInformation?odpt:operator=odpt.Operator:Tokyu"
+        },
+        "Seibu": {
+            base: "https://api-challenge.odpt.org/api/v4/",
+            train: null,  // 西武不提供列车位置API
+            trainTimetable: null,  // 西武不提供列车时刻表API
+            trainInformation: "odpt:TrainInformation?odpt:operator=odpt.Operator:Seibu"
+        },
+        "Odakyu": {
+            base: "https://api-challenge.odpt.org/api/v4/",
+            train: null,
+            trainTimetable: null,
+            trainInformation: null  // 小田急不提供这三种API
+        },
+
+        // ===== Center API 运营商 =====
+        "TokyoMetro": {
+            base: "https://api.odpt.org/api/v4/",
+            train: null,  // 东京地铁不提供列车位置API
+            trainTimetable: "odpt:TrainTimetable?odpt:operator=odpt.Operator:TokyoMetro",
+            trainInformation: "odpt:TrainInformation?odpt:operator=odpt.Operator:TokyoMetro"
+        },
+        "Toei": {
+            base: "https://api.odpt.org/api/v4/",
+            train: null,
+            trainTimetable: "odpt:TrainTimetable?odpt:operator=odpt.Operator:Toei",
+            trainInformation: "odpt:TrainInformation?odpt:operator=odpt.Operator:Toei"
+        },
+        "YokohamaMunicipal": {
+            base: "https://api.odpt.org/api/v4/",
+            train: null,
+            trainTimetable: "odpt:TrainTimetable?odpt:operator=odpt.Operator:YokohamaMunicipal",
+            trainInformation: "odpt:TrainInformation?odpt:operator=odpt.Operator:YokohamaMunicipal"
+        },
+        "TWR": {
+            base: "https://api.odpt.org/api/v4/",
+            train: null,
+            trainTimetable: "odpt:TrainTimetable?odpt:operator=odpt.Operator:TWR",
+            trainInformation: "odpt:TrainInformation?odpt:operator=odpt.Operator:TWR"
+        },
+        "MIR": {
+            base: "https://api.odpt.org/api/v4/",
+            train: null,
+            trainTimetable: "odpt:TrainTimetable?odpt:operator=odpt.Operator:MIR",
+            trainInformation: "odpt:TrainInformation?odpt:operator=odpt.Operator:MIR"
+        },
+        "TamaMonorail": {
+            base: "https://api.odpt.org/api/v4/",
+            train: null,
+            trainTimetable: "odpt:TrainTimetable?odpt:operator=odpt.Operator:TamaMonorail",
+            trainInformation: "odpt:TrainInformation?odpt:operator=odpt.Operator:TamaMonorail"
+        },
+        "Yurikamome": {
+            base: "https://api.odpt.org/api/v4/",
+            train: null,
+            trainTimetable: null,  // 百合鸥不提供列车时刻表API
+            trainInformation: null  // 百合鸥不提供运行情报API
+        },
+        "Keisei": {
+            base: "https://api.odpt.org/api/v4/",
+            train: "odpt:Train?odpt:operator=odpt.Operator:Keisei",
+            trainTimetable: "odpt:TrainTimetable?odpt:operator=odpt.Operator:Keisei",
+            trainInformation: "odpt:TrainInformation?odpt:operator=odpt.Operator:Keisei"
+        },
+        "MinatoMirai": {
+            base: "https://api.odpt.org/api/v4/",
+            train: null,
+            trainTimetable: "odpt:TrainTimetable?odpt:operator=odpt.Operator:MinatoMirai",
+            trainInformation: null  // 港未来线不提供运行情报API
+        }
     };
+
+    // 构建完整URL
+    function buildUrl(operator, type) {
+        var ep = ODPT_ENDPOINTS[operator];
+        if (!ep || !ep[type]) return null;
+        var key = ep.base.indexOf('api-challenge') >= 0 ? CHALLENGE_KEY : CENTER_KEY;
+        return ep.base + ep[type] + "&acl:consumerKey=" + key;
+    }
 
     // ========== 线路 -> 运营商映射 ==========
     var LINE_TO_OPERATOR = {
@@ -173,7 +276,7 @@
         "Tsugaru": "JR-East",
         "TsukubaExpress": "TsukubaExpress",
         "Tsurumi": "JR-East",
-        "T\u014dnami": "JR-East",
+        "Tōnami": "JR-East",
         "Uchibo": "JR-East",
         "Uetsu": "JR-East",
         "Utsunomiya": "Tobu",
@@ -185,8 +288,7 @@
         "Yonezawa": "JR-East",
         "Yurakucho": "TokyoMetro",
         "Yurakucho_Seibu": "Seibu",
-        "Yurikamome": "Yurikamome",
-        "Tōnami": "JR-East"
+        "Yurikamome": "Yurikamome"
     };
 
     // ========== Fetch wrapper ==========
@@ -214,52 +316,119 @@
         ENDPOINTS: ODPT_ENDPOINTS,
         LINE_TO_OPERATOR: LINE_TO_OPERATOR,
 
+        // 获取运行情报/延误信息
         getTrainInformation: function(operator) {
-            return fetchODPT(ODPT_ENDPOINTS[operator]).then(extractData);
+            return fetchODPT(buildUrl(operator, 'trainInformation')).then(extractData);
         },
 
+        // 获取列车实时位置
+        getTrainPositions: function(operator) {
+            return fetchODPT(buildUrl(operator, 'train')).then(extractData);
+        },
+
+        // 获取列车时刻表
         getTimetable: function(operator) {
-            return fetchODPT(ODPT_ENDPOINTS[operator]).then(extractData);
+            return fetchODPT(buildUrl(operator, 'trainTimetable')).then(extractData);
+        },
+
+        // 检查运营商是否支持某种API
+        supports: function(operator, type) {
+            var ep = ODPT_ENDPOINTS[operator];
+            return !!(ep && ep[type]);
         }
     };
 
-    // ========== Global delay data store ==========
-    window.ODPT_DELAY_DATA = {};
-    // Full per-operator train/timetable responses (consumed by DataFusion.loadTrainPositions)
+    // ========== 全局数据存储 ==========
+    window.ODPT_DELAY_DATA = {};       // 延误/运行情报
+    window.ODPT_TRAIN_POSITIONS = {};  // 列车实时位置
+    window.ODPT_TIMETABLES = {};       // 列车时刻表
+    // 向后兼容：合并时刻表和实时位置
     window.ODPT_TRAINS = {};
 
-    // ========== Load all realtime data ==========
-    function loadAllDelayData() {
+    // ========== 加载所有ODPT数据 ==========
+    function loadAllData() {
         window.ODPT_DELAY_DATA = {};
+        window.ODPT_TRAIN_POSITIONS = {};
+        window.ODPT_TIMETABLES = {};
         window.ODPT_TRAINS = {};
+
         var ops = Object.keys(ODPT_ENDPOINTS);
-        var loaded = 0;
+        var loaded = { delay: 0, positions: 0, timetables: 0 };
+
         var promises = ops.map(function(op) {
-            return window.ODPTClient.getTrainInformation(op).then(function(data) {
-                if (data && data.length > 0) {
-                    window.ODPT_DELAY_DATA[op] = data[0];
-                    window.ODPT_TRAINS[op] = data;
-                    loaded++;
-                }
-            });
+            var ep = ODPT_ENDPOINTS[op];
+            var subPromises = [];
+
+            // 1. 加载运行情报/延误信息
+            if (ep.trainInformation) {
+                subPromises.push(
+                    fetchODPT(buildUrl(op, 'trainInformation')).then(extractData).then(function(data) {
+                        if (data && data.length > 0) {
+                            window.ODPT_DELAY_DATA[op] = data[0];
+                            loaded.delay++;
+                        }
+                    })
+                );
+            }
+
+            // 2. 加载列车实时位置
+            if (ep.train) {
+                subPromises.push(
+                    fetchODPT(buildUrl(op, 'train')).then(extractData).then(function(data) {
+                        if (data && data.length > 0) {
+                            window.ODPT_TRAIN_POSITIONS[op] = data;
+                            window.ODPT_TRAINS[op] = data;  // 向后兼容
+                            loaded.positions++;
+                        }
+                    })
+                );
+            }
+
+            // 3. 加载列车时刻表
+            if (ep.trainTimetable) {
+                subPromises.push(
+                    fetchODPT(buildUrl(op, 'trainTimetable')).then(extractData).then(function(data) {
+                        if (data && data.length > 0) {
+                            window.ODPT_TIMETABLES[op] = data;
+                            // 如果没有实时位置，用时刻表填充ODPT_TRAINS（向后兼容）
+                            if (!window.ODPT_TRAINS[op]) {
+                                window.ODPT_TRAINS[op] = data;
+                            }
+                            loaded.timetables++;
+                        }
+                    })
+                );
+            }
+
+            return Promise.all(subPromises);
         });
+
         return Promise.all(promises).then(function() {
-            // Push ODPT data into DataFusion: delay status + train positions
+            // 推送数据到DataFusion
             try {
                 if (window.DataFusion) {
-                    if (window.DataFusion.updateOdptData) window.DataFusion.updateOdptData(window.ODPT_DELAY_DATA);
-                    if (window.DataFusion.loadTrainPositions) window.DataFusion.loadTrainPositions();
+                    if (window.DataFusion.updateOdptData) {
+                        window.DataFusion.updateOdptData(window.ODPT_DELAY_DATA);
+                    }
+                    if (window.DataFusion.loadTrainPositions) {
+                        window.DataFusion.loadTrainPositions();
+                    }
                 }
             } catch(e) { console.debug("[ODPT] DataFusion push error:", e.message); }
-            console.log("[ODPT] Loaded delay data for:", loaded, "operators");
+
+            console.log("[ODPT] Loaded - delay:", loaded.delay,
+                        "operators, positions:", loaded.positions,
+                        "operators, timetables:", loaded.timetables, "operators");
         });
     }
 
     // ========== Init ==========
     function init() {
-        loadAllDelayData().catch(function(){});
-        setInterval(function() { loadAllDelayData().catch(function(){}); }, 30000);
-        console.log("[ODPT] Client initialized with", Object.keys(ODPT_ENDPOINTS).length, "endpoints");
+        loadAllData().catch(function(e) { console.warn("[ODPT] Init error:", e.message); });
+        setInterval(function() {
+            loadAllData().catch(function(e) { console.warn("[ODPT] Refresh error:", e.message); });
+        }, 30000);
+        console.log("[ODPT] Client initialized with", Object.keys(ODPT_ENDPOINTS).length, "operators");
     }
 
     if (document.readyState === "loading") {

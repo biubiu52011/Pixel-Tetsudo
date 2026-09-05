@@ -168,7 +168,8 @@
 
   function loadTrainPositions() {
     try {
-      if (!window.ODPT_TRAINS) return;
+      var positionSource = window.ODPT_TRAIN_POSITIONS || window.ODPT_TRAINS;
+      if (!positionSource) return;
       var allLines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : (window.UNIFIED_LINES || {});
       if (!allLines || Object.keys(allLines).length === 0) return;
       var posMap = {};
@@ -200,9 +201,10 @@
       // ===== Estimate positions for lines without realtime data =====
       try {
         if (window.TrainPositionEstimator && typeof window.TrainPositionEstimator.estimateAllPositions === "function") {
+          var timetableSource = window.ODPT_TIMETABLES || window.ODPT_TRAINS || {};
           var estimated = window.TrainPositionEstimator.estimateAllPositions(
             allLines,
-            window.ODPT_TRAINS,
+            timetableSource,
             odptData.delayInfo,
             posMap
           );
