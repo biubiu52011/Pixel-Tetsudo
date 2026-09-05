@@ -11,8 +11,8 @@
     "JR-East": "../images/列车/JR東日本/山手線.png",
     "JR West": "../images/列车/JR東日本/山手線.png",
     "TokyoMetro": "../images/列车/JR東日本/銀座線.png",
-    "Toei": "../images/列车/都営地下鉄/1000形.png",
-    "YokohamaMunicipal": "../images/列车/都営地下鉄/1000形.png",
+    "Toei": "../images/列车/JR東日本/都営浅草線.png",
+    "YokohamaMunicipal": "../images/列车/JR東日本/横浜市ブルーライン.png",
     "Keio": "../images/列车/JR東日本/京王.png",
     "Odakyu": "../images/列车/JR東日本/小田急線.png",
     "Seibu": "../images/列车/JR東日本/池袋線.png",
@@ -21,18 +21,18 @@
     "Keikyu": "../images/列车/JR東日本/京急線.png",
     "Keisei": "../images/列车/JR東日本/京成.png",
     "Sotetsu": "../images/列车/JR東日本/相鉄.png",
-    "TWR": "../images/列车/東京臨海高速鉄道/70-000形.png",
-    "MIR": "../images/列车/横浜高速鉄道/Y000系.png",
-    "MinatoMirai": "../images/列车/横浜高速鉄道/Y000系.png",
-    "Rinkai": "../images/列车/東京臨海高速鉄道/70-000形.png",
-    "TsukubaExpress": "../images/列车/首都圏新都市鉄道/TX-1000系.png",
-    "Yurikamome": "../images/列车/ゆりかもめ/7000系.png",
-    "TamaMonorail": "../images/列车/多摩都市モノレール/1000形.png",
-    "ShonanMonorail": "../images/列车/湘南モノレール/5000形.png",
-    "SaitamaNewUrbanTransit": "../images/列车/埼玉新都市交通/2000形.png",
-    "ChibaUrbanMonorail": "../images/列车/千葉都市モノレール/1000形.png",
-    "TokyoMonorail": "../images/列车/東京モノレール/10000形.png",
-    "NipporiToneri": "../images/列车/都営地下鉄/1000形.png"
+    "TWR": "../images/列车/JR東日本/ゆりかもめ.png",
+    "MIR": "../images/列车/JR東日本/横浜市ブルーライン.png",
+    "MinatoMirai": "../images/列车/JR東日本/横浜市ブルーライン.png",
+    "Rinkai": "../images/列车/JR東日本/りんかい線.png",
+    "TsukubaExpress": "../images/列车/JR東日本/つくばエクスプレス.png",
+    "Yurikamome": "../images/列车/JR東日本/ゆりかもめ.png",
+    "TamaMonorail": "../images/列车/JR東日本/多摩モノレール.png",
+    "ShonanMonorail": "../images/列车/JR東日本/千葉モノレール.png",
+    "SaitamaNewUrbanTransit": "../images/列车/JR東日本/ニューシャトル.png",
+    "ChibaUrbanMonorail": "../images/列车/JR東日本/千葉モノレール.png",
+    "TokyoMonorail": "../images/列车/JR東日本/東京モノレール.png",
+    "NipporiToneri": "../images/列车/JR東日本/都営浅草線.png"
   };
 
   // Specific line icons (override operator defaults)
@@ -115,10 +115,23 @@
     "SotetsuIzumino": "../images/列车/JR東日本/相鉄.png",
     "SotetsuShinyokohama": "../images/列车/JR東日本/相鉄.png",
     // Toei specific
-    "Asakusa": "../images/列车/都営地下鉄/5300系.png",
-    "Mita": "../images/列车/都営地下鉄/6300形.png",
-    "Shinjuku": "../images/列车/都営地下鉄/10-000形.png",
-    "Oedo": "../images/列车/都営地下鉄/12-000形.png"
+    "Asakusa": "../images/列车/JR東日本/都営浅草線.png",
+    "Mita": "../images/列车/JR東日本/都営三田線.png",
+    "Shinjuku": "../images/列车/JR東日本/都営新宿線.png",
+    "Oedo": "../images/列车/JR東日本/大江戸線.png",
+    "TodenArakawa": "../images/列车/JR東日本/都電荒川線.png",
+    // Yokohama Municipal
+    "YokohamaBlue": "../images/列车/JR東日本/横浜市ブルーライン.png",
+    "YokohamaGreen": "../images/列车/JR東日本/横浜市グリーンライン.png",
+    // Single-line operators
+    "Rinkai": "../images/列车/JR東日本/りんかい線.png",
+    "Yurikamome": "../images/列车/JR東日本/ゆりかもめ.png",
+    "TsukubaExpress": "../images/列车/JR東日本/つくばエクスプレス.png",
+    "TamaMonorail": "../images/列车/JR東日本/多摩モノレール.png",
+    "ChibaUrbanMonorail": "../images/列车/JR東日本/千葉モノレール.png",
+    "TokyoMonorail": "../images/列车/JR東日本/東京モノレール.png",
+    "SaitamaNewUrbanTransit": "../images/列车/JR東日本/ニューシャトル.png",
+    "NipporiToneri": "../images/列车/JR東日本/都営浅草線.png"
   };
 
   function getTrainIcon(lineId, operator) {
