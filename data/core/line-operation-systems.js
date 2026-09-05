@@ -534,7 +534,7 @@ window.LineOperationSystems = {
       nameEn: "Ikebukuro Line",
       nameKo: "",
       color: "#4da72a",
-      lineIds: ["SeibuIkebukuro", "Ikebukuro", "SeibuToshima", "SeibuChichibu", "Yurakucho_Seibu", "Seibu_Sayama"],
+      lineIds: ["Ikebukuro","SeibuToshima","SeibuChichibu","Yurakucho_Seibu","Seibu_Sayama"],
       icon: "../images/鉄道/西武鉄道/西武池袋線.png",
       order: 1
     },
@@ -556,7 +556,7 @@ window.LineOperationSystems = {
       nameEn: "Shinjuku Line",
       nameKo: "",
       color: "#0087c5",
-      lineIds: ["SeibuShinjuku", "Seibu_Shinjuku", "Hamura"],
+      lineIds: ["SeibuShinjuku","Hamura"],
       icon: "../images/鉄道/西武鉄道/西武新宿線.png",
       order: 3
     },
@@ -567,7 +567,7 @@ window.LineOperationSystems = {
       nameEn: "Tamako Line",
       nameKo: "",
       color: "#4da72a",
-      lineIds: ["SeibuTamako", "SeibuNakagawa"],
+      lineIds: ["SeibuTamako"],
       icon: "../images/鉄道/西武鉄道/西武多摩湖線.png",
       order: 4
     },
@@ -594,6 +594,7 @@ window.LineOperationSystems = {
       order: 6
     }
   ],
+
   "TOKYU": [
     {
       code: "DT",
