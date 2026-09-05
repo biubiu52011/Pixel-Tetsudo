@@ -115,7 +115,7 @@
     // Aggregate worst status across member lines for the card-level icon
     var worst = null;
     var firstId = null;
-    var chipsHtml = "";
+    var intervalSegments = []; // 收集所有线路的起终点用于合并
     for (var i = 0; i < memberIds.length; i++) {
       var lid = memberIds[i];
       if (firstId === null) firstId = lid;
@@ -126,18 +126,43 @@
       var status = dInfo.status ? dInfo.status : (dInfo ? "normal" : "no_data");
       if (!worst || statusRank(status) > statusRank(worst)) worst = status;
       if (mode === "trains") {
-        // 显示运行区间（起点↔终点）而不是线路名称
         var stations = line.stations || [];
         if (stations.length >= 2) {
-          var fromId = stations[0];
-          var toId = stations[stations.length - 1];
-          var fromName = (window.RailwayDB && window.RailwayDB.resolveStationName) ? window.RailwayDB.resolveStationName(fromId, lang) || fromId : fromId;
-          var toName = (window.RailwayDB && window.RailwayDB.resolveStationName) ? window.RailwayDB.resolveStationName(toId, lang) || toId : toId;
-          chipsHtml += '<span class="rs-sys-chip">' + escapeHtml(fromName) + '↔' + escapeHtml(toName) + '</span>';
-        } else {
-          var lname = (window.RailwayDB && window.RailwayDB.resolveLineName) ? window.RailwayDB.resolveLineName(lid, lang) : lid;
-          chipsHtml += '<span class="rs-sys-chip">' + escapeHtml(lname) + '</span>';
+          intervalSegments.push({ from: stations[0], to: stations[stations.length - 1] });
         }
+      }
+    }
+    // 合并连续线路的区间（前一条终点 == 后一条起点）
+    var chipsHtml = "";
+    if (mode === "trains" && intervalSegments.length > 0) {
+      var merged = [intervalSegments[0]];
+      for (var si = 1; si < intervalSegments.length; si++) {
+        var prev = merged[merged.length - 1];
+        var curr = intervalSegments[si];
+        if (prev.to === curr.from) {
+          // 连续，合并：起点保持，终点更新，中间站记录
+          prev.to = curr.to;
+          prev.mid = (prev.mid ? prev.mid + "↔" : "") + curr.from;
+        } else {
+          merged.push(curr);
+        }
+      }
+      for (var mi = 0; mi < merged.length; mi++) {
+        var seg = merged[mi];
+        var sFromName = (window.RailwayDB && window.RailwayDB.resolveStationName) ? window.RailwayDB.resolveStationName(seg.from, lang) || seg.from : seg.from;
+        var sToName = (window.RailwayDB && window.RailwayDB.resolveStationName) ? window.RailwayDB.resolveStationName(seg.to, lang) || seg.to : seg.to;
+        var midText = "";
+        if (seg.mid) {
+          var midStations = seg.mid.split("↔");
+          var midNames = [];
+          for (var msi = 0; msi < midStations.length; msi++) {
+            var midName = (window.RailwayDB && window.RailwayDB.resolveStationName) ? window.RailwayDB.resolveStationName(midStations[msi], lang) || midStations[msi] : midStations[msi];
+            midNames.push(escapeHtml(midName));
+          }
+          midText = midNames.join("↔") + "↔";
+        }
+        var intervalText = escapeHtml(sFromName) + "↔" + midText + escapeHtml(sToName);
+        chipsHtml += '<span class="rs-sys-chip">' + intervalText + '</span>';
       }
     }
     var worstS = getStatus(worst);
