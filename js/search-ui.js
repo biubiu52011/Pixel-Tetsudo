@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Pixel Tetsudo - Search UI Module (Optimized)
  */
 (function() {
@@ -36,12 +36,6 @@
           this.fromInput.setAttribute('data-station-id', _fromParam || '');
         }
         this._setFromSourceHint(_fromParam, _resolvedName);
-        // Only clean URL when to param is absent — preserve both params for refresh
-        var _hasTo = _params ? !!_params.get('to') : false;
-        if (!_hasTo) {
-          var _cleanUrl = window.location.pathname;
-          window.history.replaceState({}, '', _cleanUrl);
-        }
       }
 
       // Phase 42-E: Parse ?to=StationKey URL param
@@ -55,6 +49,12 @@
         this.toInput.setAttribute('data-station-id', _toParam || '');
       }
 
+
+      // Clean URL after both params are parsed — inputs are already filled, no need to preserve
+      if (_fromParam || _toParam) {
+        var _cleanUrl = window.location.pathname;
+        window.history.replaceState({}, '' , _cleanUrl);
+      }
       this.lastRouteResult = null;
       this.bindEvents();
       window.onLanguageChange(() => this.refreshUI());
