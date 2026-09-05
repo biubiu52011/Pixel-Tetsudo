@@ -206,10 +206,9 @@
   box-shadow: 3px 3px 0px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.1);
   transition: var(--transition-slow);
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   text-decoration: none;
   color: inherit;
-  min-height: 100px;
 }
 .sm-card:hover {
   box-shadow: var(--shadow-elevated);
@@ -221,13 +220,14 @@
 /* === Card thumb (left thumbnail area) === */
 .sm-thumb {
   position: relative;
-  width: 100px;
-  min-width: 100px;
+  width: 100%;
+  height: 140px;
   background: var(--bg3);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  overflow: hidden;
 }
 .sm-thumb-img {
   width: 100%;
@@ -569,7 +569,7 @@
 /* === Map info cards === */
 .map-info {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: var(--space-6);
   margin-bottom: 16px;
   width: 100%;
@@ -775,7 +775,7 @@
   padding: 0;
   margin: 0;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: var(--space-4);
 }
 .highlights-list li {
@@ -803,7 +803,7 @@
   padding: 0;
   margin: 0;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: var(--space-3);
 }
 .tips-list li {
@@ -836,7 +836,7 @@
 }
 .info-row {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   padding: 10px 14px;
   background: var(--card);
 }
@@ -1018,6 +1018,7 @@
   background: var(--green-dim, #006600);
   opacity: 1;
 }
+
 
 
 
