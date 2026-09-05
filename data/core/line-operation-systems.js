@@ -90,6 +90,17 @@ window.LineOperationSystems = {
       order: 5
     },
     {
+      code: "HAC",
+      nameJa: "八高線",
+      nameZh: "八高线",
+      nameEn: "Hachiko Line",
+      nameKo: "",
+      color: "#e95411",
+      lineIds: ["Hachiko"],
+      icon: "",
+      order: 30
+    },
+    {
       code: "JI",
       nameJa: "鶴見線",
       nameZh: "鹤见线",

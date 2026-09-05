@@ -10808,6 +10808,39 @@
         "Onda",
         "Kodomo-no-kuni"
       ]
+    },
+    "Hachiko": {
+      "nameJa": "八高線",
+      "nameEn": "Hachiko Line",
+      "operator": "JR-East",
+      "color": "#e95411",
+      "code": "HAC",
+      "stations": [
+        "Hachioji",
+        "Kita-Hachioji",
+        "Komiya",
+        "Haijima",
+        "Higashi-Fussa",
+        "Hakonegasaki",
+        "Kaneko",
+        "Higashi-Hanno",
+        "Komagawa",
+        "Moro",
+        "Ogose",
+        "Myokaku",
+        "Ogawamachi",
+        "Takezawa",
+        "Orihara",
+        "Yorii",
+        "Yodo",
+        "Matsuhisa",
+        "Kodama",
+        "Tansho",
+        "Gumma-Fujioka",
+        "Kita-Fujioka",
+        "Kuragano",
+        "Takasaki"
+      ]
     }
   },
   "name_map": {
