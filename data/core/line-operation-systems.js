@@ -1194,7 +1194,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#003399",
       lineIds: ["MinatoMirai"],
-      icon: "",
+      icon: "../images/鉄道/横浜高速鉄道/みなとみらい線.png",
       order: 1
     }
   ],
@@ -1220,7 +1220,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#ea5504",
       lineIds: ["NewShuttle"],
-      icon: "",
+      icon: "../images/鉄道/埼玉新都市交通/伊奈線.png",
       order: 1
     }
   ],
@@ -1233,7 +1233,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#0099cc",
       lineIds: ["ChibaUrbanMonorail"],
-      icon: "",
+      icon: "../images/鉄道/千葉都市モノレール/千葉都市モノレール1号線.png",
       order: 1
     }
   ],
@@ -1246,7 +1246,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#006fc0",
       lineIds: ["TokyoMonorail"],
-      icon: "",
+      icon: "../images/鉄道/東京モノレール/東京モノレール羽田空港線.png",
       order: 1
     }
   ],
