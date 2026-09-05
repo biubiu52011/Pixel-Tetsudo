@@ -550,10 +550,65 @@ window.LineOperationSystems = {
       nameZh: "鬼怒川线",
       nameEn: "Kinugawa Line",
       nameKo: "",
-      color: "#e46c0a",
+      color: "#006400",
       lineIds: ["Nikkoku"],
-      icon: "",
+      icon: "../images/鉄道/東武鉄道/日光線 宇都宮線 鬼怒川線.png",
       order: 5
+    },
+    {
+      code: "TU",
+      nameJa: "宇都宮線",
+      nameZh: "宇都宫线",
+      nameEn: "Utsunomiya Line",
+      nameKo: "",
+      color: "#FF8C00",
+      lineIds: ["Utsunomiya"],
+      icon: "../images/鉄道/東武鉄道/宇都宮線.png",
+      order: 6
+    },
+    {
+      code: "DTB",
+      nameJa: "大師線",
+      nameZh: "大师线",
+      nameEn: "Daishi Line",
+      nameKo: "",
+      color: "#FF6600",
+      lineIds: ["Daishi_Tobu"],
+      icon: "../images/鉄道/東武鉄道/大志線.png",
+      order: 7
+    },
+    {
+      code: "TKM",
+      nameJa: "亀戸線",
+      nameZh: "龟户线",
+      nameEn: "Kameido Line",
+      nameKo: "",
+      color: "#FF69B4",
+      lineIds: ["Tobu_Kameido"],
+      icon: "../images/鉄道/東武鉄道/亀戸線.png",
+      order: 8
+    },
+    {
+      code: "TOG",
+      nameJa: "越生線",
+      nameZh: "越生线",
+      nameEn: "Ogose Line",
+      nameKo: "",
+      color: "#4169E1",
+      lineIds: ["Ogose"],
+      icon: "../images/鉄道/東武鉄道/生越線.png",
+      order: 9
+    },
+    {
+      code: "TQZ",
+      nameJa: "小泉線",
+      nameZh: "小泉线",
+      nameEn: "Koizumi Line",
+      nameKo: "",
+      color: "#32CD32",
+      lineIds: ["Koizumi"],
+      icon: "../images/鉄道/東武鉄道/小泉線.png",
+      order: 10
     }
   ],
   "SEIBU": [
