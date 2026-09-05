@@ -229,9 +229,9 @@ function renderGrid() {
     }
 
     dom.grid.innerHTML = spotList.map(function(s, idx) {
-      const name = s.name || '';
-      const desc = s.desc || '';
-      const tags = s.tags || [];
+      const lang = state.lang || 'ja';
+      const name = (s.name_i18n && s.name_i18n[lang]) || s.name || '';
+      const desc = (s.desc_i18n && s.desc_i18n[lang]) || s.desc || '';
       const image = s.image || '';
 
       const thumbHtml = image ? 

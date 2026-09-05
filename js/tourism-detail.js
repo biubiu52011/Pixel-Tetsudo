@@ -53,8 +53,8 @@ var currentStationKey = null;
   function getSpotName(spot) {
     if (!spot) return '';
     var l = lang || 'ja';
+    if (spot.name_i18n && spot.name_i18n[l]) return spot.name_i18n[l];
     if (spot['name_' + l]) return spot['name_' + l];
-    if (spot.name) return spot.name;
     return '';
   }
 
@@ -128,7 +128,7 @@ var currentStationKey = null;
     if (!container) return;
 
     var spotName = getSpotName(spot);
-    var desc = spot['desc_' + lang] || spot.desc || '';
+    var desc = (spot.desc_i18n && spot.desc_i18n[lang]) || spot['desc_' + lang] || spot.desc || '';
     var tags = spot.tags || ['all'];
     var gradient = getGradientForTags(tags);
     var coord = spot.coord || [35.71, 139.80];
