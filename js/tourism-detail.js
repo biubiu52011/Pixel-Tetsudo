@@ -58,6 +58,37 @@ var currentStationKey = null;
     return '';
   }
 
+  // Get i18n field value with fallback
+  function getI18nField(spot, field, lang) {
+    if (!spot) return '';
+    var i18nField = field + '_i18n';
+    if (spot[i18nField] && spot[i18nField][lang]) return spot[i18nField][lang];
+    if (spot[i18nField] && spot[i18nField].ja) return spot[i18nField].ja;
+    return spot[field] || '';
+  }
+
+  // Translate common Japanese terms in hours/fee fields
+  function translateCommonTerms(text, lang) {
+    if (!text) return text;
+    var translations = {
+      '無料': { zh: '免费', en: 'Free', ko: '무료' },
+      '年中無休': { zh: '全年无休', en: 'Open year-round', ko: '연중무휴' },
+      '定休日': { zh: '定期休息日', en: 'Regular holiday', ko: '정기휴일' },
+      '火曜定休': { zh: '周二休息', en: 'Closed Tuesdays', ko: '화요일 휴무' },
+      '外観のみ公開': { zh: '仅外观开放', en: 'Exterior only', ko: '외관만 공개' },
+      '内部非公開': { zh: '内部不开放', en: 'Interior not open', ko: '내부 비공개' },
+      '24時間営業': { zh: '24小时营业', en: 'Open 24 hours', ko: '24시간 영업' },
+      '24時間開放': { zh: '24小时开放', en: 'Open 24 hours', ko: '24시간 개방' }
+    };
+    var result = text;
+    Object.keys(translations).forEach(function(term) {
+      if (translations[term][lang]) {
+        result = result.replace(new RegExp(term, 'g'), translations[term][lang]);
+      }
+    });
+    return result;
+  }
+
   // Get all spots from global TOURISM_SPOTS pool (no station binding)
   function getAllSpots() {
     return window.TOURISM_SPOTS || [];
@@ -77,7 +108,7 @@ var currentStationKey = null;
   // Find spot by name or index
   function findSpotByName(name) {
     if (!name || allSpots.length === 0) return null;
-    return allSpots.find(function(s) { return s.name === name || (s['name_' + lang] === name) || (s.name_ja === name) || (s.name_zh === name); }) || null;
+    return allSpots.find(function(s) { return s.name === name || (s.name_i18n && (s.name_i18n[lang] === name || s.name_i18n.ja === name || s.name_i18n.zh === name || s.name_i18n.en === name)) || (s['name_' + lang] === name) || (s.name_ja === name) || (s.name_zh === name); }) || null;
   }
 
   function findSpotByIndex(idx) {
@@ -197,15 +228,16 @@ var currentStationKey = null;
     if (distText) tipsHtml += '<li>' + escapeHtml(t('detail.distance') + ': ' + distText) + '</li>';
     if (spot.tips && spot.tips.length > 0) {
       for (var ti = 0; ti < spot.tips.length; ti++) {
-        tipsHtml += '<li>' + escapeHtml(spot.tips[ti]) + '</li>';
+        var tipText = (spot.tips_i18n && spot.tips_i18n[lang] && spot.tips_i18n[lang][ti]) || (spot.tips_i18n && spot.tips_i18n.ja && spot.tips_i18n.ja[ti]) || spot.tips[ti];
+        tipsHtml += '<li>' + escapeHtml(tipText) + '</li>';
       }
     } else {
       tipsHtml += '<li>' + escapeHtml(t('detail.fallback_best_time')) + '</li>';
     }
     tipsHtml += '</ul></div>';
 
-    var spotHours = spot.hours || t('detail.unavailable');
-    var spotFee = spot.fee || t('detail.unavailable');
+    var spotHours = translateCommonTerms(getI18nField(spot, 'hours', lang) || t('detail.unavailable'), lang);
+    var spotFee = translateCommonTerms(getI18nField(spot, 'fee', lang) || t('detail.unavailable'), lang);
     // Info grid (hours, fees)
     var infoHtml = '<div class="article-section">'
       + '<h3 class="section-heading">' + t('detail.info_hours') + '</h3>'
@@ -218,7 +250,7 @@ var currentStationKey = null;
     var mapHtml = '<div id="tourismMap" class="map-container"><div class="map-loading">' + (typeof t === 'function' ? t('detail.map_loading') : 'Loading map...') + '</div></div>';
 
     // Quick info bar
-    var spotBestTime = spot.bestTime || t('detail.fallback_best_time');
+    var spotBestTime = translateCommonTerms(getI18nField(spot, 'bestTime', lang) || t('detail.fallback_best_time'), lang);
     var quickInfo = '<div class="detail-quick-info">' + '<div class="qi-item"><div class="qi-label">' + t('detail.distance') + '</div><div class="qi-value">' + escapeHtml(distText || t('detail.near_station')) + '</div></div>' + '<div class="qi-item"><div class="qi-label">' + t('detail.best_time') + '</div><div class="qi-value">' + escapeHtml(spotBestTime) + '</div></div>' + '</div>';
 
     var heroClass = getHeroClassForGradient(gradient);
