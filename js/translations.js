@@ -542,7 +542,7 @@
       "op.Sotetsu": "相模鉄道",
       "op.YokohamaMunicipal": "横浜市営地下鉄",
       "op.TWR": "りんかい線",
-      "op.MinatoMirai": "港未来線",
+      "op.MinatoMirai": "横浜高速鉄道",
       "op.MIR": "ひたちなか海浜鉄道",
       "op.Rinkai": "臨海線",
       "op.TsukubaExpress": "つくばエクスプレス",
