@@ -113,6 +113,30 @@
       var positions = getRealtimePositions(lineId);
       var color = line.color || "#008803";
       var stations = line.stations || [];
+      // Merge stations from same LOS running system
+      var _sysId = null;
+      if (window.LineOperationSystems) {
+        for (var _sid in window.LineOperationSystems) {
+          var _sys = window.LineOperationSystems[_sid];
+          if (_sys.lineIds && _sys.lineIds.indexOf(lineId) >= 0) { _sysId = _sid; break; }
+        }
+      }
+      if (_sysId && window.LineOperationSystems && window.LineOperationSystems[_sysId]) {
+        var _sys = window.LineOperationSystems[_sysId];
+        var _allLines = getLinesData();
+        var _merged = [];
+        var _seen = {};
+        for (var _li = 0; _li < _sys.lineIds.length; _li++) {
+          var _sub = _allLines[_sys.lineIds[_li]];
+          if (!_sub || !_sub.stations) continue;
+          for (var _si = 0; _si < _sub.stations.length; _si++) {
+            var _stid = _sub.stations[_si];
+            if (!_seen[_stid]) { _seen[_stid] = true; _merged.push(_stid); }
+          }
+        }
+        if (_merged.length > stations.length) { stations = _merged; }
+        if (_sys.color) { color = _sys.color; }
+      }
       var _lang = window.currentLang || 'ja';
       var _rS = (window.RailwayDB && window.RailwayDB.resolveStationName) ? function(id){ return window.RailwayDB.resolveStationName(id, _lang) || id; } : function(id){ return id; };
       var branchLines = [];
