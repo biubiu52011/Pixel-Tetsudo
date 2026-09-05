@@ -284,6 +284,18 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#00732f",
       lineIds: ["TohokuMain"],
+    {
+      code: "SOB",
+      nameJa: "総武本線",
+      nameZh: "总武本线",
+      nameEn: "Sobu Main Line",
+      nameKo: "",
+      color: "#fcc60d",
+      lineIds: ["SobuMain"],
+      icon: "",
+      order: 30
+    },
+
       icon: "",
       order: 21
     },

@@ -11017,6 +11017,37 @@
         "Haneda Airport Terminal 1",
         "Haneda Airport Terminal 2"
       ]
+    },
+    "SobuMain": {
+      "nameJa": "総武本線",
+      "nameEn": "Sōbu Main Line",
+      "operator": "JR-East",
+      "color": "#fcc60d",
+      "code": "SOB",
+      "stations": [
+        "Chiba",
+        "Higashi-Chiba",
+        "Tsuga",
+        "Yotsukaidō",
+        "Monoi",
+        "Sakura",
+        "Minami-Shisui",
+        "Enokido",
+        "Yachimata",
+        "Hyūga",
+        "Narita",
+        "Matsuo",
+        "Yokoshiba",
+        "Iikura",
+        "Yōkaichiba",
+        "Higata",
+        "Asahi",
+        "Iioka",
+        "Kurahashi",
+        "Saruda",
+        "Matsugishi",
+        "Chōshi"
+      ]
     }
   },
   "name_map": {
