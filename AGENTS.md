@@ -224,7 +224,7 @@ If the answer is NO, the change is REJECTED.
 | Debt | Priority | Reason for defer |
 |------|----------|-----------------|
 | History <-> SearchUI coupling (P2) | P2 | Requires SearchUI public API redesign |
-| data/铁道/ directory (P3) | P3 | Historical archive, zero runtime impact |
+| ~~data/铁道/ directory~~ | REMOVED 2026-09-06 | Historical archive deleted on explicit user instruction (git history preserves everything; restored once by concurrent workflow 63114dd, then removed again on user approval). Twin home.html with broken relative paths eliminated — entry is exclusively pages/home.html |
 | ~~data/api/line-operation-systems.js~~ | REMOVED 4.3.41 | Orphan duplicate of data/core (zero page refs, missing isStandalone) — removed, keep data/core/line-operation-systems.js as single source |
 | CSS orphan classes (5) | P3 | Low risk, covered by inheritance |
 | console.log in odpt-unified.js (2) | P3 | Non-product debug output |
@@ -243,7 +243,7 @@ If the answer is NO, the change is REJECTED.
 
 ---
 
-Last updated: 2026-09-01
+Last updated: 2026-09-06
 Version: RC-2
 ---
 
@@ -307,3 +307,12 @@ Before tagging a release:
 3. Commit rule update BEFORE tagging
 4. Tag on the new commit (not on old HEAD)
 5. Push main branch + tag together
+
+---
+
+## Runtime Contract (运行契约)
+- Canonical data is loaded by db-loader.js via `fetch` (railway_data.json / station_i18n.json / tourism_data.json).
+- `file://` protocol blocks fetch (CORS), so pages CANNOT work when opened by double-click. The project MUST be served over HTTP:
+  - `python -m http.server 8017` then open `http://localhost:8017/pages/home.html`
+- Data load success signal: console log `509 stations, 159 lines, 94 tourism stations`.
+- The ONLY entry page is `pages/home.html` (index.html redirects there). Do not create or restore any second home.html elsewhere.
