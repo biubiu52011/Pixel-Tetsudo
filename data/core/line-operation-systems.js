@@ -454,7 +454,7 @@ window.LineOperationSystems = {
       nameEn: "Isesaki Line (Skytree Line)",
       nameKo: "",
       color: "#002d62",
-      lineIds: ["TobuIsesaki", "Isesaki", "Skytree", "TobuSkytree"],
+      lineIds: ["TobuIsesaki", "Skytree", "TobuSkytree"],
       icon: "../images/鉄道/東武鉄道/伊勢崎線 佐野線 桐生線 小泉線 小泉線支線.png",
       order: 2
     },
@@ -603,7 +603,7 @@ window.LineOperationSystems = {
       nameEn: "Keio Line",
       nameKo: "",
       color: "#dd057c",
-      lineIds: ["Keio", "KeioMain", "KeioShin", "KeioSagami", "KeioTakao", "KeioKeibajo", "KeioZoo"],
+      lineIds: ["KeioMain", "KeioShin", "KeioSagami", "KeioTakao", "KeioKeibajo", "KeioZoo"],
       icon: "../images/鉄道/京王電鉄/相模原線.png",
       order: 2
     }
@@ -642,7 +642,7 @@ window.LineOperationSystems = {
       nameEn: "Keikyu Main Line",
       nameKo: "",
       color: "#e60012",
-      lineIds: ["Keikyu", "KeikyuMain", "KeikyuAirport", "KeikyuKurihama", "KeikyuZushi", "Daishi_Keikyu"],
+      lineIds: ["Keikyu", "KeikyuAirport", "KeikyuKurihama", "KeikyuZushi", "Daishi_Keikyu"],
       icon: "../images/鉄道/京急電鉄/空港線.png",
       order: 1
     }
