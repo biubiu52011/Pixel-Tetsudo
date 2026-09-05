@@ -3702,7 +3702,7 @@
     "SeibuShinjuku": {
       "name": "SeibuShinjuku",
       "nameEn": "Seibu Shinjuku Line",
-      "nameJa": "西福新宿線",
+      "nameJa": "西武新宿線",
       "code": "SN",
       "color": "#01A6BF",
       "operator": "Seibu",
@@ -4054,7 +4054,7 @@
     "SeibuIkebukuro": {
       "name": "SeibuIkebukuro",
       "nameEn": "Seibu Ikebukuro Line",
-      "nameJa": "西福池袋線",
+      "nameJa": "西武池袋線",
       "code": "SI",
       "color": "#EF7A00",
       "operator": "Seibu",
@@ -4405,7 +4405,7 @@
     "HitachiNakaKaimin": {
       "name": "HitachiNakaKaimin",
       "nameEn": "Tsukuba Express",
-      "nameJa": "ひたちなか海浜鉄道なかしおもこうりん線",
+      "nameJa": "ひたちなか海浜鉄道なかしおとうみ線",
       "code": "TX",
       "color": "#273E6C",
       "operator": "MIR",
