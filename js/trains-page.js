@@ -167,7 +167,7 @@
           if (_existingIcon) {
             var _oldX = parseFloat(_existingIcon.getAttribute('x'));
             var _oldY = parseFloat(_existingIcon.getAttribute('y'));
-            var _newX = _px - 10, _newY = _py - 12;
+            var _newX = _px - 8, _newY = _py - 10;
             if (Math.abs(_oldX - _newX) > 0.5 || Math.abs(_oldY - _newY) > 0.5) {
               _existingIcon.setAttribute('x', _newX);
               _existingIcon.setAttribute('y', _newY);
@@ -180,10 +180,10 @@
             var _iconCls = _isEst ? "train-icon estimated" : "train-icon";
             var _newIcon = document.createElementNS("http://www.w3.org/2000/svg", "image");
             _newIcon.setAttribute("data-train-id", String(_trainUid));
-            _newIcon.setAttribute("x", String(_px - 10));
-            _newIcon.setAttribute("y", String(_py - 12));
-            _newIcon.setAttribute("width", "20");
-            _newIcon.setAttribute("height", "24");
+            _newIcon.setAttribute("x", String(_px - 8));
+            _newIcon.setAttribute("y", String(_py - 10));
+            _newIcon.setAttribute("width", "16");
+            _newIcon.setAttribute("height", "20");
             if (_iconSrc) _newIcon.setAttribute("href", _iconSrc);
             _newIcon.setAttribute("class", _iconCls);
             _newIcon.setAttribute("preserveAspectRatio", "xMidYMid meet");
@@ -358,7 +358,7 @@
         var iconClass = isEstimated ? "train-icon estimated" : "train-icon";
         if (iconSrc) {
           var trainUid = p.trainId || ("train_" + j);
-        svg += "<image data-train-id=\"" + escapeHtml(trainUid) + "\" x=\"" + (px - 10) + "\" y=\"" + (py - 12) + "\" width=\"20\" height=\"24\" href=\"" + escapeHtml(iconSrc) + "\" class=\"" + iconClass + "\" preserveAspectRatio=\"xMidYMid meet\"/>";
+        svg += "<image data-train-id=\"" + escapeHtml(trainUid) + "\" x=\"" + (px - 8) + "\" y=\"" + (py - 10) + "\" width=\"16\" height=\"20\" href=\"" + escapeHtml(iconSrc) + "\" class=\"" + iconClass + "\" preserveAspectRatio=\"xMidYMid meet\"/>";
         } else {
           svg += "<circle cx=\"" + px + "\" cy=\"" + py + "\""+ "  r=\"8\" fill=\"" + escapeHtml(color) + "\""+ "  filter=\"url(#tg_" + escapeHtml(lineId) + ")\" opacity=\"0.9\"/>";
           
