@@ -1037,7 +1037,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#f39800",
       lineIds: ["NaritaSkyAccess"],
-      icon: "",
+      icon: "../images/鉄道/京成電鉄/成田スカイアクセス.png",
       order: 6
     }
   ],
