@@ -8,8 +8,8 @@
 
   // Operator default icons (fallback)
   var OPERATOR_ICONS = {
-    "JR-East": "../images/列车/JR東日本/E233系.png",
-    "JR West": "../images/列车/JR東日本/E233系.png",
+    "JR-East": "../images/列车/JR東日本/山手線.png",
+    "JR West": "../images/列车/JR東日本/山手線.png",
     "TokyoMetro": "../images/列车/東京メトロ/18000系.png",
     "Toei": "../images/列车/都営地下鉄/1000形.png",
     "YokohamaMunicipal": "../images/列车/都営地下鉄/1000形.png",
@@ -37,27 +37,29 @@
 
   // Specific line icons (override operator defaults)
   var LINE_ICONS = {
-    // JR East specific
-    "Yamanote": "../images/列车/JR東日本/E235系.png",
-    "KeihinTohoku": "../images/列车/JR東日本/E233系.png",
-    "ChuoRapid": "../images/列车/JR東日本/E233系.png",
-    "ChuoLocal": "../images/列车/JR東日本/E231系.png",
-    "Saikyo": "../images/列车/JR東日本/E233系.png",
-    "Yokosuka": "../images/列车/JR東日本/E217系.png",
-    "Tokaido": "../images/列车/JR東日本/E233系.png",
-    "Utsunomiya": "../images/列车/JR東日本/E233系.png",
-    "Takasaki": "../images/列车/JR東日本/E233系.png",
-    "SobuRapid": "../images/列车/JR東日本/E217系.png",
-    "JobanRapid": "../images/列车/JR東日本/E231系.png",
-    "JobanLocal": "../images/列车/JR東日本/E233系.png",
-    "Musashino": "../images/列车/JR東日本/E231系.png",
-    "Nambu": "../images/列车/JR東日本/E233系.png",
-    "Yokohama": "../images/列车/JR東日本/E233系.png",
-    "Keiyo": "../images/列车/JR東日本/E233系.png",
-    "Tsurumi": "../images/列车/JR東日本/E233系.png",
-    "ShonanShinjuku": "../images/列车/JR東日本/E233系.png",
-    "Ome": "../images/列车/JR東日本/E233系.png",
-    "Itsukaichi": "../images/列车/JR東日本/E233系.png",
+    // JR East specific (line-specific icons)
+    "Yamanote": "../images/列车/JR東日本/山手線.png",
+    "KeihinTohoku": "../images/列车/JR東日本/京浜東北線.png",
+    "Saikyo": "../images/列车/JR東日本/埼京川越線.png",
+    "Kawagoe": "../images/列车/JR東日本/埼京川越線.png",
+    // Other JR East lines use Yamanote as generic fallback
+    "ChuoRapid": "../images/列车/JR東日本/山手線.png",
+    "ChuoLocal": "../images/列车/JR東日本/山手線.png",
+    "Yokosuka": "../images/列车/JR東日本/山手線.png",
+    "Tokaido": "../images/列车/JR東日本/山手線.png",
+    "Utsunomiya": "../images/列车/JR東日本/山手線.png",
+    "Takasaki": "../images/列车/JR東日本/山手線.png",
+    "SobuRapid": "../images/列车/JR東日本/山手線.png",
+    "JobanRapid": "../images/列车/JR東日本/山手線.png",
+    "JobanLocal": "../images/列车/JR東日本/山手線.png",
+    "Musashino": "../images/列车/JR東日本/山手線.png",
+    "Nambu": "../images/列车/JR東日本/山手線.png",
+    "Yokohama": "../images/列车/JR東日本/山手線.png",
+    "Keiyo": "../images/列车/JR東日本/山手線.png",
+    "Tsurumi": "../images/列车/JR東日本/山手線.png",
+    "ShonanShinjuku": "../images/列车/JR東日本/山手線.png",
+    "Ome": "../images/列车/JR東日本/山手線.png",
+    "Itsukaichi": "../images/列车/JR東日本/山手線.png",
     // Tokyo Metro specific
     "Ginza": "../images/列车/東京メトロ/1000系.png",
     "Marunouchi": "../images/列车/東京メトロ/2000系.png",
