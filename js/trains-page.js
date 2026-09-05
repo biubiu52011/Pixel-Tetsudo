@@ -173,6 +173,22 @@
               _existingIcon.setAttribute('y', _newY);
               _hasChanges = true;
             }
+          } else {
+            // Create new train icon for newly appeared train
+            var _iconSrc = (window.TrainIcons && typeof window.TrainIcons.getTrainIcon === "function") ? window.TrainIcons.getTrainIcon(lineId, line.operator) : "";
+            var _isEst = _p.estimated === true;
+            var _iconCls = _isEst ? "train-icon estimated" : "train-icon";
+            var _newIcon = document.createElementNS("http://www.w3.org/2000/svg", "image");
+            _newIcon.setAttribute("data-train-id", String(_trainUid));
+            _newIcon.setAttribute("x", String(_px - 10));
+            _newIcon.setAttribute("y", String(_py - 12));
+            _newIcon.setAttribute("width", "20");
+            _newIcon.setAttribute("height", "24");
+            if (_iconSrc) _newIcon.setAttribute("href", _iconSrc);
+            _newIcon.setAttribute("class", _iconCls);
+            _newIcon.setAttribute("preserveAspectRatio", "xMidYMid meet");
+            existingSvg.appendChild(_newIcon);
+            _hasChanges = true;
           }
         }
         var _allIcons = existingSvg.querySelectorAll('[data-train-id]');
