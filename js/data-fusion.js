@@ -5,7 +5,7 @@
   "use strict";
 
   var FUSION_VERSION = 11;
-  var REFRESH_INTERVAL = 30000;
+  var REFRESH_INTERVAL = 15000;
   var POSITION_INTERVAL = 60000;
 
   var odptData = { trains: {}, delayInfo: {}, realtimePositions: {} };

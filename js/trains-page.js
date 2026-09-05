@@ -495,7 +495,12 @@
             for (var i = 0; i < ids.length; i++) {
               var l = lines[ids[i]];
               if (l && l.realtimePositions && l.realtimePositions.length > 0) {
-                posHash += ids[i] + ':' + l.realtimePositions.length + ';';
+                posHash += ids[i] + ':' + l.realtimePositions.length + ':';
+                for (var _pi = 0; _pi < l.realtimePositions.length; _pi++) {
+                  var _tp = l.realtimePositions[_pi];
+                  posHash += (_tp.trainId || ('t' + _pi)) + '@' + (_tp.stationIndex || 0) + ',';
+                }
+                posHash += ';';
               }
             }
           } catch(e) {}
@@ -508,9 +513,11 @@
           } else if (posHash !== _lastPositionsHash) {
             _lastPositionsHash = posHash;
             renderList(listEl);
-            // Re-render line detail view if open (to update train positions on map)
+            // Update train positions on map if detail view is open (incremental update for smooth animation)
             if (currentLine && detailEl && !detailEl.classList.contains("hidden")) {
-              showLineView(currentLine);
+              var _lines = getLinesData();
+              var _fusedLine = _lines[currentLine];
+              if (_fusedLine) renderTrainMap(mapEl, _fusedLine, currentLine);
             }
           }
         });
