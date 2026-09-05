@@ -192,7 +192,7 @@
           var _px, _py;
           if (_isLoop && _loopPts.length > _idx) { _px = _loopPts[_idx].x; _py = _loopPts[_idx].y; }
           else { _px = _mainCx; _py = _topP + _idx * _sp; }
-          var _trainUid = _p.trainId || ("train_" + _pi);
+          var _trainUid = (_p.trainId || ("train_" + _pi)) + "_" + (_p.stationIndex || 0);
           _updatedIds[_trainUid] = true;
           var _existingIcon = existingSvg.querySelector('[data-train-id="' + String(_trainUid).replace(/"/g, '') + '"]');
           if (_existingIcon) {
@@ -388,7 +388,7 @@
         var isEstimated = p.estimated === true;
         var iconClass = isEstimated ? "train-icon estimated" : "train-icon";
         if (iconSrc) {
-          var trainUid = p.trainId || ("train_" + j);
+          var trainUid = (p.trainId || ("train_" + j)) + "_" + (p.stationIndex || 0);
         svg += "<image data-train-id=\"" + escapeHtml(trainUid) + "\" x=\"" + (px - 7) + "\" y=\"" + (py - 9) + "\" width=\"14\" height=\"18\" href=\"" + escapeHtml(iconSrc) + "\" class=\"" + iconClass + "\" preserveAspectRatio=\"xMidYMid meet\"/>";
         } else {
           svg += "<circle cx=\"" + px + "\" cy=\"" + py + "\""+ "  r=\"8\" fill=\"" + escapeHtml(color) + "\""+ "  filter=\"url(#tg_" + escapeHtml(lineId) + ")\" opacity=\"0.9\"/>";
