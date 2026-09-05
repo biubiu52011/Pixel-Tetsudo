@@ -4202,7 +4202,7 @@
       "nameJa": "多摩都市モノレール線",
       "code": "TT",
       "color": "#ff9900",
-      "operator": "Tama Monorail",
+      "operator": "TamaMonorail",
       "region": "Tokyo Area",
       "type": "straight",
       "image": "../images/鉄道/多摩モノレール/多摩モノレール.png",

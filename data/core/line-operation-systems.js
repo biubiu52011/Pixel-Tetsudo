@@ -1165,7 +1165,7 @@ window.LineOperationSystems = {
       nameJa: "多摩モノレール線",
       nameZh: "多摩单轨线",
       nameEn: "Tama Toshi Monorail Line",
-      nameKo: "",
+      nameKo: "타마 도시 모노레일 선",
       color: "#ff9900",
       lineIds: ["TamaMonorail"],
       icon: "../images/鉄道/多摩都市モノレール/多摩都市モノレール線.png",
