@@ -71,9 +71,9 @@
       // Handle common naming variants
       var aliases = {
         "kokusaitenjijo": "tokyoshowacenter",
+        "tennozuisle": "tennozuise",
         "shinagawaseaside": "shinagawaseaside",
         "oimachi": "oimachi",
-        "tennozuisle": "tennozuisle",
         "tokyoteleport": "tokyoteleport",
         "shinkiba": "shinkiba",
         "shinonome": "shinonome"
