@@ -331,6 +331,32 @@
             return fetchODPT(buildUrl(operator, 'trainTimetable')).then(extractData);
         },
 
+        // 按线路获取时刻表（解决API返回1000条限制的问题）
+        getTimetableForRailway: function(operator, railway) {
+            var ep = ODPT_ENDPOINTS[operator];
+            if (!ep || !ep.trainTimetable) return Promise.resolve([]);
+            var key = ep.base.indexOf('api-challenge') >= 0 ? CHALLENGE_KEY : CENTER_KEY;
+            // railway格式: "odpt.Railway:TokyoMetro.Ginza" 或 "Ginza"
+            var railwayParam = railway.indexOf('odpt.Railway:') === 0 ? railway : 'odpt.Railway:' + operator + '.' + railway;
+            var url = ep.base + 'odpt:TrainTimetable?odpt:operator=odpt.Operator:' + operator + '&odpt:railway=' + railwayParam + '&acl:consumerKey=' + key;
+            return fetchODPT(url).then(extractData);
+        },
+
+        // 时刻表缓存（避免重复请求）
+        _timetableCache: {},
+
+        // 获取缓存的时刻表（按线路）
+        getCachedTimetable: function(operator, railway) {
+            var key = operator + ':' + railway;
+            return this._timetableCache[key] || null;
+        },
+
+        // 缓存时刻表
+        cacheTimetable: function(operator, railway, data) {
+            var key = operator + ':' + railway;
+            this._timetableCache[key] = data;
+        },
+
         // 检查运营商是否支持某种API
         supports: function(operator, type) {
             var ep = ODPT_ENDPOINTS[operator];

@@ -199,27 +199,63 @@
       odptData.realtimePositions = posMap;
 
       // ===== Estimate positions for lines without realtime data =====
-      try {
-        if (window.TrainPositionEstimator && typeof window.TrainPositionEstimator.estimateAllPositions === "function") {
-          var timetableSource = window.ODPT_TIMETABLES || window.ODPT_TRAINS || {};
-          var estimated = window.TrainPositionEstimator.estimateAllPositions(
-            allLines,
-            timetableSource,
-            odptData.delayInfo,
-            posMap
-          );
-          var estCount = 0;
-          Object.keys(estimated).forEach(function(lid) {
-            if (!posMap[lid] || posMap[lid].length === 0) {
-              posMap[lid] = estimated[lid];
-              estCount += estimated[lid].length;
+      function doEstimation() {
+        try {
+          if (window.TrainPositionEstimator && typeof window.TrainPositionEstimator.estimateAllPositions === "function") {
+            var timetableSource = window.ODPT_TIMETABLES || window.ODPT_TRAINS || {};
+            var estimated = window.TrainPositionEstimator.estimateAllPositions(
+              allLines,
+              timetableSource,
+              odptData.delayInfo,
+              posMap
+            );
+            var estCount = 0;
+            Object.keys(estimated).forEach(function(lid) {
+              if (!posMap[lid] || posMap[lid].length === 0) {
+                posMap[lid] = estimated[lid];
+                estCount += estimated[lid].length;
+              }
+            });
+            if (estCount > 0) {
+              console.debug("[DataFusion] Estimated", estCount, "train positions for", Object.keys(estimated).length, "lines");
             }
-          });
-          if (estCount > 0) {
-            console.debug("[DataFusion] Estimated", estCount, "train positions for", Object.keys(estimated).length, "lines");
           }
+        } catch(estErr) { console.debug("[DataFusion] Position estimation error:", estErr.message); }
+      }
+
+      // 先进行一次估算（使用已有的时刻表数据）
+      doEstimation();
+
+      // 识别需要估算但可能没有时刻表的线路，按需加载
+      try {
+        var timetableOps = Object.keys(window.ODPT_TIMETABLES || {});
+        var linesNeedingTimetable = [];
+        Object.keys(allLines).forEach(function(lid) {
+          var line = allLines[lid];
+          if (!line || !line.operator) return;
+          var hasRealtime = posMap[lid] && posMap[lid].length > 0;
+          var hasTimetable = timetableOps.indexOf(line.operator) >= 0;
+          // 检查该线路是否有时刻表数据（按railway过滤）
+          if (hasTimetable && window.ODPT_TIMETABLES[line.operator]) {
+            var lineTimetables = window.ODPT_TIMETABLES[line.operator].filter(function(t) {
+              var railway = t['odpt:railway'] || '';
+              return railway.indexOf(lid) >= 0 || railway.indexOf('.' + lid) >= 0;
+            });
+            hasTimetable = lineTimetables.length > 0;
+          }
+          if (!hasRealtime && !hasTimetable && window.ODPTClient && window.ODPTClient.supports(line.operator, 'trainTimetable')) {
+            linesNeedingTimetable.push({ lineId: lid, operator: line.operator, name: line.name || line.nameJa });
+          }
+        });
+
+        if (linesNeedingTimetable.length > 0 && typeof loadMissingTimetables === 'function') {
+          loadMissingTimetables(linesNeedingTimetable).then(function() {
+            // 时刻表加载完成后，重新进行估算
+            doEstimation();
+            try { fuseAll(); } catch(e) { console.debug("[DataFusion] reload->fuseAll error:", e.message); }
+          });
         }
-      } catch(estErr) { console.debug("[DataFusion] Position estimation error:", estErr.message); }
+      } catch(timetableErr) { console.debug("[DataFusion] Missing timetable detection error:", timetableErr.message); }
 
       try { fuseAll(); } catch(e) { console.debug("[DataFusion] loadTrainPositions->fuseAll error:", e.message); }
     } catch(e) { console.debug("[DataFusion] loadTrainPositions error:", e.message); }
