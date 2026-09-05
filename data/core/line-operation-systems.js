@@ -824,7 +824,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#dd057c",
       lineIds: ["KeioShin"],
-      icon: "",
+      icon: "../images/鉄道/京王電鉄/京王新線.png",
       order: 3
     },
     {
@@ -833,7 +833,7 @@ window.LineOperationSystems = {
       nameZh: "相模原线",
       nameEn: "Sagamihara Line",
       nameKo: "",
-      color: "#dd057c",
+      color: "#9C27B0",
       lineIds: ["KeioSagami"],
       icon: "../images/鉄道/京王電鉄/相模原線.png",
       order: 4
@@ -844,9 +844,9 @@ window.LineOperationSystems = {
       nameZh: "高尾线",
       nameEn: "Takao Line",
       nameKo: "",
-      color: "#dd057c",
+      color: "#9C27B0",
       lineIds: ["KeioTakao"],
-      icon: "",
+      icon: "../images/鉄道/京王電鉄/高尾線.png",
       order: 5
     },
     {
@@ -855,9 +855,9 @@ window.LineOperationSystems = {
       nameZh: "竞马场线",
       nameEn: "Keibajo Line",
       nameKo: "",
-      color: "#dd057c",
+      color: "#8C1C8E",
       lineIds: ["KeioKeibajo"],
-      icon: "",
+      icon: "../images/鉄道/京王電鉄/競馬場線.png",
       order: 6
     },
     {
@@ -866,9 +866,9 @@ window.LineOperationSystems = {
       nameZh: "动物园线",
       nameEn: "Dobutsuen Line",
       nameKo: "",
-      color: "#dd057c",
+      color: "#8C1C8E",
       lineIds: ["KeioZoo"],
-      icon: "",
+      icon: "../images/鉄道/京王電鉄/動物園線.png",
       order: 7
     }
   ],
