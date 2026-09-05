@@ -279,7 +279,21 @@
       if (listEl) listEl.classList.add("hidden");
       if (filterBarEl) filterBarEl.classList.add("hidden");
       if (detailEl) detailEl.classList.remove("hidden");
-      if (titleEl) titleEl.textContent = (window.RailwayDB && window.RailwayDB.resolveLineName ? window.RailwayDB.resolveLineName(lineId, window.currentLang) : (fusedLine.nameEn || fusedLine.nameJa || lineId));
+      var _title = (window.RailwayDB && window.RailwayDB.resolveLineName ? window.RailwayDB.resolveLineName(lineId, window.currentLang) : (fusedLine.nameEn || fusedLine.nameJa || lineId));
+      if (window.LineOperationSystems) {
+        for (var _sid in window.LineOperationSystems) {
+          var _sys = window.LineOperationSystems[_sid];
+          if (_sys.lineIds && _sys.lineIds.indexOf(lineId) >= 0) {
+            var _lang = window.currentLang || "ja";
+            if (_lang === "zh" && _sys.nameZh) _title = _sys.nameZh;
+            else if (_lang === "en" && _sys.nameEn) _title = _sys.nameEn;
+            else if (_lang === "ko" && _sys.nameKo) _title = _sys.nameKo;
+            else if (_sys.nameJa) _title = _sys.nameJa;
+            break;
+          }
+        }
+      }
+      if (titleEl) titleEl.textContent = _title;
       if (mapEl) renderTrainMap(mapEl, fusedLine, lineId);
     } catch(e) {}
   }
