@@ -19,7 +19,7 @@ window.LineOperationSystems = {
       nameEn: "Saikyo Line / Kawagoe Line",
       nameKo: "",
       color: "#00ac47",
-      lineIds: ["Saikyo", "Kawagoe"],
+      lineIds: ["Saikyo","Kawagoe"],
       icon: "../images/鉄道/JR東日本/埼京線.png",
       order: 1
     },
@@ -87,18 +87,7 @@ window.LineOperationSystems = {
       color: "#9fc21b",
       lineIds: ["Yokohama"],
       icon: "../images/鉄道/JR東日本/横浜線.png",
-      order: 5
-    },
-    {
-      code: "HAC",
-      nameJa: "八高線",
-      nameZh: "八高线",
-      nameEn: "Hachiko Line",
-      nameKo: "",
-      color: "#e95411",
-      lineIds: ["Hachiko"],
-      icon: "",
-      order: 30
+      order: 7
     },
     {
       code: "JI",
@@ -109,7 +98,7 @@ window.LineOperationSystems = {
       color: "#ffd400",
       lineIds: ["Tsurumi"],
       icon: "../images/鉄道/JR東日本/鶴見線.png",
-      order: 6
+      order: 8
     },
     {
       code: "JJ",
@@ -120,7 +109,7 @@ window.LineOperationSystems = {
       color: "#00a2e1",
       lineIds: ["Joban"],
       icon: "../images/鉄道/JR東日本/常磐線快速.png",
-      order: 7
+      order: 9
     },
     {
       code: "JK",
@@ -131,7 +120,7 @@ window.LineOperationSystems = {
       color: "#00b2e5",
       lineIds: ["KeihinTohoku"],
       icon: "../images/鉄道/JR東日本/京浜東北線.png",
-      order: 8
+      order: 10
     },
     {
       code: "JL",
@@ -142,7 +131,7 @@ window.LineOperationSystems = {
       color: "#00bb83",
       lineIds: ["JobanLocal"],
       icon: "../images/鉄道/JR東日本/常盤緩行線.png",
-      order: 9
+      order: 11
     },
     {
       code: "JM",
@@ -153,7 +142,7 @@ window.LineOperationSystems = {
       color: "#f15a22",
       lineIds: ["Musashino"],
       icon: "../images/鉄道/JR東日本/武蔵野線.png",
-      order: 10
+      order: 12
     },
     {
       code: "JN",
@@ -164,7 +153,7 @@ window.LineOperationSystems = {
       color: "#ffd400",
       lineIds: ["Nambu"],
       icon: "../images/鉄道/JR東日本/南武線.png",
-      order: 11
+      order: 13
     },
     {
       code: "JO",
@@ -173,9 +162,9 @@ window.LineOperationSystems = {
       nameEn: "Yokosuka Line / Sobu Line (Rapid)",
       nameKo: "",
       color: "#00347a",
-      lineIds: ["Yokosuka", "SobuRapid"],
+      lineIds: ["Yokosuka","SobuRapid"],
       icon: "../images/鉄道/JR東日本/総武線快速横須賀線.png",
-      order: 12
+      order: 14
     },
     {
       code: "JS",
@@ -186,7 +175,7 @@ window.LineOperationSystems = {
       color: "#e71112",
       lineIds: ["ShonanShinjuku"],
       icon: "../images/鉄道/JR東日本/湘南新宿ライン.png",
-      order: 13
+      order: 15
     },
     {
       code: "JT",
@@ -197,18 +186,7 @@ window.LineOperationSystems = {
       color: "#f68b1e",
       lineIds: ["Tokaido"],
       icon: "../images/鉄道/JR東日本/東海道線.png",
-      order: 14
-    },
-    {
-      code: "JU",
-      nameJa: "宇都宮線",
-      nameZh: "宇都宫线",
-      nameEn: "Utsunomiya Line",
-      nameKo: "",
-      color: "#00732f",
-      lineIds: ["Oyama"],
-      icon: "../images/鉄道/JR東日本/宇都宮線.png",
-      order: 15
+      order: 16
     },
     {
       code: "JU",
@@ -219,7 +197,18 @@ window.LineOperationSystems = {
       color: "#f68b1e",
       lineIds: ["Takasaki"],
       icon: "../images/鉄道/JR東日本/高崎線.png",
-      order: 16
+      order: 17
+    },
+    {
+      code: "JU",
+      nameJa: "宇都宮線",
+      nameZh: "宇都宫线",
+      nameEn: "Utsunomiya Line",
+      nameKo: "",
+      color: "#00732f",
+      lineIds: ["Oyama"],
+      icon: "../images/鉄道/JR東日本/宇都宮線.png",
+      order: 18
     },
     {
       code: "JY",
@@ -230,7 +219,18 @@ window.LineOperationSystems = {
       color: "#99cc00",
       lineIds: ["Yamanote"],
       icon: "../images/鉄道/JR東日本/山手線.png",
-      order: 16
+      order: 19
+    },
+    {
+      code: "CHU",
+      nameJa: "中央本線",
+      nameZh: "中央本线",
+      nameEn: "Chuo Main Line",
+      nameKo: "",
+      color: "#0073bf",
+      lineIds: ["ChuoMain"],
+      icon: "",
+      order: 20
     },
     {
       code: "ITO",
@@ -241,7 +241,18 @@ window.LineOperationSystems = {
       color: "#f68b1e",
       lineIds: ["Ito"],
       icon: "",
-      order: 17
+      order: 21
+    },
+    {
+      code: "HAC",
+      nameJa: "八高線",
+      nameZh: "八高线",
+      nameEn: "Hachiko Line",
+      nameKo: "",
+      color: "#e95411",
+      lineIds: ["Hachiko"],
+      icon: "",
+      order: 22
     },
     {
       code: "UCH",
@@ -252,7 +263,7 @@ window.LineOperationSystems = {
       color: "#fcc60d",
       lineIds: ["Sotobo"],
       icon: "",
-      order: 18
+      order: 23
     },
     {
       code: "SOT",
@@ -263,7 +274,7 @@ window.LineOperationSystems = {
       color: "#fcc60d",
       lineIds: ["Uchibo"],
       icon: "",
-      order: 19
+      order: 24
     },
     {
       code: "NRT",
@@ -274,7 +285,7 @@ window.LineOperationSystems = {
       color: "#fcc60d",
       lineIds: ["Narita"],
       icon: "",
-      order: 20
+      order: 25
     },
     {
       code: "TOH",
@@ -284,24 +295,8 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#00732f",
       lineIds: ["TohokuMain"],
-    {
-      code: "SOB",
-      nameJa: "総武本線",
-      nameZh: "总武本线",
-      nameEn: "Sobu Main Line",
-      nameKo: "",
-      color: "#fcc60d",
-      lineIds: ["SobuMain"],
-    {
-      code: "CHU",
-      nameJa: "中央本線",
-      nameZh: "中央本线",
-      nameEn: "Chuo Main Line",
-      nameKo: "",
-      color: "#0073bf",
-      lineIds: ["ChuoMain"],
       icon: "",
-      order: 31
+      order: 26
     },
     {
       code: "TOK",
@@ -312,15 +307,7 @@ window.LineOperationSystems = {
       color: "#f68b1e",
       lineIds: ["TokaidoMain"],
       icon: "",
-      order: 32
-    },
-
-      icon: "",
-      order: 30
-    },
-
-      icon: "",
-      order: 21
+      order: 27
     },
     {
       code: "SAG",
@@ -331,9 +318,21 @@ window.LineOperationSystems = {
       color: "#00a3af",
       lineIds: ["Sagami"],
       icon: "",
-      order: 22
+      order: 28
+    },
+    {
+      code: "SOB",
+      nameJa: "総武本線",
+      nameZh: "总武本线",
+      nameEn: "Sobu Main Line",
+      nameKo: "",
+      color: "#fcc60d",
+      lineIds: ["SobuMain"],
+      icon: "",
+      order: 29
     }
   ],
+
   "TOKYO_METRO": [
     {
       code: "C",
@@ -838,7 +837,7 @@ window.LineOperationSystems = {
       icon: "../images/鉄道/ゆりかもせ/ゆりかもせ.png",
       order: 1
     }
-  ]
+  ],
   "SAITAMA_NEW_URBAN_TRANSIT": [
     {
       code: "NS",
