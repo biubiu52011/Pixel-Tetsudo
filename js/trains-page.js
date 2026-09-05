@@ -126,6 +126,36 @@
       if (existingSvg && positions.length > 0) {
         var _color = line.color || "#008803";
         var _stations = line.stations || [];
+        // Merge stations from same LOS running system (same as initial render)
+        var _sysInfo = null;
+        if (window.LineOperationSystems) {
+          for (var _opKey in window.LineOperationSystems) {
+            var _opSys = window.LineOperationSystems[_opKey];
+            if (!Array.isArray(_opSys)) continue;
+            for (var _si = 0; _si < _opSys.length; _si++) {
+              if (_opSys[_si].lineIds && _opSys[_si].lineIds.indexOf(lineId) >= 0) {
+                _sysInfo = _opSys[_si];
+                break;
+              }
+            }
+            if (_sysInfo) break;
+          }
+        }
+        if (_sysInfo) {
+          var _allLinesSys = getLinesData();
+          var _merged = [];
+          var _seen = {};
+          for (var _li = 0; _li < _sysInfo.lineIds.length; _li++) {
+            var _sub = _allLinesSys[_sysInfo.lineIds[_li]];
+            if (!_sub || !_sub.stations) continue;
+            for (var _sj = 0; _sj < _sub.stations.length; _sj++) {
+              var _stid = _sub.stations[_sj];
+              if (!_seen[_stid]) { _seen[_stid] = true; _merged.push(_stid); }
+            }
+          }
+          if (_merged.length > _stations.length) { _stations = _merged; }
+          if (_sysInfo.color) { _color = _sysInfo.color; }
+        }
         var _isLoop = line.type === "loop";
         var _sp = 30, _topP = 16;
         var _allLines = getLinesData();
@@ -133,7 +163,8 @@
         for (var _bid in _allLines) {
           if (_allLines[_bid].branchOf === lineId && _bid !== lineId) _branchOffset += 70;
         }
-        var _mainCx = (_isLoop ? 130 : (190 + _branchOffset) / 2);
+        // Fix: mainCx should be svgW/2 - branchOffset/2 = 95 for non-loop, 130 for loop
+        var _mainCx = _isLoop ? 130 : 95;
         var _loopPts = [];
         if (_isLoop && _stations.length > 2) {
           var _loopRectH = Math.max(_stations.length * 36 / 2 - 80, 140);
