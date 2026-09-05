@@ -262,6 +262,146 @@
   }
 
   
+  // ========== 直通运行关系配置 ==========
+  var THROUGH_SERVICE_MAP = {
+    "TobuSkytree": ["Hibiya", "Hanzomon", "Namboku"],
+    "Skytree": ["Hibiya", "Hanzomon", "Namboku"],
+    "Hibiya": ["TobuSkytree", "TobuIsesaki"],
+    "Hanzomon": ["TobuSkytree", "TobuIsesaki", "TokyuDenEn"],
+    "Namboku": ["TobuSkytree", "TobuIsesaki"],
+    "TokyuToyoko": ["MinatoMirai", "Fukutoshin"],
+    "Toyoko": ["MinatoMirai", "Fukutoshin"],
+    "MinatoMirai": ["TokyuToyoko", "Fukutoshin"],
+    "Fukutoshin": ["TokyuToyoko", "MinatoMirai", "SeibuIkebukuro", "Tojo"],
+    "SeibuIkebukuro": ["Fukutoshin"],
+    "Ikebukuro": ["Fukutoshin"],
+    "Tojo": ["Fukutoshin"],
+    "Asakusa": ["KeikyuMain", "Keisei", "Hokuso"],
+    "KeikyuMain": ["Asakusa", "Keisei"],
+    "Keikyu": ["Asakusa", "Keisei"],
+    "Keisei": ["Asakusa", "KeikyuMain", "Hokuso"],
+    "Mita": ["TokyuMeguro"],
+    "TokyuMeguro": ["Mita", "TokyuTamagawa"],
+    "Saikyo": ["Kawagoe", "Rinkai"],
+    "Kawagoe": ["Saikyo"],
+    "Rinkai": ["Saikyo"],
+    "ShonanShinjuku": ["Utsunomiya", "Takasaki", "Yokosuka"],
+    "ChuoRapid": ["Ome", "Itsukaichi"],
+    "SobuRapid": ["Yokosuka"],
+    "Yokosuka": ["SobuRapid"],
+    "Joban": ["JobanLocal"],
+    "JobanLocal": ["Joban", "Chiyoda"],
+    "Chiyoda": ["JobanLocal", "OdakyuTama"],
+    "OdakyuTama": ["Chiyoda"],
+    "Tozai": ["ChuoSobuLocal"],
+    "Yurakucho": ["SeibuIkebukuro", "TokyuToyoko"],
+    "TokyuDenEn": ["Hanzomon"],
+    "DenEn": ["Hanzomon"],
+    "Keio": ["Shinjuku"],
+    "KeioMain": ["Shinjuku"],
+    "Shinjuku": ["Keio", "KeioMain"],
+    "SotetsuMain": ["TokyuToyoko"],
+    "TokyuTamagawa": ["TokyuMeguro"]
+  };
+
+  function getThroughServiceLines(lineId) {
+    try {
+      var result = [];
+      var visited = {};
+      var queue = [lineId];
+      visited[lineId] = true;
+      while (queue.length > 0) {
+        var current = queue.shift();
+        var through = THROUGH_SERVICE_MAP[current];
+        if (through && Array.isArray(through)) {
+          through.forEach(function(lid) {
+            if (!visited[lid]) {
+              visited[lid] = true;
+              result.push(lid);
+              queue.push(lid);
+            }
+          });
+        }
+      }
+      return result;
+    } catch(e) { return []; }
+  }
+
+  // ========== 按需加载缺失线路的时刻表 ==========
+  var _timetableLoading = {};
+
+  function loadMissingTimetables(linesNeedingEstimation) {
+    try {
+      if (!window.ODPTClient || !linesNeedingEstimation || linesNeedingEstimation.length === 0) return Promise.resolve();
+
+      var priorityOps = ['TokyoMetro', 'Toei', 'YokohamaMunicipal', 'Keio', 'Sotetsu', 'Tokyu', 'Tobu', 'TWR', 'MIR', 'TamaMonorail'];
+      var allLines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : {};
+
+      // 扩展需要加载的线路，包括直通运行的线路
+      var expandedLines = [];
+      var seenLineIds = {};
+      linesNeedingEstimation.forEach(function(l) {
+        if (!seenLineIds[l.lineId]) {
+          seenLineIds[l.lineId] = true;
+          expandedLines.push(l);
+        }
+        var throughLines = getThroughServiceLines(l.lineId);
+        throughLines.forEach(function(tlid) {
+          if (!seenLineIds[tlid]) {
+            var throughLine = allLines && allLines[tlid];
+            var throughOp = throughLine ? throughLine.operator : (window.ODPTClient && window.ODPTClient.LINE_TO_OPERATOR ? window.ODPTClient.LINE_TO_OPERATOR[tlid] : null);
+            if (throughOp) {
+              seenLineIds[tlid] = true;
+              expandedLines.push({ lineId: tlid, operator: throughOp, name: throughLine ? (throughLine.name || throughLine.nameJa) : tlid });
+            }
+          }
+        });
+      });
+
+      var toLoad = expandedLines.filter(function(l) {
+        return priorityOps.indexOf(l.operator) >= 0 && !_timetableLoading[l.lineId];
+      });
+
+      toLoad = toLoad.slice(0, 12);
+
+      if (toLoad.length === 0) return Promise.resolve();
+
+      console.debug("[DataFusion] Loading missing timetables for", toLoad.length, "lines");
+
+      var promises = toLoad.map(function(lineInfo) {
+        _timetableLoading[lineInfo.lineId] = true;
+        return window.ODPTClient.getTimetableForRailwayFiltered(lineInfo.operator, lineInfo.lineId, 90).then(function(data) {
+          if (data && data.length > 0) {
+            if (!window.ODPT_TIMETABLES[lineInfo.operator]) {
+              window.ODPT_TIMETABLES[lineInfo.operator] = [];
+            }
+            var existingIds = {};
+            window.ODPT_TIMETABLES[lineInfo.operator].forEach(function(t) {
+              var id = t['odpt:trainNumber'] || t['odpt:train'] || JSON.stringify(t);
+              existingIds[id] = true;
+            });
+            data.forEach(function(t) {
+              var id = t['odpt:trainNumber'] || t['odpt:train'] || JSON.stringify(t);
+              if (!existingIds[id]) {
+                window.ODPT_TIMETABLES[lineInfo.operator].push(t);
+              }
+            });
+            if (!window.ODPT_TRAINS[lineInfo.operator]) {
+              window.ODPT_TRAINS[lineInfo.operator] = window.ODPT_TIMETABLES[lineInfo.operator];
+            }
+          }
+        }).catch(function(e) {
+          console.debug("[DataFusion] Failed to load timetable for", lineInfo.lineId, ":", e.message);
+        });
+      });
+
+      return Promise.all(promises);
+    } catch(e) {
+      console.debug("[DataFusion] loadMissingTimetables error:", e.message);
+      return Promise.resolve();
+    }
+  }
+
   function saveToCache() {
     try {
       if (!window.RailwayRTC || !_lastFusedData) return;
