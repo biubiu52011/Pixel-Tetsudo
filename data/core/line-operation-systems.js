@@ -993,7 +993,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#0054a6",
       lineIds: ["KeiseiOshiage"],
-      icon: "",
+      icon: "../images/鉄道/京成電鉄/京成押上線.png",
       order: 2
     },
     {
@@ -1004,7 +1004,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#0054a6",
       lineIds: ["KeiseiKanamachi"],
-      icon: "",
+      icon: "../images/鉄道/京成電鉄/京成金町線.png",
       order: 3
     },
     {
@@ -1015,7 +1015,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#0054a6",
       lineIds: ["KeiseiChiba"],
-      icon: "",
+      icon: "../images/鉄道/京成電鉄/京成千葉線.png",
       order: 4
     },
     {
@@ -1026,7 +1026,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#0054a6",
       lineIds: ["KeiseiChihara"],
-      icon: "",
+      icon: "../images/鉄道/京成電鉄/京成千原線.png",
       order: 5
     },
     {
