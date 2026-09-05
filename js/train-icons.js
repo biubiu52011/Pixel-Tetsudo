@@ -42,24 +42,23 @@
     "KeihinTohoku": "../images/列车/JR東日本/京浜東北線.png",
     "Saikyo": "../images/列车/JR東日本/埼京川越線.png",
     "Kawagoe": "../images/列车/JR東日本/埼京川越線.png",
-    // Other JR East lines use Yamanote as generic fallback
-    "ChuoRapid": "../images/列车/JR東日本/山手線.png",
-    "ChuoLocal": "../images/列车/JR東日本/山手線.png",
-    "Yokosuka": "../images/列车/JR東日本/山手線.png",
-    "Tokaido": "../images/列车/JR東日本/山手線.png",
-    "Utsunomiya": "../images/列车/JR東日本/山手線.png",
-    "Takasaki": "../images/列车/JR東日本/山手線.png",
-    "SobuRapid": "../images/列车/JR東日本/山手線.png",
-    "JobanRapid": "../images/列车/JR東日本/山手線.png",
-    "JobanLocal": "../images/列车/JR東日本/山手線.png",
-    "Musashino": "../images/列车/JR東日本/山手線.png",
-    "Nambu": "../images/列车/JR東日本/山手線.png",
-    "Yokohama": "../images/列车/JR東日本/山手線.png",
-    "Keiyo": "../images/列车/JR東日本/山手線.png",
-    "Tsurumi": "../images/列车/JR東日本/山手線.png",
-    "ShonanShinjuku": "../images/列车/JR東日本/山手線.png",
-    "Ome": "../images/列车/JR東日本/山手線.png",
-    "Itsukaichi": "../images/列车/JR東日本/山手線.png",
+    "ChuoRapid": "../images/列车/JR東日本/中央線.png",
+    "ChuoLocal": "../images/列车/JR東日本/e231総武中央線.png",
+    "Yokosuka": "../images/列车/JR東日本/総武横須賀線.png",
+    "SobuRapid": "../images/列车/JR東日本/総武横須賀線.png",
+    "Tokaido": "../images/列车/JR東日本/東海道線.png",
+    "Utsunomiya": "../images/列车/JR東日本/宇都宮線.png",
+    "Takasaki": "../images/列车/JR東日本/高崎線.png",
+    "JobanRapid": "../images/列车/JR東日本/常磐線快速.png",
+    "JobanLocal": "../images/列车/JR東日本/常磐線.png",
+    "Musashino": "../images/列车/JR東日本/武蔵野線.png",
+    "Nambu": "../images/列车/JR東日本/南武線.png",
+    "Yokohama": "../images/列车/JR東日本/横浜線.png",
+    "Keiyo": "../images/列车/JR東日本/京葉線.png",
+    "Tsurumi": "../images/列车/JR東日本/鶴見線.png",
+    "Ome": "../images/列车/JR東日本/青梅線.png",
+    "Itsukaichi": "../images/列车/JR東日本/中央線.png",
+    "ShonanShinjuku": "../images/列车/JR東日本/東海道線.png",
     // Tokyo Metro specific
     "Ginza": "../images/列车/東京メトロ/1000系.png",
     "Marunouchi": "../images/列车/東京メトロ/2000系.png",
@@ -90,7 +89,7 @@
       if (OPERATOR_ICONS[opKey]) return OPERATOR_ICONS[opKey];
       
       // Ultimate fallback
-      return "../images/列车/JR東日本/E233系.png";
+      return "../images/列车/JR東日本/山手線.png";
     } catch(e) {
       return "../images/列车/JR東日本/E233系.png";
     }
