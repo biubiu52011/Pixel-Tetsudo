@@ -475,6 +475,28 @@ window.LineOperationSystems = {
       lineIds: ["Shinjuku"],
       icon: "../images/鉄道/都営地下鉄/都営新宿線.png",
       order: 4
+    },
+    {
+      code: "K",
+      nameJa: "都電荒川線",
+      nameZh: "都电荒川线",
+      nameEn: "Toden Arakawa Line",
+      nameKo: "",
+      color: "#E040A0",
+      lineIds: ["Arakawa"],
+      icon: "../images/鉄道/都営地下鉄/都電荒川線.png",
+      order: 5
+    },
+    {
+      code: "NT",
+      nameJa: "日暮里・舎人ライナー",
+      nameZh: "日暮里・舍人Liner",
+      nameEn: "Nippori-Toneri Liner",
+      nameKo: "",
+      color: "#ed6d00",
+      lineIds: ["Nippori_Toneri"],
+      icon: "../images/鉄道/都営地下鉄/日暮里・舎人ライナー.png",
+      order: 6
     }
   ],
   "TOBU": [
