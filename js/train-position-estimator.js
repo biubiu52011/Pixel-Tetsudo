@@ -13,15 +13,21 @@
   var ESTIMATOR_VERSION = 1;
 
   // ========== Calendar detection ==========
-  function getCurrentCalendar() {
+  function getCurrentCalendars() {
     try {
       var now = new Date();
       var day = now.getDay(); // 0=Sunday, 6=Saturday
-      // Simple: Saturday/Sunday -> SaturdayHoliday, else Weekday
-      // TODO: Could check Japanese holidays, but this is sufficient for estimation
-      if (day === 0 || day === 6) return "odpt.Calendar:SaturdayHoliday";
-      return "odpt.Calendar:Weekday";
-    } catch(e) { return "odpt.Calendar:Weekday"; }
+      // Return array of matching calendar types
+      if (day === 6) return ["odpt.Calendar:Saturday", "odpt.Calendar:SaturdayHoliday", "odpt.Calendar:Holiday"];
+      if (day === 0) return ["odpt.Calendar:Holiday", "odpt.Calendar:SaturdayHoliday", "odpt.Calendar:Sunday"];
+      return ["odpt.Calendar:Weekday"];
+    } catch(e) { return ["odpt.Calendar:Weekday"]; }
+  }
+
+  // Backward compatibility
+  function getCurrentCalendar() {
+    var cals = getCurrentCalendars();
+    return cals[0];
   }
 
   // ========== Time parsing ==========
@@ -92,7 +98,7 @@
       if (!line || !line.stations || !Array.isArray(line.stations) || line.stations.length === 0) return [];
       if (!timetableData || !Array.isArray(timetableData) || timetableData.length === 0) return [];
 
-      var currentCalendar = getCurrentCalendar();
+      var currentCalendars = getCurrentCalendars();
       var currentMin = getCurrentMinutes();
       var delayMin = getDelayForOperator(operatorId, delayInfo);
       var adjustedCurrentMin = currentMin + delayMin;
@@ -110,9 +116,9 @@
         var tt = timetableData[t];
         if (!tt) continue;
 
-        // Filter by calendar
+        // Filter by calendar (match any of current calendar types)
         var calendar = tt["odpt:calendar"];
-        if (calendar && calendar !== currentCalendar) continue;
+        if (calendar && currentCalendars.indexOf(calendar) < 0) continue;
 
         // Filter by railway (if lineId matches)
         var railway = tt["odpt:railway"];
@@ -242,6 +248,7 @@
     estimateLinePositions: estimateLinePositions,
     estimateAllPositions: estimateAllPositions,
     getCurrentCalendar: getCurrentCalendar,
+    getCurrentCalendars: getCurrentCalendars,
     getCurrentMinutes: getCurrentMinutes
   };
 
