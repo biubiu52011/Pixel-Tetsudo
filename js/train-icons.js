@@ -43,7 +43,7 @@
     "Saikyo": "../images/列车/JR東日本/埼京川越線.png",
     "Kawagoe": "../images/列车/JR東日本/埼京川越線.png",
     "ChuoRapid": "../images/列车/JR東日本/中央線.png",
-    "ChuoLocal": "../images/列车/JR東日本/e231総武中央線.png",
+    "ChuoLocal": "../images/列车/JR東日本/e235総武中央線.png",
     "Yokosuka": "../images/列车/JR東日本/総武横須賀線.png",
     "SobuRapid": "../images/列车/JR東日本/総武横須賀線.png",
     "Tokaido": "../images/列车/JR東日本/東海道線.png",
