@@ -120,6 +120,78 @@
   function renderTrainMap(el, line, lineId) {
     try {
       var positions = getRealtimePositions(lineId);
+      
+      // Incremental update: if SVG already exists, only update train icon positions for smooth animation
+      var existingSvg = el.querySelector('svg');
+      if (existingSvg && positions.length > 0) {
+        var _color = line.color || "#008803";
+        var _stations = line.stations || [];
+        var _isLoop = line.type === "loop";
+        var _sp = 30, _topP = 16;
+        var _allLines = getLinesData();
+        var _branchOffset = 0;
+        for (var _bid in _allLines) {
+          if (_allLines[_bid].branchOf === lineId && _bid !== lineId) _branchOffset += 70;
+        }
+        var _mainCx = (_isLoop ? 130 : (190 + _branchOffset) / 2);
+        var _loopPts = [];
+        if (_isLoop && _stations.length > 2) {
+          var _loopRectH = Math.max(_stations.length * 36 / 2 - 80, 140);
+          var _svgW = 260, _svgH = _loopRectH + 80;
+          var _cx = _svgW / 2, _cy = _svgH / 2;
+          var _rectW = 80, _rectH = _loopRectH;
+          var _halfW = _rectW / 2, _halfH = _rectH / 2;
+          var _perimeter = 2 * (_rectW + _rectH);
+          var _startOffset = _rectW / 2;
+          for (var _li = 0; _li < _stations.length; _li++) {
+            var _pos = ((_li / _stations.length) * _perimeter + _startOffset) % _perimeter;
+            var _lx, _ly;
+            if (_pos < _rectW) { _lx = _cx - _halfW + _pos; _ly = _cy - _halfH; }
+            else if (_pos < _rectW + _rectH) { _lx = _cx + _halfW; _ly = _cy - _halfH + (_pos - _rectW); }
+            else if (_pos < 2 * _rectW + _rectH) { _lx = _cx + _halfW - (_pos - _rectW - _rectH); _ly = _cy + _halfH; }
+            else { _lx = _cx - _halfW; _ly = _cy + _halfH - (_pos - 2 * _rectW - _rectH); }
+            _loopPts.push({ x: _lx, y: _ly });
+          }
+        }
+        var _updatedIds = {};
+        var _hasChanges = false;
+        for (var _pi = 0; _pi < positions.length; _pi++) {
+          var _p = positions[_pi];
+          var _idx = Math.min(_p.stationIndex || 0, _stations.length - 1);
+          var _px, _py;
+          if (_isLoop && _loopPts.length > _idx) { _px = _loopPts[_idx].x; _py = _loopPts[_idx].y; }
+          else { _px = _mainCx; _py = _topP + _idx * _sp; }
+          var _trainUid = _p.trainId || ("train_" + _pi);
+          _updatedIds[_trainUid] = true;
+          var _existingIcon = existingSvg.querySelector('[data-train-id="' + String(_trainUid).replace(/"/g, '') + '"]');
+          if (_existingIcon) {
+            var _oldX = parseFloat(_existingIcon.getAttribute('x'));
+            var _oldY = parseFloat(_existingIcon.getAttribute('y'));
+            var _newX = _px - 10, _newY = _py - 12;
+            if (Math.abs(_oldX - _newX) > 0.5 || Math.abs(_oldY - _newY) > 0.5) {
+              _existingIcon.setAttribute('x', _newX);
+              _existingIcon.setAttribute('y', _newY);
+              _hasChanges = true;
+            }
+          }
+        }
+        var _allIcons = existingSvg.querySelectorAll('[data-train-id]');
+        for (var _ii = 0; _ii < _allIcons.length; _ii++) {
+          var _tid = _allIcons[_ii].getAttribute('data-train-id');
+          if (!_updatedIds[_tid]) {
+            _allIcons[_ii].parentNode.removeChild(_allIcons[_ii]);
+            _hasChanges = true;
+          }
+        }
+        var _runningEl = el.querySelector('.tp-running');
+        if (_runningEl) {
+          var _running = t("trains.running");
+          var _cntText = t("trains.train_count");
+          _runningEl.innerHTML = _running + " (" + positions.length + " " + _cntText + ")";
+        }
+        if (positions.length > 0) return;
+      }
+  
       var color = line.color || "#008803";
       var stations = line.stations || [];
       // Merge stations from same LOS running system
@@ -269,7 +341,8 @@
         var isEstimated = p.estimated === true;
         var iconClass = isEstimated ? "train-icon estimated" : "train-icon";
         if (iconSrc) {
-          svg += "<image x=\"" + (px - 10) + "\" y=\"" + (py - 12) + "\" width=\"20\" height=\"24\" href=\"" + escapeHtml(iconSrc) + "\" class=\"" + iconClass + "\" preserveAspectRatio=\"xMidYMid meet\"/>";
+          var trainUid = p.trainId || ("train_" + j);
+        svg += "<image data-train-id=\"" + escapeHtml(trainUid) + "\" x=\"" + (px - 10) + "\" y=\"" + (py - 12) + "\" width=\"20\" height=\"24\" href=\"" + escapeHtml(iconSrc) + "\" class=\"" + iconClass + "\" preserveAspectRatio=\"xMidYMid meet\"/>";
         } else {
           svg += "<circle cx=\"" + px + "\" cy=\"" + py + "\""+ "  r=\"8\" fill=\"" + escapeHtml(color) + "\""+ "  filter=\"url(#tg_" + escapeHtml(lineId) + ")\" opacity=\"0.9\"/>";
           
