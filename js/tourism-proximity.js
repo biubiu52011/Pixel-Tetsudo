@@ -109,7 +109,8 @@
           spot: spot,
           distance: dist,
           distanceText: formatWalkMinutes(dist),
-          stationId: stationId
+          stationId: stationId,
+            exitDirection: getExitDirection(sLat, sLng, spot.coord[0], spot.coord[1]),
         });
       }
     }
@@ -139,6 +140,34 @@
    */
   function getDistance(lat1, lng1, lat2, lng2) {
     return haversine(lat1, lng1, lat2, lng2);
+  }
+
+  /**
+   * Calculate exit direction from station to spot (8-direction compass)
+   * @param {number} stationLat - Station latitude
+   * @param {number} stationLng - Station longitude
+   * @param {number} spotLat - Spot latitude
+   * @param {number} spotLng - Spot longitude
+   * @returns {string} Direction key: N/NE/E/SE/S/SW/W/NW or null if too close
+   */
+  function getExitDirection(stationLat, stationLng, spotLat, spotLng) {
+    if (stationLat == null || stationLng == null || spotLat == null || spotLng == null) return null;
+    var dLat = spotLat - stationLat;
+    var dLng = spotLng - stationLng;
+    // If spot is very close to station, consider it station direct
+    var dist = haversine(stationLat, stationLng, spotLat, spotLng);
+    if (dist < 80) return 'STATION';
+    // Calculate bearing (0=N, 90=E, 180=S, 270=W)
+    var bearing = (Math.atan2(dLng, dLat) * 180 / Math.PI + 360) % 360;
+    // 8-direction compass
+    if (bearing >= 337.5 || bearing < 22.5) return 'N';
+    if (bearing >= 22.5 && bearing < 67.5) return 'NE';
+    if (bearing >= 67.5 && bearing < 112.5) return 'E';
+    if (bearing >= 112.5 && bearing < 157.5) return 'SE';
+    if (bearing >= 157.5 && bearing < 202.5) return 'S';
+    if (bearing >= 202.5 && bearing < 247.5) return 'SW';
+    if (bearing >= 247.5 && bearing < 292.5) return 'W';
+    return 'NW';
   }
 
 
@@ -171,6 +200,7 @@
     getNearbySpotsByStation: getNearbySpotsByStation,
     getDistance: getDistance,
     getNearestStation: getNearestStation,
+    getExitDirection: getExitDirection,
     formatDistance: formatDistance,
     formatWalkMinutes: formatWalkMinutes,
     invalidateCache: invalidateCache,

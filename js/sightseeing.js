@@ -238,7 +238,16 @@ function renderGrid() {
         '<img class="sm-thumb-img" src="' + encodeURI(image) + '" alt="' + name + '">' :
         '<span class="sm-thumb-icon">&#x2699;</span>';
       
-      const distRowHtml = s.distText ? '<p class="sm-dist">' + s.distText + (s.dir ? ' · ' + s.dir : '') + '</p>' : '';
+      // Dynamic exit direction based on current station (not fixed to spot data)
+      var exitText = '';
+      if (s.exitDirection) {
+        if (s.exitDirection === 'STATION') {
+          exitText = t('tourism.station_direct') || '駅直結';
+        } else {
+          exitText = t('detail.dir_' + s.exitDirection) + (t('tourism.exit_suffix') || '口');
+        }
+      }
+      const distRowHtml = s.distText ? '<p class="sm-dist">' + s.distText + (exitText ? ' · ' + exitText : '') + '</p>' : '';
       
       const tagsHtml = tags.filter(function(tag) { return tag !== 'all'; }).map(function(tag) {
         return '<span>' + t('tourism.tag_' + tag) + '</span>';

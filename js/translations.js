@@ -148,6 +148,8 @@
       "tourism.tag_night": "Night",
       "tourism.tag_seasonal": "Seasonal",
       "tourism.title": "Sightseeing Spots",
+      "tourism.station_direct": "Station Direct",
+      "tourism.exit_suffix": "Exit",
       "tourism.west": "W",
       "tourism.within_100m": "Within 100m",
       "trains.loading": "Updating data...",
@@ -337,6 +339,8 @@
       "tourism.tag_night": "\u591c\u666f",
       "tourism.tag_seasonal": "\u5b63\u8282",
       "tourism.title": "\u89c2\u5149\u666f\u70b9",
+      "tourism.station_direct": "车站直达",
+      "tourism.exit_suffix": "口",
       "tourism.west": "\u897f",
       "tourism.within_100m": "100\u7c73\u5185",
       "trains.loading": "\u6570\u636e\u66f4\u65b0\u4e2d...",
@@ -526,6 +530,8 @@
       "tourism.tag_night": "\u30ca\u30a4\u30c8",
       "tourism.tag_seasonal": "\u5b63\u7bc0",
       "tourism.title": "\u89b3\u5149\u30b9\u30dd\u30c3\u30c8",
+      "tourism.station_direct": "駅直結",
+      "tourism.exit_suffix": "口",
       "tourism.west": "\u897f",
       "tourism.within_100m": "100m\u4ee5\u5185",
       "trains.loading": "\u30c7\u30fc\u30bf\u66f4\u65b0\u4e2d...",
@@ -716,6 +722,8 @@
       "tourism.tag_night": "\uc57c\uacbd",
       "tourism.tag_seasonal": "\uacc4\uc808",
       "tourism.title": "\uad00\uad11 \uba85\uc18c",
+      "tourism.station_direct": "역 직결",
+      "tourism.exit_suffix": "출구",
       "tourism.west": "\uc11c",
       "tourism.within_100m": "100m \uc774\ub0b4",
       "trains.loading": "\ub370\uc774\ud130 \uc5c5\ub370\uc774\ud2b8 \uc911...",
@@ -773,6 +781,7 @@
 
 
  
+
 
 
 
