@@ -51,7 +51,7 @@
     return (typeof window.t === 'function') ? window.t(key) : key;
   }
 
-  function getSPOTS() { return window.TOURISM_DATA || {}; }
+  function getSPOTS() { return window.TOURISM_SPOTS || []; }
   function isAcrossRiver(stationLat, stationLng, spotLat, spotLng) {
     for (const river of RIVERS) {
       const distToRiver = Math.abs(spotLat - river.lat) * 111000;
@@ -387,16 +387,9 @@ function renderGrid() {
   }
 
   function findNearestStation() {
-    var minDistance = Infinity;
-    var nearestStation = null;
-    var coords = getStationCoords();
-    for (const stationKey of Object.keys(coords)) {
-      const coord = coords[stationKey];
-      const dist = TourismProximity.getDistance(state.userLat, state.userLng, coord[0], coord[1]);
-      if (dist < minDistance) { minDistance = dist; nearestStation = stationKey; }
-    }
-    if (nearestStation) {
-      state.selectedStation = nearestStation;
+    var nearest = TourismProximity.getNearestStation(state.userLat, state.userLng);
+    if (nearest) {
+      state.selectedStation = nearest.stationId;
       state.autoDetected = true;
       state.locStatus = 'found';
       renderAll();
@@ -426,8 +419,8 @@ function renderGrid() {
   }
 
   function setStation(stationKey) {
-    const spots = getSPOTS();
-    if (!spots[stationKey]) return;
+    const stationCoords = getStationCoords();
+    if (!stationCoords[stationKey]) return;
     state.selectedStation = stationKey;
     state.autoDetected = false;
     state.activeTags.clear();
@@ -446,6 +439,7 @@ function renderGrid() {
     init();
   }
 })();
+
 
 
 

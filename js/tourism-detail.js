@@ -58,29 +58,18 @@ var currentStationKey = null;
     return '';
   }
 
-  // Get all spots from TOURISM_DATA (handles nested array [[]])
+  // Get all spots from global TOURISM_SPOTS pool (no station binding)
   function getAllSpots() {
-    var td = window.TOURISM_DATA;
-    if (!td) return [];
-    if (Array.isArray(td.spots)) return td.spots;
-    var result = [];
-    if (td && typeof td === 'object') {
-      Object.keys(td).forEach(function(key) {
-        var entry = td[key];
-        if (entry && entry.spots && Array.isArray(entry.spots)) {
-          entry.spots.forEach(function(spot) {
-            result.push(spot);
-          });
-        }
-      });
-    }
-    return result;
+    return window.TOURISM_SPOTS || [];
   }
 
-  // Filter spots by current station (scoped for station-specific view)
+  // Get scoped spots: global pool, sorted by distance from station if stationKey set
   function getScopedSpots() {
-    if (currentStationKey && window.TOURISM_DATA && window.TOURISM_DATA[currentStationKey] && window.TOURISM_DATA[currentStationKey].spots) {
-      return window.TOURISM_DATA[currentStationKey].spots;
+    if (currentStationKey && window.TourismProximity) {
+      var nearby = TourismProximity.getNearbySpotsByStation(currentStationKey, { radius: 50000, limit: 100 });
+      if (nearby && nearby.length > 0) {
+        return nearby.map(function(item) { return item.spot; });
+      }
     }
     return allSpots;
   }
@@ -391,7 +380,7 @@ function init() {
       // Fallback: poll every 50ms until data loads (max 10s)
       var pollCount = 0;
       var pollInterval = setInterval(function() {
-        if (window.TOURISM_DATA && Object.keys(window.TOURISM_DATA).length > 0) {
+        if (window.TOURISM_SPOTS && window.TOURISM_SPOTS.length > 0) {
           clearInterval(pollInterval);
           start();
         } else if (pollCount >= 200) {

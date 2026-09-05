@@ -90,17 +90,45 @@ function applyData(data, i18n) {
       if (!l.transferStations) l.transferStations = [];
     });
 
-    window.TOURISM_DATA = data.tourism || {};
-    // Merge JS-based tourism override (works under file:// protocol where fetch is blocked)
-    if (window.TOURISM_OVERRIDE && typeof window.TOURISM_OVERRIDE === 'object') {
-      Object.keys(window.TOURISM_OVERRIDE).forEach(function(stationKey) {
-        window.TOURISM_DATA[stationKey] = window.TOURISM_OVERRIDE[stationKey];
-        if (window.TOURISM_OVERRIDE[stationKey].coord && window.TOURISM_OVERRIDE[stationKey].coord.length === 2) {
-          window.STATION_COORDS[stationKey] = window.TOURISM_OVERRIDE[stationKey].coord;
+    // Tourism data: global spots pool (no station binding) + station coordinate corrections
+    window.TOURISM_SPOTS = [];
+    // Backward compat: collect spots from old station-grouped format in railway_data.json
+    if (data.tourism && typeof data.tourism === 'object') {
+      Object.keys(data.tourism).forEach(function(stationKey) {
+        var st = data.tourism[stationKey];
+        if (st && st.spots && Array.isArray(st.spots)) {
+          st.spots.forEach(function(spot) {
+            window.TOURISM_SPOTS.push(spot);
+          });
         }
       });
     }
-    window.TOURISM_STATIONS = Object.keys(window.TOURISM_DATA);
+    // Merge JS-based tourism override (works under file:// protocol where fetch is blocked)
+    // New format: { spots: [...], station_coords: { ... } }
+    if (window.TOURISM_OVERRIDE && typeof window.TOURISM_OVERRIDE === 'object') {
+      if (window.TOURISM_OVERRIDE.spots && Array.isArray(window.TOURISM_OVERRIDE.spots)) {
+        window.TOURISM_SPOTS = window.TOURISM_OVERRIDE.spots;
+      }
+      if (window.TOURISM_OVERRIDE.station_coords && typeof window.TOURISM_OVERRIDE.station_coords === 'object') {
+        Object.keys(window.TOURISM_OVERRIDE.station_coords).forEach(function(stationKey) {
+          var coord = window.TOURISM_OVERRIDE.station_coords[stationKey];
+          if (coord && coord.length === 2) {
+            window.STATION_COORDS[stationKey] = coord;
+          }
+        });
+      }
+      // Backward compat: old station-grouped override format
+      Object.keys(window.TOURISM_OVERRIDE).forEach(function(key) {
+        if (key === 'spots' || key === 'station_coords') return;
+        var st = window.TOURISM_OVERRIDE[key];
+        if (st && st.coord && st.coord.length === 2) {
+          window.STATION_COORDS[key] = st.coord;
+        }
+      });
+    }
+    // Keep TOURISM_DATA as empty object for backward compatibility (old code may check it)
+    window.TOURISM_DATA = {};
+    window.TOURISM_STATIONS = [];
 
     // Build canonical StationLine relation
     window.STATION_LINES = {};
@@ -373,15 +401,29 @@ function load() {
       .then(function(results) {
         applyData(results[0], results[1]);
         // Merge tourism data override (tourism_data.json takes precedence)
+        // New format: { spots: [...], station_coords: { ... } } - global spots pool
         var tourismOverride = results[2] || {};
-        Object.keys(tourismOverride).forEach(function(stationKey) {
-          window.TOURISM_DATA[stationKey] = tourismOverride[stationKey];
-          // Also update station coords if tourism data provides them (fixes 0,0 placeholder coords)
-          if (tourismOverride[stationKey].coord && tourismOverride[stationKey].coord.length === 2) {
-            window.STATION_COORDS[stationKey] = tourismOverride[stationKey].coord;
+        if (tourismOverride.spots && Array.isArray(tourismOverride.spots)) {
+          window.TOURISM_SPOTS = tourismOverride.spots;
+        }
+        if (tourismOverride.station_coords && typeof tourismOverride.station_coords === 'object') {
+          Object.keys(tourismOverride.station_coords).forEach(function(stationKey) {
+            var coord = tourismOverride.station_coords[stationKey];
+            if (coord && coord.length === 2) {
+              window.STATION_COORDS[stationKey] = coord;
+            }
+          });
+        }
+        // Backward compat: old station-grouped format
+        Object.keys(tourismOverride).forEach(function(key) {
+          if (key === 'spots' || key === 'station_coords') return;
+          var st = tourismOverride[key];
+          if (st && st.coord && st.coord.length === 2) {
+            window.STATION_COORDS[key] = st.coord;
           }
         });
-        window.TOURISM_STATIONS = Object.keys(window.TOURISM_DATA);
+        window.TOURISM_DATA = {};
+        window.TOURISM_STATIONS = [];
         loaded = true;
         console.log(
           Object.keys(results[0].stations).length + " stations, " +
@@ -389,35 +431,9 @@ function load() {
           Object.keys(results[0].tourism).length + " tourism stations");
       })
       .catch(function(err) {
+        // Fallback to railway-data.js removed: the file does not exist in data/core
+        // (canonical data lives in railway_data.json, per AGENTS.md Three-Layer rule).
         error = err;
-        // Dynamic fallback: load railway-data.js only when needed
-        if (!window._railwayDataFallbackLoaded) {
-          window._railwayDataFallbackLoaded = true;
-          var fbScript = document.createElement('script');
-          fbScript.src = '../data/core/railway-data.js';
-          fbScript.onload = function() {
-            if (window.RAILWAY_DATA && window.RAILWAY_DATA.stations) {
-              applyData(window.RAILWAY_DATA);
-              loaded = true;
-              console.log(
-                Object.keys(window.STATION_COORDS).length + " stations, " +
-                Object.keys(window.UNIFIED_LINES).length + " lines");
-            } else {
-              console.error("[DbLoader] railway-data.js loaded but RAILWAY_DATA not found");
-              throw new Error("Fallback data unavailable");
-            }
-          };
-          fbScript.onerror = function() {
-            console.error("[DbLoader] Failed to load fallback railway-data.js");
-            throw err;
-          };
-          document.head.appendChild(fbScript);
-          return new Promise(function(resolve, reject) {
-            var origOnload = fbScript.onload;
-            fbScript.onload = function() { if (origOnload) origOnload(); resolve(); };
-            fbScript.onerror = function() { reject(err); };
-          });
-        }
         console.error("[DbLoader] Failed to load:", err.message);
         throw err;
       });

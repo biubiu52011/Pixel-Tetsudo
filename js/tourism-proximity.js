@@ -66,9 +66,9 @@
     var radius = (options.radius > 0) ? options.radius : DEFAULT_RADIUS;
     var limit = (options.limit > 0) ? options.limit : DEFAULT_LIMIT;
 
-    var td = window.TOURISM_DATA;
+    var spots = window.TOURISM_SPOTS || [];
     var sc = window.STATION_COORDS || {};
-    if (!td || !stationId) return [];
+    if (!stationId) return [];
 
     // Resolve station coords — use RailwayDB if available, else STATION_COORDS
     var stationCoord = null;
@@ -97,24 +97,20 @@
       // TTL expired — fall through to recompute
     }
 
-    // Collect all spots and compute distances
+    // Collect all spots from global pool and compute distances
     var results = [];
-    for (var sk in td) {
-      var st = td[sk];
-      if (!st || !st.spots) continue;
-      for (var i = 0; i < st.spots.length; i++) {
-        var spot = st.spots[i];
-        if (!spot || !spot.coord || !spot.coord[0] || !spot.coord[1]) continue;
-        var dist = haversine(sLat, sLng, spot.coord[0], spot.coord[1]);
-        if (dist === Infinity) continue;
-        if (dist <= radius) {
-          results.push({
-            spot: spot,
-            distance: dist,
-            distanceText: formatWalkMinutes(dist),
-            stationId: sk
-          });
-        }
+    for (var i = 0; i < spots.length; i++) {
+      var spot = spots[i];
+      if (!spot || !spot.coord || !spot.coord[0] || !spot.coord[1]) continue;
+      var dist = haversine(sLat, sLng, spot.coord[0], spot.coord[1]);
+      if (dist === Infinity) continue;
+      if (dist <= radius) {
+        results.push({
+          spot: spot,
+          distance: dist,
+          distanceText: formatWalkMinutes(dist),
+          stationId: stationId
+        });
       }
     }
 
@@ -145,11 +141,36 @@
     return haversine(lat1, lng1, lat2, lng2);
   }
 
+
+  /**
+   * Find nearest station from user location
+   * @param {number} userLat - User latitude
+   * @param {number} userLng - User longitude
+   * @returns {Object|null} { stationId, distance, coord } or null
+   */
+  function getNearestStation(userLat, userLng) {
+    if (userLat == null || userLng == null) return null;
+    var sc = window.STATION_COORDS || {};
+    var nearest = null;
+    var minDist = Infinity;
+    Object.keys(sc).forEach(function(stationId) {
+      var coord = sc[stationId];
+      if (!coord || !coord[0] || !coord[1]) return;
+      if (coord[0] === 0 && coord[1] === 0) return;
+      var dist = haversine(userLat, userLng, coord[0], coord[1]);
+      if (dist < minDist) {
+        minDist = dist;
+        nearest = { stationId: stationId, distance: dist, coord: coord };
+      }
+    });
+    return nearest;
+  }
   var _proximityCache = {};
 
   window.TourismProximity = {
     getNearbySpotsByStation: getNearbySpotsByStation,
     getDistance: getDistance,
+    getNearestStation: getNearestStation,
     formatDistance: formatDistance,
     formatWalkMinutes: formatWalkMinutes,
     invalidateCache: invalidateCache,
@@ -161,3 +182,4 @@
   };
 
 })();
+
