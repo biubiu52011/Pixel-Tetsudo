@@ -206,14 +206,108 @@
   box-shadow: 3px 3px 0px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.1);
   transition: var(--transition-slow);
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   text-decoration: none;
   color: inherit;
+  min-height: 100px;
 }
 .sm-card:hover {
   box-shadow: var(--shadow-elevated);
   transform: translateY(-3px);
   border-color: var(--green-pale);
+}
+
+
+/* === Card thumb (left thumbnail area) === */
+.sm-thumb {
+  position: relative;
+  width: 100px;
+  min-width: 100px;
+  background: var(--bg3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.sm-thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.sm-thumb-icon {
+  font-size: 36px;
+  color: var(--text-muted);
+  line-height: 1;
+}
+.sm-dist-badge {
+  position: absolute;
+  bottom: 6px;
+  left: 6px;
+  right: 6px;
+  background: var(--green);
+  color: var(--white);
+  font-size: 10px;
+  padding: 3px 4px;
+  border-radius: 4px;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* === Card body (right text area) === */
+.sm-body {
+  padding: 12px 14px;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.sm-body h3 {
+  font-size: 14px;
+  font-weight: 700;
+  margin: 0;
+  color: var(--text);
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sm-body .sm-dist {
+  font-size: 11px;
+  color: var(--green);
+  font-weight: 600;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sm-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.45;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.sm-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: auto;
+  padding-top: 4px;
+}
+.sm-card-tags span {
+  font-size: 10px;
+  padding: 2px 6px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg);
+  color: var(--text-muted);
+  font-weight: 500;
+  white-space: nowrap;
 }
 
 /* === Card image === */
@@ -385,7 +479,7 @@
 
 /* === Loading / error states === */
 .td-loading-state {
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  display: flex; flex-direction: row; align-items: center; justify-content: center;
   padding: 60px 24px; gap: var(--space-6);
 }
 .td-loading-dots {
@@ -475,7 +569,7 @@
 /* === Map info cards === */
 .map-info {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: var(--space-6);
   margin-bottom: 16px;
   width: 100%;
@@ -681,7 +775,7 @@
   padding: 0;
   margin: 0;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: var(--space-4);
 }
 .highlights-list li {
@@ -709,7 +803,7 @@
   padding: 0;
   margin: 0;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: var(--space-3);
 }
 .tips-list li {
@@ -742,7 +836,7 @@
 }
 .info-row {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   padding: 10px 14px;
   background: var(--card);
 }
@@ -897,6 +991,36 @@
   padding-bottom: 20px;
   background: var(--card);
 }
+
+/* === Tourism detail page - map container === */
+.map-container {
+  width: 100%;
+  height: 280px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius, 8px);
+  overflow: hidden;
+  background: var(--bg, #f5f5f7);
+  margin-top: 12px;
+}
+.osm-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* === Go-here button: use project green instead of blue === */
+.go-here-btn {
+  background: var(--green, #008803);
+  border: 2px solid var(--green-dim, #006600);
+}
+.go-here-btn:hover {
+  background: var(--green-dim, #006600);
+  opacity: 1;
+}
+
+
+
 
 
 

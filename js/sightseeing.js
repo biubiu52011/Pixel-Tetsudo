@@ -229,10 +229,9 @@ function renderGrid() {
       const desc = s.desc || '';
       const tags = s.tags || [];
       const image = s.image || '';
-      const distBadge = s.distText ? '<span class="sm-dist-badge">' + s.distText + '</span>' : '';
-      
+
       const thumbHtml = image ? 
-        '<img class="sm-thumb-img" src="' + image + '" alt="' + name + '">' :
+        '<img class="sm-thumb-img" src="' + encodeURI(image) + '" alt="' + name + '">' :
         '<span class="sm-thumb-icon">&#x2699;</span>';
       
       const distRowHtml = s.distText ? '<p class="sm-dist">' + s.distText + (s.dir ? ' · ' + s.dir : '') + '</p>' : '';
@@ -244,7 +243,7 @@ function renderGrid() {
       const detailUrl = 'tourism-detail.html?station=' + encodeURIComponent(stationKey) + '&index=' + idx;
 
       return '<a href="' + detailUrl + '" class="sm-card" data-index="' + idx + '">' +
-        '<div class="sm-thumb">' + thumbHtml + distBadge + '</div>' +
+        '<div class="sm-thumb">' + thumbHtml + '</div>' +
         '<div class="sm-body">' +
           '<h3>' + name + '</h3>' +
           distRowHtml +
@@ -443,6 +442,8 @@ function renderGrid() {
     init();
   }
 })();
+
+
 
 
 

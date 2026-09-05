@@ -1,4 +1,6 @@
-﻿{
+﻿// Tourism data override - loaded as JS to work under file:// protocol
+// This data takes precedence over railway_data.json tourism section
+window.TOURISM_OVERRIDE = {
   "Kitasenju": {
     "coord": [35.750113, 139.805038],
     "spots": [
@@ -66,3 +68,4 @@
   }
 }
 
+;

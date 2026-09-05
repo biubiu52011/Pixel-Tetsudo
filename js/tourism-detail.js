@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Tourism Detail Page - Decoupled Architecture
  * Spots are accessed by name/index, not by station association
  */
@@ -195,15 +195,17 @@ var currentStationKey = null;
     var highlightsHtml = '';
     if (desc) {
       var sentences = desc.split(/[.。！？]+/).filter(function(s) { return s.trim().length > 10; });
-      if (sentences.length === 0) sentences = [desc];
-      var highlightItems = sentences.slice(0, 3);
-      highlightsHtml = '<div class="article-section">'
-        + '<h3 class="section-heading">' + t('detail.highlights') + '</h3>'
-        + '<ul class="highlights-list">';
-      for (var h = 0; h < highlightItems.length; h++) {
-        highlightsHtml += '<li>' + escapeHtml(highlightItems[h].trim()) + '</li>';
+      // Only show highlights if at least 2 distinct sentences (avoids duplicate with about section)
+      if (sentences.length >= 2) {
+        var highlightItems = sentences.slice(0, 3);
+        highlightsHtml = '<div class="article-section">'
+          + '<h3 class="section-heading">' + t('detail.highlights') + '</h3>'
+          + '<ul class="highlights-list">';
+        for (var h = 0; h < highlightItems.length; h++) {
+          highlightsHtml += '<li>' + escapeHtml(highlightItems[h].trim()) + '</li>';
+        }
+        highlightsHtml += '</ul></div>';
       }
-      highlightsHtml += '</ul></div>';
     }
 
     // Tips section
@@ -222,7 +224,7 @@ var currentStationKey = null;
       + '<div class="info-row"><span class="info-label">' + t('detail.info_fee') + '</span><span class="info-value">' + escapeHtml(t('detail.unavailable')) + '</span></div>'
       + '</div></div>';
 
-    // Map container (Leaflet will initialize after render)
+    // Map container (OSM iframe)
     var mapHtml = '<div id="tourismMap" class="map-container"><div class="map-loading">' + (typeof t === 'function' ? t('detail.map_loading') : 'Loading map...') + '</div></div>';
 
     // Quick info bar
@@ -272,7 +274,7 @@ var currentStationKey = null;
     btnContainer.className = 'go-here-container';
     btnContainer.appendChild(goHereBtn);
     container.appendChild(btnContainer);
-    // Initialize Leaflet map after DOM is ready
+    // Initialize map after DOM is ready
     setTimeout(function() { initMap(mapLat, mapLng, spotName); }, 50);
     var pageTitle = spotName + ' | ' + (stationName || '') + ' | PIXEL TETSUDO';
     if (document.title) document.title = pageTitle;
@@ -400,26 +402,13 @@ function init() {
     }
   }
 
-  // Leaflet map instance (reused across renders)
-  var mapInstance = null;
-  var mapMarker = null;
+  // OpenStreetMap iframe (no external JS dependency, CSP-approved)
   function initMap(lat, lng, name) {
-    if (!window.L) return;
     var mapEl = document.getElementById("tourismMap");
     if (!mapEl) return;
-    if (!mapInstance) {
-      mapEl.innerHTML = "";
-      mapInstance = window.L.map(mapEl, { zoomControl: false, attributionControl: false }).setView([lat, lng], 16);
-      window.L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19 }).addTo(mapInstance);
-    } else {
-      mapInstance.setView([lat, lng], 16);
-    }
-    if (mapMarker) {
-      mapMarker.setLatLng([lat, lng]);
-    } else {
-      mapMarker = window.L.marker([lat, lng]).addTo(mapInstance);
-    }
-    mapMarker.setPopupContent("<b>" + (name || "") + "</b>");
+    var bbox = (lng - 0.006) + ',' + (lat - 0.004) + ',' + (lng + 0.006) + ',' + (lat + 0.004);
+    var iframeUrl = 'https://www.openstreetmap.org/export/embed.html?bbox=' + bbox + '&layer=mapnik&marker=' + lat + ',' + lng;
+    mapEl.innerHTML = '<iframe src="' + iframeUrl + '" class="osm-iframe" loading="lazy" title="' + escapeHtml(name || 'Map') + '"></iframe>';
   }
 
   window.TourismDetailPage = {
@@ -443,3 +432,6 @@ function init() {
     init();
   }
 })();
+
+
+

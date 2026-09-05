@@ -91,6 +91,15 @@ function applyData(data, i18n) {
     });
 
     window.TOURISM_DATA = data.tourism || {};
+    // Merge JS-based tourism override (works under file:// protocol where fetch is blocked)
+    if (window.TOURISM_OVERRIDE && typeof window.TOURISM_OVERRIDE === 'object') {
+      Object.keys(window.TOURISM_OVERRIDE).forEach(function(stationKey) {
+        window.TOURISM_DATA[stationKey] = window.TOURISM_OVERRIDE[stationKey];
+        if (window.TOURISM_OVERRIDE[stationKey].coord && window.TOURISM_OVERRIDE[stationKey].coord.length === 2) {
+          window.STATION_COORDS[stationKey] = window.TOURISM_OVERRIDE[stationKey].coord;
+        }
+      });
+    }
     window.TOURISM_STATIONS = Object.keys(window.TOURISM_DATA);
 
     // Build canonical StationLine relation
@@ -442,6 +451,7 @@ function load() {
     event.preventDefault();
   });
 })();
+
 
 
 
