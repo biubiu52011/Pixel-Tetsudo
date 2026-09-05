@@ -298,7 +298,7 @@
         openModal(card.dataset.line, _latestLines);
       }
     });
-    }
     if (typeof window.onLanguageChange === "function") { window.onLanguageChange(function() { render(); if (_selectedOperator) renderFiltered(); if (_currentModalLine && _latestLines) { openModal(_currentModalLine, _latestLines); } }); }
+    }
   init();
 })();
