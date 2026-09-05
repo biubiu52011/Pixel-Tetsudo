@@ -5098,7 +5098,6 @@
       "operator": "JR-East",
       "region": "Gunma",
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": 55,
       "branchOf": "Takasaki",
       "stations": [
@@ -5204,7 +5203,6 @@
       "operator": "JR-East",
       "region": "Fukushima",
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": 55,
       "branchOf": null,
       "stations": [
@@ -5253,7 +5251,6 @@
       "operator": "JR-East",
       "region": "Fukushima",
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": 65,
       "branchOf": null,
       "stations": [
@@ -5509,7 +5506,6 @@
       "operator": "JR-East",
       "region": "Niigata",
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": 55,
       "branchOf": null,
       "stations": [
@@ -5594,7 +5590,6 @@
       "operator": "JR-East",
       "region": "Aomori/Akita",
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": 90,
       "branchOf": null,
       "stations": [
@@ -5699,7 +5694,6 @@
       "operator": "JR-East",
       "region": "Aomori",
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": 55,
       "branchOf": null,
       "stations": [
@@ -5770,7 +5764,6 @@
       "operator": "JR-East",
       "region": null,
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
@@ -5844,7 +5837,6 @@
       "operator": "JR-East",
       "region": null,
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
@@ -6057,7 +6049,6 @@
       "operator": "JR-East",
       "region": null,
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
@@ -6102,7 +6093,6 @@
       "operator": "JR-East",
       "region": "Shizuoka Area",
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": 25,
       "branchOf": null,
       "stations": [
@@ -6133,7 +6123,6 @@
       "operator": "JR-East",
       "region": null,
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
@@ -6224,7 +6213,6 @@
       "operator": "JR West",
       "region": "Chugoku",
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": 60,
       "branchOf": null,
       "stations": [
@@ -6297,7 +6285,6 @@
       "operator": "JR-East",
       "region": null,
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
@@ -6366,7 +6353,6 @@
       "operator": "JR-East",
       "region": null,
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
@@ -6419,7 +6405,6 @@
       "operator": "JR-East",
       "region": null,
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
@@ -6454,7 +6439,6 @@
       "operator": "JR-East",
       "region": null,
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
@@ -6489,7 +6473,6 @@
       "operator": "JR-East",
       "region": "Saitama Area",
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": 35,
       "branchOf": null,
       "stations": [
@@ -7035,7 +7018,6 @@
       "operator": "JR-East",
       "region": null,
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
@@ -7189,7 +7171,6 @@
       "operator": "JR-East",
       "region": null,
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
@@ -7274,7 +7255,6 @@
       "operator": "JR-East",
       "region": null,
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
@@ -7345,7 +7325,6 @@
       "operator": "JR-East",
       "region": null,
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
@@ -7392,7 +7371,6 @@
       "operator": "JR-East",
       "region": null,
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
@@ -7441,7 +7419,6 @@
       "operator": "JR-East",
       "region": null,
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
@@ -7474,7 +7451,6 @@
       "operator": "JR-East",
       "region": "Chiba Area",
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": 90,
       "branchOf": null,
       "stations": [
@@ -7874,7 +7850,6 @@
       "operator": "JR-East",
       "region": null,
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
@@ -7919,7 +7894,6 @@
       "operator": "JR-East",
       "region": null,
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
@@ -8001,7 +7975,6 @@
       "operator": "JR-East",
       "region": null,
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
@@ -8090,7 +8063,6 @@
       "operator": "JR-East",
       "region": null,
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
@@ -8129,7 +8101,6 @@
       "operator": "JR-East",
       "region": null,
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
@@ -8423,7 +8394,6 @@
       "operator": "JR-East",
       "region": null,
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
@@ -8464,7 +8434,6 @@
       "operator": "JR-East",
       "region": null,
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
@@ -8538,7 +8507,6 @@
       "operator": "JR-East",
       "region": null,
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
@@ -8601,7 +8569,6 @@
       "operator": "JR-East",
       "region": "Kanagawa Area",
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": 40,
       "branchOf": null,
       "stations": [
@@ -8711,7 +8678,6 @@
       "operator": "JR-East",
       "region": null,
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
@@ -8919,7 +8885,6 @@
       "operator": "JR-East",
       "region": null,
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
@@ -9000,7 +8965,6 @@
       "operator": "JR-East",
       "region": null,
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
@@ -9053,7 +9017,6 @@
       "operator": "JR-East",
       "region": null,
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
@@ -9112,7 +9075,6 @@
       "operator": "JR-East",
       "region": null,
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
@@ -9243,7 +9205,6 @@
       "operator": "JR-East",
       "region": null,
       "type": null,
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
@@ -9498,7 +9459,6 @@
       "operator": "JR-East",
       "region": "Chiba Area",
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": 120,
       "stations": [
         "Soga",
@@ -9576,7 +9536,6 @@
       "operator": "JR-East",
       "region": null,
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
@@ -9675,7 +9634,6 @@
       "operator": "JR-East",
       "region": null,
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": null,
       "branchOf": "Suigun",
       "stations": [
@@ -9706,7 +9664,6 @@
       "operator": "JR-East",
       "region": null,
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
@@ -9792,7 +9749,6 @@
       "operator": "JR-East",
       "region": null,
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
@@ -10051,7 +10007,6 @@
       "operator": "JR-East",
       "region": null,
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
@@ -10140,7 +10095,6 @@
       "operator": "JR-East",
       "region": null,
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
@@ -10252,7 +10206,6 @@
       "operator": "JR-East",
       "region": "Chiba Area",
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": 100,
       "stations": [
         "Chiba",
@@ -10320,7 +10273,6 @@
       "operator": "JR-East",
       "region": null,
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
@@ -10496,7 +10448,6 @@
       "operator": "JR-East",
       "region": null,
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
@@ -10614,7 +10565,6 @@
       "operator": "JR-East",
       "region": null,
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
