@@ -5486,7 +5486,7 @@
       "operator": "Tobu",
       "region": null,
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
+      "image": "../images/鉄道/東武鉄道/大志線.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
@@ -7068,7 +7068,7 @@
       "operator": "Tobu",
       "region": null,
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
+      "image": "../images/鉄道/東武鉄道/伊勢崎線 佐野線 桐生線 小泉線 小泉線支線.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
@@ -7537,7 +7537,7 @@
       "operator": "Tobu",
       "region": null,
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
+      "image": "../images/鉄道/東武鉄道/日光線 宇都宮線 鬼怒川線.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
@@ -7966,7 +7966,7 @@
       "operator": "Tobu",
       "region": null,
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
+      "image": "../images/鉄道/東武鉄道/生越線.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
@@ -8656,7 +8656,7 @@
       "operator": "Tobu",
       "region": null,
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
+      "image": "../images/鉄道/東武鉄道/佐野線.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
@@ -10459,7 +10459,7 @@
       "operator": "Tobu",
       "region": null,
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/JRグループ.png",
+      "image": "../images/鉄道/東武鉄道/宇都宮線.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
