@@ -574,9 +574,9 @@ window.LineOperationSystems = {
       nameZh: "丰岛线",
       nameEn: "Toshima Line",
       nameKo: "",
-      color: "#4da72a",
+      color: "#FF6600",
       lineIds: ["SeibuToshima"],
-      icon: "",
+      icon: "../images/鉄道/西武鉄道/西武豊島線.png",
       order: 2
     },
     {
@@ -585,9 +585,9 @@ window.LineOperationSystems = {
       nameZh: "秩父线",
       nameEn: "Chichibu Line",
       nameKo: "",
-      color: "#4da72a",
+      color: "#EF7A00",
       lineIds: ["SeibuChichibu"],
-      icon: "",
+      icon: "../images/鉄道/西武鉄道/西武秩父線.png",
       order: 3
     },
     {
@@ -596,9 +596,9 @@ window.LineOperationSystems = {
       nameZh: "西武有乐町线",
       nameEn: "Seibu Yurakucho Line",
       nameKo: "",
-      color: "#4da72a",
+      color: "#C6C6C6",
       lineIds: ["Yurakucho_Seibu"],
-      icon: "",
+      icon: "../images/鉄道/西武鉄道/西武有楽町線.png",
       order: 4
     },
     {
@@ -607,10 +607,21 @@ window.LineOperationSystems = {
       nameZh: "狭山线",
       nameEn: "Sayama Line",
       nameKo: "",
-      color: "#4da72a",
+      color: "#0066CC",
       lineIds: ["Seibu_Sayama"],
-      icon: "",
+      icon: "../images/鉄道/西武鉄道/西武佐山線.png",
       order: 5
+    },
+    {
+      code: "SEN",
+      nameJa: "西武園線",
+      nameZh: "西武园线",
+      nameEn: "Seibu-en Line",
+      nameKo: "",
+      color: "#F7AF0E",
+      lineIds: ["SeibuEn"],
+      icon: "../images/鉄道/西武鉄道/西武西武園線.png",
+      order: 6
     },
     {
       code: "SK",
@@ -621,7 +632,7 @@ window.LineOperationSystems = {
       color: "#4da72a",
       lineIds: ["Kokubunji"],
       icon: "../images/鉄道/西武鉄道/西武国分寺線.png",
-      order: 6
+      order: 7
     },
     {
       code: "SS",
@@ -632,7 +643,7 @@ window.LineOperationSystems = {
       color: "#0087c5",
       lineIds: ["SeibuShinjuku"],
       icon: "../images/鉄道/西武鉄道/西武新宿線.png",
-      order: 7
+      order: 8
     },
     {
       code: "SHM",
@@ -640,10 +651,10 @@ window.LineOperationSystems = {
       nameZh: "拜岛线",
       nameEn: "Haijima Line",
       nameKo: "",
-      color: "#0087c5",
+      color: "#8B4513",
       lineIds: ["Hamura"],
-      icon: "",
-      order: 8
+      icon: "../images/鉄道/西武鉄道/西武拝島線.png",
+      order: 9
     },
     {
       code: "ST",
@@ -651,10 +662,10 @@ window.LineOperationSystems = {
       nameZh: "多摩湖线",
       nameEn: "Tamako Line",
       nameKo: "",
-      color: "#4da72a",
+      color: "#EF7A00",
       lineIds: ["SeibuTamako"],
       icon: "../images/鉄道/西武鉄道/西武多摩湖線.png",
-      order: 9
+      order: 10
     },
     {
       code: "SW",
@@ -665,7 +676,7 @@ window.LineOperationSystems = {
       color: "#4da72a",
       lineIds: ["SeibuTamagawa"],
       icon: "../images/鉄道/西武鉄道/西武多摩川線.png",
-      order: 10
+      order: 11
     },
     {
       code: "SY",
@@ -673,10 +684,10 @@ window.LineOperationSystems = {
       nameZh: "山口线",
       nameEn: "Yamaguchi Line",
       nameKo: "",
-      color: "#ffffff",
+      color: "#E83E2F",
       lineIds: ["SeibuYamaguchi"],
       icon: "../images/鉄道/西武鉄道/西武山口線.png",
-      order: 11
+      order: 12
     }
   ],
   "TOKYU": [
