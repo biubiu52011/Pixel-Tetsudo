@@ -5486,7 +5486,7 @@
       "operator": "Tobu",
       "region": null,
       "type": "straight",
-      "image": "../images/鉄道/京急電鉄/大師線.png",
+      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
@@ -7537,7 +7537,7 @@
       "operator": "Tobu",
       "region": null,
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/宇都宮線.png",
+      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
@@ -7966,7 +7966,7 @@
       "operator": "Tobu",
       "region": null,
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/宇都宮線.png",
+      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
@@ -9243,7 +9243,7 @@
       "operator": "JR-East",
       "region": null,
       "type": null,
-      "image": "",
+      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
@@ -9792,7 +9792,7 @@
       "operator": "JR-East",
       "region": null,
       "type": "straight",
-      "image": "",
+      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
