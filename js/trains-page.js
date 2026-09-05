@@ -121,9 +121,9 @@
     try {
       var positions = getRealtimePositions(lineId);
       
-      // Incremental update: if SVG already exists, only update train icon positions for smooth animation
+      // Incremental update: only if SAME line (data-line-id matches) and positions exist
       var existingSvg = el.querySelector('svg');
-      if (existingSvg && positions.length > 0) {
+      if (existingSvg && existingSvg.getAttribute('data-line-id') === lineId && positions.length > 0) {
         var _color = line.color || "#008803";
         var _stations = line.stations || [];
         // Merge stations from same LOS running system (same as initial render)
@@ -303,7 +303,7 @@
       var loopRectH = Math.max(stations.length * 36 / 2 - 80, 140);
       var svgW = isLoop ? 260 : 190 + branchOffset;
       var svgH = isLoop ? loopRectH + 80 : topP + stations.length * sp + botP;
-      var svg = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 " + svgW + " " + svgH + "\" preserveAspectRatio=\"xMidYMid meet\">";
+      var svg = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 " + svgW + " " + svgH + "\" preserveAspectRatio=\"xMidYMid meet\" data-line-id=\"" + lineId + "\">";
       svg += "<defs><filter id=\"tg_" + escapeHtml(lineId) + "\"><feGaussianBlur stdDeviation=\"2\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs>";
       svg += "<rect width=\"" + svgW + "\" height=\"" + svgH + "\" fill=\"var(--bg)\" rx=\"8\"/>";
       var loopPts = [];
