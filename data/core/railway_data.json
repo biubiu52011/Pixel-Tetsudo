@@ -4660,41 +4660,6 @@
       "throughServices": [],
       "transferStations": []
     },
-    "Orange": {
-      "name": "Orange",
-      "nameEn": "Orange Line",
-      "nameJa": "オレンジライナー",
-      "code": "O",
-      "color": "#F39200",
-      "operator": "YokohamaMunicipal",
-      "region": "Kanagawa Area",
-      "type": "straight",
-      "image": "",
-      "durationTotalMin": 14,
-      "branchOf": null,
-      "stations": [
-        "Shin-Yokohama",
-        "Nishi-Nakajima",
-        "Tsunashima",
-        "Higashi-Yamatokoji",
-        "Sakae",
-        "Kita-Yamato",
-        "Aoba-dori",
-        "Yokohama"
-      ],
-      "durations": [
-        2,
-        2,
-        2,
-        2,
-        2,
-        2,
-        2,
-        2
-      ],
-      "throughServices": [],
-      "transferStations": []
-    },
     "SotetsuMain": {
       "name": "SotetsuMain",
       "nameEn": "Sotetsu Main Line",
