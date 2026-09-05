@@ -518,7 +518,7 @@ window.LineOperationSystems = {
       nameEn: "Isesaki Line (Skytree Line)",
       nameKo: "",
       color: "#002d62",
-      lineIds: ["TobuIsesaki"],
+      lineIds: ["TobuSkytree", "TobuIsesaki"],
       icon: "../images/鉄道/東武鉄道/伊勢崎線 佐野線 桐生線 小泉線 小泉線支線.png",
       order: 2
     },
