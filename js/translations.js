@@ -185,6 +185,9 @@
       "op.Yurikamome": "Yurikamome",
       "op.TamaMonorail": "Tama Monorail",
       "op.ShonanMonorail": "Shonan Monorail",
+      "op.ChibaUrbanMonorail": "Chiba Urban Monorail",
+      "op.TokyoMonorail": "Tokyo Monorail",
+      "op.SaitamaNewUrbanTransit": "Saitama New Urban Transit",
     },
     zh: {
       "app.footer": "\u00a9 2026 \u50cf\u7d20\u94c1\u9053",
@@ -367,6 +370,9 @@
       "op.Yurikamome": "百合鸥号",
       "op.TamaMonorail": "多摩单轨电车",
       "op.ShonanMonorail": "湘南单轨电车",
+      "op.ChibaUrbanMonorail": "千叶都市单轨电车",
+      "op.TokyoMonorail": "东京单轨电车",
+      "op.SaitamaNewUrbanTransit": "埼玉新都市交通",
     },
     ja: {
       "app.footer": "\u00a9 2026 Pixel Tetsudo",
@@ -549,6 +555,9 @@
       "op.Yurikamome": "ゆりかもめ",
       "op.TamaMonorail": "多摩都市モノレール",
       "op.ShonanMonorail": "湘南モノレール",
+      "op.ChibaUrbanMonorail": "千葉都市モノレール",
+      "op.TokyoMonorail": "東京モノレール",
+      "op.SaitamaNewUrbanTransit": "埼玉新都市交通",
     },
     ko: {
       "app.footer": "\u00a9 2026 Pixel Tetsudo",
@@ -732,6 +741,9 @@
       "op.Yurikamome": "유리카모메",
       "op.TamaMonorail": "타마 모노레일",
       "op.ShonanMonorail": "쇼난 모노레일",
+      "op.ChibaUrbanMonorail": "치바 도시 모노레일",
+      "op.TokyoMonorail": "도쿄 모노레일",
+      "op.SaitamaNewUrbanTransit": "사이타마 신도시 교통",
     },
 
   };
