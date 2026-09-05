@@ -47,6 +47,7 @@
   }
 
   function openModal(lineId, linesObj) {
+    _currentModalLine = lineId;
     var modal = document.getElementById("lineDetailModal");
     if (!modal || !linesObj || !linesObj[lineId]) return;
     var line = linesObj[lineId];
@@ -115,6 +116,7 @@
   }
 
   function closeModal() {
+    _currentModalLine = null;
     var modal = document.getElementById("lineDetailModal");
     if (!modal) return;
     modal.classList.remove("active");
@@ -124,6 +126,7 @@
   let _latestLines = null;
   let _latestOrder = null;
   let _selectedOperator = null;
+  let _currentModalLine = null;
 
 
   function escapeHtml(s) {
@@ -296,6 +299,6 @@
       }
     });
     }
-    if (typeof window.onLanguageChange === "function") { window.onLanguageChange(function() { render(); if (_selectedOperator) renderFiltered(); }); }
+    if (typeof window.onLanguageChange === "function") { window.onLanguageChange(function() { render(); if (_selectedOperator) renderFiltered(); if (_currentModalLine && _latestLines) { openModal(_currentModalLine, _latestLines); } }); }
   init();
 })();
