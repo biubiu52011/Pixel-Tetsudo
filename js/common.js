@@ -44,7 +44,10 @@
     "Keikyu": "KEIKYU", "Keisei": "KEISEI", "Sotetsu": "SOTETSU", "Rinkai": "RINKAI",
     "MinatoMirai": "MINATO_MIRAI", "TWR": "TWR", "MIR": "MIR",
     "TamaMonorail": "TAMA_MONORAIL", "ShonanMonorail": "SHONAN_MONORAIL",
-    "Yurikamome": "YURIKAMOME", "TsukubaExpress": "TSUKUBA_EXPRESS"
+    "Yurikamome": "YURIKAMOME", "TsukubaExpress": "TSUKUBA_EXPRESS",
+    "SaitamaNewUrbanTransit": "SAITAMA_NEW_URBAN_TRANSIT",
+    "ChibaUrbanMonorail": "CHIBA_URBAN_MONORAIL",
+    "TokyoMonorail": "TOKYO_MONORAIL"
   };
   window.TransitConstants = {
     OP_ORDER: [
