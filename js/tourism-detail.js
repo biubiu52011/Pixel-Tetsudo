@@ -43,10 +43,9 @@ var currentStationKey = null;
   }
 
   function getStationLabel(key) {
-    var nm = getNameMap();
-    if (nm[key] && nm[key].zh) return nm[key].zh;
-    if (nm[key] && nm[key].ja) return nm[key].ja;
-    if (nm[key] && nm[key].en) return nm[key].en;
+    if (window.RailwayDB && window.RailwayDB.resolveStationName) {
+      return window.RailwayDB.resolveStationName(key, lang) || key;
+    }
     return key;
   }
 

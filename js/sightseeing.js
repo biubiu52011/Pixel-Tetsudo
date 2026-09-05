@@ -274,12 +274,12 @@ function renderGrid() {
       return;
     }
     if (state.selectedStation) {
-      var _snKey = 'station_names.' + state.selectedStation;
-      var _snLabel = t(_snKey);
-      if (_snLabel === _snKey && window.RailwayDB && window.RailwayDB.getStationName) {
-        _snLabel = window.RailwayDB.getStationName(state.selectedStation, state.lang) || state.selectedStation;
-      } else if (_snLabel === _snKey) {
-        _snLabel = state.selectedStation;
+    if (state.selectedStation) {
+      var _snLabel = state.selectedStation;
+      if (window.RailwayDB && window.RailwayDB.resolveStationName) {
+        _snLabel = window.RailwayDB.resolveStationName(state.selectedStation, state.lang) || state.selectedStation;
+      }
+      const stationLabel = _snLabel;
       }
       const stationLabel = _snLabel;
       dom.stationDisplay.textContent = stationLabel;
