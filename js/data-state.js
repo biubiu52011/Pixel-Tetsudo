@@ -126,8 +126,18 @@
       var status = dInfo.status ? dInfo.status : (dInfo ? "normal" : "no_data");
       if (!worst || statusRank(status) > statusRank(worst)) worst = status;
       if (mode === "trains") {
-        var lname = (window.RailwayDB && window.RailwayDB.resolveLineName) ? window.RailwayDB.resolveLineName(lid, lang) : lid;
-        chipsHtml += '<span class="rs-sys-chip">' + escapeHtml(lname) + '</span>';
+        // 显示运行区间（起点↔终点）而不是线路名称
+        var stations = line.stations || [];
+        if (stations.length >= 2) {
+          var fromId = stations[0];
+          var toId = stations[stations.length - 1];
+          var fromName = (window.RailwayDB && window.RailwayDB.resolveStationName) ? window.RailwayDB.resolveStationName(fromId, lang) || fromId : fromId;
+          var toName = (window.RailwayDB && window.RailwayDB.resolveStationName) ? window.RailwayDB.resolveStationName(toId, lang) || toId : toId;
+          chipsHtml += '<span class="rs-sys-chip">' + escapeHtml(fromName) + '↔' + escapeHtml(toName) + '</span>';
+        } else {
+          var lname = (window.RailwayDB && window.RailwayDB.resolveLineName) ? window.RailwayDB.resolveLineName(lid, lang) : lid;
+          chipsHtml += '<span class="rs-sys-chip">' + escapeHtml(lname) + '</span>';
+        }
       }
     }
     var worstS = getStatus(worst);
