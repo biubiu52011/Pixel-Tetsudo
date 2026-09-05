@@ -721,7 +721,7 @@ window.LineOperationSystems = {
       nameEn: "Sotetsu Main Line",
       nameKo: "",
       color: "#003366",
-      lineIds: ["SotetsuMain"],
+      lineIds: ["SotetsuMain", "SotetsuIzumino", "SotetsuShin-Yokohama"],
       icon: "",
       order: 1
     }
@@ -804,4 +804,43 @@ window.LineOperationSystems = {
       order: 1
     }
   ]
+  "SAITAMA_NEW_URBAN_TRANSIT": [
+    {
+      code: "NS",
+      nameJa: "埼玉新都市交通伊奈線（ニューシャトル）",
+      nameZh: "埼玉新都市交通伊奈线（新穿梭）",
+      nameEn: "Saitama New Urban Transit Ina Line (New Shuttle)",
+      nameKo: "",
+      color: "#ea5504",
+      lineIds: ["NewShuttle"],
+      icon: "",
+      order: 1
+    }
+  ],
+  "CHIBA_URBAN_MONORAIL": [
+    {
+      code: "CM",
+      nameJa: "千葉都市モノレール",
+      nameZh: "千叶都市单轨电车",
+      nameEn: "Chiba Urban Monorail",
+      nameKo: "",
+      color: "#0099cc",
+      lineIds: ["ChibaUrbanMonorail"],
+      icon: "",
+      order: 1
+    }
+  ],
+  "TOKYO_MONORAIL": [
+    {
+      code: "MO",
+      nameJa: "東京モノレール羽田空港線",
+      nameZh: "东京单轨电车羽田机场线",
+      nameEn: "Tokyo Monorail Haneda Airport Line",
+      nameKo: "",
+      color: "#006fc0",
+      lineIds: ["TokyoMonorail"],
+      icon: "",
+      order: 1
+    }
+  ],
 };

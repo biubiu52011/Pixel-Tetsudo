@@ -10919,6 +10919,104 @@
         "Narita-Airport-Terminal-2-3",
         "Narita-Airport-Terminal-1"
       ]
+    },
+    "SotetsuIzumino": {
+      "nameJa": "相鉄いずみ野線",
+      "nameEn": "Sotetsu Izumino Line",
+      "operator": "Sotetsu",
+      "color": "#003366",
+      "code": "SO",
+      "stations": [
+        "Futamata-gawa",
+        "Minami-Makigahara",
+        "Ryokuen-toshi",
+        "Yayoidai",
+        "Izumino",
+        "Izumi-chūō",
+        "Yumegaoka",
+        "Shōnandai"
+      ]
+    },
+    "SotetsuShin-Yokohama": {
+      "nameJa": "相鉄新横浜線",
+      "nameEn": "Sotetsu Shin-Yokohama Line",
+      "operator": "Sotetsu",
+      "color": "#003366",
+      "code": "SO",
+      "stations": [
+        "Nishiya",
+        "Shin-Tsunashima",
+        "Shin-Yokohama"
+      ]
+    },
+    "NewShuttle": {
+      "nameJa": "埼玉新都市交通伊奈線（ニューシャトル）",
+      "nameEn": "Saitama New Urban Transit Ina Line (New Shuttle)",
+      "operator": "SaitamaNewUrbanTransit",
+      "color": "#ea5504",
+      "code": "NS",
+      "stations": [
+        "Ōmiya",
+        "Tetsudō-Hakubutsukan",
+        "Kamonomiya",
+        "Higashi-Miyahara",
+        "Konba",
+        "Yoshinohara",
+        "Haraichi",
+        "Shōnan",
+        "Maruyama",
+        "Shiku",
+        "Ina-Chūō",
+        "Hanuki",
+        "Uchijuku"
+      ]
+    },
+    "ChibaUrbanMonorail": {
+      "nameJa": "千葉都市モノレール",
+      "nameEn": "Chiba Urban Monorail",
+      "operator": "ChibaUrbanMonorail",
+      "color": "#0099cc",
+      "code": "CM",
+      "stations": [
+        "Chiba-Minato",
+        "Shiyakusho-mae",
+        "Chiba",
+        "Sakaechō",
+        "Yoshikawa-kōen",
+        "Kenchō-mae",
+        "Chiba-kōen",
+        "Sakusabe",
+        "Tendai",
+        "Anagawa",
+        "Sports-Center",
+        "Dōbutsu-kōen",
+        "Mitsuwadai",
+        "Tsuga",
+        "Sakuragi",
+        "Oguradai",
+        "Chishirodai-Kita",
+        "Chishirodai"
+      ]
+    },
+    "TokyoMonorail": {
+      "nameJa": "東京モノレール羽田空港線",
+      "nameEn": "Tokyo Monorail Haneda Airport Line",
+      "operator": "TokyoMonorail",
+      "color": "#006fc0",
+      "code": "MO",
+      "stations": [
+        "Monorail-Hamamatsuchō",
+        "Tennōzu Isle",
+        "Ōi Keibajō Mae",
+        "Ryūtsū Center",
+        "Shōwajima",
+        "Seibijō",
+        "Tenkūbashi",
+        "Haneda Airport Terminal 3",
+        "Shin-Seibijō",
+        "Haneda Airport Terminal 1",
+        "Haneda Airport Terminal 2"
+      ]
     }
   },
   "name_map": {
