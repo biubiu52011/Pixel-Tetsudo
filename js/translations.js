@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Pixel Tetsudo - Translations (en/zh/ja/ko)
  */
 (function() {
@@ -118,6 +118,7 @@
       "tourism.auto_detected": "Auto-detected",
       "tourism.locating": "Locating...",
       "tourism.loc_error": "Location unavailable",
+      "tourism.choose_station": "Choose station",
       "tourism.east": "E",
       "tourism.min_walk": "min walk",
       "tourism.ne": "NE",
@@ -143,6 +144,9 @@
       "tourism.tag_shrine": "Shrine",
       "tourism.tag_sightseeing": "Sightseeing",
       "tourism.tag_temple": "Temple",
+      "tourism.tag_all": "All",
+      "tourism.tag_night": "Night",
+      "tourism.tag_seasonal": "Seasonal",
       "tourism.title": "Sightseeing Guide",
       "tourism.west": "W",
       "tourism.within_100m": "Within 100m",
@@ -260,7 +264,7 @@
       "search.no_results": "\u672a\u627e\u5230\u8def\u7ebf",
       "search.segments": "\u533a\u95f4",
       "search.title": "\u8def\u7ebf\u641c\u7d22",
-      "search.toLabel": "\u76ee\u7684\u5730",
+      "search.toLabel": "\u5230\u7740\u99c5",
       "search.toPlaceholder": "\u8f93\u5165\u76ee\u7684\u5730",
       "search.transfers": "\u6362\u4e58",
       "search.yen": "\u65e5\u5143",
@@ -303,6 +307,7 @@
       "tourism.auto_detected": "\u81ea\u52a8\u68c0\u6d4b",
       "tourism.locating": "\u5b9a\u4f4d\u4e2d...",
       "tourism.loc_error": "无法获取位置信息...",
+      "tourism.choose_station": "选择车站",
       "tourism.east": "\u4e1c",
       "tourism.min_walk": "\u6b65\u884c\u5206",
       "tourism.ne": "\u4e1c\u5317",
@@ -328,6 +333,9 @@
       "tourism.tag_shrine": "\u795e\u793e",
       "tourism.tag_sightseeing": "\u89c2\u5149",
       "tourism.tag_temple": "\u5bfa\u5e99",
+      "tourism.tag_all": "\u5168\u90e8",
+      "tourism.tag_night": "\u591c\u666f",
+      "tourism.tag_seasonal": "\u5b63\u8282",
       "tourism.title": "\u89c2\u5149\u6307\u5357",
       "tourism.west": "\u897f",
       "tourism.within_100m": "100\u7c73\u5185",
@@ -433,8 +441,8 @@
       "line.straight": "\u76f4\u7dda",
       "line_map.back": "\u623b\u308b",
       "search.btn": "\u691c\u7d22",
-      "search.fromLabel": "\u59cb\u70b9",
-      "search.fromPlaceholder": "\u59cb\u70b9\u99c5\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044",
+      "search.fromLabel": "\u51fa\u767a\u99c5",
+      "search.fromPlaceholder": "\u51fa\u767a\u99c5\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044",
       "search.min_unit": "\u5206",
       "search.fare": "料金",
       "search.walking": "歩行",
@@ -445,8 +453,8 @@
       "search.no_results": "\u8def\u7dda\u304c\u898b\u3064\u304b\u308a\u307e\u305b\u3093",
       "search.segments": "\u533a\u9593",
       "search.title": "\u8def\u7dda\u691c\u7d22",
-      "search.toLabel": "\u76ee\u7684\u5730",
-      "search.toPlaceholder": "\u76ee\u7684\u5730\u99c5\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044",
+      "search.toLabel": "\u5230\u7740\u99c5",
+      "search.toPlaceholder": "\u5230\u7740\u99c5\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044",
       "search.transfers": "\u4e57\u63db",
       "search.yen": "\u00a5",
       "search.rec.fewest_transfers": "乗換最少",
@@ -487,7 +495,8 @@
       "tourism.at_station": "\u99c5\u76f4\u8fd1",
       "tourism.auto_detected": "\u81ea\u52a8\u691c\u51fa",
       "tourism.locating": "\u4f4d\u7f6e\u6e2c\u5b9a\u4e2d...",
-      "tourism.loc_error": "位置情報の利用ができません...",
+      "tourism.loc_error": "位置情報が取得できません...",
+      "tourism.choose_station": "駅を選択",
       "tourism.east": "\u4e1c",
       "tourism.min_walk": "\u5206\u6b69\u304d",
       "tourism.ne": "\u5317\u4e1c",
@@ -495,13 +504,13 @@
       "tourism.no_station_found": "\u8a72\u5f53\u3059\u308b\u99c5\u304c\u898b\u3064\u304b\u308a\u307e\u305b\u3093",
       "tourism.north": "\u5317",
       "tourism.nw": "\u5317\u897f",
-      "tourism.relocate": "\u518d\u5b9a\u4f4d",
+      "tourism.relocate": "\u73fe\u5728\u4f4d\u7f6e\u3092\u66f4\u65b0",
       "tourism.se": "\u5357\u4e1c",
-      "tourism.select_station": "\u8fd1\u304f\u306e\u99c5",
+      "tourism.select_station": "\u6700\u5bc4\u308a\u99c5",
       "tourism.south": "\u5357",
       "tourism.sw": "\u5357\u897f",
       "tourism.tag_anime": "\u30a2\u30cb\u30e1",
-      "tourism.tag_discount": "\u30b5\u30fc\u30d3\u30b9",
+      "tourism.tag_discount": "\u5272\u5f15",
       "tourism.tag_food": "\u30d5\u30fc\u30c9",
       "tourism.tag_free": "\u7121\u6599",
       "tourism.tag_history": "\u6b74\u53f2",
@@ -513,6 +522,9 @@
       "tourism.tag_shrine": "\u795e\u793e",
       "tourism.tag_sightseeing": "\u89b3\u5149",
       "tourism.tag_temple": "\u5bfa",
+      "tourism.tag_all": "\u3059\u3079\u3066",
+      "tourism.tag_night": "\u30ca\u30a4\u30c8",
+      "tourism.tag_seasonal": "\u5b63\u7bc0",
       "tourism.title": "\u89b3\u5149\u30ac\u30a4\u30c9",
       "tourism.west": "\u897f",
       "tourism.within_100m": "100m\u4ee5\u5185",
@@ -673,6 +685,7 @@
       "tourism.auto_detected": "\uc790\ub3d9 \uac10\uc9c0",
       "tourism.locating": "\uc704\uce58 \uc815\ubcf4 \uc218\ucda9...",
       "tourism.loc_error": "위치 정보를 사용할 수 없습니다...",
+      "tourism.choose_station": "역 선택",
 
       "tourism.east": "\ub3d9",
       "tourism.min_walk": "\ub3c4\ubcf4 \ubd84",
@@ -699,6 +712,9 @@
       "tourism.tag_shrine": "\uc2e0\uc0ac",
       "tourism.tag_sightseeing": "\uad00\uad11",
       "tourism.tag_temple": "\uc0ac\uc6d0",
+      "tourism.tag_all": "\uc804\uccb4",
+      "tourism.tag_night": "\uc57c\uacbd",
+      "tourism.tag_seasonal": "\uacc4\uc808",
       "tourism.title": "\uad00\uad11 \uac00\uc774\ub4dc",
       "tourism.west": "\uc11c",
       "tourism.within_100m": "100m \uc774\ub0b4",
@@ -757,3 +773,9 @@
 
 
  
+
+
+
+
+
+

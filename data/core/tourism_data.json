@@ -1,0 +1,67 @@
+{
+  "Kitasenju": {
+    "coord": [35.750113, 139.805038],
+    "spots": [
+      {
+        "name": "LUMINE 北千住",
+        "coord": [35.750113, 139.805038],
+        "dist": "0 min walk",
+        "dir": "station direct",
+        "desc": "駅直結。トレンドファッション、雑貨（Loftあり）、カフェが充実。",
+        "tags": ["all"],
+        "station": "Kitasenju",
+        "image": ""
+      },
+      {
+        "name": "北千住丸井 (Marui)",
+        "coord": [35.750611, 139.804333],
+        "dist": "2 min walk",
+        "dir": "west exit",
+        "desc": "駅西口直通。地下1階の食品街「せんじゅ市」で和菓子や総菜を買うのに便利。",
+        "tags": ["all", "food"],
+        "station": "Kitasenju",
+        "image": ""
+      },
+      {
+        "name": "千住 街之驛",
+        "coord": [35.750478, 139.801642],
+        "dist": "4 min walk",
+        "dir": "west",
+        "desc": "伝統的な民家を改装した観光案内所。無料地図がもらえ、散歩の起点に最適。",
+        "tags": ["history", "all"],
+        "station": "Kitasenju",
+        "image": ""
+      },
+      {
+        "name": "宿場町通商店街",
+        "coord": [35.751240, 139.801750],
+        "dist": "5 min walk",
+        "dir": "northwest",
+        "desc": "江戸時代、日光街道の重要な宿場町。老舗店舗や昭和レトロな居酒屋が立ち並ぶ。",
+        "tags": ["history", "all", "food"],
+        "station": "Kitasenju",
+        "image": ""
+      },
+      {
+        "name": "横山家住宅",
+        "coord": [35.751678, 139.802139],
+        "dist": "6 min walk",
+        "dir": "northwest",
+        "desc": "江戸後期の貴重な建物。正門の柱には江戸末期の戦争による日本刀の斬り傷が残る。",
+        "tags": ["history", "all"],
+        "station": "Kitasenju",
+        "image": ""
+      },
+      {
+        "name": "荒川 虹之広場",
+        "coord": [35.757050, 139.804111],
+        "dist": "10 min walk",
+        "dir": "north",
+        "desc": "荒川河川敷公園。視界が開けており、電車の鉄道、東京スカイツリー、夕日を撮る絶好のポイント。",
+        "tags": ["nature", "all"],
+        "station": "Kitasenju",
+        "image": ""
+      }
+    ]
+  }
+}

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Pixel Tetsudo - Database Loader
  * 从 railway_data.json 加载所有数据到全局变量
  * 新增：IndexedDB 实时数据缓存（train positions + delay info）
@@ -59,6 +59,7 @@
 
   var DATA_FILE = "../data/core/railway_data.json";
   var STATION_I18N_FILE = "../data/core/station_i18n.json";
+  var TOURISM_DATA_FILE = "../data/core/tourism_data.json";
   var _stationI18n = {};
   var loaded = false;
   var error = null;
@@ -354,10 +355,24 @@ function load() {
       fetch(STATION_I18N_FILE).then(function(res) {
         if (!res.ok) return {};
         return res.json();
+      }),
+      fetch(TOURISM_DATA_FILE).then(function(res) {
+        if (!res.ok) return {};
+        return res.json();
       }).catch(function() { return {}; })
     ])
       .then(function(results) {
         applyData(results[0], results[1]);
+        // Merge tourism data override (tourism_data.json takes precedence)
+        var tourismOverride = results[2] || {};
+        Object.keys(tourismOverride).forEach(function(stationKey) {
+          window.TOURISM_DATA[stationKey] = tourismOverride[stationKey];
+          // Also update station coords if tourism data provides them (fixes 0,0 placeholder coords)
+          if (tourismOverride[stationKey].coord && tourismOverride[stationKey].coord.length === 2) {
+            window.STATION_COORDS[stationKey] = tourismOverride[stationKey].coord;
+          }
+        });
+        window.TOURISM_STATIONS = Object.keys(window.TOURISM_DATA);
         loaded = true;
         console.log(
           Object.keys(data.stations).length + " stations, " +
@@ -427,3 +442,6 @@ function load() {
     event.preventDefault();
   });
 })();
+
+
+

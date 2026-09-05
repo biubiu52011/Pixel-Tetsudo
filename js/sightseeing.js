@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Sightseeing Module - Coordinate-based Recommendation
  */
 
@@ -265,6 +265,11 @@ function renderGrid() {
   
   function updateStationDisplay() {
     if (!dom.stationDisplay) return;
+    if (state.locStatus === 'error') {
+      dom.stationDisplay.textContent = t('tourism.loc_error');
+      dom.stationDisplay.classList.remove('sm-station-detected');
+      return;
+    }
     if (state.selectedStation) {
       var _snKey = 'station_names.' + state.selectedStation;
       var _snLabel = t(_snKey);
@@ -304,12 +309,25 @@ function renderGrid() {
         }
       });
     }
+    if (dom.locationBar) {
+      dom.locationBar.style.cursor = 'pointer';
+      dom.locationBar.addEventListener('click', function(e) {
+        if (e.target.closest('#smRelocateBtn')) return;
+        if (state.locStatus === 'error' || state.locStatus === 'found') {
+          if (dom.stationPicker.classList.contains('hidden')) {
+            showStationPicker();
+          } else {
+            hideStationPicker();
+          }
+        }
+      });
+    }
   }
 
   // Station picker shown when geolocation is unavailable
   function showStationPicker() {
     if (!dom.stationPicker) return;
-    var html = '<div class="sm-picker-label">' + t('tourism.select_station') + '</div><div class="sm-picker-list">';
+    var html = '<div class="sm-picker-label">' + t('tourism.choose_station') + '</div><div class="sm-picker-list">';
     var _stations = getMajorStations();
     for (var i = 0; i < _stations.length; i++) {
       var s = _stations[i];
@@ -334,9 +352,9 @@ function renderGrid() {
     state.locStatus = 'locating';
     renderHeader();
     if (typeof navigator === 'undefined' || !navigator.geolocation) {
+      state.locStatus = 'error';
       state.selectedStation = (getMajorStations().length > 0) ? getMajorStations()[0] : 'Shinjuku';
       state.autoDetected = false;
-      showStationPicker();
       renderAll();
       return;
     }
@@ -352,13 +370,12 @@ function renderGrid() {
           state.locStatus = 'error';
           state.selectedStation = (getMajorStations().length > 0) ? getMajorStations()[0] : 'Shinjuku';
           state.autoDetected = false;
-          showStationPicker();
           renderAll();
         } else {
           // No geolocation API available - show picker directly
+          state.locStatus = 'error';
           state.selectedStation = (getMajorStations().length > 0) ? getMajorStations()[0] : 'Shinjuku';
           state.autoDetected = false;
-          showStationPicker();
           renderAll();
         }
       },
@@ -426,4 +443,8 @@ function renderGrid() {
     init();
   }
 })();
+
+
+
+
 

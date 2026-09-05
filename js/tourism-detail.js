@@ -349,12 +349,15 @@ function init() {
       if (spotName) {
         targetSpot = findSpotByName(spotName);
       }
-      if (!targetSpot && allSpots.length > 0) {
-        targetSpot = allSpots[spotIndex] || allSpots[0];
+      // When coming from sightseeing.js, index refers to scopedSpots position
+      if (!targetSpot && scopedSpots.length > 0) {
+        targetSpot = scopedSpots[spotIndex] || scopedSpots[0];
       }
 
       if (targetSpot) {
-        currentSpotIndex = allSpots.indexOf(targetSpot);
+        // Use scopedSpots index for navigation consistency
+        currentSpotIndex = scopedSpots.indexOf(targetSpot);
+        if (currentSpotIndex < 0) currentSpotIndex = 0;
         renderArticle(targetSpot, stationKey);
       } else if (allSpots.length > 0) {
         currentSpotIndex = 0;
@@ -365,8 +368,10 @@ function init() {
         window.onLanguageChange(function() {
           lang = window.currentLang || 'ja';
           scopedSpots = getScopedSpots();
-          if (allSpots.length > 0 && currentSpotIndex >= 0) {
-            renderArticle(allSpots[currentSpotIndex], currentStationKey);
+          if (scopedSpots.length > 0 && currentSpotIndex >= 0 && currentSpotIndex < scopedSpots.length) {
+            renderArticle(scopedSpots[currentSpotIndex], currentStationKey);
+          } else if (allSpots.length > 0) {
+            renderArticle(allSpots[0], currentStationKey);
           }
         });
       }
@@ -423,8 +428,11 @@ function init() {
     getAllSpots: getAllSpots,
     setStation: function(stationKey) {
       currentStationKey = stationKey;
-      if (allSpots.length > 0 && currentSpotIndex >= 0) {
-        renderArticle(allSpots[currentSpotIndex]);
+      scopedSpots = getScopedSpots();
+      if (scopedSpots.length > 0 && currentSpotIndex >= 0 && currentSpotIndex < scopedSpots.length) {
+        renderArticle(scopedSpots[currentSpotIndex]);
+      } else if (allSpots.length > 0) {
+        renderArticle(allSpots[0]);
       }
     }
   };
@@ -435,5 +443,3 @@ function init() {
     init();
   }
 })();
-
-
