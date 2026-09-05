@@ -405,10 +405,14 @@
           }
         });
       }
-      // Refresh filter bar labels on language switch
+      // Refresh filter bar labels and line detail view on language switch
       if (typeof window.onLanguageChange === "function") {
         window.onLanguageChange(function() {
           renderFilterBar(document.getElementById("trainsFilterBar"));
+          // Re-render line detail view if open
+          if (currentLine && detailEl && !detailEl.classList.contains("hidden")) {
+            showLineView(currentLine);
+          }
         });
       }
     } catch(e) {}
