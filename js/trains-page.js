@@ -264,7 +264,16 @@
           px = mainCx;
           py = topP + idx * sp;
         }
-        svg += "<circle cx=\"" + px + "\" cy=\"" + py + "\""+ "  r=\"8\" fill=\"" + escapeHtml(color) + "\""+ "  filter=\"url(#tg_" + escapeHtml(lineId) + ")\" opacity=\"0.9\"/>";
+        // Train icon (20x24, centered)
+        var iconSrc = (window.TrainIcons && typeof window.TrainIcons.getTrainIcon === "function") ? window.TrainIcons.getTrainIcon(lineId, line.operator) : "";
+        var isEstimated = p.estimated === true;
+        var iconClass = isEstimated ? "train-icon estimated" : "train-icon";
+        if (iconSrc) {
+          svg += "<image x=\"" + (px - 10) + "\" y=\"" + (py - 12) + "\" width=\"20\" height=\"24\" href=\"" + escapeHtml(iconSrc) + "\" class=\"" + iconClass + "\" preserveAspectRatio=\"xMidYMid meet\"/>";
+        } else {
+          svg += "<circle cx=\"" + px + "\" cy=\"" + py + "\""+ "  r=\"8\" fill=\"" + escapeHtml(color) + "\""+ "  filter=\"url(#tg_" + escapeHtml(lineId) + ")\" opacity=\"0.9\"/>";
+          
+        }
         svg += "<circle cx=\"" + px + "\" cy=\"" + py + "\""+ "  r=\"3\" fill=\"#fff\"/>";
       }
       svg += "</svg>";

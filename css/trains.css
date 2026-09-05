@@ -36,6 +36,26 @@
 .tp-map-wrap { min-width: 200px; }
 .tp-map-wrap svg { width: 100%; height: auto; display: block; }
 
+/* Train icon pulse animation */
+.train-icon {
+  animation: trainPulse 2s ease-in-out infinite;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+.train-icon.estimated {
+  opacity: 0.65;
+  animation-duration: 3s;
+  animation-name: trainPulseEst;
+}
+@keyframes trainPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.75; transform: scale(1.12); }
+}
+@keyframes trainPulseEst {
+  0%, 100% { opacity: 0.65; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(1.08); }
+}
+
 
 /* Responsive — mobile */
 @media (max-width: 640px) {
