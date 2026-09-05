@@ -539,7 +539,7 @@
       "op.Odakyu": "小田急電鉄",
       "op.Keisei": "京成電鉄",
       "op.Keikyu": "京急電鉄",
-      "op.Sotetsu": "相鉄",
+      "op.Sotetsu": "相模鉄道",
       "op.YokohamaMunicipal": "横浜市営地下鉄",
       "op.TWR": "りんかい線",
       "op.MinatoMirai": "港未来線",

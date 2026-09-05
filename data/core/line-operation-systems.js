@@ -1107,7 +1107,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#003366",
       lineIds: ["SotetsuMain"],
-      icon: "",
+      icon: "../images/鉄道/相鉄/相鉄本線.png",
       order: 1
     },
     {
@@ -1118,7 +1118,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#003366",
       lineIds: ["SotetsuIzumino"],
-      icon: "",
+      icon: "../images/鉄道/相鉄/相鉄いずみ野線.png",
       order: 2
     },
     {
@@ -1129,7 +1129,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#003366",
       lineIds: ["SotetsuShin-Yokohama"],
-      icon: "",
+      icon: "../images/鉄道/相鉄/相鉄新横浜線.png",
       order: 3
     }
   ],
