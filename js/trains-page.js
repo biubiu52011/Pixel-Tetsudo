@@ -464,7 +464,24 @@
         label.setAttribute("font-family", "sans-serif");
         label.setAttribute("font-weight", isJunction ? "700" : "500");
         label.setAttribute("text-anchor", anchor);
-        label.textContent = _rS(stationId);
+        
+        // Station name
+        var stationName = _rS(stationId);
+        var nameTspan = document.createElementNS(svgNS, "tspan");
+        nameTspan.textContent = stationName;
+        label.appendChild(nameTspan);
+        
+        // Transfer hint (if exists)
+        var transferHint = (typeof window.getTransferHint === "function") ? window.getTransferHint(stationId, window.currentLang) : null;
+        if (transferHint) {
+          var hintTspan = document.createElementNS(svgNS, "tspan");
+          hintTspan.textContent = transferHint;
+          hintTspan.setAttribute("font-size", isJunction ? "7" : "6");
+          hintTspan.setAttribute("fill", "#888");
+          hintTspan.setAttribute("font-weight", "400");
+          label.appendChild(hintTspan);
+        }
+        
         staticLayer.appendChild(label);
       }
       
