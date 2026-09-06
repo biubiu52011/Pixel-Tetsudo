@@ -1,1 +1,0 @@
-c=open('js/data-state.js','r',encoding='utf-8').read(); idx=c.find('no_data:'); open('C:/Users/80996/Documents/\u9879\u76ee/\u7C89\u50CF\u9244\u9053/recovery/reports/_debug7.txt','w',encoding='utf-8').write(repr(c[idx:idx+100])) 

@@ -10,9 +10,32 @@
 (function() {
     'use strict';
 
-    // ========== API Keys ==========
-    var CHALLENGE_KEY = "gxyoc62dp9i6a4e4bhr96wqcd9bfo7i5o4d410ild6icmf079zevrlk0tjv04din";
-    var CENTER_KEY = "jueja2bhf8mgsjuirxyl5x0q6sij2i67bzmr93zvg0l89o7ct8p3izl8fa0k28lz";
+    // ========== API Keys（安全：不硬编码，从 localStorage 读取） ==========
+    // 设置方式：localStorage.setItem('odpt_challenge_key', '<你的Challenge Key>')
+    //           localStorage.setItem('odpt_center_key', '<你的Center Key>')
+    // 或调用 window.ODPTClient.setApiKey(base, key) 后刷新页面
+    var KEY_STORE = { challenge: 'odpt_challenge_key', center: 'odpt_center_key' };
+    function _keyName(base) {
+        return base.indexOf('api-challenge') >= 0 ? KEY_STORE.challenge : KEY_STORE.center;
+    }
+    function getApiKey(base) {
+        try {
+            var k = localStorage.getItem(_keyName(base));
+            if (k) return k;
+        } catch (e) {}
+        return null;
+    }
+    function setApiKey(base, key) {
+        try {
+            var n = _keyName(base);
+            if (key) localStorage.setItem(n, key.trim());
+            else localStorage.removeItem(n);
+            return true;
+        } catch (e) { return false; }
+    }
+    function keysConfigured() {
+        return !!(getApiKey('https://api-challenge.odpt.org/api/v4/') && getApiKey('https://api.odpt.org/api/v4/'));
+    }
 
     // ========== 完整 API URL（按运营商和类型区分） ==========
     var ODPT_ENDPOINTS = {
@@ -127,7 +150,11 @@
     function buildUrl(operator, type) {
         var ep = ODPT_ENDPOINTS[operator];
         if (!ep || !ep[type]) return null;
-        var key = ep.base.indexOf('api-challenge') >= 0 ? CHALLENGE_KEY : CENTER_KEY;
+        var key = getApiKey(ep.base);
+        if (!key) {
+            console.warn("[ODPT] API key not configured for " + ep.base + " — set localStorage '" + _keyName(ep.base) + "'");
+            return null;
+        }
         return ep.base + ep[type] + "&acl:consumerKey=" + key;
     }
 
@@ -139,7 +166,7 @@
         "BanetsuEast": "JR-East",
         "BanetsuWest": "JR-East",
         "Chiyoda": "TokyoMetro",
-        "ChuoKonosu": "JR-East",
+
         "ChuoRapid": "JR-East",
         "ChuoSobuLocal": "JR-East",
         "Daishi_Keikyu": "Keikyu",
@@ -157,7 +184,7 @@
         "HitachiNakaKaimin": "MIR",
         "Iiyama": "JR-East",
         "Ikebukuro": "Seibu",
-        "Isesaki": "Tobu",
+
         "Ishinomaki": "JR-East",
         "Ito": "JR-East",
         "Itsukaichi": "JR-East",
@@ -167,7 +194,7 @@
         "Joetsu": "JR-East",
         "Kamaishi": "JR-East",
         "Kamiishi": "JR-East",
-        "Kanagawa": "JR-East",
+
         "Karasuyama": "JR-East",
         "Kashima": "JR-East",
         "Kawagoe": "JR-East",
@@ -175,9 +202,9 @@
         "Keikyu": "Keikyu",
         "KeikyuAirport": "Keikyu",
         "KeikyuKurihama": "Keikyu",
-        "KeikyuMain": "Keikyu",
+
         "KeikyuZushi": "Keikyu",
-        "Keio": "Keio",
+
         "KeioInokashira": "Keio",
         "KeioKeibajo": "Keio",
         "KeioMain": "Keio",
@@ -204,12 +231,12 @@
         "Namboku": "TokyoMetro",
         "Nambu": "JR-East",
         "Narita": "JR-East",
-        "Nikko": "Tobu",
+
         "Nikkoku": "Tobu",
         "Nippori_Toneri": "Toei",
         "Noda": "Tobu",
         "OdakyuEnoshima": "Odakyu",
-        "OdakyuOdawara": "Odakyu",
+
         "OdakyuTama": "Odakyu",
         "Odawara": "Odakyu",
         "Oedo": "Toei",
@@ -219,30 +246,29 @@
         "Oito": "JR-East",
         "Ome": "JR-East",
         "Ominato": "JR-East",
-        "Orange": "YokohamaMunicipal",
+
         "OuMain": "JR-East",
         "Oyama": "JR-East",
         "RikutoEast": "JR-East",
         "RikutsuWest": "JR-East",
         "Rinkai": "TWR",
-        "Rinko": "TWR",
+
         "Ryomo": "JR-East",
         "Sagami": "JR-East",
         "Saikyo": "JR-East",
-        "Sakuragi": "Keikyu",
+
         "Sano": "JR-East",
         "Sanriku": "JR-East",
         "SeibuChichibu": "Seibu",
         "SeibuEn": "Seibu",
-        "SeibuIkebukuro": "Seibu",
-        "SeibuNakagawa": "Seibu",
+
         "SeibuShinjuku": "Seibu",
         "SeibuTamagawa": "Seibu",
         "SeibuTamako": "Seibu",
         "SeibuToshima": "Seibu",
         "SeibuYamaguchi": "Seibu",
         "Seibu_Sayama": "Seibu",
-        "Seibu_Shinjuku": "Seibu",
+
         "Senseki": "JR-East",
         "SensekiTohoku": "JR-East",
         "Senzan": "JR-East",
@@ -251,8 +277,7 @@
         "Shinonoi": "JR-East",
         "ShonanMonorailE": "ShonanMonorail",
         "ShonanShinjuku": "JR-East",
-        "Skytree": "Tobu",
-        "SobuLocal": "JR-East",
+
         "SobuRapid": "JR-East",
         "SotetsuMain": "Sotetsu",
         "Sotobo": "JR-East",
@@ -281,6 +306,30 @@
         "Uetsu": "JR-East",
         "Utsunomiya": "Tobu",
         "Yamagata": "JR-East",
+        "ChibaUrbanMonorail": "ChibaUrbanMonorail",
+        "ChiyodaBranch": "TokyoMetro",
+        "ChuoMain": "JR-East",
+        "Hachiko": "JR-East",
+        "KeiseiChiba": "Keisei",
+        "KeiseiChihara": "Keisei",
+        "KeiseiKanamachi": "Keisei",
+        "KeiseiOshiage": "Keisei",
+        "NaritaSkyAccess": "Keisei",
+        "NewShuttle": "SaitamaNewUrbanTransit",
+        "SobuMain": "JR-East",
+        "SotetsuIzumino": "Sotetsu",
+        "SotetsuShin-Yokohama": "Sotetsu",
+        "TokaidoMain": "JR-East",
+        "TokyoMonorail": "TokyoMonorail",
+        "TokyuIkegami": "Tokyu",
+        "TokyuKodomonokuni": "Tokyu",
+        "TokyuMeguro": "Tokyu",
+        "TokyuOimachi": "Tokyu",
+        "TokyuSetagaya": "Tokyu",
+        "Tonami": "JR-East",
+        "TsurumiOkawa": "JR-East",
+        "TsurumiUmiShibaura": "JR-East",
+        "Yokohama": "JR-East",
         "Yamanote": "JR-East",
         "YokohamaBlue": "YokohamaMunicipal",
         "YokohamaGreen": "YokohamaMunicipal",
@@ -291,6 +340,49 @@
         "Yurikamome": "Yurikamome"
     };
 
+
+    // ========== 线路 key → ODPT Railway code 别名表 ==========
+    // 内部线路 key 与 ODPT odpt.Railway code 不一致时在此映射，避免 404。
+    // 已确认项来自 ODPT 官方线路 ID 列表；推断项遵循 ODPT 命名惯例，运行时以 API 返回为准。
+    var LINE_RAILWAY_CODE = {
+      "Saikyo": "SaikyoKawagoe",
+      "Kawagoe": "SaikyoKawagoe",
+      "KeihinTohoku": "KeihinTohokuNegishi",
+      "ChuoMain": "Chuo",
+      "SobuMain": "Sobu",
+      "TokaidoMain": "Tokaido",
+      "OuMain": "Ou",
+      "Joban": "JobanRapid",
+      "KeioMain": "Keio",
+      "KeioSagami": "Sagamihara",
+      "KeioZoo": "Dobutsuen",
+      "KeioShin": "KeioNew",
+      "TobuNoda": "TobuUrbanPark",
+      "TsurumiUmiShibaura": "Tsurumi",
+      "TsurumiOkawa": "Tsurumi",
+      "ChiyodaBranch": "Chiyoda",
+      "YokohamaBlue": "Blue",
+      "YokohamaGreen": "Green",
+      "SotetsuMain": "Main",
+      "SotetsuIzumino": "Izumino",
+      "SotetsuShin-Yokohama": "Shinyokohama",
+      "TokyuDenEn": "Denentoshi",
+      "TokyuToyoko": "Toyoko",
+      "TokyuMeguro": "Meguro",
+      "TokyuOimachi": "Oimachi",
+      "TokyuIkegami": "Ikegami",
+      "TokyuSetagaya": "Setagaya",
+      "TokyuTamagawa": "Tamagawa",
+      "TokyuKodomonokuni": "Kodomonokuni",
+      "MinatoMirai": "Minatomirai",
+      "TamaMonorail": "Tama"
+    };
+
+    // 解析内部线路 key 为 ODPT Railway code（带别名）
+    function resolveRailwayCode(operator, railway) {
+      var code = LINE_RAILWAY_CODE[railway] || railway;
+      return 'odpt.Railway:' + operator + '.' + code;
+    }
     // ========== API Rate Limiting ==========
     // 为每个API服务维护请求队列，确保不超过频率限制
     var API_RATE_LIMIT = 1000;  // 每个API服务最小请求间隔（毫秒），即每秒1次，每分钟60次
@@ -391,10 +483,54 @@
         return result.value || (Array.isArray(result) ? result : []);
     }
 
+    // ========== 未配置 Key 时的页面提示条 ==========
+    function ensureKeyPrompt() {
+        if (keysConfigured()) return;
+        if (document.getElementById('odpt-key-prompt')) return;
+        try {
+            var bar = document.createElement('div');
+            bar.id = 'odpt-key-prompt';
+            bar.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:99999;background:#fff7e6;color:#613400;border-bottom:1px solid #ffd591;padding:10px 14px;font:13px/1.5 sans-serif;display:flex;align-items:center;gap:10px;flex-wrap:wrap;';
+            bar.innerHTML = '<span>⚠ ODPT API キー未設定 — リアルタイムデータを取得するにはキー設定が必要です。</span>' +
+                '<button id="odpt-key-open" style="background:#fa8c16;color:#fff;border:none;border-radius:4px;padding:5px 12px;cursor:pointer;font-size:12px;">設定</button>';
+            var cfg = document.createElement('div');
+            cfg.id = 'odpt-key-config';
+            cfg.style.cssText = 'display:none;width:100%;padding:8px 0;';
+            cfg.innerHTML =
+                '<div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;">' +
+                '<label style="font-size:12px;">Challenge Key<input id="odpt-key-challenge" type="text" style="margin-left:4px;padding:4px;width:220px;border:1px solid #d9d9d9;border-radius:4px;font-size:12px;"></label>' +
+                '<label style="font-size:12px;">Center Key<input id="odpt-key-center" type="text" style="margin-left:4px;padding:4px;width:220px;border:1px solid #d9d9d9;border-radius:4px;font-size:12px;"></label>' +
+                '<button id="odpt-key-save" style="background:#1890ff;color:#fff;border:none;border-radius:4px;padding:5px 12px;cursor:pointer;font-size:12px;">保存して再読み込み</button>' +
+                '</div>';
+            bar.appendChild(cfg);
+            document.body.appendChild(bar);
+            bar.querySelector('#odpt-key-open').addEventListener('click', function() {
+                cfg.style.display = cfg.style.display === 'none' ? 'block' : 'none';
+            });
+            bar.querySelector('#odpt-key-save').addEventListener('click', function() {
+                var ch = bar.querySelector('#odpt-key-challenge').value.trim();
+                var ce = bar.querySelector('#odpt-key-center').value.trim();
+                if (ch) setApiKey('https://api-challenge.odpt.org/api/v4/', ch);
+                if (ce) setApiKey('https://api.odpt.org/api/v4/', ce);
+                if (ch || ce) location.reload();
+            });
+        } catch (e) {}
+    }
+    if (typeof document !== 'undefined' && document.body) {
+        ensureKeyPrompt();
+    } else if (typeof document !== 'undefined') {
+        document.addEventListener('DOMContentLoaded', ensureKeyPrompt);
+    }
+
     // ========== Public API ==========
     window.ODPTClient = {
         ENDPOINTS: ODPT_ENDPOINTS,
         LINE_TO_OPERATOR: LINE_TO_OPERATOR,
+        LINE_RAILWAY_CODE: LINE_RAILWAY_CODE,
+        getApiKey: getApiKey,
+        setApiKey: setApiKey,
+        keysConfigured: keysConfigured,
+        ensureKeyPrompt: ensureKeyPrompt,
 
         // 获取运行情报/延误信息
         getTrainInformation: function(operator) {
@@ -415,9 +551,10 @@
         getTimetableForRailway: function(operator, railway) {
             var ep = ODPT_ENDPOINTS[operator];
             if (!ep || !ep.trainTimetable) return Promise.resolve([]);
-            var key = ep.base.indexOf('api-challenge') >= 0 ? CHALLENGE_KEY : CENTER_KEY;
+            var key = getApiKey(ep.base);
+            if (!key) return Promise.resolve([]);
             // railway格式: "odpt.Railway:TokyoMetro.Ginza" 或 "Ginza"
-            var railwayParam = railway.indexOf('odpt.Railway:') === 0 ? railway : 'odpt.Railway:' + operator + '.' + railway;
+            var railwayParam = railway.indexOf('odpt.Railway:') === 0 ? railway : resolveRailwayCode(operator, railway);
             var url = ep.base + 'odpt:TrainTimetable?odpt:operator=odpt.Operator:' + operator + '&odpt:railway=' + railwayParam + '&acl:consumerKey=' + key;
             return fetchODPT(url).then(extractData);
         },

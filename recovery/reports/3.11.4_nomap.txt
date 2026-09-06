@@ -1,1 +1,0 @@
-{'line_id': 'Tōnami', 'operator': 'JR-East', 'has_odpt_endpoint': True, 'has_line_to_operator': False, 'status': 'REALTIME_NO_MAPPING'}

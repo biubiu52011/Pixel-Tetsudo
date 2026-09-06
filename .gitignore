@@ -38,3 +38,7 @@ images/*/_files.txt
 
 # VSCode
 .vscode/
+
+# Recovery archive
+recovery/
+

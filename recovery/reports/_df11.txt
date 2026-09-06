@@ -1,5 +1,0 @@
----
-      if (!window.ODPTClient || !window.ODPTClient.LINE_TO_OPERATOR) return null;
-      return window.ODPTClient.LINE_TO_OPERATOR[lineId] || window.ODPTClient.LINE_TO_OPERATOR[lineName] || null;
-      if (window.ODPTClient && window.ODPTClient.LINE_TO_OPERATOR) {
----

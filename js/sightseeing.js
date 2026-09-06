@@ -228,6 +228,7 @@ function renderGrid() {
       return;
     }
 
+    var _escSpot = window.escapeHtml || function(x) { return String(x); };
     dom.grid.innerHTML = spotList.map(function(s, idx) {
       const lang = state.lang || 'ja';
       const name = (s.name_i18n && s.name_i18n[lang]) || s.name || '';
@@ -236,13 +237,13 @@ function renderGrid() {
       const image = s.image || '';
 
       const thumbHtml = image ? 
-        '<img class="sm-thumb-img" src="' + encodeURI(image) + '" alt="' + name + '">' :
+        '<img class="sm-thumb-img" src="' + encodeURI(image) + '" alt="' + _escSpot(name) + '">' :
         '<span class="sm-thumb-icon">&#x2699;</span>';
       
       // Dynamic exit direction - already mapped to actual exit name (e.g. 東口, 西口, 駅直結)
       // Only shows exits that actually exist at the current station
       const exitText = s.exitDirection || '';
-      const distRowHtml = s.distText ? '<p class="sm-dist">' + s.distText + (exitText ? ' · ' + exitText : '') + '</p>' : '';
+      const distRowHtml = s.distText ? '<p class="sm-dist">' + _escSpot(s.distText) + (exitText ? ' · ' + _escSpot(exitText) : '') + '</p>' : '';
       
       const tagsHtml = tags.filter(function(tag) { return tag !== 'all'; }).map(function(tag) {
         return '<span>' + t('tourism.tag_' + tag) + '</span>';
@@ -253,9 +254,9 @@ function renderGrid() {
       return '<a href="' + detailUrl + '" class="sm-card" data-index="' + idx + '">' +
         '<div class="sm-thumb">' + thumbHtml + '</div>' +
         '<div class="sm-body">' +
-          '<h3>' + name + '</h3>' +
+          '<h3>' + _escSpot(name) + '</h3>' +
           distRowHtml +
-          '<p class="sm-desc">' + desc + '</p>' +
+          '<p class="sm-desc">' + _escSpot(desc) + '</p>' +
           '<div class="sm-card-tags">' + tagsHtml + '</div>' +
         '</div>' +
       '</a>';
@@ -344,7 +345,7 @@ function renderGrid() {
         if (nm[s]) { label = nm[s]; }
         else { for (var _k in nm) { if (nm[_k] === s) { label = _k; break; } } }
       }
-      html += '<button class="sm-picker-btn" data-station="' + s + '">' + label + '</button>';
+      html += '<button class="sm-picker-btn" data-station="' + s + '">' + (window.escapeHtml ? window.escapeHtml(label) : label) + '</button>';
     }
     html += '</div>';
     dom.stationPicker.innerHTML = html;

@@ -1,1 +1,0 @@
-block_len:100 repr:'no_data:   { icon: "\\u25cc", cls: "rs-status-icon-no-data",   label: "no_data"  },\n  };\n\n  // ======'

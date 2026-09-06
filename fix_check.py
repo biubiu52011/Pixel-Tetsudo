@@ -1,1 +1,0 @@
-import json; d=json.load(open("data/core/railway_data.json","r",encoding="utf-8")); lines=d.get("lines",{}); [print(lid,":",lines[lid].get("code")) for lid in ["ChuoRapid","ChuoKonosu","Ome","Itsukaichi"]]
