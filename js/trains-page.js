@@ -117,524 +117,522 @@
     } catch(e) {}
     return [];
   }
+  // ========== Route Geometry Cache (Single source of truth for coordinates) ==========
+  var _routeGeometryCache = {};
+  
+  /**
+   * Compute route geometry for a line - single source of truth for all station coordinates.
+   * Result is cached and only recomputed when line changes.
+   * @param {Object} line - Line object with stations, type, color, etc.
+   * @param {string} lineId - Line ID
+   * @returns {Object} Geometry object with stations, svgW, svgH, isLoop, isSixShapedLoop, etc.
+   */
+  function computeRouteGeometry(line, lineId) {
+    // Check cache first
+    if (_routeGeometryCache[lineId] && _routeGeometryCache[lineId].lineHash === _computeLineHash(line)) {
+      return _routeGeometryCache[lineId];
+    }
+    
+    var stations = line.stations || [];
+    var color = line.color || "#008803";
+    var isLoop = line.type === "loop";
+    var isSixShapedLoop = line.isSixShapedLoop === true;
+    var sp = 30, topP = 16, botP = 14;
+    
+    // Get branch lines
+    var allLines = getLinesData();
+    var branchLines = [];
+    for (var bid in allLines) {
+      if (allLines[bid].branchOf === lineId && bid !== lineId) {
+        var bl = allLines[bid];
+        branchLines.push({ id: bid, name: bl.name || bid, color: bl.color || color, stations: bl.stations });
+      }
+    }
+    var branchOffset = branchLines.length > 0 ? 70 * branchLines.length : 0;
+    
+    var svgW, svgH;
+    var stationCoords = []; // Array of {x, y, side, stationId}
+    var routeElements = []; // SVG elements for route lines (static layer)
+    
+    if (isSixShapedLoop && stations.length > 2) {
+      // Six-shaped loop: L-shaped tail + closed loop
+      var hikarigaokaIdx = stations.indexOf("Hikarigaoka");
+      if (hikarigaokaIdx === -1) hikarigaokaIdx = Math.floor(stations.length / 3);
+      
+      var junctionX = 80;
+      var junctionY = 60;
+      
+      // Tochomae direction: closed loop
+      var loopStations = [stations[0]].concat(stations.slice(hikarigaokaIdx + 1));
+      var loopRectW = 110;
+      var loopRectH = Math.max(loopStations.length * 26 / 2 - 20, 220);
+      var loopLeft = junctionX;
+      var loopTop = junctionY;
+      var loopRight = loopLeft + loopRectW;
+      var loopBottom = loopTop + loopRectH;
+      var loopPerimeter = 2 * (loopRectW + loopRectH);
+      
+      var loopPts6 = [];
+      for (var i = 0; i < loopStations.length; i++) {
+        var pos6 = (i / loopStations.length) * loopPerimeter;
+        var lx6, ly6, side6;
+        if (pos6 < loopRectW) {
+          lx6 = loopLeft + pos6; ly6 = loopTop; side6 = "top";
+        } else if (pos6 < loopRectW + loopRectH) {
+          lx6 = loopRight; ly6 = loopTop + (pos6 - loopRectW); side6 = "right";
+        } else if (pos6 < 2 * loopRectW + loopRectH) {
+          lx6 = loopRight - (pos6 - loopRectW - loopRectH); ly6 = loopBottom; side6 = "bottom";
+        } else {
+          lx6 = loopLeft; ly6 = loopBottom - (pos6 - 2 * loopRectW - loopRectH); side6 = "left";
+        }
+        loopPts6.push({ x: lx6, y: ly6, side: side6, stationId: loopStations[i] });
+      }
+      loopPts6[0].x = junctionX;
+      loopPts6[0].y = junctionY;
+      loopPts6[0].side = "top-left";
+      
+      // Hikarigaoka direction: L-shaped open tail
+      var hikarigaokaStations = stations.slice(0, hikarigaokaIdx + 1);
+      var tailHorizontalLen = Math.min(loopRectW * 0.65, 70);
+      var tailVerticalLen = Math.min(loopRectW * 0.45, 50);
+      var tailTotalLen = tailHorizontalLen + tailVerticalLen;
+      var tailCornerX = junctionX - tailHorizontalLen;
+      var tailEndY = junctionY - tailVerticalLen;
+      
+      var tailPts = [];
+      for (var i = 0; i < hikarigaokaStations.length; i++) {
+        var distAlongTail = (i / (hikarigaokaStations.length - 1)) * tailTotalLen;
+        var tx, ty, tside;
+        if (distAlongTail <= tailHorizontalLen) {
+          tx = junctionX - distAlongTail; ty = junctionY; tside = "top";
+        } else {
+          var verticalDist = distAlongTail - tailHorizontalLen;
+          tx = tailCornerX; ty = junctionY - verticalDist; tside = "left";
+        }
+        tailPts.push({ x: tx, y: ty, side: tside, stationId: hikarigaokaStations[i] });
+      }
+      tailPts[0].x = junctionX;
+      tailPts[0].y = junctionY;
+      tailPts[0].side = "top-left";
+      
+      // Combine all station coords (tail stations first, then loop stations excluding junction)
+      stationCoords = tailPts.concat(loopPts6.slice(1));
+      
+      // Calculate SVG size
+      var minX = Math.min(junctionX, tailCornerX);
+      var maxX = loopRight;
+      var minY = Math.min(junctionY, tailEndY);
+      var maxY = loopBottom;
+      svgW = Math.ceil(maxX - minX + 40);
+      svgH = Math.ceil(maxY - minY + 40);
+      
+      // Route elements for static layer
+      routeElements.push({
+        type: 'rect',
+        attrs: { x: loopLeft, y: loopTop, width: loopRectW, height: loopRectH, rx: 10, ry: 10, stroke: color, 'stroke-width': 5, fill: 'none', opacity: 0.5 }
+      });
+      var tailPointsStr = tailPts.map(function(p) { return p.x + "," + p.y; }).join(" ");
+      routeElements.push({
+        type: 'polyline',
+        attrs: { points: tailPointsStr, stroke: color, 'stroke-width': 3.5, fill: 'none', opacity: 0.4, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }
+      });
+      
+    } else if (isLoop && stations.length > 2) {
+      // Standard loop
+      var loopRectH = Math.max(stations.length * 36 / 2 - 80, 140);
+      svgW = 260;
+      svgH = loopRectH + 80;
+      var cx = svgW / 2, cy = svgH / 2;
+      var rectW = 80, rectH = loopRectH;
+      var halfW = rectW / 2, halfH = rectH / 2;
+      var perimeter = 2 * (rectW + rectH);
+      var startOffset = rectW / 2;
+      
+      var loopPts = [];
+      for (var i = 0; i < stations.length; i++) {
+        var pos = ((i / stations.length) * perimeter + startOffset) % perimeter;
+        var lx, ly, side;
+        if (pos < rectW) { lx = cx - halfW + pos; ly = cy - halfH; side = "top"; }
+        else if (pos < rectW + rectH) { lx = cx + halfW; ly = cy - halfH + (pos - rectW); side = "right"; }
+        else if (pos < 2 * rectW + rectH) { lx = cx + halfW - (pos - rectW - rectH); ly = cy + halfH; side = "bottom"; }
+        else { lx = cx - halfW; ly = cy + halfH - (pos - 2 * rectW - rectH); side = "left"; }
+        loopPts.push({ x: lx, y: ly, side: side, stationId: stations[i] });
+      }
+      stationCoords = loopPts;
+      
+      routeElements.push({
+        type: 'rect',
+        attrs: { x: cx - halfW, y: cy - halfH, width: rectW, height: rectH, rx: 10, ry: 10, stroke: color, 'stroke-width': 5, fill: 'none', opacity: 0.35 }
+      });
+      
+    } else {
+      // Standard linear line
+      svgW = 190 + branchOffset;
+      svgH = topP + stations.length * sp + botP;
+      var mainCx = svgW / 2 - branchOffset / 2;
+      
+      for (var i = 0; i < stations.length; i++) {
+        stationCoords.push({ x: mainCx, y: topP + i * sp, side: 'right', stationId: stations[i] });
+      }
+      
+      var y1 = topP, y2 = topP + (stations.length - 1) * sp;
+      routeElements.push({
+        type: 'line',
+        attrs: { x1: mainCx, y1: y1, x2: mainCx, y2: y2, stroke: color, 'stroke-width': 5, 'stroke-linecap': 'round', opacity: 0.35 }
+      });
+    }
+    
+    // Build geometry object
+    var geometry = {
+      lineId: lineId,
+      lineHash: _computeLineHash(line),
+      stations: stations,
+      stationCoords: stationCoords,
+      svgW: svgW,
+      svgH: svgH,
+      isLoop: isLoop,
+      isSixShapedLoop: isSixShapedLoop,
+      color: color,
+      branchLines: branchLines,
+      branchOffset: branchOffset,
+      routeElements: routeElements,
+      junctionStation: isSixShapedLoop ? stations[0] : null
+    };
+    
+    // Cache it
+    _routeGeometryCache[lineId] = geometry;
+    
+    return geometry;
+  }
+  
+  function _computeLineHash(line) {
+    // Simple hash based on stations and type
+    return (line.stations || []).join('|') + '|' + (line.type || '') + '|' + (line.isSixShapedLoop ? '6' : '0');
+  }
+  
+  function invalidateRouteGeometryCache(lineId) {
+    if (lineId) {
+      delete _routeGeometryCache[lineId];
+    } else {
+      _routeGeometryCache = {};
+    }
+  }
+  
   function renderTrainMap(el, line, lineId) {
     try {
       var positions = getRealtimePositions(lineId);
       
-      // Incremental update: only if SAME line (data-line-id matches) and positions exist
+      // Get route geometry from cache (single source of truth for coordinates)
+      var geometry = computeRouteGeometry(line, lineId);
+      var stationCoords = geometry.stationCoords;
+      var svgW = geometry.svgW;
+      var svgH = geometry.svgH;
+      var color = geometry.color;
+      
+      // Check if we need full rebuild (line changed) or just train layer update
       var existingSvg = el.querySelector('svg');
-      if (existingSvg && existingSvg.getAttribute('data-line-id') === lineId && positions.length > 0) {
-        var _color = line.color || "#008803";
-        var _stations = line.stations || [];
-        // Merge stations from same LOS running system (same as initial render)
-        var _sysInfo = null;
-        if (window.LineOperationSystems) {
-          for (var _opKey in window.LineOperationSystems) {
-            var _opSys = window.LineOperationSystems[_opKey];
-            if (!Array.isArray(_opSys)) continue;
-            for (var _si = 0; _si < _opSys.length; _si++) {
-              if (_opSys[_si].lineIds && _opSys[_si].lineIds.indexOf(lineId) >= 0) {
-                _sysInfo = _opSys[_si];
-                break;
-              }
-            }
-            if (_sysInfo) break;
-          }
-        }
-        if (_sysInfo) {
-          var _allLinesSys = getLinesData();
-          var _merged = [];
-          var _seen = {};
-          for (var _li = 0; _li < _sysInfo.lineIds.length; _li++) {
-            var _sub = _allLinesSys[_sysInfo.lineIds[_li]];
-            if (!_sub || !_sub.stations) continue;
-            for (var _sj = 0; _sj < _sub.stations.length; _sj++) {
-              var _stid = _sub.stations[_sj];
-              if (!_seen[_stid]) { _seen[_stid] = true; _merged.push(_stid); }
-            }
-          }
-          if (_merged.length > _stations.length) { _stations = _merged; }
-          if (_sysInfo.color) { _color = _sysInfo.color; }
-        }
-        var _isLoop = line.type === "loop";
-        var _sp = 30, _topP = 16;
-        var _allLines = getLinesData();
-        var _branchOffset = 0;
-        for (var _bid in _allLines) {
-          if (_allLines[_bid].branchOf === lineId && _bid !== lineId) _branchOffset += 70;
-        }
-        // Fix: mainCx should be svgW/2 - branchOffset/2 = 95 for non-loop, 130 for loop
-        var _mainCx = _isLoop ? 130 : 95;
-        var _loopPts = [];
-        if (_isLoop && _stations.length > 2) {
-          var _loopRectH = Math.max(_stations.length * 36 / 2 - 80, 140);
-          var _svgW = 260, _svgH = _loopRectH + 80;
-          var _cx = _svgW / 2, _cy = _svgH / 2;
-          var _rectW = 80, _rectH = _loopRectH;
-          var _halfW = _rectW / 2, _halfH = _rectH / 2;
-          var _perimeter = 2 * (_rectW + _rectH);
-          var _startOffset = _rectW / 2;
-          for (var _li = 0; _li < _stations.length; _li++) {
-            var _pos = ((_li / _stations.length) * _perimeter + _startOffset) % _perimeter;
-            var _lx, _ly;
-            if (_pos < _rectW) { _lx = _cx - _halfW + _pos; _ly = _cy - _halfH; }
-            else if (_pos < _rectW + _rectH) { _lx = _cx + _halfW; _ly = _cy - _halfH + (_pos - _rectW); }
-            else if (_pos < 2 * _rectW + _rectH) { _lx = _cx + _halfW - (_pos - _rectW - _rectH); _ly = _cy + _halfH; }
-            else { _lx = _cx - _halfW; _ly = _cy + _halfH - (_pos - 2 * _rectW - _rectH); }
-            _loopPts.push({ x: _lx, y: _ly });
-          }
-        }
-        var _updatedIds = {};
-        var _hasChanges = false;
-        // Count trains per station for offset
-        var _stationCount = {};
-        var _stationIdx = {};
-        for (var _pi0 = 0; _pi0 < positions.length; _pi0++) {
-          var _idx0 = Math.min(positions[_pi0].stationIndex || 0, _stations.length - 1);
-          _stationCount[_idx0] = (_stationCount[_idx0] || 0) + 1;
-        }
-        for (var _pi = 0; _pi < positions.length; _pi++) {
-          var _p = positions[_pi];
-          var _idx = Math.min(_p.stationIndex || 0, _stations.length - 1);
-          var _px, _py;
-          if (_isLoop && _loopPts.length > _idx) { _px = _loopPts[_idx].x; _py = _loopPts[_idx].y; }
-          else { _px = _mainCx; _py = _topP + _idx * _sp; }
-          // Offset multiple trains at same station based on direction and count
-          var _trainIdxAt = _stationIdx[_idx] || 0;
-          _stationIdx[_idx] = _trainIdxAt + 1;
-          var _totalAt = _stationCount[_idx] || 1;
-          var _direction = _p.railDirection || '';
-          var _offX = 0, _offY = 0;
-          
-          if (_isLoop) {
-            // For loop lines: offset by direction (InnerLoop up, OuterLoop down)
-            if (_direction.indexOf('Inner') >= 0) {
-              _offY = -8;
-            } else if (_direction.indexOf('Outer') >= 0) {
-              _offY = 8;
-            }
-            // Also offset horizontally for multiple trains in same direction
-            _offX = (_trainIdxAt - (_totalAt - 1) / 2) * 20;
-          } else {
-            // For non-loop lines: offset by direction (Inbound left, Outbound right)
-            if (_direction.indexOf('Inbound') >= 0 || _direction.indexOf('Inner') >= 0) {
-              _offX = -10;
-            } else if (_direction.indexOf('Outbound') >= 0 || _direction.indexOf('Outer') >= 0) {
-              _offX = 10;
-            }
-            // Additional horizontal offset for multiple trains
-            _offX += (_trainIdxAt - (_totalAt - 1) / 2) * 18;
-          }
-          
-          _px += _offX;
-          _py += _offY;
-          var _trainUid = (_p.trainId || ("train_" + _pi)) + "_" + (_p.stationIndex || 0);
-          _updatedIds[_trainUid] = true;
-          var _existingIcon = existingSvg.querySelector('[data-train-id="' + String(_trainUid).replace(/"/g, '') + '"]');
-          if (_existingIcon) {
-            var _oldX = parseFloat(_existingIcon.getAttribute('x'));
-            var _oldY = parseFloat(_existingIcon.getAttribute('y'));
-            var _newX = _px - 7, _newY = _py - 9;
-            if (Math.abs(_oldX - _newX) > 0.5 || Math.abs(_oldY - _newY) > 0.5) {
-              _existingIcon.setAttribute('x', _newX);
-              _existingIcon.setAttribute('y', _newY);
-              _hasChanges = true;
-            }
-          } else {
-            // Create new train icon for newly appeared train
-            var _iconSrc = (window.TrainIcons && typeof window.TrainIcons.getTrainIcon === "function") ? window.TrainIcons.getTrainIcon(lineId, line.operator) : "";
-            var _isEst = _p.estimated === true;
-            var _iconCls = _isEst ? "train-icon estimated" : "train-icon";
-            var _newIcon = document.createElementNS("http://www.w3.org/2000/svg", "image");
-            _newIcon.setAttribute("data-train-id", String(_trainUid));
-            _newIcon.setAttribute("x", String(_px - 7));
-            _newIcon.setAttribute("y", String(_py - 9));
-            _newIcon.setAttribute("width", "14");
-            _newIcon.setAttribute("height", "18");
-            if (_iconSrc) _newIcon.setAttribute("href", _iconSrc);
-            _newIcon.setAttribute("class", _iconCls);
-            _newIcon.setAttribute("preserveAspectRatio", "xMidYMid meet");
-            existingSvg.appendChild(_newIcon);
-            _hasChanges = true;
-          }
-        }
-        var _allIcons = existingSvg.querySelectorAll('[data-train-id]');
-        for (var _ii = 0; _ii < _allIcons.length; _ii++) {
-          var _tid = _allIcons[_ii].getAttribute('data-train-id');
-          if (!_updatedIds[_tid]) {
-            _allIcons[_ii].parentNode.removeChild(_allIcons[_ii]);
-            _hasChanges = true;
-          }
-        }
-        var _runningEl = el.querySelector('.tp-running');
-        if (_runningEl) {
-          var _running = t("trains.running");
-          var _cntText = t("trains.train_count");
-          _runningEl.innerHTML = _running + " (" + positions.length + " " + _cntText + ")";
-        }
-        if (positions.length > 0) return;
+      var isSameLine = existingSvg && existingSvg.getAttribute('data-line-id') === lineId;
+      
+      if (isSameLine) {
+        // === Incremental update: only update train layer using cached geometry ===
+        updateTrainLayer(existingSvg, positions, stationCoords, lineId, line);
+        updateRunningInfo(el, positions);
+        return;
       }
-  
-      var color = line.color || "#008803";
-      var stations = line.stations || [];
-      // Merge stations from same LOS running system
-      var _sysInfo = null;
-      if (window.LineOperationSystems) {
-        for (var _opKey in window.LineOperationSystems) {
-          var _opSys = window.LineOperationSystems[_opKey];
-          if (!Array.isArray(_opSys)) continue;
-          for (var _si = 0; _si < _opSys.length; _si++) {
-            if (_opSys[_si].lineIds && _opSys[_si].lineIds.indexOf(lineId) >= 0) {
-              _sysInfo = _opSys[_si];
-              break;
-            }
+      
+      // === Full rebuild: create new SVG with separated layers ===
+      var svgNS = "http://www.w3.org/2000/svg";
+      var svg = document.createElementNS(svgNS, "svg");
+      svg.setAttribute("xmlns", svgNS);
+      svg.setAttribute("viewBox", "0 0 " + svgW + " " + svgH);
+      svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
+      svg.setAttribute("data-line-id", lineId);
+      
+      // Background
+      var bgRect = document.createElementNS(svgNS, "rect");
+      bgRect.setAttribute("width", svgW);
+      bgRect.setAttribute("height", svgH);
+      bgRect.setAttribute("fill", "var(--bg)");
+      bgRect.setAttribute("rx", "8");
+      svg.appendChild(bgRect);
+      
+      // === Static layer: route lines, stations, labels (only built once per line) ===
+      var staticLayer = document.createElementNS(svgNS, "g");
+      staticLayer.setAttribute("class", "static-layer");
+      
+      // Add route elements (lines/rects/polylines)
+      for (var re = 0; re < geometry.routeElements.length; re++) {
+        var routeEl = geometry.routeElements[re];
+        var svgEl = document.createElementNS(svgNS, routeEl.type);
+        for (var attr in routeEl.attrs) {
+          if (routeEl.attrs.hasOwnProperty(attr)) {
+            svgEl.setAttribute(attr, routeEl.attrs[attr]);
           }
-          if (_sysInfo) break;
         }
+        staticLayer.appendChild(svgEl);
       }
-      if (_sysInfo) {
-        var _allLines = getLinesData();
-        var _merged = [];
-        var _seen = {};
-        for (var _li = 0; _li < _sysInfo.lineIds.length; _li++) {
-          var _sub = _allLines[_sysInfo.lineIds[_li]];
-          if (!_sub || !_sub.stations) continue;
-          for (var _sj = 0; _sj < _sub.stations.length; _sj++) {
-            var _stid = _sub.stations[_sj];
-            if (!_seen[_stid]) { _seen[_stid] = true; _merged.push(_stid); }
-          }
-        }
-        if (_merged.length > stations.length) { stations = _merged; }
-        if (_sysInfo.color) { color = _sysInfo.color; }
+      
+      // Add station circles and labels
+      for (var si = 0; si < stationCoords.length; si++) {
+        var sc = stationCoords[si];
+        var stationId = sc.stationId;
+        var isJunction = geometry.junctionStation && stationId === geometry.junctionStation;
+        
+        // Station circle
+        var circle = document.createElementNS(svgNS, "circle");
+        circle.setAttribute("cx", sc.x);
+        circle.setAttribute("cy", sc.y);
+        circle.setAttribute("r", isJunction ? "6.5" : "4");
+        circle.setAttribute("fill", isJunction ? color : "#fff");
+        circle.setAttribute("stroke", color);
+        circle.setAttribute("stroke-width", isJunction ? "2.5" : "2");
+        circle.setAttribute("data-station-index", si);
+        staticLayer.appendChild(circle);
+        
+        // Station label
+        var label = document.createElementNS(svgNS, "text");
+        var side = sc.side || "right";
+        var tx, ty, anchor;
+        if (side === "top") { tx = sc.x; ty = sc.y - (isJunction ? 12 : 8); anchor = "middle"; }
+        else if (side === "bottom") { tx = sc.x; ty = sc.y + (isJunction ? 16 : 13); anchor = "middle"; }
+        else if (side === "left") { tx = sc.x - (isJunction ? 10 : 8); ty = sc.y + 3; anchor = "end"; }
+        else { tx = sc.x + (isJunction ? 10 : 8); ty = sc.y + 3; anchor = "start"; }
+        label.setAttribute("x", tx);
+        label.setAttribute("y", ty);
+        label.setAttribute("font-size", isJunction ? "8.5" : "7.5");
+        label.setAttribute("fill", isJunction ? color : "#555");
+        label.setAttribute("font-family", "sans-serif");
+        label.setAttribute("font-weight", isJunction ? "700" : "500");
+        label.setAttribute("text-anchor", anchor);
+        label.textContent = _rS(stationId);
+        staticLayer.appendChild(label);
       }
-      var _lang = window.currentLang || 'ja';
-      var _rS = (window.RailwayDB && window.RailwayDB.resolveStationName) ? function(id){ return window.RailwayDB.resolveStationName(id, _lang) || id; } : function(id){ return id; };
-      var branchLines = [];
-      var allLines = getLinesData();
-      for (var lid in allLines) {
-        if (allLines[lid].branchOf === lineId && lid !== lineId) {
-          var bl = allLines[lid];
-          if (bl.stations && bl.stations.length > 0) {
-            branchLines.push({ id: lid, name: bl.name || lid, color: bl.color || color, stations: bl.stations });
-          }
-        }
-      }
-      var isLoop = line.type === "loop";
-      var isSixShapedLoop = line.isSixShapedLoop === true;
-      var sp = 30, topP = 16, botP = 14;
-      var numBranches = branchLines.length;
-      var branchOffset = numBranches > 0 ? 70 * numBranches : 0;
-      var loopRectH = Math.max(stations.length * 36 / 2 - 80, 140);
-      var svgW, svgH;
-      // For six-shaped loop, we need more width and height for two loops
-      if (isSixShapedLoop) {
-        var hikarigaokaIdx = stations.indexOf("Hikarigaoka");
-        if (hikarigaokaIdx === -1) hikarigaokaIdx = Math.floor(stations.length / 3);
-        // L-shaped tail layout: junction at top-left corner of loop
-        var junctionX = 80;
-        var junctionY = 60;
-        // Loop dimensions
-        var loopStations = [stations[0]].concat(stations.slice(hikarigaokaIdx + 1));
-        var loopRectW = 110;
-        var loopRectH = Math.max(loopStations.length * 26 / 2 - 20, 220);
-        var loopRight = junctionX + loopRectW;
-        var loopBottom = junctionY + loopRectH;
-        // L-shaped tail dimensions (fixed, not proportional to station count)
-        var tailHorizontalLen = Math.min(loopRectW * 0.65, 70);
-        var tailVerticalLen = Math.min(loopRectW * 0.45, 50);
-        var tailLeft = junctionX - tailHorizontalLen;
-        var tailTop = junctionY - tailVerticalLen;
-        // Calculate SVG size to contain both loop and L-shaped tail
-        var minX = Math.min(junctionX, tailLeft);
-        var maxX = loopRight;
-        var minY = Math.min(junctionY, tailTop);
-        var maxY = loopBottom;
-        // Add padding
-        svgW = Math.ceil(maxX - minX + 40);
-        svgH = Math.ceil(maxY - minY + 40);
-      } else {
-        svgW = isLoop ? 260 : 190 + branchOffset;
-        svgH = isLoop ? loopRectH + 80 : topP + stations.length * sp + botP;
-      }
-      var svg = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 " + svgW + " " + svgH + "\" preserveAspectRatio=\"xMidYMid meet\" data-line-id=\"" + lineId + "\">";
-      svg += "<defs><filter id=\"tg_" + escapeHtml(lineId) + "\"><feGaussianBlur stdDeviation=\"2\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs>";
-      svg += "<rect width=\"" + svgW + "\" height=\"" + svgH + "\" fill=\"var(--bg)\" rx=\"8\"/>";
-      var loopPts = [];
-      var mainCx = svgW / 2 - branchOffset / 2;
-      if (isSixShapedLoop && stations.length > 2) {
-        // Six-shaped loop: Hikarigaoka direction is an L-SHAPED OPEN TAIL,
-        // Tochomae direction is a CLOSED LOOP. Junction at top-left corner of loop.
-        var sp6 = 26;
-        
-        // === Define junction (Tochomae) as top-left corner of the loop ===
-        var junctionX = 80;
-        var junctionY = 60;
-        
-        // === Tochomae direction: CLOSED LOOP ===
-        // Top-left corner of rectangle = junction (Tochomae)
-        var loopStations = [stations[0]].concat(stations.slice(hikarigaokaIdx + 1));
-        var loopRectW = 110;
-        var loopRectH = Math.max(loopStations.length * sp6 / 2 - 20, 220);
-        // Rectangle starts at junction (top-left corner)
-        var loopLeft = junctionX;
-        var loopTop = junctionY;
-        var loopRight = loopLeft + loopRectW;
-        var loopBottom = loopTop + loopRectH;
-        var loopPerimeter = 2 * (loopRectW + loopRectH);
-        // Distribute stations around loop, starting from top-left corner (junction), going clockwise
-        var loopPts6 = [];
-        for (var i = 0; i < loopStations.length; i++) {
-          var pos6 = (i / loopStations.length) * loopPerimeter;
-          var lx6, ly6, side6;
-          if (pos6 < loopRectW) {
-            // Top edge: going right from top-left corner
-            lx6 = loopLeft + pos6;
-            ly6 = loopTop;
-            side6 = "top";
-          } else if (pos6 < loopRectW + loopRectH) {
-            // Right edge: going down
-            lx6 = loopRight;
-            ly6 = loopTop + (pos6 - loopRectW);
-            side6 = "right";
-          } else if (pos6 < 2 * loopRectW + loopRectH) {
-            // Bottom edge: going left
-            lx6 = loopRight - (pos6 - loopRectW - loopRectH);
-            ly6 = loopBottom;
-            side6 = "bottom";
-          } else {
-            // Left edge: going up back to top-left corner
-            lx6 = loopLeft;
-            ly6 = loopBottom - (pos6 - 2 * loopRectW - loopRectH);
-            side6 = "left";
-          }
-          loopPts6.push({ x: lx6, y: ly6, side: side6 });
-        }
-        // First station (junction) is exactly at top-left corner
-        loopPts6[0].x = junctionX;
-        loopPts6[0].y = junctionY;
-        loopPts6[0].side = "top-left";
-        
-        // Draw closed loop rectangle (thicker, more saturated)
-        svg += "<rect x=\"" + loopLeft + "\" y=\"" + loopTop + "\" width=\"" + loopRectW + "\" height=\"" + loopRectH + "\" rx=\"10\" ry=\"10\" stroke=\"" + escapeHtml(color) + "\" stroke-width=\"5\" fill=\"none\" opacity=\"0.5\"/>";
-        
-        // === Hikarigaoka direction: L-SHAPED OPEN TAIL ===
-        // Tail goes LEFT from junction, then UP (L-shape)
-        // Fixed length: not proportional to station count
-        var hikarigaokaStations = stations.slice(0, hikarigaokaIdx + 1);
-        var tailHorizontalLen = Math.min(loopRectW * 0.65, 70); // 65% of loop width, max 70
-        var tailVerticalLen = Math.min(loopRectW * 0.45, 50);   // 45% of loop width, max 50
-        var tailTotalLen = tailHorizontalLen + tailVerticalLen;
-        
-        // Tail path: junction (top-left corner) -> left -> up
-        // Corner point: (junctionX - tailHorizontalLen, junctionY)
-        // End point (Hikarigaoka): (junctionX - tailHorizontalLen, junctionY - tailVerticalLen)
-        var tailCornerX = junctionX - tailHorizontalLen;
-        var tailCornerY = junctionY;
-        var tailEndX = tailCornerX;
-        var tailEndY = junctionY - tailVerticalLen;
-        
-        // Distribute stations along L-shaped tail
-        var tailPts = [];
-        for (var i = 0; i < hikarigaokaStations.length; i++) {
-          var distAlongTail = (i / (hikarigaokaStations.length - 1)) * tailTotalLen;
-          var tx, ty, tside;
-          if (distAlongTail <= tailHorizontalLen) {
-            // Horizontal segment: going left from junction
-            tx = junctionX - distAlongTail;
-            ty = junctionY;
-            tside = "top";
-          } else {
-            // Vertical segment: going up from corner
-            var verticalDist = distAlongTail - tailHorizontalLen;
-            tx = tailCornerX;
-            ty = junctionY - verticalDist;
-            tside = "left";
-          }
-          tailPts.push({ x: tx, y: ty, side: tside });
-        }
-        // First station (junction) is exactly at top-left corner
-        tailPts[0].x = junctionX;
-        tailPts[0].y = junctionY;
-        tailPts[0].side = "top-left";
-        
-        // Draw L-shaped tail using polyline (thinner, lower opacity)
-        var tailPoints = tailPts.map(function(p) { return p.x + "," + p.y; }).join(" ");
-        svg += "<polyline points=\"" + tailPoints + "\" stroke=\"" + escapeHtml(color) + "\" stroke-width=\"3.5\" fill=\"none\" opacity=\"0.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>";
-        
-        // === Draw stations for Hikarigaoka tail (skip junction) ===
-        for (var i = 1; i < hikarigaokaStations.length; i++) {
-          var pt = tailPts[i];
-          var stt = hikarigaokaStations[i];
-          svg += "<circle cx=\"" + pt.x + "\" cy=\"" + pt.y + "\" r=\"3.5\" fill=\"#fff\" stroke=\"" + escapeHtml(color) + "\" stroke-width=\"1.8\"/>";
-          // Text position based on which segment
-          var ttx, tty, tanchor;
-          if (pt.side === "top") {
-            // Horizontal segment: text above
-            ttx = pt.x;
-            tty = pt.y - 7;
-            tanchor = "middle";
-          } else {
-            // Vertical segment: text to the left
-            ttx = pt.x - 6;
-            tty = pt.y + 3;
-            tanchor = "end";
-          }
-          svg += "<text x=\"" + ttx + "\" y=\"" + tty + "\" font-size=\"7\" fill=\"#666\" font-family=\"sans-serif\" font-weight=\"500\" text-anchor=\"" + tanchor + "\">" + escapeHtml(_rS(stt)) + "</text>";
-        }
-        
-        // === Draw stations for Tochomae loop (skip junction) ===
-        for (var i = 1; i < loopStations.length; i++) {
-          var p6 = loopPts6[i];
-          var st6 = loopStations[i];
-          svg += "<circle cx=\"" + p6.x + "\" cy=\"" + p6.y + "\" r=\"4\" fill=\"#fff\" stroke=\"" + escapeHtml(color) + "\" stroke-width=\"2\"/>";
-          var side6 = p6.side || "right";
-          var tx6, ty6, anchor6;
-          if (side6 === "top") { tx6 = p6.x; ty6 = p6.y - 8; anchor6 = "middle"; }
-          else if (side6 === "bottom") { tx6 = p6.x; ty6 = p6.y + 13; anchor6 = "middle"; }
-          else if (side6 === "left") { tx6 = p6.x - 8; ty6 = p6.y + 3; anchor6 = "end"; }
-          else { tx6 = p6.x + 8; ty6 = p6.y + 3; anchor6 = "start"; }
-          svg += "<text x=\"" + tx6 + "\" y=\"" + ty6 + "\" font-size=\"7.5\" fill=\"#555\" font-family=\"sans-serif\" font-weight=\"500\" text-anchor=\"" + anchor6 + "\">" + escapeHtml(_rS(st6)) + "</text>";
-        }
-        
-        // === Draw junction station (Tochomae) once, larger and highlighted ===
-        svg += "<circle cx=\"" + junctionX + "\" cy=\"" + junctionY + "\" r=\"6.5\" fill=\"" + escapeHtml(color) + "\" stroke=\"#fff\" stroke-width=\"2.5\"/>";
-        svg += "<text x=\"" + (junctionX + 10) + "\" y=\"" + (junctionY - 8) + "\" font-size=\"8.5\" fill=\"" + escapeHtml(color) + "\" font-family=\"sans-serif\" font-weight=\"700\" text-anchor=\"start\">都庁前</text>";
-      } else if (isLoop && stations.length > 2) {      } else if (isLoop && stations.length > 2) {
-        var spLoop = 36;
-        var rectW = 80;
-        var rectH = loopRectH;
-        var halfW = rectW / 2, halfH = rectH / 2;
-        var perimeter = 2 * (rectW + rectH);
-        var startOffset = rectW / 2;
-        var cx = svgW / 2, cy = svgH / 2;
-        for (var i = 0; i < stations.length; i++) {
-          var pos = ((i / stations.length) * perimeter + startOffset) % perimeter;
-          var lx, ly;
-          if (pos < rectW) { lx = cx - halfW + pos; ly = cy - halfH; }
-          else if (pos < rectW + rectH) { lx = cx + halfW; ly = cy - halfH + (pos - rectW); }
-          else if (pos < 2 * rectW + rectH) { lx = cx + halfW - (pos - rectW - rectH); ly = cy + halfH; }
-          else { lx = cx - halfW; ly = cy + halfH - (pos - 2 * rectW - rectH); }
-          var side = (pos < rectW) ? "top" : (pos < rectW + rectH ? "right" : (pos < 2 * rectW + rectH ? "bottom" : "left"));
-          loopPts.push({ x: lx, y: ly, angle: 0, side: side });
-        }
-        svg += "<rect x=\"" + (cx - halfW) + "\" y=\"" + (cy - halfH) + "\" width=\"" + rectW + "\" height=\"" + rectH + "\" rx=\"10\" ry=\"10\" stroke=\"" + escapeHtml(color) + "\" stroke-width=\"5\" fill=\"none\" opacity=\"0.35\"/>";
-        for (var i = 0; i < stations.length; i++) {
-          var p = loopPts[i];
-          var st = stations[i];
-          var hasTrain = positions.some(function(pp) { return pp.stationIndex === i; });
-          svg += "<circle cx=\"" + p.x + "\" cy=\"" + p.y + "\""+ "  r=\"" + (hasTrain ? 6 : 4) + "\""+ "  fill=\"" + (hasTrain ? escapeHtml(color) : "#fff") + "\""+ "  stroke=\"" + escapeHtml(color) + "\""+ "  stroke-width=\"" + (hasTrain ? 2.5 : 2) + "\"/>";
-          var dn = st;
-          var side = p.side || "right";
-          var tx, ty, anchor;
-          if (side === "top") { tx = p.x; ty = p.y - 10; anchor = "middle"; }
-          else if (side === "bottom") { tx = p.x; ty = p.y + 16; anchor = "middle"; }
-          else if (side === "left") { tx = p.x - 10; ty = p.y + 3; anchor = "end"; }
-          else { tx = p.x + 10; ty = p.y + 3; anchor = "start"; }
-          svg += "<text x=\"" + tx + "\" y=\"" + ty + "\""+ "  font-size=\"9\" fill=\"#444\" font-family=\"sans-serif\" font-weight=\"500\" text-anchor=\"" + anchor + "\">" + escapeHtml(_rS(dn)) + "</text>";
-        }
-      } else {
-        var y1 = topP, y2 = topP + (stations.length - 1) * sp;
-        svg += "<line x1=\"" + mainCx + "\" y1=\"" + y1 + "\" x2=\"" + mainCx + "\" y2=\"" + y2 + "\""+ "  stroke=\"" + escapeHtml(color) + "\""+ "  stroke-width=\"5\" stroke-linecap=\"round\" opacity=\"0.35\"/>";
-        for (var i = 0; i < stations.length; i++) {
-          var st = stations[i];
-          var y = topP + i * sp;
-          var hasTrain = positions.some(function(p) { return p.stationIndex === i; });
-          svg += "<circle cx=\"" + mainCx + "\" cy=\"" + y + "\""+ "  r=\"" + (hasTrain ? 6 : 4) + "\""+ "  fill=\"" + (hasTrain ? escapeHtml(color) : "#fff") + "\""+ "  stroke=\"" + escapeHtml(color) + "\""+ "  stroke-width=\"" + (hasTrain ? 2.5 : 2) + "\"/>";
-          svg += "<text x=\"" + (mainCx + 14) + "\" y=\"" + (y + 3.5) + "\""+ "  font-size=\"9\" fill=\"#444\" font-family=\"sans-serif\" font-weight=\"500\">" + escapeHtml(_rS(st)) + "</text>";
-        }
-      }
-      for (var bi = 0; bi < branchLines.length; bi++) {
-        var branch = branchLines[bi];
+      
+      // Add branch lines (if any)
+      for (var bi = 0; bi < geometry.branchLines.length; bi++) {
+        var branch = geometry.branchLines[bi];
         var bColor = branch.color || color;
-        var bStations = branch.stations;
-        var junctionIdx = -1;
-        for (var si = 0; si < bStations.length; si++) {
-          var bs = bStations[si];
-          for (var mi = 0; mi < stations.length; mi++) {
-            if (stations[mi] === bs) { junctionIdx = mi; break; }
-          }
-          if (junctionIdx >= 0) break;
-        }
-        if (junctionIdx < 0) junctionIdx = 0;
-        var bx, by;
-        if (isLoop && loopPts.length > junctionIdx) {
-          bx = loopPts[junctionIdx].x + 20 + bi * 70;
-          by = loopPts[junctionIdx].y;
-        } else {
-          var bjy = topP + junctionIdx * sp;
-          bx = mainCx + 20 + bi * 70;
-          by = bjy;
-        }
-        var branchTop = by;
-        var branchBot = by + (bStations.length - 1) * sp;
-        svg += "<line x1=\"" + (isLoop ? loopPts[junctionIdx].x : mainCx) + "\" y1=\"" + by + "\" x2=\"" + bx + "\" y2=\"" + by + "\""+ "  stroke=\"" + escapeHtml(bColor) + "\""+ "  stroke-width=\"3\" opacity=\"0.5\"/>";
-        svg += "<line x1=\"" + bx + "\" y1=\"" + branchTop + "\" x2=\"" + bx + "\" y2=\"" + branchBot + "\""+ "  stroke=\"" + escapeHtml(bColor) + "\""+ "  stroke-width=\"4\" stroke-linecap=\"round\" opacity=\"0.4\"/>";
-        for (var bsi = 0; bsi < bStations.length; bsi++) {
-          var bsy = branchTop + bsi * sp;
-          var isJunc = (bsi === 0 && junctionIdx >= 0 && stations[junctionIdx] === bStations[0]);
-          svg += "<circle cx=\"" + bx + "\" cy=\"" + bsy + "\""+ "  r=\"" + (isJunc ? 5 : 4) + "\""+ "  fill=\"" + (isJunc ? escapeHtml(bColor) : "#fff") + "\""+ "  stroke=\"" + escapeHtml(bColor) + "\""+ "  stroke-width=\"2\"/>";
-          // Add station name for branch stations (skip junction station which is already labeled on main line)
-          if (!isJunc) {
-            svg += "<text x=\"" + (bx + 10) + "\" y=\"" + (bsy + 3.5) + "\""+ "  font-size=\"8\" fill=\"#666\" font-family=\"sans-serif\" font-weight=\"500\">" + escapeHtml(_rS(bStations[bsi])) + "</text>";
-          }
-        }
-        // Use resolved line name instead of raw branch.name
-        var _branchDisplayName = (window.RailwayDB && typeof window.RailwayDB.resolveLineName === "function") ? window.RailwayDB.resolveLineName(branch.id, _lang) : (branch.nameJa || branch.name);
-        svg += "<text x=\"" + bx + "\" y=\"" + (branchTop - 6) + "\""+ "  font-size=\"8\" fill=\"" + escapeHtml(bColor) + "\""+ "  font-family=\"sans-serif\" font-weight=\"600\" text-anchor=\"middle\">" + escapeHtml(_branchDisplayName) + "</text>";
-      }
-      // Count trains per station for horizontal offset
-      var _stCount = {};
-      var _stIdx = {};
-      for (var _j0 = 0; _j0 < positions.length; _j0++) {
-        var _i0 = Math.min(positions[_j0].stationIndex || 0, stations.length - 1);
-        _stCount[_i0] = (_stCount[_i0] || 0) + 1;
-      }
-for (var j = 0; j < positions.length; j++) {
-        var p = positions[j];
-        var idx = Math.min(p.stationIndex || 0, stations.length - 1);
-        var px, py;
-        if (isLoop && loopPts.length > idx) {
-          px = loopPts[idx].x;
-          py = loopPts[idx].y;
-        } else {
-          px = mainCx;
-          py = topP + idx * sp;
-        }
-        // Offset multiple trains at same station
-        var _tIdx = _stIdx[idx] || 0;
-        _stIdx[idx] = _tIdx + 1;
-        var _total = _stCount[idx] || 1;
-        px += (_tIdx - (_total - 1) / 2) * 16;
-        // Train icon (20x24, centered)
-        var iconSrc = (window.TrainIcons && typeof window.TrainIcons.getTrainIcon === "function") ? window.TrainIcons.getTrainIcon(lineId, line.operator) : "";
-        var isEstimated = p.estimated === true;
-        var iconClass = isEstimated ? "train-icon estimated" : "train-icon";
-        if (iconSrc) {
-          var trainUid = (p.trainId || ("train_" + j)) + "_" + (p.stationIndex || 0);
-        svg += "<image data-train-id=\"" + escapeHtml(trainUid) + "\" x=\"" + (px - 7) + "\" y=\"" + (py - 9) + "\" width=\"14\" height=\"18\" href=\"" + escapeHtml(iconSrc) + "\" class=\"" + iconClass + "\" preserveAspectRatio=\"xMidYMid meet\"/>";
-        } else {
-          svg += "<circle cx=\"" + px + "\" cy=\"" + py + "\""+ "  r=\"8\" fill=\"" + escapeHtml(color) + "\""+ "  filter=\"url(#tg_" + escapeHtml(lineId) + ")\" opacity=\"0.9\"/>";
+        var junctionIdx = 0; // Simplified: branch starts at first station
+        if (geometry.isLoop && stationCoords.length > junctionIdx) {
+          var bx = stationCoords[junctionIdx].x + 20 + bi * 70;
+          var by = stationCoords[junctionIdx].y;
+          var branchTop = by - 20;
           
-          svg += "<circle cx=\"" + px + "\" cy=\"" + py + "\""+ "  r=\"3\" fill=\"#fff\"/>";
+          // Branch line
+          var branchLine = document.createElementNS(svgNS, "line");
+          branchLine.setAttribute("x1", stationCoords[junctionIdx].x);
+          branchLine.setAttribute("y1", by);
+          branchLine.setAttribute("x2", bx);
+          branchLine.setAttribute("y2", by);
+          branchLine.setAttribute("stroke", bColor);
+          branchLine.setAttribute("stroke-width", "3");
+          branchLine.setAttribute("opacity", "0.5");
+          staticLayer.appendChild(branchLine);
+          
+          // Branch vertical line
+          var branchVLine = document.createElementNS(svgNS, "line");
+          branchVLine.setAttribute("x1", bx);
+          branchVLine.setAttribute("y1", by);
+          branchVLine.setAttribute("x2", bx);
+          branchVLine.setAttribute("y2", branchTop + (branch.stations ? branch.stations.length * 24 : 50));
+          branchVLine.setAttribute("stroke", bColor);
+          branchVLine.setAttribute("stroke-width", "3");
+          branchVLine.setAttribute("opacity", "0.5");
+          staticLayer.appendChild(branchVLine);
+          
+          // Branch stations (simplified)
+          if (branch.stations) {
+            for (var bsi = 0; bsi < branch.stations.length; bsi++) {
+              var bsy = by + bsi * 24;
+              var bCircle = document.createElementNS(svgNS, "circle");
+              bCircle.setAttribute("cx", bx);
+              bCircle.setAttribute("cy", bsy);
+              bCircle.setAttribute("r", "3.5");
+              bCircle.setAttribute("fill", "#fff");
+              bCircle.setAttribute("stroke", bColor);
+              bCircle.setAttribute("stroke-width", "1.8");
+              staticLayer.appendChild(bCircle);
+              
+              var bLabel = document.createElementNS(svgNS, "text");
+              bLabel.setAttribute("x", bx + 6);
+              bLabel.setAttribute("y", bsy + 3);
+              bLabel.setAttribute("font-size", "7");
+              bLabel.setAttribute("fill", "#666");
+              bLabel.setAttribute("font-family", "sans-serif");
+              bLabel.setAttribute("font-weight", "500");
+              bLabel.textContent = _rS(branch.stations[bsi]);
+              staticLayer.appendChild(bLabel);
+            }
+          }
+          
+          // Branch name
+          var branchName = document.createElementNS(svgNS, "text");
+          branchName.setAttribute("x", bx);
+          branchName.setAttribute("y", branchTop - 6);
+          branchName.setAttribute("font-size", "8");
+          branchName.setAttribute("fill", bColor);
+          branchName.setAttribute("font-family", "sans-serif");
+          branchName.setAttribute("font-weight", "600");
+          branchName.setAttribute("text-anchor", "middle");
+          var branchDisplayName = (window.RailwayDB && typeof window.RailwayDB.resolveLineName === "function") ? window.RailwayDB.resolveLineName(branch.id, window.currentLang) : (branch.nameJa || branch.name);
+          branchName.textContent = branchDisplayName;
+          staticLayer.appendChild(branchName);
         }
       }
-      svg += "</svg>";
+      
+      svg.appendChild(staticLayer);
+      
+      // === Train layer: empty initially, populated by updateTrainLayer ===
+      var trainLayer = document.createElementNS(svgNS, "g");
+      trainLayer.setAttribute("class", "train-layer");
+      svg.appendChild(trainLayer);
+      
+      // Replace content
       var noData = t("trains.no_data");
       var loading = t("trains.loading");
-      var running = t("trains.running");
-      var cntText = t("trains.train_count");
       var info = "";
       if (positions.length === 0) {
         info = '<div class="tp-no-data">' + noData + '<br><span style="font-size:11px;color:var(--text-muted)">' + loading + '</span></div>';
-      } else {
-        info = '<div class="tp-no-data tp-running">' + running + " (" + positions.length + " " + cntText + ")" + '</div>';
       }
-      el.innerHTML = '<div class="tp-map-wrap">' + svg + "</div>" + info;
+      el.innerHTML = '<div class="tp-map-wrap"></div>' + info;
+      el.querySelector('.tp-map-wrap').appendChild(svg);
+      
+      // Now populate train layer
+      updateTrainLayer(svg, positions, stationCoords, lineId, line);
+      updateRunningInfo(el, positions);
+      
     } catch(e) {
       el.innerHTML = '<div class="tp-no-data">Error: ' + escapeHtml(e.message) + '</div>';
     }
   }
-
+  
+  /**
+   * Update train layer using DOM diff (update existing, create new, remove missing)
+   * Uses cached stationCoords - never recomputes geometry
+   */
+  function updateTrainLayer(svg, positions, stationCoords, lineId, line) {
+    var trainLayer = svg.querySelector('.train-layer');
+    if (!trainLayer) return;
+    
+    var svgNS = "http://www.w3.org/2000/svg";
+    var isLoop = stationCoords.length > 2 && (line.type === "loop" || line.isSixShapedLoop);
+    
+    // Count trains per station for offset
+    var stationCount = {};
+    var stationIdx = {};
+    for (var pi0 = 0; pi0 < positions.length; pi0++) {
+      var idx0 = Math.min(positions[pi0].stationIndex || 0, stationCoords.length - 1);
+      stationCount[idx0] = (stationCount[idx0] || 0) + 1;
+    }
+    
+    var updatedIds = {};
+    
+    for (var pi = 0; pi < positions.length; pi++) {
+      var p = positions[pi];
+      var idx = Math.min(p.stationIndex || 0, stationCoords.length - 1);
+      var coord = stationCoords[idx];
+      if (!coord) continue;
+      
+      var px = coord.x;
+      var py = coord.y;
+      
+      // Offset multiple trains at same station
+      var trainIdxAt = stationIdx[idx] || 0;
+      stationIdx[idx] = trainIdxAt + 1;
+      var totalAt = stationCount[idx] || 1;
+      var direction = p.railDirection || '';
+      var offX = 0, offY = 0;
+      
+      if (isLoop) {
+        if (direction.indexOf('Inner') >= 0) offY = -8;
+        else if (direction.indexOf('Outer') >= 0) offY = 8;
+        offX = (trainIdxAt - (totalAt - 1) / 2) * 20;
+      } else {
+        if (direction.indexOf('Inbound') >= 0 || direction.indexOf('Inner') >= 0) offX = -10;
+        else if (direction.indexOf('Outbound') >= 0 || direction.indexOf('Outer') >= 0) offX = 10;
+        offX += (trainIdxAt - (totalAt - 1) / 2) * 18;
+      }
+      
+      px += offX;
+      py += offY;
+      
+      var trainUid = (p.trainId || ("train_" + pi)) + "_" + (p.stationIndex || 0);
+      updatedIds[trainUid] = true;
+      
+      var existingIcon = trainLayer.querySelector('[data-train-id="' + String(trainUid).replace(/"/g, '') + '"]');
+      
+      if (existingIcon) {
+        // Update existing icon position
+        var oldX = parseFloat(existingIcon.getAttribute('x'));
+        var oldY = parseFloat(existingIcon.getAttribute('y'));
+        var newX = px - 7;
+        var newY = py - 9;
+        if (Math.abs(oldX - newX) > 0.5 || Math.abs(oldY - newY) > 0.5) {
+          existingIcon.setAttribute('x', newX);
+          existingIcon.setAttribute('y', newY);
+        }
+      } else {
+        // Create new train icon
+        var iconSrc = (window.TrainIcons && typeof window.TrainIcons.getTrainIcon === "function") ? window.TrainIcons.getTrainIcon(lineId, line.operator) : "";
+        var isEst = p.estimated === true;
+        var iconCls = isEst ? "train-icon estimated" : "train-icon";
+        
+        if (iconSrc) {
+          var newIcon = document.createElementNS(svgNS, "image");
+          newIcon.setAttribute("data-train-id", String(trainUid));
+          newIcon.setAttribute("x", String(px - 7));
+          newIcon.setAttribute("y", String(py - 9));
+          newIcon.setAttribute("width", "14");
+          newIcon.setAttribute("height", "18");
+          newIcon.setAttribute("href", iconSrc);
+          newIcon.setAttribute("class", iconCls);
+          newIcon.setAttribute("preserveAspectRatio", "xMidYMid meet");
+          trainLayer.appendChild(newIcon);
+        } else {
+          // Fallback: circle icon
+          var newCircle = document.createElementNS(svgNS, "g");
+          newCircle.setAttribute("data-train-id", String(trainUid));
+          newCircle.setAttribute("class", iconCls);
+          
+          var outerCircle = document.createElementNS(svgNS, "circle");
+          outerCircle.setAttribute("cx", px);
+          outerCircle.setAttribute("cy", py);
+          outerCircle.setAttribute("r", "8");
+          outerCircle.setAttribute("fill", color);
+          outerCircle.setAttribute("opacity", "0.9");
+          newCircle.appendChild(outerCircle);
+          
+          var innerCircle = document.createElementNS(svgNS, "circle");
+          innerCircle.setAttribute("cx", px);
+          innerCircle.setAttribute("cy", py);
+          innerCircle.setAttribute("r", "3");
+          innerCircle.setAttribute("fill", "#fff");
+          newCircle.appendChild(innerCircle);
+          
+          trainLayer.appendChild(newCircle);
+        }
+      }
+    }
+    
+    // Remove icons for trains that no longer exist
+    var allIcons = trainLayer.querySelectorAll('[data-train-id]');
+    for (var ii = 0; ii < allIcons.length; ii++) {
+      var tid = allIcons[ii].getAttribute('data-train-id');
+      if (!updatedIds[tid]) {
+        allIcons[ii].parentNode.removeChild(allIcons[ii]);
+      }
+    }
+  }
+  
+  function updateRunningInfo(el, positions) {
+    var runningEl = el.querySelector('.tp-running');
+    if (runningEl) {
+      var running = t("trains.running");
+      var cntText = t("trains.train_count");
+      runningEl.innerHTML = running + " (" + positions.length + " " + cntText + ")";
+    }
+  }
+  
   function showLineView(lineId) {
     try {
       var lines = getLinesData();
