@@ -92,7 +92,9 @@
         durations: l.durations || [],
         realtimePositions: [],
         nameJa: l.nameJa || l.name || ids[i],
-        branchOf: l.branchOf || null
+        branchOf: l.branchOf || null,
+        isSixShapedLoop: l.isSixShapedLoop === true,
+        loopJunction: l.loopJunction || null
       };
     }
     return lines;
