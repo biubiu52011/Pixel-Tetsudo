@@ -325,6 +325,7 @@
       var numBranches = branchLines.length;
       var branchOffset = numBranches > 0 ? 70 * numBranches : 0;
       var loopRectH = Math.max(stations.length * 36 / 2 - 80, 140);
+      var svgW, svgH;
       // For six-shaped loop, we need more width and height for two loops
       if (isSixShapedLoop) {
         var hikarigaokaIdx = stations.indexOf("Hikarigaoka");
@@ -343,8 +344,8 @@
         svgW = Math.max(loop2Cx + loop2RectW / 2 + 20, 300);
         svgH = Math.max(loop2Cy + loop2RectH / 2 + 20, 280);
       } else {
-        var svgW = isLoop ? 260 : 190 + branchOffset;
-        var svgH = isLoop ? loopRectH + 80 : topP + stations.length * sp + botP;
+        svgW = isLoop ? 260 : 190 + branchOffset;
+        svgH = isLoop ? loopRectH + 80 : topP + stations.length * sp + botP;
       }
       var svg = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 " + svgW + " " + svgH + "\" preserveAspectRatio=\"xMidYMid meet\" data-line-id=\"" + lineId + "\">";
       svg += "<defs><filter id=\"tg_" + escapeHtml(lineId) + "\"><feGaussianBlur stdDeviation=\"2\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs>";
