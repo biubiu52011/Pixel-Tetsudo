@@ -11,29 +11,29 @@
   var VEHICLE_DEPLOYMENTS = {
     "211Nagano": {
       routes: [
-        { line: "ChuoMain", from: "Takao", to: "Shiojiri", icon: "../images/列车/JR東日本/中央东线.png", priority: 1 },        // 中央東線：高尾〜塩尻（2026.3 改点后不进高尾以东）
-        { line: "Shinonoi", from: "Shiojiri", to: "Shinonoi", icon: "../images/列车/JR東日本/篠之井线.png", priority: 2 },     // 篠ノ井線：全线（班次最密）
-        { line: "Shinetsu", from: "Shinonoi", to: "Nagano", icon: "../images/列车/JR東日本/信越本线（长野段）.png", priority: 2 },       // 信越本線（長野段）：早晚通勤普通
-        { line: "Oito", from: "Matsumoto", to: "Shinano-Omachi", icon: "../images/列车/JR東日本/大糸线.png", priority: 1 },  // 大糸線：南段（少数固定班次）
-        { line: "ChuoWest", from: "Shiojiri", to: "Nakatsugawa", icon: "../images/列车/JR東日本/中央西线.png", priority: 1 },  // 中央西線：直通（线路数据待补）
+        { line: "ChuoMain", from: "Takao", to: "Shiojiri", icon: "../images/列车/JR東日本/211系長野色.png", priority: 1 },        // 中央東線：高尾〜塩尻（2026.3 改点后不进高尾以东）
+        { line: "Shinonoi", from: "Shiojiri", to: "Shinonoi", icon: "../images/列车/JR東日本/211系長野色.png", priority: 2 },     // 篠ノ井線：全线（班次最密）
+        { line: "Shinetsu", from: "Shinonoi", to: "Nagano", icon: "../images/列车/JR東日本/211系長野色.png", priority: 2 },       // 信越本線（長野段）：早晚通勤普通
+        { line: "Oito", from: "Matsumoto", to: "Shinano-Omachi", icon: "../images/列车/JR東日本/211系長野色.png", priority: 1 },  // 大糸線：南段（少数固定班次）
+        { line: "ChuoWest", from: "Shiojiri", to: "Nakatsugawa", icon: "../images/列车/JR東日本/211系長野色.png", priority: 1 },  // 中央西線：直通（线路数据待补）
         { line: "Fujikyuko", from: "Otsuki", to: "Kawaguchiko" },   // 富士急行線：直通（线路+图标待补）
         { line: "Iida", from: "Tatsuno", to: "Iida" }               // 飯田線：直通（线路+图标待补）
       ]
     },
     "E127": {
       routes: [
-        { line: "Oito", from: "Matsumoto", to: "Minami-Koya", icon: "../images/列车/JR東日本/大糸线 (2).png", priority: 2 },   // 大糸線：全线（E127 核心，包揽大量普通，优先于 211）
-        { line: "Shinonoi", from: "Shiojiri", to: "Shinonoi", icon: "../images/列车/JR東日本/篠之井线 (2).png", priority: 1 }, // 篠ノ井線：普通运用（班次少于 211）
-        { line: "Shinetsu", from: "Shinonoi", to: "Nagano", icon: "../images/列车/JR東日本/信越本线（长野段） (2).png", priority: 1 }, // 信越本線長野段：极少数班次
-        { line: "ChuoTatsuno", from: "Okaya", to: "Shiojiri", icon: "../images/列车/JR東日本/中央本线（辰野支线）.png", priority: 1 }  // 中央本線辰野支線：区间摆渡（替代 123 系）
+        { line: "Oito", from: "Matsumoto", to: "Minami-Koya", icon: "../images/列车/JR東日本/E127系100番台.png", priority: 2 },   // 大糸線：全线（E127 核心，包揽大量普通，优先于 211）
+        { line: "Shinonoi", from: "Shiojiri", to: "Shinonoi", icon: "../images/列车/JR東日本/E127系100番台.png", priority: 1 }, // 篠ノ井線：普通运用（班次少于 211）
+        { line: "Shinetsu", from: "Shinonoi", to: "Nagano", icon: "../images/列车/JR東日本/E127系100番台.png", priority: 1 }, // 信越本線長野段：极少数班次
+        { line: "ChuoTatsuno", from: "Okaya", to: "Shiojiri", icon: "../images/列车/JR東日本/E127系100番台.png", priority: 1 }  // 中央本線辰野支線：区间摆渡（替代 123 系）
       ]
     }
   };
 
   // Operator default icons (fallback)
   var OPERATOR_ICONS = {
-    "JR-East": "../images/列车/JR東日本/山手線.png",
-    "JR West": "../images/列车/JR東日本/山手線.png",
+    "JR-East": "../images/列车/JR東日本/E235系山手線.png",
+    "JR West": "../images/列车/JR東日本/E235系山手線.png",
     "TokyoMetro": "../images/列车/東京メトロ/銀座線.png",
     "Toei": "../images/列车/都営地下鉄/都営浅草線.png",
     "YokohamaMunicipal": "../images/列车/横浜市交通局/横浜市ブルーライン.png",
@@ -62,36 +62,36 @@
   // Specific line icons (override operator defaults)
   var LINE_ICONS = {
     // JR East specific
-    "Yamanote": "../images/列车/JR東日本/山手線.png",
-    "KeihinTohoku": "../images/列车/JR東日本/京浜東北線.png",
-    "Saikyo": "../images/列车/JR東日本/埼京川越線.png",
-    "Kawagoe": "../images/列车/JR東日本/埼京川越線.png",
-    "ChuoRapid": "../images/列车/JR東日本/中央線.png",
-    "ChuoLocal": "../images/列车/JR東日本/e235総武中央線.png",
-    "ChuoSobuLocal": "../images/列车/JR東日本/e235総武中央線.png",
-    "ChuoMain": "../images/列车/JR東日本/中央線.png",
-    "Yokosuka": "../images/列车/JR東日本/総武横須賀線.png",
-    "SobuRapid": "../images/列车/JR東日本/総武横須賀線.png",
-    "SobuMain": "../images/列车/JR東日本/総武横須賀線.png",
-    "Tokaido": "../images/列车/JR東日本/東海道線.png",
-    "TokaidoMain": "../images/列车/JR東日本/東海道線.png",
-    "Utsunomiya": "../images/列车/JR東日本/宇都宮線.png",
-    "Takasaki": "../images/列车/JR東日本/高崎線.png",
-    "Joban": "../images/列车/JR東日本/常磐線快速.png",
-    "JobanRapid": "../images/列车/JR東日本/常磐線快速.png",
+    "Yamanote": "../images/列车/JR東日本/E235系山手線.png",
+    "KeihinTohoku": "../images/列车/JR東日本/E233系1000番台.png",
+    "Saikyo": "../images/列车/JR東日本/E233系7000番台.png",
+    "Kawagoe": "../images/列车/JR東日本/E233系7000番台.png",
+    "ChuoRapid": "../images/列车/JR東日本/E233系0番台.png",
+    "ChuoLocal": "../images/列车/JR東日本/E235系総武中央線.png",
+    "ChuoSobuLocal": "../images/列车/JR東日本/E235系総武中央線.png",
+    "ChuoMain": "../images/列车/JR東日本/E233系0番台.png",
+    "Yokosuka": "../images/列车/JR東日本/E235系1000番台.png",
+    "SobuRapid": "../images/列车/JR東日本/E235系1000番台.png",
+    "SobuMain": "../images/列车/JR東日本/E235系1000番台.png",
+    "Tokaido": "../images/列车/JR東日本/E231系近郊型.png",
+    "TokaidoMain": "../images/列车/JR東日本/E231系近郊型.png",
+    "Utsunomiya": "../images/列车/JR東日本/E231系近郊型.png",
+    "Takasaki": "../images/列车/JR東日本/E231系近郊型.png",
+    "Joban": "../images/列车/JR東日本/E531系.png",
+    "JobanRapid": "../images/列车/JR東日本/E531系.png",
     "JobanLocal": "../images/列车/東京メトロ/千代田線.png",
-    "Mito": "../images/列车/JR東日本/常磐線快速.png",
+    "Mito": "../images/列车/JR東日本/E531系.png",
     "Musashino": "../images/列车/JR東日本/武蔵野線.png",
-    "Nambu": "../images/列车/JR東日本/南武線.png",
-    "Yokohama": "../images/列车/JR東日本/横浜線.png",
-    "Keiyo": "../images/列车/JR東日本/京葉線.png",
+    "Nambu": "../images/列车/JR東日本/E233系8000番台.png",
+    "Yokohama": "../images/列车/JR東日本/E233系6000番台.png",
+    "Keiyo": "../images/列车/JR東日本/E233系5000番台.png",
     "Tsurumi": "../images/列车/JR東日本/鶴見線.png",
-    "Ome": "../images/列车/JR東日本/青梅線.png",
-    "Itsukaichi": "../images/列车/JR東日本/中央線.png",
-    "ShonanShinjuku": "../images/列车/JR東日本/東海道線.png",
-    "TohokuMain": "../images/列车/JR東日本/宇都宮線.png",
-    "OuMain": "../images/列车/JR東日本/宇都宮線.png",
-    "Ryomo": "../images/列车/JR東日本/宇都宮線.png",
+    "Ome": "../images/列车/JR東日本/E233系青梅線.png",
+    "Itsukaichi": "../images/列车/JR東日本/E233系0番台.png",
+    "ShonanShinjuku": "../images/列车/JR東日本/E231系近郊型.png",
+    "TohokuMain": "../images/列车/JR東日本/E231系近郊型.png",
+    "OuMain": "../images/列车/JR東日本/E231系近郊型.png",
+    "Ryomo": "../images/列车/JR東日本/E231系近郊型.png",
     "Agatsuma": "../images/列车/東武鉄道/東武各線.png",
     "BanetsuWest": "../images/列车/東武鉄道/東武各線.png",
     
@@ -207,8 +207,8 @@
         if (typeof trainId === "number") { n = Math.abs(trainId) % 2; }
         else if (typeof trainId === "string") { var s = 0; for (var i = 0; i < trainId.length; i++) s += trainId.charCodeAt(i); n = s % 2; }
         return n === 0
-          ? "../images/列车/JR東日本/e231総武中央線.png"
-          : "../images/列车/JR東日本/e235総武中央線.png";
+          ? "../images/列车/JR東日本/E231系総武中央線.png"
+          : "../images/列车/JR東日本/E235系総武中央線.png";
       }
       // Vehicle deployment zones first (211系長野色/E127等按区间部署，priority 高者优先)
       if (typeof stationIndex === "number" && window.UNIFIED_LINES && window.UNIFIED_LINES[lineId]) {
@@ -241,9 +241,9 @@
       if (OPERATOR_ICONS[opKey]) return OPERATOR_ICONS[opKey];
       
       // Ultimate fallback
-      return "../images/列车/JR東日本/山手線.png";
+      return "../images/列车/JR東日本/E235系山手線.png";
     } catch(e) {
-      return "../images/列车/JR東日本/E233系.png";
+      return "../images/列车/JR東日本/E235系山手線.png";
     }
   }
 
