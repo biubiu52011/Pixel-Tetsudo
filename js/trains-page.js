@@ -320,18 +320,106 @@
         }
       }
       var isLoop = line.type === "loop";
+      var isSixShapedLoop = line.isSixShapedLoop === true;
       var sp = 30, topP = 16, botP = 14;
       var numBranches = branchLines.length;
       var branchOffset = numBranches > 0 ? 70 * numBranches : 0;
       var loopRectH = Math.max(stations.length * 36 / 2 - 80, 140);
-      var svgW = isLoop ? 260 : 190 + branchOffset;
-      var svgH = isLoop ? loopRectH + 80 : topP + stations.length * sp + botP;
+      // For six-shaped loop, we need more width and height for two loops
+      if (isSixShapedLoop) {
+        var hikarigaokaIdx = stations.indexOf("Hikarigaoka");
+        if (hikarigaokaIdx === -1) hikarigaokaIdx = Math.floor(stations.length / 3);
+        var loop1Stations = stations.slice(0, hikarigaokaIdx + 1);
+        var loop2Stations = [stations[0]].concat(stations.slice(hikarigaokaIdx + 1));
+        var loop1RectH = Math.max(loop1Stations.length * 36 / 2 - 40, 100);
+        var loop2RectH = Math.max(loop2Stations.length * 36 / 2 - 40, 140);
+        svgW = 320;
+        svgH = Math.max(loop1RectH, loop2RectH) + 100;
+      } else {
+        var svgW = isLoop ? 260 : 190 + branchOffset;
+        var svgH = isLoop ? loopRectH + 80 : topP + stations.length * sp + botP;
+      }
       var svg = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 " + svgW + " " + svgH + "\" preserveAspectRatio=\"xMidYMid meet\" data-line-id=\"" + lineId + "\">";
       svg += "<defs><filter id=\"tg_" + escapeHtml(lineId) + "\"><feGaussianBlur stdDeviation=\"2\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs>";
       svg += "<rect width=\"" + svgW + "\" height=\"" + svgH + "\" fill=\"var(--bg)\" rx=\"8\"/>";
       var loopPts = [];
       var mainCx = svgW / 2 - branchOffset / 2;
-      if (isLoop && stations.length > 2) {
+      if (isSixShapedLoop && stations.length > 2) {
+        // Six-shaped loop rendering: two connected loops
+        var spLoop6 = 32;
+        // Loop 1 (Hikarigaoka direction): smaller loop on top-left
+        var loop1RectW = 70;
+        var loop1RectH = Math.max(loop1Stations.length * spLoop6 / 2 - 30, 80);
+        var loop1Cx = 90;
+        var loop1Cy = 50 + loop1RectH / 2;
+        var loop1HalfW = loop1RectW / 2, loop1HalfH = loop1RectH / 2;
+        var loop1Perimeter = 2 * (loop1RectW + loop1RectH);
+        var loop1StartOffset = loop1RectW / 2;
+        var loop1Pts = [];
+        for (var i = 0; i < loop1Stations.length; i++) {
+          var pos1 = ((i / loop1Stations.length) * loop1Perimeter + loop1StartOffset) % loop1Perimeter;
+          var lx1, ly1;
+          if (pos1 < loop1RectW) { lx1 = loop1Cx - loop1HalfW + pos1; ly1 = loop1Cy - loop1HalfH; }
+          else if (pos1 < loop1RectW + loop1RectH) { lx1 = loop1Cx + loop1HalfW; ly1 = loop1Cy - loop1HalfH + (pos1 - loop1RectW); }
+          else if (pos1 < 2 * loop1RectW + loop1RectH) { lx1 = loop1Cx + loop1HalfW - (pos1 - loop1RectW - loop1RectH); ly1 = loop1Cy + loop1HalfH; }
+          else { lx1 = loop1Cx - loop1HalfW; ly1 = loop1Cy + loop1HalfH - (pos1 - 2 * loop1RectW - loop1RectH); }
+          var side1 = (pos1 < loop1RectW) ? "top" : (pos1 < loop1RectW + loop1RectH ? "right" : (pos1 < 2 * loop1RectW + loop1RectH ? "bottom" : "left"));
+          loop1Pts.push({ x: lx1, y: ly1, angle: 0, side: side1 });
+        }
+        // Loop 2 (main loop direction): larger loop on bottom-right
+        var loop2RectW = 80;
+        var loop2RectH = Math.max(loop2Stations.length * spLoop6 / 2 - 30, 120);
+        var loop2Cx = 210;
+        var loop2Cy = 80 + loop2RectH / 2;
+        var loop2HalfW = loop2RectW / 2, loop2HalfH = loop2RectH / 2;
+        var loop2Perimeter = 2 * (loop2RectW + loop2RectH);
+        var loop2StartOffset = loop2RectW / 2;
+        var loop2Pts = [];
+        for (var i = 0; i < loop2Stations.length; i++) {
+          var pos2 = ((i / loop2Stations.length) * loop2Perimeter + loop2StartOffset) % loop2Perimeter;
+          var lx2, ly2;
+          if (pos2 < loop2RectW) { lx2 = loop2Cx - loop2HalfW + pos2; ly2 = loop2Cy - loop2HalfH; }
+          else if (pos2 < loop2RectW + loop2RectH) { lx2 = loop2Cx + loop2HalfW; ly2 = loop2Cy - loop2HalfH + (pos2 - loop2RectW); }
+          else if (pos2 < 2 * loop2RectW + loop2RectH) { lx2 = loop2Cx + loop2HalfW - (pos2 - loop2RectW - loop2RectH); ly2 = loop2Cy + loop2HalfH; }
+          else { lx2 = loop2Cx - loop2HalfW; ly2 = loop2Cy + loop2HalfH - (pos2 - 2 * loop2RectW - loop2RectH); }
+          var side2 = (pos2 < loop2RectW) ? "top" : (pos2 < loop2RectW + loop2RectH ? "right" : (pos2 < 2 * loop2RectW + loop2RectH ? "bottom" : "left"));
+          loop2Pts.push({ x: lx2, y: ly2, angle: 0, side: side2 });
+        }
+        // Draw loop 1 rectangle
+        svg += "<rect x=\"" + (loop1Cx - loop1HalfW) + "\" y=\"" + (loop1Cy - loop1HalfH) + "\" width=\"" + loop1RectW + "\" height=\"" + loop1RectH + "\" rx=\"10\" ry=\"10\" stroke=\"" + escapeHtml(color) + "\" stroke-width=\"4\" fill=\"none\" opacity=\"0.35\"/>";
+        // Draw loop 2 rectangle
+        svg += "<rect x=\"" + (loop2Cx - loop2HalfW) + "\" y=\"" + (loop2Cy - loop2HalfH) + "\" width=\"" + loop2RectW + "\" height=\"" + loop2RectH + "\" rx=\"10\" ry=\"10\" stroke=\"" + escapeHtml(color) + "\" stroke-width=\"5\" fill=\"none\" opacity=\"0.35\"/>";
+        // Draw stations for loop 1
+        for (var i = 0; i < loop1Stations.length; i++) {
+          var p1 = loop1Pts[i];
+          var st1 = loop1Stations[i];
+          var isJunction1 = (i === 0); // Tochomae is junction
+          svg += "<circle cx=\"" + p1.x + "\" cy=\"" + p1.y + "\""+ "  r=\"" + (isJunction1 ? 6 : 4) + "\""+ "  fill=\"" + (isJunction1 ? escapeHtml(color) : "#fff") + "\""+ "  stroke=\"" + escapeHtml(color) + "\""+ "  stroke-width=\"" + (isJunction1 ? 2.5 : 2) + "\"/>";
+          var side1 = p1.side || "right";
+          var tx1, ty1, anchor1;
+          if (side1 === "top") { tx1 = p1.x; ty1 = p1.y - 8; anchor1 = "middle"; }
+          else if (side1 === "bottom") { tx1 = p1.x; ty1 = p1.y + 14; anchor1 = "middle"; }
+          else if (side1 === "left") { tx1 = p1.x - 8; ty1 = p1.y + 3; anchor1 = "end"; }
+          else { tx1 = p1.x + 8; ty1 = p1.y + 3; anchor1 = "start"; }
+          svg += "<text x=\"" + tx1 + "\" y=\"" + ty1 + "\""+ "  font-size=\"8\" fill=\"#444\" font-family=\"sans-serif\" font-weight=\"500\" text-anchor=\"" + anchor1 + "\">" + escapeHtml(_rS(st1)) + "</text>";
+        }
+        // Draw stations for loop 2
+        for (var i = 0; i < loop2Stations.length; i++) {
+          var p2 = loop2Pts[i];
+          var st2 = loop2Stations[i];
+          var isJunction2 = (i === 0); // Tochomae is junction
+          svg += "<circle cx=\"" + p2.x + "\" cy=\"" + p2.y + "\""+ "  r=\"" + (isJunction2 ? 6 : 4) + "\""+ "  fill=\"" + (isJunction2 ? escapeHtml(color) : "#fff") + "\""+ "  stroke=\"" + escapeHtml(color) + "\""+ "  stroke-width=\"" + (isJunction2 ? 2.5 : 2) + "\"/>";
+          var side2 = p2.side || "right";
+          var tx2, ty2, anchor2;
+          if (side2 === "top") { tx2 = p2.x; ty2 = p2.y - 8; anchor2 = "middle"; }
+          else if (side2 === "bottom") { tx2 = p2.x; ty2 = p2.y + 14; anchor2 = "middle"; }
+          else if (side2 === "left") { tx2 = p2.x - 8; ty2 = p2.y + 3; anchor2 = "end"; }
+          else { tx2 = p2.x + 8; ty2 = p2.y + 3; anchor2 = "start"; }
+          svg += "<text x=\"" + tx2 + "\" y=\"" + ty2 + "\""+ "  font-size=\"8\" fill=\"#444\" font-family=\"sans-serif\" font-weight=\"500\" text-anchor=\"" + anchor2 + "\">" + escapeHtml(_rS(st2)) + "</text>";
+        }
+        // Add junction label
+        svg += "<text x=\"" + ((loop1Pts[0].x + loop2Pts[0].x) / 2) + "\" y=\"" + (loop1Pts[0].y - 15) + "\""+ "  font-size=\"9\" fill=\"" + escapeHtml(color) + "\" font-family=\"sans-serif\" font-weight=\"600\" text-anchor=\"middle\">都庁前</text>";
+      } else if (isLoop && stations.length > 2) {
         var spLoop = 36;
         var rectW = 80;
         var rectH = loopRectH;
