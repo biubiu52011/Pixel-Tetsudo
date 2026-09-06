@@ -334,7 +334,7 @@
         var loop2Stations = [stations[0]].concat(stations.slice(hikarigaokaIdx + 1));
         // Calculate sizes based on new rendering layout
         var spLoop6 = 26;
-        var junctionX = 150, junctionY = 100;
+        var junctionX = 150, junctionY = 150;
         var loop1RectW = 70;
         var loop1RectH = Math.max(loop1Stations.length * spLoop6 / 2 - 10, 90);
         var loop2RectW = 90;
@@ -357,7 +357,7 @@
         var spLoop6 = 26;
         // Junction station position (Tochomae) - where both loops connect
         var junctionX = 150;
-        var junctionY = 100;
+        var junctionY = 150;
         
         // Loop 1 (Hikarigaoka direction): smaller loop going top-left from junction
         var loop1RectW = 70;
