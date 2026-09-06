@@ -332,6 +332,8 @@
       var lid = ids[i];
       var line = linesObj[lid];
       if (!line) continue;
+      // Skip branch lines - they are displayed within their parent line's map
+      if (line.branchOf) continue;
       var op = line.operator || "Unknown";
       if (!groups[op]) {
         groups[op] = [];
