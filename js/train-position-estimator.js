@@ -259,6 +259,13 @@
 
           processedTrainIds[trainNumber] = true;
           var trainClassification = classifyTrain(tt['odpt:trainType'], trainNumber);
+          // 提取方向字段
+          var railDirection = tt['odpt:railDirection'] || '';
+          var directionName = '';
+          if (railDirection) {
+            var dirParts = String(railDirection).split(':');
+            directionName = dirParts.length > 1 ? dirParts[dirParts.length - 1] : String(railDirection);
+          }
           positions.push({
             stationIndex: currentStationIndex,
             trainId: trainNumber,
@@ -267,7 +274,8 @@
             trainType: tt['odpt:trainType'] || '',
             typeName: trainClassification.typeName,
             isLimitedExpress: trainClassification.isLimitedExpress,
-            isThroughTrain: trainClassification.isThroughTrain
+            isThroughTrain: trainClassification.isThroughTrain,
+            railDirection: directionName
           });
         }
       }

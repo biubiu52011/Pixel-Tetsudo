@@ -210,18 +210,34 @@
           if (matchingLines.length === 1) {
             targetLine = matchingLines[0];
           } else if (matchingLines.length > 1) {
-            for (var i = 0; i < matchingLines.length; i++) {
-              var ml = matchingLines[i];
-              if (railwayName && ml.lid.indexOf(railwayName) >= 0) {
-                targetLine = ml;
-                break;
+            // 1. 优先使用railway字段精确匹配
+            if (railwayName) {
+              for (var i = 0; i < matchingLines.length; i++) {
+                var ml = matchingLines[i];
+                // 精确匹配：lineId包含railwayName，或者railwayName包含lineId
+                if (ml.lid === railwayName || ml.lid.indexOf(railwayName) >= 0 || railwayName.indexOf(ml.lid) >= 0) {
+                  targetLine = ml;
+                  break;
+                }
               }
             }
+            // 2. 如果没有精确匹配，只选择主要线路（车站数量>=10）
             if (!targetLine) {
-              matchingLines.sort(function(a, b) {
-                return (b.line.stations ? b.line.stations.length : 0) - (a.line.stations ? a.line.stations.length : 0);
+              var mainLines = matchingLines.filter(function(ml) {
+                return ml.line.stations && ml.line.stations.length >= 10;
               });
-              targetLine = matchingLines[0];
+              if (mainLines.length > 0) {
+                mainLines.sort(function(a, b) {
+                  return (b.line.stations ? b.line.stations.length : 0) - (a.line.stations ? a.line.stations.length : 0);
+                });
+                targetLine = mainLines[0];
+              } else {
+                // 如果没有主要线路，选择车站数量最多的线路
+                matchingLines.sort(function(a, b) {
+                  return (b.line.stations ? b.line.stations.length : 0) - (a.line.stations ? a.line.stations.length : 0);
+                });
+                targetLine = matchingLines[0];
+              }
             }
           }
           if (targetLine) {
