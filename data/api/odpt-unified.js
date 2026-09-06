@@ -516,6 +516,10 @@
             if (!data || !data.timestamp) return null;
             var age = Date.now() - data.timestamp;
             if (age > TIMETABLE_CACHE_TTL) return null;
+            // 如果是压缩数据，需要解压
+            if (data.compressed && data.timetables) {
+                return decompressTimetable(data.timetables);
+            }
             return data.timetables || {};
         } catch(e) {
             console.debug("[ODPT] Failed to load timetable cache:", e.message);
@@ -523,15 +527,99 @@
         }
     }
 
+    function compressTimetable(timetables) {
+        try {
+            var compressed = {};
+            Object.keys(timetables).forEach(function(op) {
+                var data = timetables[op] || [];
+                compressed[op] = data.map(function(tt) {
+                    // 只保留必要字段
+                    var stations = (tt['odpt:trainTimetableObject'] || []).map(function(sto) {
+                        return {
+                            s: sto['odpt:station'] || '',
+                            a: sto['odpt:arrivalTime'] || '',
+                            d: sto['odpt:departureTime'] || ''
+                        };
+                    });
+                    return {
+                        n: tt['odpt:trainNumber'] || '',
+                        r: tt['odpt:railway'] || '',
+                        t: tt['odpt:trainType'] || '',
+                        dir: tt['odpt:railDirection'] || '',
+                        st: stations
+                    };
+                });
+            });
+            return compressed;
+        } catch(e) {
+            console.debug("[ODPT] Compress error:", e.message);
+            return timetables;
+        }
+    }
+
+    function decompressTimetable(compressed) {
+        try {
+            var timetables = {};
+            Object.keys(compressed).forEach(function(op) {
+                var data = compressed[op] || [];
+                timetables[op] = data.map(function(tt) {
+                    var stations = (tt.st || []).map(function(sto) {
+                        return {
+                            'odpt:station': sto.s || '',
+                            'odpt:arrivalTime': sto.a || '',
+                            'odpt:departureTime': sto.d || ''
+                        };
+                    });
+                    return {
+                        'odpt:trainNumber': tt.n || '',
+                        'odpt:railway': tt.r || '',
+                        'odpt:trainType': tt.t || '',
+                        'odpt:railDirection': tt.dir || '',
+                        'odpt:trainTimetableObject': stations
+                    };
+                });
+            });
+            return timetables;
+        } catch(e) {
+            console.debug("[ODPT] Decompress error:", e.message);
+            return compressed;
+        }
+    }
+
     function saveTimetableCache(timetables) {
         try {
+            // 压缩数据
+            var compressed = compressTimetable(timetables);
             var data = {
                 timestamp: Date.now(),
-                timetables: timetables
+                timetables: compressed,
+                compressed: true
             };
-            localStorage.setItem(TIMETABLE_CACHE_KEY, JSON.stringify(data));
+            var jsonStr = JSON.stringify(data);
+            console.log("[ODPT] Timetable cache size:", (jsonStr.length / 1024 / 1024).toFixed(2), "MB");
+            localStorage.setItem(TIMETABLE_CACHE_KEY, jsonStr);
+            console.log("[ODPT] Timetable cache saved successfully");
         } catch(e) {
             console.debug("[ODPT] Failed to save timetable cache:", e.message);
+            // 如果还是太大，尝试只保存主要运营商
+            try {
+                var mainOps = ['JR-East', 'TokyoMetro', 'Toei', 'Tobu', 'Keio'];
+                var partial = {};
+                mainOps.forEach(function(op) {
+                    if (timetables[op]) partial[op] = timetables[op];
+                });
+                var compressed = compressTimetable(partial);
+                var data = {
+                    timestamp: Date.now(),
+                    timetables: compressed,
+                    compressed: true,
+                    partial: true
+                };
+                localStorage.setItem(TIMETABLE_CACHE_KEY, JSON.stringify(data));
+                console.log("[ODPT] Partial timetable cache saved");
+            } catch(e2) {
+                console.debug("[ODPT] Partial cache also failed:", e2.message);
+            }
         }
     }
 
