@@ -447,7 +447,7 @@
         // === Draw junction station (Tochomae) once, larger and highlighted ===
         svg += "<circle cx=\"" + junctionX + "\" cy=\"" + junctionY + "\" r=\"7\" fill=\"" + escapeHtml(color) + "\" stroke=\"#fff\" stroke-width=\"2.5\"/>";
         svg += "<text x=\"" + (junctionX - 10) + "\" y=\"" + (junctionY - 10) + "\" font-size=\"9\" fill=\"" + escapeHtml(color) + "\" font-family=\"sans-serif\" font-weight=\"700\" text-anchor=\"end\">都庁前</text>";
-      } else if (isLoop && stations.length > 2) {      } else if (isLoop && stations.length > 2) {      } else if (isLoop && stations.length > 2) {
+      } else if (isLoop && stations.length > 2) {
         var spLoop = 36;
         var rectW = 80;
         var rectH = loopRectH;
