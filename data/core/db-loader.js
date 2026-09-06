@@ -594,6 +594,42 @@ function applyData(data, i18n) {
     }
   })();
 
+  // ========== 13. Yahiko: 弥彦線（E129系新潟地区）==========
+  (function() {
+    var _yh = window.UNIFIED_LINES['Yahiko'];
+    if (!_yh) {
+      window.UNIFIED_LINES['Yahiko'] = {
+        name: 'Yahiko',
+        nameEn: 'Yahiko Line',
+        nameJa: '弥彦線',
+        code: 'H',
+        color: '#3366CC',
+        operator: 'JR-East',
+        region: 'Niigata Area',
+        type: 'line',
+        durationTotalMin: 24,
+        stations: ['Higashi-Sanjo', 'Kita-Sanjo', 'Tsubame-Sanjo', 'Tsubame', 'Nishi-Tsubame', 'Yoshida', 'Yahagi', 'Yahiko'],
+        durations: [3, 3, 3, 3, 3, 3, 3],
+        throughServices: [],
+        transferStations: []
+      };
+    }
+    var _yhStations = {
+      'Higashi-Sanjo': { lat: 37.6200, lng: 138.9530, nameJa: '東三条', nameEn: 'Higashi-Sanjo', nameZh: '东三条', nameKo: '히가시산조' },
+      'Kita-Sanjo': { lat: 37.6480, lng: 138.9400, nameJa: '北三条', nameEn: 'Kita-Sanjo', nameZh: '北三条', nameKo: '기타산조' },
+      'Tsubame-Sanjo': { lat: 37.6720, lng: 138.9220, nameJa: '燕三条', nameEn: 'Tsubame-Sanjo', nameZh: '燕三条', nameKo: '쓰바메산조' },
+      'Tsubame': { lat: 37.6710, lng: 138.9000, nameJa: '燕', nameEn: 'Tsubame', nameZh: '燕', nameKo: '쓰바메' },
+      'Nishi-Tsubame': { lat: 37.6670, lng: 138.8730, nameJa: '西燕', nameEn: 'Nishi-Tsubame', nameZh: '西燕', nameKo: '니시쓰바메' },
+      'Yoshida': { lat: 37.6880, lng: 138.8810, nameJa: '吉田', nameEn: 'Yoshida', nameZh: '吉田', nameKo: '요시다' },
+      'Yahagi': { lat: 37.7070, lng: 138.8520, nameJa: '矢作', nameEn: 'Yahagi', nameZh: '矢作', nameKo: '야하기' },
+      'Yahiko': { lat: 37.6950, lng: 138.8270, nameJa: '弥彦', nameEn: 'Yahiko', nameZh: '弥彦', nameKo: '야히코' }
+    };
+    for (var _s in _yhStations) {
+      if (!data.stations[_s]) data.stations[_s] = _yhStations[_s];
+    }
+  })();
+
+
       // 10. Line image fixes (align with actual icon library) — I2
       var LINE_IMAGE_FIXES = {
         "Keisei": "../images/鉄道/京成電鉄/京成本線.png",
