@@ -2785,7 +2785,7 @@
       "operator": "JR-East",
       "region": "Chiba Area",
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/常盤緩行線.png",
+      "image": "../images/鉄道/JR東日本/常磐緩行線.png",
       "durationTotalMin": 45,
       "branchOf": null,
       "stations": [
@@ -3657,7 +3657,7 @@
       "operator": "Yurikamome",
       "region": "Tokyo Area",
       "type": "straight",
-      "image": "../images/鉄道/ゆりかもせ/ゆりかもせ.png",
+      "image": "../images/鉄道/ゆりかもめ/ゆりかもめ.png",
       "durationTotalMin": 30,
       "branchOf": null,
       "stations": [
@@ -3932,7 +3932,7 @@
       "operator": "Keisei",
       "region": "Chiba Area",
       "type": "straight",
-      "image": "../images/鉄道/京成電鉄/本線.png",
+      "image": "../images/鉄道/京成電鉄/京成本線.png",
       "durationTotalMin": 70,
       "branchOf": null,
       "stations": [
@@ -4205,7 +4205,7 @@
       "operator": "TamaMonorail",
       "region": "Tokyo Area",
       "type": "straight",
-      "image": "../images/鉄道/多摩モノレール/多摩モノレール.png",
+      "image": "../images/鉄道/多摩都市モノレール/多摩都市モノレール線.png",
       "durationTotalMin": 36,
       "branchOf": null,
       "stations": [
@@ -4644,7 +4644,7 @@
       "operator": "Sotetsu",
       "region": "Kanagawa Area",
       "type": "straight",
-      "image": "../images/鉄道/相模鉄道/本線.png",
+      "image": "../images/鉄道/相鉄/相鉄本線.png",
       "durationTotalMin": 35,
       "branchOf": null,
       "stations": [
@@ -4736,7 +4736,7 @@
       "operator": "Seibu",
       "region": "Saitama Area",
       "type": "straight",
-      "image": "../images/鉄道/西武鉄道/西武西武園線.png",
+      "image": "../images/鉄道/西武鉄道/西武園線.png",
       "durationTotalMin": 20,
       "branchOf": null,
       "stations": [
@@ -5239,7 +5239,7 @@
       "operator": "Tobu",
       "region": null,
       "type": "straight",
-      "image": "../images/鉄道/東武鉄道/大志線.png",
+      "image": "../images/鉄道/東武鉄道/大師線.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
@@ -5675,7 +5675,7 @@
       "operator": "Seibu",
       "region": "Saitama Area",
       "type": "straight",
-      "image": "../images/鉄道/西武鉄道/池袋線.png",
+      "image": "../images/鉄道/西武鉄道/西武池袋線.png",
       "durationTotalMin": 55,
       "branchOf": null,
       "stations": [
@@ -7405,7 +7405,7 @@
       "operator": "Tobu",
       "region": null,
       "type": "straight",
-      "image": "../images/鉄道/東武鉄道/生越線.png",
+      "image": "../images/鉄道/東武鉄道/越生線.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
@@ -8189,7 +8189,7 @@
       "operator": "Seibu",
       "region": null,
       "type": "straight",
-      "image": "../images/鉄道/西武鉄道/西武佐山線.png",
+      "image": "../images/鉄道/西武鉄道/西武狭山線.png",
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
@@ -10029,7 +10029,7 @@
       "operator": "Tobu",
       "region": "Tochigi Area",
       "type": "straight",
-      "image": "../images/鉄道/東武鉄道/日光線.png",
+      "image": "../images/鉄道/東武鉄道/日光線 宇都宮線 鬼怒川線.png",
       "durationTotalMin": 50,
       "branchOf": null,
       "stations": [

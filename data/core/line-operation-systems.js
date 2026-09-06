@@ -128,7 +128,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#00bb83",
       lineIds: ["JobanLocal"],
-      icon: "../images/鉄道/JR東日本/常盤緩行線.png",
+      icon: "../images/鉄道/JR東日本/常磐緩行線.png",
       order: 11
     },
     {
@@ -227,7 +227,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#0073bf",
       lineIds: ["ChuoMain"],
-      icon: "",
+      icon: "../images/鉄道/JR東日本/JRグループ.png",
       order: 20
     },
     {
@@ -238,7 +238,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#f68b1e",
       lineIds: ["Ito"],
-      icon: "",
+      icon: "../images/鉄道/JR東日本/JRグループ.png",
       order: 21
     },
     {
@@ -249,7 +249,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#e95411",
       lineIds: ["Hachiko"],
-      icon: "",
+      icon: "../images/鉄道/JR東日本/JRグループ.png",
       order: 22
     },
     {
@@ -260,7 +260,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#fcc60d",
       lineIds: ["Sotobo"],
-      icon: "",
+      icon: "../images/鉄道/JR東日本/JRグループ.png",
       order: 23
     },
     {
@@ -271,7 +271,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#fcc60d",
       lineIds: ["Uchibo"],
-      icon: "",
+      icon: "../images/鉄道/JR東日本/JRグループ.png",
       order: 24
     },
     {
@@ -282,7 +282,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#fcc60d",
       lineIds: ["Narita"],
-      icon: "",
+      icon: "../images/鉄道/JR東日本/JRグループ.png",
       order: 25
     },
     {
@@ -293,7 +293,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#00732f",
       lineIds: ["TohokuMain"],
-      icon: "",
+      icon: "../images/鉄道/JR東日本/JRグループ.png",
       order: 26
     },
     {
@@ -304,7 +304,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#f68b1e",
       lineIds: ["TokaidoMain"],
-      icon: "",
+      icon: "../images/鉄道/JR東日本/JRグループ.png",
       order: 27
     },
     {
@@ -315,7 +315,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#00a3af",
       lineIds: ["Sagami"],
-      icon: "",
+      icon: "../images/鉄道/JR東日本/JRグループ.png",
       order: 28
     },
     {
@@ -326,7 +326,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#fcc60d",
       lineIds: ["SobuMain"],
-      icon: "",
+      icon: "../images/鉄道/JR東日本/JRグループ.png",
       order: 29
     }
   ],
@@ -574,7 +574,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#FF6600",
       lineIds: ["Daishi_Tobu"],
-      icon: "../images/鉄道/東武鉄道/大志線.png",
+      icon: "../images/鉄道/東武鉄道/大師線.png",
       order: 7
     },
     {
@@ -596,7 +596,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#4169E1",
       lineIds: ["Ogose"],
-      icon: "../images/鉄道/東武鉄道/生越線.png",
+      icon: "../images/鉄道/東武鉄道/越生線.png",
       order: 9
     },
     {
@@ -664,7 +664,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#0066CC",
       lineIds: ["Seibu_Sayama"],
-      icon: "../images/鉄道/西武鉄道/西武佐山線.png",
+      icon: "../images/鉄道/西武鉄道/西武狭山線.png",
       order: 5
     },
     {
@@ -675,7 +675,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#F7AF0E",
       lineIds: ["SeibuEn"],
-      icon: "../images/鉄道/西武鉄道/西武西武園線.png",
+      icon: "../images/鉄道/西武鉄道/西武園線.png",
       order: 6
     },
     {
@@ -1207,7 +1207,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#004fa8",
       lineIds: ["Yurikamome"],
-      icon: "../images/鉄道/ゆりかもせ/ゆりかもせ.png",
+      icon: "../images/鉄道/ゆりかもめ/ゆりかもめ.png",
       order: 1
     }
   ],

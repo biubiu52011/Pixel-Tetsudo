@@ -148,7 +148,8 @@
     "SobuMain": "../images/列车/JR東日本/E235系1000番台.png",
     "Tokaido": "../images/列车/JR東日本/E231系近郊型.png",
     "TokaidoMain": "../images/列车/JR東日本/E231系近郊型.png",
-    "Utsunomiya": "../images/列车/JR東日本/E231系近郊型.png",
+    "Oyama": "../images/列车/JR東日本/E231系近郊型.png", // JR宇都宮線（railway_data key=Oyama，原误挂在 Utsunomiya 名下）
+    "Utsunomiya": "../images/列车/東武鉄道/東武宇都宮線.png", // 東武宇都宮線（修复语义冲突：railway_data 的 Utsunomiya 是東武线路）
     "Takasaki": "../images/列车/JR東日本/E231系近郊型.png",
     "Joban": "../images/列车/JR東日本/E531系.png",
     "JobanRapid": "../images/列车/JR東日本/E531系.png",
@@ -281,7 +282,36 @@
     "TamaMonorail": "../images/列车/多摩都市モノレール/多摩モノレール.png",
     "ChibaUrbanMonorail": "../images/列车/千葉都市モノレール/千葉モノレール.png",
     "TokyoMonorail": "../images/列车/東京モノレール/東京モノレール.png",
-    "SaitamaNewUrbanTransit": "../images/列车/埼玉新都市交通/ニューシャトル.png"
+    "SaitamaNewUrbanTransit": "../images/列车/埼玉新都市交通/ニューシャトル.png",
+
+    // ===== railway_data key 对齐（4.3.265）：UNIFIED_LINES 线路 key 直查，避免 fallback 到运营商标识 =====
+    "MinatoMirai": "../images/鉄道/横浜高速鉄道/みなとみらい線.png",            // = MIR（借用线路符号，无车辆图）
+    "Nippori_Toneri": "../images/列车/都営地下鉄/都営浅草線.png",               // = NipporiToneri（占位）
+    "SotetsuShin-Yokohama": "../images/列车/相模鉄道/相鉄.png",                 // = SotetsuShinyokohama
+    "NewShuttle": "../images/列车/埼玉新都市交通/ニューシャトル.png",            // = SaitamaNewUrbanTransit
+    "HitachiNakaKaimin": "../images/鉄道/ひたちなか海浜鉄道/湊線.png",           // ひたちなか海浜鉄道湊線（借用线路符号；operator 字段 MIR 为数据遗留）
+    "TokyuIkegami": "../images/列车/東急電鉄/池上多摩川線.png",                  // = Ikegami
+    "TokyuKodomonokuni": "../images/列车/東急電鉄/こどもの国線.png",             // = Kodomonokuni
+    "TokyuOimachi": "../images/列车/東急電鉄/大井町線.png",                      // = Oimachi
+    "KeioKeibajo": "../images/列车/京王電鉄/京王.png",                           // = Keio
+    "KeioSagami": "../images/列车/京王電鉄/京王.png",
+    "KeioShin": "../images/列车/京王電鉄/京王.png",
+    "KeioTakao": "../images/列车/京王電鉄/京王.png",
+    "KeioZoo": "../images/列车/京王電鉄/京王.png",
+    "OdakyuEnoshima": "../images/列车/小田急電鉄/小田急線.png",                  // = Odakyu
+    "OdakyuTama": "../images/列车/小田急電鉄/小田急線.png",
+    "KeiseiChiba": "../images/列车/京成電鉄/京成.png",                           // = Chiba
+    "KeiseiChihara": "../images/列车/京成電鉄/京成.png",                         // = Chihara
+    "KeiseiKanamachi": "../images/列车/京成電鉄/京成.png",                       // = Kanamachi
+    "KeiseiOshiage": "../images/列车/京成電鉄/京成.png",                         // = Oshiage
+    "NaritaSkyAccess": "../images/列车/京成電鉄/スカイライナー.png",              // = NaritaAccess
+    "SeibuYamaguchi": "../images/列车/西武鉄道/山口線.png",                       // = Yamaguchi
+    "SuigunBranch": "../images/列车/JR東日本/水郡線.png",                        // 水郡線支線（同本线车辆）
+    "Tōnami": "../images/列车/JR東日本/GV-E400系.png",                           // 只見線：GV-E400系気動車
+    "Echigo": "../images/列车/JR東日本/E129系.png",                              // 越後線：E129系（新潟車両センター）
+    "Hakushin": "../images/列车/JR東日本/E129系.png",                            // 白新線：E129系
+    "Miyo": "../images/列车/JR東日本/E129系.png",                                // 弥彦線：E129系
+    "Senzan": "../images/列车/JR東日本/E721系.png"                               // 仙山線：E721系（仙台地区）
   };
 
   function getTrainIcon(lineId, operator, trainId, stationIndex, trainType) {
