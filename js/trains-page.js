@@ -405,8 +405,14 @@
           var bsy = branchTop + bsi * sp;
           var isJunc = (bsi === 0 && junctionIdx >= 0 && stations[junctionIdx] === bStations[0]);
           svg += "<circle cx=\"" + bx + "\" cy=\"" + bsy + "\""+ "  r=\"" + (isJunc ? 5 : 4) + "\""+ "  fill=\"" + (isJunc ? escapeHtml(bColor) : "#fff") + "\""+ "  stroke=\"" + escapeHtml(bColor) + "\""+ "  stroke-width=\"2\"/>";
+          // Add station name for branch stations (skip junction station which is already labeled on main line)
+          if (!isJunc) {
+            svg += "<text x=\"" + (bx + 10) + "\" y=\"" + (bsy + 3.5) + "\""+ "  font-size=\"8\" fill=\"#666\" font-family=\"sans-serif\" font-weight=\"500\">" + escapeHtml(_rS(bStations[bsi])) + "</text>";
+          }
         }
-        svg += "<text x=\"" + bx + "\" y=\"" + (branchTop - 6) + "\""+ "  font-size=\"8\" fill=\"" + escapeHtml(bColor) + "\""+ "  font-family=\"sans-serif\" font-weight=\"600\" text-anchor=\"middle\">" + escapeHtml(branch.name) + "</text>";
+        // Use resolved line name instead of raw branch.name
+        var _branchDisplayName = (window.RailwayDB && typeof window.RailwayDB.resolveLineName === "function") ? window.RailwayDB.resolveLineName(branch.id, _lang) : (branch.nameJa || branch.name);
+        svg += "<text x=\"" + bx + "\" y=\"" + (branchTop - 6) + "\""+ "  font-size=\"8\" fill=\"" + escapeHtml(bColor) + "\""+ "  font-family=\"sans-serif\" font-weight=\"600\" text-anchor=\"middle\">" + escapeHtml(_branchDisplayName) + "</text>";
       }
       // Count trains per station for horizontal offset
       var _stCount = {};
