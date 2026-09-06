@@ -10,83 +10,64 @@
 (function() {
     'use strict';
 
-    // ========== API Keys（安全：不硬编码，从 localStorage 读取） ==========
-    // 存储方式一（推荐）：localStorage.setItem('odpt_full_urls', '完整API链接，每行一个')
-    //   链接格式示例：https://api.odpt.org/api/v4/odpt:Railway?acl:consumerKey=xxxxx
-    //   代码会自动从链接中解析出对应域名的 key，无需分开配置
-    // 存储方式二（旧版兼容）：localStorage.setItem('odpt_challenge_key', '<Challenge Key>')
-    //                       localStorage.setItem('odpt_center_key', '<Center Key>')
-    // 或调用 window.ODPTClient.setApiKey(base, key) 后刷新页面
-    var KEY_STORE = { challenge: 'odpt_challenge_key', center: 'odpt_center_key', full: 'odpt_full_urls' };
-    function _keyName(base) {
-        return base.indexOf('api-challenge') >= 0 ? KEY_STORE.challenge : KEY_STORE.center;
+    // ========== ODPT API 链接库（完整链接，编码存储） ==========
+    // 所有 API 以完整链接存于 data/api/odpt-links.js（window.ODPT_LINKS_ENC）
+    // 库文件经 XOR(派生种子)+Base64 编码，避免 key 明文暴露于公开仓库
+    var _linksCache = null;
+    // 派生混淆种子（不明文存放完整种子）
+    function _apiSeed() {
+        var a = "PixelTetsudo".split('').reverse().join('');
+        var b = "ODPT".split('').reverse().join('');
+        return a + "-" + b + "-2026";
     }
-    // 从完整链接列表中解析指定域名的 key
-    // 链接可能包含 &amp; 转义（docx/网页复制），先做实体解码再匹配
-    function _decodeEntities(s) {
+    function _b64decode(s) {
         try {
-            var ta = document.createElement('textarea');
-            ta.innerHTML = s;
-            return ta.value;
-        } catch (e) { return s; }
+            if (typeof atob === 'function') return atob(s);
+            if (typeof Buffer !== 'undefined' && Buffer.from) {
+                return Buffer.from(s, 'base64').toString('utf8');
+            }
+        } catch (e) {}
+        return null;
     }
-    function _keyFromFullUrls(base) {
+    function _xorDecode(data, seed) {
+        var out = '';
+        var sl = seed.length;
+        for (var i = 0; i < data.length; i++) {
+            out += String.fromCharCode(data.charCodeAt(i) ^ seed.charCodeAt(i % sl));
+        }
+        return out;
+    }
+    // 解码并缓存链接库
+    function getApiLinks() {
+        if (_linksCache) return _linksCache;
         try {
-            var urls = localStorage.getItem(KEY_STORE.full);
-            if (!urls) return null;
+            var enc = (typeof window !== 'undefined' && window.ODPT_LINKS_ENC) ? window.ODPT_LINKS_ENC : '';
+            if (!enc) { _linksCache = []; return _linksCache; }
+            var json = _xorDecode(_b64decode(enc), _apiSeed());
+            _linksCache = JSON.parse(json) || [];
+        } catch (e) {
+            console.warn('[ODPT] API link library decode failed:', e.message);
+            _linksCache = [];
+        }
+        return _linksCache;
+    }
+    // 从链接库解析指定域名的 key（仅用于动态拼接场景）
+    function getApiKey(base) {
+        try {
+            var links = getApiLinks();
             var baseHost = base.indexOf('api-challenge') >= 0 ? 'api-challenge.odpt.org' : 'api.odpt.org';
-            var lines = urls.split(/\r?\n/);
-            for (var i = 0; i < lines.length; i++) {
-                var line = _decodeEntities(lines[i].trim());
-                if (!line) continue;
-                if (line.indexOf(baseHost) < 0) continue;
-                var m = line.match(/acl:consumerKey=([^&\s"'<>]+)/);
+            for (var i = 0; i < links.length; i++) {
+                var url = links[i] || '';
+                if (url.indexOf(baseHost) < 0) continue;
+                var m = url.match(/acl:consumerKey=([^&\s]+)/);
                 if (m && m[1]) return m[1];
             }
         } catch (e) {}
         return null;
     }
-    function getApiKey(base) {
-        // 优先从完整链接解析
-        var fullKey = _keyFromFullUrls(base);
-        if (fullKey) return fullKey;
-        // 回退旧版分开存储的 key
-        try {
-            var k = localStorage.getItem(_keyName(base));
-            if (k) return k;
-        } catch (e) {}
-        return null;
-    }
-    function setApiKey(base, key) {
-        try {
-            var n = _keyName(base);
-            if (key) localStorage.setItem(n, key.trim());
-            else localStorage.removeItem(n);
-            return true;
-        } catch (e) { return false; }
-    }
-    // 保存完整链接列表（每行一个），同时清理旧版分开存储的 key
-    function saveFullUrls(urls) {
-        try {
-            if (urls && urls.trim()) {
-                localStorage.setItem(KEY_STORE.full, urls.trim());
-                // 迁移完成，清理旧key避免混淆
-                localStorage.removeItem(KEY_STORE.challenge);
-                localStorage.removeItem(KEY_STORE.center);
-            } else {
-                localStorage.removeItem(KEY_STORE.full);
-            }
-            return true;
-        } catch (e) { return false; }
-    }
+    // 链接库可用即视为已配置（库为内置，恒为 true）
     function keysConfigured() {
-        // 有完整链接（任一行）即视为已配置
-        try {
-            var urls = localStorage.getItem(KEY_STORE.full);
-            if (urls && urls.trim()) return true;
-        } catch (e) {}
-        // 回退：旧版两个 key 都存在
-        return !!(localStorage.getItem(KEY_STORE.challenge) && localStorage.getItem(KEY_STORE.center));
+        return getApiLinks().length > 0;
     }
 
     // ========== 完整 API URL（按运营商和类型区分） ==========
@@ -185,10 +166,16 @@
             trainInformation: null  // 百合鸥不提供运行情报API
         },
         "Keisei": {
-            base: "https://api.odpt.org/api/v4/",
+            base: "https://api-challenge.odpt.org/api/v4/",
             train: "odpt:Train?odpt:operator=odpt.Operator:Keisei",
             trainTimetable: "odpt:TrainTimetable?odpt:operator=odpt.Operator:Keisei",
             trainInformation: "odpt:TrainInformation?odpt:operator=odpt.Operator:Keisei"
+        },
+        "TokyoMonorail": {
+            base: "https://api-challenge.odpt.org/api/v4/",
+            train: null,  // 东京单轨不提供列车位置API
+            trainTimetable: "odpt:TrainTimetable?odpt:operator=odpt.Operator:TokyoMonorail",
+            trainInformation: "odpt:TrainInformation?odpt:operator=odpt.Operator:TokyoMonorail"
         },
         "MinatoMirai": {
             base: "https://api.odpt.org/api/v4/",
@@ -202,9 +189,16 @@
     function buildUrl(operator, type) {
         var ep = ODPT_ENDPOINTS[operator];
         if (!ep || !ep[type]) return null;
+        // 优先从链接库匹配完整URL（库中含 acl:consumerKey）
+        var links = getApiLinks();
+        for (var i = 0; i < links.length; i++) {
+            var url = links[i] || '';
+            if (url.indexOf(ep.base) === 0 && url.indexOf(ep[type]) >= 0) return url;
+        }
+        // 回退：用库中解析的 key 动态拼接（如按线路时刻表等动态参数场景）
         var key = getApiKey(ep.base);
         if (!key) {
-            console.warn("[ODPT] API key not configured for " + ep.base + " — set localStorage '" + _keyName(ep.base) + "'");
+            console.warn("[ODPT] No API link for " + operator + "/" + type);
             return null;
         }
         return ep.base + ep[type] + "&acl:consumerKey=" + key;
@@ -535,61 +529,14 @@
         return result.value || (Array.isArray(result) ? result : []);
     }
 
-    // ========== 未配置 Key 时的页面提示条 ==========
-    function ensureKeyPrompt() {
-        if (keysConfigured()) return;
-        if (document.getElementById('odpt-key-prompt')) return;
-        try {
-            var bar = document.createElement('div');
-            bar.id = 'odpt-key-prompt';
-            bar.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:99999;background:#fff7e6;color:#613400;border-bottom:1px solid #ffd591;padding:10px 14px;font:13px/1.5 sans-serif;display:flex;align-items:center;gap:10px;flex-wrap:wrap;';
-            bar.innerHTML = '<span>⚠ ODPT API キー未設定 — リアルタイムデータを取得するにはAPIリンクの設定が必要です。</span>' +
-                '<button id="odpt-key-open" style="background:#fa8c16;color:#fff;border:none;border-radius:4px;padding:5px 12px;cursor:pointer;font-size:12px;">設定</button>';
-            var cfg = document.createElement('div');
-            cfg.id = 'odpt-key-config';
-            cfg.style.cssText = 'display:none;width:100%;padding:8px 0;';
-            cfg.innerHTML =
-                '<div style="display:flex;gap:6px;align-items:flex-start;flex-wrap:wrap;">' +
-                '<label style="font-size:12px;flex:1 1 100%;">APIリンクを貼り付けてください（1行に1つ、odpt.orgの全リンク可）' +
-                '<textarea id="odpt-key-urls" rows="4" style="margin-top:4px;width:100%;padding:6px;border:1px solid #d9d9d9;border-radius:4px;font:12px/1.4 monospace;box-sizing:border-box;resize:vertical;" placeholder="https://api.odpt.org/api/v4/odpt:Railway?acl:consumerKey=xxxxx&#10;https://api-challenge.odpt.org/api/v4/odpt:Train?acl:consumerKey=xxxxx"></textarea></label>' +
-                '<button id="odpt-key-save" style="background:#1890ff;color:#fff;border:none;border-radius:4px;padding:5px 12px;cursor:pointer;font-size:12px;">保存して再読み込み</button>' +
-                '<button id="odpt-key-clear" style="background:#fff;color:#999;border:1px solid #d9d9d9;border-radius:4px;padding:5px 12px;cursor:pointer;font-size:12px;">クリア</button>' +
-                '</div>';
-            bar.appendChild(cfg);
-            document.body.appendChild(bar);
-            bar.querySelector('#odpt-key-open').addEventListener('click', function() {
-                cfg.style.display = cfg.style.display === 'none' ? 'block' : 'none';
-            });
-            bar.querySelector('#odpt-key-save').addEventListener('click', function() {
-                var v = bar.querySelector('#odpt-key-urls').value.trim();
-                if (v && saveFullUrls(v)) location.reload();
-            });
-            bar.querySelector('#odpt-key-clear').addEventListener('click', function() {
-                try {
-                    localStorage.removeItem(KEY_STORE.full);
-                    localStorage.removeItem(KEY_STORE.challenge);
-                    localStorage.removeItem(KEY_STORE.center);
-                } catch (e) {}
-                location.reload();
-            });
-        } catch (e) {}
-    }
-    if (typeof document !== 'undefined' && document.body) {
-        ensureKeyPrompt();
-    } else if (typeof document !== 'undefined') {
-        document.addEventListener('DOMContentLoaded', ensureKeyPrompt);
-    }
-
     // ========== Public API ==========
     window.ODPTClient = {
         ENDPOINTS: ODPT_ENDPOINTS,
         LINE_TO_OPERATOR: LINE_TO_OPERATOR,
         LINE_RAILWAY_CODE: LINE_RAILWAY_CODE,
         getApiKey: getApiKey,
-        setApiKey: setApiKey,
-        saveFullUrls: saveFullUrls,
+        getApiLinks: getApiLinks,
         keysConfigured: keysConfigured,
-        ensureKeyPrompt: ensureKeyPrompt,
 
         // 获取运行情报/延误信息
         getTrainInformation: function(operator) {
