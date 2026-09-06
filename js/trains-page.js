@@ -330,19 +330,29 @@
       if (isSixShapedLoop) {
         var hikarigaokaIdx = stations.indexOf("Hikarigaoka");
         if (hikarigaokaIdx === -1) hikarigaokaIdx = Math.floor(stations.length / 3);
-        var loop1Stations = stations.slice(0, hikarigaokaIdx + 1);
-        var loop2Stations = [stations[0]].concat(stations.slice(hikarigaokaIdx + 1));
-        // Calculate sizes based on new rendering layout
-        var spLoop6 = 26;
-        var junctionX = 150, junctionY = 150;
-        var loop1RectW = 70;
-        var loop1RectH = Math.max(loop1Stations.length * spLoop6 / 2 - 10, 90);
-        var loop2RectW = 90;
-        var loop2RectH = Math.max(loop2Stations.length * spLoop6 / 2 - 10, 180);
-        var loop2Cx = junctionX + loop2RectW / 2 + 5;
-        var loop2Cy = junctionY + loop2RectH / 2 - 5;
-        svgW = Math.max(loop2Cx + loop2RectW / 2 + 20, 300);
-        svgH = Math.max(loop2Cy + loop2RectH / 2 + 20, 280);
+        // New topology: Hikarigaoka direction is OPEN LINE, Tochomae direction is CLOSED LOOP
+        var sp6 = 28;
+        var junctionX = 70, junctionY = 70;
+        // Hikarigaoka open line goes top-left at 135 degrees
+        var hikarigaokaStations = stations.slice(0, hikarigaokaIdx + 1);
+        var hikarigaokaLength = (hikarigaokaStations.length - 1) * sp6;
+        var hikarigaokaEndX = junctionX + Math.cos(-135 * Math.PI / 180) * hikarigaokaLength;
+        var hikarigaokaEndY = junctionY + Math.sin(-135 * Math.PI / 180) * hikarigaokaLength;
+        // Tochomae closed loop
+        var loopStations = [stations[0]].concat(stations.slice(hikarigaokaIdx + 1));
+        var loopRectW = 100;
+        var loopRectH = Math.max(loopStations.length * sp6 / 2 - 20, 200);
+        var loopCx = junctionX + loopRectW / 2 + 20;
+        var loopCy = junctionY + loopRectH / 2 - 10;
+        var loopEndX = loopCx + loopRectW / 2;
+        var loopEndY = loopCy + loopRectH / 2;
+        // Calculate SVG size to contain both open line and closed loop
+        var minX = Math.min(junctionX, hikarigaokaEndX, loopCx - loopRectW / 2);
+        var maxX = Math.max(junctionX, hikarigaokaEndX, loopEndX);
+        var minY = Math.min(junctionY, hikarigaokaEndY, loopCy - loopRectH / 2);
+        var maxY = Math.max(junctionY, hikarigaokaEndY, loopEndY);
+        svgW = Math.ceil(maxX - minX + 40);
+        svgH = Math.ceil(maxY - minY + 40);
       } else {
         svgW = isLoop ? 260 : 190 + branchOffset;
         svgH = isLoop ? loopRectH + 80 : topP + stations.length * sp + botP;
@@ -353,99 +363,91 @@
       var loopPts = [];
       var mainCx = svgW / 2 - branchOffset / 2;
       if (isSixShapedLoop && stations.length > 2) {
-        // Six-shaped loop rendering: two connected loops at junction station (Tochomae)
-        var spLoop6 = 26;
-        // Junction station position (Tochomae) - where both loops connect
-        var junctionX = 150;
-        var junctionY = 150;
+        // Six-shaped loop: Hikarigaoka direction is an OPEN LINE (not a loop),
+        // Tochomae direction is a CLOSED LOOP.
+        var sp6 = 28;
+        // Junction station (Tochomae) - where open line meets closed loop
+        var junctionX = 70;
+        var junctionY = 70;
         
-        // Loop 1 (Hikarigaoka direction): smaller loop going top-left from junction
-        var loop1RectW = 70;
-        var loop1RectH = Math.max(loop1Stations.length * spLoop6 / 2 - 10, 90);
-        var loop1Cx = junctionX - loop1RectW / 2 - 5;
-        var loop1Cy = junctionY - loop1RectH / 2 + 15;
-        var loop1HalfW = loop1RectW / 2, loop1HalfH = loop1RectH / 2;
-        var loop1Perimeter = 2 * (loop1RectW + loop1RectH);
-        // Start from junction (right side of loop 1, going up)
-        var loop1StartOffset = loop1RectW + loop1RectH / 2;
-        var loop1Pts = [];
-        for (var i = 0; i < loop1Stations.length; i++) {
-          var pos1 = ((i / loop1Stations.length) * loop1Perimeter + loop1StartOffset) % loop1Perimeter;
-          var lx1, ly1;
-          if (pos1 < loop1RectW) { lx1 = loop1Cx - loop1HalfW + pos1; ly1 = loop1Cy - loop1HalfH; }
-          else if (pos1 < loop1RectW + loop1RectH) { lx1 = loop1Cx + loop1HalfW; ly1 = loop1Cy - loop1HalfH + (pos1 - loop1RectW); }
-          else if (pos1 < 2 * loop1RectW + loop1RectH) { lx1 = loop1Cx + loop1HalfW - (pos1 - loop1RectW - loop1RectH); ly1 = loop1Cy + loop1HalfH; }
-          else { lx1 = loop1Cx - loop1HalfW; ly1 = loop1Cy + loop1HalfH - (pos1 - 2 * loop1RectW - loop1RectH); }
-          var side1 = (pos1 < loop1RectW) ? "top" : (pos1 < loop1RectW + loop1RectH ? "right" : (pos1 < 2 * loop1RectW + loop1RectH ? "bottom" : "left"));
-          loop1Pts.push({ x: lx1, y: ly1, angle: 0, side: side1 });
+        // === Hikarigaoka direction: OPEN LINE (not closed) ===
+        // Stations: Tochomae -> Nishi-Shinjuku-Gochome -> ... -> Hikarigaoka
+        var hikarigaokaStations = stations.slice(0, hikarigaokaIdx + 1);
+        var hikarigaokaLinePts = [];
+        // Draw as a diagonal line going top-left from junction
+        var hikarigaokaAngle = -135 * Math.PI / 180; // 135 degrees (top-left)
+        var hikarigaokaLength = (hikarigaokaStations.length - 1) * sp6;
+        for (var i = 0; i < hikarigaokaStations.length; i++) {
+          var dist = i * sp6;
+          var hx = junctionX + Math.cos(hikarigaokaAngle) * dist;
+          var hy = junctionY + Math.sin(hikarigaokaAngle) * dist;
+          hikarigaokaLinePts.push({ x: hx, y: hy, side: "top-left" });
         }
         // Force first station (junction) to exact junction position
-        loop1Pts[0].x = junctionX;
-        loop1Pts[0].y = junctionY;
-        loop1Pts[0].side = "right";
+        hikarigaokaLinePts[0].x = junctionX;
+        hikarigaokaLinePts[0].y = junctionY;
         
-        // Loop 2 (main loop direction): larger loop going bottom-right from junction
-        var loop2RectW = 90;
-        var loop2RectH = Math.max(loop2Stations.length * spLoop6 / 2 - 10, 180);
-        var loop2Cx = junctionX + loop2RectW / 2 + 5;
-        var loop2Cy = junctionY + loop2RectH / 2 - 5;
-        var loop2HalfW = loop2RectW / 2, loop2HalfH = loop2RectH / 2;
-        var loop2Perimeter = 2 * (loop2RectW + loop2RectH);
-        // Start from junction (left side of loop 2, going down)
-        var loop2StartOffset = loop2RectW / 2;
-        var loop2Pts = [];
-        for (var i = 0; i < loop2Stations.length; i++) {
-          var pos2 = ((i / loop2Stations.length) * loop2Perimeter + loop2StartOffset) % loop2Perimeter;
-          var lx2, ly2;
-          if (pos2 < loop2RectW) { lx2 = loop2Cx - loop2HalfW + pos2; ly2 = loop2Cy - loop2HalfH; }
-          else if (pos2 < loop2RectW + loop2RectH) { lx2 = loop2Cx + loop2HalfW; ly2 = loop2Cy - loop2HalfH + (pos2 - loop2RectW); }
-          else if (pos2 < 2 * loop2RectW + loop2RectH) { lx2 = loop2Cx + loop2HalfW - (pos2 - loop2RectW - loop2RectH); ly2 = loop2Cy + loop2HalfH; }
-          else { lx2 = loop2Cx - loop2HalfW; ly2 = loop2Cy + loop2HalfH - (pos2 - 2 * loop2RectW - loop2RectH); }
-          var side2 = (pos2 < loop2RectW) ? "top" : (pos2 < loop2RectW + loop2RectH ? "right" : (pos2 < 2 * loop2RectW + loop2RectH ? "bottom" : "left"));
-          loop2Pts.push({ x: lx2, y: ly2, angle: 0, side: side2 });
+        // Draw open line (polyline, NOT closed) for Hikarigaoka direction
+        var hikarigaokaPoints = hikarigaokaLinePts.map(function(p) { return p.x + "," + p.y; }).join(" ");
+        svg += "<polyline points=\"" + hikarigaokaPoints + "\" stroke=\"" + escapeHtml(color) + "\" stroke-width=\"4\" fill=\"none\" opacity=\"0.5\" stroke-linecap=\"round\"/>";
+        
+        // === Tochomae direction: CLOSED LOOP ===
+        // Stations: Tochomae -> Shinjuku -> ... -> Daimon -> Tochomae
+        var loopStations = [stations[0]].concat(stations.slice(hikarigaokaIdx + 1));
+        var loopRectW = 100;
+        var loopRectH = Math.max(loopStations.length * sp6 / 2 - 20, 200);
+        var loopCx = junctionX + loopRectW / 2 + 20;
+        var loopCy = junctionY + loopRectH / 2 - 10;
+        var loopHalfW = loopRectW / 2, loopHalfH = loopRectH / 2;
+        var loopPerimeter = 2 * (loopRectW + loopRectH);
+        // Start from junction (top-left corner of loop, going right along top edge)
+        var loopStartOffset = 0;
+        var loopPts6 = [];
+        for (var i = 0; i < loopStations.length; i++) {
+          var pos6 = ((i / loopStations.length) * loopPerimeter + loopStartOffset) % loopPerimeter;
+          var lx6, ly6;
+          if (pos6 < loopRectW) { lx6 = loopCx - loopHalfW + pos6; ly6 = loopCy - loopHalfH; }
+          else if (pos6 < loopRectW + loopRectH) { lx6 = loopCx + loopHalfW; ly6 = loopCy - loopHalfH + (pos6 - loopRectW); }
+          else if (pos6 < 2 * loopRectW + loopRectH) { lx6 = loopCx + loopHalfW - (pos6 - loopRectW - loopRectH); ly6 = loopCy + loopHalfH; }
+          else { lx6 = loopCx - loopHalfW; ly6 = loopCy + loopHalfH - (pos6 - 2 * loopRectW - loopRectH); }
+          var side6 = (pos6 < loopRectW) ? "top" : (pos6 < loopRectW + loopRectH ? "right" : (pos6 < 2 * loopRectW + loopRectH ? "bottom" : "left"));
+          loopPts6.push({ x: lx6, y: ly6, angle: 0, side: side6 });
         }
-        // Force first station (junction) to exact junction position
-        loop2Pts[0].x = junctionX;
-        loop2Pts[0].y = junctionY;
-        loop2Pts[0].side = "left";
+        // Force first station (junction) to connect with open line
+        loopPts6[0].x = junctionX;
+        loopPts6[0].y = junctionY;
+        loopPts6[0].side = "top-left";
         
-        // Draw loop 1 rectangle
-        svg += "<rect x=\"" + (loop1Cx - loop1HalfW) + "\" y=\"" + (loop1Cy - loop1HalfH) + "\" width=\"" + loop1RectW + "\" height=\"" + loop1RectH + "\" rx=\"12\" ry=\"12\" stroke=\"" + escapeHtml(color) + "\" stroke-width=\"4\" fill=\"none\" opacity=\"0.4\"/>";
-        // Draw loop 2 rectangle
-        svg += "<rect x=\"" + (loop2Cx - loop2HalfW) + "\" y=\"" + (loop2Cy - loop2HalfH) + "\" width=\"" + loop2RectW + "\" height=\"" + loop2RectH + "\" rx=\"12\" ry=\"12\" stroke=\"" + escapeHtml(color) + "\" stroke-width=\"5\" fill=\"none\" opacity=\"0.4\"/>";
+        // Draw closed loop rectangle for Tochomae direction
+        svg += "<rect x=\"" + (loopCx - loopHalfW) + "\" y=\"" + (loopCy - loopHalfH) + "\" width=\"" + loopRectW + "\" height=\"" + loopRectH + "\" rx=\"12\" ry=\"12\" stroke=\"" + escapeHtml(color) + "\" stroke-width=\"5\" fill=\"none\" opacity=\"0.4\"/>";
         
-        // Draw stations for loop 1 (skip junction station, drawn once at end)
-        for (var i = 1; i < loop1Stations.length; i++) {
-          var p1 = loop1Pts[i];
-          var st1 = loop1Stations[i];
-          svg += "<circle cx=\"" + p1.x + "\" cy=\"" + p1.y + "\""+ "  r=\"4\""+ "  fill=\"#fff\""+ "  stroke=\"" + escapeHtml(color) + "\""+ "  stroke-width=\"2\"/>";
-          var side1 = p1.side || "right";
-          var tx1, ty1, anchor1;
-          if (side1 === "top") { tx1 = p1.x; ty1 = p1.y - 7; anchor1 = "middle"; }
-          else if (side1 === "bottom") { tx1 = p1.x; ty1 = p1.y + 12; anchor1 = "middle"; }
-          else if (side1 === "left") { tx1 = p1.x - 7; ty1 = p1.y + 3; anchor1 = "end"; }
-          else { tx1 = p1.x + 7; ty1 = p1.y + 3; anchor1 = "start"; }
-          svg += "<text x=\"" + tx1 + "\" y=\"" + ty1 + "\""+ "  font-size=\"7.5\" fill=\"#555\" font-family=\"sans-serif\" font-weight=\"500\" text-anchor=\"" + anchor1 + "\">" + escapeHtml(_rS(st1)) + "</text>";
+        // === Draw stations for Hikarigaoka open line (skip junction) ===
+        for (var i = 1; i < hikarigaokaStations.length; i++) {
+          var ph = hikarigaokaLinePts[i];
+          var sth = hikarigaokaStations[i];
+          svg += "<circle cx=\"" + ph.x + "\" cy=\"" + ph.y + "\" r=\"4\" fill=\"#fff\" stroke=\"" + escapeHtml(color) + "\" stroke-width=\"2\"/>";
+          // Text position: top-left of the station (since line goes top-left)
+          svg += "<text x=\"" + (ph.x - 8) + "\" y=\"" + (ph.y - 5) + "\" font-size=\"7.5\" fill=\"#555\" font-family=\"sans-serif\" font-weight=\"500\" text-anchor=\"end\">" + escapeHtml(_rS(sth)) + "</text>";
         }
         
-        // Draw stations for loop 2 (skip junction station, drawn once at end)
-        for (var i = 1; i < loop2Stations.length; i++) {
-          var p2 = loop2Pts[i];
-          var st2 = loop2Stations[i];
-          svg += "<circle cx=\"" + p2.x + "\" cy=\"" + p2.y + "\""+ "  r=\"4\""+ "  fill=\"#fff\""+ "  stroke=\"" + escapeHtml(color) + "\""+ "  stroke-width=\"2\"/>";
-          var side2 = p2.side || "right";
-          var tx2, ty2, anchor2;
-          if (side2 === "top") { tx2 = p2.x; ty2 = p2.y - 7; anchor2 = "middle"; }
-          else if (side2 === "bottom") { tx2 = p2.x; ty2 = p2.y + 12; anchor2 = "middle"; }
-          else if (side2 === "left") { tx2 = p2.x - 7; ty2 = p2.y + 3; anchor2 = "end"; }
-          else { tx2 = p2.x + 7; ty2 = p2.y + 3; anchor2 = "start"; }
-          svg += "<text x=\"" + tx2 + "\" y=\"" + ty2 + "\""+ "  font-size=\"7.5\" fill=\"#555\" font-family=\"sans-serif\" font-weight=\"500\" text-anchor=\"" + anchor2 + "\">" + escapeHtml(_rS(st2)) + "</text>";
+        // === Draw stations for Tochomae closed loop (skip junction) ===
+        for (var i = 1; i < loopStations.length; i++) {
+          var p6 = loopPts6[i];
+          var st6 = loopStations[i];
+          svg += "<circle cx=\"" + p6.x + "\" cy=\"" + p6.y + "\" r=\"4\" fill=\"#fff\" stroke=\"" + escapeHtml(color) + "\" stroke-width=\"2\"/>";
+          var side6 = p6.side || "right";
+          var tx6, ty6, anchor6;
+          if (side6 === "top") { tx6 = p6.x; ty6 = p6.y - 7; anchor6 = "middle"; }
+          else if (side6 === "bottom") { tx6 = p6.x; ty6 = p6.y + 12; anchor6 = "middle"; }
+          else if (side6 === "left") { tx6 = p6.x - 7; ty6 = p6.y + 3; anchor6 = "end"; }
+          else { tx6 = p6.x + 7; ty6 = p6.y + 3; anchor6 = "start"; }
+          svg += "<text x=\"" + tx6 + "\" y=\"" + ty6 + "\" font-size=\"7.5\" fill=\"#555\" font-family=\"sans-serif\" font-weight=\"500\" text-anchor=\"" + anchor6 + "\">" + escapeHtml(_rS(st6)) + "</text>";
         }
         
-        // Draw junction station (Tochomae) once, larger and highlighted
-        svg += "<circle cx=\"" + junctionX + "\" cy=\"" + junctionY + "\""+ "  r=\"7\""+ "  fill=\"" + escapeHtml(color) + "\""+ "  stroke=\"#fff\""+ "  stroke-width=\"2.5\"/>";
-        svg += "<text x=\"" + junctionX + "\" y=\"" + (junctionY - 12) + "\""+ "  font-size=\"9\" fill=\"" + escapeHtml(color) + "\" font-family=\"sans-serif\" font-weight=\"700\" text-anchor=\"middle\">都庁前</text>";
-      } else if (isLoop && stations.length > 2) {      } else if (isLoop && stations.length > 2) {
+        // === Draw junction station (Tochomae) once, larger and highlighted ===
+        svg += "<circle cx=\"" + junctionX + "\" cy=\"" + junctionY + "\" r=\"7\" fill=\"" + escapeHtml(color) + "\" stroke=\"#fff\" stroke-width=\"2.5\"/>";
+        svg += "<text x=\"" + (junctionX - 10) + "\" y=\"" + (junctionY - 10) + "\" font-size=\"9\" fill=\"" + escapeHtml(color) + "\" font-family=\"sans-serif\" font-weight=\"700\" text-anchor=\"end\">都庁前</text>";
+      } else if (isLoop && stations.length > 2) {      } else if (isLoop && stations.length > 2) {      } else if (isLoop && stations.length > 2) {
         var spLoop = 36;
         var rectW = 80;
         var rectH = loopRectH;
