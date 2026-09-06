@@ -155,87 +155,143 @@
     var routeElements = []; // SVG elements for route lines (static layer)
     
     if (isSixShapedLoop && stations.length > 2) {
-      // Six-shaped loop: L-shaped tail + closed loop
+      // Six-shaped loop: "loop + tail" structure (not two loops)
+      // Hikarigaoka direction = open vertical tail, Tochomae direction = closed rectangular loop
       var hikarigaokaIdx = stations.indexOf("Hikarigaoka");
       if (hikarigaokaIdx === -1) hikarigaokaIdx = Math.floor(stations.length / 3);
       
-      var junctionX = 80;
-      var junctionY = 60;
-      
-      // Tochomae direction: closed loop
+      var hikarigaokaStations = stations.slice(0, hikarigaokaIdx + 1); // [0]=Tochomae (junction)
       var loopStations = [stations[0]].concat(stations.slice(hikarigaokaIdx + 1));
-      var loopRectW = 110;
-      var loopRectH = Math.max(loopStations.length * 26 / 2 - 20, 220);
-      var loopLeft = junctionX;
-      var loopTop = junctionY;
-      var loopRight = loopLeft + loopRectW;
-      var loopBottom = loopTop + loopRectH;
-      var loopPerimeter = 2 * (loopRectW + loopRectH);
       
+      // ============ Size calculation ============
+      var spLoop6 = 26;
+      var loopRectW = 150;
+      var loopRectH = Math.max(loopStations.length * spLoop6 - 40, 200);
+      
+      var marginRight = 30;
+      var marginTopBot = 40;
+      var tailAreaWidth = 140;
+      var leftMargin = 10;
+      
+      svgW = leftMargin + tailAreaWidth + loopRectW + marginRight;
+      svgH = loopRectH + marginTopBot * 2;
+      
+      // ============ Geometry calculation ============
+      // Loop center - derived from svg size, not independently set
+      var loopCx = svgW - marginRight - loopRectW / 2;
+      var loopCy = svgH / 2;
+      var loopHalfW = loopRectW / 2;
+      var loopHalfH = loopRectH / 2;
+      
+      // Junction (Tochomae) - MUST be derived from loop rectangle position formula
+      // = loop left edge + vertical midpoint (guarantees perfect alignment, no gaps)
+      var junctionX = loopCx - loopHalfW;
+      var junctionY = loopCy;
+      
+      // Stub: short horizontal segment from loop side (creates "branching from loop side" realism)
+      var stubLen = 35;
+      var stubX = junctionX - stubLen;
+      var stubY = junctionY;
+      
+      // Tail: vertical line going up, stations arranged along vertical line
+      var tailCount = hikarigaokaStations.length - 1;
+      var tailTotalHeight = tailCount > 0 ? Math.min(loopRectH * 0.85, tailCount * spLoop6) : 0;
+      var tailStep = tailCount > 0 ? tailTotalHeight / tailCount : 0;
+      
+      // Tail station coordinates: first = junction, rest = along vertical line at stubX
+      var hikarigaokaLinePts = [{ x: junctionX, y: junctionY, side: 'left', stationId: hikarigaokaStations[0] }];
+      for (var i = 1; i < hikarigaokaStations.length; i++) {
+        hikarigaokaLinePts.push({ 
+          x: stubX, 
+          y: stubY - i * tailStep, 
+          side: 'left', 
+          stationId: hikarigaokaStations[i] 
+        });
+      }
+      
+      // Loop station coordinates (perimeter calculation)
+      var perimeter = 2 * (loopRectW + loopRectH);
+      var startOffset = 2 * loopRectW + 1.5 * loopRectH;
       var loopPts6 = [];
       for (var i = 0; i < loopStations.length; i++) {
-        var pos6 = (i / loopStations.length) * loopPerimeter;
-        var lx6, ly6, side6;
-        if (pos6 < loopRectW) {
-          lx6 = loopLeft + pos6; ly6 = loopTop; side6 = "top";
-        } else if (pos6 < loopRectW + loopRectH) {
-          lx6 = loopRight; ly6 = loopTop + (pos6 - loopRectW); side6 = "right";
-        } else if (pos6 < 2 * loopRectW + loopRectH) {
-          lx6 = loopRight - (pos6 - loopRectW - loopRectH); ly6 = loopBottom; side6 = "bottom";
-        } else {
-          lx6 = loopLeft; ly6 = loopBottom - (pos6 - 2 * loopRectW - loopRectH); side6 = "left";
+        var pos = ((i / loopStations.length) * perimeter + startOffset) % perimeter;
+        var lx, ly, side;
+        if (pos < loopRectW) { 
+          lx = loopCx - loopHalfW + pos; 
+          ly = loopCy - loopHalfH; 
+          side = "top"; 
+        } else if (pos < loopRectW + loopRectH) { 
+          lx = loopCx + loopHalfW; 
+          ly = loopCy - loopHalfH + (pos - loopRectW); 
+          side = "right"; 
+        } else if (pos < 2 * loopRectW + loopRectH) { 
+          lx = loopCx + loopHalfW - (pos - loopRectW - loopRectH); 
+          ly = loopCy + loopHalfH; 
+          side = "bottom"; 
+        } else { 
+          lx = loopCx - loopHalfW; 
+          ly = loopCy + loopHalfH - (pos - 2 * loopRectW - loopRectH); 
+          side = "left"; 
         }
-        loopPts6.push({ x: lx6, y: ly6, side: side6, stationId: loopStations[i] });
+        loopPts6.push({ x: lx, y: ly, side: side, stationId: loopStations[i] });
       }
+      // Override first station (junction) with exact coordinates derived from loop formula
       loopPts6[0].x = junctionX;
       loopPts6[0].y = junctionY;
-      loopPts6[0].side = "top-left";
-      
-      // Hikarigaoka direction: L-shaped open tail
-      var hikarigaokaStations = stations.slice(0, hikarigaokaIdx + 1);
-      var tailHorizontalLen = Math.min(loopRectW * 0.65, 70);
-      var tailVerticalLen = Math.min(loopRectW * 0.45, 50);
-      var tailTotalLen = tailHorizontalLen + tailVerticalLen;
-      var tailCornerX = junctionX - tailHorizontalLen;
-      var tailEndY = junctionY - tailVerticalLen;
-      
-      var tailPts = [];
-      for (var i = 0; i < hikarigaokaStations.length; i++) {
-        var distAlongTail = (i / (hikarigaokaStations.length - 1)) * tailTotalLen;
-        var tx, ty, tside;
-        if (distAlongTail <= tailHorizontalLen) {
-          tx = junctionX - distAlongTail; ty = junctionY; tside = "top";
-        } else {
-          var verticalDist = distAlongTail - tailHorizontalLen;
-          tx = tailCornerX; ty = junctionY - verticalDist; tside = "left";
-        }
-        tailPts.push({ x: tx, y: ty, side: tside, stationId: hikarigaokaStations[i] });
-      }
-      tailPts[0].x = junctionX;
-      tailPts[0].y = junctionY;
-      tailPts[0].side = "top-left";
+      loopPts6[0].side = "left";
       
       // Combine all station coords (tail stations first, then loop stations excluding junction)
-      stationCoords = tailPts.concat(loopPts6.slice(1));
+      stationCoords = hikarigaokaLinePts.concat(loopPts6.slice(1));
       
-      // Calculate SVG size
-      var minX = Math.min(junctionX, tailCornerX);
-      var maxX = loopRight;
-      var minY = Math.min(junctionY, tailEndY);
-      var maxY = loopBottom;
-      svgW = Math.ceil(maxX - minX + 40);
-      svgH = Math.ceil(maxY - minY + 40);
-      
-      // Route elements for static layer
+      // ============ Route elements for static layer ============
+      // Main loop rectangle (heavier visual weight = primary)
       routeElements.push({
         type: 'rect',
-        attrs: { x: loopLeft, y: loopTop, width: loopRectW, height: loopRectH, rx: 10, ry: 10, stroke: color, 'stroke-width': 5, fill: 'none', opacity: 0.5 }
+        attrs: { 
+          x: loopCx - loopHalfW, 
+          y: loopCy - loopHalfH, 
+          width: loopRectW, 
+          height: loopRectH, 
+          rx: 12, 
+          ry: 12, 
+          stroke: color, 
+          'stroke-width': 5, 
+          fill: 'none', 
+          opacity: 0.4 
+        }
       });
-      var tailPointsStr = tailPts.map(function(p) { return p.x + "," + p.y; }).join(" ");
+      
+      // Stub: short horizontal line from loop side (lighter visual weight)
       routeElements.push({
-        type: 'polyline',
-        attrs: { points: tailPointsStr, stroke: color, 'stroke-width': 3.5, fill: 'none', opacity: 0.4, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }
+        type: 'line',
+        attrs: { 
+          x1: junctionX, 
+          y1: junctionY, 
+          x2: stubX, 
+          y2: stubY, 
+          stroke: color, 
+          'stroke-width': 3, 
+          opacity: 0.5 
+        }
       });
+      
+      // Tail: vertical line (lighter visual weight = secondary)
+      if (hikarigaokaLinePts.length > 1) {
+        var tailTopY = hikarigaokaLinePts[hikarigaokaLinePts.length - 1].y;
+        routeElements.push({
+          type: 'line',
+          attrs: { 
+            x1: stubX, 
+            y1: stubY, 
+            x2: stubX, 
+            y2: tailTopY, 
+            stroke: color, 
+            'stroke-width': 4, 
+            'stroke-linecap': 'round', 
+            opacity: 0.4 
+          }
+        });
+      }
       
     } else if (isLoop && stations.length > 2) {
       // Standard loop
@@ -384,9 +440,9 @@
         var circle = document.createElementNS(svgNS, "circle");
         circle.setAttribute("cx", sc.x);
         circle.setAttribute("cy", sc.y);
-        circle.setAttribute("r", isJunction ? "6.5" : "4");
+        circle.setAttribute("r", isJunction ? "7" : "4");
         circle.setAttribute("fill", isJunction ? color : "#fff");
-        circle.setAttribute("stroke", color);
+        circle.setAttribute("stroke", isJunction ? "#fff" : color);
         circle.setAttribute("stroke-width", isJunction ? "2.5" : "2");
         circle.setAttribute("data-station-index", si);
         staticLayer.appendChild(circle);
@@ -397,11 +453,11 @@
         var tx, ty, anchor;
         if (side === "top") { tx = sc.x; ty = sc.y - (isJunction ? 12 : 8); anchor = "middle"; }
         else if (side === "bottom") { tx = sc.x; ty = sc.y + (isJunction ? 16 : 13); anchor = "middle"; }
-        else if (side === "left") { tx = sc.x - (isJunction ? 10 : 8); ty = sc.y + 3; anchor = "end"; }
+        else if (side === "left") { tx = sc.x - (isJunction ? 12 : 8); ty = sc.y + (isJunction ? 4 : 3); anchor = "end"; }
         else { tx = sc.x + (isJunction ? 10 : 8); ty = sc.y + 3; anchor = "start"; }
         label.setAttribute("x", tx);
         label.setAttribute("y", ty);
-        label.setAttribute("font-size", isJunction ? "8.5" : "7.5");
+        label.setAttribute("font-size", isJunction ? "9" : "7.5");
         label.setAttribute("fill", isJunction ? color : "#555");
         label.setAttribute("font-family", "sans-serif");
         label.setAttribute("font-weight", isJunction ? "700" : "500");
