@@ -30,7 +30,9 @@
     "SaitamaNewUrbanTransit": "../images/列车/埼玉新都市交通/ニューシャトル.png",
     "ChibaUrbanMonorail": "../images/列车/千葉都市モノレール/千葉モノレール.png",
     "TokyoMonorail": "../images/列车/東京モノレール/東京モノレール.png",
-    "NipporiToneri": "../images/列车/都営地下鉄/都営浅草線.png"
+    "NipporiToneri": "../images/列车/都営地下鉄/都営浅草線.png",
+    "MinatoMirai": "../images/鉄道/横浜高速鉄道/みなとみらい線.png",
+    "ShonanMonorail": "../images/鉄道/湘南モノレール/湘南モノレール江の島線.png"
   };
 
   // Specific line icons (override operator defaults)
@@ -173,8 +175,17 @@
     "SaitamaNewUrbanTransit": "../images/列车/埼玉新都市交通/ニューシャトル.png"
   };
 
-  function getTrainIcon(lineId, operator) {
+  function getTrainIcon(lineId, operator, trainId) {
     try {
+      // Chuo/Sobu local: E231系500番台 + E235系0番台 并用（2025 起 E235 由山手线转用）
+      if (lineId === "ChuoLocal" || lineId === "ChuoSobuLocal") {
+        var n = 0;
+        if (typeof trainId === "number") { n = Math.abs(trainId) % 2; }
+        else if (typeof trainId === "string") { var s = 0; for (var i = 0; i < trainId.length; i++) s += trainId.charCodeAt(i); n = s % 2; }
+        return n === 0
+          ? "../images/列车/JR東日本/e231総武中央線.png"
+          : "../images/列车/JR東日本/e235総武中央線.png";
+      }
       // Check specific line icon first
       if (LINE_ICONS[lineId]) return LINE_ICONS[lineId];
       

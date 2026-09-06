@@ -659,7 +659,7 @@
         }
       } else {
         // Create new train icon
-        var iconSrc = (window.TrainIcons && typeof window.TrainIcons.getTrainIcon === "function") ? window.TrainIcons.getTrainIcon(lineId, line.operator) : "";
+        var iconSrc = (window.TrainIcons && typeof window.TrainIcons.getTrainIcon === "function") ? window.TrainIcons.getTrainIcon(lineId, line.operator, trainUid) : "";
         var isEst = p.estimated === true;
         var iconCls = isEst ? "train-icon estimated" : "train-icon";
         
