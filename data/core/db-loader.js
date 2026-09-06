@@ -413,6 +413,10 @@ function applyData(data, i18n) {
           name: 'Kiryu', nameEn: 'Kiryu Line', nameJa: '東武桐生線',
           stations: ['Ota', 'Sanmaihashi', 'Jiroembashi', 'Yabuzuka', 'Azami', 'Shin-Kiryu', 'Aioi', 'Akagi']
         },
+        Shinonoi: {
+          name: 'Shinonoi', nameEn: 'Shinonoi Line', nameJa: '篠ノ井線',
+          stations: ['Shiojiri', 'Hirosa', 'Murai', 'Hirata', 'Minami-Matsumoto', 'Matsumoto', 'Tazawa', 'Akashina', 'Saijo', 'Sakakita', 'Hijiri-Kogen', 'Kanzasa', 'Obasute', 'Inariyama', 'Shinonoi']
+        },
         Sano: {
           name: 'Sano', nameEn: 'Sano Line', nameJa: '東武佐野線',
           stations: ['Tatebayashi', 'Watarase', 'Tajima', 'Sano-Shi', 'Sano', 'Horigome', 'Yoshimizu', 'Tanuma', 'Tada', 'Kuzu']

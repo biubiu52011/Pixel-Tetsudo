@@ -6,6 +6,22 @@
 (function() {
   "use strict";
 
+  // Vehicle deployment zones: specific rolling stock only runs on listed segments
+  // 211系長野色（冰蓝与青色带）部署区间（参考 trafficnews.jp/post/676306）
+  var VEHICLE_DEPLOYMENTS = {
+    "211Nagano": {
+      routes: [
+        { line: "ChuoMain", from: "Takao", to: "Shiojiri", icon: "../images/列车/JR東日本/中央东线.png" },        // 中央東線：高尾〜塩尻（2026.3 改点后不进高尾以东）
+        { line: "Shinonoi", from: "Shiojiri", to: "Shinonoi", icon: "../images/列车/JR東日本/篠之井线.png" },     // 篠ノ井線：全线（最核心）
+        { line: "Shinetsu", from: "Shinonoi", to: "Nagano", icon: "../images/列车/JR東日本/信越本线（长野段）.png" },       // 信越本線（長野段）：早晚通勤普通
+        { line: "Oito", from: "Matsumoto", to: "Shinano-Omachi", icon: "../images/列车/JR東日本/大糸线.png" },  // 大糸線：南段（信濃大町以南）
+        { line: "ChuoWest", from: "Shiojiri", to: "Nakatsugawa", icon: "../images/列车/JR東日本/中央西线.png" },  // 中央西線：直通（线路数据待补）
+        { line: "Fujikyuko", from: "Otsuki", to: "Kawaguchiko" },   // 富士急行線：直通（线路+图标待补）
+        { line: "Iida", from: "Tatsuno", to: "Iida" }               // 飯田線：直通（线路+图标待补）
+      ]
+    }
+  };
+
   // Operator default icons (fallback)
   var OPERATOR_ICONS = {
     "JR-East": "../images/列车/JR東日本/山手線.png",
@@ -175,7 +191,7 @@
     "SaitamaNewUrbanTransit": "../images/列车/埼玉新都市交通/ニューシャトル.png"
   };
 
-  function getTrainIcon(lineId, operator, trainId) {
+  function getTrainIcon(lineId, operator, trainId, stationIndex) {
     try {
       // Chuo/Sobu local: E231系500番台 + E235系0番台 并用（2025 起 E235 由山手线转用）
       if (lineId === "ChuoLocal" || lineId === "ChuoSobuLocal") {
@@ -185,6 +201,24 @@
         return n === 0
           ? "../images/列车/JR東日本/e231総武中央線.png"
           : "../images/列车/JR東日本/e235総武中央線.png";
+      }
+      // Vehicle deployment zones first (211系長野色等特定车型按区间部署)
+      if (typeof stationIndex === "number" && window.UNIFIED_LINES && window.UNIFIED_LINES[lineId]) {
+        var sts = window.UNIFIED_LINES[lineId].stations || [];
+        var deployIcon = null;
+        Object.keys(VEHICLE_DEPLOYMENTS).forEach(function(vk) {
+          var v = VEHICLE_DEPLOYMENTS[vk];
+          if (deployIcon) return;
+          v.routes.forEach(function(r) {
+            if (r.line !== lineId || deployIcon || !r.icon) return;
+            var fi = sts.indexOf(r.from);
+            var ti = sts.indexOf(r.to);
+            if (fi === -1 || ti === -1) return;
+            var lo = Math.min(fi, ti), hi = Math.max(fi, ti);
+            if (stationIndex >= lo && stationIndex <= hi) deployIcon = r.icon;
+          });
+        });
+        if (deployIcon) return deployIcon;
       }
       // Check specific line icon first
       if (LINE_ICONS[lineId]) return LINE_ICONS[lineId];
