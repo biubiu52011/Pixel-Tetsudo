@@ -457,7 +457,22 @@ function applyData(data, i18n) {
         'Sodesaki':              { ja: '袖崎',     zh: '袖崎',     ko: '소데사키',           lat: 38.4890, lng: 140.3880 },
         'Oishida':               { ja: '大石田',   zh: '大石田',   ko: '오이시다',           lat: 38.5940, lng: 140.3740 },
         'Kita-Oishida':          { ja: '北大石田', zh: '北大石田', ko: '기타오이시다',       lat: 38.6110, lng: 140.3720 },
-        'Ashisawa':              { ja: '芦沢',     zh: '芦泽',     ko: '아시사와',           lat: 38.6590, lng: 140.3710 }
+        'Ashisawa':              { ja: '芦沢',     zh: '芦泽',     ko: '아시사와',           lat: 38.6590, lng: 140.3710 },
+        'Hirosa':                   { ja: '広丘',     zh: '广丘',     ko: '히로오카',           lat: 36.157, lng: 137.931 },
+        'Murai':                    { ja: '村井',     zh: '村井',     ko: '무라이',           lat: 36.204, lng: 137.943 },
+        'Hirata':                   { ja: '平田',     zh: '平田',     ko: '히라타',           lat: 36.221, lng: 137.93 },
+        'Minami-Matsumoto':         { ja: '南松本',     zh: '南松本',     ko: '미나미마쓰모토',           lat: 36.22, lng: 137.962 },
+        'Tazawa':                   { ja: '田沢',     zh: '田泽',     ko: '다자와',           lat: 36.267, lng: 137.903 },
+        'Akashina':                 { ja: '明科',     zh: '明科',     ko: '아카시나',           lat: 36.345, lng: 137.895 },
+        'Saijo':                    { ja: '西条',     zh: '西条',     ko: '사이조',           lat: 36.402, lng: 137.894 },
+        'Sakakita':                 { ja: '坂北',     zh: '坂北',     ko: '사카키타',           lat: 36.42, lng: 137.962 },
+        'Hijiri-Kogen':             { ja: '聖高原',     zh: '圣高原',     ko: '히지리고겐',           lat: 36.447, lng: 137.965 },
+        'Kanzasa':                  { ja: '冠着',     zh: '冠着',     ko: '간자사',           lat: 36.468, lng: 138.032 },
+        'Obasute':                  { ja: '姨捨',     zh: '姨舍',     ko: '오바스테',           lat: 36.48, lng: 138.117 },
+        'Inariyama':                { ja: '稲荷山',     zh: '稻荷山',     ko: '이나리야마',           lat: 36.51, lng: 138.135 },
+        'Kawagishi':                { ja: '川岸',     zh: '川岸',     ko: '가와기시',           lat: 36.077, lng: 138.005 },
+        'Tatsuno':                  { ja: '辰野',     zh: '辰野',     ko: '다쓰노',           lat: 35.981, lng: 137.992 },
+        'Ono':                      { ja: '小野',     zh: '小野',     ko: '오노',           lat: 35.978, lng: 137.933 }
       };
       Object.keys(LINE_STATION_FIXES).forEach(function(lid) {
         var fix = LINE_STATION_FIXES[lid];
@@ -546,6 +561,38 @@ function applyData(data, i18n) {
           if (!window.STATION_NAME_MAP['Kita-Ayase']) window.STATION_NAME_MAP['Kita-Ayase'] = { ja: '北綾瀬', en: 'Kita-Ayase' };
         }
       }
+
+  // ========== 12. ChuoTatsuno: 中央本線（辰野支線）E127系100番台担当 ==========
+  (function() {
+    var _cts = window.UNIFIED_LINES['ChuoTatsuno'];
+    if (!_cts) {
+      window.UNIFIED_LINES['ChuoTatsuno'] = {
+        name: 'ChuoTatsuno',
+        nameEn: 'Chuo Main Line (Tatsuno Branch)',
+        nameJa: '中央本線（辰野支線）',
+        code: 'CHU',
+        color: '#0073bf',
+        operator: 'JR-East',
+        region: 'Nagano Area',
+        type: 'branch',
+        branchOf: 'ChuoMain',
+        durationTotalMin: 12,
+        stations: ['Okaya', 'Kawagishi', 'Tatsuno', 'Ono', 'Shiojiri'],
+        durations: [3, 3, 3, 3],
+        throughServices: [],
+        transferStations: []
+      };
+    }
+    if (!data.stations['Kawagishi']) {
+      data.stations['Kawagishi'] = { lat: 36.0770, lng: 138.0050, nameJa: '川岸', nameEn: 'Kawagishi', nameZh: '川岸', nameKo: '가와기시' };
+    }
+    if (!data.stations['Tatsuno']) {
+      data.stations['Tatsuno'] = { lat: 35.9810, lng: 137.9920, nameJa: '辰野', nameEn: 'Tatsuno', nameZh: '辰野', nameKo: '다쓰노' };
+    }
+    if (!data.stations['Ono']) {
+      data.stations['Ono'] = { lat: 35.9780, lng: 137.9330, nameJa: '小野', nameEn: 'Ono', nameZh: '小野', nameKo: '오노' };
+    }
+  })();
 
       // 10. Line image fixes (align with actual icon library) — I2
       var LINE_IMAGE_FIXES = {

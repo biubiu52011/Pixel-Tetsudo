@@ -11,13 +11,21 @@
   var VEHICLE_DEPLOYMENTS = {
     "211Nagano": {
       routes: [
-        { line: "ChuoMain", from: "Takao", to: "Shiojiri", icon: "../images/列车/JR東日本/中央东线.png" },        // 中央東線：高尾〜塩尻（2026.3 改点后不进高尾以东）
-        { line: "Shinonoi", from: "Shiojiri", to: "Shinonoi", icon: "../images/列车/JR東日本/篠之井线.png" },     // 篠ノ井線：全线（最核心）
-        { line: "Shinetsu", from: "Shinonoi", to: "Nagano", icon: "../images/列车/JR東日本/信越本线（长野段）.png" },       // 信越本線（長野段）：早晚通勤普通
-        { line: "Oito", from: "Matsumoto", to: "Shinano-Omachi", icon: "../images/列车/JR東日本/大糸线.png" },  // 大糸線：南段（信濃大町以南）
-        { line: "ChuoWest", from: "Shiojiri", to: "Nakatsugawa", icon: "../images/列车/JR東日本/中央西线.png" },  // 中央西線：直通（线路数据待补）
+        { line: "ChuoMain", from: "Takao", to: "Shiojiri", icon: "../images/列车/JR東日本/中央东线.png", priority: 1 },        // 中央東線：高尾〜塩尻（2026.3 改点后不进高尾以东）
+        { line: "Shinonoi", from: "Shiojiri", to: "Shinonoi", icon: "../images/列车/JR東日本/篠之井线.png", priority: 2 },     // 篠ノ井線：全线（班次最密）
+        { line: "Shinetsu", from: "Shinonoi", to: "Nagano", icon: "../images/列车/JR東日本/信越本线（长野段）.png", priority: 2 },       // 信越本線（長野段）：早晚通勤普通
+        { line: "Oito", from: "Matsumoto", to: "Shinano-Omachi", icon: "../images/列车/JR東日本/大糸线.png", priority: 1 },  // 大糸線：南段（少数固定班次）
+        { line: "ChuoWest", from: "Shiojiri", to: "Nakatsugawa", icon: "../images/列车/JR東日本/中央西线.png", priority: 1 },  // 中央西線：直通（线路数据待补）
         { line: "Fujikyuko", from: "Otsuki", to: "Kawaguchiko" },   // 富士急行線：直通（线路+图标待补）
         { line: "Iida", from: "Tatsuno", to: "Iida" }               // 飯田線：直通（线路+图标待补）
+      ]
+    },
+    "E127": {
+      routes: [
+        { line: "Oito", from: "Matsumoto", to: "Minami-Koya", icon: "../images/列车/JR東日本/大糸线 (2).png", priority: 2 },   // 大糸線：全线（E127 核心，包揽大量普通，优先于 211）
+        { line: "Shinonoi", from: "Shiojiri", to: "Shinonoi", icon: "../images/列车/JR東日本/篠之井线 (2).png", priority: 1 }, // 篠ノ井線：普通运用（班次少于 211）
+        { line: "Shinetsu", from: "Shinonoi", to: "Nagano", icon: "../images/列车/JR東日本/信越本线（长野段） (2).png", priority: 1 }, // 信越本線長野段：极少数班次
+        { line: "ChuoTatsuno", from: "Okaya", to: "Shiojiri", icon: "../images/列车/JR東日本/中央本线（辰野支线）.png", priority: 1 }  // 中央本線辰野支線：区间摆渡（替代 123 系）
       ]
     }
   };
@@ -202,23 +210,25 @@
           ? "../images/列车/JR東日本/e231総武中央線.png"
           : "../images/列车/JR東日本/e235総武中央線.png";
       }
-      // Vehicle deployment zones first (211系長野色等特定车型按区间部署)
+      // Vehicle deployment zones first (211系長野色/E127等按区间部署，priority 高者优先)
       if (typeof stationIndex === "number" && window.UNIFIED_LINES && window.UNIFIED_LINES[lineId]) {
         var sts = window.UNIFIED_LINES[lineId].stations || [];
-        var deployIcon = null;
+        var bestIcon = null, bestPri = -1;
         Object.keys(VEHICLE_DEPLOYMENTS).forEach(function(vk) {
           var v = VEHICLE_DEPLOYMENTS[vk];
-          if (deployIcon) return;
           v.routes.forEach(function(r) {
-            if (r.line !== lineId || deployIcon || !r.icon) return;
+            if (r.line !== lineId || !r.icon) return;
             var fi = sts.indexOf(r.from);
             var ti = sts.indexOf(r.to);
             if (fi === -1 || ti === -1) return;
             var lo = Math.min(fi, ti), hi = Math.max(fi, ti);
-            if (stationIndex >= lo && stationIndex <= hi) deployIcon = r.icon;
+            if (stationIndex >= lo && stationIndex <= hi) {
+              var pri = r.priority || 0;
+              if (pri > bestPri) { bestPri = pri; bestIcon = r.icon; }
+            }
           });
         });
-        if (deployIcon) return deployIcon;
+        if (bestIcon) return bestIcon;
       }
       // Check specific line icon first
       if (LINE_ICONS[lineId]) return LINE_ICONS[lineId];
