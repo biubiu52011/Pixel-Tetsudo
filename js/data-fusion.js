@@ -144,7 +144,7 @@
         relatedLines: _chainCtx.relatedLines || [],
         throughServiceGroup: _chainCtx.throughServiceGroup || null
       } : null;
-      return { id: lineId, name: line.name, nameEn: line.nameEn || line.name, code: line.code, color: line.color, operator: line.operator, region: line.region, type: line.type, image: line.image, stations: line.stations || [], durations: line.durations || [], intervalTotal: line.durationTotalMin || 0, realtimePositions: odptData.realtimePositions[lineId] || [], delayInfo: delayInfo, branchOf: line.branchOf || null, _chainMeta: _chainMeta };
+      return { id: lineId, name: line.name, nameEn: line.nameEn || line.name, code: line.code, color: line.color, operator: line.operator, region: line.region, type: line.type, image: line.image, stations: line.stations || [], durations: line.durations || [], intervalTotal: line.durationTotalMin || 0, realtimePositions: odptData.realtimePositions[lineId] || [], delayInfo: delayInfo, branchOf: line.branchOf || null, isSixShapedLoop: line.isSixShapedLoop === true, loopJunction: line.loopJunction || null, _chainMeta: _chainMeta };
     } catch(e) { console.debug("[DataFusion] fuseLine error for " + lineId + ":", e.message); return null; }
   }
 
