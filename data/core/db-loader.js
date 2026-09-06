@@ -134,6 +134,79 @@ function applyData(data, i18n) {
           delete window.LINE_STATION_ORDER['Tōnami'];
         }
       }
+      
+      // 5. Add Marunouchi Line Branch (Honancho Branch)
+      if (!window.UNIFIED_LINES['MarunouchiBranch']) {
+        window.UNIFIED_LINES['MarunouchiBranch'] = {
+          name: 'MarunouchiBranch',
+          nameEn: 'Marunouchi Line Branch',
+          nameJa: '丸ノ内線（方南町支線）',
+          code: 'Mb',
+          color: '#f31630',
+          operator: 'TokyoMetro',
+          region: 'Tokyo Area',
+          type: 'branch',
+          branchOf: 'Marunouchi',
+          image: '../images/鉄道/東京メトロ/丸ノ内線.png',
+          durationTotalMin: 5,
+          stations: [
+            'Nakano-Sakaue',
+            'Nishi-Shinjuku-Gochome',
+            'Honancho'
+          ],
+          durations: [2, 2],
+          throughServices: [],
+          transferStations: []
+        };
+        
+        // Add station definitions if missing
+        if (!data.stations['Nishi-Shinjuku-Gochome']) {
+          data.stations['Nishi-Shinjuku-Gochome'] = { lat: 35.6918, lng: 139.6867 };
+        }
+        if (!data.stations['Honancho']) {
+          data.stations['Honancho'] = { lat: 35.6938, lng: 139.6817 };
+        }
+        
+        // Add station name map
+        if (window.STATION_NAME_MAP) {
+          if (!window.STATION_NAME_MAP['Nishi-Shinjuku-Gochome']) {
+            window.STATION_NAME_MAP['Nishi-Shinjuku-Gochome'] = { ja: '西新宿五丁目', en: 'Nishi-Shinjuku-gochome' };
+          }
+          if (!window.STATION_NAME_MAP['Honancho']) {
+            window.STATION_NAME_MAP['Honancho'] = { ja: '方南町', en: 'Honancho' };
+          }
+          if (window.EN_STATION_NAME_MAP) {
+            window.EN_STATION_NAME_MAP['Nishi-Shinjuku-gochome'] = '西新宿五丁目';
+            window.EN_STATION_NAME_MAP['Honancho'] = '方南町';
+          }
+        }
+        
+        // Add STATION_LINES references
+        if (window.STATION_LINES) {
+          var branchStations = ['Nakano-Sakaue', 'Nishi-Shinjuku-Gochome', 'Honancho'];
+          branchStations.forEach(function(sid, order) {
+            if (!window.STATION_LINES[sid]) {
+              window.STATION_LINES[sid] = [];
+            }
+            // Check if already added
+            var alreadyExists = window.STATION_LINES[sid].some(function(sl) {
+              return sl.line_id === 'MarunouchiBranch';
+            });
+            if (!alreadyExists) {
+              window.STATION_LINES[sid].push({ line_id: 'MarunouchiBranch', station_order: order });
+            }
+          });
+        }
+        
+        // Add LINE_STATION_ORDER
+        if (window.LINE_STATION_ORDER) {
+          window.LINE_STATION_ORDER['MarunouchiBranch'] = {};
+          var branchStations = ['Nakano-Sakaue', 'Nishi-Shinjuku-Gochome', 'Honancho'];
+          branchStations.forEach(function(sid, order) {
+            window.LINE_STATION_ORDER['MarunouchiBranch'][sid] = order;
+          });
+        }
+      }
     })();
     
     Object.keys(window.UNIFIED_LINES).forEach(function(lid) {
