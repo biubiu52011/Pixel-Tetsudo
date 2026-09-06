@@ -119,7 +119,7 @@
     "Keisei": "../images/列车/京成電鉄/京成.png",
     "Sotetsu": "../images/列车/相模鉄道/相鉄.png",
     "TWR": "../images/列车/東京臨海高速鉄道/りんかい線.png",
-    "MIR": "../images/列车/横浜市交通局/横浜市ブルーライン.png",
+    "MIR": "../images/鉄道/横浜高速鉄道/みなとみらい線.png", // 修正：MIR=みなとみらい線（原误用TX/ブルーライン）
     "Rinkai": "../images/列车/東京臨海高速鉄道/りんかい線.png",
     "TsukubaExpress": "../images/列车/首都圏新都市鉄道/つくばエクスプレス.png",
     "Yurikamome": "../images/列车/ゆりかもめ/ゆりかもめ.png",
@@ -152,7 +152,7 @@
     "Takasaki": "../images/列车/JR東日本/E231系近郊型.png",
     "Joban": "../images/列车/JR東日本/E531系.png",
     "JobanRapid": "../images/列车/JR東日本/E531系.png",
-    "JobanLocal": "../images/列车/東京メトロ/千代田線.png",
+    "JobanLocal": "../images/列车/東京メトロ/18000系.png", // 常磐各停：千代田線车辆直通担当
     "Mito": "../images/列车/JR東日本/E531系.png",
     "Musashino": "../images/列车/JR東日本/武蔵野線.png",
     "Nambu": "../images/列车/JR東日本/E233系8000番台.png",
@@ -161,18 +161,21 @@
     "Ome": "../images/列车/JR東日本/E233系青梅線.png",
     "Itsukaichi": "../images/列车/JR東日本/E233系0番台.png",
     "ShonanShinjuku": "../images/列车/JR東日本/E231系近郊型.png",
-    "TohokuMain": "../images/列车/JR東日本/E231系近郊型.png",
+    "TohokuMain": "../images/列车/JR東日本/東北線.png",
+    "Yamagata": "../images/列车/JR東日本/山形線.png",
+    "Uetsu": "../images/列车/JR東日本/羽越線.png",
     "OuMain": "../images/列车/JR東日本/E231系近郊型.png",
     "Ryomo": "../images/列车/JR東日本/211系湘南色.png",
     "Agatsuma": "../images/列车/JR東日本/211系湘南色.png",
-    "BanetsuWest": "../images/列车/東武鉄道/東武各線.png",
-    "Keiyo": "../images/列车/JR東日本/E233系2000番台.png",
+    "BanetsuWest": "../images/列车/JR東日本/E721系.png", // 修正：磐越西線（郡山〜喜多方）为JR路线，主力E721系（原误用東武各線）
+    "Keiyo": "../images/列车/JR東日本/E233系5000番台.png", // 京葉線：E233系5000番台（原2000番台为常磐緩行線车辆，误指）
     "Karasuyama": "../images/列车/JR東日本/烏山線.png",
-    "Kururi": "../images/列车/JR東日本/久留里線.png",
+    "Kururi": "../images/列车/JR東日本/E131系200番台.png", // 久留里線：E131系200番台（现役主力）
     "Sagami": "../images/列车/JR東日本/相模線.png",
-    "Sotobo": "../images/列车/JR東日本/内房線.png",
+    "Senseki": "../images/列车/JR東日本/仙石線.png",
+    "Sotobo": "../images/列车/JR東日本/外房線.png",   // 修正：外房線（此前误指内房線）
     "Suigun": "../images/列车/JR東日本/水郡線.png",
-    "Uchibo": "../images/列车/JR東日本/外房線.png",
+    "Uchibo": "../images/列车/JR東日本/内房線.png",   // 修正：内房線（此前误指外房線）
     "Hachiko": "../images/列车/JR東日本/八高線.png",
     "Noda": "../images/列车/東武鉄道/野田線.png",
     
@@ -181,7 +184,7 @@
     "Marunouchi": "../images/列车/東京メトロ/丸ノ内線.png",
     "Hibiya": "../images/列车/東京メトロ/日比谷線.png",
     "Tozai": "../images/列车/東京メトロ/東西線.png",
-    "Chiyoda": "../images/列车/東京メトロ/千代田線.png",
+    "Chiyoda": "../images/列车/東京メトロ/18000系.png",
     "Yurakucho": "../images/列车/東京メトロ/有楽町線.png",
     "Hanzomon": "../images/列车/東京メトロ/半蔵門線.png",
     "Namboku": "../images/列车/東京メトロ/南北線.png",
@@ -227,6 +230,7 @@
     
     // Keio specific
     "Keio": "../images/列车/京王電鉄/京王.png",
+    "KeioMain": "../images/列车/京王電鉄/2000系.png", // 京王線：新型2000系（2026-01-31 デビュー）
     "KeioLine": "../images/列车/京王電鉄/京王.png",
     "KeioInokashira": "../images/列车/京王電鉄/京王.png",
     "Inokashira": "../images/列车/京王電鉄/京王.png",
@@ -271,7 +275,7 @@
     // Single-line operators
     "TWR": "../images/列车/東京臨海高速鉄道/りんかい線.png",
     "Rinkai": "../images/列车/東京臨海高速鉄道/りんかい線.png",
-    "MIR": "../images/列车/首都圏新都市鉄道/つくばエクスプレス.png",
+    "MIR": "../images/鉄道/横浜高速鉄道/みなとみらい線.png", // 修正：MIR=みなとみらい線（原误指つくばエクスプレス）
     "TsukubaExpress": "../images/列车/首都圏新都市鉄道/つくばエクスプレス.png",
     "Yurikamome": "../images/列车/ゆりかもめ/ゆりかもめ.png",
     "TamaMonorail": "../images/列车/多摩都市モノレール/多摩モノレール.png",
