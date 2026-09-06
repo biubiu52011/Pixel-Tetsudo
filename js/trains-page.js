@@ -199,12 +199,35 @@
           var _px, _py;
           if (_isLoop && _loopPts.length > _idx) { _px = _loopPts[_idx].x; _py = _loopPts[_idx].y; }
           else { _px = _mainCx; _py = _topP + _idx * _sp; }
-          // Offset multiple trains at same station horizontally
+          // Offset multiple trains at same station based on direction and count
           var _trainIdxAt = _stationIdx[_idx] || 0;
           _stationIdx[_idx] = _trainIdxAt + 1;
           var _totalAt = _stationCount[_idx] || 1;
-          var _offX = (_trainIdxAt - (_totalAt - 1) / 2) * 16;
+          var _direction = _p.railDirection || '';
+          var _offX = 0, _offY = 0;
+          
+          if (_isLoop) {
+            // For loop lines: offset by direction (InnerLoop up, OuterLoop down)
+            if (_direction.indexOf('Inner') >= 0) {
+              _offY = -8;
+            } else if (_direction.indexOf('Outer') >= 0) {
+              _offY = 8;
+            }
+            // Also offset horizontally for multiple trains in same direction
+            _offX = (_trainIdxAt - (_totalAt - 1) / 2) * 20;
+          } else {
+            // For non-loop lines: offset by direction (Inbound left, Outbound right)
+            if (_direction.indexOf('Inbound') >= 0 || _direction.indexOf('Inner') >= 0) {
+              _offX = -10;
+            } else if (_direction.indexOf('Outbound') >= 0 || _direction.indexOf('Outer') >= 0) {
+              _offX = 10;
+            }
+            // Additional horizontal offset for multiple trains
+            _offX += (_trainIdxAt - (_totalAt - 1) / 2) * 18;
+          }
+          
           _px += _offX;
+          _py += _offY;
           var _trainUid = (_p.trainId || ("train_" + _pi)) + "_" + (_p.stationIndex || 0);
           _updatedIds[_trainUid] = true;
           var _existingIcon = existingSvg.querySelector('[data-train-id="' + String(_trainUid).replace(/"/g, '') + '"]');
