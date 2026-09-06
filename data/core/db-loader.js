@@ -207,6 +207,135 @@ function applyData(data, i18n) {
           });
         }
       }
+      
+      // 6. Add Tsurumi Line Branches (Umi-Shibaura Branch & Okawa Branch)
+      // Umi-Shibaura Branch: Anzen -> Umi-Shibaura
+      if (!window.UNIFIED_LINES['TsurumiUmiShibaura']) {
+        window.UNIFIED_LINES['TsurumiUmiShibaura'] = {
+          name: 'TsurumiUmiShibaura',
+          nameEn: 'Tsurumi Line Umi-Shibaura Branch',
+          nameJa: '鶴見線（海芝浦支線）',
+          code: 'JI-U',
+          color: '#ffd400',
+          operator: 'JR-East',
+          region: 'Tokyo Area',
+          type: 'branch',
+          branchOf: 'Tsurumi',
+          image: '../images/鉄道/JR東日本/鶴見線.png',
+          durationTotalMin: 3,
+          stations: [
+            'Anzen',
+            'Umi-Shibaura'
+          ],
+          durations: [2],
+          throughServices: [],
+          transferStations: []
+        };
+        
+        // Add station definition if missing
+        if (!data.stations['Umi-Shibaura']) {
+          data.stations['Umi-Shibaura'] = { lat: 35.4833, lng: 139.7833 };
+        }
+        
+        // Add station name map
+        if (window.STATION_NAME_MAP) {
+          if (!window.STATION_NAME_MAP['Umi-Shibaura']) {
+            window.STATION_NAME_MAP['Umi-Shibaura'] = { ja: '海芝浦', en: 'Umi-Shibaura' };
+          }
+          if (window.EN_STATION_NAME_MAP) {
+            window.EN_STATION_NAME_MAP['Umi-Shibaura'] = '海芝浦';
+          }
+        }
+        
+        // Add STATION_LINES references
+        if (window.STATION_LINES) {
+          var branchStations = ['Anzen', 'Umi-Shibaura'];
+          branchStations.forEach(function(sid, order) {
+            if (!window.STATION_LINES[sid]) {
+              window.STATION_LINES[sid] = [];
+            }
+            var alreadyExists = window.STATION_LINES[sid].some(function(sl) {
+              return sl.line_id === 'TsurumiUmiShibaura';
+            });
+            if (!alreadyExists) {
+              window.STATION_LINES[sid].push({ line_id: 'TsurumiUmiShibaura', station_order: order });
+            }
+          });
+        }
+        
+        // Add LINE_STATION_ORDER
+        if (window.LINE_STATION_ORDER) {
+          window.LINE_STATION_ORDER['TsurumiUmiShibaura'] = {};
+          var branchStations = ['Anzen', 'Umi-Shibaura'];
+          branchStations.forEach(function(sid, order) {
+            window.LINE_STATION_ORDER['TsurumiUmiShibaura'][sid] = order;
+          });
+        }
+      }
+      
+      // Okawa Branch: Asano -> Okawa
+      if (!window.UNIFIED_LINES['TsurumiOkawa']) {
+        window.UNIFIED_LINES['TsurumiOkawa'] = {
+          name: 'TsurumiOkawa',
+          nameEn: 'Tsurumi Line Okawa Branch',
+          nameJa: '鶴見線（大川支線）',
+          code: 'JI-O',
+          color: '#ffd400',
+          operator: 'JR-East',
+          region: 'Tokyo Area',
+          type: 'branch',
+          branchOf: 'Tsurumi',
+          image: '../images/鉄道/JR東日本/鶴見線.png',
+          durationTotalMin: 3,
+          stations: [
+            'Asano',
+            'Okawa'
+          ],
+          durations: [2],
+          throughServices: [],
+          transferStations: []
+        };
+        
+        // Add station definition if missing
+        if (!data.stations['Okawa']) {
+          data.stations['Okawa'] = { lat: 35.4917, lng: 139.7917 };
+        }
+        
+        // Add station name map
+        if (window.STATION_NAME_MAP) {
+          if (!window.STATION_NAME_MAP['Okawa']) {
+            window.STATION_NAME_MAP['Okawa'] = { ja: '大川', en: 'Okawa' };
+          }
+          if (window.EN_STATION_NAME_MAP) {
+            window.EN_STATION_NAME_MAP['Okawa'] = '大川';
+          }
+        }
+        
+        // Add STATION_LINES references
+        if (window.STATION_LINES) {
+          var branchStations = ['Asano', 'Okawa'];
+          branchStations.forEach(function(sid, order) {
+            if (!window.STATION_LINES[sid]) {
+              window.STATION_LINES[sid] = [];
+            }
+            var alreadyExists = window.STATION_LINES[sid].some(function(sl) {
+              return sl.line_id === 'TsurumiOkawa';
+            });
+            if (!alreadyExists) {
+              window.STATION_LINES[sid].push({ line_id: 'TsurumiOkawa', station_order: order });
+            }
+          });
+        }
+        
+        // Add LINE_STATION_ORDER
+        if (window.LINE_STATION_ORDER) {
+          window.LINE_STATION_ORDER['TsurumiOkawa'] = {};
+          var branchStations = ['Asano', 'Okawa'];
+          branchStations.forEach(function(sid, order) {
+            window.LINE_STATION_ORDER['TsurumiOkawa'][sid] = order;
+          });
+        }
+      }
     })();
     
     Object.keys(window.UNIFIED_LINES).forEach(function(lid) {
