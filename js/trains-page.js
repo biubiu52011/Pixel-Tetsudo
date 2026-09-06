@@ -331,7 +331,7 @@
         var hikarigaokaIdx = stations.indexOf("Hikarigaoka");
         if (hikarigaokaIdx === -1) hikarigaokaIdx = Math.floor(stations.length / 3);
         // L-shaped tail layout: junction at top-left corner of loop
-        var junctionX = 60;
+        var junctionX = 80;
         var junctionY = 60;
         // Loop dimensions
         var loopStations = [stations[0]].concat(stations.slice(hikarigaokaIdx + 1));
@@ -367,7 +367,7 @@
         var sp6 = 26;
         
         // === Define junction (Tochomae) as top-left corner of the loop ===
-        var junctionX = 60;
+        var junctionX = 80;
         var junctionY = 60;
         
         // === Tochomae direction: CLOSED LOOP ===
