@@ -735,7 +735,7 @@
       if (listEl) listEl.classList.remove("hidden");
       if (filterBarEl) filterBarEl.classList.remove("hidden");
       if (detailEl) detailEl.classList.add("hidden");
-      renderList(listEl);
+      renderFiltered(listEl);
     } catch(e) {}
   }
 
