@@ -11,14 +11,46 @@
     'use strict';
 
     // ========== API Keys（安全：不硬编码，从 localStorage 读取） ==========
-    // 设置方式：localStorage.setItem('odpt_challenge_key', '<你的Challenge Key>')
-    //           localStorage.setItem('odpt_center_key', '<你的Center Key>')
+    // 存储方式一（推荐）：localStorage.setItem('odpt_full_urls', '完整API链接，每行一个')
+    //   链接格式示例：https://api.odpt.org/api/v4/odpt:Railway?acl:consumerKey=xxxxx
+    //   代码会自动从链接中解析出对应域名的 key，无需分开配置
+    // 存储方式二（旧版兼容）：localStorage.setItem('odpt_challenge_key', '<Challenge Key>')
+    //                       localStorage.setItem('odpt_center_key', '<Center Key>')
     // 或调用 window.ODPTClient.setApiKey(base, key) 后刷新页面
-    var KEY_STORE = { challenge: 'odpt_challenge_key', center: 'odpt_center_key' };
+    var KEY_STORE = { challenge: 'odpt_challenge_key', center: 'odpt_center_key', full: 'odpt_full_urls' };
     function _keyName(base) {
         return base.indexOf('api-challenge') >= 0 ? KEY_STORE.challenge : KEY_STORE.center;
     }
+    // 从完整链接列表中解析指定域名的 key
+    // 链接可能包含 &amp; 转义（docx/网页复制），先做实体解码再匹配
+    function _decodeEntities(s) {
+        try {
+            var ta = document.createElement('textarea');
+            ta.innerHTML = s;
+            return ta.value;
+        } catch (e) { return s; }
+    }
+    function _keyFromFullUrls(base) {
+        try {
+            var urls = localStorage.getItem(KEY_STORE.full);
+            if (!urls) return null;
+            var baseHost = base.indexOf('api-challenge') >= 0 ? 'api-challenge.odpt.org' : 'api.odpt.org';
+            var lines = urls.split(/\r?\n/);
+            for (var i = 0; i < lines.length; i++) {
+                var line = _decodeEntities(lines[i].trim());
+                if (!line) continue;
+                if (line.indexOf(baseHost) < 0) continue;
+                var m = line.match(/acl:consumerKey=([^&\s"'<>]+)/);
+                if (m && m[1]) return m[1];
+            }
+        } catch (e) {}
+        return null;
+    }
     function getApiKey(base) {
+        // 优先从完整链接解析
+        var fullKey = _keyFromFullUrls(base);
+        if (fullKey) return fullKey;
+        // 回退旧版分开存储的 key
         try {
             var k = localStorage.getItem(_keyName(base));
             if (k) return k;
@@ -33,8 +65,28 @@
             return true;
         } catch (e) { return false; }
     }
+    // 保存完整链接列表（每行一个），同时清理旧版分开存储的 key
+    function saveFullUrls(urls) {
+        try {
+            if (urls && urls.trim()) {
+                localStorage.setItem(KEY_STORE.full, urls.trim());
+                // 迁移完成，清理旧key避免混淆
+                localStorage.removeItem(KEY_STORE.challenge);
+                localStorage.removeItem(KEY_STORE.center);
+            } else {
+                localStorage.removeItem(KEY_STORE.full);
+            }
+            return true;
+        } catch (e) { return false; }
+    }
     function keysConfigured() {
-        return !!(getApiKey('https://api-challenge.odpt.org/api/v4/') && getApiKey('https://api.odpt.org/api/v4/'));
+        // 有完整链接（任一行）即视为已配置
+        try {
+            var urls = localStorage.getItem(KEY_STORE.full);
+            if (urls && urls.trim()) return true;
+        } catch (e) {}
+        // 回退：旧版两个 key 都存在
+        return !!(localStorage.getItem(KEY_STORE.challenge) && localStorage.getItem(KEY_STORE.center));
     }
 
     // ========== 完整 API URL（按运营商和类型区分） ==========
@@ -491,16 +543,17 @@
             var bar = document.createElement('div');
             bar.id = 'odpt-key-prompt';
             bar.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:99999;background:#fff7e6;color:#613400;border-bottom:1px solid #ffd591;padding:10px 14px;font:13px/1.5 sans-serif;display:flex;align-items:center;gap:10px;flex-wrap:wrap;';
-            bar.innerHTML = '<span>⚠ ODPT API キー未設定 — リアルタイムデータを取得するにはキー設定が必要です。</span>' +
+            bar.innerHTML = '<span>⚠ ODPT API キー未設定 — リアルタイムデータを取得するにはAPIリンクの設定が必要です。</span>' +
                 '<button id="odpt-key-open" style="background:#fa8c16;color:#fff;border:none;border-radius:4px;padding:5px 12px;cursor:pointer;font-size:12px;">設定</button>';
             var cfg = document.createElement('div');
             cfg.id = 'odpt-key-config';
             cfg.style.cssText = 'display:none;width:100%;padding:8px 0;';
             cfg.innerHTML =
-                '<div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;">' +
-                '<label style="font-size:12px;">Challenge Key<input id="odpt-key-challenge" type="text" style="margin-left:4px;padding:4px;width:220px;border:1px solid #d9d9d9;border-radius:4px;font-size:12px;"></label>' +
-                '<label style="font-size:12px;">Center Key<input id="odpt-key-center" type="text" style="margin-left:4px;padding:4px;width:220px;border:1px solid #d9d9d9;border-radius:4px;font-size:12px;"></label>' +
+                '<div style="display:flex;gap:6px;align-items:flex-start;flex-wrap:wrap;">' +
+                '<label style="font-size:12px;flex:1 1 100%;">APIリンクを貼り付けてください（1行に1つ、odpt.orgの全リンク可）' +
+                '<textarea id="odpt-key-urls" rows="4" style="margin-top:4px;width:100%;padding:6px;border:1px solid #d9d9d9;border-radius:4px;font:12px/1.4 monospace;box-sizing:border-box;resize:vertical;" placeholder="https://api.odpt.org/api/v4/odpt:Railway?acl:consumerKey=xxxxx&#10;https://api-challenge.odpt.org/api/v4/odpt:Train?acl:consumerKey=xxxxx"></textarea></label>' +
                 '<button id="odpt-key-save" style="background:#1890ff;color:#fff;border:none;border-radius:4px;padding:5px 12px;cursor:pointer;font-size:12px;">保存して再読み込み</button>' +
+                '<button id="odpt-key-clear" style="background:#fff;color:#999;border:1px solid #d9d9d9;border-radius:4px;padding:5px 12px;cursor:pointer;font-size:12px;">クリア</button>' +
                 '</div>';
             bar.appendChild(cfg);
             document.body.appendChild(bar);
@@ -508,11 +561,16 @@
                 cfg.style.display = cfg.style.display === 'none' ? 'block' : 'none';
             });
             bar.querySelector('#odpt-key-save').addEventListener('click', function() {
-                var ch = bar.querySelector('#odpt-key-challenge').value.trim();
-                var ce = bar.querySelector('#odpt-key-center').value.trim();
-                if (ch) setApiKey('https://api-challenge.odpt.org/api/v4/', ch);
-                if (ce) setApiKey('https://api.odpt.org/api/v4/', ce);
-                if (ch || ce) location.reload();
+                var v = bar.querySelector('#odpt-key-urls').value.trim();
+                if (v && saveFullUrls(v)) location.reload();
+            });
+            bar.querySelector('#odpt-key-clear').addEventListener('click', function() {
+                try {
+                    localStorage.removeItem(KEY_STORE.full);
+                    localStorage.removeItem(KEY_STORE.challenge);
+                    localStorage.removeItem(KEY_STORE.center);
+                } catch (e) {}
+                location.reload();
             });
         } catch (e) {}
     }
@@ -529,6 +587,7 @@
         LINE_RAILWAY_CODE: LINE_RAILWAY_CODE,
         getApiKey: getApiKey,
         setApiKey: setApiKey,
+        saveFullUrls: saveFullUrls,
         keysConfigured: keysConfigured,
         ensureKeyPrompt: ensureKeyPrompt,
 
