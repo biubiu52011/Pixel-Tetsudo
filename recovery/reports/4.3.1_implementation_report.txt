@@ -1,0 +1,58 @@
+# 4.3.1 IMPLEMENTATION REPORT
+
+Feature: Route Search Core Experience
+Main-heart:我怎么从 A 到 B？
+Decision: EXTEND
+
+---
+
+## Modified Files
+1. js/search-ui.js (line 248) — P0 bug fix
+2. data/core/translations.js (+4 lines) — P2 translation completion
+
+## Consumer Preservation: PASS
+- Home Route Search: renderResults() called internally, fixed
+- History: monkey-patch on performSearch(fromInput/toInput) unaffected
+- Realtime/Trains/Tourism: no consumption of renderResults(), unchanged
+
+## A-for-B Degradation: PASS
+- Modified module: SearchUI.renderResults()
+- Other modules: No interface change, no dependency breakage
+- History still gets search results via performSearch patch (100ms timeout)
+
+## Orphan Scan: PASS
+- New functions: 0
+- New CSS classes: 0
+- New HTML IDs: 0
+- New Providers: 0
+- New resolvers: 0
+
+## Duplicate Scan: PASS
+- renderResults(): 1 implementation (search-ui.js:212)
+- journey-* classes: only in style.css (existing)
+- transfer_count: now defined in all 4 languages
+
+## Display Identity: PASS
+- All line names: RailwayDB.resolveLineName()
+- All station names: RailwayDB.resolveStationName()
+- No new display resolver introduced
+
+## Canonical Data: 156/509/1703/93 — UNCHANGED
+
+## Cross-Module Impact
+- Home: FIX (border-left-color now works, transfer_count translates)
+- History: NO CHANGE
+- Realtime: NO CHANGE
+- Trains: NO CHANGE
+- Tourism: NO CHANGE
+
+## Bug Fixed
+search-ui.js:248 — Journey Card segment div class construction was broken:
+  Before: html += '<div class="journey-seg"+ (lineColor ? ...  (string literal + operator, invalid HTML)
+  After:  html += '<div class="journey-seg' + (lineColor ? ... (correct concatenation)
+
+## Translation Added
+search_result.transfer_count → transfer(s) / 换乘次数 / 乗換回数 / 환승 횟수
+Previously showed raw key \"search_result.transfer_count\" in UI when transfers > 0.
+
+## Final Verdict: PASS

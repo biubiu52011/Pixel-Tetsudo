@@ -1,0 +1,320 @@
+# 4.2.12 — Global Product & Capability Integrity Sweep
+
+## Status
+- Type: READ-ONLY audit
+- Code changes: NONE
+- Canonical data: UNTOUCHED
+- Generated: 2026-09-01
+
+---
+
+## A. Six-Page Main-Heart Verification
+
+| Page | Expected Main Heart | Actual | Verdict |
+|------|-------------------|--------|---------|
+| Home | Route Search | Route search is primary CTA | OK |
+| Route Search | Find a route | performSearch + results | OK |
+| Realtime | Check if line is runnable | renderCard + STATUS_META | OK |
+| Trains | Understand a line | renderList + DataState | OK |
+| History | See past searches | renderHistory + getHistory | OK |
+| Tourism | Explore destination | init + getNameMap | OK |
+
+All six pages maintain their own main heart. No page has been hijacked by another module.
+
+---
+
+## B. User Task Chain Verification
+
+| Task | Step | Result |
+|------|------|--------|
+| Home -> Route Search | searchContainer present | PASS |
+| Route Search -> Results | performSearch + fromInput/toInput | PASS |
+| Route -> Realtime nav | link/nav exists | PASS |
+| Realtime -> Status Display | renderCard/STATUS_META | PASS |
+| Trains -> Line Info | renderList/DataState | PASS |
+| History -> Past Searches | renderHistory/getHistory | PASS |
+| Tourism -> Destination Explore | init/getNameMap | PASS |
+
+User task chain is intact. No broken links.
+
+---
+
+## C. Module Boundary Verification
+
+### Cross-module leaks
+| Source -> Target | Pattern | Risk |
+|----------------|---------|------|
+| history.js -> SearchUI | monkey-patch performSearch | MEDIUM |
+| history.js -> SearchUI | access fromInput/toInput | MEDIUM |
+| history.js -> SearchUI | dispatchEvent on inputs | MEDIUM |
+| (none others found) | | |
+
+Only history.js has cross-module coupling, and it is the same P2 issue identified in 4.2.11.
+No other module breaches another module boundary.
+
+---
+
+## D. Capability Integrity Verification
+
+| Capability | Provider | Consumers | Status |
+|-----------|----------|-----------|--------|
+| resolveLineName | RailwayDB | 7 modules | OK |
+| resolveStationName | RailwayDB | 6 modules | OK |
+| tOp | lang-init.js | 3 modules | OK |
+| renderList | DataState | realtime-view, trains-page | OK |
+| renderCard | DataState | realtime-view | OK |
+| performSearch | SearchUI | history.js (monkey-patch) | WARN |
+| getCachedPositions | DataLayer | trains-page | OK |
+| getDisplayOrder | LinePresentationService | data-fusion, data-state, realtime-view | OK |
+
+---
+
+---
+
+## E. Old/New Code Relationship Verification
+
+### Name resolution patterns
+| File | Line | Pattern | User-visible? | Verdict |
+|------|------|---------|--------------|---------|
+| trains-page.js:73 | nameEn: l.nameEn || l.name || ids[i] | NO - internal fused-line object builder | ACCEPTABLE |
+| trains-page.js:83 | nameJa: l.nameJa || l.name || ids[i] | NO - internal fused-line object builder | ACCEPTABLE |
+| route-search.js:219 | lines.push(line.name) | NO - internal adjacency cache | ACCEPTABLE |
+
+All three are INTERNAL data structure builders, not user-visible output. They serve the fused-line object used by DataLayer/DataFusion.
+
+### Compat/legacy code paths
+| File | Line | Pattern | Purpose | Verdict |
+|------|------|---------|---------|---------|
+| realtime-view.js:186 | UNIFIED_LINES compat fallback | Multi-layer fallback chain | INTENTIONAL |
+| trains-detail.js:29,34 | RailwayDB/DataLayer-first fallback | Graceful degradation | INTENTIONAL |
+| trains-page.js:102 | UNIFIED_LINES cachedPositions compat | Runtime cache fallback | INTENTIONAL |
+| trains-page.js:270 | UNIFIED_LINES merge compat | Position persistence | INTENTIONAL |
+| tourism-proximity.js:142 | backward compatibility constants | API surface | ACCEPTABLE |
+
+All compat paths are INTENTIONAL multi-layer fallbacks. None are abandoned legacy code.
+They exist because the three-layer architecture (UNIFIED_LINES -> DataLayer -> RailwayDB)
+requires graceful degradation at each level.
+
+---
+
+## F. Function Orphan Verification
+
+Utility functions defined in multiple modules (expected, not orphan):
+- escapeHtml: data-state.js, history.js, tourism-detail.js (self-contained utility)
+- formatDistance: tourism-detail.js, tourism-proximity.js (same domain)
+- t(): data-state.js, sightseeing.js, tourism-detail.js, translations.js (local alias)
+- init(): 7 modules (each has own initialization)
+
+No truly orphan functions found. All function definitions serve active consumers.
+
+---
+
+## G. Data Access Boundary Verification
+
+Direct railway_data.json readers:
+- data/core/db-loader.js: ONLY file that reads the canonical JSON
+
+Pages with direct data access:
+- pages/home.html: OK (no direct access)
+- pages/realtime.html: OK (no direct access)
+- pages/trains.html: OK (no direct access)
+- pages/history.html: OK (no direct access)
+
+DataFusion integration:
+- Uses RailwayDB: YES
+- Uses DataLayer: YES
+- Uses UNIFIED_LINES: YES
+- Status: Proper three-layer integration
+
+---
+
+## H. Display Identity Deep Verification
+
+RailwayDB provider methods:
+- resolveLineName: OK (present in db-loader.js)
+- resolveStationName: OK (present in db-loader.js)
+- getStationName: OK (present in db-loader.js)
+- getNameMap: OK (present in db-loader.js)
+
+Consumer verification (all use RailwayDB methods):
+- search-ui.js: resolveLineName, resolveStationName - OK
+- realtime-view.js: resolveLineName, tOp - OK
+- trains-page.js: resolveLineName, resolveStationName - OK
+- trains-detail.js: resolveLineName, tOp - OK
+- history.js: resolveStationName - OK
+- data-state.js: resolveLineName, resolveStationName, tOp - OK
+- route-search.js: resolveStationName - OK
+
+No raw ID leaks in user-visible output paths.
+
+---
+
+---
+
+## I. AI Misleading Entry Verification
+
+### data/铁道/ files (HIGH/MEDIUM risk)
+| File | Risk | Different from js/? | Runtime loaded? |
+|------|------|--------------------|-----------------|
+| search-ui.js | HIGH | 36% | NO |
+| realtime-view.js | HIGH | 11% | NO |
+| station-resolver.js | HIGH | 14% | NO |
+| translations.js | HIGH | 10% | NO |
+| train-timetable.js | HIGH | N/A (no js/ counterpart) | NO |
+| trains-render.js | HIGH | N/A (js/ deleted in 4.2.7) | NO |
+| line-operation-systems.js | HIGH | N/A (duplicate of data/core/) | NO |
+| history.js | MEDIUM | 5% | NO |
+| route-search.js | MEDIUM | 1% | NO |
+| trains-detail.js | MEDIUM | 3% | NO |
+| trains-page.js | MEDIUM | ~0% | NO |
+| common.js | LOW | SAME | NO |
+| sightseeing.js | LOW | SAME | NO |
+| home.html | LOW | N/A | NO |
+
+### data/core/ files
+| File | Risk | Different from js/? | Notes |
+|------|------|--------------------|-------|
+| db-loader.js | LOW | N/A (no js/ counterpart) | Canonical provider, intentionally here |
+| line-operation-systems.js | LOW | N/A (no js/ counterpart) | Canonical data, intentionally here |
+| sightseeing.js | LOW | SAME | Byte-identical duplicate |
+| translations.js | MEDIUM | 11% | Outdated, missing 66 keys |
+
+Total AI traps: 7 HIGH, 5 MEDIUM, 3 LOW
+
+---
+
+## J. Cross-Module Side Effect Verification
+
+Direct window property writes (beyond normal API):
+- history.js: window.SearchUI.performSearch = ... (monkey-patch, documented in P2)
+- history.js: window.location.href (navigation, normal)
+
+DOM cross-references between modules:
+- No cross-module querySelector references found
+
+Timers that could cause stale state:
+- history.js: setTimeout (100ms) in monkey-patch wrapper - acceptable, bounded
+
+---
+
+## K. Issues That NEED Fixing
+
+### K-01: History <-> SearchUI coupling (P2)
+- **What**: history.js monkey-patches SearchUI.performSearch and accesses fromInput/toInput
+- **Impact**: If SearchUI refactors its internal structure, history breaks silently
+- **Fix direction**: SearchUI exposes public API (getInputs/setInputs/onSearchComplete)
+- **Priority**: P2 - should fix in dedicated task, not rush
+- **Decision**: DEFER to 4.2.13 or 4.3
+
+### K-02: data/铁道/ AI trap documentation (P3)
+- **What**: 7 HIGH-risk files in data/铁道/ can mislead future AI
+- **Impact**: Future AI may edit wrong version, creating divergence
+- **Fix direction**: Add ARCHIVE notice in architecture.md + directory README
+- **Priority**: P3 - document only, no code change
+- **Decision**: DOCUMENT ONLY
+
+---
+
+## L. Issues That Should NOT Be Fixed
+
+| Issue | Why NOT fix |
+|-------|-------------|
+| trains-page.js:73,83 nameEn/nameJa fallbacks | Internal fused-line object builder, not user-visible |
+| route-search.js:219 line.name in cache | Internal name-to-ID cache, not displayed |
+| realtime-view.js:186 UNIFIED_LINES compat | Intentional multi-layer fallback in three-tier architecture |
+| trains-detail.js:29,34 compat fallback | Graceful degradation when RailwayDB unavailable |
+| trains-page.js:102,270 UNIFIED_LINES compat | Runtime cache persistence, intentional design |
+| data/core/translations.js outdated | Not loaded at runtime, harmless stale file |
+| 5 CSS orphan classes | Low risk, may be inherited from parent styles |
+| 2 console.log in odpt-unified.js | Development debug output, no runtime impact |
+| data/铁道/ directory deletion | Historical value, requires deliberate archive decision |
+| sightseeing.js triple duplicate | Byte-identical, deletion is cleanup not fix |
+
+---
+
+## M. Issues That Can Be Permanently Deferred
+
+| Issue | Reason for permanent deferral |
+|-------|------------------------------|
+| 13 image path fixes | Asset mapping issue, no product impact, deferred to 4.2.13 |
+| data/铁道/ cleanup | Repository governance, not product feature |
+| data/core/sightseeing.js duplicate | Repository cleanliness, zero runtime impact |
+| CSS orphan classes | Visual inheritance likely covers them |
+| console.log cleanup | P3 noise, no user impact |
+
+---
+
+## N. DO NOT FIX LIST
+
+This is the most important section of this audit.
+Knowing what NOT to touch is more valuable than knowing what to fix.
+
+### DO NOT FIX — Legal architectural boundaries
+1. Three-layer data architecture (UNIFIED_LINES / DataLayer / RailwayDB)
+   Reason: Intentional separation of raw data, runtime cache, and display identity
+2. DataLayer.getLine delegating to RailwayDB.getLine
+   Reason: Proper layering — DataLayer adds runtime capabilities on top of RailwayDB
+3. Multiple escapeHtml/t/init definitions across modules
+   Reason: Self-contained module utilities, no cross-module dependency
+4. tOp local wrappers in data-state.js and realtime-view.js
+   Reason: Thin delegators, not duplicate implementations
+
+### DO NOT FIX — Intentional compat fallbacks
+5. UNIFIED_LINES fallback in data-fusion.js, route-search.js, trains-page.js
+   Reason: Graceful degradation when DataLayer/RailwayDB unavailable
+6. RailwayDB null-checks in all consumers
+   Reason: Sandbox/test environment support
+
+### DO NOT FIX — Historical artifacts
+7. data/铁道/ directory
+   Reason: Historical backup, zero runtime impact, deletion requires user decision
+8. data/core/translations.js stale copy
+   Reason: Not loaded, harmless
+
+### DO NOT FIX — Deferred improvements
+9. History <-> SearchUI coupling (P2)
+   Reason: Functional now, requires careful API design, not a rush fix
+10. 5 CSS orphan classes
+    Reason: Low risk, may be covered by CSS inheritance
+
+---
+
+## O. Final Assessment
+
+### Product Health
+| Dimension | Rating | Notes |
+|-----------|--------|-------|
+| User task chain | HEALTHY | All 7 tasks PASS |
+| Module main-hearts | HEALTHY | No page hijacked |
+| Display identity | HEALTHY | Single canonical provider, all consumers migrated |
+| Data access | HEALTHY | Single canonical reader (db-loader.js) |
+| Module boundaries | WARNING | History monkey-patches SearchUI (P2) |
+| Fallback safety | HEALTHY | All fallbacks properly guarded |
+| AI trap prevention | NEEDS WORK | 7 HIGH-risk files in data/铁道/ |
+| Capability integrity | HEALTHY | All providers have active consumers |
+
+### Overall: PRODUCT READY FOR RC-2
+
+The product is functionally complete and architecturally sound.
+The only actionable items are:
+1. P2: History/SearchUI coupling (deferred, not urgent)
+2. P3: AI trap documentation (document only, no code change)
+
+No P0 or P1 issues found. No capability gaps. No broken user tasks.
+
+---
+
+## P. No-Code-Change Verification
+
+- [x] No production JS modified
+- [x] No CSS modified
+- [x] No HTML modified
+- [x] No canonical data modified
+- [x] No files created or deleted
+- [x] Working tree unchanged (except this report)
+
+---
+
+Report generated: 2026-09-01
+Status: 4.2.12 COMPLETE - read-only audit, no code changes
+Recommendation: Proceed to 4.2.13 RC-2 Release Gate

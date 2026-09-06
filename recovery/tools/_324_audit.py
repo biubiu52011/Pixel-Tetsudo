@@ -1,0 +1,121 @@
+import json
+
+report = {
+    "task": "3.24",
+    "date": "2026-08-28",
+    "canonical_sha": "60328163CF28540B86EFD59CF30E3FBADACF7056FCD49035095A6CECECC8B567",
+    "summary": {
+        "total_issues_found": 3,
+        "high": 0,
+        "medium": 2,
+        "low": 1,
+        "recommendation": "Data quality issues, no architectural bugs"
+    },
+    "architecture_check": {
+        "station_to_tourism_json_exists": False,
+        "architecture_clean": True,
+        "data_flow": "User location -> nearest station (STATION_COORDS) -> TourismProximity.getNearbySpotsByStation() -> Haversine distance -> sorted by distance -> top 10",
+        "modules_involved": ["sightseeing.js", "tourism-proximity.js", "search-ui.js", "tourism-detail.js"],
+        "unified_api": "TourismProximity.getNearbySpotsByStation(stationId, {radius: 3000, limit: 10})"
+    },
+    "findings": {
+        "3.24.1_data_chain": {
+            "status": "PASS",
+            "description": "Data chain is correct and uses unified TourismProximity API",
+            "details": {
+                "station_coords_source": "railway_data.json stations -> db-loader.js -> window.STATION_COORDS",
+                "tourism_data_source": "railway_data.json tourism -> window.TOURISM_DATA",
+                "distance_calculation": "Haversine formula in tourism-proximity.js",
+                "sorting": "Ascending by distance, limited to 10 results",
+                "radius": "3000m (3km)",
+                "caching": "60s TTL, recompute on 100m user move"
+            }
+        },
+        "3.24.2_recommendation_algorithm": {
+            "status": "PASS",
+            "description": "Recommendation algorithm correctly uses dynamic distance calculation",
+            "details": {
+                "not_pre_associated": True,
+                "uses_haversine": True,
+                "sorts_by_distance": True,
+                "limits_to_10": True,
+                "tag_filtering": True,
+                "river_crossing_check": True
+            }
+        },
+        "3.24.3_data_integrity": {
+            "status": "ISSUE_FOUND",
+            "severity": "MEDIUM",
+            "description": "36 orphan tourism stations lack entity coordinates",
+            "details": {
+                "total_tourism_stations": 93,
+                "with_valid_entity_coords": 57,
+                "orphan_no_entity": 36,
+                "total_tourism_spots": 396,
+                "spots_with_valid_coords": 396,
+                "spots_with_zero_coords": 0,
+                "spots_with_null_coords": 0,
+                "spots_with_nan_coords": 0
+            },
+            "orphan_examples": ["Aomori", "Aoyama", "Azabu", "Bunkyo", "Chiyoda", "Chuo", "Daikanyama", "Edogawa", "Fukuoka", "Hakone"],
+            "impact": "Tourism stations without entities cannot be resolved to coordinates, so getNearbySpotsByStation() returns [] for these stations"
+        },
+        "3.24.4_ui_business_separation": {
+            "status": "PASS",
+            "description": "UI and business logic are properly separated",
+            "details": {
+                "sightseeing.js": "UI rendering + state management + delegates to TourismProximity",
+                "tourism-proximity.js": "Pure distance computation + caching",
+                "search-ui.js": "Search result display + delegates to TourismProximity",
+                "tourism-detail.js": "Detail page + nearest station lookup"
+            }
+        },
+        "3.24.5_name_resolution_for_tourism": {
+            "status": "ISSUE_FOUND",
+            "severity": "MEDIUM",
+            "description": "42 tourism station keys not resolvable via name_map",
+            "details": {
+                "total_tourism_keys": 93,
+                "resolved_via_name_map": 51,
+                "not_resolved": 42,
+                "examples": ["Okayama", "Nishitokyo", "Sumida", "Sapporo", "Toshima", "Hiroshima", "Suginami", "Daikanyama", "Chiyoda", "Chuo"]
+            },
+            "impact": "When user input matches an unresolved tourism key, the station name display falls back to raw ID"
+        }
+    },
+    "data_summary": {
+        "stations": 503,
+        "stations_with_coords": 364,
+        "stations_with_zero_coords": 139,
+        "tourism_entries": 93,
+        "tourism_spots": 396,
+        "tourism_with_valid_coords": 57,
+        "tourism_orphan": 36,
+        "name_map_entries": 1703,
+        "referenced_stations_resolved": "458/458 (100%)"
+    },
+    "recommendations": [
+        {
+            "id": "T4-001",
+            "severity": "LOW",
+            "description": "Add station entities for 36 orphan tourism stations if they are real stations",
+            "effort": "Data task - requires domain knowledge to verify"
+        },
+        {
+            "id": "T4-002",
+            "severity": "LOW",
+            "description": "Add name_map entries for 42 unresolved tourism station keys",
+            "effort": "Data task - straightforward name additions"
+        },
+        {
+            "id": "T4-003",
+            "severity": "INFO",
+            "description": "139 stations have (0,0) coordinates - these are entity-only stubs that cannot participate in distance-based features",
+            "effort": "Known limitation - documented in Entity Guard warnings"
+        }
+    ]
+}
+
+with open("recovery/reports/3.24_sightseeing_business_chain_audit.json", "w", encoding="utf-8") as f:
+    json.dump(report, f, ensure_ascii=False, indent=2)
+print("Audit report saved.")

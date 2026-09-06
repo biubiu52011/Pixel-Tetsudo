@@ -1,0 +1,379 @@
+# 4.2.11 — Global Contract Sweep
+
+## 1. Executive Summary
+
+Architecture Contract Health: 82/100
+
+P0 (Critical contract breach): 0
+P1 (Migration incomplete): 0
+P2 (Cross-module coupling risk): 2
+P3 (AI trap / documentation): 8
+Informational (Normal patterns): 12
+
+Key Finding: The project has a clean display identity chain (RailwayDB.resolveLineName is the sole provider).
+The main architectural concern is history.js monkey-patching SearchUI.performSearch and accessing
+SearchUI internal properties (fromInput, toInput), which creates a tight coupling that violates
+the module boundary principle established in 4.2.
+
+---
+
+## 2. Capability Contract Map
+
+| Capability | Provider | Consumers | Contract | Fallback | Status |
+|-----------|----------|-----------|----------|----------|--------|
+| resolveLineName | RailwayDB (db-loader.js) | search-ui, realtime-view, trains-page, trains-detail, data-state, history, route-search | resolveLineName(lineId, lang) | line.nameEn||line.name||lineId (data-state.js:70) | OK |
+| resolveStationName | RailwayDB (db-loader.js) | search-ui, history, trains-page, route-search, tourism-detail, tourism-proximity | resolveStationName(id, lang) | id (direct) | OK |
+| tOp | lang-init.js:229 | realtime-view, data-state, trains-detail | tOp(operatorId) | operatorId (direct) | OK |
+| getAllLines | RailwayDB + DataLayer | data-fusion, route-search, trains-page, realtime-view, data-state | getAllLines() | UNIFIED_LINES fallback | OK |
+| getLine | DataLayer -> RailwayDB | data-fusion, route-search, trains-detail | getLine(lineId) | UNIFIED_LINES fallback | OK |
+| getCachedPositions | DataLayer | trains-page | getCachedPositions(lineId) | None | OK |
+| setCachedPositions | DataLayer | trains-page | setCachedPositions(lineId, positions) | None | OK |
+| renderCard | DataState | realtime-view, data-state | renderCard(line, lineId, opts) | None | OK |
+| renderList | DataState | realtime-view, trains-page, data-state | renderList(container, lines, opts) | None | OK |
+| performSearch | SearchUI | history.js (monkey-patch) | performSearch(from, to) | None | WARN |
+| subscribe | DataFusion -> DataState | data-state, trains-page | subscribe(callback) | None | OK |
+| getNameMap | RailwayDB | sightseeing, tourism-detail | getNameMap() | None | OK |
+| getStationLocation | RailwayDB | tourism-proximity | getStationLocation(id) | STATION_COORDS fallback | OK |
+| getTourism | RailwayDB | sightseeing | getTourism() | None | OK |
+| getDisplayOrder | LinePresentationService | data-fusion, data-state, realtime-view | getDisplayOrder(lines) | Object.keys(lines) | OK |
+
+---
+
+## 3. Consumer Chain Audit
+
+### 3.1 Display Identity Chain (resolveLineName)
+RailwayDB.resolveLineName(lineId, lang)
+  +---> search-ui.js:244 (line name in journey segments)
+  +---> realtime-view.js:46 (modal title)
+  +---> trains-page.js:242 (line card title)
+  +---> trains-detail.js:108 (detail page title)
+  +---> data-state.js:70 (line card rendering)
+  +---> history.js:104 (history entry display)
+  +---> route-search.js (no direct call, uses DataLayer)
+Status: ALL 7 consumers verified. No orphan resolver.
+
+### 3.2 Station Identity Chain (resolveStationName)
+RailwayDB.resolveStationName(stationId, lang)
+  +---> search-ui.js:31,50,224,225,236,246,247 (from/to/transfer stations)
+  +---> history.js:22,108,110,177,218-220 (history entry display)
+  +---> trains-page.js:116 (SVG station labels)
+  +---> route-search.js:241,264 (station names in results)
+  +---> tourism-detail.js:41-42 (via getNameMap)
+  +---> tourism-proximity.js:62-63 (station coords lookup)
+Status: ALL 6 consumers verified. No orphan resolver.
+
+### 3.3 Operator Identity Chain (tOp)
+lang-init.js:229 -> window.tOp(opId)
+  +---> realtime-view.js:10,139 (filter buttons, modal)
+  +---> data-state.js:51-52 (wrapper, card rendering)
+  +---> trains-detail.js:101 (detail page operator badge)
+Status: 3 consumers, all correct. No orphan resolver.
+
+### 3.4 DataState Subscribe Chain
+DataFusion.subscribe(callback)
+  -> data-state.js:283 (DataState subscribes to DataFusion)
+  -> DataState.notifySubscribers()
+  -> trains-page.js:328 (trains-page subscribes to DataState)
+Status: Clean publish-subscribe pattern. No issues.
+
+### 3.5 SearchUI -> History (MONKEY PATCH) [P2]
+history.js:167 -> window.SearchUI.performSearch = function() { ... }
+  +---> Accesses this.fromInput (line 171)
+  +---> Accesses this.toInput (line 172)
+  +---> Calls originalPerformSearch.apply(this, arguments)
+  +---> Restores values to fromInput/toInput (lines 221-224)
+  +---> Dispatches input events (lines 223-224)
+Status: WARN - Direct internal property access (see Section 6)
+
+---
+
+## 4. Migration Completeness
+
+### 4.1 Display Identity Migration (4.1.1)
+| Item | Status |
+|------|--------|
+| RailwayDB.resolveLineName() canonical provider | DONE |
+| RailwayDB.resolveStationName() canonical provider | DONE |
+| window.tOp() canonical provider | DONE |
+| tLineName removed from production JS | DONE |
+| All 7 line name consumers migrated | DONE |
+| All 6 station name consumers migrated | DONE |
+| All 3 operator name consumers migrated | DONE |
+| Old inline fallbacks (line.nameEn || line.name) | REMAIN (data-state.js:70 sandbox) |
+
+### 4.2 Orphan File Cleanup (4.2.7)
+| File | Status |
+|------|--------|
+| js/trains-render.js | DELETED |
+| js/security.js | DELETED |
+| data/铁道/trains-render.js | ARCHIVE (not deleted) |
+
+### 4.3 Incomplete Migrations
+NONE FOUND. All major migrations are complete.
+
+---
+
+## 5. Global Object Contract
+
+| Global Object | Provider | Consumer Count | Formal Contract | Risk |
+|--------------|----------|---------------|----------------|------|
+| window.RailwayDB | db-loader.js:128 | 31 references | YES - explicit API | LOW |
+| window.DataLayer | data-layer.js:125 | 14 references | YES - explicit API | LOW |
+| window.UNIFIED_LINES | db-loader.js:81 | 18 references | YES - raw data source | LOW |
+| window.DataFusion | data-fusion.js:198 | 7 references | YES - event bus | LOW |
+| window.DataState | data-state.js | 5+ references | YES - render service | LOW |
+| window.SearchUI | search-ui.js:287 | 13 references | YES - but monkey-patched | MEDIUM |
+| window.currentLang | lang-init.js | global | YES - language state | LOW |
+| window.tOp | lang-init.js:229 | 3 references | YES - operator translator | LOW |
+| window.LinePresentationService | line-presentation-service.js:60 | 6 references | YES - display order | LOW |
+| window.TransitConstants | lang-init.js:221 | 5 references | YES - OP_NAMES lookup | LOW |
+
+---
+
+## 6. Cross-Module Coupling Analysis (P2 Findings)
+
+### P2-01: history.js monkey-patches SearchUI.performSearch
+
+Location: js/history.js:164-192
+
+Pattern:
+- history.init() saves original SearchUI.performSearch
+- Replaces with wrapper that:
+  a) calls original
+  b) reads this.fromInput / this.toInput (internal props)
+  c) saves to history
+
+Risk: If SearchUI.performSearch signature changes, history breaks silently.
+      If SearchUI renames fromInput/toInput, history breaks.
+      History reads SearchUI internal state (not public API).
+
+Verdict: MEDIUM RISK - functional now, but fragile under refactoring.
+
+### P2-02: history.js.restoreFromRecent() accesses SearchUI internal DOM
+
+Location: js/history.js:214-226
+
+Pattern:
+- history.restoreFromRecent(fromId, toId)
+  -> window.SearchUI.fromInput.value = fromName
+  -> window.SearchUI.toInput.value = toName
+  -> dispatchEvent(input) on both
+
+Risk: Directly manipulates SearchUI internal DOM elements.
+      Relies on SearchUI having fromInput/toInput properties.
+      If SearchUI restructures its DOM, this breaks.
+
+Verdict: MEDIUM RISK - same category as P2-01.
+
+### Not a Bug, But a Design Debt
+These patterns are FUNCTIONAL and intentional (history auto-save and restore).
+However, they violate the module boundary principle.
+The fix would require SearchUI to expose public APIs:
+  SearchUI.getInputs() -> { from, to }
+  SearchUI.setInputs(fromValue, toValue)
+  SearchUI.onSearchComplete(callback)
+This is a 4.2.x improvement task, not a blocking issue.
+
+---
+
+## 7. Load Order Contract
+
+### pages/home.html (11 scripts)
+1. db-loader.js -> RailwayDB, UNIFIED_LINES
+2. station-resolver.js -> depends on RailwayDB
+3. translations.js -> translation keys
+4. common.js -> escapeHtml, formatTime
+5. lang-init.js -> tOp, currentLang, TransitConstants
+6. route-search.js -> depends on RailwayDB
+7. search-ui.js -> SearchUI (depends on above)
+8. tourism-proximity.js -> depends on RailwayDB
+9. sightseeing.js -> depends on RailwayDB
+10. tab-switch.js -> UI switching
+11. history.js -> depends on SearchUI (monkey-patch)
+Status: CORRECT - all dependencies resolved in order.
+
+### pages/realtime.html (11 scripts)
+1. db-loader.js -> RailwayDB, UNIFIED_LINES
+2. line-operation-systems.js -> LPS data
+3. line-presentation-service.js -> LinePresentationService
+4. data-state.js -> DataState
+5. odpt-unified.js -> ODPT realtime data
+6. translations.js -> translation keys
+7. common.js -> utilities
+8. lang-init.js -> tOp, currentLang
+9. tab-switch.js -> UI switching
+10. data-fusion.js -> DataFusion (fuses ODPT + RailwayDB)
+11. realtime-view.js -> depends on DataState, DataFusion
+Status: CORRECT
+
+### pages/trains.html (11 scripts)
+1. db-loader.js -> RailwayDB, UNIFIED_LINES
+2. data-layer.js -> DataLayer (depends on RailwayDB)
+3. odpt-unified.js -> ODPT data
+4. local-railway-data.js -> local data
+5. data-fusion.js -> DataFusion
+6. translations.js -> translation keys
+7. common.js -> utilities
+8. line-operation-systems.js -> LPS
+9. line-presentation-service.js -> LPS service
+10. data-state.js -> DataState
+11. lang-init.js -> tOp, currentLang
+12. trains-page.js -> depends on DataState, DataLayer
+Status: CORRECT
+
+### pages/history.html (5 scripts)
+1. db-loader.js -> RailwayDB
+2. translations.js -> keys
+3. common.js -> utilities
+4. lang-init.js -> tOp, currentLang
+5. history.js -> depends on RailwayDB
+Status: CORRECT
+
+---
+
+## 8. Fallback Audit
+
+| Location | Fallback | Rating | Reason |
+|----------|----------|--------|--------|
+| data-state.js:70 | line.nameEn||line.name||lineId | SAFE | Sandbox/test fallback when RailwayDB unavailable |
+| search-ui.js:138 | cachedKey||empty | SAFE | Empty string for missing cache |
+| realtime-view.js:46 | resolveLineName?name:id | SAFE | RailwayDB guard present |
+| trains-page.js:242 | resolveLineName?name:id | SAFE | RailwayDB guard present |
+| history.js:22 | RailwayDB?resolveStationName:null | SAFE | Null guard, caller checks |
+| route-search.js:21 | RailwayDB?DataLayer?UNIFIED_LINES | SAFE | Three-tier fallback chain |
+| tourism-detail.js:149 | desc_lang||desc||empty | SAFE | Progressive degradation |
+| sightseeing.js:83 | TAG_ICONS[tag]||empty | SAFE | Empty string for missing icon |
+| db-loader.js:172 | nameKey||nameJa||nameEn||name||id | SAFE | Canonical resolver internal fallback |
+
+All fallbacks are appropriately guarded. No dangerous unguarded raw ID leaks.
+
+---
+
+## 9. Duplicate Implementation Audit
+
+| Capability | Duplicate? | Verdict |
+|-----------|-----------|---------|
+| resolveLineName | No | Single provider: RailwayDB |
+| resolveStationName | No | Single provider: RailwayDB |
+| tOp | No | Single provider: lang-init.js |
+| getLine | No | DataLayer delegates to RailwayDB (proper chain) |
+| renderCard/renderList | No | Single provider: DataState |
+| performSearch | PARTIAL | SearchUI defines, history.js monkey-patches |
+| escapeHtml | YES (3x) | Each module self-contains utility - acceptable |
+| t() translation | YES (4x) | Each module has local alias - acceptable |
+| init() | YES (7x) | Each module has own init - acceptable |
+
+---
+
+## 10. AI Trap Map
+
+| File | Risk | Reason |
+|------|------|--------|
+| data/铁道/search-ui.js | HIGH | 36% different from js/ version; missing 4.1.x fixes |
+| data/铁道/realtime-view.js | HIGH | 11% different from js/ version |
+| data/铁道/station-resolver.js | HIGH | 14% different from js/ version |
+| data/铁道/translations.js | HIGH | 10% different; missing 66 keys |
+| data/铁道/train-timetable.js | HIGH | No js/ counterpart; standalone orphan |
+| data/铁道/trains-render.js | HIGH | Orphan (js/ deleted in 4.2.7) |
+| data/铁道/line-operation-systems.js | HIGH | Duplicate of data/core/ version |
+| data/铁道/history.js | MEDIUM | 5% different from js/ version |
+| data/铁道/route-search.js | MEDIUM | 1% different from js/ version |
+| data/铁道/trains-detail.js | MEDIUM | 3% different from js/ version |
+| data/铁道/trains-page.js | MEDIUM | 0% different (nearly identical) |
+| data/core/sightseeing.js | LOW | Byte-identical to js/ version |
+| data/core/translations.js | LOW | Outdated copy, not loaded at runtime |
+| data/铁道/home.html | LOW | Standalone HTML, not loaded |
+
+---
+
+## 11. Future Orphan Risk Map
+
+| Scenario | Risk | Mitigation |
+|----------|------|------------|
+| New AI edits data/铁道/search-ui.js | HIGH | Document as ARCHIVE in architecture.md |
+| New AI adds new display resolver | HIGH | PROHIBITED patterns documented in 4.2.9 |
+| SearchUI performsSearch signature changes | MEDIUM | history.js monkey patch will break |
+| DataState API changes | MEDIUM | trains-page.js subscribe will break |
+| RailwayDB removed/restructured | LOW | Canonical provider with many consumers |
+| data/core/translations.js used instead of js/ | LOW | Not loaded by any HTML |
+
+---
+
+## 12. Module Boundary Health
+
+| Module | Main Heart | Boundary Violations | Health |
+|--------|-----------|--------------------|--------|
+| Home | Route Search | None | HEALTHY |
+| Route Search | Route finding | None | HEALTHY |
+| Realtime | Current status | None | HEALTHY |
+| Trains | Line info | Depends on DataState (intentional) | HEALTHY |
+| History | Past searches | Monkey-patches SearchUI (P2-01) | WARNING |
+| Tourism | Destination explore | None | HEALTHY |
+
+---
+
+## 13. Required Actions
+
+### MUST FIX (P0/P1)
+NONE
+
+### SHOULD FIX (P2)
+1. History <-> SearchUI coupling: Expose public API on SearchUI
+   - Add SearchUI.getInputs() returning {from, to} DOM elements
+   - Add SearchUI.setInputs(fromValue, toValue) for restore
+   - Add SearchUI.onSearchComplete(callback) for auto-save
+   - Remove monkey-patch from history.js
+   - Target: 4.2.12 or 4.3
+
+### DOCUMENT ONLY (P3)
+1. Add ARCHIVE notice to data/铁道/ directory (architecture.md)
+2. Add comment to data/core/sightseeing.js header
+3. Add comment to data/core/translations.js header
+4. Record 5 CSS orphan classes for 4.2.12 review
+5. Record 2 console.log in data/api/odpt-unified.js for P3 cleanup
+
+### DEFERRED
+1. Delete data/铁道/ directory (requires user decision on archive strategy)
+2. Delete data/core/sightseeing.js (确认后删除)
+3. Delete data/core/translations.js (确认后删除)
+4. Clean 5 CSS orphan classes (4.2.12)
+5. Clean 2 console.log statements (P3 cleanup)
+
+### DO NOT TOUCH
+1. data/铁道/ files - historical value, do not delete without decision
+2. railway_data.json - canonical data frozen
+3. 13 image path fixes - deferred to 4.2.13
+4. HISTORY-SEARCHUI coupling - Document now, fix in dedicated task
+
+---
+
+## 14. Architecture Contract Score
+
+| Dimension | Score | Notes |
+|-----------|-------|-------|
+| Display Identity | 100/100 | Single canonical provider, all consumers migrated |
+| Data Access | 95/100 | Three-layer architecture clean; getLine delegation proper |
+| Module Boundaries | 80/100 | History monkey-patches SearchUI (P2) |
+| Fallback Safety | 95/100 | All fallbacks properly guarded |
+| Load Order | 100/100 | All dependencies resolved correctly |
+| No Orphans | 90/100 | trains-render.js and security.js cleaned; data/铁道/ remains |
+| AI Trap Prevention | 70/100 | data/铁道/ HIGH risk files not yet documented |
+| CSS Contract | 90/100 | 11 multi-file classes (mostly safe); 5 orphan classes |
+| OVERALL | 82/100 | Strong architecture; 2 P2 coupling issues, 8 AI traps |
+
+---
+
+## 15. No-Code-Change Verification
+
+- [x] No production JS modified
+- [x] No CSS modified
+- [x] No HTML modified
+- [x] No canonical data modified
+- [x] No files created or deleted
+- [x] Working tree unchanged (except this report)
+
+---
+
+Report generated: 2026-09-01
+Status: 4.2.11 COMPLETE - read-only audit, no code changes
+Next: 4.2.12 Global Product Sweep or user decision on P2 actions

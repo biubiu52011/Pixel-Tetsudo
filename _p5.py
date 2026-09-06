@@ -1,0 +1,1 @@
+﻿f = open("js/data-state.js", "r", encoding="utf-8").read()\nold = chr(39) + " + escapeHtml(lineColor) + " + chr(39) + ">" + chr(39)\nnew = old + " + _chainBadgeHtml"\nif old in f:\n    f = f.replace(old, new, 1)\n    open("js/data-state.js", "w", encoding="utf-8").write(f)\n    print("patched")\nelse:\n    print("not found")\n

@@ -1,0 +1,185 @@
+# 4.3.1 ROUTE SEARCH CORE EXPERIENCE
+## 4.3.0 INTAKE REPORT
+
+---
+
+## Feature
+Route Search Core Experience — 完善 Journey Card 展示，使用户一眼理解「出发站 → 线路 → 换乘 → 到达站」
+
+## User Task
+用户在 Home 输入出发站和到达站后，快速、清晰地理解「我应该怎么走」。
+
+## Page / Module
+Home 页面 → Route Search 模块（#searchContainer）
+
+## Main-heart
+「我怎么从 A 到 B？」
+本功能服务此主心，不抢不偏离。
+
+## Capability Owner
+| 能力 | Owner | Provider |
+|------|-------|----------|
+| 线路/车站身份解析 | RailwayDB | resolveLineName(), resolveStationName() |
+| 运营商显示 | RailwayDB | tOp() |
+| 路线搜索算法 | RouteSearch | findRoute(), buildRouteSegments() |
+| 结果渲染/UI | SearchUI | renderResults() |
+| 历史记录 | History | SearchHistory（消费 SearchUI 输出） |
+
+## Existing Provider
+- search-ui.js:renderResults() — Journey Card HTML 构建
+- css/style.css: .journey-* 系列类 — 已有视觉样式
+- route-search.js:buildRouteSegments() — 数据段构建
+- RailwayDB — 身份解析
+
+## Existing Consumers
+- Home 页面 Route Search 模块 — 直接消费者
+- History 模块 — 通过 monkey-patch SearchUI.performSearch 间接消费（P2 债务，本任务不得修改）
+- 四语言翻译系统 — t() 调用
+
+---
+
+## Decision: EXTEND
+
+理由：
+1. 现有架构边界清晰，Journey Card 能力属于 SearchUI
+2. 无需新建 Provider 或迁移 Consumer
+3. 不触碰 RailwayDB / DataLayer / DataFusion 边界
+4. 不创建新 CSS 组件体系
+
+---
+
+## System Impact
+
+### P0 — JavaScript Bug（字符串拼接损坏）
+文件：js/search-ui.js，renderResults() 函数
+
+当前代码：
+`js
+html += '<div class=\"journey-seg\"+ (lineColor ? ' style=\"border-left-color: + window.escapeHtml(lineColor) 
++ ' : '') + '>';
+`
+问题：字符串拼接断裂，产生无效 HTML，导致线路段无左边框颜色。
+修复：正确拼接字符串，使 border-left-color 动态生效。
+
+### P2 — 翻译 Key 缺失
+文件：data/core/translations.js
+缺失 key：search_result.transfer_count（所有语言：JA/ZH/EN/KO 均未定义）
+当前代码使用：t('search_result.transfer_count')
+影响：换乘数量徽章显示 raw key 而非翻译文本。
+
+### 信息层级优化（设计层面）
+当前 Journey Card 结构：
+`
+[journey-header]    → 绿色渐变背景，显示时长+换乘数
+[journey-route-line]→ 出发站 → 到达站（仅首尾，无中间过程）
+[journey-segments]  → 线路段 + 换乘段
+`
+
+问题：
+- .journey-arrow 在桌面端显示「→」但在手机端 display:none
+- 换乘段（.journey-transfer）视觉权重与线路段相同，不够突出
+- 换乘站名未与「换乘」标签形成明确语义关联
+
+改进方向（仅视觉，不改结构）：
+1. 换乘段增加视觉区分（图标 + 站名 + 标签三者关系更清晰）
+2. 保留现有 .journey-* 组件体系，不创建新类
+3. 不增加额外字段（无排序按钮、无方向箭头、无 segments 数量等）
+
+---
+
+## Consumer Preservation
+
+### 修改前
+- Home → SearchUI.renderResults() → Journey Card 显示 ← [有 bug]
+- History → monkey-patch SearchUI.performSearch → fromInput/toInput ← [不变]
+- RailwayDB → resolveLineName/resolveStationName/tOp ← [不变]
+
+### 修改后
+- Home → SearchUI.renderResults() → Journey Card 显示 ← [bug 修复]
+- History → monkey-patch SearchUI.performSearch → fromInput/toInput ← [不变]
+- RailwayDB → resolveLineName/resolveStationName/tOp ← [不变]
+
+A-for-B Degradation 风险：
+- 低。修改范围严格限制在 search-ui.js renderResults() 函数内
+- History 的 monkey-patch 依赖 fromInput/toInput/performSearch，不影响
+- 不涉及 RailwayDB 或其他 Provider
+
+---
+
+## A-for-B Degradation Risk
+低风险。搜索-ui.js 修改仅影响 Home Route Search 的 renderResults() 函数。
+其他页面（Realtime/Trains/Tourism/History）不直接调用 renderResults()，不受影响。
+History 的耦合是通过 monkey-patch performSearch，本任务不改 performSearch 签名，不产生退化。
+
+---
+
+## Orphan / Legacy Trap Risk
+本次修改不新增任何 class、函数、HTML ID 或数据入口。
+只修复现有字符串拼接 bug 和补充翻译 key，不会产生孤儿。
+
+---
+
+## Cross-module Impact
+- Home: ✅ 受影响，改善
+- Route Search 独立页面: ⚠️ 需确认是否也使用 Journey Card（若使用则同步受益）
+- Realtime: ✅ 不受影响（不消费 renderResults）
+- Trains: ✅ 不受影响
+- History: ✅ 不受影响（monkey-patch 只读 fromInput/toInput）
+- Tourism: ✅ 不受影响
+
+---
+
+## Minimum Change Surface
+
+### 修改文件
+1. js/search-ui.js — 修复 renderResults() 中字符串拼接 bug（约 5 行）
+2. data/core/translations.js — 补充 search_result.transfer_count（4 语言）
+
+### 可选美化（不引入新类）
+3. css/style.css — 微调 .journey-transfer 视觉权重（现有类，不加新类）
+
+### 绝对不修改
+- data/core/railway_data.json（canonical data 冻结）
+- data/core/db-loader.js（RailwayDB 不变）
+- js/route-search.js（算法不变）
+- js/history.js（P2 债务不动）
+- js/realtime*.js / trains*.js / tourism*.js
+- 任何 CSS 新组件类
+
+---
+
+## Blocked
+- 不得修改 History ↔ SearchUI 耦合（P2 债务，deferred）
+- 不得添加新的 CSS 组件类（遵循既有 .journey-* 体系）
+- 不得修改 canonical data
+- 不得改动 RailwayDB / DataLayer / DataFusion 接口
+
+## Allowed
+- 修复 renderResults() 中的字符串拼接 bug
+- 补充缺失翻译 key
+- 在现有 .journey-* 类范围内微调视觉层级
+- 确认 Route Search 独立页面是否共享 Journey Card
+
+---
+
+## Implementation Boundary
+仅修改 js/search-ui.js 和 data/core/translations.js。
+CSS 改动仅在现有 .journey-* 类上微调，不新增类。
+
+---
+
+## Verdict: PROCEED (EXTEND)
+
+本任务在 RC-2 系统边界内可行：
+- 能力归属清晰：SearchUI 拥有 Journey Card 渲染
+- 无孤儿风险
+- 无 A-for-B 退化风险
+- 最小修改面：2 个文件（search-ui.js + translations.js），可选 1 个（style.css）
+- 不触碰 P2 债务（History↔SearchUI 耦合）
+
+实施顺序：
+Phase A（Read）: 确认 renderResults() 当前代码 → 已完成
+Phase B（Design）: 确定最小修改 → 本报告
+Phase C（Implement）: 待批准
+Phase D（Consumer Preservation）: 待实施后验证
+Phase E（Whole-System Sweep）: 待实施后验证

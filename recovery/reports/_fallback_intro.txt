@@ -1,0 +1,1 @@
+detail.fallback_intro = '' (len=0)

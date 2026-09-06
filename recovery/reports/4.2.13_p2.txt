@@ -1,0 +1,51 @@
+
+---
+
+## Layer 5: History <-> SearchUI (Known Debt)
+
+| Aspect | Status |
+|--------|--------|
+| Monkey-patch present | YES (history.js:167) |
+| SearchUI.performSearch defined | YES (search-ui.js) |
+| fromInput/toInput access | YES (history.js:171,172) |
+| restoreFromRecent functional | YES (history.js:214-226) |
+| Overall | FUNCTIONAL (KNOWN DEBT) |
+
+Decision: DEFERRED. Not a blocking issue. History auto-save and restore work correctly.
+Fix requires SearchUI public API design, not a quick patch.
+
+---
+
+## Layer 6: AI Trap Verification
+
+| File/Directory | Runtime References | Risk | Action |
+|---------------|-------------------|------|--------|
+| data/铁道/ (15 files) | 0 HTML refs, 0 JS refs | HIGH | DOCUMENT in architecture.md |
+| data/core/sightseeing.js | 0 (js/ version loaded) | LOW | DOCUMENT |
+| data/core/translations.js | 0 (js/ version loaded) | MEDIUM | DOCUMENT |
+
+No AI traps have been accidentally activated. No production code references deprecated paths.
+
+---
+
+## Layer 7: Multi-Language Verification
+
+### Translation key coverage
+| Key | JA | EN | ZH | KO |
+|-----|----|----|----|----|
+| route.search (search title) | Y | Y | Y | Y |
+| realtime.filter (filter all) | Y | Y | Y | Y |
+| history.title | Y | Y | Y | Y |
+| tourism.title | Y | Y | Y | Y |
+| status.no_lines | Y | Y | Y | Y |
+| filter.all | Y | Y | Y | Y |
+
+### Page i18n coverage
+| Page | Loads translations.js | Loads lang-init.js |
+|------|----------------------|-------------------|
+| home.html | YES | YES |
+| realtime.html | YES | YES |
+| trains.html | YES | YES |
+| history.html | YES | YES |
+
+All 4 languages covered. All pages load i18n infrastructure.

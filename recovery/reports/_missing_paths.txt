@@ -1,0 +1,52 @@
+ChuoRapid (中央線快速): 中央快速線 青梅線 五日市線.png
+  HEX: e4b8ade5a4aee5bfabe9809fe7b79a20e99d92e6a285e7b79a20e4ba94e697a5e5b882e7b79a2e706e67
+  full_path: ../images/鉄道/JR東日本/中央快速線 青梅線 五日市線.png
+
+Joban (常磐快速線): 常盤線快速.png
+  HEX: e5b8b8e79ba4e7b79ae5bfabe9809f2e706e67
+  full_path: ../images/鉄道/JR東日本/常盤線快速.png
+
+SeibuShinjuku (西福新宿線): 新宿線 ハイジマ線.png
+  HEX: e696b0e5aebfe7b79a20e3838fe382a4e382b8e3839ee7b79a2e706e67
+  full_path: ../images/鉄道/西武鉄道/新宿線 ハイジマ線.png
+
+Keisei (京成線): 東条本線 おごせ線.png
+  HEX: e69db1e69da1e69cace7b79a20e3818ae38194e3819be7b79a2e706e67
+  full_path: ../images/鉄道/京成電鉄/東条本線 おごせ線.png
+
+SeibuIkebukuro (西福池袋線): 池袋線 西武秩父線 西武有楽町線 豊島線 佐山線.png
+  HEX: e6b1a0e8a28be7b79a20e8a5bfe6ada6e7a7a9e788b6e7b79a20e8a5bfe6ada6e69c89e6a5bde794bae7b79a20e8b18ae5b3b6e7b79a20e4bd90e5b1b1e7b79a2e706e67
+  full_path: ../images/鉄道/西武鉄道/池袋線 西武秩父線 西武有楽町線 豊島線 佐山線.png
+
+SeibuChichibu (西武秩父線): 池袋線 西武秩父線 西武有楽町線 豊島線 佐山線.png
+  HEX: e6b1a0e8a28be7b79a20e8a5bfe6ada6e7a7a9e788b6e7b79a20e8a5bfe6ada6e69c89e6a5bde794bae7b79a20e8b18ae5b3b6e7b79a20e4bd90e5b1b1e7b79a2e706e67
+  full_path: ../images/鉄道/西武鉄道/池袋線 西武秩父線 西武有楽町線 豊島線 佐山線.png
+
+SeibuTamako (西武多摩湖線): 玉子線.png
+  HEX: e78e89e5ad90e7b79a2e706e67
+  full_path: ../images/鉄道/西武鉄道/玉子線.png
+
+Ome (青梅線): 中央快速線 青梅線 五日市線.png
+  HEX: e4b8ade5a4aee5bfabe9809fe7b79a20e99d92e6a285e7b79a20e4ba94e697a5e5b882e7b79a2e706e67
+  full_path: ../images/鉄道/JR東日本/中央快速線 青梅線 五日市線.png
+
+Itsukaichi (五日市線): 中央快速線 青梅線 五日市線.png
+  HEX: e4b8ade5a4aee5bfabe9809fe7b79a20e99d92e6a285e7b79a20e4ba94e697a5e5b882e7b79a2e706e67
+  full_path: ../images/鉄道/JR東日本/中央快速線 青梅線 五日市線.png
+
+SeibuYamaguchi (西武山口線): 池袋線 西武秩父線 西武有楽町線 豊島線 佐山線.png
+  HEX: e6b1a0e8a28be7b79a20e8a5bfe6ada6e7a7a9e788b6e7b79a20e8a5bfe6ada6e69c89e6a5bde794bae7b79a20e8b18ae5b3b6e7b79a20e4bd90e5b1b1e7b79a2e706e67
+  full_path: ../images/鉄道/西武鉄道/池袋線 西武秩父線 西武有楽町線 豊島線 佐山線.png
+
+SeibuNakagawa (西武中和線): 玉子線.png
+  HEX: e78e89e5ad90e7b79a2e706e67
+  full_path: ../images/鉄道/西武鉄道/玉子線.png
+
+SeibuEn (西武園線): 西武園線.png
+  HEX: e8a5bfe6ada6e59c92e7b79a2e706e67
+  full_path: ../images/鉄道/西武鉄道/西武園線.png
+
+SeibuTamagawa (): 玉川線.png
+  HEX: e78e89e5b79de7b79a2e706e67
+  full_path: ../images/鉄道/西武鉄道/玉川線.png
+

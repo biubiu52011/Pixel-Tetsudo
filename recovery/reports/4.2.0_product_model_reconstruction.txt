@@ -1,0 +1,322 @@
+# 4.2.0 Product Model Reconstruction — First Principles Review
+
+## Core Question: What IS Pixel-Tetsudo?
+
+### NOT defined by existing UI
+The current implementation (Home with two cards, Trains listing, Realtime dashboard, etc.) is
+a SET OF IMPLEMENTATIONS, not the PRODUCT DEFINITION.
+
+The product definition must come from first principles: who is this for, and what do they need?
+
+---
+
+## 1. Product Identity
+
+### What Pixel-Tetsudo IS
+A **railway information browser** for people who want to understand the Japanese rail network.
+It answers: "What line is this?" "Where does it go?" "Is it running normally right now?"
+
+### What Pixel-Tetsudo is NOT
+- A trip planner (no origin→destination routing with timing)
+- A ticket booking system
+- A schedule/timetable app
+- A navigation GPS
+- A social feature
+- A developer tool
+
+### Target Users (Primary)
+1. **Tourists in Japan** — Need to understand which lines exist, where they go, and current status
+2. **English/Chinese/Korean speakers** — Japanese rail info is often only in Japanese; this bridges the gap
+3. **Rail enthusiasts** — Want to explore the network structure
+
+### Target Users (Secondary)
+4. **Commuters** — Check real-time status, but this is a secondary use case
+5. **Developers/Researchers** — The data layer is accessible, but the UI is not designed for them
+
+---
+
+## 2. User Tasks (Ranked by Frequency/Importance)
+
+### Task 1: "Show me a line"
+- User wants to browse/understand a specific railway line
+- Searches by line name, sees it in a list, clicks for details
+- **Information need**: Name, route, operator, current status, stations
+
+### Task 2: "Is this line running?"
+- User checks real-time status before traveling
+- Filters by operator or line, sees status badges
+- **Information need**: Current status (normal/delayed/suspended), delay minutes, cause
+
+### Task 3: "How do I get from A to B?"
+- User wants a route between two stations
+- Gets a journey card showing line + transfers
+- **Information need**: Which line(s), how many transfers, approximate duration
+
+### Task 4: "What's near this station?"
+- User is at or heading to a station, wants to know what's nearby
+- **Information need**: Attraction names, categories, walking distance
+
+### Task 5: "What did I search before?"
+- User reviews past searches
+- **Information need**: What was searched, when
+
+---
+
+## 3. Page Model (One Primary Task Per Page)
+
+### home.html — The Entry Point
+**Primary Task**: Route search (Task 3)
+**Secondary**: Quick link to real-time status (Task 2)
+
+```
+HOME
+├── [ROUTE SEARCH] ← Primary, most prominent
+│   ├── From input → To input → Search
+│   └── Journey card results
+├── [REALTIME QUICK ACCESS] ← Secondary, lower prominence
+│   └── Link to realtime.html
+└── [TOURISM] ← Tertiary, only after route search
+    └── Nearby spots for destination
+```
+
+**Why this hierarchy**: Most users arrive wanting to go somewhere. Route search is the highest-value task.
+Realtime and Tourism are context-dependent — they make sense AFTER you know where you're going.
+
+### realtime.html — Current Status
+**Primary Task**: Check if lines are running normally (Task 2)
+
+```
+REALTIME
+├── [OPERATOR FILTER] ← Collapsed/secondary
+├── [LINE CARDS] ← Status at a glance
+│   ├── Line name
+│   ├── OS code badge
+│   ├── Status icon (●△×○)
+│   └── Delay info (if any)
+└── [LINE DETAIL MODAL] ← Deeper dive
+```
+
+**Design principle**: Users scan for problems. Normal lines should be visually quiet;
+problem lines should stand out. Not every line needs equal visual weight.
+
+### trains.html — Line Browser
+**Primary Task**: Explore the network (Task 1)
+
+```
+TRAINS
+├── [LINE LIST] ← Grouped by operator
+│   ├── Line name
+│   ├── OS code badge
+│   └── Route interval (first ↔ last station)
+└── [LINE DETAIL] ← Click any line
+    ├── Full station list
+    ├── Operator info
+    ├── Line color / image
+    └── Station map (SVG)
+```
+
+**Design principle**: This is an EXPLORATION tool, not a decision-making tool.
+Users browse to learn, not to act. Information density should be lower than Realtime.
+
+### history.html — Search Memory
+**Primary Task**: Review past searches (Task 5)
+
+```
+HISTORY
+├── [SEARCH RECORDS] ← Simple list
+│   ├── From → To
+│   └── Timestamp
+└── [CLEAR ALL]
+```
+
+**Design principle**: Minimal. This is metadata, not content. Don't over-design.
+
+### tourism-detail.html — Point of Interest
+**Primary Task**: Learn about a specific attraction (Task 4)
+
+```
+TOURISM DETAIL
+├── [ATTRACTION NAME] ← Primary
+├── [CATEGORY] ← e.g., temple, shrine, park
+├── [DESCRIPTION] ← In current language
+├── [NEARBY STATIONS] ← How to get there
+└── [MAP] ← Location context
+```
+
+**Design principle**: This is accessed FROM a route search result or standalone.
+It should not compete with Route Search for home page prominence.
+
+---
+
+## 4. Information Architecture Rules
+
+### Rule 1: One Primary Task Per Page
+Each page exists to serve ONE core user question. If a page tries to serve two,
+split it or demote one.
+
+| Page | Primary Question |
+|------|-----------------|
+| Home | "How do I get from A to B?" |
+| Realtime | "Is this line running?" |
+| Trains | "What is this line?" |
+| History | "What did I search before?" |
+| Tourism | "What is this place?" |
+
+### Rule 2: Information Hierarchy Per Element
+Every piece of information on screen must answer one of these:
+- **Identity**: What is this? (line name, station name)
+- **Context**: Where does it go? (route interval, operator)
+- **Status**: What's happening now? (normal, delayed)
+- **Action**: What can I do? (click for detail, filter)
+
+If an element doesn't fit one of these categories, it should be removed or hidden.
+
+### Rule 3: No Internal Data in User View
+The following must NEVER appear as user-visible text:
+- `line_id` (e.g., "ChuoRapid")
+- `station_id` (e.g., "Kot手指")
+- Raw operator ID (e.g., "JR-East" without translation)
+- Database field names (e.g., "branchOf", "nameEn")
+- Technical error messages (e.g., "Render error: undefined")
+
+### Rule 4: Language-Aware Display
+Display names MUST respect current language:
+- JA → nameJa
+- ZH → nameZh
+- EN → nameEn
+- KO → nameKo
+
+Fallback chain: current-lang name → nameJa → name → line_id
+
+### Rule 5: Consistency Without Uniformity
+Different pages can look different IF the difference is justified by different user tasks.
+Trains and Realtime share visual language (cards, badges, colors) but DIFFER in information density
+because their tasks differ.
+
+---
+
+## 5. Explicitly OUT OF SCOPE (Do Not Build)
+
+### Not a Trip Planner
+- No origin→destination routing with time estimates
+- No "fastest route" vs "fewest transfers" comparison
+- No fare calculation
+- No departure/arrival time selection
+
+### No Schedule Data
+- No train departure times
+- No timetable display
+- No "next train in X minutes"
+
+### No Social Features
+- No user accounts
+- No saved routes
+- No sharing
+- No ratings/reviews
+
+### No Advanced Filtering
+- No multi-criteria search (speed + cost + accessibility)
+- No line-type filtering (rapid vs local)
+- No operator preference settings
+
+### No Map Visualization
+- No interactive map as primary interface
+- SVG station maps are secondary (detail view only)
+- No route drawn on map
+
+### No Administrative Tools
+- No data editing UI
+- No CMS
+- No developer panel
+
+---
+
+## 6. AI Extension Risk Rules
+
+When future AI adds features, it must pass these tests:
+
+### Test 1: Task Alignment
+"Which user task does this serve?" If the answer is "none" or "the developer's testing needs", reject.
+
+### Test 2: Page Primacy
+"Does this belong on an existing page or a new page?" If adding to an existing page would
+make it serve two primary tasks, create a new page instead.
+
+### Test 3: Information Necessity
+"Would a first-time user understand why this information is here?" If the answer requires
+explaining database structure, reject or hide.
+
+### Test 4: Canonical Dependency
+"Does this use RailwayDB.resolveLineName() or its station/operator equivalents?"
+If it introduces a new display resolution path, it creates future drift risk.
+
+### Test 5: Scope Creep
+"Is this feature solving a user problem or a data completeness problem?"
+If the data exists but no user would ask for it, don't display it.
+
+---
+
+## 7. Current Implementation vs. Product Model Gap Analysis
+
+| Page | Current State | Product Model Alignment | Gap |
+|------|--------------|------------------------|-----|
+| Home | Route search + Tourism side-by-side | Route search PRIMARY, Tourism TERTIARY | Tourism too prominent |
+| Home | Two equal card modules | Search priority should be visual | CSS conflict (.sm-module vs .pixel-card) |
+| Realtime | Filter bar with operator buttons | OK for exploration, but secondary | Consider collapsing by default |
+| Realtime | Modal with full status details | OK | |
+| Trains | Line list + detail with SVG map | OK | |
+| Trains | Hash-based navigation | Slightly technical but functional | |
+| Route Search | Journey card with transfers | GOOD — aligns with product model | |
+| Route Search | Nearby spots appended to results | NEEDS REDESIGN — should be separate section | |
+| History | Simple search records | OK | |
+| Tourism Detail | Attraction info | OK but DATA-LIMITED (only coord+spots) | |
+| Global | 4-language support | GOOD — aligns with product model | |
+| Global | RailwayDB.resolveLineName() unified | GOOD — canonical provider established | |
+
+---
+
+## 8. 4.2 Phase Decisions (To Be Determined by User)
+
+### Likely Candidates for 4.2.1 Implementation:
+1. **Home hierarchy fix**: Make Route Search the clear primary, demote Tourism
+2. **Nearby spots redesign**: Move from inline to separate section
+3. **Tourism data expansion**: Add name/nameEn/nameZh fields (DATA-BLOCKED — needs external data)
+4. **Visual system unification**: Resolve .sm-module vs .pixel-card conflict
+
+### Likely Candidates for Deferred:
+1. **Image path fixes** (13 items) — Asset mapping, not product design
+2. **data/铁道/ cleanup** — Orphaned backup, zero runtime impact
+3. **Dead CSS cleanup** — Low priority, cosmetic
+4. **Multi-language tourism** — Blocked by data availability
+
+### Out of 4.2 Scope Entirely:
+1. **New features** (timetables, fare calc, social, etc.) — Explicitly out of scope
+2. **Admin tools** — Not a user product
+3. **Map visualization** — Not in product model
+
+---
+
+## 9. Final Product Statement
+
+> Pixel-Tetsudo is a railway information browser for people exploring Japan.
+> It helps users understand the rail network: which lines exist, where they go,
+> who operates them, and whether they're running normally right now.
+>
+> It is NOT a trip planner, timetable app, or navigation tool.
+> It is NOT designed for railway experts or data analysts.
+> It IS designed for curious travelers who want to understand the system they're about to ride.
+>
+> Every UI element must serve one of these questions:
+> - "What is this line?"
+> - "Where does it go?"
+> - "Is it running?"
+> - "What's near here?"
+>
+> If an element cannot answer one of these, it should not exist.
+
+---
+
+## Next Step
+
+Awaiting user review of this product model.
+Once approved, proceed to **4.2.1 Global Product Cleanup** with these decisions as the framework.

@@ -1,0 +1,89 @@
+# 4.3.2 IMPLEMENTATION REPORT
+
+Feature: Route Search Result UX — Journey Card Timeline Redesign
+Main-heart:我怎么从 A 到 B？
+Decision: EXTEND
+
+---
+
+## Modified Files
+1. js/search-ui.js — renderResults() HTML 结构重写（+44/-15 行）
+2. css/style.css — journey-* CSS 重构（+21/-1 行）
+3. data/core/translations.js — 无净变化（transfer_count 在 4.3.1 已添加）
+
+---
+
+## What Changed
+
+### Journey Card 视觉结构重塑
+
+**Before（旧版）:**
+`
+[绿色渐变 Header]  22分钟  [换乘徽章]
+[白底行]           出发站 > 到达站
+[段落]             线路A: 站1 -> 站2 [状态徽章]
+                   ⇋ 换乘站 [换乘]
+                   线路B: 站3 -> 站4 [状态徽章]
+`
+
+**After（新版）:**
+`
+[紧凑 Header]      22分钟  1换乘
+[时间线]
+  ● 出发站
+  ├─ 线路A: 站1 -> 站2 ─┐
+  │                      │ 左侧色条 = 线路颜色
+  ⇋ 换乘站               ├─ 线路B: 站3 -> 站4
+  ● 到达站
+`
+
+关键变化：
+- 删除 journey-route-line（水平 origin→arrow→dest）
+- 删除 journey-arrow（被移除的箭头元素）
+- 新增 journey-timeline（垂直时间线容器）
+- 新增 journey-node + journey-node-dot（起点/终点标记点）
+- 新增 journey-segments::before（垂直连接线）
+- 起点绿色圆点 / 终点红色圆点，一目了然
+
+### CSS 变化
+- Header: 绿色渐变 → 中性背景（duration + transfer count 不再抢眼）
+- Timeline: 新增垂直连接线（::before pseudo-element）
+- Segments: 保留 border-left-color（lineColor），增加 margin-left 实现缩进
+- Transfer: 保持绿色底色，增加 margin-left 缩进对齐
+- Mobile: 原有 @media 规则完全保留
+
+---
+
+## Consumer Preservation: PASS
+- SearchUI.renderResults(): 重写，但公共接口 (result, t) 不变
+- History: 仍通过 monkey-patch performSearch → fromInput/toInput 工作
+- Realtime/Trains/Tourism: 不消费 Journey Card HTML，不受影响
+- 四语言: 所有文案仍通过 t() 翻译函数
+
+## A-for-B Degradation: PASS
+- 仅修改 Home Route Search 的 renderResults() HTML 生成
+- History 的 100ms setTimeout 读取 fromInput/toInput，不受 HTML 结构影响
+- RailwayDB resolveLineName/resolveStationName 调用路径不变
+
+## Orphan Scan: PASS
+- New JS functions: 0
+- New CSS classes: journey-timeline, journey-node, journey-node-dot, journey-node-label (均为内部使用，非外部消费者)
+- No new Providers, resolvers, or data layers
+
+## Display Identity: PASS
+- All station names: RailwayDB.resolveStationName()
+- All line names: RailwayDB.resolveLineName()
+- No new display resolver introduced
+
+## Canonical Data: 156/509/1703/93 — UNCHANGED
+
+## Cross-Module Impact
+- Home/Route Search: REDESIGNED (improved)
+- History: NO CHANGE
+- Realtime: NO CHANGE
+- Trains: NO CHANGE
+- Tourism: NO CHANGE
+
+## Final Verdict: PASS
+
+Commit: d29ee13
