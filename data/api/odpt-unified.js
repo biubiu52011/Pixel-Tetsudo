@@ -504,6 +504,50 @@
         }
     };
 
+    // ========== Timetable Local Cache ==========
+    var TIMETABLE_CACHE_KEY = 'odpt_timetable_cache_v1';
+    var TIMETABLE_CACHE_TTL = 3600000;  // 1小时过期
+
+    function loadTimetableCache() {
+        try {
+            var cached = localStorage.getItem(TIMETABLE_CACHE_KEY);
+            if (!cached) return null;
+            var data = JSON.parse(cached);
+            if (!data || !data.timestamp) return null;
+            var age = Date.now() - data.timestamp;
+            if (age > TIMETABLE_CACHE_TTL) return null;
+            return data.timetables || {};
+        } catch(e) {
+            console.debug("[ODPT] Failed to load timetable cache:", e.message);
+            return null;
+        }
+    }
+
+    function saveTimetableCache(timetables) {
+        try {
+            var data = {
+                timestamp: Date.now(),
+                timetables: timetables
+            };
+            localStorage.setItem(TIMETABLE_CACHE_KEY, JSON.stringify(data));
+        } catch(e) {
+            console.debug("[ODPT] Failed to save timetable cache:", e.message);
+        }
+    }
+
+    function shouldRefreshTimetables() {
+        try {
+            var cached = localStorage.getItem(TIMETABLE_CACHE_KEY);
+            if (!cached) return true;
+            var data = JSON.parse(cached);
+            if (!data || !data.timestamp) return true;
+            var age = Date.now() - data.timestamp;
+            return age > TIMETABLE_CACHE_TTL;
+        } catch(e) {
+            return true;
+        }
+    }
+
     // ========== 全局数据存储 ==========
     window.ODPT_DELAY_DATA = {};       // 延误/运行情报
     window.ODPT_TRAIN_POSITIONS = {};  // 列车实时位置
@@ -511,15 +555,15 @@
     // 向后兼容：合并时刻表和实时位置
     window.ODPT_TRAINS = {};
 
-    // ========== 加载所有ODPT数据 ==========
-    function loadAllData() {
+    // ========== 加载实时数据（延误信息 + 实时位置）==========
+    // 每30秒刷新一次
+    function loadRealtimeData() {
         window.ODPT_DELAY_DATA = {};
         window.ODPT_TRAIN_POSITIONS = {};
-        window.ODPT_TIMETABLES = {};
-        window.ODPT_TRAINS = {};
+        // 注意：不清空ODPT_TIMETABLES和ODPT_TRAINS，时刻表使用缓存
 
         var ops = Object.keys(ODPT_ENDPOINTS);
-        var loaded = { delay: 0, positions: 0, timetables: 0 };
+        var loaded = { delay: 0, positions: 0 };
 
         var promises = ops.map(function(op) {
             var ep = ODPT_ENDPOINTS[op];
@@ -550,22 +594,6 @@
                 );
             }
 
-            // 3. 加载列车时刻表
-            if (ep.trainTimetable) {
-                subPromises.push(
-                    fetchODPT(buildUrl(op, 'trainTimetable')).then(extractData).then(function(data) {
-                        if (data && data.length > 0) {
-                            window.ODPT_TIMETABLES[op] = data;
-                            // 如果没有实时位置，用时刻表填充ODPT_TRAINS（向后兼容）
-                            if (!window.ODPT_TRAINS[op]) {
-                                window.ODPT_TRAINS[op] = data;
-                            }
-                            loaded.timetables++;
-                        }
-                    })
-                );
-            }
-
             return Promise.all(subPromises);
         });
 
@@ -582,18 +610,87 @@
                 }
             } catch(e) { console.debug("[ODPT] DataFusion push error:", e.message); }
 
-            console.log("[ODPT] Loaded - delay:", loaded.delay,
-                        "operators, positions:", loaded.positions,
-                        "operators, timetables:", loaded.timetables, "operators");
+            console.debug("[ODPT] Realtime loaded - delay:", loaded.delay,
+                        "operators, positions:", loaded.positions, "operators");
+        });
+    }
+
+    // ========== 加载时刻表数据（使用本地缓存）==========
+    // 每小时刷新一次，优先使用本地缓存
+    function loadTimetableData(forceRefresh) {
+        // 先尝试从本地缓存加载
+        var cachedTimetables = loadTimetableCache();
+        if (cachedTimetables && !forceRefresh) {
+            console.log("[ODPT] Using cached timetables from localStorage");
+            window.ODPT_TIMETABLES = cachedTimetables;
+            // 填充ODPT_TRAINS（向后兼容）
+            Object.keys(cachedTimetables).forEach(function(op) {
+                if (!window.ODPT_TRAINS[op]) {
+                    window.ODPT_TRAINS[op] = cachedTimetables[op];
+                }
+            });
+            return Promise.resolve();
+        }
+
+        // 缓存过期或强制刷新，从API加载
+        console.log("[ODPT] Loading fresh timetables from API");
+        var ops = Object.keys(ODPT_ENDPOINTS);
+        var loaded = 0;
+        var newTimetables = {};
+
+        var promises = ops.map(function(op) {
+            var ep = ODPT_ENDPOINTS[op];
+            if (!ep.trainTimetable) return Promise.resolve();
+
+            return fetchODPT(buildUrl(op, 'trainTimetable')).then(extractData).then(function(data) {
+                if (data && data.length > 0) {
+                    newTimetables[op] = data;
+                    window.ODPT_TIMETABLES[op] = data;
+                    // 如果没有实时位置，用时刻表填充ODPT_TRAINS（向后兼容）
+                    if (!window.ODPT_TRAINS[op]) {
+                        window.ODPT_TRAINS[op] = data;
+                    }
+                    loaded++;
+                }
+            });
+        });
+
+        return Promise.all(promises).then(function() {
+            // 保存到本地缓存
+            if (Object.keys(newTimetables).length > 0) {
+                saveTimetableCache(newTimetables);
+                console.log("[ODPT] Timetables cached to localStorage:", loaded, "operators");
+            }
+        });
+    }
+
+    // ========== 加载所有数据（实时数据 + 时刻表）==========
+    function loadAllData() {
+        // 先加载时刻表（可能使用缓存，快速返回）
+        return loadTimetableData(false).then(function() {
+            // 再加载实时数据（每30秒刷新）
+            return loadRealtimeData();
         });
     }
 
     // ========== Init ==========
     function init() {
+        // 初始加载所有数据
         loadAllData().catch(function(e) { console.warn("[ODPT] Init error:", e.message); });
+
+        // 实时数据每30秒刷新
         setInterval(function() {
-            loadAllData().catch(function(e) { console.warn("[ODPT] Refresh error:", e.message); });
+            loadRealtimeData().catch(function(e) { console.warn("[ODPT] Realtime refresh error:", e.message); });
         }, 30000);
+
+        // 时刻表每小时刷新（检查缓存是否过期）
+        setInterval(function() {
+            if (shouldRefreshTimetables()) {
+                console.log("[ODPT] Timetable cache expired, refreshing...");
+                loadTimetableData(true).catch(function(e) { console.warn("[ODPT] Timetable refresh error:", e.message); });
+            }
+        }, 300000);  // 每5分钟检查一次是否需要刷新
+
         console.log("[ODPT] Client initialized with", Object.keys(ODPT_ENDPOINTS).length, "operators");
     }
 
