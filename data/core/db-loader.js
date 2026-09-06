@@ -336,6 +336,72 @@ function applyData(data, i18n) {
           });
         }
       }
+      
+      // 7. Reorder Oedo Line stations to reflect "6-shaped" loop
+      // Correct order: Tochomae -> Hikarigaoka branch -> Tochomae -> Loop -> Tochomae
+      if (window.UNIFIED_LINES['Oedo'] && window.UNIFIED_LINES['Oedo'].stations) {
+        var oldStations = window.UNIFIED_LINES['Oedo'].stations;
+        
+        // Find Tochomae index
+        var tochomaeIndex = oldStations.indexOf('Tochomae');
+        
+        if (tochomaeIndex > 0) {
+          // Split into two parts:
+          // Part 1: Hikarigaoka -> Tochomae (光丘方向)
+          var hikarigaokaPart = oldStations.slice(0, tochomaeIndex + 1);
+          // Part 2: Tochomae -> Shinjuku-Sanchome (环线方向)
+          var loopPart = oldStations.slice(tochomaeIndex);
+          
+          // New order: Tochomae -> Hikarigaoka (reverse) -> Tochomae -> Loop (skip first Tochomae)
+          // This reflects the "6-shaped" line
+          var hikarigaokaReverse = hikarigaokaPart.slice().reverse();
+          var loopWithoutFirst = loopPart.slice(1);
+          
+          // Combine: Tochomae (start) -> Hikarigaoka -> Tochomae -> Loop -> Tochomae (end)
+          // But we don't want duplicate Tochomae, so:
+          // Tochomae -> Hikarigaoka direction (reverse, ending at Tochomae) -> Loop direction (starting after Tochomae)
+          var newStations = hikarigaokaReverse.concat(loopWithoutFirst);
+          
+          // Update stations
+          window.UNIFIED_LINES['Oedo'].stations = newStations;
+          
+          // Update durations to match new station count
+          if (window.UNIFIED_LINES['Oedo'].durations) {
+            var newDurations = [];
+            for (var i = 0; i < newStations.length - 1; i++) {
+              newDurations.push(2); // Default 2 minutes
+            }
+            window.UNIFIED_LINES['Oedo'].durations = newDurations;
+          }
+          
+          // Update LINE_STATION_ORDER
+          if (window.LINE_STATION_ORDER) {
+            window.LINE_STATION_ORDER['Oedo'] = {};
+            newStations.forEach(function(sid, order) {
+              window.LINE_STATION_ORDER['Oedo'][sid] = order;
+            });
+          }
+          
+          // Update STATION_LINES references
+          if (window.STATION_LINES) {
+            newStations.forEach(function(sid, order) {
+              if (!window.STATION_LINES[sid]) {
+                window.STATION_LINES[sid] = [];
+              }
+              // Remove old Oedo references
+              window.STATION_LINES[sid] = window.STATION_LINES[sid].filter(function(sl) {
+                return sl.line_id !== 'Oedo';
+              });
+              // Add new Oedo reference
+              window.STATION_LINES[sid].push({ line_id: 'Oedo', station_order: order });
+            });
+          }
+          
+          // Mark as special 6-shaped loop
+          window.UNIFIED_LINES['Oedo'].isSixShapedLoop = true;
+          window.UNIFIED_LINES['Oedo'].loopJunction = 'Tochomae';
+        }
+      }
     })();
     
     Object.keys(window.UNIFIED_LINES).forEach(function(lid) {
