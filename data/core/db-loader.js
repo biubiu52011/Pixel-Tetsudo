@@ -111,6 +111,29 @@ function applyData(data, i18n) {
       if (window.STATION_COORDS && window.STATION_COORDS['Kataomo_Bashi']) {
         window.STATION_COORDS['Omokage_Bashi'] = window.STATION_COORDS['Kataomo_Bashi'];
       }
+      
+      // 4. Fix line ID with diacritics: Tōnami -> Tonami
+      if (window.UNIFIED_LINES['Tōnami']) {
+        window.UNIFIED_LINES['Tonami'] = window.UNIFIED_LINES['Tōnami'];
+        delete window.UNIFIED_LINES['Tōnami'];
+        
+        // Fix STATION_LINES references
+        if (window.STATION_LINES) {
+          Object.keys(window.STATION_LINES).forEach(function(sid) {
+            window.STATION_LINES[sid].forEach(function(sl) {
+              if (sl.line_id === 'Tōnami') {
+                sl.line_id = 'Tonami';
+              }
+            });
+          });
+        }
+        
+        // Fix LINE_STATION_ORDER references
+        if (window.LINE_STATION_ORDER && window.LINE_STATION_ORDER['Tōnami']) {
+          window.LINE_STATION_ORDER['Tonami'] = window.LINE_STATION_ORDER['Tōnami'];
+          delete window.LINE_STATION_ORDER['Tōnami'];
+        }
+      }
     })();
     
     Object.keys(window.UNIFIED_LINES).forEach(function(lid) {
