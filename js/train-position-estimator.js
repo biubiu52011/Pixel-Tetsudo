@@ -268,7 +268,7 @@
           }
           positions.push({
             stationIndex: currentStationIndex,
-            trainId: trainNumber,
+            trainId: lineId + '_' + trainNumber,
             delayMin: delayMin,
             estimated: true,
             trainType: tt['odpt:trainType'] || '',
