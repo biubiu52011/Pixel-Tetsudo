@@ -185,15 +185,63 @@
           if (!stationKey) return;
           var delayMin = t["odpt:delay"] != null ? (parseInt(t["odpt:delay"], 10) || 0) : 0;
           var trainId = t["odpt:trainNumber"] || t["odpt:train"] || "";
+          var railDirection = t["odpt:railDirection"] || "";
+          var railway = t["odpt:railway"] || "";
+          var directionName = "";
+          if (railDirection) {
+            var dirParts = String(railDirection).split(":");
+            directionName = dirParts.length > 1 ? dirParts[dirParts.length - 1] : String(railDirection);
+          }
+          var railwayName = "";
+          if (railway) {
+            var railParts = String(railway).split(":");
+            railwayName = railParts.length > 1 ? railParts[railParts.length - 1] : String(railway);
+          }
+          var matchingLines = [];
           Object.keys(allLines).forEach(function(lid) {
             var line = allLines[lid];
             var lop = TransitConstants && typeof TransitConstants.normalizeOp === "function" ? TransitConstants.normalizeOp(line.operator) : line.operator;
             if (!line || lop !== top || !line.stations) return;
             var idx = line.stations.indexOf(stationKey);
             if (idx < 0) return;
-            if (!posMap[lid]) posMap[lid] = [];
-            posMap[lid].push({ stationIndex: idx, trainId: trainId, delayMin: delayMin });
+            matchingLines.push({ lid: lid, idx: idx, line: line });
           });
+          var targetLine = null;
+          if (matchingLines.length === 1) {
+            targetLine = matchingLines[0];
+          } else if (matchingLines.length > 1) {
+            for (var i = 0; i < matchingLines.length; i++) {
+              var ml = matchingLines[i];
+              if (railwayName && ml.lid.indexOf(railwayName) >= 0) {
+                targetLine = ml;
+                break;
+              }
+            }
+            if (!targetLine) {
+              matchingLines.sort(function(a, b) {
+                return (b.line.stations ? b.line.stations.length : 0) - (a.line.stations ? a.line.stations.length : 0);
+              });
+              targetLine = matchingLines[0];
+            }
+          }
+          if (targetLine) {
+            var lid = targetLine.lid;
+            var idx = targetLine.idx;
+            if (!posMap[lid]) posMap[lid] = [];
+            var existingIdx = posMap[lid].findIndex(function(p) { return p.trainId === trainId; });
+            var positionData = { 
+              stationIndex: idx, 
+              trainId: trainId, 
+              delayMin: delayMin,
+              railDirection: directionName,
+              estimated: false
+            };
+            if (existingIdx >= 0) {
+              posMap[lid][existingIdx] = positionData;
+            } else {
+              posMap[lid].push(positionData);
+            }
+          }
         });
       });
       odptData.realtimePositions = posMap;
