@@ -468,12 +468,21 @@
         staticLayer.appendChild(label);
       }
       
-      // Add branch lines (if any)
+      // Add branch lines (if any) - supports both loop and linear lines
       for (var bi = 0; bi < geometry.branchLines.length; bi++) {
         var branch = geometry.branchLines[bi];
         var bColor = branch.color || color;
-        var junctionIdx = 0; // Simplified: branch starts at first station
-        if (geometry.isLoop && stationCoords.length > junctionIdx) {
+        // Find junction station: first station of branch that exists in main line
+        var junctionIdx = 0;
+        if (branch.stations && branch.stations.length > 0 && stationCoords.length > 0) {
+          for (var _ji = 0; _ji < stationCoords.length; _ji++) {
+            if (stationCoords[_ji].stationId === branch.stations[0]) {
+              junctionIdx = _ji;
+              break;
+            }
+          }
+        }
+        if (stationCoords.length > junctionIdx) {
           var bx = stationCoords[junctionIdx].x + 20 + bi * 70;
           var by = stationCoords[junctionIdx].y;
           var branchTop = by - 20;
