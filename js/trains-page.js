@@ -321,6 +321,8 @@
   function renderTrainMap(el, line, lineId) {
     try {
       var positions = getRealtimePositions(lineId);
+      var _lang = window.currentLang || "ja";
+      var _rS = (window.RailwayDB && window.RailwayDB.resolveStationName) ? function(id){ return window.RailwayDB.resolveStationName(id, _lang) || id; } : function(id){ return id; };
       
       // Get route geometry from cache (single source of truth for coordinates)
       var geometry = computeRouteGeometry(line, lineId);
