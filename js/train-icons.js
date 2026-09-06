@@ -7,8 +7,18 @@
   "use strict";
 
   // Vehicle deployment zones: specific rolling stock only runs on listed segments
-  // 211系長野色（冰蓝与青色带）部署区间（参考 trafficnews.jp/post/676306）
   var VEHICLE_DEPLOYMENTS = {
+    // 211系湘南色（橙×绿帯、高崎車両センター）部署区间（参考 trainfrontview.net sozai-e4 高崎地区 + 用户指定 4 路线）
+    // 両毛線・吾妻線は 211 系湘南色が全普通列車を担当；上越線・信越本線は高崎側区間のみ
+    "211Shonan": {
+      routes: [
+        { line: "Ryomo", from: "Oyama", to: "Shin-Maebashi", icon: "../images/列车/JR東日本/211系湘南色.png", priority: 1 },   // 両毛線：全線（小山〜新前橋）
+        { line: "Agatsuma", from: "Shibukawa", to: "Numata", icon: "../images/列车/JR東日本/211系湘南色.png", priority: 1 },   // 吾妻線：渋川〜沼田（数据内站点）
+        { line: "Joetsu", from: "Takasaki", to: "Minakami", icon: "../images/列车/JR東日本/211系湘南色.png", priority: 1 },     // 上越線：高崎〜水上
+        { line: "Shinetsu", from: "Takasaki", to: "Yokokawa", icon: "../images/列车/JR東日本/211系湘南色.png", priority: 1 }    // 信越本線：高崎〜横川
+      ]
+    },
+    // 211系長野色（冰蓝与青色带）部署区间（参考 trafficnews.jp/post/676306）
     "211Nagano": {
       routes: [
         { line: "ChuoMain", from: "Takao", to: "Shiojiri", icon: "../images/列车/JR東日本/211系長野色.png", priority: 1 },        // 中央東線：高尾〜塩尻（2026.3 改点后不进高尾以东）
@@ -36,6 +46,59 @@
         { line: "Yahiko", from: "Higashi-Sanjo", to: "Yahiko", icon: "../images/列车/JR東日本/E129系.png", priority: 1 },   // 弥彦線：全線
         { line: "Uetsu", from: "Niitsu", to: "Murakami", icon: "../images/列车/JR東日本/E129系.png", priority: 1 },         // 羽越本線（新潟直流区間）：新津〜村上
         { line: "Joetsu", from: "Miyaike", to: "Minakami", icon: "../images/列车/JR東日本/E129系.png", priority: 1 }        // 上越線（新潟直流区間）：宮内(長岡)〜水上
+      ]
+    },
+    // ===== 特急・観光列車（typeMatch 按 ODPT trainType 匹配；from/to 省略 = 全線）=====
+    "ExpJREast": {
+      routes: [
+        { line: "Joban", icon: "../images/列车/JR東日本/E657系.png", typeMatch: ["Hitachi", "Tokiwa"], priority: 3 },          // ひたち・ときわ（常磐線特急）
+        { line: "JobanLocal", icon: "../images/列车/JR東日本/E657系.png", typeMatch: ["Hitachi", "Tokiwa"], priority: 3 },
+        { line: "ChuoRapid", icon: "../images/列车/JR東日本/E353系.png", typeMatch: ["Azusa", "Kaiji"], priority: 3 },        // あずさ・かいじ（中央線特急）
+        { line: "ChuoMain", icon: "../images/列车/JR東日本/E353系.png", typeMatch: ["Azusa", "Kaiji"], priority: 3 },
+        { line: "SobuRapid", icon: "../images/列车/JR東日本/E259系.png", typeMatch: ["NaritaExpress"], priority: 3 },        // 成田エクスプレス
+        { line: "Narita", icon: "../images/列车/JR東日本/E259系.png", typeMatch: ["NaritaExpress"], priority: 3 },
+        { line: "Tokaido", icon: "../images/列车/JR東日本/E261系.png", typeMatch: ["SaphirOdoriko"], priority: 3 },           // サフィール踊り子
+        { line: "Ito", icon: "../images/列车/JR東日本/E261系.png", typeMatch: ["SaphirOdoriko"], priority: 3 },
+        { line: "SobuRapid", icon: "../images/列车/JR東日本/E257系500番台.png", typeMatch: ["Sazanami", "Wakashio", "Shiosai"], priority: 3 }, // さざなみ・わかしお・しおさい
+        { line: "Uchibo", icon: "../images/列车/JR東日本/E257系500番台.png", typeMatch: ["Sazanami"], priority: 3 },
+        { line: "Sotobo", icon: "../images/列车/JR東日本/E257系500番台.png", typeMatch: ["Wakashio"], priority: 3 },
+        { line: "Narita", icon: "../images/列车/JR東日本/E257系500番台.png", typeMatch: ["Shiosai"], priority: 3 },
+        { line: "Uetsu", icon: "../images/列车/JR東日本/いなほ.png", typeMatch: ["Inaho"], priority: 3 },                     // 特急いなほ（新潟〜秋田）
+        { line: "Hakushin", icon: "../images/列车/JR東日本/いなほ.png", typeMatch: ["Inaho"], priority: 3 },
+        { line: "OuMain", icon: "../images/列车/JR東日本/つがる.png", typeMatch: ["Tsugaru"], priority: 3 },                  // 特急つがる（青森〜秋田）
+        { line: "Shinetsu", icon: "../images/列车/JR東日本/しらゆき.png", typeMatch: ["Shirayuki"], priority: 3 },            // 特急しらゆき（新潟〜直江津）
+        { line: "Joetsu", icon: "../images/列车/JR東日本/草津四万.png", typeMatch: ["Kusatsu", "Shima"], priority: 3 },       // 特急草津・四万
+        { line: "Agatsuma", icon: "../images/列车/JR東日本/草津四万.png", typeMatch: ["Kusatsu", "Shima"], priority: 3 },
+        { line: "Oga", icon: "../images/列车/JR東日本/さきがけ.png", typeMatch: ["Sakigake"], priority: 3 }                   // 快速さきがけ（男鹿線）
+      ]
+    },
+    "ExpTobu": {
+      routes: [
+        { line: "TobuSkytree", icon: "../images/列车/東武鉄道/スペーシアX.png", typeMatch: ["SpaciaX"], priority: 3 },        // スペーシアX
+        { line: "TobuNikko", icon: "../images/列车/東武鉄道/スペーシアX.png", typeMatch: ["SpaciaX"], priority: 3 },
+        { line: "TobuSkytree", icon: "../images/列车/東武鉄道/スペーシア リバティ.png", typeMatch: ["SpaciaLiberty"], priority: 3 }, // スペーシア リバティ
+        { line: "TobuNikko", icon: "../images/列车/東武鉄道/スペーシア リバティ.png", typeMatch: ["SpaciaLiberty"], priority: 3 },
+        { line: "TobuSkytree", icon: "../images/列车/東武鉄道/日光 きぬがわ.png", typeMatch: ["Kinu", "Kegon", "Nikko"], priority: 3 }, // きぬがわ・けごん
+        { line: "TobuNikko", icon: "../images/列车/東武鉄道/日光 きぬがわ.png", typeMatch: ["Kinu", "Kegon", "Nikko"], priority: 3 }
+      ]
+    },
+    "ExpOdakyu": {
+      routes: [
+        { line: "Odawara", icon: "../images/列车/小田急電鉄/ロマンスカーGSE.png", typeMatch: ["SuperHakone"], priority: 3 }, // GSE（スーパーはこね）
+        { line: "Odawara", icon: "../images/列车/小田急電鉄/ロマンスカーMSE.png", typeMatch: ["Hakone", "HomeWay", "MorningWay"], priority: 3 }, // MSE
+        { line: "OdakyuEnoshima", icon: "../images/列车/小田急電鉄/ロマンスカーEXE.png", typeMatch: ["Enoshima", "BayResort", "HomeWay", "MorningWay"], priority: 3 }, // EXE（えのしま等）
+        { line: "Odawara", icon: "../images/列车/小田急電鉄/80000系.png", typeMatch: ["Hakone"], priority: 2 },              // 80000系（新はこね）
+        { line: "Odawara", icon: "../images/列车/小田急電鉄/ロマンスカー.png", typeMatch: ["SuperHakone", "Hakone", "Enoshima", "HomeWay", "MorningWay", "BayResort"], priority: 1 },
+        { line: "OdakyuEnoshima", icon: "../images/列车/小田急電鉄/ロマンスカー.png", typeMatch: ["SuperHakone", "Hakone", "Enoshima", "HomeWay", "MorningWay", "BayResort"], priority: 1 },
+        { line: "OdakyuTama", icon: "../images/列车/小田急電鉄/ロマンスカー.png", typeMatch: ["SuperHakone", "Hakone", "Enoshima", "HomeWay", "MorningWay", "BayResort"], priority: 1 }
+      ]
+    },
+    "ExpSeibu": {
+      routes: [
+        { line: "Ikebukuro", icon: "../images/列车/西武鉄道/40000系.png", typeMatch: ["Chichibu", "Musashi"], priority: 3 }, // 特急ちちぶ・むさし（40000系）
+        { line: "SeibuChichibu", icon: "../images/列车/西武鉄道/40000系.png", typeMatch: ["Chichibu", "Musashi"], priority: 3 },
+        { line: "Ikebukuro", icon: "../images/列车/西武鉄道/西武観光特急.png", typeMatch: ["Ltrain"], priority: 2 },          // 観光特急 L-train
+        { line: "SeibuChichibu", icon: "../images/列车/西武鉄道/西武観光特急.png", typeMatch: ["Ltrain"], priority: 2 }
       ]
     }
   };
@@ -94,16 +157,24 @@
     "Musashino": "../images/列车/JR東日本/武蔵野線.png",
     "Nambu": "../images/列车/JR東日本/E233系8000番台.png",
     "Yokohama": "../images/列车/JR東日本/E233系6000番台.png",
-    "Keiyo": "../images/列车/JR東日本/E233系5000番台.png",
     "Tsurumi": "../images/列车/JR東日本/鶴見線.png",
     "Ome": "../images/列车/JR東日本/E233系青梅線.png",
     "Itsukaichi": "../images/列车/JR東日本/E233系0番台.png",
     "ShonanShinjuku": "../images/列车/JR東日本/E231系近郊型.png",
     "TohokuMain": "../images/列车/JR東日本/E231系近郊型.png",
     "OuMain": "../images/列车/JR東日本/E231系近郊型.png",
-    "Ryomo": "../images/列车/JR東日本/E231系近郊型.png",
-    "Agatsuma": "../images/列车/東武鉄道/東武各線.png",
+    "Ryomo": "../images/列车/JR東日本/211系湘南色.png",
+    "Agatsuma": "../images/列车/JR東日本/211系湘南色.png",
     "BanetsuWest": "../images/列车/東武鉄道/東武各線.png",
+    "Keiyo": "../images/列车/JR東日本/E233系2000番台.png",
+    "Karasuyama": "../images/列车/JR東日本/烏山線.png",
+    "Kururi": "../images/列车/JR東日本/久留里線.png",
+    "Sagami": "../images/列车/JR東日本/相模線.png",
+    "Sotobo": "../images/列车/JR東日本/内房線.png",
+    "Suigun": "../images/列车/JR東日本/水郡線.png",
+    "Uchibo": "../images/列车/JR東日本/外房線.png",
+    "Hachiko": "../images/列车/JR東日本/八高線.png",
+    "Noda": "../images/列车/東武鉄道/野田線.png",
     
     // Tokyo Metro specific
     "Ginza": "../images/列车/東京メトロ/銀座線.png",
@@ -122,7 +193,7 @@
     "Mita": "../images/列车/都営地下鉄/都営三田線.png",
     "Shinjuku": "../images/列车/都営地下鉄/都営新宿線.png",
     "Oedo": "../images/列车/都営地下鉄/大江戸線.png",
-    "TodenArakawa": "../images/列车/都営地下鉄/都電荒川線.png",
+    "Arakawa": "../images/列车/都営地下鉄/都電荒川線.png",
     "NipporiToneri": "../images/列车/都営地下鉄/都営浅草線.png",
     
     // Tobu specific
@@ -140,7 +211,7 @@
     "SeibuIkebukuro": "../images/列车/西武鉄道/池袋線.png",
     "SeibuShinjuku": "../images/列车/西武鉄道/新宿線.png",
     "SeibuTamagawa": "../images/列车/西武鉄道/多摩川線.png",
-    "Seibuen": "../images/列车/西武鉄道/西武園線.png",
+    "SeibuEn": "../images/列车/西武鉄道/西武園線.png",
     "Yamaguchi": "../images/列车/西武鉄道/山口線.png",
     
     // Tokyu specific
@@ -209,7 +280,7 @@
     "SaitamaNewUrbanTransit": "../images/列车/埼玉新都市交通/ニューシャトル.png"
   };
 
-  function getTrainIcon(lineId, operator, trainId, stationIndex) {
+  function getTrainIcon(lineId, operator, trainId, stationIndex, trainType) {
     try {
       // Chuo/Sobu local: E231系500番台 + E235系0番台 并用（2025 起 E235 由山手线转用）
       if (lineId === "ChuoLocal" || lineId === "ChuoSobuLocal") {
@@ -220,18 +291,45 @@
           ? "../images/列车/JR東日本/E231系総武中央線.png"
           : "../images/列车/JR東日本/E235系総武中央線.png";
       }
-      // Vehicle deployment zones first (211系長野色/E127等按区间部署，priority 高者优先)
+      // Vehicle deployment zones first (211系長野色/E127/E129/特急 etc., priority 高者优先)
       if (typeof stationIndex === "number" && window.UNIFIED_LINES && window.UNIFIED_LINES[lineId]) {
         var sts = window.UNIFIED_LINES[lineId].stations || [];
+        // 特急等按列車種別（trainType）匹配；URI 形式 odpt.TrainType:JR-East.Hitachi → Hitachi
+        var typeName = "";
+        if (trainType) {
+          var tp = String(trainType).split(":");
+          typeName = tp.length > 1 ? tp[tp.length - 1] : String(trainType);
+        }
         var bestIcon = null, bestPri = -1;
         Object.keys(VEHICLE_DEPLOYMENTS).forEach(function(vk) {
           var v = VEHICLE_DEPLOYMENTS[vk];
           v.routes.forEach(function(r) {
             if (r.line !== lineId || !r.icon) return;
-            var fi = sts.indexOf(r.from);
-            var ti = sts.indexOf(r.to);
-            if (fi === -1 || ti === -1) return;
-            var lo = Math.min(fi, ti), hi = Math.max(fi, ti);
+            // 特急/種別条件：typeMatch 指定がある場合は trainType の typeName で部分一致（大小写不敏感）
+            if (r.typeMatch) {
+              if (!typeName) return;
+              var matched = false;
+              for (var i = 0; i < r.typeMatch.length; i++) {
+                if (typeName.toLowerCase().indexOf(String(r.typeMatch[i]).toLowerCase()) >= 0) { matched = true; break; }
+              }
+              if (!matched) return;
+            }
+            // 区间条件：from/to 省略 = 全线；省略其一 = 单侧无界
+            var lo = 0, hi = sts.length - 1;
+            if (r.from && r.to) {
+              var fi = sts.indexOf(r.from);
+              var ti = sts.indexOf(r.to);
+              if (fi === -1 || ti === -1) return;
+              lo = Math.min(fi, ti); hi = Math.max(fi, ti);
+            } else if (r.from) {
+              var f2 = sts.indexOf(r.from);
+              if (f2 === -1) return;
+              lo = f2;
+            } else if (r.to) {
+              var t2 = sts.indexOf(r.to);
+              if (t2 === -1) return;
+              hi = t2;
+            }
             if (stationIndex >= lo && stationIndex <= hi) {
               var pri = r.priority || 0;
               if (pri > bestPri) { bestPri = pri; bestIcon = r.icon; }

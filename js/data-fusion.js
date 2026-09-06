@@ -245,11 +245,19 @@
             var idx = targetLine.idx;
             if (!posMap[lid]) posMap[lid] = [];
             var existingIdx = posMap[lid].findIndex(function(p) { return p.trainId === trainId; });
+            var rawType = t["odpt:trainType"] || "";
+            var typeName = "";
+            if (rawType) {
+              var tp = String(rawType).split(":");
+              typeName = tp.length > 1 ? tp[tp.length - 1] : String(rawType);
+            }
             var positionData = { 
               stationIndex: idx, 
               trainId: trainId, 
               delayMin: delayMin,
               railDirection: directionName,
+              trainType: rawType,
+              typeName: typeName,
               estimated: false
             };
             if (existingIdx >= 0) {
