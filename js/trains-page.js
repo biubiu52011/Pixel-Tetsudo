@@ -332,16 +332,16 @@
         var loop1Stations = stations.slice(0, hikarigaokaIdx + 1);
         var loop2Stations = [stations[0]].concat(stations.slice(hikarigaokaIdx + 1));
         // Calculate sizes based on new rendering layout
-        var spLoop6 = 28;
-        var junctionX = 160, junctionY = 120;
-        var loop1RectW = 80;
-        var loop1RectH = Math.max(loop1Stations.length * spLoop6 / 2 - 20, 100);
-        var loop2RectW = 100;
-        var loop2RectH = Math.max(loop2Stations.length * spLoop6 / 2 - 20, 200);
-        var loop2Cx = junctionX + loop2RectW / 2 + 10;
-        var loop2Cy = junctionY + loop2RectH / 2 - 10;
-        svgW = Math.max(loop2Cx + loop2RectW / 2 + 30, 320);
-        svgH = Math.max(loop2Cy + loop2RectH / 2 + 30, 300);
+        var spLoop6 = 26;
+        var junctionX = 150, junctionY = 100;
+        var loop1RectW = 70;
+        var loop1RectH = Math.max(loop1Stations.length * spLoop6 / 2 - 10, 90);
+        var loop2RectW = 90;
+        var loop2RectH = Math.max(loop2Stations.length * spLoop6 / 2 - 10, 180);
+        var loop2Cx = junctionX + loop2RectW / 2 + 5;
+        var loop2Cy = junctionY + loop2RectH / 2 - 5;
+        svgW = Math.max(loop2Cx + loop2RectW / 2 + 20, 300);
+        svgH = Math.max(loop2Cy + loop2RectH / 2 + 20, 280);
       } else {
         var svgW = isLoop ? 260 : 190 + branchOffset;
         var svgH = isLoop ? loopRectH + 80 : topP + stations.length * sp + botP;
@@ -353,16 +353,16 @@
       var mainCx = svgW / 2 - branchOffset / 2;
       if (isSixShapedLoop && stations.length > 2) {
         // Six-shaped loop rendering: two connected loops at junction station (Tochomae)
-        var spLoop6 = 28;
+        var spLoop6 = 26;
         // Junction station position (Tochomae) - where both loops connect
-        var junctionX = 160;
-        var junctionY = 120;
+        var junctionX = 150;
+        var junctionY = 100;
         
         // Loop 1 (Hikarigaoka direction): smaller loop going top-left from junction
-        var loop1RectW = 80;
-        var loop1RectH = Math.max(loop1Stations.length * spLoop6 / 2 - 20, 100);
-        var loop1Cx = junctionX - loop1RectW / 2 - 10;
-        var loop1Cy = junctionY - loop1RectH / 2 + 10;
+        var loop1RectW = 70;
+        var loop1RectH = Math.max(loop1Stations.length * spLoop6 / 2 - 10, 90);
+        var loop1Cx = junctionX - loop1RectW / 2 - 5;
+        var loop1Cy = junctionY - loop1RectH / 2 + 15;
         var loop1HalfW = loop1RectW / 2, loop1HalfH = loop1RectH / 2;
         var loop1Perimeter = 2 * (loop1RectW + loop1RectH);
         // Start from junction (right side of loop 1, going up)
@@ -384,10 +384,10 @@
         loop1Pts[0].side = "right";
         
         // Loop 2 (main loop direction): larger loop going bottom-right from junction
-        var loop2RectW = 100;
-        var loop2RectH = Math.max(loop2Stations.length * spLoop6 / 2 - 20, 200);
-        var loop2Cx = junctionX + loop2RectW / 2 + 10;
-        var loop2Cy = junctionY + loop2RectH / 2 - 10;
+        var loop2RectW = 90;
+        var loop2RectH = Math.max(loop2Stations.length * spLoop6 / 2 - 10, 180);
+        var loop2Cx = junctionX + loop2RectW / 2 + 5;
+        var loop2Cy = junctionY + loop2RectH / 2 - 5;
         var loop2HalfW = loop2RectW / 2, loop2HalfH = loop2RectH / 2;
         var loop2Perimeter = 2 * (loop2RectW + loop2RectH);
         // Start from junction (left side of loop 2, going down)
