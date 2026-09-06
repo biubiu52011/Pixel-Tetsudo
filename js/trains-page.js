@@ -351,6 +351,9 @@
         var maxX = Math.max(junctionX, hikarigaokaEndX, loopEndX);
         var minY = Math.min(junctionY, hikarigaokaEndY, loopCy - loopRectH / 2);
         var maxY = Math.max(junctionY, hikarigaokaEndY, loopEndY);
+        // Add offset to ensure all content is within viewbox (minX, minY >= 0)
+        var offsetX = minX < 0 ? -minX + 20 : 20;
+        var offsetY = minY < 0 ? -minY + 20 : 20;
         svgW = Math.ceil(maxX - minX + 40);
         svgH = Math.ceil(maxY - minY + 40);
       } else {
@@ -367,8 +370,9 @@
         // Tochomae direction is a CLOSED LOOP.
         var sp6 = 28;
         // Junction station (Tochomae) - where open line meets closed loop
-        var junctionX = 70;
-        var junctionY = 70;
+        // Apply offset to ensure all content is within viewbox
+        var junctionX = 70 + offsetX;
+        var junctionY = 70 + offsetY;
         
         // === Hikarigaoka direction: OPEN LINE (not closed) ===
         // Stations: Tochomae -> Nishi-Shinjuku-Gochome -> ... -> Hikarigaoka
