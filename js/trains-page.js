@@ -397,8 +397,8 @@
           bx = mainCx + 20 + bi * 70;
           by = bjy;
         }
-        var branchTop = isLoop ? by : topP;
-        var branchBot = isLoop ? by : topP + (bStations.length - 1) * sp;
+        var branchTop = by;
+        var branchBot = by + (bStations.length - 1) * sp;
         svg += "<line x1=\"" + (isLoop ? loopPts[junctionIdx].x : mainCx) + "\" y1=\"" + by + "\" x2=\"" + bx + "\" y2=\"" + by + "\""+ "  stroke=\"" + escapeHtml(bColor) + "\""+ "  stroke-width=\"3\" opacity=\"0.5\"/>";
         svg += "<line x1=\"" + bx + "\" y1=\"" + branchTop + "\" x2=\"" + bx + "\" y2=\"" + branchBot + "\""+ "  stroke=\"" + escapeHtml(bColor) + "\""+ "  stroke-width=\"4\" stroke-linecap=\"round\" opacity=\"0.4\"/>";
         for (var bsi = 0; bsi < bStations.length; bsi++) {
