@@ -126,6 +126,29 @@
 
   // ========== Transfer map cache: stationId -> interchange lines (excluding the line itself) ==========
   var _transferMapCache = null;
+  // Through-service direction at a given station of `lineId`:
+  //   first station of the line → "up" (∧, label above the station),
+  //   last station            → "down" (∨, label below the station),
+  //   any mid-line junction   → "middle" (label on the left of the station).
+  // Returns null when the station is not a through boundary.
+  function _throughDirForStation(lineId, stationId) {
+    var thrIds = (window.ThroughService && window.ThroughService.getDirectThroughLines) ? window.ThroughService.getDirectThroughLines(lineId) : [];
+    if (!thrIds.length) return null;
+    var src2 = (window.RailwayDB && window.RailwayDB.getAllLines) ? window.RailwayDB.getAllLines() : getLinesData();
+    var own2 = src2[lineId];
+    var sts2 = (own2 && own2.stations) ? own2.stations : [];
+    var idx2 = sts2.indexOf(stationId);
+    if (idx2 < 0) return null;
+    for (var ti = 0; ti < thrIds.length; ti++) {
+      var tl = src2[thrIds[ti]];
+      if (tl && tl.stations && tl.stations.indexOf(stationId) >= 0) {
+        if (idx2 === 0) return "up";
+        if (idx2 === sts2.length - 1) return "down";
+        return "middle";
+      }
+    }
+    return null;
+  }
   function _getTransferMap(lineId) {
     var _langNow = window.currentLang || "ja";
     if (_transferMapCache && _transferMapCache.lineId === lineId && _transferMapCache.lang === _langNow) return _transferMapCache.map;
@@ -148,18 +171,15 @@
     if (throughLines.length > 0) {
       var own = src[lineId];
       var ownStations = (own && own.stations) ? own.stations : [];
-      var ownIdxMap = {};
-      for (var k0 = 0; k0 < ownStations.length; k0++) ownIdxMap[ownStations[k0]] = k0;
-      var ownHalf = ownStations.length / 2;
       for (var i2 = 0; i2 < ownStations.length; i2++) {
         var stArr = map[ownStations[i2]];
         if (stArr) {
           for (var j2 = 0; j2 < stArr.length; j2++) {
             if (throughLines.indexOf(stArr[j2].lineId) >= 0) {
               stArr[j2].through = true;
-              // Direction the through train continues on the map: boundary station in the
-              // first half of the station list → "up" (∧), otherwise "down" (∨).
-              stArr[j2].dir = (ownIdxMap[ownStations[i2]] < ownHalf) ? "up" : "down";
+              // Direction the through train continues: first station → up (∧),
+              // last station → down (∨), mid-line junction → middle (label on the left).
+              stArr[j2].dir = _throughDirForStation(lineId, ownStations[i2]) || "middle";
             }
           }
         }
@@ -189,17 +209,24 @@
     var maxN = mobile ? 6 : 10;
     return nm.length > maxN ? nm.slice(0, maxN) + "…" : nm;
   }
+  // Size (w/h in px) of the boxed through-service label, used both for layout
+  // anchoring (position calculation) and by the renderer itself.
+  function _throughChipSize(lineObj, mobile) {
+    var nm = _throughShortName(lineObj, mobile);
+    var label = (lineObj.dir === "up" ? "∧" : "∨") + "直通" + nm;
+    var fs = mobile ? 9 : 7;
+    var w = label.length * (mobile ? 9 : 6.5) + 8;
+    var h = (mobile ? 19 : 12) + 4;
+    return { w: w + 2, h: h, label: label };
+  }
   // Industry-standard through-service affordance (mirrors JR/Tokyo Metro station
   // signage "相互直通運転"): a rounded boxed label reading "∨直通〇〇線" / "∧直通〇〇線",
   // where the arrow points in the direction the through train continues on the map
   // (up=∧, down=∨). Returns the consumed width so flow layouts can advance.
   function _renderThroughChip(layer, ns, x, y, lineObj, iconSize, mobile) {
-    var arrow = lineObj.dir === "up" ? "∧" : "∨";
-    var nm = _throughShortName(lineObj, mobile);
-    var label = arrow + "直通" + nm;
-    var fs = mobile ? 9 : 7;
-    var w = label.length * (mobile ? 9 : 6.5) + 8;
-    var h = iconSize + 4;
+    var sz = _throughChipSize(lineObj, mobile);
+    var label = sz.label;
+    var w = sz.w - 2, h = sz.h;
     var bg = document.createElementNS(ns, "rect");
     bg.setAttribute("x", x - 1);
     bg.setAttribute("y", y - 2);
@@ -213,7 +240,7 @@
     var txt = document.createElementNS(ns, "text");
     txt.setAttribute("x", x + 3);
     txt.setAttribute("y", y + (mobile ? 12 : 9));
-    txt.setAttribute("font-size", fs);
+    txt.setAttribute("font-size", mobile ? 9 : 7);
     txt.setAttribute("fill", "#2e7d32");
     txt.setAttribute("font-weight", "700");
     txt.textContent = label;
@@ -271,7 +298,14 @@
     var color = line.color || "#008803";
     var isLoop = line.type === "loop";
     var isSixShapedLoop = line.isSixShapedLoop === true;
-    var sp = 44, topP = 18, botP = 16;
+    // Room for boxed through-service labels at line ends: ∧ label sits ABOVE the
+    // start station, ∨ label BELOW the last station.
+    var thrTopPad = 0, thrBotPad = 0;
+    if (stations.length > 1) {
+      if (_throughDirForStation(lineId, stations[0])) thrTopPad = 26;
+      if (_throughDirForStation(lineId, stations[stations.length - 1])) thrBotPad = 26;
+    }
+    var sp = 44, topP = 18 + thrTopPad, botP = 16 + thrBotPad;
     
     // Get branch lines
     var allLines = getLinesData();
@@ -634,13 +668,14 @@
           var PER_ROW = isCompact ? 2 : (isDual ? 10 : 6);
           var MAX_ROWS = isCompact ? 2 : (isDual ? 2 : 1);
           var maxShow = PER_ROW * MAX_ROWS;
-          // Through partners always shown first (most important info on the chip)
-          var sortedTx = txLines.slice().sort(function(a, b) { return ((b.through ? 1 : 0) - (a.through ? 1 : 0)) || (a.name < b.name ? -1 : 1); });
-          var shown = sortedTx.slice(0, maxShow);
+          // Through partners are drawn as station-anchored boxed labels (start ∧
+          // above / end ∨ below / mid junction on the left) — keep them out of the
+          // icon chip so the chip stays a pure interchange-icon grid.
+          var nonThru = txLines.filter(function(t) { return !t.through; });
+          var shown = nonThru.slice(0, maxShow);
           var rows = Math.ceil(shown.length / PER_ROW);
           var rowW = Math.min(shown.length, PER_ROW) * (ICON + GAP) - GAP;
-          var moreText = txLines.length > maxShow ? "+" + (txLines.length - maxShow) : "";
-          var chipThroughRow = false;
+          var moreText = nonThru.length > maxShow ? "+" + (nonThru.length - maxShow) : "";
           var totalW = rowW + (moreText ? 12 : 0);
           var ix0, iy0;
           // Chip anchored to its station: 3px below the name (left/right/bottom).
@@ -657,18 +692,18 @@
           // compact 2-row layout (3 per row, then 2 per row) so it stays on-canvas.
           if (side === "left" && ix0 < 2 && !isCompact) {
             isCompact = true; ICON = 10; GAP = 1; PER_ROW = 3; MAX_ROWS = 2;
-            shown = sortedTx.slice(0, PER_ROW * MAX_ROWS);
+            shown = nonThru.slice(0, PER_ROW * MAX_ROWS);
             rows = Math.ceil(shown.length / PER_ROW);
             rowW = Math.min(shown.length, PER_ROW) * (ICON + GAP) - GAP;
-            moreText = txLines.length > PER_ROW * MAX_ROWS ? "+" + (txLines.length - PER_ROW * MAX_ROWS) : "";
+            moreText = nonThru.length > PER_ROW * MAX_ROWS ? "+" + (nonThru.length - PER_ROW * MAX_ROWS) : "";
             totalW = rowW + (moreText ? 12 : 0);
             ix0 = tx - totalW;
             if (ix0 < 2) {
               PER_ROW = 2;
-              shown = sortedTx.slice(0, PER_ROW * MAX_ROWS);
+              shown = nonThru.slice(0, PER_ROW * MAX_ROWS);
               rows = Math.ceil(shown.length / PER_ROW);
               rowW = Math.min(shown.length, PER_ROW) * (ICON + GAP) - GAP;
-              moreText = txLines.length > PER_ROW * MAX_ROWS ? "+" + (txLines.length - PER_ROW * MAX_ROWS) : "";
+              moreText = nonThru.length > PER_ROW * MAX_ROWS ? "+" + (nonThru.length - PER_ROW * MAX_ROWS) : "";
               totalW = rowW + (moreText ? 12 : 0);
               ix0 = tx - totalW;
             }
@@ -677,18 +712,18 @@
           // Right-side overflow: same compact degradation (2 rows, stays on-canvas)
           if ((side === "right" || side === "dual") && ix0 + totalW > svgW - 2 && !isCompact) {
             isCompact = true; ICON = 10; GAP = 1; PER_ROW = 3; MAX_ROWS = 2;
-            shown = sortedTx.slice(0, PER_ROW * MAX_ROWS);
+            shown = nonThru.slice(0, PER_ROW * MAX_ROWS);
             rows = Math.ceil(shown.length / PER_ROW);
             rowW = Math.min(shown.length, PER_ROW) * (ICON + GAP) - GAP;
-            moreText = txLines.length > PER_ROW * MAX_ROWS ? "+" + (txLines.length - PER_ROW * MAX_ROWS) : "";
+            moreText = nonThru.length > PER_ROW * MAX_ROWS ? "+" + (nonThru.length - PER_ROW * MAX_ROWS) : "";
             totalW = rowW + (moreText ? 12 : 0);
             ix0 = tx;
             if (ix0 + totalW > svgW - 2) {
               PER_ROW = 2;
-              shown = sortedTx.slice(0, PER_ROW * MAX_ROWS);
+              shown = nonThru.slice(0, PER_ROW * MAX_ROWS);
               rows = Math.ceil(shown.length / PER_ROW);
               rowW = Math.min(shown.length, PER_ROW) * (ICON + GAP) - GAP;
-              moreText = txLines.length > PER_ROW * MAX_ROWS ? "+" + (txLines.length - PER_ROW * MAX_ROWS) : "";
+              moreText = nonThru.length > PER_ROW * MAX_ROWS ? "+" + (nonThru.length - PER_ROW * MAX_ROWS) : "";
               totalW = rowW + (moreText ? 12 : 0);
               ix0 = tx;
             }
@@ -712,20 +747,10 @@
             var flowEndX = ix0, flowEndY = iy0;
             for (var fi = 0; fi < shown.length; fi++) {
               var fxl = shown[fi];
-              var fw;
-              if (fxl.through) {
-                // Through-service partner: boxed "∨/∧直通〇〇線" label (industry-standard signage)
-                var thruName = _throughShortName(fxl, isMobileView);
-                var thruLabel = (fxl.dir === "up" ? "∧" : "∨") + "直通" + thruName;
-                fw = thruLabel.length * (isMobileView ? 9 : 6.5) + 10;
-              } else {
-                var fName = fxl.name.length > 4 ? fxl.name.slice(0, 4) + "…" : fxl.name;
-                fw = fxl.image ? ICON : (fName.length * (isMobileView ? 9 : 6) + 4);
-              }
+              var fName = fxl.name.length > 4 ? fxl.name.slice(0, 4) + "…" : fxl.name;
+              var fw = fxl.image ? ICON : (fName.length * (isMobileView ? 9 : 6) + 4);
               if (curX + fw > maxLineW && curX > ix0) { curX = ix0; lineY += ICON + GAP; }
-              if (fxl.through) {
-                fw = _renderThroughChip(staticLayer, svgNS, curX, lineY, fxl, ICON, isMobileView);
-              } else if (fxl.image) {
+              if (fxl.image) {
                 var fImg = document.createElementNS(svgNS, "image");
                 fImg.setAttribute("href", fxl.image);
                 fImg.setAttribute("xlink:href", fxl.image);
@@ -753,13 +778,10 @@
             // Background chip width follows actual flow extent (grid estimate was too narrow)
             bg.setAttribute("width", (flowEndX - ix0) + (moreText ? 16 : 0) + 2);
           } else {
-            // Grid layout for loop/compact sides.
-            // Through partners go to a dedicated label row below the icon grid.
-            var gridItems = [], throughItems = [];
-            for (var ti = 0; ti < shown.length; ti++) { (shown[ti].through ? throughItems : gridItems).push(shown[ti]); }
-            var gRows = Math.max(1, Math.ceil(gridItems.length / PER_ROW));
-            for (var ti2 = 0; ti2 < gridItems.length; ti2++) {
-              var txl = gridItems[ti2];
+            // Grid layout for loop/compact sides (through partners are drawn as
+            // station-anchored labels, so the chip only carries plain interchange icons).
+            for (var ti2 = 0; ti2 < shown.length; ti2++) {
+              var txl = shown[ti2];
               var row = Math.floor(ti2 / PER_ROW);
               var col = ti2 % PER_ROW;
               var tix = ix0 + col * (ICON + GAP);
@@ -787,22 +809,11 @@
                 staticLayer.appendChild(tTxt);
               }
             }
-            if (throughItems.length > 0) {
-              var lx2 = ix0;
-              var ly2 = iy0 + gRows * (ICON + GAP) + 2;
-              for (var th = 0; th < throughItems.length; th++) {
-                lx2 += _renderThroughChip(staticLayer, svgNS, lx2, ly2, throughItems[th], ICON, isMobileView) + GAP;
-              }
-              // Widen/tall the chip background to cover the through-label row
-              bg.setAttribute("height", gRows * (ICON + GAP) + ICON + 8);
-              if (lx2 - ix0 > totalW) bg.setAttribute("width", (lx2 - ix0) + 2);
-              chipThroughRow = true;
-            }
           }
           if (moreText) {
             var more = document.createElementNS(svgNS, "text");
             var moreX = isDual ? flowEndX + 4 : ix0 + rowW + GAP;
-            var moreY = isDual ? flowEndY + 8 : (chipThroughRow ? iy0 + rows * (ICON + GAP) + ICON + 12 : iy0 + 8);
+            var moreY = isDual ? flowEndY + 8 : iy0 + 8;
             if (isDual && moreX + 12 > svgW - 2) { moreX = ix0; moreY = flowEndY + ICON + GAP + 8; }
             more.setAttribute("x", moreX);
             more.setAttribute("y", moreY);
@@ -810,6 +821,47 @@
             more.setAttribute("fill", "#777");
             more.textContent = moreText;
             staticLayer.appendChild(more);
+          }
+
+          // Through-service boxed labels anchored to the station in the through
+          // direction (industry-standard signage): start station → label ABOVE (∧),
+          // last station → label BELOW (∨), mid-line junction → label on the LEFT.
+          // Kept outside the icon chip so the chip stays a pure interchange grid.
+          // Multiple partners at the same station are laid out side by side
+          // (up/down) or stacked vertically (middle) so they never overlap.
+          var thruList = [];
+          for (var tI = 0; tI < txLines.length; tI++) {
+            if (txLines[tI] && txLines[tI].through) thruList.push(txLines[tI]);
+          }
+          var thruTotalW = 0;
+          for (var tW = 0; tW < thruList.length; tW++) thruTotalW += _throughChipSize(thruList[tW], isMobileView).w;
+          if (thruList.length > 1) thruTotalW += (thruList.length - 1) * 6;
+          var thruCursor = sc.x - thruTotalW / 2;
+          for (var tI2 = 0; tI2 < thruList.length; tI2++) {
+            var tt = thruList[tI2];
+            var sz = _throughChipSize(tt, isMobileView);
+            var lx, ly;
+            if (tt.dir === "up") { lx = thruCursor; ly = sc.y - sz.h - 4; }
+            else if (tt.dir === "down") { lx = thruCursor; ly = sc.y + 5; }
+            else {
+              // Mid-line junction: label on the LEFT of the station. When the
+              // station name also sits on the left (anchor=end), estimate its
+              // left edge from the known label anchor + name length so the boxed
+              // label never overlaps it (getBBox is unreliable mid-render — the
+              // SVG is not laid out yet when this runs).
+              if (side === "dual" || side === "left") {
+                var nameRightX = sc.x - (isJunction ? 14 : 10);
+                var estNameW = (stationName || "").length * (isMobileView ? 12 : 7.5);
+                lx = nameRightX - estNameW - sz.w - 6;
+              } else {
+                lx = sc.x - sz.w - 8;
+              }
+              ly = sc.y - sz.h / 2 + tI2 * (sz.h + 4);
+            }
+            thruCursor += sz.w + 6;
+            lx = Math.max(2, Math.min(lx, svgW - sz.w - 2));
+            ly = Math.max(2, Math.min(ly, svgH - sz.h - 2));
+            _renderThroughChip(staticLayer, svgNS, lx, ly, tt, ICON, isMobileView);
           }
         }
       }
