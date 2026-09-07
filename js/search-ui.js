@@ -330,10 +330,10 @@
           } else {
             var lineId = seg.lineId || null;
             var lineName = lineId ? (window.RailwayDB && window.RailwayDB.resolveLineName ? window.RailwayDB.resolveLineName(lineId, window.currentLang) : null) : null;
-            var lineColor = (window.RailwayDB && window.RailwayDB.getLine(lineId)) ? (window.RailwayDB.getLine(lineId).color || null) : null;
+            var lineColor = (window.LineOperationSystemsResolveColor && window.LineOperationSystemsResolveColor(lineId)) || (window.RailwayDB && window.RailwayDB.getLine(lineId) ? (window.RailwayDB.getLine(lineId).color || null) : null) || null;
             var fromSt = window.RailwayDB && window.RailwayDB.resolveStationName ? window.RailwayDB.resolveStationName(seg.fromStation, lang) : (seg.fromStation || '');
             var toSt = window.RailwayDB && window.RailwayDB.resolveStationName ? window.RailwayDB.resolveStationName(seg.toStation, lang) : (seg.toStation || '');
-            html += '<div class="journey-seg" style="border-left-color:' + window.escapeHtml(lineColor || 'var(--border)') + ';">';
+            html += '<div class="journey-seg" data-seg-color="' + window.escapeHtml(lineColor || '') + '">';
             html += '<span class="journey-seg-name">' + window.escapeHtml(lineName || '') + '</span>';
             // Running-status badge synced with Realtime page (delayed / suspended only)
             var _stBadge = '';
@@ -369,6 +369,11 @@
       var spotsHtml = '';
       if (destStation && typeof this.renderNearbySpots === 'function') { spotsHtml = this.renderNearbySpots(destStation, t); }
       this.resultsDiv.innerHTML = html;
+      // Apply journey segment border colors via DOM API (CSP-safe; inline style attributes are blocked by style-src 'self').
+      this.resultsDiv.querySelectorAll('.journey-seg').forEach(function(seg) {
+        var color = seg.getAttribute('data-seg-color');
+        if (color) seg.style.setProperty('border-left-color', color);
+      });
       if (spotsHtml) { this.resultsDiv.insertAdjacentHTML('beforeend', spotsHtml); }
     },
 
