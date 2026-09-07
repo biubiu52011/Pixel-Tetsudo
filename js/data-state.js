@@ -217,8 +217,11 @@
     var iconHtml = "";
     // Operator-generic logos (JRグループ.png etc.) are not line icons;
     // skip them so per-line cards never borrow another operator's logo.
-    var _imgOk = line.image && !/(グループ|ロゴ|マーク|アイコン|シンボル)/.test(line.image);
-    if (_imgOk) {
+    var _losIcon = (window.LineOperationSystemsResolveIcon && window.LineOperationSystemsResolveIcon(lineId)) || "";
+    var _imgOk = _losIcon || (line.image && !/(グループ|ロゴ|マーク|アイコン|シンボル)/.test(line.image));
+    if (_losIcon) {
+      iconHtml = '<img class="rs-line-icon" src="' + escapeHtml(_losIcon) + '" alt="" loading="lazy">';
+    } else if (_imgOk) {
       iconHtml = '<img class="rs-line-icon" src="' + escapeHtml(line.image) + '" alt="" loading="lazy">';
     } else if (line.operator === "JR-East") {
       iconHtml = '<div class="rs-line-icon-fallback"><img src="../images/鉄道/JR東日本/JRグループ.png" alt="JR"></div>';

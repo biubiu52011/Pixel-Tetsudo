@@ -1796,3 +1796,24 @@ window.LineOperationSystemsResolveColor = function(lineId) {
   }
   return null;
 };
+/*
+ * Line icon resolver - single authority for system-card icons.
+ * Consumers (search-ui, data-state) MUST call this before reading line.image,
+ * matching the ResolveColor pattern. LOS owns the icon of every running system.
+ */
+window.LineOperationSystemsResolveIcon = function(lineId) {
+  if (!lineId) return null;
+  var LOS = window.LineOperationSystems;
+  if (!LOS) return null;
+  for (var g in LOS) {
+    var arr = LOS[g];
+    if (!Array.isArray(arr)) continue;
+    for (var i = 0; i < arr.length; i++) {
+      var sys = arr[i];
+      if (sys.lineIds && sys.lineIds.indexOf(lineId) !== -1) {
+        return sys.icon || null;
+      }
+    }
+  }
+  return null;
+};
