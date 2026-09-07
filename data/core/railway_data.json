@@ -2563,12 +2563,6 @@
      "note": ""
     },
     {
-     "station": "Yurakucho",
-     "lineId": "TokaidoMain",
-     "type": "in",
-     "note": ""
-    },
-    {
      "station": "Shimbashi",
      "lineId": "Yokosuka",
      "type": "in",
@@ -2623,32 +2617,14 @@
      "note": ""
     },
     {
-     "station": "Hamamatsucho",
-     "lineId": "TokaidoMain",
-     "type": "in",
-     "note": ""
-    },
-    {
      "station": "Tamachi",
      "lineId": "Yamanote",
      "type": "in",
      "note": ""
     },
     {
-     "station": "Tamachi",
-     "lineId": "TokaidoMain",
-     "type": "in",
-     "note": ""
-    },
-    {
      "station": "Takanawa-Gateway",
      "lineId": "Yamanote",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Takanawa-Gateway",
-     "lineId": "TokaidoMain",
      "type": "in",
      "note": ""
     },
@@ -2695,12 +2671,6 @@
      "note": ""
     },
     {
-     "station": "Omori",
-     "lineId": "TokaidoMain",
-     "type": "in",
-     "note": ""
-    },
-    {
      "station": "Kamata",
      "lineId": "TokyuTamagawa",
      "type": "in",
@@ -2709,12 +2679,6 @@
     {
      "station": "Kamata",
      "lineId": "TokyuIkegami",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Kamata",
-     "lineId": "TokaidoMain",
      "type": "in",
      "note": ""
     },
@@ -2743,26 +2707,8 @@
      "note": ""
     },
     {
-     "station": "Tsurumi",
-     "lineId": "TokaidoMain",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Shin-Koyasu",
-     "lineId": "TokaidoMain",
-     "type": "in",
-     "note": ""
-    },
-    {
      "station": "Higashi-Kanagawa",
      "lineId": "Yokohama",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Higashi-Kanagawa",
-     "lineId": "TokaidoMain",
      "type": "in",
      "note": ""
     },
@@ -2989,18 +2935,6 @@
     },
     {
      "station": "Totsuka",
-     "lineId": "TokaidoMain",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Higashi-Totsuka",
-     "lineId": "TokaidoMain",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Hodogaya",
      "lineId": "TokaidoMain",
      "type": "in",
      "note": ""
@@ -5535,12 +5469,6 @@
      "lineId": "KeihinTohoku",
      "type": "in",
      "note": ""
-    },
-    {
-     "station": "Tsurumi",
-     "lineId": "TokaidoMain",
-     "type": "in",
-     "note": ""
     }
    ],
    "branches": [
@@ -7405,12 +7333,6 @@
     {
      "station": "Yurakucho",
      "lineId": "Yamanote",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Yurakucho",
-     "lineId": "TokaidoMain",
      "type": "in",
      "note": ""
     },
@@ -12711,32 +12633,14 @@
      "note": ""
     },
     {
-     "station": "Takanawa-Gateway",
-     "lineId": "TokaidoMain",
-     "type": "in",
-     "note": ""
-    },
-    {
      "station": "Tamachi",
      "lineId": "KeihinTohoku",
      "type": "in",
      "note": ""
     },
     {
-     "station": "Tamachi",
-     "lineId": "TokaidoMain",
-     "type": "in",
-     "note": ""
-    },
-    {
      "station": "Hamamatsucho",
      "lineId": "KeihinTohoku",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Hamamatsucho",
-     "lineId": "TokaidoMain",
      "type": "in",
      "note": ""
     },
@@ -12797,12 +12701,6 @@
     {
      "station": "Yurakucho",
      "lineId": "Yurakucho",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Yurakucho",
-     "lineId": "TokaidoMain",
      "type": "in",
      "note": ""
     },
@@ -20047,12 +19945,6 @@
      "lineId": "TokyuIkegami",
      "type": "in",
      "note": ""
-    },
-    {
-     "station": "Kamata",
-     "lineId": "TokaidoMain",
-     "type": "in",
-     "note": ""
     }
    ]
   },
@@ -21884,12 +21776,6 @@
      "note": ""
     },
     {
-     "station": "Higashi-Kanagawa",
-     "lineId": "TokaidoMain",
-     "type": "in",
-     "note": ""
-    },
-    {
      "station": "Kikuna",
      "lineId": "TokyuToyoko",
      "type": "in",
@@ -22155,12 +22041,6 @@
     {
      "station": "Kamata",
      "lineId": "TokyuTamagawa",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Kamata",
-     "lineId": "TokaidoMain",
      "type": "in",
      "note": ""
     }
@@ -22746,13 +22626,6 @@
     {
      "station": "Monorail-Hamamatsucho",
      "lineId": "KeihinTohoku",
-     "toStation": "Hamamatsucho",
-     "type": "out",
-     "note": "JR浜松町，徒歩約2分"
-    },
-    {
-     "station": "Monorail-Hamamatsucho",
-     "lineId": "TokaidoMain",
      "toStation": "Hamamatsucho",
      "type": "out",
      "note": "JR浜松町，徒歩約2分"
@@ -23557,13 +23430,6 @@
      "lineId": "Ito",
      "type": "in",
      "note": ""
-    },
-    {
-     "station": "Hamamatsucho",
-     "lineId": "TokyoMonorail",
-     "toStation": "Monorail-Hamamatsucho",
-     "type": "out",
-     "note": "モノレール浜松町，徒歩約2分"
     }
    ]
   },
