@@ -126,8 +126,18 @@
   var LINE_ICONS = {
     // ===== JR East =====
     "Yamanote": "../images/列车/JR東日本/E235系山手線.png",
+    // 4.3.271 常态化直通系统修正：
+    // 京浜東北線・根岸線 = 同一系統（E233系1000番台）
+    "KeihinTohoku": "../images/列车/JR東日本/E233系1000番台.png",
+    // 中央線快速 ↔ 青梅線 ↔ 五日市線 = 同一系統（青梅・五日市全列車中央線快速直通，E233系0番台同型）
     "ChuoLocal": "../images/列车/JR東日本/E235系総武中央線.png",
     "ChuoSobuLocal": "../images/列车/JR東日本/E235系総武中央線.png",
+    "ChuoRapid": "../images/列车/JR東日本/E233系0番台.png",
+    "Ome": "../images/列车/JR東日本/E233系青梅線.png",
+    "Itsukaichi": "../images/列车/JR東日本/E233系青梅線.png",
+    // 埼京線 ↔ 川越線（大宮〜川越間は埼京線車両 E233系7000番台が直通）
+    "Saikyo": "../images/列车/JR東日本/E233系7000番台.png",
+    "Kawagoe": "../images/列车/JR東日本/E233系7000番台.png",
     "Yokosuka": "../images/列车/JR東日本/E235系1000番台.png",
     "SobuRapid": "../images/列车/JR東日本/E235系1000番台.png",
     "SobuMain": "../images/列车/JR東日本/E235系1000番台.png",
@@ -135,6 +145,9 @@
     "JobanRapid": "../images/列车/JR東日本/E531系.png",
     "JobanLocal": "../images/列车/東京メトロ/18000系.png", // 常磐各停：千代田線车辆直通担当
     "Mito": "../images/列车/JR東日本/E531系.png",
+    // 上野東京ライン（宇都宮・高崎 ↔ 東海道）＝同一系統 E231系近郊型；宇都宮線(Oyama) 同車
+    "Tokaido": "../images/列车/JR東日本/E231系近郊型.png",
+    "Takasaki": "../images/列车/JR東日本/E231系近郊型.png",
     "Musashino": "../images/列车/JR東日本/武蔵野線.png",
     "Uetsu": "../images/列车/JR東日本/羽越線.png",
     "Ryomo": "../images/列车/JR東日本/211系湘南色.png",
