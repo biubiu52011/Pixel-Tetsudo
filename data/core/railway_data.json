@@ -6143,6 +6143,12 @@
      "note": ""
     },
     {
+     "station": "Ayase",
+     "lineId": "ChiyodaBranch",
+     "type": "in",
+     "note": ""
+    },
+    {
      "station": "Matsudo",
      "lineId": "Joban",
      "type": "in",
@@ -8753,6 +8759,12 @@
     {
      "station": "Ayase",
      "lineId": "JobanLocal",
+     "type": "in",
+     "note": ""
+    },
+    {
+     "station": "Ayase",
+     "lineId": "ChiyodaBranch",
      "type": "in",
      "note": ""
     },
@@ -24165,7 +24177,20 @@
     2
    ],
    "throughServices": [],
-   "transferStations": []
+    "transferStations": [
+     {
+      "station": "Ayase",
+      "lineId": "Chiyoda",
+      "type": "in",
+      "note": ""
+     },
+     {
+      "station": "Ayase",
+      "lineId": "JobanLocal",
+      "type": "in",
+      "note": ""
+     }
+    ]
   },
   "ChuoTatsuno": {
    "name": "ChuoTatsuno",
