@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Pixel Tetsudo - Database Loader
  * 从 railway_data.json 加载所有数据到全局变量
  * 新增：IndexedDB 实时数据缓存（train positions + delay info）
@@ -993,15 +993,15 @@ function load() {
 
     // HTTP/HTTPS: try fetch first
     return Promise.all([
-      fetch(DATA_FILE, { cache: "no-store" }).then(function(res) {
+      fetch(DATA_FILE, { cache: "no-cache" }).then(function(res) {
         if (!res.ok) throw new Error("HTTP " + res.status);
         return res.json();
       }),
-      fetch(STATION_I18N_FILE, { cache: "no-store" }).then(function(res) {
+      fetch(STATION_I18N_FILE, { cache: "no-cache" }).then(function(res) {
         if (!res.ok) return {};
         return res.json();
       }),
-      fetch(TOURISM_DATA_FILE, { cache: "no-store" }).then(function(res) {
+      fetch(TOURISM_DATA_FILE, { cache: "no-cache" }).then(function(res) {
         if (!res.ok) return {};
         return res.json();
       }).catch(function() { return {}; })

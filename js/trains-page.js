@@ -83,7 +83,7 @@
         name: l.name || ids[i],
         nameEn: l.nameEn || l.name || ids[i],
         code: l.code || ids[i],
-        color: l.color || "#888888",
+        color: (window.LineOperationSystemsResolveColor && window.LineOperationSystemsResolveColor(ids[i])) || l.color || "#888888",
         operator: l.operator || "Unknown",
         region: l.region || "",
         type: l.type || "straight",
@@ -173,7 +173,7 @@
       if (!map[t.station]) map[t.station] = [];
       map[t.station].push({
         lineId: t.lineId, image: img, name: nm, operator: tl.operator || "",
-        color: tl.color || "", type: t.type === "out" ? "out" : "in", note: t.note || ""
+        color: (window.LineOperationSystemsResolveColor && window.LineOperationSystemsResolveColor(t.lineId)) || tl.color || "", type: t.type === "out" ? "out" : "in", note: t.note || ""
       });
     }
     // Mark through-service (直通運転) partner lines that join this line at one of its own stations
@@ -371,7 +371,7 @@
     for (var bid in allLines) {
       if (allLines[bid].branchOf === lineId && bid !== lineId) {
         var bl = allLines[bid];
-        branchLines.push({ id: bid, name: bl.name || bid, color: bl.color || color, stations: bl.stations });
+        branchLines.push({ id: bid, name: bl.name || bid, color: (window.LineOperationSystemsResolveColor && window.LineOperationSystemsResolveColor(bid)) || bl.color || color, stations: bl.stations });
       }
     }
     var branchOffset = branchLines.length > 0 ? 70 * branchLines.length : 0;
@@ -631,7 +631,7 @@
       var sharedSegs = _findSharedSegments(line, allLines);
       for (var si = 0; si < sharedSegs.length; si++) {
         var sseg = sharedSegs[si];
-        var pColor = (allLines[sseg.partner] && allLines[sseg.partner].color) || "#888";
+        var pColor = (window.LineOperationSystemsResolveColor && window.LineOperationSystemsResolveColor(sseg.partner)) || (allLines[sseg.partner] && allLines[sseg.partner].color) || "#888";
         routeElements.push({
           type: 'line',
           attrs: { x1: mainCx - 7, y1: topP + sseg.start * sp, x2: mainCx - 7, y2: topP + sseg.end * sp, stroke: pColor, 'stroke-width': 3, 'stroke-linecap': 'round', opacity: 0.55 }
@@ -1402,8 +1402,8 @@
               renderFilterBar(document.getElementById("trainsFilterBar"));
               return;
             }
-            if (++_tries > 40) return; // ~12s cap
-            setTimeout(tick, 300);
+            if (++_tries > 120) return; // ~60s cap (mobile GitHub Pages can be slow)
+            setTimeout(tick, 500);
           })();
         })();
         // Restore hash-based navigation (poll until line data is ready; async load timing)
