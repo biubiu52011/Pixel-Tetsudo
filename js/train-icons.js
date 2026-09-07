@@ -70,8 +70,8 @@
     },
     "ExpTobu": {
       routes: [
-        { line: "TobuSkytree", icon: "../images/列车/東武鉄道/スペーシアX.png", typeMatch: ["SpaciaX"], priority: 3 },        // スペーシアX
-        { line: "TobuNikko", icon: "../images/列车/東武鉄道/スペーシアX.png", typeMatch: ["SpaciaX"], priority: 3 },
+        { line: "TobuSkytree", icon: "../images/列车/東武鉄道/N100系.png", typeMatch: ["SpaciaX"], priority: 3 },        // スペーシアX（N100系）
+        { line: "TobuNikko", icon: "../images/列车/東武鉄道/N100系.png", typeMatch: ["SpaciaX"], priority: 3 },
         { line: "TobuSkytree", icon: "../images/列车/東武鉄道/スペーシア リバティ.png", typeMatch: ["SpaciaLiberty"], priority: 3 }, // スペーシア リバティ
         { line: "TobuNikko", icon: "../images/列车/東武鉄道/スペーシア リバティ.png", typeMatch: ["SpaciaLiberty"], priority: 3 },
         { line: "TobuSkytree", icon: "../images/列车/東武鉄道/日光 きぬがわ.png", typeMatch: ["Kinu", "Kegon", "Nikko"], priority: 3 }, // きぬがわ・けごん
@@ -101,9 +101,9 @@
     "Toei": "../images/列车/都営地下鉄/1000形.png", // 4.3.266：原都営浅草線.png 为电子设备占位图，改用 1000形（电车）
     "YokohamaMunicipal": "../images/列车/横浜市交通局/横浜市ブルーライン.png",
     "Keio": "../images/鉄道/京王電鉄/京王線.png", // 4.3.266：原京王.png 为随身听占位图，回退全局默认（京王素材待补）
-    "Odakyu": "../images/鉄道/小田急電鉄/小田原線.png", // 4.3.266：原小田急線.png 为巴士占位图，回退全局默认（素材待补）
+    "Odakyu": "../images/列车/小田急電鉄/8000系.png", // 4.3.274：小田急系統共通 8000系（小田原/江ノ島/多摩 同一車輛体系）
     "Seibu": "../images/列车/西武鉄道/30000系.png", // 4.3.270：西武运营商默认 = 30000系（通勤主力）
-    "Tobu": "../images/列车/東武鉄道/東武各線.png",
+    "Tobu": "../images/列车/東武鉄道/8000系.png", // 4.3.274：東武標準一般車
     "Tokyu": "../images/列车/東急電鉄/田園都市線.png",
     "Keikyu": "../images/列车/京急電鉄/京急線.png",
     "Keisei": "../images/列车/京成電鉄/京成.png",
@@ -163,7 +163,7 @@
     "Suigun": "../images/列车/JR東日本/水郡線.png",       // 水郡線：キハE130系
     "Uchibo": "../images/列车/JR東日本/外房線.png",       // 4.3.266：railway_data 中 Uchibo 显示名=外房線，图标对齐显示名
     "Hachiko": "../images/列车/JR東日本/八高線.png",
-    "Noda": "../images/鉄道/東武鉄道/野田線.png",
+    "Noda": "../images/列车/東武鉄道/20400系.png", // 4.3.274：野田線（アーバンパークライン）
 
     // Tokyo Metro specific
     "Ginza": "../images/列车/東京メトロ/銀座線.png",
@@ -183,16 +183,20 @@
     "Oedo": "../images/鉄道/都営地下鉄/都営大江戸線.png",
     "Arakawa": "../images/鉄道/都営地下鉄/都電荒川線.png",
 
-    // Tobu specific
-    "TobuSkytree": "../images/列车/東武鉄道/東武各線.png",
-    "TobuIsesaki": "../images/列车/東武鉄道/東武各線.png",
-    "TobuTojo": "../images/列车/東武鉄道/東武各線.png",   // 4.3.273：東上系統（東上線+越生線 全列車直通、同一車輛）
-    "Tojo": "../images/列车/東武鉄道/東武各線.png",
-    "TobuNikko": "../images/列车/東武鉄道/東武各線.png",
-    "TobuNoda": "../images/鉄道/東武鉄道/野田線.png",
+    // Tobu specific（4.3.274：车型命名入库，同系统线路共用同一车型图）
+    "TobuSkytree": "../images/列车/東武鉄道/30000系.png",     // スカイツリーライン（伊勢崎線系）：30000系
+    "TobuIsesaki": "../images/列车/東武鉄道/30000系.png",     // 伊勢崎線：スカイツリー系統（同一車輛）
+    "TobuTojo": "../images/列车/東武鉄道/60000系.png",       // 東上系統：60000系（東上線・越生線 同一車輛）
+    "Tojo": "../images/列车/東武鉄道/60000系.png",
+    "TobuNikko": "../images/列车/東武鉄道/1000系.png",       // 日光線：一般列車（1000系）
+    "TobuNoda": "../images/列车/東武鉄道/20400系.png",       // 野田線（アーバンパークライン）：20400系
     "Tobu_Kameido": "../images/列车/東武鉄道/亀戸線.png",
-    "Ogose": "../images/列车/東武鉄道/東武各線.png",
-    "Utsunomiya": "../images/鉄道/東武鉄道/宇都宮線.png", // 東武宇都宮線
+    "Ogose": "../images/列车/東武鉄道/60000系.png",          // 越生線：東上系統（東上線全列車直通）
+    "Utsunomiya": "../images/列车/東武鉄道/8000系.png",      // 東武宇都宮線：8000系
+    // Odakyu specific（4.3.274：小田急系統共通 8000系，ロマンスカー は typeMatch 優先）
+    "Odawara": "../images/列车/小田急電鉄/8000系.png",
+    "OdakyuEnoshima": "../images/列车/小田急電鉄/8000系.png",
+    "OdakyuTama": "../images/列车/小田急電鉄/8000系.png",
     // 4.3.273 JR 系統補全
     "Nambu": "../images/列车/JR東日本/E233系8000番台.png",     // 南武線：E233系8000番台（図庫既有）
     "TokaidoMain": "../images/列车/JR東日本/E231系近郊型.png", // 東海道本線：上野東京ライン系統（Tokaido 同一車両）
