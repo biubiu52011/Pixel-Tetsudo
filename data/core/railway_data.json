@@ -2873,6 +2873,13 @@
      "lineId": "Keisei",
      "type": "out",
      "note": "京成上野，徒歩約3分"
+    },
+    {
+     "station": "Hamamatsucho",
+     "lineId": "TokyoMonorail",
+     "toStation": "Monorail-Hamamatsucho",
+     "type": "out",
+     "note": "モノレール浜松町，徒歩約2分"
     }
    ]
   },
@@ -12811,6 +12818,13 @@
      "toStation": "Meiji-Jingumae",
      "type": "in",
      "note": ""
+    },
+    {
+     "station": "Hamamatsucho",
+     "lineId": "TokyoMonorail",
+     "toStation": "Monorail-Hamamatsucho",
+     "type": "out",
+     "note": "モノレール浜松町，徒歩約2分"
     }
    ]
   },
@@ -22745,7 +22759,29 @@
     "Haneda Airport Terminal 1",
     "Haneda Airport Terminal 2"
    ],
-   "transferStations": []
+   "transferStations": [
+    {
+     "station": "Monorail-Hamamatsucho",
+     "lineId": "Yamanote",
+     "toStation": "Hamamatsucho",
+     "type": "out",
+     "note": "JR浜松町，徒歩約2分"
+    },
+    {
+     "station": "Monorail-Hamamatsucho",
+     "lineId": "KeihinTohoku",
+     "toStation": "Hamamatsucho",
+     "type": "out",
+     "note": "JR浜松町，徒歩約2分"
+    },
+    {
+     "station": "Monorail-Hamamatsucho",
+     "lineId": "TokaidoMain",
+     "toStation": "Hamamatsucho",
+     "type": "out",
+     "note": "JR浜松町，徒歩約2分"
+    }
+   ]
   },
   "SobuMain": {
    "nameJa": "総武本線",
@@ -23557,6 +23593,13 @@
      "lineId": "Ito",
      "type": "in",
      "note": ""
+    },
+    {
+     "station": "Hamamatsucho",
+     "lineId": "TokyoMonorail",
+     "toStation": "Monorail-Hamamatsucho",
+     "type": "out",
+     "note": "モノレール浜松町，徒歩約2分"
     }
    ]
   },
