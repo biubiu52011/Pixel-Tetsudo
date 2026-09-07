@@ -89,11 +89,11 @@
     causeSection.querySelector(".rs-section-title").textContent = t("status.delay_cause");
     var causeHtml;
     if (status === "no_data") {
-      causeHtml = '<span style="color:var(--text-muted)">' + t("status.no_data") + '</span>';
+      causeHtml = '<span class="rs-text-muted">' + t("status.no_data") + '</span>';
     } else if (cause) {
       causeHtml = escapeHtml(cause);
     } else {
-      causeHtml = '<span style="color:var(--text-muted)">' + t("status.none") + '</span>';
+      causeHtml = '<span class="rs-text-muted">' + t("status.none") + '</span>';
     }
     causeSection.querySelector(".rs-cause-text").innerHTML = causeHtml;
     // Updated time section

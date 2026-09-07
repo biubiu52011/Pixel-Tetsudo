@@ -39,6 +39,8 @@
 @media (max-width: 640px) { .tp-line-map { padding: 6px; } }
 .tp-map-wrap { width: 100%; max-width: 100%; min-width: 200px; }
 .tp-map-wrap svg { width: 100%; height: auto; display: block; }
+.tp-no-data { text-align: center; color: var(--text-muted); font-size: 13px; padding: 16px; }
+.tp-no-data-sub { font-size: 11px; color: var(--text-muted); }
 
 /* Train icon smooth movement */
 .train-icon {

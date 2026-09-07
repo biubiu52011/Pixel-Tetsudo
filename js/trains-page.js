@@ -1110,7 +1110,7 @@
       var loading = t("trains.loading");
       var info = "";
       if (positions.length === 0) {
-        info = '<div class="tp-no-data">' + noData + '<br><span style="font-size:11px;color:var(--text-muted)">' + loading + '</span></div>';
+        info = '<div class="tp-no-data">' + noData + '<br><span class="tp-no-data-sub">' + loading + '</span></div>';
       }
       el.innerHTML = '<div class="tp-map-wrap"></div>' + info;
       el.querySelector('.tp-map-wrap').appendChild(svg);
