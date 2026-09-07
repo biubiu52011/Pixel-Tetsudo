@@ -15,6 +15,13 @@
 
   // Vehicle deployment zones: specific rolling stock only runs on listed segments
   var VEHICLE_DEPLOYMENTS = {
+    // 埼京線 ↔ 川越線：大宮〜川越間は埼京線車両 E233系7000番台が直通担当
+    // （川越線独自区間 川越〜高麗川 は LINE_ICONS の E209系3500番台）
+    "SaikyoKawagoe": {
+      routes: [
+        { line: "Kawagoe", from: "Omiya", to: "Kawagoe", icon: "../images/列车/JR東日本/E233系7000番台.png", priority: 2 }
+      ]
+    },
     // 211系湘南色（橙×绿帯、高崎車両センター）部署区间（参考 trainfrontview.net sozai-e4 高崎地区 + 用户指定 4 路线）
     "211Shonan": {
       routes: [
