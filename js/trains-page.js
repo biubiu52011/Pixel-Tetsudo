@@ -832,7 +832,7 @@
           };
           var maxRowW = 0;
           for (var rw_ = 0; rw_ < rows; rw_++) maxRowW = Math.max(maxRowW, _rowWAt(rw_));
-          var rowW = _rowWAt(rows - 1);
+          var rowW = rows > 0 ? _rowWAt(rows - 1) : 0;
           var moreText = nonThru.length > maxShow ? "+" + (nonThru.length - maxShow) : "";
           var totalW = maxRowW + (moreText ? 12 : 0);
           var ix0, iy0;
