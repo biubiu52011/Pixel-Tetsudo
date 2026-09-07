@@ -756,6 +756,13 @@
   font-weight: 600;
   backdrop-filter: blur(4px);
 }
+.station-badge .station-icon {
+  width: 14px;
+  height: 14px;
+  display: block;
+  flex-shrink: 0;
+}
+
 .hero-meta .tag-badge {
   background: rgba(0,0,0,0.35);
   border-color: rgba(255,255,255,0.3);

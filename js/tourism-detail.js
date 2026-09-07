@@ -201,7 +201,7 @@ var currentStationKey = null;
 
     // Station badge
     var stationBadge = stationName
-      ? '<span class="station-badge">' + escapeHtml(stationName) + '</span>'
+      ? '<span class="station-badge"><img src="../images/icon-metro-station.svg" alt="" class="station-icon">' + escapeHtml(stationName) + '</span>'
       : '';
 
     // Tips section
