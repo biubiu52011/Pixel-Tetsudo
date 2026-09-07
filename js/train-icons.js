@@ -117,7 +117,7 @@
     "SaitamaNewUrbanTransit": "../images/鉄道/埼玉新都市交通/伊奈線.png",
     "ChibaUrbanMonorail": "../images/鉄道/千葉都市モノレール/千葉都市モノレール1号線.png",
     "TokyoMonorail": "../images/鉄道/東京モノレール/東京モノレール羽田空港線.png",
-    "NipporiToneri": "../images/列车/都営地下鉄/1000形.png",
+    "NipporiToneri": "../images/鉄道/都営地下鉄/日暮里・舎人ライナー.png", // 4.3.273：日暮里・舎人ライナー = AGT新交通（330形），非1000形地下鉄車
     "MinatoMirai": "../images/列车/東急電鉄/東横MM線.png",
     "ShonanMonorail": "../images/鉄道/湘南モノレール/湘南モノレール江の島線.png"
   };
@@ -177,7 +177,8 @@
     "Fukutoshin": "../images/列车/東京メトロ/副都心線.png",
     "KitaAyase": "../images/列车/東京メトロ/北綾瀬支線.png",
 
-    // Toei specific（浅草/三田/日暮里舎人 → 回退运营商默认 1000形）
+    "Mita": "../images/鉄道/都営地下鉄/都営三田線.png",  // 4.3.273：三田線 = 6300形/6500形（1000形は浅草線用の誤用→符号に修正、素材待補）
+    // Toei specific（浅草線 回退 1000形；新宿線・大江戸線・荒川線 符号）
     "Shinjuku": "../images/鉄道/都営地下鉄/都営新宿線.png",
     "Oedo": "../images/鉄道/都営地下鉄/都営大江戸線.png",
     "Arakawa": "../images/鉄道/都営地下鉄/都電荒川線.png",
@@ -185,25 +186,30 @@
     // Tobu specific
     "TobuSkytree": "../images/列车/東武鉄道/東武各線.png",
     "TobuIsesaki": "../images/列车/東武鉄道/東武各線.png",
-    "TobuTojo": "../images/鉄道/東武鉄道/東武東上線.png",
-    "Tojo": "../images/鉄道/東武鉄道/東武東上線.png",
+    "TobuTojo": "../images/列车/東武鉄道/東武各線.png",   // 4.3.273：東上系統（東上線+越生線 全列車直通、同一車輛）
+    "Tojo": "../images/列车/東武鉄道/東武各線.png",
     "TobuNikko": "../images/列车/東武鉄道/東武各線.png",
     "TobuNoda": "../images/鉄道/東武鉄道/野田線.png",
     "Tobu_Kameido": "../images/列车/東武鉄道/亀戸線.png",
     "Ogose": "../images/列车/東武鉄道/東武各線.png",
     "Utsunomiya": "../images/鉄道/東武鉄道/宇都宮線.png", // 東武宇都宮線
+    // 4.3.273 JR 系統補全
+    "Nambu": "../images/列车/JR東日本/E233系8000番台.png",     // 南武線：E233系8000番台（図庫既有）
+    "TokaidoMain": "../images/列车/JR東日本/E231系近郊型.png", // 東海道本線：上野東京ライン系統（Tokaido 同一車両）
 
-    // Seibu specific（4.3.270：用户提供 6 车型素材，按线路代表车型映射）
-    "SeibuShinjuku": "../images/列车/西武鉄道/40000系.png",       // 新宿線：S-TRAIN 40000系（特急代表）
+    // Seibu specific（4.3.273：按运行系统分组，支线全列車直通親線 → 同一車輛）
+    "SeibuShinjuku": "../images/列车/西武鉄道/30000系.png",       // 新宿系統・普通主力（40000系は特急S-TRAIN用）
+    "Hamura": "../images/列车/西武鉄道/30000系.png",              // 拝島線：新宿系統（全列車新宿線直通、同一車輛）
+    "Kokubunji": "../images/列车/西武鉄道/30000系.png",           // 国分寺線：新宿系統
     "SeibuTamagawa": "../images/列车/西武鉄道/多摩川線.png",
     "SeibuEn": "../images/列车/西武鉄道/西武園線.png",
     "Yamaguchi": "../images/列车/西武鉄道/山口線.png",
     "SeibuYamaguchi": "../images/列车/西武鉄道/山口線.png",
-    "SeibuChichibu": "../images/列车/西武鉄道/4000系.png",        // 秩父線：4000系
-    "Seibu_Sayama": "../images/列车/西武鉄道/9000系.png",         // 狭山線（球場線）：9000系
+    "SeibuChichibu": "../images/列车/西武鉄道/4000系.png",        // 秩父線：池袋系統（池袋線直通）
+    "Seibu_Sayama": "../images/列车/西武鉄道/9000系.png",         // 狭山線（球場線）：池袋系統
     "SeibuTamako": "../images/列车/西武鉄道/9000系.png",          // 多摩湖線：9000系
-    "Yurakucho_Seibu": "../images/列车/西武鉄道/40050系.png",     // 西武有楽町線：40050系（池袋線直通新型）
-    "SeibuToshima": "../images/列车/西武鉄道/9000系.png",         // 豊島線：9000系
+    "Yurakucho_Seibu": "../images/列车/西武鉄道/40050系.png",     // 西武有楽町線：池袋系統（新型）
+    "SeibuToshima": "../images/列车/西武鉄道/9000系.png",         // 豊島線：池袋系統
 
     // Tokyu specific
     "TokyuDenEn": "../images/列车/東急電鉄/田園都市線.png",
