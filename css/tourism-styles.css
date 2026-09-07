@@ -1005,12 +1005,25 @@
   opacity: 1;
 }
 
-
-
-
-
-
-
-
-
-
+/* === Mobile font scaling (<=640px) === */
+@media (max-width: 640px) {
+  .article-title { font-size: 24px; }
+  .section-heading { font-size: 13px; letter-spacing: 0.8px; }
+  .article-text { font-size: 16px; line-height: 1.9; }
+  .tag-badge { font-size: 12px; padding: 4px 12px; }
+  .station-badge { font-size: 14px; padding: 4px 12px; }
+  .hero-meta .tag-badge { font-size: 12px; }
+  .tips-list li { font-size: 14px; padding: 8px 14px; }
+  .info-label { font-size: 11px; }
+  .info-value { font-size: 15px; }
+  .info-row { padding: 12px 14px; }
+  .qi-label { font-size: 11px; }
+  .qi-value { font-size: 16px; }
+  .qi-item { padding: 14px 12px; }
+  .map-label { font-size: 11px; }
+  .map-value { font-size: 15px; }
+  .nav-spot-name { font-size: 14px; }
+  .nav-label { font-size: 11px; }
+  .detail-back-btn { font-size: 14px; padding: 12px 22px; }
+  .article-section { padding: 24px 20px; }
+}
