@@ -15022,6 +15022,34 @@
      "lineId": "Keikyu",
      "type": "in",
      "note": ""
+    },
+    {
+     "station": "Tenku-Bashi",
+     "lineId": "TokyoMonorail",
+     "toStation": "Tenkubashi",
+     "type": "in",
+     "note": ""
+    },
+    {
+     "station": "Haneda-Kuko-T1T2",
+     "lineId": "TokyoMonorail",
+     "toStation": "Haneda Airport Terminal 1",
+     "type": "out",
+     "note": "東京モノレール羽田空港第1ターミナル，徒歩約5分"
+    },
+    {
+     "station": "Haneda-Kuko-T1T2",
+     "lineId": "TokyoMonorail",
+     "toStation": "Haneda Airport Terminal 2",
+     "type": "out",
+     "note": "東京モノレール羽田空港第2ターミナル，徒歩約3分"
+    },
+    {
+     "station": "Haneda-Kuko-T3",
+     "lineId": "TokyoMonorail",
+     "toStation": "Haneda Airport Terminal 3",
+     "type": "out",
+     "note": "東京モノレール羽田空港第3ターミナル，徒歩約4分"
     }
    ]
   },
@@ -22629,6 +22657,34 @@
      "toStation": "Hamamatsucho",
      "type": "out",
      "note": "JR浜松町，徒歩約2分"
+    },
+    {
+     "station": "Tenkubashi",
+     "lineId": "KeikyuAirport",
+     "toStation": "Tenku-Bashi",
+     "type": "in",
+     "note": ""
+    },
+    {
+     "station": "Haneda Airport Terminal 1",
+     "lineId": "KeikyuAirport",
+     "toStation": "Haneda-Kuko-T1T2",
+     "type": "out",
+     "note": "京急羽田空港第1・第2ターミナル，徒歩約5分"
+    },
+    {
+     "station": "Haneda Airport Terminal 2",
+     "lineId": "KeikyuAirport",
+     "toStation": "Haneda-Kuko-T1T2",
+     "type": "out",
+     "note": "京急羽田空港第1・第2ターミナル，徒歩約3分"
+    },
+    {
+     "station": "Haneda Airport Terminal 3",
+     "lineId": "KeikyuAirport",
+     "toStation": "Haneda-Kuko-T3",
+     "type": "out",
+     "note": "京急羽田空港第3ターミナル，徒歩約4分"
     }
    ]
   },
