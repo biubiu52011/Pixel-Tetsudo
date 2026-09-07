@@ -102,7 +102,7 @@
     "YokohamaMunicipal": "../images/列车/横浜市交通局/横浜市ブルーライン.png",
     "Keio": "../images/鉄道/京王電鉄/京王線.png", // 4.3.266：原京王.png 为随身听占位图，回退全局默认（京王素材待补）
     "Odakyu": "../images/鉄道/小田急電鉄/小田原線.png", // 4.3.266：原小田急線.png 为巴士占位图，回退全局默认（素材待补）
-    "Seibu": "../images/鉄道/西武鉄道/西武池袋線.png", // 4.3.266：原池袋線.png 为电子设备占位图，回退全局默认（素材待补）
+    "Seibu": "../images/列车/西武鉄道/30000系.png", // 4.3.270：西武运营商默认 = 30000系（通勤主力）
     "Tobu": "../images/列车/東武鉄道/東武各線.png",
     "Tokyu": "../images/列车/東急電鉄/田園都市線.png",
     "Keikyu": "../images/列车/京急電鉄/京急線.png",
@@ -180,12 +180,17 @@
     "Ogose": "../images/列车/東武鉄道/東武各線.png",
     "Utsunomiya": "../images/鉄道/東武鉄道/宇都宮線.png", // 東武宇都宮線
 
-    // Seibu specific（池袋線 已清理，其余保留待审）
-    "SeibuShinjuku": "../images/鉄道/西武鉄道/西武新宿線.png",
+    // Seibu specific（4.3.270：用户提供 6 车型素材，按线路代表车型映射）
+    "SeibuShinjuku": "../images/列车/西武鉄道/40000系.png",       // 新宿線：S-TRAIN 40000系（特急代表）
     "SeibuTamagawa": "../images/列车/西武鉄道/多摩川線.png",
     "SeibuEn": "../images/列车/西武鉄道/西武園線.png",
     "Yamaguchi": "../images/列车/西武鉄道/山口線.png",
     "SeibuYamaguchi": "../images/列车/西武鉄道/山口線.png",
+    "SeibuChichibu": "../images/列车/西武鉄道/4000系.png",        // 秩父線：4000系
+    "Seibu_Sayama": "../images/列车/西武鉄道/9000系.png",         // 狭山線（球場線）：9000系
+    "SeibuTamako": "../images/列车/西武鉄道/9000系.png",          // 多摩湖線：9000系
+    "Yurakucho_Seibu": "../images/列车/西武鉄道/40050系.png",     // 西武有楽町線：40050系（池袋線直通新型）
+    "SeibuToshima": "../images/列车/西武鉄道/9000系.png",         // 豊島線：9000系
 
     // Tokyu specific
     "TokyuDenEn": "../images/列车/東急電鉄/田園都市線.png",
