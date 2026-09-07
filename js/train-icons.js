@@ -109,7 +109,7 @@
     "Keisei": "../images/列车/京成電鉄/京成.png",
     "Sotetsu": "../images/列车/相模鉄道/相鉄.png",
     "TWR": "../images/鉄道/東京臨海高速鉄道/臨海線.png",
-    "MIR": "../images/鉄道/横浜高速鉄道/みなとみらい線.png",
+    "MIR": "../images/列车/東急電鉄/東横MM線.png",
     "Rinkai": "../images/鉄道/東京臨海高速鉄道/臨海線.png",
     "TsukubaExpress": "../images/列车/首都圏新都市鉄道/つくばエクスプレス.png",
     "Yurikamome": "../images/列车/ゆりかもめ/ゆりかもめ.png",
@@ -118,7 +118,7 @@
     "ChibaUrbanMonorail": "../images/鉄道/千葉都市モノレール/千葉都市モノレール1号線.png",
     "TokyoMonorail": "../images/鉄道/東京モノレール/東京モノレール羽田空港線.png",
     "NipporiToneri": "../images/列车/都営地下鉄/1000形.png",
-    "MinatoMirai": "../images/鉄道/横浜高速鉄道/みなとみらい線.png",
+    "MinatoMirai": "../images/列车/東急電鉄/東横MM線.png",
     "ShonanMonorail": "../images/鉄道/湘南モノレール/湘南モノレール江の島線.png"
   };
 
@@ -189,17 +189,19 @@
 
     // Tokyu specific
     "TokyuDenEn": "../images/列车/東急電鉄/田園都市線.png",
-    "TokyuMeguro": "../images/鉄道/東急電鉄/目黒線.png",
-    "TokyuTamagawa": "../images/鉄道/東急電鉄/東急多摩川線.png",
+    "TokyuMeguro": "../images/列车/東急電鉄/目黒線.png",
+    "TokyuTamagawa": "../images/列车/東急電鉄/池上多摩川線.png",
     "Denentoshi": "../images/列车/東急電鉄/田園都市線.png",
-    "Oimachi": "../images/鉄道/東急電鉄/大井町線.png",
-    "Meguro": "../images/鉄道/東急電鉄/目黒線.png",
-    "Ikegami": "../images/鉄道/東急電鉄/池上線.png",
-    "Tamagawa": "../images/鉄道/東急電鉄/東急多摩川線.png",
-    "Kodomonokuni": "../images/鉄道/東急電鉄/こどもの国線.png",
-    "TokyuIkegami": "../images/鉄道/東急電鉄/池上線.png",
-    "TokyuKodomonokuni": "../images/鉄道/東急電鉄/こどもの国線.png",
-    "TokyuOimachi": "../images/鉄道/東急電鉄/大井町線.png",
+    "Oimachi": "../images/列车/東急電鉄/大井町線.png",
+    "Meguro": "../images/列车/東急電鉄/目黒線.png",
+    "Ikegami": "../images/列车/東急電鉄/池上多摩川線.png",
+    "Tamagawa": "../images/列车/東急電鉄/池上多摩川線.png",
+    "Kodomonokuni": "../images/列车/東急電鉄/こどもの国線.png",
+    "TokyuIkegami": "../images/列车/東急電鉄/池上多摩川線.png",
+    "TokyuKodomonokuni": "../images/列车/東急電鉄/こどもの国線.png",
+    "TokyuOimachi": "../images/列车/東急電鉄/大井町線.png",
+    "TokyuToyoko": "../images/列车/東急電鉄/東横MM線.png",   // 4.3.269：東横線 + みなとみらい線 直通（横浜高速鉄道 Y500系 同型）
+    "Toyoko": "../images/列车/東急電鉄/東横MM線.png",
 
     // Keikyu specific
     "Keikyu": "../images/列车/京急電鉄/京急線.png",
@@ -239,7 +241,7 @@
     // Single-line operators
     "TWR": "../images/鉄道/東京臨海高速鉄道/臨海線.png",
     "Rinkai": "../images/鉄道/東京臨海高速鉄道/臨海線.png",
-    "MIR": "../images/鉄道/横浜高速鉄道/みなとみらい線.png",
+    "MIR": "../images/列车/東急電鉄/東横MM線.png",
     "TsukubaExpress": "../images/列车/首都圏新都市鉄道/つくばエクスプレス.png",
     "Yurikamome": "../images/列车/ゆりかもめ/ゆりかもめ.png",
     "TamaMonorail": "../images/鉄道/多摩都市モノレール/多摩都市モノレール線.png",
@@ -248,7 +250,7 @@
     "SaitamaNewUrbanTransit": "../images/鉄道/埼玉新都市交通/伊奈線.png",
 
     // ===== railway_data key 对齐 =====
-    "MinatoMirai": "../images/鉄道/横浜高速鉄道/みなとみらい線.png",
+    "MinatoMirai": "../images/列车/東急電鉄/東横MM線.png",
     "NewShuttle": "../images/鉄道/埼玉新都市交通/伊奈線.png",
     "HitachiNakaKaimin": "../images/鉄道/ひたちなか海浜鉄道/湊線.png",
     "Tōnami": "../images/列车/JR東日本/只見線.png",       // 4.3.266：只見線 = GV-E400系（原GV-E400系.png 为机械面板占位图）
