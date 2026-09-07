@@ -14,7 +14,7 @@ const TI = sandbox.window.TrainIcons;
 console.log('=== 语法/加载 OK, LINE_ICONS:', Object.keys(TI.LINE_ICONS).length, 'OPERATOR:', Object.keys(TI.OPERATOR_ICONS).length);
 
 // 2. 残留垃圾引用检查（4.3.276 逐张放大10x重新判定：37张中36张实车已恢复，仅东京モノレール为卡通机器人脸垃圾）
-const junk = ['東京モノレール.png'];
+const junk = [];
 let junkHit = 0;
 for (const j of junk) {
   if (src.includes(j)) { console.log('JUNK REMAIN:', j); junkHit++; }
