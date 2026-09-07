@@ -172,7 +172,7 @@
     "Tozai": "../images/鉄道/東京メトロ/東西線.png",
     "Chiyoda": "../images/列车/東京メトロ/18000系.png",
     "Yurakucho": "../images/列车/東京メトロ/有楽町線.png",
-    "Hanzomon": "../images/列车/東京メトロ/半蔵門線.png",
+    "Hanzomon": "../images/列车/東急電鉄/田園都市線.png",   // 4.3.272：半蔵門線↔田園都市線 100%相互直通（同一列車：東急5000系/メトロ8000系が両線を運行）
     "Namboku": "../images/列车/東京メトロ/南北線.png",
     "Fukutoshin": "../images/列车/東京メトロ/副都心線.png",
     "KitaAyase": "../images/列车/東京メトロ/北綾瀬支線.png",
