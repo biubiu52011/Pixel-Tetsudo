@@ -43,19 +43,10 @@
         }
       }
       
-      // Also add transfer connections between lines
-      if (line.transferStations) {
-        for (const transfer of line.transferStations) {
-          const station = transfer.station;
-          if (graph.has(station)) {
-            for (const connectLineId of (transfer.connects || [])) {
-              const connectLine = window.DataLayer ? window.DataLayer.getLine(connectLineId) : (window.UNIFIED_LINES ? window.UNIFIED_LINES[connectLineId] : null);
-              // Transfer stations are already in the graph via line stations
-              // No need to add self-loops - BFS visited set handles this
-            }
-          }
-        }
-      }
+      // Cross-line interchanges are NOT built here: they are established by
+      // shared station IDs (buildLayerGraph.stationLines) plus explicit
+      // transferStations (penalty) / transferStations[].toStation (異名換乘)
+      // consumed in the Dijkstra transfer step below.
     }
     
     _graphCache = graph;
@@ -132,7 +123,7 @@
       });
       lineMeta[lid] = { stations: l.stations, positions: positions, durations: l.durations || [] };
     }
-    _layerCache = { stationLines: stationLines, lineMeta: lineMeta, transferPenalty: buildTransferPenalty(lines) };
+    _layerCache = { stationLines: stationLines, lineMeta: lineMeta, transferPenalty: buildTransferPenalty(lines), aliasTransfers: buildAliasTransfers(lines) };
     return _layerCache;
   }
 
@@ -150,6 +141,27 @@
         const a = lid, b = t.lineId;
         const key = t.station + '\u0001' + (a < b ? a : b) + '\u0001' + (a < b ? b : a);
         if (!m.has(key)) m.set(key, { out: t.type === 'out', walk: walkMin(t.note) });
+      }
+    }
+    return m;
+  }
+
+  // Name-mismatch (異名) transfer declarations: transferStations[].toStation names
+  // the target line's station ID when the same physical interchange carries a
+  // different ID on each line (JR 原宿 Harajuku ↔ 千代田線 明治神宮前 Meiji-Jingumae).
+  // Returns Map<"fromStation\u0001fromLine", Map<toLineId, toStation>>.
+  function buildAliasTransfers(lines) {
+    const m = new Map();
+    for (const lid of Object.keys(lines)) {
+      const l = lines[lid];
+      if (!l || !Array.isArray(l.transferStations)) continue;
+      for (const t of l.transferStations) {
+        if (!t || !t.station || !t.lineId || !t.toStation) continue;
+        const tl = lines[t.lineId];
+        if (!tl || !Array.isArray(tl.stations) || tl.stations.indexOf(t.toStation) < 0) continue;
+        const key = t.station + '\u0001' + lid;
+        if (!m.has(key)) m.set(key, new Map());
+        m.get(key).set(t.lineId, t.toStation);
       }
     }
     return m;
@@ -242,9 +254,16 @@
 
       // Transfer to other lines at the same station
       const otherLines = stationLines.get(st) || new Set();
-      for (const ol of otherLines) {
+      // Name-mismatch interchanges (異名換乘): transferStations[].toStation connects
+      // this station to a differently-ID'd station on the target line, e.g.
+      // JR 原宿 Harajuku ↔ 千代田線 明治神宮前〈原宿〉 Meiji-Jingumae.
+      const aliasMap = (layer.aliasTransfers && layer.aliasTransfers.get(st + '\u0001' + lid)) || null;
+      const txTargets = new Set(otherLines);
+      if (aliasMap) { for (const ol of aliasMap.keys()) { if (ol !== lid) txTargets.add(ol); } }
+      for (const ol of txTargets) {
         if (ol === lid) continue;
-        const nk = st + '\u0001' + ol;
+        const txSt = (aliasMap && aliasMap.has(ol)) ? aliasMap.get(ol) : st;
+        const nk = txSt + '\u0001' + ol;
         const through = isThroughConnected(lid, ol);
         let txCost = through ? THROUGH_PENALTY : TRANSFER_PENALTY;
         // Out-of-station interchange: add the real walk minutes declared in
@@ -297,6 +316,9 @@
         }
         lastLine = lid;
         segFrom = st;
+        // Name-mismatch interchange: the station ID changed across the transfer
+        // (原宿 → 明治神宮前), so the new ID must appear in the path.
+        if (st !== lastSt) path.push(st);
         lastSt = st;
       } else {
         lastSt = st;

@@ -1,4 +1,0 @@
-      "op.JR-West": "JR West",
-      "op.JR-West": "JR西日本",
-      "op.JR-West": "JR西日本",
-      "op.JR-West": "JR서일본",

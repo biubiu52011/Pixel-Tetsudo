@@ -169,6 +169,20 @@
     };
     return result;
   }
+  // Localize station exit direction labels (東口/西口/南口/北口/駅直結)
+  function localizeExitDirection(dir) {
+    if (!dir) return '';
+    if (dir === '駅直結') return t('tourism.station_direct');
+    var dirKeys = { '東口': 'tourism.east', '西口': 'tourism.west', '南口': 'tourism.south', '北口': 'tourism.north' };
+    var key = dirKeys[dir];
+    if (key) {
+      var lang = state.lang || 'ja';
+      var suffix = t('tourism.exit_suffix');
+      return (lang === 'en') ? t(key) + ' ' + suffix : t(key) + suffix;
+    }
+    return dir;
+  }
+
 function renderGrid() {
     if (!dom.grid) return;
     const stationKey = state.selectedStation;
@@ -240,10 +254,17 @@ function renderGrid() {
         '<img class="sm-thumb-img" src="' + encodeURI(image) + '" alt="' + _escSpot(name) + '">' :
         '<span class="sm-thumb-icon">&#x2699;</span>';
       
-      // Dynamic exit direction - already mapped to actual exit name (e.g. 東口, 西口, 駅直結)
-      // Only shows exits that actually exist at the current station
-      const exitText = s.exitDirection || '';
-      const distRowHtml = s.distText ? '<p class="sm-dist">' + _escSpot(s.distText) + (exitText ? ' · ' + _escSpot(exitText) : '') + '</p>' : '';
+      // Localize distance text with current language (cached distanceText is ja-only)
+      let distText = '';
+      if (s.distM !== null && s.distM !== undefined && !isNaN(s.distM)) {
+        distText = TourismProximity.formatWalkMinutes(s.distM, { at_station: t('tourism.at_station'), min_walk: t('tourism.min_walk') }) || '';
+      }
+      if (!distText) distText = s.distText || '';
+      // Localize exit direction (東口/西口/南口/北口/駅直結)
+      let exitText = localizeExitDirection(s.exitDirection || '');
+      // Dedupe: at-station distance text already says 駅直結 in some languages
+      if (distText && exitText && distText === exitText) exitText = '';
+      const distRowHtml = (distText || exitText) ? '<p class="sm-dist">' + (distText ? _escSpot(distText) : '') + (distText && exitText ? ' · ' : '') + (exitText ? _escSpot(exitText) : '') + '</p>' : '';
       
       const tagsHtml = tags.filter(function(tag) { return tag !== 'all'; }).map(function(tag) {
         return '<span>' + t('tourism.tag_' + tag) + '</span>';
@@ -279,12 +300,9 @@ function renderGrid() {
       return;
     }
     if (state.selectedStation) {
-    if (state.selectedStation) {
       var _snLabel = state.selectedStation;
       if (window.RailwayDB && window.RailwayDB.resolveStationName) {
         _snLabel = window.RailwayDB.resolveStationName(state.selectedStation, state.lang) || state.selectedStation;
-      }
-      const stationLabel = _snLabel;
       }
       const stationLabel = _snLabel;
       dom.stationDisplay.textContent = stationLabel;
@@ -340,10 +358,8 @@ function renderGrid() {
     for (var i = 0; i < _stations.length; i++) {
       var s = _stations[i];
       var label = s;
-      if (window.RailwayDB && window.RailwayDB.getNameMap) {
-        var nm = window.RailwayDB.getNameMap();
-        if (nm[s]) { label = nm[s]; }
-        else { for (var _k in nm) { if (nm[_k] === s) { label = _k; break; } } }
+      if (window.RailwayDB && window.RailwayDB.resolveStationName) {
+        label = window.RailwayDB.resolveStationName(s, state.lang) || s;
       }
       html += '<button class="sm-picker-btn" data-station="' + s + '">' + (window.escapeHtml ? window.escapeHtml(label) : label) + '</button>';
     }
@@ -359,33 +375,39 @@ function renderGrid() {
   function initLocation() {
     state.locStatus = 'locating';
     renderHeader();
-    if (typeof navigator === 'undefined' || !navigator.geolocation) {
+    var guard = setTimeout(function() {
+      if (state.locStatus === 'locating') {
+        state.locStatus = 'error';
+        if (!state.selectedStation) {
+          state.selectedStation = (getMajorStations().length > 0) ? getMajorStations()[0] : 'Shinjuku';
+        }
+        state.autoDetected = false;
+        renderAll();
+      }
+    }, 8000);
+    function locFallback() {
       state.locStatus = 'error';
-      state.selectedStation = (getMajorStations().length > 0) ? getMajorStations()[0] : 'Shinjuku';
+      if (!state.selectedStation) {
+        state.selectedStation = (getMajorStations().length > 0) ? getMajorStations()[0] : 'Shinjuku';
+      }
       state.autoDetected = false;
       renderAll();
+    }
+    if (typeof navigator === 'undefined' || !navigator.geolocation) {
+      clearTimeout(guard);
+      locFallback();
       return;
     }
     navigator.geolocation.getCurrentPosition(
       function(position) {
+        clearTimeout(guard);
         state.userLat = position.coords.latitude;
         state.userLng = position.coords.longitude;
         findNearestStation();
       },
       function(err) {
-        // Geolocation failed or denied - show station picker
-        if (err.code === err.PERMISSION_DENIED || err.code === err.POSITION_UNAVAILABLE) {
-          state.locStatus = 'error';
-          state.selectedStation = (getMajorStations().length > 0) ? getMajorStations()[0] : 'Shinjuku';
-          state.autoDetected = false;
-          renderAll();
-        } else {
-          // No geolocation API available - show picker directly
-          state.locStatus = 'error';
-          state.selectedStation = (getMajorStations().length > 0) ? getMajorStations()[0] : 'Shinjuku';
-          state.autoDetected = false;
-          renderAll();
-        }
+        clearTimeout(guard);
+        locFallback();
       },
       { enableHighAccuracy: true, timeout: 10000, maximumAge: 300000 }
     );
@@ -407,7 +429,7 @@ function renderGrid() {
   function init(config) {
     config = config || {};
     cacheDom();
-    if (config.lang) state.lang = config.lang;
+    state.lang = config.lang || window.currentLang || 'ja';
     if (config.station) {
       state.selectedStation = config.station;
       state.autoDetected = false;
@@ -435,7 +457,10 @@ function renderGrid() {
   window.SightseeingModule = { init: init, setLang: setLang, setStation: setStation };
 
   if (typeof window.onLanguageChange === 'function') {
-    window.onLanguageChange(function() { renderAll(); });
+    window.onLanguageChange(function() {
+      state.lang = window.currentLang || 'ja';
+      renderAll();
+    });
   }
 
   if (document.readyState === 'loading') {

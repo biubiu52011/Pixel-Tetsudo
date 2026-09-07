@@ -30,10 +30,14 @@
 .info-label { font-size: 12px; color: var(--text-muted); font-weight: 500; }
 .info-value { font-size: 14px; color: var(--text); font-weight: 600; text-align: right; }
 .tp-line-map {
+  /* Fixed width; height follows line length */
+  width: 100%; max-width: 100%; min-width: 0; box-sizing: border-box;
+  height: auto; min-height: 0; max-height: none;
   background: var(--bg); border: 2px solid var(--border);
-  border-radius: var(--radius-sm); padding: 14px; overflow-x: auto;
+  border-radius: var(--radius-sm); padding: 14px; overflow-x: clip; overflow-y: visible; flex-shrink: 0;
 }
-.tp-map-wrap { min-width: 200px; }
+@media (max-width: 640px) { .tp-line-map { padding: 6px; } }
+.tp-map-wrap { width: 100%; max-width: 100%; min-width: 200px; }
 .tp-map-wrap svg { width: 100%; height: auto; display: block; }
 
 /* Train icon smooth movement */
@@ -65,6 +69,6 @@
     text-align: left;
   }
   .tp-line-map {
-    padding: 10px;
+    padding: 6px;
   }
 }

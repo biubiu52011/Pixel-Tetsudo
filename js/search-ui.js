@@ -259,6 +259,19 @@
       return rtData;
     },
 
+    // Line badge: icon image from RailwayDB line.image (provider-owned field),
+    // falling back to the resolved display name so a missing icon never blanks out.
+    _lineBadge: function(lid) {
+      if (!lid) return '';
+      var nm = (window.RailwayDB && window.RailwayDB.resolveLineName) ? window.RailwayDB.resolveLineName(lid, window.currentLang) : lid;
+      var line = (window.RailwayDB && window.RailwayDB.getLine) ? window.RailwayDB.getLine(lid) : null;
+      var img = line && line.image && !/(グループ|ロゴ|マーク|アイコン|シンボル)/.test(line.image) ? line.image : '';
+      if (img) {
+        return '<span class="journey-line-badge"><img class="journey-line-icon" src="' + window.escapeHtml(img) + '" alt="' + window.escapeHtml(nm) + '" title="' + window.escapeHtml(nm) + '" loading="lazy"><span class="journey-line-name">' + window.escapeHtml(nm) + '</span></span>';
+      }
+      return '<span class="journey-line-name-fallback">' + window.escapeHtml(nm) + '</span>';
+    },
+
     renderResults: function(result, t) {
       if (!this.resultsDiv) return;
       var lang = window.currentLang || 'ja';
@@ -290,19 +303,29 @@
           var seg = segs[i];
           if (seg.type === 'transfer') {
             var txSt = window.RailwayDB && window.RailwayDB.resolveStationName ? window.RailwayDB.resolveStationName(seg.station, lang) : (seg.station || '');
-            var fromLineName = seg.fromLine ? (window.RailwayDB && window.RailwayDB.resolveLineName ? window.RailwayDB.resolveLineName(seg.fromLine, window.currentLang) : seg.fromLine) : null;
-            var toLineNames = seg.toLines ? seg.toLines.map(function(lid) {
-              return window.RailwayDB && window.RailwayDB.resolveLineName ? window.RailwayDB.resolveLineName(lid, window.currentLang) : lid;
-            }).join(', ') : null;
             var lineChange = '';
-            if (fromLineName || toLineNames) {
-              lineChange = '<span class="journey-transfer-lines">' + window.escapeHtml(fromLineName || '') + ' &rarr; ' + window.escapeHtml(toLineNames || '') + '</span>';
+            if (seg.fromLine || (seg.toLines && seg.toLines.length)) {
+              var badgeParts = [];
+              if (seg.fromLine) badgeParts.push(this._lineBadge(seg.fromLine));
+              if (seg.toLines && seg.toLines.length) {
+                if (badgeParts.length) badgeParts.push('<span class="journey-line-arrow">&rarr;</span>');
+                for (var bi = 0; bi < seg.toLines.length; bi++) badgeParts.push(this._lineBadge(seg.toLines[bi]));
+              }
+              lineChange = '<span class="journey-line-icons">' + badgeParts.join('') + '</span>';
             }
-            html += '<div class="journey-transfer">';
-            html += '<span class="journey-transfer-icon">' + String.fromCharCode(0x21bb) + '</span>';
+            html += '<div class="journey-transfer';
+            if (seg.through) { html += ' journey-transfer--through'; }
+            html += '">';
+            html += '<span class="journey-transfer-icon">' + String.fromCharCode(seg.through ? 0x21c4 : 0x21bb) + '</span>';
             html += '<span class="journey-transfer-station">' + window.escapeHtml(txSt) + '</span>';
-            html += '<span class="journey-transfer-text">' + t('search_result.transfer') + '</span>';
+            html += '<span class="journey-transfer-text';
+            if (seg.through) { html += ' journey-transfer-text--through'; }
+            html += '">' + t(seg.through ? 'search_result.through' : 'search_result.transfer') + '</span>';
             if (lineChange) { html += lineChange; }
+            if (!seg.through && seg.station && window.getTransferHint) {
+              var hintTxt = window.getTransferHint(seg.station, lang);
+              if (hintTxt) { html += '<span class="journey-transfer-hint">' + window.escapeHtml(hintTxt) + '</span>'; }
+            }
             html += '</div>';
           } else {
             var lineId = seg.lineId || null;
@@ -312,6 +335,22 @@
             var toSt = window.RailwayDB && window.RailwayDB.resolveStationName ? window.RailwayDB.resolveStationName(seg.toStation, lang) : (seg.toStation || '');
             html += '<div class="journey-seg" style="border-left-color:' + window.escapeHtml(lineColor || 'var(--border)') + ';">';
             html += '<span class="journey-seg-name">' + window.escapeHtml(lineName || '') + '</span>';
+            // Running-status badge synced with Realtime page (delayed / suspended only)
+            var _stBadge = '';
+            if (lineId && window.DataFusion) {
+              try {
+                var _fused = window.DataFusion.getFusedData();
+                var _fl = _fused && _fused.lines && _fused.lines[lineId];
+                var _di = _fl && _fl.delayInfo;
+                if (_di && (_di.status === 'delayed' || _di.status === 'suspended')) {
+                  var _stCls = _di.status === 'delayed' ? 'delayed' : 'suspended';
+                  var _stIcon = _di.status === 'delayed' ? '\u25b3' : '\u00d7';
+                  var _stLabel = (window.t && window.t('status.' + _di.status)) || _di.status;
+                  _stBadge = ' <span class="route-status-badge ' + _stCls + '">' + _stIcon + ' ' + window.escapeHtml(_stLabel) + '</span>';
+                }
+              } catch(_e) {}
+            }
+            if (_stBadge) { html += _stBadge; }
             html += '<span class="journey-seg-route">' + window.escapeHtml(fromSt) + ' &rarr; ' + window.escapeHtml(toSt) + '</span>';
             html += '</div>';
           }
@@ -328,7 +367,7 @@
 
       var destStation = result.path[result.path.length - 1];
       var spotsHtml = '';
-      if (destStation) { spotsHtml = this.renderNearbySpots(destStation, t); }
+      if (destStation && typeof this.renderNearbySpots === 'function') { spotsHtml = this.renderNearbySpots(destStation, t); }
       this.resultsDiv.innerHTML = html;
       if (spotsHtml) { this.resultsDiv.insertAdjacentHTML('beforeend', spotsHtml); }
     },

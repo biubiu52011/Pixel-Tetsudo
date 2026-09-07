@@ -541,21 +541,41 @@
       // Standard loop
       var loopScale = _isMobileView() ? 1.5 : 1.6;
       var loopRectH = Math.max(stations.length * 36 / 2 - 80, 140) * loopScale;
-      svgW = 280 * loopScale;
+      svgW = 260 * loopScale;
       svgH = loopRectH + 80 * loopScale;
       var cx = svgW / 2, cy = svgH / 2;
       var isYamanote = lineId === "Yamanote";
-      var rectW = (isYamanote ? 140 : 110) * loopScale, rectH = loopRectH;
+      var rectW = 110 * loopScale, rectH = loopRectH;
       var halfW = rectW / 2, halfH = rectH / 2;
       var loopPts = [];
       var i, _t;
       if (isYamanote) {
-        // JR-official layout: the ring runs as two parallel columns from
-        // Komagome/Tabata down. Right column (top->bottom): Tabata..Tokyo..
-        // Takahanawadai (14). Left column (top->bottom): Komagome..Osaki (15).
-        // Shinagawa sits at bottom center between Osaki and Takahanawadai.
-        // Top edge connects Tabata (NE) - Komagome (NW) in parallel.
-        var _rightSeq = [8,7,6,5,4,3,2,1,0,29,28,27,26,25];
+        // JR-official: 30 stations split 15 per column, no station at the
+        // bottom center — wide open middle. Right column (top->bottom):
+        // Tabata..Tokyo..Shinagawa. Left column (top->bottom): Komagome..Osaki.
+        // Vertical pitch adapts to the tallest interchange chip in each column
+        // (name 16 + 3px gap + chip rows + 6px margin) so nothing overlaps.
+        var _rightSeq = [8,7,6,5,4,3,2,1,0,29,28,27,26,25,24];
+        var _colPitch = function(ids) {
+          var mx = 16 + 6 + 22 + 12;
+          for (var k = 0; k < ids.length; k++) {
+            var _txN = (transferMap[ids[k]] || []).filter(function(t) { return !t.through; }).length;
+            var _rows = Math.ceil(Math.min(_txN, 8) / 4);
+            mx = Math.max(mx, 16 + 6 + _rows * 22 + 12);
+          }
+          return mx;
+        };
+        var _rightIds = _rightSeq.map(function(si) { return stations[si]; });
+        var _leftIds = [];
+        for (var _li0 = 0; _li0 < 15; _li0++) _leftIds.push(stations[9 + _li0]);
+        var _pitch = Math.max(_colPitch(_rightIds), _colPitch(_leftIds));
+        var _needH = _pitch * 14;
+        if (_needH > loopRectH) {
+          rectH = _needH;
+          halfH = rectH / 2;
+          svgH = rectH + 100 * loopScale;
+          cy = svgH / 2;
+        }
         for (var ri = 0; ri < _rightSeq.length; ri++) {
           var _tR = (ri + 0.5) / _rightSeq.length;
           loopPts.push({ x: cx + halfW, y: cy - halfH + _tR * rectH, side: "right", stationId: stations[_rightSeq[ri]] });
@@ -564,7 +584,6 @@
           var _tL = (li + 0.5) / 15;
           loopPts.push({ x: cx - halfW, y: cy - halfH + _tL * rectH, side: "left", stationId: stations[9 + li] });
         }
-        loopPts.push({ x: cx, y: cy + halfH, side: "bottom", stationId: stations[24] });
       } else {
         var perimeter = 2 * (rectW + rectH);
         var startOffset = rectW / 2;
@@ -590,7 +609,6 @@
       var isMobileView = _isMobileView();
       var _cw = ((typeof document !== "undefined" && document.querySelector("#trainsMapContainer")) || {}).clientWidth || 820;
       svgW = (_isMobileView() ? 410 : Math.min(Math.max(_cw, 440), 820)) + branchOffset;
-      svgH = (stationCoords.length ? stationCoords[stationCoords.length - 1].y : topP) + sp + botP;
       var mainCx = svgW / 2 - branchOffset / 2;
       
       var _iconStep = (isMobileView ? 20 : 16) + 2;
@@ -601,6 +619,9 @@
         stationCoords.push({ x: mainCx, y: topP + i * sp + _extraY, side: 'dual', stationId: stations[i] });
         if (_rowsN > 1) _extraY += (_rowsN - 1) * _iconStep;
       }
+      // svgH must be computed AFTER stationCoords is populated (with the
+      // per-station 2-row chip compensation) or the viewBox clips the line.
+      svgH = (stationCoords.length ? stationCoords[stationCoords.length - 1].y : topP) + sp + botP;
       var y1 = topP, y2 = stationCoords.length ? stationCoords[stationCoords.length - 1].y : (topP + (stations.length - 1) * sp);
       routeElements.push({
         type: 'line',
@@ -785,7 +806,6 @@
         var txLines = transferMap[stationId] || [];
         if (txLines.length > 0) {
           var isCompact = (side === "top" || side === "bottom");
-          var isDual = (side === "dual");
           var ICON = isMobileView ? 20 : 16;
           var GAP = 2;
           // Unified icon size: same for every station/line; 4 per row, wrap to second row
@@ -798,37 +818,54 @@
           var nonThru = txLines.filter(function(t) { return !t.through; });
           var shown = nonThru.slice(0, maxShow);
           var rows = Math.ceil(shown.length / PER_ROW);
-          var rowW = Math.min(shown.length, PER_ROW) * (ICON + GAP) - GAP;
+          // Row width follows content: icons are ICON wide, text items advance
+          // by their own rendered width (name length * char width + pad) so a
+          // text label never overlaps the neighbouring icon.
+          var _rowWAt = function(r) {
+            var acc = 0;
+            var from = r * PER_ROW, to = Math.min((r + 1) * PER_ROW, shown.length);
+            for (var k = from; k < to; k++) {
+              var it = shown[k];
+              acc += (it.image ? ICON : (((it.name || "").length) * (isMobileView ? 11 : 6) + 4)) + GAP;
+            }
+            return acc > 0 ? acc - GAP : 0;
+          };
+          var maxRowW = 0;
+          for (var rw_ = 0; rw_ < rows; rw_++) maxRowW = Math.max(maxRowW, _rowWAt(rw_));
+          var rowW = _rowWAt(rows - 1);
           var moreText = nonThru.length > maxShow ? "+" + (nonThru.length - maxShow) : "";
-          var totalW = rowW + (moreText ? 12 : 0);
+          var totalW = maxRowW + (moreText ? 12 : 0);
           var ix0, iy0;
-          // Chip anchored to its station: 3px below the name (left/right/bottom).
-          // On the top side the name sits ABOVE the dot, so the chip goes below the dot
-          // (y+6) instead — keeping name and chip on opposite sides of the dot avoids overlap.
-          if (side === "top") { iy0 = ty + 14; }
-          else { iy0 = ty + 3; }
+          // Unified rule (same as Yamanote): the chip sits directly BELOW the
+          // station label. Station labels use 16px text with baseline at ty, so
+          // the text bottom is ~ty+4 (descent); chip top = ty+4+3. On the top
+          // side the label sits ABOVE the dot, so the chip goes below the dot
+          // instead (sc.y+14) to avoid covering it. getBBox() is NOT used here:
+          // it returns 0 while the layer is not yet mounted (mid-render).
+          iy0 = (side === "top") ? (sc.y + 14) : (ty + 7);
           if (iy0 < 2) iy0 = 2;
-          if (side === "left") { ix0 = tx - totalW; }
-          else if (side === "dual") { ix0 = sc.x + 12; }
-          else if (side === "top" || side === "bottom") { ix0 = tx - totalW / 2; }
-          else { ix0 = tx; }
+          if (anchor === "end") { ix0 = tx - totalW; }
+          else if (anchor === "start") { ix0 = tx; }
+          else { ix0 = tx - totalW / 2; }
           // Left-side overflow: if the chip would cross the SVG left edge, degrade to a
           // compact 2-row layout (3 per row, then 2 per row) so it stays on-canvas.
-          if (side === "left" && ix0 < 2) {
+          if ((side === "left" || side === "dual") && ix0 < 2) {
             PER_ROW = 3;
             shown = nonThru.slice(0, PER_ROW * MAX_ROWS);
             rows = Math.ceil(shown.length / PER_ROW);
-            rowW = Math.min(shown.length, PER_ROW) * (ICON + GAP) - GAP;
+            maxRowW = 0;
+            for (var rw_2 = 0; rw_2 < rows; rw_2++) maxRowW = Math.max(maxRowW, _rowWAt(rw_2));
             moreText = nonThru.length > PER_ROW * MAX_ROWS ? "+" + (nonThru.length - PER_ROW * MAX_ROWS) : "";
-            totalW = rowW + (moreText ? 12 : 0);
+            totalW = maxRowW + (moreText ? 12 : 0);
             ix0 = tx - totalW;
             if (ix0 < 2) {
               PER_ROW = 2;
               shown = nonThru.slice(0, PER_ROW * MAX_ROWS);
               rows = Math.ceil(shown.length / PER_ROW);
-              rowW = Math.min(shown.length, PER_ROW) * (ICON + GAP) - GAP;
+              maxRowW = 0;
+              for (var rw_2 = 0; rw_2 < rows; rw_2++) maxRowW = Math.max(maxRowW, _rowWAt(rw_2));
               moreText = nonThru.length > PER_ROW * MAX_ROWS ? "+" + (nonThru.length - PER_ROW * MAX_ROWS) : "";
-              totalW = rowW + (moreText ? 12 : 0);
+              totalW = maxRowW + (moreText ? 12 : 0);
               ix0 = tx - totalW;
             }
             if (ix0 < 2) ix0 = 2;
@@ -838,23 +875,36 @@
             PER_ROW = 3;
             shown = nonThru.slice(0, PER_ROW * MAX_ROWS);
             rows = Math.ceil(shown.length / PER_ROW);
-            rowW = Math.min(shown.length, PER_ROW) * (ICON + GAP) - GAP;
+            maxRowW = 0;
+            for (var rw_2 = 0; rw_2 < rows; rw_2++) maxRowW = Math.max(maxRowW, _rowWAt(rw_2));
             moreText = nonThru.length > PER_ROW * MAX_ROWS ? "+" + (nonThru.length - PER_ROW * MAX_ROWS) : "";
-            totalW = rowW + (moreText ? 12 : 0);
+            totalW = maxRowW + (moreText ? 12 : 0);
             ix0 = tx;
             if (ix0 + totalW > svgW - 2) {
               PER_ROW = 2;
               shown = nonThru.slice(0, PER_ROW * MAX_ROWS);
               rows = Math.ceil(shown.length / PER_ROW);
-              rowW = Math.min(shown.length, PER_ROW) * (ICON + GAP) - GAP;
+              maxRowW = 0;
+              for (var rw_2 = 0; rw_2 < rows; rw_2++) maxRowW = Math.max(maxRowW, _rowWAt(rw_2));
               moreText = nonThru.length > PER_ROW * MAX_ROWS ? "+" + (nonThru.length - PER_ROW * MAX_ROWS) : "";
-              totalW = rowW + (moreText ? 12 : 0);
+              totalW = maxRowW + (moreText ? 12 : 0);
               ix0 = tx;
             }
             if (ix0 + totalW > svgW - 2) ix0 = svgW - 2 - totalW;
           }
-          // Background chip (white rounded) to visually group the icons
-          var bgH = rows * ICON + (rows - 1) * GAP + 2;
+          // Background chip (white rounded) to visually group the icons.
+          // Row height follows content: icon rows get ICON+2, pure-text rows
+          // (interchange partners without a logo) get 15 so no empty block
+          // hangs below the text.
+          var bgH = 0;
+          for (var r_ = 0; r_ < rows; r_++) {
+            var _rowImg = false;
+            for (var c_ = r_ * PER_ROW; c_ < Math.min((r_ + 1) * PER_ROW, shown.length); c_++) {
+              if (shown[c_].image) { _rowImg = true; break; }
+            }
+            bgH += (_rowImg ? ICON + 2 : 15);
+          }
+          if (rows > 1) bgH += (rows - 1) * GAP;
           var bg = document.createElementNS(svgNS, "rect");
           bg.setAttribute("x", ix0 - 1);
           bg.setAttribute("y", iy0 - 1);
@@ -863,53 +913,17 @@
           bg.setAttribute("rx", "3");
           bg.setAttribute("fill", "rgba(255,255,255,0.72)");
           staticLayer.appendChild(bg);
-          if (isDual) {
-            // Flow layout for the wide right lane: icons are fixed width, text items advance by their own width
-            var lineY = iy0;
-            var curX = ix0;
-            var maxLineW = svgW - 2;
-            var flowEndX = ix0, flowEndY = iy0;
-            for (var fi = 0; fi < shown.length; fi++) {
-              var fxl = shown[fi];
-              var fName = fxl.name.length > 4 ? fxl.name.slice(0, 4) + "…" : fxl.name;
-              var fw = fxl.image ? ICON : (fName.length * (isMobileView ? 11 : 6) + 4);
-              if (fi % PER_ROW === 0 && fi > 0) { curX = ix0; lineY += ICON + GAP; }
-              if (fxl.image) {
-                var fImg = document.createElementNS(svgNS, "image");
-                fImg.setAttribute("href", fxl.image);
-                fImg.setAttribute("xlink:href", fxl.image);
-                fImg.setAttribute("x", curX);
-                fImg.setAttribute("y", lineY);
-                fImg.setAttribute("width", ICON);
-                fImg.setAttribute("height", ICON);
-                fImg.setAttribute("opacity", "0.95");
-                var fTitle = document.createElementNS(svgNS, "title");
-                fTitle.textContent = _throughBadgeText(fxl);
-                fImg.appendChild(fTitle);
-                staticLayer.appendChild(fImg);
-              } else {
-                var fTxt = document.createElementNS(svgNS, "text");
-                fTxt.setAttribute("x", curX);
-                fTxt.setAttribute("y", lineY + 8);
-                fTxt.setAttribute("font-size", isMobileView ? "11" : "6");
-                fTxt.setAttribute("fill", "#999");
-                fTxt.textContent = fxl.name.length > 4 ? fxl.name.slice(0, 4) + "…" : fxl.name;
-                staticLayer.appendChild(fTxt);
-              }
-              curX += fw + GAP;
-            }
-            flowEndX = curX; flowEndY = lineY;
-            // Background chip width follows actual flow extent (grid estimate was too narrow)
-            bg.setAttribute("width", (flowEndX - ix0) + (moreText ? 16 : 0) + 2);
-          } else {
+          {
             // Grid layout for loop/compact sides (through partners are drawn as
             // station-anchored labels, so the chip only carries plain interchange icons).
-            for (var ti2 = 0; ti2 < shown.length; ti2++) {
-              var txl = shown[ti2];
-              var row = Math.floor(ti2 / PER_ROW);
-              var col = ti2 % PER_ROW;
-              var tix = ix0 + col * (ICON + GAP);
-              var tiy = iy0 + row * (ICON + GAP);
+            var _rowCur = null;
+              for (var ti2 = 0; ti2 < shown.length; ti2++) {
+                var txl = shown[ti2];
+                var row = Math.floor(ti2 / PER_ROW);
+                var col = ti2 % PER_ROW;
+                if (col === 0) _rowCur = ix0;
+                var tix = _rowCur;
+                var tiy = iy0 + row * (ICON + GAP);
               if (txl.image) {
                 var tImg = document.createElementNS(svgNS, "image");
                 tImg.setAttribute("href", txl.image);
@@ -926,19 +940,19 @@
               } else {
                 var tTxt = document.createElementNS(svgNS, "text");
                 tTxt.setAttribute("x", tix);
-                tTxt.setAttribute("y", tiy + 8);
+                tTxt.setAttribute("y", tiy + 10);
                 tTxt.setAttribute("font-size", isCompact ? (isMobileView ? "9" : "6") : (isMobileView ? "11" : "6"));
                 tTxt.setAttribute("fill", "#999");
-                tTxt.textContent = txl.name.length > 4 ? txl.name.slice(0, 4) + "…" : txl.name;
+                tTxt.textContent = ((txl.name || "").length > 4 ? (txl.name || "").slice(0, 4) + "…" : (txl.name || ""));
                 staticLayer.appendChild(tTxt);
               }
+              _rowCur += (txl.image ? ICON : (((txl.name || "").length) * (isMobileView ? 11 : 6) + 4)) + GAP;
             }
           }
           if (moreText) {
             var more = document.createElementNS(svgNS, "text");
-            var moreX = isDual ? flowEndX + 4 : ix0 + rowW + GAP;
-            var moreY = isDual ? flowEndY + 8 : iy0 + 8;
-            if (isDual && moreX + 12 > svgW - 2) { moreX = ix0; moreY = flowEndY + ICON + GAP + 8; }
+            var moreX = ix0 + rowW + GAP;
+            var moreY = iy0 + 8;
             more.setAttribute("x", moreX);
             more.setAttribute("y", moreY);
             more.setAttribute("font-size", "7");
@@ -972,21 +986,27 @@
             var tt = thruList[tI2];
             var sz = _throughChipSize(tt, isMobileView);
             var lx, ly;
-            if (tt.dir === "up") { lx = thruCursor; ly = sc.y - sz.h - 4; }
-            else if (tt.dir === "down") { lx = thruCursor; ly = svgH - sz.h - 4; }
+            if (tt.dir === "up") {
+              // Keep the ^ label clear of the station NAME: labels hang from
+              // baseline ty (side-adjacent: top of name = sc.y-13, top side:
+              // name sits above the dot so it needs an extra margin).
+              lx = thruCursor;
+              ly = sc.y - sz.h - (side === "top" ? 28 : 16);
+            }
+            else if (tt.dir === "down") {
+              // Below the last station's interchange chip (if any) so the v-label
+              // is never covered by the chip.
+              var _chipBot = iy0 + rows * ICON + (rows - 1) * GAP + 2;
+              lx = thruCursor;
+              ly = Math.max(_chipBot + 4, sc.y + sz.h + 6);
+            }
             else {
-              // Mid-line junction: label on the LEFT of the station. When the
-              // station name also sits on the left (anchor=end), estimate its
-              // left edge from the known label anchor + name length so the boxed
-              // label never overlaps it (getBBox is unreliable mid-render — the
-              // SVG is not laid out yet when this runs).
-              if (side === "dual" || side === "left") {
-                var nameRightX = sc.x - (isJunction ? 14 : 10);
-                var estNameW = (stationName || "").length * (isMobileView ? 16 : 14);
-                lx = nameRightX - estNameW - sz.w - 6;
-              } else {
-                lx = sc.x - sz.w - 8;
-              }
+              // Mid-line junction: label on the OPPOSITE side of the station
+              // name (right of the track when the name hangs left; left when
+              // the name hangs right). Stacked vertically for multiple
+              // partners so they never overlap.
+              if (anchor === "start") { lx = sc.x - sz.w - 8; }
+              else { lx = sc.x + (isJunction ? 14 : 10) + 4; }
               ly = sc.y - sz.h / 2 + tI2 * (sz.h + 4);
             }
             thruCursor += sz.w + 6;
@@ -1351,6 +1371,12 @@
       backBtn = document.getElementById("trainsBackBtn");
       if (!listEl) return;
       listEl.addEventListener("click", function(e) {
+        // 支线 chip：从父线卡片进入支线详情（Line Hierarchy Rule）
+        var chip = e.target.closest(".rs-branch-chip");
+        if (chip && chip.dataset.line) {
+          showLineView(chip.dataset.line);
+          return;
+        }
         var card = e.target.closest(".rs-line-card");
         if (card) showLineView(card.dataset.line);
       });

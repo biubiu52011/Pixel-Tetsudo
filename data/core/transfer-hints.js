@@ -43,13 +43,23 @@ window.TRANSFER_HINTS = {
   "Meiji-Jingumae": {
     type: "name_mismatch",
     note: {
-      ja: "（表参道駅連絡・要出站）",
-      zh: "（连络表参道站・需出站）",
-      en: "(Connects to Omotesando, outside transfer)",
-      ko: "（오모테산도역 연결・역외 환승）"
+      ja: "（表参道駅連絡・要出站／JR原宿駅連絡）",
+      zh: "（连络表参道站・需出站／连络JR原宿站）",
+      en: "(Connects to Omotesando, outside transfer / Harajuku JR)",
+      ko: "（오모테산도역 연결・역외 환승／JR하라주쿠역 연결）"
     },
-    connects: ["Omotesando"],
+    connects: ["Omotesando", "Harajuku"],
     outside: true
+  },
+  "Harajuku": {
+    type: "name_mismatch",
+    note: {
+      ja: "（明治神宮前〈原宿〉駅連絡）",
+      zh: "（连络明治神宫前〈原宿〉站）",
+      en: "(Connects to Meiji-Jingumae (Harajuku))",
+      ko: "（메이지진구마에〈하라주쿠〉역 연결）"
+    },
+    connects: ["Meiji-Jingumae"]
   },
   "Nishi-Shinjuku": {
     type: "name_mismatch",

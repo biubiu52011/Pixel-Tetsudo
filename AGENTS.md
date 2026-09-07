@@ -5,6 +5,23 @@ These rules take precedence over any per-task instructions.
 
 ---
 
+## Line Hierarchy Rule (HARD RULE) — 线路层级规则
+
+**规则一：平级独立运营线（Peer Independent Service Line）的排他定义**
+满足以下任意一个条件的线路，即使共享同一路线记号（JC/JU 等）、即使物理上分叉或直通，也 MUST 是完全平级、独立的顶级节点（Parent Line），严禁被当作另一条的"支线（Branch）"嵌套合并：
+1. 独立爱称：拥有官方和乘客公认的不同运营线名称（例：中央線快速 JC / 青梅線 JC / 五日市線 JC 是三条独立主线；宇都宮線 JU / 高崎線 JU 是两条独立主线）。
+2. 独立大列表：拥有独立、完整的长途运行区间和独立车站大列表，不是依附主线的盲肠。
+Line_ID 必须彻底解耦（JC_Chuo_Rapid / JC_Ome / JC_Itsukaichi 级别），并在"线路一览"一级大列表并列独立展示。
+
+**规则二：真正的内部支线（Branch Line）的嵌套规则**
+仅当线路在日常运营和向导看板上没有独立于父线的宏观运营系统名称（官方即称"XX線XX支線"，如：中央本線辰野支線、水郡線常陸太田支線、丸ノ内線方南町支線、千代田線北綾瀬支線、鶴見線海芝浦支線/大川支線）时，才判定为支线并强制执行嵌套：
+- 数据模型：line 带 branchOf=<父线ID>，父线带 branches=[子线ID...]；严禁在一级总列表独立展示。
+- 支线只能在父线详情/系统卡片内展示。
+
+**判定流程（禁止用物理线覆盖）**：先问"乘客看板/运营系统叫什么"→ 独立运营名 = 平级顶级；官方叫"XX支線" = 嵌套。任何合并/嵌套前必须显式声明依据规则一还是规则二。
+
+**Agatsuma（吾妻線）、Miyo（弥彦線）等拥有独立运营名的线路均为平级顶级，branchOf 必须为 null。**
+
 ## System-First Change Rule (HARD RULE)
 
 Any add, modify, or delete operation MUST start from the current full system state, never from the target file alone.
@@ -230,6 +247,7 @@ If the answer is NO, the change is REJECTED.
 | console.log in odpt-unified.js (2) | P3 | Non-product debug output |
 | js/trains-detail.js orphan | P3 | Zero consumers (not referenced by any page); contains unresolved _rS/tStation/_lang refs — do not enable |
 | LOS isStandalone / REGIONAL pseudo-group | REMOVED 4.3.42 | Running-system rendering retired the branch-skip mechanism; LOS regenerated from authoritative 運行系統 table (branch lines live inside their system group, e.g. Ome/Itsukaichi in JC) |
+| ~~Yurakucho/Fukutoshin 駅順ねじれ~~ | FIXED 2026-09-07 | 公式駅順 和光市-成増-赤塚-平和台-氷川台-小竹向原-千川-要町-池袋。旧データは有楽町線に小竹向原が、副都心線に氷川台が欠落。ユーザー指摘+公式証拠により railway_data.json を修正（Yurakucho +Kotake-Mukaihara / Fukutoshin +Hikawadai）。両線最初の9駅が一致し、共有区間は 和光市〜池袋 の1セグメント。 |
 | 13 image path fixes | Deferred | Asset mapping, no product impact |
 
 ---
@@ -243,7 +261,7 @@ If the answer is NO, the change is REJECTED.
 
 ---
 
-Last updated: 2026-09-06
+Last updated: 2026-09-07
 Version: RC-2
 ---
 
@@ -251,6 +269,7 @@ Version: RC-2
 The following data is LOCKED. Never modify for any reason:
 - data/core/railway_data.json: 156 lines / 509 stations / 1703 name_map / 93 tourism
 - Any missing data field is DATA-BLOCKED, not a reason to fabricate content.
+- 2026-09-07 ユーザー指示による修正: Yurakucho +Kotake-Mukaihara / Fukutoshin +Hikawadai（公式駅順に整合）。氷川台・小竹向原は両線の駅として扱う。
 
 ---
 

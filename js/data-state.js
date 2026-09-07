@@ -295,6 +295,23 @@
         _chainBadgeHtml = "<span class=\"rs-chain-badge rs-chain-badge-unknown\" title=\"Unknown relation\"></span>";
       }
     }
+    // Line Hierarchy Rule: 支线（branches）在父线卡片内展示，不独立出现在一级列表
+    var branchHtml = "";
+    if (line.branches && line.branches.length > 0 && linesObj) {
+      var blang = window.currentLang || "ja";
+      var bItems = [];
+      for (var bi = 0; bi < line.branches.length; bi++) {
+        var blid = line.branches[bi];
+        var bline = linesObj[blid];
+        if (!bline) continue;
+        var bName = bline.nameJa || bline.name || blid;
+        if (window.RailwayDB && window.RailwayDB.resolveLineName) bName = window.RailwayDB.resolveLineName(blid, blang) || bName;
+        bItems.push('<span class="rs-branch-chip" data-line="' + escapeHtml(blid) + '" data-parent="' + escapeHtml(lineId) + '">' + escapeHtml(bName) + '</span>');
+      }
+      if (bItems.length > 0) {
+        branchHtml = '<div class="rs-branch-row">' + bItems.join("") + '</div>';
+      }
+    }
     return '<div class="rs-line-card" data-line="' + escapeHtml(lineId) + '" data-line-color="' + escapeHtml(lineColor) + '">' + _chainBadgeHtml
       + '<div class="rs-line-header">'
       + iconHtml
@@ -304,7 +321,9 @@
       + intervalHtml
       + '</div>'
       + statusIconHtml
-      + '</div></div>';
+      + '</div>'
+      + branchHtml
+      + '</div>';
   }
 
   /**
@@ -332,6 +351,9 @@
       var lid = ids[i];
       var line = linesObj[lid];
       if (!line) continue;
+      // Line Hierarchy Rule: 真支线（branchOf 非空）严禁在一级总列表独立展示，
+      // 只在父线卡片/详情内展示。平级独立运营线（branchOf=null）照常平铺。
+      if (line.branchOf) continue;
       var op = line.operator || "Unknown";
       if (!groups[op]) {
         groups[op] = [];

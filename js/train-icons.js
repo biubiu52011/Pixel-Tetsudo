@@ -38,10 +38,10 @@
     },
     "E127": {
       routes: [
-        { line: "Oito", from: "Matsumoto", to: "Minami-Koya", icon: "../images/列车/JR東日本/E127系100番台.png", priority: 2 },   // 大糸線：全线（E127 核心，优先于 211）
-        { line: "Shinonoi", from: "Shiojiri", to: "Shinonoi", icon: "../images/列车/JR東日本/E127系100番台.png", priority: 1 }, // 篠ノ井線：普通运用（班次少于 211）
-        { line: "Shinetsu", from: "Shinonoi", to: "Nagano", icon: "../images/列车/JR東日本/E127系100番台.png", priority: 1 }, // 信越本線長野段：极少数班次
-        { line: "ChuoTatsuno", from: "Okaya", to: "Shiojiri", icon: "../images/列车/JR東日本/E127系100番台.png", priority: 1 }  // 中央本線辰野支線：区间摆渡（替代 123 系）
+        { line: "Oito", from: "Matsumoto", to: "Minami-Koya", icon: "../images/列车/JR東日本/E127系0番台.png", priority: 2 },   // 大糸線：全线（E127 核心，优先于 211）
+        { line: "Shinonoi", from: "Shiojiri", to: "Shinonoi", icon: "../images/列车/JR東日本/E127系0番台.png", priority: 1 }, // 篠ノ井線：普通运用（班次少于 211）
+        { line: "Shinetsu", from: "Shinonoi", to: "Nagano", icon: "../images/列车/JR東日本/E127系0番台.png", priority: 1 }, // 信越本線長野段：极少数班次
+        { line: "ChuoTatsuno", from: "Okaya", to: "Shiojiri", icon: "../images/列车/JR東日本/E127系0番台.png", priority: 1 }  // 中央本線辰野支線：区间摆渡（替代 123 系）
       ]
     },
     "E129": {
@@ -49,7 +49,7 @@
         { line: "Shinetsu", from: "Naoetsu", to: "Niigata", icon: "../images/列车/JR東日本/E129系.png", priority: 1 },   // 信越本線（新潟段）：直江津〜長岡〜新潟
         { line: "Hakushin", from: "Niigata", to: "Shibata", icon: "../images/列车/JR東日本/E129系.png", priority: 1 },     // 白新線：全線
         { line: "Echigo", from: "Kashiwazaki-Higashi", to: "Niigata", icon: "../images/列车/JR東日本/E129系.png", priority: 1 },  // 越後線：柏崎側端〜吉田〜新潟
-        { line: "Yahiko", from: "Higashi-Sanjo", to: "Yahiko", icon: "../images/列车/JR東日本/E129系.png", priority: 1 },   // 弥彦線：全線
+        { line: "Miyo", from: "Higashi-Sanjo", to: "Yahiko", icon: "../images/列车/JR東日本/E129系.png", priority: 1 },   // 弥彦線：全線（lineId=Miyo）
         { line: "Uetsu", from: "Niitsu", to: "Murakami", icon: "../images/列车/JR東日本/E129系.png", priority: 1 },         // 羽越本線（新潟直流区間）：新津〜村上
         { line: "Joetsu", from: "Miyaike", to: "Minakami", icon: "../images/列车/JR東日本/E129系.png", priority: 1 }        // 上越線（新潟直流区間）：宮内(長岡)〜水上
       ]
@@ -57,15 +57,21 @@
     // ===== 特急・観光列車（typeMatch 按 ODPT trainType 匹配；from/to 省略 = 全線）=====
     "ExpJREast": {
       routes: [
-        { line: "Joban", icon: "../images/列车/JR東日本/E657系.png", typeMatch: ["Hitachi", "Tokiwa"], priority: 3 },          // ひたち・ときわ（※E657系.png 内容待核验）
+        { line: "Joban", icon: "../images/列车/JR東日本/E261系.png", typeMatch: ["Hitachi", "Tokiwa"], priority: 4 },          // ひたち・ときわ（2026新型 E261系）
+        { line: "Joban", icon: "../images/列车/JR東日本/E657系.png", typeMatch: ["Hitachi", "Tokiwa"], priority: 3 },          // ひたち・ときわ（E657系 従来車）
         { line: "JobanLocal", icon: "../images/列车/JR東日本/E657系.png", typeMatch: ["Hitachi", "Tokiwa"], priority: 3 },
         { line: "SobuRapid", icon: "../images/列车/JR東日本/E257系500番台.png", typeMatch: ["Sazanami", "Wakashio", "Shiosai"], priority: 3 }, // さざなみ・わかしお・しおさい
         { line: "Uchibo", icon: "../images/列车/JR東日本/E257系500番台.png", typeMatch: ["Sazanami"], priority: 3 },
         { line: "Sotobo", icon: "../images/列车/JR東日本/E257系500番台.png", typeMatch: ["Wakashio"], priority: 3 },
         { line: "Narita", icon: "../images/列车/JR東日本/E257系500番台.png", typeMatch: ["Shiosai"], priority: 3 },
-        { line: "OuMain", icon: "../images/列车/JR東日本/つがる.png", typeMatch: ["Tsugaru"], priority: 3 },                  // 特急つがる（青森〜秋田）
-        { line: "Joetsu", icon: "../images/列车/JR東日本/草津四万.png", typeMatch: ["Kusatsu", "Shima"], priority: 3 },       // 特急草津・四万
-        { line: "Agatsuma", icon: "../images/列车/JR東日本/草津四万.png", typeMatch: ["Kusatsu", "Shima"], priority: 3 }
+        { line: "ChuoMain", icon: "../images/列车/JR東日本/E353系.png", typeMatch: ["Azusa", "Kaiji"], priority: 3 },           // 特急あずさ・かいじ（E353系）
+        { line: "Narita", icon: "../images/列车/JR東日本/E259系.png", typeMatch: ["NaritaExpress"], priority: 3 },               // 成田エクスプレス（E259系）
+        { line: "OuMain", icon: "../images/列车/JR東日本/E751系.png", typeMatch: ["Tsugaru"], priority: 3 },                  // 特急つがる（青森〜秋田）
+        { line: "Uetsu", icon: "../images/列车/JR東日本/E653系.png", typeMatch: ["Inaho"], priority: 3 },                      // 特急いなほ（新潟〜秋田）
+        { line: "OuMain", icon: "../images/列车/JR東日本/E653系.png", typeMatch: ["Inaho"], priority: 3 },
+        { line: "Joetsu", icon: "../images/列车/JR東日本/E257系5500番台.png", typeMatch: ["Kusatsu", "Shima"], priority: 3 },       // 特急草津・四万
+        { line: "Agatsuma", icon: "../images/列车/JR東日本/E257系5500番台.png", typeMatch: ["Kusatsu", "Shima"], priority: 3 },
+        { line: "Shinetsu", icon: "../images/列车/JR東日本/E653系1000番台.png", typeMatch: ["Shirayuki"], priority: 3 }        // 特急しらゆき（新潟〜直江津）
       ]
     },
     "ExpTobu": {
@@ -75,20 +81,24 @@
         { line: "TobuSkytree", icon: "../images/列车/東武鉄道/500系.png", typeMatch: ["SpaciaLiberty"], priority: 3 }, // スペーシア リバティ（500系）
         { line: "TobuNikko", icon: "../images/列车/東武鉄道/500系.png", typeMatch: ["SpaciaLiberty"], priority: 3 },
         { line: "TobuSkytree", icon: "../images/列车/東武鉄道/100系.png", typeMatch: ["Kinu", "Kegon", "Nikko"], priority: 3 }, // きぬがわ・けごん（100系スペーシア）
-        { line: "TobuNikko", icon: "../images/列车/東武鉄道/100系.png", typeMatch: ["Kinu", "Kegon", "Nikko"], priority: 3 }
+        { line: "TobuNikko", icon: "../images/列车/東武鉄道/100系.png", typeMatch: ["Kinu", "Kegon", "Nikko"], priority: 3 },
+        { line: "TobuSkytree", icon: "../images/列车/東武鉄道/250系.png", typeMatch: ["Ryomo"], priority: 3 },                    // 特急りょうもう（250系）
+        { line: "TobuIsesaki", icon: "../images/列车/東武鉄道/250系.png", typeMatch: ["Ryomo"], priority: 3 }
       ]
     },
     "ExpOdakyu": {
       routes: [
-        { line: "Odawara", icon: "../images/列车/小田急電鉄/ロマンスカーGSE.png", typeMatch: ["SuperHakone"], priority: 3 }, // GSE（スーパーはこね）
-        { line: "Odawara", icon: "../images/列车/小田急電鉄/ロマンスカーMSE.png", typeMatch: ["Hakone", "HomeWay", "MorningWay"], priority: 3 }, // MSE
-        { line: "OdakyuEnoshima", icon: "../images/列车/小田急電鉄/ロマンスカーEXE.png", typeMatch: ["Enoshima", "BayResort", "HomeWay", "MorningWay"], priority: 3 } // EXE（えのしま等）
+        { line: "Odawara", icon: "../images/列车/小田急電鉄/70000形.png", typeMatch: ["SuperHakone"], priority: 3 }, // GSE（スーパーはこね）
+        { line: "Odawara", icon: "../images/列车/小田急電鉄/60000形.png", typeMatch: ["Hakone", "HomeWay", "MorningWay"], priority: 3 }, // MSE
+        { line: "OdakyuEnoshima", icon: "../images/列车/小田急電鉄/30000形.png", typeMatch: ["Enoshima", "BayResort", "HomeWay", "MorningWay"], priority: 3 } // EXE（えのしま等）
       ]
     },
     "ExpSeibu": {
       routes: [
-        { line: "Ikebukuro", icon: "../images/列车/西武鉄道/西武観光特急.png", typeMatch: ["Ltrain"], priority: 2 },          // 観光特急 L-train
-        { line: "SeibuChichibu", icon: "../images/列车/西武鉄道/西武観光特急.png", typeMatch: ["Ltrain"], priority: 2 }
+        { line: "Ikebukuro", icon: "../images/列车/西武鉄道/10000系.png", typeMatch: ["Ltrain"], priority: 2 },          // 観光特急 L-train
+        { line: "SeibuChichibu", icon: "../images/列车/西武鉄道/10000系.png", typeMatch: ["Ltrain"], priority: 2 },
+        { line: "Ikebukuro", icon: "../images/列车/西武鉄道/40000系.png", typeMatch: ["STRAIN", "S-TRAIN"], priority: 2 },      // S-TRAIN（40000系）
+        { line: "SeibuShinjuku", icon: "../images/列车/西武鉄道/40000系.png", typeMatch: ["STRAIN", "S-TRAIN"], priority: 2 }
       ]
     }
   };
@@ -98,7 +108,7 @@
     "JR-East": "../images/列车/JR東日本/E235系山手線.png",
     "JR West": "../images/列车/JR東日本/E235系山手線.png",
     "TokyoMetro": "../images/列车/東京メトロ/1000系.png",
-    "Toei": "../images/列车/都営地下鉄/1000形.png", // 4.3.266：原都営浅草線.png 为电子设备占位图，改用 1000形（电车）
+    "Toei": "../images/列车/都営地下鉄/6300形.png", // 4.3.266：原都営浅草線.png 为电子设备占位图，1000形.png 与東武1000系重复已删，改用 6300形（三田線）
     "YokohamaMunicipal": "../images/列车/横浜市交通局/4000形.png",
     "Keio": "../images/列车/京王電鉄/2000系.png", // 4.3.277：京王.png 与 2000系.png 同一图（哈希一致），归并至 2000系.png
     "Odakyu": "../images/列车/小田急電鉄/4000系.png", // 4.3.275：小田急系統共通 4000系（千代田直通の現役主力、小田原/江ノ島/多摩 同一車輛体系）
@@ -106,12 +116,12 @@
     "Tobu": "../images/列车/東武鉄道/8000系.png", // 4.3.274：東武標準一般車
     "Tokyu": "../images/列车/東急電鉄/2020系.png",
     "Keikyu": "../images/列车/京急電鉄/1000系.png",
-    "Keisei": "../images/列车/京成電鉄/3000系.png",
+    "Keisei": "../images/列车/京成電鉄/3200形.png",
     "Sotetsu": "../images/列车/相模鉄道/13000系.png", // 4.3.277：相鉄.png 与 13000系.png 同一图，归并
     "TWR": "../images/列车/東京臨海高速鉄道/70-000形.png", // 4.3.276：实车图恢复
     "MIR": "../images/列车/東急電鉄/5050系.png",
     "Rinkai": "../images/列车/東京臨海高速鉄道/70-000形.png", // 4.3.276：实车图恢复
-    "TsukubaExpress": "../images/列车/首都圏新都市鉄道/TX-2000系.png",
+    "TsukubaExpress": "../images/列车/首都圏新都市鉄道/TX-2000系.png", // つくばエクスプレス：TX-2000系
     "Yurikamome": "../images/列车/ゆりかもめ/7300系.png",
     "TamaMonorail": "../images/列车/多摩都市モノレール/1000系.png", // 4.3.276：实车图恢复
     "SaitamaNewUrbanTransit": "../images/列车/埼玉新都市交通/2000形.png", // 4.3.276：AGT实车图恢复
@@ -133,11 +143,13 @@
     "ChuoLocal": "../images/列车/JR東日本/E235系総武中央線.png",
     "ChuoSobuLocal": "../images/列车/JR東日本/E235系総武中央線.png",
     "ChuoRapid": "../images/列车/JR東日本/E233系0番台.png",
+    "ChuoMain": "../images/列车/JR東日本/E233系0番台.png", // 中央本線（東京〜高尾兜底；高尾以西は 211長野 deployment）
     "Ome": "../images/列车/JR東日本/E233系青梅線.png",
     "Itsukaichi": "../images/列车/JR東日本/E233系青梅線.png",
     // 埼京線 ↔ 川越線（大宮〜川越間は埼京線車両 E233系7000番台が直通）
     "Saikyo": "../images/列车/JR東日本/E233系7000番台.png",
-    "Kawagoe": "../images/列车/JR東日本/E233系7000番台.png",
+    "Kawagoe": "../images/列车/JR東日本/E209系3500番台.png", // 川越線自社車（高崎車両センター E209系3500番台）；埼京線直通列車は Saikyo 側が優先
+    "ShonanShinjuku": "../images/列车/JR東日本/E233系3000番台.png", // 湘南新宿ライン：E233系3000番台
     "Yokosuka": "../images/列车/JR東日本/E235系1000番台.png",
     "SobuRapid": "../images/列车/JR東日本/E235系1000番台.png",
     "SobuMain": "../images/列车/JR東日本/E235系1000番台.png",
@@ -145,37 +157,41 @@
     "JobanRapid": "../images/列车/JR東日本/E531系.png",
     "JobanLocal": "../images/列车/東京メトロ/18000系.png", // 常磐各停：千代田線车辆直通担当
     "Mito": "../images/列车/JR東日本/E531系.png",
-    // 上野東京ライン（宇都宮・高崎 ↔ 東海道）＝同一系統 E231系近郊型；宇都宮線(Oyama) 同車
-    "Tokaido": "../images/列车/JR東日本/E231系近郊型.png",
-    "Takasaki": "../images/列车/JR東日本/E231系近郊型.png",
+    "Nikkoku": "../images/列车/JR東日本/E131系600番台.png", // 日光線：E131系600番台
+    "Gono": "../images/列车/JR東日本/HB-E220系.png", // 五能線：HB-E220系
+    "Yokohama": "../images/列车/JR東日本/E233系6000番台.png", // 横浜線：E233系6000番台
+    // 上野東京ライン（宇都宮・高崎 ↔ 東海道）＝同一系統 E233系湘南色；宇都宮線(Oyama) 同車
+    "Tokaido": "../images/列车/JR東日本/E233系湘南色.png",
+    "Takasaki": "../images/列车/JR東日本/E233系湘南色.png",
     "Musashino": "../images/列车/JR東日本/E231系0番台.png",
-    "Uetsu": "../images/列车/JR東日本/羽越線.png",
+    "Uetsu": "../images/列车/JR東日本/701系100番台.png",
     "Ryomo": "../images/列车/JR東日本/211系湘南色.png",
     "Agatsuma": "../images/列车/JR東日本/211系湘南色.png",
-    "BanetsuWest": "../images/列车/JR東日本/E721系.png",
+    "BanetsuWest": "../images/列车/JR東日本/キハ110系.png",  // 磐越西線：非電化区間主力（キハ110系/GV-E400系；E721系仅限郡山〜会津若松電化段，不作为全线代表）
     "Senzan": "../images/列车/JR東日本/E721系.png",      // 仙山線：E721系（仙台地区）
     "TohokuMain": "../images/列车/JR東日本/E721系.png",  // 4.3.266：東北本線（仙台）= E721系（原東北線.png 同车型重复）
-    "Yamagata": "../images/列车/JR東日本/山形線.png",    // 4.3.276：山形線.png 恢复（原判定仪表盘为误判，实为车辆图）
-    "Senseki": "../images/列车/JR東日本/E721系.png",     // 4.3.266：仙石線 = E721系（原仙石線.png 为车载终端占位图）
-    "Keiyo": "../images/列车/JR東日本/E233系5000番台.png", // ※E233系5000番台.png 内容可疑（粉高铁非京葉線涂装），待用户提供正确素材
+    "Tazawako": "../images/列车/JR東日本/701系盛岡.png", // 田沢湖線：701系盛岡
+    "Yamagata": "../images/列车/JR東日本/E723系.png",    // 4.3.276：山形線 = E723系（原山形線.png 重命名入库）
+    "Senseki": "../images/列车/JR東日本/E131系800番台.png",     // 仙石線：E131系800番台（原 E721系 判定修正）
+    "Keiyo": "../images/列车/JR東日本/E233系5000番台.png", // 京葉線：E233系5000番台（e233ky）
     "Karasuyama": "../images/列车/JR東日本/EV-E301系.png",   // 烏山線：EV-E301系（蓄電池）
-    "Kururi": "../images/列车/JR東日本/キハE130系.png",     // 4.3.266：久留里線 = E131系200番台（原E131系200番台.png 为空调面板占位图）
-    "Suigun": "../images/列车/JR東日本/キハE130系100番台.png",       // 水郡線：キハE130系
-    "Uchibo": "../images/列车/JR東日本/E131系200番台.png",       // 4.3.266：railway_data 中 Uchibo 显示名=外房線，图标对齐显示名
-    "Hachiko": "../images/列车/JR東日本/キハ110系.png",
-    "Noda": "../images/列车/東武鉄道/20400系.png", // 4.3.274：野田線（アーバンパークライン）
+    "Kururi": "../images/列车/JR東日本/キハE130系100番台.png",     // 久留里線：キハE130系100番台
+    "Suigun": "../images/列车/JR東日本/キハE130系0番台.png",       // 水郡線：キハE130系0番台
+    "Uchibo": "../images/列车/JR東日本/E131系0番台.png",       // 外房線：E131系0番台
+    "Hachiko": "../images/列车/JR東日本/HB-E220系.png",  // 4.3.280：八高線非電化区間 2026.3 キハ110系定期運用終了 → HB-E220系
+    "Noda": "../images/列车/東武鉄道/80000系.png", // 4.3.280：野田線（アーバンパークライン）：80000系（2025.3 投入の新主力）
 
     // Tokyo Metro specific
     "Ginza": "../images/列车/東京メトロ/1000系.png",
     "Marunouchi": "../images/列车/東京メトロ/2000系.png",
     "Hibiya": "../images/列车/東京メトロ/13000系.png", // 4.3.276：实车图恢复
-    "Tozai": "../images/列车/東京メトロ/05系.png", // 4.3.276：实车图恢复
+    "Tozai": "../images/列车/東京メトロ/15000系.png", // 東西線：15000系（原05系 重命名）
     "Chiyoda": "../images/列车/東京メトロ/18000系.png",
     "Yurakucho": "../images/列车/東京メトロ/17000系.png",
     "Hanzomon": "../images/列车/東急電鉄/2020系.png",   // 4.3.272：半蔵門線↔田園都市線 100%相互直通（同一列車：東急5000系/メトロ8000系が両線を運行）
     "Namboku": "../images/列车/東京メトロ/9000系.png",
     "Fukutoshin": "../images/列车/東京メトロ/10000系.png",
-    "KitaAyase": "../images/列车/東京メトロ/6000系.png",
+    "KitaAyase": "../images/列车/東京メトロ/05系（北綾瀬）.png",
 
     "Mita": "../images/列车/都営地下鉄/6300形.png",  // 4.3.276：三田線实车图恢复（原判定服务器机箱为误判）
     // Toei specific（4.3.276：都営各線实车图恢复）
@@ -187,31 +203,31 @@
     // Tobu specific（4.3.275：用户重命名后重新判定，8枚全为实车，已按车型入库）
     "TobuSkytree": "../images/列车/東武鉄道/50000系.png",     // スカイツリーライン（伊勢崎線系）：50000系主力
     "TobuIsesaki": "../images/列车/東武鉄道/50000系.png",     // 伊勢崎線：スカイツリー系統（同一車輛）
-    "TobuTojo": "../images/列车/東武鉄道/50090系.png",       // 東上系統：50090系（東上線・越生線 同一車輛）
-    "Tojo": "../images/列车/東武鉄道/50090系.png",
+    "TobuTojo": "../images/列车/東武鉄道/90000系.png",      // 4.3.280：東上系統：90000系（2026.9.26 デビュー予定・東上線新型；原80000系是野田線用，接线错误）
+    "Tojo": "../images/列车/東武鉄道/90000系.png",
     "TobuNikko": "../images/列车/東武鉄道/1000系.png",       // 日光線：一般列車（1000系）
-    "TobuNoda": "../images/列车/東武鉄道/20400系.png",       // 野田線（アーバンパークライン）：20400系
+    "TobuNoda": "../images/列车/東武鉄道/80000系.png",      // 4.3.280：野田線（アーバンパークライン）：80000系（2025.3 投入の新主力）
     "Tobu_Kameido": "../images/列车/東武鉄道/1000系.png",     // 4.3.277：亀戸線.png 与 東武1000系.png 同一图（哈希一致），已归并
     "Ogose": "../images/列车/東武鉄道/50090系.png",          // 越生線：東上系統（東上線全列車直通）
-    "Utsunomiya": "../images/列车/東武鉄道/8000系.png",      // 東武宇都宮線：8000系
-    // Odakyu specific（4.3.275：小田急系統共通 4000系，ロマンスカー は typeMatch 優先）
+    "Utsunomiya": "../images/列车/東武鉄道/20400系.png",     // 4.3.280：東武宇都宮線：20400系（已替换最后8000系）
+    // Odakyu specific（4.3.275：小田急系統共通 4000系，ロマンスカー は typeMatch 優先；4.3.278：江ノ島線・多摩線 各停6両主力=3000形）
     "Odawara": "../images/列车/小田急電鉄/4000系.png",
-    "OdakyuEnoshima": "../images/列车/小田急電鉄/4000系.png",
-    "OdakyuTama": "../images/列车/小田急電鉄/4000系.png",
+    "OdakyuEnoshima": "../images/列车/小田急電鉄/3000形.png", // 4.3.278：江ノ島線 各停（6両）主力=3000形/1000形/8000形；4000形は10両固定で各停6両ホームに入線せず（维基#車両 2022年改正後）
+    "OdakyuTama": "../images/列车/小田急電鉄/3000形.png", // 4.3.278：多摩線 日中各停6両主力=3000形（维基#車両 同江ノ島線論理）
     // 4.3.273 JR 系統補全
     "Nambu": "../images/列车/JR東日本/E233系8000番台.png",     // 南武線：E233系8000番台（図庫既有）
-    "TokaidoMain": "../images/列车/JR東日本/E231系近郊型.png", // 東海道本線：上野東京ライン系統（Tokaido 同一車両）
+    "TokaidoMain": "../images/列车/JR東日本/E233系湘南色.png", // 東海道本線：上野東京ライン系統（Tokaido 同一車両）
     // 4.3.276 恢复实车图（原判定误判）
     "Sagami": "../images/列车/JR東日本/E131系500番台.png",   // 相模線
-    "Tsurumi": "../images/列车/JR東日本/205系1100番台.png",  // 鶴見線
-    "Sotobo": "../images/列车/JR東日本/E131系200番台.png",   // 内房線（特急わかしお は typeMatch E257系）
+    "Tsurumi": "../images/列车/JR東日本/E131系1000番台.png",  // 鶴見線
+    "Sotobo": "../images/列车/JR東日本/E131系0番台.png",   // 内房線（特急わかしお は typeMatch E257系）
 
     // Seibu specific（4.3.273：按运行系统分组，支线全列車直通親線 → 同一車輛）
     "SeibuShinjuku": "../images/列车/西武鉄道/30000系.png",       // 新宿系統・普通主力（40000系は特急S-TRAIN用）
     "Hamura": "../images/列车/西武鉄道/30000系.png",              // 拝島線：新宿系統（全列車新宿線直通、同一車輛）
     "Kokubunji": "../images/列车/西武鉄道/30000系.png",           // 国分寺線：新宿系統
     "SeibuTamagawa": "../images/列车/西武鉄道/101系.png", // 4.3.277：多摩川線.png 与 101系.png 同一图，归并
-    "SeibuEn": "../images/列车/西武鉄道/西武園線.png",
+    "SeibuEn": "../images/列车/西武鉄道/101系（西武園線）.png",
     "Yamaguchi": "../images/列车/西武鉄道/8500系.png",
     "SeibuYamaguchi": "../images/列车/西武鉄道/8500系.png",
     "SeibuChichibu": "../images/列车/西武鉄道/4000系.png",        // 秩父線：池袋系統（池袋線直通）
@@ -222,11 +238,11 @@
 
     // Tokyu specific
     "TokyuDenEn": "../images/列车/東急電鉄/2020系.png",
-    "TokyuMeguro": "../images/列车/東急電鉄/3000系.png",
+    "TokyuMeguro": "../images/列车/東急電鉄/3020系.png",
     "TokyuTamagawa": "../images/列车/東急電鉄/7000系.png",
     "Denentoshi": "../images/列车/東急電鉄/2020系.png",
     "Oimachi": "../images/列车/東急電鉄/6020系.png",
-    "Meguro": "../images/列车/東急電鉄/3000系.png",
+    "Meguro": "../images/列车/東急電鉄/3020系.png",
     "Ikegami": "../images/列车/東急電鉄/7000系.png",
     "Tamagawa": "../images/列车/東急電鉄/7000系.png",
     "Kodomonokuni": "../images/列车/東急電鉄/Y000系.png",
@@ -240,31 +256,34 @@
     "Keikyu": "../images/列车/京急電鉄/1000系.png",
     "KeikyuMain": "../images/列车/京急電鉄/1000系.png",
     "KeikyuAirport": "../images/列车/京急電鉄/1000系.png",
-    "KeikyuDaishi": "../images/列车/京急電鉄/1000系.png",    // 4.3.277：大師線.png 与 東武1000系.png 同一图，归并至 京急1000系.png
-    "Daishi_Keikyu": "../images/列车/京急電鉄/1000系.png",
+    "Daishi_Keikyu": "../images/列车/京急電鉄/600形.png", // 大師線：600形（専用車）
     "KeikyuZushi": "../images/列车/京急電鉄/1000系.png",
     "KeikyuKurihama": "../images/列车/京急電鉄/1000系.png",
 
     // Keisei specific
-    "Keisei": "../images/列车/京成電鉄/3000系.png",
-    "KeiseiMain": "../images/列车/京成電鉄/3000系.png",
-    "Oshiage": "../images/列车/京成電鉄/3000系.png",
-    "Kanamachi": "../images/列车/京成電鉄/3000系.png",
-    "Chiba": "../images/列车/京成電鉄/3000系.png",
-    "Chihara": "../images/列车/京成電鉄/3000系.png",
-    "NaritaAccess": "../images/列车/京成電鉄/スカイライナー.png",
-    "KeiseiChiba": "../images/列车/京成電鉄/3000系.png",
-    "KeiseiChihara": "../images/列车/京成電鉄/3000系.png",
-    "KeiseiKanamachi": "../images/列车/京成電鉄/3000系.png",
-    "KeiseiOshiage": "../images/列车/京成電鉄/3000系.png",
-    "NaritaSkyAccess": "../images/列车/京成電鉄/スカイライナー.png",
+    "Keisei": "../images/列车/京成電鉄/3200形.png",
+    "KeiseiMain": "../images/列车/京成電鉄/3200形.png",
+    "Oshiage": "../images/列车/京成電鉄/3200形.png",
+    "Kanamachi": "../images/列车/京成電鉄/3200形.png",
+    "Chiba": "../images/列车/京成電鉄/3200形.png",
+    "Chihara": "../images/列车/京成電鉄/3200形.png",
+    "NaritaAccess": "../images/列车/京成電鉄/AE形.png",
+    "KeiseiChiba": "../images/列车/京成電鉄/3200形.png",
+    "KeiseiChihara": "../images/列车/京成電鉄/3200形.png",
+    "KeiseiKanamachi": "../images/列车/京成電鉄/3200形.png",
+    "KeiseiOshiage": "../images/列车/京成電鉄/3200形.png",
+    "NaritaSkyAccess": "../images/列车/京成電鉄/AE形.png",
 
     // Keio specific（4.3.278：新增车型素材 1000系=井の頭線用）
     "Inokashira": "../images/列车/京王電鉄/1000系.png",
     "KeioInokashira": "../images/列车/京王電鉄/1000系.png",
     "KeioMain": "../images/列车/京王電鉄/5000系.png",
     "Keio-Hachioji": "../images/列车/京王電鉄/5000系.png",
-    "KeioKeibajo": "../images/列车/京王電鉄/5000系.png",
+    "KeioTakao": "../images/列车/京王電鉄/7000系.png", // 高尾線：7000系
+    "KeioZoo": "../images/列车/京王電鉄/7000系.png", // 動物園線：7000系
+    "KeioKeibajo": "../images/列车/京王電鉄/7000系.png", // 競馬場線：7000系
+    "KeioSagami": "../images/列车/京王電鉄/9000系.png", // 相模原線：9000系
+    "KeioShin": "../images/列车/京王電鉄/9000系.png", // 京王新線：9000系
 
     // Sotetsu specific
     "Sotetsu": "../images/列车/相模鉄道/13000系.png",
@@ -282,7 +301,7 @@
     "TWR": "../images/列车/東京臨海高速鉄道/70-000形.png", // 4.3.276：实车图恢复
     "Rinkai": "../images/列车/東京臨海高速鉄道/70-000形.png",
     "MIR": "../images/列车/東急電鉄/5050系.png",
-    "TsukubaExpress": "../images/列车/首都圏新都市鉄道/TX-2000系.png",
+    "TsukubaExpress": "../images/列车/首都圏新都市鉄道/TX-2000系.png", // つくばエクスプレス：TX-2000系
     "Yurikamome": "../images/列车/ゆりかもめ/7300系.png",
     "TamaMonorail": "../images/列车/多摩都市モノレール/1000系.png",
     "ChibaUrbanMonorail": "../images/列车/千葉都市モノレール/1000形.png",
@@ -297,7 +316,30 @@
     "Echigo": "../images/列车/JR東日本/E129系.png",
     "Hakushin": "../images/列车/JR東日本/E129系.png",
     "Miyo": "../images/列车/JR東日本/E129系.png",
-    "SuigunBranch": "../images/列车/JR東日本/キハE130系100番台.png"
+    "SuigunBranch": "../images/列车/JR東日本/キハE130系0番台.png",
+
+    // ===== 4.3.279 复查修复（fallback 误判纠正）=====
+    "Nippori_Toneri": "../images/鉄道/都営地下鉄/日暮里・舎人ライナー.png", // 日暮里・舎人ライナー：AGT新交通（330形），原错误fallback到6300形
+    "TokyuSetagaya": "../images/鉄道/東急電鉄/世田谷線.png", // 世田谷線：路面電車（300系），原错误fallback到2020系
+    "Oyama": "../images/列车/JR東日本/E233系湘南色.png", // 宇都宮線（JR東北本線系統）：上野東京ライン同一車両
+    "BanetsuEast": "../images/列车/JR東日本/キハ110系.png", // 磐越東線：キハ110系
+    "Iiyama": "../images/列车/JR東日本/キハ110系.png", // 飯山線：キハ110系
+    "Ishinomaki": "../images/列车/JR東日本/キハ110系.png", // 石巻線：キハ110系
+    "Kamaishi": "../images/列车/JR東日本/キハ110系.png", // 釜石線：キハ110系
+    "Kamiishi": "../images/列车/JR東日本/キハ110系.png", // 北上線：キハ110系
+    "Komii": "../images/列车/JR東日本/キハ110系.png", // 小海線：キハ110系
+    "Kounan": "../images/列车/JR東日本/キハ110系.png", // 花輪線：キハ110系
+    "Oga": "../images/列车/JR東日本/キハ110系.png", // 男鹿線：キハ110系
+    "Ominato": "../images/列车/JR東日本/キハ110系.png", // 大湊線：キハ110系
+    "RikutoEast": "../images/列车/JR東日本/キハ110系.png", // 陸羽東線：キハ110系
+    "RikutsuWest": "../images/列车/JR東日本/キハ110系.png", // 陸羽西線：キハ110系
+    "Tsugaru": "../images/列车/JR東日本/キハ110系.png", // 津軽線：キハ110系
+    "Yonezawa": "../images/列车/JR東日本/キハ110系.png", // 米坂線：キハ110系
+    "Hachinohe": "../images/列车/JR東日本/キハE130系500番台.png", // 八戸線：キハE130系500番台
+    "Ito": "../images/列车/JR東日本/E231系1000番台.png", // 伊東線：E231系1000番台（湘南色近郊型）
+    "Kashima": "../images/列车/JR東日本/E131系0番台.png", // 鹿島線：E131系0番台
+    "SensekiTohoku": "../images/列车/JR東日本/HB-E210系.png", // 仙石東北ライン：HB-E210系
+    "Daishi_Tobu": "../images/列车/東武鉄道/1000系.png" // 東武大師線：1000系（現役主力）
   };
 
   function getTrainIcon(lineId, operator, trainId, stationIndex, trainType) {

@@ -334,71 +334,13 @@
   }
 
   
-  // ========== 直通运行关系配置 ==========
-  var THROUGH_SERVICE_MAP = {
-    "TobuSkytree": ["Hibiya", "Hanzomon", "Namboku"],
-    "Skytree": ["Hibiya", "Hanzomon", "Namboku"],
-    "Hibiya": ["TobuSkytree", "TobuIsesaki"],
-    "Hanzomon": ["TobuSkytree", "TobuIsesaki", "TokyuDenEn"],
-    "Namboku": ["TobuSkytree", "TobuIsesaki"],
-    "TokyuToyoko": ["MinatoMirai", "Fukutoshin"],
-    "Toyoko": ["MinatoMirai", "Fukutoshin"],
-    "MinatoMirai": ["TokyuToyoko", "Fukutoshin"],
-    "Fukutoshin": ["TokyuToyoko", "MinatoMirai", "SeibuIkebukuro", "Tojo"],
-    "SeibuIkebukuro": ["Fukutoshin"],
-    "Ikebukuro": ["Fukutoshin"],
-    "Tojo": ["Fukutoshin"],
-    "Asakusa": ["KeikyuMain", "Keisei", "Hokuso"],
-    "KeikyuMain": ["Asakusa", "Keisei"],
-    "Keikyu": ["Asakusa", "Keisei"],
-    "Keisei": ["Asakusa", "KeikyuMain", "Hokuso"],
-    "Mita": ["TokyuMeguro"],
-    "TokyuMeguro": ["Mita", "TokyuTamagawa"],
-    "Saikyo": ["Kawagoe", "Rinkai"],
-    "Kawagoe": ["Saikyo"],
-    "Rinkai": ["Saikyo"],
-    "ShonanShinjuku": ["Utsunomiya", "Takasaki", "Yokosuka"],
-    "ChuoRapid": ["Ome", "Itsukaichi"],
-    "SobuRapid": ["Yokosuka"],
-    "Yokosuka": ["SobuRapid"],
-    "JobanLocal": ["Chiyoda"],
-    "Chiyoda": ["JobanLocal", "OdakyuTama"],
-    "OdakyuTama": ["Chiyoda"],
-    "Tozai": ["ChuoSobuLocal"],
-    "Yurakucho": ["SeibuIkebukuro", "TokyuToyoko"],
-    "TokyuDenEn": ["Hanzomon"],
-    "DenEn": ["Hanzomon"],
-    "Keio": ["Shinjuku"],
-    "KeioMain": ["Shinjuku"],
-    "Shinjuku": ["Keio", "KeioMain"],
-    "SotetsuMain": ["TokyuToyoko"],
-    "TokyuTamagawa": ["TokyuMeguro"]
-  };
-
+  // ========== 直通运行关系 ==========
+  // Data moved to data/core/through-service.js (single Provider: window.ThroughService).
   function getThroughServiceLines(lineId) {
-    try {
-      var result = [];
-      var visited = {};
-      var queue = [lineId];
-      visited[lineId] = true;
-      while (queue.length > 0) {
-        var current = queue.shift();
-        var through = THROUGH_SERVICE_MAP[current];
-        if (through && Array.isArray(through)) {
-          through.forEach(function(lid) {
-            if (!visited[lid]) {
-              visited[lid] = true;
-              result.push(lid);
-              queue.push(lid);
-            }
-          });
-        }
-      }
-      return result;
-    } catch(e) { return []; }
+    return (window.ThroughService && window.ThroughService.getThroughServiceLines) ? window.ThroughService.getThroughServiceLines(lineId) : [];
   }
 
-  // ========== 按需加载缺失线路的时刻表 ==========
+    // ========== 按需加载缺失线路的时刻表 ==========
   var _timetableLoading = {};
 
   function loadMissingTimetables(linesNeedingEstimation) {
@@ -518,6 +460,11 @@
     loadTrainPositions: loadTrainPositions,
     getCachedData: function() { return _lastFusedData; },
     saveToCache: saveToCache, refresh: function() { return fuseAll(); },
+    // Through-service (直通運転) providers: direct neighbours + BFS closure
+    getThroughServiceLines: getThroughServiceLines,
+    getDirectThroughLines: function(lineId) {
+      return (window.ThroughService && window.ThroughService.getDirectThroughLines) ? window.ThroughService.getDirectThroughLines(lineId) : [];
+    },
     updateOdptData: function(delayData) {
       if (delayData && typeof delayData === 'object') { odptData.delayInfo = delayData; try { fuseAll(); } catch(e) { console.debug('[DataFusion] updateOdptData->fuseAll error:', e.message); } }
     }
