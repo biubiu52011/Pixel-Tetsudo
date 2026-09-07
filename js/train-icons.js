@@ -100,7 +100,7 @@
     "TokyoMetro": "../images/列车/東京メトロ/銀座線.png",
     "Toei": "../images/列车/都営地下鉄/1000形.png", // 4.3.266：原都営浅草線.png 为电子设备占位图，改用 1000形（电车）
     "YokohamaMunicipal": "../images/列车/横浜市交通局/横浜市ブルーライン.png",
-    "Keio": "../images/鉄道/京王電鉄/京王線.png", // 4.3.266：原京王.png 为随身听占位图，回退全局默认（京王素材待补）
+    "Keio": "../images/列车/京王電鉄/京王.png", // 4.3.276：京王.png 恢复（原判定随身听为误判，实为京王系统车辆图，米白+玫红）
     "Odakyu": "../images/列车/小田急電鉄/4000系.png", // 4.3.275：小田急系統共通 4000系（千代田直通の現役主力、小田原/江ノ島/多摩 同一車輛体系）
     "Seibu": "../images/列车/西武鉄道/30000系.png", // 4.3.270：西武运营商默认 = 30000系（通勤主力）
     "Tobu": "../images/列车/東武鉄道/8000系.png", // 4.3.274：東武標準一般車
@@ -108,14 +108,14 @@
     "Keikyu": "../images/列车/京急電鉄/京急線.png",
     "Keisei": "../images/列车/京成電鉄/京成.png",
     "Sotetsu": "../images/列车/相模鉄道/相鉄.png",
-    "TWR": "../images/鉄道/東京臨海高速鉄道/臨海線.png",
+    "TWR": "../images/列车/東京臨海高速鉄道/りんかい線.png", // 4.3.276：实车图恢复
     "MIR": "../images/列车/東急電鉄/東横MM線.png",
-    "Rinkai": "../images/鉄道/東京臨海高速鉄道/臨海線.png",
+    "Rinkai": "../images/列车/東京臨海高速鉄道/りんかい線.png", // 4.3.276：实车图恢复
     "TsukubaExpress": "../images/列车/首都圏新都市鉄道/つくばエクスプレス.png",
     "Yurikamome": "../images/列车/ゆりかもめ/ゆりかもめ.png",
-    "TamaMonorail": "../images/鉄道/多摩都市モノレール/多摩都市モノレール線.png",
-    "SaitamaNewUrbanTransit": "../images/鉄道/埼玉新都市交通/伊奈線.png",
-    "ChibaUrbanMonorail": "../images/鉄道/千葉都市モノレール/千葉都市モノレール1号線.png",
+    "TamaMonorail": "../images/列车/多摩都市モノレール/多摩モノレール.png", // 4.3.276：实车图恢复
+    "SaitamaNewUrbanTransit": "../images/列车/埼玉新都市交通/ニューシャトル.png", // 4.3.276：AGT实车图恢复
+    "ChibaUrbanMonorail": "../images/列车/千葉都市モノレール/千葉モノレール.png", // 4.3.276：实车图恢复
     "TokyoMonorail": "../images/鉄道/東京モノレール/東京モノレール羽田空港線.png",
     "NipporiToneri": "../images/鉄道/都営地下鉄/日暮里・舎人ライナー.png", // 4.3.273：日暮里・舎人ライナー = AGT新交通（330形），非1000形地下鉄車
     "MinatoMirai": "../images/列车/東急電鉄/東横MM線.png",
@@ -155,7 +155,7 @@
     "BanetsuWest": "../images/列车/JR東日本/E721系.png",
     "Senzan": "../images/列车/JR東日本/E721系.png",      // 仙山線：E721系（仙台地区）
     "TohokuMain": "../images/列车/JR東日本/E721系.png",  // 4.3.266：東北本線（仙台）= E721系（原東北線.png 同车型重复）
-    "Yamagata": "../images/列车/JR東日本/E721系.png",    // 4.3.266：山形線 = E721系（原山形線.png 为仪表盘占位图）
+    "Yamagata": "../images/列车/JR東日本/山形線.png",    // 4.3.276：山形線.png 恢复（原判定仪表盘为误判，实为车辆图）
     "Senseki": "../images/列车/JR東日本/E721系.png",     // 4.3.266：仙石線 = E721系（原仙石線.png 为车载终端占位图）
     "Keiyo": "../images/列车/JR東日本/E233系5000番台.png", // ※E233系5000番台.png 内容可疑（粉高铁非京葉線涂装），待用户提供正确素材
     "Karasuyama": "../images/列车/JR東日本/烏山線.png",   // 烏山線：EV-E301系（蓄電池）
@@ -168,8 +168,8 @@
     // Tokyo Metro specific
     "Ginza": "../images/列车/東京メトロ/銀座線.png",
     "Marunouchi": "../images/列车/東京メトロ/丸ノ内線.png",
-    "Hibiya": "../images/鉄道/東京メトロ/日比谷線.png",
-    "Tozai": "../images/鉄道/東京メトロ/東西線.png",
+    "Hibiya": "../images/列车/東京メトロ/日比谷線.png", // 4.3.276：实车图恢复
+    "Tozai": "../images/列车/東京メトロ/東西線.png", // 4.3.276：实车图恢复
     "Chiyoda": "../images/列车/東京メトロ/18000系.png",
     "Yurakucho": "../images/列车/東京メトロ/有楽町線.png",
     "Hanzomon": "../images/列车/東急電鉄/田園都市線.png",   // 4.3.272：半蔵門線↔田園都市線 100%相互直通（同一列車：東急5000系/メトロ8000系が両線を運行）
@@ -177,11 +177,12 @@
     "Fukutoshin": "../images/列车/東京メトロ/副都心線.png",
     "KitaAyase": "../images/列车/東京メトロ/北綾瀬支線.png",
 
-    "Mita": "../images/鉄道/都営地下鉄/都営三田線.png",  // 4.3.273：三田線 = 6300形/6500形（1000形は浅草線用の誤用→符号に修正、素材待補）
-    // Toei specific（浅草線 回退 1000形；新宿線・大江戸線・荒川線 符号）
-    "Shinjuku": "../images/鉄道/都営地下鉄/都営新宿線.png",
-    "Oedo": "../images/鉄道/都営地下鉄/都営大江戸線.png",
-    "Arakawa": "../images/鉄道/都営地下鉄/都電荒川線.png",
+    "Mita": "../images/列车/都営地下鉄/都営三田線.png",  // 4.3.276：三田線实车图恢复（原判定服务器机箱为误判）
+    // Toei specific（4.3.276：都営各線实车图恢复）
+    "Asakusa": "../images/列车/都営地下鉄/都営浅草線.png",
+    "Shinjuku": "../images/列车/都営地下鉄/都営新宿線.png",
+    "Oedo": "../images/列车/都営地下鉄/大江戸線.png",
+    "Arakawa": "../images/列车/都営地下鉄/都電荒川線.png",
 
     // Tobu specific（4.3.275：用户重命名后重新判定，8枚全为实车，已按车型入库）
     "TobuSkytree": "../images/列车/東武鉄道/50000系.png",     // スカイツリーライン（伊勢崎線系）：50000系主力
@@ -200,6 +201,10 @@
     // 4.3.273 JR 系統補全
     "Nambu": "../images/列车/JR東日本/E233系8000番台.png",     // 南武線：E233系8000番台（図庫既有）
     "TokaidoMain": "../images/列车/JR東日本/E231系近郊型.png", // 東海道本線：上野東京ライン系統（Tokaido 同一車両）
+    // 4.3.276 恢复实车图（原判定误判）
+    "Sagami": "../images/列车/JR東日本/相模線.png",   // 相模線
+    "Tsurumi": "../images/列车/JR東日本/鶴見線.png",  // 鶴見線
+    "Sotobo": "../images/列车/JR東日本/内房線.png",   // 内房線（特急わかしお は typeMatch E257系）
 
     // Seibu specific（4.3.273：按运行系统分组，支线全列車直通親線 → 同一車輛）
     "SeibuShinjuku": "../images/列车/西武鉄道/30000系.png",       // 新宿系統・普通主力（40000系は特急S-TRAIN用）
@@ -267,19 +272,19 @@
     "YokohamaGreen": "../images/列车/横浜市交通局/横浜市グリーンライン.png",
 
     // Single-line operators
-    "TWR": "../images/鉄道/東京臨海高速鉄道/臨海線.png",
-    "Rinkai": "../images/鉄道/東京臨海高速鉄道/臨海線.png",
+    "TWR": "../images/列车/東京臨海高速鉄道/りんかい線.png", // 4.3.276：实车图恢复
+    "Rinkai": "../images/列车/東京臨海高速鉄道/りんかい線.png",
     "MIR": "../images/列车/東急電鉄/東横MM線.png",
     "TsukubaExpress": "../images/列车/首都圏新都市鉄道/つくばエクスプレス.png",
     "Yurikamome": "../images/列车/ゆりかもめ/ゆりかもめ.png",
-    "TamaMonorail": "../images/鉄道/多摩都市モノレール/多摩都市モノレール線.png",
-    "ChibaUrbanMonorail": "../images/鉄道/千葉都市モノレール/千葉都市モノレール1号線.png",
+    "TamaMonorail": "../images/列车/多摩都市モノレール/多摩モノレール.png",
+    "ChibaUrbanMonorail": "../images/列车/千葉都市モノレール/千葉モノレール.png",
     "TokyoMonorail": "../images/鉄道/東京モノレール/東京モノレール羽田空港線.png",
-    "SaitamaNewUrbanTransit": "../images/鉄道/埼玉新都市交通/伊奈線.png",
+    "SaitamaNewUrbanTransit": "../images/列车/埼玉新都市交通/ニューシャトル.png",
 
     // ===== railway_data key 对齐 =====
     "MinatoMirai": "../images/列车/東急電鉄/東横MM線.png",
-    "NewShuttle": "../images/鉄道/埼玉新都市交通/伊奈線.png",
+    "NewShuttle": "../images/列车/埼玉新都市交通/ニューシャトル.png",
     "HitachiNakaKaimin": "../images/鉄道/ひたちなか海浜鉄道/湊線.png",
     "Tōnami": "../images/列车/JR東日本/只見線.png",       // 4.3.266：只見線 = GV-E400系（原GV-E400系.png 为机械面板占位图）
     "Echigo": "../images/列车/JR東日本/E129系.png",
