@@ -24,7 +24,7 @@
     function updateOperatorNames() {
         if (typeof window.t === 'function' && typeof window.TransitConstants === 'object') {
             var _opNames = {};
-            var _opIds = ['JR-East','JR-West','JR West','TokyoMetro','Toei','Seibu','Tobu','Tokyu','Keio','Odakyu','Keisei','Keikyu','Sotetsu','YokohamaMunicipal','TWR','MinatoMirai','MIR','Rinkai','TsukubaExpress','Yurikamome','TamaMonorail','ShonanMonorail','ChibaUrbanMonorail','TokyoMonorail','SaitamaNewUrbanTransit'];
+            var _opIds = ['JR-East','JR-West','JR West','TokyoMetro','Toei','Seibu','Tobu','Tokyu','Keio','Odakyu','Keisei','Keikyu','Sotetsu','YokohamaMunicipal','TWR','MinatoMirai','MIR','Rinkai','TsukubaExpress','Yurikamome','TamaMonorail','ShonanMonorail','ChibaUrbanMonorail','TokyoMonorail','SaitamaNewUrbanTransit','IGR','Aoimori'];
             for (var _i = 0; _i < _opIds.length; _i++) {
                 var _key = 'op.' + _opIds[_i];
                 _opNames[_opIds[_i]] = window.t(_key) || _opIds[_i];

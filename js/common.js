@@ -56,7 +56,9 @@
       "Keio", "Odakyu", "Seibu", "Tobu", "Tokyu",
       "Keikyu", "Keisei", "Sotetsu",
       "TWR", "MinatoMirai", "MIR", "Rinkai",
-      "TsukubaExpress", "Yurikamome", "TamaMonorail", "ShonanMonorail"
+      "TsukubaExpress", "Yurikamome", "TamaMonorail", "ShonanMonorail",
+      "ChibaUrbanMonorail", "TokyoMonorail", "SaitamaNewUrbanTransit",
+      "IGR", "Aoimori"
     ],
     NORMALIZE: TRANSIT_NORMALIZE,
     OP_NAMES: {},
