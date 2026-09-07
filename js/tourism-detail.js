@@ -201,7 +201,7 @@ var currentStationKey = null;
 
     // Station badge
     var stationBadge = stationName
-      ? '<span class="station-badge">\u{26A1} ' + escapeHtml(stationName) + '</span>'
+      ? '<span class="station-badge">' + escapeHtml(stationName) + '</span>'
       : '';
 
     // Tips section
