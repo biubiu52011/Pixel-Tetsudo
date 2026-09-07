@@ -363,7 +363,7 @@
     }
 
     // Sort operator groups by OP_ORDER, unknown ops appended at end
-    var knownOps = TransitConstants.OP_ORDER || [];
+    var knownOps = (window.TransitConstants && window.TransitConstants.OP_ORDER) || [];
     var unknownOps = opOrder.filter(function(op){ return knownOps.indexOf(op) === -1; });
     opOrder = knownOps.filter(function(op){ return groups[op]; }).concat(unknownOps);
 
@@ -416,7 +416,7 @@
     }
     container.innerHTML = html;
     // Apply line colors via DOM API (CSP-safe, bypasses style-src restriction)
-    container.querySelectorAll('.rs-line-card').forEach(function(card) {
+    Array.prototype.slice.call(container.querySelectorAll('.rs-line-card')).forEach(function(card) {
       var color = card.getAttribute('data-line-color');
       if (color) card.style.setProperty('--line-color', color);
     });

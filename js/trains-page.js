@@ -1358,7 +1358,7 @@
     var lines = window.DataLayer ? window.DataLayer.getAllLines() : (window.UNIFIED_LINES || {});
     var ul = Array.isArray(lines) ? (function(){ var d={}; lines.forEach(function(l){ d[l.id||l.line_id]=l; }); return d; })() : lines;
     if (!ul || Object.keys(ul).length === 0) { el.innerHTML = ''; return; }
-    var lineOrder = (window.LinePresentationService && window.UNIFIED_LINES) ? window.LinePresentationService.getDisplayOrder(window.UNIFIED_LINES) : []; try { window.DataState.renderList(el, ul, { mode: "trains", lineOrder: lineOrder }); } catch(e) { console.error("RENDER_FAIL_STACK:", e && e.stack); el.innerHTML = "<div class=\"rs-error\">Render failed</div>"; }
+    var lineOrder = (window.LinePresentationService && window.UNIFIED_LINES) ? window.LinePresentationService.getDisplayOrder(window.UNIFIED_LINES) : []; try { window.DataState.renderList(el, ul, { mode: "trains", lineOrder: lineOrder }); } catch(e) { el.innerHTML = "<div class=\"rs-error\">Render failed</div>"; }
   }
 
   function init() {
@@ -1567,7 +1567,7 @@
       });
     }
     if (!filtered || Object.keys(filtered).length === 0) { el.innerHTML = ''; return; }
-    var lineOrder = (window.LinePresentationService && window.UNIFIED_LINES) ? window.LinePresentationService.getDisplayOrder(window.UNIFIED_LINES) : []; try { window.DataState.renderList(el, filtered, { mode: "trains", lineOrder: lineOrder }); } catch(e) { console.error("RENDER_FAIL_STACK:", e && e.stack); el.innerHTML = "<div class=\"rs-error\">Render failed</div>"; }
+    var lineOrder = (window.LinePresentationService && window.UNIFIED_LINES) ? window.LinePresentationService.getDisplayOrder(window.UNIFIED_LINES) : []; try { window.DataState.renderList(el, filtered, { mode: "trains", lineOrder: lineOrder }); } catch(e) { el.innerHTML = "<div class=\"rs-error\">Render failed</div>"; }
   }
   window.TrainsPage = {
     init: init,
