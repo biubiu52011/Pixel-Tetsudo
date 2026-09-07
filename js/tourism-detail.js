@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Tourism Detail Page - Decoupled Architecture
  * Spots are accessed by name/index, not by station association
  */
@@ -204,28 +204,10 @@ var currentStationKey = null;
       ? '<span class="station-badge">\u{26A1} ' + escapeHtml(stationName) + '</span>'
       : '';
 
-    // Highlights: break description into key points
-    var highlightsHtml = '';
-    if (desc) {
-      var sentences = desc.split(/[.。！？]+/).filter(function(s) { return s.trim().length > 10; });
-      // Only show highlights if at least 2 distinct sentences (avoids duplicate with about section)
-      if (sentences.length >= 2) {
-        var highlightItems = sentences.slice(0, 3);
-        highlightsHtml = '<div class="article-section">'
-          + '<h3 class="section-heading">' + t('detail.highlights') + '</h3>'
-          + '<ul class="highlights-list">';
-        for (var h = 0; h < highlightItems.length; h++) {
-          highlightsHtml += '<li>' + escapeHtml(highlightItems[h].trim()) + '</li>';
-        }
-        highlightsHtml += '</ul></div>';
-      }
-    }
-
     // Tips section
     var tipsHtml = '<div class="article-section">'
       + '<h3 class="section-heading">' + t('detail.tips') + '</h3>'
       + '<ul class="tips-list">';
-    if (distText) tipsHtml += '<li>' + escapeHtml(t('detail.distance') + ': ' + distText) + '</li>';
     if (spot.tips && spot.tips.length > 0) {
       for (var ti = 0; ti < spot.tips.length; ti++) {
         var tipText = (spot.tips_i18n && spot.tips_i18n[lang] && spot.tips_i18n[lang][ti]) || (spot.tips_i18n && spot.tips_i18n.ja && spot.tips_i18n.ja[ti]) || spot.tips[ti];
@@ -240,7 +222,7 @@ var currentStationKey = null;
     var spotFee = translateCommonTerms(getI18nField(spot, 'fee', lang) || t('detail.unavailable'), lang);
     // Info grid (hours, fees)
     var infoHtml = '<div class="article-section">'
-      + '<h3 class="section-heading">' + t('detail.info_hours') + '</h3>'
+      + '<h3 class="section-heading">' + t('detail.basic_info') + '</h3>'
       + '<div class="info-grid">'
       + '<div class="info-row"><span class="info-label">' + t('detail.info_hours') + '</span><span class="info-value">' + escapeHtml(spotHours) + '</span></div>'
       + '<div class="info-row"><span class="info-label">' + t('detail.info_fee') + '</span><span class="info-value">' + escapeHtml(spotFee) + '</span></div>'
@@ -266,15 +248,12 @@ var currentStationKey = null;
       + '<div class="article-section">'
       + '<h3 class="section-heading">' + t('detail.about') + '</h3>'
       + '<p class="article-text">' + escapeHtml(desc) + '</p>'
-      + '<div class="article-tags">' + tagsHtml + '</div>'
       + '</div>'
-      + highlightsHtml
       + tipsHtml
       + infoHtml
       + '<div class="article-section">'
       + '<h3 class="section-heading">' + t('detail.location') + '</h3>'
       + '<div class="map-info">'
-      + '<div class="map-distance"><span class="map-icon">\u2192</span><div><div class="map-label">' + t('detail.distance') + '</div><div class="map-value">' + escapeHtml(distText || t('detail.walking_distance')) + '</div></div></div>'
       + mapHtml
       + '</div>'
       + '</div>';
