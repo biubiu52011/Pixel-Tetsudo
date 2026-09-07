@@ -148,11 +148,19 @@
     if (throughLines.length > 0) {
       var own = src[lineId];
       var ownStations = (own && own.stations) ? own.stations : [];
+      var ownIdxMap = {};
+      for (var k0 = 0; k0 < ownStations.length; k0++) ownIdxMap[ownStations[k0]] = k0;
+      var ownHalf = ownStations.length / 2;
       for (var i2 = 0; i2 < ownStations.length; i2++) {
         var stArr = map[ownStations[i2]];
         if (stArr) {
           for (var j2 = 0; j2 < stArr.length; j2++) {
-            if (throughLines.indexOf(stArr[j2].lineId) >= 0) { stArr[j2].through = true; }
+            if (throughLines.indexOf(stArr[j2].lineId) >= 0) {
+              stArr[j2].through = true;
+              // Direction the through train continues on the map: boundary station in the
+              // first half of the station list → "up" (∧), otherwise "down" (∨).
+              stArr[j2].dir = (ownIdxMap[ownStations[i2]] < ownHalf) ? "up" : "down";
+            }
           }
         }
       }
@@ -163,7 +171,7 @@
 
   // Industry-standard through-service affordance (mirrors JR/Tokyo Metro
   // "相互直通運転" station signage):
-  //   - icon: green rounded ⇄ badge on the top-right corner
+  //   - boxed label "∨/∧直通〇〇線" (arrow = direction the through train continues)
   //   - title: "Operator Line（相互直通運転）" with i18n operator + through label
   function _throughBadgeText(lineObj) {
     var opName = (lineObj.operator && window.tOp) ? window.tOp(lineObj.operator) : "";
@@ -172,25 +180,45 @@
     var thru = (window.t ? window.t("train.throughService", "相互直通運転") : "相互直通運転");
     return base + "（" + thru + "）";
   }
-  function _addThroughBadge(layer, ns, x, y, iconSize) {
-    var bW = 11, bH = 8;
+  // Short display name for a through-partner line: prefer the "○○ライン" alias in
+  // parentheses (e.g. 伊勢崎線（スカイツリーライン）→ スカイツリーライン), then truncate.
+  function _throughShortName(lineObj, mobile) {
+    var nm = lineObj.name;
+    var m = nm.match(/[（(]([^）)]*ライン)[）)]/);
+    if (m) nm = m[1];
+    var maxN = mobile ? 6 : 10;
+    return nm.length > maxN ? nm.slice(0, maxN) + "…" : nm;
+  }
+  // Industry-standard through-service affordance (mirrors JR/Tokyo Metro station
+  // signage "相互直通運転"): a rounded boxed label reading "∨直通〇〇線" / "∧直通〇〇線",
+  // where the arrow points in the direction the through train continues on the map
+  // (up=∧, down=∨). Returns the consumed width so flow layouts can advance.
+  function _renderThroughChip(layer, ns, x, y, lineObj, iconSize, mobile) {
+    var arrow = lineObj.dir === "up" ? "∧" : "∨";
+    var nm = _throughShortName(lineObj, mobile);
+    var label = arrow + "直通" + nm;
+    var fs = mobile ? 9 : 7;
+    var w = label.length * (mobile ? 9 : 6.5) + 8;
+    var h = iconSize + 4;
     var bg = document.createElementNS(ns, "rect");
-    bg.setAttribute("x", x + iconSize - bW + 1);
-    bg.setAttribute("y", y - 4);
-    bg.setAttribute("width", bW);
-    bg.setAttribute("height", bH);
-    bg.setAttribute("rx", "2");
-    bg.setAttribute("fill", "#2e7d32");
+    bg.setAttribute("x", x - 1);
+    bg.setAttribute("y", y - 2);
+    bg.setAttribute("width", w);
+    bg.setAttribute("height", h);
+    bg.setAttribute("rx", "3");
+    bg.setAttribute("fill", "#e8f5e9");
+    bg.setAttribute("stroke", "#2e7d32");
+    bg.setAttribute("stroke-width", "1");
     layer.appendChild(bg);
     var txt = document.createElementNS(ns, "text");
-    txt.setAttribute("x", x + iconSize - bW / 2 + 1);
-    txt.setAttribute("y", y + 2);
-    txt.setAttribute("font-size", "8");
+    txt.setAttribute("x", x + 3);
+    txt.setAttribute("y", y + (mobile ? 12 : 9));
+    txt.setAttribute("font-size", fs);
+    txt.setAttribute("fill", "#2e7d32");
     txt.setAttribute("font-weight", "700");
-    txt.setAttribute("fill", "#fff");
-    txt.setAttribute("text-anchor", "middle");
-    txt.textContent = "⇄";
+    txt.textContent = label;
     layer.appendChild(txt);
+    return w + 2; // consumed width (for flow layout advance)
   }
   
   /**
@@ -606,10 +634,13 @@
           var PER_ROW = isCompact ? 2 : (isDual ? 10 : 6);
           var MAX_ROWS = isCompact ? 2 : (isDual ? 2 : 1);
           var maxShow = PER_ROW * MAX_ROWS;
-          var shown = txLines.slice(0, maxShow);
+          // Through partners always shown first (most important info on the chip)
+          var sortedTx = txLines.slice().sort(function(a, b) { return ((b.through ? 1 : 0) - (a.through ? 1 : 0)) || (a.name < b.name ? -1 : 1); });
+          var shown = sortedTx.slice(0, maxShow);
           var rows = Math.ceil(shown.length / PER_ROW);
           var rowW = Math.min(shown.length, PER_ROW) * (ICON + GAP) - GAP;
           var moreText = txLines.length > maxShow ? "+" + (txLines.length - maxShow) : "";
+          var chipThroughRow = false;
           var totalW = rowW + (moreText ? 12 : 0);
           var ix0, iy0;
           // Chip anchored to its station: 3px below the name (left/right/bottom).
@@ -626,7 +657,7 @@
           // compact 2-row layout (3 per row, then 2 per row) so it stays on-canvas.
           if (side === "left" && ix0 < 2 && !isCompact) {
             isCompact = true; ICON = 10; GAP = 1; PER_ROW = 3; MAX_ROWS = 2;
-            shown = txLines.slice(0, PER_ROW * MAX_ROWS);
+            shown = sortedTx.slice(0, PER_ROW * MAX_ROWS);
             rows = Math.ceil(shown.length / PER_ROW);
             rowW = Math.min(shown.length, PER_ROW) * (ICON + GAP) - GAP;
             moreText = txLines.length > PER_ROW * MAX_ROWS ? "+" + (txLines.length - PER_ROW * MAX_ROWS) : "";
@@ -634,7 +665,7 @@
             ix0 = tx - totalW;
             if (ix0 < 2) {
               PER_ROW = 2;
-              shown = txLines.slice(0, PER_ROW * MAX_ROWS);
+              shown = sortedTx.slice(0, PER_ROW * MAX_ROWS);
               rows = Math.ceil(shown.length / PER_ROW);
               rowW = Math.min(shown.length, PER_ROW) * (ICON + GAP) - GAP;
               moreText = txLines.length > PER_ROW * MAX_ROWS ? "+" + (txLines.length - PER_ROW * MAX_ROWS) : "";
@@ -646,7 +677,7 @@
           // Right-side overflow: same compact degradation (2 rows, stays on-canvas)
           if ((side === "right" || side === "dual") && ix0 + totalW > svgW - 2 && !isCompact) {
             isCompact = true; ICON = 10; GAP = 1; PER_ROW = 3; MAX_ROWS = 2;
-            shown = txLines.slice(0, PER_ROW * MAX_ROWS);
+            shown = sortedTx.slice(0, PER_ROW * MAX_ROWS);
             rows = Math.ceil(shown.length / PER_ROW);
             rowW = Math.min(shown.length, PER_ROW) * (ICON + GAP) - GAP;
             moreText = txLines.length > PER_ROW * MAX_ROWS ? "+" + (txLines.length - PER_ROW * MAX_ROWS) : "";
@@ -654,7 +685,7 @@
             ix0 = tx;
             if (ix0 + totalW > svgW - 2) {
               PER_ROW = 2;
-              shown = txLines.slice(0, PER_ROW * MAX_ROWS);
+              shown = sortedTx.slice(0, PER_ROW * MAX_ROWS);
               rows = Math.ceil(shown.length / PER_ROW);
               rowW = Math.min(shown.length, PER_ROW) * (ICON + GAP) - GAP;
               moreText = txLines.length > PER_ROW * MAX_ROWS ? "+" + (txLines.length - PER_ROW * MAX_ROWS) : "";
@@ -681,23 +712,20 @@
             var flowEndX = ix0, flowEndY = iy0;
             for (var fi = 0; fi < shown.length; fi++) {
               var fxl = shown[fi];
-              var fName = fxl.name.length > 4 ? fxl.name.slice(0, 4) + "…" : fxl.name;
-              var fw = fxl.image ? ICON : ((fName.length + (fxl.through ? 1 : 0)) * (isMobileView ? 9 : 6) + 4);
-              if (curX + fw > maxLineW && curX > ix0) { curX = ix0; lineY += ICON + GAP; }
-              if (fxl.through && fxl.image) {
-                var ring2 = document.createElementNS(svgNS, "rect");
-                ring2.setAttribute("x", curX - 1);
-                ring2.setAttribute("y", lineY - 1);
-                ring2.setAttribute("width", ICON + 2);
-                ring2.setAttribute("height", ICON + 2);
-                ring2.setAttribute("rx", "2");
-                ring2.setAttribute("fill", "none");
-                ring2.setAttribute("stroke", "#2e7d32");
-                ring2.setAttribute("stroke-width", "1.2");
-                staticLayer.appendChild(ring2);
-                _addThroughBadge(staticLayer, svgNS, curX, lineY, ICON);
+              var fw;
+              if (fxl.through) {
+                // Through-service partner: boxed "∨/∧直通〇〇線" label (industry-standard signage)
+                var thruName = _throughShortName(fxl, isMobileView);
+                var thruLabel = (fxl.dir === "up" ? "∧" : "∨") + "直通" + thruName;
+                fw = thruLabel.length * (isMobileView ? 9 : 6.5) + 10;
+              } else {
+                var fName = fxl.name.length > 4 ? fxl.name.slice(0, 4) + "…" : fxl.name;
+                fw = fxl.image ? ICON : (fName.length * (isMobileView ? 9 : 6) + 4);
               }
-              if (fxl.image) {
+              if (curX + fw > maxLineW && curX > ix0) { curX = ix0; lineY += ICON + GAP; }
+              if (fxl.through) {
+                fw = _renderThroughChip(staticLayer, svgNS, curX, lineY, fxl, ICON, isMobileView);
+              } else if (fxl.image) {
                 var fImg = document.createElementNS(svgNS, "image");
                 fImg.setAttribute("href", fxl.image);
                 fImg.setAttribute("xlink:href", fxl.image);
@@ -715,14 +743,8 @@
                 fTxt.setAttribute("x", curX);
                 fTxt.setAttribute("y", lineY + 8);
                 fTxt.setAttribute("font-size", isMobileView ? "9" : "6");
-                if (fxl.through) {
-                  fTxt.setAttribute("fill", "#2e7d32");
-                  fTxt.setAttribute("font-weight", "700");
-                  fTxt.textContent = "⇄" + (fxl.name.length > 4 ? fxl.name.slice(0, 4) + "…" : fxl.name);
-                } else {
-                  fTxt.setAttribute("fill", "#999");
-                  fTxt.textContent = fxl.name.length > 4 ? fxl.name.slice(0, 4) + "…" : fxl.name;
-                }
+                fTxt.setAttribute("fill", "#999");
+                fTxt.textContent = fxl.name.length > 4 ? fxl.name.slice(0, 4) + "…" : fxl.name;
                 staticLayer.appendChild(fTxt);
               }
               curX += fw + GAP;
@@ -731,61 +753,56 @@
             // Background chip width follows actual flow extent (grid estimate was too narrow)
             bg.setAttribute("width", (flowEndX - ix0) + (moreText ? 16 : 0) + 2);
           } else {
-            // Original grid loop for loop/compact sides
-          for (var ti = 0; ti < shown.length; ti++) {
-            var txl = shown[ti];
-            var row = Math.floor(ti / PER_ROW);
-            var col = ti % PER_ROW;
-            var tix = ix0 + col * (ICON + GAP);
-            var tiy = iy0 + row * (ICON + GAP);
-            if (txl.through && txl.image) {
-              // Through-service partner: green ring + ⇄ badge distinguishes it from a plain interchange
-              var ring = document.createElementNS(svgNS, "rect");
-              ring.setAttribute("x", tix - 1);
-              ring.setAttribute("y", tiy - 1);
-              ring.setAttribute("width", ICON + 2);
-              ring.setAttribute("height", ICON + 2);
-              ring.setAttribute("rx", "2");
-              ring.setAttribute("fill", "none");
-              ring.setAttribute("stroke", "#2e7d32");
-              ring.setAttribute("stroke-width", "1.2");
-              staticLayer.appendChild(ring);
-              _addThroughBadge(staticLayer, svgNS, tix, tiy, ICON);
-            }
-            if (txl.image) {
-              var tImg = document.createElementNS(svgNS, "image");
-              tImg.setAttribute("href", txl.image);
-              tImg.setAttribute("xlink:href", txl.image);
-              tImg.setAttribute("x", tix);
-              tImg.setAttribute("y", tiy);
-              tImg.setAttribute("width", ICON);
-              tImg.setAttribute("height", ICON);
-              tImg.setAttribute("opacity", "0.95");
-              var tTitle = document.createElementNS(svgNS, "title");
-              tTitle.textContent = _throughBadgeText(txl);
-              tImg.appendChild(tTitle);
-              staticLayer.appendChild(tImg);
-            } else {
-              var tTxt = document.createElementNS(svgNS, "text");
-              tTxt.setAttribute("x", tix);
-              tTxt.setAttribute("y", tiy + 8);
-              tTxt.setAttribute("font-size", isCompact ? (isMobileView ? "7" : "6") : (isMobileView ? "9" : "6"));
-              if (txl.through) {
-                tTxt.setAttribute("fill", "#2e7d32");
-                tTxt.setAttribute("font-weight", "700");
-                tTxt.textContent = "⇄" + (txl.name.length > 4 ? txl.name.slice(0, 4) + "…" : txl.name);
+            // Grid layout for loop/compact sides.
+            // Through partners go to a dedicated label row below the icon grid.
+            var gridItems = [], throughItems = [];
+            for (var ti = 0; ti < shown.length; ti++) { (shown[ti].through ? throughItems : gridItems).push(shown[ti]); }
+            var gRows = Math.max(1, Math.ceil(gridItems.length / PER_ROW));
+            for (var ti2 = 0; ti2 < gridItems.length; ti2++) {
+              var txl = gridItems[ti2];
+              var row = Math.floor(ti2 / PER_ROW);
+              var col = ti2 % PER_ROW;
+              var tix = ix0 + col * (ICON + GAP);
+              var tiy = iy0 + row * (ICON + GAP);
+              if (txl.image) {
+                var tImg = document.createElementNS(svgNS, "image");
+                tImg.setAttribute("href", txl.image);
+                tImg.setAttribute("xlink:href", txl.image);
+                tImg.setAttribute("x", tix);
+                tImg.setAttribute("y", tiy);
+                tImg.setAttribute("width", ICON);
+                tImg.setAttribute("height", ICON);
+                tImg.setAttribute("opacity", "0.95");
+                var tTitle = document.createElementNS(svgNS, "title");
+                tTitle.textContent = _throughBadgeText(txl);
+                tImg.appendChild(tTitle);
+                staticLayer.appendChild(tImg);
               } else {
+                var tTxt = document.createElementNS(svgNS, "text");
+                tTxt.setAttribute("x", tix);
+                tTxt.setAttribute("y", tiy + 8);
+                tTxt.setAttribute("font-size", isCompact ? (isMobileView ? "7" : "6") : (isMobileView ? "9" : "6"));
                 tTxt.setAttribute("fill", "#999");
                 tTxt.textContent = txl.name.length > 4 ? txl.name.slice(0, 4) + "…" : txl.name;
+                staticLayer.appendChild(tTxt);
               }
-              staticLayer.appendChild(tTxt);
             }
-          }
+            if (throughItems.length > 0) {
+              var lx2 = ix0;
+              var ly2 = iy0 + gRows * (ICON + GAP) + 2;
+              for (var th = 0; th < throughItems.length; th++) {
+                lx2 += _renderThroughChip(staticLayer, svgNS, lx2, ly2, throughItems[th], ICON, isMobileView) + GAP;
+              }
+              // Widen/tall the chip background to cover the through-label row
+              bg.setAttribute("height", gRows * (ICON + GAP) + ICON + 8);
+              if (lx2 - ix0 > totalW) bg.setAttribute("width", (lx2 - ix0) + 2);
+              chipThroughRow = true;
+            }
           }
           if (moreText) {
             var more = document.createElementNS(svgNS, "text");
             var moreX = isDual ? flowEndX + 4 : ix0 + rowW + GAP;
-            var moreY = isDual ? flowEndY + 8 : iy0 + 8;
+            var moreY = isDual ? flowEndY + 8 : (chipThroughRow ? iy0 + rows * (ICON + GAP) + ICON + 12 : iy0 + 8);
             if (isDual && moreX + 12 > svgW - 2) { moreX = ix0; moreY = flowEndY + ICON + GAP + 8; }
             more.setAttribute("x", moreX);
             more.setAttribute("y", moreY);
