@@ -75,7 +75,8 @@
     let i = a.length - 1;
     while (i > 0) {
       const p = (i - 1) >> 1;
-      if (a[p][0] <= a[i][0]) break;
+      // Compare (cost, transfers): prefer fewer transfers when cost is equal
+      if (a[p][0] < a[i][0] || (a[p][0] === a[i][0] && a[p][1] <= a[i][1])) break;
       const t = a[p]; a[p] = a[i]; a[i] = t;
       i = p;
     }
@@ -91,8 +92,8 @@
       for (;;) {
         const l = i * 2 + 1, r = l + 1;
         let m = i;
-        if (l < a.length && a[l][0] < a[m][0]) m = l;
-        if (r < a.length && a[r][0] < a[m][0]) m = r;
+        if (l < a.length && (a[l][0] < a[m][0] || (a[l][0] === a[m][0] && a[l][1] < a[m][1]))) m = l;
+        if (r < a.length && (a[r][0] < a[m][0] || (a[r][0] === a[m][0] && a[r][1] < a[m][1]))) m = r;
         if (m === i) break;
         const t = a[m]; a[m] = a[i]; a[i] = t;
         i = m;
@@ -212,21 +213,22 @@
     if (startLines.length === 0) return null;
 
     const heap = new _MinHeap();
-    const dist = new Map();
+    const dist = new Map(); // key -> [cost, transfers]
     const prev = new Map(); // key -> { key, station, line }
     const rideDur = new Map(); // accumulated ride-only minutes (excludes penalty)
     for (const lid of startLines) {
       const k = fromKey + '\u0001' + lid;
-      dist.set(k, 0);
+      dist.set(k, [0, 0]);
       rideDur.set(k, 0);
-      heap.push([0, k]);
+      heap.push([0, 0, k]);
     }
 
     let endKey = null;
     while (heap.size() > 0) {
       const top = heap.pop();
-      const cost = top[0], key = top[1];
-      if (dist.get(key) < cost) continue;
+      const cost = top[0], transfers = top[1], key = top[2];
+      const dcur = dist.get(key);
+      if (!dcur || dcur[0] < cost || (dcur[0] === cost && dcur[1] < transfers)) continue;
       const sep = key.indexOf('\u0001');
       const st = key.slice(0, sep), lid = key.slice(sep + 1);
       if (st === toKey) { endKey = key; break; }
@@ -244,11 +246,12 @@
         const nk = nst + '\u0001' + lid;
         const d = (meta.durations && meta.durations[pos] != null) ? meta.durations[pos] : 2;
         const nc = cost + d;
-        if (!dist.has(nk) || nc < dist.get(nk)) {
-          dist.set(nk, nc);
+        const rc = dist.get(nk);
+        if (!rc || nc < rc[0] || (nc === rc[0] && transfers < rc[1])) {
+          dist.set(nk, [nc, transfers]);
           rideDur.set(nk, (rideDur.get(key) || 0) + d);
           prev.set(nk, { key: key, station: st, line: lid });
-          heap.push([nc, nk]);
+          heap.push([nc, transfers, nk]);
         }
       }
 
@@ -274,11 +277,13 @@
           if (p && p.out) txCost += (p.walk || 0);
         }
         const nc = cost + txCost;
-        if (!dist.has(nk) || nc < dist.get(nk)) {
-          dist.set(nk, nc);
+        const nt = transfers + 1;
+        const tc = dist.get(nk);
+        if (!tc || nc < tc[0] || (nc === tc[0] && nt < tc[1])) {
+          dist.set(nk, [nc, nt]);
           rideDur.set(nk, rideDur.get(key) || 0);
           prev.set(nk, { key: key, station: st, line: lid });
-          heap.push([nc, nk]);
+          heap.push([nc, nt, nk]);
         }
       }
     }

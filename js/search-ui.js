@@ -278,7 +278,7 @@
       var dur = result.durationMin || 0;
       var transfers = 0;
       var segs = result.routeSegments || result.lineInfo || [];
-      for (var i = 0; i < segs.length; i++) { if (segs[i].type === 'transfer') transfers++; }
+      for (var i = 0; i < segs.length; i++) { if (segs[i].type === 'transfer' && !segs[i].through) transfers++; }
 
       var origin = window.RailwayDB && window.RailwayDB.resolveStationName ? window.RailwayDB.resolveStationName(result.path[0], lang) : (result.path[0] || '');
       var dest = window.RailwayDB && window.RailwayDB.resolveStationName ? window.RailwayDB.resolveStationName(result.path[result.path.length - 1], lang) : (result.path[result.path.length - 1] || '');

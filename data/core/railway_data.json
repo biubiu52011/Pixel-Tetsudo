@@ -21489,18 +21489,6 @@
      "note": ""
     },
     {
-     "station": "Kamonomiya",
-     "lineId": "NewShuttle",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Kamonomiya",
-     "lineId": "TokaidoMain",
-     "type": "in",
-     "note": ""
-    },
-    {
      "station": "Odawara",
      "lineId": "ShonanShinjuku",
      "type": "in",
@@ -22582,7 +22570,7 @@
    "stations": [
     "Omiya",
     "Tetsudo-Hakubutsukan",
-    "Kamonomiya",
+    "Kamomiya",
     "Higashi-Miyahara",
     "Konba",
     "Yoshinohara",
@@ -22640,18 +22628,6 @@
     {
      "station": "Omiya",
      "lineId": "UtsunomiyaJR",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Kamonomiya",
-     "lineId": "Odawara",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Kamonomiya",
-     "lineId": "TokaidoMain",
      "type": "in",
      "note": ""
     }
@@ -23549,18 +23525,6 @@
     {
      "station": "Kozu",
      "lineId": "Odawara",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Kamonomiya",
-     "lineId": "Odawara",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Kamonomiya",
-     "lineId": "NewShuttle",
      "type": "in",
      "note": ""
     },
@@ -25820,6 +25784,7 @@
   "鮫洲": "Samezu",
   "鳥沢": "Torisawa",
   "鳩ノ巣": "Hatonosu",
+  "加茂宮": "Kamomiya",
   "鴨宮": "Kamonomiya",
   "鴨居": "Kamoi",
   "鴻巣": "Konosu",
@@ -40297,9 +40262,11 @@
   "Shibusawa": [
    "Odawara"
   ],
+  "Kamomiya": [
+   "NewShuttle"
+  ],
   "Kamonomiya": [
    "Odawara",
-   "NewShuttle",
    "TokaidoMain"
   ],
   "Koremasa": [
@@ -44495,7 +44462,7 @@
   "NewShuttle": {
    "Omiya": 0,
    "Tetsudo-Hakubutsukan": 1,
-   "Kamonomiya": 2,
+   "Kamomiya": 2,
    "Higashi-Miyahara": 3,
    "Konba": 4,
    "Yoshinohara": 5,
