@@ -121,6 +121,77 @@
   }
   // ========== Route Geometry Cache (Single source of truth for coordinates) ==========
   var _routeGeometryCache = {};
+  function _isMobileView() { return typeof window !== "undefined" && window.innerWidth < 600; }
+  function _geomKey(lineId) { return lineId + (_isMobileView() ? "__m" : "__d"); }
+
+  // ========== Transfer map cache: stationId -> interchange lines (excluding the line itself) ==========
+  var _transferMapCache = null;
+  function _getTransferMap(lineId) {
+    var _langNow = window.currentLang || "ja";
+    if (_transferMapCache && _transferMapCache.lineId === lineId && _transferMapCache.lang === _langNow) return _transferMapCache.map;
+    var src = (window.RailwayDB && window.RailwayDB.getAllLines) ? window.RailwayDB.getAllLines() : getLinesData();
+    var map = {};
+    for (var lid in src) {
+      if (lid === lineId) continue;
+      var l = src[lid];
+      if (!l || !l.stations || !l.stations.length) continue;
+      var img = (l.image && !/(グループ|ロゴ|マーク|アイコン|シンボル)/.test(l.image)) ? l.image : "";
+      var nm = (window.RailwayDB && window.RailwayDB.resolveLineName) ? window.RailwayDB.resolveLineName(lid, window.currentLang) : (l.name || lid);
+      for (var i = 0; i < l.stations.length; i++) {
+        var st = l.stations[i];
+        if (!map[st]) map[st] = [];
+        map[st].push({ lineId: lid, image: img, name: nm, operator: l.operator || "" });
+      }
+    }
+    // Mark through-service (直通運転) partner lines that join this line at one of its own stations
+    var throughLines = (window.ThroughService && window.ThroughService.getDirectThroughLines) ? window.ThroughService.getDirectThroughLines(lineId) : [];
+    if (throughLines.length > 0) {
+      var own = src[lineId];
+      var ownStations = (own && own.stations) ? own.stations : [];
+      for (var i2 = 0; i2 < ownStations.length; i2++) {
+        var stArr = map[ownStations[i2]];
+        if (stArr) {
+          for (var j2 = 0; j2 < stArr.length; j2++) {
+            if (throughLines.indexOf(stArr[j2].lineId) >= 0) { stArr[j2].through = true; }
+          }
+        }
+      }
+    }
+    _transferMapCache = { lineId: lineId, lang: _langNow, map: map };
+    return map;
+  }
+
+  // Industry-standard through-service affordance (mirrors JR/Tokyo Metro
+  // "相互直通運転" station signage):
+  //   - icon: green rounded ⇄ badge on the top-right corner
+  //   - title: "Operator Line（相互直通運転）" with i18n operator + through label
+  function _throughBadgeText(lineObj) {
+    var opName = (lineObj.operator && window.tOp) ? window.tOp(lineObj.operator) : "";
+    var base = (opName ? opName + " " : "") + lineObj.name;
+    if (!lineObj.through) return base;
+    var thru = (window.t ? window.t("train.throughService", "相互直通運転") : "相互直通運転");
+    return base + "（" + thru + "）";
+  }
+  function _addThroughBadge(layer, ns, x, y, iconSize) {
+    var bW = 11, bH = 8;
+    var bg = document.createElementNS(ns, "rect");
+    bg.setAttribute("x", x + iconSize - bW + 1);
+    bg.setAttribute("y", y - 4);
+    bg.setAttribute("width", bW);
+    bg.setAttribute("height", bH);
+    bg.setAttribute("rx", "2");
+    bg.setAttribute("fill", "#2e7d32");
+    layer.appendChild(bg);
+    var txt = document.createElementNS(ns, "text");
+    txt.setAttribute("x", x + iconSize - bW / 2 + 1);
+    txt.setAttribute("y", y + 2);
+    txt.setAttribute("font-size", "8");
+    txt.setAttribute("font-weight", "700");
+    txt.setAttribute("fill", "#fff");
+    txt.setAttribute("text-anchor", "middle");
+    txt.textContent = "⇄";
+    layer.appendChild(txt);
+  }
   
   /**
    * Compute route geometry for a line - single source of truth for all station coordinates.
@@ -129,17 +200,50 @@
    * @param {string} lineId - Line ID
    * @returns {Object} Geometry object with stations, svgW, svgH, isLoop, isSixShapedLoop, etc.
    */
+  /**
+   * Find shared (parallel track) sections with other lines.
+   * Industry standard (Tokyo Metro official map): shared sections are drawn as
+   * twin parallel lines in each line's own colour.
+   */
+  function _findSharedSegments(line, allLines) {
+    var lineId = line.id || line.lineId || line.name;
+    var stLines = {};
+    var lids = Object.keys(allLines);
+    for (var li = 0; li < lids.length; li++) {
+      var ll = allLines[lids[li]];
+      if (!ll || !ll.stations) continue;
+      for (var si = 0; si < ll.stations.length; si++) {
+        (stLines[ll.stations[si]] = stLines[ll.stations[si]] || []).push(lids[li]);
+      }
+    }
+    var stations = line.stations || [];
+    var segs = [], cur = null;
+    for (var i = 0; i < stations.length - 1; i++) {
+      var la = stLines[stations[i]] || [], lb = stLines[stations[i + 1]] || [];
+      var shared = null;
+      for (var k = 0; k < la.length; k++) {
+        if (la[k] !== lineId && lb.indexOf(la[k]) >= 0) { shared = la[k]; break; }
+      }
+      if (shared) {
+        if (cur && cur.partner === shared && cur.end === i) { cur.end = i + 1; }
+        else { if (cur) segs.push(cur); cur = { partner: shared, start: i, end: i + 1 }; }
+      } else { if (cur) { segs.push(cur); cur = null; } }
+    }
+    if (cur) segs.push(cur);
+    return segs;
+  }
+
   function computeRouteGeometry(line, lineId) {
     // Check cache first
-    if (_routeGeometryCache[lineId] && _routeGeometryCache[lineId].lineHash === _computeLineHash(line)) {
-      return _routeGeometryCache[lineId];
+    if (_routeGeometryCache[_geomKey(lineId)] && _routeGeometryCache[_geomKey(lineId)].lineHash === _computeLineHash(line)) {
+      return _routeGeometryCache[_geomKey(lineId)];
     }
     
     var stations = line.stations || [];
     var color = line.color || "#008803";
     var isLoop = line.type === "loop";
     var isSixShapedLoop = line.isSixShapedLoop === true;
-    var sp = 30, topP = 16, botP = 14;
+    var sp = 44, topP = 18, botP = 16;
     
     // Get branch lines
     var allLines = getLinesData();
@@ -166,14 +270,15 @@
       var loopStations = [stations[0]].concat(stations.slice(hikarigaokaIdx + 1));
       
       // ============ Size calculation ============
-      var spLoop6 = 26;
-      var loopRectW = 150;
-      var loopRectH = Math.max(loopStations.length * spLoop6 - 40, 200);
+      var scale6 = _isMobileView() ? 1.5 : 1;
+      var spLoop6 = 26 * scale6;
+      var loopRectW = 150 * scale6;
+      var loopRectH = Math.max(loopStations.length * spLoop6 - 40 * scale6, 200 * scale6);
       
-      var marginRight = 30;
-      var marginTopBot = 40;
-      var tailAreaWidth = 140;
-      var leftMargin = 10;
+      var marginRight = 30 * scale6 + (_isMobileView() ? 36 : 12);
+      var marginTopBot = 40 * scale6;
+      var tailAreaWidth = 140 * scale6;
+      var leftMargin = 10 * scale6;
       
       svgW = leftMargin + tailAreaWidth + loopRectW + marginRight;
       svgH = loopRectH + marginTopBot * 2;
@@ -191,7 +296,7 @@
       var junctionY = loopCy;
       
       // Stub: short horizontal segment from loop side (creates "branching from loop side" realism)
-      var stubLen = 35;
+      var stubLen = 35 * scale6;
       var stubX = junctionX - stubLen;
       var stubY = junctionY;
       
@@ -297,11 +402,12 @@
       
     } else if (isLoop && stations.length > 2) {
       // Standard loop
-      var loopRectH = Math.max(stations.length * 36 / 2 - 80, 140);
-      svgW = 260;
-      svgH = loopRectH + 80;
+      var loopScale = _isMobileView() ? 1.5 : 1;
+      var loopRectH = Math.max(stations.length * 36 / 2 - 80, 140) * loopScale;
+      svgW = 260 * loopScale;
+      svgH = loopRectH + 80 * loopScale;
       var cx = svgW / 2, cy = svgH / 2;
-      var rectW = 80, rectH = loopRectH;
+      var rectW = 80 * loopScale, rectH = loopRectH;
       var halfW = rectW / 2, halfH = rectH / 2;
       var perimeter = 2 * (rectW + rectH);
       var startOffset = rectW / 2;
@@ -324,13 +430,13 @@
       });
       
     } else {
-      // Standard linear line
-      svgW = 190 + branchOffset;
+      // Standard linear line: widen the canvas so left (names) and right (icons) both get used
+      svgW = 440 + branchOffset;
       svgH = topP + stations.length * sp + botP;
       var mainCx = svgW / 2 - branchOffset / 2;
       
       for (var i = 0; i < stations.length; i++) {
-        stationCoords.push({ x: mainCx, y: topP + i * sp, side: 'right', stationId: stations[i] });
+        stationCoords.push({ x: mainCx, y: topP + i * sp, side: 'dual', stationId: stations[i] });
       }
       
       var y1 = topP, y2 = topP + (stations.length - 1) * sp;
@@ -338,6 +444,16 @@
         type: 'line',
         attrs: { x1: mainCx, y1: y1, x2: mainCx, y2: y2, stroke: color, 'stroke-width': 5, 'stroke-linecap': 'round', opacity: 0.35 }
       });
+      // Twin parallel line for shared sections (industry standard)
+      var sharedSegs = _findSharedSegments(line, allLines);
+      for (var si = 0; si < sharedSegs.length; si++) {
+        var sseg = sharedSegs[si];
+        var pColor = (allLines[sseg.partner] && allLines[sseg.partner].color) || "#888";
+        routeElements.push({
+          type: 'line',
+          attrs: { x1: mainCx - 7, y1: topP + sseg.start * sp, x2: mainCx - 7, y2: topP + sseg.end * sp, stroke: pColor, 'stroke-width': 3, 'stroke-linecap': 'round', opacity: 0.55 }
+        });
+      }
     }
     
     // Build geometry object
@@ -358,7 +474,7 @@
     };
     
     // Cache it
-    _routeGeometryCache[lineId] = geometry;
+    _routeGeometryCache[_geomKey(lineId)] = geometry;
     
     return geometry;
   }
@@ -370,7 +486,7 @@
   
   function invalidateRouteGeometryCache(lineId) {
     if (lineId) {
-      delete _routeGeometryCache[lineId];
+      delete _routeGeometryCache[_geomKey(lineId)];
     } else {
       _routeGeometryCache = {};
     }
@@ -387,6 +503,7 @@
       var stationCoords = geometry.stationCoords;
       var svgW = geometry.svgW;
       var svgH = geometry.svgH;
+      var isMobileView = _isMobileView();
       var color = geometry.color;
       
       // Check if we need full rebuild (line changed) or just train layer update
@@ -406,6 +523,7 @@
       svg.setAttribute("xmlns", svgNS);
       svg.setAttribute("viewBox", "0 0 " + svgW + " " + svgH);
       svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
+      svg.style.width = isMobileView ? (svgW + "px") : "100%";
       svg.setAttribute("data-line-id", lineId);
       
       // Background
@@ -419,6 +537,9 @@
       // === Static layer: route lines, stations, labels (only built once per line) ===
       var staticLayer = document.createElementNS(svgNS, "g");
       staticLayer.setAttribute("class", "static-layer");
+      
+      // Transfer map for interchange station icons (interchange lines on this line)
+      var transferMap = _getTransferMap(lineId);
       
       // Add route elements (lines/rects/polylines)
       for (var re = 0; re < geometry.routeElements.length; re++) {
@@ -456,10 +577,11 @@
         if (side === "top") { tx = sc.x; ty = sc.y - (isJunction ? 12 : 8); anchor = "middle"; }
         else if (side === "bottom") { tx = sc.x; ty = sc.y + (isJunction ? 16 : 13); anchor = "middle"; }
         else if (side === "left") { tx = sc.x - (isJunction ? 12 : 8); ty = sc.y + (isJunction ? 4 : 3); anchor = "end"; }
+        else if (side === "dual") { tx = sc.x - (isJunction ? 14 : 10); ty = sc.y + 3; anchor = "end"; }
         else { tx = sc.x + (isJunction ? 10 : 8); ty = sc.y + 3; anchor = "start"; }
         label.setAttribute("x", tx);
         label.setAttribute("y", ty);
-        label.setAttribute("font-size", isJunction ? "9" : "7.5");
+        label.setAttribute("font-size", isCompact ? (isMobileView ? "9" : "7.5") : (isJunction ? (isMobileView ? "13" : "9") : (isMobileView ? "12" : "7.5")));
         label.setAttribute("fill", isJunction ? color : "#555");
         label.setAttribute("font-family", "sans-serif");
         label.setAttribute("font-weight", isJunction ? "700" : "500");
@@ -471,18 +593,208 @@
         nameTspan.textContent = stationName;
         label.appendChild(nameTspan);
         
-        // Transfer hint (if exists)
-        var transferHint = (typeof window.getTransferHint === "function") ? window.getTransferHint(stationId, window.currentLang) : null;
-        if (transferHint) {
-          var hintTspan = document.createElementNS(svgNS, "tspan");
-          hintTspan.textContent = transferHint;
-          hintTspan.setAttribute("font-size", isJunction ? "7" : "6");
-          hintTspan.setAttribute("fill", "#888");
-          hintTspan.setAttribute("font-weight", "400");
-          label.appendChild(hintTspan);
-        }
-        
         staticLayer.appendChild(label);
+        
+        // Interchange line icons (grouped in a rounded background chip below the label)
+        var txLines = transferMap[stationId] || [];
+        if (txLines.length > 0) {
+          var isCompact = (side === "top" || side === "bottom");
+          var isDual = (side === "dual");
+          var ICON = isCompact ? (isMobileView ? 12 : 10) : (isMobileView ? 19 : 12);
+          var GAP = isCompact ? 1 : 2;
+          // Compact rows hold 2 icons so that icons + "+N" (34px) fit the 36px loop spacing
+          var PER_ROW = isCompact ? 2 : (isDual ? 10 : 6);
+          var MAX_ROWS = isCompact ? 2 : (isDual ? 2 : 1);
+          var maxShow = PER_ROW * MAX_ROWS;
+          var shown = txLines.slice(0, maxShow);
+          var rows = Math.ceil(shown.length / PER_ROW);
+          var rowW = Math.min(shown.length, PER_ROW) * (ICON + GAP) - GAP;
+          var moreText = txLines.length > maxShow ? "+" + (txLines.length - maxShow) : "";
+          var totalW = rowW + (moreText ? 12 : 0);
+          var ix0, iy0;
+          // Chip anchored to its station: 3px below the name (left/right/bottom).
+          // On the top side the name sits ABOVE the dot, so the chip goes below the dot
+          // (y+6) instead — keeping name and chip on opposite sides of the dot avoids overlap.
+          if (side === "top") { iy0 = ty + 14; }
+          else { iy0 = ty + 3; }
+          if (iy0 < 2) iy0 = 2;
+          if (side === "left") { ix0 = tx - totalW; }
+          else if (side === "dual") { ix0 = sc.x + 12; }
+          else if (side === "top" || side === "bottom") { ix0 = tx - totalW / 2; }
+          else { ix0 = tx; }
+          // Left-side overflow: if the chip would cross the SVG left edge, degrade to a
+          // compact 2-row layout (3 per row, then 2 per row) so it stays on-canvas.
+          if (side === "left" && ix0 < 2 && !isCompact) {
+            isCompact = true; ICON = 10; GAP = 1; PER_ROW = 3; MAX_ROWS = 2;
+            shown = txLines.slice(0, PER_ROW * MAX_ROWS);
+            rows = Math.ceil(shown.length / PER_ROW);
+            rowW = Math.min(shown.length, PER_ROW) * (ICON + GAP) - GAP;
+            moreText = txLines.length > PER_ROW * MAX_ROWS ? "+" + (txLines.length - PER_ROW * MAX_ROWS) : "";
+            totalW = rowW + (moreText ? 12 : 0);
+            ix0 = tx - totalW;
+            if (ix0 < 2) {
+              PER_ROW = 2;
+              shown = txLines.slice(0, PER_ROW * MAX_ROWS);
+              rows = Math.ceil(shown.length / PER_ROW);
+              rowW = Math.min(shown.length, PER_ROW) * (ICON + GAP) - GAP;
+              moreText = txLines.length > PER_ROW * MAX_ROWS ? "+" + (txLines.length - PER_ROW * MAX_ROWS) : "";
+              totalW = rowW + (moreText ? 12 : 0);
+              ix0 = tx - totalW;
+            }
+            if (ix0 < 2) ix0 = 2;
+          }
+          // Right-side overflow: same compact degradation (2 rows, stays on-canvas)
+          if ((side === "right" || side === "dual") && ix0 + totalW > svgW - 2 && !isCompact) {
+            isCompact = true; ICON = 10; GAP = 1; PER_ROW = 3; MAX_ROWS = 2;
+            shown = txLines.slice(0, PER_ROW * MAX_ROWS);
+            rows = Math.ceil(shown.length / PER_ROW);
+            rowW = Math.min(shown.length, PER_ROW) * (ICON + GAP) - GAP;
+            moreText = txLines.length > PER_ROW * MAX_ROWS ? "+" + (txLines.length - PER_ROW * MAX_ROWS) : "";
+            totalW = rowW + (moreText ? 12 : 0);
+            ix0 = tx;
+            if (ix0 + totalW > svgW - 2) {
+              PER_ROW = 2;
+              shown = txLines.slice(0, PER_ROW * MAX_ROWS);
+              rows = Math.ceil(shown.length / PER_ROW);
+              rowW = Math.min(shown.length, PER_ROW) * (ICON + GAP) - GAP;
+              moreText = txLines.length > PER_ROW * MAX_ROWS ? "+" + (txLines.length - PER_ROW * MAX_ROWS) : "";
+              totalW = rowW + (moreText ? 12 : 0);
+              ix0 = tx;
+            }
+            if (ix0 + totalW > svgW - 2) ix0 = svgW - 2 - totalW;
+          }
+          // Background chip (white rounded) to visually group the icons
+          var bgH = rows * ICON + (rows - 1) * GAP + 2;
+          var bg = document.createElementNS(svgNS, "rect");
+          bg.setAttribute("x", ix0 - 1);
+          bg.setAttribute("y", iy0 - 1);
+          bg.setAttribute("width", totalW + 2);
+          bg.setAttribute("height", bgH);
+          bg.setAttribute("rx", "3");
+          bg.setAttribute("fill", "rgba(255,255,255,0.72)");
+          staticLayer.appendChild(bg);
+          if (isDual) {
+            // Flow layout for the wide right lane: icons are fixed width, text items advance by their own width
+            var lineY = iy0;
+            var curX = ix0;
+            var maxLineW = svgW - 2;
+            var flowEndX = ix0, flowEndY = iy0;
+            for (var fi = 0; fi < shown.length; fi++) {
+              var fxl = shown[fi];
+              var fName = fxl.name.length > 4 ? fxl.name.slice(0, 4) + "…" : fxl.name;
+              var fw = fxl.image ? ICON : ((fName.length + (fxl.through ? 1 : 0)) * (isMobileView ? 9 : 6) + 4);
+              if (curX + fw > maxLineW && curX > ix0) { curX = ix0; lineY += ICON + GAP; }
+              if (fxl.through && fxl.image) {
+                var ring2 = document.createElementNS(svgNS, "rect");
+                ring2.setAttribute("x", curX - 1);
+                ring2.setAttribute("y", lineY - 1);
+                ring2.setAttribute("width", ICON + 2);
+                ring2.setAttribute("height", ICON + 2);
+                ring2.setAttribute("rx", "2");
+                ring2.setAttribute("fill", "none");
+                ring2.setAttribute("stroke", "#2e7d32");
+                ring2.setAttribute("stroke-width", "1.2");
+                staticLayer.appendChild(ring2);
+                _addThroughBadge(staticLayer, svgNS, curX, lineY, ICON);
+              }
+              if (fxl.image) {
+                var fImg = document.createElementNS(svgNS, "image");
+                fImg.setAttribute("href", fxl.image);
+                fImg.setAttribute("xlink:href", fxl.image);
+                fImg.setAttribute("x", curX);
+                fImg.setAttribute("y", lineY);
+                fImg.setAttribute("width", ICON);
+                fImg.setAttribute("height", ICON);
+                fImg.setAttribute("opacity", "0.95");
+                var fTitle = document.createElementNS(svgNS, "title");
+                fTitle.textContent = _throughBadgeText(fxl);
+                fImg.appendChild(fTitle);
+                staticLayer.appendChild(fImg);
+              } else {
+                var fTxt = document.createElementNS(svgNS, "text");
+                fTxt.setAttribute("x", curX);
+                fTxt.setAttribute("y", lineY + 8);
+                fTxt.setAttribute("font-size", isMobileView ? "9" : "6");
+                if (fxl.through) {
+                  fTxt.setAttribute("fill", "#2e7d32");
+                  fTxt.setAttribute("font-weight", "700");
+                  fTxt.textContent = "⇄" + (fxl.name.length > 4 ? fxl.name.slice(0, 4) + "…" : fxl.name);
+                } else {
+                  fTxt.setAttribute("fill", "#999");
+                  fTxt.textContent = fxl.name.length > 4 ? fxl.name.slice(0, 4) + "…" : fxl.name;
+                }
+                staticLayer.appendChild(fTxt);
+              }
+              curX += fw + GAP;
+            }
+            flowEndX = curX; flowEndY = lineY;
+            // Background chip width follows actual flow extent (grid estimate was too narrow)
+            bg.setAttribute("width", (flowEndX - ix0) + (moreText ? 16 : 0) + 2);
+          } else {
+            // Original grid loop for loop/compact sides
+          for (var ti = 0; ti < shown.length; ti++) {
+            var txl = shown[ti];
+            var row = Math.floor(ti / PER_ROW);
+            var col = ti % PER_ROW;
+            var tix = ix0 + col * (ICON + GAP);
+            var tiy = iy0 + row * (ICON + GAP);
+            if (txl.through && txl.image) {
+              // Through-service partner: green ring + ⇄ badge distinguishes it from a plain interchange
+              var ring = document.createElementNS(svgNS, "rect");
+              ring.setAttribute("x", tix - 1);
+              ring.setAttribute("y", tiy - 1);
+              ring.setAttribute("width", ICON + 2);
+              ring.setAttribute("height", ICON + 2);
+              ring.setAttribute("rx", "2");
+              ring.setAttribute("fill", "none");
+              ring.setAttribute("stroke", "#2e7d32");
+              ring.setAttribute("stroke-width", "1.2");
+              staticLayer.appendChild(ring);
+              _addThroughBadge(staticLayer, svgNS, tix, tiy, ICON);
+            }
+            if (txl.image) {
+              var tImg = document.createElementNS(svgNS, "image");
+              tImg.setAttribute("href", txl.image);
+              tImg.setAttribute("xlink:href", txl.image);
+              tImg.setAttribute("x", tix);
+              tImg.setAttribute("y", tiy);
+              tImg.setAttribute("width", ICON);
+              tImg.setAttribute("height", ICON);
+              tImg.setAttribute("opacity", "0.95");
+              var tTitle = document.createElementNS(svgNS, "title");
+              tTitle.textContent = _throughBadgeText(txl);
+              tImg.appendChild(tTitle);
+              staticLayer.appendChild(tImg);
+            } else {
+              var tTxt = document.createElementNS(svgNS, "text");
+              tTxt.setAttribute("x", tix);
+              tTxt.setAttribute("y", tiy + 8);
+              tTxt.setAttribute("font-size", isCompact ? (isMobileView ? "7" : "6") : (isMobileView ? "9" : "6"));
+              if (txl.through) {
+                tTxt.setAttribute("fill", "#2e7d32");
+                tTxt.setAttribute("font-weight", "700");
+                tTxt.textContent = "⇄" + (txl.name.length > 4 ? txl.name.slice(0, 4) + "…" : txl.name);
+              } else {
+                tTxt.setAttribute("fill", "#999");
+                tTxt.textContent = txl.name.length > 4 ? txl.name.slice(0, 4) + "…" : txl.name;
+              }
+              staticLayer.appendChild(tTxt);
+            }
+          }
+          }
+          if (moreText) {
+            var more = document.createElementNS(svgNS, "text");
+            var moreX = isDual ? flowEndX + 4 : ix0 + rowW + GAP;
+            var moreY = isDual ? flowEndY + 8 : iy0 + 8;
+            if (isDual && moreX + 12 > svgW - 2) { moreX = ix0; moreY = flowEndY + ICON + GAP + 8; }
+            more.setAttribute("x", moreX);
+            more.setAttribute("y", moreY);
+            more.setAttribute("font-size", "7");
+            more.setAttribute("fill", "#777");
+            more.textContent = moreText;
+            staticLayer.appendChild(more);
+          }
+        }
       }
       
       // Add branch lines (if any) - supports both loop and linear lines
@@ -828,19 +1140,32 @@
       loadCachedPositions(function() {
         renderList(listEl);
         renderFilterBar(document.getElementById("trainsFilterBar"));
-        // Restore hash-based navigation
-        var hash = window.location.hash;
-        if (hash && hash.length > 1) {
+        // Restore hash-based navigation (poll until line data is ready; async load timing)
+        (function tryHash() {
+          var hash = window.location.hash;
+          if (!hash || hash.length <= 1) return;
           var lid = hash.substring(1);
           var lines = getLinesData();
-          if (lines[lid]) showLineView(lid);
-        }
+          if (lines[lid]) {
+            showLineView(lid);
+            return;
+          }
+          setTimeout(tryHash, 400);
+        })();
         if (backBtn) backBtn.textContent = "\u2190 " + t("line_map.back");
       });
       // Subscribe to DataState changes to handle late data loading
       if (window.DataState) {
         window.DataState.subscribe(function(lines, delayData, positions) {
           if (!lines || Object.keys(lines).length === 0 || !listEl) return;
+          // Unified hash-restore: whenever line data is present, honor a #lineId deep link
+          var _h3 = window.location.hash;
+          if (_h3 && _h3.length > 1) {
+            var _lid3 = _h3.substring(1);
+            if (lines[_lid3] && (!currentLine || detailEl.classList.contains("hidden"))) {
+              try { showLineView(_lid3); } catch(e) {}
+            }
+          }
           // Build hash of positions to detect changes (check both realtimePositions and cachedPositions)
           var posHash = '';
           try {
@@ -869,9 +1194,29 @@
             renderList(listEl);
             renderFilterBar(document.getElementById("trainsFilterBar"));
             _lastPositionsHash = posHash;
+            // (through-service info now lives inside the train map interchange icons)
+            // Restore hash-based navigation once data is ready (async load timing)
+            var _h = window.location.hash;
+            if (_h && _h.length > 1) {
+              var _lid = _h.substring(1);
+              var _lns = getLinesData();
+              if (_lns[_lid] && (!currentLine || detailEl.classList.contains("hidden"))) {
+                try { showLineView(_lid); } catch(e) {}
+              }
+            }
           } else if (posHash !== _lastPositionsHash) {
             _lastPositionsHash = posHash;
             renderList(listEl);
+            // Restore hash-based navigation once data is ready (posHash changed = data arrived)
+            var _h2 = window.location.hash;
+            if (_h2 && _h2.length > 1) {
+              var _lid2 = _h2.substring(1);
+              var _lns2 = getLinesData();
+              if (_lns2[_lid2] && (!currentLine || detailEl.classList.contains("hidden"))) {
+                try { showLineView(_lid2); } catch(e) {}
+              }
+            }
+            // (through-service info now lives inside the train map interchange icons)
             // Update train positions on map if detail view is open (incremental update for smooth animation)
             if (currentLine && detailEl && !detailEl.classList.contains("hidden")) {
               var _lines = getLinesData();
