@@ -1085,13 +1085,13 @@
           
           // Branch name
           var branchName = document.createElementNS(svgNS, "text");
-          branchName.setAttribute("x", bx);
+          branchName.setAttribute("x", bx + 6);
           branchName.setAttribute("y", branchTop - 6);
           branchName.setAttribute("font-size", "8");
           branchName.setAttribute("fill", bColor);
           branchName.setAttribute("font-family", "sans-serif");
           branchName.setAttribute("font-weight", "600");
-          branchName.setAttribute("text-anchor", "middle");
+          branchName.setAttribute("text-anchor", "start");
           var branchDisplayName = (window.RailwayDB && typeof window.RailwayDB.resolveLineName === "function") ? window.RailwayDB.resolveLineName(branch.id, window.currentLang) : (branch.nameJa || branch.name);
           branchName.textContent = branchDisplayName;
           staticLayer.appendChild(branchName);
@@ -1358,7 +1358,7 @@
     var lines = window.DataLayer ? window.DataLayer.getAllLines() : (window.UNIFIED_LINES || {});
     var ul = Array.isArray(lines) ? (function(){ var d={}; lines.forEach(function(l){ d[l.id||l.line_id]=l; }); return d; })() : lines;
     if (!ul || Object.keys(ul).length === 0) { el.innerHTML = ''; return; }
-    var lineOrder = (window.LinePresentationService && window.UNIFIED_LINES) ? window.LinePresentationService.getDisplayOrder(window.UNIFIED_LINES) : []; try { window.DataState.renderList(el, ul, { mode: "trains", lineOrder: lineOrder }); } catch(e) { el.innerHTML = "<div class=\"rs-error\">Render failed</div>"; }
+    var lineOrder = (window.LinePresentationService && window.UNIFIED_LINES) ? window.LinePresentationService.getDisplayOrder(window.UNIFIED_LINES) : []; try { window.DataState.renderList(el, ul, { mode: "trains", lineOrder: lineOrder }); } catch(e) { console.error("RENDER_FAIL_STACK:", e && e.stack); el.innerHTML = "<div class=\"rs-error\">Render failed</div>"; }
   }
 
   function init() {
@@ -1567,7 +1567,7 @@
       });
     }
     if (!filtered || Object.keys(filtered).length === 0) { el.innerHTML = ''; return; }
-    var lineOrder = (window.LinePresentationService && window.UNIFIED_LINES) ? window.LinePresentationService.getDisplayOrder(window.UNIFIED_LINES) : []; try { window.DataState.renderList(el, filtered, { mode: "trains", lineOrder: lineOrder }); } catch(e) { el.innerHTML = "<div class=\"rs-error\">Render failed</div>"; }
+    var lineOrder = (window.LinePresentationService && window.UNIFIED_LINES) ? window.LinePresentationService.getDisplayOrder(window.UNIFIED_LINES) : []; try { window.DataState.renderList(el, filtered, { mode: "trains", lineOrder: lineOrder }); } catch(e) { console.error("RENDER_FAIL_STACK:", e && e.stack); el.innerHTML = "<div class=\"rs-error\">Render failed</div>"; }
   }
   window.TrainsPage = {
     init: init,
