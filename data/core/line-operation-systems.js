@@ -204,7 +204,7 @@ window.LineOperationSystems = {
       nameEn: "Utsunomiya Line",
       nameKo: "",
       color: "#00732f",
-      lineIds: ["Oyama"],
+      lineIds: ["UtsunomiyaJR"],
       icon: "../images/鉄道/JR東日本/宇都宮線.png",
       order: 18
     },

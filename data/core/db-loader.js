@@ -664,7 +664,7 @@ function applyData(data, i18n) {
         "SobuMain": "../images/鉄道/JR東日本/総武線快速横須賀線.png",
         "ChuoMain": "../images/鉄道/JR東日本/中央快速線.png",
         "TokaidoMain": "../images/鉄道/JR東日本/東海道線.png",
-        "Oyama": "../images/鉄道/JR東日本/宇都宮線.png",
+        "UtsunomiyaJR": "../images/鉄道/JR東日本/宇都宮線.png",
         "SotetsuShin-Yokohama": "../images/鉄道/相鉄/相鉄新横浜線.png",
         "ChiyodaBranch": "../images/列车/東京メトロ/北綾瀬支線.png",
       };
@@ -993,15 +993,15 @@ function load() {
 
     // HTTP/HTTPS: try fetch first
     return Promise.all([
-      fetch(DATA_FILE).then(function(res) {
+      fetch(DATA_FILE, { cache: "no-store" }).then(function(res) {
         if (!res.ok) throw new Error("HTTP " + res.status);
         return res.json();
       }),
-      fetch(STATION_I18N_FILE).then(function(res) {
+      fetch(STATION_I18N_FILE, { cache: "no-store" }).then(function(res) {
         if (!res.ok) return {};
         return res.json();
       }),
-      fetch(TOURISM_DATA_FILE).then(function(res) {
+      fetch(TOURISM_DATA_FILE, { cache: "no-store" }).then(function(res) {
         if (!res.ok) return {};
         return res.json();
       }).catch(function() { return {}; })
