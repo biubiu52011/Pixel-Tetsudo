@@ -68,83 +68,252 @@
    * @param {string} toStation - Destination station name
    * @returns {Object|null} { path: string[], durationMin: number, lineInfo: Array[] } or null if no route
    */
+  // Transfer penalty (minutes): models walking + waiting at a transfer.
+  // Keeps the search from favoring hop-heavy routes that save nothing real.
+  const TRANSFER_PENALTY = 6;
+  // Through-service (直通運転): changing lines that run through costs no transfer penalty
+  const THROUGH_PENALTY = 0;
+
+  // Minimal binary min-heap for Dijkstra priority queue.
+  function _MinHeap() {
+    this.a = [];
+  }
+  _MinHeap.prototype.push = function(item) {
+    const a = this.a;
+    a.push(item);
+    let i = a.length - 1;
+    while (i > 0) {
+      const p = (i - 1) >> 1;
+      if (a[p][0] <= a[i][0]) break;
+      const t = a[p]; a[p] = a[i]; a[i] = t;
+      i = p;
+    }
+  };
+  _MinHeap.prototype.pop = function() {
+    const a = this.a;
+    if (a.length === 0) return undefined;
+    const top = a[0];
+    const last = a.pop();
+    if (a.length > 0) {
+      a[0] = last;
+      let i = 0;
+      for (;;) {
+        const l = i * 2 + 1, r = l + 1;
+        let m = i;
+        if (l < a.length && a[l][0] < a[m][0]) m = l;
+        if (r < a.length && a[r][0] < a[m][0]) m = r;
+        if (m === i) break;
+        const t = a[m]; a[m] = a[i]; a[i] = t;
+        i = m;
+      }
+    }
+    return top;
+  };
+  _MinHeap.prototype.size = function() { return this.a.length; };
+
+  // Layered graph cache: (station, line) states.
+  // stationLines: Map<station, Set<lineId>>; lineMeta: lineId -> {stations, positions, durations}
+  let _layerCache = null;
+  function buildLayerGraph() {
+    if (_layerCache) return _layerCache;
+    const lines = window.RailwayDB ? window.RailwayDB.getAllLines() :
+                  (window.DataLayer ? window.DataLayer.getAllLines() : window.UNIFIED_LINES || {});
+    const lineIds = Object.keys(lines);
+    const stationLines = new Map();
+    const lineMeta = {};
+    for (const lid of lineIds) {
+      const l = lines[lid];
+      if (!l || !l.stations || !l.stations.length) continue;
+      const positions = new Map();
+      l.stations.forEach(function(st, i) {
+        positions.set(st, i);
+        if (!stationLines.has(st)) stationLines.set(st, new Set());
+        stationLines.get(st).add(lid);
+      });
+      lineMeta[lid] = { stations: l.stations, positions: positions, durations: l.durations || [] };
+    }
+    _layerCache = { stationLines: stationLines, lineMeta: lineMeta, transferPenalty: buildTransferPenalty(lines) };
+    return _layerCache;
+  }
+
+  // Transfer penalty lookup from the explicit transferStations declaration.
+  // The user rule is: "不是线路经过就可以换乘" — a shared station ID alone does
+  // NOT make an interchange. Out-of-station (type: "out") transfers cost extra
+  // walk minutes; unlisted shared stations keep the default penalty.
+  function buildTransferPenalty(lines) {
+    const m = new Map(); // "station\u0001lineA\u0001lineB" -> { out: bool, walk: int }
+    for (const lid of Object.keys(lines)) {
+      const l = lines[lid];
+      if (!l || !Array.isArray(l.transferStations)) continue;
+      for (const t of l.transferStations) {
+        if (!t || !t.station || !t.lineId || !lines[t.lineId]) continue;
+        const a = lid, b = t.lineId;
+        const key = t.station + '\u0001' + (a < b ? a : b) + '\u0001' + (a < b ? b : a);
+        if (!m.has(key)) m.set(key, { out: t.type === 'out', walk: walkMin(t.note) });
+      }
+    }
+    return m;
+  }
+
+  // Extract walk minutes from the canonical note text ("徒歩約5分" etc).
+  function walkMin(note) {
+    if (!note) return 0;
+    const mt = String(note).match(/徒歩約(\d+)分/);
+    return mt ? parseInt(mt[1], 10) : 0;
+  }
+
+  function isThroughConnected(a, b) {
+    try {
+      // Single Provider first: data/core/through-service.js
+      if (window.ThroughService && window.ThroughService.getDirectThroughLines) {
+        return window.ThroughService.getDirectThroughLines(a).indexOf(b) >= 0;
+      }
+      if (window.DataFusion && window.DataFusion.getDirectThroughLines) {
+        return window.DataFusion.getDirectThroughLines(a).indexOf(b) >= 0;
+      }
+      return false;
+    } catch(e) { return false; }
+  }
+
+  /**
+   * Find a route minimizing (ride time + transfer penalty) via Dijkstra
+   * over (station, line) states. Returns the same shape as before:
+   * { path, durationMin, segments, lineInfo, routeSegments }
+   */
   function findRoute(fromStation, toStation) {
     if (!fromStation || !toStation) return null;
     if (fromStation.toLowerCase() === toStation.toLowerCase()) {
       return { path: [fromStation], durationMin: 0, segments: 0, lineInfo: [] };
     }
 
-    const graph = buildStationGraph();
-    
-    // Check if both stations exist in the graph
-    const fromLower = fromStation.toLowerCase();
-    const toLower = toStation.toLowerCase();
-    const fromMatch = Array.from(graph.keys()).find(s => s.toLowerCase() === fromLower);
-    const toMatch = Array.from(graph.keys()).find(s => s.toLowerCase() === toLower);
-    if (!fromMatch || !toMatch) return null;
-    const queue = [[fromMatch]];
-    const visited = new Set([fromMatch]);
-    
-    while (queue.length > 0) {
-      const currentPath = queue.shift();
-      const currentStation = currentPath[currentPath.length - 1];
-      
-      // Check if destination reached
-      if (currentStation === toMatch) {
-        // Calculate actual duration using line duration data
-        let durationMin = 0;
-        for (let i = 0; i < currentPath.length - 1; i++) {
-          const segLines = getLinesForSegment(currentPath[i], currentPath[i+1]);
-          if (segLines.length > 0) {
-            const line = window.DataLayer ? window.DataLayer.getLine(segLines[0]) : (window.UNIFIED_LINES ? window.UNIFIED_LINES[segLines[0]] : null);
-            if (line && line.durations) {
-              const segIdx = line.stations.indexOf(currentPath[i]);
-              if (segIdx >= 0 && segIdx < line.durations.length) {
-                durationMin += line.durations[segIdx];
-              } else {
-                durationMin += 2;
-              }
-            } else {
-              durationMin += 2;
-            }
-          } else {
-            durationMin += 2;
-          }
+    const layer = buildLayerGraph();
+    const stationLines = layer.stationLines;
+    let fromKey = null, toKey = null;
+    for (const st of stationLines.keys()) {
+      if (st.toLowerCase() === fromStation.toLowerCase()) fromKey = st;
+      if (st.toLowerCase() === toStation.toLowerCase()) toKey = st;
+      if (fromKey && toKey) break;
+    }
+    if (!fromKey || !toKey) return null;
+
+    const startLines = Array.from(stationLines.get(fromKey) || []);
+    if (startLines.length === 0) return null;
+
+    const heap = new _MinHeap();
+    const dist = new Map();
+    const prev = new Map(); // key -> { key, station, line }
+    const rideDur = new Map(); // accumulated ride-only minutes (excludes penalty)
+    for (const lid of startLines) {
+      const k = fromKey + '\u0001' + lid;
+      dist.set(k, 0);
+      rideDur.set(k, 0);
+      heap.push([0, k]);
+    }
+
+    let endKey = null;
+    while (heap.size() > 0) {
+      const top = heap.pop();
+      const cost = top[0], key = top[1];
+      if (dist.get(key) < cost) continue;
+      const sep = key.indexOf('\u0001');
+      const st = key.slice(0, sep), lid = key.slice(sep + 1);
+      if (st === toKey) { endKey = key; break; }
+
+      const meta = layer.lineMeta[lid];
+      if (!meta) continue;
+      const pos = meta.positions.get(st);
+
+      // Ride to adjacent stations on the same line
+      const adj = [];
+      if (pos > 0) adj.push(pos - 1);
+      if (pos < meta.stations.length - 1) adj.push(pos + 1);
+      for (const ai of adj) {
+        const nst = meta.stations[ai];
+        const nk = nst + '\u0001' + lid;
+        const d = (meta.durations && meta.durations[pos] != null) ? meta.durations[pos] : 2;
+        const nc = cost + d;
+        if (!dist.has(nk) || nc < dist.get(nk)) {
+          dist.set(nk, nc);
+          rideDur.set(nk, (rideDur.get(key) || 0) + d);
+          prev.set(nk, { key: key, station: st, line: lid });
+          heap.push([nc, nk]);
         }
-        
-        // Determine which lines are involved in each segment
-        const lineInfo = [];
-        for (let i = 0; i < currentPath.length - 1; i++) {
-          const segmentLines = getLinesForSegment(currentPath[i], currentPath[i+1]);
-          lineInfo.push({
-            from: currentPath[i],
-            to: currentPath[i+1],
-            lines: segmentLines
-          });
-        }
-        
-        return {
-          path: currentPath,
-          durationMin: durationMin,
-          segments: currentPath.length - 1,
-          lineInfo: lineInfo,
-          routeSegments: buildRouteSegments({ lineInfo: lineInfo })
-        };
       }
-      
-      // Explore neighbors
-      const neighbors = graph.get(currentStation) || [];
-      for (const neighbor of neighbors) {
-        if (!visited.has(neighbor)) {
-          visited.add(neighbor);
-          const newPath = [...currentPath, neighbor];
-          queue.push(newPath);
+
+      // Transfer to other lines at the same station
+      const otherLines = stationLines.get(st) || new Set();
+      for (const ol of otherLines) {
+        if (ol === lid) continue;
+        const nk = st + '\u0001' + ol;
+        const through = isThroughConnected(lid, ol);
+        let txCost = through ? THROUGH_PENALTY : TRANSFER_PENALTY;
+        // Out-of-station interchange: add the real walk minutes declared in
+        // transferStations (user rule: "不是线路经过就可以换乘").
+        if (!through && layer.transferPenalty) {
+          const pk = st + '\u0001' + (lid < ol ? lid : ol) + '\u0001' + (lid < ol ? ol : lid);
+          const p = layer.transferPenalty.get(pk);
+          if (p && p.out) txCost += (p.walk || 0);
+        }
+        const nc = cost + txCost;
+        if (!dist.has(nk) || nc < dist.get(nk)) {
+          dist.set(nk, nc);
+          rideDur.set(nk, rideDur.get(key) || 0);
+          prev.set(nk, { key: key, station: st, line: lid });
+          heap.push([nc, nk]);
         }
       }
     }
-    
-    // No route found
-    return null;
+    if (!endKey) return null;
+
+    // Reconstruct the state chain (start -> end)
+    const states = [];
+    let cur = endKey;
+    while (cur) {
+      states.push(cur);
+      cur = prev.get(cur) ? prev.get(cur).key : null;
+    }
+    states.reverse();
+
+    // Build path (unique stations) + lineInfo (per adjacent-pair with chosen line name)
+    const path = [];
+    const lineInfo = [];
+    let lastSt = null, lastLine = null, segFrom = null;
+    for (const k of states) {
+      const sep = k.indexOf('\u0001');
+      const st = k.slice(0, sep), lid = k.slice(sep + 1);
+      if (lastSt === null) {
+        lastSt = st; lastLine = lid; segFrom = st; path.push(st);
+        continue;
+      }
+      if (lid === lastLine && st !== lastSt) {
+        // ride advance on the same line
+        path.push(st);
+        lastSt = st;
+      } else if (lid !== lastLine) {
+        // transfer at this station (station unchanged) — close the previous ride segment
+        if (segFrom !== null && lastSt !== null && segFrom !== lastSt) {
+          const nm = window.RailwayDB && window.RailwayDB.getLine ? (window.RailwayDB.getLine(lastLine) || {}).name : lastLine;
+          lineInfo.push({ from: segFrom, to: lastSt, lines: [nm || lastLine] });
+        }
+        lastLine = lid;
+        segFrom = st;
+        lastSt = st;
+      } else {
+        lastSt = st;
+      }
+    }
+    if (segFrom !== null && lastSt !== null && segFrom !== lastSt) {
+      const nm = window.RailwayDB && window.RailwayDB.getLine ? (window.RailwayDB.getLine(lastLine) || {}).name : lastLine;
+      lineInfo.push({ from: segFrom, to: lastSt, lines: [nm || lastLine] });
+    }
+
+    return {
+      path: path,
+      durationMin: rideDur.get(endKey) || 0,
+      segments: path.length - 1,
+      lineInfo: lineInfo,
+      routeSegments: buildRouteSegments({ lineInfo: lineInfo })
+    };
   }
 
   /**
@@ -199,7 +368,9 @@
       if (i < route.lineInfo.length - 1) {
         const nextLineName = route.lineInfo[i+1].lines[0] || null;
         if (nextLineName && nextLineName !== lineName) {
-          segments.push({ type: 'transfer', station: seg.to, fromLine: lineName, toLines: route.lineInfo[i+1].lines, walking: null, walkingDuration: null });
+          const nextLid = nextLineName ? (nameToId[nextLineName] || null) : null;
+          const through = !!(lineId && nextLid && isThroughConnected(lineId, nextLid));
+          segments.push({ type: 'transfer', station: seg.to, fromLine: lineName, toLines: route.lineInfo[i+1].lines, walking: null, walkingDuration: null, through: through });
         }
       }
     }

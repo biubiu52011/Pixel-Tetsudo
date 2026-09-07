@@ -189,6 +189,7 @@
       "op.TokyoMonorail": "Tokyo Monorail",
       "op.SaitamaNewUrbanTransit": "Saitama New Urban Transit",
       "train.throughService": "through service",
+      "train.transferOut": "out-of-station transfer",
     },
     zh: {
       "app.footer": "\u00a9 2026 \u50cf\u7d20\u94c1\u9053",
@@ -375,6 +376,7 @@
       "op.TokyoMonorail": "东京单轨电车",
       "op.SaitamaNewUrbanTransit": "埼玉新都市交通",
       "train.throughService": "相互直通運転",
+      "train.transferOut": "站外換乘",
     },
     ja: {
       "app.footer": "\u00a9 2026 Pixel Tetsudo",
@@ -561,6 +563,7 @@
       "op.TokyoMonorail": "東京モノレール",
       "op.SaitamaNewUrbanTransit": "埼玉新都市交通",
       "train.throughService": "相互直通運転",
+      "train.transferOut": "駅外乗換",
     },
     ko: {
       "app.footer": "\u00a9 2026 Pixel Tetsudo",
@@ -748,6 +751,7 @@
       "op.TokyoMonorail": "도쿄 모노레일",
       "op.SaitamaNewUrbanTransit": "사이타마 신도시 교통",
       "train.throughService": "상호 직통 운행",
+      "train.transferOut": "역외 환승",
     },
 
   };
