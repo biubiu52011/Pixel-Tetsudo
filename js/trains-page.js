@@ -1389,6 +1389,23 @@
       loadCachedPositions(function() {
         renderList(listEl);
         renderFilterBar(document.getElementById("trainsFilterBar"));
+        // Data-ready poll: db-loader fetch is async; the first render may run before
+        // network data arrives (IndexedDB positions usually resolve first), leaving the
+        // list empty with no later re-render trigger. Same pattern as the realtime page.
+        // Respect an already-selected operator filter instead of overwriting it.
+        (function ensureDataReady() {
+          var _tries = 0;
+          (function tick() {
+            var _d = getLinesData();
+            if (_d && Object.keys(_d).length > 0) {
+              if (_selectedOperator === null) { renderList(listEl); } else { renderFiltered(listEl); }
+              renderFilterBar(document.getElementById("trainsFilterBar"));
+              return;
+            }
+            if (++_tries > 40) return; // ~12s cap
+            setTimeout(tick, 300);
+          })();
+        })();
         // Restore hash-based navigation (poll until line data is ready; async load timing)
         (function tryHash() {
           var hash = window.location.hash;
