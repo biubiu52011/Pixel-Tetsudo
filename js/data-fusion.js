@@ -234,6 +234,10 @@
     try {
       var line = (window.DataLayer && window.DataLayer.getLine ? window.DataLayer.getLine(lineId) : null) || (localData.lines && localData.lines[lineId]) || (window.UNIFIED_LINES && window.UNIFIED_LINES[lineId]) || null;
       if (!line) return null;
+      // v4.3.398: localData 兜底对象可能缺 id 字段——补齐，否则 getApiDelayInfo 的
+      // railway code 匹配（code=line.id）得到 undefined，matched 永远失败 → 有归属延误记录
+      // 全部走聚合→null→误判 normal（4.3.391 聚合收紧后即出现此回归）
+      if (!line.id) line.id = lineId;
       var apiInfo = getApiDelayInfo(line);
       var localStatus = localData.statusMap && localData.statusMap[lineId];
       // v4.3.386: effective local status only (default-normal init must not mask missing source)
