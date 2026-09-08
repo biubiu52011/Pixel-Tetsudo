@@ -727,12 +727,13 @@
         type: 'line',
         attrs: { x1: mainCx, y1: y1, x2: mainCx, y2: y2, stroke: color, 'stroke-width': 5, 'stroke-linecap': 'round', opacity: 0.35 }
       });
-      // v4.3.409: 融合机制——直通运行系统延伸段几何（如横須賀線・総武快速線）
-      // 延伸线接主线端点（東京站）后沿同一垂直方向继续排布；列车索引 = baseIdx + 延伸线站表索引
+      // v4.3.409/4.3.422: 融合机制——直通运行系统延伸段几何（如横須賀線・総武快速線）
+      // 延伸线接主线端点（東京站）后沿同一垂直方向、同一列继续排布（一条连续线）；
+      // 列车索引 = baseIdx + 延伸线站表索引
       var fusionMap = {};
       var _extLines = _fusionExtensionLines(lineId);
       if (_extLines && _extLines.length > 0) {
-        var extOffsetX = 110;
+        var extOffsetX = 0; // 4.3.422: 同列延伸（用户指示"为一条线"），不再另起右列
         var yBase = stationCoords.length ? stationCoords[stationCoords.length - 1].y : topP;
         var yStartRef = topP;
         for (var exi = 0; exi < _extLines.length; exi++) {
@@ -750,7 +751,7 @@
             var exY = exl.joinAtEnd ? (extStartY + (exk + 1) * sp) : (extStartY - (exk + 1) * sp);
             stationCoords.push({ x: mainCx + extOffsetX, y: exY, side: 'right', stationId: extStations[exk], fusionLineId: exl.lid });
           }
-          // 连接线：主线端点 → 延伸段第一站（L 形）
+          // 连接线：主线端点 → 延伸段第一站（同列时即为垂直连续线）
           var jx = mainCx, jy = exl.joinAtEnd ? yBase : yStartRef;
           var exFirstY = exl.joinAtEnd ? (yBase + sp) : (yStartRef - sp);
           routeElements.push({ type: 'line', attrs: { x1: jx, y1: jy, x2: mainCx + extOffsetX, y2: jy, stroke: exColor, 'stroke-width': 4, 'stroke-linecap': 'round', opacity: 0.5 } });
@@ -766,8 +767,7 @@
           routeElements.push({ type: 'text', attrs: { x: mainCx + extOffsetX, y: exl.joinAtEnd ? (extStartY + (extStations.length + 1) * sp) : (extStartY - (extStations.length + 1) * sp), 'text-anchor': 'middle', 'font-size': '12', fill: exColor, 'font-weight': '600' }, text: _exName });
           fusionMap[exl.lid] = { baseIdx: extBaseIdx, joinAtEnd: exl.joinAtEnd, stationCount: extStations.length };
         }
-        // svg 尺寸扩展：右列站名 + 标题空间
-        svgW = Math.max(svgW, mainCx + extOffsetX + 60);
+        // svg 尺寸扩展：同列延伸只扩展高度（站名沿用主线站名区宽度）
         if (stationCoords.length) {
           var _lastY = stationCoords[stationCoords.length - 1].y;
           svgH = Math.max(svgH, _lastY + sp + botP);
@@ -1150,11 +1150,20 @@
               ly = sc.y - sz.h - (side === "top" ? 28 : 16);
             }
             else if (tt.dir === "down") {
+              // 4.3.422: 融合延伸段存在时（如横須賀線・総武快速線），∨ 直通标签画在
+              // 线路图视觉终点（延伸段末站）下方而非主线末站——保持"一条线"连续观感
+              var _extLast = null;
+              if (geometry.fusionMap && stationCoords.length) {
+                for (var _ei = stationCoords.length - 1; _ei >= 0; _ei--) {
+                  if (stationCoords[_ei].fusionLineId) { _extLast = stationCoords[_ei]; break; }
+                }
+              }
+              var _scD = _extLast || sc;
               // Below the last station's interchange chip (if any) so the v-label
               // is never covered by the chip.
               var _chipBot = iy0 + rows * ICON + (rows - 1) * GAP + 2;
               lx = thruCursor;
-              ly = Math.max(_chipBot + 4, sc.y + sz.h + 6);
+              ly = Math.max(_chipBot + 4, _scD.y + sz.h + 6);
             }
             else {
               // Mid-line junction: label on the OPPOSITE side of the station
