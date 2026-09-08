@@ -151,8 +151,9 @@
           if (text.indexOf("\u898b\u5408\u308f\u305b") >= 0 || text.indexOf("\u904b\u8ee2\u3092\u4e2d\u6b62") >= 0 || text.indexOf("\u5168\u7dda\u904b\u4f11") >= 0 || text.toLowerCase().indexOf("suspended") >= 0) result.status = "suspended";
           else if (text.indexOf("\u904b\u5ef6") >= 0 || text.indexOf("\u9045\u5ef6") >= 0 || text.indexOf("\u9045\u308c") >= 0 || text.indexOf("\u904b\u308c") >= 0 || text.indexOf("\u4e71\u308c") >= 0 || text.toLowerCase().indexOf("delay") >= 0) result.status = "delayed";
           else if (text.indexOf("\u7d42\u4e86") >= 0 || text.toLowerCase().indexOf("finished") >= 0) result.status = "suspended";
-          // v4.3.426: 有实质运行通知（非延误/非中断/非正常宣言文本）→ notice（黄色感叹号）
-          if (result.status === "normal") result.status = "notice";
+          // v4.3.426: 有实质运行通知 → notice（黄色感叹号）
+          // v4.3.429: 收紧——字段 Normal 时仅"明确通知类"文本才标！，其余跟随字段显示正常（权威字段主导，避免文本兜底占领）
+          if (result.status === "normal" && /\u904b\u4f11|\u6642\u523b\u5909\u66f4|\u30e1\u30f3\u30c6\u30ca\u30f3\u30b9|\u5de5\u4e8b|\u70b9\u691c|\u81e8\u6642\u5217\u8eca|\u632f\u66ff\u8f38\u9001|\u4ee3\u884c\u8f38\u9001|\u304a\u77e5\u3089\u305b/.test(text)) result.status = "notice";
         }
       }
       // 延迟分钟：排除时刻（18時08分頃 的 "08分" 不是延迟）
