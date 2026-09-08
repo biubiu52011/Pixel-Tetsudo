@@ -143,6 +143,12 @@
   // 的线路作为延伸段（如 Yokosuka ↔ SobuRapid，東京站直通）
   function _fusionExtensionLines(lineId) {
     try {
+      var src = (window.RailwayDB && window.RailwayDB.getAllLines) ? window.RailwayDB.getAllLines() : getLinesData();
+      var own = src[lineId];
+      if (!own || !own.stations || own.stations.length < 2) return null;
+      var first = own.stations[0], last = own.stations[own.stations.length - 1];
+      var out = [];
+      // 1) LOS 同系统直通延伸（如 Yokosuka ↔ SobuRapid）
       var sysLineIds = null;
       if (window.LineOperationSystems) {
         var ops = window.LineOperationSystems;
@@ -159,25 +165,38 @@
           if (sysLineIds) break;
         }
       }
-      if (!sysLineIds) return null;
-      var thr = (window.ThroughService && window.ThroughService.getDirectThroughLines) ? window.ThroughService.getDirectThroughLines(lineId) : [];
-      if (!thr || thr.length === 0) return null;
-      var src = (window.RailwayDB && window.RailwayDB.getAllLines) ? window.RailwayDB.getAllLines() : getLinesData();
-      var own = src[lineId];
-      if (!own || !own.stations || own.stations.length < 2) return null;
-      var first = own.stations[0], last = own.stations[own.stations.length - 1];
-      var out = [];
-      for (var i = 0; i < sysLineIds.length; i++) {
-        var lid2 = sysLineIds[i];
-        if (lid2 === lineId) continue;
-        if (thr.indexOf(lid2) < 0) continue;
-        var l2 = src[lid2];
-        if (!l2 || !l2.stations || l2.stations.length < 2) continue;
-        // 接续判定：延伸线端点与主线首/末站匹配
-        if (l2.stations[0] === last) {
-          out.push({ lid: lid2, joinAtEnd: true, baseIdx: own.stations.length - 1 });
-        } else if (l2.stations[l2.stations.length - 1] === first) {
-          out.push({ lid: lid2, joinAtEnd: false, baseIdx: 0 });
+      if (sysLineIds) {
+        var thr = (window.ThroughService && window.ThroughService.getDirectThroughLines) ? window.ThroughService.getDirectThroughLines(lineId) : [];
+        if (thr && thr.length > 0) {
+          for (var i = 0; i < sysLineIds.length; i++) {
+            var lid2 = sysLineIds[i];
+            if (lid2 === lineId) continue;
+            if (thr.indexOf(lid2) < 0) continue;
+            var l2 = src[lid2];
+            if (!l2 || !l2.stations || l2.stations.length < 2) continue;
+            if (l2.stations[0] === last) {
+              out.push({ lid: lid2, joinAtEnd: true, baseIdx: own.stations.length - 1 });
+            } else if (l2.stations[l2.stations.length - 1] === first) {
+              out.push({ lid: lid2, joinAtEnd: false, baseIdx: 0 });
+            }
+          }
+        }
+      }
+      // 2) 干线本名（TRUNK）延伸——数据保留的干线本名线路若端点与运行系统主线相接，
+      // 作为延伸段显示其列车（如 中央本線 ChuoMain 高尾→塩尻 延伸自 中央快速 ChuoRapid 高尾站）
+      var trunk = (window.DataState && window.DataState.TRUNK_MAIN_LINE_IDS) || [];
+      for (var ti = 0; ti < trunk.length; ti++) {
+        var tlid = trunk[ti];
+        if (tlid === lineId) continue;
+        var tl = src[tlid];
+        if (!tl || !tl.stations || tl.stations.length < 2) continue;
+        var already = false;
+        for (var ai = 0; ai < out.length; ai++) { if (out[ai].lid === tlid) { already = true; break; } }
+        if (already) continue;
+        if (tl.stations[0] === last) {
+          out.push({ lid: tlid, joinAtEnd: true, baseIdx: own.stations.length - 1 });
+        } else if (tl.stations[tl.stations.length - 1] === first) {
+          out.push({ lid: tlid, joinAtEnd: false, baseIdx: 0 });
         }
       }
       return out.length ? out : null;

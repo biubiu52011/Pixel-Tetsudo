@@ -476,6 +476,7 @@
   // ========== Public API ==========
   window.DataState = {
     STATUS_META: STATUS_META,
+    TRUNK_MAIN_LINE_IDS: TRUNK_MAIN_LINE_IDS,
     renderCard: renderCard,
     renderList: renderList,
     setLines: setLines,
