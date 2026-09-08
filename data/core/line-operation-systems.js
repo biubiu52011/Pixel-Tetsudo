@@ -649,17 +649,6 @@ window.LineOperationSystems = {
       order: 61
     },
     {
-      code: "SHE",
-      nameJa: "信越本線",
-      nameZh: "信越本线",
-      nameEn: "Shinetsu Main Line",
-      nameKo: "",
-      color: "#00b3e6",
-      lineIds: ["Shinetsu"],
-      icon: "../images/鉄道/JR東日本/JRグループ.png",
-      order: 62
-    },
-    {
       code: "SHN",
       nameJa: "篠ノ井線",
       nameZh: "篠之井线",
