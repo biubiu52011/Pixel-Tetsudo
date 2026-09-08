@@ -51,14 +51,13 @@
   };
   window.TransitConstants = {
     OP_ORDER: [
-      "JR-East", "JR West",
+      "JR-East",
       "TokyoMetro", "Toei", "YokohamaMunicipal",
       "Keio", "Odakyu", "Seibu", "Tobu", "Tokyu",
       "Keikyu", "Keisei", "Sotetsu",
       "TWR", "MinatoMirai", "MIR", "Rinkai",
       "TsukubaExpress", "Yurikamome", "TamaMonorail", "ShonanMonorail",
-      "ChibaUrbanMonorail", "TokyoMonorail", "SaitamaNewUrbanTransit",
-      "IGR", "Aoimori"
+      "ChibaUrbanMonorail", "TokyoMonorail", "SaitamaNewUrbanTransit"
     ],
     NORMALIZE: TRANSIT_NORMALIZE,
     // JRE (JR東日本) 白名单：路線記号 JA~JY 全覆盖；無記号の地方線（operator=JR-East）兜底

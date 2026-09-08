@@ -316,7 +316,6 @@
     // ===== railway_data key 对齐 =====
     "MinatoMirai": "../images/列车/東急電鉄/5050系.png",
     "NewShuttle": "../images/列车/埼玉新都市交通/2000形.png",
-    "HitachiNakaKaimin": "../images/鉄道/ひたちなか海浜鉄道/湊線.png",
     "Tōnami": "../images/列车/JR東日本/GV-E400系.png",       // 4.3.266：只見線 = GV-E400系（原GV-E400系.png 为机械面板占位图）
     "Echigo": "../images/列车/JR東日本/E129系.png",
     "Hakushin": "../images/列车/JR東日本/E129系.png",

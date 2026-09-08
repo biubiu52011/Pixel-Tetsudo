@@ -237,7 +237,6 @@
         "Ishinomaki": "JR-East",
         "Ito": "JR-East",
         "Itsukaichi": "JR-East",
-        "JR_Yamaguchi": "JR-West",
         "Joban": "JR-East",
         "JobanLocal": "JR-East",
         "JobanMain": "JR-East",

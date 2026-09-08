@@ -1700,55 +1700,6 @@ window.LineOperationSystems = {
       order: 1
     }
   ],
-  "MIR": [
-    {
-      code: "MIR",
-      nameJa: "湊線",
-      nameZh: "凑线",
-      nameEn: "Minato Line",
-      nameKo: "",
-      color: "#0066B3",
-      lineIds: ["HitachiNakaKaimin"],
-      icon: "../images/鉄道/ひたちなか海浜鉄道/湊線.png",
-      order: 1
-    }
-  ],
-  "JR_WEST": [
-    {
-      code: "YGH",
-      nameJa: "JR山口線",
-      nameZh: "JR山口线",
-      nameEn: "Yamaguchi Line",
-      nameKo: "",
-      color: "#f37052",
-      lineIds: ["JR_Yamaguchi"],
-      order: 1
-    }
-  ],
-  "IGR": [
-    {
-      code: "IGR",
-      nameJa: "いわて銀河鉄道線",
-      nameZh: "岩手银河铁道线",
-      nameEn: "IGR Iwate Galaxy Railway Line",
-      nameKo: "",
-      color: "#03459a",
-      lineIds: ["IGR"],
-      order: 1
-    }
-  ],
-  "AOIMORI": [
-    {
-      code: "AO",
-      nameJa: "青い森鉄道線",
-      nameZh: "青森铁路线",
-      nameEn: "Aoimori Railway Line",
-      nameKo: "",
-      color: "#33cbf4",
-      lineIds: ["Aoimori"],
-      order: 1
-    }
-  ]
 };
 
 /*

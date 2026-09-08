@@ -637,7 +637,6 @@ function applyData(data, i18n) {
         "SotetsuMain": "../images/鉄道/相鉄/相鉄本線.png",
         "Ikebukuro": "../images/鉄道/西武鉄道/西武池袋線.png",
         "TobuNikko": "../images/鉄道/東武鉄道/日光線 宇都宮線 鬼怒川線.png",
-        "HitachiNakaKaimin": "../images/鉄道/ひたちなか海浜鉄道/湊線.png",
         "TokyuDenEn": "../images/鉄道/東急電鉄/田園都市線.png",
         "Keikyu": "../images/鉄道/京急電鉄/京急本線.png",
         "MinatoMirai": "../images/鉄道/横浜高速鉄道/みなとみらい線.png",
