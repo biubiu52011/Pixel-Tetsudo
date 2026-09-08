@@ -23,6 +23,7 @@
   // STATUS_META is defined in data-state.js; use window.DataState.STATUS_META
   const STATUS_META = window.DataState ? window.DataState.STATUS_META : {
     normal:    { icon: "\u25cb", color: "green"  },
+    notice:    { icon: "\u26a0", color: "yellow" },
     delayed:   { icon: "\u25b3", color: "orange" },
     suspended: { icon: "\u00d7", color: "red"  },
     no_data:   { icon: "\u25cc", color: "gray"   },
@@ -67,7 +68,7 @@
     statusSection.innerHTML = '<span class="rs-status-indicator"><span class="rs-status-dot"></span>' + statusText + '</span>';
     // Apply status dot color via DOM API (CSP-safe)
     var dot = statusSection.querySelector(".rs-status-dot");
-    if (dot) dot.style.background = "var(--" + (s.color || ({ normal: "green", delayed: "orange", suspended: "red", no_data: "gray", no_odpt: "gray", loading: "gray" }[status] || "gray")) + ")";
+    if (dot) dot.style.background = "var(--" + (s.color || ({ normal: "green", notice: "yellow", delayed: "orange", suspended: "red", no_data: "gray", no_odpt: "gray", loading: "gray" }[status] || "gray")) + ")";
     // Interval section
     var intervalSection = modal.querySelector(".rs-interval-section");
     intervalSection.querySelector(".rs-info-label").textContent = t("status.interval");

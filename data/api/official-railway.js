@@ -57,7 +57,8 @@
             .replace(/\s+/g, " ")
             .trim();
         var status = "normal";
-        if (/見合わせ|運休|停止/.test(text)) status = "suspended";
+        // v4.3.425: 收紧——仅明确"見合わせ/停止/全線運休"判中断，单独"運休"（部分运休通知）不误判
+        if (/見合わせ|停止|全線運休/.test(text)) status = "suspended";
         else if (/遅延|遅れ|乱れ/.test(text)) status = "delayed";
         var m = text.match(/(\d{4}年\d{1,2}月\d{1,2}日\d{1,2}時\d{1,2}分)/);
         var titleMatch = text.match(/(平常運転|遅延|運転見合わせ|運転再開)/);

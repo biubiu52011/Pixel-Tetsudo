@@ -9,6 +9,7 @@
   // ========== Status definitions ==========
   var STATUS_META = {
     normal:    { icon: "\u25cb", cls: "rs-status-icon-normal",    label: "normal"    },
+    notice:    { icon: "\u26a0", cls: "rs-status-icon-notice",    label: "notice"    },
     delayed:   { icon: "\u25b3", cls: "rs-status-icon-delayed",  label: "delayed"   },
     suspended: { icon: "\u00d7", cls: "rs-status-icon-suspended", label: "suspended" },
     no_data:   { icon: "\u25cc", cls: "rs-status-icon-no-data",   label: "no_data"  },
@@ -89,6 +90,7 @@
   function statusRank(s) {
     if (s === "suspended") return 5;
     if (s === "delayed") return 4;
+    if (s === "notice") return 3.5;
     if (s === "no_odpt") return 3;
     if (s === "loading") return 2;
     if (s === "no_data") return 2;
