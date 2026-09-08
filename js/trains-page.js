@@ -101,6 +101,26 @@
   }
 
   function getRealtimePositions(lineId) {
+    var positions = _getBasePositions(lineId);
+    // v4.3.409: 融合机制——横須賀線・総武快速線等直通运行系统（LOS 同系统 + 直通相接）
+    // 详情页显示主线 + 延伸线列车；延伸线列车带 fusionLineId，渲染层按延伸几何偏移定位
+    var ext = _fusionExtensionLines(lineId);
+    if (ext && ext.length > 0) {
+      var all = positions.slice();
+      for (var ei = 0; ei < ext.length; ei++) {
+        var ep = _getBasePositions(ext[ei].lid);
+        for (var ej = 0; ej < ep.length; ej++) {
+          var np = {};
+          for (var pk in ep[ej]) { if (ep[ej].hasOwnProperty(pk)) np[pk] = ep[ej][pk]; }
+          np.fusionLineId = ext[ei].lid;
+          all.push(np);
+        }
+      }
+      return all;
+    }
+    return positions;
+  }
+  function _getBasePositions(lineId) {
     try {
       if (window.DataFusion && window.DataFusion.getRealtimePositions) {
         var pos = window.DataFusion.getRealtimePositions(lineId);
@@ -118,6 +138,64 @@
       }
     } catch(e) {}
     return [];
+  }
+  // 融合延伸线识别：lineId 所属 LOS 系统内、且与 lineId 直通相接（ThroughService 双向）
+  // 的线路作为延伸段（如 Yokosuka ↔ SobuRapid，東京站直通）
+  function _fusionExtensionLines(lineId) {
+    try {
+      var sysLineIds = null;
+      if (window.LineOperationSystems) {
+        var ops = window.LineOperationSystems;
+        for (var ok in ops) {
+          var list = ops[ok];
+          if (!Array.isArray(list)) continue;
+          for (var si = 0; si < list.length; si++) {
+            var sys = list[si];
+            if (sys && sys.lineIds && sys.lineIds.indexOf(lineId) >= 0 && sys.lineIds.length > 1) {
+              sysLineIds = sys.lineIds;
+              break;
+            }
+          }
+          if (sysLineIds) break;
+        }
+      }
+      if (!sysLineIds) return null;
+      var thr = (window.ThroughService && window.ThroughService.getDirectThroughLines) ? window.ThroughService.getDirectThroughLines(lineId) : [];
+      if (!thr || thr.length === 0) return null;
+      var src = (window.RailwayDB && window.RailwayDB.getAllLines) ? window.RailwayDB.getAllLines() : getLinesData();
+      var own = src[lineId];
+      if (!own || !own.stations || own.stations.length < 2) return null;
+      var first = own.stations[0], last = own.stations[own.stations.length - 1];
+      var out = [];
+      for (var i = 0; i < sysLineIds.length; i++) {
+        var lid2 = sysLineIds[i];
+        if (lid2 === lineId) continue;
+        if (thr.indexOf(lid2) < 0) continue;
+        var l2 = src[lid2];
+        if (!l2 || !l2.stations || l2.stations.length < 2) continue;
+        // 接续判定：延伸线端点与主线首/末站匹配
+        if (l2.stations[0] === last) {
+          out.push({ lid: lid2, joinAtEnd: true, baseIdx: own.stations.length - 1 });
+        } else if (l2.stations[l2.stations.length - 1] === first) {
+          out.push({ lid: lid2, joinAtEnd: false, baseIdx: 0 });
+        }
+      }
+      return out.length ? out : null;
+    } catch(e) { return null; }
+  }
+  // 融合机制：延伸线列车的全局索引基准（主线末站 = 延伸线起点站）
+  function _fusionBaseIdx(lineId, fusionLineId) {
+    try {
+      var g = _routeGeometryCache[_geomKey(lineId)];
+      if (g && g.fusionMap && g.fusionMap[fusionLineId]) return g.fusionMap[fusionLineId].baseIdx;
+      var allLines = getLinesData();
+      var own = allLines[lineId], ext = allLines[fusionLineId];
+      if (own && ext && ext.stations && own.stations) {
+        if (ext.stations[0] === own.stations[own.stations.length - 1]) return own.stations.length - 1;
+        if (ext.stations[ext.stations.length - 1] === own.stations[0]) return 0;
+      }
+    } catch(e) {}
+    return -1;
   }
   // ========== Route Geometry Cache (Single source of truth for coordinates) ==========
   var _routeGeometryCache = {};
@@ -627,6 +705,54 @@
         type: 'line',
         attrs: { x1: mainCx, y1: y1, x2: mainCx, y2: y2, stroke: color, 'stroke-width': 5, 'stroke-linecap': 'round', opacity: 0.35 }
       });
+      // v4.3.409: 融合机制——直通运行系统延伸段几何（如横須賀線・総武快速線）
+      // 延伸线接主线端点（東京站）后沿同一垂直方向继续排布；列车索引 = baseIdx + 延伸线站表索引
+      var fusionMap = {};
+      var _extLines = _fusionExtensionLines(lineId);
+      if (_extLines && _extLines.length > 0) {
+        var extOffsetX = 110;
+        var yBase = stationCoords.length ? stationCoords[stationCoords.length - 1].y : topP;
+        var yStartRef = topP;
+        for (var exi = 0; exi < _extLines.length; exi++) {
+          var exl = _extLines[exi];
+          var exLine = allLines[exl.lid];
+          if (!exLine || !exLine.stations) continue;
+          var exSt = exLine.stations;
+          var exColor = (window.LineOperationSystemsResolveColor && window.LineOperationSystemsResolveColor(exl.lid)) || exLine.color || "#888";
+          // 延伸站 = 去掉与主线共享的接续站（主线末站/首站）
+          var extStations = exl.joinAtEnd ? exSt.slice(1) : exSt.slice(0, -1);
+          if (extStations.length === 0) continue;
+          var extStartY = exl.joinAtEnd ? yBase : yStartRef;
+          var extBaseIdx = stationCoords.length;
+          for (var exk = 0; exk < extStations.length; exk++) {
+            var exY = exl.joinAtEnd ? (extStartY + (exk + 1) * sp) : (extStartY - (exk + 1) * sp);
+            stationCoords.push({ x: mainCx + extOffsetX, y: exY, side: 'right', stationId: extStations[exk], fusionLineId: exl.lid });
+          }
+          // 连接线：主线端点 → 延伸段第一站（L 形）
+          var jx = mainCx, jy = exl.joinAtEnd ? yBase : yStartRef;
+          var exFirstY = exl.joinAtEnd ? (yBase + sp) : (yStartRef - sp);
+          routeElements.push({ type: 'line', attrs: { x1: jx, y1: jy, x2: mainCx + extOffsetX, y2: jy, stroke: exColor, 'stroke-width': 4, 'stroke-linecap': 'round', opacity: 0.5 } });
+          routeElements.push({ type: 'line', attrs: { x1: mainCx + extOffsetX, y1: jy, x2: mainCx + extOffsetX, y2: exFirstY, stroke: exColor, 'stroke-width': 4, 'stroke-linecap': 'round', opacity: 0.5 } });
+          // 延伸段站内连线
+          for (var exk2 = 0; exk2 < extStations.length - 1; exk2++) {
+            var yA = exl.joinAtEnd ? (extStartY + (exk2 + 1) * sp) : (extStartY - (exk2 + 1) * sp);
+            var yB = exl.joinAtEnd ? (extStartY + (exk2 + 2) * sp) : (extStartY - (exk2 + 2) * sp);
+            routeElements.push({ type: 'line', attrs: { x1: mainCx + extOffsetX, y1: yA, x2: mainCx + extOffsetX, y2: yB, stroke: exColor, 'stroke-width': 4, 'stroke-linecap': 'round', opacity: 0.5 } });
+          }
+          // 延伸段标题标签
+          var _exName = (window.RailwayDB && window.RailwayDB.resolveLineName) ? window.RailwayDB.resolveLineName(exl.lid, window.currentLang) || exl.lid : exl.lid;
+          routeElements.push({ type: 'text', attrs: { x: mainCx + extOffsetX, y: exl.joinAtEnd ? (extStartY + (extStations.length + 1) * sp) : (extStartY - (extStations.length + 1) * sp), 'text-anchor': 'middle', 'font-size': '12', fill: exColor, 'font-weight': '600' }, text: _exName });
+          fusionMap[exl.lid] = { baseIdx: extBaseIdx, joinAtEnd: exl.joinAtEnd, stationCount: extStations.length };
+        }
+        // svg 尺寸扩展：右列站名 + 标题空间
+        svgW = Math.max(svgW, mainCx + extOffsetX + 60);
+        if (stationCoords.length) {
+          var _lastY = stationCoords[stationCoords.length - 1].y;
+          svgH = Math.max(svgH, _lastY + sp + botP);
+          var _minY = Math.min.apply(null, stationCoords.map(function(c) { return c.y; }));
+          svgH = Math.max(svgH, _minY + sp * 2 + botP);
+        }
+      }
       // Twin parallel line for shared sections (industry standard)
       var sharedSegs = _findSharedSegments(line, allLines);
       for (var si = 0; si < sharedSegs.length; si++) {
@@ -655,7 +781,8 @@
       branchOffset: branchOffset,
       routeElements: routeElements,
       junctionStation: isSixShapedLoop ? stations[0] : null,
-  junctionX: isSixShapedLoop ? junctionX : null
+  junctionX: isSixShapedLoop ? junctionX : null,
+      fusionMap: fusionMap || null
     };
     
     // Cache it
@@ -745,6 +872,7 @@
             svgEl.setAttribute(attr, routeEl.attrs[attr]);
           }
         }
+        if (routeEl.text) svgEl.textContent = routeEl.text;
         staticLayer.appendChild(svgEl);
       }
       
@@ -1177,7 +1305,15 @@
     
     for (var pi = 0; pi < positions.length; pi++) {
       var p = positions[pi];
-      var idx = Math.min(p.stationIndex || 0, stationCoords.length - 1);
+      // v4.3.409: 融合机制——延伸线（fusionLineId）列车按延伸几何 baseIdx 偏移
+      var idx;
+      if (p.fusionLineId) {
+        var fm = _fusionBaseIdx(lineId, p.fusionLineId);
+        idx = fm >= 0 ? fm + (p.stationIndex || 0) : (p.stationIndex || 0);
+      } else {
+        idx = p.stationIndex || 0;
+      }
+      idx = Math.min(idx, stationCoords.length - 1);
       var coord = stationCoords[idx];
       if (!coord) continue;
       
@@ -1221,7 +1357,7 @@
         }
       } else {
         // Create new train icon
-        var iconSrc = (window.TrainIcons && typeof window.TrainIcons.getTrainIcon === "function") ? window.TrainIcons.getTrainIcon(lineId, line.operator, trainUid, p.stationIndex, p.trainType) : "";
+        var iconSrc = (window.TrainIcons && typeof window.TrainIcons.getTrainIcon === "function") ? window.TrainIcons.getTrainIcon(p.fusionLineId || lineId, line.operator, trainUid, p.stationIndex, p.trainType) : "";
         var isEst = p.estimated === true;
         var iconCls = isEst ? "train-icon estimated" : "train-icon";
         
