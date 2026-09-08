@@ -16315,24 +16315,6 @@
      "note": ""
     },
     {
-     "station": "Yamato",
-     "lineId": "OdakyuEnoshima",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Yamato",
-     "lineId": "SotetsuMain",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Yamato",
-     "lineId": "Kounan",
-     "type": "in",
-     "note": ""
-    },
-    {
      "station": "Haguro",
      "lineId": "Komii",
      "type": "in",
@@ -17244,40 +17226,6 @@
    "durationTotalMin": null,
    "branchOf": null,
    "stations": [
-    "Fukushima",
-    "Sakinoko",
-    "Niwasaka",
-    "Itaya",
-    "Toge",
-    "Osawa",
-    "Sekine",
-    "Yonezawa",
-    "Okitama",
-    "Takahata",
-    "Akayu",
-    "Nakagawa",
-    "Uzen-Nakayama",
-    "Kaminoyama-Onsen",
-    "Mokichi-Kinenkan-mae",
-    "Zao",
-    "Yamagata",
-    "Kita-Yamagata",
-    "Uzen-Chitose",
-    "Minami-Dewa",
-    "Urushiyama",
-    "Takadama",
-    "Tendo",
-    "Minami-Tendo",
-    "Midaregawa",
-    "Jimmachi",
-    "Sakuranbo-Higashine",
-    "Higashine",
-    "Murayama",
-    "Sodesaki",
-    "Oishida",
-    "Kita-Oishida",
-    "Ashisawa",
-    "Funagata",
     "Shinjo",
     "Izumita",
     "Uzen-Toyosato",
@@ -17410,247 +17358,10 @@
     2,
     2,
     2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
     2
    ],
    "throughServices": [],
    "transferStations": [
-    {
-     "station": "Fukushima",
-     "lineId": "TohokuMain",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Fukushima",
-     "lineId": "Yamagata",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Niwasaka",
-     "lineId": "Yamagata",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Itaya",
-     "lineId": "Yamagata",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Toge",
-     "lineId": "Yamagata",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Osawa",
-     "lineId": "Joetsu",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Osawa",
-     "lineId": "Yamagata",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Sekine",
-     "lineId": "Yamagata",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Yonezawa",
-     "lineId": "Yamagata",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Yonezawa",
-     "lineId": "Yonezawa",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Okitama",
-     "lineId": "Yamagata",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Takahata",
-     "lineId": "Yamagata",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Akayu",
-     "lineId": "Yamagata",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Nakagawa",
-     "lineId": "Yamagata",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Uzen-Nakayama",
-     "lineId": "Yamagata",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Kaminoyama-Onsen",
-     "lineId": "Yamagata",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Yamagata",
-     "lineId": "Senzan",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Yamagata",
-     "lineId": "Yamagata",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Kita-Yamagata",
-     "lineId": "Senzan",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Kita-Yamagata",
-     "lineId": "Yamagata",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Uzen-Chitose",
-     "lineId": "Senzan",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Uzen-Chitose",
-     "lineId": "Yamagata",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Minami-Dewa",
-     "lineId": "Yamagata",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Urushiyama",
-     "lineId": "Yamagata",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Takadama",
-     "lineId": "Yamagata",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Tendo",
-     "lineId": "Yamagata",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Midaregawa",
-     "lineId": "Yamagata",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Sakuranbo-Higashine",
-     "lineId": "Yamagata",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Higashine",
-     "lineId": "Yamagata",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Murayama",
-     "lineId": "Yamagata",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Sodesaki",
-     "lineId": "Yamagata",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Oishida",
-     "lineId": "Yamagata",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Kita-Oishida",
-     "lineId": "Yamagata",
-     "type": "in",
-     "note": ""
-    },
     {
      "station": "Shinjo",
      "lineId": "RikutoEast",
@@ -20716,31 +20427,7 @@
    "transferStations": [
     {
      "station": "Fukushima",
-     "lineId": "OuMain",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Fukushima",
      "lineId": "TohokuMain",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Niwasaka",
-     "lineId": "OuMain",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Itaya",
-     "lineId": "OuMain",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Toge",
-     "lineId": "OuMain",
      "type": "in",
      "note": ""
     },
@@ -20751,80 +20438,14 @@
      "note": ""
     },
     {
-     "station": "Osawa",
-     "lineId": "OuMain",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Sekine",
-     "lineId": "OuMain",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Yonezawa",
-     "lineId": "OuMain",
-     "type": "in",
-     "note": ""
-    },
-    {
      "station": "Yonezawa",
      "lineId": "Yonezawa",
      "type": "in",
      "note": ""
     },
     {
-     "station": "Okitama",
-     "lineId": "OuMain",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Takahata",
-     "lineId": "OuMain",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Akayu",
-     "lineId": "OuMain",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Nakagawa",
-     "lineId": "OuMain",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Uzen-Nakayama",
-     "lineId": "OuMain",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Kaminoyama-Onsen",
-     "lineId": "OuMain",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Yamagata",
-     "lineId": "OuMain",
-     "type": "in",
-     "note": ""
-    },
-    {
      "station": "Yamagata",
      "lineId": "Senzan",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Kita-Yamagata",
-     "lineId": "OuMain",
      "type": "in",
      "note": ""
     },
@@ -20836,79 +20457,7 @@
     },
     {
      "station": "Uzen-Chitose",
-     "lineId": "OuMain",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Uzen-Chitose",
      "lineId": "Senzan",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Minami-Dewa",
-     "lineId": "OuMain",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Urushiyama",
-     "lineId": "OuMain",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Takadama",
-     "lineId": "OuMain",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Tendo",
-     "lineId": "OuMain",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Midaregawa",
-     "lineId": "OuMain",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Sakuranbo-Higashine",
-     "lineId": "OuMain",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Higashine",
-     "lineId": "OuMain",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Murayama",
-     "lineId": "OuMain",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Sodesaki",
-     "lineId": "OuMain",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Oishida",
-     "lineId": "OuMain",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Kita-Oishida",
-     "lineId": "OuMain",
      "type": "in",
      "note": ""
     },
@@ -22721,7 +22270,7 @@
     "Enokido",
     "Yachimata",
     "Hyuga",
-    "Narita",
+    "Naruto",
     "Matsuo",
     "Yokoshiba",
     "Iikura",
@@ -22816,12 +22365,6 @@
     {
      "station": "Yachimata",
      "lineId": "Uchibo",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Narita",
-     "lineId": "Narita",
      "type": "in",
      "note": ""
     },
@@ -36806,7 +36349,6 @@
   ],
   "Osawa": [
    "Joetsu",
-   "OuMain",
    "Yamagata"
   ],
   "Echigo-Iwasaki": [
@@ -37775,8 +37317,7 @@
    "Narita"
   ],
   "Narita": [
-   "Narita",
-   "SobuMain"
+   "Narita"
   ],
   "Kuzumi": [
    "Narita"
@@ -38197,134 +37738,93 @@
    "Ominato"
   ],
   "Fukushima": [
-   "OuMain",
    "TohokuMain",
    "Yamagata"
   ],
-  "Sakinoko": [
-   "OuMain"
-  ],
   "Niwasaka": [
-   "OuMain",
    "Yamagata"
   ],
   "Itaya": [
-   "OuMain",
    "Yamagata"
   ],
   "Toge": [
-   "OuMain",
    "Yamagata"
   ],
   "Sekine": [
-   "OuMain",
    "Yamagata"
   ],
   "Yonezawa": [
-   "OuMain",
    "Yamagata",
    "Yonezawa"
   ],
   "Okitama": [
-   "OuMain",
    "Yamagata"
   ],
   "Takahata": [
-   "OuMain",
    "Yamagata"
   ],
   "Akayu": [
-   "OuMain",
    "Yamagata"
   ],
   "Nakagawa": [
-   "OuMain",
    "Yamagata"
   ],
   "Uzen-Nakayama": [
-   "OuMain",
    "Yamagata"
   ],
   "Kaminoyama-Onsen": [
-   "OuMain",
    "Yamagata"
   ],
-  "Mokichi-Kinenkan-mae": [
-   "OuMain"
-  ],
-  "Zao": [
-   "OuMain"
-  ],
   "Yamagata": [
-   "OuMain",
    "Senzan",
    "Yamagata"
   ],
   "Kita-Yamagata": [
-   "OuMain",
    "Senzan",
    "Yamagata"
   ],
   "Uzen-Chitose": [
-   "OuMain",
    "Senzan",
    "Yamagata"
   ],
   "Minami-Dewa": [
-   "OuMain",
    "Yamagata"
   ],
   "Urushiyama": [
-   "OuMain",
    "Yamagata"
   ],
   "Takadama": [
-   "OuMain",
    "Yamagata"
   ],
   "Tendo": [
-   "OuMain",
    "Yamagata"
-  ],
-  "Minami-Tendo": [
-   "OuMain"
   ],
   "Midaregawa": [
-   "OuMain",
    "Yamagata"
   ],
-  "Jimmachi": [
-   "OuMain"
-  ],
   "Sakuranbo-Higashine": [
-   "OuMain",
    "Yamagata"
   ],
   "Higashine": [
-   "OuMain",
    "Yamagata"
   ],
   "Murayama": [
-   "OuMain",
    "Yamagata"
   ],
   "Sodesaki": [
-   "OuMain",
    "Yamagata"
   ],
   "Oishida": [
-   "OuMain",
    "Yamagata"
   ],
   "Kita-Oishida": [
-   "OuMain",
    "Yamagata"
   ],
   "Ashisawa": [
-   "OuMain"
+   "Yamagata"
   ],
   "Funagata": [
-   "OuMain"
+   "Yamagata"
   ],
   "Shinjo": [
    "OuMain",
@@ -39906,7 +39406,8 @@
    "Uchibo"
   ],
   "Naruto": [
-   "Uchibo"
+   "Uchibo",
+   "SobuMain"
   ],
   "Yachimata": [
    "Uchibo",
@@ -43576,106 +43077,72 @@
    "Ominato": 10
   },
   "OuMain": {
-   "Fukushima": 0,
-   "Sakinoko": 1,
-   "Niwasaka": 2,
-   "Itaya": 3,
-   "Toge": 4,
-   "Osawa": 5,
-   "Sekine": 6,
-   "Yonezawa": 7,
-   "Okitama": 8,
-   "Takahata": 9,
-   "Akayu": 10,
-   "Nakagawa": 11,
-   "Uzen-Nakayama": 12,
-   "Kaminoyama-Onsen": 13,
-   "Mokichi-Kinenkan-mae": 14,
-   "Zao": 15,
-   "Yamagata": 16,
-   "Kita-Yamagata": 17,
-   "Uzen-Chitose": 18,
-   "Minami-Dewa": 19,
-   "Urushiyama": 20,
-   "Takadama": 21,
-   "Tendo": 22,
-   "Minami-Tendo": 23,
-   "Midaregawa": 24,
-   "Jimmachi": 25,
-   "Sakuranbo-Higashine": 26,
-   "Higashine": 27,
-   "Murayama": 28,
-   "Sodesaki": 29,
-   "Oishida": 30,
-   "Kita-Oishida": 31,
-   "Ashisawa": 32,
-   "Funagata": 33,
-   "Shinjo": 34,
-   "Izumita": 35,
-   "Uzen-Toyosato": 36,
-   "Mamurogawa": 37,
-   "Kamabuchi": 38,
-   "Otaki": 39,
-   "Nozoki": 40,
-   "Innai": 41,
-   "Yokobori": 42,
-   "Mikazuki": 43,
-   "Kami-Yuzawa": 44,
-   "Yuzawa": 45,
-   "Shimo-Yuzawa": 46,
-   "Jumonji": 47,
-   "Daigo": 48,
-   "Yanagita": 49,
-   "Yokote": 50,
-   "Go-Sannen": 51,
-   "Iizume": 52,
-   "Omagari": 53,
-   "Jinguji": 54,
-   "Kariwano": 55,
-   "Mineyoshikawa": 56,
-   "Ugo-Sakai": 57,
-   "Obarino": 58,
-   "Wada": 59,
-   "Yotsugoya": 60,
-   "Akita": 61,
-   "Izumi-Sotoasahikawa": 62,
-   "Tsuchizaki": 63,
-   "Kami-Iijima": 64,
-   "Oiwake": 65,
-   "Okubo": 66,
-   "Ougo": 67,
-   "Ikawa-Sakura": 68,
-   "Hachirogata": 69,
-   "Koikawa": 70,
-   "Kado": 71,
-   "Moritake": 72,
-   "Kita-Kanaoka": 73,
-   "Higashi-Noshiro": 74,
-   "Tsurugata": 75,
-   "Tomine": 76,
-   "Futatsui": 77,
-   "Maeyama": 78,
-   "Takanosu": 79,
-   "Nukazawa": 80,
-   "Hayaguchi": 81,
-   "Shimokawabe": 82,
-   "Odate": 83,
-   "Shirasawa": 84,
-   "Jinba": 85,
-   "Tsugaru-Yunosawa": 86,
-   "Iwaizumi": 87,
-   "Owani-Onsen": 88,
-   "Ishikawa": 89,
-   "Hirosaki": 90,
-   "Naijoshi": 91,
-   "Kawabe": 92,
-   "Kita-Tokiwa": 93,
-   "Namioka": 94,
-   "Daishaka": 95,
-   "Tsurugasaka": 96,
-   "Tsugaru-Shinjo": 97,
-   "Shin-Aomori": 98,
-   "Aomori": 99
+   "Shinjo": 0,
+   "Izumita": 1,
+   "Uzen-Toyosato": 2,
+   "Mamurogawa": 3,
+   "Kamabuchi": 4,
+   "Otaki": 5,
+   "Nozoki": 6,
+   "Innai": 7,
+   "Yokobori": 8,
+   "Mikazuki": 9,
+   "Kami-Yuzawa": 10,
+   "Yuzawa": 11,
+   "Shimo-Yuzawa": 12,
+   "Jumonji": 13,
+   "Daigo": 14,
+   "Yanagita": 15,
+   "Yokote": 16,
+   "Go-Sannen": 17,
+   "Iizume": 18,
+   "Omagari": 19,
+   "Jinguji": 20,
+   "Kariwano": 21,
+   "Mineyoshikawa": 22,
+   "Ugo-Sakai": 23,
+   "Obarino": 24,
+   "Wada": 25,
+   "Yotsugoya": 26,
+   "Akita": 27,
+   "Izumi-Sotoasahikawa": 28,
+   "Tsuchizaki": 29,
+   "Kami-Iijima": 30,
+   "Oiwake": 31,
+   "Okubo": 32,
+   "Ougo": 33,
+   "Ikawa-Sakura": 34,
+   "Hachirogata": 35,
+   "Koikawa": 36,
+   "Kado": 37,
+   "Moritake": 38,
+   "Kita-Kanaoka": 39,
+   "Higashi-Noshiro": 40,
+   "Tsurugata": 41,
+   "Tomine": 42,
+   "Futatsui": 43,
+   "Maeyama": 44,
+   "Takanosu": 45,
+   "Nukazawa": 46,
+   "Hayaguchi": 47,
+   "Shimokawabe": 48,
+   "Odate": 49,
+   "Shirasawa": 50,
+   "Jinba": 51,
+   "Tsugaru-Yunosawa": 52,
+   "Iwaizumi": 53,
+   "Owani-Onsen": 54,
+   "Ishikawa": 55,
+   "Hirosaki": 56,
+   "Naijoshi": 57,
+   "Kawabe": 58,
+   "Kita-Tokiwa": 59,
+   "Namioka": 60,
+   "Daishaka": 61,
+   "Tsurugasaka": 62,
+   "Tsugaru-Shinjo": 63,
+   "Shin-Aomori": 64,
+   "Aomori": 65
   },
   "RikutoEast": {
    "Kogota": 0,
@@ -44769,7 +44236,7 @@
    "Enokido": 7,
    "Yachimata": 8,
    "Hyuga": 9,
-   "Narita": 10,
+   "Naruto": 10,
    "Matsuo": 11,
    "Yokoshiba": 12,
    "Iikura": 13,

@@ -9119,12 +9119,6 @@
   "ko": "시게기넨칸마에",
   "en": "Shige-Kinenkanmae"
  },
- "Zao": {
-  "ja": "蔵王",
-  "zh": "藏王",
-  "ko": "자오",
-  "en": "Zaō"
- },
  "Yamagata-Kita": {
   "ja": "山形北",
   "zh": "山形北",
@@ -9172,12 +9166,6 @@
   "zh": "天童",
   "ko": "텐도",
   "en": "Tendō"
- },
- "Minami-Tendo": {
-  "ja": "南天童",
-  "zh": "南天童",
-  "ko": "미나미텐도",
-  "en": "Minami-Tendō"
  },
  "Rikkyawa": {
   "ja": "立谷沢",
@@ -12768,8 +12756,8 @@
   "en": "Oshida"
  },
  "Naruto": {
-  "ja": "鳴門",
-  "zh": "鸣门",
+  "ja": "成東",
+  "zh": "成东",
   "ko": "나루토",
   "en": "Naruto"
  },
@@ -17890,24 +17878,6 @@
   "zh": "见沼代亲水公园",
   "ko": "미누마다이신스이코엔",
   "en": "Minumadai-Shinsuikōen"
- },
- "Sakinoko": {
-  "ja": "笹木野",
-  "zh": "笹木野",
-  "ko": "사사키노",
-  "en": "Sakinoko"
- },
- "Mokichi-Kinenkan-mae": {
-  "ja": "茂吉記念館前",
-  "zh": "茂吉纪念馆前",
-  "ko": "모키치키넨칸마에",
-  "en": "Mokichi-Kinenkan-mae"
- },
- "Jimmachi": {
-  "ja": "神町",
-  "zh": "神町",
-  "ko": "진마치",
-  "en": "Jimmachi"
  },
  "Ashisawa": {
   "ja": "芦沢",
