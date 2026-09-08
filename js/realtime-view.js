@@ -183,7 +183,10 @@
     if (_selectedOperator) {
       var f = {};
       Object.keys(_latestLines).forEach(function(id) {
-        if (_latestLines[id] && _latestLines[id].operator === _selectedOperator) {
+        var _ln = _latestLines[id];
+        if (_ln && (_selectedOperator === "JR-East"
+          ? (window.TransitConstants && window.TransitConstants.isJRERoute ? window.TransitConstants.isJRERoute(_ln) : _ln.operator === "JR-East")
+          : _ln.operator === _selectedOperator)) {
           f[id] = _latestLines[id];
         }
       });

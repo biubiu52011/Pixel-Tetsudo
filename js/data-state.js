@@ -179,7 +179,7 @@
     } else {
       var _firstLine = memberIds.length > 0 ? (linesObj[memberIds[0]] || {}) : {};
       var _sysOp = _firstLine.operator || sys.operator || "";
-      if (_sysOp.indexOf("JR") === 0) {
+      if (window.TransitConstants && window.TransitConstants.isJRERoute && window.TransitConstants.isJRERoute(_firstLine)) {
         iconHtml = '<div class="rs-line-icon-fallback"><img src="../images/鉄道/JR東日本/JRグループ.png" alt="JR"></div>';
       } else {
         iconHtml = '<div class="rs-system-badge">' + escapeHtml(code || "?") + '</div>';
@@ -223,7 +223,7 @@
       iconHtml = '<img class="rs-line-icon" src="' + escapeHtml(_losIcon) + '" alt="" loading="lazy">';
     } else if (_imgOk) {
       iconHtml = '<img class="rs-line-icon" src="' + escapeHtml(line.image) + '" alt="" loading="lazy">';
-    } else if (line.operator && line.operator.indexOf("JR") === 0) {
+    } else if (line && window.TransitConstants && window.TransitConstants.isJRERoute && window.TransitConstants.isJRERoute(line)) {
       iconHtml = '<div class="rs-line-icon-fallback"><img src="../images/鉄道/JR東日本/JRグループ.png" alt="JR"></div>';
     } else if (line.code) {
       iconHtml = '<div class="rs-code-badge">' + escapeHtml(line.code) + '</div>';

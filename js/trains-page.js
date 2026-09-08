@@ -1574,7 +1574,10 @@
     if (_selectedOperator) {
       filtered = {};
       Object.keys(allLines).forEach(function(id) {
-        if (allLines[id] && allLines[id].operator === _selectedOperator) {
+        var _ln = allLines[id];
+        if (_ln && (_selectedOperator === "JR-East"
+          ? (window.TransitConstants && window.TransitConstants.isJRERoute ? window.TransitConstants.isJRERoute(_ln) : _ln.operator === "JR-East")
+          : _ln.operator === _selectedOperator)) {
           filtered[id] = allLines[id];
         }
       });

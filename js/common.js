@@ -61,6 +61,15 @@
       "IGR", "Aoimori"
     ],
     NORMALIZE: TRANSIT_NORMALIZE,
+    // JRE (JR東日本) 白名单：路線記号 JA~JY 全覆盖；無記号の地方線（operator=JR-East）兜底
+    JRE_MARK_CODES: ["JA","JB","JC","JE","JH","JI","JJ","JK","JL","JM","JN","JO","JS","JT","JU","JY"],
+    isJRERoute: function(line) {
+      if (!line) return false;
+      var code = String(line.code || "");
+      if (this.JRE_MARK_CODES.indexOf(code) >= 0) return true;
+      if (code.indexOf("JI-") === 0) return true;  // 鶴見線支線 JI-O / JI-U
+      return line.operator === "JR-East";          // 無記号の地方線（上越線・水郡線等）
+    },
     OP_NAMES: {},
     // Any format ("JR-East" / "JR_EAST" / "jr east") -> standard DB/ODPT key ("JR-East")
     normalizeOp: function(op) {
