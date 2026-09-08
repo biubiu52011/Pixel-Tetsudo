@@ -77,7 +77,7 @@
             base: "https://api-challenge.odpt.org/api/v4/",
             train: "odpt:Train?odpt:operator=odpt.Operator:JR-East",
             trainTimetable: "odpt:TrainTimetable?odpt:operator=odpt.Operator:JR-East",
-            trainInformation: null  // JR东日本不提供运行情报API
+            trainInformation: "odpt:TrainInformation?odpt:operator=odpt.Operator:jre-is" // v4.3.401: JR東日本の運行情報（odpt.Operator:jre-is，ODPT challenge 提供 88 条）
         },
         "Tobu": {
             base: "https://api-challenge.odpt.org/api/v4/",
@@ -227,9 +227,11 @@
         "Hamura": "Seibu",
         "Hanzomon": "TokyoMetro",
         "Hibiya": "TokyoMetro",
+        "ChuoTatsuno": "JR-East",
         // v4.3.400: ひたちなか海浜鉄道湊線 不是 MIR（首都圏新都市鉄道/つくばエクスプレス）——移除映射，
         // 否则会拉取/聚合つくばエクスプレスの運行情報（串线）。ODPT 无该运营者 TI → 落 no_odpt。
         "Iiyama": "JR-East",
+        "Yahiko": "JR-East",
         "Ikebukuro": "Seibu",
 
         "Ishinomaki": "JR-East",
@@ -238,6 +240,7 @@
         "JR_Yamaguchi": "JR West",
         "Joban": "JR-East",
         "JobanLocal": "JR-East",
+        "JobanMain": "JR-East",
         "Joetsu": "JR-East",
         "Kamaishi": "JR-East",
         "Kamiishi": "JR-East",
@@ -350,6 +353,7 @@
         "Tsurumi": "JR-East",
         "Tōnami": "JR-East",
         "Uchibo": "JR-East",
+        "UtsunomiyaJR": "JR-East",
         "Uetsu": "JR-East",
         "Utsunomiya": "Tobu",
         "Yamagata": "JR-East",
@@ -375,6 +379,7 @@
         "TokyuSetagaya": "Tokyu",
         "Tonami": "JR-East",
         "TsurumiOkawa": "JR-East",
+        "Tadami": "JR-East",
         "TsurumiUmiShibaura": "JR-East",
         "Yokohama": "JR-East",
         "Yamanote": "JR-East",
@@ -405,8 +410,8 @@
       "KeioZoo": "Dobutsuen",
       "KeioShin": "KeioNew",
       "TobuNoda": "TobuUrbanPark",
-      "TsurumiUmiShibaura": "Tsurumi",
-      "TsurumiOkawa": "Tsurumi",
+      "TsurumiUmiShibaura": "TsurumiUmiShibauraBranch",
+      "TsurumiOkawa": "TsurumiOkawaBranch",
       "ChiyodaBranch": "Chiyoda",
       "Noda": "TobuUrbanPark",
       "Nippori_Toneri": "NipporiToneri",
@@ -434,8 +439,19 @@
       "TokyuTamagawa": "TokyuTamagawa",
       "TokyuKodomonokuni": "Kodomonokuni",
       "MinatoMirai": "Minatomirai",
-      "TamaMonorail": "TamaMonorail"
-    };
+      "TamaMonorail": "TamaMonorail",
+    
+    "ChuoTatsuno": "ChuoTatsunoBranch",
+    "RikutoEast": "RikuEast",
+    "RikutsuWest": "RikuWest",
+    "UtsunomiyaJR": "Utsunomiya",
+    "JobanMain": "Joban",
+    "TohokuMain": "Tohoku",
+    "Yamagata": "OuYamagata",
+    "Kounan": "Hanawa",
+    "Miyo": "Yahiko",
+    "Yonezawa": "Yonesaka",
+    "Komii": "Koumi",};
 
     // 解析内部线路 key 为 ODPT Railway code（带别名）
     function resolveRailwayCode(operator, railway) {

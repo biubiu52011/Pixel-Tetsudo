@@ -140,10 +140,11 @@
       // 状态字段缺失/为 Normal 时用文本关键词补充（ダイヤ乱れ = 遅延）
       if (result.status === "normal") {
         // v4.3.392: 否定句排除——「現在、１５分以上の遅延はありません/遅延なし/平常運転」不是延误
-        var _neg = /\u3042\u308a\u307e\u305b\u3093|\u3054\u3056\u3044\u307e\u305b\u3093|\u306a\u3057|\u89e3\u6d88|\u5e73\u5e38\u904b\u8ee2|\u5e73\u5e38\u904b\u884c|\u5e73\u5e38\u3067\u3059|\u9589\u9381|\u904b\u8ee2\u518d\u958b/.test(text);
+        // v4.3.401: 恢复完成式排除——「運転を見合わせていましたが…再開しました/運転を再開しました」= 已恢复，不是運休
+        var _neg = /\u3042\u308a\u307e\u305b\u3093|\u3054\u3056\u3044\u307e\u305b\u3093|\u306a\u3057|\u89e3\u6d88|\u5e73\u5e38\u904b\u8ee2|\u5e73\u5e38\u904b\u884c|\u5e73\u5e38\u3067\u3059|\u9589\u9381|\u904b\u8ee2\u518d\u958b|\u518d\u958b\u3057\u307e\u3057\u305f|\u3092\u518d\u958b/.test(text);
         if (!_neg) {
           if (text.indexOf("\u904b\u4f11") >= 0 || text.indexOf("\u898b\u5408\u308f\u305b") >= 0 || text.toLowerCase().indexOf("suspended") >= 0) result.status = "suspended";
-          else if (text.indexOf("\u904b\u5ef6") >= 0 || text.indexOf("\u9045\u5ef6") >= 0 || text.indexOf("\u904b\u308c") >= 0 || text.indexOf("\u4e71\u308c") >= 0 || text.toLowerCase().indexOf("delay") >= 0) result.status = "delayed";
+          else if (text.indexOf("\u904b\u5ef6") >= 0 || text.indexOf("\u9045\u5ef6") >= 0 || text.indexOf("\u9045\u308c") >= 0 || text.indexOf("\u904b\u308c") >= 0 || text.indexOf("\u4e71\u308c") >= 0 || text.toLowerCase().indexOf("delay") >= 0) result.status = "delayed";
           else if (text.indexOf("\u7d42\u4e86") >= 0 || text.toLowerCase().indexOf("finished") >= 0) result.status = "suspended";
         }
       }
