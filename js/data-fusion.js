@@ -340,6 +340,14 @@
             var lop = TransitConstants && typeof TransitConstants.normalizeOp === "function" ? TransitConstants.normalizeOp(line.operator) : line.operator;
             if (!line || lop !== top || !line.stations) return;
             var idx = line.stations.indexOf(stationKey);
+            // v4.3.407: ODPT 站 ID 与项目站表差异（连字符 Musashi-Nakahara→MusashiNakahara、
+            // 大小写 Inagi-Naganuma→Inaginaganuma）——归一化（去连字符+小写）兜底匹配
+            if (idx < 0) {
+              var normKey = String(stationKey).replace(/-/g, "").toLowerCase();
+              for (var _si = 0; _si < line.stations.length; _si++) {
+                if (String(line.stations[_si]).replace(/-/g, "").toLowerCase() === normKey) { idx = _si; break; }
+              }
+            }
             if (idx < 0) return;
             matchingLines.push({ lid: lid, idx: idx, line: line });
           });
