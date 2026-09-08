@@ -303,6 +303,12 @@
     } catch(e) { console.error("[DataFusion] fuseAll error:", e.message); if (_lastFusedData) { emitUpdate(_lastFusedData); return _lastFusedData; } return null; }
   }
 
+  // v4.3.416: ODPT 站 ID 与项目站表拼写差异别名（项目冻结数据不动，仅匹配层转换）
+  // 五日市線 武蔵引田：ODPT MusashiHikida（官方罗马音 Hikida）→ 项目 Musashi-Hikita（历史拼写 d/t 混淆，冻结待用户决定是否修数据）
+  var STATION_ALIAS = {
+    "MusashiHikida": "Musashi-Hikita"
+  };
+
   function loadTrainPositions() {
     try {
       var positionSource = window.ODPT_TRAIN_POSITIONS || window.ODPT_TRAINS;
@@ -330,6 +336,8 @@
           var fromId = t["odpt:fromStation"] || "";
           var stationKey = String(fromId).split(".").pop();
           if (!stationKey) return;
+          // v4.3.416: 别名转换（ODPT 拼写差异站 ID → 项目站表 ID）
+          if (STATION_ALIAS[stationKey]) stationKey = STATION_ALIAS[stationKey];
           var delayMin = t["odpt:delay"] != null ? (parseInt(t["odpt:delay"], 10) || 0) : 0;
           var trainId = t["odpt:trainNumber"] || t["odpt:train"] || "";
           var railDirection = t["odpt:railDirection"] || "";
@@ -485,6 +493,18 @@
       } catch(timetableErr) { console.debug("[DataFusion] Missing timetable detection error:", timetableErr.message); }
 
       try { fuseAll(); } catch(e) { console.debug("[DataFusion] loadTrainPositions->fuseAll error:", e.message); }
+
+      // v4.3.416: 延迟二次校准——ODPT_TRAINS 分批写入 / DataLayer 晚构建时，
+      // 首次调用可能漏掉部分线路（实测 Ome/Itsukaichi 偶发 0 而 ChuoRapid 正常），
+      // 3 秒后重跑一次补齐（幂等；每次 posPromises 完成后由 odpt-unified 重置 _calibrated）
+      if (!loadTrainPositions._calibrated) {
+        loadTrainPositions._calibrated = true;
+        clearTimeout(loadTrainPositions._calib);
+        loadTrainPositions._calib = setTimeout(function() {
+          loadTrainPositions._retry = 0;
+          try { loadTrainPositions(); } catch(e) {}
+        }, 3000);
+      }
     } catch(e) { console.debug("[DataFusion] loadTrainPositions error:", e.message); }
   }
 

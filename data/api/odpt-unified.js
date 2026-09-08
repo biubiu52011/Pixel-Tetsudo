@@ -906,7 +906,11 @@
                 return;
             }
             try {
-                window.DataFusion.loadTrainPositions();
+                // v4.3.416: 每次位置推送重置二次校准 flag，刷新周期内只补一次
+                if (window.DataFusion.loadTrainPositions) {
+                    window.DataFusion.loadTrainPositions._calibrated = false;
+                    window.DataFusion.loadTrainPositions();
+                }
             } catch(e) { console.debug("[ODPT] train positions push error:", e.message); }
             console.debug("[ODPT] Realtime positions pushed:", loaded.positions, "operators");
         }
