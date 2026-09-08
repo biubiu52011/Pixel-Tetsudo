@@ -182,12 +182,15 @@
           }
         }
       }
-      // 2) 干线本名（TRUNK）延伸——数据保留的干线本名线路若端点与运行系统主线相接，
-      // 作为延伸段显示其列车（如 中央本線 ChuoMain 高尾→塩尻 延伸自 中央快速 ChuoRapid 高尾站）
+      // 2) 干线本名（TRUNK）延伸——4.3.421 起改为显式白名单（当前为空，即不延伸任何干线本名）。
+      //    原自动判定（端点相接）导致横須賀線（東京）误延伸整条東海道本線（東京→熱海 并行线非直通）；
+      //    中央本線已独立 CO 卡（4.3.414），TRUNK_MAIN_LINE_IDS 余项（Shinetsu/TokaidoMain/TohokuMain）
+      //    均非运行系统的直通延伸段。未来确有需要时在此显式登记，例：{ ChuoRapid: ["ChuoMain"] }。
       var trunk = (window.DataState && window.DataState.TRUNK_MAIN_LINE_IDS) || [];
+      var _TRUNK_EXTENSION_ALLOW = {};
       for (var ti = 0; ti < trunk.length; ti++) {
         var tlid = trunk[ti];
-        if (tlid === lineId) continue;
+        if (!_TRUNK_EXTENSION_ALLOW[tlid]) continue;
         var tl = src[tlid];
         if (!tl || !tl.stations || tl.stations.length < 2) continue;
         var already = false;
