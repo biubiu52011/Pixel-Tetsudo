@@ -101,6 +101,8 @@
       var ti = raw["odpt:trainInformationText"] || "";
       var text = typeof ti === "string" ? ti : (typeof ti === "object" && ti !== null ? (ti.ja || ti.en || ti.zh || JSON.stringify(ti)) : "");
       if (!text) return result;
+      // v4.3.389: 保留原文全文（弹窗直接显示，不依赖碎片解析）
+      result.detail = text;
       // 状态字段缺失/为 Normal 时用文本关键词补充（ダイヤ乱れ = 遅延）
       if (result.status === "normal") {
         if (text.indexOf("\u904b\u4f11") >= 0 || text.indexOf("\u898b\u5408\u308f\u305b") >= 0 || text.toLowerCase().indexOf("suspended") >= 0) result.status = "suspended";

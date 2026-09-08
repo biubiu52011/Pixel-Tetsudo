@@ -84,12 +84,15 @@
       }
     }
     intervalSection.querySelector(".rs-interval-stations").innerHTML = intervalHtml;
-    // Cause section
+    // Cause section -> 運行情報（v4.3.389: 直接显示 ODPT text 原文，不解析碎片）
     var causeSection = modal.querySelector(".rs-cause-section");
-    causeSection.querySelector(".rs-section-title").textContent = t("status.delay_cause");
+    var _detailTitles = { ja: "運行情報", en: "Service Info", zh: "运行信息", ko: "운행 정보" };
+    causeSection.querySelector(".rs-section-title").textContent = _detailTitles[(window.currentLang || "ja")] || "運行情報";
     var causeHtml;
     if (status === "no_data") {
       causeHtml = '<span class="rs-text-muted">' + t("status.no_data") + '</span>';
+    } else if (delayInfo.detail) {
+      causeHtml = escapeHtml(delayInfo.detail);
     } else if (cause) {
       causeHtml = escapeHtml(cause);
     } else {
