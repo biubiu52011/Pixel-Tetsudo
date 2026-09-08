@@ -4163,12 +4163,6 @@
     },
     {
      "station": "Kita-Senju",
-     "lineId": "JobanLocal",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Kita-Senju",
      "lineId": "Hibiya",
      "type": "in",
      "note": ""
@@ -4238,6 +4232,12 @@
      "lineId": "Keisei",
      "type": "out",
      "note": "京成上野，徒歩約3分"
+    },
+    {
+     "station": "Toride",
+     "lineId": "JobanMain",
+     "type": "in",
+     "note": ""
     }
    ]
   },
@@ -6071,7 +6071,6 @@
    "durationTotalMin": 45,
    "branchOf": null,
    "stations": [
-    "Kita-Senju",
     "Ayase",
     "Kameari",
     "Kanamachi",
@@ -6100,42 +6099,10 @@
     2,
     2,
     2,
-    2,
-    2,
     2
    ],
    "throughServices": [],
    "transferStations": [
-    {
-     "station": "Kita-Senju",
-     "lineId": "Joban",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Kita-Senju",
-     "lineId": "Hibiya",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Kita-Senju",
-     "lineId": "Chiyoda",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Kita-Senju",
-     "lineId": "TsukubaExpress",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Kita-Senju",
-     "lineId": "TobuSkytree",
-     "type": "in",
-     "note": ""
-    },
     {
      "station": "Ayase",
      "lineId": "Chiyoda",
@@ -6193,6 +6160,12 @@
     {
      "station": "Toride",
      "lineId": "Joban",
+     "type": "in",
+     "note": ""
+    },
+    {
+     "station": "Toride",
+     "lineId": "JobanMain",
      "type": "in",
      "note": ""
     }
@@ -11015,7 +10988,14 @@
     2
    ],
    "throughServices": [],
-   "transferStations": []
+   "transferStations": [
+    {
+     "station": "Katsuta",
+     "lineId": "JobanMain",
+     "type": "in",
+     "note": ""
+    }
+   ]
   },
   "Ome": {
    "name": "Ome",
@@ -12939,6 +12919,12 @@
     {
      "station": "Koriyama",
      "lineId": "TohokuMain",
+     "type": "in",
+     "note": ""
+    },
+    {
+     "station": "Iwaki",
+     "lineId": "JobanMain",
      "type": "in",
      "note": ""
     }
@@ -16351,6 +16337,12 @@
      "lineId": "Komii",
      "type": "in",
      "note": ""
+    },
+    {
+     "station": "Tomobe",
+     "lineId": "JobanMain",
+     "type": "in",
+     "note": ""
     }
    ]
   },
@@ -19384,6 +19376,12 @@
      "lineId": "TohokuMain",
      "type": "in",
      "note": ""
+    },
+    {
+     "station": "Mito",
+     "lineId": "JobanMain",
+     "type": "in",
+     "note": ""
     }
    ],
    "branches": [
@@ -19754,6 +19752,12 @@
     {
      "station": "Morioka",
      "lineId": "IGR",
+     "type": "in",
+     "note": ""
+    },
+    {
+     "station": "Iwanuma",
+     "lineId": "JobanMain",
      "type": "in",
      "note": ""
     }
@@ -24177,20 +24181,20 @@
     2
    ],
    "throughServices": [],
-    "transferStations": [
-     {
-      "station": "Ayase",
-      "lineId": "Chiyoda",
-      "type": "in",
-      "note": ""
-     },
-     {
-      "station": "Ayase",
-      "lineId": "JobanLocal",
-      "type": "in",
-      "note": ""
-     }
-    ]
+   "transferStations": [
+    {
+     "station": "Ayase",
+     "lineId": "Chiyoda",
+     "type": "in",
+     "note": ""
+    },
+    {
+     "station": "Ayase",
+     "lineId": "JobanLocal",
+     "type": "in",
+     "note": ""
+    }
+   ]
   },
   "ChuoTatsuno": {
    "name": "ChuoTatsuno",
@@ -24265,6 +24269,128 @@
    ],
    "throughServices": [],
    "transferStations": []
+  },
+  "JobanMain": {
+   "name": "Joban",
+   "nameEn": "Joban Line",
+   "nameJa": "常磐線",
+   "code": null,
+   "color": "#00a2e1",
+   "operator": "JR-East",
+   "region": null,
+   "type": "straight",
+   "durationTotalMin": null,
+   "branchOf": null,
+   "stations": [
+    "Toride",
+    "Fujishiro",
+    "Ryugasaki",
+    "Ushiku",
+    "Hitachino-Ushiku",
+    "Arakawaoki",
+    "Tsuchiura",
+    "Kandatsu",
+    "Takahama",
+    "Ishioka",
+    "Hatori",
+    "Iwama",
+    "Tomobe",
+    "Uchihara",
+    "Akatsuka",
+    "Mito",
+    "Katsuta",
+    "Sawa",
+    "Tokai",
+    "Omika",
+    "Hitachi-Taga",
+    "Hitachi",
+    "Ogitsu",
+    "Juo",
+    "Takahagi",
+    "Minami-Nakago",
+    "Isohara",
+    "Otsuko",
+    "Nakoso",
+    "Ueda",
+    "Izumi",
+    "Yumoto",
+    "Uchigo",
+    "Iwaki",
+    "Kusano",
+    "Yotsukura",
+    "Hisanohama",
+    "Suetsugi",
+    "Hirono",
+    "J-Village",
+    "Kido",
+    "Tatsuta",
+    "Tomioka",
+    "Yonomori",
+    "Ono-Fukushima",
+    "Futaba",
+    "Namie",
+    "Momouchi",
+    "Odaka",
+    "Iwaki-Ota",
+    "Haranomachi",
+    "Kashima",
+    "Nittaki",
+    "Soma",
+    "Komagamine",
+    "Shinchi",
+    "Sakamoto",
+    "Yamashita-Miyagi",
+    "Hamayoshida",
+    "Watari",
+    "Okuma",
+    "Iwanuma"
+   ],
+   "durations": [],
+   "throughServices": [],
+   "transferStations": [
+    {
+     "station": "Toride",
+     "lineId": "Joban",
+     "type": "in",
+     "note": ""
+    },
+    {
+     "station": "Toride",
+     "lineId": "JobanLocal",
+     "type": "in",
+     "note": ""
+    },
+    {
+     "station": "Tomobe",
+     "lineId": "Mito",
+     "type": "in",
+     "note": ""
+    },
+    {
+     "station": "Mito",
+     "lineId": "Suigun",
+     "type": "in",
+     "note": ""
+    },
+    {
+     "station": "Katsuta",
+     "lineId": "HitachiNakaKaimin",
+     "type": "in",
+     "note": ""
+    },
+    {
+     "station": "Iwaki",
+     "lineId": "BanetsuEast",
+     "type": "in",
+     "note": ""
+    },
+    {
+     "station": "Iwanuma",
+     "lineId": "TohokuMain",
+     "type": "in",
+     "note": ""
+    }
+   ]
   }
  },
  "name_map": {
@@ -24290,7 +24416,7 @@
   "とうきょうスカイツリー": "TOKYO SKYTREE",
   "ときわ台": "Tokiwadai",
   "はるひ野": "Haruhino",
-  "ひたち野うしく": "Hitachinoushiku",
+  "ひたち野うしく": "Hitachino-Ushiku",
   "ひばりヶ丘": "Hibarigaoka",
   "ふじみ野": "Fujimino",
   "みずほ台": "Mizuhodai",
@@ -25760,7 +25886,7 @@
   "麻布十番": "Azabu-Juban",
   "黄金町": "Koganechō",
   "黒川": "Kurokawa",
-  "龍ケ崎市": "Ryugasakishi",
+  "龍ケ崎市": "Ryugasaki",
   "Ｊヴィレッジ": "J-Village",
   "足立": "Adachi",
   "曙": "Akebono",
@@ -25971,7 +26097,13 @@
   "TokyoBigSight": "東京ビッグサイト",
   "武蔵堺": "Musashi-sakai",
   "武蔵狭山": "Musashisakai",
-  "Shin-Ochanomizu": "神保町"
+  "Shin-Ochanomizu": "神保町",
+  "久之浜": "Hisanohama",
+  "Jヴィレッジ": "J-Village",
+  "水戸": "Mito",
+  "友部": "Tomobe",
+  "いわき": "Iwaki",
+  "岩沼": "Iwanuma"
  },
  "tourism": {
   "Adachi": {
@@ -33422,7 +33554,6 @@
   ],
   "Kita-Senju": [
    "Joban",
-   "JobanLocal",
    "Hibiya",
    "Chiyoda",
    "TsukubaExpress",
@@ -33448,7 +33579,8 @@
   ],
   "Toride": [
    "Joban",
-   "JobanLocal"
+   "JobanLocal",
+   "JobanMain"
   ],
   "Hatchobori": [
    "Keiyo",
@@ -35214,7 +35346,8 @@
    "TamaMonorail"
   ],
   "Katsuta": [
-   "HitachiNakaKaimin"
+   "HitachiNakaKaimin",
+   "JobanMain"
   ],
   "Koki-Mae": [
    "HitachiNakaKaimin"
@@ -35809,7 +35942,8 @@
    "Arakawa"
   ],
   "Iwaki": [
-   "BanetsuEast"
+   "BanetsuEast",
+   "JobanMain"
   ],
   "Akai": [
    "BanetsuEast"
@@ -37602,7 +37736,8 @@
    "Mito"
   ],
   "Tomobe": [
-   "Mito"
+   "Mito",
+   "JobanMain"
   ],
   "Higashi-Sanjo": [
    "Miyo",
@@ -39160,7 +39295,8 @@
    "Uchibo"
   ],
   "Mito": [
-   "Suigun"
+   "Suigun",
+   "JobanMain"
   ],
   "Hitachi-Aoba": [
    "Suigun"
@@ -39441,7 +39577,8 @@
    "TohokuMain"
   ],
   "Iwanuma": [
-   "TohokuMain"
+   "TohokuMain",
+   "JobanMain"
   ],
   "Tatekoshi-Tohoku": [
    "TohokuMain"
@@ -41214,6 +41351,174 @@
   ],
   "Okawa": [
    "TsurumiOkawa"
+  ],
+  "Fujishiro": [
+   "JobanMain"
+  ],
+  "Ryugasaki": [
+   "JobanMain"
+  ],
+  "Ushiku": [
+   "JobanMain"
+  ],
+  "Hitachino-Ushiku": [
+   "JobanMain"
+  ],
+  "Arakawaoki": [
+   "JobanMain"
+  ],
+  "Tsuchiura": [
+   "JobanMain"
+  ],
+  "Kandatsu": [
+   "JobanMain"
+  ],
+  "Takahama": [
+   "JobanMain"
+  ],
+  "Ishioka": [
+   "JobanMain"
+  ],
+  "Hatori": [
+   "JobanMain"
+  ],
+  "Iwama": [
+   "JobanMain"
+  ],
+  "Uchihara": [
+   "JobanMain"
+  ],
+  "Akatsuka": [
+   "JobanMain"
+  ],
+  "Sawa": [
+   "JobanMain"
+  ],
+  "Tokai": [
+   "JobanMain"
+  ],
+  "Omika": [
+   "JobanMain"
+  ],
+  "Hitachi-Taga": [
+   "JobanMain"
+  ],
+  "Hitachi": [
+   "JobanMain"
+  ],
+  "Ogitsu": [
+   "JobanMain"
+  ],
+  "Juo": [
+   "JobanMain"
+  ],
+  "Takahagi": [
+   "JobanMain"
+  ],
+  "Minami-Nakago": [
+   "JobanMain"
+  ],
+  "Isohara": [
+   "JobanMain"
+  ],
+  "Otsuko": [
+   "JobanMain"
+  ],
+  "Nakoso": [
+   "JobanMain"
+  ],
+  "Ueda": [
+   "JobanMain"
+  ],
+  "Izumi": [
+   "JobanMain"
+  ],
+  "Yumoto": [
+   "JobanMain"
+  ],
+  "Uchigo": [
+   "JobanMain"
+  ],
+  "Kusano": [
+   "JobanMain"
+  ],
+  "Yotsukura": [
+   "JobanMain"
+  ],
+  "Hisanohama": [
+   "JobanMain"
+  ],
+  "Suetsugi": [
+   "JobanMain"
+  ],
+  "Hirono": [
+   "JobanMain"
+  ],
+  "J-Village": [
+   "JobanMain"
+  ],
+  "Kido": [
+   "JobanMain"
+  ],
+  "Tatsuta": [
+   "JobanMain"
+  ],
+  "Tomioka": [
+   "JobanMain"
+  ],
+  "Yonomori": [
+   "JobanMain"
+  ],
+  "Ono-Fukushima": [
+   "JobanMain"
+  ],
+  "Futaba": [
+   "JobanMain"
+  ],
+  "Namie": [
+   "JobanMain"
+  ],
+  "Momouchi": [
+   "JobanMain"
+  ],
+  "Odaka": [
+   "JobanMain"
+  ],
+  "Iwaki-Ota": [
+   "JobanMain"
+  ],
+  "Haranomachi": [
+   "JobanMain"
+  ],
+  "Kashima": [
+   "JobanMain"
+  ],
+  "Nittaki": [
+   "JobanMain"
+  ],
+  "Soma": [
+   "JobanMain"
+  ],
+  "Komagamine": [
+   "JobanMain"
+  ],
+  "Shinchi": [
+   "JobanMain"
+  ],
+  "Sakamoto": [
+   "JobanMain"
+  ],
+  "Yamashita-Miyagi": [
+   "JobanMain"
+  ],
+  "Hamayoshida": [
+   "JobanMain"
+  ],
+  "Watari": [
+   "JobanMain"
+  ],
+  "Okuma": [
+   "JobanMain"
   ]
  },
  "lineStationOrder": {
@@ -41502,21 +41807,20 @@
    "Atami": 13
   },
   "JobanLocal": {
-   "Kita-Senju": 0,
-   "Ayase": 1,
-   "Kameari": 2,
-   "Kanamachi": 3,
-   "Matsudo": 4,
-   "Kita-Matsudo": 5,
-   "Mabashi": 6,
-   "Shin-Matsudo": 7,
-   "Kita-Kogane": 8,
-   "Minami-Kashiwa": 9,
-   "Kashiwa": 10,
-   "Kita-Kashiwa": 11,
-   "Abiko": 12,
-   "Tennodai": 13,
-   "Toride": 14
+   "Ayase": 0,
+   "Kameari": 1,
+   "Kanamachi": 2,
+   "Matsudo": 3,
+   "Kita-Matsudo": 4,
+   "Mabashi": 5,
+   "Shin-Matsudo": 6,
+   "Kita-Kogane": 7,
+   "Minami-Kashiwa": 8,
+   "Kashiwa": 9,
+   "Kita-Kashiwa": 10,
+   "Abiko": 11,
+   "Tennodai": 12,
+   "Toride": 13
   },
   "Ginza": {
    "Shibuya": 0,
@@ -44699,6 +45003,70 @@
   "TsurumiOkawa": {
    "Anzen": 0,
    "Okawa": 1
+  },
+  "JobanMain": {
+   "Toride": 0,
+   "Fujishiro": 1,
+   "Ryugasaki": 2,
+   "Ushiku": 3,
+   "Hitachino-Ushiku": 4,
+   "Arakawaoki": 5,
+   "Tsuchiura": 6,
+   "Kandatsu": 7,
+   "Takahama": 8,
+   "Ishioka": 9,
+   "Hatori": 10,
+   "Iwama": 11,
+   "Tomobe": 12,
+   "Uchihara": 13,
+   "Akatsuka": 14,
+   "Mito": 15,
+   "Katsuta": 16,
+   "Sawa": 17,
+   "Tokai": 18,
+   "Omika": 19,
+   "Hitachi-Taga": 20,
+   "Hitachi": 21,
+   "Ogitsu": 22,
+   "Juo": 23,
+   "Takahagi": 24,
+   "Minami-Nakago": 25,
+   "Isohara": 26,
+   "Otsuko": 27,
+   "Nakoso": 28,
+   "Ueda": 29,
+   "Izumi": 30,
+   "Yumoto": 31,
+   "Uchigo": 32,
+   "Iwaki": 33,
+   "Kusano": 34,
+   "Yotsukura": 35,
+   "Hisanohama": 36,
+   "Suetsugi": 37,
+   "Hirono": 38,
+   "J-Village": 39,
+   "Kido": 40,
+   "Tatsuta": 41,
+   "Tomioka": 42,
+   "Yonomori": 43,
+   "Ono-Fukushima": 44,
+   "Futaba": 45,
+   "Namie": 46,
+   "Momouchi": 47,
+   "Odaka": 48,
+   "Iwaki-Ota": 49,
+   "Haranomachi": 50,
+   "Kashima": 51,
+   "Nittaki": 52,
+   "Soma": 53,
+   "Komagamine": 54,
+   "Shinchi": 55,
+   "Sakamoto": 56,
+   "Yamashita-Miyagi": 57,
+   "Hamayoshida": 58,
+   "Watari": 59,
+   "Okuma": 60,
+   "Iwanuma": 61
   }
  }
 }

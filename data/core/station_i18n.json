@@ -19576,5 +19576,317 @@
   "zh": "弥彦",
   "ko": "야히코",
   "en": "Yahiko"
+ },
+ "Fujishiro": {
+  "ja": "藤代",
+  "zh": "藤代",
+  "ko": "후지시로",
+  "en": "Fujishiro"
+ },
+ "Ryugasaki": {
+  "ja": "龍ケ崎市",
+  "zh": "龙崎市",
+  "ko": "류가사키시",
+  "en": "Ryugasaki"
+ },
+ "Ushiku": {
+  "ja": "牛久",
+  "zh": "牛久",
+  "ko": "우시쿠",
+  "en": "Ushiku"
+ },
+ "Hitachino-Ushiku": {
+  "ja": "ひたち野うしく",
+  "zh": "常陆野牛久",
+  "ko": "히타치노우시쿠",
+  "en": "Hitachino-Ushiku"
+ },
+ "Arakawaoki": {
+  "ja": "荒川沖",
+  "zh": "荒川冲",
+  "ko": "아라카와오키",
+  "en": "Arakawaoki"
+ },
+ "Tsuchiura": {
+  "ja": "土浦",
+  "zh": "土浦",
+  "ko": "쓰치우라",
+  "en": "Tsuchiura"
+ },
+ "Kandatsu": {
+  "ja": "神立",
+  "zh": "神立",
+  "ko": "간다쓰",
+  "en": "Kandatsu"
+ },
+ "Takahama": {
+  "ja": "高浜",
+  "zh": "高滨",
+  "ko": "다카하마",
+  "en": "Takahama"
+ },
+ "Ishioka": {
+  "ja": "石岡",
+  "zh": "石冈",
+  "ko": "이시오카",
+  "en": "Ishioka"
+ },
+ "Hatori": {
+  "ja": "羽鳥",
+  "zh": "羽鸟",
+  "ko": "하토리",
+  "en": "Hatori"
+ },
+ "Iwama": {
+  "ja": "岩間",
+  "zh": "岩间",
+  "ko": "이와마",
+  "en": "Iwama"
+ },
+ "Uchihara": {
+  "ja": "内原",
+  "zh": "内原",
+  "ko": "우치하라",
+  "en": "Uchihara"
+ },
+ "Sawa": {
+  "ja": "佐和",
+  "zh": "佐和",
+  "ko": "사와",
+  "en": "Sawa"
+ },
+ "Tokai": {
+  "ja": "東海",
+  "zh": "东海",
+  "ko": "도카이",
+  "en": "Tokai"
+ },
+ "Omika": {
+  "ja": "大甕",
+  "zh": "大瓮",
+  "ko": "오미카",
+  "en": "Omika"
+ },
+ "Hitachi-Taga": {
+  "ja": "常陸多賀",
+  "zh": "常陆多贺",
+  "ko": "히타치타가",
+  "en": "Hitachi-Taga"
+ },
+ "Hitachi": {
+  "ja": "日立",
+  "zh": "日立",
+  "ko": "히타치",
+  "en": "Hitachi"
+ },
+ "Ogitsu": {
+  "ja": "小木津",
+  "zh": "小木津",
+  "ko": "오기쓰",
+  "en": "Ogitsu"
+ },
+ "Juo": {
+  "ja": "十王",
+  "zh": "十王",
+  "ko": "주오",
+  "en": "Juo"
+ },
+ "Takahagi": {
+  "ja": "高萩",
+  "zh": "高萩",
+  "ko": "다카하기",
+  "en": "Takahagi"
+ },
+ "Minami-Nakago": {
+  "ja": "南中郷",
+  "zh": "南中乡",
+  "ko": "미나미나카고",
+  "en": "Minami-Nakago"
+ },
+ "Isohara": {
+  "ja": "磯原",
+  "zh": "矶原",
+  "ko": "이소하라",
+  "en": "Isohara"
+ },
+ "Otsuko": {
+  "ja": "大津港",
+  "zh": "大津港",
+  "ko": "오쓰코",
+  "en": "Otsuko"
+ },
+ "Nakoso": {
+  "ja": "勿来",
+  "zh": "勿来",
+  "ko": "나코소",
+  "en": "Nakoso"
+ },
+ "Ueda": {
+  "ja": "植田",
+  "zh": "植田",
+  "ko": "우에다",
+  "en": "Ueda"
+ },
+ "Uchigo": {
+  "ja": "内郷",
+  "zh": "内乡",
+  "ko": "우치고",
+  "en": "Uchigo"
+ },
+ "Kusano": {
+  "ja": "草野",
+  "zh": "草野",
+  "ko": "쿠사노",
+  "en": "Kusano"
+ },
+ "Yotsukura": {
+  "ja": "四ツ倉",
+  "zh": "四仓",
+  "ko": "요쓰쿠라",
+  "en": "Yotsukura"
+ },
+ "Hisanohama": {
+  "ja": "久之浜",
+  "zh": "久之滨",
+  "ko": "히사노하마",
+  "en": "Hisanohama"
+ },
+ "Suetsugi": {
+  "ja": "末続",
+  "zh": "末续",
+  "ko": "스에쓰기",
+  "en": "Suetsugi"
+ },
+ "Hirono": {
+  "ja": "広野",
+  "zh": "广野",
+  "ko": "히로노",
+  "en": "Hirono"
+ },
+ "J-Village": {
+  "ja": "Jヴィレッジ",
+  "zh": "J村",
+  "ko": "J빌리지",
+  "en": "J-Village"
+ },
+ "Kido": {
+  "ja": "木戸",
+  "zh": "木户",
+  "ko": "키도",
+  "en": "Kido"
+ },
+ "Tatsuta": {
+  "ja": "竜田",
+  "zh": "龙田",
+  "ko": "다쓰타",
+  "en": "Tatsuta"
+ },
+ "Tomioka": {
+  "ja": "富岡",
+  "zh": "富冈",
+  "ko": "도미오카",
+  "en": "Tomioka"
+ },
+ "Yonomori": {
+  "ja": "夜ノ森",
+  "zh": "夜之森",
+  "ko": "요노모리",
+  "en": "Yonomori"
+ },
+ "Ono-Fukushima": {
+  "ja": "大野",
+  "zh": "大野",
+  "ko": "오노",
+  "en": "Ono"
+ },
+ "Futaba": {
+  "ja": "双葉",
+  "zh": "双叶",
+  "ko": "후타바",
+  "en": "Futaba"
+ },
+ "Namie": {
+  "ja": "浪江",
+  "zh": "浪江",
+  "ko": "나미에",
+  "en": "Namie"
+ },
+ "Momouchi": {
+  "ja": "桃内",
+  "zh": "桃内",
+  "ko": "모모우치",
+  "en": "Momouchi"
+ },
+ "Odaka": {
+  "ja": "小高",
+  "zh": "小高",
+  "ko": "오다카",
+  "en": "Odaka"
+ },
+ "Iwaki-Ota": {
+  "ja": "磐城太田",
+  "zh": "磐城太田",
+  "ko": "이와키오타",
+  "en": "Iwaki-Ota"
+ },
+ "Haranomachi": {
+  "ja": "原ノ町",
+  "zh": "原之町",
+  "ko": "하라노마치",
+  "en": "Haranomachi"
+ },
+ "Nittaki": {
+  "ja": "日立木",
+  "zh": "日立木",
+  "ko": "닛타키",
+  "en": "Nittaki"
+ },
+ "Soma": {
+  "ja": "相馬",
+  "zh": "相马",
+  "ko": "소마",
+  "en": "Soma"
+ },
+ "Komagamine": {
+  "ja": "駒ケ嶺",
+  "zh": "驹岭",
+  "ko": "고마가미네",
+  "en": "Komagamine"
+ },
+ "Shinchi": {
+  "ja": "新地",
+  "zh": "新地",
+  "ko": "신치",
+  "en": "Shinchi"
+ },
+ "Sakamoto": {
+  "ja": "坂元",
+  "zh": "坂元",
+  "ko": "사카모토",
+  "en": "Sakamoto"
+ },
+ "Yamashita-Miyagi": {
+  "ja": "山下",
+  "zh": "山下",
+  "ko": "야마시타",
+  "en": "Yamashita"
+ },
+ "Hamayoshida": {
+  "ja": "浜吉田",
+  "zh": "滨吉田",
+  "ko": "하마요시다",
+  "en": "Hamayoshida"
+ },
+ "Watari": {
+  "ja": "亘理",
+  "zh": "亘理",
+  "ko": "와타리",
+  "en": "Watari"
+ },
+ "Okuma": {
+  "ja": "逢隈",
+  "zh": "逢隈",
+  "ko": "오쿠마",
+  "en": "Okuma"
  }
 }
