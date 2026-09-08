@@ -8,13 +8,13 @@
 
   // ========== Status definitions ==========
   var STATUS_META = {
-    normal:    { icon: "\u25cb", cls: "rs-status-icon-normal",    label: "normal"    },
-    notice:    { icon: "\uff01", cls: "rs-status-icon-notice",    label: "notice"    },
-    delayed:   { icon: "\u25b3", cls: "rs-status-icon-delayed",  label: "delayed"   },
-    suspended: { icon: "\u00d7", cls: "rs-status-icon-suspended", label: "suspended" },
-    no_data:   { icon: "\u25cc", cls: "rs-status-icon-no-data",   label: "no_data"  },
-    no_odpt:   { icon: "\u25cf", cls: "rs-status-icon-no-odpt",   label: "no_odpt"  },
-    loading:   { icon: "\u25d0", cls: "rs-status-icon-loading",   label: "loading"  }
+    normal:    { icon: '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="5.2" fill="none" stroke="currentColor" stroke-width="2"/></svg>', cls: "rs-status-icon-normal",    label: "normal"    },
+    notice:    { icon: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2.8v6.2" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="8" cy="12.6" r="1.15" fill="currentColor"/></svg>', cls: "rs-status-icon-notice",    label: "notice"    },
+    delayed:   { icon: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2.6 L14 13.2 H2 Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>', cls: "rs-status-icon-delayed",  label: "delayed"   },
+    suspended: { icon: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.2 4.2 L11.8 11.8 M11.8 4.2 L4.2 11.8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>', cls: "rs-status-icon-suspended", label: "suspended" },
+    no_data:   { icon: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2.4 L13.6 8 L8 13.6 L2.4 8 Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>', cls: "rs-status-icon-no-data",   label: "no_data"  },
+    no_odpt:   { icon: '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="5.2" fill="currentColor"/></svg>', cls: "rs-status-icon-no-odpt",   label: "no_odpt"  },
+    loading:   { icon: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2.4 A5.6 5.6 0 0 0 8 13.6 Z" fill="currentColor"/><circle cx="8" cy="8" r="5.6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>', cls: "rs-status-icon-loading",   label: "loading"  }
   };
 
   // ========== Internal state ==========
