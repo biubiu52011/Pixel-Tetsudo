@@ -335,6 +335,9 @@
    * @param {Object} linesObj - line ID -> line data map
    * @param {Object} options - { mode, lineOrder }
    */
+  // 干线本名（非運行系統）不进线路一览；数据保留作换乘锚点/支线父线
+  var TRUNK_MAIN_LINE_IDS = ["ChuoMain", "TokaidoMain", "TohokuMain"];
+
   function renderList(container, linesObj, options) {
     if (!container || !linesObj || typeof linesObj !== "object" || Object.keys(linesObj).length === 0) {
       container.innerHTML = '<div class="rs-empty">' + (typeof window.t === "function" ? window.t("status.no_trains") : "No data") + '</div>';
@@ -357,6 +360,9 @@
       // Line Hierarchy Rule: 真支线（branchOf 非空）严禁在一级总列表独立展示，
       // 只在父线卡片/详情内展示。平级独立运营线（branchOf=null）照常平铺。
       if (line.branchOf) continue;
+      // 国鉄幹線本名（类比京沪铁路/成渝铁路）不是運行系統：中央本線/東海道本線/東北本線 不进入线路一览，
+      // 数据保留作换乘锚点/支线父线。
+      if (TRUNK_MAIN_LINE_IDS.indexOf(lid) >= 0) continue;
       var op = line.operator || "Unknown";
       if (!groups[op]) {
         groups[op] = [];
