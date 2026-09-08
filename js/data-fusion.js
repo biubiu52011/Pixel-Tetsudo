@@ -308,7 +308,17 @@
       var positionSource = window.ODPT_TRAIN_POSITIONS || window.ODPT_TRAINS;
       if (!positionSource) return;
       var allLines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : (window.UNIFIED_LINES || {});
-      if (!allLines || Object.keys(allLines).length === 0) return;
+      if (!allLines || Object.keys(allLines).length === 0) {
+        // v4.3.413: DataLayer/UNIFIED_LINES 未就绪时延迟重试（最多 10 次），
+        // 避免 ODPT 列车位置先于线路数据到达导致静默 return、实时位置永久丢失
+        if (!loadTrainPositions._retry) loadTrainPositions._retry = 0;
+        if (loadTrainPositions._retry < 10) {
+          loadTrainPositions._retry++;
+          setTimeout(loadTrainPositions, 300);
+        }
+        return;
+      }
+      loadTrainPositions._retry = 0;
       var posMap = {};
       odptData.trains = {};
       Object.keys(window.ODPT_TRAINS).forEach(function(op) {

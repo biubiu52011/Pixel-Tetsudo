@@ -346,7 +346,7 @@
    * @param {Object} options - { mode, lineOrder }
    */
   // 干线本名（非運行系統）不进线路一览；数据保留作换乘锚点/支线父线
-  var TRUNK_MAIN_LINE_IDS = ["ChuoMain", "Shinetsu", "TokaidoMain", "TohokuMain"];
+  var TRUNK_MAIN_LINE_IDS = ["Shinetsu", "TokaidoMain", "TohokuMain"];
 
   function renderList(container, linesObj, options) {
     if (!container || !linesObj || typeof linesObj !== "object" || Object.keys(linesObj).length === 0) {
