@@ -407,21 +407,30 @@
       "TsurumiUmiShibaura": "Tsurumi",
       "TsurumiOkawa": "Tsurumi",
       "ChiyodaBranch": "Chiyoda",
+      "Noda": "TobuUrbanPark",
+      "Nippori_Toneri": "NipporiToneri",
+      "TobuIsesaki": "Isesaki",
+      "Daishi_Tobu": "Daishi",
+      "KeioInokashira": "Inokashira",
+      "KeioKeibajo": "Keibajo",
+      "KeioTakao": "Takao",
+      "Tobu_Kameido": "Kameido",
+      "TobuNikko": "Nikko",
       "YokohamaBlue": "Blue",
       "YokohamaGreen": "Green",
       "SotetsuMain": "Main",
       "SotetsuIzumino": "Izumino",
       "SotetsuShin-Yokohama": "Shinyokohama",
-      "TokyuDenEn": "Denentoshi",
+      "TokyuDenEn": "DenEnToshi",
       "TokyuToyoko": "Toyoko",
       "TokyuMeguro": "Meguro",
       "TokyuOimachi": "Oimachi",
       "TokyuIkegami": "Ikegami",
       "TokyuSetagaya": "Setagaya",
-      "TokyuTamagawa": "Tamagawa",
+      "TokyuTamagawa": "TokyuTamagawa",
       "TokyuKodomonokuni": "Kodomonokuni",
       "MinatoMirai": "Minatomirai",
-      "TamaMonorail": "Tama"
+      "TamaMonorail": "TamaMonorail"
     };
 
     // 解析内部线路 key 为 ODPT Railway code（带别名）
@@ -804,11 +813,13 @@
             if (ep.trainInformation) {
                 subPromises.push(
                     fetchODPT(buildUrl(op, 'trainInformation')).then(extractData).then(function(data) {
-                        if (data && data.length > 0) {
-                            // v4.3.386: 保留全部记录（ODPT 按运行系统返回多条，data[0] 只留首条会丢其他线路的延误）
-                            window.ODPT_DELAY_DATA[op] = data;
-                            loaded.delay++;
-                        }
+                        // v4.3.386: 保留全部记录（ODPT 按运行系统返回多条，data[0] 只留首条会丢其他线路的延误）
+                        // v4.3.392: 成功即写入（空数组=确认无记录→UI normal）；失败标记 null（→UI 情報なし，不伪装成正常）
+                        window.ODPT_DELAY_DATA[op] = (data && data.length > 0) ? data : [];
+                        loaded.delay++;
+                    }).catch(function(e) {
+                        window.ODPT_DELAY_DATA[op] = null;
+                        console.debug("[ODPT] " + op + " trainInformation fetch failed:", e && e.message);
                     })
                 );
             }
@@ -817,11 +828,14 @@
             if (ep.train) {
                 subPromises.push(
                     fetchODPT(buildUrl(op, 'train')).then(extractData).then(function(data) {
-                        if (data && data.length > 0) {
-                            window.ODPT_TRAIN_POSITIONS[op] = data;
-                            window.ODPT_TRAINS[op] = data;  // 向后兼容
-                            loaded.positions++;
-                        }
+                        // v4.3.392: 成功即写入（空数组也写入），失败不拖垮全局推送
+                        window.ODPT_TRAIN_POSITIONS[op] = (data && data.length > 0) ? data : [];
+                        window.ODPT_TRAINS[op] = window.ODPT_TRAIN_POSITIONS[op];  // 向后兼容
+                        loaded.positions++;
+                    }).catch(function(e) {
+                        window.ODPT_TRAIN_POSITIONS[op] = null;
+                        window.ODPT_TRAINS[op] = null;
+                        console.debug("[ODPT] " + op + " train positions fetch failed:", e && e.message);
                     })
                 );
             }

@@ -26,6 +26,7 @@
     delayed:   { icon: "\u25b3", color: "orange" },
     suspended: { icon: "\u00d7", color: "red"  },
     no_data:   { icon: "\u25cc", color: "gray"   },
+    no_odpt:   { icon: "\u25cc", color: "gray"   },
   };
 
   function getDelayInfo(line) {
@@ -89,7 +90,7 @@
     var _detailTitles = { ja: "運行情報", en: "Service Info", zh: "运行信息", ko: "운행 정보" };
     causeSection.querySelector(".rs-section-title").textContent = _detailTitles[(window.currentLang || "ja")] || "運行情報";
     var causeHtml;
-    if (status === "no_data") {
+    if (status === "no_data" || status === "no_odpt") {
       causeHtml = '<span class="rs-text-muted">' + t("status.no_data") + '</span>';
     } else if (delayInfo.detail) {
       causeHtml = escapeHtml(delayInfo.detail);
@@ -107,7 +108,7 @@
     if (fused && fused.timestamp) {
       var d = new Date(fused.timestamp);
       updateTime = d.getHours().toString().padStart(2,"0") + ":" + d.getMinutes().toString().padStart(2,"0");
-    } else if (status === "no_data") {
+    } else if (status === "no_data" || status === "no_odpt") {
       updateTime = t("status.no_data");
     } else {
       updateTime = t("status.unknown");

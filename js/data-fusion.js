@@ -139,9 +139,13 @@
       result.detail = text;
       // 状态字段缺失/为 Normal 时用文本关键词补充（ダイヤ乱れ = 遅延）
       if (result.status === "normal") {
-        if (text.indexOf("\u904b\u4f11") >= 0 || text.indexOf("\u898b\u5408\u308f\u305b") >= 0 || text.toLowerCase().indexOf("suspended") >= 0) result.status = "suspended";
-        else if (text.indexOf("\u904b\u5ef6") >= 0 || text.indexOf("\u9045\u5ef6") >= 0 || text.indexOf("\u904b\u308c") >= 0 || text.indexOf("\u4e71\u308c") >= 0 || text.toLowerCase().indexOf("delay") >= 0) result.status = "delayed";
-        else if (text.indexOf("\u7d42\u4e86") >= 0 || text.toLowerCase().indexOf("finished") >= 0) result.status = "suspended";
+        // v4.3.392: 否定句排除——「現在、１５分以上の遅延はありません/遅延なし/平常運転」不是延误
+        var _neg = /\u3042\u308a\u307e\u305b\u3093|\u3054\u3056\u3044\u307e\u305b\u3093|\u306a\u3057|\u89e3\u6d88|\u5e73\u5e38\u904b\u8ee2|\u5e73\u5e38\u904b\u884c|\u5e73\u5e38\u3067\u3059|\u9589\u9381|\u904b\u8ee2\u518d\u958b/.test(text);
+        if (!_neg) {
+          if (text.indexOf("\u904b\u4f11") >= 0 || text.indexOf("\u898b\u5408\u308f\u305b") >= 0 || text.toLowerCase().indexOf("suspended") >= 0) result.status = "suspended";
+          else if (text.indexOf("\u904b\u5ef6") >= 0 || text.indexOf("\u9045\u5ef6") >= 0 || text.indexOf("\u904b\u308c") >= 0 || text.indexOf("\u4e71\u308c") >= 0 || text.toLowerCase().indexOf("delay") >= 0) result.status = "delayed";
+          else if (text.indexOf("\u7d42\u4e86") >= 0 || text.toLowerCase().indexOf("finished") >= 0) result.status = "suspended";
+        }
       }
       // 延迟分钟：排除时刻（18時08分頃 的 "08分" 不是延迟）
       var m = text.match(/(?:\u7d04|\u304a\u3088\u305d)?\s*(\d{1,3})\s*(?:\u5206\u9593|\u5206|min)(?!\u9803|\u5f8c|\u4ee5)/i);
@@ -238,7 +242,10 @@
       try {
         var _opLine = window.ODPTClient && window.ODPTClient.LINE_TO_OPERATOR ? (window.ODPTClient.LINE_TO_OPERATOR[lineId] || window.ODPTClient.LINE_TO_OPERATOR[line.name]) : null;
         if (_opLine && window.ODPTClient.supports && window.ODPTClient.supports(_opLine, 'trainInformation')) {
-          fallbackDelay = { status: "normal", maxDelay: 0, interval: null, cause: null };
+          // v4.3.392: 数据源获取失败(null)→情報なし(no_odpt)；成功但无记录→正常(normal)——不把丢失伪装成正常
+          var _opKey = TransitConstants && typeof TransitConstants.normalizeOp === "function" ? TransitConstants.normalizeOp(_opLine) : _opLine;
+          var _opFailed = !!(odptData.delayInfo && _opKey && odptData.delayInfo[_opKey] === null);
+          fallbackDelay = _opFailed ? { status: "no_odpt", maxDelay: 0, interval: null, cause: null } : { status: "normal", maxDelay: 0, interval: null, cause: null };
         }
       } catch(_e) {}
       var delayInfo = apiInfo || (_hasLocal && { status: localStatus.status, maxDelay: localStatus.maxDelay, interval: localStatus.interval, cause: localStatus.cause }) || fallbackDelay;
