@@ -175,7 +175,11 @@
     // otherwise fall back to the 記号 badge.
     var iconHtml = "";
     if (sys.icon) {
-      iconHtml = '<img class="rs-line-icon" src="' + escapeHtml(sys.icon) + '" alt="" loading="lazy">';
+      if (String(sys.icon).indexOf("JRグループ.png") !== -1) {
+        iconHtml = '<div class="rs-line-icon-fallback"><img src="' + escapeHtml(sys.icon) + '" alt="JR"></div>';
+      } else {
+        iconHtml = '<img class="rs-line-icon" src="' + escapeHtml(sys.icon) + '" alt="" loading="lazy">';
+      }
     } else {
       var _firstLine = memberIds.length > 0 ? (linesObj[memberIds[0]] || {}) : {};
       var _sysOp = _firstLine.operator || sys.operator || "";
@@ -220,7 +224,11 @@
     var _losIcon = (window.LineOperationSystemsResolveIcon && window.LineOperationSystemsResolveIcon(lineId)) || "";
     var _imgOk = _losIcon || (line.image && !/(グループ|ロゴ|マーク|アイコン|シンボル)/.test(line.image));
     if (_losIcon) {
-      iconHtml = '<img class="rs-line-icon" src="' + escapeHtml(_losIcon) + '" alt="" loading="lazy">';
+      if (String(_losIcon).indexOf("JRグループ.png") !== -1) {
+        iconHtml = '<div class="rs-line-icon-fallback"><img src="' + escapeHtml(_losIcon) + '" alt="JR"></div>';
+      } else {
+        iconHtml = '<img class="rs-line-icon" src="' + escapeHtml(_losIcon) + '" alt="" loading="lazy">';
+      }
     } else if (_imgOk) {
       iconHtml = '<img class="rs-line-icon" src="' + escapeHtml(line.image) + '" alt="" loading="lazy">';
     } else if (line && window.TransitConstants && window.TransitConstants.isJRERoute && window.TransitConstants.isJRERoute(line)) {

@@ -247,7 +247,7 @@ window.LineOperationSystems = {
       nameZh: "内房线",
       nameEn: "Uchibo Line",
       nameKo: "",
-      color: "#fcc60d",
+  color: "#0071C5",
       lineIds: ["Sotobo"],
       icon: "../images/鉄道/JR東日本/JRグループ.png",
       order: 23
@@ -258,7 +258,7 @@ window.LineOperationSystems = {
       nameZh: "外房线",
       nameEn: "Sotobo Line",
       nameKo: "",
-      color: "#fcc60d",
+  color: "#F22335",
       lineIds: ["Uchibo"],
       icon: "../images/鉄道/JR東日本/JRグループ.png",
       order: 24
@@ -269,7 +269,7 @@ window.LineOperationSystems = {
       nameZh: "成田线",
       nameEn: "Narita Line",
       nameKo: "",
-      color: "#fcc60d",
+  color: "#00BB85",
       lineIds: ["Narita"],
       icon: "../images/鉄道/JR東日本/JRグループ.png",
       order: 25
