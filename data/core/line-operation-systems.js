@@ -936,7 +936,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#0f6cc3",
       lineIds: ["TobuSkytree"],
-      icon: "../images/鉄道/東武鉄道/伊勢崎線 佐野線 桐生線 小泉線 小泉線支線.png",
+      icon: "../images/鉄道/東武鉄道/東武スカイツリーライン.png",
       order: 2
     },
     {
