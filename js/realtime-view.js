@@ -67,7 +67,7 @@
     statusSection.innerHTML = '<span class="rs-status-indicator"><span class="rs-status-dot"></span>' + statusText + '</span>';
     // Apply status dot color via DOM API (CSP-safe)
     var dot = statusSection.querySelector(".rs-status-dot");
-    if (dot) dot.style.background = "var(--" + (s.color || ({ normal: "green", delayed: "orange", suspended: "red", no_data: "gray", no_odpt: "gray" }[status] || "gray")) + ")";
+    if (dot) dot.style.background = "var(--" + (s.color || ({ normal: "green", delayed: "orange", suspended: "red", no_data: "gray", no_odpt: "gray", loading: "gray" }[status] || "gray")) + ")";
     // Interval section
     var intervalSection = modal.querySelector(".rs-interval-section");
     intervalSection.querySelector(".rs-info-label").textContent = t("status.interval");
@@ -90,7 +90,9 @@
     var _detailTitles = { ja: "運行情報", en: "Service Info", zh: "运行信息", ko: "운행 정보" };
     causeSection.querySelector(".rs-section-title").textContent = _detailTitles[(window.currentLang || "ja")] || "運行情報";
     var causeHtml;
-    if (status === "no_data" || status === "no_odpt") {
+    if (status === "loading") {
+      causeHtml = '<span class="rs-text-muted">' + t("status.loading") + '</span>';
+    } else if (status === "no_data" || status === "no_odpt") {
       causeHtml = '<span class="rs-text-muted">' + t("status.no_data") + '</span>';
     } else if (delayInfo.detail) {
       causeHtml = escapeHtml(delayInfo.detail);
@@ -108,6 +110,8 @@
     if (fused && fused.timestamp) {
       var d = new Date(fused.timestamp);
       updateTime = d.getHours().toString().padStart(2,"0") + ":" + d.getMinutes().toString().padStart(2,"0");
+    } else if (status === "loading") {
+      updateTime = t("status.loading");
     } else if (status === "no_data" || status === "no_odpt") {
       updateTime = t("status.no_data");
     } else {

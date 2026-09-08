@@ -807,14 +807,14 @@
 
         var ops = Object.keys(ODPT_ENDPOINTS);
         var loaded = { delay: 0, positions: 0 };
+        var delayPromises = [], posPromises = [];
 
-        var promises = ops.map(function(op) {
+        ops.forEach(function(op) {
             var ep = ODPT_ENDPOINTS[op];
-            var subPromises = [];
 
-            // 1. 加载运行情报/延误信息
+            // 1. 加载运行情报/延误信息（优先推送，首屏不等列车位置）
             if (ep.trainInformation) {
-                subPromises.push(
+                delayPromises.push(
                     fetchODPT(buildUrl(op, 'trainInformation')).then(extractData).then(function(data) {
                         // v4.3.386: 保留全部记录（ODPT 按运行系统返回多条，data[0] 只留首条会丢其他线路的延误）
                         // v4.3.392: 成功即写入（空数组=确认无记录→UI normal）；失败标记 null（→UI 情報なし，不伪装成正常）
@@ -827,9 +827,9 @@
                 );
             }
 
-            // 2. 加载列车实时位置
+            // 2. 加载列车实时位置（第二推送，不阻塞延误首屏）
             if (ep.train) {
-                subPromises.push(
+                posPromises.push(
                     fetchODPT(buildUrl(op, 'train')).then(extractData).then(function(data) {
                         // v4.3.392: 成功即写入（空数组也写入），失败不拖垮全局推送
                         window.ODPT_TRAIN_POSITIONS[op] = (data && data.length > 0) ? data : [];
@@ -842,12 +842,19 @@
                     })
                 );
             }
-
-            return Promise.all(subPromises);
         });
 
-        return Promise.all(promises).then(function() {
-            // 推送数据到DataFusion
+        // v4.3.394: 延误信息全部就绪后立即推送（首屏 5-15s → 2-4s）；
+        // 列车位置随后补齐。加载期间 UI 显示「情報取得中」，不再把等待期伪装成「正常」。
+        function pushDelay() {
+            try {
+                if (window.DataFusion && window.DataFusion.updateOdptData) {
+                    window.DataFusion.updateOdptData(window.ODPT_DELAY_DATA);
+                }
+            } catch(e) { console.debug("[ODPT] delay push error:", e.message); }
+            console.debug("[ODPT] Realtime delay loaded:", loaded.delay, "operators");
+        }
+        function pushAll() {
             try {
                 if (window.DataFusion) {
                     if (window.DataFusion.updateOdptData) {
@@ -858,12 +865,14 @@
                     }
                 }
             } catch(e) { console.debug("[ODPT] DataFusion push error:", e.message); }
-
             console.debug("[ODPT] Realtime loaded - delay:", loaded.delay,
                         "operators, positions:", loaded.positions, "operators");
-        });
-    }
+        }
 
+        return Promise.all(delayPromises).then(pushDelay)
+            .then(function() { return Promise.all(posPromises); })
+            .then(pushAll);
+    }
     // ========== 加载时刻表数据（使用本地缓存）==========
     // 每小时刷新一次，优先使用本地缓存
     function loadTimetableData(forceRefresh) {

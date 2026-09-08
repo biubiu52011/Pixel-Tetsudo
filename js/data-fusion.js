@@ -242,10 +242,14 @@
       try {
         var _opLine = window.ODPTClient && window.ODPTClient.LINE_TO_OPERATOR ? (window.ODPTClient.LINE_TO_OPERATOR[lineId] || window.ODPTClient.LINE_TO_OPERATOR[line.name]) : null;
         if (_opLine && window.ODPTClient.supports && window.ODPTClient.supports(_opLine, 'trainInformation')) {
-          // v4.3.392: 数据源获取失败(null)→情報なし(no_odpt)；成功但无记录→正常(normal)——不把丢失伪装成正常
+          // v4.3.394: 三态 fallback——获取失败(null)→情報なし(no_odpt)；尚未完成首次加载(undefined)→情報取得中(loading)；成功但无记录→正常(normal)。绝不把"还在加载"伪装成"正常"
           var _opKey = TransitConstants && typeof TransitConstants.normalizeOp === "function" ? TransitConstants.normalizeOp(_opLine) : _opLine;
-          var _opFailed = !!(odptData.delayInfo && _opKey && odptData.delayInfo[_opKey] === null);
-          fallbackDelay = _opFailed ? { status: "no_odpt", maxDelay: 0, interval: null, cause: null } : { status: "normal", maxDelay: 0, interval: null, cause: null };
+          var _opState = odptData.delayInfo && _opKey ? odptData.delayInfo[_opKey] : undefined;
+          var _opFailed = _opState === null;
+          var _opLoading = _opState === undefined;
+          fallbackDelay = _opFailed ? { status: "no_odpt", maxDelay: 0, interval: null, cause: null }
+            : (_opLoading ? { status: "loading", maxDelay: 0, interval: null, cause: null }
+              : { status: "normal", maxDelay: 0, interval: null, cause: null });
         }
       } catch(_e) {}
       var delayInfo = apiInfo || (_hasLocal && { status: localStatus.status, maxDelay: localStatus.maxDelay, interval: localStatus.interval, cause: localStatus.cause }) || fallbackDelay;

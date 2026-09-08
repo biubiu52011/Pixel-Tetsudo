@@ -12,7 +12,8 @@
     delayed:   { icon: "\u25b3", cls: "rs-status-icon-delayed",  label: "delayed"   },
     suspended: { icon: "\u00d7", cls: "rs-status-icon-suspended", label: "suspended" },
     no_data:   { icon: "\u25cc", cls: "rs-status-icon-no-data",   label: "no_data"  },
-    no_odpt:   { icon: "\u25cf", cls: "rs-status-icon-no-odpt",   label: "no_odpt"  }
+    no_odpt:   { icon: "\u25cf", cls: "rs-status-icon-no-odpt",   label: "no_odpt"  },
+    loading:   { icon: "\u25d0", cls: "rs-status-icon-loading",   label: "loading"  }
   };
 
   // ========== Internal state ==========
@@ -89,6 +90,7 @@
     if (s === "suspended") return 5;
     if (s === "delayed") return 4;
     if (s === "no_odpt") return 3;
+    if (s === "loading") return 2;
     if (s === "no_data") return 2;
     if (s === "normal") return 1;
     return 0;
