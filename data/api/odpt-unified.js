@@ -227,7 +227,8 @@
         "Hamura": "Seibu",
         "Hanzomon": "TokyoMetro",
         "Hibiya": "TokyoMetro",
-        "HitachiNakaKaimin": "MIR",
+        // v4.3.400: ひたちなか海浜鉄道湊線 不是 MIR（首都圏新都市鉄道/つくばエクスプレス）——移除映射，
+        // 否则会拉取/聚合つくばエクスプレスの運行情報（串线）。ODPT 无该运营者 TI → 落 no_odpt。
         "Iiyama": "JR-East",
         "Ikebukuro": "Seibu",
 
