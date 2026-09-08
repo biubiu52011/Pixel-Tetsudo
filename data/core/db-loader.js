@@ -657,7 +657,6 @@ function applyData(data, i18n) {
         "NaritaSkyAccess": "../images/鉄道/京成電鉄/成田スカイアクセス.png",
         "SotetsuIzumino": "../images/鉄道/相鉄/相鉄いずみ野線.png",
         "NewShuttle": "../images/鉄道/埼玉新都市交通/伊奈線.png",
-        "ChibaUrbanMonorail": "../images/鉄道/千葉都市モノレール/千葉都市モノレール1号線.png",
         "TokyoMonorail": "../images/鉄道/東京モノレール/東京モノレール羽田空港線.png",
         "Tojo": "../images/鉄道/東武鉄道/東武東上線.png",
         "SobuMain": "../images/鉄道/JR東日本/総武線快速横須賀線.png",

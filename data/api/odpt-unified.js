@@ -324,7 +324,6 @@
         "Shinetsu": "JR-East",
         "Shinjuku": "Toei",
         "Shinonoi": "JR-East",
-        "ShonanMonorailE": "ShonanMonorail",
         "ShonanShinjuku": "JR-East",
 
         "SobuRapid": "JR-East",
@@ -356,7 +355,6 @@
         "Uetsu": "JR-East",
         "Utsunomiya": "Tobu",
         "Yamagata": "JR-East",
-        "ChibaUrbanMonorail": "ChibaMonorail",
         "ChiyodaBranch": "TokyoMetro",
         "ChuoMain": "JR-East",
         "Hachiko": "JR-East",

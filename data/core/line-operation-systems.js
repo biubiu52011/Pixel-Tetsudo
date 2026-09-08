@@ -1596,19 +1596,6 @@ window.LineOperationSystems = {
       order: 1
     }
   ],
-  "SHONAN_MONORAIL": [
-    {
-      code: "S",
-      nameJa: "湘南モノレール江の島線",
-      nameZh: "湘南单轨江之岛线",
-      nameEn: "Shonan Monorail Enoshima Line",
-      nameKo: "",
-      color: "#ff0000",
-      lineIds: ["ShonanMonorailE"],
-      icon: "../images/鉄道/湘南モノレール/湘南モノレール江の島線.png",
-      order: 1
-    }
-  ],
   "TAMA_MONORAIL": [
     {
       code: "TT",
@@ -1671,19 +1658,6 @@ window.LineOperationSystems = {
       color: "#ea5504",
       lineIds: ["NewShuttle"],
       icon: "../images/鉄道/埼玉新都市交通/伊奈線.png",
-      order: 1
-    }
-  ],
-  "CHIBA_URBAN_MONORAIL": [
-    {
-      code: "CM",
-      nameJa: "千葉都市モノレール",
-      nameZh: "千叶都市单轨电车",
-      nameEn: "Chiba Urban Monorail",
-      nameKo: "",
-      color: "#2843ba",
-      lineIds: ["ChibaUrbanMonorail"],
-      icon: "../images/鉄道/千葉都市モノレール/千葉都市モノレール1号線.png",
       order: 1
     }
   ],

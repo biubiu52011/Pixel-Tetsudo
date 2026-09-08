@@ -131,11 +131,9 @@
     "Yurikamome": "../images/列车/ゆりかもめ/7300系.png",
     "TamaMonorail": "../images/列车/多摩都市モノレール/1000系.png", // 4.3.276：实车图恢复
     "SaitamaNewUrbanTransit": "../images/列车/埼玉新都市交通/2000形.png", // 4.3.276：AGT实车图恢复
-    "ChibaUrbanMonorail": "../images/列车/千葉都市モノレール/1000形.png", // 4.3.276：实车图恢复
     "TokyoMonorail": "../images/列车/東京モノレール/1000形.png", // 4.3.278：入库实车图（40×48 绿色带车头，车型待用户最终确认）
     "NipporiToneri": "../images/鉄道/都営地下鉄/日暮里・舎人ライナー.png", // 4.3.273：日暮里・舎人ライナー = AGT新交通（330形），非1000形地下鉄車
-    "MinatoMirai": "../images/列车/東急電鉄/5050系.png",
-    "ShonanMonorail": "../images/鉄道/湘南モノレール/湘南モノレール江の島線.png"
+    "MinatoMirai": "../images/列车/東急電鉄/5050系.png"
   };
 
   // Specific line icons (override operator defaults)
@@ -309,7 +307,6 @@
     "TsukubaExpress": "../images/列车/首都圏新都市鉄道/TX-2000系.png", // つくばエクスプレス：TX-2000系
     "Yurikamome": "../images/列车/ゆりかもめ/7300系.png",
     "TamaMonorail": "../images/列车/多摩都市モノレール/1000系.png",
-    "ChibaUrbanMonorail": "../images/列车/千葉都市モノレール/1000形.png",
     "TokyoMonorail": "../images/列车/東京モノレール/1000形.png", // 4.3.278：入库实车图（40×48 绿色带车头，车型待用户最终确认）
     "SaitamaNewUrbanTransit": "../images/列车/埼玉新都市交通/2000形.png",
 

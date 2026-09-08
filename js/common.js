@@ -32,7 +32,7 @@
     "KEIO": "Keio", "ODAKYU": "Odakyu", "SEIBU": "Seibu", "TOBU": "Tobu", "TOKYU": "Tokyu",
     "KEIKYU": "Keikyu", "KEISEI": "Keisei", "SOTETSU": "Sotetsu", "RINKAI": "Rinkai",
     "MINATO_MIRAI": "MinatoMirai", "TWR": "TWR", "MIR": "MIR",
-    "TAMA_MONORAIL": "TamaMonorail", "SHONAN_MONORAIL": "ShonanMonorail",
+    "TAMA_MONORAIL": "TamaMonorail",
     "YURIKAMOME": "Yurikamome", "TSUKUBA_EXPRESS": "TsukubaExpress"
   };
   // Standard DB operator key -> LOS key (reverse of NORMALIZE; handles
@@ -43,10 +43,9 @@
     "Keio": "KEIO", "Odakyu": "ODAKYU", "Seibu": "SEIBU", "Tobu": "TOBU", "Tokyu": "TOKYU",
     "Keikyu": "KEIKYU", "Keisei": "KEISEI", "Sotetsu": "SOTETSU", "Rinkai": "RINKAI",
     "MinatoMirai": "MINATO_MIRAI", "TWR": "TWR", "MIR": "MIR",
-    "TamaMonorail": "TAMA_MONORAIL", "ShonanMonorail": "SHONAN_MONORAIL",
+    "TamaMonorail": "TAMA_MONORAIL",
     "Yurikamome": "YURIKAMOME", "TsukubaExpress": "TSUKUBA_EXPRESS",
     "SaitamaNewUrbanTransit": "SAITAMA_NEW_URBAN_TRANSIT",
-    "ChibaUrbanMonorail": "CHIBA_URBAN_MONORAIL",
     "TokyoMonorail": "TOKYO_MONORAIL"
   };
   window.TransitConstants = {
@@ -56,8 +55,8 @@
       "Keio", "Odakyu", "Seibu", "Tobu", "Tokyu",
       "Keikyu", "Keisei", "Sotetsu",
       "TWR", "MinatoMirai", "MIR", "Rinkai",
-      "TsukubaExpress", "Yurikamome", "TamaMonorail", "ShonanMonorail",
-      "ChibaUrbanMonorail", "TokyoMonorail", "SaitamaNewUrbanTransit"
+      "TsukubaExpress", "Yurikamome", "TamaMonorail",
+      "TokyoMonorail", "SaitamaNewUrbanTransit"
     ],
     NORMALIZE: TRANSIT_NORMALIZE,
     // JRE (JR東日本) 白名单：路線記号 JA~JY 全覆盖；無記号の地方線（operator=JR-East）兜底

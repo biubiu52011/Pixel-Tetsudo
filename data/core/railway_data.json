@@ -2804,12 +2804,6 @@
         },
         {
           "station": "Ofuna",
-          "lineId": "ShonanMonorailE",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Ofuna",
           "lineId": "TokaidoMain",
           "type": "in",
           "note": ""
@@ -2900,12 +2894,6 @@
         {
           "station": "Ofuna",
           "lineId": "Tokaido",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Ofuna",
-          "lineId": "ShonanMonorailE",
           "type": "in",
           "note": ""
         },
@@ -4378,12 +4366,6 @@
           "note": ""
         },
         {
-          "station": "Chiba-Minato",
-          "lineId": "ChibaUrbanMonorail",
-          "type": "in",
-          "note": ""
-        },
-        {
           "station": "Soga",
           "lineId": "Sotobo",
           "type": "in",
@@ -4968,12 +4950,6 @@
         {
           "station": "Ofuna",
           "lineId": "Tokaido",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Ofuna",
-          "lineId": "ShonanMonorailE",
           "type": "in",
           "note": ""
         },
@@ -5921,12 +5897,6 @@
         {
           "station": "Ofuna",
           "lineId": "ShonanShinjuku",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Ofuna",
-          "lineId": "ShonanMonorailE",
           "type": "in",
           "note": ""
         },
@@ -10993,12 +10963,6 @@
         },
         {
           "station": "Chiba",
-          "lineId": "ChibaUrbanMonorail",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Chiba",
           "lineId": "SobuMain",
           "type": "in",
           "note": ""
@@ -13206,12 +13170,6 @@
         {
           "station": "Chiba",
           "lineId": "Uchibo",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Chiba",
-          "lineId": "ChibaUrbanMonorail",
           "type": "in",
           "note": ""
         },
@@ -16020,12 +15978,6 @@
         },
         {
           "station": "Chiba",
-          "lineId": "ChibaUrbanMonorail",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Chiba",
           "lineId": "SobuMain",
           "type": "in",
           "note": ""
@@ -16033,12 +15985,6 @@
         {
           "station": "Higashi-Chiba",
           "lineId": "SobuMain",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Tsuga",
-          "lineId": "ChibaUrbanMonorail",
           "type": "in",
           "note": ""
         },
@@ -18238,72 +18184,6 @@
         }
       ]
     },
-    "ShonanMonorailE": {
-      "name": "ShonanMonorailE",
-      "nameEn": "Shonan Monorail Enoshima Line",
-      "nameJa": "湘南モノレール江の島線",
-      "code": "S",
-      "color": "#0073bb",
-      "operator": "ShonanMonorail",
-      "region": "Kanagawa",
-      "type": "straight",
-      "image": "../images/鉄道/湘南モノレール/湘南モノレール江の島線.png",
-      "durationTotalMin": 16,
-      "branchOf": null,
-      "stations": [
-        "Ofuna",
-        "Fujimi-Machi",
-        "Shonan-Machiya",
-        "Shonan-Fukazawa",
-        "Nishi-Kamakura",
-        "Katase-Yama",
-        "Mejiro-Dai",
-        "Shonan-Enoshima"
-      ],
-      "durations": [
-        2,
-        2,
-        2,
-        2,
-        2,
-        2,
-        2,
-        2
-      ],
-      "throughServices": [],
-      "transferStations": [
-        {
-          "station": "Ofuna",
-          "lineId": "KeihinTohoku",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Ofuna",
-          "lineId": "Yokosuka",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Ofuna",
-          "lineId": "ShonanShinjuku",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Ofuna",
-          "lineId": "Tokaido",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Ofuna",
-          "lineId": "TokaidoMain",
-          "type": "in",
-          "note": ""
-        }
-      ]
-    },
     "Sotobo": {
       "name": "Sotobo",
       "nameEn": "Sotobo Line",
@@ -19480,12 +19360,6 @@
         {
           "station": "Chiba",
           "lineId": "Narita",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Chiba",
-          "lineId": "ChibaUrbanMonorail",
           "type": "in",
           "note": ""
         },
@@ -21517,83 +21391,6 @@
         }
       ]
     },
-    "ChibaUrbanMonorail": {
-      "nameJa": "千葉都市モノレール",
-      "nameEn": "Chiba Urban Monorail",
-      "operator": "ChibaUrbanMonorail",
-      "color": "#0099cc",
-      "code": "CM",
-      "stations": [
-        "Chiba-Minato",
-        "Shiyakusho-mae",
-        "Chiba",
-        "Sakaecho",
-        "Yoshikawa-koen",
-        "Kenchomae",
-        "Chiba-koen",
-        "Sakusabe",
-        "Tendai",
-        "Anagawa",
-        "Sports-Center",
-        "Dobutsu-koen",
-        "Mitsuwadai",
-        "Tsuga",
-        "Sakuragi",
-        "Oguradai",
-        "Chishirodai-Kita",
-        "Chishirodai"
-      ],
-      "transferStations": [
-        {
-          "station": "Chiba-Minato",
-          "lineId": "Keiyo",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Chiba",
-          "lineId": "SobuRapid",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Chiba",
-          "lineId": "ChuoSobuLocal",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Chiba",
-          "lineId": "Narita",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Chiba",
-          "lineId": "Uchibo",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Chiba",
-          "lineId": "SobuMain",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Tsuga",
-          "lineId": "Narita",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Tsuga",
-          "lineId": "SobuMain",
-          "type": "in",
-          "note": ""
-        }
-      ]
-    },
     "TokyoMonorail": {
       "nameJa": "東京モノレール羽田空港線",
       "nameEn": "Tokyo Monorail Haneda Airport Line",
@@ -21714,12 +21511,6 @@
           "note": ""
         },
         {
-          "station": "Chiba",
-          "lineId": "ChibaUrbanMonorail",
-          "type": "in",
-          "note": ""
-        },
-        {
           "station": "Higashi-Chiba",
           "lineId": "Narita",
           "type": "in",
@@ -21728,12 +21519,6 @@
         {
           "station": "Tsuga",
           "lineId": "Narita",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Tsuga",
-          "lineId": "ChibaUrbanMonorail",
           "type": "in",
           "note": ""
         },
@@ -22280,12 +22065,6 @@
         {
           "station": "Ofuna",
           "lineId": "Tokaido",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Ofuna",
-          "lineId": "ShonanMonorailE",
           "type": "in",
           "note": ""
         },
@@ -24026,7 +23805,6 @@
     "柴崎": "Shibasaki",
     "柴崎体育館": "Shibasaki-Taiikukan",
     "柿生": "Kakio",
-    "栄町": "Sakaecho",
     "栗平": "Kurihira",
     "栗橋": "Kurihashi",
     "栢山": "Kayama",
@@ -32109,7 +31887,6 @@
       "Yokosuka",
       "ShonanShinjuku",
       "Tokaido",
-      "ShonanMonorailE",
       "TokaidoMain"
     ],
     "Kurihama": [
@@ -32401,8 +32178,7 @@
       "Keiyo"
     ],
     "Chiba-Minato": [
-      "Keiyo",
-      "ChibaUrbanMonorail"
+      "Keiyo"
     ],
     "Soga": [
       "Keiyo",
@@ -33977,9 +33753,6 @@
     "Omiya-Koen": [
       "Noda"
     ],
-    "Sakaecho": [
-      "ChibaUrbanMonorail"
-    ],
     "Kawama": [
       "Noda"
     ],
@@ -34021,7 +33794,6 @@
     "Kamagaya": [
       "Noda"
     ],
-    "Kita-Narashino": [],
     "Keisei-Narashino": [
       "Keisei"
     ],
@@ -34210,7 +33982,6 @@
       "ChuoSobuLocal",
       "Narita",
       "Uchibo",
-      "ChibaUrbanMonorail",
       "SobuMain"
     ],
     "Ikejiri-Ohashi": [
@@ -36385,7 +36156,6 @@
     ],
     "Tsuga": [
       "Narita",
-      "ChibaUrbanMonorail",
       "SobuMain"
     ],
     "Yotsukaido": [
@@ -37692,27 +37462,6 @@
     "Inariyama": [
       "Shinonoi"
     ],
-    "Fujimi-Machi": [
-      "ShonanMonorailE"
-    ],
-    "Shonan-Machiya": [
-      "ShonanMonorailE"
-    ],
-    "Shonan-Fukazawa": [
-      "ShonanMonorailE"
-    ],
-    "Nishi-Kamakura": [
-      "ShonanMonorailE"
-    ],
-    "Katase-Yama": [
-      "ShonanMonorailE"
-    ],
-    "Mejiro-Dai": [
-      "ShonanMonorailE"
-    ],
-    "Shonan-Enoshima": [
-      "ShonanMonorailE"
-    ],
     "Hamano": [
       "Sotobo"
     ],
@@ -38406,7 +38155,6 @@
     "Mobara": [
       "Uchibo"
     ],
-    "Daijima": [],
     "Naruto": [
       "SobuMain"
     ],
@@ -38422,8 +38170,6 @@
     "Matsuo": [
       "SobuMain"
     ],
-    "Kujukuri": [],
-    "Kasugacho": [],
     "Awa-Kominato": [
       "Uchibo"
     ],
@@ -39339,48 +39085,6 @@
     ],
     "Uchijuku": [
       "NewShuttle"
-    ],
-    "Shiyakusho-mae": [
-      "ChibaUrbanMonorail"
-    ],
-    "Yoshikawa-koen": [
-      "ChibaUrbanMonorail"
-    ],
-    "Kenchomae": [
-      "ChibaUrbanMonorail"
-    ],
-    "Chiba-koen": [
-      "ChibaUrbanMonorail"
-    ],
-    "Sakusabe": [
-      "ChibaUrbanMonorail"
-    ],
-    "Tendai": [
-      "ChibaUrbanMonorail"
-    ],
-    "Anagawa": [
-      "ChibaUrbanMonorail"
-    ],
-    "Sports-Center": [
-      "ChibaUrbanMonorail"
-    ],
-    "Dobutsu-koen": [
-      "ChibaUrbanMonorail"
-    ],
-    "Mitsuwadai": [
-      "ChibaUrbanMonorail"
-    ],
-    "Sakuragi": [
-      "ChibaUrbanMonorail"
-    ],
-    "Oguradai": [
-      "ChibaUrbanMonorail"
-    ],
-    "Chishirodai-Kita": [
-      "ChibaUrbanMonorail"
-    ],
-    "Chishirodai": [
-      "ChibaUrbanMonorail"
     ],
     "Monorail-Hamamatsucho": [
       "TokyoMonorail"
@@ -42337,16 +42041,6 @@
       "Inariyama": 13,
       "Shinonoi": 14
     },
-    "ShonanMonorailE": {
-      "Ofuna": 0,
-      "Fujimi-Machi": 1,
-      "Shonan-Machiya": 2,
-      "Shonan-Fukazawa": 3,
-      "Nishi-Kamakura": 4,
-      "Katase-Yama": 5,
-      "Mejiro-Dai": 6,
-      "Shonan-Enoshima": 7
-    },
     "Sotobo": {
       "Soga": 0,
       "Hamano": 1,
@@ -43114,26 +42808,6 @@
       "Ina-Chuo": 10,
       "Hanuki": 11,
       "Uchijuku": 12
-    },
-    "ChibaUrbanMonorail": {
-      "Chiba-Minato": 0,
-      "Shiyakusho-mae": 1,
-      "Chiba": 2,
-      "Sakaecho": 3,
-      "Yoshikawa-koen": 4,
-      "Kenchomae": 5,
-      "Chiba-koen": 6,
-      "Sakusabe": 7,
-      "Tendai": 8,
-      "Anagawa": 9,
-      "Sports-Center": 10,
-      "Dobutsu-koen": 11,
-      "Mitsuwadai": 12,
-      "Tsuga": 13,
-      "Sakuragi": 14,
-      "Oguradai": 15,
-      "Chishirodai-Kita": 16,
-      "Chishirodai": 17
     },
     "TokyoMonorail": {
       "Monorail-Hamamatsucho": 0,

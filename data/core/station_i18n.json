@@ -3347,12 +3347,6 @@
     "ko": "타테야마",
     "en": "Tateyama"
   },
-  "Mejiro-Dai": {
-    "ja": "目白台",
-    "zh": "目白台",
-    "ko": "메지로다이",
-    "en": "Mejiro-dai"
-  },
   "Horikiri": {
     "ja": "堀切",
     "zh": "堀切",
@@ -6269,12 +6263,6 @@
     "ko": "사이타마사카",
     "en": "Saitama_Saka"
   },
-  "Sakaecho": {
-    "ja": "栄町",
-    "zh": "荣町",
-    "ko": "사카에초",
-    "en": "Sakaecho"
-  },
   "Sakasai": {
     "ja": "逆井",
     "zh": "逆井",
@@ -7289,12 +7277,6 @@
     "ko": "유메가오카",
     "en": "Yumegaoka"
   },
-  "Anagawa": {
-    "ja": "穴生川",
-    "zh": "穴生川",
-    "ko": "아나가와",
-    "en": "Anagawa"
-  },
   "Hashira": {
     "ja": "柱",
     "zh": "柱",
@@ -7319,89 +7301,17 @@
     "ko": "카와와치",
     "en": "Kawa-Wachi"
   },
-  "Chiba-koen": {
-    "ja": "千葉公園",
-    "zh": "千叶公园",
-    "ko": "치바코엔",
-    "en": "Chiba-koen"
-  },
-  "Chishirodai": {
-    "ja": "千城台",
-    "zh": "千城台",
-    "ko": "치시로다이",
-    "en": "Chishirodai"
-  },
-  "Chishirodai-Kita": {
-    "ja": "千城台北",
-    "zh": "千城台北",
-    "ko": "치시로다이키타",
-    "en": "Chishirodai-Kita"
-  },
-  "Dobutsu-koen": {
-    "ja": "動物公園",
-    "zh": "动物公园",
-    "ko": "도부츠코엔",
-    "en": "Dobutsu-koen"
-  },
-  "Kenchomae": {
-    "ja": "県庁前",
-    "zh": "县厅前",
-    "ko": "켄초마에",
-    "en": "Kenchomae"
-  },
-  "Mitsuwadai": {
-    "ja": "みつわ台",
-    "zh": "三和台",
-    "ko": "미츠와다이",
-    "en": "Mitsuwadai"
-  },
   "Monorail-Hamamatsucho": {
     "ja": "モノレール浜松町",
     "zh": "单轨电车滨松町",
     "ko": "모노레일하마마츠초",
     "en": "Monorail-Hamamatsucho"
   },
-  "Oguradai": {
-    "ja": "小倉台",
-    "zh": "小仓台",
-    "ko": "오구라다이",
-    "en": "Oguradai"
-  },
-  "Sakuragi": {
-    "ja": "桜木",
-    "zh": "樱木",
-    "ko": "사쿠라기",
-    "en": "Sakuragi"
-  },
-  "Shiyakusho-mae": {
-    "ja": "市役所前",
-    "zh": "市役所前",
-    "ko": "시야쿠쇼마에",
-    "en": "Shiyakusho-mae"
-  },
-  "Sports-Center": {
-    "ja": "スポーツセンター",
-    "zh": "体育中心",
-    "ko": "스포츠센터",
-    "en": "Sports-Center"
-  },
-  "Tendai": {
-    "ja": "天台",
-    "zh": "天台",
-    "ko": "텐다이",
-    "en": "Tendai"
-  },
   "Tsuga": {
     "ja": "都賀",
     "zh": "都贺",
     "ko": "츠가",
     "en": "Tsuga"
-  },
-  "Yoshikawa-koen": {
-    "ja": "葭川公園",
-    "zh": "葭川公园",
-    "ko": "요시카와코엔",
-    "en": "Yoshikawa-koen"
   },
   "Banpaku-Kinen-Kouen": {
     "ja": "万博記念公園",
@@ -7613,36 +7523,6 @@
     "ko": "요코하마시에이",
     "en": "Yokohama-Municipal"
   },
-  "Katase-Yama": {
-    "ja": "片瀬山",
-    "zh": "片濑山",
-    "ko": "카타세야마",
-    "en": "Katase-Yama"
-  },
-  "Nishi-Kamakura": {
-    "ja": "西鎌倉",
-    "zh": "西镰仓",
-    "ko": "니시카마쿠라",
-    "en": "Nishi-Kamakura"
-  },
-  "Shonan-Enoshima": {
-    "ja": "湘南江の島",
-    "zh": "湘南江之岛",
-    "ko": "쇼난에노시마",
-    "en": "Shonan-Enoshima"
-  },
-  "Shonan-Fukazawa": {
-    "ja": "湘南深沢",
-    "zh": "湘南深泽",
-    "ko": "쇼난후카자와",
-    "en": "Shonan-Fukazawa"
-  },
-  "Shonan-Machiya": {
-    "ja": "湘南町屋",
-    "zh": "湘南町屋",
-    "ko": "쇼난마치야",
-    "en": "Shonan-Machiya"
-  },
   "Kokusai-Tenjijo": {
     "ja": "国際展示場",
     "zh": "国际展示场",
@@ -7672,12 +7552,6 @@
     "zh": "东京昭和纪念馆",
     "ko": "도쿄쇼와센터",
     "en": "Tokyo-Showa-Center"
-  },
-  "Sakusabe": {
-    "ja": "作草部",
-    "zh": "作草部",
-    "ko": "사쿠사베",
-    "en": "Sakusabe"
   },
   "Rokuchou": {
     "ja": "六町",
@@ -7726,12 +7600,6 @@
     "zh": "高田",
     "ko": "타카다",
     "en": "Takata"
-  },
-  "Fujimi-Machi": {
-    "ja": "富士見町",
-    "zh": "富士见町",
-    "ko": "후지미마치",
-    "en": "Fujimi-Machi"
   },
   "Oi-Machi": {
     "ja": "大井町",
