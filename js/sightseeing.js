@@ -18,7 +18,18 @@
 
   const TAG_ICONS = {};
 
-  function getMajorStations() { return (window.TOURISM_STATIONS && window.TOURISM_STATIONS.length > 0) ? Array.from(window.TOURISM_STATIONS) : ['Shinjuku']; }
+  function getMajorStations() {
+    if (window.TOURISM_STATIONS && window.TOURISM_STATIONS.length > 0) return Array.from(window.TOURISM_STATIONS);
+    // Fallback: stations that actually have nearby spots (never default to an empty-grid station)
+    var withSpots = [];
+    try {
+      Object.keys(getStationCoords()).forEach(function(k) {
+        if (withSpots.length >= 12) return;
+        if (window.TourismProximity && window.TourismProximity.getNearbySpotsByStation(k, { radius: 3000, limit: 1 }).length > 0) withSpots.push(k);
+      });
+    } catch(e) {}
+    return withSpots.length > 0 ? withSpots : ['Shinjuku'];
+  }
   const RIVERS = [
     { name: 'Sumida', lat: 35.710, lng: 139.803, width: 120 } // width in meters
   ];
@@ -286,6 +297,7 @@ function renderGrid() {
 
   function renderAll() {
     cacheDom();
+    if (dom.relocateBtn) dom.relocateBtn.classList.remove('loading');
     renderHeader();
     renderTagFilters();
     renderGrid();
@@ -319,7 +331,7 @@ function renderGrid() {
         e.preventDefault();
         e.stopPropagation();
         hideStationPicker();
-        initLocation();
+        initLocation({ showPickerOnFail: true });
       });
     }
     if (dom.stationPicker) {
@@ -372,8 +384,11 @@ function renderGrid() {
     if (dom.stationPicker) dom.stationPicker.classList.add('hidden');
   }
 
-  function initLocation() {
+  function initLocation(opts) {
+    opts = opts || {};
+    var showPickerOnFail = !!opts.showPickerOnFail;
     state.locStatus = 'locating';
+    if (dom.relocateBtn) dom.relocateBtn.classList.add('loading');
     renderHeader();
     var guard = setTimeout(function() {
       if (state.locStatus === 'locating') {
@@ -383,6 +398,7 @@ function renderGrid() {
         }
         state.autoDetected = false;
         renderAll();
+        if (showPickerOnFail) showStationPicker();
       }
     }, 8000);
     function locFallback() {
@@ -392,6 +408,7 @@ function renderGrid() {
       }
       state.autoDetected = false;
       renderAll();
+      if (showPickerOnFail) showStationPicker();
     }
     if (typeof navigator === 'undefined' || !navigator.geolocation) {
       clearTimeout(guard);
@@ -429,6 +446,10 @@ function renderGrid() {
   function init(config) {
     config = config || {};
     cacheDom();
+    if (dom.relocateBtn) {
+      dom.relocateBtn.title = t('tourism.relocate');
+      dom.relocateBtn.setAttribute('aria-label', t('tourism.relocate'));
+    }
     state.lang = config.lang || window.currentLang || 'ja';
     if (config.station) {
       state.selectedStation = config.station;
@@ -450,6 +471,7 @@ function renderGrid() {
     if (!stationCoords[stationKey]) return;
     state.selectedStation = stationKey;
     state.autoDetected = false;
+    state.locStatus = 'found';
     state.activeTags.clear();
     renderAll();
   }

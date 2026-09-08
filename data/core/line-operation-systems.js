@@ -220,17 +220,6 @@ window.LineOperationSystems = {
       order: 19
     },
     {
-      code: "CHU",
-      nameJa: "中央本線",
-      nameZh: "中央本线",
-      nameEn: "Chuo Main Line",
-      nameKo: "",
-      color: "#0073bf",
-      lineIds: ["ChuoMain","ChuoTatsuno"],
-      icon: "../images/鉄道/JR東日本/JRグループ.png",
-      order: 20
-    },
-    {
       code: "ITO",
       nameJa: "伊東線",
       nameZh: "伊东线",
@@ -284,28 +273,6 @@ window.LineOperationSystems = {
       lineIds: ["Narita"],
       icon: "../images/鉄道/JR東日本/JRグループ.png",
       order: 25
-    },
-    {
-      code: "TOH",
-      nameJa: "東北本線",
-      nameZh: "东北本线",
-      nameEn: "Tohoku Main Line",
-      nameKo: "",
-      color: "#3cb371",
-      lineIds: ["TohokuMain"],
-      icon: "../images/鉄道/JR東日本/JRグループ.png",
-      order: 26
-    },
-    {
-      code: "TOK",
-      nameJa: "東海道本線",
-      nameZh: "东海道本线",
-      nameEn: "Tokaido Main Line",
-      nameKo: "",
-      color: "#f68b1e",
-      lineIds: ["TokaidoMain"],
-      icon: "../images/鉄道/JR東日本/JRグループ.png",
-      order: 27
     },
     {
       code: "SAG",

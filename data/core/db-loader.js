@@ -726,7 +726,9 @@ function applyData(data, i18n) {
     }
     // Keep TOURISM_DATA as empty object for backward compatibility (old code may check it)
     window.TOURISM_DATA = {};
-    window.TOURISM_STATIONS = [];
+    // Tourism anchor stations: the station_coords explicitly provided by the tourism data source
+    var _tourismStations = (window.TOURISM_OVERRIDE && window.TOURISM_OVERRIDE.station_coords) ? Object.keys(window.TOURISM_OVERRIDE.station_coords) : [];
+    window.TOURISM_STATIONS = _tourismStations;
 
     // Build canonical StationLine relation
     window.STATION_LINES = {};
@@ -1037,7 +1039,7 @@ function load() {
           window.STATION_EXITS = {};
         }
         window.TOURISM_DATA = {};
-        window.TOURISM_STATIONS = [];
+        window.TOURISM_STATIONS = Object.keys(tourismOverride.station_coords || {});
         loaded = true;
         console.log(
           Object.keys(results[0].stations).length + " stations, " +

@@ -59,6 +59,9 @@
   border: 2px solid var(--border);
   border-radius: var(--radius);
   background: var(--card);
+  color: var(--text);
+  -webkit-appearance: none;
+  appearance: none;
   cursor: pointer;
   transition: var(--transition-fast);
   flex-shrink: 0;
