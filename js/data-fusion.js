@@ -9,6 +9,8 @@
   var POSITION_INTERVAL = 60000;
 
   var odptData = { trains: {}, delayInfo: {}, realtimePositions: {} };
+  // v4.3.405: 官方源（小田急/ゆりかもめ）delayInfo——按 line.id 直查，优先级高于 ODPT
+  var officialData = { delayInfo: null };
   var subscribers = [];
   var localData = { lines: {}, statusMap: {} };
   var _lastFusedData = null;
@@ -200,6 +202,10 @@
 
   function getApiDelayInfo(line) {
     try {
+      // v4.3.405: 官方源优先——按 line.id 直查（小田急 3 线 / ゆりかもめ）
+      if (officialData.delayInfo && line && line.id && officialData.delayInfo[line.id]) {
+        return officialData.delayInfo[line.id];
+      }
       var op = getOperatorForLine(line.id, line.name);
       if (!odptData.delayInfo || !op) return null;
       var norm = TransitConstants && typeof TransitConstants.normalizeOp === "function" ? TransitConstants.normalizeOp(op) : op;
@@ -564,14 +570,29 @@
       window.RailwayRTC.savePositions(posList);
       window.RailwayRTC.saveDelayInfo(delayMap);
     } catch(e) {}
-  }function init() {
+  }
+  // v4.3.405: 官方源（小田急/ゆりかもめ）delay 加载——通过本地代理，30s TTL
+  function loadOfficialDelay() {
+    try {
+      if (!window.OfficialRailway || typeof window.OfficialRailway.fetchDelayInfo !== "function") return;
+      window.OfficialRailway.fetchDelayInfo().then(function(info) {
+        if (info && typeof info === "object") {
+          officialData.delayInfo = info;
+          try { fuseAll(); } catch(e) { console.debug("[DataFusion] official->fuseAll error:", e.message); }
+        }
+      }).catch(function(e) { console.debug("[DataFusion] official delay error:", e.message); });
+    } catch(e) { console.debug("[DataFusion] loadOfficialDelay error:", e.message); }
+  }
+
+  function init() {
     if (_initialized) return;
     _initialized = true;
     loadLocalData();
     syncStatusMap();
     checkCacheStale();
     fuseAll();
-    _refreshTimer = setInterval(function() { try { fuseAll(); } catch(e) { console.debug("[DataFusion] fuseAll error:", e.message); } }, REFRESH_INTERVAL);
+    loadOfficialDelay();
+    _refreshTimer = setInterval(function() { loadOfficialDelay(); try { fuseAll(); } catch(e) { console.debug("[DataFusion] fuseAll error:", e.message); } }, REFRESH_INTERVAL);
     _cacheTimer = setInterval(function() { try { saveToCache(); } catch(e) {} }, REFRESH_INTERVAL);
     (function pollUnified() {
       var checkLines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : (window.UNIFIED_LINES || {});

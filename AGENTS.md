@@ -352,6 +352,7 @@ Before tagging a release:
 ## Runtime Contract (运行契约)
 - Canonical data is loaded by db-loader.js via `fetch` (railway_data.json / station_i18n.json / tourism_data.json).
 - `file://` protocol blocks fetch (CORS), so pages CANNOT work when opened by double-click. The project MUST be served over HTTP:
-  - `python -m http.server 8017` then open `http://localhost:8017/pages/home.html`
+  - `python serve.py`（本地静态服务器 + `/api-proxy/` 官方 API 代理，4.3.405 起替代 `python -m http.server 8017`）then open `http://localhost:8017/pages/home.html`
+- **官方源代理（4.3.405）**：ODPT 未提供運行状況的线路（小田急 3 线/ゆりかもめ）由 `data/api/official-railway.js`（window.OfficialRailway）经本地代理抓取官方 API——小田急 `d6oynijiy33tb.cloudfront.net`（x-api-key 公开 key）、ゆりかもめ `cms-2.yurikamome.co.jp/api/operation/`（无 key）。两官方 API 均无 CORS 头，浏览器必须经 `serve.py` 的 `/api-proxy/` 白名单端点转发（防 SSRF）。DataFusion 融合优先级：official（按 line.id）> ODPT > localStatus > fallback。
 - Data load success signal: console log `509 stations, 159 lines, 94 tourism stations`.
 - The ONLY entry page is `pages/home.html` (index.html redirects there). Do not create or restore any second home.html elsewhere.
