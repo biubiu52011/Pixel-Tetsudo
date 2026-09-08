@@ -23,7 +23,7 @@
   // STATUS_META is defined in data-state.js; use window.DataState.STATUS_META
   const STATUS_META = window.DataState ? window.DataState.STATUS_META : {
     normal:    { icon: "\u25cb", color: "green"  },
-    notice:    { icon: "\u26a0", color: "yellow" },
+    notice:    { icon: "\uff01", color: "yellow" },
     delayed:   { icon: "\u25b3", color: "orange" },
     suspended: { icon: "\u00d7", color: "red"  },
     no_data:   { icon: "\u25cc", color: "gray"   },
