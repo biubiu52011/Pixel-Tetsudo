@@ -216,8 +216,19 @@
 
     performSearch: function() {
       // Prefer station ID from data-station-id (set by suggestion click); fall back to display name for direct input
-      const from = (this.fromInput ? (this.fromInput.getAttribute('data-station-id') || this.fromInput.value.trim()) : '');
-      const to = (this.toInput ? (this.toInput.getAttribute('data-station-id') || this.toInput.value.trim()) : '');
+      const rawFrom = (this.fromInput ? (this.fromInput.getAttribute('data-station-id') || this.fromInput.value.trim()) : '');
+      const rawTo = (this.toInput ? (this.toInput.getAttribute('data-station-id') || this.toInput.value.trim()) : '');
+      // Direct-input fallback: display names must be resolved to canonical station IDs (Kitasenju -> Kita-Senju etc.)
+      var _resolveId = function(v) {
+        if (!v) return '';
+        if (window.StationResolver) {
+          var r = window.StationResolver.resolve(v);
+          if (r && r.length > 0 && r[0].stationId) return r[0].stationId;
+        }
+        return v;
+      };
+      const from = _resolveId(rawFrom);
+      const to = _resolveId(rawTo);
       const t = window.t || function(key) { return key; };
 
       if (!from || !to) {

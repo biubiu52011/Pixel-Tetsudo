@@ -19,6 +19,8 @@
    */
   function _normalizeId(id) {
     var lower = id.toLowerCase();
+    // Tourism-short ID -> railway canonical ID (hyphenated form used in line.stations)
+    if (lower === "kitasenju") return "Kita-Senju";
     var arr = Array.from(_lineStationIds);
     for (var j = 0; j < arr.length; j++) {
       if (arr[j].toLowerCase() === lower) return arr[j];
