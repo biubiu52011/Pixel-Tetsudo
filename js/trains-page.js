@@ -1235,11 +1235,12 @@
           staticLayer.appendChild(branchLine);
           
           // Branch vertical line
+          var branchSp = geometry.sp || 24;
           var branchVLine = document.createElementNS(svgNS, "line");
           branchVLine.setAttribute("x1", bx);
           branchVLine.setAttribute("y1", by);
           branchVLine.setAttribute("x2", bx);
-          branchVLine.setAttribute("y2", branchTop + (branch.stations ? branch.stations.length * 24 : 50));
+          branchVLine.setAttribute("y2", branchTop + (branch.stations ? branch.stations.length * branchSp : 50));
           branchVLine.setAttribute("stroke", bColor);
           branchVLine.setAttribute("stroke-width", "3");
           branchVLine.setAttribute("opacity", "0.5");
@@ -1248,20 +1249,20 @@
           // Branch stations (simplified)
           if (branch.stations) {
             for (var bsi = 0; bsi < branch.stations.length; bsi++) {
-              var bsy = by + bsi * 24;
+              var bsy = by + bsi * branchSp;
               var bCircle = document.createElementNS(svgNS, "circle");
               bCircle.setAttribute("cx", bx);
               bCircle.setAttribute("cy", bsy);
-              bCircle.setAttribute("r", "3.5");
+              bCircle.setAttribute("r", "4");
               bCircle.setAttribute("fill", "#fff");
               bCircle.setAttribute("stroke", bColor);
-              bCircle.setAttribute("stroke-width", "1.8");
+              bCircle.setAttribute("stroke-width", "2");
               staticLayer.appendChild(bCircle);
               
               var bLabel = document.createElementNS(svgNS, "text");
               bLabel.setAttribute("x", bx + 6);
               bLabel.setAttribute("y", bsy + 3);
-              bLabel.setAttribute("font-size", "7");
+              bLabel.setAttribute("font-size", "12");
               bLabel.setAttribute("fill", "#666");
               bLabel.setAttribute("font-family", "sans-serif");
               bLabel.setAttribute("font-weight", "500");
@@ -1274,7 +1275,7 @@
           var branchName = document.createElementNS(svgNS, "text");
           branchName.setAttribute("x", bx + 6);
           branchName.setAttribute("y", branchTop - 6);
-          branchName.setAttribute("font-size", "8");
+          branchName.setAttribute("font-size", "13");
           branchName.setAttribute("fill", bColor);
           branchName.setAttribute("font-family", "sans-serif");
           branchName.setAttribute("font-weight", "600");
