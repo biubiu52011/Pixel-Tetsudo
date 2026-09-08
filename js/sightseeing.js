@@ -54,6 +54,7 @@
     dom.empty = document.getElementById('smEmpty');
     dom.stationDisplay = document.getElementById('smStationDisplay');
     dom.relocateBtn = document.getElementById('smRelocateBtn');
+    dom.locationBar = document.querySelector('.sm-location-bar');
     dom.header = document.querySelector('.sm-header');
     dom.stationPicker = document.getElementById('smStationPicker');
   }
@@ -307,7 +308,16 @@ function renderGrid() {
   function updateStationDisplay() {
     if (!dom.stationDisplay) return;
     if (state.locStatus === 'error') {
-      dom.stationDisplay.textContent = t('tourism.loc_error');
+      // Geolocation failed: if a station is still shown (default/manual), say so explicitly
+      if (state.selectedStation) {
+        var _defLabel = state.selectedStation;
+        if (window.RailwayDB && window.RailwayDB.resolveStationName) {
+          _defLabel = window.RailwayDB.resolveStationName(state.selectedStation, state.lang) || state.selectedStation;
+        }
+        dom.stationDisplay.textContent = (t('tourism.loc_error_default') || '').replace('{station}', _defLabel);
+      } else {
+        dom.stationDisplay.textContent = t('tourism.loc_error');
+      }
       dom.stationDisplay.classList.remove('sm-station-detected');
       return;
     }
@@ -331,7 +341,7 @@ function renderGrid() {
         e.preventDefault();
         e.stopPropagation();
         hideStationPicker();
-        initLocation({ showPickerOnFail: true });
+        initLocation();
       });
     }
     if (dom.stationPicker) {
@@ -384,9 +394,7 @@ function renderGrid() {
     if (dom.stationPicker) dom.stationPicker.classList.add('hidden');
   }
 
-  function initLocation(opts) {
-    opts = opts || {};
-    var showPickerOnFail = !!opts.showPickerOnFail;
+  function initLocation() {
     state.locStatus = 'locating';
     if (dom.relocateBtn) dom.relocateBtn.classList.add('loading');
     renderHeader();
@@ -398,7 +406,6 @@ function renderGrid() {
         }
         state.autoDetected = false;
         renderAll();
-        if (showPickerOnFail) showStationPicker();
       }
     }, 8000);
     function locFallback() {
@@ -408,7 +415,6 @@ function renderGrid() {
       }
       state.autoDetected = false;
       renderAll();
-      if (showPickerOnFail) showStationPicker();
     }
     if (typeof navigator === 'undefined' || !navigator.geolocation) {
       clearTimeout(guard);
