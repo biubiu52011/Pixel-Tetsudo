@@ -89,6 +89,10 @@
     var result = { status: "normal", maxDelay: 0, interval: null, cause: null };
     if (!raw) return result;
     try {
+      // v4.3.388: 权威状态字段优先（odpt:trainInformationStatus: Delay/Suspension/Normal）
+      var _stF = String(raw["odpt:trainInformationStatus"] || "").split(":").pop();
+      if (_stF === "Suspension") result.status = "suspended";
+      else if (_stF === "Delay") result.status = "delayed";
       // Direct delay field first: odpt:Train responses carry odpt:delay (minutes)
       if (raw["odpt:delay"] != null) {
         var dMin0 = parseInt(raw["odpt:delay"], 10);
@@ -97,16 +101,25 @@
       var ti = raw["odpt:trainInformationText"] || "";
       var text = typeof ti === "string" ? ti : (typeof ti === "object" && ti !== null ? (ti.ja || ti.en || ti.zh || JSON.stringify(ti)) : "");
       if (!text) return result;
-      if (text.indexOf("\u904b\u4f11") >= 0 || text.indexOf("\u898b\u5408\u308f\u305b") >= 0 || text.toLowerCase().indexOf("suspended") >= 0) result.status = "suspended";
-      else if (text.indexOf("\u904b\u5ef6") >= 0 || text.indexOf("\u9045\u5ef6") >= 0 || text.indexOf("\u904b\u308c") >= 0 || text.toLowerCase().indexOf("delay") >= 0) result.status = "delayed";
-      else if (text.indexOf("\u5e73\u5e38") >= 0 || text.indexOf("\u901a\u5e38") >= 0 || text.toLowerCase().indexOf("normal") >= 0 || text.toLowerCase().indexOf("schedule") >= 0) result.status = "normal";
-      else if (text.indexOf("\u7d42\u4e86") >= 0 || text.toLowerCase().indexOf("finished") >= 0) result.status = "suspended";
-      var m = text.match(/(\d+)\s*(\u5206|min)/i);
+      // 状态字段缺失/为 Normal 时用文本关键词补充（ダイヤ乱れ = 遅延）
+      if (result.status === "normal") {
+        if (text.indexOf("\u904b\u4f11") >= 0 || text.indexOf("\u898b\u5408\u308f\u305b") >= 0 || text.toLowerCase().indexOf("suspended") >= 0) result.status = "suspended";
+        else if (text.indexOf("\u904b\u5ef6") >= 0 || text.indexOf("\u9045\u5ef6") >= 0 || text.indexOf("\u904b\u308c") >= 0 || text.indexOf("\u4e71\u308c") >= 0 || text.toLowerCase().indexOf("delay") >= 0) result.status = "delayed";
+        else if (text.indexOf("\u7d42\u4e86") >= 0 || text.toLowerCase().indexOf("finished") >= 0) result.status = "suspended";
+      }
+      // 延迟分钟：排除时刻（18時08分頃 的 "08分" 不是延迟）
+      var m = text.match(/(?:\u7d04|\u304a\u3088\u305d)?\s*(\d{1,3})\s*(?:\u5206\u9593|\u5206|min)(?!\u9803|\u5f8c|\u4ee5)/i);
       if (m) result.maxDelay = parseInt(m[1], 10);
+      // 区间：站间（A〜B）优先；其次"○○線内"（如 京急線内）
       var im = text.match(/([^\s\-。，,、]+?)\s*[\u301c\uff5e\uff0d\u2212\u81f3\u2192-]\s*([^\s\-。，,、]+?)(?:\u99c5|\u9593|(?=[。，,、\s]))/);
       if (im) result.interval = im[1] + "\u2192" + im[2];
-      // v4.3.386: cause extraction - "XXのため" / "XXの影響" / "XXにより"
-      var cm = text.match(/(?:\u3067|、|，|,|\s|^)([^。\n，,、\s\u3067\u301c\uff5e\uff0d\u2212\u81f3\u2192-]+?)(?:\u306e\u305f\u3081|\u306e\u5f71\u97ff|\u306b\u3088\u308a|\u306b\u3088\u308b|\u304c\u539f\u56e0|\u306e\u767a\u751f|\u306b\u4f34\u3044)/);
+      else {
+        var inM = text.match(/([^\s。，,、]{1,8}?\u7dda\u5185)/);
+        if (inM) result.interval = inM[1];
+      }
+      // v4.3.388: 原因提取——优先"発生した/発生し"之后（…にて発生した信号確認のため→信号確認），其次通用模式
+      var cm = text.match(/(?:\u767a\u751f\u3057\u305f|\u767a\u751f\u3057)([^。\n，,、\s\u3067\u301c\uff5e\uff0d\u2212\u81f3\u2192-]+?)(?:\u306e\u305f\u3081|\u306e\u5f71\u97ff|\u306b\u3088\u308a|\u306b\u3088\u308b)/);
+      if (!cm) cm = text.match(/(?:\u3067|、|，|,|\s|^)([^。\n，,、\s\u3067\u301c\uff5e\uff0d\u2212\u81f3\u2192-]+?)(?:\u306e\u305f\u3081|\u306e\u5f71\u97ff|\u306b\u3088\u308a|\u306b\u3088\u308b|\u304c\u539f\u56e0|\u306e\u767a\u751f|\u306b\u4f34\u3044)/);
       if (cm && cm[1]) result.cause = cm[1];
     } catch(e) {}
     return result;
