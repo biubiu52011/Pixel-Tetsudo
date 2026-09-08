@@ -397,8 +397,8 @@
     arr.setAttribute("fill", "none");
     arr.setAttribute("stroke", lc);
     arr.setAttribute("stroke-width", mobile ? 2 : 1.8);
-    arr.setAttribute("stroke-linecap", "butt");
-    arr.setAttribute("stroke-linejoin", "miter");
+    arr.setAttribute("stroke-linecap", "round");
+    arr.setAttribute("stroke-linejoin", "round");
     layer.appendChild(arr);
     var txt = document.createElementNS(ns, "text");
     txt.setAttribute("x", x + 12);
