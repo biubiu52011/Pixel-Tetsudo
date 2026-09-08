@@ -929,15 +929,26 @@ window.LineOperationSystems = {
       order: 1
     },
     {
-      code: "TI",
-      nameJa: "伊勢崎線（スカイツリーライン）",
-      nameZh: "伊势崎线（晴空塔线）",
-      nameEn: "Isesaki Line (Skytree Line)",
+      code: "TS",
+      nameJa: "東武スカイツリーライン",
+      nameZh: "东武晴空塔线",
+      nameEn: "Tobu Skytree Line",
       nameKo: "",
       color: "#0f6cc3",
-      lineIds: ["TobuSkytree", "TobuIsesaki"],
+      lineIds: ["TobuSkytree"],
       icon: "../images/鉄道/東武鉄道/伊勢崎線 佐野線 桐生線 小泉線 小泉線支線.png",
       order: 2
+    },
+    {
+      code: "TI",
+      nameJa: "伊勢崎線",
+      nameZh: "伊势崎线",
+      nameEn: "Tobu Isesaki Line",
+      nameKo: "",
+      color: "#0f6cc3",
+      lineIds: ["TobuIsesaki"],
+      icon: "../images/鉄道/東武鉄道/伊勢崎線 佐野線 桐生線 小泉線 小泉線支線.png",
+      order: 2.5
     },
     {
       code: "TJ",
