@@ -977,82 +977,179 @@ function applyData(data, i18n) {
       }
     };
   }
+  // ========== v4.3.387: Static DB cache (stale-while-revalidate) ==========
+  // localStorage key 跟随 script 的 ?v= 版本参数自动失效（同版本刷新秒开，发版后自动重新下载）
+  var DB_CACHE_VERSION = (function() {
+    try {
+      var src = (document.currentScript && document.currentScript.src) || "";
+      var m = src.match(/[?&]v=([^&]+)/);
+      if (m && m[1]) return m[1];
+    } catch(e) {}
+    return "0";
+  })();
+  var DB_CACHE_KEY = "pt_db_v" + DB_CACHE_VERSION;
+
+  function cacheRead() {
+    try {
+      var raw = localStorage.getItem(DB_CACHE_KEY);
+      if (!raw) return null;
+      var obj = JSON.parse(raw);
+      if (!obj || !obj.railway || !obj.railway.lines || !obj.railway.stations || !obj.i18n) return null;
+      return obj;
+    } catch(e) { return null; }
+  }
+
+  function cacheWrite(railway, i18n, tourism) {
+    try {
+      localStorage.setItem(DB_CACHE_KEY, JSON.stringify({ railway: railway, i18n: i18n, tourism: tourism, ts: Date.now() }));
+    } catch(e) { /* quota / private mode: ignore */ }
+  }
+
+  // 清理旧版本缓存（只留当前版本）
+  function cleanOldCaches() {
+    try {
+      for (var i = localStorage.length - 1; i >= 0; i--) {
+        var k = localStorage.key(i);
+        if (k && k.indexOf("pt_db_v") === 0 && k !== DB_CACHE_KEY) localStorage.removeItem(k);
+      }
+    } catch(e) {}
+  }
+
+  // 网络失败时的最后兜底：取任意旧版本缓存（最新优先）
+  function readAnyCache() {
+    try {
+      var best = null, bestTs = -1;
+      for (var i = 0; i < localStorage.length; i++) {
+        var k = localStorage.key(i);
+        if (!k || k.indexOf("pt_db_v") !== 0) continue;
+        try {
+          var obj = JSON.parse(localStorage.getItem(k));
+          if (!obj || !obj.railway || !obj.railway.lines) continue;
+          if (obj.ts > bestTs) { bestTs = obj.ts; best = obj; }
+        } catch(e) {}
+      }
+      return best;
+    } catch(e) { return null; }
+  }
+
+  // fetch with timeout (default 15s)
+  function fetchWithTimeout(url, ms) {
+    ms = ms || 15000;
+    if (typeof AbortController === "undefined") return fetch(url);
+    var ctrl = new AbortController();
+    var timer = setTimeout(function() { ctrl.abort(); }, ms);
+    return fetch(url, { cache: "no-cache", signal: ctrl.signal }).then(
+      function(r) { clearTimeout(timer); return r; },
+      function(err) { clearTimeout(timer); throw err; }
+    );
+  }
+
+  // fetch + retry (3 attempts total, 400ms/800ms backoff)
+  function fetchJSON(url, tries) {
+    tries = (tries === undefined) ? 3 : tries;
+    return fetchWithTimeout(url).then(function(res) {
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      return res.json();
+    }).catch(function(err) {
+      if (tries <= 1) throw err;
+      return new Promise(function(resolve) { setTimeout(resolve, 400 * (3 - tries + 1)); })
+        .then(function() { return fetchJSON(url, tries - 1); });
+    });
+  }
+
+  // 应用 tourism_data.json 覆盖（原 fetch then-chain 逻辑，抽取复用）
+  function applyTourismData(override) {
+    override = override || {};
+    if (override.spots && Array.isArray(override.spots)) window.TOURISM_SPOTS = override.spots;
+    if (override.station_coords && typeof override.station_coords === 'object') {
+      Object.keys(override.station_coords).forEach(function(stationKey) {
+        var coord = override.station_coords[stationKey];
+        if (coord && coord.length === 2) window.STATION_COORDS[stationKey] = coord;
+      });
+    }
+    Object.keys(override).forEach(function(key) {
+      if (key === 'spots' || key === 'station_coords') return;
+      var st = override[key];
+      if (st && st.coord && st.coord.length === 2) window.STATION_COORDS[key] = st.coord;
+    });
+    if (override.station_exits && typeof override.station_exits === 'object') {
+      window.STATION_EXITS = override.station_exits;
+    } else {
+      window.STATION_EXITS = {};
+    }
+    window.TOURISM_DATA = {};
+    window.TOURISM_STATIONS = Object.keys(override.station_coords || {});
+  }
+
+  // 远程加载：并行 + 超时 + 重试 + 应用 + 写缓存（i18n/tourism 容错，railway 必须成功）
+  function fetchRemote() {
+    return Promise.all([
+      fetchJSON(DATA_FILE),
+      fetchJSON(STATION_I18N_FILE).then(function(r) { return r; }, function() { return {}; }),
+      fetchJSON(TOURISM_DATA_FILE).then(function(r) { return r; }, function() { return {}; })
+    ]).then(function(results) {
+      applyData(results[0], results[1]);
+      applyTourismData(results[2]);
+      cleanOldCaches();
+      cacheWrite(results[0], results[1], results[2]);
+      loaded = true;
+      console.log(
+        Object.keys(results[0].stations).length + " stations, " +
+        Object.keys(results[0].lines).length + " lines, " +
+        Object.keys(results[0].tourism).length + " tourism stations");
+      return results;
+    });
+  }
+
 function load() {
     if (loaded) return Promise.resolve();
 
-    // Strategy A: if file:// protocol, skip fetch (CORS blocks it) and use script-based data directly.
-    // Strategy B: if http/https, try fetch first, fall back to script data on failure.
+    // Strategy A: file:// protocol - skip fetch (CORS blocks it), use script data directly.
     var isFileProtocol = (window.location.protocol === 'file:');
-
     if (isFileProtocol) {
-      var xhr = new XMLHttpRequest();
-      xhr.open('GET', '../data/core/railway_data.json', false);
       if (window.RAILWAY_DATA && window.RAILWAY_DATA.stations) { applyData(window.RAILWAY_DATA); loaded = true; return Promise.resolve(); }
       error = new Error("No data source available under file:// protocol");
       console.error("[DbLoader] Failed to load data under file:// protocol");
       return Promise.reject(error);
     }
 
-    // HTTP/HTTPS: try fetch first
-    return Promise.all([
-      fetch(DATA_FILE, { cache: "no-cache" }).then(function(res) {
-        if (!res.ok) throw new Error("HTTP " + res.status);
-        return res.json();
-      }),
-      fetch(STATION_I18N_FILE, { cache: "no-cache" }).then(function(res) {
-        if (!res.ok) return {};
-        return res.json();
-      }),
-      fetch(TOURISM_DATA_FILE, { cache: "no-cache" }).then(function(res) {
-        if (!res.ok) return {};
-        return res.json();
-      }).catch(function() { return {}; })
-    ])
-      .then(function(results) {
-        applyData(results[0], results[1]);
-        // Merge tourism data override (tourism_data.json takes precedence)
-        // New format: { spots: [...], station_coords: { ... } } - global spots pool
-        var tourismOverride = results[2] || {};
-        if (tourismOverride.spots && Array.isArray(tourismOverride.spots)) {
-          window.TOURISM_SPOTS = tourismOverride.spots;
-        }
-        if (tourismOverride.station_coords && typeof tourismOverride.station_coords === 'object') {
-          Object.keys(tourismOverride.station_coords).forEach(function(stationKey) {
-            var coord = tourismOverride.station_coords[stationKey];
-            if (coord && coord.length === 2) {
-              window.STATION_COORDS[stationKey] = coord;
-            }
-          });
-        }
-        // Backward compat: old station-grouped format
-        Object.keys(tourismOverride).forEach(function(key) {
-          if (key === 'spots' || key === 'station_coords') return;
-          var st = tourismOverride[key];
-          if (st && st.coord && st.coord.length === 2) {
-            window.STATION_COORDS[key] = st.coord;
-          }
-        });
-        // Load station exits (only exits that actually exist at each station)
-        if (tourismOverride.station_exits && typeof tourismOverride.station_exits === 'object') {
-          window.STATION_EXITS = tourismOverride.station_exits;
-        } else {
-          window.STATION_EXITS = {};
-        }
-        window.TOURISM_DATA = {};
-        window.TOURISM_STATIONS = Object.keys(tourismOverride.station_coords || {});
+    // Strategy B (v4.3.387): stale-while-revalidate
+    // 1) 缓存命中 → 立即应用（首屏秒开），后台刷新数据
+    var cached = cacheRead();
+    if (cached) {
+      try {
+        applyData(cached.railway, cached.i18n);
+        applyTourismData(cached.tourism);
         loaded = true;
-        console.log(
-          Object.keys(results[0].stations).length + " stations, " +
-          Object.keys(results[0].lines).length + " lines, " +
-          Object.keys(results[0].tourism).length + " tourism stations");
-      })
-      .catch(function(err) {
-        // Fallback to railway-data.js removed: the file does not exist in data/core
-        // (canonical data lives in railway_data.json, per AGENTS.md Three-Layer rule).
-        error = err;
-        console.error("[DbLoader] Failed to load:", err.message);
-        throw err;
-      });
+        console.log("[DbLoader] Cache hit (v" + DB_CACHE_VERSION + "), background refresh scheduled");
+        fetchRemote().catch(function(err) {
+          console.warn("[DbLoader] Background refresh failed, keeping cache:", err.message);
+        });
+        return Promise.resolve();
+      } catch(e) {
+        // 缓存损坏 → 走远程
+        console.warn("[DbLoader] Cache apply failed, falling back to remote:", e.message);
+        try { localStorage.removeItem(DB_CACHE_KEY); } catch(_e) {}
+      }
+    }
+
+    // 2) 无缓存 → 远程加载（超时 + 重试）
+    return fetchRemote().catch(function(err) {
+      // 3) 远程失败 → 旧版本缓存兜底（避免白屏 / Render failed）
+      var fallback = readAnyCache();
+      if (fallback) {
+        try {
+          applyData(fallback.railway, fallback.i18n);
+          applyTourismData(fallback.tourism);
+          loaded = true;
+          console.warn("[DbLoader] Remote failed, using older cache fallback:", err.message);
+          return fallback;
+        } catch(e2) {}
+      }
+      error = err;
+      console.error("[DbLoader] Failed to load:", err.message);
+      throw err;
+    });
   }
 
   window.DataLoader = {
