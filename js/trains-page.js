@@ -346,9 +346,10 @@
   // anchoring (position calculation) and by the renderer itself.
   function _throughChipSize(lineObj, mobile) {
     var nm = _throughShortName(lineObj, mobile);
-    var label = (lineObj.dir === "up" ? "∧" : (lineObj.dir === "down" ? "∨" : "<")) + "直通" + nm;
+    // 方向箭头改为 SVG 矢量绘制（不受字体字形影响），文本不再含 ∧/∨/< 字符。
+    var label = "直通" + nm;
     var fs = mobile ? 12 : 10;
-    var w = label.length * (mobile ? 12 : 10) + 8;
+    var w = label.length * (mobile ? 12 : 10) + 8 + (mobile ? 12 : 10);
     var h = (mobile ? 19 : 12) + 4;
     return { w: w + 2, h: h, label: label };
   }
@@ -378,8 +379,29 @@
     bg.setAttribute("stroke", lc);
     bg.setAttribute("stroke-width", "1");
     layer.appendChild(bg);
+    // Direction arrow drawn as an inline SVG path (vector, immune to font
+    // glyph availability): up=∧ / down=∨ / middle=<, stroke in the line colour.
+    var dir = lineObj.dir || "middle";
+    var ay = y + (mobile ? 9 : 6);
+    var _ax = x + 5;
+    var arrowD = "";
+    if (dir === "up") {
+      arrowD = "M" + (_ax - 3) + "," + (ay + 4) + " L" + _ax + "," + (ay - 3) + " L" + (_ax + 3) + "," + (ay + 4);
+    } else if (dir === "down") {
+      arrowD = "M" + (_ax - 3) + "," + (ay - 3) + " L" + _ax + "," + (ay + 4) + " L" + (_ax + 3) + "," + (ay - 3);
+    } else {
+      arrowD = "M" + (_ax + 3) + "," + (ay - 3) + " L" + (_ax - 3) + "," + ay + " L" + (_ax + 3) + "," + (ay + 3);
+    }
+    var arr = document.createElementNS(ns, "path");
+    arr.setAttribute("d", arrowD);
+    arr.setAttribute("fill", "none");
+    arr.setAttribute("stroke", lc);
+    arr.setAttribute("stroke-width", mobile ? 2 : 1.8);
+    arr.setAttribute("stroke-linecap", "butt");
+    arr.setAttribute("stroke-linejoin", "miter");
+    layer.appendChild(arr);
     var txt = document.createElementNS(ns, "text");
-    txt.setAttribute("x", x + 3);
+    txt.setAttribute("x", x + 12);
     txt.setAttribute("y", y + (mobile ? 12 : 9));
     txt.setAttribute("font-size", mobile ? 12 : 10);
     txt.setAttribute("fill", lc);
