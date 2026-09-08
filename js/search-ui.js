@@ -266,7 +266,7 @@
       var nm = (window.RailwayDB && window.RailwayDB.resolveLineName) ? window.RailwayDB.resolveLineName(lid, window.currentLang) : lid;
       var line = (window.RailwayDB && window.RailwayDB.getLine) ? window.RailwayDB.getLine(lid) : null;
       var img = (window.LineOperationSystemsResolveIcon && window.LineOperationSystemsResolveIcon(lid)) || (line && line.image && !/(グループ|ロゴ|マーク|アイコン|シンボル)/.test(line.image) ? line.image : '');
-      if (!img && line && line.operator === "JR-East") img = "../images/鉄道/JR東日本/JRグループ.png";
+      if (!img && line && line.operator && line.operator.indexOf("JR") === 0) img = "../images/鉄道/JR東日本/JRグループ.png";
       if (img) {
         return '<span class="journey-line-badge"><img class="journey-line-icon" src="' + window.escapeHtml(img) + '" alt="' + window.escapeHtml(nm) + '" title="' + window.escapeHtml(nm) + '" loading="lazy"><span class="journey-line-name">' + window.escapeHtml(nm) + '</span></span>';
       }
