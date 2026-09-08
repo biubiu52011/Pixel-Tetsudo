@@ -159,11 +159,26 @@
   }
 
   // ========== Delay lookup ==========
+  // v4.3.386: compatible with full-record array (worst delay of the operator)
   function getDelayForOperator(operatorId, delayInfo) {
     try {
       if (!delayInfo) return 0;
       var info = delayInfo[operatorId];
       if (!info) return 0;
+      if (Array.isArray(info)) {
+        var worst = 0;
+        for (var i = 0; i < info.length; i++) {
+          var rec = info[i] || {};
+          var st = String(rec["odpt:trainInformationStatus"] || "").split(":").pop();
+          var t = String(rec["odpt:trainInformationText"] || "");
+          if (st === "Suspension" || t.indexOf("運休") >= 0 || t.toLowerCase().indexOf("suspended") >= 0) return 60;
+          if (st === "Delay" || st === "遅延" || t.indexOf("運延") >= 0 || t.indexOf("運れ") >= 0 || t.toLowerCase().indexOf("delay") >= 0) {
+            var tm = t.match(/(d+)s*(分|min)/i);
+            worst = Math.max(worst, tm ? (parseInt(tm[1], 10) || 15) : 15);
+          }
+        }
+        return worst;
+      }
       if (info.status === "normal" || info.status === "no_data") return 0;
       return info.maxDelay || info.delay || 0;
     } catch(e) { return 0; }

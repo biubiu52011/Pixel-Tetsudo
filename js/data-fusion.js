@@ -97,16 +97,43 @@
       var ti = raw["odpt:trainInformationText"] || "";
       var text = typeof ti === "string" ? ti : (typeof ti === "object" && ti !== null ? (ti.ja || ti.en || ti.zh || JSON.stringify(ti)) : "");
       if (!text) return result;
-      if (text.indexOf("\u904b\u4f11") >= 0 || text.toLowerCase().indexOf("suspended") >= 0) result.status = "suspended";
-      else if (text.indexOf("\u904b\u5ef6") >= 0 || text.indexOf("\u904b\u308c") >= 0 || text.toLowerCase().indexOf("delay") >= 0) result.status = "delayed";
+      if (text.indexOf("\u904b\u4f11") >= 0 || text.indexOf("\u898b\u5408\u308f\u305b") >= 0 || text.toLowerCase().indexOf("suspended") >= 0) result.status = "suspended";
+      else if (text.indexOf("\u904b\u5ef6") >= 0 || text.indexOf("\u9045\u5ef6") >= 0 || text.indexOf("\u904b\u308c") >= 0 || text.toLowerCase().indexOf("delay") >= 0) result.status = "delayed";
       else if (text.indexOf("\u5e73\u5e38") >= 0 || text.indexOf("\u901a\u5e38") >= 0 || text.toLowerCase().indexOf("normal") >= 0 || text.toLowerCase().indexOf("schedule") >= 0) result.status = "normal";
       else if (text.indexOf("\u7d42\u4e86") >= 0 || text.toLowerCase().indexOf("finished") >= 0) result.status = "suspended";
       var m = text.match(/(\d+)\s*(\u5206|min)/i);
       if (m) result.maxDelay = parseInt(m[1], 10);
-      var im = text.match(/([^\s\-]+)\s*[-\uff5e\u81f3\u2192]\s*([^\s\-]+)/);
+      var im = text.match(/([^\s\-。，,、]+?)\s*[\u301c\uff5e\uff0d\u2212\u81f3\u2192-]\s*([^\s\-。，,、]+?)(?:\u99c5|\u9593|(?=[。，,、\s]))/);
       if (im) result.interval = im[1] + "\u2192" + im[2];
+      // v4.3.386: cause extraction - "XXのため" / "XXの影響" / "XXにより"
+      var cm = text.match(/(?:\u3067|、|，|,|\s|^)([^。\n，,、\s\u3067\u301c\uff5e\uff0d\u2212\u81f3\u2192-]+?)(?:\u306e\u305f\u3081|\u306e\u5f71\u97ff|\u306b\u3088\u308a|\u306b\u3088\u308b|\u304c\u539f\u56e0|\u306e\u767a\u751f|\u306b\u4f34\u3044)/);
+      if (cm && cm[1]) result.cause = cm[1];
     } catch(e) {}
     return result;
+  }
+
+  // ========== v4.3.386: TrainInformation full-record matching ==========
+  // ODPT "odpt.Railway:TokyoMetro.Ginza" -> "Ginza"
+  function extractRailwayShort(rec) {
+    try {
+      var rw = (rec && rec["odpt:railway"]) || "";
+      if (!rw) return "";
+      var parts = String(rw).split(":");
+      if (parts.length < 2) return "";
+      var dots = parts[parts.length - 1].split(".");
+      return dots[dots.length - 1] || "";
+    } catch(e) { return ""; }
+  }
+
+  // Worst-state aggregation across records (suspension > delayed > normal)
+  function aggregateDelayRecords(records) {
+    var rank = { suspended: 3, delayed: 2, normal: 1 };
+    var worst = null;
+    for (var i = 0; i < records.length; i++) {
+      var parsed = parseODPTDelay(records[i]);
+      if (!worst || (rank[parsed.status] || 0) > (rank[worst.status] || 0)) worst = parsed;
+    }
+    return worst || { status: "normal", maxDelay: 0, interval: null, cause: null };
   }
 
   function getApiDelayInfo(line) {
@@ -116,9 +143,31 @@
       var norm = TransitConstants && typeof TransitConstants.normalizeOp === "function" ? TransitConstants.normalizeOp(op) : op;
       var raw = odptData.delayInfo[norm] || odptData.delayInfo[op];
       if (!raw) return null;
+      // v4.3.386: full-record array (one per running system) -> match by line's ODPT railway code
+      if (Array.isArray(raw)) {
+        if (raw.length === 0) return null;
+        var code = line.id;
+        if (window.ODPTClient && window.ODPTClient.LINE_RAILWAY_CODE && window.ODPTClient.LINE_RAILWAY_CODE[line.id]) {
+          code = window.ODPTClient.LINE_RAILWAY_CODE[line.id];
+        }
+        var matched = null;
+        for (var i = 0; i < raw.length; i++) {
+          if (!raw[i]) continue;
+          var shortCode = extractRailwayShort(raw[i]);
+          if (shortCode && String(shortCode).toLowerCase() === String(code).toLowerCase()) {
+            matched = raw[i];
+            break;
+          }
+        }
+        if (matched) return parseODPTDelay(matched);
+        // no own record -> aggregate worst state of this operator (no loss, no false normal)
+        return aggregateDelayRecords(raw);
+      }
+      // legacy single-record path
       return parseODPTDelay(raw);
     } catch(e) { return null; }
   }
+
 
   function fuseLine(lineId) {
     try {
@@ -126,7 +175,16 @@
       if (!line) return null;
       var apiInfo = getApiDelayInfo(line);
       var localStatus = localData.statusMap && localData.statusMap[lineId];
-      var delayInfo = apiInfo || (localStatus && { status: localStatus.status, maxDelay: localStatus.maxDelay, interval: localStatus.interval, cause: localStatus.cause }) || (window.ODPTClient && window.ODPTClient.LINE_TO_OPERATOR && (window.ODPTClient.LINE_TO_OPERATOR[lineId] || window.ODPTClient.LINE_TO_OPERATOR[line.name]) ? { status: "normal", maxDelay: 0, interval: null, cause: null } : { status: "no_odpt", maxDelay: 0, interval: null, cause: null });
+      // v4.3.386: effective local status only (default-normal init must not mask missing source)
+      var _hasLocal = !!(localStatus && (localStatus.status !== "normal" || (localStatus.maxDelay || 0) > 0 || localStatus.interval || localStatus.cause));
+      var fallbackDelay = { status: "no_odpt", maxDelay: 0, interval: null, cause: null };
+      try {
+        var _opLine = window.ODPTClient && window.ODPTClient.LINE_TO_OPERATOR ? (window.ODPTClient.LINE_TO_OPERATOR[lineId] || window.ODPTClient.LINE_TO_OPERATOR[line.name]) : null;
+        if (_opLine && window.ODPTClient.supports && window.ODPTClient.supports(_opLine, 'trainInformation')) {
+          fallbackDelay = { status: "normal", maxDelay: 0, interval: null, cause: null };
+        }
+      } catch(_e) {}
+      var delayInfo = apiInfo || (_hasLocal && { status: localStatus.status, maxDelay: localStatus.maxDelay, interval: localStatus.interval, cause: localStatus.cause }) || fallbackDelay;
       // Attach running-chain resolution context (transient, not persistent)
       var _chainCtx = null;
       try {

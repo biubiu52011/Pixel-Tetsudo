@@ -805,7 +805,8 @@
                 subPromises.push(
                     fetchODPT(buildUrl(op, 'trainInformation')).then(extractData).then(function(data) {
                         if (data && data.length > 0) {
-                            window.ODPT_DELAY_DATA[op] = data[0];
+                            // v4.3.386: 保留全部记录（ODPT 按运行系统返回多条，data[0] 只留首条会丢其他线路的延误）
+                            window.ODPT_DELAY_DATA[op] = data;
                             loaded.delay++;
                         }
                     })
