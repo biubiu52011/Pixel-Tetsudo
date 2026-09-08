@@ -100,6 +100,40 @@
       }
       var ti = raw["odpt:trainInformationText"] || "";
       var text = typeof ti === "string" ? ti : (typeof ti === "object" && ti !== null ? (ti.ja || ti.en || ti.zh || JSON.stringify(ti)) : "");
+      // v4.3.390: 结构化字段优先（ODPT v4 schema 提供 Cause/Range/stationFrom/stationTo/resumeEstimate）
+      var _cF = raw["odpt:trainInformationCause"];
+      if (_cF != null) {
+        var _cS = typeof _cF === "string" ? _cF : (_cF.ja || _cF.en || "");
+        if (_cS) result.cause = _cS;
+      }
+      if (!result.interval) {
+        var _rF = raw["odpt:trainInformationRange"];
+        if (_rF != null) {
+          var _rS = typeof _rF === "string" ? _rF : (_rF.ja || _rF.en || "");
+          if (_rS) result.interval = _rS;
+        }
+      }
+      if (!result.interval) {
+        var _fS = raw["odpt:stationFrom"];
+        var _tS = raw["odpt:stationTo"];
+        if (_fS || _tS) {
+          var _fId = _fS ? extractRailwayShort({ "odpt:railway": _fS }) : "";
+          var _tId = _tS ? extractRailwayShort({ "odpt:railway": _tS }) : "";
+          var _fN = _fId, _tN = _tId;
+          try {
+            if (_fId && window.RailwayDB && window.RailwayDB.resolveStationName) _fN = window.RailwayDB.resolveStationName(_fId) || _fId;
+            if (_tId && window.RailwayDB && window.RailwayDB.resolveStationName) _tN = window.RailwayDB.resolveStationName(_tId) || _tId;
+          } catch(e) {}
+          if (_fN && _tN) result.interval = _fN + "\u2192" + _tN;
+          else if (_fN) result.interval = _fN + "\u65b9\u9762";
+          else if (_tN) result.interval = _tN + "\u65b9\u9762";
+        }
+      }
+      var _rs = raw["odpt:resumeEstimate"];
+      if (_rs) {
+        var _rm = String(_rs).match(/(\d{2}):(\d{2})/);
+        if (_rm) result.resume = _rm[1] + ":" + _rm[2];
+      }
       if (!text) return result;
       // v4.3.389: 保留原文全文（弹窗直接显示，不依赖碎片解析）
       result.detail = text;
@@ -112,17 +146,21 @@
       // 延迟分钟：排除时刻（18時08分頃 的 "08分" 不是延迟）
       var m = text.match(/(?:\u7d04|\u304a\u3088\u305d)?\s*(\d{1,3})\s*(?:\u5206\u9593|\u5206|min)(?!\u9803|\u5f8c|\u4ee5)/i);
       if (m) result.maxDelay = parseInt(m[1], 10);
-      // 区间：站间（A〜B）优先；其次"○○線内"（如 京急線内）
-      var im = text.match(/([^\s\-。，,、]+?)\s*[\u301c\uff5e\uff0d\u2212\u81f3\u2192-]\s*([^\s\-。，,、]+?)(?:\u99c5|\u9593|(?=[。，,、\s]))/);
-      if (im) result.interval = im[1] + "\u2192" + im[2];
-      else {
-        var inM = text.match(/([^\s。，,、]{1,8}?\u7dda\u5185)/);
-        if (inM) result.interval = inM[1];
+      // 区间（文本回退，仅字段缺失时）：站间（A〜B）优先；其次"○○線内"（如 京急線内）
+      if (!result.interval) {
+        var im = text.match(/([^\s\-。，,、]+?)\s*[\u301c\uff5e\uff0d\u2212\u81f3\u2192-]\s*([^\s\-。，,、]+?)(?:\u99c5|\u9593|(?=[。，,、\s]))/);
+        if (im) result.interval = im[1] + "\u2192" + im[2];
+        else {
+          var inM = text.match(/([^\s。，,、]{1,8}?\u7dda\u5185)/);
+          if (inM) result.interval = inM[1];
+        }
       }
-      // v4.3.388: 原因提取——优先"発生した/発生し"之后（…にて発生した信号確認のため→信号確認），其次通用模式
-      var cm = text.match(/(?:\u767a\u751f\u3057\u305f|\u767a\u751f\u3057)([^。\n，,、\s\u3067\u301c\uff5e\uff0d\u2212\u81f3\u2192-]+?)(?:\u306e\u305f\u3081|\u306e\u5f71\u97ff|\u306b\u3088\u308a|\u306b\u3088\u308b)/);
-      if (!cm) cm = text.match(/(?:\u3067|、|，|,|\s|^)([^。\n，,、\s\u3067\u301c\uff5e\uff0d\u2212\u81f3\u2192-]+?)(?:\u306e\u305f\u3081|\u306e\u5f71\u97ff|\u306b\u3088\u308a|\u306b\u3088\u308b|\u304c\u539f\u56e0|\u306e\u767a\u751f|\u306b\u4f34\u3044)/);
-      if (cm && cm[1]) result.cause = cm[1];
+      // 原因（文本回退，仅字段缺失时）：优先"発生した/発生し"之后，其次通用模式
+      if (!result.cause) {
+        var cm = text.match(/(?:\u767a\u751f\u3057\u305f|\u767a\u751f\u3057)([^。\n，,、\s\u3067\u301c\uff5e\uff0d\u2212\u81f3\u2192-]+?)(?:\u306e\u305f\u3081|\u306e\u5f71\u97ff|\u306b\u3088\u308a|\u306b\u3088\u308b)/);
+        if (!cm) cm = text.match(/(?:\u3067|、|，|,|\s|^)([^。\n，,、\s\u3067\u301c\uff5e\uff0d\u2212\u81f3\u2192-]+?)(?:\u306e\u305f\u3081|\u306e\u5f71\u97ff|\u306b\u3088\u308a|\u306b\u3088\u308b|\u304c\u539f\u56e0|\u306e\u767a\u751f|\u306b\u4f34\u3044)/);
+        if (cm && cm[1]) result.cause = cm[1];
+      }
     } catch(e) {}
     return result;
   }
