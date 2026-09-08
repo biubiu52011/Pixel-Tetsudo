@@ -185,11 +185,10 @@
     } else {
       var _firstLine = memberIds.length > 0 ? (linesObj[memberIds[0]] || {}) : {};
       var _sysOp = _firstLine.operator || sys.operator || "";
-      if (window.TransitConstants && window.TransitConstants.isJRERoute && window.TransitConstants.isJRERoute(_firstLine) && !code) {
+      if (window.TransitConstants && window.TransitConstants.isJRERoute && window.TransitConstants.isJRERoute(_firstLine)) {
         iconHtml = '<div class="rs-line-icon-fallback"><img src="../images/鉄道/JR東日本/JRグループ.png" alt="JR"></div>';
       } else {
-        // v4.3.418: 无专属图标的系统卡显示路线色框 + 官方记号（中央本線 CO 等），替代裸文字 badge
-        iconHtml = '<div class="rs-line-icon-fallback rs-code-badge">' + escapeHtml(code || "?") + '</div>';
+        iconHtml = '<div class="rs-system-badge">' + escapeHtml(code || "?") + '</div>';
       }
     }
     return '<div class="rs-line-card rs-system-card" data-line="' + escapeHtml(firstId) + '" data-system="' + escapeHtml(code) + '" data-lines="' + escapeHtml(memberIds.join(",")) + '" data-line-color="' + escapeHtml(color) + '">'

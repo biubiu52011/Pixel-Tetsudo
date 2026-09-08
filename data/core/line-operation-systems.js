@@ -51,7 +51,7 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#007ac0",
       lineIds: ["ChuoMain"],
-      order: 3.5
+      order: 20
     },
     {
       code: "JC",
