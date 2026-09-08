@@ -178,15 +178,19 @@
     } catch(e) { return ""; }
   }
 
-  // Worst-state aggregation across records (suspension > delayed > normal)
+  // v4.3.391: 聚合只接受无 railway 归属的记录（全网/多线报文）。
+  // 有 odpt:railway 的记录专属其线——不得把 A 线的报文聚合显示到 B 线弹窗
+  // （修复：都営新宿線无记录时误显浅草線报文）。
   function aggregateDelayRecords(records) {
     var rank = { suspended: 3, delayed: 2, normal: 1 };
     var worst = null;
     for (var i = 0; i < records.length; i++) {
+      if (!records[i]) continue;
+      if (extractRailwayShort(records[i])) continue;
       var parsed = parseODPTDelay(records[i]);
       if (!worst || (rank[parsed.status] || 0) > (rank[worst.status] || 0)) worst = parsed;
     }
-    return worst || { status: "normal", maxDelay: 0, interval: null, cause: null };
+    return worst;
   }
 
   function getApiDelayInfo(line) {
