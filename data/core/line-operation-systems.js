@@ -914,7 +914,7 @@ window.LineOperationSystems = {
       nameEn: "Noda Line (Urban Park Line)",
       nameKo: "",
       color: "#0093d0",
-      lineIds: ["TobuNoda","Noda"],
+      lineIds: ["Noda"],
       icon: "../images/鉄道/東武鉄道/野田線.png",
       order: 1
     },

@@ -2210,7 +2210,7 @@
     },
     {
      "station": "Omiya",
-     "lineId": "TobuNoda",
+     "lineId": "Noda",
      "type": "in",
      "note": ""
     },
@@ -3865,7 +3865,7 @@
     },
     {
      "station": "Omiya",
-     "lineId": "TobuNoda",
+     "lineId": "Noda",
      "type": "in",
      "note": ""
     },
@@ -4199,7 +4199,7 @@
     },
     {
      "station": "Kashiwa",
-     "lineId": "TobuNoda",
+     "lineId": "Noda",
      "type": "in",
      "note": ""
     },
@@ -4511,12 +4511,6 @@
     },
     {
      "station": "Nishi-Funabashi",
-     "lineId": "TobuNoda",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Nishi-Funabashi",
      "lineId": "ChuoSobuLocal",
      "type": "in",
      "note": ""
@@ -4601,7 +4595,7 @@
     },
     {
      "station": "Omiya",
-     "lineId": "TobuNoda",
+     "lineId": "Noda",
      "type": "in",
      "note": ""
     },
@@ -5361,7 +5355,7 @@
     },
     {
      "station": "Omiya",
-     "lineId": "TobuNoda",
+     "lineId": "Noda",
      "type": "in",
      "note": ""
     },
@@ -6135,7 +6129,7 @@
     },
     {
      "station": "Kashiwa",
-     "lineId": "TobuNoda",
+     "lineId": "Noda",
      "type": "in",
      "note": ""
     },
@@ -7534,12 +7528,6 @@
     {
      "station": "Nishi-Funabashi",
      "lineId": "Musashino",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Nishi-Funabashi",
-     "lineId": "TobuNoda",
      "type": "in",
      "note": ""
     },
@@ -10277,6 +10265,7 @@
     "Funabashi-Keibajo",
     "Yatsu",
     "Keisei-Tsudanuma",
+    "Keisei-Narashino",
     "Keisei-Ohkubo",
     "Mimomi",
     "Yachiyodai",
@@ -10379,12 +10368,6 @@
     {
      "station": "Keisei-Takasago",
      "lineId": "NaritaSkyAccess",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Yatsu",
-     "lineId": "TobuNoda",
      "type": "in",
      "note": ""
     },
@@ -10628,240 +10611,6 @@
     {
      "station": "Fujisawa",
      "lineId": "TokaidoMain",
-     "type": "in",
-     "note": ""
-    }
-   ]
-  },
-  "TobuNoda": {
-   "name": "TobuNoda",
-   "nameEn": "Tobu Noda Line",
-   "nameJa": "野田線（アーバンパークライン）",
-   "code": "TD",
-   "color": "#0093d0",
-   "operator": "Tobu",
-   "region": "Saitama Area",
-   "type": "straight",
-   "image": "../images/鉄道/東武鉄道/野田線.png",
-   "durationTotalMin": 65,
-   "branchOf": null,
-   "stations": [
-    "Omiya",
-    "Kita-Omiya",
-    "Omiya-Koen",
-    "Sakaecho",
-    "Kawama",
-    "Nanasato",
-    "Shimizu-koen",
-    "Atago",
-    "Nanodai",
-    "Kasukabe",
-    "Yagisaki",
-    "Iwatsuki",
-    "Higashi-Iwatsuki",
-    "Ohanabatake",
-    "Kashiwa",
-    "Shin-Kashiwa",
-    "Gumyo",
-    "Sakasai",
-    "Mutsumi",
-    "Shin-Kamagaya",
-    "Kamagaya",
-    "Maezaki",
-    "Unane",
-    "Kita-Narashino",
-    "Yatsu",
-    "Keisei-Narashino",
-    "Nishi-Funabashi",
-    "Higashi-Funabashi",
-    "Funabashi"
-   ],
-   "durations": [
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2
-   ],
-   "throughServices": [],
-   "transferStations": [
-    {
-     "station": "Omiya",
-     "lineId": "KeihinTohoku",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Omiya",
-     "lineId": "Saikyo",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Omiya",
-     "lineId": "ShonanShinjuku",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Omiya",
-     "lineId": "Takasaki",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Omiya",
-     "lineId": "Kawagoe",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Omiya",
-     "lineId": "Noda",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Omiya",
-     "lineId": "NewShuttle",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Omiya",
-     "lineId": "UtsunomiyaJR",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Sakaecho",
-     "lineId": "ChibaUrbanMonorail",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Atago",
-     "lineId": "Noda",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Kasukabe",
-     "lineId": "TobuSkytree",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Yagisaki",
-     "lineId": "Noda",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Iwatsuki",
-     "lineId": "Noda",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Kashiwa",
-     "lineId": "Joban",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Kashiwa",
-     "lineId": "JobanLocal",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Kashiwa",
-     "lineId": "Noda",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Shin-Kamagaya",
-     "lineId": "NaritaSkyAccess",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Kamagaya",
-     "lineId": "Noda",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Yatsu",
-     "lineId": "Keisei",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Nishi-Funabashi",
-     "lineId": "Musashino",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Nishi-Funabashi",
-     "lineId": "Tozai",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Nishi-Funabashi",
-     "lineId": "ChuoSobuLocal",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Higashi-Funabashi",
-     "lineId": "ChuoSobuLocal",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Funabashi",
-     "lineId": "SobuRapid",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Funabashi",
-     "lineId": "ChuoSobuLocal",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Funabashi",
-     "lineId": "Noda",
      "type": "in",
      "note": ""
     }
@@ -11269,7 +11018,7 @@
     },
     {
      "station": "Funabashi",
-     "lineId": "TobuNoda",
+     "lineId": "Noda",
      "type": "in",
      "note": ""
     },
@@ -13486,14 +13235,8 @@
      "note": ""
     },
     {
-     "station": "Nishi-Funabashi",
-     "lineId": "TobuNoda",
-     "type": "in",
-     "note": ""
-    },
-    {
      "station": "Funabashi",
-     "lineId": "TobuNoda",
+     "lineId": "Noda",
      "type": "in",
      "note": ""
     },
@@ -13506,12 +13249,6 @@
     {
      "station": "Funabashi",
      "lineId": "Noda",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Higashi-Funabashi",
-     "lineId": "TobuNoda",
      "type": "in",
      "note": ""
     },
@@ -14935,7 +14672,7 @@
     },
     {
      "station": "Omiya",
-     "lineId": "TobuNoda",
+     "lineId": "Noda",
      "type": "in",
      "note": ""
     },
@@ -16655,43 +16392,42 @@
    "branchOf": null,
    "stations": [
     "Omiya",
-    "Kita_Omiya",
-    "Omiya_Koen",
-    "Oowada",
-    "Shichiri",
+    "Kita-Omiya",
+    "Omiya-Koen",
+    "Owada",
+    "Nanasato",
     "Iwatsuki",
-    "Higashi_Iwatsuki",
-    "Tohyu",
+    "Higashi-Iwatsuki",
+    "Toyoharu",
     "Yagisaki",
-    "Kasugabe",
-    "Fujino_Shima",
-    "Minami_Sakurai",
-    "Kawa",
-    "Nanakouen",
-    "Shimizu_Koen",
+    "Kasukabe",
+    "Fujino-Ushijima",
+    "Minami-Sakurai",
+    "Kawama",
+    "Nanakodai",
+    "Shimizu-koen",
     "Atago",
-    "Ichihashi",
-    "Umon",
+    "Nodashi",
+    "Umesato",
+    "Unga",
     "Edogawadai",
-    "Hajime",
-    "Nagareyama",
-    "Ohtakano_Mori",
-    "Toyotoki",
+    "Hatsuishi",
+    "Nagareyama-Otakanomori",
+    "Toyoshiki",
     "Kashiwa",
-    "Shin_Kashiwa",
+    "Shin-Kashiwa",
     "Masuo",
-    "Sakae",
+    "Sakasai",
     "Takayanagi",
-    "Rokkoku",
-    "Shin_Kamagaya",
+    "Mutsumi",
+    "Shin-Kamagaya",
     "Kamagaya",
-    "Matsumizawa",
-    "Tsuka",
-    "Shin_Funabashi",
+    "Magomezawa",
+    "Tsukada",
+    "Shin-Funabashi",
     "Funabashi"
    ],
    "durations": [
-    2,
     2,
     2,
     2,
@@ -16755,12 +16491,6 @@
     },
     {
      "station": "Omiya",
-     "lineId": "TobuNoda",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Omiya",
      "lineId": "Kawagoe",
      "type": "in",
      "note": ""
@@ -16778,20 +16508,8 @@
      "note": ""
     },
     {
-     "station": "Iwatsuki",
-     "lineId": "TobuNoda",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Yagisaki",
-     "lineId": "TobuNoda",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Atago",
-     "lineId": "TobuNoda",
+     "station": "Kasukabe",
+     "lineId": "TobuSkytree",
      "type": "in",
      "note": ""
     },
@@ -16808,20 +16526,8 @@
      "note": ""
     },
     {
-     "station": "Kashiwa",
-     "lineId": "TobuNoda",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Kamagaya",
-     "lineId": "TobuNoda",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Funabashi",
-     "lineId": "TobuNoda",
+     "station": "Shin-Kamagaya",
+     "lineId": "NaritaSkyAccess",
      "type": "in",
      "note": ""
     },
@@ -21179,7 +20885,7 @@
     },
     {
      "station": "Kasukabe",
-     "lineId": "TobuNoda",
+     "lineId": "Noda",
      "type": "in",
      "note": ""
     },
@@ -21852,7 +21558,7 @@
     },
     {
      "station": "Shin-Kamagaya",
-     "lineId": "TobuNoda",
+     "lineId": "Noda",
      "type": "in",
      "note": ""
     }
@@ -21975,7 +21681,7 @@
     },
     {
      "station": "Omiya",
-     "lineId": "TobuNoda",
+     "lineId": "Noda",
      "type": "in",
      "note": ""
     },
@@ -22059,12 +21765,6 @@
     {
      "station": "Chiba",
      "lineId": "SobuMain",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Sakaecho",
-     "lineId": "TobuNoda",
      "type": "in",
      "note": ""
     },
@@ -23312,7 +23012,7 @@
     },
     {
      "station": "Omiya",
-     "lineId": "TobuNoda",
+     "lineId": "Noda",
      "type": "in",
      "note": ""
     },
@@ -24068,7 +23768,7 @@
   "北品川": "Kitashinagawa",
   "北坂戸": "Kita-sakado",
   "北堀之内": "Kita-Horinouchi",
-  "北大宮": "Kita-omiya",
+  "北大宮": "Kita-Omiya",
   "北小金": "Kita-Kogane",
   "北山田": "Kita-Yamata",
   "北府中": "Kita-Fuchu",
@@ -24122,7 +23822,7 @@
   "南林間": "Minami-Rinkan",
   "南柏": "Minami-Kashiwa",
   "南栗橋": "Minami-kurihashi",
-  "南桜井": "Minami-sakurai",
+  "南桜井": "Minami-Sakurai",
   "南橋本": "Minami-Hashimoto",
   "南流山": "Minami-Nagareyama",
   "南浦和": "Minami-Urawa",
@@ -24224,7 +23924,7 @@
   "大塚": "Otsuka",
   "大塚・帝京大学": "Otsuka-Teikyo-Daigaku",
   "大塚駅前": "Otsuka-ekimae",
-  "大宮公園": "Omiya-koen",
+  "大宮公園": "Omiya-Koen",
   "大山": "Oyama",
   "大岡山": "Ookayama",
   "大島": "Oshida",
@@ -24475,7 +24175,7 @@
   "新松戸": "Shim-Matsudo",
   "新松田": "Shin-Matsuda",
   "新板橋": "Shin-itabashi",
-  "新柏": "Shin-kashiwa",
+  "新柏": "Shin-Kashiwa",
   "新栃木": "Shin-tochigi",
   "新桐生": "Shin-kiryu",
   "新桜台": "Shin-Sakuradai",
@@ -24494,13 +24194,13 @@
   "新綱島": "Shin-tsunashima",
   "新羽": "Nippa",
   "新習志野": "Shin-Narashino",
-  "新船橋": "Shin-funabashi",
+  "新船橋": "Shin-Funabashi",
   "新芝浦": "Shin-Shibaura",
   "新茂原": "Shim-Mobara",
   "新藤原": "Shin-fujiwara",
   "新豊洲": "Shin-Toyosu",
   "新越谷": "Shin-koshigaya",
-  "新鎌ヶ谷": "Shin-kamagaya",
+  "新鎌ヶ谷": "Shin-Kamagaya",
   "新馬場": "Shimbamba",
   "新高円寺": "Shin-koenji",
   "新高島平": "Shin-takashimadaira",
@@ -24589,7 +24289,7 @@
   "東尾久三丁目": "Higashi-ogu-sanchome",
   "東山梨": "Higashi-Yamanashi",
   "東山田": "Higashi-Yamata",
-  "東岩槻": "Higashi-iwatsuki",
+  "東岩槻": "Higashi-Iwatsuki",
   "東川口": "Higashi-Kawaguchi",
   "東府中": "Higashi-fuchū",
   "東我孫子": "Higashi-Abiko",
@@ -24729,7 +24429,6 @@
   "永田": "Nagata",
   "永田町": "Nagatacho",
   "永福町": "Eifukuchō",
-  "求名": "Gumyo",
   "汐入": "Shioiri",
   "汐留": "Shiodome",
   "江北": "Kohoku",
@@ -24759,7 +24458,7 @@
   "津久田": "Tsukuda",
   "津田山": "Tsudayama",
   "津田沼": "Tsudanuma",
-  "流山おおたかの森": "Nagareyama-ōtakanomori",
+  "流山おおたかの森": "Nagareyama-Otakanomori",
   "流山セントラルパーク": "Nagareyama-centralpark",
   "浅草": "Asakusa",
   "浅草橋": "Asakusabashi",
@@ -25040,7 +24739,7 @@
   "蔵前": "Kuramae",
   "蕨": "Warabi",
   "藤が丘": "Fujigaoka",
-  "藤の牛島": "Fujino-ushijima",
+  "藤の牛島": "Fujino-Ushijima",
   "藤代": "Fujishiro",
   "藤岡": "Fujioka",
   "藤沢": "Fujisawa",
@@ -25403,7 +25102,6 @@
   "奥多摩口新": "Okutama-guchi",
   "大宮": "Omiya",
   "埼玉": "Saitama",
-  "栄": "Sakae",
   "堺": "Sakai",
   "狭山": "Sayama",
   "西武茶山": "Seibu-Chausuyama",
@@ -32495,7 +32193,6 @@
    "Saikyo",
    "ShonanShinjuku",
    "Takasaki",
-   "TobuNoda",
    "Kawagoe",
    "Noda",
    "NewShuttle",
@@ -32972,7 +32669,6 @@
   "Kashiwa": [
    "Joban",
    "JobanLocal",
-   "TobuNoda",
    "Noda"
   ],
   "Abiko": [
@@ -33117,7 +32813,6 @@
   "Nishi-Funabashi": [
    "Musashino",
    "Tozai",
-   "TobuNoda",
    "ChuoSobuLocal"
   ],
   "Fujisawa": [
@@ -34471,8 +34166,7 @@
    "Keisei"
   ],
   "Yatsu": [
-   "Keisei",
-   "TobuNoda"
+   "Keisei"
   ],
   "Keisei-Tsudanuma": [
    "Keisei",
@@ -34607,87 +34301,63 @@
    "OdakyuEnoshima"
   ],
   "Kita-Omiya": [
-   "TobuNoda"
+   "Noda"
   ],
   "Omiya-Koen": [
-   "TobuNoda"
+   "Noda"
   ],
   "Sakaecho": [
-   "TobuNoda",
    "ChibaUrbanMonorail"
   ],
   "Kawama": [
-   "TobuNoda"
-  ],
-  "Nanasato": [
-   "TobuNoda"
-  ],
-  "Shimizu-koen": [
-   "TobuNoda"
-  ],
-  "Atago": [
-   "TobuNoda",
    "Noda"
   ],
-  "Nanodai": [
-   "TobuNoda"
+  "Nanasato": [
+   "Noda"
+  ],
+  "Shimizu-koen": [
+   "Noda"
+  ],
+  "Atago": [
+   "Noda"
   ],
   "Kasukabe": [
-   "TobuNoda",
-   "TobuSkytree"
+   "TobuSkytree",
+   "Noda"
   ],
   "Yagisaki": [
-   "TobuNoda",
    "Noda"
   ],
   "Iwatsuki": [
-   "TobuNoda",
    "Noda"
   ],
   "Higashi-Iwatsuki": [
-   "TobuNoda"
-  ],
-  "Ohanabatake": [
-   "TobuNoda"
-  ],
-  "Shin-Kashiwa": [
-   "TobuNoda"
-  ],
-  "Gumyo": [
-   "TobuNoda"
-  ],
-  "Sakasai": [
-   "TobuNoda"
-  ],
-  "Mutsumi": [
-   "TobuNoda"
-  ],
-  "Shin-Kamagaya": [
-   "TobuNoda",
-   "NaritaSkyAccess"
-  ],
-  "Kamagaya": [
-   "TobuNoda",
    "Noda"
   ],
-  "Maezaki": [
-   "TobuNoda"
+  "Shin-Kashiwa": [
+   "Noda"
   ],
-  "Unane": [
-   "TobuNoda"
+  "Sakasai": [
+   "Noda"
   ],
-  "Kita-Narashino": [
-   "TobuNoda"
+  "Mutsumi": [
+   "Noda"
   ],
+  "Shin-Kamagaya": [
+   "NaritaSkyAccess",
+   "Noda"
+  ],
+  "Kamagaya": [
+   "Noda"
+  ],
+  "Kita-Narashino": [],
   "Keisei-Narashino": [
-   "TobuNoda"
+   "Keisei"
   ],
   "Higashi-Funabashi": [
-   "TobuNoda",
    "ChuoSobuLocal"
   ],
   "Funabashi": [
-   "TobuNoda",
    "SobuRapid",
    "ChuoSobuLocal",
    "Noda"
@@ -37270,88 +36940,13 @@
   "Minumadai-Shinsuikoen": [
    "Nippori_Toneri"
   ],
-  "Kita_Omiya": [
-   "Noda"
-  ],
-  "Omiya_Koen": [
-   "Noda"
-  ],
-  "Oowada": [
-   "Noda"
-  ],
-  "Shichiri": [
-   "Noda"
-  ],
-  "Higashi_Iwatsuki": [
-   "Noda"
-  ],
-  "Tohyu": [
-   "Noda"
-  ],
-  "Kasugabe": [
-   "Noda"
-  ],
-  "Fujino_Shima": [
-   "Noda"
-  ],
-  "Minami_Sakurai": [
-   "Noda"
-  ],
-  "Kawa": [
-   "Noda"
-  ],
-  "Nanakouen": [
-   "Noda"
-  ],
-  "Shimizu_Koen": [
-   "Noda"
-  ],
-  "Ichihashi": [
-   "Noda"
-  ],
-  "Umon": [
-   "Noda"
-  ],
   "Edogawadai": [
-   "Noda"
-  ],
-  "Hajime": [
-   "Noda"
-  ],
-  "Nagareyama": [
-   "Noda"
-  ],
-  "Ohtakano_Mori": [
-   "Noda"
-  ],
-  "Toyotoki": [
-   "Noda"
-  ],
-  "Shin_Kashiwa": [
    "Noda"
   ],
   "Masuo": [
    "Noda"
   ],
-  "Sakae": [
-   "Noda"
-  ],
   "Takayanagi": [
-   "Noda"
-  ],
-  "Rokkoku": [
-   "Noda"
-  ],
-  "Shin_Kamagaya": [
-   "Noda"
-  ],
-  "Matsumizawa": [
-   "Noda"
-  ],
-  "Tsuka": [
-   "Noda"
-  ],
-  "Shin_Funabashi": [
    "Noda"
   ],
   "Shin-Yuri-Ga-Oka": [
@@ -40911,6 +40506,48 @@
   ],
   "Tateyama-Yamagata": [
    "Senzan"
+  ],
+  "Owada": [
+   "Noda"
+  ],
+  "Minami-Sakurai": [
+   "Noda"
+  ],
+  "Toyoharu": [
+   "Noda"
+  ],
+  "Fujino-Ushijima": [
+   "Noda"
+  ],
+  "Nanakodai": [
+   "Noda"
+  ],
+  "Nodashi": [
+   "Noda"
+  ],
+  "Umesato": [
+   "Noda"
+  ],
+  "Unga": [
+   "Noda"
+  ],
+  "Hatsuishi": [
+   "Noda"
+  ],
+  "Nagareyama-Otakanomori": [
+   "Noda"
+  ],
+  "Toyoshiki": [
+   "Noda"
+  ],
+  "Magomezawa": [
+   "Noda"
+  ],
+  "Tsukada": [
+   "Noda"
+  ],
+  "Shin-Funabashi": [
+   "Noda"
   ]
  },
  "lineStationOrder": {
