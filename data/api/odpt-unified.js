@@ -398,7 +398,7 @@
     // 已确认项来自 ODPT 官方线路 ID 列表；推断项遵循 ODPT 命名惯例，运行时以 API 返回为准。
     var LINE_RAILWAY_CODE = {
       "Saikyo": "SaikyoKawagoe",
-      "Kawagoe": "SaikyoKawagoe",
+      "Kawagoe": "Kawagoe",
       "KeihinTohoku": "KeihinTohokuNegishi",
       "ChuoMain": "Chuo",
       "SobuMain": "Sobu",
@@ -892,10 +892,28 @@
             console.debug("[ODPT] Realtime loaded - delay:", loaded.delay,
                         "operators, positions:", loaded.positions, "operators");
         }
+        // v4.3.415: 列车位置推送与延误情报解耦——位置数据不等待 delayPromises 完成
+        // （TrainInformation 任一 operator 慢/超时会卡住整条 Promise 链，导致 loadTrainPositions 永不执行）
+        // 同时等待 DataLayer 就绪后再分配（本地线路数据晚于 ODPT 到达时重试，不设死上限）
+        function pushTrainPositions() {
+            if (!window.DataFusion || !window.DataFusion.loadTrainPositions) {
+                setTimeout(pushTrainPositions, 300);
+                return;
+            }
+            var dl = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : (window.UNIFIED_LINES || {});
+            if (!dl || Object.keys(dl).length === 0) {
+                setTimeout(pushTrainPositions, 300);
+                return;
+            }
+            try {
+                window.DataFusion.loadTrainPositions();
+            } catch(e) { console.debug("[ODPT] train positions push error:", e.message); }
+            console.debug("[ODPT] Realtime positions pushed:", loaded.positions, "operators");
+        }
 
-        return Promise.all(delayPromises).then(pushDelay)
-            .then(function() { return Promise.all(posPromises); })
-            .then(pushAll);
+        // 延误情报独立推送；列车位置在 posPromises 就绪后推送（不阻塞、不依赖延误链）
+        Promise.all(delayPromises).then(pushDelay);
+        return Promise.all(posPromises).then(pushTrainPositions);
     }
     // ========== 加载时刻表数据（使用本地缓存）==========
     // 每小时刷新一次，优先使用本地缓存

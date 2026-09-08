@@ -328,7 +328,10 @@
             html += '<div class="journey-transfer';
             if (seg.through) { html += ' journey-transfer--through'; }
             html += '">';
-            html += '<span class="journey-transfer-icon">' + String.fromCharCode(seg.through ? 0x21c4 : 0x21bb) + '</span>';
+            var _txIconSvg = seg.through
+              ? '<svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 5.6h9"/><path d="M9.4 3.4l2.4 2.2-2.4 2.2"/><path d="M13.5 10.4h-9"/><path d="M6.6 8.2l-2.4 2.2 2.4 2.2"/></svg>'
+              : '<svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2.8a5.4 5.4 0 1 1-5.3 4.2"/><path d="M2.7 5.2v3.1h3.2"/></svg>';
+            html += '<span class="journey-transfer-icon">' + _txIconSvg + '</span>';
             html += '<span class="journey-transfer-station">' + window.escapeHtml(txSt) + '</span>';
             html += '<span class="journey-transfer-text';
             if (seg.through) { html += ' journey-transfer-text--through'; }

@@ -309,10 +309,10 @@
       if (!positionSource) return;
       var allLines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : (window.UNIFIED_LINES || {});
       if (!allLines || Object.keys(allLines).length === 0) {
-        // v4.3.413: DataLayer/UNIFIED_LINES 未就绪时延迟重试（最多 10 次），
+        // v4.3.413: DataLayer/UNIFIED_LINES 未就绪时延迟重试（最多 30 次），
         // 避免 ODPT 列车位置先于线路数据到达导致静默 return、实时位置永久丢失
         if (!loadTrainPositions._retry) loadTrainPositions._retry = 0;
-        if (loadTrainPositions._retry < 10) {
+        if (loadTrainPositions._retry < 30) {
           loadTrainPositions._retry++;
           setTimeout(loadTrainPositions, 300);
         }
