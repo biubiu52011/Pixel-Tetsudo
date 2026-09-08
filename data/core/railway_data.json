@@ -14545,18 +14545,6 @@
      "note": ""
     },
     {
-     "station": "Osawa",
-     "lineId": "OuMain",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Osawa",
-     "lineId": "Yamagata",
-     "type": "in",
-     "note": ""
-    },
-    {
      "station": "Koide",
      "lineId": "Tadami",
      "type": "in",
@@ -16107,7 +16095,6 @@
     "Hataya",
     "Shinmachi",
     "Yokomata",
-    "Yamato",
     "Yuse-Onsen",
     "Hachimantai",
     "Rikuchu-Sato",
@@ -16274,7 +16261,7 @@
     "Hayashi",
     "Shimotsuma",
     "Niihari",
-    "Yamato",
+    "Yamato-Mito",
     "Iwase",
     "Haguro",
     "Fukuhara",
@@ -16489,12 +16476,6 @@
     },
     {
      "station": "Sakura",
-     "lineId": "Uchibo",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Sakura",
      "lineId": "SobuMain",
      "type": "in",
      "note": ""
@@ -16502,12 +16483,6 @@
     {
      "station": "Narita",
      "lineId": "SobuMain",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Namegawa",
-     "lineId": "Uchibo",
      "type": "in",
      "note": ""
     },
@@ -16835,12 +16810,6 @@
     {
      "station": "Kashiwa",
      "lineId": "TobuNoda",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Sakae",
-     "lineId": "Uchibo",
      "type": "in",
      "note": ""
     },
@@ -19948,58 +19917,34 @@
    "durationTotalMin": 100,
    "stations": [
     "Chiba",
+    "Hon-Chiba",
     "Soga",
+    "Kamatori",
+    "Honda",
     "Toke",
     "Oami",
-    "Honda",
+    "Nagata",
+    "Honno",
+    "Shim-Mobara",
+    "Mobara",
     "Yatsumi",
     "Kazusa-Ichinomiya",
-    "Mobara",
-    "Daijima",
-    "Naruto",
-    "Sakura",
-    "Yachimata",
-    "Enokido",
-    "Yokaichiba",
-    "Sakae",
-    "Iigura",
-    "Matsuo",
-    "Kujukuri",
-    "Kasugacho",
-    "Namegawa",
+    "Torami",
+    "Taito",
+    "Chojamachi",
+    "Mikado",
+    "Ohara",
+    "Namihana",
+    "Onjuku",
+    "Katsuura",
+    "Ubara",
+    "Kazusa-Okitsu",
+    "Namegawa-Island",
     "Awa-Kominato",
     "Awa-Amatsu",
-    "Katsuura",
-    "Kazusa-Okitsu",
     "Awa-Kamogawa"
    ],
-   "durations": [
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2,
-    2
-   ],
+   "durations": [],
    "throughServices": [],
    "transferStations": [
     {
@@ -20041,54 +19986,6 @@
     {
      "station": "Soga",
      "lineId": "Sotobo",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Sakura",
-     "lineId": "Narita",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Sakura",
-     "lineId": "SobuMain",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Yachimata",
-     "lineId": "SobuMain",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Enokido",
-     "lineId": "SobuMain",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Yokaichiba",
-     "lineId": "SobuMain",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Sakae",
-     "lineId": "Noda",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Matsuo",
-     "lineId": "SobuMain",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Namegawa",
-     "lineId": "Narita",
      "type": "in",
      "note": ""
     },
@@ -20361,7 +20258,7 @@
     "Akaiwa",
     "Itaya",
     "Toge",
-    "Osawa",
+    "Osawa-Yamagata",
     "Sekine",
     "Yonezawa",
     "Okitama",
@@ -20388,6 +20285,8 @@
     "Sodesaki",
     "Oishida",
     "Kita-Oishida",
+    "Ashisawa",
+    "Funagata",
     "Shinjo"
    ],
    "durations": [
@@ -20428,12 +20327,6 @@
     {
      "station": "Fukushima",
      "lineId": "TohokuMain",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Osawa",
-     "lineId": "Joetsu",
      "type": "in",
      "note": ""
     },
@@ -22347,36 +22240,6 @@
     {
      "station": "Sakura",
      "lineId": "Narita",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Sakura",
-     "lineId": "Uchibo",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Enokido",
-     "lineId": "Uchibo",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Yachimata",
-     "lineId": "Uchibo",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Matsuo",
-     "lineId": "Uchibo",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Yokaichiba",
-     "lineId": "Uchibo",
      "type": "in",
      "note": ""
     },
@@ -25188,7 +25051,7 @@
   "虎ノ門": "Toranomon",
   "虎ノ門ヒルズ": "Toranomon-hills",
   "螢田": "Hotaruda",
-  "行川アイランド": "Namegawa Island",
+  "行川アイランド": "Namegawa-Island",
   "行徳": "Gyotoku",
   "行田": "Gyoda",
   "衣笠": "Kinugasa",
@@ -34714,9 +34577,7 @@
   ],
   "Yamato": [
    "OdakyuEnoshima",
-   "SotetsuMain",
-   "Kounan",
-   "Mito"
+   "SotetsuMain"
   ],
   "Sakuragaoka": [
    "OdakyuEnoshima"
@@ -36348,8 +36209,7 @@
    "Joetsu"
   ],
   "Osawa": [
-   "Joetsu",
-   "Yamagata"
+   "Joetsu"
   ],
   "Echigo-Iwasaki": [
    "Joetsu"
@@ -37310,7 +37170,6 @@
   ],
   "Sakura": [
    "Narita",
-   "Uchibo",
    "SobuMain"
   ],
   "Shisui": [
@@ -37323,8 +37182,7 @@
    "Narita"
   ],
   "Namegawa": [
-   "Narita",
-   "Uchibo"
+   "Narita"
   ],
   "Shimosa-Kanzaki": [
    "Narita"
@@ -37476,8 +37334,7 @@
    "Noda"
   ],
   "Sakae": [
-   "Noda",
-   "Uchibo"
+   "Noda"
   ],
   "Takayanagi": [
    "Noda"
@@ -38489,9 +38346,6 @@
   "Takase": [
    "Senzan"
   ],
-  "Tateyama-Yamagata": [
-   "Senzan"
-  ],
   "Kita-Takasaki": [
    "Shinetsu"
   ],
@@ -39402,38 +39256,24 @@
   "Mobara": [
    "Uchibo"
   ],
-  "Daijima": [
-   "Uchibo"
-  ],
+  "Daijima": [],
   "Naruto": [
-   "Uchibo",
    "SobuMain"
   ],
   "Yachimata": [
-   "Uchibo",
    "SobuMain"
   ],
   "Enokido": [
-   "Uchibo",
    "SobuMain"
   ],
   "Yokaichiba": [
-   "Uchibo",
    "SobuMain"
-  ],
-  "Iigura": [
-   "Uchibo"
   ],
   "Matsuo": [
-   "Uchibo",
    "SobuMain"
   ],
-  "Kujukuri": [
-   "Uchibo"
-  ],
-  "Kasugacho": [
-   "Uchibo"
-  ],
+  "Kujukuri": [],
+  "Kasugacho": [],
   "Awa-Kominato": [
    "Uchibo"
   ],
@@ -41020,6 +40860,57 @@
   ],
   "Okuma": [
    "JobanMain"
+  ],
+  "Kamatori": [
+   "Uchibo"
+  ],
+  "Nagata": [
+   "Uchibo"
+  ],
+  "Honno": [
+   "Uchibo"
+  ],
+  "Shim-Mobara": [
+   "Uchibo"
+  ],
+  "Torami": [
+   "Uchibo"
+  ],
+  "Taito": [
+   "Uchibo"
+  ],
+  "Chojamachi": [
+   "Uchibo"
+  ],
+  "Mikado": [
+   "Uchibo"
+  ],
+  "Ohara": [
+   "Uchibo"
+  ],
+  "Namihana": [
+   "Uchibo"
+  ],
+  "Onjuku": [
+   "Uchibo"
+  ],
+  "Ubara": [
+   "Uchibo"
+  ],
+  "Hon-Chiba": [
+   "Uchibo"
+  ],
+  "Yamato-Mito": [
+   "Mito"
+  ],
+  "Osawa-Yamagata": [
+   "Yamagata"
+  ],
+  "Namegawa-Island": [
+   "Uchibo"
+  ],
+  "Tateyama-Yamagata": [
+   "Senzan"
   ]
  },
  "lineStationOrder": {
@@ -42842,20 +42733,19 @@
    "Hataya": 9,
    "Shinmachi": 10,
    "Yokomata": 11,
-   "Yamato": 12,
-   "Yuse-Onsen": 13,
-   "Hachimantai": 14,
-   "Rikuchu-Sato": 15,
-   "Kazuno-Karua": 16,
-   "Shibaraki": 17,
-   "Towada-Minami": 18,
-   "Suehiro": 19,
-   "Fukakai": 20,
-   "Juni": 21,
-   "Ootaki-Onsen": 22,
-   "Ogi": 23,
-   "Higashi-Ohata": 24,
-   "Ohata": 25
+   "Yuse-Onsen": 12,
+   "Hachimantai": 13,
+   "Rikuchu-Sato": 14,
+   "Kazuno-Karua": 15,
+   "Shibaraki": 16,
+   "Towada-Minami": 17,
+   "Suehiro": 18,
+   "Fukakai": 19,
+   "Juni": 20,
+   "Ootaki-Onsen": 21,
+   "Ogi": 22,
+   "Higashi-Ohata": 23,
+   "Ohata": 24
   },
   "Kururi": {
    "Kisarazu": 0,
@@ -42881,14 +42771,14 @@
    "Hayashi": 4,
    "Shimotsuma": 5,
    "Niihari": 6,
-   "Yamato": 7,
    "Iwase": 8,
    "Haguro": 9,
    "Fukuhara": 10,
    "Inada": 11,
    "Kasama": 12,
    "Shihodo": 13,
-   "Tomobe": 14
+   "Tomobe": 14,
+   "Yamato-Mito": 7
   },
   "Miyo": {
    "Higashi-Sanjo": 0,
@@ -43710,30 +43600,32 @@
   },
   "Uchibo": {
    "Chiba": 0,
-   "Soga": 1,
-   "Toke": 2,
-   "Oami": 3,
+   "Hon-Chiba": 1,
+   "Soga": 2,
+   "Kamatori": 3,
    "Honda": 4,
-   "Yatsumi": 5,
-   "Kazusa-Ichinomiya": 6,
-   "Mobara": 7,
-   "Daijima": 8,
-   "Naruto": 9,
-   "Sakura": 10,
-   "Yachimata": 11,
-   "Enokido": 12,
-   "Yokaichiba": 13,
-   "Sakae": 14,
-   "Iigura": 15,
-   "Matsuo": 16,
-   "Kujukuri": 17,
-   "Kasugacho": 18,
-   "Namegawa": 19,
-   "Awa-Kominato": 20,
-   "Awa-Amatsu": 21,
-   "Katsuura": 22,
-   "Kazusa-Okitsu": 23,
-   "Awa-Kamogawa": 24
+   "Toke": 5,
+   "Oami": 6,
+   "Nagata": 7,
+   "Honno": 8,
+   "Shim-Mobara": 9,
+   "Mobara": 10,
+   "Yatsumi": 11,
+   "Kazusa-Ichinomiya": 12,
+   "Torami": 13,
+   "Taito": 14,
+   "Chojamachi": 15,
+   "Mikado": 16,
+   "Ohara": 17,
+   "Namihana": 18,
+   "Onjuku": 19,
+   "Katsuura": 20,
+   "Ubara": 21,
+   "Kazusa-Okitsu": 22,
+   "Namegawa-Island": 23,
+   "Awa-Kominato": 24,
+   "Awa-Amatsu": 25,
+   "Awa-Kamogawa": 26
   },
   "Uetsu": {
    "Niitsu": 0,
@@ -43815,7 +43707,7 @@
    "Akaiwa": 3,
    "Itaya": 4,
    "Toge": 5,
-   "Osawa": 6,
+   "Osawa-Yamagata": 6,
    "Sekine": 7,
    "Yonezawa": 8,
    "Okitama": 9,
@@ -43842,7 +43734,9 @@
    "Sodesaki": 30,
    "Oishida": 31,
    "Kita-Oishida": 32,
-   "Shinjo": 33
+   "Ashisawa": 33,
+   "Funagata": 34,
+   "Shinjo": 35
   },
   "YokohamaGreen": {
    "Nakayama": 0,

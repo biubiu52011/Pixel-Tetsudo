@@ -12779,12 +12779,6 @@
   "ko": "요카이치바",
   "en": "Yokaichiba"
  },
- "Iigura": {
-  "ja": "飯倉",
-  "zh": "饭仓",
-  "ko": "이이구라",
-  "en": "Iigura"
- },
  "Matsuo": {
   "ja": "松尾",
   "zh": "松尾",
@@ -12804,8 +12798,8 @@
   "en": "Kasugacho"
  },
  "Namegawa": {
-  "ja": "滑川",
-  "zh": "滑川",
+  "ja": "滑河",
+  "zh": "滑河",
   "ko": "나메가와",
   "en": "Namegawa"
  },
@@ -13779,7 +13773,7 @@
   "ja": "飯倉",
   "zh": "饭仓",
   "ko": "이이쿠라",
-  "en": "Iigura"
+  "en": "Iikura"
  },
  "Higata": {
   "ja": "干潟",
@@ -19858,5 +19852,95 @@
   "zh": "逢隈",
   "ko": "오쿠마",
   "en": "Okuma"
+ },
+ "Kamatori": {
+  "ja": "鎌取",
+  "zh": "镰取",
+  "ko": "카마토리",
+  "en": "Kamatori"
+ },
+ "Nagata": {
+  "ja": "永田",
+  "zh": "永田",
+  "ko": "나가타",
+  "en": "Nagata"
+ },
+ "Honno": {
+  "ja": "本納",
+  "zh": "本纳",
+  "ko": "혼노",
+  "en": "Honno"
+ },
+ "Shim-Mobara": {
+  "ja": "新茂原",
+  "zh": "新茂原",
+  "ko": "신모바라",
+  "en": "Shim-Mobara"
+ },
+ "Torami": {
+  "ja": "東浪見",
+  "zh": "东浪见",
+  "ko": "토라미",
+  "en": "Torami"
+ },
+ "Taito": {
+  "ja": "太東",
+  "zh": "太东",
+  "ko": "타이토",
+  "en": "Taito"
+ },
+ "Chojamachi": {
+  "ja": "長者町",
+  "zh": "长者町",
+  "ko": "쵸자마치",
+  "en": "Chojamachi"
+ },
+ "Mikado": {
+  "ja": "三門",
+  "zh": "三门",
+  "ko": "미카도",
+  "en": "Mikado"
+ },
+ "Ohara": {
+  "ja": "大原",
+  "zh": "大原",
+  "ko": "오하라",
+  "en": "Ohara"
+ },
+ "Namihana": {
+  "ja": "浪花",
+  "zh": "浪花",
+  "ko": "나미하나",
+  "en": "Namihana"
+ },
+ "Onjuku": {
+  "ja": "御宿",
+  "zh": "御宿",
+  "ko": "온주쿠",
+  "en": "Onjuku"
+ },
+ "Ubara": {
+  "ja": "鵜原",
+  "zh": "鹈原",
+  "ko": "우바라",
+  "en": "Ubara"
+ },
+ "Yamato-Mito": {
+  "ja": "大和",
+  "zh": "大和",
+  "ko": "야마토",
+  "en": "Yamato"
+ },
+ "Osawa-Yamagata": {
+  "ja": "大沢",
+  "zh": "大泽",
+  "ko": "오오사와",
+  "en": "Osawa"
+ },
+ "Namegawa-Island": {
+  "ja": "行川アイランド",
+  "zh": "行川岛",
+  "ko": "나메가와아일랜드",
+  "en": "Namegawa-Island"
  }
 }
