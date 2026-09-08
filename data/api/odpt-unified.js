@@ -451,7 +451,10 @@
     "Kounan": "Hanawa",
     "Miyo": "Yahiko",
     "Yonezawa": "Yonesaka",
-    "Komii": "Koumi",};
+    "Komii": "Koumi",
+    // v4.3.430: 房総2線 ID 语义与 ODPT 相反——项目 内房線=Sotobo（ODPT Uchibo=内房）、外房線=Uchibo（ODPT Sotobo=外房）
+    "Sotobo": "Uchibo",
+    "Uchibo": "Sotobo",};
 
     // 解析内部线路 key 为 ODPT Railway code（带别名）
     function resolveRailwayCode(operator, railway) {

@@ -92,7 +92,13 @@
     if (!raw) return result;
     try {
       // v4.3.388: 权威状态字段优先（odpt:trainInformationStatus: Delay/Suspension/Normal）
-      var _stF = String(raw["odpt:trainInformationStatus"] || "").split(":").pop();
+      // v4.3.430: 字段可为对象 {ja:"自由文本"}（如 直通運転中止/運転見合わせ）——提取，标准枚举直接采用，自由文本并入 text 统一判定
+      var _stRaw = raw["odpt:trainInformationStatus"];
+      var _stF = "";
+      if (_stRaw != null) {
+        if (typeof _stRaw === "string") _stF = String(_stRaw).split(":").pop();
+        else if (typeof _stRaw === "object") _stF = (_stRaw.ja || _stRaw.en || _stRaw.zh || "");
+      }
       if (_stF === "Suspension") result.status = "suspended";
       else if (_stF === "Delay") result.status = "delayed";
       // Direct delay field first: odpt:Train responses carry odpt:delay (minutes)
@@ -102,6 +108,10 @@
       }
       var ti = raw["odpt:trainInformationText"] || "";
       var text = typeof ti === "string" ? ti : (typeof ti === "object" && ti !== null ? (ti.ja || ti.en || ti.zh || JSON.stringify(ti)) : "");
+      // v4.3.430: 状态字段为自由文本（非标准枚举）时并入 text 统一判定（如 直通運転中止）
+      if (_stF && _stF !== "Normal" && _stF !== "Suspension" && _stF !== "Delay" && !/^odpt\./.test(_stF)) {
+        text = (text ? text + "\u3002" : "") + _stF;
+      }
       // v4.3.390: 结构化字段优先（ODPT v4 schema 提供 Cause/Range/stationFrom/stationTo/resumeEstimate）
       var _cF = raw["odpt:trainInformationCause"];
       if (_cF != null) {
@@ -146,9 +156,13 @@
         // v4.3.428: 删除裸"運転再開"——「運転再開は7時30分頃を見込んでいます」（未来将恢复）≠ 已恢复，不得跳过中断判定
         var _neg = /\u3042\u308a\u307e\u305b\u3093|\u3054\u3056\u3044\u307e\u305b\u3093|\u306a\u3057|\u89e3\u6d88|\u5e73\u5e38\u904b\u8ee2|\u5e73\u5e38\u904b\u884c|\u5e73\u5e38\u3067\u3059|\u9589\u9381|\u518d\u958b\u3057\u307e\u3057\u305f|\u3092\u518d\u958b/.test(text);
         if (!_neg) {
-          // v4.3.425: 收紧——只有明确"運転見合わせ/運転を中止/全線運休"才判全线中断；
-          // 单独"運休"（部分列车运休/时刻变更，如 设备维护通知）≠ 全线断线，不再误判
-          if (text.indexOf("\u898b\u5408\u308f\u305b") >= 0 || text.indexOf("\u904b\u8ee2\u3092\u4e2d\u6b62") >= 0 || text.indexOf("\u5168\u7dda\u904b\u4f11") >= 0 || text.toLowerCase().indexOf("suspended") >= 0) result.status = "suspended";
+          // v4.3.430: 直通终止/他线影响引述 ≠ 本线中断——直通对象线停运、本线折返/站台拥堵 = 运行情报（！）
+          // 例：武蔵野線"京葉線内での信号確認の影響で…直通運転を中止"→ notice；内房線"…運転を見合わせます"→ suspended
+          var _otherImpact = /(?:\u7dda\u5185\u3067\u306e|\u7dda\u306e\u904b\u8ee2\u898b\u5408\u308f\u305b|\u904b\u8ee2\u898b\u5408\u308f\u305b\u306e\u5f71\u97ff|\u904b\u8ee2\u898b\u5408\u308f\u305b\u306b\u4f34\u3044|\u306e\u5f71\u97ff\u3067)/.test(text) && !/(?:\u5f53\u7dda|\u81ea\u7dda|\u672c\u7dda|\u5168\u7dda|\u4e0a\u4e0b\u7dda).*(?:\u898b\u5408\u308f\u305b|\u4e2d\u6b62)/.test(text);
+          var _diversion = /\u76f4\u901a\u904b\u8ee2\u3092\u4e2d\u6b62|\u76f4\u901a\u904b\u8ee2\u4e2d\u6b62|\u6298\u308a\u8fd4\u3057\u904b\u8ee2|\u6298\u8fd4\u3057\u904b\u8ee2|\u30db\u30fc\u30e0\u304c\u6df7\u96d1|\u99c5\u69cb\u5185\u304c\u6df7\u96d1/.test(text);
+          if (_otherImpact || _diversion) {
+            result.status = "notice";
+          } else if (text.indexOf("\u898b\u5408\u308f\u305b") >= 0 || text.indexOf("\u904b\u8ee2\u3092\u4e2d\u6b62") >= 0 || text.indexOf("\u5168\u7dda\u904b\u4f11") >= 0 || text.toLowerCase().indexOf("suspended") >= 0) result.status = "suspended";
           else if (text.indexOf("\u904b\u5ef6") >= 0 || text.indexOf("\u9045\u5ef6") >= 0 || text.indexOf("\u9045\u308c") >= 0 || text.indexOf("\u904b\u308c") >= 0 || text.indexOf("\u4e71\u308c") >= 0 || text.toLowerCase().indexOf("delay") >= 0) result.status = "delayed";
           else if (text.indexOf("\u7d42\u4e86") >= 0 || text.toLowerCase().indexOf("finished") >= 0) result.status = "suspended";
           // v4.3.426: 有实质运行通知 → notice（黄色感叹号）
