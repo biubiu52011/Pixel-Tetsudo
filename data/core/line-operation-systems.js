@@ -44,12 +44,12 @@ window.LineOperationSystems = {
       order: 3
     },
     {
-      code: "CHU",
+      code: "CO",
       nameJa: "中央本線",
       nameZh: "中央本线",
       nameEn: "Chuo Main Line",
       nameKo: "",
-      color: "#0073bf",
+      color: "#007ac0",
       lineIds: ["ChuoMain"],
       order: 3.5
     },
