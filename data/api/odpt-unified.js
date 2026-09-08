@@ -850,22 +850,26 @@
         // v4.3.394: 延误信息全部就绪后立即推送（首屏 5-15s → 2-4s）；
         // 列车位置随后补齐。加载期间 UI 显示「情報取得中」，不再把等待期伪装成「正常」。
         function pushDelay() {
+            // v4.3.396: head 提前执行场景——DataFusion 可能尚未加载，重试等待不丢数据
+            if (!window.DataFusion || !window.DataFusion.updateOdptData) {
+                setTimeout(pushDelay, 300);
+                return;
+            }
             try {
-                if (window.DataFusion && window.DataFusion.updateOdptData) {
-                    window.DataFusion.updateOdptData(window.ODPT_DELAY_DATA);
-                }
+                window.DataFusion.updateOdptData(window.ODPT_DELAY_DATA);
             } catch(e) { console.debug("[ODPT] delay push error:", e.message); }
             console.debug("[ODPT] Realtime delay loaded:", loaded.delay, "operators");
         }
         function pushAll() {
+            // v4.3.396: 同 pushDelay——DataFusion 未就绪时重试，不丢数据
+            if (!window.DataFusion || !window.DataFusion.updateOdptData) {
+                setTimeout(pushAll, 300);
+                return;
+            }
             try {
-                if (window.DataFusion) {
-                    if (window.DataFusion.updateOdptData) {
-                        window.DataFusion.updateOdptData(window.ODPT_DELAY_DATA);
-                    }
-                    if (window.DataFusion.loadTrainPositions) {
-                        window.DataFusion.loadTrainPositions();
-                    }
+                window.DataFusion.updateOdptData(window.ODPT_DELAY_DATA);
+                if (window.DataFusion.loadTrainPositions) {
+                    window.DataFusion.loadTrainPositions();
                 }
             } catch(e) { console.debug("[ODPT] DataFusion push error:", e.message); }
             console.debug("[ODPT] Realtime loaded - delay:", loaded.delay,
