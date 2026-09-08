@@ -702,6 +702,12 @@
         // === Incremental update: only update train layer using cached geometry ===
         updateTrainLayer(existingSvg, positions, stationCoords, lineId, line);
         updateRunningInfo(el, positions);
+        // Sync loading placeholder with the realtime page: hide it as soon as train
+        // positions are available (the full-rebuild path re-inserts it when empty).
+        if (positions.length > 0) {
+          var _noDataEl = el.querySelector('.tp-no-data');
+          if (_noDataEl) _noDataEl.remove();
+        }
         return;
       }
       
@@ -1110,7 +1116,8 @@
       var loading = t("trains.loading");
       var info = "";
       if (positions.length === 0) {
-        info = '<div class="tp-no-data">' + noData + '<br><span class="tp-no-data-sub">' + loading + '</span></div>';
+        // Sync loading animation with the realtime page (rs-loading-spinner)
+        info = '<div class="tp-no-data"><div class="rs-loading-spinner"></div><br>' + noData + '<br><span class="tp-no-data-sub">' + loading + '</span></div>';
       }
       el.innerHTML = '<div class="tp-map-wrap"></div>' + info;
       el.querySelector('.tp-map-wrap').appendChild(svg);
@@ -1357,7 +1364,11 @@
     if (!el || !window.DataState) return;
     var lines = window.DataLayer ? window.DataLayer.getAllLines() : (window.UNIFIED_LINES || {});
     var ul = Array.isArray(lines) ? (function(){ var d={}; lines.forEach(function(l){ d[l.id||l.line_id]=l; }); return d; })() : lines;
-    if (!ul || Object.keys(ul).length === 0) { el.innerHTML = ''; return; }
+    if (!ul || Object.keys(ul).length === 0) {
+      // Sync loading animation with the realtime page (rs-loading spinner)
+      el.innerHTML = '<div class="rs-loading"><div class="rs-loading-spinner"></div><span>' + t("trains.loading") + '</span></div>';
+      return;
+    }
     var lineOrder = (window.LinePresentationService && window.UNIFIED_LINES) ? window.LinePresentationService.getDisplayOrder(window.UNIFIED_LINES) : []; try { window.DataState.renderList(el, ul, { mode: "trains", lineOrder: lineOrder }); } catch(e) { el.innerHTML = "<div class=\"rs-error\">Render failed</div>"; }
   }
 
@@ -1370,6 +1381,8 @@
       filterBarEl = document.getElementById("trainsFilterBar");
       backBtn = document.getElementById("trainsBackBtn");
       if (!listEl) return;
+      // Sync loading animation with the realtime page (rs-loading spinner)
+      listEl.innerHTML = '<div class="rs-loading"><div class="rs-loading-spinner"></div><span>' + t("trains.loading") + '</span></div>';
       listEl.addEventListener("click", function(e) {
         // 支线 chip：从父线卡片进入支线详情（Line Hierarchy Rule）
         var chip = e.target.closest(".rs-branch-chip");
