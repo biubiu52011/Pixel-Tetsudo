@@ -227,7 +227,18 @@
         // Filter by railway (if lineId matches)
         var railway = tt["odpt:railway"];
         var railwayKey = extractRailwayKey(railway);
-        if (railwayKey && railwayKey !== lineId) continue;
+        if (railwayKey && railwayKey !== lineId) {
+          // v4.3.437: 反查 LINE_RAILWAY_CODE——ODPT Kawagoe（川越-高麗川間）数据对应
+          // 项目 KawagoeWest 线、SaikyoKawagoe 数据对应 Saikyo/Kawagoe 线（大宮〜川越段）
+          var _kwMatch = false;
+          var _rwc = window.ODPTClient && window.ODPTClient.LINE_RAILWAY_CODE;
+          if (_rwc) {
+            Object.keys(_rwc).forEach(function(k) {
+              if (_rwc[k] === railwayKey && k === lineId) _kwMatch = true;
+            });
+          }
+          if (!_kwMatch) continue;
+        }
 
         var trainNumber = tt["odpt:trainNumber"] || tt["odpt:train"] || ("est_" + t);
         if (processedTrainIds[trainNumber]) continue; // Avoid duplicates

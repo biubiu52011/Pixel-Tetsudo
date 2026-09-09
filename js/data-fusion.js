@@ -395,10 +395,21 @@
           } else if (matchingLines.length > 1) {
             // 1. 优先使用railway字段精确匹配
             if (railwayName) {
+              // v4.3.437: 先用 LINE_RAILWAY_CODE 反查 odpt railway 短名 → 项目线 key 列表
+              // （如 SaikyoKawagoe→[Saikyo,Kawagoe]、Kawagoe→[KawagoeWest]），集合匹配比
+              // 子串猜测更准——避免川越〜高麗川的 Kawagoe 数据错配到大宮〜川越段。
+              var mappedLids = [];
+              var _rwc = window.ODPTClient && window.ODPTClient.LINE_RAILWAY_CODE;
+              if (_rwc) {
+                Object.keys(_rwc).forEach(function(k) {
+                  if (_rwc[k] === railwayName) mappedLids.push(k);
+                });
+              }
               for (var i = 0; i < matchingLines.length; i++) {
                 var ml = matchingLines[i];
-                // 精确匹配：lineId包含railwayName，或者railwayName包含lineId
-                if (ml.lid === railwayName || ml.lid.indexOf(railwayName) >= 0 || railwayName.indexOf(ml.lid) >= 0) {
+                if (mappedLids.length > 0) {
+                  if (mappedLids.indexOf(ml.lid) >= 0) { targetLine = ml; break; }
+                } else if (ml.lid === railwayName || ml.lid.indexOf(railwayName) >= 0 || railwayName.indexOf(ml.lid) >= 0) {
                   targetLine = ml;
                   break;
                 }
