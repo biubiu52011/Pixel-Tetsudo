@@ -267,6 +267,7 @@ If the answer is NO, the change is REJECTED.
 | Odawara(小田原線) 駅リスト末端に JR 東海道系駅が混入 | P1 | 小田原線 stations が …Hadano→Shibusawa→Oiso→Ninomiya→Kozu→Kamonomiya→Odawara と JR 東海道系駅（Oiso/Ninomiya/Kozu/Kamonomiya）を誤って含む（小田急は国府津・鴨宮を通らない）。テレポートの温床のため要修正だが、駅数削減を伴い凍結データに触れるためユーザー判断待ち。2026-09-08 時点では Kamonomiya 分離のみ実施（下記 Freeze 例外）。 |
 | 13 image path fixes | Deferred | Asset mapping, no product impact |
 | ~~Noda（東武アーバンパークライン）の Sakae（栄）駅~~ | FIXED 2026-09-08 | 東武野田線に栄駅は実在しない（正しくは逆井 Sakasai）。wiki 核验により Noda を正序 35 駅に全面再構築、重複線 TobuNoda を削除、誤 ID 28 件を正 ID に置換・i18n 補完（下記 Freeze 例外）。 |
+| SotetsuDirect（相鉄直通）列車が山手線 posMap に誤マッチ | P1 | Osaki 等共用駅のため fromStation 一致で山手線に誤配（railway フィールド無視）。湘南新宿ライン/相鉄直通線の車が山手線詳細図に表示される。
 
 ---
 
@@ -324,6 +325,7 @@ The following data is LOCKED. Never modify for any reason:
 
 - 2026-09-09 ユーザー指示（方向ラベルを進行方向に・4.3.455）: 列車の方向矢印を進行方向に向ける——方向端点駅名の站表 index と現在位置を比較（端点が下＝▼でアイコン下、上＝▲でアイコン上）。Inbound/Outbound は起点/終点方向で上下判定（Inbound=▲、Outbound=▼）。環線 Inner/Outer 等は判定不能のため ▶ 固定。▼ 時は終点ラベルを 1 行下げて重複回避、ラベル追従も移動方向に再配置。検証: 半蔵門線 A 号（押上方向）=▼下・B 号（渋谷方向）=▲上、京葉線 Inbound/Outbound 語義判定。---
 
+- 2026-09-09 ユーザー指示（環状線の方向ラベル・4.3.456）: 環状線（山手線等）の InnerLoop/OuterLoop を言語別にローカライズ（内回り/外回り、内环/外环、Inner/Outer、내선/외선）し、上下矢印なし・終点ラベル非表示（ODPT 環状線の終点は大崎等の折返点で実終点でない）。基点方向詞 Northbound/Southbound/Eastbound/Westbound も北行/南行/東行/西行（4 言語）に。検証: 山手線 28 車=内環/外環で終点なし、274M=▶北行/新宿、半蔵門線 ▲渋谷/▼押上 は回帰なし。※相鉄直通（SotetsuDirect）列車が山手線 posMap に誤マッチする既存問題を確認（Osaki 共用駅のため）——Known Debt 化（要ユーザー判断）。
 ## Display Identity Rule
 RailwayDB.resolveLineName() / resolveStationName() / tOp() are the ONLY allowed display name paths.
 Never implement a second resolver. Never use line.name / line.nameJa / line.nameEn directly in user-visible output.
