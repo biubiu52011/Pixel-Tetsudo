@@ -1099,16 +1099,45 @@ function applyData(data, i18n) {
     });
   }
 
+  // file:// protocol: load the generated data bundles via <script> tags.
+  var FILE_BUNDLES = [
+    "../data/core/railway-data.file.js",
+    "../data/core/station-i18n.file.js",
+    "../data/core/tourism-data.file.js"
+  ];
+  function loadScript(url) {
+    return new Promise(function(res, rej) {
+      var s = document.createElement('script');
+      s.src = url;
+      s.onload = function() { res(); };
+      s.onerror = function() { rej(new Error('file bundle load failed: ' + url)); };
+      document.head.appendChild(s);
+    });
+  }
+  function loadFileBundles() {
+    return FILE_BUNDLES.reduce(function(p, u) {
+      return p.then(function() { return loadScript(u); });
+    }, Promise.resolve());
+  }
+
 function load() {
     if (loaded) return Promise.resolve();
 
     // Strategy A: file:// protocol - skip fetch (CORS blocks it), use script data directly.
     var isFileProtocol = (window.location.protocol === 'file:');
     if (isFileProtocol) {
-      if (window.RAILWAY_DATA && window.RAILWAY_DATA.stations) { applyData(window.RAILWAY_DATA); loaded = true; return Promise.resolve(); }
-      error = new Error("No data source available under file:// protocol");
-      console.error("[DbLoader] Failed to load data under file:// protocol");
-      return Promise.reject(error);
+      // file:// bundles: <script src> loads where fetch is CORS-blocked.
+      return loadFileBundles().then(function() {
+        if (window.RAILWAY_DATA && window.RAILWAY_DATA.stations) {
+          applyData(window.RAILWAY_DATA, window.RAILWAY_I18N || {});
+          applyTourismData(window.RAILWAY_TOURISM || {});
+          loaded = true;
+          return;
+        }
+        error = new Error("No data source available under file:// protocol");
+        console.error("[DbLoader] Failed to load data under file:// protocol");
+        throw error;
+      });
     }
 
     // Strategy B (v4.3.387): stale-while-revalidate
