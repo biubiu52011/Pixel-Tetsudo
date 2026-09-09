@@ -242,9 +242,10 @@
         this.resultsDiv.innerHTML = '<div class="rs-loading"><div class="rs-loading-spinner"></div><span>' + t('status.loading') + '</span></div>';
       }
 
+      this.currentMode = this.currentMode || 'combo';
       let result = null;
       if (window.RouteSearch) {
-        result = window.RouteSearch.findRoute(from, to);
+        result = window.RouteSearch.findRoute(from, to, this.currentMode);
         if (this.resultsDiv) {
           if (result) {
             this.renderResults(result, t);
@@ -296,10 +297,20 @@
       var dest = window.RailwayDB && window.RailwayDB.resolveStationName ? window.RailwayDB.resolveStationName(result.path[result.path.length - 1], lang) : (result.path[result.path.length - 1] || '');
 
       var html = '<div class="search-result journey-card">';
-      // Header: total duration + transfer count
+      // Mode tabs (おすすめ / 最速 / 乗換最少), mirroring 乗換案内
+      var _modes = [['combo', t('search.mode.combo')], ['duration', t('search.mode.duration')], ['transfers', t('search.mode.transfers')]];
+      html += '<div class="journey-modes">';
+      for (var _mi = 0; _mi < _modes.length; _mi++) {
+        var _mCls = (_modes[_mi][0] === this.currentMode) ? 'mode-tab active' : 'mode-tab';
+        html += '<button type="button" class="' + _mCls + '" data-mode="' + _modes[_mi][0] + '">' + window.escapeHtml(_modes[_mi][1]) + '</button>';
+      }
+      html += '</div>';
+      // Header: total duration + transfer count + estimated fare
       html += '<div class="journey-header">';
       html += '<span class="journey-duration">' + dur + ' ' + t('search.min_unit') + '</span>';
       if (transfers > 0) { html += '<span class="journey-transfers">' + transfers + ' ' + t('search_result.transfer_count') + '</span>'; }
+      var _totalFare = (window.FareEstimator && result.routeSegments) ? window.FareEstimator.estimateTotal(result.routeSegments) : null;
+      if (_totalFare) { html += '<span class="journey-fare">¥' + _totalFare.toLocaleString() + ' <span class="journey-fare-tag">' + window.escapeHtml(t('search.fare_tag')) + '</span></span>'; }
       html += '</div>';
       // Timeline: origin -> segments -> destination
       html += '<div class="journey-timeline">';
@@ -350,6 +361,7 @@
             var toSt = window.RailwayDB && window.RailwayDB.resolveStationName ? window.RailwayDB.resolveStationName(seg.toStation, lang) : (seg.toStation || '');
             html += '<div class="journey-seg" data-seg-color="' + window.escapeHtml(lineColor || '') + '">';
             html += '<span class="journey-seg-name">' + window.escapeHtml(lineName || '') + '</span>';
+            if (seg.trainType) { html += '<span class="journey-seg-type">' + window.escapeHtml(t('train_type.' + seg.trainType)) + '</span>'; }
             // Running-status badge synced with Realtime page (delayed / suspended only)
             var _stBadge = '';
             if (lineId && window.DataFusion) {
@@ -367,6 +379,11 @@
             }
             if (_stBadge) { html += _stBadge; }
             html += '<span class="journey-seg-route">' + window.escapeHtml(fromSt) + ' &rarr; ' + window.escapeHtml(toSt) + '</span>';
+            if (seg.direction !== 0 && lineId) {
+              var _dirSt = seg.direction > 0 ? seg.toStation : seg.fromStation;
+              var _dirName = (window.RailwayDB && window.RailwayDB.resolveStationName) ? window.RailwayDB.resolveStationName(_dirSt, lang) : _dirSt;
+              html += '<span class="journey-seg-direction">' + window.escapeHtml(t('search.direction').replace('{s}', _dirName)) + '</span>';
+            }
             html += '</div>';
           }
         }
@@ -390,6 +407,15 @@
         if (color) seg.style.setProperty('border-left-color', color);
       });
       if (spotsHtml) { this.resultsDiv.insertAdjacentHTML('beforeend', spotsHtml); }
+      // Mode tab switching: re-run the search with the new mode (bind AFTER innerHTML commit)
+      var _self = this;
+      var _modeTabs = this.resultsDiv ? this.resultsDiv.querySelectorAll('.mode-tab') : [];
+      for (var _ti = 0; _ti < _modeTabs.length; _ti++) {
+        _modeTabs[_ti].addEventListener('click', function() {
+          _self.currentMode = this.getAttribute('data-mode');
+          _self.performSearch();
+        });
+      }
     },
 
 

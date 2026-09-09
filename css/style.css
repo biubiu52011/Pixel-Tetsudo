@@ -69,3 +69,14 @@
 .rs-branch-chip{display:inline-flex;align-items:center;padding:2px 8px;font-size:11px;line-height:1.5;color:#555;background:rgba(0,0,0,.045);border:1px solid rgba(0,0,0,.09);border-radius:10px;cursor:pointer;transition:background .15s}
 .rs-branch-chip:hover{background:rgba(0,0,0,.09)}
 .rs-branch-chip::before{content:"↳ ";opacity:.6}
+
+
+/* === Route search modes + fare + train type (4.3.445) === */
+.journey-modes{display:flex;gap:6px;padding:8px 18px 0;background:var(--bg);border-bottom:1px solid var(--border);}
+.mode-tab{flex:1;padding:6px 10px;background:var(--card);border:2px solid var(--border);border-radius:var(--radius-sm);color:var(--text-muted);font-size:12px;font-family:inherit;cursor:pointer;transition:var(--transition-fast);}
+.mode-tab.active{background:var(--green);border-color:var(--green-dim);color:var(--white);font-weight:700;}
+.mode-tab:hover:not(.active){border-color:var(--green);color:var(--green);}
+.journey-fare{margin-left:auto;font-size:12px;font-weight:700;color:var(--green);}
+.journey-fare-tag{font-size:10px;font-weight:500;color:var(--text-muted);}
+.journey-seg-type{display:inline-block;margin-left:6px;padding:1px 6px;background:var(--green-pale);border:1px solid var(--green-dim);border-radius:var(--radius-sm);color:var(--green);font-size:10px;font-weight:700;vertical-align:middle;}
+.journey-seg-direction{display:block;font-size:10px;color:var(--text-muted);margin-top:2px;}

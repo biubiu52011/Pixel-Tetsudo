@@ -59,11 +59,13 @@
    * @param {string} toStation - Destination station name
    * @returns {Object|null} { path: string[], durationMin: number, lineInfo: Array[] } or null if no route
    */
-  // Transfer penalty (minutes): models walking + waiting at a transfer.
-  // Keeps the search from favoring hop-heavy routes that save nothing real.
-  const TRANSFER_PENALTY = 6;
-  // Through-service (直通運転): changing lines that run through costs no transfer penalty
-  const THROUGH_PENALTY = 0;
+  // Search-mode transfer penalties (minutes). Three modes mirror 乗換案内:
+  // combo(おすすめ)=balanced, duration(最速)=low penalty, transfers(乗換最少)=penalty dominates.
+  const MODE_PENALTY = {
+    combo: { transfer: 6, through: 0 },
+    duration: { transfer: 3, through: 0 },
+    transfers: { transfer: 1000, through: 0 }
+  };
 
   // Minimal binary min-heap for Dijkstra priority queue.
   function _MinHeap() {
@@ -193,7 +195,8 @@
    * over (station, line) states. Returns the same shape as before:
    * { path, durationMin, segments, lineInfo, routeSegments }
    */
-  function findRoute(fromStation, toStation) {
+  function findRoute(fromStation, toStation, mode) {
+    const pen = MODE_PENALTY[mode] || MODE_PENALTY.combo;
     if (!fromStation || !toStation) return null;
     if (fromStation.toLowerCase() === toStation.toLowerCase()) {
       return { path: [fromStation], durationMin: 0, segments: 0, lineInfo: [] };
@@ -268,7 +271,7 @@
         const txSt = (aliasMap && aliasMap.has(ol)) ? aliasMap.get(ol) : st;
         const nk = txSt + '\u0001' + ol;
         const through = isThroughConnected(lid, ol);
-        let txCost = through ? THROUGH_PENALTY : TRANSFER_PENALTY;
+        let txCost = through ? pen.through : pen.transfer;
         // Out-of-station interchange: add the real walk minutes declared in
         // transferStations (user rule: "不是线路经过就可以换乘").
         if (!through && layer.transferPenalty) {
@@ -339,6 +342,7 @@
       durationMin: rideDur.get(endKey) || 0,
       segments: path.length - 1,
       lineInfo: lineInfo,
+      mode: mode || "combo",
       routeSegments: buildRouteSegments({ lineInfo: lineInfo })
     };
   }
@@ -363,6 +367,16 @@
   /**
    * Convert a BFS route result into RouteSegment[] array.
    */
+  // 運行系統が示す種別（保守的マッピング：確実な系統のみ表示、他は null）
+  const TRAIN_TYPE_BY_LINE = {
+    ChuoRapid: "rapid", SobuRapid: "rapid", Joban: "rapid", JobanLocal: "local",
+    Saikyo: "rapid", ShonanShinjuku: "rapid", Tokaido: "rapid", Yokosuka: "rapid",
+    Utsunomiya: "rapid", Takasaki: "rapid", KeihinTohoku: "rapid", Yamanote: "local",
+    Ome: "rapid", Itsukaichi: "rapid", Kawagoe: "rapid", KawagoeWest: "rapid",
+    Nambu: "rapid", Yokohama: "rapid", Musashino: "rapid", Keiyo: "rapid",
+    ChuoSobuLocal: "local", Negishi: "rapid"
+  };
+
   function buildRouteSegments(route) {
     if (!route || !route.lineInfo || route.lineInfo.length === 0) return [];
     const segments = [];
@@ -391,7 +405,10 @@
           }
         }
       }
-      segments.push({ type: 'ride', lineId, lineName, fromStation: seg.from, toStation: seg.to, duration, direction, fare: null, walking: null });
+      const lo = (lineId && lineOrder[lineId]) ? lineOrder[lineId] : null;
+      const hopCount = (lo && lo[seg.from] != null && lo[seg.to] != null) ? Math.abs(lo[seg.to] - lo[seg.from]) : 1;
+      const fare = (lineId && window.FareEstimator) ? window.FareEstimator.estimateSegment(lineId, hopCount) : null;
+      segments.push({ type: 'ride', lineId, lineName, fromStation: seg.from, toStation: seg.to, duration, direction, trainType: TRAIN_TYPE_BY_LINE[lineId] || null, fare, walking: null });
       if (i < route.lineInfo.length - 1) {
         const nextLineName = route.lineInfo[i+1].lines[0] || null;
         if (nextLineName && nextLineName !== lineName) {
