@@ -160,7 +160,7 @@
     "SobuMain": "../images/列车/JR東日本/E235系1000番台.png",
     "Joban": "../images/列车/JR東日本/E531系.png",
     "JobanRapid": "../images/列车/JR東日本/E531系.png",
-    "JobanLocal": "../images/列车/東京メトロ/18000系.png", // 常磐各停：千代田線车辆直通担当
+    "JobanLocal": "../images/列车/JR東日本/E231系0番台.png", // 常磐緩行線（綾瀬〜取手）自社車：松戸車両センター E231系0番台（4.3.450 訂正——千代田線直通車は Chiyoda 側 18000系）
     "Mito": "../images/列车/JR東日本/E531系.png",
     "Nikkoku": "../images/列车/JR東日本/E131系600番台.png", // 日光線：E131系600番台
     "Gono": "../images/列车/JR東日本/HB-E220系.png", // 五能線：HB-E220系
@@ -345,8 +345,32 @@
     "Daishi_Tobu": "../images/列车/東武鉄道/1000系.png" // 東武大師線：1000系（現役主力）
   };
 
+  // v4.3.450: 直通列車の車号規則——ODPT Train には車両形式フィールドが無いため、
+  // trainNumber の末尾記号で直通車の車籍を識別する（JR 社内直通 京葉↔武蔵野 など）。
+  // 例：京葉線上の E 末尾 = 武蔵野線直通（E231系0番台）、武蔵野線上の Y 末尾 = 京葉線直通（E233系5000番台）。
+  var THROUGH_SUFFIX_RULES = {
+    "Keiyo": [
+      { suffix: "E", icon: "../images/列车/JR東日本/E231系0番台.png" }
+    ],
+    "Musashino": [
+      { suffix: "Y", icon: "../images/列车/JR東日本/E233系5000番台.png" }
+    ]
+  };
+
   function getTrainIcon(lineId, operator, trainId, stationIndex, trainType) {
     try {
+      // 直通列車：車号末尾で車籍系統を判定（現在線のデフォルト車両より優先）
+      if (THROUGH_SUFFIX_RULES[lineId]) {
+        var _tn = String(trainId || "").split("_")[0];
+        var _rules = THROUGH_SUFFIX_RULES[lineId];
+        for (var _ri = 0; _ri < _rules.length; _ri++) {
+          var _rule = _rules[_ri];
+          if (_tn && _rule.suffix && _tn.length >= _rule.suffix.length &&
+              _tn.slice(_tn.length - _rule.suffix.length) === _rule.suffix) {
+            return _rule.icon;
+          }
+        }
+      }
       // Chuo/Sobu local: E231系500番台 + E235系0番台 并用（2025 起 E235 由山手线转用）
       if (lineId === "ChuoLocal" || lineId === "ChuoSobuLocal") {
         var n = 0;
