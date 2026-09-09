@@ -1445,6 +1445,12 @@
           existingIcon.setAttribute('x', newX);
           existingIcon.setAttribute('y', newY);
         }
+        // v4.3.454: 终点/方向标签跟随列车移动
+        var _lb = trainLayer.querySelectorAll('[data-train-label-for="' + String(trainUid).replace(/"/g, '') + '"]');
+        for (var _li = 0; _li < _lb.length; _li++) {
+          _lb[_li].setAttribute('x', px);
+          _lb[_li].setAttribute('y', py + (_lb[_li].getAttribute('data-label-pos') === 'dir' ? -14 : 25));
+        }
       } else {
         // Create new train icon
         var iconSrc = (window.TrainIcons && typeof window.TrainIcons.getTrainIcon === "function") ? window.TrainIcons.getTrainIcon(p.fusionLineId || lineId, line.operator, trainUid, p.stationIndex, p.trainType) : "";
@@ -1462,6 +1468,7 @@
           newIcon.setAttribute("class", iconCls);
           newIcon.setAttribute("preserveAspectRatio", "xMidYMid meet");
           trainLayer.appendChild(newIcon);
+          appendTrainLabels(trainLayer, svgNS, trainUid, px, py, p);
         } else {
           // Fallback: circle icon
           var newCircle = document.createElementNS(svgNS, "g");
@@ -1484,17 +1491,100 @@
           newCircle.appendChild(innerCircle);
           
           trainLayer.appendChild(newCircle);
+          appendTrainLabels(trainLayer, svgNS, trainUid, px, py, p);
         }
       }
     }
     
     // Remove icons for trains that no longer exist
-    var allIcons = trainLayer.querySelectorAll('[data-train-id]');
+    // v4.3.454: 兼容终点/方向标签（data-train-label-for 与图标同 uid 清理）
+    var allIcons = trainLayer.querySelectorAll('[data-train-id], [data-train-label-for]');
     for (var ii = 0; ii < allIcons.length; ii++) {
-      var tid = allIcons[ii].getAttribute('data-train-id');
+      var tid = allIcons[ii].getAttribute('data-train-id') || allIcons[ii].getAttribute('data-train-label-for');
       if (!updatedIds[tid]) {
         allIcons[ii].parentNode.removeChild(allIcons[ii]);
       }
+    }
+  }
+
+  // v4.3.454: 列车终点/方向标签——方向在上（7px #999）、终点在下（8px #666）
+  // 站名解析带归一化兜底：ODPT 站 ID 无连字符（KiyosumiShirakawa）vs 项目站 ID 连字符
+  // （Kiyosumi-Shirakawa）——去连字符+小写匹配项目站表后按项目 ID 解析显示名
+  function _resolveStationLoose(id) {
+    if (!id) return '';
+    var db = window.RailwayDB;
+    var direct = (db && db.resolveStationName) ? db.resolveStationName(id, window.currentLang) : id;
+    if (direct && direct !== id) return direct;
+    var norm = String(id).replace(/-/g, '').toLowerCase();
+    var hit = '';
+    if (db && typeof db.getStations === 'function') {
+      try {
+        var sts = db.getStations();
+        for (var k in sts) {
+          if (String(k).replace(/-/g, '').toLowerCase() === norm) { hit = k; break; }
+        }
+      } catch(e) {}
+    }
+    if (!hit && window.UNIFIED_LINES) {
+      for (var lid in window.UNIFIED_LINES) {
+        var arr = (window.UNIFIED_LINES[lid] || {}).stations || [];
+        for (var i = 0; i < arr.length; i++) {
+          if (String(arr[i]).replace(/-/g, '').toLowerCase() === norm) { hit = arr[i]; break; }
+        }
+        if (hit) break;
+      }
+    }
+    if (hit && db && db.resolveStationName) {
+      var name = db.resolveStationName(hit, window.currentLang);
+      if (name && name !== hit) return name;
+    }
+    return direct;
+  }
+
+  function _trainDirText(directionName) {
+    if (!directionName) return '';
+    var dn = String(directionName);
+    if (/^(Inbound|Outbound|Inner|Outer)$/.test(dn)) return dn;
+    // ODPT railDirection 形如 "odpt.RailDirection:TokyoMetro.Oshiage"——取站名末段再解析
+    var tail = dn.split(".").pop();
+    if (!tail) return dn;
+    return _resolveStationLoose(tail) || tail;
+  }
+
+  function _trainDestText(destStation) {
+    if (!destStation) return '';
+    return _resolveStationLoose(destStation) || destStation;
+  }
+
+  function appendTrainLabels(trainLayer, svgNS, trainUid, px, py, p) {
+    var dirText = _trainDirText(p.railDirection);
+    var destText = _trainDestText(p.destinationStation);
+    if (!dirText && !destText) return;
+    if (dirText) {
+      var ldir = document.createElementNS(svgNS, "text");
+      ldir.setAttribute("data-train-label-for", String(trainUid));
+      ldir.setAttribute("data-label-pos", "dir");
+      ldir.setAttribute("x", String(px));
+      ldir.setAttribute("y", String(py - 14));
+      ldir.setAttribute("text-anchor", "middle");
+      ldir.setAttribute("font-size", "7");
+      ldir.setAttribute("fill", "#999");
+      ldir.setAttribute("class", "train-label-dir");
+      ldir.textContent = "▶" + dirText;
+      trainLayer.appendChild(ldir);
+    }
+    if (destText) {
+      var ldest = document.createElementNS(svgNS, "text");
+      ldest.setAttribute("data-train-label-for", String(trainUid));
+      ldest.setAttribute("data-label-pos", "dest");
+      ldest.setAttribute("x", String(px));
+      ldest.setAttribute("y", String(py + 25));
+      ldest.setAttribute("text-anchor", "middle");
+      ldest.setAttribute("font-size", "8");
+      ldest.setAttribute("fill", "#666");
+      ldest.setAttribute("class", "train-label-dest");
+      ldest.textContent = destText;
+      trainLayer.appendChild(ldest);
     }
   }
   

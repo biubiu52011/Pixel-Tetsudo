@@ -372,6 +372,9 @@
             var railParts = String(railway).split(":");
             railwayName = railParts.length > 1 ? railParts[railParts.length - 1] : String(railway);
           }
+          // v4.3.454: 终点站提取（odpt:destinationStation）——供详情图列车标签显示终点/方向
+          var destStations = t["odpt:destinationStation"] || [];
+          var destStation = destStations.length > 0 ? String(destStations[0]).split(".").pop() : "";
           var matchingLines = [];
           Object.keys(allLines).forEach(function(lid) {
             var line = allLines[lid];
@@ -450,6 +453,7 @@
               trainId: trainId, 
               delayMin: delayMin,
               railDirection: directionName,
+              destinationStation: destStation,
               trainType: rawType,
               typeName: typeName,
               estimated: false

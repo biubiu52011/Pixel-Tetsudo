@@ -292,6 +292,9 @@
             var dirParts = String(railDirection).split(':');
             directionName = dirParts.length > 1 ? dirParts[dirParts.length - 1] : String(railDirection);
           }
+          // v4.3.454: 终点站提取（odpt:destinationStation）——供详情图列车标签显示终点/方向
+          var destStations = tt['odpt:destinationStation'] || [];
+          var destinationStation = destStations.length > 0 ? String(destStations[0]).split(".").pop() : "";
           positions.push({
             stationIndex: currentStationIndex,
             trainId: lineId + '_' + trainNumber,
@@ -301,7 +304,8 @@
             typeName: trainClassification.typeName,
             isLimitedExpress: trainClassification.isLimitedExpress,
             isThroughTrain: trainClassification.isThroughTrain,
-            railDirection: directionName
+            railDirection: directionName,
+            destinationStation: destinationStation
           });
         }
       }
