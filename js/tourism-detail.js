@@ -1,5 +1,5 @@
 /*
- * Tourism Detail Page (4.3.465) - Decoupled Architecture
+ * Tourism Detail Page (4.3.466) - Decoupled Architecture
  * Spots are accessed by name/index, not by station association
  */
 (function() {
@@ -334,30 +334,88 @@ function init() {
   }
 
   // Leaflet + Carto Positron 简洁底图（本地化 Leaflet，CSP 兼容；Positron 极简灰白，无 POI 噪音）
+  // MapLibre + MapTiler vector（与 OSM 官网 MapTiler OMT 同架构：vector 瓦片 + 完整标注 + 语言跟随）
+  // 语言跟随：style 中 name:__LANG__ 在运行时替换为 ja/zh/ko/en（中文界面中文地名/日文界面日文地名）
+  // 兜底链：maplibregl 不可用或地图错误 → Leaflet streets raster → Carto light_all
   function initMap(lat, lng, name) {
     var mapEl = document.getElementById("tourismMap");
     if (!mapEl) return;
+    if (window.maplibregl && window.MAPTILER_STREETS_V2_JSON) {
+      _initMapMaplibre(mapEl, lat, lng, name);
+    } else {
+      _initMapLeaflet(mapEl, lat, lng, name);
+    }
+  }
+
+  function _initMapMaplibre(mapEl, lat, lng, name) {
+    // 切换景点/语言时清理旧实例
+    if (mapEl._tdMap) { mapEl._tdMap.remove(); mapEl._tdMap = null; }
+    var lang = { ja: 'ja', zh: 'zh', ko: 'ko', en: 'en' }[window.currentLang] || 'en';
+    var style = null;
+    try {
+      style = JSON.parse(window.MAPTILER_STREETS_V2_JSON.split('name:__LANG__').join('name:' + lang));
+    } catch (e) { /* fallthrough */ }
+    if (!style) { _initMapLeaflet(mapEl, lat, lng, name); return; }
+    var map;
+    try {
+      map = new maplibregl.Map({
+        container: mapEl,
+        // 构造用官方 style URL（对象方式在部分 WebGL1 内核下不解析，URL 方式稳定）
+        style: 'https://api.maptiler.com/maps/streets-v2/style.json?key=' + MAPTILER_KEY,
+        center: [lng, lat],
+        zoom: 15,
+        attributionControl: { compact: true },
+        scrollZoom: false,      // 防滚动页面被地图劫持
+        boxZoom: false,
+        dragRotate: false,
+        pitchWithRotate: false,
+        touchPitch: false,
+        canvasContextAttributes: { antialias: true }
+      });
+    } catch (e) { _initMapLeaflet(mapEl, lat, lng, name); return; }
+    mapEl._tdMap = map;
+    // 官方 style 加载完成后切换到语言版内联 style（语言跟随 + sprite 带 key）
+    map.on('style.load', function () {
+      if (mapEl._tdMap !== map) return;
+      try { map.setStyle(style); } catch (e) { /* 保留官方 style */ }
+    });
+    // 兜底：仅 source/样式等致命错误 → Leaflet streets
+    // 忽略 sprite 类错误（官方 style 的 sprite 无 key 会 404，但不影响地图主体；语言版 setStyle 后 sprite 带 key 正常）
+    var mlFailed = false;
+    map.on('error', function (e) {
+      if (mlFailed) return;
+      var msg = (e && e.error && e.error.message) || '';
+      if (/sprite/i.test(msg)) return;
+      mlFailed = true;
+      try { map.remove(); } catch (err) {}
+      mapEl._tdMap = null;
+      _initMapLeaflet(mapEl, lat, lng, name);
+    });
+    // 像素风圆点 marker（div 元素本地渲染，无外域图片）
+    var dot = document.createElement('div');
+    dot.className = 'td-map-marker-dot';
+    new maplibregl.Marker({ element: dot, anchor: 'center' })
+      .setLngLat([lng, lat])
+      .setPopup(new maplibregl.Popup({ closeButton: false, offset: 14 }).setHTML('<b>' + escapeHtml(name || '') + '</b>'))
+      .addTo(map);
+    // 文章渲染后才挂载容器，确保尺寸正确
+    setTimeout(function () { map.resize(); }, 120);
+  }
+
+  // Leaflet 兜底（MapTiler streets raster + Carto light_all）
+  function _initMapLeaflet(mapEl, lat, lng, name) {
     if (typeof L === 'undefined') {
       mapEl.innerHTML = '<div class="map-error">' + escapeHtml(typeof t === 'function' ? t('detail.unavailable') : 'Map unavailable') + '</div>';
       return;
     }
-    // 切换景点时清理旧实例（Leaflet 实例不能被重复初始化在同一容器）
     if (mapEl._tdLeaflet) { mapEl._tdLeaflet.remove(); mapEl._tdLeaflet = null; }
-    var map = L.map(mapEl, {
-      zoomControl: false,        // 移动端简洁：不用缩放控件，手势缩放足够
-      scrollWheelZoom: false,    // 防止滚动页面时被地图劫持
-      attributionControl: true
-    });
+    var map = L.map(mapEl, { zoomControl: false, scrollWheelZoom: false, attributionControl: true });
     mapEl._tdLeaflet = map;
-    // MapTiler Streets 底图（免费 key，origin 白名单防盗用；language 参数跟随界面语言：中文界面中文地名/日文界面日文地名）
-    // 用户实测 Basic 样式地名标注过少（像没有图层），切 Streets 获得完整地名/路名/地标标注
-    // MapTiler 固定返回 512px 瓦片（tilesize 参数无效）：Leaflet 默认 256 网格会把瓦片压缩一半导致图层错位——tileSize:512 + zoomOffset:-1 正确渲染
-    // 兜底：MapTiler 失败（key 失效/额度超限/Origin 校验延迟）时自动回退 Carto light_all
     var mtLang = { ja: 'ja', zh: 'zh', ko: 'ko', en: 'en' }[window.currentLang] || 'en';
     var mtLayer = L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=' + MAPTILER_KEY + '&language=' + mtLang, {
       attribution: '&copy; <a href="https://www.maptiler.com/copyright/">MapTiler</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       maxZoom: 19,
-      tileSize: 512,      // MapTiler 固定返回 512px 瓦片：tileSize 对齐使 1:1 渲染，zoomOffset -1 保持 256 口径缩放层级
+      tileSize: 512,
       zoomOffset: -1,
       crossOrigin: 'anonymous'
     }).addTo(map);
@@ -374,17 +432,9 @@ function init() {
         }).addTo(map);
       } catch (e) { /* noop */ }
     });
-    // 像素风圆点 marker（divIcon 本地渲染，无外域图片依赖）
-    var icon = L.divIcon({
-      className: 'td-map-marker',
-      html: '<div class="td-map-marker-dot"></div>',
-      iconSize: [18, 18],
-      iconAnchor: [9, 9]
-    });
-    L.marker([lat, lng], { icon: icon }).addTo(map)
-      .bindPopup('<b>' + escapeHtml(name || '') + '</b>', { closeButton: false });
+    var icon = L.divIcon({ className: 'td-map-marker', html: '<div class="td-map-marker-dot"></div>', iconSize: [18, 18], iconAnchor: [9, 9] });
+    L.marker([lat, lng], { icon: icon }).addTo(map).bindPopup('<b>' + escapeHtml(name || '') + '</b>', { closeButton: false });
     map.setView([lat, lng], 15);
-    // 文章渲染后才挂载容器，确保尺寸计算正确
     setTimeout(function () { map.invalidateSize(); }, 120);
   }
 

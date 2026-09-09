@@ -151,7 +151,7 @@
     // Delegate to unified TourismProximity API
     let nearby = [];
     try {
-      nearby = TourismProximity.getNearbySpotsByStation(stationKey, { radius: 3000, limit: 10 });
+      nearby = TourismProximity.getNearbySpotsByStation(stationKey, { radius: 3500, limit: 30 });
     } catch(e) {
       console.warn('[Sightseeing] getNearbySpotsByStation failed:', e);
     }
@@ -231,8 +231,8 @@ function renderGrid() {
       return;
     }
     if (dom.empty) dom.empty.classList.add('hidden');
-    // Limit to top 10
-    spotList = spotList.slice(0, 10);
+    // Limit to top 30 (39 registered spots; keep far sights like Asakusa/Skytree visible)
+    spotList = spotList.slice(0, 30);
 
     if (state.activeTags.size > 0) {
       spotList = spotList.filter(function(s) {
