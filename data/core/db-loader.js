@@ -664,7 +664,7 @@ function applyData(data, i18n) {
         "TokaidoMain": "../images/鉄道/JR東日本/東海道線.png",
         "UtsunomiyaJR": "../images/鉄道/JR東日本/宇都宮線.png",
         "SotetsuShin-Yokohama": "../images/鉄道/相鉄/相鉄新横浜線.png",
-        "ChiyodaBranch": "../images/列车/東京メトロ/北綾瀬支線.png",
+        "ChiyodaBranch": "../images/列车/東京メトロ/05系（北綾瀬）.png", // 4.3.457：図庫整理で北綾瀬支線.png→05系（北綾瀬）.png に改名
       };
       Object.keys(LINE_IMAGE_FIXES).forEach(function(lid) {
         var line = window.UNIFIED_LINES[lid];
