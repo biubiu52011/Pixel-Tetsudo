@@ -1,5 +1,8 @@
 /* Pixel Tetsudo - Train Location Styles (detail view only) */
 
+/* 返回按钮：trains-detail 为 flex column 容器，默认 stretch 会把按钮拉成整行巨长条；对齐 tourism-detail 的紧凑按钮（内容宽度） */
+.trains-detail .back-btn { align-self: flex-start; }
+
 .tp-fade-in { animation: tpFadeIn 0.2s ease; }
 @keyframes tpFadeIn {
   from { opacity: 0; transform: translateY(8px); }
