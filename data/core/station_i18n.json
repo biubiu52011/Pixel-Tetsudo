@@ -8576,7 +8576,7 @@
   "Kaminoyama-Onsen": {
     "ja": "かみのやま温泉",
     "zh": "上之山温泉",
-    "ko": "",
+    "ko": "가미노야마 온센",
     "en": "Kaminoyama-Onsen"
   },
   "Shige-Kinenkanmae": {
@@ -8702,7 +8702,7 @@
   "Uzen-Toyosato": {
     "ja": "羽前豊里",
     "zh": "羽前丰里",
-    "ko": "",
+    "ko": "우젠 토요사토",
     "en": "Uzen-Toyosato"
   },
   "Mamurogawa": {
@@ -8720,7 +8720,7 @@
   "Otaki": {
     "ja": "大滝",
     "zh": "大泷",
-    "ko": "",
+    "ko": "오타키",
     "en": "Ōtaki"
   },
   "Oki": {
@@ -8756,13 +8756,13 @@
   "Yuzawa": {
     "ja": "湯沢",
     "zh": "汤泽",
-    "ko": "",
+    "ko": "유자와",
     "en": "Yuzawa"
   },
   "Shimo-Yuzawa": {
     "ja": "下湯沢",
     "zh": "下汤泽",
-    "ko": "",
+    "ko": "시모유자와",
     "en": "Shimo-Yuzawa"
   },
   "Toomoji": {
@@ -8810,7 +8810,7 @@
   "Jinguji": {
     "ja": "神宮寺",
     "zh": "神宫寺",
-    "ko": "",
+    "ko": "진구지",
     "en": "Jingūji"
   },
   "Kawachi": {
@@ -8924,7 +8924,7 @@
   "Tsurugata": {
     "ja": "鶴形",
     "zh": "鹤形",
-    "ko": "",
+    "ko": "츠루가타",
     "en": "Tsurugata"
   },
   "Tominne": {
@@ -8954,7 +8954,7 @@
   "Nukazawa": {
     "ja": "糠沢",
     "zh": "糠泽",
-    "ko": "",
+    "ko": "누카자와",
     "en": "Nukazawa"
   },
   "Hayaguchi": {
@@ -8984,7 +8984,7 @@
   "Jinba": {
     "ja": "陣場",
     "zh": "阵场",
-    "ko": "",
+    "ko": "진바",
     "en": "Jinba"
   },
   "Tsugaru": {
@@ -9062,7 +9062,7 @@
   "Tsugaru-Shinjo": {
     "ja": "津軽新城",
     "zh": "津轻新城",
-    "ko": "",
+    "ko": "쓰가루 신조",
     "en": "Tsugaru-Shinjō"
   },
   "Shin-Aomori": {
@@ -14708,7 +14708,7 @@
   "Sakuranbo-Higashine": {
     "ja": "さくらんぼ東根",
     "zh": "樱桃东根",
-    "ko": "",
+    "ko": "사쿠란보 히가시네",
     "en": "Sakuranbo-Higashine"
   },
   "Higashine": {
@@ -17372,13 +17372,13 @@
   "Mikazuki": {
     "ja": "三関",
     "zh": "三关",
-    "ko": "",
+    "ko": "미카즈키",
     "en": "Mikazuki"
   },
   "Kami-Yuzawa": {
     "ja": "上湯沢",
     "zh": "上汤泽",
-    "ko": "",
+    "ko": "카미유자와",
     "en": "Kami-Yuzawa"
   },
   "Jumonji": {
@@ -17402,13 +17402,13 @@
   "Go-Sannen": {
     "ja": "後三年",
     "zh": "后三年",
-    "ko": "",
+    "ko": "고산넨",
     "en": "Go-Sannen"
   },
   "Iizume": {
     "ja": "飯詰",
     "zh": "饭诘",
-    "ko": "",
+    "ko": "이이즈메",
     "en": "Iizume"
   },
   "Kariwano": {
@@ -17426,19 +17426,19 @@
   "Ugo-Sakai": {
     "ja": "羽後境",
     "zh": "羽后境",
-    "ko": "",
+    "ko": "우고 사카이",
     "en": "Ugo-Sakai"
   },
   "Obarino": {
     "ja": "大張野",
     "zh": "大张野",
-    "ko": "",
+    "ko": "오바리노",
     "en": "Ōbarino"
   },
   "Yotsugoya": {
     "ja": "四ツ小屋",
     "zh": "四小屋",
-    "ko": "",
+    "ko": "요츠고야",
     "en": "Yotsugoya"
   },
   "Izumi-Sotoasahikawa": {
@@ -17456,7 +17456,7 @@
   "Kami-Iijima": {
     "ja": "上飯島",
     "zh": "上饭岛",
-    "ko": "",
+    "ko": "카미이이지마",
     "en": "Kami-Iijima"
   },
   "Oiwake": {
@@ -17468,19 +17468,19 @@
   "Ougo": {
     "ja": "大羽後",
     "zh": "大羽后",
-    "ko": "",
+    "ko": "오우고",
     "en": "Ōugo"
   },
   "Ikawa-Sakura": {
     "ja": "井川さくら",
     "zh": "井川樱",
-    "ko": "",
+    "ko": "이카와 사쿠라",
     "en": "Ikawa-Sakura"
   },
   "Koikawa": {
     "ja": "鯉川",
     "zh": "鲤川",
-    "ko": "",
+    "ko": "코이카와",
     "en": "Koikawa"
   },
   "Kado": {
@@ -17492,7 +17492,7 @@
   "Kita-Kanaoka": {
     "ja": "北金岡",
     "zh": "北金冈",
-    "ko": "",
+    "ko": "키타카나오카",
     "en": "Kita-Kanaoka"
   },
   "Tomine": {
@@ -17504,13 +17504,13 @@
   "Futatsui": {
     "ja": "二ツ井",
     "zh": "二井",
-    "ko": "",
+    "ko": "후타츠이",
     "en": "Futatsui"
   },
   "Takanosu": {
     "ja": "鷹ノ巣",
     "zh": "鹰巢",
-    "ko": "",
+    "ko": "타카노스",
     "en": "Takanosu"
   },
   "Shimokawabe": {
@@ -17522,19 +17522,19 @@
   "Odate": {
     "ja": "大館",
     "zh": "大馆",
-    "ko": "",
+    "ko": "오다테",
     "en": "Ōdate"
   },
   "Shirasawa": {
     "ja": "白沢",
     "zh": "白泽",
-    "ko": "",
+    "ko": "시라사와",
     "en": "Shirasawa"
   },
   "Tsugaru-Yunosawa": {
     "ja": "津軽湯の沢",
     "zh": "津轻汤之泽",
-    "ko": "",
+    "ko": "쓰가루 유노사와",
     "en": "Tsugaru-Yunosawa"
   },
   "Iwaizumi": {
@@ -17546,37 +17546,37 @@
   "Owani-Onsen": {
     "ja": "大鰐温泉",
     "zh": "大鳄温泉",
-    "ko": "",
+    "ko": "오와니 온센",
     "en": "Ōwani-Onsen"
   },
   "Naijoshi": {
     "ja": "撫牛子",
     "zh": "抚牛子",
-    "ko": "",
+    "ko": "나이조시",
     "en": "Naijōshi"
   },
   "Kita-Tokiwa": {
     "ja": "北常盤",
     "zh": "北常盘",
-    "ko": "",
+    "ko": "키타토키와",
     "en": "Kita-Tokiwa"
   },
   "Namioka": {
     "ja": "浪岡",
     "zh": "浪冈",
-    "ko": "",
+    "ko": "나미오카",
     "en": "Namioka"
   },
   "Daishaka": {
     "ja": "大釈迦",
     "zh": "大释迦",
-    "ko": "",
+    "ko": "다이샤카",
     "en": "Daishaka"
   },
   "Tsurugasaka": {
     "ja": "鶴ヶ坂",
     "zh": "鹤坂",
-    "ko": "",
+    "ko": "츠루가사카",
     "en": "Tsurugasaka"
   },
   "Kita-Noshiro": {
