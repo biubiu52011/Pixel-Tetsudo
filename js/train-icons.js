@@ -93,6 +93,13 @@
         { line: "TobuIsesaki", icon: "../images/列车/東武鉄道/250系.png", typeMatch: ["Ryomo"], priority: 3 }
       ]
     },
+    "ExpKeisei": {
+      routes: [
+        // 4.3.458：スカイライナー（AE形）は typeMatch で判定——アクセス線の普通列車は 3900系
+        { line: "NaritaAccess", icon: "../images/列车/京成電鉄/AE形.png", typeMatch: ["Skyliner"], priority: 3 },
+        { line: "NaritaSkyAccess", icon: "../images/列车/京成電鉄/AE形.png", typeMatch: ["Skyliner"], priority: 3 }
+      ]
+    },
     "ExpOdakyu": {
       routes: [
         { line: "Odawara", icon: "../images/列车/小田急電鉄/70000形.png", typeMatch: ["SuperHakone"], priority: 3 }, // GSE（スーパーはこね）
@@ -128,7 +135,7 @@
     "TWR": "../images/列车/東京臨海高速鉄道/twr71000.png", // 4.3.457：りんかい線現役主力 71-000形
     "MIR": "../images/列车/東急電鉄/5050系.png",
     "Rinkai": "../images/列车/東京臨海高速鉄道/twr71000.png", // 4.3.457：りんかい線現役主力 71-000形
-    "TsukubaExpress": "../images/列车/首都圏新都市鉄道/TX-2000系.png", // つくばエクスプレス：TX-2000系
+    "TsukubaExpress": "../images/列车/首都圏新都市鉄道/tx3000.png", // 4.3.458：TX-3000系（2021年〜新型主力）
     "Yurikamome": "../images/列车/ゆりかもめ/7300系.png",
     "TamaMonorail": "../images/列车/多摩都市モノレール/1000系.png", // 4.3.276：实车图恢复
     "SaitamaNewUrbanTransit": "../images/列车/埼玉新都市交通/2000形.png", // 4.3.276：AGT实车图恢复
@@ -205,7 +212,7 @@
     "Asakusa": "../images/列车/都営地下鉄/5500形.png",
     "Shinjuku": "../images/列车/都営地下鉄/10-300形.png",
     "Oedo": "../images/列车/都営地下鉄/12-000形.png",
-    "Arakawa": "../images/列车/都営地下鉄/7700形.png",
+    "Arakawa": "../images/列车/都営地下鉄/todn8503.png", // 都電荒川線（東京さくらトラム）：都電8500形（1997年〜現役、4.3.458 都電素材に変更）
 
     // Tobu specific（4.3.275：用户重命名后重新判定，8枚全为实车，已按车型入库）
     "TobuSkytree": "../images/列车/東武鉄道/50000系.png",     // スカイツリーライン（伊勢崎線系）：50000系主力
@@ -217,7 +224,7 @@
     "Ogose": "../images/列车/東武鉄道/50090系.png",          // 越生線：東上系統（東上線全列車直通）
     "Utsunomiya": "../images/列车/東武鉄道/20400系.png",     // 4.3.280：東武宇都宮線：20400系（已替换最后8000系）
     // Odakyu specific（4.3.275：小田急系統共通 4000系，ロマンスカー は typeMatch 優先；4.3.278：江ノ島線・多摩線 各停6両主力=3000形）
-    "Odawara": "../images/列车/小田急電鉄/4000系.png",
+    "Odawara": "../images/列车/小田急電鉄/5000系.png", // 4.3.458：小田原線の新型 5000形（2025年デビュー・増備中；4000形 は千代田直通の既存主力）
     "OdakyuEnoshima": "../images/列车/小田急電鉄/3000形.png", // 4.3.278：江ノ島線 各停（6両）主力=3000形/1000形/8000形；4000形は10両固定で各停6両ホームに入線せず（维基#車両 2022年改正後）
     "OdakyuTama": "../images/列车/小田急電鉄/3000形.png", // 4.3.278：多摩線 日中各停6両主力=3000形（维基#車両 同江ノ島線論理）
     // 4.3.273 JR 系統補全
@@ -273,12 +280,12 @@
     "Kanamachi": "../images/列车/京成電鉄/80000形.png",
     "Chiba": "../images/列车/京成電鉄/80000形.png",
     "Chihara": "../images/列车/京成電鉄/80000形.png",
-    "NaritaAccess": "../images/列车/京成電鉄/AE形.png",
+    "NaritaAccess": "../images/列车/京成電鉄/3900系.png", // 4.3.458：スカイアクセス線の普通列車＝3900形（スカイライナーAE形は typeMatch）
     "KeiseiChiba": "../images/列车/京成電鉄/80000形.png",
     "KeiseiChihara": "../images/列车/京成電鉄/80000形.png",
     "KeiseiKanamachi": "../images/列车/京成電鉄/80000形.png",
     "KeiseiOshiage": "../images/列车/京成電鉄/80000形.png",
-    "NaritaSkyAccess": "../images/列车/京成電鉄/AE形.png",
+    "NaritaSkyAccess": "../images/列车/京成電鉄/3900系.png", // 4.3.458：普通列車＝3900形（スカイライナーは typeMatch AE形）
 
     // Keio specific（4.3.278：新增车型素材 1000系=井の頭線用）
     "Inokashira": "../images/列车/京王電鉄/1000系.png",
@@ -295,8 +302,8 @@
     "Sotetsu": "../images/列车/相模鉄道/13000系.png",
     "SotetsuMain": "../images/列车/相模鉄道/13000系.png",
     "SotetsuIzumino": "../images/列车/相模鉄道/13000系.png",
-    "SotetsuShinyokohama": "../images/列车/相模鉄道/13000系.png",
-    "SotetsuShin-Yokohama": "../images/列车/相模鉄道/13000系.png",
+    "SotetsuShinyokohama": "../images/列车/相模鉄道/11000系（新塗装）.png", // 4.3.458：相鉄新横浜線の主力＝11000系（新塗装）
+    "SotetsuShin-Yokohama": "../images/列车/相模鉄道/11000系（新塗装）.png",
 
     // Yokohama Municipal
     "YokohamaMunicipal": "../images/列车/横浜市交通局/4000形.png",
@@ -307,7 +314,7 @@
     "TWR": "../images/列车/東京臨海高速鉄道/twr71000.png", // 4.3.457：りんかい線現役主力 71-000形（70-000形は置換済み）
     "Rinkai": "../images/列车/東京臨海高速鉄道/twr71000.png",
     "MIR": "../images/列车/東急電鉄/5050系.png",
-    "TsukubaExpress": "../images/列车/首都圏新都市鉄道/TX-2000系.png", // つくばエクスプレス：TX-2000系
+    "TsukubaExpress": "../images/列车/首都圏新都市鉄道/tx3000.png", // 4.3.458：TX-3000系（2021年〜新型主力）
     "Yurikamome": "../images/列车/ゆりかもめ/7300系.png",
     "TamaMonorail": "../images/列车/多摩都市モノレール/1000系.png",
     "TokyoMonorail": "../images/列车/東京モノレール/mn-tky10000.png", // 4.3.457：東京モノレール現役主力 10000形（1000形は引退）
