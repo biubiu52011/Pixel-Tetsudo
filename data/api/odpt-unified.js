@@ -399,6 +399,8 @@
       "Kawagoe": "SaikyoKawagoe", // 大宮〜川越段は埼京線・川越線運行系統（ODPT SaikyoKawagoe API）
       "KawagoeWest": "Kawagoe", // 川越〜高麗川段 = ODPT 川越線（川越-高麗川間）
       "KeihinTohoku": "KeihinTohokuNegishi",
+      "Marunouchi": "Marunouchi",
+      "MarunouchiBranch": "MarunouchiBranch", // 丸ノ内線支線（方南町支線）独立 ODPT railway
       "ChuoMain": "Chuo",
       "SobuMain": "Sobu",
       "TokaidoMain": "Tokaido",

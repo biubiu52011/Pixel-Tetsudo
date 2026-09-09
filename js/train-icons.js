@@ -189,6 +189,7 @@
     // Tokyo Metro specific
     "Ginza": "../images/列车/東京メトロ/1000系.png",
     "Marunouchi": "../images/列车/東京メトロ/2000系.png",
+    "MarunouchiBranch": "../images/列车/東京メトロ/2000系.png", // 丸ノ内線支線（方南町支線）：本線と同じ2000系
     "Hibiya": "../images/列车/東京メトロ/13000系.png", // 4.3.276：实车图恢复
     "Tozai": "../images/列车/東京メトロ/15000系.png", // 東西線：15000系（原05系 重命名）
     "Chiyoda": "../images/列车/東京メトロ/18000系.png",

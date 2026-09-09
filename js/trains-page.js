@@ -118,6 +118,32 @@
       }
       return all;
     }
+    // v4.3.446: 支线融合——本线的 branchOf 子线（如丸ノ内線→方南町支線）列车并入本线详情图，
+    // 列车带 fusionLineId，渲染层按支线几何（branchGeom）定位，与主线留出距离。
+    var _src = (window.RailwayDB && window.RailwayDB.getAllLines) ? window.RailwayDB.getAllLines() : getLinesData();
+    var _brs = [];
+    if (_src && _src[lineId] && _src[lineId].branches) {
+      _brs = _src[lineId].branches;
+    } else if (_src) {
+      for (var _bk in _src) {
+        if (_src[_bk].branchOf === lineId && _bk !== lineId) _brs.push(_bk);
+      }
+    }
+    if (_brs.length > 0) {
+      var _all2 = positions.slice();
+      for (var _bi2 = 0; _bi2 < _brs.length; _bi2++) {
+        var _blid = _brs[_bi2];
+        if (!_src[_blid] || !_src[_blid].stations || _src[_blid].stations.length === 0) continue;
+        var _bp = _getBasePositions(_blid);
+        for (var _bj = 0; _bj < _bp.length; _bj++) {
+          var _np2 = {};
+          for (var _pk2 in _bp[_bj]) { if (_bp[_bj].hasOwnProperty(_pk2)) _np2[_pk2] = _bp[_bj][_pk2]; }
+          _np2.fusionLineId = _blid;
+          _all2.push(_np2);
+        }
+      }
+      return _all2;
+    }
     return positions;
   }
   function _getBasePositions(lineId) {
@@ -811,6 +837,30 @@
       }
     }
     
+    // Branch geometry for realtime train placement (kept separate from main line
+    // so branch trains render on their own station column, visually distanced)
+    var branchGeom = null;
+    if (branchLines.length > 0 && stationCoords.length > 0) {
+      branchGeom = {};
+      for (var bgi = 0; bgi < branchLines.length; bgi++) {
+        var _br = branchLines[bgi];
+        if (!_br.stations || _br.stations.length === 0) continue;
+        var _jIdx = -1;
+        for (var _ji2 = 0; _ji2 < stationCoords.length; _ji2++) {
+          if (stationCoords[_ji2].stationId === _br.stations[0]) { _jIdx = _ji2; break; }
+        }
+        if (_jIdx < 0) continue;
+        var _bx = stationCoords[_jIdx].x + 20 + bgi * 70;
+        var _by = stationCoords[_jIdx].y;
+        var _bsp = sp || 24;
+        var _bcoords = [];
+        for (var _bsi = 0; _bsi < _br.stations.length; _bsi++) {
+          _bcoords.push({ stationId: _br.stations[_bsi], x: _bx, y: _by + _bsi * _bsp });
+        }
+        branchGeom[_br.id] = _bcoords;
+      }
+    }
+
     // Build geometry object
     var geometry = {
       lineId: lineId,
@@ -825,6 +875,7 @@
       color: color,
       branchLines: branchLines,
       branchOffset: branchOffset,
+      branchGeom: branchGeom,
       routeElements: routeElements,
       junctionStation: isSixShapedLoop ? stations[0] : null,
   junctionX: isSixShapedLoop ? junctionX : null,
@@ -893,6 +944,8 @@
       svg.style.width = "100%";
       svg.setAttribute("data-line-id", lineId);
       svg.setAttribute("data-lang", _lang);
+      // Branch geometry for train placement (branch trains render on branch column)
+      svg.__branchGeom = geometry.branchGeom || null;
       
       // Background
       var bgRect = document.createElementNS(svgNS, "rect");
@@ -1361,16 +1414,27 @@
     
     for (var pi = 0; pi < positions.length; pi++) {
       var p = positions[pi];
-      // v4.3.409: 融合机制——延伸线（fusionLineId）列车按延伸几何 baseIdx 偏移
-      var idx;
+      // v4.3.446: 支线融合列车——画在支线站列（branchGeom）上，与主线留出距离
+      var coord = null;
       if (p.fusionLineId) {
-        var fm = _fusionBaseIdx(lineId, p.fusionLineId);
-        idx = fm >= 0 ? fm + (p.stationIndex || 0) : (p.stationIndex || 0);
-      } else {
-        idx = p.stationIndex || 0;
+        var _bg = svg.__branchGeom || null;
+        if (_bg && _bg[p.fusionLineId]) {
+          var _bii = Math.min(p.stationIndex || 0, _bg[p.fusionLineId].length - 1);
+          coord = _bg[p.fusionLineId][_bii];
+        }
       }
-      idx = Math.min(idx, stationCoords.length - 1);
-      var coord = stationCoords[idx];
+      if (!coord) {
+        // v4.3.409: 融合机制——延伸线（fusionLineId）列车按延伸几何 baseIdx 偏移
+        var idx;
+        if (p.fusionLineId) {
+          var fm = _fusionBaseIdx(lineId, p.fusionLineId);
+          idx = fm >= 0 ? fm + (p.stationIndex || 0) : (p.stationIndex || 0);
+        } else {
+          idx = p.stationIndex || 0;
+        }
+        idx = Math.min(idx, stationCoords.length - 1);
+        coord = stationCoords[idx];
+      }
       if (!coord) continue;
       
       var px = coord.x;
