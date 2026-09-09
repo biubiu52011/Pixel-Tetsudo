@@ -684,7 +684,7 @@
     };
 
     // ========== Timetable Local Cache ==========
-    var TIMETABLE_CACHE_KEY = 'odpt_timetable_cache_v1';
+    var TIMETABLE_CACHE_KEY = 'odpt_timetable_cache_v2'; // v4.3.459: v1 缓存 stop 站字段为空（压缩不兼容新 schema），升级键强制失效
     var TIMETABLE_CACHE_TTL = 3600000;  // 1小时过期
 
     function loadTimetableCache() {
@@ -713,9 +713,12 @@
                 var data = timetables[op] || [];
                 compressed[op] = data.map(function(tt) {
                     // 只保留必要字段
+                    // v4.3.459: ODPT 时刻表 stop 的站字段是 departureStation/arrivalStation（odpt:station 已不再返回）——
+                    // 旧压缩只取 odpt:station 导致缓存解压后站全空、推定位置全失（都电荒川线 879 条时刻表 0 位置）。
+                    // 压缩时兼容三种字段，解压时全部还原。
                     var stations = (tt['odpt:trainTimetableObject'] || []).map(function(sto) {
                         return {
-                            s: sto['odpt:station'] || '',
+                            s: sto['odpt:station'] || sto['odpt:departureStation'] || sto['odpt:arrivalStation'] || '',
                             a: sto['odpt:arrivalTime'] || '',
                             d: sto['odpt:departureTime'] || ''
                         };
@@ -745,6 +748,8 @@
                     var stations = (tt.st || []).map(function(sto) {
                         return {
                             'odpt:station': sto.s || '',
+                            'odpt:departureStation': sto.s || '',
+                            'odpt:arrivalStation': sto.s || '',
                             'odpt:arrivalTime': sto.a || '',
                             'odpt:departureTime': sto.d || ''
                         };
