@@ -42,3 +42,7 @@ images/*/_files.txt
 # Recovery archive
 recovery/
 
+
+# serve logs
+serve.err
+serve.log

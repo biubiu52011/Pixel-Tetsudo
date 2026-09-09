@@ -152,7 +152,7 @@
       }
     },
     {
-      "name": "千住 街之驛",
+      "name": "千住街の駅",
       "coord": [
         35.750478,
         139.801642
@@ -164,7 +164,7 @@
         "history",
         "all"
       ],
-      "image": "../images/観光地/千住 街之驿.jpg",
+      "image": "../images/観光地/千住街の駅.jpg",
       "bestTime": "9:00～17:00",
       "hours": "9:00～17:00（火曜定休）",
       "fee": "無料",
@@ -174,10 +174,10 @@
         "伝統的な民家改装の建物"
       ],
       "name_i18n": {
-        "ja": "千住 街之驛",
-        "zh": "千住 街之驿",
+        "ja": "千住街の駅",
+        "zh": "千住街之站",
         "en": "Senju Machi-no-Eki",
-        "ko": "센쥬 마치노에키"
+        "ko": "센주 마치노에키"
       },
       "desc_i18n": {
         "ja": "古民家を改装した観光案内所。無料で地図がもらえるし、スタッフのおじさんが色々親切に教えてくれる。散歩の起点に最適。",
@@ -227,7 +227,7 @@
       }
     },
     {
-      "name": "宿場町通商店街",
+      "name": "宿場町通り商店街",
       "coord": [
         35.75124,
         139.80175
@@ -241,7 +241,7 @@
         "food",
         "shopping"
       ],
-      "image": "../images/観光地/宿场町通商店街.jpg",
+      "image": "../images/観光地/宿場町通り商店街.jpg",
       "bestTime": "昼～夜",
       "hours": "各店異なる（概ね10:00～22:00）",
       "fee": "無料（自由散策）",
@@ -251,10 +251,10 @@
         "夕方以降が雰囲気あり"
       ],
       "name_i18n": {
-        "ja": "宿場町通商店街",
+        "ja": "宿場町通り商店街",
         "zh": "宿场町通商店街",
-        "en": "Shukuba-machi Shopping Street",
-        "ko": "슈쿠바마치 상점가"
+        "en": "Shukubamachi-dori Shopping Street",
+        "ko": "슈쿠바마치도리 상점가"
       },
       "desc_i18n": {
         "ja": "江戸時代は日光街道の宿場町だった通り。今でも老舗の菓子屋や昭和レトロな居酒屋が残っていて、歩いているだけでタイムスリップした気分になれる。",
@@ -384,10 +384,10 @@
       }
     },
     {
-      "name": "荒川 虹之広場",
+      "name": "虹の広場（荒川河川敷）",
       "coord": [
-        35.75705,
-        139.804111
+        35.7572771,
+        139.805376
       ],
       "dist": "10 min walk",
       "dir": "北",
@@ -396,7 +396,7 @@
         "nature",
         "all"
       ],
-      "image": "../images/観光地/荒川 虹之广场.jpg",
+      "image": "../images/観光地/虹の広場（荒川河川敷）.jpg",
       "bestTime": "日中～夕日",
       "hours": "24時間営業",
       "fee": "無料",
@@ -407,10 +407,10 @@
         "犬の同伴可"
       ],
       "name_i18n": {
-        "ja": "荒川 虹之広場",
-        "zh": "荒川 虹之广场",
-        "en": "Arakawa Nijino-Hiroba",
-        "ko": "아라카와 니지노히로바"
+        "ja": "虹の広場（荒川河川敷）",
+        "zh": "虹之广场（荒川河岸）",
+        "en": "Niji-no-Hiroba (Arakawa Riverside)",
+        "ko": "니지노 히로바 (아라카와 강둑)"
       },
       "desc_i18n": {
         "ja": "荒川の河川敷にある広場。視界が開けていて、電車とスカイツリーと夕日を一緒に撮れる隠れた名所。夕暮れ時が特に綺麗。",
@@ -477,7 +477,7 @@
         "shopping",
         "landmark"
       ],
-      "image": "../images/観光地/阳光城 (Sunshine City).jpg",
+      "image": "../images/観光地/サンシャインシティ.jpg",
       "bestTime": "10:00～22:00",
       "hours": "施設により異なる（概ね10:00～22:00）",
       "fee": "無料（入場）、各施設別途料金",
@@ -553,7 +553,7 @@
         "shopping",
         "food"
       ],
-      "image": "../images/観光地/西武百货 池袋本店.jpg",
+      "image": "../images/観光地/西武百貨店 池袋本店.jpg",
       "bestTime": "10:00～21:00",
       "hours": "10:00～21:00（一部店舗異なる）",
       "fee": "無料",
@@ -629,7 +629,7 @@
         "shopping",
         "food"
       ],
-      "image": "../images/観光地/东武百货 池袋店.jpg",
+      "image": "../images/観光地/東武百貨店 池袋店.jpg",
       "bestTime": "10:00～21:00",
       "hours": "10:00～21:00（レストラン街は～23:00）",
       "fee": "無料",
@@ -705,7 +705,7 @@
         "shopping",
         "modern"
       ],
-      "image": "../images/観光地/Animate 池袋本店.jpg",
+      "image": "../images/観光地/アニメイト 池袋本店.jpg",
       "bestTime": "10:00～21:00",
       "hours": "10:00～21:00",
       "fee": "無料",
@@ -771,7 +771,7 @@
       "name": "乙女ロード (Otome Road)",
       "coord": [
         35.7302,
-        139.7160
+        139.716
       ],
       "dist": "15 min walk",
       "dir": "東",
@@ -781,7 +781,7 @@
         "shopping",
         "modern"
       ],
-      "image": "../images/観光地/乙女路.jpg",
+      "image": "../images/観光地/乙女ロード.jpg",
       "bestTime": "昼～夜",
       "hours": "各店異なる（概ね11:00～20:00）",
       "fee": "無料（自由散策）",
@@ -857,7 +857,7 @@
         "park",
         "landmark"
       ],
-      "image": "../images/観光地/池袋西口公园.jpg",
+      "image": "../images/観光地/池袋西口公園.jpg",
       "bestTime": "日中～夜",
       "hours": "24時間開放",
       "fee": "無料",
@@ -934,7 +934,7 @@
         "shrine",
         "nature"
       ],
-      "image": "../images/観光地/杂司谷鬼子母神堂.jpg",
+      "image": "../images/観光地/雑司が谷鬼子母神堂.jpg",
       "bestTime": "日中",
       "hours": "境内自由（社務所9:00～17:00）",
       "fee": "無料",
@@ -1160,7 +1160,7 @@
         "all",
         "nature"
       ],
-      "image": "../images/観光地/汐入公园 (Shioiri Park).jpg",
+      "image": "../images/観光地/汐入公園.jpg",
       "bestTime": "通年",
       "hours": "24時間開放",
       "fee": "無料",
@@ -1235,7 +1235,7 @@
         "history",
         "all"
       ],
-      "image": "../images/観光地/延命寺 (首振地藏).jpg",
+      "image": "../images/観光地/延命寺（首振地蔵）.jpg",
       "bestTime": "通年",
       "hours": "境内自由参拝",
       "fee": "無料",
@@ -1310,7 +1310,7 @@
         "history",
         "all"
       ],
-      "image": "../images/観光地/回向院 (小冢原回向院).jpg",
+      "image": "../images/観光地/回向院（小塚原回向院）.jpg",
       "bestTime": "通年",
       "hours": "境内自由参拝",
       "fee": "無料",
@@ -1373,37 +1373,36 @@
       }
     },
     {
-      "name": "杉田玄白「解体新書」記念碑",
+      "name": "観臓記念碑（解体新書）",
       "coord": [
         35.732791,
         139.797746
       ],
       "dist": "4 min walk",
       "dir": "西",
-      "desc": "回向院の敷地内にある記念碑。蘭学医の杉田玄白が、ここで人体解剖を見学して『解体新書』を翻訳するきっかけを得た場所。日本医学史の重要な一里塚。",
+      "desc": "1771年（明和8年）、杉田玄白・前野良沢らが小塚原の刑場で腑分け（解剖）を見学し、蘭書『ターヘル・アナトミア』の翻訳に挑んだことを記念する碑。回向院の門を入ってすぐ右側に立つ。",
       "tags": [
         "history"
       ],
-      "image": "../images/観光地/杉田玄白「解体新书」纪念碑.jpg",
+      "image": "../images/観光地/観臓記念碑（解体新書）.jpg",
       "bestTime": "通年",
       "hours": "境内自由参拝",
       "fee": "無料",
       "tips": [
-        "回向院内にある",
-        "解体新書ゆかりの地",
-        "蘭学の歴史を感じる"
+        "回向院の境内に立つ",
+        "『解体新書』刊行のきっかけとなった地"
       ],
       "name_i18n": {
-        "ja": "杉田玄白「解体新書」記念碑",
-        "zh": "杉田玄白「解体新书」纪念碑",
-        "en": "Sugita Genpaku \"Kaitai Shinsho\" Monument",
-        "ko": "스기타 겐파쿠 「해체신서」 기념비"
+        "ja": "観臓記念碑（解体新書）",
+        "zh": "观脏纪念碑（解体新书）",
+        "en": "Kanzo Monument (Kaitai Shinsho)",
+        "ko": "간조 기념비 (해체신서)"
       },
       "desc_i18n": {
-        "ja": "回向院の敷地内にある記念碑。蘭学医の杉田玄白が、ここで人体解剖を見学して『解体新書』を翻訳するきっかけを得た場所。日本医学史の重要な一里塚。",
-        "zh": "回向院院内的纪念碑。兰学医家杉田玄白曾在此观摩人体解剖，从而获得翻译《解体新书》的契机。日本医学史的重要里程碑。",
-        "en": "A monument on the grounds of Eko-in. This is where Rangaku (Dutch learning) doctor Sugita Genpaku witnessed a human dissection, which inspired him to translate the groundbreaking medical text \"Kaitai Shinsho.\" An important milestone in Japanese medical history.",
-        "ko": "에코인 부지 내에 있는 기념비. 난학 의사 스기타 겐파쿠가 이곳에서 인체 해부를 견학하고 『해체신서』를 번역할 계기를 얻은 장소. 일본 의학사의 중요한 이정표예요."
+        "ja": "1771年（明和8年）、杉田玄白・前野良沢らが小塚原の刑場で腑分け（解剖）を見学し、蘭書『ターヘル・アナトミア』の翻訳に挑んだことを記念する碑。回向院の門を入ってすぐ右側に立つ。",
+        "zh": "为纪念1771年（明和8年）杉田玄白、前野良泽等人在小塚原刑场观摩腑分（解剖）并着手翻译兰书《解体新书》而立之碑，位于回向院山门内右侧。",
+        "en": "A monument commemorating Sugita Genpaku, Maeno Ryotaku and others who witnessed a dissection at the Kozukahara execution ground in 1771 and set out to translate the Dutch anatomy text, leading to Kaitai Shinsho. It stands just inside the gate of Ekoin Temple.",
+        "ko": "1771년(메이와 8년), 스기타 겐파쿠·마에노 료타쿠 등이 고즈카하라 형장에서 해부를 참관하고 네덜란드 해부학서를 번역하기 시작한 것을 기념하는 비. 에코인 절 정문 안 오른쪽에 있다."
       },
       "hours_i18n": {
         "ja": "境内自由参拝",
@@ -1425,24 +1424,20 @@
       },
       "tips_i18n": {
         "ja": [
-          "回向院内にある",
-          "解体新書ゆかりの地",
-          "蘭学の歴史を感じる"
+          "回向院の境内に立つ",
+          "『解体新書』刊行のきっかけとなった地"
         ],
         "zh": [
-          "在回向院院内",
-          "与《解体新书》有缘的地方",
-          "能感受到兰学的历史"
+          "位于回向院境内",
+          "《解体新书》刊行的发端之地"
         ],
         "en": [
-          "Located within Eko-in",
-          "Place connected to Kaitai Shinsho",
-          "Feel the history of Rangaku (Dutch learning)"
+          "Inside the grounds of Ekoin Temple",
+          "The site that led to the publication of Kaitai Shinsho"
         ],
         "ko": [
-          "에코인 경내에 있음",
-          "『해체신서』와 인연 있는 곳",
-          "난학의 역사를 느낌"
+          "에코인 절 경내에 있음",
+          "《해체신서》 간행의 계기가 된 곳"
         ]
       }
     },
@@ -1459,7 +1454,7 @@
         "nature",
         "all"
       ],
-      "image": "../images/観光地/荒川区立 瑞光公园.jpg",
+      "image": "../images/観光地/荒川区立 瑞光公園.jpg",
       "bestTime": "通年",
       "hours": "24時間開放",
       "fee": "無料",
@@ -1533,7 +1528,7 @@
       "tags": [
         "history"
       ],
-      "image": "../images/観光地/净闲寺 (投込寺).jpg",
+      "image": "../images/観光地/浄閑寺（投込寺）.jpg",
       "bestTime": "通年",
       "hours": "境内自由参拝",
       "fee": "無料",
@@ -1596,37 +1591,37 @@
       }
     },
     {
-      "name": "隅田川 尾久橋付近歩道",
+      "name": "千住桜堤",
       "coord": [
         35.743122,
         139.803011
       ],
       "dist": "14 min walk",
       "dir": "北東",
-      "desc": "南千住の北側を流れる隅田川沿いの歩道。水鳥がよく泳いでいるのが見えるし、荒川区と足立区の境界の河川景観を撮るのにもいい。のんびり歩くのに最適。",
+      "desc": "足立区千住の隅田川沿いに続く桜並木の遊歩道。千住大橋付近から水神大橋方面にかけての堤防沿いにあり、春には川面と桜のコントラストが楽しめる。水鳥が泳ぐ姿も見られ、季節を問わず散策に適している。",
       "tags": [
         "nature"
       ],
-      "image": "../images/観光地/隅田川 尾久桥附近步道.jpg",
-      "bestTime": "通年",
+      "image": "../images/観光地/千住桜堤.jpg",
+      "bestTime": "春（3月下旬〜4月上旬）",
       "hours": "24時間開放",
       "fee": "無料",
       "tips": [
-        "水鳥が見られる",
-        "川沿いの散歩道",
-        "撮影スポット"
+        "桜並木の遊歩道",
+        "春は花見の名所",
+        "川沿いの散歩道"
       ],
       "name_i18n": {
-        "ja": "隅田川 尾久橋付近歩道",
-        "zh": "隅田川 尾久桥附近步道",
-        "en": "Sumida River Oku-bashi Area Walkway",
-        "ko": "스미다 강 오쿠하시 부근 보도"
+        "ja": "千住桜堤",
+        "zh": "千住樱堤",
+        "en": "Senju Sakura Tsutsumi",
+        "ko": "센주 사쿠라 츠츠미"
       },
       "desc_i18n": {
-        "ja": "南千住の北側を流れる隅田川沿いの歩道。水鳥がよく泳いでいるのが見えるし、荒川区と足立区の境界の河川景観を撮るのにもいい。のんびり歩くのに最適。",
-        "zh": "南千住北侧流淌的隅田川沿岸步道。经常能看到水鸟游弋，也是拍摄荒川区与足立区交界河景的好地方。适合悠闲散步。",
-        "en": "A walkway along the Sumida River flowing north of Minami-Senju. You can often see waterfowl swimming, and its good for shooting the river landscape at the border of Arakawa and Adachi wards. Perfect for a leisurely stroll.",
-        "ko": "미나미센쥬 북쪽을 흐르는 스미다 강가의 보도. 물새들이 헤엄치는 모습을 자주 볼 수 있고, 아라카와 구와 아다치 구 경계의 강 풍경을 찍기에도 좋아요. 느긋하게 걷기 최적이에요."
+        "ja": "足立区千住の隅田川沿いに続く桜並木の遊歩道。千住大橋付近から水神大橋方面にかけての堤防沿いにあり、春には川面と桜のコントラストが楽しめる。水鳥が泳ぐ姿も見られ、季節を問わず散策に適している。",
+        "zh": "足立区千住的隅田川沿岸樱并木步道，从千住大桥附近延伸至水神大桥方向，春季可欣赏河面与樱花的对比美景，还能看到水鸟游弋，四季皆宜散步。",
+        "en": "A cherry-blossom-lined promenade along the Sumida River in Senju, Adachi Ward, stretching from near Senju Ohashi toward Suijin Ohashi. In spring the blossoms contrast beautifully with the river; waterfowl can be seen year-round, making it a pleasant walk in any season.",
+        "ko": "아다치구 센주의 스미다 강가에 이어지는 벚꽃 산책로로, 센주 오하시 부근에서 스이진 오하시 방면까지 이어집니다. 봄에는 강물과 벚꽃의 대비를 즐길 수 있고, 물새가 헤엄치는 모습도 볼 수 있어 사계절 산책에 좋습니다."
       },
       "hours_i18n": {
         "ja": "24時間開放",
@@ -1641,31 +1636,31 @@
         "ko": "무료"
       },
       "bestTime_i18n": {
-        "ja": "通年",
-        "zh": "全年",
-        "en": "Year-round",
-        "ko": "연중"
+        "ja": "春（3月下旬〜4月上旬）",
+        "zh": "春季（3月下旬～4月上旬）",
+        "en": "Spring (late March - early April)",
+        "ko": "봄 (3월 하순~4월 상순)"
       },
       "tips_i18n": {
         "ja": [
-          "水鳥が見られる",
-          "川沿いの散歩道",
-          "撮影スポット"
+          "桜並木の遊歩道",
+          "春は花見の名所",
+          "川沿いの散歩道"
         ],
         "zh": [
-          "能看到水鸟",
-          "沿河的散步道",
-          "拍摄景点"
+          "樱并木步道",
+          "春季赏樱名所",
+          "沿河散步道"
         ],
         "en": [
-          "Waterfowl can be seen",
-          "Riverside walking path",
-          "Photo spot"
+          "Cherry-tree-lined promenade",
+          "Famous hanami spot in spring",
+          "Riverside walking path"
         ],
         "ko": [
-          "물새 관찰 가능",
-          "강가 산책로",
-          "촬영 스폿"
+          "벚꽃 가로수길",
+          "봄꽃놀이 명소",
+          "강가 산책로"
         ]
       }
     },
@@ -1682,7 +1677,7 @@
         "food",
         "all"
       ],
-      "image": "../images/観光地/尾花 (Obana) 鳗鱼饭.jpg",
+      "image": "../images/観光地/尾花 (Obana) うなぎ料理.jpg",
       "bestTime": "11:30～14:00 / 17:00～21:00",
       "hours": "11:30～14:00（L.O.13:30）/ 17:00～21:00（L.O.20:30）",
       "fee": "予算4000円～",
@@ -1757,7 +1752,7 @@
         "history",
         "all"
       ],
-      "image": "../images/観光地/素盏雄神社.jpg",
+      "image": "../images/観光地/素盞雄神社.jpg",
       "bestTime": "通年",
       "hours": "境内自由参拝",
       "fee": "無料",
@@ -1820,38 +1815,38 @@
       }
     },
     {
-      "name": "迭翠軒 (関屋の里碑)",
+      "name": "関屋の里（冨嶽三十六景）",
       "coord": [
         35.743139,
         139.81225
       ],
-      "dist": "",
-      "dir": "",
-      "desc": "葛飾北斎が、あの有名な『富嶽三十六景・隅田川関屋の里』をこの辺りで描いたと伝わる場所。史跡の碑が残っていて、浮世絵ファンにはたまらない。",
+      "dist": "13 min walk",
+      "dir": "南東",
+      "desc": "葛飾北斎の『冨嶽三十六景』の1図「隅田川関屋の里」の舞台とされる場所。江戸時代は風光明媚な土地として知られ、墨堤通り（掃部堤）沿いの風景が浮世絵に数多く描かれた。",
       "tags": [
         "all",
         "history",
         "landmark"
       ],
-      "image": "../images/観光地/迭翠轩 (关屋之里碑).jpg",
+      "image": "../images/観光地/関屋の里（冨嶽三十六景）.jpg",
       "bestTime": "日中",
       "hours": "常時公開（屋外）",
       "fee": "無料",
       "tips": [
-        "屋外史跡、雨天も可",
-        "北斎の作品を事前に調べてから行くとより楽しめる"
+        "墨堤通り沿いの史跡エリア",
+        "北斎の作品を事前に見てから訪れるとより楽しめる"
       ],
       "name_i18n": {
-        "ja": "迭翠軒 (関屋の里碑)",
-        "zh": "迭翠轩 (关屋之里碑)",
-        "en": "Tessuiken (Sekiya-no-sato Monument)",
-        "ko": "테스이켄(세키야노사토 비)"
+        "ja": "関屋の里（冨嶽三十六景）",
+        "zh": "关屋之里（富岳三十六景）",
+        "en": "Sekiya-no-sato (Thirty-six Views of Mount Fuji)",
+        "ko": "세키야노사토 (후가쿠 36경)"
       },
       "desc_i18n": {
-        "ja": "葛飾北斎が、あの有名な『富嶽三十六景・隅田川関屋の里』をこの辺りで描いたと伝わる場所。史跡の碑が残っていて、浮世絵ファンにはたまらない。",
-        "zh": "传闻葛饰北斋曾在这一带绘制著名的《富岳三十六景·隅田川关屋之里》。留有古迹纪念碑，浮世绘爱好者必去。",
-        "en": "The place where Katsushika Hokusai is said to have painted his famous \"Thirty-six Views of Mount Fuji: Sumida River Sekiya-no-sato\" around here. A historic monument remains, a must-visit for ukiyo-e fans.",
-        "ko": "가쓰시카 호쿠사이가 유명한 『후가쥬육십사경·스미다 강 세키야노사토』를 이 부근에서 그렸다고 전해지는 장소. 사적 비가 남아있어 우키요에 팬이라면 꼭 가봐야 해요."
+        "ja": "葛飾北斎の『冨嶽三十六景』の1図「隅田川関屋の里」の舞台とされる場所。江戸時代は風光明媚な土地として知られ、墨堤通り（掃部堤）沿いの風景が浮世絵に数多く描かれた。",
+        "zh": "据传为葛饰北斋《富岳三十六景》之一《隅田川关屋之里》的取景地。江户时代以风景优美著称，墨堤通（扫部堤）沿岸风光多次出现在浮世绘中。",
+        "en": "The setting of \"Sumida River Sekiya-no-sato\", one of Katsushika Hokusai's Thirty-six Views of Mount Fuji. Known in the Edo period as a scenic spot, the views along Bokutei-dori (Kamondzutsumi) were depicted in many ukiyo-e prints.",
+        "ko": "가쓰시카 호쿠사이의 《후가쿠 36경》 중 하나인 \"스미다 강 세키야노사토\"의 무대로 전해지는 곳. 에도 시대에는 경치 좋은 곳으로 유명했으며, 보쿠테이도리(카몬츠츠미)를 따라 펼쳐진 풍경이 우키요에에 자주 그려졌습니다."
       },
       "hours_i18n": {
         "ja": "常時公開（屋外）",
@@ -1873,56 +1868,56 @@
       },
       "tips_i18n": {
         "ja": [
-          "屋外史跡、雨天も可",
-          "北斎の作品を事前に調べてから行くとより楽しめる"
+          "墨堤通り沿いの史跡エリア",
+          "北斎の作品を事前に見てから訪れるとより楽しめる"
         ],
         "zh": [
-          "户外史迹，雨天也可参观",
-          "提前了解北斋的作品再去会更享受"
+          "墨堤通沿线的史迹区域",
+          "先欣赏北斋作品再前往更添乐趣"
         ],
         "en": [
-          "Outdoor historic site, visitable in rain",
-          "Research Hokusais works beforehand for more enjoyment"
+          "Historic area along Bokutei-dori",
+          "Enjoy it more by viewing Hokusai's print beforehand"
         ],
         "ko": [
-          "야외 사적, 비오는 날도 방문 가능",
-          "호쿠사이 작품을 미리 알아보고 가면 더 즐길 수 있음"
+          "보쿠테이도리 주변 사적 지역",
+          "호쿠사이 작품을 미리 감상하고 가면 더 즐거움"
         ]
       }
     },
     {
-      "name": "吾妻稲荷神社",
+      "name": "柳原稲荷神社",
       "coord": [
-        35.744111,
-        139.812361
+        35.7478199,
+        139.8128981
       ],
-      "dist": "",
-      "dir": "",
-      "desc": "住宅街の路地裏にひっそり佇む小さな稲荷神社。地域の人々を守る狐神が祀られていて、赤い鳥居が下町らしい古風な雰囲気を醸し出している。",
+      "dist": "10 min walk",
+      "dir": "南東",
+      "desc": "足立区柳原に鎮座する稲荷神社。慶長11年（1606年）に徳川家康が当地を訪れた際、楊柳を見て名付けたと伝わる。江戸時代より伝わる「柳原箕輪囃子」は足立区登録無形文化財。",
       "tags": [
         "all",
         "history",
         "shrine"
       ],
-      "image": "../images/観光地/吾妻稻荷神社.webp",
+      "image": "../images/観光地/柳原稲荷神社.webp",
       "bestTime": "日中",
       "hours": "境内自由参拝",
       "fee": "無料",
       "tips": [
-        "住宅街の小さな神社、静かに参拝を",
-        "鳥居の写真スポット"
+        "住宅街の中の小さな神社",
+        "区登録無形文化財「柳原箕輪囃子」"
       ],
       "name_i18n": {
-        "ja": "吾妻稲荷神社",
-        "zh": "吾妻稻荷神社",
-        "en": "Azuma Inari Shrine",
-        "ko": "아즈마 이나리 신사"
+        "ja": "柳原稲荷神社",
+        "zh": "柳原稻荷神社",
+        "en": "Yanagihara Inari Shrine",
+        "ko": "야나기하라 이나리 신사"
       },
       "desc_i18n": {
-        "ja": "住宅街の路地裏にひっそり佇む小さな稲荷神社。地域の人々を守る狐神が祀られていて、赤い鳥居が下町らしい古風な雰囲気を醸し出している。",
-        "zh": "隐匿在住宅区小巷里的小稻荷神社。供奉着守护当地居民的狐狸神，红色鸟居散发着下町特有的古朴氛围。",
-        "en": "A small Inari shrine quietly standing in a back alley of a residential area. Dedicated to the fox deity protecting local residents, its red torii gate exudes a quaint, old-town atmosphere.",
-        "ko": "주택가 골목에 조용히 자리한 작은 이나리 신사. 지역 주민들을 지키는 여우 신이 모셔져 있고, 붉은 도리이가 시타마치 특유의 고풍스러운 분위기를 자아내고 있어요."
+        "ja": "足立区柳原に鎮座する稲荷神社。慶長11年（1606年）に徳川家康が当地を訪れた際、楊柳を見て名付けたと伝わる。江戸時代より伝わる「柳原箕輪囃子」は足立区登録無形文化財。",
+        "zh": "坐落于足立区柳原的稻荷神社。相传庆长11年（1606年）德川家康到访此地时，见杨柳而赐名。江户时代流传至今的「柳原箕轮囃子」为足立区登记无形民俗文化财。",
+        "en": "An Inari shrine in Yanagihara, Adachi Ward. It is said that Tokugawa Ieyasu named it after seeing the willow trees when he visited in 1606. The \"Yanagihara Minowa-bayashi\" music handed down since the Edo period is a registered intangible folk cultural asset of Adachi Ward.",
+        "ko": "아다치구 야나기하라에 있는 이나리 신사. 1606년 도쿠가와 이에야스가 이곳을 방문했을 때 버드나무를 보고 이름을 지었다고 전해집니다. 에도 시대부터 전해지는 \"야나기하라 미노와바야시\"는 아다치구 등록 무형민속문화재입니다."
       },
       "hours_i18n": {
         "ja": "境内自由参拝",
@@ -1944,20 +1939,20 @@
       },
       "tips_i18n": {
         "ja": [
-          "住宅街の小さな神社、静かに参拝を",
-          "鳥居の写真スポット"
+          "住宅街の中の小さな神社",
+          "区登録無形文化財「柳原箕輪囃子」"
         ],
         "zh": [
-          "住宅区的小神社，请安静参拜",
-          "鸟居的拍照景点"
+          "住宅区中的小型神社",
+          "区登记无形文化财「柳原箕轮囃子」"
         ],
         "en": [
-          "Small shrine in residential area, worship quietly",
-          "Torii gate photo spot"
+          "A small shrine in a residential area",
+          "Registered cultural asset \"Yanagihara Minowa-bayashi\""
         ],
         "ko": [
-          "주택가의 작은 신사, 조용히 참배",
-          "도리이 사진 스폿"
+          "주택가 속 작은 신사",
+          "구 등록 무형문화재 \"야나기하라 미노와바야시\""
         ]
       }
     },
@@ -1967,15 +1962,15 @@
         35.745417,
         139.815028
       ],
-      "dist": "",
-      "dir": "",
+      "dist": "13 min walk",
+      "dir": "南東",
       "desc": "駅から歩いて5分ほど。春・夏・秋・冬のエリアに分かれた、こじんまりとした日本庭園風の公園。地元の人だけが知る穴場的な避暑スポット。",
       "tags": [
         "all",
         "nature",
         "park"
       ],
-      "image": "../images/観光地/柳原千草园.jpg",
+      "image": "../images/観光地/柳原千草園.jpg",
       "bestTime": "春～秋",
       "hours": "24時間開放",
       "fee": "無料",
@@ -2033,38 +2028,39 @@
       }
     },
     {
-      "name": "隅田川堤防遊歩道 (千住発着場)",
+      "name": "隅田川テラス（千住発着場）",
       "coord": [
         35.742056,
         139.814389
       ],
-      "dist": "",
-      "dir": "",
-      "desc": "隅田川沿いに整備された水辺の遊歩道。スカイツリーが遠望できるだけでなく、東京都内でも数少ない水上バスの発着場にもなっている。景色が抜群で気持ちいい。",
+      "dist": "15 min walk",
+      "dir": "南東",
+      "desc": "隅田川沿いに整備された水辺の遊歩道「隅田川テラス」。千住汐入大橋のたもとには東京水辺ラインの「千住発着場」があり、川面とスカイツリーを望む景色が楽しめる。",
       "tags": [
         "all",
         "nature",
         "park"
       ],
-      "image": "../images/観光地/隅田川堤防步道 (千住发着场).jpg",
+      "image": "../images/観光地/隅田川テラス（千住発着場）.jpg",
       "bestTime": "日中～夕日",
       "hours": "24時間開放",
       "fee": "無料",
       "tips": [
-        "水上バスの時刻表を事前確認",
-        "夕日の時間帯が特におすすめ"
+        "水上バスで隅田川クルーズ",
+        "スカイツリーの眺望",
+        "散歩・ジョギングに最適"
       ],
       "name_i18n": {
-        "ja": "隅田川堤防遊歩道 (千住発着場)",
-        "zh": "隅田川堤防步道 (千住发着场)",
-        "en": "Sumida River Embankment Walkway (Senju Landing)",
-        "ko": "스미다 강 제방 보도(센쥬 발착장)"
+        "ja": "隅田川テラス（千住発着場）",
+        "zh": "隅田川滨水步道（千住码头）",
+        "en": "Sumida River Terrace (Senju Landing)",
+        "ko": "스미다 강 테라스 (센주 발착장)"
       },
       "desc_i18n": {
-        "ja": "隅田川沿いに整備された水辺の遊歩道。スカイツリーが遠望できるだけでなく、東京都内でも数少ない水上バスの発着場にもなっている。景色が抜群で気持ちいい。",
-        "zh": "沿着隅田川修建的亲水步道。不仅能远眺晴空塔，还是东京都内少数水上巴士的停靠码头。景色绝佳，心情舒畅。",
-        "en": "A waterside walkway along the Sumida River. Not only can you see Skytree in the distance, but its also one of the few water bus stops in Tokyo. The views are outstanding and refreshing.",
-        "ko": "스미다 강가에 정비된 물가 보도. 스카이트리를 원경으로 볼 수 있을 뿐만 아니라, 도쿄 도내에서도 드문 워터버스 발착장이기도 해요. 경치가 탁 트여 기분이 좋아요."
+        "ja": "隅田川沿いに整備された水辺の遊歩道「隅田川テラス」。千住汐入大橋のたもとには東京水辺ラインの「千住発着場」があり、川面とスカイツリーを望む景色が楽しめる。",
+        "zh": "隅田川沿岸的滨水步道「隅田川Terrace」。千住汐入大桥桥头设有东京水边线的「千住码头」，可欣赏河面与晴空塔同框的景色。",
+        "en": "A riverside promenade \"Sumida River Terrace\" along the Sumida River. The \"Senju Landing\" of Tokyo Mizube Line is located at the foot of Senju Shioiri Ohashi, offering views of the river and Tokyo Skytree.",
+        "ko": "스미다 강가의 산책로 \"스미다 강 테라스\". 센주 시오이리 오하시 기슭에는 도쿄 미즈베 라인의 \"센주 발착장\"이 있어 강물과 도쿄 스카이트리를 함께 감상할 수 있습니다."
       },
       "hours_i18n": {
         "ja": "24時間開放",
@@ -2086,56 +2082,61 @@
       },
       "tips_i18n": {
         "ja": [
-          "水上バスの時刻表を事前確認",
-          "夕日の時間帯が特におすすめ"
+          "水上バスで隅田川クルーズ",
+          "スカイツリーの眺望",
+          "散歩・ジョギングに最適"
         ],
         "zh": [
-          "请提前确认水上巴士时刻表",
-          "夕阳时段特别推荐"
+          "乘坐水上巴士巡游隅田川",
+          "眺望晴空塔",
+          "适合散步与慢跑"
         ],
         "en": [
-          "Check water bus timetable in advance",
-          "Sunset time especially recommended"
+          "River cruise by water bus",
+          "Views of Tokyo Skytree",
+          "Great for walking and jogging"
         ],
         "ko": [
-          "워터버스 시간표 미리 확인",
-          "석양 시간대 특히 추천"
+          "수상버스로 스미다 강 크루즈",
+          "도쿄 스카이트리 전망",
+          "산책·조깅에 최적"
         ]
       }
     },
     {
-      "name": "堀切大橋 (荒川河川敷)",
+      "name": "堀切橋（荒川）",
       "coord": [
-        35.746111,
-        139.8225
+        35.7457846,
+        139.8192654
       ],
-      "dist": "",
-      "dir": "",
-      "desc": "北東へ歩いて12分ほど。荒川を渡る大きな橋で、河川敷は芝生が広がっていて開放感満点。鉄道ファンなら、様々な電車が疾走する姿を撮りに行く価値あり。",
+      "dist": "17 min walk",
+      "dir": "南東",
+      "desc": "荒川に架かる東京都道314号の橋。足立区柳原と葛飾区堀切を結び、橋のたもとの河川敷は芝生が広がる。付近には首都高速の堀切ジャンクションがあり、鉄道・車両の撮影スポットとしても知られる。",
       "tags": [
         "all",
         "nature",
         "landmark"
       ],
-      "image": "../images/観光地/堀切大桥 (荒川河堤).jpg",
+      "image": "../images/観光地/堀切橋（荒川）.jpg",
       "bestTime": "日中～夕日",
       "hours": "24時間開放",
       "fee": "無料",
       "tips": [
-        "河川敷は広いので歩きやすい靴で",
-        "電車の撮影は線路から安全な距離を"
+        "河川敷の芝生で開放感",
+        "鉄道・首都高の撮影スポット",
+        "堀切菖蒲園へも徒歩圏"
       ],
       "name_i18n": {
-        "ja": "堀切大橋 (荒川河川敷)",
-        "zh": "堀切大桥 (荒川河堤)",
-        "en": "Horikiri Bridge (Arakawa Riverbed)",
-        "ko": "호리키리 오하시(아라카와 강둑)"
+        "ja": "堀切橋（荒川）",
+        "zh": "堀切桥（荒川）",
+        "en": "Horikiri Bridge (Arakawa)",
+        "ko": "호리키리 다리 (아라카와)"
       },
       "desc_i18n": {
-        "ja": "北東へ歩いて12分ほど。荒川を渡る大きな橋で、河川敷は芝生が広がっていて開放感満点。鉄道ファンなら、様々な電車が疾走する姿を撮りに行く価値あり。",
-        "zh": "向东北步行约12分钟。横跨荒川的大桥，河堤上草坪广阔，开放感满分。铁道迷值得去拍摄各种电车飞驰的姿态。",
-        "en": "About a 12-minute walk northeast. A large bridge crossing the Arakawa River, with an expansive lawn riverbed full of openness. Railway fans should go to photograph various trains speeding by.",
-        "ko": "북동쪽으로 걸어서 12분 정도. 아라카와 강을 건너는 큰 다리로, 강둑에는 잔디가 펼쳐져 있어 개방감 만점. 철도 팬이라면 다양한 전철이 질주하는 모습을 찍으러 갈 가치가 있어요."
+        "ja": "荒川に架かる東京都道314号の橋。足立区柳原と葛飾区堀切を結び、橋のたもとの河川敷は芝生が広がる。付近には首都高速の堀切ジャンクションがあり、鉄道・車両の撮影スポットとしても知られる。",
+        "zh": "横跨荒川的都道314号桥梁，连接足立区柳原与葛饰区堀切，桥头河岸绿地开阔。附近有首都高速堀切枢纽，也是铁道与车辆的摄影胜地。",
+        "en": "A bridge of Tokyo Metropolitan Road 314 over the Arakawa River, connecting Yanagihara (Adachi) and Horikiri (Katsushika). The riverside green space at the foot of the bridge is spacious, and the nearby Horikiri Junction of the Shuto Expressway makes it a popular photo spot for trains and vehicles.",
+        "ko": "아라카와 강을 가로지르는 도쿄도도 314호선 다리로, 아다치구 야나기하라와 카츠시카구 호리키리를 연결합니다. 다리 기슭의 강둑 잔디밭이 넓게 펼쳐져 있으며, 인근 수도고속 호리키리 분기점은 철도·차량 촬영 명소로도 알려져 있습니다."
       },
       "hours_i18n": {
         "ja": "24時間開放",
@@ -2157,90 +2158,24 @@
       },
       "tips_i18n": {
         "ja": [
-          "河川敷は広いので歩きやすい靴で",
-          "電車の撮影は線路から安全な距離を"
+          "河川敷の芝生で開放感",
+          "鉄道・首都高の撮影スポット",
+          "堀切菖蒲園へも徒歩圏"
         ],
         "zh": [
-          "河堤很宽阔，请穿好走的鞋子",
-          "拍摄电车请与铁轨保持安全距离"
+          "河岸绿地开阔",
+          "铁道与首都高摄影点",
+          "步行可达堀切菖蒲园"
         ],
         "en": [
-          "Riverbed is wide, wear comfortable shoes",
-          "Keep safe distance from tracks when photographing trains"
+          "Spacious riverside lawn",
+          "Photo spot for trains and expressways",
+          "Within walking distance of Horikiri Iris Garden"
         ],
         "ko": [
-          "강둑이 넓으니 걷기 편한 신발로",
-          "전철 촬영 시 선로에서 안전 거리 유지"
-        ]
-      }
-    },
-    {
-      "name": "ダイエー 千住曙町店",
-      "coord": [
-        35.742714,
-        139.812289
-      ],
-      "dist": "",
-      "dir": "",
-      "desc": "地元では最大級の総合スーパー。生鮮果物に出来たてのお弁当、揚げ物惣菜、プチプラのドラッグストアまで品揃えが豊富。値段も庶民的で、まさに市民の味方。",
-      "tags": [
-        "all",
-        "shopping"
-      ],
-      "image": "../images/観光地/大荣超市 千住曙町店.jpg",
-      "bestTime": "10:00～21:00",
-      "hours": "9:00～22:00（店舗により異なる）",
-      "fee": "無料（入場）",
-      "tips": [
-        "生鮮食品は夕方が安い",
-        "駐車場あり"
-      ],
-      "name_i18n": {
-        "ja": "ダイエー 千住曙町店",
-        "zh": "大荣超市 千住曙町店",
-        "en": "Daiei Senju Akebono-cho Store",
-        "ko": "다이에 센쥬 아케보노쵸 점"
-      },
-      "desc_i18n": {
-        "ja": "地元では最大級の総合スーパー。生鮮果物に出来たてのお弁当、揚げ物惣菜、プチプラのドラッグストアまで品揃えが豊富。値段も庶民的で、まさに市民の味方。",
-        "zh": "当地最大级的综合超市。生鲜水果、现做便当、炸物熟食、平价药妆店，商品种类丰富。价格也很亲民，简直是市民的好伙伴。",
-        "en": "One of the largest general supermarkets in the area. Fresh fruits, made-to-order bento, fried prepared foods, and even an affordable drugstore — the selection is rich. Prices are also down-to-earth, truly a citizens ally.",
-        "ko": "현지에서 최대 규모의 종합 슈퍼. 신선한 과일에 갓 만든 도시락, 튀김 반찬, 저렴한 드럭스토어까지 품목이 풍부해요. 가격도 서민적이라 그야말로 시민의 편이에요."
-      },
-      "hours_i18n": {
-        "ja": "9:00～22:00（店舗により異なる）",
-        "zh": "9:00～22:00（因店铺而异）",
-        "en": "9:00～22:00（Varies by store）",
-        "ko": "9:00～22:00（점포마다 상이）"
-      },
-      "fee_i18n": {
-        "ja": "無料（入場）",
-        "zh": "免费（入场）",
-        "en": "Free（Admission）",
-        "ko": "무료（입장）"
-      },
-      "bestTime_i18n": {
-        "ja": "10:00～21:00",
-        "zh": "10:00～21:00",
-        "en": "10:00～21:00",
-        "ko": "10:00～21:00"
-      },
-      "tips_i18n": {
-        "ja": [
-          "生鮮食品は夕方が安い",
-          "駐車場あり"
-        ],
-        "zh": [
-          "生鲜食品傍晚更便宜",
-          "有停车场"
-        ],
-        "en": [
-          "Fresh food cheaper in the evening",
-          "Parking available"
-        ],
-        "ko": [
-          "신선 식품은 저녁이 쌈",
-          "주차장 있음"
+          "강둑 잔디밭이 넓음",
+          "철도·수도고속 촬영 명소",
+          "호리키리 창포원 도보권"
         ]
       }
     },
@@ -2250,15 +2185,15 @@
         35.745833,
         139.813056
       ],
-      "dist": "",
-      "dir": "",
+      "dist": "11 min walk",
+      "dir": "南東",
       "desc": "住宅街の真ん中にひっそり残るレトロな商店街。昭和時代から続く手作り豆腐店や老舗の菓子屋があって、歩いているだけで下町の活気を感じられる。",
       "tags": [
         "all",
         "shopping",
         "food"
       ],
-      "image": "../images/観光地/柳原商荣会商店街.jpg",
+      "image": "../images/観光地/柳原商栄会商店街.jpg",
       "bestTime": "昼～夜",
       "hours": "各店異なる（概ね10:00～20:00）",
       "fee": "無料（自由散策）",
@@ -2316,7 +2251,7 @@
       }
     },
     {
-      "name": "学園通り旭町商店街",
+      "name": "千住旭町商店街（学園通り）",
       "coord": [
         35.749111,
         139.8075
@@ -2329,7 +2264,7 @@
         "shopping",
         "food"
       ],
-      "image": "../images/観光地/学园街旭町商店街.jpg",
+      "image": "../images/観光地/千住旭町商店街（学園通り）.jpg",
       "bestTime": "昼～夜",
       "hours": "各店異なる（概ね11:00～23:00）",
       "fee": "無料（自由散策）",
@@ -2338,10 +2273,10 @@
         "夜は居酒屋が賑やか"
       ],
       "name_i18n": {
-        "ja": "学園通り旭町商店街",
-        "zh": "学园街旭町商店街",
-        "en": "Gakuen-dori Asahimachi Shopping Street",
-        "ko": "가쿠엔도리 아사히마치 상점가"
+        "ja": "千住旭町商店街（学園通り）",
+        "zh": "千住旭町商店街（学园通）",
+        "en": "Senju Asahimachi Shopping Street (Gakuen-dori)",
+        "ko": "센주 아사히마치 상점가 (가쿠엔도리)"
       },
       "desc_i18n": {
         "ja": "駅から歩いて10分ほど。近くの大学キャンパスに近いせいか、通りの両側にリーズナブルな焼肉店、ドラッグストア、弁当屋、学生向けの居酒屋がびっしり並んでいる。",
