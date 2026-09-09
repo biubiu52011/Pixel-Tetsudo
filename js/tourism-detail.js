@@ -1,5 +1,5 @@
 /*
- * Tourism Detail Page - Decoupled Architecture
+ * Tourism Detail Page (4.3.451) - Decoupled Architecture
  * Spots are accessed by name/index, not by station association
  */
 (function() {
@@ -255,6 +255,9 @@ var currentStationKey = null;
   }
 
 function init() {
+    // 首次进入时刷新语言快照（lang-init 的 init 在 DOMContentLoaded 才设置 currentLang，
+    // 模块级 var lang 在脚本加载时快照到的仍是 ja；不刷新则首次渲染用错语言）
+    lang = window.currentLang || 'ja';
     translateUI();
     // Show loading state
     var ct = document.getElementById('articleContainer');
