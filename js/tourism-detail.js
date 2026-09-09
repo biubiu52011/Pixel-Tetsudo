@@ -1,5 +1,5 @@
 /*
- * Tourism Detail Page (4.3.451) - Decoupled Architecture
+ * Tourism Detail Page (4.3.459) - Decoupled Architecture
  * Spots are accessed by name/index, not by station association
  */
 (function() {
@@ -332,13 +332,39 @@ function init() {
     }
   }
 
-  // OpenStreetMap iframe (no external JS dependency, CSP-approved)
+  // Leaflet + Carto Positron 简洁底图（本地化 Leaflet，CSP 兼容；Positron 极简灰白，无 POI 噪音）
   function initMap(lat, lng, name) {
     var mapEl = document.getElementById("tourismMap");
     if (!mapEl) return;
-    var bbox = (lng - 0.006) + ',' + (lat - 0.004) + ',' + (lng + 0.006) + ',' + (lat + 0.004);
-    var iframeUrl = 'https://www.openstreetmap.org/export/embed.html?bbox=' + bbox + '&layer=mapnik&marker=' + lat + ',' + lng;
-    mapEl.innerHTML = '<iframe src="' + iframeUrl + '" class="osm-iframe" loading="lazy" title="' + escapeHtml(name || 'Map') + '"></iframe>';
+    if (typeof L === 'undefined') {
+      mapEl.innerHTML = '<div class="map-error">' + escapeHtml(typeof t === 'function' ? t('detail.unavailable') : 'Map unavailable') + '</div>';
+      return;
+    }
+    // 切换景点时清理旧实例（Leaflet 实例不能被重复初始化在同一容器）
+    if (mapEl._tdLeaflet) { mapEl._tdLeaflet.remove(); mapEl._tdLeaflet = null; }
+    var map = L.map(mapEl, {
+      zoomControl: false,        // 移动端简洁：不用缩放控件，手势缩放足够
+      scrollWheelZoom: false,    // 防止滚动页面时被地图劫持
+      attributionControl: true
+    });
+    mapEl._tdLeaflet = map;
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      subdomains: 'abcd',
+      maxZoom: 20
+    }).addTo(map);
+    // 像素风圆点 marker（divIcon 本地渲染，无外域图片依赖）
+    var icon = L.divIcon({
+      className: 'td-map-marker',
+      html: '<div class="td-map-marker-dot"></div>',
+      iconSize: [18, 18],
+      iconAnchor: [9, 9]
+    });
+    L.marker([lat, lng], { icon: icon }).addTo(map)
+      .bindPopup('<b>' + escapeHtml(name || '') + '</b>', { closeButton: false });
+    map.setView([lat, lng], 15);
+    // 文章渲染后才挂载容器，确保尺寸计算正确
+    setTimeout(function () { map.invalidateSize(); }, 120);
   }
 
   window.TourismDetailPage = {
