@@ -1150,6 +1150,25 @@
     }
   }
 
+  // v4.3.469: 推定データ注記（容器外・下方中央）——いずれかの列車が時刻表推定なら表示。
+  // リアルタイム位置のみの路線には出さない。増分・全再構築の両パスから呼ばれる（冪等）。
+  function updateEstimatedNote(el, positions) {
+    try {
+      var old = el.querySelector('.tp-est-note');
+      if (old) old.remove();
+      if (!positions || !positions.length) return;
+      var anyEst = false;
+      for (var _ei = 0; _ei < positions.length; _ei++) {
+        if (positions[_ei] && positions[_ei].estimated === true) { anyEst = true; break; }
+      }
+      if (!anyEst) return;
+      var note = document.createElement("div");
+      note.className = "tp-est-note";
+      note.textContent = t("trains.estimated_note") || "*Data calculated from timetable";
+      el.appendChild(note);
+    } catch(e) { /* note is best-effort */ }
+  }
+
   function renderTrainMap(el, line, lineId) {
     try {
       var positions = getRealtimePositions(lineId);
@@ -1175,6 +1194,7 @@
         // === Incremental update: only update train layer using cached geometry ===
         updateTrainLayer(existingSvg, positions, stationCoords, lineId, line);
         updateRunningInfo(el, positions);
+        updateEstimatedNote(el, positions);
         // Sync loading placeholder with the realtime page: hide it as soon as train
         // positions are available (the full-rebuild path re-inserts it when empty).
         if (positions.length > 0) {
@@ -1319,14 +1339,10 @@
       svg.appendChild(trainLayer);
       
       // Replace content
-      var noData = t("trains.no_data");
-      var loading = t("trains.loading");
-      var info = "";
-      if (positions.length === 0) {
-        // Sync loading animation with the realtime page (rs-loading-spinner)
-        info = '<div class="tp-no-data"><div class="rs-loading-spinner"></div><br>' + noData + '<br><span class="tp-no-data-sub">' + loading + '</span></div>';
-      }
-      el.innerHTML = '<div class="tp-map-wrap"></div>' + info;
+      // v4.3.469: 容器内に"時刻表で推定中"等の提示を出さない——推定データはページ読込と
+      // 一緒に初期化し、容器内はリアルタイムと同じ見た目に。データ出所の注記は容器外
+      // （tp-est-note、下・中央）に置く。
+      el.innerHTML = '<div class="tp-map-wrap"></div>';
       el.querySelector('.tp-map-wrap').appendChild(svg);
       
       // Clamp over-long station names into available width (industry practice:
@@ -1355,6 +1371,7 @@
       // Now populate train layer
       updateTrainLayer(svg, positions, stationCoords, lineId, line);
       updateRunningInfo(el, positions);
+      updateEstimatedNote(el, positions);
       
     } catch(e) {
       el.innerHTML = '<div class="tp-no-data">Error: ' + escapeHtml(e.message) + '</div>';
@@ -1545,9 +1562,13 @@
   function _trainDirText(directionName) {
     if (!directionName) return '';
     var dn = String(directionName);
-    // 环线方向词：内回り/外回り（按语言本地化，无上下箭头）
     var tail = dn.split('.').pop();
     var lang = window.currentLang || 'ja';
+    // 基点方向词：上り/下り（Inbound/Outbound 抽象方向，JR 干线用）
+    if (/^(Inbound|Outbound)$/.test(tail)) {
+      return DIR_BASE_NAMES[tail][lang] || DIR_BASE_NAMES[tail].ja;
+    }
+    // 环线方向词：内回り/外回り（按语言本地化，无上下箭头）
     if (LOOP_DIR_NAMES[tail]) {
       return LOOP_DIR_NAMES[tail][lang] || LOOP_DIR_NAMES[tail].ja;
     }
@@ -1555,7 +1576,6 @@
     if (COMPASS_DIR_NAMES[tail]) {
       return COMPASS_DIR_NAMES[tail][lang] || COMPASS_DIR_NAMES[tail].ja;
     }
-    if (/^(Inbound|Outbound)$/.test(tail)) return tail;
     if (!tail) return dn;
     return _resolveStationLoose(tail) || tail;
   }
@@ -1573,6 +1593,11 @@
     OuterLoop: { ja: "外回り", zh: "外环", en: "Outer", ko: "외선" },
     Inner: { ja: "内回り", zh: "内环", en: "Inner", ko: "내선" },
     Outer: { ja: "外回り", zh: "外环", en: "Outer", ko: "외선" }
+  };
+  // 基点方向词（JR 干线）：Inbound 上り / Outbound 下り
+  var DIR_BASE_NAMES = {
+    Inbound: { ja: "上り", zh: "上行", en: "Inbound", ko: "상행" },
+    Outbound: { ja: "下り", zh: "下行", en: "Outbound", ko: "하행" }
   };
   // 基点方向词（相铁直通等）：北行/南行/东行/西行
   var COMPASS_DIR_NAMES = {
