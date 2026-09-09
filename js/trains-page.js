@@ -1317,10 +1317,12 @@
               var bLabel = document.createElementNS(svgNS, "text");
               bLabel.setAttribute("x", bx + 6);
               bLabel.setAttribute("y", bsy + 3);
-              bLabel.setAttribute("font-size", "12");
-              bLabel.setAttribute("fill", "#666");
-              bLabel.setAttribute("font-family", "sans-serif");
+              // v4.3.448: 支線駅ラベルも主線駅と同じスタイル（16px/#555/500）に統一——
+              // 従来は独立簡略描画（12px/#666）で支線だけ小さく薄く見えていた
+              bLabel.setAttribute("font-size", "16");
+              bLabel.setAttribute("fill", "#555");
               bLabel.setAttribute("font-weight", "500");
+              bLabel.setAttribute("font-family", "sans-serif");
               bLabel.textContent = _rS(branch.stations[bsi]);
               staticLayer.appendChild(bLabel);
             }
@@ -1330,7 +1332,8 @@
           var branchName = document.createElementNS(svgNS, "text");
           branchName.setAttribute("x", bx + 6);
           branchName.setAttribute("y", branchTop - 6);
-          branchName.setAttribute("font-size", "13");
+          // v4.3.448: 支線名も主線の文字階層に合わせ 13→14px（独立簡略値のまま残さない）
+          branchName.setAttribute("font-size", "14");
           branchName.setAttribute("fill", bColor);
           branchName.setAttribute("font-family", "sans-serif");
           branchName.setAttribute("font-weight", "600");
