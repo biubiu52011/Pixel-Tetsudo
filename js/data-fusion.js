@@ -512,6 +512,26 @@
           if (!hasRealtime && !hasTimetable && window.ODPTClient && window.ODPTClient.supports(line.operator, 'trainTimetable')) {
             linesNeedingTimetable.push({ lineId: lid, operator: line.operator, name: line.name || line.nameJa });
           }
+          // v4.3.446: 支線（branchOf 子線、丸ノ内線支線等）の時刻表も本体と同じく必要——
+          // 支線は単独カード化せず体系内でリアルタイム配備するため、本体の需要に依存せず常に確保する
+          if (line && line.branches) {
+            line.branches.forEach(function(bid3) {
+              var bl3 = allLines[bid3];
+              if (!bl3 || !bl3.operator) return;
+              var hasRt3 = posMap[bid3] && posMap[bid3].length > 0;
+              var hasTt3 = false;
+              if (window.ODPT_TIMETABLES && window.ODPT_TIMETABLES[bl3.operator]) {
+                var lt3 = window.ODPT_TIMETABLES[bl3.operator].filter(function(t) {
+                  var railway = t['odpt:railway'] || '';
+                  return railway.indexOf(bid3) >= 0 || railway.indexOf('.' + bid3) >= 0;
+                });
+                hasTt3 = lt3.length > 0;
+              }
+              if (!hasRt3 && !hasTt3 && window.ODPTClient && window.ODPTClient.supports(bl3.operator, 'trainTimetable')) {
+                linesNeedingTimetable.push({ lineId: bid3, operator: bl3.operator, name: bl3.name || bl3.nameJa });
+              }
+            });
+          }
         });
 
         if (linesNeedingTimetable.length > 0 && typeof loadMissingTimetables === 'function') {
@@ -581,7 +601,9 @@
         return priorityOps.indexOf(l.operator) >= 0 && !_timetableLoading[l.lineId];
       });
 
-      toLoad = toLoad.slice(0, 12);
+      // v4.3.446: 上限 12→24——支線（丸ノ内線支線等）を含めても主線の時刻表ロードを阻まない
+      // （ODPT 150ms 間隔・3 並行、24 リクエストでも 1 秒前後に収まる）
+      toLoad = toLoad.slice(0, 24);
 
       if (toLoad.length === 0) return Promise.resolve();
 
