@@ -770,8 +770,8 @@ window.RAILWAY_TOURISM = {
     {
       "name": "乙女ロード (Otome Road)",
       "coord": [
-        35.730389,
-        139.721472
+        35.7302,
+        139.7160
       ],
       "dist": "15 min walk",
       "dir": "東",
@@ -922,8 +922,8 @@ window.RAILWAY_TOURISM = {
     {
       "name": "雑司が谷 鬼子母神堂",
       "coord": [
-        35.721389,
-        139.715278
+        35.7237,
+        139.7166
       ],
       "dist": "15 min walk",
       "dir": "南",

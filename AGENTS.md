@@ -387,3 +387,26 @@ Before tagging a release:
 - **官方源代理（4.3.405）**：ODPT 未提供運行状況的线路（小田急 3 线/ゆりかもめ）由 `data/api/official-railway.js`（window.OfficialRailway）经本地代理抓取官方 API——小田急 `d6oynijiy33tb.cloudfront.net`（x-api-key 公开 key）、ゆりかもめ `cms-2.yurikamome.co.jp/api/operation/`（无 key）。两官方 API 均无 CORS 头，浏览器必须经 `serve.py` 的 `/api-proxy/` 白名单端点转发（防 SSRF）。DataFusion 融合优先级：official（按 line.id）> ODPT > localStatus > fallback。
 - Data load success signal: console log `509 stations, 159 lines, 94 tourism stations`.
 - The ONLY entry page is `pages/home.html` (index.html redirects there). Do not create or restore any second home.html elsewhere.
+
+
+---
+
+## 2026-09-09 用户指示（景点位置漂移修正・站坐标批量修复・Freeze 例外・4.3.456）
+
+用户反馈"很多景点位置漂移，需要重新确认"。排查结论：**32 个景点 coord 全部正常**（距真实位置 <500m），漂移根因是**站坐标错误 + 虚构站**——景点关联（TourismProximity Haversine 最近站）被错误站坐标污染，导致南千住一带景点被关联到"西馬込"（其坐标错位 17km）等。
+
+修复（railway_data.json stations 坐标 30 站 + 补站 13 个 + 删虚构站 4 个 + db-loader approx 1 站）：
+
+1. **坐标修正 30 站**（Wikipedia/公开源核验后写入）：Nishi-Magome→35.5869,139.7059（原错至南千住）、Minami-Senju→35.7333,139.7990（原错 7km）、Otsuka→35.7314,139.7293、Mejiro→35.7207,139.7066、Nishi-Koiwa→35.7283,139.8793、Musashi-Sakai→35.7022,139.5456（原 42km 错位）、Nakagami→35.7090,139.3757、Akishima→35.7068,139.3597、Haijima→35.7213,139.3435、Ome→35.7928,139.2614、Miyanohira→35.7846,139.2506、Sawai→35.8007,139.2302、Mitake→35.8063,139.1908、Higashi-Akiru→35.7219,139.3239、Hakusan→37.9119,139.0297（原为东京白山坐标，越后线新潟白山应在此）、Nagatsuta→35.5319,139.4944、Naruse→35.5331,139.5005、Tama→35.6381,139.4990、Isogo→35.4000,139.6181、Shin-Koyasu→35.4887,139.6552、Ofuna→35.3543,139.5316、Oi→35.6062,139.7349、Tochomae→35.6895,139.6917、Wakoshi→35.7878,139.6678、Urawa→35.8617,139.6450、Akabane→35.7776,139.7209、Kawaguchi→35.7976,139.7206、Higashi-Ome→35.7898,139.2661、Ishigamimae→35.7858,139.2003、Futamatao→35.7900,139.1725、Hinatawada→35.7833,139.2440。
+
+2. **删除虚构站 4 个**（真实不存在的站，坐标在荒川区、干扰景点关联）：Shin-Machiya（新町屋）、Minami-Magome（南馬込）、Tobu-Dozui-Michi（土居道）、Koji（工房）——stations/name_map/station_i18n 三处引用全清。
+
+3. **补站 13 个**：Mikawashima 三河島（常磐線挂线但 stations 表无定义）→35.7334,139.7764 + i18n 4 语言；青梅線数据补全 12 站（挂线但 MISSING）：Higashi-Nakagami/Ushihama/Fussa/Hamu/Kosaku/Kabe/Ikusabata/Kawai/Furusato/Hatonosu/Shiromaru/Okutama。
+
+4. **db-loader STATION_FIX_DATA**：Kawagishi 川岸 36.077,138.005→35.9727,137.9870（approx 坐标修正）。
+
+5. **景点 coord 修正 2 处**：乙女ロード→35.7302,139.7160（原东偏 550m）、雑司が谷鬼子母神堂→35.7237,139.7166。
+
+验证：全量相邻站检测 >12km 仅剩 2 对（Tokaido Odawara-Atami 19km=真实远距 / Saikyo Kawaguchi-Omiya 15km=线路归属问题另行记录）；32 景点全部正确关联（南千住组→Minami-Senju、池袋组→Ikebukuro）；浏览器实测 localhost + file:// 390 站/32 景点/console 0 错误；bundle 已重跑（改 JSON 后须重跑 `node data/core/gen-file-data.js`）。
+
+遗留：**埼京線（Saikyo）stations 混入京浜東北線系駅**（Urawa/Naka-Urawa/Minami-Urawa/Warabi/Nishi-Kawaguchi/Kawaguchi 等，埼京線実経路は赤羽→北赤羽→武蔵浦和→中浦和→南与野→与野本町→北与野→大宮）——线路站序重构风险大，另立任务待用户指示。

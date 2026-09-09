@@ -61,8 +61,8 @@ window.RAILWAY_DATA = {
       "lng": 139.6231
     },
     "Ofuna": {
-      "lat": 35.3889,
-      "lng": 139.6469
+      "lat": 35.3543,
+      "lng": 139.5316
     },
     "Kamakura": {
       "lat": 35.3192,
@@ -93,12 +93,12 @@ window.RAILWAY_DATA = {
       "lng": 139.3239
     },
     "Mitake": {
-      "lat": 35.7106,
-      "lng": 139.2669
+      "lat": 35.8063,
+      "lng": 139.1908
     },
     "Ome": {
-      "lat": 35.7239,
-      "lng": 139.1633
+      "lat": 35.7928,
+      "lng": 139.2614
     },
     "Takanawa": {
       "lat": 35.6256,
@@ -185,8 +185,8 @@ window.RAILWAY_DATA = {
       "lng": 139.8481
     },
     "Nishi-Koiwa": {
-      "lat": 35.7456,
-      "lng": 139.8342
+      "lat": 35.7283,
+      "lng": 139.8793
     },
     "Minami-Koiwa": {
       "lat": 35.7556,
@@ -226,7 +226,7 @@ window.RAILWAY_DATA = {
     },
     "Urawa": {
       "lat": 35.8617,
-      "lng": 139.6944
+      "lng": 139.645
     },
     "Kita-Urawa": {
       "lat": 35.8778,
@@ -237,8 +237,8 @@ window.RAILWAY_DATA = {
       "lng": 139.6731
     },
     "Akabane": {
-      "lat": 35.7356,
-      "lng": 139.6731
+      "lat": 35.7776,
+      "lng": 139.7209
     },
     "Higashi-Jujo": {
       "lat": 35.7456,
@@ -289,8 +289,8 @@ window.RAILWAY_DATA = {
       "lng": 139.6994
     },
     "Wakoshi": {
-      "lat": 35.8231,
-      "lng": 139.7756
+      "lat": 35.7878,
+      "lng": 139.6678
     },
     "Higashi-Ikebukuro": {
       "lat": 35.7311,
@@ -421,44 +421,44 @@ window.RAILWAY_DATA = {
       "lng": 139.3989
     },
     "Nakagami": {
-      "lat": 35.7189,
-      "lng": 139.2222
+      "lat": 35.709,
+      "lng": 139.3757
     },
     "Haijima": {
-      "lat": 35.7311,
-      "lng": 139.1806
+      "lat": 35.7213,
+      "lng": 139.3435
     },
     "Higashi-Ome": {
-      "lat": 35.7289,
-      "lng": 139.1722
+      "lat": 35.7898,
+      "lng": 139.2661
     },
     "Sawai": {
-      "lat": 35.7317,
-      "lng": 139.1556
+      "lat": 35.8007,
+      "lng": 139.2302
     },
     "Nishi-Ome": {
       "lat": 35.7367,
       "lng": 139.1444
     },
     "Futamatao": {
-      "lat": 35.7439,
-      "lng": 139.1361
+      "lat": 35.7900,
+      "lng": 139.1725
     },
     "Ishigamimae": {
-      "lat": 35.7517,
-      "lng": 139.1278
+      "lat": 35.7858,
+      "lng": 139.2003
     },
     "Hinatawada": {
-      "lat": 35.7606,
-      "lng": 139.1194
+      "lat": 35.7833,
+      "lng": 139.2440
     },
     "Miyanohira": {
-      "lat": 35.7689,
-      "lng": 139.1111
+      "lat": 35.7846,
+      "lng": 139.2506
     },
     "Musashi-Sakai": {
-      "lat": 35.7778,
-      "lng": 139.1028
+      "lat": 35.7022,
+      "lng": 139.5456
     },
     "Musashi-Yoshida": {
       "lat": 35.7861,
@@ -489,16 +489,16 @@ window.RAILWAY_DATA = {
       "lng": 139.6639
     },
     "Mejiro": {
-      "lat": 35.7167,
-      "lng": 139.7061
+      "lat": 35.7207,
+      "lng": 139.7066
     },
     "Takadanobaba": {
       "lat": 35.7117,
       "lng": 139.7028
     },
     "Otsuka": {
-      "lat": 35.7317,
-      "lng": 139.7231
+      "lat": 35.7314,
+      "lng": 139.7293
     },
     "Nezu": {
       "lat": 35.7389,
@@ -589,12 +589,12 @@ window.RAILWAY_DATA = {
       "lng": 139.7156
     },
     "Shin-Koyasu": {
-      "lat": 35.5417,
-      "lng": 139.6778
+      "lat": 35.4887,
+      "lng": 139.6552
     },
     "Oi": {
-      "lat": 35.5717,
-      "lng": 139.6678
+      "lat": 35.6062,
+      "lng": 139.7349
     },
     "Omori": {
       "lat": 35.5878,
@@ -664,21 +664,9 @@ window.RAILWAY_DATA = {
       "lat": 35.6639,
       "lng": 139.7139
     },
-    "Shin-Machiya": {
-      "lat": 35.7417,
-      "lng": 139.8089
-    },
     "Nishi-Magome": {
-      "lat": 35.7339,
-      "lng": 139.7978
-    },
-    "Minami-Magome": {
-      "lat": 35.7278,
-      "lng": 139.7906
-    },
-    "Koji": {
-      "lat": 35.7217,
-      "lng": 139.7831
+      "lat": 35.5869,
+      "lng": 139.7059
     },
     "Minowa": {
       "lat": 35.7156,
@@ -704,9 +692,61 @@ window.RAILWAY_DATA = {
       "lat": 35.6817,
       "lng": 139.7539
     },
+    "Higashi-Nakagami": {
+      "lat": 35.7069,
+      "lng": 139.3949
+    },
+    "Ushihama": {
+      "lat": 35.7297,
+      "lng": 139.3556
+    },
+    "Fussa": {
+      "lat": 35.7372,
+      "lng": 139.3269
+    },
+    "Hamu": {
+      "lat": 35.7632,
+      "lng": 139.3063
+    },
+    "Kosaku": {
+      "lat": 35.7825,
+      "lng": 139.2861
+    },
+    "Kabe": {
+      "lat": 35.7868,
+      "lng": 139.2716
+    },
+    "Ikusabata": {
+      "lat": 35.79,
+      "lng": 139.183
+    },
+    "Kawai": {
+      "lat": 35.8028,
+      "lng": 139.165
+    },
+    "Furusato": {
+      "lat": 35.7969,
+      "lng": 139.1442
+    },
+    "Hatonosu": {
+      "lat": 35.8058,
+      "lng": 139.1211
+    },
+    "Shiromaru": {
+      "lat": 35.8083,
+      "lng": 139.1042
+    },
+    "Okutama": {
+      "lat": 35.8097,
+      "lng": 139.0964
+    },
+    "Mikawashima": {
+      "lat": 35.7334,
+      "lng": 139.7764
+    },
     "Minami-Senju": {
-      "lat": 35.6756,
-      "lng": 139.7506
+      "lat": 35.7333,
+      "lng": 139.799
     },
     "Tatekawa": {
       "lat": 35.6689,
@@ -721,8 +761,8 @@ window.RAILWAY_DATA = {
       "lng": 139.7417
     },
     "Tochomae": {
-      "lat": 35.6978,
-      "lng": 139.7578
+      "lat": 35.6895,
+      "lng": 139.6917
     },
     "Suidobashi": {
       "lat": 35.7017,
@@ -853,8 +893,8 @@ window.RAILWAY_DATA = {
       "lng": 139.6889
     },
     "Nagatsuta": {
-      "lat": 35.5078,
-      "lng": 139.6839
+      "lat": 35.5319,
+      "lng": 139.4944
     },
     "Tama-Center": {
       "lat": 35.4878,
@@ -863,10 +903,6 @@ window.RAILWAY_DATA = {
     "Asakusa": {
       "lat": 35.7148,
       "lng": 139.7967
-    },
-    "Tobu-Dozui-Michi": {
-      "lat": 35.7317,
-      "lng": 139.7978
     },
     "Yoyogi-Uehara": {
       "lat": 35.6778,
@@ -941,8 +977,8 @@ window.RAILWAY_DATA = {
       "lng": 139.4775
     },
     "Akishima": {
-      "lat": 35.7069,
-      "lng": 139.3836
+      "lat": 35.7068,
+      "lng": 139.3597
     },
     "Hino": {
       "lat": 35.6706,
@@ -953,8 +989,8 @@ window.RAILWAY_DATA = {
       "lng": 139.4778
     },
     "Tama": {
-      "lat": 35.6367,
-      "lng": 139.4389
+      "lat": 35.6381,
+      "lng": 139.499
     },
     "Musashi-Kosugi": {
       "lat": 35.5456,
@@ -1005,8 +1041,8 @@ window.RAILWAY_DATA = {
       "lng": 139.6178
     },
     "Isogo": {
-      "lat": 35.4456,
-      "lng": 139.6389
+      "lat": 35.4,
+      "lng": 139.6181
     },
     "Negishi": {
       "lat": 35.4378,
@@ -1153,8 +1189,8 @@ window.RAILWAY_DATA = {
       "lng": 139.70436
     },
     "Kawaguchi": {
-      "lat": 35.8018,
-      "lng": 139.71746
+      "lat": 35.7976,
+      "lng": 139.7206
     },
     "Higashi-Kanagawa": {
       "lat": 35.47788,
@@ -1345,8 +1381,8 @@ window.RAILWAY_DATA = {
       "lng": 139.41258
     },
     "Naruse": {
-      "lat": 35.53541,
-      "lng": 139.4729
+      "lat": 35.5331,
+      "lng": 139.5005
     },
     "Nagatoro": {
       "lat": 0,
@@ -1645,8 +1681,8 @@ window.RAILWAY_DATA = {
       "lng": 0
     },
     "Hakusan": {
-      "lat": 35.721682,
-      "lng": 139.752134
+      "lat": 37.9119,
+      "lng": 139.0297
     },
     "Minami-Nagasaki": {
       "lat": 0,
@@ -1861,8 +1897,8 @@ window.RAILWAY_DATA = {
       "lng": 140.11169
     },
     "Higashi-Akiru": {
-      "lat": 35.72594,
-      "lng": 139.31168
+      "lat": 35.7219,
+      "lng": 139.3239
     },
     "Nishi-Akiru": {
       "lat": 0,
@@ -24847,7 +24883,6 @@ window.RAILWAY_DATA = {
     "北仙台": "Kita-Sendai",
     "北大和": "Kita-Yamato",
     "北逗子": "Kita-Zushi",
-    "工房": "Koji",
     "工房前": "Koji-mae",
     "国会議事堂": "Kokkai-gijido",
     "国民会議場": "Kokumin-kyogijo",
@@ -24870,7 +24905,6 @@ window.RAILWAY_DATA = {
     "三河橋": "Mikawahashi",
     "南亀浦": "Minami-Kemigawa",
     "南小岩": "Minami-Koiwa",
-    "南馬込": "Minami-Magome",
     "南長崎": "Minami-Nagasaki",
     "南若洲": "Minami-Wakasu",
     "みなとみらい21": "Minato-Mirai-21",
@@ -24924,7 +24958,6 @@ window.RAILWAY_DATA = {
     "聖学院台": "Seijodai",
     "下田": "Shimoda",
     "新足立": "Shin-Adachi",
-    "新町屋": "Shin-Machiya",
     "新崎": "Shin-Misaki",
     "新浦和": "Shin-Urawa",
     "新大手町": "Shin-otemachi",

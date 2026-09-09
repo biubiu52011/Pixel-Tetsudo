@@ -1799,29 +1799,11 @@ window.RAILWAY_I18N = {
     "ko": "케이오하치오지",
     "en": "Keio-Hachioji"
   },
-  "Shin-Machiya": {
-    "ja": "新町屋",
-    "zh": "新町屋",
-    "ko": "시ㄴ마치야",
-    "en": "Shin-Machiya"
-  },
   "Nishi-Magome": {
     "ja": "西馬込",
     "zh": "西马込",
     "ko": "니시마고메",
     "en": "Nishi-Magome"
-  },
-  "Minami-Magome": {
-    "ja": "南馬込",
-    "zh": "南马込",
-    "ko": "미나미마고메",
-    "en": "Minami-Magome"
-  },
-  "Koji": {
-    "ja": "工房",
-    "zh": "工房",
-    "ko": "코지",
-    "en": "Koji"
   },
   "Shimo-Kitazzu": {
     "ja": "下北沢",

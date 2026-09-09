@@ -470,7 +470,7 @@ function applyData(data, i18n) {
         'Kanzasa':                  { ja: '冠着',     zh: '冠着',     ko: '간자사',           lat: 36.468, lng: 138.032 },
         'Obasute':                  { ja: '姨捨',     zh: '姨舍',     ko: '오바스테',           lat: 36.48, lng: 138.117 },
         'Inariyama':                { ja: '稲荷山',     zh: '稻荷山',     ko: '이나리야마',           lat: 36.51, lng: 138.135 },
-        'Kawagishi':                { ja: '川岸',     zh: '川岸',     ko: '가와기시',           lat: 36.077, lng: 138.005 },
+        'Kawagishi':                { ja: '川岸',     zh: '川岸',     ko: '가와기시',           lat: 35.9727, lng: 137.9870 },
         'Tatsuno':                  { ja: '辰野',     zh: '辰野',     ko: '다쓰노',           lat: 35.981, lng: 137.992 },
         'Ono':                      { ja: '小野',     zh: '小野',     ko: '오노',           lat: 35.978, lng: 137.933 }
       };
