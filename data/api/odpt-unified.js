@@ -131,7 +131,11 @@
         },
         "Toei": {
             base: "https://api.odpt.org/api/v4/",
-            train: null,
+            // v4.3.460: Toei の odpt:Train（リアルタイム位置）を実測確認（浅草/新宿/三田/大江戸で返却、
+            // 深夜 0:26 でも 26 件）。従来 train: null で取得していなかったのを有効化。
+            // ※都電荒川線（Arakawa）は odpt:Train に含まれず（都電は路面電車のため提供外）、
+            //   荒川線は従来どおり時刻表推定のみ。
+            train: "odpt:Train?odpt:operator=odpt.Operator:Toei",
             trainTimetable: "odpt:TrainTimetable?odpt:operator=odpt.Operator:Toei",
             trainInformation: "odpt:TrainInformation?odpt:operator=odpt.Operator:Toei"
         },
