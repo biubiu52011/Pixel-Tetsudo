@@ -357,11 +357,34 @@
     ]
   };
 
+  // v4.3.453: 車号プレフィックス規則——直通線の車号先頭記号が車籍系統と一致する場合に使う。
+  // 半蔵門線の実測（ODPT 時刻表 994 件）: B プレフィックス 492 件の起点が全て東武側（南栗橋/久喜/
+  // 東武動物公園/押上）＝東武50000系、A プレフィックス 502 件の起点が全て東急側（中央林間/長津田/
+  // 二子玉川）＝東急2020系。メトロ自社・東急直通は半蔵門線既定アイコン（東急2020系）のまま。
+  var THROUGH_PREFIX_RULES = {
+    "Hanzomon": [
+      { prefix: "B", icon: "../images/列车/東武鉄道/50000系.png" }
+    ]
+  };
+
   function getTrainIcon(lineId, operator, trainId, stationIndex, trainType) {
     try {
+      // 直通列車：車号プレフィックスで車籍系統を判定（例：半蔵門線 B 号 = 東武50000系）
+      // trainId は「車号_駅idx」または「lineId_車号_駅idx」の2形式——車号は後ろから2番目のトークン
+      var _tp = String(trainId || "").split("_");
+      var _tn = _tp.length >= 2 ? _tp[_tp.length - 2] : _tp[0];
+      if (THROUGH_PREFIX_RULES[lineId]) {
+        var _prules = THROUGH_PREFIX_RULES[lineId];
+        for (var _pi = 0; _pi < _prules.length; _pi++) {
+          var _prule = _prules[_pi];
+          if (_tn && _prule.prefix && _tn.length >= _prule.prefix.length &&
+              _tn.slice(0, _prule.prefix.length) === _prule.prefix) {
+            return _prule.icon;
+          }
+        }
+      }
       // 直通列車：車号末尾で車籍系統を判定（現在線のデフォルト車両より優先）
       if (THROUGH_SUFFIX_RULES[lineId]) {
-        var _tn = String(trainId || "").split("_")[0];
         var _rules = THROUGH_SUFFIX_RULES[lineId];
         for (var _ri = 0; _ri < _rules.length; _ri++) {
           var _rule = _rules[_ri];
