@@ -78,6 +78,16 @@
     return (typeof window.t === "function") ? window.t(key) : (key || "");
   }
 
+  // Localize the direction suffix "方面" (e.g. "東京方面") produced by data-fusion
+  // when ODPT provides only a one-sided station. Station names inside interval are
+  // already fused in the active language; only the system-generated suffix needs
+  // per-language substitution (ja 方面 / zh 方向 / ko 방면 / en bound for).
+  function _localizeInterval(str) {
+    if (!str || String(str).indexOf("\u65b9\u9762") === -1) return str;
+    var dir = t("status.toward");
+    return String(str).split("\u65b9\u9762").join(dir || "\u65b9\u9762");
+  }
+
   // tLine removed: use RailwayDB.resolveLineName(lineId, lang) instead
 
   function tOp(name) {
@@ -264,7 +274,7 @@
     // Interval text (realtime mode)
     var intervalHtml = "";
     if (mode === "realtime" && interval) {
-      intervalHtml = '<div class="rs-line-interval">' + escapeHtml(interval) + '</div>';
+      intervalHtml = '<div class="rs-line-interval">' + escapeHtml(_localizeInterval(interval)) + '</div>';
     }
 
     // Status icon
@@ -471,7 +481,14 @@
 
   function initLangSupport() {
     if (typeof window.onLanguageChange === "function") {
-      window.onLanguageChange(function() { notify(); });
+      window.onLanguageChange(function() {
+        // 4.3.442: re-fuse so interval station names / direction suffix follow the
+        // newly selected language (fused delayInfo is generated at fusion time)
+        try {
+          if (window.DataFusion && typeof window.DataFusion.refresh === "function") window.DataFusion.refresh();
+        } catch(e) {}
+        notify();
+      });
     }
   }
 
@@ -481,6 +498,7 @@
     TRUNK_MAIN_LINE_IDS: TRUNK_MAIN_LINE_IDS,
     renderCard: renderCard,
     renderList: renderList,
+    localizeInterval: _localizeInterval,
     setLines: setLines,
     setPositions: setPositions,
     getLine: getLine,

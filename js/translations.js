@@ -107,6 +107,7 @@
       "status.suspended": "Suspended",
       "status.unknown": "Unknown",
       "status.updated": "Last Updated",
+      "status.toward": " bound for",
       "tab.history": "History",
       "tab.realtime": "Service Status",
       "tab.search": "Route Search",
@@ -186,6 +187,7 @@
       "op.TokyoMonorail": "Tokyo Monorail",
       "op.SaitamaNewUrbanTransit": "Saitama New Urban Transit",
       "train.throughService": "through service",
+      "train.through": "Through ",
       "train.transferOut": "out-of-station transfer",
     },
     zh: {
@@ -291,6 +293,7 @@
       "status.suspended": "\u505c\u8fd0",
       "status.unknown": "未知",
       "status.updated": "最后更新",
+      "status.toward": "\u65b9\u5411",
       "tab.history": "\u5386\u53f2",
       "tab.realtime": "\u8fd0\u884c\u72b6\u51b5",
       "tab.search": "\u8def\u7ebf\u641c\u7d22",
@@ -370,6 +373,7 @@
       "op.TokyoMonorail": "东京单轨电车",
       "op.SaitamaNewUrbanTransit": "埼玉新都市交通",
       "train.throughService": "相互直通運転",
+      "train.through": "直通",
       "train.transferOut": "站外換乘",
     },
     ja: {
@@ -475,6 +479,7 @@
       "status.suspended": "\u904b\u8ee2\u898b\u5408\u308f\u305b",
       "status.unknown": "不明",
       "status.updated": "最終更新",
+      "status.toward": "方面",
       "tab.history": "\u691c\u7d22\u5c65\u6b74",
       "tab.realtime": "\u904b\u884c\u72b6\u6cc1",
       "tab.search": "\u8def\u7dda\u691c\u7d22",
@@ -554,6 +559,7 @@
       "op.TokyoMonorail": "東京モノレール",
       "op.SaitamaNewUrbanTransit": "埼玉新都市交通",
       "train.throughService": "相互直通運転",
+      "train.through": "直通",
       "train.transferOut": "駅外乗換",
     },
     ko: {
@@ -659,6 +665,7 @@
       "status.suspended": "\uc6b4\ud589 \uc911\ub2e8",
       "status.unknown": "알 수 없음",
       "status.updated": "최종 업데이트",
+      "status.toward": " 방면",
       "tab.history": "\uac80\uc0c9 \uae30\ub85d",
       "tab.realtime": "\uc6b4\ud589 \uc815\ubcf4",
       "tab.search": "\ub178\uc120 \uac80\uc0c9",
@@ -739,6 +746,7 @@
       "op.TokyoMonorail": "도쿄 모노레일",
       "op.SaitamaNewUrbanTransit": "사이타마 신도시 교통",
       "train.throughService": "상호 직통 운행",
+      "train.through": "직통",
       "train.transferOut": "역외 환승",
     },
 

@@ -347,7 +347,9 @@
   function _throughChipSize(lineObj, mobile) {
     var nm = _throughShortName(lineObj, mobile);
     // 方向箭头改为 SVG 矢量绘制（不受字体字形影响），文本不再含 ∧/∨/< 字符。
-    var label = "直通" + nm;
+    // 4.3.442: "直通" prefix localized (ja 直通 / zh 直通 / ko 직통 / en Through )
+    var throughLbl = (typeof window.t === "function" && window.t("train.through")) ? window.t("train.through") : "直通";
+    var label = throughLbl + nm;
     var fs = mobile ? 12 : 10;
     var w = label.length * (mobile ? 12 : 10) + 8 + (mobile ? 12 : 10);
     var h = (mobile ? 19 : 12) + 4;

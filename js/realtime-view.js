@@ -82,7 +82,10 @@
           + '<span class="rs-interval-arrow">\u2192</span>'
           + '<span class="rs-station-end">' + escapeHtml(tStation(parts[1])) + '</span>';
       } else {
-        intervalHtml = '<span class="rs-station-text">' + escapeHtml(interval) + '</span>';
+        // Single-ended interval ("東京方面"): localize the "方面" suffix per language
+        var _int = interval;
+        if (window.DataState && typeof window.DataState.localizeInterval === "function") _int = window.DataState.localizeInterval(_int);
+        intervalHtml = '<span class="rs-station-text">' + escapeHtml(_int) + '</span>';
       }
     }
     intervalSection.querySelector(".rs-interval-stations").innerHTML = intervalHtml;
