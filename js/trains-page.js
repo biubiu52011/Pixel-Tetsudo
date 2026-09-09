@@ -1559,27 +1559,6 @@
     return direct;
   }
 
-  function _trainDirText(directionName) {
-    if (!directionName) return '';
-    var dn = String(directionName);
-    var tail = dn.split('.').pop();
-    var lang = window.currentLang || 'ja';
-    // 基点方向词：上り/下り（Inbound/Outbound 抽象方向，JR 干线用）
-    if (/^(Inbound|Outbound)$/.test(tail)) {
-      return DIR_BASE_NAMES[tail][lang] || DIR_BASE_NAMES[tail].ja;
-    }
-    // 环线方向词：内回り/外回り（按语言本地化，无上下箭头）
-    if (LOOP_DIR_NAMES[tail]) {
-      return LOOP_DIR_NAMES[tail][lang] || LOOP_DIR_NAMES[tail].ja;
-    }
-    // 基点方向词：北行/南行/东行/西行
-    if (COMPASS_DIR_NAMES[tail]) {
-      return COMPASS_DIR_NAMES[tail][lang] || COMPASS_DIR_NAMES[tail].ja;
-    }
-    if (!tail) return dn;
-    return _resolveStationLoose(tail) || tail;
-  }
-
   function _trainDestText(destStation) {
     if (!destStation) return '';
     return _resolveStationLoose(destStation) || destStation;
@@ -1587,24 +1566,12 @@
 
   // v4.3.455: 列车方向标签朝移动方向——方向端点站名在站表中位于当前位置下方＝向下▼（标签在图标下方）、
   // 上方＝向上▲（标签在图标上方）；Inbound/Outbound 按往起点/终点判断；环线 InnerLoop/OuterLoop 等无上下概念返回 null
-  // v4.3.456: 环线方向词本地化（内回/外回）且无终点——见 _trainDirText/appendTrainLabels
+  // 环线方向词：内回り/外回り（按语言本地化）
   var LOOP_DIR_NAMES = {
     InnerLoop: { ja: "内回り", zh: "内环", en: "Inner", ko: "내선" },
     OuterLoop: { ja: "外回り", zh: "外环", en: "Outer", ko: "외선" },
     Inner: { ja: "内回り", zh: "内环", en: "Inner", ko: "내선" },
     Outer: { ja: "外回り", zh: "外环", en: "Outer", ko: "외선" }
-  };
-  // 基点方向词（JR 干线）：Inbound 上り / Outbound 下り
-  var DIR_BASE_NAMES = {
-    Inbound: { ja: "上り", zh: "上行", en: "Inbound", ko: "상행" },
-    Outbound: { ja: "下り", zh: "下行", en: "Outbound", ko: "하행" }
-  };
-  // 基点方向词（相铁直通等）：北行/南行/东行/西行
-  var COMPASS_DIR_NAMES = {
-    Northbound: { ja: "北行", zh: "北行", en: "Northbound", ko: "북행" },
-    Southbound: { ja: "南行", zh: "南行", en: "Southbound", ko: "남행" },
-    Eastbound: { ja: "東行", zh: "东行", en: "Eastbound", ko: "동행" },
-    Westbound: { ja: "西行", zh: "西行", en: "Westbound", ko: "서행" }
   };
 
   function _isLoopDirName(dirName) {
@@ -1636,39 +1603,33 @@
   }
 
   function appendTrainLabels(trainLayer, svgNS, trainUid, px, py, p, lineId) {
-    var dirText = _trainDirText(p.railDirection);
-    // v4.3.456: 环线无终点——内回/外回列车不显示终点标签（ODPT 环线终点为大崎等折返点，无实际终点意义）
-    var isLoopDir = _isLoopDirName(p.railDirection);
-    var destText = isLoopDir ? '' : _trainDestText(p.destinationStation);
-    if (!dirText && !destText) return;
     var moveDir = _trainMoveDir(p, lineId);
+    var isLoopDir = _isLoopDirName(p.railDirection);
+    var dn = String(p.railDirection || '').split('.').pop();
+    var lang = window.currentLang || 'ja';
+    // v4.3.471: 单标签——箭头 + 方向端点站名；不再单独显示"上下行"方向词与终点。
+    // 抽象方向词（Inbound/Outbound/Northbound 等无方向端点站）→ 用终点站名；环线 → 内回/外回。
+    var labelText = '';
+    if (isLoopDir) {
+      labelText = (LOOP_DIR_NAMES[dn] && LOOP_DIR_NAMES[dn][lang]) || (LOOP_DIR_NAMES[dn] ? LOOP_DIR_NAMES[dn].ja : '');
+    } else if (/^(Inbound|Outbound|Northbound|Southbound|Eastbound|Westbound)$/.test(dn)) {
+      labelText = _trainDestText(p.destinationStation);
+    } else if (dn) {
+      labelText = _resolveStationLoose(dn) || dn;
+    }
+    if (!labelText) return;
     var dirSym = moveDir === 'down' ? '▼' : (moveDir === 'up' ? '▲' : (isLoopDir ? '' : '▶'));
-    if (dirText) {
-      var ldir = document.createElementNS(svgNS, "text");
-      ldir.setAttribute("data-train-label-for", String(trainUid));
-      ldir.setAttribute("data-label-pos", "dir");
-      ldir.setAttribute("x", String(px));
-      ldir.setAttribute("y", String(_trainLabelY('dir', py, moveDir)));
-      ldir.setAttribute("text-anchor", "middle");
-      ldir.setAttribute("font-size", "7");
-      ldir.setAttribute("fill", "#999");
-      ldir.setAttribute("class", "train-label-dir");
-      ldir.textContent = dirSym + dirText;
-      trainLayer.appendChild(ldir);
-    }
-    if (destText) {
-      var ldest = document.createElementNS(svgNS, "text");
-      ldest.setAttribute("data-train-label-for", String(trainUid));
-      ldest.setAttribute("data-label-pos", "dest");
-      ldest.setAttribute("x", String(px));
-      ldest.setAttribute("y", String(_trainLabelY('dest', py, moveDir)));
-      ldest.setAttribute("text-anchor", "middle");
-      ldest.setAttribute("font-size", "8");
-      ldest.setAttribute("fill", "#666");
-      ldest.setAttribute("class", "train-label-dest");
-      ldest.textContent = destText;
-      trainLayer.appendChild(ldest);
-    }
+    var ldir = document.createElementNS(svgNS, "text");
+    ldir.setAttribute("data-train-label-for", String(trainUid));
+    ldir.setAttribute("data-label-pos", "dir");
+    ldir.setAttribute("x", String(px));
+    ldir.setAttribute("y", String(_trainLabelY('dir', py, moveDir)));
+    ldir.setAttribute("text-anchor", "middle");
+    ldir.setAttribute("font-size", "8");
+    ldir.setAttribute("fill", "#666");
+    ldir.setAttribute("class", "train-label-dir");
+    ldir.textContent = dirSym + labelText;
+    trainLayer.appendChild(ldir);
   }
   
   function updateRunningInfo(el, positions) {
