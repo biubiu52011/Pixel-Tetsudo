@@ -1,5 +1,5 @@
 /*
- * Tourism Detail Page (4.3.459) - Decoupled Architecture
+ * Tourism Detail Page (4.3.460) - Decoupled Architecture
  * Spots are accessed by name/index, not by station association
  */
 (function() {
@@ -348,7 +348,9 @@ function init() {
       attributionControl: true
     });
     mapEl._tdLeaflet = map;
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    // light_nolabels: 无任何地名文字的极简灰白底图（Carto 语言变体 light_ja/zh/ko 已废弃返回 404；
+    // 无文字版彻底消除英文标签与界面语言的不协调，位置语义由本地语言 popup 承担）
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
       subdomains: 'abcd',
       maxZoom: 20
