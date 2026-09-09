@@ -160,7 +160,7 @@
     "SobuMain": "../images/列车/JR東日本/E235系1000番台.png",
     "Joban": "../images/列车/JR東日本/E531系.png",
     "JobanRapid": "../images/列车/JR東日本/E531系.png",
-    "JobanLocal": "../images/列车/JR東日本/E231系0番台.png", // 常磐緩行線（綾瀬〜取手）自社車：松戸車両センター E231系0番台（4.3.450 訂正——千代田線直通車は Chiyoda 側 18000系）
+    "JobanLocal": "../images/列车/東京メトロ/18000系.png", // 常磐各停：千代田線车辆直通担当（2026-09-08 用户指示统一 18000系）
     "Mito": "../images/列车/JR東日本/E531系.png",
     "Nikkoku": "../images/列车/JR東日本/E131系600番台.png", // 日光線：E131系600番台
     "Gono": "../images/列车/JR東日本/HB-E220系.png", // 五能線：HB-E220系
