@@ -29,7 +29,9 @@ window.LineOperationSystems = {
       nameKo: "",
       color: "#00ac47",
       lineIds: ["KawagoeWest"],
-      order: 1.1
+      // 川越線（川越〜高麗川）は東京近郊通勤記号列（JA-JY）に属さない郊外線。
+      // 八高線（HAC order 22、高麗川接続）の直後に配置（CO 中央本線と同じ扱い：記号は残すが序列外）。
+      order: 22.1
     },
     {
       code: "JB",
