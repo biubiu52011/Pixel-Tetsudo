@@ -266,7 +266,6 @@ function init() {
 
     function start() {
       allSpots = getAllSpots();
-      scopedSpots = getScopedSpots();
 
       var params = new URLSearchParams(window.location.search);
       var spotName = decodeURIComponent(params.get('name'));
@@ -274,6 +273,19 @@ function init() {
       var spotIndex = parseInt(params.get('index')) || 0;
 
       currentStationKey = stationKey;
+
+      // Guard: if station coords aren't ready yet, getNearbySpotsByStation returns []
+      // and getScopedSpots would fall back to global order — causing index mismatch.
+      // Defer start() until station coords are available.
+      if (stationKey && window.TourismProximity) {
+        var probe = window.TourismProximity.getNearbySpotsByStation(stationKey, { radius: 50000, limit: 100 });
+        if (!probe || probe.length === 0) {
+          setTimeout(start, 200);
+          return;
+        }
+      }
+
+      scopedSpots = getScopedSpots();
 
       var backBtn = document.getElementById('detailBackBtn');
       if (backBtn) backBtn.addEventListener('click', handleBack);
@@ -300,6 +312,7 @@ function init() {
       if (typeof window.onLanguageChange === 'function') {
         window.onLanguageChange(function() {
           lang = window.currentLang || 'ja';
+          translateUI();
           scopedSpots = getScopedSpots();
           if (scopedSpots.length > 0 && currentSpotIndex >= 0 && currentSpotIndex < scopedSpots.length) {
             renderArticle(scopedSpots[currentSpotIndex], currentStationKey);
@@ -317,10 +330,17 @@ function init() {
         console.error('[TourismDetail] Data load failed:', err.message);
       });
     } else {
-      // Fallback: poll every 50ms until data loads (max 10s)
+      // Resolve stationKey early so poll can wait for station coords
+      var paramsProbe = new URLSearchParams(window.location.search);
+      var stationKeyProbe = paramsProbe.get('station');
+      // Fallback: poll every 50ms until data + station coords are ready (max 10s)
       var pollCount = 0;
       var pollInterval = setInterval(function() {
-        if (window.TOURISM_SPOTS && window.TOURISM_SPOTS.length > 0) {
+        var spReady = window.TOURISM_SPOTS && window.TOURISM_SPOTS.length > 0;
+        var coordReady = !stationKeyProbe ||
+          (window.RailwayDB && window.RailwayDB.getStationLocation && window.RailwayDB.getStationLocation(stationKeyProbe)) ||
+          (window.STATION_COORDS && window.STATION_COORDS[stationKeyProbe]);
+        if (spReady && coordReady) {
           clearInterval(pollInterval);
           start();
         } else if (pollCount >= 200) {
