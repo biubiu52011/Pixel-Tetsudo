@@ -1,5 +1,5 @@
 /*
- * Tourism Detail Page (4.3.461) - Decoupled Architecture
+ * Tourism Detail Page (4.3.462) - Decoupled Architecture
  * Spots are accessed by name/index, not by station association
  */
 (function() {
@@ -20,6 +20,7 @@
     default:  "linear-gradient(135deg, #008803 0%, #006600 100%)"
   };
 
+  var MAPTILER_KEY = 'tYRNv4akrEAKTL5ORzUm';  // MapTiler 免费 key（origin 白名单：GitHub Pages + localhost:8017，防盗用）
   var TAG_EMOJI = {};
 
   var currentSpotIndex = 0;
@@ -348,12 +349,27 @@ function init() {
       attributionControl: true
     });
     mapEl._tdLeaflet = map;
-    // light_all: Carto Positron 极简灰白底图（带地名标签，便于定位）——nolabels 无地名版用户实测找不到位置，换回
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
-      subdomains: 'abcd',
-      maxZoom: 20
+    // MapTiler Basic 极简底图（免费 key，origin 白名单防盗用；language 参数跟随界面语言：中文界面中文地名/日文界面日文地名）
+    // 兜底：MapTiler 失败（key 失效/额度超限/Origin 校验延迟）时自动回退 Carto light_all
+    var mtLang = { ja: 'ja', zh: 'zh', ko: 'ko', en: 'en' }[window.currentLang] || 'en';
+    var mtLayer = L.tileLayer('https://api.maptiler.com/maps/basic/{z}/{x}/{y}.png?key=' + MAPTILER_KEY + '&language=' + mtLang, {
+      attribution: '&copy; <a href="https://www.maptiler.com/copyright/">MapTiler</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      maxZoom: 19,
+      crossOrigin: 'anonymous'
     }).addTo(map);
+    var mtFallback = false;
+    mtLayer.on('tileerror', function () {
+      if (mtFallback) return;
+      mtFallback = true;
+      try {
+        map.removeLayer(mtLayer);
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+          subdomains: 'abcd',
+          maxZoom: 20
+        }).addTo(map);
+      } catch (e) { /* noop */ }
+    });
     // 像素风圆点 marker（divIcon 本地渲染，无外域图片依赖）
     var icon = L.divIcon({
       className: 'td-map-marker',
