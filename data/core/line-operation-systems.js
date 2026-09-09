@@ -22,6 +22,16 @@ window.LineOperationSystems = {
       order: 1
     },
     {
+      code: "JA",
+      nameJa: "川越線（川越〜高麗川）",
+      nameZh: "川越线（川越～高丽川）",
+      nameEn: "Kawagoe Line (Kawagoe - Komagawa)",
+      nameKo: "",
+      color: "#00ac47",
+      lineIds: ["KawagoeWest"],
+      order: 1.1
+    },
+    {
       code: "JB",
       nameJa: "中央・総武線（各駅停車）",
       nameZh: "中央・总武线（各站停车）",

@@ -153,6 +153,7 @@
     // 埼京線 ↔ 川越線（大宮〜川越間は埼京線車両 E233系7000番台が直通）
     "Saikyo": "../images/列车/JR東日本/E233系7000番台.png",
     "Kawagoe": "../images/列车/JR東日本/E209系3500番台.png", // 川越線自社車（高崎車両センター E209系3500番台）；埼京線直通列車は Saikyo 側が優先
+    "KawagoeWest": "../images/列车/JR東日本/E209系3500番台.png", // 川越線（川越〜高麗川）単独運行区間：川越線自社車 E209系3500番台
     "ShonanShinjuku": "../images/列车/JR東日本/E233系3000番台.png", // 湘南新宿ライン：E233系3000番台
     "Yokosuka": "../images/列车/JR東日本/E235系1000番台.png",
     "SobuRapid": "../images/列车/JR東日本/E235系1000番台.png",

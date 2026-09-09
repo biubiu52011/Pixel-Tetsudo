@@ -14423,7 +14423,7 @@
       "operator": "JR-East",
       "region": "Saitama Area",
       "type": "straight",
-      "durationTotalMin": 35,
+      "durationTotalMin": 15,
       "branchOf": null,
       "stations": [
         "Omiya",
@@ -14431,19 +14431,9 @@
         "Nishi-Omiya",
         "Sashiogi",
         "Minami-Furuya",
-        "Kawagoe",
-        "Nishi-Kawagoe",
-        "Matoba",
-        "Kasahata",
-        "Musashi-Takahagi",
-        "Komagawa"
+        "Kawagoe"
       ],
       "durations": [
-        2,
-        2,
-        2,
-        2,
-        2,
         2,
         2,
         2,
@@ -14504,6 +14494,55 @@
         {
           "station": "Kawagoe",
           "lineId": "Tojo",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Kawagoe",
+          "lineId": "KawagoeWest",
+          "type": "in",
+          "note": ""
+        }
+      ]
+    },
+    "KawagoeWest": {
+      "name": "KawagoeWest",
+      "nameEn": "Kawagoe Line (Kawagoe - Komagawa)",
+      "nameJa": "川越線（川越〜高麗川）",
+      "code": "JA",
+      "color": "#00ac47",
+      "operator": "JR-East",
+      "region": "Saitama Area",
+      "type": "straight",
+      "durationTotalMin": 14,
+      "branchOf": null,
+      "stations": [
+        "Kawagoe",
+        "Nishi-Kawagoe",
+        "Matoba",
+        "Kasahata",
+        "Musashi-Takahagi",
+        "Komagawa"
+      ],
+      "durations": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "throughServices": [],
+      "transferStations": [
+        {
+          "station": "Kawagoe",
+          "lineId": "Tojo",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Kawagoe",
+          "lineId": "Kawagoe",
           "type": "in",
           "note": ""
         },
@@ -21036,7 +21075,7 @@
         },
         {
           "station": "Komagawa",
-          "lineId": "Kawagoe",
+          "lineId": "KawagoeWest",
           "type": "in",
           "note": ""
         },
@@ -35521,22 +35560,23 @@
     ],
     "Kawagoe": [
       "Kawagoe",
+      "KawagoeWest",
       "Tojo"
     ],
     "Nishi-Kawagoe": [
-      "Kawagoe"
+      "KawagoeWest"
     ],
     "Matoba": [
-      "Kawagoe"
+      "KawagoeWest"
     ],
     "Kasahata": [
-      "Kawagoe"
+      "KawagoeWest"
     ],
     "Musashi-Takahagi": [
-      "Kawagoe"
+      "KawagoeWest"
     ],
     "Komagawa": [
-      "Kawagoe",
+      "KawagoeWest",
       "Hachiko"
     ],
     "Kokuji": [
@@ -41248,12 +41288,15 @@
       "Nishi-Omiya": 2,
       "Sashiogi": 3,
       "Minami-Furuya": 4,
-      "Kawagoe": 5,
-      "Nishi-Kawagoe": 6,
-      "Matoba": 7,
-      "Kasahata": 8,
-      "Musashi-Takahagi": 9,
-      "Komagawa": 10
+      "Kawagoe": 5
+    },
+    "KawagoeWest": {
+      "Kawagoe": 0,
+      "Nishi-Kawagoe": 1,
+      "Matoba": 2,
+      "Kasahata": 3,
+      "Musashi-Takahagi": 4,
+      "Komagawa": 5
     },
     "KeikyuAirport": {
       "Keikyu-Kamata": 0,

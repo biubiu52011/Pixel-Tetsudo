@@ -59,7 +59,8 @@
     "SotetsuShin-Yokohama": ["SotetsuMain"],
     // JR
     "Saikyo": ["Kawagoe", "Rinkai", "SotetsuMain"],
-    "Kawagoe": ["Saikyo"],
+    "Kawagoe": ["Saikyo", "KawagoeWest"],
+    "KawagoeWest": ["Kawagoe"],
     "Rinkai": ["Saikyo"],
     "UtsunomiyaJR": ["ShonanShinjuku", "Tokaido"],
     "Takasaki": ["ShonanShinjuku", "Tokaido"],
@@ -82,7 +83,8 @@
   var THROUGH_JOIN_STATIONS = {
     // 埼京
     "Saikyo": { "Kawagoe": ["Omiya"], "Rinkai": ["Osaki"], "SotetsuMain": [] },
-    "Kawagoe": { "Saikyo": ["Omiya"] },
+    "Kawagoe": { "Saikyo": ["Omiya"], "KawagoeWest": ["Kawagoe"] },
+    "KawagoeWest": { "Kawagoe": ["Kawagoe"] },
     "Rinkai": { "Saikyo": ["Osaki"] },
     // 副都心・有楽町・西武・東上・東横
     "Fukutoshin": { "Tojo": ["Wakoshi"], "TokyuToyoko": ["Shibuya"], "Yurakucho_Seibu": ["Kotake-Mukaihara"] },
