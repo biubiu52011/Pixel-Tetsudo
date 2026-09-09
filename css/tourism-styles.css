@@ -606,71 +606,6 @@
   font-weight: 600;
 }
 
-/* === Better nav === */
-.article-nav {
-  display: flex;
-  gap: 0;
-  border: 2px solid var(--border);
-  border-top: 1px solid var(--border);
-  border-radius: 0 0 12px 12px;
-  overflow: hidden;
-  background: var(--card);
-  box-shadow: 3px 3px 0px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.1);
-}
-.spot-nav-btn {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  padding: 16px 20px;
-  border: none;
-  border-right: 1px solid var(--border);
-  background: var(--card);
-  color: var(--text);
-  cursor: pointer;
-  font-family: inherit;
-  font-size: 13px;
-  transition: var(--transition-fast) step-start;
-  text-decoration: none;
-  min-height: 60px;
-}
-.spot-nav-btn:last-child { border-right: none; }
-.spot-nav-btn:hover:not(.disabled) {
-  background: var(--green-pale);
-  color: var(--green);
-  transform: none;
-}
-.spot-nav-btn.disabled {
-  opacity: 0.3;
-  cursor: default;
-  background: var(--bg3);
-}
-.nav-arrow {
-  font-size: 22px;
-  flex-shrink: 0;
-  color: var(--text-muted);
-  line-height: 1;
-  transition: var(--transition-fast);
-}
-.prev-btn:hover:not(.disabled) .nav-arrow { transform: translateX(-3px); }
-.next-btn:hover:not(.disabled) .nav-arrow { transform: translateX(3px); }
-.nav-info { flex: 1; text-align: center; }
-.nav-label {
-  font-size: 10px;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 2px;
-}
-.nav-spot-name {
-  font-size: 13px;
-  color: var(--text);
-  font-weight: 600;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
-}
-
 /* === Detail page outer padding === */
 .tourism-detail-page {
   max-width: 800px;
@@ -987,8 +922,6 @@
   .qi-item { padding: 14px 12px; }
   .map-label { font-size: 11px; }
   .map-value { font-size: 15px; }
-  .nav-spot-name { font-size: 14px; }
-  .nav-label { font-size: 11px; }
   .detail-back-btn { font-size: 14px; padding: 12px 22px; }
   .article-section { padding: 24px 20px; }
 }

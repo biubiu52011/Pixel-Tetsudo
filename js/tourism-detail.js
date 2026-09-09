@@ -242,58 +242,16 @@ var currentStationKey = null;
       + '</div>';
 
     container.innerHTML = '<div class="article-content">' + html + '</div>';
-    updateNavigation();
     // Initialize map after DOM is ready
     setTimeout(function() { initMap(mapLat, mapLng, spotName); }, 50);
     var pageTitle = spotName + ' | ' + (stationName || '') + ' | PIXEL TETSUDO';
     if (document.title) document.title = pageTitle;
   }
-  function updateNavigation() {
-    var prevBtn = document.getElementById("prevSpotBtn");
-    var nextBtn = document.getElementById("nextSpotBtn");
-    var prevNameEl = document.getElementById("prevSpotName");
-    var nextNameEl = document.getElementById("nextSpotName");
-
-    if (prevBtn) {
-      if (currentSpotIndex > 0 && currentSpotIndex < scopedSpots.length) {
-        prevBtn.classList.remove("disabled");
-        if (prevNameEl) prevNameEl.textContent = getSpotName(scopedSpots[currentSpotIndex - 1]);
-        prevBtn.addEventListener("click", function() {
-          currentSpotIndex--;
-          renderArticle(scopedSpots[currentSpotIndex], currentStationKey);
-          window.scrollTo(0, 0);
-        });
-      } else {
-        prevBtn.classList.add("disabled");
-        if (prevNameEl) prevNameEl.textContent = '';
-      }
-    }
-
-    if (nextBtn) {
-      if (currentSpotIndex < scopedSpots.length - 1) {
-        nextBtn.classList.remove("disabled");
-        if (nextNameEl) nextNameEl.textContent = getSpotName(scopedSpots[currentSpotIndex + 1]);
-        nextBtn.addEventListener("click", function() {
-          currentSpotIndex++;
-          renderArticle(scopedSpots[currentSpotIndex], currentStationKey);
-          window.scrollTo(0, 0);
-        });
-      } else {
-        nextBtn.classList.add("disabled");
-        if (nextNameEl) nextNameEl.textContent = '';
-      }
-    }
-  }
-
   function handleBack() { window.history.back(); }
 
   function translateUI() {
     var backBtnText = document.getElementById("backBtnText");
     if (backBtnText) backBtnText.textContent = t("detail.back");
-    var prevLabel = document.getElementById("prevLabel");
-    if (prevLabel) prevLabel.textContent = t("detail.prev");
-    var nextLabel = document.getElementById("nextLabel");
-    if (nextLabel) nextLabel.textContent = t("detail.next");
   }
 
 function init() {
