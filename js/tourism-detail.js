@@ -136,23 +136,6 @@ var currentStationKey = null;
     return "article-hero--landmark";
   }
 
-  // Find nearest station ID to a lat/lng (excludes 0,0 stations)
-  function getNearestStationId(lat, lng) {
-    var coords = window.STATION_COORDS || {};
-    var bestId = null;
-    var bestDist = Infinity;
-    for (var sid in coords) {
-      var c = coords[sid];
-      if (!c || !c[0] || !c[1]) continue;
-      var dlat = c[0] - lat;
-      var dlng = c[1] - lng;
-      var d = dlat * dlat + dlng * dlng;
-      if (d < bestDist) { bestDist = d; bestId = sid; }
-    }
-    return bestId;
-  }
-
-
   function renderArticle(spot, stationKey) {
     if (!spot) return;
     var container = document.getElementById("articleContainer");
@@ -260,22 +243,6 @@ var currentStationKey = null;
 
     container.innerHTML = '<div class="article-content">' + html + '</div>';
     updateNavigation();
-    // Go-here button: find nearest station to spot and navigate to route search
-    var goHereBtn = document.createElement('button');
-    goHereBtn.className = 'go-here-btn';
-    goHereBtn.textContent = t('detail.go_here') || 'Go there';
-    goHereBtn.addEventListener('click', function() {
-      var spotCoord = spot.coord || [mapLat, mapLng];
-      var fromId = currentStationKey || spotStation;
-      var toId = getNearestStationId(spotCoord[0], spotCoord[1]);
-      if (!fromId || !toId) return;
-      var url = '../pages/home.html?from=' + encodeURIComponent(fromId) + '&to=' + encodeURIComponent(toId);
-      window.location.href = url;
-    });
-    var btnContainer = document.createElement('div');
-    btnContainer.className = 'go-here-container';
-    btnContainer.appendChild(goHereBtn);
-    container.appendChild(btnContainer);
     // Initialize map after DOM is ready
     setTimeout(function() { initMap(mapLat, mapLng, spotName); }, 50);
     var pageTitle = spotName + ' | ' + (stationName || '') + ' | PIXEL TETSUDO';

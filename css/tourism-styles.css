@@ -875,33 +875,6 @@
 }
 
 /* === Article tags === */
-.go-here-container {
-  padding: 16px;
-  display: flex;
-  justify-content: center;
-}
-.go-here-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 24px;
-  background: var(--accent, #0088ff);
-  color: var(--white, #fff);
-  border: none;
-  border-radius: var(--radius, 8px);
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: var(--transition, background 0.15s);
-  font-family: inherit;
-}
-.go-here-btn:hover {
-  opacity: 0.85;
-  transform: translateY(-1px);
-}
-.go-here-btn:active {
-  transform: translateY(0);
-}
 .sm-station-picker {
   padding: 12px 16px;
   border-top: 1px solid var(--border, #e0e0e0);
@@ -938,7 +911,6 @@
 @media (max-width: 640px) {
   .sm-tag-btn,
   .sm-picker-btn,
-  .go-here-btn,
   .detail-back-btn {
     min-height: 44px;
     padding-top: 10px;
@@ -996,16 +968,6 @@
   height: 100%;
   border: none;
   display: block;
-}
-
-/* === Go-here button: use project green instead of blue === */
-.go-here-btn {
-  background: var(--green, #008803);
-  border: 2px solid var(--green-dim, #006600);
-}
-.go-here-btn:hover {
-  background: var(--green-dim, #006600);
-  opacity: 1;
 }
 
 /* === Mobile font scaling (<=640px) === */
