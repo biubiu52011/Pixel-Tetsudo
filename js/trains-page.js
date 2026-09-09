@@ -1585,10 +1585,28 @@
       });
       if (backBtn) {
         backBtn.addEventListener("click", function() {
-          window.location.hash = "";
-          hideLineView();
+          // 与 tourism-detail 返回按钮同步：优先浏览器历史回退（回到来源页/列表态）
+          if (window.history.length > 1) {
+            window.history.back();
+            // 若当前已无 hash（页内列表态误触返回），直接恢复列表视图
+            if (!window.location.hash) hideLineView();
+          } else {
+            // 无历史（直接打开详情页）：清 hash 回列表
+            window.location.hash = "";
+            hideLineView();
+          }
         });
       }
+      // hash 路由兜底：history.back() 后 hash 变化时恢复对应视图
+      // （与 tourism-detail 的 history.back() 行为同步，避免页内返回后停留在详情）
+      window.addEventListener("hashchange", function() {
+        var h = (window.location.hash || "").replace(/^#/, "");
+        if (!h) {
+          hideLineView();
+        } else if (h !== currentLine) {
+          try { showLineView(h); } catch(e) {}
+        }
+      });
       loadCachedPositions(function() {
         renderList(listEl);
         renderFilterBar(document.getElementById("trainsFilterBar"));
