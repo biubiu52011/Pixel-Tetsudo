@@ -1,5 +1,5 @@
 /*
- * Tourism Detail Page (4.3.464) - Decoupled Architecture
+ * Tourism Detail Page (4.3.465) - Decoupled Architecture
  * Spots are accessed by name/index, not by station association
  */
 (function() {
@@ -349,11 +349,12 @@ function init() {
       attributionControl: true
     });
     mapEl._tdLeaflet = map;
-    // MapTiler Basic 极简底图（免费 key，origin 白名单防盗用；language 参数跟随界面语言：中文界面中文地名/日文界面日文地名）
+    // MapTiler Streets 底图（免费 key，origin 白名单防盗用；language 参数跟随界面语言：中文界面中文地名/日文界面日文地名）
+    // 用户实测 Basic 样式地名标注过少（像没有图层），切 Streets 获得完整地名/路名/地标标注
     // MapTiler 固定返回 512px 瓦片（tilesize 参数无效）：Leaflet 默认 256 网格会把瓦片压缩一半导致图层错位——tileSize:512 + zoomOffset:-1 正确渲染
     // 兜底：MapTiler 失败（key 失效/额度超限/Origin 校验延迟）时自动回退 Carto light_all
     var mtLang = { ja: 'ja', zh: 'zh', ko: 'ko', en: 'en' }[window.currentLang] || 'en';
-    var mtLayer = L.tileLayer('https://api.maptiler.com/maps/basic/{z}/{x}/{y}.png?key=' + MAPTILER_KEY + '&language=' + mtLang, {
+    var mtLayer = L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=' + MAPTILER_KEY + '&language=' + mtLang, {
       attribution: '&copy; <a href="https://www.maptiler.com/copyright/">MapTiler</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       maxZoom: 19,
       tileSize: 512,      // MapTiler 固定返回 512px 瓦片：tileSize 对齐使 1:1 渲染，zoomOffset -1 保持 256 口径缩放层级
