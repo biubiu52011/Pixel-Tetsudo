@@ -1445,11 +1445,12 @@
           existingIcon.setAttribute('x', newX);
           existingIcon.setAttribute('y', newY);
         }
-        // v4.3.454: 终点/方向标签跟随列车移动
+        // v4.3.454/455: 终点/方向标签跟随列车移动（位置随移动方向）
+        var _mvDir = _trainMoveDir(p, lineId);
         var _lb = trainLayer.querySelectorAll('[data-train-label-for="' + String(trainUid).replace(/"/g, '') + '"]');
         for (var _li = 0; _li < _lb.length; _li++) {
           _lb[_li].setAttribute('x', px);
-          _lb[_li].setAttribute('y', py + (_lb[_li].getAttribute('data-label-pos') === 'dir' ? -14 : 25));
+          _lb[_li].setAttribute('y', _trainLabelY(_lb[_li].getAttribute('data-label-pos'), py, _mvDir));
         }
       } else {
         // Create new train icon
@@ -1468,7 +1469,7 @@
           newIcon.setAttribute("class", iconCls);
           newIcon.setAttribute("preserveAspectRatio", "xMidYMid meet");
           trainLayer.appendChild(newIcon);
-          appendTrainLabels(trainLayer, svgNS, trainUid, px, py, p);
+          appendTrainLabels(trainLayer, svgNS, trainUid, px, py, p, lineId);
         } else {
           // Fallback: circle icon
           var newCircle = document.createElementNS(svgNS, "g");
@@ -1491,7 +1492,7 @@
           newCircle.appendChild(innerCircle);
           
           trainLayer.appendChild(newCircle);
-          appendTrainLabels(trainLayer, svgNS, trainUid, px, py, p);
+          appendTrainLabels(trainLayer, svgNS, trainUid, px, py, p, lineId);
         }
       }
     }
@@ -1556,21 +1557,48 @@
     return _resolveStationLoose(destStation) || destStation;
   }
 
-  function appendTrainLabels(trainLayer, svgNS, trainUid, px, py, p) {
+  // v4.3.455: 列车方向标签朝移动方向——方向端点站名在站表中位于当前位置下方＝向下▼（标签在图标下方）、
+  // 上方＝向上▲（标签在图标上方）；Inbound/Outbound 按往起点/终点判断；无法判断（环线 Inner/Outer 等）返回 null 保持 ▶ 样式
+  function _trainMoveDir(p, lineId) {
+    var dn = String(p.railDirection || '');
+    if (/^Outbound$/.test(dn)) return 'down';
+    if (/^Inbound$/.test(dn)) return 'up';
+    var tail = dn.split('.').pop();
+    if (!tail) return null;
+    var cur = p.stationIndex || 0;
+    var sts = (window.UNIFIED_LINES && window.UNIFIED_LINES[lineId]) ? (window.UNIFIED_LINES[lineId].stations || []) : [];
+    var normTail = String(tail).replace(/-/g, '').toLowerCase();
+    for (var _di = 0; _di < sts.length; _di++) {
+      if (String(sts[_di]).replace(/-/g, '').toLowerCase() === normTail) {
+        return _di > cur ? 'down' : 'up';
+      }
+    }
+    return null;
+  }
+
+  // 方向/终点标签的垂直位置：dir='down' 时方向▼在图标下、终点下移一行；否则方向▲/▶在上、终点在下
+  function _trainLabelY(labelPos, py, moveDir) {
+    if (labelPos === 'dir') return moveDir === 'down' ? py + 17 : py - 14;
+    return moveDir === 'down' ? py + 28 : py + 25;
+  }
+
+  function appendTrainLabels(trainLayer, svgNS, trainUid, px, py, p, lineId) {
     var dirText = _trainDirText(p.railDirection);
     var destText = _trainDestText(p.destinationStation);
     if (!dirText && !destText) return;
+    var moveDir = _trainMoveDir(p, lineId);
+    var dirSym = moveDir === 'down' ? '▼' : (moveDir === 'up' ? '▲' : '▶');
     if (dirText) {
       var ldir = document.createElementNS(svgNS, "text");
       ldir.setAttribute("data-train-label-for", String(trainUid));
       ldir.setAttribute("data-label-pos", "dir");
       ldir.setAttribute("x", String(px));
-      ldir.setAttribute("y", String(py - 14));
+      ldir.setAttribute("y", String(_trainLabelY('dir', py, moveDir)));
       ldir.setAttribute("text-anchor", "middle");
       ldir.setAttribute("font-size", "7");
       ldir.setAttribute("fill", "#999");
       ldir.setAttribute("class", "train-label-dir");
-      ldir.textContent = "▶" + dirText;
+      ldir.textContent = dirSym + dirText;
       trainLayer.appendChild(ldir);
     }
     if (destText) {
@@ -1578,7 +1606,7 @@
       ldest.setAttribute("data-train-label-for", String(trainUid));
       ldest.setAttribute("data-label-pos", "dest");
       ldest.setAttribute("x", String(px));
-      ldest.setAttribute("y", String(py + 25));
+      ldest.setAttribute("y", String(_trainLabelY('dest', py, moveDir)));
       ldest.setAttribute("text-anchor", "middle");
       ldest.setAttribute("font-size", "8");
       ldest.setAttribute("fill", "#666");
