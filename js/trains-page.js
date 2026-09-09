@@ -1545,9 +1545,17 @@
   function _trainDirText(directionName) {
     if (!directionName) return '';
     var dn = String(directionName);
-    if (/^(Inbound|Outbound|Inner|Outer)$/.test(dn)) return dn;
-    // ODPT railDirection 形如 "odpt.RailDirection:TokyoMetro.Oshiage"——取站名末段再解析
-    var tail = dn.split(".").pop();
+    // 环线方向词：内回り/外回り（按语言本地化，无上下箭头）
+    var tail = dn.split('.').pop();
+    var lang = window.currentLang || 'ja';
+    if (LOOP_DIR_NAMES[tail]) {
+      return LOOP_DIR_NAMES[tail][lang] || LOOP_DIR_NAMES[tail].ja;
+    }
+    // 基点方向词：北行/南行/东行/西行
+    if (COMPASS_DIR_NAMES[tail]) {
+      return COMPASS_DIR_NAMES[tail][lang] || COMPASS_DIR_NAMES[tail].ja;
+    }
+    if (/^(Inbound|Outbound)$/.test(tail)) return tail;
     if (!tail) return dn;
     return _resolveStationLoose(tail) || tail;
   }
@@ -1558,16 +1566,36 @@
   }
 
   // v4.3.455: 列车方向标签朝移动方向——方向端点站名在站表中位于当前位置下方＝向下▼（标签在图标下方）、
-  // 上方＝向上▲（标签在图标上方）；Inbound/Outbound 按往起点/终点判断；无法判断（环线 Inner/Outer 等）返回 null 保持 ▶ 样式
+  // 上方＝向上▲（标签在图标上方）；Inbound/Outbound 按往起点/终点判断；环线 InnerLoop/OuterLoop 等无上下概念返回 null
+  // v4.3.456: 环线方向词本地化（内回/外回）且无终点——见 _trainDirText/appendTrainLabels
+  var LOOP_DIR_NAMES = {
+    InnerLoop: { ja: "内回り", zh: "内环", en: "Inner", ko: "내선" },
+    OuterLoop: { ja: "外回り", zh: "外环", en: "Outer", ko: "외선" },
+    Inner: { ja: "内回り", zh: "内环", en: "Inner", ko: "내선" },
+    Outer: { ja: "外回り", zh: "外环", en: "Outer", ko: "외선" }
+  };
+  // 基点方向词（相铁直通等）：北行/南行/东行/西行
+  var COMPASS_DIR_NAMES = {
+    Northbound: { ja: "北行", zh: "北行", en: "Northbound", ko: "북행" },
+    Southbound: { ja: "南行", zh: "南行", en: "Southbound", ko: "남행" },
+    Eastbound: { ja: "東行", zh: "东行", en: "Eastbound", ko: "동행" },
+    Westbound: { ja: "西行", zh: "西行", en: "Westbound", ko: "서행" }
+  };
+
+  function _isLoopDirName(dirName) {
+    if (!dirName) return false;
+    return !!LOOP_DIR_NAMES[String(dirName).split('.').pop()];
+  }
+
   function _trainMoveDir(p, lineId) {
-    var dn = String(p.railDirection || '');
-    if (/^Outbound$/.test(dn)) return 'down';
+    var dn = String(p.railDirection || '').split('.').pop();
+    if (/^(InnerLoop|Inner|OuterLoop|Outer)$/.test(dn)) return null;
     if (/^Inbound$/.test(dn)) return 'up';
-    var tail = dn.split('.').pop();
-    if (!tail) return null;
+    if (/^Outbound$/.test(dn)) return 'down';
+    if (!dn) return null;
     var cur = p.stationIndex || 0;
     var sts = (window.UNIFIED_LINES && window.UNIFIED_LINES[lineId]) ? (window.UNIFIED_LINES[lineId].stations || []) : [];
-    var normTail = String(tail).replace(/-/g, '').toLowerCase();
+    var normTail = String(dn).replace(/-/g, '').toLowerCase();
     for (var _di = 0; _di < sts.length; _di++) {
       if (String(sts[_di]).replace(/-/g, '').toLowerCase() === normTail) {
         return _di > cur ? 'down' : 'up';
@@ -1584,10 +1612,12 @@
 
   function appendTrainLabels(trainLayer, svgNS, trainUid, px, py, p, lineId) {
     var dirText = _trainDirText(p.railDirection);
-    var destText = _trainDestText(p.destinationStation);
+    // v4.3.456: 环线无终点——内回/外回列车不显示终点标签（ODPT 环线终点为大崎等折返点，无实际终点意义）
+    var isLoopDir = _isLoopDirName(p.railDirection);
+    var destText = isLoopDir ? '' : _trainDestText(p.destinationStation);
     if (!dirText && !destText) return;
     var moveDir = _trainMoveDir(p, lineId);
-    var dirSym = moveDir === 'down' ? '▼' : (moveDir === 'up' ? '▲' : '▶');
+    var dirSym = moveDir === 'down' ? '▼' : (moveDir === 'up' ? '▲' : (isLoopDir ? '' : '▶'));
     if (dirText) {
       var ldir = document.createElementNS(svgNS, "text");
       ldir.setAttribute("data-train-label-for", String(trainUid));
