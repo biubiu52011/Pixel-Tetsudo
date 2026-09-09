@@ -92,14 +92,16 @@
     }
     intervalSection.querySelector(".rs-interval-stations").innerHTML = intervalHtml;
     // 4.3.443: 单端/文本兜底区间（如"京急線内"）在非 ja 界面翻译
+    // 4.3.445: 改为离线 DelayTranslator.translateFragment（同步替换，不再走异步 API）
     if (_singleEndInterval && (window.currentLang || "ja") !== "ja") {
       var _intEl = intervalSection.querySelector(".rs-interval-stations .rs-station-text");
-      if (_intEl && _needsJaTranslate(interval)) {
-        window.TranslateService.applyToElement(_intEl, interval, window.currentLang);
+      if (_intEl && _needsJaTranslate(interval) && window.DelayTranslator) {
+        _intEl.textContent = window.DelayTranslator.translateFragment(interval, window.currentLang);
       }
     }
     // Cause section -> 運行情報（v4.3.389: 直接显示 ODPT text 原文，不解析碎片；
-    // 4.3.443: 非 ja 界面译文为主显示，原文折叠保留，翻译失败自动回退原文）
+    // 4.3.443: 非 ja 界面译文为主显示，原文折叠保留，翻译失败自动回退原文；
+    // 4.3.445: 改用离线模板翻译引擎 DelayTranslator（同步、无网络、线上可用））
     var causeSection = modal.querySelector(".rs-cause-section");
     var _detailTitles = { ja: "運行情報", en: "Service Info", zh: "运行信息", ko: "운행 정보" };
     causeSection.querySelector(".rs-section-title").textContent = _detailTitles[(window.currentLang || "ja")] || "運行情報";
@@ -111,18 +113,14 @@
       causeHtml = '<span class="rs-text-muted">' + t("status.no_data") + '</span>';
     } else if (delayInfo.detail) {
       _transSource = delayInfo.detail;
-      causeHtml = _translatedText(delayInfo.detail, window.currentLang || "ja");
+      causeHtml = _translatedText(delayInfo.detail, window.currentLang || "ja", { cause: cause, status: status, lineId: lineId });
     } else if (cause) {
       _transSource = cause;
-      causeHtml = _translatedText(cause, window.currentLang || "ja");
+      causeHtml = _translatedText(cause, window.currentLang || "ja", { cause: cause, status: status, lineId: lineId });
     } else {
       causeHtml = '<span class="rs-text-muted">' + t("status.none") + '</span>';
     }
     causeSection.querySelector(".rs-cause-text").innerHTML = causeHtml;
-    if (_transSource && (window.currentLang || "ja") !== "ja") {
-      var _trEl = causeSection.querySelector(".rs-cause-translated");
-      if (_trEl) window.TranslateService.applyToElement(_trEl, _transSource, window.currentLang);
-    }
     // Updated time section
     var updatedSection = modal.querySelector(".rs-updated-section");
     updatedSection.querySelector(".rs-info-label").textContent = t("status.updated");
@@ -173,10 +171,16 @@
   var _origLabels = { ja: "日本語原文", zh: "查看日文原文", en: "View Japanese original", ko: "일본어 원문 보기" };
 
   // 译文为主 + 原文折叠（非 ja 界面）；ja 界面或原文即目标语言时直出
-  function _translatedText(text, lang) {
+  // 4.3.445: 译文来自离线模板引擎 DelayTranslator（同步；未命中时安全回退原文）
+  function _translatedText(text, lang, opts) {
     var safe = escapeHtml(text);
     if (lang === "ja" || !_needsJaTranslate(text)) return safe;
-    return '<div class="rs-cause-translated">' + safe + '</div>'
+    var tr = text;
+    if (window.DelayTranslator) {
+      var r = window.DelayTranslator.translate(text, opts || {}, lang);
+      tr = r.translated || text;
+    }
+    return '<div class="rs-cause-translated">' + escapeHtml(tr) + '</div>'
       + '<details class="rs-cause-original"><summary>' + (_origLabels[lang] || _origLabels.en) + '</summary><div>' + safe + '</div></details>';
   }
 

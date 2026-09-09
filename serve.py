@@ -41,25 +41,12 @@ PROXY_TARGETS = {
     },
 }
 
-# ---- 无需注册的翻译端点（4.3.443）----
-# 目标：realtime 运行情报等日文动态文本多语言化。
-# 后端：MyMemory（官方公开免费 API，无需注册）主力 + Google gtx 端点兜底（同样无需 key）。
-# 两者均无 CORS 头，浏览器必须经本端点转发；白名单固定目标，防 SSRF。
-# 内存缓存：同文本+语言 7 天不重复请求（30s 自动刷新 + 多卡片复用时会烧免费额度）。
-_TRANSLATE_CACHE = {}
-_TRANSLATE_TTL = 7 * 86400
-_LANG_TARGET = {"zh": "zh-CN", "ko": "ko", "en": "en"}
-
-
 class Handler(http.server.SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=ROOT, **kwargs)
 
     def do_GET(self):
         path = self.path.split("?")[0]
-        if path == "/api-proxy/translate":
-            self._translate()
-            return
         if path in PROXY_TARGETS:
             self._proxy(path)
             return
@@ -72,57 +59,6 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         self.send_header("Cache-Control", "no-store")
         self.end_headers()
         self.wfile.write(body)
-
-    def _translate(self):
-        qs = urllib.parse.parse_qs(self.path.split("?", 1)[1]) if "?" in self.path else {}
-        text = (qs.get("text") or [""])[0]
-        lang = (qs.get("lang") or ["zh"])[0]
-        if not text or not text.strip():
-            self._json({"ok": False, "error": "empty text"})
-            return
-        if lang not in _LANG_TARGET:
-            lang = "zh"
-        tgt = _LANG_TARGET[lang]
-        cache_key = hashlib.md5((lang + "|" + text).encode("utf-8")).hexdigest()
-        now = time.time()
-        if cache_key in _TRANSLATE_CACHE:
-            ts, val = _TRANSLATE_CACHE[cache_key]
-            if now - ts < _TRANSLATE_TTL:
-                self._json({"ok": True, "translated": val, "engine": "cache"})
-                return
-        # 1) MyMemory（官方公开，无需注册；限 500 字符/次、匿名额度）
-        try:
-            url = "https://api.mymemory.translated.net/get?q=" + urllib.parse.quote(text) + "&langpair=ja|" + tgt
-            req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-            with urllib.request.urlopen(req, timeout=10) as resp:
-                data = json.loads(resp.read().decode("utf-8", "ignore"))
-            tr = (data.get("responseData") or {}).get("translatedText") or ""
-            if tr and data.get("responseStatus") == 200 and "MYMEMORY WARNING" not in tr.upper():
-                _TRANSLATE_CACHE[cache_key] = (now, tr)
-                self._json({"ok": True, "translated": tr, "engine": "mymemory"})
-                return
-        except Exception:
-            pass
-        # 2) Google gtx 端点兜底（无需 key；非官方，仅作 fallback）
-        try:
-            url = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=ja&tl=" + tgt + "&dt=t&q=" + urllib.parse.quote(text)
-            req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-            with urllib.request.urlopen(req, timeout=10) as resp:
-                data = json.loads(resp.read().decode("utf-8", "ignore"))
-            segs = []
-            top = data[0] if isinstance(data, list) and data else None
-            if isinstance(top, list):
-                for seg in top:
-                    if isinstance(seg, list) and seg and isinstance(seg[0], str):
-                        segs.append(seg[0])
-            tr = "".join(segs)
-            if tr:
-                _TRANSLATE_CACHE[cache_key] = (now, tr)
-                self._json({"ok": True, "translated": tr, "engine": "google"})
-                return
-        except Exception:
-            pass
-        self._json({"ok": False, "error": "translate failed"}, 502)
 
     def _proxy(self, path):
         cfg = PROXY_TARGETS[path]
