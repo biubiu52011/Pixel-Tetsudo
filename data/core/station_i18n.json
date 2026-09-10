@@ -3211,7 +3211,7 @@
   },
   "Kaisei": {
     "ja": "開成",
-    "zh": "開成",
+    "zh": "开成",
     "ko": "카이세이",
     "en": "Kaisei"
   },
@@ -19480,5 +19480,29 @@
     "zh": "川崎新町",
     "ko": "카와사키신마치",
     "en": "Kawasakishimmachi"
+  },
+  "ShinMatsuda": {
+    "ja": "新松田",
+    "zh": "新松田",
+    "ko": "신마츠다",
+    "en": "Shin-Matsuda"
+  },
+  "Kayama": {
+    "ja": "栢山",
+    "zh": "栢山",
+    "ko": "카야마",
+    "en": "Kayama"
+  },
+  "Tomizu": {
+    "ja": "富水",
+    "zh": "富水",
+    "ko": "토미즈",
+    "en": "Tomizu"
+  },
+  "Hotaruda": {
+    "ja": "螢田",
+    "zh": "萤田",
+    "ko": "호타루다",
+    "en": "Hotaruda"
   }
 }

@@ -2323,6 +2323,30 @@ window.RAILWAY_DATA = {
     "Kawasakishimmachi": {
       "lat": 35.51832,
       "lng": 140.69926
+    },
+    "ShinMatsuda": {
+      "lat": 35.34476,
+      "lng": 139.13965
+    },
+    "Kaisei": {
+      "lat": 35.32627,
+      "lng": 139.13606
+    },
+    "Kayama": {
+      "lat": 35.31059,
+      "lng": 139.14254
+    },
+    "Tomizu": {
+      "lat": 35.29657,
+      "lng": 139.14518
+    },
+    "Hotaruda": {
+      "lat": 35.28506,
+      "lng": 139.15197
+    },
+    "Ashigara": {
+      "lat": 35.27181,
+      "lng": 139.15445
     }
   },
   "lines": {
@@ -5203,19 +5227,7 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Oiso",
-          "lineId": "Odawara",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Oiso",
           "lineId": "TokaidoMain",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Ninomiya",
-          "lineId": "Odawara",
           "type": "in",
           "note": ""
         },
@@ -5228,12 +5240,6 @@ window.RAILWAY_DATA = {
         {
           "station": "Kozu",
           "lineId": "Tokaido",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Kozu",
-          "lineId": "Odawara",
           "type": "in",
           "note": ""
         },
@@ -6191,12 +6197,6 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Oiso",
-          "lineId": "Odawara",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Oiso",
           "lineId": "TokaidoMain",
           "type": "in",
           "note": ""
@@ -6204,12 +6204,6 @@ window.RAILWAY_DATA = {
         {
           "station": "Kozu",
           "lineId": "ShonanShinjuku",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Kozu",
-          "lineId": "Odawara",
           "type": "in",
           "note": ""
         },
@@ -12552,6 +12546,7 @@ window.RAILWAY_DATA = {
           "note": "モノレール浜松町，徒歩約2分"
         }
       ],
+      "isDoubleColumnLoop": true,
       "nameZh": "山手线",
       "nameKo": "야마노테선"
     },
@@ -20354,7 +20349,6 @@ window.RAILWAY_DATA = {
         "Odakyu-Sagamihara",
         "Sobudai-Mae",
         "Zama",
-        "Iriuda",
         "Ebina",
         "Atsugi",
         "Hon-Atsugi",
@@ -20364,10 +20358,12 @@ window.RAILWAY_DATA = {
         "Tokaidaigaku-Mae",
         "Hadano",
         "Shibusawa",
-        "Oiso",
-        "Ninomiya",
-        "Kozu",
-        "Kamonomiya",
+        "ShinMatsuda",
+        "Kaisei",
+        "Kayama",
+        "Tomizu",
+        "Hotaruda",
+        "Ashigara",
         "Odawara"
       ],
       "durations": [
@@ -20519,54 +20515,6 @@ window.RAILWAY_DATA = {
         {
           "station": "Atsugi",
           "lineId": "Sagami",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Oiso",
-          "lineId": "ShonanShinjuku",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Oiso",
-          "lineId": "Tokaido",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Oiso",
-          "lineId": "TokaidoMain",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Ninomiya",
-          "lineId": "ShonanShinjuku",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Ninomiya",
-          "lineId": "TokaidoMain",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Kozu",
-          "lineId": "ShonanShinjuku",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Kozu",
-          "lineId": "Tokaido",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Kozu",
-          "lineId": "TokaidoMain",
           "type": "in",
           "note": ""
         },
@@ -22463,20 +22411,8 @@ window.RAILWAY_DATA = {
           "note": ""
         },
         {
-          "station": "Oiso",
-          "lineId": "Odawara",
-          "type": "in",
-          "note": ""
-        },
-        {
           "station": "Ninomiya",
           "lineId": "ShonanShinjuku",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Ninomiya",
-          "lineId": "Odawara",
           "type": "in",
           "note": ""
         },
@@ -22489,12 +22425,6 @@ window.RAILWAY_DATA = {
         {
           "station": "Kozu",
           "lineId": "Tokaido",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Kozu",
-          "lineId": "Odawara",
           "type": "in",
           "note": ""
         },
@@ -25162,7 +25092,13 @@ window.RAILWAY_DATA = {
     "伊勢崎": "Isesaki",
     "立小路": "Tatekoji",
     "館腰": "Tatekoshi",
-    "求名": "Gumyo"
+    "求名": "Gumyo",
+    "ShinMatsuda": "新松田",
+    "Kaisei": "開成",
+    "Kayama": "栢山",
+    "Tomizu": "富水",
+    "Hotaruda": "螢田",
+    "Ashigara": "足柄"
   },
   "tourism": {
     "Adachi": {
@@ -32793,18 +32729,15 @@ window.RAILWAY_DATA = {
     "Oiso": [
       "ShonanShinjuku",
       "Tokaido",
-      "Odawara",
       "TokaidoMain"
     ],
     "Ninomiya": [
       "ShonanShinjuku",
-      "Odawara",
       "TokaidoMain"
     ],
     "Kozu": [
       "ShonanShinjuku",
       "Tokaido",
-      "Odawara",
       "TokaidoMain"
     ],
     "Odawara": [
@@ -38945,9 +38878,6 @@ window.RAILWAY_DATA = {
     "Zama": [
       "Odawara"
     ],
-    "Iriuda": [
-      "Odawara"
-    ],
     "Hon-Atsugi": [
       "Odawara"
     ],
@@ -38973,7 +38903,6 @@ window.RAILWAY_DATA = {
       "NewShuttle"
     ],
     "Kamonomiya": [
-      "Odawara",
       "TokaidoMain"
     ],
     "Koremasa": [
@@ -40232,6 +40161,24 @@ window.RAILWAY_DATA = {
     ],
     "Kawasakishimmachi": [
       "NambuBranch"
+    ],
+    "ShinMatsuda": [
+      "Odawara"
+    ],
+    "Kaisei": [
+      "Odawara"
+    ],
+    "Kayama": [
+      "Odawara"
+    ],
+    "Tomizu": [
+      "Odawara"
+    ],
+    "Hotaruda": [
+      "Odawara"
+    ],
+    "Ashigara": [
+      "Odawara"
     ]
   },
   "lineStationOrder": {
@@ -43049,21 +42996,22 @@ window.RAILWAY_DATA = {
       "Odakyu-Sagamihara": 28,
       "Sobudai-Mae": 29,
       "Zama": 30,
-      "Iriuda": 31,
-      "Ebina": 32,
-      "Atsugi": 33,
-      "Hon-Atsugi": 34,
-      "Aiko-Ishida": 35,
-      "Isehara": 36,
-      "Tsurumaki-Onsen": 37,
-      "Tokaidaigaku-Mae": 38,
-      "Hadano": 39,
-      "Shibusawa": 40,
-      "Oiso": 41,
-      "Ninomiya": 42,
-      "Kozu": 43,
-      "Kamonomiya": 44,
-      "Odawara": 45
+      "Ebina": 31,
+      "Atsugi": 32,
+      "Hon-Atsugi": 33,
+      "Aiko-Ishida": 34,
+      "Isehara": 35,
+      "Tsurumaki-Onsen": 36,
+      "Tokaidaigaku-Mae": 37,
+      "Hadano": 38,
+      "Shibusawa": 39,
+      "ShinMatsuda": 40,
+      "Kaisei": 41,
+      "Kayama": 42,
+      "Tomizu": 43,
+      "Hotaruda": 44,
+      "Ashigara": 45,
+      "Odawara": 46
     },
     "SeibuTamagawa": {
       "Koremasa": 0,
@@ -43634,5 +43582,4 @@ window.RAILWAY_DATA = {
       "Shitte": 4
     }
   }
-}
-;
+};
