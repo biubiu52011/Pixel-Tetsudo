@@ -513,14 +513,12 @@
     var routeElements = []; // SVG elements for route lines (static layer)
     
     if (isSixShapedLoop && stations.length > 2) {
-      // Six-shaped loop: "loop + tail" structure (not two loops).
-      // v4.3.483: 环部参考山手线双列规则——站名朝外、环内留白；
-      // 光丘尾从环顶（Tochomae junction）独立向上，不再与环共享水平空间。
+      // Six-shaped loop: "loop + tail" structure (not two loops)
+      // Hikarigaoka direction = open vertical tail, Tochomae direction = closed rectangular loop
       var hikarigaokaIdx = stations.indexOf("Hikarigaoka");
       if (hikarigaokaIdx === -1) hikarigaokaIdx = Math.floor(stations.length / 3);
       
       var hikarigaokaStations = stations.slice(0, hikarigaokaIdx + 1); // [0]=Tochomae (junction)
-      // 环站 = [Tochomae] + 新宿西口..新宿（28 站）
       var loopStations = [stations[0]].concat(stations.slice(hikarigaokaIdx + 1));
       
       // ============ Size calculation ============
@@ -528,88 +526,94 @@
       // (no squeeze -> real font size == declared font size). Vertical params stay fixed.
       var _cw6 = ((typeof document !== "undefined" && document.querySelector("#trainsMapContainer")) || {}).clientWidth || 410;
       var _cw6Content = _isMobileView() ? Math.max(_cw6 - 16, 320) : _cw6;
-      // 对齐山手线：移动 1.5 / 桌面 1.6
-      var scale6 = _isMobileView() ? 1.5 : 1.6;
-      // 光丘尾站距（垂直）
-      var spLoop6 = 24 * scale6;
-      // 环宽：山手线同款窄矩形（110px 基准），站名朝外
-      var loopRectW = 110 * scale6;
-      // 双列站距：按各列最高换乘 chip 自适应（同山手线 _colPitch）
-      var _colPitch6 = function(ids) {
-        var mx = 16 + 6 + 22 + 12;
-        for (var k = 0; k < ids.length; k++) {
-          var _txN = (transferMap[ids[k]] || []).filter(function(t) { return !t.through; }).length;
-          var _rows = Math.ceil(Math.min(_txN, 8) / 4);
-          mx = Math.max(mx, 16 + 6 + _rows * 22 + 12);
-        }
-        return mx;
-      };
-      // 右列（顶→底）：Tochomae + stations[37..25]（新宿..门前仲町）
-      var rightIds6 = [stations[0]].concat(stations.slice(25, 38).reverse());
-      // 左列（顶→底）：stations[11..24]（新宿西口..清澄白河）
-      var leftIds6 = stations.slice(11, 25);
-      var pitch6 = Math.max(_colPitch6(rightIds6), _colPitch6(leftIds6));
-      // 14 站 13 间隔
-      var loopRectH = pitch6 * 13;
+      var scale6 = _isMobileView() ? 1.5 : 1.3;
+      var spLoop6 = 26 * scale6;
+      var loopRectW = 110 * scale6; // v4.3.483b: 环宽调窄（山手线同款基准），给光丘尾留水平空间
+      var loopRectH = Math.max(loopStations.length * spLoop6 - 40 * scale6, 200 * scale6);
       
       var leftMargin = 8 * scale6;
-      var marginRight = 20 * scale6 + (_isMobileView() ? 24 : 12);
+      var marginRight = 20 * scale6 + (_isMobileView() ? 36 : 12);
       var marginTopBot = 40 * scale6;
+      // v4.3.482: tail 列宽与直线支线同源（GEOM.BRANCH_COL_W × 本图缩放系数）。
+      // 移动端容器是 1:1 硬约束，tail 列让位给环（保底 BRANCH_COL_W×1.1 ≈ 现状 105px）。
+      var _tailCap = _isMobileView() ? GEOM.BRANCH_COL_W * scale6 : GEOM.BRANCH_COL_W * 1.6;
+      var tailAreaWidth = Math.min(_tailCap,
+                                   Math.max(GEOM.BRANCH_COL_W * 1.1,
+                                            _cw6Content - leftMargin - loopRectW - marginRight));
       
-      // 光丘尾区（环顶上方）：10 个尾站 × spLoop6
-      var tailCount6 = hikarigaokaStations.length - 1;
-      var tailHeight6 = tailCount6 > 0 ? tailCount6 * spLoop6 + 16 : 0;
-      
-      // 站名区：左右各留 GEOM.BRANCH_COL_W 级别宽度（站名朝外），桌面加宽
-      var _nameW6 = _isMobileView() ? GEOM.BRANCH_COL_W : GEOM.BRANCH_COL_W * 1.2;
-      svgW = leftMargin + _nameW6 + loopRectW + _nameW6 + marginRight;
-      if (_isMobileView() && svgW > _cw6Content) {
-        svgW = _cw6Content;
+      var naturalW = leftMargin + tailAreaWidth + loopRectW + marginRight;
+      if (_isMobileView() && naturalW > _cw6Content) {
+        loopRectW = Math.max(_cw6Content - leftMargin - tailAreaWidth - marginRight, 110 * scale6);
       }
-      svgH = marginTopBot + tailHeight6 + loopRectH + marginTopBot;
+      svgW = leftMargin + tailAreaWidth + loopRectW + marginRight;
+      svgH = loopRectH + marginTopBot * 2;
       
       // ============ Geometry calculation ============
-      var loopCx = leftMargin + _nameW6 + loopRectW / 2;
-      var loopCy = marginTopBot + tailHeight6 + loopRectH / 2;
+      // Loop center - derived from svg size, not independently set
+      var loopCx = svgW - marginRight - loopRectW / 2;
+      var loopCy = svgH / 2;
       var loopHalfW = loopRectW / 2;
       var loopHalfH = loopRectH / 2;
       
-      // Junction (Tochomae) = 环顶右端（右列顶）
-      var junctionX = loopCx + loopHalfW;
-      var junctionY = loopCy - loopHalfH + (0.5 / 14) * loopRectH;
+      // Junction (Tochomae) - MUST be derived from loop rectangle position formula
+      // = loop left edge + vertical midpoint (guarantees perfect alignment, no gaps)
+      var junctionX = loopCx - loopHalfW;
+      var junctionY = loopCy;
       
-      // 光丘尾：从 Tochomae 垂直向上，站名朝右（独立空间，不与环共享宽度）
-      var hikarigaokaLinePts = [{ x: junctionX, y: junctionY, side: 'right', stationId: hikarigaokaStations[0] }];
+      // Stub: short horizontal segment from loop side (creates "branching from loop side" realism)
+      // stubX = tail 列 x 位置（画布左缘 + 边距 10px），分叉引出段 = junctionX→stubX 水平线
+      var stubX = leftMargin + 10 * scale6;
+      var stubY = junctionY;
+      
+      // Tail: vertical line going up, stations arranged along vertical line
+      var tailCount = hikarigaokaStations.length - 1;
+      var tailTotalHeight = tailCount > 0 ? Math.min(loopRectH * 0.85, tailCount * spLoop6) + 32 : 0;
+      var tailStep = tailCount > 0 ? tailTotalHeight / tailCount : 0;
+      
+      // Tail station coordinates: first = junction, rest = along vertical line at stubX
+      var hikarigaokaLinePts = [{ x: junctionX, y: junctionY, side: 'left', stationId: hikarigaokaStations[0] }];
       for (var i = 1; i < hikarigaokaStations.length; i++) {
         hikarigaokaLinePts.push({ 
-          x: junctionX, 
-          y: junctionY - i * spLoop6, 
-          side: 'right', 
+          x: stubX, 
+          y: stubY - i * tailStep, 
+          side: 'left', 
           stationId: hikarigaokaStations[i] 
         });
       }
       
-      // 环站双列（山手线规则）：
-      // 右列（顶→底）：Tochomae 已在尾列，这里只放 stations[37..25]
+      // Loop station coordinates (perimeter calculation)
+      var perimeter = 2 * (loopRectW + loopRectH);
+      var startOffset = 2 * loopRectW + 1.5 * loopRectH;
       var loopPts6 = [];
-      for (var ri = 0; ri < 13; ri++) {
-        var _tR = (ri + 1.5) / 14;
-        loopPts6.push({ x: loopCx + loopHalfW, y: loopCy - loopHalfH + _tR * loopRectH, side: "right", stationId: stations[37 - ri] });
+      for (var i = 0; i < loopStations.length; i++) {
+        var pos = ((i / loopStations.length) * perimeter + startOffset) % perimeter;
+        var lx, ly, side;
+        if (pos < loopRectW) { 
+          lx = loopCx - loopHalfW + pos; 
+          ly = loopCy - loopHalfH; 
+          side = "top"; 
+        } else if (pos < loopRectW + loopRectH) { 
+          lx = loopCx + loopHalfW; 
+          ly = loopCy - loopHalfH + (pos - loopRectW); 
+          side = "right"; 
+        } else if (pos < 2 * loopRectW + loopRectH) { 
+          lx = loopCx + loopHalfW - (pos - loopRectW - loopRectH); 
+          ly = loopCy + loopHalfH; 
+          side = "bottom"; 
+        } else { 
+          lx = loopCx - loopHalfW; 
+          ly = loopCy + loopHalfH - (pos - 2 * loopRectW - loopRectH); 
+          side = "left"; 
+        }
+        loopPts6.push({ x: lx, y: ly, side: side, stationId: loopStations[i] });
       }
-      // 左列（顶→底）：stations[11..24]
-      for (var li = 0; li < 14; li++) {
-        var _tL = (li + 0.5) / 14;
-        loopPts6.push({ x: loopCx - loopHalfW, y: loopCy - loopHalfH + _tL * loopRectH, side: "left", stationId: stations[11 + li] });
-      }
+      // Override first station (junction) with exact coordinates derived from loop formula
+      loopPts6[0].x = junctionX;
+      loopPts6[0].y = junctionY;
+      loopPts6[0].side = "left";
       
-      // Combine: 尾站(Tochomae + 光丘向) 在前，环站（左列顶→底 + 右列底→顶）按站表 index 顺序
-      // stationCoords 顺序必须 = stations 站表 index 顺序（train 定位依赖 stationIndex）
-      var rightColIndexOrder = [];
-      for (var rbi = 25; rbi <= 37; rbi++) {
-        // loopPts6[0..12] = stations[37..25]（顶→底），按 index 25..37 取出
-        rightColIndexOrder.push(loopPts6[37 - rbi]);
-      }
-      stationCoords = hikarigaokaLinePts.concat(loopPts6.slice(13)).concat(rightColIndexOrder);
+      // Combine all station coords (tail stations first, then loop stations excluding junction)
+      stationCoords = hikarigaokaLinePts.concat(loopPts6.slice(1));
       
       // ============ Route elements for static layer ============
       // Main loop rectangle (heavier visual weight = primary)
@@ -629,15 +633,29 @@
         }
       });
       
-      // Tail: vertical line up from the loop top (junction) — lighter weight = secondary
+      // Stub: short horizontal line from loop side (lighter visual weight)
+      routeElements.push({
+        type: 'line',
+        attrs: { 
+          x1: junctionX, 
+          y1: junctionY, 
+          x2: stubX, 
+          y2: stubY, 
+          stroke: color, 
+          'stroke-width': 3, 
+          opacity: 0.5 
+        }
+      });
+      
+      // Tail: vertical line (lighter visual weight = secondary)
       if (hikarigaokaLinePts.length > 1) {
         var tailTopY = hikarigaokaLinePts[hikarigaokaLinePts.length - 1].y;
         routeElements.push({
           type: 'line',
           attrs: { 
-            x1: junctionX, 
-            y1: junctionY, 
-            x2: junctionX, 
+            x1: stubX, 
+            y1: stubY, 
+            x2: stubX, 
             y2: tailTopY, 
             stroke: color, 
             'stroke-width': 4, 
@@ -842,7 +860,7 @@
       branchGeom: branchGeom,
       routeElements: routeElements,
       junctionStation: isSixShapedLoop ? stations[0] : null,
-  junctionX: null,
+      junctionX: isSixShapedLoop ? junctionX : null,
       fusionMap: fusionMap || null
     };
     
@@ -893,8 +911,10 @@
     if (o.tx != null) { tx = o.tx; ty = o.ty; anchor = o.anchor || "start"; }
     else if (side === "top") { tx = o.x; ty = o.y - (isJunction ? 12 : 8); anchor = "middle"; }
     else if (side === "bottom") { tx = o.x; ty = o.y + (isJunction ? 16 : 13); anchor = "middle"; }
+    else if (side === "left" && geometry.isSixShapedLoop) { tx = o.x + (isJunction ? 10 : 8); ty = o.y + (isJunction ? 4 : 3); anchor = "start"; }
     else if (side === "left") { tx = o.x - (isJunction ? 12 : 8); ty = o.y + (isJunction ? 4 : 3); anchor = "end"; }
     else if (side === "dual") { tx = o.x - (isJunction ? 14 : 10); ty = o.y + 3; anchor = "end"; }
+    else if (side === "right" && geometry.isSixShapedLoop) { tx = o.x - (isJunction ? 12 : 8); ty = o.y + (isJunction ? 4 : 3); anchor = "end"; }
     else { tx = o.x + (isJunction ? 10 : 8); ty = o.y + 3; anchor = "start"; }
 
     var label = document.createElementNS(svgNS, "text");
@@ -910,8 +930,22 @@
     label.setAttribute("font-weight", isJunction ? "700" : "500");
     label.setAttribute("text-anchor", anchor);
     var _clampAvail = (side === "dual" || side === "left") ? (tx - 4) : ((side === "right") ? (svgW - 2 - tx) : 0);
-    // v4.3.483: 六形环双列化后站名方向与山手线统一（左列朝左/右列朝右/尾站朝右），
-    // clamp 走通用 side 规则，不再需要 junctionX 特判。
+    if (geometry.isSixShapedLoop) {
+      if (geometry.junctionX === null || o.x >= geometry.junctionX) {
+        // Loop stations: name area = half the loop width (shared by both sides)
+        var _sc6 = isMobileView ? 1.5 : 1.3;
+        var _m6r = isMobileView ? 66 : (20 * _sc6 + 12);
+        var _tw6 = 70 * _sc6;
+        var _lm6 = 8 * _sc6;
+        var _loopW6 = svgW - _lm6 - _tw6 - _m6r;
+        _clampAvail = Math.max(40, Math.floor(_loopW6 / 2) - 10);
+      } else if (side === "left") {
+        // v4.3.482: Tail stations (光丘方向) name flows RIGHT from stubX toward
+        // the loop's left edge. The generic branch above wrongly used tx-4
+        // (space to the left, ~31px) which crushed every tail label to 40px.
+        _clampAvail = Math.max(40, Math.floor(geometry.junctionX - tx - 4));
+      }
+    }
     if (_clampAvail > 0) label.setAttribute("data-clamp-avail", String(Math.max(40, Math.round(_clampAvail))));
 
     // Station name
