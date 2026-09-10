@@ -568,7 +568,12 @@
       var marginTopBot = 40 * scale6;
       // v4.3.482: tail 列宽与直线支线同源（GEOM.BRANCH_COL_W × 本图缩放系数）。
       // 移动端容器是 1:1 硬约束，tail 列让位给环（保底 BRANCH_COL_W×1.1 ≈ 现状 105px）。
-      var _tailCap = _isMobileView() ? GEOM.BRANCH_COL_W * scale6 : GEOM.BRANCH_COL_W * 1.6;
+      // v4.3.513: 光丘尾竖线不穿左列上方站名——桌面 tail 列扩到"竖线右侧容纳左列上方 5 字
+      // 全尺寸文字带"（三区分离：光丘尾文字带|竖线|左列上方文字带|环，junctionX≥stubX+10+88+10）；
+      // 移动端容器 1:1 硬约束下 tailCap 保持现状（剩余穿线站名用白色描边遮线，见 _renderStationNode）。
+      var _tailCap = _isMobileView()
+        ? GEOM.BRANCH_COL_W * scale6
+        : Math.max(GEOM.BRANCH_COL_W * 1.6, 10 + 105.6 + 10 + 88 + 10);
       var tailAreaWidth = Math.min(_tailCap,
                                    Math.max(GEOM.BRANCH_COL_W * 1.1,
                                             _cw6Content - leftMargin - loopRectW - marginRight));
@@ -1051,6 +1056,16 @@
     label.setAttribute("text-anchor", anchor);
     // v4.3.500: 左右侧站名垂直居中于圆点（top/bottom 保持基线在圆点上下方）
     if (side !== "top" && side !== "bottom") label.setAttribute("dominant-baseline", "central");
+    // v4.3.513: 移动端容器窄（tailAreaWidth 上限 < 三区分离需求），光丘尾竖线（stubX）穿左列上方站名——
+    // 白色描边遮线（线路从文字后穿过）。桌面端 tail 列已扩至三区分离（junctionX≥stubX+10+88+10），无穿线不触发。
+    if (geometry.isSixShapedLoop && geometry.isDualLoop6 && isMobileView &&
+        !isJunction && side === "left" &&
+        Math.abs(o.x - geometry.junctionX) < 0.5 && o.y < geometry.junctionY) {
+      label.setAttribute("paint-order", "stroke");
+      label.setAttribute("stroke", "#ffffff");
+      label.setAttribute("stroke-width", "3");
+      label.setAttribute("stroke-linejoin", "round");
+    }
     var _clampAvail = (side === "dual" || side === "left") ? (tx - 4) : ((side === "right") ? (svgW - 2 - tx) : 0);
     if (geometry.isSixShapedLoop) {
       if (geometry.isDualLoop6) {
