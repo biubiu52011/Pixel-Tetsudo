@@ -402,6 +402,18 @@
     "NaritaAbikoBranch": { "Kohoku": "Kohoku-Narita" }
   };
 
+  // v4.3.494: 直通系统（ODPT 独立 railway 推送、本地无同名线）的列车归属表。
+  // 根因: 相鉄直通(SotetsuDirect)列车 railway=JR-East.SotetsuDirect, fromStation 为专属站 ID
+  //   (Osaki/武蔵小杉/西大井/羽沢横浜国大) —— 本地无 SotetsuDirect 线 → 反查无映射 →
+  //   fallback 站数最多 → Yamanote(30站) 误配山手线详情图。
+  // 处理: prefer 顺序选择归属线(跨 operator 放行 SotetsuShin-Yokohama), exclude 排除环线。
+  var THROUGH_RAILWAY_FALLBACK = {
+    "SotetsuDirect": {
+      exclude: ["Yamanote"],
+      prefer: ["SotetsuShin-Yokohama", "Yokosuka", "Saikyo", "ShonanShinjuku"]
+    }
+  };
+
   function loadTrainPositions() {
     try {
       var positionSource = window.ODPT_TRAIN_POSITIONS || window.ODPT_TRAINS;
@@ -457,7 +469,12 @@
           Object.keys(allLines).forEach(function(lid) {
             var line = allLines[lid];
             var lop = TransitConstants && typeof TransitConstants.normalizeOp === "function" ? TransitConstants.normalizeOp(line.operator) : line.operator;
-            if (!line || lop !== top || !line.stations) return;
+            if (!line || !line.stations) return;
+            // v4.3.494: 直通系统（SotetsuDirect）列车 operator=JR-East，但羽沢横浜国大归属
+            // SotetsuShin-Yokohama 线（operator=Sotetsu）——prefer 表内线路跨 operator 放行，
+            // 否则该站始发列车匹配不到任何线而丢失。
+            var _thruCfg = THROUGH_RAILWAY_FALLBACK[railwayName];
+            if (lop !== top && !(_thruCfg && _thruCfg.prefer.indexOf(lid) >= 0)) return;
             var idx = line.stations.indexOf(stationKey);
             // v4.3.407: ODPT 站 ID 与项目站表差异（连字符 Musashi-Nakahara→MusashiNakahara、
             // 大小写 Inagi-Naganuma→Inaginaganuma）——归一化（去连字符+小写）兜底匹配
@@ -496,7 +513,19 @@
                 }
               }
             }
-            // 2. 如果没有精确匹配，只选择主要线路（车站数量>=10）
+            // 2. 直通系统（v4.3.494）: 按 prefer 归属表顺序选择，排除环线
+            if (!targetLine && THROUGH_RAILWAY_FALLBACK[railwayName]) {
+              var _thru = THROUGH_RAILWAY_FALLBACK[railwayName];
+              for (var _pi = 0; _pi < _thru.prefer.length; _pi++) {
+                var _plid = _thru.prefer[_pi];
+                if (_thru.exclude && _thru.exclude.indexOf(_plid) >= 0) continue;
+                for (var _mi2 = 0; _mi2 < matchingLines.length; _mi2++) {
+                  if (matchingLines[_mi2].lid === _plid) { targetLine = matchingLines[_mi2]; break; }
+                }
+                if (targetLine) break;
+              }
+            }
+            // 3. 如果没有精确匹配，只选择主要线路（车站数量>=10）
             if (!targetLine) {
               var mainLines = matchingLines.filter(function(ml) {
                 return ml.line.stations && ml.line.stations.length >= 10;

@@ -267,7 +267,7 @@ If the answer is NO, the change is REJECTED.
 | ~~Odawara(小田原線) 駅リスト末端に JR 東海道系駅が混入~~ | FIXED 2026-09-10 | ODPT 公式（Odakyu.Odawara 47 駅/Station API OH41-46）により全面修正——4 錯誤駅（Oiso/Ninomiya/Kozu/Kamonomiya）除去・Iriuda（箱根登山鉄道駅）除去・新駅 6 件追加（ShinMatsuda 新松田 OH41/Kaisei 開成 OH42/Kayama 栢山 OH43/Tomizu 富水 OH44/Hotaruda 螢田 OH45/Ashigara 足柄 OH46）、46→47 駅に正序再構築（下記 Freeze 例外 4.3.493）。 |
 | 13 image path fixes | Deferred | Asset mapping, no product impact |
 | ~~Noda（東武アーバンパークライン）の Sakae（栄）駅~~ | FIXED 2026-09-08 | 東武野田線に栄駅は実在しない（正しくは逆井 Sakasai）。wiki 核验により Noda を正序 35 駅に全面再構築、重複線 TobuNoda を削除、誤 ID 28 件を正 ID に置換・i18n 補完（下記 Freeze 例外）。 |
-| SotetsuDirect（相鉄直通）列車が山手線 posMap に誤マッチ | P1 | Osaki 等共用駅のため fromStation 一致で山手線に誤配（railway フィールド無視）。湘南新宿ライン/相鉄直通線の車が山手線詳細図に表示される。
+| ~~SotetsuDirect（相鉄直通）列車が山手線 posMap に誤マッチ~~ | FIXED 2026-09-10 | ODPT 実証（JR-East.SotetsuDirect 独立 railway、fromStation 専属駅 ID）により修正（4.3.494）——THROUGH_RAILWAY_FALLBACK 表（SotetsuDirect→prefer SotetsuShin-Yokohama/Yokosuka/Saikyo/ShonanShinjuku、exclude Yamanote）+ 羽沢横浜国大の跨 operator 放行。検証: Osaki→Saikyo / MusashiKosugi→Yokosuka / NishiOi→Yokosuka / HazawaYokohamaKokudai→SotetsuShin-Yokohama、Yamanote 正常列車不受影響、integration_test 28/28。
 
 ---
 
@@ -293,6 +293,19 @@ If the answer is NO, the change is REJECTED.
 **未修复项（数据源限制，非代码缺陷）**：41 条地方线（BanetsuEast/Echigo/Ou/Ryomo/Uetsu 等）ODPT 无 Train/TrainTimetable 数据，实时与推定均无法覆盖；UI 按现状显示（无实时时状态缺失）
 
 - 2026-09-10 ユーザー指示（小田原線站表混入修正・Freeze 例外、ODPT 準拠）: 小田原線（Odawara）駅リストを ODPT 公式（odpt:Railway:Odakyu.Odawara 47 駅站序 + odpt:Station API）に完全準拠させ再構築（4.3.493）。除去 5 駅——JR 東海道系 4 駅（Oiso 大磯/Ninomiya 二宮/Kozu 国府津/Kamonomiya 鴨宮、Odakyu Station API に記録なし）＋箱根登山鉄道系 Iriuda 入生田（ODPT Odawara 線に無し、Zama→Ebina 直結）。追加 6 駅（ODPT 公式駅番号/geo 準拠）——ShinMatsuda 新松田 OH41（35.34476,139.13965）/Kaisei 開成 OH42/ Kayama 栢山 OH43/Tomizu 富水 OH44/Hotaruda 螢田 OH45/Ashigara 足柄 OH46。46→47 駅、尾部は …Hadano→Shibusawa→ShinMatsuda→Kaisei→Kayama→Tomizu→Hotaruda→Ashigara→Odawara。stations 実体 6 件追加（581→587）、stationLines（新 6 駅=Odawara、誤 4 駅から Odawara 除去）、lineStationOrder[Odawara] 47 駅再構築、Odawara.transferStations 28→20（誤 4 駅宣言除去、ShonanShinjuku/Tokaido/TokaidoMain 側の誤乗換 9 件も除去）、name_map 6 件、station_i18n 6 件（ShinMatsuda/Kayama/Tomizu/Hotaruda 新規、Kaisei/Ashigara 既存あり）。i18n の誤 4 駅条目は JR 側のため残置。Matsuda 空実体（御殿場線未収録）は残置。検証: 本地 47 駅と ODPT 47 駅が位置まで一一対応、JSON 構文 OK、bundle 再生成（node data/core/gen-file-data.js）、integration_test 28/28。
+## 4.3.494（2026-09-10，SotetsuDirect 相鉄直通列车误配山手线修复）
+**问题**：Known Debt P1——相鉄直通列车显示在山手线详细图（posMap 误配）。
+**根因实证（ODPT API 实拉）**：
+- ODPT 用独立 railway `odpt.Railway:JR-East.SotetsuDirect` 推送相鉄直通列车，fromStation 为 SotetsuDirect 专属站 ID（Osaki/MusashiKosugi/NishiOi/HazawaYokohamaKokudai）
+- 本地无 SotetsuDirect 线 → LINE_RAILWAY_CODE 反查无映射 → fallback "站数最多" → Yamanote（30 站，Osaki 共用）误配
+- 羽沢横浜国大始发列车因 operator 过滤（列车 operator=JR-East vs SotetsuShin-Yokohama 线 operator=Sotetsu）匹配不到任何线而丢失
+**修复**（js/data-fusion.js）：
+- 新增 THROUGH_RAILWAY_FALLBACK 表：SotetsuDirect → exclude:["Yamanote"] + prefer:["SotetsuShin-Yokohama","Yokosuka","Saikyo","ShonanShinjuku"]
+- matchingLines 收集：直通系统 prefer 表内线路跨 operator 放行（SotetsuShin-Yokohama 可承接 JR-East 列车）
+- fallback 选择：直通系统按 prefer 顺序归属，排除环线；普通线路逻辑不变
+**验证**：Osaki→Saikyo / MusashiKosugi→Yokosuka / NishiOi→Yokosuka / HazawaYokohamaKokudai→SotetsuShin-Yokohama 全对；对照组 Yamanote 正常列车不受影响；node --check 通过；integration_test.js 28/28
+**遗留**：LINE_RAILWAY_CODE 未加 SotetsuDirect 条目（本地无此线，加了反查也匹配不到）；夜间 SotetsuDirect 列车仅 1 列（283M MusashiKosugi→Ebina），白天班次多的归属行为待用户线上验收
+
 Last updated: 2026-09-09
 Version: RC-2
 ---
@@ -516,3 +529,4 @@ Before tagging a release:
 - 2026-09-10 用户指示（山手线回退・4.3.489）: 4.3.486-488 环线双列统一整体回退——用户判定方向错误（「弄反了，把大江户线的间距调整到山手线了」）。trains-page.js 恢复至 4.3.485（ac15b47）原始实现：①山手线恢复 isYamanote 双列特例（右列 [8..0]+[29..24] 田端→東京→品川、左列 [9..23] 駒込→大崎、_colPitch 按换乘 chip 自适应）；②大江户线（isSixShapedLoop）恢复周长均布原版（spLoop6=26×scale、环高=环段站数×26×scale−40×scale）；③删除 RING_SPLIT_MAP 与 4.3.488 stationId 坐标索引改动。trains.html 引用回退至 v=4.3.489。验证: node --check OK。
 - 2026-09-10 用户指示（删除 isYamanote 特例机制・4.3.491）: 删除 trains-page.js 硬编码的 `lineId === "Yamanote"` 特判（isYamanote 变量 + 分支触发），但山手线双列画法（右列 [8..0]+[29..24] 田端→東京→品川、左列 [9..23] 駒込→大崎、_colPitch 按换乘 chip 自适应）逐字节原样保留——触发改为数据驱动：railway_data.json Yamanote 块新增 `"isDoubleColumnLoop": true`（Freeze 例外，先例 isSixShapedLoop）。完整 Provider→Consumer 链：railway_data.json（唯一真源）→ gen-file-data.js 重生成 railway-data.file.js（file:// bundle，改 JSON 后已重跑）→ trains-page.js getLinesData 包装新增 `isDoubleColumnLoop: l.isDoubleColumnLoop === true`（非融合路径）→ data-fusion.js fuseLine 融合映射新增 `isDoubleColumnLoop: line.isDoubleColumnLoop === true`（融合路径，fuseLine 读 DataLayer/UNIFIED_LINES 原始对象故属性可达）→ computeRouteGeometry 以 `line.isDoubleColumnLoop === true` 触发双列分支。_computeLineHash 追加 isDoubleColumnLoop 维度（几何影响输入进缓存键，防陈旧几何）。Oedo（isSixShapedLoop 六形环分支）与其余环线周长均布路径零改动。trains.html 引用 v=4.3.491（trains-page.js/data-fusion.js）。※4.3.490 曾删除 isYamanote 同时把双列画法一并删掉（环线统一周长均布）被回退——本版本保留画法仅数据化触发，勿再走统一化路线。验证: node --check 2 文件 OK、JSON 解析 OK（Yamanote isDoubleColumnLoop=true / Oedo=false）、双列画法主体 diff 零改动、js/ 下 isYamanote 零残留、bundle 已含新属性。
 - 2026-09-10 用户指示（山手线双列宽度收窄・4.3.492）: 山手线双列画法环宽收窄——标准环线分支 rectW 基准 110→96（约 -13%）。svgW 改为派生式 `rectW + 150*loopScale`（原 260=110+150 合写拆开：两侧站名空间恒 75×scale 不变，单一调整点，防未来只改其一导致画布/环宽失配）。数值：移动 rectW 144px（原 165）/svgW 369px（原 390）；桌面 rectW 153.6px（原 176）/svgW 393.6px（原 416）。安全性：_renderStationNode 左列 anchor=end 朝左、右列 anchor=start 朝右，换乘 chip 在列外侧排布，两列之间仅有站圆与线——收窄 rectW 不挤压任何文字。六形环（大江户线）保持 110 不动，4.3.483c「环宽对齐山手线」注释已更新（4.3.492 起山手线基准独立为 96 不再对齐，用户只指示山手线）。标准环线分支当前唯一消费者为山手线双列（Oedo 走 isSixShapedLoop 分支）。trains.html 引用 v=4.3.492。验证: node --check OK、数值推导（两侧留白恒 75×scale）、六形环分支零改动。
+- 2026-09-10 用户指示（山手线双列宽度缩减50%・4.3.494）: rectW 基准 96→48（对 4.3.492 再减半）。svgW 派生式自动跟随：48+150=198×scale——移动 rectW 72px（原 144）/svgW 297px（原 369）；桌面 rectW 76.8px（原 153.6）/svgW 316.8px（原 393.6）。两侧站名空间恒 75×scale（100.5/102.5px 移动、108/110px 桌面，随画布联动不缩水）。六形环（大江户线）仍保持 110 不动。trains.html 引用 v=4.3.494。验证: node --check OK、数值推导（移动 svgW 297≤410 容器、两列站名可用空间充足）、六形环分支零改动。※连续收窄轨迹：110（原始）→96（4.3.492，-13%）→48（4.3.494，再-50%）。
