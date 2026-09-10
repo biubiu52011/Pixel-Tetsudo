@@ -601,7 +601,9 @@
       var junctionY = loopCy - loopHalfH + ((_juncIdx6 + 0.5) / _halfN) * loopRectH; // 左列第 7 位
       
       // Stub: 从环左缘（Tochomae）水平向左到 stubX（画布左缘 + 边距 10px），再垂直向上
-      var stubX = leftMargin + 10 * scale6;
+      // v4.3.511: 光丘尾站名改朝左（用户指令）——竖线右移，保证最宽站
+      // （西新宿五丁目 6 字 ≈105.6px）全尺寸朝左时文字左缘仍 ≥ leftMargin（12/12.8px）。
+      var stubX = Math.max(leftMargin + 10 * scale6, leftMargin + 10 + 105.6);
       var stubY = junctionY;
       
       // Tail station coordinates: first = junction (Tochomae, 环左缘 1/2 处), rest = along vertical line at stubX
@@ -946,10 +948,8 @@
       var soff = (sc.stationId === geometry.junctionStation) ? 14 : 10;
       var sRect;
       if (Math.abs(sc.x - jx) < 0.5) {
-        // 左列主干站：双排固定规则（上方朝右、下方朝左）
-        sRect = (sc.y < jy)
-          ? [sc.x + soff, sc.x + soff + sW, sc.y - 8, sc.y + 8]
-          : [sc.x - soff - sW, sc.x - soff, sc.y - 8, sc.y + 8];
+        // v4.3.511: 左列主干站统一朝左（上方由朝右改朝左，与左列下方一致）
+        sRect = [sc.x - soff - sW, sc.x - soff, sc.y - 8, sc.y + 8];
       } else {
         // 右列主干站：朝右
         sRect = [sc.x + soff, sc.x + soff + sW, sc.y - 8, sc.y + 8];
@@ -994,20 +994,41 @@
     if (o.tx != null) { tx = o.tx; ty = o.ty; anchor = o.anchor || "start"; }
     else if (side === "top") { tx = o.x; ty = o.y - (isJunction ? 14 : 10); anchor = "middle"; }
     else if (side === "bottom") { tx = o.x; ty = o.y + (isJunction ? 19 : 15); anchor = "middle"; }
-    // v4.3.509: 六形环双列——**主干（环站）按双排规则固定**（左列上方朝右、左列下方朝左、
-    // 右列朝右，v4.3.504）；**枝干（光丘尾 10 站 + Tochomae junction）站名默认朝右**，
-    // 右侧被主干（环）占用（空间挤压放不下）才放左（用户裁定"枝干如果发现某一侧被
-    // 主干占用默认就在另外一侧"）。
+    // v4.3.509/511: 六形环双列——**主干（环站）左列统一朝左**（v4.3.511 用户指令：
+    // 左列上方麻布十番〜新宿由朝右改朝左，与左列下方一致）；**枝干光丘尾站名朝左**
+    // （v4.3.511 用户指令），右缘动态避让左列上方站名带（被避让站右缘左移，
+    // 画布左限由 clamp 缩字兜底）；**Tochomae junction 保持岔路朝右**（v4.3.505 用户裁定）。
     else if (side === "left" && geometry.isSixShapedLoop && geometry.isDualLoop6) {
-      var _sixSide;
+      var _sixSide, _sixTx = null;
       if (o.x < geometry.junctionX || isJunction) {
-        // 枝干站：主干占用检测（默认右，右被主干占用→左）
-        _sixSide = _pickSixLabelSide(o, geometry, svgW);
+        if (isJunction) {
+          // Tochomae junction：岔路站名朝右（v4.3.505 用户裁定，占用检测仅作兜底）
+          _sixSide = _pickSixLabelSide(o, geometry, svgW);
+        } else {
+          // 光丘尾站名朝左——右缘避让左列上方站名带（文字带 y±8 重叠即避让）
+          _sixSide = "left";
+          _sixTx = o.x - 10;
+          var _scs6 = geometry.stationCoords || [];
+          for (var _b6 = 0; _b6 < _scs6.length; _b6++) {
+            var _bc6 = _scs6[_b6];
+            if (_bc6.stationId === o.stationId) continue;
+            if (Math.abs(_bc6.x - geometry.junctionX) >= 0.5) continue; // 只看左列站
+            if (!(_bc6.y < geometry.junctionY)) continue;               // 只看左列上方
+            if (Math.abs(_bc6.y - o.y) >= 16) continue;                 // 文字带（±8）不重叠
+            var _bn6 = (window.RailwayDB && window.RailwayDB.resolveStationName)
+              ? (window.RailwayDB.resolveStationName(_bc6.stationId, window.currentLang) || _bc6.stationId)
+              : _bc6.stationId;
+            var _bw6 = (_bn6 || "").length * 16 * 1.1;
+            var _bl6 = geometry.junctionX - 10 - _bw6;                  // 左列站名朝左的左缘
+            var _lim6 = _bl6 - 4;
+            if (_sixTx > _lim6) _sixTx = _lim6;
+          }
+        }
       } else {
-        // 主干环站：双排固定规则（v4.3.504）
-        _sixSide = (o.y < geometry.junctionY) ? "right" : "left";
+        // 主干环站：左列统一朝左（左列上方由朝右改朝左，v4.3.511）
+        _sixSide = "left";
       }
-      tx = (_sixSide === "right") ? (o.x + (isJunction ? 14 : 10)) : (o.x - (isJunction ? 14 : 10));
+      tx = (_sixTx != null) ? _sixTx : ((_sixSide === "right") ? (o.x + (isJunction ? 14 : 10)) : (o.x - (isJunction ? 14 : 10)));
       ty = o.y; anchor = (_sixSide === "right") ? "start" : "end";
     }
     else if (side === "left" && geometry.isSixShapedLoop && !geometry.isDualLoop6) { tx = o.x + (isJunction ? 14 : 10); ty = o.y; anchor = "start"; }
@@ -1033,12 +1054,10 @@
     var _clampAvail = (side === "dual" || side === "left") ? (tx - 4) : ((side === "right") ? (svgW - 2 - tx) : 0);
     if (geometry.isSixShapedLoop) {
       if (geometry.isDualLoop6) {
-        // v4.3.506: 双列模式——右列站走通用 clamp（svgW-2-tx）。
-        // 站名朝右的 left 站（_sixSide==='right'：光丘尾、左列上方 S32..S37、Tochomae）走窄空间 clamp，
-        // 但空间不同：
-        // - 光丘尾（x<junctionX，环外）：名到环左缘前（junctionX-4-tx）
-        // - 左列上方站与 Tochomae（x==junctionX，环内）：名到右列圆点左缘前（junctionX+loopRectW−7−4−tx，
-        //   58px 窄空间，5 字站名经 clamp 缩至 10px 恰好贴圆点不重叠）
+        // v4.3.506/511: 双列模式——右列站走通用 clamp（svgW-2-tx）。
+        // 站名朝右的 left 站（_sixSide==='right'，现仅 Tochomae junction）走窄空间 clamp：
+        // - 左列上方站与 Tochomae（x==junctionX，环内）：名到右列圆点左缘前（junctionX+loopRectW−7−4−tx）
+        // 光丘尾与左列上方站已改朝左（v4.3.511），走通用 left clamp（tx-4，避让后的右缘）。
         if (side === "left" && _sixSide === "right") {
           var _rDotL6 = geometry.junctionX + (geometry.loopRectW || 72) - 7;
           _clampAvail = o.x < geometry.junctionX
@@ -1473,6 +1492,8 @@
           if (_useW > _av) {
             // v4.3.504: 下限 12→10——六形环左列上方站名（环段尾，朝环内）在 58px 环内窄空间
             // 需 10px 才能完整放下（5 字=55px，恰好贴右列圆点左缘不重叠）。
+            // v4.3.511: 左列上方已改朝左（不再走该窄空间）；下限 10px 仍对光丘尾避让后
+            // 与左列站名带重叠的站有效（落合南長崎 5 字≈11.5px）。
             var _nf = Math.max(10, _f * _av / _useW);
             _ct.setAttribute("font-size", String(Math.round(_nf * 10) / 10));
           }
