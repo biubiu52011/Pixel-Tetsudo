@@ -994,6 +994,9 @@
       var ix0, iy0;
       iy0 = (side === "top") ? (o.y + 14) : (ty + (isJunction ? 14 : 9)); // v4.3.500: chip 在站名下方，避让圆点底缘（+2px）
       if (iy0 < 2) iy0 = 2;
+      // v4.3.501 对齐规则（用户规定）：换乘图标块必须有一边与站名文字侧边对齐——
+      // 站名在圆点右侧（anchor=start）→ chip 左缘=文字左缘；站名在左侧（anchor=end）→
+      // chip 右缘=文字右缘；顶底站名（anchor=middle）→ chip 居中于文字。
       if (anchor === "end") { ix0 = tx - totalW; }
       else if (anchor === "start") { ix0 = tx; }
       else { ix0 = tx - totalW / 2; }
