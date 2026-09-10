@@ -545,16 +545,20 @@
         return mx;
       };
       var _loopN = loopStations.length;
-      // v4.3.503: 支线从环中心支出去——Tochomae(junction) 移到环顶正中央，环上 27 站分列：
-      // 左列 14 站（loopStations[1..14]，顶→下）、右列 13 站（loopStations[15..27]，顶→下）。
-      var _leftN6 = Math.ceil((_loopN - 1) / 2); // 28 → 14
-      var _rightN6 = _loopN - 1 - _leftN6;        // 28 → 13
+      // v4.3.504: 支线从环左侧 1/2 处展开（参考车站实际位置——都庁前在环左半）：
+      // Tochomae(junction) 在左列第 7 位（环左缘、中点偏上 0.5/14×rectH，最接近 1/2 处）；
+      // 左列（顶→下）= [S32..S37, Tochomae, S11..S17]（14 站）、右列（顶→下）= [S18..S31]（14 站）。
+      var _halfN = Math.ceil(_loopN / 2); // 28 → 14/14
+      var _juncIdx6 = Math.floor((_halfN - 1) / 2); // Tochomae 左列索引（6 = 第 7 位）
       var _leftIds6 = [], _rightIds6 = [];
-      for (var _s6 = 0; _s6 < _leftN6; _s6++) _leftIds6.push(loopStations[1 + _s6]);
-      for (var _s6b = 0; _s6b < _rightN6; _s6b++) _rightIds6.push(loopStations[1 + _leftN6 + _s6b]);
+      for (var _s6 = 0; _s6 < _juncIdx6; _s6++) _leftIds6.push(loopStations[_loopN - _juncIdx6 + _s6]); // S32..S37（环段尾）
+      _leftIds6.push(loopStations[0]); // Tochomae
+      for (var _s6b = 0; _s6b < _halfN - 1 - _juncIdx6; _s6b++) _leftIds6.push(loopStations[1 + _s6b]); // S11..S17（环段头）
+      var _rightStart = 1 + (_halfN - 1 - _juncIdx6); // 8 → S18
+      for (var _s6c = 0; _s6c < _halfN; _s6c++) _rightIds6.push(loopStations[_rightStart + _s6c]); // S18..S31
       var _pitch6 = Math.max(_colPitch6(_leftIds6), _colPitch6(_rightIds6));
-      // 左列 14 站更密（站距 rectH/14），右列 13 站自动更宽（rectH/13）；站距密度与 v4.3.502 一致。
-      var _needH6 = _pitch6 * (_leftN6 - 1);
+      // 左右列各 14 站（站距 rectH/14），与 v4.3.502 站距密度一致。
+      var _needH6 = _pitch6 * (_halfN - 1);
       if (_needH6 > loopRectH) loopRectH = _needH6;
       
       var leftMargin = 8 * scale6;
@@ -575,12 +579,13 @@
       }
       svgW = leftMargin + tailAreaWidth + loopRectW + marginRight;
       // Tail 高度先算（依赖 loopRectH），svgH 须同时容纳环（垂直居中）与向上伸出的光丘尾。
-      // v4.3.503: junction 在环顶正中央，tail 顶 = loopCy−loopHalfH−tailTotalHeight ≥ 边距
+      // v4.3.504: junction 在左列第 7 位（中点偏上 0.5/14×rectH），tail 顶 = loopCy−juncOff−tailTotalHeight ≥ 边距
       var tailCount = hikarigaokaStations.length - 1;
       var tailTotalHeight = tailCount > 0 ? Math.min(loopRectH * 0.85, tailCount * spLoop6) + 32 : 0;
       var tailStep = tailCount > 0 ? tailTotalHeight / tailCount : 0;
+      var _juncOff6 = loopRectH * Math.abs(0.5 - (_juncIdx6 + 0.5) / _halfN); // 0.5/14×rectH ≈ 36px
       svgH = Math.max(loopRectH + marginTopBot * 2,
-                      2 * (marginTopBot + loopRectH / 2 + tailTotalHeight));
+                      2 * (marginTopBot + _juncOff6 + tailTotalHeight));
       
       // ============ Geometry calculation ============
       // Loop center - derived from svg size, not independently set
@@ -590,16 +595,16 @@
       var loopHalfH = loopRectH / 2;
       
       // Junction (Tochomae) - MUST be derived from loop rectangle position formula
-      // v4.3.503: 支线从环中心支出去——junction = 环顶正中央（环的水平中心线 x=loopCx），
-      // 光丘尾从环顶中央垂直向上（非 4.3.502 的左上角）。左列站 x 另用 _leftColX。
-      var junctionX = loopCx;               // 环中心 x（Tochomae 与 tail 列共用）
-      var junctionY = loopCy - loopHalfH;   // 环顶 y = Tochomae y
+      // v4.3.504: 支线从环左侧 1/2 处展开（都庁前实际在环左半）——junction = 环左缘、
+      // 左列第 7 位（y=loopCy−0.5/14×rectH，中点偏上 36px 取最接近）。光丘尾水平 stub 后向上。
+      var junctionX = loopCx - loopHalfW;   // 环左缘 x = Tochomae x（左列站 x）
+      var junctionY = loopCy - loopHalfH + ((_juncIdx6 + 0.5) / _halfN) * loopRectH; // 左列第 7 位
       
-      // Stub: 环顶中央直接向上引出（无水平段）——stubX = loopCx 与 tail 列重合，stub 为零长
-      var stubX = loopCx;
+      // Stub: 从环左缘（Tochomae）水平向左到 stubX（画布左缘 + 边距 10px），再垂直向上
+      var stubX = leftMargin + 10 * scale6;
       var stubY = junctionY;
       
-      // Tail station coordinates: first = junction (Tochomae, 环顶中央), rest = along vertical line at loopCx
+      // Tail station coordinates: first = junction (Tochomae, 环左缘 1/2 处), rest = along vertical line at stubX
       var hikarigaokaLinePts = [{ x: junctionX, y: junctionY, side: 'left', stationId: hikarigaokaStations[0] }];
       for (var i = 1; i < hikarigaokaStations.length; i++) {
         hikarigaokaLinePts.push({ 
@@ -610,22 +615,26 @@
         });
       }
       
-      // v4.3.503: 环上 27 站左右二分（双列）——左列 14 站（loopStations[1..14]，顶→下）、
-      // 右列 13 站（loopStations[15..27]，顶→下）；Tochomae 独立在环顶中央（tail junction）。
-      // 站序流：Tochomae→左列下→环底→右列下→右列上→环顶→Tochomae（闭合）。
-      var _leftColX = loopCx - loopHalfW;
+      // v4.3.504: 环段 27 站 + Tochomae 分左右两列（14/14）——左列（顶→下）=
+      // [S32..S37（麻布十番…新宿）, Tochomae, S11..S17（新宿西口…春日）]，右列（顶→下）= [S18..S31（本郷三丁目…赤羽橋）]。
+      // 站序流：Tochomae→左列下（春日）→环底→右列下（本郷三丁目）→右列上（赤羽橋）→环顶→
+      // 左列上（麻布十番…新宿）→Tochomae（闭合）。
+      var _leftOrder6 = [];
+      for (var _lo6 = 0; _lo6 < _juncIdx6; _lo6++) _leftOrder6.push(loopStations[_loopN - _juncIdx6 + _lo6]); // S32..S37
+      _leftOrder6.push(loopStations[0]); // Tochomae
+      for (var _lo6b = 0; _lo6b < _halfN - 1 - _juncIdx6; _lo6b++) _leftOrder6.push(loopStations[1 + _lo6b]); // S11..S17
       var loopPts6 = [];
-      for (var li6 = 0; li6 < _leftN6; li6++) {
-        var _tl6 = (li6 + 0.5) / _leftN6;
-        loopPts6.push({ x: _leftColX, y: loopCy - loopHalfH + _tl6 * loopRectH, side: "left", stationId: loopStations[1 + li6] });
+      for (var li6 = 0; li6 < _halfN; li6++) {
+        var _tl6 = (li6 + 0.5) / _halfN;
+        loopPts6.push({ x: junctionX, y: loopCy - loopHalfH + _tl6 * loopRectH, side: "left", stationId: _leftOrder6[li6] });
       }
-      for (var ri6 = 0; ri6 < _rightN6; ri6++) {
-        var _tr6 = (ri6 + 0.5) / _rightN6;
-        loopPts6.push({ x: loopCx + loopHalfW, y: loopCy - loopHalfH + _tr6 * loopRectH, side: "right", stationId: loopStations[1 + _leftN6 + ri6] });
+      for (var ri6 = 0; ri6 < _halfN; ri6++) {
+        var _tr6 = (ri6 + 0.5) / _halfN;
+        loopPts6.push({ x: loopCx + loopHalfW, y: loopCy - loopHalfH + _tr6 * loopRectH, side: "right", stationId: loopStations[_rightStart + ri6] });
       }
       
-      // Combine all station coords (tail stations first, then loop stations)
-      stationCoords = hikarigaokaLinePts.concat(loopPts6);
+      // Combine all station coords (tail stations first, then loop stations excluding junction)
+      stationCoords = hikarigaokaLinePts.concat(loopPts6.filter(function(_pt6){ return _pt6.stationId !== stations[0]; }));
       
       // ============ Route elements for static layer ============
       // Main loop rectangle (heavier visual weight = primary)
@@ -645,8 +654,19 @@
         }
       });
       
-      // v4.3.503: stub 段已无（junction 在环顶中央 x=loopCx，tail 线 x1=stubX=loopCx 直接
-      // 从环顶中央垂直向上——支线从环中心支出去，无需水平引出段）。
+      // Stub: 从环左缘（Tochomae）水平向左的引出段（v4.3.504 恢复——支线从环左侧 1/2 处展开）
+      routeElements.push({
+        type: 'line',
+        attrs: { 
+          x1: junctionX, 
+          y1: junctionY, 
+          x2: stubX, 
+          y2: stubY, 
+          stroke: color, 
+          'stroke-width': 3, 
+          opacity: 0.5 
+        }
+      });
       
       // Tail: vertical line (lighter visual weight = secondary)
       if (hikarigaokaLinePts.length > 1) {
@@ -865,7 +885,8 @@
       routeElements: routeElements,
       junctionStation: isSixShapedLoop ? stations[0] : null,
       junctionX: isSixShapedLoop ? junctionX : null,
-      junctionY: isSixShapedLoop ? junctionY : null, // v4.3.503: 环顶 y（tail 站名方向/紧致 clamp 依据）
+      junctionY: isSixShapedLoop ? junctionY : null, // v4.3.504: 左列第 7 位 y（站名方向/紧致 clamp 依据）
+      loopRectW: isSixShapedLoop ? loopRectW : null, // v4.3.504: 环宽（左列上方站 clamp 到右列圆点前）
       fusionMap: fusionMap || null
     };
     
@@ -942,11 +963,16 @@
     var _clampAvail = (side === "dual" || side === "left") ? (tx - 4) : ((side === "right") ? (svgW - 2 - tx) : 0);
     if (geometry.isSixShapedLoop) {
       if (geometry.isDualLoop6) {
-        // v4.3.502: 双列模式——环内左右列站名朝外，走通用 clamp（940：左列 tx-4 / 右列 svgW-2-tx）；
-        // v4.3.503: 光丘尾（环顶上方 o.y < junctionY）站名朝右，可用空间 = 到画布右缘
-        // （tail 与右列站 y 带分离，水平带重叠也无妨）。
+        // v4.3.504: 双列模式——Tochomae/左列下方站/右列站走通用 clamp（940：左列 tx-4 / 右列 svgW-2-tx）。
+        // y<junctionY 的 left 站（环段尾 S32..S37 与光丘尾）站名都朝右，但空间不同：
+        // - 光丘尾（x<junctionX，环外）：名到环左缘前（junctionX-4-tx）
+        // - 左列上方站（x==junctionX，环内）：名到右列圆点左缘前（junctionX+loopRectW−7−4−tx，
+        //   58px 窄空间，5 字站名经 clamp 缩至 10px 恰好贴圆点不重叠）
         if (side === "left" && o.y < geometry.junctionY) {
-          _clampAvail = Math.max(40, Math.floor(svgW - 2 - tx));
+          var _rDotL6 = geometry.junctionX + (geometry.loopRectW || 72) - 7;
+          _clampAvail = o.x < geometry.junctionX
+            ? Math.max(40, Math.floor(geometry.junctionX - tx - 4))
+            : Math.max(40, Math.floor(_rDotL6 - 4 - tx));
         }
       } else if (geometry.junctionX === null || o.x >= geometry.junctionX) {
         // Loop stations: name area = half the loop width (shared by both sides)
@@ -1372,7 +1398,9 @@
           // font was not loaded and the measured width is unreliable.
           var _useW = (_bb.width > 0 && Math.abs(_bb.width - _estW) < _estW * 0.5) ? _bb.width : _estW;
           if (_useW > _av) {
-            var _nf = Math.max(12, _f * _av / _useW);
+            // v4.3.504: 下限 12→10——六形环左列上方站名（环段尾，朝环内）在 58px 环内窄空间
+            // 需 10px 才能完整放下（5 字=55px，恰好贴右列圆点左缘不重叠）。
+            var _nf = Math.max(10, _f * _av / _useW);
             _ct.setAttribute("font-size", String(Math.round(_nf * 10) / 10));
           }
         }
