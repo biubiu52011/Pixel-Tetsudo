@@ -67,6 +67,7 @@
         nameJa: l.nameJa || l.name || ids[i],
         branchOf: l.branchOf || null,
         isSixShapedLoop: l.isSixShapedLoop === true,
+        isDoubleColumnLoop: l.isDoubleColumnLoop === true,
         loopJunction: l.loopJunction || null
       };
     }
@@ -526,11 +527,11 @@
       // (no squeeze -> real font size == declared font size). Vertical params stay fixed.
       var _cw6 = ((typeof document !== "undefined" && document.querySelector("#trainsMapContainer")) || {}).clientWidth || 410;
       var _cw6Content = _isMobileView() ? Math.max(_cw6 - 16, 320) : _cw6;
-      // v4.3.483c: 缩放系数对齐山手线 loopScale（移动 1.5 / 桌面 1.6）——
-      // 环宽 = 山手线 rectW（110 基准 × 同缩放）完全一致，尾区同步受益。
+      // v4.3.483c: 缩放系数对齐山手线 loopScale（移动 1.5 / 桌面 1.6）。
+      // ※4.3.492 起山手线双列基准独立收窄为 96，六形环保持 110 不再对齐（用户只指示山手线）。
       var scale6 = _isMobileView() ? 1.5 : 1.6;
       var spLoop6 = 26 * scale6;
-      var loopRectW = 110 * scale6; // v4.3.483b: 环宽调窄（山手线同款基准），给光丘尾留水平空间
+      var loopRectW = 110 * scale6; // v4.3.483b: 环宽调窄（原山手线同款基准），给光丘尾留水平空间
       var loopRectH = Math.max(loopStations.length * spLoop6 - 40 * scale6, 200 * scale6);
       
       var leftMargin = 8 * scale6;
@@ -671,15 +672,17 @@
       // Standard loop
       var loopScale = _isMobileView() ? 1.5 : 1.6;
       var loopRectH = Math.max(stations.length * 36 / 2 - 80, 140) * loopScale;
-      svgW = 260 * loopScale;
+      // v4.3.495: 双列基准再缩减 50%（96→48）；svgW 派生式（rectW+150×scale）自动跟随，
+      // 两侧站名空间恒 75×scale 不变。移动 rectW 72px/svgW 297px，桌面 76.8px/316.8px。
+      var rectW = 48 * loopScale, rectH = loopRectH;
+      svgW = rectW + 150 * loopScale;
       svgH = loopRectH + 80 * loopScale;
       var cx = svgW / 2, cy = svgH / 2;
-      var isYamanote = lineId === "Yamanote";
-      var rectW = 110 * loopScale, rectH = loopRectH;
+      var isDoubleColumnLoop = line.isDoubleColumnLoop === true;
       var halfW = rectW / 2, halfH = rectH / 2;
       var loopPts = [];
       var i, _t;
-      if (isYamanote) {
+      if (isDoubleColumnLoop) {
         // JR-official: 30 stations split 15 per column, no station at the
         // bottom center — wide open middle. Right column (top->bottom):
         // Tabata..Tokyo..Shinagawa. Left column (top->bottom): Komagome..Osaki.
@@ -874,7 +877,7 @@
   
   function _computeLineHash(line) {
     // Simple hash based on stations and type
-    return (line.stations || []).join('|') + '|' + (line.type || '') + '|' + (line.isSixShapedLoop ? '6' : '0');
+    return (line.stations || []).join('|') + '|' + (line.type || '') + '|' + (line.isSixShapedLoop ? '6' : '0') + '|' + (line.isDoubleColumnLoop ? 'D' : '0');
   }
   
   function invalidateRouteGeometryCache(lineId) {
