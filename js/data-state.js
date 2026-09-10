@@ -300,7 +300,9 @@
         }
       } catch(e) {}
       if (intervalText) {
-        subHtml = '<div class="rs-line-name-en">' + escapeHtml(intervalText) + '</div>';
+        // 4.3.480：区间文字统一灰色——rs-line-name-en 全项目无 CSS 定义（默认黑色），
+        // LOS 卡区间用 rs-sys-chip 灰色；独立线卡（无 LOS 卡，如 JobanMain）改用 rs-line-interval 同灰。
+        subHtml = '<div class="rs-line-interval">' + escapeHtml(intervalText) + '</div>';
       }
     }
 

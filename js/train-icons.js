@@ -65,7 +65,9 @@
     "ExpJREast": {
       routes: [
         { line: "Joban", icon: "../images/列车/JR東日本/E261系.png", typeMatch: ["Hitachi", "Tokiwa"], priority: 4 },          // ひたち・ときわ（2026新型 E261系）
+        { line: "JobanMain", icon: "../images/列车/JR東日本/E261系.png", typeMatch: ["Hitachi", "Tokiwa"], priority: 4 },      // 常磐線本線上のひたち・ときわ（4.3.480：JobanMain 単独カード対応）
         { line: "Joban", icon: "../images/列车/JR東日本/E657系.png", typeMatch: ["Hitachi", "Tokiwa"], priority: 3 },          // ひたち・ときわ（E657系 従来車）
+        { line: "JobanMain", icon: "../images/列车/JR東日本/E657系.png", typeMatch: ["Hitachi", "Tokiwa"], priority: 3 },      // 同上（JobanMain 用）
                 { line: "SobuRapid", icon: "../images/列车/JR東日本/E257系500番台.png", typeMatch: ["Sazanami", "Wakashio", "Shiosai"], priority: 3 }, // さざなみ・わかしお・しおさい
         { line: "Uchibo", icon: "../images/列车/JR東日本/E257系500番台.png", typeMatch: ["Sazanami"], priority: 3 },
         { line: "Sotobo", icon: "../images/列车/JR東日本/E257系500番台.png", typeMatch: ["Wakashio"], priority: 3 },
@@ -166,8 +168,8 @@
     "Yokosuka": "../images/列车/JR東日本/E235系1000番台.png",
     "SobuRapid": "../images/列车/JR東日本/E235系1000番台.png",
     "SobuMain": "../images/列车/JR東日本/E235系1000番台.png",
-    "Joban": "../images/列车/JR東日本/E531系.png",
-    "JobanRapid": "../images/列车/JR東日本/E231系常磐LED.png", // 常磐線快速（品川〜取手）：E231系0番台（LED方向幕）が主力（4.3.457 図庫更新）
+    "Joban": "../images/列车/JR東日本/E231系常磐LED.png", // 常磐線快速（品川〜取手）：E231系0番台（LED方向幕）が主力
+    "JobanMain": "../images/列车/JR東日本/E531系.png", // 常磐線本線（取手〜仙台 中距離）：E531系が主力（4.3.480 追加）
     "JobanLocal": "../images/列车/東京メトロ/18000系.png", // 常磐各停：千代田線车辆直通担当（2026-09-08 用户指示统一 18000系）
     "Mito": "../images/列车/JR東日本/E531系.png",
     "Nikkoku": "../images/列车/JR東日本/E131系600番台.png", // 日光線：E131系600番台
