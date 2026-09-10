@@ -913,8 +913,10 @@
   // v4.3.449: 主線/支線の区別は geometry（座標・side・色）のみに残し、駅・ラベル・
   // 乗換チップ・直通チップの描画はこの関数一本で統一。支線駅も主線駅と同一スタイル。
 
-  // v4.3.506: 站名侧选择 = 占用检测（"左侧被占用就在右侧，右侧被占用就在左侧"）。
-  // 对每个站检测圆点左/右两侧的占用情况，选择空侧；返回 'right'（站名在圆点右侧）
+  // v4.3.506/507: 岔路站站名侧选择 = 占用检测（用户规则："左侧被占用就在右侧，
+  // 右侧被占用就在左侧"，**只针对那根岔**——光丘支线的光丘尾 10 站 + Tochomae junction；
+  // 环站不适用，走 4.3.504 固定规则）。
+  // 对岔路站检测圆点左/右两侧的占用情况，选择空侧；返回 'right'（站名在圆点右侧）
   // 或 'left'（站名在圆点左侧）。占用源按序检测：
   //   ① 空间占用：该侧可用空间放不下全尺寸（16px）文字宽（需 clamp 缩 → 空间被挤压占用）
   //   ② 线路占用：stub 水平线（y=junctionY，x∈[stubX, junctionX]）——站名若放左会骑线
@@ -981,11 +983,18 @@
     if (o.tx != null) { tx = o.tx; ty = o.ty; anchor = o.anchor || "start"; }
     else if (side === "top") { tx = o.x; ty = o.y - (isJunction ? 14 : 10); anchor = "middle"; }
     else if (side === "bottom") { tx = o.x; ty = o.y + (isJunction ? 19 : 15); anchor = "middle"; }
-    // v4.3.506: 六形环双列——站名侧由占用检测决定（_pickSixLabelSide：左侧被占用→右侧，
-    // 右侧被占用→左侧）；左列下方站（左侧空）朝左、光丘尾/左列上方/Tochomae（左侧被
-    // 线路/光丘尾站名带/画布边占用）朝右、右列站（左侧环内被对面圆点占用）朝右。
+    // v4.3.507: 六形环双列——占用检测（_pickSixLabelSide）**只针对岔路站**（光丘尾 10 站
+    // + Tochomae junction，用户裁定"规定是针对那根岔"）；环站（左列/右列）保持 4.3.504
+    // 固定规则：左列上方朝右、左列下方朝左、右列朝右。
     else if (side === "left" && geometry.isSixShapedLoop && geometry.isDualLoop6) {
-      var _sixSide = _pickSixLabelSide(o, geometry, svgW);
+      var _sixSide;
+      if (o.x < geometry.junctionX || isJunction) {
+        // 岔路站：占用检测（左侧被占用→右侧，右侧被占用→左侧）
+        _sixSide = _pickSixLabelSide(o, geometry, svgW);
+      } else {
+        // 环站：固定规则（v4.3.504）
+        _sixSide = (o.y < geometry.junctionY) ? "right" : "left";
+      }
       tx = (_sixSide === "right") ? (o.x + (isJunction ? 14 : 10)) : (o.x - (isJunction ? 14 : 10));
       ty = o.y; anchor = (_sixSide === "right") ? "start" : "end";
     }
