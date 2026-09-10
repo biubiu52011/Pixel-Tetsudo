@@ -668,64 +668,27 @@
       }
       
     } else if (isLoop && stations.length > 2) {
-      // Standard loop
+      // Standard loop — v4.3.490: 取消山手线特例（删除 isYamanote 特判，非改样式），
+      // 全部环线统一周长均布标准画法，山手线不再有独立双列布局。
       var loopScale = _isMobileView() ? 1.5 : 1.6;
       var loopRectH = Math.max(stations.length * 36 / 2 - 80, 140) * loopScale;
       svgW = 260 * loopScale;
       svgH = loopRectH + 80 * loopScale;
       var cx = svgW / 2, cy = svgH / 2;
-      var isYamanote = lineId === "Yamanote";
       var rectW = 110 * loopScale, rectH = loopRectH;
       var halfW = rectW / 2, halfH = rectH / 2;
       var loopPts = [];
-      var i, _t;
-      if (isYamanote) {
-        // JR-official: 30 stations split 15 per column, no station at the
-        // bottom center — wide open middle. Right column (top->bottom):
-        // Tabata..Tokyo..Shinagawa. Left column (top->bottom): Komagome..Osaki.
-        // Vertical pitch adapts to the tallest interchange chip in each column
-        // (name 16 + 3px gap + chip rows + 6px margin) so nothing overlaps.
-        var _rightSeq = [8,7,6,5,4,3,2,1,0,29,28,27,26,25,24];
-        var _colPitch = function(ids) {
-          var mx = 16 + 6 + 22 + 12;
-          for (var k = 0; k < ids.length; k++) {
-            var _txN = (transferMap[ids[k]] || []).filter(function(t) { return !t.through; }).length;
-            var _rows = Math.ceil(Math.min(_txN, 8) / 4);
-            mx = Math.max(mx, 16 + 6 + _rows * 22 + 12);
-          }
-          return mx;
-        };
-        var _rightIds = _rightSeq.map(function(si) { return stations[si]; });
-        var _leftIds = [];
-        for (var _li0 = 0; _li0 < 15; _li0++) _leftIds.push(stations[9 + _li0]);
-        var _pitch = Math.max(_colPitch(_rightIds), _colPitch(_leftIds));
-        var _needH = _pitch * 14;
-        if (_needH > loopRectH) {
-          rectH = _needH;
-          halfH = rectH / 2;
-          svgH = rectH + 100 * loopScale;
-          cy = svgH / 2;
-        }
-        for (var ri = 0; ri < _rightSeq.length; ri++) {
-          var _tR = (ri + 0.5) / _rightSeq.length;
-          loopPts.push({ x: cx + halfW, y: cy - halfH + _tR * rectH, side: "right", stationId: stations[_rightSeq[ri]] });
-        }
-        for (var li = 0; li < 15; li++) {
-          var _tL = (li + 0.5) / 15;
-          loopPts.push({ x: cx - halfW, y: cy - halfH + _tL * rectH, side: "left", stationId: stations[9 + li] });
-        }
-      } else {
-        var perimeter = 2 * (rectW + rectH);
-        var startOffset = rectW / 2;
-        for (i = 0; i < stations.length; i++) {
-          var pos = ((i / stations.length) * perimeter + startOffset) % perimeter;
-          var lx, ly, side;
-          if (pos < rectW) { lx = cx - halfW + pos; ly = cy - halfH; side = "top"; }
-          else if (pos < rectW + rectH) { lx = cx + halfW; ly = cy - halfH + (pos - rectW); side = "right"; }
-          else if (pos < 2 * rectW + rectH) { lx = cx + halfW - (pos - rectW - rectH); ly = cy + halfH; side = "bottom"; }
-          else { lx = cx - halfW; ly = cy + halfH - (pos - 2 * rectW - rectH); side = "left"; }
-          loopPts.push({ x: lx, y: ly, side: side, stationId: stations[i] });
-        }
+      var i;
+      var perimeter = 2 * (rectW + rectH);
+      var startOffset = rectW / 2;
+      for (i = 0; i < stations.length; i++) {
+        var pos = ((i / stations.length) * perimeter + startOffset) % perimeter;
+        var lx, ly, side;
+        if (pos < rectW) { lx = cx - halfW + pos; ly = cy - halfH; side = "top"; }
+        else if (pos < rectW + rectH) { lx = cx + halfW; ly = cy - halfH + (pos - rectW); side = "right"; }
+        else if (pos < 2 * rectW + rectH) { lx = cx + halfW - (pos - rectW - rectH); ly = cy + halfH; side = "bottom"; }
+        else { lx = cx - halfW; ly = cy + halfH - (pos - 2 * rectW - rectH); side = "left"; }
+        loopPts.push({ x: lx, y: ly, side: side, stationId: stations[i] });
       }
       stationCoords = loopPts;
       

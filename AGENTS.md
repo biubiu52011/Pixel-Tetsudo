@@ -501,3 +501,5 @@ Before tagging a release:
 
 
 - 2026-09-10 用户指示（山手线回退・4.3.489）: 4.3.486-488 环线双列统一整体回退——用户判定方向错误（「弄反了，把大江户线的间距调整到山手线了」）。trains-page.js 恢复至 4.3.485（ac15b47）原始实现：①山手线恢复 isYamanote 双列特例（右列 [8..0]+[29..24] 田端→東京→品川、左列 [9..23] 駒込→大崎、_colPitch 按换乘 chip 自适应）；②大江户线（isSixShapedLoop）恢复周长均布原版（spLoop6=26×scale、环高=环段站数×26×scale−40×scale）；③删除 RING_SPLIT_MAP 与 4.3.488 stationId 坐标索引改动。trains.html 引用回退至 v=4.3.489。验证: node --check OK。
+
+- 2026-09-10 用户指示（重新开始·取消山手线特例・4.3.490）: 「现在我们重新开始，取消山手线的特例（是删除特例设定不是改样式）」——在 4.3.489 回退（恢复 isYamanote 双列特例）后重新正确实施：computeRouteGeometry 标准环分支删除 isYamanote 特判（var isYamanote + if(isYamanote) 双列分支整体移除），山手线与其他 type=loop 环线统一走周长均布标准画法（loopRectH=max(N×36/2−80,140)×loopScale、环宽 110×loopScale、perimeter 均布）。与 4.3.486 的本质区别：486 是「把山手线双列泛化为 RING_SPLIT_MAP 环线标准」（改样式/新增机制，方向错误已回退）；490 是「删除特例设定」——山手线直接继承标准环逻辑，不新增任何布局机制。大江户线（isSixShapedLoop 周长均布）不受影响。验证: node --check OK、isYamanote/RING_SPLIT/_rightSeq/_colPitch 全仓库零引用。
