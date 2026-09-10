@@ -565,6 +565,15 @@
               typeName: typeName,
               estimated: false
             };
+            // v5: 车型判断（数据层）——与推定列车同一字段语义（TrainIcons.getTrainClass 复用渲染选择逻辑）
+            try {
+              if (window.TrainIcons && typeof window.TrainIcons.getTrainClass === "function") {
+                positionData.trainClass = window.TrainIcons.getTrainClass(
+                  lid, (targetLine.line && targetLine.line.operator) || '',
+                  trainId + '_' + idx, idx, rawType
+                );
+              }
+            } catch(e) {}
             if (existingIdx >= 0) {
               posMap[lid][existingIdx] = positionData;
             } else {

@@ -399,7 +399,7 @@
     ]
   };
 
-  function getTrainIcon(lineId, operator, trainId, stationIndex, trainType) {
+  function _resolveTrainIcon(lineId, operator, trainId, stationIndex, trainType) {
     try {
       // 直通列車：車号プレフィックスで車籍系統を判定（例：半蔵門線 B 号 = 東武50000系）
       // trainId は「車号_駅idx」または「lineId_車号_駅idx」の2形式——車号は後ろから2番目のトークン
@@ -516,8 +516,24 @@
     }
   }
 
+  function getTrainIcon(lineId, operator, trainId, stationIndex, trainType) {
+    return _resolveTrainIcon(lineId, operator, trainId, stationIndex, trainType);
+  }
+
+  // 车型判断（数据层）——复用与 getTrainIcon 完全相同的选择逻辑，返回型号名（图标文件名去扩展名）
+  // Provider: TrainIcons.getTrainClass  Consumer: TrainPositionEstimator / DataFusion（position.trainClass）
+  function getTrainClass(lineId, operator, trainId, stationIndex, trainType) {
+    try {
+      var icon = _resolveTrainIcon(lineId, operator, trainId, stationIndex, trainType);
+      var name = String(icon || '').split('/').pop();
+      name = name.replace(/\.png$/i, '');
+      return name || '';
+    } catch(e) { return ''; }
+  }
+
   window.TrainIcons = {
     getTrainIcon: getTrainIcon,
+    getTrainClass: getTrainClass,
     LINE_ICONS: LINE_ICONS,
     OPERATOR_ICONS: OPERATOR_ICONS
   };

@@ -356,7 +356,7 @@
       "tourism.west": "\u897f",
       "tourism.within_100m": "100\u7c73\u5185",
       "trains.loading": "\u6570\u636e\u66f4\u65b0\u4e2d...",
-      "trains.estimated_note": "\u002a\u6570\u636e\u6765\u81ea\u65f6\u523b\u8868\u8ba1\u7b97",
+      "trains.estimated_note": "\u002a\u6570\u636e\u6765\u6e90\uff1a\u7ebf\u8def\u56fe\u63a8\u7b97",
       "trains.map_error": "\u5730\u56fe\u52a0\u8f7d\u5931\u8d25",
       "trains.no_data": "\u6309\u65f6\u523b\u8868\u63a8\u7b97...",
       "trains.running": "\u25cf \u8fd0\u884c\u4e2d",

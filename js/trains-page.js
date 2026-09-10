@@ -1226,8 +1226,10 @@
     }
   }
 
-  // v4.3.469: 推定データ注記（容器外・下方中央）——いずれかの列車が時刻表推定なら表示。
+  // v4.3.469: 推定データ注記——いずれかの列車が時刻表推定なら表示。
   // リアルタイム位置のみの路線には出さない。増分・全再構築の両パスから呼ばれる（冪等）。
+  // v4.3.511: 位置を容器内 appendChild から「容器正下方（外部）」に修正（insertAdjacentElement afterend）——
+  // 元実装は容器内末尾に置いており、v4.3.469 の設計意図（容器外・下方中央）と不一致だった。
   function updateEstimatedNote(el, positions) {
     try {
       var old = el.querySelector('.tp-est-note');
@@ -1241,7 +1243,7 @@
       var note = document.createElement("div");
       note.className = "tp-est-note";
       note.textContent = t("trains.estimated_note") || "*Data calculated from timetable";
-      el.appendChild(note);
+      el.insertAdjacentElement('afterend', note);
     } catch(e) { /* note is best-effort */ }
   }
 
