@@ -171,7 +171,7 @@ window.LineOperationSystems = {
       nameEn: "Nambu Line",
       nameKo: "난부선",
       color: "#ffd400",
-      lineIds: ["Nambu"],
+      lineIds: ["Nambu", "NambuBranch"], // 4.3.479: 浜川崎支線并入南武線（规则二嵌套）
       icon: "../images/鉄道/JR東日本/南武線.png",
       order: 13
     },
@@ -270,7 +270,7 @@ window.LineOperationSystems = {
       nameEn: "Uchibo Line",
       nameKo: "우치보선",
   color: "#0071C5",
-      lineIds: ["Sotobo"],
+      lineIds: ["Uchibo"],
       icon: "../images/鉄道/JR東日本/JRグループ.png",
       order: 23
     },
@@ -281,7 +281,7 @@ window.LineOperationSystems = {
       nameEn: "Sotobo Line",
       nameKo: "소토보선",
   color: "#F22335",
-      lineIds: ["Uchibo"],
+      lineIds: ["Sotobo"],
       icon: "../images/鉄道/JR東日本/JRグループ.png",
       order: 24
     },
@@ -292,9 +292,20 @@ window.LineOperationSystems = {
       nameEn: "Narita Line",
       nameKo: "나리타선",
   color: "#00BB85",
-      lineIds: ["Narita"],
+      lineIds: ["Narita", "NaritaAbikoBranch", "NaritaAirportBranch"], // 4.3.479: 我孫子支線・空港支線并入成田線（规则二嵌套，支线仅在父卡内展示）
       icon: "../images/鉄道/JR東日本/JRグループ.png",
       order: 25
+    },
+    {
+      code: "TGN",
+      nameJa: "東金線",
+      nameZh: "东金线",
+      nameEn: "Togane Line",
+      nameKo: "토가네선",
+      color: "#B31C31", // ODPT 官方
+      lineIds: ["Togane"], // 4.3.479: 独立运营名"東金線"（规则一平级顶级）
+      icon: "../images/鉄道/JR東日本/JRグループ.png",
+      order: 26
     },
     {
       code: "SAG",
@@ -446,7 +457,7 @@ window.LineOperationSystems = {
       nameEn: "Kitakami Line",
       nameKo: "키타카미선",
       color: "#851a72",
-      lineIds: ["Kamiishi"],
+      lineIds: ["Kitakami"],
       icon: "../images/鉄道/JR東日本/JRグループ.png",
       order: 41
     },
@@ -630,10 +641,10 @@ window.LineOperationSystems = {
       code: "SAN",
       nameJa: "山田線",
       nameZh: "山田线",
-      nameEn: "Sanriku Line",
+      nameEn: "Yamada Line",
       nameKo: "야마다선",
       color: "#cd7a1e",
-      lineIds: ["Sanriku"],
+      lineIds: ["Yamada"],
       icon: "../images/鉄道/JR東日本/JRグループ.png",
       order: 58
     },
@@ -1169,7 +1180,7 @@ window.LineOperationSystems = {
       nameEn: "Haijima Line",
       nameKo: "하이지마선",
       color: "#01A6BF",
-      lineIds: ["Hamura"],
+      lineIds: ["Haijima"],
       icon: "../images/鉄道/西武鉄道/西武拝島線.png",
       order: 9
     },

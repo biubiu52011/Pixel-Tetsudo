@@ -441,7 +441,7 @@ window.RAILWAY_I18N = {
     "ja": "立川",
     "zh": "立川",
     "ko": "타치카와",
-    "en": "Tatekawa"
+    "en": "Tachikawa"
   },
   "Musashynuigami": {
     "ja": "武蔵新上",
@@ -476,13 +476,13 @@ window.RAILWAY_I18N = {
   "Azabu-Juban": {
     "ja": "麻布十番",
     "zh": "麻布十番",
-    "ko": "아자부주바ㄴ",
+    "ko": "아자부주방",
     "en": "Azabu-Juban"
   },
   "Roppongi": {
     "ja": "六本木",
     "zh": "六本木",
-    "ko": "로빠오ㄴ기",
+    "ko": "롯폰기",
     "en": "Roppongi"
   },
   "Ikebukuro": {
@@ -1419,7 +1419,7 @@ window.RAILWAY_I18N = {
     "ja": "八丁堀",
     "zh": "八丁堀",
     "ko": "하쵸보리",
-    "en": "Hacchobori"
+    "en": "Hatchobori"
   },
   "Yanaka": {
     "ja": "谷中",
@@ -2735,12 +2735,6 @@ window.RAILWAY_I18N = {
     "ko": "오가와",
     "en": "Ogawa"
   },
-  "Hamura": {
-    "ja": "羽村",
-    "zh": "羽村",
-    "ko": "하무라",
-    "en": "Hamura"
-  },
   "Sakuradai": {
     "ja": "桜台",
     "zh": "樱台",
@@ -2892,9 +2886,9 @@ window.RAILWAY_I18N = {
     "en": "Kanazawa-hakkei"
   },
   "Miura-Kaigan": {
-    "ja": "三崎港",
-    "zh": "三崎港",
-    "ko": "미우라카이가ㄴ",
+    "ja": "三浦海岸",
+    "zh": "三浦海岸",
+    "ko": "미우라카이간",
     "en": "Miura-Kaigan"
   },
   "Zushi-Hayama": {
@@ -4373,12 +4367,6 @@ window.RAILWAY_I18N = {
     "ko": "네리마카스가초",
     "en": "Nerima-kasugacho"
   },
-  "Higashi-Nerima": {
-    "ja": "東練馬",
-    "zh": "东练马",
-    "ko": "히가시네리마",
-    "en": "Higashi-Nerima"
-  },
   "Shin-egota": {
     "ja": "新江古田",
     "zh": "新江古田",
@@ -4607,11 +4595,11 @@ window.RAILWAY_I18N = {
     "ko": "가쿠인마에",
     "en": "Gakushuinshita"
   },
-  "Kataomo_Bashi": {
-    "ja": "片倉橋",
-    "zh": "片仓桥",
-    "ko": "카타오모바시",
-    "en": "Kataomo_Bashi"
+  "Omokagebashi": {
+    "ja": "面影橋",
+    "zh": "面影桥",
+    "ko": "오모카게바시",
+    "en": "Omokagebashi"
   },
   "Akazuchi_Shgakko_Mae": {
     "ja": "赤土小学校前",
@@ -6233,12 +6221,6 @@ window.RAILWAY_I18N = {
     "ko": "오츠마",
     "en": "Otsuma"
   },
-  "Ryubai": {
-    "ja": "竜梅",
-    "zh": "龙梅",
-    "ko": "류바이",
-    "en": "Ryubai"
-  },
   "Saitama_Saka": {
     "ja": "埼玉坂",
     "zh": "埼玉坂",
@@ -7248,10 +7230,10 @@ window.RAILWAY_I18N = {
     "en": "Yayoidai"
   },
   "Yokodai": {
-    "ja": "横浜",
-    "zh": "横滨",
+    "ja": "洋光台",
+    "zh": "洋光台",
     "ko": "요코다이",
-    "en": "Yokohama"
+    "en": "Yokodai"
   },
   "Yumegaoka": {
     "ja": "ゆめが丘",
@@ -7620,7 +7602,7 @@ window.RAILWAY_I18N = {
     "en": "Kita-Kamakura"
   },
   "Hodogaya": {
-    "ja": "保土ヶ谷",
+    "ja": "保土ケ谷",
     "zh": "保土谷",
     "ko": "호도가야",
     "en": "Hodogaya"
@@ -7926,7 +7908,7 @@ window.RAILWAY_I18N = {
     "en": "Inage"
   },
   "Sendagaya": {
-    "ja": "千駄ヶ谷",
+    "ja": "千駄ケ谷",
     "zh": "千驮谷",
     "ko": "센다가야",
     "en": "Sendagaya"
@@ -7941,7 +7923,7 @@ window.RAILWAY_I18N = {
     "ja": "幕張本郷",
     "zh": "幕张本乡",
     "ko": "마쿠하리혼고",
-    "en": "Makuhari-Hong"
+    "en": "Makuharihongo"
   },
   "Shin-Kemigawa": {
     "ja": "新検見川",
@@ -10062,8 +10044,8 @@ window.RAILWAY_I18N = {
     "en": "Shiozaki"
   },
   "Nirasaki": {
-    "ja": "韭崎",
-    "zh": "韭崎",
+    "ja": "韮崎",
+    "zh": "韮崎",
     "ko": "니라사키",
     "en": "Nirasaki"
   },
@@ -10098,8 +10080,8 @@ window.RAILWAY_I18N = {
     "en": "Kobuchizawa"
   },
   "Shinano-Sakai": {
-    "ja": "信納境",
-    "zh": "信纳境",
+    "ja": "信濃境",
+    "zh": "信浓境",
     "ko": "시나노사카이",
     "en": "Shinano-Sakai"
   },
@@ -12588,7 +12570,7 @@ window.RAILWAY_I18N = {
     "en": "Nagaura"
   },
   "Iwane": {
-    "ja": "岩根",
+    "ja": "巌根",
     "zh": "岩根",
     "ko": "이와네",
     "en": "Iwane"
@@ -13110,7 +13092,7 @@ window.RAILWAY_I18N = {
     "en": "Higashi-Fussa"
   },
   "Hakonegasaki": {
-    "ja": "箱根ヶ崎",
+    "ja": "箱根ケ崎",
     "zh": "箱根崎",
     "ko": "하코네가사키",
     "en": "Hakonegasaki"
@@ -13134,8 +13116,8 @@ window.RAILWAY_I18N = {
     "en": "Moro"
   },
   "Myokaku": {
-    "ja": "妙覚",
-    "zh": "妙觉",
+    "ja": "明覚",
+    "zh": "明觉",
     "ko": "묘각",
     "en": "Myokaku"
   },
@@ -13146,8 +13128,8 @@ window.RAILWAY_I18N = {
     "en": "Takezawa"
   },
   "Yodo": {
-    "ja": "余戸",
-    "zh": "余户",
+    "ja": "用土",
+    "zh": "用土",
     "ko": "요도",
     "en": "Yodo"
   },
@@ -13336,12 +13318,6 @@ window.RAILWAY_I18N = {
     "zh": "三春",
     "ko": "미하루",
     "en": "Miharu"
-  },
-  "Kamiichi": {
-    "ja": "上市",
-    "zh": "上市",
-    "ko": "카미이치",
-    "en": "Kamiichi"
   },
   "Yanagihara": {
     "ja": "柳原",
@@ -13589,35 +13565,11 @@ window.RAILWAY_I18N = {
     "ko": "토미다",
     "en": "Tomi-da"
   },
-  "Ashikaga-Flower-Park": {
-    "ja": "足利フラワーパーク",
-    "zh": "足利花卉公园",
-    "ko": "아시카가플라워파크",
-    "en": "Ashikaga-Flower-Park"
-  },
-  "Ashikaga": {
-    "ja": "足利",
-    "zh": "足利",
-    "ko": "아시카가",
-    "en": "Ashikaga"
-  },
-  "Kiryu": {
-    "ja": "桐生",
-    "zh": "桐生",
-    "ko": "키류",
-    "en": "Kiryū"
-  },
   "Shimoda-Nitta": {
     "ja": "下田新田",
     "zh": "下田新田",
     "ko": "시모다닛타",
     "en": "Shimoda-Nitta"
-  },
-  "Iwaya": {
-    "ja": "岩宿",
-    "zh": "岩宿",
-    "ko": "이와야",
-    "en": "Iwaya"
   },
   "Shimokiri-u": {
     "ja": "下切上",
@@ -15095,12 +15047,6 @@ window.RAILWAY_I18N = {
     "ko": "아카쿠라온센",
     "en": "Akakura-Onsen"
   },
-  "Tatekoshi": {
-    "ja": "立小路",
-    "zh": "立小路",
-    "ko": "타테코지",
-    "en": "Tatekoshi"
-  },
   "Mogami": {
     "ja": "最上",
     "zh": "最上",
@@ -15850,12 +15796,6 @@ window.RAILWAY_I18N = {
     "zh": "榴冈",
     "ko": "츠츠지가오카",
     "en": "Tsutsujigaoka-2"
-  },
-  "Tatekoshi-Tohoku": {
-    "ja": "館腰",
-    "zh": "馆腰",
-    "ko": "타테코시",
-    "en": "Tatekoshi-Tohoku"
   },
   "Ooyama": {
     "ja": "大山",
@@ -17151,7 +17091,7 @@ window.RAILWAY_I18N = {
     "ja": "祖母島",
     "zh": "祖母岛",
     "ko": "소히지마",
-    "en": "Sōhijima"
+    "en": "Ubashima"
   },
   "Onogami": {
     "ja": "小野上",
@@ -17187,13 +17127,13 @@ window.RAILWAY_I18N = {
     "ja": "郷原",
     "zh": "乡原",
     "ko": "고하라",
-    "en": "Gōhara"
+    "en": "Gobara"
   },
   "Yakura": {
     "ja": "矢倉",
     "zh": "矢仓",
     "ko": "야쿠라",
-    "en": "Yakura"
+    "en": "Yagura"
   },
   "Iwashima": {
     "ja": "岩島",
@@ -17205,7 +17145,7 @@ window.RAILWAY_I18N = {
     "ja": "川原湯温泉",
     "zh": "川原汤温泉",
     "ko": "카와하라유온센",
-    "en": "Kawahara-yu-Onsen"
+    "en": "Kawarayu-Onsen"
   },
   "Naganohara-Kusatsuguchi": {
     "ja": "長野原草津口",
@@ -18647,47 +18587,11 @@ window.RAILWAY_I18N = {
     "ko": "후나히키",
     "en": "Funahiki"
   },
-  "Omoigawa": {
-    "ja": "思川",
-    "zh": "思川",
-    "ko": "오모이가와",
-    "en": "Omoigawa"
-  },
   "Manmada": {
     "ja": "間々田",
     "zh": "间间田",
     "ko": "만마다",
     "en": "Manmada"
-  },
-  "Ohiroshita": {
-    "ja": "大平下",
-    "zh": "大平下",
-    "ko": "오오히라시타",
-    "en": "Ōhirashita"
-  },
-  "Omata": {
-    "ja": "小俣",
-    "zh": "小俣",
-    "ko": "오마타",
-    "en": "Omata"
-  },
-  "Iwafune": {
-    "ja": "岩舟",
-    "zh": "岩舟",
-    "ko": "이와후네",
-    "en": "Iwafune"
-  },
-  "Yamagoe": {
-    "ja": "山前",
-    "zh": "山前",
-    "ko": "야마고에",
-    "en": "Yamagoe"
-  },
-  "Tomita": {
-    "ja": "富田",
-    "zh": "富田",
-    "ko": "토미타",
-    "en": "Tomita"
   },
   "Inubushi": {
     "ja": "犬伏",
@@ -18759,7 +18663,7 @@ window.RAILWAY_I18N = {
     "ja": "龍ケ崎市",
     "zh": "龙崎市",
     "ko": "류가사키시",
-    "en": "Ryugasaki"
+    "en": "Ryugasakishi"
   },
   "Ushiku": {
     "ja": "牛久",
@@ -18918,7 +18822,7 @@ window.RAILWAY_I18N = {
     "en": "Yotsukura"
   },
   "Hisanohama": {
-    "ja": "久之浜",
+    "ja": "久ノ浜",
     "zh": "久之滨",
     "ko": "히사노하마",
     "en": "Hisanohama"
@@ -19222,5 +19126,360 @@ window.RAILWAY_I18N = {
     "zh": "新船桥",
     "ko": "신후나바시",
     "en": "Shin-Funabashi"
+  },
+  "Wakamatsu-Kawada": {
+    "ja": "若松河田",
+    "zh": "若松河田",
+    "ko": "와카마츠카와다",
+    "en": "Wakamatsu-kawada"
+  },
+  "Tsukijishijo": {
+    "ja": "築地市場",
+    "zh": "筑地市场",
+    "ko": "츠키지시조",
+    "en": "Tsukiji-shijo"
+  },
+  "Kokuritsu-Kyogijo": {
+    "ja": "国立競技場",
+    "zh": "国立竞技场",
+    "ko": "코쿠리츠쿄기조",
+    "en": "Kokuritsu-kyogijo"
+  },
+  "Ochiai-Minami-Nagasaki": {
+    "ja": "落合南長崎",
+    "zh": "落合南长崎",
+    "ko": "오치아이미나미나가사키",
+    "en": "Ochiai-minami-nagasaki"
+  },
+  "Ryumai": {
+    "ja": "竜舞",
+    "zh": "龙舞",
+    "ko": "류마이",
+    "en": "Ryumai"
+  },
+  "Bushu-Karasawa": {
+    "ja": "武州唐沢",
+    "zh": "武州唐泽",
+    "ko": "부슈카라사와",
+    "en": "Bushu-Karasawa"
+  },
+  "Bushu-Nagase": {
+    "ja": "武州長瀬",
+    "zh": "武州长濑",
+    "ko": "부슈나가세",
+    "en": "Bushu-Nagase"
+  },
+  "Daiyamuko": {
+    "ja": "大谷向",
+    "zh": "大谷向",
+    "ko": "다이야무코",
+    "en": "Daiyamuko"
+  },
+  "Esojima": {
+    "ja": "江曽島",
+    "zh": "江曾岛",
+    "ko": "에소지마",
+    "en": "Esojima"
+  },
+  "Futomi": {
+    "ja": "太海",
+    "zh": "太海",
+    "ko": "후토미",
+    "en": "Futomi"
+  },
+  "Goi": {
+    "ja": "五井",
+    "zh": "五井",
+    "ko": "고이",
+    "en": "Goi"
+  },
+  "Ippommatsu": {
+    "ja": "一本松",
+    "zh": "一本松",
+    "ko": "잇폰마쓰",
+    "en": "Ippommatsu"
+  },
+  "Jimbohara": {
+    "ja": "神保原",
+    "zh": "神保原",
+    "ko": "진보하라",
+    "en": "Jimbohara"
+  },
+  "Joetsu-Ski-Jo-Mae": {
+    "ja": "上越国際スキー場前",
+    "zh": "上越国际滑雪场前",
+    "ko": "조에쓰국제스키장앞",
+    "en": "Joetsu-Ski-Jo-Mae"
+  },
+  "Kameido-Suijin": {
+    "ja": "亀戸水神",
+    "zh": "龟户水神",
+    "ko": "가메이도스이진",
+    "en": "Kameido-Suijin"
+  },
+  "Kashima-Soccer-Stadium": {
+    "ja": "鹿島サッカースタジアム",
+    "zh": "鹿岛足球场",
+    "ko": "가시마축구경기장",
+    "en": "Kashima-Soccer-Stadium"
+  },
+  "Kinugawa-Koen": {
+    "ja": "鬼怒川公園",
+    "zh": "鬼怒川公园",
+    "ko": "키누가와코엔",
+    "en": "Kinugawa-Koen"
+  },
+  "Kinugawa-Onsen": {
+    "ja": "鬼怒川温泉",
+    "zh": "鬼怒川温泉",
+    "ko": "키누가와온센",
+    "en": "Kinugawa-Onsen"
+  },
+  "Kita-Yono": {
+    "ja": "北与野",
+    "zh": "北与野",
+    "ko": "기타요노",
+    "en": "Kita-Yono"
+  },
+  "Kosagoe": {
+    "ja": "小佐越",
+    "zh": "小佐越",
+    "ko": "코사고에",
+    "en": "Kosagoe"
+  },
+  "Kumagawa": {
+    "ja": "熊川",
+    "zh": "熊川",
+    "ko": "구마가와",
+    "en": "Kumagawa"
+  },
+  "Makuhari-Toyosuna": {
+    "ja": "幕張豊砂",
+    "zh": "幕张丰砂",
+    "ko": "마쿠하리토요스나",
+    "en": "Makuhari-Toyosuna"
+  },
+  "Minami-Utsunomiya": {
+    "ja": "南宇都宮",
+    "zh": "南宇都宫",
+    "ko": "미나미우쓰노미야",
+    "en": "Minami-Utsunomiya"
+  },
+  "Minami-Yono": {
+    "ja": "南与野",
+    "zh": "南与野",
+    "ko": "미나미요노",
+    "en": "Minami-Yono"
+  },
+  "Musashi-Hikida": {
+    "ja": "武蔵引田",
+    "zh": "武藏引田",
+    "ko": "무사시히키다",
+    "en": "Musashi-Hikida"
+  },
+  "Narushima-Yonezawa": {
+    "ja": "成島",
+    "zh": "成岛",
+    "ko": "나루시마",
+    "en": "Narushima-Yonezawa"
+  },
+  "Niragawa": {
+    "ja": "韮川",
+    "zh": "韭川",
+    "ko": "니라가와",
+    "en": "Niragawa"
+  },
+  "Nishi-Oya": {
+    "ja": "西大家",
+    "zh": "西大家",
+    "ko": "니시오야",
+    "en": "Nishi-Oya"
+  },
+  "Obitsu": {
+    "ja": "小櫃",
+    "zh": "小柜",
+    "ko": "오비쓰",
+    "en": "Obitsu"
+  },
+  "Okuwa": {
+    "ja": "大桑",
+    "zh": "大桑",
+    "ko": "오쿠와",
+    "en": "Okuwa"
+  },
+  "Omochanomachi": {
+    "ja": "おもちゃのまち",
+    "zh": "玩具之町",
+    "ko": "오모차노마치",
+    "en": "Omochanomachi"
+  },
+  "Satte": {
+    "ja": "幸手",
+    "zh": "幸手",
+    "ko": "삿테",
+    "en": "Satte"
+  },
+  "Shiishiba": {
+    "ja": "椎柴",
+    "zh": "椎柴",
+    "ko": "시이시바",
+    "en": "Shiishiba"
+  },
+  "Shin-Fujiwara": {
+    "ja": "新藤原",
+    "zh": "新藤原",
+    "ko": "신후지와라",
+    "en": "Shin-Fujiwara"
+  },
+  "Shin-Takatoku": {
+    "ja": "新高徳",
+    "zh": "新高德",
+    "ko": "신타카토쿠",
+    "en": "Shin-Takatoku"
+  },
+  "Sobudaishita": {
+    "ja": "相武台下",
+    "zh": "相武台下",
+    "ko": "소부다이시타",
+    "en": "Sobudaishita"
+  },
+  "Tawarada": {
+    "ja": "俵田",
+    "zh": "俵田",
+    "ko": "타와라다",
+    "en": "Tawarada"
+  },
+  "Tobu-World-Square": {
+    "ja": "東武ワールドスクウェア",
+    "zh": "东武世界广场",
+    "ko": "도부월드스퀘어",
+    "en": "Tobu-World-Square"
+  },
+  "TobuUtsunomiya": {
+    "ja": "東武宇都宮",
+    "zh": "东武宇都宫",
+    "ko": "도부우쓰노미야",
+    "en": "Tobu-Utsunomiya"
+  },
+  "Tomiura": {
+    "ja": "富浦",
+    "zh": "富浦",
+    "ko": "토미우라",
+    "en": "Tomiura"
+  },
+  "Ukimafunado": {
+    "ja": "浮間舟渡",
+    "zh": "浮间舟渡",
+    "ko": "우키마후나도",
+    "en": "Ukimafunado"
+  },
+  "Yashu-Hirakawa": {
+    "ja": "野州平川",
+    "zh": "野州平川",
+    "ko": "야슈히라카와",
+    "en": "Yashu-Hirakawa"
+  },
+  "Yashu-Otsuka": {
+    "ja": "野州大塚",
+    "zh": "野州大塚",
+    "ko": "야슈오쓰카",
+    "en": "Yashu-Otsuka"
+  },
+  "Yasuzuka": {
+    "ja": "安塚",
+    "zh": "安塚",
+    "ko": "야스즈카",
+    "en": "Yasuzuka"
+  },
+  "Yono-Hommachi": {
+    "ja": "与野本町",
+    "zh": "与野本町",
+    "ko": "요노혼마치",
+    "en": "Yono-Hommachi"
+  },
+  "Tatekoji": {
+    "ja": "立小路",
+    "zh": "立小路",
+    "ko": "타테코지",
+    "en": "Tatekoji"
+  },
+  "Kairakuen": {
+    "ja": "偕楽園",
+    "zh": "偕乐园",
+    "ko": "카이라쿠엔",
+    "en": "Kairakuen"
+  },
+  "Tatekoshi": {
+    "ja": "館腰",
+    "zh": "馆腰",
+    "ko": "타테코시",
+    "en": "Tatekoshi"
+  },
+  "Fukutawara": {
+    "ja": "福俵",
+    "zh": "福俵",
+    "ko": "후쿠타와라",
+    "en": "Fukutawara"
+  },
+  "Togane": {
+    "ja": "東金",
+    "zh": "东金",
+    "ko": "토가네",
+    "en": "Togane"
+  },
+  "Gumyo": {
+    "ja": "求名",
+    "zh": "求名",
+    "ko": "구묘",
+    "en": "Gumyo"
+  },
+  "Higashi-Abiko": {
+    "ja": "東我孫子",
+    "zh": "东我孙子",
+    "ko": "히가시아비코",
+    "en": "Higashi-Abiko"
+  },
+  "Kohoku-Narita": {
+    "ja": "湖北",
+    "zh": "湖北",
+    "ko": "코호쿠",
+    "en": "Kohoku-Narita"
+  },
+  "Araki": {
+    "ja": "新木",
+    "zh": "新木",
+    "ko": "아라키",
+    "en": "Araki"
+  },
+  "Fusa": {
+    "ja": "布佐",
+    "zh": "布佐",
+    "ko": "후사",
+    "en": "Fusa"
+  },
+  "Ajiki": {
+    "ja": "安食",
+    "zh": "安食",
+    "ko": "아지키",
+    "en": "Ajiki"
+  },
+  "Shimosa-Manzaki": {
+    "ja": "下総松崎",
+    "zh": "下总松崎",
+    "ko": "시모사만자키",
+    "en": "Shimosa-Manzaki"
+  },
+  "Odasakae": {
+    "ja": "小田栄",
+    "zh": "小田荣",
+    "ko": "오다사카에",
+    "en": "Odasakae"
+  },
+  "Kawasakishimmachi": {
+    "ja": "川崎新町",
+    "zh": "川崎新町",
+    "ko": "카와사키신마치",
+    "en": "Kawasakishimmachi"
   }
-};
+}
+;

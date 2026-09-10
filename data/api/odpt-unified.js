@@ -133,8 +133,9 @@
             base: "https://api.odpt.org/api/v4/",
             // v4.3.460: Toei の odpt:Train（リアルタイム位置）を実測確認（浅草/新宿/三田/大江戸で返却、
             // 深夜 0:26 でも 26 件）。従来 train: null で取得していなかったのを有効化。
-            // ※都電荒川線（Arakawa）は odpt:Train に含まれず（都電は路面電車のため提供外）、
-            //   荒川線は従来どおり時刻表推定のみ。
+            // v4.3.472 訂正: 都電荒川線（Arakawa）も odpt:Train に含まれる（実測 17 件/昼、30 駅全駅あり）——
+            // 従来「提供外」は誤認。data-fusion.js STATION_ALIAS に 26 駅の ID 別名（ODPT 驼峰 vs 本地下划线）を
+            // 追加して全列車が荒川線に正しく帰属するよう修正済み。
             train: "odpt:Train?odpt:operator=odpt.Operator:Toei",
             trainTimetable: "odpt:TrainTimetable?odpt:operator=odpt.Operator:Toei",
             trainInformation: "odpt:TrainInformation?odpt:operator=odpt.Operator:Toei"
@@ -228,7 +229,7 @@
         "Gono": "JR-East",
         "Hachinohe": "JR-East",
         "Hakushin": "JR-East",
-        "Hamura": "Seibu",
+        "Haijima": "Seibu",
         "Hanzomon": "TokyoMetro",
         "Hibiya": "TokyoMetro",
         "ChuoTatsuno": "JR-East",
@@ -246,7 +247,7 @@
         "JobanMain": "JR-East",
         "Joetsu": "JR-East",
         "Kamaishi": "JR-East",
-        "Kamiishi": "JR-East",
+        "Kitakami": "JR-East",
 
         "Karasuyama": "JR-East",
         "Kashima": "JR-East",
@@ -285,6 +286,11 @@
         "Namboku": "TokyoMetro",
         "Nambu": "JR-East",
         "Narita": "JR-East",
+        // v4.3.479: 成田線支線（我孫子/空港）・東金線・南武線浜川崎支線（ODPT 独立 railway，同名透传）
+        "NaritaAbikoBranch": "JR-East",
+        "NaritaAirportBranch": "JR-East",
+        "Togane": "JR-East",
+        "NambuBranch": "JR-East",
 
         "Nikkoku": "Tobu",
         "Nippori_Toneri": "Toei",
@@ -312,7 +318,7 @@
         "Saikyo": "JR-East",
 
         "Sano": "Tobu",
-        "Sanriku": "JR-East",
+        "Yamada": "JR-East",
         "SeibuChichibu": "Seibu",
         "SeibuEn": "Seibu",
 
@@ -368,7 +374,7 @@
         "KeiseiKanamachi": "Keisei",
         "KeiseiOshiage": "Keisei",
         "NaritaSkyAccess": "Keisei",
-        "NewShuttle": "SaitamaTransit",
+        "NewShuttle": "SaitamaRailway", // v4.3.470: ODPT 官方 operator 名实为 SaitamaRailway（埼玉新都市交通），本地原错写 SaitamaTransit
         "SobuMain": "JR-East",
         "SotetsuIzumino": "Sotetsu",
         "SotetsuShin-Yokohama": "Sotetsu",
@@ -450,16 +456,54 @@
     "RikutoEast": "RikuEast",
     "RikutsuWest": "RikuWest",
     "UtsunomiyaJR": "Utsunomiya",
+    // v4.3.475: 東武宇都宮線（ODPT Tobu.Utsunomiya 独立 railway，与 JR 宇都宮線 UtsunomiyaJR→Utsunomiya 并存，operator 不同不冲突）
+    "TobuUtsunomiya": "Utsunomiya",
+    // v4.3.475: 都営新宿線显式映射（透传已命中 ODPT Toei.Shinjuku，此处文档化防歧义）
+    "Shinjuku": "Shinjuku",
     "JobanMain": "Joban",
     "TohokuMain": "Tohoku",
+    // v4.3.479: 新建支線/東金線同名透传文档化（ODPT 官方 railway code 与本地 ID 一致）
+    "Togane": "Togane",
+    "NaritaAbikoBranch": "NaritaAbikoBranch",
+    "NaritaAirportBranch": "NaritaAirportBranch",
+    "NambuBranch": "NambuBranch",
     "Yamagata": "OuYamagata",
     "Kounan": "Hanawa",
     "Miyo": "Yahiko",
     "Yonezawa": "Yonesaka",
     "Komii": "Koumi",
-    // v4.3.430: 房総2線 ID 语义与 ODPT 相反——项目 内房線=Sotobo（ODPT Uchibo=内房）、外房線=Uchibo（ODPT Sotobo=外房）
-    "Sotobo": "Uchibo",
-    "Uchibo": "Sotobo",};
+    // ===== v4.3.470: ODPT API 实测修正（2026-09-10，22 operator 全量 railway 对比）=====
+    // 本地 line ID 与 ODPT odpt.Railway code 命名不同，原默认透传全部 404/空，实时数据接不上。
+    // 京急（ODPT 官方用 Main/Airport/Kurihama/Zushi/Daishi）
+    "Keikyu": "Main",
+    "KeikyuAirport": "Airport",
+    "KeikyuKurihama": "Kurihama",
+    "KeikyuZushi": "Zushi",
+    "Daishi_Keikyu": "Daishi",
+    // 京成（本線/千葉/金町/押上；千原線 KeiseiChihara ODPT 无独立 railway，维持透传不生效）
+    "Keisei": "Main",
+    "KeiseiChiba": "Chiba",
+    "KeiseiKanamachi": "Kanamachi",
+    "KeiseiOshiage": "Oshiage",
+    // 西武（Haijima=拝島線——4.3.471 起本地 line ID 已正名 Haijima，同名透传即命中 ODPT）
+    "Seibu_Sayama": "Sayama",
+    "SeibuEn": "Seibuen",
+    "SeibuShinjuku": "Shinjuku",
+    "SeibuTamagawa": "Tamagawa",
+    "SeibuTamako": "Tamako",
+    "SeibuToshima": "Toshima",
+    "SeibuYamaguchi": "Yamaguchi",
+    "Yurakucho_Seibu": "SeibuYurakucho",
+    // 小田急
+    "OdakyuEnoshima": "Enoshima",
+    "OdakyuTama": "Tama",
+    // 相鉄・東京モノレール
+    "SotetsuShin-Yokohama": "SotetsuShinYokohama",
+    "TokyoMonorail": "HanedaAirport",
+    // 埼玉新都市交通（operator 已改 SaitamaRailway，railway 同名）
+    "NewShuttle": "SaitamaRailway",
+    // （4.3.471: 北上線 Kitakami・山田線 Yamada 已正名，同名透传即命中 ODPT，垫片移除）
+};
 
     // 解析内部线路 key 为 ODPT Railway code（带别名）
     function resolveRailwayCode(operator, railway) {

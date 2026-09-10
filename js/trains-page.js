@@ -1574,16 +1574,64 @@
     Outer: { ja: "外回り", zh: "外环", en: "Outer", ko: "외선" }
   };
 
+  // v4.3.473: 方位词（Northbound/Southbound/Eastbound/Westbound）→ 站表方向映射。
+  // +1 = 该方位词的列车沿站表正向行驶（方向端点在站表后部）→ ▼（标签在图标下方）
+  // -1 = 沿站表反向行驶（方向端点在站表前部）→ ▲（标签在图标上方）
+  // 判定依据：2026-09-10 ODPT odpt:Train 实时样本（odpt:fromStation→odpt:toStation 沿站表 index 增减，
+  // 各条目样本 100% 一致）。站表方向以 railway_data.json 冻结站表为准。
+  // 未列入的线路/方向保持 ▶ 兜底（不猜测方向）。
+  var DIR_AXIS_MAP = {
+    // ---- JR-East ----
+    KeihinTohoku:   { Northbound: -1, Southbound: +1 }, // 站表 大宮→大船：北行=大宮（站表前）
+    ChuoSobuLocal:  { Eastbound: +1, Westbound: -1 },   // 站表 三鷹→千葉：東行=千葉（站表后）
+    Saikyo:         { Northbound: +1, Southbound: -1 }, // 站表 大崎→大宮：北行=大宮（站表后）
+    Kawagoe:        { Southbound: -1 },                 // 站表 大宮→日進→西大宮→…→川越：南行=大宮方向（站表前）
+    ShonanShinjuku: { Northbound: -1, Southbound: +1 }, // 站表 大宮→小田原：北行=大宮（站表前）
+    // ---- Toei ----
+    Asakusa:        { Northbound: +1, Southbound: -1 }, // 站表 西馬込→押上：北行=押上（站表后）
+    Mita:           { Northbound: +1, Southbound: -1 }, // 站表 目黒→西高島平：北行=高島平（站表后）
+    Shinjuku:       { Eastbound: +1, Westbound: -1 }    // 站表 新宿→本八幡：東行=本八幡（站表后）
+  };
+
   function _isLoopDirName(dirName) {
     if (!dirName) return false;
     return !!LOOP_DIR_NAMES[String(dirName).split('.').pop()];
   }
 
+  // v4.3.475: 大江户线（6字形）光丘段列车识别。
+  // 站表 [0]=Tochomae（环线/光丘段枢纽）、[1..10]=光丘段（西新宿五丁目→光丘，竖直开放尾）。
+  // 光丘段列车虽被 ODPT 标成 InnerLoop/OuterLoop，但没有"回り"语义——应显示真实终点（光丘/都厅前）。
+  function _isOedoBranchTrain(lineId, p) {
+    if (lineId !== 'Oedo' || !p) return false;
+    var si = p.stationIndex || 0;
+    if (si >= 1 && si <= 10) return true; // 当前位置在光丘段
+    if (si === 0) {
+      // 都厅前枢纽出发的车：dest=光丘 则进入光丘段；dest=都厅前 是环线折返
+      var _d0 = String(p.destinationStation || '').split('.').pop();
+      if (/^Hikarigaoka$/i.test(_d0)) return true;
+    }
+    return false;
+  }
+
   function _trainMoveDir(p, lineId) {
     var dn = String(p.railDirection || '').split('.').pop();
+    // v4.3.475: 大江户线光丘段列车先于环线判定——tail 从都厅前竖直向上延伸到光丘，
+    // 屏幕方向与站表 index 相反：往光丘=屏幕上方=▲、往都厅前=屏幕下方=▼
+    if (_isOedoBranchTrain(lineId, p)) {
+      var _dest = String(p.destinationStation || '').split('.').pop();
+      if (/^Hikarigaoka$/i.test(_dest)) return 'up';
+      if (/^Tochomae$/i.test(_dest)) return 'down';
+      return null;
+    }
     if (/^(InnerLoop|Inner|OuterLoop|Outer)$/.test(dn)) return null;
     if (/^Inbound$/.test(dn)) return 'up';
     if (/^Outbound$/.test(dn)) return 'down';
+    // v4.3.473: 方位词用线路映射表判定（未建表线路返回 null → ▶ 兜底）
+    if (/^(Northbound|Southbound|Eastbound|Westbound)$/.test(dn)) {
+      var axis = (DIR_AXIS_MAP[lineId] && DIR_AXIS_MAP[lineId][dn]);
+      if (axis === undefined) return null;
+      return axis > 0 ? 'down' : 'up';
+    }
     if (!dn) return null;
     var cur = p.stationIndex || 0;
     var sts = (window.UNIFIED_LINES && window.UNIFIED_LINES[lineId]) ? (window.UNIFIED_LINES[lineId].stations || []) : [];
@@ -1610,7 +1658,10 @@
     // v4.3.471: 单标签——箭头 + 方向端点站名；不再单独显示"上下行"方向词与终点。
     // 抽象方向词（Inbound/Outbound/Northbound 等无方向端点站）→ 用终点站名；环线 → 内回/外回。
     var labelText = '';
-    if (isLoopDir) {
+    // v4.3.475: 大江户线光丘段列车显示真实终点（光丘/都厅前），不走环线"内回/外回"标签
+    if (_isOedoBranchTrain(lineId, p)) {
+      labelText = _trainDestText(p.destinationStation);
+    } else if (isLoopDir) {
       labelText = (LOOP_DIR_NAMES[dn] && LOOP_DIR_NAMES[dn][lang]) || (LOOP_DIR_NAMES[dn] ? LOOP_DIR_NAMES[dn].ja : '');
     } else if (/^(Inbound|Outbound|Northbound|Southbound|Eastbound|Westbound)$/.test(dn)) {
       labelText = _trainDestText(p.destinationStation);
@@ -1618,7 +1669,7 @@
       labelText = _resolveStationLoose(dn) || dn;
     }
     if (!labelText) return;
-    var dirSym = moveDir === 'down' ? '▼' : (moveDir === 'up' ? '▲' : (isLoopDir ? '' : '▶'));
+    var dirSym = moveDir === 'down' ? '▼' : (moveDir === 'up' ? '▲' : ((isLoopDir && !_isOedoBranchTrain(lineId, p)) ? '' : '▶'));
     var ldir = document.createElementNS(svgNS, "text");
     ldir.setAttribute("data-train-label-for", String(trainUid));
     ldir.setAttribute("data-label-pos", "dir");

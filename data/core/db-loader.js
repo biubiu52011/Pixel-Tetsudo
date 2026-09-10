@@ -87,30 +87,8 @@ function applyData(data, i18n) {
     // ========== Data Correction Layer ==========
     // Fix known data issues in railway_data.json (locked file)
     (function applyDataCorrections() {
-      // 1. Fix Arakawa Line station name: Kataomo_Bashi -> Omokage_Bashi (面影橋)
-      if (window.UNIFIED_LINES.Arakawa && window.UNIFIED_LINES.Arakawa.stations) {
-        var stations = window.UNIFIED_LINES.Arakawa.stations;
-        for (var i = 0; i < stations.length; i++) {
-          if (stations[i] === 'Kataomo_Bashi') {
-            stations[i] = 'Omokage_Bashi';
-          }
-        }
-      }
-      
-      // 2. Fix station name map for Omokage_Bashi
-      if (window.STATION_NAME_MAP) {
-        if (!window.STATION_NAME_MAP['Omokage_Bashi']) {
-          window.STATION_NAME_MAP['Omokage_Bashi'] = { ja: '面影橋', en: 'Omokagebashi' };
-        }
-        if (window.EN_STATION_NAME_MAP) {
-          window.EN_STATION_NAME_MAP['Omokagebashi'] = '面影橋';
-        }
-      }
-      
-      // 3. Fix station coordinates if available
-      if (window.STATION_COORDS && window.STATION_COORDS['Kataomo_Bashi']) {
-        window.STATION_COORDS['Omokage_Bashi'] = window.STATION_COORDS['Kataomo_Bashi'];
-      }
+      // v4.3.473: 1-3 号修正（Kataomo_Bashi→Omokage_Bashi 面影橋）已删除——
+      // 冻结数据已按 ODPT 官方 ID 正名为 Omokagebashi（Freeze 例外），运行时补丁使命完成。
       
       // 4. Fix line ID with diacritics: Tōnami -> Tonami
       if (window.UNIFIED_LINES['Tōnami']) {

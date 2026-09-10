@@ -190,7 +190,7 @@
     "Karasuyama": "../images/列车/JR東日本/EV-E301系.png",   // 烏山線：EV-E301系（蓄電池）
     "Kururi": "../images/列车/JR東日本/キハE130系100番台.png",     // 久留里線：キハE130系100番台
     "Suigun": "../images/列车/JR東日本/キハE130系0番台.png",       // 水郡線：キハE130系0番台
-    "Uchibo": "../images/列车/JR東日本/E131系0番台.png",       // 外房線：E131系0番台
+    "Uchibo": "../images/列车/JR東日本/E131系0番台.png",       // 内房線：E131系0番台（4.3.478 互换后 Uchibo=内房）
     "Hachiko": "../images/列车/JR東日本/HB-E220系.png",  // 4.3.280：八高線非電化区間 2026.3 キハ110系定期運用終了 → HB-E220系
     "Noda": "../images/列车/東武鉄道/80000系.png", // 4.3.280：野田線（アーバンパークライン）：80000系（2025.3 投入の新主力）
 
@@ -233,11 +233,11 @@
     // 4.3.276 恢复实车图（原判定误判）
     "Sagami": "../images/列车/JR東日本/E131系500番台.png",   // 相模線
     "Tsurumi": "../images/列车/JR東日本/E131系1000番台.png",  // 鶴見線
-    "Sotobo": "../images/列车/JR東日本/E131系0番台.png",   // 内房線（特急わかしお は typeMatch E257系）
+    "Sotobo": "../images/列车/JR東日本/E131系0番台.png",   // 外房線（特急わかしお は typeMatch E257系）（4.3.478 互换后 Sotobo=外房）
 
     // Seibu specific（4.3.273：按运行系统分组，支线全列車直通親線 → 同一車輛）
     "SeibuShinjuku": "../images/列车/西武鉄道/30000系.png",       // 新宿系統・普通主力（40000系は特急S-TRAIN用）
-    "Hamura": "../images/列车/西武鉄道/30000系.png",              // 拝島線：新宿系統（全列車新宿線直通、同一車輛）
+    "Haijima": "../images/列车/西武鉄道/30000系.png",              // 拝島線：新宿系統（全列車新宿線直通、同一車輛）
     "Kokubunji": "../images/列车/西武鉄道/30000系.png",           // 国分寺線：新宿系統
     "SeibuTamagawa": "../images/列车/西武鉄道/101系.png", // 4.3.277：多摩川線.png 与 101系.png 同一图，归并
     "SeibuEn": "../images/列车/西武鉄道/101系（西武園線）.png",
@@ -337,7 +337,7 @@
     "Iiyama": "../images/列车/JR東日本/キハ110系.png", // 飯山線：キハ110系
     "Ishinomaki": "../images/列车/JR東日本/キハ110系.png", // 石巻線：キハ110系
     "Kamaishi": "../images/列车/JR東日本/キハ110系.png", // 釜石線：キハ110系
-    "Kamiishi": "../images/列车/JR東日本/キハ110系.png", // 北上線：キハ110系
+    "Kitakami": "../images/列车/JR東日本/キハ110系.png", // 北上線：キハ110系
     "Komii": "../images/列车/JR東日本/キハ110系.png", // 小海線：キハ110系
     "Kounan": "../images/列车/JR東日本/キハ110系.png", // 花輪線：キハ110系
     "Oga": "../images/列车/JR東日本/キハ110系.png", // 男鹿線：キハ110系
