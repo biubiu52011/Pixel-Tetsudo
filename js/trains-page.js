@@ -526,7 +526,9 @@
       // (no squeeze -> real font size == declared font size). Vertical params stay fixed.
       var _cw6 = ((typeof document !== "undefined" && document.querySelector("#trainsMapContainer")) || {}).clientWidth || 410;
       var _cw6Content = _isMobileView() ? Math.max(_cw6 - 16, 320) : _cw6;
-      var scale6 = _isMobileView() ? 1.5 : 1.3;
+      // v4.3.483c: 缩放系数对齐山手线 loopScale（移动 1.5 / 桌面 1.6）——
+      // 环宽 = 山手线 rectW（110 基准 × 同缩放）完全一致，尾区同步受益。
+      var scale6 = _isMobileView() ? 1.5 : 1.6;
       var spLoop6 = 26 * scale6;
       var loopRectW = 110 * scale6; // v4.3.483b: 环宽调窄（山手线同款基准），给光丘尾留水平空间
       var loopRectH = Math.max(loopStations.length * spLoop6 - 40 * scale6, 200 * scale6);
