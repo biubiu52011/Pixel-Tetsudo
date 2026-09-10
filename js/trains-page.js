@@ -913,15 +913,15 @@
 
     // Station label position (o.tx/o.ty/o.anchor overrides win; otherwise derive from side)
     var tx, ty, anchor;
-    // v4.3.499: 站名偏移随圆点放大联动（普通 r=7 → 偏移 10；换乘 r=12 → 偏移 14，均 ≥ r+2）
+    // v4.3.500: 站名与圆点同行，垂直居中对齐（dominant-baseline central，ty=圆心）
     if (o.tx != null) { tx = o.tx; ty = o.ty; anchor = o.anchor || "start"; }
     else if (side === "top") { tx = o.x; ty = o.y - (isJunction ? 14 : 10); anchor = "middle"; }
     else if (side === "bottom") { tx = o.x; ty = o.y + (isJunction ? 19 : 15); anchor = "middle"; }
-    else if (side === "left" && geometry.isSixShapedLoop) { tx = o.x + (isJunction ? 14 : 10); ty = o.y + (isJunction ? 4 : 3); anchor = "start"; }
-    else if (side === "left") { tx = o.x - (isJunction ? 14 : 10); ty = o.y + (isJunction ? 4 : 3); anchor = "end"; }
-    else if (side === "dual") { tx = o.x - (isJunction ? 16 : 12); ty = o.y + 3; anchor = "end"; }
-    else if (side === "right" && geometry.isSixShapedLoop) { tx = o.x - (isJunction ? 14 : 10); ty = o.y + (isJunction ? 4 : 3); anchor = "end"; }
-    else { tx = o.x + (isJunction ? 14 : 10); ty = o.y + 3; anchor = "start"; }
+    else if (side === "left" && geometry.isSixShapedLoop) { tx = o.x + (isJunction ? 14 : 10); ty = o.y; anchor = "start"; }
+    else if (side === "left") { tx = o.x - (isJunction ? 14 : 10); ty = o.y; anchor = "end"; }
+    else if (side === "dual") { tx = o.x - (isJunction ? 16 : 12); ty = o.y; anchor = "end"; }
+    else if (side === "right" && geometry.isSixShapedLoop) { tx = o.x - (isJunction ? 14 : 10); ty = o.y; anchor = "end"; }
+    else { tx = o.x + (isJunction ? 14 : 10); ty = o.y; anchor = "start"; }
 
     var label = document.createElementNS(svgNS, "text");
     label.setAttribute("x", tx);
@@ -935,6 +935,8 @@
     label.setAttribute("font-family", "Fusion Pixel, 'Courier New', monospace"); // v4.3.498: 站名用像素字体（与全局一致）
     label.setAttribute("font-weight", isJunction ? "700" : "500");
     label.setAttribute("text-anchor", anchor);
+    // v4.3.500: 左右侧站名垂直居中于圆点（top/bottom 保持基线在圆点上下方）
+    if (side !== "top" && side !== "bottom") label.setAttribute("dominant-baseline", "central");
     var _clampAvail = (side === "dual" || side === "left") ? (tx - 4) : ((side === "right") ? (svgW - 2 - tx) : 0);
     if (geometry.isSixShapedLoop) {
       if (geometry.junctionX === null || o.x >= geometry.junctionX) {
@@ -990,7 +992,7 @@
       var moreText = nonThru.length > maxShow ? "+" + (nonThru.length - maxShow) : "";
       var totalW = maxRowW + (moreText ? 12 : 0);
       var ix0, iy0;
-      iy0 = (side === "top") ? (o.y + 14) : (ty + (isJunction ? 11 : 7)); // v4.3.499: chip 避开放大后的换乘圆点（底缘 y+12）
+      iy0 = (side === "top") ? (o.y + 14) : (ty + (isJunction ? 14 : 9)); // v4.3.500: chip 在站名下方，避让圆点底缘（+2px）
       if (iy0 < 2) iy0 = 2;
       if (anchor === "end") { ix0 = tx - totalW; }
       else if (anchor === "start") { ix0 = tx; }
@@ -1305,7 +1307,7 @@
                 si: bsi, side: "right", geometry: geometry, isMobileView: isMobileView,
                 svgW: svgW, svgH: svgH, transferMap: transferMap, stationCoords: stationCoords,
                 rS: _rS,
-                tx: bx + 6, ty: bsy + 3, anchor: "start",
+                tx: bx + 10, ty: bsy, anchor: "start", // v4.3.500: 支线站名避让 r=7 圆点 + 垂直居中
                 skipTx: (bsi === 0)
               });
             }

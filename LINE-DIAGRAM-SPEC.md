@@ -146,16 +146,20 @@
 
 顶部/底部留白：topP=18、botP=16（有直通标签时 +26）。
 
-### 6.2 站名锚点与偏移（916-923）
+### 6.2 站名锚点与偏移（916-924）
+- **左右侧站名与圆点同行、垂直居中**（v4.3.500：`dominant-baseline: central`，ty=圆心）
 | side | tx | ty | anchor |
 |---|---|---|---|
-| top | x | y-12（换乘）/y-8 | middle |
-| bottom | x | y+16/y+13 | middle |
-| left（六形环） | x+10/x+8 | y+4/y+3 | start |
-| left | x-12/x-8 | y+4/y+3 | end |
-| dual（双列） | x-14/x-10 | y+3 | end |
-| right（六形环） | x-12/x-8 | y+4/y+3 | end |
-| right（默认） | x+10/x+8 | y+3 | start |
+| top | x | y-14（换乘）/y-10 | middle |
+| bottom | x | y+19/y+15 | middle |
+| left（六形环） | x+14/x+10 | y（central） | start |
+| left | x-14/x-10 | y（central） | end |
+| dual（双列） | x-16/x-12 | y（central） | end |
+| right（六形环） | x-14/x-10 | y（central） | end |
+| right（默认） | x+14/x+10 | y（central） | start |
+
+- 支线站（数据覆盖）：tx=bx+10、ty=bsy（central），同普通站规格（1310）。
+- 换乘 chip 顶部：ty+14（换乘站）/ty+9（普通站），避让圆点底缘 +2px（995）。
 
 ### 6.3 环线布局
 - **标准环线（山手线）**：双列画法（JR 官方视觉），右列田端→東京→品川、左列駒込→大崎；站名空间 = 75×scale/侧。
