@@ -912,6 +912,46 @@
   // === Unified station renderer (main line & branch share the same style) ===
   // v4.3.449: 主線/支線の区別は geometry（座標・side・色）のみに残し、駅・ラベル・
   // 乗換チップ・直通チップの描画はこの関数一本で統一。支線駅も主線駅と同一スタイル。
+
+  // v4.3.506: 站名侧选择 = 占用检测（"左侧被占用就在右侧，右侧被占用就在左侧"）。
+  // 对每个站检测圆点左/右两侧的占用情况，选择空侧；返回 'right'（站名在圆点右侧）
+  // 或 'left'（站名在圆点左侧）。占用源按序检测：
+  //   ① 空间占用：该侧可用空间放不下全尺寸（16px）文字宽（需 clamp 缩 → 空间被挤压占用）
+  //   ② 线路占用：stub 水平线（y=junctionY，x∈[stubX, junctionX]）——站名若放左会骑线
+  //   ③ 文字带占用：左列站左侧被光丘尾站名带（x<junctionX 侧、y∈[tailTop, junctionY]）占用
+  //   ④ 对面圆点占用：左列站右侧被右列圆点（y 同行）占用；右列站左侧被左列圆点占用
+  function _pickSixLabelSide(o, geometry, svgW) {
+    var x = o.x, y = o.y;
+    var off = o.isJunction ? 14 : 10;
+    var minW = (o.labelLen || 3) * 16 * 1.1; // 全尺寸（16px）文字宽
+    var isTail = x < geometry.junctionX;            // 光丘尾（环外竖线带）
+    var isLeftCol = !isTail && Math.abs(x - geometry.junctionX) < 1;
+    var isRightCol = !isTail && !isLeftCol;
+
+    // 右侧可用空间（右边界约束）
+    var availR;
+    if (isTail) availR = geometry.junctionX - 4 - (x + off);                              // 到环左缘
+    else if (isLeftCol) availR = geometry.junctionX + geometry.loopRectW - 7 - 4 - (x + off); // 到右列圆点左缘
+    else availR = svgW - 2 - (x + off);                                                   // 到画布右缘
+    var availL = x - off - 4;                                                             // 到画布左缘
+
+    var leftOccupied = false, rightOccupied = false;
+    // ① 空间占用
+    if (availL < minW) leftOccupied = true;
+    if (availR < minW) rightOccupied = true;
+    // ② 线路占用：Tochomae（y==junctionY）左侧站名带会骑 stub 线
+    if (isLeftCol && Math.abs(y - geometry.junctionY) <= 8) leftOccupied = true;
+    // ③ 文字带占用：左列上方站（y 带与光丘尾站名带相交）左侧被光丘尾站名占用
+    if (isLeftCol && y < geometry.junctionY - 8) leftOccupied = true;
+    // ④ 对面圆点占用：左列站右侧被右列圆点占用（y 同行）；右列站左侧被左列圆点占用
+    if (isLeftCol) rightOccupied = true;
+    if (isRightCol) leftOccupied = true;
+
+    if (leftOccupied && !rightOccupied) return "right";
+    if (rightOccupied && !leftOccupied) return "left";
+    return "right"; // 双侧同况（都空/都占用）→ 朝右（主布局习惯）
+  }
+
   function _renderStationNode(staticLayer, svgNS, o) {
     var color = o.color;
     var isJunction = !!o.isJunction;
@@ -920,6 +960,9 @@
     var geometry = o.geometry || {};
     var svgW = o.svgW;
     var svgH = o.svgH;
+    // v4.3.506: 预取站名并记录字数（供占用检测估算文字宽）
+    var _sName = (o.rS || function(id){ return id; })(o.stationId) || "";
+    o.labelLen = _sName.length;
 
     // Station circle
     var circle = document.createElementNS(svgNS, "circle");
@@ -938,10 +981,15 @@
     if (o.tx != null) { tx = o.tx; ty = o.ty; anchor = o.anchor || "start"; }
     else if (side === "top") { tx = o.x; ty = o.y - (isJunction ? 14 : 10); anchor = "middle"; }
     else if (side === "bottom") { tx = o.x; ty = o.y + (isJunction ? 19 : 15); anchor = "middle"; }
-    // v4.3.505: 岔路站名统一朝右——光丘尾站（o.y < junctionY）与 Tochomae（o.y == junctionY，
-    // 岔路 junction，v4.3.505 起朝右与光丘尾 10 站统一）站名都在圆点右侧；
-    // 左列环站（o.y > junctionY，新宿西口…春日）站名朝左（双列朝外）。
-    else if (side === "left" && geometry.isSixShapedLoop && (!geometry.isDualLoop6 || o.y <= geometry.junctionY)) { tx = o.x + (isJunction ? 14 : 10); ty = o.y; anchor = "start"; }
+    // v4.3.506: 六形环双列——站名侧由占用检测决定（_pickSixLabelSide：左侧被占用→右侧，
+    // 右侧被占用→左侧）；左列下方站（左侧空）朝左、光丘尾/左列上方/Tochomae（左侧被
+    // 线路/光丘尾站名带/画布边占用）朝右、右列站（左侧环内被对面圆点占用）朝右。
+    else if (side === "left" && geometry.isSixShapedLoop && geometry.isDualLoop6) {
+      var _sixSide = _pickSixLabelSide(o, geometry, svgW);
+      tx = (_sixSide === "right") ? (o.x + (isJunction ? 14 : 10)) : (o.x - (isJunction ? 14 : 10));
+      ty = o.y; anchor = (_sixSide === "right") ? "start" : "end";
+    }
+    else if (side === "left" && geometry.isSixShapedLoop && !geometry.isDualLoop6) { tx = o.x + (isJunction ? 14 : 10); ty = o.y; anchor = "start"; }
     else if (side === "left") { tx = o.x - (isJunction ? 14 : 10); ty = o.y; anchor = "end"; }
     else if (side === "dual") { tx = o.x - (isJunction ? 16 : 12); ty = o.y; anchor = "end"; }
     else if (side === "right" && geometry.isSixShapedLoop && !geometry.isDualLoop6) { tx = o.x - (isJunction ? 14 : 10); ty = o.y; anchor = "end"; }
@@ -964,12 +1012,13 @@
     var _clampAvail = (side === "dual" || side === "left") ? (tx - 4) : ((side === "right") ? (svgW - 2 - tx) : 0);
     if (geometry.isSixShapedLoop) {
       if (geometry.isDualLoop6) {
-        // v4.3.505: 双列模式——右列站走通用 clamp（940：svgW-2-tx）。
-        // y<=junctionY 的 left 站（环段尾 S32..S37、Tochomae 与光丘尾）站名都朝右，但空间不同：
+        // v4.3.506: 双列模式——右列站走通用 clamp（svgW-2-tx）。
+        // 站名朝右的 left 站（_sixSide==='right'：光丘尾、左列上方 S32..S37、Tochomae）走窄空间 clamp，
+        // 但空间不同：
         // - 光丘尾（x<junctionX，环外）：名到环左缘前（junctionX-4-tx）
         // - 左列上方站与 Tochomae（x==junctionX，环内）：名到右列圆点左缘前（junctionX+loopRectW−7−4−tx，
         //   58px 窄空间，5 字站名经 clamp 缩至 10px 恰好贴圆点不重叠）
-        if (side === "left" && o.y <= geometry.junctionY) {
+        if (side === "left" && _sixSide === "right") {
           var _rDotL6 = geometry.junctionX + (geometry.loopRectW || 72) - 7;
           _clampAvail = o.x < geometry.junctionX
             ? Math.max(40, Math.floor(geometry.junctionX - tx - 4))
@@ -993,7 +1042,7 @@
     if (_clampAvail > 0) label.setAttribute("data-clamp-avail", String(Math.max(40, Math.round(_clampAvail))));
 
     // Station name
-    var stationName = (o.rS || function(id){ return id; })(o.stationId);
+    var stationName = _sName;
     var nameTspan = document.createElementNS(svgNS, "tspan");
     nameTspan.textContent = stationName;
     label.appendChild(nameTspan);
