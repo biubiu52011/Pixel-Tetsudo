@@ -532,10 +532,30 @@
       var scale6 = _isMobileView() ? 1.5 : 1.6;
       var spLoop6 = 26 * scale6;
       var loopRectW = 48 * scale6; // v4.3.496: 环宽对齐山手线标准（48 基准），给光丘尾留水平空间
-      var loopRectH = Math.max(loopStations.length * spLoop6 - 40 * scale6, 200 * scale6);
+      // v4.3.502: 六形环环段改左右二分（双列）——环高用山手线公式（站数/2 列 × 36 基准 −80），
+      // 并按各列最宽换乘 chip 高度动态放大（_colPitch6，与山手线 _colPitch 同款）。
+      var loopRectH = Math.max(loopStations.length * 36 / 2 - 80, 140) * scale6;
+      var _colPitch6 = function(ids) {
+        var mx = 16 + 6 + 22 + 12;
+        for (var k6 = 0; k6 < ids.length; k6++) {
+          var _txN6 = (transferMap[ids[k6]] || []).filter(function(t) { return !t.through; }).length;
+          var _rows6 = Math.ceil(Math.min(_txN6, 8) / 4);
+          mx = Math.max(mx, 16 + 6 + _rows6 * 22 + 12);
+        }
+        return mx;
+      };
+      var _loopN = loopStations.length;
+      var _halfN = Math.ceil(_loopN / 2); // 28 → 14/14
+      var _leftIds6 = [], _rightIds6 = [];
+      for (var _s6 = 0; _s6 < _halfN; _s6++) { _leftIds6.push(loopStations[_s6]); _rightIds6.push(loopStations[_halfN + _s6]); }
+      var _pitch6 = Math.max(_colPitch6(_leftIds6), _colPitch6(_rightIds6));
+      var _needH6 = _pitch6 * (_halfN - 1);
+      if (_needH6 > loopRectH) loopRectH = _needH6;
       
       var leftMargin = 8 * scale6;
-      var marginRight = 20 * scale6 + (_isMobileView() ? 36 : 12);
+      // v4.3.502: 双列后右列站名朝外（anchor=start），marginRight 需容纳站名——
+      // 移动 92 / 桌面 84（右列站名空间 = marginRight−16 ≥ 68px，4 字站名全尺寸显示）。
+      var marginRight = 20 * scale6 + (_isMobileView() ? 92 : 84);
       var marginTopBot = 40 * scale6;
       // v4.3.482: tail 列宽与直线支线同源（GEOM.BRANCH_COL_W × 本图缩放系数）。
       // 移动端容器是 1:1 硬约束，tail 列让位给环（保底 BRANCH_COL_W×1.1 ≈ 现状 105px）。
@@ -549,7 +569,13 @@
         loopRectW = Math.max(_cw6Content - leftMargin - tailAreaWidth - marginRight, 48 * scale6);
       }
       svgW = leftMargin + tailAreaWidth + loopRectW + marginRight;
-      svgH = loopRectH + marginTopBot * 2;
+      // Tail 高度先算（依赖 loopRectH），svgH 须同时容纳环（垂直居中）与向上伸出的光丘尾。
+      // v4.3.502: junction 在左列顶（非中点），tail 顶 = loopCy−0.4643×loopRectH−tailTotalHeight ≥ 边距
+      var tailCount = hikarigaokaStations.length - 1;
+      var tailTotalHeight = tailCount > 0 ? Math.min(loopRectH * 0.85, tailCount * spLoop6) + 32 : 0;
+      var tailStep = tailCount > 0 ? tailTotalHeight / tailCount : 0;
+      svgH = Math.max(loopRectH + marginTopBot * 2,
+                      2 * (marginTopBot + loopRectH * (0.5 - 0.5 / _halfN) + tailTotalHeight));
       
       // ============ Geometry calculation ============
       // Loop center - derived from svg size, not independently set
@@ -559,19 +585,14 @@
       var loopHalfH = loopRectH / 2;
       
       // Junction (Tochomae) - MUST be derived from loop rectangle position formula
-      // = loop left edge + vertical midpoint (guarantees perfect alignment, no gaps)
+      // v4.3.502: 双列后 junction = 左列顶（环左缘顶部），光丘尾从左上角伸出（非左缘中点）
       var junctionX = loopCx - loopHalfW;
-      var junctionY = loopCy;
+      var junctionY = loopCy - loopHalfH + (0.5 / _halfN) * loopRectH;
       
       // Stub: short horizontal segment from loop side (creates "branching from loop side" realism)
       // stubX = tail 列 x 位置（画布左缘 + 边距 10px），分叉引出段 = junctionX→stubX 水平线
       var stubX = leftMargin + 10 * scale6;
       var stubY = junctionY;
-      
-      // Tail: vertical line going up, stations arranged along vertical line
-      var tailCount = hikarigaokaStations.length - 1;
-      var tailTotalHeight = tailCount > 0 ? Math.min(loopRectH * 0.85, tailCount * spLoop6) + 32 : 0;
-      var tailStep = tailCount > 0 ? tailTotalHeight / tailCount : 0;
       
       // Tail station coordinates: first = junction, rest = along vertical line at stubX
       var hikarigaokaLinePts = [{ x: junctionX, y: junctionY, side: 'left', stationId: hikarigaokaStations[0] }];
@@ -584,33 +605,19 @@
         });
       }
       
-      // Loop station coordinates (perimeter calculation)
-      var perimeter = 2 * (loopRectW + loopRectH);
-      var startOffset = 2 * loopRectW + 1.5 * loopRectH;
+      // v4.3.502: 环段站左右二分（双列，与山手线 isDoubleColumnLoop 一致）——
+      // 左列 [0..13]（Tochomae 顶→下）、右列 [14..27]（顶→下）。
+      // 站序流：Tochomae→左列下→环底→右列下→右列上→环顶→Tochomae（闭合）。
       var loopPts6 = [];
-      for (var i = 0; i < loopStations.length; i++) {
-        var pos = ((i / loopStations.length) * perimeter + startOffset) % perimeter;
-        var lx, ly, side;
-        if (pos < loopRectW) { 
-          lx = loopCx - loopHalfW + pos; 
-          ly = loopCy - loopHalfH; 
-          side = "top"; 
-        } else if (pos < loopRectW + loopRectH) { 
-          lx = loopCx + loopHalfW; 
-          ly = loopCy - loopHalfH + (pos - loopRectW); 
-          side = "right"; 
-        } else if (pos < 2 * loopRectW + loopRectH) { 
-          lx = loopCx + loopHalfW - (pos - loopRectW - loopRectH); 
-          ly = loopCy + loopHalfH; 
-          side = "bottom"; 
-        } else { 
-          lx = loopCx - loopHalfW; 
-          ly = loopCy + loopHalfH - (pos - 2 * loopRectW - loopRectH); 
-          side = "left"; 
-        }
-        loopPts6.push({ x: lx, y: ly, side: side, stationId: loopStations[i] });
+      for (var li6 = 0; li6 < _halfN; li6++) {
+        var _tl6 = (li6 + 0.5) / _halfN;
+        loopPts6.push({ x: junctionX, y: loopCy - loopHalfH + _tl6 * loopRectH, side: "left", stationId: loopStations[li6] });
       }
-      // Override first station (junction) with exact coordinates derived from loop formula
+      for (var ri6 = 0; ri6 < _halfN; ri6++) {
+        var _tr6 = (ri6 + 0.5) / _halfN;
+        loopPts6.push({ x: loopCx + loopHalfW, y: loopCy - loopHalfH + _tr6 * loopRectH, side: "right", stationId: loopStations[_halfN + ri6] });
+      }
+      // Junction 坐标精确覆盖（左列顶 = tail junction，与 hikarigaokaLinePts[0] 完全一致）
       loopPts6[0].x = junctionX;
       loopPts6[0].y = junctionY;
       loopPts6[0].side = "left";
@@ -858,6 +865,7 @@
       svgH: svgH,
       isLoop: isLoop,
       isSixShapedLoop: isSixShapedLoop,
+      isDualLoop6: isSixShapedLoop, // v4.3.502: 六形环环段左右二分（双列）——站名朝外、clamp 走通用
       sp: sp,
       color: color,
       branchLines: branchLines,
@@ -917,10 +925,10 @@
     if (o.tx != null) { tx = o.tx; ty = o.ty; anchor = o.anchor || "start"; }
     else if (side === "top") { tx = o.x; ty = o.y - (isJunction ? 14 : 10); anchor = "middle"; }
     else if (side === "bottom") { tx = o.x; ty = o.y + (isJunction ? 19 : 15); anchor = "middle"; }
-    else if (side === "left" && geometry.isSixShapedLoop) { tx = o.x + (isJunction ? 14 : 10); ty = o.y; anchor = "start"; }
+    else if (side === "left" && geometry.isSixShapedLoop && (!geometry.isDualLoop6 || o.x < geometry.junctionX)) { tx = o.x + (isJunction ? 14 : 10); ty = o.y; anchor = "start"; }
     else if (side === "left") { tx = o.x - (isJunction ? 14 : 10); ty = o.y; anchor = "end"; }
     else if (side === "dual") { tx = o.x - (isJunction ? 16 : 12); ty = o.y; anchor = "end"; }
-    else if (side === "right" && geometry.isSixShapedLoop) { tx = o.x - (isJunction ? 14 : 10); ty = o.y; anchor = "end"; }
+    else if (side === "right" && geometry.isSixShapedLoop && !geometry.isDualLoop6) { tx = o.x - (isJunction ? 14 : 10); ty = o.y; anchor = "end"; }
     else { tx = o.x + (isJunction ? 14 : 10); ty = o.y; anchor = "start"; }
 
     var label = document.createElementNS(svgNS, "text");
@@ -939,7 +947,13 @@
     if (side !== "top" && side !== "bottom") label.setAttribute("dominant-baseline", "central");
     var _clampAvail = (side === "dual" || side === "left") ? (tx - 4) : ((side === "right") ? (svgW - 2 - tx) : 0);
     if (geometry.isSixShapedLoop) {
-      if (geometry.junctionX === null || o.x >= geometry.junctionX) {
+      if (geometry.isDualLoop6) {
+        // v4.3.502: 双列模式——环内左右列站名朝外，走通用 clamp（940：左列 tx-4 / 右列 svgW-2-tx）；
+        // 仅光丘尾（左列外侧 o.x < junctionX）保留 tail 特判（站名朝右到环左缘）。
+        if (side === "left" && o.x < geometry.junctionX) {
+          _clampAvail = Math.max(40, Math.floor(geometry.junctionX - tx - 4));
+        }
+      } else if (geometry.junctionX === null || o.x >= geometry.junctionX) {
         // Loop stations: name area = half the loop width (shared by both sides)
         var _sc6 = isMobileView ? 1.5 : 1.3;
         var _m6r = isMobileView ? 66 : (20 * _sc6 + 12);
