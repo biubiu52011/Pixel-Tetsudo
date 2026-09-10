@@ -913,45 +913,37 @@
   // v4.3.449: 主線/支線の区別は geometry（座標・side・色）のみに残し、駅・ラベル・
   // 乗換チップ・直通チップの描画はこの関数一本で統一。支線駅も主線駅と同一スタイル。
 
-  // v4.3.506/507: 岔路站站名侧选择 = 占用检测（用户规则："左侧被占用就在右侧，
-  // 右侧被占用就在左侧"，**只针对那根岔**——光丘支线的光丘尾 10 站 + Tochomae junction；
-  // 环站不适用，走 4.3.504 固定规则）。
-  // 对岔路站检测圆点左/右两侧的占用情况，选择空侧；返回 'right'（站名在圆点右侧）
-  // 或 'left'（站名在圆点左侧）。占用源按序检测：
-  //   ① 空间占用：该侧可用空间放不下全尺寸（16px）文字宽（需 clamp 缩 → 空间被挤压占用）
-  //   ② 线路占用：stub 水平线（y=junctionY，x∈[stubX, junctionX]）——站名若放左会骑线
-  //   ③ 文字带占用：左列站左侧被光丘尾站名带（x<junctionX 侧、y∈[tailTop, junctionY]）占用
-  //   ④ 对面圆点占用：左列站右侧被右列圆点（y 同行）占用；右列站左侧被左列圆点占用
+  // v4.3.508: 岔路站站名侧 = 占用检测（用户规则："按照双排规则主干该在哪在哪里，
+  // 枝干如果发现某一侧被主干占用默认就在另外一侧"）——**只针对那根岔**（光丘支线的
+  // 光丘尾 10 站 + Tochomae junction）；环站（主干）按双排固定规则（4.3.504，不走此函数）。
+  // 对岔路站检测圆点左/右两侧是否被占用，被占用则放另一侧；返回 'right' 或 'left'。
+  // 占用判定：
+  //   ① 空间占用：该侧可用空间 < clamp 下限文字宽（10px×字数×1.1）——右侧可用空间到
+  //      主干边界（光丘尾到环左缘 / Tochomae 到右列圆点左缘），左侧到画布左缘；空间被
+  //      主干/画布挤压即视为该侧被占用（clamp 缩至下限仍放不下）
+  //   ② 线路占用：Tochomae（y==junctionY）左侧有枝干 stub 引出线，站名放左会骑线
+  // 决策：单侧占用→放另一侧；双侧同况（都空/都占用）→ 默认朝右
   function _pickSixLabelSide(o, geometry, svgW) {
     var x = o.x, y = o.y;
     var off = o.isJunction ? 14 : 10;
-    var minW = (o.labelLen || 3) * 16 * 1.1; // 全尺寸（16px）文字宽
+    var minW = (o.labelLen || 3) * 10 * 1.1; // clamp 下限 10px 文字宽
     var isTail = x < geometry.junctionX;            // 光丘尾（环外竖线带）
-    var isLeftCol = !isTail && Math.abs(x - geometry.junctionX) < 1;
-    var isRightCol = !isTail && !isLeftCol;
-
-    // 右侧可用空间（右边界约束）
-    var availR;
-    if (isTail) availR = geometry.junctionX - 4 - (x + off);                              // 到环左缘
-    else if (isLeftCol) availR = geometry.junctionX + geometry.loopRectW - 7 - 4 - (x + off); // 到右列圆点左缘
-    else availR = svgW - 2 - (x + off);                                                   // 到画布右缘
-    var availL = x - off - 4;                                                             // 到画布左缘
+    // 右侧可用空间（到主干边界）
+    var availR = isTail
+      ? geometry.junctionX - 4 - (x + off)                               // 光丘尾：到环左缘
+      : geometry.junctionX + geometry.loopRectW - 7 - 4 - (x + off);     // Tochomae：到右列圆点左缘
+    var availL = x - off - 4;                                             // 到画布左缘
 
     var leftOccupied = false, rightOccupied = false;
-    // ① 空间占用
+    // ① 空间占用（被主干/画布挤压）
     if (availL < minW) leftOccupied = true;
     if (availR < minW) rightOccupied = true;
-    // ② 线路占用：Tochomae（y==junctionY）左侧站名带会骑 stub 线
-    if (isLeftCol && Math.abs(y - geometry.junctionY) <= 8) leftOccupied = true;
-    // ③ 文字带占用：左列上方站（y 带与光丘尾站名带相交）左侧被光丘尾站名占用
-    if (isLeftCol && y < geometry.junctionY - 8) leftOccupied = true;
-    // ④ 对面圆点占用：左列站右侧被右列圆点占用（y 同行）；右列站左侧被左列圆点占用
-    if (isLeftCol) rightOccupied = true;
-    if (isRightCol) leftOccupied = true;
+    // ② 线路占用：Tochomae（y==junctionY）左侧枝干 stub 线，站名放左会骑线
+    if (!isTail && Math.abs(y - geometry.junctionY) <= 8) leftOccupied = true;
 
     if (leftOccupied && !rightOccupied) return "right";
     if (rightOccupied && !leftOccupied) return "left";
-    return "right"; // 双侧同况（都空/都占用）→ 朝右（主布局习惯）
+    return "right"; // 双侧同况（都空/都占用）→ 默认朝右
   }
 
   function _renderStationNode(staticLayer, svgNS, o) {
@@ -983,16 +975,17 @@
     if (o.tx != null) { tx = o.tx; ty = o.ty; anchor = o.anchor || "start"; }
     else if (side === "top") { tx = o.x; ty = o.y - (isJunction ? 14 : 10); anchor = "middle"; }
     else if (side === "bottom") { tx = o.x; ty = o.y + (isJunction ? 19 : 15); anchor = "middle"; }
-    // v4.3.507: 六形环双列——占用检测（_pickSixLabelSide）**只针对岔路站**（光丘尾 10 站
-    // + Tochomae junction，用户裁定"规定是针对那根岔"）；环站（左列/右列）保持 4.3.504
-    // 固定规则：左列上方朝右、左列下方朝左、右列朝右。
+    // v4.3.508: 六形环双列——**主干（环站）按双排规则固定**（左列上方朝右、左列下方朝左、
+    // 右列朝右，v4.3.504）；**枝干（光丘尾 10 站 + Tochomae junction）站名侧=占用检测**
+    // （_pickSixLabelSide：某一侧被占用→放另一侧，用户裁定"枝干如果发现某一侧被主干占用
+    // 默认就在另外一侧"）。
     else if (side === "left" && geometry.isSixShapedLoop && geometry.isDualLoop6) {
       var _sixSide;
       if (o.x < geometry.junctionX || isJunction) {
-        // 岔路站：占用检测（左侧被占用→右侧，右侧被占用→左侧）
+        // 枝干站：占用检测（哪侧被主干/画布占用→另一侧）
         _sixSide = _pickSixLabelSide(o, geometry, svgW);
       } else {
-        // 环站：固定规则（v4.3.504）
+        // 主干环站：双排固定规则（v4.3.504）
         _sixSide = (o.y < geometry.junctionY) ? "right" : "left";
       }
       tx = (_sixSide === "right") ? (o.x + (isJunction ? 14 : 10)) : (o.x - (isJunction ? 14 : 10));
