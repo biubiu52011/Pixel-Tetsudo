@@ -999,9 +999,64 @@
         var loaded = 0;
         var newTimetables = {};
 
+        // v4.3.489: JR-East 时刻表按 railway 分批拉取（ODPT 单请求 1000 条上限会把
+        // 首都圈外线路截断——实测全量请求仅返回 ChuoRapid/Hachiko/Joban/Agatsuma/JobanRapid 5 线，
+        // 其余 83 条 JR 线路时刻表全部丢失，导致时刻表推定无法覆盖地方线）
+        function collectTimetableByRailway(op, localLineIds) {
+            var batch = localLineIds.filter(function(lid) {
+                return ODPT_ENDPOINTS[op] && ODPT_ENDPOINTS[op].trainTimetable;
+            });
+            // v4.3.489: 分批并行拉取——fetchODPT 自带 3 并发 + 150ms 滑动窗口限速；
+            // 85 条一次 Promise.all 在弱网/沙箱下可能被连接池限流卡住，每批 20 条链式
+            // 推进，既完整覆盖又避免瞬时请求过多（约 4-6s 完成全量）
+            var BATCH = 20;
+            var idx = 0;
+            function nextBatch() {
+                if (idx >= batch.length) return Promise.resolve();
+                var slice = batch.slice(idx, idx + BATCH);
+                idx += BATCH;
+                return Promise.all(slice.map(function(lid) {
+                    return window.ODPTClient.getTimetableForRailway(op, lid).then(function(data) {
+                        var rows = (data && data.length > 0) ? data : [];
+                        // 探测标记：无论有无数据都记录，避免 loadMissingTimetables 对空线反复请求
+                        if (!window.ODPT_TT_PROBED) window.ODPT_TT_PROBED = {};
+                        window.ODPT_TT_PROBED[lid] = true;
+                        if (rows.length > 0) {
+                            if (!newTimetables[op]) newTimetables[op] = [];
+                            newTimetables[op] = newTimetables[op].concat(rows);
+                            if (!window.ODPT_TIMETABLES[op]) window.ODPT_TIMETABLES[op] = [];
+                            window.ODPT_TIMETABLES[op] = window.ODPT_TIMETABLES[op].concat(rows);
+                        }
+                    }).catch(function() {
+                        if (!window.ODPT_TT_PROBED) window.ODPT_TT_PROBED = {};
+                        window.ODPT_TT_PROBED[lid] = true;
+                    });
+                })).then(nextBatch);
+            }
+            return nextBatch().then(function() {
+                if (newTimetables[op] && newTimetables[op].length > 0) {
+                    if (!window.ODPT_TRAINS[op]) window.ODPT_TRAINS[op] = newTimetables[op];
+                    loaded++;
+                }
+            });
+        }
+
         var promises = ops.map(function(op) {
             var ep = ODPT_ENDPOINTS[op];
             if (!ep.trainTimetable) return Promise.resolve();
+
+            // JR-East 走按 railway 分批（本地线路映射），其余运营商保持单请求
+            if (op === 'JR-East') {
+                // v4.3.489: 从 LINE_TO_OPERATOR 收集全部 JR-East 本地线（85 条）——
+                // LINE_RAILWAY_CODE 只含显式改名线（62 条同名透传线不在其中），
+                // 漏掉会让 Yamanote/ChuoRapid/Agatsuma 等大批线路时刻表缺失
+                var jrLineIds = [];
+                Object.keys(LINE_TO_OPERATOR).forEach(function(lid) {
+                    if (LINE_TO_OPERATOR[lid] === 'JR-East') jrLineIds.push(lid);
+                });
+                if (jrLineIds.length === 0) return Promise.resolve();
+                return collectTimetableByRailway(op, jrLineIds);
+            }
 
             return fetchODPT(buildUrl(op, 'trainTimetable')).then(extractData).then(function(data) {
                 if (data && data.length > 0) {

@@ -280,6 +280,18 @@ If the answer is NO, the change is REJECTED.
 
 ---
 
+## 4.3.489（2026-09-10，历史问题大扫除·时刻表推定修复）
+**问题盘点**：对话历史提出未修复项——①首都圈外 JR 无实时映射；②时刻表推定未覆盖。
+**根因实证（ODPT API 实拉）**：
+- odpt:Train（实时位置）仅 370 条、覆盖 22 条全部首都圈通勤系统——地方线 ODPT 无 Train 记录，属数据源限制
+- odpt:TrainTimetable（时刻表）单请求恰 1000 条截断，仅返回 5 线（ChuoRapid 926 条占满）——其余 83 条 JR 线时刻表全部丢失
+- 逐 railway 探测 88 条：35 条有时刻表（首都圈 22 + Ome/Itsukaichi/Hachiko/Kawagoe/Kururi/Togane/Ito/Sagami/Narita/Sotobo/Uchibo + Agatsuma 10/Joetsu 10/Kashima 64），41 条地方线（东北/上越/奥羽/信越等）ODPT 无时刻表数据
+**修复**：
+- data/api/odpt-unified.js loadTimetableData：JR-East 改按 railway 分批拉取（collectTimetableByRailway，20 条/批链式，fetchODPT 自带 3 并发限速）——从 LINE_TO_OPERATOR 收集全部 85 条 JR-East 本地线（非 LINE_RAILWAY_CODE，62 条同名透传线不在此表），探测标记 window.ODPT_TT_PROBED 防空线重试。实测覆盖 39 railway / 19625 条（旧逻辑 5 线/1000 条）
+- js/data-fusion.js loadMissingTimetables：priorityOps 白名单加入 JR-East（原仅私铁/地铁，JR 永不补缺）；toLoad filter 排除已探测线（ODPT_TT_PROBED）
+**验证**：e2e 实拉 86 线探测全完成、关键线路（Yamanote/ChuoRapid/Ome/Agatsuma/Joetsu/Kashima）全部到位、Tokaido 1384 条合并正确；node --check 双文件；integration_test.js 28/28
+**未修复项（数据源限制，非代码缺陷）**：41 条地方线（BanetsuEast/Echigo/Ou/Ryomo/Uetsu 等）ODPT 无 Train/TrainTimetable 数据，实时与推定均无法覆盖；UI 按现状显示（无实时时状态缺失）
+
 Last updated: 2026-09-09
 Version: RC-2
 ---
@@ -501,3 +513,4 @@ Before tagging a release:
 
 
 - 2026-09-10 用户指示（山手线回退・4.3.489）: 4.3.486-488 环线双列统一整体回退——用户判定方向错误（「弄反了，把大江户线的间距调整到山手线了」）。trains-page.js 恢复至 4.3.485（ac15b47）原始实现：①山手线恢复 isYamanote 双列特例（右列 [8..0]+[29..24] 田端→東京→品川、左列 [9..23] 駒込→大崎、_colPitch 按换乘 chip 自适应）；②大江户线（isSixShapedLoop）恢复周长均布原版（spLoop6=26×scale、环高=环段站数×26×scale−40×scale）；③删除 RING_SPLIT_MAP 与 4.3.488 stationId 坐标索引改动。trains.html 引用回退至 v=4.3.489。验证: node --check OK。
+- 2026-09-10 用户指示（删除 isYamanote 特例机制・4.3.491）: 删除 trains-page.js 硬编码的 `lineId === "Yamanote"` 特判（isYamanote 变量 + 分支触发），但山手线双列画法（右列 [8..0]+[29..24] 田端→東京→品川、左列 [9..23] 駒込→大崎、_colPitch 按换乘 chip 自适应）逐字节原样保留——触发改为数据驱动：railway_data.json Yamanote 块新增 `"isDoubleColumnLoop": true`（Freeze 例外，先例 isSixShapedLoop）。完整 Provider→Consumer 链：railway_data.json（唯一真源）→ gen-file-data.js 重生成 railway-data.file.js（file:// bundle，改 JSON 后已重跑）→ trains-page.js getLinesData 包装新增 `isDoubleColumnLoop: l.isDoubleColumnLoop === true`（非融合路径）→ data-fusion.js fuseLine 融合映射新增 `isDoubleColumnLoop: line.isDoubleColumnLoop === true`（融合路径，fuseLine 读 DataLayer/UNIFIED_LINES 原始对象故属性可达）→ computeRouteGeometry 以 `line.isDoubleColumnLoop === true` 触发双列分支。_computeLineHash 追加 isDoubleColumnLoop 维度（几何影响输入进缓存键，防陈旧几何）。Oedo（isSixShapedLoop 六形环分支）与其余环线周长均布路径零改动。trains.html 引用 v=4.3.491（trains-page.js/data-fusion.js）。※4.3.490 曾删除 isYamanote 同时把双列画法一并删掉（环线统一周长均布）被回退——本版本保留画法仅数据化触发，勿再走统一化路线。验证: node --check 2 文件 OK、JSON 解析 OK（Yamanote isDoubleColumnLoop=true / Oedo=false）、双列画法主体 diff 零改动、js/ 下 isYamanote 零残留、bundle 已含新属性。

@@ -301,7 +301,7 @@
         relatedLines: _chainCtx.relatedLines || [],
         throughServiceGroup: _chainCtx.throughServiceGroup || null
       } : null;
-      return { id: lineId, name: line.name, nameEn: line.nameEn || line.name, code: line.code, color: (window.LineOperationSystemsResolveColor && window.LineOperationSystemsResolveColor(lineId)) || line.color, operator: line.operator, region: line.region, type: line.type, image: line.image, stations: line.stations || [], durations: line.durations || [], intervalTotal: line.durationTotalMin || 0, realtimePositions: odptData.realtimePositions[lineId] || [], delayInfo: delayInfo, branchOf: line.branchOf || null, isSixShapedLoop: line.isSixShapedLoop === true, loopJunction: line.loopJunction || null, _chainMeta: _chainMeta };
+      return { id: lineId, name: line.name, nameEn: line.nameEn || line.name, code: line.code, color: (window.LineOperationSystemsResolveColor && window.LineOperationSystemsResolveColor(lineId)) || line.color, operator: line.operator, region: line.region, type: line.type, image: line.image, stations: line.stations || [], durations: line.durations || [], intervalTotal: line.durationTotalMin || 0, realtimePositions: odptData.realtimePositions[lineId] || [], delayInfo: delayInfo, branchOf: line.branchOf || null, isSixShapedLoop: line.isSixShapedLoop === true, isDoubleColumnLoop: line.isDoubleColumnLoop === true, loopJunction: line.loopJunction || null, _chainMeta: _chainMeta };
     } catch(e) { console.debug("[DataFusion] fuseLine error for " + lineId + ":", e.message); return null; }
   }
 
@@ -655,7 +655,10 @@
     try {
       if (!window.ODPTClient || !linesNeedingEstimation || linesNeedingEstimation.length === 0) return Promise.resolve();
 
-      var priorityOps = ['TokyoMetro', 'Toei', 'YokohamaMunicipal', 'Keio', 'Sotetsu', 'Tokyu', 'Tobu', 'TWR', 'MIR', 'TamaMonorail'];
+      // v4.3.489: 加入 JR-East——ODPT JR-East 时刻表已按 railway 分批入库，
+      // 此白名单只控制"缺时刻表的线是否补拉"，JR 地方线（东北/上越/奥羽等）无实时位置，
+      // 必须靠按需补时刻表推定才能显示
+      var priorityOps = ['JR-East', 'TokyoMetro', 'Toei', 'YokohamaMunicipal', 'Keio', 'Sotetsu', 'Tokyu', 'Tobu', 'TWR', 'MIR', 'TamaMonorail'];
       var allLines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : {};
 
       // 扩展需要加载的线路，包括直通运行的线路
@@ -680,7 +683,10 @@
       });
 
       var toLoad = expandedLines.filter(function(l) {
-        return priorityOps.indexOf(l.operator) >= 0 && !_timetableLoading[l.lineId];
+        // v4.3.489: 已由初始分批探测（ODPT_TT_PROBED）的线路不再重复请求——
+        // JR 地方线 41 条 ODPT 无时刻表数据，标记后避免每次刷新都重试
+        var probed = window.ODPT_TT_PROBED && window.ODPT_TT_PROBED[l.lineId];
+        return priorityOps.indexOf(l.operator) >= 0 && !_timetableLoading[l.lineId] && !probed;
       });
 
       // v4.3.446: 上限 12→24——支線（丸ノ内線支線等）を含めても主線の時刻表ロードを阻まない
