@@ -196,6 +196,29 @@
     "Hachiko": "../images/列车/JR東日本/HB-E220系.png",  // 4.3.280：八高線非電化区間 2026.3 キハ110系定期運用終了 → HB-E220系
     "Noda": "../images/列车/東武鉄道/80000系.png", // 4.3.280：野田線（アーバンパークライン）：80000系（2025.3 投入の新主力）
 
+    // 4.3.481 图标覆盖补全：以下 23 条此前无 LINE_ICONS 键，全部 fallback 到 E235系山手線（东京通勤车图标乱入地方线）。
+    // 各线车型依据 ODPT 时刻表/已知部署：地方线按实际主力车型（キハ110系/E129系/E131系等）。
+    "ChuoTatsuno": "../images/列车/JR東日本/E127系0番台.png", // 中央本線辰野支線：E127系0番台（区间摆渡）
+    "Joetsu": "../images/列车/JR東日本/211系湘南色.png",     // 上越線：211系湘南色（高崎〜水上段主力；E129系部署见 VEHICLE_DEPLOYMENTS）
+    "Kesennuma": "../images/列车/JR東日本/キハ110系.png",    // 気仙沼線：キハ110系（BRT 化前主力）
+    "NambuBranch": "../images/列车/JR東日本/E131系0番台.png", // 南武線浜川崎支線：E131系0番台（2021 投入，与南武線同型车体系）
+    "Narita": "../images/列车/JR東日本/E131系0番台.png",     // 成田線：E131系0番台（房総地区共通）
+    "NaritaAbikoBranch": "../images/列车/JR東日本/E131系0番台.png", // 成田線我孫子支線：E131系0番台
+    "NaritaAirportBranch": "../images/列车/JR東日本/E235系1000番台.png", // 成田線空港支線：E235系1000番台（総武快速直通担当）
+    "Ofunato": "../images/列车/JR東日本/キハ110系.png",      // 大船渡線：キハ110系
+    "Oito": "../images/列车/JR東日本/E127系0番台.png",       // 大糸線：E127系0番台（松本〜南小谷；211長野色部署见 VEHICLE_DEPLOYMENTS）
+    "OuMain": "../images/列车/JR東日本/キハ110系.png",       // 奥羽本線：キハ110系（非電化区間主力；特急は typeMatch E751/E653）
+    "Shinetsu": "../images/列车/JR東日本/E129系.png",        // 信越本線：E129系（新潟段；高崎段 211湘南/長野段 211長野·E127 见 VEHICLE_DEPLOYMENTS）
+    "Shinonoi": "../images/列车/JR東日本/211系長野色.png",   // 篠ノ井線：211系長野色（主力）
+    "Togane": "../images/列车/JR東日本/E131系0番台.png",     // 東金線：E131系0番台（房総地区共通）
+    "TsurumiOkawa": "../images/列车/JR東日本/E131系1000番台.png", // 鶴見線大川支線：E131系1000番台（鶴見線同型）
+    "TsurumiUmiShibaura": "../images/列车/JR東日本/E131系1000番台.png", // 鶴見線海芝浦支線：E131系1000番台
+    "Yamada": "../images/列车/JR東日本/キハ110系.png",       // 山田線：キハ110系
+    "Ikebukuro": "../images/列车/西武鉄道/30000系.png",      // 西武池袋線：30000系（通勤主力，同 Seibu 默认）
+    "Kiryu": "../images/列车/東武鉄道/8000系.png",           // 東武桐生線：8000系
+    "Koizumi": "../images/列车/東武鉄道/8000系.png",         // 東武小泉線：8000系
+    "Sano": "../images/列车/東武鉄道/8000系.png",            // 東武佐野線：8000系
+
     // Tokyo Metro specific
     "Ginza": "../images/列车/東京メトロ/1000系.png",
     "Marunouchi": "../images/列车/東京メトロ/2000系.png",
@@ -224,7 +247,7 @@
     "TobuNikko": "../images/列车/東武鉄道/1000系.png",       // 日光線：一般列車（1000系）
     "Tobu_Kameido": "../images/列车/東武鉄道/1000系.png",     // 4.3.277：亀戸線.png 与 東武1000系.png 同一图（哈希一致），已归并
     "Ogose": "../images/列车/東武鉄道/50090系.png",          // 越生線：東上系統（東上線全列車直通）
-    "Utsunomiya": "../images/列车/東武鉄道/20400系.png",     // 4.3.280：東武宇都宮線：20400系（已替换最后8000系）
+    "TobuUtsunomiya": "../images/列车/東武鉄道/20400系.png",     // 4.3.481：键名修正 Utsunomiya→TobuUtsunomiya（Utsunomiya 是 JR 宇都宮線 ID，東武線是 TobuUtsunomiya，错键导致東武宇都宮線 fallback 東武8000系）；20400系（已替换最后8000系）
     // Odakyu specific（4.3.275：小田急系統共通 4000系，ロマンスカー は typeMatch 優先；4.3.278：江ノ島線・多摩線 各停6両主力=3000形）
     "Odawara": "../images/列车/小田急電鉄/5000系.png", // 4.3.458：小田原線の新型 5000形（2025年デビュー・増備中；4000形 は千代田直通の既存主力）
     "OdakyuEnoshima": "../images/列车/小田急電鉄/3000形.png", // 4.3.278：江ノ島線 各停（6両）主力=3000形/1000形/8000形；4000形は10両固定で各停6両ホームに入線せず（维基#車両 2022年改正後）
@@ -325,7 +348,7 @@
     // ===== railway_data key 对齐 =====
     "MinatoMirai": "../images/列车/東急電鉄/5050系.png",
     "NewShuttle": "../images/列车/埼玉新都市交通/2000形.png",
-    "Tōnami": "../images/列车/JR東日本/GV-E400系.png",       // 4.3.266：只見線 = GV-E400系（原GV-E400系.png 为机械面板占位图）
+    "Tadami": "../images/列车/JR東日本/GV-E400系.png",        // 4.3.481：键名修正 Tōnami→Tadami（unicode ō 变体导致只见線无键 fallback E235）；只見線 = GV-E400系
     "Echigo": "../images/列车/JR東日本/E129系.png",
     "Hakushin": "../images/列车/JR東日本/E129系.png",
     "Miyo": "../images/列车/JR東日本/E129系.png",
@@ -334,7 +357,7 @@
     // ===== 4.3.279 复查修复（fallback 误判纠正）=====
     "Nippori_Toneri": "../images/列车/都営地下鉄/toky330.png", // 日暮里・舎人ライナー：AGT 330形（4.3.457 図庫更新——実車図に変更）
     "TokyuSetagaya": "../images/鉄道/東急電鉄/世田谷線.png", // 世田谷線：路面電車（300系），原错误fallback到2020系
-    "Oyama": "../images/列车/JR東日本/E233系湘南色.png", // 宇都宮線（JR東北本線系統）：上野東京ライン同一車両
+    "UtsunomiyaJR": "../images/列车/JR東日本/E233系湘南色.png", // 4.3.481：键名修正 Oyama→UtsunomiyaJR（Oyama 是车站 ID，线路 ID 是 UtsunomiyaJR，错键导致宇都宮線 fallback E235）；上野東京ライン同一車両
     "BanetsuEast": "../images/列车/JR東日本/キハ110系.png", // 磐越東線：キハ110系
     "Iiyama": "../images/列车/JR東日本/キハ110系.png", // 飯山線：キハ110系
     "Ishinomaki": "../images/列车/JR東日本/キハ110系.png", // 石巻線：キハ110系

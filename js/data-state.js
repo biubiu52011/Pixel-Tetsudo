@@ -227,7 +227,7 @@
     if (_aggDelay) delayInfo = _aggDelay;
     var status = delayInfo && delayInfo.status ? delayInfo.status : (delayInfo ? "normal" : "no_data");
     var interval = delayInfo.interval || "";
-    var lineColor = line.color || "#00b643";
+    var lineColor = (window.LineOperationSystemsResolveColor && window.LineOperationSystemsResolveColor(lineId)) || line.color || "#00b643";
     var displayName = (window.RailwayDB && window.RailwayDB.resolveLineName) ? window.RailwayDB.resolveLineName(lineId, window.currentLang) : (line.nameEn || line.name || lineId);
     // Fallback: RailwayDB unavailable (e.g., test/sandbox) — use raw fields
 
