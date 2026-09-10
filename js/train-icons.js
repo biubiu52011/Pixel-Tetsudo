@@ -75,8 +75,7 @@
         { line: "ChuoMain", icon: "../images/列车/JR東日本/E353系.png", typeMatch: ["Azusa", "Kaiji"], priority: 3 },           // 特急あずさ・かいじ（E353系）
         { line: "Narita", icon: "../images/列车/JR東日本/E259系.png", typeMatch: ["NaritaExpress"], priority: 3 },               // 成田エクスプレス（E259系）
         { line: "OuMain", icon: "../images/列车/JR東日本/E751系.png", typeMatch: ["Tsugaru"], priority: 3 },                  // 特急つがる（青森〜秋田）
-        { line: "Uetsu", icon: "../images/列车/JR東日本/E653系.png", typeMatch: ["Inaho"], priority: 3 },                      // 特急いなほ（新潟〜秋田）
-        { line: "OuMain", icon: "../images/列车/JR東日本/E653系.png", typeMatch: ["Inaho"], priority: 3 },
+        { line: "Uetsu", icon: "../images/列车/JR東日本/E653系.png", typeMatch: ["Inaho"], priority: 3 },                      // 特急いなほ（新潟〜秋田、羽越本線のみ——奥羽本線は走らない）
         { line: "Joetsu", icon: "../images/列车/JR東日本/E257系5500番台.png", typeMatch: ["Kusatsu", "Shima"], priority: 3 },       // 特急草津・四万
         { line: "Agatsuma", icon: "../images/列车/JR東日本/E257系5500番台.png", typeMatch: ["Kusatsu", "Shima"], priority: 3 },
         { line: "Shinetsu", icon: "../images/列车/JR東日本/E653系1000番台.png", typeMatch: ["Shirayuki"], priority: 3 },        // 特急しらゆき（新潟〜直江津）
@@ -85,14 +84,14 @@
     },
     "ExpTobu": {
       routes: [
-        { line: "TobuSkytree", icon: "../images/列车/東武鉄道/N100系.png", typeMatch: ["SpaciaX"], priority: 3 },        // スペーシアX（N100系）
-        { line: "TobuNikko", icon: "../images/列车/東武鉄道/N100系.png", typeMatch: ["SpaciaX"], priority: 3 },
-        { line: "TobuSkytree", icon: "../images/列车/東武鉄道/500系.png", typeMatch: ["SpaciaLiberty"], priority: 3 }, // スペーシア リバティ（500系）
-        { line: "TobuNikko", icon: "../images/列车/東武鉄道/500系.png", typeMatch: ["SpaciaLiberty"], priority: 3 },
-        { line: "TobuSkytree", icon: "../images/列车/東武鉄道/100系（スペーシア）.png", typeMatch: ["Kinu", "Kegon", "Nikko"], priority: 3 }, // きぬがわ・けごん（100系スペーシア、4.3.457 塗装図に更新）
-        { line: "TobuNikko", icon: "../images/列车/東武鉄道/100系（スペーシア）.png", typeMatch: ["Kinu", "Kegon", "Nikko"], priority: 3 },
-        { line: "TobuSkytree", icon: "../images/列车/東武鉄道/250系.png", typeMatch: ["Ryomo"], priority: 3 },                    // 特急りょうもう（250系）
-        { line: "TobuIsesaki", icon: "../images/列车/東武鉄道/250系.png", typeMatch: ["Ryomo"], priority: 3 }
+        // v4.3.485: ODPT 東武特急 trainType 一律 "Tobu.LimitedExpress"（スペーシアX/リバティ/けごん・きぬがわ/りょうもう を区別する具体名なし、
+        // 実測：Tobu 時刻表 101 件の LimitedExpress 全て Generic）——typeMatch 具体名は発火しない。
+        // 按线代表制：TobuIsesaki 上の LimitedExpress=りょうもう（250系、正確——Isesaki 線特急はりょうもうのみ）；
+        // TobuSkytree/TobuNikko 上は けごん・きぬがわ が主体 → 100系（スペーシア）代表（スペーシアX/リバティは trainType で判別不能、
+        // りょうもう が浅草〜東武動物公園の Skytree 線区間を走る間も 100系 表示になる既知の限界）。
+        { line: "TobuSkytree", icon: "../images/列车/東武鉄道/100系（スペーシア）.png", typeMatch: ["LimitedExpress"], priority: 3 },
+        { line: "TobuNikko", icon: "../images/列车/東武鉄道/100系（スペーシア）.png", typeMatch: ["LimitedExpress"], priority: 3 },
+        { line: "TobuIsesaki", icon: "../images/列车/東武鉄道/250系.png", typeMatch: ["LimitedExpress"], priority: 3 }
       ]
     },
     "ExpKeisei": {
@@ -427,6 +426,14 @@
           }
         }
       }
+      // v4.3.485: 成田エクスプレス（E259系）としおさい（E257系500番台）は ODPT trainType が共に
+      // LimitedExpress（実測：成田線/総武快速の LimitedExpress は 20xxM=54 本・40xxM=14 本のみ）——
+      // 車号で判別：20xxM=N'EX、40xxM=しおさい。
+      if (lineId === 'Narita' || lineId === 'SobuRapid') {
+        var _nn = String(_tn || '').replace(/[^0-9]/g, '');
+        if (/^20/.test(_nn)) return "../images/列车/JR東日本/E259系.png";
+        if (/^40/.test(_nn)) return "../images/列车/JR東日本/E257系500番台.png";
+      }
       // Chuo/Sobu local: E231系500番台 + E235系0番台 并用（2025 起 E235 由山手线转用）
       if (lineId === "ChuoLocal" || lineId === "ChuoSobuLocal") {
         var n = 0;
@@ -452,8 +459,20 @@
             if (r.typeMatch) {
               if (!typeName) return;
               var matched = false;
-              for (var i = 0; i < r.typeMatch.length; i++) {
-                if (typeName.toLowerCase().indexOf(String(r.typeMatch[i]).toLowerCase()) >= 0) { matched = true; break; }
+              // v4.3.484: JR-East ODPT 特急 trainType 一律 "odpt.TrainType:JR-East.LimitedExpress"
+              // （实测 Chuo かいじ/あずさ・Joban ひたち/ときわ 均不带具体列车名），导致原有
+              // typeMatch 具体名规则（Azusa/Kaiji/Hitachi/Tokiwa 等）全部失效、特急显示成普通车。
+              // typeMatch 规则均属"特急・観光列車"区段（按 line 隔离），遇到通用 LimitedExpress 视为命中；
+              // 具体名匹配保留（東武 SpaciaX/京成 Skyliner/小田急 SuperHakone/N'EX NaritaExpress 等独立类型）。
+              // ※注意：京急の LimitedExpress/RapidLimitedExpress は「快特」（普通運賃の快速）——京急に
+              // typeMatch 規則を追加する際は誤爆注意（現在は規則なしで影響なし）。
+              var tnLower = typeName.toLowerCase();
+              if (tnLower.indexOf('limitedexpress') >= 0) {
+                matched = true;
+              } else {
+                for (var i = 0; i < r.typeMatch.length; i++) {
+                  if (tnLower.indexOf(String(r.typeMatch[i]).toLowerCase()) >= 0) { matched = true; break; }
+                }
               }
               if (!matched) return;
             }
