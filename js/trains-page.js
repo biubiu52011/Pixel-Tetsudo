@@ -1377,7 +1377,20 @@
     
     var svgNS = "http://www.w3.org/2000/svg";
     var isLoop = stationCoords.length > 2 && (line.type === "loop" || line.isSixShapedLoop);
-    
+
+    // v4.3.488: stationId -> coord 索引（修复 486 环线双列后 stationCoords 顺序 ≠ 站表 index，
+    // 用站表 index 当下标会取错坐标——环线列车"写着终点 A 却越跑越远"）。
+    // 挂在 svg 上跨增量更新复用（full rebuild 时 svg 新建，索引自然重建）。
+    var _coordIdx = svg.__coordIdx;
+    if (!_coordIdx) {
+      _coordIdx = {};
+      for (var _ci = 0; _ci < stationCoords.length; _ci++) {
+        var _sc = stationCoords[_ci];
+        if (_sc && _sc.stationId && !_coordIdx[_sc.stationId]) _coordIdx[_sc.stationId] = _sc;
+      }
+      svg.__coordIdx = _coordIdx;
+    }
+
     // Count trains per station for offset
     var stationCount = {};
     var stationIdx = {};
@@ -1397,6 +1410,22 @@
         if (_bg && _bg[p.fusionLineId]) {
           var _bii = Math.min(p.stationIndex || 0, _bg[p.fusionLineId].length - 1);
           coord = _bg[p.fusionLineId][_bii];
+        }
+      }
+      if (!coord) {
+        // v4.3.488: 按 stationId 匹配坐标（主线站/延伸线站均以站表 index 取站名再查索引）。
+        // 直线与六形环 stationCoords 顺序=站表顺序，旧下标逻辑本可工作；环线双列必须走 stationId。
+        var _sid = null;
+        if (p.fusionLineId) {
+          try {
+            var _fl2 = getLinesData()[p.fusionLineId];
+            if (_fl2 && _fl2.stations) _sid = _fl2.stations[p.stationIndex || 0];
+          } catch(e2) { _sid = null; }
+        } else if (line.stations) {
+          _sid = line.stations[p.stationIndex || 0];
+        }
+        if (_sid && _coordIdx[_sid]) {
+          coord = _coordIdx[_sid];
         }
       }
       if (!coord) {
