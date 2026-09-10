@@ -21,45 +21,18 @@
     var d = document.createElement("div"); d.textContent = s; return d.innerHTML;
   };
 
-  // Branch map: branch ID -> parent ID
-  var _BRANCH_MAP = {
-    "KeikyuAirport": "Keikyu", "KeikyuDaishi": "Keikyu", "KeikyuKurihama": "Keikyu", "KeikyuZushi": "Keikyu",
-    "TobuSkytreeBranch": "TobuSkytree", "TobuKameido": "TobuSkytree", "TobuDaishi": "TobuIsesaki",
-    "TobuKoizumiBranch": "TobuKoizumi",
-    "SotetsuIzumino": "SotetsuMain", "SotetsuShinYokohama": "SotetsuMain",
-    "MarunouchiBranch": "Marunouchi",
-    "TsurumiUmigippu": "Tsurumi", "TsurumiOokawa": "Tsurumi"
+  // === GEOM 设计令牌（v4.3.482：统一线路图度量，行业惯例网格）===
+  // 所有线路共用一套宽度语义，不再一条线一套魔法数字。
+  var GEOM = {
+    // 支线列宽：站名 16px（最长 6 字≈106px）+ 换乘 chip 余量，统一全支线
+    BRANCH_COL_W: 96,
+    // 分叉引出长度（主线列 → 支线列的水平 stub）
+    BRANCH_STUB: 20,
+    // 主线基准画布宽（无支线时）
+    MAIN_BASE_W_MOBILE: 410,
+    MAIN_BASE_W_MIN: 440,
+    MAIN_BASE_W_MAX: 820
   };
-
-
-  function detectBranches(lines) {
-    var byImage = {};
-    var ids = Object.keys(lines);
-    for (var i = 0; i < ids.length; i++) {
-      var img = lines[ids[i]].image || "";
-      if (!img) continue;
-      if (!byImage[img]) byImage[img] = [];
-      byImage[img].push(ids[i]);
-    }
-    var imageKeys = Object.keys(byImage);
-    for (var j = 0; j < imageKeys.length; j++) {
-      var group = byImage[imageKeys[j]];
-      if (group.length < 2) continue;
-      var parentKey = null;
-      for (var k = 0; k < group.length; k++) {
-        if (_BRANCH_MAP[group[k]]) { parentKey = _BRANCH_MAP[group[k]]; break; }
-      }
-      if (!parentKey) {
-        group.sort(function(a, b) { return lines[a].code.length - lines[b].code.length; });
-        parentKey = group[0];
-      }
-      for (var k = 0; k < group.length; k++) {
-        if (group[k] !== parentKey && !lines[group[k]].branchOf) {
-          lines[group[k]].branchOf = parentKey;
-        }
-      }
-    }
-  }
 
   function getLinesData() {
     // Priority 1: DataFusion fused data (has realtimePositions for train location)
@@ -524,7 +497,7 @@
         branchLines.push({ id: bid, name: bl.name || bid, color: (window.LineOperationSystemsResolveColor && window.LineOperationSystemsResolveColor(bid)) || bl.color || color, stations: bl.stations });
       }
     }
-    var branchOffset = branchLines.length > 0 ? 70 * branchLines.length : 0;
+    var branchOffset = branchLines.length > 0 ? GEOM.BRANCH_COL_W * branchLines.length : 0;
     // Branch name label sits 26px above the junction station (industry-standard
     // branch annotation). Reserve headroom when the junction is the first station.
     if (branchLines.length > 0) {
@@ -758,8 +731,12 @@
       // Standard linear line: widen the canvas so left (names) and right (icons) both get used
       var isMobileView = _isMobileView();
       var _cw = ((typeof document !== "undefined" && document.querySelector("#trainsMapContainer")) || {}).clientWidth || 820;
-      svgW = (_isMobileView() ? 410 : Math.min(Math.max(_cw, 440), 820)) + branchOffset;
-      var mainCx = svgW / 2 - branchOffset / 2;
+      // v4.3.482: 主线中心固定（不随支线数左移），画布 = 主线区 + 支线区。
+      // 支线列宽统一 GEOM.BRANCH_COL_W；画布只扩到实际需要，避免移动端整体缩放变小。
+      var _baseW = (_isMobileView() ? GEOM.MAIN_BASE_W_MOBILE : Math.min(Math.max(_cw, GEOM.MAIN_BASE_W_MIN), GEOM.MAIN_BASE_W_MAX));
+      var mainCx = _baseW / 2;
+      var _rightPad = isMobileView ? 24 : 40;
+      svgW = Math.max(_baseW, mainCx + GEOM.BRANCH_STUB + branchOffset + _rightPad);
       
       var _iconStep = (isMobileView ? 20 : 16) + 2;
       var _extraY = 0;
@@ -850,7 +827,7 @@
           if (stationCoords[_ji2].stationId === _br.stations[0]) { _jIdx = _ji2; break; }
         }
         if (_jIdx < 0) continue;
-        var _bx = stationCoords[_jIdx].x + 20 + bgi * 70;
+        var _bx = stationCoords[_jIdx].x + GEOM.BRANCH_STUB + bgi * GEOM.BRANCH_COL_W;
         var _by = stationCoords[_jIdx].y;
         var _bsp = sp || 24;
         var _bcoords = [];
@@ -1273,7 +1250,7 @@
           }
         }
         if (junctionIdx >= 0 && stationCoords.length > junctionIdx) {
-          var bx = stationCoords[junctionIdx].x + 20 + bi * 70;
+          var bx = stationCoords[junctionIdx].x + GEOM.BRANCH_STUB + bi * GEOM.BRANCH_COL_W;
           var by = stationCoords[junctionIdx].y;
           var branchTop = by - 20;
           

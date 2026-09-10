@@ -62,7 +62,7 @@ window.LineOperationSystems = {
       nameEn: "Chuo Main Line",
       nameKo: "주오 본선",
       color: "#007ac0",
-      lineIds: ["ChuoMain"],
+      lineIds: ["ChuoMain", "ChuoTatsuno"],
       order: 20
     },
     {
@@ -778,7 +778,7 @@ window.LineOperationSystems = {
       nameEn: "Chiyoda Line",
       nameKo: "치요다선",
       color: "#009944",
-      lineIds: ["Chiyoda"],
+      lineIds: ["Chiyoda", "ChiyodaBranch"],
       icon: "../images/鉄道/東京メトロ/千代田線.png",
       order: 1
     },
