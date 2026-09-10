@@ -531,10 +531,14 @@
       var loopRectW = 150 * scale6;
       var loopRectH = Math.max(loopStations.length * spLoop6 - 40 * scale6, 200 * scale6);
       
+      var leftMargin = 8 * scale6;
       var marginRight = 20 * scale6 + (_isMobileView() ? 36 : 12);
       var marginTopBot = 40 * scale6;
-      var tailAreaWidth = (_isMobileView() ? 70 : 105) * scale6;
-      var leftMargin = 8 * scale6;
+      // v4.3.482: tail 列宽与直线支线同源（GEOM.BRANCH_COL_W × 本图缩放系数）。
+      // 移动端容器是 1:1 硬约束，tail 列让位给环（保底 BRANCH_COL_W×1.1 ≈ 现状 105px）。
+      var tailAreaWidth = Math.min(GEOM.BRANCH_COL_W * scale6,
+                                   Math.max(GEOM.BRANCH_COL_W * 1.1,
+                                            _cw6Content - leftMargin - 230 - marginRight));
       
       var naturalW = leftMargin + tailAreaWidth + loopRectW + marginRight;
       if (_isMobileView() && naturalW > _cw6Content) {
@@ -556,7 +560,7 @@
       var junctionY = loopCy;
       
       // Stub: short horizontal segment from loop side (creates "branching from loop side" realism)
-      var stubLen = 35 * scale6;
+      // stubX = tail 列 x 位置（画布左缘 + 边距 10px），分叉引出段 = junctionX→stubX 水平线
       var stubX = leftMargin + 10 * scale6;
       var stubY = junctionY;
       
@@ -925,13 +929,21 @@
     label.setAttribute("font-weight", isJunction ? "700" : "500");
     label.setAttribute("text-anchor", anchor);
     var _clampAvail = (side === "dual" || side === "left") ? (tx - 4) : ((side === "right") ? (svgW - 2 - tx) : 0);
-    if (geometry.isSixShapedLoop && (side === "left" || side === "right") && (geometry.junctionX === null || o.x >= geometry.junctionX)) {
-      var _sc6 = isMobileView ? 1.5 : 1.3;
-      var _m6r = isMobileView ? 66 : (20 * _sc6 + 12);
-      var _tw6 = 70 * _sc6;
-      var _lm6 = 8 * _sc6;
-      var _loopW6 = svgW - _lm6 - _tw6 - _m6r;
-      _clampAvail = Math.max(40, Math.floor(_loopW6 / 2) - 10);
+    if (geometry.isSixShapedLoop) {
+      if (geometry.junctionX === null || o.x >= geometry.junctionX) {
+        // Loop stations: name area = half the loop width (shared by both sides)
+        var _sc6 = isMobileView ? 1.5 : 1.3;
+        var _m6r = isMobileView ? 66 : (20 * _sc6 + 12);
+        var _tw6 = 70 * _sc6;
+        var _lm6 = 8 * _sc6;
+        var _loopW6 = svgW - _lm6 - _tw6 - _m6r;
+        _clampAvail = Math.max(40, Math.floor(_loopW6 / 2) - 10);
+      } else if (side === "left") {
+        // v4.3.482: Tail stations (光丘方向) name flows RIGHT from stubX toward
+        // the loop's left edge. The generic branch above wrongly used tx-4
+        // (space to the left, ~31px) which crushed every tail label to 40px.
+        _clampAvail = Math.max(40, Math.floor(geometry.junctionX - tx - 4));
+      }
     }
     if (_clampAvail > 0) label.setAttribute("data-clamp-avail", String(Math.max(40, Math.round(_clampAvail))));
 
