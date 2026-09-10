@@ -24,14 +24,14 @@
   "use strict";
 
   var THROUGH_SERVICE_MAP = {
-    // 東武スカイツリーライン・伊勢崎線
-    "TobuSkytree": ["Hibiya", "Hanzomon", "Asakusa"],
-    "TobuIsesaki": ["Hibiya", "Hanzomon"],
+    // 東武スカイツリーライン・伊勢崎線（東武動物公園で相互直通）
+    "TobuSkytree": ["Hibiya", "Hanzomon", "Asakusa", "TobuIsesaki"],
+    "TobuIsesaki": ["Hibiya", "Hanzomon", "TobuSkytree"],
     // 東京メトロ
     "Hibiya": ["TobuSkytree", "TobuIsesaki"],
     "Hanzomon": ["TobuSkytree", "TobuIsesaki", "TokyuDenEn"],
     "Namboku": ["TokyuMeguro"],
-    "Chiyoda": ["JobanLocal", "OdakyuTama"],
+    "Chiyoda": ["JobanLocal", "OdakyuTama", "Odawara"],
     "Tozai": ["ChuoSobuLocal"],
     "Yurakucho": ["Tojo"],
     "Fukutoshin": ["TokyuToyoko", "Tojo", "Yurakucho_Seibu"],
@@ -51,8 +51,9 @@
     "Tojo": ["Fukutoshin", "Yurakucho"],
     // 京成・京急
     "Keikyu": ["Asakusa"],
-    "Keisei": ["Asakusa", "KeiseiOshiage"],
+    "Keisei": ["Asakusa", "KeiseiOshiage", "NaritaSkyAccess"],
     "KeiseiOshiage": ["Asakusa", "Keisei"],
+    "NaritaSkyAccess": ["Keisei"],
     // 相鉄
     "SotetsuMain": ["Saikyo", "TokyuToyoko", "SotetsuIzumino", "SotetsuShin-Yokohama"],
     "SotetsuIzumino": ["SotetsuMain"],
@@ -60,22 +61,27 @@
     // JR
     "Saikyo": ["Kawagoe", "Rinkai", "SotetsuMain"],
     "Kawagoe": ["Saikyo", "KawagoeWest"],
-    "KawagoeWest": ["Kawagoe"],
+    "KawagoeWest": ["Kawagoe", "Hachiko"],
     "Rinkai": ["Saikyo"],
     "UtsunomiyaJR": ["ShonanShinjuku", "Tokaido"],
     "Takasaki": ["ShonanShinjuku", "Tokaido"],
-    "Tokaido": ["UtsunomiyaJR", "Takasaki"],
+    "Tokaido": ["UtsunomiyaJR", "Takasaki", "Ito"],
+    "Ito": ["Tokaido"],
     "ShonanShinjuku": ["UtsunomiyaJR", "Takasaki", "Yokosuka"],
-    "ChuoRapid": ["Ome", "Itsukaichi"],
+    "ChuoRapid": ["Ome", "Itsukaichi", "ChuoMain"],
+    "ChuoMain": ["ChuoRapid"],
     "SobuRapid": ["Yokosuka"],
     "Yokosuka": ["SobuRapid", "ShonanShinjuku"],
     "JobanLocal": ["Chiyoda"],
     "Joban": ["Narita"],
     "Narita": ["Joban"],
-    "Keiyo": ["Uchibo", "Sotobo"],
+    "Keiyo": ["Uchibo", "Sotobo", "Musashino"],
+    "Musashino": ["Keiyo"],
     "Uchibo": ["Keiyo"],
     "Sotobo": ["Keiyo"],
-    "OdakyuTama": ["Chiyoda"],
+    "Hachiko": ["KawagoeWest"],
+    "OdakyuTama": ["Chiyoda", "Odawara"],
+    "Odawara": ["Chiyoda", "OdakyuTama"],
     "ChuoSobuLocal": ["Tozai"]
   };
 
@@ -84,7 +90,6 @@
     // 埼京
     "Saikyo": { "Kawagoe": ["Omiya"], "Rinkai": ["Osaki"], "SotetsuMain": [] },
     "Kawagoe": { "Saikyo": ["Omiya"], "KawagoeWest": ["Kawagoe"] },
-    "KawagoeWest": { "Kawagoe": ["Kawagoe"] },
     "Rinkai": { "Saikyo": ["Osaki"] },
     // 副都心・有楽町・西武・東上・東横
     "Fukutoshin": { "Tojo": ["Wakoshi"], "TokyuToyoko": ["Shibuya"], "Yurakucho_Seibu": ["Kotake-Mukaihara"] },
@@ -95,18 +100,21 @@
     "MinatoMirai": { "TokyuToyoko": ["Yokohama"] },
     // 半蔵門・日比谷・東武
     "Hanzomon": { "TobuSkytree": ["Oshiage"], "TobuIsesaki": ["Oshiage"], "TokyuDenEn": ["Shibuya"] },
-    "TobuSkytree": { "Hanzomon": ["Oshiage"], "Hibiya": ["Kita-Senju"], "Asakusa": ["Oshiage"] },
-    "TobuIsesaki": { "Hibiya": ["Kita-Senju"], "Hanzomon": ["Oshiage"] },
+    // 東武スカイツリー・伊勢崎（東武動物公園）
+    "TobuSkytree": { "Hanzomon": ["Oshiage"], "Hibiya": ["Kita-Senju"], "Asakusa": ["Oshiage"], "TobuIsesaki": ["Tobu-Dobutsu-Koen"] },
+    "TobuIsesaki": { "Hibiya": ["Kita-Senju"], "Hanzomon": ["Oshiage"], "TobuSkytree": ["Tobu-Dobutsu-Koen"] },
     "Hibiya": { "TobuSkytree": ["Kita-Senju"], "TobuIsesaki": ["Kita-Senju"] },
     // 浅草・京成・京急
     "Asakusa": { "Keikyu": ["Sengakuji"], "Keisei": ["Oshiage"], "KeiseiOshiage": ["Oshiage"], "TobuSkytree": ["Oshiage"] },
     "Keikyu": { "Asakusa": ["Sengakuji"] },
-    "Keisei": { "Asakusa": ["Oshiage"], "KeiseiOshiage": ["Aoto"] },
+    "Keisei": { "Asakusa": ["Oshiage"], "KeiseiOshiage": ["Aoto"], "NaritaSkyAccess": ["Keisei-Takasago"] },
     "KeiseiOshiage": { "Asakusa": ["Oshiage"], "Keisei": ["Aoto"] },
+    "NaritaSkyAccess": { "Keisei": ["Keisei-Takasago"] },
     // 千代田
-    "Chiyoda": { "JobanLocal": ["Ayase"], "OdakyuTama": ["Yoyogi-Uehara"] },
+    "Chiyoda": { "JobanLocal": ["Ayase"], "OdakyuTama": ["Yoyogi-Uehara"], "Odawara": ["Yoyogi-Uehara"] },
     "JobanLocal": { "Chiyoda": ["Ayase"] },
-    "OdakyuTama": { "Chiyoda": ["Yoyogi-Uehara"] },
+    "OdakyuTama": { "Chiyoda": ["Yoyogi-Uehara"], "Odawara": [] },
+    "Odawara": { "Chiyoda": ["Yoyogi-Uehara"], "OdakyuTama": ["Shin-Yurigaoka"] },
     // 東西
     "Tozai": { "ChuoSobuLocal": ["Nakano"] },
     "ChuoSobuLocal": { "Tozai": ["Nakano"] },
@@ -118,17 +126,24 @@
     "Yokosuka": { "ShonanShinjuku": ["Ofuna"], "SobuRapid": ["Tokyo"] },
     "UtsunomiyaJR": { "ShonanShinjuku": ["Omiya"], "Tokaido": ["Tokyo"] },
     "Takasaki": { "ShonanShinjuku": ["Omiya"], "Tokaido": ["Tokyo"] },
-    "Tokaido": { "UtsunomiyaJR": ["Tokyo"], "Takasaki": ["Tokyo"] },
+    "Tokaido": { "UtsunomiyaJR": ["Tokyo"], "Takasaki": ["Tokyo"], "Ito": ["Atami"] },
+    "Ito": { "Tokaido": ["Atami"] },
     // 中央線
-    "ChuoRapid": { "Ome": ["Tachikawa"], "Itsukaichi": ["Haijima"] },
+    "ChuoRapid": { "Ome": ["Tachikawa"], "Itsukaichi": ["Haijima"], "ChuoMain": ["Takao"] },
+    "ChuoMain": { "ChuoRapid": ["Takao"] },
     "Ome": { "ChuoRapid": ["Tachikawa"] },
     "Itsukaichi": { "ChuoRapid": ["Haijima"] },
     // 総武快速×横須賀
     "SobuRapid": { "Yokosuka": ["Tokyo"] },
     // 京葉
-    "Keiyo": { "Uchibo": ["Soga"], "Sotobo": ["Soga"] },
+    // 京葉（武蔵野⇄京葉は西船橋で直通するが、京葉線の駅表に西船橋は無い→京葉側マーカー抑制）
+    "Keiyo": { "Uchibo": ["Soga"], "Sotobo": ["Soga"], "Musashino": [] },
+    "Musashino": { "Keiyo": ["Nishi-Funabashi"] },
     "Uchibo": { "Keiyo": ["Soga"] },
     "Sotobo": { "Keiyo": ["Soga"] },
+    // 八高・川越線西（高麗川）
+    "Hachiko": { "KawagoeWest": ["Komagawa"] },
+    "KawagoeWest": { "Kawagoe": ["Kawagoe"], "Hachiko": ["Komagawa"] },
     // 南北・三田・目黒
     "Namboku": { "TokyuMeguro": ["Meguro"] },
     "Mita": { "TokyuMeguro": ["Meguro"] },

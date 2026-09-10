@@ -306,6 +306,22 @@ If the answer is NO, the change is REJECTED.
 **验证**：Osaki→Saikyo / MusashiKosugi→Yokosuka / NishiOi→Yokosuka / HazawaYokohamaKokudai→SotetsuShin-Yokohama 全对；对照组 Yamanote 正常列车不受影响；node --check 通过；integration_test.js 28/28
 **遗留**：LINE_RAILWAY_CODE 未加 SotetsuDirect 条目（本地无此线，加了反查也匹配不到）；夜间 SotetsuDirect 列车仅 1 列（283M MusashiKosugi→Ebina），白天班次多的归属行为待用户线上验收
 
+## 4.3.495（2026-09-11，直通运行补全 + 异名换乘映射补全）
+**问题**：用户连续追问"直通运行补全了吗"——THROUGH_SERVICE_MAP 有 7 组真实直通缺失；历史梳理的 43 组异名换乘中 32 组无连接声明、全部未落地。
+**直通补全**（data/core/through-service.js）——THROUGH_SERVICE_MAP + THROUGH_JOIN_STATIONS 新增 7 组（接续站经 ODPT/本地站表逐一核实）：
+- 千代田線⇄小田急本線（Yoyogi-Uehara 代々木上原）——原只有多摩線，缺本線
+- 東海道線⇄伊東線（Atami 熱海）
+- 武蔵野線⇄京葉線（Musashino 側 Nishi-Funabashi 标记；京葉線站表无西船橋→Keiyo→Musashino 用 [] 抑制标记，物理直通保留）
+- 中央快速⇄中央本線（Takao 高尾）
+- 八高線⇄川越線西段（Komagawa 高麗川）
+- 東武スカイツリーライン⇄伊勢崎線（Tobu-Dobutsu-Koen 東武動物公園）
+- 京成⇄成田スカイアクセス（Keisei-Takasago 京成高砂）
+- 附带：小田急本線⇄多摩線（Odawara⇄OdakyuTama，新百合ヶ丘；多摩線站表无 Shin-Yurigaoka→[] 抑制）
+- 未补（本地缺线）：相鉄新横浜⇄東急新横浜（TokyuShin-Yokohama 不存在）、浅草線⇄北総（Hokuso 不存在）——需用户拍板是否新增线路
+**异名换乘补全**（data/core/transfer-hints.js）——name_mismatch 新增 57 组条目（原 17 → 74），覆盖历史梳理 32 组无连接声明（後楽園⇄春日、三田⇄田町、上野広小路⇄仲御徒町⇄上野御徒町⇄御徒町、淡路町⇄小川町⇄新御茶ノ水、馬喰横山⇄馬喰町⇄東日本橋、溜池山王⇄国会議事堂前、日比谷⇄有楽町、汐留⇄新橋、秋葉原⇄岩本町、神田⇄岩本町、東京⇄大手町、大手町⇄二重橋前、新日本橋⇄三越前、泉岳寺⇄高輪ゲートウェイ、虎ノ門⇄虎ノ門ヒルズ、人形町⇄水天宮前、銀座⇄銀座一丁目、立川⇄立川北/立川南、秋津⇄新秋津、大塚⇄大塚駅前、戸越⇄戸越銀座、牛田⇄京成関屋、本八幡⇄京成八幡、新越谷⇄南越谷、朝霞台⇄北朝霞、武蔵溝ノ口⇄溝の口、豪徳寺⇄山下）——站外换乘（outside:true）按实际步行关系标注；ID 拼写按 name_map 核实（新日本橋=Shin-Nihonbashi、秋津=Akitsu、新秋津=Shin-Akitsu、大塚駅前=Otsuka_Eki_Mae、戸越銀座=Togoshi-ginza）。合并重复键（Ningyocho/Shibuya×2）。
+**验证**：through-service 语法+MAP 双向对称（余 5 处为既有设计：京王線未收录/SotetsuMain→TokyuToyoko 缺中间线/Ome·Itsukaichi 单向）+JOIN 白名单站存在性；BFS 可达 8 项全对（含浅草線→成田空港多跳链）；transfer-hints 语法+无重复键+connects 站全部存在+4 语言完整；e2e 直通判定 9 项（含 2 对照）+标记位置 11 处全对；integration_test.js 28/28
+**遗留**：京王線/新京成/関東鉄道等本地未收录线的异名换乘未覆盖（9 组缺站类）；ID 拼写不一致（Shinbashi vs Shimbashi 等 230 孤立坐标）按 Freeze 规则未动，列入 Known Debt 待评估
+
 Last updated: 2026-09-09
 Version: RC-2
 ---
