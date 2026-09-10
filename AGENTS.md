@@ -334,6 +334,15 @@ If the answer is NO, the change is REJECTED.
 **验证**：verify_A.js 30/30（ID 错位 0 残留、显示名 8 处、坐标 6 处、みなとみらい 10 项、一致性 5 项）；bundle 加载 OK（562/165/1706，Bay-Cross/Shin-juku 0 残留）；node gen-file-data.js 重生成；git diff 7 文件。
 **遗留（方案 B/C 待用户拍板）**：2132 个真实站（全部有 i18n/name_map）缺坐标实体，地方线覆盖率 0%——方案 B=ODPT 批量补齐（部分地方线 ODPT 无 geo 需 wiki）；230 幽灵中 87 个有坐标无引用（含 Saitama/Nagoya/Osaka/Kyoto 非首都圈真实站 + Takanawa/Iwatsunomachi 等变体 + 疑似虚构）——方案 C=逐站甄别清理。
 
+## 4.3.496-补（2026-09-11，ODPT+wiki 双源验证）
+**用户指示**："odpt加wiki验证"——对方案 A 已订正车站做 ODPT API + ja.wikipedia 双源复核。
+**验证方法**：JR 系走 challenge API 按 railway 拉站表（10 线 10 站坐标逐站比对全 OK）；地铁/私铁走主站 API 按 operator 全量拉取再匹配（TokyoMetro 144 站/Toei 141 站，6 站比对 OK）；ODPT 无 geo 的站（みなとみらい線 5 站/結城/京成ユーカリが丘）用 ja.wikipedia coord 模板兜底。
+**ODPT 坐标校准 3 站**：Kita-Senju 35.74884,139.80464→35.749904,139.805591（偏差 130m）；Azabu-Juban 35.654,139.7307→35.65481,139.737045（偏差 550m）；Shin-Okachimachi 35.7078,139.7778→35.707009,139.782166（偏差 380m，ODPT Oedo 新御徒町）。另确认 Tokyo-Teleport 35.62754,139.77885 与 TWR.Rinkai 官方完全一致（此前 NOT_FOUND 是 operator 名误用 Rinkai→TWR）。
+**wiki 坐标校准 6 站**（ja.wikipedia coord 模板实测）：みなとみらい線 5 站全部重新校准——Shin-Takashima 35.4597,139.6291→35.461889,139.626806 / Minato-Mirai 35.4572,139.6329→35.457889,139.632306 / Bashamichi 35.4504,139.6351→35.450139,139.636167 / Nihon-odori 35.4476,139.6447→35.446806,139.642611 / Motomachi-Chukagai 35.4433,139.6507→35.442417,139.650472；結城 Yuki 0,0→36.298219,139.872283（水戸線 ODPT 无数据，wiki 兜底）。
+**新发现并修复**：①Shin-Yuri-Ga-Oka/Shin-Yurigaoka 是**同一站（新百合ヶ丘）双键**（小田急 Odawara 引用后者@22、OdakyuTama 引用前者@0，坐标/i18n 相同）——合并为标准键 Shin-Yurigaoka（ODPT 实证 odpt.Station:Odakyu.Odawara.ShinYurigaoka），stationLines 合并 [Odawara,OdakyuTama]、LSO 同步、删除冗余实体/i18n；②京成ユーカリが丘 Yuri-ga-oka 是**真实站**（京成本線 志津～京成臼井 间 @33，i18n 已有 ja=ユーカリが丘）——ODPT 无此站数据，wiki 坐标 35.721739,140.156317 补实体 + stationLines[Keisei] + name_map；它与小田急百合ヶ丘 Yurigaoka（35.609103,139.516228，wiki 确认与本地一致）是**不同站**，verify_A 的 strip 归一化曾误报为错位。
+**并发会话协调（重要）**：验证期间发现并发会话的方案 B 已落地（stations 562→2280、2188 带坐标），且**覆盖了 4 个方案 A 已订正坐标**——Shirokane-Takanawa 35.6456,139.7317 / Konandai 35.5578,139.6278（偏差 20km！）/ Hongodai 35.5678,139.6378（偏差 20km！）/ Utsunomiya 36.5578,139.8939——已按 ODPT 权威全部恢复。方案 B 批量补坐标疑似使用劣质估算源，**建议方案 B 会话复核其补入的全部坐标**；92 站 0,0 残留（含 Matsuda 已知空实体）为方案 B 遗留未覆盖。
+**验证**：28 关键站双源对比全一致（check_all_verify.js）；verify_A.js 30/30（期望值更新为 wiki 校准值）；bundle 加载 OK（2280/165/1707，Keisei Yuri-ga-oka@33/Odawara Shin-Yurigaoka@22/OdakyuTama 首站全部实体闭环）；git diff 仍为 7 文件（含并发会话叠加）。
+
 Last updated: 2026-09-11
 Version: RC-2
 ---
@@ -582,3 +591,5 @@ Before tagging a release:
 - 2026-09-11 ユーザー指示（枝干站名侧=被主干占用则换侧・4.3.508）: 用户精化规则——"按照双排规则主干该在哪在哪里，枝干如果发现某一侧被主干占用默认就在另外一侧"。主干（环站）站名按双排固定规则不动（4.3.504：左列上方朝右/左列下方朝左/右列朝右）；枝干（光丘尾 10 站 + Tochomae junction）站名侧=占用检测 _pickSixLabelSide 重写语义：①空间占用（可用空间 < clamp 下限 10px×字数×1.1——右侧可用空间到主干边界：光丘尾到环左缘 junctionX-4、Tochomae 到右列圆点左缘 junctionX+loopRectW-7-4；左侧到画布左缘 x-off-4）②线路占用（Tochomae 左侧枝干 stub 线，放左会骑线）。单侧占用→放另一侧；双侧同況→默认右。阈值由 16px 全尺寸降为 10px 下限（clamp 缩至下限仍放不下才算占用，clamp 保证不碰主干）——检测语义由"全局几何"改为"被主干/画布挤压"。検証: node --check OK、枝干 11 站占用检测全 right（光丘尾左=画布占用、Tochomae 左=stub 线）、主干环站固定 right/left/right 不变; LINE-DIAGRAM-SPEC 6.2/6.3/9 節同期。
 
 - 2026-09-11 ユーザー指示（枝干站名侧=默认右+只检测主干侧占用・4.3.509）: 用户质疑 4.3.508"还是把方向搞反了"——4.3.508 检测的是"左侧被画布/stub 占用→放右"（双侧检测），用户规则"枝干如果发现某一侧被主干占用默认就在另外一侧"中的"被主干占用"指**右侧（主干侧）**。修正：枝干（光丘尾 10 站 + Tochomae junction）站名**默认朝右**（v4.3.505 岔路站名标准），**只检测右侧是否被主干（环）占用**——右侧可用空间（到主干边界：光丘尾→环左缘 junctionX−4 / Tochomae→右列圆点左缘 junctionX+loopRectW−7−4）< clamp 下限文字宽（10px×字数×1.1）→ 放左；否则默认右。枝干站左侧无主干元素（光丘尾左=画布边、Tochomae 左=枝干 stub 引出线），不构成主干占用，故不再检测左侧。主干环站固定规则（4.3.504）不变。検証: node --check OK、正常布局枝干全 right（光丘尾 availR=115≥66 / Tochomae availR=47≥33）、主干 fixed right/left/right、边界模拟（环宽收窄 availR=23<33→Tochomae left）正しい; LINE-DIAGRAM-SPEC 6.2/6.3/9 節同期。
+
+- 2026-09-11 ユーザー指示（枝干站名侧=站名重叠检测・4.3.510）: 用户纠正"我说的是站名，你在折腾什么"——前几轮占用检测语义（空间/几何/stub/边界）全部偏离，检测对象应是**站名文字带**。重写 _pickSixLabelSide：枝干（光丘尾 10 站 + Tochomae junction）站名放某一侧时，若与主干（环）站名文字带重叠（该侧被主干站名占用）则放另一侧；双侧都不重叠 → 默认朝右（v4.3.505 标准）；画布边界硬约束（放不下即占用）。主干站名带方向按双排固定规则（左列上朝右/左列下朝左/右列朝右，v4.3.504），站名经 RailwayDB.resolveStationName(id, currentLang) 解析后按字数×16×1.1 估算文字宽。検証: node --check OK、全 38 站方向枚举（枝干 11 right / 左列上 6 right / 左列下 7 left / 右列 14 right）= 31 right + 7 left 与既有视觉一致、站名带矩形相交判定经模拟正确; LINE-DIAGRAM-SPEC 6.2/6.3/9 節同期。

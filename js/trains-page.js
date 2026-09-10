@@ -913,25 +913,56 @@
   // v4.3.449: 主線/支線の区別は geometry（座標・side・色）のみに残し、駅・ラベル・
   // 乗換チップ・直通チップの描画はこの関数一本で統一。支線駅も主線駅と同一スタイル。
 
-  // v4.3.509: 枝干站名侧 = 主干占用检测（用户规则："按照双排规则主干该在哪在哪里，
-  // 枝干如果发现某一侧被主干占用默认就在另外一侧"）——**只针对那根岔**（光丘支线的
-  // 光丘尾 10 站 + Tochomae junction）；环站（主干）按双排固定规则（4.3.504，不走此函数）。
-  // 枝干站名**默认朝右**（沿支线延伸方向，v4.3.505 岔路站名标准）；**只检测右侧是否被
-  // 主干（环）占用**：右侧可用空间（到主干边界——光丘尾→环左缘 junctionX−4、
-  // Tochomae→右列圆点左缘 junctionX+loopRectW−7−4）< clamp 下限文字宽（10px×字数×1.1）
-  // → 右侧被主干挤压占用 → 放左侧；否则默认朝右。
-  // 枝干站左侧无主干元素（光丘尾左=画布边、Tochomae 左=枝干 stub 引出线），不构成主干占用。
+  // v4.3.510: 枝干站名侧 = 站名占用检测（用户纠正："我说的是站名"）——检测对象是
+  // **站名文字带**而非空间/几何：枝干（光丘尾 10 站 + Tochomae junction）站名放某一侧时，
+  // 若与主干（环）站的站名文字带重叠（该侧被主干站名占用），则放另一侧；双侧都不重叠
+  // → 默认朝右（v4.3.505 岔路站名标准）。主干站名带方向按双排固定规则（左列上方朝右、
+  // 左列下方朝左、右列朝右，v4.3.504）。画布边界为硬约束（放不下即占用）。
   function _pickSixLabelSide(o, geometry, svgW) {
     var x = o.x, y = o.y;
     var off = o.isJunction ? 14 : 10;
-    var minW = (o.labelLen || 3) * 10 * 1.1; // clamp 下限 10px 文字宽
-    var isTail = x < geometry.junctionX;            // 光丘尾（环外竖线带）
-    // 右侧可用空间（到主干边界）
-    var availR = isTail
-      ? geometry.junctionX - 4 - (x + off)                               // 光丘尾：到环左缘
-      : geometry.junctionX + geometry.loopRectW - 7 - 4 - (x + off);     // Tochomae：到右列圆点左缘
-    // 右侧被主干占用 → 放左；否则默认朝右
-    return (availR < minW) ? "left" : "right";
+    var W = (o.labelLen || 3) * 16 * 1.1; // 当前枝干站全尺寸文字宽
+    var y0 = y - 8, y1 = y + 8;
+    var rightRect = [x + off, x + off + W, y0, y1];
+    var leftRect = [x - off - W, x - off, y0, y1];
+    var rightOccupied = false, leftOccupied = false;
+
+    // 画布边界硬约束（放不下即占用）
+    if (rightRect[1] > svgW - 2) rightOccupied = true;
+    if (leftRect[0] < 0) leftOccupied = true;
+
+    // 主干（环）站名文字带重叠检测
+    var scs = geometry.stationCoords || [];
+    var jx = geometry.junctionX, jy = geometry.junctionY;
+    for (var i = 0; i < scs.length; i++) {
+      var sc = scs[i];
+      if (sc.stationId === o.stationId) continue;      // 跳过自身
+      if (sc.x < jx - 0.5) continue;                   // 跳过枝干光丘尾站（环外）
+      if (Math.abs(sc.x - jx) < 0.5 && sc.stationId === geometry.junctionStation) continue; // 跳过 junction 自身
+      var sName = (window.RailwayDB && window.RailwayDB.resolveStationName)
+        ? (window.RailwayDB.resolveStationName(sc.stationId, window.currentLang) || sc.stationId)
+        : sc.stationId;
+      var sW = (sName || "").length * 16 * 1.1;
+      var soff = (sc.stationId === geometry.junctionStation) ? 14 : 10;
+      var sRect;
+      if (Math.abs(sc.x - jx) < 0.5) {
+        // 左列主干站：双排固定规则（上方朝右、下方朝左）
+        sRect = (sc.y < jy)
+          ? [sc.x + soff, sc.x + soff + sW, sc.y - 8, sc.y + 8]
+          : [sc.x - soff - sW, sc.x - soff, sc.y - 8, sc.y + 8];
+      } else {
+        // 右列主干站：朝右
+        sRect = [sc.x + soff, sc.x + soff + sW, sc.y - 8, sc.y + 8];
+      }
+      if (rightRect[0] < sRect[1] && sRect[0] < rightRect[1] &&
+          rightRect[2] < sRect[3] && sRect[2] < rightRect[3]) rightOccupied = true;
+      if (leftRect[0] < sRect[1] && sRect[0] < leftRect[1] &&
+          leftRect[2] < sRect[3] && sRect[2] < leftRect[3]) leftOccupied = true;
+    }
+
+    if (leftOccupied && !rightOccupied) return "right";
+    if (rightOccupied && !leftOccupied) return "left";
+    return "right"; // 双侧同况（都空/都占）→ 默认朝右
   }
 
   function _renderStationNode(staticLayer, svgNS, o) {
