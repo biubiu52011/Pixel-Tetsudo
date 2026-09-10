@@ -966,7 +966,7 @@
     var txLines = transferMap[o.stationId] || [];
     if (txLines.length > 0) {
       var isCompact = (side === "top" || side === "bottom");
-      var ICON = isMobileView ? 20 : 16;
+      var ICON = 16; // v4.3.497: 换乘图标统一 16px（与站名字号一致，用户尝试）
       var GAP = 2;
       var PER_ROW = 4;
       var MAX_ROWS = 2;
