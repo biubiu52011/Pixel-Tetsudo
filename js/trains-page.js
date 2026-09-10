@@ -528,10 +528,10 @@
       var _cw6 = ((typeof document !== "undefined" && document.querySelector("#trainsMapContainer")) || {}).clientWidth || 410;
       var _cw6Content = _isMobileView() ? Math.max(_cw6 - 16, 320) : _cw6;
       // v4.3.483c: 缩放系数对齐山手线 loopScale（移动 1.5 / 桌面 1.6）。
-      // ※4.3.492 起山手线双列基准独立收窄为 96，六形环保持 110 不再对齐（用户只指示山手线）。
+      // v4.3.496: 用户裁定环线标准宽度——六形环圆环部分与山手线统一（48 基准，移动 72px/桌面 76.8px）。
       var scale6 = _isMobileView() ? 1.5 : 1.6;
       var spLoop6 = 26 * scale6;
-      var loopRectW = 110 * scale6; // v4.3.483b: 环宽调窄（原山手线同款基准），给光丘尾留水平空间
+      var loopRectW = 48 * scale6; // v4.3.496: 环宽对齐山手线标准（48 基准），给光丘尾留水平空间
       var loopRectH = Math.max(loopStations.length * spLoop6 - 40 * scale6, 200 * scale6);
       
       var leftMargin = 8 * scale6;
@@ -546,7 +546,7 @@
       
       var naturalW = leftMargin + tailAreaWidth + loopRectW + marginRight;
       if (_isMobileView() && naturalW > _cw6Content) {
-        loopRectW = Math.max(_cw6Content - leftMargin - tailAreaWidth - marginRight, 110 * scale6);
+        loopRectW = Math.max(_cw6Content - leftMargin - tailAreaWidth - marginRight, 48 * scale6);
       }
       svgW = leftMargin + tailAreaWidth + loopRectW + marginRight;
       svgH = loopRectH + marginTopBot * 2;
