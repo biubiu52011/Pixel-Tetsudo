@@ -938,9 +938,10 @@
     if (o.tx != null) { tx = o.tx; ty = o.ty; anchor = o.anchor || "start"; }
     else if (side === "top") { tx = o.x; ty = o.y - (isJunction ? 14 : 10); anchor = "middle"; }
     else if (side === "bottom") { tx = o.x; ty = o.y + (isJunction ? 19 : 15); anchor = "middle"; }
-    // v4.3.503: 光丘尾站（环顶上方 o.y < junctionY，含 tail 站 x=loopCx）站名朝右（朝环外/画布右缘）；
-    // Tochomae（o.y == junctionY）与左列环站（o.y > junctionY）站名朝左（双列朝外）。
-    else if (side === "left" && geometry.isSixShapedLoop && (!geometry.isDualLoop6 || o.y < geometry.junctionY)) { tx = o.x + (isJunction ? 14 : 10); ty = o.y; anchor = "start"; }
+    // v4.3.505: 岔路站名统一朝右——光丘尾站（o.y < junctionY）与 Tochomae（o.y == junctionY，
+    // 岔路 junction，v4.3.505 起朝右与光丘尾 10 站统一）站名都在圆点右侧；
+    // 左列环站（o.y > junctionY，新宿西口…春日）站名朝左（双列朝外）。
+    else if (side === "left" && geometry.isSixShapedLoop && (!geometry.isDualLoop6 || o.y <= geometry.junctionY)) { tx = o.x + (isJunction ? 14 : 10); ty = o.y; anchor = "start"; }
     else if (side === "left") { tx = o.x - (isJunction ? 14 : 10); ty = o.y; anchor = "end"; }
     else if (side === "dual") { tx = o.x - (isJunction ? 16 : 12); ty = o.y; anchor = "end"; }
     else if (side === "right" && geometry.isSixShapedLoop && !geometry.isDualLoop6) { tx = o.x - (isJunction ? 14 : 10); ty = o.y; anchor = "end"; }
@@ -963,12 +964,12 @@
     var _clampAvail = (side === "dual" || side === "left") ? (tx - 4) : ((side === "right") ? (svgW - 2 - tx) : 0);
     if (geometry.isSixShapedLoop) {
       if (geometry.isDualLoop6) {
-        // v4.3.504: 双列模式——Tochomae/左列下方站/右列站走通用 clamp（940：左列 tx-4 / 右列 svgW-2-tx）。
-        // y<junctionY 的 left 站（环段尾 S32..S37 与光丘尾）站名都朝右，但空间不同：
+        // v4.3.505: 双列模式——右列站走通用 clamp（940：svgW-2-tx）。
+        // y<=junctionY 的 left 站（环段尾 S32..S37、Tochomae 与光丘尾）站名都朝右，但空间不同：
         // - 光丘尾（x<junctionX，环外）：名到环左缘前（junctionX-4-tx）
-        // - 左列上方站（x==junctionX，环内）：名到右列圆点左缘前（junctionX+loopRectW−7−4−tx，
+        // - 左列上方站与 Tochomae（x==junctionX，环内）：名到右列圆点左缘前（junctionX+loopRectW−7−4−tx，
         //   58px 窄空间，5 字站名经 clamp 缩至 10px 恰好贴圆点不重叠）
-        if (side === "left" && o.y < geometry.junctionY) {
+        if (side === "left" && o.y <= geometry.junctionY) {
           var _rDotL6 = geometry.junctionX + (geometry.loopRectW || 72) - 7;
           _clampAvail = o.x < geometry.junctionX
             ? Math.max(40, Math.floor(geometry.junctionX - tx - 4))
