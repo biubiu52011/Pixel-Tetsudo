@@ -931,7 +931,7 @@
     var _lblCompact = (side === "top" || side === "bottom");
     label.setAttribute("font-size", _lblCompact ? (isMobileView ? "16" : _pcFsC) : (isJunction ? (isMobileView ? "16" : _pcFsJ) : (isMobileView ? "16" : _pcFs)));
     label.setAttribute("fill", isJunction ? color : "#555");
-    label.setAttribute("font-family", "sans-serif");
+    label.setAttribute("font-family", "Fusion Pixel, 'Courier New', monospace"); // v4.3.498: 站名用像素字体（与全局一致）
     label.setAttribute("font-weight", isJunction ? "700" : "500");
     label.setAttribute("text-anchor", anchor);
     var _clampAvail = (side === "dual" || side === "left") ? (tx - 4) : ((side === "right") ? (svgW - 2 - tx) : 0);
@@ -1317,7 +1317,7 @@
           // v4.3.448: 支線名も主線の文字階層に合わせ 13→14px（独立簡略値のまま残さない）
           branchName.setAttribute("font-size", "14");
           branchName.setAttribute("fill", bColor);
-          branchName.setAttribute("font-family", "sans-serif");
+          branchName.setAttribute("font-family", "Fusion Pixel, 'Courier New', monospace"); // v4.3.498: 支线名用像素字体（与全局一致）
           branchName.setAttribute("font-weight", "600");
           branchName.setAttribute("text-anchor", "start");
           var branchDisplayName = (window.RailwayDB && typeof window.RailwayDB.resolveLineName === "function") ? window.RailwayDB.resolveLineName(branch.id, window.currentLang) : (branch.nameJa || branch.name);

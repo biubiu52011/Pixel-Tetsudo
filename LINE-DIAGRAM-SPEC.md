@@ -16,6 +16,7 @@
 | 主字体 | `'Fusion Pixel'`（像素字体） | style.css @font-face |
 | 语言包 | 拉丁 / 日文 / 简体中文 / 繁体中文 / 韩文（5 个 ttf） | style.css |
 | 回退 | `'Courier New', monospace` | style.css body |
+| SVG 站名/支线名 | 显式 `'Fusion Pixel', 'Courier New', monospace`（v4.3.498 起，原 sans-serif） | trains-page.js 934/1320 |
 
 ### 1.2 字号刻度（两套体系）
 **A. CSS 设计令牌**（页面 UI）：
