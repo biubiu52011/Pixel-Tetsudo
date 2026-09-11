@@ -946,6 +946,9 @@
       color: color,
       branchLines: branchLines,
       branchOffset: branchOffset,
+      branchSides: (function() { var _ba = []; for (var _bi5 = 0; _bi5 < branchLines.length; _bi5++) _ba.push(_bSide(_bi5)); return _ba; })(), // v4.3.515: 每支线分叉侧（跨函数传给 renderTrainMap）
+      bCol: _bCol, // v4.3.515: 支线列序号（跨函数）
+      branchStubL: _branchStubL, // v4.3.515: 左侧支线 stub（主干最宽站名+22，跨函数）
       branchGeom: branchGeom,
       routeElements: routeElements,
       junctionStation: isSixShapedLoop ? stations[0] : null,
@@ -1475,10 +1478,13 @@
         }
         if (junctionIdx >= 0 && stationCoords.length > junctionIdx) {
           // v4.3.515: 支线左右交替分叉（ㅕㅑ）——偶数支线右（ㅑ）、奇数支线左（ㅕ）；单支线保持右（现状）
-          var _bSideNow = _bSide(bi);
+          // 派生值经 geometry 跨函数传递（computeRouteGeometry → renderTrainMap）
+          var _bSideNow = (geometry.branchSides && geometry.branchSides[bi]) ? geometry.branchSides[bi] : "right";
+          var _bColNow = (geometry.bCol) ? geometry.bCol(bi) : 0;
+          var _stubL6 = geometry.branchStubL || 0;
           var bx = (_bSideNow === "left")
-            ? (stationCoords[junctionIdx].x - _branchStubL - _bCol(bi) * GEOM.BRANCH_COL_W)
-            : (stationCoords[junctionIdx].x + GEOM.BRANCH_STUB + _bCol(bi) * GEOM.BRANCH_COL_W);
+            ? (stationCoords[junctionIdx].x - _stubL6 - _bColNow * GEOM.BRANCH_COL_W)
+            : (stationCoords[junctionIdx].x + GEOM.BRANCH_STUB + _bColNow * GEOM.BRANCH_COL_W);
           var by = stationCoords[junctionIdx].y;
           var branchTop = by - 20;
           // v4.3.515: 左侧支线连接线下移 20px 再水平分叉（避免水平线穿过 junction 主干站名带，
