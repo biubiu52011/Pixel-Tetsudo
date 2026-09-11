@@ -736,3 +736,33 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 - 鉄博下り 23時首班 08（非03）、内宿上り 8時 无45（整图像素确认）、終点着時刻+2 修正
 **验证**：鉄博発/内宿発時刻与官网表逐分钟一致（含丸山行同刻无重复）；node --check；结构回归 0 问题（railway/calendar/时刻格式/终点一致/单调递增）；站 key 与本地 lines.NewShuttle 13 站逐字符一致；消费链走通用 ensureManualTimetable（无特判）。
 **推送范围**：4.3.528-532 + 4.3.533（本线）+ 并发会话 4.3.495-500 车站订正；.work 不入库（.gitignore 已加）。
+
+## 4.3.534（2026-09-12，退役列车图标清理·14 项）
+**用户指示**："清理到已经没有运营的列车了"——对检查报告（trainfrontview 网站标签全量核对，仅按文件名+网站标注+百科判定，未读图）确认的 14 个已退役车型图标执行删除。
+**清理清单（网站明确标「過去」+ 本地现存，删除前全部经引用检查）**：
+- 根目录 9 项：e110ex（キハ110系外幌無/只見）/ e40jkaze（キハ40系フルーティア・風っこ）/ e485ha（485系白鳥・いなほ）/ e485km_tgr（485系つがる）/ e719ft（719系フルーティア）/ yrkm7000-1~4（ゆりかもめ7000系）
+- 子目录 5 项：都営地下鉄 toky10490（10-490形）/ toky10520（10-520形）/ toky5301（5300形）；横浜高速鉄道 yok1000jg + 横浜市交通局 10000形.png（**两者哈希相同 F385BD5D，均为ブルーライン事業用過去車的误名重复图**）
+**引用修复**（System-First）：train-icons.js YokohamaGreen 原指向 横浜市交通局/10000形.png（已删退役误名图）→ 改指 横浜高速鉄道/yok10000.png（现役 10000形 绿线）。删除后全项目 grep 确认 0 残留引用。
+**验证**：14 文件全部删除确认（Remove-Item + Test-Path 双重）；残留引用 0（仅注释含"10000形"字样非路径）；新引用目标 yok10000/10001/10002 均存在；检查报告 CSV 重建 201 条（含已删除标注）。
+**遗留**：e40ka（烏山線キハ40，网站现役标注但该车已退役）/ e701ta（田沢湖線701-500，网站标過去但实际现役）/ e255s（255系置换中）/ e209ky1（209系京葉 2026年7月训练车转用）/ e653j/m（水戸 E653）/ toky12700 / tx1000~2005（TX-3000置换中）8 项存疑未清理，待用户逐项拍板；yok 系列归类迁移（横浜高速鉄道→横浜市交通局）未执行，YokohamaGreen 现引用横浜高速鉄道目录待后续归类时一并处理。
+
+## 4.3.535（2026-09-12，图库归类迁移 + train-icons.js 断链清零）
+**用户指示**："我要你同时把大图整理到子目录去"——根目录 328 个 trainfrontview 大图按运营公司归入子目录，并修复引用断链。
+**归类迁移（前缀→运营公司，页面标签/上下文实证）**：JR東日本=e*/c57/ee*（131）；東京モノレール=mn-tky（6）；多摩都市モノレール=mn-tma（4）；首都圏新都市鉄道=tx（7）；埼玉新都市交通=nstl（9）；都営地下鉄=todn/toky（25）；東京臨海高速鉄道=twr（2）；ゆりかもめ=yrkm（2）；北総鉄道=hkso（2）；千葉ニュータウン鉄道=sbym（1）；京王=keio（9）；京成=kese（16）；京急=khk（7）；小田急=odq（21）；西武=seb/musa（30）；相模鉄道=sote（9）；埼玉高速鉄道=sr（1）；東京メトロ=tkm（30）；東武=tob（63）；東急=toq（34）；東葉高速鉄道=toyo（1）；横浜高速鉄道=yokk500f（みなとみらい線，4）；yokk000/yokk000me/yokk000mo=東急（こどもの国線，合并入東急電鉄，删除带括号目录）。根目录清零。
+**断链修复（57 唯一引用/141 处）**：train-icons.js 全引用从"标准型号名"（E233系1000番台.png 等）改为代码名大图（e233kt.png 等），53 处 JR 系 + 都営 5（toky10300/12002/5500/6300/todn8503→8500）+ ゆりかもめ yrkm7300 + 多摩 mn-tma1000。替换后引用 114 唯一 / 断链 0；node --check 通过。
+**验证**：根目录 0 残留；26 子目录全部就位；断链复检 0；train-icons.js 语法 OK。
+**遗留**：湘南モノレール目录仍空（无对应大图）；横浜市交通局目录仅 4000形.png（yok10000 系列仍在横浜高速鉄道目录，归属迁移未执行）；私铁子目录旧小图（東武16/東急7/メトロ10 等）未替换为大图，待用户拍板。
+
+
+## 4.3.536（2026-09-12，后台缓存 IndexedDB 化 + serve.py key 治理）
+**用户指示**：“修复”（后台体检结论落地：P1-1 缓存存储触顶/主线程阻塞、P1-2 API key 明文入库、P3 console.log 治理）。
+**odpt-unified.js 缓存改造**（data/api/odpt-unified.js）：
+- 存储从 localStorage 迁移到 IndexedDB（v4.3.534 注释）：全量时刻表压缩后 5-10MB 触 localStorage 配额（曾触发 partial 降级丢数据），且 JSON.stringify 大对象同步执行阻塞主线程；IndexedDB 异步写入、容量 GB 级
+- 新增 _idbOpen/_idbGet/_idbSet（DB pixel-tetsudo / store odpt_cache，失败重置允许重试）；键升级 odpt_timetable_cache_v3→v4
+- loadTimetableCache/saveTimetableCache/shouldRefreshTimetables 全部异步化；localStorage 保留为 IndexedDB 不可用（隐私模式等）时的兜底（_readLocalStorageCache/_saveLocalStorage 含 partial 降级）
+- 旧 v3 localStorage 缓存首次访问自动迁移入 IndexedDB（_migrateLegacyLocalStorage，避免首次重下大体积时刻表），成功后清除 v3 残留释放配额
+- loadTimetableData 拆壳：缓存读取异步化，API 拉取主体独立 _loadTimetableDataFromApi；内部 Promise 链全部接续（loadAllData/init/setInterval 5min 检查 shouldRefreshTimetables 异步化）
+**serve.py key 治理**：ODAKYU_KEY 硬编码移除 → 环境变量 ODAKYU_API_KEY → .work/serve.env（gitignore 已覆盖）→ 未配置时 /api-proxy/ 返回 503 明确提示；utf-8-sig 兼容 PowerShell BOM；key 本体已写入本地 .work/serve.env（不入库）
+**console.log 治理**：odpt-unified.js 全部产物 console.log（8 处）降级 console.debug（AGENTS.md Known Debt 消除）
+**验证**：node --check 双文件；.work/test_odpt_cache.cjs 端到端 12/12 PASS（A 首拉落盘/A5 压缩格式/B IDB 命中时刻表零重拉/C v3 迁移/D TTL 过期重拉）；serve.py py_compile + key 加载复验 40 字符匹配；浏览器端效果按用户约定人工验收
+**范围**：仅 data/api/odpt-unified.js + serve.py + AGENTS.md（并发会话 4.3.534/535 图标/图库改动不纳入本 commit）

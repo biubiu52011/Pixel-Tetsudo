@@ -734,27 +734,115 @@
         }
     };
 
-    // ========== Timetable Local Cache ==========
-    var TIMETABLE_CACHE_KEY = 'odpt_timetable_cache_v3'; // v4.3.512: 压缩格式新增 c(calendar) 字段 + 1000 截断线按日历拆分合并，v2 缓存结构不兼容，升级键强制失效
+    // ========== Timetable Cache (IndexedDB primary, localStorage fallback) ==========
+    // v4.3.534: 存储从 localStorage 迁移到 IndexedDB——全量时刻表压缩后 5-10MB，localStorage
+    // 5-10MB 配额会触顶（曾触发 partial 降级丢数据），且 JSON.stringify 大对象同步执行会阻塞主线程。
+    // IndexedDB 异步写入、容量 GB 级；localStorage 保留为隐私模式/禁用 IDB 时的兜底。
+    var TIMETABLE_CACHE_KEY = 'odpt_timetable_cache_v4';
+    var LEGACY_LS_CACHE_KEY = 'odpt_timetable_cache_v3'; // 旧 localStorage 缓存，首次迁移后清除
     var TIMETABLE_CACHE_TTL = 3600000;  // 1小时过期
+    var IDB_DB_NAME = 'pixel-tetsudo';
+    var IDB_STORE = 'odpt_cache';
+    var _idbDbPromise = null;
 
-    function loadTimetableCache() {
+    function _idbOpen() {
+        if (_idbDbPromise) return _idbDbPromise;
+        _idbDbPromise = new Promise(function(resolve, reject) {
+            try {
+                if (!window.indexedDB) { reject(new Error('IndexedDB unavailable')); return; }
+                var req = window.indexedDB.open(IDB_DB_NAME, 1);
+                req.onupgradeneeded = function(e) {
+                    var db = e.target.result;
+                    if (!db.objectStoreNames.contains(IDB_STORE)) {
+                        db.createObjectStore(IDB_STORE);
+                    }
+                };
+                req.onsuccess = function(e) { resolve(e.target.result); };
+                req.onerror = function(e) { reject(e.target.error || new Error('IDB open failed')); };
+                req.onblocked = function() { reject(new Error('IDB blocked')); };
+            } catch(e) { reject(e); }
+        });
+        // 失败后重置，允许下次重试（如用户稍后解除隐私模式）
+        _idbDbPromise = _idbDbPromise.catch(function(err) { _idbDbPromise = null; throw err; });
+        return _idbDbPromise;
+    }
+    function _idbGet(key) {
+        return _idbOpen().then(function(db) {
+            return new Promise(function(resolve, reject) {
+                try {
+                    var tx = db.transaction(IDB_STORE, 'readonly');
+                    var req = tx.objectStore(IDB_STORE).get(key);
+                    req.onsuccess = function() { resolve(req.result); };
+                    req.onerror = function() { reject(req.error); };
+                } catch(e) { reject(e); }
+            });
+        });
+    }
+    function _idbSet(key, value) {
+        return _idbOpen().then(function(db) {
+            return new Promise(function(resolve, reject) {
+                try {
+                    var tx = db.transaction(IDB_STORE, 'readwrite');
+                    tx.objectStore(IDB_STORE).put(value, key);
+                    tx.oncomplete = function() { resolve(); };
+                    tx.onerror = function() { reject(tx.error); };
+                    tx.onabort = function() { reject(tx.error); };
+                } catch(e) { reject(e); }
+            });
+        });
+    }
+
+    // 旧 localStorage 缓存同步读取（TTL 检查 + 解压）
+    function _readLocalStorageCache(key) {
         try {
-            var cached = localStorage.getItem(TIMETABLE_CACHE_KEY);
+            var cached = localStorage.getItem(key);
             if (!cached) return null;
             var data = JSON.parse(cached);
             if (!data || !data.timestamp) return null;
             var age = Date.now() - data.timestamp;
             if (age > TIMETABLE_CACHE_TTL) return null;
-            // 如果是压缩数据，需要解压
             if (data.compressed && data.timetables) {
                 return decompressTimetable(data.timetables);
             }
             return data.timetables || {};
         } catch(e) {
-            console.debug("[ODPT] Failed to load timetable cache:", e.message);
+            console.debug("[ODPT] Failed to read localStorage cache:", e.message);
             return null;
         }
+    }
+
+    // 迁移：IndexedDB 无记录时，把未过期的旧 localStorage v3 缓存搬入 IndexedDB（避免首次重下大体积时刻表）
+    function _migrateLegacyLocalStorage() {
+        var legacy = _readLocalStorageCache(LEGACY_LS_CACHE_KEY);
+        if (!legacy) return null;
+        var compressed = compressTimetable(legacy);
+        var data = { timestamp: Date.now(), timetables: compressed, compressed: true, migrated: true };
+        _idbSet(TIMETABLE_CACHE_KEY, data).then(function() {
+            try { localStorage.removeItem(LEGACY_LS_CACHE_KEY); } catch(e) {}
+            console.debug("[ODPT] Migrated legacy localStorage cache to IndexedDB");
+        }).catch(function(e) {
+            console.debug("[ODPT] Legacy migration to IndexedDB failed:", e && e.message);
+        });
+        return legacy;
+    }
+
+    // 异步读取缓存：IndexedDB 主路径 → 旧 localStorage 迁移 → localStorage 兜底
+    function loadTimetableCache() {
+        return _idbGet(TIMETABLE_CACHE_KEY).then(function(record) {
+            if (record && record.timestamp) {
+                var age = Date.now() - record.timestamp;
+                if (age > TIMETABLE_CACHE_TTL) return null;
+                if (record.compressed && record.timetables) {
+                    return decompressTimetable(record.timetables);
+                }
+                return record.timetables || {};
+            }
+            // 本键无记录（首次 v4）：尝试迁移旧 v3 localStorage 缓存
+            return _migrateLegacyLocalStorage();
+        }).catch(function(e) {
+            console.debug("[ODPT] IndexedDB read failed, using localStorage:", e && e.message);
+            return _readLocalStorageCache(TIMETABLE_CACHE_KEY);
+        });
     }
 
     function compressTimetable(timetables) {
@@ -823,19 +911,14 @@
         }
     }
 
-    function saveTimetableCache(timetables) {
+    // localStorage 兜底保存（同步，含 partial 降级）——仅当 IndexedDB 不可用时触发
+    function _saveLocalStorage(compressed, data, timetables) {
         try {
-            // 压缩数据
-            var compressed = compressTimetable(timetables);
-            var data = {
-                timestamp: Date.now(),
-                timetables: compressed,
-                compressed: true
-            };
             var jsonStr = JSON.stringify(data);
-            console.log("[ODPT] Timetable cache size:", (jsonStr.length / 1024 / 1024).toFixed(2), "MB");
+            console.debug("[ODPT] Timetable cache size:", (jsonStr.length / 1024 / 1024).toFixed(2), "MB");
             localStorage.setItem(TIMETABLE_CACHE_KEY, jsonStr);
-            console.log("[ODPT] Timetable cache saved successfully");
+            console.debug("[ODPT] Timetable cache saved to localStorage (fallback)");
+            return Promise.resolve();
         } catch(e) {
             console.debug("[ODPT] Failed to save timetable cache:", e.message);
             // 如果还是太大，尝试只保存主要运营商
@@ -845,32 +928,64 @@
                 mainOps.forEach(function(op) {
                     if (timetables[op]) partial[op] = timetables[op];
                 });
-                var compressed = compressTimetable(partial);
-                var data = {
+                var partialCompressed = compressTimetable(partial);
+                var partialData = {
                     timestamp: Date.now(),
-                    timetables: compressed,
+                    timetables: partialCompressed,
                     compressed: true,
                     partial: true
                 };
-                localStorage.setItem(TIMETABLE_CACHE_KEY, JSON.stringify(data));
-                console.log("[ODPT] Partial timetable cache saved");
+                localStorage.setItem(TIMETABLE_CACHE_KEY, JSON.stringify(partialData));
+                console.debug("[ODPT] Partial timetable cache saved to localStorage");
             } catch(e2) {
                 console.debug("[ODPT] Partial cache also failed:", e2.message);
             }
+            return Promise.resolve();
         }
     }
 
+    function saveTimetableCache(timetables) {
+        var compressed = compressTimetable(timetables);
+        var data = { timestamp: Date.now(), timetables: compressed, compressed: true };
+        // 主路径：IndexedDB 异步写入，不阻塞主线程、容量充足
+        return _idbSet(TIMETABLE_CACHE_KEY, data).then(function() {
+            console.debug("[ODPT] Timetable cache saved to IndexedDB:", Object.keys(timetables).length, "operators");
+            // 成功后清除旧 localStorage 残留（释放配额）
+            try { localStorage.removeItem(LEGACY_LS_CACHE_KEY); } catch(e) {}
+        }).catch(function(e) {
+            console.debug("[ODPT] IndexedDB save failed, falling back to localStorage:", e && e.message);
+            return _saveLocalStorage(compressed, data, timetables);
+        });
+    }
+
     function shouldRefreshTimetables() {
-        try {
-            var cached = localStorage.getItem(TIMETABLE_CACHE_KEY);
-            if (!cached) return true;
-            var data = JSON.parse(cached);
-            if (!data || !data.timestamp) return true;
-            var age = Date.now() - data.timestamp;
-            return age > TIMETABLE_CACHE_TTL;
-        } catch(e) {
+        return _idbGet(TIMETABLE_CACHE_KEY).then(function(record) {
+            if (record && record.timestamp) {
+                return (Date.now() - record.timestamp) > TIMETABLE_CACHE_TTL;
+            }
+            // 本键无记录：检查旧 localStorage 缓存是否仍有效（迁移完成前）
+            var legacy = null;
+            try {
+                var cached = localStorage.getItem(LEGACY_LS_CACHE_KEY);
+                if (cached) {
+                    var d = JSON.parse(cached);
+                    if (d && d.timestamp) legacy = d;
+                }
+            } catch(e) {}
+            if (legacy) return (Date.now() - legacy.timestamp) > TIMETABLE_CACHE_TTL;
             return true;
-        }
+        }).catch(function() {
+            // IndexedDB 不可用：localStorage 兜底
+            try {
+                var cached = localStorage.getItem(TIMETABLE_CACHE_KEY);
+                if (!cached) return true;
+                var data = JSON.parse(cached);
+                if (!data || !data.timestamp) return true;
+                return (Date.now() - data.timestamp) > TIMETABLE_CACHE_TTL;
+            } catch(e) {
+                return true;
+            }
+        });
     }
 
     // ========== 全局数据存储 ==========
@@ -984,22 +1099,27 @@
     // ========== 加载时刻表数据（使用本地缓存）==========
     // 每小时刷新一次，优先使用本地缓存
     function loadTimetableData(forceRefresh) {
-        // 先尝试从本地缓存加载
-        var cachedTimetables = loadTimetableCache();
-        if (cachedTimetables && !forceRefresh) {
-            console.log("[ODPT] Using cached timetables from localStorage");
-            window.ODPT_TIMETABLES = cachedTimetables;
-            // 填充ODPT_TRAINS（向后兼容）
-            Object.keys(cachedTimetables).forEach(function(op) {
-                if (!window.ODPT_TRAINS[op]) {
-                    window.ODPT_TRAINS[op] = cachedTimetables[op];
-                }
-            });
-            return Promise.resolve();
-        }
+        // 先尝试从本地缓存加载（IndexedDB 主路径，异步；失败自动回退 localStorage）
+        return loadTimetableCache().then(function(cachedTimetables) {
+            if (cachedTimetables && !forceRefresh) {
+                console.debug("[ODPT] Using cached timetables from IndexedDB/localStorage");
+                window.ODPT_TIMETABLES = cachedTimetables;
+                // 填充ODPT_TRAINS（向后兼容）
+                Object.keys(cachedTimetables).forEach(function(op) {
+                    if (!window.ODPT_TRAINS[op]) {
+                        window.ODPT_TRAINS[op] = cachedTimetables[op];
+                    }
+                });
+                return;
+            }
+            // 缓存过期或强制刷新，从API加载
+            return _loadTimetableDataFromApi();
+        });
+    }
 
-        // 缓存过期或强制刷新，从API加载
-        console.log("[ODPT] Loading fresh timetables from API");
+    // v4.3.534: 从 API 全量拉取并落缓存（原 loadTimetableData 主体，缓存读取异步化后独立成函数）
+    function _loadTimetableDataFromApi() {
+        console.debug("[ODPT] Loading fresh timetables from API");
         var ops = Object.keys(ODPT_ENDPOINTS);
         var loaded = 0;
         var newTimetables = {};
@@ -1128,10 +1248,11 @@
         });
 
         return Promise.all(promises).then(function() {
-            // 保存到本地缓存
+            // 保存到本地缓存（IndexedDB 主路径，失败自动降级 localStorage；内部兜底不 reject）
             if (Object.keys(newTimetables).length > 0) {
-                saveTimetableCache(newTimetables);
-                console.log("[ODPT] Timetables cached to localStorage:", loaded, "operators");
+                return saveTimetableCache(newTimetables).then(function() {
+                    console.debug("[ODPT] Timetables cached:", loaded, "operators");
+                });
             }
         });
     }
@@ -1157,13 +1278,15 @@
 
         // 时刻表每小时刷新（检查缓存是否过期）
         setInterval(function() {
-            if (shouldRefreshTimetables()) {
-                console.log("[ODPT] Timetable cache expired, refreshing...");
-                loadTimetableData(true).catch(function(e) { console.warn("[ODPT] Timetable refresh error:", e.message); });
-            }
+            shouldRefreshTimetables().then(function(need) {
+                if (need) {
+                    console.debug("[ODPT] Timetable cache expired, refreshing...");
+                    loadTimetableData(true).catch(function(e) { console.warn("[ODPT] Timetable refresh error:", e.message); });
+                }
+            }).catch(function(e) { console.debug("[ODPT] shouldRefreshTimetables check error:", e.message); });
         }, 300000);  // 每5分钟检查一次是否需要刷新
 
-        console.log("[ODPT] Client initialized with", Object.keys(ODPT_ENDPOINTS).length, "operators");
+        console.debug("[ODPT] Client initialized with", Object.keys(ODPT_ENDPOINTS).length, "operators");
     }
 
     // v4.3.395: 请求尽早发起——fetch 不依赖 DOM，脚本执行即请求，不再等 DOMContentLoaded

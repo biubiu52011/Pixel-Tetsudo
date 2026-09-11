@@ -20,7 +20,27 @@ import time
 PORT = 8017
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
-ODAKYU_KEY = "8r7ngDW81q3qCNFVk59KB4bnazimt6TfpDOF4mB5"
+# v4.3.534: API key 不再硬编码入库。读取顺序：环境变量 ODAKYU_API_KEY →
+# .work/serve.env（本地文件，已被 .gitignore 排除）→ 未配置（代理返回 503 提示）。
+def _load_odakyu_key():
+    env = os.environ.get("ODAKYU_API_KEY")
+    if env:
+        return env.strip()
+    env_path = os.path.join(ROOT, ".work", "serve.env")
+    try:
+        # utf-8-sig 兼容 PowerShell Set-Content 写入的 UTF-8 BOM 头
+        with open(env_path, "r", encoding="utf-8-sig") as f:
+            for line in f:
+                line = line.strip()
+                if line and not line.startswith("#") and "=" in line:
+                    k, _, v = line.partition("=")
+                    if k.strip() == "ODAKYU_API_KEY":
+                        return v.strip().strip('"').strip("'")
+    except FileNotFoundError:
+        pass
+    return ""
+
+ODAKYU_KEY = _load_odakyu_key()
 
 # 白名单代理端点（只允许这些固定目标，防 SSRF）
 PROXY_TARGETS = {
@@ -62,6 +82,15 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 
     def _proxy(self, path):
         cfg = PROXY_TARGETS[path]
+        # 需要 key 的端点未配置时给出明确提示（不发送空 key 请求）
+        if cfg["headers"].get("x-api-key") is not None and not cfg["headers"].get("x-api-key"):
+            self.send_response(503)
+            self.send_header("Content-Type", "application/json; charset=utf-8")
+            self.end_headers()
+            self.wfile.write(json.dumps(
+                {"error": "ODAKYU_API_KEY not configured: set env var or create .work/serve.env"},
+                ensure_ascii=False).encode("utf-8"))
+            return
         try:
             headers = {"User-Agent": "Mozilla/5.0"}
             headers.update(cfg["headers"])
