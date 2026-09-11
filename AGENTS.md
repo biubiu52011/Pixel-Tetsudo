@@ -793,6 +793,12 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 **修复**（js/trains-page.js 渲染完整重建路径）：appendChild(svg) 后 `requestAnimationFrame` 设置 `el.scrollLeft = (scrollWidth - clientWidth) / 2`——初始视口中心对准图中心，左右两侧对称溢出，向两端滚动全程可达（刻意不用 flex 居中：flex 溢出时左侧溢出区 scrollLeft 不可达，属浏览器已知限制）。仅完整重建路径设置一次，用户手动滚动后位置保持；增量更新路径不受影响。
 **验证**：node --check 通过；trains.html trains-page.js 版本行 4.3.523→4.3.539；diff 仅 2 处。交付后用户人工验收（禁系统截图）。
 
+## 4.3.540（2026-09-12，线路图放大追加 50% → 总计 100%）
+**用户指示**："还需要增加50%"——在 4.3.538（100%→150%）基础上再 +50%。
+**实现**（css/trains.css）：`.tp-map-wrap` 宽度 150%→**200%**（总放大 100%）；居中裁切 JS（4.3.539 scrollLeft=(scrollWidth-clientWidth)/2）对任意宽度通用，无需改动；overflow-x auto 滚动范围随 scrollWidth 自动扩展。
+**验证**：trains.html trains.css 版本行 4.3.538→4.3.540；中文编码完好。交付后用户人工验收（禁系统截图）。
+
+
 
 
 

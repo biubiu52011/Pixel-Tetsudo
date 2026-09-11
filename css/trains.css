@@ -40,8 +40,8 @@
   border-radius: var(--radius-sm); padding: 14px; overflow-x: auto; overflow-y: visible; flex-shrink: 0;
 }
 @media (max-width: 640px) { .tp-line-map { padding: 6px; } }
-/* v4.3.538: 线路图整体放大 50%——渲染宽度 150%，容器可横向滚动查看超出部分 */
-.tp-map-wrap { width: 150%; max-width: none; min-width: 200px; }
+/* v4.3.540: 线路图整体放大 100%（原 100% → 200%）——渲染宽度 200%，容器可横向滚动，初始视图居中裁切 */
+.tp-map-wrap { width: 200%; max-width: none; min-width: 200px; }
 .tp-map-wrap svg { width: 100%; height: auto; display: block; }
 .tp-no-data { text-align: center; color: var(--text-muted); font-size: 13px; padding: 16px; }
 .tp-no-data-sub { font-size: 11px; color: var(--text-muted); }
