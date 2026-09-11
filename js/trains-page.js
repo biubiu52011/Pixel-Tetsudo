@@ -568,12 +568,26 @@
       var marginTopBot = 40 * scale6;
       // v4.3.482: tail 列宽与直线支线同源（GEOM.BRANCH_COL_W × 本图缩放系数）。
       // 移动端容器是 1:1 硬约束，tail 列让位给环（保底 BRANCH_COL_W×1.1 ≈ 现状 105px）。
+      // v4.3.514: 支线宽度取决于文本最多的那个站（用户指示）——不硬编码 105.6/88，
+      // 动态扫描光丘尾列（stub 前 10 站）与左列上方站名的最大文字宽（字数×16×1.1，与
+      // _pickSixLabelSide 同源）；语言切换/站名变化时 stubX 与 tailCap 自适应。
+      var _sixNameW = function(_id6) {
+        var _n6 = (window.RailwayDB && window.RailwayDB.resolveStationName)
+          ? (window.RailwayDB.resolveStationName(_id6, window.currentLang) || _id6) : _id6;
+        return (_n6 || "").length * 16 * 1.1;
+      };
+      var _tailWidest = 0;
+      for (var _tw6 = 1; _tw6 < hikarigaokaStations.length; _tw6++)
+        _tailWidest = Math.max(_tailWidest, _sixNameW(hikarigaokaStations[_tw6]));
+      var _leftTopWidest = 0;
+      for (var _lw6 = 0; _lw6 < _juncIdx6; _lw6++)
+        _leftTopWidest = Math.max(_leftTopWidest, _sixNameW(_leftIds6[_lw6]));
       // v4.3.513: 光丘尾竖线不穿左列上方站名——桌面 tail 列扩到"竖线右侧容纳左列上方 5 字
       // 全尺寸文字带"（三区分离：光丘尾文字带|竖线|左列上方文字带|环，junctionX≥stubX+10+88+10）；
       // 移动端容器 1:1 硬约束下 tailCap 保持现状（剩余穿线站名用白色描边遮线，见 _renderStationNode）。
       var _tailCap = _isMobileView()
         ? GEOM.BRANCH_COL_W * scale6
-        : Math.max(GEOM.BRANCH_COL_W * 1.6, 10 + 105.6 + 10 + 88 + 10);
+        : Math.max(GEOM.BRANCH_COL_W * 1.6, 10 + _tailWidest + 10 + _leftTopWidest + 10);
       var tailAreaWidth = Math.min(_tailCap,
                                    Math.max(GEOM.BRANCH_COL_W * 1.1,
                                             _cw6Content - leftMargin - loopRectW - marginRight));
@@ -608,7 +622,8 @@
       // Stub: 从环左缘（Tochomae）水平向左到 stubX（画布左缘 + 边距 10px），再垂直向上
       // v4.3.511: 光丘尾站名改朝左（用户指令）——竖线右移，保证最宽站
       // （西新宿五丁目 6 字 ≈105.6px）全尺寸朝左时文字左缘仍 ≥ leftMargin（12/12.8px）。
-      var stubX = Math.max(leftMargin + 10 * scale6, leftMargin + 10 + 105.6);
+      // v4.3.514: 宽度取光丘尾列实际最长站名（_tailWidest 动态），不硬编码 105.6。
+      var stubX = Math.max(leftMargin + 10 * scale6, leftMargin + 10 + _tailWidest);
       var stubY = junctionY;
       
       // Tail station coordinates: first = junction (Tochomae, 环左缘 1/2 处), rest = along vertical line at stubX
