@@ -28,8 +28,9 @@
     BRANCH_COL_W: 96,
     // 分叉引出长度（主线列 → 支线列的水平 stub）
     BRANCH_STUB: 20,
-    // 主线基准画布宽（无支线时）
+    // 主线基准画布宽（v4.3.543: 固定档位，不再按容器宽度 clamp——图的实际像素与窗口宽度无关）
     MAIN_BASE_W_MOBILE: 410,
+    // v4.3.543 停用：MAIN_BASE_W_MIN（440）原为容器宽度 clamp 下界，固定基准后无引用，保留作历史
     MAIN_BASE_W_MIN: 440,
     MAIN_BASE_W_MAX: 820
   };
@@ -591,9 +592,9 @@
       var loopStations = [stations[0]].concat(stations.slice(hikarigaokaIdx + 1));
       
       // ============ Size calculation ============
-      // Mobile-first: viewBox width must equal container width so the SVG renders 1:1
-      // (no squeeze -> real font size == declared font size). Vertical params stay fixed.
-      var _cw6 = ((typeof document !== "undefined" && document.querySelector("#trainsMapContainer")) || {}).clientWidth || 410;
+      // v4.3.543: 画布基准固定（与直线布局同档：移动 410 / 桌面 820）——不再读取容器宽度，
+      // 使环宽/画布宽恒定，×2 部署的像素尺寸与窗口宽度无关（"拓展后实际尺寸"，非基数放大）。
+      var _cw6 = _isMobileView() ? GEOM.MAIN_BASE_W_MOBILE : GEOM.MAIN_BASE_W_MAX;
       var _cw6Content = _isMobileView() ? Math.max(_cw6 - 16, 320) : _cw6;
       // v4.3.483c: 缩放系数对齐山手线 loopScale（移动 1.5 / 桌面 1.6）。
       // v4.3.496: 用户裁定环线标准宽度——六形环圆环部分与山手线统一（48 基准，移动 72px/桌面 76.8px）。
@@ -848,10 +849,9 @@
     } else {
       // Standard linear line: widen the canvas so left (names) and right (icons) both get used
       var isMobileView = _isMobileView();
-      var _cw = ((typeof document !== "undefined" && document.querySelector("#trainsMapContainer")) || {}).clientWidth || 820;
-      // v4.3.482: 主线中心固定（不随支线数左移），画布 = 主线区 + 支线区。
-      // 支线列宽统一 GEOM.BRANCH_COL_W；画布只扩到实际需要，避免移动端整体缩放变小。
-      var _baseW = (_isMobileView() ? GEOM.MAIN_BASE_W_MOBILE : Math.min(Math.max(_cw, GEOM.MAIN_BASE_W_MIN), GEOM.MAIN_BASE_W_MAX));
+      // v4.3.543: 画布基准固定（移动 410 / 桌面 820）——不再读取容器宽度 clamp，
+      // svgW 恒定 → ×2 部署像素尺寸与窗口宽度无关（"拓展后实际尺寸"，非基数放大）。
+      var _baseW = (_isMobileView() ? GEOM.MAIN_BASE_W_MOBILE : GEOM.MAIN_BASE_W_MAX);
       var _rightPad = isMobileView ? 24 : 40;
       var mainCx, svgW;
       if (branchLines.length >= 2) {
