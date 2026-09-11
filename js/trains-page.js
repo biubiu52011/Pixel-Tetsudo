@@ -498,11 +498,12 @@
         branchLines.push({ id: bid, name: bl.name || bid, color: (window.LineOperationSystemsResolveColor && window.LineOperationSystemsResolveColor(bid)) || bl.color || color, stations: bl.stations });
       }
     }
-    // v4.3.515: 双支线及以上左右交替分叉（ㅕㅑ 镜像）——偶数支线朝右（ㅑ）、奇数支线朝左（ㅕ）；
-    // 单支线保持右侧弯折（现状）。左侧支线 stub 需避开主干朝左站名带（主干最大站名宽 + 20，gap 10px）。
-    var _bSide = function(_i6b) { return (branchLines.length >= 2) ? ((_i6b % 2 === 0) ? "right" : "left") : "right"; };
-    var _bCol = function(_i6b) { return Math.floor(_i6b / 2); };
-    var _rightCols = Math.ceil(branchLines.length / 2), _leftCols = Math.floor(branchLines.length / 2);
+    // v4.3.516: 双支线及以上**同侧直排**（用户："要么两条直线在左边或者右边别再有拐弯"）——
+    // 多支线全部朝左直排（junction 站名朝右避让，见 renderTrainMap），无下移拐弯；单支线保持右侧弯折（现状）。
+    var _bSide = function(_i6b) { return (branchLines.length >= 2) ? "left" : "right"; };
+    var _bCol = function(_i6b) { return _i6b; }; // 同侧列序号 = 支线序号
+    var _rightCols = (branchLines.length >= 2) ? 0 : (branchLines.length === 1 ? 1 : 0);
+    var _leftCols = (branchLines.length >= 2) ? branchLines.length : 0;
     var _branchStubL = 0, _branchMaxNameW = function(_sd6) {
       var _mx6 = 0;
       for (var _bi3 = 0; _bi3 < branchLines.length; _bi3++) {
@@ -528,8 +529,10 @@
       }
       _branchStubL = _mainMaxW + 22; // 主干站名朝左偏移 12（side=dual）+ gap 10
     }
-    var _leftNeed = _leftCols > 0 ? (_branchStubL + (_leftCols - 1) * GEOM.BRANCH_COL_W + 10 + _branchMaxNameW("left") + 2) : 0;
-    var _rightNeed = _rightCols > 0 ? (GEOM.BRANCH_STUB + (_rightCols - 1) * GEOM.BRANCH_COL_W + 10 + _branchMaxNameW("right") + 2) : 0;
+    // v4.3.516: 左侧列距动态化——列 1 竖线不穿列 0 名带（列 0 名带右缘=bx0-10，列 1 竖线=bx0-列距，需 gap ≥ 4）
+    var _branchColW = _leftCols > 0 ? Math.max(GEOM.BRANCH_COL_W, _branchMaxNameW("left") + 14) : GEOM.BRANCH_COL_W;
+    var _leftNeed = _leftCols > 0 ? (_branchStubL + (_leftCols - 1) * _branchColW + 10 + _branchMaxNameW("left") + 2) : 0;
+    var _rightNeed = _rightCols > 0 ? (GEOM.BRANCH_STUB + 10 + _branchMaxNameW("right") + 2) : 0;
     var branchOffset = branchLines.length > 0 ? GEOM.BRANCH_COL_W * branchLines.length : 0;
     // Branch name label sits 26px above the junction station (industry-standard
     // branch annotation). Reserve headroom when the junction is the first station.
@@ -819,10 +822,19 @@
       var _rightPad = isMobileView ? 24 : 40;
       var mainCx, svgW;
       if (branchLines.length >= 2) {
-        // v4.3.515: 双支线及以上左右交替分叉（ㅕㅑ）——主干 x ≥ 左侧支线区需求（站名朝左放下），
-        // svgW 容纳左侧需求 + 右侧需求；左侧 stub 已避开主干站名带（_branchStubL）。
+        // v4.3.516: 多支线全左直排——mainCx ≥ 左侧支线区需求（站名朝左放下），
+        // 右侧仅 junction 站名朝右（岔路）+ 余量；左侧 stub 已避开主干站名带（_branchStubL）。
+        var _jMaxW6 = 0;
+        for (var _jb6 = 0; _jb6 < branchLines.length; _jb6++) {
+          var _jn6 = branchLines[_jb6].stations && branchLines[_jb6].stations[0]
+            ? ((window.RailwayDB && window.RailwayDB.resolveStationName)
+              ? (window.RailwayDB.resolveStationName(branchLines[_jb6].stations[0], window.currentLang) || branchLines[_jb6].stations[0])
+              : branchLines[_jb6].stations[0])
+            : "";
+          _jMaxW6 = Math.max(_jMaxW6, (_jn6 || "").length * 16 * 1.1);
+        }
         mainCx = Math.max(_baseW / 2, _leftNeed + 20);
-        svgW = Math.max(_baseW, mainCx + _rightNeed + 20);
+        svgW = Math.max(_baseW, mainCx + 12 + _jMaxW6 + _rightPad);
       } else {
         // 单支线/无支线：主线中心固定（现状）
         mainCx = _baseW / 2;
@@ -919,7 +931,7 @@
         }
         if (_jIdx < 0) continue;
         var _bx = (_bSide(bgi) === "left")
-          ? (stationCoords[_jIdx].x - _branchStubL - _bCol(bgi) * GEOM.BRANCH_COL_W)
+          ? (stationCoords[_jIdx].x - _branchStubL - _bCol(bgi) * _branchColW)
           : (stationCoords[_jIdx].x + GEOM.BRANCH_STUB + _bCol(bgi) * GEOM.BRANCH_COL_W);
         var _by = stationCoords[_jIdx].y;
         var _bsp = sp || 24;
@@ -949,6 +961,7 @@
       branchSides: (function() { var _ba = []; for (var _bi5 = 0; _bi5 < branchLines.length; _bi5++) _ba.push(_bSide(_bi5)); return _ba; })(), // v4.3.515: 每支线分叉侧（跨函数传给 renderTrainMap）
       bCol: _bCol, // v4.3.515: 支线列序号（跨函数）
       branchStubL: _branchStubL, // v4.3.515: 左侧支线 stub（主干最宽站名+22，跨函数）
+      branchColW: _branchColW, // v4.3.516: 左侧列距动态化（跨函数）
       branchGeom: branchGeom,
       routeElements: routeElements,
       junctionStation: isSixShapedLoop ? stations[0] : null,
@@ -1449,16 +1462,28 @@
       }
       
       // Add station circles and labels（主線駅も支線駅も _renderStationNode で統一描画）
+      // v4.3.516: 支线 junction 站（岔路起点=各支线 stations[0]）站名朝右（Tochomae 先例）——
+      // 多支线全左直排时左侧水平 stub 不穿 junction 站名带；单支线（右侧）junction 保持朝左（现状）
+      var _isBranchJunction = function(_sid7) {
+        if (!geometry.branchLines || geometry.branchLines.length < 2) return false;
+        for (var _bj7 = 0; _bj7 < geometry.branchLines.length; _bj7++) {
+          if (geometry.branchLines[_bj7].stations && geometry.branchLines[_bj7].stations[0] === _sid7) return true;
+        }
+        return false;
+      };
       for (var si = 0; si < stationCoords.length; si++) {
         var sc = stationCoords[si];
         var stationId = sc.stationId;
         var isJunction = geometry.junctionStation && stationId === geometry.junctionStation;
+        var _bJ7 = _isBranchJunction(stationId);
         _renderStationNode(staticLayer, svgNS, {
           x: sc.x, y: sc.y, stationId: stationId, isJunction: isJunction, color: color,
           si: si, side: sc.side || "right", geometry: geometry, isMobileView: isMobileView,
           svgW: svgW, svgH: svgH, transferMap: transferMap, stationCoords: stationCoords,
           rS: _rS,
-          skipTx: false
+          skipTx: false,
+          tx: _bJ7 ? (sc.x + 12) : undefined, // 岔路 junction 站名朝右（anchor=start 右缘=圆点右 12）
+          anchor: _bJ7 ? "start" : undefined
         });
       }
       
@@ -1477,32 +1502,23 @@
           }
         }
         if (junctionIdx >= 0 && stationCoords.length > junctionIdx) {
-          // v4.3.515: 支线左右交替分叉（ㅕㅑ）——偶数支线右（ㅑ）、奇数支线左（ㅕ）；单支线保持右（现状）
+          // v4.3.516: 多支线全左直排（用户："要么两条直线在左边或者右边别再有拐弯"）——
+          // 全部支线同一侧、junction 行水平直 stub（无下移拐弯）；单支线保持右（现状）
           // 派生值经 geometry 跨函数传递（computeRouteGeometry → renderTrainMap）
           var _bSideNow = (geometry.branchSides && geometry.branchSides[bi]) ? geometry.branchSides[bi] : "right";
           var _bColNow = (geometry.bCol) ? geometry.bCol(bi) : 0;
           var _stubL6 = geometry.branchStubL || 0;
+          var _colW6 = geometry.branchColW || GEOM.BRANCH_COL_W;
           var bx = (_bSideNow === "left")
-            ? (stationCoords[junctionIdx].x - _stubL6 - _bColNow * GEOM.BRANCH_COL_W)
+            ? (stationCoords[junctionIdx].x - _stubL6 - _bColNow * _colW6)
             : (stationCoords[junctionIdx].x + GEOM.BRANCH_STUB + _bColNow * GEOM.BRANCH_COL_W);
           var by = stationCoords[junctionIdx].y;
           var branchTop = by - 20;
-          // v4.3.515: 左侧支线连接线下移 20px 再水平分叉（避免水平线穿过 junction 主干站名带，
-          // 站名带 y±8 且朝左延伸至圆点左侧 12px）；沿主干的重叠垂直段隐式连接圆点。
-          var _connY = (_bSideNow === "left") ? (by + 20) : by;
+          // v4.3.516: junction 行水平直 stub（不拐弯）；左侧穿 junction 站名带问题由
+          // junction 站名朝右解决（_isBranchJunction，见主干站渲染）
+          var _connY = by;
           
-          // Branch line（左侧：垂直段沿主干下移 + 水平段；右侧：junction 行水平，现状）
-          if (_bSideNow === "left") {
-            var _vSeg = document.createElementNS(svgNS, "line");
-            _vSeg.setAttribute("x1", stationCoords[junctionIdx].x);
-            _vSeg.setAttribute("y1", by);
-            _vSeg.setAttribute("x2", stationCoords[junctionIdx].x);
-            _vSeg.setAttribute("y2", _connY);
-            _vSeg.setAttribute("stroke", bColor);
-            _vSeg.setAttribute("stroke-width", "3");
-            _vSeg.setAttribute("opacity", "0.5");
-            staticLayer.appendChild(_vSeg);
-          }
+          // Branch line（junction 行水平直 stub）
           var branchLine = document.createElementNS(svgNS, "line");
           branchLine.setAttribute("x1", stationCoords[junctionIdx].x);
           branchLine.setAttribute("y1", _connY);
