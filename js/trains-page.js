@@ -1578,6 +1578,7 @@
           rS: _rS,
           skipTx: false,
           tx: _bJ7 ? (sc.x + 12) : undefined, // 岔路 junction 站名朝右（anchor=start 右缘=圆点右 12）
+          ty: _bJ7 ? sc.y : undefined, // v4.3.549: 补漏——junction 站名与圆点同行（此前漏传 ty，text y=undefined / 换乘 chip y=NaN）
           anchor: _bJ7 ? "start" : undefined
         });
       }

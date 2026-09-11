@@ -895,3 +895,13 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 **效果（本地 DOM 验证）**：nCircle 29→27（16 主干 + 9 我孫子 + 2 空港）、「成田」仅主干 1 次（站名朝右）、支線竖列自下総松崎/空港第2ビル 起（y=junction+sp）、竖线 y1=junction 行不变、y2 余量保持。
 **版本**：bump trains-page.js ?v=4.3.546→4.3.548（db-loader 4.3.547 数据未变不 bump）。
 **验证**：node --check 通过；本地静态服务器 + DOM 读取结构断言全过（圆点数/成田出现次数/支線首站/竖线范围）；线上由用户人工 Ctrl+F5 验收。
+
+## 4.3.549（2026-09-12，成田線 junction 站名/换乘 chip y=undefined 修复·深度检查）
+**用户指示**："深度检查成田线差不了的原因"（成田線查不到实时/页面异常深度排查）。
+**深度检查结论（实测）**：
+- ODPT challenge API 实测：odpt:Train Narita=0 / NaritaAbikoBranch=0 / NaritaAirportBranch=0 —— **ODPT 数据源不推送成田線实时列车位置**（仅覆盖首都圈 22 系统，4.3.489 已记录），实时查不到属数据源限制，非代码缺陷；
+- odpt:TrainTimetable 成田系 728 条齐全（Narita 348 / Abiko 160 / Airport 220），时刻表推定正常——SVG 已渲染 11 个推定列车标记（时刻表からの計算データ）；
+- 发现并修复可修 bug：成田線双支線触发 `_isBranchJunction` 分支（多支線线首条），`_renderStationNode` 调用漏传 `ty`（仅 `tx`/`anchor`）→ _renderStationNode 1159 行 `ty = o.ty` 取 undefined → 成田站名 text y=undefined（SVG 报 `<text> attribute y: Expected length`）、换乘 chip `iy0 = ty+14 = NaN`（rect/image 不渲染，报 y: NaN）——成田站周边视觉缺失/错位的直接原因。
+**修复**（js/trains-page.js 1580-1581 行）：junction 分支补 `ty: _bJ7 ? sc.y : undefined`（站名与圆点同行，dominant-baseline central 同 v4.3.500 规则）。
+**验证**：node --check；本地 DOM——成田站名 y=142（此前 undefined）、chip rect y=150 / image y=151（此前 NaN）、全图坏 y（undefined/NaN）0 处；线上由用户人工 Ctrl+F5 验收。
+**版本**：bump trains-page.js ?v=4.3.548→4.3.549（数据/时刻表未变不 bump db-loader）。
