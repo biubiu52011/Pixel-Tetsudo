@@ -885,3 +885,13 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 **修复**（railway_data.json，用户指示允许改数据）：Narita 本線删銚子 17→16 站（佐倉～松岸，durations 17→15、transferStations 删銚子条目）；SobuMain.transferStations 删銚子→Narita 声明；stationLines[Choshi] 删 Narita；LSO[Narita] 删銚子。空港支線（3 站）/我孫子支線（10 站）已正确不变；三条合计 27 站与官方一致。gen-file-data.js 重生成 bundle。
 **缓存规避**：bump trains.html db-loader.js ?v=4.3.469→4.3.547（数据 localStorage 缓存 key 跟随 db-loader 版本，不 bump 则命中旧缓存——4.3.521 教训同型）。
 **验证**：本地三条数据断言全过（銚子 0 残留、站数/换乘/LSO/stationLines 全对）、bundle 重生成；线上 #Narita 由用户人工验收。
+
+## 4.3.548（2026-09-12，成田線图 junction 重复绘制修复·渲染层）
+**用户指示**："你自己看"（4.3.547 拆三条上线后成田線图视觉堆叠投诉）——数据层经复核已正确（本線 16 站含久住 Kuzumi 真实站/銚子归総武；下総松崎～新木 6 站属我孫子支線，Suica 官方表证实），问题在渲染层。
+**根因（线上 DOM 实测）**：computeRouteGeometry branchGeom 竖列分支与 renderTrainMap 竖列循环均从支線站表首位（junction）生成坐标/绘制——成田線两条支線 junction 同为成田 → 图中「成田」圆点+站名出现 3 次（主干 1 + 两竖列各 1），支線竖线从重复成田行起头，三条线视觉纠缠、站名堆叠（对比横向 _branchH 路径早有 junction continue，竖列缺失此跳过）。
+**修复**（js/trains-page.js 两处）：
+- computeRouteGeometry branchGeom 竖列：`if (_gStations[_bsi] === _jfG.station) continue;`，独有站 y = _by + _bK*_bsp（_bK 从 1 起 = junction 下方一档，与横排 _bHi+1 同规则）；
+- renderTrainMap 竖列：同样跳过 junction（skipTx 由 bsi===0 改恒 false），支線只画独有站。
+**效果（本地 DOM 验证）**：nCircle 29→27（16 主干 + 9 我孫子 + 2 空港）、「成田」仅主干 1 次（站名朝右）、支線竖列自下総松崎/空港第2ビル 起（y=junction+sp）、竖线 y1=junction 行不变、y2 余量保持。
+**版本**：bump trains-page.js ?v=4.3.546→4.3.548（db-loader 4.3.547 数据未变不 bump）。
+**验证**：node --check 通过；本地静态服务器 + DOM 读取结构断言全过（圆点数/成田出现次数/支線首站/竖线范围）；线上由用户人工 Ctrl+F5 验收。

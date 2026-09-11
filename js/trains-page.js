@@ -1014,8 +1014,13 @@
             _bHi++;
           }
         } else {
+          // v4.3.548: 竖列跳过 junction 站（主干已绘）——共享站不重复绘制，
+          // 支线独有站从 junction 下方一档开始（与横排 _bHi+1 同规则）
+          var _bK = 1;
           for (var _bsi = 0; _bsi < _gStations.length; _bsi++) {
-            _bcoords.push({ stationId: _gStations[_bsi], x: _bx, y: _by + _bsi * _bsp });
+            if (_gStations[_bsi] === _jfG.station) continue;
+            _bcoords.push({ stationId: _gStations[_bsi], x: _bx, y: _by + _bK * _bsp });
+            _bK++;
           }
         }
         branchGeom[_br.id] = _bcoords;
@@ -1696,17 +1701,21 @@
             var _bTx = (_bSideNow === "left") ? (bx - 10) : (bx + 10);
             var _bAnchor = (_bSideNow === "left") ? "end" : "start";
             // v4.3.520: junction 在支线站表末位（我孫子支线）→ 反转站序从 junction 向下延伸
+            // v4.3.548: 竖列跳过 junction 站（主干已绘）——支线只画独有站，junction 不重复
             var _rStations = (_jAt === branch.stations.length - 1) ? branch.stations.slice().reverse() : branch.stations;
+            var _bK2 = 1;
             for (var bsi = 0; bsi < _rStations.length; bsi++) {
-              var bsy = by + bsi * branchSp;
+              if (_rStations[bsi] === _jFind7.station) continue;
+              var bsy = by + _bK2 * branchSp;
               _renderStationNode(staticLayer, svgNS, {
                 x: bx, y: bsy, stationId: _rStations[bsi], isJunction: false, color: bColor,
                 si: bsi, side: _bSideNow, geometry: geometry, isMobileView: isMobileView,
                 svgW: svgW, svgH: svgH, transferMap: transferMap, stationCoords: stationCoords,
                 rS: _rS,
                 tx: _bTx, ty: bsy, anchor: _bAnchor, // v4.3.500: 支线站名避让 r=7 圆点 + 垂直居中（左侧支线镜像朝左）
-                skipTx: (bsi === 0)
+                skipTx: false
               });
+              _bK2++;
             }
           }
           
