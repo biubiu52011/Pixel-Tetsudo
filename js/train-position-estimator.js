@@ -10,7 +10,7 @@
 (function() {
   "use strict";
 
-  var ESTIMATOR_VERSION = 5;
+  var ESTIMATOR_VERSION = 6;
 
   // ========== Train type classification ==========
   // 通用特急关键词——JR-East/東武 等只写 "LimitedExpress"（4.3.484/4.3.485 实测：爱称不出现，具体名规则全部失效）
@@ -233,6 +233,61 @@
     } catch(e) { return 0; }
   }
 
+  // ========== Extrapolation (v6: 接续推定——数据最远端之后) ==========
+  // 用户需求（2026-09-11）：列车到达 ODPT 提供数据的最后站后，推定其接续行驶，不中途消失。
+  // 全量核查（41 线 18903 记录）实证：真截断 175 条集中在首都圈大线——
+  //   ChuoSobuLocal 76 / ShonanShinjuku 69 / SobuMain 16 / Saikyo 10 / Sotobo 4。
+  //   例：中央総武 1012Y（三鷹→西船橋 全程列车）记录只给前 7 站（三鷹→中野），dest=西船橋（站表 29 位），
+  //   列车在图内开到中野就消失——用户所见"半路没了"的元凶。
+  // 方案（经全量核查修正）：
+  //   1. dest 可映射到本线站表且 dest 索引 > 记录末站索引 → 外推到 dest（列车真实终点）
+  //   2. dest 跨线/缺失 → 不接续（列车在本线旅程 = 记录覆盖段，到段末出图/收车是正确行为）
+  //      注：跨线不外推——上越線 高崎→渋川 后列车拐入吾妻線（dest=長野原草津口），
+  //      外推到上越線末站長岡 会把列车放上它根本没走的区间（假位置）。
+  // 算法：已知段平均速度 v=(末站时刻−首站时刻)/(末站索引−首站索引) 分钟/站索引差
+  //       （按站索引差天然兼容跳站列车），后续站时刻 = 末站时刻 + v×(目标索引−末站索引)。
+  //       终点站 depTime=null（到站即收车，不"通过"）；中间外推站 depTime=arrTime（不停车通过）。
+  // 完整数据（dest 索引 <= 末站索引）→ 不外推，零影响。
+  function buildExtrapolation(tt, tto, stationIndexMap) {
+    try {
+      var destStations = tt['odpt:destinationStation'];
+      var destUrn = (destStations && destStations.length > 0) ? String(destStations[0]) : '';
+      if (!destUrn) return null;
+      var dKey = extractStationKey(destUrn);
+      var targetIdx = stationIndexMap[normalizeStationKey(dKey)];
+      if (targetIdx === undefined) targetIdx = stationIndexMap[dKey];
+      if (targetIdx === undefined || targetIdx < 0) return null; // dest 跨线/不可映射 → 不接续
+
+      // 已知段首末可映射站（索引 + 时刻）
+      var firstIdx = -1, lastIdx = -1, firstTime = null, lastTime = null;
+      for (var i = 0; i < tto.length; i++) {
+        var stop = tto[i] || {};
+        var key = extractStationKey(stop['odpt:departureStation'] || stop['odpt:arrivalStation']);
+        var idx = stationIndexMap[normalizeStationKey(key)];
+        if (idx === undefined) idx = stationIndexMap[key];
+        if (idx === undefined || idx < 0) continue;
+        var arr = parseTimeToMinutes(stop['odpt:arrivalTime']);
+        var dep = parseTimeToMinutes(stop['odpt:departureTime']);
+        var tm = (arr !== null && arr !== undefined) ? arr : dep;
+        if (firstIdx < 0) { firstIdx = idx; firstTime = tm; }
+        lastIdx = idx;
+        if (tm !== null && tm !== undefined) lastTime = tm;
+      }
+      if (firstIdx < 0 || lastIdx <= firstIdx || lastTime === null || firstTime === null) return null;
+      if (targetIdx <= lastIdx) return null; // 数据已覆盖到 dest → 不外推（完整/区间车）
+
+      var v = (lastTime - firstTime) / (lastIdx - firstIdx);
+      if (!(v > 0)) return null; // 速度异常（0/负）不外推
+
+      var stops = [];
+      for (var idx2 = lastIdx + 1; idx2 <= targetIdx; idx2++) {
+        var time = Math.round(lastTime + v * (idx2 - lastIdx));
+        stops.push({ _index: idx2, arrTime: time, depTime: (idx2 < targetIdx) ? time : null });
+      }
+      return { stops: stops, lastIdx: lastIdx, targetIdx: targetIdx };
+    } catch(e) { return null; }
+  }
+
   // ========== Core estimation ==========
   /**
    * Estimate train positions for a single line based on timetable + delay
@@ -299,20 +354,34 @@
         var tto = tt["odpt:trainTimetableObject"];
         if (!tto || !Array.isArray(tto) || tto.length === 0) continue;
 
+        // v6: 接续推定——数据最远端之后。dest 在本线站表内且更远 → 外推补充站序列；
+        // 否则（跨线/缺失/数据完整）fullStops === tto，零影响。
+        var ext = buildExtrapolation(tt, tto, stationIndexMap);
+        var fullStops = ext ? tto.concat(ext.stops) : tto;
+        var extrapolated = false;
+
         // Find current station based on time
         var currentStationIndex = -1;
         var foundInService = false;
 
-        for (var s = 0; s < tto.length; s++) {
-          var stop = tto[s];
+        for (var s = 0; s < fullStops.length; s++) {
+          var stop = fullStops[s];
           if (!stop) continue;
 
-          var depTime = parseTimeToMinutes(stop["odpt:departureTime"]);
-          var arrTime = parseTimeToMinutes(stop["odpt:arrivalTime"]);
-          var stationKey = extractStationKey(stop["odpt:departureStation"] || stop["odpt:arrivalStation"]);
-          var normStationKey = normalizeStationKey(stationKey);
-          var idx = stationIndexMap[normStationKey];
-          if (idx === undefined) idx = stationIndexMap[stationKey]; // fallback to original key
+          var depTime, arrTime, idx;
+          if (stop._index !== undefined) {
+            // 外推虚拟站（已带站表索引与推定时刻）
+            idx = stop._index;
+            arrTime = stop.arrTime;
+            depTime = stop.depTime;
+          } else {
+            depTime = parseTimeToMinutes(stop["odpt:departureTime"]);
+            arrTime = parseTimeToMinutes(stop["odpt:arrivalTime"]);
+            var stationKey = extractStationKey(stop["odpt:departureStation"] || stop["odpt:arrivalStation"]);
+            var normStationKey = normalizeStationKey(stationKey);
+            idx = stationIndexMap[normStationKey];
+            if (idx === undefined) idx = stationIndexMap[stationKey]; // fallback to original key
+          }
 
           if (idx === undefined || idx < 0) continue;
 
@@ -324,6 +393,7 @@
           if (effectiveArrival !== null && adjustedCurrentMin >= effectiveArrival) {
             currentStationIndex = idx;
             foundInService = true;
+            if (ext && idx > ext.lastIdx) extrapolated = true;
           }
           // 尚未发车（停车中或未到达）即停——列车不会越过本站
           if (effectiveDeparture !== null && adjustedCurrentMin < effectiveDeparture) {
@@ -334,8 +404,9 @@
         // Only include trains that are currently in service (have departed at least one station)
         if (foundInService && currentStationIndex >= 0) {
           // Check if train has already terminated (current time past last station arrival)
-          var lastStop = tto[tto.length - 1];
-          var lastArrTime = parseTimeToMinutes(lastStop["odpt:arrivalTime"] || lastStop["odpt:departureTime"]);
+          // v6: 收车判定基于外推后的末站——真截断列车走完全程后才收车
+          var lastStop = fullStops[fullStops.length - 1];
+          var lastArrTime = (lastStop._index !== undefined) ? lastStop.arrTime : parseTimeToMinutes(lastStop["odpt:arrivalTime"] || lastStop["odpt:departureTime"]);
           if (lastArrTime !== null && adjustedCurrentMin > lastArrTime + 5) continue; // 5 min grace
 
           processedTrainIds[trainNumber] = true;
@@ -367,6 +438,7 @@
             trainId: lineId + '_' + trainNumber,
             delayMin: delayMin,
             estimated: true,
+            extrapolated: extrapolated, // v6: 位置位于外推段（数据最远端之后）
             trainType: tt['odpt:trainType'] || '',
             typeName: trainClassification.typeName,
             isLimitedExpress: trainClassification.isLimitedExpress,
