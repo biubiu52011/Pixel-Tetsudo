@@ -164,7 +164,7 @@
 | right（默认） | x+14/x+10 | y（central） | start |
 
 - 支线站（数据覆盖）：tx=bx+10、ty=bsy（central），同普通站规格（1310）。
-- **支线分叉布局（v4.3.516，用户指示"双支线或以上不要弯折方案""要么两条直线在左边或者右边别再有拐弯"）**：直线线型支线 **≥2 条**时**全部同侧直排（左侧）**——每条支线 junction 行水平直 stub（无下移拐弯）+ 垂直列；单支线保持右侧弯折（现状）。左侧支线 bx=mainCx−_branchStubL−支线序号×_branchColW（**_branchStubL=主干最大站名宽+22**，避开主干朝左站名带 gap 10；**_branchColW=max(96, 左支线最大站名宽+14)**，列间竖线不穿前列名带 gap ≥4）、站名朝左（tx=bx−10，anchor=end）、支线名朝左；**支线 junction 站（各支线 stations[0]）主干站名朝右**（tx=mainCx+12、anchor=start，Tochomae 岔路朝右先例）——直 stub 不穿 junction 站名带。svgW=max(_baseW, mainCx+12+最长 junction 站名宽+_rightPad)，mainCx=max(_baseW/2, _leftNeed+20)。适用：鶴見線（大川列0 bx 232.1/海芝浦列1 bx 136.1 桌面）、成田線（空港列0/我孫子列1，列距 119.6）。
+- **支线分叉布局（v4.3.516，用户指示"双支线或以上不要弯折方案""要么两条直线在左边或者右边别再有拐弯"）**：直线线型支线 **≥2 条**时**全部同侧直排（左侧）**——每条支线 junction 行水平直 stub（无下移拐弯）+ 垂直列；单支线保持右侧弯折（现状）。左侧支线 bx=mainCx−_branchStubL−支线序号×_branchColW（**_branchStubL=主干最大站名宽+22**，避开主干朝左站名带 gap 10；**_branchColW=max(96, 左支线最大站名宽+14)**，列间竖线不穿前列名带 gap ≥4）、站名朝左（tx=bx−10，anchor=end）、支线名朝左；**支线 junction 站（支线与主干的接续站，v4.3.520 起不限 stations[0]——我孫子支线 junction 成田在站表末位也命中）主干站名朝右**（tx=mainCx+12、anchor=start，Tochomae 岔路朝右先例）——直 stub 不穿 junction 站名带。svgW=max(_baseW, mainCx+12+最长 junction 站名宽+_rightPad)，mainCx=max(_baseW/2, _leftNeed+20)。适用：鶴見線（大川列0 bx 232.1/海芝浦列1 bx 136.1 桌面）、成田線（空港列0/我孫子列1，列距 119.6；**v4.3.520 修复我孫子支线整条缺失**——junction 成田在支线站表末位 [我孫子…成田]，旧代码只查 stations[0] 找不到 junction 跳过渲染；现统一 `_branchJunctionStation` 解析（支线站表第一个出现在主干站表的站），junction 在末位时渲染站序反转从 junction 向下延伸）。
 - 换乘 chip 顶部：ty+14（换乘站）/ty+9（普通站），避让圆点底缘 +2px（995）。
 
 ### 6.3 环线布局

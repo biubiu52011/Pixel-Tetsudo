@@ -362,6 +362,26 @@ If the answer is NO, the change is REJECTED.
 **验证**：stations 2280→2274、name_map 1707→1701、i18n 3220→3214；0,0 残留 87→81；bundle 重生成加载 OK（5 站修复保持完好：Aoba-dori/Hitoichiba/Karasuyama/Midori-dai/Wada 坐标全对、Oito@5 链路完整）。
 **剩余 81 个 0,0 孤立实体待甄别**：疑似虚构（銀座四丁目/江東縛り/未来海/武蔵ニューレ/国会議事堂/高橋平/奥多摩口新 等）、拼写变体（Musashynuigami/MinamiKemigawa/Nishi-fushimi 等）、非首都圈真实站（Tobata 戸畑/Kerama 嘉手納/Nagatoro 長瀞/Shimoda 下田/Kishibojin 岸本神社 等）、东京系地名（東大和駅/Higashi-Yamatokoji 等）——待用户逐类拍板。
 
+## 4.3.499（2026-09-11，方案 C 第二批·错别字系列删除）
+**用户指示**："然后 再处理错别字系列"——删除 0,0 孤立实体中明确的错别字/架空站名。
+**删除 68 站**（全部经安全断言：无 lines 引用/无 stationLines/无 transferStations 引用）：
+- 错别字类：Takahashimadaira 高橋平（→高島平 Takashimadaira 误字，正站已存在 Nishi-Takashimadaira）、Fudosan-mae 不動山前（→不動前 Fudomae）、Kokkai-gijido 国会議事堂（→国会議事堂前，缺"前"）、Kishibojin 岸本神社（→鬼子母神前 Kishibojin-mae）、Higashi-Yamatokoji 東大和駅（→東大和市駅）、Minami-Kemigawa 南亀浦 + MinamiKemigawa 南検見川（京成千葉線無此二站，正站为 検見川）、Narashino 習志野/成相野（市名非站名）、Kasai-Rinkai 葛西臨海（→葛西臨海公園）、MakuhariSeaside 幕張海浜 + "Makuhari Seaside"（→海浜幕張 Kaihin-Makuhari 倒置）、Nishi-Akiru 西秋留（東秋留存在但西秋留不存在）等
+- 架空类：Ginza-yonchome 銀座四丁目/Koto-shibari 江東縛り/Miraikai 未来海/Musashinurare 武蔵ニューレ/Musashi-Saiwai 武蔵彩輝/Takahatafujimidai 高畑富士見台/Tamagawa-Enzei-ji 多摩川円蔵寺/Okutama-guchi 奥多摩口新/Tokyo-domae 東京ドーム前/Kanagawa-NewTown 神奈川県ニュータウン/Kita-Saitama 北さいたま/Chuo-Ku 中央区/Shin-otemachi 新大手町/Denno 電波/Go-komon 五本松/Tadachi 立派/Yokojimma 横島/Kototoi 言知/Mitarashi 御駄志/Mukaiminato 向岬/Yanauchi 柳内/Kimachi 木町/Choju 長寿/Meguro-Dai 目黒台/Midoricho 緑町/Minami-Nagasaki 南長崎/Nishi-Ikebukuro 西池袋/Nishi-Kichijoji 西吉祥寺/Nishi-Totsuka 西戸塚/Nishi-koen 西公園/Nishi-takaido 西高尾/Nishifujisawa 西藤沢/Fuchubashi 府中橋/Nishi-Fuchubashi 西府中橋/Higashi-Hachioji 東八王子/Higashi-Maruko 東丸島/Higashi-gotanda 東品川/Inokashira 井の頭/Miyagi 宮城/Nambu 南武/Nishi-fushimi 西伏見/Shin-rinkan 新林間/Wakasu 若洲/Minami-Wakasu 南若洲/Kit-Otsuka 北大塚/Kita-Yamato 北大和/Koji-mae 工房前/Musashi-Mitsuwadai 武蔵三澤台/Musashi-Nakagawa 武蔵中川/Musashi-Yamanaka 武蔵山中/Yukinoshita 雪之下/Hachiman-gaika 八幡外華/Hachiman-Honmachi 八幡本町/Minowa-shita 箕輪下/Musashynuigami 武蔵新上/Sakae(空壳) 等
+**保留 13 站**（实存站但本地无对应线路/无法判定，非错别字）：Chichibu 秩父（秩父鉄道）/Daizen-ji 大善寺（JR九州久大本線）/Hachiman 八幡（各地同名，无法判定）/Kerama 嘉手納（沖縄地名）/Kotaki 小滝（大糸線JR西区間実在駅）/Matsuda 松田（御殿場線，已知残置）/Nagatoro 長瀞（秩父鉄道）/Nakahara 中原（各地同名）/Nishi-Kawasaki 西川崎（南武支線実在駅，本地南武線未收支線）/Shimoda 下田（伊豆急行）/Shiroi 白井（北総鉄道）/Tateshina 立科（長野県地名）/Tobata 戸畑（JR九州鹿児島本線）
+**范围**：stations 68 键、stationLines 68 键（本来无）、name_map 68 键（値指向删除站的映射全清）、station_i18n 68 键。
+**验证**：删除前安全断言通过（无任何引用）；stations 2274→2206、name_map 1701→1636、i18n 3214→3148；0,0 残留 81→13；bundle 重生成加载 OK（5 站修复+Oito 链路保持完好）。
+**剩余 13 个 0,0 站**：全部为实存站但本地未收录对应线路（秩父鉄道/伊豆急/北総/JR九州 等）或同名无法判定——不在首都圈 JR 东范围，保留待用户决定是否清理。
+
+## 4.3.500（2026-09-11，方案 C 第三批·串门站点删除，0,0 清零）
+**用户指示**："所以还是属于串门站点？"（确认 13 个保留站性质）→"那你现在先补上吧"——用户裁定 13 个 0,0 保留站全部属"串门站点"（外地/外线路真实站混入本地数据），执行删除。
+**删除 13 站**（安全断言全过：无 lines 引用/无 stationLines/无 transferStations/无 name_map 他指）：
+- 纯串门 10 站：Chichibu 秩父/Nagatoro 長瀞（秩父鉄道）/Shimoda 下田（伊豆急）/Shiroi 白井（北総）/Tobata 戸畑/Daizen-ji 大善寺（JR九州）/Kerama 嘉手納（沖縄）/Tateshina 立科（長野県地名，无站）/Hachiman 八幡/Nakahara 中原（同名无法判定）
+- 沾边 3 站（本地未收录对应区间，删除并记录**重建提示**）：Nishi-Kawasaki 西川崎（南武支線 尻手～浜川崎，本地南武線未收支線）/Kotaki 小滝（大糸線 JR 西区間 南小谷～糸魚川，本地 Oito 只收松本～南小谷）/Matsuda 松田（御殿場線，4.3.493 曾记录残置，本次用户拍板删除）
+**范围**：stations 13 键、stationLines 13 键、name_map 13 键、station_i18n 13 键。
+**验证**：stations 2206→2193、name_map 1636→1623、i18n 3148→3135；**0,0 残留 81→13→0**；bundle 重生成加载 OK（5 站修复+Oito 链路保持完好）。
+**重建提示（未来若补以下线路需重建这 3 站）**：南武支線（川崎～尻手～浜川崎，含西川崎）→需重建 Nishi-Kawasaki；大糸線 JR 西区間（南小谷～糸魚川，含小滝）→需重建 Kotaki；御殿場線（含松田）→需重建 Matsuda。
+**0,0 全清零**：92 个 0,0 站处理全部完成（4.3.497 补 5 真实站坐标 + 4.3.498 删 6 大阪 + 4.3.499 删 68 错别字 + 4.3.500 删 13 串门）。
+
 Last updated: 2026-09-11
 Version: RC-2
 ---
@@ -622,3 +642,4 @@ Before tagging a release:
 - 2026-09-11 用户指示（时刻表推定提示去重・4.3.517）: 用户在 #Tsurumi 投诉"底部重复这么多次提示你是怕人瞎吗"——`.tp-est-note`（*時刻表からの計算データ）堆了 6 条。根因：`updateEstimatedNote` 用 `el.insertAdjacentElement('afterend', note)` 把 note 插成 el 的**兄弟节点**，清理时却用 `el.querySelector('.tp-est-note')` 只在 el **内部**查——永远删不到，每次增量刷新（约 15s 一次）/重建都堆一个新条。修复：改查 `el.parentNode.querySelectorAll('.tp-est-note')` 全部删除后再插唯一一个（一处函数覆盖增量/全量两个调用点）。验证: node --check OK; 线上 #Tsurumi DOM 6→1。
 - 2026-09-11 用户指示（推定列车很扯・4.3.519）: 用户在 #Tsurumi 质疑推定显示（36 列推定全挤在弁天橋/浅野/安善/武蔵白石 4 站，每站 4-13 列堆叠，含 601/703 等清晨车 13:54 仍在图上）。实证：鹤见线 ODPT 有 432 条时刻表（JR-East 18662 条内 railway=JR-East.Tsurumi）；**106 条记录末站 arrival/departure 均为空**（区间/支线车如 1013B 末站浅野）→ 旧收车判定 lastArrTime=null → 
 ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/432 为 2-8 站）在主干站表映射不全 → 位置全判定在 junction 附近。修复（js/train-position-estimator.js ESTIMATOR_VERSION=6→7）：收车判定改「最后可解析时刻」——从末站往前找最后一个可解析时刻（外推站 arrTime 兼容），整条记录无时刻则 foundInService 必然为 false 自动丢弃。验证: node --check OK; 线上 36→2 列（14:06 实测 1307B_9 在扇町 14:07 到站前/1312B_0 在鶴見，train-id 后缀与 DOM 位置一致），分布不再堆叠; 版本 4.3.519 同步 trains.html estimator 引用; git 仅 2 文件（js/train-position-estimator.js、pages/trains.html），data/core 并发改动未动。
+- 2026-09-11 用户指示（L 形状未改 + 推定未修复・4.3.520）: 用户线上验收反馈"并未得到修复，而且还是没有把 L 形状改成直线"——线上 bust8 实测：推定已 36→2 列（4.3.519 生效）、鹤见线支线已是水平直 stub（line 332.5-240.1:266 / 332.5-144.1:328 + 垂直列，无 L 形拐弯），判定为旧缓存页（用户 tab 仍为 bust6 旧参数）。但同期发现真实 bug：成田线我孫子支线整条缺失——NaritaAbikoBranch 站序 [我孫子…下総松崎,成田]，junction 成田在站表末位，而支线渲染/branchGeom/_isBranchJunction/_jMaxW6 全部只查 stations[0] → junction 找不到 → 整条支线跳过。修复：新增 _branchJunctionStation(branchStations, mainStations)（支线站表中第一个出现在主干站表的站，支持首位/末位）统一 4 处——渲染 junction 查找、branchGeom、_isBranchJunction（indexOf 扫描）、_jMaxW6（junction 名宽）；junction 在末位时渲染/几何站序反转（从 junction 向下延伸，成田→下総松崎→…→我孫子）。鹤见线（junction 均在首位）零影响。验证: node --check OK; 线上 bust9 读 #Narita DOM——我孫子支线竖线+10 站渲染、成田 junction 站名朝右、列 1 bx 与空港列 0 间距 _branchColW; 版本 4.3.520 同步 trains.html/SPEC/AGENTS; git 4 文件（js/trains-page.js、pages/trains.html、LINE-DIAGRAM-SPEC.md、AGENTS.md）。

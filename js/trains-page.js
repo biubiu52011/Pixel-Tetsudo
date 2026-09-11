@@ -464,6 +464,22 @@
     return segs;
   }
 
+  // v4.3.520: 支线 junction 站解析——支线站表中第一个出现在主干站表的站。
+  // 支持 junction 在支线站表首位（鹤见线海芝浦/大川、成田线空港支线）或**末位**
+  // （成田线我孫子支线 [我孫子…下総松崎,成田]，junction 成田在最后——旧代码只查
+  // stations[0] 导致整条支线不渲染）。返回 { station, at } 或 null。
+  function _branchJunctionStation(branchStations, mainStations) {
+    try {
+      if (!branchStations || !branchStations.length || !mainStations || !mainStations.length) return null;
+      var _bm = {};
+      for (var _iM = 0; _iM < mainStations.length; _iM++) _bm[mainStations[_iM]] = true;
+      for (var _iB = 0; _iB < branchStations.length; _iB++) {
+        if (_bm[branchStations[_iB]]) return { station: branchStations[_iB], at: _iB };
+      }
+      return null;
+    } catch(e) { return null; }
+  }
+
   function computeRouteGeometry(line, lineId) {
     // Check cache first
     if (_routeGeometryCache[_geomKey(lineId)] && _routeGeometryCache[_geomKey(lineId)].lineHash === _computeLineHash(line)) {
@@ -826,10 +842,16 @@
         // 右侧仅 junction 站名朝右（岔路）+ 余量；左侧 stub 已避开主干站名带（_branchStubL）。
         var _jMaxW6 = 0;
         for (var _jb6 = 0; _jb6 < branchLines.length; _jb6++) {
-          var _jn6 = branchLines[_jb6].stations && branchLines[_jb6].stations[0]
+          var _bl6 = branchLines[_jb6];
+          var _jst6 = "";
+          if (_bl6.stations && _bl6.stations.length) {
+            var _jf6 = _branchJunctionStation(_bl6.stations, stations);
+            _jst6 = (_jf6 && _jf6.station) || _bl6.stations[0];
+          }
+          var _jn6 = _jst6
             ? ((window.RailwayDB && window.RailwayDB.resolveStationName)
-              ? (window.RailwayDB.resolveStationName(branchLines[_jb6].stations[0], window.currentLang) || branchLines[_jb6].stations[0])
-              : branchLines[_jb6].stations[0])
+              ? (window.RailwayDB.resolveStationName(_jst6, window.currentLang) || _jst6)
+              : _jst6)
             : "";
           _jMaxW6 = Math.max(_jMaxW6, (_jn6 || "").length * 16 * 1.1);
         }
@@ -925,9 +947,11 @@
       for (var bgi = 0; bgi < branchLines.length; bgi++) {
         var _br = branchLines[bgi];
         if (!_br.stations || _br.stations.length === 0) continue;
+        var _jfG = _branchJunctionStation(_br.stations, stations);
+        if (!_jfG) continue;
         var _jIdx = -1;
         for (var _ji2 = 0; _ji2 < stationCoords.length; _ji2++) {
-          if (stationCoords[_ji2].stationId === _br.stations[0]) { _jIdx = _ji2; break; }
+          if (stationCoords[_ji2].stationId === _jfG.station) { _jIdx = _ji2; break; }
         }
         if (_jIdx < 0) continue;
         var _bx = (_bSide(bgi) === "left")
@@ -935,9 +959,11 @@
           : (stationCoords[_jIdx].x + GEOM.BRANCH_STUB + _bCol(bgi) * GEOM.BRANCH_COL_W);
         var _by = stationCoords[_jIdx].y;
         var _bsp = sp || 24;
+        // v4.3.520: junction 在支线站表末位（我孫子支线）→ 反转站序从 junction 向下延伸
+        var _gStations = (_jfG.at === _br.stations.length - 1) ? _br.stations.slice().reverse() : _br.stations;
         var _bcoords = [];
-        for (var _bsi = 0; _bsi < _br.stations.length; _bsi++) {
-          _bcoords.push({ stationId: _br.stations[_bsi], x: _bx, y: _by + _bsi * _bsp });
+        for (var _bsi = 0; _bsi < _gStations.length; _bsi++) {
+          _bcoords.push({ stationId: _gStations[_bsi], x: _bx, y: _by + _bsi * _bsp });
         }
         branchGeom[_br.id] = _bcoords;
       }
@@ -1465,12 +1491,14 @@
       }
       
       // Add station circles and labels（主線駅も支線駅も _renderStationNode で統一描画）
-      // v4.3.516: 支线 junction 站（岔路起点=各支线 stations[0]）站名朝右（Tochomae 先例）——
+      // v4.3.516: 支线 junction 站（岔路起点=各支线与主干的接续站）站名朝右（Tochomae 先例）——
       // 多支线全左直排时左侧水平 stub 不穿 junction 站名带；单支线（右侧）junction 保持朝左（现状）
+      // v4.3.520: junction 不再限定 stations[0]——我孫子支线 junction 成田在站表末位也命中
       var _isBranchJunction = function(_sid7) {
         if (!geometry.branchLines || geometry.branchLines.length < 2) return false;
         for (var _bj7 = 0; _bj7 < geometry.branchLines.length; _bj7++) {
-          if (geometry.branchLines[_bj7].stations && geometry.branchLines[_bj7].stations[0] === _sid7) return true;
+          var _bl7 = geometry.branchLines[_bj7];
+          if (_bl7.stations && _bl7.stations.indexOf(_sid7) >= 0) return true;
         }
         return false;
       };
@@ -1495,13 +1523,19 @@
         var branch = geometry.branchLines[bi];
         var bColor = branch.color || color;
         // Find junction station: first station of branch that exists in main line
+        // v4.3.520: 支持 junction 在支线站表任意位置（我孫子支线 junction 成田在末位）
         var junctionIdx = -1;
+        var _jAt = 0;
         if (branch.stations && branch.stations.length > 0 && stationCoords.length > 0) {
-          for (var _ji = 0; _ji < stationCoords.length; _ji++) {
-            if (stationCoords[_ji].stationId === branch.stations[0]) {
-              junctionIdx = _ji;
-              break;
+          var _jFind7 = _branchJunctionStation(branch.stations, stations);
+          if (_jFind7) {
+            for (var _ji = 0; _ji < stationCoords.length; _ji++) {
+              if (stationCoords[_ji].stationId === _jFind7.station) {
+                junctionIdx = _ji;
+                break;
+              }
             }
+            _jAt = _jFind7.at;
           }
         }
         if (junctionIdx >= 0 && stationCoords.length > junctionIdx) {
@@ -1548,10 +1582,12 @@
           if (branch.stations) {
             var _bTx = (_bSideNow === "left") ? (bx - 10) : (bx + 10);
             var _bAnchor = (_bSideNow === "left") ? "end" : "start";
-            for (var bsi = 0; bsi < branch.stations.length; bsi++) {
+            // v4.3.520: junction 在支线站表末位（我孫子支线）→ 反转站序从 junction 向下延伸
+            var _rStations = (_jAt === branch.stations.length - 1) ? branch.stations.slice().reverse() : branch.stations;
+            for (var bsi = 0; bsi < _rStations.length; bsi++) {
               var bsy = by + bsi * branchSp;
               _renderStationNode(staticLayer, svgNS, {
-                x: bx, y: bsy, stationId: branch.stations[bsi], isJunction: false, color: bColor,
+                x: bx, y: bsy, stationId: _rStations[bsi], isJunction: false, color: bColor,
                 si: bsi, side: _bSideNow, geometry: geometry, isMobileView: isMobileView,
                 svgW: svgW, svgH: svgH, transferMap: transferMap, stationCoords: stationCoords,
                 rS: _rS,
