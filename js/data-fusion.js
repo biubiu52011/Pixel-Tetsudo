@@ -605,6 +605,42 @@
             if (estCount > 0) {
               console.debug("[DataFusion] Estimated", estCount, "train positions for", Object.keys(estimated).length, "lines");
             }
+
+            // v4.3.521: 复合模式——手动时刻表补充线（中央本線等 ODPT 无 TrainTimetable 的线）。
+            // 用户诉求（2026-09-11）："不要出现中央本线那样上半段实时的下半段干干净净的"——
+            // 实时定位 + 推断复合：即使线路已有实时列车（ODPT 只推上半段），仍用手动时刻表
+            // 跑推定补全其余区段，按 trainId 合并去重（实时优先，推定只填实时没有的车次）。
+            // 数据文件 data/timetables/chuomain-manual.js 为 JR 官网公开时刻表人工整理（ODPT 兼容格式）。
+            var manualTT = window.CHUO_MAIN_MANUAL_TIMETABLES;
+            if (manualTT && Array.isArray(manualTT) && manualTT.length > 0) {
+              try {
+                var manualLineId = 'ChuoMain';
+                var mLine = allLines[manualLineId];
+                if (mLine && mLine.stations) {
+                  var mEst = window.TrainPositionEstimator.estimateLinePositions(
+                    manualLineId, mLine, manualTT, odptData.delayInfo, mLine.operator
+                  );
+                  if (mEst && mEst.length > 0) {
+                    if (!posMap[manualLineId]) posMap[manualLineId] = [];
+                    var haveId = {};
+                    posMap[manualLineId].forEach(function(p) { if (p && p.trainId) haveId[p.trainId] = true; });
+                    var mAdded = 0;
+                    mEst.forEach(function(p) {
+                      if (p && p.trainId && !haveId[p.trainId]) {
+                        posMap[manualLineId].push(p);
+                        haveId[p.trainId] = true;
+                        mAdded++;
+                      }
+                    });
+                    if (mAdded > 0) {
+                      console.debug("[DataFusion] Composite mode: ChuoMain +", mAdded, "estimated (realtime", posMap[manualLineId].length - mAdded, "+ estimated", mAdded + ")");
+                    }
+                  }
+                }
+              } catch(mErr) {
+                console.debug("[DataFusion] Composite mode error:", mErr.message);
+              }
+            }
           }
         } catch(estErr) { console.debug("[DataFusion] Position estimation error:", estErr.message); }
       }
