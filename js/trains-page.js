@@ -498,6 +498,38 @@
         branchLines.push({ id: bid, name: bl.name || bid, color: (window.LineOperationSystemsResolveColor && window.LineOperationSystemsResolveColor(bid)) || bl.color || color, stations: bl.stations });
       }
     }
+    // v4.3.515: 双支线及以上左右交替分叉（ㅕㅑ 镜像）——偶数支线朝右（ㅑ）、奇数支线朝左（ㅕ）；
+    // 单支线保持右侧弯折（现状）。左侧支线 stub 需避开主干朝左站名带（主干最大站名宽 + 20，gap 10px）。
+    var _bSide = function(_i6b) { return (branchLines.length >= 2) ? ((_i6b % 2 === 0) ? "right" : "left") : "right"; };
+    var _bCol = function(_i6b) { return Math.floor(_i6b / 2); };
+    var _rightCols = Math.ceil(branchLines.length / 2), _leftCols = Math.floor(branchLines.length / 2);
+    var _branchStubL = 0, _branchMaxNameW = function(_sd6) {
+      var _mx6 = 0;
+      for (var _bi3 = 0; _bi3 < branchLines.length; _bi3++) {
+        if (_bSide(_bi3) !== _sd6) continue;
+        var _bl3 = branchLines[_bi3];
+        if (!_bl3.stations) continue;
+        for (var _bs3 = 0; _bs3 < _bl3.stations.length; _bs3++) {
+          var _bn3 = (window.RailwayDB && window.RailwayDB.resolveStationName)
+            ? (window.RailwayDB.resolveStationName(_bl3.stations[_bs3], window.currentLang) || _bl3.stations[_bs3])
+            : _bl3.stations[_bs3];
+          _mx6 = Math.max(_mx6, (_bn3 || "").length * 16 * 1.1);
+        }
+      }
+      return _mx6;
+    };
+    if (_leftCols > 0) {
+      var _mainMaxW = 0;
+      for (var _mw = 0; _mw < stations.length; _mw++) {
+        var _mn = (window.RailwayDB && window.RailwayDB.resolveStationName)
+          ? (window.RailwayDB.resolveStationName(stations[_mw], window.currentLang) || stations[_mw])
+          : stations[_mw];
+        _mainMaxW = Math.max(_mainMaxW, (_mn || "").length * 16 * 1.1);
+      }
+      _branchStubL = _mainMaxW + 22; // 主干站名朝左偏移 12（side=dual）+ gap 10
+    }
+    var _leftNeed = _leftCols > 0 ? (_branchStubL + (_leftCols - 1) * GEOM.BRANCH_COL_W + 10 + _branchMaxNameW("left") + 2) : 0;
+    var _rightNeed = _rightCols > 0 ? (GEOM.BRANCH_STUB + (_rightCols - 1) * GEOM.BRANCH_COL_W + 10 + _branchMaxNameW("right") + 2) : 0;
     var branchOffset = branchLines.length > 0 ? GEOM.BRANCH_COL_W * branchLines.length : 0;
     // Branch name label sits 26px above the junction station (industry-standard
     // branch annotation). Reserve headroom when the junction is the first station.
@@ -784,9 +816,18 @@
       // v4.3.482: 主线中心固定（不随支线数左移），画布 = 主线区 + 支线区。
       // 支线列宽统一 GEOM.BRANCH_COL_W；画布只扩到实际需要，避免移动端整体缩放变小。
       var _baseW = (_isMobileView() ? GEOM.MAIN_BASE_W_MOBILE : Math.min(Math.max(_cw, GEOM.MAIN_BASE_W_MIN), GEOM.MAIN_BASE_W_MAX));
-      var mainCx = _baseW / 2;
       var _rightPad = isMobileView ? 24 : 40;
-      svgW = Math.max(_baseW, mainCx + GEOM.BRANCH_STUB + branchOffset + _rightPad);
+      var mainCx, svgW;
+      if (branchLines.length >= 2) {
+        // v4.3.515: 双支线及以上左右交替分叉（ㅕㅑ）——主干 x ≥ 左侧支线区需求（站名朝左放下），
+        // svgW 容纳左侧需求 + 右侧需求；左侧 stub 已避开主干站名带（_branchStubL）。
+        mainCx = Math.max(_baseW / 2, _leftNeed + 20);
+        svgW = Math.max(_baseW, mainCx + _rightNeed + 20);
+      } else {
+        // 单支线/无支线：主线中心固定（现状）
+        mainCx = _baseW / 2;
+        svgW = Math.max(_baseW, mainCx + GEOM.BRANCH_STUB + branchOffset + _rightPad);
+      }
       
       var _iconStep = (isMobileView ? 20 : 16) + 2;
       var _extraY = 0;
@@ -877,7 +918,9 @@
           if (stationCoords[_ji2].stationId === _br.stations[0]) { _jIdx = _ji2; break; }
         }
         if (_jIdx < 0) continue;
-        var _bx = stationCoords[_jIdx].x + GEOM.BRANCH_STUB + bgi * GEOM.BRANCH_COL_W;
+        var _bx = (_bSide(bgi) === "left")
+          ? (stationCoords[_jIdx].x - _branchStubL - _bCol(bgi) * GEOM.BRANCH_COL_W)
+          : (stationCoords[_jIdx].x + GEOM.BRANCH_STUB + _bCol(bgi) * GEOM.BRANCH_COL_W);
         var _by = stationCoords[_jIdx].y;
         var _bsp = sp || 24;
         var _bcoords = [];
@@ -1431,16 +1474,34 @@
           }
         }
         if (junctionIdx >= 0 && stationCoords.length > junctionIdx) {
-          var bx = stationCoords[junctionIdx].x + GEOM.BRANCH_STUB + bi * GEOM.BRANCH_COL_W;
+          // v4.3.515: 支线左右交替分叉（ㅕㅑ）——偶数支线右（ㅑ）、奇数支线左（ㅕ）；单支线保持右（现状）
+          var _bSideNow = _bSide(bi);
+          var bx = (_bSideNow === "left")
+            ? (stationCoords[junctionIdx].x - _branchStubL - _bCol(bi) * GEOM.BRANCH_COL_W)
+            : (stationCoords[junctionIdx].x + GEOM.BRANCH_STUB + _bCol(bi) * GEOM.BRANCH_COL_W);
           var by = stationCoords[junctionIdx].y;
           var branchTop = by - 20;
+          // v4.3.515: 左侧支线连接线下移 20px 再水平分叉（避免水平线穿过 junction 主干站名带，
+          // 站名带 y±8 且朝左延伸至圆点左侧 12px）；沿主干的重叠垂直段隐式连接圆点。
+          var _connY = (_bSideNow === "left") ? (by + 20) : by;
           
-          // Branch line
+          // Branch line（左侧：垂直段沿主干下移 + 水平段；右侧：junction 行水平，现状）
+          if (_bSideNow === "left") {
+            var _vSeg = document.createElementNS(svgNS, "line");
+            _vSeg.setAttribute("x1", stationCoords[junctionIdx].x);
+            _vSeg.setAttribute("y1", by);
+            _vSeg.setAttribute("x2", stationCoords[junctionIdx].x);
+            _vSeg.setAttribute("y2", _connY);
+            _vSeg.setAttribute("stroke", bColor);
+            _vSeg.setAttribute("stroke-width", "3");
+            _vSeg.setAttribute("opacity", "0.5");
+            staticLayer.appendChild(_vSeg);
+          }
           var branchLine = document.createElementNS(svgNS, "line");
           branchLine.setAttribute("x1", stationCoords[junctionIdx].x);
-          branchLine.setAttribute("y1", by);
+          branchLine.setAttribute("y1", _connY);
           branchLine.setAttribute("x2", bx);
-          branchLine.setAttribute("y2", by);
+          branchLine.setAttribute("y2", _connY);
           branchLine.setAttribute("stroke", bColor);
           branchLine.setAttribute("stroke-width", "3");
           branchLine.setAttribute("opacity", "0.5");
@@ -1450,7 +1511,7 @@
           var branchSp = geometry.sp || 24;
           var branchVLine = document.createElementNS(svgNS, "line");
           branchVLine.setAttribute("x1", bx);
-          branchVLine.setAttribute("y1", by);
+          branchVLine.setAttribute("y1", _connY);
           branchVLine.setAttribute("x2", bx);
           branchVLine.setAttribute("y2", branchTop + (branch.stations ? branch.stations.length * branchSp : 50));
           branchVLine.setAttribute("stroke", bColor);
@@ -1460,14 +1521,16 @@
           
           // Branch stations（主線と同じ _renderStationNode で統一描画——スタイルは完全に同一）
           if (branch.stations) {
+            var _bTx = (_bSideNow === "left") ? (bx - 10) : (bx + 10);
+            var _bAnchor = (_bSideNow === "left") ? "end" : "start";
             for (var bsi = 0; bsi < branch.stations.length; bsi++) {
               var bsy = by + bsi * branchSp;
               _renderStationNode(staticLayer, svgNS, {
                 x: bx, y: bsy, stationId: branch.stations[bsi], isJunction: false, color: bColor,
-                si: bsi, side: "right", geometry: geometry, isMobileView: isMobileView,
+                si: bsi, side: _bSideNow, geometry: geometry, isMobileView: isMobileView,
                 svgW: svgW, svgH: svgH, transferMap: transferMap, stationCoords: stationCoords,
                 rS: _rS,
-                tx: bx + 10, ty: bsy, anchor: "start", // v4.3.500: 支线站名避让 r=7 圆点 + 垂直居中
+                tx: _bTx, ty: bsy, anchor: _bAnchor, // v4.3.500: 支线站名避让 r=7 圆点 + 垂直居中（左侧支线镜像朝左）
                 skipTx: (bsi === 0)
               });
             }
@@ -1475,14 +1538,14 @@
           
           // Branch name
           var branchName = document.createElementNS(svgNS, "text");
-          branchName.setAttribute("x", bx + 6);
+          branchName.setAttribute("x", (_bSideNow === "left") ? (bx - 6) : (bx + 6));
           branchName.setAttribute("y", branchTop - 6);
           // v4.3.448: 支線名も主線の文字階層に合わせ 13→14px（独立簡略値のまま残さない）
           branchName.setAttribute("font-size", "14");
           branchName.setAttribute("fill", bColor);
           branchName.setAttribute("font-family", "Fusion Pixel, 'Courier New', monospace"); // v4.3.498: 支线名用像素字体（与全局一致）
           branchName.setAttribute("font-weight", "600");
-          branchName.setAttribute("text-anchor", "start");
+          branchName.setAttribute("text-anchor", (_bSideNow === "left") ? "end" : "start"); // v4.3.515: 左侧支线名朝左
           var branchDisplayName = (window.RailwayDB && typeof window.RailwayDB.resolveLineName === "function") ? window.RailwayDB.resolveLineName(branch.id, window.currentLang) : (branch.nameJa || branch.name);
           branchName.textContent = branchDisplayName;
           staticLayer.appendChild(branchName);
