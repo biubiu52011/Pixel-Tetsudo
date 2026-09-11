@@ -638,7 +638,9 @@
         },
 
         // 按线路获取时刻表（解决API返回1000条限制的问题）
-        getTimetableForRailway: function(operator, railway) {
+        // v4.3.512: 新增 opts.calendar——按日历过滤请求（如 odpt.Calendar:Weekday），
+        // 单请求 1000 条硬上限下把截断线按日历拆成多次请求即可合并出完整数据
+        getTimetableForRailway: function(operator, railway, opts) {
             var ep = ODPT_ENDPOINTS[operator];
             if (!ep || !ep.trainTimetable) return Promise.resolve([]);
             var key = getApiKey(ep.base);
@@ -646,6 +648,7 @@
             // railway格式: "odpt.Railway:TokyoMetro.Ginza" 或 "Ginza"
             var railwayParam = railway.indexOf('odpt.Railway:') === 0 ? railway : resolveRailwayCode(operator, railway);
             var url = ep.base + 'odpt:TrainTimetable?odpt:operator=odpt.Operator:' + operator + '&odpt:railway=' + railwayParam + '&acl:consumerKey=' + key;
+            if (opts && opts.calendar) url += '&odpt:calendar=' + opts.calendar;
             return fetchODPT(url).then(extractData);
         },
 
@@ -732,7 +735,7 @@
     };
 
     // ========== Timetable Local Cache ==========
-    var TIMETABLE_CACHE_KEY = 'odpt_timetable_cache_v2'; // v4.3.459: v1 缓存 stop 站字段为空（压缩不兼容新 schema），升级键强制失效
+    var TIMETABLE_CACHE_KEY = 'odpt_timetable_cache_v3'; // v4.3.512: 压缩格式新增 c(calendar) 字段 + 1000 截断线按日历拆分合并，v2 缓存结构不兼容，升级键强制失效
     var TIMETABLE_CACHE_TTL = 3600000;  // 1小时过期
 
     function loadTimetableCache() {
@@ -776,6 +779,7 @@
                         r: tt['odpt:railway'] || '',
                         t: tt['odpt:trainType'] || '',
                         dir: tt['odpt:railDirection'] || '',
+                        c: tt['odpt:calendar'] || '',  // v4.3.512: 压缩保留 calendar——v2 丢 calendar 导致缓存数据不做日历过滤（周六会推定平日班次）
                         st: stations
                     };
                 });
@@ -807,6 +811,7 @@
                         'odpt:railway': tt.r || '',
                         'odpt:trainType': tt.t || '',
                         'odpt:railDirection': tt.dir || '',
+                        'odpt:calendar': tt.c || '',  // v4.3.512: 还原 calendar，estimator 日历过滤恢复生效
                         'odpt:trainTimetableObject': stations
                     };
                 });
@@ -1006,6 +1011,35 @@
             var batch = localLineIds.filter(function(lid) {
                 return ODPT_ENDPOINTS[op] && ODPT_ENDPOINTS[op].trainTimetable;
             });
+            // v4.3.512: ODPT 单请求 1000 条硬上限（acl:page 实测 400 不支持分页）——
+            // 恰 1000 条 = 截断信号，按日历拆成多次请求合并出完整数据。
+            // 实测 5 条首都圈大线截断：Yamanote 1037 / Keiyo 1127 / ChuoRapid 1087 /
+            // ChuoSobuLocal 1196 / KeihinTohoku 1263（合并后全量，各日历分片均 <1000）。
+            var CAL_SPLIT = ['odpt.Calendar:Weekday', 'odpt.Calendar:SaturdayHoliday', 'odpt.Calendar:Holiday'];
+            function splitTruncatedByCalendar(lid) {
+                var seen = {};
+                function dedup(list) {
+                    var out = [];
+                    list.forEach(function(tt) {
+                        if (!tt) return;
+                        // 同车次×同日历×同方向 = 同一条记录（日历拆分后天然区分平日/休日班次）
+                        var k = (tt['odpt:trainNumber'] || '') + '|' + (tt['odpt:railway'] || '') + '|' + (tt['odpt:calendar'] || '') + '|' + (tt['odpt:railDirection'] || '');
+                        if (seen[k]) return;
+                        seen[k] = true;
+                        out.push(tt);
+                    });
+                    return out;
+                }
+                var chain = Promise.resolve([]);
+                CAL_SPLIT.forEach(function(cal) {
+                    chain = chain.then(function(acc) {
+                        return window.ODPTClient.getTimetableForRailway(op, lid, { calendar: cal }).then(function(part) {
+                            return acc.concat(part || []);
+                        }, function() { return acc; });  // 单日历失败不阻断，取其余部分
+                    });
+                });
+                return chain.then(dedup);
+            }
             // v4.3.489: 分批并行拉取——fetchODPT 自带 3 并发 + 150ms 滑动窗口限速；
             // 85 条一次 Promise.all 在弱网/沙箱下可能被连接池限流卡住，每批 20 条链式
             // 推进，既完整覆盖又避免瞬时请求过多（约 4-6s 完成全量）
@@ -1018,6 +1052,19 @@
                 return Promise.all(slice.map(function(lid) {
                     return window.ODPTClient.getTimetableForRailway(op, lid).then(function(data) {
                         var rows = (data && data.length > 0) ? data : [];
+                        // 截断线：按日历拆分重拉合并（替换截断数据）
+                        if (rows.length >= 1000) {
+                            return splitTruncatedByCalendar(lid).then(function(merged) {
+                                return merged.length > rows.length ? merged : rows;  // 拆分失败/无增益时回退
+                            });
+                        }
+                        return rows;
+                    }).catch(function() {
+                        // 请求失败：仍标记探测，避免后续对空线反复请求
+                        if (!window.ODPT_TT_PROBED) window.ODPT_TT_PROBED = {};
+                        window.ODPT_TT_PROBED[lid] = true;
+                        return [];
+                    }).then(function(rows) {
                         // 探测标记：无论有无数据都记录，避免 loadMissingTimetables 对空线反复请求
                         if (!window.ODPT_TT_PROBED) window.ODPT_TT_PROBED = {};
                         window.ODPT_TT_PROBED[lid] = true;
@@ -1027,15 +1074,24 @@
                             if (!window.ODPT_TIMETABLES[op]) window.ODPT_TIMETABLES[op] = [];
                             window.ODPT_TIMETABLES[op] = window.ODPT_TIMETABLES[op].concat(rows);
                         }
-                    }).catch(function() {
-                        if (!window.ODPT_TT_PROBED) window.ODPT_TT_PROBED = {};
-                        window.ODPT_TT_PROBED[lid] = true;
                     });
                 })).then(nextBatch);
             }
             return nextBatch().then(function() {
                 if (newTimetables[op] && newTimetables[op].length > 0) {
-                    if (!window.ODPT_TRAINS[op]) window.ODPT_TRAINS[op] = newTimetables[op];
+                    // v4.3.512: 池级去重——跨 lid 共用同一 ODPT railway（Kawagoe/KawagoeWest 等）
+                    // 会重复 concat 同一批记录；单线拆分的 dedup 只覆盖拆分内，这里是全池去重。
+                    var seenAll = {}, deduped = [];
+                    newTimetables[op].forEach(function(tt) {
+                        if (!tt) return;
+                        var k = (tt['odpt:trainNumber'] || '') + '|' + (tt['odpt:railway'] || '') + '|' + (tt['odpt:calendar'] || '') + '|' + (tt['odpt:railDirection'] || '');
+                        if (seenAll[k]) return;
+                        seenAll[k] = true;
+                        deduped.push(tt);
+                    });
+                    newTimetables[op] = deduped;
+                    window.ODPT_TIMETABLES[op] = deduped;
+                    if (!window.ODPT_TRAINS[op]) window.ODPT_TRAINS[op] = deduped;
                     loaded++;
                 }
             });
