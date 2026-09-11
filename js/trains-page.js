@@ -1371,8 +1371,11 @@
   // 元実装は容器内末尾に置いており、v4.3.469 の設計意図（容器外・下方中央）と不一致だった。
   function updateEstimatedNote(el, positions) {
     try {
-      var old = el.querySelector('.tp-est-note');
-      if (old) old.remove();
+      // v4.3.517: 修复 note 重复堆积——note 插在 el 之后（afterend，兄弟节点），旧代码却只在
+      // el 内部查 .tp-est-note（永远删不到），每次刷新/每趟推定列车都堆一个新条
+      // （用户投诉"底部重复这么多次提示"）。改为清理 el 父级下全部旧 note 再插唯一一个。
+      var _oldNotes = el.parentNode ? el.parentNode.querySelectorAll('.tp-est-note') : [];
+      for (var _oi = 0; _oi < _oldNotes.length; _oi++) _oldNotes[_oi].remove();
       if (!positions || !positions.length) return;
       var anyEst = false;
       for (var _ei = 0; _ei < positions.length; _ei++) {
