@@ -806,6 +806,12 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 - 居中裁切/增量更新/短线路（svg×2 < 容器宽时不滚动靠左）均不受影响
 **验证**：node --check 通过；grep 确认无其他代码依赖 wrap 200% 或 svg 100% 宽；trains.html 双版本行 4.3.540/4.3.539→4.3.541。交付后用户人工验收（禁系统截图）。
 
+## 4.3.542（2026-09-12，短线路居中·修正靠左）
+**用户指示**："修正"——4.3.541 后短线路（svg×2 像素宽 < 容器宽）wrap fit-content 靠左显示，右边留空；长线路溢出时靠 JS scrollLeft 居中裁切。
+**修复**（css/trains.css）：`.tp-map-wrap` 加 `margin-left:auto; margin-right:auto`——不溢出时水平居中；溢出时 margin auto 无剩余空间自动归零，JS 居中裁切继续生效。两态兼容，无需改 JS。
+**验证**：diff 仅 wrap 行 + 注释；trains.html trains.css 版本行→4.3.542。交付后用户人工验收（禁系统截图）。
+
+
 
 
 
