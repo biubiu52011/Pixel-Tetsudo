@@ -766,3 +766,19 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 **console.log 治理**：odpt-unified.js 全部产物 console.log（8 处）降级 console.debug（AGENTS.md Known Debt 消除）
 **验证**：node --check 双文件；.work/test_odpt_cache.cjs 端到端 12/12 PASS（A 首拉落盘/A5 压缩格式/B IDB 命中时刻表零重拉/C v3 迁移/D TTL 过期重拉）；serve.py py_compile + key 加载复验 40 字符匹配；浏览器端效果按用户约定人工验收
 **范围**：仅 data/api/odpt-unified.js + serve.py + AGENTS.md（并发会话 4.3.534/535 图标/图库改动不纳入本 commit）
+
+
+## 4.3.537（2026-09-12，后台安全加固·静态暴露修复）
+**用户指示**：“现在来看后台的安全性”——威胁面盘点 + 实证 + 修复。
+**实证发现（修复前）**：
+- **P0-1 静态服务整树暴露**：serve.py 以项目根为静态根，.work/serve.env（含 ODAKYU_API_KEY 明文）实测可经 http://127.0.0.1:8017/.work/serve.env 直接下载（已用临时 server + curl 复现）
+- **P0-2 目录列表开启**：/images/ 与根目录列表可枚举，泄露项目结构（AGENTS.md 等文档可读）
+- **P0-3 git 历史 key 泄露**：bde42b3（4.3.406）起 ODAKYU key 明文入库并已推送 GitHub 公开仓库（5e12a33 仅移除当前版本，历史仍可查）→ **key 需轮换**
+- P1 代理异常回显 str(e)（泄露上游响应细节）
+**修复（serve.py）**：
+- 静态敏感拦截：FORBIDDEN_PREFIXES（.work/ .git/ .user_skills/ .skills/ work/ recovery/ scripts/）+ FORBIDDEN_NAMES（serve.py/serve.err/serve.log）+ FORBIDDEN_SUFFIXES（.env/.py/.log/.err）→ 403
+- 目录列表关闭：list_directory 覆盖返回 403
+- Host 头校验：非 127.0.0.1/localhost/[::1] 拒绝（防 DNS rebinding 绕过本机绑定）
+- 代理异常回显改通用文案（upstream request failed）；全部响应补 X-Content-Type-Options: nosniff
+**验证（临时 server 实测）**：.work/serve.env 403 / serve.py 403 / /images/ 403 / 根路径=index.html 正常跳转 / pages/home.html 200 / 恶意 Host 403 / 代理带 key 正常 200（serve.env 读取链路 + 上游联通双确认）；serve.err 无 key；py_compile OK
+**遗留**：ODAKYU key 轮换需用户在小田急侧操作（git 历史清理风险高不推荐，轮换即等效失效）；ODPT 前端 consumer key 为公开设计（浏览器必然携带，非漏洞）；P2-1 脚本入库政策仍待拍板

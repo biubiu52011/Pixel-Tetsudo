@@ -61,22 +61,70 @@ PROXY_TARGETS = {
     },
 }
 
+# v4.3.537: 静态服务敏感路径拦截（本地服务器曾把项目根整树暴露：
+# .work/serve.env 含 ODAKYU key 可直接下载；目录列表开启泄露项目结构）
+FORBIDDEN_PREFIXES = (
+    "/.work/", "/.git/", "/.user_skills/", "/.skills/",
+    "/work/", "/recovery/", "/scripts/",
+)
+FORBIDDEN_NAMES = {
+    "serve.py", "serve.err", "serve.log",
+}
+FORBIDDEN_SUFFIXES = (".env", ".py", ".log", ".err")
+ALLOWED_HOSTS = ("127.0.0.1", "localhost", "[::1]")
+
+def _is_forbidden(path):
+    """路径归一化（去 query）后判断是否命中敏感名单"""
+    p = path.split("?")[0].lstrip("/")
+    if not p:
+        return False
+    low = p.lower()
+    if any(low.startswith(prefix.lower()) for prefix in FORBIDDEN_PREFIXES):
+        return True
+    if low.split("/")[-1] in FORBIDDEN_NAMES:
+        return True
+    if low.endswith(FORBIDDEN_SUFFIXES):
+        return True
+    return False
+
 class Handler(http.server.SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=ROOT, **kwargs)
 
     def do_GET(self):
+        # v4.3.537: Host 头校验（防 DNS rebinding 绕过 127.0.0.1 绑定）
+        host = (self.headers.get("Host") or "").split(":")[0].strip().lower()
+        if host and host not in ALLOWED_HOSTS:
+            self._json({"error": "forbidden host"}, 403)
+            return
         path = self.path.split("?")[0]
         if path in PROXY_TARGETS:
             self._proxy(path)
             return
+        if _is_forbidden(self.path):
+            self.send_response(403)
+            self.send_header("Content-Type", "text/plain; charset=utf-8")
+            self.send_header("X-Content-Type-Options", "nosniff")
+            self.end_headers()
+            self.wfile.write(b"Forbidden")
+            return
         return super().do_GET()
+
+    def list_directory(self, path):
+        # v4.3.537: 关闭目录列表（泄露项目结构）
+        self.send_response(403)
+        self.send_header("Content-Type", "text/plain; charset=utf-8")
+        self.send_header("X-Content-Type-Options", "nosniff")
+        self.end_headers()
+        self.wfile.write(b"Forbidden")
+        return None
 
     def _json(self, obj, code=200):
         body = json.dumps(obj, ensure_ascii=False).encode("utf-8")
         self.send_response(code)
         self.send_header("Content-Type", "application/json; charset=utf-8")
         self.send_header("Cache-Control", "no-store")
+        self.send_header("X-Content-Type-Options", "nosniff")
         self.end_headers()
         self.wfile.write(body)
 
@@ -100,13 +148,15 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             self.send_response(200)
             self.send_header("Content-Type", cfg["content_type"])
             self.send_header("Cache-Control", "no-store")
+            self.send_header("X-Content-Type-Options", "nosniff")
             self.end_headers()
             self.wfile.write(body)
-        except Exception as e:
+        except Exception:
+            # v4.3.537: 不回显内部异常详情（避免泄露上游响应/实现细节）
             self.send_response(502)
             self.send_header("Content-Type", "application/json; charset=utf-8")
             self.end_headers()
-            self.wfile.write(json.dumps({"error": str(e)}, ensure_ascii=False).encode("utf-8"))
+            self.wfile.write(json.dumps({"error": "upstream request failed"}, ensure_ascii=False).encode("utf-8"))
 
     def log_message(self, fmt, *args):
         # 静默访问日志（避免刷屏），保留错误
