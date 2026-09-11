@@ -64,15 +64,17 @@
     // ===== 特急・観光列車（typeMatch 按 ODPT trainType 匹配；from/to 省略 = 全線）=====
     "ExpJREast": {
       routes: [
-        { line: "Joban", icon: "../images/列车/JR東日本/E261系.png", typeMatch: ["Hitachi", "Tokiwa"], priority: 4 },          // ひたち・ときわ（2026新型 E261系）
-        { line: "JobanMain", icon: "../images/列车/JR東日本/E261系.png", typeMatch: ["Hitachi", "Tokiwa"], priority: 4 },      // 常磐線本線上のひたち・ときわ（4.3.480：JobanMain 単独カード対応）
-        { line: "Joban", icon: "../images/列车/JR東日本/E657系.png", typeMatch: ["Hitachi", "Tokiwa"], priority: 3 },          // ひたち・ときわ（E657系 従来車）
-        { line: "JobanMain", icon: "../images/列车/JR東日本/E657系.png", typeMatch: ["Hitachi", "Tokiwa"], priority: 3 },      // 同上（JobanMain 用）
+        // v4.3.525-2: ひたち・ときわ 现行车 E657系（JR東日本官网列车页 + 2026年3月改正时刻表全部 E657 10両
+        // 实证；原 4.3.480 误设 E261系 pri4 = サフィール踊り子专用车（东海道・伊东线），非常磐线——已修正）
+        { line: "Joban", icon: "../images/列车/JR東日本/E657系.png", typeMatch: ["Hitachi", "Tokiwa"], priority: 4 },          // ひたち・ときわ（E657系）
+        { line: "JobanMain", icon: "../images/列车/JR東日本/E657系.png", typeMatch: ["Hitachi", "Tokiwa"], priority: 4 },      // 常磐線本線上のひたち・ときわ（4.3.480：JobanMain 単独カード対応）
                 { line: "SobuRapid", icon: "../images/列车/JR東日本/E257系500番台.png", typeMatch: ["Sazanami", "Wakashio", "Shiosai"], priority: 3 }, // さざなみ・わかしお・しおさい
         { line: "Uchibo", icon: "../images/列车/JR東日本/E257系500番台.png", typeMatch: ["Sazanami"], priority: 3 },
         { line: "Sotobo", icon: "../images/列车/JR東日本/E257系500番台.png", typeMatch: ["Wakashio"], priority: 3 },
         { line: "Narita", icon: "../images/列车/JR東日本/E257系500番台.png", typeMatch: ["Shiosai"], priority: 3 },
         { line: "ChuoMain", icon: "../images/列车/JR東日本/E353系.png", typeMatch: ["Azusa", "Kaiji"], priority: 3 },           // 特急あずさ・かいじ（E353系）
+        // v4.3.525: 中央快速線（ChuoRapid）上特急 E353 补全——ODPT 实测 ChuoRapid 上 4 条 LimitedExpress（38M/5041M/5139M 等，dest 松本/甲府=あずさ・かいじ）此前全部 fallback E233系0番台（普通车）
+        { line: "ChuoRapid", icon: "../images/列车/JR東日本/E353系.png", typeMatch: ["Azusa", "Kaiji"], priority: 3 },          // 特急あずさ・かいじ（中央快速線区間）
         { line: "Narita", icon: "../images/列车/JR東日本/E259系.png", typeMatch: ["NaritaExpress"], priority: 3 },               // 成田エクスプレス（E259系）
         { line: "OuMain", icon: "../images/列车/JR東日本/E751系.png", typeMatch: ["Tsugaru"], priority: 3 },                  // 特急つがる（青森〜秋田）
         { line: "Uetsu", icon: "../images/列车/JR東日本/E653系.png", typeMatch: ["Inaho"], priority: 3 },                      // 特急いなほ（新潟〜秋田、羽越本線のみ——奥羽本線は走らない）
@@ -426,13 +428,31 @@
           }
         }
       }
-      // v4.3.485: 成田エクスプレス（E259系）としおさい（E257系500番台）は ODPT trainType が共に
-      // LimitedExpress（実測：成田線/総武快速の LimitedExpress は 20xxM=54 本・40xxM=14 本のみ）——
-      // 車号で判別：20xxM=N'EX、40xxM=しおさい。
-      if (lineId === 'Narita' || lineId === 'SobuRapid') {
+      // v4.3.525: N'EX（E259系）・しおさい（E257系500番台）・日光/きぬがわ（253系）——ODPT trainType 一律
+      // LimitedExpress（愛称不出现），車号で判別。実測（2026-09-11 ODPT 実拉）：
+      //   20xxM=N'EX（2041/2043M）、22xxM=N'EX 新宿・大船発着系（2234/2245M）、40xxM=しおさい、
+      //   10xxM=日光・きぬがわ（1082M=きぬがわ2号 鬼怒川温泉→新宿、停站时刻与 JR 公式完全一致）
+      // N'EX は成田線/総武快速に加え横須賀線（2034/2043M 大船発着）・湘南新宿ライン（2245M 新宿発）も走行。
+      // ※車号規則は trainType が LimitedExpress の時のみ発火（例：Tokaido 325M は Local なのに 32xx 号段で
+      // 特急誤爆した実測事例がある——特急のみ車号判別し、普通列車は車号規則に触れさせない）。
+      var _isLE = String(trainType || '').toLowerCase().indexOf('limitedexpress') >= 0;
+      if (_isLE && (lineId === 'Narita' || lineId === 'SobuRapid' || lineId === 'Yokosuka' || lineId === 'ShonanShinjuku')) {
         var _nn = String(_tn || '').replace(/[^0-9]/g, '');
-        if (/^20/.test(_nn)) return "../images/列车/JR東日本/E259系.png";
-        if (/^40/.test(_nn)) return "../images/列车/JR東日本/E257系500番台.png";
+        if (/^2[02]/.test(_nn)) return "../images/列车/JR東日本/E259系.png";   // 20xxM/22xxM = 成田エクスプレス
+        if (/^40/.test(_nn) && (lineId === 'Narita' || lineId === 'SobuRapid')) return "../images/列车/JR東日本/E257系500番台.png"; // しおさい
+        if (/^1[0-9]/.test(_nn) && lineId === 'ShonanShinjuku') return "../images/列车/JR東日本/253系.png"; // 日光・きぬがわ（湘南新宿ライン区間）
+      }
+      // v4.3.525: 東海道線特急（踊り子・湘南）——現行車両 E257系2000番台（踊り子）・2500番台（湘南）
+      // （ペニンシュラブルー塗装）。v4.3.526 用 E261系（サフィール踊り子）代替，v4.3.527 用户补齐图库
+      // 素材后改为真实车型。
+      // ※30xx 号段のみ対象（325M 等 32xx の Local を誤爆しないよう /^30/ に限定）。
+      // v4.3.527 車号段実測（ODPT TrainTimetable JR-East.Tokaido 46 条 LimitedExpress）：
+      //   3001M-3031M → 踊り子（dest 伊豆急下田/東京返程）、3071M-3096M → 湘南（dest 小田原/平塚/新宿/東京）
+      // 湘南新宿ライン上 30xxM（3091M-3096M 新宿発着湘南、編成表 3093M 湘南23号 E257系9両）同属湘南段。
+      if (_isLE && (lineId === 'Tokaido' || lineId === 'ShonanShinjuku')) {
+        var _nt = String(_tn || '').replace(/[^0-9]/g, '');
+        if (/^30[0-3]/.test(_nt)) return "../images/列车/JR東日本/E257系2000番台.png"; // 30[0-3]xxM = 踊り子（E257系2000番台）
+        if (/^30[7-9]/.test(_nt)) return "../images/列车/JR東日本/E257系2500番台.png"; // 30[7-9]xxM = 湘南（E257系2500番台）
       }
       // Chuo/Sobu local: E231系500番台 + E235系0番台 并用（2025 起 E235 由山手线转用）
       if (lineId === "ChuoLocal" || lineId === "ChuoSobuLocal") {

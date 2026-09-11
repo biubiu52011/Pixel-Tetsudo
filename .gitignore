@@ -46,3 +46,7 @@ recovery/
 # serve logs
 serve.err
 serve.log
+
+# Agent intermediate artifacts (ODPT ST parse / timetable exploration)
+.work/
+work/

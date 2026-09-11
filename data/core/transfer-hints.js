@@ -272,7 +272,7 @@ window.TRANSFER_HINTS = {
     },
     connects: ["Bakuro-Yokoyama", "Bakurocho"]
   },
-  "Tameike-sanno": {
+  "Tameike-Sanno": {
     type: "name_mismatch",
     note: {
       ja: "（国会議事堂前駅連絡）",
@@ -287,10 +287,10 @@ window.TRANSFER_HINTS = {
     note: {
       ja: "（溜池山王駅連絡）",
       zh: "（连络溜池山王站）",
-      en: "(Connects to Tameike-sanno)",
+      en: "(Connects to Tameike-Sanno)",
       ko: "（타메이케산노역 연결）"
     },
-    connects: ["Tameike-sanno"]
+    connects: ["Tameike-Sanno"]
   },
   "Hibiya": {
     type: "name_mismatch",
@@ -317,13 +317,13 @@ window.TRANSFER_HINTS = {
     note: {
       ja: "（新橋駅連絡・要出站）",
       zh: "（连络新桥站・需出站）",
-      en: "(Connects to Shinbashi, outside transfer)",
+      en: "(Connects to Shimbashi, outside transfer)",
       ko: "（신바시역 연결・역외 환승）"
     },
-    connects: ["Shinbashi"],
+    connects: ["Shimbashi"],
     outside: true
   },
-  "Shinbashi": {
+  "Shimbashi": {
     type: "name_mismatch",
     note: {
       ja: "（汐留駅連絡・要出站）",

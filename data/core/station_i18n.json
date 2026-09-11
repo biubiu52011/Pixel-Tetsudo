@@ -263,18 +263,6 @@
     "ko": "요코아미",
     "en": "Yokoami"
   },
-  "Konan-dai": {
-    "ja": "河南台",
-    "zh": "河南台",
-    "ko": "코난다이",
-    "en": "Konan-dai"
-  },
-  "Hongo-dai": {
-    "ja": "本郷台",
-    "zh": "本郷台",
-    "ko": "혼고다이",
-    "en": "Hongo-dai"
-  },
   "Ofuna": {
     "ja": "大船",
     "zh": "大船",
@@ -341,18 +329,6 @@
     "ko": "시부야",
     "en": "Shibuya"
   },
-  "Shin-juku": {
-    "ja": "新宿",
-    "zh": "新宿",
-    "ko": "신주쿠",
-    "en": "Shin-juku"
-  },
-  "Shin-juku-nishiguchi": {
-    "ja": "新宿西口",
-    "zh": "新宿西口",
-    "ko": "신주쿠니시구치",
-    "en": "Shin-juku-nishiguchi"
-  },
   "Mejiro": {
     "ja": "目白",
     "zh": "目白",
@@ -401,12 +377,6 @@
     "ko": "니이자",
     "en": "Niiza"
   },
-  "Kita-Saitama": {
-    "ja": "北さいたま",
-    "zh": "北埼玉",
-    "ko": "키타사이타마",
-    "en": "Kita-Saitama"
-  },
   "Kuki": {
     "ja": "久喜",
     "zh": "久喜",
@@ -418,12 +388,6 @@
     "zh": "熊谷",
     "ko": "쿠마가야",
     "en": "Kumagaya"
-  },
-  "Hon-Jo": {
-    "ja": "本城",
-    "zh": "本城",
-    "ko": "호ㄴ조",
-    "en": "Hon-Jo"
   },
   "Sayama": {
     "ja": "狭山",
@@ -442,12 +406,6 @@
     "zh": "立川",
     "ko": "타치카와",
     "en": "Tachikawa"
-  },
-  "Musashynuigami": {
-    "ja": "武蔵新上",
-    "zh": "武藏新上",
-    "ko": "무사ㅅㅇ누이가미",
-    "en": "Musashynuigami"
   },
   "Kokubunji": {
     "ja": "国分寺",
@@ -497,18 +455,6 @@
     "ko": "키요세",
     "en": "Kiyose"
   },
-  "Fuchubashi": {
-    "ja": "府中橋",
-    "zh": "府中桥",
-    "ko": "후츄바시",
-    "en": "Fuchubashi"
-  },
-  "Nishi-Fuchubashi": {
-    "ja": "西府中橋",
-    "zh": "西府中桥",
-    "ko": "니시후츄바시",
-    "en": "Nishi-Fuchubashi"
-  },
   "Musashino": {
     "ja": "武蔵野",
     "zh": "武藏野",
@@ -520,12 +466,6 @@
     "zh": "吉祥寺",
     "ko": "키치조지",
     "en": "Kichijoji"
-  },
-  "Nishi-Kichijoji": {
-    "ja": "西吉祥寺",
-    "zh": "西吉祥寺",
-    "ko": "니시키치조지",
-    "en": "Nishi-Kichijoji"
   },
   "Harumi": {
     "ja": "春海",
@@ -647,23 +587,11 @@
     "ko": "시ㄴ니호ㄴ바시",
     "en": "Shin-Nihonbashi"
   },
-  "Kimachi": {
-    "ja": "木町",
-    "zh": "木町",
-    "ko": "키마치",
-    "en": "Kimachi"
-  },
   "Ariake": {
     "ja": "有明",
     "zh": "有明",
     "ko": "아리아케",
     "en": "Ariake"
-  },
-  "Tokyo Teleport": {
-    "ja": "東京テレポート",
-    "zh": "东京传送门",
-    "ko": "도쿄텔레포트",
-    "en": "Tokyo Teleport"
   },
   "Makuhari-Hong": {
     "ja": "幕張本郷",
@@ -671,41 +599,17 @@
     "ko": "마쿠하리혼고",
     "en": "Makuhari-Hong"
   },
-  "Minami-Kemigawa": {
-    "ja": "南亀浦",
-    "zh": "南龟浦",
-    "ko": "미나미케미가와",
-    "en": "Minami-Kemigawa"
-  },
   "Takanawa": {
     "ja": "高輪",
     "zh": "高轮",
     "ko": "타카나와",
     "en": "Takanawa"
   },
-  "Kasai-Rinkai": {
-    "ja": "葛西臨海",
-    "zh": "葛西臨海",
-    "ko": "카사이리ㄴ카이",
-    "en": "Kasai-Rinkai"
-  },
   "Nishi-Kasai": {
     "ja": "西葛西",
     "zh": "西葛西",
     "ko": "니시카사이",
     "en": "Nishi-Kasai"
-  },
-  "Takahashimadaira": {
-    "ja": "高橋平",
-    "zh": "高桥平",
-    "ko": "타카하시마다이라",
-    "en": "Takahashimadaira"
-  },
-  "Higashi-Maruko": {
-    "ja": "東丸島",
-    "zh": "东丸岛",
-    "ko": "히가시마루코",
-    "en": "Higashi-Maruko"
   },
   "Shin-Okubo": {
     "ja": "新大久保",
@@ -731,12 +635,6 @@
     "ko": "시ㄴ세ㄴ",
     "en": "Shinsen"
   },
-  "Nishi-Kawasaki": {
-    "ja": "西川崎",
-    "zh": "西川崎",
-    "ko": "니시카와사키",
-    "en": "Nishi-Kawasaki"
-  },
   "Higashi-Kawasaki": {
     "ja": "東川崎",
     "zh": "东川崎",
@@ -754,18 +652,6 @@
     "zh": "子安",
     "ko": "코야수",
     "en": "Koyasu"
-  },
-  "Minami-Wakasu": {
-    "ja": "南若洲",
-    "zh": "南若洲",
-    "ko": "미나미와카수",
-    "en": "Minami-Wakasu"
-  },
-  "Wakasu": {
-    "ja": "若洲",
-    "zh": "若洲",
-    "ko": "와카수",
-    "en": "Wakasu"
   },
   "Takasaki": {
     "ja": "高崎",
@@ -797,12 +683,6 @@
     "ko": "하수다",
     "en": "Hasuda"
   },
-  "Nakahara": {
-    "ja": "中原",
-    "zh": "中原",
-    "ko": "나카하라",
-    "en": "Nakahara"
-  },
   "Ekimae": {
     "ja": "駅前",
     "zh": "站前",
@@ -814,18 +694,6 @@
     "zh": "武藏新城",
     "ko": "무사시시ㄴ조",
     "en": "Musashi-Shinjo"
-  },
-  "Tobata": {
-    "ja": "戸畑",
-    "zh": "户畑",
-    "ko": "토바타",
-    "en": "Tobata"
-  },
-  "Nambu": {
-    "ja": "南武",
-    "zh": "南武",
-    "ko": "나ㅁ부",
-    "en": "Nambu"
   },
   "Higashi-Totsuka": {
     "ja": "東戸塚",
@@ -845,24 +713,6 @@
     "ko": "코쿠도",
     "en": "Kokudo"
   },
-  "Musashi-Mitsuwadai": {
-    "ja": "武蔵三澤台",
-    "zh": "武藏三泽台",
-    "ko": "무사시미츠와다이",
-    "en": "Musashi-Mitsuwadai"
-  },
-  "Musashi-Saiwai": {
-    "ja": "武蔵彩輝",
-    "zh": "武藏彩輝",
-    "ko": "무사시사이와이",
-    "en": "Musashi-Saiwai"
-  },
-  "Musashi-Nakagawa": {
-    "ja": "武蔵中川",
-    "zh": "武藏中川",
-    "ko": "무사시나카가와",
-    "en": "Musashi-Nakagawa"
-  },
   "Musashi-Fujisawa": {
     "ja": "武蔵藤沢",
     "zh": "武藏藤泽",
@@ -875,29 +725,11 @@
     "ko": "나루세",
     "en": "Naruse"
   },
-  "Nagatoro": {
-    "ja": "長瀞",
-    "zh": "长瀞",
-    "ko": "나가토로",
-    "en": "Nagatoro"
-  },
   "Kugahara": {
     "ja": "久が原",
     "zh": "久原",
     "ko": "쿠가하라",
     "en": "Kugahara"
-  },
-  "Hachiman-Honmachi": {
-    "ja": "八幡本町",
-    "zh": "八幡本町",
-    "ko": "하치마ㄴ호ㄴ마치",
-    "en": "Hachiman-Honmachi"
-  },
-  "Midoricho": {
-    "ja": "緑町",
-    "zh": "绿町",
-    "ko": "미도리쵸",
-    "en": "Midoricho"
   },
   "Mizonokuchi": {
     "ja": "溝の口",
@@ -923,12 +755,6 @@
     "ko": "키쿠나",
     "en": "Kikuna"
   },
-  "Shimoda": {
-    "ja": "下田",
-    "zh": "下田",
-    "ko": "시모다",
-    "en": "Shimoda"
-  },
   "Ito": {
     "ja": "伊東",
     "zh": "伊东",
@@ -940,12 +766,6 @@
     "zh": "湯本",
     "ko": "유모토",
     "en": "Yumoto"
-  },
-  "Matsuda": {
-    "ja": "松田",
-    "zh": "松田",
-    "ko": "마츠다",
-    "en": "Matsuda"
   },
   "Sagami-Ono": {
     "ja": "相模大野",
@@ -964,12 +784,6 @@
     "zh": "藤泽",
     "ko": "후지사와",
     "en": "Fujisawa"
-  },
-  "Yukinoshita": {
-    "ja": "雪之下",
-    "zh": "雪之下",
-    "ko": "유키노시타",
-    "en": "Yukinoshita"
   },
   "Kamakura": {
     "ja": "鎌倉",
@@ -1001,12 +815,6 @@
     "ko": "긴자",
     "en": "Ginza"
   },
-  "Ginza-yonchome": {
-    "ja": "銀座四丁目",
-    "zh": "银座四丁目",
-    "ko": "기ㄴ자요ㄴ쵸메",
-    "en": "Ginza-yonchome"
-  },
   "Hibiya": {
     "ja": "日比谷",
     "zh": "日比谷",
@@ -1018,12 +826,6 @@
     "zh": "早稻田",
     "ko": "와세다",
     "en": "Waseda"
-  },
-  "Ueno-hirokoji": {
-    "ja": "上野広小路",
-    "zh": "上野广小路",
-    "ko": "우에노히로코지",
-    "en": "Ueno-hirokoji"
   },
   "Tawaramachi": {
     "ja": "田原町",
@@ -1055,12 +857,6 @@
     "ko": "미츠코시마에",
     "en": "Mitsukoshimae"
   },
-  "Go-komon": {
-    "ja": "五本松",
-    "zh": "五本松",
-    "ko": "고코모ㄴ",
-    "en": "Go-komon"
-  },
   "Shin-Ochanomizu": {
     "ja": "新御茶ノ水",
     "zh": "新御茶之水",
@@ -1084,12 +880,6 @@
     "zh": "中目岛",
     "ko": "나카메지마",
     "en": "Naka-mejima"
-  },
-  "Kitasendai": {
-    "ja": "北仙台",
-    "zh": "北仙台",
-    "ko": "키타세ㄴ다이",
-    "en": "Kita-Sendai"
   },
   "Hatchobori": {
     "ja": "八丁堀",
@@ -1133,35 +923,11 @@
     "ko": "와코시",
     "en": "Wakoshi"
   },
-  "Kishibojin": {
-    "ja": "岸本神社",
-    "zh": "岸本神社",
-    "ko": "키시보지ㄴ",
-    "en": "Kishibojin"
-  },
   "Iruma": {
     "ja": "入間",
     "zh": "入间",
     "ko": "이루마",
     "en": "Iruma"
-  },
-  "Shin-rinkan": {
-    "ja": "新林間",
-    "zh": "新林间",
-    "ko": "시ㄴ리ㄴ카ㄴ",
-    "en": "Shin-rinkan"
-  },
-  "Higashi-murayama": {
-    "ja": "東村山",
-    "zh": "东村山",
-    "ko": "히가시무라야마",
-    "en": "Higashi-Murayama"
-  },
-  "Nishi-kokubunji": {
-    "ja": "西国分寺",
-    "zh": "西国分寺",
-    "ko": "니시코쿠부ㄴ지",
-    "en": "Nishi-kokubunji"
   },
   "Akigawa": {
     "ja": "秋川",
@@ -1181,12 +947,6 @@
     "ko": "하시모토",
     "en": "Hashimoto"
   },
-  "Musashi-sakai": {
-    "ja": "武蔵境",
-    "zh": "武藏境",
-    "ko": "무사시사카이",
-    "en": "Musashi-Sakai"
-  },
   "Nishi-fuchu": {
     "ja": "西府",
     "zh": "西府",
@@ -1205,12 +965,6 @@
     "ko": "히노",
     "en": "Hino"
   },
-  "Nishi-koen": {
-    "ja": "西公園",
-    "zh": "西公園",
-    "ko": "니시코에ㄴ",
-    "en": "Nishi-koen"
-  },
   "Seijodai": {
     "ja": "聖学院台",
     "zh": "聖学院台",
@@ -1223,29 +977,11 @@
     "ko": "아카츠카",
     "en": "Akatsuka"
   },
-  "Musashinurare": {
-    "ja": "武蔵ニューレ",
-    "zh": "武藏Newre",
-    "ko": "무사시뉴레",
-    "en": "Musashinurare"
-  },
   "Kokumin-kyogijo": {
     "ja": "国民会議場",
     "zh": "国民会議场",
     "ko": "코쿠미ㄴ쿄기조",
     "en": "Kokumin-kyogijo"
-  },
-  "Mejiro-dai": {
-    "ja": "目白台",
-    "zh": "目白台",
-    "ko": "메지로다이",
-    "en": "Mejiro-dai"
-  },
-  "Tokyo-domae": {
-    "ja": "東京ドーム前",
-    "zh": "东京巨蛋前",
-    "ko": "도쿄돔마에",
-    "en": "Tokyo Dome-mae"
   },
   "Daimon": {
     "ja": "大門",
@@ -1259,12 +995,6 @@
     "ko": "오나리몬",
     "en": "Onarimon"
   },
-  "Nishi-fushimi": {
-    "ja": "西伏見",
-    "zh": "西伏见",
-    "ko": "니시후시미",
-    "en": "Nishi-fushimi"
-  },
   "Kodaira": {
     "ja": "小平",
     "zh": "小平",
@@ -1276,12 +1006,6 @@
     "zh": "光之丘",
     "ko": "히카리다이",
     "en": "Hikaridai"
-  },
-  "Nishi-takaido": {
-    "ja": "西高尾",
-    "zh": "西高尾",
-    "ko": "니시타카이도",
-    "en": "Nishi-takaido"
   },
   "Karasuyama": {
     "ja": "烏山",
@@ -1301,23 +1025,11 @@
     "ko": "시나노마치",
     "en": "Shinanomachi"
   },
-  "Shirokane-takanawa": {
-    "ja": "白金高輪",
-    "zh": "白金高轮",
-    "ko": "시로카네타카나와",
-    "en": "Shirokane-Takanawa"
-  },
   "Toranomon": {
     "ja": "虎ノ門",
     "zh": "虎之门",
     "ko": "토라노몬",
     "en": "Toranomon"
-  },
-  "Choju": {
-    "ja": "長寿",
-    "zh": "长寿",
-    "ko": "쵸주",
-    "en": "Choju"
   },
   "Kiba": {
     "ja": "木場",
@@ -1325,35 +1037,11 @@
     "ko": "키바",
     "en": "Kiba"
   },
-  "Koto-shibari": {
-    "ja": "江東縛り",
-    "zh": "江东柴",
-    "ko": "코토시바리",
-    "en": "Koto-shibari"
-  },
-  "Toyo-su": {
-    "ja": "豊洲",
-    "zh": "丰洲",
-    "ko": "토요스",
-    "en": "Toyo-su"
-  },
-  "Shin-kiba": {
-    "ja": "新木場",
-    "zh": "新木场",
-    "ko": "시ㄴ키바",
-    "en": "ShinKiba"
-  },
   "Oshiage": {
     "ja": "押上",
     "zh": "押上",
     "ko": "오시아게",
     "en": "Oshiage"
-  },
-  "Kerama": {
-    "ja": "嘉手納",
-    "zh": "嘉手納",
-    "ko": "케라마",
-    "en": "Kerama"
   },
   "Ningyocho": {
     "ja": "人形町",
@@ -1367,23 +1055,11 @@
     "ko": "히가시니호ㄴ바시",
     "en": "Higashi-nihombashi"
   },
-  "Mitarashi": {
-    "ja": "御駄志",
-    "zh": "御駄志",
-    "ko": "미타라시",
-    "en": "Mitarashi"
-  },
   "Den-en-chofu": {
     "ja": "田園調布",
     "zh": "田園調布",
     "ko": "데ㄴ에ㄴ쵸후",
     "en": "Den-en-chofu"
-  },
-  "Kototoi": {
-    "ja": "言知",
-    "zh": "言知",
-    "ko": "코토토이",
-    "en": "Kototoi"
   },
   "Oimachi": {
     "ja": "大井町",
@@ -1391,29 +1067,11 @@
     "ko": "오이마치",
     "en": "Oimachi"
   },
-  "Higashi-gotanda": {
-    "ja": "東品川",
-    "zh": "东品川",
-    "ko": "히가시고타ㄴ다",
-    "en": "Higashi-gotanda"
-  },
   "Takashimadaira": {
     "ja": "高島平",
     "zh": "高岛平",
     "ko": "타카시마다이라",
     "en": "Takashimadaira"
-  },
-  "Shin-kawasaki": {
-    "ja": "新川崎",
-    "zh": "新川崎",
-    "ko": "시ㄴ카와사키",
-    "en": "Shin-kawasaki"
-  },
-  "Shin-otemachi": {
-    "ja": "新大手町",
-    "zh": "新大手町",
-    "ko": "시ㄴ오테마치",
-    "en": "Shin-otemachi"
   },
   "Hacchobori": {
     "ja": "八丁堀",
@@ -1433,29 +1091,11 @@
     "ko": "미노와",
     "en": "Minowa"
   },
-  "Minowa-shita": {
-    "ja": "箕輪下",
-    "zh": "箕轮下",
-    "ko": "미노와시타",
-    "en": "Minowa-shita"
-  },
-  "Koji-mae": {
-    "ja": "工房前",
-    "zh": "工房前",
-    "ko": "코지마에",
-    "en": "Koji-mae"
-  },
   "Otsuka-ekimae": {
     "ja": "大塚駅前",
     "zh": "大冢站前",
     "ko": "오츠카에키마에",
     "en": "Otsuka-ekimae"
-  },
-  "Meguro-Dai": {
-    "ja": "目黒台",
-    "zh": "目黑台",
-    "ko": "메구로다이",
-    "en": "Meguro-Dai"
   },
   "Shirokanedai": {
     "ja": "白金台",
@@ -1523,12 +1163,6 @@
     "ko": "아카바네이와부치",
     "en": "Akabane-Iwabuchi"
   },
-  "Shinjuku-sanchome": {
-    "ja": "新宿三丁目",
-    "zh": "新宿三丁目",
-    "ko": "신주쿠산초메",
-    "en": "Shinjuku-sanchome"
-  },
   "Kita-Senju": {
     "ja": "北千住",
     "zh": "北千住",
@@ -1559,12 +1193,6 @@
     "ko": "히가시시ㄴ바시",
     "en": "Higashi-Shinbashi"
   },
-  "Shin-Toyosu": {
-    "ja": "新豊洲",
-    "zh": "新丰洲",
-    "ko": "신토요스",
-    "en": "Shin-Toyosu"
-  },
   "Aomi": {
     "ja": "青海",
     "zh": "青海",
@@ -1583,35 +1211,11 @@
     "ko": "아카바네바시",
     "en": "Akabanebashi"
   },
-  "Hitotsubashi": {
-    "ja": "一日市場",
-    "zh": "一日市场",
-    "ko": "히토츠바시",
-    "en": "Hitotsubashi"
-  },
-  "Yokojimma": {
-    "ja": "横島",
-    "zh": "横岛",
-    "ko": "요코지ㅁ마",
-    "en": "Yokojimma"
-  },
   "Takebashi": {
     "ja": "竹橋",
     "zh": "竹桥",
     "ko": "타케바시",
     "en": "Takebashi"
-  },
-  "Kitasenju": {
-    "ja": "北千住",
-    "zh": "北千住",
-    "ko": "키타세ㄴ주",
-    "en": "Kitasenju"
-  },
-  "Yanauchi": {
-    "ja": "柳内",
-    "zh": "柳内",
-    "ko": "야나우치",
-    "en": "Yanauchi"
   },
   "Harajuku": {
     "ja": "原宿",
@@ -1624,12 +1228,6 @@
     "zh": "东池袋",
     "ko": "히가시이케부쿠로",
     "en": "Higashi-Ikebukuro"
-  },
-  "Makuhari-hongo": {
-    "ja": "幕張本郷新",
-    "zh": "幕张本郷新",
-    "ko": "마쿠하리혼고",
-    "en": "Makuhari-hongo"
   },
   "Tokyo Dome-mae": {
     "ja": "東京ドーム前",
@@ -1654,24 +1252,6 @@
     "zh": "新木场",
     "ko": "신키바",
     "en": "ShinKiba"
-  },
-  "Miraikai": {
-    "ja": "未来海",
-    "zh": "未来海",
-    "ko": "미라이카이",
-    "en": "Miraikai"
-  },
-  "Denno": {
-    "ja": "電波",
-    "zh": "電波",
-    "ko": "데ㄴ노",
-    "en": "Denno"
-  },
-  "Midosuji": {
-    "ja": "御堂筋",
-    "zh": "御堂筋",
-    "ko": "미도수지",
-    "en": "Midosuji"
   },
   "Daiba": {
     "ja": "台場",
@@ -1703,24 +1283,6 @@
     "ko": "하쿠산",
     "en": "Hakusan"
   },
-  "Minami-Nagasaki": {
-    "ja": "南長崎",
-    "zh": "南长崎",
-    "ko": "미나미나가사키",
-    "en": "Minami-Nagasaki"
-  },
-  "Kita-Otsuka": {
-    "ja": "北大塚",
-    "zh": "北大冢",
-    "ko": "키타오츠카",
-    "en": "Kita-Otsuka"
-  },
-  "Iruma-shi": {
-    "ja": "入間市",
-    "zh": "入间市",
-    "ko": "이루마시",
-    "en": "Iruma-shi"
-  },
   "Higashi-Koganei": {
     "ja": "東小金井",
     "zh": "东小金井",
@@ -1732,12 +1294,6 @@
     "zh": "秋津",
     "ko": "아키츠",
     "en": "Akitsu"
-  },
-  "Nishifujisawa": {
-    "ja": "西藤沢",
-    "zh": "西藤泽",
-    "ko": "니시후지사와",
-    "en": "Nishifujisawa"
   },
   "Oyama": {
     "ja": "小山",
@@ -1757,24 +1313,6 @@
     "ko": "츠루카와",
     "en": "Tsurukawa"
   },
-  "Higashi-Hachioji": {
-    "ja": "東八王子",
-    "zh": "东八王子",
-    "ko": "히가시하치오지",
-    "en": "Higashi-Hachioji"
-  },
-  "Takahatafujimidai": {
-    "ja": "高畑富士見台",
-    "zh": "高畑富士见台",
-    "ko": "타카하타후지미다이",
-    "en": "Takahatafujimidai"
-  },
-  "Okutama-guchi": {
-    "ja": "奥多摩口新",
-    "zh": "奥多摩口新",
-    "ko": "오쿠타마구치",
-    "en": "Okutama-guchi"
-  },
   "Mitaka": {
     "ja": "三鷹",
     "zh": "三鹰",
@@ -1786,12 +1324,6 @@
     "zh": "上野原",
     "ko": "우에노하라",
     "en": "Uenohara"
-  },
-  "Inokashira": {
-    "ja": "井の頭",
-    "zh": "井头",
-    "ko": "이노카시라",
-    "en": "Inokashira"
   },
   "Keio-Hachioji": {
     "ja": "京王八王子",
@@ -1847,18 +1379,6 @@
     "ko": "시ㄴ미사키",
     "en": "Shin-Misaki"
   },
-  "Fudosan-mae": {
-    "ja": "不動山前",
-    "zh": "不動山前",
-    "ko": "후도사ㄴ마에",
-    "en": "Fudosan-mae"
-  },
-  "Chuo-rinkan": {
-    "ja": "中央林間",
-    "zh": "中央林间",
-    "ko": "츄오리ㄴ카ㄴ",
-    "en": "Chuo-rinkan"
-  },
   "Setagaya": {
     "ja": "世田谷",
     "zh": "世田谷",
@@ -1882,24 +1402,6 @@
     "zh": "多摩川",
     "ko": "타마가와",
     "en": "Tamagawa"
-  },
-  "Tamagawa-Enzei-ji": {
-    "ja": "多摩川円蔵寺",
-    "zh": "多摩川元藏寺",
-    "ko": "타마가와에ㄴ제이지",
-    "en": "Tamagawa-Enzei-ji"
-  },
-  "Daizen-ji": {
-    "ja": "大善寺",
-    "zh": "大善寺",
-    "ko": "다이제ㄴ지",
-    "en": "Daizen-ji"
-  },
-  "Mukaiminato": {
-    "ja": "向岬",
-    "zh": "向岬",
-    "ko": "무카이미나토",
-    "en": "Mukaiminato"
   },
   "Hama-Kawada": {
     "ja": "浜川田",
@@ -1937,29 +1439,11 @@
     "ko": "히라츠카",
     "en": "Hiratsuka"
   },
-  "Miyagi": {
-    "ja": "宮城",
-    "zh": "宫城",
-    "ko": "미야기",
-    "en": "Miyagi"
-  },
   "Yamato": {
     "ja": "大和",
     "zh": "大和",
     "ko": "야마토",
     "en": "Yamato"
-  },
-  "Chuo-Ku": {
-    "ja": "中央区",
-    "zh": "中央区",
-    "ko": "츄오쿠",
-    "en": "Chuo-Ku"
-  },
-  "Sakai": {
-    "ja": "堺",
-    "zh": "堺",
-    "ko": "사카이",
-    "en": "Sakai"
   },
   "Isehara": {
     "ja": "伊勢原",
@@ -1967,35 +1451,17 @@
     "ko": "이세하라",
     "en": "Isehara"
   },
-  "Tadachi": {
-    "ja": "立派",
-    "zh": "立派",
-    "ko": "타다치",
-    "en": "Tadachi"
-  },
   "Keisei-Tsukawa": {
     "ja": "京成津川",
     "zh": "京成津川",
     "ko": "케이세이츠카와",
     "en": "Keisei-Tsukawa"
   },
-  "Kotaki": {
-    "ja": "小滝",
-    "zh": "小滝",
-    "ko": "코타키",
-    "en": "Kotaki"
-  },
   "Nakagami": {
     "ja": "中神",
     "zh": "中神",
     "ko": "나카가미",
     "en": "Nakagami"
-  },
-  "Chichibu": {
-    "ja": "秩父",
-    "zh": "秩父",
-    "ko": "치치부",
-    "en": "Chichibu"
   },
   "Seibu-Yuuyamada": {
     "ja": "西武湯ヶ谷",
@@ -2004,7 +1470,7 @@
     "en": "Seibu-Yuuyamada"
   },
   "Yuki": {
-    "ja": "雪",
+    "ja": "結城",
     "zh": "雪",
     "ko": "유키",
     "en": "Yuki"
@@ -2051,29 +1517,11 @@
     "ko": "타마센터",
     "en": "Tama-Center"
   },
-  "Hachiman": {
-    "ja": "八幡",
-    "zh": "八幡",
-    "ko": "하치마ㄴ",
-    "en": "Hachiman"
-  },
   "Osaki": {
     "ja": "大崎",
     "zh": "大崎",
     "ko": "오사키",
     "en": "Osaki"
-  },
-  "OdaibaKaihinkoen": {
-    "ja": "お台場海浜公園",
-    "zh": "御台场海滨公园",
-    "ko": "오다이바해변공원",
-    "en": "OdaibaKaihinkoen"
-  },
-  "TokyoBigSight": {
-    "ja": "東京ビッグサイト",
-    "zh": "东京国际展示场",
-    "ko": "도쿄빅사이트",
-    "en": "TokyoBigSight"
   },
   "KokusaiTenjijo": {
     "ja": "国際展示場",
@@ -2081,41 +1529,11 @@
     "ko": "코쿠사이테ㄴ지조",
     "en": "KokusaiTenjijo"
   },
-  "MakuhariSeaside": {
-    "ja": "幕張海浜",
-    "zh": "幕张海滨",
-    "ko": "마쿠하리시사이드",
-    "en": "MakuhariSeaside"
-  },
-  "ShinKemigawa": {
-    "ja": "新検見川",
-    "zh": "新检见川",
-    "ko": "신케미가와",
-    "en": "ShinKemigawa"
-  },
-  "MinamiKemigawa": {
-    "ja": "南検見川",
-    "zh": "南检见川",
-    "ko": "미나미케미가와",
-    "en": "MinamiKemigawa"
-  },
   "Gotanda": {
     "ja": "五反田",
     "zh": "五反田",
     "ko": "고탄다",
     "en": "Gotanda"
-  },
-  "Nishi-Ikebukuro": {
-    "ja": "西池袋",
-    "zh": "西池袋",
-    "ko": "니시이케부쿠로",
-    "en": "Nishi-Ikebukuro"
-  },
-  "Shiroi": {
-    "ja": "白井",
-    "zh": "白井",
-    "ko": "시로이",
-    "en": "Shiroi"
   },
   "Kamagaya": {
     "ja": "鎌ヶ谷",
@@ -2140,12 +1558,6 @@
     "zh": "柏",
     "ko": "카시와",
     "en": "Kashiwa"
-  },
-  "Narashino": {
-    "ja": "習志野",
-    "zh": "习志野",
-    "ko": "나라시노",
-    "en": "Narashino"
   },
   "Funabashi": {
     "ja": "船橋",
@@ -2267,12 +1679,6 @@
     "ko": "히가시아키루",
     "en": "Higashi-Akiru"
   },
-  "Nishi-Akiru": {
-    "ja": "西秋留",
-    "zh": "西秋留",
-    "ko": "니시아키루",
-    "en": "Nishi-Akiru"
-  },
   "Musashi-Hikita": {
     "ja": "武蔵日向",
     "zh": "武藏日向",
@@ -2363,12 +1769,6 @@
     "ko": "와다",
     "en": "Wada"
   },
-  "Tateshina": {
-    "ja": "立科",
-    "zh": "立科",
-    "ko": "타테시나",
-    "en": "Tateshina"
-  },
   "Sakado": {
     "ja": "坂戸",
     "zh": "坂户",
@@ -2387,41 +1787,11 @@
     "ko": "토키가와",
     "en": "Tokigawa"
   },
-  "Musashisakai": {
-    "ja": "武蔵狭山",
-    "zh": "武藏狭山",
-    "ko": "무사시사카이",
-    "en": "Musashisakai"
-  },
   "Nakano-Sakaue": {
     "ja": "中野坂上",
     "zh": "中野坂上",
     "ko": "나카노사카우에",
     "en": "Nakano-Sakaue"
-  },
-  "Futamata-gawa": {
-    "ja": "二俣川",
-    "zh": "二俣川",
-    "ko": "후타마타가와",
-    "en": "Futamata-gawa"
-  },
-  "Nakatsu": {
-    "ja": "中津",
-    "zh": "中津",
-    "ko": "나카츠",
-    "en": "Nakatsu"
-  },
-  "Hachiman-gaika": {
-    "ja": "八幡外華",
-    "zh": "八幡外華",
-    "ko": "하치마ㄴ가이카",
-    "en": "Hachiman-gaika"
-  },
-  "Tama-plaza": {
-    "ja": "たまプラーザ",
-    "zh": "多摩广场",
-    "ko": "타마플라자",
-    "en": "Tama-plaza"
   },
   "Tsutsujigaoka": {
     "ja": "つつじヶ丘",
@@ -2429,23 +1799,11 @@
     "ko": "츠츠지가오카",
     "en": "Tsutsujigaoka"
   },
-  "Midoridai": {
-    "ja": "緑ヶ丘",
-    "zh": "绿丘",
-    "ko": "미도리다이",
-    "en": "Midoridai"
-  },
   "Seijo": {
     "ja": "聖学院",
     "zh": "聖学院",
     "ko": "세이조",
     "en": "Seijo"
-  },
-  "Tsukamoto": {
-    "ja": "塚本",
-    "zh": "冢本",
-    "ko": "츠카모토",
-    "en": "Tsukamoto"
   },
   "Nishi-takahashimadaira": {
     "ja": "西高島平",
@@ -2465,35 +1823,11 @@
     "ko": "모토마치츄카가이",
     "en": "Motomachi-Chukagai"
   },
-  "Minato-Mirai-21": {
-    "ja": "みなとみらい21",
-    "zh": "港未来21",
-    "ko": "미나토미라이21",
-    "en": "Minato-Mirai-21"
-  },
-  "Bay-Cross": {
-    "ja": "ベイクロス",
-    "zh": "海湾十字",
-    "ko": "베이크로스",
-    "en": "Bay-Cross"
-  },
-  "Kokkai-gijido": {
-    "ja": "国会議事堂",
-    "zh": "国会議事堂",
-    "ko": "코까아이기지도",
-    "en": "Kokkai-gijido"
-  },
   "Shin-Yokohama": {
     "ja": "新横浜",
     "zh": "新横滨",
     "ko": "신요코하마",
     "en": "Shin-Yokohama"
-  },
-  "Nishi-Nakajima": {
-    "ja": "西中島",
-    "zh": "西中岛",
-    "ko": "니시나카지마",
-    "en": "Nishi-Nakajima"
   },
   "Tsunashima": {
     "ja": "綱島",
@@ -2501,20 +1835,8 @@
     "ko": "츠나시마",
     "en": "Tsunashima"
   },
-  "Higashi-Yamatokoji": {
-    "ja": "東大和駅",
-    "zh": "东大和站",
-    "ko": "히가시야마토코지",
-    "en": "Higashi-Yamatokoji"
-  },
-  "Kita-Yamato": {
-    "ja": "北大和",
-    "zh": "北大和",
-    "ko": "키타야마토",
-    "en": "Kita-Yamato"
-  },
   "Aoba-dori": {
-    "ja": "青葉通",
+    "ja": "あおば通",
     "zh": "青葉通",
     "ko": "아오바도리",
     "en": "Aoba-dori"
@@ -2525,41 +1847,11 @@
     "ko": "호리노우치",
     "en": "Horinouchi"
   },
-  "Nishi-Totsuka": {
-    "ja": "西戸塚",
-    "zh": "西户冢",
-    "ko": "니시토츠카",
-    "en": "Nishi-Totsuka"
-  },
-  "Sakuragi-cho": {
-    "ja": "桜木町",
-    "zh": "樱木町",
-    "ko": "사쿠라기쵸",
-    "en": "Sakuragi-cho"
-  },
-  "Ishikawadai": {
-    "ja": "石川台",
-    "zh": "石川台",
-    "ko": "이시카와다이",
-    "en": "Ishikawadai"
-  },
-  "Umeda": {
-    "ja": "梅田",
-    "zh": "梅田",
-    "ko": "우메다",
-    "en": "Umeda"
-  },
   "Machida": {
     "ja": "町田",
     "zh": "町田",
     "ko": "마치다",
     "en": "Machida"
-  },
-  "Kanagawa-NewTown": {
-    "ja": "神奈川県ニュータウン",
-    "zh": "神奈川县新镇",
-    "ko": "가나가와뉴타운",
-    "en": "Kanagawa-NewTown"
   },
   "Seibu-Chitose": {
     "ja": "西武千歳",
@@ -2578,12 +1870,6 @@
     "zh": "西武中原",
     "ko": "세이부나카가와",
     "en": "Seibu-Nakagawa"
-  },
-  "Musashi-Yamanaka": {
-    "ja": "武蔵山中",
-    "zh": "武藏山中",
-    "ko": "무사시야마나카",
-    "en": "Musashi-Yamanaka"
   },
   "Seibu-Hikawa": {
     "ja": "西武日光",
@@ -5338,12 +4624,6 @@
     "zh": "参宫桥",
     "ko": "산구바시",
     "en": "Sangubashi"
-  },
-  "Shin-Yuri-Ga-Oka": {
-    "ja": "新百合ヶ丘",
-    "zh": "新百合丘",
-    "ko": "신유리가오카",
-    "en": "Shin-Yurigaoka"
   },
   "Satsuki-Dai": {
     "ja": "さつき台",
@@ -19504,5 +18784,29 @@
     "zh": "萤田",
     "ko": "호타루다",
     "en": "Hotaruda"
+  },
+  "Shin-Takashima": {
+    "ja": "新高島",
+    "zh": "新高岛",
+    "ko": "신타카시마",
+    "en": "Shin-Takashima"
+  },
+  "Minato-Mirai": {
+    "ja": "みなとみらい",
+    "zh": "港未来",
+    "ko": "미나토미라이",
+    "en": "Minato-Mirai"
+  },
+  "Bashamichi": {
+    "ja": "馬車道",
+    "zh": "马车道",
+    "ko": "바샤미치",
+    "en": "Bashamichi"
+  },
+  "Hitoichiba": {
+    "ja": "一日市場",
+    "zh": "一日市场",
+    "ko": "히토이치바",
+    "en": "Hitoichiba"
   }
 }

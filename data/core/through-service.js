@@ -149,8 +149,8 @@
     "Mita": { "TokyuMeguro": ["Meguro"] },
     "TokyuMeguro": { "Mita": ["Meguro"], "Namboku": ["Meguro"] },
     // 相鉄（埼京・東横とはデータ上接続駅なし→マーカー非表示）
-    "SotetsuMain": { "Saikyo": [], "TokyuToyoko": [], "SotetsuIzumino": ["Futamata-Gawa", "Futamata-gawa"], "SotetsuShin-Yokohama": ["Nishiya"] },
-    "SotetsuIzumino": { "SotetsuMain": ["Futamata-Gawa", "Futamata-gawa"] },
+    "SotetsuMain": { "Saikyo": [], "TokyuToyoko": [], "SotetsuIzumino": ["Futamatagawa", "Futamatagawa"], "SotetsuShin-Yokohama": ["Nishiya"] },
+    "SotetsuIzumino": { "SotetsuMain": ["Futamatagawa", "Futamatagawa"] },
     "SotetsuShin-Yokohama": { "SotetsuMain": ["Nishiya"] }
   };
 

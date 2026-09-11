@@ -869,6 +869,67 @@
     })();
   }
 
+  // ========== 手动时刻表按需加载（v4.3.528） ==========
+  // 41 个 data/timetables/*-manual.js（ODPT 无 TrainTimetable 的 JR 地方线补充数据）
+  // 由 HTML 静态标签改为按需动态注入：打开线路时才加载该线文件，
+  // trains 页首屏不再全量解析约 7.1MB 时刻表数据（首都圈线 ODPT 有时刻表，全程零加载）。
+  // 时序保证：script.onload 触发 = 脚本执行完成 = window.<lineId>_MANUAL_TIMETABLES 已定义，
+  //   onload 内二次校验变量存在（文件名/线路 ID 命名不匹配时 reject 暴露，不静默缺数据）；
+  //   数据就绪后内部重跑 doEstimation + fuseAll（与 loadMissingTimetables 完成后同一链路）。
+  // 防重入：_manualLoading 记录共享 Promise，同线路并发调用只发一次请求。
+  // 结果归属：调用方（trains-page）在 .then 中校验 currentLine，用户切走线路后旧结果不覆盖新状态。
+  var _manualLoading = {};
+
+  function _hasOdptTimetable(lineId) {
+    try {
+      var tt = window.ODPT_TIMETABLES || {};
+      // v4.3.530: 映射后 code 一并检查——KawagoeWest→Kawagoe / UtsunomiyaJR→Utsunomiya /
+      // SobuMain→Sobu / JobanMain→Joban 等 ODPT railway 名不含本地 lineId 子串，
+      // 原判断误判"ODPT 无数据"→ 每次打开该线都注入不存在的 manual → 404 + reject 噪音
+      var code = (window.ODPTClient && window.ODPTClient.LINE_RAILWAY_CODE &&
+        window.ODPTClient.LINE_RAILWAY_CODE[lineId]) || lineId;
+      for (var op in tt) {
+        var arr = tt[op];
+        if (!Array.isArray(arr)) continue;
+        for (var i = 0; i < arr.length; i++) {
+          var rw = (arr[i] && arr[i]['odpt:railway']) || '';
+          if (rw.indexOf(lineId) >= 0 || rw.indexOf('.' + lineId) >= 0 ||
+              rw.indexOf(code) >= 0 || rw.indexOf('.' + code) >= 0) return true;
+        }
+      }
+    } catch(e) {}
+    return false;
+  }
+
+  function ensureManualTimetable(lineId) {
+    return new Promise(function(resolve, reject) {
+      try {
+        var varName = lineId + '_MANUAL_TIMETABLES';
+        if (window[varName]) { resolve(true); return; }
+        // ODPT 已有该线时刻表（首都圈等）→ 无需 manual，零请求
+        if (window.ODPT_TIMETABLES && _hasOdptTimetable(lineId)) { resolve(true); return; }
+        // 加载中：复用同一 Promise，避免并发重复请求
+        if (_manualLoading[lineId]) { _manualLoading[lineId].then(resolve, reject); return; }
+        var s = document.createElement('script');
+        var base = (typeof window.getBasePath === 'function' && window.getBasePath()) || '..';
+        s.src = base + '/data/timetables/' + lineId + '-manual.js';
+        var p = new Promise(function(res, rej) {
+          s.onload = function() {
+            if (!window[varName]) { rej(new Error(varName + ' undefined (naming mismatch?)')); return; }
+            try { doEstimation(); } catch(e) { console.debug("[DataFusion] ensureManual->doEstimation error:", e.message); }
+            try { fuseAll(); } catch(e) { console.debug("[DataFusion] ensureManual->fuseAll error:", e.message); }
+            res(true);
+          };
+          s.onerror = function() { rej(new Error('manual file not found (ODPT 无数据且无 manual 文件?)')); };
+        });
+        _manualLoading[lineId] = p;
+        p.then(function() { delete _manualLoading[lineId]; }, function() { delete _manualLoading[lineId]; });
+        document.head.appendChild(s);
+        p.then(resolve, reject);
+      } catch(e) { reject(e); }
+    });
+  }
+
   window.DataFusion = {
     init: init, fuseAll: fuseAll, subscribe: subscribe,
     getFusedData: function() { return window.DATA_FUSION || _lastFusedData || null; },
@@ -878,6 +939,8 @@
     loadTrainPositions: loadTrainPositions,
     getCachedData: function() { return _lastFusedData; },
     saveToCache: saveToCache, refresh: function() { return fuseAll(); },
+    // v4.3.528: 手动时刻表按需加载（ODPT 无时刻表的 JR 地方线，打开线路时才注入该线文件）
+    ensureManualTimetable: ensureManualTimetable,
     // Through-service (直通運転) providers: direct neighbours + BFS closure
     getThroughServiceLines: getThroughServiceLines,
     getDirectThroughLines: function(lineId) {

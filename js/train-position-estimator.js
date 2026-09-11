@@ -511,6 +511,12 @@
         if (window.TransitConstants && typeof window.TransitConstants.normalizeOp === "function") {
           opId = window.TransitConstants.normalizeOp(opId);
         }
+        // v4.3.532: ODPT 运营商别名——时刻表池按 ODPT_ENDPOINTS 键组织（api.odpt.org 的 TWR/MIR），
+        // 而本地 line.operator 用独立键（Rinkai/TsukubaExpress）→ timetableIndex[opId] 取不到 → 推定空白。
+        // 实测 ODPT：odpt:TrainTimetable?operator=TWR = 564 条全为 TWR.Rinkai；MIR = 841 条全为 MIR.TsukubaExpress。
+        // 别名仅作用于"取时刻表池"这一处，不影响 LOS 分组/图标/延误（那些仍用 line.operator 原键）。
+        var TT_OP_ALIAS = { "Rinkai": "TWR", "TsukubaExpress": "MIR" };
+        if (TT_OP_ALIAS[opId]) opId = TT_OP_ALIAS[opId];
 
         // Find timetable data for this operator（v4: 按 railway 子集，非全量）
         var rIdx = timetableIndex[opId];
