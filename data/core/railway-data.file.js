@@ -22622,12 +22622,9 @@ window.RAILWAY_DATA = {
         "Shimosa-Tachibana",
         "Shimosa-Toyosato",
         "Shiishiba",
-        "Matsugishi",
-        "Choshi"
+        "Matsugishi"
       ],
       "durations": [
-        2,
-        2,
         2,
         2,
         2,
@@ -22672,12 +22669,6 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Matsugishi",
-          "lineId": "SobuMain",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Choshi",
           "lineId": "SobuMain",
           "type": "in",
           "note": ""
@@ -28233,12 +28224,6 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Matsugishi",
-          "lineId": "Narita",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Choshi",
           "lineId": "Narita",
           "type": "in",
           "note": ""
@@ -42955,7 +42940,6 @@ window.RAILWAY_DATA = {
       "SobuMain"
     ],
     "Choshi": [
-      "Narita",
       "SobuMain"
     ],
     "Tobu-World-Square": [
@@ -48341,8 +48325,7 @@ window.RAILWAY_DATA = {
       "Shimosa-Tachibana": 12,
       "Shimosa-Toyosato": 13,
       "Shiishiba": 14,
-      "Matsugishi": 15,
-      "Choshi": 16
+      "Matsugishi": 15
     },
     "Nikkoku": {
       "Shimo-Imaichi": 0,

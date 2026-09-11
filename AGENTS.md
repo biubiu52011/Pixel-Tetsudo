@@ -879,3 +879,9 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 **清理清单**：北総鉄道 9200形 / 千葉都市モノレール 1000形 / 小田急電鉄 1000形（箱根登山色）・80000系（旧名残留） / 東急電鉄 6021系 / 東武鉄道 100系・100系別塗装・500系 / 横浜市交通局 10000形（別）・10000形（横浜メトロ） / 横浜高速鉄道 Y500系 / 江ノ島電鉄 1000形・1500形・700形 / 相模鉄道 10000系・10000系（新塗装）・11000系・8000系。
 **验证**：图库 PNG 372→**354**（26 子目录不变）；train-icons.js 引用断链 0；node --check 通过；被引用文件零波及（清理前双保险）。
 **恢复路径**：如需恢复任一文件，从 `%TEMP%\图库旧小图备份\孤儿清理\` 按目录取回即可（TEMP 重启可能清空，需长期保留请复制到项目目录）。
+## 4.3.547（2026-09-12，成田線拆三条·JR 官方口径）
+**用户指示**："成田线JR官方拆成三条"——JR 官方成田線为三条：本線（佐倉～松岸）、空港支線（成田～成田空港）、我孫子支線（我孫子～成田），合计 27 站。
+**根因**：本地 Narita 本线站表原为 佐倉→…→松岸→銚子（17 站）——銚子是総武本線终点被误收（成田線本線官方终点为松岸），且产生 3 处错误引用：Narita.transferStations 銚子→SobuMain、SobuMain.transferStations 銚子→Narita、stationLines[Choshi]=[Narita,SobuMain]、LSO[Narita].Choshi。
+**修复**（railway_data.json，用户指示允许改数据）：Narita 本線删銚子 17→16 站（佐倉～松岸，durations 17→15、transferStations 删銚子条目）；SobuMain.transferStations 删銚子→Narita 声明；stationLines[Choshi] 删 Narita；LSO[Narita] 删銚子。空港支線（3 站）/我孫子支線（10 站）已正确不变；三条合计 27 站与官方一致。gen-file-data.js 重生成 bundle。
+**缓存规避**：bump trains.html db-loader.js ?v=4.3.469→4.3.547（数据 localStorage 缓存 key 跟随 db-loader 版本，不 bump 则命中旧缓存——4.3.521 教训同型）。
+**验证**：本地三条数据断言全过（銚子 0 残留、站数/换乘/LSO/stationLines 全对）、bundle 重生成；线上 #Narita 由用户人工验收。
