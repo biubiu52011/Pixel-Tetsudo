@@ -592,10 +592,16 @@
       var loopStations = [stations[0]].concat(stations.slice(hikarigaokaIdx + 1));
       
       // ============ Size calculation ============
-      // v4.3.543: 画布基准固定（与直线布局同档：移动 410 / 桌面 820）——不再读取容器宽度，
-      // 使环宽/画布宽恒定，×2 部署的像素尺寸与窗口宽度无关（"拓展后实际尺寸"，非基数放大）。
-      var _cw6 = _isMobileView() ? GEOM.MAIN_BASE_W_MOBILE : GEOM.MAIN_BASE_W_MAX;
-      var _cw6Content = _isMobileView() ? Math.max(_cw6 - 16, 320) : _cw6;
+      // v4.3.543: 桌面画布基准固定（820）——环宽恒定，×_mapScale 部署像素与窗口宽度无关。
+      // v4.3.545: 移动端恢复 1:1 适配容器（_mapScale=1，画布=容器内容宽）——环不超屏、无横向滚动（手机友好）。
+      var _cw6;
+      if (_isMobileView()) {
+        var _mcw6 = ((typeof document !== "undefined" && document.querySelector("#trainsMapContainer")) || {}).clientWidth || 360;
+        _cw6 = Math.max(_mcw6 - 16, 320);
+      } else {
+        _cw6 = GEOM.MAIN_BASE_W_MAX;
+      }
+      var _cw6Content = _cw6;
       // v4.3.483c: 缩放系数对齐山手线 loopScale（移动 1.5 / 桌面 1.6）。
       // v4.3.496: 用户裁定环线标准宽度——六形环圆环部分与山手线统一（48 基准，移动 72px/桌面 76.8px）。
       var scale6 = _isMobileView() ? 1.5 : 1.6;
@@ -849,9 +855,15 @@
     } else {
       // Standard linear line: widen the canvas so left (names) and right (icons) both get used
       var isMobileView = _isMobileView();
-      // v4.3.543: 画布基准固定（移动 410 / 桌面 820）——不再读取容器宽度 clamp，
-      // svgW 恒定 → ×2 部署像素尺寸与窗口宽度无关（"拓展后实际尺寸"，非基数放大）。
-      var _baseW = (_isMobileView() ? GEOM.MAIN_BASE_W_MOBILE : GEOM.MAIN_BASE_W_MAX);
+      // v4.3.543: 桌面画布基准固定（820）——svgW 恒定，×_mapScale 部署像素与窗口宽度无关（"拓展后实际尺寸"）。
+      // v4.3.545: 移动端恢复 1:1 适配容器（_mapScale=1，画布=容器内容宽）——图不超屏、无横向滚动（手机友好）。
+      var _baseW;
+      if (isMobileView) {
+        var _mcw = ((typeof document !== "undefined" && document.querySelector("#trainsMapContainer")) || {}).clientWidth || 360;
+        _baseW = Math.max(_mcw - 16, 320);
+      } else {
+        _baseW = GEOM.MAIN_BASE_W_MAX;
+      }
       var _rightPad = isMobileView ? 24 : 40;
       var mainCx, svgW;
       if (branchLines.length >= 2) {
@@ -1501,8 +1513,9 @@
       svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
       // v4.3.541: 按拓展后实际尺寸部署——渲染像素 = viewBox 逻辑尺寸 × _mapScale，
       // 不再以容器宽度为放大基数（容器只作裁切视口，横向滚动 + 居中裁切）。
-      // v4.3.544: 放大比例 200%→170%（用户"减小30%"，与"增加50%"同口径：百分点增减）。
-      var _mapScale = 1.7; // 累计放大 70%
+      // v4.3.544: 桌面放大比例 200%→170%（用户"减小30%"）。
+      // v4.3.545: 移动端 _mapScale=1（1:1 适配容器，不放大、无横滑）——放大仅桌面。
+      var _mapScale = _isMobileView() ? 1 : 1.7; // 桌面累计放大 70%
       svg.style.width = Math.round(svgW * _mapScale) + "px";
       svg.style.height = Math.round(svgH * _mapScale) + "px";
       svg.setAttribute("data-line-id", lineId);
