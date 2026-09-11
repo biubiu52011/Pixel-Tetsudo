@@ -782,3 +782,9 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 - 代理异常回显改通用文案（upstream request failed）；全部响应补 X-Content-Type-Options: nosniff
 **验证（临时 server 实测）**：.work/serve.env 403 / serve.py 403 / /images/ 403 / 根路径=index.html 正常跳转 / pages/home.html 200 / 恶意 Host 403 / 代理带 key 正常 200（serve.env 读取链路 + 上游联通双确认）；serve.err 无 key；py_compile OK
 **遗留**：ODAKYU key 轮换需用户在小田急侧操作（git 历史清理风险高不推荐，轮换即等效失效）；ODPT 前端 consumer key 为公开设计（浏览器必然携带，非漏洞）；P2-1 脚本入库政策仍待拍板
+
+## 4.3.538（2026-09-12，线路图整体放大 50%）
+**用户指示**："线路图整体放大50%"。
+**实现**（css/trains.css）：`.tp-map-wrap` 宽度 100%→**150%**（max-width 解除）→ SVG（width:100% 相对 wrap）实际渲染 1.5 倍，站距/文字/图标/列车等比放大；`.tp-line-map` overflow-x clip→**auto**（放大后横向滚动查看超出部分）；纵向 height:auto 自然撑开页面流。几何逻辑（viewBox/站距按容器 clientWidth 计算）完全不动，纯显示层放大。
+**验证**：git diff 仅 2 处（overflow 行 + wrap 宽度行）；trains.html 版本行 bump v=4.3.469→4.3.538（缓存规避）；中文编码完好（无 BOM 文件未经 PowerShell 写入）。交付后用户人工验收（禁系统截图）。
+
