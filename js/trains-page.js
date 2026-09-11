@@ -518,11 +518,11 @@
     // 多支线全部朝左直排（junction 站名朝右避让，见 renderTrainMap），无下移拐弯；单支线保持右侧弯折（现状）。
     var _bSide = function(_i6b) { return (branchLines.length >= 2) ? "left" : "right"; };
     var _bCol = function(_i6b) { return _i6b; }; // 同侧列序号 = 支线序号
-    // v4.3.522: 短支线线（每条支线非 junction 站 ≤ 4）→ 支线水平直线横排
-    // （用户："要么两条直线在左边或者右边别再有拐弯"）。含长支线的线（如成田我孫子 9 站）
-    // 保持竖列（现状）——横排只用于鹤见线这类短支线，避免长支线横排把画布撑爆。
+    // v4.3.522: 短支线线（双支线及以上，且每条支线非 junction 站 ≤ 4）→ 支线水平直线横排
+    // （用户："要么两条直线在左边或者右边别再有拐弯"）。单支线保持右侧弯折现状
+    // （丸ノ内方南町/千代田北綾瀬不受影响）；含长支线的线（如成田我孫子 9 站）保持竖列。
     var _branchH = false;
-    if (branchLines.length > 0) {
+    if (branchLines.length >= 2) {
       _branchH = true;
       for (var _bhi = 0; _bhi < branchLines.length; _bhi++) {
         var _bhSt = branchLines[_bhi].stations || [];
