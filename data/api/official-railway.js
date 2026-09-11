@@ -4,6 +4,9 @@
  *
  * 数据通道：本地代理 /api-proxy/（官方 API 无 CORS 头，浏览器不能直连）
  * 输出结构对齐 ODPT delayInfo：{ status, text, cause, range, maxDelay, interval, updatedAt, source }
+ *
+ * v4.3.538: 小田急源封锁中（ODAKYU key 泄露待轮换）——parseOdakyu 在代理不可用时
+ * 返回 {}，小田急 3 线走融合 fallback 显示"暂无延误情报"；ゆりかもめ不受影响。
  */
 (function() {
     'use strict';
@@ -29,7 +32,11 @@
 
     // ===== 小田急 =====
     // 输出键 = 项目线路真实 id（Odawara / OdakyuEnoshima / OdakyuTama）
+    // v4.3.538: 小田急源已封锁（ODAKYU key 泄露待轮换）——代理端点删除后 res 为 null，
+    // 此时返回 {}（不输出小田急键），融合链走 fallback → no_odpt → 前端"暂无延误情报"。
+    // 绝不把"源不可用"伪装成 平常運転（normal）。
     function parseOdakyu(summary, detail) {
+        if (!summary || !detail) return {};
         var d = (detail && detail["train_service_status_detail"]) || {};
         var title = _normText(d.hp_title);
         var fields = [["odawara", "Odawara"], ["enoshima", "OdakyuEnoshima"], ["tama", "OdakyuTama"]];
@@ -86,7 +93,7 @@
                 .catch(function() { return ""; })
         ]).then(function(res) {
             var out = {};
-            var odakyu = parseOdakyu(res[0], res[1]);
+            var odakyu = parseOdakyu(res[0], res[1]);  // 封锁期返回 {} → 小田急键不输出
             Object.keys(odakyu).forEach(function(k) { out[k] = odakyu[k]; });
             out["Yurikamome"] = parseYurikamome(res[2]);
             _cache = out;

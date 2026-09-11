@@ -300,7 +300,7 @@
       "status.normal": "\u6b63\u5e38",
       "status.notice": "\u901a\u77e5",
       "status.no_data": "\u6682\u65e0\u5b9e\u65f6\u6570\u636e",
-      "status.no_odpt": "\u65e0\u5b9e\u65f6\u4fe1\u606f",
+      "status.no_odpt": "\u6682\u65e0\u5ef6\u8bef\u60c5\u62a5",
       "status.render_error": "\u6e32\u67d3\u5931\u8d25: ",
       "status.running_normal": "\u6b63\u5e38\u8fd0\u884c",
       "status.suspended": "\u505c\u8fd0",

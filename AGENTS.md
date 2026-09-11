@@ -788,3 +788,12 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 **实现**（css/trains.css）：`.tp-map-wrap` 宽度 100%→**150%**（max-width 解除）→ SVG（width:100% 相对 wrap）实际渲染 1.5 倍，站距/文字/图标/列车等比放大；`.tp-line-map` overflow-x clip→**auto**（放大后横向滚动查看超出部分）；纵向 height:auto 自然撑开页面流。几何逻辑（viewBox/站距按容器 clientWidth 计算）完全不动，纯显示层放大。
 **验证**：git diff 仅 2 处（overflow 行 + wrap 宽度行）；trains.html 版本行 bump v=4.3.469→4.3.538（缓存规避）；中文编码完好（无 BOM 文件未经 PowerShell 写入）。交付后用户人工验收（禁系统截图）。
 
+
+
+## 4.3.539（2026-09-12，小田急运行状况源封锁·key 轮换前置）
+**用户指示**：“先把小田原清理封锁，显示暂无延误情报”——ODAKYU key 已泄露（4.3.537 P0-3，公开仓库历史），轮换前封锁小田急数据源，前端明确显示无情报而非伪装正常。
+**serve.py**：PROXY_TARGETS 移除 odakyu-status / odakyu-status-detail 两个端点（404）——不再用已泄露 key 发起任何上游请求；ODAKYU_KEY 加载逻辑保留（注释标明封锁期无消费者，轮换后随端点恢复）；ゆりかもめ-operation 不受影响（无 key 源）。
+**official-railway.js**：parseOdakyu 增加封锁分支——代理不可用（summary/detail 为 null）时返回 {}（不输出 Odawara/OdakyuEnoshima/OdakyuTama 键），杜绝将“源不可用”伪装成 平常運転(normal)；融合链（getApiDelayInfo official 优先短路）随之走 ODPT→localStatus→fallback，最终 no_odpt。
+**translations.js**：zh status.no_odpt “无实时信息”→“暂无延误情报”（用户点名文案；en/ja/ko 保持原样）。
+**验证**：py_compile / node --check 全过；.work/test_official_block.cjs 6/6 PASS（封锁分支空对象/正常分支 3 键/融合链无小田急键）；临时 server 实测 odakyu-status 404 / odakyu-status-detail 404 / yurikamome-operation 200 / pages/home.html 200；浏览器端按用户约定人工验收。
+**恢复路径**：用户轮换 ODAKYU key 写入 .work/serve.env 后，把两个端点重新加入 PROXY_TARGETS 即恢复（parseOdakyu 正常分支已就绪）。

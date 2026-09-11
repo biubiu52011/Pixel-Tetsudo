@@ -40,20 +40,13 @@ def _load_odakyu_key():
         pass
     return ""
 
-ODAKYU_KEY = _load_odakyu_key()
+ODAKYU_KEY = _load_odakyu_key()  # v4.3.538: 封锁期间无消费者；轮换新 key 后随端点一并恢复
 
 # 白名单代理端点（只允许这些固定目标，防 SSRF）
+# v4.3.538: 小田急 odakyu-status / odakyu-status-detail 已封锁（403 清除）——
+# ODAKYU_API_KEY 曾明文进入 git 历史并推送公开仓库，旧 key 视为泄露，轮换前禁止再用
+# 上游请求（前端相应显示"暂无延误情报"）。轮换后恢复：重新加入 PROXY_TARGETS 即可。
 PROXY_TARGETS = {
-    "/api-proxy/odakyu-status": {
-        "url": "https://d6oynijiy33tb.cloudfront.net/service/status/1",
-        "headers": {"x-api-key": ODAKYU_KEY},
-        "content_type": "application/json; charset=utf-8",
-    },
-    "/api-proxy/odakyu-status-detail": {
-        "url": "https://d6oynijiy33tb.cloudfront.net/service/status_detail",
-        "headers": {"x-api-key": ODAKYU_KEY},
-        "content_type": "application/json; charset=utf-8",
-    },
     "/api-proxy/yurikamome-operation": {
         "url": "https://cms-2.yurikamome.co.jp/api/operation/",
         "headers": {},
