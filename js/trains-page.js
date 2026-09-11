@@ -1501,7 +1501,8 @@
       svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
       // v4.3.541: 按拓展后实际尺寸部署——渲染像素 = viewBox 逻辑尺寸 × _mapScale，
       // 不再以容器宽度为放大基数（容器只作裁切视口，横向滚动 + 居中裁切）。
-      var _mapScale = 2; // 累计放大 100%
+      // v4.3.544: 放大比例 200%→170%（用户"减小30%"，与"增加50%"同口径：百分点增减）。
+      var _mapScale = 1.7; // 累计放大 70%
       svg.style.width = Math.round(svgW * _mapScale) + "px";
       svg.style.height = Math.round(svgH * _mapScale) + "px";
       svg.setAttribute("data-line-id", lineId);
