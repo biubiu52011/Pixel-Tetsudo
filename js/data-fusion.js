@@ -606,15 +606,28 @@
               console.debug("[DataFusion] Estimated", estCount, "train positions for", Object.keys(estimated).length, "lines");
             }
 
-            // v4.3.521: 复合模式——手动时刻表补充线（中央本線等 ODPT 无 TrainTimetable 的线）。
+            // v4.3.524: 复合模式——手动时刻表补充线（全部 ODPT 无 TrainTimetable 的 JR 本地线）。
             // 用户诉求（2026-09-11）："不要出现中央本线那样上半段实时的下半段干干净净的"——
             // 实时定位 + 推断复合：即使线路已有实时列车（ODPT 只推上半段），仍用手动时刻表
             // 跑推定补全其余区段，按 trainId 合并去重（实时优先，推定只填实时没有的车次）。
-            // 数据文件 data/timetables/chuomain-manual.js 为 JR 官网公开时刻表人工整理（ODPT 兼容格式）。
-            var manualTT = window.CHUO_MAIN_MANUAL_TIMETABLES;
-            if (manualTT && Array.isArray(manualTT) && manualTT.length > 0) {
+            // 数据文件 data/timetables/*-manual.js 为 JR 官网公开时刻表人工整理（ODPT 兼容格式）。
+            // 通用化：collectManualTimetableLines() 自动扫描 window.<lineId>_MANUAL_TIMETABLES（后缀 18 字符）。
+            function collectManualTimetableLines() {
+              var out = [];
               try {
-                var manualLineId = 'ChuoMain';
+                Object.keys(window).forEach(function(k) {
+                  if (k.slice(-18) === '_MANUAL_TIMETABLES' && window[k] && window[k].length > 0) {
+                    out.push(k.slice(0, -18));
+                  }
+                });
+              } catch(e) { console.debug("[DataFusion] collectManualTimetableLines error:", e.message); }
+              return out;
+            }
+            var manualLines = collectManualTimetableLines();
+            manualLines.forEach(function(manualLineId) {
+              var manualTT = window[manualLineId + '_MANUAL_TIMETABLES'];
+              if (!manualTT || !Array.isArray(manualTT) || manualTT.length === 0) return;
+              try {
                 var mLine = allLines[manualLineId];
                 if (mLine && mLine.stations) {
                   var mEst = window.TrainPositionEstimator.estimateLinePositions(
@@ -633,14 +646,14 @@
                       }
                     });
                     if (mAdded > 0) {
-                      console.debug("[DataFusion] Composite mode: ChuoMain +", mAdded, "estimated (realtime", posMap[manualLineId].length - mAdded, "+ estimated", mAdded + ")");
+                      console.debug("[DataFusion] Composite mode: " + manualLineId + " +" + mAdded + " estimated (realtime " + (posMap[manualLineId].length - mAdded) + " + estimated " + mAdded + ")");
                     }
                   }
                 }
               } catch(mErr) {
-                console.debug("[DataFusion] Composite mode error:", mErr.message);
+                console.debug("[DataFusion] Composite mode error:", manualLineId, mErr.message);
               }
-            }
+            });
           }
         } catch(estErr) { console.debug("[DataFusion] Position estimation error:", estErr.message); }
       }

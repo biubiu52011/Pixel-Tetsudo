@@ -2,7 +2,8 @@
 // （timetables.jreast.co.jp 2609 版，2026年9月改正）人工核对整理，自建数据格式。
 // 覆盖 ODPT 未提供的中央本線 TrainTimetable 空白（ODPT 无此线时刻表数据）。
 // 字段与 ODPT TrainTimetable 兼容（odpt:trainTimetableObject），可直接喂 PositionEstimator。
-window.CHUO_MAIN_MANUAL_TIMETABLES = [
+// v4.3.524: 变量名统一为 <lineId>_MANUAL_TIMETABLES（ChuoMain）——data-fusion 通用扫描依赖。
+window.ChuoMain_MANUAL_TIMETABLES = [
  {
   "odpt:railway": "odpt.Railway:JR-East.ChuoMain",
   "odpt:calendar": "odpt.Calendar:Weekday",

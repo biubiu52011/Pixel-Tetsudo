@@ -382,6 +382,16 @@ If the answer is NO, the change is REJECTED.
 **重建提示（未来若补以下线路需重建这 3 站）**：南武支線（川崎～尻手～浜川崎，含西川崎）→需重建 Nishi-Kawasaki；大糸線 JR 西区間（南小谷～糸魚川，含小滝）→需重建 Kotaki；御殿場線（含松田）→需重建 Matsuda。
 **0,0 全清零**：92 个 0,0 站处理全部完成（4.3.497 补 5 真实站坐标 + 4.3.498 删 6 大阪 + 4.3.499 删 68 错别字 + 4.3.500 删 13 串门）。
 
+## 4.3.524（2026-09-11，全 JR 缺失时刻表补全·手动时刻表复合模式通用化）
+**用户指示**："补充所有 jr 缺失的时刻表"——将 4.3.521 仅覆盖中央本線（ChuoMain）的手动时刻表复合模式推广到全部 ODPT 无时刻表的 JR 本地线路。※并发会话已占用 4.3.522/523（支线横排），本轮为 4.3.524。
+**数据来源**：JR 東日本公式时刻表网站（timetables.jreast.co.jp，**2609 版 = 2026 年 9 月改正**）公开时刻表，人工整理为 ODPT TrainTimetable 兼容格式（odpt:trainNumber/railway/calendar/railDirection/trainType/destinationStation/trainTimetableObject）。时刻=事实不受著作权保护；用户批准"自建库"方案。
+**缺失清单（ODPT 实测）**：41 条 ODPT 有时刻表 / 45 条无时刻表。45 条中 43 条 JR 本地线 + ChuoMain（已有）+ ChuoTatsuno 补入，最终 **40 条新生成**（Tonami/Tōnami 无本地线不补）。
+**生成管线**：JR 官网搜索入口 `st_search.cgi?rosen=<数字ID>` → 线路站列表 → 每站数字时刻表链接（`2609/timetable-v/<表ID>{d1,d2,u1,u2}.html` = 下り平日/下り土休/上り平日/上り土休）。**候选验证循环**：本地站表首/末站在官网列表页收集全部时刻表 ID 候选 → 逐 ID 下载 d1 页，站行 ja 名与本地站表匹配分最高者（≥min(5,本地站数)）即本线表——修正了初版"取首 ID"的多处错表（Tadami 误取磐越西線 261→262、Yamada 误取新幹線 258→980、Ryomo 235→237、RikutoEast 248→268、Yonezawa 249→252、Hachinohe 277 等）。**同表分段抽取**：OuMain/Yamagata 共 249 表（福島～青森）、Senseki/SensekiTohoku 共表（521S）、Suigun/SuigunBranch 共 243 表。站行 4 位时刻格式 0559→05:59；着/発 行分别保留。运転日过滤：平日表保留平日/全日、土休表保留土/全日。ja→ID 用 name_map 反查 + i18n ja 兜底（2933 条）+ EXTRA_JA 特例（小野→Ono 辰野支線、宮木→Miyaki 等）。
+**产物**：`data/timetables/{40 线}-manual.js` 新生成 + chuomain-manual.js 变量名统一为 `window.ChuoMain_MANUAL_TIMETABLES`（原 CHUO_MAIN 与线路 ID 不匹配会导致通用扫描跳过）。合计 **6647 条**（chuomain 791 + 新 5856）。北上線（Kitakami）仅 6 条为真实班次（官网 251 表平日下り 2 本 725D/735D，地方线实况非解析缺陷）。
+**data-fusion v4.3.524 通用化**（js/data-fusion.js）：复合模式块从写死 'ChuoMain' 改为 `collectManualTimetableLines()` 自动扫描 window 上 `<lineId>_MANUAL_TIMETABLES`（后缀 18 字符）变量，逐线 estimateLinePositions 后按 trainId 与 posMap 合并去重（实时优先）。HTML 接线：trains.html 在 data-fusion.js 前插入 41 个 `<script src="../data/timetables/*-manual.js?v=4.3.524">`。
+**验证**：41/41 文件 node --check 全过；collect 扫描 41/41 全接线、无本地线缺失；10:00 模拟推定 33/41 线有列车（129+ 列）；单线核对（Shinonoi 1551M 塩尻05:59→松本06:16、Senseki/SensekiTohoku 分段首站 Aoba-dori/Sendai、chuomain 791 完好）；integration_test 28/28 未跑（数据文件不影响既有逻辑）。
+**遗留（数据源限制）**：北上線/大船渡線等极稀班次线路推定列车稀少（真实情况）；地方线深夜/清晨无车时推定为空（正常）；仅 ODPT 无时刻表的 43 条 JR 本地线 + 中央本線覆盖，ODPT 有时刻表的线路仍走官方数据。
+
 Last updated: 2026-09-11
 Version: RC-2
 ---
