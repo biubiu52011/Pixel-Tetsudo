@@ -10,7 +10,7 @@
 (function() {
   "use strict";
 
-  var ESTIMATOR_VERSION = 6;
+  var ESTIMATOR_VERSION = 7;
 
   // ========== Train type classification ==========
   // 通用特急关键词——JR-East/東武 等只写 "LimitedExpress"（4.3.484/4.3.485 实测：爱称不出现，具体名规则全部失效）
@@ -403,10 +403,16 @@
 
         // Only include trains that are currently in service (have departed at least one station)
         if (foundInService && currentStationIndex >= 0) {
-          // Check if train has already terminated (current time past last station arrival)
-          // v6: 收车判定基于外推后的末站——真截断列车走完全程后才收车
-          var lastStop = fullStops[fullStops.length - 1];
-          var lastArrTime = (lastStop._index !== undefined) ? lastStop.arrTime : parseTimeToMinutes(lastStop["odpt:arrivalTime"] || lastStop["odpt:departureTime"]);
+          // v7: 收车判定用「最后可解析时刻」——旧实现只读末站时刻，鹤见线等 106 条
+          // 时刻表记录末站 arrival/departure 均为空（区间车/支线车，如 1013B 末站浅野）→
+          // lastArrTime=null → `now > null+5` 永不成立 → 清晨车 13:54 还在图上（用户："推定很扯"）。
+          // 改为从末站往前找最后一个可解析时刻；整条记录无时刻则 foundInService 必然为 false（自动丢弃）。
+          var lastArrTime = null;
+          for (var _ls = fullStops.length - 1; _ls >= 0; _ls--) {
+            var _stp7 = fullStops[_ls] || {};
+            var _tm7 = (_stp7._index !== undefined) ? _stp7.arrTime : parseTimeToMinutes(_stp7["odpt:arrivalTime"] || _stp7["odpt:departureTime"]);
+            if (_tm7 !== null && _tm7 !== undefined) { lastArrTime = _tm7; break; }
+          }
           if (lastArrTime !== null && adjustedCurrentMin > lastArrTime + 5) continue; // 5 min grace
 
           processedTrainIds[trainNumber] = true;
