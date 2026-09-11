@@ -1724,6 +1724,15 @@
       // （tp-est-note、下・中央）に置く。
       el.innerHTML = '<div class="tp-map-wrap"></div>';
       el.querySelector('.tp-map-wrap').appendChild(svg);
+
+      // v4.3.539: 线路图放大 150% 后初始视图居中裁切——视口中心对准图中心，
+      // 左右两侧对称溢出，用户可向两端滚动查看（scrollLeft 全程可达，无 flex 溢出不可达问题）。
+      requestAnimationFrame(function () {
+        try {
+          var _scW = el.scrollWidth, _ccW = el.clientWidth;
+          if (_scW > _ccW) el.scrollLeft = Math.round((_scW - _ccW) / 2);
+        } catch (_e) { /* best-effort centering */ }
+      });
       
       // Clamp over-long station names into available width (industry practice:
       // shrink, never clip). Runs after mount so getBBox is accurate.

@@ -788,6 +788,12 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 **实现**（css/trains.css）：`.tp-map-wrap` 宽度 100%→**150%**（max-width 解除）→ SVG（width:100% 相对 wrap）实际渲染 1.5 倍，站距/文字/图标/列车等比放大；`.tp-line-map` overflow-x clip→**auto**（放大后横向滚动查看超出部分）；纵向 height:auto 自然撑开页面流。几何逻辑（viewBox/站距按容器 clientWidth 计算）完全不动，纯显示层放大。
 **验证**：git diff 仅 2 处（overflow 行 + wrap 宽度行）；trains.html 版本行 bump v=4.3.469→4.3.538（缓存规避）；中文编码完好（无 BOM 文件未经 PowerShell 写入）。交付后用户人工验收（禁系统截图）。
 
+## 4.3.539（2026-09-12，线路图放大后初始视图居中裁切）
+**用户反馈**："但是你没有居中裁切"——4.3.538 放大 150% 后 wrap 左对齐，初始视图从图左端开始。
+**修复**（js/trains-page.js 渲染完整重建路径）：appendChild(svg) 后 `requestAnimationFrame` 设置 `el.scrollLeft = (scrollWidth - clientWidth) / 2`——初始视口中心对准图中心，左右两侧对称溢出，向两端滚动全程可达（刻意不用 flex 居中：flex 溢出时左侧溢出区 scrollLeft 不可达，属浏览器已知限制）。仅完整重建路径设置一次，用户手动滚动后位置保持；增量更新路径不受影响。
+**验证**：node --check 通过；trains.html trains-page.js 版本行 4.3.523→4.3.539；diff 仅 2 处。交付后用户人工验收（禁系统截图）。
+
+
 
 
 ## 4.3.539（2026-09-12，小田急运行状况源封锁·key 轮换前置）
