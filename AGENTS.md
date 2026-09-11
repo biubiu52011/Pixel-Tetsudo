@@ -905,3 +905,10 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 **修复**（js/trains-page.js 1580-1581 行）：junction 分支补 `ty: _bJ7 ? sc.y : undefined`（站名与圆点同行，dominant-baseline central 同 v4.3.500 规则）。
 **验证**：node --check；本地 DOM——成田站名 y=142（此前 undefined）、chip rect y=150 / image y=151（此前 NaN）、全图坏 y（undefined/NaN）0 处；线上由用户人工 Ctrl+F5 验收。
 **版本**：bump trains-page.js ?v=4.3.548→4.3.549（数据/时刻表未变不 bump db-loader）。
+
+## 4.3.550（2026-09-12，成田線换画法·双支线左右分侧）
+**用户指示**："那你还上换一种画法把，成田线现在这样可读性很差"（4.3.516/522 双支线全左：我孫子 9 站竖列 + 空港 2 站也被拖成拐弯竖列，全挤左侧站名朝左视觉失衡）。
+**画法规则**（写规则非逐例）：①每条支线独立画法——非 junction 站 ≤4 → 水平直线横排（h）、>4 → 竖列（v）（原 _branchH 全局阈值：成田我孫子 9>4 卡死整线横排）；②位置——竖列支线在左、横排支线在右（仅当存在竖列支线；全部横排如鶴見線保持全左现状不回归），_bCol 改同侧内序号（左右分别从 0 计）；③junction 站名——存在右支线时转圆点上方居中 + 白描边（paint-order stroke 3px 遮主干竖线；换乘 chip 仍放圆点下方，iy0 判据改 anchor==="middle"，规避非 loop 线 isJunction=false）；④svgW 右侧需求含右横排支线（_rightNeed=横排长+站名带，修复 var 提升陷阱——_branchHSp 定义前移）。
+**修改**（js/trains-page.js）：_branchModes/_hasVCol/_bSide/_bCol 重构（分支判定区）、_rightNeed/_branchHSp/svgW（几何需求区）、branchGeom（_branchModes 判断）、geometry 透传（branchModes/rightBranch）、_renderStationNode（paintOrder 支持 + chip _jTopMode）、renderTrainMap（主干 junction top + 横排分支改 branchModes）。
+**验证**：node --check OK；本地 DOM——成田線 viewBox 852×1026（原 820，修复 NaN——_rightNeed 引 _branchHSp 在定义前，var 提升 undefined×2=NaN）、我孫子竖列左 x=317.6（9 站）、空港横排右 x=527.6/645.2（2 站，y=142 与圆点同行）、成田站名 y=126 居中描边、chip rect y=155 圆点下方、坏坐标 0；鶴見線全横排左（海芝浦 345.2/280.4:266、大川 345.2:328）不回归；千代田单支線右（430）不回归。
+**版本**：bump trains-page.js ?v=4.3.549→4.3.550（数据未动不 bump db-loader）；LINE-DIAGRAM-SPEC 修订表 4.3.550 行。

@@ -515,26 +515,40 @@
         branchLines.push({ id: bid, name: bl.name || bid, color: (window.LineOperationSystemsResolveColor && window.LineOperationSystemsResolveColor(bid)) || bl.color || color, stations: bl.stations });
       }
     }
-    // v4.3.516: 双支线及以上**同侧直排**（用户："要么两条直线在左边或者右边别再有拐弯"）——
-    // 多支线全部朝左直排（junction 站名朝右避让，见 renderTrainMap），无下移拐弯；单支线保持右侧弯折（现状）。
-    var _bSide = function(_i6b) { return (branchLines.length >= 2) ? "left" : "right"; };
-    var _bCol = function(_i6b) { return _i6b; }; // 同侧列序号 = 支线序号
-    // v4.3.522: 短支线线（双支线及以上，且每条支线非 junction 站 ≤ 4）→ 支线水平直线横排
-    // （用户："要么两条直线在左边或者右边别再有拐弯"）。单支线保持右侧弯折现状
-    // （丸ノ内方南町/千代田北綾瀬不受影响）；含长支线的线（如成田我孫子 9 站）保持竖列。
-    var _branchH = false;
-    if (branchLines.length >= 2) {
-      _branchH = true;
-      for (var _bhi = 0; _bhi < branchLines.length; _bhi++) {
-        var _bhSt = branchLines[_bhi].stations || [];
-        if (!_bhSt.length) continue;
-        var _bhJ = _branchJunctionStation(_bhSt, stations);
-        var _bhN = _bhJ ? (_bhSt.length - 1) : _bhSt.length;
-        if (_bhN > 4) { _branchH = false; break; }
-      }
+    // v4.3.550: 双支线及以上**左右分侧**（用户："成田线现在这样可读性很差"——三条竖线全挤左侧、
+    // 空港 2 站也被长支线拖成拐弯竖列）——每条支线独立画法：非 junction 站 ≤4 → 水平直线横排（h），
+    // >4 → 竖列（v）；竖列支线放左、横排支线放右（全部横排时保持全左，鹤见线不回归）；
+    // junction 站名在存在右支线时转圆点上方+白描边遮线（两侧都被占，renderTrainMap 实现）。
+    var _branchModes = []; // 每支线 'h' 横排 / 'v' 竖列
+    var _hasVCol = false;
+    for (var _bmi = 0; _bmi < branchLines.length; _bmi++) {
+      var _bmSt = branchLines[_bmi].stations || [];
+      var _bmJ = _bmSt.length ? _branchJunctionStation(_bmSt, stations) : null;
+      var _bmN = _bmJ ? (_bmSt.length - 1) : _bmSt.length;
+      // 单支线保持右侧弯折（现状：丸ノ内方南町/千代田北綾瀬）——不启用横排
+      var _bmode = (branchLines.length >= 2 && _bmN <= 4) ? 'h' : 'v';
+      _branchModes.push(_bmode);
+      if (_bmode === 'v') _hasVCol = true;
     }
-    var _rightCols = (branchLines.length >= 2) ? 0 : (branchLines.length === 1 ? 1 : 0);
-    var _leftCols = (branchLines.length >= 2) ? branchLines.length : 0;
+    // 位置规则：竖列支线在左；横排支线在右（仅当存在竖列支线时）；全部横排（鹤见线）保持全左现状。
+    var _bSide = function(_i6b) {
+      if (branchLines.length < 2) return "right";
+      if (_branchModes[_i6b] === 'v') return "left";
+      return _hasVCol ? "right" : "left";
+    };
+    var _bCol = function(_i6b) { // 同侧内列序号
+      var _c = 0;
+      for (var _ci = 0; _ci < _i6b; _ci++) {
+        if (_bSide(_ci) === _bSide(_i6b)) _c++;
+      }
+      return _c;
+    };
+    // 全横排（鹤见线）标志：兼容 _leftNeedH 与旧渲染路径
+    var _branchH = (branchLines.length >= 2) && !_hasVCol;
+    var _rightCols = 0, _leftCols = 0;
+    for (var _ci2 = 0; _ci2 < branchLines.length; _ci2++) {
+      if (_bSide(_ci2) === "left") _leftCols++; else _rightCols++;
+    }
     var _branchStubL = 0, _branchMaxNameW = function(_sd6) {
       var _mx6 = 0;
       for (var _bi3 = 0; _bi3 < branchLines.length; _bi3++) {
@@ -562,12 +576,26 @@
     }
     // v4.3.516: 左侧列距动态化——列 1 竖线不穿列 0 名带（列 0 名带右缘=bx0-10，列 1 竖线=bx0-列距，需 gap ≥ 4）
     var _branchColW = _leftCols > 0 ? Math.max(GEOM.BRANCH_COL_W, _branchMaxNameW("left") + 14) : GEOM.BRANCH_COL_W;
-    var _leftNeed = _leftCols > 0 ? (_branchStubL + (_leftCols - 1) * _branchColW + 10 + _branchMaxNameW("left") + 2) : 0;
-    var _rightNeed = _rightCols > 0 ? (GEOM.BRANCH_STUB + 10 + _branchMaxNameW("right") + 2) : 0;
-    var branchOffset = branchLines.length > 0 ? GEOM.BRANCH_COL_W * branchLines.length : 0;
     // v4.3.522: 横排站距 = 全支线最宽站名文本宽 + 12（"支线宽度取决于文本最多的那个"——
-    // 横排时相邻站名不重叠所需的最小站距）
-    var _branchHSp = _branchH ? (_branchMaxNameW("left") + 12) : 0;
+    // 横排时相邻站名不重叠所需的最小站距）。v4.3.550: 须在 _rightNeed 之前定义（var 提升陷阱）
+    var _branchHSp = (_branchH || _hasVCol) ? (Math.max(_branchMaxNameW("left"), _branchMaxNameW("right")) + 12) : 0;
+    var _leftNeed = _leftCols > 0 ? (_branchStubL + (_leftCols - 1) * _branchColW + 10 + _branchMaxNameW("left") + 2) : 0;
+    var _rightNeed = 0;
+    if (_rightCols > 0) {
+      if (branchLines.length >= 2) {
+        // v4.3.550: 右横排支线需求 = 横排长（站数×站距）+ 站名带 + 余量
+        for (var _rn = 0; _rn < branchLines.length; _rn++) {
+          if (_bSide(_rn) !== "right") continue;
+          var _rSt = branchLines[_rn].stations || [];
+          var _rJ = _rSt.length ? _branchJunctionStation(_rSt, stations) : null;
+          var _rN = _rJ ? (_rSt.length - 1) : _rSt.length;
+          _rightNeed = Math.max(_rightNeed, _rN * _branchHSp + 12 + _branchMaxNameW("right") + 2);
+        }
+      } else {
+        _rightNeed = GEOM.BRANCH_STUB + 10 + _branchMaxNameW("right") + 2; // 单支线（现状）
+      }
+    }
+    var branchOffset = branchLines.length > 0 ? GEOM.BRANCH_COL_W * branchLines.length : 0;
     // Branch name label sits 26px above the junction station (industry-standard
     // branch annotation). Reserve headroom when the junction is the first station.
     if (branchLines.length > 0) {
@@ -895,7 +923,8 @@
           }
         }
         mainCx = Math.max(_baseW / 2, (_branchH ? _leftNeedH : _leftNeed) + 20);
-        svgW = Math.max(_baseW, mainCx + 12 + _jMaxW6 + _rightPad);
+        // v4.3.550: 右侧需求含右横排支线（此前仅 junction 名宽）；左需求已含竖列支线
+        svgW = Math.max(_baseW, mainCx + 12 + _jMaxW6 + _rightNeed + _rightPad);
       } else {
         // 单支线/无支线：主线中心固定（现状）
         mainCx = _baseW / 2;
@@ -1001,7 +1030,7 @@
         // v4.3.520: junction 在支线站表末位（我孫子支线）→ 反转站序从 junction 向下延伸
         var _gStations = (_jfG.at === _br.stations.length - 1) ? _br.stations.slice().reverse() : _br.stations;
         var _bcoords = [];
-        if (_branchH) {
+        if (_branchModes[bgi] === 'h') {
           // v4.3.522: 短支线水平直线横排——跳过 junction 站（主干已画），从 junction
           // 向侧边水平排开（站距 = 全支线最宽名 + 12）；列车定位坐标同步横排
           var _bHx0 = stationCoords[_jIdx].x, _bHy0 = stationCoords[_jIdx].y, _bHi = 0;
@@ -1047,6 +1076,8 @@
       branchStubL: _branchStubL, // v4.3.515: 左侧支线 stub（主干最宽站名+22，跨函数）
       branchColW: _branchColW, // v4.3.516: 左侧列距动态化（跨函数）
       branchH: _branchH, // v4.3.522: 短支线线 → 支线水平直线横排（跨函数）
+      branchModes: _branchModes, // v4.3.550: 每支线画法（h 横排 / v 竖列，跨函数）
+      rightBranch: _rightCols > 0 && branchLines.length >= 2, // v4.3.550: 存在右支线（junction 站名转圆点上方+白描边）
       branchHSp: _branchHSp, // v4.3.522: 横排站距（跨函数）
       branchGeom: branchGeom,
       routeElements: routeElements,
@@ -1216,6 +1247,13 @@
     label.setAttribute("text-anchor", anchor);
     // v4.3.500: 左右侧站名垂直居中于圆点（top/bottom 保持基线在圆点上下方）
     if (side !== "top" && side !== "bottom") label.setAttribute("dominant-baseline", "central");
+    // v4.3.550: junction 站名转圆点上方时白描边遮线（主干竖线从文字后方穿过）
+    if (o.paintOrder) {
+      label.setAttribute("paint-order", o.paintOrder);
+      if (o.stroke) label.setAttribute("stroke", o.stroke);
+      if (o.strokeWidth) label.setAttribute("stroke-width", o.strokeWidth);
+      label.setAttribute("stroke-linejoin", "round");
+    }
     // v4.3.513: 移动端容器窄（tailAreaWidth 上限 < 三区分离需求），光丘尾竖线（stubX）穿左列上方站名——
     // 白色描边遮线（线路从文字后穿过）。桌面端 tail 列已扩至三区分离（junctionX≥stubX+10+88+10），无穿线不触发。
     if (geometry.isSixShapedLoop && geometry.isDualLoop6 && isMobileView &&
@@ -1292,7 +1330,10 @@
       var moreText = nonThru.length > maxShow ? "+" + (nonThru.length - maxShow) : "";
       var totalW = maxRowW + (moreText ? 12 : 0);
       var ix0, iy0;
-      iy0 = (side === "top") ? (o.y + 14) : (ty + (isJunction ? 14 : 9)); // v4.3.500: chip 在站名下方，避让圆点底缘（+2px）
+      // v4.3.550: junction 站名在圆点上方（anchor=middle）时，换乘 chip 仍放圆点下方（ty 已上移，不能再用 ty+9/14）
+      // 判据用 anchor==="middle"（junction top 模式唯一入口；普通站不传 o.anchor）
+      var _jTopMode = (o.tx != null && o.anchor === "middle" && o.y != null);
+      iy0 = _jTopMode ? (o.y + 14) : ((side === "top") ? (o.y + 14) : (ty + (isJunction ? 14 : 9))); // v4.3.500: chip 在站名下方，避让圆点底缘（+2px）
       if (iy0 < 2) iy0 = 2;
       // v4.3.501 对齐规则（用户规定）：换乘图标块必须有一边与站名文字侧边对齐——
       // 站名在圆点右侧（anchor=start）→ chip 左缘=文字左缘；站名在左侧（anchor=end）→
@@ -1577,9 +1618,12 @@
           svgW: svgW, svgH: svgH, transferMap: transferMap, stationCoords: stationCoords,
           rS: _rS,
           skipTx: false,
-          tx: _bJ7 ? (sc.x + 12) : undefined, // 岔路 junction 站名朝右（anchor=start 右缘=圆点右 12）
-          ty: _bJ7 ? sc.y : undefined, // v4.3.549: 补漏——junction 站名与圆点同行（此前漏传 ty，text y=undefined / 换乘 chip y=NaN）
-          anchor: _bJ7 ? "start" : undefined
+          tx: _bJ7 ? (geometry.rightBranch ? sc.x : (sc.x + 12)) : undefined, // v4.3.550: 有右支线时 junction 站名转圆点上方居中
+          ty: _bJ7 ? (geometry.rightBranch ? (sc.y - 16) : sc.y) : undefined, // v4.3.549: 补漏 ty——junction 站名与圆点同行（此前漏传 ty，text y=undefined / 换乘 chip y=NaN）
+          anchor: _bJ7 ? (geometry.rightBranch ? "middle" : "start") : undefined,
+          paintOrder: (_bJ7 && geometry.rightBranch) ? "stroke" : undefined, // v4.3.550: 白描边遮主干竖线
+          stroke: (_bJ7 && geometry.rightBranch) ? "#ffffff" : undefined,
+          strokeWidth: (_bJ7 && geometry.rightBranch) ? 3 : undefined
         });
       }
       
@@ -1613,7 +1657,7 @@
           var _bColNow = (geometry.bCol) ? geometry.bCol(bi) : 0;
           var _stubL6 = geometry.branchStubL || 0;
           var _colW6 = geometry.branchColW || GEOM.BRANCH_COL_W;
-          if (geometry.branchH) {
+          if (geometry.branchModes && geometry.branchModes[bi] === 'h') {
             // v4.3.522: 短支线线 → 支线水平直线横排（用户："两条直线别再有拐弯"）：
             // junction 圆点直接一条水平直线延伸到最后一站（无 stub、无竖列、无拐弯）；
             // 支线站横排（跳过 junction 站，主干已画），站名朝侧边、与圆点同行。
