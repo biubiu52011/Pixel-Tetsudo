@@ -1527,7 +1527,9 @@
         var junctionIdx = -1;
         var _jAt = 0;
         if (branch.stations && branch.stations.length > 0 && stationCoords.length > 0) {
-          var _jFind7 = _branchJunctionStation(branch.stations, stations);
+          var _mainIds7 = [];
+          for (var _mI7 = 0; _mI7 < stationCoords.length; _mI7++) _mainIds7.push(stationCoords[_mI7].stationId);
+          var _jFind7 = _branchJunctionStation(branch.stations, _mainIds7);
           if (_jFind7) {
             for (var _ji = 0; _ji < stationCoords.length; _ji++) {
               if (stationCoords[_ji].stationId === _jFind7.station) {
