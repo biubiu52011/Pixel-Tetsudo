@@ -40,10 +40,9 @@
   border-radius: var(--radius-sm); padding: 14px; overflow-x: auto; overflow-y: visible; flex-shrink: 0;
 }
 @media (max-width: 640px) { .tp-line-map { padding: 6px; } }
-/* v4.3.542: 线路图按拓展后实际尺寸部署——svg 像素尺寸由 JS 依 viewBox×2 设定，
-   wrap 随内容尺寸（fit-content），容器仅作裁切视口。
-   居中：溢出时 JS scrollLeft 居中裁切；不溢出时 margin auto 水平居中（消除短线路靠左） */
-.tp-map-wrap { width: fit-content; max-width: none; min-width: 0; margin-left: auto; margin-right: auto; }
+/* v4.3.546: 线路图完整适配——svg width=100%（viewBox 缩放），wrap 占满容器，
+   整图可见、无横向滚动；此前 fit-content/px 部署（4.3.541-545）已废弃 */
+.tp-map-wrap { width: 100%; max-width: none; min-width: 0; }
 .tp-map-wrap svg { height: auto; display: block; }
 .tp-no-data { text-align: center; color: var(--text-muted); font-size: 13px; padding: 16px; }
 .tp-no-data-sub { font-size: 11px; color: var(--text-muted); }

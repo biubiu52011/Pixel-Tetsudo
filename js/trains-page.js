@@ -592,8 +592,8 @@
       var loopStations = [stations[0]].concat(stations.slice(hikarigaokaIdx + 1));
       
       // ============ Size calculation ============
-      // v4.3.543: 桌面画布基准固定（820）——环宽恒定，×_mapScale 部署像素与窗口宽度无关。
-      // v4.3.545: 移动端恢复 1:1 适配容器（_mapScale=1，画布=容器内容宽）——环不超屏、无横向滚动（手机友好）。
+      // v4.3.543: 桌面画布基准固定（820）——环宽恒定（viewBox 内容密度基线，显示层 v4.3.546 容器适配）。
+      // v4.3.545: 移动端画布=容器内容宽（1:1 密度基线，无横向滚动）。
       var _cw6;
       if (_isMobileView()) {
         var _mcw6 = ((typeof document !== "undefined" && document.querySelector("#trainsMapContainer")) || {}).clientWidth || 360;
@@ -855,8 +855,8 @@
     } else {
       // Standard linear line: widen the canvas so left (names) and right (icons) both get used
       var isMobileView = _isMobileView();
-      // v4.3.543: 桌面画布基准固定（820）——svgW 恒定，×_mapScale 部署像素与窗口宽度无关（"拓展后实际尺寸"）。
-      // v4.3.545: 移动端恢复 1:1 适配容器（_mapScale=1，画布=容器内容宽）——图不超屏、无横向滚动（手机友好）。
+      // v4.3.543: 桌面画布基准固定（820）——svgW 恒定（viewBox 内容密度基线，显示层 v4.3.546 容器适配）。
+      // v4.3.545: 移动端画布=容器内容宽（1:1 密度基线，无横向滚动）。
       var _baseW;
       if (isMobileView) {
         var _mcw = ((typeof document !== "undefined" && document.querySelector("#trainsMapContainer")) || {}).clientWidth || 360;
@@ -1511,13 +1511,11 @@
       svg.setAttribute("xmlns", svgNS);
       svg.setAttribute("viewBox", "0 0 " + svgW + " " + svgH);
       svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
-      // v4.3.541: 按拓展后实际尺寸部署——渲染像素 = viewBox 逻辑尺寸 × _mapScale，
-      // 不再以容器宽度为放大基数（容器只作裁切视口，横向滚动 + 居中裁切）。
-      // v4.3.544: 桌面放大比例 200%→170%（用户"减小30%"）。
-      // v4.3.545: 移动端 _mapScale=1（1:1 适配容器，不放大、无横滑）——放大仅桌面。
-      var _mapScale = _isMobileView() ? 1 : 1.7; // 桌面累计放大 70%
-      svg.style.width = Math.round(svgW * _mapScale) + "px";
-      svg.style.height = Math.round(svgH * _mapScale) + "px";
+      // v4.3.541-545: 像素 ×倍数部署（拓展后尺寸）——图超出容器需横向滚动，体验差。
+      // v4.3.546: 显示层改容器适配——svg width=100%，viewBox 按比例缩放完整显示，
+      // 整图可见、无横向滚动；viewBox 逻辑尺寸（_baseW/_cw6）仍决定内容密度基线。
+      svg.style.width = "100%";
+      svg.style.height = "auto";
       svg.setAttribute("data-line-id", lineId);
       svg.setAttribute("data-lang", _lang);
       // Branch geometry for train placement (branch trains render on branch column)
