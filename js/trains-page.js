@@ -518,6 +518,20 @@
     // 多支线全部朝左直排（junction 站名朝右避让，见 renderTrainMap），无下移拐弯；单支线保持右侧弯折（现状）。
     var _bSide = function(_i6b) { return (branchLines.length >= 2) ? "left" : "right"; };
     var _bCol = function(_i6b) { return _i6b; }; // 同侧列序号 = 支线序号
+    // v4.3.522: 短支线线（每条支线非 junction 站 ≤ 4）→ 支线水平直线横排
+    // （用户："要么两条直线在左边或者右边别再有拐弯"）。含长支线的线（如成田我孫子 9 站）
+    // 保持竖列（现状）——横排只用于鹤见线这类短支线，避免长支线横排把画布撑爆。
+    var _branchH = false;
+    if (branchLines.length > 0) {
+      _branchH = true;
+      for (var _bhi = 0; _bhi < branchLines.length; _bhi++) {
+        var _bhSt = branchLines[_bhi].stations || [];
+        if (!_bhSt.length) continue;
+        var _bhJ = _branchJunctionStation(_bhSt, stations);
+        var _bhN = _bhJ ? (_bhSt.length - 1) : _bhSt.length;
+        if (_bhN > 4) { _branchH = false; break; }
+      }
+    }
     var _rightCols = (branchLines.length >= 2) ? 0 : (branchLines.length === 1 ? 1 : 0);
     var _leftCols = (branchLines.length >= 2) ? branchLines.length : 0;
     var _branchStubL = 0, _branchMaxNameW = function(_sd6) {
@@ -550,6 +564,9 @@
     var _leftNeed = _leftCols > 0 ? (_branchStubL + (_leftCols - 1) * _branchColW + 10 + _branchMaxNameW("left") + 2) : 0;
     var _rightNeed = _rightCols > 0 ? (GEOM.BRANCH_STUB + 10 + _branchMaxNameW("right") + 2) : 0;
     var branchOffset = branchLines.length > 0 ? GEOM.BRANCH_COL_W * branchLines.length : 0;
+    // v4.3.522: 横排站距 = 全支线最宽站名文本宽 + 12（"支线宽度取决于文本最多的那个"——
+    // 横排时相邻站名不重叠所需的最小站距）
+    var _branchHSp = _branchH ? (_branchMaxNameW("left") + 12) : 0;
     // Branch name label sits 26px above the junction station (industry-standard
     // branch annotation). Reserve headroom when the junction is the first station.
     if (branchLines.length > 0) {
@@ -855,7 +872,17 @@
             : "";
           _jMaxW6 = Math.max(_jMaxW6, (_jn6 || "").length * 16 * 1.1);
         }
-        mainCx = Math.max(_baseW / 2, _leftNeed + 20);
+        // v4.3.522: 横排时左需求 = 最长支线横排长 + 最宽站名 + 余量（竖列时走 _leftNeed）
+        var _leftNeedH = 0;
+        if (_branchH) {
+          for (var _lh = 0; _lh < branchLines.length; _lh++) {
+            var _lhSt = branchLines[_lh].stations || [];
+            var _lhJ = _branchJunctionStation(_lhSt, stations);
+            var _lhN = _lhJ ? (_lhSt.length - 1) : _lhSt.length;
+            _leftNeedH = Math.max(_leftNeedH, _lhN * _branchHSp + 12 + _branchMaxNameW("left") + 2);
+          }
+        }
+        mainCx = Math.max(_baseW / 2, (_branchH ? _leftNeedH : _leftNeed) + 20);
         svgW = Math.max(_baseW, mainCx + 12 + _jMaxW6 + _rightPad);
       } else {
         // 单支线/无支线：主线中心固定（现状）
@@ -962,8 +989,22 @@
         // v4.3.520: junction 在支线站表末位（我孫子支线）→ 反转站序从 junction 向下延伸
         var _gStations = (_jfG.at === _br.stations.length - 1) ? _br.stations.slice().reverse() : _br.stations;
         var _bcoords = [];
-        for (var _bsi = 0; _bsi < _gStations.length; _bsi++) {
-          _bcoords.push({ stationId: _gStations[_bsi], x: _bx, y: _by + _bsi * _bsp });
+        if (_branchH) {
+          // v4.3.522: 短支线水平直线横排——跳过 junction 站（主干已画），从 junction
+          // 向侧边水平排开（站距 = 全支线最宽名 + 12）；列车定位坐标同步横排
+          var _bHx0 = stationCoords[_jIdx].x, _bHy0 = stationCoords[_jIdx].y, _bHi = 0;
+          for (var _bsiH = 0; _bsiH < _gStations.length; _bsiH++) {
+            if (_gStations[_bsiH] === _jfG.station) continue;
+            var _bHx = (_bSide(bgi) === "left")
+              ? (_bHx0 - (_bHi + 1) * _branchHSp)
+              : (_bHx0 + (_bHi + 1) * _branchHSp);
+            _bcoords.push({ stationId: _gStations[_bsiH], x: _bHx, y: _bHy0 });
+            _bHi++;
+          }
+        } else {
+          for (var _bsi = 0; _bsi < _gStations.length; _bsi++) {
+            _bcoords.push({ stationId: _gStations[_bsi], x: _bx, y: _by + _bsi * _bsp });
+          }
         }
         branchGeom[_br.id] = _bcoords;
       }
@@ -988,6 +1029,8 @@
       bCol: _bCol, // v4.3.515: 支线列序号（跨函数）
       branchStubL: _branchStubL, // v4.3.515: 左侧支线 stub（主干最宽站名+22，跨函数）
       branchColW: _branchColW, // v4.3.516: 左侧列距动态化（跨函数）
+      branchH: _branchH, // v4.3.522: 短支线线 → 支线水平直线横排（跨函数）
+      branchHSp: _branchHSp, // v4.3.522: 横排站距（跨函数）
       branchGeom: branchGeom,
       routeElements: routeElements,
       junctionStation: isSixShapedLoop ? stations[0] : null,
@@ -1548,28 +1591,80 @@
           var _bColNow = (geometry.bCol) ? geometry.bCol(bi) : 0;
           var _stubL6 = geometry.branchStubL || 0;
           var _colW6 = geometry.branchColW || GEOM.BRANCH_COL_W;
-          var bx = (_bSideNow === "left")
-            ? (stationCoords[junctionIdx].x - _stubL6 - _bColNow * _colW6)
-            : (stationCoords[junctionIdx].x + GEOM.BRANCH_STUB + _bColNow * GEOM.BRANCH_COL_W);
-          var by = stationCoords[junctionIdx].y;
-          var branchTop = by - 20;
-          // v4.3.516: junction 行水平直 stub（不拐弯）；左侧穿 junction 站名带问题由
-          // junction 站名朝右解决（_isBranchJunction，见主干站渲染）
-          var _connY = by;
-          
-          // Branch line（junction 行水平直 stub）
-          var branchLine = document.createElementNS(svgNS, "line");
-          branchLine.setAttribute("x1", stationCoords[junctionIdx].x);
-          branchLine.setAttribute("y1", _connY);
-          branchLine.setAttribute("x2", bx);
-          branchLine.setAttribute("y2", _connY);
-          branchLine.setAttribute("stroke", bColor);
-          branchLine.setAttribute("stroke-width", "3");
-          branchLine.setAttribute("opacity", "0.5");
-          staticLayer.appendChild(branchLine);
-          
-          // Branch vertical line
-          var branchSp = geometry.sp || 24;
+          if (geometry.branchH) {
+            // v4.3.522: 短支线线 → 支线水平直线横排（用户："两条直线别再有拐弯"）：
+            // junction 圆点直接一条水平直线延伸到最后一站（无 stub、无竖列、无拐弯）；
+            // 支线站横排（跳过 junction 站，主干已画），站名朝侧边、与圆点同行。
+            var _bHSt = [];
+            var _rStationsH = (_jAt === branch.stations.length - 1) ? branch.stations.slice().reverse() : branch.stations;
+            for (var bhi2 = 0; bhi2 < _rStationsH.length; bhi2++) {
+              if (_rStationsH[bhi2] === _jFind7.station) continue;
+              _bHSt.push(_rStationsH[bhi2]);
+            }
+            var _bHsp = geometry.branchHSp || 65;
+            var _bHX0 = stationCoords[junctionIdx].x;
+            var _bHY0 = stationCoords[junctionIdx].y;
+            var _bHxLast = (_bSideNow === "left")
+              ? (_bHX0 - _bHSt.length * _bHsp)
+              : (_bHX0 + _bHSt.length * _bHsp);
+            // 水平直线：junction → 最后一站
+            var bHLine = document.createElementNS(svgNS, "line");
+            bHLine.setAttribute("x1", _bHX0); bHLine.setAttribute("y1", _bHY0);
+            bHLine.setAttribute("x2", _bHxLast); bHLine.setAttribute("y2", _bHY0);
+            bHLine.setAttribute("stroke", bColor);
+            bHLine.setAttribute("stroke-width", "3");
+            bHLine.setAttribute("opacity", "0.5");
+            staticLayer.appendChild(bHLine);
+            // 支线站横排
+            for (var bsiH = 0; bsiH < _bHSt.length; bsiH++) {
+              var _bHx = (_bSideNow === "left")
+                ? (_bHX0 - (bsiH + 1) * _bHsp)
+                : (_bHX0 + (bsiH + 1) * _bHsp);
+              var _bTxH = (_bSideNow === "left") ? (_bHx - 10) : (_bHx + 10);
+              _renderStationNode(staticLayer, svgNS, {
+                x: _bHx, y: _bHY0, stationId: _bHSt[bsiH], isJunction: false, color: bColor,
+                si: bsiH, side: _bSideNow, geometry: geometry, isMobileView: isMobileView,
+                svgW: svgW, svgH: svgH, transferMap: transferMap, stationCoords: stationCoords,
+                rS: _rS,
+                tx: _bTxH, ty: _bHY0, anchor: (_bSideNow === "left") ? "end" : "start",
+                skipTx: false
+              });
+            }
+            // 支线名：放远端上方（朝侧边，不挡 junction 区）
+            var bHName = document.createElementNS(svgNS, "text");
+            bHName.setAttribute("x", (_bSideNow === "left") ? (_bHxLast - 6) : (_bHxLast + 6));
+            bHName.setAttribute("y", _bHY0 - 24);
+            bHName.setAttribute("font-size", "14");
+            bHName.setAttribute("fill", bColor);
+            bHName.setAttribute("font-family", "Fusion Pixel, 'Courier New', monospace");
+            bHName.setAttribute("font-weight", "600");
+            bHName.setAttribute("text-anchor", (_bSideNow === "left") ? "end" : "start");
+            bHName.textContent = (window.RailwayDB && typeof window.RailwayDB.resolveLineName === "function") ? window.RailwayDB.resolveLineName(branch.id, window.currentLang) : (branch.nameJa || branch.name);
+            staticLayer.appendChild(bHName);
+          } else {
+            // ---- 竖列（现状：水平直 stub + 垂直列）----
+            var bx = (_bSideNow === "left")
+              ? (stationCoords[junctionIdx].x - _stubL6 - _bColNow * _colW6)
+              : (stationCoords[junctionIdx].x + GEOM.BRANCH_STUB + _bColNow * GEOM.BRANCH_COL_W);
+            var by = stationCoords[junctionIdx].y;
+            var branchTop = by - 20;
+            // v4.3.516: junction 行水平直 stub（不拐弯）；左侧穿 junction 站名带问题由
+            // junction 站名朝右解决（_isBranchJunction，见主干站渲染）
+            var _connY = by;
+            
+            // Branch line（junction 行水平直 stub）
+            var branchLine = document.createElementNS(svgNS, "line");
+            branchLine.setAttribute("x1", stationCoords[junctionIdx].x);
+            branchLine.setAttribute("y1", _connY);
+            branchLine.setAttribute("x2", bx);
+            branchLine.setAttribute("y2", _connY);
+            branchLine.setAttribute("stroke", bColor);
+            branchLine.setAttribute("stroke-width", "3");
+            branchLine.setAttribute("opacity", "0.5");
+            staticLayer.appendChild(branchLine);
+            
+            // Branch vertical line
+            var branchSp = geometry.sp || 24;
           var branchVLine = document.createElementNS(svgNS, "line");
           branchVLine.setAttribute("x1", bx);
           branchVLine.setAttribute("y1", _connY);
@@ -1612,6 +1707,7 @@
           var branchDisplayName = (window.RailwayDB && typeof window.RailwayDB.resolveLineName === "function") ? window.RailwayDB.resolveLineName(branch.id, window.currentLang) : (branch.nameJa || branch.name);
           branchName.textContent = branchDisplayName;
           staticLayer.appendChild(branchName);
+          } // v4.3.522: else（竖列现状）闭合
         }
       }
       
