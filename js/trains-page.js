@@ -577,8 +577,11 @@
     // v4.3.516: 左侧列距动态化——列 1 竖线不穿列 0 名带（列 0 名带右缘=bx0-10，列 1 竖线=bx0-列距，需 gap ≥ 4）
     var _branchColW = _leftCols > 0 ? Math.max(GEOM.BRANCH_COL_W, _branchMaxNameW("left") + 14) : GEOM.BRANCH_COL_W;
     // v4.3.522: 横排站距 = 全支线最宽站名文本宽 + 12（"支线宽度取决于文本最多的那个"——
-    // 横排时相邻站名不重叠所需的最小站距）。v4.3.550: 须在 _rightNeed 之前定义（var 提升陷阱）
-    var _branchHSp = (_branchH || _hasVCol) ? (Math.max(_branchMaxNameW("left"), _branchMaxNameW("right")) + 12) : 0;
+    // 横排时相邻站名不重叠所需的最小站距）。v4.3.550: 须在 _rightNeed 之前定义（var 提升陷阱）。
+    // v4.3.551: "所有插线叉出去那一部分也要算站间距"——横排站距 = 最宽名 + 标准站间距(sp)：
+    // 竖列支线站距本就 = sp（算站间距），横排此前只 +12 文本 padding 未算站间距；改为 +sp 后
+    // 横排站名间空隙 = sp，与主干/竖列的站间距视觉统一。
+    var _branchHSp = (_branchH || _hasVCol) ? (Math.max(_branchMaxNameW("left"), _branchMaxNameW("right")) + sp) : 0;
     var _leftNeed = _leftCols > 0 ? (_branchStubL + (_leftCols - 1) * _branchColW + 10 + _branchMaxNameW("left") + 2) : 0;
     var _rightNeed = 0;
     if (_rightCols > 0) {
@@ -1053,6 +1056,26 @@
           }
         }
         branchGeom[_br.id] = _bcoords;
+      }
+    }
+
+    // v4.3.551: "所有插线叉出去那一部分也要算站间距"——竖列支线底部计入 svgH：
+    // svgH 原只按主干 stationCoords 站间距计算（junction 靠上 + 长竖列支线时支线底部会被
+    // viewBox 裁剪）；现取全部支线坐标最大 y，超过主干底时扩展画布（横排与 junction 同行
+    // 不影响高度，竖列每站已按 sp 站间距排布，底部 = 站数 × sp）。
+    if (branchGeom) {
+      var _maxBrY = 0;
+      for (var _bgKey in branchGeom) {
+        if (Object.prototype.hasOwnProperty.call(branchGeom, _bgKey)) {
+          var _bgArr = branchGeom[_bgKey];
+          if (_bgArr && _bgArr.length) {
+            var _bgLast = _bgArr[_bgArr.length - 1];
+            if (_bgLast && _bgLast.y > _maxBrY) _maxBrY = _bgLast.y;
+          }
+        }
+      }
+      if (_maxBrY > 0) {
+        svgH = Math.max(svgH, _maxBrY + sp + botP);
       }
     }
 

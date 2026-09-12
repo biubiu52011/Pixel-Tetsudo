@@ -912,3 +912,11 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 **修改**（js/trains-page.js）：_branchModes/_hasVCol/_bSide/_bCol 重构（分支判定区）、_rightNeed/_branchHSp/svgW（几何需求区）、branchGeom（_branchModes 判断）、geometry 透传（branchModes/rightBranch）、_renderStationNode（paintOrder 支持 + chip _jTopMode）、renderTrainMap（主干 junction top + 横排分支改 branchModes）。
 **验证**：node --check OK；本地 DOM——成田線 viewBox 852×1026（原 820，修复 NaN——_rightNeed 引 _branchHSp 在定义前，var 提升 undefined×2=NaN）、我孫子竖列左 x=317.6（9 站）、空港横排右 x=527.6/645.2（2 站，y=142 与圆点同行）、成田站名 y=126 居中描边、chip rect y=155 圆点下方、坏坐标 0；鶴見線全横排左（海芝浦 345.2/280.4:266、大川 345.2:328）不回归；千代田单支線右（430）不回归。
 **版本**：bump trains-page.js ?v=4.3.549→4.3.550（数据未动不 bump db-loader）；LINE-DIAGRAM-SPEC 修订表 4.3.550 行。
+
+## 4.3.551（2026-09-12，插线叉出去部分也算站间距·横排站距=名宽+sp）
+**用户指示**："所有插线叉出去那一部分也要算站间距"——横排支线（插线叉出去的部分）此前站距 = 全支线最宽名+12（4.3.522，仅文本 padding），未算站间距；竖列支线站距本就 = sp（已算）。
+**规则**（写规则非逐例）：**横排支线站距 = 全支线最宽名 + 标准站间距(sp)**——横排站名间隙 = sp，与主干/竖列站间距视觉统一（成田空港 117.6→167.6 = 105.6+62；鹤见 64.8→114.8 = 52.8+62）。
+**配套 svgH 完备化**：svgH 原只按主干 stationCoords 站间距计算——junction 靠上 + 长竖列支线时支线底部会被 viewBox 裁剪；branchGeom 构建后取全部支线坐标最大 y，超过主干底时 svgH = max(原 svgH, 支线底 + sp + botP)（横排与 junction 同行不影响高度）。
+**修改**（js/trains-page.js）：_branchHSp 定义行 +12 → +sp（注释更新）；branchGeom 块后新增 svgH 扩展。
+**验证**：node --check OK；本地 DOM——成田空港 x=587.6/755.2（站距 167.6）、viewBox 952×1026（svgW 852→952）、成田站名 y=126、我孫子竖列 307.6:204→700（站距 62 无回归）；鹤见 viewBox 820×654 不变、横排站距 114.8（站名间隙 62）；千代田 820×1344 无回归。
+**版本**：bump trains-page.js ?v=4.3.550→4.3.551（数据未动不 bump db-loader）；LINE-DIAGRAM-SPEC 修订表 4.3.551 行。
