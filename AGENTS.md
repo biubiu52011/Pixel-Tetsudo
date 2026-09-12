@@ -1162,3 +1162,11 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 **配图**（沿用 4.3.579 硬流程：Commons API 带 UA+8-15s 间隔+下载后 Read 双验证 OCR+主体，禁只看尺寸）：20 张全部从 Wikimedia Commons 下载并 Read 验证。弃却 8 张（増上寺ラーメン屋台/ミッドタウン RENAISSANCE ビル・KONAMI ビル・六本木街景/日比谷野台ステージ/代々木入口 KEIO BUS/光が丘萩ケ丘公園 OCR 直证/豪徳寺本堂のみ）——按"宁缺毋滥"换关键词重搜（Sangedatsumon/増上寺三解脱門/Midtown Garden/Fountain in Hibiya/Yoyogi Park Tokyo/Zojoji）。最终采用：増上寺=三解脱門+東京タワー panoramio（OCR「増上寺前」直证）、東京ミッドタウン=Midtown Garden 噴水+タワー群、日比谷公園=Fountain in Hibiya Park-2、代々木公園=池+噴水+芝生、光が丘公園=Yurinoki hiroba、豪徳寺=招き猫奉納所（納奉幕+白猫群像）。
 **处理**：20 張转存 images/観光地/（spot 名=去（）去空格；谷中銀座商店街.jpg）；157 spots image 字段全回填、**no-image spots=0**、文件完整性 157/157；bundle 再生成（tourism-data.file.js 269KB）；4 頁 bump 4.3.582。
 **验证**：bundle 20 新 image 路径 20/20；spots 157 无图 0、文件缺失 0；git ls-remote=10fb55e（4.3.581，无并发）。
+
+
+## 4.3.583（2026-09-13，特色小店拓展·参考 findmy.tokyo 13 个）
+**用户指示**："拓展一些特色小店比如参考一下 https://findmy.tokyo/"——findmy.tokyo 是東京メトロ 的"发现东京"项目（各駅周辺の特色店を challenge 形式で紹介）。单店 Commons 图覆盖低，按同精神选**特色商店街/名街区 + 代表性老铺**（Commons 有图、识别性强），23 区内 13 个。
+**数据**：tourism_data.json 157→170 spots（DUP 检查通过）。新增：かっぱ橋道具街（台東）/神保町古書店街（千代田）/アメヤ横丁（台東）/巣鴨地蔵通り商店街（豊島）/戸越銀座商店街（品川）/砂町銀座商店街（江東）/高円寺純情商店街（杉並）/十条銀座商店街（北）/自由が丘（目黒）/神楽坂（新宿）/代官山蔦屋書店（渋谷）/銀座木村家本店（中央）/神田まつや（千代田）。全 spot 四語 i18n 完备。※柴又帝釈天・下北沢 は既存 spot と重複のため除外。
+**配图**（沿用硬流程：Commons API 带 UA+8s 间隔+下载后 Read 双验证 OCR+主体，禁只看尺寸）：13 张全部 Read 验证。弃却 6 张（神保町ひまわり館=区役所出張所ビル/神保町駅構内ゲート、巣鴨=駅構内改札、高円寺=駅前交差点（みずほ+マクド）主体なし、神田まつや=蕎麦丼の料理写真）——再検索 4 处（Jinbocho bookstores/Sugamo jizodori/Koenji jyunjyo/Matsuya soba shop）后全数采用。最终图：かっぱ橋=新井食器+料理人像（OCR「かっぱ橋道具街」直证）/神保町=古書店並ぶ通り（蔵文閣・明倫館・大屋書店 OCR）/アメヤ横丁=アーチ入口（AMEYAYOKOCHO OCR）/巣鴨=地蔵通りアーチ（「商」紋）/戸越=アーチ（「としこぎんざ」）/砂町=アーチ入口（砂町銀座+時計）/高円寺=純情商店街緑黄アーチ/十条=アーチ（JUJO GINZA）/自由が丘=商店街+熊野神社看板/神楽坂=通りの看板/代官山=T-SITE ガラス建築（ファイル名直证）/木村家=夜の店舗（GINZA KIMURAYA OCR）/まつや=木造2階建て店舗（手打そば暖簾 OCR）。
+**处理**：13 張转存 images/観光地/；170 spots image 字段全回填、**no-image spots=0**、文件完整性 170/170；bundle 再生成（tourism-data.file.js 295KB）；4 頁 bump 4.3.583。
+**验证**：bundle 13 新 image 路径 13/13；spots 170 无图 0、文件缺失 0；git ls-remote=85396b3（4.3.582，无并发）。

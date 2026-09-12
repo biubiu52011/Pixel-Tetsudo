@@ -10971,6 +10971,960 @@ window.RAILWAY_TOURISM = {
         }
       ],
       "image": "../images/観光地/目黒雅叙園.jpg"
+    },
+    {
+      "name": "かっぱ橋道具街",
+      "coord": [
+        35.7104,
+        139.7894
+      ],
+      "dist": "銀座線田原町駅 徒歩5分 / つくばエクスプレス浅草駅 徒歩7分",
+      "desc": "料理道具のプロ向け問屋街。食品サンプル専門店や包丁・鍋・漆器など約170店が集まる。浅草観光のついでに寄れる買い物スポット。",
+      "tags": [
+        "all",
+        "shopping",
+        "food",
+        "history"
+      ],
+      "bestTime": "昼",
+      "hours": "店舗により異なる（多くは 9:00-17:00）",
+      "fee": "無料（買物は実費）",
+      "tips": [
+        "食品サンプルを買える専門店あり",
+        "合羽橋本通りは日曜日が歩行者天国",
+        "浅草寺から徒歩10分"
+      ],
+      "name_i18n": {
+        "ja": "かっぱ橋道具街",
+        "zh": "合羽桥道具街",
+        "en": "Kappabashi Kitchenware Town",
+        "ko": "갓파바시 주방용품 거리"
+      },
+      "desc_i18n": {
+        "ja": "料理道具のプロ向け問屋街。食品サンプルや包丁・漆器など約170店が集まる。",
+        "zh": "面向专业人士的厨具批发街，食品样品、菜刀、漆器等约170家店铺聚集。",
+        "en": "A wholesale street for kitchenware, with about 170 shops selling food samples, knives and lacquerware.",
+        "ko": "프로용 주방용품 도매 거리. 식품 샘플과 칼·칠기 등 약 170개 점포가 모여 있다."
+      },
+      "hours_i18n": {
+        "ja": "店舗により異なる（多くは 9:00-17:00）",
+        "zh": "因店铺而异（多为9:00-17:00）",
+        "en": "Varies by shop (mostly 9:00-17:00)",
+        "ko": "점포마다 상이（대부분 9:00-17:00）"
+      },
+      "fee_i18n": {
+        "ja": "無料（買物は実費）",
+        "zh": "免费（购物自费）",
+        "en": "Free (shopping at own cost)",
+        "ko": "무료（쇼핑은 실비）"
+      },
+      "bestTime_i18n": {
+        "ja": "昼",
+        "zh": "白天",
+        "en": "Daytime",
+        "ko": "낮"
+      },
+      "tips_i18n": [
+        {
+          "ja": "食品サンプルを買える専門店あり",
+          "zh": "有可购买食品样品的专门店",
+          "en": "Specialty shops sell food samples",
+          "ko": "식품 샘플을 살 수 있는 전문점 있음"
+        },
+        {
+          "ja": "合羽橋本通りは日曜日が歩行者天国",
+          "zh": "合羽桥本通周日为步行者天堂",
+          "en": "Kappabashi-dori is pedestrian-only on Sundays",
+          "ko": "갓파바시 본도리는 일요일 보행자 천국"
+        },
+        {
+          "ja": "浅草寺から徒歩10分",
+          "zh": "距浅草寺步行10分钟",
+          "en": "10 min walk from Senso-ji",
+          "ko": "센소지에서 도보 10분"
+        }
+      ],
+      "image": "../images/観光地/かっぱ橋道具街.jpg"
+    },
+    {
+      "name": "神保町古書店街",
+      "coord": [
+        35.6959,
+        139.7577
+      ],
+      "dist": "都営三田線・新宿線神保町駅 徒歩1分 / 半蔵門線神保町駅 徒歩3分",
+      "desc": "世界最大級の古書店街。約170店の古書店に加え、名物カレー店や老舗喫茶も集まる「本とカレーの街」。",
+      "tags": [
+        "all",
+        "shopping",
+        "history",
+        "food"
+      ],
+      "bestTime": "昼〜夕方",
+      "hours": "店舗により異なる（多くは 10:00-19:00）",
+      "fee": "無料（買物・飲食は実費）",
+      "tips": [
+        "夏の神田古本まつりが有名",
+        "名物カレー店（ボンディ・キッチン南海など）",
+        "三省堂書店本店も見どころ"
+      ],
+      "name_i18n": {
+        "ja": "神保町古書店街",
+        "zh": "神保町古书街",
+        "en": "Jinbocho Used-Book District",
+        "ko": "진보초 헌책방 거리"
+      },
+      "desc_i18n": {
+        "ja": "世界最大級の古書店街。古書店と名物カレー店が集まる「本とカレーの街」。",
+        "zh": "世界最大规模的古书街，古书店与名物咖喱店云集的「书与咖喱之街」。",
+        "en": "One of the world largest used-book districts - a town of books and famous curry shops.",
+        "ko": "세계 최대급 헌책방 거리. 헌책방과 명물 카레집이 모인 「책과 카레의 거리」."
+      },
+      "hours_i18n": {
+        "ja": "店舗により異なる（多くは 10:00-19:00）",
+        "zh": "因店铺而异（多为10:00-19:00）",
+        "en": "Varies by shop (mostly 10:00-19:00)",
+        "ko": "점포마다 상이（대부분 10:00-19:00）"
+      },
+      "fee_i18n": {
+        "ja": "無料（買物・飲食は実費）",
+        "zh": "免费（购物饮食自费）",
+        "en": "Free (shopping/food at own cost)",
+        "ko": "무료（쇼핑·식사는 실비）"
+      },
+      "bestTime_i18n": {
+        "ja": "昼〜夕方",
+        "zh": "白天至傍晚",
+        "en": "Daytime to evening",
+        "ko": "낮~저녁"
+      },
+      "tips_i18n": [
+        {
+          "ja": "夏の神田古本まつりが有名",
+          "zh": "夏季神田旧书节很有名",
+          "en": "Famous Kanda used-book fair in summer",
+          "ko": "여름 간다 헌책 축제가 유명"
+        },
+        {
+          "ja": "名物カレー店（ボンディ・キッチン南海など）",
+          "zh": "名物咖喱店（Bondy、Kitchen Nankai等）",
+          "en": "Famous curry shops (Bondy, Kitchen Nankai...)",
+          "ko": "명물 카레집（본디·키친 난카이 등）"
+        },
+        {
+          "ja": "三省堂書店本店も見どころ",
+          "zh": "三省堂书店总店也是看点",
+          "en": "Sanseido Bookstore main store is a must-see",
+          "ko": "산세이도 서점 본점도 볼거리"
+        }
+      ],
+      "image": "../images/観光地/神保町古書店街.jpg"
+    },
+    {
+      "name": "アメヤ横丁",
+      "coord": [
+        35.7083,
+        139.7749
+      ],
+      "dist": "JR御徒町駅 徒歩1分 / 上野駅 徒歩3分",
+      "desc": "上野・御徒町間の高架下に広がる活気ある市場通り。菓子・乾物・衣料・雑貨など約400店が軒を連ねる。",
+      "tags": [
+        "all",
+        "shopping",
+        "food"
+      ],
+      "bestTime": "昼〜夜",
+      "hours": "店舗により異なる（多くは 10:00-20:00）",
+      "fee": "無料（買物・飲食は実費）",
+      "tips": [
+        "大晦日の買い出し風景が有名",
+        "ドライフルーツとナッツの量り売り",
+        "上野駅・御徒町駅からすぐ"
+      ],
+      "name_i18n": {
+        "ja": "アメヤ横丁",
+        "zh": "阿美横丁",
+        "en": "Ameya-Yokocho (Ameyoko)",
+        "ko": "아메요코（아메야 요코초）"
+      },
+      "desc_i18n": {
+        "ja": "上野・御徒町間の高架下に広がる活気ある市場通り。約400店が軒を連ねる。",
+        "zh": "上野与御徒町之间高架桥下的活力市场街，约400家店铺林立。",
+        "en": "A lively market street under the elevated tracks between Ueno and Okachimachi, with about 400 shops.",
+        "ko": "우에노·오카치마치 사이 고가 아래 펼쳐진 활기찬 시장 거리. 약 400개 점포."
+      },
+      "hours_i18n": {
+        "ja": "店舗により異なる（多くは 10:00-20:00）",
+        "zh": "因店铺而异（多为10:00-20:00）",
+        "en": "Varies by shop (mostly 10:00-20:00)",
+        "ko": "점포마다 상이（대부분 10:00-20:00）"
+      },
+      "fee_i18n": {
+        "ja": "無料（買物・飲食は実費）",
+        "zh": "免费（购物饮食自费）",
+        "en": "Free (shopping/food at own cost)",
+        "ko": "무료（쇼핑·식사는 실비）"
+      },
+      "bestTime_i18n": {
+        "ja": "昼〜夜",
+        "zh": "白天至夜晚",
+        "en": "Daytime to night",
+        "ko": "낮~밤"
+      },
+      "tips_i18n": [
+        {
+          "ja": "大晦日の買い出し風景が有名",
+          "zh": "大晦日采购场景很有名",
+          "en": "Famous New Year Eve shopping crowds",
+          "ko": "섣달그믐 장보기 풍경이 유명"
+        },
+        {
+          "ja": "ドライフルーツとナッツの量り売り",
+          "zh": "干果与坚果按量称重售卖",
+          "en": "Dried fruits and nuts sold by weight",
+          "ko": "건과일과 견과류 계량 판매"
+        },
+        {
+          "ja": "上野駅・御徒町駅からすぐ",
+          "zh": "距上野站・御徒町站很近",
+          "en": "Right next to Ueno and Okachimachi stations",
+          "ko": "우에노·오카치마치 역에서 가까움"
+        }
+      ],
+      "image": "../images/観光地/アメヤ横丁.jpg"
+    },
+    {
+      "name": "巣鴨地蔵通り商店街",
+      "coord": [
+        35.7332,
+        139.7393
+      ],
+      "dist": "JR山手線巣鴨駅 徒歩1分 / 都営三田線巣鴨駅 徒歩3分",
+      "desc": "「おばあちゃんの原宿」と呼ばれる巣鴨のメイン商店街。とげぬき地蔵尊への参道に約180店が並ぶ。",
+      "tags": [
+        "all",
+        "shopping",
+        "history"
+      ],
+      "bestTime": "昼",
+      "hours": "店舗により異なる（多くは 10:00-18:00）",
+      "fee": "無料（買物・飲食は実費）",
+      "tips": [
+        "とげぬき地蔵尊（高岩寺）へ参拝",
+        "名物の赤パンツと塩大福",
+        "4のつく日は縁日"
+      ],
+      "name_i18n": {
+        "ja": "巣鴨地蔵通り商店街",
+        "zh": "巢鸭地藏通商店街",
+        "en": "Sugamo Jizo-dori Shopping Street",
+        "ko": "스가모 지조도리 상점가"
+      },
+      "desc_i18n": {
+        "ja": "「おばあちゃんの原宿」と呼ばれる巣鴨のメイン商店街。とげぬき地蔵尊の参道に約180店。",
+        "zh": "被称为「奶奶的原宿」的巢鸭主商店街，通往拔刺地藏尊的参道上约180家店。",
+        "en": "Sugamo main street nicknamed \"Harajuku for grannies\", with about 180 shops along the path to Togenuki Jizo.",
+        "ko": "「할머니의 하라주쿠」라 불리는 스가모의 메인 상점가. 지조존 참배길에 약 180개 점포."
+      },
+      "hours_i18n": {
+        "ja": "店舗により異なる（多くは 10:00-18:00）",
+        "zh": "因店铺而异（多为10:00-18:00）",
+        "en": "Varies by shop (mostly 10:00-18:00)",
+        "ko": "점포마다 상이（대부분 10:00-18:00）"
+      },
+      "fee_i18n": {
+        "ja": "無料（買物・飲食は実費）",
+        "zh": "免费（购物饮食自费）",
+        "en": "Free (shopping/food at own cost)",
+        "ko": "무료（쇼핑·식사는 실비）"
+      },
+      "bestTime_i18n": {
+        "ja": "昼",
+        "zh": "白天",
+        "en": "Daytime",
+        "ko": "낮"
+      },
+      "tips_i18n": [
+        {
+          "ja": "とげぬき地蔵尊（高岩寺）へ参拝",
+          "zh": "参拜拔刺地藏尊（高岩寺）",
+          "en": "Visit Togenuki Jizo (Kogan-ji)",
+          "ko": "토게누키 지조존（고간지） 참배"
+        },
+        {
+          "ja": "名物の赤パンツと塩大福",
+          "zh": "名物红内裤与盐大福",
+          "en": "Famous red underwear and shio-daifuku",
+          "ko": "명물 빨간 팬티와 소금 다이후쿠"
+        },
+        {
+          "ja": "4のつく日は縁日",
+          "zh": "带4的日子是庙会日",
+          "en": "Festival days on dates with 4",
+          "ko": "4가 들어가는 날은 엔니치"
+        }
+      ],
+      "image": "../images/観光地/巣鴨地蔵通り商店街.jpg"
+    },
+    {
+      "name": "戸越銀座商店街",
+      "coord": [
+        35.6164,
+        139.7173
+      ],
+      "dist": "都営浅草線戸越銀座駅 徒歩1分",
+      "desc": "東京一の長さ約1.3kmを誇る商店街。約400店が連なり、食べ歩きグルメが人気の下町商店街。",
+      "tags": [
+        "all",
+        "shopping",
+        "food"
+      ],
+      "bestTime": "昼〜夕方",
+      "hours": "店舗により異なる（多くは 10:00-19:00）",
+      "fee": "無料（買物・飲食は実費）",
+      "tips": [
+        "名物コロッケを食べ歩き",
+        "まぐろの目玉焼きで有名な老舗も",
+        "都営浅草線戸越銀座駅からすぐ"
+      ],
+      "name_i18n": {
+        "ja": "戸越銀座商店街",
+        "zh": "户越银座商店街",
+        "en": "Togoshi Ginza Shopping Street",
+        "ko": "토고시 긴자 상점가"
+      },
+      "desc_i18n": {
+        "ja": "東京一の長さ約1.3kmの商店街。約400店が連なり食べ歩きグルメが人気。",
+        "zh": "全长约1.3km、东京最长的商店街，约400家店铺相连，边走边吃的美食很受欢迎。",
+        "en": "Tokyo longest shopping street (about 1.3 km) with about 400 shops, popular for street food.",
+        "ko": "도쿄에서 가장 긴 약 1.3km 상점가. 약 400개 점포, 먹거리 산책이 인기."
+      },
+      "hours_i18n": {
+        "ja": "店舗により異なる（多くは 10:00-19:00）",
+        "zh": "因店铺而异（多为10:00-19:00）",
+        "en": "Varies by shop (mostly 10:00-19:00)",
+        "ko": "점포마다 상이（대부분 10:00-19:00）"
+      },
+      "fee_i18n": {
+        "ja": "無料（買物・飲食は実費）",
+        "zh": "免费（购物饮食自费）",
+        "en": "Free (shopping/food at own cost)",
+        "ko": "무료（쇼핑·식사는 실비）"
+      },
+      "bestTime_i18n": {
+        "ja": "昼〜夕方",
+        "zh": "白天至傍晚",
+        "en": "Daytime to evening",
+        "ko": "낮~저녁"
+      },
+      "tips_i18n": [
+        {
+          "ja": "名物コロッケを食べ歩き",
+          "zh": "边走边吃名物炸肉饼",
+          "en": "Try the famous croquettes",
+          "ko": "명물 크로켓 먹으며 산책"
+        },
+        {
+          "ja": "まぐろの目玉焼きで有名な老舗も",
+          "zh": "有以金枪鱼目玉烧闻名的老店",
+          "en": "Old shop famous for tuna \"medamayaki\"",
+          "ko": "참치 눈알구이로 유명한 노포도 있음"
+        },
+        {
+          "ja": "都営浅草線戸越銀座駅からすぐ",
+          "zh": "距都营浅草线户越银座站很近",
+          "en": "Right next to Togoshi-Ginza station",
+          "ko": "도에이 아사쿠사선 토고시긴자 역 바로 앞"
+        }
+      ],
+      "image": "../images/観光地/戸越銀座商店街.jpg"
+    },
+    {
+      "name": "砂町銀座商店街",
+      "coord": [
+        35.6805,
+        139.8175
+      ],
+      "dist": "都営新宿線西大島駅 徒歩8分 / 東西線南砂町駅 徒歩10分",
+      "desc": "「人情の街」として知られる下町商店街。約140店が軒を連ね、安くて旨い惣菜・おでんが自慢。",
+      "tags": [
+        "all",
+        "shopping",
+        "food"
+      ],
+      "bestTime": "昼〜夕方",
+      "hours": "店舗により異なる（多くは 10:00-19:00）",
+      "fee": "無料（買物・飲食は実費）",
+      "tips": [
+        "名物おでんの老舗「いっ葉」",
+        "夕方の惣菜買い出しが楽しい",
+        "都心に残る下町人情"
+      ],
+      "name_i18n": {
+        "ja": "砂町銀座商店街",
+        "zh": "砂町银座商店街",
+        "en": "Sunamachi Ginza Shopping Street",
+        "ko": "스나마치 긴자 상점가"
+      },
+      "desc_i18n": {
+        "ja": "「人情の街」として知られる下町商店街。約140店が軒を連ね、惣菜・おでんが自慢。",
+        "zh": "以「人情之街」闻名的下町商店街，约140家店铺，熟食与关东煮是一绝。",
+        "en": "A friendly downtown shopping street with about 140 shops, famous for affordable deli food and oden.",
+        "ko": "「인정의 거리」로 알려진 하정 상점가. 약 140개 점포, 반찬·오뎅이 자랑."
+      },
+      "hours_i18n": {
+        "ja": "店舗により異なる（多くは 10:00-19:00）",
+        "zh": "因店铺而异（多为10:00-19:00）",
+        "en": "Varies by shop (mostly 10:00-19:00)",
+        "ko": "점포마다 상이（대부분 10:00-19:00）"
+      },
+      "fee_i18n": {
+        "ja": "無料（買物・飲食は実費）",
+        "zh": "免费（购物饮食自费）",
+        "en": "Free (shopping/food at own cost)",
+        "ko": "무료（쇼핑·식사는 실비）"
+      },
+      "bestTime_i18n": {
+        "ja": "昼〜夕方",
+        "zh": "白天至傍晚",
+        "en": "Daytime to evening",
+        "ko": "낮~저녁"
+      },
+      "tips_i18n": [
+        {
+          "ja": "名物おでんの老舗「いっ葉」",
+          "zh": "名物关东煮老店「一叶」",
+          "en": "Famous oden shop \"Ippa\"",
+          "ko": "명물 오뎅 노포 「잇파」"
+        },
+        {
+          "ja": "夕方の惣菜買い出しが楽しい",
+          "zh": "傍晚买熟食很有乐趣",
+          "en": "Evening deli shopping is fun",
+          "ko": "저녁 반찬 장보기가 즐거움"
+        },
+        {
+          "ja": "都心に残る下町人情",
+          "zh": "市中心留存的下町人情",
+          "en": "Downtown warmth still alive in the city",
+          "ko": "도심에 남은 하정 인정"
+        }
+      ],
+      "image": "../images/観光地/砂町銀座商店街.jpg"
+    },
+    {
+      "name": "高円寺純情商店街",
+      "coord": [
+        35.7048,
+        139.6495
+      ],
+      "dist": "JR中央線高円寺駅 徒歩1分",
+      "desc": "「純情商店街」の名で親しまれる高円寺駅北口の商店街。古着店・ライブハウス・個性派カフェが集まる。",
+      "tags": [
+        "all",
+        "shopping",
+        "food"
+      ],
+      "bestTime": "昼〜夜",
+      "hours": "店舗により異なる（多くは 10:00-21:00）",
+      "fee": "無料（買物・飲食は実費）",
+      "tips": [
+        "8月の高円寺阿波おどりが圧巻",
+        "古着・サブカル発信地",
+        "気まぐれな営業の店が多い"
+      ],
+      "name_i18n": {
+        "ja": "高円寺純情商店街",
+        "zh": "高圆寺纯情商店街",
+        "en": "Koenji Junjo Shopping Street",
+        "ko": "고엔지 준죠 상점가"
+      },
+      "desc_i18n": {
+        "ja": "「純情商店街」の名で親しまれる高円寺駅北口の商店街。古着・ライブハウス・個性派カフェが集まる。",
+        "zh": "以「纯情商店街」之名闻名的高圆寺站北口商店街，古着店、livehouse、个性咖啡馆云集。",
+        "en": "Koenji north-exit shopping street, home to vintage shops, live houses and quirky cafes.",
+        "ko": "「준죠 상점가」로 친숙한 고엔지 역 북쪽 출구 상점가. 빈티지샵·라이브하우스·개성파 카페."
+      },
+      "hours_i18n": {
+        "ja": "店舗により異なる（多くは 10:00-21:00）",
+        "zh": "因店铺而异（多为10:00-21:00）",
+        "en": "Varies by shop (mostly 10:00-21:00)",
+        "ko": "점포마다 상이（대부분 10:00-21:00）"
+      },
+      "fee_i18n": {
+        "ja": "無料（買物・飲食は実費）",
+        "zh": "免费（购物饮食自费）",
+        "en": "Free (shopping/food at own cost)",
+        "ko": "무료（쇼핑·식사는 실비）"
+      },
+      "bestTime_i18n": {
+        "ja": "昼〜夜",
+        "zh": "白天至夜晚",
+        "en": "Daytime to night",
+        "ko": "낮~밤"
+      },
+      "tips_i18n": [
+        {
+          "ja": "8月の高円寺阿波おどりが圧巻",
+          "zh": "8月的高圆寺阿波舞盛况空前",
+          "en": "Spectacular Koenji Awa Odori in August",
+          "ko": "8월 고엔지 아와오도리가 압권"
+        },
+        {
+          "ja": "古着・サブカル発信地",
+          "zh": "古着与亚文化发源地",
+          "en": "A hub of vintage fashion and subculture",
+          "ko": "빈티지·서브컬처 발신지"
+        },
+        {
+          "ja": "気まぐれな営業の店が多い",
+          "zh": "随性营业的店铺很多",
+          "en": "Many shops keep irregular hours",
+          "ko": "기분대로 영업하는 점포가 많음"
+        }
+      ],
+      "image": "../images/観光地/高円寺純情商店街.jpg"
+    },
+    {
+      "name": "十条銀座商店街",
+      "coord": [
+        35.7612,
+        139.7222
+      ],
+      "dist": "JR埼京線十条駅 徒歩1分",
+      "desc": "アーケードの下に精肉店・鮮魚店・惣菜店など約180店が並ぶ活気ある下町商店街。",
+      "tags": [
+        "all",
+        "shopping",
+        "food"
+      ],
+      "bestTime": "昼〜夕方",
+      "hours": "店舗により異なる（多くは 9:00-19:00）",
+      "fee": "無料（買物・飲食は実費）",
+      "tips": [
+        "十条名物「とんこつラーメン」発祥の地",
+        "アーケード商店街で雨の日も安心",
+        "都内屈指の物価の安さ"
+      ],
+      "name_i18n": {
+        "ja": "十条銀座商店街",
+        "zh": "十条银座商店街",
+        "en": "Jujo Ginza Shopping Street",
+        "ko": "주조 긴자 상점가"
+      },
+      "desc_i18n": {
+        "ja": "アーケードの下に約180店が並ぶ活気ある下町商店街。十条名物のとんこつラーメン発祥の地。",
+        "zh": "拱廊下有约180家店铺的活力下町商店街，是十条名物豚骨拉面的发源地。",
+        "en": "A lively covered shopping street with about 180 shops - birthplace of Jujo famous tonkotsu ramen.",
+        "ko": "아케이드 아래 약 180개 점포가 늘어선 활기찬 하정 상점가. 돈코츠라멘 발상지."
+      },
+      "hours_i18n": {
+        "ja": "店舗により異なる（多くは 9:00-19:00）",
+        "zh": "因店铺而异（多为9:00-19:00）",
+        "en": "Varies by shop (mostly 9:00-19:00)",
+        "ko": "점포마다 상이（대부분 9:00-19:00）"
+      },
+      "fee_i18n": {
+        "ja": "無料（買物・飲食は実費）",
+        "zh": "免费（购物饮食自费）",
+        "en": "Free (shopping/food at own cost)",
+        "ko": "무료（쇼핑·식사는 실비）"
+      },
+      "bestTime_i18n": {
+        "ja": "昼〜夕方",
+        "zh": "白天至傍晚",
+        "en": "Daytime to evening",
+        "ko": "낮~저녁"
+      },
+      "tips_i18n": [
+        {
+          "ja": "十条名物「とんこつラーメン」発祥の地",
+          "zh": "十条名物豚骨拉面发源地",
+          "en": "Birthplace of Jujo tonkotsu ramen",
+          "ko": "주조 명물 돈코츠라멘 발상지"
+        },
+        {
+          "ja": "アーケード商店街で雨の日も安心",
+          "zh": "拱廊商店街雨天也安心",
+          "en": "Covered arcade, fine even in rain",
+          "ko": "아케이드라 비 오는 날도 안심"
+        },
+        {
+          "ja": "都内屈指の物価の安さ",
+          "zh": "都内屈指可数的物价便宜",
+          "en": "Among the cheapest prices in Tokyo",
+          "ko": "도내 손꼽히는 저렴한 물가"
+        }
+      ],
+      "image": "../images/観光地/十条銀座商店街.jpg"
+    },
+    {
+      "name": "自由が丘",
+      "coord": [
+        35.6071,
+        139.6689
+      ],
+      "dist": "東急東横線・大井町線自由が丘駅 徒歩1分",
+      "desc": "おしゃれな雑貨店・スイーツ店・セレクトショップが集まる大人の街。スイーツ激戦区として名高い。",
+      "tags": [
+        "all",
+        "shopping",
+        "food",
+        "modern"
+      ],
+      "bestTime": "昼〜夜",
+      "hours": "店舗により異なる（多くは 10:00-20:00）",
+      "fee": "無料（買物・飲食は実費）",
+      "tips": [
+        "スイーツフォレストで食べ歩き",
+        "路地裏に個性派ショップが点在",
+        "駅前の「熊野神社」も穴場"
+      ],
+      "name_i18n": {
+        "ja": "自由が丘",
+        "zh": "自由之丘",
+        "en": "Jiyugaoka",
+        "ko": "지유가오카"
+      },
+      "desc_i18n": {
+        "ja": "おしゃれな雑貨店・スイーツ店・セレクトショップが集まる大人の街。",
+        "zh": "时尚杂货店、甜品店、精选店云集的成熟街区。",
+        "en": "A stylish town of select shops, sweets and lifestyle stores.",
+        "ko": "세련된 잡화점·디저트 가게·셀렉트숍이 모인 어른의 거리."
+      },
+      "hours_i18n": {
+        "ja": "店舗により異なる（多くは 10:00-20:00）",
+        "zh": "因店铺而异（多为10:00-20:00）",
+        "en": "Varies by shop (mostly 10:00-20:00)",
+        "ko": "점포마다 상이（대부분 10:00-20:00）"
+      },
+      "fee_i18n": {
+        "ja": "無料（買物・飲食は実費）",
+        "zh": "免费（购物饮食自费）",
+        "en": "Free (shopping/food at own cost)",
+        "ko": "무료（쇼핑·식사는 실비）"
+      },
+      "bestTime_i18n": {
+        "ja": "昼〜夜",
+        "zh": "白天至夜晚",
+        "en": "Daytime to night",
+        "ko": "낮~밤"
+      },
+      "tips_i18n": [
+        {
+          "ja": "スイーツフォレストで食べ歩き",
+          "zh": "在甜点森林边走边吃",
+          "en": "Food crawl at Sweets Forest",
+          "ko": "스위츠 포레스트에서 먹거리 산책"
+        },
+        {
+          "ja": "路地裏に個性派ショップが点在",
+          "zh": "小巷中散布个性店铺",
+          "en": "Unique shops hidden in the backstreets",
+          "ko": "골목마다 개성파 숍이 산재"
+        },
+        {
+          "ja": "駅前の「熊野神社」も穴場",
+          "zh": "站前的「熊野神社」也是小众景点",
+          "en": "Kumano Shrine by the station is a hidden gem",
+          "ko": "역 앞 구마노 신사도 숨은 명소"
+        }
+      ],
+      "image": "../images/観光地/自由が丘.jpg"
+    },
+    {
+      "name": "神楽坂",
+      "coord": [
+        35.7015,
+        139.741
+      ],
+      "dist": "東西線神楽坂駅 徒歩1分 / JR飯田橋駅 徒歩8分",
+      "desc": "花街の面影を残す石畳の路地と料亭・老舗が並ぶ大人の街。「東京の小パリ」とも呼ばれる。",
+      "tags": [
+        "all",
+        "shopping",
+        "history",
+        "food"
+      ],
+      "bestTime": "昼〜夜",
+      "hours": "店舗により異なる（多くは 11:00-21:00）",
+      "fee": "無料（買物・飲食は実費）",
+      "tips": [
+        "石畳の路地（兵庫横丁・かくれんぼ横丁）",
+        "毘沙門天（善国寺）へ参拝",
+        "夜の大人の散策がおすすめ"
+      ],
+      "name_i18n": {
+        "ja": "神楽坂",
+        "zh": "神乐坂",
+        "en": "Kagurazaka",
+        "ko": "카구라자카"
+      },
+      "desc_i18n": {
+        "ja": "花街の面影を残す石畳の路地と料亭・老舗が並ぶ大人の街。",
+        "zh": "保留花街风貌的石板路小巷与料亭、老店林立的成熟街区。",
+        "en": "An elegant town of stone-paved alleys, ryotei and long-established shops, once a geisha district.",
+        "ko": "하나마치의 면모를 남긴 돌길 골목과 료테이·노포가 늘어선 어른의 거리."
+      },
+      "hours_i18n": {
+        "ja": "店舗により異なる（多くは 11:00-21:00）",
+        "zh": "因店铺而异（多为11:00-21:00）",
+        "en": "Varies by shop (mostly 11:00-21:00)",
+        "ko": "점포마다 상이（대부분 11:00-21:00）"
+      },
+      "fee_i18n": {
+        "ja": "無料（買物・飲食は実費）",
+        "zh": "免费（购物饮食自费）",
+        "en": "Free (shopping/food at own cost)",
+        "ko": "무료（쇼핑·식사는 실비）"
+      },
+      "bestTime_i18n": {
+        "ja": "昼〜夜",
+        "zh": "白天至夜晚",
+        "en": "Daytime to night",
+        "ko": "낮~밤"
+      },
+      "tips_i18n": [
+        {
+          "ja": "石畳の路地（兵庫横丁・かくれんぼ横丁）",
+          "zh": "石板小巷（兵库横丁、捉迷藏横丁）",
+          "en": "Stone-paved alleys (Hyogo Yokocho, Kakurenbo Yokocho)",
+          "ko": "돌길 골목（효고 요코초·카쿠렌보 요코초）"
+        },
+        {
+          "ja": "毘沙門天（善国寺）へ参拝",
+          "zh": "参拜毗沙门天（善国寺）",
+          "en": "Visit Bishamonten (Zenkokuji)",
+          "ko": "비샤몬텐（젠코쿠지） 참배"
+        },
+        {
+          "ja": "夜の大人の散策がおすすめ",
+          "zh": "推荐夜晚的成熟漫步",
+          "en": "Evening strolls are recommended",
+          "ko": "밤의 어른 산책 추천"
+        }
+      ],
+      "image": "../images/観光地/神楽坂.jpg"
+    },
+    {
+      "name": "代官山蔦屋書店",
+      "coord": [
+        35.6484,
+        139.7009
+      ],
+      "dist": "東急東横線代官山駅 徒歩5分",
+      "desc": "「T-SITE」の核となるコンセプト書店。3棟の白いガラス建築に本・雑貨・カフェが融合する文化発信地。",
+      "tags": [
+        "all",
+        "shopping",
+        "modern"
+      ],
+      "bestTime": "7:00-26:00",
+      "hours": "7:00-26:00",
+      "fee": "入館無料（買物・飲食は実費）",
+      "tips": [
+        "世界で最も美しい書店20選に選出",
+        "犬連れOKのグリーンエリア",
+        "夜遅くまで営業"
+      ],
+      "name_i18n": {
+        "ja": "代官山蔦屋書店",
+        "zh": "代官山茑屋书店",
+        "en": "Daikanyama Tsutaya Books",
+        "ko": "다이칸야마 츠타야 서점"
+      },
+      "desc_i18n": {
+        "ja": "T-SITEの核となるコンセプト書店。白いガラス建築に本・雑貨・カフェが融合する。",
+        "zh": "T-SITE 核心概念书店，白色玻璃建筑融合书籍、杂货与咖啡。",
+        "en": "The concept bookstore at the heart of T-SITE, blending books, lifestyle goods and a cafe in white glass buildings.",
+        "ko": "T-SITE의 핵심 콘셉트 서점. 하얀 유리 건축에 책·잡화·카페가 융합."
+      },
+      "hours_i18n": {
+        "ja": "7:00-26:00",
+        "zh": "7:00-次日2:00",
+        "en": "7:00-26:00 (2 am)",
+        "ko": "7:00-26:00（다음날 2시）"
+      },
+      "fee_i18n": {
+        "ja": "入館無料（買物・飲食は実費）",
+        "zh": "入馆免费（购物饮食自费）",
+        "en": "Free entry (shopping/food at own cost)",
+        "ko": "입장 무료（쇼핑·식사는 실비）"
+      },
+      "bestTime_i18n": {
+        "ja": "朝〜夜",
+        "zh": "早晨至夜晚",
+        "en": "Morning to night",
+        "ko": "아침~밤"
+      },
+      "tips_i18n": [
+        {
+          "ja": "世界で最も美しい書店20選に選出",
+          "zh": "入选世界最美书店20选",
+          "en": "Selected among the world most beautiful bookstores",
+          "ko": "세계에서 가장 아름다운 서점 20선 선정"
+        },
+        {
+          "ja": "犬連れOKのグリーンエリア",
+          "zh": "可带狗的绿地空间",
+          "en": "Dog-friendly green area",
+          "ko": "반려견 동반 가능한 그린 에어리어"
+        },
+        {
+          "ja": "夜遅くまで営業",
+          "zh": "营业至深夜",
+          "en": "Open until late night",
+          "ko": "늦은 밤까지 영업"
+        }
+      ],
+      "image": "../images/観光地/代官山蔦屋書店.jpg"
+    },
+    {
+      "name": "銀座木村家本店",
+      "coord": [
+        35.6724,
+        139.7654
+      ],
+      "dist": "銀座線・日比谷線・丸ノ内線銀座駅 徒歩1分",
+      "desc": "1869年創業、あんぱん発祥の店。銀座4丁目交差点に建つ老舗で、酒種あんぱんは今も変わらぬ味。",
+      "tags": [
+        "all",
+        "shopping",
+        "food",
+        "history"
+      ],
+      "bestTime": "朝〜夕方",
+      "hours": "10:00-19:00（喫茶室 10:00-17:00）",
+      "fee": "買物・飲食は実費",
+      "tips": [
+        "あんぱん発祥の店（1869年創業）",
+        "名物の酒種あんぱん",
+        "2階の喫茶室でモーニングも"
+      ],
+      "name_i18n": {
+        "ja": "銀座木村家本店",
+        "zh": "银座木村家总店",
+        "en": "Ginza Kimuraya Main Store",
+        "ko": "긴자 키무라야 본점"
+      },
+      "desc_i18n": {
+        "ja": "1869年創業、あんぱん発祥の店。銀座4丁目交差点に建つ老舗。",
+        "zh": "1869年创业、红豆面包发源的老店，位于银座四丁目路口。",
+        "en": "Founded 1869, birthplace of anpan, standing at the Ginza 4-chome crossing.",
+        "ko": "1869년 창업, 앙팡 발상지의 노포. 긴자 4초메 교차로에 위치."
+      },
+      "hours_i18n": {
+        "ja": "10:00-19:00（喫茶室 10:00-17:00）",
+        "zh": "10:00-19:00（茶室10:00-17:00）",
+        "en": "10:00-19:00 (tea room 10:00-17:00)",
+        "ko": "10:00-19:00（다방 10:00-17:00）"
+      },
+      "fee_i18n": {
+        "ja": "買物・飲食は実費",
+        "zh": "购物饮食自费",
+        "en": "Shopping/food at own cost",
+        "ko": "쇼핑·식사는 실비"
+      },
+      "bestTime_i18n": {
+        "ja": "朝〜夕方",
+        "zh": "早晨至傍晚",
+        "en": "Morning to evening",
+        "ko": "아침~저녁"
+      },
+      "tips_i18n": [
+        {
+          "ja": "あんぱん発祥の店（1869年創業）",
+          "zh": "红豆面包发源店（1869年创业）",
+          "en": "Birthplace of anpan (est. 1869)",
+          "ko": "앙팡 발상지（1869년 창업）"
+        },
+        {
+          "ja": "名物の酒種あんぱん",
+          "zh": "名物酒种红豆面包",
+          "en": "Famous sakadane anpan",
+          "ko": "명물 사카다네 앙팡"
+        },
+        {
+          "ja": "2階の喫茶室でモーニングも",
+          "zh": "2楼茶室也有早餐",
+          "en": "Morning sets at the 2F tea room",
+          "ko": "2층 다방에서 모닝도 가능"
+        }
+      ],
+      "image": "../images/観光地/銀座木村家本店.jpg"
+    },
+    {
+      "name": "神田まつや",
+      "coord": [
+        35.6958,
+        139.7693
+      ],
+      "dist": "JR神田駅 徒歩5分 / 銀座線神田駅 徒歩5分",
+      "desc": "1884年創業の老舗そば店。江戸前そばの伝統を守る「せいろ」と昭和の佇まいの木造2階建てが名物。",
+      "tags": [
+        "all",
+        "food",
+        "history"
+      ],
+      "bestTime": "昼",
+      "hours": "11:00-20:00（土日祝は -19:00）",
+      "fee": "飲食は実費",
+      "tips": [
+        "創業1884年の老舗",
+        "せいろと天ぷらの名店",
+        "昼時は行列必至"
+      ],
+      "name_i18n": {
+        "ja": "神田まつや",
+        "zh": "神田松屋",
+        "en": "Kanda Matsuya",
+        "ko": "간다 마츠야"
+      },
+      "desc_i18n": {
+        "ja": "1884年創業の老舗そば店。江戸前そばの伝統を守るせいろと木造2階建ての佇まい。",
+        "zh": "1884年创业的老字号荞麦面店，守护江户前荞麦传统，木造二层小楼充满昭和风情。",
+        "en": "Soba shop founded in 1884, preserving Edo-style soba tradition in a Showa-era wooden building.",
+        "ko": "1884년 창업의 노포 소바 가게. 에도마에 소바 전통과 목조 2층 건물."
+      },
+      "hours_i18n": {
+        "ja": "11:00-20:00（土日祝は -19:00）",
+        "zh": "11:00-20:00（周末节假日-19:00）",
+        "en": "11:00-20:00 (until 19:00 on weekends/holidays)",
+        "ko": "11:00-20:00（주말·공휴일은 -19:00）"
+      },
+      "fee_i18n": {
+        "ja": "飲食は実費",
+        "zh": "餐饮自费",
+        "en": "Food at own cost",
+        "ko": "식사는 실비"
+      },
+      "bestTime_i18n": {
+        "ja": "昼",
+        "zh": "白天",
+        "en": "Daytime",
+        "ko": "낮"
+      },
+      "tips_i18n": [
+        {
+          "ja": "創業1884年の老舗",
+          "zh": "1884年创业的老店",
+          "en": "Founded in 1884",
+          "ko": "1884년 창업 노포"
+        },
+        {
+          "ja": "せいろと天ぷらの名店",
+          "zh": "蒸笼荞麦与天妇罗名店",
+          "en": "Famous for seiro soba and tempura",
+          "ko": "세이로 소바와 덴푸라 명점"
+        },
+        {
+          "ja": "昼時は行列必至",
+          "zh": "午餐时段必排队",
+          "en": "Expect a queue at lunch",
+          "ko": "점심때는 줄서기 필수"
+        }
+      ],
+      "image": "../images/観光地/神田まつや.jpg"
     }
   ],
   "station_exits": {
