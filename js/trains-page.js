@@ -1050,9 +1050,11 @@
             _bHi++;
           }
         } else {
-          // v4.3.548: 竖列跳过 junction 站（主干已绘）——共享站不重复绘制，
-          // 支线独有站从 junction 下方一档开始（与横排 _bHi+1 同规则）
-          var _bK = 1;
+          // v4.3.553: 竖列跳过 junction 站（主干已绘）——支线独有站**第一站与 junction 同行**：
+          // 用户："岔路的第一个站和出去的站在一行"——岔路第一站水平叉出、与岔路点（junction）
+          // 同一水平行，再竖列向下（原 _bK=1 从 junction 下方一档开始，第一站落到主干下一站行，
+          // 岔路起点视觉下沉一档）；横排支线第一站本就与 junction 同行（y=by），规则统一。
+          var _bK = 0;
           for (var _bsi = 0; _bsi < _gStations.length; _bsi++) {
             if (_gStations[_bsi] === _jfG.station) continue;
             _bcoords.push({ stationId: _gStations[_bsi], x: _bx, y: _by + _bK * _bsp });
@@ -1776,8 +1778,10 @@
             var _bAnchor = (_bSideNow === "left") ? "end" : "start";
             // v4.3.520: junction 在支线站表末位（我孫子支线）→ 反转站序从 junction 向下延伸
             // v4.3.548: 竖列跳过 junction 站（主干已绘）——支线只画独有站，junction 不重复
+            // v4.3.553: 第一站与 junction 同行（用户："岔路的第一个站和出去的站在一行"）——
+            // 岔路第一站水平叉出与岔路点同行，再竖列向下（原 _bK2=1 起于 junction 下方一档）
             var _rStations = (_jAt === branch.stations.length - 1) ? branch.stations.slice().reverse() : branch.stations;
-            var _bK2 = 1;
+            var _bK2 = 0;
             for (var bsi = 0; bsi < _rStations.length; bsi++) {
               if (_rStations[bsi] === _jFind7.station) continue;
               var bsy = by + _bK2 * branchSp;

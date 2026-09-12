@@ -935,3 +935,10 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 **修改**（js/trains-page.js 7 处）：_branchStubR 定义（_branchStubL 后）；_rightNeed 单支线（598）、svgW 单支线（934）、branchGeom 右侧竖列 x（1030）三处 GEOM.BRANCH_STUB→_branchStubR；geometry 增传 branchStubR（1100）；renderTrainMap 顶部 _stubR6=geometry.branchStubR||BRANCH_STUB（1682）、右侧竖列 x（1737）GEOM.BRANCH_STUB→_stubR6。
 **验证**：node --check OK；本地 DOM 四线——南武線 竖线 410/468（stub 58）+支线站名 478、svgW 820 不变；丸ノ内 方南町 竖线 410/468+478；成田 我孫子 307.6/空港 587.6+755.2/成田 410 middle 全不变（双支线右横排不用右侧 stub）；鶴見 海芝浦 170.4/大川 285.2/浅野 422 全不变（全横排左）。
 **版本**：bump trains-page.js ?v=4.3.552→4.3.553（数据未动不 bump db-loader）；LINE-DIAGRAM-SPEC 修订表 4.3.553 行。
+
+## 4.3.554（2026-09-12，竖列支线第一站与 junction 同行）
+**用户指示**："我是想要岔路的第一个站和出去的站在一行"——竖列支线此前独有站从 junction 下方一档开始（_bK/_bK2=1，4.3.548 规则"与横排 _bHi+1 同规则"），第一站落到主干下一站行，岔路起点视觉下沉一档；用户要岔路第一站水平叉出、与岔路点（junction）同一水平行。
+**规则**（写规则非逐例）：**竖列支线跳过 junction 后，第一站与 junction 同行**（水平叉出），再竖列向下——横排支线第一站本就与 junction 同行（y=by），竖列规则与横排统一："岔路的第一站和出去的站在一行"= junction 行即岔路点行。
+**修改**（js/trains-page.js 2 处）：branchGeom 竖列 `_bK` 1→0（约 1053-1059，注释同步）；renderTrainMap 竖列 `_bK2` 1→0（约 1778-1796，注释同步）。
+**验证**：node --check OK；本地 DOM 四线同行——南武線 八丁畷 y=76 与尻手 y=76 同行（viewBox 820×1542）；成田 下総松崎 y=142 与成田同行（viewBox 952×1026 不变）；千代田 北綾瀬 y=1178 与綾瀬同行（viewBox 820×1344→1282 缩短一档）；丸ノ内 西新宿五丁目 y=308 与中野坂上同行、方南町第二站 y=366（viewBox 820×1520）。
+**版本**：bump trains-page.js ?v=4.3.553→4.3.554（**4.3.553 已被 stub 修复 commit 0b6b165 占用并 push，同行修复必须 bump 新版本号，否则浏览器缓存命中旧 stub 版 JS**；数据未动不 bump db-loader）；LINE-DIAGRAM-SPEC 修订表 4.3.554 行。
