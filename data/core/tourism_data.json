@@ -7170,6 +7170,2310 @@
           "大師前역에서 도보 3분"
         ]
       }
+    },
+    {
+      "name": "皇居（皇居外苑・二重橋）",
+      "coord": [
+        35.681,
+        139.7521
+      ],
+      "dist": "5 min walk",
+      "desc": "天皇陛下のお住まい。広大な皇居外苑と二重橋は散策・写真スポットとして人気。",
+      "tags": [
+        "all",
+        "landmark",
+        "nature"
+      ],
+      "bestTime": "早朝・夕方（散策）",
+      "hours": "外苑は常時開放",
+      "fee": "無料",
+      "tips": [
+        "二重橋は早朝が空いている",
+        "皇居東御苑もおすすめ",
+        "ランニングコースが人気"
+      ],
+      "name_i18n": {
+        "ja": "皇居（皇居外苑・二重橋）",
+        "zh": "皇居（皇居外苑・二重桥）",
+        "en": "Imperial Palace (Outer Garden & Nijubashi)",
+        "ko": "황거（황거외원・니주바시）"
+      },
+      "desc_i18n": {
+        "ja": "天皇陛下のお住まい。広大な皇居外苑と二重橋は散策・写真スポットとして人気。",
+        "zh": "天皇的住所。广阔的皇居外苑和二重桥是散步、拍照的热门地点。",
+        "en": "The Emperor's residence. The vast Outer Garden and Nijubashi Bridge are popular for strolling and photos.",
+        "ko": "천황의 거처예요. 드넓은 황거외원과 니주바시는 산책과 사진 명소로 인기가 많아요."
+      },
+      "hours_i18n": {
+        "ja": "外苑は常時開放",
+        "zh": "外苑全天开放",
+        "en": "Outer Garden open at all times",
+        "ko": "외원은 상시 개방"
+      },
+      "fee_i18n": {
+        "ja": "無料",
+        "zh": "免费",
+        "en": "Free",
+        "ko": "무료"
+      },
+      "bestTime_i18n": {
+        "ja": "早朝・夕方（散策）",
+        "zh": "清晨・傍晚（散步）",
+        "en": "Early morning / evening (stroll)",
+        "ko": "이른 아침・저녁（산책）"
+      },
+      "tips_i18n": {
+        "ja": [
+          "二重橋は早朝が空いている",
+          "皇居東御苑もおすすめ",
+          "ランニングコースが人気"
+        ],
+        "zh": [
+          "二重桥清晨人少",
+          "推荐顺访皇居东御苑",
+          "跑步路线很受欢迎"
+        ],
+        "en": [
+          "Nijubashi is quietest early morning",
+          "East Gardens also recommended",
+          "Popular running route"
+        ],
+        "ko": [
+          "니주바시는 이른 아침이 한적해요",
+          "황거 동어원도 추천",
+          "러닝 코스로 유명해요"
+        ]
+      }
+    },
+    {
+      "name": "東京駅丸の内駅舎",
+      "coord": [
+        35.6814,
+        139.7671
+      ],
+      "dist": "0 min walk",
+      "desc": "1914年完成の赤レンガ駅舎。復原工事後、駅舎内の見学やライトアップが楽しめる。",
+      "tags": [
+        "all",
+        "landmark",
+        "history"
+      ],
+      "bestTime": "日没後（ライトアップ）",
+      "hours": "駅舎は常時見学可",
+      "fee": "無料",
+      "tips": [
+        "東京駅一番街も散策を",
+        "夜間ライトアップ必見",
+        "丸の内側から全体を望む"
+      ],
+      "name_i18n": {
+        "ja": "東京駅丸の内駅舎",
+        "zh": "东京站丸之内站房",
+        "en": "Tokyo Station Marunouchi Building",
+        "ko": "도쿄역 마루노우치 역사"
+      },
+      "desc_i18n": {
+        "ja": "1914年完成の赤レンガ駅舎。復原工事後、駅舎内の見学やライトアップが楽しめる。",
+        "zh": "1914年建成的红砖站房。复原工程后可参观站房内部并欣赏灯光秀。",
+        "en": "The red-brick station completed in 1914. After restoration, visitors can tour the building and enjoy illuminations.",
+        "ko": "1914년 완성된 붉은 벽돌 역사예요. 복원 공사 후 역사 내부 견학과 라이트업을 즐길 수 있어요."
+      },
+      "hours_i18n": {
+        "ja": "駅舎は常時見学可",
+        "zh": "站房全天可参观",
+        "en": "Station building open at all times",
+        "ko": "역사는 상시 견학 가능"
+      },
+      "fee_i18n": {
+        "ja": "無料",
+        "zh": "免费",
+        "en": "Free",
+        "ko": "무료"
+      },
+      "bestTime_i18n": {
+        "ja": "日没後（ライトアップ）",
+        "zh": "日落后（灯光秀）",
+        "en": "After sunset (illumination)",
+        "ko": "일몰 후（라이트업）"
+      },
+      "tips_i18n": {
+        "ja": [
+          "東京駅一番街も散策を",
+          "夜間ライトアップ必見",
+          "丸の内側から全体を望む"
+        ],
+        "zh": [
+          "顺访东京站一番街",
+          "夜晚灯光秀必看",
+          "从丸之内侧看全景"
+        ],
+        "en": [
+          "Explore Tokyo Station Ichibangai too",
+          "Don't miss the evening illumination",
+          "View the whole facade from Marunouchi side"
+        ],
+        "ko": [
+          "도쿄역 이치방가이도 둘러보기",
+          "밤 라이트업은 필수",
+          "마루노우치 쪽에서 전체 모습을"
+        ]
+      }
+    },
+    {
+      "name": "銀座（銀座四丁目交差点）",
+      "coord": [
+        35.6717,
+        139.7649
+      ],
+      "dist": "0 min walk",
+      "desc": "高級ブランド店や老舗が並ぶ東京を代表する繁華街。週末は歩行者天国に。",
+      "tags": [
+        "all",
+        "landmark",
+        "shopping"
+      ],
+      "bestTime": "土日（歩行者天国）",
+      "hours": "店舗により異なる",
+      "fee": "無料",
+      "tips": [
+        "和光の時計台が目印",
+        "歌舞伎座も近い",
+        "銀ブラ散策を楽しむ"
+      ],
+      "name_i18n": {
+        "ja": "銀座（銀座四丁目交差点）",
+        "zh": "银座（银座四丁目十字路口）",
+        "en": "Ginza (Ginza 4-chome Crossing)",
+        "ko": "긴자（긴자 4초메 교차로）"
+      },
+      "desc_i18n": {
+        "ja": "高級ブランド店や老舗が並ぶ東京を代表する繁華街。週末は歩行者天国に。",
+        "zh": "高级品牌店和老字号林立的东京代表性繁华街区。周末变为步行者天堂。",
+        "en": "Tokyo's premier shopping district with luxury brands and long-established stores. Pedestrian-only on weekends.",
+        "ko": "고급 브랜드와 노포가 늘어선 도쿄를 대표하는 번화가예요. 주말에는 보행자 천국이 돼요."
+      },
+      "hours_i18n": {
+        "ja": "店舗により異なる",
+        "zh": "各店铺营业时间不同",
+        "en": "Varies by store",
+        "ko": "점포별 상이"
+      },
+      "fee_i18n": {
+        "ja": "無料",
+        "zh": "免费",
+        "en": "Free",
+        "ko": "무료"
+      },
+      "bestTime_i18n": {
+        "ja": "土日（歩行者天国）",
+        "zh": "周末（步行者天国）",
+        "en": "Weekends (pedestrian paradise)",
+        "ko": "주말（보행자 천국）"
+      },
+      "tips_i18n": {
+        "ja": [
+          "和光の時計台が目印",
+          "歌舞伎座も近い",
+          "銀ブラ散策を楽しむ"
+        ],
+        "zh": [
+          "以和光钟楼为地标",
+          "歌舞伎座就在附近",
+          "悠闲逛银座"
+        ],
+        "en": [
+          "Wako clock tower is the landmark",
+          "Kabukiza is nearby",
+          "Enjoy a Ginza stroll"
+        ],
+        "ko": [
+          "와코 시계탑이 랜드마크",
+          "가부키좌도 가까워요",
+          "긴자 산책을 즐기기"
+        ]
+      }
+    },
+    {
+      "name": "日本橋",
+      "coord": [
+        35.6841,
+        139.7745
+      ],
+      "dist": "0 min walk",
+      "desc": "江戸時代から続く五街道の起点。美しいアーチ橋と麒麟像が有名。",
+      "tags": [
+        "all",
+        "landmark",
+        "history"
+      ],
+      "bestTime": "日中",
+      "hours": "常時",
+      "fee": "無料",
+      "tips": [
+        "橋の上から麒麟像を眺める",
+        "三越本店も見学",
+        "COREDO日本橋で食事も"
+      ],
+      "name_i18n": {
+        "ja": "日本橋",
+        "zh": "日本桥",
+        "en": "Nihonbashi Bridge",
+        "ko": "니혼바시"
+      },
+      "desc_i18n": {
+        "ja": "江戸時代から続く五街道の起点。美しいアーチ橋と麒麟像が有名。",
+        "zh": "江户时代延续至今的五街道起点。优美的拱桥和麒麟像闻名。",
+        "en": "The starting point of the Five Routes since the Edo period. Famous for its beautiful arch bridge and Qilin statue.",
+        "ko": "에도 시대부터 이어진 오가도의 기점이에요. 아름다운 아치교와 기린상으로 유명해요."
+      },
+      "hours_i18n": {
+        "ja": "常時",
+        "zh": "全天",
+        "en": "Always open",
+        "ko": "상시"
+      },
+      "fee_i18n": {
+        "ja": "無料",
+        "zh": "免费",
+        "en": "Free",
+        "ko": "무료"
+      },
+      "bestTime_i18n": {
+        "ja": "日中",
+        "zh": "白天",
+        "en": "Daytime",
+        "ko": "낮"
+      },
+      "tips_i18n": {
+        "ja": [
+          "橋の上から麒麟像を眺める",
+          "三越本店も見学",
+          "COREDO日本橋で食事も"
+        ],
+        "zh": [
+          "在桥上眺望麒麟像",
+          "顺访三越本店",
+          "可在COREDO日本桥用餐"
+        ],
+        "en": [
+          "View the Qilin statue from the bridge",
+          "Visit Mitsukoshi main store",
+          "Dine at COREDO Nihonbashi"
+        ],
+        "ko": [
+          "다리 위에서 기린상을 감상",
+          "미쓰코시 본점도 견학",
+          "COREDO 니혼바시에서 식사도"
+        ]
+      }
+    },
+    {
+      "name": "東京タワー",
+      "coord": [
+        35.6586,
+        139.7454
+      ],
+      "dist": "10 min walk",
+      "desc": "高さ333mの東京のシンボル。メインデッキからの夜景と、足元の増上寺のコントラストが美しい。",
+      "tags": [
+        "all",
+        "landmark",
+        "modern"
+      ],
+      "bestTime": "夕方～夜（夜景）",
+      "hours": "9:00～23:00（展望台）",
+      "fee": "有料（メインデッキ 大人1,200円～）",
+      "tips": [
+        "夕暮れ時のライトアップが美しい",
+        "増上寺とのコラボ撮影が人気",
+        "混雑は土日夕方がピーク"
+      ],
+      "name_i18n": {
+        "ja": "東京タワー",
+        "zh": "东京塔",
+        "en": "Tokyo Tower",
+        "ko": "도쿄 타워"
+      },
+      "desc_i18n": {
+        "ja": "高さ333mの東京のシンボル。メインデッキからの夜景と、足元の増上寺のコントラストが美しい。",
+        "zh": "高333米的东京象征。从主瞭望台欣赏夜景，与脚下的增上寺形成美丽对比。",
+        "en": "Tokyo's 333m symbol. The night view from Main Deck contrasts beautifully with Zojoji Temple at its base.",
+        "ko": "높이 333m의 도쿄 상징이에요. 메인 전망대의 야경과 발밑 조조지 절의 대비가 아름다워요."
+      },
+      "hours_i18n": {
+        "ja": "9:00～23:00（展望台）",
+        "zh": "9:00～23:00（瞭望台）",
+        "en": "9:00–23:00 (observation deck)",
+        "ko": "9:00~23:00（전망대）"
+      },
+      "fee_i18n": {
+        "ja": "有料（メインデッキ 大人1,200円～）",
+        "zh": "收费（主瞭望台 成人1,200日元起）",
+        "en": "Paid (Main Deck adult from ¥1,200)",
+        "ko": "유료（메인 데크 성인 1,200엔~）"
+      },
+      "bestTime_i18n": {
+        "ja": "夕方～夜（夜景）",
+        "zh": "傍晚～夜晚（夜景）",
+        "en": "Evening to night (night view)",
+        "ko": "저녁~밤（야경）"
+      },
+      "tips_i18n": {
+        "ja": [
+          "夕暮れ時のライトアップが美しい",
+          "増上寺とのコラボ撮影が人気",
+          "混雑は土日夕方がピーク"
+        ],
+        "zh": [
+          "黄昏时的灯光秀很美",
+          "与增上寺同框拍摄很受欢迎",
+          "周末傍晚最拥挤"
+        ],
+        "en": [
+          "Beautiful at dusk with illuminations",
+          "Popular photo spot with Zojoji",
+          "Peak crowds on weekend evenings"
+        ],
+        "ko": [
+          "황혼 때 라이트업이 아름다워요",
+          "조조지와 함께 찍는 사진이 인기",
+          "주말 저녁이 가장 붐벼요"
+        ]
+      }
+    },
+    {
+      "name": "六本木ヒルズ",
+      "coord": [
+        35.6605,
+        139.7292
+      ],
+      "dist": "5 min walk",
+      "desc": "森タワー52階の東京シティビューから都心を一望。美術館やレストランも充実。",
+      "tags": [
+        "all",
+        "landmark",
+        "modern"
+      ],
+      "bestTime": "夕方～夜（夜景）",
+      "hours": "展望台 10:00～22:00",
+      "fee": "有料（東京シティビュー 大人2,000円～）",
+      "tips": [
+        "66プラザの蜘蛛像が人気",
+        "毛利庭園の桜も美しい",
+        "大屋根デッキは屋外夜景"
+      ],
+      "name_i18n": {
+        "ja": "六本木ヒルズ",
+        "zh": "六本木新城",
+        "en": "Roppongi Hills",
+        "ko": "롯폰기 힐즈"
+      },
+      "desc_i18n": {
+        "ja": "森タワー52階の東京シティビューから都心を一望。美術館やレストランも充実。",
+        "zh": "从森大厦52层东京城市观景台俯瞰市中心。美术馆和餐厅也很充实。",
+        "en": "Enjoy panoramic views from Tokyo City View on the 52nd floor of Mori Tower. Museums and restaurants abound.",
+        "ko": "모리 타워 52층 도쿄 시티뷰에서 도심을 한눈에 볼 수 있어요. 미술관과 레스토랑도 풍부해요."
+      },
+      "hours_i18n": {
+        "ja": "展望台 10:00～22:00",
+        "zh": "瞭望台 10:00～22:00",
+        "en": "Observation deck 10:00–22:00",
+        "ko": "전망대 10:00~22:00"
+      },
+      "fee_i18n": {
+        "ja": "有料（東京シティビュー 大人2,000円～）",
+        "zh": "收费（东京城市观景台 成人2,000日元起）",
+        "en": "Paid (Tokyo City View adult from ¥2,000)",
+        "ko": "유료（도쿄 시티뷰 성인 2,000엔~）"
+      },
+      "bestTime_i18n": {
+        "ja": "夕方～夜（夜景）",
+        "zh": "傍晚～夜晚（夜景）",
+        "en": "Evening to night (night view)",
+        "ko": "저녁~밤（야경）"
+      },
+      "tips_i18n": {
+        "ja": [
+          "66プラザの蜘蛛像が人気",
+          "毛利庭園の桜も美しい",
+          "大屋根デッキは屋外夜景"
+        ],
+        "zh": [
+          "66广场的蜘蛛像很受欢迎",
+          "毛利庭园的樱花也很美",
+          "大屋根露天观景台可赏夜景"
+        ],
+        "en": [
+          "Popular spider sculpture at 66 Plaza",
+          "Cherry blossoms at Mori Garden",
+          "Sky Deck offers open-air night views"
+        ],
+        "ko": [
+          "66 플라자의 거미 조형물이 인기",
+          "모리 정원의 벚꽃도 아름다워요",
+          "스카이 데크는 야외 야경"
+        ]
+      }
+    },
+    {
+      "name": "東京都庁展望室",
+      "coord": [
+        35.6896,
+        139.6917
+      ],
+      "dist": "0 min walk",
+      "desc": "無料で楽しめる高さ202mの展望室。富士山が見える日は絶景。",
+      "tags": [
+        "all",
+        "landmark",
+        "modern"
+      ],
+      "bestTime": "晴天の日中",
+      "hours": "9:30～23:00（北展望室）",
+      "fee": "無料",
+      "tips": [
+        "無料で展望が楽しめる",
+        "南・北展望室の両方へ",
+        "お土産コーナーもある"
+      ],
+      "name_i18n": {
+        "ja": "東京都庁展望室",
+        "zh": "东京都厅展望室",
+        "en": "Tokyo Metropolitan Government Building Observatory",
+        "ko": "도쿄도청 전망실"
+      },
+      "desc_i18n": {
+        "ja": "無料で楽しめる高さ202mの展望室。富士山が見える日は絶景。",
+        "zh": "免费的高202米展望室。能看到富士山的日子景色绝佳。",
+        "en": "A free 202m observatory. On clear days you can see Mt. Fuji.",
+        "ko": "무료로 즐기는 높이 202m 전망실이에요. 후지산이 보이는 날은 절경이에요."
+      },
+      "hours_i18n": {
+        "ja": "9:30～23:00（北展望室）",
+        "zh": "9:30～23:00（北展望室）",
+        "en": "9:30–23:00 (North Observatory)",
+        "ko": "9:30~23:00（북쪽 전망실）"
+      },
+      "fee_i18n": {
+        "ja": "無料",
+        "zh": "免费",
+        "en": "Free",
+        "ko": "무료"
+      },
+      "bestTime_i18n": {
+        "ja": "晴天の日中",
+        "zh": "晴天的白天",
+        "en": "Daytime on clear days",
+        "ko": "맑은 날 낮"
+      },
+      "tips_i18n": {
+        "ja": [
+          "無料で展望が楽しめる",
+          "南・北展望室の両方へ",
+          "お土産コーナーもある"
+        ],
+        "zh": [
+          "免费享受展望",
+          "南北两个展望室都去",
+          "也有特产区"
+        ],
+        "en": [
+          "Free observation decks",
+          "Visit both South and North decks",
+          "Souvenir corner available"
+        ],
+        "ko": [
+          "무료로 전망을 즐길 수 있어요",
+          "남쪽・북쪽 전망실 모두 방문",
+          "기념품 코너도 있어요"
+        ]
+      }
+    },
+    {
+      "name": "新宿御苑",
+      "coord": [
+        35.6852,
+        139.71
+      ],
+      "dist": "5 min walk",
+      "desc": "広大な庭園で桜・紅葉が美しい。都会のオアシスとして人気。",
+      "tags": [
+        "all",
+        "nature",
+        "park"
+      ],
+      "bestTime": "春（桜）・秋（紅葉）",
+      "hours": "9:00～17:30",
+      "fee": "有料（大人500円）",
+      "tips": [
+        "春の桜が圧巻",
+        "緑の芝生でピクニック",
+        "母と子の森も散策"
+      ],
+      "name_i18n": {
+        "ja": "新宿御苑",
+        "zh": "新宿御苑",
+        "en": "Shinjuku Gyoen National Garden",
+        "ko": "신주쿠 교엔"
+      },
+      "desc_i18n": {
+        "ja": "広大な庭園で桜・紅葉が美しい。都会のオアシスとして人気。",
+        "zh": "广阔的庭园，樱花、红叶很美。作为都市绿洲很受欢迎。",
+        "en": "A vast garden famous for cherry blossoms and autumn leaves. A popular urban oasis.",
+        "ko": "드넓은 정원으로 벚꽃과 단풍이 아름다워요. 도심의 오아시스로 인기가 많아요."
+      },
+      "hours_i18n": {
+        "ja": "9:00～17:30",
+        "zh": "9:00～17:30",
+        "en": "9:00–17:30",
+        "ko": "9:00~17:30"
+      },
+      "fee_i18n": {
+        "ja": "有料（大人500円）",
+        "zh": "收费（成人500日元）",
+        "en": "Paid (adult ¥500)",
+        "ko": "유료（성인 500엔）"
+      },
+      "bestTime_i18n": {
+        "ja": "春（桜）・秋（紅葉）",
+        "zh": "春（樱花）・秋（红叶）",
+        "en": "Spring (cherry blossoms) & autumn (fall leaves)",
+        "ko": "봄（벚꽃）・가을（단풍）"
+      },
+      "tips_i18n": {
+        "ja": [
+          "春の桜が圧巻",
+          "緑の芝生でピクニック",
+          "母と子の森も散策"
+        ],
+        "zh": [
+          "春天的樱花壮观",
+          "在绿色草坪野餐",
+          "母与子之森也值得散步"
+        ],
+        "en": [
+          "Spectacular cherry blossoms in spring",
+          "Picnic on the lawns",
+          "Stroll through Momo to Ko no Mori"
+        ],
+        "ko": [
+          "봄 벚꽃이 장관",
+          "푸른 잔디에서 피크닉",
+          "하하와 아이의 숲도 산책"
+        ]
+      }
+    },
+    {
+      "name": "渋谷スクランブル交差点",
+      "coord": [
+        35.6595,
+        139.7005
+      ],
+      "dist": "0 min walk",
+      "desc": "1回の信号で3,000人以上が交差する世界有数の交差点。スクランブルスクエアからの眺めが人気。",
+      "tags": [
+        "all",
+        "landmark",
+        "shopping"
+      ],
+      "bestTime": "日中・夜",
+      "hours": "常時（交差点）",
+      "fee": "無料",
+      "tips": [
+        "スクランブルスクエア展望台から",
+        "ハチ公像も見学",
+        "夜のネオンが映える"
+      ],
+      "name_i18n": {
+        "ja": "渋谷スクランブル交差点",
+        "zh": "涩谷十字路口",
+        "en": "Shibuya Scramble Crossing",
+        "ko": "시부야 스크램블 교차로"
+      },
+      "desc_i18n": {
+        "ja": "1回の信号で3,000人以上が交差する世界有数の交差点。スクランブルスクエアからの眺めが人気。",
+        "zh": "一次信号灯有3000人以上交叉的世界著名路口。从涩谷天空大厦眺望很受欢迎。",
+        "en": "One of the world's busiest crossings, with 3,000+ people per signal cycle. Views from Shibuya Scramble Square are popular.",
+        "ko": "신호 한 번에 3,000명 이상이 교차하는 세계적인 교차로예요. 시부야 스크램블 스퀘어에서 보는 풍경이 인기예요."
+      },
+      "hours_i18n": {
+        "ja": "常時（交差点）",
+        "zh": "全天（路口）",
+        "en": "Always open (crossing)",
+        "ko": "상시（교차로）"
+      },
+      "fee_i18n": {
+        "ja": "無料",
+        "zh": "免费",
+        "en": "Free",
+        "ko": "무료"
+      },
+      "bestTime_i18n": {
+        "ja": "日中・夜",
+        "zh": "白天・夜晚",
+        "en": "Daytime & night",
+        "ko": "낮・밤"
+      },
+      "tips_i18n": {
+        "ja": [
+          "スクランブルスクエア展望台から",
+          "ハチ公像も見学",
+          "夜のネオンが映える"
+        ],
+        "zh": [
+          "从涩谷天空大厦瞭望台看",
+          "顺访八公像",
+          "夜晚霓虹很上镜"
+        ],
+        "en": [
+          "View from Shibuya Scramble Square",
+          "See the Hachiko statue",
+          "Neon lights glow at night"
+        ],
+        "ko": [
+          "시부야 스크램블 스퀘어 전망대에서",
+          "하치코 동상도 관람",
+          "밤에는 네온이 빛나요"
+        ]
+      }
+    },
+    {
+      "name": "明治神宮",
+      "coord": [
+        35.6764,
+        139.6993
+      ],
+      "dist": "3 min walk",
+      "desc": "都心に広がる鎮守の森。本殿までの参道は緑に包まれ、ご利益は縁結び・開運。",
+      "tags": [
+        "all",
+        "shrine",
+        "landmark"
+      ],
+      "bestTime": "早朝・正月",
+      "hours": "日の出～日没",
+      "fee": "無料",
+      "tips": [
+        "明治神宮御苑の花菖蒲",
+        "木々に囲まれた参道",
+        "おみくじも人気"
+      ],
+      "name_i18n": {
+        "ja": "明治神宮",
+        "zh": "明治神宫",
+        "en": "Meiji Jingu",
+        "ko": "메이지 신궁"
+      },
+      "desc_i18n": {
+        "ja": "都心に広がる鎮守の森。本殿までの参道は緑に包まれ、ご利益は縁結び・開運。",
+        "zh": "市中心广阔的镇守之森。通往本殿的参道绿意盎然，以求姻缘、开运闻名。",
+        "en": "A forest shrine in the heart of Tokyo. The approach is surrounded by greenery; known for matchmaking and good fortune.",
+        "ko": "도심에 펼쳐진 진수림이에요. 본전까지의 참배길은 녹음으로 둘러싸여 있고, 인연과 개운의 신으로 유명해요."
+      },
+      "hours_i18n": {
+        "ja": "日の出～日没",
+        "zh": "日出～日落",
+        "en": "Sunrise to sunset",
+        "ko": "일출~일몰"
+      },
+      "fee_i18n": {
+        "ja": "無料",
+        "zh": "免费",
+        "en": "Free",
+        "ko": "무료"
+      },
+      "bestTime_i18n": {
+        "ja": "早朝・正月",
+        "zh": "清晨・正月",
+        "en": "Early morning & New Year",
+        "ko": "이른 아침・정월"
+      },
+      "tips_i18n": {
+        "ja": [
+          "明治神宮御苑の花菖蒲",
+          "木々に囲まれた参道",
+          "おみくじも人気"
+        ],
+        "zh": [
+          "明治神宫御苑的花菖蒲",
+          "绿树环绕的参道",
+          "抽签也很有人气"
+        ],
+        "en": [
+          "Iris garden at Meiji Jingu Gyoen",
+          "Approach lined with trees",
+          "Popular omikuji fortunes"
+        ],
+        "ko": [
+          "메이지 신궁 어원의 꽃창포",
+          "나무로 둘러싸인 참배길",
+          "오미쿠지도 인기"
+        ]
+      }
+    },
+    {
+      "name": "東京ドーム",
+      "coord": [
+        35.7056,
+        139.7519
+      ],
+      "dist": "5 min walk",
+      "desc": "日本初の屋根付き球場。巨人戦やコンサート、アトラクション施設も楽しめる。",
+      "tags": [
+        "all",
+        "landmark",
+        "modern"
+      ],
+      "bestTime": "イベント開催日",
+      "hours": "イベントにより異なる",
+      "fee": "イベントにより異なる",
+      "tips": [
+        "ラクーアも併設",
+        "巨人戦の観戦",
+        "スカイフラワーは絶景"
+      ],
+      "name_i18n": {
+        "ja": "東京ドーム",
+        "zh": "东京巨蛋",
+        "en": "Tokyo Dome",
+        "ko": "도쿄 돔"
+      },
+      "desc_i18n": {
+        "ja": "日本初の屋根付き球場。巨人戦やコンサート、アトラクション施設も楽しめる。",
+        "zh": "日本首个有顶球场。可观看巨人队比赛、演唱会，还有游乐设施。",
+        "en": "Japan's first domed stadium. Home to Giants games, concerts, and amusement attractions.",
+        "ko": "일본 최초의 지붕 있는 구장이에요. 요미우리 경기나 콘서트, 놀이 시설도 즐길 수 있어요."
+      },
+      "hours_i18n": {
+        "ja": "イベントにより異なる",
+        "zh": "因活动而异",
+        "en": "Varies by event",
+        "ko": "이벤트별 상이"
+      },
+      "fee_i18n": {
+        "ja": "イベントにより異なる",
+        "zh": "因活动而异",
+        "en": "Varies by event",
+        "ko": "이벤트별 상이"
+      },
+      "bestTime_i18n": {
+        "ja": "イベント開催日",
+        "zh": "活动举办日",
+        "en": "On event days",
+        "ko": "이벤트 개최일"
+      },
+      "tips_i18n": {
+        "ja": [
+          "ラクーアも併設",
+          "巨人戦の観戦",
+          "スカイフラワーは絶景"
+        ],
+        "zh": [
+          "拉库阿水疗城也在旁边",
+          "观看巨人队比赛",
+          "空中花朵游乐设施景色绝佳"
+        ],
+        "en": [
+          "LaQua is attached",
+          "Catch a Giants game",
+          "Sky Flower ride offers great views"
+        ],
+        "ko": [
+          "라쿠아도 함께 이용",
+          "요미우리 경기 관람",
+          "스카이 플라워 절경"
+        ]
+      }
+    },
+    {
+      "name": "小石川後楽園",
+      "coord": [
+        35.7057,
+        139.762
+      ],
+      "dist": "3 min walk",
+      "desc": "水戸徳川家ゆかりの大名庭園。都心にありながら四季の風景が楽しめる。",
+      "tags": [
+        "all",
+        "nature",
+        "park",
+        "history"
+      ],
+      "bestTime": "秋（紅葉）・春（梅）",
+      "hours": "9:00～17:00",
+      "fee": "有料（大人300円）",
+      "tips": [
+        "梅まつりが有名",
+        "回遊式庭園を散策",
+        "通天閣を模した滝も"
+      ],
+      "name_i18n": {
+        "ja": "小石川後楽園",
+        "zh": "小石川后乐园",
+        "en": "Koishikawa Korakuen Garden",
+        "ko": "코이시카와 코라쿠엔"
+      },
+      "desc_i18n": {
+        "ja": "水戸徳川家ゆかりの大名庭園。都心にありながら四季の風景が楽しめる。",
+        "zh": "与水户德川家有渊源的诸侯庭园。位于市中心却能欣赏四季风景。",
+        "en": "A daimyo garden of the Mito Tokugawa family. Enjoy four seasons of scenery in central Tokyo.",
+        "ko": "미토 도쿠가와가와 인연이 있는 다이묘 정원이에요. 도심에 있으면서 사계절 풍경을 즐길 수 있어요."
+      },
+      "hours_i18n": {
+        "ja": "9:00～17:00",
+        "zh": "9:00～17:00",
+        "en": "9:00–17:00",
+        "ko": "9:00~17:00"
+      },
+      "fee_i18n": {
+        "ja": "有料（大人300円）",
+        "zh": "收费（成人300日元）",
+        "en": "Paid (adult ¥300)",
+        "ko": "유료（성인 300엔）"
+      },
+      "bestTime_i18n": {
+        "ja": "秋（紅葉）・春（梅）",
+        "zh": "秋（红叶）・春（梅花）",
+        "en": "Autumn (fall leaves) & spring (plum)",
+        "ko": "가을（단풍）・봄（매화）"
+      },
+      "tips_i18n": {
+        "ja": [
+          "梅まつりが有名",
+          "回遊式庭園を散策",
+          "通天閣を模した滝も"
+        ],
+        "zh": [
+          "梅花节有名",
+          "漫步回游式庭园",
+          "有模仿通天阁的瀑布"
+        ],
+        "en": [
+          "Famous plum festival",
+          "Stroll the circuit garden",
+          "Waterfall modeled on Tsutenkaku"
+        ],
+        "ko": [
+          "매화 축제가 유명해요",
+          "회유식 정원 산책",
+          "쓰텐카쿠를 본뜬 폭포도"
+        ]
+      }
+    },
+    {
+      "name": "上野恩賜公園",
+      "coord": [
+        35.7158,
+        139.774
+      ],
+      "dist": "0 min walk",
+      "desc": "桜の名所として名高い都立公園。博物館・美術館・動物園が集まる文化の杜。",
+      "tags": [
+        "all",
+        "park",
+        "nature",
+        "landmark"
+      ],
+      "bestTime": "春（桜）",
+      "hours": "5:00～23:00",
+      "fee": "無料（公園）",
+      "tips": [
+        "春の桜並木が圧巻",
+        "上野動物園も隣接",
+        "不忍池のボートも"
+      ],
+      "name_i18n": {
+        "ja": "上野恩賜公園",
+        "zh": "上野恩赐公园",
+        "en": "Ueno Park",
+        "ko": "우에노 공원"
+      },
+      "desc_i18n": {
+        "ja": "桜の名所として名高い都立公園。博物館・美術館・動物園が集まる文化の杜。",
+        "zh": "以樱花闻名的都立公园。博物馆、美术馆、动物园汇聚的文化之森。",
+        "en": "A park famous for cherry blossoms, and a cultural hub with museums and a zoo.",
+        "ko": "벚꽃 명소로 유명한 도립공원이에요. 박물관・미술관・동물원이 모인 문화의 숲이에요."
+      },
+      "hours_i18n": {
+        "ja": "5:00～23:00",
+        "zh": "5:00～23:00",
+        "en": "5:00–23:00",
+        "ko": "5:00~23:00"
+      },
+      "fee_i18n": {
+        "ja": "無料（公園）",
+        "zh": "免费（公园）",
+        "en": "Free (park)",
+        "ko": "무료（공원）"
+      },
+      "bestTime_i18n": {
+        "ja": "春（桜）",
+        "zh": "春（樱花）",
+        "en": "Spring (cherry blossoms)",
+        "ko": "봄（벚꽃）"
+      },
+      "tips_i18n": {
+        "ja": [
+          "春の桜並木が圧巻",
+          "上野動物園も隣接",
+          "不忍池のボートも"
+        ],
+        "zh": [
+          "春天的樱花道壮观",
+          "上野动物园就在旁边",
+          "不忍池可划船"
+        ],
+        "en": [
+          "Spectacular spring cherry blossoms",
+          "Ueno Zoo is adjacent",
+          "Row boats on Shinobazu Pond"
+        ],
+        "ko": [
+          "봄 벚꽃길이 장관",
+          "우에노 동물원도 인접",
+          "시노부즈 연못 보트도"
+        ]
+      }
+    },
+    {
+      "name": "お台場（ダイバーシティ東京）",
+      "coord": [
+        35.625,
+        139.776
+      ],
+      "dist": "5 min walk",
+      "desc": "レインボーブリッジを望む臨海エリア。ガンダム立像やショッピング・温泉が楽しめる。",
+      "tags": [
+        "all",
+        "landmark",
+        "modern",
+        "shopping"
+      ],
+      "bestTime": "夕方～夜",
+      "hours": "施設により異なる",
+      "fee": "無料（入場）",
+      "tips": [
+        "実物大ガンダム立像",
+        "レインボーブリッジの夜景",
+        "チームラボも近くに"
+      ],
+      "name_i18n": {
+        "ja": "お台場（ダイバーシティ東京）",
+        "zh": "台场（DiverCity东京）",
+        "en": "Odaiba (DiverCity Tokyo)",
+        "ko": "오다이바（다이버시티 도쿄）"
+      },
+      "desc_i18n": {
+        "ja": "レインボーブリッジを望む臨海エリア。ガンダム立像やショッピング・温泉が楽しめる。",
+        "zh": "可眺望彩虹大桥的临海区域。可欣赏高达立像、购物和温泉。",
+        "en": "A waterfront area facing Rainbow Bridge. Home to the Gundam statue, shopping, and a spa.",
+        "ko": "레인보우 브리지를 바라보는 임해 지역이에요. 건담 동상과 쇼핑・온천을 즐길 수 있어요."
+      },
+      "hours_i18n": {
+        "ja": "施設により異なる",
+        "zh": "因设施而异",
+        "en": "Varies by facility",
+        "ko": "시설별 상이"
+      },
+      "fee_i18n": {
+        "ja": "無料（入場）",
+        "zh": "免费（入场）",
+        "en": "Free (entry)",
+        "ko": "무료（입장）"
+      },
+      "bestTime_i18n": {
+        "ja": "夕方～夜",
+        "zh": "傍晚～夜晚",
+        "en": "Evening to night",
+        "ko": "저녁~밤"
+      },
+      "tips_i18n": {
+        "ja": [
+          "実物大ガンダム立像",
+          "レインボーブリッジの夜景",
+          "チームラボも近くに"
+        ],
+        "zh": [
+          "实物大高达立像",
+          "彩虹大桥的夜景",
+          "teamLab也在附近"
+        ],
+        "en": [
+          "Life-size Gundam statue",
+          "Rainbow Bridge night view",
+          "teamLab nearby"
+        ],
+        "ko": [
+          "실물 크기 건담 동상",
+          "레인보우 브리지 야경",
+          "팀랩도 근처에"
+        ]
+      }
+    },
+    {
+      "name": "豊洲市場",
+      "coord": [
+        35.6421,
+        139.7856
+      ],
+      "dist": "0 min walk",
+      "desc": "築地から移転した東京の台所。早朝のマグロ競り見学や新鮮な海鮮丼が楽しめる。",
+      "tags": [
+        "all",
+        "food",
+        "landmark"
+      ],
+      "bestTime": "早朝～午前",
+      "hours": "競り見学 5:00～（予約制）",
+      "fee": "見学無料（店舗は別）",
+      "tips": [
+        "マグロ競り見学は要予約",
+        "海鮮丼が絶品",
+        "場内の清掃が行き届く"
+      ],
+      "name_i18n": {
+        "ja": "豊洲市場",
+        "zh": "丰洲市场",
+        "en": "Toyosu Market",
+        "ko": "토요스 시장"
+      },
+      "desc_i18n": {
+        "ja": "築地から移転した東京の台所。早朝のマグロ競り見学や新鮮な海鮮丼が楽しめる。",
+        "zh": "从筑地迁来的东京厨房。可参观清晨的金枪鱼拍卖，品尝新鲜海鲜盖饭。",
+        "en": "Tokyo's kitchen, relocated from Tsukiji. Watch the early-morning tuna auction or enjoy fresh seafood bowls.",
+        "ko": "쓰키지에서 이전한 도쿄의 부엌이에요. 새벽 참치 경매 견학과 신선한 해산물 덮밥을 즐길 수 있어요."
+      },
+      "hours_i18n": {
+        "ja": "競り見学 5:00～（予約制）",
+        "zh": "拍卖参观 5:00起（预约制）",
+        "en": "Auction viewing from 5:00 (reservation required)",
+        "ko": "경매 견학 5:00~（예약제）"
+      },
+      "fee_i18n": {
+        "ja": "見学無料（店舗は別）",
+        "zh": "参观免费（店铺另计）",
+        "en": "Viewing free (shops separate)",
+        "ko": "견학 무료（점포 별도）"
+      },
+      "bestTime_i18n": {
+        "ja": "早朝～午前",
+        "zh": "清晨～上午",
+        "en": "Early morning to noon",
+        "ko": "새벽~오전"
+      },
+      "tips_i18n": {
+        "ja": [
+          "マグロ競り見学は要予約",
+          "海鮮丼が絶品",
+          "場内の清掃が行き届く"
+        ],
+        "zh": [
+          "金枪鱼拍卖需预约",
+          "海鲜盖饭绝品",
+          "场内非常整洁"
+        ],
+        "en": [
+          "Reserve for the tuna auction",
+          "Excellent seafood bowls",
+          "Spotless facilities"
+        ],
+        "ko": [
+          "참치 경매는 예약 필수",
+          "해산물 덮밥이 일품",
+          "시설이 매우 깨끗해요"
+        ]
+      }
+    },
+    {
+      "name": "品川神社",
+      "coord": [
+        35.6173,
+        139.7359
+      ],
+      "dist": "5 min walk",
+      "desc": "旧東海道の鎮守。江戸時代から信仰を集める富士塚が境内に残る。",
+      "tags": [
+        "all",
+        "shrine",
+        "history"
+      ],
+      "bestTime": "昼間",
+      "hours": "終日",
+      "fee": "無料",
+      "tips": [
+        "富士塚に登れる",
+        "旧東海道沿いに立つ",
+        "境内の鳥居が美しい"
+      ],
+      "name_i18n": {
+        "ja": "品川神社",
+        "zh": "品川神社",
+        "en": "Shinagawa Shrine",
+        "ko": "시나가와 신사"
+      },
+      "desc_i18n": {
+        "ja": "旧東海道の鎮守。江戸時代から信仰を集める富士塚が境内に残る。",
+        "zh": "旧东海道的守护神社。境内保留着江户时代起受到信仰的富士冢。",
+        "en": "Guardian shrine of the old Tokaido. A Fujizuka mound that has drawn worship since the Edo period remains.",
+        "ko": "옛 도카이도의 수호신사예요. 에도 시대부터 신앙을 모은 후지즈카가 경내에 남아 있어요."
+      },
+      "hours_i18n": {
+        "ja": "終日",
+        "zh": "全天",
+        "en": "All day",
+        "ko": "종일"
+      },
+      "fee_i18n": {
+        "ja": "無料",
+        "zh": "免费",
+        "en": "Free",
+        "ko": "무료"
+      },
+      "bestTime_i18n": {
+        "ja": "昼間",
+        "zh": "白天",
+        "en": "Daytime",
+        "ko": "낮"
+      },
+      "tips_i18n": {
+        "ja": [
+          "富士塚に登れる",
+          "旧東海道沿いに立つ",
+          "境内の鳥居が美しい"
+        ],
+        "zh": [
+          "可登上富士冢",
+          "位于旧东海道沿线",
+          "境内的鸟居很美"
+        ],
+        "en": [
+          "Climb the Fujizuka mound",
+          "On the old Tokaido road",
+          "Beautiful torii gates"
+        ],
+        "ko": [
+          "후지즈카에 오를 수 있어요",
+          "옛 도카이도 변에 위치",
+          "경내 도리이가 아름다워요"
+        ]
+      }
+    },
+    {
+      "name": "目黒川（桜並木）",
+      "coord": [
+        35.6444,
+        139.6986
+      ],
+      "dist": "2 min walk",
+      "desc": "中目黒周辺に約4km続く桜並木。春は桜のトンネルが楽しめる。",
+      "tags": [
+        "all",
+        "nature",
+        "landmark",
+        "seasonal"
+      ],
+      "bestTime": "春（桜）",
+      "hours": "常時",
+      "fee": "無料",
+      "tips": [
+        "桜のライトアップ",
+        "川沿いのカフェも",
+        "夜桜が美しい"
+      ],
+      "name_i18n": {
+        "ja": "目黒川（桜並木）",
+        "zh": "目黑川（樱花道）",
+        "en": "Meguro River (Cherry Blossom Promenade)",
+        "ko": "메구로가와（벚꽃길）"
+      },
+      "desc_i18n": {
+        "ja": "中目黒周辺に約4km続く桜並木。春は桜のトンネルが楽しめる。",
+        "zh": "中目黑周边绵延约4公里的樱花道。春天可欣赏樱花隧道。",
+        "en": "About 4km of cherry trees along the river near Nakameguro. A stunning tunnel of blossoms in spring.",
+        "ko": "나카메구로 주변에 약 4km 이어지는 벚꽃길이에요. 봄에는 벚꽃 터널을 즐길 수 있어요."
+      },
+      "hours_i18n": {
+        "ja": "常時",
+        "zh": "全天",
+        "en": "Always open",
+        "ko": "상시"
+      },
+      "fee_i18n": {
+        "ja": "無料",
+        "zh": "免费",
+        "en": "Free",
+        "ko": "무료"
+      },
+      "bestTime_i18n": {
+        "ja": "春（桜）",
+        "zh": "春（樱花）",
+        "en": "Spring (cherry blossoms)",
+        "ko": "봄（벚꽃）"
+      },
+      "tips_i18n": {
+        "ja": [
+          "桜のライトアップ",
+          "川沿いのカフェも",
+          "夜桜が美しい"
+        ],
+        "zh": [
+          "樱花灯光秀",
+          "沿河咖啡馆",
+          "夜樱很美"
+        ],
+        "en": [
+          "Illuminated blossoms",
+          "Riverside cafés",
+          "Beautiful night blossoms"
+        ],
+        "ko": [
+          "벚꽃 라이트업",
+          "강변 카페도",
+          "밤 벚꽃이 아름다워요"
+        ]
+      }
+    },
+    {
+      "name": "目黒不動尊（瀧泉寺）",
+      "coord": [
+        35.6339,
+        139.7131
+      ],
+      "dist": "10 min walk",
+      "desc": "江戸時代から厄除けの信仰を集める天台宗の古刹。都会の喧騒を忘れる静けさ。",
+      "tags": [
+        "all",
+        "shrine",
+        "history"
+      ],
+      "bestTime": "昼間",
+      "hours": "8:00～17:00",
+      "fee": "無料",
+      "tips": [
+        "江戸三不動の一つ",
+        "境内の大銀杏",
+        "東海道を望む高台"
+      ],
+      "name_i18n": {
+        "ja": "目黒不動尊（瀧泉寺）",
+        "zh": "目黑不动尊（泷泉寺）",
+        "en": "Meguro Fudoson (Ryusenji Temple)",
+        "ko": "메구로 후도손（류센지）"
+      },
+      "desc_i18n": {
+        "ja": "江戸時代から厄除けの信仰を集める天台宗の古刹。都会の喧騒を忘れる静けさ。",
+        "zh": "自江户时代起受驱邪信仰的天台宗古刹。能忘记都市喧嚣的宁静。",
+        "en": "A Tendai temple that has drawn prayers for warding off evil since the Edo period. Peaceful and quiet.",
+        "ko": "에도 시대부터 액막이 신앙을 모은 천태종 고찰이에요. 도심의 번잡함을 잊게 하는 고요함이에요."
+      },
+      "hours_i18n": {
+        "ja": "8:00～17:00",
+        "zh": "8:00～17:00",
+        "en": "8:00–17:00",
+        "ko": "8:00~17:00"
+      },
+      "fee_i18n": {
+        "ja": "無料",
+        "zh": "免费",
+        "en": "Free",
+        "ko": "무료"
+      },
+      "bestTime_i18n": {
+        "ja": "昼間",
+        "zh": "白天",
+        "en": "Daytime",
+        "ko": "낮"
+      },
+      "tips_i18n": {
+        "ja": [
+          "江戸三不動の一つ",
+          "境内の大銀杏",
+          "東海道を望む高台"
+        ],
+        "zh": [
+          "江户三不动之一",
+          "院内的大银杏",
+          "可眺望东海道的高台"
+        ],
+        "en": [
+          "One of the Edo San Fudo",
+          "Great ginkgo tree",
+          "Hilltop with views toward Tokaido"
+        ],
+        "ko": [
+          "에도 3부동의 하나",
+          "경내 큰 은행나무",
+          "도카이도를 바라보는 언덕"
+        ]
+      }
+    },
+    {
+      "name": "池上本門寺",
+      "coord": [
+        35.581,
+        139.7065
+      ],
+      "dist": "5 min walk",
+      "desc": "日蓮宗の大本山。石段や五重塔が美しく、歴史ある境内を散策できる。",
+      "tags": [
+        "all",
+        "shrine",
+        "history",
+        "landmark"
+      ],
+      "bestTime": "昼間",
+      "hours": "6:00～17:00",
+      "fee": "無料",
+      "tips": [
+        "壮観な石段",
+        "国指定の五重塔",
+        "池上会館周辺も"
+      ],
+      "name_i18n": {
+        "ja": "池上本門寺",
+        "zh": "池上本门寺",
+        "en": "Ikegami Honmonji Temple",
+        "ko": "이케가미 혼몬지"
+      },
+      "desc_i18n": {
+        "ja": "日蓮宗の大本山。石段や五重塔が美しく、歴史ある境内を散策できる。",
+        "zh": "日莲宗大本山。石阶和五重塔优美，可漫步历史悠久的院内。",
+        "en": "Head temple of Nichiren Buddhism. Beautiful stone steps and a five-story pagoda in historic grounds.",
+        "ko": "니치렌 종파의 대본산이에요. 돌계단과 오층탑이 아름답고 역사 깊은 경내를 산책할 수 있어요."
+      },
+      "hours_i18n": {
+        "ja": "6:00～17:00",
+        "zh": "6:00～17:00",
+        "en": "6:00–17:00",
+        "ko": "6:00~17:00"
+      },
+      "fee_i18n": {
+        "ja": "無料",
+        "zh": "免费",
+        "en": "Free",
+        "ko": "무료"
+      },
+      "bestTime_i18n": {
+        "ja": "昼間",
+        "zh": "白天",
+        "en": "Daytime",
+        "ko": "낮"
+      },
+      "tips_i18n": {
+        "ja": [
+          "壮観な石段",
+          "国指定の五重塔",
+          "池上会館周辺も"
+        ],
+        "zh": [
+          "壮观石阶",
+          "国指定五重塔",
+          "池上会馆周边也可逛"
+        ],
+        "en": [
+          "Magnificent stone steps",
+          "Nationally designated pagoda",
+          "Explore around Ikegami Kaikan"
+        ],
+        "ko": [
+          "장관인 돌계단",
+          "국가지정 오층탑",
+          "이케가미 회관 주변도"
+        ]
+      }
+    },
+    {
+      "name": "羽田空港（展望デッキ）",
+      "coord": [
+        35.5494,
+        139.7798
+      ],
+      "dist": "5 min walk",
+      "desc": "国内線ターミナルの屋上展望デッキから離着陸を間近で見学できる。飛行機ファン必見。",
+      "tags": [
+        "all",
+        "landmark",
+        "modern"
+      ],
+      "bestTime": "日中",
+      "hours": "6:30～23:00（ターミナル）",
+      "fee": "無料",
+      "tips": [
+        "離着陸の迫力",
+        "滑走路を見渡せる",
+        "フードコートも充実"
+      ],
+      "name_i18n": {
+        "ja": "羽田空港（展望デッキ）",
+        "zh": "羽田机场（观景台）",
+        "en": "Haneda Airport (Observation Deck)",
+        "ko": "하네다 공항（전망 데크）"
+      },
+      "desc_i18n": {
+        "ja": "国内線ターミナルの屋上展望デッキから離着陸を間近で見学できる。飛行機ファン必見。",
+        "zh": "从国内线航站楼屋顶观景台近距离观看飞机起降。飞机迷必看。",
+        "en": "Watch planes take off and land up close from the rooftop deck of the domestic terminal. A must for plane fans.",
+        "ko": "국내선 터미널 옥상 전망 데크에서 이착륙을 가까이 볼 수 있어요. 비행기 팬 필수 코스예요."
+      },
+      "hours_i18n": {
+        "ja": "6:30～23:00（ターミナル）",
+        "zh": "6:30～23:00（航站楼）",
+        "en": "6:30–23:00 (terminal)",
+        "ko": "6:30~23:00（터미널）"
+      },
+      "fee_i18n": {
+        "ja": "無料",
+        "zh": "免费",
+        "en": "Free",
+        "ko": "무료"
+      },
+      "bestTime_i18n": {
+        "ja": "日中",
+        "zh": "白天",
+        "en": "Daytime",
+        "ko": "낮"
+      },
+      "tips_i18n": {
+        "ja": [
+          "離着陸の迫力",
+          "滑走路を見渡せる",
+          "フードコートも充実"
+        ],
+        "zh": [
+          "飞机起降的震撼",
+          "可俯瞰跑道",
+          "美食广场也很充实"
+        ],
+        "en": [
+          "Thrilling takeoffs and landings",
+          "Views over the runways",
+          "Great food court"
+        ],
+        "ko": [
+          "이착륙의 박진감",
+          "활주로를 내려다볼 수 있어요",
+          "푸드코트도 알차요"
+        ]
+      }
+    },
+    {
+      "name": "下北沢",
+      "coord": [
+        35.6618,
+        139.6683
+      ],
+      "dist": "0 min walk",
+      "desc": "サブカルチャーと古着の聖地。個性的なカフェやライブハウスが密集する。",
+      "tags": [
+        "all",
+        "shopping",
+        "landmark"
+      ],
+      "bestTime": "午後～夜",
+      "hours": "店舗により異なる",
+      "fee": "無料",
+      "tips": [
+        "古着屋を巡る",
+        "本多劇場で演劇",
+        "ミュージックシーン発祥地"
+      ],
+      "name_i18n": {
+        "ja": "下北沢",
+        "zh": "下北泽",
+        "en": "Shimokitazawa",
+        "ko": "시모키타자와"
+      },
+      "desc_i18n": {
+        "ja": "サブカルチャーと古着の聖地。個性的なカフェやライブハウスが密集する。",
+        "zh": "亚文化和古着圣地。个性咖啡馆和Live House密集。",
+        "en": "A mecca of subculture and vintage clothing, packed with unique cafés and live houses.",
+        "ko": "서브컬처와 빈티지 의류의 성지예요. 개성 있는 카페와 라이브하우스가 밀집해 있어요."
+      },
+      "hours_i18n": {
+        "ja": "店舗により異なる",
+        "zh": "因店铺而异",
+        "en": "Varies by store",
+        "ko": "점포별 상이"
+      },
+      "fee_i18n": {
+        "ja": "無料",
+        "zh": "免费",
+        "en": "Free",
+        "ko": "무료"
+      },
+      "bestTime_i18n": {
+        "ja": "午後～夜",
+        "zh": "下午～夜晚",
+        "en": "Afternoon to night",
+        "ko": "오후~밤"
+      },
+      "tips_i18n": {
+        "ja": [
+          "古着屋を巡る",
+          "本多劇場で演劇",
+          "ミュージックシーン発祥地"
+        ],
+        "zh": [
+          "逛古着店",
+          "在本多剧场看戏剧",
+          "音乐现场的发源地"
+        ],
+        "en": [
+          "Browse vintage stores",
+          "See a play at Honda Gekijo",
+          "Birthplace of a vibrant music scene"
+        ],
+        "ko": [
+          "빈티지 숍 투어",
+          "혼다 극장에서 연극",
+          "음악 신의 발상지"
+        ]
+      }
+    },
+    {
+      "name": "中野ブロードウェイ",
+      "coord": [
+        35.7079,
+        139.6654
+      ],
+      "dist": "3 min walk",
+      "desc": "サブカル・オタク文化の聖地。マンガ・フィギュア・中古品がびっしり並ぶ。",
+      "tags": [
+        "all",
+        "shopping",
+        "landmark"
+      ],
+      "bestTime": "午後",
+      "hours": "店舗により異なる（10:00～20:00）",
+      "fee": "無料",
+      "tips": [
+        "マンガ・フィギュア探し",
+        "中古家電も豊富",
+        "ラーメン店も多い"
+      ],
+      "name_i18n": {
+        "ja": "中野ブロードウェイ",
+        "zh": "中野百老汇",
+        "en": "Nakano Broadway",
+        "ko": "나카노 브로드웨이"
+      },
+      "desc_i18n": {
+        "ja": "サブカル・オタク文化の聖地。マンガ・フィギュア・中古品がびっしり並ぶ。",
+        "zh": "亚文化・宅文化圣地。漫画、手办、二手商品琳琅满目。",
+        "en": "A shrine of subculture and otaku culture, packed with manga, figures, and used goods.",
+        "ko": "서브컬처・오타쿠 문화의 성지예요. 만화・피규어・중고품이 빽빽하게 늘어서 있어요."
+      },
+      "hours_i18n": {
+        "ja": "店舗により異なる（10:00～20:00）",
+        "zh": "因店铺而异（10:00～20:00）",
+        "en": "Varies by store (10:00–20:00)",
+        "ko": "점포별 상이（10:00~20:00）"
+      },
+      "fee_i18n": {
+        "ja": "無料",
+        "zh": "免费",
+        "en": "Free",
+        "ko": "무료"
+      },
+      "bestTime_i18n": {
+        "ja": "午後",
+        "zh": "下午",
+        "en": "Afternoon",
+        "ko": "오후"
+      },
+      "tips_i18n": {
+        "ja": [
+          "マンガ・フィギュア探し",
+          "中古家電も豊富",
+          "ラーメン店も多い"
+        ],
+        "zh": [
+          "淘漫画・手办",
+          "二手家电也很丰富",
+          "拉面店也很多"
+        ],
+        "en": [
+          "Hunt for manga and figures",
+          "Plenty of used electronics",
+          "Many ramen shops"
+        ],
+        "ko": [
+          "만화・피규어 찾기",
+          "중고 가전도 풍부",
+          "라멘집도 많아요"
+        ]
+      }
+    },
+    {
+      "name": "大宮八幡宮",
+      "coord": [
+        35.6896,
+        139.637
+      ],
+      "dist": "8 min walk",
+      "desc": "東京のほぼ中央に鎮座する大社。広い境内と梅・桜が美しい。",
+      "tags": [
+        "all",
+        "shrine",
+        "history"
+      ],
+      "bestTime": "昼間",
+      "hours": "6:00～18:00",
+      "fee": "無料",
+      "tips": [
+        "梅園が見どころ",
+        "縁結びのご利益",
+        "赤ちゃんの初宮参り"
+      ],
+      "name_i18n": {
+        "ja": "大宮八幡宮",
+        "zh": "大宫八幡宫",
+        "en": "Omiya Hachimangu",
+        "ko": "오미야 하치만구"
+      },
+      "desc_i18n": {
+        "ja": "東京のほぼ中央に鎮座する大社。広い境内と梅・桜が美しい。",
+        "zh": "镇座于东京几乎正中央的大神社。广阔的院内与梅花、樱花很美。",
+        "en": "A grand shrine at the center of Tokyo. Spacious grounds with beautiful plum and cherry blossoms.",
+        "ko": "도쿄의 거의 중앙에 자리한 큰 신사예요. 넓은 경내와 매화・벚꽃이 아름다워요."
+      },
+      "hours_i18n": {
+        "ja": "6:00～18:00",
+        "zh": "6:00～18:00",
+        "en": "6:00–18:00",
+        "ko": "6:00~18:00"
+      },
+      "fee_i18n": {
+        "ja": "無料",
+        "zh": "免费",
+        "en": "Free",
+        "ko": "무료"
+      },
+      "bestTime_i18n": {
+        "ja": "昼間",
+        "zh": "白天",
+        "en": "Daytime",
+        "ko": "낮"
+      },
+      "tips_i18n": {
+        "ja": [
+          "梅園が見どころ",
+          "縁結びのご利益",
+          "赤ちゃんの初宮参り"
+        ],
+        "zh": [
+          "梅园是看点",
+          "求姻缘灵验",
+          "婴儿初宫参拜地"
+        ],
+        "en": [
+          "Plum garden highlight",
+          "Known for matchmaking",
+          "Popular for babies' first shrine visit"
+        ],
+        "ko": [
+          "매화원이 볼거리",
+          "인연의 신",
+          "아기 첫 신사 참배"
+        ]
+      }
+    },
+    {
+      "name": "石神井公園",
+      "coord": [
+        35.7458,
+        139.6077
+      ],
+      "dist": "5 min walk",
+      "desc": "二つの池を囲む自然豊かな公園。ボートや野鳥観察が楽しめる。",
+      "tags": [
+        "all",
+        "park",
+        "nature"
+      ],
+      "bestTime": "春・秋",
+      "hours": "常時",
+      "fee": "無料",
+      "tips": [
+        "ボート遊び",
+        "カワセミの観察",
+        "桜・紅葉の名所"
+      ],
+      "name_i18n": {
+        "ja": "石神井公園",
+        "zh": "石神井公园",
+        "en": "Shakujii Park",
+        "ko": "샤쿠지이 공원"
+      },
+      "desc_i18n": {
+        "ja": "二つの池を囲む自然豊かな公園。ボートや野鳥観察が楽しめる。",
+        "zh": "环绕两座池塘、自然丰富的公园。可划船、观赏野鸟。",
+        "en": "A nature-rich park around two ponds. Enjoy boating and birdwatching.",
+        "ko": "두 개의 연못을 둘러싼 자연이 풍부한 공원이에요. 보트와 야생조류 관찰을 즐길 수 있어요."
+      },
+      "hours_i18n": {
+        "ja": "常時",
+        "zh": "全天",
+        "en": "Always open",
+        "ko": "상시"
+      },
+      "fee_i18n": {
+        "ja": "無料",
+        "zh": "免费",
+        "en": "Free",
+        "ko": "무료"
+      },
+      "bestTime_i18n": {
+        "ja": "春・秋",
+        "zh": "春・秋",
+        "en": "Spring & autumn",
+        "ko": "봄・가을"
+      },
+      "tips_i18n": {
+        "ja": [
+          "ボート遊び",
+          "カワセミの観察",
+          "桜・紅葉の名所"
+        ],
+        "zh": [
+          "划船",
+          "观察翠鸟",
+          "樱花・红叶名胜"
+        ],
+        "en": [
+          "Boating",
+          "Kingfisher spotting",
+          "Famous for blossoms and foliage"
+        ],
+        "ko": [
+          "보트 놀이",
+          "물총새 관찰",
+          "벚꽃・단풍 명소"
+        ]
+      }
+    },
+    {
+      "name": "東京大仏（乗蓮寺）",
+      "coord": [
+        35.7509,
+        139.6958
+      ],
+      "dist": "8 min walk",
+      "desc": "高さ13mの青銅製大仏。板橋区のシンボルとして親しまれる。",
+      "tags": [
+        "all",
+        "shrine",
+        "history",
+        "landmark"
+      ],
+      "bestTime": "昼間",
+      "hours": "9:00～17:00",
+      "fee": "無料",
+      "tips": [
+        "大仏の迫力",
+        "春は桜が映える",
+        "境内は静か"
+      ],
+      "name_i18n": {
+        "ja": "東京大仏（乗蓮寺）",
+        "zh": "东京大佛（乘莲寺）",
+        "en": "Tokyo Daibutsu (Jorenji Temple)",
+        "ko": "도쿄 대불（조렌지）"
+      },
+      "desc_i18n": {
+        "ja": "高さ13mの青銅製大仏。板橋区のシンボルとして親しまれる。",
+        "zh": "高13米的青铜大佛。作为板桥区的象征深受喜爱。",
+        "en": "A 13m bronze Buddha, beloved as the symbol of Itabashi Ward.",
+        "ko": "높이 13m의 청동 대불이에요. 이타바시구의 상징으로 사랑받아요."
+      },
+      "hours_i18n": {
+        "ja": "9:00～17:00",
+        "zh": "9:00～17:00",
+        "en": "9:00–17:00",
+        "ko": "9:00~17:00"
+      },
+      "fee_i18n": {
+        "ja": "無料",
+        "zh": "免费",
+        "en": "Free",
+        "ko": "무료"
+      },
+      "bestTime_i18n": {
+        "ja": "昼間",
+        "zh": "白天",
+        "en": "Daytime",
+        "ko": "낮"
+      },
+      "tips_i18n": {
+        "ja": [
+          "大仏の迫力",
+          "春は桜が映える",
+          "境内は静か"
+        ],
+        "zh": [
+          "大佛的震撼",
+          "春天樱花映衬",
+          "院内安静"
+        ],
+        "en": [
+          "Impressive Buddha",
+          "Cherry blossoms in spring",
+          "Peaceful grounds"
+        ],
+        "ko": [
+          "대불의 위압감",
+          "봄에는 벚꽃과 잘 어울려요",
+          "경내는 조용해요"
+        ]
+      }
+    },
+    {
+      "name": "葛西臨海公園",
+      "coord": [
+        35.6443,
+        139.8618
+      ],
+      "dist": "0 min walk",
+      "desc": "海を望む広大な公園。大観覧車と水族園が人気のデートスポット。",
+      "tags": [
+        "all",
+        "park",
+        "nature",
+        "landmark"
+      ],
+      "bestTime": "夕方（夜景）",
+      "hours": "常時（水族園は9:30～17:00）",
+      "fee": "公園無料（水族園有料）",
+      "tips": [
+        "大観覧車から富士山",
+        "鳥類園でバードウォッチング",
+        "夕日が美しい"
+      ],
+      "name_i18n": {
+        "ja": "葛西臨海公園",
+        "zh": "葛西临海公园",
+        "en": "Kasai Rinkai Park",
+        "ko": "가사이 임해공원"
+      },
+      "desc_i18n": {
+        "ja": "海を望む広大な公園。大観覧車と水族園が人気のデートスポット。",
+        "zh": "面朝大海的广阔公园。大摩天轮和水族园是热门约会地点。",
+        "en": "A vast seaside park. The big Ferris wheel and aquarium make it a popular date spot.",
+        "ko": "바다가 보이는 드넓은 공원이에요. 대관람차와 수족원이 인기 데이트 명소예요."
+      },
+      "hours_i18n": {
+        "ja": "常時（水族園は9:30～17:00）",
+        "zh": "全天（水族园9:30～17:00）",
+        "en": "Always open (aquarium 9:30–17:00)",
+        "ko": "상시（수족원 9:30~17:00）"
+      },
+      "fee_i18n": {
+        "ja": "公園無料（水族園有料）",
+        "zh": "公园免费（水族园收费）",
+        "en": "Park free (aquarium paid)",
+        "ko": "공원 무료（수족원 유료）"
+      },
+      "bestTime_i18n": {
+        "ja": "夕方（夜景）",
+        "zh": "傍晚（夜景）",
+        "en": "Evening (night view)",
+        "ko": "저녁（야경）"
+      },
+      "tips_i18n": {
+        "ja": [
+          "大観覧車から富士山",
+          "鳥類園でバードウォッチング",
+          "夕日が美しい"
+        ],
+        "zh": [
+          "从大摩天轮看富士山",
+          "在鸟类园观鸟",
+          "夕阳很美"
+        ],
+        "en": [
+          "Mt. Fuji from the Ferris wheel",
+          "Birdwatching at the aviary area",
+          "Beautiful sunsets"
+        ],
+        "ko": [
+          "대관람차에서 후지산",
+          "조류원에서 버드워칭",
+          "노을이 아름다워요"
+        ]
+      }
+    },
+    {
+      "name": "都電荒川線（三ノ輪橋）",
+      "coord": [
+        35.7317,
+        139.7937
+      ],
+      "dist": "0 min walk",
+      "desc": "東京に残る路面電車。レトロな車両で下町情緒を味わえる。",
+      "tags": [
+        "all",
+        "history",
+        "landmark"
+      ],
+      "bestTime": "日中",
+      "hours": "5:00～23:00頃",
+      "fee": "有料（大人170円～）",
+      "tips": [
+        "レトロな車両に乗車",
+        "沿線の下町散策",
+        "一日乗車券も"
+      ],
+      "name_i18n": {
+        "ja": "都電荒川線（三ノ輪橋）",
+        "zh": "都电荒川线（三轮桥）",
+        "en": "Toden Arakawa Line (Minowabashi)",
+        "ko": "도덴 아라카와선（미노와바시）"
+      },
+      "desc_i18n": {
+        "ja": "東京に残る路面電車。レトロな車両で下町情緒を味わえる。",
+        "zh": "东京仅存的路面电车。乘复古车厢感受老街风情。",
+        "en": "Tokyo's surviving streetcar line. Ride retro cars through nostalgic downtown streets.",
+        "ko": "도쿄에 남은 노면전차예요. 레트로한 차량으로 옛 정취를 느낄 수 있어요."
+      },
+      "hours_i18n": {
+        "ja": "5:00～23:00頃",
+        "zh": "5:00～23:00左右",
+        "en": "Around 5:00–23:00",
+        "ko": "5:00~23:00경"
+      },
+      "fee_i18n": {
+        "ja": "有料（大人170円～）",
+        "zh": "收费（成人170日元起）",
+        "en": "Paid (adult from ¥170)",
+        "ko": "유료（성인 170엔~）"
+      },
+      "bestTime_i18n": {
+        "ja": "日中",
+        "zh": "白天",
+        "en": "Daytime",
+        "ko": "낮"
+      },
+      "tips_i18n": {
+        "ja": [
+          "レトロな車両に乗車",
+          "沿線の下町散策",
+          "一日乗車券も"
+        ],
+        "zh": [
+          "乘坐复古车厢",
+          "沿线老街散步",
+          "有一日乘车券"
+        ],
+        "en": [
+          "Ride the retro cars",
+          "Explore downtown along the line",
+          "Day pass available"
+        ],
+        "ko": [
+          "레트로 차량 탑승",
+          "노선 주변 옛 거리 산책",
+          "하루 승차권도"
+        ]
+      }
+    },
+    {
+      "name": "飛鳥山公園",
+      "coord": [
+        35.7508,
+        139.7402
+      ],
+      "dist": "5 min walk",
+      "desc": "江戸時代から桜の名所。王子の高台から市街を一望できる。",
+      "tags": [
+        "all",
+        "park",
+        "nature",
+        "landmark"
+      ],
+      "bestTime": "春（桜）",
+      "hours": "常時",
+      "fee": "無料",
+      "tips": [
+        "都電・モノレールでアクセス",
+        "渋沢史料館も隣接",
+        "紙の博物館も"
+      ],
+      "name_i18n": {
+        "ja": "飛鳥山公園",
+        "zh": "飞鸟山公园",
+        "en": "Asukayama Park",
+        "ko": "아스카야마 공원"
+      },
+      "desc_i18n": {
+        "ja": "江戸時代から桜の名所。王子の高台から市街を一望できる。",
+        "zh": "江户时代以来的樱花名胜。从王子的高台可俯瞰市区。",
+        "en": "A cherry blossom spot since the Edo period. Overlooks the city from a hilltop in Oji.",
+        "ko": "에도 시대부터 벚꽃 명소예요. 오지의 언덕에서 시가지를 한눈에 볼 수 있어요."
+      },
+      "hours_i18n": {
+        "ja": "常時",
+        "zh": "全天",
+        "en": "Always open",
+        "ko": "상시"
+      },
+      "fee_i18n": {
+        "ja": "無料",
+        "zh": "免费",
+        "en": "Free",
+        "ko": "무료"
+      },
+      "bestTime_i18n": {
+        "ja": "春（桜）",
+        "zh": "春（樱花）",
+        "en": "Spring (cherry blossoms)",
+        "ko": "봄（벚꽃）"
+      },
+      "tips_i18n": {
+        "ja": [
+          "都電・モノレールでアクセス",
+          "渋沢史料館も隣接",
+          "紙の博物館も"
+        ],
+        "zh": [
+          "乘都电・单轨电车前往",
+          "涩泽史料馆就在旁边",
+          "纸博物馆也在附近"
+        ],
+        "en": [
+          "Accessible by Toden or monorail",
+          "Shibusawa Museum adjacent",
+          "Paper Museum nearby"
+        ],
+        "ko": [
+          "도덴・모노레일로 접근",
+          "시부사와 자료관도 인접",
+          "종이 박물관도"
+        ]
+      }
+    },
+    {
+      "name": "旧古河庭園",
+      "coord": [
+        35.7492,
+        139.7485
+      ],
+      "dist": "7 min walk",
+      "desc": "洋館と日本庭園が調和する名園。バラの季節は特に美しい。",
+      "tags": [
+        "all",
+        "nature",
+        "history",
+        "park"
+      ],
+      "bestTime": "春・秋（バラ）",
+      "hours": "9:00～17:00",
+      "fee": "有料（大人150円）",
+      "tips": [
+        "バラ園が見どころ",
+        "洋館の見学",
+        "紅葉も美しい"
+      ],
+      "name_i18n": {
+        "ja": "旧古河庭園",
+        "zh": "旧古河庭园",
+        "en": "Former Furukawa Garden",
+        "ko": "구 후루카와 정원"
+      },
+      "desc_i18n": {
+        "ja": "洋館と日本庭園が調和する名園。バラの季節は特に美しい。",
+        "zh": "西式建筑与日本庭园和谐的名园。玫瑰季尤其美丽。",
+        "en": "A famous garden blending a Western mansion and Japanese garden. Especially lovely in rose season.",
+        "ko": "양관과 일본 정원이 조화를 이루는 명원이에요. 장미 철에 특히 아름다워요."
+      },
+      "hours_i18n": {
+        "ja": "9:00～17:00",
+        "zh": "9:00～17:00",
+        "en": "9:00–17:00",
+        "ko": "9:00~17:00"
+      },
+      "fee_i18n": {
+        "ja": "有料（大人150円）",
+        "zh": "收费（成人150日元）",
+        "en": "Paid (adult ¥150)",
+        "ko": "유료（성인 150엔）"
+      },
+      "bestTime_i18n": {
+        "ja": "春・秋（バラ）",
+        "zh": "春・秋（玫瑰）",
+        "en": "Spring & autumn (roses)",
+        "ko": "봄・가을（장미）"
+      },
+      "tips_i18n": {
+        "ja": [
+          "バラ園が見どころ",
+          "洋館の見学",
+          "紅葉も美しい"
+        ],
+        "zh": [
+          "玫瑰园是看点",
+          "参观西式建筑",
+          "红叶也很美"
+        ],
+        "en": [
+          "Rose garden highlight",
+          "Tour the Western mansion",
+          "Beautiful autumn leaves"
+        ],
+        "ko": [
+          "장미원이 볼거리",
+          "양관 견학",
+          "단풍도 아름다워요"
+        ]
+      }
+    },
+    {
+      "name": "両国国技館",
+      "coord": [
+        35.6966,
+        139.793
+      ],
+      "dist": "5 min walk",
+      "desc": "大相撲の聖地。本場所の観戦や、江戸東京博物館もすぐ近く。",
+      "tags": [
+        "all",
+        "history",
+        "landmark"
+      ],
+      "bestTime": "本場所期間",
+      "hours": "イベントにより異なる",
+      "fee": "本場所観戦は有料",
+      "tips": [
+        "相撲観戦の醍醐味",
+        "ちゃんこ鍋も楽しめる",
+        "江戸東京博物館も"
+      ],
+      "name_i18n": {
+        "ja": "両国国技館",
+        "zh": "两国国技馆",
+        "en": "Ryogoku Kokugikan",
+        "ko": "료고쿠 국기관"
+      },
+      "desc_i18n": {
+        "ja": "大相撲の聖地。本場所の観戦や、江戸東京博物館もすぐ近く。",
+        "zh": "大相扑的圣地。可观看正式比赛，江户东京博物馆也在附近。",
+        "en": "The home of sumo. Watch tournament bouts; the Edo-Tokyo Museum is right nearby.",
+        "ko": "스모의 성지예요. 본장소 관전과 에도 도쿄 박물관도 바로 근처예요."
+      },
+      "hours_i18n": {
+        "ja": "イベントにより異なる",
+        "zh": "因活动而异",
+        "en": "Varies by event",
+        "ko": "이벤트별 상이"
+      },
+      "fee_i18n": {
+        "ja": "本場所観戦は有料",
+        "zh": "正式比赛观战收费",
+        "en": "Tournament viewing is paid",
+        "ko": "본장소 관전 유료"
+      },
+      "bestTime_i18n": {
+        "ja": "本場所期間",
+        "zh": "正式比赛期间",
+        "en": "During tournaments",
+        "ko": "본장소 기간"
+      },
+      "tips_i18n": {
+        "ja": [
+          "相撲観戦の醍醐味",
+          "ちゃんこ鍋も楽しめる",
+          "江戸東京博物館も"
+        ],
+        "zh": [
+          "观看相扑的乐趣",
+          "可品尝相扑锅",
+          "顺访江户东京博物馆"
+        ],
+        "en": [
+          "The thrill of live sumo",
+          "Try chanko nabe",
+          "Visit the Edo-Tokyo Museum too"
+        ],
+        "ko": [
+          "스모 관전의 묘미",
+          "찬코나베도 즐기기",
+          "에도 도쿄 박물관도"
+        ]
+      }
+    },
+    {
+      "name": "柴又帝釈天（題経寺）",
+      "coord": [
+        35.7553,
+        139.8736
+      ],
+      "dist": "3 min walk",
+      "desc": "映画『男はつらいよ』の舞台。彫刻が美しい帝釈堂と賑やかな参道が魅力。",
+      "tags": [
+        "all",
+        "shrine",
+        "history",
+        "landmark"
+      ],
+      "bestTime": "昼間",
+      "hours": "8:00～16:00",
+      "fee": "無料（庭園は有料）",
+      "tips": [
+        "参道の草団子",
+        "帝釈堂の彫刻見学",
+        "寅さん像と記念撮影"
+      ],
+      "name_i18n": {
+        "ja": "柴又帝釈天（題経寺）",
+        "zh": "柴又帝释天（题经寺）",
+        "en": "Shibamata Taishakuten (Daikyoji Temple)",
+        "ko": "시바마타 타이샤쿠텐（다이쿄지）"
+      },
+      "desc_i18n": {
+        "ja": "映画『男はつらいよ』の舞台。彫刻が美しい帝釈堂と賑やかな参道が魅力。",
+        "zh": "电影《男人真命苦》的舞台。雕刻精美的帝释堂和热闹的参道是魅力所在。",
+        "en": "The setting of the film \"Otoko wa Tsurai yo\". Admire the carved Daishakudo and lively approach.",
+        "ko": "영화 《남자는 괴로워》의 무대예요. 조각이 아름다운 타이샤쿠도와 활기찬 참배길이 매력이에요."
+      },
+      "hours_i18n": {
+        "ja": "8:00～16:00",
+        "zh": "8:00～16:00",
+        "en": "8:00–16:00",
+        "ko": "8:00~16:00"
+      },
+      "fee_i18n": {
+        "ja": "無料（庭園は有料）",
+        "zh": "免费（庭园收费）",
+        "en": "Free (garden paid)",
+        "ko": "무료（정원 유료）"
+      },
+      "bestTime_i18n": {
+        "ja": "昼間",
+        "zh": "白天",
+        "en": "Daytime",
+        "ko": "낮"
+      },
+      "tips_i18n": {
+        "ja": [
+          "参道の草団子",
+          "帝釈堂の彫刻見学",
+          "寅さん像と記念撮影"
+        ],
+        "zh": [
+          "参道的草团子",
+          "参观帝释堂雕刻",
+          "与寅次郎雕像合影"
+        ],
+        "en": [
+          "Kusa-dango rice cakes on the approach",
+          "See the carvings of Daishakudo",
+          "Photo with the Torasan statue"
+        ],
+        "ko": [
+          "참배길 쿠사당고",
+          "타이샤쿠도 조각 견학",
+          "토라상 동상과 기념촬영"
+        ]
+      }
     }
   ],
   "station_exits": {
