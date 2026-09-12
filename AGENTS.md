@@ -1084,3 +1084,17 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 **4.3.572（2026-09-13，tesshow 寺院专题站补图 5 + 天祖神社，99/106 有图）**：寺院索引（temple_index.html）按景点 desc 锁定页面映射——東岳寺=伊興本町（temple_ikob_togaku，山号南昌山；本堂匾额 OCR 两次读出"高岩寺/南蔵院"不同字、判断为小字误读，来源页 alt"東岳寺本堂"+住所一致采用）、善立寺=梅田（temple_umeda_zenritsu，日蓮宗近代建築）、薬師寺（綾瀬）=綾瀬1-14-20（temple_ayase_yakushi）、常護寺=千住中居町（temple_senju_jogo——**tesshow 图与维基错图（幸徳寺）完全不同，正式替换 4.3.570 拒用后恢复配图**）、浄光寺=東伊興（temple_eiko_joko 赤坂山浄光寺，景点库 desc"足立区東伊興にある浄光寺"锁定，非古千谷浄光寺）。**天祖神社**=神明天祖神社（desc"足立区神明"→shrine_shinmei_tenso，页面标题确认）。寺院页图片路径为 `images/xxx.jpg`（无 shrine/temple 子目录）。全部逐张 Read 验证。图库 93→99。
 
 **4.3.573（2026-09-13，関屋の里 浮世绘补图，100/106 有图）**：冨嶽三十六景「隅田川関屋の里」舞台地——用 Wikimedia Commons API（generator=search gsrsearch=Sekiya village Hokusai Sumida）搜到公共领域浮世绘（MET 收藏 DP141023，3912x2634→1280px thumb），下载后 OCR 确认"富嶽三十六景 隅田川"+"葛飾北斎画"。**剩余 6 个无图定案**：活动类 5 个（じんがんなわ祭/一茶まつり/閻魔祭/鹿浜の獅子舞/だるま供養）——image_search 审核拒绝活动类查询、同名他地域活动照片误配风险高，**图标兜底**；八幡神社（西綾瀬）——tesshow 无页面（shrine_wayase_hachiman/shrine_nishiarai_hachiman 均 404）、维基无条目、image_search 无结果，**图标兜底**。本轮图库 99→100。
+
+## 4.3.573（2026-09-13，回滚布局 + 卡片表述优化，用户裁定）
+**用户指示**："回滚，其实让你优化表述，别出现拉面这种"——撤销 4.3.571 的横向滚动布局（用户"优化"本意是表述而非布局）；无图景点卡片不再显示 🍜 等具体 emoji 图标。
+**改动**：
+- sightseeing.js: SPOT_ICON_BY_TAG（10 个 emoji 语义图标）删除 → labelForTags()：按景点 tags 返回第一个匹配类别的**概括性文字**（t(TAG_LABELS)）
+- tourism-styles.css: `.sm-tag-filters` 恢复 `flex-wrap:wrap`（回滚 4.3.571 横向滚动）；`.sm-thumb-icon` 从 36px emoji 样式改为文字样式（14px+边框+圆角+底色）
+- 页面版本 572→573（并发会话图库已推进至 4.3.572）
+**验证**：node --check；file:// 标签 wrap 恢复；线上无图卡片显示类别文字、0 emoji、0 JS 错误；已 push 18fbe96
+**注意**：SPOT_ICON_BY_TAG 已整体删除（不再有具体食物/物品 emoji 兜底图标）；无图卡片 thumb 显示类别文字（無ければ空）。
+
+## 4.3.574（2026-09-13，labelForTags 跳过 all 标记）
+**问题**：4.3.573 上线后无图卡片显示"すべて"——tourism_data 所有景点 tags 首项均为 'all'（筛选按钮标记），labelForTags 遍历命中 'all' 返回 TAG_LABELS['all']='すべて'。
+**修复**：labelForTags 遍历跳过 `tags[i] !== 'all'`，显示第一个具体类别（神社/歴史/ショッピング等）。
+**验证**：线上无图卡片显示"季節"等具体类别、0 emoji、wrap 保持；已 push aae1fc9。
