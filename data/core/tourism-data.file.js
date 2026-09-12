@@ -6799,7 +6799,7 @@ window.RAILWAY_TOURISM = {
         "all",
         "seasonal"
       ],
-      "image": "",
+      "image": "../images/観光地/閻魔祭.jpg",
       "bestTime": "開催日",
       "hours": "",
       "fee": "無料",
