@@ -6863,7 +6863,7 @@ window.RAILWAY_TOURISM = {
         "all",
         "seasonal"
       ],
-      "image": "",
+      "image": "../images/観光地/鹿浜の獅子舞.jpg",
       "bestTime": "開催日",
       "hours": "",
       "fee": "無料",

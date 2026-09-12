@@ -1144,3 +1144,13 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 **修复**（css/tourism-styles.css）：.sm-tag-filters display:flex; flex-wrap:wrap → display:grid; grid-template-columns:repeat(5,1fr)——任意宽度恒为 5+5 两行、等宽填满无空隙；.sm-tag-btn 加 justify-content:center; white-space:nowrap，padding 6px 14px→6px 4px（grid 列内居中）；新增 @media(max-width:420px)（gap 4px/padding 12px 10px/字号 11px/padding 6px 0）与 @media(max-width:340px)（gap 2px/padding 12px 6px/字号 10px）两级窄屏适配（ショッピング/ランドマーク 6 字符在 375px 下 11px≈66px<列宽 67.8px 不折行）。
 **验证**：本地 511px 视口实测 display=grid、5 列均分、2 行、nowrap 无折行；线上 4.3.580 强刷后 bu.js 实测 cols=74.125/83.2/74.1375/83.2/74.125、rows=2、按钮等宽填满；curl 线上 CSS 含 repeat(5,1fr)。
 **提交**：push 1f5c630 + bump 4.3.580（4 页）
+
+## 4.3.581（2026-09-13，鹿浜の獅子舞 配图完成·全スポット有图 138/138）
+**用户指示**：「AIによる概要」を提供（閻魔祭り概要の後、鹿浜の獅子舞=足立区指定無形民俗文化財・江戸時代から約300年・三匹獅子舞 と案内）→ 唯一の無図 spot の配図を再開。
+**渠道尝试**（Commons 鹿浜獅子舞 0 hits → 足立区公式 2 枚 300px<400px 下限弃用済み → 足立区地域情報誌 PDF 再抽出）：
+- PDF=210.140.162.31/documents/33731/shikahama33.pdf（7.7MB、http 301→https 要 curl -sk）；第6頁（doc[5]）「足立区指定無形文化財 鹿浜獅子舞が4年ぶりの奉納」記事に写真2枚。
+- pymupdf クロップ試行 5 回（fitz.Rect を pt 指定）：OCR ボックスは千分比(0-1000)基準であることに注意（表示px ではない）。最終位置=写真1(獅子頭+舞手2人) Rect(30,140,190,246)pt を 4x でレンダリング → 640x424px。
+**採用**：images/観光地/鹿浜の獅子舞.jpg（640x424、PIL 変換 quality=88、59.7KB）——獅子頭を被った舞手2人が社殿前で舞う姿、キャプション入り込まず。Read 検証 OK（OCR=無文字、主体=獅子舞の舞手）。
+**处理**：tourism_data.json 鹿浜の獅子舞 image='../images/観光地/鹿浜の獅子舞.jpg'；**no-image spots=0（全 138 スポット有図）**；bundle 再生成（230KB）；4頁 bump 4.3.581（4.3.580 は前段で済み）。
+**验证**：Read 画像検証（主体=鹿浜東町会社殿前の獅子舞、640x424≥400px 下限、JPG 形式）；bundle ロード OK；git 併存チェック ls-remote=12ee811（ローカル HEAD 一致）。
+
