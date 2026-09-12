@@ -6991,7 +6991,7 @@ window.RAILWAY_TOURISM = {
         "all",
         "shrine"
       ],
-      "image": "",
+      "image": "../images/観光地/八幡神社西綾瀬.jpg",
       "bestTime": "日中",
       "hours": "参拝自由（境内）",
       "fee": "無料",
@@ -7119,7 +7119,7 @@ window.RAILWAY_TOURISM = {
         "all",
         "seasonal"
       ],
-      "image": "",
+      "image": "../images/観光地/だるま供養.jpg",
       "bestTime": "開催日",
       "hours": "",
       "fee": "無料",
