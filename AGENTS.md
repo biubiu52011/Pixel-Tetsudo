@@ -1016,6 +1016,7 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 4. 搜索历史条目 [object Object]（新发现，线上实测）：js/history.js lineInfo 为对象数组 [{from,to,lines}]，entry.lineInfo.flat() 不展开对象 → 渲染 [object Object]；改 _extractLines 提取各条 lines（兼容纯字符串旧数据）。
 5. 版本不一致（history/realtime/trains 页残留 ?v=4.3.469×42）：5 页面全部资源统一 bump 4.3.560。
 **验证**：node --check 6 文件（station-resolver/route-search/sightseeing/history/trains-page/data-fusion）；resolver 単測（work/_test-resolver.js）；verify-558.js 全绿（观光 top12 无都电/无假站/北千住正确）；verify-coord-fix.js 27/2（FAIL 1=预存悬挂引用 8 处遗留、FAIL 2=3km 命中 128 > 脚本期望 122——tourism spots 扩增 39→106 后正常增长，阈值未随更新，非回归）；bundle=json 一致性（2175 站/165 线/106 spots，4.3.559-补 遗留改动未破坏）。
+**部署说明**：提交后并发会话将 5 页面版本推进至 4.3.562（trains 页仍 4.3.560），实际部署内容即本轮修复（版本号仅缓存参数，无功能差异）。
 **遗留**：预存悬挂引用 8 处（TobuIsesaki:Goshi/Keisei 5 站/BanetsuEast:Sugaya，见 4.3.559-补）待专项；Hachinohe 站表混入/NO-COORD（ODPT 无八戸線数据）待 wiki 专项；spots 扩增 39→106 的 AGENTS.md 记录缺失（并发会话工作，verify 阈值未同步）。
 
 **4.3.562（2026-09-12，观光体验修正，用户「修正」指示）**：①**定位立即降级**——file:// 本地打开无 geolocation 权限时直接降级（跳过定位，立即显示默认站 北千住），guard 8s→4s（sightseeing.js initLocation 加 location.protocol==="file:" 短路）；②**无图景点类别图标**——新增 iconForTags()：按 tags 显示语义图标（神社 ⛩/寺 🏛/自然 🌳/食 🍜/季節 🎆/夜 🌙/買物 🛍/公園 🌲/ランドマーク 🗼/近代 🏙），替代统一齿轮（sightseeing.js thumbHtml），39 有图保持原图；③**页面双问号修正**——并发会话遗留 `??v=` 双问号（功能等价但格式错）统一为 `?v=`（home/tourism-detail/history/realtime 4 页面），版本 4.3.561→4.3.562 强制刷新。验证：file:// 打开 7s 内降级完成（数据就绪→立即降级→北千住 30 卡片）、图标抽查 金蔵寺🏛/地守稲荷神社⛩/閻魔祭🎆 全对、tab 切换无回归、0 JS 错误。
