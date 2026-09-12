@@ -101,15 +101,9 @@
   display: flex;
   gap: var(--space-4);
   padding: 14px 24px;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
+  flex-wrap: wrap;
   border-bottom: 1px solid var(--border);
   background: var(--card);
-}
-.sm-tag-filters::-webkit-scrollbar {
-  display: none;
 }
 .sm-tags {
   display: flex;
@@ -245,9 +239,15 @@
   display: block;
 }
 .sm-thumb-icon {
-  font-size: 36px;
+  /* 4.3.572: emoji 图标→类别文字（用户指示"别出现拉面这种"） */
+  font-size: 14px;
+  font-weight: 700;
   color: var(--text-muted);
-  line-height: 1;
+  letter-spacing: 1px;
+  padding: 8px 12px;
+  border: 2px solid var(--border, #e0e0e0);
+  border-radius: var(--radius, 6px);
+  background: var(--bg2, #f2f2f2);
 }
 .sm-dist-badge {
   position: absolute;

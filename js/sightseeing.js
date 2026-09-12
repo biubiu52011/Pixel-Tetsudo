@@ -20,26 +20,14 @@
     night: 'tourism.tag_night'
   };
 
-  // 4.3.561: 无图景点按类别显示语义图标（替代统一齿轮）
-  const SPOT_ICON_BY_TAG = {
-    shrine: '&#x26E9;&#xFE0F;',
-    history: '&#x1F3DB;&#xFE0F;',
-    nature: '&#x1F333;',
-    food: '&#x1F35C;',
-    seasonal: '&#x1F386;',
-    night: '&#x1F319;',
-    shopping: '&#x1F6CD;&#xFE0F;',
-    park: '&#x1F332;',
-    landmark: '&#x1F5FC;',
-    modern: '&#x1F3D9;&#xFE0F;'
-  };
-  function iconForTags(tags) {
+  // 4.3.572: 无图景点按类别显示概括性文字（替代 emoji 图标——用户指示"别出现拉面这种"）
+  function labelForTags(tags) {
     if (Array.isArray(tags)) {
       for (var i = 0; i < tags.length; i++) {
-        if (SPOT_ICON_BY_TAG[tags[i]]) return SPOT_ICON_BY_TAG[tags[i]];
+        if (TAG_LABELS[tags[i]]) return t(TAG_LABELS[tags[i]]) || tags[i];
       }
     }
-    return '&#x2699;';
+    return '';
   }
 
   const RIVERS = [
@@ -276,7 +264,7 @@ function renderGrid() {
 
       const thumbHtml = image ? 
         '<img class="sm-thumb-img" src="' + encodeURI(image) + '" alt="' + _escSpot(name) + '">' :
-        '<span class="sm-thumb-icon">' + iconForTags(tags) + '</span>';
+        '<span class="sm-thumb-icon">' + labelForTags(tags) + '</span>';
       
       // Localize distance text with current language (cached distanceText is ja-only)
       let distText = '';
