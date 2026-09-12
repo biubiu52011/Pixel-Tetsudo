@@ -8,15 +8,32 @@
 
   const TAG_LABELS = {
     all: 'tourism.tag_all',
-    night: 'tourism.tag_night',
-    history: 'tourism.tag_history',
-    nature: 'tourism.tag_nature',
     shrine: 'tourism.tag_shrine',
+    history: 'tourism.tag_history',
+    shopping: 'tourism.tag_shopping',
+    nature: 'tourism.tag_nature',
     food: 'tourism.tag_food',
-    seasonal: 'tourism.tag_seasonal'
+    landmark: 'tourism.tag_landmark',
+    seasonal: 'tourism.tag_seasonal',
+    park: 'tourism.tag_park',
+    modern: 'tourism.tag_modern',
+    night: 'tourism.tag_night'
   };
 
-  const TAG_ICONS = {};
+  // 4.3.567: 标签图标（emoji，随平台渲染）
+  const TAG_ICONS = {
+    all: '✨',
+    shrine: '⛩️',
+    history: '🏛️',
+    shopping: '🛍️',
+    nature: '🌳',
+    food: '🍜',
+    landmark: '🗼',
+    seasonal: '🍁',
+    park: '🌷',
+    modern: '🏙️',
+    night: '🌙'
+  };
 
   // 4.3.561: 无图景点按类别显示语义图标（替代统一齿轮）
   const SPOT_ICON_BY_TAG = {
@@ -97,7 +114,8 @@
 
   function renderTagFilters() {
     if (!dom.tagFilters) return;
-    const tags = ['all', 'night', 'history', 'nature', 'shrine', 'food', 'seasonal'];
+    // 4.3.567: 分类按数据量排序（shopping/landmark/park/modern 为新增，night 数据暂缺保留末位）
+    const tags = ['all', 'shrine', 'history', 'shopping', 'nature', 'food', 'landmark', 'seasonal', 'park', 'modern', 'night'];
     dom.tagFilters.innerHTML = tags.map(function(tag) {
       const label = t(TAG_LABELS[tag]) || tag;
       const icon = TAG_ICONS[tag] || '';
