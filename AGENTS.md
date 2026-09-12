@@ -1208,3 +1208,9 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 - css/style.css：.journey-transfer-text 徽章化（绿底绿框粗体，"乗換"更醒目）；.journey-transfer-hint 强调色（--yellow，fallback #b8860b）；.journey-seg-direction 10→11px。
 **验证**：node --check 双文件通过；方向逻辑新旧对比模拟（反向段 新宿→渋谷 由"新宿方面"→"渋谷方面"）；4 页 bump 4.3.586（home/history/realtime/tourism-detail 各 20/8/22/15 处）；线上人工验收待用户。
 **遗留**：trains.html 版本引用仍停 4.3.560（独立既有状态，未随主版本 bump——trains 页可能加载旧版 translations/style.css，影响小但待评估统一）；乘换 hint 仍为站级泛化文本（新宿 JR→JR 换乘也显示"私鉄・地下鉄連絡"），结构化换乘指引（番线/步行时长/换乘方向）需数据层新增字段，列为 Known Debt。
+
+
+## 4.3.587（2026-09-13，版本冲突协调·缓存键推进）
+**问题**：4.3.586 版本号被两个提交占用——本会话 e2fdadc（换乘指引清晰化）与并发会话 379f6b6（tourism 移除 22 个 0,0 活动 spot 452->430）先后都标 4.3.586，且 379f6b6 基于 e2fdadc 之上提交。
+**处理**：线上文件内容实际一致（379f6b6 在 e2fdadc 之上，?v=4.3.586 已能加载含全部改动的最终文件）；为遵守"版本号唯一 + 缓存键推进"铁律，将 4 页缓存键推进至 4.3.587（home/history/realtime/tourism-detail 各 20/8/22/15 处），确保任何中间缓存状态都被刷新。AGENTS.md 记录两个 4.3.586 并存事实备查。
+**验证**：4 页 bump 计数核对；git log 确认 379f6b6→e2fdadc→6854b3c 顺序；线上人工验收待用户。
