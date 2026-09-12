@@ -24,7 +24,7 @@
   function labelForTags(tags) {
     if (Array.isArray(tags)) {
       for (var i = 0; i < tags.length; i++) {
-        if (TAG_LABELS[tags[i]]) return t(TAG_LABELS[tags[i]]) || tags[i];
+        if (tags[i] !== 'all' && TAG_LABELS[tags[i]]) return t(TAG_LABELS[tags[i]]) || tags[i];
       }
     }
     return '';
