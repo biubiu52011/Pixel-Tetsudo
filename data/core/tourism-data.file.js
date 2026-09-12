@@ -11925,6 +11925,222 @@ window.RAILWAY_TOURISM = {
         }
       ],
       "image": "../images/観光地/神田まつや.jpg"
+    },
+    {
+      "name": "浅草たい焼き工房 求楽",
+      "coord": [
+        35.7121067,
+        139.7899784
+      ],
+      "dist": "TX浅草駅 徒歩4分 / 田原町駅 徒歩3分",
+      "desc": "浅草でたい焼きの手焼き体験（要予約）ができる人気店。あんこたっぷりの昔ながらの一丁焼きが自慢。",
+      "tags": [
+        "all",
+        "food"
+      ],
+      "bestTime": "午後",
+      "hours": "11:00-18:00（不定休）",
+      "fee": "たい焼き 1匹300円〜（体験は要予約・別料金）",
+      "tips": [
+        "手焼きたい焼き体験が人気（要予約）",
+        "あんこたっぷりの一丁焼き",
+        "テイクアウト中心"
+      ],
+      "name_i18n": {
+        "ja": "浅草たい焼き工房 求楽",
+        "zh": "浅草鲷鱼烧工房 求乐",
+        "en": "Asakusa Taiyaki Guraku",
+        "ko": "아사쿠사 타이야키 구라쿠"
+      },
+      "desc_i18n": {
+        "ja": "浅草でたい焼きの手焼き体験（要予約）ができる人気店。あんこたっぷりの一丁焼きが自慢。",
+        "zh": "浅草人气鲷鱼烧店，可体验亲手烤制鲷鱼烧（需预约）。红豆馅饱满的一丁烧是招牌。",
+        "en": "Popular Asakusa taiyaki shop offering hands-on baking experience (reservation required). Famous for its generously filled one-piece taiyaki.",
+        "ko": "아사쿠사의 인기 타이야키 가게. 직접 구워보는 체험(예약 필요)이 가능하며 앙금 가득한 타이야키가 자랑."
+      },
+      "hours_i18n": {
+        "ja": "11:00-18:00（不定休）",
+        "zh": "11:00-18:00（不定期休息）",
+        "en": "11:00-18:00 (irregular holidays)",
+        "ko": "11:00-18:00（부정기 휴무）"
+      },
+      "fee_i18n": {
+        "ja": "たい焼き 1匹300円〜（体験は要予約・別料金）",
+        "zh": "鲷鱼烧 1只300日元起（体验需预约・另收费）",
+        "en": "Taiyaki from ¥300 each (experience requires reservation and separate fee)",
+        "ko": "타이야키 1마리 300엔~（체험은 예약 필요·별도 요금）"
+      },
+      "bestTime_i18n": {
+        "ja": "午後",
+        "zh": "下午",
+        "en": "Afternoon",
+        "ko": "오후"
+      },
+      "tips_i18n": [
+        {
+          "ja": "手焼きたい焼き体験が人気（要予約）",
+          "zh": "手烤鲷鱼烧体验人气（需预约）",
+          "en": "Hand-baked taiyaki experience is popular (reservation required)",
+          "ko": "직접 굽는 타이야키 체험 인기（예약 필요）"
+        },
+        {
+          "ja": "あんこたっぷりの一丁焼き",
+          "zh": "红豆馅饱满的一丁烧",
+          "en": "Generously filled one-piece taiyaki",
+          "ko": "앙금 가득한 일정 구이"
+        },
+        {
+          "ja": "テイクアウト中心",
+          "zh": "以外带为主",
+          "en": "Take-out focused",
+          "ko": "테이크아웃 중심"
+        }
+      ],
+      "image": "../images/観光地/浅草たい焼き工房 求楽.jpg"
+    },
+    {
+      "name": "めぐろ三ツ星食堂",
+      "coord": [
+        35.633831,
+        139.719028
+      ],
+      "dist": "JR山手線目黒駅 徒歩4分 / 南北線目黒駅 徒歩4分",
+      "desc": "目黒駅近くの昭和レトロな洋食店。ふわとろオムライスが名物で、観葉植物が並ぶ木造の店先が目印。",
+      "tags": [
+        "all",
+        "food"
+      ],
+      "bestTime": "昼",
+      "hours": "火-金 11:30-14:30/18:00-21:30、土 11:30-14:30（月・日・祝定休）",
+      "fee": "飲食は実費（現金のみ）",
+      "tips": [
+        "ふわとろオムライスが名物",
+        "現金のみ（CASH ONLY）",
+        "ランチは早めの来店を"
+      ],
+      "name_i18n": {
+        "ja": "めぐろ三ツ星食堂",
+        "zh": "目黑三星食堂",
+        "en": "Meguro Mitsuboshi Shokudo",
+        "ko": "메구로 미츠보시 식당"
+      },
+      "desc_i18n": {
+        "ja": "目黒駅近くの昭和レトロな洋食店。ふわとろオムライスが名物。観葉植物が並ぶ木造の店先が目印。",
+        "zh": "目黑站附近的昭和复古西餐店。招牌是松软嫩滑的蛋包饭，店门口摆放绿植的木造门面是其标志。",
+        "en": "Showa-retro Western restaurant near Meguro Station. Famous for fluffy omelette rice, marked by a wooden storefront lined with plants.",
+        "ko": "메구로역 근처 쇼와 레트로 양식당. 부드러운 오므라이스가 명물이며 식물이 늘어선 목조 점포가 랜드마크."
+      },
+      "hours_i18n": {
+        "ja": "火-金 11:30-14:30/18:00-21:30、土 11:30-14:30（月・日・祝定休）",
+        "zh": "周二至周五 11:30-14:30/18:00-21:30、周六 11:30-14:30（周一・周日・节假日休息）",
+        "en": "Tue-Fri 11:30-14:30/18:00-21:30, Sat 11:30-14:30 (closed Mon, Sun, holidays)",
+        "ko": "화-금 11:30-14:30/18:00-21:30、토 11:30-14:30（월·일·공휴일 휴무）"
+      },
+      "fee_i18n": {
+        "ja": "飲食は実費（現金のみ）",
+        "zh": "餐饮自费（仅收现金）",
+        "en": "Food at own cost (cash only)",
+        "ko": "식사는 실비（현금만）"
+      },
+      "bestTime_i18n": {
+        "ja": "昼",
+        "zh": "白天",
+        "en": "Daytime",
+        "ko": "낮"
+      },
+      "tips_i18n": [
+        {
+          "ja": "ふわとろオムライスが名物",
+          "zh": "松软嫩滑的蛋包饭是招牌",
+          "en": "Famous for fluffy omelette rice",
+          "ko": "부드러운 오므라이스가 명물"
+        },
+        {
+          "ja": "現金のみ（CASH ONLY）",
+          "zh": "仅收现金",
+          "en": "Cash only",
+          "ko": "현금만 가능"
+        },
+        {
+          "ja": "ランチは早めの来店を",
+          "zh": "午餐建议早到",
+          "en": "Arrive early for lunch",
+          "ko": "점심은 일찍 방문 추천"
+        }
+      ],
+      "image": "../images/観光地/めぐろ三ツ星食堂.jpg"
+    },
+    {
+      "name": "PostCoffee Offline Store",
+      "coord": [
+        35.6312524,
+        139.7030639
+      ],
+      "dist": "JR山手線目黒駅 徒歩6分",
+      "desc": "AIが好みを診断して30種以上の豆からコーヒーを届けるサブスク「PostCoffee」の実店舗。※店舗営業は一時休業中（オンライン販売中心）。",
+      "tags": [
+        "all",
+        "food"
+      ],
+      "bestTime": "昼",
+      "hours": "12:00-17:00（月-金 定休）※一時休業中",
+      "fee": "コーヒー・グッズは実費",
+      "tips": [
+        "AI診断で好みのコーヒーを提案",
+        "30種以上の豆を取り扱い",
+        "実店舗は一時休業中"
+      ],
+      "name_i18n": {
+        "ja": "PostCoffee Offline Store",
+        "zh": "PostCoffee 线下店",
+        "en": "PostCoffee Offline Store",
+        "ko": "PostCoffee 오프라인 스토어"
+      },
+      "desc_i18n": {
+        "ja": "AIが好みを診断して30種以上の豆からコーヒーを届けるサブスク「PostCoffee」の実店舗。※店舗営業は一時休業中。",
+        "zh": "订阅式咖啡服务「PostCoffee」的实体店，AI诊断口味偏好，从30多种豆子中挑选配送。※店铺目前暂停营业。",
+        "en": "Physical store of PostCoffee, a coffee subscription that uses AI to diagnose preferences and deliver from 30+ beans. ※Store temporarily closed.",
+        "ko": "AI가 취향을 진단해 30종 이상의 원두에서 커피를 배송하는 구독 서비스 'PostCoffee'의 실물 매장. ※일시 휴업 중."
+      },
+      "hours_i18n": {
+        "ja": "12:00-17:00（月-金 定休）※一時休業中",
+        "zh": "12:00-17:00（周一至周五休息）※暂停营业中",
+        "en": "12:00-17:00 (closed Mon-Fri) ※Temporarily closed",
+        "ko": "12:00-17:00（월-금 휴무）※일시 휴업 중"
+      },
+      "fee_i18n": {
+        "ja": "コーヒー・グッズは実費",
+        "zh": "咖啡・周边商品自费",
+        "en": "Coffee and goods at own cost",
+        "ko": "커피·굿즈는 실비"
+      },
+      "bestTime_i18n": {
+        "ja": "昼",
+        "zh": "白天",
+        "en": "Daytime",
+        "ko": "낮"
+      },
+      "tips_i18n": [
+        {
+          "ja": "AI診断で好みのコーヒーを提案",
+          "zh": "AI诊断推荐符合口味的咖啡",
+          "en": "AI diagnoses your taste and suggests coffee",
+          "ko": "AI 진단으로 취향에 맞는 커피 제안"
+        },
+        {
+          "ja": "30種以上の豆を取り扱い",
+          "zh": "经营30多种咖啡豆",
+          "en": "Carries 30+ bean varieties",
+          "ko": "30종 이상의 원두 취급"
+        },
+        {
+          "ja": "実店舗は一時休業中",
+          "zh": "实体店暂停营业中",
+          "en": "Store temporarily closed",
+          "ko": "실물 매장 일시 휴업 중"
+        }
+      ],
+      "image": "../images/観光地/PostCoffee Offline Store.jpg"
     }
   ],
   "station_exits": {

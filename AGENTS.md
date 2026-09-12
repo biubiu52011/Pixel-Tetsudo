@@ -1170,3 +1170,14 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 **配图**（沿用硬流程：Commons API 带 UA+8s 间隔+下载后 Read 双验证 OCR+主体，禁只看尺寸）：13 张全部 Read 验证。弃却 6 张（神保町ひまわり館=区役所出張所ビル/神保町駅構内ゲート、巣鴨=駅構内改札、高円寺=駅前交差点（みずほ+マクド）主体なし、神田まつや=蕎麦丼の料理写真）——再検索 4 处（Jinbocho bookstores/Sugamo jizodori/Koenji jyunjyo/Matsuya soba shop）后全数采用。最终图：かっぱ橋=新井食器+料理人像（OCR「かっぱ橋道具街」直证）/神保町=古書店並ぶ通り（蔵文閣・明倫館・大屋書店 OCR）/アメヤ横丁=アーチ入口（AMEYAYOKOCHO OCR）/巣鴨=地蔵通りアーチ（「商」紋）/戸越=アーチ（「としこぎんざ」）/砂町=アーチ入口（砂町銀座+時計）/高円寺=純情商店街緑黄アーチ/十条=アーチ（JUJO GINZA）/自由が丘=商店街+熊野神社看板/神楽坂=通りの看板/代官山=T-SITE ガラス建築（ファイル名直证）/木村家=夜の店舗（GINZA KIMURAYA OCR）/まつや=木造2階建て店舗（手打そば暖簾 OCR）。
 **处理**：13 張转存 images/観光地/；170 spots image 字段全回填、**no-image spots=0**、文件完整性 170/170；bundle 再生成（tourism-data.file.js 295KB）；4 頁 bump 4.3.583。
 **验证**：bundle 13 新 image 路径 13/13；spots 170 无图 0、文件缺失 0；git ls-remote=85396b3（4.3.582，无并发）。
+
+
+## 4.3.584（2026-09-13，Google Maps 点评图配图·findmy.tokyo 特色单店 3 个）
+**用户指示**："可以使用谷歌评价等点评网站的优质评论图片"——配图来源授权扩展：Commons 无图的特色单店可用 Google Maps 评论/照片图。
+**点评图获取流程（已实测）**：bu（browser-use-automation）打开 google.com/maps/search/店名 → 点击"查看照片"开照片墙 → bu.js 提取全部 lh3.googleusercontent.com/gps-cs-s 的 URL（img src + background-image 双源，去重）→ URL 以 = 分割取 base，拼 =w1280-h960-k-no → fetch 下载（带 UA，1.2-1.5s 间隔，多张 400 时多为 URL 抄错，须用 bu.js 完整输出落盘再下）→ Read 双验证。店铺坐标从 place 页 URL 的 @lat,lng 提取（search 页无坐标）。
+**数据**：tourism_data.json 170→173 spots。新增（全部 findmy.tokyo/東京メトロ 系特色单店、Commons 无图）：
+- 浅草たい焼き工房 求楽（台東区西浅草2-3-2，35.7121067,139.7899784，TX浅草4分/田原町3分）——たい焼き手焼き体験（要予約）・一丁焼き。图=店頭（赤れんが+赤提灯+「たい焼」のれん，OCR 直证）。G Maps 4.7★/1065 评。
+- めぐろ三ツ星食堂（品川区上大崎3-4-6，35.633831,139.719028，目黒駅4分）——昭和レトロ洋食・ふわとろオムライス名物。图=店先外観（木造+観葉植物+CASH ONLY，OCR 直证）。G Maps 4.0★/436 评/892+ 图。
+- PostCoffee Offline Store（目黒4-11-7，35.6312524,139.7030639，目黒駅6分）——AI コーヒー診断サブスク実店舗。**実店舗営業は一時休業中**（desc/i18n 明記）。图=店内ボトル棚（30+ 種の豆，OCR「POST」直证）。
+**处理**：3 图转存 images/観光地/（235/268/313KB）；173 spots 无图 0・文件缺失 0・DUP 0・i18n 四語完全（新增 3 个）；bundle 再生成（tourism-data.file.js 301KB）；4 頁 bump 4.3.584。
+**验证**：3 新 spot 结构完整（image/tips_i18n 3 条/tags all, food）；既有 13 个 spot i18n 缺失（観臓記念碑/浄閑寺/千住桜堤/ギャラクシティ/大谷田温泉明神の湯 等）为历史遗留，本轮不动；git ls-remote=13eb7b8（4.3.583，无并发）。
