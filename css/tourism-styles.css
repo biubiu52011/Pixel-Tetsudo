@@ -101,9 +101,15 @@
   display: flex;
   gap: var(--space-4);
   padding: 14px 24px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
   border-bottom: 1px solid var(--border);
   background: var(--card);
+}
+.sm-tag-filters::-webkit-scrollbar {
+  display: none;
 }
 .sm-tags {
   display: flex;

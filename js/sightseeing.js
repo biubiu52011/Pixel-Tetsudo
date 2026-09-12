@@ -20,21 +20,6 @@
     night: 'tourism.tag_night'
   };
 
-  // 4.3.567: 标签图标（emoji，随平台渲染）
-  const TAG_ICONS = {
-    all: '✨',
-    shrine: '⛩️',
-    history: '🏛️',
-    shopping: '🛍️',
-    nature: '🌳',
-    food: '🍜',
-    landmark: '🗼',
-    seasonal: '🍁',
-    park: '🌷',
-    modern: '🏙️',
-    night: '🌙'
-  };
-
   // 4.3.561: 无图景点按类别显示语义图标（替代统一齿轮）
   const SPOT_ICON_BY_TAG = {
     shrine: '&#x26E9;&#xFE0F;',
@@ -118,9 +103,9 @@
     const tags = ['all', 'shrine', 'history', 'shopping', 'nature', 'food', 'landmark', 'seasonal', 'park', 'modern', 'night'];
     dom.tagFilters.innerHTML = tags.map(function(tag) {
       const label = t(TAG_LABELS[tag]) || tag;
-      const icon = TAG_ICONS[tag] || '';
+      // 4.3.571: 标签纯文字（emoji 图标已移除）
       return '<button class="sm-tag-btn' + (state.activeTags.size === 0 || state.activeTags.has(tag) ? ' active' : '') + 
-             '" data-tag="' + tag + '"><span class="tag-icon">' + icon + '</span><span class="tag-label">' + label + '</span></button>';
+             '" data-tag="' + tag + '"><span class="tag-label">' + label + '</span></button>';
     }).join('');
 
     // Event delegation - bind once on the container
