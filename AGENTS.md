@@ -1181,3 +1181,16 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 - PostCoffee Offline Store（目黒4-11-7，35.6312524,139.7030639，目黒駅6分）——AI コーヒー診断サブスク実店舗。**実店舗営業は一時休業中**（desc/i18n 明記）。图=店内ボトル棚（30+ 種の豆，OCR「POST」直证）。
 **处理**：3 图转存 images/観光地/（235/268/313KB）；173 spots 无图 0・文件缺失 0・DUP 0・i18n 四語完全（新增 3 个）；bundle 再生成（tourism-data.file.js 301KB）；4 頁 bump 4.3.584。
 **验证**：3 新 spot 结构完整（image/tips_i18n 3 条/tags all, food）；既有 13 个 spot i18n 缺失（観臓記念碑/浄閑寺/千住桜堤/ギャラクシティ/大谷田温泉明神の湯 等）为历史遗留，本轮不动；git ls-remote=13eb7b8（4.3.583，无并发）。
+
+
+
+## 4.3.585（2026-09-13，findmy.tokyo 全挑战导入·279 店批量入观光图库）
+**用户指示**："能把网站的店铺全部倒过来吗"——将 findmy.tokyo（東京メトロ「Find my Tokyo.」challenge 企划）**全部 290 个挑战**导入 tourism_data.json。
+**数据源突破（自定义 API 实拉）**：challenge 页是 SPA（HTML 仅壳），但 main.bundle.js 暴露自定义 REST 端点 `/wp-json/v2/challenge/<id>`——单请求返回结构化全量数据：title/topics[0].text（主题描述）/info[0].text（店名+住所+電話+営業時間+定休日+最寄駅アクセス）/info[0].map **[lat,lng] 直接给坐标**（无需 nominatim geocoding）/image_top（官方主视觉）/tags。全量列表走 wp-sitemap-posts-challenge-1.xml（290 个 <loc>，ID 2~683）。curl.exe 带 UA 可直抓，0 失败。
+**数据处理**：290 详情全拉（300ms 限速）→ 278 张官方图下载（image_top，800x500 JPG，0 失败）→ 确定性解析（店名=info 首行、[住所]/[営業時間]/[定休日]/[アクセス] 正则提取、坐标直取、tags 映射到 all/food/shopping/history/nature/landmark/park/shrine/seasonal/modern 词表）→ 4 批并行子代理（71/70/70/70）Read 验证图 + 四语 i18n + tips×3。
+**配图验证（用户铁律）**：4 个子代理共 Read 验证 234 张（餐饮/咖啡/店铺全验 OCR 辨店名/招牌/料理；公园/神社/活动抽样 50%），**0 错图**——官方主视觉与店名/主体全部吻合（SOBA CAFE IKEMORI/パパブブレ/深川図書館/東証/榎本ハンバーグ研究所 等 OCR 直证）。官方图缺失 0（仅「東京メトロの七夕飾り」1 张 localImage=null，image 留空）。
+**去重**：跳过 5 个无 info 块的早期挑战（ID 2/4/6/8/9）；跳过 4 个与既有 spot 同名重复（王子稲荷神社/飛鳥山公園/旧古河庭園/日比谷公園）；合并时再去 2 个批内重复（東京まちさんぽ ID16/54、新発見！駅から始まるさんぽ道）。最终 **173→452 spots（+279）**。
+**坐标**：258 个带真实经纬度（API info.map 直给）；**22 个 coord=[0,0]**（活动类/stamp rally/展览类无实体地址：お江戸深川さくらまつり/ジブリクイズラリー/タラレバ娘スタンプラリー/地下謎への招待状2016/すすメトロ！検定各弾/東京グレートカヤッキングツアー 等——nominatim geocoding 对活动名全失败，按规则 [0,0] 待补）。
+**处理**：278 图转存 images/観光地/（文件名=shopName，Windows 非法字符清理）；279 新 spot 四语 i18n 全字段（name/desc/hours/fee/bestTime/tips_i18n 3 条 × ja/zh/en/ko）schema 校验 0 错误；tourism_data.json 173→452；bundle 再生成（tourism-data.file.js 861KB）；4 頁 bump 4.3.585（home/history/realtime/tourism-detail 各 20/8/22/15 处）。
+**验证**：bundle 加载 452 spots OK；JSON 语法合法；schema 0 错误；4 子代理报告错图 0；git ls-remote=e3bef82（无并发）。
+**遗留**：22 个 coord=[0,0] 活动类 spot 待补坐标；1 个无图 spot（東京メトロの七夕飾り）待补官方图；5 个无 info 早期挑战（ID 2/4/6/8/9）未导入。
