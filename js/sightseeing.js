@@ -16,8 +16,7 @@
     landmark: 'tourism.tag_landmark',
     seasonal: 'tourism.tag_seasonal',
     park: 'tourism.tag_park',
-    modern: 'tourism.tag_modern',
-    night: 'tourism.tag_night'
+    modern: 'tourism.tag_modern'
   };
 
   // 4.3.572: 无图景点按类别显示概括性文字（替代 emoji 图标——用户指示"别出现拉面这种"）
@@ -87,8 +86,8 @@
 
   function renderTagFilters() {
     if (!dom.tagFilters) return;
-    // 4.3.567: 分类按数据量排序（shopping/landmark/park/modern 为新增，night 数据暂缺保留末位）
-    const tags = ['all', 'shrine', 'history', 'shopping', 'nature', 'food', 'landmark', 'seasonal', 'park', 'modern', 'night'];
+    // 4.3.575: 分类按数据量排序（night 数据为 0 已移除——点开即空白；未来补夜景数据可加回）
+    const tags = ['all', 'shrine', 'history', 'shopping', 'nature', 'food', 'landmark', 'seasonal', 'park', 'modern'];
     dom.tagFilters.innerHTML = tags.map(function(tag) {
       const label = t(TAG_LABELS[tag]) || tag;
       // 4.3.571: 标签纯文字（emoji 图标已移除）
@@ -219,8 +218,11 @@ function renderGrid() {
         return s.tags && s.tags.some(function(t) { return state.activeTags.has(t); });
       });
     }
-    // Sort by distance
+    // 4.3.575: 有图优先 + 距离排序（无图卡压缩缩略区后排后，避免列表前部出现空白块）
     spotList.sort(function(a, b) {
+      const ai = a.image ? 0 : 1;
+      const bi = b.image ? 0 : 1;
+      if (ai !== bi) return ai - bi;
       if (a.distM === null) return 1;
       if (b.distM === null) return -1;
       return a.distM - b.distM;
@@ -262,6 +264,7 @@ function renderGrid() {
       const tags = s.tags || [];
       const image = s.image || '';
 
+      // 4.3.575: 无图卡片缩略区压缩（sm-thumb-noimg 56px 类别文字卡，替代 140px 空白块）
       const thumbHtml = image ? 
         '<img class="sm-thumb-img" src="' + encodeURI(image) + '" alt="' + _escSpot(name) + '">' :
         '<span class="sm-thumb-icon">' + labelForTags(tags) + '</span>';
@@ -285,7 +288,7 @@ function renderGrid() {
       const detailUrl = 'tourism-detail.html?station=' + encodeURIComponent(stationKey) + '&index=' + idx + '&name=' + encodeURIComponent(name);
 
       return '<a href="' + detailUrl + '" class="sm-card" data-index="' + idx + '">' +
-        '<div class="sm-thumb">' + thumbHtml + '</div>' +
+        '<div class="sm-thumb' + (image ? '' : ' sm-thumb-noimg') + '">' + thumbHtml + '</div>' +
         '<div class="sm-body">' +
           '<h3>' + _escSpot(name) + '</h3>' +
           distRowHtml +
