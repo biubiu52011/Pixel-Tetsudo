@@ -1025,3 +1025,14 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 **配图**：image_search（doubao CDN）为主 + Wikimedia 为辅，下载 12 张合格 JPG 存 images/観光地/——西新井大師総持寺(1280x853)/大谷田温泉明神の湯(900x901)/足立区立郷土博物館(750x375)/舎人氷川神社(1024x577)/綾瀬稲荷神社(400x300)/千住本氷川神社(960x720)/千住神社(800x533)/石洞美術館(500x333)/花畑大鷲神社(1000x750)/足立の花火(1499x1000)/満願寺(1000x500)/炎天寺(960x489)。**尺寸不合格弃用 2 张**（千住氷川神社 160x120、南光寺小图，保留图标兜底）。Wikimedia 直连被 IP 级 429 限速（退避 160s 仍 429，浏览器 UA 无效）——CC 图库批量下载需长间隔分批；image_search 返回的 aka.doubaocdn.com 短链可稳定下载（注意同名词张冠李戴：竹塚神社→宮城竹駒神社、梅島天満宮→湯島天満宮 均拒用）。
 **重要修复（格式 bug）**：tourism_data.json 顶层是对象 {spots, station_exits}（db-loader applyTourismData 读 override.spots，4.3.557 后 station_exits 16 键仍在）；本次配图写回脚本误把文件写成裸数组 → TOURISM_SPOTS 空 → 观光全空（默认站 新宿 0 卡片、getNearbySpotsByStation 全 0）。修复：git show HEAD 取回 station_exits，恢复对象格式并保留 image 字段，bundle 重跑。**教训：tourism_data.json 写回必须保持 {spots, station_exits} 对象结构，禁止裸数组。**
 **规模**：有图 39→51、无图 55（语义图标兜底）；bundle tourism-data.file.js 174KB；4 页面 bump ?v=4.3.562→4.3.563（trains.html 4.3.547 不动）。验证：浏览器实测 Kita-Senju（千住本氷川神社 960x720/千住神社 800x533/石洞美術館 图）+ Daishi_Mae（西新井大師/満願寺/炎天寺 图）全对、0 JS 错误。
+
+## 4.3.564（2026-09-12，观光区定位失败空态·彻底取消手动选站）
+**用户裁定**："定位失败后不要给备选站"+"彻底取消用户手动选站"——观光区仅展示定位附近景点；定位失败显示"位置情報が取得できません"空态，不提供 Shinjuku/北千住等任何备选；站选择器与手动选站入口全部移除。
+**修复**（js/sightseeing.js）：
+- initLocation guard/locFallback 删除 selectedStation 兜底赋值（原 `(getMajorStations().length>0)?[0]:'Shinjuku'`）——定位失败保持 error 无站，渲染层走 tourism.loc_error + 空 grid
+- bindEvents 仅保留 relocateBtn→initLocation；删除 stationPicker 点击、locationBar 打开 picker 逻辑
+- 删除 showStationPicker/hideStationPicker/setStation（无消费者）；SightseeingModule={init,setLang}
+- 删除孤儿 getMajorStations（站选择器唯一调用者移除后无引用）与 cacheDom 中 locationBar/stationPicker 引用
+- 页面版本 563→564（4 页统一，trains 页非本次范围不动）
+**验证**：node --check；verify-558.js 通过；file:// 本地实测定位失败→"位置情報が取得できません"+空态，无 Shinjuku/北千住备选；已 push c25d7ef
+**渲染层既有路径（未改）**：updateStationDisplay error+无站→tourism.loc_error；renderGrid 无站→清空+smEmpty
