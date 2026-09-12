@@ -4368,7 +4368,7 @@ window.RAILWAY_TOURISM = {
         "all",
         "shrine"
       ],
-      "image": "../images/観光地/千住神社.jpg",
+      "image": "",
       "bestTime": "日中",
       "hours": "参拝自由（境内）",
       "fee": "無料",
