@@ -920,3 +920,10 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 **修改**（js/trains-page.js）：_branchHSp 定义行 +12 → +sp（注释更新）；branchGeom 块后新增 svgH 扩展。
 **验证**：node --check OK；本地 DOM——成田空港 x=587.6/755.2（站距 167.6）、viewBox 952×1026（svgW 852→952）、成田站名 y=126、我孫子竖列 307.6:204→700（站距 62 无回归）；鹤见 viewBox 820×654 不变、横排站距 114.8（站名间隙 62）；千代田 820×1344 无回归。
 **版本**：bump trains-page.js ?v=4.3.550→4.3.551（数据未动不 bump db-loader）；LINE-DIAGRAM-SPEC 修订表 4.3.551 行。
+
+## 4.3.552（2026-09-12，详情返回按钮改纯退回）
+**用户指示**："发现问题返回是返回对应一览页，不是退回"——trains 详情页返回按钮行为不符合"退回"语义。
+**根因（本地 DOM 实测）**：返回按钮原为 history.back() 优先 + fallback（history.length<=1 时 location.hash="" 清 hash 跳一览页）——①直开详情（新标签打开 #Tsurumi，hlen=1）时走 fallback 直接跳一览页（"返回一览页"），非退回；②location.hash="" 产生新 history entry（hlen 1→2），用户再点返回反而 back() 回详情，形成"详情→一览→详情"循环。
+**修复**（js/trains-page.js backBtn 监听）：一律 window.history.back()，与 tourism-detail handleBack 完全同步；删除 fallback 块与 2312 行无效 hash 检查（back 异步）。hashchange 兜底保留——back() 回列表（hash 空→hideLineView）/回上一详情（hash 变→showLineView）视图自动恢复；无历史（直开详情）时 back() 无操作、详情保持（同浏览器后退按钮禁用语义）。
+**验证**：node --check OK；本地 DOM——直开 #Tsurumi（hlen=1）点返回 URL/hash/详情均不变（不再跳一览页）；列表→鹤见→返回回列表（hash 空）；详情→回列表→成田→返回回列表。
+**版本**：bump trains-page.js ?v=4.3.551→4.3.552（数据未动不 bump db-loader）；LINE-DIAGRAM-SPEC 修订表 4.3.552 行。
