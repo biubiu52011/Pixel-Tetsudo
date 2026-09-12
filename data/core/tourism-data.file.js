@@ -9505,6 +9505,1472 @@ window.RAILWAY_TOURISM = {
         ]
       },
       "image": "../images/観光地/柴又帝釈天.jpg"
+    },
+    {
+      "name": "増上寺",
+      "coord": [
+        35.6574,
+        139.7469
+      ],
+      "dist": "都営三田線 御成門駅 徒歩5分 / 大門駅 徒歩5分",
+      "desc": "徳川将軍家の菩提寺。江戸時代から続く浄土宗の大本山で、東京タワーを背景にした大門と本堂の景観が有名。国指定文化財の三解脱門や徳川家霊廟も見どころ。",
+      "tags": [
+        "all",
+        "shrine",
+        "history"
+      ],
+      "bestTime": "通年",
+      "hours": "境内自由（大殿 9:00-17:00）",
+      "fee": "無料",
+      "tips": [
+        "三解脱門は国の重要文化財",
+        "東京タワーと大門のコラボ写真が人気",
+        "徳川将軍家の霊廟も拝観できる"
+      ],
+      "name_i18n": {
+        "ja": "増上寺",
+        "zh": "增上寺",
+        "en": "Zojoji Temple",
+        "ko": "조조지 절"
+      },
+      "desc_i18n": {
+        "ja": "徳川将軍家の菩提寺。江戸時代から続く浄土宗の大本山で、東京タワーを背景にした大門と本堂の景観が有名。",
+        "zh": "德川将军家的菩提寺，江户时代延续至今的净土宗大本山，以东京塔为背景的山门与正殿景观闻名。",
+        "en": "The family temple of the Tokugawa shoguns. Head temple of the Jodo sect since the Edo period, famous for its main gate and hall set against Tokyo Tower.",
+        "ko": "도쿠가와 장군가의 보리사. 에도 시대부터 이어지는 정토종 대본산으로 도쿄타워를 배경으로 한 대문과 본당 경관으로 유명하다."
+      },
+      "hours_i18n": {
+        "ja": "境内自由（大殿 9:00-17:00）",
+        "zh": "院内自由（大殿 9:00-17:00）",
+        "en": "Grounds free (Main Hall 9:00-17:00)",
+        "ko": "경내 자유（대전 9:00-17:00）"
+      },
+      "fee_i18n": {
+        "ja": "無料",
+        "zh": "免费",
+        "en": "Free",
+        "ko": "무료"
+      },
+      "bestTime_i18n": {
+        "ja": "通年",
+        "zh": "全年",
+        "en": "Year-round",
+        "ko": "연중"
+      },
+      "tips_i18n": [
+        {
+          "ja": "三解脱門は国の重要文化財",
+          "zh": "三解脱门为国家重要文化财产",
+          "en": "The Sangedatsumon gate is a National Important Cultural Property",
+          "ko": "삼해탈문은 국가 중요 문화재"
+        },
+        {
+          "ja": "東京タワーと大門のコラボ写真が人気",
+          "zh": "东京塔与山门同框是经典机位",
+          "en": "A classic photo spot combining Tokyo Tower and the gate",
+          "ko": "도쿄타워와 대문이 함께 나오는 사진이 인기"
+        },
+        {
+          "ja": "徳川将軍家の霊廟も拝観できる",
+          "zh": "可参拜德川将军家灵庙",
+          "en": "The Tokugawa shogun mausoleums can also be visited",
+          "ko": "도쿠가와 장군가의 영묘도 참배 가능"
+        }
+      ],
+      "image": "../images/観光地/増上寺.jpg"
+    },
+    {
+      "name": "東京ミッドタウン",
+      "coord": [
+        35.6664,
+        139.7313
+      ],
+      "dist": "都営大江戸線 六本木駅 直結",
+      "desc": "六本木の複合商業施設。デザイン性の高い建築と緑豊かな広場が特徴で、ミッドタウンガーデンや21_21 DESIGN SIGHTなどの文化施設も充実。",
+      "tags": [
+        "all",
+        "shopping",
+        "modern",
+        "landmark"
+      ],
+      "bestTime": "通年",
+      "hours": "店舗・施設により異なる（多くは 11:00-21:00）",
+      "fee": "入場無料（施設により異なる）",
+      "tips": [
+        "ガーデンエリアは無料で散策できる",
+        "春は桜の名所としても有名",
+        "21_21 DESIGN SIGHT は建築ファン必見"
+      ],
+      "name_i18n": {
+        "ja": "東京ミッドタウン",
+        "zh": "东京中城",
+        "en": "Tokyo Midtown",
+        "ko": "도쿄 미드타운"
+      },
+      "desc_i18n": {
+        "ja": "六本木の複合商業施設。デザイン性の高い建築と緑豊かな広場が特徴。",
+        "zh": "六本木的综合商业设施，以设计感强的建筑和绿意盎然的广场为特色。",
+        "en": "A complex commercial facility in Roppongi, known for its design-driven architecture and green plazas.",
+        "ko": "롯폰기의 복합 상업 시설. 디자인성이 높은 건축과 녹지가 풍부한 광장이 특징."
+      },
+      "hours_i18n": {
+        "ja": "店舗・施設により異なる（多くは 11:00-21:00）",
+        "zh": "因店铺设施而异（多为 11:00-21:00）",
+        "en": "Varies by store (mostly 11:00-21:00)",
+        "ko": "점포·시설마다 상이（대부분 11:00-21:00）"
+      },
+      "fee_i18n": {
+        "ja": "入場無料（施設により異なる）",
+        "zh": "入场免费（设施各异）",
+        "en": "Free entry (varies by facility)",
+        "ko": "입장 무료（시설에 따라 상이）"
+      },
+      "bestTime_i18n": {
+        "ja": "通年",
+        "zh": "全年",
+        "en": "Year-round",
+        "ko": "연중"
+      },
+      "tips_i18n": [
+        {
+          "ja": "ガーデンエリアは無料で散策できる",
+          "zh": "花园区域可免费漫步",
+          "en": "The garden area is free to stroll",
+          "ko": "가든 에리어는 무료로 산책 가능"
+        },
+        {
+          "ja": "春は桜の名所としても有名",
+          "zh": "春季也是赏樱名所",
+          "en": "Famous for cherry blossoms in spring",
+          "ko": "봄에는 벚꽃 명소로도 유명"
+        },
+        {
+          "ja": "21_21 DESIGN SIGHT は建築ファン必見",
+          "zh": "21_21 DESIGN SIGHT 建筑迷必看",
+          "en": "21_21 DESIGN SIGHT is a must-see for design fans",
+          "ko": "21_21 DESIGN SIGHT는 디자인 팬 필견"
+        }
+      ],
+      "image": "../images/観光地/東京ミッドタウン.jpg"
+    },
+    {
+      "name": "築地場外市場",
+      "coord": [
+        35.6655,
+        139.771
+      ],
+      "dist": "都営大江戸線 築地市場駅 徒歩1分",
+      "desc": "豊洲移転後も残る活気ある市場街。約400店舗が軒を連ね、海鮮丼・玉子焼き・だし巻きなど食の宝庫。朝から多くの観光客で賑わう。",
+      "tags": [
+        "all",
+        "food",
+        "shopping"
+      ],
+      "bestTime": "早朝〜午前中",
+      "hours": "店舗により異なる（多くは 5:00-14:00 前後）",
+      "fee": "無料（飲食・買物は実費）",
+      "tips": [
+        "朝早い時間帯が新鮮な食材でおすすめ",
+        "玉子焼きの食べ歩きが定番",
+        "日曜・祝日は休みの店が多い"
+      ],
+      "name_i18n": {
+        "ja": "築地場外市場",
+        "zh": "筑地场外市场",
+        "en": "Tsukiji Outer Market",
+        "ko": "츠키지 시장"
+      },
+      "desc_i18n": {
+        "ja": "豊洲移転後も残る活気ある市場街。海鮮丼や玉子焼きなど食の宝庫。",
+        "zh": "丰洲搬迁后仍充满活力的市场街，海鲜丼、玉子烧等美食宝库。",
+        "en": "A lively market street that remains after the Toyosu relocation. A food treasure trove of seafood bowls and tamagoyaki.",
+        "ko": "도요스 이전 후에도 남은 활기찬 시장가. 해산물 덮밥, 계란말이 등 미식의 보고."
+      },
+      "hours_i18n": {
+        "ja": "店舗により異なる（多くは 5:00-14:00 前後）",
+        "zh": "因店铺而异（多为 5:00-14:00 前后）",
+        "en": "Varies by shop (mostly around 5:00-14:00)",
+        "ko": "점포마다 상이（대부분 5:00-14:00 전후）"
+      },
+      "fee_i18n": {
+        "ja": "無料（飲食・買物は実費）",
+        "zh": "免费（饮食购物自费）",
+        "en": "Free (food and shopping at own cost)",
+        "ko": "무료（식사·쇼핑은 실비）"
+      },
+      "bestTime_i18n": {
+        "ja": "早朝〜午前中",
+        "zh": "清晨至上午",
+        "en": "Early morning to noon",
+        "ko": "이른 아침~오전"
+      },
+      "tips_i18n": [
+        {
+          "ja": "朝早い時間帯が新鮮な食材でおすすめ",
+          "zh": "清晨时段食材最新鲜",
+          "en": "Early morning offers the freshest food",
+          "ko": "이른 아침 시간대가 신선한 식재료로 추천"
+        },
+        {
+          "ja": "玉子焼きの食べ歩きが定番",
+          "zh": "边走边吃玉子烧是经典",
+          "en": "Eating tamagoyaki while walking is a classic",
+          "ko": "계란말이 먹으면서 걷는 것이 정석"
+        },
+        {
+          "ja": "日曜・祝日は休みの店が多い",
+          "zh": "周日节假日许多店休业",
+          "en": "Many shops close on Sundays and holidays",
+          "ko": "일요일·공휴일은 쉬는 점포가 많음"
+        }
+      ],
+      "image": "../images/観光地/築地場外市場.jpg"
+    },
+    {
+      "name": "日比谷公園",
+      "coord": [
+        35.6733,
+        139.7576
+      ],
+      "dist": "東京メトロ 日比谷駅 直結 / 有楽町駅 徒歩5分",
+      "desc": "日本初の洋風公園として1903年に開園。大噴水や日比谷公会堂、鶴の噴水などがあり、都会のオアシスとして親しまれる。",
+      "tags": [
+        "all",
+        "park",
+        "nature"
+      ],
+      "bestTime": "通年",
+      "hours": "終日開放（一部施設あり）",
+      "fee": "無料",
+      "tips": [
+        "大噴水周辺は映画のロケ地としても有名",
+        "秋は銀杏並木が見事",
+        "ランチタイムは近隣のビジネスパーソンで賑わう"
+      ],
+      "name_i18n": {
+        "ja": "日比谷公園",
+        "zh": "日比谷公园",
+        "en": "Hibiya Park",
+        "ko": "히비야 공원"
+      },
+      "desc_i18n": {
+        "ja": "日本初の洋風公園として1903年に開園。大噴水や公会堂があり、都会のオアシス。",
+        "zh": "1903年开园的日本首个西式公园，拥有大喷泉与公会堂，是都市绿洲。",
+        "en": "Opened in 1903 as Japan's first Western-style park. A downtown oasis with a large fountain and Hibiya Public Hall.",
+        "ko": "1903년 개원한 일본 최초의 서양식 공원. 대분수와 공회당이 있으며 도심의 오아시스."
+      },
+      "hours_i18n": {
+        "ja": "終日開放（一部施設あり）",
+        "zh": "全天开放（部分设施）",
+        "en": "Open all day (some facilities)",
+        "ko": "종일 개방（일부 시설）"
+      },
+      "fee_i18n": {
+        "ja": "無料",
+        "zh": "免费",
+        "en": "Free",
+        "ko": "무료"
+      },
+      "bestTime_i18n": {
+        "ja": "通年",
+        "zh": "全年",
+        "en": "Year-round",
+        "ko": "연중"
+      },
+      "tips_i18n": [
+        {
+          "ja": "大噴水周辺は映画のロケ地としても有名",
+          "zh": "大喷泉周边是著名电影取景地",
+          "en": "The fountain area is a famous film location",
+          "ko": "대분수 주변은 영화 촬영지로도 유명"
+        },
+        {
+          "ja": "秋は銀杏並木が見事",
+          "zh": "秋季银杏并木很美",
+          "en": "Beautiful ginkgo avenue in autumn",
+          "ko": "가을에는 은행나무 가로수가 장관"
+        },
+        {
+          "ja": "ランチタイムは近隣のビジネスパーソンで賑わう",
+          "zh": "午间聚集周边上班族",
+          "en": "Bustling with office workers at lunchtime",
+          "ko": "점심시간에는 인근 직장인들로 북적"
+        }
+      ],
+      "image": "../images/観光地/日比谷公園.jpg"
+    },
+    {
+      "name": "新宿ゴールデン街",
+      "coord": [
+        35.6959,
+        139.7031
+      ],
+      "dist": "西武新宿駅 徒歩3分 / JR新宿駅 徒歩10分",
+      "desc": "約200軒の小さなバーが密集する昭和レトロな飲み屋街。映画や文学に登場する文化人の聖地としても知られる。",
+      "tags": [
+        "all",
+        "shopping",
+        "food"
+      ],
+      "bestTime": "夜",
+      "hours": "店舗により異なる（多くは 18:00-深夜）",
+      "fee": "入場無料（飲食は実費）",
+      "tips": [
+        "昭和レトロな街並みは写真映えする",
+        "一部の店は紹介制のため事前リサーチを",
+        "路地の雰囲気を味わうだけでも楽しい"
+      ],
+      "name_i18n": {
+        "ja": "新宿ゴールデン街",
+        "zh": "新宿黄金街",
+        "en": "Shinjuku Golden Gai",
+        "ko": "신주쿠 골든가이"
+      },
+      "desc_i18n": {
+        "ja": "約200軒の小さなバーが密集する昭和レトロな飲み屋街。文化人の聖地としても知られる。",
+        "zh": "约200家小酒吧密集的昭和复古酒馆街，也是文人墨客的圣地。",
+        "en": "A retro Showa-era bar district with about 200 tiny bars. Known as a cultural landmark of Tokyo nightlife.",
+        "ko": "약 200개의 작은 바가 밀집한 쇼와 레트로 술집 거리. 문화인의 성지로도 알려짐."
+      },
+      "hours_i18n": {
+        "ja": "店舗により異なる（多くは 18:00-深夜）",
+        "zh": "因店铺而异（多为 18:00-深夜）",
+        "en": "Varies by bar (mostly 18:00-late night)",
+        "ko": "점포마다 상이（대부분 18:00-심야）"
+      },
+      "fee_i18n": {
+        "ja": "入場無料（飲食は実費）",
+        "zh": "入场免费（饮食自费）",
+        "en": "Free entry (drinks at own cost)",
+        "ko": "입장 무료（식사·음료는 실비）"
+      },
+      "bestTime_i18n": {
+        "ja": "夜",
+        "zh": "夜间",
+        "en": "Night",
+        "ko": "밤"
+      },
+      "tips_i18n": [
+        {
+          "ja": "昭和レトロな街並みは写真映えする",
+          "zh": "昭和复古街景很出片",
+          "en": "The Showa-retro streets are photogenic",
+          "ko": "쇼와 레트로 거리 풍경이 사진에 잘 담김"
+        },
+        {
+          "ja": "一部の店は紹介制のため事前リサーチを",
+          "zh": "部分店铺为介绍制，建议提前调查",
+          "en": "Some bars are member-only, so research ahead",
+          "ko": "일부 점포는 소개제이므로 사전 조사 필요"
+        },
+        {
+          "ja": "路地の雰囲気を味わうだけでも楽しい",
+          "zh": "光感受巷弄氛围也很有趣",
+          "en": "Enjoyable just to soak up the alley atmosphere",
+          "ko": "골목 분위기를 즐기는 것만으로도 재미있음"
+        }
+      ],
+      "image": "../images/観光地/新宿ゴールデン街.jpg"
+    },
+    {
+      "name": "代々木公園",
+      "coord": [
+        35.6711,
+        139.6948
+      ],
+      "dist": "JR原宿駅 徒歩3分 / 明治神宮前駅 徒歩3分",
+      "desc": "明治神宮に隣接する都内最大級の公園。広大な芝生広場と緑豊かな森が広がり、週末は多くの人で賑わう。",
+      "tags": [
+        "all",
+        "park",
+        "nature"
+      ],
+      "bestTime": "通年",
+      "hours": "終日開放",
+      "fee": "無料",
+      "tips": [
+        "春は桜、秋は紅葉の名所",
+        "週末はフリーマーケットやイベントが開催されることも",
+        "原宿・表参道観光のついでに立ち寄りやすい"
+      ],
+      "name_i18n": {
+        "ja": "代々木公園",
+        "zh": "代代木公园",
+        "en": "Yoyogi Park",
+        "ko": "요요기 공원"
+      },
+      "desc_i18n": {
+        "ja": "明治神宮に隣接する都内最大級の公園。広大な芝生広場と緑豊かな森が広がる。",
+        "zh": "毗邻明治神宫的东京最大级公园，拥有广阔草坪与茂密森林。",
+        "en": "One of Tokyo's largest parks, next to Meiji Jingu, with vast lawns and lush forest.",
+        "ko": "메이지 신궁에 인접한 도쿄 최대급 공원. 넓은 잔디밭과 푸르른 숲이 펼쳐짐."
+      },
+      "hours_i18n": {
+        "ja": "終日開放",
+        "zh": "全天开放",
+        "en": "Open all day",
+        "ko": "종일 개방"
+      },
+      "fee_i18n": {
+        "ja": "無料",
+        "zh": "免费",
+        "en": "Free",
+        "ko": "무료"
+      },
+      "bestTime_i18n": {
+        "ja": "通年",
+        "zh": "全年",
+        "en": "Year-round",
+        "ko": "연중"
+      },
+      "tips_i18n": [
+        {
+          "ja": "春は桜、秋は紅葉の名所",
+          "zh": "春季赏樱、秋季赏枫的名所",
+          "en": "Famous for cherry blossoms in spring and autumn colors",
+          "ko": "봄 벚꽃, 가을 단풍 명소"
+        },
+        {
+          "ja": "週末はフリーマーケットやイベントが開催されることも",
+          "zh": "周末有时举办跳蚤市场和活动",
+          "en": "Weekend flea markets and events sometimes held",
+          "ko": "주말에는 플리마켓이나 이벤트가 열리기도 함"
+        },
+        {
+          "ja": "原宿・表参道観光のついでに立ち寄りやすい",
+          "zh": "适合在原宿表参道观光顺路到访",
+          "en": "Easy stop while sightseeing Harajuku/Omotesando",
+          "ko": "하라주쿠·오모테산도 관광 중 들르기 좋음"
+        }
+      ],
+      "image": "../images/観光地/代々木公園.jpg"
+    },
+    {
+      "name": "六義園",
+      "coord": [
+        35.7413,
+        139.7471
+      ],
+      "dist": "JR駒込駅 徒歩7分 / 東京メトロ千石駅 徒歩10分",
+      "desc": "江戸時代に徳川五代将軍綱吉の側用人・柳沢吉保が造営した回遊式築山泉水庭園。都内随一の大名庭園として知られる。",
+      "tags": [
+        "all",
+        "park",
+        "nature",
+        "history"
+      ],
+      "bestTime": "春（枝垂れ桜）・秋（紅葉）",
+      "hours": "9:00-17:00（入園は16:30まで）",
+      "fee": "大人300円",
+      "tips": [
+        "春の枝垂れ桜はライトアップも行われる",
+        "茶屋では抹茶を楽しめる",
+        "紅葉シーズンは夜間特別公開あり"
+      ],
+      "name_i18n": {
+        "ja": "六義園",
+        "zh": "六义园",
+        "en": "Rikugien Garden",
+        "ko": "리쿠기엔 정원"
+      },
+      "desc_i18n": {
+        "ja": "徳川五代将軍綱吉の側用人・柳沢吉保が造営した回遊式築山泉水庭園。",
+        "zh": "由德川五代将军纲吉的侧用人柳泽吉保营造的回游式筑山泉水庭园。",
+        "en": "A strolling-style garden built by Yanagisawa Yoshiyasu, chamberlain to the 5th Tokugawa shogun.",
+        "ko": "도쿠가와 5대 쇼군 쓰나요시의 측근 야나기사와 요시야스가 조성한 회유식 정원."
+      },
+      "hours_i18n": {
+        "ja": "9:00-17:00（入園は16:30まで）",
+        "zh": "9:00-17:00（16:30前入园）",
+        "en": "9:00-17:00 (last entry 16:30)",
+        "ko": "9:00-17:00（입장 16:30까지）"
+      },
+      "fee_i18n": {
+        "ja": "大人300円",
+        "zh": "成人300日元",
+        "en": "Adults 300 yen",
+        "ko": "어른 300엔"
+      },
+      "bestTime_i18n": {
+        "ja": "春（枝垂れ桜）・秋（紅葉）",
+        "zh": "春季（垂枝樱）・秋季（红叶）",
+        "en": "Spring (weeping cherry) / Autumn (fall colors)",
+        "ko": "봄（수양벚꽃）·가을（단풍）"
+      },
+      "tips_i18n": [
+        {
+          "ja": "春の枝垂れ桜はライトアップも行われる",
+          "zh": "春季垂枝樱有夜间点灯",
+          "en": "Spring weeping cherry blossoms are lit up at night",
+          "ko": "봄 수양벚꽃은 라이트업도 진행"
+        },
+        {
+          "ja": "茶屋では抹茶を楽しめる",
+          "zh": "茶屋可品尝抹茶",
+          "en": "Matcha is available at the teahouse",
+          "ko": "찻집에서 말차를 즐길 수 있음"
+        },
+        {
+          "ja": "紅葉シーズンは夜間特別公開あり",
+          "zh": "红叶季有夜间特别开放",
+          "en": "Special night openings during autumn colors",
+          "ko": "단풍 시즌에는 야간 특별 공개 있음"
+        }
+      ],
+      "image": "../images/観光地/六義園.jpg"
+    },
+    {
+      "name": "根津神社",
+      "coord": [
+        35.7196,
+        139.7593
+      ],
+      "dist": "東京メトロ千代田線 根津駅 徒歩5分",
+      "desc": "1706年に徳川綱吉が造営した社殿が現存する由緒ある神社。楼門・本殿・唐門などが重要文化財に指定され、境内のつつじ苑も有名。",
+      "tags": [
+        "all",
+        "shrine",
+        "history"
+      ],
+      "bestTime": "通年（つつじは4月中旬〜5月上旬）",
+      "hours": "境内自由（社務所 9:00-17:00）",
+      "fee": "境内無料（つつじ苑は開花時期 200円）",
+      "tips": [
+        "文豪・夏目漱石も通った神社",
+        "つつじ苑は約100種3000株",
+        "千駄木・谷中の散策コースに組み込める"
+      ],
+      "name_i18n": {
+        "ja": "根津神社",
+        "zh": "根津神社",
+        "en": "Nezu Shrine",
+        "ko": "네즈 신사"
+      },
+      "desc_i18n": {
+        "ja": "1706年に徳川綱吉が造営した社殿が現存。楼門や本殿などが重要文化財。",
+        "zh": "现存1706年德川纲吉营造的社殿，楼门、正殿等为国家重要文化财产。",
+        "en": "Founded in 1706 by Tokugawa Tsunayoshi, with Important Cultural Property buildings and a famous azalea garden.",
+        "ko": "1706년 도쿠가와 쓰나요시가 조성한 사전이 현존. 누문, 본전 등이 중요 문화재."
+      },
+      "hours_i18n": {
+        "ja": "境内自由（社務所 9:00-17:00）",
+        "zh": "院内自由（社务所 9:00-17:00）",
+        "en": "Grounds free (office 9:00-17:00)",
+        "ko": "경내 자유（사무소 9:00-17:00）"
+      },
+      "fee_i18n": {
+        "ja": "境内無料（つつじ苑は開花時期 200円）",
+        "zh": "院内免费（杜鹃苑花期200日元）",
+        "en": "Grounds free (Azalea Garden 200 yen in season)",
+        "ko": "경내 무료（진달래원 개화기 200엔）"
+      },
+      "bestTime_i18n": {
+        "ja": "通年（つつじは4月中旬〜5月上旬）",
+        "zh": "全年（杜鹃为4月中旬〜5月上旬）",
+        "en": "Year-round (azaleas mid-April to early May)",
+        "ko": "연중（진달래는 4월 중순~5월 초）"
+      },
+      "tips_i18n": [
+        {
+          "ja": "文豪・夏目漱石も通った神社",
+          "zh": "文豪夏目漱石也曾造访的神社",
+          "en": "Frequented by the novelist Natsume Soseki",
+          "ko": "문호 나쓰메 소세키도 다니던 신사"
+        },
+        {
+          "ja": "つつじ苑は約100種3000株",
+          "zh": "杜鹃苑约100种3000株",
+          "en": "The azalea garden has about 100 varieties / 3,000 plants",
+          "ko": "진달래원은 약 100종 3,000그루"
+        },
+        {
+          "ja": "千駄木・谷中の散策コースに組み込める",
+          "zh": "可并入千驮木·谷中散步路线",
+          "en": "Fits into a Sentagaya/Yanaka walking route",
+          "ko": "센다기·야나카 산책 코스에 포함 가능"
+        }
+      ],
+      "image": "../images/観光地/根津神社.jpg"
+    },
+    {
+      "name": "谷中銀座商店街",
+      "coord": [
+        35.7304,
+        139.768
+      ],
+      "dist": "JR日暮里駅 徒歩5分 / 千代田線千駄木駅 徒歩5分",
+      "desc": "昭和の風情が残る下町商店街。約60店舗が軒を連ね、食べ歩きグルメや猫スポットとして人気。夕暮れの夕焼けだんだんが有名。",
+      "tags": [
+        "all",
+        "shopping",
+        "food"
+      ],
+      "bestTime": "昼〜夕方",
+      "hours": "店舗により異なる（多くは 10:00-18:00 前後）",
+      "fee": "無料（買物・飲食は実費）",
+      "tips": [
+        "夕焼けだんだんは日没前がおすすめ",
+        "谷中ぎんざ名物の肉のサトウのメンチカツ",
+        "「谷根千」散策の中心"
+      ],
+      "name_i18n": {
+        "ja": "谷中銀座商店街",
+        "zh": "谷中银座商店街",
+        "en": "Yanaka Ginza Shopping Street",
+        "ko": "야나카 긴자 상점가"
+      },
+      "desc_i18n": {
+        "ja": "昭和の風情が残る下町商店街。約60店舗が軒を連ね、食べ歩きと猫スポットで人気。",
+        "zh": "保留昭和风情的下町商店街，约60家店铺林立，是边走边吃与撸猫的人气地。",
+        "en": "A nostalgic Showa-era shopping street with about 60 shops, popular for street food and cat spotting.",
+        "ko": "쇼와 정취가 남은 하정 상점가. 약 60개 점포가 늘어서 있으며 먹거리와 고양이 명소로 인기."
+      },
+      "hours_i18n": {
+        "ja": "店舗により異なる（多くは 10:00-18:00 前後）",
+        "zh": "因店铺而异（多为10:00-18:00前后）",
+        "en": "Varies by shop (mostly around 10:00-18:00)",
+        "ko": "점포마다 상이（대부분 10:00-18:00 전후）"
+      },
+      "fee_i18n": {
+        "ja": "無料（買物・飲食は実費）",
+        "zh": "免费（购物饮食自费）",
+        "en": "Free (shopping/food at own cost)",
+        "ko": "무료（쇼핑·식사는 실비）"
+      },
+      "bestTime_i18n": {
+        "ja": "昼〜夕方",
+        "zh": "白天至傍晚",
+        "en": "Daytime to evening",
+        "ko": "낮~저녁"
+      },
+      "tips_i18n": [
+        {
+          "ja": "夕焼けだんだんは日没前がおすすめ",
+          "zh": "夕阳阶梯建议日落前前往",
+          "en": "Visit Yuyake-dandan before sunset",
+          "ko": "석양 계단은 해지기 전 추천"
+        },
+        {
+          "ja": "谷中ぎんざ名物の肉のサトウのメンチカツ",
+          "zh": "谷中银座名物肉之SATO炸肉饼",
+          "en": "Try the famous menchi-katsu at Niku no Sato",
+          "ko": "야나카 긴자 명물 니쿠노사토의 멘치카츠"
+        },
+        {
+          "ja": "「谷根千」散策の中心",
+          "zh": "「谷根千」散步的中心",
+          "en": "The heart of the \"Yanesen\" walking area",
+          "ko": "\"야네센\" 산책의 중심"
+        }
+      ],
+      "image": "../images/観光地/谷中銀座商店街.jpg"
+    },
+    {
+      "name": "国立西洋美術館",
+      "coord": [
+        35.7151,
+        139.7758
+      ],
+      "dist": "JR上野駅 徒歩1分",
+      "desc": "ル・コルビュジエ設計の本館が世界遺産に登録されている美術館。モネやルノワールなど西洋美術の名作を多数所蔵。",
+      "tags": [
+        "all",
+        "modern",
+        "history",
+        "landmark"
+      ],
+      "bestTime": "通年",
+      "hours": "9:30-17:30（金土は20:00まで）",
+      "fee": "常設展 500円",
+      "tips": [
+        "本館建築はユネスコ世界遺産「ル・コルビュジエの建築作品」の一部",
+        "ロダンの「考える人」は庭で無料鑑賞できる",
+        "月曜休館"
+      ],
+      "name_i18n": {
+        "ja": "国立西洋美術館",
+        "zh": "国立西洋美术馆",
+        "en": "National Museum of Western Art",
+        "ko": "국립서양미술관"
+      },
+      "desc_i18n": {
+        "ja": "ル・コルビュジエ設計の本館が世界遺産に登録。モネやルノワールなど西洋美術の名作を多数所蔵。",
+        "zh": "勒·柯布西耶设计的主馆为世界遗产，收藏莫奈、雷诺阿等西洋美术名作。",
+        "en": "A UNESCO World Heritage building designed by Le Corbusier, housing masterpieces of Western art from Monet to Rodin.",
+        "ko": "르 코르뷔지에가 설계한 본관이 세계유산으로 등록. 모네, 르누아르 등 서양 미술 명작 다수 소장."
+      },
+      "hours_i18n": {
+        "ja": "9:30-17:30（金土は20:00まで）",
+        "zh": "9:30-17:30（周五六至20:00）",
+        "en": "9:30-17:30 (Fri/Sat until 20:00)",
+        "ko": "9:30-17:30（금토 20:00까지）"
+      },
+      "fee_i18n": {
+        "ja": "常設展 500円",
+        "zh": "常设展500日元",
+        "en": "Permanent collection 500 yen",
+        "ko": "상설전 500엔"
+      },
+      "bestTime_i18n": {
+        "ja": "通年",
+        "zh": "全年",
+        "en": "Year-round",
+        "ko": "연중"
+      },
+      "tips_i18n": [
+        {
+          "ja": "本館建築はユネスコ世界遺産「ル・コルビュジエの建築作品」の一部",
+          "zh": "主馆建筑是联合国教科文组织世界遗产的一部分",
+          "en": "The main building is part of the Le Corbusier UNESCO World Heritage listing",
+          "ko": "본관 건축은 유네스코 세계유산의 일부"
+        },
+        {
+          "ja": "ロダンの「考える人」は庭で無料鑑賞できる",
+          "zh": "罗丹的《思想者》可在庭园免费观赏",
+          "en": "Rodin's Thinker can be viewed free in the garden",
+          "ko": "로댕의 「생각하는 사람」은 정원에서 무료 감상 가능"
+        },
+        {
+          "ja": "月曜休館",
+          "zh": "周一闭馆",
+          "en": "Closed on Mondays",
+          "ko": "월요일 휴관"
+        }
+      ],
+      "image": "../images/観光地/国立西洋美術館.jpg"
+    },
+    {
+      "name": "江戸東京博物館",
+      "coord": [
+        35.6961,
+        139.7957
+      ],
+      "dist": "JR両国駅 徒歩3分",
+      "desc": "江戸から東京までの歴史・文化を体感できる博物館。実物大の日本橋模型やジオラマなど迫力の展示が魅力。",
+      "tags": [
+        "all",
+        "history",
+        "modern"
+      ],
+      "bestTime": "通年",
+      "hours": "9:30-17:30（土曜は19:30まで）",
+      "fee": "常設展 600円",
+      "tips": [
+        "日本橋の実物大模型は圧巻",
+        "建物は解体・改修工事中のため要確認（2027年再開予定）",
+        "両国国技館と合わせて観光できる"
+      ],
+      "name_i18n": {
+        "ja": "江戸東京博物館",
+        "zh": "江户东京博物馆",
+        "en": "Edo-Tokyo Museum",
+        "ko": "에도 도쿄 박물관"
+      },
+      "desc_i18n": {
+        "ja": "江戸から東京までの歴史・文化を体感できる博物館。実物大の日本橋模型が迫力。",
+        "zh": "可体验江户到东京历史文化的博物馆，实物大日本桥模型极具震撼。",
+        "en": "A museum of Edo-Tokyo history and culture with a full-scale Nihonbashi bridge model.",
+        "ko": "에도에서 도쿄까지의 역사·문화를 체험할 수 있는 박물관. 실물 크기 니혼바시 모형이 압권."
+      },
+      "hours_i18n": {
+        "ja": "9:30-17:30（土曜は19:30まで）",
+        "zh": "9:30-17:30（周六至19:30）",
+        "en": "9:30-17:30 (Sat until 19:30)",
+        "ko": "9:30-17:30（토요일 19:30까지）"
+      },
+      "fee_i18n": {
+        "ja": "常設展 600円",
+        "zh": "常设展600日元",
+        "en": "Permanent exhibition 600 yen",
+        "ko": "상설전 600엔"
+      },
+      "bestTime_i18n": {
+        "ja": "通年",
+        "zh": "全年",
+        "en": "Year-round",
+        "ko": "연중"
+      },
+      "tips_i18n": [
+        {
+          "ja": "日本橋の実物大模型は圧巻",
+          "zh": "实物大日本桥模型非常震撼",
+          "en": "The full-scale Nihonbashi model is stunning",
+          "ko": "실물 크기 니혼바시 모형은 압권"
+        },
+        {
+          "ja": "建物は解体・改修工事中のため要確認（2027年再開予定）",
+          "zh": "建筑正处拆除改建中请确认（预计2027年重开）",
+          "en": "Building under renovation (reopening planned 2027) - check before visiting",
+          "ko": "건물은 해체·개수 공사 중이므로 확인 필요（2027년 재개관 예정）"
+        },
+        {
+          "ja": "両国国技館と合わせて観光できる",
+          "zh": "可与两国国技馆一并观光",
+          "en": "Combine with a visit to Ryogoku Kokugikan",
+          "ko": "료고쿠 국기관과 함께 관광 가능"
+        }
+      ],
+      "image": "../images/観光地/江戸東京博物館.jpg"
+    },
+    {
+      "name": "亀戸天神社",
+      "coord": [
+        35.7027,
+        139.8194
+      ],
+      "dist": "JR亀戸駅 徒歩15分 / 東武亀戸線亀戸天神前駅 徒歩1分",
+      "desc": "菅原道真公を祀る「東の天満宮」。境内の池に架かる太鼓橋と藤棚が有名で、藤の名所として親しまれる。",
+      "tags": [
+        "all",
+        "shrine",
+        "nature",
+        "seasonal"
+      ],
+      "bestTime": "4月下旬〜5月上旬（藤）",
+      "hours": "境内自由",
+      "fee": "境内無料",
+      "tips": [
+        "藤の季節はライトアップも開催",
+        "太鼓橋からの眺めが美しい",
+        "学業成就の神様として有名"
+      ],
+      "name_i18n": {
+        "ja": "亀戸天神社",
+        "zh": "龟户天神社",
+        "en": "Kameido Tenjin Shrine",
+        "ko": "가메이도 텐진 신사"
+      },
+      "desc_i18n": {
+        "ja": "菅原道真公を祀る「東の天満宮」。池に架かる太鼓橋と藤棚が有名。",
+        "zh": "供奉菅原道真公的「东之天满宫」，以池上太鼓桥与紫藤架闻名。",
+        "en": "A Tenjin shrine to Sugawara no Michizane, famous for its drum bridge and wisteria trellis.",
+        "ko": "스가와라 미치자네를 모신 「동쪽 텐만구」. 연못 위 북 모양 다리와 등나무 시렁이 유명."
+      },
+      "hours_i18n": {
+        "ja": "境内自由",
+        "zh": "院内自由",
+        "en": "Grounds free",
+        "ko": "경내 자유"
+      },
+      "fee_i18n": {
+        "ja": "境内無料",
+        "zh": "院内免费",
+        "en": "Free",
+        "ko": "경내 무료"
+      },
+      "bestTime_i18n": {
+        "ja": "4月下旬〜5月上旬（藤）",
+        "zh": "4月下旬〜5月上旬（紫藤）",
+        "en": "Late Apr-early May (wisteria)",
+        "ko": "4월 하순~5월 상순（등나무）"
+      },
+      "tips_i18n": [
+        {
+          "ja": "藤の季節はライトアップも開催",
+          "zh": "紫藤季举办夜间点灯",
+          "en": "The wisteria season features night illuminations",
+          "ko": "등나무 시즌에는 라이트업도 개최"
+        },
+        {
+          "ja": "太鼓橋からの眺めが美しい",
+          "zh": "太鼓桥上的眺望很美",
+          "en": "Beautiful views from the drum bridge",
+          "ko": "북 모양 다리에서의 조망이 아름다움"
+        },
+        {
+          "ja": "学業成就の神様として有名",
+          "zh": "以学业成就之神闻名",
+          "en": "Famous as a god of academic success",
+          "ko": "학업 성취의 신으로 유명"
+        }
+      ],
+      "image": "../images/観光地/亀戸天神社.jpg"
+    },
+    {
+      "name": "泉岳寺",
+      "coord": [
+        35.638,
+        139.7332
+      ],
+      "dist": "都営浅草線 泉岳寺駅 徒歩1分",
+      "desc": "赤穂浪士の眠る寺として有名な曹洞宗の寺院。大石内蔵助ら47士の墓所があり、義士祭（12月14日）には多くの参拝者が訪れる。",
+      "tags": [
+        "all",
+        "shrine",
+        "history"
+      ],
+      "bestTime": "通年",
+      "hours": "境内 7:00-17:00（季節により変動）",
+      "fee": "境内無料（宝物殿 200円）",
+      "tips": [
+        "義士祭は毎年12月14日",
+        "大石内蔵助の墓所は必見",
+        "山門は国の重要文化財"
+      ],
+      "name_i18n": {
+        "ja": "泉岳寺",
+        "zh": "泉岳寺",
+        "en": "Sengakuji Temple",
+        "ko": "센가쿠지 절"
+      },
+      "desc_i18n": {
+        "ja": "赤穂浪士の眠る寺として有名な曹洞宗の寺院。大石内蔵助ら47士の墓所がある。",
+        "zh": "以安葬赤穗浪士闻名的曹洞宗寺院，有大量内藏助等47士的墓所。",
+        "en": "A Soto Zen temple known as the resting place of the 47 Ronin, including Oishi Kuranosuke.",
+        "ko": "아코 낭사의 잠든 사찰로 유명한 조동종 사원. 오이시 쿠라노스케 등 47사의 묘소가 있음."
+      },
+      "hours_i18n": {
+        "ja": "境内 7:00-17:00（季節により変動）",
+        "zh": "院内7:00-17:00（随季节变动）",
+        "en": "Grounds 7:00-17:00 (varies by season)",
+        "ko": "경내 7:00-17:00（계절에 따라 변동）"
+      },
+      "fee_i18n": {
+        "ja": "境内無料（宝物殿 200円）",
+        "zh": "院内免费（宝物殿200日元）",
+        "en": "Grounds free (Treasure Hall 200 yen)",
+        "ko": "경내 무료（보물전 200엔）"
+      },
+      "bestTime_i18n": {
+        "ja": "通年",
+        "zh": "全年",
+        "en": "Year-round",
+        "ko": "연중"
+      },
+      "tips_i18n": [
+        {
+          "ja": "義士祭は毎年12月14日",
+          "zh": "义士祭每年12月14日",
+          "en": "Gishi-sai festival held every Dec 14",
+          "ko": "의사제는 매년 12월 14일"
+        },
+        {
+          "ja": "大石内蔵助の墓所は必見",
+          "zh": "大量内藏助墓所必看",
+          "en": "Oishi Kuranosuke's grave is a must-see",
+          "ko": "오이시 쿠라노스케의 묘소는 필견"
+        },
+        {
+          "ja": "山門は国の重要文化財",
+          "zh": "山门为国家重要文化财产",
+          "en": "The main gate is an Important Cultural Property",
+          "ko": "산문은 국가 중요 문화재"
+        }
+      ],
+      "image": "../images/観光地/泉岳寺.jpg"
+    },
+    {
+      "name": "豪徳寺",
+      "coord": [
+        35.647,
+        139.6472
+      ],
+      "dist": "小田急線 豪徳寺駅 徒歩5分 / 東急世田谷線 宮の坂駅 徒歩5分",
+      "desc": "「招き猫発祥の地」として知られる寺院。境内には参拝者が奉納した数千体の招き猫が並び、猫好きの聖地となっている。",
+      "tags": [
+        "all",
+        "shrine",
+        "history"
+      ],
+      "bestTime": "通年",
+      "hours": "境内 9:00-17:00（招き猫の奉納所も同時間）",
+      "fee": "境内無料",
+      "tips": [
+        "招き猫の奉納所には数千体の招き猫",
+        "井伊直弼の墓所もある",
+        "招き猫は帰りに購入して奉納するのが人気"
+      ],
+      "name_i18n": {
+        "ja": "豪徳寺",
+        "zh": "豪德寺",
+        "en": "Gotokuji Temple",
+        "ko": "고토쿠지 절"
+      },
+      "desc_i18n": {
+        "ja": "「招き猫発祥の地」として知られる寺院。数千体の招き猫が並ぶ猫好きの聖地。",
+        "zh": "以「招财猫发祥地」闻名的寺院，数千尊招财猫并列，是猫奴圣地。",
+        "en": "Known as the birthplace of the maneki-neko (beckoning cat). Thousands of cats line the grounds, a pilgrimage site for cat lovers.",
+        "ko": "「고양이를 부르는 고양이」 발상지로 알려진 사찰. 수천 마리의 마네키네코가 늘어선 고양이 애호가의 성지."
+      },
+      "hours_i18n": {
+        "ja": "境内 9:00-17:00（招き猫の奉納所も同時間）",
+        "zh": "院内9:00-17:00（招财猫奉纳所同期）",
+        "en": "Grounds 9:00-17:00 (cat offering area same hours)",
+        "ko": "경내 9:00-17:00（마네키네코 봉납소 동일）"
+      },
+      "fee_i18n": {
+        "ja": "境内無料",
+        "zh": "院内免费",
+        "en": "Free",
+        "ko": "경내 무료"
+      },
+      "bestTime_i18n": {
+        "ja": "通年",
+        "zh": "全年",
+        "en": "Year-round",
+        "ko": "연중"
+      },
+      "tips_i18n": [
+        {
+          "ja": "招き猫の奉納所には数千体の招き猫",
+          "zh": "奉纳所里供奉着数千尊招财猫",
+          "en": "Thousands of maneki-neko cats at the offering hall",
+          "ko": "봉납소에는 수천 마리의 마네키네코"
+        },
+        {
+          "ja": "井伊直弼の墓所もある",
+          "zh": "也有井伊直弼的墓所",
+          "en": "Tomb of Ii Naosuke is also here",
+          "ko": "이이 나오스케의 묘소도 있음"
+        },
+        {
+          "ja": "招き猫は帰りに購入して奉納するのが人気",
+          "zh": "回程购买招财猫并奉纳是流行做法",
+          "en": "Popular to buy a cat on the way out and offer it back",
+          "ko": "귀가길에 마네키네코를 사서 봉납하는 것이 인기"
+        }
+      ],
+      "image": "../images/観光地/豪徳寺.jpg"
+    },
+    {
+      "name": "哲学堂公園",
+      "coord": [
+        35.7267,
+        139.6609
+      ],
+      "dist": "西武新宿線 新井薬師前駅 徒歩10分",
+      "desc": "哲学者・井上円了が創設した世界唯一の「哲学のテーマパーク」。哲学の概念を空間で表現した庭園で、六賢台や哲理門などがある。",
+      "tags": [
+        "all",
+        "park",
+        "history"
+      ],
+      "bestTime": "通年",
+      "hours": "9:00-17:00",
+      "fee": "無料",
+      "tips": [
+        "哲理門や六賢台など哲学にちなんだ建造物が点在",
+        "春は桜、秋は紅葉の名所",
+        "園内の建物の一部は登録有形文化財"
+      ],
+      "name_i18n": {
+        "ja": "哲学堂公園",
+        "zh": "哲学堂公园",
+        "en": "Tetsugakudo Park",
+        "ko": "테츠가쿠도 공원"
+      },
+      "desc_i18n": {
+        "ja": "哲学者・井上円了が創設した世界唯一の「哲学のテーマパーク」。",
+        "zh": "哲学家井上圆了创建的世界唯一「哲学主题公园」。",
+        "en": "The world's only \"philosophy theme park,\" created by philosopher Inoue Enryo.",
+        "ko": "철학자 이노우에 엔료가 창설한 세계 유일의 「철학 테마파크」."
+      },
+      "hours_i18n": {
+        "ja": "9:00-17:00",
+        "zh": "9:00-17:00",
+        "en": "9:00-17:00",
+        "ko": "9:00-17:00"
+      },
+      "fee_i18n": {
+        "ja": "無料",
+        "zh": "免费",
+        "en": "Free",
+        "ko": "무료"
+      },
+      "bestTime_i18n": {
+        "ja": "通年",
+        "zh": "全年",
+        "en": "Year-round",
+        "ko": "연중"
+      },
+      "tips_i18n": [
+        {
+          "ja": "哲理門や六賢台など哲学にちなんだ建造物が点在",
+          "zh": "哲理门、六贤台等哲学主题建筑散布",
+          "en": "Philosophy-themed structures dot the grounds",
+          "ko": "철리문, 육현대 등 철학 관련 건조물이 곳곳에"
+        },
+        {
+          "ja": "春は桜、秋は紅葉の名所",
+          "zh": "春樱秋枫的名所",
+          "en": "Cherry blossoms in spring, autumn colors in fall",
+          "ko": "봄 벚꽃, 가을 단풍 명소"
+        },
+        {
+          "ja": "園内の建物の一部は登録有形文化財",
+          "zh": "园内部分建筑为登录有形文化财",
+          "en": "Some buildings are Registered Tangible Cultural Properties",
+          "ko": "원내 건물 일부는 등록 유형 문화재"
+        }
+      ],
+      "image": "../images/観光地/哲学堂公園.jpg"
+    },
+    {
+      "name": "善福寺公園",
+      "coord": [
+        35.722,
+        139.595
+      ],
+      "dist": "JR中央線 西荻窪駅 徒歩15分 / 吉祥寺駅からバス",
+      "desc": "井の頭公園と並ぶ杉並区のオアシス。上池・下池の2つの池を中心にした緑豊かな公園で、カワセミなど野鳥観察の名所。",
+      "tags": [
+        "all",
+        "park",
+        "nature"
+      ],
+      "bestTime": "通年",
+      "hours": "終日開放",
+      "fee": "無料",
+      "tips": [
+        "カワセミが生息しバードウォッチングに人気",
+        "池周辺の散策路が整備されている",
+        "井の頭公園まで徒歩圏"
+      ],
+      "name_i18n": {
+        "ja": "善福寺公園",
+        "zh": "善福寺公园",
+        "en": "Zenpukuji Park",
+        "ko": "젠푸쿠지 공원"
+      },
+      "desc_i18n": {
+        "ja": "井の頭公園と並ぶ杉並区のオアシス。上池・下池を中心にした緑豊かな公園。",
+        "zh": "与井之头公园并列的杉并区绿洲，以上池下池为中心的绿意公园。",
+        "en": "A green oasis in Suginami with two ponds, a renowned birdwatching spot.",
+        "ko": "이노카시라 공원과 나란히 손꼽히는 스기나미구의 오아시스. 상연못·하연못을 중심으로 한 녹음 공원."
+      },
+      "hours_i18n": {
+        "ja": "終日開放",
+        "zh": "全天开放",
+        "en": "Open all day",
+        "ko": "종일 개방"
+      },
+      "fee_i18n": {
+        "ja": "無料",
+        "zh": "免费",
+        "en": "Free",
+        "ko": "무료"
+      },
+      "bestTime_i18n": {
+        "ja": "通年",
+        "zh": "全年",
+        "en": "Year-round",
+        "ko": "연중"
+      },
+      "tips_i18n": [
+        {
+          "ja": "カワセミが生息しバードウォッチングに人気",
+          "zh": "有翠鸟栖息，是观鸟胜地",
+          "en": "Home to kingfishers, popular for birdwatching",
+          "ko": "물총새가 서식하며 버드워칭으로 인기"
+        },
+        {
+          "ja": "池周辺の散策路が整備されている",
+          "zh": "池畔步道完善",
+          "en": "Well-maintained walking paths around the ponds",
+          "ko": "연못 주변 산책로가 정비되어 있음"
+        },
+        {
+          "ja": "井の頭公園まで徒歩圏",
+          "zh": "步行可达井之头公园",
+          "en": "Within walking distance of Inokashira Park",
+          "ko": "이노카시라 공원까지 도보권"
+        }
+      ],
+      "image": "../images/観光地/善福寺公園.jpg"
+    },
+    {
+      "name": "光が丘公園",
+      "coord": [
+        35.7507,
+        139.6418
+      ],
+      "dist": "都営大江戸線 光が丘駅 徒歩8分",
+      "desc": "練馬区と板橋区にまたがる都内最大級の公園。旧成田山の森を生かした広大な雑木林とバラ園、野球場など多彩な施設がある。",
+      "tags": [
+        "all",
+        "park",
+        "nature"
+      ],
+      "bestTime": "通年",
+      "hours": "終日開放（一部施設あり）",
+      "fee": "無料",
+      "tips": [
+        "バラ園は春と秋に見頃",
+        "雑木林は野鳥観察にも人気",
+        "グラウンドやテニスコートも充実"
+      ],
+      "name_i18n": {
+        "ja": "光が丘公園",
+        "zh": "光丘公园",
+        "en": "Hikarigaoka Park",
+        "ko": "히카리가오카 공원"
+      },
+      "desc_i18n": {
+        "ja": "練馬区と板橋区にまたがる都内最大級の公園。広大な雑木林とバラ園がある。",
+        "zh": "横跨练马区与板桥区的东京最大级公园，拥有广阔杂木林与玫瑰园。",
+        "en": "One of Tokyo's largest parks, spanning Nerima and Itabashi, with vast woodland and a rose garden.",
+        "ko": "네리마구와 이타바시구에 걸친 도쿄 최대급 공원. 넓은 잡목림과 장미원이 있음."
+      },
+      "hours_i18n": {
+        "ja": "終日開放（一部施設あり）",
+        "zh": "全天开放（部分设施）",
+        "en": "Open all day (some facilities)",
+        "ko": "종일 개방（일부 시설）"
+      },
+      "fee_i18n": {
+        "ja": "無料",
+        "zh": "免费",
+        "en": "Free",
+        "ko": "무료"
+      },
+      "bestTime_i18n": {
+        "ja": "通年",
+        "zh": "全年",
+        "en": "Year-round",
+        "ko": "연중"
+      },
+      "tips_i18n": [
+        {
+          "ja": "バラ園は春と秋に見頃",
+          "zh": "玫瑰园春季秋季最美",
+          "en": "Rose garden best in spring and autumn",
+          "ko": "장미원은 봄과 가을에 절정"
+        },
+        {
+          "ja": "雑木林は野鳥観察にも人気",
+          "zh": "杂木林也适合观鸟",
+          "en": "Woodland popular for birdwatching",
+          "ko": "잡목림은 조류 관찰에도 인기"
+        },
+        {
+          "ja": "グラウンドやテニスコートも充実",
+          "zh": "球场与网球场等设施完善",
+          "en": "Well-equipped with sports fields and tennis courts",
+          "ko": "운동장, 테니스 코트 등 시설 충실"
+        }
+      ],
+      "image": "../images/観光地/光が丘公園.jpg"
+    },
+    {
+      "name": "王子稲荷神社",
+      "coord": [
+        35.7535,
+        139.7373
+      ],
+      "dist": "JR王子駅 徒歩5分 / 都電荒川線 王子駅前駅 徒歩3分",
+      "desc": "「王子稲荷」として親しまれる関東最古の稲荷神社。桜の名所としても知られ、狐の石像が多数安置されている。",
+      "tags": [
+        "all",
+        "shrine",
+        "history"
+      ],
+      "bestTime": "通年",
+      "hours": "境内自由",
+      "fee": "境内無料",
+      "tips": [
+        "江戸時代の「王子狐の行列」が有名",
+        "境内の桜は開花時期にライトアップ",
+        "音無川沿いの桜並木が美しい"
+      ],
+      "name_i18n": {
+        "ja": "王子稲荷神社",
+        "zh": "王子稻荷神社",
+        "en": "Oji Inari Shrine",
+        "ko": "오지 이나리 신사"
+      },
+      "desc_i18n": {
+        "ja": "「王子稲荷」として親しまれる関東最古の稲荷神社。狐の石像が多数安置されている。",
+        "zh": "被亲切称为「王子稻荷」的关东最古老稻荷神社，供奉众多狐狸石像。",
+        "en": "One of the Kanto region's oldest Inari shrines, famous for its fox statues and cherry blossoms.",
+        "ko": "\"오지 이나리\"로 친숙한 간토 최고(最古)의 이나리 신사. 여우 석상이 다수 안치."
+      },
+      "hours_i18n": {
+        "ja": "境内自由",
+        "zh": "院内自由",
+        "en": "Grounds free",
+        "ko": "경내 자유"
+      },
+      "fee_i18n": {
+        "ja": "境内無料",
+        "zh": "院内免费",
+        "en": "Free",
+        "ko": "경내 무료"
+      },
+      "bestTime_i18n": {
+        "ja": "通年",
+        "zh": "全年",
+        "en": "Year-round",
+        "ko": "연중"
+      },
+      "tips_i18n": [
+        {
+          "ja": "江戸時代の「王子狐の行列」が有名",
+          "zh": "江户时代的「王子狐狸行列」很有名",
+          "en": "Famous for the Edo-era \"Oji Fox Parade\"",
+          "ko": "에도 시대의 「오지 여우 행렬」이 유명"
+        },
+        {
+          "ja": "境内の桜は開花時期にライトアップ",
+          "zh": "院内樱花花期有点灯",
+          "en": "Cherry blossoms lit up in season",
+          "ko": "경내 벚꽃은 개화기에 라이트업"
+        },
+        {
+          "ja": "音無川沿いの桜並木が美しい",
+          "zh": "音无川沿岸的樱花并木很美",
+          "en": "Beautiful cherry avenue along Otonashigawa river",
+          "ko": "오토나시가와 강변 벚꽃 가로수가 아름다움"
+        }
+      ],
+      "image": "../images/観光地/王子稲荷神社.jpg"
+    },
+    {
+      "name": "堀切菖蒲園",
+      "coord": [
+        35.7505,
+        139.8288
+      ],
+      "dist": "京成本線 堀切菖蒲園駅 徒歩5分",
+      "desc": "江戸時代から続く花菖蒲の名所。約6000株の花菖蒲が咲き誇る6月の見頃には、多くの花見客で賑わう。",
+      "tags": [
+        "all",
+        "park",
+        "nature",
+        "seasonal"
+      ],
+      "bestTime": "6月上旬〜中旬（花菖蒲）",
+      "hours": "終日開放（花菖蒲の見頃は 6:00-18:00）",
+      "fee": "無料",
+      "tips": [
+        "6月の花菖蒲まつりが有名",
+        "江戸時代の浮世絵にも描かれた名所",
+        "周辺は「堀切」の下町情緒が残る"
+      ],
+      "name_i18n": {
+        "ja": "堀切菖蒲園",
+        "zh": "堀切菖蒲园",
+        "en": "Horikiri Iris Garden",
+        "ko": "호리키리 창포원"
+      },
+      "desc_i18n": {
+        "ja": "江戸時代から続く花菖蒲の名所。約6000株の花菖蒲が咲き誇る。",
+        "zh": "江户时代延续至今的花菖蒲名所，约6000株花菖蒲盛开。",
+        "en": "An iris garden since the Edo period, with about 6,000 irises blooming in June.",
+        "ko": "에도 시대부터 이어져 온 창포 명소. 약 6,000그루의 창포가 만개."
+      },
+      "hours_i18n": {
+        "ja": "終日開放（花菖蒲の見頃は 6:00-18:00）",
+        "zh": "全天开放（花菖蒲盛期6:00-18:00）",
+        "en": "Open all day (best viewing 6:00-18:00)",
+        "ko": "종일 개방（창포 절정기 6:00-18:00）"
+      },
+      "fee_i18n": {
+        "ja": "無料",
+        "zh": "免费",
+        "en": "Free",
+        "ko": "무료"
+      },
+      "bestTime_i18n": {
+        "ja": "6月上旬〜中旬（花菖蒲）",
+        "zh": "6月上旬〜中旬（花菖蒲）",
+        "en": "Early-mid June (irises)",
+        "ko": "6월 상순~중순（창포）"
+      },
+      "tips_i18n": [
+        {
+          "ja": "6月の花菖蒲まつりが有名",
+          "zh": "6月花菖蒲祭很有名",
+          "en": "The June iris festival is famous",
+          "ko": "6월 창포 축제가 유명"
+        },
+        {
+          "ja": "江戸時代の浮世絵にも描かれた名所",
+          "zh": "江户时代浮世绘也曾描绘的名所",
+          "en": "A famous spot depicted in Edo-era ukiyo-e",
+          "ko": "에도 시대 우키요에에도 그려진 명소"
+        },
+        {
+          "ja": "周辺は「堀切」の下町情緒が残る",
+          "zh": "周边保留堀切的下町风情",
+          "en": "The surrounding Horikiri area keeps downtown charm",
+          "ko": "주변은 호리키리의 하정 정취가 남아 있음"
+        }
+      ],
+      "image": "../images/観光地/堀切菖蒲園.jpg"
+    },
+    {
+      "name": "目黒雅叙園",
+      "coord": [
+        35.6296,
+        139.716
+      ],
+      "dist": "JR目黒駅 徒歩5分",
+      "desc": "大正時代から続く「昭和の竜宮城」。豪華な装飾が施された建築と、江戸時代の美術品を展示する百段階段が見どころ。",
+      "tags": [
+        "all",
+        "modern",
+        "history",
+        "landmark"
+      ],
+      "bestTime": "通年",
+      "hours": "施設により異なる（百段階段は企画展時のみ公開）",
+      "fee": "百段階段は入館料あり（企画により変動）",
+      "tips": [
+        "「百段階段」は昭和初期の芸術の粋",
+        "結婚式場としても有名",
+        "ランチやスイーツも楽しめる"
+      ],
+      "name_i18n": {
+        "ja": "目黒雅叙園",
+        "zh": "目黑雅叙园",
+        "en": "Meguro Gajoen",
+        "ko": "메구로 가죠엔"
+      },
+      "desc_i18n": {
+        "ja": "大正時代から続く「昭和の竜宮城」。豪華な装飾の建築と百段階段が見どころ。",
+        "zh": "大正时代延续至今的「昭和龙宫城」，以豪华装饰建筑与百段阶梯为看点。",
+        "en": "A \"Showa-era Dragon Palace\" since the Taisho period, famed for its ornate interiors and Hyakudan Kaidan staircase.",
+        "ko": "다이쇼 시대부터 이어져 온 「쇼와의 용궁성」. 호화로운 장식 건축과 백단 계단이 볼거리."
+      },
+      "hours_i18n": {
+        "ja": "施設により異なる（百段階段は企画展時のみ公開）",
+        "zh": "因设施而异（百段阶梯仅企划展时开放）",
+        "en": "Varies by facility (Hyakudan Kaidan open during exhibitions)",
+        "ko": "시설마다 상이（백단 계단은 기획전 시에만 공개）"
+      },
+      "fee_i18n": {
+        "ja": "百段階段は入館料あり（企画により変動）",
+        "zh": "百段阶梯需门票（依企划变动）",
+        "en": "Hyakudan Kaidan has an entry fee (varies by exhibition)",
+        "ko": "백단 계단은 입장료 있음（기획에 따라 변동）"
+      },
+      "bestTime_i18n": {
+        "ja": "通年",
+        "zh": "全年",
+        "en": "Year-round",
+        "ko": "연중"
+      },
+      "tips_i18n": [
+        {
+          "ja": "「百段階段」は昭和初期の芸術の粋",
+          "zh": "「百段阶梯」凝聚昭和初期艺术精华",
+          "en": "The \"Hyakudan Kaidan\" is a masterpiece of early Showa art",
+          "ko": "「백단 계단」은 쇼와 초기 예술의 정수"
+        },
+        {
+          "ja": "結婚式場としても有名",
+          "zh": "作为婚礼会场也很有名",
+          "en": "Also famous as a wedding venue",
+          "ko": "결혼식장으로도 유명"
+        },
+        {
+          "ja": "ランチやスイーツも楽しめる",
+          "zh": "可享用餐点与甜点",
+          "en": "Lunch and sweets are also available",
+          "ko": "런치와 디저트도 즐길 수 있음"
+        }
+      ],
+      "image": "../images/観光地/目黒雅叙園.jpg"
     }
   ],
   "station_exits": {

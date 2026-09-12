@@ -1154,3 +1154,11 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 **处理**：tourism_data.json 鹿浜の獅子舞 image='../images/観光地/鹿浜の獅子舞.jpg'；**no-image spots=0（全 138 スポット有図）**；bundle 再生成（230KB）；4頁 bump 4.3.581（4.3.580 は前段で済み）。
 **验证**：Read 画像検証（主体=鹿浜東町会社殿前の獅子舞、640x424≥400px 下限、JPG 形式）；bundle ロード OK；git 併存チェック ls-remote=12ee811（ローカル HEAD 一致）。
 
+
+
+## 4.3.582（2026-09-13，观光图库拓展·23区第二层地标 20 个）
+**用户指示**："继续拓展数据库"——在 4.3.581（137 spots 全有图）基础上新增 23 区第二层知名地标 20 个，配图→bundle→bump→push。
+**数据**：tourism_data.json 137→157 spots（DUP 检查通过）。新增：築地場外市場/新宿ゴールデン街/六義園/根津神社/谷中銀座商店街/国立西洋美術館/江戸東京博物館/亀戸天神社/泉岳寺/哲学堂公園/善福寺公園/王子稲荷神社/堀切菖蒲園/目黒雅叙園/光が丘公園/豪徳寺/日比谷公園/代々木公園/東京ミッドタウン/増上寺。全 spot 四語 i18n 完备（name/desc/hours/fee/bestTime/tips）。
+**配图**（沿用 4.3.579 硬流程：Commons API 带 UA+8-15s 间隔+下载后 Read 双验证 OCR+主体，禁只看尺寸）：20 张全部从 Wikimedia Commons 下载并 Read 验证。弃却 8 张（増上寺ラーメン屋台/ミッドタウン RENAISSANCE ビル・KONAMI ビル・六本木街景/日比谷野台ステージ/代々木入口 KEIO BUS/光が丘萩ケ丘公園 OCR 直证/豪徳寺本堂のみ）——按"宁缺毋滥"换关键词重搜（Sangedatsumon/増上寺三解脱門/Midtown Garden/Fountain in Hibiya/Yoyogi Park Tokyo/Zojoji）。最终采用：増上寺=三解脱門+東京タワー panoramio（OCR「増上寺前」直证）、東京ミッドタウン=Midtown Garden 噴水+タワー群、日比谷公園=Fountain in Hibiya Park-2、代々木公園=池+噴水+芝生、光が丘公園=Yurinoki hiroba、豪徳寺=招き猫奉納所（納奉幕+白猫群像）。
+**处理**：20 張转存 images/観光地/（spot 名=去（）去空格；谷中銀座商店街.jpg）；157 spots image 字段全回填、**no-image spots=0**、文件完整性 157/157；bundle 再生成（tourism-data.file.js 269KB）；4 頁 bump 4.3.582。
+**验证**：bundle 20 新 image 路径 20/20；spots 157 无图 0、文件缺失 0；git ls-remote=10fb55e（4.3.581，无并发）。
