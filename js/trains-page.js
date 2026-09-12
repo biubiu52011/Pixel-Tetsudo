@@ -574,6 +574,10 @@
       }
       _branchStubL = _mainMaxW + 22; // 主干站名朝左偏移 12（side=dual）+ gap 10
     }
+    // v4.3.553: "插线叉出去那一部分也要算站间距"——右侧支线水平叉出段（stub）≥ 标准站间距：
+    // 原固定 20px 使单支线（南武線浜川崎/丸ノ内方南町/千代田北綾瀬）竖列紧贴主线，视觉像
+    // 双线并行；改为 ≥ sp 后支线与主干间距 = 一个站间距，与横排/竖列"算站间距"规则统一。
+    var _branchStubR = Math.max(GEOM.BRANCH_STUB, sp);
     // v4.3.516: 左侧列距动态化——列 1 竖线不穿列 0 名带（列 0 名带右缘=bx0-10，列 1 竖线=bx0-列距，需 gap ≥ 4）
     var _branchColW = _leftCols > 0 ? Math.max(GEOM.BRANCH_COL_W, _branchMaxNameW("left") + 14) : GEOM.BRANCH_COL_W;
     // v4.3.522: 横排站距 = 全支线最宽站名文本宽 + 12（"支线宽度取决于文本最多的那个"——
@@ -595,7 +599,7 @@
           _rightNeed = Math.max(_rightNeed, _rN * _branchHSp + 12 + _branchMaxNameW("right") + 2);
         }
       } else {
-        _rightNeed = GEOM.BRANCH_STUB + 10 + _branchMaxNameW("right") + 2; // 单支线（现状）
+        _rightNeed = _branchStubR + 10 + _branchMaxNameW("right") + 2; // 单支线（现状）
       }
     }
     var branchOffset = branchLines.length > 0 ? GEOM.BRANCH_COL_W * branchLines.length : 0;
@@ -931,7 +935,7 @@
       } else {
         // 单支线/无支线：主线中心固定（现状）
         mainCx = _baseW / 2;
-        svgW = Math.max(_baseW, mainCx + GEOM.BRANCH_STUB + branchOffset + _rightPad);
+        svgW = Math.max(_baseW, mainCx + _branchStubR + branchOffset + _rightPad);
       }
       
       var _iconStep = (isMobileView ? 20 : 16) + 2;
@@ -1027,7 +1031,7 @@
         if (_jIdx < 0) continue;
         var _bx = (_bSide(bgi) === "left")
           ? (stationCoords[_jIdx].x - _branchStubL - _bCol(bgi) * _branchColW)
-          : (stationCoords[_jIdx].x + GEOM.BRANCH_STUB + _bCol(bgi) * GEOM.BRANCH_COL_W);
+          : (stationCoords[_jIdx].x + _branchStubR + _bCol(bgi) * GEOM.BRANCH_COL_W);
         var _by = stationCoords[_jIdx].y;
         var _bsp = sp || 24;
         // v4.3.520: junction 在支线站表末位（我孫子支线）→ 反转站序从 junction 向下延伸
@@ -1097,6 +1101,7 @@
       branchSides: (function() { var _ba = []; for (var _bi5 = 0; _bi5 < branchLines.length; _bi5++) _ba.push(_bSide(_bi5)); return _ba; })(), // v4.3.515: 每支线分叉侧（跨函数传给 renderTrainMap）
       bCol: _bCol, // v4.3.515: 支线列序号（跨函数）
       branchStubL: _branchStubL, // v4.3.515: 左侧支线 stub（主干最宽站名+22，跨函数）
+      branchStubR: _branchStubR, // v4.3.553: 右侧支线 stub（≥ 站间距，跨函数）
       branchColW: _branchColW, // v4.3.516: 左侧列距动态化（跨函数）
       branchH: _branchH, // v4.3.522: 短支线线 → 支线水平直线横排（跨函数）
       branchModes: _branchModes, // v4.3.550: 每支线画法（h 横排 / v 竖列，跨函数）
@@ -1679,6 +1684,7 @@
           var _bSideNow = (geometry.branchSides && geometry.branchSides[bi]) ? geometry.branchSides[bi] : "right";
           var _bColNow = (geometry.bCol) ? geometry.bCol(bi) : 0;
           var _stubL6 = geometry.branchStubL || 0;
+          var _stubR6 = geometry.branchStubR || GEOM.BRANCH_STUB; // v4.3.553: 右侧 stub ≥ 站间距
           var _colW6 = geometry.branchColW || GEOM.BRANCH_COL_W;
           if (geometry.branchModes && geometry.branchModes[bi] === 'h') {
             // v4.3.522: 短支线线 → 支线水平直线横排（用户："两条直线别再有拐弯"）：
@@ -1734,7 +1740,7 @@
             // ---- 竖列（现状：水平直 stub + 垂直列）----
             var bx = (_bSideNow === "left")
               ? (stationCoords[junctionIdx].x - _stubL6 - _bColNow * _colW6)
-              : (stationCoords[junctionIdx].x + GEOM.BRANCH_STUB + _bColNow * GEOM.BRANCH_COL_W);
+              : (stationCoords[junctionIdx].x + _stubR6 + _bColNow * GEOM.BRANCH_COL_W);
             var by = stationCoords[junctionIdx].y;
             var branchTop = by - 20;
             // v4.3.516: junction 行水平直 stub（不拐弯）；左侧穿 junction 站名带问题由

@@ -927,3 +927,11 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 **修复**（js/trains-page.js backBtn 监听）：一律 window.history.back()，与 tourism-detail handleBack 完全同步；删除 fallback 块与 2312 行无效 hash 检查（back 异步）。hashchange 兜底保留——back() 回列表（hash 空→hideLineView）/回上一详情（hash 变→showLineView）视图自动恢复；无历史（直开详情）时 back() 无操作、详情保持（同浏览器后退按钮禁用语义）。
 **验证**：node --check OK；本地 DOM——直开 #Tsurumi（hlen=1）点返回 URL/hash/详情均不变（不再跳一览页）；列表→鹤见→返回回列表（hash 空）；详情→回列表→成田→返回回列表。
 **版本**：bump trains-page.js ?v=4.3.551→4.3.552（数据未动不 bump db-loader）；LINE-DIAGRAM-SPEC 修订表 4.3.552 行。
+
+## 4.3.553（2026-09-12，右侧支线 stub 叉出段 ≥ 站间距）
+**用户指示**："你算了站间距后为什么设计成这样"——南武線手机截图：浜川崎支線竖列紧贴主线（固定 stub 20px），两条竖线视觉像双线并行、可读性差。
+**根因**：4.3.551「插线叉出去那一部分也要算站间距」只覆盖了**横排站距**（名宽+sp）；**右侧单支线竖列的 stub（水平叉出段）仍是固定 GEOM.BRANCH_STUB=20px**——南武線（24 站 sp=58）主线 410/支线 430 只差 20px。对照：左侧竖列 _branchStubL=主干最宽名+22（≥92 已满足）、成田/鶴見 支线离主线 92-167px 用户可接受——唯独右侧单支线 stub 20px 贴主线。
+**规则**（写规则非逐例）：**右侧支线水平叉出段（stub）≥ 标准站间距(sp)**——`_branchStubR = Math.max(GEOM.BRANCH_STUB, sp)`，与竖列/横排"算站间距"统一。
+**修改**（js/trains-page.js 7 处）：_branchStubR 定义（_branchStubL 后）；_rightNeed 单支线（598）、svgW 单支线（934）、branchGeom 右侧竖列 x（1030）三处 GEOM.BRANCH_STUB→_branchStubR；geometry 增传 branchStubR（1100）；renderTrainMap 顶部 _stubR6=geometry.branchStubR||BRANCH_STUB（1682）、右侧竖列 x（1737）GEOM.BRANCH_STUB→_stubR6。
+**验证**：node --check OK；本地 DOM 四线——南武線 竖线 410/468（stub 58）+支线站名 478、svgW 820 不变；丸ノ内 方南町 竖线 410/468+478；成田 我孫子 307.6/空港 587.6+755.2/成田 410 middle 全不变（双支线右横排不用右侧 stub）；鶴見 海芝浦 170.4/大川 285.2/浅野 422 全不变（全横排左）。
+**版本**：bump trains-page.js ?v=4.3.552→4.3.553（数据未动不 bump db-loader）；LINE-DIAGRAM-SPEC 修订表 4.3.553 行。
