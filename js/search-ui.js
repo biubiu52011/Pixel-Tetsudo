@@ -399,7 +399,9 @@
             if (_stBadge) { html += _stBadge; }
             html += '<span class="journey-seg-route">' + window.escapeHtml(fromSt) + ' &rarr; ' + window.escapeHtml(toSt) + '</span>';
             if (seg.direction !== 0 && lineId) {
-              var _dirSt = seg.direction > 0 ? seg.toStation : seg.fromStation;
+              // 方向指引 = 本段终点（行进方向），而非线路站序符号：反向乘车段曾误显示起点站名
+              // （例：新宿→渋谷 显示"新宿方面"），乘客视角应始终是"驶向的站"。
+              var _dirSt = seg.toStation;
               var _dirName = (window.RailwayDB && window.RailwayDB.resolveStationName) ? window.RailwayDB.resolveStationName(_dirSt, lang) : _dirSt;
               html += '<span class="journey-seg-direction">' + window.escapeHtml(t('search.direction').replace('{s}', _dirName)) + '</span>';
             }

@@ -1194,3 +1194,17 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 **处理**：278 图转存 images/観光地/（文件名=shopName，Windows 非法字符清理）；279 新 spot 四语 i18n 全字段（name/desc/hours/fee/bestTime/tips_i18n 3 条 × ja/zh/en/ko）schema 校验 0 错误；tourism_data.json 173→452；bundle 再生成（tourism-data.file.js 861KB）；4 頁 bump 4.3.585（home/history/realtime/tourism-detail 各 20/8/22/15 处）。
 **验证**：bundle 加载 452 spots OK；JSON 语法合法；schema 0 错误；4 子代理报告错图 0；git ls-remote=e3bef82（无并发）。
 **遗留**：22 个 coord=[0,0] 活动类 spot 待补坐标；1 个无图 spot（東京メトロの七夕飾り）待补官方图；5 个无 info 早期挑战（ID 2/4/6/8/9）未导入。
+
+
+## 4.3.586（2026-09-13，换乘指引清晰化）
+**问题**：用户反馈"换乘指引不够清晰"——线上实测 2 个产品缺陷。
+**根因实证（浏览器线上实测 + 代码定位）**：
+- 方向指引 bug：search-ui.js renderResults 方向渲染 `_dirSt = seg.direction > 0 ? seg.toStation : seg.fromStation`——线路站序反向乘车段（direction<0）把**起点站**当"方面"显示。实测：新宿→渋谷（埼京線反向）显示"新宿方面"、新川崎→新宿（湘南新宿ライン直通段）显示"新川崎方面"——乘客视角严重误导。
+- 乘换段说明抽象：乘换段仅"駅名 + 乗換 + 线路徽章 + 站级 hint"，方向指引错误叠加后整体不清晰；hint 为站级泛化文本（新宿"（JR・私鉄・地下鉄連絡、一部要出站）"在 JR→JR 换乘也显示）。
+- 乘换计数表述不自然：日文"1 乗換回"、英文"1 transfer(s)"、韩文"1 회통 환수"（误译乱码）。
+**修复**：
+- js/search-ui.js：方向渲染 `_dirSt` 恒取段终点 `seg.toStation`（不再依赖 direction 符号）——"方面"始终是驶向的站。御茶ノ水→渋谷 第二段现显示"渋谷方面"。
+- js/translations.js：transfer_count 四语言修正——ja "乗換回"→"回乗換"（1 回乗換）、en "transfer(s)"→"transfer"（1 transfer）、ko "회통 환수"→"회 환승"（1 회 환승）、zh "次换乘" 不变。
+- css/style.css：.journey-transfer-text 徽章化（绿底绿框粗体，"乗換"更醒目）；.journey-transfer-hint 强调色（--yellow，fallback #b8860b）；.journey-seg-direction 10→11px。
+**验证**：node --check 双文件通过；方向逻辑新旧对比模拟（反向段 新宿→渋谷 由"新宿方面"→"渋谷方面"）；4 页 bump 4.3.586（home/history/realtime/tourism-detail 各 20/8/22/15 处）；线上人工验收待用户。
+**遗留**：trains.html 版本引用仍停 4.3.560（独立既有状态，未随主版本 bump——trains 页可能加载旧版 translations/style.css，影响小但待评估统一）；乘换 hint 仍为站级泛化文本（新宿 JR→JR 换乘也显示"私鉄・地下鉄連絡"），结构化换乘指引（番线/步行时长/换乘方向）需数据层新增字段，列为 Known Debt。
