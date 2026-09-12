@@ -1766,7 +1766,17 @@
           branchVLine.setAttribute("x1", bx);
           branchVLine.setAttribute("y1", _connY);
           branchVLine.setAttribute("x2", bx);
-          branchVLine.setAttribute("y2", branchTop + (branch.stations ? branch.stations.length * branchSp : 50));
+          // v4.3.554: 竖线只画到最后一个支线站（原 branchTop+站数×sp 从 junction 上一档起、
+          // 含 junction 全站计数——4.3.548 跳过 junction、4.3.554 第一站同行后竖线多出
+          // 2×sp-20px 空段：丸ノ内方南町 308→462 多 96px 空线）——精确计数独有站，
+          // 终点 = 最后一站 y = junction 行 + (独有站数-1)×sp
+          var _vOwn = 0;
+          if (branch.stations) {
+            for (var _vi7 = 0; _vi7 < branch.stations.length; _vi7++) {
+              if (branch.stations[_vi7] !== _jFind7.station) _vOwn++;
+            }
+          }
+          branchVLine.setAttribute("y2", _connY + Math.max(0, _vOwn - 1) * branchSp);
           branchVLine.setAttribute("stroke", bColor);
           branchVLine.setAttribute("stroke-width", "3");
           branchVLine.setAttribute("opacity", "0.5");

@@ -942,3 +942,11 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 **修改**（js/trains-page.js 2 处）：branchGeom 竖列 `_bK` 1→0（约 1053-1059，注释同步）；renderTrainMap 竖列 `_bK2` 1→0（约 1778-1796，注释同步）。
 **验证**：node --check OK；本地 DOM 四线同行——南武線 八丁畷 y=76 与尻手 y=76 同行（viewBox 820×1542）；成田 下総松崎 y=142 与成田同行（viewBox 952×1026 不变）；千代田 北綾瀬 y=1178 与綾瀬同行（viewBox 820×1344→1282 缩短一档）；丸ノ内 西新宿五丁目 y=308 与中野坂上同行、方南町第二站 y=366（viewBox 820×1520）。
 **版本**：bump trains-page.js ?v=4.3.553→4.3.554（**4.3.553 已被 stub 修复 commit 0b6b165 占用并 push，同行修复必须 bump 新版本号，否则浏览器缓存命中旧 stub 版 JS**；数据未动不 bump db-loader）；LINE-DIAGRAM-SPEC 修订表 4.3.554 行。
+
+## 4.3.555（2026-09-12，竖列支线竖线只画到最后一个站）
+**用户指示**：截图问"那么多余的部分是"——丸ノ内方南町支线竖线在方南町圆点下方多出一段空线（DOM 实测 468:308→462，方南町 y=366，多 96px）；列车推定标记"▼中野坂上"(504,383) 还落在多余空线段上，观感更乱。
+**根因**：竖线终点公式 `branchTop + branch.stations.length×branchSp`（branchTop=by−20，从 junction 上一档起、含 junction 全站计数）——4.3.548 跳过 junction 绘制、4.3.554 第一站同行（_bK2=0 起）后，竖线终点未同步，多出 2×sp−20px 空段（丸ノ内 58→96px、成田 62→102px）。
+**规则**（写规则非逐例）：**竖列支线竖线起点 = junction 行（同行修复），终点 = 最后一个支线站 y = junction 行 + (独有站数−1)×sp**；独有站 = 支线站表跳过 junction 后的站数（精确计数，不依赖站表长度假设）；单站支线（千代田北綾瀬）零长竖线。
+**修改**（js/trains-page.js renderTrainMap 竖列）：branchVLine y2 改为 `_connY + Math.max(0, _vOwn-1)×branchSp`，_vOwn 由循环跳过 _jFind7.station 精确计数。
+**验证**：node --check OK；本地 DOM 四线——丸ノ内 竖线 468:308→366（方南町）、南武線 468:76→250（浜川崎）、千代田 472:1178→1178（单站零长）、成田 317.6:142→638（我孫子，原 742）；站名/同行/横排均无回归。
+**版本**：bump trains-page.js ?v=4.3.554→4.3.555（数据未动不 bump db-loader）；LINE-DIAGRAM-SPEC 修订表 4.3.555 行。
