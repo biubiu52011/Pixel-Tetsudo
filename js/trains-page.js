@@ -2325,14 +2325,11 @@
       });
       if (backBtn) {
         backBtn.addEventListener("click", function() {
-          // v4.3.552: 与 tourism-detail 完全同步——纯退回（history.back()）。
-          // 用户："返回是返回对应一览页，不是退回"——原 fallback（history.length<=1 时
-          // location.hash="" 清 hash 跳一览页）违背"退回"语义，且 location.hash="" 会
-          // 产生新 history entry（直开详情 hlen 1→2），用户再次点返回反而 back() 回详情，
-          // 形成"详情→一览→详情"循环。现一律 history.back()：有历史退到来源页
-          // （列表/主页/上一详情，hashchange 兜底恢复视图）；无历史（直开详情）时
-          // back() 无操作、详情保持——与浏览器后退按钮行为一致。
-          window.history.back();
+          // v4.3.556: 统一回到线路一览（用户："所有返回统一回到一览"）——
+          // 反转 4.3.552 纯退回（history.back()）：清 hash 触发 hashchange 兜底
+          // hideLineView()，无论从哪进入详情（列表/主页/上一详情/直开），
+          // 点返回一律回到线路一览页。
+          window.location.hash = "";
         });
       }
       // hash 路由兜底：history.back() 后 hash 变化时恢复对应视图

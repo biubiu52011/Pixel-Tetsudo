@@ -950,3 +950,9 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 **修改**（js/trains-page.js renderTrainMap 竖列）：branchVLine y2 改为 `_connY + Math.max(0, _vOwn-1)×branchSp`，_vOwn 由循环跳过 _jFind7.station 精确计数。
 **验证**：node --check OK；本地 DOM 四线——丸ノ内 竖线 468:308→366（方南町）、南武線 468:76→250（浜川崎）、千代田 472:1178→1178（单站零长）、成田 317.6:142→638（我孫子，原 742）；站名/同行/横排均无回归。
 **版本**：bump trains-page.js ?v=4.3.554→4.3.555（数据未动不 bump db-loader）；LINE-DIAGRAM-SPEC 修订表 4.3.555 行。
+
+## 4.3.556（2026-09-12，返回按钮统一回到线路一览）
+**用户指示**："所有返回统一回到一览"——反转 4.3.552 纯退回（history.back()），返回按钮一律回到线路一览页（trains 页唯一返回入口 trainsBackBtn）。
+**修复**（js/trains-page.js backBtn 监听）：点击由 `window.history.back()` 改为 `window.location.hash = ""`——清 hash 触发 hashchange 兜底 `!h → hideLineView()` 显示列表；无论从哪进入详情（列表/主页/上一详情/直开新标签）点返回都回一览。清 hash 产生新 history entry（直开详情 hlen 1→2），浏览器后退仍回详情——标准浏览器历史行为，与"返回按钮=回一览"语义一致；hashchange 兜底（hash 变→showLineView / hash 空→hideLineView）保留。
+**验证**：node --check OK；本地 DOM 两场景——①列表→南武→点返回：URL #Nambu→#、detailHidden true、listHidden false（回列表）；②直开 #Nambu（新 tab hlen=1）→点返回：同样回列表（4.3.552 时直开详情 back() 无操作，现统一回一览）。
+**版本**：bump trains-page.js ?v=4.3.555→4.3.556（数据未动不 bump db-loader）；LINE-DIAGRAM-SPEC 修订表 4.3.556 行。
