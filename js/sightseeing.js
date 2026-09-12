@@ -18,13 +18,38 @@
 
   const TAG_ICONS = {};
 
+  // 4.3.561: 无图景点按类别显示语义图标（替代统一齿轮）
+  const SPOT_ICON_BY_TAG = {
+    shrine: '&#x26E9;&#xFE0F;',
+    history: '&#x1F3DB;&#xFE0F;',
+    nature: '&#x1F333;',
+    food: '&#x1F35C;',
+    seasonal: '&#x1F386;',
+    night: '&#x1F319;',
+    shopping: '&#x1F6CD;&#xFE0F;',
+    park: '&#x1F332;',
+    landmark: '&#x1F5FC;',
+    modern: '&#x1F3D9;&#xFE0F;'
+  };
+  function iconForTags(tags) {
+    if (Array.isArray(tags)) {
+      for (var i = 0; i < tags.length; i++) {
+        if (SPOT_ICON_BY_TAG[tags[i]]) return SPOT_ICON_BY_TAG[tags[i]];
+      }
+    }
+    return '&#x2699;';
+  }
+
   function getMajorStations() {
     if (window.TOURISM_STATIONS && window.TOURISM_STATIONS.length > 0) return Array.from(window.TOURISM_STATIONS);
     // 4.3.559: 按 3km 内景点数降序取前 12（替换旧键序遍历——键序 + 劣质估算坐标会导致假站/漏真站）
     // 排除路面电车（都电荒川线）：其停留场无出入口概念，与出口算法不匹配
     var tramIds = {};
     try {
-      var arakawaLine = window.RAILWAY_DATA && window.RAILWAY_DATA.lines && window.RAILWAY_DATA.lines['Arakawa'];
+      // 4.3.560: 线上 https 场景 db-loader 从 railway_data.json 加载（applyData 不设置 window.RAILWAY_DATA），
+      // 必须用 UNIFIED_LINES（applyData 已设置 = data.lines）才能正确排除都电荒川线停留场
+      var arakawaLine = (window.UNIFIED_LINES && window.UNIFIED_LINES['Arakawa'])
+        || (window.RAILWAY_DATA && window.RAILWAY_DATA.lines && window.RAILWAY_DATA.lines['Arakawa']);
       if (arakawaLine && arakawaLine.stations) {
         arakawaLine.stations.forEach(function(sid) { tramIds[sid] = true; });
       }
@@ -206,6 +231,7 @@
         stationKey: item.stationId || stationKey,
         distM: item.distance,
         distText: item.distanceText,
+        exitDirection: item.exitDirection,
         isAcross: isAcross
       };
     });
@@ -302,7 +328,7 @@ function renderGrid() {
 
       const thumbHtml = image ? 
         '<img class="sm-thumb-img" src="' + encodeURI(image) + '" alt="' + _escSpot(name) + '">' :
-        '<span class="sm-thumb-icon">&#x2699;</span>';
+        '<span class="sm-thumb-icon">' + iconForTags(tags) + '</span>';
       
       // Localize distance text with current language (cached distanceText is ja-only)
       let distText = '';
@@ -445,7 +471,7 @@ function renderGrid() {
         state.autoDetected = false;
         renderAll();
       }
-    }, 8000);
+    }, 4000);
     function locFallback() {
       state.locStatus = 'error';
       if (!state.selectedStation) {
@@ -453,6 +479,12 @@ function renderGrid() {
       }
       state.autoDetected = false;
       renderAll();
+    }
+    // 4.3.561: file:// 本地打开无 geolocation 权限，直接降级（不等 8 秒）
+    if (typeof location !== 'undefined' && location.protocol === 'file:') {
+      clearTimeout(guard);
+      locFallback();
+      return;
     }
     if (typeof navigator === 'undefined' || !navigator.geolocation) {
       clearTimeout(guard);
@@ -502,7 +534,22 @@ function renderGrid() {
     bindEvents();
     updateStationDisplay();
     renderAll();
-    setTimeout(initLocation, 100);
+    // 4.3.560: 等待数据就绪后再定位——数据未就绪时 getMajorStations() 兜底 ['Shinjuku']，
+    // 且 db-loader 无数据就绪事件通知，导致默认站永远锁定无景点的 Shinjuku。
+    // 就绪判定：DataLoader.isLoaded() 或 STATION_COORDS 已有键；最多等 6s（24 次 x 250ms），超时仍走 initLocation。
+    var _attempt = 0;
+    function _dataReady() {
+      return (window.DataLoader && window.DataLoader.isLoaded && window.DataLoader.isLoaded())
+        || (window.STATION_COORDS && Object.keys(window.STATION_COORDS).length > 0);
+    }
+    function _startWhenReady() {
+      if (_dataReady() || ++_attempt >= 24) {
+        setTimeout(initLocation, 50);
+        return;
+      }
+      setTimeout(_startWhenReady, 250);
+    }
+    _startWhenReady();
   }
 
   function setLang(lang) {

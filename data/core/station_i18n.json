@@ -503,12 +503,6 @@
     "ko": "쿠라마에",
     "en": "Kuramae"
   },
-  "Kinshi": {
-    "ja": "金砂",
-    "zh": "金砂",
-    "ko": "키ㄴ시",
-    "en": "Kinshi"
-  },
   "Tsukishima": {
     "ja": "月島",
     "zh": "月岛",
@@ -556,12 +550,6 @@
     "zh": "新足立",
     "ko": "시ㄴ아다치",
     "en": "Shin-Adachi"
-  },
-  "Adachi": {
-    "ja": "安達",
-    "zh": "安达",
-    "ko": "아다치",
-    "en": "Adachi"
   },
   "Kayabacho": {
     "ja": "茅場町",
@@ -1037,12 +1025,6 @@
     "ko": "닝요초",
     "en": "Ningyocho"
   },
-  "Higashi-nihonbashi": {
-    "ja": "東日本橋",
-    "zh": "东日本桥",
-    "ko": "히가시니호ㄴ바시",
-    "en": "Higashi-nihombashi"
-  },
   "Den-en-chofu": {
     "ja": "田園調布",
     "zh": "田園調布",
@@ -1067,23 +1049,11 @@
     "ko": "하쵸보리",
     "en": "Hatchobori"
   },
-  "Yanaka": {
-    "ja": "谷中",
-    "zh": "谷中",
-    "ko": "야나카",
-    "en": "Yanaka"
-  },
   "Minowa": {
     "ja": "三ノ輪",
     "zh": "三轮",
     "ko": "미노와",
     "en": "Minowa"
-  },
-  "Otsuka-ekimae": {
-    "ja": "大塚駅前",
-    "zh": "大冢站前",
-    "ko": "오츠카에키마에",
-    "en": "Otsuka-ekimae"
   },
   "Shirokanedai": {
     "ja": "白金台",
@@ -1324,12 +1294,6 @@
     "zh": "西马込",
     "ko": "니시마고메",
     "en": "Nishi-Magome"
-  },
-  "Shimo-Kitazzu": {
-    "ja": "下北沢",
-    "zh": "下北泽",
-    "ko": "시모키타ㅈ주",
-    "en": "Shimo-Kitazzu"
   },
   "Kita-Aoi": {
     "ja": "北青井",
@@ -1691,23 +1655,11 @@
     "ko": "이이다바시",
     "en": "Iidabashi"
   },
-  "Fujimi": {
-    "ja": "富士見",
-    "zh": "富士见",
-    "ko": "후지미",
-    "en": "Fujimi"
-  },
   "Koshigaya": {
     "ja": "越谷",
     "zh": "越谷",
     "ko": "코시가야",
     "en": "Koshigaya"
-  },
-  "Tokiwabashi": {
-    "ja": "常盤橋",
-    "zh": "常盤桥",
-    "ko": "토키와바시",
-    "en": "Tokiwabashi"
   },
   "Shin-Urawa": {
     "ja": "新浦和",
@@ -5015,12 +4967,6 @@
     "ko": "히가시무코지마",
     "en": "Higashi-mukojima"
   },
-  "Higashi_Azuma": {
-    "ja": "東あずま",
-    "zh": "东吾妻",
-    "ko": "히가시아즈마",
-    "en": "Higashi-azuma"
-  },
   "Higashi_Koizumi": {
     "ja": "東小泉",
     "zh": "东小泉",
@@ -5243,12 +5189,6 @@
     "ko": "코이즈미초",
     "en": "Koizumimachi"
   },
-  "Komura_i": {
-    "ja": "小村井",
-    "zh": "小村井",
-    "ko": "코무라이",
-    "en": "Omurai"
-  },
   "Kosuge": {
     "ja": "小菅",
     "zh": "小菅",
@@ -5416,12 +5356,6 @@
     "zh": "西川田",
     "ko": "니시카와다",
     "en": "Nishikawada"
-  },
-  "Nishi_Arayashi": {
-    "ja": "西新井",
-    "zh": "西新井",
-    "ko": "니시아라야시",
-    "en": "Nishiarai"
   },
   "Nishi_Koizumi": {
     "ja": "西小泉",
@@ -11321,12 +11255,6 @@
     "ko": "카나하마",
     "en": "Kanahama"
   },
-  "Otocchi": {
-    "ja": "乙越",
-    "zh": "乙越",
-    "ko": "오토치",
-    "en": "Otocchi"
-  },
   "Kaijo": {
     "ja": "海上",
     "zh": "海上",
@@ -11338,12 +11266,6 @@
     "zh": "角滨",
     "ko": "츠노하마",
     "en": "Tsunohama"
-  },
-  "Hirai-8oh": {
-    "ja": "平井",
-    "zh": "平井",
-    "ko": "히라이",
-    "en": "Hirai"
   },
   "Taneichi": {
     "ja": "種市",
@@ -14812,12 +14734,6 @@
     "zh": "本宫",
     "ko": "모토미야",
     "en": "Motomori"
-  },
-  "Sugita-2": {
-    "ja": "杉田",
-    "zh": "杉田",
-    "ko": "스기타",
-    "en": "Sugita-2"
   },
   "Nihonmatsu": {
     "ja": "二本松",
@@ -18784,5 +18700,17 @@
     "zh": "一日市场",
     "ko": "히토이치바",
     "en": "Hitoichiba"
+  },
+  "Higashi-Azuma": {
+    "ja": "東あずま",
+    "zh": "东吾妻",
+    "ko": "히가시아즈마",
+    "en": "Higashi-azuma"
+  },
+  "Omurai": {
+    "ja": "小村井",
+    "zh": "小村井",
+    "ko": "코무라이",
+    "en": "Omurai"
   }
 }

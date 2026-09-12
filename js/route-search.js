@@ -450,7 +450,10 @@
     if (window.StationResolver) {
       var results = window.StationResolver.resolve(term);
       var lang = window.currentLang || 'en';
-      return results.slice(0, 10).map(function(r) {
+      // 4.3.560: 过滤 NOT_FOUND/null stationId 结果，防止无 ID 建议项进入渲染层
+      return results
+        .filter(function(r) { return r && r.stationId && r.status !== 'NOT_FOUND'; })
+        .slice(0, 10).map(function(r) {
         var did = r.stationId;
         var dn = r.displayName || did;
         if (window.RailwayDB && window.RailwayDB.resolveStationName) {

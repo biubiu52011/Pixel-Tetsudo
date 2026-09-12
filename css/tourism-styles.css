@@ -814,6 +814,10 @@
   padding: 12px 16px;
   border-top: 1px solid var(--border, #e0e0e0);
 }
+/* 4.3.560: 浮层隐藏规则缺失——hideStationPicker 加 hidden 类无视觉作用，导致浮层显示后永不收起 */
+.sm-station-picker.hidden {
+  display: none;
+}
 .sm-picker-label {
   font-size: 12px;
   color: var(--text-secondary, #888);

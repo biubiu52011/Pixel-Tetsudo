@@ -102,7 +102,19 @@
 
     history.forEach(function(entry) {
       const timeStr = formatTime(entry.timestamp, t);
-      const _lang = window.currentLang || "ja"; const lines = entry.lineInfo ? [...new Set(entry.lineInfo.flat())].map(function(lid){ return (window.RailwayDB && window.RailwayDB.resolveLineName) ? window.RailwayDB.resolveLineName(lid, _lang) : lid; }).join(", ") : "";
+      const _lang = window.currentLang || "ja";
+      // 4.3.560: lineInfo 为对象数组 [{from,to,lines:[...]}]，flat() 不展开对象导致 [object Object]
+      // 修复：提取每条记录的 lines 数组（兼容纯字符串数组的旧数据）
+      function _extractLines(lineInfo) {
+        var out = [];
+        if (!Array.isArray(lineInfo)) return out;
+        lineInfo.forEach(function(x) {
+          if (x && Array.isArray(x.lines)) out = out.concat(x.lines);
+          else if (typeof x === "string") out.push(x);
+        });
+        return out;
+      }
+      const lines = entry.lineInfo ? [...new Set(_extractLines(entry.lineInfo))].map(function(lid){ return (window.RailwayDB && window.RailwayDB.resolveLineName) ? window.RailwayDB.resolveLineName(lid, _lang) : lid; }).join(", ") : "";
 
       html += '<div class="history-entry" data-id="' + entry.id + '">';
       html += '<div class="history-route">';

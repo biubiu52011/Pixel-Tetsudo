@@ -147,6 +147,16 @@
         }
       }
       if (jpMatches.length > 0) return jpMatches;
+      // 4.3.560: 带「駅」后缀的日文输入（如「渋谷駅」）容错——剥离后缀后按站名重新解析
+      if (q.charAt(q.length - 1) === "駅") {
+        var bare = q.slice(0, -1);
+        var bareR = resolve(bare);
+        if (bareR.length > 0 && bareR[0].stationId) {
+          return bareR.map(function(r) {
+            return { stationId: r.stationId, displayName: q, status: r.status };
+          });
+        }
+      }
       return [{ stationId: null, displayName: q, status: "NOT_FOUND" }];
     }
 
