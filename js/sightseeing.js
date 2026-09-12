@@ -40,59 +40,6 @@
     return '&#x2699;';
   }
 
-  function getMajorStations() {
-    if (window.TOURISM_STATIONS && window.TOURISM_STATIONS.length > 0) return Array.from(window.TOURISM_STATIONS);
-    // 4.3.559: 按 3km 内景点数降序取前 12（替换旧键序遍历——键序 + 劣质估算坐标会导致假站/漏真站）
-    // 排除路面电车（都电荒川线）：其停留场无出入口概念，与出口算法不匹配
-    var tramIds = {};
-    try {
-      // 4.3.560: 线上 https 场景 db-loader 从 railway_data.json 加载（applyData 不设置 window.RAILWAY_DATA），
-      // 必须用 UNIFIED_LINES（applyData 已设置 = data.lines）才能正确排除都电荒川线停留场
-      var arakawaLine = (window.UNIFIED_LINES && window.UNIFIED_LINES['Arakawa'])
-        || (window.RAILWAY_DATA && window.RAILWAY_DATA.lines && window.RAILWAY_DATA.lines['Arakawa']);
-      if (arakawaLine && arakawaLine.stations) {
-        arakawaLine.stations.forEach(function(sid) { tramIds[sid] = true; });
-      }
-    } catch (e) {}
-    var withSpots = [];
-    try {
-      Object.keys(getStationCoords()).forEach(function(k) {
-        if (tramIds[k]) return;
-        var cnt = 0, near = Infinity;
-        try {
-          var nearby = (window.TourismProximity && window.TourismProximity.getNearbySpotsByStation)
-            ? window.TourismProximity.getNearbySpotsByStation(k, { radius: 3000, limit: 30 }) : [];
-          cnt = nearby.length;
-          if (cnt > 0 && nearby[0]) near = nearby[0].distance;
-        } catch (e) { return; }
-        if (cnt > 0) withSpots.push({ id: k, cnt: cnt, near: near });
-      });
-      // 4.3.559: 景点数降序；景点数相同 → 距最近景点更近的站优先（避免北千住等中心站被并列截断）
-      withSpots.sort(function(a, b) {
-        if (b.cnt !== a.cnt) return b.cnt - a.cnt;
-        return a.near - b.near;
-      });
-      withSpots = withSpots.slice(0, 12).map(function(x) { return x.id; });
-    } catch (e) {}
-    if (withSpots.length > 0) return withSpots;
-    // Last-resort fallback (4.3.557): derive default stations FROM the spot
-    // catalogue instead of hard-coding one. 'Shinjuku' has no registered spots,
-    // so it left the tourism grid blank whenever the coordinate index was not
-    // ready yet. Reverse-lookup each spot's nearest station guarantees a
-    // default that actually has data.
-    var fromSpots = [];
-    try {
-      var spots = window.TOURISM_SPOTS || [];
-      for (var i = 0; i < spots.length && fromSpots.length < 12; i++) {
-        var sp = spots[i];
-        if (sp && sp.coord && sp.coord.length >= 2 && window.TourismProximity && window.TourismProximity.getNearestStation) {
-          var ns = window.TourismProximity.getNearestStation(sp.coord[0], sp.coord[1]);
-          if (ns && ns.stationId && fromSpots.indexOf(ns.stationId) < 0) fromSpots.push(ns.stationId);
-        }
-      }
-    } catch(e) {}
-    return fromSpots.length > 0 ? fromSpots : ['Shinjuku'];
-  }
   const RIVERS = [
     { name: 'Sumida', lat: 35.710, lng: 139.803, width: 120 } // width in meters
   ];
@@ -117,9 +64,7 @@
     dom.empty = document.getElementById('smEmpty');
     dom.stationDisplay = document.getElementById('smStationDisplay');
     dom.relocateBtn = document.getElementById('smRelocateBtn');
-    dom.locationBar = document.querySelector('.sm-location-bar');
     dom.header = document.querySelector('.sm-header');
-    dom.stationPicker = document.getElementById('smStationPicker');
   }
 
   function t(key) {
@@ -400,62 +345,14 @@ function renderGrid() {
   }
 
   function bindEvents() {
+    // 4.3.564: 彻底取消手动选站（站选择器）——观光区仅展示定位附近景点，定位失败不提供备选站
     if (dom.relocateBtn) {
       dom.relocateBtn.addEventListener('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
-        hideStationPicker();
         initLocation();
       });
     }
-    if (dom.stationPicker) {
-      dom.stationPicker.addEventListener('click', function(e) {
-        var btn = e.target.closest('.sm-picker-btn');
-        if (!btn) return;
-        e.preventDefault();
-        e.stopPropagation();
-        var station = btn.getAttribute('data-station');
-        if (station) {
-          hideStationPicker();
-          setStation(station);
-        }
-      });
-    }
-    if (dom.locationBar) {
-      dom.locationBar.style.cursor = 'pointer';
-      dom.locationBar.addEventListener('click', function(e) {
-        if (e.target.closest('#smRelocateBtn')) return;
-        if (state.locStatus === 'error' || state.locStatus === 'found') {
-          if (dom.stationPicker.classList.contains('hidden')) {
-            showStationPicker();
-          } else {
-            hideStationPicker();
-          }
-        }
-      });
-    }
-  }
-
-  // Station picker shown when geolocation is unavailable
-  function showStationPicker() {
-    if (!dom.stationPicker) return;
-    var html = '<div class="sm-picker-label">' + t('tourism.choose_station') + '</div><div class="sm-picker-list">';
-    var _stations = getMajorStations();
-    for (var i = 0; i < _stations.length; i++) {
-      var s = _stations[i];
-      var label = s;
-      if (window.RailwayDB && window.RailwayDB.resolveStationName) {
-        label = window.RailwayDB.resolveStationName(s, state.lang) || s;
-      }
-      html += '<button class="sm-picker-btn" data-station="' + s + '">' + (window.escapeHtml ? window.escapeHtml(label) : label) + '</button>';
-    }
-    html += '</div>';
-    dom.stationPicker.innerHTML = html;
-    dom.stationPicker.classList.remove('hidden');
-  }
-
-  function hideStationPicker() {
-    if (dom.stationPicker) dom.stationPicker.classList.add('hidden');
   }
 
   function initLocation() {
@@ -465,18 +362,14 @@ function renderGrid() {
     var guard = setTimeout(function() {
       if (state.locStatus === 'locating') {
         state.locStatus = 'error';
-        if (!state.selectedStation) {
-          state.selectedStation = (getMajorStations().length > 0) ? getMajorStations()[0] : 'Shinjuku';
-        }
+        // 4.3.564: 定位失败不给备选站——保持"定位失败"状态，用户点刷新重试
         state.autoDetected = false;
         renderAll();
       }
     }, 4000);
     function locFallback() {
       state.locStatus = 'error';
-      if (!state.selectedStation) {
-        state.selectedStation = (getMajorStations().length > 0) ? getMajorStations()[0] : 'Shinjuku';
-      }
+      // 4.3.564: 定位失败不给备选站
       state.autoDetected = false;
       renderAll();
     }
@@ -557,17 +450,8 @@ function renderGrid() {
     renderAll();
   }
 
-  function setStation(stationKey) {
-    const stationCoords = getStationCoords();
-    if (!stationCoords[stationKey]) return;
-    state.selectedStation = stationKey;
-    state.autoDetected = false;
-    state.locStatus = 'found';
-    state.activeTags.clear();
-    renderAll();
-  }
-
-  window.SightseeingModule = { init: init, setLang: setLang, setStation: setStation };
+  // 4.3.564: 手动选站已彻底取消（setStation 移除）
+  window.SightseeingModule = { init: init, setLang: setLang };
 
   if (typeof window.onLanguageChange === 'function') {
     window.onLanguageChange(function() {
