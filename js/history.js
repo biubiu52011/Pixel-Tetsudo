@@ -43,6 +43,7 @@
     } catch (e) {
       console.warn("[History] Failed to save:", e);
     }
+    renderHistory();
     return entry;
   }
 
@@ -161,35 +162,12 @@
   function init() {
     renderHistory();
 
-    // Intercept SearchUI results
-    const originalPerformSearch = window.SearchUI ? window.SearchUI.performSearch : null;
-    if (originalPerformSearch) {
-      window.SearchUI.performSearch = function() {
-        const result = originalPerformSearch.apply(this, arguments);
-        var _searchResult = result;
-        setTimeout(function() {
-          const from = this.fromInput ? this.fromInput.value.trim() : "";
-          const to = this.toInput ? this.toInput.value.trim() : "";
-          if (from && to) {
-            if (_searchResult && _searchResult.error) { return; }
-            const history = getHistory();
-            const lastEntry = history[0];
-            const rid = window.RailwayDB ? window.RailwayDB.resolveStationName : null;
-            const lang = window.currentLang || "ja";
-            const dfrom = rid ? (rid(from, lang) || from) : from;
-            const dto = rid ? (rid(to, lang) || to) : to;
-            const lastFrom = lastEntry && lastEntry.fromId ? lastEntry.fromId : (lastEntry && rid ? (rid(lastEntry.from, lang) || lastEntry.from) : from);
-            const lastTo = lastEntry && lastEntry.toId ? lastEntry.toId : (lastEntry && rid ? (rid(lastEntry.to, lang) || lastEntry.to) : to);
-            if (!lastEntry || lastFrom !== dfrom || lastTo !== dto) {
-              saveToHistory(from, to, _searchResult);
-              renderHistory();
-            }
-          }
-        }.bind(this), 100);
-        this._lastSearchResult = result;
-        return result;
-      };
-    }
+    // NOTE (4.3.557): search persistence is now done inside SearchUI.performSearch
+    // -> SearchHistory.saveToHistory (single Provider -> Consumer path). The old
+    // monkey-patch below wrapped window.SearchUI.performSearch, which is the
+    // constructor property, while real calls run through SearchUI.prototype.
+    // performSearch — so it never fired and search history stayed empty. It has
+    // been removed rather than kept as dead code.
 
     if (typeof window.onLanguageChange === "function") {
       window.onLanguageChange(function() { renderHistory(); });

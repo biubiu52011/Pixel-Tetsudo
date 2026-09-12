@@ -137,6 +137,10 @@
           if (e.key === 'Enter') self.performSearch();
         });
         this.fromInput.addEventListener('input', function() {
+          // Manual edit invalidates any previously selected station: without this
+          // removal, data-station-id still points to the OLD station while the
+          // input shows a new name, and performSearch resolves to the stale station.
+          this.removeAttribute('data-station-id');
           self.showSuggestions(this.value, 'fromSuggestions', this);
         });
       }
@@ -146,6 +150,8 @@
           if (e.key === 'Enter') self.performSearch();
         });
         this.toInput.addEventListener('input', function() {
+          // Same stale data-station-id invalidation as the from input above.
+          this.removeAttribute('data-station-id');
           self.showSuggestions(this.value, 'toSuggestions', this);
         });
       }
@@ -186,6 +192,9 @@
       if (this._suggestionBindDone[cachedKey]) {
         container.innerHTML = this._suggestionCacheDOM[cachedKey] || '';
         container.classList.add('active');
+        // Rebind click handlers: re-writing innerHTML destroys the previous nodes
+        // and their listeners, so a later input event would leave items unclickable.
+        this._bindSuggestionEvents(container, inputEl);
         return;
       }
 
@@ -202,6 +211,10 @@
       this._suggestionCacheDOM[cachedKey] = container.innerHTML;
       this._suggestionBindDone[cachedKey] = true;
 
+      this._bindSuggestionEvents(container, inputEl);
+    },
+
+    _bindSuggestionEvents: function(container, inputEl) {
       container.querySelectorAll('.suggestion-item').forEach(item => {
         item.addEventListener('click', () => {
           var did = item.getAttribute('data-station-id');
@@ -250,6 +263,12 @@
           if (result) {
             this.renderResults(result, t);
             this.lastRouteResult = result;
+            // Persist the completed search to History (History consumes SearchUI
+            // output via its public API; the old monkey-patch in history.js
+            // wrapped the constructor property and never fired — fixed 4.3.557).
+            if (window.SearchHistory && window.SearchHistory.saveToHistory) {
+              window.SearchHistory.saveToHistory(from, to, result);
+            }
           } else {
             this.resultsDiv.innerHTML = '<div class="search-error">' + t('search.no_results') + '</div>';
           }

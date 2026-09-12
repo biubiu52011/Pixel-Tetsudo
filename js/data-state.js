@@ -129,6 +129,7 @@
     // Aggregate worst status across member lines for the card-level icon
     var worst = null;
     var firstId = null;
+    var allLoop = false;
     var intervalSegments = []; // 收集所有线路的起终点用于合并
     for (var i = 0; i < memberIds.length; i++) {
       var lid = memberIds[i];
@@ -141,14 +142,24 @@
       if (!worst || statusRank(status) > statusRank(worst)) worst = status;
       if (mode === "trains") {
         var stations = line.stations || [];
-        if (stations.length >= 2) {
+        // Loop lines (Yamanote / Oedo) have no meaningful termini: their drawn
+        // first/last stations are adjacent on the ring and mislead users
+        // (山手線 figure order starts 東京→有楽町). Skip them; a pure-loop card
+        // falls back to "環状" below (4.3.557).
+        var isLoopLine = !!(line.isDoubleColumnLoop || line.isSixShapedLoop);
+        if (isLoopLine) allLoop = true;
+        if (stations.length >= 2 && !isLoopLine) {
           intervalSegments.push({ from: stations[0], to: stations[stations.length - 1] });
         }
       }
     }
     // 合并连续线路的区间（前一条终点 == 后一条起点）
     var chipsHtml = "";
-    if (mode === "trains" && intervalSegments.length > 0) {
+    if (mode === "trains" && intervalSegments.length === 0 && allLoop) {
+      // Whole card is loop lines only: show 環状 instead of a meaningless
+      // first↔last interval (Yamanote/Oedo LOS cards).
+      chipsHtml = '<span class="rs-sys-chip">' + escapeHtml(t('line.loop')) + '</span>';
+    } else if (mode === "trains" && intervalSegments.length > 0) {
       var merged = [intervalSegments[0]];
       for (var si = 1; si < intervalSegments.length; si++) {
         var prev = merged[merged.length - 1];
@@ -289,7 +300,12 @@
       var intervalText = "";
       try {
         var stations = (window.RailwayDB && window.RailwayDB.getLineStations) ? window.RailwayDB.getLineStations(lineId) : [];
-        if (stations && stations.length >= 2) {
+        // Loop lines (Yamanote/Oedo): drawn first↔last stations are adjacent on
+        // the ring and mislead users (東京⇔有楽町), so show 環状 instead (4.3.557).
+        var _isLoop = !!(line && (line.isDoubleColumnLoop || line.isSixShapedLoop));
+        if (_isLoop) {
+          intervalText = t('line.loop');
+        } else if (stations && stations.length >= 2) {
           var lang = window.currentLang || 'ja';
           var resolveName = (window.RailwayDB && window.RailwayDB.resolveStationName) ? window.RailwayDB.resolveStationName : null;
           if (resolveName) {

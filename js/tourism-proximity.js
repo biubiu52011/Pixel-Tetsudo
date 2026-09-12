@@ -84,7 +84,7 @@
     var sLng = stationCoord[1];
 
     // Build cache key from station coords + radius (not stationId, to handle name variations)
-    var cacheKey = sLat.toFixed(6) + "," + sLng.toFixed(6) + '|' + radius;
+    var cacheKey = sLat.toFixed(6) + "," + sLng.toFixed(6) + '|' + radius + '|' + limit;
     var now = Date.now();
 
     // Check cache
@@ -110,7 +110,7 @@
           distance: dist,
           distanceText: formatWalkMinutes(dist),
           stationId: stationId,
-            exitDirection: mapDirectionToExit(getExitDirection(sLat, sLng, spot.coord[0], spot.coord[1]), stationId),
+          exitDirection: getExitNameByCoords(stationId, dist, spot.coord[0], spot.coord[1]),
         });
       }
     }
@@ -143,31 +143,36 @@
   }
 
   /**
-   * Calculate exit direction from station to spot (8-direction compass)
-   * @param {number} stationLat - Station latitude
-   * @param {number} stationLng - Station longitude
+   * 4.3.559: 按出入口经纬度取最近出口（替换旧 8 方位角 + 优先级表映射）
+   * 遍历 STATION_EXITS[stationId] 中每个出口的真实坐标，Haversine 取与 spot 最近者。
+   * @param {string} stationId - Station identifier
    * @param {number} spotLat - Spot latitude
    * @param {number} spotLng - Spot longitude
-   * @returns {string} Direction key: N/NE/E/SE/S/SW/W/NW or null if too close
+   * @returns {Object|null} { name, distance } or null（站无出口数据）
    */
-  function getExitDirection(stationLat, stationLng, spotLat, spotLng) {
-    if (stationLat == null || stationLng == null || spotLat == null || spotLng == null) return null;
-    var dLat = spotLat - stationLat;
-    var dLng = spotLng - stationLng;
-    // If spot is very close to station, consider it station direct
-    var dist = haversine(stationLat, stationLng, spotLat, spotLng);
-    if (dist < 80) return 'STATION';
-    // Calculate bearing (0=N, 90=E, 180=S, 270=W)
-    var bearing = (Math.atan2(dLng, dLat) * 180 / Math.PI + 360) % 360;
-    // 8-direction compass
-    if (bearing >= 337.5 || bearing < 22.5) return 'N';
-    if (bearing >= 22.5 && bearing < 67.5) return 'NE';
-    if (bearing >= 67.5 && bearing < 112.5) return 'E';
-    if (bearing >= 112.5 && bearing < 157.5) return 'SE';
-    if (bearing >= 157.5 && bearing < 202.5) return 'S';
-    if (bearing >= 202.5 && bearing < 247.5) return 'SW';
-    if (bearing >= 247.5 && bearing < 292.5) return 'W';
-    return 'NW';
+  function getNearestExit(stationId, spotLat, spotLng) {
+    if (spotLat == null || spotLng == null) return null;
+    var stationExits = (window.STATION_EXITS && window.STATION_EXITS[stationId]) || [];
+    if (!stationExits.length) return null;
+    var best = null;
+    for (var i = 0; i < stationExits.length; i++) {
+      var ex = stationExits[i];
+      if (!ex || ex.lat == null || ex.lng == null) continue;
+      var d = haversine(spotLat, spotLng, ex.lat, ex.lng);
+      if (d === Infinity) continue;
+      if (!best || d < best.distance) best = { name: ex.name, distance: d };
+    }
+    return best;
+  }
+
+  /**
+   * 4.3.559: 出口名解析——spot 距站中心 <80m 视为駅直結，否则取经纬度最近出口
+   * @returns {string|null} exit name or '駅直結' or null（无出口数据）
+   */
+  function getExitNameByCoords(stationId, stationToSpotDist, spotLat, spotLng) {
+    if (stationToSpotDist < 80) return '駅直結';
+    var nearest = getNearestExit(stationId, spotLat, spotLng);
+    return nearest ? nearest.name : null;
   }
 
 
@@ -178,32 +183,7 @@
    * @returns {Object|null} { stationId, distance, coord } or null
    */
 
-  /**
-   * Map 8-direction to actual exit name based on station available exits
-   * Only returns exits that actually exist at the station
-   */
-  function mapDirectionToExit(directionKey, stationId) {
-    if (!directionKey || directionKey === 'STATION') return '駅直結';
-    var stationExits = (window.STATION_EXITS && window.STATION_EXITS[stationId]) || [];
-    if (stationExits.length === 0) return null;
-    var priorityMap = {
-      'N': ['北口', '東口', '西口'],
-      'NE': ['東口', '北口', '南口'],
-      'E': ['東口', '北口', '南口', '西口'],
-      'SE': ['東口', '南口', '西口'],
-      'S': ['南口', '西口', '東口'],
-      'SW': ['西口', '南口', '東口'],
-      'W': ['西口', '北口', '南口', '東口'],
-      'NW': ['西口', '北口', '東口']
-    };
-    var priorities = priorityMap[directionKey] || ['東口', '西口'];
-    for (var i = 0; i < priorities.length; i++) {
-      if (stationExits.indexOf(priorities[i]) >= 0) {
-        return priorities[i];
-      }
-    }
-    return stationExits[0] || null;
-  }
+
 
   function getNearestStation(userLat, userLng) {
     if (userLat == null || userLng == null) return null;
@@ -228,8 +208,8 @@
     getNearbySpotsByStation: getNearbySpotsByStation,
     getDistance: getDistance,
     getNearestStation: getNearestStation,
-    getExitDirection: getExitDirection,
-    mapDirectionToExit: mapDirectionToExit,
+    getNearestExit: getNearestExit,
+    getExitNameByCoords: getExitNameByCoords,
     formatDistance: formatDistance,
     formatWalkMinutes: formatWalkMinutes,
     invalidateCache: invalidateCache,

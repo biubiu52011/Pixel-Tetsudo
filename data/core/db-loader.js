@@ -64,7 +64,8 @@
   var loaded = false;
   var error = null;
 
-  // Apply station data from an object with .stations, .lines, .tourism structure
+  // Apply station data from an object with .stations, .lines structure
+  // (4.3.557: .tourism anchor field removed from railway data)
 function applyData(data, i18n) {
     _stationI18n = i18n || {};
     window.STATION_COORDS = {};
@@ -657,54 +658,16 @@ function applyData(data, i18n) {
       if (!l.transferStations) l.transferStations = [];
     });
 
-    // Tourism data: global spots pool (no station binding) + station coordinate corrections
+    // Tourism data: global spots pool (no station binding).
+    // Anchor fields (station_coords / station_exits) and the old station-grouped
+    // format in railway_data.json were removed 4.3.557 — spots are the single source,
+    // stations are discovered automatically from STATION_COORDS via proximity.
     window.TOURISM_SPOTS = [];
-    // Backward compat: collect spots from old station-grouped format in railway_data.json
-    if (data.tourism && typeof data.tourism === 'object') {
-      Object.keys(data.tourism).forEach(function(stationKey) {
-        var st = data.tourism[stationKey];
-        if (st && st.spots && Array.isArray(st.spots)) {
-          st.spots.forEach(function(spot) {
-            window.TOURISM_SPOTS.push(spot);
-          });
-        }
-      });
-    }
-    // Merge JS-based tourism override (works under file:// protocol where fetch is blocked)
-    // New format: { spots: [...], station_coords: { ... } }
-    if (window.TOURISM_OVERRIDE && typeof window.TOURISM_OVERRIDE === 'object') {
-      if (window.TOURISM_OVERRIDE.spots && Array.isArray(window.TOURISM_OVERRIDE.spots)) {
-        window.TOURISM_SPOTS = window.TOURISM_OVERRIDE.spots;
-      }
-      if (window.TOURISM_OVERRIDE.station_coords && typeof window.TOURISM_OVERRIDE.station_coords === 'object') {
-        Object.keys(window.TOURISM_OVERRIDE.station_coords).forEach(function(stationKey) {
-          var coord = window.TOURISM_OVERRIDE.station_coords[stationKey];
-          if (coord && coord.length === 2) {
-            window.STATION_COORDS[stationKey] = coord;
-          }
-        });
-
-      }
-      // Load station exits (only exits that actually exist at each station)
-      if (window.TOURISM_OVERRIDE.station_exits && typeof window.TOURISM_OVERRIDE.station_exits === 'object') {
-        window.STATION_EXITS = window.TOURISM_OVERRIDE.station_exits;
-      } else {
-        window.STATION_EXITS = {};
-      }
-      // Backward compat: old station-grouped override format
-      Object.keys(window.TOURISM_OVERRIDE).forEach(function(key) {
-        if (key === 'spots' || key === 'station_coords') return;
-        var st = window.TOURISM_OVERRIDE[key];
-        if (st && st.coord && st.coord.length === 2) {
-          window.STATION_COORDS[key] = st.coord;
-        }
-      });
-    }
     // Keep TOURISM_DATA as empty object for backward compatibility (old code may check it)
     window.TOURISM_DATA = {};
-    // Tourism anchor stations: the station_coords explicitly provided by the tourism data source
-    var _tourismStations = (window.TOURISM_OVERRIDE && window.TOURISM_OVERRIDE.station_coords) ? Object.keys(window.TOURISM_OVERRIDE.station_coords) : [];
-    window.TOURISM_STATIONS = _tourismStations;
+    // Tourism anchor stations: no explicit anchors — station picker auto-discovers
+    // stations that have nearby spots (see Sightseeing.getMajorStations fallback).
+    window.TOURISM_STATIONS = [];
 
     // Build canonical StationLine relation
     window.STATION_LINES = {};
@@ -827,24 +790,6 @@ function applyData(data, i18n) {
         results.sort(function(a,b){return a.dist-b.dist;});
         return results.slice(0, limit).map(function(r){return r.id;});
       },
-      getNearbySpots: function(lat, lng, radiusKm, limit) {
-        limit = limit || 10;
-        radiusKm = radiusKm || 5;
-        var results = [];
-        Object.keys(data.tourism || {}).forEach(function(sid) {
-          var ts = data.tourism[sid];
-          if (!ts.spots) return;
-          ts.spots.forEach(function(sp){
-            var spLat = sp.lat || (sp.coord && sp.coord[0]);
-            var spLng = sp.lng || (sp.coord && sp.coord[1]);
-            if (!spLat || !spLng) return;
-            var d = Math.sqrt(Math.pow(spLat-lat,2)+Math.pow(spLng-lng,2))*111;
-            if (d <= radiusKm) results.push({stationId: sid, spot: sp, dist: d});
-          });
-        });
-        results.sort(function(a,b){return a.dist-b.dist;});
-        return results.slice(0, limit);
-      },
 
       // Name map
       getNameMap: function() { return data.name_map; },
@@ -918,14 +863,6 @@ function applyData(data, i18n) {
 
         // 3. Fallback: return id
         return id;
-      },
-
-      // Tourism
-      getTourism: function() { return data.tourism; },
-      getSpot: function(station, spotName) {
-        var ts = data.tourism ? data.tourism[station] : null;
-        if (!ts) return null;
-        return ts.spots.find(function(s) { return s.name === spotName; }) || null;
       },
 
       // Line query helpers (compatibility for modules that used window.UNIFIED_LINES)
@@ -1033,28 +970,16 @@ function applyData(data, i18n) {
     });
   }
 
-  // 应用 tourism_data.json 覆盖（原 fetch then-chain 逻辑，抽取复用）
+  // 应用 tourism_data.json（唯一真源：全局 spot 池，无锚点字段）
+  // 4.3.557：station_coords/station_exits 锚点字段已清理——spot 坐标直接来自
+  // 数据本身，站坐标统一走 railway STATION_COORDS，站选择器自动发现附近有景点的站。
   function applyTourismData(override) {
     override = override || {};
     if (override.spots && Array.isArray(override.spots)) window.TOURISM_SPOTS = override.spots;
-    if (override.station_coords && typeof override.station_coords === 'object') {
-      Object.keys(override.station_coords).forEach(function(stationKey) {
-        var coord = override.station_coords[stationKey];
-        if (coord && coord.length === 2) window.STATION_COORDS[stationKey] = coord;
-      });
-    }
-    Object.keys(override).forEach(function(key) {
-      if (key === 'spots' || key === 'station_coords') return;
-      var st = override[key];
-      if (st && st.coord && st.coord.length === 2) window.STATION_COORDS[key] = st.coord;
-    });
-    if (override.station_exits && typeof override.station_exits === 'object') {
-      window.STATION_EXITS = override.station_exits;
-    } else {
-      window.STATION_EXITS = {};
-    }
+    // 4.3.558: 出入口坐标表（{ stationId: [{name,lat,lng}] }），算法按经纬度取最近出口
+    window.STATION_EXITS = (override.station_exits && typeof override.station_exits === 'object') ? override.station_exits : {};
     window.TOURISM_DATA = {};
-    window.TOURISM_STATIONS = Object.keys(override.station_coords || {});
+    window.TOURISM_STATIONS = [];
   }
 
   // 远程加载：并行 + 超时 + 重试 + 应用 + 写缓存（i18n/tourism 容错，railway 必须成功）
@@ -1072,7 +997,7 @@ function applyData(data, i18n) {
       console.log(
         Object.keys(results[0].stations).length + " stations, " +
         Object.keys(results[0].lines).length + " lines, " +
-        Object.keys(results[0].tourism).length + " tourism stations");
+        (results[2] && results[2].spots ? results[2].spots.length : 0) + " tourism spots");
       return results;
     });
   }

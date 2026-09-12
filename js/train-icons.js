@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Pixel Tetsudo - Train Icon Mapping
  * 列车车型图标映射表
  * 图标来源: trainfrontview.net (32x38px)
@@ -135,15 +135,15 @@
     "Keikyu": "../images/列车/京急電鉄/1000系.png",
     "Keisei": "../images/列车/京成電鉄/80000形.png", // 4.3.457：京成本線系主力 80000形（3200形は引退進行）
     "Sotetsu": "../images/列车/相模鉄道/13000系.png", // 4.3.277：相鉄.png 与 13000系.png 同一图，归并
-    "TWR": "../images/列车/東京臨海高速鉄道/twr71000.png", // 4.3.457：りんかい線現役主力 71-000形
+    "TWR": "../images/列车/東京臨海高速鉄道/71-000形.png", // 4.3.457：りんかい線現役主力 71-000形
     "MIR": "../images/列车/東急電鉄/5050系.png",
-    "Rinkai": "../images/列车/東京臨海高速鉄道/twr71000.png", // 4.3.457：りんかい線現役主力 71-000形
-    "TsukubaExpress": "../images/列车/首都圏新都市鉄道/tx3000.png", // 4.3.458：TX-3000系（2021年〜新型主力）
+    "Rinkai": "../images/列车/東京臨海高速鉄道/71-000形.png", // 4.3.457：りんかい線現役主力 71-000形
+    "TsukubaExpress": "../images/列车/首都圏新都市鉄道/TX-3000系.png", // 4.3.458：TX-3000系（2021年〜新型主力）
     "Yurikamome": "../images/列车/ゆりかもめ/7300系.png",
     "TamaMonorail": "../images/列车/多摩都市モノレール/1000系.png", // 4.3.276：实车图恢复
-    "SaitamaNewUrbanTransit": "../images/列车/埼玉新都市交通/2000形.png", // 4.3.276：AGT实车图恢复
-    "TokyoMonorail": "../images/列车/東京モノレール/mn-tky10000.png", // 4.3.457：東京モノレール現役主力 10000形（1000形は引退）
-    "NipporiToneri": "../images/列车/都営地下鉄/toky330.png", // 4.3.457：日暮里・舎人ライナー = AGT新交通（330形），実車図に変更
+    "SaitamaNewUrbanTransit": "../images/列车/埼玉新都市交通/2000系.png", // 4.3.276：AGT实车图恢复
+    "TokyoMonorail": "../images/列车/東京モノレール/10000形.png", // 4.3.457：東京モノレール現役主力 10000形（1000形は引退）
+    "NipporiToneri": "../images/列车/都営地下鉄/330形.png", // 4.3.457：日暮里・舎人ライナー = AGT新交通（330形），実車図に変更
     "MinatoMirai": "../images/列车/東急電鉄/5050系.png"
   };
 
@@ -238,7 +238,7 @@
     "Asakusa": "../images/列车/都営地下鉄/5500形.png",
     "Shinjuku": "../images/列车/都営地下鉄/10-300形.png",
     "Oedo": "../images/列车/都営地下鉄/12-000形.png",
-    "Arakawa": "../images/列车/都営地下鉄/todn8503.png", // 都電荒川線（東京さくらトラム）：都電8500形（1997年〜現役、4.3.458 都電素材に変更）
+    "Arakawa": "../images/列车/都営地下鉄/8500形.png", // 都電荒川線（東京さくらトラム）：都電8500形（1997年〜現役、4.3.458 都電素材に変更）
 
     // Tobu specific（4.3.275：用户重命名后重新判定，8枚全为实车，已按车型入库）
     "TobuSkytree": "../images/列车/東武鉄道/50000系.png",     // スカイツリーライン（伊勢崎線系）：50000系主力
@@ -337,18 +337,18 @@
     "YokohamaGreen": "../images/列车/横浜市交通局/10000形.png",
 
     // Single-line operators
-    "TWR": "../images/列车/東京臨海高速鉄道/twr71000.png", // 4.3.457：りんかい線現役主力 71-000形（70-000形は置換済み）
-    "Rinkai": "../images/列车/東京臨海高速鉄道/twr71000.png",
+    "TWR": "../images/列车/東京臨海高速鉄道/71-000形.png", // 4.3.457：りんかい線現役主力 71-000形（70-000形は置換済み）
+    "Rinkai": "../images/列车/東京臨海高速鉄道/71-000形.png",
     "MIR": "../images/列车/東急電鉄/5050系.png",
-    "TsukubaExpress": "../images/列车/首都圏新都市鉄道/tx3000.png", // 4.3.458：TX-3000系（2021年〜新型主力）
+    "TsukubaExpress": "../images/列车/首都圏新都市鉄道/TX-3000系.png", // 4.3.458：TX-3000系（2021年〜新型主力）
     "Yurikamome": "../images/列车/ゆりかもめ/7300系.png",
     "TamaMonorail": "../images/列车/多摩都市モノレール/1000系.png",
-    "TokyoMonorail": "../images/列车/東京モノレール/mn-tky10000.png", // 4.3.457：東京モノレール現役主力 10000形（1000形は引退）
-    "SaitamaNewUrbanTransit": "../images/列车/埼玉新都市交通/2000形.png",
+    "TokyoMonorail": "../images/列车/東京モノレール/10000形.png", // 4.3.457：東京モノレール現役主力 10000形（1000形は引退）
+    "SaitamaNewUrbanTransit": "../images/列车/埼玉新都市交通/2000系.png",
 
     // ===== railway_data key 对齐 =====
     "MinatoMirai": "../images/列车/東急電鉄/5050系.png",
-    "NewShuttle": "../images/列车/埼玉新都市交通/2000形.png",
+    "NewShuttle": "../images/列车/埼玉新都市交通/2000系.png",
     "Tadami": "../images/列车/JR東日本/GV-E400系.png",        // 4.3.481：键名修正 Tōnami→Tadami（unicode ō 变体导致只见線无键 fallback E235）；只見線 = GV-E400系
     "Echigo": "../images/列车/JR東日本/E129系.png",
     "Hakushin": "../images/列车/JR東日本/E129系.png",
@@ -356,7 +356,7 @@
     "SuigunBranch": "../images/列车/JR東日本/キハE130系0番台.png",
 
     // ===== 4.3.279 复查修复（fallback 误判纠正）=====
-    "Nippori_Toneri": "../images/列车/都営地下鉄/toky330.png", // 日暮里・舎人ライナー：AGT 330形（4.3.457 図庫更新——実車図に変更）
+    "Nippori_Toneri": "../images/列车/都営地下鉄/330形.png", // 日暮里・舎人ライナー：AGT 330形（4.3.457 図庫更新——実車図に変更）
     "TokyuSetagaya": "../images/鉄道/東急電鉄/世田谷線.png", // 世田谷線：路面電車（300系），原错误fallback到2020系
     "UtsunomiyaJR": "../images/列车/JR東日本/E233系湘南色.png", // 4.3.481：键名修正 Oyama→UtsunomiyaJR（Oyama 是车站 ID，线路 ID 是 UtsunomiyaJR，错键导致宇都宮線 fallback E235）；上野東京ライン同一車両
     "BanetsuEast": "../images/列车/JR東日本/キハ110系.png", // 磐越東線：キハ110系

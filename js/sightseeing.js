@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Sightseeing Module - Coordinate-based Recommendation
  */
 
@@ -20,15 +20,53 @@
 
   function getMajorStations() {
     if (window.TOURISM_STATIONS && window.TOURISM_STATIONS.length > 0) return Array.from(window.TOURISM_STATIONS);
-    // Fallback: stations that actually have nearby spots (never default to an empty-grid station)
+    // 4.3.559: 按 3km 内景点数降序取前 12（替换旧键序遍历——键序 + 劣质估算坐标会导致假站/漏真站）
+    // 排除路面电车（都电荒川线）：其停留场无出入口概念，与出口算法不匹配
+    var tramIds = {};
+    try {
+      var arakawaLine = window.RAILWAY_DATA && window.RAILWAY_DATA.lines && window.RAILWAY_DATA.lines['Arakawa'];
+      if (arakawaLine && arakawaLine.stations) {
+        arakawaLine.stations.forEach(function(sid) { tramIds[sid] = true; });
+      }
+    } catch (e) {}
     var withSpots = [];
     try {
       Object.keys(getStationCoords()).forEach(function(k) {
-        if (withSpots.length >= 12) return;
-        if (window.TourismProximity && window.TourismProximity.getNearbySpotsByStation(k, { radius: 3000, limit: 1 }).length > 0) withSpots.push(k);
+        if (tramIds[k]) return;
+        var cnt = 0, near = Infinity;
+        try {
+          var nearby = (window.TourismProximity && window.TourismProximity.getNearbySpotsByStation)
+            ? window.TourismProximity.getNearbySpotsByStation(k, { radius: 3000, limit: 30 }) : [];
+          cnt = nearby.length;
+          if (cnt > 0 && nearby[0]) near = nearby[0].distance;
+        } catch (e) { return; }
+        if (cnt > 0) withSpots.push({ id: k, cnt: cnt, near: near });
       });
+      // 4.3.559: 景点数降序；景点数相同 → 距最近景点更近的站优先（避免北千住等中心站被并列截断）
+      withSpots.sort(function(a, b) {
+        if (b.cnt !== a.cnt) return b.cnt - a.cnt;
+        return a.near - b.near;
+      });
+      withSpots = withSpots.slice(0, 12).map(function(x) { return x.id; });
+    } catch (e) {}
+    if (withSpots.length > 0) return withSpots;
+    // Last-resort fallback (4.3.557): derive default stations FROM the spot
+    // catalogue instead of hard-coding one. 'Shinjuku' has no registered spots,
+    // so it left the tourism grid blank whenever the coordinate index was not
+    // ready yet. Reverse-lookup each spot's nearest station guarantees a
+    // default that actually has data.
+    var fromSpots = [];
+    try {
+      var spots = window.TOURISM_SPOTS || [];
+      for (var i = 0; i < spots.length && fromSpots.length < 12; i++) {
+        var sp = spots[i];
+        if (sp && sp.coord && sp.coord.length >= 2 && window.TourismProximity && window.TourismProximity.getNearestStation) {
+          var ns = window.TourismProximity.getNearestStation(sp.coord[0], sp.coord[1]);
+          if (ns && ns.stationId && fromSpots.indexOf(ns.stationId) < 0) fromSpots.push(ns.stationId);
+        }
+      }
     } catch(e) {}
-    return withSpots.length > 0 ? withSpots : ['Shinjuku'];
+    return fromSpots.length > 0 ? fromSpots : ['Shinjuku'];
   }
   const RIVERS = [
     { name: 'Sumida', lat: 35.710, lng: 139.803, width: 120 } // width in meters

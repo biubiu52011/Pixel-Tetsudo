@@ -956,3 +956,45 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 **修复**（js/trains-page.js backBtn 监听）：点击由 `window.history.back()` 改为 `window.location.hash = ""`——清 hash 触发 hashchange 兜底 `!h → hideLineView()` 显示列表；无论从哪进入详情（列表/主页/上一详情/直开新标签）点返回都回一览。清 hash 产生新 history entry（直开详情 hlen 1→2），浏览器后退仍回详情——标准浏览器历史行为，与"返回按钮=回一览"语义一致；hashchange 兜底（hash 变→showLineView / hash 空→hideLineView）保留。
 **验证**：node --check OK；本地 DOM 两场景——①列表→南武→点返回：URL #Nambu→#、detailHidden true、listHidden false（回列表）；②直开 #Nambu（新 tab hlen=1）→点返回：同样回列表（4.3.552 时直开详情 back() 无操作，现统一回一览）。
 **版本**：bump trains-page.js ?v=4.3.555→4.3.556（数据未动不 bump db-loader）；LINE-DIAGRAM-SPEC 修订表 4.3.556 行。
+
+## 4.3.557（2026-09-12，观光锚点字段清理·旧格式锚点机制退役）
+**用户指示**："清理掉锚点相关字段"——旅游数据不再维护手工锚点站，改为全自动距离发现。
+**数据层**：
+- tourism_data.json 删除 station_coords / station_exits（3 站锚点）——现仅剩 spots（39 个）单一真源
+- railway_data.json 删除 tourism 键（93 组 396 个旧格式占位 spot，如 Local Shrines/Quiet religious sites 模板描述，被新格式覆盖从未生效）——按站分组锚点格式整体退役
+**代码层（db-loader.js）**：applyData 旧格式 spots 收集段、TOURISM_OVERRIDE 死分支（从未赋值）、applyTourismData 锚点合并、RailwayDB.getNearbySpots/getTourism/getSpot（grep 确认 0 消费者）全部删除；fetchRemote 日志改读 spots.length
+**运行时行为变化**：
+- TOURISM_STATIONS=[] → sightseeing getMajorStations 走 fallback：从铁路库 STATION_COORDS（2193 站）自动找 3km 内有景点的站（≤12）——站选择器不再只有 3 个锚点站
+- STATION_EXITS 恒 {} → tourism-proximity mapDirectionToExit 返回 null → 前端不显示出口，距离显示不受影响
+- 站坐标统一走铁路库（消除旧锚点 ID 错位：Kitasenju vs 铁路库 Kita-Senju）
+**验证**：bundle 重跑（railway-data.file.js 816KB / tourism-data.file.js 79KB）；vm 模拟加载 39 spots + 2193 站坐标 + 自动发现 12 站（Ueno/Akihabara/Ikebukuro/.../Oshiage）+ 北千住 3km 8 spot 推荐正常；node --check db-loader.js OK；JSON 语法 OK
+**缓存**：bump home.html / tourism-detail.html ?v=4.3.469/470→4.3.557（db-loader 缓存键刷新）
+**遗留**：足立区观光采集 180 设施已存档 work/adachi-facilities-raw.json（教会28/旅行社4/銭湯33 排除，候选约115）；新增景点规模 A精选20/B标准60/C全量115 待用户拍板；新 spot 无图走图标兜底
+
+
+## 4.3.558（2026-09-12，线上运营漏洞检测报告修复·5 项）
+**用户指示**："根据报告进行修复"——针对线上 GitHub Pages（biubiu52011.github.io/Pixel-Tetsudo，4.3.556 版本）运营漏洞检测报告的 5 项缺陷修复。线上与本地 git HEAD=6ac5649 一致；durations 数据口径为 JR 官网时刻表明内差常识估算（非官方，与本项目既有数据风格一致），已在文末声明。
+**漏洞 1【严重】搜索建议残留站 ID 导致搜索用旧站**（js/search-ui.js，LF）：input 事件只调 showSuggestions 不清 `data-station-id` → performSearch 优先用残留站 ID；showSuggestions 缓存分支命中时重写 innerHTML 但不重绑点击（二次 input 后建议失效）。修复：两处 input 监听加 `removeAttribute('data-station-id')`；抽 `_bindSuggestionEvents(container, inputEl)` 并在缓存命中分支重绑；performSearch 成功（result 非空）后调 `window.SearchHistory.saveToHistory(from, to, result)`（与体验 1 联动）。验证：node --check OK。
+**漏洞 2【高】成田空港→上野路线/耗时/费用错误（36分/¥530 无京成直达）**（data/core/railway_data.json，2 空格 LF，改前备份 .bak557）：
+- 根因一：durations 缺失 → route-search 缺省 2 分/段 → 36 分钟假象。全量统计 165 线：缺失 25、不全 17。
+- 根因二：水郡線（Suigun）站表混入 7 个跨区站 ID（Shizu 京成志津/Tamagawa 東急多摩川/MuraNoJo/Ogawa 東京都/Futa-ba/Nogi 宇都宮線/Kawabe 五能線・奥羽）→ E2E 荒谬路径"成田→志津→水郡線→多摩川→横須賀線→上野"。
+- 根因三：京成上野⇄上野 14 处换乘声明缺 toStation → buildAliasTransfers 不建异名换乘 → 京成直达不出现。
+- 根因四：NaritaSkyAccess（成田スカイアクセス，真实最快通道）终点 ID 与京成本線不一致（Narita-Airport-Terminal-2-3/Terminal-1 为孤立 ID）且 durations 全空 → スカイアクセス不可达。
+- 修复：Joban 重建 19 站（品川→取手，补綾瀬/亀有/金町/馬橋/新松戸/北小金，18 段 total=62）、JobanLocal 重建 19 站（上野→取手，含北松戸/南柏/北柏，total=50）、NaritaAbikoBranch 9 段 total=29、NaritaAirportBranch [7,3] total=10、Narita 15 段 total=77、Keisei 42 段 total=97；stationLines/LSO 同步；toStation 补齐 14 处（Ueno 侧 7 + Keisei-Ueno 侧 7 交叉指向，VERIFIED aliasTransfers 生效、Keisei-Ueno⇄Ueno dur=0 直达双向）；Suigun 40→33 站（durations 按原索引区间求和，32 段 total=78）；NaritaSkyAccess 终点 ID 对齐 Airport-Terminal-2/Narita-Airport（共享换乘自动成立）+ durations [5,5,4,4,4,8,6] total=36（アクセス特急水平）。
+- 验证（node 模拟 bundle→RailwayDB→through-service/fare-estimator/route-search）：成田空港→上野 combo/duration = 52 分（スカイアクセス→京成本線→日暮里→常磐線各駅停車，真实路径、京成方案出现、耗时合理）；transfers = 65 分（スカイアクセス→京成→押上→東武→日比谷→上野）；逆向 53 分。回归 8 组常见路线端点全对、荒谬路径 0 残留；bundle 重生成加载 OK（railway-data.file.js 816KB / tourism-data.file.js 88KB）；JSON 语法 OK；node --check 相关 JS 全过。
+**漏洞 3【中】环线列表区间误导（山手線"東京⇔有楽町"）**（js/data-state.js，LF）：trains 模式区间取首末站——山手線（isDoubleColumnLoop）/大江戸線（isSixShapedLoop）图面首末站为环上相邻站 → 误导。修复：LOS 卡循环加 allLoop 检测（双列环/六字环不推入 intervalSegments，全环卡显示 `t('line.loop')`）；trains 单线 subHtml 同标记时显示 `t('line.loop')`（i18n 已存在：en Loop/zh 环线/ja 環状/ko 환상）。验证：node --check OK。
+**体验 1 搜索历史恒空**（js/history.js，CRLF，Edit 工具失败改 PowerShell ReadAllText/WriteAllText 保留行尾）：init 的拦截器包装 `window.SearchUI.performSearch`（构造函数属性，未定义）→ 真实调用走原型方法 → 拦截永不触发。修复：移除失效拦截器整块（替换为说明注释）；search-ui.js 改为直接调 saveToHistory（漏洞 1 联动）；saveToHistory 末尾加 renderHistory() 刷新列表。验证：node --check OK；vm 模拟 SearchHistory.saveToHistory/renderHistory 存在。
+**体验 2 观光兜底站无数据**（js/sightseeing.js，CRLF，PowerShell 替换）：getMajorStations 兜底硬编码 ['Shinjuku']，而 Shinjuku 无 spot → 观光网格空白。修复：withSpots 为空时改为从 `window.TOURISM_SPOTS`（39 个）逐 spot 用 `TourismProximity.getNearestStation` 反查有数据站（限 12 个），仍无才 ['Shinjuku']。验证：node --check OK；vm 模拟反查得 12 站（Kita-Senju/Ikebukuro/Senju-Ohashi 等，非硬编码）。
+**遗留（非本轮范围）**：①22 条线跨区站 ID 混入债务（除 Suigun 已修，剩 21 条：Hachinohe/TohokuMain/BanetsuEast/TokyuSetagaya/JobanMain 等，含 Otocchi/Adachi/Shiogama 等，污染搜索图但无直接荒谬路径）——按用户"串门站删除"策略待拍板；②剩余 durations 缺口（25 缺失 + 17 不全中的非本轮 6 线）未补——"36 分钟/¥530"类低估在其他线路组合仍会出现；③fare 估算按 hop 数（スカイアクセス 8 站大站距被低估，成田空港→上野显示 350/500 円 vs 真实 アクセス特急 ~1,300 円）——FareEstimator 概算设计局限，未动。
+**备注**：本轮 railway_data.json 改动与并发会话（4.3.557 观光锚点清理：db-loader.js/tourism 区块抽出）工作区交叉，提交时需确认不覆盖并发改动；AGENTS.md 4.3.557 已由并发会话占用，本轮从 4.3.558 起编号。
+## 4.3.559（2026-09-12，出入口推荐算法经纬度化（2026-09-12，出入口推荐算法经纬度化·站坐标修正·观光选择器排序）
+**用户指示**："换种算法按照经纬判断那个出入口离得近"——景点出口推荐从"8 方位角 + 出口优先级表"改为按出入口真实经纬度取最近出口。
+**数据源确认**：ODPT 无出口坐标（odpt:exit 为 string 数组，死路）→ OpenStreetMap Overpass API 采集出入口节点（railway=subway_entrance/entrance=yes）。26 目标站批量查询 25/26 命中（Oshiage 押上未命中，Tokyo-Skytree 出口圈已含押上 A2/B1/B2 覆盖）；公共 Overpass 实例不稳定（overpass-api.de 406/XML 错、kumi/osmj 超时），数据采够勿再依赖。
+**数据层**：tourism_data.json 顶层新增 `station_exits`（16 站出口坐标表：Kita-Senju 8/Minami-Senju 2/Horikiri-Shobuen 2/Machiya 4/Ayase 2/Asakusa 6/Tokyo-Skytree 1/Ueno 13/Akihabara 8/Ikebukuro 24/Zoshigaya 3/Nippori 4/Kanegafuchi 1/Iriya 4/Kuramae 5/Keisei-Ueno 11）；300m 圈归属过滤邻站串门、同名<40m 去重、名称规范化（East/West exit→東/西口、Exit N→N番出口、押上 A2→A2番出口）。幽灵站审计（4.3.496 方案 B 劣质估算坐标遗留）删 4 纯幽灵站（Minami-Koiwa/Yoshiwara/Iwatsunomachi/Mikawahashi，stations 2193→2189/name_map 1623→1619/i18n 3135→3131）+ Kuramae 坐标修正（35.70560,139.79780→35.70552,139.79241，OSM 实证）+ Tokyo-Skytree 修正（35.71047,139.80939→35.71069,139.81101，149m 偏差虽未达 150m 阈值但为押上寄り错位，一并修正）。Asakusa 本地坐标 (35.71480,139.79670) 判为正确（都営浅草駅），不按 OSM 東武側改。
+**代码改造**：
+- data/core/db-loader.js：applyTourismData 读 `station_exits` 赋 window.STATION_EXITS（原恒 {}）。
+- js/tourism-proximity.js：删除 getExitDirection（8 方位角）与 mapDirectionToExit（priorityMap 北口/東口表）；新增 getNearestExit（遍历 STATION_EXITS[stationId] 出口坐标 Haversine 取最近 {name,distance}）与 getExitNameByCoords（spot 距站中心 <80m 返 駅直結，否则取最近出口名）；113 行 exitDirection 改调新函数；导出同步。
+- **附带修复缓存污染 bug**：cacheKey 原不含 limit（sLat,sLng|radius），getMajorStations limit:1 探测会污染 UI limit:30 缓存致景点列表截断——cacheKey 追加 limit。
+- js/sightseeing.js getMajorStations：键序遍历（键序+劣质坐标导致 Fujimi/Korakuen/Koiwa/Adachi 假命中站霸榜）改为按 3km 内景点数降序取前 12、景点数相同按最近景点距离决胜（保北千住等中心站）；排除都电荒川线停留场（line key 'Arakawa'，路面电车无出口概念与出口算法不匹配）；4.3.557 按 spot 反查最近站 fallback 保留。
+**验证**：vm 模拟 2189 站/39 spots/16 出口站全加载；旧函数 0 残留（全项目 grep）；北千住 LUMINE(55m)→駅直結、北千住丸井(138m)→4番出口(34m)、柳原稲荷(699m)→南口(684m)、浅草→Tokyo Metro(263m)、池袋西武→池袋駅42(117m) 全部合理；top12 无假站/无都电/含北千住；node --check 双文件；bundle 重跑 OK（816KB/88KB/301KB）；home.html & tourism-detail.html ?v= 20+15 处 bump 4.3.559。
+**遗留**：4.3.496 方案 B 劣质补坐标仍致 122 站 3km 假命中（真实目标 ~15 站）——本轮仅修 Kuramae/Tokyo-Skytree + 删 4 幽灵，Koiwa/Korakuen/Adachi/Fujimi 等真实站坐标错位未修，是否全局修坐标待用户决定；景点新增规模 A约20/B约60/C约115（足立区 180 设施，work/adachi-facilities-raw.json）用户未拍板。
