@@ -1038,3 +1038,13 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 **渲染层既有路径（未改）**：updateStationDisplay error+无站→tourism.loc_error；renderGrid 无站→清空+smEmpty
 
 **4.3.565（2026-09-12，图库二轮·再补 9 图，60/106 有图）**：用户「继续完善图库」——image_search 再补 9 张（西新井氷川神社 750x421/江北氷川神社 512x384/金蔵寺 640x480/慈眼寺（千住）1200x900/源正寺 750x370/堀之内氷川神社 2560x1920/白幡八幡神社 1200x630/元宿神社 750x750/法受寺）。**法受寺原图 3998x2998 4MB 过大**——mediakit-cli image resize-image 缩至 1280x960 357KB（技能流程：shared 前置→image SKILL→resize-image reference→CLI）。**搜索失败记录**（image_search 空/歧义/拦截，保留图标兜底）：ギャラクシティ・だるま・じんがんなわ・一茶まつり（"get empty query after review"拦截）、東岳寺/実性寺/善立寺/常護寺/六町神社/関原八幡神社/伊興若宮八幡宮（空）、高砂神社（兵庫）/日の出神社（三重）/瑞応寺（長野）/薬師寺伊興（奈良）/竹塚神社（宮城）——均同名歧义拒用；恵明寺仅 wikid 270x202 小图弃用。Wikimedia 直连 429 仍未恢复（22:51 实测）。**并发协调**：远端已由并发会话推进至 c25d7ef（4.3.564 观光区取消手动选站+定位失败空态，sightseeing.js setStation 移除）；tourism_data.json 与远端零冲突（diff 仅 9 处 image 字段）；本轮 bump 4.3.565 避免版本重叠。验证：bundle 重跑（tourism-data.file.js 175KB）、浏览器 TOURISM_SPOTS 106/有图 60/9 张新 image 全对。
+
+## 4.3.566（2026-09-13，手动选站结构本体删除）
+**用户裁定**："清理掉整个用户手动选站的结构，不是去除掉CSS等让其不显示"——4.3.564 仅移除 JS 逻辑、DOM 仍以 hidden 类隐藏；本轮**真正删除结构本体**。
+**删除**：
+- home.html: `<div id="smStationPicker" class="sm-station-picker hidden"></div>` 节点移除（此前靠 hidden 隐藏）
+- tourism-styles.css: `.sm-station-picker/.sm-picker-label/.sm-picker-list/.sm-picker-btn` 全部样式（含 @media 内 `.sm-picker-btn` 选择器）移除
+- translations.js: 无消费者的 `tourism.choose_station` 4 语言文案移除
+- 页面版本 565→566（4 页统一；并发会话已推送 4.3.565 图库二轮，本提交叠加）
+**保留（非选站结构）**：.sm-location-bar（最寄り駅标签+stationDisplay+smRelocateBtn）——定位状态显示与刷新重试入口
+**验证**：node --check；file:// 实测 document.getElementById('smStationPicker')=null、定位失败空态正常、0 JS 错误；已 push 4e6bba3
