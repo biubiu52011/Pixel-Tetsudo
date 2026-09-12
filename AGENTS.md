@@ -1036,3 +1036,5 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 - 页面版本 563→564（4 页统一，trains 页非本次范围不动）
 **验证**：node --check；verify-558.js 通过；file:// 本地实测定位失败→"位置情報が取得できません"+空态，无 Shinjuku/北千住备选；已 push c25d7ef
 **渲染层既有路径（未改）**：updateStationDisplay error+无站→tourism.loc_error；renderGrid 无站→清空+smEmpty
+
+**4.3.565（2026-09-12，图库二轮·再补 9 图，60/106 有图）**：用户「继续完善图库」——image_search 再补 9 张（西新井氷川神社 750x421/江北氷川神社 512x384/金蔵寺 640x480/慈眼寺（千住）1200x900/源正寺 750x370/堀之内氷川神社 2560x1920/白幡八幡神社 1200x630/元宿神社 750x750/法受寺）。**法受寺原图 3998x2998 4MB 过大**——mediakit-cli image resize-image 缩至 1280x960 357KB（技能流程：shared 前置→image SKILL→resize-image reference→CLI）。**搜索失败记录**（image_search 空/歧义/拦截，保留图标兜底）：ギャラクシティ・だるま・じんがんなわ・一茶まつり（"get empty query after review"拦截）、東岳寺/実性寺/善立寺/常護寺/六町神社/関原八幡神社/伊興若宮八幡宮（空）、高砂神社（兵庫）/日の出神社（三重）/瑞応寺（長野）/薬師寺伊興（奈良）/竹塚神社（宮城）——均同名歧义拒用；恵明寺仅 wikid 270x202 小图弃用。Wikimedia 直连 429 仍未恢复（22:51 实测）。**并发协调**：远端已由并发会话推进至 c25d7ef（4.3.564 观光区取消手动选站+定位失败空态，sightseeing.js setStation 移除）；tourism_data.json 与远端零冲突（diff 仅 9 处 image 字段）；本轮 bump 4.3.565 避免版本重叠。验证：bundle 重跑（tourism-data.file.js 175KB）、浏览器 TOURISM_SPOTS 106/有图 60/9 张新 image 全对。
