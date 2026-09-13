@@ -29745,13 +29745,12 @@ window.RAILWAY_DATA = {
       "region": "Tokyo Area",
       "type": "straight",
       "image": "../images/鉄道/JR東日本/上野東京ライン.png",
-      "durationTotalMin": 29,
+      "durationTotalMin": 26,
       "branchOf": null,
       "stations": [
         "Omiya",
         "Urawa",
         "Ueno",
-        "Nippori",
         "Tokyo",
         "Shinagawa",
         "Kawasaki",
@@ -29761,9 +29760,8 @@ window.RAILWAY_DATA = {
       "durations": [
         3,
         4,
-        2,
         3,
-        4,
+        3,
         4,
         4,
         5
@@ -29828,25 +29826,7 @@ window.RAILWAY_DATA = {
           "station": "Ueno",
           "lineId": "Joban",
           "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Nippori",
-          "lineId": "Yamanote",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Nippori",
-          "lineId": "KeihinTohoku",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Nippori",
-          "lineId": "Joban",
-          "type": "in",
-          "note": ""
+          "note": "直通常磐線"
         },
         {
           "station": "Tokyo",
@@ -31657,8 +31637,7 @@ window.RAILWAY_DATA = {
       "Keisei",
       "Yamanote",
       "Nippori_Toneri",
-      "JobanLocal",
-      "UenoTokyo"
+      "JobanLocal"
     ],
     "Uguisudani": [
       "KeihinTohoku",
@@ -43083,12 +43062,11 @@ window.RAILWAY_DATA = {
       "Omiya": 0,
       "Urawa": 1,
       "Ueno": 2,
-      "Nippori": 3,
-      "Tokyo": 4,
-      "Shinagawa": 5,
-      "Kawasaki": 6,
-      "Yokohama": 7,
-      "Ofuna": 8
+      "Tokyo": 3,
+      "Shinagawa": 4,
+      "Kawasaki": 5,
+      "Yokohama": 6,
+      "Ofuna": 7
     }
   }
 };
