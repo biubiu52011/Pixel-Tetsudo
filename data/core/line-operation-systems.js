@@ -209,7 +209,7 @@ window.LineOperationSystems = {
       subNameZh: "宇都宫线・高崎线・常磐线～东海道线",
       subNameEn: "Utsunomiya・Takasaki・Jōban ~ Tōkaidō",
       subNameKo: "우쓰노미야・다카사키・조반 ~ 도카이도",
-      icon: "../images/鉄道/JR東日本/上野東京ライン.png",
+      icon: "../images/鉄道/JR東日本/JRグループ.png",
       order: 15.5
     },
     {
