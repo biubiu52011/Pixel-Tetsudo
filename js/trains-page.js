@@ -898,17 +898,12 @@
     } else {
       // Standard linear line: widen the canvas so left (names) and right (icons) both get used
       var isMobileView = _isMobileView();
-      // v4.3.543: 桌面画布基准固定（820）——svgW 恒定（viewBox 内容密度基线，显示层 v4.3.546 容器适配）。
-      // v4.3.545: 移动端画布=容器内容宽（1:1 密度基线，无横向滚动）。
-      var _baseW;
-      if (isMobileView) {
-        // v4.3.605: 移动端画布基准对齐山手线环线（svgW=297，GEOM.MOBILE_CONTENT_W）——
-        // 直线型也以山手线内容密度为准（约 1.5x 视觉放大），不再 1:1 跟随容器宽
-        // （此前字小、中间细条留白）；svgW = max(_baseW, 内容需求) 保证支线/站名/换乘不压缩。
-        _baseW = GEOM.MOBILE_CONTENT_W;
-      } else {
-        _baseW = GEOM.MAIN_BASE_W_MAX;
-      }
+      // v4.3.608: 桌面画布基准统一为内容基准（297，同移动端/山手线环线）——
+      // 此前桌面固定 820：svg width=100% 拉到桌面容器（~1000px+）时放大 3-4x+（字 50-68px 巨大）。
+      // 统一内容基准后渲染倍率由 CSS max-width 封顶（v4.3.608，桌面 ≤520px），
+      // 手机（1.51x）与桌面（~1.75x）字号接近，两种尺寸均可读。
+      // v4.3.543/545 历史：桌面 820 固定、移动 1:1 容器宽（均废弃）。
+      var _baseW = GEOM.MOBILE_CONTENT_W;
       var _rightPad = isMobileView ? 24 : 40;
       var mainCx, svgW;
       if (branchLines.length >= 2) {
