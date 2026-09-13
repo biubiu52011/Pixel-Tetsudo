@@ -357,7 +357,7 @@
             }
             html += '<div class="journey-transfer';
             if (seg.through) { html += ' journey-transfer--through'; }
-            html += '">';
+            html += '" data-tx-idx="' + i + '">';
             var _txIconSvg = seg.through
               ? '<svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 5.6h9"/><path d="M9.4 3.4l2.4 2.2-2.4 2.2"/><path d="M13.5 10.4h-9"/><path d="M6.6 8.2l-2.4 2.2 2.4 2.2"/></svg>'
               : '<svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2.8a5.4 5.4 0 1 1-5.3 4.2"/><path d="M2.7 5.2v3.1h3.2"/></svg>';
@@ -437,14 +437,28 @@
         var _rtSelf = this;
         var _rtDP = t('search.time_dep') || '\u767a';
         var _rtAR = t('search.time_arr') || '\u7740';
-        window.RouteTimetable.enrichSegments(result.routeSegments).then(function(times) {
+        window.RouteTimetable.enrichSegments(result.routeSegments).then(function(res) {
           if (!_rtSelf.resultsDiv) return;
-          for (var _ridx in times) {
+          // v4.3.590: enrich 返回 { times, downgrade }；downgrade = 直通贯通失败需降级为换乘的 transfer 段索引
+          var _times = (res && res.times) ? res.times : (res || {});
+          for (var _ridx in _times) {
             var _slot = _rtSelf.resultsDiv.querySelector('[data-seg-times="' + _ridx + '"]');
-            if (!_slot || !times[_ridx]) continue;
-            var _tm = times[_ridx];
+            if (!_slot || !_times[_ridx]) continue;
+            var _tm = _times[_ridx];
             _slot.innerHTML = '<span class="journey-seg-time-dep">' + window.escapeHtml(_tm.dep) + _rtDP + '</span>' +
                               '<span class="journey-seg-time-arr">' + window.escapeHtml(_tm.arr) + _rtAR + '</span>';
+          }
+          // 直通降级：ODPT 分表无贯通车次时，"乗換不要"改回换乘文案并去除直通样式（避免误导）
+          var _dg = (res && res.downgrade) || [];
+          for (var _d2 = 0; _d2 < _dg.length; _d2++) {
+            var _tr = _rtSelf.resultsDiv.querySelector('[data-tx-idx="' + _dg[_d2] + '"]');
+            if (!_tr) continue;
+            _tr.classList.remove('journey-transfer--through');
+            var _txt = _tr.querySelector('.journey-transfer-text');
+            if (_txt) {
+              _txt.classList.remove('journey-transfer-text--through');
+              _txt.textContent = t('search_result.transfer');
+            }
           }
         }).catch(function() {});
       }

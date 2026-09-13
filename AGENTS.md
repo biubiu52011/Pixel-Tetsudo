@@ -1237,5 +1237,14 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 - css/style.css：.journey-seg-times（margin-left:auto 右对齐）/time-dep（绿粗）/time-arr（灰小）
 - pages/home.html：odpt-links.js + window.ODPT_LAZY=true + odpt-unified.js（official-railway 前）+ route-timetable.js（search-ui 后）
 **版本协调**：4.3.589 被并发会话占用（tourism 人均费用 4f7e6b2），本轮用 4.3.590；589 改动在 detail.* 键与 4 页 bump，与本轮 search.* 键/脚本接线无重叠（git diff HEAD 验证）
-**验证**：node --check 4 文件通过；线上 DOM 验证（御茶ノ水→渋谷 中央線/埼京線 発着時刻徽章、横浜→池袋 直通段时刻）待 push
+**验证**：node --check 通过；本地 DOM 验证 3 场景（御茶ノ水→渋谷 换乘 2 段时刻、横浜→池袋 直通降级、立川→千葉 长距 2 段衔接）；0 console 错误
 **遗留**：発着番線（站台）ODPT 无数据——需手建枢纽番线库（方案 B）或新数据源，列 Known Debt
+
+## 4.3.590-补（2026-09-13，运行时修复：CSP 内联脚本/站 ID 连字符/直通降级/惰性粒度）
+**线上+本地验证发现的 4 个运行时缺陷及修复**（全部本地复测通过后提交）：
+1. **CSP 阻止内联 script（严重，未推送时发现）**：home.html 原 `connect-src 'self'` 阻止 ODPT 外部 fetch（realtime.html 白名单为 `'self' https://api-challenge.odpt.org https://api.odpt.org`）——时刻表拉取全部 Failed to fetch。修复：home.html CSP 对齐 realtime 白名单。**连带发现**：CSP `script-src 'self'` 阻止内联 `<script>window.ODPT_LAZY=true;</script>`（动态注入验证：内联 script 不执行）→ 惰性标记从未生效，首页全量 init 发出 552 个 ODPT 请求。修复：新建 `js/odpt-lazy.js`（外部同源脚本，CSP 允许）替换内联标记。
+2. **splitTruncatedByCalendar 提升不彻底（getCompleteTimetable 运行时 ReferenceError）**：初版提升只改缩进，函数仍留在 collectTimetableByRailway 作用域内，模块级调用找不到。修复：真正移至模块级（_loadTimetableDataFromApi 前）。
+3. **ODPT 站 ID 连字符差异（横須賀線段匹配 miss）**：ODPT station ID 无连字符（ShinKawasaki），本地 key 带连字符（Shin-Kawasaki）——归一化（去 -）后比较。实测 Yokosuka 段从空 → 15:11発/15:20着。
+4. **直通段衔接与降级**：实测横須賀線⇄湘南新宿ライン ODPT 完全分表、**无贯通车次**（Yokosuka 表 Inbound 列车 inSk 全 false）——同车次贯通匹配必然失败。实施：①顺序推算 + 换乘游标（下段发车 ≥ 上段到达 + 3 分钟缓冲，直通同车次接续不加缓冲）；②直通段贯通失败时降级为换乘衔接，并把 transfer 文案由"乗換不要"动态改回"ここで乗換"（search-ui 处理 enrich 返回的 downgrade 数组）；③与下一段直通时 filter 只匹配贯通列车，候选为空则去 filter 重试并降级。
+5. **惰性粒度细化**：惰性模式原跳过全部 init → 搜索延误徽章（route-status-badge）数据丢失。修复：loadRealtimeData(delayOnly) 只拉 TrainInformation（延误）并保持 30s 刷新，跳过 Train 位置与 TrainTimetable 全量；data-fusion 在 ODPT_LAZY 下跳过 loadMissingTimetables（时刻表推定是 realtime/trains 页功能）。首页请求 552 → **15（纯延误）**，延误徽章保留。
+**验证**：node --check 6 文件；本地 3 场景 DOM 全过（换乘衔接 15:07発→15:27発、直通降级 15:11発/15:42発 + "ここで乗換"、长距 2 段 3 分钟衔接）；首页 ODPT 请求 552→195→3→15（delayOnly 生效）；DELAY_OPS=15/TRAIN_OPS=0；0 console 错误

@@ -1,5 +1,5 @@
 /**
- * Pixel Tetsudo - Route Timetable Enrichment (搜索时刻推算, v4.3.589)
+ * Pixel Tetsudo - Route Timetable Enrichment (搜索时刻推算, v4.3.590)
  *
  * 能力归属：数据查询消费 ODPTClient（Provider，odpt-unified.js，惰性模式）
  *          + data/timetables/*-manual.js（ODPT 无时刻表的地方线补充，动态注入）
@@ -35,6 +35,12 @@
     return i >= 0 ? s.slice(i + 1) : s;
   }
 
+  // v4.3.590: ODPT 站 ID 无连字符（ShinKawasaki），本地 key 带连字符（Shin-Kawasaki）——
+  // 归一化（去连字符）后比较，避免同站因拼写风格不一致匹配失败
+  function normStationKey(s) {
+    return String(s || '').replace(/-/g, '');
+  }
+
   function parseTime(t) {
     if (!t) return null;
     var p = String(t).split(':');
@@ -55,31 +61,69 @@
   }
 
   // 在时刻表列表中找起点站发车 >= now 的最近班次
-  function findNextTrain(ttList, fromKey, toKey, nowMin, cals) {
+  // v4.3.590: trainFilter 存在时仅匹配指定车次集合内的列车（直通段贯通匹配用）
+  function findNextTrain(ttList, fromKey, toKey, nowMin, cals, trainFilter) {
     if (!ttList || ttList.length === 0) return null;
     var best = null;
     for (var i = 0; i < ttList.length; i++) {
       var cal = getCal(ttList[i]);
       if (cals && cals.length > 0 && cal && cals.indexOf(cal) < 0) continue;
+      var trainNo = ttList[i]['odpt:trainNumber'] || '';
+      if (trainFilter && !trainFilter[trainNo]) continue;
       var tto = getTto(ttList[i]);
       var fromIdx = -1, toIdx = -1;
+      var normFrom = normStationKey(fromKey), normTo = normStationKey(toKey);
       for (var j = 0; j < tto.length; j++) {
         var st = tto[j]['odpt:departureStation'] || tto[j]['odpt:arrivalStation'] || '';
-        var key = stripStationId(st);
-        if (fromIdx < 0 && key === fromKey) fromIdx = j;
-        else if (fromIdx >= 0 && toIdx < 0 && key === toKey) { toIdx = j; break; }
+        var key = normStationKey(stripStationId(st));
+        if (fromIdx < 0 && key === normFrom) fromIdx = j;
+        else if (fromIdx >= 0 && toIdx < 0 && key === normTo) { toIdx = j; break; }
       }
       if (fromIdx < 0 || toIdx < 0) continue;
       var dep = tto[fromIdx]['odpt:departureTime'] || '';
       var depMin = parseTime(dep);
       if (depMin == null || depMin < nowMin) continue;
       var arr = tto[toIdx]['odpt:arrivalTime'] || tto[toIdx]['odpt:departureTime'] || '';
+      var arrMin = parseTime(arr);
       if (!best || depMin < best.depMin) {
-        best = { dep: dep, arr: arr, depMin: depMin };
+        best = { dep: dep, arr: arr, depMin: depMin, arrMin: arrMin, train: trainNo };
       }
     }
     return best;
   }
+
+  // 在时刻表列表中找指定车次在 fromKey 站的发车时刻（直通段同车次接续）
+  function findTrainByNumber(ttList, trainNo, fromKey, cals) {
+    if (!ttList || !trainNo) return null;
+    var normFrom = normStationKey(fromKey);
+    for (var i = 0; i < ttList.length; i++) {
+      var cal = getCal(ttList[i]);
+      if (cals && cals.length > 0 && cal && cals.indexOf(cal) < 0) continue;
+      if ((ttList[i]['odpt:trainNumber'] || '') !== trainNo) continue;
+      var tto = getTto(ttList[i]);
+      for (var j = 0; j < tto.length; j++) {
+        var st = tto[j]['odpt:departureStation'] || tto[j]['odpt:arrivalStation'] || '';
+        if (normStationKey(stripStationId(st)) !== normFrom) continue;
+        var dep = tto[j]['odpt:departureTime'] || '';
+        if (!dep) continue;
+        var arr = tto[j]['odpt:arrivalTime'] || dep;
+        return { dep: dep, arr: arr, depMin: parseTime(dep), arrMin: parseTime(arr), train: trainNo };
+      }
+    }
+    return null;
+  }
+
+  // 提取线表全部车次集合（直通贯通匹配过滤器用）
+  function buildTrainSet(ttList) {
+    var s = {};
+    (ttList || []).forEach(function(tt) {
+      if (tt && tt['odpt:trainNumber']) s[tt['odpt:trainNumber']] = true;
+    });
+    return s;
+  }
+
+  // 换乘缓冲（分钟）：下一段发车不得早于上一段到达 + 此值
+  var TRANSFER_BUFFER = 3;
 
   // 动态注入手动时刻表（ODPT 无数据的地方线）；404 容忍返回 null
   function loadManual(lineId) {
@@ -134,18 +178,63 @@
       var byLine = {};
       results.forEach(function(r) { byLine[r.lineId] = r.list; });
       var out = {};
+      var downgrade = [];
+      // v4.3.590: 顺序推算保证衔接——下一段发车 >= 上一段到达 + TRANSFER_BUFFER；
+      // 直通（transfer 段 through:true 标记相邻两 ride 段同一列车接续）不加缓冲（到达即发车）。
+      // 跨 railway 直通 ODPT 分表无贯通车次（横須賀↔湘南新宿等实测 inSk=false）——
+      // 同车次匹配失败时降级为换乘衔接，并标记该 transfer 段由"乗換不要"降为换乘文案。
+      var rides = [];
+      var throughFlags = [];  // throughFlags[i] = 第 i 段与第 i+1 段是否直通
+      var txIdxs = [];        // txIdxs[i] = 第 i 段与第 i+1 段之间 transfer 段的 routeSegments 索引（无则 null）
       routeSegments.forEach(function(seg, idx) {
-        if (!seg || seg.type !== 'ride') return;
-        var list = byLine[seg.lineId];
-        if (!list) return;
-        var hit = findNextTrain(list, seg.fromStation, seg.toStation, nowMin, cals);
-        if (!hit) {
-          // 日历过滤无候选 → 放宽全日历再试
-          hit = findNextTrain(list, seg.fromStation, seg.toStation, nowMin, []);
+        if (seg && seg.type === 'ride') {
+          rides.push({ seg: seg, idx: idx });
+          throughFlags.push(false);
+          txIdxs.push(null);
+        } else if (seg && seg.type === 'transfer' && rides.length > 0) {
+          if (seg.through) throughFlags[rides.length - 1] = true;
+          txIdxs[rides.length - 1] = idx;
         }
-        if (hit) out[idx] = { dep: hit.dep, arr: hit.arr };
       });
-      return out;
+      var cursorMin = nowMin;
+      var prevTrainNo = null;
+      rides.forEach(function(item, i) {
+        var seg = item.seg;
+        var list = byLine[seg.lineId];
+        if (!list) { prevTrainNo = null; return; }
+        var hit = null;
+        // 直通段（与上一段直通）：优先同车次在接续站的发车时刻（同一列车贯通）
+        if (i > 0 && throughFlags[i - 1] && prevTrainNo) {
+          hit = findTrainByNumber(list, prevTrainNo, seg.fromStation, cals);
+          if (!hit) hit = findTrainByNumber(list, prevTrainNo, seg.fromStation, []);
+          if (!hit && txIdxs[i - 1] != null && downgrade.indexOf(txIdxs[i - 1]) < 0) downgrade.push(txIdxs[i - 1]);  // 贯通失败 → 换乘段降级
+        }
+        if (!hit) {
+          // 与下一段直通时，本段只匹配贯通列车（trainNumber 同时存在于下一线表）
+          var filter = null;
+          if (throughFlags[i] && i + 1 < rides.length) {
+            var nextList = byLine[rides[i + 1].seg.lineId];
+            if (nextList) filter = buildTrainSet(nextList);
+          }
+          hit = findNextTrain(list, seg.fromStation, seg.toStation, cursorMin, cals, filter);
+          if (!hit) hit = findNextTrain(list, seg.fromStation, seg.toStation, cursorMin, [], filter);
+          // 直通候选被 filter 全部排除（ODPT 分表无贯通车次）→ 降级为换乘：去 filter 重试 + 标记该 transfer 段
+          if (!hit && filter) {
+            hit = findNextTrain(list, seg.fromStation, seg.toStation, cursorMin, cals, null);
+            if (!hit) hit = findNextTrain(list, seg.fromStation, seg.toStation, cursorMin, [], null);
+            if (hit && txIdxs[i] != null && downgrade.indexOf(txIdxs[i]) < 0) downgrade.push(txIdxs[i]);
+          }
+        }
+        if (hit) {
+          out[item.idx] = { dep: hit.dep, arr: hit.arr };
+          prevTrainNo = hit.train || null;
+          // 有到达时刻才推进换乘游标（无到达时刻的段不阻塞下一段）
+          if (hit.arrMin != null) cursorMin = throughFlags[i] ? hit.arrMin : hit.arrMin + TRANSFER_BUFFER;
+        } else {
+          prevTrainNo = null;
+        }
+      });
+      return { times: out, downgrade: downgrade };
     });
   }
 

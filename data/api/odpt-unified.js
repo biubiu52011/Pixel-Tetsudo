@@ -1017,7 +1017,8 @@
 
     // ========== 加载实时数据（延误信息 + 实时位置）==========
     // 每30秒刷新一次
-    function loadRealtimeData() {
+    // v4.3.590: delayOnly=true 时只拉运行情报/延误（惰性模式首页搜索徽章用），跳过列车位置与时刻表
+    function loadRealtimeData(delayOnly) {
         window.ODPT_DELAY_DATA = {};
         window.ODPT_TRAIN_POSITIONS = {};
         // 注意：不清空ODPT_TIMETABLES和ODPT_TRAINS，时刻表使用缓存
@@ -1044,8 +1045,8 @@
                 );
             }
 
-            // 2. 加载列车实时位置（第二推送，不阻塞延误首屏）
-            if (ep.train) {
+            // 2. 加载列车实时位置（第二推送，不阻塞延误首屏；delayOnly 模式跳过）
+            if (!delayOnly && ep.train) {
                 posPromises.push(
                     fetchODPT(buildUrl(op, 'train')).then(extractData).then(function(data) {
                         // v4.3.392: 成功即写入（空数组也写入），失败不拖垮全局推送
@@ -1114,6 +1115,7 @@
 
         // 延误情报独立推送；列车位置在 posPromises 就绪后推送（不阻塞、不依赖延误链）
         Promise.all(delayPromises).then(pushDelay);
+        if (delayOnly) return Promise.resolve();  // 惰性模式不拉位置
         return Promise.all(posPromises).then(pushTrainPositions);
     }
     // ========== 加载时刻表数据（使用本地缓存）==========
@@ -1137,6 +1139,37 @@
         });
     }
 
+    // v4.3.589: 分线截断合并（模块级）——ODPT 单请求 1000 条硬上限（acl:page 实测 400 不支持分页），
+    // 恰 1000 条 = 截断信号，按日历拆成多次请求合并出完整数据。
+    // 实测 5 条首都圈大线截断：Yamanote 1037 / Keiyo 1127 / ChuoRapid 1087 /
+    // ChuoSobuLocal 1196 / KeihinTohoku 1263（合并后全量，各日历分片均 <1000）。
+    // 供全量加载（collectTimetableByRailway）与按需查询（getCompleteTimetable）共用。
+    function splitTruncatedByCalendar(op, lid) {
+        var CAL_SPLIT = ['odpt.Calendar:Weekday', 'odpt.Calendar:SaturdayHoliday', 'odpt.Calendar:Holiday'];
+        var seen = {};
+        function dedup(list) {
+            var out = [];
+            list.forEach(function(tt) {
+                if (!tt) return;
+                // 同车次×同日历×同方向 = 同一条记录（日历拆分后天然区分平日/休日班次）
+                var k = (tt['odpt:trainNumber'] || '') + '|' + (tt['odpt:railway'] || '') + '|' + (tt['odpt:calendar'] || '') + '|' + (tt['odpt:railDirection'] || '');
+                if (seen[k]) return;
+                seen[k] = true;
+                out.push(tt);
+            });
+            return out;
+        }
+        var chain = Promise.resolve([]);
+        CAL_SPLIT.forEach(function(cal) {
+            chain = chain.then(function(acc) {
+                return window.ODPTClient.getTimetableForRailway(op, lid, { calendar: cal }).then(function(part) {
+                    return acc.concat(part || []);
+                }, function() { return acc; });  // 单日历失败不阻断，取其余部分
+            });
+        });
+        return chain.then(dedup);
+    }
+
     // v4.3.534: 从 API 全量拉取并落缓存（原 loadTimetableData 主体，缓存读取异步化后独立成函数）
     function _loadTimetableDataFromApi() {
         console.debug("[ODPT] Loading fresh timetables from API");
@@ -1151,36 +1184,6 @@
             var batch = localLineIds.filter(function(lid) {
                 return ODPT_ENDPOINTS[op] && ODPT_ENDPOINTS[op].trainTimetable;
             });
-        // v4.3.589: 分线截断合并已提升为模块级 splitTruncatedByCalendar（供按需查询复用）
-        // v4.3.512: ODPT 单请求 1000 条硬上限（acl:page 实测 400 不支持分页）——
-        // 恰 1000 条 = 截断信号，按日历拆成多次请求合并出完整数据。
-        // 实测 5 条首都圈大线截断：Yamanote 1037 / Keiyo 1127 / ChuoRapid 1087 /
-        // ChuoSobuLocal 1196 / KeihinTohoku 1263（合并后全量，各日历分片均 <1000）。
-        function splitTruncatedByCalendar(op, lid) {
-            var CAL_SPLIT = ['odpt.Calendar:Weekday', 'odpt.Calendar:SaturdayHoliday', 'odpt.Calendar:Holiday'];
-            var seen = {};
-            function dedup(list) {
-                var out = [];
-                list.forEach(function(tt) {
-                    if (!tt) return;
-                    // 同车次×同日历×同方向 = 同一条记录（日历拆分后天然区分平日/休日班次）
-                    var k = (tt['odpt:trainNumber'] || '') + '|' + (tt['odpt:railway'] || '') + '|' + (tt['odpt:calendar'] || '') + '|' + (tt['odpt:railDirection'] || '');
-                    if (seen[k]) return;
-                    seen[k] = true;
-                    out.push(tt);
-                });
-                return out;
-            }
-            var chain = Promise.resolve([]);
-            CAL_SPLIT.forEach(function(cal) {
-                chain = chain.then(function(acc) {
-                    return window.ODPTClient.getTimetableForRailway(op, lid, { calendar: cal }).then(function(part) {
-                        return acc.concat(part || []);
-                    }, function() { return acc; });  // 单日历失败不阻断，取其余部分
-                });
-            });
-            return chain.then(dedup);
-        }
             // v4.3.489: 分批并行拉取——fetchODPT 自带 3 并发 + 150ms 滑动窗口限速；
             // 85 条一次 Promise.all 在弱网/沙箱下可能被连接池限流卡住，每批 20 条链式
             // 推进，既完整覆盖又避免瞬时请求过多（约 4-6s 完成全量）
@@ -1314,8 +1317,14 @@
     // （原实现在 DOMContentLoaded 后才 init，延误请求被页面全部资源加载完才发出，白白多等数秒）
     // v4.3.589: 惰性模式——首页搜索按需查询时刻表时加载本库但跳过全量 init（loadAllData
     // 会拉全部 operator 实时/时刻表，首页首屏不可承受）；搜索模块经 getCompleteTimetable 按需拉取。
+    // v4.3.590: 惰性模式仍拉延误（TrainInformation，搜索延误徽章需要）并保持 30s 刷新，
+    // 仅跳过列车位置（Train）与时刻表全量（TrainTimetable）——首页请求量 500+ → ~30。
     if (window.ODPT_LAZY === true) {
-        console.debug("[ODPT] Lazy mode enabled - skip auto init");
+        console.debug("[ODPT] Lazy mode enabled - delay-only init");
+        loadRealtimeData(true).catch(function(e) { console.warn("[ODPT] Lazy delay init error:", e.message); });
+        setInterval(function() {
+            loadRealtimeData(true).catch(function(e) { console.warn("[ODPT] Lazy delay refresh error:", e.message); });
+        }, 30000);
     } else {
         init();
     }

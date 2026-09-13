@@ -703,7 +703,10 @@
           }
         });
 
-        if (linesNeedingTimetable.length > 0 && typeof loadMissingTimetables === 'function') {
+        // v4.3.590: 惰性模式（home 搜索页 ODPT_LAZY=true）跳过时刻表补缺——时刻表推定是
+        // realtime/trains 页功能，home 仅需实时延误徽章；补缺会按 operator 逐线拉取造成
+        // 数百个 ODPT 请求拖慢首屏。loadTrainPositions（实时延误）与 fuseAll 不受影响。
+        if (!window.ODPT_LAZY && linesNeedingTimetable.length > 0 && typeof loadMissingTimetables === 'function') {
           loadMissingTimetables(linesNeedingTimetable).then(function() {
             // 时刻表加载完成后，重新进行估算
             doEstimation();
