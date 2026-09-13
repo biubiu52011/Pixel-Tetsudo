@@ -68,6 +68,7 @@
     "Tokaido": ["UtsunomiyaJR", "Takasaki", "Ito"],
     "Ito": ["Tokaido"],
     "ShonanShinjuku": ["UtsunomiyaJR", "Takasaki", "Yokosuka"],
+    "UenoTokyo": ["UtsunomiyaJR", "Takasaki", "Joban", "Tokaido"],
     "ChuoRapid": ["Ome", "Itsukaichi", "ChuoMain"],
     "ChuoMain": ["ChuoRapid"],
     "SobuRapid": ["Yokosuka"],
@@ -122,10 +123,13 @@
     "Shinjuku": { "Keio": ["Shinjuku"], "KeioMain": ["Shinjuku"] },
     // 湘南新宿ライン
     "ShonanShinjuku": { "UtsunomiyaJR": ["Omiya"], "Takasaki": ["Omiya"], "Yokosuka": ["Ofuna"] },
-    "Takasaki": { "ShonanShinjuku": ["Omiya"] },
+    // 上野東京ライン
+    "UenoTokyo": { "UtsunomiyaJR": ["Omiya"], "Takasaki": ["Omiya"], "Joban": ["Ueno"], "Tokaido": ["Tokyo"] },
+    "Takasaki": { "ShonanShinjuku": ["Omiya"], "UenoTokyo": ["Omiya"], "Tokaido": ["Tokyo"] },
     "Yokosuka": { "ShonanShinjuku": ["Ofuna"], "SobuRapid": ["Tokyo"] },
-    "UtsunomiyaJR": { "ShonanShinjuku": ["Omiya"], "Tokaido": ["Tokyo"] },
-    "Takasaki": { "ShonanShinjuku": ["Omiya"], "Tokaido": ["Tokyo"] },
+    "UtsunomiyaJR": { "ShonanShinjuku": ["Omiya"], "UenoTokyo": ["Omiya"], "Tokaido": ["Tokyo"] },
+    "Joban": { "UenoTokyo": ["Ueno"] },
+    "Tokaido": { "UtsunomiyaJR": ["Tokyo"], "Takasaki": ["Tokyo"], "UenoTokyo": ["Tokyo"], "Ito": ["Atami"] },
     "Tokaido": { "UtsunomiyaJR": ["Tokyo"], "Takasaki": ["Tokyo"], "Ito": ["Atami"] },
     "Ito": { "Tokaido": ["Atami"] },
     // 中央線
