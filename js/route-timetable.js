@@ -235,14 +235,6 @@
               if (_plat) out[item.idx].platform = _plat;
             } catch (_e) {}
           }
-          // v4.3.595: 改札口——EXIT_DATA（wiki 改札口手建精选版）按 出发站 解析主要改札口；
-          // 无数据（多口无主站）时省略，不误导
-          if (window.PlatformResolver && window.PlatformResolver.resolveExit) {
-            try {
-              var _exit = window.PlatformResolver.resolveExit(seg.fromStation);
-              if (_exit) out[item.idx].exit = _exit;
-            } catch (_e) {}
-          }
           prevTrainNo = hit.train || null;
           // 有到达时刻才推进换乘游标（无到达时刻的段不阻塞下一段）
           if (hit.arrMin != null) cursorMin = throughFlags[i] ? hit.arrMin : hit.arrMin + TRANSFER_BUFFER;
