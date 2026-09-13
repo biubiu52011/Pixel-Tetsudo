@@ -235,7 +235,11 @@ var currentStationKey = null;
     var spotFee = translateCommonTerms(getI18nField(spot, 'fee', lang) || t('detail.unavailable'), lang);
     // 店铺类（餐饮/购物）费用标签用"人均"（在店消费场景），非店铺用"入场费"
     var _isShop = spot.tags && (spot.tags.indexOf('food') >= 0 || spot.tags.indexOf('shopping') >= 0);
-    var feeLabel = _isShop ? t('detail.info_fee_per_person') : t('detail.info_fee');
+    // 4.3.599: 费用标签按内容自适应——店铺类且含价格(円/前後/〜/～)才叫"人均"；
+    // 無料/実費占位类店铺（免费参观、按实际消费无标价）用通用"费用"，避免"人均：無料"语义错配
+    var feeLabel = (_isShop && /[円前後〜～]/.test(spotFee))
+      ? t('detail.info_fee_per_person')
+      : t('detail.info_fee');
     // Info grid (hours, fees)
     var infoHtml = '<div class="article-section">'
       + '<h3 class="section-heading">' + t('detail.basic_info') + '</h3>'
