@@ -34085,10 +34085,10 @@ window.RAILWAY_TOURISM = {
   {
    "name": "select gallery & bar “baku”",
    "coord": [
-    35.7497,
-    139.805
+    35.7491,
+    139.81
    ],
-   "dist": "足立区（最寄駅案内は公式参照）",
+   "dist": "北千住駅東口から徒歩5分",
    "desc": "日本人作家による生活道具、洋服、服飾小物、雑貨等の販売。 18:00よりバー営業をしています。 路地裏の小さなお店ですがいらした方がリラックスできる空間を心がけています。",
    "tags": [
     "all",
@@ -34097,7 +34097,7 @@ window.RAILWAY_TOURISM = {
    "image": "../images/観光地/select gallery & bar “baku”.jpg",
    "bestTime": "13:00~24:00（変動あり） 詳しくはInstagram（ @baku_tokyo ）をご覧ください。（定休日火曜（臨時休業あり） 詳しくはInstagram（ @baku_tokyo ）をご覧ください。）",
    "hours": "13:00~24:00（変動あり） 詳しくはInstagram（ @baku_tokyo ）をご覧ください。（定休日火曜（臨時休業あり） 詳しくはInstagram（ @baku_tokyo ）をご覧ください。）",
-   "fee": "飲食・ドリンク実費",
+   "fee": "予算 2,000円〜4,000円",
    "tips": [
     "夜の雰囲気,",
     "ギャラリー併設,",
@@ -34122,10 +34122,10 @@ window.RAILWAY_TOURISM = {
     "ko": "13:00~24:00（変動あり） 詳しくはInstagram（ @baku_tokyo ）をご覧ください。（定休日火曜（臨時休業あり） 詳しくはInstagram（ @baku_tokyo ）をご覧ください。）"
    },
    "fee_i18n": {
-    "ja": "飲食・ドリンク実費",
-    "zh": "店内消费另计",
-    "en": "Paid on consumption",
-    "ko": "이용료 별도"
+    "ja": "予算 2,000円〜4,000円",
+    "zh": "预算 2,000～4,000日元",
+    "en": "Budget ¥2,000–4,000",
+    "ko": "예산 2,000~4,000엔"
    },
    "bestTime_i18n": {
     "ja": "営業時間内",
@@ -34154,7 +34154,8 @@ window.RAILWAY_TOURISM = {
      "갤러리 겸영",
      "13시부터"
     ]
-   }
+   },
+   "address": "東京都足立区千住旭町21-10"
   },
   {
    "name": "株式会社伊藤鞄製作所・ショールーム＆カフェ「Regalo Felice」",
