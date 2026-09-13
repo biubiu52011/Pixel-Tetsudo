@@ -22650,6 +22650,18 @@ window.RAILWAY_DATA = {
           "lineId": "NaritaAirportBranch",
           "type": "in",
           "note": ""
+        },
+        {
+          "station": "Airport-Terminal-2",
+          "lineId": "Keisei",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Narita-Airport",
+          "lineId": "Keisei",
+          "type": "in",
+          "note": ""
         }
       ],
       "nameZh": "成田线",
@@ -29722,6 +29734,18 @@ window.RAILWAY_DATA = {
         {
           "station": "Narita",
           "lineId": "Narita",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Airport-Terminal-2",
+          "lineId": "Keisei",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Narita-Airport",
+          "lineId": "Keisei",
           "type": "in",
           "note": ""
         }

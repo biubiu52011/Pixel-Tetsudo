@@ -587,9 +587,13 @@
     // v4.3.522: 横排站距 = 全支线最宽站名文本宽 + 12（"支线宽度取决于文本最多的那个"——
     // 横排时相邻站名不重叠所需的最小站距）。v4.3.550: 须在 _rightNeed 之前定义（var 提升陷阱）。
     // v4.3.551: "所有插线叉出去那一部分也要算站间距"——横排站距 = 最宽名 + 标准站间距(sp)：
+    // v4.3.551: "所有插线叉出去那一部分也要算站间距"——横排站距 = 最宽名 + 标准站间距(sp)：
     // 竖列支线站距本就 = sp（算站间距），横排此前只 +12 文本 padding 未算站间距；改为 +sp 后
     // 横排站名间空隙 = sp，与主干/竖列的站间距视觉统一。
-    var _branchHSp = (_branchH || _hasVCol) ? (Math.max(_branchMaxNameW("left"), _branchMaxNameW("right")) + sp) : 0;
+    // v4.3.607: "成田线别把机场的两个站拉得这么远"——长站名（机场第2航站楼 6字）下
+    // 最宽名+sp 双倍惩罚（~195px/段）；改为 max(sp, 最宽名+12)：站距保底 = sp（仍算站间距），
+    // 长站名只加文本 padding 不再叠加 sp。空港支线 195→118px/段，短站名支线（鹤见）不变。
+    var _branchHSp = (_branchH || _hasVCol) ? Math.max(sp, Math.max(_branchMaxNameW("left"), _branchMaxNameW("right")) + 12) : 0;
     var _leftNeed = _leftCols > 0 ? (_branchStubL + (_leftCols - 1) * _branchColW + 10 + _branchMaxNameW("left") + 2) : 0;
     var _rightNeed = 0;
     if (_rightCols > 0) {
