@@ -167,6 +167,21 @@
           if (!_seen[_jpToCanon[jaKey]]) { _seen[_jpToCanon[jaKey]] = 1; jpMatches.push({ stationId: _jpToCanon[jaKey], displayName: jaKey, status: "ALIAS" }); }
         }
       }
+      // Chinese / Korean fuzzy match: query is simplified Chinese or Hangul,
+      // but _jpToEn/_jpToCanon keys are Japanese kanji (東京 not 东京).
+      // Search through zh/ko reverse indexes for substring matches.
+      for (var zhKey in _zhToCanon) {
+        if (zhKey.indexOf(q) !== -1) {
+          var _cid = _zhToCanon[zhKey];
+          if (!_seen[_cid]) { _seen[_cid] = 1; jpMatches.push({ stationId: _cid, displayName: zhKey, status: "ALIAS" }); }
+        }
+      }
+      for (var koKey in _koToCanon) {
+        if (koKey.indexOf(q) !== -1) {
+          var _kid = _koToCanon[koKey];
+          if (!_seen[_kid]) { _seen[_kid] = 1; jpMatches.push({ stationId: _kid, displayName: koKey, status: "ALIAS" }); }
+        }
+      }
       if (jpMatches.length > 0) return jpMatches;
       // 4.3.560: 带「駅」后缀的日文输入（如「渋谷駅」）容错——剥离后缀后按站名重新解析
       if (q.charAt(q.length - 1) === "駅") {
@@ -195,8 +210,18 @@
       if (jid) return [{ stationId: jid, displayName: jid, status: "ALIAS" }];
     }
     // Korean input fallback (Hangul doesn't match Japanese regex)
-    if (_hasKorean(q) && _koToCanon[q]) {
-      return [{ stationId: _koToCanon[q], displayName: q, status: "EXACT" }];
+    if (_hasKorean(q)) {
+      if (_koToCanon[q]) {
+        return [{ stationId: _koToCanon[q], displayName: q, status: "EXACT" }];
+      }
+      // Korean fuzzy match
+      var koPartial = [];
+      for (var koKey in _koToCanon) {
+        if (koKey.indexOf(q) !== -1) {
+          koPartial.push({ stationId: _koToCanon[koKey], displayName: koKey, status: "ALIAS" });
+        }
+      }
+      if (koPartial.length > 0) return koPartial;
     }
     // Substring match over real station IDs (case/accent-insensitive)
     var partial = [];
