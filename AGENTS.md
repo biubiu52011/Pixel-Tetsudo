@@ -1283,3 +1283,9 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 - PlatformResolver.resolveExit(stationId) 公共 API；route-timetable enrichSegments 解析 exit；search-ui 渲染蓝色改札口徽章（.journey-seg-exit，--blue-dim/--blue-pale 新增 CSS 变量）；口名保持日文原名不翻译（专有名词，行业惯例）
 **验证**：node --check 3 文件；Resolver 6 项（Sugamo内2/Otsuka外2/Mitaka下3・4/Osaki埼京6・7/Ueno中央改札/Shibuya null）；本地 DOM——上野→池袋 高崎線5・6番線+中央改札徽章、秋葉原→新宿 中央総武5番線+中央改札、吉祥寺→立川 中央快速3番線；0 console 错误；全页 bump 597（与并发会话 596 避让）
 **遗留**：御茶ノ水/四ツ谷/高円寺/西荻窪/武蔵境/西国分寺/日野/豊田/西八王子/高尾/赤羽/浦和/川口/大井町/大森/蒲田/川崎/千葉/船橋/松戸/柏/北千住 等站番线待后续；改札口完整映射（構内図级）待用户拍板是否抓官网 PDF；大崎駅方向已含
+
+## 4.3.599（2026-09-13，改札口移出乘车段）
+**用户裁定**："改札口不是用在这里的"——改札口/出入口不属于搜索结果乘车段层级（并发会话 4.3.598 已用 STATION_EXITS 16站98口实现 tourism 出站指引，出入口的正确位置是旅游/车站详情层）。
+**改动**：search-ui.js 移除 _exitHtml 渲染（乘车段恢复"发时+番线徽章+到时"）；route-timetable.js 移除 exit 解析（零消费者不传输）；CSS 删除 .journey-seg-exit 与 --blue-dim/--blue-pale 变量；**EXIT_DATA + PlatformResolver.resolveExit 保留**为车站信息资产（Provider 公共 API，待接入车站详情/线路详情层级）。全页 bump 599。
+**验证**：node --check 3 文件；git diff 确认 CSS 无 blue/exit 残留、tourism 并发样式未受影响；本地+线上乘车段仅番线徽章。
+**遗留**：EXIT_DATA（5 枢纽主要改札口）目前零展示消费者——接入位置（车站详情层）待用户拍板。
