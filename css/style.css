@@ -83,4 +83,5 @@
 .journey-seg-direction-badge{font-size:10px;font-weight:700;color:var(--green-dim);background:var(--green-pale);border:1px solid var(--green-dim);border-radius:var(--radius-sm);padding:1px 6px;white-space:nowrap;}
 .journey-seg-times{margin-left:auto;display:flex;align-items:center;gap:6px;flex-shrink:0;white-space:nowrap;}
 .journey-seg-time-dep{font-weight:700;font-size:12px;color:var(--green-dim);}
+.journey-seg-platform{font-size:10px;font-weight:700;color:var(--green-dim);background:var(--green-pale);border:1px solid var(--green-dim);border-radius:var(--radius-sm);padding:1px 6px;white-space:nowrap;}
 .journey-seg-time-arr{font-size:11px;color:var(--text-muted);}

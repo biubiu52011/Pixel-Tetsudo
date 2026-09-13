@@ -227,6 +227,14 @@
         }
         if (hit) {
           out[item.idx] = { dep: hit.dep, arr: hit.arr };
+          // v4.3.594: 発着番線——PLATFORM_DATA（wiki のりば手建库）按 线路+起点站+方向 解析；
+          // 查不到（该站/线未收录）时省略，不误导
+          if (window.PlatformResolver && window.PlatformResolver.resolve) {
+            try {
+              var _plat = window.PlatformResolver.resolve(seg.lineId, seg.fromStation, seg.direction);
+              if (_plat) out[item.idx].platform = _plat;
+            } catch (_e) {}
+          }
           prevTrainNo = hit.train || null;
           // 有到达时刻才推进换乘游标（无到达时刻的段不阻塞下一段）
           if (hit.arrMin != null) cursorMin = throughFlags[i] ? hit.arrMin : hit.arrMin + TRANSFER_BUFFER;
