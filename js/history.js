@@ -114,7 +114,26 @@
         });
         return out;
       }
-      const lines = entry.lineInfo ? [...new Set(_extractLines(entry.lineInfo))].map(function(lid){ return (window.RailwayDB && window.RailwayDB.resolveLineName) ? window.RailwayDB.resolveLineName(lid, _lang) : lid; }).join(", ") : "";
+      // 4.3.592: lineInfo.lines 存 lineId；旧历史条目（4.3.592 前）存 line.name——
+      // name 字段不一致（UtsunomiyaJR.name="Utsunomiya Line" 等英文名），resolveLineName
+      // 查不到会原样返回英文。反查 name→ID 兜底后再解析。
+      function _resolveLineIdOrName(lid, lang) {
+        var nm = (window.RailwayDB && window.RailwayDB.resolveLineName) ? window.RailwayDB.resolveLineName(lid, lang) : lid;
+        if (nm !== lid) return nm;
+        // resolveLineName 原样返回（未知 ID）——若输入是某线的 name 字段，反查为 ID
+        if (window.RailwayDB && window.RailwayDB.getLine && !window.RailwayDB.getLine(lid)) {
+          var all = (window.RailwayDB.getAllLines && window.RailwayDB.getAllLines()) || {};
+          for (var _k in all) {
+            var _l = all[_k];
+            if (_l && (_l.name === lid || _l.nameEn === lid || _l.nameJa === lid)) {
+              var _r = window.RailwayDB.resolveLineName(_k, lang);
+              if (_r && _r !== _k) { nm = _r; break; }
+            }
+          }
+        }
+        return nm;
+      }
+      const lines = entry.lineInfo ? [...new Set(_extractLines(entry.lineInfo))].map(function(lid){ return _resolveLineIdOrName(lid, _lang); }).join(", ") : "";
 
       html += '<div class="history-entry" data-id="' + entry.id + '">';
       html += '<div class="history-route">';
@@ -233,11 +252,17 @@
     restoreFromRecent: restoreFromRecent
   };
 
-  function safeInit() {
-    if (typeof window.t === "function") {
+  // v4.3.592: 除 window.t 外还需等 RailwayDB 数据就绪（DataLoader.isLoaded）——
+  // 原实现只等 translations，db 异步加载完成前渲染会把站名/线路名解析成 ID/英文
+  // （resolveLineName 对未知 ID 原样返回）。db 加载失败或超时（15s）也放行兜底。
+  function safeInit(tries) {
+    tries = tries || 0;
+    var dbReady = !!(window.DataLoader && window.DataLoader.isLoaded && window.DataLoader.isLoaded());
+    var dbErr = !!(window.DataLoader && window.DataLoader.getError && window.DataLoader.getError());
+    if (typeof window.t === "function" && (dbReady || dbErr || tries > 300)) {
       SearchHistory.init();
     } else {
-      setTimeout(safeInit, 50);
+      setTimeout(function() { safeInit(tries + 1); }, 50);
     }
   }
   if (document.readyState === "loading") {

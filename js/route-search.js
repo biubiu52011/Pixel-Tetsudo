@@ -301,7 +301,7 @@
     }
     states.reverse();
 
-    // Build path (unique stations) + lineInfo (per adjacent-pair with chosen line name)
+    // Build path (unique stations) + lineInfo (per adjacent-pair with chosen line id)
     const path = [];
     const lineInfo = [];
     let lastSt = null, lastLine = null, segFrom = null;
@@ -319,8 +319,10 @@
       } else if (lid !== lastLine) {
         // transfer at this station (station unchanged) — close the previous ride segment
         if (segFrom !== null && lastSt !== null && segFrom !== lastSt) {
-          const nm = window.RailwayDB && window.RailwayDB.getLine ? (window.RailwayDB.getLine(lastLine) || {}).name : lastLine;
-          lineInfo.push({ from: segFrom, to: lastSt, lines: [nm || lastLine] });
+          // v4.3.592: lines 存 lineId（真实 ID）而非 line.name——name 字段不一致
+          // （UtsunomiyaJR.name="Utsunomiya Line" 等英文名），消费方（search-ui._lineBadge /
+          // history）都按 ID 解析，name 会导致 resolveLineName 查不到而原样显示英文。
+          lineInfo.push({ from: segFrom, to: lastSt, lines: [lastLine] });
         }
         lastLine = lid;
         segFrom = st;
@@ -333,8 +335,7 @@
       }
     }
     if (segFrom !== null && lastSt !== null && segFrom !== lastSt) {
-      const nm = window.RailwayDB && window.RailwayDB.getLine ? (window.RailwayDB.getLine(lastLine) || {}).name : lastLine;
-      lineInfo.push({ from: segFrom, to: lastSt, lines: [nm || lastLine] });
+      lineInfo.push({ from: segFrom, to: lastSt, lines: [lastLine] });
     }
 
     return {
@@ -352,19 +353,6 @@
    */
   const _lineCache = new Map();
   /**
-   * Build a reverse map: lineName -> lineId (for first match)
-   */
-  let _nameToIdCache = null;
-  function getNameToIdMap() {
-    if (_nameToIdCache) return _nameToIdCache;
-    _nameToIdCache = {};
-    for (const [lineId, line] of Object.entries(window.RailwayDB ? window.RailwayDB.getAllLines() : (window.DataLayer ? window.DataLayer.getAllLines() : window.UNIFIED_LINES || {}))) {
-      if (line && line.name) { _nameToIdCache[line.name] = lineId; }
-    }
-    return _nameToIdCache;
-  }
-
-  /**
    * Convert a BFS route result into RouteSegment[] array.
    */
   // 運行系統が示す種別（保守的マッピング：確実な系統のみ表示、他は null）
@@ -380,12 +368,12 @@
   function buildRouteSegments(route) {
     if (!route || !route.lineInfo || route.lineInfo.length === 0) return [];
     const segments = [];
-    const nameToId = getNameToIdMap();
     const lineOrder = window.LINE_STATION_ORDER || {};
     for (let i = 0; i < route.lineInfo.length; i++) {
       const seg = route.lineInfo[i];
-      const lineName = seg.lines[0] || null;
-      const lineId = lineName ? (nameToId[lineName] || null) : null;
+      // v4.3.592: lineInfo.lines[0] 为 lineId（真实 ID）；lineName 仅作兼容字段
+      const lineId = seg.lines[0] || null;
+      const lineName = lineId ? ((window.RailwayDB && window.RailwayDB.getLine && window.RailwayDB.getLine(lineId)) || {}).name || lineId : null;
       let direction = 0;
       if (lineId && lineOrder[lineId]) {
         const o = lineOrder[lineId];
@@ -410,11 +398,10 @@
       const fare = (lineId && window.FareEstimator) ? window.FareEstimator.estimateSegment(lineId, hopCount) : null;
       segments.push({ type: 'ride', lineId, lineName, fromStation: seg.from, toStation: seg.to, duration, direction, trainType: TRAIN_TYPE_BY_LINE[lineId] || null, fare, walking: null });
       if (i < route.lineInfo.length - 1) {
-        const nextLineName = route.lineInfo[i+1].lines[0] || null;
-        if (nextLineName && nextLineName !== lineName) {
-          const nextLid = nextLineName ? (nameToId[nextLineName] || null) : null;
+        const nextLid = route.lineInfo[i+1].lines[0] || null;
+        if (nextLid && nextLid !== lineId) {
           const through = !!(lineId && nextLid && isThroughConnected(lineId, nextLid));
-          segments.push({ type: 'transfer', station: seg.to, fromLine: lineName, toLines: route.lineInfo[i+1].lines, walking: null, walkingDuration: null, through: through });
+          segments.push({ type: 'transfer', station: seg.to, fromLine: lineId, toLines: [nextLid], walking: null, walkingDuration: null, through: through });
         }
       }
     }

@@ -1248,3 +1248,10 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 4. **直通段衔接与降级**：实测横須賀線⇄湘南新宿ライン ODPT 完全分表、**无贯通车次**（Yokosuka 表 Inbound 列车 inSk 全 false）——同车次贯通匹配必然失败。实施：①顺序推算 + 换乘游标（下段发车 ≥ 上段到达 + 3 分钟缓冲，直通同车次接续不加缓冲）；②直通段贯通失败时降级为换乘衔接，并把 transfer 文案由"乗換不要"动态改回"ここで乗換"（search-ui 处理 enrich 返回的 downgrade 数组）；③与下一段直通时 filter 只匹配贯通列车，候选为空则去 filter 重试并降级。
 5. **惰性粒度细化**：惰性模式原跳过全部 init → 搜索延误徽章（route-status-badge）数据丢失。修复：loadRealtimeData(delayOnly) 只拉 TrainInformation（延误）并保持 30s 刷新，跳过 Train 位置与 TrainTimetable 全量；data-fusion 在 ODPT_LAZY 下跳过 loadMissingTimetables（时刻表推定是 realtime/trains 页功能）。首页请求 552 → **15（纯延误）**，延误徽章保留。
 **验证**：node --check 6 文件；本地 3 场景 DOM 全过（换乘衔接 15:07発→15:27発、直通降级 15:11発/15:42発 + "ここで乗換"、长距 2 段 3 分钟衔接）；首页 ODPT 请求 552→195→3→15（delayOnly 生效）；DELAY_OPS=15/TRAIN_OPS=0；0 console 错误
+## 4.3.592（2026-09-13，线路名英文混入修复：lineInfo 统一输出 lineId）
+**问题**：用户报告宇都宮線（Utsunomiya Line）在非英语界面显示英文。
+**根因（线上实证）**：route-search findRoute 的 lineInfo[].lines 存的是 line.name 而非 lineId——name 字段各线不一致（ChuoRapid.name=ChuoRapid、UtsunomiyaJR.name=Utsunomiya Line、Komii.name=小海線）——buildRouteSegments 的 transfer 段 fromLine/toLines 沿用该 name；search-ui._lineBadge 把 name 当 lineId 传给 resolveLineName，查不到就原样返回（Utsunomiya Line 英文出现在所有语言界面换乘行）。另发现 history 页渲染早于 RailwayDB 异步加载（safeInit 只等 window.t）→ 站名/线路名全显示 ID/英文。
+**修复**：
+- js/route-search.js：①findRoute 两处 lineInfo.push lines 改存 lastLine（真实 ID，删除 nm=line.name 取值）；②buildRouteSegments 改以 lines[0] 直接作 lineId（删除 nameToId 反查）、lineName 字段由 getLine(lineId).name 兼容、transfer 段 fromLine/toLines 改传真实 ID；③删除已无引用的 getNameToIdMap/_nameToIdCache（防未来误导）
+- js/history.js：①safeInit 增加等待 DataLoader.isLoaded()（db 错误或 15s 超时放行兜底）——修复渲染早于 db 就绪导致站名/线路名显示 ID/英文的时序 bug；②旧历史条目（存 line.name）渲染时 resolveLineName 原样返回则按 name/nameEn/nameJa 反查 lineId 再解析（_resolveLineIdOrName）
+**验证**：node --check 2 文件；本地 DOM——新宿→宇都宮 routeSegments 换乘段 fromLine/toLines 为 ID（ChuoRapid/Komii/UtsunomiyaJR）、日文界面换乘徽章=宇都宮線（原英文 Utsunomiya Line）、中文界面=宇都宫线、历史页线路=中央線快速, 小海線, 宇都宮線 + 站名=新宿→宇都宮（原 ID/英文）
