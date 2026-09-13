@@ -29,8 +29,8 @@
       "lng": 139.7648
     },
     "Hibiya": {
-      "lat": 35.6745,
-      "lng": 139.7521
+      "lat": 35.674271,
+      "lng": 139.7606
     },
     "Shinagawa": {
       "lat": 35.6284,
@@ -49,8 +49,8 @@
       "lng": 139.62252
     },
     "Kawasaki": {
-      "lat": 35.5307,
-      "lng": 139.7029
+      "lat": 35.531365,
+      "lng": 139.696889
     },
     "Saitama": {
       "lat": 35.8617,
@@ -89,8 +89,8 @@
       "lng": 135.7681
     },
     "Hachioji": {
-      "lat": 35.6558,
-      "lng": 139.3239
+      "lat": 35.655673,
+      "lng": 139.338962
     },
     "Mitake": {
       "lat": 35.8063,
@@ -105,8 +105,8 @@
       "lng": 139.7403
     },
     "Meguro": {
-      "lat": 35.6339,
-      "lng": 139.6917
+      "lat": 35.633635,
+      "lng": 139.715444
     },
     "Ebisu": {
       "lat": 35.6467,
@@ -133,8 +133,8 @@
       "lng": 139.7453
     },
     "Korakuen": {
-      "lat": 35.70731,
-      "lng": 139.75086
+      "lat": 35.708486,
+      "lng": 139.751822
     },
     "Nihonbashi": {
       "lat": 35.6819,
@@ -145,8 +145,8 @@
       "lng": 139.7839
     },
     "Kayabacho": {
-      "lat": 35.6767,
-      "lng": 139.7781
+      "lat": 35.679935,
+      "lng": 139.780163
     },
     "Tsukishima": {
       "lat": 35.6644,
@@ -185,16 +185,16 @@
       "lng": 139.74806
     },
     "Tabata": {
-      "lat": 35.7444,
-      "lng": 139.7378
+      "lat": 35.738158,
+      "lng": 139.760815
     },
     "Shin-Urawa": {
       "lat": 35.8456,
       "lng": 139.6917
     },
     "Urawa": {
-      "lat": 35.8617,
-      "lng": 139.645
+      "lat": 35.859037,
+      "lng": 139.657163
     },
     "Kita-Urawa": {
       "lat": 35.8778,
@@ -221,8 +221,8 @@
       "lng": 139.7156
     },
     "Nishi-Nippori": {
-      "lat": 35.7306,
-      "lng": 139.7631
+      "lat": 35.732006,
+      "lng": 139.766886
     },
     "Nippori": {
       "lat": 35.7278,
@@ -233,40 +233,40 @@
       "lng": 139.77803
     },
     "Okachimachi": {
-      "lat": 35.7044,
-      "lng": 139.7722
+      "lat": 35.7072,
+      "lng": 139.77472
     },
     "Hamamatsucho": {
-      "lat": 35.6556,
-      "lng": 139.7528
+      "lat": 35.655381,
+      "lng": 139.757129
     },
     "Tamachi": {
-      "lat": 35.6456,
-      "lng": 139.7431
+      "lat": 35.645736,
+      "lng": 139.747562
     },
     "Takanawa-Gateway": {
       "lat": 35.6378,
       "lng": 139.7389
     },
     "Osaki": {
-      "lat": 35.6267,
-      "lng": 139.7278
+      "lat": 35.619851,
+      "lng": 139.728189
     },
     "Gotanda": {
-      "lat": 35.6328,
-      "lng": 139.6994
+      "lat": 35.62616,
+      "lng": 139.7236
     },
     "Wakoshi": {
-      "lat": 35.7878,
-      "lng": 139.6678
+      "lat": 35.78835,
+      "lng": 139.612865
     },
     "Higashi-Ikebukuro": {
       "lat": 35.7311,
       "lng": 139.7269
     },
     "Yushima": {
-      "lat": 35.7117,
-      "lng": 139.7689
+      "lat": 35.70718,
+      "lng": 139.76994
     },
     "Tokyo Dome-mae": {
       "lat": 35.7056,
@@ -281,36 +281,36 @@
       "lng": 139.7978
     },
     "Otemachi": {
-      "lat": 35.6867,
-      "lng": 139.7656
+      "lat": 35.685349,
+      "lng": 139.763278
     },
     "Kudanshita": {
       "lat": 35.6944,
       "lng": 139.7478
     },
     "Jimbocho": {
-      "lat": 35.6944,
-      "lng": 139.7531
+      "lat": 35.695932,
+      "lng": 139.757627
     },
     "Ichigaya": {
-      "lat": 35.6978,
-      "lng": 139.7378
+      "lat": 35.692894,
+      "lng": 139.736324
     },
     "Nagatacho": {
-      "lat": 35.6778,
-      "lng": 139.7389
+      "lat": 35.678601,
+      "lng": 139.740286
     },
     "Akasaka-mitsuke": {
-      "lat": 35.6739,
-      "lng": 139.7356
+      "lat": 35.676845,
+      "lng": 139.737347
     },
     "Roppongi": {
       "lat": 35.6628,
       "lng": 139.7314
     },
     "Akabane-Iwabuchi": {
-      "lat": 35.7467,
-      "lng": 139.6689
+      "lat": 35.783355,
+      "lng": 139.72211
     },
     "Hanzomon": {
       "lat": 35.6856,
@@ -321,8 +321,8 @@
       "lng": 139.7378
     },
     "Shirokanedai": {
-      "lat": 35.6378,
-      "lng": 139.7189
+      "lat": 35.63793,
+      "lng": 139.72615
     },
     "Nakameguro": {
       "lat": 35.6433,
@@ -337,8 +337,8 @@
       "lng": 139.7189
     },
     "Kamiyacho": {
-      "lat": 35.6678,
-      "lng": 139.7356
+      "lat": 35.663118,
+      "lng": 139.745183
     },
     "Komazawa": {
       "lat": 35.6556,
@@ -357,16 +357,16 @@
       "lng": 139.6361
     },
     "Sangenjaya": {
-      "lat": 35.6444,
-      "lng": 139.6517
+      "lat": 35.64364,
+      "lng": 139.671326
     },
     "Onarimon": {
-      "lat": 35.6739,
-      "lng": 139.7378
+      "lat": 35.660774,
+      "lng": 139.751366
     },
     "Mita": {
-      "lat": 35.6556,
-      "lng": 139.7456
+      "lat": 35.64865,
+      "lng": 139.748998
     },
     "Nishi-Tachikawa": {
       "lat": 35.6956,
@@ -409,8 +409,8 @@
       "lng": 139.2506
     },
     "Musashi-Sakai": {
-      "lat": 35.7022,
-      "lng": 139.5456
+      "lat": 35.702139,
+      "lng": 139.543658
     },
     "Musashi-Yoshida": {
       "lat": 35.7861,
@@ -433,8 +433,8 @@
       "lng": 139.6839
     },
     "Taishakuten": {
-      "lat": 35.6956,
-      "lng": 139.6756
+      "lat": 35.75671,
+      "lng": 139.8755
     },
     "Ikeda": {
       "lat": 35.7028,
@@ -453,8 +453,8 @@
       "lng": 139.7293
     },
     "Nezu": {
-      "lat": 35.7389,
-      "lng": 139.7689
+      "lat": 35.7173463,
+      "lng": 139.7657368
     },
     "Shin-Okachimachi": {
       "lat": 35.707009,
@@ -497,24 +497,24 @@
       "lng": 139.7839
     },
     "Tsukiji": {
-      "lat": 35.6654,
-      "lng": 139.7707
+      "lat": 35.66811,
+      "lng": 139.77262
     },
     "Ginza-hitchome": {
-      "lat": 35.6717,
-      "lng": 139.7678
+      "lat": 35.674394,
+      "lng": 139.766979
     },
     "Nijubashimae": {
-      "lat": 35.6789,
-      "lng": 139.7578
+      "lat": 35.680665,
+      "lng": 139.761745
     },
     "Kasumigaseki": {
-      "lat": 35.6756,
-      "lng": 139.7517
+      "lat": 35.672603,
+      "lng": 139.751176
     },
     "Hiroo": {
-      "lat": 35.6556,
-      "lng": 139.7189
+      "lat": 35.651499,
+      "lng": 139.722209
     },
     "Shin-osaki": {
       "lat": 35.6267,
@@ -525,8 +525,8 @@
       "lng": 139.6178
     },
     "Tsurumi": {
-      "lat": 35.5317,
-      "lng": 139.6917
+      "lat": 35.508036,
+      "lng": 139.676263
     },
     "Higashi-Kawasaki": {
       "lat": 35.5267,
@@ -541,12 +541,12 @@
       "lng": 139.7349
     },
     "Omori": {
-      "lat": 35.5878,
-      "lng": 139.6978
+      "lat": 35.588447,
+      "lng": 139.727868
     },
     "Kamata": {
-      "lat": 35.5617,
-      "lng": 139.7089
+      "lat": 35.562479,
+      "lng": 139.716073
     },
     "Shimokitazawa": {
       "lat": 35.6619,
@@ -577,8 +577,8 @@
       "lng": 139.4056
     },
     "Seibu-Shinjuku": {
-      "lat": 35.6956,
-      "lng": 139.6978
+      "lat": 35.695363,
+      "lng": 139.700052
     },
     "Seibu-Chausuyama": {
       "lat": 35.7189,
@@ -609,16 +609,16 @@
       "lng": 139.7059
     },
     "Minowa": {
-      "lat": 35.7156,
-      "lng": 139.7756
+      "lat": 35.72963,
+      "lng": 139.79136
     },
     "Tawaramachi": {
       "lat": 35.70992,
       "lng": 139.79031
     },
     "Kita-Aoi": {
-      "lat": 35.6944,
-      "lng": 139.7617
+      "lat": 35.77237,
+      "lng": 139.82038
     },
     "Aoto": {
       "lat": 35.6878,
@@ -701,16 +701,16 @@
       "lng": 139.6917
     },
     "Suidobashi": {
-      "lat": 35.7017,
-      "lng": 139.7506
+      "lat": 35.702048,
+      "lng": 139.753502
     },
     "Okachi": {
       "lat": 35.7078,
       "lng": 139.7778
     },
     "Daimon": {
-      "lat": 35.6339,
-      "lng": 139.7478
+      "lat": 35.65687,
+      "lng": 139.754679
     },
     "Shin-Odaimon": {
       "lat": 35.6278,
@@ -749,8 +749,8 @@
       "lng": 139.7356
     },
     "Sakuragicho": {
-      "lat": 35.4456,
-      "lng": 139.6339
+      "lat": 35.450914,
+      "lng": 139.631059
     },
     "Keio-Hachioji": {
       "lat": 35.6717,
@@ -817,12 +817,12 @@
       "lng": 139.6678
     },
     "Asakusa": {
-      "lat": 35.7148,
-      "lng": 139.7967
+      "lat": 35.710746,
+      "lng": 139.797774
     },
     "Yoyogi-Uehara": {
-      "lat": 35.6778,
-      "lng": 139.6956
+      "lat": 35.669003,
+      "lng": 139.679733
     },
     "Waseda": {
       "lat": 35.7139,
@@ -841,8 +841,8 @@
       "lng": 139.7671
     },
     "Kokubunji": {
-      "lat": 35.7022,
-      "lng": 139.4067
+      "lat": 35.70022,
+      "lng": 139.48027
     },
     "Koganei": {
       "lat": 35.6997,
@@ -865,16 +865,16 @@
       "lng": 139.6364
     },
     "Koenji": {
-      "lat": 35.7067,
-      "lng": 139.6478
+      "lat": 35.705346,
+      "lng": 139.649929
     },
     "Nerima": {
       "lat": 35.7357,
       "lng": 139.6517
     },
     "Itabashi": {
-      "lat": 35.7514,
-      "lng": 139.7078
+      "lat": 35.745496,
+      "lng": 139.719775
     },
     "Musashimurayama": {
       "lat": 35.7531,
@@ -901,8 +901,8 @@
       "lng": 139.499
     },
     "Musashi-Kosugi": {
-      "lat": 35.5456,
-      "lng": 139.6539
+      "lat": 35.576633,
+      "lng": 139.659466
     },
     "Shonandai": {
       "lat": 35.3056,
@@ -945,16 +945,16 @@
       "lng": 139.6181
     },
     "Negishi": {
-      "lat": 35.4378,
-      "lng": 139.6278
+      "lat": 35.415819,
+      "lng": 139.635046
     },
     "Yamate": {
       "lat": 35.4278,
       "lng": 139.6378
     },
     "Kannai": {
-      "lat": 35.4378,
-      "lng": 139.6478
+      "lat": 35.44518,
+      "lng": 139.63563
     },
     "Sotsu-Shin-Yokohama": {
       "lat": 35.5089,
@@ -1065,8 +1065,8 @@
       "lng": 139.70436
     },
     "Kawaguchi": {
-      "lat": 35.7976,
-      "lng": 139.7206
+      "lat": 35.80194,
+      "lng": 139.7175
     },
     "Higashi-Kanagawa": {
       "lat": 35.47788,
@@ -1449,8 +1449,8 @@
       "lng": 139.686663
     },
     "Machida": {
-      "lat": 35.54154,
-      "lng": 139.44659
+      "lat": 35.54397,
+      "lng": 139.445079
     },
     "Nakagawara": {
       "lat": 35.65953,
@@ -1481,12 +1481,12 @@
       "lng": 138.7658
     },
     "Kiyosumi-Shirakawa": {
-      "lat": 35.6944,
-      "lng": 139.7631
+      "lat": 35.682119,
+      "lng": 139.799841
     },
     "Honancho": {
-      "lat": 35.6938,
-      "lng": 139.6817
+      "lat": 35.683515,
+      "lng": 139.657935
     },
     "Kawagishi": {
       "lat": 36.077,
@@ -1521,8 +1521,8 @@
       "lng": 139.6867
     },
     "Kita-Ayase": {
-      "lat": 35.7928,
-      "lng": 139.8261
+      "lat": 35.77689,
+      "lng": 139.832095
     },
     "Kita-Yono": {
       "lat": 35.8907,
@@ -1769,8 +1769,8 @@
       "lng": 139.6389
     },
     "Tameike-Sanno": {
-      "lat": 35.6739,
-      "lng": 139.7356
+      "lat": 35.673091,
+      "lng": 139.741294
     },
     "Ueno-Hirokoji": {
       "lat": 35.7089,
@@ -2805,8 +2805,8 @@
       "lng": 139.60357
     },
     "Kami-Shakujii": {
-      "lat": 35.72623,
-      "lng": 139.59208
+      "lat": 35.7250851,
+      "lng": 139.6036178
     },
     "Musashiseki": {
       "lat": 35.72753,
@@ -4341,8 +4341,8 @@
       "lng": 139.43138
     },
     "Takahatafudo": {
-      "lat": 35.6613,
-      "lng": 139.4152
+      "lat": 35.662139,
+      "lng": 139.413207
     },
     "Minamidaira": {
       "lat": 35.65514,
@@ -8457,8 +8457,8 @@
       "lng": 141.0075
     },
     "Yotsuya-Sanchome": {
-      "lat": 35.686,
-      "lng": 139.73066667
+      "lat": 35.687835,
+      "lng": 139.719325
     },
     "Keisei-Narashino": {
       "lat": 35.71513889,
@@ -29737,7 +29737,7 @@
   "name_map": {
     "YRP野比": "YRP Nobi",
     "あざみ野": "Azamino",
-    "いずみ中央": "Izumi-chuo",
+    "いずみ中央": "Izumi-Chuo",
     "いずみ野": "Izumino",
     "おもちゃのまち": "Omochanomachi",
     "お台場海浜公園": "Odaiba-kaihinkoen",
@@ -29798,19 +29798,19 @@
     "三鷹台": "Mitakadai",
     "上中里": "Kami-Nakazato",
     "上井草": "Kami-Igusa",
-    "上今市": "Kami-imaichi",
+    "上今市": "Kami-Imaichi",
     "上北台": "Kamikitadai",
     "上北沢": "Kami-kitazawa",
     "上大岡": "Kamiooka",
     "上尾": "Ageo",
     "上星川": "Kami-Hoshikawa",
-    "上板橋": "Kami-itabashi",
+    "上板橋": "Kami-Itabashi",
     "上永谷": "Kaminagaya",
     "上溝": "Kamimizo",
     "上牧": "Kamimoku",
     "上町": "Kamimachi",
     "上石神井": "Kami-Shakujii",
-    "上福岡": "Kami-fukuoka",
+    "上福岡": "Kami-Fukuoka",
     "上総一ノ宮": "Kazusa-Ichinomiya",
     "上総亀山": "Kazusa-Kameyama",
     "上総松丘": "Kazusa-Matsuoka",
@@ -29825,11 +29825,11 @@
     "上野毛": "Kaminoge",
     "下丸子": "Shimomaruko",
     "下井草": "Shimo-Igusa",
-    "下今市": "Shimo-imaichi",
+    "下今市": "Shimo-Imaichi",
     "下北沢": "Shimo-Kitazzu",
-    "下小代": "Shimo-goshiro",
+    "下小代": "Shimo-Goshiro",
     "下山口": "Shimo-Yamaguchi",
-    "下板橋": "Shimo-itabashi",
+    "下板橋": "Shimo-Itabashi",
     "下永谷": "Shimonagaya",
     "下溝": "Shimomizo",
     "下神明": "Shimo-shimmei",
@@ -29839,7 +29839,7 @@
     "下総神崎": "Shimosa-Kozaki",
     "下落合": "Shimo-Ochiai",
     "下諏訪": "Shimo-Suwa",
-    "下赤塚": "Shimo-akatsuka",
+    "下赤塚": "Shimo-Akatsuka",
     "下郡": "Shimogori",
     "下飯田": "Shimoiida",
     "下高井戸": "Shimo-takaido",
@@ -29858,7 +29858,7 @@
     "中川": "Nakagawa",
     "中延": "Nakanobu",
     "中村橋": "Nakamurabashi",
-    "中板橋": "Naka-itabashi",
+    "中板橋": "Naka-Itabashi",
     "中河原": "Nakagawara",
     "中浦和": "Naka-Urawa",
     "中田": "Nakada",
@@ -29889,7 +29889,7 @@
     "二俣尾": "Futamatao",
     "二俣川": "Futamatagawa",
     "二俣新町": "Futamatashimmachi",
-    "二子新地": "Futako-shinchi",
+    "二子新地": "Futako-Shinchi",
     "二子玉川": "Futako-tamagawa",
     "二宮": "Ninomiya",
     "二重橋前〈丸の内〉": "Nijubashimae<Marunouchi>",
@@ -29924,10 +29924,10 @@
     "代々木": "Yoyogi",
     "代々木上原": "Yoyogi-Uehara",
     "代々木八幡": "Yoyogi-Hachiman",
-    "代々木公園": "Yoyogi-koen",
+    "代々木公園": "Yoyogi-Koen",
     "代官山": "Daikan-yama",
     "代田橋": "Daitabashi",
-    "仲御徒町": "Naka-okachimachi",
+    "仲御徒町": "Naka-Okachimachi",
     "仲町台": "Nakamachidai",
     "伊勢佐木長者町": "Isezaki-Chojamachi",
     "伊勢原": "Isehara",
@@ -29974,7 +29974,7 @@
     "六実": "Mutsumi",
     "六日町": "Muikamachi",
     "六本木": "Roppongi",
-    "六本木一丁目": "Roppongi-itchome",
+    "六本木一丁目": "Roppongi-Itchome",
     "六浦": "Mutsuura",
     "六町": "Rokuchō",
     "六郷土手": "Rokugōdote",
@@ -30000,7 +30000,7 @@
     "北千束": "Kita-senzoku",
     "北参道": "Kita-sando",
     "北品川": "Kitashinagawa",
-    "北坂戸": "Kita-sakado",
+    "北坂戸": "Kita-Sakado",
     "北堀之内": "Kita-Horinouchi",
     "北大宮": "Kita-Omiya",
     "北小金": "Kita-Kogane",
@@ -30008,22 +30008,22 @@
     "北府中": "Kita-Fuchu",
     "北戸田": "Kita-Toda",
     "北新横浜": "Kita-Shin-Yokohama",
-    "北春日部": "Kita-kasukabe",
+    "北春日部": "Kita-Kasukabe",
     "北朝霞": "Kita-Asaka",
     "北本": "Kitamoto",
     "北松戸": "Kita-Matsudo",
     "北柏": "Kita-Kashiwa",
-    "北池袋": "Kita-ikebukuro",
+    "北池袋": "Kita-Ikebukuro",
     "北浦和": "Kita-Urawa",
-    "北綾瀬": "Kita-ayase",
+    "北綾瀬": "Kita-Ayase",
     "北茅ケ崎": "Kita-Chigasaki",
     "北藤岡": "Kita-Fujioka",
     "北赤羽": "Kita-Akabane",
-    "北越谷": "Kita-koshigaya",
+    "北越谷": "Kita-Koshigaya",
     "北野": "Kitano",
     "北鎌倉": "Kita-Kamakura",
     "北鴻巣": "Kita-Konosu",
-    "北鹿沼": "Kita-kanuma",
+    "北鹿沼": "Kita-Kanuma",
     "十二橋": "Junikyo",
     "十日市場": "Tokaichiba",
     "十条": "Jujo",
@@ -30031,7 +30031,7 @@
     "千倉": "Chikura",
     "千川": "Senkawa",
     "千歳": "Chitose",
-    "千歳烏山": "Chitose-karasuyama",
+    "千歳烏山": "Chitose-Karasuyama",
     "千歳船橋": "Chitose-Funabashi",
     "千石": "Sengoku",
     "千葉": "Chiba",
@@ -30055,24 +30055,24 @@
     "南新宿": "Minami-Shinjuku",
     "南林間": "Minami-Rinkan",
     "南柏": "Minami-Kashiwa",
-    "南栗橋": "Minami-kurihashi",
+    "南栗橋": "Minami-Kurihashi",
     "南桜井": "Minami-Sakurai",
     "南橋本": "Minami-Hashimoto",
     "南流山": "Minami-Nagareyama",
     "南浦和": "Minami-Urawa",
     "南町田グランベリーパーク": "Minami-Machida Grandberry Park",
-    "南砂町": "Minami-sunamachi",
-    "南羽生": "Minami-hanyu",
+    "南砂町": "Minami-Sunamachi",
+    "南羽生": "Minami-Hanyu",
     "南船橋": "Minami-Funabashi",
-    "南行徳": "Minami-gyotoku",
+    "南行徳": "Minami-Gyotoku",
     "南越谷": "Minami-Koshigaya",
     "南酒々井": "Minami-Shisui",
-    "南阿佐ケ谷": "Minami-asagaya",
+    "南阿佐ケ谷": "Minami-Asagaya",
     "厚木": "Atsugi",
     "原ノ町": "Haranomachi",
     "原宿": "Harajuku",
     "原当麻": "Harataima",
-    "原木中山": "Baraki-nakayama",
+    "原木中山": "Baraki-Nakayama",
     "参宮橋": "Sangubashi",
     "双葉": "Futaba",
     "反町": "Tammachi",
@@ -30106,12 +30106,12 @@
     "四ツ谷": "Yotsuya",
     "四方津": "Shiotsu",
     "四街道": "Yotsukaido",
-    "四谷三丁目": "Yotsuya-sanchome",
-    "国会議事堂前": "Kokkai-gijidomae",
+    "四谷三丁目": "Yotsuya-Sanchome",
+    "国会議事堂前": "Kokkai-Gijidomae",
     "国分寺": "Kokubunji",
     "国府津": "Kozu",
     "国立": "Kunitachi",
-    "国立競技場": "Kokuritsu-kyogijo",
+    "国立競技場": "Kokuritsu-Kyogijo",
     "国谷": "Kuniya",
     "国道": "Kokudo",
     "国際展示場": "KokusaiTenjijo",
@@ -30121,8 +30121,8 @@
     "土樽": "Tsuchitaru",
     "土気": "Toke",
     "土浦": "Tsuchiura",
-    "地下鉄成増": "Chikatetsu-narimasu",
-    "地下鉄赤塚": "Chikatetsu-akatsuka",
+    "地下鉄成増": "Chikatetsu-Narimasu",
+    "地下鉄赤塚": "Chikatetsu-Akatsuka",
     "坂元": "Sakamoto",
     "坂戸": "Sakado",
     "堀ノ内": "Horinouchi",
@@ -30200,7 +30200,7 @@
     "姫宮": "Himemiya",
     "子安": "Koyasu",
     "学習院下": "Gakushuinshita",
-    "学芸大学": "Gakugei-daigaku",
+    "学芸大学": "Gakugei-Daigaku",
     "宇佐美": "Usami",
     "守谷": "Moriya",
     "安善": "Anzen",
@@ -30251,7 +30251,7 @@
     "小田急永山": "Odakyu-Nagayama",
     "小田急相模原": "Odakyu-Sagamihara",
     "小田栄": "Odasakae",
-    "小竹向原": "Kotake-mukaihara",
+    "小竹向原": "Kotake-Mukaihara",
     "小菅": "Kosuge",
     "小見川": "Omigawa",
     "小野上": "Onogami",
@@ -30337,8 +30337,8 @@
     "御成門": "Onarimon",
     "御茶ノ水": "Ochanomizu",
     "志木": "Shiki",
-    "志村三丁目": "Shimura-sanchome",
-    "志村坂上": "Shimura-sakaue",
+    "志村三丁目": "Shimura-Sanchome",
+    "志村坂上": "Shimura-Sakaue",
     "志茂": "Shimo",
     "恋ヶ窪": "Koigakubo",
     "恩田": "Onda",
@@ -30361,7 +30361,7 @@
     "戸越銀座": "Togoshi-ginza",
     "戸部": "Tobe",
     "所沢": "Tokorozawa",
-    "扇大橋": "Ogi-ohashi",
+    "扇大橋": "Ogi-Ohashi",
     "扇町": "Ogimachi",
     "折原": "Orihara",
     "押上": "Oshiage",
@@ -30371,22 +30371,22 @@
     "指扇": "Sashiogi",
     "敷島": "Shikishima",
     "新三郷": "Shim-Misato",
-    "新中野": "Shin-nakano",
+    "新中野": "Shin-Nakano",
     "新丸子": "Shin-maruko",
     "新井薬師前": "Araiyakushi-Mae",
     "新代田": "Shindaita",
-    "新伊勢崎": "Shin-isesaki",
+    "新伊勢崎": "Shin-Isesaki",
     "新八柱": "Shin-Yahashira",
-    "新古河": "Shin-koga",
+    "新古河": "Shin-Koga",
     "新地": "Shinchi",
     "新大久保": "Shin-Okubo",
-    "新大塚": "Shin-otsuka",
+    "新大塚": "Shin-Otsuka",
     "新大平下": "Shin-ohirashita",
     "新大津": "Shin-ōtsu",
     "新子安": "Shin-Koyasu",
     "新宿": "Shinjuku",
     "新宿三丁目": "Shinjuku-Sanchome",
-    "新宿御苑前": "Shinjuku-gyoemmae",
+    "新宿御苑前": "Shinjuku-Gyoemmae",
     "新宿西口": "Shinjuku-Nishiguchi",
     "新富町": "Shintomicho",
     "新小岩": "Shin-Koiwa",
@@ -30397,7 +30397,7 @@
     "新府": "Shimpu",
     "新座": "Niiza",
     "新御徒町": "Shin-Okachimachi",
-    "新御茶ノ水": "Shin-ochanomizu",
+    "新御茶ノ水": "Shin-Ochanomizu",
     "新所沢": "Shin-Tokorozawa",
     "新日本橋": "Shin-Nihonbashi",
     "新木": "Araki",
@@ -30405,10 +30405,10 @@
     "新杉田": "Shin-Sugita",
     "新松戸": "Shim-Matsudo",
     "新松田": "Shin-Matsuda",
-    "新板橋": "Shin-itabashi",
+    "新板橋": "Shin-Itabashi",
     "新柏": "Shin-Kashiwa",
-    "新栃木": "Shin-tochigi",
-    "新桐生": "Shin-kiryu",
+    "新栃木": "Shin-Tochigi",
+    "新桐生": "Shin-Kiryu",
     "新桜台": "Shin-Sakuradai",
     "新検見川": "Shin-Kemigawa",
     "新横浜": "Shin-Yokohama",
@@ -30428,15 +30428,15 @@
     "新船橋": "Shin-Funabashi",
     "新芝浦": "Shin-Shibaura",
     "新茂原": "Shim-Mobara",
-    "新藤原": "Shin-fujiwara",
+    "新藤原": "Shin-Fujiwara",
     "新豊洲": "Shin-toyosu",
-    "新越谷": "Shin-koshigaya",
+    "新越谷": "Shin-Koshigaya",
     "新鎌ヶ谷": "Shin-Kamagaya",
     "新馬場": "Shimbamba",
-    "新高円寺": "Shin-koenji",
-    "新高島平": "Shin-takashimadaira",
+    "新高円寺": "Shin-Koenji",
+    "新高島平": "Shin-Takashimadaira",
     "新高徳": "Shin-Takatoku",
-    "新鹿沼": "Shin-kanuma",
+    "新鹿沼": "Shin-Kanuma",
     "方南町": "Honancho",
     "旗の台": "Hatanodai",
     "日の出": "Hinode",
@@ -30488,17 +30488,17 @@
     "本厚木": "Hon-Atsugi",
     "本川越": "Hon-Kawagoe",
     "本庄": "Honjo",
-    "本所吾妻橋": "Honjo-azumabashi",
+    "本所吾妻橋": "Honjo-Azumabashi",
     "本納": "Honno",
     "本蓮沼": "Motohasunuma",
-    "本郷三丁目": "Hongo-sanchome",
+    "本郷三丁目": "Hongo-Sanchome",
     "本郷台": "Hongodai",
-    "本駒込": "Hon-komagome",
+    "本駒込": "Hon-Komagome",
     "本鵠沼": "Hon-Kugenuma",
-    "杉戸高野台": "Sugito-takanodai",
+    "杉戸高野台": "Sugito-Takanodai",
     "杉田": "Sugita",
     "来宮": "Kinomiya",
-    "東あずま": "Higashi-azuma",
+    "東あずま": "Higashi-Azuma",
     "東中神": "Higashi-Nakagami",
     "東中野": "Higashi-Nakano",
     "東久留米": "Higashi-Kurume",
@@ -30509,12 +30509,12 @@
     "東北沢": "Higashi-Kitazawa",
     "東十条": "Higashi-Jujo",
     "東千葉": "Higashi-Chiba",
-    "東向島": "Higashi-mukojima",
+    "東向島": "Higashi-Mukojima",
     "東吾野": "Higashi-Agano",
     "東大前": "Todaimae",
     "東大和市": "Higashi-Yamatoshi",
     "東大宮": "Higashi-Omiya",
-    "東大島": "Higashi-ojima",
+    "東大島": "Higashi-Ojima",
     "東小泉": "Higashi-koizumi",
     "東小金井": "Higashi-Koganei",
     "東尾久三丁目": "Higashi-ogu-sanchome",
@@ -30526,22 +30526,22 @@
     "東我孫子": "Higashi-Abiko",
     "東戸塚": "Higashi-Totsuka",
     "東所沢": "Higashi-Tokorozawa",
-    "東新宿": "Higashi-shinjuku",
-    "東日本橋": "Higashi-nihombashi",
+    "東新宿": "Higashi-Shinjuku",
+    "東日本橋": "Higashi-Nihombashi",
     "東村山": "Higashi-Murayama",
-    "東松原": "Higashi-matsubara",
-    "東松山": "Higashi-matsuyama",
+    "東松原": "Higashi-Matsubara",
+    "東松山": "Higashi-Matsuyama",
     "東松戸": "Higashi-Matsudo",
     "東林間": "Higashi-Rinkan",
     "東横田": "Higashi-Yokota",
     "東武ワールドスクウェア": "Tobu-World-Square",
-    "東武動物公園": "Tobu-dobutsu-koen",
-    "東武和泉": "Tobu-izumi",
-    "東武宇都宮": "Tobu-utsunomiya",
-    "東武日光": "Tobu-nikko",
-    "東武竹沢": "Tobu-takezawa",
-    "東武練馬": "Tobu-nerima",
-    "東武金崎": "Tobu-kanasaki",
+    "東武動物公園": "Tobu-Dobutsu-Koen",
+    "東武和泉": "Tobu-Izumi",
+    "東武宇都宮": "Tobu-Utsunomiya",
+    "東武日光": "Tobu-Nikko",
+    "東武竹沢": "Tobu-Takezawa",
+    "東武練馬": "Tobu-Nerima",
+    "東武金崎": "Tobu-Kanasaki",
     "東毛呂": "Higashi-moro",
     "東池袋": "Higashi-Ikebukuro",
     "東池袋四丁目": "Higashi-ikebukuro-yonchome",
@@ -30550,21 +30550,21 @@
     "東海": "Tokai",
     "東海大学前": "Tokaidaigaku-Mae",
     "東清川": "Higashi-Kiyokawa",
-    "東白楽": "Higashi-hakuraku",
+    "東白楽": "Higashi-Hakuraku",
     "東神奈川": "Higashi-Kanagawa",
     "東福生": "Higashi-Fussa",
     "東秋留": "Higashi-Akiru",
     "東船橋": "Higashi-Funabashi",
     "東逗子": "Higashi-Zushi",
     "東金": "Togane",
-    "東銀座": "Higashi-ginza",
+    "東銀座": "Higashi-Ginza",
     "東長崎": "Higashi-Nagasaki",
     "東門前": "Higashimonzen",
     "東陽町": "Toyocho",
     "東雲": "Shinonome",
     "東青梅": "Higashi-Ome",
     "東飯能": "Higashi-Hanno",
-    "東高円寺": "Higashi-koenji",
+    "東高円寺": "Higashi-Koenji",
     "東鷲宮": "Higashi-Washinomiya",
     "松が谷": "Matsugaya",
     "松久": "Matsuhisa",
@@ -30575,7 +30575,7 @@
     "松陰神社前": "Shoin-jinja-mae",
     "板倉東洋大前": "Itakura-toyodaimae",
     "板橋": "Itabashi",
-    "板橋区役所前": "Itabashi-kuyakushomae",
+    "板橋区役所前": "Itabashi-Kuyakushomae",
     "板橋本町": "Itabashihoncho",
     "板荷": "Itaga",
     "柏": "Kashiwa",
@@ -30596,7 +30596,7 @@
     "桜ヶ丘": "Sakuragaoka",
     "桜上水": "Sakurajōsui",
     "桜台": "Sakuradai",
-    "桜新町": "Sakura-shimmachi",
+    "桜新町": "Sakura-Shimmachi",
     "桜木町": "Sakuragicho",
     "桜田門": "Sakuradamon",
     "桜街道": "Sakurakaido",
@@ -30609,7 +30609,7 @@
     "梶が谷": "Kajigaya",
     "梶原": "Kajiwara",
     "森下": "Morishita",
-    "森林公園": "Shinrin-koen",
+    "森林公園": "Shinrin-Koen",
     "植田": "Ueda",
     "椎名町": "Shiinamachi",
     "椎柴": "Shiishiba",
@@ -30635,7 +30635,7 @@
     "武蔵小山": "Musashi-koyama",
     "武蔵小杉": "Musashi-Kosugi",
     "武蔵小金井": "Musashi-Koganei",
-    "武蔵嵐山": "Musashi-ranzan",
+    "武蔵嵐山": "Musashi-Ranzan",
     "武蔵引田": "Musashi-Hikida",
     "武蔵新城": "Musashi-Shinjo",
     "武蔵新田": "Musashi-nitta",
@@ -30713,7 +30713,7 @@
     "深谷": "Fukaya",
     "淵野辺": "Fuchinobe",
     "清水公園": "Shimizu-koen",
-    "清澄白河": "Kiyosumi-shirakawa",
+    "清澄白河": "Kiyosumi-Shirakawa",
     "清瀬": "Kiyose",
     "渋川": "Shibukawa",
     "渋沢": "Shibusawa",
@@ -30745,8 +30745,8 @@
     "牛久": "Ushiku",
     "牛浜": "Ushihama",
     "牛田": "Ushida",
-    "牛込柳町": "Ushigome-yanagicho",
-    "牛込神楽坂": "Ushigome-kagurazaka",
+    "牛込柳町": "Ushigome-Yanagicho",
+    "牛込神楽坂": "Ushigome-Kagurazaka",
     "物井": "Monoi",
     "狛江": "Komae",
     "狭山ヶ丘": "Sayamagaoka",
@@ -30759,7 +30759,7 @@
     "玉川学園前": "Tamagawagakuen-Mae",
     "玉淀": "Tamayodo",
     "王子": "Oji",
-    "王子神谷": "Oji-kamiya",
+    "王子神谷": "Oji-Kamiya",
     "王子駅前": "Oji-ekimae",
     "瑞江": "Mizue",
     "生田": "Ikuta",
@@ -30837,7 +30837,7 @@
     "神保原": "Jimbohara",
     "神保町": "Jimbocho",
     "神奈川": "Kanagawa",
-    "神奈川新町": "Kanagawa-shimmachi",
+    "神奈川新町": "Kanagawa-Shimmachi",
     "神楽坂": "Kagurazaka",
     "神武寺": "Jimmuji",
     "神泉": "Shinsen",
@@ -30897,7 +30897,7 @@
     "緑が丘": "Midorigaoka",
     "緑園都市": "Ryokuentoshi",
     "練馬": "Nerima",
-    "練馬春日町": "Nerima-kasugacho",
+    "練馬春日町": "Nerima-Kasugacho",
     "練馬高野台": "Nerima-Takanodai",
     "群馬原町": "Gumma-Haramachi",
     "群馬大津": "Gumma-Otsu",
@@ -30910,12 +30910,12 @@
     "羽田空港第１・第２ターミナル": "Haneda Airport Terminal 1 and 2",
     "羽田空港第３ターミナル": "Haneda Airport Terminal 3",
     "羽鳥": "Hatori",
-    "聖蹟桜ヶ丘": "Seiseki-sakuragaoka",
+    "聖蹟桜ヶ丘": "Seiseki-Sakuragaoka",
     "能見台": "Nōkendai",
     "自治医大": "Jichiidai",
     "自由が丘": "Jiyugaoka",
     "舎人": "Toneri",
-    "舎人公園": "Toneri-koen",
+    "舎人公園": "Toneri-Koen",
     "舞岡": "Maioka",
     "舞浜": "Maihama",
     "航空公園": "Koku-Koen",
@@ -30929,7 +30929,7 @@
     "花小金井": "Hana-Koganei",
     "花崎": "Hanasaki",
     "花月総持寺": "Kagetsusojiji",
-    "若松河田": "Wakamatsu-kawada",
+    "若松河田": "Wakamatsu-Kawada",
     "若林": "Wakabayashi",
     "若葉": "Wakaba",
     "若葉台": "Wakabadai",
@@ -30955,7 +30955,7 @@
     "菊川": "Kikukawa",
     "萩山": "Hagiyama",
     "落合": "Ochiai",
-    "落合南長崎": "Ochiai-minami-nagasaki",
+    "落合南長崎": "Ochiai-Minami-Nagasaki",
     "葛生": "Kuzu",
     "葛西": "Kasai",
     "葛西臨海公園": "Kasai-Rinkai Park",
@@ -30978,7 +30978,7 @@
     "藪塚": "Yabuzuka",
     "蘇我": "Soga",
     "虎ノ門": "Toranomon",
-    "虎ノ門ヒルズ": "Toranomon-hills",
+    "虎ノ門ヒルズ": "Toranomon-Hills",
     "螢田": "Hotaruda",
     "行川アイランド": "Namegawa-Island",
     "行徳": "Gyotoku",
@@ -30998,22 +30998,22 @@
     "西大井": "Nishi-Oi",
     "西大宮": "Nishi-Omiya",
     "西大家": "Nishi-Oya",
-    "西大島": "Nishi-ojima",
+    "西大島": "Nishi-Ojima",
     "西太子堂": "Nishi-taishido",
     "西小山": "Nishi-koyama",
     "西小泉": "Nishi-koizumi",
     "西川口": "Nishi-Kawaguchi",
     "西川田": "Nishikawada",
     "西川越": "Nishi-Kawagoe",
-    "西巣鴨": "Nishi-sugamo",
+    "西巣鴨": "Nishi-Sugamo",
     "西府": "Nishifu",
     "西所沢": "Nishi-Tokorozawa",
     "西新井": "Nishiarai",
     "西新井大師西": "Nishiaraidaishi-nishi",
     "西新宿": "Nishi-Shinjuku",
-    "西新宿五丁目": "Nishi-shinjuku-gochome",
+    "西新宿五丁目": "Nishi-Shinjuku-Gochome",
     "西日暮里": "Nishi-Nippori",
-    "西早稲田": "Nishi-waseda",
+    "西早稲田": "Nishi-Waseda",
     "西横浜": "Nishi-Yokohama",
     "西武園": "Seibuen",
     "西武園ゆうえんち": "Seibuen-Yuenchi",
@@ -31022,7 +31022,7 @@
     "西武球場前": "Seibukyujo-Mae",
     "西武秩父": "Seibu-Chichibu",
     "西武立川": "Seibu-Tachikawa",
-    "西永福": "Nishi-eifuku",
+    "西永福": "Nishi-Eifuku",
     "西浦和": "Nishi-Urawa",
     "西立川": "Nishi-Tachikawa",
     "西船橋": "Nishi-Funabashi",
@@ -31034,7 +31034,7 @@
     "西馬込": "Nishi-Magome",
     "西高島平": "Nishi-takahashimadaira",
     "要町": "Kanamecho",
-    "見沼代親水公園": "Minumadai-shinsuikoen",
+    "見沼代親水公園": "Minumadai-Shinsuikoen",
     "誉田": "Honda",
     "読売ランド前": "Yomiuri Land-Mae",
     "調布": "Chōfu",
@@ -31048,7 +31048,7 @@
     "豊洲": "Toyosu",
     "豊田": "Toyoda",
     "豪徳寺": "Gotokuji",
-    "赤土小学校前": "Akado-shogakkomae",
+    "赤土小学校前": "Akado-Shogakkomae",
     "赤坂": "Akasaka",
     "赤坂見附": "Akasaka-mitsuke",
     "赤城": "Akagi",
@@ -31065,7 +31065,7 @@
     "越谷レイクタウン": "Koshigaya Laketown",
     "足利市": "Ashikagashi",
     "足柄": "Ashigara",
-    "足立小台": "Adachi-odai",
+    "足立小台": "Adachi-Odai",
     "踊場": "Odoriba",
     "軍畑": "Ikusabata",
     "辰巳": "Tatsumi",
@@ -31073,14 +31073,14 @@
     "追浜": "Oppama",
     "逆井": "Sakasai",
     "逗子": "Zushi",
-    "逗子・葉山": "Zushi-hayama",
+    "逗子・葉山": "Zushi-Hayama",
     "逢隈": "Okuma",
     "逸見": "Hemi",
     "運河": "Unga",
     "那古船形": "Nakofunakata",
     "郷原": "Gobara",
     "都庁前": "Tochomae",
-    "都立大学": "Toritsu-daigaku",
+    "都立大学": "Toritsu-Daigaku",
     "都立家政": "Toritsu-Kasei",
     "都筑ふれあいの丘": "Tsuzuki-fureainooka",
     "都賀": "Tsuga",
@@ -31089,15 +31089,15 @@
     "酒折": "Sakaori",
     "野崎": "Nozaki",
     "野州大塚": "Yashu-Otsuka",
-    "野州山辺": "Yashu-yamabe",
+    "野州山辺": "Yashu-Yamabe",
     "野州平川": "Yashu-Hirakawa",
     "野方": "Nogata",
     "野木": "Nogi",
     "野田市": "Nodashi",
     "金子": "Kaneko",
     "金島": "Kanashima",
-    "金沢八景": "Kanazawa-hakkei",
-    "金沢文庫": "Kanazawa-bunko",
+    "金沢八景": "Kanazawa-Hakkei",
+    "金沢文庫": "Kanazawa-Bunko",
     "金町": "Kanamachi",
     "鈴木町": "Suzukichō",
     "鉢形": "Hachigata",
@@ -31117,7 +31117,7 @@
     "長浦": "Nagaura",
     "長者町": "Chojamachi",
     "長野原草津口": "Naganoharakusatsuguchi",
-    "門前仲町": "Monzen-nakacho",
+    "門前仲町": "Monzen-Nakacho",
     "門沢橋": "Kadosawabashi",
     "開成": "Kaisei",
     "間々田": "Mamada",
@@ -31154,7 +31154,7 @@
     "館林": "Tatebayashi",
     "香取": "Katori",
     "香川": "Kagawa",
-    "馬喰横山": "Bakuro-yokoyama",
+    "馬喰横山": "Bakuro-Yokoyama",
     "馬喰町": "Bakurocho",
     "馬堀海岸": "Maborikaigan",
     "馬来田": "Makuta",
@@ -31163,7 +31163,7 @@
     "馬込沢": "Magomezawa",
     "駒ケ嶺": "Komagamine",
     "駒場東大前": "Komaba-tōdaimae",
-    "駒沢大学": "Komazawa-daigaku",
+    "駒沢大学": "Komazawa-Daigaku",
     "駒込": "Komagome",
     "高井戸": "Takaido",
     "高円寺": "Koenji",
@@ -31207,7 +31207,7 @@
     "鶴瀬": "Tsuruse",
     "鶴見": "Tsurumi",
     "鶴見小野": "Tsurumiono",
-    "鶴見市場": "Tsurumi-ichiba",
+    "鶴見市場": "Tsurumi-Ichiba",
     "鶴間": "Tsuruma",
     "鷲宮": "Washinomiya",
     "鷹の台": "Takanodai",
