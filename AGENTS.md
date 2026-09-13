@@ -1214,3 +1214,14 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 **问题**：4.3.586 版本号被两个提交占用——本会话 e2fdadc（换乘指引清晰化）与并发会话 379f6b6（tourism 移除 22 个 0,0 活动 spot 452->430）先后都标 4.3.586，且 379f6b6 基于 e2fdadc 之上提交。
 **处理**：线上文件内容实际一致（379f6b6 在 e2fdadc 之上，?v=4.3.586 已能加载含全部改动的最终文件）；为遵守"版本号唯一 + 缓存键推进"铁律，将 4 页缓存键推进至 4.3.587（home/history/realtime/tourism-detail 各 20/8/22/15 处），确保任何中间缓存状态都被刷新。AGENTS.md 记录两个 4.3.586 并存事实备查。
 **验证**：4 页 bump 计数核对；git log 确认 379f6b6→e2fdadc→6854b3c 顺序；线上人工验收待用户。
+
+
+## 4.3.588（2026-09-13，换乘导航结果·行业对标优化）
+**用户指示**："你看看换乘导航的设计，然后看看行业中是怎么让任何人都能瞬间看懂"→"优化"——route 搜索结果展示按行业标杆（Yahoo!MAP 2022 改版 / Jorudan 乗換案内 / Transit）对标。
+**行业基准**：①乗車情報（路線・行先・のりば）掛乗車駅名直下；②駅名視覚階層（出/達駅最大）；③乗換動作零歧義（乗換 / 乗換不要）。
+**改动**：
+- js/search-ui.js renderResults：乗車段重构为两行——.journey-seg-head（路線徽章+種別+運行状態徽章+**方向徽章**）+ .journey-seg-route（乗車区間 from→to 弱化行）；方向由 .journey-seg-direction 纯文本改为 .journey-seg-direction-badge 绿色徽章，掛乗車段頂部（乗車駅直下，Yahoo 式掛位）
+- js/translations.js：换乘动作文案零歧义四语言——search_result.transfer 乗換→ここで乗換 / 换乘→在此换乘 / Transfer→Transfer here / 환승→여기서 환승；search_result.through 直通→乗換不要 / 直通→无需换乘 / Through→No transfer / 직통→환승 불필요
+- css/style.css：.journey-seg 改 column 两行结构；新增 .journey-seg-head（flex wrap）；.journey-seg-name 去 min-width:90px；.journey-seg-route flex:1→auto；.journey-seg-direction-badge 绿底绿框徽章（与 train_type 徽章同系）
+**验证**：node --check search-ui.js/translations.js 通过；4 页 bump 4.3.587→4.3.588（home/history/realtime/tourism-detail 各 20/8/22/15 处）；线上 DOM 检查（换乘/直通标签文案、方向徽章 class）待用户人工确认视觉
+**遗留**：発着時刻（需時刻表推算，档2）、乗換步行時間・待ち時間（需站内步行数据）未实施

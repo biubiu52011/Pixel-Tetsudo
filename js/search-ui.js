@@ -379,6 +379,7 @@
             var fromSt = window.RailwayDB && window.RailwayDB.resolveStationName ? window.RailwayDB.resolveStationName(seg.fromStation, lang) : (seg.fromStation || '');
             var toSt = window.RailwayDB && window.RailwayDB.resolveStationName ? window.RailwayDB.resolveStationName(seg.toStation, lang) : (seg.toStation || '');
             html += '<div class="journey-seg" data-seg-color="' + window.escapeHtml(lineColor || '') + '">';
+            html += '<div class="journey-seg-head">';
             html += '<span class="journey-seg-name">' + window.escapeHtml(lineName || '') + '</span>';
             if (seg.trainType) { html += '<span class="journey-seg-type">' + window.escapeHtml(t('train_type.' + seg.trainType)) + '</span>'; }
             // Running-status badge synced with Realtime page (delayed / suspended only)
@@ -397,14 +398,15 @@
               } catch(_e) {}
             }
             if (_stBadge) { html += _stBadge; }
-            html += '<span class="journey-seg-route">' + window.escapeHtml(fromSt) + ' &rarr; ' + window.escapeHtml(toSt) + '</span>';
+            // 方向徽章：乗車情報（行先）掛在乗車段頂部——Yahoo式乗車駅直下挂位；恒取段终点（行进方向）
+            // （线路站序反向乘车段曾误显示起点站名，例：新宿→渋谷 显示"新宿方面"，乘客视角应始终是驶向的站）
             if (seg.direction !== 0 && lineId) {
-              // 方向指引 = 本段终点（行进方向），而非线路站序符号：反向乘车段曾误显示起点站名
-              // （例：新宿→渋谷 显示"新宿方面"），乘客视角应始终是"驶向的站"。
               var _dirSt = seg.toStation;
               var _dirName = (window.RailwayDB && window.RailwayDB.resolveStationName) ? window.RailwayDB.resolveStationName(_dirSt, lang) : _dirSt;
-              html += '<span class="journey-seg-direction">' + window.escapeHtml(t('search.direction').replace('{s}', _dirName)) + '</span>';
+              html += '<span class="journey-seg-direction-badge">' + window.escapeHtml(t('search.direction').replace('{s}', _dirName)) + '</span>';
             }
+            html += '</div>';
+            html += '<span class="journey-seg-route">' + window.escapeHtml(fromSt) + ' &rarr; ' + window.escapeHtml(toSt) + '</span>';
             html += '</div>';
           }
         }
