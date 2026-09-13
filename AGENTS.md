@@ -1355,3 +1355,12 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 3. **数据真身教训（重要）**：先误改 `railway-data.file.js`（产物）被 gen-file-data.js 覆盖——**真身 = railway_data.json**（db-loader fetchRemote 拉 JSON；.file.js 仅 file:// 模式 bundle，由 `node data/core/gen-file-data.js` 生成）。改 JSON 后重新生成。另 trains.html 的 db-loader.js?v=4.3.547 严重滞后 → DB_CACHE_VERSION 跟随 script ?v=（stale-while-revalidate localStorage 缓存 key）→ 旧缓存遮蔽新数据（DataLayer txCount=7 旧）——bump 547→607 后 txCount=9 生效。
 **验证**：本地+线上 607——机场两站 195→118/135px、京成換乘图标（京成本線.png）×2 显示、鹤见/山手/中央回归正常、无 JS error。push 5dd275c。
 **教训**：改数据必须改 railway_data.json 真身 + gen-file-data.js 重新生成 + bump 引用 db-loader 的 ?v=（缓存 key）。
+
+## 4.3.610（2026-09-13，线路图统一两种尺寸可读设计）
+**用户指示**："统一一个两种大小都能很好阅读的设计"（手机+桌面同一套设计都好读）。
+**问题实证（模拟桌面容器 1280px）**：svg width=100% 无限拉伸——容器 1277px 时 svg 1265px、放大 4.26x、字 68px 巨大；山手线环线桌面（316.8 基准）同样 3.2x+ 巨大；直线型桌面 820 基准在更大容器下也漂移。移动端 4.3.605 已统一 297 基准 1.51x 好读。
+**统一设计（两层）**：
+1. **几何层**（js/trains-page.js）：桌面直线型画布基准 820→内容基准 297（GEOM.MOBILE_CONTENT_W，同移动/山手环线）——viewBox 密度两尺寸一致。桌面 sp（62/58/54/50）×1.75 ≈ 移动 sp（72/66/60/56）×1.51，站距渲染视觉一致。
+2. **CSS 层**（css/trains.css）：.tp-map-wrap svg 加 `max-width:520px; margin:0 auto` 封顶居中——桌面倍率 ~1.75x（字 28px），移动端容器 449px<520 不变（1.51x 字 24px）；成田等超宽大图（内容需求 620+）桌面 520 封顶。
+**验证**（本地+线上 610）：中央/山手 移动 1.51x(449) / 桌面 1.75x(520px 封顶)；成田大图桌面 520px 0.84x；无 JS error、无溢出。push 8f14b8b。
+**版本**：并发占用 608/609 → 本线用 610；trains.html bump trains-page/trains.css 546→610（db-loader 607 数据未改不动）。
