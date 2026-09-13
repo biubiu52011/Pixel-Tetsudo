@@ -6276,70 +6276,6 @@ window.RAILWAY_TOURISM = {
       }
     },
     {
-      "name": "一茶まつり",
-      "coord": [
-        35.78715,
-        139.79178
-      ],
-      "dist": "10 min walk",
-      "desc": "小林一茶にゆかりのある千住で開かれる祭り。",
-      "tags": [
-        "all",
-        "seasonal"
-      ],
-      "image": "../images/観光地/一茶まつり.jpg",
-      "bestTime": "開催日",
-      "hours": "",
-      "fee": "無料",
-      "tips": [
-        "東武伊勢崎線「竹ノ塚駅」から 徒歩10分"
-      ],
-      "name_i18n": {
-        "ja": "一茶まつり",
-        "zh": "一茶まつり",
-        "en": "一茶まつり",
-        "ko": "一茶まつり"
-      },
-      "desc_i18n": {
-        "ja": "小林一茶にゆかりのある千住で開かれる祭り。",
-        "zh": "在与小林一茶有渊源的千住举行的祭典。",
-        "en": "在与小林一茶有渊源的千住举行的祭典。",
-        "ko": "在与小林一茶有渊源的千住举行的祭典。"
-      },
-      "hours_i18n": {
-        "ja": "",
-        "zh": "",
-        "en": "",
-        "ko": ""
-      },
-      "fee_i18n": {
-        "ja": "無料",
-        "zh": "免费",
-        "en": "Free",
-        "ko": "무료"
-      },
-      "bestTime_i18n": {
-        "ja": "開催日",
-        "zh": "開催日",
-        "en": "開催日",
-        "ko": "開催日"
-      },
-      "tips_i18n": {
-        "ja": [
-          "東武伊勢崎線「竹ノ塚駅」から 徒歩10分"
-        ],
-        "zh": [
-          "竹ノ塚站步行10分钟"
-        ],
-        "en": [
-          "10 min walk from 竹ノ塚 Station"
-        ],
-        "ko": [
-          "竹ノ塚역에서 도보 10분"
-        ]
-      }
-    },
-    {
       "name": "江北氷川神社",
       "coord": [
         35.76969,
@@ -7104,70 +7040,6 @@ window.RAILWAY_TOURISM = {
         ],
         "ko": [
           "北千住역에서 도보 7분"
-        ]
-      }
-    },
-    {
-      "name": "だるま供養",
-      "coord": [
-        35.77973,
-        139.78018
-      ],
-      "dist": "3 min walk",
-      "desc": "毎年2月に西新井大師で行われるだるま供養。1年間お世話になっただるまを納め、新しいだるまを授かる。",
-      "tags": [
-        "all",
-        "seasonal"
-      ],
-      "image": "../images/観光地/だるま供養.jpg",
-      "bestTime": "開催日",
-      "hours": "",
-      "fee": "無料",
-      "tips": [
-        "東武大師線「大師前駅」から 徒歩3分"
-      ],
-      "name_i18n": {
-        "ja": "だるま供養",
-        "zh": "だるま供養",
-        "en": "だるま供養",
-        "ko": "だるま供養"
-      },
-      "desc_i18n": {
-        "ja": "毎年2月に西新井大師で行われるだるま供養。1年間お世話になっただるまを納め、新しいだるまを授かる。",
-        "zh": "每年2月在西新井大师举行的达摩供养法会。供奉使用一年的达摩，并请回新的达摩。",
-        "en": "每年2月在西新井大师举行的达摩供养法会。供奉使用一年的达摩，并请回新的达摩。",
-        "ko": "每年2月在西新井大师举行的达摩供养法会。供奉使用一年的达摩，并请回新的达摩。"
-      },
-      "hours_i18n": {
-        "ja": "",
-        "zh": "",
-        "en": "",
-        "ko": ""
-      },
-      "fee_i18n": {
-        "ja": "無料",
-        "zh": "免费",
-        "en": "Free",
-        "ko": "무료"
-      },
-      "bestTime_i18n": {
-        "ja": "開催日",
-        "zh": "開催日",
-        "en": "開催日",
-        "ko": "開催日"
-      },
-      "tips_i18n": {
-        "ja": [
-          "東武大師線「大師前駅」から 徒歩3分"
-        ],
-        "zh": [
-          "大師前站步行3分钟"
-        ],
-        "en": [
-          "3 min walk from 大師前 Station"
-        ],
-        "ko": [
-          "大師前역에서 도보 3분"
         ]
       }
     },
@@ -17970,7 +17842,7 @@ window.RAILWAY_TOURISM = {
         139.922131
       ],
       "dist": "妙典駅より徒歩10分",
-      "desc": "妙典にある徳川家ゆかりの寺で、晩年の宮本武蔵が留まった地。武蔵が描いた「八方にらみの達磨図」は11月に公開。",
+      "desc": "妙典にある徳川家ゆかりの寺で、晩年の宮本武蔵が留まった地。武蔵が描いた「八方にらみの達磨図」は11月に公開。 行徳三十三観音めぐりの一番札所としても知られる。",
       "tags": [
         "all",
         "history",
@@ -17992,10 +17864,10 @@ window.RAILWAY_TOURISM = {
         "ko": "카이간잔 토쿠겐지"
       },
       "desc_i18n": {
-        "ja": "妙典にある徳川家ゆかりの寺で、晩年の宮本武蔵が留まった地。武蔵が描いた「八方にらみの達磨図」は11月に公開。",
-        "zh": "位于妙典、与德川家渊源深厚的寺院，是晚年宫本武藏隐居之地。武藏所绘「八方睨み达摩图」11月公开。",
-        "en": "A temple in Myoden linked to the Tokugawa and the place where an aged Musashi Miyamoto once stayed; his 'Eight-Direction Glance Daruma' is shown once a year in November.",
-        "ko": "묘덴의 도쿠가와 가문 인연 사찰. 노년의 미야모토 무사시가 머문 곳. 무사시의 '팔방노려 다마마도'는 11월 공개."
+        "ja": "妙典にある徳川家ゆかりの寺で、晩年の宮本武蔵が留まった地。武蔵が描いた「八方にらみの達磨図」は11月に公開。 行徳三十三観音めぐりの一番札所としても知られる。",
+        "zh": "位于妙典、与德川家渊源深厚的寺院，是晚年宫本武藏隐居之地。武藏所绘「八方睨み达摩图」11月公开。 也是行德三十三观音巡礼的第一番札所。",
+        "en": "A temple in Myoden linked to the Tokugawa and the place where an aged Musashi Miyamoto once stayed; his 'Eight-Direction Glance Daruma' is shown once a year in November. Also known as the No.1 temple of the Gyotoku 33 Kannon pilgrimage.",
+        "ko": "묘덴의 도쿠가와 가문 인연 사찰. 노년의 미야모토 무사시가 머문 곳. 무사시의 '팔방노려 다마마도'는 11월 공개. 교토쿠 33관음 순례의 제1번 예소로도 알려져 있다."
       },
       "hours_i18n": {
         "ja": "参拝自由／寺宝公開は11月16日",
@@ -22736,80 +22608,6 @@ window.RAILWAY_TOURISM = {
           "zh": "有望远镜更方便",
           "en": "Binoculars help",
           "ko": "쌍안경 있으면 편리"
-        }
-      ]
-    },
-    {
-      "name": "一、海厳山 徳願寺",
-      "coord": [
-        35.695329,
-        139.922142
-      ],
-      "dist": "妙典・行徳エリア寺町通り",
-      "desc": "成田山へ続く寺町通りに立つお寺のひとつ。33体の観音巡り発祥の地として知られる。",
-      "tags": [
-        "all",
-        "history",
-        "nature",
-        "shrine"
-      ],
-      "image": "../images/観光地/一、海厳山 徳願寺.jpg",
-      "bestTime": "終日",
-      "hours": "境内自由見学可",
-      "fee": "入場・体験は実費",
-      "tips": [
-        "三十三観音巡りの起点に",
-        "寺町通りの街並みを散策",
-        "江戸時代の参詣道を体感"
-      ],
-      "name_i18n": {
-        "ja": "一、海厳山 徳願寺",
-        "zh": "海严山德愿寺",
-        "en": "Tokugen-ji",
-        "ko": "도쿠겐지"
-      },
-      "desc_i18n": {
-        "ja": "成田山へ続く寺町通りに立つお寺のひとつ。33体の観音巡り発祥の地として知られる。",
-        "zh": "坐落通往成田山寺町街道的古刹之一，为33观音巡礼发祥地。",
-        "en": "One of the temples lining the Teramachi approach to Naritasan, known as the origin of the 33-Kannon pilgrimage.",
-        "ko": "나리타산으로 이어지는 데라마치 거리의 사찰 중 하나, 33관음 순례 발상지로 알려짐."
-      },
-      "hours_i18n": {
-        "ja": "境内自由見学可",
-        "zh": "境内可自由参观",
-        "en": "Grounds freely visitable",
-        "ko": "경내 자유 관람 가능"
-      },
-      "fee_i18n": {
-        "ja": "入場・体験は実費",
-        "zh": "入场与体验自费",
-        "en": "Admission and experience at your own expense",
-        "ko": "입장·체험은 별도"
-      },
-      "bestTime_i18n": {
-        "ja": "終日",
-        "zh": "全天",
-        "en": "All day",
-        "ko": "종일"
-      },
-      "tips_i18n": [
-        {
-          "ja": "三十三観音巡りの起点に",
-          "zh": "作为33观音巡礼起点",
-          "en": "Start of the 33-Kannon circuit",
-          "ko": "33관음 순례 기점으로"
-        },
-        {
-          "ja": "寺町通りの街並みを散策",
-          "zh": "漫步寺町街道街景",
-          "en": "Stroll the Teramachi streetscape",
-          "ko": "데라마치 거리 풍경 산책"
-        },
-        {
-          "ja": "江戸時代の参詣道を体感",
-          "zh": "体验江户时代参拜道",
-          "en": "Feel the Edo-era pilgrim road",
-          "ko": "에도 시대 참배길 체험"
         }
       ]
     },
@@ -30500,78 +30298,6 @@ window.RAILWAY_TOURISM = {
           "zh": "可试奏。",
           "en": "You can play them.",
           "ko": "시연 OK."
-        }
-      ]
-    },
-    {
-      "name": "浅草たい焼き工房　求楽（ぐらく）",
-      "coord": [
-        35.71210620751336,
-        139.7899783324342
-      ],
-      "dist": "田原町駅 徒歩4分",
-      "desc": "生地から自分で作るたい焼き体験が人気。持ち込み具材も可。",
-      "tags": [
-        "all",
-        "food"
-      ],
-      "image": "../images/観光地/浅草たい焼き工房 求楽（ぐらく）.jpg",
-      "bestTime": "昼",
-      "hours": "テイクアウト11:00～18:00、たい焼き体験は要予約／不定休",
-      "fee": "飲食は実費",
-      "tips": [
-        "生地から手作り。",
-        "キーマカレーやキムチチーズも。",
-        "持ち込み具材もOK。"
-      ],
-      "name_i18n": {
-        "ja": "浅草たい焼き工房 求楽",
-        "zh": "浅草鲷鱼烧工房 求乐",
-        "en": "Asakusa Taiyaki Kobo Guraku",
-        "ko": "아사쿠사 타이야키 공방 구라쿠"
-      },
-      "desc_i18n": {
-        "ja": "自分で作るたい焼き体験の店。",
-        "zh": "可从头制作鲷鱼烧的工房。",
-        "en": "A studio where you make taiyaki from scratch.",
-        "ko": "직접 만드는 타이야키 체험 공방."
-      },
-      "hours_i18n": {
-        "ja": "テイクアウト11:00～18:00、たい焼き体験は要予約／不定休",
-        "zh": "テイクアウト11:00～18:00、たい焼き体験は要予約／不定休",
-        "en": "テイクアウト11:00～18:00、たい焼き体験は要予約／不定休",
-        "ko": "テイクアウト11:00～18:00、たい焼き体験は要予約／不定休"
-      },
-      "fee_i18n": {
-        "ja": "飲食は実費",
-        "zh": "餐饮自费",
-        "en": "Food and drinks at your own expense",
-        "ko": "식음료 개별 부담"
-      },
-      "bestTime_i18n": {
-        "ja": "昼",
-        "zh": "白天",
-        "en": "Daytime",
-        "ko": "낮"
-      },
-      "tips_i18n": [
-        {
-          "ja": "生地から手作り。",
-          "zh": "从面团做起。",
-          "en": "Make the batter too.",
-          "ko": "반죽부터 직접."
-        },
-        {
-          "ja": "変わり種具材。",
-          "zh": "特色馅料。",
-          "en": "Unique fillings.",
-          "ko": "이색 소."
-        },
-        {
-          "ja": "持ち込み具材OK。",
-          "zh": "自带馅料也可。",
-          "en": "Bring your own fillings.",
-          "ko": "재료 지참 OK."
         }
       ]
     },
