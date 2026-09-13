@@ -1323,3 +1323,10 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 **验证**：本地+线上（v=4.3.603、注意 CDN/浏览器缓存需全新 query）——北千住→取手 快速直通 1番線 33分（旧：緩行 36分）、松戸→上野 快速 3番線 22分（旧：緩行 6番線 23分）、柏→上野 快速 3番線 31分（旧：緩行 1番線 35分）；回帰 千葉→東京 3・4・5・6番線/川崎→横浜 1番線 正常。push 4aaa488 + 62d1b14（bump 603）。
 **扩展方式**：其他快速/特急线（中央快速/京浜東北快速 等）有通過駅时按同样方式向 EXPRESS_SKIP_STATIONS 追加（需公式停站表确认）。
 **缓存教训**：GitHub Pages 同 URL CDN 更新有延迟，浏览器会缓存旧 JS——**验证必须用全新 query（?v=X 递增），且 bump 后等 ~90s 再用全新版本号验证**。
+
+## 4.3.604（2026-09-13，多语言站名搜索修复·孤儿数据接入）
+**用户指示**："我的意思是你那简体和繁体有差别的还有韩语直接在对应语言处搜索"——要求用对应语言站名搜索验证，暴露：简体中文（涩谷/松户/御茶之水）与韩文（키타센쥬/토리데）站名搜索全部「未找到路线」，英文显示名（Kitasenju）也不解析。
+**根因实证**：`data/core/station-i18n.file.js`（window.RAILWAY_I18N，3135 站 4 语言）是**孤儿文件**——全项目 grep 无任何页面/JS 引用（历史重构遗留），station-resolver.js 期待 `_stationI18N/STATION_I18N` 均不存在 → _zhToCanon/_koToCanon 全空 → 简体/韩文 NOT_FOUND；英文 _enToJp 仅从 name_map 构建（键=日文），en 显示名（Kitasenju）不在其中 → 也不解析。日文站名正常（_jpToCanon 走 RailwayDB.resolveStationName，不依赖 i18n 数据）所以此前一直未暴露。
+**修复**：①home.html 在 db-loader.js 后、station-resolver.js 前接入 `station-i18n.file.js`（+bump 604）；②station-resolver.js i18n 读取兼容 `window.RAILWAY_I18N`；③新增 `_enToCanon` 反向索引（i18n en 字段→canonical ID，_asciiLower 归一），resolve() 非日文分支在 _enToJp 后追加 _enToCanon 精确匹配。
+**验证**：resolve 直测 10 站全 EXACT（涩谷/御茶之水/松户/키타센쥬/토리데/시부야/치바/Kitasenju/Toride/北千住）；本地+线上端到端——ZH 涩谷→御茶之水 3号站台+7・8号站台、KO 키타센쥬→토리데 1번 승강장、EN Kitasenju→Toride Platform 1、回归 ZH 北千住→取手 1号站台。push 9968116。
+**遗留**：繁体中文（澀谷/御茶ノ水/松戸）未做繁简转换归一——zh 字段为简体，繁体输入走日文分支可能部分命中（日文汉字同形站）或 NOT_FOUND，待用户拍板是否加繁→简归一。
