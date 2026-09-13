@@ -3032,7 +3032,7 @@ window.RAILWAY_TOURISM = {
     139.84763
    ],
    "dist": "",
-   "desc": "足立区大谷田の日帰り温泉施設。",
+   "desc": "足立区大谷田にある天然温泉の日帰り施設。露天風呂やサウナを備え、区民の憩いの場となっている。",
    "tags": [
     "all"
    ],
@@ -3608,7 +3608,7 @@ window.RAILWAY_TOURISM = {
     139.82291
    ],
    "dist": "",
-   "desc": "足立区六町にある六町神社。地域の鎮守として親しまれている。",
+   "desc": "足立区六町の住宅街に建つ神社。地域の鎮守として古くから親しまれている。",
    "tags": [
     "all",
     "shrine"
@@ -3627,10 +3627,10 @@ window.RAILWAY_TOURISM = {
     "ko": "六町神社"
    },
    "desc_i18n": {
-    "ja": "足立区六町にある六町神社。地域の鎮守として親しまれている。",
-    "zh": "位于足立区六町的六町神社，作为地区守护神社深受喜爱。",
-    "en": "六町神社 in 六町, Adachi-ku, cherished as the local guardian shrine.",
-    "ko": "아다치구 六町에 있는 六町神社로, 지역 수호신으로 사랑받는 신사예요."
+    "ja": "足立区六町の住宅街に建つ神社。地域の鎮守として古くから親しまれている。",
+    "zh": "坐落于足立区六町住宅区的神社，作为地区守护神自古以来深受爱戴。",
+    "en": "A shrine in a residential neighborhood of Rokucho, Adachi-ku, long cherished as the local guardian.",
+    "ko": "아다치구 六町 주택가에 자리한 신사로, 지역 수호신으로 오랫동안 사랑받아요."
    },
    "hours_i18n": {
     "ja": "参拝自由（境内）",
@@ -3672,7 +3672,7 @@ window.RAILWAY_TOURISM = {
     139.78886
    ],
    "dist": "5 min walk",
-   "desc": "足立区伊興本町にある東岳寺。",
+   "desc": "足立区伊興本町にある曹洞宗系の単立の寺。閑静な住宅地に建ち、地域の御堂として親しまれる。",
    "tags": [
     "all",
     "history"
@@ -3736,7 +3736,7 @@ window.RAILWAY_TOURISM = {
     139.81137
    ],
    "dist": "19 min walk",
-   "desc": "足立区花畑にある実性寺。",
+   "desc": "足立区花畑にある浄土宗の寺。徳川秀忠・家光ゆかりで、朱塗りの山門と葵の紋が特徴。",
    "tags": [
     "all",
     "history"
@@ -3800,7 +3800,7 @@ window.RAILWAY_TOURISM = {
     139.8213
    ],
    "dist": "16 min walk",
-   "desc": "足立区南花畑にある長建寺。",
+   "desc": "足立区南花畑にある浄土宗の寺。隆光山正受院と号し、阿弥陀如来を本尊とする。",
    "tags": [
     "all",
     "history"
@@ -3992,7 +3992,7 @@ window.RAILWAY_TOURISM = {
     139.7892
    ],
    "dist": "13 min walk",
-   "desc": "足立区東伊興にある浄光寺。",
+   "desc": "足立区東伊興にある浄土真宗本願寺派の寺。もとは築地本願寺の寺中寺と伝わる。",
    "tags": [
     "all",
     "history"
@@ -4056,7 +4056,7 @@ window.RAILWAY_TOURISM = {
     139.79033
    ],
    "dist": "12 min walk",
-   "desc": "足立区東伊興にある法受寺。",
+   "desc": "足立区東伊興にある浄土宗の寺。普賢山新幡随院と号し、伊興七福神の布袋尊を祀る。",
    "tags": [
     "all",
     "history"
@@ -4120,7 +4120,7 @@ window.RAILWAY_TOURISM = {
     139.80373
    ],
    "dist": "2 min walk",
-   "desc": "足立区千住にある金蔵寺。",
+   "desc": "北千住駅近くにある真言宗豊山派の寺。本尊は閻魔大王で、春の閻魔祭が知られる。",
    "tags": [
     "all",
     "history"
@@ -4248,7 +4248,7 @@ window.RAILWAY_TOURISM = {
     139.76769
    ],
    "dist": "5 min walk",
-   "desc": "足立区入谷にある南光寺。",
+   "desc": "足立区入谷にある寺。入谷地区の住宅街に建つ、地域の人々に親しまれる小さな御堂。",
    "tags": [
     "all",
     "history"
@@ -4312,7 +4312,7 @@ window.RAILWAY_TOURISM = {
     139.78241
    ],
    "dist": "11 min walk",
-   "desc": "足立区伊興にある源正寺。",
+   "desc": "足立区伊興にある真言宗豊山派の寺。無量山と号し、伊興七福神の恵比寿を祀る札所。",
    "tags": [
     "all",
     "history"
@@ -4568,7 +4568,7 @@ window.RAILWAY_TOURISM = {
     139.79178
    ],
    "dist": "10 min walk",
-   "desc": "足立区六月にある炎天寺。",
+   "desc": "足立区六月にある真言宗豊山派の寺。源頼義・義家ゆかりで、地名「六月」の由来とも伝わる。",
    "tags": [
     "all",
     "history"
@@ -4760,7 +4760,7 @@ window.RAILWAY_TOURISM = {
     139.82098
    ],
    "dist": "8 min walk",
-   "desc": "足立区綾瀬にある薬師寺（綾瀬）。",
+   "desc": "足立区綾瀬にある真言宗豊山派の寺。宝珠山普門院と号し、薬師如来を本尊とする。",
    "tags": [
     "all",
     "history"
@@ -4824,7 +4824,7 @@ window.RAILWAY_TOURISM = {
     139.79906
    ],
    "dist": "12 min walk",
-   "desc": "足立区梅田にある善立寺。",
+   "desc": "足立区梅田にある日蓮宗の寺。大光山と号し、古くから地域に伝わる由緒ある御堂。",
    "tags": [
     "all",
     "history"
@@ -4952,7 +4952,7 @@ window.RAILWAY_TOURISM = {
     139.77675
    ],
    "dist": "8 min walk",
-   "desc": "足立区扇にある瑞応寺。",
+   "desc": "足立区扇にある真言宗豊山派の寺。500年以上の歴史を持ち、夕顔観音で知られる。",
    "tags": [
     "all",
     "history"
@@ -5016,7 +5016,7 @@ window.RAILWAY_TOURISM = {
     139.76413
    ],
    "dist": "8 min walk",
-   "desc": "足立区江北にある恵明寺。",
+   "desc": "足立区江北にある真言宗系の寺。宮城山円明院と号し、江戸六阿弥陀の2番札所。",
    "tags": [
     "all",
     "history"
@@ -5080,7 +5080,7 @@ window.RAILWAY_TOURISM = {
     139.80608
    ],
    "dist": "7 min walk",
-   "desc": "足立区足立にある高砂神社。地域の鎮守として親しまれている。",
+   "desc": "足立区足立の住宅街に建つ神社。地域の鎮守として古くから親しまれている。",
    "tags": [
     "all",
     "shrine"
@@ -5099,10 +5099,10 @@ window.RAILWAY_TOURISM = {
     "ko": "高砂神社"
    },
    "desc_i18n": {
-    "ja": "足立区足立にある高砂神社。地域の鎮守として親しまれている。",
-    "zh": "位于足立区足立的高砂神社，作为地区守护神社深受喜爱。",
-    "en": "高砂神社 in 足立, Adachi-ku, cherished as the local guardian shrine.",
-    "ko": "아다치구 足立에 있는 高砂神社로, 지역 수호신으로 사랑받는 신사예요."
+    "ja": "足立区足立の住宅街に建つ神社。地域の鎮守として古くから親しまれている。",
+    "zh": "坐落于足立区足立住宅区的神社，作为地区守护神自古以来深受爱戴。",
+    "en": "A shrine in a residential area of Adachi, Adachi-ku, long cherished as the local guardian.",
+    "ko": "아다치구 足立 주택가에 자리한 신사로, 지역 수호신으로 오랫동안 사랑받아요."
    },
    "hours_i18n": {
     "ja": "参拝自由（境内）",
@@ -5144,7 +5144,7 @@ window.RAILWAY_TOURISM = {
     139.7832
    ],
    "dist": "11 min walk",
-   "desc": "足立区伊興にある薬師寺（伊興）。",
+   "desc": "足立区伊興にある曹洞宗の寺。伊興の里山に建つ、静かな地域の御堂。",
    "tags": [
     "all",
     "history"
@@ -5208,7 +5208,7 @@ window.RAILWAY_TOURISM = {
     139.78511
    ],
    "dist": "4 min walk",
-   "desc": "足立区栗原にある満願寺。",
+   "desc": "足立区栗原にある真言宗豊山派の寺。西新井大師の近く、住宅地に佇む。",
    "tags": [
     "all",
     "history"
@@ -5400,7 +5400,7 @@ window.RAILWAY_TOURISM = {
     139.82111
    ],
    "dist": "5 min walk",
-   "desc": "足立区綾瀬にある綾瀬神社。地域の鎮守として親しまれている。",
+   "desc": "足立区綾瀬の街なかに建つ神社。地域の鎮守として古くから親しまれている。",
    "tags": [
     "all",
     "shrine"
@@ -5419,10 +5419,10 @@ window.RAILWAY_TOURISM = {
     "ko": "綾瀬神社"
    },
    "desc_i18n": {
-    "ja": "足立区綾瀬にある綾瀬神社。地域の鎮守として親しまれている。",
-    "zh": "位于足立区綾瀬的綾瀬神社，作为地区守护神社深受喜爱。",
-    "en": "綾瀬神社 in 綾瀬, Adachi-ku, cherished as the local guardian shrine.",
-    "ko": "아다치구 綾瀬에 있는 綾瀬神社로, 지역 수호신으로 사랑받는 신사예요."
+    "ja": "足立区綾瀬の街なかに建つ神社。地域の鎮守として古くから親しまれている。",
+    "zh": "坐落于足立区绫濑街区的神社，作为地区守护神自古以来深受爱戴。",
+    "en": "A shrine in the streets of Ayase, Adachi-ku, long cherished as the local guardian.",
+    "ko": "아다치구 綾瀬 거리에 자리한 신사로, 지역 수호신으로 오랫동안 사랑받아요."
    },
    "hours_i18n": {
     "ja": "参拝自由（境内）",
@@ -5783,7 +5783,7 @@ window.RAILWAY_TOURISM = {
     139.79945
    ],
    "dist": "7 min walk",
-   "desc": "足立区千住にある慈眼寺（千住）。",
+   "desc": "千住にある新義真言宗の寺。千龍山妙智院と号し、正和3年(1314)創建と伝わる。",
    "tags": [
     "all",
     "history"
@@ -5847,7 +5847,7 @@ window.RAILWAY_TOURISM = {
     139.83607
    ],
    "dist": "18 min walk",
-   "desc": "足立区神明にある天祖神社。地域の鎮守として親しまれている。",
+   "desc": "足立区神明の住宅街に建つ神社。地域の鎮守として古くから親しまれている。",
    "tags": [
     "all",
     "shrine"
@@ -5866,10 +5866,10 @@ window.RAILWAY_TOURISM = {
     "ko": "天祖神社"
    },
    "desc_i18n": {
-    "ja": "足立区神明にある天祖神社。地域の鎮守として親しまれている。",
-    "zh": "位于足立区神明的天祖神社，作为地区守护神社深受喜爱。",
-    "en": "天祖神社 in 神明, Adachi-ku, cherished as the local guardian shrine.",
-    "ko": "아다치구 神明에 있는 天祖神社로, 지역 수호신으로 사랑받는 신사예요."
+    "ja": "足立区神明の住宅街に建つ神社。地域の鎮守として古くから親しまれている。",
+    "zh": "坐落于足立区神明住宅区的神社，作为地区守护神自古以来深受爱戴。",
+    "en": "A shrine in a residential area of Shinmei, Adachi-ku, long cherished as the local guardian.",
+    "ko": "아다치구 神明 주택가에 자리한 신사로, 지역 수호신으로 오랫동안 사랑받아요."
    },
    "hours_i18n": {
     "ja": "参拝自由（境内）",
@@ -5975,7 +5975,7 @@ window.RAILWAY_TOURISM = {
     139.79779
    ],
    "dist": "7 min walk",
-   "desc": "足立区千住中居町にある常護寺。",
+   "desc": "千住中居町にある浄土真宗系の寺。千邑山と号し、下町の路地裏に佇む。",
    "tags": [
     "all",
     "history"
@@ -6104,7 +6104,7 @@ window.RAILWAY_TOURISM = {
     139.80473
    ],
    "dist": "",
-   "desc": "毎年7月、荒川河川敷で開催される足立区の夏の花火大会。",
+   "desc": "毎年7月、荒川河川敷で開催される足立区を代表する夏の風物詩。多くの観客でにぎわう。",
    "tags": [
     "all",
     "seasonal"
@@ -6123,10 +6123,10 @@ window.RAILWAY_TOURISM = {
     "ko": "足立の花火"
    },
    "desc_i18n": {
-    "ja": "毎年7月、荒川河川敷で開催される足立区の夏の花火大会。",
-    "zh": "每年7月在荒川河岸举行的足立区夏季烟花大会。",
-    "en": "每年7月在荒川河岸举行的足立区夏季烟花大会。",
-    "ko": "每年7月在荒川河岸举行的足立区夏季烟花大会。"
+    "ja": "毎年7月、荒川河川敷で開催される足立区を代表する夏の風物詩。多くの観客でにぎわう。",
+    "zh": "每年7月在荒川河岸举行的足立区代表性夏日烟花大会，吸引众多观众。",
+    "en": "Adachi-ku's signature summer fireworks show held every July on the Arakawa riverbank, drawing big crowds.",
+    "ko": "매년 7월 아라카와 강변에서 열리는 아다치구 대표 여름 축제로, 많은 관람객이 찾아요."
    },
    "hours_i18n": {
     "ja": "",
@@ -6168,7 +6168,7 @@ window.RAILWAY_TOURISM = {
     139.80093
    ],
    "dist": "15 min walk",
-   "desc": "西保木間・舎人地区に伝わる伝統の祭り。",
+   "desc": "西保木間の大乗院で1月に行われる伝統行事。ワラで作った大蛇をイチョウの木に掲げ、五穀豊穣を祈る足立区無形民俗文化財。",
    "tags": [
     "all",
     "seasonal"
@@ -6232,7 +6232,7 @@ window.RAILWAY_TOURISM = {
     139.81877
    ],
    "dist": "25 min walk",
-   "desc": "足立区花畑にある縁起寺 花畑阿弥陀堂。",
+   "desc": "足立区花畑にある真宗木辺派の寺。天界山と号し、本尊は国内でも珍しい石仏の阿弥陀如来。",
    "tags": [
     "all",
     "history"
@@ -6744,7 +6744,7 @@ window.RAILWAY_TOURISM = {
     139.80101
    ],
    "dist": "4 min walk",
-   "desc": "千住で行われる閻魔にまつわる祭礼。",
+   "desc": "千住の金蔵寺で行われる閻魔大王にまつわる春の祭礼。江戸時代から続く下町の信仰行事。",
    "tags": [
     "all",
     "seasonal"
@@ -6808,7 +6808,7 @@ window.RAILWAY_TOURISM = {
     139.74731
    ],
    "dist": "17 min walk",
-   "desc": "鹿浜地区に伝わる獅子舞の奉納行事。",
+   "desc": "鹿浜地区の4社で輪番奉納される三匹獅子舞。江戸時代から続く足立区無形民俗文化財。",
    "tags": [
     "all",
     "seasonal"
@@ -7589,7 +7589,7 @@ window.RAILWAY_TOURISM = {
     139.71
    ],
    "dist": "5 min walk",
-   "desc": "広大な庭園で桜・紅葉が美しい。都会のオアシスとして人気。",
+   "desc": "皇室ゆかりの歴史ある庭園で、桜・紅葉が美しい。都心のど真ん中に広がる都会のオアシス。",
    "tags": [
     "all",
     "nature",
@@ -7610,10 +7610,10 @@ window.RAILWAY_TOURISM = {
     "ko": "신주쿠 교엔"
    },
    "desc_i18n": {
-    "ja": "広大な庭園で桜・紅葉が美しい。都会のオアシスとして人気。",
-    "zh": "广阔的庭园，樱花、红叶很美。作为都市绿洲很受欢迎。",
-    "en": "A vast garden famous for cherry blossoms and autumn leaves. A popular urban oasis.",
-    "ko": "드넓은 정원으로 벚꽃과 단풍이 아름다워요. 도심의 오아시스로 인기가 많아요."
+    "ja": "皇室ゆかりの歴史ある庭園で、桜・紅葉が美しい。都心のど真ん中に広がる都会のオアシス。",
+    "zh": "与皇室渊源深厚的历史名园，樱花与红叶绝美，是市中心的都市绿洲。",
+    "en": "A historic garden linked to the Imperial Household, famed for cherry blossoms and autumn leaves; an oasis in central Tokyo.",
+    "ko": "천왕실과 인연 깊은 역사 정원으로 벚꽃·단풍이 아름답고, 도심 속 오아시스예요."
    },
    "hours_i18n": {
     "ja": "9:00～17:30",
@@ -8719,7 +8719,7 @@ window.RAILWAY_TOURISM = {
     139.637
    ],
    "dist": "8 min walk",
-   "desc": "東京のほぼ中央に鎮座する大社。広い境内と梅・桜が美しい。",
+   "desc": "東京のほぼ中央に鎮座する大社。広い境内に梅や桜が咲き、初詣にも多くの参拝客が訪れる。",
    "tags": [
     "all",
     "shrine",
@@ -8740,10 +8740,10 @@ window.RAILWAY_TOURISM = {
     "ko": "오미야 하치만구"
    },
    "desc_i18n": {
-    "ja": "東京のほぼ中央に鎮座する大社。広い境内と梅・桜が美しい。",
-    "zh": "镇座于东京几乎正中央的大神社。广阔的院内与梅花、樱花很美。",
-    "en": "A grand shrine at the center of Tokyo. Spacious grounds with beautiful plum and cherry blossoms.",
-    "ko": "도쿄의 거의 중앙에 자리한 큰 신사예요. 넓은 경내와 매화・벚꽃이 아름다워요."
+    "ja": "東京のほぼ中央に鎮座する大社。広い境内に梅や桜が咲き、初詣にも多くの参拝客が訪れる。",
+    "zh": "镇座于东京几乎正中央的大神社，院内梅花樱花盛开，新年参拜者众多。",
+    "en": "A grand shrine near the center of Tokyo; plum and cherry blossoms fill its spacious grounds, crowded on New Year's visits.",
+    "ko": "도쿄 거의 중앙에 자리한 큰 신사. 넓은 경내에 매화와 벚꽃이 피고, 신년 참배객이 많이 찾아요."
    },
    "hours_i18n": {
     "ja": "6:00～18:00",
@@ -8794,7 +8794,7 @@ window.RAILWAY_TOURISM = {
     139.6077
    ],
    "dist": "5 min walk",
-   "desc": "二つの池を囲む自然豊かな公園。ボートや野鳥観察が楽しめる。",
+   "desc": "三宝寺池など二つの池を囲む自然豊かな公園。ボート遊びや野鳥観察が気軽に楽しめる。",
    "tags": [
     "all",
     "park",
@@ -8815,10 +8815,10 @@ window.RAILWAY_TOURISM = {
     "ko": "샤쿠지이 공원"
    },
    "desc_i18n": {
-    "ja": "二つの池を囲む自然豊かな公園。ボートや野鳥観察が楽しめる。",
-    "zh": "环绕两座池塘、自然丰富的公园。可划船、观赏野鸟。",
-    "en": "A nature-rich park around two ponds. Enjoy boating and birdwatching.",
-    "ko": "두 개의 연못을 둘러싼 자연이 풍부한 공원이에요. 보트와 야생조류 관찰을 즐길 수 있어요."
+    "ja": "三宝寺池など二つの池を囲む自然豊かな公園。ボート遊びや野鳥観察が気軽に楽しめる。",
+    "zh": "环绕三宝寺池等两座池塘、绿意盎然的公园，可轻松划船、观赏野鸟。",
+    "en": "A lush park around two ponds including Sanpōji Pond; enjoy rowing and birdwatching.",
+    "ko": "산포지 연못 등 두 개 연못을 낀 푸른 공원. 보트와 철새 관찰을 가볍게 즐길 수 있어요."
    },
    "hours_i18n": {
     "ja": "常時",
@@ -8869,7 +8869,7 @@ window.RAILWAY_TOURISM = {
     139.6958
    ],
    "dist": "8 min walk",
-   "desc": "高さ13mの青銅製大仏。板橋区のシンボルとして親しまれる。",
+   "desc": "高さ13mの青銅製大仏を本尊とする乗蓮寺。板橋区のシンボルとして地域の人々に親しまれる。",
    "tags": [
     "all",
     "shrine",
@@ -8891,10 +8891,10 @@ window.RAILWAY_TOURISM = {
     "ko": "도쿄 대불（조렌지）"
    },
    "desc_i18n": {
-    "ja": "高さ13mの青銅製大仏。板橋区のシンボルとして親しまれる。",
-    "zh": "高13米的青铜大佛。作为板桥区的象征深受喜爱。",
-    "en": "A 13m bronze Buddha, beloved as the symbol of Itabashi Ward.",
-    "ko": "높이 13m의 청동 대불이에요. 이타바시구의 상징으로 사랑받아요."
+    "ja": "高さ13mの青銅製大仏を本尊とする乗蓮寺。板橋区のシンボルとして地域の人々に親しまれる。",
+    "zh": "供奉高13米青铜大佛的乘莲寺，作为板桥区的象征深受当地居民喜爱。",
+    "en": "Jōren Temple with a 13m bronze Buddha as its main image, beloved as a symbol of Itabashi Ward.",
+    "ko": "높이 13m 청동 대불을 본존으로 모신 조렌지. 이타바시구의 상징으로 사랑받아요."
    },
    "hours_i18n": {
     "ja": "9:00～17:00",
@@ -9021,7 +9021,7 @@ window.RAILWAY_TOURISM = {
     139.7937
    ],
    "dist": "0 min walk",
-   "desc": "東京に残る路面電車。レトロな車両で下町情緒を味わえる。",
+   "desc": "東京に残る都電荒川線。三ノ輪橋から早稲田を結び、レトロな車両で下町情緒を味わえる。",
    "tags": [
     "all",
     "history",
@@ -9042,10 +9042,10 @@ window.RAILWAY_TOURISM = {
     "ko": "도덴 아라카와선（미노와바시）"
    },
    "desc_i18n": {
-    "ja": "東京に残る路面電車。レトロな車両で下町情緒を味わえる。",
-    "zh": "东京仅存的路面电车。乘复古车厢感受老街风情。",
-    "en": "Tokyo's surviving streetcar line. Ride retro cars through nostalgic downtown streets.",
-    "ko": "도쿄에 남은 노면전차예요. 레트로한 차량으로 옛 정취를 느낄 수 있어요."
+    "ja": "東京に残る都電荒川線。三ノ輪橋から早稲田を結び、レトロな車両で下町情緒を味わえる。",
+    "zh": "东京仅存的都电荒川线，连接三之轮桥与早稻田，乘复古车厢可感受老街风情。",
+    "en": "Tokyo's surviving Toden Arakawa Line, running from Minowabashi to Waseda on retro cars through old downtown.",
+    "ko": "도쿄에 남은 도덴 아라카와 선. 미나미와바시~와세다 구간을 레트로 차량으로 달려 옛 정취를 느껴요."
    },
    "hours_i18n": {
     "ja": "5:00～23:00頃",
@@ -9096,7 +9096,7 @@ window.RAILWAY_TOURISM = {
     139.7402
    ],
    "dist": "5 min walk",
-   "desc": "江戸時代から桜の名所。王子の高台から市街を一望できる。",
+   "desc": "江戸時代から続く桜の名所。王子の高台に広がり、上野方面まで市街を一望できる。",
    "tags": [
     "all",
     "park",
@@ -9118,10 +9118,10 @@ window.RAILWAY_TOURISM = {
     "ko": "아스카야마 공원"
    },
    "desc_i18n": {
-    "ja": "江戸時代から桜の名所。王子の高台から市街を一望できる。",
-    "zh": "江户时代以来的樱花名胜。从王子的高台可俯瞰市区。",
-    "en": "A cherry blossom spot since the Edo period. Overlooks the city from a hilltop in Oji.",
-    "ko": "에도 시대부터 벚꽃 명소예요. 오지의 언덕에서 시가지를 한눈에 볼 수 있어요."
+    "ja": "江戸時代から続く桜の名所。王子の高台に広がり、上野方面まで市街を一望できる。",
+    "zh": "自江户时代延续至今的樱花名胜，位于王子高台，可远眺上野方向市区。",
+    "en": "A cherry blossom spot since the Edo period, spread over an Oji hilltop with sweeping views toward Ueno.",
+    "ko": "에도 시대부터 이어진 벚꽃 명소. 오지 언덕에 펼쳐져 우에노 방면 시가지를 조망해요."
    },
    "hours_i18n": {
     "ja": "常時",
@@ -9172,7 +9172,7 @@ window.RAILWAY_TOURISM = {
     139.7485
    ],
    "dist": "7 min walk",
-   "desc": "洋館と日本庭園が調和する名園。バラの季節は特に美しい。",
+   "desc": "洋館・バラ園・日本庭園が一体となった名園。バラの咲く春と秋はとりわけ美しい。",
    "tags": [
     "all",
     "nature",
@@ -9194,10 +9194,10 @@ window.RAILWAY_TOURISM = {
     "ko": "구 후루카와 정원"
    },
    "desc_i18n": {
-    "ja": "洋館と日本庭園が調和する名園。バラの季節は特に美しい。",
-    "zh": "西式建筑与日本庭园和谐的名园。玫瑰季尤其美丽。",
-    "en": "A famous garden blending a Western mansion and Japanese garden. Especially lovely in rose season.",
-    "ko": "양관과 일본 정원이 조화를 이루는 명원이에요. 장미 철에 특히 아름다워요."
+    "ja": "洋館・バラ園・日本庭園が一体となった名園。バラの咲く春と秋はとりわけ美しい。",
+    "zh": "西洋洋房、玫瑰园与日本庭园融为一体的名园，玫瑰盛开的春秋尤为美丽。",
+    "en": "A stately garden blending a Western mansion, rose garden and Japanese garden; especially beautiful in rose season.",
+    "ko": "서양관·장미원·일본정원이 어우러진 명원. 장미가 피는 봄과 가을이 특히 아름다워요."
    },
    "hours_i18n": {
     "ja": "9:00～17:00",
@@ -9248,7 +9248,7 @@ window.RAILWAY_TOURISM = {
     139.793
    ],
    "dist": "5 min walk",
-   "desc": "大相撲の聖地。本場所の観戦や、江戸東京博物館もすぐ近く。",
+   "desc": "大相撲の本場所が行われる聖地。すぐ隣には江戸東京博物館もあり、観光にも便利。",
    "tags": [
     "all",
     "history",
@@ -9269,10 +9269,10 @@ window.RAILWAY_TOURISM = {
     "ko": "료고쿠 국기관"
    },
    "desc_i18n": {
-    "ja": "大相撲の聖地。本場所の観戦や、江戸東京博物館もすぐ近く。",
-    "zh": "大相扑的圣地。可观看正式比赛，江户东京博物馆也在附近。",
-    "en": "The home of sumo. Watch tournament bouts; the Edo-Tokyo Museum is right nearby.",
-    "ko": "스모의 성지예요. 본장소 관전과 에도 도쿄 박물관도 바로 근처예요."
+    "ja": "大相撲の本場所が行われる聖地。すぐ隣には江戸東京博物館もあり、観光にも便利。",
+    "zh": "举办大相扑正式比赛的圣地，紧邻江户东京博物馆，观光十分便利。",
+    "en": "The sacred home of professional sumo tournaments; the Edo-Tokyo Museum sits right next door.",
+    "ko": "프로 스모 본장소가 열리는 성지. 바로 옆에 에도 도쿄 박물관이 있어 관광에도 편리해요."
    },
    "hours_i18n": {
     "ja": "イベントにより異なる",
@@ -15282,86 +15282,6 @@ window.RAILWAY_TOURISM = {
    ]
   },
   {
-   "name": "MANIKA FACTORY",
-   "coord": [
-    35.693635,
-    139.658099
-   ],
-   "dist": "丸ノ内線 東高円寺駅 徒歩8分",
-   "desc": "東高円寺の旅道具屋。アウトドアのオリジナル商品や古着をコーヒー片手にゆっくり物色。",
-   "tags": [
-    "all",
-    "food",
-    "shopping",
-    "history",
-    "shrine"
-   ],
-   "image": "../images/観光地/MANIKA FACTORY.jpg",
-   "bestTime": "昼～夕方",
-   "hours": {
-    "ja": "12:00～19:00（月～金はイベント出店等で休みあり）",
-    "zh": "12:00–19:00（周一～五因摆摊等或休）",
-    "en": "12:00–19:00 (may close Mon–Fri for events)",
-    "ko": "12:00~19:00 (월~금은 이벤트 출점 등으로 휴무 있음)"
-   },
-   "fee": "商品・コーヒーは実費",
-   "tips": [
-    "焚き火台「TAKIBI-LIGHT」など独創的。",
-    "コーヒーを片手にゆっくり見られる。",
-    "ご夫婦に開発秘話を聞けることも。"
-   ],
-   "name_i18n": {
-    "ja": "MANIKA FACTORY",
-    "zh": "MANIKA FACTORY",
-    "en": "MANIKA FACTORY",
-    "ko": "마니카 팩토리"
-   },
-   "desc_i18n": {
-    "ja": "東高円寺の旅道具屋。アウトドアのオリジナル商品や古着をコーヒー片手にゆっくり物色。",
-    "zh": "东高圆寺的旅行道具店，端着咖啡慢慢挑选户外原创品与古着。",
-    "en": "A travel-goods shop in Higashi-Kōenji: browse original outdoor gear and vintage over coffee.",
-    "ko": "히가시코엔지의 여행 용품점. 아웃도어 오리지널 상품과 빈티지를 커피 손에 천천히 구경."
-   },
-   "hours_i18n": {
-    "ja": "12:00～19:00（月～金はイベント出店等で休みあり）",
-    "zh": "12:00–19:00（周一～五因摆摊等或休）",
-    "en": "12:00–19:00 (may close Mon–Fri for events)",
-    "ko": "12:00~19:00 (월~금은 이벤트 출점 등으로 휴무 있음)"
-   },
-   "fee_i18n": {
-    "ja": "商品・コーヒーは実費",
-    "zh": "商品、咖啡实付",
-    "en": "Goods & coffee at own cost",
-    "ko": "상품·커피 실비"
-   },
-   "bestTime_i18n": {
-    "ja": "昼～夕方",
-    "zh": "白天～傍晚",
-    "en": "Daytime to evening",
-    "ko": "낮~저녁"
-   },
-   "tips_i18n": [
-    {
-     "ja": "焚き火台「TAKIBI-LIGHT」など独創的。",
-     "zh": "篝火台\"TAKIBI-LIGHT\"等独具创意。",
-     "en": "Original pieces like the \"TAKIBI-LIGHT\" fire pit.",
-     "ko": "화로대 「TAKIBI-LIGHT」 등 독창적."
-    },
-    {
-     "ja": "コーヒーを片手にゆっくり見られる。",
-     "zh": "端着咖啡慢慢逛。",
-     "en": "Look around slowly over coffee.",
-     "ko": "커피 손에 천천히 둘러보기."
-    },
-    {
-     "ja": "ご夫婦に開発秘話を聞けることも。",
-     "zh": "有时能听店主夫妇讲开发幕后。",
-     "en": "Sometimes hear the owners' dev stories.",
-     "ko": "부부에게 개발 비화를 듣기도."
-    }
-   ]
-  },
-  {
    "name": "JUNGLE BOOKS",
    "coord": [
     35.719344,
@@ -18290,78 +18210,6 @@ window.RAILWAY_TOURISM = {
    ]
   },
   {
-   "name": "むらからまちから館",
-   "coord": [
-    35.675198,
-    139.7646
-   ],
-   "dist": "日比谷駅より徒歩7分",
-   "desc": "有楽町の東京交通会館内にある全国の特産品を集めたアンテナショップ。約1000商品・地酒200種以上が一堂に。",
-   "tags": [
-    "all",
-    "food"
-   ],
-   "image": "../images/観光地/むらからまちから館.jpg",
-   "bestTime": "昼",
-   "hours": "10:30～19:15（日祝18:45まで）／ほぼ無休",
-   "fee": "買い物は実費",
-   "tips": [
-    "日本全国の特産品が約1000点",
-    "地酒は200種類以上",
-    "東京にいながら日本一周気分"
-   ],
-   "name_i18n": {
-    "ja": "むらからまちから館",
-    "zh": "由里他乡馆",
-    "en": "Murakara Machikara-kan",
-    "ko": "무라카라 마치카라칸"
-   },
-   "desc_i18n": {
-    "ja": "有楽町の東京交通会館内にある全国の特産品を集めたアンテナショップ。約1000商品・地酒200種以上が一堂に。",
-    "zh": "有乐町东京交通会馆内汇集全国特产的直销店。约1000种商品、200多种地酒齐聚一堂。",
-    "en": "A showcase of regional products inside the Tokyo Kotsu Kaikan in Yurakucho; ~1,000 items and 200+ local sakes under one roof.",
-    "ko": "유라쿠초 도쿄교통회관 내 전국 특산물 앤테나숍. 약 1000상품·지방주 200종 이상."
-   },
-   "hours_i18n": {
-    "ja": "10:30～19:15（日祝18:45まで）／ほぼ無休",
-    "zh": "10:30~19:15（日祝到18:45）／基本无休",
-    "en": "10:30-19:15 (Sun/hol. till 18:45) / mostly open",
-    "ko": "10:30-19:15 (일·공휴일 18:45까지) / 연중무휴"
-   },
-   "fee_i18n": {
-    "ja": "買い物は実費",
-    "zh": "餐饮费用自理",
-    "en": "Food & drinks at your own expense",
-    "ko": "식음료는 실비"
-   },
-   "bestTime_i18n": {
-    "ja": "昼",
-    "zh": "白天",
-    "en": "Daytime",
-    "ko": "낮"
-   },
-   "tips_i18n": [
-    {
-     "ja": "日本全国の特産品が約1000点",
-     "zh": "约1000种日本全国特产",
-     "en": "~1,000 regional products nationwide",
-     "ko": "전국 특산물 약 1000점"
-    },
-    {
-     "ja": "地酒は200種類以上",
-     "zh": "地酒200种以上",
-     "en": "200+ local sakes",
-     "ko": "지방주 200종 이상"
-    },
-    {
-     "ja": "東京にいながら日本一周気分",
-     "zh": "在东京也能感受游日本一圈",
-     "en": "Tour Japan without leaving Tokyo",
-     "ko": "도쿄에서 일본 일주 기분"
-    }
-   ]
-  },
-  {
    "name": "国立公文書館",
    "coord": [
     35.69027,
@@ -20164,78 +20012,6 @@ window.RAILWAY_TOURISM = {
     }
    ],
    "address": "東京都杉並区方南2-4-29（集合は方南町駅1番出口・現地住所非公開）"
-  },
-  {
-   "name": "平日昼だけ",
-   "coord": [
-    35.697444,
-    139.65369
-   ],
-   "dist": "東高円寺駅より徒歩7分",
-   "desc": "東高円寺の間借りカレー。平日昼だけ営業し、メニューは「和だしそぼろカレー」一品のみ。和食店時代のまかないがルーツ。",
-   "tags": [
-    "all",
-    "food"
-   ],
-   "image": "../images/観光地/平日昼だけ.jpg",
-   "bestTime": "昼",
-   "hours": "11:30～15:00（完売次第閉店）／土・日・祝日休み",
-   "fee": "カレー 980円前後",
-   "tips": [
-    "間借り営業で平日昼のみオープン",
-    "メニューは和だしそぼろカレー一品のみ",
-    "完売次第閉店の早い者勝ち"
-   ],
-   "name_i18n": {
-    "ja": "平日昼だけ",
-    "zh": "仅平日白天",
-    "en": "Heijitsu Hiru Dake",
-    "ko": "평일 낮만"
-   },
-   "desc_i18n": {
-    "ja": "東高円寺の間借りカレー。平日昼だけ営業し、メニューは「和だしそぼろカレー」一品のみ。和食店時代のまかないがルーツ。",
-    "zh": "东高圆寺的转租咖喱店。仅平日白天营业，菜单只有「日式高汤肉末咖喱」一种，源自和食店时的员工餐。",
-    "en": "A 'space-share' curry shop in Higashi-Koenji open only weekday lunch; a single dish, dashi-soboro curry, born from a former chef's staff meal.",
-    "ko": "히가시코엔지의 틈셰어 카레. 평일 낮만 영업, 메뉴는 '와시다시 소보로 카레' 한 가지. 일식집 시절 인밥이 기원."
-   },
-   "hours_i18n": {
-    "ja": "11:30～15:00（完売次第閉店）／土・日・祝日休み",
-    "zh": "11:30~15:00（售完即关）／周六·周日·祝日休",
-    "en": "11:30-15:00 (closes when sold out) / closed Sat, Sun, holidays",
-    "ko": "11:30-15:00 (완매 시 폐점) / 토·일·공휴일 휴무"
-   },
-   "fee_i18n": {
-    "ja": "カレー 980円前後",
-    "zh": "咖喱 约980日元",
-    "en": "Curry ~980 JPY",
-    "ko": "카레 약 980엔"
-   },
-   "bestTime_i18n": {
-    "ja": "昼",
-    "zh": "白天",
-    "en": "Daytime",
-    "ko": "낮"
-   },
-   "tips_i18n": [
-    {
-     "ja": "間借り営業で平日昼のみオープン",
-     "zh": "转租营业仅平日白天开",
-     "en": "Space-share, open only weekday lunch",
-     "ko": "틈셰어 영업으로 평일 낮만 오픈"
-    },
-    {
-     "ja": "メニューは和だしそぼろカレー一品のみ",
-     "zh": "菜单只有日式高汤肉末咖喱一种",
-     "en": "A single dashi-soboro curry dish",
-     "ko": "메뉴는 와시다시 소보로 카레 한 가지"
-    },
-    {
-     "ja": "完売次第閉店の早い者勝ち",
-     "zh": "售完即关先到先吃",
-     "en": "Closes when sold out—early bird wins",
-     "ko": "완매 시 폐점, 선착순"
-    }
-   ]
   },
   {
    "name": "Café Kaya",
@@ -26928,7 +26704,7 @@ window.RAILWAY_TOURISM = {
     139.667538
    ],
    "dist": "中野駅 徒歩2分",
-   "desc": "昆虫好きの聖地。生きた虫も標本もそろう専門店。",
+   "desc": "昆虫好きの聖地ともいえる専門店。生きた昆虫から標本・図鑑まで幅広く扱う。",
    "tags": [
     "all",
     "shopping"
@@ -26949,10 +26725,10 @@ window.RAILWAY_TOURISM = {
     "ko": "무샤"
    },
    "desc_i18n": {
-    "ja": "生きた虫も標本も扱う昆虫専門店。",
-    "zh": "从活虫到标本都有的昆虫专门店。",
-    "en": "An insect shop with live bugs and specimens.",
-    "ko": "살아있는 곤충부터 표본까지 취급."
+    "ja": "昆虫好きの聖地ともいえる専門店。生きた昆虫から標本・図鑑まで幅広く扱う。",
+    "zh": "堪称昆虫爱好者圣地的专门店，从活虫到标本、图鉴一应俱全。",
+    "en": "A mecca for insect lovers, stocking everything from live specimens to taxidermy and reference books.",
+    "ko": "곤충 애호가의 성지라 할 전문점. 살아있는 곤충부터 표본·도감까지 폭넓게 다뤄요."
    },
    "hours_i18n": {
     "ja": "11:00～20:00／年中無休(年末年始除く)",
@@ -27647,82 +27423,6 @@ window.RAILWAY_TOURISM = {
    ]
   },
   {
-   "name": "BETTARA STAND 日本橋",
-   "coord": [
-    35.689199,
-    139.776895
-   ],
-   "dist": "小伝馬町駅 徒歩2分",
-   "desc": "日本橋本町の元駐車場から生まれたクラフトビールスタンド。外席で多彩な銘柄と小皿料理を楽しむ店。",
-   "tags": [
-    "all",
-    "food",
-    "shopping",
-    "history",
-    "shrine"
-   ],
-   "image": "../images/観光地/BETTARA STAND 日本橋.jpg",
-   "bestTime": "夜",
-   "hours": "平日18:00～22:30、土日祝12:00～22:30(要予約)／月曜定休",
-   "fee": "クラフトビール 700円前後",
-   "tips": [
-    "恵比寿提灯が目印。",
-    "全国のクラフトビールと日本酒。",
-    "べったら漬け発祥の地。"
-   ],
-   "name_i18n": {
-    "ja": "BETTARA STAND 日本橋",
-    "zh": "BETTARA STAND 日本桥",
-    "en": "BETTARA STAND Nihonbashi",
-    "ko": "베타라 스탠드 니혼바시"
-   },
-   "desc_i18n": {
-    "ja": "日本橋本町の元駐車場から生まれたクラフトビールスタンド。外席で多彩な銘柄と小皿料理を楽しむ店。",
-    "zh": "日本桥本町由旧停车场改造的精酿啤酒店，在户外座位品尝多种啤酒与小菜。",
-    "en": "A craft-beer stand born from a former parking lot in Nihonbashi-Honcho, with outdoor seats and small plates.",
-    "ko": "니혼바시혼초의 옛 주차장에서 태어난 크래프트 비어 스탠드. 야외석에서 다양한 맥주와 안주를 즐긴다."
-   },
-   "hours_i18n": {
-    "ja": "平日18:00～22:30、土日祝12:00～22:30(要予約)／月曜定休",
-    "zh": "平日18:00～22:30、土日祝12:00～22:30(要予約)／月曜定休",
-    "en": "平日18:00～22:30、土日祝12:00～22:30(要予約)／月曜定休",
-    "ko": "平日18:00～22:30、土日祝12:00～22:30(要予約)／月曜定休"
-   },
-   "fee_i18n": {
-    "ja": "クラフトビール 700円前後",
-    "zh": "精酿啤酒约700日元",
-    "en": "Craft beer around ¥700",
-    "ko": "크래프트 맥주 약 700엔"
-   },
-   "bestTime_i18n": {
-    "ja": "夜",
-    "zh": "晚上",
-    "en": "Evening",
-    "ko": "저녁"
-   },
-   "tips_i18n": [
-    {
-     "ja": "恵比寿提灯が目印。",
-     "zh": "惠比寿灯笼为标志。",
-     "en": "Look for the Ebisu lantern.",
-     "ko": "에비스 등불이 표시."
-    },
-    {
-     "ja": "クラフトビールと日本酒。",
-     "zh": "精酿啤酒与日本酒。",
-     "en": "Craft beer and sake.",
-     "ko": "크래프트 맥주와 사케."
-    },
-    {
-     "ja": "べったら漬け発祥。",
-     "zh": "甜酱菜发祥地。",
-     "en": "Birthplace of bettara pickles.",
-     "ko": "벳타라즈케 발상지."
-    }
-   ],
-   "address": "東京都中央区日本橋本町3-10-1"
-  },
-  {
    "name": "日比谷松本楼",
    "coord": [
     35.673714,
@@ -28096,7 +27796,7 @@ window.RAILWAY_TOURISM = {
     139.771189
    ],
    "dist": "西日暮里駅 徒歩5分",
-   "desc": "江戸時代から伝わる金属技法・木目金のジュエリーが人気。",
+   "desc": "江戸の伝統金属技法・木目金を用いたジュエリーが人気の工房兼店。",
    "tags": [
     "all",
     "food",
@@ -28118,10 +27818,10 @@ window.RAILWAY_TOURISM = {
     "ko": "긴자 나오코"
    },
    "desc_i18n": {
-    "ja": "木目金のジュエリーが人気の店。",
-    "zh": "以江户木目金金属工艺首饰闻名。",
-    "en": "A jewelry shop famed for mokume-gane metalwork.",
-    "ko": "메쿠메가네 주얼리로 유명한 집."
+    "ja": "江戸の伝統金属技法・木目金を用いたジュエリーが人気の工房兼店。",
+    "zh": "以江户传统金属工艺木目金首饰闻名的工房兼店铺。",
+    "en": "A workshop-shop known for jewelry made with the traditional Edo mokume-gane metal technique.",
+    "ko": "에도 전통 금속 기법 메쿠메가네 주얼리로 인기인 공방 겸 가게."
    },
    "hours_i18n": {
     "ja": "10:30～18:00／月土祝休",
@@ -29039,7 +28739,7 @@ window.RAILWAY_TOURISM = {
     139.686045
    ],
    "dist": "中井駅 徒歩3分",
-   "desc": "中井駅徒歩3分の街の立ち食いそば店。気軽に立ち寄れる。",
+   "desc": "中井駅から徒歩3分ほどの街の立ち食いそば店。仕事帰りにも気軽に立ち寄れる。",
    "tags": [
     "all",
     "food"
@@ -29060,10 +28760,10 @@ window.RAILWAY_TOURISM = {
     "ko": "미카쿠안"
    },
    "desc_i18n": {
-    "ja": "中井駅徒歩3分の街の立ち食いそば店。気軽に立ち寄れる。",
-    "zh": "距中井站步行3分钟的街边立食荞麦店，可轻松驻足。",
-    "en": "A standing soba eatery a 3-minute walk from Nakai Station; easy to drop in.",
-    "ko": "나카이역 도보 3분 거리 서서 먹는 소바 가게."
+    "ja": "中井駅から徒歩3分ほどの街の立ち食いそば店。仕事帰りにも気軽に立ち寄れる。",
+    "zh": "距中井站步行约3分钟的街边立食荞麦店，下班也可轻松驻足。",
+    "en": "A standing soba eatery about 3 minutes from Nakai Station, easy to drop by after work.",
+    "ko": "나카이역 도보 약 3분 서서 먹는 소바 가게. 퇴근길에도 가볍게 들르기 좋아요."
    },
    "hours_i18n": {
     "ja": "9:00～19:00／日祝休",
@@ -29111,7 +28811,7 @@ window.RAILWAY_TOURISM = {
     139.700628
    ],
    "dist": "東新宿駅 徒歩1分",
-   "desc": "東新宿駅前のつけ蕎麦店。ラー油の効いたつけ汁が名物。",
+   "desc": "東新宿駅前の個性派つけ蕎麦店。ラー油の効いたピリ辛つけ汁が名物。",
    "tags": [
     "all",
     "food",
@@ -29133,10 +28833,10 @@ window.RAILWAY_TOURISM = {
     "ko": "왜 소바에 라유를 넣는가"
    },
    "desc_i18n": {
-    "ja": "東新宿駅前のつけ蕎麦店。ラー油の効いたつけ汁が名物。",
-    "zh": "东新宿站前的蘸面荞麦店，辣油蘸汁是招牌。",
-    "en": "A dipping-soba restaurant in front of Higashi-Shinjuku Station, known for its chili-oil dipping sauce.",
-    "ko": "히가시신주쿠역 앞 츠케소바 전문점, 라유를 넣은 츠유가 명물."
+    "ja": "東新宿駅前の個性派つけ蕎麦店。ラー油の効いたピリ辛つけ汁が名物。",
+    "zh": "东新宿站前的个性蘸面荞麦店，辣油蘸汁微辣上头是招牌。",
+    "en": "An idiosyncratic dipping-soba spot by Higashi-Shinjuku Station; the chili-oil dipping sauce is the draw.",
+    "ko": "히가시신주쿠역 앞 개성 넘치는 츠케소바집. 라유 들어간 매콤한 츠유가 명물."
    },
    "hours_i18n": {
     "ja": "11:00～16:00、17:30～22:00／無休",
@@ -29184,7 +28884,7 @@ window.RAILWAY_TOURISM = {
     139.751106
    ],
    "dist": "後楽園駅 徒歩4分",
-   "desc": "後楽園駅近くの寺。こんにゃくをお供えする閻魔像で知られる。",
+   "desc": "後楽園駅近くにある由緒ある寺。こんにゃくをお供えする珍しい閻魔像で知られる。",
    "tags": [
     "all",
     "landmark"
@@ -29205,10 +28905,10 @@ window.RAILWAY_TOURISM = {
     "ko": "겐가쿠지 (곤냉 염마)"
    },
    "desc_i18n": {
-    "ja": "後楽園駅近くの寺。こんにゃくをお供えする閻魔像で知られる。",
-    "zh": "后乐园站附近的寺院，因供奉蒟蒻的阎魔像闻名。",
-    "en": "A temple near Korakuen Station known for its Enma statue offered konnyaku.",
-    "ko": "고라쿠엔역 근처 사찰, 곤약을 올리는 염마상으로 유명."
+    "ja": "後楽園駅近くにある由緒ある寺。こんにゃくをお供えする珍しい閻魔像で知られる。",
+    "zh": "后乐园站附近的古寺，因供奉蒟蒻的罕见阎魔像而闻名。",
+    "en": "A historic temple near Kōrakuen Station, known for its rare Enma statue offered konnyaku.",
+    "ko": "고라쿠엔역 근처 유서 깊은 사찰. 곤약을 공양하는 특별한 염마상으로 알려져요."
    },
    "hours_i18n": {
     "ja": "詳細は寺務所HP参照／年中無休",
@@ -29329,7 +29029,7 @@ window.RAILWAY_TOURISM = {
     139.830728
    ],
    "dist": "北綾瀬駅 徒歩1分",
-   "desc": "北綾瀬駅前の花しょうぶの名所。沼を囲む遊歩道は散歩に最適。",
+   "desc": "北綾瀬駅前、花しょうぶの名所として知られる公園。沼を囲む遊歩道は散歩に最適。",
    "tags": [
     "all",
     "nature",
@@ -29351,10 +29051,10 @@ window.RAILWAY_TOURISM = {
     "ko": "쇼부누마 공원"
    },
    "desc_i18n": {
-    "ja": "北綾瀬駅前の花しょうぶの名所。沼を囲む遊歩道は散歩に最適。",
-    "zh": "北绫濑站前的菖蒲赏花名所，环湖步道适合散步。",
-    "en": "A famous iris spot by Kita-Ayase Station; the pondside promenade is great for strolling.",
-    "ko": "기타아야세역 앞 창포 명소, 연못 둘레 산책로가 산책에 최적."
+    "ja": "北綾瀬駅前、花しょうぶの名所として知られる公園。沼を囲む遊歩道は散歩に最適。",
+    "zh": "北绫濑站前知名的菖蒲赏花公园，环湖步道最适合散步。",
+    "en": "A park by Kita-Ayase Station famed for irises; the pondside path is ideal for strolling.",
+    "ko": "기타아야세역 앞 창포 명소 공원. 연못 둘레 산책로가 산책하기 좋아요."
    },
    "hours_i18n": {
     "ja": "詳細は公園HP参照／年中無休",
@@ -29402,7 +29102,7 @@ window.RAILWAY_TOURISM = {
     139.825726
    ],
    "dist": "綾瀬駅 徒歩5分",
-   "desc": "綾瀬駅近くの武道・各種競技が行われる都立の体育館。",
+   "desc": "綾瀬駅近くにある都立の体育館。武道をはじめ各種競技やイベントが行われる。",
    "tags": [
     "all",
     "landmark"
@@ -29423,10 +29123,10 @@ window.RAILWAY_TOURISM = {
     "ko": "도쿄 무도관"
    },
    "desc_i18n": {
-    "ja": "綾瀬駅近くの武道・各種競技が行われる都立の体育館。",
-    "zh": "绫濑站附近的都立武道馆，举办各类武道与赛事。",
-    "en": "A metropolitan martial-arts and sports hall near Ayase Station.",
-    "ko": "아야세역 근처 도립 무도관."
+    "ja": "綾瀬駅近くにある都立の体育館。武道をはじめ各種競技やイベントが行われる。",
+    "zh": "绫濑站附近的都立体育馆，举办武道及各类赛事与活动。",
+    "en": "A metropolitan sports hall near Ayase Station hosting martial arts matches and events.",
+    "ko": "아야세역 근처 도립 체육관. 무도를 비롯한 각종 경기와 행사가 열려요."
    },
    "hours_i18n": {
     "ja": "詳細は武道館HP参照／月曜休",
@@ -29474,7 +29174,7 @@ window.RAILWAY_TOURISM = {
     139.657663
    ],
    "dist": "方南町駅 徒歩5分",
-   "desc": "方南町のイタリアン。特大ピザのオークションが楽しめる店。",
+   "desc": "方南町のイタリアンレストラン。焼きたて特大ピザのオークションが名物。",
    "tags": [
     "all",
     "food"
@@ -29495,10 +29195,10 @@ window.RAILWAY_TOURISM = {
     "ko": "아킷초 데시카"
    },
    "desc_i18n": {
-    "ja": "方南町のイタリアン。特大ピザのオークションが楽しめる店。",
-    "zh": "方南町的意大利餐厅，可体验特大披萨拍卖。",
-    "en": "An Italian in Honancho where giant-pizza auctions are a draw.",
-    "ko": "호난초 이탈리안, 특대 피자 경매가 인기."
+    "ja": "方南町のイタリアンレストラン。焼きたて特大ピザのオークションが名物。",
+    "zh": "方南町的意大利餐厅，现烤特大披萨拍卖是招牌。",
+    "en": "An Italian restaurant in Honancho famous for auctions of giant fresh-baked pizzas.",
+    "ko": "호난초 이탈리안 레스토랑. 갓 구운 특대 피자 경매가 명물이에요."
    },
    "hours_i18n": {
     "ja": "ランチ11:30～15:00(L.O.14:30)、ディナー17:00～22:00(L.O.21:00)／火曜定休",
@@ -29620,7 +29320,7 @@ window.RAILWAY_TOURISM = {
     139.713779
    ],
    "dist": "雑司が谷駅 徒歩3分",
-   "desc": "雑司が谷の鬼子母神門前に佇む創業約200年の駄菓子屋。",
+   "desc": "雑司が谷の鬼子母神門前に佇む創業約200年の駄菓子屋。昔ながらの菓子が並ぶ。",
    "tags": [
     "all",
     "shopping",
@@ -29643,10 +29343,10 @@ window.RAILWAY_TOURISM = {
     "ko": "가미카와구치야"
    },
    "desc_i18n": {
-    "ja": "雑司が谷の鬼子母神門前に佇む創業約200年の駄菓子屋。",
-    "zh": "杂司谷鬼子母神门前创业约200年的老铺零食店。",
-    "en": "A roughly 200-year-old candy shop standing by Kishimojin Temple in Zoshigaya.",
-    "ko": "조시가야 기시보진 앞 약 200년 된 옛날 과자 가게."
+    "ja": "雑司が谷の鬼子母神門前に佇む創業約200年の駄菓子屋。昔ながらの菓子が並ぶ。",
+    "zh": "杂司谷鬼子母神门前创业约200年的老铺零食店，摆满怀旧零食。",
+    "en": "A roughly 200-year-old candy shop by Kishimojin Temple in Zōshigaya, lined with old-school sweets.",
+    "ko": "조시가야 기시보진 앞 약 200년 된 옛날 과자 가게. 추억의 과자가 가득해요."
    },
    "hours_i18n": {
     "ja": "10:00～17:00／雨天・台風等臨時休",
@@ -29767,7 +29467,7 @@ window.RAILWAY_TOURISM = {
     139.814127
    ],
    "dist": "錦糸町駅 徒歩3分",
-   "desc": "錦糸町駅近くで長く愛される老舗タイ料理店。",
+   "desc": "錦糸町駅近くで長く愛される老舗タイ料理店。現地さながらの本格派の味わい。",
    "tags": [
     "all",
     "food"
@@ -29788,10 +29488,10 @@ window.RAILWAY_TOURISM = {
     "ko": "타일랜드"
    },
    "desc_i18n": {
-    "ja": "錦糸町駅近くで長く愛される老舗タイ料理店。",
-    "zh": "锦系町站附近长期受欢迎的老牌泰国菜。",
-    "en": "A long-loved traditional Thai restaurant near Kinshicho Station.",
-    "ko": "긴시초역 근처 오래 사랑받는 태국 요릿집."
+    "ja": "錦糸町駅近くで長く愛される老舗タイ料理店。現地さながらの本格派の味わい。",
+    "zh": "锦系町站附近长盛不衰的老牌泰国菜，味道地道如亲临泰国。",
+    "en": "A long-loved Thai restaurant near Kinshicho Station, serving authentic, homestyle Thai flavors.",
+    "ko": "긴시초역 근처 오래 사랑받는 태국 요릿집. 현지 같은 본고장 맛이 일품이에요."
    },
    "hours_i18n": {
     "ja": "火～金11:30～14:30・17:00～23:00、土日祝11:30～23:00／月曜休",
@@ -29911,7 +29611,7 @@ window.RAILWAY_TOURISM = {
     139.71300699685673
    ],
    "dist": "目黒駅 徒歩3分",
-   "desc": "目黒駅近くで約100種のお茶割りが楽しめるバー。",
+   "desc": "目黒駅近くにあるバー。約100種類もの豊富なお茶割りが楽しめる。",
    "tags": [
     "all",
     "landmark"
@@ -29932,10 +29632,10 @@ window.RAILWAY_TOURISM = {
     "ko": "차와리"
    },
    "desc_i18n": {
-    "ja": "目黒駅近くで約100種のお茶割りが楽しめるバー。",
-    "zh": "目黑站附近可享约100种茶调酒的酒吧。",
-    "en": "A bar near Meguro offering around 100 kinds of tea mixers.",
-    "ko": "메구로역 근처 약 100종 차 하이볼을 즐기는 바."
+    "ja": "目黒駅近くにあるバー。約100種類もの豊富なお茶割りが楽しめる。",
+    "zh": "目黑站附近的酒吧，可品尝约100种丰富的茶调酒。",
+    "en": "A bar near Meguro Station offering a generous lineup of around 100 tea mixers.",
+    "ko": "메구로역 근처 바. 약 100종이나 되는 다채로운 차 하이볼을 즐길 수 있어요."
    },
    "hours_i18n": {
     "ja": "17:00～23:00／無休",
@@ -29983,7 +29683,7 @@ window.RAILWAY_TOURISM = {
     139.8580024747331
    ],
    "dist": "西葛西駅 徒歩3分",
-   "desc": "西葛西のスパイス醤油ラーメン店。14種のスパイスを使用。",
+   "desc": "西葛西のスパイス醤油ラーメン店。14種類のスパイスをブレンドした一杯が人気。",
    "tags": [
     "all",
     "food"
@@ -30004,10 +29704,10 @@ window.RAILWAY_TOURISM = {
     "ko": "만리키"
    },
    "desc_i18n": {
-    "ja": "西葛西のスパイス醤油ラーメン店。14種のスパイスを使用。",
-    "zh": "西葛西的香料酱油拉面店，使用14种香料。",
-    "en": "A spice-soy-ramen shop in Nishi-Kasai using 14 kinds of spices.",
-    "ko": "니시카사이 14가지 향신료를 쓰는 간장 라멘집."
+    "ja": "西葛西のスパイス醤油ラーメン店。14種類のスパイスをブレンドした一杯が人気。",
+    "zh": "西葛西的香料酱油拉面店，融合14种香料的一碗拉面人气颇高。",
+    "en": "A spice-soy-ramen shop in Nishi-Kasai, popular for a bowl blending 14 kinds of spices.",
+    "ko": "니시카사이 향신료 간장 라멘집. 14가지 향신료를 블렌딩한 한 그릇이 인기예요."
    },
    "hours_i18n": {
     "ja": "11:00～21:00／水曜定休",
@@ -30127,7 +29827,7 @@ window.RAILWAY_TOURISM = {
     139.76997890791944
    ],
    "dist": "築地駅 徒歩2分",
-   "desc": "明治創業の老舗寿司店。晴海通り店では寿司握り体験も人気。",
+   "desc": "明治創業の老舗寿司店。晴海通り店では職人による本格的な寿司握り体験も人気。",
    "tags": [
     "all",
     "food",
@@ -30149,10 +29849,10 @@ window.RAILWAY_TOURISM = {
     "ko": "츠키지 다마즈시 하루미도리점"
    },
    "desc_i18n": {
-    "ja": "明治創業の老舗寿司店。晴海通り店では寿司握り体験も人気。",
-    "zh": "明治创业的老牌寿司店，晴海通店可体验握寿司。",
-    "en": "A long-established sushi restaurant founded in Meiji; sushi-making experiences are popular.",
-    "ko": "메이지 창업 노포 스시집, 스시 쥐기 체험 인기."
+    "ja": "明治創業の老舗寿司店。晴海通り店では職人による本格的な寿司握り体験も人気。",
+    "zh": "明治创业的老牌寿司店，晴海通店由职人教授的握寿司体验人气很高。",
+    "en": "A sushi house founded in the Meiji era; hands-on sushi-making with artisans is popular here.",
+    "ko": "메이지 창업 노포 스시집. 하루미도리점에서는 장인의 본격 스시 쥐기 체험도 인기예요."
    },
    "hours_i18n": {
     "ja": "11:00～15:00、17:00～22:00／年中無休(年末年始除く)",
@@ -30272,7 +29972,7 @@ window.RAILWAY_TOURISM = {
     139.76325022771496
    ],
    "dist": "御茶ノ水駅 徒歩3分",
-   "desc": "御茶ノ水駅前の大型総合楽器店。国内外の楽器が一堂に。",
+   "desc": "御茶ノ水駅前にある大型総合楽器店。国内外の弦楽器・管楽器が一堂に並ぶ。",
    "tags": [
     "all",
     "landmark"
@@ -30293,10 +29993,10 @@ window.RAILWAY_TOURISM = {
     "ko": "쿠로사와 악기 오차노미즈 역점"
    },
    "desc_i18n": {
-    "ja": "御茶ノ水駅前の大型総合楽器店。国内外の楽器が一堂に。",
-    "zh": "御茶之水站前的大型综合乐器店，云集各乐器。",
-    "en": "A large comprehensive instrument store in front of Ochanomizu Station.",
-    "ko": "오차노미즈역 앞 대형 종합 악기점."
+    "ja": "御茶ノ水駅前にある大型総合楽器店。国内外の弦楽器・管楽器が一堂に並ぶ。",
+    "zh": "御茶之水站前的大型综合乐器店，云集国内外各类管弦乐器。",
+    "en": "A large comprehensive instrument store in front of Ochanomizu Station, string and wind instruments in one hall.",
+    "ko": "오차노미즈역 앞 대형 종합 악기점. 국내외 현악기·관악기가 한자리에 모여요."
    },
    "hours_i18n": {
     "ja": "月～土11:00～20:00、日祝11:00～19:00",
@@ -30344,7 +30044,7 @@ window.RAILWAY_TOURISM = {
     139.77475219915894
    ],
    "dist": "上野駅 徒歩5分",
-   "desc": "上野の森美術館に併設された本格絵画・造形教室。",
+   "desc": "上野の森美術館に併設された本格的な絵画・造形教室。初心者から経験者まで学べる。",
    "tags": [
     "all",
     "food",
@@ -30367,10 +30067,10 @@ window.RAILWAY_TOURISM = {
     "ko": "우에노노모리 아트스쿨"
    },
    "desc_i18n": {
-    "ja": "上野の森美術館に併設された本格絵画・造形教室。",
-    "zh": "上野之森美术馆附设的正规绘画与造型教室。",
-    "en": "A full-scale painting and sculpture studio attached to the Ueno Royal Museum.",
-    "ko": "우에노노모리미술관 부속 본격 회화·조형 교실."
+    "ja": "上野の森美術館に併設された本格的な絵画・造形教室。初心者から経験者まで学べる。",
+    "zh": "上野之森美术馆附设的正规绘画与造型教室，零基础到有经验者均可学习。",
+    "en": "A full-scale painting and sculpture studio attached to the Ueno Royal Museum, for beginners to experienced learners.",
+    "ko": "우에노노모리미술관 부속 본격 회화·조형 교실. 초보자부터 경험자까지 배울 수 있어요."
    },
    "hours_i18n": {
     "ja": "クラスにより異なる(昼10:30～/夜18:30～)／不定休",
@@ -30565,7 +30265,7 @@ window.RAILWAY_TOURISM = {
     139.87532699971953
    ],
    "dist": "葛西駅 徒歩3分",
-   "desc": "葛西駅近くのドライフラワー作り体験スタジオ。",
+   "desc": "葛西駅近くにあるドライフラワー作りの体験スタジオ。少人数でゆっくり作れる。",
    "tags": [
     "all",
     "nature",
@@ -30587,10 +30287,10 @@ window.RAILWAY_TOURISM = {
     "ko": "스튜디오 오로라"
    },
    "desc_i18n": {
-    "ja": "葛西駅近くのドライフラワー作り体験スタジオ。",
-    "zh": "葛西站附近的干花制作体验工作室。",
-    "en": "A dried-flower arranging studio near Kasai Station.",
-    "ko": "카사이역 근처 드라이플라워 체험 스튜디오."
+    "ja": "葛西駅近くにあるドライフラワー作りの体験スタジオ。少人数でゆっくり作れる。",
+    "zh": "葛西站附近的干花制作体验工作室，小班可从容创作。",
+    "en": "A dried-flower arranging studio near Kasai Station; small groups can work at a relaxed pace.",
+    "ko": "카사이역 근처 드라이플라워 체험 스튜디오. 소규모로 여유롭게 만들 수 있어요."
    },
    "hours_i18n": {
     "ja": "11:00～18:00(金曜13:00～)／水曜休",
@@ -30638,7 +30338,7 @@ window.RAILWAY_TOURISM = {
     139.868775726033
    ],
    "dist": "葛西駅 徒歩5分",
-   "desc": "葛西で話題のまぜごはんおむすびスタンド。テイクアウト中心。",
+   "desc": "葛西で話題のまぜごはんおむすびスタンド。テイクアウトを中心に人気を集める。",
    "tags": [
     "all",
     "food",
@@ -30660,10 +30360,10 @@ window.RAILWAY_TOURISM = {
     "ko": "테마루 오무스비 스탠드"
    },
    "desc_i18n": {
-    "ja": "葛西で話題のまぜごはんおむすびスタンド。テイクアウト中心。",
-    "zh": "葛西热门的拌饭饭团外带站。",
-    "en": "A popular mixed-rice onigiri takeaway stand in Kasai.",
-    "ko": "카사이 인기 철밥 삼각김밥 테이크아웃 스탠드."
+    "ja": "葛西で話題のまぜごはんおむすびスタンド。テイクアウトを中心に人気を集める。",
+    "zh": "葛西热门的拌饭饭团外带店，主打外带而人气渐涨。",
+    "en": "A talked-about mixed-rice onigiri takeaway stand in Kasai, popular for its grab-and-go wraps.",
+    "ko": "카사이에서 화제인 철밥 삼각김밥 스탠드. 테이크아웃 중심으로 인기를 끌어요."
    },
    "hours_i18n": {
     "ja": "11:00～17:00(売切次第終了)／日祝・土不定休",
@@ -30711,7 +30411,7 @@ window.RAILWAY_TOURISM = {
     139.73208376301997
    ],
    "dist": "赤坂駅 徒歩8分",
-   "desc": "赤坂の老舗和菓子店。冷やしみたらしが名物で手土産にも人気。",
+   "desc": "赤坂の老舗和菓子店。ひんやりおいしい冷やしみたらしが名物で、手土産にも人気。",
    "tags": [
     "all",
     "food",
@@ -30734,10 +30434,10 @@ window.RAILWAY_TOURISM = {
     "ko": "아카사카 아오노"
    },
    "desc_i18n": {
-    "ja": "赤坂の老舗和菓子店。冷やしみたらしが名物で手土産にも人気。",
-    "zh": "赤坂的老牌和果子店，冷御手洗团子是招牌，适合伴手礼。",
-    "en": "A long-established sweets shop in Akasaka known for chilled mitarashi dango.",
-    "ko": "아카사카 노포 화과자집, 차가운 미타라시가 명물."
+    "ja": "赤坂の老舗和菓子店。ひんやりおいしい冷やしみたらしが名物で、手土産にも人気。",
+    "zh": "赤坂的老牌和果子店，冰凉可口的冷御手洗团子是招牌，也是热门伴手礼。",
+    "en": "A long-established Akasaka sweets shop; chilled mitarashi dango is the signature, popular as a gift.",
+    "ko": "아카사카 노포 화과자집. 시원한 미타라시가 명물이며 선물로도 인기예요."
    },
    "hours_i18n": {
     "ja": "月～金9:00～18:00、土9:00～17:00／日祝休",
@@ -30785,7 +30485,7 @@ window.RAILWAY_TOURISM = {
     139.7373
    ],
    "dist": "赤坂駅より徒歩4分／赤坂見附駅より徒歩3分",
-   "desc": "赤坂の自家焙煎コーヒー専門店。こだわりの豆が味わえる。",
+   "desc": "赤坂にある自家焙煎コーヒー専門店。こだわりの豆を一杯ずつ丁寧にドリップする。",
    "tags": [
     "all",
     "food",
@@ -30807,10 +30507,10 @@ window.RAILWAY_TOURISM = {
     "ko": "마메토라 아카사카 배전소"
    },
    "desc_i18n": {
-    "ja": "赤坂の自家焙煎コーヒー専門店。こだわりの豆が味わえる。",
-    "zh": "赤坂的自家烘焙咖啡专卖店，可品尝精选咖啡豆。",
-    "en": "A specialty coffee roaster in Akasaka.",
-    "ko": "아카사카 홈로스트 커피 전문점."
+    "ja": "赤坂にある自家焙煎コーヒー専門店。こだわりの豆を一杯ずつ丁寧にドリップする。",
+    "zh": "赤坂的自家烘焙咖啡专卖店，精选咖啡豆逐杯精心手冲。",
+    "en": "A specialty roaster in Akasaka, carefully hand-dripping its chosen beans one cup at a time.",
+    "ko": "아카사카 홈로스트 커피 전문점. 엄선한 원두를 한 잔씩 정성껏 내려요."
    },
    "hours_i18n": {
     "ja": "10:00～20:00／年中無休",
@@ -34276,7 +33976,7 @@ window.RAILWAY_TOURISM = {
     139.82645
    ],
    "dist": "綾瀬駅から徒歩約2分",
-   "desc": "綾瀬駅から徒歩約2分のビジネスホテル。",
+   "desc": "綾瀬駅から徒歩約2分のビジネスホテル。駅近で宿泊出張にも便利な立地。",
    "tags": [
     "all",
     "hotel"
@@ -34297,10 +33997,10 @@ window.RAILWAY_TOURISM = {
     "ko": "호텔 리브맥스 도쿄 아야세 역앞"
    },
    "desc_i18n": {
-    "ja": "綾瀬駅から徒歩約2分のビジネスホテル。",
-    "zh": "距绫濑站步行约2分钟的商务酒店。",
-    "en": "A business hotel about a 2-minute walk from Ayase Station.",
-    "ko": "아야세역에서 도보 약 2분 거리 비즈니스 호텔."
+    "ja": "綾瀬駅から徒歩約2分のビジネスホテル。駅近で宿泊出張にも便利な立地。",
+    "zh": "距绫濑站步行约2分钟的商务酒店，临近车站，方便出差住宿。",
+    "en": "A business hotel about 2 minutes on foot from Ayase Station, handy for overnight business stays.",
+    "ko": "아야세역 도보 약 2분 비즈니스 호텔. 역 가까워 출박 숙박에 편리해요."
    },
    "hours_i18n": {
     "ja": "店舗による",
@@ -34350,7 +34050,7 @@ window.RAILWAY_TOURISM = {
     139.824712
    ],
    "dist": "綾瀬駅から徒歩約5分",
-   "desc": "綾瀬駅から徒歩約5分の格安チェーンホテル。",
+   "desc": "綾瀬駅から徒歩約5分の格安チェーンホテル。リーズナブルに泊まれると人気。",
    "tags": [
     "all",
     "hotel"
@@ -34371,10 +34071,10 @@ window.RAILWAY_TOURISM = {
     "ko": "스마일 호텔 도쿄 아야세 역앞"
    },
    "desc_i18n": {
-    "ja": "綾瀬駅から徒歩約5分の格安チェーンホテル。",
-    "zh": "距绫濑站步行约5分钟的经济型连锁酒店。",
-    "en": "An economy chain hotel about 5 minutes on foot from Ayase Station.",
-    "ko": "아야세역 도보 약 5분 거리 가성비 체인 호텔."
+    "ja": "綾瀬駅から徒歩約5分の格安チェーンホテル。リーズナブルに泊まれると人気。",
+    "zh": "距绫濑站步行约5分钟的经济型连锁酒店，以实惠住宿而受欢迎。",
+    "en": "An economy chain hotel about 5 minutes from Ayase Station, popular for affordable stays.",
+    "ko": "아야세역 도보 약 5분 가성비 체인 호텔. 저렴하게 묵기 좋아 인기예요."
    },
    "hours_i18n": {
     "ja": "店舗による",
@@ -34424,7 +34124,7 @@ window.RAILWAY_TOURISM = {
     139.82627
    ],
    "dist": "綾瀬駅から徒歩約2分",
-   "desc": "綾瀬駅前に立地する全国チェーンのビジネスホテル。",
+   "desc": "綾瀬駅前に立地する全国チェーンのビジネスホテル。清潔な客室が快適。",
    "tags": [
     "all",
     "hotel"
@@ -34445,10 +34145,10 @@ window.RAILWAY_TOURISM = {
     "ko": "APA호텔 아야세 역앞"
    },
    "desc_i18n": {
-    "ja": "綾瀬駅前に立地する全国チェーンのビジネスホテル。",
-    "zh": "位于绫濑站前的全国连锁商务酒店。",
-    "en": "A nationwide chain business hotel right in front of Ayase Station.",
-    "ko": "아야세역 앞 전국 체인 비즈니스 호텔."
+    "ja": "綾瀬駅前に立地する全国チェーンのビジネスホテル。清潔な客室が快適。",
+    "zh": "位于绫濑站前的全国连锁商务酒店，客房洁净舒适。",
+    "en": "A nationwide chain business hotel right in front of Ayase Station, with clean, comfortable rooms.",
+    "ko": "아야세역 앞 전국 체인 비즈니스 호텔. 깨끗한 객실이 쾌적해요."
    },
    "hours_i18n": {
     "ja": "店舗による",
@@ -34498,7 +34198,7 @@ window.RAILWAY_TOURISM = {
     139.79613
    ],
    "dist": "北千住駅から徒歩約12分",
-   "desc": "(公式概要参照)",
+   "desc": "北千住駅から徒歩約12分のゲストハウス。素泊まり中心でリーズナブルに、下町・北千住の滞在を楽しめる。",
    "tags": [
     "all",
     "hotel"
@@ -34519,10 +34219,10 @@ window.RAILWAY_TOURISM = {
     "ko": "카가리비 키타센주 게스트하우스"
    },
    "desc_i18n": {
-    "ja": "かがりび – kagaribi – 北千住 Guest House",
-    "zh": "北千住的日式榻榻米民宿。",
-    "en": "A Japanese tatami guesthouse in Kitasenju.",
-    "ko": "기타센주의 일본식 다다미 게스트하우스."
+    "ja": "北千住駅から徒歩約12分のゲストハウス。素泊まり中心でリーズナブルに、下町・北千住の滞在を楽しめる。",
+    "zh": "距北千住站步行约12分钟的青年旅舍，以不含早的经济住宿为主，可轻松体验老街北千住。",
+    "en": "A guesthouse about 12 minutes' walk from Kita-Senju; room-only stays for exploring old-town Tokyo affordably.",
+    "ko": "기타센주역 도보 약 12분 게스트하우스. 조식 없는 가성비 숙박으로 옛 정취를 느끼기 좋아요."
    },
    "hours_i18n": {
     "ja": "店舗による",
@@ -34572,7 +34272,7 @@ window.RAILWAY_TOURISM = {
     139.80455
    ],
    "dist": "北千住駅から徒歩約3分",
-   "desc": "北千住駅から徒歩約3分のデザイナーズホテル。",
+   "desc": "北千住駅から徒歩約3分のデザイナーズホテル。おしゃれな空間で過ごせる。",
    "tags": [
     "all",
     "hotel"
@@ -34593,10 +34293,10 @@ window.RAILWAY_TOURISM = {
     "ko": "어반 도쿄 우노 키타센주"
    },
    "desc_i18n": {
-    "ja": "北千住駅から徒歩約3分のデザイナーズホテル。",
-    "zh": "距北千住站步行约3分钟的设计酒店。",
-    "en": "A design hotel about 3 minutes' walk from Kita-Senju Station.",
-    "ko": "기타센주역 도보 약 3분 디자이너스 호텔."
+    "ja": "北千住駅から徒歩約3分のデザイナーズホテル。おしゃれな空間で過ごせる。",
+    "zh": "距北千住站步行约3分钟的设计酒店，可在时尚空间入住。",
+    "en": "A design hotel about 3 minutes' walk from Kita-Senju Station, stylish rooms to stay in.",
+    "ko": "기타센주역 도보 약 3분 디자이너스 호텔. 세련된 공간에서 머물 수 있어요."
    },
    "hours_i18n": {
     "ja": "店舗による",
@@ -34646,7 +34346,7 @@ window.RAILWAY_TOURISM = {
     139.80294
    ],
    "dist": "北千住駅から徒歩約4分",
-   "desc": "北千住駅から徒歩約4分のシティホテル。",
+   "desc": "北千住駅から徒歩約4分のシティホテル。観光にもビジネスにも便利。",
    "tags": [
     "all",
     "hotel"
@@ -34667,10 +34367,10 @@ window.RAILWAY_TOURISM = {
     "ko": "호텔 코코 그랑 키타센주"
    },
    "desc_i18n": {
-    "ja": "北千住駅から徒歩約4分のシティホテル。",
-    "zh": "距北千住站步行约4分钟的城市酒店。",
-    "en": "A city hotel about 4 minutes' walk from Kita-Senju Station.",
-    "ko": "기타센주역 도보 약 4분 시티 호텔."
+    "ja": "北千住駅から徒歩約4分のシティホテル。観光にもビジネスにも便利。",
+    "zh": "距北千住站步行约4分钟的城市酒店，观光与商务两相宜。",
+    "en": "A city hotel about 4 minutes' walk from Kita-Senju Station, convenient for sightseeing and business.",
+    "ko": "기타센주역 도보 약 4분 시티 호텔. 관광과 비즈니스 어디에도 편리해요."
    },
    "hours_i18n": {
     "ja": "店舗による",
@@ -34720,7 +34420,7 @@ window.RAILWAY_TOURISM = {
     139.80332
    ],
    "dist": "谷塚駅から徒歩約2分",
-   "desc": "谷塚駅から徒歩約2分。天然温泉付きで人気のドーミーイン。",
+   "desc": "谷塚駅から徒歩約2分。天然温泉の大浴場が付いた人気のドーミーイン。",
    "tags": [
     "all",
     "hotel"
@@ -34741,10 +34441,10 @@ window.RAILWAY_TOURISM = {
     "ko": "도미인 익스프레스 소카시티"
    },
    "desc_i18n": {
-    "ja": "谷塚駅から徒歩約2分。天然温泉付きで人気のドーミーイン。",
-    "zh": "距谷冢站步行约2分钟，带天然温泉的多米酒店。",
-    "en": "A Dormy Inn about 2 minutes from Yatsuka Station, with natural hot springs.",
-    "ko": "야쓰카역 도보 약 2분, 천연 온천이 있는 도미인."
+    "ja": "谷塚駅から徒歩約2分。天然温泉の大浴場が付いた人気のドーミーイン。",
+    "zh": "距谷冢站步行约2分钟，附天然温泉大浴场的热门多米酒店。",
+    "en": "A popular Dormy Inn about 2 minutes from Yatsuka Station, with a large natural-hot-spring bath.",
+    "ko": "야쓰카역 도보 약 2분. 천연온천 대욕장이 딸린 인기 도미인이에요."
    },
    "hours_i18n": {
     "ja": "店舗による",
@@ -34794,7 +34494,7 @@ window.RAILWAY_TOURISM = {
     139.805
    ],
    "dist": "草加駅から徒歩約4分",
-   "desc": "草加駅西口から徒歩約4分の東横イン。出張に便利。",
+   "desc": "草加駅西口から徒歩約4分の東横イン。出張や長期滞在にも便利。",
    "tags": [
     "all",
     "hotel"
@@ -34815,10 +34515,10 @@ window.RAILWAY_TOURISM = {
     "ko": "토요코인 소카역 서구치"
    },
    "desc_i18n": {
-    "ja": "草加駅西口から徒歩約4分の東横イン。出張に便利。",
-    "zh": "距草加站西口步行约4分钟的东横INN，方便出差。",
-    "en": "A Toyoko Inn about 4 minutes from Soka Station west exit, handy for business trips.",
-    "ko": "소카역 서쪽 출구 도보 약 4분 도요코인."
+    "ja": "草加駅西口から徒歩約4分の東横イン。出張や長期滞在にも便利。",
+    "zh": "距草加站西口步行约4分钟的东横INN，出差与长住都方便。",
+    "en": "A Toyoko Inn about 4 minutes from Saka Station's west exit, handy for business and longer stays.",
+    "ko": "소카역 서쪽 출구 도보 약 4분 도요코인. 출장과 장기 체류에도 편리해요."
    },
    "hours_i18n": {
     "ja": "店舗による",
@@ -34942,7 +34642,7 @@ window.RAILWAY_TOURISM = {
     139.7913305
    ],
    "dist": "浅草駅から徒歩約6分",
-   "desc": "浅草駅から徒歩約6分。浅草観光の拠点に便利なシティホテル。",
+   "desc": "浅草駅から徒歩約6分。雷門や浅草寺にも近く、浅草観光の拠点に便利なシティホテル。",
    "tags": [
     "all",
     "hotel"
@@ -34963,10 +34663,10 @@ window.RAILWAY_TOURISM = {
     "ko": "아사쿠사 뷰 호텔"
    },
    "desc_i18n": {
-    "ja": "浅草駅から徒歩約6分。浅草観光の拠点に便利なシティホテル。",
-    "zh": "距浅草站步行约6分钟，便于游览浅草的城市酒店。",
-    "en": "A city hotel about 6 minutes' walk from Asakusa, ideal for sightseeing.",
-    "ko": "아사쿠사역 도보 약 6분, 관광 거점에 편리한 시티 호텔."
+    "ja": "浅草駅から徒歩約6分。雷門や浅草寺にも近く、浅草観光の拠点に便利なシティホテル。",
+    "zh": "距浅草站步行约6分钟，近雷门与浅草寺，便于游览浅草的城市酒店。",
+    "en": "A city hotel about 6 minutes from Asakusa, near Kaminarimon and Senso-ji, ideal for sightseeing.",
+    "ko": "아사쿠사역 도보 약 6분. 가미나리몬·센소지와 가까워 아사쿠사 관광 거점에 편리해요."
    },
    "hours_i18n": {
     "ja": "店舗による",
