@@ -498,6 +498,42 @@ function applyData(data, i18n) {
         }
       });
 
+      // 8b. Fix Yokohama Subway station name_map mismatches
+      //     name_map used "Center Minami"/"Center Kita" (no -G suffix, space),
+      //     but actual station IDs are "Center-Minami-G"/"Center-Kita-G" (hyphen + -G suffix).
+      //     This broke StationResolver._normalizeId() and made route search fail.
+      if (window.STATION_NAME_MAP) {
+        var YOKOHAMA_NAME_FIXES = {
+          'センター南': 'Center-Minami-G',
+          'センター北': 'Center-Kita-G'
+        };
+        for (var jpKey in YOKOHAMA_NAME_FIXES) {
+          var correctId = YOKOHAMA_NAME_FIXES[jpKey];
+          window.STATION_NAME_MAP[jpKey] = { ja: jpKey, en: correctId };
+          if (window.EN_STATION_NAME_MAP) {
+            window.EN_STATION_NAME_MAP[correctId] = jpKey;
+          }
+        }
+        // Add missing entries for stations with no name_map at all
+        var YOKOHAMA_MISSING_NAMES = {
+          'Nakagawa-Yokohama': { ja: '中川', zh: '中川', ko: '나가가와' },
+          'Kawawachi':         { ja: '川和', zh: '川和', ko: '카와와치' },
+          'Takada':            { ja: '高田', zh: '高田', ko: '타카다' }
+        };
+        for (var sid in YOKOHAMA_MISSING_NAMES) {
+          var info = YOKOHAMA_MISSING_NAMES[sid];
+          if (!window.STATION_NAME_MAP[sid]) {
+            window.STATION_NAME_MAP[sid] = { ja: info.ja, en: sid };
+          }
+          if (window.EN_STATION_NAME_MAP && !window.EN_STATION_NAME_MAP[sid]) {
+            window.EN_STATION_NAME_MAP[sid] = info.ja;
+          }
+          if (!_stationI18n[sid]) {
+            _stationI18n[sid] = { ja: info.ja, zh: info.zh, ko: info.ko };
+          }
+        }
+      }
+
       // 9. Add Chiyoda Line Kita-Ayase Branch (branch: Ayase -> Kita-Ayase)
       //    Kita-Ayase is a branch terminal, not part of the Chiyoda main line run.
       var _chiyoda = window.UNIFIED_LINES['Chiyoda'];

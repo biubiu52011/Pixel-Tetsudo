@@ -8,9 +8,12 @@
   var _jpToEn = {};
   var _enToJp = {};
   var _jpToCanon = {};
+  var _zhToCanon = {};
+  var _koToCanon = {};
   var _lineStationIds = null;
 
   function _hasJapanese(s) { return /[\u4e00-\u9fff\u3040-\u309f\u30a0-\u30ff]/.test(s); }
+  function _hasKorean(s) { return /[\uac00-\ud7af]/.test(s); }
 
   /**
    * Normalize a resolved station ID to the canonical casing used in line.stations.
@@ -59,9 +62,12 @@
     if (_lineStationIds !== null) return;
     _lineStationIds = new Set();
     _jpToCanon = {};
+    _zhToCanon = {};
+    _koToCanon = {};
     var lines = window.RailwayDB && window.RailwayDB.getAllLines
       ? window.RailwayDB.getAllLines()
       : (window.UNIFIED_LINES || {});
+    var i18n = window._stationI18n || window.STATION_I18N || {};
     for (var lid in lines) {
       var line = lines[lid];
       if (line && line.stations) {
@@ -72,6 +78,12 @@
           if (window.RailwayDB && window.RailwayDB.resolveStationName) {
             var _ja = window.RailwayDB.resolveStationName(_sid, 'ja');
             if (_ja && _ja !== _sid && !_jpToCanon[_ja]) _jpToCanon[_ja] = _sid;
+          }
+          // Chinese / Korean reverse index from i18n
+          var entry = i18n[_sid];
+          if (entry) {
+            if (entry.zh && !_zhToCanon[entry.zh]) _zhToCanon[entry.zh] = _sid;
+            if (entry.ko && !_koToCanon[entry.ko]) _koToCanon[entry.ko] = _sid;
           }
         }
       }
@@ -133,6 +145,15 @@
         var normJp = _normalizeId(_jpToEn[q]);
         return [{ stationId: normJp, displayName: _jpToEn[q], status: "EXACT" }];
       }
+      // Chinese / Korean input fallback: same CJK characters as Japanese,
+      // but name_map keys are in Japanese kanji (東京 not 东京).
+      // Check zh/ko reverse indexes from i18n before falling through to fuzzy match.
+      if (_zhToCanon[q]) {
+        return [{ stationId: _zhToCanon[q], displayName: q, status: "EXACT" }];
+      }
+      if (_koToCanon[q]) {
+        return [{ stationId: _koToCanon[q], displayName: q, status: "EXACT" }];
+      }
       var jpMatches = [];
       var _seen = {};
       for (var jpKey in _jpToEn) {
@@ -172,6 +193,10 @@
       var jk = _enToJp[qLower];
       var jid = _normalizeId(_jpToEn[jk] || qLower);
       if (jid) return [{ stationId: jid, displayName: jid, status: "ALIAS" }];
+    }
+    // Korean input fallback (Hangul doesn't match Japanese regex)
+    if (_hasKorean(q) && _koToCanon[q]) {
+      return [{ stationId: _koToCanon[q], displayName: q, status: "EXACT" }];
     }
     // Substring match over real station IDs (case/accent-insensitive)
     var partial = [];
