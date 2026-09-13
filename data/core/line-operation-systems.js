@@ -198,13 +198,17 @@ window.LineOperationSystems = {
       order: 15
     },
     {
-      code: "UT",
+      code: "",
       nameJa: "上野東京ライン",
       nameZh: "上野东京线",
       nameEn: "Ueno-Tokyo Line",
       nameKo: "우에노도쿄 라인",
       color: "#f68b1e",
       lineIds: ["Tokaido", "UtsunomiyaJR", "Takasaki"],
+      subNameJa: "高崎線～東海道線",
+      subNameZh: "高崎线～东海道线",
+      subNameEn: "Takasaki ~ Tokaido",
+      subNameKo: "다카사키 ~ 도카이도",
       icon: "../images/鉄道/JR東日本/上野東京ライン.png",
       order: 15.5
     },
