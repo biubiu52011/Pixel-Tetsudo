@@ -50,6 +50,35 @@ var currentStationKey = null;
     return key;
   }
 
+  // 4.3.597: 出站指引条 HTML——跨站最优出站推荐
+  // 场景：定位到 A 站显示"从 A 站 O 口出"；若其他站出口明显更近，推荐"去 X 站 Y 口出"
+  function buildExitGuide(spotLat, spotLng, fromStationKey) {
+    if (!window.TourismProximity || !TourismProximity.recommendExitStation) return '';
+    var reco = TourismProximity.recommendExitStation(spotLat, spotLng, fromStationKey || null, 2000);
+    var label = '<span class="exit-label">' + t('detail.exit') + '</span>';
+    if (!reco || !reco.best) {
+      return '<div class="detail-exit-bar exit-na">' + label + '<span class="exit-value">' + escapeHtml(t('detail.exit_na')) + '</span></div>';
+    }
+    var bestLabel = getStationLabel(reco.best.stationId);
+    var bestDist = TourismProximity.formatDistance(reco.best.distance);
+    var from = reco.fromExit;
+    if (from && from.stationId === reco.best.stationId) {
+      // 当前站即最优出站站：从本站 X 口出
+      var val = bestLabel + ' ' + reco.best.exitName + '・' + bestDist;
+      return '<div class="detail-exit-bar">' + label + '<span class="exit-value">' + escapeHtml(val) + '</span></div>';
+    }
+    if (from) {
+      // 跨站推荐：本站出口较远 → 建议去更近的 X 站 Y 口出
+      var fromDist = TourismProximity.formatDistance(from.distance);
+      var val2 = t('detail.exit_here_station') + ' ' + from.exitName + '・' + fromDist
+        + ' → ' + t('detail.exit_better_prefix') + bestLabel + ' ' + reco.best.exitName + '・' + bestDist;
+      return '<div class="detail-exit-bar exit-better">' + label + '<span class="exit-value">' + escapeHtml(val2) + '</span></div>';
+    }
+    // 无当前站：直接推荐全局最优出站
+    var val3 = t('detail.exit_reco') + bestLabel + ' ' + reco.best.exitName + '・' + bestDist;
+    return '<div class="detail-exit-bar">' + label + '<span class="exit-value">' + escapeHtml(val3) + '</span></div>';
+  }
+
   // Get spot display name based on language
   function getSpotName(spot) {
     if (!spot) return '';
@@ -222,6 +251,10 @@ var currentStationKey = null;
     var spotBestTime = translateCommonTerms(getI18nField(spot, 'bestTime', lang) || t('detail.fallback_best_time'), lang);
     var quickInfo = '<div class="detail-quick-info">' + '<div class="qi-item"><div class="qi-label">' + t('detail.distance') + '</div><div class="qi-value">' + escapeHtml(distText || t('detail.near_station')) + '</div></div>' + '<div class="qi-item"><div class="qi-label">' + t('detail.best_time') + '</div><div class="qi-value">' + escapeHtml(spotBestTime) + '</div></div>' + '</div>';
 
+    // 4.3.597: 出站指引——跨站最优出站推荐
+    // 定位到 A 站显示"从 A 站 O 口出"；若其他站出口明显更近，推荐"去 X 站 Y 口出"
+    var exitHtml = buildExitGuide(mapLat, mapLng, stationKey || currentStationKey);
+
     var heroClass = getHeroClassForGradient(gradient);
     var html = '<div class="article-hero ' + heroClass + '">'
       + imageHtml
@@ -231,6 +264,7 @@ var currentStationKey = null;
       + '<h1 class="article-title">' + escapeHtml(spotName) + '</h1>'
       + '</div></div>'
       + quickInfo
+      + exitHtml
       + '<div class="article-body">'
       + '<div class="article-section">'
       + '<h3 class="section-heading">' + t('detail.about') + '</h3>'

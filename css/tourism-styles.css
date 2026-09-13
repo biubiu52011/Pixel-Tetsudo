@@ -695,6 +695,39 @@
   font-weight: 700;
 }
 
+/* === Exit guide bar (4.3.597) === */
+.detail-exit-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0 0;
+  padding: 9px 14px;
+  background: rgba(0, 120, 255, 0.07);
+  border: 1px solid rgba(0, 120, 255, 0.18);
+  border-radius: 10px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.detail-exit-bar .exit-label {
+  flex-shrink: 0;
+  font-weight: 700;
+  color: var(--accent, #0078ff);
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.detail-exit-bar .exit-value {
+  color: var(--text);
+  word-break: break-word;
+}
+.detail-exit-bar.exit-better {
+  background: rgba(255, 165, 0, 0.08);
+  border-color: rgba(255, 165, 0, 0.25);
+}
+.detail-exit-bar.exit-na {
+  opacity: 0.55;
+}
+
 /* === Hero meta === */
 .hero-meta {
   display: flex;

@@ -185,6 +185,43 @@
 
 
 
+  /**
+   * 4.3.597: 跨站最优出站推荐——遍历 STATION_EXITS 全部站，对每站取最近出口，
+   * 按出口→spot 距离升序，给出全局最优出站站+出口；同时返回当前站(fromStationId)的出站信息。
+   * 场景：定位到 A 站时显示"从 A 站 O 口出"；若其他站出口明显更近，推荐"去 X 站 Y 口出"。
+   * @param {number} spotLat - Spot latitude
+   * @param {number} spotLng - Spot longitude
+   * @param {string|null} fromStationId - 当前定位/来源站 ID（可空）
+   * @param {number} maxDistM - 只考虑出口距离在此范围内的站（默认 2000m）
+   * @returns {Object|null} {
+   *   best: { stationId, exitName, distance } | null,
+   *   fromExit: { stationId, exitName, distance } | null,
+   *   list: Array<{ stationId, exitName, distance }>
+   * }
+   */
+  function recommendExitStation(spotLat, spotLng, fromStationId, maxDistM) {
+    if (spotLat == null || spotLng == null) return null;
+    maxDistM = (maxDistM > 0) ? maxDistM : 2000;
+    var allExits = (window.STATION_EXITS) || {};
+    var list = [];
+    Object.keys(allExits).forEach(function(sid) {
+      var nearest = getNearestExit(sid, spotLat, spotLng);
+      if (!nearest || nearest.distance == null || nearest.distance === Infinity) return;
+      if (nearest.distance > maxDistM) return;
+      list.push({ stationId: sid, exitName: nearest.name, distance: nearest.distance });
+    });
+    list.sort(function(a, b) { return a.distance - b.distance; });
+    if (!list.length) return { best: null, fromExit: null, list: [] };
+    var fromExit = null;
+    if (fromStationId) {
+      var f = getNearestExit(fromStationId, spotLat, spotLng);
+      if (f && f.distance != null && f.distance !== Infinity && f.distance <= maxDistM) {
+        fromExit = { stationId: fromStationId, exitName: f.name, distance: f.distance };
+      }
+    }
+    return { best: list[0], fromExit: fromExit, list: list };
+  }
+
   function getNearestStation(userLat, userLng) {
     if (userLat == null || userLng == null) return null;
     var sc = window.STATION_COORDS || {};
@@ -210,6 +247,7 @@
     getNearestStation: getNearestStation,
     getNearestExit: getNearestExit,
     getExitNameByCoords: getExitNameByCoords,
+    recommendExitStation: recommendExitStation,
     formatDistance: formatDistance,
     formatWalkMinutes: formatWalkMinutes,
     invalidateCache: invalidateCache,
