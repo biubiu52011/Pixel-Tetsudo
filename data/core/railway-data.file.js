@@ -10057,12 +10057,6 @@ window.RAILWAY_DATA = {
           "note": ""
         },
         {
-          "station": "Higashi-Koganei",
-          "lineId": "Komii",
-          "type": "in",
-          "note": ""
-        },
-        {
           "station": "Kokubunji",
           "lineId": "Kokubunji",
           "type": "in",
@@ -22254,36 +22248,6 @@ window.RAILWAY_DATA = {
           "lineId": "ChuoMain",
           "type": "in",
           "note": ""
-        },
-        {
-          "station": "Matsubara",
-          "lineId": "TokyuSetagaya",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Haguro",
-          "lineId": "Mito",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Ryuo",
-          "lineId": "ChuoMain",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Higashi-Koganei",
-          "lineId": "ChuoRapid",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Koganei",
-          "lineId": "UtsunomiyaJR",
-          "type": "in",
-          "note": ""
         }
       ],
       "nameZh": "小海线",
@@ -22502,12 +22466,6 @@ window.RAILWAY_DATA = {
         {
           "station": "Oyama",
           "lineId": "UtsunomiyaJR",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Haguro",
-          "lineId": "Komii",
           "type": "in",
           "note": ""
         },
@@ -27591,14 +27549,7 @@ window.RAILWAY_DATA = {
         "Matsubara",
         "Shimo-takaido"
       ],
-      "transferStations": [
-        {
-          "station": "Matsubara",
-          "lineId": "Komii",
-          "type": "in",
-          "note": ""
-        }
-      ],
+      "transferStations": [],
       "nameZh": "东急世田谷线",
       "nameKo": "도큐 세타가야선"
     },
@@ -28264,12 +28215,6 @@ window.RAILWAY_DATA = {
         {
           "station": "Takao",
           "lineId": "KeioTakao",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Ryuo",
-          "lineId": "Komii",
           "type": "in",
           "note": ""
         },
@@ -29288,12 +29233,6 @@ window.RAILWAY_DATA = {
         {
           "station": "Oyama",
           "lineId": "Ryomo",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Koganei",
-          "lineId": "Komii",
           "type": "in",
           "note": ""
         },

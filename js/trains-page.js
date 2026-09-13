@@ -273,11 +273,20 @@
       if (t.lineId === lineId) continue;
       var tl = src[t.lineId];
       if (!tl) continue;
-      var img = (tl.image && !/(グループ|ロゴ|マーク|アイコン|シンボル)/.test(tl.image)) ? tl.image : "";
+      // v4.3.613: 图标单一权威 = LOS ResolveIcon（LOS 拥有每个运行系统的图标，
+      // 注释规定 Consumer 必须先调用）；fallback line.image——宇都宮線等
+      // railway_data.image 为空的线自动获得官方徽章图。
+      // 占位图（JRグループ等集团徽标）过滤——八高線/伊東線等无专用徽章图的线
+      // 降级为色块徽章（LOS 官方色 + 记号），与图片徽章同一套视觉语言。
+      var _placeholderRe = /(グループ|ロゴ|マーク|アイコン|シンボル)/;
+      var _losIcon = (window.LineOperationSystemsResolveIcon && window.LineOperationSystemsResolveIcon(t.lineId)) || "";
+      var img = (_losIcon && !_placeholderRe.test(_losIcon)) ? _losIcon :
+                (tl.image && !_placeholderRe.test(tl.image) ? tl.image : "");
       var nm = (window.RailwayDB && window.RailwayDB.resolveLineName) ? window.RailwayDB.resolveLineName(t.lineId, window.currentLang) : (tl.name || t.lineId);
       if (!map[t.station]) map[t.station] = [];
       map[t.station].push({
         lineId: t.lineId, image: img, name: nm, operator: tl.operator || "",
+        code: tl.code || "",
         color: (window.LineOperationSystemsResolveColor && window.LineOperationSystemsResolveColor(t.lineId)) || tl.color || "", type: t.type === "out" ? "out" : "in", note: t.note || ""
       });
     }
@@ -305,6 +314,30 @@
     }
     _transferMapCache = { lineId: lineId, lang: _langNow, map: map };
     return map;
+  }
+
+  // v4.3.613: LOS 系统组键——同一运行系统（同 code 同 icon，如横须贺·总武快速 JO）
+  // 视为同一徽章去重；高崎/宇都宮虽同 code JU 但 icon 不同（两条独立系统）不合并。
+  function _losGroupKey(t) {
+    var los = window.LineOperationSystems;
+    if (!los || !t) return null;
+    var found = null;
+    for (var g in los) {
+      var arr = los[g];
+      if (!Array.isArray(arr)) continue;
+      for (var i = 0; i < arr.length; i++) {
+        var sys = arr[i];
+        if (sys.lineIds && sys.lineIds.indexOf(t.lineId) !== -1) { found = sys; break; }
+      }
+      if (found) break;
+    }
+    if (!found) return null;
+    return found.code + "|" + (found.icon || "");
+  }
+  // 色块徽章宽度（无图标线的统一徽章，v4.3.613）
+  function _badgeW(it, isMobile) {
+    var txt = (it.code || (it.name || it.lineId || "")).slice(0, 5);
+    return txt.length * (isMobile ? 7 : 5) + 8;
   }
 
   // Industry-standard through-service affordance (mirrors JR/Tokyo Metro
@@ -1345,9 +1378,27 @@
       var ICON = 16; // v4.3.497: 换乘图标统一 16px（与站名字号一致，用户尝试）
       var GAP = 2;
       var PER_ROW = 4;
-      var MAX_ROWS = 2;
+      var MAX_ROWS = 3; // v4.3.613: 2→3 行——JR 大站（东京/新宿）换乘超 8 条，截断致"同一套系统无法区分"
       var maxShow = PER_ROW * MAX_ROWS;
       var nonThru = txLines.filter(function(t) { return !t.through; });
+      // v4.3.613 系统级去重：同一运营系统只显示一个徽章——
+      // ①同 icon（视觉身份）：横须贺·总武快速同 JO、東海道線 JT 与干线本名
+      //   TokaidoMain 同 icon → 合并；②无 icon 时按 LOS 系统键（高崎/宇都宮
+      //   icon 不同 → 保留为两条独立线）
+      var seenIcon = {};
+      nonThru = nonThru.filter(function(t) {
+        var key = t.image ? ("I:" + t.image) : (_losGroupKey(t) || ("L:" + t.lineId));
+        if (seenIcon[key]) return false;
+        seenIcon[key] = true;
+        return true;
+      });
+      // v4.3.613 JR 东系统内换乘排前（行业惯例：JR 线一组、私铁/地铁另排）——
+      // 同记号系列（JK-JY）连续可辨，跨公司换乘不插队
+      nonThru.sort(function(a, b) {
+        var aj = a.operator === "JR-East" ? 0 : 1;
+        var bj = b.operator === "JR-East" ? 0 : 1;
+        return aj - bj;
+      });
       var shown = nonThru.slice(0, maxShow);
       var rows = Math.ceil(shown.length / PER_ROW);
       var _rowWAt = function(r) {
@@ -1355,7 +1406,7 @@
         var from = r * PER_ROW, to = Math.min((r + 1) * PER_ROW, shown.length);
         for (var k = from; k < to; k++) {
           var it = shown[k];
-          acc += (it.image ? ICON : (((it.name || "").length) * (isMobileView ? 11 : 6) + 4)) + GAP;
+          acc += (it.image ? ICON : _badgeW(it, isMobileView)) + GAP;
         }
         return acc > 0 ? acc - GAP : 0;
       };
@@ -1458,15 +1509,30 @@
             tImg.appendChild(tTitle);
             staticLayer.appendChild(tImg);
           } else {
-            var tTxt = document.createElementNS(svgNS, "text");
-            tTxt.setAttribute("x", tix);
-            tTxt.setAttribute("y", tiy + 10);
-            tTxt.setAttribute("font-size", isCompact ? (isMobileView ? "9" : "6") : (isMobileView ? "11" : "6"));
-            tTxt.setAttribute("fill", "#999");
-            tTxt.textContent = ((txl.name || "").length > 4 ? (txl.name || "").slice(0, 4) + "…" : (txl.name || ""));
-            staticLayer.appendChild(tTxt);
+            // v4.3.613: 无图标线统一为色块徽章（LOS 官方色 + 路线记号）——替代灰色小字，
+            // 与图片徽章同一套视觉语言（JR 换乘看板 = 色块+记号）
+            var badgeTxt = (txl.code || (txl.name || txl.lineId || "")).slice(0, 5);
+            var bW = _badgeW(txl, isMobileView);
+            var bH = isMobileView ? 15 : 11;
+            var bRect = document.createElementNS(svgNS, "rect");
+            bRect.setAttribute("x", tix);
+            bRect.setAttribute("y", tiy);
+            bRect.setAttribute("width", bW);
+            bRect.setAttribute("height", bH);
+            bRect.setAttribute("rx", "2");
+            bRect.setAttribute("fill", txl.color || "#8a8a8a");
+            staticLayer.appendChild(bRect);
+            var bTxt = document.createElementNS(svgNS, "text");
+            bTxt.setAttribute("x", tix + bW / 2);
+            bTxt.setAttribute("y", tiy + bH / 2 + (isMobileView ? 3.2 : 2.2));
+            bTxt.setAttribute("text-anchor", "middle");
+            bTxt.setAttribute("font-size", isMobileView ? "9" : "6.5");
+            bTxt.setAttribute("font-weight", "600");
+            bTxt.setAttribute("fill", "#fff");
+            bTxt.textContent = badgeTxt;
+            staticLayer.appendChild(bTxt);
           }
-          _rowCur += (txl.image ? ICON : (((txl.name || "").length) * (isMobileView ? 11 : 6) + 4)) + GAP;
+          _rowCur += (txl.image ? ICON : _badgeW(txl, isMobileView)) + GAP;
         }
       }
       if (moreText) {
