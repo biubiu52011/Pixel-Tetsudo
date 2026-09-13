@@ -67,6 +67,16 @@
     transfers: { transfer: 1000, through: 0 }
   };
 
+  // v4.3.602: 快速/特急通過駅——LSO 站表包含「線路经过但不站站停」的通过站，
+  // durations 按各站停车基准累加会高估快速线时间（常磐快速 北千住→取手 38分 vs 实际 ~31分）。
+  // 通过站只计运行时间（省去停站+加减速），按 EXPRESS_PASS_RATIO 折扣。
+  // 值 0.5 经常磐快速实时间校准（4 个通过站 3+3+3+4=13分 → 6.5分，合计 ~31.5分）。
+  // 数据源：各线公式停站表（wiki）。Joban=常磐快速 松戸〜柏间ノンストップ（通过 亀有/馬橋/新松戸/北小金）。
+  const EXPRESS_PASS_RATIO = 0.5;
+  const EXPRESS_SKIP_STATIONS = {
+    'Joban': { 'Kameari': 1, 'Mabashi': 1, 'Shin-Matsudo': 1, 'Kita-Kogane': 1 }
+  };
+
   // Minimal binary min-heap for Dijkstra priority queue.
   function _MinHeap() {
     this.a = [];
@@ -247,7 +257,10 @@
       for (const ai of adj) {
         const nst = meta.stations[ai];
         const nk = nst + '\u0001' + lid;
-        const d = (meta.durations && meta.durations[pos] != null) ? meta.durations[pos] : 2;
+        let d = (meta.durations && meta.durations[pos] != null) ? meta.durations[pos] : 2;
+        // v4.3.602: 快速通过站折扣（见 EXPRESS_SKIP_STATIONS）
+        const sk = EXPRESS_SKIP_STATIONS[lid];
+        if (sk && sk[nst]) d = d * EXPRESS_PASS_RATIO;
         const nc = cost + d;
         const rc = dist.get(nk);
         if (!rc || nc < rc[0] || (nc === rc[0] && transfers < rc[1])) {
