@@ -29732,6 +29732,211 @@
           "note": ""
         }
       ]
+    },
+    "UenoTokyo": {
+      "name": "UenoTokyo",
+      "nameEn": "Ueno-Tokyo Line",
+      "nameJa": "上野東京ライン",
+      "nameZh": "上野东京线",
+      "nameKo": "우에노도쿄 라인",
+      "code": "",
+      "color": "#f68b1e",
+      "operator": "JR-East",
+      "region": "Tokyo Area",
+      "type": "straight",
+      "image": "../images/鉄道/JR東日本/上野東京ライン.png",
+      "durationTotalMin": 40,
+      "branchOf": null,
+      "stations": [
+        "Omiya",
+        "Urawa",
+        "Ueno",
+        "Tokyo",
+        "Shinagawa",
+        "Kawasaki",
+        "Yokohama",
+        "Ofuna"
+      ],
+      "durations": [
+        3,
+        4,
+        3,
+        3,
+        4,
+        4,
+        5
+      ],
+      "throughServices": [],
+      "transferStations": [
+        {
+          "station": "Omiya",
+          "lineId": "KeihinTohoku",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Omiya",
+          "lineId": "Saikyo",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Omiya",
+          "lineId": "Takasaki",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Omiya",
+          "lineId": "UtsunomiyaJR",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Urawa",
+          "lineId": "KeihinTohoku",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Urawa",
+          "lineId": "Takasaki",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Urawa",
+          "lineId": "UtsunomiyaJR",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Ueno",
+          "lineId": "KeihinTohoku",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Ueno",
+          "lineId": "Yamanote",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Ueno",
+          "lineId": "Joban",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Tokyo",
+          "lineId": "Tokaido",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Tokyo",
+          "lineId": "ChuoRapid",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Tokyo",
+          "lineId": "Yamanote",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Tokyo",
+          "lineId": "SobuRapid",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Shinagawa",
+          "lineId": "Tokaido",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Shinagawa",
+          "lineId": "Yamanote",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Shinagawa",
+          "lineId": "KeihinTohoku",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Shinagawa",
+          "lineId": "Yokosuka",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Kawasaki",
+          "lineId": "KeihinTohoku",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Kawasaki",
+          "lineId": "Tokaido",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Yokohama",
+          "lineId": "KeihinTohoku",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Yokohama",
+          "lineId": "Tokaido",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Yokohama",
+          "lineId": "Yokosuka",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Yokohama",
+          "lineId": "ShonanShinjuku",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Ofuna",
+          "lineId": "KeihinTohoku",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Ofuna",
+          "lineId": "Tokaido",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Ofuna",
+          "lineId": "Yokosuka",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Ofuna",
+          "lineId": "ShonanShinjuku",
+          "type": "in",
+          "note": ""
+        }
+      ]
     }
   },
   "name_map": {
@@ -31364,7 +31569,8 @@
       "Kawagoe",
       "Noda",
       "NewShuttle",
-      "UtsunomiyaJR"
+      "UtsunomiyaJR",
+      "UenoTokyo"
     ],
     "Saitama-Shintoshin": [
       "KeihinTohoku",
@@ -31381,7 +31587,8 @@
       "KeihinTohoku",
       "ShonanShinjuku",
       "Takasaki",
-      "UtsunomiyaJR"
+      "UtsunomiyaJR",
+      "UenoTokyo"
     ],
     "Minami-Urawa": [
       "KeihinTohoku",
@@ -31444,7 +31651,8 @@
       "Hibiya",
       "Yamanote",
       "UtsunomiyaJR",
-      "JobanLocal"
+      "JobanLocal",
+      "UenoTokyo"
     ],
     "Okachimachi": [
       "KeihinTohoku",
@@ -31476,7 +31684,8 @@
       "SobuRapid",
       "Yamanote",
       "TokaidoMain",
-      "UtsunomiyaJR"
+      "UtsunomiyaJR",
+      "UenoTokyo"
     ],
     "Yurakucho": [
       "KeihinTohoku",
@@ -31517,7 +31726,8 @@
       "Tokaido",
       "Keikyu",
       "Yamanote",
-      "TokaidoMain"
+      "TokaidoMain",
+      "UenoTokyo"
     ],
     "Oimachi": [
       "KeihinTohoku",
@@ -31537,7 +31747,8 @@
       "KeihinTohoku",
       "Nambu",
       "Tokaido",
-      "TokaidoMain"
+      "TokaidoMain",
+      "UenoTokyo"
     ],
     "Tsurumi": [
       "KeihinTohoku",
@@ -31563,7 +31774,8 @@
       "Keikyu",
       "SotetsuMain",
       "TokaidoMain",
-      "MinatoMirai"
+      "MinatoMirai",
+      "UenoTokyo"
     ],
     "Sakuragicho": [
       "KeihinTohoku",
@@ -31603,7 +31815,8 @@
       "Yokosuka",
       "ShonanShinjuku",
       "Tokaido",
-      "TokaidoMain"
+      "TokaidoMain",
+      "UenoTokyo"
     ],
     "Kurihama": [
       "Yokosuka"
@@ -42844,6 +43057,16 @@
       "Kawasakishimmachi": 2,
       "Hatchonawate": 3,
       "Shitte": 4
+    },
+    "UenoTokyo": {
+      "Omiya": 0,
+      "Urawa": 1,
+      "Ueno": 2,
+      "Tokyo": 3,
+      "Shinagawa": 4,
+      "Kawasaki": 5,
+      "Yokohama": 6,
+      "Ofuna": 7
     }
   }
 }
