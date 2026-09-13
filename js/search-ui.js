@@ -446,8 +446,11 @@
             if (!_slot || !_times[_ridx]) continue;
             var _tm = _times[_ridx];
             var _platHtml = _tm.platform ? '<span class="journey-seg-platform">' + window.escapeHtml(t('search.platform').replace('{p}', _tm.platform)) + '</span>' : '';
+            // v4.3.595: 改札口徽章（EXIT_DATA 精选版）——与番线并排显示，如"中央改札"
+            var _exitHtml = _tm.exit ? '<span class="journey-seg-exit">' + window.escapeHtml(_tm.exit) + '</span>' : '';
             _slot.innerHTML = '<span class="journey-seg-time-dep">' + window.escapeHtml(_tm.dep) + _rtDP + '</span>' +
                               _platHtml +
+                              _exitHtml +
                               '<span class="journey-seg-time-arr">' + window.escapeHtml(_tm.arr) + _rtAR + '</span>';
           }
           // 直通降级：ODPT 分表无贯通车次时，"乗換不要"改回换乘文案并去除直通样式（避免误导）
