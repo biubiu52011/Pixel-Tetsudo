@@ -1330,3 +1330,10 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 **修复**：①home.html 在 db-loader.js 后、station-resolver.js 前接入 `station-i18n.file.js`（+bump 604）；②station-resolver.js i18n 读取兼容 `window.RAILWAY_I18N`；③新增 `_enToCanon` 反向索引（i18n en 字段→canonical ID，_asciiLower 归一），resolve() 非日文分支在 _enToJp 后追加 _enToCanon 精确匹配。
 **验证**：resolve 直测 10 站全 EXACT（涩谷/御茶之水/松户/키타센쥬/토리데/시부야/치바/Kitasenju/Toride/北千住）；本地+线上端到端——ZH 涩谷→御茶之水 3号站台+7・8号站台、KO 키타센쥬→토리데 1번 승강장、EN Kitasenju→Toride Platform 1、回归 ZH 北千住→取手 1号站台。push 9968116。
 **遗留**：繁体中文（澀谷/御茶ノ水/松戸）未做繁简转换归一——zh 字段为简体，繁体输入走日文分支可能部分命中（日文汉字同形站）或 NOT_FOUND，待用户拍板是否加繁→简归一。
+
+## 4.3.605（2026-09-13，线路图尺寸以山手线为基准）
+**用户指示**："以山手线的线路图尺寸为基准进行其他线路图调整"——trains 页各线路图尺寸不统一。
+**探查实证（线上量化）**：山手线（环线）viewBox 297×1242、渲染 scale 1.51（字 16→24px 饱满）；直线型（中央/常磐/总武/京滨东北）viewBox 445×H、scale 1.01（字 16px 小、中间细条留白）——差异根源：环线 svgW 固定公式 rectW+150*loopScale=297；直线型移动端 _baseW=容器宽-16（v4.3.545 1:1 密度基线）。
+**修复**（js/trains-page.js）：GEOM 新增 MOBILE_CONTENT_W=297（=山手线 svgW 值，注释 v4.3.605）；直线型移动端 _baseW 由 `Math.max(容器宽-16,320)` 改为固定 GEOM.MOBILE_CONTENT_W——所有直线型与山手线同内容密度（1.51x 视觉放大）；svgW=max(_baseW,内容需求) 自动扩展保证支线/站名/换乘不压缩。桌面端不变（820）。
+**验证**：本地+线上（trains.html?v=4.3.605）——山手 297×1242 / 中央 297×1688 / 常磐 297×1490 / 京滨东北 297×2986，scale 均 1.51，字号 16→24px 显示；成田线 793.6×1186（多支线内容需求主导，改前 445 基准时同值，非回归）。push cfbd138。
+**教训**：页面语言由 currentLang 决定（zh），卡片 textContent 为简体——线上验证点击需用简体关键词（曾误用日文"中央線"导致点击静默失败、残留上一线路图 viewBox 造成误读）。
