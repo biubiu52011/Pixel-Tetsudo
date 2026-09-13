@@ -246,11 +246,32 @@
     if (idx2 < 0) return null;
     for (var ti = 0; ti < thrIds.length; ti++) {
       var tl = src2[thrIds[ti]];
-      if (tl && tl.stations && tl.stations.indexOf(stationId) >= 0) {
-        if (idx2 === 0) return "up";
-        if (idx2 === sts2.length - 1) return "down";
-        return "middle";
+      if (!tl || !tl.stations) continue;
+      if (tl.stations.indexOf(stationId) < 0) continue;
+      // 端点判断：连接站是当前线的第一个站 → 往上延伸直通
+      if (idx2 === 0) return "up";
+      // 端点判断：连接站是当前线的最后一个站 → 往下延伸直通
+      if (idx2 === sts2.length - 1) return "down";
+      // 中间站：看当前线里连接站之后（往下）的站，是否都在直通线上
+      // 例：东海道线直通，東京站往下（品川→川崎→横浜→大船）都是东海道线 → down
+      var allAfterOnThrough = true;
+      var afterCount = 0;
+      for (var ai = idx2 + 1; ai < sts2.length; ai++) {
+        if (tl.stations.indexOf(sts2[ai]) < 0) { allAfterOnThrough = false; break; }
+        afterCount++;
       }
+      if (allAfterOnThrough && afterCount >= 2) return "down";
+      // 中间站：看当前线里连接站之前（往上）的站，是否都在直通线上
+      // 例：高崎线直通，大宮站往上（浦和→...）都是高崎线 → up
+      var allBeforeOnThrough = true;
+      var beforeCount = 0;
+      for (var bi = 0; bi < idx2; bi++) {
+        if (tl.stations.indexOf(sts2[bi]) < 0) { allBeforeOnThrough = false; break; }
+        beforeCount++;
+      }
+      if (allBeforeOnThrough && beforeCount >= 2) return "up";
+      // 连接站在中间，前后都不全在直通线上 → 侧面直通
+      return "middle";
     }
     return null;
   }
