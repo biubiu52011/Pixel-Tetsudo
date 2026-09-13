@@ -29740,7 +29740,7 @@ window.RAILWAY_DATA = {
       "nameZh": "上野东京线",
       "nameKo": "우에노도쿄 라인",
       "code": "",
-      "color": "#f68b1e",
+      "color": "#9358b6",
       "operator": "JR-East",
       "region": "Tokyo Area",
       "type": "straight",

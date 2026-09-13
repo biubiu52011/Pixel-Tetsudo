@@ -203,7 +203,7 @@ window.LineOperationSystems = {
       nameZh: "上野东京线",
       nameEn: "Ueno-Tokyo Line",
       nameKo: "우에노도쿄 라인",
-      color: "#f68b1e",
+      color: "#9358b6",
       lineIds: ["UenoTokyo"],
       subNameJa: "宇都宮線・高崎線・常磐線～東海道線",
       subNameZh: "宇都宫线・高崎线・常磐线～东海道线",
