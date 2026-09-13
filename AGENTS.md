@@ -1268,3 +1268,18 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 **方向映射要点（防错）**：Yamanote 站序=内回り方向（東京@0 起点）→ 内回り=升序1/外回り=降序-1；**Yamanote@東京 故意不收录**（站序切点在東京，内外回 direction 均判 1 有歧义）；ShonanShinjuku 站序=大宮→小田原 → 南行=升序1/北行=降序-1（初版写反已修正）；品川/横浜 的上野東京ライン直通段用 "*" 兜底（品川不在 UtsunomiyaJR/Takasaki 站序，direction=0）
 **验证**：node --check 4 文件；一致性脚本（方向/站存在性）全过；本地 DOM——東京→新宿 17:00発1・2番線、横浜→渋谷 湘南新宿ライン 4番線、渋谷→横浜 4番線、池袋→上野 3番線（北行）、上野→大宮 高崎線 5・6番線、品川→東京 東海道線 6・7番線（上り）、東京→品川 9・10番線（下り）、大宮→東京 湘南新宿ライン 11番線；中文界面"1・2号站台"；0 console 错误
 **遗留**：其余站/线番线未覆盖（后续按需扩充）；品川→東京 若 route-search 选 Joban 段会显示 9・10（品川発常磐線=9・10 下り，该场景实际应走上野东京ライン=6・7，属 route-search 选线既有行为非番线引入）
+
+## 4.3.597（2026-09-13，番线库批量扩充 + 改札口精选版）
+**用户指示**："现在很多都没做出入口对应"→"不只抓站台还有出入口"——首版仅 8 枢纽大量站无番线，需批量扩充并加入出入口。
+**番线扩充**（data/core/platform-data.js，wikiのりば 8→44 站 / 13→17 线）：
+- 山手线全线除东京（22 站新增）：Kanda/Akihabara/Okachimachi/Uguisudani/Nippori/Tabata/Komagome/Sugamo/Otsuka/Mejiro/Takadanobaba/Yoyogi/Harajuku/Ebisu/Meguro/Gotanda/Osaki/Takanawa-Gateway/Tamachi/Hamamatsucho/Shimbashi/Yurakucho（内回り=站序升序1/外回り=-1；**大塚は駒込/巣鴨と内外回番线相反**（1=内回り 2=外回り，wiki 逐站确认）；东京仍不收录因 direction 歧义）
+- 中央線快速 8 站：Kanda(6/5)/Nakano(6/7)/Ogikubo(3/4)/Kichijoji(3/4)/Mitaka(3・4/5・6)/Kokubunji(1・2/3・4)/Tachikawa(5・6/3・4)/Hachioji(4/2)
+- 中央・総武 4 站：Mitaka(1・2)/Nakano(2/1)/Yoyogi(4/3)/Akihabara(6/5)；京浜東北 11 站：Tabata/Nippori(9/12)/Uguisudani/Okachimachi/Akihabara/Kanda/Yurakucho/Shimbashi(3/6)/Hamamatsucho/Tamachi/Takanawa-Gateway(4/3)
+- 常磐 Nippori(4/3)、湘南新宿 Ebisu/Osaki(5/8)、埼京 Osaki(6・7)/Ebisu(3/4)、南武 Tachikawa(7・8)、横浜線 Hachioji(5・6)、八高 Hachioji(1)、青梅 Tachikawa(1・2)、東海道 Shimbashi(1/2)、横須賀 Shimbashi(2/1)
+- 东京站数据复核：wiki 東京駅のりば——中央線=1・2（首版正确）、東海道=9・10（正确）、京浜東北=6/3、上野東京ライン=7・8、横須賀地下1・2、総武快速地下3・4、京葉1～4（全部与首版一致，无需修正）
+**改札口精选版**（EXIT_DATA，wiki「駅構造」节改札口记载）：
+- 数据源调查结论：ODPT/JR公式時刻表/JR官网駅ページ（info.aspx 仅営業時間）均无结构化出口数据；wiki 只有改札口名称（无"线路→口"映射，多口无主）；完整映射仅在 JR公式駅構内図（PDF 图）——行业产品（乗換案内/Google）搜索结果也只显示番线，出入口属駅詳細层级
+- EXIT_DATA[stationId].default：仅收录 wiki 明确"主要改札口"的 5 枢纽——秋葉原/上野/品川/横浜/大宮=中央改札；東京（丸の内/八重洲多口）/新宿/渋谷/池袋/新橋/吉祥寺 等无主不写（不误导）
+- PlatformResolver.resolveExit(stationId) 公共 API；route-timetable enrichSegments 解析 exit；search-ui 渲染蓝色改札口徽章（.journey-seg-exit，--blue-dim/--blue-pale 新增 CSS 变量）；口名保持日文原名不翻译（专有名词，行业惯例）
+**验证**：node --check 3 文件；Resolver 6 项（Sugamo内2/Otsuka外2/Mitaka下3・4/Osaki埼京6・7/Ueno中央改札/Shibuya null）；本地 DOM——上野→池袋 高崎線5・6番線+中央改札徽章、秋葉原→新宿 中央総武5番線+中央改札、吉祥寺→立川 中央快速3番線；0 console 错误；全页 bump 597（与并发会话 596 避让）
+**遗留**：御茶ノ水/四ツ谷/高円寺/西荻窪/武蔵境/西国分寺/日野/豊田/西八王子/高尾/赤羽/浦和/川口/大井町/大森/蒲田/川崎/千葉/船橋/松戸/柏/北千住 等站番线待后续；改札口完整映射（構内図级）待用户拍板是否抓官网 PDF；大崎駅方向已含
