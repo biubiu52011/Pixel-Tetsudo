@@ -204,12 +204,15 @@ var currentStationKey = null;
 
     var spotHours = translateCommonTerms(getI18nField(spot, 'hours', lang) || t('detail.unavailable'), lang);
     var spotFee = translateCommonTerms(getI18nField(spot, 'fee', lang) || t('detail.unavailable'), lang);
+    // 店铺类（餐饮/购物）费用标签用"人均"（在店消费场景），非店铺用"入场费"
+    var _isShop = spot.tags && (spot.tags.indexOf('food') >= 0 || spot.tags.indexOf('shopping') >= 0);
+    var feeLabel = _isShop ? t('detail.info_fee_per_person') : t('detail.info_fee');
     // Info grid (hours, fees)
     var infoHtml = '<div class="article-section">'
       + '<h3 class="section-heading">' + t('detail.basic_info') + '</h3>'
       + '<div class="info-grid">'
       + '<div class="info-row"><span class="info-label">' + t('detail.info_hours') + '</span><span class="info-value">' + escapeHtml(spotHours) + '</span></div>'
-      + '<div class="info-row"><span class="info-label">' + t('detail.info_fee') + '</span><span class="info-value">' + escapeHtml(spotFee) + '</span></div>'
+      + '<div class="info-row"><span class="info-label">' + feeLabel + '</span><span class="info-value">' + escapeHtml(spotFee) + '</span></div>'
       + '</div></div>';
 
     // Map container (OSM iframe)
