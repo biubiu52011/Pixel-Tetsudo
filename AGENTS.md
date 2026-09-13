@@ -1346,3 +1346,12 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 - 32 家 dist 占位补全（按 railway_data stations 最近站 80m/分，前轮写入本轮随 commit 落定）
 **待用户确认（未编造坐标）**：うめつば精确坐标（2026新店，Tabelog/Retty URL 未取得，hotpepper 未収録，nominatim 空）；大谷田公園（大谷田4-4-1）/大谷田南公園（中川4-42-1）官方地址不同但库内同坐标 [35.7782,139.8378]；LASOLA Bhutan/杉本とうふ 同坐标组（东京店信息缺失，LASOLA 搜索均为不丹本国店）
 **验证**：bundle 重生成 OK；17 家全部写回并逐一核对；重复坐标组 9→5（2 组为合理同址：回向院同址史跡 / LUSH·BarBrass 同楼園生ビル）
+
+## 4.3.607（2026-09-13，成田线机场支线修正·数据真身+缓存机制）
+**用户指示**（#Narita 线路图）："别把机场的两个站拉的这么远，而且还没有说可以换乘京成"。
+**修复**（3 项）：
+1. **横排站距**（js/trains-page.js）：`最宽名+sp` → `max(sp, 最宽名+12)`——长站名（机场第2航站楼）不再双倍惩罚。机场两站 195→118px（zh 7字 135px），短站名横排支线（鹤见）不变（302×754 更紧凑）。
+2. **机场两站补京成换乘**：Narita + NaritaAirportBranch transferStations 各 +2（Airport-Terminal-2/Narita-Airport → Keisei）。京成（Keisei 京成本線）与 JR 空港支线**共用站 ID**（Airport-Terminal-2/Narita-Airport 两线都有），但 _getTransferMap 只读主线 own.transferStations 声明、不自动匹配同 ID 站 → 必须显式声明。
+3. **数据真身教训（重要）**：先误改 `railway-data.file.js`（产物）被 gen-file-data.js 覆盖——**真身 = railway_data.json**（db-loader fetchRemote 拉 JSON；.file.js 仅 file:// 模式 bundle，由 `node data/core/gen-file-data.js` 生成）。改 JSON 后重新生成。另 trains.html 的 db-loader.js?v=4.3.547 严重滞后 → DB_CACHE_VERSION 跟随 script ?v=（stale-while-revalidate localStorage 缓存 key）→ 旧缓存遮蔽新数据（DataLayer txCount=7 旧）——bump 547→607 后 txCount=9 生效。
+**验证**：本地+线上 607——机场两站 195→118/135px、京成換乘图标（京成本線.png）×2 显示、鹤见/山手/中央回归正常、无 JS error。push 5dd275c。
+**教训**：改数据必须改 railway_data.json 真身 + gen-file-data.js 重新生成 + bump 引用 db-loader 的 ?v=（缓存 key）。
