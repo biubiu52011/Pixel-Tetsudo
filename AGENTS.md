@@ -1225,3 +1225,17 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 - css/style.css：.journey-seg 改 column 两行结构；新增 .journey-seg-head（flex wrap）；.journey-seg-name 去 min-width:90px；.journey-seg-route flex:1→auto；.journey-seg-direction-badge 绿底绿框徽章（与 train_type 徽章同系）
 **验证**：node --check search-ui.js/translations.js 通过；4 页 bump 4.3.587→4.3.588（home/history/realtime/tourism-detail 各 20/8/22/15 处）；线上 DOM 检查（换乘/直通标签文案、方向徽章 class）待用户人工确认视觉
 **遗留**：発着時刻（需時刻表推算，档2）、乗換步行時間・待ち時間（需站内步行数据）未实施
+
+## 4.3.590（2026-09-13，搜索発着時刻推算·时刻表接入）
+**用户指示**："结合时刻表和车站信息，告诉几点几分在哪个站台"——搜索结果展示発着時刻。
+**数据可行性实测（ODPT 实拉 ChuoRapid）**：TrainTimetable tto 只有 departureStation/departureTime/arrivalStation/arrivalTime，**无 platformNumber（発着番線）**——ODPT 生态不提供番线，本轮做时刻（発着時刻），番线列 Known Debt 待数据源。
+**改动**：
+- data/api/odpt-unified.js：①惰性模式——window.ODPT_LAZY=true 时跳过自动 init（loadAllData 会全量拉所有 operator 实时/时刻表，home 首屏不可承受）；home 加载本库仅供按需查询。②splitTruncatedByCalendar 提升为模块级（原局部函数，op 参数化），供全量加载与按需查询共用。③新增 ODPTClient.getCompleteTimetable(operator, railway)——单请求 ≥1000 条（截断信号）按日历拆分合并，内存缓存复用
+- js/route-timetable.js（新，window.RouteTimetable）：enrichSegments(routeSegments)→{segIdx:{dep,arr}}——ODPT station ID 末段匹配本地站 key；起点站 departureTime≥now 最近班次；arr 取同班次终点站时刻（末站 arrivalTime/中间站 departureTime）；按今天日历（Weekday/Saturday/SaturdayHoliday/Holiday）过滤，无候选放宽全日历；ODPT 空数据动态注入 data/timetables/<lineId>-manual.js（404 容忍降级）
+- js/search-ui.js renderResults：ride 段加 data-seg-idx + .journey-seg-times 占位；innerHTML 提交后异步 enrichSegments 回填 "14:05発 14:12着"（不阻塞首屏，失败静默降级）
+- js/translations.js：search.time_dep/time_arr 四语言（ja 発/着、zh 发/到、en dep/arr、ko 발/착）
+- css/style.css：.journey-seg-times（margin-left:auto 右对齐）/time-dep（绿粗）/time-arr（灰小）
+- pages/home.html：odpt-links.js + window.ODPT_LAZY=true + odpt-unified.js（official-railway 前）+ route-timetable.js（search-ui 后）
+**版本协调**：4.3.589 被并发会话占用（tourism 人均费用 4f7e6b2），本轮用 4.3.590；589 改动在 detail.* 键与 4 页 bump，与本轮 search.* 键/脚本接线无重叠（git diff HEAD 验证）
+**验证**：node --check 4 文件通过；线上 DOM 验证（御茶ノ水→渋谷 中央線/埼京線 発着時刻徽章、横浜→池袋 直通段时刻）待 push
+**遗留**：発着番線（站台）ODPT 无数据——需手建枢纽番线库（方案 B）或新数据源，列 Known Debt

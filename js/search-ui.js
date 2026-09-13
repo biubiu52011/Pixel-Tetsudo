@@ -378,7 +378,7 @@
             var lineColor = (window.LineOperationSystemsResolveColor && window.LineOperationSystemsResolveColor(lineId)) || (window.RailwayDB && window.RailwayDB.getLine(lineId) ? (window.RailwayDB.getLine(lineId).color || null) : null) || null;
             var fromSt = window.RailwayDB && window.RailwayDB.resolveStationName ? window.RailwayDB.resolveStationName(seg.fromStation, lang) : (seg.fromStation || '');
             var toSt = window.RailwayDB && window.RailwayDB.resolveStationName ? window.RailwayDB.resolveStationName(seg.toStation, lang) : (seg.toStation || '');
-            html += '<div class="journey-seg" data-seg-color="' + window.escapeHtml(lineColor || '') + '">';
+            html += '<div class="journey-seg" data-seg-color="' + window.escapeHtml(lineColor || '') + '" data-seg-idx="' + i + '">';
             html += '<div class="journey-seg-head">';
             html += '<span class="journey-seg-name">' + window.escapeHtml(lineName || '') + '</span>';
             if (seg.trainType) { html += '<span class="journey-seg-type">' + window.escapeHtml(t('train_type.' + seg.trainType)) + '</span>'; }
@@ -405,6 +405,7 @@
               var _dirName = (window.RailwayDB && window.RailwayDB.resolveStationName) ? window.RailwayDB.resolveStationName(_dirSt, lang) : _dirSt;
               html += '<span class="journey-seg-direction-badge">' + window.escapeHtml(t('search.direction').replace('{s}', _dirName)) + '</span>';
             }
+            html += '<span class="journey-seg-times" data-seg-times="' + i + '"></span>';
             html += '</div>';
             html += '<span class="journey-seg-route">' + window.escapeHtml(fromSt) + ' &rarr; ' + window.escapeHtml(toSt) + '</span>';
             html += '</div>';
@@ -430,6 +431,23 @@
         if (color) seg.style.setProperty('border-left-color', color);
       });
       if (spotsHtml) { this.resultsDiv.insertAdjacentHTML('beforeend', spotsHtml); }
+      // v4.3.589: 発着時刻推算（异步回填）——ODPT 时刻表/手动表查询完成后把 "14:05発 14:12着"
+      // 注入各乗車段右侧（数据未就绪时不阻塞首屏，查询失败静默降级为无时刻展示）
+      if (window.RouteTimetable && result.routeSegments) {
+        var _rtSelf = this;
+        var _rtDP = t('search.time_dep') || '\u767a';
+        var _rtAR = t('search.time_arr') || '\u7740';
+        window.RouteTimetable.enrichSegments(result.routeSegments).then(function(times) {
+          if (!_rtSelf.resultsDiv) return;
+          for (var _ridx in times) {
+            var _slot = _rtSelf.resultsDiv.querySelector('[data-seg-times="' + _ridx + '"]');
+            if (!_slot || !times[_ridx]) continue;
+            var _tm = times[_ridx];
+            _slot.innerHTML = '<span class="journey-seg-time-dep">' + window.escapeHtml(_tm.dep) + _rtDP + '</span>' +
+                              '<span class="journey-seg-time-arr">' + window.escapeHtml(_tm.arr) + _rtAR + '</span>';
+          }
+        }).catch(function() {});
+      }
       // Mode tab switching: re-run the search with the new mode (bind AFTER innerHTML commit)
       var _self = this;
       var _modeTabs = this.resultsDiv ? this.resultsDiv.querySelectorAll('.mode-tab') : [];

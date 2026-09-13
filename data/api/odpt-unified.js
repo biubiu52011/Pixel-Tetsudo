@@ -652,6 +652,26 @@
             return fetchODPT(url).then(extractData);
         },
 
+        // v4.3.589: 完整时刻表（搜索按需查询用）——单请求 ≥1000 条（ODPT 截断信号）时
+        // 按日历拆分合并，避免缺班次；内存缓存复用，同线并发只发一次请求。
+        getCompleteTimetable: function(operator, railway) {
+            var ck = operator + ':' + railway;
+            if (this._timetableCache[ck]) return Promise.resolve(this._timetableCache[ck]);
+            var self = this;
+            return this.getTimetableForRailway(operator, railway).then(function(data) {
+                var rows = (data && data.length > 0) ? data : [];
+                if (rows.length >= 1000) {
+                    return splitTruncatedByCalendar(operator, railway).then(function(merged) {
+                        var final = merged.length > rows.length ? merged : rows;
+                        self._timetableCache[ck] = final;
+                        return final;
+                    }, function() { self._timetableCache[ck] = rows; return rows; });
+                }
+                self._timetableCache[ck] = rows;
+                return rows;
+            });
+        },
+
         // 时刻表缓存（避免重复请求）
         _timetableCache: {},
 
@@ -1131,35 +1151,36 @@
             var batch = localLineIds.filter(function(lid) {
                 return ODPT_ENDPOINTS[op] && ODPT_ENDPOINTS[op].trainTimetable;
             });
-            // v4.3.512: ODPT 单请求 1000 条硬上限（acl:page 实测 400 不支持分页）——
-            // 恰 1000 条 = 截断信号，按日历拆成多次请求合并出完整数据。
-            // 实测 5 条首都圈大线截断：Yamanote 1037 / Keiyo 1127 / ChuoRapid 1087 /
-            // ChuoSobuLocal 1196 / KeihinTohoku 1263（合并后全量，各日历分片均 <1000）。
+        // v4.3.589: 分线截断合并已提升为模块级 splitTruncatedByCalendar（供按需查询复用）
+        // v4.3.512: ODPT 单请求 1000 条硬上限（acl:page 实测 400 不支持分页）——
+        // 恰 1000 条 = 截断信号，按日历拆成多次请求合并出完整数据。
+        // 实测 5 条首都圈大线截断：Yamanote 1037 / Keiyo 1127 / ChuoRapid 1087 /
+        // ChuoSobuLocal 1196 / KeihinTohoku 1263（合并后全量，各日历分片均 <1000）。
+        function splitTruncatedByCalendar(op, lid) {
             var CAL_SPLIT = ['odpt.Calendar:Weekday', 'odpt.Calendar:SaturdayHoliday', 'odpt.Calendar:Holiday'];
-            function splitTruncatedByCalendar(lid) {
-                var seen = {};
-                function dedup(list) {
-                    var out = [];
-                    list.forEach(function(tt) {
-                        if (!tt) return;
-                        // 同车次×同日历×同方向 = 同一条记录（日历拆分后天然区分平日/休日班次）
-                        var k = (tt['odpt:trainNumber'] || '') + '|' + (tt['odpt:railway'] || '') + '|' + (tt['odpt:calendar'] || '') + '|' + (tt['odpt:railDirection'] || '');
-                        if (seen[k]) return;
-                        seen[k] = true;
-                        out.push(tt);
-                    });
-                    return out;
-                }
-                var chain = Promise.resolve([]);
-                CAL_SPLIT.forEach(function(cal) {
-                    chain = chain.then(function(acc) {
-                        return window.ODPTClient.getTimetableForRailway(op, lid, { calendar: cal }).then(function(part) {
-                            return acc.concat(part || []);
-                        }, function() { return acc; });  // 单日历失败不阻断，取其余部分
-                    });
+            var seen = {};
+            function dedup(list) {
+                var out = [];
+                list.forEach(function(tt) {
+                    if (!tt) return;
+                    // 同车次×同日历×同方向 = 同一条记录（日历拆分后天然区分平日/休日班次）
+                    var k = (tt['odpt:trainNumber'] || '') + '|' + (tt['odpt:railway'] || '') + '|' + (tt['odpt:calendar'] || '') + '|' + (tt['odpt:railDirection'] || '');
+                    if (seen[k]) return;
+                    seen[k] = true;
+                    out.push(tt);
                 });
-                return chain.then(dedup);
+                return out;
             }
+            var chain = Promise.resolve([]);
+            CAL_SPLIT.forEach(function(cal) {
+                chain = chain.then(function(acc) {
+                    return window.ODPTClient.getTimetableForRailway(op, lid, { calendar: cal }).then(function(part) {
+                        return acc.concat(part || []);
+                    }, function() { return acc; });  // 单日历失败不阻断，取其余部分
+                });
+            });
+            return chain.then(dedup);
+        }
             // v4.3.489: 分批并行拉取——fetchODPT 自带 3 并发 + 150ms 滑动窗口限速；
             // 85 条一次 Promise.all 在弱网/沙箱下可能被连接池限流卡住，每批 20 条链式
             // 推进，既完整覆盖又避免瞬时请求过多（约 4-6s 完成全量）
@@ -1174,7 +1195,7 @@
                         var rows = (data && data.length > 0) ? data : [];
                         // 截断线：按日历拆分重拉合并（替换截断数据）
                         if (rows.length >= 1000) {
-                            return splitTruncatedByCalendar(lid).then(function(merged) {
+                            return splitTruncatedByCalendar(op, lid).then(function(merged) {
                                 return merged.length > rows.length ? merged : rows;  // 拆分失败/无增益时回退
                             });
                         }
@@ -1291,6 +1312,12 @@
 
     // v4.3.395: 请求尽早发起——fetch 不依赖 DOM，脚本执行即请求，不再等 DOMContentLoaded
     // （原实现在 DOMContentLoaded 后才 init，延误请求被页面全部资源加载完才发出，白白多等数秒）
-    init();
+    // v4.3.589: 惰性模式——首页搜索按需查询时刻表时加载本库但跳过全量 init（loadAllData
+    // 会拉全部 operator 实时/时刻表，首页首屏不可承受）；搜索模块经 getCompleteTimetable 按需拉取。
+    if (window.ODPT_LAZY === true) {
+        console.debug("[ODPT] Lazy mode enabled - skip auto init");
+    } else {
+        init();
+    }
 
 })();
