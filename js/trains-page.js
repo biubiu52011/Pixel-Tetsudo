@@ -335,8 +335,10 @@
     return found.code + "|" + (found.icon || "");
   }
   // 色块徽章宽度（无图标线的统一徽章，v4.3.613）
+  // v4.3.614: 徽章文字改线名（当前语言）而非记号——HAC 等记号普通用户看不懂，
+  // 图片徽章内含线名可读，色块徽章同理显示线名（截 4 字）
   function _badgeW(it, isMobile) {
-    var txt = (it.code || (it.name || it.lineId || "")).slice(0, 5);
+    var txt = (it.name || it.lineId || "").slice(0, 4);
     return txt.length * (isMobile ? 7 : 5) + 8;
   }
 
@@ -1511,7 +1513,7 @@
           } else {
             // v4.3.613: 无图标线统一为色块徽章（LOS 官方色 + 路线记号）——替代灰色小字，
             // 与图片徽章同一套视觉语言（JR 换乘看板 = 色块+记号）
-            var badgeTxt = (txl.code || (txl.name || txl.lineId || "")).slice(0, 5);
+            var badgeTxt = (txl.name || txl.lineId || "").slice(0, 4);
             var bW = _badgeW(txl, isMobileView);
             var bH = isMobileView ? 15 : 11;
             var bRect = document.createElementNS(svgNS, "rect");
