@@ -1255,3 +1255,16 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 - js/route-search.js：①findRoute 两处 lineInfo.push lines 改存 lastLine（真实 ID，删除 nm=line.name 取值）；②buildRouteSegments 改以 lines[0] 直接作 lineId（删除 nameToId 反查）、lineName 字段由 getLine(lineId).name 兼容、transfer 段 fromLine/toLines 改传真实 ID；③删除已无引用的 getNameToIdMap/_nameToIdCache（防未来误导）
 - js/history.js：①safeInit 增加等待 DataLoader.isLoaded()（db 错误或 15s 超时放行兜底）——修复渲染早于 db 就绪导致站名/线路名显示 ID/英文的时序 bug；②旧历史条目（存 line.name）渲染时 resolveLineName 原样返回则按 name/nameEn/nameJa 反查 lineId 再解析（_resolveLineIdOrName）
 **验证**：node --check 2 文件；本地 DOM——新宿→宇都宮 routeSegments 换乘段 fromLine/toLines 为 ID（ChuoRapid/Komii/UtsunomiyaJR）、日文界面换乘徽章=宇都宮線（原英文 Utsunomiya Line）、中文界面=宇都宫线、历史页线路=中央線快速, 小海線, 宇都宮線 + 站名=新宿→宇都宮（原 ID/英文）
+
+## 4.3.594（2026-09-13，発着番線显示·手建番线库首版）
+**用户指示**："我觉得还要加上番台"——搜索结果乗車段显示"何番線から発車"。
+**数据源调查（线上实证）**：ODPT TrainTimetable 实测无番線（ChuoRapid 1087 条 tto 仅 departure/arrival Time，hasPlatform=0）；手动时刻表（ODPT 兼容格式）无番線；JR公式時刻表网页（tt1039/1039090 中央線快速、timetable-v 磐越西線 261d1 等）innerText 均无"番線"字样；JR駅ページ（info.aspx）仅线路列表无のりば。**结论：番線只能手建（Known Debt 方案 B）——以 ja.wikipedia 各駅「のりば」節为数据源（出典注記 JR東日本駅構内図 / 交通新聞社JR時刻表2026年9月号）。**
+**实现**：
+- 新 Provider `data/core/platform-data.js`：`window.PLATFORM_DATA[lineId][stationId][direction] = 番線`；direction 与 route-search buildRouteSegments 一致（LINE_STATION_ORDER 站序升序=1/降序=-1/无法判定查 "*" 兜底）；`PlatformResolver.resolve(lineId, stationId, direction)` 公共 API，查不到返回 null（展示层静默省略不误导）
+- 首版覆盖 8 枢纽（東京/新宿/渋谷/池袋/上野/品川/横浜/大宮）× 13 线（ChuoRapid/ChuoSobuLocal/Yamanote/KeihinTohoku/UtsunomiyaJR/Takasaki/Joban/Tokaido/Yokosuka/SobuRapid/Keiyo/Saikyo/ShonanShinjuku），direction 方向按各线站序人工换算（wiki 下り/上り/北行/南行/内回り/外回り → 站序方向）；"主に"类备注不写入，仅确定性/常用番线（区间用"・"如 7・8）
+- js/route-timetable.js enrichSegments：hit 命中时按 seg.lineId/fromStation/direction 解析番線，返回 platform 字段（times[segIdx].platform）
+- js/search-ui.js：时刻徽章渲染 "14:05発" + `<span class="journey-seg-platform">1・2番線</span>` + "14:12着"；js/translations.js 4 语言 search.platform（en Platform {p} / zh {p}号站台 / ja {p}番線 / ko {p}番 승강장）；css/style.css .journey-seg-platform（绿色小徽章）
+- pages/home.html 引入 platform-data.js（route-timetable.js 之前）+ 全页 bump 594
+**方向映射要点（防错）**：Yamanote 站序=内回り方向（東京@0 起点）→ 内回り=升序1/外回り=降序-1；**Yamanote@東京 故意不收录**（站序切点在東京，内外回 direction 均判 1 有歧义）；ShonanShinjuku 站序=大宮→小田原 → 南行=升序1/北行=降序-1（初版写反已修正）；品川/横浜 的上野東京ライン直通段用 "*" 兜底（品川不在 UtsunomiyaJR/Takasaki 站序，direction=0）
+**验证**：node --check 4 文件；一致性脚本（方向/站存在性）全过；本地 DOM——東京→新宿 17:00発1・2番線、横浜→渋谷 湘南新宿ライン 4番線、渋谷→横浜 4番線、池袋→上野 3番線（北行）、上野→大宮 高崎線 5・6番線、品川→東京 東海道線 6・7番線（上り）、東京→品川 9・10番線（下り）、大宮→東京 湘南新宿ライン 11番線；中文界面"1・2号站台"；0 console 错误
+**遗留**：其余站/线番线未覆盖（后续按需扩充）；品川→東京 若 route-search 选 Joban 段会显示 9・10（品川発常磐線=9・10 下り，该场景实际应走上野东京ライン=6・7，属 route-search 选线既有行为非番线引入）
