@@ -198,7 +198,7 @@ window.LineOperationSystems = {
       order: 15
     },
     {
-      code: "JU",
+      code: "UT",
       nameJa: "上野東京ライン",
       nameZh: "上野东京线",
       nameEn: "Ueno-Tokyo Line",
