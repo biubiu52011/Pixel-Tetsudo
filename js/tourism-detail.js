@@ -50,34 +50,8 @@ var currentStationKey = null;
     return key;
   }
 
-  // 4.3.597: 出站指引条 HTML——跨站最优出站推荐
-  // 场景：定位到 A 站显示"从 A 站 O 口出"；若其他站出口明显更近，推荐"去 X 站 Y 口出"
-  function buildExitGuide(spotLat, spotLng, fromStationKey) {
-    if (!window.TourismProximity || !TourismProximity.recommendExitStation) return '';
-    var reco = TourismProximity.recommendExitStation(spotLat, spotLng, fromStationKey || null, 2000);
-    var label = '<span class="exit-label">' + t('detail.exit') + '</span>';
-    if (!reco || !reco.best) {
-      return '<div class="detail-exit-bar exit-na">' + label + '<span class="exit-value">' + escapeHtml(t('detail.exit_na')) + '</span></div>';
-    }
-    var bestLabel = getStationLabel(reco.best.stationId);
-    var bestDist = TourismProximity.formatDistance(reco.best.distance);
-    var from = reco.fromExit;
-    if (from && from.stationId === reco.best.stationId) {
-      // 当前站即最优出站站：从本站 X 口出
-      var val = bestLabel + ' ' + reco.best.exitName + '・' + bestDist;
-      return '<div class="detail-exit-bar">' + label + '<span class="exit-value">' + escapeHtml(val) + '</span></div>';
-    }
-    if (from) {
-      // 跨站推荐：本站出口较远 → 建议去更近的 X 站 Y 口出
-      var fromDist = TourismProximity.formatDistance(from.distance);
-      var val2 = t('detail.exit_here_station') + ' ' + from.exitName + '・' + fromDist
-        + ' → ' + t('detail.exit_better_prefix') + bestLabel + ' ' + reco.best.exitName + '・' + bestDist;
-      return '<div class="detail-exit-bar exit-better">' + label + '<span class="exit-value">' + escapeHtml(val2) + '</span></div>';
-    }
-    // 无当前站：直接推荐全局最优出站
-    var val3 = t('detail.exit_reco') + bestLabel + ' ' + reco.best.exitName + '・' + bestDist;
-    return '<div class="detail-exit-bar">' + label + '<span class="exit-value">' + escapeHtml(val3) + '</span></div>';
-  }
+  // 4.3.621: 出站指引已与距离块融合（见 renderSpotDetail）——统一以"跨站最优出口"为
+  // 唯一距离口径（出口→景点 米 + 步行分钟），原独立出站指引条移除，避免两处距离割裂。
 
   // Get spot display name based on language
   function getSpotName(spot) {
@@ -184,21 +158,40 @@ var currentStationKey = null;
     var stationCoords = window.STATION_COORDS || {};
     var stationName = '';
     var distText = '';
+    var distMain = '';   // v4.3.621: 融合主行（站+出口+距离）
+    var distSub = '';    // v4.3.621: 融合副行（步行分钟）
     if (stationKey || currentStationKey) {
       stationName = getStationLabel(stationKey || currentStationKey);
     } else if (spotStation && stationCoords[spotStation]) {
       stationName = getStationLabel(spotStation);
     }
-    if (spotStation && stationCoords[spotStation]) {
-      var sc = stationCoords[spotStation];
-      var sLat = sc[0] || 0, sLng = sc[1] || 0;
-      if (sLat && sLng) {
-        var dist = TourismProximity.getDistance(sLat, sLng, mapLat, mapLng);
-        distText = TourismProximity.formatWalkMinutes(dist, { at_station: t('detail.at_station'), min_walk: t('detail.min_walk') });
-        }
+    // v4.3.621: 出站指引与距离融合——统一以"跨站最优出口"为唯一距离口径（出口→景点），
+    // 替代原"景点绑定站中心→景点"的近似值（站中心≠出口，两处距离割裂且可能指向不同站）。
+    // 无出口数据时回退原逻辑（绑定站中心步行分钟 / spotDist）。
+    var exitReco = null;
+    if (window.TourismProximity && TourismProximity.recommendExitStation) {
+      exitReco = TourismProximity.recommendExitStation(mapLat, mapLng, stationKey || currentStationKey || null, 2000);
     }
-    // Fallback: use spot's own dist/dir
-    if (!distText && spotDist) distText = spotDist;
+    if (exitReco && exitReco.best) {
+      var _bestLabel = getStationLabel(exitReco.best.stationId);
+      var _bestDistM = TourismProximity.formatDistance(exitReco.best.distance);
+      distMain = _bestLabel + ' ' + exitReco.best.exitName + '・' + (_bestDistM || '');
+      if (exitReco.best.distance >= 100) {
+        distSub = TourismProximity.formatWalkMinutes(exitReco.best.distance, { at_station: t('detail.at_station'), min_walk: t('detail.min_walk') }) || '';
+      }
+    }
+    if (!distMain) {
+      if (spotStation && stationCoords[spotStation]) {
+        var sc = stationCoords[spotStation];
+        var sLat = sc[0] || 0, sLng = sc[1] || 0;
+        if (sLat && sLng) {
+          var dist = TourismProximity.getDistance(sLat, sLng, mapLat, mapLng);
+          distText = TourismProximity.formatWalkMinutes(dist, { at_station: t('detail.at_station'), min_walk: t('detail.min_walk') });
+        }
+      }
+      // Fallback: use spot's own dist/dir
+      if (!distText && spotDist) distText = spotDist;
+    }
 
     // Hero image
     var imageHtml = '';
@@ -253,11 +246,11 @@ var currentStationKey = null;
 
     // Quick info bar
     var spotBestTime = translateCommonTerms(getI18nField(spot, 'bestTime', lang) || t('detail.fallback_best_time'), lang);
-    var quickInfo = '<div class="detail-quick-info">' + '<div class="qi-item"><div class="qi-label">' + t('detail.distance') + '</div><div class="qi-value">' + escapeHtml(distText || t('detail.near_station')) + '</div></div>' + '<div class="qi-item"><div class="qi-label">' + t('detail.best_time') + '</div><div class="qi-value">' + escapeHtml(spotBestTime) + '</div></div>' + '</div>';
-
-    // 4.3.597: 出站指引——跨站最优出站推荐
-    // 定位到 A 站显示"从 A 站 O 口出"；若其他站出口明显更近，推荐"去 X 站 Y 口出"
-    var exitHtml = buildExitGuide(mapLat, mapLng, stationKey || currentStationKey);
+    // v4.3.621: 距离块 = 出站指引融合（主行 站+出口+距离，副行 步行分钟）；无最优出口时回退原值
+    var distValueHtml = distMain
+      ? '<span class="qi-main">' + escapeHtml(distMain) + '</span>' + (distSub ? '<br><span class="qi-sub">' + escapeHtml(distSub) + '</span>' : '')
+      : escapeHtml(distText || t('detail.near_station'));
+    var quickInfo = '<div class="detail-quick-info">' + '<div class="qi-item"><div class="qi-label">' + t('detail.distance') + '</div><div class="qi-value">' + distValueHtml + '</div></div>' + '<div class="qi-item"><div class="qi-label">' + t('detail.best_time') + '</div><div class="qi-value">' + escapeHtml(spotBestTime) + '</div></div>' + '</div>';
 
     var heroClass = getHeroClassForGradient(gradient);
     var html = '<div class="article-hero ' + heroClass + '">'
@@ -268,7 +261,6 @@ var currentStationKey = null;
       + '<h1 class="article-title">' + escapeHtml(spotName) + '</h1>'
       + '</div></div>'
       + quickInfo
-      + exitHtml
       + '<div class="article-body">'
       + '<div class="article-section">'
       + '<h3 class="section-heading">' + t('detail.about') + '</h3>'

@@ -1406,3 +1406,30 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 **stationLines 收尾**：对齐 10 处规范化残留变体（Akasaka-Mitsuke→Akasaka-mitsuke 等）；删 5 孤儿（Otocchi/Hirai-8oh/Sugita-2/Adachi/Nishi_Arayashi）；Nishi-Arai 补大师線归属；亀戸線 小村井 Omurai→Komurai 正名；Tobu-Utsunomiya 归属 TobuUtsunomiya 线（原误挂 UtsunomiyaJR）。
 **验证**：站序缺站 0、LSO 错位 0、0,0 残留 0、Ryuo 冲突复扫 0；剩余 425 项全部为"站序引用>坐标实体"架构常态（历史设计，不修）；stations 2179/线 166；bundle 重生成加载 OK；dist 审计无新异常。
 **方法论教训（延续 4.3.616）**：Google embed 对简单站名误配外地同名 POI（幕張→海浜幕張、三郷中央→房総方向），遇线走向矛盾必须 OSM 交叉；OSM Nominatim 对小海線站名匹配差（误配中国/台湾地名）只采用精确命中值；ODPT 主 key 失效，站核回退 Google/OSM/wiki 三源；PowerShell 内联 node -e 含中文必炸，拆分脚本必须 Write work/_*.js 再跑（本轮 Ryuo 拆分首跑静默失败即因此）。
+
+## 4.3.618（2026-09-15，官方源代理 404/403 噪音修复）
+**用户反馈**：trains 页 console 3 个 /api-proxy/* 404（odakyu-status / odakyu-status-detail / yurikamome-operation）+ 2 个 Uncaught (in promise) code=403。
+**根因**：①GitHub Pages 纯静态托管无 /api-proxy/ 后端，代码每 30s 刷新仍请求 → 404 噪音；②ゆりかもめ把"源不可用"（空响应）伪装成"平常運転"（违反文件头"绝不伪装"原则）；③旧线上版本存在未捕获 promise rejection（本地 ODPT 请求链已全 catch；实测两域 key 有效、全部 trainInformation/train 请求 200，403 非 key 封锁）。
+**修复**（data/api/official-railway.js）：新增 /api-proxy/health 探测（HTTP 可达=代理存在），失败进入 5 分钟冷却期，期间不再发请求（404 噪音归零）；parseYurikamome 空内容返回 null（键不输出 → 融合链 fallback → no_odpt → "暂无延误情报"）；请求阶段整体失败标记 down 冷却。
+**修复**（js/common.js）：全局 unhandledrejection 兜底（preventDefault 抑制控制台红字 + console.debug 记录），覆盖 4 页。
+**验证**：node --check 2 文件 OK；vm 行为测试 3 场景（代理 down 只探测 1 次/冷却期 0 请求、代理 up 小田急+百合鸥正常、空内容不输出键）；brace_balance 通过；arch_guard/home_ui 无新增项（arch_guard FAIL 为 trains-page.js 既有 UNCLASSIFIED_UNIFIED_LINES，与本次无关；ci_guard AttributeError 为 railway_data.json 与基线既有不匹配，均未触碰）。
+**版本**：4 页 official-railway.js/common.js 引用 bump 至 v4.3.618。
+## 4.3.619（2026-09-15，彻底移除官方源代理请求链）
+**用户指示**："彻底清理"——不再保留对不存在的 /api-proxy/ 后端的任何请求能力。
+**删除**：data/api/official-railway.js（含 _checkProxy 探测、odakyu-status/odakyu-status-detail/yurikamome-operation 三请求、parseOdakyu/parseYurikamome）；3 个 html（trains/home/realtime）移除引用。
+**清理**（js/data-fusion.js）：删除 officialData 声明、getApiDelayInfo 官方源优先分支、loadOfficialDelay 函数及 init/定时器调用——官方源全部移除后，小田急 3 线/ゆりかもめ 恒走融合链 fallback → no_odpt → "暂无延误情报"（ODPT 不受影响，两域 key 实测有效）。
+**验证**：node --check data-fusion.js OK；全项目（js/html/py/yml）OfficialRailway/officialData/loadOfficialDelay/official-railway/api-proxy 零残留；brace_balance EXIT=0；home_ui PASS（SHA changed 为 home.html 引用移除预期内）。
+**版本**：trains/realtime/home 的 data-fusion.js 引用 bump v4.3.619；common.js 维持 v4.3.618。
+## 4.3.620（2026-09-15，403 验证闭环——无代码变更）
+**用户要求**：403 问题也要修复（初始日志 2 个 Uncaught (in promise) code=403）。
+**证据链**：
+- 全量实测：172 条线路 TrainTimetable、15 种 calendar 组合（splitTruncatedByCalendar 路径）、15 运营商 trainInformation/train——全部 HTTP 200，无业务 403；两域 key 有效。
+- 真实浏览器（serve.py + bu）加载 trains.html 完整首屏：console 0 条 unhandledrejection、0 条 403（v4.3.618/619 代码）。
+- 判定：日志 403 来自 GitHub Pages 线上旧版请求链把 ODPT/代理错误对象 reject 到顶层；v4.3.618（全局 unhandledrejection 兜底）+ v4.3.619（官方源代理链彻底删除）已从根因移除。推送部署后线上不再出现。
+**附带发现**：本地浏览器实测 ODPT HTTP 429 限流高频（[ODPT] Failed: HTTP 429）——150ms/3 并发在浏览器双域并行加载下偏激进；429 已被 catch（仅数据缺失，不 uncaught）。未扩大改动范围，待用户确认是否优化限速/退避。
+## 4.3.621（2026-09-15，观光详情页：出站指引与距离融合）
+**用户反馈**：出站指引（北千住 2番出口·250m）与距离（4步行分）两个独立块割裂——口径不同（出口→景点 vs 站中心→景点）、可能指向不同站、单位不一致（米 vs 步行分）。
+**融合**（js/tourism-detail.js）：删除独立出站指引条（buildExitGuide 函数 + 渲染），距离块统一以 recommendExitStation 全局最优出口为唯一口径——主行"站+出口+距离"（北千住 2番出口・250m）、副行步行分钟（≥100m 时显示，<100m 视为駅直結/车站内不显示）；无出口数据回退原逻辑（绑定站中心步行分钟 / spotDist）。跨站推荐语义自然保留（最优出口站可能≠当前定位站）。
+**样式**（css/tourism-styles.css）：新增 .qi-main/.qi-sub（副行弱化 11px）。
+**验证**（serve.py + bu 实测，无截图）：Kita-Senju 站 16 个景点 + 无定位 6 个景点——融合主行正确、副行正确（57m 无副行 / 117m→1分 / 176m→2分 / 271m→3分 / 721m→9分）、出站指引条残留 0、<100m 不显示步行分钟；node --check OK；brace_balance EXIT=0。
+**版本**：tourism-detail.html 引用 tourism-styles.css / tourism-proximity.js / tourism-detail.js bump v4.3.621。

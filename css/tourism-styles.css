@@ -694,6 +694,16 @@
   color: var(--text);
   font-weight: 700;
 }
+/* v4.3.621: 距离块融合出站指引——主行（站+出口+距离）+ 副行（步行分钟） */
+.qi-value .qi-main { display: block; line-height: 1.35; }
+.qi-value .qi-sub {
+  display: block;
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--text-muted);
+  margin-top: 3px;
+  line-height: 1.2;
+}
 
 /* === Exit guide bar (4.3.597) === */
 .detail-exit-bar {
