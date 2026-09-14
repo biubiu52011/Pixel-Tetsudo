@@ -236,7 +236,7 @@
   //   last station            → "down" (∨, label below the station),
   //   any mid-line junction   → "middle" (label on the left of the station).
   // Returns null when the station is not a through boundary.
-  function _throughDirForStation(lineId, stationId) {
+  function _throughDirForStation(lineId, stationId, throughLineId) {
     var thrIds = (window.ThroughService && window.ThroughService.getDirectThroughLines) ? window.ThroughService.getDirectThroughLines(lineId) : [];
     if (!thrIds.length) return null;
     var src2 = (window.RailwayDB && window.RailwayDB.getAllLines) ? window.RailwayDB.getAllLines() : getLinesData();
@@ -244,8 +244,10 @@
     var sts2 = (own2 && own2.stations) ? own2.stations : [];
     var idx2 = sts2.indexOf(stationId);
     if (idx2 < 0) return null;
-    for (var ti = 0; ti < thrIds.length; ti++) {
-      var tl = src2[thrIds[ti]];
+    // 如果指定了直通线ID，只判断这条线的方向；否则遍历所有直通线（旧逻辑，仅用于 padding 判断）
+    var targetIds = throughLineId ? [throughLineId] : thrIds;
+    for (var ti = 0; ti < targetIds.length; ti++) {
+      var tl = src2[targetIds[ti]];
       if (!tl || !tl.stations) continue;
       if (tl.stations.indexOf(stationId) < 0) continue;
       // 端点判断：连接站是当前线的第一个站 → 往上延伸直通
@@ -325,9 +327,8 @@
             var _js = (window.ThroughService && window.ThroughService.getJoinStations) ? window.ThroughService.getJoinStations(lineId, stArr[j2].lineId) : null;
             if (_js === null || _js.indexOf(ownStations[i2]) >= 0) {
               stArr[j2].through = true;
-              // Direction the through train continues: first station → up (∧),
-              // last station → down (∨), mid-line junction → middle (label on the left).
-              stArr[j2].dir = _throughDirForStation(lineId, ownStations[i2]) || "middle";
+              // Direction the through train continues: 针对每条直通线单独判断方向
+              stArr[j2].dir = _throughDirForStation(lineId, ownStations[i2], stArr[j2].lineId) || "middle";
             }
           }
         }
