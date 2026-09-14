@@ -8977,7 +8977,7 @@
   },
   "Wespa-Tsubakisan": {
     "ja": "ウェスパ椿山",
-    "zh": "Wespa椿山",
+    "zh": "威斯帕椿山",
     "ko": "웨스파츠바키산",
     "en": "Wespa-Tsubakisan"
   },
@@ -10715,29 +10715,11 @@
     "ko": "키요사토",
     "en": "Kiyosato"
   },
-  "nullno": {
-    "ja": "野辺山",
-    "zh": "野边山",
-    "ko": "노베야마",
-    "en": "nullno"
-  },
   "Shinano-Kawakami": {
     "ja": "信濃川上",
     "zh": "信浓川上",
     "ko": "시나노카와카미",
     "en": "Shinano-Kawakami"
-  },
-  "Saku": {
-    "ja": "佐久",
-    "zh": "佐久",
-    "ko": "사쿠",
-    "en": "Saku"
-  },
-  "Hirose": {
-    "ja": "広瀬",
-    "zh": "广濑",
-    "ko": "히로세",
-    "en": "Hirose"
   },
   "Saku-Kainouchi": {
     "ja": "佐久河内",
@@ -10750,12 +10732,6 @@
     "zh": "海濑",
     "ko": "카이멘",
     "en": "Kaimen"
-  },
-  "Lake-Kai": {
-    "ja": "西湖",
-    "zh": "西湖",
-    "ko": "레이크카이",
-    "en": "Lake-Kai"
   },
   "Komi": {
     "ja": "小海",
@@ -10817,47 +10793,11 @@
     "ko": "나카코미",
     "en": "Naka-komi"
   },
-  "Name-komi": {
-    "ja": "滑小海",
-    "zh": "滑小海",
-    "ko": "나메코미",
-    "en": "Name-komi"
-  },
-  "Kita-Naka-komi": {
-    "ja": "北中小海",
-    "zh": "北中小海",
-    "ko": "키타나카코미",
-    "en": "Kita-Naka-komi"
-  },
-  "Iwamura": {
-    "ja": "岩村",
-    "zh": "岩村",
-    "ko": "이와무라",
-    "en": "Iwamura"
-  },
   "Saku-Hirai": {
     "ja": "佐久平",
     "zh": "佐久平",
     "ko": "사쿠히라이",
     "en": "Saku-Hirai"
-  },
-  "Naka-sato": {
-    "ja": "中里",
-    "zh": "中里",
-    "ko": "나카사토",
-    "en": "Naka-sato"
-  },
-  "Satomi": {
-    "ja": "里見",
-    "zh": "里见",
-    "ko": "사토미",
-    "en": "Satomi"
-  },
-  "Mikaoka": {
-    "ja": "三ヶ岡",
-    "zh": "三冈",
-    "ko": "미카오카",
-    "en": "Mikaoka"
   },
   "Otome": {
     "ja": "乙女",
@@ -11579,18 +11519,6 @@
     "ko": "카마이시",
     "en": "Kamaishi"
   },
-  "Komabo": {
-    "ja": "小牧",
-    "zh": "小牧",
-    "ko": "코마보",
-    "en": "Komabo"
-  },
-  "Higashi-Otasa": {
-    "ja": "東大笹",
-    "zh": "东大笹",
-    "ko": "히가시오타사",
-    "en": "Higashi-Otasa"
-  },
   "Otasa": {
     "ja": "大笹",
     "zh": "大笹",
@@ -11615,35 +11543,11 @@
     "ko": "마츠오카하치만타이",
     "en": "Matsuoka-Hachimantai"
   },
-  "HiTakasaka": {
-    "ja": "日高坂",
-    "zh": "日高坂",
-    "ko": "히타카사카",
-    "en": "HiTakasaka"
-  },
-  "Takooya": {
-    "ja": "蛸屋",
-    "zh": "蛸屋",
-    "ko": "타코오야",
-    "en": "Takooya"
-  },
-  "Hataya": {
-    "ja": "幡屋",
-    "zh": "幡屋",
-    "ko": "하타야",
-    "en": "Hataya"
-  },
   "Yokomata": {
     "ja": "横又",
     "zh": "横又",
     "ko": "요코마타",
     "en": "Yokomata"
-  },
-  "Yuse-Onsen": {
-    "ja": "湯瀬温泉",
-    "zh": "汤濑温泉",
-    "ko": "유세온센",
-    "en": "Yuse-Onsen"
   },
   "Hachimantai": {
     "ja": "八幡平",
@@ -12985,7 +12889,7 @@
   },
   "Sorokami": {
     "ja": "ソロ上",
-    "zh": "Soro上",
+    "zh": "曾吕上",
     "ko": "소로카미",
     "en": "Sorokami"
   },
@@ -18707,16 +18611,94 @@
     "ko": "히가시아즈마",
     "en": "Higashi-azuma"
   },
-  "Omurai": {
-    "ja": "小村井",
-    "zh": "小村井",
-    "ko": "코무라이",
-    "en": "Omurai"
-  },
   "Sagami-Iriya": {
     "ja": "入谷",
     "zh": "入谷",
     "ko": "이리야",
     "en": "Iriya"
+  },
+  "Tadami-Negishi": {
+    "ja": "根岸",
+    "zh": "根岸",
+    "ko": "네기시",
+    "en": "Negishi"
+  },
+  "Akita-Okubo": {
+    "ja": "大久保",
+    "zh": "大久保",
+    "ko": "오오쿠보",
+    "en": "Okubo"
+  },
+  "Oyamada": {
+    "ja": "小山田",
+    "zh": "小山田",
+    "ko": "오야마다",
+    "en": "Oyamada"
+  },
+  "Matsubara-Ko": {
+    "ja": "松原湖",
+    "zh": "松原湖",
+    "ko": "마츠바라코",
+    "en": "Matsubara-ko"
+  },
+  "Nobeyama": {
+    "ja": "野辺山",
+    "zh": "野边山",
+    "ko": "노베야마",
+    "en": "Nobeyama"
+  },
+  "Higashi-Komoro": {
+    "ja": "東小諸",
+    "zh": "东小诸",
+    "ko": "히가시코모로",
+    "en": "Higashi-Komoro"
+  },
+  "Shigeno": {
+    "ja": "滋野",
+    "zh": "滋野",
+    "ko": "시게노",
+    "en": "Shigeno"
+  },
+  "Appi-Kogen": {
+    "ja": "安比高原",
+    "zh": "安比高原",
+    "ko": "앗피코겐",
+    "en": "Appi-Kogen"
+  },
+  "Akasakada": {
+    "ja": "赤坂田",
+    "zh": "赤坂田",
+    "ko": "아카사카다",
+    "en": "Akasakada"
+  },
+  "Koyanohata": {
+    "ja": "小屋の畑",
+    "zh": "小屋之畑",
+    "ko": "코야노하타",
+    "en": "Koyanohata"
+  },
+  "Araya-Shinmachi": {
+    "ja": "荒屋新町",
+    "zh": "荒屋新町",
+    "ko": "아라야신마치",
+    "en": "Araya-Shinmachi"
+  },
+  "Anihata": {
+    "ja": "兄畑",
+    "zh": "兄畑",
+    "ko": "아니하타",
+    "en": "Anihata"
+  },
+  "Komurai": {
+    "ja": "小村井",
+    "zh": "小村井",
+    "ko": "코무라이",
+    "en": "Komurai"
+  },
+  "Fujimi": {
+    "ja": "富士見",
+    "zh": "富士见",
+    "ko": "후지미",
+    "en": "Fujimi"
   }
 }

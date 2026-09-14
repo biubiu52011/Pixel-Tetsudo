@@ -781,8 +781,8 @@ window.RAILWAY_DATA = {
       "lng": 139.6278
     },
     "Shiogama": {
-      "lat": 35.2178,
-      "lng": 139.6167
+      "lat": 38.309546,
+      "lng": 141.0095991
     },
     "Sagami-Ono": {
       "lat": 35.5517,
@@ -7244,17 +7244,9 @@ window.RAILWAY_DATA = {
       "lat": 35.9191,
       "lng": 138.43673056
     },
-    "nullno": {
-      "lat": 35.95535,
-      "lng": 138.47443611
-    },
     "Shinano-Kawakami": {
       "lat": 35.97586667,
       "lng": 138.52717778
-    },
-    "Saku": {
-      "lat": 44.744,
-      "lng": 142.04847222
     },
     "Kaimen": {
       "lat": 36.15595,
@@ -7276,25 +7268,13 @@ window.RAILWAY_DATA = {
       "lat": 36.19391389,
       "lng": 138.48811111
     },
-    "Iwamura": {
-      "lat": 35.36886389,
-      "lng": 137.43433889
-    },
     "Saku-Hirai": {
       "lat": 36.27796389,
       "lng": 138.46423889
     },
-    "Satomi": {
-      "lat": 35.33666667,
-      "lng": 140.1455
-    },
     "Otome": {
       "lat": 36.31126667,
       "lng": 138.44090833
-    },
-    "Komabo": {
-      "lat": 35.28916667,
-      "lng": 136.92822222
     },
     "Otasa": {
       "lat": 37.04113889,
@@ -7303,14 +7283,6 @@ window.RAILWAY_DATA = {
     "Kita-Mori": {
       "lat": 39.95669444,
       "lng": 141.07188889
-    },
-    "Hataya": {
-      "lat": 35.33483333,
-      "lng": 132.93936667
-    },
-    "Yuse-Onsen": {
-      "lat": 40.122375,
-      "lng": 140.84040278
     },
     "Hachimantai": {
       "lat": 40.14330556,
@@ -8548,22 +8520,6 @@ window.RAILWAY_DATA = {
       "lat": 38.67916667,
       "lng": 141.4475
     },
-    "Name-komi": {
-      "lat": 36.23869167,
-      "lng": 138.47495556
-    },
-    "Mikaoka": {
-      "lat": 35.60483333,
-      "lng": 139.70280556
-    },
-    "Higashi-Otasa": {
-      "lat": 37.912,
-      "lng": 139.0619
-    },
-    "HiTakasaka": {
-      "lat": 36.00266667,
-      "lng": 139.39763889
-    },
     "Shibaraki": {
       "lat": 34.59927778,
       "lng": 132.20938889
@@ -8703,6 +8659,58 @@ window.RAILWAY_DATA = {
     "Sagami-Iriya": {
       "lat": 35.47858,
       "lng": 139.39182
+    },
+    "Tadami-Negishi": {
+      "lat": 37.5018238,
+      "lng": 139.8286901
+    },
+    "Akita-Okubo": {
+      "lat": 39.8715013,
+      "lng": 140.0630709
+    },
+    "Oyamada": {
+      "lat": 39.408508,
+      "lng": 141.194199
+    },
+    "Matsubara-Ko": {
+      "lat": 36.061116,
+      "lng": 138.4704765
+    },
+    "Nobeyama": {
+      "lat": 35.9553038,
+      "lng": 138.4746495
+    },
+    "Higashi-Komoro": {
+      "lat": 36.3169542,
+      "lng": 138.4322921
+    },
+    "Shigeno": {
+      "lat": 36.3426044,
+      "lng": 138.3635521
+    },
+    "Appi-Kogen": {
+      "lat": 40.0123954,
+      "lng": 140.9976755
+    },
+    "Akasakada": {
+      "lat": 40.048762,
+      "lng": 141.004289
+    },
+    "Koyanohata": {
+      "lat": 40.0766715,
+      "lng": 141.02066
+    },
+    "Araya-Shinmachi": {
+      "lat": 40.0973548,
+      "lng": 141.0491912
+    },
+    "Anihata": {
+      "lat": 40.1162368,
+      "lng": 140.8822362
+    },
+    "Fujimi": {
+      "lat": 35.9116151,
+      "lng": 138.2381543
     }
   },
   "lines": {
@@ -20799,7 +20807,7 @@ window.RAILWAY_DATA = {
         "Hanamaki",
         "Naiuchi",
         "Shin-Hanamaki",
-        "Oyamadai",
+        "Oyamada",
         "Douzawa",
         "Haruyama",
         "Iwanebashi",
@@ -22179,35 +22187,26 @@ window.RAILWAY_DATA = {
         "Kai-Koizumi",
         "Kai-Oizumi",
         "Kiyosato",
-        "nullno",
+        "Nobeyama",
         "Shinano-Kawakami",
-        "Saku",
-        "Hirose",
-        "Saku-Kainouchi",
-        "Kaimen",
-        "Matsubara",
-        "Lake-Kai",
-        "Komi",
-        "Ubajiru",
-        "Takagiwa",
-        "Yachiho",
-        "Kaise",
-        "Haguro",
         "Shimoyama-Aoi",
-        "Usuda",
-        "Ryuo",
-        "Jotaibu",
+        "Haguro",
+        "Kaise",
+        "Yachiho",
+        "Takagiwa",
+        "Ubajiru",
+        "Komi",
+        "Matsubara-Ko",
+        "Kaimen",
+        "Saku-Kainouchi",
         "Naka-komi",
-        "Name-komi",
-        "Kita-Naka-komi",
-        "Iwamura",
+        "Jotaibu",
+        "Ryuo",
+        "Usuda",
         "Saku-Hirai",
-        "Naka-sato",
-        "Satomi",
-        "Mikaoka",
+        "Shigeno",
         "Otome",
-        "Higashi-Koganei",
-        "Koganei"
+        "Higashi-Komoro"
       ],
       "durations": [
         2,
@@ -22268,19 +22267,16 @@ window.RAILWAY_DATA = {
       "durationTotalMin": null,
       "branchOf": null,
       "stations": [
-        "Komabo",
-        "Higashi-Otasa",
         "Otasa",
         "Hiratekan",
         "Kita-Mori",
         "Matsuoka-Hachimantai",
-        "HiTakasaka",
-        "Akasaka",
-        "Takooya",
-        "Hataya",
-        "Shinmachi",
+        "Appi-Kogen",
+        "Akasakada",
+        "Koyanohata",
+        "Araya-Shinmachi",
         "Yokomata",
-        "Yuse-Onsen",
+        "Anihata",
         "Hachimantai",
         "Rikuchu-Sato",
         "Kazuno-Karua",
@@ -23329,7 +23325,7 @@ window.RAILWAY_DATA = {
         "Tsuchizaki",
         "Kami-Iijima",
         "Oiwake",
-        "Okubo",
+        "Akita-Okubo",
         "Ougo",
         "Ikawa-Sakura",
         "Hachirogata",
@@ -24171,7 +24167,6 @@ window.RAILWAY_DATA = {
         "Nigatake",
         "Kozuru-Shinden",
         "Nakanosakae",
-        "Shinden",
         "Fukudamachi",
         "Rikuzen-Takasago",
         "Rikuzen-Ono",
@@ -25165,7 +25160,7 @@ window.RAILWAY_DATA = {
       "branchOf": null,
       "stations": [
         "Hikifune",
-        "Omurai",
+        "Komurai",
         "Higashi-Azuma",
         "Kameido-Suijin",
         "Kameido"
@@ -28199,6 +28194,7 @@ window.RAILWAY_DATA = {
         "Nagasaka",
         "Kobuchizawa",
         "Shinano-Sakai",
+        "Fujimi",
         "Suzurannosato",
         "Aoyagi",
         "Chino",
@@ -28807,7 +28803,7 @@ window.RAILWAY_DATA = {
         "Nishi-Wakamatsu",
         "Aizu-Hongo",
         "Aizu-Takada",
-        "Negishi",
+        "Tadami-Negishi",
         "Shin-Kaku",
         "Miya-Wakamatsu",
         "Aizu-Sakashita",
@@ -30354,7 +30350,7 @@ window.RAILWAY_DATA = {
     "多磨": "Tama",
     "多磨霊園": "Tama-reien",
     "夜ノ森": "Yonomori",
-    "大久保": "Okubo",
+    "大久保": "Akita-Okubo",
     "大井町": "Oimachi",
     "大倉山": "Okurayama",
     "大前": "Omae",
@@ -30450,7 +30446,7 @@ window.RAILWAY_DATA = {
     "小手指": "Kotesashi",
     "小木津": "Ogitsu",
     "小机": "Kozukue",
-    "小村井": "Omurai",
+    "小村井": "Komurai",
     "小林": "Kobayashi",
     "小櫃": "Obitsu",
     "小泉町": "Koizumimachi",
@@ -30797,7 +30793,7 @@ window.RAILWAY_DATA = {
     "栗平": "Kurihira",
     "栗橋": "Kurihashi",
     "栢山": "Kayama",
-    "根岸": "Negishi",
+    "根岸": "Tadami-Negishi",
     "根府川": "Nebukawa",
     "根津": "Nezu",
     "桃内": "Momouchi",
@@ -31561,7 +31557,17 @@ window.RAILWAY_DATA = {
     "馬車道": "Bashamichi",
     "ユーカリが丘": "Yuri-ga-oka",
     "一日市場": "Hitoichiba",
-    "あおば通": "Aoba-dori"
+    "あおば通": "Aoba-dori",
+    "小山田": "Oyamada",
+    "松原湖": "Matsubara-Ko",
+    "東小諸": "Higashi-Komoro",
+    "滋野": "Shigeno",
+    "安比高原": "Appi-Kogen",
+    "赤坂田": "Akasakada",
+    "小屋の畑": "Koyanohata",
+    "荒屋新町": "Araya-Shinmachi",
+    "兄畑": "Anihata",
+    "野辺山": "Nobeyama"
   },
   "stationLines": {
     "Omiya": [
@@ -31733,8 +31739,7 @@ window.RAILWAY_DATA = {
       "UenoTokyo"
     ],
     "Oimachi": [
-      "KeihinTohoku",
-      "TokyuOimachi"
+      "Rinkai"
     ],
     "Omori": [
       "KeihinTohoku",
@@ -31795,8 +31800,7 @@ window.RAILWAY_DATA = {
       "KeihinTohoku"
     ],
     "Negishi": [
-      "KeihinTohoku",
-      "Tadami"
+      "KeihinTohoku"
     ],
     "Isogo": [
       "KeihinTohoku"
@@ -31867,10 +31871,7 @@ window.RAILWAY_DATA = {
       "ShonanShinjuku"
     ],
     "Musashi-Kosugi": [
-      "Yokosuka",
-      "ShonanShinjuku",
-      "Nambu",
-      "TokyuToyoko"
+      "TokyuMeguro"
     ],
     "Nishi-Oi": [
       "Yokosuka",
@@ -31936,8 +31937,7 @@ window.RAILWAY_DATA = {
       "SeibuTamagawa"
     ],
     "Higashi-Koganei": [
-      "ChuoRapid",
-      "Komii"
+      "ChuoRapid"
     ],
     "Musashi-Koganei": [
       "ChuoRapid"
@@ -32295,8 +32295,7 @@ window.RAILWAY_DATA = {
       "Takasaki"
     ],
     "Shinmachi": [
-      "Takasaki",
-      "Kounan"
+      "Takasaki"
     ],
     "Kuragano": [
       "Takasaki",
@@ -32454,11 +32453,10 @@ window.RAILWAY_DATA = {
       "Ginza"
     ],
     "Aoyama-itchome": [
-      "Ginza",
-      "Hanzomon"
+      "Oedo"
     ],
     "Akasaka-mitsuke": [
-      "Ginza"
+      "Marunouchi"
     ],
     "Tameike-Sanno": [
       "Ginza",
@@ -32533,9 +32531,6 @@ window.RAILWAY_DATA = {
     "Yotsuya-Sanchome": [
       "Marunouchi"
     ],
-    "Akasaka-Mitsuke": [
-      "Marunouchi"
-    ],
     "Kokkai-Gijidomae": [
       "Marunouchi",
       "Chiyoda"
@@ -32566,9 +32561,6 @@ window.RAILWAY_DATA = {
     ],
     "Shin-Otsuka": [
       "Marunouchi"
-    ],
-    "Naka-Meguro": [
-      "Hibiya"
     ],
     "Hiroo": [
       "Hibiya"
@@ -33015,9 +33007,6 @@ window.RAILWAY_DATA = {
       "Oedo",
       "Yurikamome"
     ],
-    "Aoyama-Itchome": [
-      "Oedo"
-    ],
     "Meiji-Jingumae": [
       "Chiyoda",
       "Fukutoshin"
@@ -33038,8 +33027,7 @@ window.RAILWAY_DATA = {
       "Chiyoda"
     ],
     "Akasaka": [
-      "Chiyoda",
-      "Kounan"
+      "Chiyoda"
     ],
     "Nijubashimae": [
       "Chiyoda"
@@ -33325,7 +33313,7 @@ window.RAILWAY_DATA = {
       "TokyuToyoko"
     ],
     "Nakameguro": [
-      "TokyuToyoko"
+      "Hibiya"
     ],
     "Yutenji": [
       "TokyuToyoko"
@@ -33341,7 +33329,7 @@ window.RAILWAY_DATA = {
       "TokyuOimachi"
     ],
     "Den-en-chofu": [
-      "TokyuToyoko"
+      "TokyuMeguro"
     ],
     "Tamagawa": [
       "TokyuToyoko",
@@ -33920,7 +33908,7 @@ window.RAILWAY_DATA = {
       "TokyuDenEn"
     ],
     "Sangenjaya": [
-      "TokyuDenEn"
+      "TokyuSetagaya"
     ],
     "Komazawa-Daigaku": [
       "TokyuDenEn"
@@ -34523,8 +34511,7 @@ window.RAILWAY_DATA = {
       "Uetsu"
     ],
     "Okubo": [
-      "ChuoSobuLocal",
-      "OuMain"
+      "ChuoSobuLocal"
     ],
     "Sendagaya": [
       "ChuoSobuLocal"
@@ -34574,9 +34561,6 @@ window.RAILWAY_DATA = {
     ],
     "Kojima_Shinden": [
       "Daishi_Keikyu"
-    ],
-    "Nishi_Arayashi": [
-      "Daishi_Tobu"
     ],
     "Daishi_Mae": [
       "Daishi_Tobu"
@@ -34844,16 +34828,10 @@ window.RAILWAY_DATA = {
     "Kanahama": [
       "Hachinohe"
     ],
-    "Otocchi": [
-      "Hachinohe"
-    ],
     "Kaijo": [
       "Hachinohe"
     ],
     "Tsunohama": [
-      "Hachinohe"
-    ],
-    "Hirai-8oh": [
       "Hachinohe"
     ],
     "Taneichi": [
@@ -35257,7 +35235,6 @@ window.RAILWAY_DATA = {
       "Kamaishi"
     ],
     "Oyamadai": [
-      "Kamaishi",
       "TokyuOimachi"
     ],
     "Douzawa": [
@@ -35512,7 +35489,7 @@ window.RAILWAY_DATA = {
       "KeioInokashira"
     ],
     "Shimokitazawa": [
-      "KeioInokashira"
+      "Odawara"
     ],
     "Shin-Daita": [
       "KeioInokashira"
@@ -35813,16 +35790,7 @@ window.RAILWAY_DATA = {
     "Kiyosato": [
       "Komii"
     ],
-    "nullno": [
-      "Komii"
-    ],
     "Shinano-Kawakami": [
-      "Komii"
-    ],
-    "Saku": [
-      "Komii"
-    ],
-    "Hirose": [
       "Komii"
     ],
     "Saku-Kainouchi": [
@@ -35832,11 +35800,7 @@ window.RAILWAY_DATA = {
       "Komii"
     ],
     "Matsubara": [
-      "Komii",
       "TokyuSetagaya"
-    ],
-    "Lake-Kai": [
-      "Komii"
     ],
     "Komi": [
       "Komii"
@@ -35873,39 +35837,14 @@ window.RAILWAY_DATA = {
     "Naka-komi": [
       "Komii"
     ],
-    "Name-komi": [
-      "Komii"
-    ],
-    "Kita-Naka-komi": [
-      "Komii"
-    ],
-    "Iwamura": [
-      "Komii"
-    ],
     "Saku-Hirai": [
-      "Komii"
-    ],
-    "Naka-sato": [
-      "Komii"
-    ],
-    "Satomi": [
-      "Komii"
-    ],
-    "Mikaoka": [
       "Komii"
     ],
     "Otome": [
       "Komii"
     ],
     "Koganei": [
-      "Komii",
       "UtsunomiyaJR"
-    ],
-    "Komabo": [
-      "Kounan"
-    ],
-    "Higashi-Otasa": [
-      "Kounan"
     ],
     "Otasa": [
       "Kounan"
@@ -35919,19 +35858,7 @@ window.RAILWAY_DATA = {
     "Matsuoka-Hachimantai": [
       "Kounan"
     ],
-    "HiTakasaka": [
-      "Kounan"
-    ],
-    "Takooya": [
-      "Kounan"
-    ],
-    "Hataya": [
-      "Kounan"
-    ],
     "Yokomata": [
-      "Kounan"
-    ],
-    "Yuse-Onsen": [
       "Kounan"
     ],
     "Hachimantai": [
@@ -36786,9 +36713,6 @@ window.RAILWAY_DATA = {
     "Shinagawa-Sea-Side": [
       "Rinkai"
     ],
-    "Oi-Machi": [
-      "Rinkai"
-    ],
     "Nogi": [
       "UtsunomiyaJR"
     ],
@@ -36958,7 +36882,6 @@ window.RAILWAY_DATA = {
       "Senseki"
     ],
     "Shinden": [
-      "Senseki",
       "TobuSkytree"
     ],
     "Fukudamachi": [
@@ -37516,12 +37439,6 @@ window.RAILWAY_DATA = {
     "Kita-Omagari": [
       "Tazawako"
     ],
-    "Komura_i": [
-      "Tobu_Kameido"
-    ],
-    "Higashi_Azuma": [
-      "Tobu_Kameido"
-    ],
     "Kuroiso": [
       "TohokuMain",
       "UtsunomiyaJR"
@@ -37571,13 +37488,7 @@ window.RAILWAY_DATA = {
     "Motomori": [
       "TohokuMain"
     ],
-    "Sugita-2": [
-      "TohokuMain"
-    ],
     "Nihonmatsu": [
-      "TohokuMain"
-    ],
-    "Adachi": [
       "TohokuMain"
     ],
     "Matsukawa": [
@@ -38287,9 +38198,6 @@ window.RAILWAY_DATA = {
     "Higashi-Kitazawa": [
       "Odawara"
     ],
-    "Shimo-Kitazawa": [
-      "Odawara"
-    ],
     "Setagaya-Daita": [
       "Odawara"
     ],
@@ -38494,7 +38402,8 @@ window.RAILWAY_DATA = {
       "TobuSkytree"
     ],
     "Nishi-Arai": [
-      "TobuSkytree"
+      "TobuSkytree",
+      "Daishi_Tobu"
     ],
     "Takenotsuka": [
       "TobuSkytree"
@@ -38624,13 +38533,7 @@ window.RAILWAY_DATA = {
     "Okusawa": [
       "TokyuMeguro"
     ],
-    "Denen-chofu": [
-      "TokyuMeguro"
-    ],
     "Shin-maruko": [
-      "TokyuMeguro"
-    ],
-    "Musashi-kosugi": [
       "TokyuMeguro"
     ],
     "Moto-sumiyoshi": [
@@ -38671,9 +38574,6 @@ window.RAILWAY_DATA = {
     ],
     "Hasunuma": [
       "TokyuIkegami"
-    ],
-    "Sangen-jaya": [
-      "TokyuSetagaya"
     ],
     "Nishi-taishido": [
       "TokyuSetagaya"
@@ -39169,9 +39069,6 @@ window.RAILWAY_DATA = {
     "Suzumenomiya": [
       "UtsunomiyaJR"
     ],
-    "TobuUtsunomiya": [
-      "UtsunomiyaJR"
-    ],
     "Okamoto": [
       "UtsunomiyaJR"
     ],
@@ -39662,6 +39559,48 @@ window.RAILWAY_DATA = {
     ],
     "Sagami-Iriya": [
       "Sagami"
+    ],
+    "Tadami-Negishi": [
+      "Tadami"
+    ],
+    "Akita-Okubo": [
+      "OuMain"
+    ],
+    "Oyamada": [
+      "Kamaishi"
+    ],
+    "Matsubara-Ko": [
+      "Komii"
+    ],
+    "Nobeyama": [
+      "Komii"
+    ],
+    "Higashi-Komoro": [
+      "Komii"
+    ],
+    "Shigeno": [
+      "Komii"
+    ],
+    "Appi-Kogen": [
+      "Kounan"
+    ],
+    "Akasakada": [
+      "Kounan"
+    ],
+    "Koyanohata": [
+      "Kounan"
+    ],
+    "Araya-Shinmachi": [
+      "Kounan"
+    ],
+    "Anihata": [
+      "Kounan"
+    ],
+    "Higashi-Azuma": [
+      "Tobu_Kameido"
+    ],
+    "Komurai": [
+      "Tobu_Kameido"
     ]
   },
   "lineStationOrder": {
@@ -40179,45 +40118,44 @@ window.RAILWAY_DATA = {
       "Moto-Yawata": 20
     },
     "Oedo": {
-      "Hikarigaoka": 0,
-      "Nerima": 1,
-      "Toshimaen": 2,
-      "Nerima-Kasugacho": 3,
-      "Higashi-Nerima": 4,
-      "Shin-egota": 5,
-      "Nakai": 6,
-      "Nakano-Sakaue": 7,
-      "Higashi-Nakano": 8,
-      "Nishi-Shinjuku-Gochome": 10,
-      "Tochomae": 11,
-      "Shinjuku-Nishiguchi": 13,
-      "Higashi-Shinjuku": 14,
-      "Akebonobashi": 15,
-      "Ushigome-Yanagicho": 16,
-      "Ushigome-Kagurazaka": 17,
-      "Iidabashi": 18,
-      "Kasuga": 19,
-      "Hongosanchome": 20,
-      "Ueno-Okachimachi": 21,
-      "Shin-Okachimachi": 22,
-      "Kuramae": 23,
-      "Ryogoku": 24,
-      "Morishita": 25,
-      "Kiyosumi-Shirakawa": 26,
-      "Monzen-Nakacho": 27,
-      "Tsukishima": 28,
-      "Kachidoki": 29,
-      "Shiodome": 30,
-      "Daimon": 31,
-      "Omotesando": 34,
-      "Meiji-Jingumae": 35,
+      "Tochomae": 0,
+      "Nishi-Shinjuku-Gochome": 1,
+      "Nakano-Sakaue": 2,
+      "Higashi-Nakano": 3,
+      "Nakai": 4,
+      "Ochiai-Minami-Nagasaki": 5,
+      "Shin-egota": 6,
+      "Nerima": 7,
+      "Toshimaen": 8,
+      "Nerima-Kasugacho": 9,
+      "Hikarigaoka": 10,
+      "Shinjuku-Nishiguchi": 11,
+      "Higashi-Shinjuku": 12,
+      "Wakamatsu-Kawada": 13,
+      "Ushigome-Yanagicho": 14,
+      "Ushigome-Kagurazaka": 15,
+      "Iidabashi": 16,
+      "Kasuga": 17,
+      "Hongosanchome": 18,
+      "Ueno-Okachimachi": 19,
+      "Shin-Okachimachi": 20,
+      "Kuramae": 21,
+      "Ryogoku": 22,
+      "Morishita": 23,
+      "Kiyosumi-Shirakawa": 24,
+      "Monzen-Nakacho": 25,
+      "Tsukishima": 26,
+      "Kachidoki": 27,
+      "Tsukijishijo": 28,
+      "Shiodome": 29,
+      "Daimon": 30,
+      "Akabanebashi": 31,
+      "Azabu-Juban": 32,
+      "Roppongi": 33,
+      "Aoyama-itchome": 34,
+      "Kokuritsu-Kyogijo": 35,
       "Yoyogi": 36,
-      "Shinjuku": 37,
-      "Shinjuku-Sanchome": 38,
-      "Nakano-fujimicho": 9,
-      "Nishi-Shinjuku": 12,
-      "Akasaka-mitsuke": 32,
-      "Aoyama-itchome": 33
+      "Shinjuku": 37
     },
     "Chiyoda": {
       "Yoyogi-Uehara": 0,
@@ -40982,18 +40920,18 @@ window.RAILWAY_DATA = {
       "Tanechisa-Kaigan": 9,
       "Okuku": 10,
       "Kanahama": 11,
-      "Kaijo": 13,
-      "Tsunohama": 14,
-      "Taneichi": 16,
-      "Suketto": 17,
-      "Rikuchu-Ariake": 18,
-      "Ariake-8oh": 19,
-      "Rikuchu-Yagi": 20,
-      "Suketto-Ni": 21,
-      "Kita-Takaishi": 22,
-      "Samuraihama": 23,
-      "Rikuchu-Sekine": 24,
-      "Kuji": 25
+      "Kaijo": 12,
+      "Tsunohama": 13,
+      "Taneichi": 14,
+      "Suketto": 15,
+      "Rikuchu-Ariake": 16,
+      "Ariake-8oh": 17,
+      "Rikuchu-Yagi": 18,
+      "Suketto-Ni": 19,
+      "Kita-Takaishi": 20,
+      "Samuraihama": 21,
+      "Rikuchu-Sekine": 22,
+      "Kuji": 23
     },
     "Hakushin": {
       "Niigata": 0,
@@ -41143,7 +41081,7 @@ window.RAILWAY_DATA = {
       "Hanamaki": 0,
       "Naiuchi": 1,
       "Shin-Hanamaki": 2,
-      "Oyamadai": 3,
+      "Oyamada": 3,
       "Douzawa": 4,
       "Haruyama": 5,
       "Iwanebashi": 6,
@@ -41389,62 +41327,50 @@ window.RAILWAY_DATA = {
       "Kai-Koizumi": 1,
       "Kai-Oizumi": 2,
       "Kiyosato": 3,
-      "nullno": 4,
+      "Nobeyama": 4,
       "Shinano-Kawakami": 5,
-      "Saku": 6,
-      "Hirose": 7,
-      "Saku-Kainouchi": 8,
-      "Kaimen": 9,
-      "Matsubara": 10,
-      "Lake-Kai": 11,
+      "Shimoyama-Aoi": 6,
+      "Haguro": 7,
+      "Kaise": 8,
+      "Yachiho": 9,
+      "Takagiwa": 10,
+      "Ubajiru": 11,
       "Komi": 12,
-      "Ubajiru": 13,
-      "Takagiwa": 14,
-      "Yachiho": 15,
-      "Kaise": 16,
-      "Haguro": 17,
-      "Shimoyama-Aoi": 18,
+      "Matsubara-Ko": 13,
+      "Kaimen": 14,
+      "Saku-Kainouchi": 15,
+      "Naka-komi": 16,
+      "Jotaibu": 17,
+      "Ryuo": 18,
       "Usuda": 19,
-      "Ryuo": 20,
-      "Jotaibu": 21,
-      "Naka-komi": 22,
-      "Name-komi": 23,
-      "Kita-Naka-komi": 24,
-      "Iwamura": 25,
-      "Saku-Hirai": 26,
-      "Naka-sato": 27,
-      "Satomi": 28,
-      "Mikaoka": 29,
-      "Otome": 30,
-      "Higashi-Koganei": 31,
-      "Koganei": 32
+      "Saku-Hirai": 20,
+      "Shigeno": 21,
+      "Otome": 22,
+      "Higashi-Komoro": 23
     },
     "Kounan": {
-      "Komabo": 0,
-      "Higashi-Otasa": 1,
-      "Otasa": 2,
-      "Hiratekan": 3,
-      "Kita-Mori": 4,
-      "Matsuoka-Hachimantai": 5,
-      "HiTakasaka": 6,
-      "Akasaka": 7,
-      "Takooya": 8,
-      "Hataya": 9,
-      "Shinmachi": 10,
-      "Yokomata": 11,
-      "Yuse-Onsen": 12,
-      "Hachimantai": 13,
-      "Rikuchu-Sato": 14,
-      "Kazuno-Karua": 15,
-      "Shibaraki": 16,
-      "Towada-Minami": 17,
-      "Suehiro": 18,
-      "Fukakai": 19,
-      "Juni": 20,
-      "Ootaki-Onsen": 21,
-      "Ogi": 22,
-      "Higashi-Ohata": 23,
-      "Ohata": 24
+      "Otasa": 0,
+      "Hiratekan": 1,
+      "Kita-Mori": 2,
+      "Matsuoka-Hachimantai": 3,
+      "Appi-Kogen": 4,
+      "Akasakada": 5,
+      "Koyanohata": 6,
+      "Araya-Shinmachi": 7,
+      "Yokomata": 8,
+      "Anihata": 9,
+      "Hachimantai": 10,
+      "Rikuchu-Sato": 11,
+      "Kazuno-Karua": 12,
+      "Shibaraki": 13,
+      "Towada-Minami": 14,
+      "Suehiro": 15,
+      "Fukakai": 16,
+      "Juni": 17,
+      "Ootaki-Onsen": 18,
+      "Ogi": 19,
+      "Higashi-Ohata": 20,
+      "Ohata": 21
     },
     "Kururi": {
       "Kisarazu": 0,
@@ -41531,39 +41457,39 @@ window.RAILWAY_DATA = {
     },
     "Noda": {
       "Omiya": 0,
-      "Kita_Omiya": 1,
-      "Omiya_Koen": 2,
-      "Oowada": 3,
-      "Shichiri": 4,
+      "Kita-Omiya": 1,
+      "Omiya-Koen": 2,
+      "Owada": 3,
+      "Nanasato": 4,
       "Iwatsuki": 5,
-      "Higashi_Iwatsuki": 6,
-      "Tohyu": 7,
+      "Higashi-Iwatsuki": 6,
+      "Toyoharu": 7,
       "Yagisaki": 8,
-      "Kasugabe": 9,
-      "Fujino_Shima": 10,
-      "Minami_Sakurai": 11,
-      "Kawa": 12,
-      "Nanakouen": 13,
-      "Shimizu_Koen": 14,
+      "Kasukabe": 9,
+      "Fujino-Ushijima": 10,
+      "Minami-Sakurai": 11,
+      "Kawama": 12,
+      "Nanakodai": 13,
+      "Shimizu-koen": 14,
       "Atago": 15,
-      "Ichihashi": 16,
-      "Umon": 17,
-      "Edogawadai": 18,
-      "Hajime": 19,
-      "Nagareyama": 20,
-      "Ohtakano_Mori": 21,
-      "Toyotoki": 22,
+      "Nodashi": 16,
+      "Umesato": 17,
+      "Unga": 18,
+      "Edogawadai": 19,
+      "Hatsuishi": 20,
+      "Nagareyama-Otakanomori": 21,
+      "Toyoshiki": 22,
       "Kashiwa": 23,
-      "Shin_Kashiwa": 24,
+      "Shin-Kashiwa": 24,
       "Masuo": 25,
-      "Sakae": 26,
+      "Sakasai": 26,
       "Takayanagi": 27,
-      "Rokkoku": 28,
-      "Shin_Kamagaya": 29,
+      "Mutsumi": 28,
+      "Shin-Kamagaya": 29,
       "Kamagaya": 30,
-      "Matsumizawa": 31,
-      "Tsuka": 32,
-      "Shin_Funabashi": 33,
+      "Magomezawa": 31,
+      "Tsukada": 32,
+      "Shin-Funabashi": 33,
       "Funabashi": 34
     },
     "OdakyuTama": {
@@ -41693,7 +41619,7 @@ window.RAILWAY_DATA = {
       "Tsuchizaki": 29,
       "Kami-Iijima": 30,
       "Oiwake": 31,
-      "Okubo": 32,
+      "Akita-Okubo": 32,
       "Ougo": 33,
       "Ikawa-Sakura": 34,
       "Hachirogata": 35,
@@ -41860,17 +41786,16 @@ window.RAILWAY_DATA = {
       "Nigatake": 5,
       "Kozuru-Shinden": 6,
       "Nakanosakae": 7,
-      "Shinden": 8,
-      "Fukudamachi": 9,
-      "Rikuzen-Takasago": 10,
-      "Rikuzen-Ono": 11,
-      "Yamoto": 12,
-      "Higashi-Yamoto": 13,
-      "Rikuzen-Akai": 14,
-      "Ishinomaki-Ayumino": 15,
-      "Hebita": 16,
-      "Rikuzen-Yamashita": 17,
-      "Ishinomaki": 18
+      "Fukudamachi": 8,
+      "Rikuzen-Takasago": 9,
+      "Rikuzen-Ono": 10,
+      "Yamoto": 11,
+      "Higashi-Yamoto": 12,
+      "Rikuzen-Akai": 13,
+      "Ishinomaki-Ayumino": 14,
+      "Hebita": 15,
+      "Rikuzen-Yamashita": 16,
+      "Ishinomaki": 17
     },
     "SensekiTohoku": {
       "Sendai": 0,
@@ -42082,10 +42007,10 @@ window.RAILWAY_DATA = {
     },
     "Tobu_Kameido": {
       "Hikifune": 0,
-      "Kameido-Suijin": 3,
-      "Kameido": 4,
+      "Komurai": 1,
       "Higashi-Azuma": 2,
-      "Omurai": 1
+      "Kameido-Suijin": 3,
+      "Kameido": 4
     },
     "TohokuMain": {
       "Kuroiso": 0,
@@ -42105,64 +42030,64 @@ window.RAILWAY_DATA = {
       "Hiwada": 14,
       "Goiwa": 15,
       "Motomori": 16,
-      "Nihonmatsu": 18,
-      "Matsukawa": 20,
-      "Kanayagawa": 21,
-      "Minami-Fukushima": 22,
-      "Fukushima": 23,
-      "Higashi-Fukushima": 24,
-      "Date": 25,
-      "Koori": 26,
-      "Fujita": 27,
-      "Kaida": 28,
-      "Kosugo": 29,
-      "Shiroishi": 30,
-      "Higashi-Shiroishi": 31,
-      "Kita-Shirakawa": 32,
-      "Okawara": 33,
-      "Funaoka": 34,
-      "Tsukinoki": 35,
-      "Iwanuma": 36,
-      "Tatekoshi": 37,
-      "Natori": 38,
-      "Minami-Sendai": 39,
-      "Taishido": 40,
-      "Nagamachi": 41,
-      "Sendai": 42,
-      "Higashi-Sendai": 43,
-      "Iwakiri": 44,
-      "Rikuzen-Sanno": 45,
-      "Kokufu-Tagajo": 46,
-      "Shiogama": 47,
-      "Matsushima": 48,
-      "Atago-2": 49,
-      "Shinainuma": 50,
-      "Kashimadai": 51,
-      "Matsuyama-machi": 52,
-      "Kogota": 53,
-      "Ishikoshi": 54,
-      "Yushima-2": 55,
-      "Hanaizumi": 56,
-      "Shimizuhara": 57,
-      "Ichinoseki": 58,
-      "Yama-no-me": 59,
-      "Hiraizumi": 60,
-      "Maesawa": 61,
-      "Rikuchu-Ori": 62,
-      "Mizusawa": 63,
-      "Higashi-Mizusawa": 64,
-      "Kinka-saki": 65,
-      "Rokuhara": 66,
-      "Kitakami": 67,
-      "Murasakino": 68,
-      "Hanamaki": 69,
-      "Hanamaki-Kuko": 70,
-      "Ishidorii": 71,
-      "Hizume": 72,
-      "Furudate": 73,
-      "Yahaba": 74,
-      "Iwate-Iioka": 75,
-      "Morioka": 76
+      "Nihonmatsu": 17,
+      "Matsukawa": 18,
+      "Kanayagawa": 19,
+      "Minami-Fukushima": 20,
+      "Fukushima": 21,
+      "Higashi-Fukushima": 22,
+      "Date": 23,
+      "Koori": 24,
+      "Fujita": 25,
+      "Kaida": 26,
+      "Kosugo": 27,
+      "Shiroishi": 28,
+      "Higashi-Shiroishi": 29,
+      "Kita-Shirakawa": 30,
+      "Okawara": 31,
+      "Funaoka": 32,
+      "Tsukinoki": 33,
+      "Iwanuma": 34,
+      "Tatekoshi": 35,
+      "Natori": 36,
+      "Minami-Sendai": 37,
+      "Taishido": 38,
+      "Nagamachi": 39,
+      "Sendai": 40,
+      "Higashi-Sendai": 41,
+      "Iwakiri": 42,
+      "Rikuzen-Sanno": 43,
+      "Kokufu-Tagajo": 44,
+      "Shiogama": 45,
+      "Matsushima": 46,
+      "Atago-2": 47,
+      "Shinainuma": 48,
+      "Kashimadai": 49,
+      "Matsuyama-machi": 50,
+      "Kogota": 51,
+      "Ishikoshi": 52,
+      "Yushima-2": 53,
+      "Hanaizumi": 54,
+      "Shimizuhara": 55,
+      "Ichinoseki": 56,
+      "Yama-no-me": 57,
+      "Hiraizumi": 58,
+      "Maesawa": 59,
+      "Rikuchu-Ori": 60,
+      "Mizusawa": 61,
+      "Higashi-Mizusawa": 62,
+      "Kinka-saki": 63,
+      "Rokuhara": 64,
+      "Kitakami": 65,
+      "Murasakino": 66,
+      "Hanamaki": 67,
+      "Hanamaki-Kuko": 68,
+      "Ishidorii": 69,
+      "Hizume": 70,
+      "Furudate": 71,
+      "Yahaba": 72,
+      "Iwate-Iioka": 73,
+      "Morioka": 74
     },
     "Tojo": {
       "Ikebukuro": 0,
@@ -42819,6 +42744,7 @@ window.RAILWAY_DATA = {
       "Nagasaka": 26,
       "Kobuchizawa": 27,
       "Shinano-Sakai": 28,
+      "Fujimi": 29,
       "Suzurannosato": 30,
       "Aoyagi": 31,
       "Chino": 32,
@@ -42869,7 +42795,7 @@ window.RAILWAY_DATA = {
       "Nishi-Wakamatsu": 2,
       "Aizu-Hongo": 3,
       "Aizu-Takada": 4,
-      "Negishi": 5,
+      "Tadami-Negishi": 5,
       "Shin-Kaku": 6,
       "Miya-Wakamatsu": 7,
       "Aizu-Sakashita": 8,
