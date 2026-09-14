@@ -14,16 +14,19 @@
    * Build a bidirectional adjacency list from UNIFIED_LINES
    * Returns: Map<stationName, Set<connectedStationNames>>
    */
+  // 干线本名（与 js/data-state.js TRUNK_MAIN_LINE_IDS 同步；home 页不加载 DataState，故本地内置）
+  // 4.3.616: 干线本名不进搜索图——与 LOS 展示层规则一致（4.3.5xx"干线本名不进展示层"）；
+  // 否则并行线（Tokaido/TokaidoMain 等）会被随机选中并显示"東海道本線"等本名
+  const _TRUNK_MAIN_LINE_IDS = ["Shinetsu", "TokaidoMain", "TohokuMain"];
+  function _isTrunk(lineId) { return _TRUNK_MAIN_LINE_IDS.indexOf(lineId) >= 0; }
+
   function buildStationGraph() {
     if (_graphCache) return _graphCache;
     const graph = new Map();
     
     for (const [lineId, line] of Object.entries(window.RailwayDB ? window.RailwayDB.getAllLines() : (window.DataLayer ? window.DataLayer.getAllLines() : window.UNIFIED_LINES || {}))) {
       if (!line || !line.stations) continue;
-      // v4.3.616: 干线本名（TokaidoMain/TohokuMain/Shinetsu）不进搜索图——与 LOS 展示层规则一致
-      // （4.3.5xx"干线本名不进展示层"）；否则并行线会被随机选中并显示"東海道本線"等本名
-      const _trunk = (window.DataState && window.DataState.TRUNK_MAIN_LINE_IDS) || [];
-      if (_trunk.indexOf(lineId) >= 0) continue;
+      if (_isTrunk(lineId)) continue;
       
       // Add all stations in this line to the graph (sequential connections)
       for (let i = 0; i < line.stations.length; i++) {
@@ -132,9 +135,8 @@
     for (const lid of lineIds) {
       const l = lines[lid];
       if (!l || !l.stations || !l.stations.length) continue;
-      // v4.3.616: 干线本名不进层图（与 buildStationGraph/LOS 展示层一致）
-      const _trunk2 = (window.DataState && window.DataState.TRUNK_MAIN_LINE_IDS) || [];
-      if (_trunk2.indexOf(lid) >= 0) continue;
+      // 干线本名不进层图（与 buildStationGraph 一致）
+      if (_isTrunk(lid)) continue;
       const positions = new Map();
       l.stations.forEach(function(st, i) {
         positions.set(st, i);

@@ -17132,12 +17132,6 @@ window.RAILWAY_DATA = {
           "note": ""
         },
         {
-          "station": "Yamato",
-          "lineId": "Mito",
-          "type": "in",
-          "note": ""
-        },
-        {
           "station": "Shonandai",
           "lineId": "YokohamaBlue",
           "type": "in",
@@ -18155,12 +18149,6 @@ window.RAILWAY_DATA = {
         {
           "station": "Yamato",
           "lineId": "Kounan",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Yamato",
-          "lineId": "Mito",
           "type": "in",
           "note": ""
         },
@@ -22453,7 +22441,7 @@ window.RAILWAY_DATA = {
         "Tamado",
         "Shimodate",
         "Niihari",
-        "Yamato",
+        "Yamato-Mito",
         "Iwase",
         "Haguro",
         "Fukuhara",
