@@ -18700,5 +18700,11 @@ window.RAILWAY_I18N = {
     "zh": "富士见",
     "ko": "후지미",
     "en": "Fujimi"
+  },
+  "Ryuogajo": {
+    "ja": "龍岡城",
+    "zh": "龙冈城",
+    "ko": "류오조",
+    "en": "Ryuogajo"
   }
 };

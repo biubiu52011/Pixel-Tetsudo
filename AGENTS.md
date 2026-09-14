@@ -1392,3 +1392,17 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 **spot 坐标订正**：泉岳寺(高輪2-11-1)/なぜ蕎麦(大久保1-3-22 東新宿店，Google 直搜店名会误配他处分店→必须带地址)/フナバシ屋/根津神社/善福寺公園(偏867m)/光が丘公園(偏2km，库内放到了練馬春日町側)；BOWWOW316/うめつば/LASOLA/杉本とうふ/Kakuya dist 为 4.3.615 后批次一并提交。KEKE 案例证实"spot 对、站错"模式（库内 spot 距真白金台駅235m，审计因站坐标错报935m）。
 **方法论**：①embed 对简单站名会误配外地同名 POI（川口→新潟、戸田公園→川崎），必须带市/区名或地址重查；②OSM Nominatim 站名+市名可交叉验证；③ODPT main key 已失效（Invalid acl），challenge key 同失效，站核回退 Google/OSM/wiki 三源。
 **验证**：dist 审计 55→51→48→40→32（剩余均为"声明站可达但非绝对最近"的多出口/区域型合理项，如増上寺/築地場外/根津神社 545m vs 声明5分）；bundle 重生成 node --check 通过；4 页 bump 615→616。
+
+## 4.3.617（2026-09-14，全库扫库·站坐标污染/ID冲突/站序/LSO 系统订正）
+**用户指示**："你扫一次库"——对全库（railway_data.json 全部线路/站）系统扫描，订正方案 B 劣质估算源遗留坐标污染 + 扫描揪出的同 ID 双站串站与站序错乱。
+**扫描器演进**：v1（相邻距>3.5km+重复坐标+范围外）产出 1286 条，地方线真实远距噪声过大弃用；v2 按"该线站坐标中位数∈首都圈框"自动判定 82 条首都圈线，查①相邻距>4km②站脱离线中位数>0.35°③全库≥3 站重复坐标 → 180 条 → 87 可疑站。ID 冲突扫描（站 ID 挂多线但坐标只符一条、偏离>0.3°）105→96 条。
+**坐标修复（Google embed 带区/市名核点 + OSM Nominatim 交叉，14 站）**：白山 37.9119,139.0297→35.72123,139.75216（原串新潟253km）/ 山下 37.96632,140.88898→35.65394,139.64659（原串福島280km）/ さつき台 43.0686,141.3508→35.60015,139.49367（原串札幌845km）/ 春日の野 34.703,135.2053→35.61882,139.46464（原串大阪400km）/ 柱 35.68111,139.76667→35.67892,139.84485 / 小田栄・川崎新町（南武支線，原串千葉90km）/ 三浦海岸 / 湘南台 / 幕張本郷（embed 疑误配，OSM 复核保留）/ Tama-Center（OSM）/ 小川町（東上，OSM，原串都営小川町）/ 武蔵嵐山 / 塩釜 35.2178,139.6167→38.309546,141.0095991（OSM，原串東京三浦半岛）/ 中央本線補富士見駅（OSM 35.9116151,138.2381543，信濃境後@29）。
+**同 ID 双站拆分（2 组）**：入谷——日比谷線 Iriya 恢复 35.720565,139.784466，相模線新建 Sagami-Iriya 35.47858,139.39182；竜王/龍岡城——Ryuo 归中央本線竜王 35.6687,138.5194，小海線新建 Ryuogajo 龍岡城 36.2042018,138.4906875（Google 核点，Komii@18）。
+**有楽町線站序**：豊洲→辰巳→新木場（原豊洲→一之江→南砂町→新木場 是串站，辰巳孤儿实体归位，一之江/南砂町 各归所属线）。
+**地方线站序重建（6 线）**：Tadami@5 根岸→Tadami-Negishi、OuMain@32 大久保→Akita-Okubo、Kamaishi@3 尾山台→Oyamada、Senseki 删串入 Shinden（東武スカイツリーライン站）、小海線 Komii 全 24 站重建（原 Saku"佐久"坐标跑到北海道名寄）、花輪線 Kounan 全 22 站重建（大更→大館，原站序含 13 个架空/串站）。
+**新增 12 实体**（Tadami-Negishi/Akita-Okubo/Oyamada/Matsubara-Ko/Nobeyama(由 nullno 改名)/Higashi-Komoro/Shigeno/Appi-Kogen/Akasakada/Koyanohata/Araya-Shinmachi/Anihata）+ Fujimi + Ryuogajo，i18n/name_map 同步。
+**删除 15 架空/串站 ID**：Saku/Hirose/Lake-Kai/Name-komi/Kita-Naka-komi/Iwamura/Naka-sato/Satomi/Mikaoka/Komabo/Higashi-Otasa/Hataya/HiTakasaka/Takooya/Yuse-Onsen；nullno 改名 Nobeyama。
+**LSO 全量重建（6 线）**：Oedo/Hachinohe/Noda/TohokuMain/ChuoMain + Komii——站序为唯一权威（旧 LSO 键为过期 ID/下划线变体）。
+**stationLines 收尾**：对齐 10 处规范化残留变体（Akasaka-Mitsuke→Akasaka-mitsuke 等）；删 5 孤儿（Otocchi/Hirai-8oh/Sugita-2/Adachi/Nishi_Arayashi）；Nishi-Arai 补大师線归属；亀戸線 小村井 Omurai→Komurai 正名；Tobu-Utsunomiya 归属 TobuUtsunomiya 线（原误挂 UtsunomiyaJR）。
+**验证**：站序缺站 0、LSO 错位 0、0,0 残留 0、Ryuo 冲突复扫 0；剩余 425 项全部为"站序引用>坐标实体"架构常态（历史设计，不修）；stations 2179/线 166；bundle 重生成加载 OK；dist 审计无新异常。
+**方法论教训（延续 4.3.616）**：Google embed 对简单站名误配外地同名 POI（幕張→海浜幕張、三郷中央→房総方向），遇线走向矛盾必须 OSM 交叉；OSM Nominatim 对小海線站名匹配差（误配中国/台湾地名）只采用精确命中值；ODPT 主 key 失效，站核回退 Google/OSM/wiki 三源；PowerShell 内联 node -e 含中文必炸，拆分脚本必须 Write work/_*.js 再跑（本轮 Ryuo 拆分首跑静默失败即因此）。

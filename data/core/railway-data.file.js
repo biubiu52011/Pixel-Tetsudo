@@ -8711,6 +8711,10 @@ window.RAILWAY_DATA = {
     "Fujimi": {
       "lat": 35.9116151,
       "lng": 138.2381543
+    },
+    "Ryuogajo": {
+      "lat": 36.2042018,
+      "lng": 138.4906875
     }
   },
   "lines": {
@@ -22201,7 +22205,7 @@ window.RAILWAY_DATA = {
         "Saku-Kainouchi",
         "Naka-komi",
         "Jotaibu",
-        "Ryuo",
+        "Ryuogajo",
         "Usuda",
         "Saku-Hirai",
         "Shigeno",
@@ -31567,7 +31571,8 @@ window.RAILWAY_DATA = {
     "小屋の畑": "Koyanohata",
     "荒屋新町": "Araya-Shinmachi",
     "兄畑": "Anihata",
-    "野辺山": "Nobeyama"
+    "野辺山": "Nobeyama",
+    "龍岡城": "Ryuogajo"
   },
   "stationLines": {
     "Omiya": [
@@ -35828,7 +35833,6 @@ window.RAILWAY_DATA = {
       "Komii"
     ],
     "Ryuo": [
-      "Komii",
       "ChuoMain"
     ],
     "Jotaibu": [
@@ -39601,6 +39605,9 @@ window.RAILWAY_DATA = {
     ],
     "Komurai": [
       "Tobu_Kameido"
+    ],
+    "Ryuogajo": [
+      "Komii"
     ]
   },
   "lineStationOrder": {
@@ -41341,7 +41348,7 @@ window.RAILWAY_DATA = {
       "Saku-Kainouchi": 15,
       "Naka-komi": 16,
       "Jotaibu": 17,
-      "Ryuo": 18,
+      "Ryuogajo": 18,
       "Usuda": 19,
       "Saku-Hirai": 20,
       "Shigeno": 21,
