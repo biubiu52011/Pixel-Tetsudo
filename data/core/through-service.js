@@ -36,7 +36,7 @@
     "Yurakucho": ["Tojo"],
     "Fukutoshin": ["TokyuToyoko", "Tojo", "Yurakucho_Seibu"],
     "Mita": ["TokyuMeguro"],
-    "Asakusa": ["Keikyu", "Keisei", "KeiseiOshiage", "TobuSkytree"],
+    "Asakusa": ["Keikyu", "Keisei", "KeiseiOshiage"],
     "Shinjuku": ["Keio", "KeioMain"],
     // 東急
     "TokyuToyoko": ["MinatoMirai", "Fukutoshin"],
@@ -102,11 +102,11 @@
     // 半蔵門・日比谷・東武
     "Hanzomon": { "TobuSkytree": ["Oshiage"], "TobuIsesaki": ["Oshiage"], "TokyuDenEn": ["Shibuya"] },
     // 東武スカイツリー・伊勢崎（東武動物公園）
-    "TobuSkytree": { "Hanzomon": ["Oshiage"], "Hibiya": ["Kita-Senju"], "Asakusa": ["Oshiage"], "TobuIsesaki": ["Tobu-Dobutsu-Koen"] },
+    "TobuSkytree": { "Hanzomon": ["Oshiage"], "Hibiya": ["Kita-Senju"], "TobuIsesaki": ["Tobu-Dobutsu-Koen"] },
     "TobuIsesaki": { "Hibiya": ["Kita-Senju"], "Hanzomon": ["Oshiage"], "TobuSkytree": ["Tobu-Dobutsu-Koen"] },
     "Hibiya": { "TobuSkytree": ["Kita-Senju"], "TobuIsesaki": ["Kita-Senju"] },
     // 浅草・京成・京急
-    "Asakusa": { "Keikyu": ["Sengakuji"], "Keisei": ["Oshiage"], "KeiseiOshiage": ["Oshiage"], "TobuSkytree": ["Oshiage"] },
+    "Asakusa": { "Keikyu": ["Sengakuji"], "Keisei": ["Oshiage"], "KeiseiOshiage": ["Oshiage"] },
     "Keikyu": { "Asakusa": ["Sengakuji"] },
     "Keisei": { "Asakusa": ["Oshiage"], "KeiseiOshiage": ["Aoto"], "NaritaSkyAccess": ["Keisei-Takasago"] },
     "KeiseiOshiage": { "Asakusa": ["Oshiage"], "Keisei": ["Aoto"] },
