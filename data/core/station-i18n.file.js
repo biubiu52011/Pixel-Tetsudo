@@ -1939,7 +1939,7 @@ window.RAILWAY_I18N = {
   },
   "Kuji": {
     "ja": "久地",
-    "zh": "久地",
+    "zh": "久慈",
     "ko": "쿠지",
     "en": "Kuji"
   },

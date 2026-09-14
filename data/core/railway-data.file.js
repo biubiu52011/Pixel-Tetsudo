@@ -25668,10 +25668,7 @@ window.RAILWAY_DATA = {
         "Sotogahama",
         "Imabetsu",
         "Tsugaru-Futamata",
-        "Ozawanai",
-        "Mutsu-Yanagita",
-        "Mutsu-Iwasaki",
-        "Mutsu-Morita"
+        "Ozawanai"
       ],
       "durations": [
         2,
