@@ -209,6 +209,22 @@
     } catch(e) { return false; }
   }
 
+  // v4.3.622: 直通判定按 THROUGH_JOIN_STATIONS 声明的接续站收窄——
+  // 湘南新宿⇄横須賀 只在 大船 直通，西大井/武蔵小杉/東戸塚 等共站并非直通接续；
+  // 若任何共站都按 through(0 惩罚) 切线，Dijkstra 会在同路廊反复免费换线拼跳数，
+  // 产生 新宿→西大井→武蔵小杉→東戸塚→鎌倉 式锯齿路径。
+  function isThroughAtStation(a, b, st) {
+    if (!isThroughConnected(a, b)) return false;
+    try {
+      if (window.ThroughService && window.ThroughService.getJoinStations) {
+        var joins = window.ThroughService.getJoinStations(a, b);
+        // null = 未声明（保持宽松，任何共站算直通）；[] = 声明"无接续站"（不通过）
+        if (joins && joins.length > 0 && joins.indexOf(st) < 0) return false;
+      }
+    } catch(e) {}
+    return true;
+  }
+
   /**
    * Find a route minimizing (ride time + transfer penalty) via Dijkstra
    * over (station, line) states. Returns the same shape as before:
@@ -292,7 +308,8 @@
         if (ol === lid) continue;
         const txSt = (aliasMap && aliasMap.has(ol)) ? aliasMap.get(ol) : st;
         const nk = txSt + '\u0001' + ol;
-        const through = isThroughConnected(lid, ol);
+        // v4.3.622: through 惩罚仅限声明接续站（大船/大宮/東京 等）；非接续共站按普通换乘
+        const through = isThroughAtStation(lid, ol, st);
         let txCost = through ? pen.through : pen.transfer;
         // Out-of-station interchange: add the real walk minutes declared in
         // transferStations (user rule: "不是线路经过就可以换乘").
@@ -422,7 +439,8 @@
       if (i < route.lineInfo.length - 1) {
         const nextLid = route.lineInfo[i+1].lines[0] || null;
         if (nextLid && nextLid !== lineId) {
-          const through = !!(lineId && nextLid && isThroughConnected(lineId, nextLid));
+          // v4.3.622: 直通徽章同样按接续站判定（避免在非接续共站显示"乗換不要"）
+          const through = !!(lineId && nextLid && isThroughAtStation(lineId, nextLid, seg.to));
           segments.push({ type: 'transfer', station: seg.to, fromLine: lineId, toLines: [nextLid], walking: null, walkingDuration: null, through: through });
         }
       }
