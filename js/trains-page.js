@@ -443,7 +443,7 @@
     bg.setAttribute("stroke-width", "1");
     layer.appendChild(bg);
     // Direction arrow drawn as an inline SVG path (vector, immune to font
-    // glyph availability): up=∧ / down=∨ / middle=<, stroke in the line colour.
+    // glyph availability): up=∧ / down=∨ / middle=→, stroke in the line colour.
     var dir = lineObj.dir || "middle";
     var ay = y + (mobile ? 9 : 6);
     var _ax = x + 5;
@@ -453,7 +453,7 @@
     } else if (dir === "down") {
       arrowD = "M" + (_ax - 3) + "," + (ay - 3) + " L" + _ax + "," + (ay + 4) + " L" + (_ax + 3) + "," + (ay - 3);
     } else {
-      arrowD = "M" + (_ax + 3) + "," + (ay - 3) + " L" + (_ax - 3) + "," + ay + " L" + (_ax + 3) + "," + (ay + 3);
+      arrowD = "M" + (_ax - 3) + "," + (ay - 3) + " L" + (_ax + 3) + "," + ay + " L" + (_ax - 3) + "," + (ay + 3);
     }
     var arr = document.createElementNS(ns, "path");
     arr.setAttribute("d", arrowD);
