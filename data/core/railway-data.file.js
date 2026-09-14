@@ -14534,12 +14534,6 @@ window.RAILWAY_DATA = {
           "note": ""
         },
         {
-          "station": "Hakusan",
-          "lineId": "Echigo",
-          "type": "in",
-          "note": ""
-        },
-        {
           "station": "Sugamo",
           "lineId": "Yamanote",
           "type": "in",
