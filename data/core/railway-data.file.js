@@ -8743,6 +8743,10 @@ window.RAILWAY_DATA = {
     "Minamino": {
       "lat": 38.8575,
       "lng": 139.957778
+    },
+    "Hakusan-Niigata": {
+      "lat": 37.90583,
+      "lng": 139.0325
     }
   },
   "lines": {
@@ -19921,7 +19925,7 @@ window.RAILWAY_DATA = {
         "Kobari",
         "Aoyama",
         "Sekiya",
-        "Hakusan",
+        "Hakusan-Niigata",
         "Kamitokoro",
         "Niigata"
       ],
@@ -19977,12 +19981,6 @@ window.RAILWAY_DATA = {
         {
           "station": "Yoshida",
           "lineId": "Miyo",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Hakusan",
-          "lineId": "Mita",
           "type": "in",
           "note": ""
         },
@@ -39678,6 +39676,12 @@ window.RAILWAY_DATA = {
     ],
     "Ryuogajo": [
       "Komii"
+    ],
+    "Hakusan-Niigata": [
+      {
+        "line_id": "Echigo",
+        "station_order": 30
+      }
     ]
   },
   "lineStationOrder": {
@@ -40936,8 +40940,8 @@ window.RAILWAY_DATA = {
       "Kobari": 27,
       "Aoyama": 28,
       "Sekiya": 29,
-      "Hakusan": 30,
-      "Niigata": 31
+      "Niigata": 31,
+      "Hakusan-Niigata": 30
     },
     "Gono": {
       "Higashi-Noshiro": 0,
