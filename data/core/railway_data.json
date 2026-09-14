@@ -13932,12 +13932,6 @@
           "note": ""
         },
         {
-          "station": "Ichinoe",
-          "lineId": "Shinjuku",
-          "type": "in",
-          "note": ""
-        },
-        {
           "station": "Minami-Sunamachi",
           "lineId": "Tozai",
           "type": "in",
@@ -14744,12 +14738,6 @@
         {
           "station": "Sumiyoshi",
           "lineId": "Hanzomon",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Ichinoe",
-          "lineId": "Yurakucho",
           "type": "in",
           "note": ""
         },
