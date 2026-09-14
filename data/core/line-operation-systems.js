@@ -194,6 +194,10 @@ window.LineOperationSystems = {
       nameKo: "쇼난신주쿠 라인",
       color: "#e21f26",
       lineIds: ["ShonanShinjuku"],
+      subNameJa: "高崎線・宇都宮線 東海道線",
+      subNameZh: "高崎线・宇都宫线 东海道线",
+      subNameEn: "Takasaki・Utsunomiya  Tōkaidō",
+      subNameKo: "다카사키・우쓰노미야  도카이도",
       icon: "../images/鉄道/JR東日本/湘南新宿ライン.png",
       order: 15
     },
