@@ -18700,5 +18700,47 @@ window.RAILWAY_I18N = {
     "zh": "龙冈城",
     "ko": "류오조",
     "en": "Ryuogajo"
+  },
+  "Shimotsuke-Hanaoka": {
+    "ja": "下野花岡",
+    "zh": "下野花冈",
+    "ko": "시모츠케하나오카",
+    "en": "Shimotsuke-Hanaoka"
+  },
+  "Niita": {
+    "ja": "仁井田",
+    "zh": "仁井田",
+    "ko": "니이타",
+    "en": "Niita"
+  },
+  "Kobana": {
+    "ja": "小塙",
+    "zh": "小塙",
+    "ko": "코바나",
+    "en": "Kobana"
+  },
+  "Makuta": {
+    "ja": "馬来田",
+    "zh": "马来田",
+    "ko": "마쿠타",
+    "en": "Makuta"
+  },
+  "Uzen-Zennami": {
+    "ja": "羽前前波",
+    "zh": "羽前前波",
+    "ko": "우젠젠나미",
+    "en": "Uzen-Zennami"
+  },
+  "Tsuya": {
+    "ja": "津谷",
+    "zh": "津谷",
+    "ko": "쓰야",
+    "en": "Tsuya"
+  },
+  "Minamino": {
+    "ja": "南野",
+    "zh": "南野",
+    "ko": "미나미노",
+    "en": "Minamino"
   }
 };
