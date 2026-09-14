@@ -11135,9 +11135,8 @@ window.RAILWAY_DATA = {
         "Shibuya",
         "Ebisu",
         "Osaki",
-        "Nishi-Oi",
-        "Shin-Kawasaki",
         "Musashi-Kosugi",
+        "Shin-Kawasaki",
         "Yokohama",
         "Higashi-Totsuka",
         "Hodogaya",
@@ -11153,8 +11152,6 @@ window.RAILWAY_DATA = {
         "Odawara"
       ],
       "durations": [
-        2,
-        2,
         2,
         2,
         2,
@@ -11675,12 +11672,6 @@ window.RAILWAY_DATA = {
         {
           "station": "Odawara",
           "lineId": "TokaidoMain",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Nishi-Oi",
-          "lineId": "Yokosuka",
           "type": "in",
           "note": ""
         },
@@ -31925,11 +31916,14 @@ window.RAILWAY_DATA = {
       "ShonanShinjuku"
     ],
     "Musashi-Kosugi": [
-      "TokyuMeguro"
-    ],
-    "Nishi-Oi": [
+      "TokyuMeguro",
+      "TokyuToyoko",
+      "Nambu",
       "Yokosuka",
       "ShonanShinjuku"
+    ],
+    "Nishi-Oi": [
+      "Yokosuka"
     ],
     "Ochanomizu": [
       "ChuoRapid",
@@ -39847,22 +39841,21 @@ window.RAILWAY_DATA = {
       "Shibuya": 5,
       "Ebisu": 6,
       "Osaki": 7,
-      "Nishi-Oi": 8,
+      "Musashi-Kosugi": 8,
       "Shin-Kawasaki": 9,
-      "Musashi-Kosugi": 10,
-      "Yokohama": 11,
-      "Higashi-Totsuka": 12,
-      "Hodogaya": 13,
-      "Totsuka": 14,
-      "Ofuna": 15,
-      "Fujisawa": 16,
-      "Tsujido": 17,
-      "Chigasaki": 18,
-      "Hiratsuka": 19,
-      "Oiso": 20,
-      "Ninomiya": 21,
-      "Kozu": 22,
-      "Odawara": 23
+      "Yokohama": 10,
+      "Higashi-Totsuka": 11,
+      "Hodogaya": 12,
+      "Totsuka": 13,
+      "Ofuna": 14,
+      "Fujisawa": 15,
+      "Tsujido": 16,
+      "Chigasaki": 17,
+      "Hiratsuka": 18,
+      "Oiso": 19,
+      "Ninomiya": 20,
+      "Kozu": 21,
+      "Odawara": 22
     },
     "Takasaki": {
       "Tokyo": 0,
