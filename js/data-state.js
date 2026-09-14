@@ -155,7 +155,18 @@
     }
     // 合并连续线路的区间（前一条终点 == 后一条起点）
     var chipsHtml = "";
-    if (mode === "trains" && intervalSegments.length === 0 && allLoop) {
+    // 优先使用 LOS 系统的 subName（如 上野東京ライン 的 "東海道線～高崎線・宇都宮線 常磐線～品川"）
+    var _sysSubName = "";
+    if (mode === "trains") {
+      var _lang2 = window.currentLang || 'ja';
+      var _snKey2 = "subName" + (_lang2 === 'ja' ? 'Ja' : _lang2 === 'zh' ? 'Zh' : _lang2 === 'en' ? 'En' : 'Ko');
+      if (sys[_snKey2]) {
+        _sysSubName = sys[_snKey2];
+      }
+    }
+    if (_sysSubName) {
+      chipsHtml = '<span class="rs-sys-chip">' + escapeHtml(_sysSubName) + '</span>';
+    } else if (mode === "trains" && intervalSegments.length === 0 && allLoop) {
       // Whole card is loop lines only: show 環状 instead of a meaningless
       // first↔last interval (Yamanote/Oedo LOS cards).
       chipsHtml = '<span class="rs-sys-chip">' + escapeHtml(t('line.loop')) + '</span>';
