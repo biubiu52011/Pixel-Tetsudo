@@ -813,8 +813,8 @@ window.RAILWAY_DATA = {
       "lng": 139.4944
     },
     "Tama-Center": {
-      "lat": 35.4878,
-      "lng": 139.6678
+      "lat": 35.6245604,
+      "lng": 139.4248907
     },
     "Asakusa": {
       "lat": 35.710746,
@@ -905,8 +905,8 @@ window.RAILWAY_DATA = {
       "lng": 139.659466
     },
     "Shonandai": {
-      "lat": 35.3056,
-      "lng": 139.4611
+      "lat": 35.39631,
+      "lng": 139.46649
     },
     "Fujisawa": {
       "lat": 35.3389,
@@ -925,8 +925,8 @@ window.RAILWAY_DATA = {
       "lng": 139.5417
     },
     "Miura-Kaigan": {
-      "lat": 35.2678,
-      "lng": 139.5056
+      "lat": 35.18809,
+      "lng": 139.6533
     },
     "Hayato": {
       "lat": 35.3456,
@@ -1289,8 +1289,8 @@ window.RAILWAY_DATA = {
       "lng": 139.69256
     },
     "Hakusan": {
-      "lat": 37.9119,
-      "lng": 139.0297
+      "lat": 35.72123,
+      "lng": 139.75216
     },
     "Higashi-Koganei": {
       "lat": 35.70156,
@@ -1729,12 +1729,12 @@ window.RAILWAY_DATA = {
       "lng": 140.27755
     },
     "Odasakae": {
-      "lat": 35.51442,
-      "lng": 140.70508
+      "lat": 35.51472,
+      "lng": 139.70474
     },
     "Kawasakishimmachi": {
-      "lat": 35.51832,
-      "lng": 140.69926
+      "lat": 35.51827,
+      "lng": 139.69918
     },
     "ShinMatsuda": {
       "lat": 35.34476,
@@ -1761,8 +1761,8 @@ window.RAILWAY_DATA = {
       "lng": 139.15445
     },
     "Makuharihongo": {
-      "lat": 35.6489,
-      "lng": 139.8456
+      "lat": 35.67275,
+      "lng": 139.95879
     },
     "Oizumi-Gakuen": {
       "lat": 35.7817,
@@ -5149,12 +5149,12 @@ window.RAILWAY_DATA = {
       "lng": 139.34557
     },
     "Musashi-Ranzan": {
-      "lat": 36.04438,
-      "lng": 139.32774
+      "lat": 35.9570808,
+      "lng": 139.3277256
     },
     "Ogawa-machi": {
-      "lat": 35.695005,
-      "lng": 139.766449
+      "lat": 36.0584454,
+      "lng": 139.2612627
     },
     "Tobu-Takezawa": {
       "lat": 36.07525,
@@ -5877,8 +5877,8 @@ window.RAILWAY_DATA = {
       "lng": 139.644941
     },
     "Yamashita": {
-      "lat": 37.96632,
-      "lng": 140.88898
+      "lat": 35.65394,
+      "lng": 139.64659
     },
     "Shimo-takaido": {
       "lat": 35.666183,
@@ -8573,12 +8573,12 @@ window.RAILWAY_DATA = {
       "lng": 136.64775
     },
     "Satsuki-Dai": {
-      "lat": 43.06861111,
-      "lng": 141.35077778
+      "lat": 35.60015,
+      "lng": 139.49367
     },
     "Haruhi-No": {
-      "lat": 34.70296667,
-      "lng": 135.20528333
+      "lat": 35.61882,
+      "lng": 139.46464
     },
     "Ougo": {
       "lat": 39.23041111,
@@ -8637,8 +8637,8 @@ window.RAILWAY_DATA = {
       "lng": 140.77575556
     },
     "Hashira": {
-      "lat": 35.68111111,
-      "lng": 139.76666667
+      "lat": 35.67892,
+      "lng": 139.84485
     },
     "Kashiwa-No-Ha": {
       "lat": 35.89305556,
@@ -8699,6 +8699,10 @@ window.RAILWAY_DATA = {
     "Omurai": {
       "lat": 35.71032,
       "lng": 139.82761
+    },
+    "Sagami-Iriya": {
+      "lat": 35.47858,
+      "lng": 139.39182
     }
   },
   "lines": {
@@ -13678,8 +13682,7 @@ window.RAILWAY_DATA = {
         "Shin-Tomicho",
         "Tsukishima",
         "Toyosu",
-        "Ichinoe",
-        "Minami-Sunamachi",
+        "Tatsumi",
         "Shin-Kiba"
       ],
       "durations": [
@@ -23844,7 +23847,7 @@ window.RAILWAY_DATA = {
         "Shake",
         "Atsugi",
         "Ebina",
-        "Iriya",
+        "Sagami-Iriya",
         "Sobudaishita",
         "Shimomizo",
         "Hara-Taima",
@@ -32607,8 +32610,7 @@ window.RAILWAY_DATA = {
       "Hibiya"
     ],
     "Iriya": [
-      "Hibiya",
-      "Sagami"
+      "Hibiya"
     ],
     "Minowa": [
       "Hibiya"
@@ -32694,11 +32696,9 @@ window.RAILWAY_DATA = {
       "Yurikamome"
     ],
     "Ichinoe": [
-      "Yurakucho",
       "Shinjuku"
     ],
     "Minami-Sunamachi": [
-      "Yurakucho",
       "Tozai"
     ],
     "Ochiai": [
@@ -39656,6 +39656,12 @@ window.RAILWAY_DATA = {
     ],
     "Hitoichiba": [
       "Oito"
+    ],
+    "Tatsumi": [
+      "Yurakucho"
+    ],
+    "Sagami-Iriya": [
+      "Sagami"
     ]
   },
   "lineStationOrder": {
@@ -40070,9 +40076,8 @@ window.RAILWAY_DATA = {
       "Shin-Tomicho": 19,
       "Tsukishima": 20,
       "Toyosu": 21,
-      "Ichinoe": 22,
-      "Minami-Sunamachi": 23,
-      "Shin-Kiba": 24
+      "Shin-Kiba": 23,
+      "Tatsumi": 22
     },
     "Tozai": {
       "Nakano": 0,
@@ -41798,14 +41803,14 @@ window.RAILWAY_DATA = {
       "Shake": 7,
       "Atsugi": 8,
       "Ebina": 9,
-      "Iriya": 10,
       "Sobudaishita": 11,
       "Shimomizo": 12,
       "Hara-Taima": 13,
       "Banda": 14,
       "Kamimizo": 15,
       "Minami-Hashimoto": 16,
-      "Hashimoto": 17
+      "Hashimoto": 17,
+      "Sagami-Iriya": 10
     },
     "Sano": {
       "Tatebayashi": 0,

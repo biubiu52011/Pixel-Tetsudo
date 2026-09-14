@@ -12559,9 +12559,9 @@
   },
   "Hotto-Yuda": {
     "ja": "ほっとゆだ",
-    "zh": "Hotto汤田",
-    "ko": "홋토유다",
-    "en": "Hotto-Yuda"
+    "zh": "安心汤田",
+    "ko": "안신유다",
+    "en": "Anshin-Yuda"
   },
   "Shirakino": {
     "ja": "白木野",
@@ -18712,5 +18712,11 @@
     "zh": "小村井",
     "ko": "코무라이",
     "en": "Omurai"
+  },
+  "Sagami-Iriya": {
+    "ja": "入谷",
+    "zh": "入谷",
+    "ko": "이리야",
+    "en": "Iriya"
   }
 }
