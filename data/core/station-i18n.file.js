@@ -1257,7 +1257,8 @@ window.RAILWAY_I18N = {
     "ja": "小山",
     "zh": "小山",
     "ko": "오야마",
-    "en": "Oyama"
+    "en": "Oyama",
+    "zh-CN": "小山"
   },
   "Higashi-Murayama": {
     "ja": "東村山",
@@ -1395,7 +1396,8 @@ window.RAILWAY_I18N = {
     "ja": "大和",
     "zh": "大和",
     "ko": "야마토",
-    "en": "Yamato"
+    "en": "Yamato",
+    "zh-CN": "大和"
   },
   "Isehara": {
     "ja": "伊勢原",
@@ -1425,7 +1427,8 @@ window.RAILWAY_I18N = {
     "ja": "結城",
     "zh": "雪",
     "ko": "유키",
-    "en": "Yuki"
+    "en": "Yuki",
+    "zh-CN": "结城"
   },
   "Tamako": {
     "ja": "多摩湖",
@@ -1857,7 +1860,8 @@ window.RAILWAY_I18N = {
     "ja": "江田",
     "zh": "江田",
     "ko": "에다",
-    "en": "Eda"
+    "en": "Eda",
+    "zh-CN": "江田"
   },
   "Nakayama": {
     "ja": "中山",
@@ -6309,7 +6313,8 @@ window.RAILWAY_I18N = {
     "ja": "志津",
     "zh": "志津",
     "ko": "시즈",
-    "en": "Shizu"
+    "en": "Shizu",
+    "zh-CN": "静"
   },
   "Yachiyo-Midorigaoka": {
     "ja": "八千代緑が丘",
@@ -7701,7 +7706,8 @@ window.RAILWAY_I18N = {
     "ja": "米沢",
     "zh": "米泽",
     "ko": "요네자와",
-    "en": "Yonezawa"
+    "en": "Yonezawa",
+    "zh-CN": "米泽"
   },
   "Okura": {
     "ja": "大蔵",
@@ -7959,7 +7965,8 @@ window.RAILWAY_I18N = {
     "ja": "大曲",
     "zh": "大曲",
     "ko": "오오마가리",
-    "en": "Ōmagari"
+    "en": "Ōmagari",
+    "zh-CN": "大曲"
   },
   "Jinguji": {
     "ja": "神宮寺",
@@ -8235,7 +8242,8 @@ window.RAILWAY_I18N = {
     "ja": "新津",
     "zh": "新津",
     "ko": "니이츠",
-    "en": "Niitsu"
+    "en": "Niitsu",
+    "zh-CN": "新津"
   },
   "Kyakase": {
     "ja": "客屋瀬",
@@ -8295,7 +8303,8 @@ window.RAILWAY_I18N = {
     "ja": "坂町",
     "zh": "坂町",
     "ko": "사카마치",
-    "en": "Sakamachi"
+    "en": "Sakamachi",
+    "zh-CN": "坂町"
   },
   "Hirabayashi": {
     "ja": "平林",
@@ -8529,7 +8538,8 @@ window.RAILWAY_I18N = {
     "ja": "いわき",
     "zh": "磐城",
     "ko": "이와키",
-    "en": "Iwaki"
+    "en": "Iwaki",
+    "zh-CN": "磐城"
   },
   "Minato": {
     "ja": "湊",
@@ -9327,7 +9337,8 @@ window.RAILWAY_I18N = {
     "ja": "郡山",
     "zh": "郡山",
     "ko": "고리야마",
-    "en": "Kōriyama"
+    "en": "Kōriyama",
+    "zh-CN": "郡山"
   },
   "Koriyama-Futaba": {
     "ja": "郡山双葉",
@@ -9375,7 +9386,8 @@ window.RAILWAY_I18N = {
     "ja": "猪苗代",
     "zh": "猪苗代",
     "ko": "이나와시로",
-    "en": "Inawashiro"
+    "en": "Inawashiro",
+    "zh-CN": "猪苗代"
   },
   "Bandai-Machi": {
     "ja": "磐梯町",
@@ -9387,19 +9399,22 @@ window.RAILWAY_I18N = {
     "ja": "東長原",
     "zh": "东长原",
     "ko": "히가시나가하라",
-    "en": "Higashi-Nagahara"
+    "en": "Higashi-Nagahara",
+    "zh-CN": "东长原"
   },
   "Hirota": {
     "ja": "広田",
     "zh": "广田",
     "ko": "히로타",
-    "en": "Hirota"
+    "en": "Hirota",
+    "zh-CN": "广田"
   },
   "Aizu-Wakamatsu": {
     "ja": "会津若松",
     "zh": "会津若松",
     "ko": "아이즈와카마츠",
-    "en": "Aizu-Wakamatsu"
+    "en": "Aizu-Wakamatsu",
+    "zh-CN": "会津若松"
   },
   "Doshima": {
     "ja": "堂島",
@@ -9435,13 +9450,15 @@ window.RAILWAY_I18N = {
     "ja": "喜多方",
     "zh": "喜多方",
     "ko": "키타카타",
-    "en": "Kitakata"
+    "en": "Kitakata",
+    "zh-CN": "喜多方"
   },
   "Ogino": {
     "ja": "荻野",
     "zh": "荻野",
     "ko": "오기노",
-    "en": "Ogino"
+    "en": "Ogino",
+    "zh-CN": "荻野"
   },
   "Odano": {
     "ja": "小田野",
@@ -9459,7 +9476,8 @@ window.RAILWAY_I18N = {
     "ja": "徳沢",
     "zh": "德泽",
     "ko": "토쿠사와",
-    "en": "Tokusawa"
+    "en": "Tokusawa",
+    "zh-CN": "德泽"
   },
   "Tohji": {
     "ja": "東次",
@@ -9489,7 +9507,8 @@ window.RAILWAY_I18N = {
     "ja": "三川",
     "zh": "三川",
     "ko": "미카와",
-    "en": "Mikawa"
+    "en": "Mikawa",
+    "zh-CN": "三川"
   },
   "Mikawa-2": {
     "ja": "三川",
@@ -9531,13 +9550,15 @@ window.RAILWAY_I18N = {
     "ja": "五泉",
     "zh": "五泉",
     "ko": "고센",
-    "en": "Gosen"
+    "en": "Gosen",
+    "zh-CN": "五泉"
   },
   "Kita-Gosen": {
     "ja": "北五泉",
     "zh": "北五泉",
     "ko": "키타고센",
-    "en": "Kita-Gosen"
+    "en": "Kita-Gosen",
+    "zh-CN": "北五泉"
   },
   "Shin-Sado": {
     "ja": "新佐渡",
@@ -9555,7 +9576,8 @@ window.RAILWAY_I18N = {
     "ja": "水戸",
     "zh": "水户",
     "ko": "미토",
-    "en": "Mito"
+    "en": "Mito",
+    "zh-CN": "水户"
   },
   "Hitachi-Aoba": {
     "ja": "常陸青葉",
@@ -9567,7 +9589,8 @@ window.RAILWAY_I18N = {
     "ja": "常陸津田",
     "zh": "常陆津田",
     "ko": "히타치츠다",
-    "en": "Hitachi-Tsuda"
+    "en": "Hitachi-Tsuda",
+    "zh-CN": "常陆津田"
   },
   "Goshika": {
     "ja": "御獅子",
@@ -9579,19 +9602,22 @@ window.RAILWAY_I18N = {
     "ja": "上菅谷",
     "zh": "上菅谷",
     "ko": "카미스가야",
-    "en": "Kami-Sugaya"
+    "en": "Kami-Sugaya",
+    "zh-CN": "上菅谷"
   },
   "Naka-Sugaya": {
     "ja": "中菅谷",
     "zh": "中菅谷",
     "ko": "나카스가야",
-    "en": "Naka-Sugaya"
+    "en": "Naka-Sugaya",
+    "zh-CN": "中菅谷"
   },
   "Hitachi-Konosu": {
     "ja": "常陸鴻巣",
     "zh": "常陆鸿巢",
     "ko": "히타치코노스",
-    "en": "Hitachi-Konosu"
+    "en": "Hitachi-Konosu",
+    "zh-CN": "常陆鸿巢"
   },
   "Urigume": {
     "ja": "瓜売",
@@ -9603,7 +9629,8 @@ window.RAILWAY_I18N = {
     "ja": "常陸大宮",
     "zh": "常陆大宫",
     "ko": "히타치오미야",
-    "en": "Hitachi-Omiya"
+    "en": "Hitachi-Omiya",
+    "zh-CN": "常陆大宫"
   },
   "MuraNoJo": {
     "ja": "村野上",
@@ -9711,7 +9738,8 @@ window.RAILWAY_I18N = {
     "ja": "磐城浅川",
     "zh": "磐城浅川",
     "ko": "이와키아사카와",
-    "en": "Iwaki-Asakawa"
+    "en": "Iwaki-Asakawa",
+    "zh-CN": "磐城浅川"
   },
   "Sato-Shiraishi": {
     "ja": "里白石",
@@ -9723,7 +9751,8 @@ window.RAILWAY_I18N = {
     "ja": "磐城石川",
     "zh": "磐城石川",
     "ko": "이와키이시카와",
-    "en": "Iwaki-Ishikawa"
+    "en": "Iwaki-Ishikawa",
+    "zh-CN": "磐城石川"
   },
   "Izumikyo": {
     "ja": "泉郷",
@@ -9741,7 +9770,8 @@ window.RAILWAY_I18N = {
     "ja": "磐城守山",
     "zh": "磐城守山",
     "ko": "이와키모리야마",
-    "en": "Iwaki-Moriyama"
+    "en": "Iwaki-Moriyama",
+    "zh-CN": "磐城守山"
   },
   "Assaka-Eisei": {
     "ja": "安積永盛",
@@ -10461,7 +10491,8 @@ window.RAILWAY_I18N = {
     "ja": "花巻",
     "zh": "花卷",
     "ko": "하나마키",
-    "en": "Hanamaki"
+    "en": "Hanamaki",
+    "zh-CN": "花卷"
   },
   "Hanamaki-Kuko": {
     "ja": "花巻空港",
@@ -10515,7 +10546,8 @@ window.RAILWAY_I18N = {
     "ja": "盛岡",
     "zh": "盛冈",
     "ko": "모리오카",
-    "en": "Morioka"
+    "en": "Morioka",
+    "zh-CN": "盛冈"
   },
   "Sendai": {
     "ja": "仙台",
@@ -10767,7 +10799,8 @@ window.RAILWAY_I18N = {
     "ja": "羽黒",
     "zh": "羽黑",
     "ko": "하구로",
-    "en": "Haguro"
+    "en": "Haguro",
+    "zh-CN": "羽黑"
   },
   "Shimoyama-Aoi": {
     "ja": "下山青",
@@ -11385,7 +11418,8 @@ window.RAILWAY_I18N = {
     "ja": "新花巻",
     "zh": "新花卷",
     "ko": "신하나마키",
-    "en": "Shin-Hanamaki"
+    "en": "Shin-Hanamaki",
+    "zh-CN": "新花卷"
   },
   "Douzawa": {
     "ja": "堂沢",
@@ -11397,19 +11431,22 @@ window.RAILWAY_I18N = {
     "ja": "春山",
     "zh": "春山",
     "ko": "하루야마",
-    "en": "Haruyama"
+    "en": "Haruyama",
+    "zh-CN": "晴山"
   },
   "Iwanebashi": {
     "ja": "岩根橋",
     "zh": "岩根桥",
     "ko": "이와네바시",
-    "en": "Iwanebashi"
+    "en": "Iwanebashi",
+    "zh-CN": "岩根桥"
   },
   "Miyamori": {
     "ja": "宮守",
     "zh": "宫守",
     "ko": "미야모리",
-    "en": "Miyamori"
+    "en": "Miyamori",
+    "zh-CN": "宫守"
   },
   "Kashiwagi": {
     "ja": "柏木",
@@ -11421,7 +11458,8 @@ window.RAILWAY_I18N = {
     "ja": "鱒沢",
     "zh": "鳟泽",
     "ko": "마스자와",
-    "en": "Masuzawa"
+    "en": "Masuzawa",
+    "zh-CN": "鳟泽"
   },
   "Arayama": {
     "ja": "荒山",
@@ -11469,7 +11507,8 @@ window.RAILWAY_I18N = {
     "ja": "平川",
     "zh": "平川",
     "ko": "히라쿠라",
-    "en": "Hirakura"
+    "en": "Hirakura",
+    "zh-CN": "平仓"
   },
   "Ashikase": {
     "ja": "足笠",
@@ -11487,7 +11526,8 @@ window.RAILWAY_I18N = {
     "ja": "陸中大橋",
     "zh": "陆中大桥",
     "ko": "리쿠추오하시",
-    "en": "Rikuchu-Ohashi"
+    "en": "Rikuchu-Ohashi",
+    "zh-CN": "陆中大桥"
   },
   "Horizumi": {
     "ja": "堀住",
@@ -11499,19 +11539,22 @@ window.RAILWAY_I18N = {
     "ja": "松倉",
     "zh": "松倉",
     "ko": "마츠쿠라",
-    "en": "Matsukura"
+    "en": "Matsukura",
+    "zh-CN": "松仓"
   },
   "Kosano": {
     "ja": "小佐野",
     "zh": "小佐野",
     "ko": "코사노",
-    "en": "Kosano"
+    "en": "Kosano",
+    "zh-CN": "小佐野"
   },
   "Kamaishi": {
     "ja": "釜石",
     "zh": "釜石",
     "ko": "카마이시",
-    "en": "Kamaishi"
+    "en": "Kamaishi",
+    "zh-CN": "釜石"
   },
   "Otasa": {
     "ja": "大笹",
@@ -11757,7 +11800,8 @@ window.RAILWAY_I18N = {
     "ja": "南米沢",
     "zh": "南米泽",
     "ko": "미나미요네자와",
-    "en": "Minami-Yonezawa"
+    "en": "Minami-Yonezawa",
+    "zh-CN": "南米泽"
   },
   "Orihara": {
     "ja": "折原",
@@ -11775,13 +11819,15 @@ window.RAILWAY_I18N = {
     "ja": "萩生",
     "zh": "萩生",
     "ko": "햐규",
-    "en": "Hagyu"
+    "en": "Hagyu",
+    "zh-CN": "萩生"
   },
   "Uzen-Komatsu": {
     "ja": "羽前小松",
     "zh": "羽前小松",
     "ko": "우젠코마츠",
-    "en": "Uzen-Komatsu"
+    "en": "Uzen-Komatsu",
+    "zh-CN": "羽前小松"
   },
   "Uzen-Narita": {
     "ja": "羽前成田",
@@ -11793,7 +11839,8 @@ window.RAILWAY_I18N = {
     "ja": "犬川",
     "zh": "犬川",
     "ko": "이누카와",
-    "en": "Inukawa"
+    "en": "Inukawa",
+    "zh-CN": "犬川"
   },
   "Mutsu-Yanagawa": {
     "ja": "陸奥梁川",
@@ -11805,19 +11852,22 @@ window.RAILWAY_I18N = {
     "ja": "津川",
     "zh": "津川",
     "ko": "츠가와",
-    "en": "Tsugawa"
+    "en": "Tsugawa",
+    "zh-CN": "津川"
   },
   "Echigo-Kanamaru": {
     "ja": "越後金丸",
     "zh": "越后金丸",
     "ko": "에치고카나마루",
-    "en": "Echigo-Kanamaru"
+    "en": "Echigo-Kanamaru",
+    "zh-CN": "越后金丸"
   },
   "Echigo-Oshima": {
     "ja": "越後大島",
     "zh": "越后大岛",
     "ko": "에치고오오시마",
-    "en": "Echigo-Ōshima"
+    "en": "Echigo-Ōshima",
+    "zh-CN": "越后大岛"
   },
   "Echigo-Shikawatari": {
     "ja": "越後鹿渡",
@@ -11829,7 +11879,8 @@ window.RAILWAY_I18N = {
     "ja": "越後片貝",
     "zh": "越后片贝",
     "ko": "에치고카타카이",
-    "en": "Echigo-Katakai"
+    "en": "Echigo-Katakai",
+    "zh-CN": "越后片贝"
   },
   "Mitsumine": {
     "ja": "三峰",
@@ -12063,13 +12114,15 @@ window.RAILWAY_I18N = {
     "ja": "小岩井",
     "zh": "小岩井",
     "ko": "코이와이",
-    "en": "Koiwai"
+    "en": "Koiwai",
+    "zh-CN": "小岩井"
   },
   "Shizukuishi": {
     "ja": "雫石",
     "zh": "雫石",
     "ko": "시즈쿠이시",
-    "en": "Shizukuishi"
+    "en": "Shizukuishi",
+    "zh-CN": "雫石"
   },
   "Haruki": {
     "ja": "春木",
@@ -12087,13 +12140,15 @@ window.RAILWAY_I18N = {
     "ja": "赤渕",
     "zh": "赤渊",
     "ko": "아카부치",
-    "en": "Akabuchi"
+    "en": "Akabuchi",
+    "zh-CN": "赤渕"
   },
   "Tazawako": {
     "ja": "田沢湖",
     "zh": "田泽湖",
     "ko": "타자와코",
-    "en": "Tazawako"
+    "en": "Tazawako",
+    "zh-CN": "田泽湖"
   },
   "Sasimaki": {
     "ja": "笹森",
@@ -12147,7 +12202,8 @@ window.RAILWAY_I18N = {
     "ja": "北大曲",
     "zh": "北大曲",
     "ko": "키타오마가리",
-    "en": "Kita-Omagari"
+    "en": "Kita-Omagari",
+    "zh-CN": "北大曲"
   },
   "Kita-Hachioji": {
     "ja": "北八王子",
@@ -12327,19 +12383,22 @@ window.RAILWAY_I18N = {
     "ja": "赤井",
     "zh": "赤井",
     "ko": "아카이",
-    "en": "Akai"
+    "en": "Akai",
+    "zh-CN": "赤井"
   },
   "Ogawago": {
     "ja": "小川郷",
     "zh": "小川乡",
     "ko": "오가와고",
-    "en": "Ogawago"
+    "en": "Ogawago",
+    "zh-CN": "小川乡"
   },
   "Kawamae": {
     "ja": "川前",
     "zh": "川前",
     "ko": "카와마에",
-    "en": "Kawamae"
+    "en": "Kawamae",
+    "zh-CN": "川前"
   },
   "Ono-Shinmachi": {
     "ja": "小野新町",
@@ -12357,7 +12416,8 @@ window.RAILWAY_I18N = {
     "ja": "菅谷",
     "zh": "菅谷",
     "ko": "스가야",
-    "en": "Sugaya"
+    "en": "Sugaya",
+    "zh-CN": "菅谷"
   },
   "Takine": {
     "ja": "滝根",
@@ -12393,7 +12453,8 @@ window.RAILWAY_I18N = {
     "ja": "三春",
     "zh": "三春",
     "ko": "미하루",
-    "en": "Miharu"
+    "en": "Miharu",
+    "zh-CN": "三春"
   },
   "Yanagihara": {
     "ja": "柳原",
@@ -13077,7 +13138,8 @@ window.RAILWAY_I18N = {
     "ja": "東結城",
     "zh": "东结城",
     "ko": "히가시유키",
-    "en": "Higashi-Yuki"
+    "en": "Higashi-Yuki",
+    "zh-CN": "东结城"
   },
   "Oda": {
     "ja": "小田",
@@ -13101,31 +13163,36 @@ window.RAILWAY_I18N = {
     "ja": "新治",
     "zh": "新治",
     "ko": "니이하리",
-    "en": "Niihari"
+    "en": "Niihari",
+    "zh-CN": "新治"
   },
   "Iwase": {
     "ja": "岩瀬",
     "zh": "岩濑",
     "ko": "이와세",
-    "en": "Iwase"
+    "en": "Iwase",
+    "zh-CN": "岩濑"
   },
   "Fukuhara": {
     "ja": "福原",
     "zh": "福原",
     "ko": "후쿠하라",
-    "en": "Fukuhara"
+    "en": "Fukuhara",
+    "zh-CN": "福原"
   },
   "Inada": {
     "ja": "稲田",
     "zh": "稻田",
     "ko": "이나다",
-    "en": "Inada"
+    "en": "Inada",
+    "zh-CN": "稻田"
   },
   "Kasama": {
     "ja": "笠間",
     "zh": "笠间",
     "ko": "카사마",
-    "en": "Kasama"
+    "en": "Kasama",
+    "zh-CN": "笠间"
   },
   "Shihodo": {
     "ja": "四郷",
@@ -13137,7 +13204,8 @@ window.RAILWAY_I18N = {
     "ja": "友部",
     "zh": "友部",
     "ko": "토모베",
-    "en": "Tomobe"
+    "en": "Tomobe",
+    "zh-CN": "友部"
   },
   "Miyo": {
     "ja": "三与",
@@ -13407,7 +13475,8 @@ window.RAILWAY_I18N = {
     "ja": "上盛岡",
     "zh": "上盛冈",
     "ko": "카미모리오카",
-    "en": "Kami-Morioka"
+    "en": "Kami-Morioka",
+    "zh-CN": "上盛冈"
   },
   "Yamakoshi": {
     "ja": "山越",
@@ -13437,13 +13506,15 @@ window.RAILWAY_I18N = {
     "ja": "箱石",
     "zh": "箱石",
     "ko": "하코이시",
-    "en": "Hakoishi"
+    "en": "Hakoishi",
+    "zh-CN": "箱石"
   },
   "Rikuchu-Kawai": {
     "ja": "陸中川井",
     "zh": "陆中川井",
     "ko": "리쿠추카와이",
-    "en": "Rikuchu-Kawai"
+    "en": "Rikuchu-Kawai",
+    "zh-CN": "陆中川井"
   },
   "Harabanda": {
     "ja": "原反田",
@@ -13473,7 +13544,8 @@ window.RAILWAY_I18N = {
     "ja": "宮古",
     "zh": "宫古",
     "ko": "미야코",
-    "en": "Miyako"
+    "en": "Miyako",
+    "zh-CN": "宫古"
   },
   "Minami-Sakeide": {
     "ja": "南酒出",
@@ -14325,25 +14397,29 @@ window.RAILWAY_I18N = {
     "ja": "山岸",
     "zh": "山岸",
     "ko": "야마기시",
-    "en": "Yamagishi"
+    "en": "Yamagishi",
+    "zh-CN": "山岸"
   },
   "Kami-Yonai": {
     "ja": "上米内",
     "zh": "上米内",
     "ko": "카미요나이",
-    "en": "Kami-Yonai"
+    "en": "Kami-Yonai",
+    "zh-CN": "上米内"
   },
   "Kuzakai": {
     "ja": "区界",
     "zh": "区界",
     "ko": "쿠자카이",
-    "en": "Kuzakai"
+    "en": "Kuzakai",
+    "zh-CN": "区界"
   },
   "Matsukusa": {
     "ja": "松草",
     "zh": "松草",
     "ko": "마츠쿠사",
-    "en": "Matsukusa"
+    "en": "Matsukusa",
+    "zh-CN": "松草"
   },
   "Hiratsuto": {
     "ja": "平津戸",
@@ -14355,7 +14431,8 @@ window.RAILWAY_I18N = {
     "ja": "川内",
     "zh": "川内",
     "ko": "카와우치",
-    "en": "Kawauchi"
+    "en": "Kawauchi",
+    "zh-CN": "川内"
   },
   "Hakoda": {
     "ja": "腹帯",
@@ -14613,7 +14690,8 @@ window.RAILWAY_I18N = {
     "ja": "安積永盛",
     "zh": "安积永盛",
     "ko": "아사카나가모리",
-    "en": "Asaka-Nagamori"
+    "en": "Asaka-Nagamori",
+    "zh-CN": "安积永盛"
   },
   "Hiwada": {
     "ja": "日和田",
@@ -16953,13 +17031,15 @@ window.RAILWAY_I18N = {
     "ja": "西米沢",
     "zh": "西米泽",
     "ko": "니시요네자와",
-    "en": "Nishi-Yonezawa"
+    "en": "Nishi-Yonezawa",
+    "zh-CN": "西米泽"
   },
   "Narushima": {
     "ja": "成島",
     "zh": "成岛",
     "ko": "나루시마",
-    "en": "Narushima"
+    "en": "Narushima",
+    "zh-CN": "成岛"
   },
   "Nakagori": {
     "ja": "中郡",
@@ -16977,7 +17057,8 @@ window.RAILWAY_I18N = {
     "ja": "今泉",
     "zh": "今泉",
     "ko": "이마이즈미",
-    "en": "Imaizumi"
+    "en": "Imaizumi",
+    "zh-CN": "今泉"
   },
   "Hagiu": {
     "ja": "萩生",
@@ -16989,25 +17070,29 @@ window.RAILWAY_I18N = {
     "ja": "羽前沼沢",
     "zh": "羽前沼泽",
     "ko": "우젠누마자와",
-    "en": "Uzen-Numazawa"
+    "en": "Uzen-Numazawa",
+    "zh-CN": "羽前沼泽"
   },
   "Isaryo": {
     "ja": "伊佐領",
     "zh": "伊佐领",
     "ko": "이사료",
-    "en": "Isaryō"
+    "en": "Isaryō",
+    "zh-CN": "伊佐领"
   },
   "Uzen-Matsuoka": {
     "ja": "羽前松岡",
     "zh": "羽前松冈",
     "ko": "우젠마츠오카",
-    "en": "Uzen-Matsuoka"
+    "en": "Uzen-Matsuoka",
+    "zh-CN": "羽前松冈"
   },
   "Oguni": {
     "ja": "小川郷",
     "zh": "小川乡",
     "ko": "오고리",
-    "en": "Ogōri"
+    "en": "Ogōri",
+    "zh-CN": "小国"
   },
   "Echigo-Kanemaru": {
     "ja": "越後金丸",
@@ -17463,13 +17548,15 @@ window.RAILWAY_I18N = {
     "ja": "郡山富田",
     "zh": "郡山富田",
     "ko": "고리야마토미타",
-    "en": "Kōriyama-Tomita"
+    "en": "Kōriyama-Tomita",
+    "zh-CN": "郡山富田"
   },
   "Kikuta": {
     "ja": "喜久田",
     "zh": "喜久田",
     "ko": "키쿠타",
-    "en": "Kikuta"
+    "en": "Kikuta",
+    "zh-CN": "喜久田"
   },
   "Abukumagawa": {
     "ja": "安子ヶ島",
@@ -17481,7 +17568,8 @@ window.RAILWAY_I18N = {
     "ja": "磐梯熱海",
     "zh": "磐梯热海",
     "ko": "반다이아타미",
-    "en": "Bandai-Atami"
+    "en": "Bandai-Atami",
+    "zh-CN": "磐梯热海"
   },
   "Nakayama-juku": {
     "ja": "中山宿",
@@ -17499,19 +17587,22 @@ window.RAILWAY_I18N = {
     "ja": "関都",
     "zh": "关都",
     "ko": "세키토",
-    "en": "Sekito"
+    "en": "Sekito",
+    "zh-CN": "关都"
   },
   "Kawageta": {
     "ja": "川桁",
     "zh": "川桁",
     "ko": "카와게타",
-    "en": "Kawageta"
+    "en": "Kawageta",
+    "zh-CN": "川桁"
   },
   "Bandaimachi": {
     "ja": "磐梯町",
     "zh": "磐梯町",
     "ko": "반다이마치",
-    "en": "Bandaimachi"
+    "en": "Bandaimachi",
+    "zh-CN": "磐梯町"
   },
   "Higashiyama-Koen": {
     "ja": "東山公園",
@@ -17529,7 +17620,8 @@ window.RAILWAY_I18N = {
     "ja": "堂島",
     "zh": "堂岛",
     "ko": "도지마",
-    "en": "Dōjima"
+    "en": "Dōjima",
+    "zh-CN": "堂岛"
   },
   "Goka": {
     "ja": "五箇",
@@ -17541,13 +17633,15 @@ window.RAILWAY_I18N = {
     "ja": "塩川",
     "zh": "盐川",
     "ko": "시오카와",
-    "en": "Shiokawa"
+    "en": "Shiokawa",
+    "zh-CN": "盐川"
   },
   "Aizu-Toyokawa": {
     "ja": "会津豊川",
     "zh": "会津丰川",
     "ko": "아이즈토요카와",
-    "en": "Aizu-Toyokawa"
+    "en": "Aizu-Toyokawa",
+    "zh-CN": "会津丰川"
   },
   "Ubaido": {
     "ja": "姥堂",
@@ -17607,7 +17701,8 @@ window.RAILWAY_I18N = {
     "ja": "猿和田",
     "zh": "猿和田",
     "ko": "사루와다",
-    "en": "Saruwada"
+    "en": "Saruwada",
+    "zh-CN": "猿和田"
   },
   "Gozu": {
     "ja": "五泉",
@@ -17625,7 +17720,8 @@ window.RAILWAY_I18N = {
     "ja": "夏井",
     "zh": "夏井",
     "ko": "나츠이",
-    "en": "Natsui"
+    "en": "Natsui",
+    "zh-CN": "夏井"
   },
   "Ono-Niimachi": {
     "ja": "小野新町",
@@ -17643,7 +17739,8 @@ window.RAILWAY_I18N = {
     "ja": "大越",
     "zh": "大越",
     "ko": "오오고에",
-    "en": "Ōgoe"
+    "en": "Ōgoe",
+    "zh-CN": "大越"
   },
   "Iwaki-Tokiwada": {
     "ja": "磐城常葉",
@@ -18627,7 +18724,8 @@ window.RAILWAY_I18N = {
     "ja": "小山田",
     "zh": "小山田",
     "ko": "오야마다",
-    "en": "Oyamada"
+    "en": "Oyamada",
+    "zh-CN": "小山田"
   },
   "Matsubara-Ko": {
     "ja": "松原湖",
@@ -18742,5 +18840,545 @@ window.RAILWAY_I18N = {
     "zh": "南野",
     "ko": "미나미노",
     "en": "Minamino"
+  },
+  "Otabayashi": {
+    "ja": "小田林",
+    "en": "Otabayashi",
+    "zh-CN": "小田林",
+    "ko": "小田林"
+  },
+  "Kawashima": {
+    "ja": "川岛",
+    "en": "Kawashima",
+    "zh-CN": "川岛",
+    "ko": "川岛"
+  },
+  "Tamado": {
+    "ja": "玉户",
+    "en": "Tamado",
+    "zh-CN": "玉户",
+    "ko": "玉户"
+  },
+  "Shimodate": {
+    "ja": "下馆",
+    "en": "Shimodate",
+    "zh-CN": "下馆",
+    "ko": "下馆"
+  },
+  "Shishido": {
+    "ja": "宍户",
+    "en": "Shishido",
+    "zh-CN": "宍户",
+    "ko": "宍户"
+  },
+  "Hitachi-Aoyagi": {
+    "ja": "常陆青柳",
+    "en": "Hitachi Aoyagi",
+    "zh-CN": "常陆青柳",
+    "ko": "常陆青柳"
+  },
+  "Godai": {
+    "ja": "后台",
+    "en": "Godai",
+    "zh-CN": "后台",
+    "ko": "后台"
+  },
+  "Shimo-Sugaya": {
+    "ja": "下菅谷",
+    "en": "Shimo Sugaya",
+    "zh-CN": "下菅谷",
+    "ko": "下菅谷"
+  },
+  "Urizura": {
+    "ja": "瓜连",
+    "en": "Urizura",
+    "zh-CN": "瓜连",
+    "ko": "瓜连"
+  },
+  "Tamagawamura": {
+    "ja": "玉川村",
+    "en": "Tamagawamura",
+    "zh-CN": "玉川村",
+    "ko": "玉川村"
+  },
+  "Nogamihara": {
+    "ja": "野上原",
+    "en": "Nogamihara",
+    "zh-CN": "野上原",
+    "ko": "野上原"
+  },
+  "Yamagatajuku": {
+    "ja": "山方宿",
+    "en": "Yamagatajuku",
+    "zh-CN": "山方宿",
+    "ko": "山方宿"
+  },
+  "Naka-Funyu": {
+    "ja": "中舟生",
+    "en": "Naka Funyu",
+    "zh-CN": "中舟生",
+    "ko": "中舟生"
+  },
+  "Shimo-Ogawa": {
+    "ja": "下小川",
+    "en": "Shimo Ogawa",
+    "zh-CN": "下小川",
+    "ko": "下小川"
+  },
+  "Saigane": {
+    "ja": "西金",
+    "en": "Saigane",
+    "zh-CN": "西金",
+    "ko": "西金"
+  },
+  "Kami-Ogawa": {
+    "ja": "上小川",
+    "en": "Kami Ogawa",
+    "zh-CN": "上小川",
+    "ko": "上小川"
+  },
+  "Fukuroda": {
+    "ja": "袋田",
+    "en": "Fukuroda",
+    "zh-CN": "袋田",
+    "ko": "袋田"
+  },
+  "Hitachi-Daigo": {
+    "ja": "常陆大子",
+    "en": "Hitachi Daigo",
+    "zh-CN": "常陆大子",
+    "ko": "常陆大子"
+  },
+  "Shimonomiya": {
+    "ja": "下野宫",
+    "en": "Shimonomiya",
+    "zh-CN": "下野宫",
+    "ko": "下野宫"
+  },
+  "Yamatsuriyama": {
+    "ja": "矢祭山",
+    "en": "Yamatsuriyama",
+    "zh-CN": "矢祭山",
+    "ko": "矢祭山"
+  },
+  "Higashidate": {
+    "ja": "东馆",
+    "en": "Higashidate",
+    "zh-CN": "东馆",
+    "ko": "东馆"
+  },
+  "Minami-Ishii": {
+    "ja": "南石井",
+    "en": "Minami Ishii",
+    "zh-CN": "南石井",
+    "ko": "南石井"
+  },
+  "Iwaki-Ishii": {
+    "ja": "磐城石井",
+    "en": "Iwaki Ishii",
+    "zh-CN": "磐城石井",
+    "ko": "磐城石井"
+  },
+  "Iwaki-Hanawa": {
+    "ja": "磐城塙",
+    "en": "Iwaki Hanawa",
+    "zh-CN": "磐城塙",
+    "ko": "磐城塙"
+  },
+  "Chikatsu": {
+    "ja": "近津",
+    "en": "Chikatsu",
+    "zh-CN": "近津",
+    "ko": "近津"
+  },
+  "Nakatoyo": {
+    "ja": "中丰",
+    "en": "Nakatoyo",
+    "zh-CN": "中丰",
+    "ko": "中丰"
+  },
+  "Iwaki-Tanakura": {
+    "ja": "磐城棚仓",
+    "en": "Iwaki Tanakura",
+    "zh-CN": "磐城棚仓",
+    "ko": "磐城棚仓"
+  },
+  "Satoshiroishi": {
+    "ja": "里白石",
+    "en": "Satoshiroishi",
+    "zh-CN": "里白石",
+    "ko": "里白石"
+  },
+  "Nogisawa": {
+    "ja": "野木泽",
+    "en": "Nogisawa",
+    "zh-CN": "野木泽",
+    "ko": "野木泽"
+  },
+  "Kawabeoki": {
+    "ja": "川边冲",
+    "en": "Kawabeoki",
+    "zh-CN": "川边冲",
+    "ko": "川边冲"
+  },
+  "Izumigo": {
+    "ja": "泉乡",
+    "en": "Izumigo",
+    "zh-CN": "泉乡",
+    "ko": "泉乡"
+  },
+  "Kawahigashi": {
+    "ja": "川东",
+    "en": "Kawahigashi",
+    "zh-CN": "川东",
+    "ko": "川东"
+  },
+  "Oshioe": {
+    "ja": "小盐江",
+    "en": "Oshioe",
+    "zh-CN": "小盐江",
+    "ko": "小盐江"
+  },
+  "Yatakawa": {
+    "ja": "谷田川",
+    "en": "Yatakawa",
+    "zh-CN": "谷田川",
+    "ko": "谷田川"
+  },
+  "Nitanai": {
+    "ja": "似内",
+    "en": "Nitanai",
+    "zh-CN": "似内",
+    "ko": "似内"
+  },
+  "Tsuchizawa": {
+    "ja": "土泽",
+    "en": "Tsuchizawa",
+    "zh-CN": "土泽",
+    "ko": "土泽"
+  },
+  "Kashiwagidaira": {
+    "ja": "柏木平",
+    "en": "Kashiwagidaira",
+    "zh-CN": "柏木平",
+    "ko": "柏木平"
+  },
+  "Arayamae": {
+    "ja": "荒谷前",
+    "en": "Arayamae",
+    "zh-CN": "荒谷前",
+    "ko": "荒谷前"
+  },
+  "Iwate-Futsukamachi": {
+    "ja": "岩手二日町",
+    "en": "Iwate Futsukamachi",
+    "zh-CN": "岩手二日町",
+    "ko": "岩手二日町"
+  },
+  "Ayaori": {
+    "ja": "绫织",
+    "en": "Ayaori",
+    "zh-CN": "绫织",
+    "ko": "绫织"
+  },
+  "Tono": {
+    "ja": "远野",
+    "en": "Tono",
+    "zh-CN": "远野",
+    "ko": "远野"
+  },
+  "Aozasa": {
+    "ja": "青笹",
+    "en": "Aozasa",
+    "zh-CN": "青笹",
+    "ko": "青笹"
+  },
+  "Iwate-Kamigo": {
+    "ja": "岩手上乡",
+    "en": "Iwate Kamigo",
+    "zh-CN": "岩手上乡",
+    "ko": "岩手上乡"
+  },
+  "Ashigase": {
+    "ja": "足濑",
+    "en": "Ashigase",
+    "zh-CN": "足濑",
+    "ko": "足濑"
+  },
+  "Kami-Arisu": {
+    "ja": "上有住",
+    "en": "Kami Arisu",
+    "zh-CN": "上有住",
+    "ko": "上有住"
+  },
+  "Dosen": {
+    "ja": "洞泉",
+    "en": "Dosen",
+    "zh-CN": "洞泉",
+    "ko": "洞泉"
+  },
+  "Maegata": {
+    "ja": "前潟",
+    "en": "Maegata",
+    "zh-CN": "前潟",
+    "ko": "前潟"
+  },
+  "Okama": {
+    "ja": "大釜",
+    "en": "Okama",
+    "zh-CN": "大釜",
+    "ko": "大釜"
+  },
+  "Harukiba": {
+    "ja": "春木场",
+    "en": "Harukiba",
+    "zh-CN": "春木场",
+    "ko": "春木场"
+  },
+  "Sashimaki": {
+    "ja": "刺卷",
+    "en": "Sashimaki",
+    "zh-CN": "刺卷",
+    "ko": "刺卷"
+  },
+  "Jindai": {
+    "ja": "神代",
+    "en": "Jindai",
+    "zh-CN": "神代",
+    "ko": "神代"
+  },
+  "Shoden": {
+    "ja": "生田",
+    "en": "Shoden",
+    "zh-CN": "生田",
+    "ko": "生田"
+  },
+  "Kakunodate": {
+    "ja": "角馆",
+    "en": "Kakunodate",
+    "zh-CN": "角馆",
+    "ko": "角馆"
+  },
+  "Uguisuno": {
+    "ja": "莺野",
+    "en": "Uguisuno",
+    "zh-CN": "莺野",
+    "ko": "莺野"
+  },
+  "Ugo-Nagano": {
+    "ja": "羽后长野",
+    "en": "Ugo Nagano",
+    "zh-CN": "羽后长野",
+    "ko": "羽后长野"
+  },
+  "Yariminai": {
+    "ja": "鑓见内",
+    "en": "Yariminai",
+    "zh-CN": "鑓见内",
+    "ko": "鑓见内"
+  },
+  "Ugo-Yotsuya": {
+    "ja": "羽后四屋",
+    "en": "Ugo Yotsuya",
+    "zh-CN": "羽后四屋",
+    "ko": "羽后四屋"
+  },
+  "Haratai": {
+    "ja": "腹带",
+    "en": "Haratai",
+    "zh-CN": "腹带",
+    "ko": "腹带"
+  },
+  "Moichi": {
+    "ja": "茂市",
+    "en": "Moichi",
+    "zh-CN": "茂市",
+    "ko": "茂市"
+  },
+  "Hikime": {
+    "ja": "蟆目",
+    "en": "Hikime",
+    "zh-CN": "蟆目",
+    "ko": "蟆目"
+  },
+  "Kebaraichi": {
+    "ja": "花原市",
+    "en": "Kebaraichi",
+    "zh-CN": "花原市",
+    "ko": "花原市"
+  },
+  "Sentoku": {
+    "ja": "千德",
+    "en": "Sentoku",
+    "zh-CN": "千德",
+    "ko": "千德"
+  },
+  "Chugun": {
+    "ja": "中郡",
+    "en": "Chugun",
+    "zh-CN": "中郡",
+    "ko": "中郡"
+  },
+  "Uzen-Tsubaki": {
+    "ja": "羽前椿",
+    "en": "Uzen Tsubaki",
+    "zh-CN": "羽前椿",
+    "ko": "羽前椿"
+  },
+  "Tenoko": {
+    "ja": "手之子",
+    "en": "Tenoko",
+    "zh-CN": "手之子",
+    "ko": "手之子"
+  },
+  "Echigo-Shimoseki": {
+    "ja": "越后下关",
+    "en": "Echigo Shimoseki",
+    "zh-CN": "越后下关",
+    "ko": "越后下关"
+  },
+  "Ononiimachi": {
+    "ja": "小野新町",
+    "en": "Ononiimachi",
+    "zh-CN": "小野新町",
+    "ko": "小野新町"
+  },
+  "Kanmata": {
+    "ja": "神俣",
+    "en": "Kanmata",
+    "zh-CN": "神俣",
+    "ko": "神俣"
+  },
+  "Iwaki-Tokiwa": {
+    "ja": "磐城常叶",
+    "en": "Iwaki Tokiwa",
+    "zh-CN": "磐城常叶",
+    "ko": "磐城常叶"
+  },
+  "Funehiki": {
+    "ja": "船引",
+    "en": "Funehiki",
+    "zh-CN": "船引",
+    "ko": "船引"
+  },
+  "Kanameta": {
+    "ja": "要田",
+    "en": "Kanameta",
+    "zh-CN": "要田",
+    "ko": "要田"
+  },
+  "Mogi": {
+    "ja": "舞木",
+    "en": "Mogi",
+    "zh-CN": "舞木",
+    "ko": "舞木"
+  },
+  "Akogashima": {
+    "ja": "安子岛",
+    "en": "Akogashima",
+    "zh-CN": "安子岛",
+    "ko": "安子岛"
+  },
+  "Nakayamajuku": {
+    "ja": "中山宿",
+    "en": "Nakayamajuku",
+    "zh-CN": "中山宿",
+    "ko": "中山宿"
+  },
+  "Joko": {
+    "ja": "上户",
+    "en": "Joko",
+    "zh-CN": "上户",
+    "ko": "上户"
+  },
+  "Okinashima": {
+    "ja": "翁岛",
+    "en": "Okinashima",
+    "zh-CN": "翁岛",
+    "ko": "翁岛"
+  },
+  "Oikawa": {
+    "ja": "笈川",
+    "en": "Oikawa",
+    "zh-CN": "笈川",
+    "ko": "笈川"
+  },
+  "Ubadou": {
+    "ja": "姥堂",
+    "en": "Ubadou",
+    "zh-CN": "姥堂",
+    "ko": "姥堂"
+  },
+  "Onobori": {
+    "ja": "尾登",
+    "en": "Onobori",
+    "zh-CN": "尾登",
+    "ko": "尾登"
+  },
+  "Nozawa": {
+    "ja": "野泽",
+    "en": "Nozawa",
+    "zh-CN": "野泽",
+    "ko": "野泽"
+  },
+  "Kaminojiri": {
+    "ja": "上野尻",
+    "en": "Kaminojiri",
+    "zh-CN": "上野尻",
+    "ko": "上野尻"
+  },
+  "Toyomi": {
+    "ja": "丰实",
+    "en": "Toyomi",
+    "zh-CN": "丰实",
+    "ko": "丰实"
+  },
+  "Hideya": {
+    "ja": "日出谷",
+    "en": "Hideya",
+    "zh-CN": "日出谷",
+    "ko": "日出谷"
+  },
+  "Kanose": {
+    "ja": "鹿濑",
+    "en": "Kanose",
+    "zh-CN": "鹿濑",
+    "ko": "鹿濑"
+  },
+  "Igashima": {
+    "ja": "五十岛",
+    "en": "Igashima",
+    "zh-CN": "五十岛",
+    "ko": "五十岛"
+  },
+  "Higashi-Gejo": {
+    "ja": "东下条",
+    "en": "Higashi Gejo",
+    "zh-CN": "东下条",
+    "ko": "东下条"
+  },
+  "Sakihana": {
+    "ja": "咲花",
+    "en": "Sakihana",
+    "zh-CN": "咲花",
+    "ko": "咲花"
+  },
+  "Maoroshi": {
+    "ja": "马下",
+    "en": "Maoroshi",
+    "zh-CN": "马下",
+    "ko": "马下"
+  },
+  "Shinseki": {
+    "ja": "新关",
+    "en": "Shinseki",
+    "zh-CN": "新关",
+    "ko": "新关"
+  },
+  "Higashi-Niitsu": {
+    "ja": "东新津",
+    "en": "Higashi Niitsu",
+    "zh-CN": "东新津",
+    "ko": "东新津"
   }
 };
