@@ -32914,8 +32914,7 @@ window.RAILWAY_DATA = {
       "Oedo"
     ],
     "Hakusan": [
-      "Mita",
-      "Echigo"
+      "Mita"
     ],
     "Sengoku": [
       "Mita"
