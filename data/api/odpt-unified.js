@@ -1247,30 +1247,27 @@
             var ep = ODPT_ENDPOINTS[op];
             if (!ep.trainTimetable) return Promise.resolve();
 
-            // JR-East 走按 railway 分批（本地线路映射），其余运营商保持单请求
-            if (op === 'JR-East') {
-                // v4.3.489: 从 LINE_TO_OPERATOR 收集全部 JR-East 本地线（85 条）——
-                // LINE_RAILWAY_CODE 只含显式改名线（62 条同名透传线不在其中），
-                // 漏掉会让 Yamanote/ChuoRapid/Agatsuma 等大批线路时刻表缺失
-                var jrLineIds = [];
-                Object.keys(LINE_TO_OPERATOR).forEach(function(lid) {
-                    if (LINE_TO_OPERATOR[lid] === 'JR-East') jrLineIds.push(lid);
-                });
-                if (jrLineIds.length === 0) return Promise.resolve();
-                return collectTimetableByRailway(op, jrLineIds);
-            }
-
-            return fetchODPT(buildUrl(op, 'trainTimetable')).then(extractData).then(function(data) {
-                if (data && data.length > 0) {
-                    newTimetables[op] = data;
-                    window.ODPT_TIMETABLES[op] = data;
-                    // 如果没有实时位置，用时刻表填充ODPT_TRAINS（向后兼容）
-                    if (!window.ODPT_TRAINS[op]) {
-                        window.ODPT_TRAINS[op] = data;
-                    }
-                    loaded++;
-                }
+            // v4.3.6xx: 所有运营商都按 railway 分批拉取——
+            // 原来只有 JR-East 走分批，其他运营商（私铁、地铁等）全量请求被 1000 条截断，
+            // 导致大部分私铁线路时刻表数据丢失，线路图上无列车位置。
+            var opLineIds = [];
+            Object.keys(LINE_TO_OPERATOR).forEach(function(lid) {
+                if (LINE_TO_OPERATOR[lid] === op) opLineIds.push(lid);
             });
+            if (opLineIds.length === 0) {
+                // 没有本地线路映射的operator，回退到全量请求
+                return fetchODPT(buildUrl(op, 'trainTimetable')).then(extractData).then(function(data) {
+                    if (data && data.length > 0) {
+                        newTimetables[op] = data;
+                        window.ODPT_TIMETABLES[op] = data;
+                        if (!window.ODPT_TRAINS[op]) {
+                            window.ODPT_TRAINS[op] = data;
+                        }
+                        loaded++;
+                    }
+                });
+            }
+            return collectTimetableByRailway(op, opLineIds);
         });
 
         return Promise.all(promises).then(function() {
