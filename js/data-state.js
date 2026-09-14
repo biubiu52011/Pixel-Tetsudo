@@ -298,8 +298,31 @@
     var subHtml = "";
     if (mode === "trains") {
       var intervalText = "";
-      try {
-        var stations = (window.RailwayDB && window.RailwayDB.getLineStations) ? window.RailwayDB.getLineStations(lineId) : [];
+      // 优先使用 LOS 系统的 subName（如 上野東京ライン 的 "東海道線～高崎線・宇都宮線／常磐線～品川"）
+      var _losSubName = "";
+      if (window.LineOperationSystems) {
+        var _lang = window.currentLang || 'ja';
+        var _ops = window.LineOperationSystems;
+        var _opKeys = Object.keys(_ops);
+        for (var _oi = 0; _oi < _opKeys.length; _oi++) {
+          var _sysList = _ops[_opKeys[_oi]];
+          for (var _si = 0; _si < _sysList.length; _si++) {
+            if (_sysList[_si].lineIds && _sysList[_si].lineIds.indexOf(lineId) >= 0) {
+              var _snKey = "subName" + (_lang === 'ja' ? 'Ja' : _lang === 'zh' ? 'Zh' : _lang === 'en' ? 'En' : 'Ko');
+              if (_sysList[_si][_snKey]) {
+                _losSubName = _sysList[_si][_snKey];
+              }
+              break;
+            }
+          }
+          if (_losSubName) break;
+        }
+      }
+      if (_losSubName) {
+        intervalText = _losSubName;
+      } else {
+        try {
+          var stations = (window.RailwayDB && window.RailwayDB.getLineStations) ? window.RailwayDB.getLineStations(lineId) : [];
         // Loop lines (Yamanote/Oedo): drawn first↔last stations are adjacent on
         // the ring and mislead users (東京⇔有楽町), so show 環状 instead (4.3.557).
         var _isLoop = !!(line && (line.isDoubleColumnLoop || line.isSixShapedLoop));
@@ -315,6 +338,7 @@
           }
         }
       } catch(e) {}
+      }
       if (intervalText) {
         // 4.3.480：区间文字统一灰色——rs-line-name-en 全项目无 CSS 定义（默认黑色），
         // LOS 卡区间用 rs-sys-chip 灰色；独立线卡（无 LOS 卡，如 JobanMain）改用 rs-line-interval 同灰。
