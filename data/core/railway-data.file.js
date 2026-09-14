@@ -8747,6 +8747,10 @@ window.RAILWAY_DATA = {
     "Hakusan-Niigata": {
       "lat": 37.90583,
       "lng": 139.0325
+    },
+    "Shizu-Suigun": {
+      "lat": 36.61694,
+      "lng": 140.38611
     }
   },
   "lines": {
@@ -16920,12 +16924,6 @@ window.RAILWAY_DATA = {
           "note": ""
         },
         {
-          "station": "Shizu",
-          "lineId": "Suigun",
-          "type": "in",
-          "note": ""
-        },
-        {
           "station": "Keisei-Ueno",
           "lineId": "KeihinTohoku",
           "type": "out",
@@ -24942,7 +24940,7 @@ window.RAILWAY_DATA = {
         "Kami-Sugaya",
         "Hitachi-Konosu",
         "Urizura",
-        "Shizu",
+        "Shizu-Suigun",
         "Hitachi-Omiya",
         "Tamagawamura",
         "Nogamihara",
@@ -25017,7 +25015,7 @@ window.RAILWAY_DATA = {
           "note": ""
         },
         {
-          "station": "Shizu",
+          "station": "Shizu-Suigun",
           "lineId": "Keisei",
           "type": "in",
           "note": ""
@@ -39663,6 +39661,9 @@ window.RAILWAY_DATA = {
         "line_id": "Echigo",
         "station_order": 30
       }
+    ],
+    "Shizu-Suigun": [
+      "Suigun"
     ]
   },
   "lineStationOrder": {
