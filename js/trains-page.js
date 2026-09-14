@@ -454,8 +454,8 @@
     } else if (dir === "down") {
       arrowD = "M" + (_ax - 3) + "," + (ay - 3) + " L" + _ax + "," + (ay + 4) + " L" + (_ax + 3) + "," + (ay - 3);
     } else {
-      // 向右箭头：尺寸与向上/向下统一（高 6px -3~+3，宽 7px -3~+4）
-      arrowD = "M" + (_ax - 3) + "," + (ay - 3) + " L" + (_ax + 4) + "," + ay + " L" + (_ax - 3) + "," + (ay + 3);
+      // 向右 >：与向上/向下完全旋转对称（高 6px -3~+3，宽 6px -3~+3）
+      arrowD = "M" + (_ax - 3) + "," + (ay - 3) + " L" + (_ax + 3) + "," + ay + " L" + (_ax - 3) + "," + (ay + 3);
     }
     var arr = document.createElementNS(ns, "path");
     arr.setAttribute("d", arrowD);
