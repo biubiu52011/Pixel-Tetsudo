@@ -18210,6 +18210,18 @@ window.RAILWAY_I18N = {
     "ko": "야마토",
     "en": "Yamato"
   },
+  "Hakusan-Niigata": {
+    "ja": "白山",
+    "zh": "白山",
+    "ko": "하쿠산",
+    "en": "Hakusan"
+  },
+  "Shizu-Suigun": {
+    "ja": "静",
+    "zh": "静",
+    "ko": "시즈",
+    "en": "Shizu"
+  },
   "Osawa-Yamagata": {
     "ja": "大沢",
     "zh": "大泽",

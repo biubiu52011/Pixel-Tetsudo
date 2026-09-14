@@ -4529,8 +4529,8 @@
       "lng": 140.0895
     },
     "Yamato-Mito": {
-      "lat": 35.46991,
-      "lng": 139.4614
+      "lat": 36.28694,
+      "lng": 140.23917
     },
     "Tomobe": {
       "lat": 36.35046,
@@ -39645,10 +39645,7 @@
       "Komii"
     ],
     "Hakusan-Niigata": [
-      {
-        "line_id": "Echigo",
-        "station_order": 30
-      }
+      "Echigo"
     ],
     "Shizu-Suigun": [
       "Suigun"
