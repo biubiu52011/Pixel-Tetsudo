@@ -11165,12 +11165,6 @@ window.RAILWAY_I18N = {
     "ko": "사메",
     "en": "Same"
   },
-  "Playpia-Shirahama": {
-    "ja": "プレイピア白浜",
-    "zh": "PlayPia白滨",
-    "ko": "플레이피아시라하마",
-    "en": "Playpia-Shirahama"
-  },
   "Rikuchu-Shirahama": {
     "ja": "陸中白浜",
     "zh": "陆中白滨",

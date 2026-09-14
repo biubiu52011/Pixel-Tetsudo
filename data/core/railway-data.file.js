@@ -7012,10 +7012,6 @@ window.RAILWAY_DATA = {
       "lat": 40.53028889,
       "lng": 141.55515833
     },
-    "Playpia-Shirahama": {
-      "lat": 40.52458333,
-      "lng": 141.58125
-    },
     "Tanechisa-Kaigan": {
       "lat": 40.50701667,
       "lng": 141.607325
@@ -20124,7 +20120,6 @@ window.RAILWAY_DATA = {
         "Rikuchu-Minato",
         "Shirogane",
         "Same",
-        "Playpia-Shirahama",
         "Rikuchu-Shirahama",
         "Tanechisa-Kaigan",
         "Okuku",
@@ -34818,9 +34813,6 @@ window.RAILWAY_DATA = {
     "Same": [
       "Hachinohe"
     ],
-    "Playpia-Shirahama": [
-      "Hachinohe"
-    ],
     "Rikuchu-Shirahama": [
       "Hachinohe"
     ],
@@ -40922,7 +40914,6 @@ window.RAILWAY_DATA = {
       "Rikuchu-Minato": 4,
       "Shirogane": 5,
       "Same": 6,
-      "Playpia-Shirahama": 7,
       "Rikuchu-Shirahama": 8,
       "Tanechisa-Kaigan": 9,
       "Okuku": 10,
