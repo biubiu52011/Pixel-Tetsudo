@@ -1445,3 +1445,14 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 **改札口**：核查立川(東/西/北/南/グランデュオ 5口)、八王子(南北)、赤羽(北/南)、舞浜(北/南)、西船橋(連絡改札多口)、荻窪(東/西)、鎌倉(東/西+連絡)、高尾(消歧义)——全部多口无主，按既有原则不写 default，EXIT_DATA 维持 9 站
 **验证**：node --check + 26 例方向单测全过；本地浏览器实测：大船→藤沢 显示"東海道線 3・4番線"（原"東海道本線"无番线）、大船→横須賀 7・8番線、東京→宇都宮 番线徽章×2（浦和6/大宮9）；线上等 CDN ~10min
 **遗留**：新宿→鎌倉/品川→鎌倉 锯齿换乘（湘南新宿ライン⇄横須賀線 在武蔵小杉/東戸塚 来回 3-4 段，22 分明显失真）——既有路径规划问题非本轮回归，待查；改札口多口站是否改列全部口（用户未拍板）
+
+## 4.3.622（2026-09-15，锯齿换乘修复——直通接续站收窄 + 湘南新宿ライン站序修正）
+**用户指示**："修复"（新宿→鎌倉/品川→鎌倉 湘南新宿⇄横須賀 在武蔵小杉/西大井/東戸塚 来回 3-4 段锯齿）
+**根因**（两层）：
+- 路径规划层：MODE_PENALTY through=0 且 isThroughConnected 只返回 bool 不消费 THROUGH_JOIN_STATIONS——任何共站（西大井/武蔵小杉/東戸塚 7 个）都可 0 成本切线，Dijkstra 钻跳数差异拼锯齿路径
+- 数据层：ShonanShinjuku 站序错误——①含西大井（湘南新宿ラインは大崎→武蔵小杉 大崎支線直通，不经西大井）②新川崎 在 西大井~武蔵小杉 之间（物理应为 武蔵小杉~横浜 之间）
+**修复**（js/route-search.js + data/core/railway_data.json）：
+- isThroughAtStation(a,b,st)：直通判定按 THROUGH_JOIN_STATIONS 接续站收窄（getJoinStations null=宽松/[]=无接续/非接续站=普通 transfer 惩罚）；Dijkstra 换乘（283-313）+ buildRouteSegments 直通徽章（"乗換不要"）两处统一
+- ShonanShinjuku.stations 24→23：删 Nishi-Oi，Shin-Kawasaki 移到 Musashi-Kosugi 后；durations 24→22、LSO 重建、transferStations 删西大井幽灵条目、stationLines['Nishi-Oi']→[Yokosuka]、stationLines['Musashi-Kosugi'] 补 [TokyuToyoko,Nambu,Yokosuka,ShonanShinjuku]（五线站，原只登记 TokyuMeguro）
+**验证**：node --check + bundle 重生成加载 OK；浏览器 8 组：新宿→鎌倉 24分 大船直通(乗換不要)、品川→鎌倉 12分 1换、新宿→横浜 12分直达、西大井→横浜 横須賀線直达、武蔵小杉→渋谷 湘南新宿直达、武蔵小杉→鎌倉 横須賀線直达、東京→宇都宮 直通徽章回归、大船→藤沢 東海道線回归；trains 页湘南新宿カ：无西大井、新川崎@武蔵小杉后、直通徽章 大宮(高崎/宇都宮)+大船(横須賀)
+**遗留**：武蔵小杉 详情页五线显示待并发会话确认（stationLines 已补）；渋谷→新宿 埼京/山手 tie 正常；Yokosuka 武蔵小杉~横浜 与 ShonanShinjuku 站序现已一致
