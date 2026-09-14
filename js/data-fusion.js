@@ -846,6 +846,18 @@
     (function pollUnified() {
       var checkLines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : (window.UNIFIED_LINES || {});
       if (checkLines && Object.keys(checkLines).length > 0) {
+        // v4.3.6xx: 数据就绪后，如果当前在 trains.html 线路详情页（hash 有 lineId），
+        // 自动触发一次 ensureManualTimetable——showLineView 可能在 DataFusion 未就绪时
+        // 已从 DataLayer 渲染站表并跳过了手动时刻表加载。
+        try {
+          var h = (window.location.hash || "").replace(/^#/, "");
+          var isTrainsPage = (window.location.pathname || "").indexOf("trains.html") >= 0;
+          if (isTrainsPage && h && window.DataFusion && window.DataFusion.ensureManualTimetable) {
+            window.DataFusion.ensureManualTimetable(h).catch(function(e) {
+              console.debug("[DataFusion] auto-ensure manual skip:", h, e.message);
+            });
+          }
+        } catch(e) {}
         return;
       }
       setTimeout(pollUnified, 500);
