@@ -17917,7 +17917,7 @@ window.RAILWAY_I18N = {
   },
   "J-Village": {
     "ja": "Jヴィレッジ",
-    "zh": "J村",
+    "zh": "J-Village",
     "ko": "J빌리지",
     "en": "J-Village"
   },
