@@ -19380,5 +19380,41 @@ window.RAILWAY_I18N = {
     "en": "Higashi Niitsu",
     "ko": "东新津",
     "zh": "东新津"
+  },
+  "Rokucho": {
+    "ja": "六町",
+    "en": "Rokucho",
+    "zh": "六町",
+    "ko": "六町"
+  },
+  "Yashio": {
+    "ja": "八潮",
+    "en": "Yashio",
+    "zh": "八潮",
+    "ko": "八潮"
+  },
+  "Nagareyama-Central-Park": {
+    "ja": "流山中央公园",
+    "en": "Nagareyama Central Park",
+    "zh": "流山中央公园",
+    "ko": "流山中央公园"
+  },
+  "Miraidaira": {
+    "ja": "未来平",
+    "en": "Miraidaira",
+    "zh": "未来平",
+    "ko": "未来平"
+  },
+  "Midorino": {
+    "ja": "绿野",
+    "en": "Midorino",
+    "zh": "绿野",
+    "ko": "绿野"
+  },
+  "Kenkyu-Gakuen": {
+    "ja": "研究学园",
+    "en": "Kenkyu Gakuen",
+    "zh": "研究学园",
+    "ko": "研究学园"
   }
 };
