@@ -29843,7 +29843,7 @@ window.RAILWAY_TOURISM = {
           "피크닉에도."
         ]
       },
-      "address": "東京都足立区加平一丁目"
+      "address": "東京都足立区谷中2-4-1"
     },
     {
       "name": "東京武道館",
@@ -31659,7 +31659,7 @@ window.RAILWAY_TOURISM = {
           "가메아리 도보 6분"
         ]
       },
-      "address": "東京都足立区中川四丁目"
+      "address": "東京都足立区中川4-33-5"
     },
     {
       "name": "STAND BY ME",
@@ -32334,7 +32334,7 @@ window.RAILWAY_TOURISM = {
           "미누마 도보 3분"
         ]
       },
-      "address": "東京都足立区舎人五丁目"
+      "address": "東京都足立区舎人5-21-34"
     },
     {
       "name": "TOS CURRY",
