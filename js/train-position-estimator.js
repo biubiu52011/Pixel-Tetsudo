@@ -463,7 +463,8 @@
             isThroughTrain: trainClassification.isThroughTrain,
             railDirection: directionName,
             destinationStation: destinationStation,
-            trainClass: trainClass
+            trainClass: trainClass,
+            vehicleType: tt['vehicleType'] || ''
           });
         }
       }

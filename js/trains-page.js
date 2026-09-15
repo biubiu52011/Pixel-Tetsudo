@@ -2087,6 +2087,17 @@
           newIcon.setAttribute("href", iconSrc);
           newIcon.setAttribute("class", iconCls);
           newIcon.setAttribute("preserveAspectRatio", "xMidYMid meet");
+          // v4.3.53x: 列车信息工具提示（种别/车型/行先）——车型取 manual vehicleType，无则回退 trainClass
+          var _tip = [];
+          if (p.trainType) {
+            var _tdefs = window.TRAIN_TYPE_NAMES || {};
+            var _td = _tdefs[p.trainType];
+            _tip.push(_td ? (_td[window.currentLang] || _td.ja || String(p.trainType).split('.').pop()) : String(p.trainType).split('.').pop());
+          }
+          if (p.vehicleType) _tip.push(p.vehicleType);
+          else if (p.trainClass) _tip.push(p.trainClass);
+          if (p.destinationStation) _tip.push(_trainDestText(p.destinationStation));
+          if (_tip.length) newIcon.setAttribute("title", _tip.join(" | "));
           // v4.3.6xx: 方向翻转——非环线 Outbound（下行）列车图标水平翻转
           // Inbound（上行）保持原方向（车头向右），Outbound（下行）车头向左
           // SVG image 翻转：translate 到中心后 scale(-1,1) 再 translate 回来
@@ -2280,6 +2291,14 @@
       labelText = _resolveStationLoose(dn) || dn;
     }
     if (!labelText) return;
+    // v4.3.53x: 东急线列车等级（种别）显示——ODPT trainType → 种别名（TRAIN_TYPE_NAMES），
+    // 标签格式：方向箭头 + 种别名 + 终点站（例：▼ 特急 元町・中華街）
+    if (lineId.indexOf('Tokyu') === 0 && p.trainType) {
+      var _tdefs = window.TRAIN_TYPE_NAMES || {};
+      var _td = _tdefs[p.trainType];
+      var _tname = _td ? (_td[lang] || _td.ja) : String(p.trainType).split('.').pop();
+      if (_tname && _tname !== 'unknown') labelText = _tname + ' ' + labelText;
+    }
     // v4.3.6xx: 环线只显示内环/外环文字，不加箭头；普通线路用▲▼上下箭头 + 终点站名
     var dirSym = '';
     if (!isLoopDir || _isOedoBranchTrain(lineId, p)) {
