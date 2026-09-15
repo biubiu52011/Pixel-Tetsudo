@@ -21608,7 +21608,7 @@ window.RAILWAY_TOURISM = {
           "고양이 낮잠을 보기만 해도 힐링"
         ]
       },
-      "address": "東京都江戸川区東葛西五丁目"
+      "address": "東京都江戸川区東葛西5-19-22"
     },
     {
       "name": "The Mixology",
