@@ -3324,10 +3324,6 @@ window.RAILWAY_DATA = {
    "lat": 35.579526,
    "lng": 139.572854
   },
-  "Eda-Tokyu": {
-   "lat": 35.558529,
-   "lng": 139.551559
-  },
   "Ichigao": {
    "lat": 35.551402,
    "lng": 139.54118
@@ -5188,14 +5184,6 @@ window.RAILWAY_DATA = {
    "lat": 35.571169,
    "lng": 139.685759
   },
-  "Musashi-Shintada": {
-   "lat": 35.567942,
-   "lng": 139.692265
-  },
-  "Yaguchi-Watari": {
-   "lat": 35.562017,
-   "lng": 139.700086
-  },
   "Aoi": {
    "lat": 35.7725,
    "lng": 139.82033
@@ -5871,10 +5859,6 @@ window.RAILWAY_DATA = {
   "Kamimachi": {
    "lat": 35.643417,
    "lng": 139.646617
-  },
-  "Miyanomachi": {
-   "lat": 35.647878,
-   "lng": 139.644941
   },
   "Yamashita": {
    "lat": 35.65394,
@@ -8755,6 +8739,22 @@ window.RAILWAY_DATA = {
   "Shinshu-Ariake": {
    "lat": 36.3591889,
    "lng": 137.8786639
+  },
+  "Miyanosaka": {
+   "lat": 35.647878,
+   "lng": 139.644941
+  },
+  "Musashi-Nitta": {
+   "lat": 35.567942,
+   "lng": 139.692265
+  },
+  "Yaguchi-No-Watashi": {
+   "lat": 35.562017,
+   "lng": 139.700086
+  },
+  "Eda-Banetsu": {
+   "lat": 37.179528,
+   "lng": 140.825806
   }
  },
  "lines": {
@@ -17570,7 +17570,7 @@ window.RAILWAY_DATA = {
     "Saginuma",
     "Tama-Plaza",
     "Azamino",
-    "Eda-Tokyu",
+    "Eda",
     "Ichigao",
     "Fujigaoka",
     "Aobadai",
@@ -19093,7 +19093,7 @@ window.RAILWAY_DATA = {
     "Iwaki",
     "Akai",
     "Ogawago",
-    "Eda",
+    "Eda-Banetsu",
     "Kawamae",
     "Natsui",
     "Ononiimachi",
@@ -25639,8 +25639,8 @@ window.RAILWAY_DATA = {
     "Numabe",
     "Unoki",
     "Shimomaruko",
-    "Musashi-Shintada",
-    "Yaguchi-Watari",
+    "Musashi-Nitta",
+    "Yaguchi-No-Watashi",
     "Kamata"
    ],
    "durations": [
@@ -27577,7 +27577,7 @@ window.RAILWAY_DATA = {
     "Shoin-jinja-mae",
     "Setagaya",
     "Kamimachi",
-    "Miyanomachi",
+    "Miyanosaka",
     "Yamashita",
     "Matsubara",
     "Shimo-takaido"
@@ -33993,9 +33993,6 @@ window.RAILWAY_DATA = {
   "Tama-Plaza": [
    "TokyuDenEn"
   ],
-  "Eda-Tokyu": [
-   "TokyuDenEn"
-  ],
   "Ichigao": [
    "TokyuDenEn"
   ],
@@ -34400,7 +34397,7 @@ window.RAILWAY_DATA = {
    "Yonezawa"
   ],
   "Eda": [
-   "BanetsuEast"
+   "TokyuDenEn"
   ],
   "Kawamae": [
    "BanetsuEast"
@@ -37702,12 +37699,6 @@ window.RAILWAY_DATA = {
   "Shimomaruko": [
    "TokyuTamagawa"
   ],
-  "Musashi-Shintada": [
-   "TokyuTamagawa"
-  ],
-  "Yaguchi-Watari": [
-   "TokyuTamagawa"
-  ],
   "Aomori-Chuo": [
    "Tsugaru"
   ],
@@ -38533,9 +38524,6 @@ window.RAILWAY_DATA = {
    "TokyuSetagaya"
   ],
   "Kamimachi": [
-   "TokyuSetagaya"
-  ],
-  "Miyanomachi": [
    "TokyuSetagaya"
   ],
   "Yamashita": [
@@ -39681,6 +39669,18 @@ window.RAILWAY_DATA = {
   ],
   "Shinshu-Ariake": [
    "Oito"
+  ],
+  "Miyanosaka": [
+   "TokyuSetagaya"
+  ],
+  "Musashi-Nitta": [
+   "TokyuTamagawa"
+  ],
+  "Yaguchi-No-Watashi": [
+   "TokyuTamagawa"
+  ],
+  "Eda-Banetsu": [
+   "BanetsuEast"
   ]
  },
  "lineStationOrder": {
@@ -40611,7 +40611,6 @@ window.RAILWAY_DATA = {
    "Saginuma": 13,
    "Tama-Plaza": 14,
    "Azamino": 15,
-   "Eda-Tokyu": 16,
    "Ichigao": 17,
    "Fujigaoka": 18,
    "Aobadai": 19,
@@ -40621,7 +40620,8 @@ window.RAILWAY_DATA = {
    "Suzukakedai": 23,
    "Minami-Machida-Grandberry-Park": 24,
    "Tsukimino": 25,
-   "Chuo-Rinkan": 26
+   "Chuo-Rinkan": 26,
+   "Eda": 16
   },
   "Keikyu": {
    "Sengakuji": 0,
@@ -40800,7 +40800,6 @@ window.RAILWAY_DATA = {
    "Iwaki": 0,
    "Akai": 1,
    "Oguni": 2,
-   "Eda": 3,
    "Kawamae": 4,
    "Natsui": 5,
    "Ono-Niimachi": 6,
@@ -40811,7 +40810,8 @@ window.RAILWAY_DATA = {
    "Iwaki-Tokiwada": 11,
    "Funahiki": 12,
    "Miharu": 13,
-   "Koriyama": 14
+   "Koriyama": 14,
+   "Eda-Banetsu": 3
   },
   "BanetsuWest": {
    "Koriyama": 0,
@@ -42217,9 +42217,9 @@ window.RAILWAY_DATA = {
    "Numabe": 1,
    "Unoki": 2,
    "Shimomaruko": 3,
-   "Musashi-Shintada": 4,
-   "Yaguchi-Watari": 5,
-   "Kamata": 6
+   "Kamata": 6,
+   "Musashi-Nitta": 4,
+   "Yaguchi-No-Watashi": 5
   },
   "Tsugaru": {
    "Aomori": 0,
@@ -42649,11 +42649,11 @@ window.RAILWAY_DATA = {
    "Shoin-jinja-mae": 3,
    "Setagaya": 4,
    "Kamimachi": 5,
-   "Miyanomachi": 6,
    "Yamashita": 7,
    "Matsubara": 8,
    "Shimo-takaido": 9,
-   "Sangenjaya": 0
+   "Sangenjaya": 0,
+   "Miyanosaka": 6
   },
   "TokyuKodomonokuni": {
    "Nagatsuta": 0,
