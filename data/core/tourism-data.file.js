@@ -27803,7 +27803,7 @@ window.RAILWAY_TOURISM = {
           "완매 시 영업 종료."
         ]
       },
-      "address": "千葉県市川市富浜三丁目"
+      "address": "千葉県市川市富浜3-6-20"
     },
     {
       "name": "兜神社",
@@ -34895,7 +34895,7 @@ window.RAILWAY_TOURISM = {
           "출장 편리"
         ]
       },
-      "address": "埼玉県草加市高砂一丁目"
+      "address": "埼玉県草加市氷川町2124-15"
     },
     {
       "name": "中田屋",
