@@ -3246,7 +3246,7 @@ window.RAILWAY_TOURISM = {
           "역에서 출발"
         ]
       },
-      "address": "東京都足立区舎人一丁目"
+      "address": "東京都足立区舎人5-21-34"
     },
     {
       "name": "西加平神社",
@@ -3376,7 +3376,7 @@ window.RAILWAY_TOURISM = {
           "역에서 출발"
         ]
       },
-      "address": "東京都足立区西新井一丁目"
+      "address": "東京都足立区西新井本町1-17-32"
     },
     {
       "name": "竹塚神社",
@@ -3441,7 +3441,7 @@ window.RAILWAY_TOURISM = {
           "역에서 출발"
         ]
       },
-      "address": "東京都足立区竹の塚一丁目"
+      "address": "東京都足立区竹の塚6-12-1"
     },
     {
       "name": "千住本氷川神社",
@@ -3506,7 +3506,7 @@ window.RAILWAY_TOURISM = {
           "역에서 출발"
         ]
       },
-      "address": "東京都足立区千住一丁目"
+      "address": "東京都足立区千住3-22"
     },
     {
       "name": "綾瀬稲荷神社",
