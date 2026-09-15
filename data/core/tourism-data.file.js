@@ -14273,7 +14273,7 @@ window.RAILWAY_TOURISM = {
           "목장 직송 우유 (¥250)로 마무리."
         ]
       },
-      "address": "東京都台東区元浅草二丁目"
+      "address": "東京都台東区元浅草2-10-5"
     },
     {
       "name": "宮本卯之助商店　太皷館",
@@ -26063,7 +26063,7 @@ window.RAILWAY_TOURISM = {
           "슈즈 대여 가능"
         ]
       },
-      "address": "東京都文京区湯島一丁目"
+      "address": "東京都文京区湯島1-1-8"
     },
     {
       "name": "TAIKO-LAB 青山",
@@ -28863,7 +28863,7 @@ window.RAILWAY_TOURISM = {
           "80년의 기술."
         ]
       },
-      "address": "東京都台東区西浅草三丁目"
+      "address": "東京都台東区西浅草3-7-6"
     },
     {
       "name": "ほていや 中塚商店",
