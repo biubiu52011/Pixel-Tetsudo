@@ -7829,7 +7829,7 @@ window.RAILWAY_TOURISM = {
         ]
       },
       "image": "../images/観光地/渋谷スクランブル交差点.jpg",
-      "address": "東京都渋谷区道玄坂二丁目"
+      "address": "東京都渋谷区渋谷交差点（道玄坂下）"
     },
     {
       "name": "明治神宮",
@@ -7981,7 +7981,7 @@ window.RAILWAY_TOURISM = {
         ]
       },
       "image": "../images/観光地/東京ドーム.jpg",
-      "address": "東京都文京区後楽一丁目61"
+      "address": "東京都文京区後楽1-3-61"
     },
     {
       "name": "小石川後楽園",
@@ -8058,7 +8058,7 @@ window.RAILWAY_TOURISM = {
         ]
       },
       "image": "../images/観光地/小石川後楽園.jpg",
-      "address": "東京都文京区本郷三丁目"
+      "address": "東京都文京区後楽1-6-6"
     },
     {
       "name": "上野恩賜公園",
@@ -8135,7 +8135,7 @@ window.RAILWAY_TOURISM = {
         ]
       },
       "image": "../images/観光地/上野恩賜公園.jpg",
-      "address": "東京都台東区神田白山線"
+      "address": "東京都台東区上野公園5-20"
     },
     {
       "name": "お台場（ダイバーシティ東京）",
@@ -8212,7 +8212,7 @@ window.RAILWAY_TOURISM = {
         ]
       },
       "image": "../images/観光地/お台場.jpg",
-      "address": "東京都江東区青海四丁目10"
+      "address": "東京都江東区青海1-1-10"
     },
     {
       "name": "豊洲市場",
@@ -9434,7 +9434,7 @@ window.RAILWAY_TOURISM = {
         ]
       },
       "image": "../images/観光地/両国国技館.jpg",
-      "address": "東京都墨田区横網一丁目28"
+      "address": "東京都墨田区横網1-3-28"
     },
     {
       "name": "柴又帝釈天（題経寺）",
@@ -9664,7 +9664,7 @@ window.RAILWAY_TOURISM = {
         ]
       },
       "image": "../images/観光地/東京ミッドタウン.jpg",
-      "address": "東京都港区赤坂九丁目1"
+      "address": "東京都港区赤坂9-7-1"
     },
     {
       "name": "築地場外市場",
@@ -9740,7 +9740,7 @@ window.RAILWAY_TOURISM = {
         ]
       },
       "image": "../images/観光地/築地場外市場.jpg",
-      "address": "東京都中央区築地四丁目"
+      "address": "東京都中央区築地4-16-2"
     },
     {
       "name": "日比谷公園",
@@ -9892,7 +9892,7 @@ window.RAILWAY_TOURISM = {
         ]
       },
       "image": "../images/観光地/新宿ゴールデン街.jpg",
-      "address": "東京都新宿区歌舞伎町一丁目"
+      "address": "東京都新宿区歌舞伎町1-1-6"
     },
     {
       "name": "代々木公園",
@@ -12503,7 +12503,7 @@ window.RAILWAY_TOURISM = {
           "텍스트 5개국어 대응, 혼자 여행에도."
         ]
       },
-      "address": "東京都港区赤坂九丁目"
+      "address": "東京都港区赤坂9-7-1"
     },
     {
       "name": "名主の滝公園",
@@ -15154,7 +15154,7 @@ window.RAILWAY_TOURISM = {
           "1바퀴 15분, 절경을 내려다보며 개방감."
         ]
       },
-      "address": "東京都文京区牛込小石川線"
+      "address": "東京都文京区後楽1-3-61"
     },
     {
       "name": "L’ESSENTIELLE（レセンシエル）",
@@ -21382,7 +21382,7 @@ window.RAILWAY_TOURISM = {
           "분홍 플라밍고도 볼거리"
         ]
       },
-      "address": "東京都台東区上野公園"
+      "address": "東京都台東区上野公園9-83"
     },
     {
       "name": "市谷亀岡八幡宮",
