@@ -519,6 +519,21 @@
         });
         if (bestIcon) return bestIcon;
       }
+      // v4.3.6xx: 临海线（Rinkai）车型判断——70-000形（旧车）vs 71-000形（新车）
+      // 70-000形：车号 70xxF、71xxF（1995-2004年制造）
+      // 71-000形：车号 10xxF（2024年开始制造，2025年10月运营开始）
+      if (lineId === 'Rinkai' || operator === 'TWR') {
+        var _tnNum = String(_tn || '').replace(/[^0-9]/g, '');
+        if (_tnNum.length >= 2) {
+          var prefix2 = _tnNum.substring(0, 2);
+          if (prefix2 === '70' || prefix2 === '71') {
+            return "../images/列车/東京臨海高速鉄道/70-000形.png";
+          }
+          if (prefix2 === '10') {
+            return "../images/列车/東京臨海高速鉄道/71-000形.png";
+          }
+        }
+      }
       // Check specific line icon first
       if (LINE_ICONS[lineId]) return LINE_ICONS[lineId];
 
