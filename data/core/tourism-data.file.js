@@ -134,7 +134,7 @@ window.RAILWAY_TOURISM = {
           "エポスカード会員は割引あり"
         ],
         "zh": [
-          "西口直通",
+          "西口直连",
           "地下1楼「千住市」买和菓子和熟食",
           "EPOS卡会员有折扣"
         ],
@@ -669,7 +669,7 @@ window.RAILWAY_TOURISM = {
           "全国のご当地グルメが集結"
         ],
         "zh": [
-          "西口直結",
+          "西口直连",
           "餐厅街SPICE丰富",
           "汇集全国各地美食"
         ],
@@ -7542,7 +7542,7 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "9:30～23:00（北展望室）",
-        "zh": "9:30～23:00（北展望室）",
+        "zh": "9:30～23:00（北展望台）",
         "en": "9:30–23:00 (North Observatory)",
         "ko": "9:30~23:00（북쪽 전망실）"
       },
@@ -8834,9 +8834,9 @@ window.RAILWAY_TOURISM = {
       },
       "bestTime_i18n": {
         "ja": "春・秋",
-        "zh": "春・秋",
-        "en": "Spring & autumn",
-        "ko": "봄・가을"
+        "zh": "春季・秋季",
+        "en": "Spring & Autumn",
+        "ko": "봄·가을"
       },
       "tips_i18n": {
         "ja": [
