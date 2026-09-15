@@ -20704,7 +20704,7 @@ window.RAILWAY_TOURISM = {
           "워크숍은 사전 예약제"
         ]
       },
-      "address": "東京都墨田区太平三丁目"
+      "address": "東京都墨田区太平3-9-6"
     },
     {
       "name": "somenova（ソメノバ）",
@@ -25536,7 +25536,7 @@ window.RAILWAY_TOURISM = {
           "아침 목욕으로 하루 시작"
         ]
       },
-      "address": "東京都墨田区横川三丁目"
+      "address": "東京都墨田区横川3-12-14"
     },
     {
       "name": "SCAI THE BATHHOUSE（スカイザバスハウス）",
@@ -30298,7 +30298,7 @@ window.RAILWAY_TOURISM = {
           "리틀 방콕 선구자."
         ]
       },
-      "address": "東京都墨田区錦糸三丁目10"
+      "address": "東京都墨田区錦糸3-12-10"
     },
     {
       "name": "PAPIER LABO. （パピエラボ.）",
