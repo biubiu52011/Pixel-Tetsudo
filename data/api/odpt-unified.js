@@ -760,7 +760,7 @@
     // v4.3.534: 存储从 localStorage 迁移到 IndexedDB——全量时刻表压缩后 5-10MB，localStorage
     // 5-10MB 配额会触顶（曾触发 partial 降级丢数据），且 JSON.stringify 大对象同步执行会阻塞主线程。
     // IndexedDB 异步写入、容量 GB 级；localStorage 保留为隐私模式/禁用 IDB 时的兜底。
-    var TIMETABLE_CACHE_KEY = 'odpt_timetable_cache_v4';
+    var TIMETABLE_CACHE_KEY = 'odpt_timetable_cache_v5';
     var LEGACY_LS_CACHE_KEY = 'odpt_timetable_cache_v3'; // 旧 localStorage 缓存，首次迁移后清除
     var TIMETABLE_CACHE_TTL = 3600000;  // 1小时过期
     var IDB_DB_NAME = 'pixel-tetsudo';
