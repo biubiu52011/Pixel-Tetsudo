@@ -36407,7 +36407,7 @@ window.RAILWAY_TOURISM = {
           "홍콩 뒷골목 분위기"
         ]
       },
-      "address": "東京都足立区千住二丁目"
+      "address": "東京都足立区千住1-39-8"
     },
     {
       "name": "餃子たけし",
@@ -37049,7 +37049,7 @@ window.RAILWAY_TOURISM = {
           "붉은 식초 샤리"
         ]
       },
-      "address": "東京都足立区千住仲町"
+      "address": "東京都足立区千住仲町18-11"
     },
     {
       "name": "北千住fuji",
@@ -37770,7 +37770,7 @@ window.RAILWAY_TOURISM = {
           "22시까지 정식"
         ]
       },
-      "address": "東京都足立区綾瀬"
+      "address": "東京都足立区綾瀬6-5-7"
     },
     {
       "name": "BAKERY やすべぇ。",
