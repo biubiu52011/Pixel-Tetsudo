@@ -1701,3 +1701,15 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 - **西武池袋線 Ikebukuro**：2032→2083 条（+51 直通）——有楽町線/副都心線/みなとみらい線直通（元町中華街18/新木場4/西武秩父33）
 **验证**：node --check 3文件全过；verify_through_vtype 63/63；verify_vtype_coverage 66/66 Missing none（115线/340条目）；integrate_all_lines OK；tt_cross_validate 仅1条预期 DEST_LINE_OUT（ODTW056→北綾瀬=千代田線直通）；scan_dep_out 0。
 **commit**：4.3.793
+## 4.3.794（2026-09-16，DEST_LINE_OUT 299→0 修正）
+**問題**：4.3.793 後 tt_cross が DEST_LINE_OUT 299 件（组织者报告不准确，实际 299 非 1 件）——新補直通列車の终点が直通先 reach に入らない。
+**根因**：
+1. THROUGH_SERVICE_MAP に西武有楽町線⇄有楽町線直通が無い（新木場 ShinKiba が reach 外）
+2. 西武池袋線⇄副都心線直通が無い（元町・中華街 が reach 外、Yurakucho_Seibu 経由で 4 跳必要）
+3. 本地未収録線/駅名不一致：北綾瀬 KitaAyase（千代田線支線、本地站表は本線19駅のみ）、印旛日本医大/印旛牧の原（北総線 Hokuso 未収録）、成田空港第1 NaritaAirportTerminal1（本地 NaritaSkyAccess は Narita-Airport 表記）、芝山千代田（芝山鉄道未収録）
+**修正**：
+- through-service.js：Yurakucho_Seibu += Yurakucho（@小竹向原）、Ikebukuro += Fukutoshin（西武池袋線⇄副都心線 実在直通）
+- tt_cross_validate.js：ALLOW_DEST_OUT += kitaayase/imbanihonidai/inzaimakinohara/naritaairportterminal1/shibayamachiyoda（実在の遠方行先・本地未収録）
+**验证**：tt_cross 問題統計 {}（299→0）、integrate 73 線/835 列車/0 缺失/100%、verify_through_vtype 63/63、verify_vtype_coverage 115 線/340 条目、scan_dep_out 0。
+**品質確認**：新補直通列車の trainTimetableObject は本線内通過駅のみ（東急系 TKYToyokoIW006 等と同一設計——直通行先のみ他線記録）——一致。
+**残タスク**：OdakyuTama/Enoshima、SeibuChichibu/Yurakucho_Seibu、KeikyuAirport/Kurihama/Zushi の直通列車未補（ODPT に直通终点あり）；MinatoMirai は ODPT StationTimetable 0 件（データ源無し、東横線側 manual で直通確認可）。
