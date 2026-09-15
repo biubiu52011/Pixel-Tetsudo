@@ -1456,3 +1456,15 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 - ShonanShinjuku.stations 24→23：删 Nishi-Oi，Shin-Kawasaki 移到 Musashi-Kosugi 后；durations 24→22、LSO 重建、transferStations 删西大井幽灵条目、stationLines['Nishi-Oi']→[Yokosuka]、stationLines['Musashi-Kosugi'] 补 [TokyuToyoko,Nambu,Yokosuka,ShonanShinjuku]（五线站，原只登记 TokyuMeguro）
 **验证**：node --check + bundle 重生成加载 OK；浏览器 8 组：新宿→鎌倉 24分 大船直通(乗換不要)、品川→鎌倉 12分 1换、新宿→横浜 12分直达、西大井→横浜 横須賀線直达、武蔵小杉→渋谷 湘南新宿直达、武蔵小杉→鎌倉 横須賀線直达、東京→宇都宮 直通徽章回归、大船→藤沢 東海道線回归；trains 页湘南新宿カ：无西大井、新川崎@武蔵小杉后、直通徽章 大宮(高崎/宇都宮)+大船(横須賀)
 **遗留**：武蔵小杉 详情页五线显示待并发会话确认（stationLines 已补）；渋谷→新宿 埼京/山手 tie 正常；Yokosuka 武蔵小杉~横浜 与 ShonanShinjuku 站序现已一致
+
+## 4.3.622（2026-09-15，出口数据按线路补全——東武線 20 站）
+**背景**：观光出站指引（v4.3.621 融合）后，用户发现"改札（出口）没有对应完全"——519 景点覆盖 176 站中仅 16 站有出口坐标，165 站缺。用户指令："按照线路进行处理" + "用 wiki 进行每个线路按照站点搜"。
+**数据源调查**：
+- OSM Overpass 公共实例 429 限流严重（東武線 30 站批量除北千住外全 0，浅草都采不到），AGENTS.md 旧记录"采够勿再依赖"成立；
+- wiki（ja.wikipedia MediaWiki API）：各駅「駅周辺/画像説明」节有出口名称（東口/西口/南口/北口），**无坐标**；小站（小菅/牛田/五反野等）连名称都没有。
+**方案**：wiki 出口名称 + 站中心方位偏移估算坐标（OFFSET_M=130m，src=wiki_est，精度±100m、方向正确）；已有 OSM 数据的站保留不覆盖。
+**采集脚本**（scripts/ 被 .gitignore 忽略，仅本地留存可复现）：scripts/collect_exits_wiki.py（wiki 提取：章节标题+图片说明+全文，站名 id 模糊匹配修复 Tokyo-Skytree/西新井等命名不一致，429 退避 8s）。
+**改动**：data/core/tourism_data.json station_exits 16→36 站（東武線新增 20 站：押上/曳舟/堀切/梅島/西新井/竹ノ塚/谷塚/草加/蒲生/新越谷/越谷/北越谷/せんげん台/武里/一ノ割/春日部/北春日部/姫宮/東武動物公園/大袋；跳过已有 Asakusa/Tokyo-Skytree/Kita-Senju）。
+**无出口数据站**（wiki/OSM 均无）：東向島/牛田/小菅/新田/五反野——仍回退跨站推荐（綾瀬/北千住等），待用户决定是否加"出入口"站中心兜底。
+**验证**：JSON 合法（spots 519 不变）；浏览器实测竹ノ塚 12 景全显示本站出口（TAVETALINA 東口59m/東岳寺 西口363m/伊興系列西口 713-991m，方向合理）、梅島東口249m、小菅仍綾瀬西口1.1km（预期）；console 无本次改动引入错误（历史 404 为景点图片缺失，预存在问题）。
+**版本**：无 html/JS 改动，数据层提交 c4fa2d2。
