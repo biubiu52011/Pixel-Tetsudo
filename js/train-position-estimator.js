@@ -12,6 +12,11 @@
 
   var ESTIMATOR_VERSION = 7;
 
+  // ========== 方向反转线路 ==========
+  // 这些线路的ODPT站序和本地站表顺序相反，需要反转索引
+  // 例：Rinkai（临海线）ODPT站序=Osaki→Shin-Kiba，本地站表=Shin-Kiba→Osaki
+  var REVERSED_STATION_ORDER = ['Rinkai'];
+
   // ========== Train type classification ==========
   // 通用特急关键词——JR-East/東武 等只写 "LimitedExpress"（4.3.484/4.3.485 实测：爱称不出现，具体名规则全部失效）
   var LIMITED_EXPRESS_KEYWORDS = ['LimitedExpress', 'Limited Express', '特急'];
@@ -312,13 +317,20 @@
       // 当前 10:40、延误 27 分时列车实际 10:51 才到 A，原逻辑却推定它已过 B（方向完全相反）。
       var adjustedCurrentMin = currentMin - delayMin;
 
+      // v4.3.6xx: 反转线路——站表顺序和ODPT站序相反时，反转站表数组
+      // 这样后面的所有计算逻辑都不用改，结果自动正确
+      var workLine = line;
+      if (REVERSED_STATION_ORDER.indexOf(lineId) >= 0) {
+        workLine = Object.assign({}, line, { stations: line.stations.slice().reverse() });
+      }
+
       // Build station index map for this line (using normalized keys)
       var stationIndexMap = {};
-      for (var i = 0; i < line.stations.length; i++) {
-        var normKey = normalizeStationKey(line.stations[i]);
+      for (var i = 0; i < workLine.stations.length; i++) {
+        var normKey = normalizeStationKey(workLine.stations[i]);
         stationIndexMap[normKey] = i;
         // Also store original key for fallback
-        stationIndexMap[line.stations[i]] = i;
+        stationIndexMap[workLine.stations[i]] = i;
       }
 
       var positions = [];
