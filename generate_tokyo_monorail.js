@@ -5,17 +5,17 @@ const fs = require('fs');
 
 // 站顺序（羽田方向）
 const stations = [
-  { id: "Hamamatsucho", name: "浜松町" },
-  { id: "TennozuIsle", name: "天王洲アイル" },
-  { id: "OoiKeibajoMae", name: "大井競馬場前" },
-  { id: "RyutsuCenter", name: "流通センター" },
+  { id: "Monorail-Hamamatsucho", name: "浜松町" },
+  { id: "Tennozu Isle", name: "天王洲アイル" },
+  { id: "Oi Keibajo Mae", name: "大井競馬場前" },
+  { id: "Ryutsu Center", name: "流通センター" },
   { id: "Showajima", name: "昭和島" },
   { id: "Seibijo", name: "整備場" },
   { id: "Tenkubashi", name: "天空橋" },
-  { id: "HanedaAirportTerminal3", name: "羽田空港第3ターミナル" },
-  { id: "ShinSeibijo", name: "新整備場" },
-  { id: "HanedaAirportTerminal1", name: "羽田空港第1ターミナル" },
-  { id: "HanedaAirportTerminal2", name: "羽田空港第2ターミナル" }
+  { id: "Haneda Airport Terminal 3", name: "羽田空港第3ターミナル" },
+  { id: "Shin-Seibijo", name: "新整備場" },
+  { id: "Haneda Airport Terminal 1", name: "羽田空港第1ターミナル" },
+  { id: "Haneda Airport Terminal 2", name: "羽田空港第2ターミナル" }
 ];
 
 // 每站运行时间（分钟）
@@ -67,7 +67,7 @@ for (let i = 0; i < 218; i++) {
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
     "odpt:trainType": type,
-    "odpt:destinationStation": "HanedaAirportTerminal2",
+    "odpt:destinationStation": "Haneda Airport Terminal 2",
     "odpt:trainTimetableObject": trainTimetableObject
   });
   
