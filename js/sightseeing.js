@@ -386,7 +386,9 @@ function renderGrid() {
         clearTimeout(guard);
         locFallback();
       },
-      { enableHighAccuracy: true, timeout: 10000, maximumAge: 300000 }
+      // 4.3.627: maximumAge 300000→0——浏览器会直接返回 5 分钟内的缓存位置，
+      // 导致坐车移动后点重新定位/刷新页面仍停留在上一站；0 = 强制请求设备实时位置
+      { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
     );
   }
 
