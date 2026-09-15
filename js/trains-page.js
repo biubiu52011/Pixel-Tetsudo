@@ -2087,6 +2087,14 @@
           newIcon.setAttribute("href", iconSrc);
           newIcon.setAttribute("class", iconCls);
           newIcon.setAttribute("preserveAspectRatio", "xMidYMid meet");
+          // v4.3.6xx: 方向翻转——非环线 Outbound（下行）列车图标水平翻转
+          // Inbound（上行）保持原方向（车头向右），Outbound（下行）车头向左
+          // SVG image 翻转：translate 到中心后 scale(-1,1) 再 translate 回来
+          if (!isLoop && direction.indexOf('Outbound') >= 0) {
+            var centerX = px;
+            var centerY = py;
+            newIcon.setAttribute('transform', 'translate(' + centerX + ', ' + centerY + ') scale(-1, 1) translate(' + (-centerX) + ', ' + (-centerY) + ')');
+          }
           trainLayer.appendChild(newIcon);
           appendTrainLabels(trainLayer, svgNS, trainUid, px, py, p, lineId);
         } else {
