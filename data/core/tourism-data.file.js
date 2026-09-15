@@ -1834,9 +1834,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "常時公開（屋外）",
-        "zh": "常時公開（屋外）",
-        "en": "常時公開（屋外）",
-        "ko": "常時公開（屋外）"
+        "zh": "常年公开（室外）",
+        "en": "Always open (outdoor)",
+        "ko": "상시 공개(야외)"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -2917,9 +2917,9 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "西新井大師（総持寺）",
-        "zh": "西新井大師（総持寺）",
-        "en": "西新井大師（総持寺）",
-        "ko": "西新井大師（総持寺）"
+        "zh": "西新井大师（总持寺）",
+        "en": "Nishiarai Daishi (Soji-ji Temple)",
+        "ko": "니시아라이 다이시(소지지)"
       },
       "desc_i18n": {
         "ja": "関東三大師の一つに数えられる真言宗豊山派の寺院。だるま市でも知られ、年間を通じて多くの参拝者が訪れる。",
@@ -2929,9 +2929,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -2981,9 +2981,9 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "ギャラクシティ",
-        "zh": "ギャラクシティ",
-        "en": "ギャラクシティ",
-        "ko": "ギャラクシティ"
+        "zh": "银河城（科学体验馆）",
+        "en": "Galaxcity (Science Museum)",
+        "ko": "갤럭시티 (과학 체험관)"
       },
       "desc_i18n": {
         "ja": "足立区の科学体験・子育て支援複合施設。大型遊具や体験型展示、プラネタリウムが楽しめる。",
@@ -3045,9 +3045,9 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "大谷田温泉明神の湯",
-        "zh": "大谷田温泉明神の湯",
-        "en": "大谷田温泉明神の湯",
-        "ko": "大谷田温泉明神の湯"
+        "zh": "大谷田温泉 明神之汤",
+        "en": "Otanida Onsen Myojin-no-yu",
+        "ko": "오타니다 온천 묘진노유"
       },
       "desc_i18n": {
         "ja": "足立区大谷田にある天然温泉の日帰り施設。露天風呂やサウナを備え、区民の憩いの場となっている。",
@@ -3109,9 +3109,9 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "足立区立郷土博物館",
-        "zh": "足立区立郷土博物館",
-        "en": "足立区立郷土博物館",
-        "ko": "足立区立郷土博物館"
+        "zh": "足立区立乡土博物馆",
+        "en": "Adachi City Museum of Local History",
+        "ko": "아다치구 향토박물관"
       },
       "desc_i18n": {
         "ja": "足立区の歴史・民俗・産業に関する資料を収蔵・展示する博物館。常設展示で区の歩みをたどり、地域の文化に触れられる。",
@@ -3174,9 +3174,9 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "舎人氷川神社",
-        "zh": "舎人氷川神社",
-        "en": "舎人氷川神社",
-        "ko": "舎人氷川神社"
+        "zh": "舍人冰川神社",
+        "en": "Toneri Hikawa Shrine",
+        "ko": "토네리 히카와 신사"
       },
       "desc_i18n": {
         "ja": "舎人の街を見守る氷川神社。氷川信仰を受け継ぎ、地域の鎮守として静かに佇む。",
@@ -3186,9 +3186,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -3239,8 +3239,8 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "西加平神社",
         "zh": "西加平神社",
-        "en": "西加平神社",
-        "ko": "西加平神社"
+        "en": "Nishikatahira Shrine",
+        "ko": "니시카타히라 신사"
       },
       "desc_i18n": {
         "ja": "西加平に鎮座する神社。住宅地に溶け込みながら、地域の氏神として暮らしに寄り添う。",
@@ -3250,9 +3250,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -3302,9 +3302,9 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "西新井氷川神社",
-        "zh": "西新井氷川神社",
-        "en": "西新井氷川神社",
-        "ko": "西新井氷川神社"
+        "zh": "西新井冰川神社",
+        "en": "Nishiarai Hikawa Shrine",
+        "ko": "니시아라이 히카와 신사"
       },
       "desc_i18n": {
         "ja": "西新井の鎮守として祀られる氷川神社。水と農の恵みを祈る氷川信仰に連なる。",
@@ -3314,9 +3314,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -3367,8 +3367,8 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "竹塚神社",
         "zh": "竹塚神社",
-        "en": "竹塚神社",
-        "ko": "竹塚神社"
+        "en": "Takezuka Shrine",
+        "ko": "다케즈카 신사"
       },
       "desc_i18n": {
         "ja": "竹の塚の街に佇む竹塚神社。地域の鎮守として、変わらずこの土地を見守ってきた。",
@@ -3378,9 +3378,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -3430,9 +3430,9 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "千住本氷川神社",
-        "zh": "千住本氷川神社",
-        "en": "千住本氷川神社",
-        "ko": "千住本氷川神社"
+        "zh": "千住本冰川神社",
+        "en": "Senju-hon Hikawa Shrine",
+        "ko": "센주본 히카와 신사"
       },
       "desc_i18n": {
         "ja": "千住に鎮座する千住本氷川神社。「本」の名を冠する氷川神社として、地域の信仰を集めてきた。",
@@ -3442,9 +3442,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -3494,9 +3494,9 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "綾瀬稲荷神社",
-        "zh": "綾瀬稲荷神社",
-        "en": "綾瀬稲荷神社",
-        "ko": "綾瀬稲荷神社"
+        "zh": "绫濑稻荷神社",
+        "en": "Ayase Inari Shrine",
+        "ko": "아야세 이나리 신사"
       },
       "desc_i18n": {
         "ja": "綾瀬に鎮座する稲荷神社。稲荷信仰の神社らしく、商売繁盛を願う人々の信仰を集めている。",
@@ -3506,9 +3506,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -3558,9 +3558,9 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "千住氷川神社",
-        "zh": "千住氷川神社",
-        "en": "千住氷川神社",
-        "ko": "千住氷川神社"
+        "zh": "千住冰川神社",
+        "en": "Senju Hikawa Shrine",
+        "ko": "센주 히카와 신사"
       },
       "desc_i18n": {
         "ja": "千住仲町に鎮座する千住氷川神社。氷川信仰を伝え、下町の暮らしを見守ってきた。",
@@ -3570,9 +3570,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -3623,8 +3623,8 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "六町神社",
         "zh": "六町神社",
-        "en": "六町神社",
-        "ko": "六町神社"
+        "en": "Rokucho Shrine",
+        "ko": "로쿠초 신사"
       },
       "desc_i18n": {
         "ja": "六町の住宅街に建つ神社。地域の暮らしに寄り添う鎮守として、親しまれてきた。",
@@ -3634,9 +3634,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -3686,9 +3686,9 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "東岳寺",
-        "zh": "東岳寺",
-        "en": "東岳寺",
-        "ko": "東岳寺"
+        "zh": "东岳寺",
+        "en": "Tokugaku-ji Temple",
+        "ko": "도가쿠지"
       },
       "desc_i18n": {
         "ja": "足立区伊興本町にある曹洞宗系の単立の寺。閑静な住宅地に建ち、地域の御堂として親しまれる。",
@@ -3698,9 +3698,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -3750,9 +3750,9 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "実性寺",
-        "zh": "実性寺",
-        "en": "実性寺",
-        "ko": "実性寺"
+        "zh": "实性寺",
+        "en": "Jissho-ji Temple",
+        "ko": "잇쇼지"
       },
       "desc_i18n": {
         "ja": "足立区花畑にある浄土宗の寺。徳川秀忠・家光ゆかりで、朱塗りの山門と葵の紋が特徴。",
@@ -3762,9 +3762,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -3814,9 +3814,9 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "長建寺",
-        "zh": "長建寺",
-        "en": "長建寺",
-        "ko": "長建寺"
+        "zh": "长建寺",
+        "en": "Choken-ji Temple",
+        "ko": "조겐지"
       },
       "desc_i18n": {
         "ja": "足立区南花畑にある浄土宗の寺。隆光山正受院と号し、阿弥陀如来を本尊とする。",
@@ -3826,9 +3826,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -3878,9 +3878,9 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "赤稲荷神社",
-        "zh": "赤稲荷神社",
-        "en": "赤稲荷神社",
-        "ko": "赤稲荷神社"
+        "zh": "赤稻荷神社",
+        "en": "Aka Inari Shrine",
+        "ko": "아카 이나리 신사"
       },
       "desc_i18n": {
         "ja": "神明にある赤稲荷神社。「赤」の名を持つ稲荷神社で、商売繁盛の神として祀られている。",
@@ -3890,9 +3890,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -3942,9 +3942,9 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "氷川神社（東伊興）",
-        "zh": "氷川神社（東伊興）",
-        "en": "氷川神社（東伊興）",
-        "ko": "氷川神社（東伊興）"
+        "zh": "冰川神社（东伊兴）",
+        "en": "Hikawa Shrine (Higashi-Iko)",
+        "ko": "히카와 신사(히가시이코)"
       },
       "desc_i18n": {
         "ja": "東伊興に鎮座する氷川神社。氷川信仰の流れをくみ、地域の守り神として静かに佇む。",
@@ -3954,9 +3954,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -4006,9 +4006,9 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "浄光寺",
-        "zh": "浄光寺",
-        "en": "浄光寺",
-        "ko": "浄光寺"
+        "zh": "净光寺",
+        "en": "Joko-ji Temple",
+        "ko": "조코지"
       },
       "desc_i18n": {
         "ja": "足立区東伊興にある浄土真宗本願寺派の寺。もとは築地本願寺の寺中寺と伝わる。",
@@ -4018,9 +4018,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -4071,8 +4071,8 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "法受寺",
         "zh": "法受寺",
-        "en": "法受寺",
-        "ko": "法受寺"
+        "en": "Hojiu-ji Temple",
+        "ko": "호주지"
       },
       "desc_i18n": {
         "ja": "足立区東伊興にある浄土宗の寺。普賢山新幡随院と号し、伊興七福神の布袋尊を祀る。",
@@ -4082,9 +4082,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -4134,9 +4134,9 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "金蔵寺",
-        "zh": "金蔵寺",
-        "en": "金蔵寺",
-        "ko": "金蔵寺"
+        "zh": "金藏寺",
+        "en": "Konzo-ji Temple",
+        "ko": "곤조지"
       },
       "desc_i18n": {
         "ja": "北千住駅近くにある真言宗豊山派の寺。本尊は閻魔大王で、春の閻魔祭が知られる。",
@@ -4146,9 +4146,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -4198,9 +4198,9 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "地守稲荷神社",
-        "zh": "地守稲荷神社",
-        "en": "地守稲荷神社",
-        "ko": "地守稲荷神社"
+        "zh": "地守稻荷神社",
+        "en": "Chimori Inari Shrine",
+        "ko": "치모리 이나리 신사"
       },
       "desc_i18n": {
         "ja": "千住にある地守稲荷神社。その名のとおり土地を守る稲荷として、地域の暮らしに根づく。",
@@ -4210,9 +4210,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -4263,8 +4263,8 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "南光寺",
         "zh": "南光寺",
-        "en": "南光寺",
-        "ko": "南光寺"
+        "en": "Nanko-ji Temple",
+        "ko": "난코지"
       },
       "desc_i18n": {
         "ja": "足立区入谷にある寺。入谷地区の住宅街に建つ、地域の人々に親しまれる小さな御堂。",
@@ -4274,9 +4274,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -4327,8 +4327,8 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "源正寺",
         "zh": "源正寺",
-        "en": "源正寺",
-        "ko": "源正寺"
+        "en": "Gensho-ji Temple",
+        "ko": "겐쇼지"
       },
       "desc_i18n": {
         "ja": "足立区伊興にある真言宗豊山派の寺。無量山と号し、伊興七福神の恵比寿を祀る札所。",
@@ -4338,9 +4338,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -4391,8 +4391,8 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "千住神社",
         "zh": "千住神社",
-        "en": "千住神社",
-        "ko": "千住神社"
+        "en": "Senju Shrine",
+        "ko": "센주 신사"
       },
       "desc_i18n": {
         "ja": "千住宮元町に鎮座する千住神社。街なかにあって、地域の氏神として静かに佇む。",
@@ -4402,9 +4402,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -4455,8 +4455,8 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "元宿神社",
         "zh": "元宿神社",
-        "en": "元宿神社",
-        "ko": "元宿神社"
+        "en": "Motoyado Shrine",
+        "ko": "모토야도 신사"
       },
       "desc_i18n": {
         "ja": "千住元町にある元宿神社。地域の鎮守として、古くから氏子に守られてきた。",
@@ -4466,9 +4466,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -4518,9 +4518,9 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "栗原氷川神社",
-        "zh": "栗原氷川神社",
-        "en": "栗原氷川神社",
-        "ko": "栗原氷川神社"
+        "zh": "栗原冰川神社",
+        "en": "Kurihara Hikawa Shrine",
+        "ko": "구리하라 히카와 신사"
       },
       "desc_i18n": {
         "ja": "栗原に鎮座する栗原氷川神社。氷川信仰の神社として、地域の守り神として暮らしに寄り添う。",
@@ -4530,9 +4530,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -4583,8 +4583,8 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "炎天寺",
         "zh": "炎天寺",
-        "en": "炎天寺",
-        "ko": "炎天寺"
+        "en": "Enten-ji Temple",
+        "ko": "엔텐지"
       },
       "desc_i18n": {
         "ja": "足立区六月にある真言宗豊山派の寺。源頼義・義家ゆかりで、地名「六月」の由来とも伝わる。",
@@ -4594,9 +4594,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -4646,9 +4646,9 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "小右衛門稲荷神社",
-        "zh": "小右衛門稲荷神社",
-        "en": "小右衛門稲荷神社",
-        "ko": "小右衛門稲荷神社"
+        "zh": "小右卫门稻荷神社",
+        "en": "Koemon Inari Shrine",
+        "ko": "코에몬 이나리 신사"
       },
       "desc_i18n": {
         "ja": "梅島にある小右衛門稲荷神社。名前に人の名を残す稲荷神社で、地域の鎮守として祀られている。",
@@ -4658,9 +4658,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -4710,9 +4710,9 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "中曽根神社",
-        "zh": "中曽根神社",
-        "en": "中曽根神社",
-        "ko": "中曽根神社"
+        "zh": "中曾根神社",
+        "en": "Nakasone Shrine",
+        "ko": "나카소네 신사"
       },
       "desc_i18n": {
         "ja": "本木にある中曽根神社。住宅街に溶け込み、地域の守り神として暮らしに寄り添う。",
@@ -4722,9 +4722,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -4774,9 +4774,9 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "薬師寺（綾瀬）",
-        "zh": "薬師寺（綾瀬）",
-        "en": "薬師寺（綾瀬）",
-        "ko": "薬師寺（綾瀬）"
+        "zh": "药师寺（绫濑）",
+        "en": "Yakushi-ji Temple (Ayase)",
+        "ko": "야쿠시지(아야세)"
       },
       "desc_i18n": {
         "ja": "足立区綾瀬にある真言宗豊山派の寺。宝珠山普門院と号し、薬師如来を本尊とする。",
@@ -4786,9 +4786,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -4839,8 +4839,8 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "善立寺",
         "zh": "善立寺",
-        "en": "善立寺",
-        "ko": "善立寺"
+        "en": "Zenryu-ji Temple",
+        "ko": "젠류지"
       },
       "desc_i18n": {
         "ja": "足立区梅田にある日蓮宗の寺。大光山と号し、古くから地域に伝わる由緒ある御堂。",
@@ -4850,9 +4850,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -4902,9 +4902,9 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "本木氷川神社",
-        "zh": "本木氷川神社",
-        "en": "本木氷川神社",
-        "ko": "本木氷川神社"
+        "zh": "本木冰川神社",
+        "en": "Motoki Hikawa Shrine",
+        "ko": "모토키 히카와 신사"
       },
       "desc_i18n": {
         "ja": "本木西町に鎮座する本木氷川神社。氷川信仰を受け継ぎ、地域を見守る氏神。",
@@ -4914,9 +4914,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -4966,9 +4966,9 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "瑞応寺",
-        "zh": "瑞応寺",
-        "en": "瑞応寺",
-        "ko": "瑞応寺"
+        "zh": "瑞应寺",
+        "en": "Zuio-ji Temple",
+        "ko": "즈이오지"
       },
       "desc_i18n": {
         "ja": "足立区扇にある真言宗豊山派の寺。500年以上の歴史を持ち、夕顔観音で知られる。",
@@ -4978,9 +4978,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -5030,9 +5030,9 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "恵明寺",
-        "zh": "恵明寺",
-        "en": "恵明寺",
-        "ko": "恵明寺"
+        "zh": "惠明寺",
+        "en": "Emei-ji Temple",
+        "ko": "에메이지"
       },
       "desc_i18n": {
         "ja": "足立区江北にある真言宗系の寺。宮城山円明院と号し、江戸六阿弥陀の2番札所。",
@@ -5042,9 +5042,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -5095,8 +5095,8 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "高砂神社",
         "zh": "高砂神社",
-        "en": "高砂神社",
-        "ko": "高砂神社"
+        "en": "Takasago Shrine",
+        "ko": "다카사고 신사"
       },
       "desc_i18n": {
         "ja": "足立の住宅街に建つ高砂神社。静かな住宅地の中で、地域に寄り添う鎮守の社。",
@@ -5106,9 +5106,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -5158,9 +5158,9 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "薬師寺（伊興）",
-        "zh": "薬師寺（伊興）",
-        "en": "薬師寺（伊興）",
-        "ko": "薬師寺（伊興）"
+        "zh": "药师寺（伊兴）",
+        "en": "Yakushi-ji Temple (Iko)",
+        "ko": "야쿠시지(이코)"
       },
       "desc_i18n": {
         "ja": "足立区伊興の里山に建つ曹洞宗の寺。静かな地域の御堂として、ゆっくり境内を巡ることができる。",
@@ -5170,9 +5170,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -5222,9 +5222,9 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "満願寺",
-        "zh": "満願寺",
-        "en": "満願寺",
-        "ko": "満願寺"
+        "zh": "满愿寺",
+        "en": "Mangan-ji Temple",
+        "ko": "만간지"
       },
       "desc_i18n": {
         "ja": "足立区栗原にある真言宗豊山派の寺。西新井大師のすぐ近く、住宅地の中に静かにたたずむ。大師参りのついでに立ち寄りやすい。",
@@ -5234,9 +5234,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -5286,9 +5286,9 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "宮城氷川神社",
-        "zh": "宮城氷川神社",
-        "en": "宮城氷川神社",
-        "ko": "宮城氷川神社"
+        "zh": "宫城冰川神社",
+        "en": "Miyagi Hikawa Shrine",
+        "ko": "미야기 히카와 신사"
       },
       "desc_i18n": {
         "ja": "宮城に鎮座する宮城氷川神社。氷川信仰をまつり、地域の守り神として祀られている。",
@@ -5298,9 +5298,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -5350,9 +5350,9 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "島氷川神社",
-        "zh": "島氷川神社",
-        "en": "島氷川神社",
-        "ko": "島氷川神社"
+        "zh": "岛冰川神社",
+        "en": "Shima Hikawa Shrine",
+        "ko": "시마 히카와 신사"
       },
       "desc_i18n": {
         "ja": "鹿浜にある島氷川神社。氷川信仰を受け継ぎ、荒川沿いの街を見守ってきた。",
@@ -5362,9 +5362,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -5414,9 +5414,9 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "綾瀬神社",
-        "zh": "綾瀬神社",
-        "en": "綾瀬神社",
-        "ko": "綾瀬神社"
+        "zh": "绫濑神社",
+        "en": "Ayase Shrine",
+        "ko": "아야세 신사"
       },
       "desc_i18n": {
         "ja": "綾瀬の街なかに建つ神社。にぎやかな通りから一歩入った場所で、地域を見守る。",
@@ -5426,9 +5426,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -5478,9 +5478,9 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "関原八幡神社",
-        "zh": "関原八幡神社",
-        "en": "関原八幡神社",
-        "ko": "関原八幡神社"
+        "zh": "关原八幡神社",
+        "en": "Sekihara Hachiman Shrine",
+        "ko": "세키하라 하치만 신사"
       },
       "desc_i18n": {
         "ja": "関原に祀られる関原八幡神社。八幡神をまつり、勝負運や武運の神として信仰されてきた。",
@@ -5490,9 +5490,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -5542,9 +5542,9 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "梅島天満宮",
-        "zh": "梅島天満宮",
-        "en": "梅島天満宮",
-        "ko": "梅島天満宮"
+        "zh": "梅岛天满宫",
+        "en": "Umejima Tenmangu Shrine",
+        "ko": "우메지마 덴만구"
       },
       "desc_i18n": {
         "ja": "梅島に鎮座する天満宮。菅原道真公を祀り、学問の神として知られる。境内は地域の暮らしに溶け込んでいる。",
@@ -5554,9 +5554,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -5605,9 +5605,9 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "石洞美術館",
-        "zh": "石洞美術館",
-        "en": "石洞美術館",
-        "ko": "石洞美術館"
+        "zh": "石洞美术馆",
+        "en": "Sekido Museum of Art",
+        "ko": "세키도 미술관"
       },
       "desc_i18n": {
         "ja": "足立区千住にある美術館。日本画や工芸品を中心に展示し、無料で気軽に鑑賞できる。",
@@ -5669,9 +5669,9 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "仲町氷川神社",
-        "zh": "仲町氷川神社",
-        "en": "仲町氷川神社",
-        "ko": "仲町氷川神社"
+        "zh": "仲町冰川神社",
+        "en": "Nakacho Hikawa Shrine",
+        "ko": "나카초 히카와 신사"
       },
       "desc_i18n": {
         "ja": "千住仲町に鎮座する仲町氷川神社。氷川信仰を伝え、下町の暮らしを見守ってきた。",
@@ -5681,9 +5681,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -5733,9 +5733,9 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "大川町氷川神社",
-        "zh": "大川町氷川神社",
-        "en": "大川町氷川神社",
-        "ko": "大川町氷川神社"
+        "zh": "大川町冰川神社",
+        "en": "Okawacho Hikawa Shrine",
+        "ko": "오카와초 히카와 신사"
       },
       "desc_i18n": {
         "ja": "千住大川町にある大川町氷川神社。氷川信仰の神社として、地域の人々に慕われている。",
@@ -5745,9 +5745,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -5798,8 +5798,8 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "慈眼寺（千住）",
         "zh": "慈眼寺（千住）",
-        "en": "慈眼寺（千住）",
-        "ko": "慈眼寺（千住）"
+        "en": "Jigen-ji Temple (Senju)",
+        "ko": "지겐지(센주)"
       },
       "desc_i18n": {
         "ja": "千住にある新義真言宗の寺。千龍山妙智院と号し、正和3年(1314)創建と伝わる。",
@@ -5809,9 +5809,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -5862,8 +5862,8 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "天祖神社",
         "zh": "天祖神社",
-        "en": "天祖神社",
-        "ko": "天祖神社"
+        "en": "Tenso Shrine",
+        "ko": "덴소 신사"
       },
       "desc_i18n": {
         "ja": "神明の住宅街に建つ天祖神社。天照大神をまつる神社として、地域の信仰を集めている。",
@@ -5873,9 +5873,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -5926,8 +5926,8 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "白幡八幡神社",
         "zh": "白幡八幡神社",
-        "en": "白幡八幡神社",
-        "ko": "白幡八幡神社"
+        "en": "Shirahata Hachiman Shrine",
+        "ko": "시라하타 하치만 신사"
       },
       "desc_i18n": {
         "ja": "千住宮元町にある白幡八幡神社。八幡神をまつり、地域の氏神として祀られている。",
@@ -5937,9 +5937,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -5989,9 +5989,9 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "常護寺",
-        "zh": "常護寺",
-        "en": "常護寺",
-        "ko": "常護寺"
+        "zh": "常护寺",
+        "en": "Jogo-ji Temple",
+        "ko": "조고지"
       },
       "desc_i18n": {
         "ja": "千住中居町にある浄土真宗系の寺。千邑山と号し、下町の路地裏に静かにたたずむ。都会の喧騒を離れ、心静かに参拝できる。",
@@ -6001,9 +6001,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -6053,9 +6053,9 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "花畑大鷲神社",
-        "zh": "花畑大鷲神社",
-        "en": "花畑大鷲神社",
-        "ko": "花畑大鷲神社"
+        "zh": "花畑大鹫神社",
+        "en": "Hanahata Oowashi Shrine",
+        "ko": "하나하타 오오와시 신사"
       },
       "desc_i18n": {
         "ja": "花畑にある花畑大鷲神社。「大鷲」の名を持つ神社で、商売繁盛の神として信仰されている。",
@@ -6065,9 +6065,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -6118,9 +6118,9 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "足立の花火",
-        "zh": "足立の花火",
-        "en": "足立の花火",
-        "ko": "足立の花火"
+        "zh": "足立花火大会",
+        "en": "Adachi Fireworks Festival",
+        "ko": "아다치 불꽃놀이"
       },
       "desc_i18n": {
         "ja": "毎年7月、荒川河川敷で開催される足立区を代表する夏の風物詩。多くの観客でにぎわう。",
@@ -6182,9 +6182,9 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "じんがんなわ祭",
-        "zh": "じんがんなわ祭",
-        "en": "じんがんなわ祭",
-        "ko": "じんがんなわ祭"
+        "zh": "神茅轮祭",
+        "en": "Jinganawa Festival",
+        "ko": "진간나와 축제"
       },
       "desc_i18n": {
         "ja": "西保木間の大乗院で1月に行われる伝統行事。ワラで作った大蛇をイチョウの木に掲げ、五穀豊穣を祈る足立区無形民俗文化財。",
@@ -6246,9 +6246,9 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "縁起寺 花畑阿弥陀堂",
-        "zh": "縁起寺 花畑阿弥陀堂",
-        "en": "縁起寺 花畑阿弥陀堂",
-        "ko": "縁起寺 花畑阿弥陀堂"
+        "zh": "缘起寺 花畑阿弥陀堂",
+        "en": "Engi-ji Temple, Hanahata Amida-do",
+        "ko": "엔기지 하나하타 아미타당"
       },
       "desc_i18n": {
         "ja": "足立区花畑にある真宗木辺派の寺。天界山と号し、本尊は国内でも珍しい石仏の阿弥陀如来。",
@@ -6258,9 +6258,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -6310,9 +6310,9 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "江北氷川神社",
-        "zh": "江北氷川神社",
-        "en": "江北氷川神社",
-        "ko": "江北氷川神社"
+        "zh": "江北冰川神社",
+        "en": "Kohoku Hikawa Shrine",
+        "ko": "고호쿠 히카와 신사"
       },
       "desc_i18n": {
         "ja": "江北に鎮座する江北氷川神社。氷川信仰を受け継ぎ、地域の鎮守として祀られている。",
@@ -6322,9 +6322,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -6375,8 +6375,8 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "六月八幡神社",
         "zh": "六月八幡神社",
-        "en": "六月八幡神社",
-        "ko": "六月八幡神社"
+        "en": "Rokugatsu Hachiman Shrine",
+        "ko": "로쿠가츠 하치만 신사"
       },
       "desc_i18n": {
         "ja": "六月にある六月八幡神社。八幡神をまつり、地域の守り神として信仰されている。",
@@ -6386,9 +6386,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -6438,9 +6438,9 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "堀之内氷川神社",
-        "zh": "堀之内氷川神社",
-        "en": "堀之内氷川神社",
-        "ko": "堀之内氷川神社"
+        "zh": "堀之内冰川神社",
+        "en": "Horinouchi Hikawa Shrine",
+        "ko": "호리노우치 히카와 신사"
       },
       "desc_i18n": {
         "ja": "堀之内に根づく氷川信仰の神社。住宅地の中で地域の鎮守として静かに佇み、四季折々の佇まいを見せる。",
@@ -6450,9 +6450,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -6503,8 +6503,8 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "扇 三嶋神社",
         "zh": "扇 三嶋神社",
-        "en": "扇 三嶋神社",
-        "ko": "扇 三嶋神社"
+        "en": "Ogi Mishima Shrine",
+        "ko": "오기 미시마 신사"
       },
       "desc_i18n": {
         "ja": "扇にある三嶋神社。三嶋信仰を伝える神社で、この地の氏神として祀られている。",
@@ -6514,9 +6514,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -6566,9 +6566,9 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "伊興 若宮八幡宮",
-        "zh": "伊興 若宮八幡宮",
-        "en": "伊興 若宮八幡宮",
-        "ko": "伊興 若宮八幡宮"
+        "zh": "伊兴 若宫八幡宫",
+        "en": "Iko Wakamiya Hachimangu Shrine",
+        "ko": "이코 와카미야 하치만구"
       },
       "desc_i18n": {
         "ja": "伊興にある若宮八幡宮。八幡信仰を受け継ぐ神社で、地域の氏神として崇敬されている。",
@@ -6578,9 +6578,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -6631,8 +6631,8 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "熊野神社",
         "zh": "熊野神社",
-        "en": "熊野神社",
-        "ko": "熊野神社"
+        "en": "Kumano Shrine",
+        "ko": "구마노 신사"
       },
       "desc_i18n": {
         "ja": "本木南町にある熊野神社。熊野信仰を受け継ぎ、地域の守り神として祀られている。",
@@ -6642,9 +6642,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -6694,9 +6694,9 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "本木御嶽神社",
-        "zh": "本木御嶽神社",
-        "en": "本木御嶽神社",
-        "ko": "本木御嶽神社"
+        "zh": "本木御岳神社",
+        "en": "Motoki Ontake Shrine",
+        "ko": "모토키 온타케 신사"
       },
       "desc_i18n": {
         "ja": "本木東町の御嶽神社。山岳信仰に由来する御嶽信仰の神社として、地域を見守る。",
@@ -6706,9 +6706,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -6758,9 +6758,9 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "閻魔祭",
-        "zh": "閻魔祭",
-        "en": "閻魔祭",
-        "ko": "閻魔祭"
+        "zh": "阎魔祭",
+        "en": "Enma Festival",
+        "ko": "엔마 축제"
       },
       "desc_i18n": {
         "ja": "千住の金蔵寺で行われる閻魔大王にまつわる春の祭礼。江戸時代から続く下町の信仰行事。",
@@ -6822,9 +6822,9 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "鹿浜の獅子舞",
-        "zh": "鹿浜の獅子舞",
-        "en": "鹿浜の獅子舞",
-        "ko": "鹿浜の獅子舞"
+        "zh": "鹿浜狮子舞",
+        "en": "Shikahama Lion Dance",
+        "ko": "시카하마 사자무"
       },
       "desc_i18n": {
         "ja": "鹿浜地区の4社で輪番奉納される三匹獅子舞。江戸時代から続く足立区無形民俗文化財。",
@@ -6886,9 +6886,9 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "長門鎮守八幡神社",
-        "zh": "長門鎮守八幡神社",
-        "en": "長門鎮守八幡神社",
-        "ko": "長門鎮守八幡神社"
+        "zh": "长门镇守八幡神社",
+        "en": "Nagato Chinju Hachiman Shrine",
+        "ko": "나가토 친주 하치만 신사"
       },
       "desc_i18n": {
         "ja": "中川にある長門鎮守八幡神社。その名のとおり、この地を鎮め守る八幡神をまつる。",
@@ -6898,9 +6898,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -6950,9 +6950,9 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "八幡神社（西綾瀬）",
-        "zh": "八幡神社（西綾瀬）",
-        "en": "八幡神社（西綾瀬）",
-        "ko": "八幡神社（西綾瀬）"
+        "zh": "八幡神社（西绫濑）",
+        "en": "Hachiman Shrine (Nishi-Ayase)",
+        "ko": "하치만 신사(니시아야세)"
       },
       "desc_i18n": {
         "ja": "西綾瀬に祀られる八幡神社。八幡神をまつり、武運の神として地域の信仰を集めている。",
@@ -6962,9 +6962,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -7014,9 +7014,9 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "日の出神社",
-        "zh": "日の出神社",
-        "en": "日の出神社",
-        "ko": "日の出神社"
+        "zh": "日出神社",
+        "en": "Hinode Shrine",
+        "ko": "히노데 신사"
       },
       "desc_i18n": {
         "ja": "日ノ出町にある日の出神社。明るい社名のとおり、地域の鎮守として暮らしに寄り添う。",
@@ -7026,9 +7026,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
-        "zh": "参拝自由（境内）",
-        "en": "参拝自由（境内）",
-        "ko": "参拝自由（境内）"
+        "zh": "院内自由参拜",
+        "en": "Free to worship (within the grounds)",
+        "ko": "경내 자유 참배"
       },
       "fee_i18n": {
         "ja": "無料",
@@ -26304,9 +26304,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "ランチ 11:30～13:30(L.O.)、ディナー 17:30～21:30(L.O.)／火曜定休",
-        "zh": "ランチ 11:30～13:30(L.O.)、ディナー 17:30～21:30(L.O.)／火曜定休",
-        "en": "ランチ 11:30～13:30(L.O.)、ディナー 17:30～21:30(L.O.)／火曜定休",
-        "ko": "ランチ 11:30～13:30(L.O.)、ディナー 17:30～21:30(L.O.)／火曜定休"
+        "zh": "午餐 11:30～13:30（最后点单）、晚餐 17:30～21:30（最后点单）／周二休息",
+        "en": "Lunch 11:30–13:30 (L.O.), dinner 17:30–21:30 (L.O.) / Closed Tuesdays",
+        "ko": "런치 11:30~13:30(라스트 오더), 디너 17:30~21:30(라스트 오더) / 화요일 휴무"
       },
       "fee_i18n": {
         "ja": "ランチ 6,000円前後 / ディナー 10,000円前後",
@@ -26378,9 +26378,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "不定休／受付平日8:00～17:00",
-        "zh": "不定休／受付平日8:00～17:00",
-        "en": "不定休／受付平日8:00～17:00",
-        "ko": "不定休／受付平日8:00～17:00"
+        "zh": "不定期休息／接待平日8:00～17:00",
+        "en": "Irregular holidays / Reception weekdays 8:00–17:00",
+        "ko": "부정기 휴무／접수 평일 8:00~17:00"
       },
       "fee_i18n": {
         "ja": "体験 江戸切子 20,000円〜／万華鏡 4,000円〜（要予約）",
@@ -26453,9 +26453,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "詳細は庭園HP参照／年中無休",
-        "zh": "詳細は庭園HP参照／年中無休",
-        "en": "詳細は庭園HP参照／年中無休",
-        "ko": "詳細は庭園HP参照／年中無休"
+        "zh": "详见庭园官网／全年无休",
+        "en": "See the garden's official website / Open all year round",
+        "ko": "자세한 내용은 정원 공식 사이트 참조 / 연중무휴"
       },
       "fee_i18n": {
         "ja": "入園料 一般 150円",
@@ -26527,9 +26527,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "10:30～19:00(金土は20:00まで)／年中無休",
-        "zh": "10:30～19:00(金土は20:00まで)／年中無休",
-        "en": "10:30～19:00(金土は20:00まで)／年中無休",
-        "ko": "10:30～19:00(金土は20:00まで)／年中無休"
+        "zh": "10:30～19:00（周五六至20:00）／全年无休",
+        "en": "10:30–19:00 (until 20:00 Fri–Sat) / Open all year round",
+        "ko": "10:30~19:00(금·토는 20:00까지) / 연중무휴"
       },
       "fee_i18n": {
         "ja": "見学無料／手ぬぐい 935円〜",
@@ -26603,9 +26603,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "平日10:00～21:00、土日祝10:00～17:30／休館日は要確認",
-        "zh": "平日10:00～21:00、土日祝10:00～17:30／休館日は要確認",
-        "en": "平日10:00～21:00、土日祝10:00～17:30／休館日は要確認",
-        "ko": "平日10:00～21:00、土日祝10:00～17:30／休館日は要確認"
+        "zh": "平日10:00～21:00、周六日节假日10:00～17:30／闭馆日请确认",
+        "en": "Weekdays 10:00–21:00, Sat/Sun/holidays 10:00–17:30 / Closed days: check ahead",
+        "ko": "평일 10:00~21:00, 주말·공휴일 10:00~17:30 / 휴관일은 확인 필요"
       },
       "fee_i18n": {
         "ja": "利用無料",
@@ -26679,9 +26679,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "ランチ11:30～15:00、ディナー17:00～23:00(L.O.22:00)／年中無休",
-        "zh": "ランチ11:30～15:00、ディナー17:00～23:00(L.O.22:00)／年中無休",
-        "en": "ランチ11:30～15:00、ディナー17:00～23:00(L.O.22:00)／年中無休",
-        "ko": "ランチ11:30～15:00、ディナー17:00～23:00(L.O.22:00)／年中無休"
+        "zh": "午餐11:30～15:00、晚餐17:00～23:00（最后点单22:00）／全年无休",
+        "en": "Lunch 11:30–15:00, dinner 17:00–23:00 (L.O. 22:00) / Open all year round",
+        "ko": "런치 11:30~15:00, 디너 17:00~23:00(라스트 오더 22:00) / 연중무휴"
       },
       "fee_i18n": {
         "ja": "ランチ 1,000円前後 / ディナー 3,000円前後",
@@ -26754,9 +26754,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "詳細は社務所HP参照／年中無休",
-        "zh": "詳細は社務所HP参照／年中無休",
-        "en": "詳細は社務所HP参照／年中無休",
-        "ko": "詳細は社務所HP参照／年中無休"
+        "zh": "详见社务所官网／全年无休",
+        "en": "See the shrine office's website / Open all year round",
+        "ko": "자세한 내용은 신사 사무소 공식 사이트 참조 / 연중무휴"
       },
       "fee_i18n": {
         "ja": "入場・体験は実費",
@@ -26829,9 +26829,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "11:00～19:00／不定休",
-        "zh": "11:00～19:00／不定休",
-        "en": "11:00～19:00／不定休",
-        "ko": "11:00～19:00／不定休"
+        "zh": "11:00～19:00／不定期休息",
+        "en": "11:00–19:00 / Irregular holidays",
+        "ko": "11:00~19:00／부정기 휴무"
       },
       "fee_i18n": {
         "ja": "厚焼玉子 1,300円前後",
@@ -26904,9 +26904,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "10:00～20:00／火曜定休",
-        "zh": "10:00～20:00／火曜定休",
-        "en": "10:00～20:00／火曜定休",
-        "ko": "10:00～20:00／火曜定休"
+        "zh": "10:00～20:00／周二休息",
+        "en": "10:00–20:00 / Closed Tuesdays",
+        "ko": "10:00~20:00／화요일 휴무"
       },
       "fee_i18n": {
         "ja": "日本茶・茶菓子 500円〜",
@@ -26979,9 +26979,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "ランチ11:30～14:00、ディナー17:30～25:00／月曜定休",
-        "zh": "ランチ11:30～14:00、ディナー17:30～25:00／月曜定休",
-        "en": "ランチ11:30～14:00、ディナー17:30～25:00／月曜定休",
-        "ko": "ランチ11:30～14:00、ディナー17:30～25:00／月曜定休"
+        "zh": "午餐11:30～14:00、晚餐17:30～次日1:00／周一休息",
+        "en": "Lunch 11:30–14:00, dinner 17:30–25:00 (1 a.m.) / Closed Mondays",
+        "ko": "런치 11:30~14:00, 디너 17:30~25:00(새벽 1:00) / 월요일 휴무"
       },
       "fee_i18n": {
         "ja": "ランチ 1,000円前後／ディナー 3,000円〜",
@@ -27053,9 +27053,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "11:00～20:00／年中無休(年末年始除く)",
-        "zh": "11:00～20:00／年中無休(年末年始除く)",
-        "en": "11:00～20:00／年中無休(年末年始除く)",
-        "ko": "11:00～20:00／年中無休(年末年始除く)"
+        "zh": "11:00～20:00／全年无休（年末年初除外）",
+        "en": "11:00–20:00 / Open all year round (except year-end and New Year)",
+        "ko": "11:00~20:00 / 연중무휴(연말연시 제외)"
       },
       "fee_i18n": {
         "ja": "雑誌 1,430円〜／グッズ 330円〜",
@@ -27129,9 +27129,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "ランチ11:00～15:00、ディナー17:00～22:00／月曜定休",
-        "zh": "ランチ11:00～15:00、ディナー17:00～22:00／月曜定休",
-        "en": "ランチ11:00～15:00、ディナー17:00～22:00／月曜定休",
-        "ko": "ランチ11:00～15:00、ディナー17:00～22:00／月曜定休"
+        "zh": "午餐11:00～15:00、晚餐17:00～22:00／周一休息",
+        "en": "Lunch 11:00–15:00, dinner 17:00–22:00 / Closed Mondays",
+        "ko": "런치 11:00~15:00, 디너 17:00~22:00 / 월요일 휴무"
       },
       "fee_i18n": {
         "ja": "ランチ 1,000円〜 / ディナー 2,000円〜",
@@ -27203,9 +27203,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "月～土11:00～翌2:00、日祝11:00～22:00／年中無休",
-        "zh": "月～土11:00～翌2:00、日祝11:00～22:00／年中無休",
-        "en": "月～土11:00～翌2:00、日祝11:00～22:00／年中無休",
-        "ko": "月～土11:00～翌2:00、日祝11:00～22:00／年中無休"
+        "zh": "周一至周六11:00～次日2:00、周日节假日11:00～22:00／全年无休",
+        "en": "Mon–Sat 11:00–2:00 a.m., Sun/holidays 11:00–22:00 / Open all year round",
+        "ko": "월~토 11:00~다음 날 2:00, 일·공휴일 11:00~22:00／연중무휴"
       },
       "fee_i18n": {
         "ja": "ランチ 1,000円前後（ラーメン）",
@@ -27277,9 +27277,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "詳細はまち歩きガイド参照",
-        "zh": "詳細はまち歩きガイド参照",
-        "en": "詳細はまち歩きガイド参照",
-        "ko": "詳細はまち歩きガイド参照"
+        "zh": "详见街区散步指南",
+        "en": "See the town-walk guide",
+        "ko": "자세한 내용은 마을 산책 가이드 참조"
       },
       "fee_i18n": {
         "ja": "無料（まち歩き）",
@@ -27351,9 +27351,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "ランチ11:30～14:00、ディナー18:00～21:30／火曜定休",
-        "zh": "ランチ11:30～14:00、ディナー18:00～21:30／火曜定休",
-        "en": "ランチ11:30～14:00、ディナー18:00～21:30／火曜定休",
-        "ko": "ランチ11:30～14:00、ディナー18:00～21:30／火曜定休"
+        "zh": "午餐11:30～14:00、晚餐18:00～21:30／周二休息",
+        "en": "Lunch 11:30–14:00, dinner 18:00–21:30 / Closed Tuesdays",
+        "ko": "런치 11:30~14:00, 디너 18:00~21:30 / 화요일 휴무"
       },
       "fee_i18n": {
         "ja": "ランチ 2,000円前後／ディナー 4,000円前後",
@@ -27427,9 +27427,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "平日9:00～19:00、土日祝9:00～18:00／月曜定休",
-        "zh": "平日9:00～19:00、土日祝9:00～18:00／月曜定休",
-        "en": "平日9:00～19:00、土日祝9:00～18:00／月曜定休",
-        "ko": "平日9:00～19:00、土日祝9:00～18:00／月曜定休"
+        "zh": "平日9:00～19:00、周六日节假日9:00～18:00／周一休息",
+        "en": "Weekdays 9:00–19:00, Sat/Sun/holidays 9:00–18:00 / Closed Mondays",
+        "ko": "평일 9:00~19:00, 주말·공휴일 9:00~18:00／월요일 휴무"
       },
       "fee_i18n": {
         "ja": "パン ～999円前後",
@@ -27502,9 +27502,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "詳細は神社HP参照／年中無休",
-        "zh": "詳細は神社HP参照／年中無休",
-        "en": "詳細は神社HP参照／年中無休",
-        "ko": "詳細は神社HP参照／年中無休"
+        "zh": "详见神社官网／全年无休",
+        "en": "See the shrine's official website / Open all year round",
+        "ko": "자세한 내용은 신사 공식 사이트 참조 / 연중무휴"
       },
       "fee_i18n": {
         "ja": "参拝無料",
@@ -27576,9 +27576,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "11:00～20:00(L.O.)／年中無休(年末年始除く)",
-        "zh": "11:00～20:00(L.O.)／年中無休(年末年始除く)",
-        "en": "11:00～20:00(L.O.)／年中無休(年末年始除く)",
-        "ko": "11:00～20:00(L.O.)／年中無休(年末年始除く)"
+        "zh": "11:00～20:00（最后点单）／全年无休（年末年初除外）",
+        "en": "11:00–20:00 (L.O.) / Open all year round (except year-end and New Year)",
+        "ko": "11:00~20:00(라스트 오더) / 연중무휴(연말연시 제외)"
       },
       "fee_i18n": {
         "ja": "ランチ 1,000円前後（パンケーキ）",
@@ -27650,9 +27650,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "12:00～売切次第終了／土日祝休",
-        "zh": "12:00～売切次第終了／土日祝休",
-        "en": "12:00～売切次第終了／土日祝休",
-        "ko": "12:00～売切次第終了／土日祝休"
+        "zh": "12:00起，售罄即止／周六日节假日休息",
+        "en": "From 12:00, closes when sold out / Closed Sat–Sun & holidays",
+        "ko": "12:00~매진 시 마감／토·일·공휴일 휴무"
       },
       "fee_i18n": {
         "ja": "バナナジュース 460円〜",
@@ -27724,9 +27724,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "11:00～20:00／不定休",
-        "zh": "11:00～20:00／不定休",
-        "en": "11:00～20:00／不定休",
-        "ko": "11:00～20:00／不定休"
+        "zh": "11:00～20:00／不定期休息",
+        "en": "11:00–20:00 / Irregular holidays",
+        "ko": "11:00~20:00／부정기 휴무"
       },
       "fee_i18n": {
         "ja": "ウッドバーニング体験 4,000円〜（要予約）",
@@ -27802,9 +27802,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "11:00～21:00(L.O.20:30)／不定休",
-        "zh": "11:00～21:00(L.O.20:30)／不定休",
-        "en": "11:00～21:00(L.O.20:30)／不定休",
-        "ko": "11:00～21:00(L.O.20:30)／不定休"
+        "zh": "11:00～21:00（最后点单20:30）／不定期休息",
+        "en": "11:00–21:00 (L.O. 20:30) / Irregular holidays",
+        "ko": "11:00~21:00(LO 20:30)／부정기 휴무"
       },
       "fee_i18n": {
         "ja": "ランチ 1,000円〜 / ディナー 3,000円〜",
@@ -27876,9 +27876,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "9:30～16:50(最終入館16:00)／水曜・年末年始休",
-        "zh": "9:30～16:50(最終入館16:00)／水曜・年末年始休",
-        "en": "9:30～16:50(最終入館16:00)／水曜・年末年始休",
-        "ko": "9:30～16:50(最終入館16:00)／水曜・年末年始休"
+        "zh": "9:30～16:50（最后入馆16:00）／周三・年末年初休息",
+        "en": "9:30–16:50 (last entry 16:00) / Closed Wed & year-end/New Year",
+        "ko": "9:30~16:50(최종 입관 16:00)／수요일·연말연시 휴무"
       },
       "fee_i18n": {
         "ja": "入館料 一般 950円",
@@ -27950,9 +27950,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "10:00～23:00／年中無休(年末年始除く)",
-        "zh": "10:00～23:00／年中無休(年末年始除く)",
-        "en": "10:00～23:00／年中無休(年末年始除く)",
-        "ko": "10:00～23:00／年中無休(年末年始除く)"
+        "zh": "10:00～23:00／全年无休（年末年初除外）",
+        "en": "10:00–23:00 / Open all year round (except year-end and New Year)",
+        "ko": "10:00~23:00 / 연중무휴(연말연시 제외)"
       },
       "fee_i18n": {
         "ja": "レッスン 3,300円〜（要予約）",
@@ -28026,9 +28026,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "10:00～17:00／土日祝休",
-        "zh": "10:00～17:00／土日祝休",
-        "en": "10:00～17:00／土日祝休",
-        "ko": "10:00～17:00／土日祝休"
+        "zh": "10:00～17:00／周六日节假日休息",
+        "en": "10:00–17:00 / Closed Sat–Sun & holidays",
+        "ko": "10:00~17:00／토·일·공휴일 휴무"
       },
       "fee_i18n": {
         "ja": "体験 匂袋 2,200円〜（要予約）",
@@ -28100,9 +28100,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "11:00～19:00(完全予約制)／水日曜休",
-        "zh": "11:00～19:00(完全予約制)／水日曜休",
-        "en": "11:00～19:00(完全予約制)／水日曜休",
-        "ko": "11:00～19:00(完全予約制)／水日曜休"
+        "zh": "11:00～19:00（完全预约制）／周三・周日休息",
+        "en": "11:00–19:00 (reservation only) / Closed Wed & Sun",
+        "ko": "11:00~19:00(완전 예약제)／수·일 휴무"
       },
       "fee_i18n": {
         "ja": "ヘアブレイド 4,000円〜",
@@ -28176,9 +28176,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "10:30～18:00／月土祝休",
-        "zh": "10:30～18:00／月土祝休",
-        "en": "10:30～18:00／月土祝休",
-        "ko": "10:30～18:00／月土祝休"
+        "zh": "10:30～18:00／周一・周六・节假日休息",
+        "en": "10:30–18:00 / Closed Mon, Sat & holidays",
+        "ko": "10:30~18:00／월·토·공휴일 휴무"
       },
       "fee_i18n": {
         "ja": "飲食は実費",
@@ -28251,9 +28251,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "8:30～11:00、12:00～15:00／土日祝休",
-        "zh": "8:30～11:00、12:00～15:00／土日祝休",
-        "en": "8:30～11:00、12:00～15:00／土日祝休",
-        "ko": "8:30～11:00、12:00～15:00／土日祝休"
+        "zh": "8:30～11:00、12:00～15:00／周六日节假日休息",
+        "en": "8:30–11:00, 12:00–15:00 / Closed Sat–Sun & holidays",
+        "ko": "8:30~11:00, 12:00~15:00／토·일·공휴일 휴무"
       },
       "fee_i18n": {
         "ja": "入場・体験は実費",
@@ -28326,9 +28326,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "公演により異なる(昼13:00～/夜19:00～)／不定休",
-        "zh": "公演により異なる(昼13:00～/夜19:00～)／不定休",
-        "en": "公演により異なる(昼13:00～/夜19:00～)／不定休",
-        "ko": "公演により異なる(昼13:00～/夜19:00～)／不定休"
+        "zh": "因演出而异（日场13:00～／夜场19:00～）／不定期休息",
+        "en": "Varies by performance (matinee from 13:00 / evening from 19:00) / Irregular holidays",
+        "ko": "공연에 따라 다름(낮 13:00~/밤 19:00~) / 부정기 휴무"
       },
       "fee_i18n": {
         "ja": "ドリンク ～1,000円（ショー付）",
@@ -28402,9 +28402,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "10:00～19:00／無休",
-        "zh": "10:00～19:00／無休",
-        "en": "10:00～19:00／無休",
-        "ko": "10:00～19:00／無休"
+        "zh": "10:00～19:00／无休",
+        "en": "10:00–19:00 / Open daily",
+        "ko": "10:00~19:00／무휴"
       },
       "fee_i18n": {
         "ja": "草履・下駄 5,000円〜",
@@ -28477,9 +28477,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "10:00～17:30／年末年始休",
-        "zh": "10:00～17:30／年末年始休",
-        "en": "10:00～17:30／年末年始休",
-        "ko": "10:00～17:30／年末年始休"
+        "zh": "10:00～17:30／年末年初休息",
+        "en": "10:00–17:30 / Closed year-end & New Year",
+        "ko": "10:00~17:30／연말연시 휴무"
       },
       "fee_i18n": {
         "ja": "製作体験 3,000円",
@@ -28539,9 +28539,9 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "ほていや 中塚商店",
-        "zh": "ほていや 中塚商店",
+        "zh": "布袋屋中塚商店",
         "en": "Hoteiya Nakatsuka Shoten",
-        "ko": "호테이나 나카쓰카 상점"
+        "ko": "호테이야 나카츠카 상점"
       },
       "desc_i18n": {
         "ja": "浅草・田原町の豆菓子専門店。昔ながらの豆菓子や豆を使ったおつまみを、量り売りで幅広く扱う。",
@@ -28551,9 +28551,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "8:30～19:00(日曜12:00～18:00)／正月・三社祭休",
-        "zh": "8:30～19:00(日曜12:00～18:00)／正月・三社祭休",
-        "en": "8:30～19:00(日曜12:00～18:00)／正月・三社祭休",
-        "ko": "8:30～19:00(日曜12:00～18:00)／正月・三社祭休"
+        "zh": "8:30～19:00（周日12:00～18:00）／正月・三社祭休息",
+        "en": "8:30–19:00 (Sun 12:00–18:00) / Closed New Year & Sanja Festival",
+        "ko": "8:30~19:00(일요일 12:00~18:00)／정월·산샤 축제 휴무"
       },
       "fee_i18n": {
         "ja": "飲食は実費",
@@ -28626,9 +28626,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "詳細は和光市HP参照",
-        "zh": "詳細は和光市HP参照",
-        "en": "詳細は和光市HP参照",
-        "ko": "詳細は和光市HP参照"
+        "zh": "详见和光市官网",
+        "en": "See Wako City's official website",
+        "ko": "자세한 내용은 와코시 공식 사이트 참조"
       },
       "fee_i18n": {
         "ja": "入園無料",
@@ -28700,9 +28700,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "月～金10:00～20:00、土日祝8:30～20:00／第2・4水曜休",
-        "zh": "月～金10:00～20:00、土日祝8:30～20:00／第2・4水曜休",
-        "en": "月～金10:00～20:00、土日祝8:30～20:00／第2・4水曜休",
-        "ko": "月～金10:00～20:00、土日祝8:30～20:00／第2・4水曜休"
+        "zh": "周一至周五10:00～20:00、周六日节假日8:30～20:00／第2・4个周三休息",
+        "en": "Mon–Fri 10:00–20:00, Sat/Sun/holidays 8:30–20:00 / Closed 2nd & 4th Wed",
+        "ko": "월~금 10:00~20:00, 토·일·공휴일 8:30~20:00／둘째·넷째 수요일 휴무"
       },
       "fee_i18n": {
         "ja": "バッティング 20球 200円",
@@ -28774,9 +28774,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "ランチ11:30～14:00、ディナー17:30～21:00／月水木日曜休",
-        "zh": "ランチ11:30～14:00、ディナー17:30～21:00／月水木日曜休",
-        "en": "ランチ11:30～14:00、ディナー17:30～21:00／月水木日曜休",
-        "ko": "ランチ11:30～14:00、ディナー17:30～21:00／月水木日曜休"
+        "zh": "午餐11:30～14:00、晚餐17:30～21:00／周一、三、四、日休息",
+        "en": "Lunch 11:30–14:00, dinner 17:30–21:00 / Closed Mon, Wed, Thu & Sun",
+        "ko": "런치 11:30~14:00, 디너 17:30~21:00 / 월·수·목·일 휴무"
       },
       "fee_i18n": {
         "ja": "ランチ 2,000円前後 / ディナー 5,000円前後",
@@ -28848,9 +28848,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "10:00～22:00(水曜14:00～)／無休",
-        "zh": "10:00～22:00(水曜14:00～)／無休",
-        "en": "10:00～22:00(水曜14:00～)／無休",
-        "ko": "10:00～22:00(水曜14:00～)／無休"
+        "zh": "10:00～22:00（周三14:00起）／无休",
+        "en": "10:00–22:00 (Wed from 14:00) / Open daily",
+        "ko": "10:00~22:00(수요일 14:00~)／무휴"
       },
       "fee_i18n": {
         "ja": "体験レッスン 3,300円〜（要予約）",
@@ -28923,9 +28923,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "月～土12:00～19:45、日祝12:00～18:00／無休(元旦除く)",
-        "zh": "月～土12:00～19:45、日祝12:00～18:00／無休(元旦除く)",
-        "en": "月～土12:00～19:45、日祝12:00～18:00／無休(元旦除く)",
-        "ko": "月～土12:00～19:45、日祝12:00～18:00／無休(元旦除く)"
+        "zh": "周一至周六12:00～19:45、周日节假日12:00～18:00／无休（元旦除外）",
+        "en": "Mon–Sat 12:00–19:45, Sun/holidays 12:00–18:00 / Open daily (except New Year's Day)",
+        "ko": "월~토 12:00~19:45, 일·공휴일 12:00~18:00 / 무휴(정월 초하루 제외)"
       },
       "fee_i18n": {
         "ja": "入場・体験は実費",
@@ -28997,9 +28997,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "11:00～20:00／月曜定休",
-        "zh": "11:00～20:00／月曜定休",
-        "en": "11:00～20:00／月曜定休",
-        "ko": "11:00～20:00／月曜定休"
+        "zh": "11:00～20:00／周一休息",
+        "en": "11:00–20:00 / Closed Mondays",
+        "ko": "11:00~20:00／월요일 휴무"
       },
       "fee_i18n": {
         "ja": "ランチ ～999円",
@@ -29071,9 +29071,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "10:45～15:30、17:00～20:00(売切次第閉店)／日祝休",
-        "zh": "10:45～15:30、17:00～20:00(売切次第閉店)／日祝休",
-        "en": "10:45～15:30、17:00～20:00(売切次第閉店)／日祝休",
-        "ko": "10:45～15:30、17:00～20:00(売切次第閉店)／日祝休"
+        "zh": "10:45～15:30、17:00～20:00（售罄即闭店）／周日・节假日休息",
+        "en": "10:45–15:30, 17:00–20:00 (closes when sold out) / Closed Sun & holidays",
+        "ko": "10:45~15:30, 17:00~20:00(매진 시 폐점)／일·공휴일 휴무"
       },
       "fee_i18n": {
         "ja": "ランチ ～999円（スープカレー）",
@@ -29145,9 +29145,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "9:00～19:00／日祝休",
-        "zh": "9:00～19:00／日祝休",
-        "en": "9:00～19:00／日祝休",
-        "ko": "9:00～19:00／日祝休"
+        "zh": "9:00～19:00／周日・节假日休息",
+        "en": "9:00–19:00 / Closed Sun & holidays",
+        "ko": "9:00~19:00／일·공휴일 휴무"
       },
       "fee_i18n": {
         "ja": "ランチ 1,000円前後（立ち食いそば）",
@@ -29220,9 +29220,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "11:00～16:00、17:30～22:00／無休",
-        "zh": "11:00～16:00、17:30～22:00／無休",
-        "en": "11:00～16:00、17:30～22:00／無休",
-        "ko": "11:00～16:00、17:30～22:00／無休"
+        "zh": "11:00～16:00、17:30～22:00／无休",
+        "en": "11:00–16:00, 17:30–22:00 / Open daily",
+        "ko": "11:00~16:00, 17:30~22:00／무휴"
       },
       "fee_i18n": {
         "ja": "ランチ 1,000円前後（蕎麦）",
@@ -29294,9 +29294,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "詳細は寺務所HP参照／年中無休",
-        "zh": "詳細は寺務所HP参照／年中無休",
-        "en": "詳細は寺務所HP参照／年中無休",
-        "ko": "詳細は寺務所HP参照／年中無休"
+        "zh": "详见寺务所官网／全年无休",
+        "en": "See the temple office's website / Open all year round",
+        "ko": "자세한 내용은 사찰 사무소 공식 사이트 참조 / 연중무휴"
       },
       "fee_i18n": {
         "ja": "拝観無料",
@@ -29369,9 +29369,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "詳細は小石川植物園HP参照／月曜休",
-        "zh": "詳細は小石川植物園HP参照／月曜休",
-        "en": "詳細は小石川植物園HP参照／月曜休",
-        "ko": "詳細は小石川植物園HP参照／月曜休"
+        "zh": "详见小石川植物园官网／周一休息",
+        "en": "See Koishikawa Botanical Garden's website / Closed Mondays",
+        "ko": "자세한 내용은 고이시카와 식물원 공식 사이트 참조 / 월요일 휴무"
       },
       "fee_i18n": {
         "ja": "入園料 高校生以上 500円（小中学生150円）",
@@ -29444,9 +29444,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "詳細は公園HP参照／年中無休",
-        "zh": "詳細は公園HP参照／年中無休",
-        "en": "詳細は公園HP参照／年中無休",
-        "ko": "詳細は公園HP参照／年中無休"
+        "zh": "详见公园官网／全年无休",
+        "en": "See the park's official website / Open all year round",
+        "ko": "자세한 내용은 공원 공식 사이트 참조 / 연중무휴"
       },
       "fee_i18n": {
         "ja": "入園無料",
@@ -29518,9 +29518,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "詳細は武道館HP参照／月曜休",
-        "zh": "詳細は武道館HP参照／月曜休",
-        "en": "詳細は武道館HP参照／月曜休",
-        "ko": "詳細は武道館HP参照／月曜休"
+        "zh": "详见武道馆官网／周一休息",
+        "en": "See the Budokan's website / Closed Mondays",
+        "ko": "자세한 내용은 부도칸 공식 사이트 참조 / 월요일 휴무"
       },
       "fee_i18n": {
         "ja": "入場・体験は実費",
@@ -29592,9 +29592,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "ランチ11:30～15:00(L.O.14:30)、ディナー17:00～22:00(L.O.21:00)／火曜定休",
-        "zh": "ランチ11:30～15:00(L.O.14:30)、ディナー17:00～22:00(L.O.21:00)／火曜定休",
-        "en": "ランチ11:30～15:00(L.O.14:30)、ディナー17:00～22:00(L.O.21:00)／火曜定休",
-        "ko": "ランチ11:30～15:00(L.O.14:30)、ディナー17:00～22:00(L.O.21:00)／火曜定休"
+        "zh": "午餐11:30～15:00（最后点单14:30）、晚餐17:00～22:00（最后点单21:00）／周二休息",
+        "en": "Lunch 11:30–15:00 (L.O. 14:30), dinner 17:00–22:00 (L.O. 21:00) / Closed Tuesdays",
+        "ko": "런치 11:30~15:00(라스트 오더 14:30), 디너 17:00~22:00(라스트 오더 21:00) / 화요일 휴무"
       },
       "fee_i18n": {
         "ja": "ランチ 1,000円〜 / ディナー 2,000円〜",
@@ -29668,9 +29668,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "11:00～翌5:00／無休",
-        "zh": "11:00～翌5:00／無休",
-        "en": "11:00～翌5:00／無休",
-        "ko": "11:00～翌5:00／無休"
+        "zh": "11:00～次日5:00／无休",
+        "en": "11:00–5:00 a.m. / Open daily",
+        "ko": "11:00~다음 날 5:00／무휴"
       },
       "fee_i18n": {
         "ja": "ラーメン 1,000円前後",
@@ -29744,9 +29744,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "10:00～17:00／雨天・台風等臨時休",
-        "zh": "10:00～17:00／雨天・台風等臨時休",
-        "en": "10:00～17:00／雨天・台風等臨時休",
-        "ko": "10:00～17:00／雨天・台風等臨時休"
+        "zh": "10:00～17:00／雨天・台风等临时休息",
+        "en": "10:00–17:00 / Closed temporarily on rainy/typhoon days",
+        "ko": "10:00~17:00／우천·태풍 등 임시 휴무"
       },
       "fee_i18n": {
         "ja": "～999円（人形焼・たい焼き）",
@@ -29819,9 +29819,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "18:00～翌3:00(日曜は翌1:00)／無休(年始除く)",
-        "zh": "18:00～翌3:00(日曜は翌1:00)／無休(年始除く)",
-        "en": "18:00～翌3:00(日曜は翌1:00)／無休(年始除く)",
-        "ko": "18:00～翌3:00(日曜は翌1:00)／無休(年始除く)"
+        "zh": "18:00～次日3:00（周日为次日1:00）／无休（年初除外）",
+        "en": "18:00–3:00 a.m. (until 1:00 a.m. Sundays) / Open daily (except New Year)",
+        "ko": "18:00~다음 날 3:00(일요일은 다음 날 1:00) / 무휴(연초 제외)"
       },
       "fee_i18n": {
         "ja": "ディナー 4,000円〜",
@@ -29893,9 +29893,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "火～金11:30～14:30・17:00～23:00、土日祝11:30～23:00／月曜休",
-        "zh": "火～金11:30～14:30・17:00～23:00、土日祝11:30～23:00／月曜休",
-        "en": "火～金11:30～14:30・17:00～23:00、土日祝11:30～23:00／月曜休",
-        "ko": "火～金11:30～14:30・17:00～23:00、土日祝11:30～23:00／月曜休"
+        "zh": "周二至周五11:30～14:30・17:00～23:00、周六日节假日11:30～23:00／周一休息",
+        "en": "Tue–Fri 11:30–14:30 & 17:00–23:00, Sat/Sun/holidays 11:30–23:00 / Closed Mon",
+        "ko": "화~금 11:30~14:30·17:00~23:00, 토·일·공휴일 11:30~23:00／월요일 휴무"
       },
       "fee_i18n": {
         "ja": "ランチ ～999円 / ディナー 2,000円前後",
@@ -29967,9 +29967,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "火～土12:00～18:00／日月曜休",
-        "zh": "火～土12:00～18:00／日月曜休",
-        "en": "火～土12:00～18:00／日月曜休",
-        "ko": "火～土12:00～18:00／日月曜休"
+        "zh": "周二至周六12:00～18:00／周日・周一休息",
+        "en": "Tue–Sat 12:00–18:00 / Closed Sun & Mon",
+        "ko": "화~토 12:00~18:00／일·월요일 휴무"
       },
       "fee_i18n": {
         "ja": "紙雑貨 500円〜",
@@ -30041,9 +30041,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "17:00～23:00／無休",
-        "zh": "17:00～23:00／無休",
-        "en": "17:00～23:00／無休",
-        "ko": "17:00～23:00／無休"
+        "zh": "17:00～23:00／无休",
+        "en": "17:00–23:00 / Open daily",
+        "ko": "17:00~23:00／무휴"
       },
       "fee_i18n": {
         "ja": "ディナー 3,000円前後／茶割り 1杯300円〜",
@@ -30115,9 +30115,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "11:00～21:00／水曜定休",
-        "zh": "11:00～21:00／水曜定休",
-        "en": "11:00～21:00／水曜定休",
-        "ko": "11:00～21:00／水曜定休"
+        "zh": "11:00～21:00／周三休息",
+        "en": "11:00–21:00 / Closed Wednesdays",
+        "ko": "11:00~21:00／수요일 휴무"
       },
       "fee_i18n": {
         "ja": "ラーメン 1,000円前後",
@@ -30189,9 +30189,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "16:00～22:00(21:30L.O.)／不定休",
-        "zh": "16:00～22:00(21:30L.O.)／不定休",
-        "en": "16:00～22:00(21:30L.O.)／不定休",
-        "ko": "16:00～22:00(21:30L.O.)／不定休"
+        "zh": "16:00～22:00（21:30最后点单）／不定期休息",
+        "en": "16:00–22:00 (L.O. 21:30) / Irregular holidays",
+        "ko": "16:00~22:00(21:30 LO)／부정기 휴무"
       },
       "fee_i18n": {
         "ja": "ディナー 2,000円前後（クラフトビール）",
@@ -30264,9 +30264,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "11:00～15:00、17:00～22:00／年中無休(年末年始除く)",
-        "zh": "11:00～15:00、17:00～22:00／年中無休(年末年始除く)",
-        "en": "11:00～15:00、17:00～22:00／年中無休(年末年始除く)",
-        "ko": "11:00～15:00、17:00～22:00／年中無休(年末年始除く)"
+        "zh": "11:00～15:00、17:00～22:00／全年无休（年末年初除外）",
+        "en": "11:00–15:00, 17:00–22:00 / Open all year round (except year-end and New Year)",
+        "ko": "11:00~15:00, 17:00~22:00 / 연중무휴(연말연시 제외)"
       },
       "fee_i18n": {
         "ja": "ランチ 2,000円前後 / ディナー 5,000円前後",
@@ -30338,9 +30338,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "詳細はRAMP ZERO HP参照／不定休",
-        "zh": "詳細はRAMP ZERO HP参照／不定休",
-        "en": "詳細はRAMP ZERO HP参照／不定休",
-        "ko": "詳細はRAMP ZERO HP参照／不定休"
+        "zh": "详见RAMP ZERO官网／不定期休息",
+        "en": "See the RAMP ZERO website / Irregular holidays",
+        "ko": "자세한 내용은 RAMP ZERO 공식 사이트 참조 / 부정기 휴무"
       },
       "fee_i18n": {
         "ja": "フリー滑走 1日 1,200円〜／レッスン 3,500円〜",
@@ -30412,9 +30412,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "月～土11:00～20:00、日祝11:00～19:00",
-        "zh": "月～土11:00～20:00、日祝11:00～19:00",
-        "en": "月～土11:00～20:00、日祝11:00～19:00",
-        "ko": "月～土11:00～20:00、日祝11:00～19:00"
+        "zh": "周一至周六11:00～20:00、周日节假日11:00～19:00",
+        "en": "Mon–Sat 11:00–20:00, Sun/holidays 11:00–19:00",
+        "ko": "월~토 11:00~20:00, 일·공휴일 11:00~19:00"
       },
       "fee_i18n": {
         "ja": "見学無料（楽器販売）",
@@ -30488,9 +30488,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "クラスにより異なる(昼10:30～/夜18:30～)／不定休",
-        "zh": "クラスにより異なる(昼10:30～/夜18:30～)／不定休",
-        "en": "クラスにより異なる(昼10:30～/夜18:30～)／不定休",
-        "ko": "クラスにより異なる(昼10:30～/夜18:30～)／不定休"
+        "zh": "因课程而异（日间10:30～／夜间18:30～）／不定期休息",
+        "en": "Varies by class (daytime from 10:30 / evening from 18:30) / Irregular holidays",
+        "ko": "수업에 따라 다름(낮 10:30~/밤 18:30~) / 부정기 휴무"
       },
       "fee_i18n": {
         "ja": "入場・体験は実費",
@@ -30563,9 +30563,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "土日13:00～17:00／月～金休",
-        "zh": "土日13:00～17:00／月～金休",
-        "en": "土日13:00～17:00／月～金休",
-        "ko": "土日13:00～17:00／月～金休"
+        "zh": "周六日13:00～17:00／周一至周五休息",
+        "en": "Sat–Sun 13:00–17:00 / Closed Mon–Fri",
+        "ko": "토·일 13:00~17:00／월~금 휴무"
       },
       "fee_i18n": {
         "ja": "ジンジャーシロップ 3,800円〜",
@@ -30639,9 +30639,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "8:00～19:30／水日祝休",
-        "zh": "8:00～19:30／水日祝休",
-        "en": "8:00～19:30／水日祝休",
-        "ko": "8:00～19:30／水日祝休"
+        "zh": "8:00～19:30／周三・周日・节假日休息",
+        "en": "8:00–19:30 / Closed Wed, Sun & holidays",
+        "ko": "8:00~19:30／수·일·공휴일 휴무"
       },
       "fee_i18n": {
         "ja": "豆腐 150円〜 / 豆乳 130円〜（テイクアウト）",
@@ -30714,9 +30714,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "11:00～18:00(金曜13:00～)／水曜休",
-        "zh": "11:00～18:00(金曜13:00～)／水曜休",
-        "en": "11:00～18:00(金曜13:00～)／水曜休",
-        "ko": "11:00～18:00(金曜13:00～)／水曜休"
+        "zh": "11:00～18:00（周五13:00起）／周三休息",
+        "en": "11:00–18:00 (Fri from 13:00) / Closed Wed",
+        "ko": "11:00~18:00(금요일 13:00~)／수요일 휴무"
       },
       "fee_i18n": {
         "ja": "入場・体験は実費",
@@ -30789,9 +30789,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "11:00～17:00(売切次第終了)／日祝・土不定休",
-        "zh": "11:00～17:00(売切次第終了)／日祝・土不定休",
-        "en": "11:00～17:00(売切次第終了)／日祝・土不定休",
-        "ko": "11:00～17:00(売切次第終了)／日祝・土不定休"
+        "zh": "11:00～17:00（售罄即止）／周日・节假日及周六不定期休息",
+        "en": "11:00–17:00 (closes when sold out) / Closed Sun/holidays, Sat irregular",
+        "ko": "11:00~17:00(매진 시 마감)／일·공휴일·토요일 부정기 휴무"
       },
       "fee_i18n": {
         "ja": "おむすび ～999円",
@@ -30865,9 +30865,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "月～金9:00～18:00、土9:00～17:00／日祝休",
-        "zh": "月～金9:00～18:00、土9:00～17:00／日祝休",
-        "en": "月～金9:00～18:00、土9:00～17:00／日祝休",
-        "ko": "月～金9:00～18:00、土9:00～17:00／日祝休"
+        "zh": "周一至周五9:00～18:00、周六9:00～17:00／周日・节假日休息",
+        "en": "Mon–Fri 9:00–18:00, Sat 9:00–17:00 / Closed Sun & holidays",
+        "ko": "월~금 9:00~18:00, 토 9:00~17:00／일·공휴일 휴무"
       },
       "fee_i18n": {
         "ja": "和菓子 ～999円",
@@ -30928,7 +30928,7 @@ window.RAILWAY_TOURISM = {
       ],
       "name_i18n": {
         "ja": "豆虎 赤坂焙煎所",
-        "zh": "豆虎 赤坂焙煎所",
+        "zh": "豆虎 赤坂烘焙所",
         "en": "Mametora Akasaka Baisho",
         "ko": "마메토라 아카사카 배전소"
       },
@@ -30940,9 +30940,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "10:00～20:00／年中無休",
-        "zh": "10:00～20:00／年中無休",
-        "en": "10:00～20:00／年中無休",
-        "ko": "10:00～20:00／年中無休"
+        "zh": "10:00～20:00／全年无休",
+        "en": "10:00–20:00 / Open all year round",
+        "ko": "10:00~20:00／연중무휴"
       },
       "fee_i18n": {
         "ja": "ランチ 1,000円前後",
@@ -31015,9 +31015,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "11:30〜22:30 LO（定休日水曜）",
-        "zh": "11:30〜22:30 LO（定休日水曜）",
-        "en": "11:30〜22:30 LO（定休日水曜）",
-        "ko": "11:30〜22:30 LO（定休日水曜）"
+        "zh": "11:30～22:30 最后点单（周三休息）",
+        "en": "11:30–22:30 L.O. (Closed Wed)",
+        "ko": "11:30~22:30 LO(수요일 휴무)"
       },
       "fee_i18n": {
         "ja": "ランチ 1,500円前後（定食）",
@@ -31089,9 +31089,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "12:00～13:30LO・18:30～20:00LO（土曜・祝日は夜のみ）（定休日日曜）",
-        "zh": "12:00～13:30LO・18:30～20:00LO（土曜・祝日は夜のみ）（定休日日曜）",
-        "en": "12:00～13:30LO・18:30～20:00LO（土曜・祝日は夜のみ）（定休日日曜）",
-        "ko": "12:00～13:30LO・18:30～20:00LO（土曜・祝日は夜のみ）（定休日日曜）"
+        "zh": "12:00～13:30最后点单・18:30～20:00最后点单（周六、节假日仅晚间）（周日休息）",
+        "en": "12:00–13:30 L.O. & 18:30–20:00 L.O. (Sat/holidays evenings only) (Closed Sundays)",
+        "ko": "12:00~13:30 LO·18:30~20:00 LO(토·공휴일은 저녁만) (일요일 정기휴무)"
       },
       "fee_i18n": {
         "ja": "ランチ 1,000円前後（洋食）",
@@ -31163,9 +31163,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "7:00〜10:00・11:00〜15:00（金曜・土曜・日曜は18:00〜22:00も営業）（定休日不定）",
-        "zh": "7:00〜10:00・11:00〜15:00（金曜・土曜・日曜は18:00〜22:00も営業）（定休日不定）",
-        "en": "7:00〜10:00・11:00〜15:00（金曜・土曜・日曜は18:00〜22:00も営業）（定休日不定）",
-        "ko": "7:00〜10:00・11:00〜15:00（金曜・土曜・日曜は18:00〜22:00も営業）（定休日不定）"
+        "zh": "7:00～10:00・11:00～15:00（周五六日18:00～22:00也营业）（休息日不定）",
+        "en": "7:00–10:00 & 11:00–15:00 (Fri–Sun also 18:00–22:00) (Irregular closing days)",
+        "ko": "7:00~10:00·11:00~15:00(금·토·일은 18:00~22:00도 영업) (휴무일 부정)"
       },
       "fee_i18n": {
         "ja": "飲食は実費",
@@ -31237,9 +31237,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "11:00～15:00・17:00～23:00（土曜・日曜・祝日は11:00～23:00）（定休日なし）",
-        "zh": "11:00～15:00・17:00～23:00（土曜・日曜・祝日は11:00～23:00）（定休日なし）",
-        "en": "11:00～15:00・17:00～23:00（土曜・日曜・祝日は11:00～23:00）（定休日なし）",
-        "ko": "11:00～15:00・17:00～23:00（土曜・日曜・祝日は11:00～23:00）（定休日なし）"
+        "zh": "11:00～15:00・17:00～23:00（周六日节假日11:00～23:00）（无休）",
+        "en": "11:00–15:00 & 17:00–23:00 (Sat/Sun/holidays 11:00–23:00) (Open daily)",
+        "ko": "11:00~15:00·17:00~23:00(토·일·공휴일은 11:00~23:00) (정기휴무 없음)"
       },
       "fee_i18n": {
         "ja": "ランチ 1,000円前後（インドカレー）",
@@ -31311,9 +31311,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "11:00〜15:00・17:30〜21:30（スープがなくなり次第終了）（定休日水曜）",
-        "zh": "11:00〜15:00・17:30〜21:30（スープがなくなり次第終了）（定休日水曜）",
-        "en": "11:00〜15:00・17:30〜21:30（スープがなくなり次第終了）（定休日水曜）",
-        "ko": "11:00〜15:00・17:30〜21:30（スープがなくなり次第終了）（定休日水曜）"
+        "zh": "11:00～15:00・17:30～21:30（汤底售罄即结束）（周三休息）",
+        "en": "11:00–15:00 & 17:30–21:30 (closes when the soup runs out) (Closed Wednesdays)",
+        "ko": "11:00~15:00·17:30~21:30(수프 매진 시 마감) (수요일 정기휴무)"
       },
       "fee_i18n": {
         "ja": "ランチ 1,000円前後（つけ麺）",
@@ -31385,9 +31385,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "（火～土）11:00〜21:00・（日）11:00〜16:00（LO.閉店15分前）（定休日月曜、第2・4火曜）",
-        "zh": "（火～土）11:00〜21:00・（日）11:00〜16:00（LO.閉店15分前）（定休日月曜、第2・4火曜）",
-        "en": "（火～土）11:00〜21:00・（日）11:00〜16:00（LO.閉店15分前）（定休日月曜、第2・4火曜）",
-        "ko": "（火～土）11:00〜21:00・（日）11:00〜16:00（LO.閉店15分前）（定休日月曜、第2・4火曜）"
+        "zh": "（周二至周六）11:00～21:00・（周日）11:00～16:00（闭店前15分钟最后点单）（周一、第2・4个周二休息）",
+        "en": "(Tue–Sat) 11:00–21:00 & (Sun) 11:00–16:00 (L.O. 15 min before closing) (Closed Mon & 2nd/4th Tue)",
+        "ko": "(화~토) 11:00~21:00·(일) 11:00~16:00(폐점 15분 전 LO)(월요일, 둘째·넷째 화요일 휴무)"
       },
       "fee_i18n": {
         "ja": "ラーメン 1,000円前後",
@@ -31459,9 +31459,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "8:00〜21:00（日・祝は〜20:00）（定休日無）",
-        "zh": "8:00〜21:00（日・祝は〜20:00）（定休日無）",
-        "en": "8:00〜21:00（日・祝は〜20:00）（定休日無）",
-        "ko": "8:00〜21:00（日・祝は〜20:00）（定休日無）"
+        "zh": "8:00～21:00（周日、节假日营业至20:00）（无休）",
+        "en": "8:00–21:00 (until 20:00 Sun & holidays) (Open daily)",
+        "ko": "8:00~21:00(일·공휴일은 ~20:00) (정기휴무 없음)"
       },
       "fee_i18n": {
         "ja": "飲食は実費",
@@ -31533,9 +31533,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "17:00〜23:00（金曜・土曜は〜24:00）（定休日不定）",
-        "zh": "17:00〜23:00（金曜・土曜は〜24:00）（定休日不定）",
-        "en": "17:00〜23:00（金曜・土曜は〜24:00）（定休日不定）",
-        "ko": "17:00〜23:00（金曜・土曜は〜24:00）（定休日不定）"
+        "zh": "17:00～23:00（周五六营业至24:00）（休息日不定）",
+        "en": "17:00–23:00 (until 24:00 Fri–Sat) (Irregular closing days)",
+        "ko": "17:00~23:00(금·토는 ~24:00) (휴무일 부정)"
       },
       "fee_i18n": {
         "ja": "ディナー 4,000円前後（居酒屋）",
@@ -31607,9 +31607,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "17:00〜23:00（定休日火曜・水曜）",
-        "zh": "17:00〜23:00（定休日火曜・水曜）",
-        "en": "17:00〜23:00（定休日火曜・水曜）",
-        "ko": "17:00〜23:00（定休日火曜・水曜）"
+        "zh": "17:00～23:00（周二・周三休息）",
+        "en": "17:00–23:00 (Closed Tue & Wed)",
+        "ko": "17:00~23:00(화·수 휴무)"
       },
       "fee_i18n": {
         "ja": "ディナー 3,000円前後",
@@ -31681,9 +31681,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "17:00〜24:00（定休日火曜）",
-        "zh": "17:00〜24:00（定休日火曜）",
-        "en": "17:00〜24:00（定休日火曜）",
-        "ko": "17:00〜24:00（定休日火曜）"
+        "zh": "17:00～24:00（周二休息）",
+        "en": "17:00–24:00 (Closed Tue)",
+        "ko": "17:00~24:00(화요일 휴무)"
       },
       "fee_i18n": {
         "ja": "ディナー 4,000円〜（ビストロ）",
@@ -31829,9 +31829,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "11:00〜17:00（土曜・日曜は12:00〜）（定休日水曜、第2・4火曜）",
-        "zh": "11:00〜17:00（土曜・日曜は12:00〜）（定休日水曜、第2・4火曜）",
-        "en": "11:00〜17:00（土曜・日曜は12:00〜）（定休日水曜、第2・4火曜）",
-        "ko": "11:00〜17:00（土曜・日曜は12:00〜）（定休日水曜、第2・4火曜）"
+        "zh": "11:00～17:00（周六日12:00起）（周三、第2、4个周二休息）",
+        "en": "11:00–17:00 (from 12:00 Sat–Sun) (Closed Wednesdays & 2nd/4th Tuesdays)",
+        "ko": "11:00~17:00(토·일은 12:00~) (수요일, 둘째·넷째 화요일 정기휴무)"
       },
       "fee_i18n": {
         "ja": "ドリンク 600円前後 / ケーキセット 1,000円前後",
@@ -31903,9 +31903,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "10:30〜15:00・17:00〜21:00（定休日月曜）",
-        "zh": "10:30〜15:00・17:00〜21:00（定休日月曜）",
-        "en": "10:30〜15:00・17:00〜21:00（定休日月曜）",
-        "ko": "10:30〜15:00・17:00〜21:00（定休日月曜）"
+        "zh": "10:30～15:00・17:00～21:00（周一休息）",
+        "en": "10:30–15:00 & 17:00–21:00 (Closed Mon)",
+        "ko": "10:30~15:00·17:00~21:00(월요일 휴무)"
       },
       "fee_i18n": {
         "ja": "ランチ 1,000円前後（カレー）",
@@ -31977,9 +31977,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "17:00〜27:00（金曜・土曜・日曜は12:00〜14:00・17:00〜27:00） ※2024年9月以降は18:00〜27:00（金曜・土曜・日曜は12:00～14:00・18:00～27:00）になります。（定休日水曜 ※2024年9月以降は月曜・第3日曜が定休日になります。）",
-        "zh": "17:00〜27:00（金曜・土曜・日曜は12:00〜14:00・17:00〜27:00） ※2024年9月以降は18:00〜27:00（金曜・土曜・日曜は12:00～14:00・18:00～27:00）になります。（定休日水曜 ※2024年9月以降は月曜・第3日曜が定休日になります。）",
-        "en": "17:00〜27:00（金曜・土曜・日曜は12:00〜14:00・17:00〜27:00） ※2024年9月以降は18:00〜27:00（金曜・土曜・日曜は12:00～14:00・18:00～27:00）になります。（定休日水曜 ※2024年9月以降は月曜・第3日曜が定休日になります。）",
-        "ko": "17:00〜27:00（金曜・土曜・日曜は12:00〜14:00・17:00〜27:00） ※2024年9月以降は18:00〜27:00（金曜・土曜・日曜は12:00～14:00・18:00～27:00）になります。（定休日水曜 ※2024年9月以降は月曜・第3日曜が定休日になります。）"
+        "zh": "17:00～27:00（周五六日12:00～14:00・17:00～27:00）※2024年9月起为18:00～27:00（周五六日12:00～14:00・18:00～27:00）。（周三休息 ※2024年9月起周一、第3个周日休息。）",
+        "en": "17:00–27:00 (Fri–Sun also 12:00–14:00 & 17:00–27:00) ※From Sep 2024: 18:00–27:00 (Fri–Sun also 12:00–14:00 & 18:00–27:00). (Closed Wed ※From Sep 2024: closed Mon & 3rd Sun.)",
+        "ko": "17:00~27:00(금·토·일은 12:00~14:00·17:00~27:00) ※2024년 9월부터 18:00~27:00(금·토·일은 12:00~14:00·18:00~27:00). (수요일 휴무 ※2024년 9월부터 월요일·셋째 일요일 휴무.)"
       },
       "fee_i18n": {
         "ja": "ランチ 500円〜1,000円",
@@ -32051,9 +32051,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "11:30～21:00（カレーが無くなり次第終了）（定休日不定休）",
-        "zh": "11:30～21:00（カレーが無くなり次第終了）（定休日不定休）",
-        "en": "11:30～21:00（カレーが無くなり次第終了）（定休日不定休）",
-        "ko": "11:30～21:00（カレーが無くなり次第終了）（定休日不定休）"
+        "zh": "11:30～21:00（咖喱售罄即结束）（不定期休息）",
+        "en": "11:30–21:00 (closes when the curry runs out) (Irregular holidays)",
+        "ko": "11:30~21:00(카레 매진 시 마감) (부정기 휴무)"
       },
       "fee_i18n": {
         "ja": "ランチ 1,000円〜2,000円 / ディナー 2,000円〜3,000円",
@@ -32199,9 +32199,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "14:00～17:00（定休日火曜・水曜）",
-        "zh": "14:00～17:00（定休日火曜・水曜）",
-        "en": "14:00～17:00（定休日火曜・水曜）",
-        "ko": "14:00～17:00（定休日火曜・水曜）"
+        "zh": "14:00～17:00（周二・周三休息）",
+        "en": "14:00–17:00 (Closed Tue & Wed)",
+        "ko": "14:00~17:00(화·수 휴무)"
       },
       "fee_i18n": {
         "ja": "雑貨・駄菓子 100円〜",
@@ -32273,9 +32273,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "17:00～23:30（LO23:00）（定休日日曜）",
-        "zh": "17:00～23:30（LO23:00）（定休日日曜）",
-        "en": "17:00～23:30（LO23:00）（定休日日曜）",
-        "ko": "17:00～23:30（LO23:00）（定休日日曜）"
+        "zh": "17:00～23:30（最后点单23:00）（周日休息）",
+        "en": "17:00–23:30 (L.O. 23:00) (Closed Sun)",
+        "ko": "17:00~23:30(LO 23:00)(일요일 휴무)"
       },
       "fee_i18n": {
         "ja": "ディナー 3,000円前後（ダイニングバー）",
@@ -32347,9 +32347,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "14:00～20:00、土曜・日曜11:00～20:00（定休日月曜）",
-        "zh": "14:00～20:00、土曜・日曜11:00～20:00（定休日月曜）",
-        "en": "14:00～20:00、土曜・日曜11:00～20:00（定休日月曜）",
-        "ko": "14:00～20:00、土曜・日曜11:00～20:00（定休日月曜）"
+        "zh": "14:00～20:00、周六日11:00～20:00（周一休息）",
+        "en": "14:00–20:00, Sat–Sun 11:00–20:00 (Closed Mon)",
+        "ko": "14:00~20:00, 토·일 11:00~20:00(월요일 휴무)"
       },
       "fee_i18n": {
         "ja": "クラフトビール 600円〜",
@@ -33838,9 +33838,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "9:30～17:30（電話：9:00～17:00） ※事前に ホームページ から来店予約が必要（定休日不定休）",
-        "zh": "9:30～17:30（電話：9:00～17:00） ※事前に ホームページ から来店予約が必要（定休日不定休）",
-        "en": "9:30～17:30（電話：9:00～17:00） ※事前に ホームページ から来店予約が必要（定休日不定休）",
-        "ko": "9:30～17:30（電話：9:00～17:00） ※事前に ホームページ から来店予約が必要（定休日不定休）"
+        "zh": "9:30～17:30（电话受理9:00～17:00）※到店前需在官网预约（不定期休息）",
+        "en": "9:30–17:30 (phone 9:00–17:00) ※Reservation required via website before visiting (Irregular holidays)",
+        "ko": "9:30~17:30(전화 9:00~17:00) ※방문 전 홈페이지에서 예약 필요 (부정기 휴무)"
       },
       "fee_i18n": {
         "ja": "見学無料／ランドセル 68,000円〜",
@@ -33912,9 +33912,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "【月曜～土曜】10:00～21:00 【日曜】9:00～21:00（定休日不定休）",
-        "zh": "【月曜～土曜】10:00～21:00 【日曜】9:00～21:00（定休日不定休）",
-        "en": "【月曜～土曜】10:00～21:00 【日曜】9:00～21:00（定休日不定休）",
-        "ko": "【月曜～土曜】10:00～21:00 【日曜】9:00～21:00（定休日不定休）"
+        "zh": "【周一至周六】10:00～21:00 【周日】9:00～21:00（不定期休息）",
+        "en": "[Mon–Sat] 10:00–21:00 [Sun] 9:00–21:00 (Irregular holidays)",
+        "ko": "[월~토] 10:00~21:00 [일] 9:00~21:00(부정기 휴무)"
       },
       "fee_i18n": {
         "ja": "入場無料／お買い物実費",
@@ -33986,9 +33986,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "13:00〜20:00 詳しくは こちら（定休日日曜、火曜、木曜、土曜（臨時休業あり・月曜が祝日の場合は火曜休業） 詳しくは こちら）",
-        "zh": "13:00〜20:00 詳しくは こちら（定休日日曜、火曜、木曜、土曜（臨時休業あり・月曜が祝日の場合は火曜休業） 詳しくは こちら）",
-        "en": "13:00〜20:00 詳しくは こちら（定休日日曜、火曜、木曜、土曜（臨時休業あり・月曜が祝日の場合は火曜休業） 詳しくは こちら）",
-        "ko": "13:00〜20:00 詳しくは こちら（定休日日曜、火曜、木曜、土曜（臨時休業あり・月曜が祝日の場合は火曜休業） 詳しくは こちら）"
+        "zh": "13:00～20:00 详见此处（周日、周二、周四、周六休息（偶有临时休业・周一为节假日时周二休业）详见此处）",
+        "en": "13:00–20:00 (see link) (Closed Sun, Tue, Thu & Sat (occasional closures; if Mon is a holiday, Tue closed) see link)",
+        "ko": "13:00~20:00 자세한 내용은 여기(일·화·목·토 휴무(임시 휴업 있음·월요일이 공휴일이면 화요일 휴업) 자세한 내용은 여기)"
       },
       "fee_i18n": {
         "ja": "体験 2,500円〜／アクリル雑貨 500円〜",
@@ -34060,9 +34060,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "11:00~18:00（定休日月曜、火曜）",
-        "zh": "11:00~18:00（定休日月曜、火曜）",
-        "en": "11:00~18:00（定休日月曜、火曜）",
-        "ko": "11:00~18:00（定休日月曜、火曜）"
+        "zh": "11:00～18:00（周一・周二休息）",
+        "en": "11:00–18:00 (Closed Mon & Tue)",
+        "ko": "11:00~18:00(월·화 휴무)"
       },
       "fee_i18n": {
         "ja": "手芸雑貨 500円〜",
@@ -34134,9 +34134,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "10:00~18:00（定休日火曜（臨時休業あり））",
-        "zh": "10:00~18:00（定休日火曜（臨時休業あり））",
-        "en": "10:00~18:00（定休日火曜（臨時休業あり））",
-        "ko": "10:00~18:00（定休日火曜（臨時休業あり））"
+        "zh": "10:00～18:00（周二休息（偶有临时休业））",
+        "en": "10:00–18:00 (Closed Tuesdays (occasional closures))",
+        "ko": "10:00~18:00 (화요일 휴무(임시 휴업 있음))"
       },
       "fee_i18n": {
         "ja": "入場無料／ランドセル 75,000円〜",
@@ -34209,9 +34209,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "9:00～18:00（定休日日曜、祝日）",
-        "zh": "9:00～18:00（定休日日曜、祝日）",
-        "en": "9:00～18:00（定休日日曜、祝日）",
-        "ko": "9:00～18:00（定休日日曜、祝日）"
+        "zh": "9:00～18:00（周日・节假日休息）",
+        "en": "9:00–18:00 (Closed Sun & holidays)",
+        "ko": "9:00~18:00(일·공휴일 휴무)"
       },
       "fee_i18n": {
         "ja": "～999円前後（バームクーヘン）",
@@ -34283,9 +34283,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "13:00~24:00（変動あり） 詳しくはInstagram（ @baku_tokyo ）をご覧ください。（定休日火曜（臨時休業あり） 詳しくはInstagram（ @baku_tokyo ）をご覧ください。）",
-        "zh": "13:00~24:00（変動あり） 詳しくはInstagram（ @baku_tokyo ）をご覧ください。（定休日火曜（臨時休業あり） 詳しくはInstagram（ @baku_tokyo ）をご覧ください。）",
-        "en": "13:00~24:00（変動あり） 詳しくはInstagram（ @baku_tokyo ）をご覧ください。（定休日火曜（臨時休業あり） 詳しくはInstagram（ @baku_tokyo ）をご覧ください。）",
-        "ko": "13:00~24:00（変動あり） 詳しくはInstagram（ @baku_tokyo ）をご覧ください。（定休日火曜（臨時休業あり） 詳しくはInstagram（ @baku_tokyo ）をご覧ください。）"
+        "zh": "13:00～24:00（可能有变动）详见Instagram（@baku_tokyo）。（周二休息（偶有临时休业）详见Instagram（@baku_tokyo）。）",
+        "en": "13:00–24:00 (subject to change) See Instagram (@baku_tokyo). (Closed Tuesdays (occasional closures) See Instagram (@baku_tokyo).)",
+        "ko": "13:00~24:00(변동 있을 수 있음) 자세한 내용은 인스타그램(@baku_tokyo) 참조. (화요일 휴무(임시 휴업 있음) 자세한 내용은 인스타그램(@baku_tokyo) 참조.)"
       },
       "fee_i18n": {
         "ja": "予算 2,000円〜4,000円",
@@ -34358,9 +34358,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "ショールーム 9:30～18:00 カフェ [ランチ] 11:00～14:00 [ティータイム]14:00～17:30 (ラストオーダー17:00)（定休日日曜、祝日、GW、夏期・冬期休業）",
-        "zh": "ショールーム 9:30～18:00 カフェ [ランチ] 11:00～14:00 [ティータイム]14:00～17:30 (ラストオーダー17:00)（定休日日曜、祝日、GW、夏期・冬期休業）",
-        "en": "ショールーム 9:30～18:00 カフェ [ランチ] 11:00～14:00 [ティータイム]14:00～17:30 (ラストオーダー17:00)（定休日日曜、祝日、GW、夏期・冬期休業）",
-        "ko": "ショールーム 9:30～18:00 カフェ [ランチ] 11:00～14:00 [ティータイム]14:00～17:30 (ラストオーダー17:00)（定休日日曜、祝日、GW、夏期・冬期休業）"
+        "zh": "展厅9:30～18:00 咖啡[午餐]11:00～14:00 [下午茶]14:00～17:30（最后点单17:00）（周日、节假日、黄金周、夏季・冬季休业）",
+        "en": "Showroom 9:30–18:00 Café [lunch] 11:00–14:00 [tea time] 14:00–17:30 (last order 17:00) (Closed Sun, holidays, Golden Week & summer/winter breaks)",
+        "ko": "쇼룸 9:30~18:00 카페 [런치] 11:00~14:00 [티타임] 14:00~17:30(라스트 오더 17:00) (일요일·공휴일·골든위크·하계·동계 휴업)"
       },
       "fee_i18n": {
         "ja": "カフェ 1,000円前後（ドリンク 440円〜）",
@@ -34508,9 +34508,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "10:00〜17:00（だんごがなくなり次第閉店）",
-        "zh": "10:00〜17:00（だんごがなくなり次第閉店）",
-        "en": "10:00〜17:00（だんごがなくなり次第閉店）",
-        "ko": "10:00〜17:00（だんごがなくなり次第閉店）"
+        "zh": "10:00～17:00（团子售罄即闭店）",
+        "en": "10:00–17:00 (closes when the dango sells out)",
+        "ko": "10:00~17:00(당고 매진 시 폐점)"
       },
       "fee_i18n": {
         "ja": "みたらしだんご 1本150円〜",
@@ -34793,9 +34793,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "工房は月に数回（SNSで告知）、10:00〜15:00頃にオープン。その他マルシェ等で販売",
-        "zh": "工房は月に数回（SNSで告知）、10:00〜15:00頃にオープン。その他マルシェ等で販売",
-        "en": "工房は月に数回（SNSで告知）、10:00〜15:00頃にオープン。その他マルシェ等で販売",
-        "ko": "工房は月に数回（SNSで告知）、10:00〜15:00頃にオープン。その他マルシェ等で販売"
+        "zh": "工房每月开放数次（SNS通知），10:00～15:00左右营业。也在集市等处售卖。",
+        "en": "Workshop opens a few times a month (announced on SNS), around 10:00–15:00. Also sold at markets and more.",
+        "ko": "공방은 월 몇 회(SNS로 공지) 10:00~15:00쯤 오픈. 그 외 마르쉐 등에서도 판매."
       },
       "fee_i18n": {
         "ja": "マフィン 400円前後",
@@ -35223,9 +35223,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "9:00～18:00 （売切れ次第終了）",
-        "zh": "9:00～18:00 （売切れ次第終了）",
-        "en": "9:00～18:00 （売切れ次第終了）",
-        "ko": "9:00～18:00 （売切れ次第終了）"
+        "zh": "9:00～18:00（售罄即止）",
+        "en": "9:00–18:00 (closes when sold out)",
+        "ko": "9:00~18:00(매진 시 마감)"
       },
       "fee_i18n": {
         "ja": "槍かけだんご 1本130円前後",
@@ -35294,9 +35294,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "11:00～14:30（土は11:00～14:30・17:00～19:45、日は11:00～14:30・17:00～19:30）",
-        "zh": "11:00～14:30（土は11:00～14:30・17:00～19:45、日は11:00～14:30・17:00～19:30）",
-        "en": "11:00～14:30（土は11:00～14:30・17:00～19:45、日は11:00～14:30・17:00～19:30）",
-        "ko": "11:00～14:30（土は11:00～14:30・17:00～19:45、日は11:00～14:30・17:00～19:30）"
+        "zh": "11:00～14:30（周六11:00～14:30・17:00～19:45、周日11:00～14:30・17:00～19:30）",
+        "en": "11:00–14:30 (Sat 11:00–14:30 & 17:00–19:45, Sun 11:00–14:30 & 17:00–19:30)",
+        "ko": "11:00~14:30(토 11:00~14:30·17:00~19:45, 일 11:00~14:30·17:00~19:30)"
       },
       "fee_i18n": {
         "ja": "中華そば 800円前後",
@@ -35434,9 +35434,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "11:30～14:30（最終入店13:00）、18:00～最終入店20:00",
-        "zh": "11:30～14:30（最終入店13:00）、18:00～最終入店20:00",
-        "en": "11:30～14:30（最終入店13:00）、18:00～最終入店20:00",
-        "ko": "11:30～14:30（最終入店13:00）、18:00～最終入店20:00"
+        "zh": "11:30～14:30（最后入店13:00）、18:00～最后入店20:00",
+        "en": "11:30–14:30 (last seating 13:00), 18:00–20:00 (last seating)",
+        "ko": "11:30~14:30(최종 입점 13:00), 18:00~최종 입점 20:00"
       },
       "fee_i18n": {
         "ja": "ランチ 3,000円前後 / ディナー 6,000円前後",
@@ -35576,9 +35576,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "10:30〜18:30／遊葉茶房10:30〜18:30（LO18:00）",
-        "zh": "10:30〜18:30／遊葉茶房10:30〜18:30（LO18:00）",
-        "en": "10:30〜18:30／遊葉茶房10:30〜18:30（LO18:00）",
-        "ko": "10:30〜18:30／遊葉茶房10:30〜18:30（LO18:00）"
+        "zh": "10:30～18:30／游叶茶房10:30～18:30（最后点单18:00）",
+        "en": "10:30–18:30 / Yuha Tea Room 10:30–18:30 (L.O. 18:00)",
+        "ko": "10:30~18:30／유하 찻집 10:30~18:30(LO 18:00)"
       },
       "fee_i18n": {
         "ja": "日本茶 600円前後～",
@@ -35717,9 +35717,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "12:00～17:00（LO16:15）、土曜・日曜・祝日～22:00（LO21:15）",
-        "zh": "12:00～17:00（LO16:15）、土曜・日曜・祝日～22:00（LO21:15）",
-        "en": "12:00～17:00（LO16:15）、土曜・日曜・祝日～22:00（LO21:15）",
-        "ko": "12:00～17:00（LO16:15）、土曜・日曜・祝日～22:00（LO21:15）"
+        "zh": "12:00～17:00（最后点单16:15）、周六日节假日～22:00（最后点单21:15）",
+        "en": "12:00–17:00 (L.O. 16:15), Sat/Sun/holidays until 22:00 (L.O. 21:15)",
+        "ko": "12:00~17:00(LO 16:15), 토·일·공휴일 ~22:00(LO 21:15)"
       },
       "fee_i18n": {
         "ja": "日本茶ドリンク 700円前後～",
@@ -35927,9 +35927,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "16:30～23:30（料理LO22:15、ドリンクLO23:00）、金曜・土曜・祝前日16:30～24:00（料理ＬＯ22:45、ドリンクＬＯ23:30）",
-        "zh": "16:30～23:30（料理LO22:15、ドリンクLO23:00）、金曜・土曜・祝前日16:30～24:00（料理ＬＯ22:45、ドリンクＬＯ23:30）",
-        "en": "16:30～23:30（料理LO22:15、ドリンクLO23:00）、金曜・土曜・祝前日16:30～24:00（料理ＬＯ22:45、ドリンクＬＯ23:30）",
-        "ko": "16:30～23:30（料理LO22:15、ドリンクLO23:00）、金曜・土曜・祝前日16:30～24:00（料理ＬＯ22:45、ドリンクＬＯ23:30）"
+        "zh": "16:30～23:30（餐食最后点单22:15、饮品最后点单23:00）、周五六・节假日前日16:30～24:00（餐食最后点单22:45、饮品最后点单23:30）",
+        "en": "16:30–23:30 (food L.O. 22:15, drinks L.O. 23:00); Fri/Sat/day before holiday 16:30–24:00 (food L.O. 22:45, drinks L.O. 23:30)",
+        "ko": "16:30~23:30(푸드 LO 22:15, 드링크 LO 23:00), 금·토·공휴일 전날 16:30~24:00(푸드 LO 22:45, 드링크 LO 23:30)"
       },
       "fee_i18n": {
         "ja": "予算 3,000円〜4,000円",
@@ -35997,9 +35997,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "11:00〜21:00（餃子がなくなり次第終了）",
-        "zh": "11:00〜21:00（餃子がなくなり次第終了）",
-        "en": "11:00〜21:00（餃子がなくなり次第終了）",
-        "ko": "11:00〜21:00（餃子がなくなり次第終了）"
+        "zh": "11:00～21:00（饺子售罄即结束）",
+        "en": "11:00–21:00 (closes when the gyoza sells out)",
+        "ko": "11:00~21:00(교자 매진 시 마감)"
       },
       "fee_i18n": {
         "ja": "焼餃子 500円前後",
@@ -36137,9 +36137,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "9:00〜20:00（フードは～17:00）",
-        "zh": "9:00〜20:00（フードは～17:00）",
-        "en": "9:00〜20:00（フードは～17:00）",
-        "ko": "9:00〜20:00（フードは～17:00）"
+        "zh": "9:00～20:00（餐食至17:00）",
+        "en": "9:00–20:00 (food until 17:00)",
+        "ko": "9:00~20:00(푸드는 ~17:00)"
       },
       "fee_i18n": {
         "ja": "プリン 500円前後",
@@ -36207,9 +36207,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "8:00〜11:00／12:00〜17:30（土曜・日曜・祝日10:00〜17:00）",
-        "zh": "8:00〜11:00／12:00〜17:30（土曜・日曜・祝日10:00〜17:00）",
-        "en": "8:00〜11:00／12:00〜17:30（土曜・日曜・祝日10:00〜17:00）",
-        "ko": "8:00〜11:00／12:00〜17:30（土曜・日曜・祝日10:00〜17:00）"
+        "zh": "8:00～11:00／12:00～17:30（周六日节假日10:00～17:00）",
+        "en": "8:00–11:00 / 12:00–17:30 (Sat/Sun/holidays 10:00–17:00)",
+        "ko": "8:00~11:00／12:00~17:30(토·일·공휴일 10:00~17:00)"
       },
       "fee_i18n": {
         "ja": "プリン 600円前後",
@@ -36419,9 +36419,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "12:00〜13:00（平日のみ）、17:00〜22:00",
-        "zh": "12:00〜13:00（平日のみ）、17:00〜22:00",
-        "en": "12:00〜13:00（平日のみ）、17:00〜22:00",
-        "ko": "12:00〜13:00（平日のみ）、17:00〜22:00"
+        "zh": "12:00～13:00（仅平日）、17:00～22:00",
+        "en": "12:00–13:00 (weekdays only), 17:00–22:00",
+        "ko": "12:00~13:00(평일만), 17:00~22:00"
       },
       "fee_i18n": {
         "ja": "にぎり 一貫 300円前後～",
@@ -36490,9 +36490,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "16:00〜24:00（料理LO23:00、ドリンクLO23:30）、",
-        "zh": "16:00〜24:00（料理LO23:00、ドリンクLO23:30）、",
-        "en": "16:00〜24:00（料理LO23:00、ドリンクLO23:30）、",
-        "ko": "16:00〜24:00（料理LO23:00、ドリンクLO23:30）、"
+        "zh": "16:00～24:00（餐食最后点单23:00、饮品最后点单23:30）",
+        "en": "16:00–24:00 (food L.O. 23:00, drinks L.O. 23:30)",
+        "ko": "16:00~24:00(푸드 LO 23:00, 드링크 LO 23:30)"
       },
       "fee_i18n": {
         "ja": "寿司コース 4,000円前後～",
@@ -36560,9 +36560,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "11:30～15:00（LO14:30）、17:00〜翌2:00（LO翌1:30）※日曜・祝日は〜22:00（LO21:00）",
-        "zh": "11:30～15:00（LO14:30）、17:00〜翌2:00（LO翌1:30）※日曜・祝日は〜22:00（LO21:00）",
-        "en": "11:30～15:00（LO14:30）、17:00〜翌2:00（LO翌1:30）※日曜・祝日は〜22:00（LO21:00）",
-        "ko": "11:30～15:00（LO14:30）、17:00〜翌2:00（LO翌1:30）※日曜・祝日は〜22:00（LO21:00）"
+        "zh": "11:30～15:00（最后点单14:30）、17:00～次日2:00（最后点单次日1:30）※周日・节假日营业至22:00（最后点单21:00）",
+        "en": "11:30–15:00 (L.O. 14:30), 17:00–2:00 a.m. (L.O. 1:30 a.m.) ※Sun/holidays until 22:00 (L.O. 21:00)",
+        "ko": "11:30~15:00(LO 14:30), 17:00~다음 날 2:00(LO 다음 날 1:30) ※일·공휴일은 ~22:00(LO 21:00)"
       },
       "fee_i18n": {
         "ja": "ランチ 1,210円～／一貫300〜500円台",
@@ -36702,9 +36702,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "17:00 ～ 22:00（LO料理21:00、ドリンク21:30）",
-        "zh": "17:00 ～ 22:00（LO料理21:00、ドリンク21:30）",
-        "en": "17:00 ～ 22:00（LO料理21:00、ドリンク21:30）",
-        "ko": "17:00 ～ 22:00（LO料理21:00、ドリンク21:30）"
+        "zh": "17:00～22:00（餐食最后点单21:00、饮品21:30）",
+        "en": "17:00–22:00 (food L.O. 21:00, drinks 21:30)",
+        "ko": "17:00~22:00(푸드 LO 21:00, 드링크 21:30)"
       },
       "fee_i18n": {
         "ja": "料理 800円前後～／宿泊 相部屋",
@@ -36844,9 +36844,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "11:30〜13:30（LO）※ネタがなくなり次第終了／17:00〜22:00（LO21:30） ※席は２時間制（土曜は17:00〜19:00 、19:20〜21:20の2部制）",
-        "zh": "11:30〜13:30（LO）※ネタがなくなり次第終了／17:00〜22:00（LO21:30） ※席は２時間制（土曜は17:00〜19:00 、19:20〜21:20の2部制）",
-        "en": "11:30〜13:30（LO）※ネタがなくなり次第終了／17:00〜22:00（LO21:30） ※席は２時間制（土曜は17:00〜19:00 、19:20〜21:20の2部制）",
-        "ko": "11:30〜13:30（LO）※ネタがなくなり次第終了／17:00〜22:00（LO21:30） ※席は２時間制（土曜は17:00〜19:00 、19:20〜21:20の2部制）"
+        "zh": "11:30～13:30（最后点单）※食材售罄即结束／17:00～22:00（最后点单21:30）※座位限时2小时（周六分17:00～19:00、19:20～21:20两部）",
+        "en": "11:30–13:30 (L.O.) ※closes when the toppings run out / 17:00–22:00 (L.O. 21:30) ※2-hour seating (Sat in two seatings: 17:00–19:00 & 19:20–21:20)",
+        "ko": "11:30~13:30(LO) ※네타(토핑) 매진 시 마감 / 17:00~22:00(LO 21:30) ※좌석 2시간제(토요일은 17:00~19:00, 19:20~21:20 2부제)"
       },
       "fee_i18n": {
         "ja": "ランチ 2,000円前後 / ディナー 6,000円前後",
@@ -36915,9 +36915,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "11:30〜14:00（木曜・日曜のみ）、17:00〜23:00",
-        "zh": "11:30〜14:00（木曜・日曜のみ）、17:00〜23:00",
-        "en": "11:30〜14:00（木曜・日曜のみ）、17:00〜23:00",
-        "ko": "11:30〜14:00（木曜・日曜のみ）、17:00〜23:00"
+        "zh": "11:30～14:00（仅周四、周日）、17:00～23:00",
+        "en": "11:30–14:00 (Thu & Sun only), 17:00–23:00",
+        "ko": "11:30~14:00(목·일만), 17:00~23:00"
       },
       "fee_i18n": {
         "ja": "きりたんぽ鍋 3,000円前後～",
@@ -36986,9 +36986,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "17:00〜24:00（予約がない場合は21:00閉店の日もあり）",
-        "zh": "17:00〜24:00（予約がない場合は21:00閉店の日もあり）",
-        "en": "17:00〜24:00（予約がない場合は21:00閉店の日もあり）",
-        "ko": "17:00〜24:00（予約がない場合は21:00閉店の日もあり）"
+        "zh": "17:00～24:00（无预约时也有21:00闭店的日子）",
+        "en": "17:00–24:00 (may close at 21:00 on days without reservations)",
+        "ko": "17:00~24:00(예약이 없으면 21:00에 닫는 날도 있음)"
       },
       "fee_i18n": {
         "ja": "ちゃんこ鍋 3,500円前後～",
@@ -37129,9 +37129,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "10:30〜22:30、土曜・日曜・祝日8:00〜22:30",
-        "zh": "10:30〜22:30、土曜・日曜・祝日8:00〜22:30",
-        "en": "10:30〜22:30、土曜・日曜・祝日8:00〜22:30",
-        "ko": "10:30〜22:30、土曜・日曜・祝日8:00〜22:30"
+        "zh": "10:30～22:30、周六日节假日8:00～22:30",
+        "en": "10:30–22:30, Sat/Sun/holidays 8:00–22:30",
+        "ko": "10:30~22:30, 토·일·공휴일 8:00~22:30"
       },
       "fee_i18n": {
         "ja": "から揚げ定食 950円前後",
@@ -37200,9 +37200,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "11:00〜14:30(LO14:00)、17:00〜19:00(LO18:30) ※売り切れ次第終了。営業時間の変更はインスタグラムのストーリー参照",
-        "zh": "11:00〜14:30(LO14:00)、17:00〜19:00(LO18:30) ※売り切れ次第終了。営業時間の変更はインスタグラムのストーリー参照",
-        "en": "11:00〜14:30(LO14:00)、17:00〜19:00(LO18:30) ※売り切れ次第終了。営業時間の変更はインスタグラムのストーリー参照",
-        "ko": "11:00〜14:30(LO14:00)、17:00〜19:00(LO18:30) ※売り切れ次第終了。営業時間の変更はインスタグラムのストーリー参照"
+        "zh": "11:00～14:30（最后点单14:00）、17:00～19:00（最后点单18:30）※售罄即结束。营业时间变更详见Instagram动态",
+        "en": "11:00–14:30 (L.O. 14:00), 17:00–19:00 (L.O. 18:30) ※closes when sold out; changes announced on Instagram Stories",
+        "ko": "11:00~14:30(LO 14:00), 17:00~19:00(LO 18:30) ※매진 시 마감. 영업시간 변경은 인스타그램 스토리 참조"
       },
       "fee_i18n": {
         "ja": "定食 950円前後",
@@ -37271,9 +37271,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "11:00〜22:00(LO21:30)、火曜・木曜11:00〜15:00、17:00〜22:00(LO21:30)",
-        "zh": "11:00〜22:00(LO21:30)、火曜・木曜11:00〜15:00、17:00〜22:00(LO21:30)",
-        "en": "11:00〜22:00(LO21:30)、火曜・木曜11:00〜15:00、17:00〜22:00(LO21:30)",
-        "ko": "11:00〜22:00(LO21:30)、火曜・木曜11:00〜15:00、17:00〜22:00(LO21:30)"
+        "zh": "11:00～22:00（最后点单21:30）、周二・周四11:00～15:00、17:00～22:00（最后点单21:30）",
+        "en": "11:00–22:00 (L.O. 21:30); Tue & Thu 11:00–15:00, 17:00–22:00 (L.O. 21:30)",
+        "ko": "11:00~22:00(LO 21:30), 화·목 11:00~15:00, 17:00~22:00(LO 21:30)"
       },
       "fee_i18n": {
         "ja": "定食 1,000円前後～",
@@ -37342,9 +37342,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "8:00〜19:00（土曜・日曜〜15:00、売り切れ次第終了）",
-        "zh": "8:00〜19:00（土曜・日曜〜15:00、売り切れ次第終了）",
-        "en": "8:00〜19:00（土曜・日曜〜15:00、売り切れ次第終了）",
-        "ko": "8:00〜19:00（土曜・日曜〜15:00、売り切れ次第終了）"
+        "zh": "8:00～19:00（周六日至15:00，售罄即止）",
+        "en": "8:00–19:00 (Sat–Sun until 15:00; closes when sold out)",
+        "ko": "8:00~19:00(토·일은 ~15:00, 매진 시 마감)"
       },
       "fee_i18n": {
         "ja": "パン 200円前後～",
@@ -37413,9 +37413,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "11:00〜19:00（売り切れ次第終了）",
-        "zh": "11:00〜19:00（売り切れ次第終了）",
-        "en": "11:00〜19:00（売り切れ次第終了）",
-        "ko": "11:00〜19:00（売り切れ次第終了）"
+        "zh": "11:00～19:00（售罄即止）",
+        "en": "11:00–19:00 (closes when sold out)",
+        "ko": "11:00~19:00(매진 시 마감)"
       },
       "fee_i18n": {
         "ja": "ベーグル 380円〜",
@@ -37485,9 +37485,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "15:00〜24:00(フードLO23:00)",
-        "zh": "15:00〜24:00(フードLO23:00)",
-        "en": "15:00〜24:00(フードLO23:00)",
-        "ko": "15:00〜24:00(フードLO23:00)"
+        "zh": "15:00～24:00（餐食最后点单23:00）",
+        "en": "15:00–24:00 (food L.O. 23:00)",
+        "ko": "15:00~24:00(푸드 LO 23:00)"
       },
       "fee_i18n": {
         "ja": "天ぷら 1品100円～",
@@ -37556,9 +37556,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "19:00〜翌3:00",
-        "zh": "19:00〜翌3:00",
-        "en": "19:00〜翌3:00",
-        "ko": "19:00〜翌3:00"
+        "zh": "19:00～次日3:00",
+        "en": "19:00–3:00 a.m.",
+        "ko": "19:00~다음 날 3:00"
       },
       "fee_i18n": {
         "ja": "酎ハイ 500円前後～",
@@ -37628,9 +37628,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "月曜～土曜・祝前日14:00〜23:00（LO22:00）、日曜・祝日13:00〜22:00（LO21:00）※テイクアウトは閉店まで可",
-        "zh": "月曜～土曜・祝前日14:00〜23:00（LO22:00）、日曜・祝日13:00〜22:00（LO21:00）※テイクアウトは閉店まで可",
-        "en": "月曜～土曜・祝前日14:00〜23:00（LO22:00）、日曜・祝日13:00〜22:00（LO21:00）※テイクアウトは閉店まで可",
-        "ko": "月曜～土曜・祝前日14:00〜23:00（LO22:00）、日曜・祝日13:00〜22:00（LO21:00）※テイクアウトは閉店まで可"
+        "zh": "周一至周六・节假日前日14:00～23:00（最后点单22:00）、周日・节假日13:00～22:00（最后点单21:00）※外带可至闭店",
+        "en": "Mon–Sat & day before holiday 14:00–23:00 (L.O. 22:00), Sun/holidays 13:00–22:00 (L.O. 21:00) ※Takeout until closing",
+        "ko": "월~토·공휴일 전날 14:00~23:00(LO 22:00), 일·공휴일 13:00~22:00(LO 21:00) ※테이크아웃은 폐점까지 가능"
       },
       "fee_i18n": {
         "ja": "クラフトビール 700円前後",
@@ -37699,9 +37699,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "15:00〜23:00、土曜・日曜・祝日13:00〜23:00",
-        "zh": "15:00〜23:00、土曜・日曜・祝日13:00〜23:00",
-        "en": "15:00〜23:00、土曜・日曜・祝日13:00〜23:00",
-        "ko": "15:00〜23:00、土曜・日曜・祝日13:00〜23:00"
+        "zh": "15:00～23:00、周六日节假日13:00～23:00",
+        "en": "15:00–23:00, Sat/Sun/holidays 13:00–23:00",
+        "ko": "15:00~23:00, 토·일·공휴일 13:00~23:00"
       },
       "fee_i18n": {
         "ja": "予算 2,000円〜3,000円",
@@ -37770,9 +37770,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "18:00～翌2:00(LO翌1:30)",
-        "zh": "18:00～翌2:00(LO翌1:30)",
-        "en": "18:00～翌2:00(LO翌1:30)",
-        "ko": "18:00～翌2:00(LO翌1:30)"
+        "zh": "18:00～次日2:00（最后点单次日1:30）",
+        "en": "18:00–2:00 a.m. (L.O. 1:30 a.m.)",
+        "ko": "18:00~다음 날 2:00(LO 다음 날 1:30)"
       },
       "fee_i18n": {
         "ja": "予算 2,000円〜3,000円",
@@ -37841,9 +37841,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "16:00～翌1:00",
-        "zh": "16:00～翌1:00",
-        "en": "16:00～翌1:00",
-        "ko": "16:00～翌1:00"
+        "zh": "16:00～次日1:00",
+        "en": "16:00–1:00 a.m.",
+        "ko": "16:00~다음 날 1:00"
       },
       "fee_i18n": {
         "ja": "チャージ300円／カクテル1,200円前後～",
@@ -37912,9 +37912,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "19:00～翌3:00（LO翌2:30）",
-        "zh": "19:00～翌3:00（LO翌2:30）",
-        "en": "19:00～翌3:00（LO翌2:30）",
-        "ko": "19:00～翌3:00（LO翌2:30）"
+        "zh": "19:00～次日3:00（最后点单次日2:30）",
+        "en": "19:00–3:00 a.m. (L.O. 2:30 a.m.)",
+        "ko": "19:00~다음 날 3:00(LO 다음 날 2:30)"
       },
       "fee_i18n": {
         "ja": "チャージ600円＋サービス料10％／カクテル1,200円前後～",
@@ -37985,9 +37985,9 @@ window.RAILWAY_TOURISM = {
       },
       "hours_i18n": {
         "ja": "18:00〜翌2:00 （LO翌1:30)、金曜・土曜18:00〜翌4:00 (LO翌3:30)",
-        "zh": "18:00〜翌2:00 （LO翌1:30)、金曜・土曜18:00〜翌4:00 (LO翌3:30)",
-        "en": "18:00〜翌2:00 （LO翌1:30)、金曜・土曜18:00〜翌4:00 (LO翌3:30)",
-        "ko": "18:00〜翌2:00 （LO翌1:30)、金曜・土曜18:00〜翌4:00 (LO翌3:30)"
+        "zh": "18:00～次日2:00（最后点单次日1:30）、周五六18:00～次日4:00（最后点单次日3:30）",
+        "en": "18:00–2:00 a.m. (L.O. 1:30 a.m.); Fri–Sat 18:00–4:00 a.m. (L.O. 3:30 a.m.)",
+        "ko": "18:00~다음 날 2:00(LO 다음 날 1:30), 금·토 18:00~다음 날 4:00(LO 다음 날 3:30)"
       },
       "fee_i18n": {
         "ja": "チャージ300円／カクテル1,100円前後～",
