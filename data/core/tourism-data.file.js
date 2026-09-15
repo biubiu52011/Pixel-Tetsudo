@@ -7449,7 +7449,7 @@ window.RAILWAY_TOURISM = {
         ]
       },
       "image": "../images/観光地/日本橋.jpg",
-      "address": "東京都中央区日本橋室町一丁目"
+      "address": "東京都中央区日本橋1-1"
     },
     {
       "name": "東京タワー",
@@ -8364,7 +8364,7 @@ window.RAILWAY_TOURISM = {
         ]
       },
       "image": "../images/観光地/品川神社.jpg",
-      "address": "東京都品川区北品川四丁目"
+      "address": "東京都品川区北品川3-7-15"
     },
     {
       "name": "目黒川（桜並木）",
@@ -8517,7 +8517,7 @@ window.RAILWAY_TOURISM = {
         ]
       },
       "image": "../images/観光地/目黒不動尊.jpg",
-      "address": "東京都目黒区下目黒一丁目3"
+      "address": "東京都目黒区下目黒3-20-26"
     },
     {
       "name": "池上本門寺",
@@ -8670,7 +8670,7 @@ window.RAILWAY_TOURISM = {
         ]
       },
       "image": "../images/観光地/羽田空港.jpg",
-      "address": "東京都大田区羽田空港"
+      "address": "東京都大田区羽田空港3-3-2"
     },
     {
       "name": "下北沢",
@@ -9204,7 +9204,7 @@ window.RAILWAY_TOURISM = {
         ]
       },
       "image": "../images/観光地/都電荒川線.jpg",
-      "address": "東京都荒川区南千住五丁目"
+      "address": "東京都荒川区南千住1-12-6"
     },
     {
       "name": "飛鳥山公園",
@@ -11343,7 +11343,7 @@ window.RAILWAY_TOURISM = {
         ]
       },
       "image": "../images/観光地/巣鴨地蔵通り商店街.jpg",
-      "address": "東京都豊島区巣鴨一丁目"
+      "address": "東京都豊島区巣鴨3-4丁目"
     },
     {
       "name": "戸越銀座商店街",
@@ -11419,7 +11419,7 @@ window.RAILWAY_TOURISM = {
         ]
       },
       "image": "../images/観光地/戸越銀座商店街.jpg",
-      "address": "東京都品川区戸越一丁目"
+      "address": "東京都品川区戸越・平塚・豊町"
     },
     {
       "name": "砂町銀座商店街",
@@ -11571,7 +11571,7 @@ window.RAILWAY_TOURISM = {
         ]
       },
       "image": "../images/観光地/高円寺純情商店街.jpg",
-      "address": "東京都杉並区高円寺南四丁目"
+      "address": "東京都杉並区高円寺北3丁目"
     },
     {
       "name": "十条銀座商店街",
@@ -11647,7 +11647,7 @@ window.RAILWAY_TOURISM = {
         ]
       },
       "image": "../images/観光地/十条銀座商店街.jpg",
-      "address": "東京都北区上十条一丁目"
+      "address": "東京都北区十条仲原1-4-8"
     },
     {
       "name": "自由が丘",
@@ -13306,7 +13306,7 @@ window.RAILWAY_TOURISM = {
           "일본 최대·매매 점유율 약 90% 시장."
         ]
       },
-      "address": "東京都中央区日本橋兜町1"
+      "address": "東京都中央区日本橋兜町2-1"
     },
     {
       "name": "木挽町よしや",
@@ -18824,7 +18824,7 @@ window.RAILWAY_TOURISM = {
           "일반 재판 참관으로도 방문 가능"
         ]
       },
-      "address": "東京都千代田区隼町2"
+      "address": "東京都千代田区隼町4-2"
     },
     {
       "name": "江戸うさぎ",
@@ -28258,7 +28258,7 @@ window.RAILWAY_TOURISM = {
           "만지며 배우기."
         ]
       },
-      "address": "東京都千代田区北の丸公園1"
+      "address": "東京都千代田区北の丸公園2-1"
     },
     {
       "name": "みやびカタックダンスアカデミー",
