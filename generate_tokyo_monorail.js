@@ -39,16 +39,33 @@ function generateTimetable(startHour, startMinute, endHour, endMinute, rapidRati
       const station = stations[j];
       const timeStr = `${String(Math.floor(currentMinute / 60)).padStart(2, '0')}:${String(currentMinute % 60).padStart(2, '0')}`;
       
-      if (j === stations.length - 1) {
+      if (j === 0) {
+        // 起点站：只有发车时间
+        downTimetableObject.push({
+          "odpt:station": station.id,
+          "odpt:departureTime": timeStr
+        });
+      } else if (j === stations.length - 1) {
+        // 终点站：只有到达时间
         downTimetableObject.push({
           "odpt:station": station.id,
           "odpt:arrivalTime": timeStr
         });
       } else {
+        // 中间站：到达时间 + 停站1分钟后发车时间
+        const arrivalTimeStr = timeStr;
+        const departureMinute = currentMinute + 1;
+        const departureTimeStr = `${String(Math.floor(departureMinute / 60)).padStart(2, '0')}:${String(departureMinute % 60).padStart(2, '0')}`;
         downTimetableObject.push({
           "odpt:station": station.id,
-          "odpt:departureTime": timeStr
+          "odpt:arrivalTime": arrivalTimeStr,
+          "odpt:departureTime": departureTimeStr
         });
+        currentMinute += 1; // 停站1分钟
+      }
+      
+      // 加上运行时间到下一站
+      if (j < stations.length - 1) {
         currentMinute += travelTimes[j];
       }
     }
@@ -76,16 +93,33 @@ function generateTimetable(startHour, startMinute, endHour, endMinute, rapidRati
       const station = stations[j];
       const timeStr = `${String(Math.floor(upCurrentMinute / 60)).padStart(2, '0')}:${String(upCurrentMinute % 60).padStart(2, '0')}`;
       
-      if (j === 0) {
+      if (j === stations.length - 1) {
+        // 起点站（羽田机场）：只有发车时间
+        upTimetableObject.push({
+          "odpt:station": station.id,
+          "odpt:departureTime": timeStr
+        });
+      } else if (j === 0) {
+        // 终点站（浜松町）：只有到达时间
         upTimetableObject.push({
           "odpt:station": station.id,
           "odpt:arrivalTime": timeStr
         });
       } else {
+        // 中间站：到达时间 + 停站1分钟后发车时间
+        const arrivalTimeStr = timeStr;
+        const departureMinute = upCurrentMinute + 1;
+        const departureTimeStr = `${String(Math.floor(departureMinute / 60)).padStart(2, '0')}:${String(departureMinute % 60).padStart(2, '0')}`;
         upTimetableObject.push({
           "odpt:station": station.id,
-          "odpt:departureTime": timeStr
+          "odpt:arrivalTime": arrivalTimeStr,
+          "odpt:departureTime": departureTimeStr
         });
+        upCurrentMinute += 1; // 停站1分钟
+      }
+      
+      // 加上运行时间到下一站（往浜松町方向）
+      if (j > 0) {
         upCurrentMinute += travelTimes[j - 1];
       }
     }
