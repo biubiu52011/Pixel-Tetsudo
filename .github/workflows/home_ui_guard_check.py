@@ -7,8 +7,12 @@ CP = os.path.join(REPO_ROOT, 'data', 'core', 'railway_data.json')
 TP = os.path.join(REPO_ROOT, 'data', 'core', 'translations.js')
 
 def sha256_file(p):
+    # 改行正規化（\r\n -> \n）で比較: .gitattributes は * text eol=lf のため
+    # CI チェックアウトは LF、ローカル作業ツリーは CRLF 混在となり得る。
+    # 生バイト比較だと同じ内容でもローカル/CI で SHA が食い違い誤検知する。
     with open(p, 'rb') as f:
-        return hashlib.sha256(f.read()).hexdigest()
+        data = f.read().replace(b'\r\n', b'\n')
+        return hashlib.sha256(data).hexdigest()
 
 def find_home_files():
     result = []

@@ -2,7 +2,7 @@
   "version": "4.3.500+",
   "created_at": "2026-08-27T05:16:56.717180",
   "canonical_file": "data/core/railway_data.json",
-  "canonical_sha256": "FC68C1F3AB8BE9C2331A9F954CFB83A9566071CE04A549D5CD9B0E0EB3A07783",
+  "canonical_sha256": "7974A2940E0C25AAD051BC6BE1E1B52DBCECD8E20345B07F582DE74C0F70C359",
   "git_head": "51ddb44",
   "entity_counts": {
     "lines": 166,
@@ -10,8 +10,8 @@
     "name_map": 1630,
     "stationLines": 2504,
     "lineStationOrder": 166,
-    "tourism_stations": 16,
-    "tourism_spots": 519
+    "tourism_stations": 134,
+    "tourism_spots": 517
   },
   "relation_counts": {
     "stationLines_total_refs": 3065,
@@ -2410,7 +2410,7 @@
   },
   "file_note": "Committed LF format SHA (git autocrlf normalizes CRLF on checkout)",
   "last_updated": "2026-09-15",
-  "task": "部署上线前 baseline 同步（官方東京モノレール時刻表849班 + 关系一致性修复34处）",
+  "task": "ゆりかもめ手動時刻表 deploy に伴う baseline 同期",
   "head": "3aa9f16",
-  "note": "2026-09-15: baseline 同步至当前权威状态。①東京モノレール真实时刻表重建(849班, 2026-03-14改正) ②ci_guard_check.py 修复 stationLines 格式解析 bug 后首次真正运行, 暴露35处历史关系不一致, 已修34处(换乘归属缺失/ID拼写错位: Makuta->Uma_Kita, RikutsuWest sl对齐), 剩 Shizu-Suigun 待核 ③tourism 数据已迁移至 data/core/tourism_data.json 独立文件, 计数同步。"
+  "note": "tourism データ現状同期: 出口データ補完(e57ed40/971d1f6)で station_exits=134, PostCoffee 同店双条削除(902308c)で spots=517。"
 }
