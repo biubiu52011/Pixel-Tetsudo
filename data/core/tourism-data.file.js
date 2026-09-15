@@ -10807,7 +10807,7 @@ window.RAILWAY_TOURISM = {
         ]
       },
       "image": "../images/観光地/光が丘公園.jpg",
-      "address": "東京都練馬区"
+      "address": "東京都練馬区光が丘4-1-1"
     },
     {
       "name": "王子稲荷神社",
@@ -19725,7 +19725,7 @@ window.RAILWAY_TOURISM = {
           "항시 대기, 국물 소진 시 조기 마감"
         ]
       },
-      "address": "東京都板橋区"
+      "address": "東京都練馬区旭町3-25-2"
     },
     {
       "name": "ゲーセンミカド",
@@ -36336,7 +36336,7 @@ window.RAILWAY_TOURISM = {
           "테이블 태블릿 주문"
         ]
       },
-      "address": "東京都足立区"
+      "address": "東京都足立区竹の塚6-10-8"
     },
     {
       "name": "ジャギ飯店",
