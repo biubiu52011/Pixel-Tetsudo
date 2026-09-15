@@ -278,7 +278,7 @@
         "Kururi": "JR-East",
         "Marunouchi": "TokyoMetro",
         "MarunouchiBranch": "TokyoMetro",
-        "MinatoMirai": "MIR",
+        "MinatoMirai": "MinatoMirai",
         "Mita": "Toei",
         "Mito": "JR-East",
         "Miyo": "JR-East",
