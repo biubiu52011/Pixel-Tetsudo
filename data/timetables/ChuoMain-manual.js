@@ -37,6 +37,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "05:59",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "05:59"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "06:17",
+    "estimated": true
    }
   ]
  },
@@ -123,6 +128,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
    {
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "07:05"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "07:23",
+    "estimated": true
    }
   ]
  },
@@ -171,6 +181,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
    {
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "07:20"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "07:38",
+    "estimated": true
    }
   ]
  },
@@ -347,6 +362,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "07:34",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "07:35"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "07:53",
+    "estimated": true
    }
   ]
  },
@@ -517,6 +537,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "08:04",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "08:07"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "08:25",
+    "estimated": true
    }
   ]
  },
@@ -673,6 +698,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "08:13",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "08:13"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "08:31",
+    "estimated": true
    }
   ]
  },
@@ -731,6 +761,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
    {
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "08:29"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "08:47",
+    "estimated": true
    }
   ]
  },
@@ -753,6 +788,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "08:46",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "08:47"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "09:05",
+    "estimated": true
    }
   ]
  },
@@ -1033,6 +1073,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "08:53",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "09:01"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "09:19",
+    "estimated": true
    }
   ]
  },
@@ -1273,6 +1318,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "09:18",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "09:18"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "09:36",
+    "estimated": true
    }
   ]
  },
@@ -1347,6 +1397,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "09:24",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "09:33"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "09:51",
+    "estimated": true
    }
   ]
  },
@@ -1603,6 +1658,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "09:53",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "10:01"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "10:19",
+    "estimated": true
    }
   ]
  },
@@ -1747,6 +1807,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "09:28",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "09:28"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "09:40",
+    "estimated": true
    }
   ]
  },
@@ -1937,6 +2002,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "10:45",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "11:00"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "11:18",
+    "estimated": true
    }
   ]
  },
@@ -2117,6 +2187,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "10:13",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "10:14"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "10:26",
+    "estimated": true
    }
   ]
  },
@@ -2273,6 +2348,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "10:27",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "10:28"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "10:40",
+    "estimated": true
    }
   ]
  },
@@ -2633,6 +2713,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "11:52",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "11:57"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "12:15",
+    "estimated": true
    }
   ]
  },
@@ -2805,6 +2890,18 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "11:17",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Kami-Suwa",
     "odpt:departureTime": "11:17"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Shiojiri",
+    "odpt:arrivalTime": "11:29",
+    "odpt:departureStation": "odpt:Station:JR-East.Chuo.Shiojiri",
+    "odpt:departureTime": "11:29",
+    "estimated": true
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "11:41",
+    "estimated": true
    }
   ]
  },
@@ -2995,6 +3092,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "12:37",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "12:37"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "12:55",
+    "estimated": true
    }
   ]
  },
@@ -3091,6 +3193,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "12:27",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "12:27"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "12:39",
+    "estimated": true
    }
   ]
  },
@@ -3341,6 +3448,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "12:57",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "13:02"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "13:14",
+    "estimated": true
    }
   ]
  },
@@ -3453,6 +3565,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "13:34",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "13:35"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "13:53",
+    "estimated": true
    }
   ]
  },
@@ -3681,6 +3798,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "13:26",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "13:27"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "13:39",
+    "estimated": true
    }
   ]
  },
@@ -4067,6 +4189,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "14:25",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "14:26"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "14:38",
+    "estimated": true
    }
   ]
  },
@@ -4099,6 +4226,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
    {
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "14:35"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "14:53",
+    "estimated": true
    }
   ]
  },
@@ -4221,6 +4353,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "14:51",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "15:02"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "15:20",
+    "estimated": true
    }
   ]
  },
@@ -4253,6 +4390,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
    {
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "15:35"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "15:53",
+    "estimated": true
    }
   ]
  },
@@ -4493,6 +4635,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "15:27",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "15:28"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "15:40",
+    "estimated": true
    }
   ]
  },
@@ -4535,6 +4682,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "15:47",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "15:57"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "16:15",
+    "estimated": true
    }
   ]
  },
@@ -4693,6 +4845,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "16:41",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "16:41"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "16:59",
+    "estimated": true
    }
   ]
  },
@@ -4941,6 +5098,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "16:29",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "16:29"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "16:41",
+    "estimated": true
    }
   ]
  },
@@ -5173,6 +5335,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "17:22",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "17:23"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "17:35",
+    "estimated": true
    }
   ]
  },
@@ -5375,6 +5542,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "17:27",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "17:28"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "17:40",
+    "estimated": true
    }
   ]
  },
@@ -5695,6 +5867,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "18:14",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "18:15"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "18:27",
+    "estimated": true
    }
   ]
  },
@@ -5797,6 +5974,18 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "18:07",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Kami-Suwa",
     "odpt:departureTime": "18:07"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Shiojiri",
+    "odpt:arrivalTime": "18:19",
+    "odpt:departureStation": "odpt:Station:JR-East.Chuo.Shiojiri",
+    "odpt:departureTime": "18:19",
+    "estimated": true
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "18:31",
+    "estimated": true
    }
   ]
  },
@@ -5987,6 +6176,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "19:03",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "19:08"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "19:26",
+    "estimated": true
    }
   ]
  },
@@ -6179,6 +6373,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "19:25",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "19:40"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "19:58",
+    "estimated": true
    }
   ]
  },
@@ -6503,6 +6702,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "19:31",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "19:32"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "19:44",
+    "estimated": true
    }
   ]
  },
@@ -6631,6 +6835,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "20:18",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "20:18"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "20:36",
+    "estimated": true
    }
   ]
  },
@@ -7065,6 +7274,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "20:32",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "20:32"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "20:44",
+    "estimated": true
    }
   ]
  },
@@ -7335,6 +7549,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "21:25",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "21:25"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "21:43",
+    "estimated": true
    }
   ]
  },
@@ -7723,6 +7942,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "21:36",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "21:36"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "21:48",
+    "estimated": true
    }
   ]
  },
@@ -7739,6 +7963,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
    {
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "21:42"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "22:00",
+    "estimated": true
    }
   ]
  },
@@ -7917,6 +8146,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "22:38",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "22:38"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "22:56",
+    "estimated": true
    }
   ]
  },
@@ -8273,6 +8507,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "22:30",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "22:30"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "22:42",
+    "estimated": true
    }
   ]
  },
@@ -8525,6 +8764,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "23:24",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "23:25"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "23:43",
+    "estimated": true
    }
   ]
  },
@@ -8837,6 +9081,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "23:39",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "23:40"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "23:52",
+    "estimated": true
    }
   ]
  },
@@ -9545,6 +9794,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "05:59",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "05:59"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "06:17",
+    "estimated": true
    }
   ]
  },
@@ -9615,6 +9869,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
    {
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "07:05"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "07:23",
+    "estimated": true
    }
   ]
  },
@@ -9663,6 +9922,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
    {
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "07:20"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "07:38",
+    "estimated": true
    }
   ]
  },
@@ -9839,6 +10103,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "07:34",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "07:35"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "07:53",
+    "estimated": true
    }
   ]
  },
@@ -10009,6 +10278,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "08:04",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "08:07"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "08:25",
+    "estimated": true
    }
   ]
  },
@@ -10165,6 +10439,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "08:13",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "08:13"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "08:31",
+    "estimated": true
    }
   ]
  },
@@ -10223,6 +10502,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
    {
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "08:29"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "08:47",
+    "estimated": true
    }
   ]
  },
@@ -10245,6 +10529,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "08:46",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "08:47"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "09:05",
+    "estimated": true
    }
   ]
  },
@@ -10525,6 +10814,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "08:53",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "09:01"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "09:19",
+    "estimated": true
    }
   ]
  },
@@ -10765,6 +11059,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "09:18",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "09:18"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "09:36",
+    "estimated": true
    }
   ]
  },
@@ -10855,6 +11154,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "09:24",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "09:33"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "09:51",
+    "estimated": true
    }
   ]
  },
@@ -10995,6 +11299,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "09:23",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "09:26"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "09:38",
+    "estimated": true
    }
   ]
  },
@@ -11171,6 +11480,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "09:53",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "10:01"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "10:19",
+    "estimated": true
    }
   ]
  },
@@ -11315,6 +11629,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "09:28",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "09:28"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "09:40",
+    "estimated": true
    }
   ]
  },
@@ -11505,6 +11824,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "10:45",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "11:00"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "11:18",
+    "estimated": true
    }
   ]
  },
@@ -11685,6 +12009,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "10:08",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "10:09"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "10:21",
+    "estimated": true
    }
   ]
  },
@@ -11761,6 +12090,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "10:13",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "10:14"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "10:26",
+    "estimated": true
    }
   ]
  },
@@ -11917,6 +12251,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "10:27",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "10:28"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "10:40",
+    "estimated": true
    }
   ]
  },
@@ -12071,6 +12410,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "11:04",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "11:07"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "11:19",
+    "estimated": true
    }
   ]
  },
@@ -12289,6 +12633,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "11:13",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "11:15"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "11:27",
+    "estimated": true
    }
   ]
  },
@@ -12417,6 +12766,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "11:52",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "11:57"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "12:15",
+    "estimated": true
    }
   ]
  },
@@ -12589,6 +12943,18 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "11:17",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Kami-Suwa",
     "odpt:departureTime": "11:17"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Shiojiri",
+    "odpt:arrivalTime": "11:29",
+    "odpt:departureStation": "odpt:Station:JR-East.Chuo.Shiojiri",
+    "odpt:departureTime": "11:29",
+    "estimated": true
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "11:41",
+    "estimated": true
    }
   ]
  },
@@ -12779,6 +13145,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "12:37",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "12:37"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "12:55",
+    "estimated": true
    }
   ]
  },
@@ -12855,6 +13226,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "12:17",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "12:18"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "12:30",
+    "estimated": true
    }
   ]
  },
@@ -13015,6 +13391,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "12:27",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "12:27"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "12:39",
+    "estimated": true
    }
   ]
  },
@@ -13281,6 +13662,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "12:57",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "13:02"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "13:14",
+    "estimated": true
    }
   ]
  },
@@ -13393,6 +13779,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "13:34",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "13:35"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "13:53",
+    "estimated": true
    }
   ]
  },
@@ -13621,6 +14012,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "13:26",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "13:27"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "13:39",
+    "estimated": true
    }
   ]
  },
@@ -13833,6 +14229,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "14:00",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "14:00"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "14:12",
+    "estimated": true
    }
   ]
  },
@@ -14061,6 +14462,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "14:25",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "14:26"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "14:38",
+    "estimated": true
    }
   ]
  },
@@ -14093,6 +14499,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
    {
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "14:35"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "14:53",
+    "estimated": true
    }
   ]
  },
@@ -14165,6 +14576,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "14:47",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "14:47"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "14:59",
+    "estimated": true
    }
   ]
  },
@@ -14227,6 +14643,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "14:51",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "15:02"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "15:20",
+    "estimated": true
    }
   ]
  },
@@ -14319,6 +14740,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
    {
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "15:35"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "15:53",
+    "estimated": true
    }
   ]
  },
@@ -14583,6 +15009,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "15:27",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "15:28"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "15:40",
+    "estimated": true
    }
   ]
  },
@@ -14625,6 +15056,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "15:47",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "15:57"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "16:15",
+    "estimated": true
    }
   ]
  },
@@ -14783,6 +15219,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "16:41",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "16:41"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "16:59",
+    "estimated": true
    }
   ]
  },
@@ -15079,6 +15520,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "16:29",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "16:29"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "16:41",
+    "estimated": true
    }
   ]
  },
@@ -15421,6 +15867,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "17:27",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "17:28"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "17:40",
+    "estimated": true
    }
   ]
  },
@@ -15741,6 +16192,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "18:14",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "18:15"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "18:27",
+    "estimated": true
    }
   ]
  },
@@ -15843,6 +16299,18 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "18:07",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Kami-Suwa",
     "odpt:departureTime": "18:07"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Shiojiri",
+    "odpt:arrivalTime": "18:19",
+    "odpt:departureStation": "odpt:Station:JR-East.Chuo.Shiojiri",
+    "odpt:departureTime": "18:19",
+    "estimated": true
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "18:31",
+    "estimated": true
    }
   ]
  },
@@ -16033,6 +16501,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "19:03",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "19:08"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "19:26",
+    "estimated": true
    }
   ]
  },
@@ -16225,6 +16698,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "19:25",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "19:40"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "19:58",
+    "estimated": true
    }
   ]
  },
@@ -16549,6 +17027,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "19:31",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "19:32"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "19:44",
+    "estimated": true
    }
   ]
  },
@@ -16651,6 +17134,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "20:18",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "20:18"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "20:36",
+    "estimated": true
    }
   ]
  },
@@ -17085,6 +17573,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "20:32",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "20:32"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "20:44",
+    "estimated": true
    }
   ]
  },
@@ -17355,6 +17848,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "21:25",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "21:25"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "21:43",
+    "estimated": true
    }
   ]
  },
@@ -17743,6 +18241,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "21:36",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "21:36"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "21:48",
+    "estimated": true
    }
   ]
  },
@@ -17759,6 +18262,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
    {
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "21:42"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "22:00",
+    "estimated": true
    }
   ]
  },
@@ -17937,6 +18445,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "22:38",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "22:38"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "22:56",
+    "estimated": true
    }
   ]
  },
@@ -18293,6 +18806,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "22:30",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "22:30"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "22:42",
+    "estimated": true
    }
   ]
  },
@@ -18545,6 +19063,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "23:24",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "23:25"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "23:43",
+    "estimated": true
    }
   ]
  },
@@ -18823,6 +19346,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "23:39",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "23:40"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Matsumoto",
+    "odpt:arrivalTime": "23:52",
+    "estimated": true
    }
   ]
  },
@@ -19799,6 +20327,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "06:15",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Otsuki",
     "odpt:departureTime": "06:16"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "06:31",
+    "estimated": true
    }
   ]
  },
@@ -20499,6 +21032,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "07:36",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Otsuki",
     "odpt:departureTime": "07:36"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "07:51",
+    "estimated": true
    }
   ]
  },
@@ -20965,6 +21503,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "06:09",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "06:10"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Okaya",
+    "odpt:arrivalTime": "06:20",
+    "estimated": true
    }
   ]
  },
@@ -21023,6 +21566,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "07:39",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Kofu",
     "odpt:departureTime": "07:40"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "08:30",
+    "estimated": true
    }
   ]
  },
@@ -21063,6 +21611,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "08:24",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Otsuki",
     "odpt:departureTime": "08:25"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "08:40",
+    "estimated": true
    }
   ]
  },
@@ -21317,6 +21870,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "08:16",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Kofu",
     "odpt:departureTime": "08:17"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "09:07",
+    "estimated": true
    }
   ]
  },
@@ -21599,6 +22157,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
    {
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "07:21"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Okaya",
+    "odpt:arrivalTime": "07:31",
+    "estimated": true
    }
   ]
  },
@@ -21633,6 +22196,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "09:20",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Otsuki",
     "odpt:departureTime": "09:21"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "09:36",
+    "estimated": true
    }
   ]
  },
@@ -22131,6 +22699,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "09:25",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Kofu",
     "odpt:departureTime": "09:27"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "10:17",
+    "estimated": true
    }
   ]
  },
@@ -22287,6 +22860,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "10:22",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Otsuki",
     "odpt:departureTime": "10:23"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "10:38",
+    "estimated": true
    }
   ]
  },
@@ -22537,6 +23115,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "10:53",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Otsuki",
     "odpt:departureTime": "10:54"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "11:09",
+    "estimated": true
    }
   ]
  },
@@ -22875,6 +23458,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
    {
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "10:00"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Okaya",
+    "odpt:arrivalTime": "10:10",
+    "estimated": true
    }
   ]
  },
@@ -23015,6 +23603,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "11:15",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Kofu",
     "odpt:departureTime": "11:16"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "12:06",
+    "estimated": true
    }
   ]
  },
@@ -23049,6 +23642,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "12:05",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Otsuki",
     "odpt:departureTime": "12:06"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "12:21",
+    "estimated": true
    }
   ]
  },
@@ -23369,6 +23967,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "12:16",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Kofu",
     "odpt:departureTime": "12:17"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "13:07",
+    "estimated": true
    }
   ]
  },
@@ -23403,6 +24006,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "13:08",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Otsuki",
     "odpt:departureTime": "13:09"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "13:24",
+    "estimated": true
    }
   ]
  },
@@ -23697,6 +24305,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "13:16",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Kofu",
     "odpt:departureTime": "13:17"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "14:07",
+    "estimated": true
    }
   ]
  },
@@ -23835,6 +24448,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "14:05",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Otsuki",
     "odpt:departureTime": "14:06"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "14:21",
+    "estimated": true
    }
   ]
  },
@@ -24173,6 +24791,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
    {
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "13:00"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Okaya",
+    "odpt:arrivalTime": "13:10",
+    "estimated": true
    }
   ]
  },
@@ -24245,6 +24868,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "14:15",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Kofu",
     "odpt:departureTime": "14:16"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "15:06",
+    "estimated": true
    }
   ]
  },
@@ -24295,6 +24923,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "15:04",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Otsuki",
     "odpt:departureTime": "15:07"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "15:22",
+    "estimated": true
    }
   ]
  },
@@ -24611,6 +25244,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "14:54",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Kofu",
     "odpt:departureTime": "14:55"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "15:45",
+    "estimated": true
    }
   ]
  },
@@ -24645,6 +25283,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "15:54",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Otsuki",
     "odpt:departureTime": "15:57"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "16:12",
+    "estimated": true
    }
   ]
  },
@@ -24911,6 +25554,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "16:28",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Otsuki",
     "odpt:departureTime": "16:29"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "16:44",
+    "estimated": true
    }
   ]
  },
@@ -24955,6 +25603,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "15:53",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Kofu",
     "odpt:departureTime": "15:54"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "16:44",
+    "estimated": true
    }
   ]
  },
@@ -25083,6 +25736,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "16:45",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Otsuki",
     "odpt:departureTime": "16:46"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "17:01",
+    "estimated": true
    }
   ]
  },
@@ -25267,6 +25925,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "16:29",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Kofu",
     "odpt:departureTime": "16:32"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "17:22",
+    "estimated": true
    }
   ]
  },
@@ -25407,6 +26070,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "17:42",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Otsuki",
     "odpt:departureTime": "17:45"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "18:00",
+    "estimated": true
    }
   ]
  },
@@ -25645,6 +26313,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
    {
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "16:00"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Okaya",
+    "odpt:arrivalTime": "16:10",
+    "estimated": true
    }
   ]
  },
@@ -25921,6 +26594,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "17:35",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Kofu",
     "odpt:departureTime": "17:36"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "18:26",
+    "estimated": true
    }
   ]
  },
@@ -25955,6 +26633,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "18:40",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Otsuki",
     "odpt:departureTime": "18:43"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "18:58",
+    "estimated": true
    }
   ]
  },
@@ -26529,6 +27212,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "19:04",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Otsuki",
     "odpt:departureTime": "19:05"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "19:20",
+    "estimated": true
    }
   ]
  },
@@ -26705,6 +27393,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "19:35",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Otsuki",
     "odpt:departureTime": "19:36"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "19:51",
+    "estimated": true
    }
   ]
  },
@@ -26945,6 +27638,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
    {
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "17:43"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Okaya",
+    "odpt:arrivalTime": "17:53",
+    "estimated": true
    }
   ]
  },
@@ -27343,6 +28041,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "19:47",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Kofu",
     "odpt:departureTime": "19:48"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "20:38",
+    "estimated": true
    }
   ]
  },
@@ -27405,6 +28108,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "20:37",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Otsuki",
     "odpt:departureTime": "20:38"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "20:53",
+    "estimated": true
    }
   ]
  },
@@ -27597,6 +28305,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "21:08",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Otsuki",
     "odpt:departureTime": "21:09"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "21:24",
+    "estimated": true
    }
   ]
  },
@@ -27771,6 +28484,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
    {
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "19:01"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Okaya",
+    "odpt:arrivalTime": "19:11",
+    "estimated": true
    }
   ]
  },
@@ -28141,6 +28859,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "21:15",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Kofu",
     "odpt:departureTime": "21:16"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "22:06",
+    "estimated": true
    }
   ]
  },
@@ -28269,6 +28992,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
    {
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "20:22"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Okaya",
+    "odpt:arrivalTime": "20:32",
+    "estimated": true
    }
   ]
  },
@@ -29953,6 +30681,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "07:36",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Otsuki",
     "odpt:departureTime": "07:36"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "07:51",
+    "estimated": true
    }
   ]
  },
@@ -30419,6 +31152,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "06:09",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "06:10"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Okaya",
+    "odpt:arrivalTime": "06:20",
+    "estimated": true
    }
   ]
  },
@@ -30477,6 +31215,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "07:39",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Kofu",
     "odpt:departureTime": "07:40"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "08:30",
+    "estimated": true
    }
   ]
  },
@@ -30517,6 +31260,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "08:24",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Otsuki",
     "odpt:departureTime": "08:25"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "08:40",
+    "estimated": true
    }
   ]
  },
@@ -30771,6 +31519,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "08:16",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Kofu",
     "odpt:departureTime": "08:17"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "09:07",
+    "estimated": true
    }
   ]
  },
@@ -31053,6 +31806,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
    {
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "07:21"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Okaya",
+    "odpt:arrivalTime": "07:31",
+    "estimated": true
    }
   ]
  },
@@ -31087,6 +31845,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "09:20",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Otsuki",
     "odpt:departureTime": "09:21"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "09:36",
+    "estimated": true
    }
   ]
  },
@@ -31585,6 +32348,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "09:25",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Kofu",
     "odpt:departureTime": "09:27"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "10:17",
+    "estimated": true
    }
   ]
  },
@@ -31741,6 +32509,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "10:23",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Otsuki",
     "odpt:departureTime": "10:24"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "10:39",
+    "estimated": true
    }
   ]
  },
@@ -32039,6 +32812,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "10:52",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Otsuki",
     "odpt:departureTime": "10:53"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "11:08",
+    "estimated": true
    }
   ]
  },
@@ -32377,6 +33155,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
    {
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "10:00"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Okaya",
+    "odpt:arrivalTime": "10:10",
+    "estimated": true
    }
   ]
  },
@@ -32517,6 +33300,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "11:15",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Kofu",
     "odpt:departureTime": "11:16"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "12:06",
+    "estimated": true
    }
   ]
  },
@@ -32551,6 +33339,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "12:05",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Otsuki",
     "odpt:departureTime": "12:06"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "12:21",
+    "estimated": true
    }
   ]
  },
@@ -32913,6 +33706,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "12:16",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Kofu",
     "odpt:departureTime": "12:17"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "13:07",
+    "estimated": true
    }
   ]
  },
@@ -32947,6 +33745,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "13:08",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Otsuki",
     "odpt:departureTime": "13:09"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "13:24",
+    "estimated": true
    }
   ]
  },
@@ -33241,6 +34044,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "13:16",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Kofu",
     "odpt:departureTime": "13:17"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "14:07",
+    "estimated": true
    }
   ]
  },
@@ -33379,6 +34187,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "14:05",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Otsuki",
     "odpt:departureTime": "14:06"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "14:21",
+    "estimated": true
    }
   ]
  },
@@ -33717,6 +34530,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
    {
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "13:00"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Okaya",
+    "odpt:arrivalTime": "13:10",
+    "estimated": true
    }
   ]
  },
@@ -33789,6 +34607,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "14:15",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Kofu",
     "odpt:departureTime": "14:16"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "15:06",
+    "estimated": true
    }
   ]
  },
@@ -33887,6 +34710,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "15:04",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Otsuki",
     "odpt:departureTime": "15:07"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "15:22",
+    "estimated": true
    }
   ]
  },
@@ -34203,6 +35031,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "14:54",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Kofu",
     "odpt:departureTime": "14:55"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "15:45",
+    "estimated": true
    }
   ]
  },
@@ -34237,6 +35070,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "15:54",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Otsuki",
     "odpt:departureTime": "15:57"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "16:12",
+    "estimated": true
    }
   ]
  },
@@ -34357,6 +35195,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "16:01",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Otsuki",
     "odpt:departureTime": "16:02"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "16:17",
+    "estimated": true
    }
   ]
  },
@@ -34609,6 +35452,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "16:07",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Otsuki",
     "odpt:departureTime": "16:08"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "16:23",
+    "estimated": true
    }
   ]
  },
@@ -34653,6 +35501,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "15:53",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Kofu",
     "odpt:departureTime": "15:54"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "16:44",
+    "estimated": true
    }
   ]
  },
@@ -34781,6 +35634,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "16:45",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Otsuki",
     "odpt:departureTime": "16:46"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "17:01",
+    "estimated": true
    }
   ]
  },
@@ -34965,6 +35823,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "16:29",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Kofu",
     "odpt:departureTime": "16:32"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "17:22",
+    "estimated": true
    }
   ]
  },
@@ -35041,6 +35904,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "17:20",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Otsuki",
     "odpt:departureTime": "17:23"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "17:38",
+    "estimated": true
    }
   ]
  },
@@ -35197,6 +36065,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "17:42",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Otsuki",
     "odpt:departureTime": "17:45"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "18:00",
+    "estimated": true
    }
   ]
  },
@@ -35407,6 +36280,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
    {
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "16:00"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Okaya",
+    "odpt:arrivalTime": "16:10",
+    "estimated": true
    }
   ]
  },
@@ -35471,6 +36349,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "17:49",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Otsuki",
     "odpt:departureTime": "17:50"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "18:05",
+    "estimated": true
    }
   ]
  },
@@ -35747,6 +36630,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "17:35",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Kofu",
     "odpt:departureTime": "17:36"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "18:26",
+    "estimated": true
    }
   ]
  },
@@ -35781,6 +36669,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "18:40",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Otsuki",
     "odpt:departureTime": "18:43"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "18:58",
+    "estimated": true
    }
   ]
  },
@@ -36107,6 +37000,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "18:54",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Otsuki",
     "odpt:departureTime": "18:55"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "19:10",
+    "estimated": true
    }
   ]
  },
@@ -36391,6 +37289,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "19:07",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Otsuki",
     "odpt:departureTime": "19:08"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "19:23",
+    "estimated": true
    }
   ]
  },
@@ -36587,6 +37490,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "18:49",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Kofu",
     "odpt:departureTime": "18:50"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "19:40",
+    "estimated": true
    }
   ]
  },
@@ -36621,6 +37529,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "19:35",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Otsuki",
     "odpt:departureTime": "19:36"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "19:51",
+    "estimated": true
    }
   ]
  },
@@ -36861,6 +37774,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
    {
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "17:43"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Okaya",
+    "odpt:arrivalTime": "17:53",
+    "estimated": true
    }
   ]
  },
@@ -37259,6 +38177,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "19:47",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Kofu",
     "odpt:departureTime": "19:48"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "20:38",
+    "estimated": true
    }
   ]
  },
@@ -37321,6 +38244,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "20:37",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Otsuki",
     "odpt:departureTime": "20:38"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "20:53",
+    "estimated": true
    }
   ]
  },
@@ -37513,6 +38441,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "21:08",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Otsuki",
     "odpt:departureTime": "21:09"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "21:24",
+    "estimated": true
    }
   ]
  },
@@ -37687,6 +38620,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
    {
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "19:01"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Okaya",
+    "odpt:arrivalTime": "19:11",
+    "estimated": true
    }
   ]
  },
@@ -37787,6 +38725,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "20:48",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Kofu",
     "odpt:departureTime": "20:49"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "21:39",
+    "estimated": true
    }
   ]
  },
@@ -38115,6 +39058,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
     "odpt:arrivalTime": "21:15",
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Kofu",
     "odpt:departureTime": "21:16"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Takao",
+    "odpt:arrivalTime": "22:06",
+    "estimated": true
    }
   ]
  },
@@ -38243,6 +39191,11 @@ window.ChuoMain_MANUAL_TIMETABLES = [
    {
     "odpt:departureStation": "odpt.Station:JR-East.Chuo.Shiojiri",
     "odpt:departureTime": "20:22"
+   },
+   {
+    "odpt:arrivalStation": "odpt.Station:JR-East.Chuo.Okaya",
+    "odpt:arrivalTime": "20:32",
+    "estimated": true
    }
   ]
  },

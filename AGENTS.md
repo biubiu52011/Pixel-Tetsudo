@@ -1728,3 +1728,14 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 - **东急接续站补齐**：TokyuToyoko 544列追加横浜/ TokyuDenEn 430列追加渋谷/ TokyuMeguro 433列追加目黒/ TokyuOimachi 2列追加二子玉川（ODPT无到着时刻，用站间运行时间估算，标 estimated:true）
 **验证**：node --check 11文件全过；verify_through_vtype 63/63；verify_vtype_coverage 69/69 Missing none（115线/340条目）；integrate_all_lines OK；tt_cross_validate {}；scan_dep_out 0。
 **commit**：4.3.797
+
+## 4.3.798（2026-09-16，接续站补齐收尾 + tt_join_check BFS 改造）
+**用户指示**：tt_join_check 仍检出 123 件接续站缺失，需修复并改 BFS 多跳判定。
+**修复**：
+- Odawara 本線：82+51=133 条直通列车补代々木上原接续站（ODTW/ODTH 平日/土休全量）
+- ChuoMain：85 条松本行き补塩尻+松本 / 69 条东京行き补高尾 / 16 条辰野支線补岡谷
+- Gono：10 条青森/秋田行き补川部接续站
+- Kamaishi：3 条盛岡行き补花巻接续站
+**tt_join_check BFS 改造**：从直接邻接 partner 改为 THROUGH 图 BFS 多跳——Keikyu 检出从 6 条→316 条直通列车对照，其余新补线（OdakyuTama/Yurakucho_Seibu/KeikyuAirport 等）全部纳入对照。
+**验证**：tt_join_check 直通列车合计 1847 | 接続駅無し **0** | 方向異常 **0**；verify_through_vtype 63/63；tt_cross_validate {}；integrate_all_lines OK；node --check 4文件全过。
+**commit**：4.3.798
