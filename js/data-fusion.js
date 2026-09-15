@@ -571,11 +571,14 @@
               );
               positionData.isRinkaiThrough = true;
             } else {
-              // v5: 车型判断（数据层）——与推定列车同一字段语义（TrainIcons.getTrainClass 复用渲染选择逻辑）
+              // v5: 车型判断（数据层）——用列车自己的operator判断，不是当前线路的operator
+              // 这样直通过来的车（比如东急的车开到半藏门线）就会显示东急的车型，而不是地铁的车型
               try {
                 if (window.TrainIcons && typeof window.TrainIcons.getTrainClass === "function") {
+                  // 从odpt:operator提取operator简称（去掉odpt.Operator:前缀）
+                  var trainOpShort = trainOperator.replace('odpt.Operator:', '') || '';
                   positionData.trainClass = window.TrainIcons.getTrainClass(
-                    lid, (targetLine.line && targetLine.line.operator) || '',
+                    lid, trainOpShort,
                     trainId + '_' + idx, idx, rawType
                   );
                 }
