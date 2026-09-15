@@ -3096,7 +3096,7 @@ window.RAILWAY_TOURISM = {
         139.84144
       ],
       "dist": "",
-      "desc": "足立区の歴史・民俗・産業に関する資料を収蔵・展示する博物館。",
+      "desc": "足立区の歴史・民俗・産業に関する資料を収蔵・展示する博物館。常設展示で区の歩みをたどり、地域の文化に触れられる。",
       "tags": [
         "all"
       ],
@@ -3114,10 +3114,10 @@ window.RAILWAY_TOURISM = {
         "ko": "足立区立郷土博物館"
       },
       "desc_i18n": {
-        "ja": "足立区の歴史・民俗・産業に関する資料を収蔵・展示する博物館。",
-        "zh": "收藏并展示足立区历史、民俗、产业相关资料的博物馆。",
-        "en": "收藏并展示足立区历史、民俗、产业相关资料的博物馆。",
-        "ko": "收藏并展示足立区历史、民俗、产业相关资料的博物馆。"
+        "ja": "足立区の歴史・民俗・産業に関する資料を収蔵・展示する博物館。常設展示で区の歩みをたどり、地域の文化に触れられる。",
+        "zh": "收藏并展示足立区历史、民俗、产业资料的博物馆。通过常设展览追溯区的发展历程，感受当地文化。",
+        "en": "A museum housing materials on Adachi's history, folklore and industry. Trace the ward's story through permanent exhibits and connect with local culture.",
+        "ko": "아다치구의 역사·민속·산업 자료를 수집·전시하는 박물관. 상설 전시로 구의 발자취를 돌아보며 지역 문화를 만날 수 있어요."
       },
       "hours_i18n": {
         "ja": "",
@@ -3160,7 +3160,7 @@ window.RAILWAY_TOURISM = {
         139.77071
       ],
       "dist": "",
-      "desc": "足立区舎人にある舎人氷川神社。地域の鎮守として親しまれている。",
+      "desc": "舎人の街を見守る氷川神社。氷川信仰を受け継ぎ、地域の鎮守として静かに佇む。",
       "tags": [
         "all",
         "shrine"
@@ -3179,10 +3179,10 @@ window.RAILWAY_TOURISM = {
         "ko": "舎人氷川神社"
       },
       "desc_i18n": {
-        "ja": "足立区舎人にある舎人氷川神社。地域の鎮守として親しまれている。",
-        "zh": "位于足立区舎人的舎人氷川神社，作为地区守护神社深受喜爱。",
-        "en": "舎人氷川神社 in 舎人, Adachi-ku, cherished as the local guardian shrine.",
-        "ko": "아다치구 舎人에 있는 舎人氷川神社로, 지역 수호신으로 사랑받는 신사예요."
+        "ja": "舎人の街を見守る氷川神社。氷川信仰を受け継ぎ、地域の鎮守として静かに佇む。",
+        "zh": "守护舎人街区的氷川神社。传承氷川信仰，静静矗立为地区的守护神社。",
+        "en": "A Hikawa shrine watching over Toneri. Rooted in Hikawa faith, it stands quietly as the area's guardian.",
+        "ko": "토네리 동네를 지키는 히카와 신사. 히카와 신앙을 이어받아 지역의 수호신으로 조용히 자리해요."
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
@@ -3224,7 +3224,7 @@ window.RAILWAY_TOURISM = {
         139.82259
       ],
       "dist": "",
-      "desc": "足立区西加平にある西加平神社。地域の鎮守として親しまれている。",
+      "desc": "西加平に鎮座する神社。住宅地に溶け込みながら、地域の氏神として暮らしに寄り添う。",
       "tags": [
         "all",
         "shrine"
@@ -3243,10 +3243,10 @@ window.RAILWAY_TOURISM = {
         "ko": "西加平神社"
       },
       "desc_i18n": {
-        "ja": "足立区西加平にある西加平神社。地域の鎮守として親しまれている。",
-        "zh": "位于足立区西加平的西加平神社，作为地区守护神社深受喜爱。",
-        "en": "西加平神社 in 西加平, Adachi-ku, cherished as the local guardian shrine.",
-        "ko": "아다치구 西加平에 있는 西加平神社로, 지역 수호신으로 사랑받는 신사예요."
+        "ja": "西加平に鎮座する神社。住宅地に溶け込みながら、地域の氏神として暮らしに寄り添う。",
+        "zh": "坐落于西加平的神社。融于住宅区之中，作为地区氏神贴近人们的日常生活。",
+        "en": "A shrine in Nishikahei, blending into the residential streets as the neighborhood's ujigami.",
+        "ko": "니시카헤이에 자리한 신사. 주택가에 어우러져 지역의 우지가미(수호신)로 일상에 다가서요."
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
@@ -3288,7 +3288,7 @@ window.RAILWAY_TOURISM = {
         139.77887
       ],
       "dist": "",
-      "desc": "足立区西新井にある西新井氷川神社。地域の鎮守として親しまれている。",
+      "desc": "西新井の鎮守として祀られる氷川神社。水と農の恵みを祈る氷川信仰に連なる。",
       "tags": [
         "all",
         "shrine"
@@ -3307,10 +3307,10 @@ window.RAILWAY_TOURISM = {
         "ko": "西新井氷川神社"
       },
       "desc_i18n": {
-        "ja": "足立区西新井にある西新井氷川神社。地域の鎮守として親しまれている。",
-        "zh": "位于足立区西新井的西新井氷川神社，作为地区守护神社深受喜爱。",
-        "en": "西新井氷川神社 in 西新井, Adachi-ku, cherished as the local guardian shrine.",
-        "ko": "아다치구 西新井에 있는 西新井氷川神社로, 지역 수호신으로 사랑받는 신사예요."
+        "ja": "西新井の鎮守として祀られる氷川神社。水と農の恵みを祈る氷川信仰に連なる。",
+        "zh": "作为西新井守护神社而被祭祀的氷川神社，属于祈愿水利与农作的氷川信仰。",
+        "en": "A Hikawa shrine venerated as Nishiarai's guardian, belonging to the Hikawa faith of water and harvest.",
+        "ko": "니시아라이의 수호신으로 모셔지는 히카와 신사. 물과 농사의 은혜를 비는 히카와 신앙에 닿아 있어요."
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
@@ -3352,7 +3352,7 @@ window.RAILWAY_TOURISM = {
         139.79172
       ],
       "dist": "",
-      "desc": "足立区竹の塚にある竹塚神社。地域の鎮守として親しまれている。",
+      "desc": "竹の塚の街に佇む竹塚神社。地域の鎮守として、変わらずこの土地を見守ってきた。",
       "tags": [
         "all",
         "shrine"
@@ -3371,10 +3371,10 @@ window.RAILWAY_TOURISM = {
         "ko": "竹塚神社"
       },
       "desc_i18n": {
-        "ja": "足立区竹の塚にある竹塚神社。地域の鎮守として親しまれている。",
-        "zh": "位于足立区竹の塚的竹塚神社，作为地区守护神社深受喜爱。",
-        "en": "竹塚神社 in 竹の塚, Adachi-ku, cherished as the local guardian shrine.",
-        "ko": "아다치구 竹の塚에 있는 竹塚神社로, 지역 수호신으로 사랑받는 신사예요."
+        "ja": "竹の塚の街に佇む竹塚神社。地域の鎮守として、変わらずこの土地を見守ってきた。",
+        "zh": "静立于竹之塚街区的竹塚神社。作为地区的守护神社，一如既往地守护着这片土地。",
+        "en": "Takezuka Shrine stands quietly in Takenotsuka, faithfully watching over the neighborhood as its guardian.",
+        "ko": "다케노즈카 거리에 자리한 다케즈카 신사. 지역의 수호신으로 변함없이 이 땅을 지켜왔어요."
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
@@ -3416,7 +3416,7 @@ window.RAILWAY_TOURISM = {
         139.80141
       ],
       "dist": "",
-      "desc": "足立区千住にある千住本氷川神社。地域の鎮守として親しまれている。",
+      "desc": "千住に鎮座する千住本氷川神社。「本」の名を冠する氷川神社として、地域の信仰を集めてきた。",
       "tags": [
         "all",
         "shrine"
@@ -3435,10 +3435,10 @@ window.RAILWAY_TOURISM = {
         "ko": "千住本氷川神社"
       },
       "desc_i18n": {
-        "ja": "足立区千住にある千住本氷川神社。地域の鎮守として親しまれている。",
-        "zh": "位于足立区千住的千住本氷川神社，作为地区守护神社深受喜爱。",
-        "en": "千住本氷川神社 in 千住, Adachi-ku, cherished as the local guardian shrine.",
-        "ko": "아다치구 千住에 있는 千住本氷川神社로, 지역 수호신으로 사랑받는 신사예요."
+        "ja": "千住に鎮座する千住本氷川神社。「本」の名を冠する氷川神社として、地域の信仰を集めてきた。",
+        "zh": "坐落于千住的千住本氷川神社。作为冠以「本」之名的氷川神社，一直凝聚着地区的信仰。",
+        "en": "Senju Hon Hikawa Shrine stands in Senju; bearing the name \"Hon,\" it has long gathered the area's devotion.",
+        "ko": "센주에 자리한 센주 혼 히카와 신사. \"혼(본)\"이라는 이름을 지닌 히카와 신사로 지역의 신앙을 모아왔어요."
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
@@ -3480,7 +3480,7 @@ window.RAILWAY_TOURISM = {
         139.82201
       ],
       "dist": "",
-      "desc": "足立区綾瀬にある綾瀬稲荷神社。地域の鎮守として親しまれている。",
+      "desc": "綾瀬に鎮座する稲荷神社。稲荷信仰の神社らしく、商売繁盛を願う人々の信仰を集めている。",
       "tags": [
         "all",
         "shrine"
@@ -3499,10 +3499,10 @@ window.RAILWAY_TOURISM = {
         "ko": "綾瀬稲荷神社"
       },
       "desc_i18n": {
-        "ja": "足立区綾瀬にある綾瀬稲荷神社。地域の鎮守として親しまれている。",
-        "zh": "位于足立区綾瀬的綾瀬稲荷神社，作为地区守护神社深受喜爱。",
-        "en": "綾瀬稲荷神社 in 綾瀬, Adachi-ku, cherished as the local guardian shrine.",
-        "ko": "아다치구 綾瀬에 있는 綾瀬稲荷神社로, 지역 수호신으로 사랑받는 신사예요."
+        "ja": "綾瀬に鎮座する稲荷神社。稲荷信仰の神社らしく、商売繁盛を願う人々の信仰を集めている。",
+        "zh": "坐落于綾瀬的稲荷神社。作为稻荷信仰的神社，聚集着祈求生意兴隆的人们的信仰。",
+        "en": "An Inari shrine in Ayase; true to Inari faith, it gathers the prayers of those seeking prosperous business.",
+        "ko": "아야세에 자리한 이나리 신사. 이나리 신앙답게 장사 번창을 기원하는 사람들의 신앙을 모아요."
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
@@ -3544,7 +3544,7 @@ window.RAILWAY_TOURISM = {
         139.80054
       ],
       "dist": "",
-      "desc": "足立区千住仲町にある千住氷川神社。地域の鎮守として親しまれている。",
+      "desc": "千住仲町に鎮座する千住氷川神社。氷川信仰を伝え、下町の暮らしを見守ってきた。",
       "tags": [
         "all",
         "shrine"
@@ -3563,10 +3563,10 @@ window.RAILWAY_TOURISM = {
         "ko": "千住氷川神社"
       },
       "desc_i18n": {
-        "ja": "足立区千住仲町にある千住氷川神社。地域の鎮守として親しまれている。",
-        "zh": "位于足立区千住仲町的千住氷川神社，作为地区守护神社深受喜爱。",
-        "en": "千住氷川神社 in 千住仲町, Adachi-ku, cherished as the local guardian shrine.",
-        "ko": "아다치구 千住仲町에 있는 千住氷川神社로, 지역 수호신으로 사랑받는 신사예요."
+        "ja": "千住仲町に鎮座する千住氷川神社。氷川信仰を伝え、下町の暮らしを見守ってきた。",
+        "zh": "坐落于千住仲町的千住氷川神社。传承氷川信仰，守护着下町的生活。",
+        "en": "Senju Hikawa Shrine in Senju Nakacho carries on Hikawa faith, watching over the old-town way of life.",
+        "ko": "센주 나카초에 자리한 센주 히카와 신사. 히카와 신앙을 전하며 옛 시가지의 삶을 지켜왔어요."
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
@@ -3608,7 +3608,7 @@ window.RAILWAY_TOURISM = {
         139.82291
       ],
       "dist": "",
-      "desc": "足立区六町の住宅街に建つ神社。地域の鎮守として古くから親しまれている。",
+      "desc": "六町の住宅街に建つ神社。地域の暮らしに寄り添う鎮守として、親しまれてきた。",
       "tags": [
         "all",
         "shrine"
@@ -3627,10 +3627,10 @@ window.RAILWAY_TOURISM = {
         "ko": "六町神社"
       },
       "desc_i18n": {
-        "ja": "足立区六町の住宅街に建つ神社。地域の鎮守として古くから親しまれている。",
-        "zh": "坐落于足立区六町住宅区的神社，作为地区守护神自古以来深受爱戴。",
-        "en": "A shrine in a residential neighborhood of Rokucho, Adachi-ku, long cherished as the local guardian.",
-        "ko": "아다치구 六町 주택가에 자리한 신사로, 지역 수호신으로 오랫동안 사랑받아요."
+        "ja": "六町の住宅街に建つ神社。地域の暮らしに寄り添う鎮守として、親しまれてきた。",
+        "zh": "建于六町住宅区的神社。作为贴近社区生活的守护神社，一直深受喜爱。",
+        "en": "A shrine in the residential streets of Rokucho, long beloved as a guardian close to daily life.",
+        "ko": "로쿠초 주택가에 세워진 신사. 지역 생활에 다가서는 수호신으로 오랫동안 사랑받아 왔어요."
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
@@ -3864,7 +3864,7 @@ window.RAILWAY_TOURISM = {
         139.82895
       ],
       "dist": "13 min walk",
-      "desc": "足立区神明にある赤稲荷神社。地域の鎮守として親しまれている。",
+      "desc": "神明にある赤稲荷神社。「赤」の名を持つ稲荷神社で、商売繁盛の神として祀られている。",
       "tags": [
         "all",
         "shrine"
@@ -3883,10 +3883,10 @@ window.RAILWAY_TOURISM = {
         "ko": "赤稲荷神社"
       },
       "desc_i18n": {
-        "ja": "足立区神明にある赤稲荷神社。地域の鎮守として親しまれている。",
-        "zh": "位于足立区神明的赤稲荷神社，作为地区守护神社深受喜爱。",
-        "en": "赤稲荷神社 in 神明, Adachi-ku, cherished as the local guardian shrine.",
-        "ko": "아다치구 神明에 있는 赤稲荷神社로, 지역 수호신으로 사랑받는 신사예요."
+        "ja": "神明にある赤稲荷神社。「赤」の名を持つ稲荷神社で、商売繁盛の神として祀られている。",
+        "zh": "位于神明的赤稲荷神社。冠以「赤」之名的稻荷神社，作为生意兴隆之神被祭祀。",
+        "en": "Aka Inari Shrine in Shinmei; an Inari shrine named \"red,\" worshiped as a god of thriving business.",
+        "ko": "신메이에 있는 아카 이나리 신사. \"빨강\"이라는 이름을 지닌 이나리 신사로 장사 번창의 신으로 모셔져요."
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
@@ -3928,7 +3928,7 @@ window.RAILWAY_TOURISM = {
         139.7863
       ],
       "dist": "15 min walk",
-      "desc": "足立区東伊興にある氷川神社（東伊興）。地域の鎮守として親しまれている。",
+      "desc": "東伊興に鎮座する氷川神社。氷川信仰の流れをくみ、地域の守り神として静かに佇む。",
       "tags": [
         "all",
         "shrine"
@@ -3947,10 +3947,10 @@ window.RAILWAY_TOURISM = {
         "ko": "氷川神社（東伊興）"
       },
       "desc_i18n": {
-        "ja": "足立区東伊興にある氷川神社（東伊興）。地域の鎮守として親しまれている。",
-        "zh": "位于足立区東伊興的氷川神社（東伊興），作为地区守护神社深受喜爱。",
-        "en": "氷川神社（東伊興） in 東伊興, Adachi-ku, cherished as the local guardian shrine.",
-        "ko": "아다치구 東伊興에 있는 氷川神社（東伊興）로, 지역 수호신으로 사랑받는 신사예요."
+        "ja": "東伊興に鎮座する氷川神社。氷川信仰の流れをくみ、地域の守り神として静かに佇む。",
+        "zh": "坐落于东伊兴的氷川神社。承袭氷川信仰一脉，作为地区的守护神静静矗立。",
+        "en": "A Hikawa shrine in Higashi-Iko, following the Hikawa tradition and standing quietly as the local guardian.",
+        "ko": "히가시이코에 자리한 히카와 신사. 히카와 신앙의 흐름을 이어 지역의 수호신으로 조용히 서 있어요."
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
@@ -4184,7 +4184,7 @@ window.RAILWAY_TOURISM = {
         139.8027
       ],
       "dist": "4 min walk",
-      "desc": "足立区千住にある地守稲荷神社。地域の鎮守として親しまれている。",
+      "desc": "千住にある地守稲荷神社。その名のとおり土地を守る稲荷として、地域の暮らしに根づく。",
       "tags": [
         "all",
         "shrine"
@@ -4203,10 +4203,10 @@ window.RAILWAY_TOURISM = {
         "ko": "地守稲荷神社"
       },
       "desc_i18n": {
-        "ja": "足立区千住にある地守稲荷神社。地域の鎮守として親しまれている。",
-        "zh": "位于足立区千住的地守稲荷神社，作为地区守护神社深受喜爱。",
-        "en": "地守稲荷神社 in 千住, Adachi-ku, cherished as the local guardian shrine.",
-        "ko": "아다치구 千住에 있는 地守稲荷神社로, 지역 수호신으로 사랑받는 신사예요."
+        "ja": "千住にある地守稲荷神社。その名のとおり土地を守る稲荷として、地域の暮らしに根づく。",
+        "zh": "位于千住的地守稲荷神社。正如其名，作为守护土地的稻荷神社，扎根于地区的生活。",
+        "en": "Jishu Inari Shrine in Senju; true to its name as the Inari who guards the land, it is rooted in local life.",
+        "ko": "센주에 있는 지슈 이나리 신사. 이름 그대로 땅을 지키는 이나리로서 지역 생활에 뿌리내렸어요."
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
@@ -4376,7 +4376,7 @@ window.RAILWAY_TOURISM = {
         139.79631
       ],
       "dist": "7 min walk",
-      "desc": "足立区千住宮元町にある千住神社。地域の鎮守として親しまれている。",
+      "desc": "千住宮元町に鎮座する千住神社。街なかにあって、地域の氏神として静かに佇む。",
       "tags": [
         "all",
         "shrine"
@@ -4395,10 +4395,10 @@ window.RAILWAY_TOURISM = {
         "ko": "千住神社"
       },
       "desc_i18n": {
-        "ja": "足立区千住宮元町にある千住神社。地域の鎮守として親しまれている。",
-        "zh": "位于足立区千住宮元町的千住神社，作为地区守护神社深受喜爱。",
-        "en": "千住神社 in 千住宮元町, Adachi-ku, cherished as the local guardian shrine.",
-        "ko": "아다치구 千住宮元町에 있는 千住神社로, 지역 수호신으로 사랑받는 신사예요."
+        "ja": "千住宮元町に鎮座する千住神社。街なかにあって、地域の氏神として静かに佇む。",
+        "zh": "坐落于千住宫元町的千住神社。身处街中，作为地区的氏神静静矗立。",
+        "en": "Senju Shrine in Senju Miyamotocho stands amid the town as the neighborhood's quiet ujigami.",
+        "ko": "센주 미야모토초에 자리한 센주 신사. 거리 한가운데서 지역의 우지가미로 조용히 서 있어요."
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
@@ -4440,7 +4440,7 @@ window.RAILWAY_TOURISM = {
         139.79184
       ],
       "dist": "17 min walk",
-      "desc": "足立区千住元町にある元宿神社。地域の鎮守として親しまれている。",
+      "desc": "千住元町にある元宿神社。地域の鎮守として、古くから氏子に守られてきた。",
       "tags": [
         "all",
         "shrine"
@@ -4459,10 +4459,10 @@ window.RAILWAY_TOURISM = {
         "ko": "元宿神社"
       },
       "desc_i18n": {
-        "ja": "足立区千住元町にある元宿神社。地域の鎮守として親しまれている。",
-        "zh": "位于足立区千住元町的元宿神社，作为地区守护神社深受喜爱。",
-        "en": "元宿神社 in 千住元町, Adachi-ku, cherished as the local guardian shrine.",
-        "ko": "아다치구 千住元町에 있는 元宿神社로, 지역 수호신으로 사랑받는 신사예요."
+        "ja": "千住元町にある元宿神社。地域の鎮守として、古くから氏子に守られてきた。",
+        "zh": "位于千住元町的元宿神社。作为地区的守护神社，自古以来受氏子们守护。",
+        "en": "Motoyado Shrine in Senju Motomachi has long been cared for by its parishioners as the local guardian.",
+        "ko": "센주 모토마치에 있는 모토야도 신사. 지역의 수호신으로 오래전부터 신자들에게 지켜져 왔어요."
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
@@ -4504,7 +4504,7 @@ window.RAILWAY_TOURISM = {
         139.79143
       ],
       "dist": "8 min walk",
-      "desc": "足立区栗原にある栗原氷川神社。地域の鎮守として親しまれている。",
+      "desc": "栗原に鎮座する栗原氷川神社。氷川信仰の神社として、地域の守り神として暮らしに寄り添う。",
       "tags": [
         "all",
         "shrine"
@@ -4523,10 +4523,10 @@ window.RAILWAY_TOURISM = {
         "ko": "栗原氷川神社"
       },
       "desc_i18n": {
-        "ja": "足立区栗原にある栗原氷川神社。地域の鎮守として親しまれている。",
-        "zh": "位于足立区栗原的栗原氷川神社，作为地区守护神社深受喜爱。",
-        "en": "栗原氷川神社 in 栗原, Adachi-ku, cherished as the local guardian shrine.",
-        "ko": "아다치구 栗原에 있는 栗原氷川神社로, 지역 수호신으로 사랑받는 신사예요."
+        "ja": "栗原に鎮座する栗原氷川神社。氷川信仰の神社として、地域の守り神として暮らしに寄り添う。",
+        "zh": "坐落于栗原的栗原氷川神社。作为氷川信仰的神社，以守护神之姿贴近地区人们的生活。",
+        "en": "Kurihara Hikawa Shrine stands in Kurihara, a guardian rooted in Hikawa faith and close to local life.",
+        "ko": "쿠리하라에 자리한 쿠리하라 히카와 신사. 히카와 신앙의 신사로서 지역의 수호신으로 생활에 다가서요."
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
@@ -4632,7 +4632,7 @@ window.RAILWAY_TOURISM = {
         139.79988
       ],
       "dist": "7 min walk",
-      "desc": "足立区梅島にある小右衛門稲荷神社。地域の鎮守として親しまれている。",
+      "desc": "梅島にある小右衛門稲荷神社。名前に人の名を残す稲荷神社で、地域の鎮守として祀られている。",
       "tags": [
         "all",
         "shrine"
@@ -4651,10 +4651,10 @@ window.RAILWAY_TOURISM = {
         "ko": "小右衛門稲荷神社"
       },
       "desc_i18n": {
-        "ja": "足立区梅島にある小右衛門稲荷神社。地域の鎮守として親しまれている。",
-        "zh": "位于足立区梅島的小右衛門稲荷神社，作为地区守护神社深受喜爱。",
-        "en": "小右衛門稲荷神社 in 梅島, Adachi-ku, cherished as the local guardian shrine.",
-        "ko": "아다치구 梅島에 있는 小右衛門稲荷神社로, 지역 수호신으로 사랑받는 신사예요."
+        "ja": "梅島にある小右衛門稲荷神社。名前に人の名を残す稲荷神社で、地域の鎮守として祀られている。",
+        "zh": "位于梅岛的小右卫门稲荷神社。神社名中留有人名的稻荷神社，作为地区守护神社被祭祀。",
+        "en": "Koemon Inari Shrine in Umejima keeps a personal name in its title; an Inari shrine venerated as the local guardian.",
+        "ko": "우메지마에 있는 코에몬 이나리 신사. 이름에 사람 이름이 남아 있는 이나리 신사로 지역의 수호신으로 모셔져요."
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
@@ -4696,7 +4696,7 @@ window.RAILWAY_TOURISM = {
         139.78545
       ],
       "dist": "16 min walk",
-      "desc": "足立区本木にある中曽根神社。地域の鎮守として親しまれている。",
+      "desc": "本木にある中曽根神社。住宅街に溶け込み、地域の守り神として暮らしに寄り添う。",
       "tags": [
         "all",
         "shrine"
@@ -4715,10 +4715,10 @@ window.RAILWAY_TOURISM = {
         "ko": "中曽根神社"
       },
       "desc_i18n": {
-        "ja": "足立区本木にある中曽根神社。地域の鎮守として親しまれている。",
-        "zh": "位于足立区本木的中曽根神社，作为地区守护神社深受喜爱。",
-        "en": "中曽根神社 in 本木, Adachi-ku, cherished as the local guardian shrine.",
-        "ko": "아다치구 本木에 있는 中曽根神社로, 지역 수호신으로 사랑받는 신사예요."
+        "ja": "本木にある中曽根神社。住宅街に溶け込み、地域の守り神として暮らしに寄り添う。",
+        "zh": "位于本木的中曽根神社。融入住宅区，作为地区的守护神贴近人们的生活。",
+        "en": "Nakasone Shrine in Motoki blends into the residential area, close to daily life as the local guardian.",
+        "ko": "모토키에 있는 나카소네 신사. 주택가에 자연스럽게 어우러져 지역의 수호신으로 일상에 다가서요."
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
@@ -4888,7 +4888,7 @@ window.RAILWAY_TOURISM = {
         139.78017
       ],
       "dist": "11 min walk",
-      "desc": "足立区本木西町にある本木氷川神社。地域の鎮守として親しまれている。",
+      "desc": "本木西町に鎮座する本木氷川神社。氷川信仰を受け継ぎ、地域を見守る氏神。",
       "tags": [
         "all",
         "shrine"
@@ -4907,10 +4907,10 @@ window.RAILWAY_TOURISM = {
         "ko": "本木氷川神社"
       },
       "desc_i18n": {
-        "ja": "足立区本木西町にある本木氷川神社。地域の鎮守として親しまれている。",
-        "zh": "位于足立区本木西町的本木氷川神社，作为地区守护神社深受喜爱。",
-        "en": "本木氷川神社 in 本木西町, Adachi-ku, cherished as the local guardian shrine.",
-        "ko": "아다치구 本木西町에 있는 本木氷川神社로, 지역 수호신으로 사랑받는 신사예요."
+        "ja": "本木西町に鎮座する本木氷川神社。氷川信仰を受け継ぎ、地域を見守る氏神。",
+        "zh": "坐落于本木西町的本木氷川神社。传承氷川信仰，守护地区的氏神。",
+        "en": "Motoki Hikawa Shrine in Motoki Nishimachi inherits Hikawa faith as the neighborhood's watching ujigami.",
+        "ko": "모토키 니시마치에 자리한 모토키 히카와 신사. 히카와 신앙을 이어받아 지역을 지키는 우지가미예요."
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
@@ -5080,7 +5080,7 @@ window.RAILWAY_TOURISM = {
         139.80608
       ],
       "dist": "7 min walk",
-      "desc": "足立区足立の住宅街に建つ神社。地域の鎮守として古くから親しまれている。",
+      "desc": "足立の住宅街に建つ高砂神社。静かな住宅地の中で、地域に寄り添う鎮守の社。",
       "tags": [
         "all",
         "shrine"
@@ -5099,10 +5099,10 @@ window.RAILWAY_TOURISM = {
         "ko": "高砂神社"
       },
       "desc_i18n": {
-        "ja": "足立区足立の住宅街に建つ神社。地域の鎮守として古くから親しまれている。",
-        "zh": "坐落于足立区足立住宅区的神社，作为地区守护神自古以来深受爱戴。",
-        "en": "A shrine in a residential area of Adachi, Adachi-ku, long cherished as the local guardian.",
-        "ko": "아다치구 足立 주택가에 자리한 신사로, 지역 수호신으로 오랫동안 사랑받아요."
+        "ja": "足立の住宅街に建つ高砂神社。静かな住宅地の中で、地域に寄り添う鎮守の社。",
+        "zh": "建于足立住宅区的高砂神社。在安静的住宅区中，是贴近社区的守护神社。",
+        "en": "Takasago Shrine stands in the quiet residential streets of Adachi as a guardian close to the community.",
+        "ko": "아다치 주택가에 세워진 다카사고 신사. 조용한 주택가에서 지역에 다가서는 수호신의 사당이에요."
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
@@ -5144,7 +5144,7 @@ window.RAILWAY_TOURISM = {
         139.7832
       ],
       "dist": "11 min walk",
-      "desc": "足立区伊興にある曹洞宗の寺。伊興の里山に建つ、静かな地域の御堂。",
+      "desc": "足立区伊興の里山に建つ曹洞宗の寺。静かな地域の御堂として、ゆっくり境内を巡ることができる。",
       "tags": [
         "all",
         "history"
@@ -5163,10 +5163,10 @@ window.RAILWAY_TOURISM = {
         "ko": "薬師寺（伊興）"
       },
       "desc_i18n": {
-        "ja": "足立区伊興にある曹洞宗の寺。伊興の里山に建つ、静かな地域の御堂。",
-        "zh": "位于足立区伊兴的曹洞宗寺院。建于伊兴的后山，是静谧的当地佛堂。",
-        "en": "A Soto-sect temple in Iko, Adachi Ward, a quiet neighborhood hall on the wooded slopes of Iko.",
-        "ko": "아다치구 이코에 있는 조동종 사찰. 이코의 산자락에 서 있는 조용한 지역 법당이다."
+        "ja": "足立区伊興の里山に建つ曹洞宗の寺。静かな地域の御堂として、ゆっくり境内を巡ることができる。",
+        "zh": "建于足立区伊兴后山的曹洞宗寺院。作为静谧的当地佛堂，可从容漫步院内。",
+        "en": "A Soto-sect temple on the wooded slopes of Iko, Adachi Ward. A quiet neighborhood hall where you can stroll the grounds at leisure.",
+        "ko": "아다치구 이코 산자락에 자리한 조동종 사찰. 조용한 지역 법당으로 경내를 천천히 둘러볼 수 있어요."
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
@@ -5208,7 +5208,7 @@ window.RAILWAY_TOURISM = {
         139.78511
       ],
       "dist": "4 min walk",
-      "desc": "足立区栗原にある真言宗豊山派の寺。西新井大師の近く、住宅地に佇む。",
+      "desc": "足立区栗原にある真言宗豊山派の寺。西新井大師のすぐ近く、住宅地の中に静かにたたずむ。大師参りのついでに立ち寄りやすい。",
       "tags": [
         "all",
         "history"
@@ -5227,10 +5227,10 @@ window.RAILWAY_TOURISM = {
         "ko": "満願寺"
       },
       "desc_i18n": {
-        "ja": "足立区栗原にある真言宗豊山派の寺。西新井大師の近く、住宅地に佇む。",
-        "zh": "位于足立区栗原的真言宗丰山派寺院。靠近西新井大师，坐落于住宅区中。",
-        "en": "A Shingon-shu Toyoyama-school temple in Kurihara, Adachi Ward, near Nishi-Arai Daishi, set in a residential area.",
-        "ko": "아다치구 쿠리하라에 있는 진언종 도요산파 사찰. 니시아라이 다이시 가까이 주택가에 자리한다."
+        "ja": "足立区栗原にある真言宗豊山派の寺。西新井大師のすぐ近く、住宅地の中に静かにたたずむ。大師参りのついでに立ち寄りやすい。",
+        "zh": "位于足立区栗原的真言宗丰山派寺院。紧邻西新井大师，静静立于住宅区中，去大师参拜时顺路即可到访。",
+        "en": "A Shingon-shu Toyoyama-school temple in Kurihara, Adachi Ward, standing quietly in a residential area right by Nishi-Arai Daishi. Easy to stop by after visiting the Daishi.",
+        "ko": "아다치구 쿠리하라에 있는 진언종 도요산파 사찰. 니시아라이 다이시 바로 옆 주택가에 조용히 자리해요. 다이시 참배길에 들르기 좋아요."
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
@@ -5272,7 +5272,7 @@ window.RAILWAY_TOURISM = {
         139.75813
       ],
       "dist": "14 min walk",
-      "desc": "足立区宮城にある宮城氷川神社。地域の鎮守として親しまれている。",
+      "desc": "宮城に鎮座する宮城氷川神社。氷川信仰をまつり、地域の守り神として祀られている。",
       "tags": [
         "all",
         "shrine"
@@ -5291,10 +5291,10 @@ window.RAILWAY_TOURISM = {
         "ko": "宮城氷川神社"
       },
       "desc_i18n": {
-        "ja": "足立区宮城にある宮城氷川神社。地域の鎮守として親しまれている。",
-        "zh": "位于足立区宮城的宮城氷川神社，作为地区守护神社深受喜爱。",
-        "en": "宮城氷川神社 in 宮城, Adachi-ku, cherished as the local guardian shrine.",
-        "ko": "아다치구 宮城에 있는 宮城氷川神社로, 지역 수호신으로 사랑받는 신사예요."
+        "ja": "宮城に鎮座する宮城氷川神社。氷川信仰をまつり、地域の守り神として祀られている。",
+        "zh": "坐落于宫城的宫城氷川神社。供奉氷川信仰，作为地区的守护神被祭祀。",
+        "en": "Miyagi Hikawa Shrine in Miyagi honors Hikawa faith, venerated as the area's guardian.",
+        "ko": "미야기(아다치구)에 자리한 미야기 히카와 신사. 히카와 신앙을 모시며 지역의 수호신으로 모셔져요."
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
@@ -5336,7 +5336,7 @@ window.RAILWAY_TOURISM = {
         139.74974
       ],
       "dist": "20 min walk",
-      "desc": "足立区鹿浜にある島氷川神社。地域の鎮守として親しまれている。",
+      "desc": "鹿浜にある島氷川神社。氷川信仰を受け継ぎ、荒川沿いの街を見守ってきた。",
       "tags": [
         "all",
         "shrine"
@@ -5355,10 +5355,10 @@ window.RAILWAY_TOURISM = {
         "ko": "島氷川神社"
       },
       "desc_i18n": {
-        "ja": "足立区鹿浜にある島氷川神社。地域の鎮守として親しまれている。",
-        "zh": "位于足立区鹿浜的島氷川神社，作为地区守护神社深受喜爱。",
-        "en": "島氷川神社 in 鹿浜, Adachi-ku, cherished as the local guardian shrine.",
-        "ko": "아다치구 鹿浜에 있는 島氷川神社로, 지역 수호신으로 사랑받는 신사예요."
+        "ja": "鹿浜にある島氷川神社。氷川信仰を受け継ぎ、荒川沿いの街を見守ってきた。",
+        "zh": "位于鹿浜的岛氷川神社。承袭氷川信仰，一直守护着荒川沿岸的街区。",
+        "en": "Shima Hikawa Shrine in Shikahama follows Hikawa faith, watching over the town along the Arakawa.",
+        "ko": "시카하마에 있는 시마 히카와 신사. 히카와 신앙을 이어받아 아라카와 강가 마을을 지켜왔어요."
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
@@ -5400,7 +5400,7 @@ window.RAILWAY_TOURISM = {
         139.82111
       ],
       "dist": "5 min walk",
-      "desc": "足立区綾瀬の街なかに建つ神社。地域の鎮守として古くから親しまれている。",
+      "desc": "綾瀬の街なかに建つ神社。にぎやかな通りから一歩入った場所で、地域を見守る。",
       "tags": [
         "all",
         "shrine"
@@ -5419,10 +5419,10 @@ window.RAILWAY_TOURISM = {
         "ko": "綾瀬神社"
       },
       "desc_i18n": {
-        "ja": "足立区綾瀬の街なかに建つ神社。地域の鎮守として古くから親しまれている。",
-        "zh": "坐落于足立区绫濑街区的神社，作为地区守护神自古以来深受爱戴。",
-        "en": "A shrine in the streets of Ayase, Adachi-ku, long cherished as the local guardian.",
-        "ko": "아다치구 綾瀬 거리에 자리한 신사로, 지역 수호신으로 오랫동안 사랑받아요."
+        "ja": "綾瀬の街なかに建つ神社。にぎやかな通りから一歩入った場所で、地域を見守る。",
+        "zh": "建于綾瀬街区的神社。从热闹的街道转入一步之遥，守护着这一带。",
+        "en": "A shrine tucked a step off Ayase's lively streets, quietly watching over the neighborhood.",
+        "ko": "아야세 거리에 세워진 신사. 번화한 길에서 한 걸음 들어선 곳에서 지역을 지켜봐요."
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
@@ -5464,7 +5464,7 @@ window.RAILWAY_TOURISM = {
         139.7886
       ],
       "dist": "13 min walk",
-      "desc": "足立区関原にある関原八幡神社。地域の鎮守として親しまれている。",
+      "desc": "関原に祀られる関原八幡神社。八幡神をまつり、勝負運や武運の神として信仰されてきた。",
       "tags": [
         "all",
         "shrine"
@@ -5483,10 +5483,10 @@ window.RAILWAY_TOURISM = {
         "ko": "関原八幡神社"
       },
       "desc_i18n": {
-        "ja": "足立区関原にある関原八幡神社。地域の鎮守として親しまれている。",
-        "zh": "位于足立区関原的関原八幡神社，作为地区守护神社深受喜爱。",
-        "en": "関原八幡神社 in 関原, Adachi-ku, cherished as the local guardian shrine.",
-        "ko": "아다치구 関原에 있는 関原八幡神社로, 지역 수호신으로 사랑받는 신사예요."
+        "ja": "関原に祀られる関原八幡神社。八幡神をまつり、勝負運や武運の神として信仰されてきた。",
+        "zh": "祭祀于关原的关原八幡神社。供奉八幡神，作为胜负运与武运之神一直受人信仰。",
+        "en": "Sekihara Hachiman Shrine venerates Hachiman, long worshiped as a god of victory and martial fortune.",
+        "ko": "세키하라에 모셔진 세키하라 하치만 신사. 하치만신을 모셔 승운과 무운의 신으로 신앙받아 왔어요."
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
@@ -5528,7 +5528,7 @@ window.RAILWAY_TOURISM = {
         139.79694
       ],
       "dist": "2 min walk",
-      "desc": "足立区梅島にある梅島天満宮。地域の鎮守として親しまれている。",
+      "desc": "梅島に鎮座する天満宮。菅原道真公を祀り、学問の神として知られる。境内は地域の暮らしに溶け込んでいる。",
       "tags": [
         "all",
         "shrine"
@@ -5547,10 +5547,10 @@ window.RAILWAY_TOURISM = {
         "ko": "梅島天満宮"
       },
       "desc_i18n": {
-        "ja": "足立区梅島にある梅島天満宮。地域の鎮守として親しまれている。",
-        "zh": "位于足立区梅島的梅島天満宮，作为地区守护神社深受喜爱。",
-        "en": "梅島天満宮 in 梅島, Adachi-ku, cherished as the local guardian shrine.",
-        "ko": "아다치구 梅島에 있는 梅島天満宮로, 지역 수호신으로 사랑받는 신사예요."
+        "ja": "梅島に鎮座する天満宮。菅原道真公を祀り、学問の神として知られる。境内は地域の暮らしに溶け込んでいる。",
+        "zh": "坐落于梅岛的天满宫。祭祀菅原道真公，以学问之神闻名，院内融入地区日常生活。",
+        "en": "A Tenmangu shrine in Umejima dedicated to Sugawara no Michizane, known as the god of learning, its grounds woven into everyday local life.",
+        "ko": "우메지마에 자리한 덴만구. 스가와라노 미치자네를 모셔 학문의 신으로 알려져 있고 경내는 지역 생활에 자연스럽게 어우러져 있어요."
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
@@ -5592,7 +5592,7 @@ window.RAILWAY_TOURISM = {
         139.79628
       ],
       "dist": "2 min walk",
-      "desc": "足立区千住にある美術館。日本画や工芸品を中心に展示している。",
+      "desc": "足立区千住にある美術館。日本画や工芸品を中心に展示し、無料で気軽に鑑賞できる。",
       "tags": [
         "all"
       ],
@@ -5610,10 +5610,10 @@ window.RAILWAY_TOURISM = {
         "ko": "石洞美術館"
       },
       "desc_i18n": {
-        "ja": "足立区千住にある美術館。日本画や工芸品を中心に展示している。",
-        "zh": "位于足立区千住的美术馆。以日本画和工艺品的展示为主。",
-        "en": "位于足立区千住的美术馆。以日本画和工艺品的展示为主。",
-        "ko": "位于足立区千住的美术馆。以日本画和工艺品的展示为主。"
+        "ja": "足立区千住にある美術館。日本画や工芸品を中心に展示し、無料で気軽に鑑賞できる。",
+        "zh": "位于足立区千住的美术馆。以日本画和工艺品展示为主，可免费轻松欣赏。",
+        "en": "A museum in Senju, Adachi Ward, focusing on Japanese paintings and crafts, free to visit.",
+        "ko": "아다치구 센주에 있는 미술관. 일본화와 공예품을 중심으로 전시하며 무료로 부담 없이 감상할 수 있어요."
       },
       "hours_i18n": {
         "ja": "",
@@ -5655,7 +5655,7 @@ window.RAILWAY_TOURISM = {
         139.80186
       ],
       "dist": "7 min walk",
-      "desc": "足立区千住仲町にある仲町氷川神社。地域の鎮守として親しまれている。",
+      "desc": "千住仲町に鎮座する仲町氷川神社。氷川信仰を伝え、下町の暮らしを見守ってきた。",
       "tags": [
         "all",
         "shrine"
@@ -5674,10 +5674,10 @@ window.RAILWAY_TOURISM = {
         "ko": "仲町氷川神社"
       },
       "desc_i18n": {
-        "ja": "足立区千住仲町にある仲町氷川神社。地域の鎮守として親しまれている。",
-        "zh": "位于足立区千住仲町的仲町氷川神社，作为地区守护神社深受喜爱。",
-        "en": "仲町氷川神社 in 千住仲町, Adachi-ku, cherished as the local guardian shrine.",
-        "ko": "아다치구 千住仲町에 있는 仲町氷川神社로, 지역 수호신으로 사랑받는 신사예요."
+        "ja": "千住仲町に鎮座する仲町氷川神社。氷川信仰を伝え、下町の暮らしを見守ってきた。",
+        "zh": "坐落于千住仲町的仲町氷川神社。传承氷川信仰，守护着下町的生活。",
+        "en": "Nakacho Hikawa Shrine in Senju Nakacho carries Hikawa faith and watches over the old-town life.",
+        "ko": "센주 나카초에 자리한 나카초 히카와 신사. 히카와 신앙을 전하며 옛 시가지의 삶을 지켜왔어요."
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
@@ -5719,7 +5719,7 @@ window.RAILWAY_TOURISM = {
         139.79994
       ],
       "dist": "12 min walk",
-      "desc": "足立区千住大川町にある大川町氷川神社。地域の鎮守として親しまれている。",
+      "desc": "千住大川町にある大川町氷川神社。氷川信仰の神社として、地域の人々に慕われている。",
       "tags": [
         "all",
         "shrine"
@@ -5738,10 +5738,10 @@ window.RAILWAY_TOURISM = {
         "ko": "大川町氷川神社"
       },
       "desc_i18n": {
-        "ja": "足立区千住大川町にある大川町氷川神社。地域の鎮守として親しまれている。",
-        "zh": "位于足立区千住大川町的大川町氷川神社，作为地区守护神社深受喜爱。",
-        "en": "大川町氷川神社 in 千住大川町, Adachi-ku, cherished as the local guardian shrine.",
-        "ko": "아다치구 千住大川町에 있는 大川町氷川神社로, 지역 수호신으로 사랑받는 신사예요."
+        "ja": "千住大川町にある大川町氷川神社。氷川信仰の神社として、地域の人々に慕われている。",
+        "zh": "位于千住大川町的大川町氷川神社。作为氷川信仰的神社，深受地区人们仰慕。",
+        "en": "Okawacho Hikawa Shrine in Senju Okawacho is an approachable Hikawa shrine admired by the area.",
+        "ko": "센주 오카와초에 있는 오카와초 히카와 신사. 히카와 신앙의 신사로서 지역 사람들이 따르는 곳이에요."
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
@@ -5847,7 +5847,7 @@ window.RAILWAY_TOURISM = {
         139.83607
       ],
       "dist": "18 min walk",
-      "desc": "足立区神明の住宅街に建つ神社。地域の鎮守として古くから親しまれている。",
+      "desc": "神明の住宅街に建つ天祖神社。天照大神をまつる神社として、地域の信仰を集めている。",
       "tags": [
         "all",
         "shrine"
@@ -5866,10 +5866,10 @@ window.RAILWAY_TOURISM = {
         "ko": "天祖神社"
       },
       "desc_i18n": {
-        "ja": "足立区神明の住宅街に建つ神社。地域の鎮守として古くから親しまれている。",
-        "zh": "坐落于足立区神明住宅区的神社，作为地区守护神自古以来深受爱戴。",
-        "en": "A shrine in a residential area of Shinmei, Adachi-ku, long cherished as the local guardian.",
-        "ko": "아다치구 神明 주택가에 자리한 신사로, 지역 수호신으로 오랫동안 사랑받아요."
+        "ja": "神明の住宅街に建つ天祖神社。天照大神をまつる神社として、地域の信仰を集めている。",
+        "zh": "建于神明住宅区的天祖神社。作为供奉天照大神的神社，凝聚着地区的信仰。",
+        "en": "Tenso Shrine in the residential area of Shinmei venerates Amaterasu, gathering the faith of the area.",
+        "ko": "신메이 주택가에 세워진 텐소 신사. 아마테라스 오미카미를 모시는 신사로 지역의 신앙을 모아요."
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
@@ -5911,7 +5911,7 @@ window.RAILWAY_TOURISM = {
         139.79799
       ],
       "dist": "5 min walk",
-      "desc": "足立区千住宮元町にある白幡八幡神社。地域の鎮守として親しまれている。",
+      "desc": "千住宮元町にある白幡八幡神社。八幡神をまつり、地域の氏神として祀られている。",
       "tags": [
         "all",
         "shrine"
@@ -5930,10 +5930,10 @@ window.RAILWAY_TOURISM = {
         "ko": "白幡八幡神社"
       },
       "desc_i18n": {
-        "ja": "足立区千住宮元町にある白幡八幡神社。地域の鎮守として親しまれている。",
-        "zh": "位于足立区千住宮元町的白幡八幡神社，作为地区守护神社深受喜爱。",
-        "en": "白幡八幡神社 in 千住宮元町, Adachi-ku, cherished as the local guardian shrine.",
-        "ko": "아다치구 千住宮元町에 있는 白幡八幡神社로, 지역 수호신으로 사랑받는 신사예요."
+        "ja": "千住宮元町にある白幡八幡神社。八幡神をまつり、地域の氏神として祀られている。",
+        "zh": "位于千住宫元町的白幡八幡神社。供奉八幡神，作为地区的氏神被祭祀。",
+        "en": "Shirahata Hachiman Shrine in Senju Miyamotocho venerates Hachiman as the neighborhood's ujigami.",
+        "ko": "센주 미야모토초에 있는 시라하타 하치만 신사. 하치만신을 모셔 지역의 우지가미로 모셔져요."
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
@@ -5975,7 +5975,7 @@ window.RAILWAY_TOURISM = {
         139.79779
       ],
       "dist": "7 min walk",
-      "desc": "千住中居町にある浄土真宗系の寺。千邑山と号し、下町の路地裏に佇む。",
+      "desc": "千住中居町にある浄土真宗系の寺。千邑山と号し、下町の路地裏に静かにたたずむ。都会の喧騒を離れ、心静かに参拝できる。",
       "tags": [
         "all",
         "history"
@@ -5994,10 +5994,10 @@ window.RAILWAY_TOURISM = {
         "ko": "常護寺"
       },
       "desc_i18n": {
-        "ja": "千住中居町にある浄土真宗系の寺。千邑山と号し、下町の路地裏に佇む。",
-        "zh": "位于千住中居町的净土真宗系寺院。山号千邑山，坐落于老街的小巷深处。",
-        "en": "A Jodo-Shinshu-related temple in Senju-Nakai-cho, titled Sennyuyama, tucked in an old-town back alley.",
-        "ko": "센주나카이초에 있는 정토진진계 사찰. 센뉴산이라 하며 을거리 골목에 자리한다."
+        "ja": "千住中居町にある浄土真宗系の寺。千邑山と号し、下町の路地裏に静かにたたずむ。都会の喧騒を離れ、心静かに参拝できる。",
+        "zh": "位于千住中居町的净土真宗系寺院。山号千邑山，静静坐落于老街小巷深处，可远离都市喧嚣静心参拜。",
+        "en": "A Jodo-Shinshu-related temple in Senju-Nakai-cho, titled Sennyuyama, tucked quietly in an old-town back alley — a calm place to pray away from the bustle.",
+        "ko": "센주나카이초에 있는 정토진종계 사찰. 산호는 센뉴산이며 옛 시가지 골목에 조용히 자리해요. 번잡함을 벗어나 마음 가라앉히고 참배할 수 있어요."
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
@@ -6039,7 +6039,7 @@ window.RAILWAY_TOURISM = {
         139.82002
       ],
       "dist": "22 min walk",
-      "desc": "足立区花畑にある花畑大鷲神社。地域の鎮守として親しまれている。",
+      "desc": "花畑にある花畑大鷲神社。「大鷲」の名を持つ神社で、商売繁盛の神として信仰されている。",
       "tags": [
         "all",
         "shrine"
@@ -6058,10 +6058,10 @@ window.RAILWAY_TOURISM = {
         "ko": "花畑大鷲神社"
       },
       "desc_i18n": {
-        "ja": "足立区花畑にある花畑大鷲神社。地域の鎮守として親しまれている。",
-        "zh": "位于足立区花畑的花畑大鷲神社，作为地区守护神社深受喜爱。",
-        "en": "花畑大鷲神社 in 花畑, Adachi-ku, cherished as the local guardian shrine.",
-        "ko": "아다치구 花畑에 있는 花畑大鷲神社로, 지역 수호신으로 사랑받는 신사예요."
+        "ja": "花畑にある花畑大鷲神社。「大鷲」の名を持つ神社で、商売繁盛の神として信仰されている。",
+        "zh": "位于花畑的花畑大鷲神社。冠以「大鷲」之名的神社，作为生意兴隆之神受人信仰。",
+        "en": "Hanahata Ootori Shrine bears the name \"great eagle,\" worshiped as a god of prosperous business.",
+        "ko": "하나하타에 있는 하나하타 오오토리 신사. \"큰 독수리\"라는 이름을 지닌 신사로 장사 번창의 신으로 신앙받아요."
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
@@ -6296,7 +6296,7 @@ window.RAILWAY_TOURISM = {
         139.76187
       ],
       "dist": "10 min walk",
-      "desc": "足立区江北にある江北氷川神社。地域の鎮守として親しまれている。",
+      "desc": "江北に鎮座する江北氷川神社。氷川信仰を受け継ぎ、地域の鎮守として祀られている。",
       "tags": [
         "all",
         "shrine"
@@ -6315,10 +6315,10 @@ window.RAILWAY_TOURISM = {
         "ko": "江北氷川神社"
       },
       "desc_i18n": {
-        "ja": "足立区江北にある江北氷川神社。地域の鎮守として親しまれている。",
-        "zh": "位于足立区江北的江北氷川神社，作为地区守护神社深受喜爱。",
-        "en": "江北氷川神社 in 江北, Adachi-ku, cherished as the local guardian shrine.",
-        "ko": "아다치구 江北에 있는 江北氷川神社로, 지역 수호신으로 사랑받는 신사예요."
+        "ja": "江北に鎮座する江北氷川神社。氷川信仰を受け継ぎ、地域の鎮守として祀られている。",
+        "zh": "坐落于江北的江北氷川神社。传承氷川信仰，作为地区的守护神社被祭祀。",
+        "en": "Kohoku Hikawa Shrine in Kohoku inherits Hikawa faith, venerated as the local guardian.",
+        "ko": "고호쿠에 자리한 고호쿠 히카와 신사. 히카와 신앙을 이어받아 지역의 수호신으로 모셔져요."
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
@@ -6360,7 +6360,7 @@ window.RAILWAY_TOURISM = {
         139.79182
       ],
       "dist": "10 min walk",
-      "desc": "足立区六月にある六月八幡神社。地域の鎮守として親しまれている。",
+      "desc": "六月にある六月八幡神社。八幡神をまつり、地域の守り神として信仰されている。",
       "tags": [
         "all",
         "shrine"
@@ -6379,10 +6379,10 @@ window.RAILWAY_TOURISM = {
         "ko": "六月八幡神社"
       },
       "desc_i18n": {
-        "ja": "足立区六月にある六月八幡神社。地域の鎮守として親しまれている。",
-        "zh": "位于足立区六月的六月八幡神社，作为地区守护神社深受喜爱。",
-        "en": "六月八幡神社 in 六月, Adachi-ku, cherished as the local guardian shrine.",
-        "ko": "아다치구 六月에 있는 六月八幡神社로, 지역 수호신으로 사랑받는 신사예요."
+        "ja": "六月にある六月八幡神社。八幡神をまつり、地域の守り神として信仰されている。",
+        "zh": "位于六月的六月八幡神社。供奉八幡神，作为地区的守护神受人信仰。",
+        "en": "Rokugatsu Hachiman Shrine venerates Hachiman, worshiped as the neighborhood's guardian.",
+        "ko": "로쿠가츠에 있는 로쿠가츠 하치만 신사. 하치만신을 모셔 지역의 수호신으로 신앙받아요."
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
@@ -6424,7 +6424,7 @@ window.RAILWAY_TOURISM = {
         139.75656
       ],
       "dist": "16 min walk",
-      "desc": "足立区堀之内にある堀之内氷川神社。地域の鎮守として親しまれている。",
+      "desc": "堀之内に根づく氷川信仰の神社。住宅地の中で地域の鎮守として静かに佇み、四季折々の佇まいを見せる。",
       "tags": [
         "all",
         "shrine"
@@ -6443,10 +6443,10 @@ window.RAILWAY_TOURISM = {
         "ko": "堀之内氷川神社"
       },
       "desc_i18n": {
-        "ja": "足立区堀之内にある堀之内氷川神社。地域の鎮守として親しまれている。",
-        "zh": "位于足立区堀之内的堀之内氷川神社，作为地区守护神社深受喜爱。",
-        "en": "堀之内氷川神社 in 堀之内, Adachi-ku, cherished as the local guardian shrine.",
-        "ko": "아다치구 堀之内에 있는 堀之内氷川神社로, 지역 수호신으로 사랑받는 신사예요."
+        "ja": "堀之内に根づく氷川信仰の神社。住宅地の中で地域の鎮守として静かに佇み、四季折々の佇まいを見せる。",
+        "zh": "扎根于堀之内的氷川信仰神社。在住宅区中静静矗立为地区守护神社，展现四季各异的风貌。",
+        "en": "A Hikawa shrine rooted in Horinouchi, standing quietly as the area's guardian amid the houses, showing a different face each season.",
+        "ko": "호리노우치에 뿌리내린 히카와 신앙의 신사. 주택가 한가운데 지역의 수호신으로 조용히 서 있으며 사계절 각기 다른 모습을 보여줘요."
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
@@ -6488,7 +6488,7 @@ window.RAILWAY_TOURISM = {
         139.76923
       ],
       "dist": "3 min walk",
-      "desc": "足立区扇にある扇 三嶋神社。地域の鎮守として親しまれている。",
+      "desc": "扇にある三嶋神社。三嶋信仰を伝える神社で、この地の氏神として祀られている。",
       "tags": [
         "all",
         "shrine"
@@ -6507,10 +6507,10 @@ window.RAILWAY_TOURISM = {
         "ko": "扇 三嶋神社"
       },
       "desc_i18n": {
-        "ja": "足立区扇にある扇 三嶋神社。地域の鎮守として親しまれている。",
-        "zh": "位于足立区扇的扇 三嶋神社，作为地区守护神社深受喜爱。",
-        "en": "扇 三嶋神社 in 扇, Adachi-ku, cherished as the local guardian shrine.",
-        "ko": "아다치구 扇에 있는 扇 三嶋神社로, 지역 수호신으로 사랑받는 신사예요."
+        "ja": "扇にある三嶋神社。三嶋信仰を伝える神社で、この地の氏神として祀られている。",
+        "zh": "位于扇的三岛神社。传承三岛信仰的神社，作为此地的氏神被祭祀。",
+        "en": "Ougi Mishima Shrine carries on Mishima faith, venerated as the area's ujigami.",
+        "ko": "오우기에 있는 미시마 신사. 미시마 신앙을 전하는 신사로 이 땅의 우지가미로 모셔져요."
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
@@ -6552,7 +6552,7 @@ window.RAILWAY_TOURISM = {
         139.78145
       ],
       "dist": "11 min walk",
-      "desc": "足立区伊興にある伊興 若宮八幡宮。地域の鎮守として親しまれている。",
+      "desc": "伊興にある若宮八幡宮。八幡信仰を受け継ぐ神社で、地域の氏神として崇敬されている。",
       "tags": [
         "all",
         "shrine"
@@ -6571,10 +6571,10 @@ window.RAILWAY_TOURISM = {
         "ko": "伊興 若宮八幡宮"
       },
       "desc_i18n": {
-        "ja": "足立区伊興にある伊興 若宮八幡宮。地域の鎮守として親しまれている。",
-        "zh": "位于足立区伊興的伊興 若宮八幡宮，作为地区守护神社深受喜爱。",
-        "en": "伊興 若宮八幡宮 in 伊興, Adachi-ku, cherished as the local guardian shrine.",
-        "ko": "아다치구 伊興에 있는 伊興 若宮八幡宮로, 지역 수호신으로 사랑받는 신사예요."
+        "ja": "伊興にある若宮八幡宮。八幡信仰を受け継ぐ神社で、地域の氏神として崇敬されている。",
+        "zh": "位于伊兴的若宫八幡宫。承袭八幡信仰的神社，作为地区的氏神受人崇敬。",
+        "en": "Iko Wakamiya Hachiman-gu carries on Hachiman faith, revered as the local ujigami.",
+        "ko": "이코에 있는 와카미야 하치만구. 하치만 신앙을 이어받은 신사로 지역의 우지가미로 숭앙받아요."
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
@@ -6616,7 +6616,7 @@ window.RAILWAY_TOURISM = {
         139.78107
       ],
       "dist": "12 min walk",
-      "desc": "足立区本木南町にある熊野神社。地域の鎮守として親しまれている。",
+      "desc": "本木南町にある熊野神社。熊野信仰を受け継ぎ、地域の守り神として祀られている。",
       "tags": [
         "all",
         "shrine"
@@ -6635,10 +6635,10 @@ window.RAILWAY_TOURISM = {
         "ko": "熊野神社"
       },
       "desc_i18n": {
-        "ja": "足立区本木南町にある熊野神社。地域の鎮守として親しまれている。",
-        "zh": "位于足立区本木南町的熊野神社，作为地区守护神社深受喜爱。",
-        "en": "熊野神社 in 本木南町, Adachi-ku, cherished as the local guardian shrine.",
-        "ko": "아다치구 本木南町에 있는 熊野神社로, 지역 수호신으로 사랑받는 신사예요."
+        "ja": "本木南町にある熊野神社。熊野信仰を受け継ぎ、地域の守り神として祀られている。",
+        "zh": "位于本木南町的熊野神社。承袭熊野信仰，作为地区的守护神被祭祀。",
+        "en": "Kumano Shrine in Motoki Minamicho follows Kumano faith, venerated as the local guardian.",
+        "ko": "모토키 미나미초에 있는 구마노 신사. 구마노 신앙을 이어받아 지역의 수호신으로 모셔져요."
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
@@ -6680,7 +6680,7 @@ window.RAILWAY_TOURISM = {
         139.78377
       ],
       "dist": "15 min walk",
-      "desc": "足立区本木東町にある本木御嶽神社。地域の鎮守として親しまれている。",
+      "desc": "本木東町の御嶽神社。山岳信仰に由来する御嶽信仰の神社として、地域を見守る。",
       "tags": [
         "all",
         "shrine"
@@ -6699,10 +6699,10 @@ window.RAILWAY_TOURISM = {
         "ko": "本木御嶽神社"
       },
       "desc_i18n": {
-        "ja": "足立区本木東町にある本木御嶽神社。地域の鎮守として親しまれている。",
-        "zh": "位于足立区本木東町的本木御嶽神社，作为地区守护神社深受喜爱。",
-        "en": "本木御嶽神社 in 本木東町, Adachi-ku, cherished as the local guardian shrine.",
-        "ko": "아다치구 本木東町에 있는 本木御嶽神社로, 지역 수호신으로 사랑받는 신사예요."
+        "ja": "本木東町の御嶽神社。山岳信仰に由来する御嶽信仰の神社として、地域を見守る。",
+        "zh": "本木东町的御岳神社。作为源自山岳信仰的御岳信仰神社，守护着地区。",
+        "en": "Motoki Ontake Shrine, rooted in the mountain worship of Ontake faith, watches over the area.",
+        "ko": "모토키 히가시초의 온타케 신사. 산악 신앙에서 유래한 온타케 신앙의 신사로서 지역을 지켜봐요."
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
@@ -6872,7 +6872,7 @@ window.RAILWAY_TOURISM = {
         139.85474
       ],
       "dist": "10 min walk",
-      "desc": "足立区中川にある長門鎮守八幡神社。地域の鎮守として親しまれている。",
+      "desc": "中川にある長門鎮守八幡神社。その名のとおり、この地を鎮め守る八幡神をまつる。",
       "tags": [
         "all",
         "shrine"
@@ -6891,10 +6891,10 @@ window.RAILWAY_TOURISM = {
         "ko": "長門鎮守八幡神社"
       },
       "desc_i18n": {
-        "ja": "足立区中川にある長門鎮守八幡神社。地域の鎮守として親しまれている。",
-        "zh": "位于足立区中川的長門鎮守八幡神社，作为地区守护神社深受喜爱。",
-        "en": "長門鎮守八幡神社 in 中川, Adachi-ku, cherished as the local guardian shrine.",
-        "ko": "아다치구 中川에 있는 長門鎮守八幡神社로, 지역 수호신으로 사랑받는 신사예요."
+        "ja": "中川にある長門鎮守八幡神社。その名のとおり、この地を鎮め守る八幡神をまつる。",
+        "zh": "位于中川的长门镇守八幡神社。正如其名，供奉着镇守此地的八幡神。",
+        "en": "Nagato Chinju Hachiman Shrine in Nakagawa, true to its name, venerates Hachiman who guards this land.",
+        "ko": "나카가와에 있는 나가토 친주 하치만 신사. 이름 그대로 이 땅을 진정시키고 지키는 하치만신을 모셔요."
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
@@ -6936,7 +6936,7 @@ window.RAILWAY_TOURISM = {
         139.81712
       ],
       "dist": "6 min walk",
-      "desc": "足立区西綾瀬にある八幡神社（西綾瀬）。地域の鎮守として親しまれている。",
+      "desc": "西綾瀬に祀られる八幡神社。八幡神をまつり、武運の神として地域の信仰を集めている。",
       "tags": [
         "all",
         "shrine"
@@ -6955,10 +6955,10 @@ window.RAILWAY_TOURISM = {
         "ko": "八幡神社（西綾瀬）"
       },
       "desc_i18n": {
-        "ja": "足立区西綾瀬にある八幡神社（西綾瀬）。地域の鎮守として親しまれている。",
-        "zh": "位于足立区西綾瀬的八幡神社（西綾瀬），作为地区守护神社深受喜爱。",
-        "en": "八幡神社（西綾瀬） in 西綾瀬, Adachi-ku, cherished as the local guardian shrine.",
-        "ko": "아다치구 西綾瀬에 있는 八幡神社（西綾瀬）로, 지역 수호신으로 사랑받는 신사예요."
+        "ja": "西綾瀬に祀られる八幡神社。八幡神をまつり、武運の神として地域の信仰を集めている。",
+        "zh": "祭祀于西绫濑的八幡神社。供奉八幡神，作为武运之神聚集着地区的信仰。",
+        "en": "A Hachiman shrine in Nishi-Ayase venerating Hachiman, gathering the area's faith as a god of martial fortune.",
+        "ko": "니시아야세에 모셔진 하치만 신사. 하치만신을 모셔 무운의 신으로 지역민의 신앙을 모아요."
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
@@ -7000,7 +7000,7 @@ window.RAILWAY_TOURISM = {
         139.80898
       ],
       "dist": "7 min walk",
-      "desc": "足立区日ノ出町にある日の出神社。地域の鎮守として親しまれている。",
+      "desc": "日ノ出町にある日の出神社。明るい社名のとおり、地域の鎮守として暮らしに寄り添う。",
       "tags": [
         "all",
         "shrine"
@@ -7019,10 +7019,10 @@ window.RAILWAY_TOURISM = {
         "ko": "日の出神社"
       },
       "desc_i18n": {
-        "ja": "足立区日ノ出町にある日の出神社。地域の鎮守として親しまれている。",
-        "zh": "位于足立区日ノ出町的日の出神社，作为地区守护神社深受喜爱。",
-        "en": "日の出神社 in 日ノ出町, Adachi-ku, cherished as the local guardian shrine.",
-        "ko": "아다치구 日ノ出町에 있는 日の出神社로, 지역 수호신으로 사랑받는 신사예요."
+        "ja": "日ノ出町にある日の出神社。明るい社名のとおり、地域の鎮守として暮らしに寄り添う。",
+        "zh": "位于日之出町的日出神社。正如这个明亮的名字，作为地区的守护神社贴近人们的生活。",
+        "en": "Hinode Shrine in Hinodecho, living up to its bright name, stands close to local life as the guardian.",
+        "ko": "히노데초에 있는 히노데 신사. 밝은 이름 그대로 지역의 수호신으로 생활에 다가서요."
       },
       "hours_i18n": {
         "ja": "参拝自由（境内）",
@@ -7214,7 +7214,7 @@ window.RAILWAY_TOURISM = {
         139.7649
       ],
       "dist": "0 min walk",
-      "desc": "高級ブランド店や老舗が並ぶ東京を代表する繁華街。週末は歩行者天国に。",
+      "desc": "高級ブランド店や老舗が並ぶ東京を代表する繁華街。週末は歩行者天国になり、和光の時計台や歌舞伎座など見どころも豊富。",
       "tags": [
         "all",
         "landmark",
@@ -7235,10 +7235,10 @@ window.RAILWAY_TOURISM = {
         "ko": "긴자（긴자 4초메 교차로）"
       },
       "desc_i18n": {
-        "ja": "高級ブランド店や老舗が並ぶ東京を代表する繁華街。週末は歩行者天国に。",
-        "zh": "高级品牌店和老字号林立的东京代表性繁华街区。周末变为步行者天堂。",
-        "en": "Tokyo's premier shopping district with luxury brands and long-established stores. Pedestrian-only on weekends.",
-        "ko": "고급 브랜드와 노포가 늘어선 도쿄를 대표하는 번화가예요. 주말에는 보행자 천국이 돼요."
+        "ja": "高級ブランド店や老舗が並ぶ東京を代表する繁華街。週末は歩行者天国になり、和光の時計台や歌舞伎座など見どころも豊富。",
+        "zh": "高级品牌店与老字号林立的东京代表性繁华街区。周末变为步行者天堂，和光钟楼、歌舞伎座等看点丰富。",
+        "en": "Tokyo's premier shopping district with luxury brands and long-established stores. Pedestrian-only on weekends, with sights like the Wako clock tower and Kabukiza.",
+        "ko": "고급 브랜드와 노포가 늘어선 도쿄를 대표하는 번화가. 주말에는 보행자 천국이 되고 와코 시계탑, 가부키좌 등 볼거리도 풍부해요."
       },
       "hours_i18n": {
         "ja": "店舗により異なる",
@@ -7289,7 +7289,7 @@ window.RAILWAY_TOURISM = {
         139.7745
       ],
       "dist": "0 min walk",
-      "desc": "江戸時代から続く五街道の起点。美しいアーチ橋と麒麟像が有名。",
+      "desc": "五街道の起点に架かる日本橋。美しいアーチと麒麟像が目を引き、橋上からは日本橋の景観を楽しめる。周辺には三越本店やCOREDO日本橋も。",
       "tags": [
         "all",
         "landmark",
@@ -7310,10 +7310,10 @@ window.RAILWAY_TOURISM = {
         "ko": "니혼바시"
       },
       "desc_i18n": {
-        "ja": "江戸時代から続く五街道の起点。美しいアーチ橋と麒麟像が有名。",
-        "zh": "江户时代延续至今的五街道起点。优美的拱桥和麒麟像闻名。",
-        "en": "The starting point of the Five Routes since the Edo period. Famous for its beautiful arch bridge and Qilin statue.",
-        "ko": "에도 시대부터 이어진 오가도의 기점이에요. 아름다운 아치교와 기린상으로 유명해요."
+        "ja": "五街道の起点に架かる日本橋。美しいアーチと麒麟像が目を引き、橋上からは日本橋の景観を楽しめる。周辺には三越本店やCOREDO日本橋も。",
+        "zh": "横跨五街道起点的日本桥。优美的拱桥与麒麟像引人注目，桥上可欣赏日本桥一带景观。周边有三越本店与COREDO日本桥。",
+        "en": "Nihonbashi spans the starting point of the Five Routes. Its graceful arch and Qilin statue catch the eye; nearby stand the Mitsukoshi main store and COREDO Nihonbashi.",
+        "ko": "오가도의 기점에 놓인 니혼바시. 아름다운 아치와 기린상이 눈길을 끌고, 다리 위에서 니혼바시 일대 풍경을 즐길 수 있어요. 주변에 미쓰코시 본점과 코레도 니혼바시도 있어요."
       },
       "hours_i18n": {
         "ja": "常時",
@@ -7514,7 +7514,7 @@ window.RAILWAY_TOURISM = {
         139.6917
       ],
       "dist": "0 min walk",
-      "desc": "無料で楽しめる高さ202mの展望室。富士山が見える日は絶景。",
+      "desc": "高さ202mから東京の街並みを一望できる無料の展望室。晴れた日は富士山も望め、南・北ふたつの展望室やお土産コーナーも楽しめる。",
       "tags": [
         "all",
         "landmark",
@@ -7535,10 +7535,10 @@ window.RAILWAY_TOURISM = {
         "ko": "도쿄도청 전망실"
       },
       "desc_i18n": {
-        "ja": "無料で楽しめる高さ202mの展望室。富士山が見える日は絶景。",
-        "zh": "免费的高202米展望室。能看到富士山的日子景色绝佳。",
-        "en": "A free 202m observatory. On clear days you can see Mt. Fuji.",
-        "ko": "무료로 즐기는 높이 202m 전망실이에요. 후지산이 보이는 날은 절경이에요."
+        "ja": "高さ202mから東京の街並みを一望できる無料の展望室。晴れた日は富士山も望め、南・北ふたつの展望室やお土産コーナーも楽しめる。",
+        "zh": "高202米、可免费俯瞰东京街景的展望室。晴天可远眺富士山，南北两座展望室与纪念品区都值得一看。",
+        "en": "A free 202m observatory overlooking Tokyo. On clear days you can see Mt. Fuji; enjoy both the south and north decks plus a souvenir corner.",
+        "ko": "높이 202m에서 도쿄 시내를 한눈에 내려다보는 무료 전망실. 맑은 날에는 후지산도 보이고, 남·북 두 전망실과 기념품 코너도 즐길 수 있어요."
       },
       "hours_i18n": {
         "ja": "9:30～23:00（北展望室）",
@@ -7889,7 +7889,7 @@ window.RAILWAY_TOURISM = {
         139.762
       ],
       "dist": "3 min walk",
-      "desc": "水戸徳川家ゆかりの大名庭園。都心にありながら四季の風景が楽しめる。",
+      "desc": "水戸徳川家ゆかりの回遊式大名庭園。都心にありながら四季の風景が楽しめ、梅まつりや通天閣を模した滝など見どころも多い。",
       "tags": [
         "all",
         "nature",
@@ -7911,10 +7911,10 @@ window.RAILWAY_TOURISM = {
         "ko": "코이시카와 코라쿠엔"
       },
       "desc_i18n": {
-        "ja": "水戸徳川家ゆかりの大名庭園。都心にありながら四季の風景が楽しめる。",
-        "zh": "与水户德川家有渊源的诸侯庭园。位于市中心却能欣赏四季风景。",
-        "en": "A daimyo garden of the Mito Tokugawa family. Enjoy four seasons of scenery in central Tokyo.",
-        "ko": "미토 도쿠가와가와 인연이 있는 다이묘 정원이에요. 도심에 있으면서 사계절 풍경을 즐길 수 있어요."
+        "ja": "水戸徳川家ゆかりの回遊式大名庭園。都心にありながら四季の風景が楽しめ、梅まつりや通天閣を模した滝など見どころも多い。",
+        "zh": "与水户德川家有渊源的环游式大名庭园。地处市中心却能欣赏四季风景，梅花祭、仿通天阁的瀑布等看点众多。",
+        "en": "A strolling daimyo garden of the Mito Tokugawa family. Enjoy four seasons of scenery in central Tokyo, plus the plum festival and a waterfall modeled on Tsutenkaku.",
+        "ko": "미토 도쿠가와가와 인연이 있는 회유식 다이묘 정원. 도심에 있으면서 사계절 풍경을 즐길 수 있고 매화 축제, 츠텐카쿠를 본뜬 폭포 등 볼거리가 많아요."
       },
       "hours_i18n": {
         "ja": "9:00～17:00",
@@ -8192,7 +8192,7 @@ window.RAILWAY_TOURISM = {
         139.7359
       ],
       "dist": "5 min walk",
-      "desc": "旧東海道の鎮守。江戸時代から信仰を集める富士塚が境内に残る。",
+      "desc": "旧東海道の鎮守として知られる神社。江戸時代から信仰を集めてきた富士塚が境内に残り、その頂からは関東平野を一望できる。",
       "tags": [
         "all",
         "shrine",
@@ -8213,10 +8213,10 @@ window.RAILWAY_TOURISM = {
         "ko": "시나가와 신사"
       },
       "desc_i18n": {
-        "ja": "旧東海道の鎮守。江戸時代から信仰を集める富士塚が境内に残る。",
-        "zh": "旧东海道的守护神社。境内保留着江户时代起受到信仰的富士冢。",
-        "en": "Guardian shrine of the old Tokaido. A Fujizuka mound that has drawn worship since the Edo period remains.",
-        "ko": "옛 도카이도의 수호신사예요. 에도 시대부터 신앙을 모은 후지즈카가 경내에 남아 있어요."
+        "ja": "旧東海道の鎮守として知られる神社。江戸時代から信仰を集めてきた富士塚が境内に残り、その頂からは関東平野を一望できる。",
+        "zh": "以旧东海道守护神社闻名。境内保留着江户时代起便受人信仰的富士冢，登顶可一览关东平原。",
+        "en": "Guardian shrine of the old Tokaido. A Fujizuka mound that has drawn worship since the Edo period remains in the grounds; from its top you can survey the Kanto plain.",
+        "ko": "옛 도카이도의 수호신사로 알려진 신사. 에도 시대부터 신앙을 모아온 후지즈카가 경내에 남아 있고, 정상에서 간토 평야를 한눈에 볼 수 있어요."
       },
       "hours_i18n": {
         "ja": "終日",
@@ -8267,7 +8267,7 @@ window.RAILWAY_TOURISM = {
         139.6986
       ],
       "dist": "2 min walk",
-      "desc": "中目黒周辺に約4km続く桜並木。春は桜のトンネルが楽しめる。",
+      "desc": "中目黒周辺に約4km続く桜並木。春は川沿いを桜のトンネルが彩り、ライトアップされた夜桜や川沿いのカフェも楽しめる。",
       "tags": [
         "all",
         "nature",
@@ -8289,10 +8289,10 @@ window.RAILWAY_TOURISM = {
         "ko": "메구로가와（벚꽃길）"
       },
       "desc_i18n": {
-        "ja": "中目黒周辺に約4km続く桜並木。春は桜のトンネルが楽しめる。",
-        "zh": "中目黑周边绵延约4公里的樱花道。春天可欣赏樱花隧道。",
-        "en": "About 4km of cherry trees along the river near Nakameguro. A stunning tunnel of blossoms in spring.",
-        "ko": "나카메구로 주변에 약 4km 이어지는 벚꽃길이에요. 봄에는 벚꽃 터널을 즐길 수 있어요."
+        "ja": "中目黒周辺に約4km続く桜並木。春は川沿いを桜のトンネルが彩り、ライトアップされた夜桜や川沿いのカフェも楽しめる。",
+        "zh": "中目黑周边绵延约4公里的樱花道。春天河岸被樱花隧道装点，灯饰下的夜樱与河岸咖啡馆都值得体验。",
+        "en": "About 4km of cherry trees along the river near Nakameguro. In spring the banks become a tunnel of blossoms, with illuminated night blooms and riverside cafés.",
+        "ko": "나카메구로 주변에 약 4km 이어지는 벚꽃길. 봄이면 강가가 벚꽃 터널로 물들고, 조명 켜진 밤벚꽃과 강변 카페도 즐길 수 있어요."
       },
       "hours_i18n": {
         "ja": "常時",
@@ -8418,7 +8418,7 @@ window.RAILWAY_TOURISM = {
         139.7065
       ],
       "dist": "5 min walk",
-      "desc": "日蓮宗の大本山。石段や五重塔が美しく、歴史ある境内を散策できる。",
+      "desc": "日蓮宗の大本山。壮観な石段や国指定の五重塔が立ち、歴史ある境内をゆっくり散策できる。",
       "tags": [
         "all",
         "shrine",
@@ -8440,10 +8440,10 @@ window.RAILWAY_TOURISM = {
         "ko": "이케가미 혼몬지"
       },
       "desc_i18n": {
-        "ja": "日蓮宗の大本山。石段や五重塔が美しく、歴史ある境内を散策できる。",
-        "zh": "日莲宗大本山。石阶和五重塔优美，可漫步历史悠久的院内。",
-        "en": "Head temple of Nichiren Buddhism. Beautiful stone steps and a five-story pagoda in historic grounds.",
-        "ko": "니치렌 종파의 대본산이에요. 돌계단과 오층탑이 아름답고 역사 깊은 경내를 산책할 수 있어요."
+        "ja": "日蓮宗の大本山。壮観な石段や国指定の五重塔が立ち、歴史ある境内をゆっくり散策できる。",
+        "zh": "日莲宗大本山。壮观的石阶与国指定五重塔矗立其中，可在历史悠久的院内从容漫步。",
+        "en": "Head temple of Nichiren Buddhism. Sweeping stone steps and a nationally designated five-story pagoda grace the historic grounds.",
+        "ko": "니치렌 종파의 대본산. 웅장한 돌계단과 국가 지정 오층탑이 서 있고, 역사 깊은 경내를 천천히 산책할 수 있어요."
       },
       "hours_i18n": {
         "ja": "6:00～17:00",
@@ -8569,7 +8569,7 @@ window.RAILWAY_TOURISM = {
         139.6683
       ],
       "dist": "0 min walk",
-      "desc": "サブカルチャーと古着の聖地。個性的なカフェやライブハウスが密集する。",
+      "desc": "サブカルチャーと古着の聖地。個性的なカフェやライブハウスが密集し、古着屋巡りや本多劇場での演劇など、一日中歩き回れる街。",
       "tags": [
         "all",
         "shopping",
@@ -8590,10 +8590,10 @@ window.RAILWAY_TOURISM = {
         "ko": "시모키타자와"
       },
       "desc_i18n": {
-        "ja": "サブカルチャーと古着の聖地。個性的なカフェやライブハウスが密集する。",
-        "zh": "亚文化和古着圣地。个性咖啡馆和Live House密集。",
-        "en": "A mecca of subculture and vintage clothing, packed with unique cafés and live houses.",
-        "ko": "서브컬처와 빈티지 의류의 성지예요. 개성 있는 카페와 라이브하우스가 밀집해 있어요."
+        "ja": "サブカルチャーと古着の聖地。個性的なカフェやライブハウスが密集し、古着屋巡りや本多劇場での演劇など、一日中歩き回れる街。",
+        "zh": "亚文化与古着圣地。个性咖啡馆与Live House密集，逛古着店、在本多剧场看戏，是可以逛上一整天的街区。",
+        "en": "A mecca of subculture and vintage clothing, packed with unique cafés and live houses — a neighborhood you can wander all day, from thrift stores to plays at Honda Gekijo.",
+        "ko": "서브컬처와 빈티지 의류의 성지. 개성 있는 카페와 라이브하우스가 밀집해 있고 빈티지 숍 투어, 혼다 극장 연극까지 하루 종일 돌아다닐 수 있는 거리예요."
       },
       "hours_i18n": {
         "ja": "店舗により異なる",
@@ -8945,7 +8945,7 @@ window.RAILWAY_TOURISM = {
         139.8618
       ],
       "dist": "0 min walk",
-      "desc": "海を望む広大な公園。大観覧車と水族園が人気のデートスポット。",
+      "desc": "海を望む広大な都立公園。大観覧車や水族園が人気で、バードウォッチングや夕日鑑賞も楽しめるデートスポット。",
       "tags": [
         "all",
         "park",
@@ -8967,10 +8967,10 @@ window.RAILWAY_TOURISM = {
         "ko": "가사이 임해공원"
       },
       "desc_i18n": {
-        "ja": "海を望む広大な公園。大観覧車と水族園が人気のデートスポット。",
-        "zh": "面朝大海的广阔公园。大摩天轮和水族园是热门约会地点。",
-        "en": "A vast seaside park. The big Ferris wheel and aquarium make it a popular date spot.",
-        "ko": "바다가 보이는 드넓은 공원이에요. 대관람차와 수족원이 인기 데이트 명소예요."
+        "ja": "海を望む広大な都立公園。大観覧車や水族園が人気で、バードウォッチングや夕日鑑賞も楽しめるデートスポット。",
+        "zh": "面朝大海的广阔都立公园。大摩天轮与水族园人气十足，观鸟与赏夕阳也令人尽兴的约会胜地。",
+        "en": "A vast seaside metropolitan park. The big Ferris wheel and aquarium draw crowds; birdwatching and sunset views make it a favorite date spot.",
+        "ko": "바다가 보이는 드넓은 도립 공원. 대관람차와 수족원이 인기 있고, 새 관찰과 노을 감상도 즐길 수 있는 데이트 명소예요."
       },
       "hours_i18n": {
         "ja": "常時（水族園は9:30～17:00）",
@@ -9323,7 +9323,7 @@ window.RAILWAY_TOURISM = {
         139.8736
       ],
       "dist": "3 min walk",
-      "desc": "映画『男はつらいよ』の舞台。彫刻が美しい帝釈堂と賑やかな参道が魅力。",
+      "desc": "映画『男はつらいよ』の舞台として知られる寺院。彫刻が美しい帝釈堂と草団子が並ぶ賑やかな参道が魅力で、寅さん像との記念撮影も人気。",
       "tags": [
         "all",
         "shrine",
@@ -9345,10 +9345,10 @@ window.RAILWAY_TOURISM = {
         "ko": "시바마타 타이샤쿠텐（다이쿄지）"
       },
       "desc_i18n": {
-        "ja": "映画『男はつらいよ』の舞台。彫刻が美しい帝釈堂と賑やかな参道が魅力。",
-        "zh": "电影《男人真命苦》的舞台。雕刻精美的帝释堂和热闹的参道是魅力所在。",
-        "en": "The setting of the film \"Otoko wa Tsurai yo\". Admire the carved Daishakudo and lively approach.",
-        "ko": "영화 《남자는 괴로워》의 무대예요. 조각이 아름다운 타이샤쿠도와 활기찬 참배길이 매력이에요."
+        "ja": "映画『男はつらいよ』の舞台として知られる寺院。彫刻が美しい帝釈堂と草団子が並ぶ賑やかな参道が魅力で、寅さん像との記念撮影も人気。",
+        "zh": "以电影《男人真命苦》舞台而闻名的寺院。雕刻精美的帝释堂与摆满草团子的热闹参道极具魅力，与寅次郎像合影也颇受欢迎。",
+        "en": "The temple known as the setting of \"Otoko wa Tsurai yo.\" Carved Daishakudo and a lively approach lined with dango shops charm visitors; photos with the Torasan statue are a favorite.",
+        "ko": "영화 《남자는 괴로워》의 무대로 알려진 사찰. 조각이 아름다운 타이샤쿠도와 단고 가게가 늘어선 활기찬 참배길이 매력이고, 토라상 동상과 기념 촬영도 인기예요."
       },
       "hours_i18n": {
         "ja": "8:00～16:00",
@@ -27653,7 +27653,7 @@ window.RAILWAY_TOURISM = {
         139.7715
       ],
       "dist": "銀座一丁目駅から徒歩約2分",
-      "desc": "江戸の伝統金属技法・木目金を用いたジュエリーが人気の工房兼店。",
+      "desc": "江戸の伝統金属技法・木目金を用いたジュエリーが人気の工房兼店。結婚・婚約指輪のオーダーメイドも手がける。",
       "tags": [
         "all",
         "food",
@@ -27675,10 +27675,10 @@ window.RAILWAY_TOURISM = {
         "ko": "긴자 나오코"
       },
       "desc_i18n": {
-        "ja": "江戸の伝統金属技法・木目金を用いたジュエリーが人気の工房兼店。",
-        "zh": "以江户传统金属工艺木目金首饰闻名的工房兼店铺。",
-        "en": "A workshop-shop known for jewelry made with the traditional Edo mokume-gane metal technique.",
-        "ko": "에도 전통 금속 기법 메쿠메가네 주얼리로 인기인 공방 겸 가게."
+        "ja": "江戸の伝統金属技法・木目金を用いたジュエリーが人気の工房兼店。結婚・婚約指輪のオーダーメイドも手がける。",
+        "zh": "以江户传统金属工艺木目金首饰闻名的工房兼店铺，也承接结婚、订婚戒指的定制。",
+        "en": "A workshop-shop known for jewelry made with the traditional Edo mokume-gane metal technique, taking custom orders for wedding and engagement rings.",
+        "ko": "에도 전통 금속 기법 메쿠메가네 주얼리로 인기인 공방 겸 가게. 결혼·약혼 반지 주문 제작도 맡아요."
       },
       "hours_i18n": {
         "ja": "10:30～18:00／月土祝休",
@@ -28525,7 +28525,7 @@ window.RAILWAY_TOURISM = {
         139.70671
       ],
       "dist": "高田馬場駅 徒歩30秒",
-      "desc": "高田馬場駅すぐのスパイスカレー店。スープカレーが看板メニュー。",
+      "desc": "高田馬場駅すぐのスパイスカレー店。看板メニューのスープカレーに加え、いりこのアンチョビチキンも人気。売り切れ次第閉店なので早めに。",
       "tags": [
         "all",
         "food"
@@ -28546,10 +28546,10 @@ window.RAILWAY_TOURISM = {
         "ko": "프네우마 카레"
       },
       "desc_i18n": {
-        "ja": "高田馬場駅すぐのスパイスカレー店。スープカレーが看板メニュー。",
-        "zh": "高田马场站旁的香料咖喱店，招牌是汤咖喱。",
-        "en": "A spice curry shop right by Takadanobaba Station; soup curry is the signature.",
-        "ko": "다카다노바바역 바로 앞 스파이스 카레 전문점, 수프카레가 시그니처 메뉴."
+        "ja": "高田馬場駅すぐのスパイスカレー店。看板メニューのスープカレーに加え、いりこのアンチョビチキンも人気。売り切れ次第閉店なので早めに。",
+        "zh": "高田马场站旁的香料咖喱店。招牌汤咖喱之外，煮干鳀鱼鸡肉也颇受欢迎。售罄即关门，建议趁早。",
+        "en": "A spice curry shop right by Takadanobaba Station; soup curry is the signature, with niboshi anchovy chicken also a hit. It closes when sold out, so go early.",
+        "ko": "다카다노바바역 바로 앞 스파이스 카레 전문점. 시그니처 수프카레 외에 니보시 안초비 치킨도 인기. 매진되면 문을 닫으니 일찍 가세요."
       },
       "hours_i18n": {
         "ja": "10:45～15:30、17:00～20:00(売切次第閉店)／日祝休",
@@ -28669,7 +28669,7 @@ window.RAILWAY_TOURISM = {
         139.7076117
       ],
       "dist": "東新宿駅 徒歩1分",
-      "desc": "東新宿駅前の個性派つけ蕎麦店。ラー油の効いたピリ辛つけ汁が名物。",
+      "desc": "東新宿駅前の個性派つけ蕎麦店。ラー油の効いたピリ辛つけ汁が名物で、生卵やフライドガーリックのトッピングも楽しめる。",
       "tags": [
         "all",
         "food",
@@ -28691,10 +28691,10 @@ window.RAILWAY_TOURISM = {
         "ko": "왜 소바에 라유를 넣는가"
       },
       "desc_i18n": {
-        "ja": "東新宿駅前の個性派つけ蕎麦店。ラー油の効いたピリ辛つけ汁が名物。",
-        "zh": "东新宿站前的个性蘸面荞麦店，辣油蘸汁微辣上头是招牌。",
-        "en": "An idiosyncratic dipping-soba spot by Higashi-Shinjuku Station; the chili-oil dipping sauce is the draw.",
-        "ko": "히가시신주쿠역 앞 개성 넘치는 츠케소바집. 라유 들어간 매콤한 츠유가 명물."
+        "ja": "東新宿駅前の個性派つけ蕎麦店。ラー油の効いたピリ辛つけ汁が名物で、生卵やフライドガーリックのトッピングも楽しめる。",
+        "zh": "东新宿站前的个性蘸面荞麦店。辣油蘸汁微辣上头是招牌，还可加生蛋、炸蒜等配料。",
+        "en": "An idiosyncratic dipping-soba spot by Higashi-Shinjuku Station; the chili-oil dipping sauce is the draw, with raw egg and fried garlic toppings to try.",
+        "ko": "히가시신주쿠역 앞 개성 넘치는 츠케소바집. 라유가 들어간 매콤한 츠유가 명물이고, 날계란이나 튀긴 마늘 토핑도 즐길 수 있어요."
       },
       "hours_i18n": {
         "ja": "11:00～16:00、17:30～22:00／無休",
@@ -28814,7 +28814,7 @@ window.RAILWAY_TOURISM = {
         139.746446
       ],
       "dist": "茗荷谷駅 徒歩15分",
-      "desc": "東大理学系附属の広大な植物園。約200年の歴史を持つ都内屈指の名所。",
+      "desc": "東京大学理学系研究科附属の植物園。1648年開園の日本最古の植物園で、約4000種もの植物が集まる。",
       "tags": [
         "all",
         "history",
@@ -28836,10 +28836,10 @@ window.RAILWAY_TOURISM = {
         "ko": "고이시카와 식물원"
       },
       "desc_i18n": {
-        "ja": "東大理学系附属の広大な植物園。約200年の歴史を持つ都内屈指の名所。",
-        "zh": "东京大学理学系附属的广阔植物园，约200年历史，都内屈指名所。",
-        "en": "The University of Tokyo's spacious Koishikawa Botanical Garden, with a history of about 200 years.",
-        "ko": "도쿄대 이학부 부속 고이시카와 식물원, 약 200년 역사."
+        "ja": "東京大学理学系研究科附属の植物園。1648年開園の日本最古の植物園で、約4000種もの植物が集まる。",
+        "zh": "东京大学理学系研究科附属植物园。1648年开园，是日本最古老的植物园，汇集约4000种植物。",
+        "en": "The University of Tokyo's Koishikawa Botanical Garden — Japan's oldest, opened in 1648, with some 4,000 species of plants.",
+        "ko": "도쿄대학 이학계 연구과 부속 고이시카와 식물원. 1648년 개원한 일본 최초의 식물원으로 약 4000종의 식물이 모여 있어요."
       },
       "hours_i18n": {
         "ja": "詳細は小石川植物園HP参照／月曜休",
@@ -29032,7 +29032,7 @@ window.RAILWAY_TOURISM = {
         139.657663
       ],
       "dist": "方南町駅 徒歩5分",
-      "desc": "方南町のイタリアンレストラン。焼きたて特大ピザのオークションが名物。",
+      "desc": "方南町のイタリアンレストラン。50cmの手作り特大ピザが焼き上がるたび、軒先でリアルオークションが開かれるユニークなお店。",
       "tags": [
         "all",
         "food"
@@ -29053,10 +29053,10 @@ window.RAILWAY_TOURISM = {
         "ko": "아킷초 데시카"
       },
       "desc_i18n": {
-        "ja": "方南町のイタリアンレストラン。焼きたて特大ピザのオークションが名物。",
-        "zh": "方南町的意大利餐厅，现烤特大披萨拍卖是招牌。",
-        "en": "An Italian restaurant in Honancho famous for auctions of giant fresh-baked pizzas.",
-        "ko": "호난초 이탈리안 레스토랑. 갓 구운 특대 피자 경매가 명물이에요."
+        "ja": "方南町のイタリアンレストラン。50cmの手作り特大ピザが焼き上がるたび、軒先でリアルオークションが開かれるユニークなお店。",
+        "zh": "方南町的意大利餐厅。50厘米手作特大披萨出炉时，会在店前举行真实拍卖的独特店铺。",
+        "en": "An Italian restaurant in Honancho famous for its live auctions of giant 50cm pizzas as they come fresh from the oven.",
+        "ko": "호난초 이탈리안 레스토랑. 50cm 수제 특대 피자가 구워질 때마다 가게 앞에서 실제 경매가 열리는 독특한 곳이에요."
       },
       "hours_i18n": {
         "ja": "ランチ11:30～15:00(L.O.14:30)、ディナー17:00～22:00(L.O.21:00)／火曜定休",
@@ -29104,7 +29104,7 @@ window.RAILWAY_TOURISM = {
         139.654425
       ],
       "dist": "東高円寺駅 徒歩7分",
-      "desc": "東高円寺の味噌ラーメン店。独自のカンパ制システムで知られる。",
+      "desc": "東高円寺の味噌ラーメン店。52種の味噌ダレから選べ、20円のカンパでトッピングが増える独自システムで知られる。",
       "tags": [
         "all",
         "food",
@@ -29127,10 +29127,10 @@ window.RAILWAY_TOURISM = {
         "ko": "미소이치 코엔지 본점"
       },
       "desc_i18n": {
-        "ja": "東高円寺の味噌ラーメン店。独自のカンパ制システムで知られる。",
-        "zh": "东高圆寺的味噌拉面店，以独特的付费制度闻名。",
-        "en": "A miso-ramen shop in Higashi-Koenji known for its unique shared-payment system.",
-        "ko": "히가시코엔지 미소 라멘집, 독특한 캉파 시스템으로 유명."
+        "ja": "東高円寺の味噌ラーメン店。52種の味噌ダレから選べ、20円のカンパでトッピングが増える独自システムで知られる。",
+        "zh": "东高圆寺的味噌拉面店。可选52种味噌酱，20日元\"カンパ\"即可追加配料的独特系统闻名。",
+        "en": "A miso-ramen shop in Higashi-Koenji known for its unique kanpa system: pick from 52 miso bases, and a 20-yen donation adds toppings.",
+        "ko": "히가시코엔지 미소 라멘집. 52종 미소 소스에서 고르고 20엔 캉파로 토핑이 늘어나는 독특한 시스템으로 유명해요."
       },
       "hours_i18n": {
         "ja": "11:00～翌5:00／無休",
@@ -29252,7 +29252,7 @@ window.RAILWAY_TOURISM = {
         139.707947
       ],
       "dist": "池袋駅 徒歩5分",
-      "desc": "池袋駅近くでペンギンが泳ぐユニークなバー。餌やり体験も人気。",
+      "desc": "池袋駅近くでペンギンが泳ぐユニークなバー。えさやりタイムが人気で、フードも充実、家族連れでも楽しめる。",
       "tags": [
         "all",
         "food",
@@ -29274,10 +29274,10 @@ window.RAILWAY_TOURISM = {
         "ko": "펭귄이 있는 BAR 이케부쿠로"
       },
       "desc_i18n": {
-        "ja": "池袋駅近くでペンギンが泳ぐユニークなバー。餌やり体験も人気。",
-        "zh": "池袋站附近有企鹅游水的独特酒吧，投喂体验受欢迎。",
-        "en": "A unique bar near Ikebukuro where penguins swim; feeding them is popular.",
-        "ko": "이케부쿠로역 근처 펭귄이 사는 독특한 바, 먹이 주기 체험 인기."
+        "ja": "池袋駅近くでペンギンが泳ぐユニークなバー。えさやりタイムが人気で、フードも充実、家族連れでも楽しめる。",
+        "zh": "池袋站附近有企鹅游水的独特酒吧。投喂时间人气十足，餐食也很丰富，适合全家同乐。",
+        "en": "A unique bar near Ikebukuro where penguins swim. Feeding time is a hit, food is plentiful, and families are welcome.",
+        "ko": "이케부쿠로역 근처 펭귄이 헤엄치는 독특한 바. 먹이 주는 시간이 인기이고, 음식도 푸짐하며 가족 단위로도 즐길 수 있어요."
       },
       "hours_i18n": {
         "ja": "18:00～翌3:00(日曜は翌1:00)／無休(年始除く)",
@@ -29397,7 +29397,7 @@ window.RAILWAY_TOURISM = {
         139.706976
       ],
       "dist": "北参道駅 徒歩6分",
-      "desc": "北参道・神宮前の紙製品にこだわる雑貨店。オリジナルの紙小物が並ぶ。",
+      "desc": "北参道・神宮前にある紙製品にこだわった雑貨店。オリジナルの紙小物が並び、名刺や招待状のオーダーメイドも受け付けている。",
       "tags": [
         "all",
         "shopping"
@@ -29418,10 +29418,10 @@ window.RAILWAY_TOURISM = {
         "ko": "파피에 라보."
       },
       "desc_i18n": {
-        "ja": "北参道・神宮前の紙製品にこだわる雑貨店。オリジナルの紙小物が並ぶ。",
-        "zh": "北参道·神宫前专注纸制品的杂货店，陈列原创纸品。",
-        "en": "A paper-goods shop near Kita-Sando/Jingumae offering original paper accessories.",
-        "ko": "키타산도·징구마에 종이 제품 잡화점."
+        "ja": "北参道・神宮前にある紙製品にこだわった雑貨店。オリジナルの紙小物が並び、名刺や招待状のオーダーメイドも受け付けている。",
+        "zh": "北参道·神宫前的纸制品杂货店。陈列着原创纸品，也承接名片、请柬的定制。",
+        "en": "A paper-goods shop near Kita-Sando/Jingumae offering original paper accessories and custom orders for business cards and invitations.",
+        "ko": "키타산도·징구마에에 있는 종이 제품에 진심인 잡화점. 오리지널 종이 소품이 진열되어 있고 명함·초대장 주문 제작도 받아요."
       },
       "hours_i18n": {
         "ja": "火～土12:00～18:00／日月曜休",
@@ -29469,7 +29469,7 @@ window.RAILWAY_TOURISM = {
         139.71300699685673
       ],
       "dist": "目黒駅 徒歩3分",
-      "desc": "目黒駅近くにあるバー。約100種類もの豊富なお茶割りが楽しめる。",
+      "desc": "目黒駅近くのバー。約100種類のお茶割りと、同じく100種をそろえる唐揚げから、自分好みの組み合わせを見つけられる。",
       "tags": [
         "all",
         "landmark"
@@ -29490,10 +29490,10 @@ window.RAILWAY_TOURISM = {
         "ko": "차와리"
       },
       "desc_i18n": {
-        "ja": "目黒駅近くにあるバー。約100種類もの豊富なお茶割りが楽しめる。",
-        "zh": "目黑站附近的酒吧，可品尝约100种丰富的茶调酒。",
-        "en": "A bar near Meguro Station offering a generous lineup of around 100 tea mixers.",
-        "ko": "메구로역 근처 바. 약 100종이나 되는 다채로운 차 하이볼을 즐길 수 있어요."
+        "ja": "目黒駅近くのバー。約100種類のお茶割りと、同じく100種をそろえる唐揚げから、自分好みの組み合わせを見つけられる。",
+        "zh": "目黑站附近的酒吧。约100种茶调酒与同样100种的炸物中，可以找到自己心仪的组合。",
+        "en": "A bar near Meguro Station with around 100 tea mixers and 100 kinds of karaage — find your own favorite pairing.",
+        "ko": "메구로역 근처 바. 약 100종의 차 하이볼과 역시 100종을 갖춘 튀김에서 취향에 맞는 조합을 찾을 수 있어요."
       },
       "hours_i18n": {
         "ja": "17:00～23:00／無休",
@@ -29613,7 +29613,7 @@ window.RAILWAY_TOURISM = {
         139.79766266851377
       ],
       "dist": "清澄白河駅 徒歩5分",
-      "desc": "清澄白河のクラフトビール醸造所併設ブルワリー。できたてが味わえる。",
+      "desc": "清澄白河にあるクラフトビール醸造所併設のブルワリー。醸造所オリジナルのできたてビールを、印刷所をリノベーションした空間で味わえる。",
       "tags": [
         "all",
         "food"
@@ -29634,10 +29634,10 @@ window.RAILWAY_TOURISM = {
         "ko": "비어 비스트 브루어리"
       },
       "desc_i18n": {
-        "ja": "清澄白河のクラフトビール醸造所併設ブルワリー。できたてが味わえる。",
-        "zh": "清澄白河的自酿精酿啤酒厂，可品尝鲜酿。",
-        "en": "A craft-brewery taproom in Kiyosumi-Shirakawa serving fresh beer.",
-        "ko": "키요스미시라카와 크래프트 맥주 양조장, 갓 양조한 맥주."
+        "ja": "清澄白河にあるクラフトビール醸造所併設のブルワリー。醸造所オリジナルのできたてビールを、印刷所をリノベーションした空間で味わえる。",
+        "zh": "清澄白河的自酿精酿啤酒厂兼酒吧。可在印刷厂改造的空间里品尝酒厂原创的鲜酿啤酒。",
+        "en": "A craft-brewery taproom in Kiyosumi-Shirakawa where you can taste fresh, house-brewed beer in a renovated print shop.",
+        "ko": "키요스미시라카와에 있는 크래프트 맥주 양조장 겸 펍. 인쇄소를 개조한 공간에서 양조장 오리지널 갓 양조 맥주를 맛볼 수 있어요."
       },
       "hours_i18n": {
         "ja": "16:00～22:00(21:30L.O.)／不定休",
@@ -29758,7 +29758,7 @@ window.RAILWAY_TOURISM = {
         139.7996667092859
       ],
       "dist": "南千住駅 徒歩1分",
-      "desc": "南千住駅前の高架下スケートボードパーク。初心者向けスクールも併設。",
+      "desc": "南千住駅前の高架下にある全天候型スケートボードパーク。初心者向けの体験レッスンも開かれ、年齢や国籍を超えて交流できる。",
       "tags": [
         "all",
         "landmark"
@@ -29779,10 +29779,10 @@ window.RAILWAY_TOURISM = {
         "ko": "램프 제로"
       },
       "desc_i18n": {
-        "ja": "南千住駅前の高架下スケートボードパーク。初心者向けスクールも併設。",
-        "zh": "南千住站前高架下的滑板公园，附设初学者课程。",
-        "en": "A skateboard park under the tracks near Minami-Senju, with beginner lessons.",
-        "ko": "미나미센주역 고가 밑 스케이트보드 파크, 초보 강습 운영."
+        "ja": "南千住駅前の高架下にある全天候型スケートボードパーク。初心者向けの体験レッスンも開かれ、年齢や国籍を超えて交流できる。",
+        "zh": "南千住站前高架桥下的全天候滑板公园。开设面向初学者的体验课程，跨越年龄与国籍的交流场所。",
+        "en": "An all-weather skateboard park under the tracks near Minami-Senju, with beginner lessons — a place to connect across ages and nationalities.",
+        "ko": "미나미센주역 앞 고가 아래 있는 전천후 스케이트보드 파크. 초보자용 체험 레슨도 열리며 나이와 국적을 넘어 교류할 수 있어요."
       },
       "hours_i18n": {
         "ja": "詳細はRAMP ZERO HP参照／不定休",
@@ -30049,7 +30049,7 @@ window.RAILWAY_TOURISM = {
         139.7400455
       ],
       "dist": "市ケ谷駅 徒歩4分",
-      "desc": "市ケ谷・九段商店街の手作り豆腐店。豆乳やできたて豆腐が人気。",
+      "desc": "市ケ谷・九段商店街の手作り豆腐店。やさしい寄せ豆腐や手作り豆乳が人気で、開店直後のできたてを味わえる。",
       "tags": [
         "all",
         "food",
@@ -30072,10 +30072,10 @@ window.RAILWAY_TOURISM = {
         "ko": "스기모토 두부가게"
       },
       "desc_i18n": {
-        "ja": "市ケ谷・九段商店街の手作り豆腐店。豆乳やできたて豆腐が人気。",
-        "zh": "市谷·九段商店街的手工豆腐店，豆浆与现做豆腐受欢迎。",
-        "en": "A handmade tofu shop in the Ichigaya-Kudan shopping street.",
-        "ko": "이치가야·구단 상점가 수제 두부 가게."
+        "ja": "市ケ谷・九段商店街の手作り豆腐店。やさしい寄せ豆腐や手作り豆乳が人気で、開店直後のできたてを味わえる。",
+        "zh": "市谷·九段商店街的手工豆腐店。口感温和的寄せ豆腐与手工豆浆人气十足，开店后马上能尝到现做美味。",
+        "en": "A handmade tofu shop in the Ichigaya-Kudan shopping street. The gentle yosedofu and fresh soy milk are popular; right after opening you can taste them at their freshest.",
+        "ko": "이치가야·구단 상점가의 수제 두부 가게. 부드러운 요세두부와 수제 두유가 인기이고, 개점 직후 갓 만든 맛을 즐길 수 있어요."
       },
       "hours_i18n": {
         "ja": "8:00～19:30／水日祝休",
@@ -31823,7 +31823,7 @@ window.RAILWAY_TOURISM = {
         139.8
       ],
       "dist": "千住大橋駅から徒歩約5分",
-      "desc": "施設名 あだち五色桜の散歩みち 概要 荒川の土手に沿って延びる、約4.4キロにもおよぶ桜並木。土手の風に吹かれ",
+      "desc": "荒川の土手に沿って延びる、約4.4キロにもおよぶ桜並木。春には五色桜が次々と咲き、土手の風を浴びながらのんびり散歩できる。",
       "tags": [
         "all",
         "park",
@@ -31845,10 +31845,10 @@ window.RAILWAY_TOURISM = {
         "ko": "아다치 고시키자쿠라 산책길"
       },
       "desc_i18n": {
-        "ja": "施設名 あだち五色桜の散歩みち 概要 荒川の土手に沿って延びる、約4.4キロにもおよぶ桜並木。土手の風に吹かれ",
-        "zh": "沿隅田川的樱花散步道，春天五色樱次第开放，可远眺桥梁。",
-        "en": "A cherry promenade along the Sumida River; five-toned cherries bloom in spring with bridge views.",
-        "ko": "스미다강 변 벚꽃 산책길. 봄이면 오색 벚꽃이 차례로 피어요."
+        "ja": "荒川の土手に沿って延びる、約4.4キロにもおよぶ桜並木。春には五色桜が次々と咲き、土手の風を浴びながらのんびり散歩できる。",
+        "zh": "沿荒川河堤的樱花散步道，春天五色樱次第开放，可远眺桥梁。",
+        "en": "A cherry promenade along the Arakawa embankment; five-toned cherries bloom in spring with bridge views.",
+        "ko": "아라카와 강둑 벚꽃 산책길. 봄이면 오색 벚꽃이 차례로 피어요."
       },
       "hours_i18n": {
         "ja": "終日開放",
@@ -31898,7 +31898,7 @@ window.RAILWAY_TOURISM = {
         139.7973722
       ],
       "dist": "千住大橋駅から徒歩約4分",
-      "desc": "施設名 大橋公園 ヨミガナ オオハシコウエン 特徴 歴史や自然と触れ合える公園 概要 松尾芭蕉の「奥の細道」に",
+      "desc": "松尾芭蕉が『奥の細道』の旅立ちの地とした大橋にちなむ公園。句碑が立ち、歴史と自然に触れ合える。",
       "tags": [
         "all",
         "park",
@@ -31920,7 +31920,7 @@ window.RAILWAY_TOURISM = {
         "ko": "오하시 공원"
       },
       "desc_i18n": {
-        "ja": "施設名 大橋公園 ヨミガナ オオハシコウエン 特徴 歴史や自然と触れ合える公園 概要 松尾芭蕉の「奥の細道」に",
+        "ja": "松尾芭蕉が『奥の細道』の旅立ちの地とした大橋にちなむ公園。句碑が立ち、歴史と自然に触れ合える。",
         "zh": "刻有松尾芭蕉奥之细道\"矢立初之地\"句碑的街区公园。",
         "en": "A local park with the stone monument marking Basho's departure point for Oku no Hosomichi.",
         "ko": "마쓰오 바쇼 《오쿠노호소미치》 출발지 비가 서린 동네 공원."
@@ -31973,7 +31973,7 @@ window.RAILWAY_TOURISM = {
         139.7866475
       ],
       "dist": "竹ノ塚駅から徒歩約15分",
-      "desc": "施設名 伊興遺跡公園 ヨミガナ イコウイセキコウエン 特徴 歴史や自然と触れ合える公園 概要 伊興遺跡は神をま",
+      "desc": "伊興遺跡にちなむ公園。茅葺き屋根の古代住居が復元され、歴史と自然に触れ合える。",
       "tags": [
         "all",
         "park",
@@ -31995,7 +31995,7 @@ window.RAILWAY_TOURISM = {
         "ko": "이코우 유적 공원"
       },
       "desc_i18n": {
-        "ja": "施設名 伊興遺跡公園 ヨミガナ イコウイセキコウエン 特徴 歴史や自然と触れ合える公園 概要 伊興遺跡は神をま",
+        "ja": "伊興遺跡にちなむ公園。茅葺き屋根の古代住居が復元され、歴史と自然に触れ合える。",
         "zh": "复原古代茅草屋顶住居的遗迹公园，可接触历史与自然。",
         "en": "A ruins park with a restored thatched-roof ancient dwelling; touch history and nature.",
         "ko": "초가지붕 옛 집을 복원한 유적 공원. 역사와 자연 체험."
@@ -32048,7 +32048,7 @@ window.RAILWAY_TOURISM = {
         139.8044956
       ],
       "dist": "北千住駅から徒歩約4分",
-      "desc": "施設名 千住ほんちょう公園 ヨミガナ センジュホンチョウコウエン 特徴 面白いオブジェや遊具がある公園、歴史や",
+      "desc": "千住の街なかにある公園。木造の門や石碑が点在し、面白いオブジェや遊具も楽しめる。",
       "tags": [
         "all",
         "park"
@@ -32069,7 +32069,7 @@ window.RAILWAY_TOURISM = {
         "ko": "센주혼초 공원"
       },
       "desc_i18n": {
-        "ja": "施設名 千住ほんちょう公園 ヨミガナ センジュホンチョウコウエン 特徴 面白いオブジェや遊具がある公園、歴史や",
+        "ja": "千住の街なかにある公園。木造の門や石碑が点在し、面白いオブジェや遊具も楽しめる。",
         "zh": "木造门楼与石碑点缀的闹街区町公园。",
         "en": "A neighborhood park marked by a wooden gate and stone monument.",
         "ko": "나무 문과 비석이 있는 번화가 동네 공원."
@@ -32122,7 +32122,7 @@ window.RAILWAY_TOURISM = {
         139.8184384
       ],
       "dist": "青井駅から徒歩約2分",
-      "desc": "施設名 青和ばら公園 ヨミガナ セイワバラコウエン 特徴 四季の花が楽しめる公園 概要 約100品種、880株",
+      "desc": "約100品種・880株のバラが咲き誇る公園。白いバラのアーチと色とりどりの花々が楽しめる。",
       "tags": [
         "all",
         "park",
@@ -32144,7 +32144,7 @@ window.RAILWAY_TOURISM = {
         "ko": "세이와 장미 공원"
       },
       "desc_i18n": {
-        "ja": "施設名 青和ばら公園 ヨミガナ セイワバラコウエン 特徴 四季の花が楽しめる公園 概要 約100品種、880株",
+        "ja": "約100品種・880株のバラが咲き誇る公園。白いバラのアーチと色とりどりの花々が楽しめる。",
         "zh": "白色玫瑰花架与多彩蔷薇盛放的赏薇名所。",
         "en": "A rose-viewing spot with a white pergola and colorful blooms.",
         "ko": "하얀 장미 터널과 알록달록 장미가 피는 명소."
@@ -32197,7 +32197,7 @@ window.RAILWAY_TOURISM = {
         139.7463916
       ],
       "dist": "王子神谷駅から徒歩約13分",
-      "desc": "施設名 新田さくら公園 ヨミガナ シンデンサクラコウエン 特徴 四季の花が楽しめる公園、夏には水遊びができる公",
+      "desc": "川沿いに桜が並ぶ公園。大型の遊具がそろい、春はお花見、夏は水遊びと、一年を通じて親子連れに人気。",
       "tags": [
         "all",
         "park"
@@ -32218,10 +32218,10 @@ window.RAILWAY_TOURISM = {
         "ko": "닛타 사쿠라 공원"
       },
       "desc_i18n": {
-        "ja": "施設名 新田さくら公園 ヨミガナ シンデンサクラコウエン 特徴 四季の花が楽しめる公園、夏には水遊びができる公",
-        "zh": "河畔樱花树与大型儿童游乐设施的公园。",
-        "en": "A park with riverside cherry trees and a large playground.",
-        "ko": "강변 벚나무와 대형 놀이터가 있는 공원."
+        "ja": "川沿いに桜が並ぶ公園。大型の遊具がそろい、春はお花見、夏は水遊びと、一年を通じて親子連れに人気。",
+        "zh": "河畔樱花成排的公园。大型游乐设施齐全，春可赏樱、夏可戏水，一年四季都深受亲子家庭欢迎。",
+        "en": "A park with cherry trees along the river and a large playground — cherry-viewing in spring, water play in summer, popular with families all year.",
+        "ko": "강변에 벚나무가 늘어선 공원. 대형 놀이기구가 갖춰져 있고 봄엔 꽃놀이, 여름엔 물놀이로 연중 가족 단위에게 인기예요."
       },
       "hours_i18n": {
         "ja": "終日開放",
@@ -32271,7 +32271,7 @@ window.RAILWAY_TOURISM = {
         139.7512911
       ],
       "dist": "谷在家駅から徒歩約22分",
-      "desc": "施設名 江北公園（鹿浜五丁目） ヨミガナ コウホクコウエン 特徴 スポーツを楽しめる公園 住所 鹿浜五丁目7番",
+      "desc": "鹿浜五丁目にある街区公園。すべり台などの遊具と芝生が広がり、地元の人々の憩いの場になっている。",
       "tags": [
         "all",
         "park"
@@ -32292,10 +32292,10 @@ window.RAILWAY_TOURISM = {
         "ko": "고호쿠 공원"
       },
       "desc_i18n": {
-        "ja": "施設名 江北公園（鹿浜五丁目） ヨミガナ コウホクコウエン 特徴 スポーツを楽しめる公園 住所 鹿浜五丁目7番",
-        "zh": "鹿浜五丁目的街区公园，有儿童滑梯与草坪。",
-        "en": "A local park in Kanahama 5-chome with slides and open lawn.",
-        "ko": "카나하마 5초메 동네 공원. 미끄럼틀과 잔디밭."
+        "ja": "鹿浜五丁目にある街区公園。すべり台などの遊具と芝生が広がり、地元の人々の憩いの場になっている。",
+        "zh": "位于鹿浜五丁目的街区公园。滑梯等游乐设施与草坪开阔，是当地居民的休憩之所。",
+        "en": "A local park in Kanahama 5-chome with slides and open lawn, a place for the neighborhood to relax.",
+        "ko": "카나하마 5초메에 있는 동네 공원. 미끄럼틀 등 놀이기구와 잔디밭이 펼쳐져 지역 주민들의 휴식처예요."
       },
       "hours_i18n": {
         "ja": "終日開放",
@@ -32345,7 +32345,7 @@ window.RAILWAY_TOURISM = {
         139.813577
       ],
       "dist": "六町駅から徒歩約13分",
-      "desc": "施設名 総合スポーツセンター公園 ヨミガナ ソウゴウスポーツセンターコウエン 特徴 スポーツを楽しめる公園 住",
+      "desc": "足立総合スポーツセンターに隣接する公園。石碑が目印で、運動前後の散歩にちょうどいい。",
       "tags": [
         "all",
         "park"
@@ -32366,7 +32366,7 @@ window.RAILWAY_TOURISM = {
         "ko": "종합스포츠센터 공원"
       },
       "desc_i18n": {
-        "ja": "施設名 総合スポーツセンター公園 ヨミガナ ソウゴウスポーツセンターコウエン 特徴 スポーツを楽しめる公園 住",
+        "ja": "足立総合スポーツセンターに隣接する公園。石碑が目印で、運動前後の散歩にちょうどいい。",
         "zh": "体育中心旁的公园，石碑为记，适合运动前后散步。",
         "en": "Park beside the sports center; marked by a stone monument, good for a pre/post-walk.",
         "ko": "체육관 옆 공원. 돌비석이 있고 운동 전후 산책에 좋아요."
@@ -32419,7 +32419,7 @@ window.RAILWAY_TOURISM = {
         139.7950373
       ],
       "dist": "千住大橋駅から徒歩約3分",
-      "desc": "施設名 千住スポーツ公園 ヨミガナ センジュスポーツコウエン 特徴 スポーツを楽しめる公園 概要 屋外にはテニ",
+      "desc": "屋外テニスコートや砂地の運動場を備えたスポーツ公園。サッカーゴールもあり、気軽に体を動かせる。",
       "tags": [
         "all",
         "park"
@@ -32440,7 +32440,7 @@ window.RAILWAY_TOURISM = {
         "ko": "센주 스포츠 공원"
       },
       "desc_i18n": {
-        "ja": "施設名 千住スポーツ公園 ヨミガナ センジュスポーツコウエン 特徴 スポーツを楽しめる公園 概要 屋外にはテニ",
+        "ja": "屋外テニスコートや砂地の運動場を備えたスポーツ公園。サッカーゴールもあり、気軽に体を動かせる。",
         "zh": "沙土运动场地带球门的开放运动公园。",
         "en": "An open sports park with a sandy field and soccer goals.",
         "ko": "흙 운동장과 축구 골대가 있는 개방 운동 공원."
@@ -32493,7 +32493,7 @@ window.RAILWAY_TOURISM = {
         139.769133
       ],
       "dist": "西新井大師西駅から徒歩約2分",
-      "desc": "施設名 上沼田東公園 ヨミガナ カミヌマタヒガシコウエン 特徴 スポーツを楽しめる公園 住所 江北六丁目10番",
+      "desc": "江北六丁目にある公園。高架沿いに位置し、時計塔が目印。木陰で休みながら電車を眺められる。",
       "tags": [
         "all",
         "park"
@@ -32514,10 +32514,10 @@ window.RAILWAY_TOURISM = {
         "ko": "카미누마타 히가시 공원"
       },
       "desc_i18n": {
-        "ja": "施設名 上沼田東公園 ヨミガナ カミヌマタヒガシコウエン 特徴 スポーツを楽しめる公園 住所 江北六丁目10番",
-        "zh": "高架沿线的公园，有钟塔与绿荫。",
-        "en": "A park along the elevated rail with a clock tower and trees.",
-        "ko": "고가 철교 옆 공원, 시계탑과 나무 그늘."
+        "ja": "江北六丁目にある公園。高架沿いに位置し、時計塔が目印。木陰で休みながら電車を眺められる。",
+        "zh": "位于江北六丁目的公园。地处高架沿线，以钟塔为标志，可在树荫下休息边看电车。",
+        "en": "A park in Kohoku 6-chome along the elevated rail, marked by a clock tower — rest in the shade and watch the trains go by.",
+        "ko": "고호쿠 6초메에 있는 공원. 고가 철교를 따라 위치하며 시계탑이 표지판이에요. 그늘에서 쉬며 전철을 구경할 수 있어요."
       },
       "hours_i18n": {
         "ja": "終日開放",
@@ -32567,7 +32567,7 @@ window.RAILWAY_TOURISM = {
         139.8488036
       ],
       "dist": "亀有駅から徒歩約10分",
-      "desc": "施設名 大谷田南公園（交通公園） ヨミガナ オオヤタミナミコウエン（コウツウコウエン） 特徴 ミニ列車に乗れる",
+      "desc": "交通公園として親しまれる公園。赤いバス型の遊具やミニ列車が人気で、子ども連れにうれしい。",
       "tags": [
         "all",
         "park"
@@ -32588,7 +32588,7 @@ window.RAILWAY_TOURISM = {
         "ko": "오야타미나미 공원(교통공원)"
       },
       "desc_i18n": {
-        "ja": "施設名 大谷田南公園（交通公園） ヨミガナ オオヤタミナミコウエン（コウツウコウエン） 特徴 ミニ列車に乗れる",
+        "ja": "交通公園として親しまれる公園。赤いバス型の遊具やミニ列車が人気で、子ども連れにうれしい。",
         "zh": "红色巴士造型游乐具的交通主题儿童公园。",
         "en": "A traffic-themed children's park with red bus-shaped play equipment.",
         "ko": "빨간 버스 모양 놀이 기구가 있는 교통 주제 어린이 공원."
@@ -32641,7 +32641,7 @@ window.RAILWAY_TOURISM = {
         139.7733174
       ],
       "dist": "舎人公園駅から徒歩約5分",
-      "desc": "施設名 都立舎人公園 ヨミガナ トリツトネリコウエン 特徴 バーベキューができる公園、四季の花が楽しめる公園、",
+      "desc": "日暮里・舎人ライナー沿線にある都立公園。花水木や大芝生が広がり、バーベキューや四季の花も楽しめる。",
       "tags": [
         "all",
         "park",
@@ -32663,7 +32663,7 @@ window.RAILWAY_TOURISM = {
         "ko": "도리츠 토네리 공원"
       },
       "desc_i18n": {
-        "ja": "施設名 都立舎人公園 ヨミガナ トリツトネリコウエン 特徴 バーベキューができる公園、四季の花が楽しめる公園、",
+        "ja": "日暮里・舎人ライナー沿線にある都立公園。花水木や大芝生が広がり、バーベキューや四季の花も楽しめる。",
         "zh": "日暮里舍人线单轨沿线，花水木与大草坪的都立公园。",
         "en": "Metropolitan park along the Nippori-Toneri Liner, known for dogwoods and open lawns.",
         "ko": "닛포리토네리 라이너 옆, 산딸나무와 넓은 잔디의 도립 공원."
@@ -32716,7 +32716,7 @@ window.RAILWAY_TOURISM = {
         139.8326239
       ],
       "dist": "綾瀬駅から徒歩約14分",
-      "desc": "施設名 都立東綾瀬公園 ヨミガナ トリツヒガシアヤセコウエン 特徴 夏には水遊びができる公園、スポーツを楽しめ",
+      "desc": "フェンスで囲まれた子ども向け遊び場と大きな木陰が特徴の都立公園。夏は水遊び、スポーツも楽しめる。",
       "tags": [
         "all",
         "park"
@@ -32737,7 +32737,7 @@ window.RAILWAY_TOURISM = {
         "ko": "도리츠 히가시아야세 공원"
       },
       "desc_i18n": {
-        "ja": "施設名 都立東綾瀬公園 ヨミガナ トリツヒガシアヤセコウエン 特徴 夏には水遊びができる公園、スポーツを楽しめ",
+        "ja": "フェンスで囲まれた子ども向け遊び場と大きな木陰が特徴の都立公園。夏は水遊び、スポーツも楽しめる。",
         "zh": "围篱式儿童游乐区与大树荫的都立公园。",
         "en": "Metropolitan park with a fenced children's play area and tall shade trees.",
         "ko": "울타리 친 놀이터와 큰 나무 그늘의 도립 공원."
@@ -32790,7 +32790,7 @@ window.RAILWAY_TOURISM = {
         139.7447772
       ],
       "dist": "志茂駅から徒歩約15分",
-      "desc": "施設名 都市農業公園 ヨミガナ トシノウギョウコウエン 特徴 四季の花が楽しめる公園、歴史や自然と触れ合える公",
+      "desc": "菜の花畑や茅葺きの古民家がある体験型公園。四季の花と農業の歴史・自然に触れ合える。",
       "tags": [
         "all",
         "park",
@@ -32812,7 +32812,7 @@ window.RAILWAY_TOURISM = {
         "ko": "도시농업공원"
       },
       "desc_i18n": {
-        "ja": "施設名 都市農業公園 ヨミガナ トシノウギョウコウエン 特徴 四季の花が楽しめる公園、歴史や自然と触れ合える公",
+        "ja": "菜の花畑や茅葺きの古民家がある体験型公園。四季の花と農業の歴史・自然に触れ合える。",
         "zh": "油菜花田与茅草顶古民家的体验型公园。",
         "en": "An experiential park with rapeseed fields and thatched traditional farmhouses.",
         "ko": "유채꽃밭과 초가집이 있는 체험형 공원."
@@ -32865,7 +32865,7 @@ window.RAILWAY_TOURISM = {
         139.7589714
       ],
       "dist": "江北駅から徒歩約13分",
-      "desc": "施設名 足立堀之内公園 ヨミガナ アダチホリノウチコウエン 特徴 四季の花が楽しめる公園 概要 園内にある約3",
+      "desc": "園内の池では夏にハスが咲き誇る。池の後ろには遊具エリアもあり、親子連れに人気。",
       "tags": [
         "all",
         "park",
@@ -32887,7 +32887,7 @@ window.RAILWAY_TOURISM = {
         "ko": "아다치 호리노우치 공원"
       },
       "desc_i18n": {
-        "ja": "施設名 足立堀之内公園 ヨミガナ アダチホリノウチコウエン 特徴 四季の花が楽しめる公園 概要 園内にある約3",
+        "ja": "園内の池では夏にハスが咲き誇る。池の後ろには遊具エリアもあり、親子連れに人気。",
         "zh": "夏日荷花盛开的水池与身后游乐区。",
         "en": "A pond of blooming lotus in summer with a play area behind.",
         "ko": "여름에 연꽃이 만개하는 연못과 놀이터."
@@ -32940,7 +32940,7 @@ window.RAILWAY_TOURISM = {
         139.8688026
       ],
       "dist": "京成高砂駅から徒歩約14分",
-      "desc": "施設名 葛西用水親水水路 ヨミガナ カサイヨウスイシンスイスイロ 特徴 四季の花が楽しめる公園 概要 葛西用水",
+      "desc": "葛西用水に沿った親水水路。アパート街のそばを流れ、春には桜が両岸を彩る。",
       "tags": [
         "all",
         "park",
@@ -32962,7 +32962,7 @@ window.RAILWAY_TOURISM = {
         "ko": "카사이요스이 친수 수로"
       },
       "desc_i18n": {
-        "ja": "施設名 葛西用水親水水路 ヨミガナ カサイヨウスイシンスイスイロ 特徴 四季の花が楽しめる公園 概要 葛西用水",
+        "ja": "葛西用水に沿った親水水路。アパート街のそばを流れ、春には桜が両岸を彩る。",
         "zh": "公寓街旁樱花夹道的亲水步道。",
         "en": "A waterside promenade lined with cherry trees beside apartment blocks.",
         "ko": "아파트 가를 따라 벚꽃이 늘어선 친수 산책로."
@@ -33015,7 +33015,7 @@ window.RAILWAY_TOURISM = {
         139.8439933
       ],
       "dist": "京成津川駅から徒歩約13分",
-      "desc": "施設名 神明六木遊歩道 ヨミガナ シンメイムツギユウホドウ 特徴 歴史や自然と触れ合える公園 概要 垳川沿いに",
+      "desc": "垳川沿いに整備された遊歩道。竹林の中を抜け、道中には案内板も設置されている。",
       "tags": [
         "all",
         "park",
@@ -33037,7 +33037,7 @@ window.RAILWAY_TOURISM = {
         "ko": "신메이로쿠기 산책길"
       },
       "desc_i18n": {
-        "ja": "施設名 神明六木遊歩道 ヨミガナ シンメイムツギユウホドウ 特徴 歴史や自然と触れ合える公園 概要 垳川沿いに",
+        "ja": "垳川沿いに整備された遊歩道。竹林の中を抜け、道中には案内板も設置されている。",
         "zh": "竹林中的步道与方向指示牌。",
         "en": "A wooded walking path with directional trail signs.",
         "ko": "대나무 숲 속 산책길과 이정표."
@@ -33090,7 +33090,7 @@ window.RAILWAY_TOURISM = {
         139.8222022
       ],
       "dist": "京成津川駅から徒歩約19分",
-      "desc": "施設名 桑袋ビオトープ公園 ヨミガナ クワブクロビオトープコウエン 特徴 歴史や自然と触れ合える公園 概要 も",
+      "desc": "草地の広がる生態公園。巨石や遊歩道が整い、広々とした芝生でピクニックや自然観察を楽しめる。",
       "tags": [
         "all",
         "park",
@@ -33112,10 +33112,10 @@ window.RAILWAY_TOURISM = {
         "ko": "쿠와바타 비오토프 공원"
       },
       "desc_i18n": {
-        "ja": "施設名 桑袋ビオトープ公園 ヨミガナ クワブクロビオトープコウエン 特徴 歴史や自然と触れ合える公園 概要 も",
-        "zh": "绿草如茵的生态公园，有巨石与游步道。",
-        "en": "A grassy ecological park with a large rock and walking paths.",
-        "ko": "잔디가 펼쳐진 생태공원, 바위와 산책길."
+        "ja": "草地の広がる生態公園。巨石や遊歩道が整い、広々とした芝生でピクニックや自然観察を楽しめる。",
+        "zh": "绿草如茵的生态公园。巨石与游步道齐备，可在开阔草坪上野餐、观察自然。",
+        "en": "A grassy ecological park with a large rock and walking paths — spread a picnic on the lawn or watch for wildlife.",
+        "ko": "잔디가 펼쳐진 생태공원. 바위와 산책길이 정비되어 있고 넓은 잔디밭에서 피크닉이나 자연 관찰을 즐길 수 있어요."
       },
       "hours_i18n": {
         "ja": "終日開放",
@@ -33165,7 +33165,7 @@ window.RAILWAY_TOURISM = {
         139.8377864
       ],
       "dist": "北綾瀬駅から徒歩約10分",
-      "desc": "施設名 大谷田公園 ヨミガナ オオヤタコウエン 特徴 四季の花が楽しめる公園 概要 園内にある梅の木約150本",
+      "desc": "園内に梅の木が約150本あり、冬に白梅が咲き誇る梅の名所。1～3月が見頃で、静かな花見を楽しめる。",
       "tags": [
         "all",
         "park",
@@ -33187,10 +33187,10 @@ window.RAILWAY_TOURISM = {
         "ko": "오야타 공원"
       },
       "desc_i18n": {
-        "ja": "施設名 大谷田公園 ヨミガナ オオヤタコウエン 特徴 四季の花が楽しめる公園 概要 園内にある梅の木約150本",
-        "zh": "白梅林在冬季盛放的赏梅公园。",
-        "en": "A plum-viewing park where white plum groves bloom in winter.",
-        "ko": "겨울에 흰 매화밭이 피는 매화 명소 공원."
+        "ja": "園内に梅の木が約150本あり、冬に白梅が咲き誇る梅の名所。1～3月が見頃で、静かな花見を楽しめる。",
+        "zh": "园内约有150棵梅树，冬季白梅盛开的赏梅名所。1至3月为最佳观赏期，可享受静谧的花见。",
+        "en": "A plum-viewing park with about 150 trees; white blossoms fill the grounds in winter. Best from January to March for a quiet hanami.",
+        "ko": "정원에 매화나무 약 150그루가 있어 겨울에 흰 매화가 만개하는 매화 명소. 1~3월이 절정기로 조용한 꽃놀이를 즐길 수 있어요."
       },
       "hours_i18n": {
         "ja": "終日開放",
@@ -33834,7 +33834,7 @@ window.RAILWAY_TOURISM = {
         139.805
       ],
       "dist": "草加駅から徒歩約4分",
-      "desc": "草加駅西口から徒歩約4分の東横イン。出張や長期滞在にも便利。",
+      "desc": "草加駅西口から徒歩約4分の東横イン。駅近で格安、出張や長期滞在にも便利な定番ビジネスホテル。",
       "tags": [
         "all",
         "hotel"
@@ -33855,10 +33855,10 @@ window.RAILWAY_TOURISM = {
         "ko": "토요코인 소카역 서구치"
       },
       "desc_i18n": {
-        "ja": "草加駅西口から徒歩約4分の東横イン。出張や長期滞在にも便利。",
-        "zh": "距草加站西口步行约4分钟的东横INN，出差与长住都方便。",
-        "en": "A Toyoko Inn about 4 minutes from Saka Station's west exit, handy for business and longer stays.",
-        "ko": "소카역 서쪽 출구 도보 약 4분 도요코인. 출장과 장기 체류에도 편리해요."
+        "ja": "草加駅西口から徒歩約4分の東横イン。駅近で格安、出張や長期滞在にも便利な定番ビジネスホテル。",
+        "zh": "距草加站西口步行约4分钟的东横INN。靠近车站且价格实惠，出差与长期入住皆宜的常选商务酒店。",
+        "en": "A Toyoko Inn about 4 minutes from Soka Station's west exit. Close to the station and budget-friendly, a dependable choice for business trips and longer stays.",
+        "ko": "소카역 서쪽 출구에서 도보 약 4분 거리의 도요코인. 역세권에 저렴하고 출장과 장기 체류에도 편리한 단골 비즈니스 호텔이에요."
       },
       "hours_i18n": {
         "ja": "店舗による",
@@ -38911,6 +38911,17781 @@ window.RAILWAY_TOURISM = {
         "name": "北口",
         "lat": 35.707895,
         "lng": 139.760154
+      },
+      {
+        "name": "駅前",
+        "lat": 35.706726,
+        "lng": 139.760154
+      }
+    ],
+    "Kayabacho": [
+      {
+        "name": "北口",
+        "lat": 35.681104,
+        "lng": 139.780163
+      }
+    ],
+    "Monzen-Nakacho": [
+      {
+        "name": "北口",
+        "lat": 35.673061,
+        "lng": 139.796099
+      }
+    ],
+    "Kiba": [
+      {
+        "name": "北口",
+        "lat": 35.670525,
+        "lng": 139.807115
+      }
+    ],
+    "Toyocho": [
+      {
+        "name": "北口",
+        "lat": 35.670759,
+        "lng": 139.81768
+      }
+    ],
+    "Minami-Sunamachi": [
+      {
+        "name": "東口",
+        "lat": 35.668415,
+        "lng": 139.833134
+      }
+    ],
+    "Minami-Gyotoku": [
+      {
+        "name": "北口",
+        "lat": 35.673898,
+        "lng": 139.902276
+      },
+      {
+        "name": "南口",
+        "lat": 35.67156,
+        "lng": 139.902276
+      }
+    ],
+    "Gyotoku": [
+      {
+        "name": "北口",
+        "lat": 35.683789,
+        "lng": 139.914185
+      },
+      {
+        "name": "南口",
+        "lat": 35.681451,
+        "lng": 139.914185
+      }
+    ],
+    "Myoden": [
+      {
+        "name": "北口",
+        "lat": 35.692183,
+        "lng": 139.924286
+      },
+      {
+        "name": "東口",
+        "lat": 35.691014,
+        "lng": 139.925725
+      },
+      {
+        "name": "南口",
+        "lat": 35.689845,
+        "lng": 139.924286
+      }
+    ],
+    "Baraki-Nakayama": [
+      {
+        "name": "北口",
+        "lat": 35.704469,
+        "lng": 139.941915
+      },
+      {
+        "name": "東口",
+        "lat": 35.7033,
+        "lng": 139.943355
+      },
+      {
+        "name": "南口",
+        "lat": 35.702131,
+        "lng": 139.941915
+      },
+      {
+        "name": "西口",
+        "lat": 35.7033,
+        "lng": 139.940475
+      }
+    ],
+    "Shibuya": [
+      {
+        "name": "南口",
+        "lat": 35.656831,
+        "lng": 139.7016
+      },
+      {
+        "name": "東口",
+        "lat": 35.658,
+        "lng": 139.703039
+      },
+      {
+        "name": "西口",
+        "lat": 35.658,
+        "lng": 139.700161
+      },
+      {
+        "name": "北口",
+        "lat": 35.659169,
+        "lng": 139.7016
+      }
+    ],
+    "Kinshicho": [
+      {
+        "name": "南口",
+        "lat": 35.696272,
+        "lng": 139.814957
+      },
+      {
+        "name": "北口",
+        "lat": 35.69861,
+        "lng": 139.814957
+      }
+    ],
+    "Nakai": [
+      {
+        "name": "北口",
+        "lat": 35.715104,
+        "lng": 139.686296
+      }
+    ],
+    "Nerima-Kasugacho": [
+      {
+        "name": "南口",
+        "lat": 35.750241,
+        "lng": 139.6403
+      },
+      {
+        "name": "北口",
+        "lat": 35.752579,
+        "lng": 139.6403
+      },
+      {
+        "name": "西口",
+        "lat": 35.75141,
+        "lng": 139.638859
+      }
+    ],
+    "Shinjuku-Nishiguchi": [
+      {
+        "name": "西口",
+        "lat": 35.6917,
+        "lng": 139.69416
+      }
+    ],
+    "Higashi-Shinjuku": [
+      {
+        "name": "西口",
+        "lat": 35.697957,
+        "lng": 139.705994
+      }
+    ],
+    "Wakamatsu-Kawada": [
+      {
+        "name": "西口",
+        "lat": 35.699188,
+        "lng": 139.716603
+      }
+    ],
+    "Kachidoki": [
+      {
+        "name": "南口",
+        "lat": 35.660531,
+        "lng": 139.7778
+      }
+    ],
+    "Akabanebashi": [
+      {
+        "name": "東口",
+        "lat": 35.654985,
+        "lng": 139.745428
+      }
+    ],
+    "Azabu-Juban": [
+      {
+        "name": "東口",
+        "lat": 35.65481,
+        "lng": 139.738484
+      }
+    ],
+    "Shirokane-Takanawa": [
+      {
+        "name": "南口",
+        "lat": 35.642114,
+        "lng": 139.734344
+      }
+    ],
+    "Roppongi-Itchome": [
+      {
+        "name": "西口",
+        "lat": 35.665075,
+        "lng": 139.737461
+      }
+    ],
+    "Todaimae": [
+      {
+        "name": "北口",
+        "lat": 35.719183,
+        "lng": 139.75788
+      }
+    ],
+    "Hon-Komagome": [
+      {
+        "name": "北口",
+        "lat": 35.725534,
+        "lng": 139.753812
+      }
+    ],
+    "Oji": [
+      {
+        "name": "南口",
+        "lat": 35.751151,
+        "lng": 139.73821
+      },
+      {
+        "name": "北口",
+        "lat": 35.753489,
+        "lng": 139.73821
+      },
+      {
+        "name": "西口",
+        "lat": 35.75232,
+        "lng": 139.736769
+      },
+      {
+        "name": "東口",
+        "lat": 35.75232,
+        "lng": 139.739651
+      }
+    ],
+    "Oji-Kamiya": [
+      {
+        "name": "北口",
+        "lat": 35.766461,
+        "lng": 139.735641
+      },
+      {
+        "name": "西口",
+        "lat": 35.765292,
+        "lng": 139.7342
+      }
+    ],
+    "Akabane-Iwabuchi": [
+      {
+        "name": "東口",
+        "lat": 35.783355,
+        "lng": 139.723551
+      }
+    ],
+    "Ebisu": [
+      {
+        "name": "東口",
+        "lat": 35.6467,
+        "lng": 139.711739
+      },
+      {
+        "name": "西口",
+        "lat": 35.6467,
+        "lng": 139.708861
+      }
+    ],
+    "Roppongi": [
+      {
+        "name": "西口",
+        "lat": 35.6628,
+        "lng": 139.729961
+      }
+    ],
+    "Higashi-Ginza": [
+      {
+        "name": "南口",
+        "lat": 35.66796,
+        "lng": 139.767633
+      },
+      {
+        "name": "北口",
+        "lat": 35.670298,
+        "lng": 139.767633
+      }
+    ],
+    "Tsukiji": [
+      {
+        "name": "南口",
+        "lat": 35.666941,
+        "lng": 139.77262
+      }
+    ],
+    "Hatchobori": [
+      {
+        "name": "北口",
+        "lat": 35.678969,
+        "lng": 139.7839
+      }
+    ],
+    "Ningyocho": [
+      {
+        "name": "北口",
+        "lat": 35.688969,
+        "lng": 139.7839
+      }
+    ],
+    "Okachimachi": [
+      {
+        "name": "南口",
+        "lat": 35.706031,
+        "lng": 139.77472
+      },
+      {
+        "name": "北口",
+        "lat": 35.708369,
+        "lng": 139.77472
+      }
+    ],
+    "Wakoshi": [
+      {
+        "name": "北口",
+        "lat": 35.789519,
+        "lng": 139.612865
+      },
+      {
+        "name": "南口",
+        "lat": 35.787181,
+        "lng": 139.612865
+      },
+      {
+        "name": "東口",
+        "lat": 35.78835,
+        "lng": 139.614306
+      }
+    ],
+    "Chikatetsu-Narimasu": [
+      {
+        "name": "北口",
+        "lat": 35.777909,
+        "lng": 139.63117
+      },
+      {
+        "name": "南口",
+        "lat": 35.775571,
+        "lng": 139.63117
+      },
+      {
+        "name": "西口",
+        "lat": 35.77674,
+        "lng": 139.629729
+      }
+    ],
+    "Chikatetsu-Akatsuka": [
+      {
+        "name": "北口",
+        "lat": 35.77115,
+        "lng": 139.644
+      }
+    ],
+    "Hikawadai": [
+      {
+        "name": "南口",
+        "lat": 35.748451,
+        "lng": 139.66547
+      }
+    ],
+    "Kotake-Mukaihara": [
+      {
+        "name": "北口",
+        "lat": 35.744564,
+        "lng": 139.67952
+      },
+      {
+        "name": "東口",
+        "lat": 35.743395,
+        "lng": 139.68096
+      }
+    ],
+    "Nishi-Waseda": [
+      {
+        "name": "北口",
+        "lat": 35.708975,
+        "lng": 139.70912
+      }
+    ],
+    "Shinjuku-Sanchome": [
+      {
+        "name": "西口",
+        "lat": 35.6917,
+        "lng": 139.69636
+      },
+      {
+        "name": "南口",
+        "lat": 35.690531,
+        "lng": 139.6978
+      },
+      {
+        "name": "東口",
+        "lat": 35.6917,
+        "lng": 139.69924
+      }
+    ],
+    "Senkawa": [
+      {
+        "name": "南口",
+        "lat": 35.737006,
+        "lng": 139.6894
+      },
+      {
+        "name": "西口",
+        "lat": 35.738175,
+        "lng": 139.68796
+      }
+    ],
+    "Sakuradamon": [
+      {
+        "name": "北口",
+        "lat": 35.678628,
+        "lng": 139.751886
+      }
+    ],
+    "Yurakucho": [
+      {
+        "name": "北口",
+        "lat": 35.676269,
+        "lng": 139.7633
+      },
+      {
+        "name": "南口",
+        "lat": 35.673931,
+        "lng": 139.7633
+      },
+      {
+        "name": "西口",
+        "lat": 35.6751,
+        "lng": 139.761861
+      }
+    ],
+    "Shin-Tomicho": [
+      {
+        "name": "北口",
+        "lat": 35.671698,
+        "lng": 139.773594
+      }
+    ],
+    "Shin-Kiba": [
+      {
+        "name": "北口",
+        "lat": 35.661769,
+        "lng": 139.8253
+      }
+    ],
+    "Meguro": [
+      {
+        "name": "西口",
+        "lat": 35.633635,
+        "lng": 139.714006
+      },
+      {
+        "name": "東口",
+        "lat": 35.633635,
+        "lng": 139.716882
+      }
+    ],
+    "Onarimon": [
+      {
+        "name": "南口",
+        "lat": 35.659605,
+        "lng": 139.751366
+      }
+    ],
+    "Suidobashi": [
+      {
+        "name": "西口",
+        "lat": 35.702048,
+        "lng": 139.752062
+      },
+      {
+        "name": "東口",
+        "lat": 35.702048,
+        "lng": 139.754942
+      }
+    ],
+    "Sugamo": [
+      {
+        "name": "南口",
+        "lat": 35.732624,
+        "lng": 139.738154
+      },
+      {
+        "name": "北口",
+        "lat": 35.734962,
+        "lng": 139.738154
+      }
+    ],
+    "Itabashi-Kuyakushomae": [
+      {
+        "name": "西口",
+        "lat": 35.751372,
+        "lng": 139.708679
+      }
+    ],
+    "Shimura-Sakaue": [
+      {
+        "name": "西口",
+        "lat": 35.776082,
+        "lng": 139.693656
+      }
+    ],
+    "Shimura-Sanchome": [
+      {
+        "name": "西口",
+        "lat": 35.777468,
+        "lng": 139.68431
+      },
+      {
+        "name": "北口",
+        "lat": 35.778637,
+        "lng": 139.685751
+      }
+    ],
+    "Hasune": [
+      {
+        "name": "西口",
+        "lat": 35.784262,
+        "lng": 139.677506
+      },
+      {
+        "name": "北口",
+        "lat": 35.785431,
+        "lng": 139.678947
+      }
+    ],
+    "Nishidai": [
+      {
+        "name": "西口",
+        "lat": 35.787074,
+        "lng": 139.671426
+      },
+      {
+        "name": "東口",
+        "lat": 35.787074,
+        "lng": 139.674308
+      }
+    ],
+    "Takashimadaira": [
+      {
+        "name": "西口",
+        "lat": 35.788908,
+        "lng": 139.65992
+      },
+      {
+        "name": "北口",
+        "lat": 35.790077,
+        "lng": 139.661361
+      },
+      {
+        "name": "東口",
+        "lat": 35.788908,
+        "lng": 139.662802
+      }
+    ],
+    "Sangubashi": [
+      {
+        "name": "西口",
+        "lat": 35.67871,
+        "lng": 139.692111
+      },
+      {
+        "name": "東口",
+        "lat": 35.67871,
+        "lng": 139.694989
+      }
+    ],
+    "Yoyogi-Hachiman": [
+      {
+        "name": "北口",
+        "lat": 35.670649,
+        "lng": 139.68863
+      },
+      {
+        "name": "西口",
+        "lat": 35.66948,
+        "lng": 139.687191
+      },
+      {
+        "name": "南口",
+        "lat": 35.668311,
+        "lng": 139.68863
+      }
+    ],
+    "Setagaya-Daita": [
+      {
+        "name": "南口",
+        "lat": 35.656911,
+        "lng": 139.66101
+      },
+      {
+        "name": "北口",
+        "lat": 35.659249,
+        "lng": 139.66101
+      },
+      {
+        "name": "西口",
+        "lat": 35.65808,
+        "lng": 139.659571
+      },
+      {
+        "name": "東口",
+        "lat": 35.65808,
+        "lng": 139.662449
+      }
+    ],
+    "Umegaoka": [
+      {
+        "name": "北口",
+        "lat": 35.657189,
+        "lng": 139.6536
+      },
+      {
+        "name": "南口",
+        "lat": 35.654851,
+        "lng": 139.6536
+      }
+    ],
+    "Gotokuji": [
+      {
+        "name": "北口",
+        "lat": 35.654909,
+        "lng": 139.64735
+      },
+      {
+        "name": "南口",
+        "lat": 35.652571,
+        "lng": 139.64735
+      }
+    ],
+    "Kyodo": [
+      {
+        "name": "北口",
+        "lat": 35.652419,
+        "lng": 139.63662
+      },
+      {
+        "name": "南口",
+        "lat": 35.650081,
+        "lng": 139.63662
+      }
+    ],
+    "Chitose-Funabashi": [
+      {
+        "name": "北口",
+        "lat": 35.648589,
+        "lng": 139.62401
+      },
+      {
+        "name": "南口",
+        "lat": 35.646251,
+        "lng": 139.62401
+      }
+    ],
+    "Soshigaya-Okura": [
+      {
+        "name": "西門",
+        "lat": 35.64327,
+        "lng": 139.608271
+      },
+      {
+        "name": "北口",
+        "lat": 35.644439,
+        "lng": 139.60971
+      },
+      {
+        "name": "南口",
+        "lat": 35.642101,
+        "lng": 139.60971
+      }
+    ],
+    "Seijo-Gakuen-Mae": [
+      {
+        "name": "北口",
+        "lat": 35.641319,
+        "lng": 139.59916
+      },
+      {
+        "name": "西口",
+        "lat": 35.64015,
+        "lng": 139.597721
+      },
+      {
+        "name": "南口",
+        "lat": 35.638981,
+        "lng": 139.59916
+      }
+    ],
+    "Kitami": [
+      {
+        "name": "北口",
+        "lat": 35.637679,
+        "lng": 139.58686
+      },
+      {
+        "name": "南口",
+        "lat": 35.635341,
+        "lng": 139.58686
+      }
+    ],
+    "Komae": [
+      {
+        "name": "北口",
+        "lat": 35.633329,
+        "lng": 139.57726
+      },
+      {
+        "name": "西口",
+        "lat": 35.63216,
+        "lng": 139.575822
+      },
+      {
+        "name": "南口",
+        "lat": 35.630991,
+        "lng": 139.57726
+      }
+    ],
+    "Izumi-Tamagawa": [
+      {
+        "name": "南口",
+        "lat": 35.626311,
+        "lng": 139.57369
+      },
+      {
+        "name": "北口",
+        "lat": 35.628649,
+        "lng": 139.57369
+      },
+      {
+        "name": "西口",
+        "lat": 35.62748,
+        "lng": 139.572252
+      },
+      {
+        "name": "東口",
+        "lat": 35.62748,
+        "lng": 139.575128
+      }
+    ],
+    "Mukogaoka-Yuen": [
+      {
+        "name": "東口",
+        "lat": 35.61721,
+        "lng": 139.565958
+      },
+      {
+        "name": "北口",
+        "lat": 35.618379,
+        "lng": 139.56452
+      },
+      {
+        "name": "南口",
+        "lat": 35.616041,
+        "lng": 139.56452
+      }
+    ],
+    "Yomiuri-Land-Mae": [
+      {
+        "name": "北口",
+        "lat": 35.615939,
+        "lng": 139.5279
+      }
+    ],
+    "Yurigaoka": [
+      {
+        "name": "北口",
+        "lat": 35.610229,
+        "lng": 139.51618
+      },
+      {
+        "name": "南口",
+        "lat": 35.607891,
+        "lng": 139.51618
+      },
+      {
+        "name": "南口",
+        "lat": 35.72057,
+        "lng": 140.156317
+      },
+      {
+        "name": "北口",
+        "lat": 35.722908,
+        "lng": 140.156317
+      },
+      {
+        "name": "駅前",
+        "lat": 35.721739,
+        "lng": 140.156317
+      }
+    ],
+    "Shin-Yurigaoka": [
+      {
+        "name": "北口",
+        "lat": 35.605009,
+        "lng": 139.50772
+      },
+      {
+        "name": "南口",
+        "lat": 35.602671,
+        "lng": 139.50772
+      }
+    ],
+    "Kakio": [
+      {
+        "name": "北口",
+        "lat": 35.590819,
+        "lng": 139.4976
+      },
+      {
+        "name": "南口",
+        "lat": 35.588481,
+        "lng": 139.4976
+      }
+    ],
+    "Tsurukawa": [
+      {
+        "name": "北口",
+        "lat": 35.584229,
+        "lng": 139.48136
+      },
+      {
+        "name": "西口",
+        "lat": 35.58306,
+        "lng": 139.479922
+      },
+      {
+        "name": "南口",
+        "lat": 35.581891,
+        "lng": 139.48136
+      }
+    ],
+    "Tamagawa-Gakuen-Mae": [
+      {
+        "name": "南門",
+        "lat": 35.562151,
+        "lng": 139.46332
+      },
+      {
+        "name": "北口",
+        "lat": 35.564489,
+        "lng": 139.46332
+      },
+      {
+        "name": "南口",
+        "lat": 35.562151,
+        "lng": 139.46332
+      }
+    ],
+    "Machida": [
+      {
+        "name": "東口",
+        "lat": 35.54397,
+        "lng": 139.446516
+      },
+      {
+        "name": "北口",
+        "lat": 35.545139,
+        "lng": 139.445079
+      },
+      {
+        "name": "西口",
+        "lat": 35.54397,
+        "lng": 139.443642
+      },
+      {
+        "name": "南口",
+        "lat": 35.542801,
+        "lng": 139.445079
+      }
+    ],
+    "Sagami-Ono": [
+      {
+        "name": "東口",
+        "lat": 35.5517,
+        "lng": 139.435337
+      },
+      {
+        "name": "北口",
+        "lat": 35.552869,
+        "lng": 139.4339
+      },
+      {
+        "name": "南口",
+        "lat": 35.550531,
+        "lng": 139.4339
+      }
+    ],
+    "Sobudai-Mae": [
+      {
+        "name": "東口",
+        "lat": 35.49913,
+        "lng": 139.409836
+      },
+      {
+        "name": "北口",
+        "lat": 35.500299,
+        "lng": 139.4084
+      },
+      {
+        "name": "南口",
+        "lat": 35.497961,
+        "lng": 139.4084
+      }
+    ],
+    "Zama": [
+      {
+        "name": "北口",
+        "lat": 35.481859,
+        "lng": 139.39993
+      },
+      {
+        "name": "西口",
+        "lat": 35.48069,
+        "lng": 139.398494
+      },
+      {
+        "name": "東口",
+        "lat": 35.48069,
+        "lng": 139.401366
+      }
+    ],
+    "Ebina": [
+      {
+        "name": "南口",
+        "lat": 35.453061,
+        "lng": 139.3893
+      },
+      {
+        "name": "北口",
+        "lat": 35.455399,
+        "lng": 139.3893
+      },
+      {
+        "name": "西口",
+        "lat": 35.45423,
+        "lng": 139.387865
+      },
+      {
+        "name": "東口",
+        "lat": 35.45423,
+        "lng": 139.390735
+      }
+    ],
+    "Hon-Atsugi": [
+      {
+        "name": "南口",
+        "lat": 35.438191,
+        "lng": 139.36429
+      },
+      {
+        "name": "北口",
+        "lat": 35.440529,
+        "lng": 139.36429
+      },
+      {
+        "name": "東口",
+        "lat": 35.43936,
+        "lng": 139.365725
+      }
+    ],
+    "Aiko-Ishida": [
+      {
+        "name": "北口",
+        "lat": 35.418809,
+        "lng": 139.34394
+      },
+      {
+        "name": "南口",
+        "lat": 35.416471,
+        "lng": 139.34394
+      }
+    ],
+    "Isehara": [
+      {
+        "name": "北口",
+        "lat": 35.397169,
+        "lng": 139.31351
+      },
+      {
+        "name": "南口",
+        "lat": 35.394831,
+        "lng": 139.31351
+      }
+    ],
+    "Tsurumaki-Onsen": [
+      {
+        "name": "北門",
+        "lat": 35.382109,
+        "lng": 139.27775
+      },
+      {
+        "name": "北口",
+        "lat": 35.382109,
+        "lng": 139.27775
+      },
+      {
+        "name": "南口",
+        "lat": 35.379771,
+        "lng": 139.27775
+      }
+    ],
+    "Tokaidaigaku-Mae": [
+      {
+        "name": "北門",
+        "lat": 35.374309,
+        "lng": 139.27123
+      },
+      {
+        "name": "北口",
+        "lat": 35.374309,
+        "lng": 139.27123
+      },
+      {
+        "name": "南口",
+        "lat": 35.371971,
+        "lng": 139.27123
+      }
+    ],
+    "Hadano": [
+      {
+        "name": "北門",
+        "lat": 35.371419,
+        "lng": 139.22577
+      },
+      {
+        "name": "北口",
+        "lat": 35.371419,
+        "lng": 139.22577
+      },
+      {
+        "name": "南口",
+        "lat": 35.369081,
+        "lng": 139.22577
+      }
+    ],
+    "ShinMatsuda": [
+      {
+        "name": "西門",
+        "lat": 35.34476,
+        "lng": 139.138217
+      },
+      {
+        "name": "北口",
+        "lat": 35.345929,
+        "lng": 139.13965
+      },
+      {
+        "name": "南口",
+        "lat": 35.343591,
+        "lng": 139.13965
+      }
+    ],
+    "Kaisei": [
+      {
+        "name": "西口",
+        "lat": 35.32627,
+        "lng": 139.134627
+      },
+      {
+        "name": "東口",
+        "lat": 35.32627,
+        "lng": 139.137493
+      }
+    ],
+    "Kayama": [
+      {
+        "name": "西口",
+        "lat": 35.31059,
+        "lng": 139.141107
+      },
+      {
+        "name": "東口",
+        "lat": 35.31059,
+        "lng": 139.143973
+      }
+    ],
+    "Tomizu": [
+      {
+        "name": "西口",
+        "lat": 35.29657,
+        "lng": 139.143748
+      },
+      {
+        "name": "東口",
+        "lat": 35.29657,
+        "lng": 139.146612
+      }
+    ],
+    "Hotaruda": [
+      {
+        "name": "西口",
+        "lat": 35.28506,
+        "lng": 139.150538
+      },
+      {
+        "name": "東口",
+        "lat": 35.28506,
+        "lng": 139.153402
+      }
+    ],
+    "Odawara": [
+      {
+        "name": "北口",
+        "lat": 35.258069,
+        "lng": 139.1544
+      },
+      {
+        "name": "西口",
+        "lat": 35.2569,
+        "lng": 139.152968
+      },
+      {
+        "name": "東口",
+        "lat": 35.2569,
+        "lng": 139.155832
+      }
+    ],
+    "Shimokitazawa": [
+      {
+        "name": "南口",
+        "lat": 35.660731,
+        "lng": 139.6672
+      },
+      {
+        "name": "北口",
+        "lat": 35.663069,
+        "lng": 139.6672
+      },
+      {
+        "name": "西口",
+        "lat": 35.6619,
+        "lng": 139.665761
+      },
+      {
+        "name": "東口",
+        "lat": 35.6619,
+        "lng": 139.668639
+      }
+    ],
+    "Kita-Ikebukuro": [
+      {
+        "name": "西口",
+        "lat": 35.74033,
+        "lng": 139.71495
+      }
+    ],
+    "Naka-Itabashi": [
+      {
+        "name": "東口",
+        "lat": 35.75628,
+        "lng": 139.695821
+      },
+      {
+        "name": "南口",
+        "lat": 35.755111,
+        "lng": 139.69438
+      },
+      {
+        "name": "北口",
+        "lat": 35.757449,
+        "lng": 139.69438
+      }
+    ],
+    "Kami-Itabashi": [
+      {
+        "name": "南口",
+        "lat": 35.762451,
+        "lng": 139.67621
+      },
+      {
+        "name": "北口",
+        "lat": 35.764789,
+        "lng": 139.67621
+      }
+    ],
+    "Tobu-Nerima": [
+      {
+        "name": "東口",
+        "lat": 35.76865,
+        "lng": 139.663981
+      },
+      {
+        "name": "南口",
+        "lat": 35.767481,
+        "lng": 139.66254
+      },
+      {
+        "name": "北口",
+        "lat": 35.769819,
+        "lng": 139.66254
+      }
+    ],
+    "Shimo-Akatsuka": [
+      {
+        "name": "南口",
+        "lat": 35.769311,
+        "lng": 139.64485
+      },
+      {
+        "name": "北口",
+        "lat": 35.771649,
+        "lng": 139.64485
+      }
+    ],
+    "Narimasu": [
+      {
+        "name": "西口",
+        "lat": 35.77759,
+        "lng": 139.631459
+      },
+      {
+        "name": "南口",
+        "lat": 35.776421,
+        "lng": 139.6329
+      },
+      {
+        "name": "北口",
+        "lat": 35.778759,
+        "lng": 139.6329
+      }
+    ],
+    "Asaka": [
+      {
+        "name": "東口",
+        "lat": 35.79676,
+        "lng": 139.601741
+      },
+      {
+        "name": "南口",
+        "lat": 35.795591,
+        "lng": 139.6003
+      },
+      {
+        "name": "北口",
+        "lat": 35.797929,
+        "lng": 139.6003
+      }
+    ],
+    "Asakadai": [
+      {
+        "name": "西口",
+        "lat": 35.81434,
+        "lng": 139.585858
+      },
+      {
+        "name": "南口",
+        "lat": 35.813171,
+        "lng": 139.5873
+      },
+      {
+        "name": "北口",
+        "lat": 35.815509,
+        "lng": 139.5873
+      }
+    ],
+    "Yanasegawa": [
+      {
+        "name": "西口",
+        "lat": 35.83056,
+        "lng": 139.561018
+      },
+      {
+        "name": "東口",
+        "lat": 35.83056,
+        "lng": 139.563902
+      }
+    ],
+    "Mizuhodai": [
+      {
+        "name": "東口",
+        "lat": 35.8382,
+        "lng": 139.552232
+      },
+      {
+        "name": "西口",
+        "lat": 35.8382,
+        "lng": 139.549348
+      }
+    ],
+    "Tsuruse": [
+      {
+        "name": "西口",
+        "lat": 35.8457,
+        "lng": 139.537868
+      },
+      {
+        "name": "東口",
+        "lat": 35.8457,
+        "lng": 139.540752
+      }
+    ],
+    "Fujimino": [
+      {
+        "name": "東口",
+        "lat": 35.86075,
+        "lng": 139.524533
+      },
+      {
+        "name": "西口",
+        "lat": 35.86075,
+        "lng": 139.521647
+      }
+    ],
+    "Kami-Fukuoka": [
+      {
+        "name": "東口",
+        "lat": 35.87387,
+        "lng": 139.513313
+      },
+      {
+        "name": "西口",
+        "lat": 35.87387,
+        "lng": 139.510427
+      },
+      {
+        "name": "北口",
+        "lat": 35.875039,
+        "lng": 139.51187
+      },
+      {
+        "name": "南口",
+        "lat": 35.872701,
+        "lng": 139.51187
+      }
+    ],
+    "Shingashi": [
+      {
+        "name": "西口",
+        "lat": 35.89102,
+        "lng": 139.495857
+      },
+      {
+        "name": "東口",
+        "lat": 35.89102,
+        "lng": 139.498743
+      }
+    ],
+    "Kawagoe": [
+      {
+        "name": "東口",
+        "lat": 35.90668,
+        "lng": 139.484643
+      },
+      {
+        "name": "西口",
+        "lat": 35.90668,
+        "lng": 139.481757
+      },
+      {
+        "name": "北口",
+        "lat": 35.907849,
+        "lng": 139.4832
+      },
+      {
+        "name": "南口",
+        "lat": 35.905511,
+        "lng": 139.4832
+      }
+    ],
+    "Tsurugashima": [
+      {
+        "name": "西口",
+        "lat": 35.93679,
+        "lng": 139.422466
+      },
+      {
+        "name": "東口",
+        "lat": 35.93679,
+        "lng": 139.425354
+      }
+    ],
+    "Sakado": [
+      {
+        "name": "西口",
+        "lat": 35.9231,
+        "lng": 139.405456
+      },
+      {
+        "name": "南口",
+        "lat": 35.921931,
+        "lng": 139.4069
+      },
+      {
+        "name": "北口",
+        "lat": 35.924269,
+        "lng": 139.4069
+      }
+    ],
+    "Kita-Sakado": [
+      {
+        "name": "東口",
+        "lat": 35.97198,
+        "lng": 139.398295
+      },
+      {
+        "name": "西口",
+        "lat": 35.97198,
+        "lng": 139.395405
+      }
+    ],
+    "Takasaka": [
+      {
+        "name": "西口",
+        "lat": 36.00293,
+        "lng": 139.396245
+      },
+      {
+        "name": "東口",
+        "lat": 36.00293,
+        "lng": 139.399135
+      }
+    ],
+    "Higashi-Matsuyama": [
+      {
+        "name": "東口",
+        "lat": 36.03464,
+        "lng": 139.403026
+      },
+      {
+        "name": "西口",
+        "lat": 36.03464,
+        "lng": 139.400134
+      },
+      {
+        "name": "北口",
+        "lat": 36.035809,
+        "lng": 139.40158
+      }
+    ],
+    "Shinrin-Koen": [
+      {
+        "name": "南門",
+        "lat": 36.043991,
+        "lng": 139.37533
+      }
+    ],
+    "Tsukinowa": [
+      {
+        "name": "南口",
+        "lat": 36.042351,
+        "lng": 139.34557
+      },
+      {
+        "name": "北口",
+        "lat": 36.044689,
+        "lng": 139.34557
+      }
+    ],
+    "Musashi-Ranzan": [
+      {
+        "name": "西口",
+        "lat": 35.957081,
+        "lng": 139.326281
+      },
+      {
+        "name": "東口",
+        "lat": 35.957081,
+        "lng": 139.32917
+      }
+    ],
+    "Tobu-Takezawa": [
+      {
+        "name": "東口",
+        "lat": 36.07525,
+        "lng": 139.239056
+      },
+      {
+        "name": "西口",
+        "lat": 36.07525,
+        "lng": 139.236164
+      }
+    ],
+    "Tamayodo": [
+      {
+        "name": "南口",
+        "lat": 36.115791,
+        "lng": 139.20019
+      },
+      {
+        "name": "北口",
+        "lat": 36.118129,
+        "lng": 139.20019
+      }
+    ],
+    "Yorii": [
+      {
+        "name": "南口",
+        "lat": 36.116691,
+        "lng": 139.19352
+      },
+      {
+        "name": "北口",
+        "lat": 36.119029,
+        "lng": 139.19352
+      }
+    ],
+    "Shiomi": [
+      {
+        "name": "東口",
+        "lat": 35.65886,
+        "lng": 139.818609
+      }
+    ],
+    "Maihama": [
+      {
+        "name": "南口",
+        "lat": 35.634991,
+        "lng": 139.88372
+      },
+      {
+        "name": "北口",
+        "lat": 35.637329,
+        "lng": 139.88372
+      }
+    ],
+    "Shin-Urayasu": [
+      {
+        "name": "南口",
+        "lat": 35.648351,
+        "lng": 139.91253
+      },
+      {
+        "name": "北口",
+        "lat": 35.650689,
+        "lng": 139.91253
+      },
+      {
+        "name": "西口",
+        "lat": 35.64952,
+        "lng": 139.911091
+      }
+    ],
+    "Minami-Funabashi": [
+      {
+        "name": "南口",
+        "lat": 35.680491,
+        "lng": 139.9957
+      },
+      {
+        "name": "北口",
+        "lat": 35.682829,
+        "lng": 139.9957
+      }
+    ],
+    "Shin-Narashino": [
+      {
+        "name": "南口",
+        "lat": 35.666231,
+        "lng": 140.01298
+      },
+      {
+        "name": "北口",
+        "lat": 35.668569,
+        "lng": 140.01298
+      }
+    ],
+    "Kaihimmakuhari": [
+      {
+        "name": "南口",
+        "lat": 35.647231,
+        "lng": 140.042
+      },
+      {
+        "name": "北口",
+        "lat": 35.649569,
+        "lng": 140.042
+      }
+    ],
+    "Kemigawahama": [
+      {
+        "name": "南口",
+        "lat": 35.636001,
+        "lng": 140.05908
+      },
+      {
+        "name": "北口",
+        "lat": 35.638339,
+        "lng": 140.05908
+      }
+    ],
+    "Inagekaigan": [
+      {
+        "name": "南口",
+        "lat": 35.628351,
+        "lng": 140.07385
+      },
+      {
+        "name": "北口",
+        "lat": 35.630689,
+        "lng": 140.07385
+      }
+    ],
+    "Chiba-Minato": [
+      {
+        "name": "東口",
+        "lat": 35.60671,
+        "lng": 140.104238
+      },
+      {
+        "name": "西口",
+        "lat": 35.60671,
+        "lng": 140.101362
+      }
+    ],
+    "Soga": [
+      {
+        "name": "東口",
+        "lat": 35.58216,
+        "lng": 140.132178
+      },
+      {
+        "name": "西口",
+        "lat": 35.58216,
+        "lng": 140.129302
+      }
+    ],
+    "Osaki": [
+      {
+        "name": "西口",
+        "lat": 35.619851,
+        "lng": 139.726751
+      },
+      {
+        "name": "南口",
+        "lat": 35.618682,
+        "lng": 139.728189
+      },
+      {
+        "name": "東口",
+        "lat": 35.619851,
+        "lng": 139.729627
+      }
+    ],
+    "Itabashi": [
+      {
+        "name": "西口",
+        "lat": 35.745496,
+        "lng": 139.718335
+      },
+      {
+        "name": "東口",
+        "lat": 35.745496,
+        "lng": 139.721215
+      }
+    ],
+    "Akabane": [
+      {
+        "name": "西口",
+        "lat": 35.7776,
+        "lng": 139.719459
+      },
+      {
+        "name": "南口",
+        "lat": 35.776431,
+        "lng": 139.7209
+      },
+      {
+        "name": "北口",
+        "lat": 35.778769,
+        "lng": 139.7209
+      },
+      {
+        "name": "東口",
+        "lat": 35.7776,
+        "lng": 139.722341
+      }
+    ],
+    "Kita-Akabane": [
+      {
+        "name": "西口",
+        "lat": 35.78703,
+        "lng": 139.704359
+      },
+      {
+        "name": "北口",
+        "lat": 35.788199,
+        "lng": 139.7058
+      }
+    ],
+    "Toda-Koen": [
+      {
+        "name": "西口",
+        "lat": 35.80776,
+        "lng": 139.676908
+      },
+      {
+        "name": "東口",
+        "lat": 35.80776,
+        "lng": 139.679792
+      }
+    ],
+    "Musashi-Urawa": [
+      {
+        "name": "西口",
+        "lat": 35.8454,
+        "lng": 139.645398
+      },
+      {
+        "name": "東口",
+        "lat": 35.8454,
+        "lng": 139.648282
+      }
+    ],
+    "Naka-Urawa": [
+      {
+        "name": "西口",
+        "lat": 35.85382,
+        "lng": 139.635958
+      },
+      {
+        "name": "東口",
+        "lat": 35.85382,
+        "lng": 139.638842
+      }
+    ],
+    "Minami-Yono": [
+      {
+        "name": "西口",
+        "lat": 35.86736,
+        "lng": 139.629617
+      },
+      {
+        "name": "東口",
+        "lat": 35.86736,
+        "lng": 139.632503
+      }
+    ],
+    "Yono-Hommachi": [
+      {
+        "name": "西口",
+        "lat": 35.88092,
+        "lng": 139.624557
+      },
+      {
+        "name": "東口",
+        "lat": 35.88092,
+        "lng": 139.627443
+      }
+    ],
+    "Kita-Yono": [
+      {
+        "name": "西口",
+        "lat": 35.8907,
+        "lng": 139.627037
+      },
+      {
+        "name": "南口",
+        "lat": 35.889531,
+        "lng": 139.62848
+      },
+      {
+        "name": "北口",
+        "lat": 35.891869,
+        "lng": 139.62848
+      }
+    ],
+    "Shin-Nihonbashi": [
+      {
+        "name": "南口",
+        "lat": 35.687871,
+        "lng": 139.7743
+      },
+      {
+        "name": "北口",
+        "lat": 35.690209,
+        "lng": 139.7743
+      }
+    ],
+    "Bakurocho": [
+      {
+        "name": "西口",
+        "lat": 35.69337,
+        "lng": 139.781
+      },
+      {
+        "name": "東口",
+        "lat": 35.69337,
+        "lng": 139.78388
+      }
+    ],
+    "Nishi-Eifuku": [
+      {
+        "name": "北口",
+        "lat": 35.680049,
+        "lng": 139.63516
+      },
+      {
+        "name": "南口",
+        "lat": 35.677711,
+        "lng": 139.63516
+      }
+    ],
+    "Hamadayama": [
+      {
+        "name": "南口",
+        "lat": 35.680411,
+        "lng": 139.62758
+      }
+    ],
+    "Takaido": [
+      {
+        "name": "南口",
+        "lat": 35.682091,
+        "lng": 139.61523
+      }
+    ],
+    "Fujimigaoka": [
+      {
+        "name": "北口",
+        "lat": 35.685979,
+        "lng": 139.6072
+      },
+      {
+        "name": "南口",
+        "lat": 35.683641,
+        "lng": 139.6072
+      }
+    ],
+    "Kugayama": [
+      {
+        "name": "北口",
+        "lat": 35.689309,
+        "lng": 139.59932
+      },
+      {
+        "name": "南口",
+        "lat": 35.686971,
+        "lng": 139.59932
+      }
+    ],
+    "Mitakadai": [
+      {
+        "name": "北口",
+        "lat": 35.693219,
+        "lng": 139.5893
+      },
+      {
+        "name": "南口",
+        "lat": 35.690881,
+        "lng": 139.5893
+      }
+    ],
+    "Kichijoji": [
+      {
+        "name": "東口",
+        "lat": 35.703,
+        "lng": 139.58114
+      },
+      {
+        "name": "北口",
+        "lat": 35.704169,
+        "lng": 139.5797
+      },
+      {
+        "name": "南口",
+        "lat": 35.701831,
+        "lng": 139.5797
+      },
+      {
+        "name": "西口",
+        "lat": 35.703,
+        "lng": 139.57826
+      }
+    ],
+    "Musashi-koyama": [
+      {
+        "name": "東口",
+        "lat": 35.620654,
+        "lng": 139.705953
+      },
+      {
+        "name": "西口",
+        "lat": 35.620654,
+        "lng": 139.703077
+      }
+    ],
+    "Senzoku": [
+      {
+        "name": "東口",
+        "lat": 35.610303,
+        "lng": 139.695754
+      }
+    ],
+    "Ookayama": [
+      {
+        "name": "東口",
+        "lat": 35.607487,
+        "lng": 139.687081
+      },
+      {
+        "name": "南口",
+        "lat": 35.606318,
+        "lng": 139.685643
+      },
+      {
+        "name": "北口",
+        "lat": 35.608656,
+        "lng": 139.685643
+      }
+    ],
+    "Okusawa": [
+      {
+        "name": "北口",
+        "lat": 35.6049,
+        "lng": 139.6721
+      }
+    ],
+    "Tamagawa": [
+      {
+        "name": "南口",
+        "lat": 35.58805,
+        "lng": 139.668874
+      },
+      {
+        "name": "西口",
+        "lat": 35.589219,
+        "lng": 139.667436
+      },
+      {
+        "name": "東口",
+        "lat": 35.589219,
+        "lng": 139.670312
+      }
+    ],
+    "Shin-maruko": [
+      {
+        "name": "東口",
+        "lat": 35.580296,
+        "lng": 139.663378
+      },
+      {
+        "name": "西口",
+        "lat": 35.580296,
+        "lng": 139.660504
+      },
+      {
+        "name": "駅前",
+        "lat": 35.580296,
+        "lng": 139.661941
+      }
+    ],
+    "Den-en-chofu": [
+      {
+        "name": "東口",
+        "lat": 35.6078,
+        "lng": 139.690338
+      },
+      {
+        "name": "西口",
+        "lat": 35.6078,
+        "lng": 139.687462
+      }
+    ],
+    "Musashi-Kosugi": [
+      {
+        "name": "東口",
+        "lat": 35.576633,
+        "lng": 139.660903
+      },
+      {
+        "name": "南口",
+        "lat": 35.575464,
+        "lng": 139.659466
+      },
+      {
+        "name": "北口",
+        "lat": 35.577802,
+        "lng": 139.659466
+      },
+      {
+        "name": "西口",
+        "lat": 35.576633,
+        "lng": 139.658029
+      }
+    ],
+    "Takeshiba": [
+      {
+        "name": "南口",
+        "lat": 35.652831,
+        "lng": 139.76192
+      }
+    ],
+    "Hinode": [
+      {
+        "name": "南口",
+        "lat": 35.648061,
+        "lng": 139.75908
+      }
+    ],
+    "Odaiba-kaihinkoen": [
+      {
+        "name": "南口",
+        "lat": 35.628731,
+        "lng": 139.77878
+      }
+    ],
+    "Daiba": [
+      {
+        "name": "北口",
+        "lat": 35.627569,
+        "lng": 139.7737
+      },
+      {
+        "name": "南口",
+        "lat": 35.625231,
+        "lng": 139.7737
+      }
+    ],
+    "Tokyo-Big-Sight": [
+      {
+        "name": "南口",
+        "lat": 35.629081,
+        "lng": 139.79134
+      }
+    ],
+    "Ariake-tennis-no-mori": [
+      {
+        "name": "南口",
+        "lat": 35.638811,
+        "lng": 139.78887
+      }
+    ],
+    "Shin-toyosu": [
+      {
+        "name": "南口",
+        "lat": 35.647541,
+        "lng": 139.79001
+      }
+    ],
+    "Daishi_Mae": [
+      {
+        "name": "東口",
+        "lat": 35.77895,
+        "lng": 139.783091
+      },
+      {
+        "name": "北口",
+        "lat": 35.780119,
+        "lng": 139.78165
+      }
+    ],
+    "Honancho": [
+      {
+        "name": "東口",
+        "lat": 35.683515,
+        "lng": 139.659374
+      },
+      {
+        "name": "西口",
+        "lat": 35.683515,
+        "lng": 139.656496
+      }
+    ],
+    "Nishi-Magome": [
+      {
+        "name": "西口",
+        "lat": 35.5869,
+        "lng": 139.704462
+      },
+      {
+        "name": "東口",
+        "lat": 35.5869,
+        "lng": 139.707338
+      },
+      {
+        "name": "南口",
+        "lat": 35.585731,
+        "lng": 139.7059
+      }
+    ],
+    "Gotanda": [
+      {
+        "name": "西口",
+        "lat": 35.62616,
+        "lng": 139.722162
+      },
+      {
+        "name": "東口",
+        "lat": 35.62616,
+        "lng": 139.725038
+      }
+    ],
+    "Takaracho": [
+      {
+        "name": "北口",
+        "lat": 35.676775,
+        "lng": 139.771966
+      }
+    ],
+    "Mitsukoshimae": [
+      {
+        "name": "北口",
+        "lat": 35.688342,
+        "lng": 139.773582
+      }
+    ],
+    "Koenji": [
+      {
+        "name": "東口",
+        "lat": 35.705346,
+        "lng": 139.651369
+      },
+      {
+        "name": "南口",
+        "lat": 35.704177,
+        "lng": 139.649929
+      },
+      {
+        "name": "北口",
+        "lat": 35.706515,
+        "lng": 139.649929
+      }
+    ],
+    "Higashi-Koganei": [
+      {
+        "name": "西口",
+        "lat": 35.70156,
+        "lng": 139.52232
+      },
+      {
+        "name": "南口",
+        "lat": 35.700391,
+        "lng": 139.52376
+      },
+      {
+        "name": "北口",
+        "lat": 35.702729,
+        "lng": 139.52376
+      }
+    ],
+    "Musashi-Koganei": [
+      {
+        "name": "西口",
+        "lat": 35.70104,
+        "lng": 139.50449
+      },
+      {
+        "name": "南口",
+        "lat": 35.699871,
+        "lng": 139.50593
+      },
+      {
+        "name": "東門",
+        "lat": 35.70104,
+        "lng": 139.50737
+      },
+      {
+        "name": "北口",
+        "lat": 35.702209,
+        "lng": 139.50593
+      }
+    ],
+    "Kokubunji": [
+      {
+        "name": "南口",
+        "lat": 35.699051,
+        "lng": 139.48027
+      },
+      {
+        "name": "北口",
+        "lat": 35.701389,
+        "lng": 139.48027
+      }
+    ],
+    "Nishi-Kokubunji": [
+      {
+        "name": "南口",
+        "lat": 35.698561,
+        "lng": 139.46592
+      },
+      {
+        "name": "北口",
+        "lat": 35.700899,
+        "lng": 139.46592
+      }
+    ],
+    "Kunitachi": [
+      {
+        "name": "南口",
+        "lat": 35.683231,
+        "lng": 139.4444
+      },
+      {
+        "name": "北口",
+        "lat": 35.685569,
+        "lng": 139.4444
+      }
+    ],
+    "Toyoda": [
+      {
+        "name": "南口",
+        "lat": 35.658281,
+        "lng": 139.38146
+      },
+      {
+        "name": "北口",
+        "lat": 35.660619,
+        "lng": 139.38146
+      }
+    ],
+    "Hachioji": [
+      {
+        "name": "南口",
+        "lat": 35.654504,
+        "lng": 139.338962
+      },
+      {
+        "name": "北口",
+        "lat": 35.656842,
+        "lng": 139.338962
+      }
+    ],
+    "Nishi-Hachioji": [
+      {
+        "name": "南口",
+        "lat": 35.655111,
+        "lng": 139.312
+      },
+      {
+        "name": "北口",
+        "lat": 35.657449,
+        "lng": 139.312
+      }
+    ],
+    "Seibu-Shinjuku": [
+      {
+        "name": "北口",
+        "lat": 35.696532,
+        "lng": 139.700052
+      },
+      {
+        "name": "東口",
+        "lat": 35.695363,
+        "lng": 139.701492
+      },
+      {
+        "name": "西口",
+        "lat": 35.695363,
+        "lng": 139.698612
+      },
+      {
+        "name": "南口",
+        "lat": 35.694194,
+        "lng": 139.700052
+      }
+    ],
+    "Shimo-Ochiai": [
+      {
+        "name": "北口",
+        "lat": 35.717009,
+        "lng": 139.69515
+      },
+      {
+        "name": "南口",
+        "lat": 35.714671,
+        "lng": 139.69515
+      }
+    ],
+    "Araiyakushi-mae": [
+      {
+        "name": "北口",
+        "lat": 35.716889,
+        "lng": 139.67189
+      },
+      {
+        "name": "西口",
+        "lat": 35.71572,
+        "lng": 139.67045
+      },
+      {
+        "name": "南口",
+        "lat": 35.714551,
+        "lng": 139.67189
+      }
+    ],
+    "Nogata": [
+      {
+        "name": "北口",
+        "lat": 35.720749,
+        "lng": 139.65271
+      },
+      {
+        "name": "東口",
+        "lat": 35.71958,
+        "lng": 139.65415
+      },
+      {
+        "name": "北門",
+        "lat": 35.720749,
+        "lng": 139.65271
+      },
+      {
+        "name": "南口",
+        "lat": 35.718411,
+        "lng": 139.65271
+      }
+    ],
+    "Toritsu-Kasei": [
+      {
+        "name": "北口",
+        "lat": 35.723419,
+        "lng": 139.64458
+      },
+      {
+        "name": "南口",
+        "lat": 35.721081,
+        "lng": 139.64458
+      }
+    ],
+    "Saginomiya": [
+      {
+        "name": "北口",
+        "lat": 35.723679,
+        "lng": 139.63893
+      },
+      {
+        "name": "南口",
+        "lat": 35.721341,
+        "lng": 139.63893
+      }
+    ],
+    "Shimo-Igusa": [
+      {
+        "name": "北口",
+        "lat": 35.725039,
+        "lng": 139.62432
+      },
+      {
+        "name": "南口",
+        "lat": 35.722701,
+        "lng": 139.62432
+      }
+    ],
+    "Iogi": [
+      {
+        "name": "北口",
+        "lat": 35.725709,
+        "lng": 139.61465
+      },
+      {
+        "name": "南口",
+        "lat": 35.723371,
+        "lng": 139.61465
+      }
+    ],
+    "Kami-Igusa": [
+      {
+        "name": "北口",
+        "lat": 35.726279,
+        "lng": 139.60357
+      },
+      {
+        "name": "南口",
+        "lat": 35.723941,
+        "lng": 139.60357
+      }
+    ],
+    "Kami-Shakujii": [
+      {
+        "name": "北口",
+        "lat": 35.726254,
+        "lng": 139.603618
+      },
+      {
+        "name": "南口",
+        "lat": 35.723916,
+        "lng": 139.603618
+      }
+    ],
+    "Musashiseki": [
+      {
+        "name": "北口",
+        "lat": 35.728699,
+        "lng": 139.57689
+      },
+      {
+        "name": "南口",
+        "lat": 35.726361,
+        "lng": 139.57689
+      }
+    ],
+    "Higashi-Fushimi": [
+      {
+        "name": "北口",
+        "lat": 35.729829,
+        "lng": 139.56423
+      },
+      {
+        "name": "南口",
+        "lat": 35.727491,
+        "lng": 139.56423
+      }
+    ],
+    "Seibu-Yagisawa": [
+      {
+        "name": "北口",
+        "lat": 35.729789,
+        "lng": 139.55261
+      },
+      {
+        "name": "南口",
+        "lat": 35.727451,
+        "lng": 139.55261
+      }
+    ],
+    "Hana-Koganei": [
+      {
+        "name": "北口",
+        "lat": 35.727289,
+        "lng": 139.51322
+      },
+      {
+        "name": "西口",
+        "lat": 35.72612,
+        "lng": 139.51178
+      },
+      {
+        "name": "南口",
+        "lat": 35.724951,
+        "lng": 139.51322
+      }
+    ],
+    "Kodaira": [
+      {
+        "name": "北口",
+        "lat": 35.730069,
+        "lng": 139.4775
+      },
+      {
+        "name": "南口",
+        "lat": 35.727731,
+        "lng": 139.4775
+      }
+    ],
+    "Kumegawa": [
+      {
+        "name": "北口",
+        "lat": 35.750789,
+        "lng": 139.47268
+      },
+      {
+        "name": "西口",
+        "lat": 35.74962,
+        "lng": 139.471239
+      },
+      {
+        "name": "南口",
+        "lat": 35.748451,
+        "lng": 139.47268
+      }
+    ],
+    "Higashi-Murayama": [
+      {
+        "name": "北口",
+        "lat": 35.761649,
+        "lng": 139.46585
+      },
+      {
+        "name": "東口",
+        "lat": 35.76048,
+        "lng": 139.467291
+      },
+      {
+        "name": "西口",
+        "lat": 35.76048,
+        "lng": 139.464409
+      },
+      {
+        "name": "南口",
+        "lat": 35.759311,
+        "lng": 139.46585
+      }
+    ],
+    "Tokorozawa": [
+      {
+        "name": "北口",
+        "lat": 35.787359,
+        "lng": 139.47328
+      },
+      {
+        "name": "東口",
+        "lat": 35.78619,
+        "lng": 139.474721
+      },
+      {
+        "name": "西口",
+        "lat": 35.78619,
+        "lng": 139.471839
+      },
+      {
+        "name": "南口",
+        "lat": 35.785021,
+        "lng": 139.47328
+      }
+    ],
+    "Shin-Tokorozawa": [
+      {
+        "name": "東口",
+        "lat": 35.80675,
+        "lng": 139.457552
+      },
+      {
+        "name": "西口",
+        "lat": 35.80675,
+        "lng": 139.454668
+      }
+    ],
+    "Iriso": [
+      {
+        "name": "東口",
+        "lat": 35.83247,
+        "lng": 139.428732
+      },
+      {
+        "name": "西口",
+        "lat": 35.83247,
+        "lng": 139.425848
+      },
+      {
+        "name": "南口",
+        "lat": 35.831301,
+        "lng": 139.42729
+      }
+    ],
+    "Sayamashi": [
+      {
+        "name": "東口",
+        "lat": 35.85692,
+        "lng": 139.414452
+      },
+      {
+        "name": "西口",
+        "lat": 35.85692,
+        "lng": 139.411568
+      },
+      {
+        "name": "南口",
+        "lat": 35.855751,
+        "lng": 139.41301
+      }
+    ],
+    "Shin-Sayama": [
+      {
+        "name": "北口",
+        "lat": 35.875149,
+        "lng": 139.4335
+      },
+      {
+        "name": "東口",
+        "lat": 35.87398,
+        "lng": 139.434943
+      },
+      {
+        "name": "西口",
+        "lat": 35.87398,
+        "lng": 139.432057
+      },
+      {
+        "name": "南口",
+        "lat": 35.872811,
+        "lng": 139.4335
+      }
+    ],
+    "Hon-Kawagoe": [
+      {
+        "name": "東口",
+        "lat": 35.9141,
+        "lng": 139.482824
+      },
+      {
+        "name": "西口",
+        "lat": 35.9141,
+        "lng": 139.479936
+      }
+    ],
+    "Daikanyama": [
+      {
+        "name": "北口",
+        "lat": 35.654469,
+        "lng": 139.6986
+      },
+      {
+        "name": "東口",
+        "lat": 35.6533,
+        "lng": 139.700039
+      },
+      {
+        "name": "西口",
+        "lat": 35.6533,
+        "lng": 139.697161
+      }
+    ],
+    "Yutenji": [
+      {
+        "name": "東口",
+        "lat": 35.637482,
+        "lng": 139.692333
+      },
+      {
+        "name": "西口",
+        "lat": 35.637482,
+        "lng": 139.689455
+      }
+    ],
+    "Gakugei-Daigaku": [
+      {
+        "name": "東口",
+        "lat": 35.628969,
+        "lng": 139.686832
+      },
+      {
+        "name": "西口",
+        "lat": 35.628969,
+        "lng": 139.683956
+      }
+    ],
+    "Toritsu-Daigaku": [
+      {
+        "name": "北口",
+        "lat": 35.618356,
+        "lng": 139.675951
+      }
+    ],
+    "Motosumiyoshi": [
+      {
+        "name": "東口",
+        "lat": 35.56461,
+        "lng": 139.65543
+      },
+      {
+        "name": "西口",
+        "lat": 35.56461,
+        "lng": 139.652556
+      },
+      {
+        "name": "駅前",
+        "lat": 35.56461,
+        "lng": 139.653993
+      }
+    ],
+    "Tsunashima": [
+      {
+        "name": "北口",
+        "lat": 35.537631,
+        "lng": 139.634543
+      },
+      {
+        "name": "東口",
+        "lat": 35.536462,
+        "lng": 139.63598
+      },
+      {
+        "name": "西口",
+        "lat": 35.536462,
+        "lng": 139.633106
+      }
+    ],
+    "Kikuna": [
+      {
+        "name": "東口",
+        "lat": 35.50963,
+        "lng": 139.631536
+      },
+      {
+        "name": "西口",
+        "lat": 35.50963,
+        "lng": 139.628664
+      }
+    ],
+    "Myorenji": [
+      {
+        "name": "東口",
+        "lat": 35.498474,
+        "lng": 139.634586
+      },
+      {
+        "name": "西口",
+        "lat": 35.498474,
+        "lng": 139.631714
+      }
+    ],
+    "Higashi-Hakuraku": [
+      {
+        "name": "西口",
+        "lat": 35.48332,
+        "lng": 139.62805
+      }
+    ],
+    "Tammachi": [
+      {
+        "name": "西口",
+        "lat": 35.474718,
+        "lng": 139.623812
+      }
+    ],
+    "Yokohama": [
+      {
+        "name": "南口",
+        "lat": 35.464571,
+        "lng": 139.62252
+      },
+      {
+        "name": "北口",
+        "lat": 35.466909,
+        "lng": 139.62252
+      },
+      {
+        "name": "東口",
+        "lat": 35.46574,
+        "lng": 139.623955
+      },
+      {
+        "name": "西口",
+        "lat": 35.46574,
+        "lng": 139.621085
+      }
+    ],
+    "Saitama-Shintoshin": [
+      {
+        "name": "西口",
+        "lat": 35.8936,
+        "lng": 139.632457
+      },
+      {
+        "name": "東口",
+        "lat": 35.8936,
+        "lng": 139.635343
+      }
+    ],
+    "Yono": [
+      {
+        "name": "西口",
+        "lat": 35.88438,
+        "lng": 139.637547
+      },
+      {
+        "name": "東口",
+        "lat": 35.88438,
+        "lng": 139.640433
+      }
+    ],
+    "Kita-Urawa": [
+      {
+        "name": "西口",
+        "lat": 35.8778,
+        "lng": 139.676357
+      },
+      {
+        "name": "東口",
+        "lat": 35.8778,
+        "lng": 139.679243
+      }
+    ],
+    "Urawa": [
+      {
+        "name": "北門",
+        "lat": 35.860206,
+        "lng": 139.657163
+      },
+      {
+        "name": "西口",
+        "lat": 35.859037,
+        "lng": 139.65572
+      },
+      {
+        "name": "東口",
+        "lat": 35.859037,
+        "lng": 139.658606
+      },
+      {
+        "name": "北口",
+        "lat": 35.860206,
+        "lng": 139.657163
+      }
+    ],
+    "Minami-Urawa": [
+      {
+        "name": "西口",
+        "lat": 35.8481,
+        "lng": 139.671658
+      },
+      {
+        "name": "東口",
+        "lat": 35.8481,
+        "lng": 139.674542
+      },
+      {
+        "name": "南口",
+        "lat": 35.846931,
+        "lng": 139.6731
+      }
+    ],
+    "Warabi": [
+      {
+        "name": "西口",
+        "lat": 35.82793,
+        "lng": 139.688978
+      },
+      {
+        "name": "東口",
+        "lat": 35.82793,
+        "lng": 139.691862
+      }
+    ],
+    "Kawaguchi": [
+      {
+        "name": "西口",
+        "lat": 35.80194,
+        "lng": 139.716059
+      },
+      {
+        "name": "東口",
+        "lat": 35.80194,
+        "lng": 139.718941
+      },
+      {
+        "name": "南口",
+        "lat": 35.800771,
+        "lng": 139.7175
+      }
+    ],
+    "Higashi-Jujo": [
+      {
+        "name": "南口",
+        "lat": 35.762691,
+        "lng": 139.72676
+      },
+      {
+        "name": "北口",
+        "lat": 35.765029,
+        "lng": 139.72676
+      }
+    ],
+    "Tabata": [
+      {
+        "name": "南口",
+        "lat": 35.736989,
+        "lng": 139.760815
+      },
+      {
+        "name": "北口",
+        "lat": 35.739327,
+        "lng": 139.760815
+      }
+    ],
+    "Uguisudani": [
+      {
+        "name": "北口",
+        "lat": 35.722629,
+        "lng": 139.77803
+      },
+      {
+        "name": "南口",
+        "lat": 35.720291,
+        "lng": 139.77803
+      }
+    ],
+    "Hamamatsucho": [
+      {
+        "name": "西口",
+        "lat": 35.655381,
+        "lng": 139.75569
+      },
+      {
+        "name": "北口",
+        "lat": 35.65655,
+        "lng": 139.757129
+      },
+      {
+        "name": "南口",
+        "lat": 35.654212,
+        "lng": 139.757129
+      }
+    ],
+    "Tamachi": [
+      {
+        "name": "西口",
+        "lat": 35.645736,
+        "lng": 139.746123
+      },
+      {
+        "name": "東口",
+        "lat": 35.645736,
+        "lng": 139.749001
+      },
+      {
+        "name": "南口",
+        "lat": 35.644567,
+        "lng": 139.747562
+      }
+    ],
+    "Takanawa-Gateway": [
+      {
+        "name": "東口",
+        "lat": 35.6378,
+        "lng": 139.740339
+      },
+      {
+        "name": "南口",
+        "lat": 35.636631,
+        "lng": 139.7389
+      }
+    ],
+    "Oimachi": [
+      {
+        "name": "西口",
+        "lat": 35.60681,
+        "lng": 139.733552
+      },
+      {
+        "name": "東口",
+        "lat": 35.60681,
+        "lng": 139.736428
+      }
+    ],
+    "Kamata": [
+      {
+        "name": "西口",
+        "lat": 35.562479,
+        "lng": 139.714636
+      },
+      {
+        "name": "東口",
+        "lat": 35.562479,
+        "lng": 139.71751
+      },
+      {
+        "name": "南口",
+        "lat": 35.56131,
+        "lng": 139.716073
+      }
+    ],
+    "Kawasaki": [
+      {
+        "name": "西口",
+        "lat": 35.531365,
+        "lng": 139.695452
+      },
+      {
+        "name": "東口",
+        "lat": 35.531365,
+        "lng": 139.698326
+      },
+      {
+        "name": "北口",
+        "lat": 35.532534,
+        "lng": 139.696889
+      }
+    ],
+    "Tsurumi": [
+      {
+        "name": "西口",
+        "lat": 35.508036,
+        "lng": 139.674827
+      },
+      {
+        "name": "東口",
+        "lat": 35.508036,
+        "lng": 139.677699
+      }
+    ],
+    "Shin-Koyasu": [
+      {
+        "name": "西口",
+        "lat": 35.4887,
+        "lng": 139.653764
+      },
+      {
+        "name": "東口",
+        "lat": 35.4887,
+        "lng": 139.656636
+      }
+    ],
+    "Higashi-Kanagawa": [
+      {
+        "name": "西口",
+        "lat": 35.47788,
+        "lng": 139.631724
+      },
+      {
+        "name": "東口",
+        "lat": 35.47788,
+        "lng": 139.634596
+      }
+    ],
+    "Sakuragicho": [
+      {
+        "name": "東口",
+        "lat": 35.450914,
+        "lng": 139.632494
+      },
+      {
+        "name": "南口",
+        "lat": 35.449745,
+        "lng": 139.631059
+      }
+    ],
+    "Kannai": [
+      {
+        "name": "北口",
+        "lat": 35.446349,
+        "lng": 139.63563
+      },
+      {
+        "name": "東口",
+        "lat": 35.44518,
+        "lng": 139.637065
+      },
+      {
+        "name": "南口",
+        "lat": 35.444011,
+        "lng": 139.63563
+      }
+    ],
+    "Ishikawacho": [
+      {
+        "name": "南口",
+        "lat": 35.437571,
+        "lng": 139.643
+      },
+      {
+        "name": "東口",
+        "lat": 35.43874,
+        "lng": 139.644435
+      },
+      {
+        "name": "北口",
+        "lat": 35.439909,
+        "lng": 139.643
+      }
+    ],
+    "Isogo": [
+      {
+        "name": "西口",
+        "lat": 35.4,
+        "lng": 139.616666
+      },
+      {
+        "name": "東口",
+        "lat": 35.4,
+        "lng": 139.619534
+      }
+    ],
+    "Shin-Sugita": [
+      {
+        "name": "西口",
+        "lat": 35.3868,
+        "lng": 139.618006
+      },
+      {
+        "name": "東口",
+        "lat": 35.3868,
+        "lng": 139.620874
+      }
+    ],
+    "Konandai": [
+      {
+        "name": "東口",
+        "lat": 35.37516,
+        "lng": 139.577674
+      }
+    ],
+    "Ofuna": [
+      {
+        "name": "西口",
+        "lat": 35.3543,
+        "lng": 139.530167
+      },
+      {
+        "name": "東口",
+        "lat": 35.3543,
+        "lng": 139.533033
+      },
+      {
+        "name": "北口",
+        "lat": 35.355469,
+        "lng": 139.5316
+      }
+    ],
+    "Hamacho": [
+      {
+        "name": "北口",
+        "lat": 35.68977,
+        "lng": 139.787725
+      }
+    ],
+    "Funabori": [
+      {
+        "name": "南口",
+        "lat": 35.682591,
+        "lng": 139.863955
+      },
+      {
+        "name": "北口",
+        "lat": 35.684929,
+        "lng": 139.863955
+      }
+    ],
+    "Mizue": [
+      {
+        "name": "南口",
+        "lat": 35.692341,
+        "lng": 139.8977
+      },
+      {
+        "name": "北口",
+        "lat": 35.694679,
+        "lng": 139.8977
+      }
+    ],
+    "Shinozaki": [
+      {
+        "name": "北口",
+        "lat": 35.707191,
+        "lng": 139.903796
+      },
+      {
+        "name": "西口",
+        "lat": 35.706022,
+        "lng": 139.902356
+      }
+    ],
+    "Moto-Yawata": [
+      {
+        "name": "南口",
+        "lat": 35.72165,
+        "lng": 139.926613
+      },
+      {
+        "name": "北口",
+        "lat": 35.723988,
+        "lng": 139.926613
+      }
+    ],
+    "Komagome": [
+      {
+        "name": "東口",
+        "lat": 35.73686,
+        "lng": 139.7495
+      },
+      {
+        "name": "北口",
+        "lat": 35.738029,
+        "lng": 139.74806
+      },
+      {
+        "name": "南口",
+        "lat": 35.735691,
+        "lng": 139.74806
+      }
+    ],
+    "Harajuku": [
+      {
+        "name": "東口",
+        "lat": 35.6702,
+        "lng": 139.704039
+      }
+    ],
+    "Kita-Ayase": [
+      {
+        "name": "東口",
+        "lat": 35.77689,
+        "lng": 139.833536
+      },
+      {
+        "name": "北口",
+        "lat": 35.778059,
+        "lng": 139.832095
+      }
+    ],
+    "Takadanobaba": [
+      {
+        "name": "早稲田口",
+        "lat": 35.71327,
+        "lng": 139.70273
+      },
+      {
+        "name": "ビッグボックス口",
+        "lat": 35.71327,
+        "lng": 139.7039
+      },
+      {
+        "name": "戸山口",
+        "lat": 35.71095,
+        "lng": 139.7039
+      }
+    ],
+    "Kosuge": [
+      {
+        "name": "駅前",
+        "lat": 35.75869,
+        "lng": 139.81265
+      }
+    ],
+    "Higashi_Ikebukuro_Yon": [
+      {
+        "name": "駅前",
+        "lat": 35.725398,
+        "lng": 139.720404
+      }
+    ],
+    "Onishimogami_Mae": [
+      {
+        "name": "駅前",
+        "lat": 35.720569,
+        "lng": 139.71516
+      }
+    ],
+    "Keisei-Sekiya": [
+      {
+        "name": "駅前",
+        "lat": 35.74402778,
+        "lng": 139.81166667
+      }
+    ],
+    "Minowa": [
+      {
+        "name": "駅前",
+        "lat": 35.72963,
+        "lng": 139.79136
+      }
+    ],
+    "Senju-Ohashi": [
+      {
+        "name": "駅前",
+        "lat": 35.7425,
+        "lng": 139.79683333
+      }
+    ],
+    "Arakawa_Ichi_Mae": [
+      {
+        "name": "駅前",
+        "lat": 35.733768,
+        "lng": 139.788841
+      }
+    ],
+    "Ushida": [
+      {
+        "name": "駅前",
+        "lat": 35.74454,
+        "lng": 139.81177
+      }
+    ],
+    "Toneri": [
+      {
+        "name": "駅前",
+        "lat": 35.80569,
+        "lng": 139.770069
+      }
+    ],
+    "Rokuchou": [
+      {
+        "name": "駅前",
+        "lat": 35.78492,
+        "lng": 139.82181
+      }
+    ],
+    "Gotanno": [
+      {
+        "name": "駅前",
+        "lat": 35.7659,
+        "lng": 139.80963
+      }
+    ],
+    "Ogi-Ohashi": [
+      {
+        "name": "駅前",
+        "lat": 35.763906,
+        "lng": 139.770798
+      }
+    ],
+    "Koya": [
+      {
+        "name": "駅前",
+        "lat": 35.768351,
+        "lng": 139.770692
+      }
+    ],
+    "Shimo": [
+      {
+        "name": "駅前",
+        "lat": 35.778025,
+        "lng": 139.7325
+      }
+    ],
+    "Keisei-Tsukawa": [
+      {
+        "name": "駅前",
+        "lat": 35.8078,
+        "lng": 139.8389
+      }
+    ],
+    "Kohoku": [
+      {
+        "name": "駅前",
+        "lat": 35.773954,
+        "lng": 139.77029
+      }
+    ],
+    "Adachi-Kangura": [
+      {
+        "name": "駅前",
+        "lat": 35.6817,
+        "lng": 139.7539
+      }
+    ],
+    "Shin-Marunouchi": [
+      {
+        "name": "駅前",
+        "lat": 35.6812,
+        "lng": 139.7671
+      }
+    ],
+    "Nihonbashi": [
+      {
+        "name": "駅前",
+        "lat": 35.6819,
+        "lng": 139.7746
+      }
+    ],
+    "Tochomae": [
+      {
+        "name": "駅前",
+        "lat": 35.6895,
+        "lng": 139.6917
+      }
+    ],
+    "Shinjuku-Gyoemmae": [
+      {
+        "name": "駅前",
+        "lat": 35.688525,
+        "lng": 139.710915
+      }
+    ],
+    "Korakuen": [
+      {
+        "name": "駅前",
+        "lat": 35.708486,
+        "lng": 139.751822
+      }
+    ],
+    "Shin-Baba": [
+      {
+        "name": "駅前",
+        "lat": 35.617634,
+        "lng": 139.741368
+      }
+    ],
+    "Nakameguro": [
+      {
+        "name": "駅前",
+        "lat": 35.6433,
+        "lng": 139.6975
+      }
+    ],
+    "Haneda-Kuko-T1T2": [
+      {
+        "name": "駅前",
+        "lat": 35.55,
+        "lng": 139.78644444
+      }
+    ],
+    "Nakano": [
+      {
+        "name": "駅前",
+        "lat": 35.7058,
+        "lng": 139.6639
+      }
+    ],
+    "Suginami": [
+      {
+        "name": "駅前",
+        "lat": 35.6994,
+        "lng": 139.6364
+      }
+    ],
+    "Shakujii-Koen": [
+      {
+        "name": "駅前",
+        "lat": 35.74353,
+        "lng": 139.60702
+      }
+    ],
+    "Kasai-Rinkai-Koen": [
+      {
+        "name": "駅前",
+        "lat": 35.64417,
+        "lng": 139.86148
+      }
+    ],
+    "Sannomi_Bashi": [
+      {
+        "name": "駅前",
+        "lat": 35.732207,
+        "lng": 139.791509
+      }
+    ],
+    "Eimachi": [
+      {
+        "name": "駅前",
+        "lat": 35.750865,
+        "lng": 139.742186
+      }
+    ],
+    "Kajiwara": [
+      {
+        "name": "駅前",
+        "lat": 35.75107,
+        "lng": 139.747268
+      }
+    ],
+    "Taishakuten": [
+      {
+        "name": "駅前",
+        "lat": 35.75671,
+        "lng": 139.8755
+      }
+    ],
+    "Tsukishima": [
+      {
+        "name": "駅前",
+        "lat": 35.6644,
+        "lng": 139.7731
+      }
+    ],
+    "Nishi-Nippori": [
+      {
+        "name": "駅前",
+        "lat": 35.732006,
+        "lng": 139.766886
+      }
+    ],
+    "Miyanomachi": [
+      {
+        "name": "駅前",
+        "lat": 35.647878,
+        "lng": 139.644941
+      }
+    ],
+    "Numabukuro": [
+      {
+        "name": "駅前",
+        "lat": 35.71938,
+        "lng": 139.66385
+      }
+    ],
+    "Kokumin-kyogijo": [
+      {
+        "name": "駅前",
+        "lat": 35.7189,
+        "lng": 139.5778
+      }
+    ],
+    "Hikaridai": [
+      {
+        "name": "駅前",
+        "lat": 35.758527,
+        "lng": 139.628901
+      }
+    ],
+    "Oji_Eki_Mae": [
+      {
+        "name": "駅前",
+        "lat": 35.752982,
+        "lng": 139.738045
+      }
+    ],
+    "Tawaramachi": [
+      {
+        "name": "駅前",
+        "lat": 35.70992,
+        "lng": 139.79031
+      }
+    ],
+    "Jimbocho": [
+      {
+        "name": "駅前",
+        "lat": 35.695932,
+        "lng": 139.757627
+      }
+    ],
+    "Edorigoshi": [
+      {
+        "name": "駅前",
+        "lat": 35.61597222,
+        "lng": 139.715
+      }
+    ],
+    "Sumiyoshi": [
+      {
+        "name": "駅前",
+        "lat": 35.68904,
+        "lng": 139.815723
+      }
+    ],
+    "Jujo": [
+      {
+        "name": "駅前",
+        "lat": 35.76039,
+        "lng": 139.72225
+      }
+    ],
+    "Jiyugaoka": [
+      {
+        "name": "駅前",
+        "lat": 35.607349,
+        "lng": 139.668532
+      }
+    ],
+    "Awajicho": [
+      {
+        "name": "駅前",
+        "lat": 35.69487,
+        "lng": 139.767455
+      }
+    ],
+    "Kiyosumi-Shirakawa": [
+      {
+        "name": "駅前",
+        "lat": 35.682119,
+        "lng": 139.799841
+      }
+    ],
+    "Hiroo": [
+      {
+        "name": "駅前",
+        "lat": 35.651499,
+        "lng": 139.722209
+      }
+    ],
+    "Nishigahara": [
+      {
+        "name": "駅前",
+        "lat": 35.745945,
+        "lng": 139.74226
+      }
+    ],
+    "Shin-Nakano": [
+      {
+        "name": "駅前",
+        "lat": 35.697475,
+        "lng": 139.66951
+      }
+    ],
+    "Kodemmacho": [
+      {
+        "name": "駅前",
+        "lat": 35.690423,
+        "lng": 139.778758
+      }
+    ],
+    "Kasumigaseki": [
+      {
+        "name": "駅前",
+        "lat": 35.672603,
+        "lng": 139.751176
+      }
+    ],
+    "Uchisaiwaicho": [
+      {
+        "name": "駅前",
+        "lat": 35.669344,
+        "lng": 139.75533
+      }
+    ],
+    "Takebashi": [
+      {
+        "name": "駅前",
+        "lat": 35.69044,
+        "lng": 139.75767
+      }
+    ],
+    "Hanzomon": [
+      {
+        "name": "駅前",
+        "lat": 35.6856,
+        "lng": 139.7389
+      }
+    ],
+    "Sendagi": [
+      {
+        "name": "駅前",
+        "lat": 35.725746,
+        "lng": 139.763303
+      }
+    ],
+    "Machiya_Ni": [
+      {
+        "name": "駅前",
+        "lat": 35.743919,
+        "lng": 139.776416
+      }
+    ],
+    "Inaricho": [
+      {
+        "name": "駅前",
+        "lat": 35.711389,
+        "lng": 139.78221
+      }
+    ],
+    "Mukojima": [
+      {
+        "name": "駅前",
+        "lat": 35.7117,
+        "lng": 139.8056
+      }
+    ],
+    "Kacho-mae": [
+      {
+        "name": "駅前",
+        "lat": 35.6967,
+        "lng": 139.7617
+      }
+    ],
+    "Myogadani": [
+      {
+        "name": "駅前",
+        "lat": 35.7172,
+        "lng": 139.736895
+      }
+    ],
+    "Kitasando": [
+      {
+        "name": "駅前",
+        "lat": 35.678503,
+        "lng": 139.705469
+      }
+    ],
+    "Fudo-mae": [
+      {
+        "name": "駅前",
+        "lat": 35.625773,
+        "lng": 139.713598
+      }
+    ],
+    "Nishi-Kasai": [
+      {
+        "name": "駅前",
+        "lat": 35.664562,
+        "lng": 139.8596
+      }
+    ],
+    "Meiji-Jingumae": [
+      {
+        "name": "駅前",
+        "lat": 35.66902778,
+        "lng": 139.70413889
+      }
+    ],
+    "Shin-Koenji": [
+      {
+        "name": "駅前",
+        "lat": 35.69786,
+        "lng": 139.64851
+      }
+    ],
+    "Ichigaya": [
+      {
+        "name": "駅前",
+        "lat": 35.692894,
+        "lng": 139.736324
+      }
+    ],
+    "Akasaka": [
+      {
+        "name": "駅前",
+        "lat": 35.672104,
+        "lng": 139.736413
+      }
+    ],
+    "Shin-Misaki": [
+      {
+        "name": "駅前",
+        "lat": 35.6556,
+        "lng": 139.7417
+      }
+    ],
+    "Nogizaka": [
+      {
+        "name": "駅前",
+        "lat": 35.666592,
+        "lng": 139.726229
+      }
+    ],
+    "Asukayama": [
+      {
+        "name": "駅前",
+        "lat": 35.750109,
+        "lng": 139.737333
+      }
+    ],
+    "Urayasu": [
+      {
+        "name": "駅前",
+        "lat": 35.665903,
+        "lng": 139.893236
+      }
+    ],
+    "Bakuro-Yokoyama": [
+      {
+        "name": "駅前",
+        "lat": 35.69193,
+        "lng": 139.783006
+      }
+    ],
+    "Nagatacho": [
+      {
+        "name": "駅前",
+        "lat": 35.678601,
+        "lng": 139.740286
+      }
+    ],
+    "Waseda": [
+      {
+        "name": "駅前",
+        "lat": 35.7139,
+        "lng": 139.6978
+      }
+    ],
+    "Nezu": [
+      {
+        "name": "駅前",
+        "lat": 35.7173463,
+        "lng": 139.7657368
+      }
+    ],
+    "Kasai": [
+      {
+        "name": "駅前",
+        "lat": 35.663616,
+        "lng": 139.87253
+      }
+    ],
+    "Akasaka-mitsuke": [
+      {
+        "name": "駅前",
+        "lat": 35.676845,
+        "lng": 139.737347
+      }
+    ],
+    "Higashi-Nihombashi": [
+      {
+        "name": "駅前",
+        "lat": 35.692123,
+        "lng": 139.784886
+      }
+    ],
+    "Kudanshita": [
+      {
+        "name": "駅前",
+        "lat": 35.6944,
+        "lng": 139.7478
+      }
+    ],
+    "Machiya_Eki_Mae": [
+      {
+        "name": "駅前",
+        "lat": 35.742783,
+        "lng": 139.780891
+      }
+    ],
+    "Heiwadai": [
+      {
+        "name": "駅前",
+        "lat": 35.757555,
+        "lng": 139.6543
+      }
+    ],
+    "Kasuga": [
+      {
+        "name": "駅前",
+        "lat": 35.709532,
+        "lng": 139.753287
+      }
+    ],
+    "Higashi-Koenji": [
+      {
+        "name": "駅前",
+        "lat": 35.697965,
+        "lng": 139.658295
+      }
+    ],
+    "Shirokanedai": [
+      {
+        "name": "駅前",
+        "lat": 35.63793,
+        "lng": 139.72615
+      }
+    ],
+    "Gaiemmae": [
+      {
+        "name": "駅前",
+        "lat": 35.670375,
+        "lng": 139.717825
+      }
+    ],
+    "Ueno-Okachimachi": [
+      {
+        "name": "駅前",
+        "lat": 35.707949,
+        "lng": 139.773351
+      }
+    ],
+    "Tempozanto-Mae": [
+      {
+        "name": "駅前",
+        "lat": 35.6528,
+        "lng": 139.7256
+      }
+    ],
+    "Keisei-Nishifuna": [
+      {
+        "name": "駅前",
+        "lat": 35.71153889,
+        "lng": 139.95893889
+      }
+    ],
+    "Kojimachi": [
+      {
+        "name": "駅前",
+        "lat": 35.6839,
+        "lng": 139.7378
+      }
+    ],
+    "Hakusan": [
+      {
+        "name": "駅前",
+        "lat": 35.72123,
+        "lng": 139.75216
+      }
+    ],
+    "Minumadai-Shinsuikoen": [
+      {
+        "name": "駅前",
+        "lat": 35.814541,
+        "lng": 139.770707
+      }
+    ],
+    "Kita-Aoi": [
+      {
+        "name": "駅前",
+        "lat": 35.77237,
+        "lng": 139.82038
+      }
+    ],
+    "Keisei-Takasago": [
+      {
+        "name": "駅前",
+        "lat": 35.75097222,
+        "lng": 139.86694444
+      }
+    ],
+    "Kita-Shinagawa": [
+      {
+        "name": "東口",
+        "lat": 35.622066,
+        "lng": 139.74064
+      }
+    ],
+    "Samezu": [
+      {
+        "name": "東口",
+        "lat": 35.605307,
+        "lng": 139.744198
+      },
+      {
+        "name": "西口",
+        "lat": 35.605307,
+        "lng": 139.741322
+      }
+    ],
+    "Namamugi": [
+      {
+        "name": "東口",
+        "lat": 35.49533,
+        "lng": 139.668385
+      },
+      {
+        "name": "西口",
+        "lat": 35.49533,
+        "lng": 139.665513
+      }
+    ],
+    "Idogaya": [
+      {
+        "name": "東口",
+        "lat": 35.433787,
+        "lng": 139.602836
+      }
+    ],
+    "Kamiooka": [
+      {
+        "name": "東口",
+        "lat": 35.408451,
+        "lng": 139.597309
+      },
+      {
+        "name": "西口",
+        "lat": 35.408451,
+        "lng": 139.594441
+      }
+    ],
+    "Kanazawa-Bunko": [
+      {
+        "name": "東口",
+        "lat": 35.343547,
+        "lng": 139.62338
+      },
+      {
+        "name": "西口",
+        "lat": 35.343547,
+        "lng": 139.620514
+      },
+      {
+        "name": "南口",
+        "lat": 35.342378,
+        "lng": 139.621947
+      }
+    ],
+    "Shioiri": [
+      {
+        "name": "西口",
+        "lat": 35.280095,
+        "lng": 139.660564
+      }
+    ],
+    "Sasazuka": [
+      {
+        "name": "南口",
+        "lat": 35.672491,
+        "lng": 139.66718
+      },
+      {
+        "name": "北口",
+        "lat": 35.674829,
+        "lng": 139.66718
+      }
+    ],
+    "Daitabashi": [
+      {
+        "name": "南口",
+        "lat": 35.669911,
+        "lng": 139.6594
+      },
+      {
+        "name": "北口",
+        "lat": 35.672249,
+        "lng": 139.6594
+      }
+    ],
+    "Shimotakaido": [
+      {
+        "name": "西口",
+        "lat": 35.666183,
+        "lng": 139.639942
+      },
+      {
+        "name": "北口",
+        "lat": 35.667352,
+        "lng": 139.641381
+      },
+      {
+        "name": "駅前",
+        "lat": 35.666183,
+        "lng": 139.641381
+      }
+    ],
+    "Chitose-Karasuyama": [
+      {
+        "name": "南口",
+        "lat": 35.666671,
+        "lng": 139.60038
+      },
+      {
+        "name": "西口",
+        "lat": 35.66784,
+        "lng": 139.598941
+      },
+      {
+        "name": "東口",
+        "lat": 35.66784,
+        "lng": 139.601819
+      },
+      {
+        "name": "北口",
+        "lat": 35.669009,
+        "lng": 139.60038
+      }
+    ],
+    "Sengawa": [
+      {
+        "name": "南口",
+        "lat": 35.661211,
+        "lng": 139.58524
+      },
+      {
+        "name": "西口",
+        "lat": 35.66238,
+        "lng": 139.583801
+      },
+      {
+        "name": "北口",
+        "lat": 35.663549,
+        "lng": 139.58524
+      }
+    ],
+    "Tsutsujigaoka": [
+      {
+        "name": "南口",
+        "lat": 35.656831,
+        "lng": 139.57519
+      },
+      {
+        "name": "西口",
+        "lat": 35.658,
+        "lng": 139.573751
+      },
+      {
+        "name": "北口",
+        "lat": 35.659169,
+        "lng": 139.57519
+      }
+    ],
+    "Bubaigawara": [
+      {
+        "name": "南口",
+        "lat": 35.667251,
+        "lng": 139.46892
+      },
+      {
+        "name": "北口",
+        "lat": 35.669589,
+        "lng": 139.46892
+      }
+    ],
+    "Nakagawara": [
+      {
+        "name": "北口",
+        "lat": 35.660699,
+        "lng": 139.4577
+      }
+    ],
+    "Seiseki-Sakuragaoka": [
+      {
+        "name": "西口",
+        "lat": 35.6508,
+        "lng": 139.445521
+      },
+      {
+        "name": "東口",
+        "lat": 35.6508,
+        "lng": 139.448399
+      }
+    ],
+    "Mogusaen": [
+      {
+        "name": "南口",
+        "lat": 35.656211,
+        "lng": 139.43138
+      },
+      {
+        "name": "北口",
+        "lat": 35.658549,
+        "lng": 139.43138
+      }
+    ],
+    "Keio-Hachioji": [
+      {
+        "name": "南口",
+        "lat": 35.670531,
+        "lng": 139.3028
+      },
+      {
+        "name": "西口",
+        "lat": 35.6717,
+        "lng": 139.301361
+      },
+      {
+        "name": "北口",
+        "lat": 35.672869,
+        "lng": 139.3028
+      }
+    ],
+    "Ikejiri-Ohashi": [
+      {
+        "name": "西口",
+        "lat": 35.650526,
+        "lng": 139.682203
+      },
+      {
+        "name": "北口",
+        "lat": 35.651695,
+        "lng": 139.683642
+      },
+      {
+        "name": "南口",
+        "lat": 35.649357,
+        "lng": 139.683642
+      },
+      {
+        "name": "東口",
+        "lat": 35.650526,
+        "lng": 139.685081
+      }
+    ],
+    "Sakura-Shimmachi": [
+      {
+        "name": "西口",
+        "lat": 35.631997,
+        "lng": 139.643533
+      },
+      {
+        "name": "北口",
+        "lat": 35.633166,
+        "lng": 139.644971
+      },
+      {
+        "name": "南口",
+        "lat": 35.630828,
+        "lng": 139.644971
+      }
+    ],
+    "Yoga": [
+      {
+        "name": "北口",
+        "lat": 35.6273,
+        "lng": 139.634183
+      },
+      {
+        "name": "東口",
+        "lat": 35.626131,
+        "lng": 139.635621
+      },
+      {
+        "name": "南口",
+        "lat": 35.624962,
+        "lng": 139.634183
+      }
+    ],
+    "Futako-Tamagawa": [
+      {
+        "name": "西口",
+        "lat": 35.612226,
+        "lng": 139.625775
+      },
+      {
+        "name": "南口",
+        "lat": 35.611057,
+        "lng": 139.627213
+      },
+      {
+        "name": "北口",
+        "lat": 35.613395,
+        "lng": 139.627213
+      },
+      {
+        "name": "東口",
+        "lat": 35.612226,
+        "lng": 139.628651
+      },
+      {
+        "name": "駅前",
+        "lat": 35.612226,
+        "lng": 139.627213
+      }
+    ],
+    "Futako-Shinchi": [
+      {
+        "name": "西口",
+        "lat": 35.607133,
+        "lng": 139.620981
+      },
+      {
+        "name": "東口",
+        "lat": 35.607133,
+        "lng": 139.623857
+      }
+    ],
+    "Miyamaedaira": [
+      {
+        "name": "北口",
+        "lat": 35.586108,
+        "lng": 139.581552
+      }
+    ],
+    "Saginuma": [
+      {
+        "name": "北口",
+        "lat": 35.580695,
+        "lng": 139.572854
+      }
+    ],
+    "Ichigao": [
+      {
+        "name": "西口",
+        "lat": 35.551402,
+        "lng": 139.539743
+      },
+      {
+        "name": "北口",
+        "lat": 35.552571,
+        "lng": 139.54118
+      },
+      {
+        "name": "東口",
+        "lat": 35.551402,
+        "lng": 139.542617
+      }
+    ],
+    "Aobadai": [
+      {
+        "name": "西口",
+        "lat": 35.542911,
+        "lng": 139.515912
+      },
+      {
+        "name": "北口",
+        "lat": 35.54408,
+        "lng": 139.517349
+      }
+    ],
+    "Nagatsuta": [
+      {
+        "name": "西口",
+        "lat": 35.5319,
+        "lng": 139.492963
+      },
+      {
+        "name": "北口",
+        "lat": 35.533069,
+        "lng": 139.4944
+      },
+      {
+        "name": "南口",
+        "lat": 35.530731,
+        "lng": 139.4944
+      }
+    ],
+    "Tsukushino": [
+      {
+        "name": "西口",
+        "lat": 35.525317,
+        "lng": 139.483041
+      },
+      {
+        "name": "東口",
+        "lat": 35.525317,
+        "lng": 139.485915
+      }
+    ],
+    "Minami-Machida-Grandberry-Park": [
+      {
+        "name": "北口",
+        "lat": 35.512566,
+        "lng": 139.470751
+      },
+      {
+        "name": "南口",
+        "lat": 35.510228,
+        "lng": 139.470751
+      }
+    ],
+    "Tsukimino": [
+      {
+        "name": "東口",
+        "lat": 35.510318,
+        "lng": 139.45949
+      }
+    ],
+    "Hiranuma-bashi": [
+      {
+        "name": "東口",
+        "lat": 35.45936,
+        "lng": 139.617725
+      }
+    ],
+    "Nishi-Yokohama": [
+      {
+        "name": "西口",
+        "lat": 35.45321,
+        "lng": 139.607075
+      },
+      {
+        "name": "東口",
+        "lat": 35.45321,
+        "lng": 139.609945
+      }
+    ],
+    "Wadamachi": [
+      {
+        "name": "西口",
+        "lat": 35.4634,
+        "lng": 139.585355
+      },
+      {
+        "name": "北口",
+        "lat": 35.464569,
+        "lng": 139.58679
+      },
+      {
+        "name": "南口",
+        "lat": 35.462231,
+        "lng": 139.58679
+      }
+    ],
+    "Kami-Hoshikawa": [
+      {
+        "name": "西口",
+        "lat": 35.46747,
+        "lng": 139.578655
+      },
+      {
+        "name": "北口",
+        "lat": 35.468639,
+        "lng": 139.58009
+      },
+      {
+        "name": "南口",
+        "lat": 35.466301,
+        "lng": 139.58009
+      }
+    ],
+    "Nishiya": [
+      {
+        "name": "西口",
+        "lat": 35.47789,
+        "lng": 139.564184
+      },
+      {
+        "name": "北口",
+        "lat": 35.479059,
+        "lng": 139.56562
+      },
+      {
+        "name": "南口",
+        "lat": 35.476721,
+        "lng": 139.56562
+      }
+    ],
+    "Mitsukyo": [
+      {
+        "name": "東口",
+        "lat": 35.46756,
+        "lng": 139.504185
+      },
+      {
+        "name": "北口",
+        "lat": 35.468729,
+        "lng": 139.50275
+      },
+      {
+        "name": "南口",
+        "lat": 35.466391,
+        "lng": 139.50275
+      }
+    ],
+    "Seya": [
+      {
+        "name": "東口",
+        "lat": 35.47012,
+        "lng": 139.483946
+      },
+      {
+        "name": "北口",
+        "lat": 35.471289,
+        "lng": 139.48251
+      },
+      {
+        "name": "南口",
+        "lat": 35.468951,
+        "lng": 139.48251
+      }
+    ],
+    "Sagami-Otsuka": [
+      {
+        "name": "北口",
+        "lat": 35.471539,
+        "lng": 139.44085
+      },
+      {
+        "name": "南口",
+        "lat": 35.469201,
+        "lng": 139.44085
+      }
+    ],
+    "Sagamino": [
+      {
+        "name": "西口",
+        "lat": 35.47134,
+        "lng": 139.427094
+      },
+      {
+        "name": "北口",
+        "lat": 35.472509,
+        "lng": 139.42853
+      },
+      {
+        "name": "南口",
+        "lat": 35.470171,
+        "lng": 139.42853
+      }
+    ],
+    "Oguchi": [
+      {
+        "name": "東口",
+        "lat": 35.4923,
+        "lng": 139.647776
+      },
+      {
+        "name": "西口",
+        "lat": 35.4923,
+        "lng": 139.644904
+      }
+    ],
+    "Shin-Yokohama": [
+      {
+        "name": "北口",
+        "lat": 35.510069,
+        "lng": 139.6178
+      },
+      {
+        "name": "西口",
+        "lat": 35.5089,
+        "lng": 139.616364
+      },
+      {
+        "name": "南口",
+        "lat": 35.507731,
+        "lng": 139.6178
+      }
+    ],
+    "Kozukue": [
+      {
+        "name": "北口",
+        "lat": 35.509809,
+        "lng": 139.59962
+      },
+      {
+        "name": "西口",
+        "lat": 35.50864,
+        "lng": 139.598184
+      },
+      {
+        "name": "南口",
+        "lat": 35.507471,
+        "lng": 139.59962
+      }
+    ],
+    "Naruse": [
+      {
+        "name": "北口",
+        "lat": 35.534269,
+        "lng": 139.5005
+      },
+      {
+        "name": "南口",
+        "lat": 35.531931,
+        "lng": 139.5005
+      }
+    ],
+    "Yabe": [
+      {
+        "name": "北口",
+        "lat": 35.574269,
+        "lng": 139.38654
+      },
+      {
+        "name": "南口",
+        "lat": 35.571931,
+        "lng": 139.38654
+      }
+    ],
+    "Sagamihara": [
+      {
+        "name": "北口",
+        "lat": 35.582649,
+        "lng": 139.37064
+      },
+      {
+        "name": "南口",
+        "lat": 35.580311,
+        "lng": 139.37064
+      }
+    ],
+    "Aihara": [
+      {
+        "name": "東口",
+        "lat": 35.60693,
+        "lng": 139.333118
+      },
+      {
+        "name": "西口",
+        "lat": 35.60693,
+        "lng": 139.330242
+      }
+    ],
+    "Hachioji-Minamino": [
+      {
+        "name": "東口",
+        "lat": 35.63129,
+        "lng": 139.332418
+      },
+      {
+        "name": "西口",
+        "lat": 35.63129,
+        "lng": 139.329542
+      },
+      {
+        "name": "南口",
+        "lat": 35.630121,
+        "lng": 139.33098
+      }
+    ],
+    "Katakura": [
+      {
+        "name": "北口",
+        "lat": 35.640849,
+        "lng": 139.34116
+      },
+      {
+        "name": "南口",
+        "lat": 35.638511,
+        "lng": 139.34116
+      }
+    ],
+    "Shin-Takashima": [
+      {
+        "name": "東口",
+        "lat": 35.461889,
+        "lng": 139.628241
+      }
+    ],
+    "Bashamichi": [
+      {
+        "name": "南口",
+        "lat": 35.44897,
+        "lng": 139.636167
+      },
+      {
+        "name": "東口",
+        "lat": 35.450139,
+        "lng": 139.637602
+      }
+    ],
+    "Tokyo-Teleport": [
+      {
+        "name": "東口",
+        "lat": 35.62754,
+        "lng": 139.780288
+      }
+    ],
+    "Shinagawa-Sea-Side": [
+      {
+        "name": "南口",
+        "lat": 35.607801,
+        "lng": 139.74967
+      }
+    ],
+    "Sunagawa-Nanaban": [
+      {
+        "name": "北口",
+        "lat": 35.724569,
+        "lng": 139.4181
+      }
+    ],
+    "Izumi-Taiikukan": [
+      {
+        "name": "南口",
+        "lat": 35.717631,
+        "lng": 139.4196
+      },
+      {
+        "name": "東門",
+        "lat": 35.7188,
+        "lng": 139.42104
+      }
+    ],
+    "Tachihi": [
+      {
+        "name": "南口",
+        "lat": 35.713131,
+        "lng": 139.4171
+      },
+      {
+        "name": "東門",
+        "lat": 35.7143,
+        "lng": 139.41854
+      },
+      {
+        "name": "北口",
+        "lat": 35.715469,
+        "lng": 139.4171
+      }
+    ],
+    "Tachikawa-Kita": [
+      {
+        "name": "北口",
+        "lat": 35.703969,
+        "lng": 139.4089
+      }
+    ],
+    "Tachikawa-Minami": [
+      {
+        "name": "南口",
+        "lat": 35.687731,
+        "lng": 139.4089
+      }
+    ],
+    "Takahata-Fudo": [
+      {
+        "name": "南口",
+        "lat": 35.660131,
+        "lng": 139.4152
+      },
+      {
+        "name": "北口",
+        "lat": 35.662469,
+        "lng": 139.4152
+      },
+      {
+        "name": "北口",
+        "lat": 35.663308,
+        "lng": 139.413207
+      },
+      {
+        "name": "南口",
+        "lat": 35.66097,
+        "lng": 139.413207
+      },
+      {
+        "name": "駅前",
+        "lat": 35.662139,
+        "lng": 139.413207
+      }
+    ],
+    "Tama-Center": [
+      {
+        "name": "南口",
+        "lat": 35.623391,
+        "lng": 139.424891
+      },
+      {
+        "name": "西口",
+        "lat": 35.62456,
+        "lng": 139.423452
+      },
+      {
+        "name": "東口",
+        "lat": 35.62456,
+        "lng": 139.426329
+      }
+    ],
+    "Higashi-Chiba": [
+      {
+        "name": "北口",
+        "lat": 35.618289,
+        "lng": 140.12242
+      },
+      {
+        "name": "南口",
+        "lat": 35.615951,
+        "lng": 140.12242
+      }
+    ],
+    "Tsuga": [
+      {
+        "name": "西口",
+        "lat": 35.63602,
+        "lng": 140.147742
+      },
+      {
+        "name": "東口",
+        "lat": 35.63602,
+        "lng": 140.150618
+      }
+    ],
+    "Yotsukaido": [
+      {
+        "name": "北口",
+        "lat": 35.663959,
+        "lng": 140.1649
+      },
+      {
+        "name": "南口",
+        "lat": 35.661621,
+        "lng": 140.1649
+      }
+    ],
+    "Monoi": [
+      {
+        "name": "西口",
+        "lat": 35.68572,
+        "lng": 140.198881
+      },
+      {
+        "name": "東口",
+        "lat": 35.68572,
+        "lng": 140.201759
+      }
+    ],
+    "Yachimata": [
+      {
+        "name": "北口",
+        "lat": 35.664349,
+        "lng": 140.31742
+      },
+      {
+        "name": "南口",
+        "lat": 35.662011,
+        "lng": 140.31742
+      }
+    ],
+    "Yokoshiba": [
+      {
+        "name": "南口",
+        "lat": 35.660611,
+        "lng": 140.49078
+      }
+    ],
+    "Yokaichiba": [
+      {
+        "name": "北口",
+        "lat": 35.700469,
+        "lng": 140.5524
+      },
+      {
+        "name": "南口",
+        "lat": 35.698131,
+        "lng": 140.5524
+      }
+    ],
+    "Sagamiko": [
+      {
+        "name": "北口",
+        "lat": 35.618489,
+        "lng": 139.18852
+      }
+    ],
+    "Uenohara": [
+      {
+        "name": "北口",
+        "lat": 35.619609,
+        "lng": 139.1154
+      },
+      {
+        "name": "南口",
+        "lat": 35.617271,
+        "lng": 139.1154
+      }
+    ],
+    "Saruhashi": [
+      {
+        "name": "北口",
+        "lat": 35.614059,
+        "lng": 138.96838
+      },
+      {
+        "name": "南口",
+        "lat": 35.611721,
+        "lng": 138.96838
+      }
+    ],
+    "Otsuki": [
+      {
+        "name": "北口",
+        "lat": 35.614429,
+        "lng": 138.94256
+      },
+      {
+        "name": "南口",
+        "lat": 35.612091,
+        "lng": 138.94256
+      }
+    ],
+    "Katsunuma-budokyo": [
+      {
+        "name": "北口",
+        "lat": 35.674009,
+        "lng": 138.74328
+      },
+      {
+        "name": "南口",
+        "lat": 35.671671,
+        "lng": 138.74328
+      }
+    ],
+    "Enzan": [
+      {
+        "name": "北口",
+        "lat": 35.706529,
+        "lng": 138.73476
+      },
+      {
+        "name": "南口",
+        "lat": 35.704191,
+        "lng": 138.73476
+      }
+    ],
+    "Yamanashishi": [
+      {
+        "name": "北口",
+        "lat": 35.686219,
+        "lng": 138.68298
+      },
+      {
+        "name": "南口",
+        "lat": 35.683881,
+        "lng": 138.68298
+      }
+    ],
+    "Sakaori": [
+      {
+        "name": "北口",
+        "lat": 35.660669,
+        "lng": 138.5993
+      },
+      {
+        "name": "西口",
+        "lat": 35.6595,
+        "lng": 138.597861
+      },
+      {
+        "name": "南口",
+        "lat": 35.658331,
+        "lng": 138.5993
+      }
+    ],
+    "Kofu": [
+      {
+        "name": "北口",
+        "lat": 35.668289,
+        "lng": 138.56876
+      },
+      {
+        "name": "南口",
+        "lat": 35.665951,
+        "lng": 138.56876
+      }
+    ],
+    "Ryuo": [
+      {
+        "name": "北口",
+        "lat": 35.669849,
+        "lng": 138.51935
+      },
+      {
+        "name": "西口",
+        "lat": 35.66868,
+        "lng": 138.517911
+      },
+      {
+        "name": "南口",
+        "lat": 35.667511,
+        "lng": 138.51935
+      },
+      {
+        "name": "東口",
+        "lat": 35.66868,
+        "lng": 138.520789
+      }
+    ],
+    "Shiozaki": [
+      {
+        "name": "北口",
+        "lat": 35.688889,
+        "lng": 138.48782
+      },
+      {
+        "name": "南口",
+        "lat": 35.686551,
+        "lng": 138.48782
+      }
+    ],
+    "Chino": [
+      {
+        "name": "西口",
+        "lat": 35.995,
+        "lng": 138.150315
+      },
+      {
+        "name": "東口",
+        "lat": 35.995,
+        "lng": 138.153205
+      }
+    ],
+    "Kami-Suwa": [
+      {
+        "name": "西口",
+        "lat": 36.04676,
+        "lng": 138.114814
+      },
+      {
+        "name": "東口",
+        "lat": 36.04676,
+        "lng": 138.117706
+      }
+    ],
+    "Tachikawa": [
+      {
+        "name": "西口",
+        "lat": 35.6983,
+        "lng": 139.41216
+      },
+      {
+        "name": "北口",
+        "lat": 35.699469,
+        "lng": 139.4136
+      },
+      {
+        "name": "東口",
+        "lat": 35.6983,
+        "lng": 139.41504
+      },
+      {
+        "name": "南口",
+        "lat": 35.697131,
+        "lng": 139.4136
+      }
+    ],
+    "Higashi-Nakagami": [
+      {
+        "name": "北口",
+        "lat": 35.708069,
+        "lng": 139.3949
+      },
+      {
+        "name": "南口",
+        "lat": 35.705731,
+        "lng": 139.3949
+      }
+    ],
+    "Nakagami": [
+      {
+        "name": "北口",
+        "lat": 35.710169,
+        "lng": 139.3757
+      },
+      {
+        "name": "東口",
+        "lat": 35.709,
+        "lng": 139.37714
+      },
+      {
+        "name": "南口",
+        "lat": 35.707831,
+        "lng": 139.3757
+      }
+    ],
+    "Akishima": [
+      {
+        "name": "北口",
+        "lat": 35.707969,
+        "lng": 139.3597
+      },
+      {
+        "name": "東口",
+        "lat": 35.7068,
+        "lng": 139.36114
+      },
+      {
+        "name": "南口",
+        "lat": 35.705631,
+        "lng": 139.3597
+      }
+    ],
+    "Haijima": [
+      {
+        "name": "北口",
+        "lat": 35.722469,
+        "lng": 139.3435
+      },
+      {
+        "name": "南口",
+        "lat": 35.720131,
+        "lng": 139.3435
+      }
+    ],
+    "Ushihama": [
+      {
+        "name": "西口",
+        "lat": 35.7297,
+        "lng": 139.35416
+      },
+      {
+        "name": "東口",
+        "lat": 35.7297,
+        "lng": 139.35704
+      }
+    ],
+    "Fussa": [
+      {
+        "name": "西口",
+        "lat": 35.7372,
+        "lng": 139.32546
+      },
+      {
+        "name": "東口",
+        "lat": 35.7372,
+        "lng": 139.32834
+      },
+      {
+        "name": "南口",
+        "lat": 35.736031,
+        "lng": 139.3269
+      }
+    ],
+    "Hamu": [
+      {
+        "name": "北口",
+        "lat": 35.764369,
+        "lng": 139.3063
+      },
+      {
+        "name": "西口",
+        "lat": 35.7632,
+        "lng": 139.304859
+      },
+      {
+        "name": "東口",
+        "lat": 35.7632,
+        "lng": 139.307741
+      }
+    ],
+    "Kabe": [
+      {
+        "name": "北口",
+        "lat": 35.787969,
+        "lng": 139.2716
+      },
+      {
+        "name": "東口",
+        "lat": 35.7868,
+        "lng": 139.273041
+      },
+      {
+        "name": "南口",
+        "lat": 35.785631,
+        "lng": 139.2716
+      }
+    ],
+    "Higashi-Ome": [
+      {
+        "name": "北口",
+        "lat": 35.790969,
+        "lng": 139.2661
+      },
+      {
+        "name": "南口",
+        "lat": 35.788631,
+        "lng": 139.2661
+      }
+    ],
+    "Futamatao": [
+      {
+        "name": "北口",
+        "lat": 35.791169,
+        "lng": 139.1725
+      },
+      {
+        "name": "南口",
+        "lat": 35.788831,
+        "lng": 139.1725
+      }
+    ],
+    "Sawai": [
+      {
+        "name": "北口",
+        "lat": 35.801869,
+        "lng": 139.2302
+      },
+      {
+        "name": "南口",
+        "lat": 35.799531,
+        "lng": 139.2302
+      }
+    ],
+    "Shin-Akitsu": [
+      {
+        "name": "東口",
+        "lat": 35.77831,
+        "lng": 139.495201
+      }
+    ],
+    "Kita-Asaka": [
+      {
+        "name": "東口",
+        "lat": 35.81547,
+        "lng": 139.588672
+      },
+      {
+        "name": "西口",
+        "lat": 35.81547,
+        "lng": 139.585788
+      },
+      {
+        "name": "北口",
+        "lat": 35.816639,
+        "lng": 139.58723
+      },
+      {
+        "name": "南口",
+        "lat": 35.814301,
+        "lng": 139.58723
+      }
+    ],
+    "Nishi-Urawa": [
+      {
+        "name": "東口",
+        "lat": 35.84418,
+        "lng": 139.629202
+      },
+      {
+        "name": "西口",
+        "lat": 35.84418,
+        "lng": 139.626318
+      }
+    ],
+    "Higashi-Kawaguchi": [
+      {
+        "name": "東口",
+        "lat": 35.87516,
+        "lng": 139.745473
+      },
+      {
+        "name": "南口",
+        "lat": 35.873991,
+        "lng": 139.74403
+      },
+      {
+        "name": "西口",
+        "lat": 35.87516,
+        "lng": 139.742587
+      },
+      {
+        "name": "北口",
+        "lat": 35.876329,
+        "lng": 139.74403
+      }
+    ],
+    "Minami-Koshigaya": [
+      {
+        "name": "東口",
+        "lat": 35.87604,
+        "lng": 139.792593
+      },
+      {
+        "name": "北口",
+        "lat": 35.877209,
+        "lng": 139.79115
+      },
+      {
+        "name": "南口",
+        "lat": 35.874871,
+        "lng": 139.79115
+      }
+    ],
+    "Koshigaya-Laketown": [
+      {
+        "name": "東口",
+        "lat": 35.8761,
+        "lng": 139.823703
+      },
+      {
+        "name": "北口",
+        "lat": 35.877269,
+        "lng": 139.82226
+      },
+      {
+        "name": "南口",
+        "lat": 35.874931,
+        "lng": 139.82226
+      }
+    ],
+    "Minami-Nagareyama": [
+      {
+        "name": "西口",
+        "lat": 35.83784,
+        "lng": 139.902788
+      },
+      {
+        "name": "北口",
+        "lat": 35.839009,
+        "lng": 139.90423
+      },
+      {
+        "name": "南口",
+        "lat": 35.836671,
+        "lng": 139.90423
+      }
+    ],
+    "Akigawa": [
+      {
+        "name": "南口",
+        "lat": 35.726881,
+        "lng": 139.28675
+      },
+      {
+        "name": "西口",
+        "lat": 35.72805,
+        "lng": 139.28531
+      },
+      {
+        "name": "北口",
+        "lat": 35.729219,
+        "lng": 139.28675
+      }
+    ],
+    "Musashi-Hikida": [
+      {
+        "name": "北口",
+        "lat": 35.730859,
+        "lng": 139.27008
+      },
+      {
+        "name": "西口",
+        "lat": 35.72969,
+        "lng": 139.26864
+      }
+    ],
+    "Musashi-Itsukaichi": [
+      {
+        "name": "南口",
+        "lat": 35.730971,
+        "lng": 139.22812
+      },
+      {
+        "name": "北口",
+        "lat": 35.733309,
+        "lng": 139.22812
+      }
+    ],
+    "Sakura": [
+      {
+        "name": "南口",
+        "lat": 35.708571,
+        "lng": 140.22678
+      },
+      {
+        "name": "北口",
+        "lat": 35.710909,
+        "lng": 140.22678
+      }
+    ],
+    "Shisui": [
+      {
+        "name": "西口",
+        "lat": 35.73185,
+        "lng": 140.27396
+      },
+      {
+        "name": "東口",
+        "lat": 35.73185,
+        "lng": 140.27684
+      }
+    ],
+    "Narita": [
+      {
+        "name": "西口",
+        "lat": 35.77726,
+        "lng": 140.312099
+      },
+      {
+        "name": "東口",
+        "lat": 35.77726,
+        "lng": 140.314981
+      }
+    ],
+    "Sawara": [
+      {
+        "name": "北口",
+        "lat": 35.896099,
+        "lng": 140.49377
+      }
+    ],
+    "Kita-Hachioji": [
+      {
+        "name": "西口",
+        "lat": 35.66928,
+        "lng": 139.361961
+      },
+      {
+        "name": "東口",
+        "lat": 35.66928,
+        "lng": 139.364839
+      }
+    ],
+    "Komiya": [
+      {
+        "name": "南口",
+        "lat": 35.684741,
+        "lng": 139.36843
+      },
+      {
+        "name": "北口",
+        "lat": 35.687079,
+        "lng": 139.36843
+      }
+    ],
+    "Higashi-Fussa": [
+      {
+        "name": "西口",
+        "lat": 35.74583,
+        "lng": 139.33446
+      },
+      {
+        "name": "東口",
+        "lat": 35.74583,
+        "lng": 139.33734
+      }
+    ],
+    "Hakonegasaki": [
+      {
+        "name": "西口",
+        "lat": 35.7717,
+        "lng": 139.345299
+      },
+      {
+        "name": "東口",
+        "lat": 35.7717,
+        "lng": 139.348181
+      }
+    ],
+    "Kaneko": [
+      {
+        "name": "南口",
+        "lat": 35.809651,
+        "lng": 139.32861
+      }
+    ],
+    "Higashi-Hanno": [
+      {
+        "name": "西口",
+        "lat": 35.85302,
+        "lng": 139.324688
+      },
+      {
+        "name": "東口",
+        "lat": 35.85302,
+        "lng": 139.327572
+      }
+    ],
+    "Komagawa": [
+      {
+        "name": "西口",
+        "lat": 35.89637,
+        "lng": 139.336687
+      },
+      {
+        "name": "東口",
+        "lat": 35.89637,
+        "lng": 139.339573
+      }
+    ],
+    "Ogose": [
+      {
+        "name": "西口",
+        "lat": 35.96286,
+        "lng": 139.297806
+      },
+      {
+        "name": "東口",
+        "lat": 35.96286,
+        "lng": 139.300694
+      }
+    ],
+    "Kodama": [
+      {
+        "name": "南口",
+        "lat": 36.191671,
+        "lng": 139.13572
+      }
+    ],
+    "Tansho": [
+      {
+        "name": "南口",
+        "lat": 36.215291,
+        "lng": 139.10258
+      }
+    ],
+    "Kuragano": [
+      {
+        "name": "西口",
+        "lat": 36.3003,
+        "lng": 139.047989
+      },
+      {
+        "name": "南口",
+        "lat": 36.299131,
+        "lng": 139.04944
+      },
+      {
+        "name": "北口",
+        "lat": 36.301469,
+        "lng": 139.04944
+      }
+    ],
+    "Takasaki": [
+      {
+        "name": "西口",
+        "lat": 36.3228,
+        "lng": 139.001349
+      },
+      {
+        "name": "東口",
+        "lat": 36.3228,
+        "lng": 139.004251
+      }
+    ],
+    "Mutsuura": [
+      {
+        "name": "西口",
+        "lat": 35.322725,
+        "lng": 139.610057
+      },
+      {
+        "name": "東口",
+        "lat": 35.322725,
+        "lng": 139.612923
+      }
+    ],
+    "Zushi-Hayama": [
+      {
+        "name": "北口",
+        "lat": 35.29702,
+        "lng": 139.581192
+      },
+      {
+        "name": "南口",
+        "lat": 35.294682,
+        "lng": 139.581192
+      }
+    ],
+    "Kawasaki_Daishi": [
+      {
+        "name": "南口",
+        "lat": 35.534445,
+        "lng": 139.726157
+      },
+      {
+        "name": "東門",
+        "lat": 35.535614,
+        "lng": 139.727594
+      },
+      {
+        "name": "北口",
+        "lat": 35.536783,
+        "lng": 139.726157
+      }
+    ],
+    "Higashi-Monzen": [
+      {
+        "name": "東門",
+        "lat": 35.536714,
+        "lng": 139.736147
+      }
+    ],
+    "Daishi_Bashi": [
+      {
+        "name": "東口",
+        "lat": 35.5367,
+        "lng": 139.742297
+      },
+      {
+        "name": "東門",
+        "lat": 35.5367,
+        "lng": 139.742297
+      }
+    ],
+    "Togoshi-koen": [
+      {
+        "name": "南口",
+        "lat": 35.607631,
+        "lng": 139.71806
+      }
+    ],
+    "Kaminoge": [
+      {
+        "name": "北口",
+        "lat": 35.613013,
+        "lng": 139.639125
+      }
+    ],
+    "Mizonokuchi": [
+      {
+        "name": "南口",
+        "lat": 35.586631,
+        "lng": 139.6889
+      },
+      {
+        "name": "東口",
+        "lat": 35.5878,
+        "lng": 139.690338
+      },
+      {
+        "name": "北口",
+        "lat": 35.588969,
+        "lng": 139.6889
+      }
+    ],
+    "Shitte": [
+      {
+        "name": "西口",
+        "lat": 35.53098,
+        "lng": 139.682863
+      }
+    ],
+    "Yako": [
+      {
+        "name": "西口",
+        "lat": 35.53936,
+        "lng": 139.678983
+      },
+      {
+        "name": "東口",
+        "lat": 35.53936,
+        "lng": 139.681857
+      }
+    ],
+    "Hirama": [
+      {
+        "name": "東口",
+        "lat": 35.56056,
+        "lng": 139.672537
+      }
+    ],
+    "Musashi-Shinjo": [
+      {
+        "name": "北口",
+        "lat": 35.588589,
+        "lng": 139.62909
+      },
+      {
+        "name": "南口",
+        "lat": 35.586251,
+        "lng": 139.62909
+      }
+    ],
+    "Musashi-Mizonokuchi": [
+      {
+        "name": "南口",
+        "lat": 35.597651,
+        "lng": 139.61138
+      },
+      {
+        "name": "東口",
+        "lat": 35.59882,
+        "lng": 139.612818
+      }
+    ],
+    "Tsudayama": [
+      {
+        "name": "北口",
+        "lat": 35.604819,
+        "lng": 139.60072
+      },
+      {
+        "name": "南口",
+        "lat": 35.602481,
+        "lng": 139.60072
+      }
+    ],
+    "Noborito": [
+      {
+        "name": "北口",
+        "lat": 35.621849,
+        "lng": 139.57026
+      },
+      {
+        "name": "南口",
+        "lat": 35.619511,
+        "lng": 139.57026
+      }
+    ],
+    "Yanokuchi": [
+      {
+        "name": "北口",
+        "lat": 35.642909,
+        "lng": 139.52044
+      },
+      {
+        "name": "南口",
+        "lat": 35.640571,
+        "lng": 139.52044
+      }
+    ],
+    "Inagi-Naganuma": [
+      {
+        "name": "北口",
+        "lat": 35.645449,
+        "lng": 139.50261
+      },
+      {
+        "name": "南口",
+        "lat": 35.643111,
+        "lng": 139.50261
+      }
+    ],
+    "Nishifu": [
+      {
+        "name": "北口",
+        "lat": 35.672109,
+        "lng": 139.45739
+      },
+      {
+        "name": "南口",
+        "lat": 35.669771,
+        "lng": 139.45739
+      }
+    ],
+    "Yaho": [
+      {
+        "name": "北口",
+        "lat": 35.682549,
+        "lng": 139.44678
+      },
+      {
+        "name": "南口",
+        "lat": 35.680211,
+        "lng": 139.44678
+      }
+    ],
+    "Hatanodai": [
+      {
+        "name": "東口",
+        "lat": 35.604784,
+        "lng": 139.704334
+      },
+      {
+        "name": "南口",
+        "lat": 35.603615,
+        "lng": 139.702896
+      },
+      {
+        "name": "北口",
+        "lat": 35.605953,
+        "lng": 139.702896
+      }
+    ],
+    "Yukigaya-otsuka": [
+      {
+        "name": "西口",
+        "lat": 35.59201,
+        "lng": 139.679526
+      },
+      {
+        "name": "南口",
+        "lat": 35.590841,
+        "lng": 139.680964
+      }
+    ],
+    "Ikegami": [
+      {
+        "name": "東口",
+        "lat": 35.572147,
+        "lng": 139.704333
+      },
+      {
+        "name": "南口",
+        "lat": 35.570978,
+        "lng": 139.702896
+      },
+      {
+        "name": "北口",
+        "lat": 35.573316,
+        "lng": 139.702896
+      }
+    ],
+    "Setagaya": [
+      {
+        "name": "南口",
+        "lat": 35.645231,
+        "lng": 139.6536
+      }
+    ],
+    "Kamimachi": [
+      {
+        "name": "南口",
+        "lat": 35.642248,
+        "lng": 139.646617
+      }
+    ],
+    "Sangenjaya": [
+      {
+        "name": "西口",
+        "lat": 35.64364,
+        "lng": 139.669887
+      },
+      {
+        "name": "南口",
+        "lat": 35.642471,
+        "lng": 139.671326
+      },
+      {
+        "name": "北口",
+        "lat": 35.644809,
+        "lng": 139.671326
+      }
+    ],
+    "Totsuka": [
+      {
+        "name": "西口",
+        "lat": 35.40044,
+        "lng": 139.532876
+      },
+      {
+        "name": "南門",
+        "lat": 35.399271,
+        "lng": 139.53431
+      },
+      {
+        "name": "東口",
+        "lat": 35.40044,
+        "lng": 139.535744
+      },
+      {
+        "name": "北口",
+        "lat": 35.401609,
+        "lng": 139.53431
+      }
+    ],
+    "Fujisawa": [
+      {
+        "name": "西口",
+        "lat": 35.3389,
+        "lng": 139.487467
+      },
+      {
+        "name": "南口",
+        "lat": 35.337731,
+        "lng": 139.4889
+      },
+      {
+        "name": "北口",
+        "lat": 35.340069,
+        "lng": 139.4889
+      }
+    ],
+    "Hiratsuka": [
+      {
+        "name": "西口",
+        "lat": 35.32755,
+        "lng": 139.347567
+      },
+      {
+        "name": "南口",
+        "lat": 35.326381,
+        "lng": 139.349
+      },
+      {
+        "name": "東口",
+        "lat": 35.32755,
+        "lng": 139.350433
+      },
+      {
+        "name": "北口",
+        "lat": 35.328719,
+        "lng": 139.349
+      }
+    ],
+    "Oiso": [
+      {
+        "name": "南口",
+        "lat": 35.310291,
+        "lng": 139.31328
+      },
+      {
+        "name": "北口",
+        "lat": 35.312629,
+        "lng": 139.31328
+      }
+    ],
+    "Ninomiya": [
+      {
+        "name": "南口",
+        "lat": 35.297501,
+        "lng": 139.25675
+      },
+      {
+        "name": "北口",
+        "lat": 35.299839,
+        "lng": 139.25675
+      }
+    ],
+    "Taura": [
+      {
+        "name": "南口",
+        "lat": 35.291671,
+        "lng": 139.63752
+      },
+      {
+        "name": "北口",
+        "lat": 35.294009,
+        "lng": 139.63752
+      }
+    ],
+    "Kamakura": [
+      {
+        "name": "東口",
+        "lat": 35.3192,
+        "lng": 139.552533
+      },
+      {
+        "name": "西口",
+        "lat": 35.3192,
+        "lng": 139.549667
+      },
+      {
+        "name": "南口",
+        "lat": 35.318031,
+        "lng": 139.5511
+      }
+    ],
+    "Shin-Kawasaki": [
+      {
+        "name": "西口",
+        "lat": 35.5307,
+        "lng": 139.701463
+      }
+    ],
+    "Kuki": [
+      {
+        "name": "西口",
+        "lat": 36.06581,
+        "lng": 139.675934
+      },
+      {
+        "name": "東口",
+        "lat": 36.06581,
+        "lng": 139.678826
+      }
+    ],
+    "Washinomiya": [
+      {
+        "name": "西口",
+        "lat": 36.09633,
+        "lng": 139.655513
+      },
+      {
+        "name": "東口",
+        "lat": 36.09633,
+        "lng": 139.658407
+      }
+    ],
+    "Hanyu": [
+      {
+        "name": "西口",
+        "lat": 36.17007,
+        "lng": 139.532582
+      },
+      {
+        "name": "東口",
+        "lat": 36.17007,
+        "lng": 139.535478
+      }
+    ],
+    "Kawamata": [
+      {
+        "name": "西口",
+        "lat": 36.20888,
+        "lng": 139.525061
+      },
+      {
+        "name": "東口",
+        "lat": 36.20888,
+        "lng": 139.527959
+      }
+    ],
+    "Tobu-Izumi": [
+      {
+        "name": "西口",
+        "lat": 36.31565,
+        "lng": 139.453639
+      },
+      {
+        "name": "東口",
+        "lat": 36.31565,
+        "lng": 139.456541
+      }
+    ],
+    "Ashikagashi": [
+      {
+        "name": "北口",
+        "lat": 36.330609,
+        "lng": 139.44818
+      },
+      {
+        "name": "南口",
+        "lat": 36.328271,
+        "lng": 139.44818
+      }
+    ],
+    "Sakaimachi": [
+      {
+        "name": "北口",
+        "lat": 36.278329,
+        "lng": 139.25626
+      },
+      {
+        "name": "南口",
+        "lat": 36.275991,
+        "lng": 139.25626
+      }
+    ],
+    "Kita-Omiya": [
+      {
+        "name": "東口",
+        "lat": 35.91794,
+        "lng": 139.626254
+      }
+    ],
+    "Iwatsuki": [
+      {
+        "name": "北口",
+        "lat": 35.951419,
+        "lng": 139.69313
+      },
+      {
+        "name": "東口",
+        "lat": 35.95025,
+        "lng": 139.694574
+      },
+      {
+        "name": "西口",
+        "lat": 35.95025,
+        "lng": 139.691686
+      }
+    ],
+    "Higashi-Iwatsuki": [
+      {
+        "name": "北口",
+        "lat": 35.964459,
+        "lng": 139.71227
+      },
+      {
+        "name": "南口",
+        "lat": 35.962121,
+        "lng": 139.71227
+      }
+    ],
+    "Toyoharu": [
+      {
+        "name": "東口",
+        "lat": 35.96804,
+        "lng": 139.727635
+      },
+      {
+        "name": "西口",
+        "lat": 35.96804,
+        "lng": 139.724745
+      }
+    ],
+    "Kawama": [
+      {
+        "name": "北口",
+        "lat": 35.980359,
+        "lng": 139.83455
+      },
+      {
+        "name": "南口",
+        "lat": 35.978021,
+        "lng": 139.83455
+      }
+    ],
+    "Nanakodai": [
+      {
+        "name": "東口",
+        "lat": 35.97085,
+        "lng": 139.854395
+      },
+      {
+        "name": "西口",
+        "lat": 35.97085,
+        "lng": 139.851505
+      }
+    ],
+    "Shimizu-koen": [
+      {
+        "name": "東口",
+        "lat": 35.95879,
+        "lng": 139.861744
+      },
+      {
+        "name": "西口",
+        "lat": 35.95879,
+        "lng": 139.858856
+      }
+    ],
+    "Umesato": [
+      {
+        "name": "東口",
+        "lat": 35.93158,
+        "lng": 139.892534
+      },
+      {
+        "name": "西口",
+        "lat": 35.93158,
+        "lng": 139.889646
+      }
+    ],
+    "Unga": [
+      {
+        "name": "東口",
+        "lat": 35.91437,
+        "lng": 139.907484
+      },
+      {
+        "name": "西口",
+        "lat": 35.91437,
+        "lng": 139.904596
+      }
+    ],
+    "Edogawadai": [
+      {
+        "name": "東口",
+        "lat": 35.89723,
+        "lng": 139.911973
+      },
+      {
+        "name": "西口",
+        "lat": 35.89723,
+        "lng": 139.909087
+      }
+    ],
+    "Toyoshiki": [
+      {
+        "name": "北口",
+        "lat": 35.867699,
+        "lng": 139.93928
+      },
+      {
+        "name": "東口",
+        "lat": 35.86653,
+        "lng": 139.940723
+      },
+      {
+        "name": "西口",
+        "lat": 35.86653,
+        "lng": 139.937837
+      },
+      {
+        "name": "南口",
+        "lat": 35.865361,
+        "lng": 139.93928
+      }
+    ],
+    "Shin-Kashiwa": [
+      {
+        "name": "東口",
+        "lat": 35.8381,
+        "lng": 139.968482
+      },
+      {
+        "name": "西口",
+        "lat": 35.8381,
+        "lng": 139.965598
+      }
+    ],
+    "Takayanagi": [
+      {
+        "name": "東口",
+        "lat": 35.8083,
+        "lng": 140.000422
+      },
+      {
+        "name": "西口",
+        "lat": 35.8083,
+        "lng": 139.997538
+      }
+    ],
+    "Shin-Kamagaya": [
+      {
+        "name": "北口",
+        "lat": 35.780779,
+        "lng": 139.99836
+      },
+      {
+        "name": "東口",
+        "lat": 35.77961,
+        "lng": 139.999801
+      },
+      {
+        "name": "南口",
+        "lat": 35.778441,
+        "lng": 139.99836
+      }
+    ],
+    "Kamagaya": [
+      {
+        "name": "東口",
+        "lat": 35.76378,
+        "lng": 139.998751
+      },
+      {
+        "name": "西口",
+        "lat": 35.76378,
+        "lng": 139.995869
+      }
+    ],
+    "Shin-Funabashi": [
+      {
+        "name": "東口",
+        "lat": 35.71156,
+        "lng": 139.98126
+      },
+      {
+        "name": "西口",
+        "lat": 35.71156,
+        "lng": 139.97838
+      }
+    ],
+    "Ageo": [
+      {
+        "name": "東口",
+        "lat": 35.97302,
+        "lng": 139.590255
+      },
+      {
+        "name": "西口",
+        "lat": 35.97302,
+        "lng": 139.587365
+      }
+    ],
+    "Kita-Ageo": [
+      {
+        "name": "東口",
+        "lat": 35.98515,
+        "lng": 139.579025
+      },
+      {
+        "name": "西口",
+        "lat": 35.98515,
+        "lng": 139.576135
+      }
+    ],
+    "Okegawa": [
+      {
+        "name": "東口",
+        "lat": 35.99844,
+        "lng": 139.565665
+      },
+      {
+        "name": "西口",
+        "lat": 35.99844,
+        "lng": 139.562775
+      }
+    ],
+    "Kita-Moto": [
+      {
+        "name": "東口",
+        "lat": 36.03218,
+        "lng": 139.534986
+      },
+      {
+        "name": "西口",
+        "lat": 36.03218,
+        "lng": 139.532094
+      }
+    ],
+    "Gyoda": [
+      {
+        "name": "東口",
+        "lat": 36.1139,
+        "lng": 139.433527
+      },
+      {
+        "name": "西口",
+        "lat": 36.1139,
+        "lng": 139.430633
+      }
+    ],
+    "Kumagaya": [
+      {
+        "name": "南口",
+        "lat": 36.138641,
+        "lng": 139.38992
+      },
+      {
+        "name": "東口",
+        "lat": 36.13981,
+        "lng": 139.391368
+      },
+      {
+        "name": "北口",
+        "lat": 36.140979,
+        "lng": 139.38992
+      }
+    ],
+    "Kagohara": [
+      {
+        "name": "南口",
+        "lat": 36.173251,
+        "lng": 139.33026
+      },
+      {
+        "name": "北口",
+        "lat": 36.175589,
+        "lng": 139.33026
+      }
+    ],
+    "Fukaya": [
+      {
+        "name": "南口",
+        "lat": 36.190171,
+        "lng": 139.28134
+      },
+      {
+        "name": "北口",
+        "lat": 36.192509,
+        "lng": 139.28134
+      }
+    ],
+    "Okabe": [
+      {
+        "name": "南口",
+        "lat": 36.204571,
+        "lng": 139.23749
+      },
+      {
+        "name": "北口",
+        "lat": 36.206909,
+        "lng": 139.23749
+      }
+    ],
+    "Sugito-Takanodai": [
+      {
+        "name": "東口",
+        "lat": 36.05135,
+        "lng": 139.715986
+      },
+      {
+        "name": "西口",
+        "lat": 36.05135,
+        "lng": 139.713094
+      }
+    ],
+    "Satte": [
+      {
+        "name": "東口",
+        "lat": 36.07407,
+        "lng": 139.716356
+      },
+      {
+        "name": "西口",
+        "lat": 36.07407,
+        "lng": 139.713464
+      }
+    ],
+    "Minami-Kurihashi": [
+      {
+        "name": "東口",
+        "lat": 36.11314,
+        "lng": 139.714277
+      },
+      {
+        "name": "西口",
+        "lat": 36.11314,
+        "lng": 139.711383
+      }
+    ],
+    "Kurihashi": [
+      {
+        "name": "東口",
+        "lat": 36.13572,
+        "lng": 139.695488
+      },
+      {
+        "name": "西口",
+        "lat": 36.13572,
+        "lng": 139.692592
+      }
+    ],
+    "Shin-Koga": [
+      {
+        "name": "東口",
+        "lat": 36.1927,
+        "lng": 139.688469
+      },
+      {
+        "name": "西口",
+        "lat": 36.1927,
+        "lng": 139.685571
+      }
+    ],
+    "Shin-Tochigi": [
+      {
+        "name": "東口",
+        "lat": 36.39006,
+        "lng": 139.743802
+      },
+      {
+        "name": "西口",
+        "lat": 36.39006,
+        "lng": 139.740898
+      }
+    ],
+    "Myojin": [
+      {
+        "name": "東口",
+        "lat": 36.67656,
+        "lng": 139.713668
+      }
+    ],
+    "Kami-Imaichi": [
+      {
+        "name": "北口",
+        "lat": 36.729179,
+        "lng": 139.68086
+      },
+      {
+        "name": "西口",
+        "lat": 36.72801,
+        "lng": 139.679401
+      }
+    ],
+    "Midori-dai": [
+      {
+        "name": "南門",
+        "lat": 35.623639,
+        "lng": 140.097711
+      }
+    ],
+    "Kokudo": [
+      {
+        "name": "北口",
+        "lat": 35.501939,
+        "lng": 139.67571
+      },
+      {
+        "name": "南口",
+        "lat": 35.499601,
+        "lng": 139.67571
+      }
+    ],
+    "Hon-Chiba": [
+      {
+        "name": "東口",
+        "lat": 35.60062,
+        "lng": 140.122868
+      },
+      {
+        "name": "西口",
+        "lat": 35.60062,
+        "lng": 140.119992
+      }
+    ],
+    "Honno": [
+      {
+        "name": "東口",
+        "lat": 35.48216,
+        "lng": 140.309006
+      }
+    ],
+    "Shim-Mobara": [
+      {
+        "name": "東口",
+        "lat": 35.44943,
+        "lng": 140.301155
+      }
+    ],
+    "Mobara": [
+      {
+        "name": "東口",
+        "lat": 35.42683,
+        "lng": 140.305505
+      },
+      {
+        "name": "南口",
+        "lat": 35.425661,
+        "lng": 140.30407
+      }
+    ],
+    "Katsuura": [
+      {
+        "name": "北口",
+        "lat": 35.153789,
+        "lng": 140.31197
+      },
+      {
+        "name": "南口",
+        "lat": 35.151451,
+        "lng": 140.31197
+      }
+    ],
+    "Hamano": [
+      {
+        "name": "西口",
+        "lat": 35.5521,
+        "lng": 140.130743
+      },
+      {
+        "name": "東口",
+        "lat": 35.5521,
+        "lng": 140.133617
+      }
+    ],
+    "Yawatajuku": [
+      {
+        "name": "西口",
+        "lat": 35.53616,
+        "lng": 140.118603
+      },
+      {
+        "name": "東口",
+        "lat": 35.53616,
+        "lng": 140.121477
+      }
+    ],
+    "Goi": [
+      {
+        "name": "西口",
+        "lat": 35.51312,
+        "lng": 140.088304
+      },
+      {
+        "name": "東口",
+        "lat": 35.51312,
+        "lng": 140.091176
+      }
+    ],
+    "Sodegaura": [
+      {
+        "name": "南口",
+        "lat": 35.430731,
+        "lng": 139.95721
+      },
+      {
+        "name": "東口",
+        "lat": 35.4319,
+        "lng": 139.958645
+      },
+      {
+        "name": "北口",
+        "lat": 35.433069,
+        "lng": 139.95721
+      }
+    ],
+    "Iwane": [
+      {
+        "name": "東口",
+        "lat": 35.41478,
+        "lng": 139.935235
+      },
+      {
+        "name": "西口",
+        "lat": 35.41478,
+        "lng": 139.932365
+      }
+    ],
+    "Kisarazu": [
+      {
+        "name": "西口",
+        "lat": 35.38162,
+        "lng": 139.924696
+      },
+      {
+        "name": "南口",
+        "lat": 35.380451,
+        "lng": 139.92613
+      },
+      {
+        "name": "東口",
+        "lat": 35.38162,
+        "lng": 139.927564
+      }
+    ],
+    "Onuki": [
+      {
+        "name": "南口",
+        "lat": 35.290451,
+        "lng": 139.85562
+      }
+    ],
+    "Awa-Kamogawa": [
+      {
+        "name": "東口",
+        "lat": 35.10762,
+        "lng": 140.105139
+      },
+      {
+        "name": "西口",
+        "lat": 35.10762,
+        "lng": 140.102281
+      }
+    ],
+    "Tsuzuki-Fureai-no-Oka": [
+      {
+        "name": "北口",
+        "lat": 35.537806,
+        "lng": 139.561611
+      }
+    ],
+    "Onda": [
+      {
+        "name": "南口",
+        "lat": 35.544418,
+        "lng": 139.491938
+      }
+    ],
+    "Yashu-Otsuka": [
+      {
+        "name": "北口",
+        "lat": 36.409939,
+        "lng": 139.77259
+      }
+    ],
+    "Omochanomachi": [
+      {
+        "name": "西口",
+        "lat": 36.46674,
+        "lng": 139.828086
+      },
+      {
+        "name": "東口",
+        "lat": 36.46674,
+        "lng": 139.830994
+      }
+    ],
+    "Odasakae": [
+      {
+        "name": "西口",
+        "lat": 35.51472,
+        "lng": 139.703304
+      }
+    ],
+    "Kawasakishimmachi": [
+      {
+        "name": "東口",
+        "lat": 35.51827,
+        "lng": 139.700616
+      }
+    ],
+    "Hatchonawate": [
+      {
+        "name": "西口",
+        "lat": 35.52307,
+        "lng": 139.689944
+      },
+      {
+        "name": "東口",
+        "lat": 35.52307,
+        "lng": 139.692816
+      }
+    ],
+    "Hatsudai": [
+      {
+        "name": "東口",
+        "lat": 35.68051,
+        "lng": 139.688149
+      },
+      {
+        "name": "南口",
+        "lat": 35.679341,
+        "lng": 139.68671
+      },
+      {
+        "name": "北口",
+        "lat": 35.681679,
+        "lng": 139.68671
+      }
+    ],
+    "Hatagaya": [
+      {
+        "name": "南口",
+        "lat": 35.675591,
+        "lng": 139.67772
+      },
+      {
+        "name": "北口",
+        "lat": 35.677929,
+        "lng": 139.67772
+      }
+    ],
+    "Haruhi-No": [
+      {
+        "name": "南口",
+        "lat": 35.617651,
+        "lng": 139.46464
+      },
+      {
+        "name": "北口",
+        "lat": 35.619989,
+        "lng": 139.46464
+      },
+      {
+        "name": "東口",
+        "lat": 35.61882,
+        "lng": 139.466078
+      }
+    ],
+    "Hitotsubashi-Gakuen": [
+      {
+        "name": "北口",
+        "lat": 35.723319,
+        "lng": 139.48007
+      },
+      {
+        "name": "南口",
+        "lat": 35.720981,
+        "lng": 139.48007
+      }
+    ],
+    "Shin-Koganei": [
+      {
+        "name": "南口",
+        "lat": 35.694691,
+        "lng": 139.52653
+      }
+    ],
+    "Higashi-Matsudo": [
+      {
+        "name": "東口",
+        "lat": 35.77049,
+        "lng": 139.945301
+      },
+      {
+        "name": "西口",
+        "lat": 35.77049,
+        "lng": 139.942419
+      }
+    ],
+    "Hazawa-Yokohama-Kokudai": [
+      {
+        "name": "北門",
+        "lat": 35.482189,
+        "lng": 139.58614
+      },
+      {
+        "name": "西口",
+        "lat": 35.48102,
+        "lng": 139.584704
+      }
+    ],
+    "Chigasaki": [
+      {
+        "name": "北口",
+        "lat": 35.328969,
+        "lng": 139.4231
+      },
+      {
+        "name": "南口",
+        "lat": 35.326631,
+        "lng": 139.4231
+      },
+      {
+        "name": "西口",
+        "lat": 35.3278,
+        "lng": 139.421667
+      }
+    ],
+    "Kagawa": [
+      {
+        "name": "南口",
+        "lat": 35.355431,
+        "lng": 139.39983
+      },
+      {
+        "name": "西口",
+        "lat": 35.3566,
+        "lng": 139.398396
+      }
+    ],
+    "Sobudaishita": [
+      {
+        "name": "北口",
+        "lat": 35.493949,
+        "lng": 139.38632
+      }
+    ],
+    "Hara-Taima": [
+      {
+        "name": "北口",
+        "lat": 35.530169,
+        "lng": 139.37536
+      },
+      {
+        "name": "東口",
+        "lat": 35.529,
+        "lng": 139.376797
+      },
+      {
+        "name": "西口",
+        "lat": 35.529,
+        "lng": 139.373923
+      }
+    ],
+    "Minami-Hashimoto": [
+      {
+        "name": "東口",
+        "lat": 35.5804,
+        "lng": 139.353857
+      },
+      {
+        "name": "西口",
+        "lat": 35.5804,
+        "lng": 139.350983
+      },
+      {
+        "name": "南口",
+        "lat": 35.579231,
+        "lng": 139.35242
+      }
+    ],
+    "Tamako": [
+      {
+        "name": "東口",
+        "lat": 35.76597,
+        "lng": 139.444071
+      },
+      {
+        "name": "北口",
+        "lat": 35.767139,
+        "lng": 139.44263
+      },
+      {
+        "name": "南口",
+        "lat": 35.764801,
+        "lng": 139.44263
+      },
+      {
+        "name": "西口",
+        "lat": 35.76597,
+        "lng": 139.441189
+      }
+    ],
+    "Nerima": [
+      {
+        "name": "西口",
+        "lat": 35.7357,
+        "lng": 139.65026
+      },
+      {
+        "name": "北口",
+        "lat": 35.736869,
+        "lng": 139.6517
+      },
+      {
+        "name": "南口",
+        "lat": 35.734531,
+        "lng": 139.6517
+      }
+    ],
+    "Nishi_Tokorozawa": [
+      {
+        "name": "東口",
+        "lat": 35.78925,
+        "lng": 139.457441
+      },
+      {
+        "name": "駅前",
+        "lat": 35.78925,
+        "lng": 139.456
+      }
+    ],
+    "Seibu-en": [
+      {
+        "name": "北口",
+        "lat": 35.768969,
+        "lng": 139.44883
+      },
+      {
+        "name": "東口",
+        "lat": 35.7678,
+        "lng": 139.450271
+      },
+      {
+        "name": "西口",
+        "lat": 35.7678,
+        "lng": 139.447389
+      },
+      {
+        "name": "南口",
+        "lat": 35.766631,
+        "lng": 139.44883
+      }
+    ],
+    "Ichikawa-Shiohama": [
+      {
+        "name": "北口",
+        "lat": 35.667649,
+        "lng": 139.92365
+      },
+      {
+        "name": "南口",
+        "lat": 35.665311,
+        "lng": 139.92365
+      }
+    ],
+    "Futamatagawa": [
+      {
+        "name": "西口",
+        "lat": 35.46338,
+        "lng": 139.530885
+      },
+      {
+        "name": "北口",
+        "lat": 35.464549,
+        "lng": 139.53232
+      },
+      {
+        "name": "東口",
+        "lat": 35.46338,
+        "lng": 139.533755
+      },
+      {
+        "name": "南口",
+        "lat": 35.462211,
+        "lng": 139.53232
+      }
+    ],
+    "Shonandai": [
+      {
+        "name": "西口",
+        "lat": 35.39631,
+        "lng": 139.465056
+      },
+      {
+        "name": "北口",
+        "lat": 35.397479,
+        "lng": 139.46649
+      },
+      {
+        "name": "東口",
+        "lat": 35.39631,
+        "lng": 139.467924
+      },
+      {
+        "name": "南門",
+        "lat": 35.395141,
+        "lng": 139.46649
+      }
+    ],
+    "Kaminagaya": [
+      {
+        "name": "東口",
+        "lat": 35.401456,
+        "lng": 139.574513
+      }
+    ],
+    "Konanchuo": [
+      {
+        "name": "東口",
+        "lat": 35.401317,
+        "lng": 139.593012
+      }
+    ],
+    "Yoshinocho": [
+      {
+        "name": "東口",
+        "lat": 35.435424,
+        "lng": 139.620315
+      }
+    ],
+    "Bandobashi": [
+      {
+        "name": "東口",
+        "lat": 35.437646,
+        "lng": 139.626731
+      }
+    ],
+    "Isezaki-chojamachi": [
+      {
+        "name": "東口",
+        "lat": 35.441008,
+        "lng": 139.634036
+      }
+    ],
+    "Takashimacho": [
+      {
+        "name": "東口",
+        "lat": 35.458945,
+        "lng": 139.624912
+      }
+    ],
+    "Mitsuzawa-kamicho": [
+      {
+        "name": "西口",
+        "lat": 35.47642,
+        "lng": 139.603972
+      }
+    ],
+    "Katakuracho": [
+      {
+        "name": "西口",
+        "lat": 35.489974,
+        "lng": 139.605082
+      }
+    ],
+    "Kishine-koen": [
+      {
+        "name": "西口",
+        "lat": 35.495556,
+        "lng": 139.61522
+      }
+    ],
+    "Wakabadai": [
+      {
+        "name": "南口",
+        "lat": 35.618191,
+        "lng": 139.47234
+      },
+      {
+        "name": "北口",
+        "lat": 35.620529,
+        "lng": 139.47234
+      },
+      {
+        "name": "西口",
+        "lat": 35.61936,
+        "lng": 139.470902
+      }
+    ],
+    "Tamasakai": [
+      {
+        "name": "東口",
+        "lat": 35.60174,
+        "lng": 139.368368
+      },
+      {
+        "name": "北口",
+        "lat": 35.602909,
+        "lng": 139.36693
+      },
+      {
+        "name": "西口",
+        "lat": 35.60174,
+        "lng": 139.365492
+      }
+    ],
+    "Mejirodai": [
+      {
+        "name": "南口",
+        "lat": 35.642461,
+        "lng": 139.30846
+      }
+    ],
+    "Takaosanguchi": [
+      {
+        "name": "北口",
+        "lat": 35.620069,
+        "lng": 139.2978
+      },
+      {
+        "name": "南口",
+        "lat": 35.617731,
+        "lng": 139.2978
+      }
+    ],
+    "Minami-Rinkan": [
+      {
+        "name": "西口",
+        "lat": 35.49573,
+        "lng": 139.446554
+      },
+      {
+        "name": "東口",
+        "lat": 35.49573,
+        "lng": 139.449426
+      }
+    ],
+    "Tsuruma": [
+      {
+        "name": "西口",
+        "lat": 35.49021,
+        "lng": 139.449404
+      },
+      {
+        "name": "北口",
+        "lat": 35.491379,
+        "lng": 139.45084
+      },
+      {
+        "name": "東口",
+        "lat": 35.49021,
+        "lng": 139.452276
+      }
+    ],
+    "Sakuragaoka": [
+      {
+        "name": "西口",
+        "lat": 35.45056,
+        "lng": 139.464305
+      },
+      {
+        "name": "東口",
+        "lat": 35.45056,
+        "lng": 139.467175
+      }
+    ],
+    "Kozashibuya": [
+      {
+        "name": "西口",
+        "lat": 35.43231,
+        "lng": 139.463235
+      },
+      {
+        "name": "東口",
+        "lat": 35.43231,
+        "lng": 139.466105
+      }
+    ],
+    "Zengyo": [
+      {
+        "name": "西口",
+        "lat": 35.36279,
+        "lng": 139.471816
+      },
+      {
+        "name": "東口",
+        "lat": 35.36279,
+        "lng": 139.474684
+      }
+    ],
+    "Fujisawa-Hommachi": [
+      {
+        "name": "西口",
+        "lat": 35.34812,
+        "lng": 139.474577
+      },
+      {
+        "name": "北口",
+        "lat": 35.349289,
+        "lng": 139.47601
+      }
+    ],
+    "Kugenuma-Kaigan": [
+      {
+        "name": "南口",
+        "lat": 35.319691,
+        "lng": 139.47118
+      }
+    ],
+    "Katase-Enoshima": [
+      {
+        "name": "東口",
+        "lat": 35.30906,
+        "lng": 139.484643
+      },
+      {
+        "name": "南口",
+        "lat": 35.307891,
+        "lng": 139.48321
+      }
+    ],
+    "Kuroiso": [
+      {
+        "name": "西口",
+        "lat": 36.97012,
+        "lng": 140.058687
+      }
+    ],
+    "Iwanuma": [
+      {
+        "name": "西口",
+        "lat": 38.11186,
+        "lng": 140.862174
+      },
+      {
+        "name": "東口",
+        "lat": 38.11186,
+        "lng": 140.865146
+      }
+    ],
+    "Shiogama": [
+      {
+        "name": "西口",
+        "lat": 38.309546,
+        "lng": 141.008109
+      }
+    ],
+    "Fujishiro": [
+      {
+        "name": "南口",
+        "lat": 35.919391,
+        "lng": 140.11815
+      },
+      {
+        "name": "北口",
+        "lat": 35.921729,
+        "lng": 140.11815
+      }
+    ],
+    "Ryugasaki": [
+      {
+        "name": "西口",
+        "lat": 35.92994,
+        "lng": 140.136476
+      },
+      {
+        "name": "南口",
+        "lat": 35.928771,
+        "lng": 140.13792
+      },
+      {
+        "name": "東口",
+        "lat": 35.92994,
+        "lng": 140.139364
+      },
+      {
+        "name": "北口",
+        "lat": 35.931109,
+        "lng": 140.13792
+      }
+    ],
+    "Ushiku": [
+      {
+        "name": "西口",
+        "lat": 35.97518,
+        "lng": 140.139585
+      },
+      {
+        "name": "東口",
+        "lat": 35.97518,
+        "lng": 140.142475
+      }
+    ],
+    "Hitachino-Ushiku": [
+      {
+        "name": "西口",
+        "lat": 36.0075,
+        "lng": 140.156855
+      },
+      {
+        "name": "東口",
+        "lat": 36.0075,
+        "lng": 140.159745
+      }
+    ],
+    "Arakawaoki": [
+      {
+        "name": "西口",
+        "lat": 36.0306,
+        "lng": 140.164534
+      },
+      {
+        "name": "東口",
+        "lat": 36.0306,
+        "lng": 140.167426
+      }
+    ],
+    "Tsuchiura": [
+      {
+        "name": "西口",
+        "lat": 36.0786,
+        "lng": 140.204793
+      },
+      {
+        "name": "東口",
+        "lat": 36.0786,
+        "lng": 140.207687
+      }
+    ],
+    "Ishioka": [
+      {
+        "name": "西口",
+        "lat": 36.1915,
+        "lng": 140.278311
+      },
+      {
+        "name": "北口",
+        "lat": 36.192669,
+        "lng": 140.27976
+      },
+      {
+        "name": "東口",
+        "lat": 36.1915,
+        "lng": 140.281209
+      }
+    ],
+    "Hatori": [
+      {
+        "name": "西口",
+        "lat": 36.24754,
+        "lng": 140.28533
+      },
+      {
+        "name": "東口",
+        "lat": 36.24754,
+        "lng": 140.28823
+      }
+    ],
+    "Iwama": [
+      {
+        "name": "西口",
+        "lat": 36.29542,
+        "lng": 140.275069
+      },
+      {
+        "name": "東口",
+        "lat": 36.29542,
+        "lng": 140.277971
+      }
+    ],
+    "Tomobe": [
+      {
+        "name": "南口",
+        "lat": 36.349291,
+        "lng": 140.30602
+      },
+      {
+        "name": "北口",
+        "lat": 36.351629,
+        "lng": 140.30602
+      }
+    ],
+    "Kairakuen": [
+      {
+        "name": "東門",
+        "lat": 36.37303,
+        "lng": 140.457792
+      }
+    ],
+    "Mito": [
+      {
+        "name": "南口",
+        "lat": 36.369691,
+        "lng": 140.47721
+      },
+      {
+        "name": "北口",
+        "lat": 36.372029,
+        "lng": 140.47721
+      }
+    ],
+    "Katsuta": [
+      {
+        "name": "南口",
+        "lat": 36.392911,
+        "lng": 140.52422
+      },
+      {
+        "name": "西口",
+        "lat": 36.39408,
+        "lng": 140.522768
+      },
+      {
+        "name": "東口",
+        "lat": 36.39408,
+        "lng": 140.525672
+      }
+    ],
+    "Sawa": [
+      {
+        "name": "西口",
+        "lat": 36.43047,
+        "lng": 140.539057
+      },
+      {
+        "name": "東口",
+        "lat": 36.43047,
+        "lng": 140.541963
+      }
+    ],
+    "Hitachi-Taga": [
+      {
+        "name": "西口",
+        "lat": 36.55212,
+        "lng": 140.631265
+      }
+    ],
+    "Hitachi": [
+      {
+        "name": "西口",
+        "lat": 36.59032,
+        "lng": 140.660344
+      }
+    ],
+    "Ogitsu": [
+      {
+        "name": "西口",
+        "lat": 36.63664,
+        "lng": 140.673843
+      },
+      {
+        "name": "東口",
+        "lat": 36.63664,
+        "lng": 140.676757
+      }
+    ],
+    "Juo": [
+      {
+        "name": "西口",
+        "lat": 36.67138,
+        "lng": 140.684482
+      },
+      {
+        "name": "東口",
+        "lat": 36.67138,
+        "lng": 140.687398
+      }
+    ],
+    "Isohara": [
+      {
+        "name": "西口",
+        "lat": 36.7907,
+        "lng": 140.74488
+      },
+      {
+        "name": "東口",
+        "lat": 36.7907,
+        "lng": 140.7478
+      }
+    ],
+    "Otsuko": [
+      {
+        "name": "西口",
+        "lat": 36.84606,
+        "lng": 140.776539
+      }
+    ],
+    "Iwaki": [
+      {
+        "name": "南口",
+        "lat": 37.057051,
+        "lng": 140.89236
+      },
+      {
+        "name": "北口",
+        "lat": 37.059389,
+        "lng": 140.89236
+      }
+    ],
+    "Yotsukura": [
+      {
+        "name": "西口",
+        "lat": 37.10232,
+        "lng": 140.979394
+      },
+      {
+        "name": "東口",
+        "lat": 37.10232,
+        "lng": 140.982326
+      }
+    ],
+    "Tatsuta": [
+      {
+        "name": "西口",
+        "lat": 37.28245,
+        "lng": 141.001271
+      },
+      {
+        "name": "東口",
+        "lat": 37.28245,
+        "lng": 141.004209
+      }
+    ],
+    "Yonomori": [
+      {
+        "name": "西口",
+        "lat": 37.36578,
+        "lng": 140.990549
+      },
+      {
+        "name": "東口",
+        "lat": 37.36578,
+        "lng": 140.993491
+      }
+    ],
+    "Futaba": [
+      {
+        "name": "西口",
+        "lat": 37.45374,
+        "lng": 141.004387
+      },
+      {
+        "name": "東口",
+        "lat": 37.45374,
+        "lng": 141.007333
+      },
+      {
+        "name": "駅前",
+        "lat": 37.45374,
+        "lng": 141.00586
+      }
+    ],
+    "Haranomachi": [
+      {
+        "name": "東口",
+        "lat": 37.63802,
+        "lng": 140.972526
+      }
+    ],
+    "Kashima": [
+      {
+        "name": "東口",
+        "lat": 37.70284,
+        "lng": 140.971558
+      }
+    ],
+    "Watari": [
+      {
+        "name": "西口",
+        "lat": 38.03988,
+        "lng": 140.859806
+      },
+      {
+        "name": "東口",
+        "lat": 38.03988,
+        "lng": 140.862774
+      }
+    ],
+    "Tatekoshi": [
+      {
+        "name": "西口",
+        "lat": 38.14308,
+        "lng": 140.878673
+      },
+      {
+        "name": "東口",
+        "lat": 38.14308,
+        "lng": 140.881647
+      }
+    ],
+    "Kita-Sendai": [
+      {
+        "name": "南口",
+        "lat": 35.644431,
+        "lng": 139.8389
+      },
+      {
+        "name": "北口",
+        "lat": 35.646769,
+        "lng": 139.8389
+      }
+    ],
+    "Shibukawa": [
+      {
+        "name": "北口",
+        "lat": 36.492399,
+        "lng": 139.00879
+      }
+    ],
+    "Nakanojo": [
+      {
+        "name": "北口",
+        "lat": 36.586579,
+        "lng": 138.85148
+      },
+      {
+        "name": "南口",
+        "lat": 36.584241,
+        "lng": 138.85148
+      }
+    ],
+    "Naganohara-Kusatsuguchi": [
+      {
+        "name": "北口",
+        "lat": 36.547669,
+        "lng": 138.64964
+      }
+    ],
+    "Manza-Kazawaguchi": [
+      {
+        "name": "北口",
+        "lat": 36.533189,
+        "lng": 138.5514
+      },
+      {
+        "name": "南口",
+        "lat": 36.530851,
+        "lng": 138.5514
+      }
+    ],
+    "Aoba-dori": [
+      {
+        "name": "西口",
+        "lat": 38.26075,
+        "lng": 140.876955
+      },
+      {
+        "name": "東口",
+        "lat": 38.26075,
+        "lng": 140.879933
+      }
+    ],
+    "Wada": [
+      {
+        "name": "南口",
+        "lat": 39.64972,
+        "lng": 140.217806
+      },
+      {
+        "name": "北口",
+        "lat": 39.652058,
+        "lng": 140.217806
+      }
+    ],
+    "Oyama": [
+      {
+        "name": "西口",
+        "lat": 36.31344,
+        "lng": 139.805179
+      },
+      {
+        "name": "東口",
+        "lat": 36.31344,
+        "lng": 139.808081
+      },
+      {
+        "name": "南口",
+        "lat": 36.312271,
+        "lng": 139.80663
+      }
+    ],
+    "Yuki": [
+      {
+        "name": "北口",
+        "lat": 36.299388,
+        "lng": 139.872283
+      },
+      {
+        "name": "南口",
+        "lat": 36.29705,
+        "lng": 139.872283
+      }
+    ],
+    "Tatebayashi": [
+      {
+        "name": "西口",
+        "lat": 36.24662,
+        "lng": 139.52636
+      },
+      {
+        "name": "東口",
+        "lat": 36.24662,
+        "lng": 139.52926
+      }
+    ],
+    "Tajima": [
+      {
+        "name": "東口",
+        "lat": 36.29022,
+        "lng": 139.56636
+      }
+    ],
+    "Horigome": [
+      {
+        "name": "西口",
+        "lat": 36.32844,
+        "lng": 139.578879
+      },
+      {
+        "name": "東口",
+        "lat": 36.32844,
+        "lng": 139.581781
+      }
+    ],
+    "Yoshimizu": [
+      {
+        "name": "西口",
+        "lat": 36.34562,
+        "lng": 139.577899
+      },
+      {
+        "name": "東口",
+        "lat": 36.34562,
+        "lng": 139.580801
+      }
+    ],
+    "Itako": [
+      {
+        "name": "東口",
+        "lat": 35.93746,
+        "lng": 140.551134
+      },
+      {
+        "name": "西口",
+        "lat": 35.93746,
+        "lng": 140.548246
+      }
+    ],
+    "Nobukata": [
+      {
+        "name": "南口",
+        "lat": 35.956931,
+        "lng": 140.5888
+      },
+      {
+        "name": "北口",
+        "lat": 35.959269,
+        "lng": 140.5888
+      }
+    ],
+    "Usami": [
+      {
+        "name": "東口",
+        "lat": 35.00564,
+        "lng": 139.081207
+      },
+      {
+        "name": "西口",
+        "lat": 35.00564,
+        "lng": 139.078353
+      }
+    ],
+    "Ono": [
+      {
+        "name": "西口",
+        "lat": 37.40932,
+        "lng": 140.982728
+      },
+      {
+        "name": "東口",
+        "lat": 37.40932,
+        "lng": 140.985672
+      }
+    ],
+    "Oami": [
+      {
+        "name": "南口",
+        "lat": 35.521131,
+        "lng": 140.31101
+      }
+    ],
+    "Gumyo": [
+      {
+        "name": "東口",
+        "lat": 35.57984,
+        "lng": 140.397617
+      },
+      {
+        "name": "西口",
+        "lat": 35.57984,
+        "lng": 140.394743
+      }
+    ],
+    "Isesaki": [
+      {
+        "name": "南口",
+        "lat": 36.325251,
+        "lng": 139.19495
+      },
+      {
+        "name": "東口",
+        "lat": 36.32642,
+        "lng": 139.196401
+      },
+      {
+        "name": "北口",
+        "lat": 36.327589,
+        "lng": 139.19495
+      }
+    ],
+    "Nishi_Koizumi": [
+      {
+        "name": "南口",
+        "lat": 36.257491,
+        "lng": 139.40851
+      }
+    ],
+    "Ryumai": [
+      {
+        "name": "南口",
+        "lat": 36.277681,
+        "lng": 139.4091
+      }
+    ],
+    "Shin-Kiryu": [
+      {
+        "name": "東口",
+        "lat": 36.39505,
+        "lng": 139.321542
+      },
+      {
+        "name": "北口",
+        "lat": 36.396219,
+        "lng": 139.32009
+      }
+    ],
+    "Aioi": [
+      {
+        "name": "東口",
+        "lat": 36.41064,
+        "lng": 139.305373
+      },
+      {
+        "name": "北口",
+        "lat": 36.411809,
+        "lng": 139.30392
+      }
+    ],
+    "Daiyamuko": [
+      {
+        "name": "東口",
+        "lat": 36.73228,
+        "lng": 139.693399
+      },
+      {
+        "name": "西口",
+        "lat": 36.73228,
+        "lng": 139.690481
+      }
+    ],
+    "Tobu-World-Square": [
+      {
+        "name": "西口",
+        "lat": 36.80833,
+        "lng": 139.70743
+      }
+    ],
+    "Echigo-Nakazato": [
+      {
+        "name": "西口",
+        "lat": 36.91032,
+        "lng": 138.847058
+      },
+      {
+        "name": "東口",
+        "lat": 36.91032,
+        "lng": 138.849982
+      }
+    ],
+    "Muikamachi": [
+      {
+        "name": "西口",
+        "lat": 37.06668,
+        "lng": 138.874195
+      },
+      {
+        "name": "東口",
+        "lat": 37.06668,
+        "lng": 138.877125
+      }
+    ],
+    "Saitama": [
+      {
+        "name": "駅前",
+        "lat": 35.8617,
+        "lng": 139.6454
+      }
+    ],
+    "Omiya": [
+      {
+        "name": "駅前",
+        "lat": 35.9067,
+        "lng": 139.6231
+      }
+    ],
+    "Atami": [
+      {
+        "name": "駅前",
+        "lat": 35.0961,
+        "lng": 139.0711
+      }
+    ],
+    "Nagoya": [
+      {
+        "name": "駅前",
+        "lat": 35.1815,
+        "lng": 136.9066
+      }
+    ],
+    "Osaka": [
+      {
+        "name": "駅前",
+        "lat": 34.6937,
+        "lng": 135.5023
+      }
+    ],
+    "Kyoto": [
+      {
+        "name": "駅前",
+        "lat": 35.0116,
+        "lng": 135.7681
+      }
+    ],
+    "Mitake": [
+      {
+        "name": "駅前",
+        "lat": 35.8063,
+        "lng": 139.1908
+      }
+    ],
+    "Ome": [
+      {
+        "name": "駅前",
+        "lat": 35.7928,
+        "lng": 139.2614
+      }
+    ],
+    "Takanawa": [
+      {
+        "name": "駅前",
+        "lat": 35.6256,
+        "lng": 139.7403
+      }
+    ],
+    "Kanda": [
+      {
+        "name": "駅前",
+        "lat": 35.6916,
+        "lng": 139.7722
+      }
+    ],
+    "Toyosu": [
+      {
+        "name": "駅前",
+        "lat": 35.6544,
+        "lng": 139.7928
+      }
+    ],
+    "Tatsumi": [
+      {
+        "name": "駅前",
+        "lat": 35.6467,
+        "lng": 139.8131
+      }
+    ],
+    "Nishi-Koiwa": [
+      {
+        "name": "駅前",
+        "lat": 35.7283,
+        "lng": 139.8793
+      }
+    ],
+    "Shin-Urawa": [
+      {
+        "name": "駅前",
+        "lat": 35.8456,
+        "lng": 139.6917
+      }
+    ],
+    "Kami-Nakazato": [
+      {
+        "name": "駅前",
+        "lat": 35.7656,
+        "lng": 139.7156
+      }
+    ],
+    "Higashi-Ikebukuro": [
+      {
+        "name": "駅前",
+        "lat": 35.7311,
+        "lng": 139.7269
+      }
+    ],
+    "Yushima": [
+      {
+        "name": "駅前",
+        "lat": 35.70718,
+        "lng": 139.76994
+      }
+    ],
+    "Tokyo Dome-mae": [
+      {
+        "name": "駅前",
+        "lat": 35.7056,
+        "lng": 139.7469
+      }
+    ],
+    "Harumi-futago": [
+      {
+        "name": "駅前",
+        "lat": 35.6644,
+        "lng": 139.7978
+      }
+    ],
+    "Otemachi": [
+      {
+        "name": "駅前",
+        "lat": 35.685349,
+        "lng": 139.763278
+      }
+    ],
+    "Omotesando": [
+      {
+        "name": "駅前",
+        "lat": 35.6653,
+        "lng": 139.7121
+      }
+    ],
+    "Aoyama-itchome": [
+      {
+        "name": "駅前",
+        "lat": 35.6678,
+        "lng": 139.7189
+      }
+    ],
+    "Kamiyacho": [
+      {
+        "name": "駅前",
+        "lat": 35.663118,
+        "lng": 139.745183
+      }
+    ],
+    "Komazawa": [
+      {
+        "name": "駅前",
+        "lat": 35.6556,
+        "lng": 139.6656
+      }
+    ],
+    "KinutaPark": [
+      {
+        "name": "駅前",
+        "lat": 35.6389,
+        "lng": 139.6456
+      }
+    ],
+    "Kegon": [
+      {
+        "name": "駅前",
+        "lat": 35.6317,
+        "lng": 139.6361
+      }
+    ],
+    "Mita": [
+      {
+        "name": "駅前",
+        "lat": 35.64865,
+        "lng": 139.748998
+      }
+    ],
+    "Nishi-Tachikawa": [
+      {
+        "name": "駅前",
+        "lat": 35.6956,
+        "lng": 139.3989
+      }
+    ],
+    "Nishi-Ome": [
+      {
+        "name": "駅前",
+        "lat": 35.7367,
+        "lng": 139.1444
+      }
+    ],
+    "Ishigamimae": [
+      {
+        "name": "駅前",
+        "lat": 35.7858,
+        "lng": 139.2003
+      }
+    ],
+    "Hinatawada": [
+      {
+        "name": "駅前",
+        "lat": 35.7833,
+        "lng": 139.244
+      }
+    ],
+    "Miyanohira": [
+      {
+        "name": "駅前",
+        "lat": 35.7846,
+        "lng": 139.2506
+      }
+    ],
+    "Musashi-Sakai": [
+      {
+        "name": "駅前",
+        "lat": 35.702139,
+        "lng": 139.543658
+      }
+    ],
+    "Musashi-Yoshida": [
+      {
+        "name": "駅前",
+        "lat": 35.7861,
+        "lng": 139.0944
+      }
+    ],
+    "Okutama-gochi": [
+      {
+        "name": "駅前",
+        "lat": 35.7278,
+        "lng": 139.1944
+      }
+    ],
+    "Nagasaki": [
+      {
+        "name": "駅前",
+        "lat": 35.6889,
+        "lng": 139.6839
+      }
+    ],
+    "Ikeda": [
+      {
+        "name": "駅前",
+        "lat": 35.7028,
+        "lng": 139.6639
+      }
+    ],
+    "Mejiro": [
+      {
+        "name": "駅前",
+        "lat": 35.7207,
+        "lng": 139.7066
+      }
+    ],
+    "Otsuka": [
+      {
+        "name": "駅前",
+        "lat": 35.7314,
+        "lng": 139.7293
+      }
+    ],
+    "Akebono": [
+      {
+        "name": "駅前",
+        "lat": 35.7167,
+        "lng": 139.8139
+      }
+    ],
+    "Harumi": [
+      {
+        "name": "駅前",
+        "lat": 35.6556,
+        "lng": 139.7839
+      }
+    ],
+    "Shinonome": [
+      {
+        "name": "駅前",
+        "lat": 35.6378,
+        "lng": 139.7978
+      }
+    ],
+    "Naka-mejima": [
+      {
+        "name": "駅前",
+        "lat": 35.6378,
+        "lng": 139.8278
+      }
+    ],
+    "Ginza-hitchome": [
+      {
+        "name": "駅前",
+        "lat": 35.674394,
+        "lng": 139.766979
+      }
+    ],
+    "Shin-osaki": [
+      {
+        "name": "駅前",
+        "lat": 35.6267,
+        "lng": 139.7278
+      }
+    ],
+    "Higashi-Kawasaki": [
+      {
+        "name": "駅前",
+        "lat": 35.5267,
+        "lng": 139.7156
+      }
+    ],
+    "Oi": [
+      {
+        "name": "駅前",
+        "lat": 35.6062,
+        "lng": 139.7349
+      }
+    ],
+    "Omori": [
+      {
+        "name": "駅前",
+        "lat": 35.588447,
+        "lng": 139.727868
+      }
+    ],
+    "Hanno": [
+      {
+        "name": "駅前",
+        "lat": 35.8528,
+        "lng": 139.4231
+      }
+    ],
+    "Iruma": [
+      {
+        "name": "駅前",
+        "lat": 35.9444,
+        "lng": 139.3778
+      }
+    ],
+    "Tokigawa": [
+      {
+        "name": "駅前",
+        "lat": 35.9639,
+        "lng": 139.3528
+      }
+    ],
+    "Sayama": [
+      {
+        "name": "駅前",
+        "lat": 35.8839,
+        "lng": 139.4056
+      }
+    ],
+    "Seibu-Chausuyama": [
+      {
+        "name": "駅前",
+        "lat": 35.7189,
+        "lng": 139.6639
+      }
+    ],
+    "Seibu-Chitose": [
+      {
+        "name": "駅前",
+        "lat": 35.7317,
+        "lng": 139.6456
+      }
+    ],
+    "Seibu-Hikawa": [
+      {
+        "name": "駅前",
+        "lat": 35.7456,
+        "lng": 139.6278
+      }
+    ],
+    "Seibu-Nakagawa": [
+      {
+        "name": "駅前",
+        "lat": 35.7606,
+        "lng": 139.6089
+      }
+    ],
+    "Seibu-Yuuyamada": [
+      {
+        "name": "駅前",
+        "lat": 35.7778,
+        "lng": 139.5878
+      }
+    ],
+    "Minami-Aoyama": [
+      {
+        "name": "駅前",
+        "lat": 35.6639,
+        "lng": 139.7139
+      }
+    ],
+    "Aoto": [
+      {
+        "name": "駅前",
+        "lat": 35.6878,
+        "lng": 139.7578
+      }
+    ],
+    "Kosaku": [
+      {
+        "name": "駅前",
+        "lat": 35.7825,
+        "lng": 139.2861
+      }
+    ],
+    "Ikusabata": [
+      {
+        "name": "駅前",
+        "lat": 35.79,
+        "lng": 139.183
+      }
+    ],
+    "Kawai": [
+      {
+        "name": "駅前",
+        "lat": 35.8028,
+        "lng": 139.165
+      }
+    ],
+    "Furusato": [
+      {
+        "name": "駅前",
+        "lat": 35.7969,
+        "lng": 139.1442
+      }
+    ],
+    "Hatonosu": [
+      {
+        "name": "駅前",
+        "lat": 35.8058,
+        "lng": 139.1211
+      }
+    ],
+    "Shiromaru": [
+      {
+        "name": "駅前",
+        "lat": 35.8083,
+        "lng": 139.1042
+      }
+    ],
+    "Okutama": [
+      {
+        "name": "駅前",
+        "lat": 35.8097,
+        "lng": 139.0964
+      }
+    ],
+    "Mikawashima": [
+      {
+        "name": "駅前",
+        "lat": 35.7334,
+        "lng": 139.7764
+      }
+    ],
+    "Tatekawa": [
+      {
+        "name": "駅前",
+        "lat": 35.6689,
+        "lng": 139.7478
+      }
+    ],
+    "Shin-Adachi": [
+      {
+        "name": "駅前",
+        "lat": 35.6628,
+        "lng": 139.7444
+      }
+    ],
+    "Okachi": [
+      {
+        "name": "駅前",
+        "lat": 35.7078,
+        "lng": 139.7778
+      }
+    ],
+    "Daimon": [
+      {
+        "name": "駅前",
+        "lat": 35.65687,
+        "lng": 139.754679
+      }
+    ],
+    "Shin-Odaimon": [
+      {
+        "name": "駅前",
+        "lat": 35.6278,
+        "lng": 139.7539
+      }
+    ],
+    "Tampopo": [
+      {
+        "name": "駅前",
+        "lat": 35.6217,
+        "lng": 139.7611
+      }
+    ],
+    "Higashi-Shinbashi": [
+      {
+        "name": "駅前",
+        "lat": 35.6639,
+        "lng": 139.7656
+      }
+    ],
+    "Shin-Bayashi": [
+      {
+        "name": "駅前",
+        "lat": 35.6278,
+        "lng": 139.7756
+      }
+    ],
+    "Aomi": [
+      {
+        "name": "駅前",
+        "lat": 35.6256,
+        "lng": 139.7817
+      }
+    ],
+    "Teleport-Chuo": [
+      {
+        "name": "駅前",
+        "lat": 35.6256,
+        "lng": 139.7889
+      }
+    ],
+    "Hotaru-Kaihinkogen": [
+      {
+        "name": "駅前",
+        "lat": 35.6439,
+        "lng": 139.7356
+      }
+    ],
+    "Yokosuka-Chuo": [
+      {
+        "name": "駅前",
+        "lat": 35.2878,
+        "lng": 139.6678
+      }
+    ],
+    "Higashi-Yokosuka": [
+      {
+        "name": "駅前",
+        "lat": 35.2956,
+        "lng": 139.6731
+      }
+    ],
+    "Kissaki": [
+      {
+        "name": "駅前",
+        "lat": 35.3017,
+        "lng": 139.6378
+      }
+    ],
+    "Kurihama": [
+      {
+        "name": "駅前",
+        "lat": 35.2556,
+        "lng": 139.6339
+      }
+    ],
+    "Kasminato": [
+      {
+        "name": "駅前",
+        "lat": 35.2456,
+        "lng": 139.6278
+      }
+    ],
+    "Sesenji": [
+      {
+        "name": "駅前",
+        "lat": 35.5678,
+        "lng": 139.6889
+      }
+    ],
+    "Kusatsu": [
+      {
+        "name": "駅前",
+        "lat": 35.5378,
+        "lng": 139.6889
+      }
+    ],
+    "Shin-Okubo": [
+      {
+        "name": "駅前",
+        "lat": 35.70093,
+        "lng": 139.70026
+      }
+    ],
+    "Koganei": [
+      {
+        "name": "駅前",
+        "lat": 35.6997,
+        "lng": 139.5025
+      }
+    ],
+    "Musashino": [
+      {
+        "name": "駅前",
+        "lat": 35.7022,
+        "lng": 139.5644
+      }
+    ],
+    "Musashimurayama": [
+      {
+        "name": "駅前",
+        "lat": 35.7531,
+        "lng": 139.3836
+      }
+    ],
+    "Hino": [
+      {
+        "name": "駅前",
+        "lat": 35.6706,
+        "lng": 139.3986
+      }
+    ],
+    "Fuchu": [
+      {
+        "name": "駅前",
+        "lat": 35.6697,
+        "lng": 139.4778
+      }
+    ],
+    "Tama": [
+      {
+        "name": "駅前",
+        "lat": 35.6381,
+        "lng": 139.499
+      }
+    ],
+    "Zushi": [
+      {
+        "name": "駅前",
+        "lat": 35.3089,
+        "lng": 139.5517
+      }
+    ],
+    "Kita-Zushi": [
+      {
+        "name": "駅前",
+        "lat": 35.3189,
+        "lng": 139.5417
+      }
+    ],
+    "Miura-Kaigan": [
+      {
+        "name": "駅前",
+        "lat": 35.18809,
+        "lng": 139.6533
+      }
+    ],
+    "Hayato": [
+      {
+        "name": "駅前",
+        "lat": 35.3456,
+        "lng": 139.5231
+      }
+    ],
+    "Tsurumi-Ryokuchi": [
+      {
+        "name": "駅前",
+        "lat": 35.4778,
+        "lng": 139.7028
+      }
+    ],
+    "Yokoami": [
+      {
+        "name": "駅前",
+        "lat": 35.5478,
+        "lng": 139.6178
+      }
+    ],
+    "Negishi": [
+      {
+        "name": "駅前",
+        "lat": 35.415819,
+        "lng": 139.635046
+      }
+    ],
+    "Yamate": [
+      {
+        "name": "駅前",
+        "lat": 35.4278,
+        "lng": 139.6378
+      }
+    ],
+    "Sotsu-Shin-Yokohama": [
+      {
+        "name": "駅前",
+        "lat": 35.5089,
+        "lng": 139.6178
+      }
+    ],
+    "Imaichi": [
+      {
+        "name": "駅前",
+        "lat": 36.7139,
+        "lng": 139.6986
+      }
+    ],
+    "Nikko": [
+      {
+        "name": "駅前",
+        "lat": 36.7139,
+        "lng": 139.6986
+      }
+    ],
+    "Utsunomiya": [
+      {
+        "name": "駅前",
+        "lat": 36.55975,
+        "lng": 139.89872
+      }
+    ],
+    "Maebashi": [
+      {
+        "name": "駅前",
+        "lat": 36.3911,
+        "lng": 139.0606
+      }
+    ],
+    "Takaradai": [
+      {
+        "name": "駅前",
+        "lat": 35.7189,
+        "lng": 139.6556
+      }
+    ],
+    "Seijo": [
+      {
+        "name": "駅前",
+        "lat": 35.6556,
+        "lng": 139.6178
+      }
+    ],
+    "Seijodai": [
+      {
+        "name": "駅前",
+        "lat": 35.6678,
+        "lng": 139.6078
+      }
+    ],
+    "Seijo-shijo": [
+      {
+        "name": "駅前",
+        "lat": 35.6778,
+        "lng": 139.5978
+      }
+    ],
+    "Minato-Mirai": [
+      {
+        "name": "駅前",
+        "lat": 35.457889,
+        "lng": 139.632306
+      }
+    ],
+    "Hama-Kawada": [
+      {
+        "name": "駅前",
+        "lat": 35.5217,
+        "lng": 139.7089
+      }
+    ],
+    "Ekimae": [
+      {
+        "name": "駅前",
+        "lat": 35.5128,
+        "lng": 139.7156
+      }
+    ],
+    "Shiodome": [
+      {
+        "name": "駅前",
+        "lat": 35.663193,
+        "lng": 139.760225
+      }
+    ],
+    "Taito": [
+      {
+        "name": "駅前",
+        "lat": 35.3201,
+        "lng": 140.38129
+      }
+    ],
+    "Nishi-Kawaguchi": [
+      {
+        "name": "駅前",
+        "lat": 35.81552,
+        "lng": 139.70436
+      }
+    ],
+    "Yokosuka": [
+      {
+        "name": "駅前",
+        "lat": 35.28422,
+        "lng": 139.6549
+      }
+    ],
+    "Niiza": [
+      {
+        "name": "駅前",
+        "lat": 35.80378,
+        "lng": 139.55629
+      }
+    ],
+    "Kiyose": [
+      {
+        "name": "駅前",
+        "lat": 35.77212,
+        "lng": 139.5199
+      }
+    ],
+    "Ariake": [
+      {
+        "name": "駅前",
+        "lat": 35.63468,
+        "lng": 139.79325
+      }
+    ],
+    "Kokusai-Tenjijo": [
+      {
+        "name": "駅前",
+        "lat": 35.63457,
+        "lng": 139.79163
+      }
+    ],
+    "Makuhari-Hong": [
+      {
+        "name": "駅前",
+        "lat": 35.6729,
+        "lng": 140.04208
+      }
+    ],
+    "Nishi-Takashimadaira": [
+      {
+        "name": "駅前",
+        "lat": 35.791965,
+        "lng": 139.645421
+      }
+    ],
+    "Shinsen": [
+      {
+        "name": "駅前",
+        "lat": 35.65717,
+        "lng": 139.69313
+      }
+    ],
+    "Koyasu": [
+      {
+        "name": "駅前",
+        "lat": 35.484592,
+        "lng": 139.645006
+      }
+    ],
+    "Ota": [
+      {
+        "name": "駅前",
+        "lat": 36.29421,
+        "lng": 139.37877
+      }
+    ],
+    "Hasuda": [
+      {
+        "name": "駅前",
+        "lat": 35.98116,
+        "lng": 139.65296
+      }
+    ],
+    "Higashi-Totsuka": [
+      {
+        "name": "駅前",
+        "lat": 35.42996,
+        "lng": 139.5565
+      }
+    ],
+    "Musashi-Fujisawa": [
+      {
+        "name": "駅前",
+        "lat": 35.8212,
+        "lng": 139.41258
+      }
+    ],
+    "Kugahara": [
+      {
+        "name": "駅前",
+        "lat": 35.579837,
+        "lng": 139.685347
+      }
+    ],
+    "Ito": [
+      {
+        "name": "駅前",
+        "lat": 34.97484,
+        "lng": 139.0921
+      }
+    ],
+    "Yumoto": [
+      {
+        "name": "駅前",
+        "lat": 37.00694,
+        "lng": 140.84984
+      }
+    ],
+    "Shinbashi": [
+      {
+        "name": "駅前",
+        "lat": 35.6663,
+        "lng": 139.75846
+      }
+    ],
+    "Shin-Ochanomizu": [
+      {
+        "name": "駅前",
+        "lat": 35.696925,
+        "lng": 139.76545
+      }
+    ],
+    "Hashimoto": [
+      {
+        "name": "駅前",
+        "lat": 35.59484,
+        "lng": 139.3451
+      }
+    ],
+    "Nishi-fuchu": [
+      {
+        "name": "駅前",
+        "lat": 35.67094,
+        "lng": 139.45739
+      }
+    ],
+    "Akatsuka": [
+      {
+        "name": "駅前",
+        "lat": 36.38176,
+        "lng": 140.41516
+      }
+    ],
+    "Karasuyama": [
+      {
+        "name": "駅前",
+        "lat": 36.650433,
+        "lng": 140.154969
+      }
+    ],
+    "Nakano-fujimicho": [
+      {
+        "name": "駅前",
+        "lat": 35.69082,
+        "lng": 139.668155
+      }
+    ],
+    "Shinanomachi": [
+      {
+        "name": "駅前",
+        "lat": 35.67996,
+        "lng": 139.7211
+      }
+    ],
+    "Toranomon": [
+      {
+        "name": "駅前",
+        "lat": 35.67016,
+        "lng": 139.75012
+      }
+    ],
+    "Hacchobori": [
+      {
+        "name": "駅前",
+        "lat": 35.67462,
+        "lng": 139.77799
+      }
+    ],
+    "Oshida": [
+      {
+        "name": "駅前",
+        "lat": 35.689752,
+        "lng": 139.834705
+      }
+    ],
+    "Akitsu": [
+      {
+        "name": "駅前",
+        "lat": 35.77829,
+        "lng": 139.49674
+      }
+    ],
+    "Nakamurabashi": [
+      {
+        "name": "駅前",
+        "lat": 35.7368,
+        "lng": 139.63777
+      }
+    ],
+    "Yamato": [
+      {
+        "name": "駅前",
+        "lat": 35.46942,
+        "lng": 139.46156
+      }
+    ],
+    "Higashi-Zushi": [
+      {
+        "name": "駅前",
+        "lat": 35.29876,
+        "lng": 139.60182
+      }
+    ],
+    "Abiko": [
+      {
+        "name": "駅前",
+        "lat": 35.8728,
+        "lng": 140.01042
+      }
+    ],
+    "Makuhari": [
+      {
+        "name": "駅前",
+        "lat": 35.65954,
+        "lng": 140.05782
+      }
+    ],
+    "Tsukuba": [
+      {
+        "name": "駅前",
+        "lat": 36.08256,
+        "lng": 140.11169
+      }
+    ],
+    "Higashi-Akiru": [
+      {
+        "name": "駅前",
+        "lat": 35.7219,
+        "lng": 139.3239
+      }
+    ],
+    "Musashi-Masuko": [
+      {
+        "name": "駅前",
+        "lat": 35.73096,
+        "lng": 139.2563
+      }
+    ],
+    "Honjo": [
+      {
+        "name": "駅前",
+        "lat": 36.2363,
+        "lng": 139.18814
+      }
+    ],
+    "Shiraoka": [
+      {
+        "name": "駅前",
+        "lat": 36.01778,
+        "lng": 139.66688
+      }
+    ],
+    "Nishi-takahashimadaira": [
+      {
+        "name": "駅前",
+        "lat": 35.791965,
+        "lng": 139.645421
+      }
+    ],
+    "Nihon-odori": [
+      {
+        "name": "駅前",
+        "lat": 35.446806,
+        "lng": 139.642611
+      }
+    ],
+    "Motomachi-Chukagai": [
+      {
+        "name": "駅前",
+        "lat": 35.442417,
+        "lng": 139.650472
+      }
+    ],
+    "Horinouchi": [
+      {
+        "name": "駅前",
+        "lat": 35.263653,
+        "lng": 139.686663
+      }
+    ],
+    "Bakurōmae": [
+      {
+        "name": "駅前",
+        "lat": 35.6778,
+        "lng": 139.7617
+      }
+    ],
+    "Aomori": [
+      {
+        "name": "駅前",
+        "lat": 40.8244,
+        "lng": 140.74
+      }
+    ],
+    "Niigata": [
+      {
+        "name": "駅前",
+        "lat": 37.9026,
+        "lng": 139.0232
+      }
+    ],
+    "Sendai": [
+      {
+        "name": "駅前",
+        "lat": 38.2682,
+        "lng": 140.8694
+      }
+    ],
+    "Kawaguchiko": [
+      {
+        "name": "駅前",
+        "lat": 35.5133,
+        "lng": 138.7658
+      }
+    ],
+    "Kawagishi": [
+      {
+        "name": "駅前",
+        "lat": 36.077,
+        "lng": 138.005
+      }
+    ],
+    "Tatsuno": [
+      {
+        "name": "駅前",
+        "lat": 35.981,
+        "lng": 137.992
+      }
+    ],
+    "Tsubame-Sanjo": [
+      {
+        "name": "駅前",
+        "lat": 37.6375,
+        "lng": 138.9106
+      }
+    ],
+    "Bunsui": [
+      {
+        "name": "駅前",
+        "lat": 37.6258,
+        "lng": 138.8739
+      }
+    ],
+    "Yahiko": [
+      {
+        "name": "駅前",
+        "lat": 37.6992,
+        "lng": 138.8376
+      }
+    ],
+    "Higashi-Sanjo": [
+      {
+        "name": "駅前",
+        "lat": 37.6207,
+        "lng": 138.959
+      }
+    ],
+    "Shin-Shibaura": [
+      {
+        "name": "駅前",
+        "lat": 35.4847,
+        "lng": 139.7278
+      }
+    ],
+    "Nishi-Shinjuku-Gochome": [
+      {
+        "name": "駅前",
+        "lat": 35.6918,
+        "lng": 139.6867
+      }
+    ],
+    "Ukimafunado": [
+      {
+        "name": "駅前",
+        "lat": 35.79134,
+        "lng": 139.69141
+      }
+    ],
+    "Bushu-Karasawa": [
+      {
+        "name": "駅前",
+        "lat": 35.9522,
+        "lng": 139.30928
+      }
+    ],
+    "Bushu-Nagase": [
+      {
+        "name": "駅前",
+        "lat": 35.94199,
+        "lng": 139.32619
+      }
+    ],
+    "Ippommatsu": [
+      {
+        "name": "駅前",
+        "lat": 35.94022,
+        "lng": 139.37008
+      }
+    ],
+    "Nishi-Oya": [
+      {
+        "name": "駅前",
+        "lat": 35.93176,
+        "lng": 139.35646
+      }
+    ],
+    "Kinugawa-Koen": [
+      {
+        "name": "駅前",
+        "lat": 36.84158,
+        "lng": 139.72282
+      }
+    ],
+    "Kinugawa-Onsen": [
+      {
+        "name": "駅前",
+        "lat": 36.82252,
+        "lng": 139.71668
+      }
+    ],
+    "Kosagoe": [
+      {
+        "name": "駅前",
+        "lat": 36.80224,
+        "lng": 139.7065
+      }
+    ],
+    "Okuwa": [
+      {
+        "name": "駅前",
+        "lat": 36.76082,
+        "lng": 139.71358
+      }
+    ],
+    "Shin-Takatoku": [
+      {
+        "name": "駅前",
+        "lat": 36.77977,
+        "lng": 139.71071
+      }
+    ],
+    "Tomiura": [
+      {
+        "name": "駅前",
+        "lat": 35.04623,
+        "lng": 139.83776
+      }
+    ],
+    "Shiishiba": [
+      {
+        "name": "駅前",
+        "lat": 35.76518,
+        "lng": 140.7589
+      }
+    ],
+    "Niragawa": [
+      {
+        "name": "駅前",
+        "lat": 36.30822,
+        "lng": 139.40251
+      }
+    ],
+    "Kameido-Suijin": [
+      {
+        "name": "駅前",
+        "lat": 35.69994,
+        "lng": 139.83339
+      }
+    ],
+    "Shiozawa": [
+      {
+        "name": "駅前",
+        "lat": 37.04148,
+        "lng": 138.84843
+      }
+    ],
+    "Joetsu-Ski-Jo-Mae": [
+      {
+        "name": "駅前",
+        "lat": 37.02875,
+        "lng": 138.82801
+      }
+    ],
+    "Nagaoka": [
+      {
+        "name": "駅前",
+        "lat": 37.44776,
+        "lng": 138.85398
+      }
+    ],
+    "Narushima": [
+      {
+        "name": "駅前",
+        "lat": 36.24908,
+        "lng": 139.50557
+      }
+    ],
+    "Obitsu": [
+      {
+        "name": "駅前",
+        "lat": 35.32824,
+        "lng": 140.05978
+      }
+    ],
+    "Tawarada": [
+      {
+        "name": "駅前",
+        "lat": 35.31462,
+        "lng": 140.06142
+      }
+    ],
+    "Kumagawa": [
+      {
+        "name": "駅前",
+        "lat": 35.72829,
+        "lng": 139.33573
+      }
+    ],
+    "Kashima-Soccer-Stadium": [
+      {
+        "name": "駅前",
+        "lat": 35.99306,
+        "lng": 140.63591
+      }
+    ],
+    "Makuhari-Toyosuna": [
+      {
+        "name": "駅前",
+        "lat": 35.65816,
+        "lng": 140.02707
+      }
+    ],
+    "Esojima": [
+      {
+        "name": "駅前",
+        "lat": 36.53096,
+        "lng": 139.86082
+      }
+    ],
+    "Minami-Utsunomiya": [
+      {
+        "name": "駅前",
+        "lat": 36.54371,
+        "lng": 139.87195
+      }
+    ],
+    "Nishi-Kawada": [
+      {
+        "name": "駅前",
+        "lat": 36.51425,
+        "lng": 139.8503
+      }
+    ],
+    "Tobu-Utsunomiya": [
+      {
+        "name": "駅前",
+        "lat": 36.55866,
+        "lng": 139.8806
+      }
+    ],
+    "Yashu-Hirakawa": [
+      {
+        "name": "駅前",
+        "lat": 36.40156,
+        "lng": 139.75378
+      }
+    ],
+    "Yasuzuka": [
+      {
+        "name": "駅前",
+        "lat": 36.48565,
+        "lng": 139.83562
+      }
+    ],
+    "Fukutawara": [
+      {
+        "name": "駅前",
+        "lat": 35.54616,
+        "lng": 140.34188
+      }
+    ],
+    "Togane": [
+      {
+        "name": "駅前",
+        "lat": 35.5601,
+        "lng": 140.3636
+      }
+    ],
+    "Higashi-Abiko": [
+      {
+        "name": "駅前",
+        "lat": 35.86898,
+        "lng": 140.0476
+      }
+    ],
+    "Kohoku-Narita": [
+      {
+        "name": "駅前",
+        "lat": 35.8672,
+        "lng": 140.07794
+      }
+    ],
+    "Araki": [
+      {
+        "name": "駅前",
+        "lat": 35.8624,
+        "lng": 140.10705
+      }
+    ],
+    "Fusa": [
+      {
+        "name": "駅前",
+        "lat": 35.84935,
+        "lng": 140.13298
+      }
+    ],
+    "Ajiki": [
+      {
+        "name": "駅前",
+        "lat": 35.83572,
+        "lng": 140.24228
+      }
+    ],
+    "Shimosa-Manzaki": [
+      {
+        "name": "駅前",
+        "lat": 35.80778,
+        "lng": 140.27755
+      }
+    ],
+    "Ashigara": [
+      {
+        "name": "駅前",
+        "lat": 35.27181,
+        "lng": 139.15445
+      }
+    ],
+    "Makuharihongo": [
+      {
+        "name": "駅前",
+        "lat": 35.67275,
+        "lng": 139.95879
+      }
+    ],
+    "Oizumi-Gakuen": [
+      {
+        "name": "駅前",
+        "lat": 35.7817,
+        "lng": 139.6389
+      }
+    ],
+    "Tameike-Sanno": [
+      {
+        "name": "駅前",
+        "lat": 35.673091,
+        "lng": 139.741294
+      }
+    ],
+    "Ueno-Hirokoji": [
+      {
+        "name": "駅前",
+        "lat": 35.7089,
+        "lng": 139.7706
+      }
+    ],
+    "Hongodai": [
+      {
+        "name": "駅前",
+        "lat": 35.36786,
+        "lng": 139.55012
+      }
+    ],
+    "Tama-Plaza": [
+      {
+        "name": "駅前",
+        "lat": 35.6339,
+        "lng": 139.4389
+      }
+    ],
+    "Irumashi": [
+      {
+        "name": "駅前",
+        "lat": 35.84196,
+        "lng": 139.38953
+      }
+    ],
+    "Chuo-Rinkan": [
+      {
+        "name": "駅前",
+        "lat": 35.507369,
+        "lng": 139.444808
+      }
+    ],
+    "Ishikawa-dai": [
+      {
+        "name": "駅前",
+        "lat": 35.596999,
+        "lng": 139.685571
+      }
+    ],
+    "Yokodai": [
+      {
+        "name": "駅前",
+        "lat": 35.37878,
+        "lng": 139.59684
+      }
+    ],
+    "Kinugasa": [
+      {
+        "name": "駅前",
+        "lat": 35.25711,
+        "lng": 139.66099
+      }
+    ],
+    "Kita-Kamakura": [
+      {
+        "name": "駅前",
+        "lat": 35.33794,
+        "lng": 139.54456
+      }
+    ],
+    "Hodogaya": [
+      {
+        "name": "駅前",
+        "lat": 35.44722,
+        "lng": 139.60037
+      }
+    ],
+    "Nishi-Oi": [
+      {
+        "name": "駅前",
+        "lat": 35.6017,
+        "lng": 139.7216
+      }
+    ],
+    "Takao": [
+      {
+        "name": "駅前",
+        "lat": 35.64238,
+        "lng": 139.28264
+      }
+    ],
+    "Toda": [
+      {
+        "name": "駅前",
+        "lat": 35.8176,
+        "lng": 139.66961
+      }
+    ],
+    "Kita-Toda": [
+      {
+        "name": "駅前",
+        "lat": 35.82676,
+        "lng": 139.66144
+      }
+    ],
+    "Tennodai": [
+      {
+        "name": "駅前",
+        "lat": 35.87247,
+        "lng": 140.04232
+      }
+    ],
+    "Etchujima": [
+      {
+        "name": "駅前",
+        "lat": 35.668,
+        "lng": 139.7925
+      }
+    ],
+    "Futamata-Shinmachi": [
+      {
+        "name": "駅前",
+        "lat": 35.69132,
+        "lng": 139.95956
+      }
+    ],
+    "Fuchu-Hommachi": [
+      {
+        "name": "駅前",
+        "lat": 35.66584,
+        "lng": 139.4771
+      }
+    ],
+    "Kita-Fuchu": [
+      {
+        "name": "駅前",
+        "lat": 35.68086,
+        "lng": 139.4718
+      }
+    ],
+    "Shin-Kodaira": [
+      {
+        "name": "駅前",
+        "lat": 35.73092,
+        "lng": 139.4705
+      }
+    ],
+    "Higashi-Tokorozawa": [
+      {
+        "name": "駅前",
+        "lat": 35.79489,
+        "lng": 139.51454
+      }
+    ],
+    "Higashi-Urawa": [
+      {
+        "name": "駅前",
+        "lat": 35.86404,
+        "lng": 139.70447
+      }
+    ],
+    "Yoshikawa": [
+      {
+        "name": "駅前",
+        "lat": 35.87662,
+        "lng": 139.84324
+      }
+    ],
+    "Yoshikawa-Minami": [
+      {
+        "name": "駅前",
+        "lat": 35.86809,
+        "lng": 139.85812
+      }
+    ],
+    "Shin-Misato": [
+      {
+        "name": "駅前",
+        "lat": 35.85839,
+        "lng": 139.86954
+      }
+    ],
+    "Misato": [
+      {
+        "name": "駅前",
+        "lat": 35.84484,
+        "lng": 139.88684
+      }
+    ],
+    "Shin-Matsudo": [
+      {
+        "name": "駅前",
+        "lat": 35.82556,
+        "lng": 139.92098
+      }
+    ],
+    "Shin-Yahashira": [
+      {
+        "name": "駅前",
+        "lat": 35.79129,
+        "lng": 139.93856
+      }
+    ],
+    "Ichikawa-Ono": [
+      {
+        "name": "駅前",
+        "lat": 35.7554,
+        "lng": 139.95128
+      }
+    ],
+    "Funabashi-Hoten": [
+      {
+        "name": "駅前",
+        "lat": 35.73046,
+        "lng": 139.96671
+      }
+    ],
+    "Tsujido": [
+      {
+        "name": "駅前",
+        "lat": 35.33684,
+        "lng": 139.4459
+      }
+    ],
+    "Kozu": [
+      {
+        "name": "駅前",
+        "lat": 35.2814,
+        "lng": 139.21496
+      }
+    ],
+    "Oku": [
+      {
+        "name": "駅前",
+        "lat": 35.7468,
+        "lng": 139.75387
+      }
+    ],
+    "Miyahara": [
+      {
+        "name": "駅前",
+        "lat": 35.94053,
+        "lng": 139.60952
+      }
+    ],
+    "Kounosu": [
+      {
+        "name": "駅前",
+        "lat": 36.05924,
+        "lng": 139.50958
+      }
+    ],
+    "Kita-Kounosu": [
+      {
+        "name": "駅前",
+        "lat": 36.0855,
+        "lng": 139.47696
+      }
+    ],
+    "Fukiage": [
+      {
+        "name": "駅前",
+        "lat": 36.10289,
+        "lng": 139.4536
+      }
+    ],
+    "Jimbohara": [
+      {
+        "name": "駅前",
+        "lat": 36.25362,
+        "lng": 139.14902
+      }
+    ],
+    "Shinmachi": [
+      {
+        "name": "駅前",
+        "lat": 36.2731,
+        "lng": 139.10532
+      }
+    ],
+    "Tsurumi-Ono": [
+      {
+        "name": "駅前",
+        "lat": 35.49702,
+        "lng": 139.68128
+      }
+    ],
+    "Bentembashi": [
+      {
+        "name": "駅前",
+        "lat": 35.4958,
+        "lng": 139.68948
+      }
+    ],
+    "Asano": [
+      {
+        "name": "駅前",
+        "lat": 35.49744,
+        "lng": 139.69571
+      }
+    ],
+    "Anzen": [
+      {
+        "name": "駅前",
+        "lat": 35.49984,
+        "lng": 139.70124
+      }
+    ],
+    "Musashi-Shiraishi": [
+      {
+        "name": "駅前",
+        "lat": 35.50193,
+        "lng": 139.70653
+      }
+    ],
+    "Hama-Kawasaki": [
+      {
+        "name": "駅前",
+        "lat": 35.50966,
+        "lng": 139.71354
+      }
+    ],
+    "Showa": [
+      {
+        "name": "駅前",
+        "lat": 35.50685,
+        "lng": 139.72392
+      }
+    ],
+    "Ogimachi": [
+      {
+        "name": "駅前",
+        "lat": 35.50174,
+        "lng": 139.72242
+      }
+    ],
+    "Kashimada": [
+      {
+        "name": "駅前",
+        "lat": 35.55146,
+        "lng": 139.67498
+      }
+    ],
+    "Mukaigawara": [
+      {
+        "name": "駅前",
+        "lat": 35.57218,
+        "lng": 139.6673
+      }
+    ],
+    "Musashi-Nakahara": [
+      {
+        "name": "駅前",
+        "lat": 35.58056,
+        "lng": 139.64214
+      }
+    ],
+    "Kuji": [
+      {
+        "name": "駅前",
+        "lat": 35.6101,
+        "lng": 139.59308
+      }
+    ],
+    "Shukugawara": [
+      {
+        "name": "駅前",
+        "lat": 35.61542,
+        "lng": 139.57954
+      }
+    ],
+    "Nakanoshima": [
+      {
+        "name": "駅前",
+        "lat": 35.63002,
+        "lng": 139.55108
+      }
+    ],
+    "Inadazutsumi": [
+      {
+        "name": "駅前",
+        "lat": 35.63341,
+        "lng": 139.53594
+      }
+    ],
+    "Minami-Tama": [
+      {
+        "name": "駅前",
+        "lat": 35.64922,
+        "lng": 139.48954
+      }
+    ],
+    "Yagawa": [
+      {
+        "name": "駅前",
+        "lat": 35.68508,
+        "lng": 139.43159
+      }
+    ],
+    "Nishi-Kunitachi": [
+      {
+        "name": "駅前",
+        "lat": 35.69379,
+        "lng": 139.4239
+      }
+    ],
+    "Kita-Matsudo": [
+      {
+        "name": "駅前",
+        "lat": 35.80036,
+        "lng": 139.91162
+      }
+    ],
+    "Kyobashi": [
+      {
+        "name": "駅前",
+        "lat": 35.676704,
+        "lng": 139.77011
+      }
+    ],
+    "Nihombashi": [
+      {
+        "name": "駅前",
+        "lat": 35.681879,
+        "lng": 139.773335
+      }
+    ],
+    "Suehirocho": [
+      {
+        "name": "駅前",
+        "lat": 35.70278,
+        "lng": 139.771762
+      }
+    ],
+    "Minami-Asagaya": [
+      {
+        "name": "駅前",
+        "lat": 35.699455,
+        "lng": 139.635575
+      }
+    ],
+    "Kokkai-Gijidomae": [
+      {
+        "name": "駅前",
+        "lat": 35.674926,
+        "lng": 139.745473
+      }
+    ],
+    "Shin-Otsuka": [
+      {
+        "name": "駅前",
+        "lat": 35.72613,
+        "lng": 139.729354
+      }
+    ],
+    "Toranomon-Hills": [
+      {
+        "name": "駅前",
+        "lat": 35.667309,
+        "lng": 139.747738
+      }
+    ],
+    "Naka-Okachimachi": [
+      {
+        "name": "駅前",
+        "lat": 35.706655,
+        "lng": 139.77619
+      }
+    ],
+    "Kanamecho": [
+      {
+        "name": "駅前",
+        "lat": 35.733215,
+        "lng": 139.69848
+      }
+    ],
+    "Gokokuji": [
+      {
+        "name": "駅前",
+        "lat": 35.71918,
+        "lng": 139.72745
+      }
+    ],
+    "Edogawabashi": [
+      {
+        "name": "駅前",
+        "lat": 35.709295,
+        "lng": 139.73413
+      }
+    ],
+    "Ginza-Itchome": [
+      {
+        "name": "駅前",
+        "lat": 35.674519,
+        "lng": 139.766786
+      }
+    ],
+    "Ichinoe": [
+      {
+        "name": "駅前",
+        "lat": 35.685987,
+        "lng": 139.882586
+      }
+    ],
+    "Ochiai": [
+      {
+        "name": "駅前",
+        "lat": 35.710635,
+        "lng": 139.685965
+      }
+    ],
+    "Kagurazaka": [
+      {
+        "name": "駅前",
+        "lat": 35.703865,
+        "lng": 139.73452
+      }
+    ],
+    "Magome": [
+      {
+        "name": "駅前",
+        "lat": 35.596773,
+        "lng": 139.711884
+      }
+    ],
+    "Nakanobu": [
+      {
+        "name": "駅前",
+        "lat": 35.605274,
+        "lng": 139.713645
+      }
+    ],
+    "Togoshi": [
+      {
+        "name": "駅前",
+        "lat": 35.614421,
+        "lng": 139.716315
+      }
+    ],
+    "Takanawadai": [
+      {
+        "name": "駅前",
+        "lat": 35.631751,
+        "lng": 139.730384
+      }
+    ],
+    "Sengakuji": [
+      {
+        "name": "駅前",
+        "lat": 35.638715,
+        "lng": 139.739993
+      }
+    ],
+    "Honjo-Azumabashi": [
+      {
+        "name": "駅前",
+        "lat": 35.708565,
+        "lng": 139.804397
+      }
+    ],
+    "Shibakoen": [
+      {
+        "name": "駅前",
+        "lat": 35.654186,
+        "lng": 139.74985
+      }
+    ],
+    "Sengoku": [
+      {
+        "name": "駅前",
+        "lat": 35.727772,
+        "lng": 139.744984
+      }
+    ],
+    "Nishi-Sugamo": [
+      {
+        "name": "駅前",
+        "lat": 35.743568,
+        "lng": 139.728703
+      }
+    ],
+    "Shin-Itabashi": [
+      {
+        "name": "駅前",
+        "lat": 35.748772,
+        "lng": 139.719808
+      }
+    ],
+    "Itabashi-Honcho": [
+      {
+        "name": "駅前",
+        "lat": 35.761309,
+        "lng": 139.705544
+      }
+    ],
+    "Hon-Hasuneuma": [
+      {
+        "name": "駅前",
+        "lat": 35.768566,
+        "lng": 139.70241
+      }
+    ],
+    "Shin-Takashimadaira": [
+      {
+        "name": "駅前",
+        "lat": 35.790289,
+        "lng": 139.65405
+      }
+    ],
+    "Akebonobashi": [
+      {
+        "name": "駅前",
+        "lat": 35.692402,
+        "lng": 139.722317
+      }
+    ],
+    "Ogawamachi": [
+      {
+        "name": "駅前",
+        "lat": 35.695005,
+        "lng": 139.766449
+      },
+      {
+        "name": "駅前",
+        "lat": 36.0584454,
+        "lng": 139.2612627
+      }
+    ],
+    "Iwamotocho": [
+      {
+        "name": "駅前",
+        "lat": 35.695607,
+        "lng": 139.775115
+      }
+    ],
+    "Morishita": [
+      {
+        "name": "駅前",
+        "lat": 35.687982,
+        "lng": 139.796623
+      }
+    ],
+    "Kikukawa": [
+      {
+        "name": "駅前",
+        "lat": 35.688399,
+        "lng": 139.806057
+      }
+    ],
+    "Nishi-Ojima": [
+      {
+        "name": "駅前",
+        "lat": 35.689391,
+        "lng": 139.826231
+      }
+    ],
+    "Ojima": [
+      {
+        "name": "駅前",
+        "lat": 35.689752,
+        "lng": 139.834705
+      }
+    ],
+    "Higashi-Ojima": [
+      {
+        "name": "駅前",
+        "lat": 35.689959,
+        "lng": 139.847255
+      }
+    ],
+    "Ochiai-Minami-Nagasaki": [
+      {
+        "name": "駅前",
+        "lat": 35.723435,
+        "lng": 139.683389
+      }
+    ],
+    "Shin-egota": [
+      {
+        "name": "駅前",
+        "lat": 35.732579,
+        "lng": 139.670498
+      }
+    ],
+    "Toshimaen": [
+      {
+        "name": "駅前",
+        "lat": 35.741711,
+        "lng": 139.649116
+      }
+    ],
+    "Hikarigaoka": [
+      {
+        "name": "駅前",
+        "lat": 35.758527,
+        "lng": 139.628901
+      }
+    ],
+    "Ushigome-Yanagicho": [
+      {
+        "name": "駅前",
+        "lat": 35.699501,
+        "lng": 139.72504
+      }
+    ],
+    "Ushigome-Kagurazaka": [
+      {
+        "name": "駅前",
+        "lat": 35.700911,
+        "lng": 139.735894
+      }
+    ],
+    "Tsukijishijo": [
+      {
+        "name": "駅前",
+        "lat": 35.664919,
+        "lng": 139.766929
+      }
+    ],
+    "Kokuritsu-Kyogijo": [
+      {
+        "name": "駅前",
+        "lat": 35.679896,
+        "lng": 139.714667
+      }
+    ],
+    "Suitengumae": [
+      {
+        "name": "駅前",
+        "lat": 35.683,
+        "lng": 139.785171
+      }
+    ],
+    "Shibaura-futo": [
+      {
+        "name": "駅前",
+        "lat": 35.64178,
+        "lng": 139.75781
+      }
+    ],
+    "Tokyo-International-Cruise-Terminal": [
+      {
+        "name": "駅前",
+        "lat": 35.62135,
+        "lng": 139.77309
+      }
+    ],
+    "Telecom-Center": [
+      {
+        "name": "駅前",
+        "lat": 35.61756,
+        "lng": 139.77939
+      }
+    ],
+    "Shijo-mae": [
+      {
+        "name": "駅前",
+        "lat": 35.64569,
+        "lng": 139.78565
+      }
+    ],
+    "Tanashi": [
+      {
+        "name": "駅前",
+        "lat": 35.72735,
+        "lng": 139.53925
+      }
+    ],
+    "Kokuko-koen": [
+      {
+        "name": "駅前",
+        "lat": 35.7984,
+        "lng": 139.4657
+      }
+    ],
+    "Minami-Otsuka": [
+      {
+        "name": "駅前",
+        "lat": 35.88979,
+        "lng": 139.45431
+      }
+    ],
+    "Wado": [
+      {
+        "name": "駅前",
+        "lat": 36.03964,
+        "lng": 139.7011
+      }
+    ],
+    "Hanasaki": [
+      {
+        "name": "駅前",
+        "lat": 36.10994,
+        "lng": 139.63359
+      }
+    ],
+    "Kazo": [
+      {
+        "name": "駅前",
+        "lat": 36.12295,
+        "lng": 139.59556
+      }
+    ],
+    "Minami-Hanyu": [
+      {
+        "name": "駅前",
+        "lat": 36.14962,
+        "lng": 139.55696
+      }
+    ],
+    "Morinji-Mae": [
+      {
+        "name": "駅前",
+        "lat": 36.22635,
+        "lng": 139.52705
+      }
+    ],
+    "Tatara": [
+      {
+        "name": "駅前",
+        "lat": 36.27368,
+        "lng": 139.50032
+      }
+    ],
+    "Agata": [
+      {
+        "name": "駅前",
+        "lat": 36.29062,
+        "lng": 139.47236
+      }
+    ],
+    "Fukui": [
+      {
+        "name": "駅前",
+        "lat": 36.30521,
+        "lng": 139.45867
+      }
+    ],
+    "Yashu-Yamabe": [
+      {
+        "name": "駅前",
+        "lat": 36.32629,
+        "lng": 139.43201
+      }
+    ],
+    "Hosoya": [
+      {
+        "name": "駅前",
+        "lat": 36.28297,
+        "lng": 139.34899
+      }
+    ],
+    "Kizaki": [
+      {
+        "name": "駅前",
+        "lat": 36.27139,
+        "lng": 139.313
+      }
+    ],
+    "Serada": [
+      {
+        "name": "駅前",
+        "lat": 36.27294,
+        "lng": 139.28197
+      }
+    ],
+    "Shin-Isesaki": [
+      {
+        "name": "駅前",
+        "lat": 36.31809,
+        "lng": 139.20182
+      }
+    ],
+    "Hiyoshi": [
+      {
+        "name": "駅前",
+        "lat": 35.553207,
+        "lng": 139.647449
+      }
+    ],
+    "Okurayama": [
+      {
+        "name": "駅前",
+        "lat": 35.521883,
+        "lng": 139.629947
+      }
+    ],
+    "Hakuraku": [
+      {
+        "name": "駅前",
+        "lat": 35.489052,
+        "lng": 139.628419
+      }
+    ],
+    "Shimoiida": [
+      {
+        "name": "駅前",
+        "lat": 35.403362,
+        "lng": 139.482969
+      }
+    ],
+    "Tateba": [
+      {
+        "name": "駅前",
+        "lat": 35.41423,
+        "lng": 139.50028
+      }
+    ],
+    "Nakada": [
+      {
+        "name": "駅前",
+        "lat": 35.411199,
+        "lng": 139.511324
+      }
+    ],
+    "Odoriba": [
+      {
+        "name": "駅前",
+        "lat": 35.405704,
+        "lng": 139.518501
+      }
+    ],
+    "Maioka": [
+      {
+        "name": "駅前",
+        "lat": 35.402538,
+        "lng": 139.551498
+      }
+    ],
+    "Shimonagaya": [
+      {
+        "name": "駅前",
+        "lat": 35.402844,
+        "lng": 139.559275
+      }
+    ],
+    "Gumyoji": [
+      {
+        "name": "駅前",
+        "lat": 35.423152,
+        "lng": 139.602039
+      }
+    ],
+    "Maita": [
+      {
+        "name": "駅前",
+        "lat": 35.430203,
+        "lng": 139.610464
+      }
+    ],
+    "Mitsuzawa-shimocho": [
+      {
+        "name": "駅前",
+        "lat": 35.476517,
+        "lng": 139.615042
+      }
+    ],
+    "Kita-shin-yokohama": [
+      {
+        "name": "駅前",
+        "lat": 35.519237,
+        "lng": 139.612816
+      }
+    ],
+    "Nippa": [
+      {
+        "name": "駅前",
+        "lat": 35.527081,
+        "lng": 139.612377
+      }
+    ],
+    "Nakamachidai": [
+      {
+        "name": "駅前",
+        "lat": 35.53523,
+        "lng": 139.589828
+      }
+    ],
+    "Center-Minami-G": [
+      {
+        "name": "駅前",
+        "lat": 35.545633,
+        "lng": 139.574713
+      }
+    ],
+    "Center-Kita-G": [
+      {
+        "name": "駅前",
+        "lat": 35.553383,
+        "lng": 139.579045
+      }
+    ],
+    "Nakagawa-Yokohama": [
+      {
+        "name": "駅前",
+        "lat": 35.562659,
+        "lng": 139.570296
+      }
+    ],
+    "Azamino": [
+      {
+        "name": "駅前",
+        "lat": 35.568022,
+        "lng": 139.553876
+      }
+    ],
+    "Narita-Airport": [
+      {
+        "name": "駅前",
+        "lat": 35.76572,
+        "lng": 140.3863
+      }
+    ],
+    "Agano": [
+      {
+        "name": "駅前",
+        "lat": 35.90841,
+        "lng": 139.22671
+      }
+    ],
+    "Nishi-Agano": [
+      {
+        "name": "駅前",
+        "lat": 35.92636,
+        "lng": 139.20218
+      }
+    ],
+    "Shomaru": [
+      {
+        "name": "駅前",
+        "lat": 35.93823,
+        "lng": 139.18208
+      }
+    ],
+    "Ashikubo": [
+      {
+        "name": "駅前",
+        "lat": 35.97646,
+        "lng": 139.13597
+      }
+    ],
+    "Yokose": [
+      {
+        "name": "駅前",
+        "lat": 35.98547,
+        "lng": 139.09782
+      }
+    ],
+    "Seibu-Chichibu": [
+      {
+        "name": "駅前",
+        "lat": 35.98991,
+        "lng": 139.08346
+      }
+    ],
+    "Ome-kaido": [
+      {
+        "name": "駅前",
+        "lat": 35.7306,
+        "lng": 139.47654
+      }
+    ],
+    "Yasaka": [
+      {
+        "name": "駅前",
+        "lat": 35.74512,
+        "lng": 139.46745
+      }
+    ],
+    "Higashi-Rinkan": [
+      {
+        "name": "駅前",
+        "lat": 35.52051,
+        "lng": 139.4389
+      }
+    ],
+    "Chogo": [
+      {
+        "name": "駅前",
+        "lat": 35.41251,
+        "lng": 139.46543
+      }
+    ],
+    "Mutsukawa": [
+      {
+        "name": "駅前",
+        "lat": 35.38358,
+        "lng": 139.47083
+      }
+    ],
+    "Hon-Kugenuma": [
+      {
+        "name": "駅前",
+        "lat": 35.331,
+        "lng": 139.47528
+      }
+    ],
+    "Kamikitadai": [
+      {
+        "name": "駅前",
+        "lat": 35.7458,
+        "lng": 139.4159
+      }
+    ],
+    "Sakura-Kaido": [
+      {
+        "name": "駅前",
+        "lat": 35.739,
+        "lng": 139.4166
+      }
+    ],
+    "Tamagawa-Josui": [
+      {
+        "name": "駅前",
+        "lat": 35.7322,
+        "lng": 139.4177
+      }
+    ],
+    "Takamatsu": [
+      {
+        "name": "駅前",
+        "lat": 35.71,
+        "lng": 139.4133
+      }
+    ],
+    "Shibasaki-Taiikukan": [
+      {
+        "name": "駅前",
+        "lat": 35.6898,
+        "lng": 139.4093
+      }
+    ],
+    "Koshu-Kaido": [
+      {
+        "name": "駅前",
+        "lat": 35.6782,
+        "lng": 139.4092
+      }
+    ],
+    "Manganji": [
+      {
+        "name": "駅前",
+        "lat": 35.6713,
+        "lng": 139.4199
+      }
+    ],
+    "Hodokubo": [
+      {
+        "name": "駅前",
+        "lat": 35.6552,
+        "lng": 139.4108
+      }
+    ],
+    "Tama-Dobutsukoen": [
+      {
+        "name": "駅前",
+        "lat": 35.6485,
+        "lng": 139.4038
+      }
+    ],
+    "Chuo-Daigaku-Meisei-Daigaku": [
+      {
+        "name": "駅前",
+        "lat": 35.6419,
+        "lng": 139.4087
+      }
+    ],
+    "Otsuka-Teikyo-Daigaku": [
+      {
+        "name": "駅前",
+        "lat": 35.6369,
+        "lng": 139.4164
+      }
+    ],
+    "Matsugaya": [
+      {
+        "name": "駅前",
+        "lat": 35.6318,
+        "lng": 139.422
+      }
+    ],
+    "Komazawa-Daigaku": [
+      {
+        "name": "駅前",
+        "lat": 35.634069,
+        "lng": 139.661652
+      }
+    ],
+    "Takatsu": [
+      {
+        "name": "駅前",
+        "lat": 35.603062,
+        "lng": 139.61669
+      }
+    ],
+    "Kajigaya": [
+      {
+        "name": "駅前",
+        "lat": 35.593779,
+        "lng": 139.605694
+      }
+    ],
+    "Miyazakidai": [
+      {
+        "name": "駅前",
+        "lat": 35.587537,
+        "lng": 139.591677
+      }
+    ],
+    "Eda-Tokyu": [
+      {
+        "name": "駅前",
+        "lat": 35.558529,
+        "lng": 139.551559
+      }
+    ],
+    "Fujigaoka": [
+      {
+        "name": "駅前",
+        "lat": 35.543626,
+        "lng": 139.528023
+      }
+    ],
+    "Tana": [
+      {
+        "name": "駅前",
+        "lat": 35.536434,
+        "lng": 139.504835
+      }
+    ],
+    "Suzukakedai": [
+      {
+        "name": "駅前",
+        "lat": 35.517427,
+        "lng": 139.482133
+      }
+    ],
+    "Aomono-Yokocho": [
+      {
+        "name": "駅前",
+        "lat": 35.609505,
+        "lng": 139.742771
+      }
+    ],
+    "Tachiaigawa": [
+      {
+        "name": "駅前",
+        "lat": 35.598261,
+        "lng": 139.738573
+      }
+    ],
+    "Omori-Kaigan": [
+      {
+        "name": "駅前",
+        "lat": 35.587456,
+        "lng": 139.735143
+      }
+    ],
+    "Heiwajima": [
+      {
+        "name": "駅前",
+        "lat": 35.578732,
+        "lng": 139.734865
+      }
+    ],
+    "Omorimachi": [
+      {
+        "name": "駅前",
+        "lat": 35.572594,
+        "lng": 139.732152
+      }
+    ],
+    "Umayabashi": [
+      {
+        "name": "駅前",
+        "lat": 35.566901,
+        "lng": 139.728347
+      }
+    ],
+    "Keikyu-Kamata": [
+      {
+        "name": "駅前",
+        "lat": 35.560659,
+        "lng": 139.723725
+      }
+    ],
+    "Zoshiki": [
+      {
+        "name": "駅前",
+        "lat": 35.549526,
+        "lng": 139.714933
+      }
+    ],
+    "Rokugodote": [
+      {
+        "name": "駅前",
+        "lat": 35.540782,
+        "lng": 139.707686
+      }
+    ],
+    "Keikyu-Kawasaki": [
+      {
+        "name": "駅前",
+        "lat": 35.532467,
+        "lng": 139.700709
+      }
+    ],
+    "Tsurumi-Ichiba": [
+      {
+        "name": "駅前",
+        "lat": 35.51781,
+        "lng": 139.6866
+      }
+    ],
+    "Keikyu-Tsurumi": [
+      {
+        "name": "駅前",
+        "lat": 35.507201,
+        "lng": 139.678004
+      }
+    ],
+    "Kagetsu-Soji-ji": [
+      {
+        "name": "駅前",
+        "lat": 35.500396,
+        "lng": 139.672974
+      }
+    ],
+    "Keikyu-Shin-Koyasu": [
+      {
+        "name": "駅前",
+        "lat": 35.486896,
+        "lng": 139.655476
+      }
+    ],
+    "Kanagawa-Shimmachi": [
+      {
+        "name": "駅前",
+        "lat": 35.480879,
+        "lng": 139.639608
+      }
+    ],
+    "Keikyu-Higashi-Kanagawa": [
+      {
+        "name": "駅前",
+        "lat": 35.477287,
+        "lng": 139.634361
+      }
+    ],
+    "Kanagawa": [
+      {
+        "name": "駅前",
+        "lat": 35.470321,
+        "lng": 139.627523
+      }
+    ],
+    "Tobe": [
+      {
+        "name": "駅前",
+        "lat": 35.456787,
+        "lng": 139.619508
+      }
+    ],
+    "Hinodecho": [
+      {
+        "name": "駅前",
+        "lat": 35.445513,
+        "lng": 139.626854
+      }
+    ],
+    "Koganecho": [
+      {
+        "name": "駅前",
+        "lat": 35.43983,
+        "lng": 139.622843
+      }
+    ],
+    "Minami-Ota": [
+      {
+        "name": "駅前",
+        "lat": 35.436873,
+        "lng": 139.61397
+      }
+    ],
+    "Byobugaura": [
+      {
+        "name": "駅前",
+        "lat": 35.394628,
+        "lng": 139.610201
+      }
+    ],
+    "Sugita": [
+      {
+        "name": "駅前",
+        "lat": 35.384224,
+        "lng": 139.615364
+      }
+    ],
+    "Keikyu-Tomioka": [
+      {
+        "name": "駅前",
+        "lat": 35.367116,
+        "lng": 139.629902
+      }
+    ],
+    "Nokendai": [
+      {
+        "name": "駅前",
+        "lat": 35.360861,
+        "lng": 139.629453
+      }
+    ],
+    "Kanazawa-Hakkei": [
+      {
+        "name": "駅前",
+        "lat": 35.33121,
+        "lng": 139.620358
+      }
+    ],
+    "Oppama": [
+      {
+        "name": "駅前",
+        "lat": 35.315833,
+        "lng": 139.624916
+      }
+    ],
+    "Keikyu-Taura": [
+      {
+        "name": "駅前",
+        "lat": 35.300847,
+        "lng": 139.625658
+      }
+    ],
+    "Anjinzuka": [
+      {
+        "name": "駅前",
+        "lat": 35.286766,
+        "lng": 139.642981
+      }
+    ],
+    "Hemi": [
+      {
+        "name": "駅前",
+        "lat": 35.280689,
+        "lng": 139.65283
+      }
+    ],
+    "Kenritsu-Daigaku": [
+      {
+        "name": "駅前",
+        "lat": 35.269919,
+        "lng": 139.676795
+      }
+    ],
+    "Keikyu-Otsu": [
+      {
+        "name": "駅前",
+        "lat": 35.260854,
+        "lng": 139.696121
+      }
+    ],
+    "Mabori-Kaigan": [
+      {
+        "name": "駅前",
+        "lat": 35.259651,
+        "lng": 139.707389
+      }
+    ],
+    "Uraga": [
+      {
+        "name": "駅前",
+        "lat": 35.251635,
+        "lng": 139.714194
+      }
+    ],
+    "Tennocho": [
+      {
+        "name": "駅前",
+        "lat": 35.45375,
+        "lng": 139.60283
+      }
+    ],
+    "Hoshikawa": [
+      {
+        "name": "駅前",
+        "lat": 35.45869,
+        "lng": 139.59478
+      }
+    ],
+    "Kashiwadai": [
+      {
+        "name": "駅前",
+        "lat": 35.4665,
+        "lng": 139.41518
+      }
+    ],
+    "Seibu-Yuenchi": [
+      {
+        "name": "駅前",
+        "lat": 35.7694,
+        "lng": 139.43999
+      }
+    ],
+    "Seibu-Kyujou-Mae": [
+      {
+        "name": "駅前",
+        "lat": 35.77041,
+        "lng": 139.41879
+      }
+    ],
+    "Kanashima": [
+      {
+        "name": "駅前",
+        "lat": 36.52958,
+        "lng": 138.97642
+      }
+    ],
+    "Sohijima": [
+      {
+        "name": "駅前",
+        "lat": 36.54074,
+        "lng": 138.95706
+      }
+    ],
+    "Onogami": [
+      {
+        "name": "駅前",
+        "lat": 36.55249,
+        "lng": 138.92224
+      }
+    ],
+    "Onogami-Onsen": [
+      {
+        "name": "駅前",
+        "lat": 36.5569,
+        "lng": 138.90431
+      }
+    ],
+    "Ichishiro": [
+      {
+        "name": "駅前",
+        "lat": 36.57064,
+        "lng": 138.88228
+      }
+    ],
+    "Gunma-Haramachi": [
+      {
+        "name": "駅前",
+        "lat": 36.5717,
+        "lng": 138.82416
+      }
+    ],
+    "Gohara": [
+      {
+        "name": "駅前",
+        "lat": 36.54873,
+        "lng": 138.8011
+      }
+    ],
+    "Yakura": [
+      {
+        "name": "駅前",
+        "lat": 36.55276,
+        "lng": 138.78426
+      }
+    ],
+    "Iwashima": [
+      {
+        "name": "駅前",
+        "lat": 36.56324,
+        "lng": 138.75994
+      }
+    ],
+    "Kawahara-yu-Onsen": [
+      {
+        "name": "駅前",
+        "lat": 36.54509,
+        "lng": 138.69723
+      }
+    ],
+    "Gunma-Otsu": [
+      {
+        "name": "駅前",
+        "lat": 36.55381,
+        "lng": 138.62809
+      }
+    ],
+    "Haneo": [
+      {
+        "name": "駅前",
+        "lat": 36.55016,
+        "lng": 138.6055
+      }
+    ],
+    "Fukurogura": [
+      {
+        "name": "駅前",
+        "lat": 36.54402,
+        "lng": 138.57918
+      }
+    ],
+    "Omae": [
+      {
+        "name": "駅前",
+        "lat": 36.51358,
+        "lng": 138.52902
+      }
+    ],
+    "Arakawa_Kuyakusho_Mae": [
+      {
+        "name": "駅前",
+        "lat": 35.734913,
+        "lng": 139.786416
+      }
+    ],
+    "Arakawa_Ni": [
+      {
+        "name": "駅前",
+        "lat": 35.738573,
+        "lng": 139.784704
+      }
+    ],
+    "Arakawa_Nana": [
+      {
+        "name": "駅前",
+        "lat": 35.741923,
+        "lng": 139.78421
+      }
+    ],
+    "Higashi_Oku_San": [
+      {
+        "name": "駅前",
+        "lat": 35.745626,
+        "lng": 139.773867
+      }
+    ],
+    "Kuma_Mae": [
+      {
+        "name": "駅前",
+        "lat": 35.748487,
+        "lng": 139.769859
+      }
+    ],
+    "Miyano_Mae": [
+      {
+        "name": "駅前",
+        "lat": 35.749811,
+        "lng": 139.76619
+      }
+    ],
+    "Kodai": [
+      {
+        "name": "駅前",
+        "lat": 35.750477,
+        "lng": 139.761739
+      }
+    ],
+    "Arakawa_Yuengiei_Mae": [
+      {
+        "name": "駅前",
+        "lat": 35.750646,
+        "lng": 139.757517
+      }
+    ],
+    "Arakawa_Shako_Mae": [
+      {
+        "name": "駅前",
+        "lat": 35.750865,
+        "lng": 139.752461
+      }
+    ],
+    "Takino_Kawa_Ichome": [
+      {
+        "name": "駅前",
+        "lat": 35.747283,
+        "lng": 139.73542
+      }
+    ],
+    "Nishi_Kbara_Yon": [
+      {
+        "name": "駅前",
+        "lat": 35.744222,
+        "lng": 139.732665
+      }
+    ],
+    "Shin_Kosenzuka": [
+      {
+        "name": "駅前",
+        "lat": 35.74107,
+        "lng": 139.730344
+      }
+    ],
+    "Kosenzuka": [
+      {
+        "name": "駅前",
+        "lat": 35.739504,
+        "lng": 139.729625
+      }
+    ],
+    "Sugamo_Shimmachi": [
+      {
+        "name": "駅前",
+        "lat": 35.735682,
+        "lng": 139.727684
+      }
+    ],
+    "Otsuka_Eki_Mae": [
+      {
+        "name": "駅前",
+        "lat": 35.731188,
+        "lng": 139.729098
+      }
+    ],
+    "Mukaiohara": [
+      {
+        "name": "駅前",
+        "lat": 35.728775,
+        "lng": 139.724759
+      }
+    ],
+    "Toei_Zoshigaya": [
+      {
+        "name": "駅前",
+        "lat": 35.724081,
+        "lng": 139.717835
+      }
+    ],
+    "Gakuin_Mae": [
+      {
+        "name": "駅前",
+        "lat": 35.716347,
+        "lng": 139.712529
+      }
+    ],
+    "Omokagebashi": [
+      {
+        "name": "駅前",
+        "lat": 35.713012,
+        "lng": 139.714199
+      }
+    ],
+    "Eda": [
+      {
+        "name": "駅前",
+        "lat": 35.558529,
+        "lng": 139.551559
+      }
+    ],
+    "Okubo": [
+      {
+        "name": "駅前",
+        "lat": 35.70064,
+        "lng": 139.69744
+      }
+    ],
+    "Sendagaya": [
+      {
+        "name": "駅前",
+        "lat": 35.6812,
+        "lng": 139.71153
+      }
+    ],
+    "Kameido": [
+      {
+        "name": "駅前",
+        "lat": 35.69734,
+        "lng": 139.82661
+      }
+    ],
+    "Hirai": [
+      {
+        "name": "駅前",
+        "lat": 35.70645,
+        "lng": 139.84238
+      }
+    ],
+    "Shimosa-Nakayama": [
+      {
+        "name": "駅前",
+        "lat": 35.71428,
+        "lng": 139.94307
+      }
+    ],
+    "Minatocho": [
+      {
+        "name": "駅前",
+        "lat": 35.5349,
+        "lng": 139.712566
+      }
+    ],
+    "Suzukimachi": [
+      {
+        "name": "駅前",
+        "lat": 35.535333,
+        "lng": 139.720271
+      }
+    ],
+    "Kojima_Shinden": [
+      {
+        "name": "駅前",
+        "lat": 35.534825,
+        "lng": 139.747862
+      }
+    ],
+    "Ariake-8oh": [
+      {
+        "name": "駅前",
+        "lat": 35.63468,
+        "lng": 139.79325
+      }
+    ],
+    "Hagi-San": [
+      {
+        "name": "駅前",
+        "lat": 35.7404,
+        "lng": 139.47745
+      }
+    ],
+    "Ogawa": [
+      {
+        "name": "駅前",
+        "lat": 35.73748,
+        "lng": 139.46353
+      }
+    ],
+    "Higashi_Yamato": [
+      {
+        "name": "駅前",
+        "lat": 35.73286,
+        "lng": 139.43432
+      }
+    ],
+    "Musashi_Sunagawa": [
+      {
+        "name": "駅前",
+        "lat": 35.72902,
+        "lng": 139.39223
+      }
+    ],
+    "Seibu_Tachikawa": [
+      {
+        "name": "駅前",
+        "lat": 35.72611,
+        "lng": 139.37026
+      }
+    ],
+    "Echigo-Kawaguchi": [
+      {
+        "name": "駅前",
+        "lat": 37.27286,
+        "lng": 138.86156
+      }
+    ],
+    "Shiinamachi": [
+      {
+        "name": "駅前",
+        "lat": 35.7266,
+        "lng": 139.69483
+      }
+    ],
+    "Higashi-Nagasaki": [
+      {
+        "name": "駅前",
+        "lat": 35.73021,
+        "lng": 139.68301
+      }
+    ],
+    "Ekoda": [
+      {
+        "name": "駅前",
+        "lat": 35.73736,
+        "lng": 139.67275
+      }
+    ],
+    "Sakuradai": [
+      {
+        "name": "駅前",
+        "lat": 35.73875,
+        "lng": 139.66241
+      }
+    ],
+    "Fujimidai": [
+      {
+        "name": "駅前",
+        "lat": 35.7359,
+        "lng": 139.63
+      }
+    ],
+    "Nerima-Takanodai": [
+      {
+        "name": "駅前",
+        "lat": 35.7408,
+        "lng": 139.61666
+      }
+    ],
+    "Hoya": [
+      {
+        "name": "駅前",
+        "lat": 35.74832,
+        "lng": 139.56754
+      }
+    ],
+    "Hibarigaoka": [
+      {
+        "name": "駅前",
+        "lat": 35.75157,
+        "lng": 139.54552
+      }
+    ],
+    "Higashi-Kurume": [
+      {
+        "name": "駅前",
+        "lat": 35.76031,
+        "lng": 139.53393
+      }
+    ],
+    "Kotesashi": [
+      {
+        "name": "駅前",
+        "lat": 35.80055,
+        "lng": 139.43801
+      }
+    ],
+    "Sayamagaoka": [
+      {
+        "name": "駅前",
+        "lat": 35.81044,
+        "lng": 139.41674
+      }
+    ],
+    "Inariyama-Koen": [
+      {
+        "name": "駅前",
+        "lat": 35.84514,
+        "lng": 139.3984
+      }
+    ],
+    "Bushi": [
+      {
+        "name": "駅前",
+        "lat": 35.83787,
+        "lng": 139.36003
+      }
+    ],
+    "Motokaji": [
+      {
+        "name": "駅前",
+        "lat": 35.84052,
+        "lng": 139.34575
+      }
+    ],
+    "Kinomiya": [
+      {
+        "name": "駅前",
+        "lat": 35.09872,
+        "lng": 139.06557
+      }
+    ],
+    "Izu-Taga": [
+      {
+        "name": "駅前",
+        "lat": 35.05944,
+        "lng": 139.0669
+      }
+    ],
+    "Ajiro": [
+      {
+        "name": "駅前",
+        "lat": 35.04346,
+        "lng": 139.081
+      }
+    ],
+    "Takasaki-Tonyamachi": [
+      {
+        "name": "駅前",
+        "lat": 36.34614,
+        "lng": 139.01723
+      }
+    ],
+    "Ino": [
+      {
+        "name": "駅前",
+        "lat": 36.35744,
+        "lng": 139.02327
+      }
+    ],
+    "Shin-Maebashi": [
+      {
+        "name": "駅前",
+        "lat": 36.379,
+        "lng": 139.047
+      }
+    ],
+    "Gunma-Soja": [
+      {
+        "name": "駅前",
+        "lat": 36.41551,
+        "lng": 139.03228
+      }
+    ],
+    "Yagihara": [
+      {
+        "name": "駅前",
+        "lat": 36.46379,
+        "lng": 139.01925
+      }
+    ],
+    "Shikishima": [
+      {
+        "name": "駅前",
+        "lat": 36.53756,
+        "lng": 139.03394
+      }
+    ],
+    "Tsukuda": [
+      {
+        "name": "駅前",
+        "lat": 36.56103,
+        "lng": 139.04286
+      }
+    ],
+    "Iwamoto": [
+      {
+        "name": "駅前",
+        "lat": 36.60216,
+        "lng": 139.04753
+      }
+    ],
+    "Numata": [
+      {
+        "name": "駅前",
+        "lat": 36.6423,
+        "lng": 139.03564
+      }
+    ],
+    "Gokan": [
+      {
+        "name": "駅前",
+        "lat": 36.67955,
+        "lng": 139.00012
+      }
+    ],
+    "Kamimoku": [
+      {
+        "name": "駅前",
+        "lat": 36.73563,
+        "lng": 138.98456
+      }
+    ],
+    "Minakami": [
+      {
+        "name": "駅前",
+        "lat": 36.77908,
+        "lng": 138.9693
+      }
+    ],
+    "Yubiso": [
+      {
+        "name": "駅前",
+        "lat": 36.80289,
+        "lng": 138.98585
+      }
+    ],
+    "Doai": [
+      {
+        "name": "駅前",
+        "lat": 36.83036,
+        "lng": 138.96506
+      }
+    ],
+    "Tsuchitaru": [
+      {
+        "name": "駅前",
+        "lat": 36.87528,
+        "lng": 138.86159
+      }
+    ],
+    "Iwahara-Ski-Jo-Mae": [
+      {
+        "name": "駅前",
+        "lat": 36.92428,
+        "lng": 138.83936
+      }
+    ],
+    "Echigo-Yuzawa": [
+      {
+        "name": "駅前",
+        "lat": 36.93582,
+        "lng": 138.80962
+      }
+    ],
+    "Ishiuchi": [
+      {
+        "name": "駅前",
+        "lat": 36.98892,
+        "lng": 138.80418
+      }
+    ],
+    "Osawa": [
+      {
+        "name": "駅前",
+        "lat": 37.02123,
+        "lng": 138.82133
+      }
+    ],
+    "Itsukamachi": [
+      {
+        "name": "駅前",
+        "lat": 37.11994,
+        "lng": 138.90844
+      }
+    ],
+    "Urasa": [
+      {
+        "name": "駅前",
+        "lat": 37.16737,
+        "lng": 138.92304
+      }
+    ],
+    "Yairo": [
+      {
+        "name": "駅前",
+        "lat": 37.19176,
+        "lng": 138.93511
+      }
+    ],
+    "Koide": [
+      {
+        "name": "駅前",
+        "lat": 37.23357,
+        "lng": 138.95361
+      }
+    ],
+    "Echigo-Horinouchi": [
+      {
+        "name": "駅前",
+        "lat": 37.23896,
+        "lng": 138.92828
+      }
+    ],
+    "Kita-Horinouchi": [
+      {
+        "name": "駅前",
+        "lat": 37.25574,
+        "lng": 138.89632
+      }
+    ],
+    "Ojiya": [
+      {
+        "name": "駅前",
+        "lat": 37.30968,
+        "lng": 138.81348
+      }
+    ],
+    "Echigo-Takaya": [
+      {
+        "name": "駅前",
+        "lat": 37.36864,
+        "lng": 138.83498
+      }
+    ],
+    "Miyauchi": [
+      {
+        "name": "駅前",
+        "lat": 37.42214,
+        "lng": 138.84012
+      }
+    ],
+    "Oyamadai": [
+      {
+        "name": "駅前",
+        "lat": 35.607179,
+        "lng": 139.653401
+      }
+    ],
+    "Nishinasuno": [
+      {
+        "name": "駅前",
+        "lat": 36.88374,
+        "lng": 139.98639
+      }
+    ],
+    "Hoshakuji": [
+      {
+        "name": "駅前",
+        "lat": 36.63162,
+        "lng": 139.97952
+      }
+    ],
+    "Katori": [
+      {
+        "name": "駅前",
+        "lat": 35.89788,
+        "lng": 140.53241
+      }
+    ],
+    "Junikyo": [
+      {
+        "name": "駅前",
+        "lat": 35.91702,
+        "lng": 140.54583
+      }
+    ],
+    "Kashima-Jingu": [
+      {
+        "name": "駅前",
+        "lat": 35.9707,
+        "lng": 140.62593
+      }
+    ],
+    "Nisshin": [
+      {
+        "name": "駅前",
+        "lat": 35.93153,
+        "lng": 139.60606
+      }
+    ],
+    "Nishi-Omiya": [
+      {
+        "name": "駅前",
+        "lat": 35.92196,
+        "lng": 139.5789
+      }
+    ],
+    "Sashiogi": [
+      {
+        "name": "駅前",
+        "lat": 35.91696,
+        "lng": 139.56497
+      }
+    ],
+    "Minami-Furuya": [
+      {
+        "name": "駅前",
+        "lat": 35.90318,
+        "lng": 139.51916
+      }
+    ],
+    "Nishi-Kawagoe": [
+      {
+        "name": "駅前",
+        "lat": 35.9191,
+        "lng": 139.45994
+      }
+    ],
+    "Matoba": [
+      {
+        "name": "駅前",
+        "lat": 35.91754,
+        "lng": 139.43541
+      }
+    ],
+    "Kasahata": [
+      {
+        "name": "駅前",
+        "lat": 35.90758,
+        "lng": 139.40626
+      }
+    ],
+    "Musashi-Takahagi": [
+      {
+        "name": "駅前",
+        "lat": 35.90168,
+        "lng": 139.37112
+      }
+    ],
+    "Kokuji": [
+      {
+        "name": "駅前",
+        "lat": 35.55453,
+        "lng": 139.72992
+      }
+    ],
+    "Daitori": [
+      {
+        "name": "駅前",
+        "lat": 35.552608,
+        "lng": 139.739219
+      }
+    ],
+    "Anamori-Inari": [
+      {
+        "name": "駅前",
+        "lat": 35.550415,
+        "lng": 139.747002
+      }
+    ],
+    "Tenku-Bashi": [
+      {
+        "name": "駅前",
+        "lat": 35.548732,
+        "lng": 139.754041
+      }
+    ],
+    "Shin-Otsu": [
+      {
+        "name": "駅前",
+        "lat": 35.256904,
+        "lng": 139.690102
+      }
+    ],
+    "Kita-Kurihama": [
+      {
+        "name": "駅前",
+        "lat": 35.250646,
+        "lng": 139.686574
+      }
+    ],
+    "Keikyu-Kurihama": [
+      {
+        "name": "駅前",
+        "lat": 35.230929,
+        "lng": 139.70237
+      }
+    ],
+    "YRP-Nohbi": [
+      {
+        "name": "駅前",
+        "lat": 35.212021,
+        "lng": 139.685078
+      }
+    ],
+    "Keikyu-Nagasawa": [
+      {
+        "name": "駅前",
+        "lat": 35.205719,
+        "lng": 139.674331
+      }
+    ],
+    "Tsukui-Hama": [
+      {
+        "name": "駅前",
+        "lat": 35.198708,
+        "lng": 139.665787
+      }
+    ],
+    "Misasaki-Guchi": [
+      {
+        "name": "駅前",
+        "lat": 35.177435,
+        "lng": 139.633482
+      }
+    ],
+    "Jinmuji": [
+      {
+        "name": "駅前",
+        "lat": 35.306399,
+        "lng": 139.593277
+      }
+    ],
+    "Komaba-Todaimae": [
+      {
+        "name": "駅前",
+        "lat": 35.65867,
+        "lng": 139.68408
+      }
+    ],
+    "Ikenoue": [
+      {
+        "name": "駅前",
+        "lat": 35.66037,
+        "lng": 139.67346
+      }
+    ],
+    "Shin-Daita": [
+      {
+        "name": "駅前",
+        "lat": 35.6625,
+        "lng": 139.66139
+      }
+    ],
+    "Higashi-Matsubara": [
+      {
+        "name": "駅前",
+        "lat": 35.66264,
+        "lng": 139.65569
+      }
+    ],
+    "Meidaimae": [
+      {
+        "name": "駅前",
+        "lat": 35.66908,
+        "lng": 139.65038
+      }
+    ],
+    "Eifukucho": [
+      {
+        "name": "駅前",
+        "lat": 35.67622,
+        "lng": 139.64267
+      }
+    ],
+    "Inokashira-Koen": [
+      {
+        "name": "駅前",
+        "lat": 35.6973,
+        "lng": 139.58312
+      }
+    ],
+    "Higashi-Fuchu": [
+      {
+        "name": "駅前",
+        "lat": 35.66877,
+        "lng": 139.4954
+      }
+    ],
+    "Fuchu-Keibajo": [
+      {
+        "name": "駅前",
+        "lat": 35.66836,
+        "lng": 139.48516
+      }
+    ],
+    "Sakurajosui": [
+      {
+        "name": "駅前",
+        "lat": 35.66764,
+        "lng": 139.63146
+      }
+    ],
+    "Kamikitazawa": [
+      {
+        "name": "駅前",
+        "lat": 35.66884,
+        "lng": 139.62342
+      }
+    ],
+    "Hachimanyama": [
+      {
+        "name": "駅前",
+        "lat": 35.67008,
+        "lng": 139.61448
+      }
+    ],
+    "Roka-koen": [
+      {
+        "name": "駅前",
+        "lat": 35.67052,
+        "lng": 139.60825
+      }
+    ],
+    "Shibasaki": [
+      {
+        "name": "駅前",
+        "lat": 35.65399,
+        "lng": 139.56662
+      }
+    ],
+    "Kokuryo": [
+      {
+        "name": "駅前",
+        "lat": 35.65018,
+        "lng": 139.55843
+      }
+    ],
+    "Fuda": [
+      {
+        "name": "駅前",
+        "lat": 35.64986,
+        "lng": 139.55172
+      }
+    ],
+    "Chofu": [
+      {
+        "name": "駅前",
+        "lat": 35.65177,
+        "lng": 139.54474
+      }
+    ],
+    "Nishi-Chofu": [
+      {
+        "name": "駅前",
+        "lat": 35.65732,
+        "lng": 139.5295
+      }
+    ],
+    "Tobitakyu": [
+      {
+        "name": "駅前",
+        "lat": 35.65998,
+        "lng": 139.52366
+      }
+    ],
+    "Musashidai": [
+      {
+        "name": "駅前",
+        "lat": 35.66414,
+        "lng": 139.5113
+      }
+    ],
+    "Tamareien": [
+      {
+        "name": "駅前",
+        "lat": 35.66636,
+        "lng": 139.50212
+      }
+    ],
+    "Minamidaira": [
+      {
+        "name": "駅前",
+        "lat": 35.65514,
+        "lng": 139.39258
+      }
+    ],
+    "Hiyamajo-koen": [
+      {
+        "name": "駅前",
+        "lat": 35.64731,
+        "lng": 139.3799
+      }
+    ],
+    "Naganuma": [
+      {
+        "name": "駅前",
+        "lat": 35.64278,
+        "lng": 139.36588
+      }
+    ],
+    "Kita-No": [
+      {
+        "name": "駅前",
+        "lat": 35.64448,
+        "lng": 139.35418
+      }
+    ],
+    "Keio-Tamagawa": [
+      {
+        "name": "駅前",
+        "lat": 35.64412,
+        "lng": 139.53632
+      }
+    ],
+    "Keio-Yomiuriland": [
+      {
+        "name": "駅前",
+        "lat": 35.63297,
+        "lng": 139.51729
+      }
+    ],
+    "Inagi": [
+      {
+        "name": "駅前",
+        "lat": 35.63614,
+        "lng": 139.50015
+      }
+    ],
+    "Keio-Horinouchi": [
+      {
+        "name": "駅前",
+        "lat": 35.62448,
+        "lng": 139.40032
+      }
+    ],
+    "Minami-Osawa": [
+      {
+        "name": "駅前",
+        "lat": 35.61408,
+        "lng": 139.37983
+      }
+    ],
+    "Keio-Katakura": [
+      {
+        "name": "駅前",
+        "lat": 35.64436,
+        "lng": 139.33696
+      }
+    ],
+    "Yamada": [
+      {
+        "name": "駅前",
+        "lat": 35.64436,
+        "lng": 139.32076
+      }
+    ],
+    "Hazama": [
+      {
+        "name": "駅前",
+        "lat": 35.64059,
+        "lng": 139.29364
+      }
+    ],
+    "Sanmaibashi": [
+      {
+        "name": "駅前",
+        "lat": 36.3134,
+        "lng": 139.35497
+      }
+    ],
+    "Jiromaru-bashi": [
+      {
+        "name": "駅前",
+        "lat": 36.33302,
+        "lng": 139.34137
+      }
+    ],
+    "Yabuzuka": [
+      {
+        "name": "駅前",
+        "lat": 36.35872,
+        "lng": 139.31582
+      }
+    ],
+    "Azami": [
+      {
+        "name": "駅前",
+        "lat": 36.38509,
+        "lng": 139.30653
+      }
+    ],
+    "Akagi": [
+      {
+        "name": "駅前",
+        "lat": 36.42562,
+        "lng": 139.27678
+      }
+    ],
+    "Hon_Nakano": [
+      {
+        "name": "駅前",
+        "lat": 36.25845,
+        "lng": 139.46954
+      }
+    ],
+    "Shinozuka": [
+      {
+        "name": "駅前",
+        "lat": 36.25681,
+        "lng": 139.44609
+      }
+    ],
+    "Koizumicho": [
+      {
+        "name": "駅前",
+        "lat": 36.26153,
+        "lng": 139.42025
+      }
+    ],
+    "Higashi_Koizumi": [
+      {
+        "name": "駅前",
+        "lat": 36.25972,
+        "lng": 139.42856
+      }
+    ],
+    "Koigakubo": [
+      {
+        "name": "駅前",
+        "lat": 35.71092,
+        "lng": 139.46414
+      }
+    ],
+    "Kobuchizawa": [
+      {
+        "name": "駅前",
+        "lat": 35.86381,
+        "lng": 138.31642
+      }
+    ],
+    "Matsubara": [
+      {
+        "name": "駅前",
+        "lat": 35.660059,
+        "lng": 139.642004
+      }
+    ],
+    "Gion": [
+      {
+        "name": "駅前",
+        "lat": 35.39162,
+        "lng": 139.94838
+      }
+    ],
+    "Kazusa_Kiyokawa": [
+      {
+        "name": "駅前",
+        "lat": 35.39084,
+        "lng": 139.96564
+      }
+    ],
+    "Higashi_Kiyokawa": [
+      {
+        "name": "駅前",
+        "lat": 35.39,
+        "lng": 139.9859
+      }
+    ],
+    "Yokota": [
+      {
+        "name": "駅前",
+        "lat": 35.3862,
+        "lng": 140.02013
+      }
+    ],
+    "Higashi_Yokota": [
+      {
+        "name": "駅前",
+        "lat": 35.38616,
+        "lng": 140.03594
+      }
+    ],
+    "Uma_Kita": [
+      {
+        "name": "駅前",
+        "lat": 35.36682,
+        "lng": 140.05852
+      }
+    ],
+    "Shimo_Kori": [
+      {
+        "name": "駅前",
+        "lat": 35.35499,
+        "lng": 140.05541
+      }
+    ],
+    "Kururi": [
+      {
+        "name": "駅前",
+        "lat": 35.2958,
+        "lng": 140.0756
+      }
+    ],
+    "Hirayama": [
+      {
+        "name": "駅前",
+        "lat": 35.2743,
+        "lng": 140.06466
+      }
+    ],
+    "Kazusa_Matsuoka": [
+      {
+        "name": "駅前",
+        "lat": 35.2582,
+        "lng": 140.06403
+      }
+    ],
+    "Kazusa_Kameyama": [
+      {
+        "name": "駅前",
+        "lat": 35.23318,
+        "lng": 140.0895
+      }
+    ],
+    "Yamato-Mito": [
+      {
+        "name": "駅前",
+        "lat": 36.28694,
+        "lng": 140.23917
+      }
+    ],
+    "Kuzumi": [
+      {
+        "name": "駅前",
+        "lat": 35.83218,
+        "lng": 140.33887
+      }
+    ],
+    "Namegawa": [
+      {
+        "name": "駅前",
+        "lat": 35.87706,
+        "lng": 140.34786
+      }
+    ],
+    "Shimosa-Kanzaki": [
+      {
+        "name": "駅前",
+        "lat": 35.89484,
+        "lng": 140.41067
+      }
+    ],
+    "Oto": [
+      {
+        "name": "駅前",
+        "lat": 35.88993,
+        "lng": 140.45773
+      }
+    ],
+    "Suigo": [
+      {
+        "name": "駅前",
+        "lat": 35.88546,
+        "lng": 140.57018
+      }
+    ],
+    "Omigawa": [
+      {
+        "name": "駅前",
+        "lat": 35.84998,
+        "lng": 140.6046
+      }
+    ],
+    "Sasagawa": [
+      {
+        "name": "駅前",
+        "lat": 35.83943,
+        "lng": 140.65582
+      }
+    ],
+    "Shimosa-Tachibana": [
+      {
+        "name": "駅前",
+        "lat": 35.81878,
+        "lng": 140.70215
+      }
+    ],
+    "Shimosa-Toyosato": [
+      {
+        "name": "駅前",
+        "lat": 35.793,
+        "lng": 140.7209
+      }
+    ],
+    "Matsugishi": [
+      {
+        "name": "駅前",
+        "lat": 35.73938,
+        "lng": 140.7952
+      }
+    ],
+    "Choshi": [
+      {
+        "name": "駅前",
+        "lat": 35.72932,
+        "lng": 140.82746
+      }
+    ],
+    "Shimo-Imaichi": [
+      {
+        "name": "駅前",
+        "lat": 36.7256,
+        "lng": 139.69277
+      }
+    ],
+    "Shin-Fujiwara": [
+      {
+        "name": "駅前",
+        "lat": 36.85246,
+        "lng": 139.73301
+      }
+    ],
+    "Akado-Shogakkomae": [
+      {
+        "name": "駅前",
+        "lat": 35.742868,
+        "lng": 139.769025
+      }
+    ],
+    "Omiya-Koen": [
+      {
+        "name": "駅前",
+        "lat": 35.92388,
+        "lng": 139.63308
+      }
+    ],
+    "Owada": [
+      {
+        "name": "駅前",
+        "lat": 35.92935,
+        "lng": 139.65102
+      }
+    ],
+    "Nanasato": [
+      {
+        "name": "駅前",
+        "lat": 35.93649,
+        "lng": 139.66601
+      }
+    ],
+    "Yagisaki": [
+      {
+        "name": "駅前",
+        "lat": 35.97858,
+        "lng": 139.7423
+      }
+    ],
+    "Fujino-Ushijima": [
+      {
+        "name": "駅前",
+        "lat": 35.98034,
+        "lng": 139.77807
+      }
+    ],
+    "Minami-Sakurai": [
+      {
+        "name": "駅前",
+        "lat": 35.9806,
+        "lng": 139.8084
+      }
+    ],
+    "Atago": [
+      {
+        "name": "駅前",
+        "lat": 35.95062,
+        "lng": 139.86462
+      }
+    ],
+    "Nodashi": [
+      {
+        "name": "駅前",
+        "lat": 35.94374,
+        "lng": 139.87079
+      }
+    ],
+    "Hatsuishi": [
+      {
+        "name": "駅前",
+        "lat": 35.88384,
+        "lng": 139.91791
+      }
+    ],
+    "Nagareyama-Otakanomori": [
+      {
+        "name": "駅前",
+        "lat": 35.87186,
+        "lng": 139.92506
+      }
+    ],
+    "Masuo": [
+      {
+        "name": "駅前",
+        "lat": 35.82982,
+        "lng": 139.97632
+      }
+    ],
+    "Sakasai": [
+      {
+        "name": "駅前",
+        "lat": 35.82328,
+        "lng": 139.9837
+      }
+    ],
+    "Mutsumi": [
+      {
+        "name": "駅前",
+        "lat": 35.79371,
+        "lng": 139.99925
+      }
+    ],
+    "Magomezawa": [
+      {
+        "name": "駅前",
+        "lat": 35.74165,
+        "lng": 139.99221
+      }
+    ],
+    "Tsukada": [
+      {
+        "name": "駅前",
+        "lat": 35.72212,
+        "lng": 139.9829
+      }
+    ],
+    "Kurokawa": [
+      {
+        "name": "駅前",
+        "lat": 35.61306,
+        "lng": 139.47089
+      }
+    ],
+    "Odakyu-Ei-Zan": [
+      {
+        "name": "駅前",
+        "lat": 35.62987,
+        "lng": 139.4483
+      }
+    ],
+    "Odakyu-Tama-Center": [
+      {
+        "name": "駅前",
+        "lat": 35.62495,
+        "lng": 139.42443
+      }
+    ],
+    "Karakita": [
+      {
+        "name": "駅前",
+        "lat": 35.61582,
+        "lng": 139.41112
+      }
+    ],
+    "Kawa_kaku": [
+      {
+        "name": "駅前",
+        "lat": 35.93761,
+        "lng": 139.34648
+      }
+    ],
+    "Higashi_Moro": [
+      {
+        "name": "駅前",
+        "lat": 35.94715,
+        "lng": 139.31533
+      }
+    ],
+    "Tennozu-Ise": [
+      {
+        "name": "駅前",
+        "lat": 35.62038,
+        "lng": 139.75084
+      }
+    ],
+    "Tochigi": [
+      {
+        "name": "駅前",
+        "lat": 36.37167,
+        "lng": 139.73149
+      }
+    ],
+    "Sano": [
+      {
+        "name": "駅前",
+        "lat": 36.31684,
+        "lng": 139.57913
+      }
+    ],
+    "Kita-Chigasaki": [
+      {
+        "name": "駅前",
+        "lat": 35.33968,
+        "lng": 139.40747
+      }
+    ],
+    "Samukawa": [
+      {
+        "name": "駅前",
+        "lat": 35.3677,
+        "lng": 139.38732
+      }
+    ],
+    "Miyayama": [
+      {
+        "name": "駅前",
+        "lat": 35.38222,
+        "lng": 139.37966
+      }
+    ],
+    "Kurami": [
+      {
+        "name": "駅前",
+        "lat": 35.39506,
+        "lng": 139.37838
+      }
+    ],
+    "Kadosawabashi": [
+      {
+        "name": "駅前",
+        "lat": 35.4067,
+        "lng": 139.38006
+      }
+    ],
+    "Shake": [
+      {
+        "name": "駅前",
+        "lat": 35.42041,
+        "lng": 139.37718
+      }
+    ],
+    "Atsugi": [
+      {
+        "name": "駅前",
+        "lat": 35.44382,
+        "lng": 139.3786
+      }
+    ],
+    "Shimomizo": [
+      {
+        "name": "駅前",
+        "lat": 35.51832,
+        "lng": 139.38051
+      }
+    ],
+    "Banda": [
+      {
+        "name": "駅前",
+        "lat": 35.54536,
+        "lng": 139.36313
+      }
+    ],
+    "Kamimizo": [
+      {
+        "name": "駅前",
+        "lat": 35.55764,
+        "lng": 139.36314
+      }
+    ],
+    "Watarase": [
+      {
+        "name": "駅前",
+        "lat": 36.26184,
+        "lng": 139.53748
+      }
+    ],
+    "Sano-shi": [
+      {
+        "name": "駅前",
+        "lat": 36.30624,
+        "lng": 139.5759
+      }
+    ],
+    "Tanuma": [
+      {
+        "name": "駅前",
+        "lat": 36.36707,
+        "lng": 139.58191
+      }
+    ],
+    "Tada": [
+      {
+        "name": "駅前",
+        "lat": 36.37808,
+        "lng": 139.59296
+      }
+    ],
+    "Kuzu": [
+      {
+        "name": "駅前",
+        "lat": 36.39788,
+        "lng": 139.60928
+      }
+    ],
+    "Shimoyamakuchi": [
+      {
+        "name": "駅前",
+        "lat": 35.77935,
+        "lng": 139.44084
+      }
+    ],
+    "Shinden": [
+      {
+        "name": "駅前",
+        "lat": 35.85411,
+        "lng": 139.79542
+      }
+    ],
+    "Kunai": [
+      {
+        "name": "駅前",
+        "lat": 37.42214,
+        "lng": 138.84012
+      }
+    ],
+    "Shiojiri": [
+      {
+        "name": "駅前",
+        "lat": 36.1148,
+        "lng": 137.94788
+      }
+    ],
+    "Kamatori": [
+      {
+        "name": "駅前",
+        "lat": 35.56266,
+        "lng": 140.17875
+      }
+    ],
+    "Honda": [
+      {
+        "name": "駅前",
+        "lat": 35.547,
+        "lng": 140.21378
+      }
+    ],
+    "Toke": [
+      {
+        "name": "駅前",
+        "lat": 35.53092,
+        "lng": 140.26977
+      }
+    ],
+    "Nagata": [
+      {
+        "name": "駅前",
+        "lat": 35.50324,
+        "lng": 140.31127
+      }
+    ],
+    "Yatsumi": [
+      {
+        "name": "駅前",
+        "lat": 35.40396,
+        "lng": 140.34536
+      }
+    ],
+    "Kazusa-Ichinomiya": [
+      {
+        "name": "駅前",
+        "lat": 35.37468,
+        "lng": 140.36552
+      }
+    ],
+    "Torami": [
+      {
+        "name": "駅前",
+        "lat": 35.34677,
+        "lng": 140.37665
+      }
+    ],
+    "Chojamachi": [
+      {
+        "name": "駅前",
+        "lat": 35.29626,
+        "lng": 140.38481
+      }
+    ],
+    "Mikado": [
+      {
+        "name": "駅前",
+        "lat": 35.28292,
+        "lng": 140.39144
+      }
+    ],
+    "Ohara": [
+      {
+        "name": "駅前",
+        "lat": 35.25101,
+        "lng": 140.39102
+      }
+    ],
+    "Namihana": [
+      {
+        "name": "駅前",
+        "lat": 35.22264,
+        "lng": 140.37914
+      }
+    ],
+    "Onjuku": [
+      {
+        "name": "駅前",
+        "lat": 35.18754,
+        "lng": 140.35144
+      }
+    ],
+    "Ubara": [
+      {
+        "name": "駅前",
+        "lat": 35.14125,
+        "lng": 140.27896
+      }
+    ],
+    "Kazusa-Okitsu": [
+      {
+        "name": "駅前",
+        "lat": 35.13722,
+        "lng": 140.25047
+      }
+    ],
+    "Namegawa-Island": [
+      {
+        "name": "駅前",
+        "lat": 35.11826,
+        "lng": 140.22571
+      }
+    ],
+    "Awa-Kominato": [
+      {
+        "name": "駅前",
+        "lat": 35.12864,
+        "lng": 140.18977
+      }
+    ],
+    "Awa-Amatsu": [
+      {
+        "name": "駅前",
+        "lat": 35.12579,
+        "lng": 140.15474
+      }
+    ],
+    "Nogi": [
+      {
+        "name": "駅前",
+        "lat": 36.2299,
+        "lng": 139.7348
+      }
+    ],
+    "Natori": [
+      {
+        "name": "駅前",
+        "lat": 38.1731,
+        "lng": 140.88275
+      }
+    ],
+    "Minami-Sendai": [
+      {
+        "name": "駅前",
+        "lat": 38.19722,
+        "lng": 140.8833
+      }
+    ],
+    "Taishido": [
+      {
+        "name": "駅前",
+        "lat": 38.21774,
+        "lng": 140.88373
+      }
+    ],
+    "Nagamachi": [
+      {
+        "name": "駅前",
+        "lat": 38.22696,
+        "lng": 140.88616
+      }
+    ],
+    "Atago-2": [
+      {
+        "name": "駅前",
+        "lat": 35.95062,
+        "lng": 139.86462
+      }
+    ],
+    "Shimo-Itabashi": [
+      {
+        "name": "駅前",
+        "lat": 35.74507,
+        "lng": 139.71562
+      }
+    ],
+    "Ooyama": [
+      {
+        "name": "駅前",
+        "lat": 35.74841,
+        "lng": 139.70262
+      }
+    ],
+    "Tokiwadai": [
+      {
+        "name": "駅前",
+        "lat": 35.7589,
+        "lng": 139.68876
+      }
+    ],
+    "Shiki": [
+      {
+        "name": "駅前",
+        "lat": 35.82217,
+        "lng": 139.5753
+      }
+    ],
+    "Kawagoeshi": [
+      {
+        "name": "駅前",
+        "lat": 35.91414,
+        "lng": 139.4771
+      }
+    ],
+    "Kasumigaseki-Tojo": [
+      {
+        "name": "駅前",
+        "lat": 35.92546,
+        "lng": 139.44385
+      }
+    ],
+    "Wakaba": [
+      {
+        "name": "駅前",
+        "lat": 35.94907,
+        "lng": 139.40848
+      }
+    ],
+    "Obusuma": [
+      {
+        "name": "駅前",
+        "lat": 36.10786,
+        "lng": 139.234
+      }
+    ],
+    "Hachigata": [
+      {
+        "name": "駅前",
+        "lat": 36.11372,
+        "lng": 139.20863
+      }
+    ],
+    "Numabe": [
+      {
+        "name": "駅前",
+        "lat": 35.582398,
+        "lng": 139.673246
+      }
+    ],
+    "Unoki": [
+      {
+        "name": "駅前",
+        "lat": 35.575263,
+        "lng": 139.680629
+      }
+    ],
+    "Shimomaruko": [
+      {
+        "name": "駅前",
+        "lat": 35.571169,
+        "lng": 139.685759
+      }
+    ],
+    "Musashi-Shintada": [
+      {
+        "name": "駅前",
+        "lat": 35.567942,
+        "lng": 139.692265
+      }
+    ],
+    "Yaguchi-Watari": [
+      {
+        "name": "駅前",
+        "lat": 35.562017,
+        "lng": 139.700086
+      }
+    ],
+    "Misato-Chuo": [
+      {
+        "name": "駅前",
+        "lat": 35.82417,
+        "lng": 139.87806
+      }
+    ],
+    "Minami-Nagase": [
+      {
+        "name": "駅前",
+        "lat": 35.83784,
+        "lng": 139.90423
+      }
+    ],
+    "Nagase-Otakanomori": [
+      {
+        "name": "駅前",
+        "lat": 35.87186,
+        "lng": 139.92506
+      }
+    ],
+    "Mirai-Daira": [
+      {
+        "name": "駅前",
+        "lat": 35.99475,
+        "lng": 140.03831
+      }
+    ],
+    "Midori-No": [
+      {
+        "name": "駅前",
+        "lat": 36.02994,
+        "lng": 140.05625
+      }
+    ],
+    "Banpaku-Kinen-Kouen": [
+      {
+        "name": "駅前",
+        "lat": 36.05847,
+        "lng": 140.05944
+      }
+    ],
+    "Kenkyu-Gaku": [
+      {
+        "name": "駅前",
+        "lat": 36.08217,
+        "lng": 140.08239
+      }
+    ],
+    "Anegasaki": [
+      {
+        "name": "駅前",
+        "lat": 35.47863,
+        "lng": 140.0419
+      }
+    ],
+    "Nagaura": [
+      {
+        "name": "駅前",
+        "lat": 35.45028,
+        "lng": 139.99542
+      }
+    ],
+    "Kimitsu": [
+      {
+        "name": "駅前",
+        "lat": 35.33359,
+        "lng": 139.89572
+      }
+    ],
+    "Aohori": [
+      {
+        "name": "駅前",
+        "lat": 35.33056,
+        "lng": 139.85888
+      }
+    ],
+    "Sanukimachi": [
+      {
+        "name": "駅前",
+        "lat": 35.25998,
+        "lng": 139.87614
+      }
+    ],
+    "Kazusa-Minato": [
+      {
+        "name": "駅前",
+        "lat": 35.22183,
+        "lng": 139.871
+      }
+    ],
+    "Takeoka": [
+      {
+        "name": "駅前",
+        "lat": 35.19759,
+        "lng": 139.83003
+      }
+    ],
+    "Hamakanaya": [
+      {
+        "name": "駅前",
+        "lat": 35.1682,
+        "lng": 139.82226
+      }
+    ],
+    "Hota": [
+      {
+        "name": "駅前",
+        "lat": 35.14146,
+        "lng": 139.83816
+      }
+    ],
+    "Awa-Katsuyama": [
+      {
+        "name": "駅前",
+        "lat": 35.11406,
+        "lng": 139.83341
+      }
+    ],
+    "Iwai": [
+      {
+        "name": "駅前",
+        "lat": 35.09305,
+        "lng": 139.84987
+      }
+    ],
+    "Nako-Funakata": [
+      {
+        "name": "駅前",
+        "lat": 35.02904,
+        "lng": 139.8514
+      }
+    ],
+    "Tateyama": [
+      {
+        "name": "駅前",
+        "lat": 34.99592,
+        "lng": 139.86199
+      }
+    ],
+    "Kokonoe": [
+      {
+        "name": "駅前",
+        "lat": 34.99752,
+        "lng": 139.9114
+      }
+    ],
+    "Chikura": [
+      {
+        "name": "駅前",
+        "lat": 34.97686,
+        "lng": 139.95452
+      }
+    ],
+    "Chitose": [
+      {
+        "name": "駅前",
+        "lat": 34.99135,
+        "lng": 139.96628
+      }
+    ],
+    "Minamihara": [
+      {
+        "name": "駅前",
+        "lat": 35.0212,
+        "lng": 139.97907
+      }
+    ],
+    "Wadaura": [
+      {
+        "name": "駅前",
+        "lat": 35.04171,
+        "lng": 140.01961
+      }
+    ],
+    "Emi": [
+      {
+        "name": "駅前",
+        "lat": 35.0625,
+        "lng": 140.06114
+      }
+    ],
+    "Futomi": [
+      {
+        "name": "駅前",
+        "lat": 35.08148,
+        "lng": 140.09623
+      }
+    ],
+    "Mibu": [
+      {
+        "name": "駅前",
+        "lat": 36.42243,
+        "lng": 139.80501
+      }
+    ],
+    "Kuniya": [
+      {
+        "name": "駅前",
+        "lat": 36.45145,
+        "lng": 139.82385
+      }
+    ],
+    "Osawa-Yamagata": [
+      {
+        "name": "駅前",
+        "lat": 37.02123,
+        "lng": 138.82133
+      }
+    ],
+    "Nakagawa": [
+      {
+        "name": "駅前",
+        "lat": 35.562659,
+        "lng": 139.570296
+      }
+    ],
+    "Nakayama": [
+      {
+        "name": "駅前",
+        "lat": 35.515143,
+        "lng": 139.540439
+      }
+    ],
+    "Kawawachi": [
+      {
+        "name": "駅前",
+        "lat": 35.528382,
+        "lng": 139.549265
+      }
+    ],
+    "Kita-Yamata": [
+      {
+        "name": "駅前",
+        "lat": 35.56095,
+        "lng": 139.592827
+      }
+    ],
+    "Higashi-Yamata": [
+      {
+        "name": "駅前",
+        "lat": 35.554184,
+        "lng": 139.604928
+      }
+    ],
+    "Takada": [
+      {
+        "name": "駅前",
+        "lat": 35.549594,
+        "lng": 139.620231
+      }
+    ],
+    "Hiyoshi-Honcho": [
+      {
+        "name": "駅前",
+        "lat": 35.549961,
+        "lng": 139.633413
+      }
+    ],
+    "Narushima-Yonezawa": [
+      {
+        "name": "駅前",
+        "lat": 36.24908,
+        "lng": 139.50557
+      }
+    ],
+    "Shin-Sakuradai": [
+      {
+        "name": "駅前",
+        "lat": 35.7407,
+        "lng": 139.66829
+      }
+    ],
+    "Minami-Shinjuku": [
+      {
+        "name": "駅前",
+        "lat": 35.68347,
+        "lng": 139.69851
+      }
+    ],
+    "Higashi-Kitazawa": [
+      {
+        "name": "駅前",
+        "lat": 35.6656,
+        "lng": 139.67322
+      }
+    ],
+    "Ikuta": [
+      {
+        "name": "駅前",
+        "lat": 35.61501,
+        "lng": 139.54221
+      }
+    ],
+    "Odakyu-Sagamihara": [
+      {
+        "name": "駅前",
+        "lat": 35.51513,
+        "lng": 139.4226
+      }
+    ],
+    "Shibusawa": [
+      {
+        "name": "駅前",
+        "lat": 35.37415,
+        "lng": 139.18451
+      }
+    ],
+    "Koremasa": [
+      {
+        "name": "駅前",
+        "lat": 35.65631,
+        "lng": 139.48876
+      }
+    ],
+    "Kyoteijo-mae": [
+      {
+        "name": "駅前",
+        "lat": 35.65608,
+        "lng": 139.49957
+      }
+    ],
+    "Shiroitai": [
+      {
+        "name": "駅前",
+        "lat": 35.6665,
+        "lng": 139.50986
+      }
+    ],
+    "Yagyu": [
+      {
+        "name": "駅前",
+        "lat": 36.20659,
+        "lng": 139.65995
+      }
+    ],
+    "Itakura-Toyodai-Mae": [
+      {
+        "name": "駅前",
+        "lat": 36.2222,
+        "lng": 139.64862
+      }
+    ],
+    "Fujioka": [
+      {
+        "name": "駅前",
+        "lat": 36.25559,
+        "lng": 139.6456
+      }
+    ],
+    "Shizuwa": [
+      {
+        "name": "駅前",
+        "lat": 36.31653,
+        "lng": 139.68493
+      }
+    ],
+    "Shin-Ohira-Shita": [
+      {
+        "name": "駅前",
+        "lat": 36.33897,
+        "lng": 139.70187
+      }
+    ],
+    "Kassenba": [
+      {
+        "name": "駅前",
+        "lat": 36.40758,
+        "lng": 139.74102
+      }
+    ],
+    "Ienaka": [
+      {
+        "name": "駅前",
+        "lat": 36.42979,
+        "lng": 139.74745
+      }
+    ],
+    "Tobu-Kanasaki": [
+      {
+        "name": "駅前",
+        "lat": 36.4663,
+        "lng": 139.74948
+      }
+    ],
+    "Niregi": [
+      {
+        "name": "駅前",
+        "lat": 36.50688,
+        "lng": 139.74527
+      }
+    ],
+    "Shin-Kanuma": [
+      {
+        "name": "駅前",
+        "lat": 36.55683,
+        "lng": 139.74478
+      }
+    ],
+    "Kita-Kanuma": [
+      {
+        "name": "駅前",
+        "lat": 36.58068,
+        "lng": 139.73776
+      }
+    ],
+    "Itaga": [
+      {
+        "name": "駅前",
+        "lat": 36.6194,
+        "lng": 139.70778
+      }
+    ],
+    "Shimo-Goshiro": [
+      {
+        "name": "駅前",
+        "lat": 36.65111,
+        "lng": 139.71395
+      }
+    ],
+    "Tobu-Nikko": [
+      {
+        "name": "駅前",
+        "lat": 36.74809,
+        "lng": 139.61993
+      }
+    ],
+    "Higashi-Mukojima": [
+      {
+        "name": "駅前",
+        "lat": 35.72436,
+        "lng": 139.81933
+      }
+    ],
+    "Kamoi": [
+      {
+        "name": "駅前",
+        "lat": 35.51085,
+        "lng": 139.56695
+      }
+    ],
+    "Tokaichiba": [
+      {
+        "name": "駅前",
+        "lat": 35.52626,
+        "lng": 139.5165
+      }
+    ],
+    "Kobuchi": [
+      {
+        "name": "駅前",
+        "lat": 35.55598,
+        "lng": 139.41924
+      }
+    ],
+    "Fuchinobe": [
+      {
+        "name": "駅前",
+        "lat": 35.56836,
+        "lng": 139.3956
+      }
+    ],
+    "Shimo-shimmei": [
+      {
+        "name": "駅前",
+        "lat": 35.608815,
+        "lng": 139.726303
+      }
+    ],
+    "Ebara-machi": [
+      {
+        "name": "駅前",
+        "lat": 35.603771,
+        "lng": 139.707904
+      }
+    ],
+    "Kita-senzoku": [
+      {
+        "name": "駅前",
+        "lat": 35.606322,
+        "lng": 139.693215
+      }
+    ],
+    "Midorigaoka": [
+      {
+        "name": "駅前",
+        "lat": 35.606455,
+        "lng": 139.679127
+      }
+    ],
+    "Kuhombutsu": [
+      {
+        "name": "駅前",
+        "lat": 35.605339,
+        "lng": 139.661468
+      }
+    ],
+    "Todoroki": [
+      {
+        "name": "駅前",
+        "lat": 35.608463,
+        "lng": 139.647552
+      }
+    ],
+    "Nishi-koyama": [
+      {
+        "name": "駅前",
+        "lat": 35.615743,
+        "lng": 139.698888
+      }
+    ],
+    "Osaki-hirokoji": [
+      {
+        "name": "駅前",
+        "lat": 35.622722,
+        "lng": 139.722711
+      }
+    ],
+    "Togoshi-ginza": [
+      {
+        "name": "駅前",
+        "lat": 35.615775,
+        "lng": 139.714764
+      }
+    ],
+    "Ebara-nakanobu": [
+      {
+        "name": "駅前",
+        "lat": 35.610001,
+        "lng": 139.711985
+      }
+    ],
+    "Nagahara": [
+      {
+        "name": "駅前",
+        "lat": 35.602201,
+        "lng": 139.697689
+      }
+    ],
+    "Senzoku-ike": [
+      {
+        "name": "駅前",
+        "lat": 35.599929,
+        "lng": 139.691409
+      }
+    ],
+    "Ontakesan": [
+      {
+        "name": "駅前",
+        "lat": 35.585344,
+        "lng": 139.682156
+      }
+    ],
+    "Chidoricho": [
+      {
+        "name": "駅前",
+        "lat": 35.57278,
+        "lng": 139.691558
+      }
+    ],
+    "Hasunuma": [
+      {
+        "name": "駅前",
+        "lat": 35.564387,
+        "lng": 139.708594
+      }
+    ],
+    "Nishi-taishido": [
+      {
+        "name": "駅前",
+        "lat": 35.644844,
+        "lng": 139.666036
+      }
+    ],
+    "Wakabayashi": [
+      {
+        "name": "駅前",
+        "lat": 35.646,
+        "lng": 139.659886
+      }
+    ],
+    "Shoin-jinja-mae": [
+      {
+        "name": "駅前",
+        "lat": 35.643998,
+        "lng": 139.655242
+      }
+    ],
+    "Yamashita": [
+      {
+        "name": "駅前",
+        "lat": 35.65394,
+        "lng": 139.64659
+      }
+    ],
+    "Kodomo-no-kuni": [
+      {
+        "name": "駅前",
+        "lat": 35.558366,
+        "lng": 139.486418
+      }
+    ],
+    "Moro": [
+      {
+        "name": "駅前",
+        "lat": 35.94074,
+        "lng": 139.30934
+      }
+    ],
+    "Myokaku": [
+      {
+        "name": "駅前",
+        "lat": 36.00356,
+        "lng": 139.28922
+      }
+    ],
+    "Takezawa": [
+      {
+        "name": "駅前",
+        "lat": 36.0755,
+        "lng": 139.22995
+      }
+    ],
+    "Orihara": [
+      {
+        "name": "駅前",
+        "lat": 36.09618,
+        "lng": 139.19532
+      }
+    ],
+    "Yodo": [
+      {
+        "name": "駅前",
+        "lat": 36.15385,
+        "lng": 139.20064
+      }
+    ],
+    "Matsuhisa": [
+      {
+        "name": "駅前",
+        "lat": 36.17306,
+        "lng": 139.1821
+      }
+    ],
+    "Gumma-Fujioka": [
+      {
+        "name": "駅前",
+        "lat": 36.25032,
+        "lng": 139.08346
+      }
+    ],
+    "Kita-Fujioka": [
+      {
+        "name": "駅前",
+        "lat": 36.28212,
+        "lng": 139.08145
+      }
+    ],
+    "Minami-Makigahara": [
+      {
+        "name": "駅前",
+        "lat": 35.45234,
+        "lng": 139.52636
+      }
+    ],
+    "Ryokuen-Toshi": [
+      {
+        "name": "駅前",
+        "lat": 35.43932,
+        "lng": 139.52198
+      }
+    ],
+    "Yayoidai": [
+      {
+        "name": "駅前",
+        "lat": 35.42974,
+        "lng": 139.50647
+      }
+    ],
+    "Izumino": [
+      {
+        "name": "駅前",
+        "lat": 35.42926,
+        "lng": 139.495
+      }
+    ],
+    "Izumi-Chuo": [
+      {
+        "name": "駅前",
+        "lat": 35.41505,
+        "lng": 139.48727
+      }
+    ],
+    "Yumegaoka": [
+      {
+        "name": "駅前",
+        "lat": 35.40546,
+        "lng": 139.48244
+      }
+    ],
+    "Tennozu Isle": [
+      {
+        "name": "駅前",
+        "lat": 35.62038,
+        "lng": 139.75084
+      }
+    ],
+    "Minami-Shisui": [
+      {
+        "name": "駅前",
+        "lat": 35.7043,
+        "lng": 140.26794
+      }
+    ],
+    "Enokido": [
+      {
+        "name": "駅前",
+        "lat": 35.68408,
+        "lng": 140.28812
+      }
+    ],
+    "Hyuga": [
+      {
+        "name": "駅前",
+        "lat": 35.6283,
+        "lng": 140.36243
+      }
+    ],
+    "Naruto": [
+      {
+        "name": "駅前",
+        "lat": 35.60854,
+        "lng": 140.41028
+      }
+    ],
+    "Matsuo": [
+      {
+        "name": "駅前",
+        "lat": 35.63636,
+        "lng": 140.45808
+      }
+    ],
+    "Iikura": [
+      {
+        "name": "駅前",
+        "lat": 35.68509,
+        "lng": 140.52142
+      }
+    ],
+    "Higata": [
+      {
+        "name": "駅前",
+        "lat": 35.71834,
+        "lng": 140.60331
+      }
+    ],
+    "Asahi": [
+      {
+        "name": "駅前",
+        "lat": 35.72184,
+        "lng": 140.65469
+      }
+    ],
+    "Iioka": [
+      {
+        "name": "駅前",
+        "lat": 35.72938,
+        "lng": 140.68335
+      }
+    ],
+    "Kurahashi": [
+      {
+        "name": "駅前",
+        "lat": 35.73776,
+        "lng": 140.71399
+      }
+    ],
+    "Saruda": [
+      {
+        "name": "駅前",
+        "lat": 35.74735,
+        "lng": 140.73736
+      }
+    ],
+    "Fujino": [
+      {
+        "name": "駅前",
+        "lat": 35.616,
+        "lng": 139.15133
+      }
+    ],
+    "Shiotsu": [
+      {
+        "name": "駅前",
+        "lat": 35.61414,
+        "lng": 139.07366
+      }
+    ],
+    "Yanagawa": [
+      {
+        "name": "駅前",
+        "lat": 35.60626,
+        "lng": 139.0373
+      }
+    ],
+    "Torisawa": [
+      {
+        "name": "駅前",
+        "lat": 35.60804,
+        "lng": 139.00348
+      }
+    ],
+    "Hatsukari": [
+      {
+        "name": "駅前",
+        "lat": 35.59437,
+        "lng": 138.88374
+      }
+    ],
+    "Sasago": [
+      {
+        "name": "駅前",
+        "lat": 35.60399,
+        "lng": 138.82536
+      }
+    ],
+    "Kai-Yamato": [
+      {
+        "name": "駅前",
+        "lat": 35.63934,
+        "lng": 138.78162
+      }
+    ],
+    "Higashi-Yamanashi": [
+      {
+        "name": "駅前",
+        "lat": 35.69434,
+        "lng": 138.70306
+      }
+    ],
+    "Kasugai-cho": [
+      {
+        "name": "駅前",
+        "lat": 35.67346,
+        "lng": 138.65898
+      }
+    ],
+    "Isawa-Onsen": [
+      {
+        "name": "駅前",
+        "lat": 35.65752,
+        "lng": 138.63448
+      }
+    ],
+    "Nirasaki": [
+      {
+        "name": "駅前",
+        "lat": 35.70956,
+        "lng": 138.4514
+      }
+    ],
+    "Shinpu": [
+      {
+        "name": "駅前",
+        "lat": 35.73687,
+        "lng": 138.43314
+      }
+    ],
+    "Anayama": [
+      {
+        "name": "駅前",
+        "lat": 35.75105,
+        "lng": 138.41389
+      }
+    ],
+    "Hinoharu": [
+      {
+        "name": "駅前",
+        "lat": 35.7907,
+        "lng": 138.39429
+      }
+    ],
+    "Nagasaka": [
+      {
+        "name": "駅前",
+        "lat": 35.82714,
+        "lng": 138.3665
+      }
+    ],
+    "Shinano-Sakai": [
+      {
+        "name": "駅前",
+        "lat": 35.88496,
+        "lng": 138.27546
+      }
+    ],
+    "Suzurannosato": [
+      {
+        "name": "駅前",
+        "lat": 35.9304,
+        "lng": 138.2118
+      }
+    ],
+    "Aoyagi": [
+      {
+        "name": "駅前",
+        "lat": 35.94278,
+        "lng": 138.19746
+      }
+    ],
+    "Shimo-Suwa": [
+      {
+        "name": "駅前",
+        "lat": 36.07196,
+        "lng": 138.085
+      }
+    ],
+    "Okaya": [
+      {
+        "name": "駅前",
+        "lat": 36.05676,
+        "lng": 138.04512
+      }
+    ],
+    "Midoriko": [
+      {
+        "name": "駅前",
+        "lat": 36.09426,
+        "lng": 137.98197
+      }
+    ],
+    "Kamonomiya": [
+      {
+        "name": "駅前",
+        "lat": 35.27573,
+        "lng": 139.18016
+      }
+    ],
+    "Hayakawa": [
+      {
+        "name": "駅前",
+        "lat": 35.23872,
+        "lng": 139.145
+      }
+    ],
+    "Nebukawa": [
+      {
+        "name": "駅前",
+        "lat": 35.20258,
+        "lng": 139.13863
+      }
+    ],
+    "Manazuru": [
+      {
+        "name": "駅前",
+        "lat": 35.15692,
+        "lng": 139.13225
+      }
+    ],
+    "Yugawara": [
+      {
+        "name": "駅前",
+        "lat": 35.14612,
+        "lng": 139.1022
+      }
+    ],
+    "Toro": [
+      {
+        "name": "駅前",
+        "lat": 35.93192,
+        "lng": 139.6322
+      }
+    ],
+    "Higashi-Omiya": [
+      {
+        "name": "駅前",
+        "lat": 35.94836,
+        "lng": 139.64026
+      }
+    ],
+    "Shin-Shiraoka": [
+      {
+        "name": "駅前",
+        "lat": 36.03825,
+        "lng": 139.67189
+      }
+    ],
+    "Higashi-Washinomiya": [
+      {
+        "name": "駅前",
+        "lat": 36.08964,
+        "lng": 139.6797
+      }
+    ],
+    "Koga": [
+      {
+        "name": "駅前",
+        "lat": 36.19442,
+        "lng": 139.70972
+      }
+    ],
+    "Mamada": [
+      {
+        "name": "駅前",
+        "lat": 36.2579,
+        "lng": 139.7611
+      }
+    ],
+    "Jichi-Ikaidaigaku": [
+      {
+        "name": "駅前",
+        "lat": 36.39538,
+        "lng": 139.85452
+      }
+    ],
+    "Ishibashi": [
+      {
+        "name": "駅前",
+        "lat": 36.43624,
+        "lng": 139.86651
+      }
+    ],
+    "Suzumenomiya": [
+      {
+        "name": "駅前",
+        "lat": 36.4939,
+        "lng": 139.87708
+      }
+    ],
+    "Okamoto": [
+      {
+        "name": "駅前",
+        "lat": 36.59826,
+        "lng": 139.94425
+      }
+    ],
+    "Ujiie": [
+      {
+        "name": "駅前",
+        "lat": 36.68169,
+        "lng": 139.9621
+      }
+    ],
+    "Kabasaka": [
+      {
+        "name": "駅前",
+        "lat": 36.72074,
+        "lng": 139.9504
+      }
+    ],
+    "Kataoka": [
+      {
+        "name": "駅前",
+        "lat": 36.75468,
+        "lng": 139.94554
+      }
+    ],
+    "Yaida": [
+      {
+        "name": "駅前",
+        "lat": 36.80662,
+        "lng": 139.93298
+      }
+    ],
+    "Nozaki": [
+      {
+        "name": "駅前",
+        "lat": 36.84381,
+        "lng": 139.9581
+      }
+    ],
+    "Nasu-Shiobara": [
+      {
+        "name": "駅前",
+        "lat": 36.93154,
+        "lng": 140.02106
+      }
+    ],
+    "Umi-Shibaura": [
+      {
+        "name": "駅前",
+        "lat": 35.48613,
+        "lng": 139.70068
+      }
+    ],
+    "Okawa": [
+      {
+        "name": "駅前",
+        "lat": 35.4954,
+        "lng": 139.71138
+      }
+    ],
+    "Kandatsu": [
+      {
+        "name": "駅前",
+        "lat": 36.12043,
+        "lng": 140.24861
+      }
+    ],
+    "Takahama": [
+      {
+        "name": "駅前",
+        "lat": 36.1635,
+        "lng": 140.29448
+      }
+    ],
+    "Uchihara": [
+      {
+        "name": "駅前",
+        "lat": 36.37004,
+        "lng": 140.35263
+      }
+    ],
+    "Tokai": [
+      {
+        "name": "駅前",
+        "lat": 36.4655,
+        "lng": 140.56604
+      }
+    ],
+    "Omika": [
+      {
+        "name": "駅前",
+        "lat": 36.51292,
+        "lng": 140.61944
+      }
+    ],
+    "Takahagi": [
+      {
+        "name": "駅前",
+        "lat": 36.71434,
+        "lng": 140.71696
+      }
+    ],
+    "Minami-Nakago": [
+      {
+        "name": "駅前",
+        "lat": 36.75332,
+        "lng": 140.72906
+      }
+    ],
+    "Nakoso": [
+      {
+        "name": "駅前",
+        "lat": 36.88363,
+        "lng": 140.78663
+      }
+    ],
+    "Ueda": [
+      {
+        "name": "駅前",
+        "lat": 36.92049,
+        "lng": 140.79648
+      }
+    ],
+    "Izumi": [
+      {
+        "name": "駅前",
+        "lat": 36.95558,
+        "lng": 140.85408
+      }
+    ],
+    "Uchigo": [
+      {
+        "name": "駅前",
+        "lat": 37.03599,
+        "lng": 140.85494
+      }
+    ],
+    "Kusano": [
+      {
+        "name": "駅前",
+        "lat": 37.07385,
+        "lng": 140.94725
+      }
+    ],
+    "Hisanohama": [
+      {
+        "name": "駅前",
+        "lat": 37.14247,
+        "lng": 140.99578
+      }
+    ],
+    "Suetsugi": [
+      {
+        "name": "駅前",
+        "lat": 37.17214,
+        "lng": 140.99565
+      }
+    ],
+    "Hirono": [
+      {
+        "name": "駅前",
+        "lat": 37.21155,
+        "lng": 140.99881
+      }
+    ],
+    "Kido": [
+      {
+        "name": "駅前",
+        "lat": 37.25799,
+        "lng": 141.00253
+      }
+    ],
+    "Tomioka": [
+      {
+        "name": "駅前",
+        "lat": 37.33405,
+        "lng": 141.02274
+      }
+    ],
+    "Ono-Fukushima": [
+      {
+        "name": "駅前",
+        "lat": 37.40932,
+        "lng": 140.9842
+      }
+    ],
+    "Namie": [
+      {
+        "name": "駅前",
+        "lat": 37.49222,
+        "lng": 140.98978
+      }
+    ],
+    "Momouchi": [
+      {
+        "name": "駅前",
+        "lat": 37.52866,
+        "lng": 140.98437
+      }
+    ],
+    "Odaka": [
+      {
+        "name": "駅前",
+        "lat": 37.56298,
+        "lng": 140.99636
+      }
+    ],
+    "Iwaki-Ota": [
+      {
+        "name": "駅前",
+        "lat": 37.60507,
+        "lng": 140.99151
+      }
+    ],
+    "Nittaki": [
+      {
+        "name": "駅前",
+        "lat": 37.75613,
+        "lng": 140.93466
+      }
+    ],
+    "Soma": [
+      {
+        "name": "駅前",
+        "lat": 37.8025,
+        "lng": 140.92571
+      }
+    ],
+    "Komagamine": [
+      {
+        "name": "駅前",
+        "lat": 37.84214,
+        "lng": 140.9251
+      }
+    ],
+    "Shinchi": [
+      {
+        "name": "駅前",
+        "lat": 37.87922,
+        "lng": 140.92564
+      }
+    ],
+    "Sakamoto": [
+      {
+        "name": "駅前",
+        "lat": 37.92408,
+        "lng": 140.90105
+      }
+    ],
+    "Yamashita-Miyagi": [
+      {
+        "name": "駅前",
+        "lat": 37.96632,
+        "lng": 140.88898
+      }
+    ],
+    "Hamayoshida": [
+      {
+        "name": "駅前",
+        "lat": 38.00222,
+        "lng": 140.89008
+      }
+    ],
+    "Okuma": [
+      {
+        "name": "駅前",
+        "lat": 38.06762,
+        "lng": 140.85475
+      }
+    ],
+    "Kioroshi": [
+      {
+        "name": "駅前",
+        "lat": 35.83888,
+        "lng": 140.14799
+      }
+    ],
+    "Kobayashi": [
+      {
+        "name": "駅前",
+        "lat": 35.83074,
+        "lng": 140.1931
+      }
+    ],
+    "Shin-Mikawashima": [
+      {
+        "name": "駅前",
+        "lat": 35.73722222,
+        "lng": 139.77388889
+      }
+    ],
+    "Ohanajaya": [
+      {
+        "name": "駅前",
+        "lat": 35.74758333,
+        "lng": 139.84016667
+      }
+    ],
+    "Keisei-Koiwa": [
+      {
+        "name": "駅前",
+        "lat": 35.74208333,
+        "lng": 139.88386111
+      }
+    ],
+    "Edogawa": [
+      {
+        "name": "駅前",
+        "lat": 35.73772222,
+        "lng": 139.896225
+      }
+    ],
+    "Konodai": [
+      {
+        "name": "駅前",
+        "lat": 35.73639167,
+        "lng": 139.90295556
+      }
+    ],
+    "Ichikawa-Mama": [
+      {
+        "name": "駅前",
+        "lat": 35.73141667,
+        "lng": 139.91127778
+      }
+    ],
+    "Keisei-Yawata": [
+      {
+        "name": "駅前",
+        "lat": 35.72386667,
+        "lng": 139.92805833
+      }
+    ],
+    "Higashi-Nakayama": [
+      {
+        "name": "駅前",
+        "lat": 35.71441389,
+        "lng": 139.95286944
+      }
+    ],
+    "Kaijin": [
+      {
+        "name": "駅前",
+        "lat": 35.70591667,
+        "lng": 139.97183333
+      }
+    ],
+    "Keisei-Funabashi": [
+      {
+        "name": "駅前",
+        "lat": 35.70013889,
+        "lng": 139.98547222
+      }
+    ],
+    "Daijingushita": [
+      {
+        "name": "駅前",
+        "lat": 35.694,
+        "lng": 139.99138889
+      }
+    ],
+    "Funabashi-Keibajo": [
+      {
+        "name": "駅前",
+        "lat": 35.68975278,
+        "lng": 139.99793611
+      }
+    ],
+    "Yatsu": [
+      {
+        "name": "駅前",
+        "lat": 35.68530556,
+        "lng": 140.00755556
+      }
+    ],
+    "Keisei-Tsudanuma": [
+      {
+        "name": "駅前",
+        "lat": 35.68361111,
+        "lng": 140.02444444
+      }
+    ],
+    "Keisei-Ohkubo": [
+      {
+        "name": "駅前",
+        "lat": 35.68588889,
+        "lng": 140.048
+      }
+    ],
+    "Mimomi": [
+      {
+        "name": "駅前",
+        "lat": 35.68688889,
+        "lng": 140.06844444
+      }
+    ],
+    "Yachiyodai": [
+      {
+        "name": "駅前",
+        "lat": 35.70141667,
+        "lng": 140.09086111
+      }
+    ],
+    "Katsutadai": [
+      {
+        "name": "駅前",
+        "lat": 35.71536111,
+        "lng": 140.12630556
+      }
+    ],
+    "Shizu": [
+      {
+        "name": "駅前",
+        "lat": 35.71745556,
+        "lng": 140.14499444
+      }
+    ],
+    "Keisei-Usui": [
+      {
+        "name": "駅前",
+        "lat": 35.72991667,
+        "lng": 140.18072222
+      }
+    ],
+    "Keisei-Sakura": [
+      {
+        "name": "駅前",
+        "lat": 35.72518333,
+        "lng": 140.22970556
+      }
+    ],
+    "Sogo-Sando": [
+      {
+        "name": "駅前",
+        "lat": 35.75266667,
+        "lng": 140.28097222
+      }
+    ],
+    "Kozu-no-Mori": [
+      {
+        "name": "駅前",
+        "lat": 35.76047222,
+        "lng": 140.29513889
+      }
+    ],
+    "Keisei-Narita": [
+      {
+        "name": "駅前",
+        "lat": 35.77675,
+        "lng": 140.31563889
+      }
+    ],
+    "Airport-Terminal-2": [
+      {
+        "name": "駅前",
+        "lat": 35.77296667,
+        "lng": 140.38763889
+      }
+    ],
+    "Tsurugamine": [
+      {
+        "name": "駅前",
+        "lat": 35.47491667,
+        "lng": 139.54925
+      }
+    ],
+    "Kibogaoka": [
+      {
+        "name": "駅前",
+        "lat": 35.46041667,
+        "lng": 139.51427778
+      }
+    ],
+    "Akai": [
+      {
+        "name": "駅前",
+        "lat": 37.08097222,
+        "lng": 140.86622222
+      }
+    ],
+    "Oguni": [
+      {
+        "name": "駅前",
+        "lat": 37.12683333,
+        "lng": 140.86236111
+      }
+    ],
+    "Kawamae": [
+      {
+        "name": "駅前",
+        "lat": 37.20608333,
+        "lng": 140.74972222
+      }
+    ],
+    "Natsui": [
+      {
+        "name": "駅前",
+        "lat": 37.25305556,
+        "lng": 140.6625
+      }
+    ],
+    "Ono-Niimachi": [
+      {
+        "name": "駅前",
+        "lat": 37.27519444,
+        "lng": 140.63677778
+      }
+    ],
+    "Kommata": [
+      {
+        "name": "駅前",
+        "lat": 37.32416667,
+        "lng": 140.6595
+      }
+    ],
+    "Miharu": [
+      {
+        "name": "駅前",
+        "lat": 37.44983333,
+        "lng": 140.47927778
+      }
+    ],
+    "Koriyama-Tomita": [
+      {
+        "name": "駅前",
+        "lat": 37.42036111,
+        "lng": 140.3695
+      }
+    ],
+    "Kikuta": [
+      {
+        "name": "駅前",
+        "lat": 37.4517,
+        "lng": 140.34195
+      }
+    ],
+    "Bandai-Atami": [
+      {
+        "name": "駅前",
+        "lat": 37.48081667,
+        "lng": 140.27079167
+      }
+    ],
+    "Nakayama-juku": [
+      {
+        "name": "駅前",
+        "lat": 37.49569167,
+        "lng": 140.21963333
+      }
+    ],
+    "Sekito": [
+      {
+        "name": "駅前",
+        "lat": 37.51565,
+        "lng": 140.14363611
+      }
+    ],
+    "Inawashiro": [
+      {
+        "name": "駅前",
+        "lat": 37.54631389,
+        "lng": 140.10307778
+      }
+    ],
+    "Kawageta": [
+      {
+        "name": "駅前",
+        "lat": 37.53563889,
+        "lng": 140.13689722
+      }
+    ],
+    "Higashi-Nagahara": [
+      {
+        "name": "駅前",
+        "lat": 37.56659444,
+        "lng": 139.94802222
+      }
+    ],
+    "Hirota": [
+      {
+        "name": "駅前",
+        "lat": 37.54917778,
+        "lng": 139.93320556
+      }
+    ],
+    "Bandaimachi": [
+      {
+        "name": "駅前",
+        "lat": 37.55785833,
+        "lng": 139.99321111
+      }
+    ],
+    "Aizu-Wakamatsu": [
+      {
+        "name": "駅前",
+        "lat": 37.50810556,
+        "lng": 139.93023889
+      }
+    ],
+    "Aizu-Takada": [
+      {
+        "name": "駅前",
+        "lat": 37.47063889,
+        "lng": 139.84152778
+      }
+    ],
+    "Aizu-Hongo": [
+      {
+        "name": "駅前",
+        "lat": 37.46347222,
+        "lng": 139.893
+      }
+    ],
+    "Aizu-Nagano": [
+      {
+        "name": "駅前",
+        "lat": 37.21522222,
+        "lng": 139.82386111
+      }
+    ],
+    "Dojima": [
+      {
+        "name": "駅前",
+        "lat": 37.55454722,
+        "lng": 139.91194722
+      }
+    ],
+    "Aizu-Kawaguchi": [
+      {
+        "name": "駅前",
+        "lat": 37.45508333,
+        "lng": 139.52388889
+      }
+    ],
+    "Shiokawa": [
+      {
+        "name": "駅前",
+        "lat": 37.59447778,
+        "lng": 139.887325
+      }
+    ],
+    "Aizu-Toyokawa": [
+      {
+        "name": "駅前",
+        "lat": 37.63319722,
+        "lng": 139.87684167
+      }
+    ],
+    "Aizu-Yanagizu": [
+      {
+        "name": "駅前",
+        "lat": 37.53866667,
+        "lng": 139.72380556
+      }
+    ],
+    "Aizu-Ashizawa": [
+      {
+        "name": "駅前",
+        "lat": 37.48091667,
+        "lng": 139.66147222
+      }
+    ],
+    "Aizu-Hinohara": [
+      {
+        "name": "駅前",
+        "lat": 37.49188889,
+        "lng": 139.67944444
+      }
+    ],
+    "Magoshita": [
+      {
+        "name": "駅前",
+        "lat": 37.73763056,
+        "lng": 139.26066389
+      }
+    ],
+    "Saruwada": [
+      {
+        "name": "駅前",
+        "lat": 37.72970833,
+        "lng": 139.22236667
+      }
+    ],
+    "Gozu": [
+      {
+        "name": "駅前",
+        "lat": 37.73456389,
+        "lng": 139.17959444
+      }
+    ],
+    "Kita-Gozu": [
+      {
+        "name": "駅前",
+        "lat": 37.74660278,
+        "lng": 139.16985278
+      }
+    ],
+    "Niitsu": [
+      {
+        "name": "駅前",
+        "lat": 37.80002778,
+        "lng": 139.12119444
+      }
+    ],
+    "Kashiwazaki": [
+      {
+        "name": "駅前",
+        "lat": 37.36360278,
+        "lng": 138.55571389
+      }
+    ],
+    "Higashi-Kashiwazaki": [
+      {
+        "name": "駅前",
+        "lat": 37.37352222,
+        "lng": 138.56553056
+      }
+    ],
+    "Nishi-Nakanori": [
+      {
+        "name": "駅前",
+        "lat": 37.39261389,
+        "lng": 138.59324444
+      }
+    ],
+    "Arahanai": [
+      {
+        "name": "駅前",
+        "lat": 37.4047,
+        "lng": 138.60179167
+      }
+    ],
+    "Kariwa": [
+      {
+        "name": "駅前",
+        "lat": 37.43,
+        "lng": 138.61955556
+      }
+    ],
+    "Raihai": [
+      {
+        "name": "駅前",
+        "lat": 37.45917778,
+        "lng": 138.66397222
+      }
+    ],
+    "Ishiji": [
+      {
+        "name": "駅前",
+        "lat": 37.48413889,
+        "lng": 138.68827778
+      }
+    ],
+    "Oginokojo": [
+      {
+        "name": "駅前",
+        "lat": 37.51540278,
+        "lng": 138.70398333
+      }
+    ],
+    "Izumozaki": [
+      {
+        "name": "駅前",
+        "lat": 37.53184444,
+        "lng": 138.71622778
+      }
+    ],
+    "Kojidani": [
+      {
+        "name": "駅前",
+        "lat": 37.57447222,
+        "lng": 138.77121667
+      }
+    ],
+    "Teradomari": [
+      {
+        "name": "駅前",
+        "lat": 37.62040556,
+        "lng": 138.81378333
+      }
+    ],
+    "Minami-Yoshida": [
+      {
+        "name": "駅前",
+        "lat": 37.67191944,
+        "lng": 138.87087778
+      }
+    ],
+    "Echigo-Sone": [
+      {
+        "name": "駅前",
+        "lat": 37.793775,
+        "lng": 138.91115
+      }
+    ],
+    "Echigo-Akatsuka": [
+      {
+        "name": "駅前",
+        "lat": 37.81558611,
+        "lng": 138.90781667
+      }
+    ],
+    "Uchino": [
+      {
+        "name": "駅前",
+        "lat": 37.85822222,
+        "lng": 138.93653333
+      }
+    ],
+    "Niigata-Daigaku-mae": [
+      {
+        "name": "駅前",
+        "lat": 37.86929167,
+        "lng": 138.95471111
+      }
+    ],
+    "Terao": [
+      {
+        "name": "駅前",
+        "lat": 37.8792,
+        "lng": 138.974
+      }
+    ],
+    "Kobari": [
+      {
+        "name": "駅前",
+        "lat": 37.88963056,
+        "lng": 138.99134722
+      }
+    ],
+    "Higashi-Noshiro": [
+      {
+        "name": "駅前",
+        "lat": 40.19140278,
+        "lng": 140.065925
+      }
+    ],
+    "Noshiro": [
+      {
+        "name": "駅前",
+        "lat": 40.20655556,
+        "lng": 140.03294444
+      }
+    ],
+    "Mukai-Noshiro": [
+      {
+        "name": "駅前",
+        "lat": 40.22577778,
+        "lng": 140.03927778
+      }
+    ],
+    "Kita-Noshiro": [
+      {
+        "name": "駅前",
+        "lat": 40.25416667,
+        "lng": 140.03358333
+      }
+    ],
+    "Torigata": [
+      {
+        "name": "駅前",
+        "lat": 40.27144444,
+        "lng": 140.03691667
+      }
+    ],
+    "Sawame": [
+      {
+        "name": "駅前",
+        "lat": 40.29602778,
+        "lng": 140.03775
+      }
+    ],
+    "Higashi-Hachimori": [
+      {
+        "name": "駅前",
+        "lat": 40.33213889,
+        "lng": 140.03244444
+      }
+    ],
+    "Hachimori": [
+      {
+        "name": "駅前",
+        "lat": 40.37133333,
+        "lng": 140.01788889
+      }
+    ],
+    "Takinoma": [
+      {
+        "name": "駅前",
+        "lat": 40.37991667,
+        "lng": 140.00225
+      }
+    ],
+    "Akita-Shirakami": [
+      {
+        "name": "駅前",
+        "lat": 40.38661111,
+        "lng": 139.98766667
+      }
+    ],
+    "Iwadate": [
+      {
+        "name": "駅前",
+        "lat": 40.40619444,
+        "lng": 139.96625
+      }
+    ],
+    "Omagoshi": [
+      {
+        "name": "駅前",
+        "lat": 40.49241667,
+        "lng": 139.95005556
+      }
+    ],
+    "Shirakamidake-Tozanguchi": [
+      {
+        "name": "駅前",
+        "lat": 40.51352778,
+        "lng": 139.95033333
+      }
+    ],
+    "Matsukami": [
+      {
+        "name": "駅前",
+        "lat": 40.53513611,
+        "lng": 139.9466
+      }
+    ],
+    "Juniko": [
+      {
+        "name": "駅前",
+        "lat": 40.55156389,
+        "lng": 139.94194444
+      }
+    ],
+    "Mutsu-Iwasaki": [
+      {
+        "name": "駅前",
+        "lat": 40.58334167,
+        "lng": 139.92405833
+      }
+    ],
+    "Mutsu-Sawabe": [
+      {
+        "name": "駅前",
+        "lat": 40.58615,
+        "lng": 139.89520278
+      }
+    ],
+    "Wespa-Tsubakiyama": [
+      {
+        "name": "駅前",
+        "lat": 40.59274167,
+        "lng": 139.87118056
+      }
+    ],
+    "Tomosaki": [
+      {
+        "name": "駅前",
+        "lat": 40.60845,
+        "lng": 139.86487778
+      }
+    ],
+    "Yokoiso": [
+      {
+        "name": "駅前",
+        "lat": 40.62986389,
+        "lng": 139.89099722
+      }
+    ],
+    "Fukaura": [
+      {
+        "name": "駅前",
+        "lat": 40.65020556,
+        "lng": 139.92930556
+      }
+    ],
+    "Hiroto": [
+      {
+        "name": "駅前",
+        "lat": 40.67424722,
+        "lng": 139.95558889
+      }
+    ],
+    "Oirase": [
+      {
+        "name": "駅前",
+        "lat": 40.68603611,
+        "lng": 139.97046111
+      }
+    ],
+    "Todorogi": [
+      {
+        "name": "駅前",
+        "lat": 40.70713889,
+        "lng": 139.98297222
+      }
+    ],
+    "Mutsu-Akaishi": [
+      {
+        "name": "駅前",
+        "lat": 40.76157222,
+        "lng": 140.16215833
+      }
+    ],
+    "Ajigasawa": [
+      {
+        "name": "駅前",
+        "lat": 40.77537778,
+        "lng": 140.22064167
+      }
+    ],
+    "Narusawa": [
+      {
+        "name": "駅前",
+        "lat": 40.78216111,
+        "lng": 140.267525
+      }
+    ],
+    "Koshimizu": [
+      {
+        "name": "駅前",
+        "lat": 40.78726111,
+        "lng": 140.29838333
+      }
+    ],
+    "Tanaka": [
+      {
+        "name": "駅前",
+        "lat": 36.35446944,
+        "lng": 138.32936389
+      }
+    ],
+    "Kizukuri": [
+      {
+        "name": "駅前",
+        "lat": 40.80244722,
+        "lng": 140.38780278
+      }
+    ],
+    "Goshogawara": [
+      {
+        "name": "駅前",
+        "lat": 40.80911111,
+        "lng": 140.44769444
+      }
+    ],
+    "Mutsu-Tsuruda": [
+      {
+        "name": "駅前",
+        "lat": 40.75769444,
+        "lng": 140.43523889
+      }
+    ],
+    "Tsurudomari": [
+      {
+        "name": "駅前",
+        "lat": 40.73642222,
+        "lng": 140.43750278
+      }
+    ],
+    "Itayanagi": [
+      {
+        "name": "駅前",
+        "lat": 40.69746944,
+        "lng": 140.46157778
+      }
+    ],
+    "Hayashizaki": [
+      {
+        "name": "駅前",
+        "lat": 40.67497778,
+        "lng": 140.48052222
+      }
+    ],
+    "Kawabe": [
+      {
+        "name": "駅前",
+        "lat": 40.64661667,
+        "lng": 140.52092222
+      }
+    ],
+    "Hachinohe": [
+      {
+        "name": "駅前",
+        "lat": 40.50944444,
+        "lng": 141.43083333
+      }
+    ],
+    "Hon-Hachinohe": [
+      {
+        "name": "駅前",
+        "lat": 40.5163,
+        "lng": 141.48896111
+      }
+    ],
+    "Shirogane": [
+      {
+        "name": "駅前",
+        "lat": 40.52205,
+        "lng": 141.54195
+      }
+    ],
+    "Same": [
+      {
+        "name": "駅前",
+        "lat": 40.53028889,
+        "lng": 141.55515833
+      }
+    ],
+    "Tanechisa-Kaigan": [
+      {
+        "name": "駅前",
+        "lat": 40.50701667,
+        "lng": 141.607325
+      }
+    ],
+    "Kanahama": [
+      {
+        "name": "駅前",
+        "lat": 40.4762,
+        "lng": 141.637
+      }
+    ],
+    "Taneichi": [
+      {
+        "name": "駅前",
+        "lat": 40.41029722,
+        "lng": 141.71526944
+      }
+    ],
+    "Rikuchu-Yagi": [
+      {
+        "name": "駅前",
+        "lat": 40.345425,
+        "lng": 141.766725
+      }
+    ],
+    "Samuraihama": [
+      {
+        "name": "駅前",
+        "lat": 40.26169722,
+        "lng": 141.76063611
+      }
+    ],
+    "Higashi-Niigata": [
+      {
+        "name": "駅前",
+        "lat": 37.90869444,
+        "lng": 139.10880556
+      }
+    ],
+    "Oogata": [
+      {
+        "name": "駅前",
+        "lat": 37.91566667,
+        "lng": 139.12955556
+      }
+    ],
+    "Niizaki": [
+      {
+        "name": "駅前",
+        "lat": 37.92255556,
+        "lng": 139.15825
+      }
+    ],
+    "Echigo-Tazawa": [
+      {
+        "name": "駅前",
+        "lat": 37.05531389,
+        "lng": 138.69474722
+      }
+    ],
+    "Tokamachi": [
+      {
+        "name": "駅前",
+        "lat": 37.13486944,
+        "lng": 138.75668333
+      }
+    ],
+    "Kogota": [
+      {
+        "name": "駅前",
+        "lat": 38.54110556,
+        "lng": 141.06430278
+      }
+    ],
+    "Kami-Wakuya": [
+      {
+        "name": "駅前",
+        "lat": 38.54914167,
+        "lng": 141.09976111
+      }
+    ],
+    "Wakuya": [
+      {
+        "name": "駅前",
+        "lat": 38.53815,
+        "lng": 141.12722778
+      }
+    ],
+    "Maeyachi": [
+      {
+        "name": "駅前",
+        "lat": 38.51222778,
+        "lng": 141.19366667
+      }
+    ],
+    "Kakeyama": [
+      {
+        "name": "駅前",
+        "lat": 38.49793889,
+        "lng": 141.23981944
+      }
+    ],
+    "Kanomata": [
+      {
+        "name": "駅前",
+        "lat": 38.48593889,
+        "lng": 141.28251111
+      }
+    ],
+    "Hanamaki": [
+      {
+        "name": "駅前",
+        "lat": 39.393729,
+        "lng": 141.110278
+      }
+    ],
+    "Shin-Hanamaki": [
+      {
+        "name": "駅前",
+        "lat": 39.407334,
+        "lng": 141.173995
+      }
+    ],
+    "Miyamori": [
+      {
+        "name": "駅前",
+        "lat": 39.35047222,
+        "lng": 141.35022222
+      }
+    ],
+    "Masuzawa": [
+      {
+        "name": "駅前",
+        "lat": 39.3002,
+        "lng": 141.3993
+      }
+    ],
+    "Ofunato": [
+      {
+        "name": "駅前",
+        "lat": 39.06353611,
+        "lng": 141.720775
+      }
+    ],
+    "Hirakura": [
+      {
+        "name": "駅前",
+        "lat": 31.45001389,
+        "lng": 130.51366111
+      }
+    ],
+    "Rikuchu-Ohashi": [
+      {
+        "name": "駅前",
+        "lat": 39.28047778,
+        "lng": 141.71838056
+      }
+    ],
+    "Matsukura": [
+      {
+        "name": "駅前",
+        "lat": 39.25636667,
+        "lng": 141.80172222
+      }
+    ],
+    "Kosano": [
+      {
+        "name": "駅前",
+        "lat": 39.26436944,
+        "lng": 141.83640833
+      }
+    ],
+    "Kamaishi": [
+      {
+        "name": "駅前",
+        "lat": 39.27291667,
+        "lng": 141.87272222
+      }
+    ],
+    "Kitakami": [
+      {
+        "name": "駅前",
+        "lat": 39.28183333,
+        "lng": 141.12222778
+      }
+    ],
+    "Fujiene": [
+      {
+        "name": "駅前",
+        "lat": 39.300975,
+        "lng": 141.03981667
+      }
+    ],
+    "Tachikawa-Me": [
+      {
+        "name": "駅前",
+        "lat": 39.30772222,
+        "lng": 140.9973
+      }
+    ],
+    "Yokogawa-Me": [
+      {
+        "name": "駅前",
+        "lat": 39.30926944,
+        "lng": 140.97221944
+      }
+    ],
+    "Iwasawa": [
+      {
+        "name": "駅前",
+        "lat": 39.30105833,
+        "lng": 140.93168889
+      }
+    ],
+    "Hotto-Yuda": [
+      {
+        "name": "駅前",
+        "lat": 39.31457778,
+        "lng": 140.77575556
+      }
+    ],
+    "Ashizawa": [
+      {
+        "name": "駅前",
+        "lat": 38.65548889,
+        "lng": 140.36106389
+      }
+    ],
+    "Yokote": [
+      {
+        "name": "駅前",
+        "lat": 39.31022222,
+        "lng": 140.56055556
+      }
+    ],
+    "Konoyama": [
+      {
+        "name": "駅前",
+        "lat": 36.66646111,
+        "lng": 140.05179722
+      }
+    ],
+    "Ogane": [
+      {
+        "name": "駅前",
+        "lat": 36.65643611,
+        "lng": 140.095675
+      }
+    ],
+    "Haneda-Kuko-T3": [
+      {
+        "name": "駅前",
+        "lat": 35.54491667,
+        "lng": 139.76788889
+      }
+    ],
+    "Keio-Inadazutsumi": [
+      {
+        "name": "駅前",
+        "lat": 35.63388889,
+        "lng": 139.53111111
+      }
+    ],
+    "Wabuchi": [
+      {
+        "name": "駅前",
+        "lat": 38.52600278,
+        "lng": 141.22050278
+      }
+    ],
+    "Nonodake": [
+      {
+        "name": "駅前",
+        "lat": 38.55276389,
+        "lng": 141.225725
+      }
+    ],
+    "Rikuzen-Toyosato": [
+      {
+        "name": "駅前",
+        "lat": 38.58251389,
+        "lng": 141.24473056
+      }
+    ],
+    "Mitakedo": [
+      {
+        "name": "駅前",
+        "lat": 38.6057,
+        "lng": 141.26478333
+      }
+    ],
+    "Rikuzen-Yokoyama": [
+      {
+        "name": "駅前",
+        "lat": 38.63102778,
+        "lng": 141.35419444
+      }
+    ],
+    "Rikuzen-Tokura": [
+      {
+        "name": "駅前",
+        "lat": 38.64791111,
+        "lng": 141.43345833
+      }
+    ],
+    "Shizugawa": [
+      {
+        "name": "駅前",
+        "lat": 38.67916667,
+        "lng": 141.4475
+      }
+    ],
+    "Shimizuhama": [
+      {
+        "name": "駅前",
+        "lat": 38.69158056,
+        "lng": 141.48951944
+      }
+    ],
+    "Utatsu": [
+      {
+        "name": "駅前",
+        "lat": 38.7176,
+        "lng": 141.51916389
+      }
+    ],
+    "Rikuzen-Minato": [
+      {
+        "name": "駅前",
+        "lat": 38.73853889,
+        "lng": 141.53089444
+      }
+    ],
+    "Rikuzen-Koisumi": [
+      {
+        "name": "駅前",
+        "lat": 38.76675,
+        "lng": 141.50903889
+      }
+    ],
+    "Motoyoshi": [
+      {
+        "name": "駅前",
+        "lat": 38.7865,
+        "lng": 141.50251944
+      }
+    ],
+    "Koganazawa": [
+      {
+        "name": "駅前",
+        "lat": 38.79635833,
+        "lng": 141.53398611
+      }
+    ],
+    "Oyakaigan": [
+      {
+        "name": "駅前",
+        "lat": 38.81388889,
+        "lng": 141.56694444
+      }
+    ],
+    "Kesennuma": [
+      {
+        "name": "駅前",
+        "lat": 38.90974722,
+        "lng": 141.55915278
+      }
+    ],
+    "Kai-Koizumi": [
+      {
+        "name": "駅前",
+        "lat": 35.87961667,
+        "lng": 138.35971944
+      }
+    ],
+    "Kai-Oizumi": [
+      {
+        "name": "駅前",
+        "lat": 35.89625,
+        "lng": 138.40963889
+      }
+    ],
+    "Kiyosato": [
+      {
+        "name": "駅前",
+        "lat": 35.9191,
+        "lng": 138.43673056
+      }
+    ],
+    "Shinano-Kawakami": [
+      {
+        "name": "駅前",
+        "lat": 35.97586667,
+        "lng": 138.52717778
+      }
+    ],
+    "Kaimen": [
+      {
+        "name": "駅前",
+        "lat": 36.15595,
+        "lng": 138.48591111
+      }
+    ],
+    "Komi": [
+      {
+        "name": "駅前",
+        "lat": 36.08873056,
+        "lng": 138.48285278
+      }
+    ],
+    "Yachiho": [
+      {
+        "name": "駅前",
+        "lat": 36.13347778,
+        "lng": 138.47736667
+      }
+    ],
+    "Kaise": [
+      {
+        "name": "駅前",
+        "lat": 36.15595,
+        "lng": 138.48591111
+      }
+    ],
+    "Usuda": [
+      {
+        "name": "駅前",
+        "lat": 36.19391389,
+        "lng": 138.48811111
+      }
+    ],
+    "Saku-Hirai": [
+      {
+        "name": "駅前",
+        "lat": 36.27796389,
+        "lng": 138.46423889
+      }
+    ],
+    "Otome": [
+      {
+        "name": "駅前",
+        "lat": 36.31126667,
+        "lng": 138.44090833
+      }
+    ],
+    "Otasa": [
+      {
+        "name": "駅前",
+        "lat": 37.04113889,
+        "lng": 136.77766667
+      }
+    ],
+    "Kita-Mori": [
+      {
+        "name": "駅前",
+        "lat": 39.95669444,
+        "lng": 141.07188889
+      }
+    ],
+    "Hachimantai": [
+      {
+        "name": "駅前",
+        "lat": 40.14330556,
+        "lng": 140.80441667
+      }
+    ],
+    "Kazuno-Karua": [
+      {
+        "name": "駅前",
+        "lat": 40.1895,
+        "lng": 140.78575
+      }
+    ],
+    "Towada-Minami": [
+      {
+        "name": "駅前",
+        "lat": 40.25546667,
+        "lng": 140.77038056
+      }
+    ],
+    "Suehiro": [
+      {
+        "name": "駅前",
+        "lat": 40.22989722,
+        "lng": 140.73725556
+      }
+    ],
+    "Fukakai": [
+      {
+        "name": "駅前",
+        "lat": 34.53025,
+        "lng": 135.49744444
+      }
+    ],
+    "Ootaki-Onsen": [
+      {
+        "name": "駅前",
+        "lat": 40.21020556,
+        "lng": 140.640375
+      }
+    ],
+    "Ohata": [
+      {
+        "name": "駅前",
+        "lat": 32.16495556,
+        "lng": 130.78771389
+      }
+    ],
+    "Higashi-Yuki": [
+      {
+        "name": "駅前",
+        "lat": 36.29668611,
+        "lng": 139.89115833
+      }
+    ],
+    "Hayashi": [
+      {
+        "name": "駅前",
+        "lat": 36.70439444,
+        "lng": 136.99922778
+      }
+    ],
+    "Shimotsuma": [
+      {
+        "name": "駅前",
+        "lat": 36.18199167,
+        "lng": 139.96444722
+      }
+    ],
+    "Niihari": [
+      {
+        "name": "駅前",
+        "lat": 36.32805278,
+        "lng": 140.03909167
+      }
+    ],
+    "Iwase": [
+      {
+        "name": "駅前",
+        "lat": 36.35955556,
+        "lng": 140.10824722
+      }
+    ],
+    "Fukuhara": [
+      {
+        "name": "駅前",
+        "lat": 36.35154444,
+        "lng": 140.18718611
+      }
+    ],
+    "Inada": [
+      {
+        "name": "駅前",
+        "lat": 36.36854722,
+        "lng": 140.21430833
+      }
+    ],
+    "Kasama": [
+      {
+        "name": "駅前",
+        "lat": 36.37325,
+        "lng": 140.24611111
+      }
+    ],
+    "Shihodo": [
+      {
+        "name": "駅前",
+        "lat": 35.12194444,
+        "lng": 137.16269444
+      }
+    ],
+    "Ichinoseki": [
+      {
+        "name": "駅前",
+        "lat": 38.926052,
+        "lng": 141.139225
+      }
+    ],
+    "Rikuzen-Koizumi": [
+      {
+        "name": "駅前",
+        "lat": 38.76675,
+        "lng": 141.50903889
+      }
+    ],
+    "Hanaizumi": [
+      {
+        "name": "駅前",
+        "lat": 38.83345278,
+        "lng": 141.18005556
+      }
+    ],
+    "Rikuzen-Yahagi": [
+      {
+        "name": "駅前",
+        "lat": 39.02247222,
+        "lng": 141.57905556
+      }
+    ],
+    "Konashi": [
+      {
+        "name": "駅前",
+        "lat": 38.93271667,
+        "lng": 141.38443889
+      }
+    ],
+    "Rikuzen-Ono": [
+      {
+        "name": "駅前",
+        "lat": 38.396,
+        "lng": 141.17433333
+      }
+    ],
+    "Detohama": [
+      {
+        "name": "駅前",
+        "lat": 39.84447778,
+        "lng": 140.02438056
+      }
+    ],
+    "Kamifutada": [
+      {
+        "name": "駅前",
+        "lat": 39.86908333,
+        "lng": 140.00408333
+      }
+    ],
+    "Futada": [
+      {
+        "name": "駅前",
+        "lat": 39.88172222,
+        "lng": 139.98716667
+      }
+    ],
+    "Tenno": [
+      {
+        "name": "駅前",
+        "lat": 39.89877778,
+        "lng": 139.96361111
+      }
+    ],
+    "Funakoshi": [
+      {
+        "name": "駅前",
+        "lat": 39.90475,
+        "lng": 139.94716667
+      }
+    ],
+    "Wakimoto": [
+      {
+        "name": "駅前",
+        "lat": 39.915,
+        "lng": 139.90297222
+      }
+    ],
+    "Hadachi": [
+      {
+        "name": "駅前",
+        "lat": 39.90472222,
+        "lng": 139.8625
+      }
+    ],
+    "Oga": [
+      {
+        "name": "駅前",
+        "lat": 39.88397222,
+        "lng": 139.84819444
+      }
+    ],
+    "Matsumoto": [
+      {
+        "name": "駅前",
+        "lat": 36.23066667,
+        "lng": 137.96391667
+      }
+    ],
+    "Kita-Matsumoto": [
+      {
+        "name": "駅前",
+        "lat": 36.23719444,
+        "lng": 137.960825
+      }
+    ],
+    "Shimauchi": [
+      {
+        "name": "駅前",
+        "lat": 36.247,
+        "lng": 137.94496389
+      }
+    ],
+    "Shimatakamatsu": [
+      {
+        "name": "駅前",
+        "lat": 36.24638333,
+        "lng": 137.93148611
+      }
+    ],
+    "Azusabashi": [
+      {
+        "name": "駅前",
+        "lat": 36.25060833,
+        "lng": 137.91803611
+      }
+    ],
+    "Toyoshina": [
+      {
+        "name": "駅前",
+        "lat": 36.30021667,
+        "lng": 137.90096944
+      }
+    ],
+    "Hotaka": [
+      {
+        "name": "駅前",
+        "lat": 36.33980278,
+        "lng": 137.88180833
+      }
+    ],
+    "Kita-Hosono": [
+      {
+        "name": "駅前",
+        "lat": 36.40633889,
+        "lng": 137.86274722
+      }
+    ],
+    "Shinano-Matsukawa": [
+      {
+        "name": "駅前",
+        "lat": 36.42527222,
+        "lng": 137.85832222
+      }
+    ],
+    "Azumi-Kutsukake": [
+      {
+        "name": "駅前",
+        "lat": 36.44794167,
+        "lng": 137.85466389
+      }
+    ],
+    "Shinano-Tokiwa": [
+      {
+        "name": "駅前",
+        "lat": 36.46726111,
+        "lng": 137.84718333
+      }
+    ],
+    "Minami-Omachi": [
+      {
+        "name": "駅前",
+        "lat": 36.49160833,
+        "lng": 137.85641667
+      }
+    ],
+    "Shinano-Omachi": [
+      {
+        "name": "駅前",
+        "lat": 36.50005556,
+        "lng": 137.86147222
+      }
+    ],
+    "Kita-Omachi": [
+      {
+        "name": "駅前",
+        "lat": 36.51759167,
+        "lng": 137.85794722
+      }
+    ],
+    "Shinano-Kizaki": [
+      {
+        "name": "駅前",
+        "lat": 36.53576944,
+        "lng": 137.84598611
+      }
+    ],
+    "Inao": [
+      {
+        "name": "駅前",
+        "lat": 36.55431389,
+        "lng": 137.8426
+      }
+    ],
+    "Uminokuchi": [
+      {
+        "name": "駅前",
+        "lat": 36.56564444,
+        "lng": 137.84192778
+      }
+    ],
+    "Iimori": [
+      {
+        "name": "駅前",
+        "lat": 36.670675,
+        "lng": 137.85005556
+      }
+    ],
+    "Hakuba": [
+      {
+        "name": "駅前",
+        "lat": 36.69574722,
+        "lng": 137.86353889
+      }
+    ],
+    "Shinano-Morishita": [
+      {
+        "name": "駅前",
+        "lat": 36.71108611,
+        "lng": 137.87200278
+      }
+    ],
+    "Minami-Otari": [
+      {
+        "name": "駅前",
+        "lat": 36.77463333,
+        "lng": 137.90833611
+      }
+    ],
+    "Noheji": [
+      {
+        "name": "駅前",
+        "lat": 40.85541944,
+        "lng": 141.11976111
+      }
+    ],
+    "Kita-Noheji": [
+      {
+        "name": "駅前",
+        "lat": 40.871175,
+        "lng": 141.13413333
+      }
+    ],
+    "Arito": [
+      {
+        "name": "駅前",
+        "lat": 40.91394722,
+        "lng": 141.18919167
+      }
+    ],
+    "Fukoshi": [
+      {
+        "name": "駅前",
+        "lat": 41.022075,
+        "lng": 141.24644167
+      }
+    ],
+    "Nozoki": [
+      {
+        "name": "駅前",
+        "lat": 38.99297222,
+        "lng": 140.36116667
+      }
+    ],
+    "Innai": [
+      {
+        "name": "駅前",
+        "lat": 39.04958333,
+        "lng": 140.41391667
+      }
+    ],
+    "Yokobori": [
+      {
+        "name": "駅前",
+        "lat": 39.06458333,
+        "lng": 140.4515
+      }
+    ],
+    "Mikazuki": [
+      {
+        "name": "駅前",
+        "lat": 39.11019444,
+        "lng": 140.48358333
+      }
+    ],
+    "Kami-Yuzawa": [
+      {
+        "name": "駅前",
+        "lat": 39.13429722,
+        "lng": 140.4853
+      }
+    ],
+    "Yuzawa": [
+      {
+        "name": "駅前",
+        "lat": 39.16363889,
+        "lng": 140.48713889
+      }
+    ],
+    "Shimo-Yuzawa": [
+      {
+        "name": "駅前",
+        "lat": 39.19811111,
+        "lng": 140.50302778
+      }
+    ],
+    "Jumonji": [
+      {
+        "name": "駅前",
+        "lat": 39.22052778,
+        "lng": 140.52569444
+      }
+    ],
+    "Yanagita": [
+      {
+        "name": "駅前",
+        "lat": 39.27638889,
+        "lng": 140.55394444
+      }
+    ],
+    "Go-Sannen": [
+      {
+        "name": "駅前",
+        "lat": 39.36447222,
+        "lng": 140.53847222
+      }
+    ],
+    "Moritake": [
+      {
+        "name": "駅前",
+        "lat": 40.10318889,
+        "lng": 140.07088611
+      }
+    ],
+    "Kita-Kanaoka": [
+      {
+        "name": "駅前",
+        "lat": 40.14188889,
+        "lng": 140.06347222
+      }
+    ],
+    "Tsurugata": [
+      {
+        "name": "駅前",
+        "lat": 40.20388611,
+        "lng": 140.11853611
+      }
+    ],
+    "Tomine": [
+      {
+        "name": "駅前",
+        "lat": 40.21794444,
+        "lng": 140.17256944
+      }
+    ],
+    "Futatsui": [
+      {
+        "name": "駅前",
+        "lat": 40.21246389,
+        "lng": 140.23569722
+      }
+    ],
+    "Maeyama": [
+      {
+        "name": "駅前",
+        "lat": 40.21473611,
+        "lng": 140.31237778
+      }
+    ],
+    "Takanosu": [
+      {
+        "name": "駅前",
+        "lat": 40.23205278,
+        "lng": 140.36985833
+      }
+    ],
+    "Nukazawa": [
+      {
+        "name": "駅前",
+        "lat": 40.25109167,
+        "lng": 140.397825
+      }
+    ],
+    "Hayaguchi": [
+      {
+        "name": "駅前",
+        "lat": 40.27119722,
+        "lng": 140.44861111
+      }
+    ],
+    "Shimokawabe": [
+      {
+        "name": "駅前",
+        "lat": 40.27659167,
+        "lng": 140.49766944
+      }
+    ],
+    "Naruko-Onsen": [
+      {
+        "name": "駅前",
+        "lat": 38.74326389,
+        "lng": 140.71598056
+      }
+    ],
+    "Nakayamadaira-Onsen": [
+      {
+        "name": "駅前",
+        "lat": 38.72652778,
+        "lng": 140.66796111
+      }
+    ],
+    "Sakida": [
+      {
+        "name": "駅前",
+        "lat": 38.73571944,
+        "lng": 140.61253889
+      }
+    ],
+    "Akakura-Onsen": [
+      {
+        "name": "駅前",
+        "lat": 38.730425,
+        "lng": 140.55370833
+      }
+    ],
+    "Tatekoji": [
+      {
+        "name": "駅前",
+        "lat": 38.74213056,
+        "lng": 140.54256944
+      }
+    ],
+    "Mogami": [
+      {
+        "name": "駅前",
+        "lat": 38.75608611,
+        "lng": 140.51748611
+      }
+    ],
+    "Ohori": [
+      {
+        "name": "駅前",
+        "lat": 38.76590833,
+        "lng": 140.47558611
+      }
+    ],
+    "Usugi": [
+      {
+        "name": "駅前",
+        "lat": 38.76496389,
+        "lng": 140.45349444
+      }
+    ],
+    "Higashi-Nagasawa": [
+      {
+        "name": "駅前",
+        "lat": 38.71898889,
+        "lng": 140.38230278
+      }
+    ],
+    "Furukuchi": [
+      {
+        "name": "駅前",
+        "lat": 38.73722222,
+        "lng": 140.14536111
+      }
+    ],
+    "Minamino": [
+      {
+        "name": "駅前",
+        "lat": 38.81805278,
+        "lng": 139.94485556
+      },
+      {
+        "name": "駅前",
+        "lat": 38.8575,
+        "lng": 139.957778
+      }
+    ],
+    "Amarume": [
+      {
+        "name": "駅前",
+        "lat": 38.84433333,
+        "lng": 139.91133333
+      }
+    ],
+    "Kita-Amarume": [
+      {
+        "name": "駅前",
+        "lat": 38.86765833,
+        "lng": 139.90835833
+      }
+    ],
+    "Sago": [
+      {
+        "name": "駅前",
+        "lat": 38.89405556,
+        "lng": 139.90788889
+      }
+    ],
+    "Higashi-Sakata": [
+      {
+        "name": "駅前",
+        "lat": 38.90752778,
+        "lng": 139.87552778
+      }
+    ],
+    "Sakata": [
+      {
+        "name": "駅前",
+        "lat": 38.92180556,
+        "lng": 139.846
+      }
+    ],
+    "Yamagishi": [
+      {
+        "name": "駅前",
+        "lat": 39.71605,
+        "lng": 141.17136667
+      }
+    ],
+    "Kami-Yonai": [
+      {
+        "name": "駅前",
+        "lat": 39.744,
+        "lng": 141.20375
+      }
+    ],
+    "Kuzakai": [
+      {
+        "name": "駅前",
+        "lat": 39.65175,
+        "lng": 141.35147222
+      }
+    ],
+    "Matsukusa": [
+      {
+        "name": "駅前",
+        "lat": 39.63571944,
+        "lng": 141.437625
+      }
+    ],
+    "Hiratsuto": [
+      {
+        "name": "駅前",
+        "lat": 39.62349167,
+        "lng": 141.51149167
+      }
+    ],
+    "Hakoda": [
+      {
+        "name": "駅前",
+        "lat": 39.60457222,
+        "lng": 141.76721389
+      }
+    ],
+    "Shigeyasu": [
+      {
+        "name": "駅前",
+        "lat": 39.62083056,
+        "lng": 141.79873333
+      }
+    ],
+    "Hikiami": [
+      {
+        "name": "駅前",
+        "lat": 39.62934444,
+        "lng": 141.83863611
+      }
+    ],
+    "Miyako": [
+      {
+        "name": "駅前",
+        "lat": 39.64027778,
+        "lng": 141.94657222
+      }
+    ],
+    "Tsutsujigaoka-2": [
+      {
+        "name": "駅前",
+        "lat": 38.25880556,
+        "lng": 140.89375
+      }
+    ],
+    "Miyaginohara": [
+      {
+        "name": "駅前",
+        "lat": 38.26108333,
+        "lng": 140.90513889
+      }
+    ],
+    "Rikuzen-Haranomachi": [
+      {
+        "name": "駅前",
+        "lat": 38.26619444,
+        "lng": 140.91088889
+      }
+    ],
+    "Nigatake": [
+      {
+        "name": "駅前",
+        "lat": 38.26869444,
+        "lng": 140.91880556
+      }
+    ],
+    "Kozuru-Shinden": [
+      {
+        "name": "駅前",
+        "lat": 38.27340278,
+        "lng": 140.935275
+      }
+    ],
+    "Nakanosakae": [
+      {
+        "name": "駅前",
+        "lat": 38.28054444,
+        "lng": 140.98478333
+      }
+    ],
+    "Fukudamachi": [
+      {
+        "name": "駅前",
+        "lat": 38.27490278,
+        "lng": 140.95846667
+      }
+    ],
+    "Rikuzen-Takasago": [
+      {
+        "name": "駅前",
+        "lat": 38.27342222,
+        "lng": 140.96794722
+      }
+    ],
+    "Yamoto": [
+      {
+        "name": "駅前",
+        "lat": 38.42055278,
+        "lng": 141.20965278
+      }
+    ],
+    "Higashi-Yamoto": [
+      {
+        "name": "駅前",
+        "lat": 38.42807778,
+        "lng": 141.22257778
+      }
+    ],
+    "Rikuzen-Akai": [
+      {
+        "name": "駅前",
+        "lat": 38.43248611,
+        "lng": 141.23869167
+      }
+    ],
+    "Hebita": [
+      {
+        "name": "駅前",
+        "lat": 38.43843333,
+        "lng": 141.2774
+      }
+    ],
+    "Ishinomaki": [
+      {
+        "name": "駅前",
+        "lat": 38.43518056,
+        "lng": 141.30374722
+      }
+    ],
+    "Iwakiri": [
+      {
+        "name": "駅前",
+        "lat": 38.30083889,
+        "lng": 140.95471667
+      }
+    ],
+    "Tagajo": [
+      {
+        "name": "駅前",
+        "lat": 38.29174722,
+        "lng": 141.00626389
+      }
+    ],
+    "Takajo-machi": [
+      {
+        "name": "駅前",
+        "lat": 38.38266389,
+        "lng": 141.07317222
+      }
+    ],
+    "Jatenda": [
+      {
+        "name": "駅前",
+        "lat": 38.43843333,
+        "lng": 141.2774
+      }
+    ],
+    "Toshogu": [
+      {
+        "name": "駅前",
+        "lat": 38.27731111,
+        "lng": 140.8866
+      }
+    ],
+    "Tohoku-Fukushi-dai-mae": [
+      {
+        "name": "駅前",
+        "lat": 38.28039444,
+        "lng": 140.84286667
+      }
+    ],
+    "Kuzuoka": [
+      {
+        "name": "駅前",
+        "lat": 38.26866667,
+        "lng": 140.81777778
+      }
+    ],
+    "Rikuzen-Ochiai": [
+      {
+        "name": "駅前",
+        "lat": 38.273425,
+        "lng": 140.79040833
+      }
+    ],
+    "Aino": [
+      {
+        "name": "駅前",
+        "lat": 38.27266944,
+        "lng": 140.76163333
+      }
+    ],
+    "Rikuzen-Shirasawa": [
+      {
+        "name": "駅前",
+        "lat": 38.27823611,
+        "lng": 140.70222778
+      }
+    ],
+    "Kumagane": [
+      {
+        "name": "駅前",
+        "lat": 38.29798056,
+        "lng": 140.68075556
+      }
+    ],
+    "Sakunami": [
+      {
+        "name": "駅前",
+        "lat": 38.31778056,
+        "lng": 140.63264167
+      }
+    ],
+    "Oku-Shinkawa": [
+      {
+        "name": "駅前",
+        "lat": 38.32595278,
+        "lng": 140.594325
+      }
+    ],
+    "Omoshiroyama-Kogen": [
+      {
+        "name": "駅前",
+        "lat": 38.33293333,
+        "lng": 140.49641389
+      }
+    ],
+    "Yamadera": [
+      {
+        "name": "駅前",
+        "lat": 38.30988889,
+        "lng": 140.43513889
+      }
+    ],
+    "Tateyama-Yamagata": [
+      {
+        "name": "駅前",
+        "lat": 38.30157222,
+        "lng": 140.37051111
+      }
+    ],
+    "Uzen-Chitose": [
+      {
+        "name": "駅前",
+        "lat": 38.28767778,
+        "lng": 140.34212778
+      }
+    ],
+    "Kita-Yamagata": [
+      {
+        "name": "駅前",
+        "lat": 38.26585278,
+        "lng": 140.33279444
+      }
+    ],
+    "Yamagata": [
+      {
+        "name": "駅前",
+        "lat": 38.24870833,
+        "lng": 140.32745556
+      }
+    ],
+    "Matsuida": [
+      {
+        "name": "駅前",
+        "lat": 36.30955,
+        "lng": 138.79736389
+      }
+    ],
+    "Nishi-Matsuida": [
+      {
+        "name": "駅前",
+        "lat": 36.31625833,
+        "lng": 138.78638889
+      }
+    ],
+    "Shinonoi": [
+      {
+        "name": "駅前",
+        "lat": 36.57736944,
+        "lng": 138.13833889
+      }
+    ],
+    "Imai": [
+      {
+        "name": "駅前",
+        "lat": 36.59546944,
+        "lng": 138.14523056
+      }
+    ],
+    "Kawanakajima": [
+      {
+        "name": "駅前",
+        "lat": 36.61455833,
+        "lng": 138.15094444
+      }
+    ],
+    "Amori": [
+      {
+        "name": "駅前",
+        "lat": 36.63009167,
+        "lng": 138.16146389
+      }
+    ],
+    "Naoetsu": [
+      {
+        "name": "駅前",
+        "lat": 37.17105556,
+        "lng": 138.24310278
+      }
+    ],
+    "Saigata": [
+      {
+        "name": "駅前",
+        "lat": 37.21032778,
+        "lng": 138.30520833
+      }
+    ],
+    "Katamachi": [
+      {
+        "name": "駅前",
+        "lat": 37.23415,
+        "lng": 138.33988333
+      }
+    ],
+    "Kamihama": [
+      {
+        "name": "駅前",
+        "lat": 39.16472222,
+        "lng": 139.90280556
+      }
+    ],
+    "Kakizaki": [
+      {
+        "name": "駅前",
+        "lat": 37.27805556,
+        "lng": 138.38611111
+      }
+    ],
+    "Yoneyama": [
+      {
+        "name": "駅前",
+        "lat": 37.31696944,
+        "lng": 138.43160833
+      }
+    ],
+    "Kasashima": [
+      {
+        "name": "駅前",
+        "lat": 37.33578889,
+        "lng": 138.46747778
+      }
+    ],
+    "Aomigawa": [
+      {
+        "name": "駅前",
+        "lat": 37.34618611,
+        "lng": 138.48605556
+      }
+    ],
+    "Kujiranami": [
+      {
+        "name": "駅前",
+        "lat": 37.35592222,
+        "lng": 138.51796111
+      }
+    ],
+    "Ibarame": [
+      {
+        "name": "駅前",
+        "lat": 37.35708611,
+        "lng": 138.58676111
+      }
+    ],
+    "Kitajo": [
+      {
+        "name": "駅前",
+        "lat": 37.33830833,
+        "lng": 138.63694167
+      }
+    ],
+    "Echigo-Hirota": [
+      {
+        "name": "駅前",
+        "lat": 37.357325,
+        "lng": 138.66112778
+      }
+    ],
+    "Raikoji": [
+      {
+        "name": "駅前",
+        "lat": 37.39718056,
+        "lng": 138.78350278
+      }
+    ],
+    "Kita-Nagaoka": [
+      {
+        "name": "駅前",
+        "lat": 37.46814722,
+        "lng": 138.86183333
+      }
+    ],
+    "Obiori": [
+      {
+        "name": "駅前",
+        "lat": 37.57255,
+        "lng": 138.92802778
+      }
+    ],
+    "Toko-ji": [
+      {
+        "name": "駅前",
+        "lat": 37.592825,
+        "lng": 138.94266389
+      }
+    ],
+    "Yasuchi": [
+      {
+        "name": "駅前",
+        "lat": 37.63913889,
+        "lng": 139.01466667
+      }
+    ],
+    "Hanyuda": [
+      {
+        "name": "駅前",
+        "lat": 37.69347222,
+        "lng": 139.06069444
+      }
+    ],
+    "Tagami": [
+      {
+        "name": "駅前",
+        "lat": 37.71925,
+        "lng": 139.07480556
+      }
+    ],
+    "Furutsu": [
+      {
+        "name": "駅前",
+        "lat": 37.77280556,
+        "lng": 139.11455556
+      }
+    ],
+    "Satsuki-no": [
+      {
+        "name": "駅前",
+        "lat": 37.81330556,
+        "lng": 139.11713889
+      }
+    ],
+    "Ogikawa": [
+      {
+        "name": "駅前",
+        "lat": 37.83333333,
+        "lng": 139.11144444
+      }
+    ],
+    "Kameda": [
+      {
+        "name": "駅前",
+        "lat": 37.87719444,
+        "lng": 139.10805556
+      }
+    ],
+    "Echigo-Ishiyama": [
+      {
+        "name": "駅前",
+        "lat": 37.89655556,
+        "lng": 139.09505556
+      }
+    ],
+    "Hirooka": [
+      {
+        "name": "駅前",
+        "lat": 36.14826667,
+        "lng": 137.94957222
+      }
+    ],
+    "Murai": [
+      {
+        "name": "駅前",
+        "lat": 36.17503333,
+        "lng": 137.95648611
+      }
+    ],
+    "Minami-Matsumoto": [
+      {
+        "name": "駅前",
+        "lat": 36.20979444,
+        "lng": 137.96895278
+      }
+    ],
+    "Akashina": [
+      {
+        "name": "駅前",
+        "lat": 36.35434444,
+        "lng": 137.93036111
+      }
+    ],
+    "Sakakita": [
+      {
+        "name": "駅前",
+        "lat": 36.43111111,
+        "lng": 138.01666667
+      }
+    ],
+    "Hijiri-Kogen": [
+      {
+        "name": "駅前",
+        "lat": 36.45502222,
+        "lng": 138.047625
+      }
+    ],
+    "Kantsuki": [
+      {
+        "name": "駅前",
+        "lat": 36.4572,
+        "lng": 138.07930833
+      }
+    ],
+    "Obasute": [
+      {
+        "name": "駅前",
+        "lat": 36.50256389,
+        "lng": 138.09331944
+      }
+    ],
+    "Inariyama": [
+      {
+        "name": "駅前",
+        "lat": 36.55272222,
+        "lng": 138.108225
+      }
+    ],
+    "Hitachi-Tsuda": [
+      {
+        "name": "駅前",
+        "lat": 36.40391667,
+        "lng": 140.48288889
+      }
+    ],
+    "Nihonmatsu": [
+      {
+        "name": "駅前",
+        "lat": 37.58958333,
+        "lng": 140.43530556
+      }
+    ],
+    "Matsukawa": [
+      {
+        "name": "駅前",
+        "lat": 37.65383333,
+        "lng": 140.48444444
+      }
+    ],
+    "Kanayagawa": [
+      {
+        "name": "駅前",
+        "lat": 37.6805,
+        "lng": 140.45219444
+      }
+    ],
+    "Minami-Fukushima": [
+      {
+        "name": "駅前",
+        "lat": 37.72363889,
+        "lng": 140.45611111
+      }
+    ],
+    "Higashi-Fukushima": [
+      {
+        "name": "駅前",
+        "lat": 37.800475,
+        "lng": 140.47808889
+      }
+    ],
+    "Date": [
+      {
+        "name": "駅前",
+        "lat": 37.82399722,
+        "lng": 140.49334722
+      }
+    ],
+    "Koori": [
+      {
+        "name": "駅前",
+        "lat": 37.85527778,
+        "lng": 140.517525
+      }
+    ],
+    "Fujita": [
+      {
+        "name": "駅前",
+        "lat": 37.87906111,
+        "lng": 140.53964167
+      }
+    ],
+    "Kaida": [
+      {
+        "name": "駅前",
+        "lat": 37.90810833,
+        "lng": 140.58101667
+      }
+    ],
+    "Kosugo": [
+      {
+        "name": "駅前",
+        "lat": 37.93387778,
+        "lng": 140.60450278
+      }
+    ],
+    "Tsukinoki": [
+      {
+        "name": "駅前",
+        "lat": 38.07862222,
+        "lng": 140.80995278
+      }
+    ],
+    "Higashi-Sendai": [
+      {
+        "name": "駅前",
+        "lat": 38.27650278,
+        "lng": 140.92018333
+      }
+    ],
+    "Rikuzen-Sanno": [
+      {
+        "name": "駅前",
+        "lat": 38.2996,
+        "lng": 140.9793
+      }
+    ],
+    "Kokufu-Tagajo": [
+      {
+        "name": "駅前",
+        "lat": 38.30090833,
+        "lng": 140.99408333
+      }
+    ],
+    "Matsushima": [
+      {
+        "name": "駅前",
+        "lat": 38.37983,
+        "lng": 141.06611
+      }
+    ],
+    "Shinainuma": [
+      {
+        "name": "駅前",
+        "lat": 38.431475,
+        "lng": 141.08232778
+      }
+    ],
+    "Kashimadai": [
+      {
+        "name": "駅前",
+        "lat": 38.47461667,
+        "lng": 141.09799167
+      }
+    ],
+    "Matsuyama-machi": [
+      {
+        "name": "駅前",
+        "lat": 38.51233611,
+        "lng": 141.07517222
+      }
+    ],
+    "Ishikoshi": [
+      {
+        "name": "駅前",
+        "lat": 38.768825,
+        "lng": 141.15898333
+      }
+    ],
+    "Yushima-2": [
+      {
+        "name": "駅前",
+        "lat": 38.79708056,
+        "lng": 141.17564722
+      }
+    ],
+    "Rikuchu-Ori": [
+      {
+        "name": "駅前",
+        "lat": 39.09422222,
+        "lng": 141.14080556
+      }
+    ],
+    "Mizusawa": [
+      {
+        "name": "駅前",
+        "lat": 39.13884444,
+        "lng": 141.14630278
+      }
+    ],
+    "Kinka-saki": [
+      {
+        "name": "駅前",
+        "lat": 39.20003056,
+        "lng": 141.11282778
+      }
+    ],
+    "Rokuhara": [
+      {
+        "name": "駅前",
+        "lat": 39.22780833,
+        "lng": 141.09753056
+      }
+    ],
+    "Murasakino": [
+      {
+        "name": "駅前",
+        "lat": 39.32302222,
+        "lng": 141.12051667
+      }
+    ],
+    "Hanamaki-Kuko": [
+      {
+        "name": "駅前",
+        "lat": 39.44261667,
+        "lng": 141.12771389
+      }
+    ],
+    "Ishidorii": [
+      {
+        "name": "駅前",
+        "lat": 39.49130833,
+        "lng": 141.14703889
+      }
+    ],
+    "Hizume": [
+      {
+        "name": "駅前",
+        "lat": 39.53873333,
+        "lng": 141.16071944
+      }
+    ],
+    "Furudate": [
+      {
+        "name": "駅前",
+        "lat": 39.58091111,
+        "lng": 141.154625
+      }
+    ],
+    "Yahaba": [
+      {
+        "name": "駅前",
+        "lat": 39.61316667,
+        "lng": 141.14822222
+      }
+    ],
+    "Iwate-Iioka": [
+      {
+        "name": "駅前",
+        "lat": 39.65377778,
+        "lng": 141.14686111
+      }
+    ],
+    "Minami-Yorii": [
+      {
+        "name": "駅前",
+        "lat": 36.09241667,
+        "lng": 139.2365
+      }
+    ],
+    "Ushirogata": [
+      {
+        "name": "駅前",
+        "lat": 40.93151111,
+        "lng": 140.66268889
+      }
+    ],
+    "Nakasawa": [
+      {
+        "name": "駅前",
+        "lat": 40.94926111,
+        "lng": 140.65618889
+      }
+    ],
+    "Kanita": [
+      {
+        "name": "駅前",
+        "lat": 41.03830833,
+        "lng": 140.64261389
+      }
+    ],
+    "Naka-Oguni": [
+      {
+        "name": "駅前",
+        "lat": 41.05163333,
+        "lng": 140.59691111
+      }
+    ],
+    "Minmaya": [
+      {
+        "name": "駅前",
+        "lat": 41.18536944,
+        "lng": 140.44438889
+      }
+    ],
+    "Imabetsu": [
+      {
+        "name": "駅前",
+        "lat": 41.17952222,
+        "lng": 140.490675
+      }
+    ],
+    "Tsugaru-Futamata": [
+      {
+        "name": "駅前",
+        "lat": 41.15,
+        "lng": 140.51
+      }
+    ],
+    "Mutsu-Morita": [
+      {
+        "name": "駅前",
+        "lat": 40.78175556,
+        "lng": 140.33898611
+      }
+    ],
+    "Nagase": [
+      {
+        "name": "駅前",
+        "lat": 35.85594444,
+        "lng": 139.90169444
+      }
+    ],
+    "Suibara": [
+      {
+        "name": "駅前",
+        "lat": 37.83657778,
+        "lng": 139.21730556
+      }
+    ],
+    "Kamiyama": [
+      {
+        "name": "駅前",
+        "lat": 37.86263889,
+        "lng": 139.24469444
+      }
+    ],
+    "Nakaura": [
+      {
+        "name": "駅前",
+        "lat": 37.91219444,
+        "lng": 139.30258333
+      }
+    ],
+    "Kaji": [
+      {
+        "name": "駅前",
+        "lat": 37.97702778,
+        "lng": 139.35902778
+      }
+    ],
+    "Kanazuka": [
+      {
+        "name": "駅前",
+        "lat": 38.01969444,
+        "lng": 139.37902778
+      }
+    ],
+    "Nakajo": [
+      {
+        "name": "駅前",
+        "lat": 38.04994444,
+        "lng": 139.39822222
+      }
+    ],
+    "Hirakida": [
+      {
+        "name": "駅前",
+        "lat": 38.09475,
+        "lng": 139.42833333
+      }
+    ],
+    "Sakamachi": [
+      {
+        "name": "駅前",
+        "lat": 38.12036944,
+        "lng": 139.44706111
+      }
+    ],
+    "Iwafunemachi": [
+      {
+        "name": "駅前",
+        "lat": 38.182625,
+        "lng": 139.45943056
+      }
+    ],
+    "Majima": [
+      {
+        "name": "駅前",
+        "lat": 38.272925,
+        "lng": 139.44996389
+      }
+    ],
+    "Echigo-Hayakawa": [
+      {
+        "name": "駅前",
+        "lat": 38.31604167,
+        "lng": 139.44968056
+      }
+    ],
+    "Kuwagawa": [
+      {
+        "name": "駅前",
+        "lat": 38.37515278,
+        "lng": 139.45883333
+      }
+    ],
+    "Echigo-Kanagawa": [
+      {
+        "name": "駅前",
+        "lat": 38.44872222,
+        "lng": 139.49005556
+      }
+    ],
+    "Gatsugi": [
+      {
+        "name": "駅前",
+        "lat": 38.49030556,
+        "lng": 139.51747222
+      }
+    ],
+    "Fuya": [
+      {
+        "name": "駅前",
+        "lat": 38.51405278,
+        "lng": 139.53124722
+      }
+    ],
+    "Koiwagawa": [
+      {
+        "name": "駅前",
+        "lat": 38.59044444,
+        "lng": 139.56591667
+      }
+    ],
+    "Atsumi-Onsen": [
+      {
+        "name": "駅前",
+        "lat": 38.62438889,
+        "lng": 139.58772222
+      }
+    ],
+    "Isagawa": [
+      {
+        "name": "駅前",
+        "lat": 38.67059722,
+        "lng": 139.61594444
+      }
+    ],
+    "Uzen-Mizusawa": [
+      {
+        "name": "駅前",
+        "lat": 38.71391667,
+        "lng": 139.73266667
+      }
+    ],
+    "Uzen-Oyama": [
+      {
+        "name": "駅前",
+        "lat": 38.74222222,
+        "lng": 139.76702778
+      }
+    ],
+    "Tsuruoka": [
+      {
+        "name": "駅前",
+        "lat": 38.73977778,
+        "lng": 139.83575
+      }
+    ],
+    "Fujishima": [
+      {
+        "name": "駅前",
+        "lat": 38.76886111,
+        "lng": 139.89463333
+      }
+    ],
+    "Nishibukuro": [
+      {
+        "name": "駅前",
+        "lat": 38.81152778,
+        "lng": 139.90775
+      }
+    ],
+    "Sagoshi": [
+      {
+        "name": "駅前",
+        "lat": 38.89405556,
+        "lng": 139.90788889
+      }
+    ],
+    "Mega": [
+      {
+        "name": "駅前",
+        "lat": 39.09875,
+        "lng": 139.88094444
+      }
+    ],
+    "Kosakagawa": [
+      {
+        "name": "駅前",
+        "lat": 39.13766667,
+        "lng": 139.88563889
+      }
+    ],
+    "Kisakata": [
+      {
+        "name": "駅前",
+        "lat": 39.20716667,
+        "lng": 139.90205556
+      }
+    ],
+    "Kanaura": [
+      {
+        "name": "駅前",
+        "lat": 39.25591667,
+        "lng": 139.92025
+      }
+    ],
+    "Nikaho": [
+      {
+        "name": "駅前",
+        "lat": 39.28983611,
+        "lng": 139.96399167
+      }
+    ],
+    "Nishime": [
+      {
+        "name": "駅前",
+        "lat": 39.34752778,
+        "lng": 140.01852778
+      }
+    ],
+    "Ugo-Honjo": [
+      {
+        "name": "駅前",
+        "lat": 39.38661111,
+        "lng": 140.05722222
+      }
+    ],
+    "Ugo-Iwaya": [
+      {
+        "name": "駅前",
+        "lat": 39.44206667,
+        "lng": 140.09060278
+      }
+    ],
+    "Oritawari": [
+      {
+        "name": "駅前",
+        "lat": 39.47638889,
+        "lng": 140.09115278
+      }
+    ],
+    "Ugo-Kameda": [
+      {
+        "name": "駅前",
+        "lat": 39.49383333,
+        "lng": 140.06302778
+      }
+    ],
+    "Iwaki-Minato": [
+      {
+        "name": "駅前",
+        "lat": 39.54548889,
+        "lng": 140.05512778
+      }
+    ],
+    "Michikawa": [
+      {
+        "name": "駅前",
+        "lat": 39.56016667,
+        "lng": 140.05686111
+      }
+    ],
+    "Shimohama": [
+      {
+        "name": "駅前",
+        "lat": 39.6187,
+        "lng": 140.06426111
+      }
+    ],
+    "Katsurane": [
+      {
+        "name": "駅前",
+        "lat": 39.6479,
+        "lng": 140.06634722
+      }
+    ],
+    "Ugo-Ushijima": [
+      {
+        "name": "駅前",
+        "lat": 39.69615556,
+        "lng": 140.11623056
+      }
+    ],
+    "Itaya": [
+      {
+        "name": "駅前",
+        "lat": 37.81159444,
+        "lng": 140.26863056
+      }
+    ],
+    "Yonezawa": [
+      {
+        "name": "駅前",
+        "lat": 37.90963611,
+        "lng": 140.12820833
+      }
+    ],
+    "Takahata": [
+      {
+        "name": "駅前",
+        "lat": 37.99243333,
+        "lng": 140.15271667
+      }
+    ],
+    "Akayu": [
+      {
+        "name": "駅前",
+        "lat": 38.04719444,
+        "lng": 140.14916667
+      }
+    ],
+    "Kaminoyama-Onsen": [
+      {
+        "name": "駅前",
+        "lat": 38.15223611,
+        "lng": 140.27865278
+      }
+    ],
+    "Mogami-Kinenkan-mae": [
+      {
+        "name": "駅前",
+        "lat": 38.17102222,
+        "lng": 140.297925
+      }
+    ],
+    "Za-o": [
+      {
+        "name": "駅前",
+        "lat": 38.20599722,
+        "lng": 140.30365
+      }
+    ],
+    "Minami-Dewa": [
+      {
+        "name": "駅前",
+        "lat": 38.30283889,
+        "lng": 140.344775
+      }
+    ],
+    "Takadama": [
+      {
+        "name": "駅前",
+        "lat": 38.33101389,
+        "lng": 140.35901389
+      }
+    ],
+    "Tendo": [
+      {
+        "name": "駅前",
+        "lat": 38.35996944,
+        "lng": 140.36950278
+      }
+    ],
+    "Midaregawa": [
+      {
+        "name": "駅前",
+        "lat": 38.38717222,
+        "lng": 140.37486389
+      }
+    ],
+    "Jimba": [
+      {
+        "name": "駅前",
+        "lat": 38.41270278,
+        "lng": 140.37862222
+      }
+    ],
+    "Sakuranbo-Higashine": [
+      {
+        "name": "駅前",
+        "lat": 38.42855556,
+        "lng": 140.38088889
+      }
+    ],
+    "Higashine": [
+      {
+        "name": "駅前",
+        "lat": 38.45111389,
+        "lng": 140.38413889
+      }
+    ],
+    "Sodesaki": [
+      {
+        "name": "駅前",
+        "lat": 38.54897778,
+        "lng": 140.39145556
+      }
+    ],
+    "Oishida": [
+      {
+        "name": "駅前",
+        "lat": 38.59568889,
+        "lng": 140.37529167
+      }
+    ],
+    "Kita-Oishida": [
+      {
+        "name": "駅前",
+        "lat": 38.62984722,
+        "lng": 140.37121944
+      }
+    ],
+    "Ashisawa": [
+      {
+        "name": "駅前",
+        "lat": 38.65548889,
+        "lng": 140.36106389
+      }
+    ],
+    "Funagata": [
+      {
+        "name": "駅前",
+        "lat": 38.69170833,
+        "lng": 140.31610556
+      }
+    ],
+    "Uzen-Komatsu": [
+      {
+        "name": "駅前",
+        "lat": 38.00456667,
+        "lng": 140.04841667
+      }
+    ],
+    "Imaizumi": [
+      {
+        "name": "駅前",
+        "lat": 38.05688889,
+        "lng": 140.04402778
+      }
+    ],
+    "Hagiu": [
+      {
+        "name": "駅前",
+        "lat": 38.06218333,
+        "lng": 140.00438611
+      }
+    ],
+    "Echigo-Sudara": [
+      {
+        "name": "駅前",
+        "lat": 37.32055556,
+        "lng": 139.0175
+      }
+    ],
+    "Nishi-Wakamatsu": [
+      {
+        "name": "駅前",
+        "lat": 37.48602778,
+        "lng": 139.91419444
+      }
+    ],
+    "Aizu-Sakashita": [
+      {
+        "name": "駅前",
+        "lat": 37.55669444,
+        "lng": 139.82152778
+      }
+    ],
+    "Aizu-Sakamoto": [
+      {
+        "name": "駅前",
+        "lat": 37.55322222,
+        "lng": 139.7565
+      }
+    ],
+    "Aizu-Miyashita": [
+      {
+        "name": "駅前",
+        "lat": 37.47119444,
+        "lng": 139.64708333
+      }
+    ],
+    "Aizu-Nakagawa": [
+      {
+        "name": "駅前",
+        "lat": 37.47366667,
+        "lng": 139.53208333
+      }
+    ],
+    "Aizu-Yokota": [
+      {
+        "name": "駅前",
+        "lat": 37.39236111,
+        "lng": 139.43580556
+      }
+    ],
+    "Aizu-Shiozawa": [
+      {
+        "name": "駅前",
+        "lat": 37.39358333,
+        "lng": 139.35511111
+      }
+    ],
+    "Irihirose": [
+      {
+        "name": "駅前",
+        "lat": 37.35877778,
+        "lng": 139.066
+      }
+    ],
+    "Echigo-Suhara": [
+      {
+        "name": "駅前",
+        "lat": 37.32055556,
+        "lng": 139.0175
+      }
+    ],
+    "J-Village": [
+      {
+        "name": "駅前",
+        "lat": 37.24258333,
+        "lng": 141.0075
+      }
+    ],
+    "Keisei-Narashino": [
+      {
+        "name": "駅前",
+        "lat": 35.71513889,
+        "lng": 140.04269444
+      }
+    ],
+    "Takine": [
+      {
+        "name": "駅前",
+        "lat": 37.32416667,
+        "lng": 140.6595
+      }
+    ],
+    "Echigo-Ichinotsubo": [
+      {
+        "name": "駅前",
+        "lat": 37.62845833,
+        "lng": 138.97373611
+      }
+    ],
+    "Kita-Kanegasawa": [
+      {
+        "name": "駅前",
+        "lat": 40.74598889,
+        "lng": 140.09513611
+      }
+    ],
+    "Nasho": [
+      {
+        "name": "駅前",
+        "lat": 34.65757222,
+        "lng": 135.14512222
+      }
+    ],
+    "Rikuchu-Shirahama": [
+      {
+        "name": "駅前",
+        "lat": 40.19027778,
+        "lng": 141.77072222
+      }
+    ],
+    "Kaijo": [
+      {
+        "name": "駅前",
+        "lat": 35.46611111,
+        "lng": 139.6225
+      }
+    ],
+    "Tsunohama": [
+      {
+        "name": "駅前",
+        "lat": 40.444625,
+        "lng": 141.68161944
+      }
+    ],
+    "Kita-Takaishi": [
+      {
+        "name": "駅前",
+        "lat": 34.5218,
+        "lng": 135.43309444
+      }
+    ],
+    "Naiuchi": [
+      {
+        "name": "駅前",
+        "lat": 43.06861111,
+        "lng": 141.35077778
+      }
+    ],
+    "Douzawa": [
+      {
+        "name": "駅前",
+        "lat": 36.57827778,
+        "lng": 136.64775
+      }
+    ],
+    "Ariumi": [
+      {
+        "name": "駅前",
+        "lat": 34.92064444,
+        "lng": 137.55174167
+      }
+    ],
+    "Waga": [
+      {
+        "name": "駅前",
+        "lat": 39.31457778,
+        "lng": 140.77575556
+      }
+    ],
+    "Sennin": [
+      {
+        "name": "駅前",
+        "lat": 39.308575,
+        "lng": 140.90944722
+      }
+    ],
+    "Shirakino": [
+      {
+        "name": "駅前",
+        "lat": 34.50062778,
+        "lng": 132.58788611
+      }
+    ],
+    "Aono": [
+      {
+        "name": "駅前",
+        "lat": 43.843725,
+        "lng": 142.71668889
+      }
+    ],
+    "Nishi-Karasuyama": [
+      {
+        "name": "駅前",
+        "lat": 35.66819444,
+        "lng": 139.60111111
+      }
+    ],
+    "Nekona": [
+      {
+        "name": "駅前",
+        "lat": 37.37158333,
+        "lng": 140.37666667
+      }
+    ],
+    "Keio-Nagayama": [
+      {
+        "name": "駅前",
+        "lat": 35.62980556,
+        "lng": 139.44819444
+      }
+    ],
+    "Keio-Tama-Center": [
+      {
+        "name": "駅前",
+        "lat": 35.62516667,
+        "lng": 139.42430556
+      }
+    ],
+    "Higashi-Shizugawa": [
+      {
+        "name": "駅前",
+        "lat": 38.67916667,
+        "lng": 141.4475
+      }
+    ],
+    "Shibaraki": [
+      {
+        "name": "駅前",
+        "lat": 34.59927778,
+        "lng": 132.20938889
+      }
+    ],
+    "Juni": [
+      {
+        "name": "駅前",
+        "lat": 36.57827778,
+        "lng": 136.64775
+      }
+    ],
+    "Satsuki-Dai": [
+      {
+        "name": "駅前",
+        "lat": 35.60015,
+        "lng": 139.49367
+      }
+    ],
+    "Ougo": [
+      {
+        "name": "駅前",
+        "lat": 39.23041111,
+        "lng": 140.13885556
+      }
+    ],
+    "Tsurugasaka": [
+      {
+        "name": "駅前",
+        "lat": 40.79125,
+        "lng": 140.63486111
+      }
+    ],
+    "Semi": [
+      {
+        "name": "駅前",
+        "lat": 38.755125,
+        "lng": 140.41950556
+      }
+    ],
+    "Tokyo-Showa-Center": [
+      {
+        "name": "駅前",
+        "lat": 35.68111111,
+        "lng": 139.76666667
+      }
+    ],
+    "Rikuchu-Yama": [
+      {
+        "name": "駅前",
+        "lat": 40.06608611,
+        "lng": 141.22851389
+      }
+    ],
+    "Nomi": [
+      {
+        "name": "駅前",
+        "lat": 35.36083333,
+        "lng": 139.62944444
+      }
+    ],
+    "Higashi-Ishinomaki": [
+      {
+        "name": "駅前",
+        "lat": 38.43518056,
+        "lng": 141.30374722
+      }
+    ],
+    "Yamakata": [
+      {
+        "name": "駅前",
+        "lat": 36.62458333,
+        "lng": 140.40125
+      }
+    ],
+    "Chikatsu-Naka": [
+      {
+        "name": "駅前",
+        "lat": 37.00047222,
+        "lng": 140.39366667
+      }
+    ],
+    "Ikuta-kaku": [
+      {
+        "name": "駅前",
+        "lat": 35.69083333,
+        "lng": 139.70027778
+      }
+    ],
+    "Hanyu-Naichi": [
+      {
+        "name": "駅前",
+        "lat": 36.14357222,
+        "lng": 139.45910833
+      }
+    ],
+    "Aomori-Chuo": [
+      {
+        "name": "駅前",
+        "lat": 39.55485278,
+        "lng": 141.15981389
+      }
+    ],
+    "Madarame": [
+      {
+        "name": "駅前",
+        "lat": 35.69083333,
+        "lng": 139.70027778
+      }
+    ],
+    "Ozawanai": [
+      {
+        "name": "駅前",
+        "lat": 39.31457778,
+        "lng": 140.77575556
+      }
+    ],
+    "Hashira": [
+      {
+        "name": "駅前",
+        "lat": 35.67892,
+        "lng": 139.84485
+      }
+    ],
+    "Kashiwa-No-Ha": [
+      {
+        "name": "駅前",
+        "lat": 35.89305556,
+        "lng": 139.95241667
+      }
+    ],
+    "Kyogase": [
+      {
+        "name": "駅前",
+        "lat": 37.81765833,
+        "lng": 139.17832222
+      }
+    ],
+    "Nezugaseki": [
+      {
+        "name": "駅前",
+        "lat": 38.55552778,
+        "lng": 139.54883333
+      }
+    ],
+    "Echigo-Yamabe": [
+      {
+        "name": "駅前",
+        "lat": 37.27298333,
+        "lng": 138.86151389
+      }
+    ],
+    "Sato-Taki": [
+      {
+        "name": "駅前",
+        "lat": 33.28083333,
+        "lng": 129.68370556
+      }
+    ],
+    "Sata": [
+      {
+        "name": "駅前",
+        "lat": 34.674805,
+        "lng": 136.34881306
+      }
+    ],
+    "Aizu-Minamiwa": [
+      {
+        "name": "駅前",
+        "lat": 37.88963056,
+        "lng": 138.99134722
+      }
+    ],
+    "Hon-Nara": [
+      {
+        "name": "駅前",
+        "lat": 34.68443611,
+        "lng": 135.82741944
+      }
+    ],
+    "Aizu-Oshio": [
+      {
+        "name": "駅前",
+        "lat": 37.39358333,
+        "lng": 139.35511111
+      }
+    ],
+    "Tonami": [
+      {
+        "name": "駅前",
+        "lat": 34.74143333,
+        "lng": 137.92566667
+      }
+    ],
+    "Yabukami": [
+      {
+        "name": "駅前",
+        "lat": 37.25661111,
+        "lng": 138.97563889
+      }
+    ],
+    "Hitoichiba": [
+      {
+        "name": "駅前",
+        "lat": 36.259606,
+        "lng": 137.90415
+      }
+    ],
+    "Higashi-Azuma": [
+      {
+        "name": "駅前",
+        "lat": 35.70738,
+        "lng": 139.8316
+      }
+    ],
+    "Omurai": [
+      {
+        "name": "駅前",
+        "lat": 35.71032,
+        "lng": 139.82761
+      }
+    ],
+    "Sagami-Iriya": [
+      {
+        "name": "駅前",
+        "lat": 35.47858,
+        "lng": 139.39182
+      }
+    ],
+    "Tadami-Negishi": [
+      {
+        "name": "駅前",
+        "lat": 37.5018238,
+        "lng": 139.8286901
+      }
+    ],
+    "Akita-Okubo": [
+      {
+        "name": "駅前",
+        "lat": 39.8715013,
+        "lng": 140.0630709
+      }
+    ],
+    "Oyamada": [
+      {
+        "name": "駅前",
+        "lat": 39.408508,
+        "lng": 141.194199
+      }
+    ],
+    "Matsubara-Ko": [
+      {
+        "name": "駅前",
+        "lat": 36.061116,
+        "lng": 138.4704765
+      }
+    ],
+    "Nobeyama": [
+      {
+        "name": "駅前",
+        "lat": 35.9553038,
+        "lng": 138.4746495
+      }
+    ],
+    "Higashi-Komoro": [
+      {
+        "name": "駅前",
+        "lat": 36.3169542,
+        "lng": 138.4322921
+      }
+    ],
+    "Shigeno": [
+      {
+        "name": "駅前",
+        "lat": 36.3426044,
+        "lng": 138.3635521
+      }
+    ],
+    "Appi-Kogen": [
+      {
+        "name": "駅前",
+        "lat": 40.0123954,
+        "lng": 140.9976755
+      }
+    ],
+    "Akasakada": [
+      {
+        "name": "駅前",
+        "lat": 40.048762,
+        "lng": 141.004289
+      }
+    ],
+    "Koyanohata": [
+      {
+        "name": "駅前",
+        "lat": 40.0766715,
+        "lng": 141.02066
+      }
+    ],
+    "Araya-Shinmachi": [
+      {
+        "name": "駅前",
+        "lat": 40.0973548,
+        "lng": 141.0491912
+      }
+    ],
+    "Anihata": [
+      {
+        "name": "駅前",
+        "lat": 40.1162368,
+        "lng": 140.8822362
+      }
+    ],
+    "Fujimi": [
+      {
+        "name": "駅前",
+        "lat": 35.9116151,
+        "lng": 138.2381543
+      }
+    ],
+    "Ryuogajo": [
+      {
+        "name": "駅前",
+        "lat": 36.2042018,
+        "lng": 138.4906875
+      }
+    ],
+    "Shimotsuke-Hanaoka": [
+      {
+        "name": "駅前",
+        "lat": 36.689722,
+        "lng": 139.969167
+      }
+    ],
+    "Niita": [
+      {
+        "name": "駅前",
+        "lat": 36.683611,
+        "lng": 139.990278
+      }
+    ],
+    "Kobana": [
+      {
+        "name": "駅前",
+        "lat": 36.625833,
+        "lng": 140.065278
+      }
+    ],
+    "Oiwake": [
+      {
+        "name": "駅前",
+        "lat": 39.848889,
+        "lng": 140.050278
+      }
+    ],
+    "Makuta": [
+      {
+        "name": "駅前",
+        "lat": 35.3575,
+        "lng": 139.9986
+      }
+    ],
+    "Uzen-Zennami": [
+      {
+        "name": "駅前",
+        "lat": 38.791944,
+        "lng": 140.060278
+      }
+    ],
+    "Tsuya": [
+      {
+        "name": "駅前",
+        "lat": 38.803056,
+        "lng": 140.083611
+      }
+    ],
+    "Hakusan-Niigata": [
+      {
+        "name": "駅前",
+        "lat": 37.90583,
+        "lng": 139.0325
+      }
+    ],
+    "Shizu-Suigun": [
+      {
+        "name": "駅前",
+        "lat": 36.61694,
+        "lng": 140.38611
+      }
+    ],
+    "Shinshu-Ariake": [
+      {
+        "name": "駅前",
+        "lat": 36.3591889,
+        "lng": 137.8786639
       }
     ]
   }
