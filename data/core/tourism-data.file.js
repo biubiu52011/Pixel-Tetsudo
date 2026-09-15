@@ -16119,7 +16119,7 @@ window.RAILWAY_TOURISM = {
           "콩과 채소 카레 \"Sambar\"를 맛보기."
         ]
       },
-      "address": "東京都江戸川区西葛西六丁目"
+      "address": "東京都江戸川区西葛西6-24-5"
     },
     {
       "name": "浅草聚楽",
