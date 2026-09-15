@@ -3636,7 +3636,7 @@ window.RAILWAY_TOURISM = {
           "역에서 출발"
         ]
       },
-      "address": "東京都足立区千住仲町"
+      "address": "東京都足立区千住仲町48-2"
     },
     {
       "name": "六町神社",
@@ -4611,7 +4611,7 @@ window.RAILWAY_TOURISM = {
           "西新井역에서 도보 8분"
         ]
       },
-      "address": "東京都足立区栗原二丁目"
+      "address": "東京都足立区栗原2-1-19"
     },
     {
       "name": "炎天寺",
@@ -6430,7 +6430,7 @@ window.RAILWAY_TOURISM = {
           "高野역에서 도보 10분"
         ]
       },
-      "address": "東京都足立区江北三丁目"
+      "address": "東京都足立区江北2-43-8"
     },
     {
       "name": "六月八幡神社",
