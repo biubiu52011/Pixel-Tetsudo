@@ -5066,7 +5066,7 @@ window.RAILWAY_TOURISM = {
           "扇大橋역에서 도보 8분"
         ]
       },
-      "address": "東京都足立区本木西町"
+      "address": "東京都足立区扇1-5-37"
     },
     {
       "name": "恵明寺",
@@ -5261,7 +5261,7 @@ window.RAILWAY_TOURISM = {
           "다케노즈카역에서 도보 11분"
         ]
       },
-      "address": "東京都足立区西伊興四丁目"
+      "address": "東京都足立区伊興5-4-3"
     },
     {
       "name": "満願寺",
@@ -5715,7 +5715,7 @@ window.RAILWAY_TOURISM = {
           "千住大橋역에서 도보 2분"
         ]
       },
-      "address": "東京都足立区千住橋戸町"
+      "address": "東京都足立区千住橋戸町23"
     },
     {
       "name": "仲町氷川神社",
