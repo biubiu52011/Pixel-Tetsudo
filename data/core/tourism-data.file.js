@@ -18146,7 +18146,7 @@ window.RAILWAY_TOURISM = {
           "집 주변은 조개 포장"
         ]
       },
-      "address": "千葉県浦安市堀江三丁目"
+      "address": "千葉県浦安市堀江3-3-1"
     },
     {
       "name": "海巖山 徳願寺",
@@ -21910,7 +21910,7 @@ window.RAILWAY_TOURISM = {
           "인근 카페 거리 산책과 세트로"
         ]
       },
-      "address": "東京都江東区三好二丁目"
+      "address": "東京都江東区白河1-3-32"
     },
     {
       "name": "Brew Parlor 3615",
@@ -26819,7 +26819,7 @@ window.RAILWAY_TOURISM = {
           "사계절 산책에 최적."
         ]
       },
-      "address": "東京都江東区清澄三丁目"
+      "address": "東京都江東区清澄3-3-9"
     },
     {
       "name": "麻布十番 麻の葉",
