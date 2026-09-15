@@ -30448,7 +30448,7 @@ window.RAILWAY_TOURISM = {
           "최고의 조합 찾기."
         ]
       },
-      "address": "東京都目黒区下目黒一丁目"
+      "address": "東京都目黒区下目黒1-3-28"
     },
     {
       "name": "卍力",
