@@ -1621,3 +1621,15 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 **验证**：全量站名审计 41→38（东急 3 线消失）；集成测试 73 线/737 列车/vehicleType 缺失 0/覆盖率 100% 无回归；verify_through_vtype 55/55、coverage 55/55（113 线/333 条目）；node --check 通过。
 **遗留（待用户拍板）**：①Kitakami manual 站名 fujiene/tachikawame/yokogawame vs 本地 fujine/tatekawame/yokokawame（3 站拼写需 wiki 查证，仅 2 班车影响极小）；②Tsugaru 本地站表 10 幽灵站（Aomori-Chuo 青森中央等）需按 wiki 重建 16 站站表（涉及显示层，风险面大）；③JR 地方线 manual 覆盖不全（OuMain 19/45 站等）为 4.3.524 提取限制，不影响推定但覆盖有限。
 **commit**：a0349e5（5 文件）
+
+## 4.3.643（2026-09-16，Kitakami 拼写修正 + Tsugaru 站表整体重建）
+**用户指令**：「继续处理」——处理 4.3.642 遗留三项中的前两项。
+**修复 1：Kitakami（北上線）manual 站名拼写**（wiki 实证官方罗马字）：Fujiene→**Fujine**（藤根 6 处）、Tachikawa-Me→**Tatekawame**（立川目 6 处）、Yokogawa-Me→**Yokokawame**（横川目 6 处）。本地站表正确，manual 拼错导致匹配失败；修后 manual 与本地 3 站全部对上。
+**修复 2：Tsugaru（津軽線）站表整体重建**——审计暴露本地 14 站含 6 幽灵/错站 + 缺 9 真站：
+- **删 6 站**（安全断言：仅 Tsugaru 引用；Tsugaru-Shinjo 同时被 OuMain 引用→一并从 OuMain @63 清理）：Aomori-Chuo（青森中央，虚构）、Tsugaru-Shinjo（津軽新町，虚构）、Madarame（斑目，地名非站）、Sotogahama（外ヶ浜，町名非站）、Ozawanai（虚构）、Gosogawa（後潟错拼——正站 Ushirogata 已在站表）
+- **补 9 真站**（wiki 坐标，ODPT 无数据）：Aburakawa 油川(40.857031,140.690442)/Tsugaru-Miyata 津軽宮田(40.887119,140.674475)/Okunai 奥内(40.903064,140.672336)/Satsumi 左堰(40.917228,140.665956)/Yomogita 蓬田(40.969322,140.654569)/Gozawa 郷沢(40.987611,140.652417)/Seheji 瀬辺地(41.007806,140.648283)/Ohira 大平(41.06585278,140.55948333)/Okawadai 大川平(41.163203,140.50755)
+- **重建 18 站官方站序**：Aomori→Aburakawa→Tsugaru-Miyata→Okunai→Satsumi→Ushirogata→Nakasawa→Yomogita→Gozawa→Seheji→Kanita→Naka-Oguni→Ohira→Tsugaru-Futamata→Okawadai→Imabetsu→Tsugaru-Hamana→Minmaya（wiki 営業キロ顺序）
+- 全链路：stations 实体 9 新建/6 删除、stationLines 同步、LSO[Tsugaru] 18 键重建、LSO[OuMain] 清理、i18n 9 新建（ja/zh/ko/en/zh-CN）、name_map 清理
+**验证**：全量站名审计——Kitakami「manual有而本地无」3 站消失、Tsugaru 幽灵站清零（剩余 14 站均为 manual 时刻表未覆盖的真站）；集成测试 73 线/737 列车/vehicleType 缺失 0/覆盖率 100% 无回归；node --check 通过。
+**遗留（任务 3，大工程）**：JR 地方线 manual 时刻表覆盖不全（38 线「本地有而 manual 无」——Tsugaru 14 站 manual 仅 4 站、OuMain 45 站 manual 仅 19 站等），为 4.3.524 官网提取限制，需逐线从 JR 官网重新提取完整时刻表。
+**commit**：4.3.643（5 文件）
