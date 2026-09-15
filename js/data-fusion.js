@@ -99,6 +99,14 @@
       }
       if (_stF === "Suspension") result.status = "suspended";
       else if (_stF === "Delay") result.status = "delayed";
+      // v4.3.629: 官方 status 自由文本值映射（官方给什么用什么，不读正文）——
+      // JR东: 運転見合わせ→中断 / 遅延→延误 / 一部運休→部分停运；私铁: 運行情報あり→info
+      if (_stF && result.status === "normal") {
+        if (/(?:\u904b\u8ee2\u898b\u5408\u308f\u305b|\u904b\u8ee2\u3092\u4e2d\u6b62|\u904b\u8ee2\u4e2d\u6b62|\u5168\u7dda\u904b\u4f11)/.test(_stF)) result.status = "suspended";
+        else if (/(?:\u9045\u5ef6|\u30c0\u30a4\u30e4\u4e71\u308c)/.test(_stF)) result.status = "delayed";
+        else if (/\u4e00\u90e8\u904b\u4f11/.test(_stF)) result.status = "notice";
+      }
+      result.statusText = _stF;
       // Direct delay field first: odpt:Train responses carry odpt:delay (minutes)
       if (raw["odpt:delay"] != null) {
         var dMin0 = parseInt(raw["odpt:delay"], 10);

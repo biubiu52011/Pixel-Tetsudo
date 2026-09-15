@@ -65,7 +65,16 @@
     // Status section
     var statusSection = modal.querySelector(".rs-status-section");
     statusSection.className = "rs-status-section rs-status-" + status;
-    statusSection.innerHTML = '<span class="rs-status-indicator"><span class="rs-status-dot"></span>' + statusText + '</span>';
+    // v4.3.629: 状态行 = 官方 status 词（分级翻译）+ 官方 cause（原因；非 ja 界面经 DelayTranslator 翻译）
+    var _causeInline = "";
+    if (cause && status !== "normal") {
+      var _cTxt = cause;
+      if ((window.currentLang || "ja") !== "ja" && window.DelayTranslator && _needsJaTranslate(cause)) {
+        try { _cTxt = window.DelayTranslator.translateFragment(cause, window.currentLang); } catch(e) {}
+      }
+      _causeInline = " <span class=\"rs-cause-inline\">\uff08" + escapeHtml(_cTxt) + "\uff09</span>";
+    }
+    statusSection.innerHTML = "<span class=\"rs-status-indicator\"><span class=\"rs-status-dot\"></span>" + statusText + "</span>" + _causeInline;
     // Apply status dot color via DOM API (CSP-safe)
     var dot = statusSection.querySelector(".rs-status-dot");
     if (dot) dot.style.background = "var(--" + (s.color || ({ normal: "green", info: "yellow", notice: "yellow", delayed: "orange", suspended: "red", no_data: "gray", no_odpt: "gray", loading: "gray" }[status] || "gray")) + ")";
