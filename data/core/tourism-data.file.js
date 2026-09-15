@@ -20326,7 +20326,7 @@ window.RAILWAY_TOURISM = {
           "빨간 문이 표지인 귀여운 가게"
         ]
       },
-      "address": "東京都足立区谷中一丁目"
+      "address": "東京都足立区谷中1-5-3"
     },
     {
       "name": "欧風カレー&シチュー専門店 トマト",
@@ -25611,7 +25611,7 @@ window.RAILWAY_TOURISM = {
           "야나카 산책 도중 불쑥"
         ]
       },
-      "address": "東京都台東区谷中七丁目"
+      "address": "東京都台東区谷中6-1-23"
     },
     {
       "name": "MOKUBAZA（モクバザ）",
