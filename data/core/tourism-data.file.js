@@ -9051,7 +9051,7 @@ window.RAILWAY_TOURISM = {
         ]
       },
       "image": "../images/観光地/東京大仏.jpg",
-      "address": "東京都板橋区弥生町"
+      "address": "東京都板橋区赤塚5-28-3"
     },
     {
       "name": "葛西臨海公園",
@@ -10731,7 +10731,7 @@ window.RAILWAY_TOURISM = {
         ]
       },
       "image": "../images/観光地/善福寺公園.jpg",
-      "address": "東京都杉並区善福寺二丁目"
+      "address": "東京都杉並区善福寺3-9-10"
     },
     {
       "name": "光が丘公園",
@@ -36691,7 +36691,7 @@ window.RAILWAY_TOURISM = {
           "모닝도 인기"
         ]
       },
-      "address": "東京都足立区"
+      "address": "東京都足立区西新井7-12-12"
     },
     {
       "name": "Ogiso cafe",
