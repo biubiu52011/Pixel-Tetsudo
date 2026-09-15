@@ -35836,7 +35836,7 @@ window.RAILWAY_TOURISM = {
           "와인과 페어링"
         ]
       },
-      "address": "東京都足立区千住四丁目"
+      "address": "東京都足立区千住3-35-1"
     },
     {
       "name": "Cielo Azzurro",
