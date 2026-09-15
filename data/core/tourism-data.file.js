@@ -31959,7 +31959,7 @@ window.RAILWAY_TOURISM = {
           "고탄노 도보 2분"
         ]
       },
-      "address": "東京都足立区足立三丁目"
+      "address": "東京都足立区足立3-33-7"
     },
     {
       "name": "にんにく料理酒場 Garlic Carinderia",
@@ -32034,7 +32034,7 @@ window.RAILWAY_TOURISM = {
           "고탄노 도보 9분"
         ]
       },
-      "address": "東京都足立区足立一丁目"
+      "address": "東京都足立区足立1-10-9"
     },
     {
       "name": "unsaule",
