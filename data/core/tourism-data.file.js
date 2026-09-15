@@ -18222,7 +18222,7 @@ window.RAILWAY_TOURISM = {
           "11월 16일 주야회가 절정"
         ]
       },
-      "address": "千葉県市川市本行徳"
+      "address": "千葉県市川市本行徳5-22"
     },
     {
       "name": "常夜灯公園",
@@ -18297,7 +18297,7 @@ window.RAILWAY_TOURISM = {
           "러닝·산책 인기 둔치"
         ]
       },
-      "address": "千葉県市川市本行徳"
+      "address": "千葉県市川市本行徳28-28"
     },
     {
       "name": "銀之塔",
@@ -22970,7 +22970,7 @@ window.RAILWAY_TOURISM = {
           "쌍안경 있으면 편리"
         ]
       },
-      "address": "千葉県市川市妙典六丁目"
+      "address": "千葉県市川市妙典2-14"
     },
     {
       "name": "みずほ銀行兜町支店",
