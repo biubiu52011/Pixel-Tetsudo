@@ -25686,7 +25686,7 @@ window.RAILWAY_TOURISM = {
           "20시간 이상 정성 들여 준비"
         ]
       },
-      "address": "東京都渋谷区神宮前二丁目"
+      "address": "東京都渋谷区神宮前2-28-12"
     },
     {
       "name": "M’amour（マムール）",
@@ -30373,7 +30373,7 @@ window.RAILWAY_TOURISM = {
           "활판 인쇄 질감."
         ]
       },
-      "address": "東京都渋谷区神宮前一丁目"
+      "address": "東京都渋谷区神宮前1-1-1"
     },
     {
       "name": "茶割",
