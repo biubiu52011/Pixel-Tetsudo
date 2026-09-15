@@ -28410,7 +28410,7 @@ window.RAILWAY_TOURISM = {
           "친절한 강습."
         ]
       },
-      "address": "東京都千代田区隼町"
+      "address": "東京都中央区日本橋2-4-1（日本橋髙島屋7階・香の調べ）"
     },
     {
       "name": "JAMBO",
