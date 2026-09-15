@@ -35907,7 +35907,7 @@ window.RAILWAY_TOURISM = {
           "코스 추천"
         ]
       },
-      "address": "東京都足立区千住二丁目"
+      "address": "東京都足立区千住2-65"
     },
     {
       "name": "洋食堂",
@@ -37265,7 +37265,7 @@ window.RAILWAY_TOURISM = {
           "사시미와 사키 집"
         ]
       },
-      "address": "東京都足立区千住四丁目"
+      "address": "東京都足立区千住3-35-13"
     },
     {
       "name": "市場食堂 さかなや",
@@ -38059,7 +38059,7 @@ window.RAILWAY_TOURISM = {
           "여기뿐인 츄하이"
         ]
       },
-      "address": "東京都足立区千住四丁目"
+      "address": "東京都足立区千住3-24-1"
     },
     {
       "name": "びあマ北千住",
