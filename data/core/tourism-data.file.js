@@ -25156,7 +25156,7 @@ window.RAILWAY_TOURISM = {
           "사전 오더 필요"
         ]
       },
-      "address": "東京都足立区綾瀬"
+      "address": "東京都足立区綾瀬3-15-15"
     },
     {
       "name": "ラべイユ",
@@ -31434,7 +31434,7 @@ window.RAILWAY_TOURISM = {
           "점심부터 반주 가능"
         ]
       },
-      "address": "東京都足立区花畑七丁目"
+      "address": "東京都足立区花畑7-8-5"
     },
     {
       "name": "キッチンフライパン",
@@ -31509,7 +31509,7 @@ window.RAILWAY_TOURISM = {
           "기타센주 도보 8분"
         ]
       },
-      "address": "東京都足立区千住一丁目"
+      "address": "東京都足立区千住1-23-18"
     },
     {
       "name": "東京華山椒",
