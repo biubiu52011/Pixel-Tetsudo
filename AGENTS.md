@@ -1659,3 +1659,14 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 - 合理缺口（官方源限制）：Gono(42/43 中田通过)、Kesennuma(17/18 東志津川无站)、Kitakami(11/15 北上線每日仅2~4班)、Kounan(26/27 Koma无站)、Ofunato(24/25 上鹿折BRT通过)、OuMain(61/65)、RikutoEast(15/25 鳴子温泉～新庄无数字表)、RikutsuWest(8/10 羽前前波/高屋全通过)、Shinetsu(55/56 Toyooka无站)、TohokuMain(74/75 東水沢通过)、Tsugaru(11/18 蟹田～三厩区间停运)、Yamagata(34/36 赤岩无站/大沢全通过)
 **验证**：node --check 38文件全过；verify_through_vtype 55/55；verify_vtype_coverage 113线/336条目；integrate_all_lines 73线/811列车/0缺失/vehicleType 100%。
 **commit**：4.3.708
+
+## 4.3.710（2026-09-16，交叉验证延伸·发站线外检查 + 重複/誤混入列车清理）
+**背景**：组织者 4.3.708 完成 38 线重建（站覆盖 966/1007=96%，记录 33759，站名不一致 38→14 线，剩余缺口均为官方源限制：通過站/停运区间/官网无表）。MainAgent 交叉验证延伸——在终点检查（DEST_LINE_OUT）基础上新增**发站线外检查**。
+**新验证**：work/yurikamome_timetable/scan_dep_out.py（初版直通表 JSON 解析失败致 49 条误报 → 修正为从 through-service.js 正确导出后归零）。
+**发现并修正 3 类真缺陷**（OuMain 797→796 条后再删 Gono 4 条）：
+1. **OuMain⇄Tazawako 重複 24 条**（823M/831M/835M/839M/843M/845M/847M/853M/855M/857M/861M×平日/土休）：盛岡発田沢湖線列車被同時写入 OuMain-manual 与 Tazawako-manual（railway 字段不同、経路時刻完全一致）——重複推定源，从 OuMain 删除（Tazawako 保留正确记录）。
+2. **OuMain 9287B**：仙台発 11:13→盛岡発 12:10（東北本線列車误入奥羽本線，与 9288B 同款，4.3.708 重建后仍在）——删除。
+3. **Gono 8632D/8634D×2**：青森発→弘前「発2站・无着」——经路青森→弘前全走奥羽本線不经五能線，判定为官网提取误混入（且结构不正）——删除。
+**验证**：发站线外 0 条；集成 73 线/811 列车/vehicleType 缺失 0/覆盖 100%；直通车型 55/55；tt_cross 虚构终点 0、DEST_LINE_OUT 577（全为合法线外终点：TokyuMeguro→相鉄 387 + TokyuDenEn→南栗橋 95 + ChuoMain→松本/長野 94 + 秩父 1）。
+**遗留**：①不完整记录 491 条（单站着/発のみ，含 Gono 青森/秋田着のみ直通列车、Suigun 折返、东急区間列車 3 条）——4.3.524/708 官网提取限制，时刻正确但经路不全；②TokyuMeguro⇄相鉄 387 条（4.3.495 拍板待ち）；③秩父直通 1 条（本地缺飯能）；④京成時刻表本体未做（ODPT 无数据）。
+**commit**：4.3.710（OuMain-manual.js / Gono-manual.js）
