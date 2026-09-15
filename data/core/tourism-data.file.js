@@ -19951,7 +19951,7 @@ window.RAILWAY_TOURISM = {
           "툇마루에 앉아 행인을 본다"
         ]
       },
-      "address": "東京都新宿区高田馬場三丁目"
+      "address": "東京都新宿区高田馬場3-46-11"
     },
     {
       "name": "InSPYre（インスパイヤ）",
@@ -20629,7 +20629,7 @@ window.RAILWAY_TOURISM = {
           "HP 암호 말하면 하와이안 커피 무료"
         ]
       },
-      "address": "東京都豊島区池袋四丁目"
+      "address": "東京都豊島区池袋4-29-2"
     },
     {
       "name": "久米繊維工業ファクトリーショップ",
@@ -20854,7 +20854,7 @@ window.RAILWAY_TOURISM = {
           "브러시만 20종 이상이라는 품셈"
         ]
       },
-      "address": "東京都渋谷区神宮前一丁目"
+      "address": "東京都渋谷区神宮前1-1-12"
     },
     {
       "name": "Dear Bear",
