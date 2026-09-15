@@ -30977,7 +30977,7 @@ window.RAILWAY_TOURISM = {
           "고집 재료."
         ]
       },
-      "address": "東京都千代田区四番町"
+      "address": "東京都千代田区九段南4-2-3"
     },
     {
       "name": "杉本とうふ店",
