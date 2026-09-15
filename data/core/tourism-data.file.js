@@ -3636,7 +3636,7 @@ window.RAILWAY_TOURISM = {
           "역에서 출발"
         ]
       },
-      "address": "東京都足立区千住仲町48-2"
+      "address": "東京都足立区千住4-31-2"
     },
     {
       "name": "六町神社",
@@ -4741,7 +4741,7 @@ window.RAILWAY_TOURISM = {
           "梅島역에서 도보 7분"
         ]
       },
-      "address": "東京都足立区梅島二丁目"
+      "address": "東京都足立区梅島2-24-23"
     },
     {
       "name": "中曽根神社",
@@ -5456,7 +5456,7 @@ window.RAILWAY_TOURISM = {
           "志茂역에서 도보 20분"
         ]
       },
-      "address": "東京都足立区鹿浜二丁目"
+      "address": "東京都足立区鹿浜2-28-4"
     },
     {
       "name": "綾瀬神社",
@@ -6690,7 +6690,7 @@ window.RAILWAY_TOURISM = {
           "다케노즈카역에서 도보 11분"
         ]
       },
-      "address": "東京都足立区伊興二丁目"
+      "address": "東京都足立区伊興2-12-22"
     },
     {
       "name": "熊野神社",
@@ -6820,7 +6820,7 @@ window.RAILWAY_TOURISM = {
           "扇大橋역에서 도보 15분"
         ]
       },
-      "address": "東京都足立区本木"
+      "address": "東京都足立区本木東町12-16"
     },
     {
       "name": "閻魔祭",
@@ -7015,7 +7015,7 @@ window.RAILWAY_TOURISM = {
           "亀有역에서 도보 10분"
         ]
       },
-      "address": "東京都足立区中川三丁目"
+      "address": "東京都足立区中川3-21-1"
     },
     {
       "name": "八幡神社（西綾瀬）",
@@ -7080,7 +7080,7 @@ window.RAILWAY_TOURISM = {
           "小菅역에서 도보 6분"
         ]
       },
-      "address": "東京都足立区西綾瀬一丁目"
+      "address": "東京都足立区西綾瀬3-6"
     },
     {
       "name": "日の出神社",
@@ -7145,7 +7145,7 @@ window.RAILWAY_TOURISM = {
           "北千住역에서 도보 7분"
         ]
       },
-      "address": "東京都足立区日ノ出町"
+      "address": "東京都足立区日ノ出町37"
     },
     {
       "name": "皇居（皇居外苑・二重橋）",
