@@ -21307,7 +21307,7 @@ window.RAILWAY_TOURISM = {
           "보는 맛 먹는 맛 신감각 스시"
         ]
       },
-      "address": "東京都台東区上野二丁目7"
+      "address": "東京都台東区上野3-21-7"
     },
     {
       "name": "東京都恩賜上野動物園",
@@ -26366,7 +26366,7 @@ window.RAILWAY_TOURISM = {
           "승마는 초등 6학년 이하"
         ]
       },
-      "address": "東京都江戸川区南葛西七丁目"
+      "address": "東京都江戸川区南葛西7-3"
     },
     {
       "name": "地下鉄博物館",
@@ -26442,7 +26442,7 @@ window.RAILWAY_TOURISM = {
           "입장료 220엔으로 부담"
         ]
       },
-      "address": "東京都江戸川区東葛西六丁目1"
+      "address": "東京都江戸川区東葛西6-3-1"
     },
     {
       "name": "Akasaka Zen Space",
