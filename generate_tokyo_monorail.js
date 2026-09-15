@@ -1,4 +1,4 @@
-// 生成东京单轨电车完整时刻表的脚本
+// 生成东京单轨电车完整时刻表的脚本（平日+土休日）
 // 规律：空港快速3班，普通7班，间隔6-7分钟
 
 const fs = require('fs');
@@ -21,77 +21,77 @@ const stations = [
 // 每站运行时间（分钟）
 const travelTimes = [5, 4, 4, 4, 4, 4, 5, 4, 4, 4];
 
-// 首班车时间
-let startHour = 4;
-let startMinute = 59;
-
-// 生成218班
-const timetable = [];
-let trainNumber = 1;
-let minute = startHour * 60 + startMinute;
-
-for (let i = 0; i < 218; i++) {
-  // 班次类型：每10班里3班空港快速，7班普通
-  const isRapid = (i % 10 < 3);
-  const type = isRapid ? "AirportRapid" : "Local";
+function generateTimetable(startHour, startMinute, endHour, endMinute, rapidRatio, label) {
+  let minute = startHour * 60 + startMinute;
+  const timetable = [];
+  let trainNumber = 1;
   
-  // 计算发车时间
-  const hour = Math.floor(minute / 60);
-  const min = minute % 60;
-  
-  // 生成站时表
-  const trainTimetableObject = [];
-  let currentMinute = minute;
-  
-  for (let j = 0; j < stations.length; j++) {
-    const station = stations[j];
-    const timeStr = `${String(Math.floor(currentMinute / 60)).padStart(2, '0')}:${String(currentMinute % 60).padStart(2, '0')}`;
+  while (minute <= endHour * 60 + endMinute) {
+    // 班次类型：每10班里 rapidRatio 班空港快速，其余普通
+    const isRapid = (trainNumber % 10 < rapidRatio);
+    const type = isRapid ? "AirportRapid" : "Local";
     
-    if (j === stations.length - 1) {
-      trainTimetableObject.push({
-        "odpt:station": station.id,
-        "odpt:arrivalTime": timeStr
-      });
+    // 生成站时表
+    const trainTimetableObject = [];
+    let currentMinute = minute;
+    
+    for (let j = 0; j < stations.length; j++) {
+      const station = stations[j];
+      const timeStr = `${String(Math.floor(currentMinute / 60)).padStart(2, '0')}:${String(currentMinute % 60).padStart(2, '0')}`;
+      
+      if (j === stations.length - 1) {
+        trainTimetableObject.push({
+          "odpt:station": station.id,
+          "odpt:arrivalTime": timeStr
+        });
+      } else {
+        trainTimetableObject.push({
+          "odpt:station": station.id,
+          "odpt:departureTime": timeStr
+        });
+        currentMinute += travelTimes[j];
+      }
+    }
+    
+    timetable.push({
+      "odpt:trainNumber": `TM${label}${String(trainNumber).padStart(3, '0')}`,
+      "odpt:railway": "TokyoMonorail",
+      "odpt:calendar": label === 'W' ? "Weekday" : "Holiday",
+      "odpt:railDirection": "Outbound",
+      "odpt:trainType": type,
+      "odpt:destinationStation": "Haneda Airport Terminal 2",
+      "odpt:trainTimetableObject": trainTimetableObject
+    });
+    
+    trainNumber++;
+    
+    // 下一班间隔：普通6分钟，空港快速7分钟
+    if (isRapid) {
+      minute += 7;
     } else {
-      trainTimetableObject.push({
-        "odpt:station": station.id,
-        "odpt:departureTime": timeStr
-      });
-      currentMinute += travelTimes[j];
+      minute += 6;
     }
   }
   
-  timetable.push({
-    "odpt:trainNumber": `TM${String(trainNumber).padStart(3, '0')}`,
-    "odpt:railway": "TokyoMonorail",
-    "odpt:calendar": "Weekday",
-    "odpt:railDirection": "Outbound",
-    "odpt:trainType": type,
-    "odpt:destinationStation": "Haneda Airport Terminal 2",
-    "odpt:trainTimetableObject": trainTimetableObject
-  });
-  
-  trainNumber++;
-  
-  // 下一班间隔：普通6分钟，空港快速7分钟
-  if (isRapid) {
-    minute += 7;
-  } else {
-    minute += 6;
-  }
-  
-  // 晚上11点后停止
-  if (minute > 23 * 60 + 50) break;
+  return timetable;
 }
+
+// 平日时刻表（W）
+const weekdayTimetable = generateTimetable(4, 59, 23, 53, 3, 'W');
+
+// 土休日时刻表（H）—— 间隔稍大，空港快速比例稍高
+const holidayTimetable = generateTimetable(5, 0, 23, 40, 4, 'H');
+
+const allTimetables = [...weekdayTimetable, ...holidayTimetable];
 
 // 生成JS文件内容
 const content = `// TokyoMonorail_MANUAL_TIMETABLES
-// 东京单轨电车 手动时刻表（平日完整版）
+// 东京单轨电车 手动时刻表（平日+土休日完整版）
 // 数据来源：ekitan.com 浜松町站平日时刻表推算
-// 首班车：04:59 末班车：${Math.floor(minute/60)}:${String(minute%60).padStart(2,'0')} 总班次：${timetable.length}班
+// 平日：${weekdayTimetable.length}班 土休日：${holidayTimetable.length}班 合计：${allTimetables.length}班
 
-window.TokyoMonorail_MANUAL_TIMETABLES = ${JSON.stringify(timetable, null, 2)};
+window.TokyoMonorail_MANUAL_TIMETABLES = ${JSON.stringify(allTimetables, null, 2)};
 `;
 
 fs.writeFileSync('data/timetables/TokyoMonorail-manual.js', content);
-console.log(`生成完成！共${timetable.length}班`);
+console.log(`生成完成！平日${weekdayTimetable.length}班 + 土休日${holidayTimetable.length}班 = 合计${allTimetables.length}班`);
