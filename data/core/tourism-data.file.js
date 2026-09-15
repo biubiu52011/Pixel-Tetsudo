@@ -17469,7 +17469,7 @@ window.RAILWAY_TOURISM = {
           "패키지가 세련되어 사진 찍기 좋음"
         ]
       },
-      "address": "東京都渋谷区広尾五丁目1"
+      "address": "東京都渋谷区広尾5-16-1"
     },
     {
       "name": "亜細亜割烹 蓮月",
@@ -19199,7 +19199,7 @@ window.RAILWAY_TOURISM = {
           "미니 산수 기념품도 인기"
         ]
       },
-      "address": "東京都台東区浅草二丁目"
+      "address": "東京都台東区浅草2-35-12"
     },
     {
       "name": "mic",
