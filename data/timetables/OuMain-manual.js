@@ -1,4 +1,4 @@
-/**
+﻿/**
  * OuMain 駅時刻表（2609 2026年9月改正）from timetables.jreast.co.jp
  */
 window.OuMain_MANUAL_TIMETABLES = [
