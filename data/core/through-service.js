@@ -44,9 +44,9 @@
     "TokyuMeguro": ["Mita", "Namboku", "SotetsuShin-Yokohama"],
     "TokyuDenEn": ["Hanzomon", "TokyuOimachi"],
     // 西武有楽町線（小竹向原-練馬）— the through path to 西武池袋線 runs via this line
-    "Yurakucho_Seibu": ["Fukutoshin", "Ikebukuro", "SeibuChichibu"],
+    "Yurakucho_Seibu": ["Fukutoshin", "Ikebukuro", "SeibuChichibu", "Yurakucho"],
     // 西武池袋線（データ線ではない——BFS 中継のみ、表示対象外）
-    "Ikebukuro": ["Yurakucho_Seibu"],
+    "Ikebukuro": ["Yurakucho_Seibu", "Fukutoshin"],
     // 東武東上線
     "Tojo": ["Fukutoshin", "Yurakucho"],
     // 京成・京急
