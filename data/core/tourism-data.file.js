@@ -29089,7 +29089,7 @@ window.RAILWAY_TOURISM = {
           "스트레스 해소."
         ]
       },
-      "address": "埼玉県和光市新倉一丁目"
+      "address": "埼玉県和光市新倉1-4-82"
     },
     {
       "name": "Lito rukka（リトルッカ）",
