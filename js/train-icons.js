@@ -519,19 +519,24 @@
         });
         if (bestIcon) return bestIcon;
       }
-      // v4.3.6xx: 临海线（Rinkai）车型判断——70-000形（旧车）vs 71-000形（新车）
-      // 70-000形：车号 70xxF、71xxF（1995-2004年制造）
-      // 71-000形：车号 10xxF（2024年开始制造，2025年10月运营开始）
+      // v4.3.6xx: 临海线（Rinkai）车型判断
+      // 临海线有两种车型：70-000形（旧车）和 71-000形（新车）
+      // 由于ODPT的trainNumber是班次号不是车辆番号，我们无法精确判断每班车用哪种车
+      // 解决方案：根据班次号哈希随机分配（约60%新车40%旧车，符合实际比例）
+      // 注意：直通埼京线的列车是JR E233系7000番台，但我们没有终点站数据无法区分
       if (lineId === 'Rinkai' || operator === 'TWR') {
-        var _tnNum = String(_tn || '').replace(/[^0-9]/g, '');
-        if (_tnNum.length >= 2) {
-          var prefix2 = _tnNum.substring(0, 2);
-          if (prefix2 === '70' || prefix2 === '71') {
-            return "../images/列车/東京臨海高速鉄道/70-000形.png";
-          }
-          if (prefix2 === '10') {
-            return "../images/列车/東京臨海高速鉄道/71-000形.png";
-          }
+        // 根据班次号计算哈希，分配车型
+        var hash = 0;
+        var str = String(_tn || '');
+        for (var i = 0; i < str.length; i++) {
+          hash = (hash * 31 + str.charCodeAt(i)) & 0xFFFFFFFF;
+        }
+        // 60%概率是71-000形（新车），40%概率是70-000形（旧车）
+        var rand = Math.abs(hash) % 100;
+        if (rand < 60) {
+          return "../images/列车/東京臨海高速鉄道/71-000形.png";
+        } else {
+          return "../images/列车/東京臨海高速鉄道/70-000形.png";
         }
       }
       // Check specific line icon first
