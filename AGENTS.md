@@ -1611,3 +1611,13 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 **遗留数据瑕疵（不影响推定链路，待用户拍板）**：①Tsugaru 本地站表含幽灵站（Aomori-Chuo 青森中央等 10 站与 manual 4 站不交叠）——本地站表数据质量问题，涉及显示层需单独评估；②Ominato manual 缺金谷沢站（本地 11/manual 10）；③Kitakami manual 站名拼写差异（yokogawame/tachikawame/fujiene vs 本地 yokokawame/tatekawame/fujine）需 wiki 查证。
 **验证**：verify_through_vtype.js 55/55、verify_vtype_coverage.js 55/55（113 线/333 条目）无回归；node --check 三文件通过。
 **commit**：a483dfb（3 文件）
+
+## 4.3.642（2026-09-16，站名 ID 规范化：东急 4 站 + 磐越江田同名冲突）
+**用户指令**：「继续校验」——全量站名一致性校验（73 线 manual 站名 vs 本地站表）后修复发现的问题。
+**全量校验发现**：41 线站名不一致，分三类：①真 ID 错误（东急 4 站、Kitakami 3 站）；②manual 时刻表覆盖区间 < 本地线路定义（JR 地方线大量「本地有而 manual 无」——4.3.524 官网提取限制）；③Tsugaru 本地站表幽灵站。
+**修复 1：东急 3 站改用官方名**（本地站表用非官方 ID，manual 用官方名导致匹配失败）：
+- Miyanomachi→**Miyanosaka**（宮ノ坂，世田谷線 @6）、Musashi-Shintada→**Musashi-Nitta**（武蔵新田，多摩川線 @4）、Yaguchi-Watari→**Yaguchi-No-Watashi**（矢口渡，多摩川線 @5）——stations/stationLines/LSO/lines/i18n 全链路同步（JSON 权威源 + gen-file-data.js 重新生成 .file.js）。
+**修复 2：Eda 同名不同站冲突**（东急江田 vs 磐越東線江田）：原 stations[Eda]=东急坐标(35.558529,139.551559) 却被 BanetsuEast 引用（磐越江田坐标错显示到町田）；stationLines 无法表达同名站。按 Utsunomiya/Tobu-Utsunomiya 先例拆分：东急江田保留 **Eda**（官方名，stationLines=[TokyuDenEn]），磐越東線江田独立 **Eda-Banetsu**（stationLines=[BanetsuEast]，坐标 wiki 官方 37.179528,140.825806——ODPT 无此站数据）；lines[BanetsuEast]/LSO/i18n 同步；BanetsuEast-manual.js 江田 URN 20 处 Eda→Eda-Banetsu。
+**验证**：全量站名审计 41→38（东急 3 线消失）；集成测试 73 线/737 列车/vehicleType 缺失 0/覆盖率 100% 无回归；verify_through_vtype 55/55、coverage 55/55（113 线/333 条目）；node --check 通过。
+**遗留（待用户拍板）**：①Kitakami manual 站名 fujiene/tachikawame/yokogawame vs 本地 fujine/tatekawame/yokokawame（3 站拼写需 wiki 查证，仅 2 班车影响极小）；②Tsugaru 本地站表 10 幽灵站（Aomori-Chuo 青森中央等）需按 wiki 重建 16 站站表（涉及显示层，风险面大）；③JR 地方线 manual 覆盖不全（OuMain 19/45 站等）为 4.3.524 提取限制，不影响推定但覆盖有限。
+**commit**：a0349e5（5 文件）
