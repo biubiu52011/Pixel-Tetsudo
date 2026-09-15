@@ -40,7 +40,13 @@ images/*/_files.txt
 .vscode/
 
 # Recovery archive
-recovery/
+# CI guard 依赖文件必须进版本库（否则 GitHub Actions checkout 后 guard 无法运行）
+recovery/*
+!recovery/baseline/
+!recovery/baseline/*.json
+!recovery/reports/
+recovery/reports/*
+!recovery/reports/unified_lines_3.3_inventory.json
 
 
 # serve logs

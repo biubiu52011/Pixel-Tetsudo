@@ -367,7 +367,7 @@ function renderGrid() {
       state.autoDetected = false;
       renderAll();
     }
-    // 4.3.561: file:// 本地打开无 geolocation 权限，直接降级（不等 8 秒）
+    // 4.3.561: 以本地文件方式打开无 geolocation 权限，直接降级（不等 8 秒）
     if (typeof location !== 'undefined' && location.protocol === 'file:') {
       clearTimeout(guard);
       locFallback();

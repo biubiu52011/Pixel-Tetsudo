@@ -20,7 +20,7 @@
     default:  "linear-gradient(135deg, #008803 0%, #006600 100%)"
   };
 
-  var MAPTILER_KEY = 'tYRNv4akrEAKTL5ORzUm';  // MapTiler 免费 key（origin 白名单：GitHub Pages + localhost:8017，防盗用）
+  var MAPTILER_KEY = 'tYRNv4akrEAKTL5ORzUm';  // MapTiler 免费 key（origin 白名单：GitHub Pages + 本地开发端口 8017，防盗用）
   var TAG_EMOJI = {};
 
   var currentSpotIndex = 0;

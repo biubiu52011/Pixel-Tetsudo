@@ -38,9 +38,24 @@ def main():
     cur_name_map = set(current.get('name_map', {}).keys())
     cur_slo = current.get('lineStationOrder', {})
     cur_sl = current.get('stationLines', {})
-    cur_tourism = current.get('tourism', {})
-    cur_tourism_stations = len(cur_tourism) if isinstance(cur_tourism, dict) else 0
-    cur_tourism_spots = sum(len(v.get('spots',[])) for v in cur_tourism.values() if isinstance(v, dict)) if isinstance(cur_tourism, dict) else 0
+    cur_tourism = current.get('tourism')
+    cur_tourism_stations = 0
+    cur_tourism_spots = 0
+    if isinstance(cur_tourism, dict) and cur_tourism:
+        cur_tourism_stations = len(cur_tourism)
+        cur_tourism_spots = sum(len(v.get('spots', [])) for v in cur_tourism.values() if isinstance(v, dict))
+    else:
+        # tourism 数据已迁移至独立文件 data/core/tourism_data.json（4.3.59x）
+        tp = os.path.join(REPO_ROOT, 'data', 'core', 'tourism_data.json')
+        if os.path.exists(tp):
+            try:
+                with open(tp, 'r', encoding='utf-8') as f:
+                    td = json.load(f)
+                if isinstance(td, dict):
+                    cur_tourism_stations = len(td.get('station_exits', {}))
+                    cur_tourism_spots = len(td.get('spots', []))
+            except Exception:
+                pass
     counts = {
         'lines': len(cur_lines),
         'stations': len(cur_stations),
@@ -95,13 +110,14 @@ def main():
         warnings.append('NEW stations (%d): %s' % (len(new_stations), ', '.join(new_stations[:5])))
     mismatch_a = 0
     mismatch_b = 0
+    # stationLines 实际格式：{站ID: [lineId, ...]}（字符串数组），按此格式做关系一致性校验
     for lid, sdict in cur_slo.items():
         for sid in sdict:
-            if not any(e.get('line_id')==lid for e in cur_sl.get(sid,[])):
+            if not any(e == lid for e in cur_sl.get(sid, [])):
                 mismatch_a += 1
     for sid, entries in cur_sl.items():
         for entry in entries:
-            lid = entry.get('line_id')
+            lid = entry
             if lid not in cur_slo or sid not in cur_slo[lid]:
                 mismatch_b += 1
     if mismatch_a > 0:

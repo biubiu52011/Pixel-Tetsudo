@@ -1425,10 +1425,9 @@ window.RAILWAY_I18N = {
   },
   "Yuki": {
     "ja": "結城",
-    "zh": "雪",
+    "zh": "结城",
     "ko": "유키",
-    "en": "Yuki",
-    "zh-CN": "结城"
+    "en": "Yuki"
   },
   "Tamako": {
     "ja": "多摩湖",
