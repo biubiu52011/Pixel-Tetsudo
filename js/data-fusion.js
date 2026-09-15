@@ -857,6 +857,16 @@
               console.debug("[DataFusion] auto-ensure manual skip:", h, e.message);
             });
           }
+          // v4.3.6xx: 后台预加载常用线路的手动时刻表（Warm-up）
+          // 用户大概率会切换的几条线，提前在后台加载，不用等到用户点击才加载
+          if (isTrainsPage && window.DataFusion && window.DataFusion.ensureManualTimetable) {
+            setTimeout(function() {
+              var warmupLines = ['Yamanote', 'ChuoRapid', 'KeihinTohoku', 'SeibuEn', 'Keikyu', 'Odawara'];
+              warmupLines.forEach(function(lid) {
+                window.DataFusion.ensureManualTimetable(lid).catch(function(){});
+              });
+            }, 2000);  // 2秒后后台开始预加载，不阻塞首屏
+          }
         } catch(e) {}
         return;
       }

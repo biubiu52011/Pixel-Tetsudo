@@ -1282,10 +1282,14 @@
 
     // ========== 加载所有数据（实时数据 + 时刻表）==========
     function loadAllData() {
-        // v4.3.395: 延误/位置先行（首屏关键）——首次无缓存时时刻表 14 个大数据请求
-        // 不再阻塞延误首屏；有缓存时 loadTimetableData 快速返回，顺序影响可忽略
-        return loadRealtimeData().then(function() {
-            return loadTimetableData(false);
+        // v4.3.6xx: 实时数据和时刻表数据并行加载（原来串行：实时→时刻表，慢一倍）
+        // 实时数据优先返回，时刻表在后台并行拉取
+        var realtimePromise = loadRealtimeData();
+        var timetablePromise = loadTimetableData(false);
+        // 实时数据先resolve，时刻表不阻塞首屏
+        return realtimePromise.then(function() {
+            // 时刻表后台继续加载，不阻塞
+            timetablePromise.catch(function(e) { console.warn("[ODPT] Timetable load error:", e.message); });
         });
     }
 
