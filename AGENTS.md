@@ -1600,3 +1600,14 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 - 私铁/单轨/新交通 19 线：京急大師/空港/久里浜/逗子線（新1000形/1500形/2100形）、西武拜島/国分寺/秩父/西武園/新宿/多摩川/多摩湖/豊島/山口/狭山線（各西武形式含40000系 Laview）、小田急江ノ島線（1000形/4000形/ロマンスカー）、ニューシャトル（2000系/2020系）、東京モノレール（10000形）、ゆりかもめ（7300系/7500系）、白新線（E129系+E653系いなほ）
 **车型实证修正**（子代理研究发现）：仙石線 205系→E131系800番台（2026年置換完了）、仙石東北ライン HB-E211→HB-E210系（系类名修正）、釜石線 キハ110→HB-E220系、男鹿線 キハ40→EV-E801系、ゆりかもめ 7000系→7300/7500系（2020年全廃）、ニューシャトル 1050系→2000/2020系（2026年引退）、西武狭山線 新101系→7000系（2026年ワンマン化）、白新線 E127系→E129系。
 **验证**：node --check 通过；work/verify_vtype_coverage.js 55/55（直通线不变）；work/verify_through_vtype.js 55/55 OK；work/verify_full_coverage.js 112 MAP + 5 东急内嵌 = 117 线（剩余 49 线为 JR 通勤线/支线/其他 operator，不在 manual 无直通范围内）；MAP 总计 113 线/333 trainType 条目；trains.html v=4.3.640。
+
+## 4.3.641（2026-09-16，数据联动核查与修复）
+**用户指令**：「你看看数据都能联动上吗」——端到端核查车型链路（manual/ODPT 时刻表注入 → estimator VehicleTypeMap fallback → 列车 vehicleType 字段）并修复发现的 3 个数据联动 bug。
+**核查方法**：新建 work/yurikamome_timetable/integrate_all_lines.js（mock 完整 LINE_RAILWAY_CODE + 加载 MAP/estimator/全部 73 个 manual）→ 73 线推定 737 列车、vehicleType 缺失 0、覆盖率 100%；ODPT 来源（无 manual 直通线）模拟查表 7/7（TobuSkytree→70000系、Keio→10-300形、SotetsuMain→12000系、Chiyoda→16000系、Saikyo→12000系、ChuoRapid→E233、Yokosuka→E235）。
+**修复 1：MinatoMirai manual 格式错误**（1216 条记录全部无法推定）：①calendar 用短名（"Weekday"/"Holiday"）而非 URN（其余 72 线均 URN）→ 全量替换为 odpt.Calendar:Weekday/SaturdayHoliday；②站对象用 "odpt:station" 而非 estimator 期望的 departureStation/arrivalStation（7296 处）→ 按对象判断：有 arrivalTime 无 departureTime 改 arrivalStation（1216），其余改 departureStation（6080）。修复后 0→13 推定。
+**修复 2：Oga（男鹿線）追分站拼写**：manual Oibune（おいぶね）→ 正确 Oiwake（追分 おいわけ，79 处）——52 条记录从全废恢复推定。
+**修复 3：RikutsuWest（陸羽西線）津谷站拼写**：manual Tsutaya（つたや）→ 正确 Tsuya（津谷 つや，34 处）——07:00/08:07/12:00/17:00/19:00 推定 1-2 列。
+**多时刻验证（区分空档与 bug）**：剩余 08:00 推定 0 的 5 线（Kitakami/Ominato/RikutsuWest/SeibuYamaguchi/Tsugaru）在 07:00/08:07/09:00/12:00/17:00/19:00 均有推定——08:00 为真实时刻空档，非数据问题。
+**遗留数据瑕疵（不影响推定链路，待用户拍板）**：①Tsugaru 本地站表含幽灵站（Aomori-Chuo 青森中央等 10 站与 manual 4 站不交叠）——本地站表数据质量问题，涉及显示层需单独评估；②Ominato manual 缺金谷沢站（本地 11/manual 10）；③Kitakami manual 站名拼写差异（yokogawame/tachikawame/fujiene vs 本地 yokokawame/tatekawame/fujine）需 wiki 查证。
+**验证**：verify_through_vtype.js 55/55、verify_vtype_coverage.js 55/55（113 线/333 条目）无回归；node --check 三文件通过。
+**commit**：a483dfb（3 文件）
