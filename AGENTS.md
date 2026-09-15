@@ -1739,3 +1739,12 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 **tt_join_check BFS 改造**：从直接邻接 partner 改为 THROUGH 图 BFS 多跳——Keikyu 检出从 6 条→316 条直通列车对照，其余新补线（OdakyuTama/Yurakucho_Seibu/KeikyuAirport 等）全部纳入对照。
 **验证**：tt_join_check 直通列车合计 1847 | 接続駅無し **0** | 方向異常 **0**；verify_through_vtype 63/63；tt_cross_validate {}；integrate_all_lines OK；node --check 4文件全过。
 **commit**：4.3.798
+
+## 4.3.800（2026-09-16，JR系直通列车通过站补全）
+**用户指示**：JR系直通列车通过站补全——ChuoMain/Gono/Kamaishi 直通列车中间站偏少。
+**修复**：
+- ChuoMain：9M/37M 塩尻通过站修正（実際通過但作為接续站保留 estimated）；上行あずさ37列补高尾接续站 estimated；松本时刻官方化（11:39 非 estimated）
+- Gono：8521D 终点川部→弘前；8631D/8635D 川部→弘前始发；8622D/8624D/8626D 川部→東能代始发；全部补川部接续站 estimated
+- Kamaishi：5562D 花巻时刻官方化（13:25 非 estimated）；3658D/3666D 补盛岡终点；9555D 花巻时刻修正
+**验证**：tt_join_check 直通列车 1853 | 接続駅無し **0** | 方向異常 **0**；verify_through_vtype 63/63；tt_cross_validate {}；node --check 3文件全过。
+**commit**：4.3.800
