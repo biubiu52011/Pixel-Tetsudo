@@ -147,26 +147,14 @@
       if (!text) return result;
       // v4.3.389: 保留原文全文（弹窗直接显示，不依赖碎片解析）
       result.detail = text;
-      // 状态字段缺失/为 Normal 时用文本关键词补充（ダイヤ乱れ = 遅延）
-      if (result.status === "normal") {
-        // v4.3.392: 否定句排除——「現在、１５分以上の遅延はありません/遅延なし/平常運転」不是延误
-        // v4.3.401: 恢复完成式排除——「運転を見合わせていましたが…再開しました/運転を再開しました」= 已恢复，不是運休
-        // v4.3.428: 删除裸"運転再開"——「運転再開は7時30分頃を見込んでいます」（未来将恢复）≠ 已恢复，不得跳过中断判定
-        var _neg = /\u3042\u308a\u307e\u305b\u3093|\u3054\u3056\u3044\u307e\u305b\u3093|\u306a\u3057|\u89e3\u6d88|\u5e73\u5e38\u904b\u8ee2|\u5e73\u5e38\u904b\u884c|\u5e73\u5e38\u3067\u3059|\u9589\u9381|\u518d\u958b\u3057\u307e\u3057\u305f|\u3092\u518d\u958b/.test(text);
-        if (!_neg) {
-          // v4.3.430: 直通终止/他线影响引述 ≠ 本线中断——直通对象线停运、本线折返/站台拥堵 = 运行情报（！）
-          // 例：武蔵野線"京葉線内での信号確認の影響で…直通運転を中止"→ notice；内房線"…運転を見合わせます"→ suspended
-          var _otherImpact = /(?:\u7dda\u5185\u3067\u306e|\u7dda\u306e\u904b\u8ee2\u898b\u5408\u308f\u305b|\u904b\u8ee2\u898b\u5408\u308f\u305b\u306e\u5f71\u97ff|\u904b\u8ee2\u898b\u5408\u308f\u305b\u306b\u4f34\u3044|\u306e\u5f71\u97ff\u3067)/.test(text) && !/(?:\u5f53\u7dda|\u81ea\u7dda|\u672c\u7dda|\u5168\u7dda|\u4e0a\u4e0b\u7dda).*(?:\u898b\u5408\u308f\u305b|\u4e2d\u6b62)/.test(text);
-          var _diversion = /\u76f4\u901a\u904b\u8ee2\u3092\u4e2d\u6b62|\u76f4\u901a\u904b\u8ee2\u4e2d\u6b62|\u6298\u308a\u8fd4\u3057\u904b\u8ee2|\u6298\u8fd4\u3057\u904b\u8ee2|\u30db\u30fc\u30e0\u304c\u6df7\u96d1|\u99c5\u69cb\u5185\u304c\u6df7\u96d1/.test(text);
-          if (_otherImpact || _diversion) {
-            result.status = "notice";
-          } else if (text.indexOf("\u898b\u5408\u308f\u305b") >= 0 || text.indexOf("\u904b\u8ee2\u3092\u4e2d\u6b62") >= 0 || text.indexOf("\u5168\u7dda\u904b\u4f11") >= 0 || text.toLowerCase().indexOf("suspended") >= 0) result.status = "suspended";
-          else if (text.indexOf("\u904b\u5ef6") >= 0 || text.indexOf("\u9045\u5ef6") >= 0 || text.indexOf("\u9045\u308c") >= 0 || text.indexOf("\u904b\u308c") >= 0 || text.indexOf("\u4e71\u308c") >= 0 || text.toLowerCase().indexOf("delay") >= 0) result.status = "delayed";
-          else if (text.indexOf("\u7d42\u4e86") >= 0 || text.toLowerCase().indexOf("finished") >= 0) result.status = "suspended";
-          // v4.3.426: 有实质运行通知 → notice（黄色感叹号）
-          // v4.3.429: 收紧——字段 Normal 时仅"明确通知类"文本才标！，其余跟随字段显示正常（权威字段主导，避免文本兜底占领）
-          if (result.status === "normal" && /\u904b\u4f11|\u6642\u523b\u5909\u66f4|\u30e1\u30f3\u30c6\u30ca\u30f3\u30b9|\u5de5\u4e8b|\u70b9\u691c|\u81e8\u6642\u5217\u8eca|\u632f\u66ff\u8f38\u9001|\u4ee3\u884c\u8f38\u9001|\u304a\u77e5\u3089\u305b/.test(text)) result.status = "notice";
-        }
+      // v4.3.623: 状态不再做文本关键词判定（用户裁定：不好判断就清理掉，只识别区间）。
+      // 状态仅采用 ODPT 结构化字段（Suspension/Delay/odpt:delay）；自由文本状态字段
+      // （如"運行情報あり"）统一归为 info = 有运行情报，不细分中断/延误——
+      // 区间/原因仍走结构化字段优先 + 文本兜底（概览用），原文全文照常展示。
+      // 仅排除"正常声明"文本（平常どおり/遅延なし/ありません等）→ 保持 normal，避免把正常当情报误报黄色。
+      if (result.status === "normal" && text && !(_stF === "Normal" || /^odpt\./.test(_stF))) {
+        var _normalDecl = /\u5e73\u5e38\u3069\u304a\u308a|\u5e73\u5e38\u904b\u8ee2|\u5e73\u5e38\u30c0\u30a4\u30e4|\u9045\u5ef6\u306a\u3057|\u3042\u308a\u307e\u305b\u3093|\u3054\u3056\u3044\u307e\u305b\u3093|\u306a\u3057|\u89e3\u6d88|\u9589\u9381|\u518d\u958b\u3057\u307e\u3057\u305f|\u3092\u518d\u958b/;
+        if (!_normalDecl.test(text)) result.status = "info";
       }
       // 延迟分钟：排除时刻（18時08分頃 的 "08分" 不是延迟）
       var m = text.match(/(?:\u7d04|\u304a\u3088\u305d)?\s*(\d{1,3})\s*(?:\u5206\u9593|\u5206|min)(?!\u9803|\u5f8c|\u4ee5)/i);

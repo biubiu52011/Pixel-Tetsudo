@@ -335,6 +335,7 @@
     if (status === "suspended") act = { zh: "暂停运行", ko: "운전 중단", en: "service suspended" }[lang];
     else if (status === "delayed") act = { zh: "出现延误", ko: "지연 발생", en: "delays occurring" }[lang];
     else if (status === "notice") act = { zh: "有运行通知", ko: "운행 안내가 있습니다", en: "service notice in effect" }[lang];
+    else if (status === "info") act = { zh: "有运行情报", ko: "운행 정보가 있습니다", en: "service info in effect" }[lang];
     else act = { zh: "有运行信息", ko: "운행 정보가 있습니다", en: "service information" }[lang];
     var prefix = lineName ? lineName + "：" : "";
     if (causeTr) {

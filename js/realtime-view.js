@@ -68,7 +68,7 @@
     statusSection.innerHTML = '<span class="rs-status-indicator"><span class="rs-status-dot"></span>' + statusText + '</span>';
     // Apply status dot color via DOM API (CSP-safe)
     var dot = statusSection.querySelector(".rs-status-dot");
-    if (dot) dot.style.background = "var(--" + (s.color || ({ normal: "green", notice: "yellow", delayed: "orange", suspended: "red", no_data: "gray", no_odpt: "gray", loading: "gray" }[status] || "gray")) + ")";
+    if (dot) dot.style.background = "var(--" + (s.color || ({ normal: "green", info: "yellow", notice: "yellow", delayed: "orange", suspended: "red", no_data: "gray", no_odpt: "gray", loading: "gray" }[status] || "gray")) + ")";
     // Interval section
     var intervalSection = modal.querySelector(".rs-interval-section");
     intervalSection.querySelector(".rs-info-label").textContent = t("status.interval");

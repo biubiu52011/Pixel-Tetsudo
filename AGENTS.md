@@ -1480,3 +1480,19 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 **并发**：e1d2b02（清闭业景点 519→518）、902308c（清 PostCoffee 重复 518→517）、0d3f775（定位按钮降级）——均无冲突。
 **覆盖**：517 景中最近站有出口 289（56%），缺 95 站。剩余缺口 wiki 无出口方位名（千住大橋13/六町8/田原町8/清澄白河8/五反野6/扇大橋6/西日暮里6/市ヶ谷6/赤坂6/京成津川5，均为地下铁编号口或小站）。
 **待决**：95 站"站中心出入口兜底"未拍板；结构迁移（出口并入 railway_data.json stations）未拍板；push 未执行（本轮新增 5 个 commit：971d1f6/9dd2f9b/e57ed40/f3f6409/ea27279）。
+## 4.3.625（2026-09-15，运行状态判定清理·只识别区间）
+**用户裁定**："我觉得你要是不好判断就清理掉这个功能，只识别区间"——运行状态（正常/延误/中断/通知分级 + 圆点/徽章）不再做文本关键词判定，状态仅采 ODPT 结构化字段；自由文本状态字段（如东武"運行情報あり"）统一归为中性 info（有运行情报），**只识别区间**（结构化 range/stationFrom/stationTo 优先 + 文本兜底）。
+**实证（ODPT 实拉）**：东武 TobuUrbanPark 人身事故记录（柏〜運河 見合わせ）odpt:trainInformationStatus={"ja":"運行情報あり"}（自由文本非枚举）、delay/Cause/Range 均无——旧逻辑靠"見合わせ"关键词猜中断，不可靠。
+**改动**（5 文件）：
+- js/data-fusion.js parseODPTDelay：**删除 L150-170 整块文本关键词状态判定**（否定句/他线影响/直通终止/見合わせ/遅延/運休/通知类）；新逻辑——status 仍 normal 且字段非枚举（非 Normal/非 odpt. 前缀）且文本非"正常声明"（平常どおり/平常運転/遅延なし/ありません/ございません/なし/解除/閉鎖/再開しました/を再開）→ info；区间/原因/maxDelay 文本兜底与 detail=原文全文照常保留
+- js/data-state.js：STATUS_META 新增 info（icon=！,cls=rs-status-icon-notice 复用黄色感叹号）；statusRank info=3（介于 notice 3.5 与 no_odpt 3 之间）
+- js/translations.js：status.info 4 语言（en=Service Info / zh=有运行情报 / ja=運行情報 / ko=운행 정보）
+- js/realtime-view.js：状态点颜色 fallback 加 info=yellow
+- js/delay-translator.js：_summary 加 info 分支（有运行情报）
+**验证**（本地 bu DOM 断言，未截图）：
+- 东武野田线 Noda（人身事故中）→ status=info + interval=柏→運河 + 弹窗"運行情報/運行区間 柏→運河/原文全文" ✓ 不再猜中断×
+- TobuSkytree/TobuIsesaki（平常どおり）→ normal（正常声明排除，不误报黄色）✓
+- 中央総武各停（停電部分運休）→ info（真实情报）✓；内房線（土砂崩れ見合わせ）→ info ✓；越後線（工事運休）→ info ✓；中央快速（平常運転）→ normal ✓
+- JR 东标准枚举不受影响：Suspension→suspended / Delay+delay→delayed / Normal→normal（node 回归）
+**保留**：结构化字段状态、区间识别、原因概览、ODPT 原文全文、位置推定（train-position-estimator 的文本中断判断属列车行为推定非状态标识，未动）
+**遗留**：search-ui 徽章仅显示结构化 delayed/suspended，info 不显示徽章（低调）；notice 状态不再产生但 STATUS_META/翻译保留兼容旧缓存
