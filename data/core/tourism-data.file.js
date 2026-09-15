@@ -20779,7 +20779,7 @@ window.RAILWAY_TOURISM = {
           "펼치는 순간까지의 즐거움"
         ]
       },
-      "address": "東京都中央区日本橋小舟町"
+      "address": "東京都中央区日本橋小舟町14-7"
     },
     {
       "name": "LABOUR AND WAIT TOKYO",
