@@ -1496,3 +1496,9 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 - JR 东标准枚举不受影响：Suspension→suspended / Delay+delay→delayed / Normal→normal（node 回归）
 **保留**：结构化字段状态、区间识别、原因概览、ODPT 原文全文、位置推定（train-position-estimator 的文本中断判断属列车行为推定非状态标识，未动）
 **遗留**：search-ui 徽章仅显示结构化 delayed/suspended，info 不显示徽章（低调）；notice 状态不再产生但 STATUS_META/翻译保留兼容旧缓存
+
+## 4.3.626（2026-09-15，出口数据兜底 + 变体重键修复 + 上线推送）
+**兜底**（d3a5ee0）：95 个景点相关缺站写入「駅前」站中心坐标（撤销了误扩到全部 2188 站的过宽兜底，只保留景点覆盖站），覆盖 517/517=100%。浏览器实测：千住大橋 駅前273/284/362m、石洞美術館 仍全局最优回退南千住876m（正确）、高田馬場 ビッグボックス口66m。
+**变体重键修复**（c531c74）：发现 station_exits 有大小写变体重复键（Shin-maruko/Shin-Maruko 等，源自 railway_data.json 源数据本身存在 16 组归一化重复站），合并 3 组（Hongo-Sanchome/Yurigaoka/Shin-maruko），429 站无重复键，严格解析通过。
+**推送**：全部出口数据 commit 已 push（远端 d3a5ee0→c531c74，SHA 与本地一致 01f05f7）。raw.githubusercontent 验证曾因 CDN 缓存误报旧版，以 GitHub API SHA 为准。
+**待决遗留**：railway_data.json 源数据 16 组重复站（Kokusai-Tenjijo 等）未修（超出出口数据范围）；真实出口坐标精度（wiki 估算 ±100m）用户已知悉。
