@@ -31,8 +31,8 @@ function generateTimetable(startHour, startMinute, endHour, endMinute, rapidRati
     const isRapid = (trainNumber % 10 < rapidRatio);
     const type = isRapid ? "AirportRapid" : "Local";
     
-    // 生成站时表
-    const trainTimetableObject = [];
+    // ========== 下行（羽田方向） ==========
+    const downTimetableObject = [];
     let currentMinute = minute;
     
     for (let j = 0; j < stations.length; j++) {
@@ -40,12 +40,12 @@ function generateTimetable(startHour, startMinute, endHour, endMinute, rapidRati
       const timeStr = `${String(Math.floor(currentMinute / 60)).padStart(2, '0')}:${String(currentMinute % 60).padStart(2, '0')}`;
       
       if (j === stations.length - 1) {
-        trainTimetableObject.push({
+        downTimetableObject.push({
           "odpt:station": station.id,
           "odpt:arrivalTime": timeStr
         });
       } else {
-        trainTimetableObject.push({
+        downTimetableObject.push({
           "odpt:station": station.id,
           "odpt:departureTime": timeStr
         });
@@ -54,13 +54,50 @@ function generateTimetable(startHour, startMinute, endHour, endMinute, rapidRati
     }
     
     timetable.push({
-      "odpt:trainNumber": `TM${label}${String(trainNumber).padStart(3, '0')}`,
+      "odpt:trainNumber": `TM${label}${String(trainNumber).padStart(3, '0')}D`,
       "odpt:railway": "TokyoMonorail",
       "odpt:calendar": label === 'W' ? "Weekday" : "Holiday",
       "odpt:railDirection": "Outbound",
       "odpt:trainType": type,
       "odpt:destinationStation": "Haneda Airport Terminal 2",
-      "odpt:trainTimetableObject": trainTimetableObject
+      "odpt:trainTimetableObject": downTimetableObject
+    });
+    
+    // ========== 上行（浜松町方向） ==========
+    // 到达终点站后折返5分钟，然后往回开
+    const turnAroundTime = 5;
+    const upStartMinute = minute + travelTimes.reduce((a, b) => a + b, 0) + turnAroundTime;
+    
+    const upTimetableObject = [];
+    let upCurrentMinute = upStartMinute;
+    
+    // 上行站顺序反过来
+    for (let j = stations.length - 1; j >= 0; j--) {
+      const station = stations[j];
+      const timeStr = `${String(Math.floor(upCurrentMinute / 60)).padStart(2, '0')}:${String(upCurrentMinute % 60).padStart(2, '0')}`;
+      
+      if (j === 0) {
+        upTimetableObject.push({
+          "odpt:station": station.id,
+          "odpt:arrivalTime": timeStr
+        });
+      } else {
+        upTimetableObject.push({
+          "odpt:station": station.id,
+          "odpt:departureTime": timeStr
+        });
+        upCurrentMinute += travelTimes[j - 1];
+      }
+    }
+    
+    timetable.push({
+      "odpt:trainNumber": `TM${label}${String(trainNumber).padStart(3, '0')}U`,
+      "odpt:railway": "TokyoMonorail",
+      "odpt:calendar": label === 'W' ? "Weekday" : "Holiday",
+      "odpt:railDirection": "Inbound",
+      "odpt:trainType": type,
+      "odpt:destinationStation": "Monorail-Hamamatsucho",
+      "odpt:trainTimetableObject": upTimetableObject
     });
     
     trainNumber++;

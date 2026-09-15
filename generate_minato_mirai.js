@@ -22,8 +22,8 @@ function generateTimetable(startHour, startMinute, endHour, endMinute, interval,
   let trainNumber = 1;
   
   while (minute <= endHour * 60 + endMinute) {
-    // 生成站时表
-    const trainTimetableObject = [];
+    // ========== 下行（元町・中華街方向） ==========
+    const downTimetableObject = [];
     let currentMinute = minute;
     
     for (let j = 0; j < stations.length; j++) {
@@ -31,12 +31,12 @@ function generateTimetable(startHour, startMinute, endHour, endMinute, interval,
       const timeStr = `${String(Math.floor(currentMinute / 60)).padStart(2, '0')}:${String(currentMinute % 60).padStart(2, '0')}`;
       
       if (j === stations.length - 1) {
-        trainTimetableObject.push({
+        downTimetableObject.push({
           "odpt:station": station.id,
           "odpt:arrivalTime": timeStr
         });
       } else {
-        trainTimetableObject.push({
+        downTimetableObject.push({
           "odpt:station": station.id,
           "odpt:departureTime": timeStr
         });
@@ -45,13 +45,50 @@ function generateTimetable(startHour, startMinute, endHour, endMinute, interval,
     }
     
     timetable.push({
-      "odpt:trainNumber": `MM${label}${String(trainNumber).padStart(3, '0')}`,
+      "odpt:trainNumber": `MM${label}${String(trainNumber).padStart(3, '0')}D`,
       "odpt:railway": "MinatoMirai",
       "odpt:calendar": label === 'W' ? "Weekday" : "Holiday",
       "odpt:railDirection": "Outbound",
       "odpt:trainType": "Local",
       "odpt:destinationStation": "Motomachi-Chukagai",
-      "odpt:trainTimetableObject": trainTimetableObject
+      "odpt:trainTimetableObject": downTimetableObject
+    });
+    
+    // ========== 上行（横浜方向） ==========
+    // 到达终点站后折返3分钟，然后往回开
+    const turnAroundTime = 3;
+    const upStartMinute = minute + travelTimes.reduce((a, b) => a + b, 0) + turnAroundTime;
+    
+    const upTimetableObject = [];
+    let upCurrentMinute = upStartMinute;
+    
+    // 上行站顺序反过来
+    for (let j = stations.length - 1; j >= 0; j--) {
+      const station = stations[j];
+      const timeStr = `${String(Math.floor(upCurrentMinute / 60)).padStart(2, '0')}:${String(upCurrentMinute % 60).padStart(2, '0')}`;
+      
+      if (j === 0) {
+        upTimetableObject.push({
+          "odpt:station": station.id,
+          "odpt:arrivalTime": timeStr
+        });
+      } else {
+        upTimetableObject.push({
+          "odpt:station": station.id,
+          "odpt:departureTime": timeStr
+        });
+        upCurrentMinute += travelTimes[j - 1];
+      }
+    }
+    
+    timetable.push({
+      "odpt:trainNumber": `MM${label}${String(trainNumber).padStart(3, '0')}U`,
+      "odpt:railway": "MinatoMirai",
+      "odpt:calendar": label === 'W' ? "Weekday" : "Holiday",
+      "odpt:railDirection": "Inbound",
+      "odpt:trainType": "Local",
+      "odpt:destinationStation": "Yokohama",
+      "odpt:trainTimetableObject": upTimetableObject
     });
     
     trainNumber++;

@@ -1,11 +1,11 @@
 // MinatoMirai_MANUAL_TIMETABLES
 // 港未来线 手动时刻表（平日+土休日完整版）
 // 数据来源：港未来线官网时刻表推算
-// 平日：381班 土休日：227班 合计：608班
+// 平日：762班 土休日：454班 合计：1216班
 
 window.MinatoMirai_MANUAL_TIMETABLES = [
   {
-    "odpt:trainNumber": "MMW001",
+    "odpt:trainNumber": "MMW001D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -39,7 +39,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW002",
+    "odpt:trainNumber": "MMW001U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "05:13"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "05:15"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "05:17"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "05:19"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "05:21"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "05:23"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW002D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -73,7 +107,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW003",
+    "odpt:trainNumber": "MMW002U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "05:16"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "05:18"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "05:20"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "05:22"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "05:24"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "05:26"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW003D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -107,7 +175,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW004",
+    "odpt:trainNumber": "MMW003U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "05:19"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "05:21"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "05:23"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "05:25"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "05:27"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "05:29"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW004D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -141,7 +243,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW005",
+    "odpt:trainNumber": "MMW004U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "05:22"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "05:24"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "05:26"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "05:28"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "05:30"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "05:32"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW005D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -175,7 +311,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW006",
+    "odpt:trainNumber": "MMW005U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "05:25"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "05:27"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "05:29"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "05:31"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "05:33"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "05:35"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW006D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -209,7 +379,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW007",
+    "odpt:trainNumber": "MMW006U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "05:28"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "05:30"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "05:32"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "05:34"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "05:36"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "05:38"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW007D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -243,7 +447,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW008",
+    "odpt:trainNumber": "MMW007U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "05:31"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "05:33"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "05:35"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "05:37"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "05:39"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "05:41"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW008D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -277,7 +515,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW009",
+    "odpt:trainNumber": "MMW008U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "05:34"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "05:36"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "05:38"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "05:40"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "05:42"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "05:44"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW009D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -311,7 +583,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW010",
+    "odpt:trainNumber": "MMW009U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "05:37"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "05:39"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "05:41"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "05:43"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "05:45"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "05:47"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW010D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -345,7 +651,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW011",
+    "odpt:trainNumber": "MMW010U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "05:40"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "05:42"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "05:44"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "05:46"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "05:48"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "05:50"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW011D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -379,7 +719,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW012",
+    "odpt:trainNumber": "MMW011U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "05:43"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "05:45"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "05:47"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "05:49"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "05:51"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "05:53"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW012D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -413,7 +787,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW013",
+    "odpt:trainNumber": "MMW012U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "05:46"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "05:48"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "05:50"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "05:52"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "05:54"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "05:56"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW013D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -447,7 +855,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW014",
+    "odpt:trainNumber": "MMW013U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "05:49"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "05:51"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "05:53"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "05:55"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "05:57"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "05:59"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW014D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -481,7 +923,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW015",
+    "odpt:trainNumber": "MMW014U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "05:52"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "05:54"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "05:56"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "05:58"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "06:00"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "06:02"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW015D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -515,7 +991,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW016",
+    "odpt:trainNumber": "MMW015U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "05:55"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "05:57"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "05:59"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "06:01"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "06:03"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "06:05"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW016D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -549,7 +1059,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW017",
+    "odpt:trainNumber": "MMW016U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "05:58"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "06:00"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "06:02"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "06:04"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "06:06"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "06:08"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW017D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -583,7 +1127,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW018",
+    "odpt:trainNumber": "MMW017U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "06:01"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "06:03"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "06:05"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "06:07"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "06:09"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "06:11"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW018D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -617,7 +1195,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW019",
+    "odpt:trainNumber": "MMW018U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "06:04"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "06:06"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "06:08"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "06:10"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "06:12"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "06:14"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW019D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -651,7 +1263,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW020",
+    "odpt:trainNumber": "MMW019U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "06:07"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "06:09"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "06:11"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "06:13"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "06:15"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "06:17"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW020D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -685,7 +1331,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW021",
+    "odpt:trainNumber": "MMW020U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "06:10"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "06:12"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "06:14"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "06:16"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "06:18"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "06:20"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW021D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -719,7 +1399,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW022",
+    "odpt:trainNumber": "MMW021U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "06:13"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "06:15"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "06:17"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "06:19"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "06:21"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "06:23"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW022D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -753,7 +1467,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW023",
+    "odpt:trainNumber": "MMW022U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "06:16"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "06:18"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "06:20"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "06:22"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "06:24"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "06:26"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW023D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -787,7 +1535,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW024",
+    "odpt:trainNumber": "MMW023U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "06:19"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "06:21"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "06:23"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "06:25"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "06:27"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "06:29"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW024D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -821,7 +1603,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW025",
+    "odpt:trainNumber": "MMW024U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "06:22"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "06:24"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "06:26"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "06:28"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "06:30"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "06:32"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW025D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -855,7 +1671,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW026",
+    "odpt:trainNumber": "MMW025U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "06:25"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "06:27"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "06:29"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "06:31"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "06:33"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "06:35"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW026D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -889,7 +1739,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW027",
+    "odpt:trainNumber": "MMW026U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "06:28"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "06:30"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "06:32"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "06:34"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "06:36"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "06:38"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW027D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -923,7 +1807,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW028",
+    "odpt:trainNumber": "MMW027U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "06:31"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "06:33"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "06:35"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "06:37"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "06:39"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "06:41"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW028D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -957,7 +1875,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW029",
+    "odpt:trainNumber": "MMW028U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "06:34"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "06:36"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "06:38"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "06:40"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "06:42"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "06:44"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW029D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -991,7 +1943,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW030",
+    "odpt:trainNumber": "MMW029U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "06:37"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "06:39"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "06:41"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "06:43"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "06:45"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "06:47"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW030D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -1025,7 +2011,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW031",
+    "odpt:trainNumber": "MMW030U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "06:40"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "06:42"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "06:44"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "06:46"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "06:48"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "06:50"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW031D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -1059,7 +2079,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW032",
+    "odpt:trainNumber": "MMW031U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "06:43"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "06:45"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "06:47"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "06:49"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "06:51"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "06:53"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW032D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -1093,7 +2147,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW033",
+    "odpt:trainNumber": "MMW032U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "06:46"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "06:48"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "06:50"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "06:52"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "06:54"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "06:56"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW033D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -1127,7 +2215,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW034",
+    "odpt:trainNumber": "MMW033U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "06:49"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "06:51"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "06:53"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "06:55"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "06:57"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "06:59"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW034D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -1161,7 +2283,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW035",
+    "odpt:trainNumber": "MMW034U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "06:52"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "06:54"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "06:56"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "06:58"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "07:00"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "07:02"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW035D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -1195,7 +2351,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW036",
+    "odpt:trainNumber": "MMW035U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "06:55"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "06:57"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "06:59"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "07:01"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "07:03"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "07:05"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW036D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -1229,7 +2419,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW037",
+    "odpt:trainNumber": "MMW036U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "06:58"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "07:00"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "07:02"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "07:04"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "07:06"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "07:08"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW037D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -1263,7 +2487,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW038",
+    "odpt:trainNumber": "MMW037U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "07:01"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "07:03"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "07:05"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "07:07"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "07:09"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "07:11"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW038D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -1297,7 +2555,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW039",
+    "odpt:trainNumber": "MMW038U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "07:04"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "07:06"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "07:08"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "07:10"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "07:12"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "07:14"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW039D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -1331,7 +2623,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW040",
+    "odpt:trainNumber": "MMW039U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "07:07"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "07:09"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "07:11"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "07:13"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "07:15"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "07:17"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW040D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -1365,7 +2691,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW041",
+    "odpt:trainNumber": "MMW040U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "07:10"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "07:12"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "07:14"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "07:16"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "07:18"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "07:20"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW041D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -1399,7 +2759,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW042",
+    "odpt:trainNumber": "MMW041U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "07:13"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "07:15"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "07:17"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "07:19"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "07:21"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "07:23"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW042D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -1433,7 +2827,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW043",
+    "odpt:trainNumber": "MMW042U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "07:16"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "07:18"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "07:20"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "07:22"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "07:24"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "07:26"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW043D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -1467,7 +2895,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW044",
+    "odpt:trainNumber": "MMW043U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "07:19"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "07:21"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "07:23"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "07:25"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "07:27"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "07:29"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW044D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -1501,7 +2963,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW045",
+    "odpt:trainNumber": "MMW044U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "07:22"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "07:24"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "07:26"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "07:28"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "07:30"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "07:32"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW045D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -1535,7 +3031,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW046",
+    "odpt:trainNumber": "MMW045U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "07:25"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "07:27"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "07:29"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "07:31"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "07:33"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "07:35"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW046D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -1569,7 +3099,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW047",
+    "odpt:trainNumber": "MMW046U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "07:28"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "07:30"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "07:32"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "07:34"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "07:36"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "07:38"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW047D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -1603,7 +3167,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW048",
+    "odpt:trainNumber": "MMW047U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "07:31"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "07:33"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "07:35"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "07:37"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "07:39"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "07:41"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW048D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -1637,7 +3235,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW049",
+    "odpt:trainNumber": "MMW048U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "07:34"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "07:36"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "07:38"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "07:40"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "07:42"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "07:44"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW049D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -1671,7 +3303,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW050",
+    "odpt:trainNumber": "MMW049U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "07:37"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "07:39"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "07:41"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "07:43"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "07:45"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "07:47"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW050D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -1705,7 +3371,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW051",
+    "odpt:trainNumber": "MMW050U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "07:40"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "07:42"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "07:44"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "07:46"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "07:48"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "07:50"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW051D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -1739,7 +3439,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW052",
+    "odpt:trainNumber": "MMW051U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "07:43"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "07:45"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "07:47"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "07:49"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "07:51"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "07:53"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW052D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -1773,7 +3507,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW053",
+    "odpt:trainNumber": "MMW052U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "07:46"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "07:48"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "07:50"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "07:52"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "07:54"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "07:56"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW053D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -1807,7 +3575,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW054",
+    "odpt:trainNumber": "MMW053U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "07:49"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "07:51"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "07:53"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "07:55"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "07:57"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "07:59"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW054D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -1841,7 +3643,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW055",
+    "odpt:trainNumber": "MMW054U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "07:52"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "07:54"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "07:56"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "07:58"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "08:00"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "08:02"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW055D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -1875,7 +3711,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW056",
+    "odpt:trainNumber": "MMW055U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "07:55"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "07:57"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "07:59"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "08:01"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "08:03"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "08:05"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW056D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -1909,7 +3779,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW057",
+    "odpt:trainNumber": "MMW056U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "07:58"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "08:00"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "08:02"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "08:04"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "08:06"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "08:08"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW057D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -1943,7 +3847,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW058",
+    "odpt:trainNumber": "MMW057U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "08:01"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "08:03"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "08:05"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "08:07"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "08:09"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "08:11"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW058D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -1977,7 +3915,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW059",
+    "odpt:trainNumber": "MMW058U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "08:04"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "08:06"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "08:08"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "08:10"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "08:12"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "08:14"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW059D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -2011,7 +3983,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW060",
+    "odpt:trainNumber": "MMW059U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "08:07"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "08:09"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "08:11"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "08:13"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "08:15"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "08:17"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW060D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -2045,7 +4051,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW061",
+    "odpt:trainNumber": "MMW060U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "08:10"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "08:12"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "08:14"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "08:16"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "08:18"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "08:20"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW061D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -2079,7 +4119,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW062",
+    "odpt:trainNumber": "MMW061U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "08:13"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "08:15"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "08:17"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "08:19"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "08:21"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "08:23"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW062D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -2113,7 +4187,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW063",
+    "odpt:trainNumber": "MMW062U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "08:16"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "08:18"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "08:20"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "08:22"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "08:24"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "08:26"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW063D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -2147,7 +4255,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW064",
+    "odpt:trainNumber": "MMW063U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "08:19"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "08:21"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "08:23"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "08:25"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "08:27"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "08:29"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW064D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -2181,7 +4323,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW065",
+    "odpt:trainNumber": "MMW064U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "08:22"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "08:24"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "08:26"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "08:28"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "08:30"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "08:32"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW065D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -2215,7 +4391,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW066",
+    "odpt:trainNumber": "MMW065U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "08:25"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "08:27"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "08:29"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "08:31"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "08:33"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "08:35"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW066D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -2249,7 +4459,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW067",
+    "odpt:trainNumber": "MMW066U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "08:28"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "08:30"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "08:32"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "08:34"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "08:36"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "08:38"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW067D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -2283,7 +4527,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW068",
+    "odpt:trainNumber": "MMW067U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "08:31"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "08:33"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "08:35"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "08:37"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "08:39"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "08:41"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW068D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -2317,7 +4595,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW069",
+    "odpt:trainNumber": "MMW068U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "08:34"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "08:36"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "08:38"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "08:40"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "08:42"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "08:44"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW069D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -2351,7 +4663,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW070",
+    "odpt:trainNumber": "MMW069U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "08:37"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "08:39"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "08:41"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "08:43"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "08:45"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "08:47"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW070D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -2385,7 +4731,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW071",
+    "odpt:trainNumber": "MMW070U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "08:40"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "08:42"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "08:44"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "08:46"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "08:48"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "08:50"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW071D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -2419,7 +4799,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW072",
+    "odpt:trainNumber": "MMW071U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "08:43"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "08:45"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "08:47"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "08:49"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "08:51"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "08:53"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW072D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -2453,7 +4867,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW073",
+    "odpt:trainNumber": "MMW072U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "08:46"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "08:48"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "08:50"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "08:52"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "08:54"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "08:56"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW073D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -2487,7 +4935,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW074",
+    "odpt:trainNumber": "MMW073U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "08:49"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "08:51"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "08:53"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "08:55"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "08:57"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "08:59"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW074D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -2521,7 +5003,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW075",
+    "odpt:trainNumber": "MMW074U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "08:52"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "08:54"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "08:56"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "08:58"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "09:00"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "09:02"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW075D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -2555,7 +5071,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW076",
+    "odpt:trainNumber": "MMW075U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "08:55"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "08:57"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "08:59"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "09:01"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "09:03"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "09:05"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW076D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -2589,7 +5139,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW077",
+    "odpt:trainNumber": "MMW076U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "08:58"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "09:00"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "09:02"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "09:04"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "09:06"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "09:08"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW077D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -2623,7 +5207,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW078",
+    "odpt:trainNumber": "MMW077U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "09:01"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "09:03"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "09:05"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "09:07"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "09:09"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "09:11"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW078D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -2657,7 +5275,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW079",
+    "odpt:trainNumber": "MMW078U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "09:04"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "09:06"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "09:08"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "09:10"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "09:12"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "09:14"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW079D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -2691,7 +5343,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW080",
+    "odpt:trainNumber": "MMW079U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "09:07"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "09:09"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "09:11"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "09:13"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "09:15"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "09:17"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW080D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -2725,7 +5411,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW081",
+    "odpt:trainNumber": "MMW080U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "09:10"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "09:12"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "09:14"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "09:16"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "09:18"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "09:20"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW081D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -2759,7 +5479,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW082",
+    "odpt:trainNumber": "MMW081U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "09:13"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "09:15"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "09:17"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "09:19"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "09:21"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "09:23"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW082D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -2793,7 +5547,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW083",
+    "odpt:trainNumber": "MMW082U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "09:16"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "09:18"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "09:20"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "09:22"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "09:24"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "09:26"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW083D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -2827,7 +5615,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW084",
+    "odpt:trainNumber": "MMW083U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "09:19"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "09:21"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "09:23"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "09:25"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "09:27"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "09:29"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW084D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -2861,7 +5683,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW085",
+    "odpt:trainNumber": "MMW084U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "09:22"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "09:24"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "09:26"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "09:28"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "09:30"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "09:32"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW085D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -2895,7 +5751,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW086",
+    "odpt:trainNumber": "MMW085U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "09:25"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "09:27"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "09:29"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "09:31"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "09:33"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "09:35"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW086D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -2929,7 +5819,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW087",
+    "odpt:trainNumber": "MMW086U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "09:28"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "09:30"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "09:32"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "09:34"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "09:36"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "09:38"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW087D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -2963,7 +5887,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW088",
+    "odpt:trainNumber": "MMW087U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "09:31"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "09:33"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "09:35"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "09:37"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "09:39"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "09:41"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW088D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -2997,7 +5955,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW089",
+    "odpt:trainNumber": "MMW088U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "09:34"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "09:36"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "09:38"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "09:40"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "09:42"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "09:44"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW089D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -3031,7 +6023,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW090",
+    "odpt:trainNumber": "MMW089U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "09:37"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "09:39"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "09:41"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "09:43"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "09:45"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "09:47"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW090D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -3065,7 +6091,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW091",
+    "odpt:trainNumber": "MMW090U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "09:40"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "09:42"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "09:44"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "09:46"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "09:48"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "09:50"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW091D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -3099,7 +6159,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW092",
+    "odpt:trainNumber": "MMW091U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "09:43"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "09:45"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "09:47"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "09:49"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "09:51"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "09:53"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW092D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -3133,7 +6227,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW093",
+    "odpt:trainNumber": "MMW092U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "09:46"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "09:48"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "09:50"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "09:52"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "09:54"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "09:56"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW093D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -3167,7 +6295,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW094",
+    "odpt:trainNumber": "MMW093U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "09:49"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "09:51"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "09:53"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "09:55"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "09:57"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "09:59"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW094D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -3201,7 +6363,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW095",
+    "odpt:trainNumber": "MMW094U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "09:52"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "09:54"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "09:56"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "09:58"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "10:00"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "10:02"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW095D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -3235,7 +6431,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW096",
+    "odpt:trainNumber": "MMW095U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "09:55"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "09:57"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "09:59"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "10:01"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "10:03"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "10:05"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW096D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -3269,7 +6499,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW097",
+    "odpt:trainNumber": "MMW096U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "09:58"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "10:00"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "10:02"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "10:04"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "10:06"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "10:08"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW097D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -3303,7 +6567,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW098",
+    "odpt:trainNumber": "MMW097U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "10:01"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "10:03"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "10:05"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "10:07"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "10:09"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "10:11"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW098D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -3337,7 +6635,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW099",
+    "odpt:trainNumber": "MMW098U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "10:04"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "10:06"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "10:08"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "10:10"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "10:12"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "10:14"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW099D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -3371,7 +6703,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW100",
+    "odpt:trainNumber": "MMW099U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "10:07"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "10:09"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "10:11"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "10:13"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "10:15"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "10:17"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW100D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -3405,7 +6771,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW101",
+    "odpt:trainNumber": "MMW100U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "10:10"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "10:12"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "10:14"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "10:16"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "10:18"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "10:20"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW101D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -3439,7 +6839,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW102",
+    "odpt:trainNumber": "MMW101U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "10:13"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "10:15"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "10:17"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "10:19"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "10:21"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "10:23"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW102D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -3473,7 +6907,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW103",
+    "odpt:trainNumber": "MMW102U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "10:16"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "10:18"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "10:20"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "10:22"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "10:24"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "10:26"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW103D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -3507,7 +6975,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW104",
+    "odpt:trainNumber": "MMW103U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "10:19"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "10:21"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "10:23"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "10:25"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "10:27"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "10:29"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW104D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -3541,7 +7043,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW105",
+    "odpt:trainNumber": "MMW104U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "10:22"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "10:24"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "10:26"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "10:28"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "10:30"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "10:32"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW105D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -3575,7 +7111,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW106",
+    "odpt:trainNumber": "MMW105U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "10:25"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "10:27"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "10:29"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "10:31"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "10:33"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "10:35"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW106D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -3609,7 +7179,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW107",
+    "odpt:trainNumber": "MMW106U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "10:28"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "10:30"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "10:32"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "10:34"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "10:36"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "10:38"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW107D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -3643,7 +7247,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW108",
+    "odpt:trainNumber": "MMW107U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "10:31"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "10:33"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "10:35"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "10:37"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "10:39"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "10:41"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW108D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -3677,7 +7315,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW109",
+    "odpt:trainNumber": "MMW108U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "10:34"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "10:36"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "10:38"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "10:40"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "10:42"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "10:44"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW109D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -3711,7 +7383,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW110",
+    "odpt:trainNumber": "MMW109U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "10:37"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "10:39"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "10:41"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "10:43"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "10:45"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "10:47"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW110D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -3745,7 +7451,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW111",
+    "odpt:trainNumber": "MMW110U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "10:40"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "10:42"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "10:44"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "10:46"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "10:48"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "10:50"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW111D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -3779,7 +7519,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW112",
+    "odpt:trainNumber": "MMW111U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "10:43"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "10:45"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "10:47"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "10:49"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "10:51"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "10:53"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW112D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -3813,7 +7587,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW113",
+    "odpt:trainNumber": "MMW112U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "10:46"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "10:48"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "10:50"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "10:52"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "10:54"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "10:56"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW113D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -3847,7 +7655,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW114",
+    "odpt:trainNumber": "MMW113U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "10:49"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "10:51"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "10:53"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "10:55"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "10:57"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "10:59"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW114D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -3881,7 +7723,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW115",
+    "odpt:trainNumber": "MMW114U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "10:52"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "10:54"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "10:56"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "10:58"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "11:00"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "11:02"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW115D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -3915,7 +7791,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW116",
+    "odpt:trainNumber": "MMW115U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "10:55"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "10:57"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "10:59"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "11:01"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "11:03"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "11:05"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW116D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -3949,7 +7859,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW117",
+    "odpt:trainNumber": "MMW116U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "10:58"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "11:00"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "11:02"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "11:04"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "11:06"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "11:08"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW117D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -3983,7 +7927,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW118",
+    "odpt:trainNumber": "MMW117U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "11:01"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "11:03"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "11:05"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "11:07"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "11:09"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "11:11"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW118D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -4017,7 +7995,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW119",
+    "odpt:trainNumber": "MMW118U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "11:04"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "11:06"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "11:08"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "11:10"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "11:12"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "11:14"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW119D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -4051,7 +8063,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW120",
+    "odpt:trainNumber": "MMW119U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "11:07"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "11:09"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "11:11"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "11:13"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "11:15"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "11:17"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW120D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -4085,7 +8131,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW121",
+    "odpt:trainNumber": "MMW120U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "11:10"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "11:12"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "11:14"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "11:16"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "11:18"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "11:20"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW121D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -4119,7 +8199,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW122",
+    "odpt:trainNumber": "MMW121U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "11:13"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "11:15"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "11:17"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "11:19"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "11:21"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "11:23"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW122D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -4153,7 +8267,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW123",
+    "odpt:trainNumber": "MMW122U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "11:16"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "11:18"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "11:20"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "11:22"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "11:24"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "11:26"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW123D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -4187,7 +8335,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW124",
+    "odpt:trainNumber": "MMW123U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "11:19"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "11:21"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "11:23"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "11:25"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "11:27"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "11:29"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW124D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -4221,7 +8403,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW125",
+    "odpt:trainNumber": "MMW124U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "11:22"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "11:24"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "11:26"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "11:28"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "11:30"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "11:32"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW125D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -4255,7 +8471,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW126",
+    "odpt:trainNumber": "MMW125U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "11:25"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "11:27"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "11:29"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "11:31"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "11:33"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "11:35"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW126D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -4289,7 +8539,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW127",
+    "odpt:trainNumber": "MMW126U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "11:28"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "11:30"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "11:32"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "11:34"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "11:36"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "11:38"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW127D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -4323,7 +8607,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW128",
+    "odpt:trainNumber": "MMW127U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "11:31"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "11:33"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "11:35"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "11:37"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "11:39"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "11:41"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW128D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -4357,7 +8675,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW129",
+    "odpt:trainNumber": "MMW128U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "11:34"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "11:36"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "11:38"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "11:40"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "11:42"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "11:44"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW129D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -4391,7 +8743,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW130",
+    "odpt:trainNumber": "MMW129U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "11:37"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "11:39"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "11:41"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "11:43"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "11:45"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "11:47"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW130D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -4425,7 +8811,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW131",
+    "odpt:trainNumber": "MMW130U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "11:40"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "11:42"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "11:44"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "11:46"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "11:48"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "11:50"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW131D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -4459,7 +8879,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW132",
+    "odpt:trainNumber": "MMW131U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "11:43"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "11:45"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "11:47"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "11:49"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "11:51"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "11:53"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW132D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -4493,7 +8947,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW133",
+    "odpt:trainNumber": "MMW132U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "11:46"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "11:48"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "11:50"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "11:52"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "11:54"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "11:56"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW133D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -4527,7 +9015,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW134",
+    "odpt:trainNumber": "MMW133U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "11:49"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "11:51"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "11:53"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "11:55"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "11:57"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "11:59"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW134D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -4561,7 +9083,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW135",
+    "odpt:trainNumber": "MMW134U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "11:52"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "11:54"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "11:56"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "11:58"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "12:00"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "12:02"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW135D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -4595,7 +9151,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW136",
+    "odpt:trainNumber": "MMW135U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "11:55"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "11:57"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "11:59"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "12:01"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "12:03"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "12:05"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW136D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -4629,7 +9219,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW137",
+    "odpt:trainNumber": "MMW136U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "11:58"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "12:00"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "12:02"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "12:04"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "12:06"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "12:08"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW137D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -4663,7 +9287,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW138",
+    "odpt:trainNumber": "MMW137U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "12:01"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "12:03"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "12:05"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "12:07"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "12:09"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "12:11"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW138D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -4697,7 +9355,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW139",
+    "odpt:trainNumber": "MMW138U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "12:04"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "12:06"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "12:08"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "12:10"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "12:12"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "12:14"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW139D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -4731,7 +9423,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW140",
+    "odpt:trainNumber": "MMW139U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "12:07"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "12:09"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "12:11"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "12:13"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "12:15"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "12:17"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW140D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -4765,7 +9491,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW141",
+    "odpt:trainNumber": "MMW140U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "12:10"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "12:12"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "12:14"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "12:16"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "12:18"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "12:20"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW141D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -4799,7 +9559,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW142",
+    "odpt:trainNumber": "MMW141U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "12:13"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "12:15"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "12:17"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "12:19"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "12:21"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "12:23"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW142D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -4833,7 +9627,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW143",
+    "odpt:trainNumber": "MMW142U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "12:16"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "12:18"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "12:20"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "12:22"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "12:24"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "12:26"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW143D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -4867,7 +9695,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW144",
+    "odpt:trainNumber": "MMW143U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "12:19"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "12:21"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "12:23"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "12:25"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "12:27"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "12:29"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW144D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -4901,7 +9763,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW145",
+    "odpt:trainNumber": "MMW144U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "12:22"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "12:24"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "12:26"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "12:28"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "12:30"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "12:32"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW145D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -4935,7 +9831,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW146",
+    "odpt:trainNumber": "MMW145U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "12:25"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "12:27"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "12:29"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "12:31"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "12:33"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "12:35"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW146D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -4969,7 +9899,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW147",
+    "odpt:trainNumber": "MMW146U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "12:28"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "12:30"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "12:32"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "12:34"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "12:36"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "12:38"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW147D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -5003,7 +9967,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW148",
+    "odpt:trainNumber": "MMW147U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "12:31"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "12:33"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "12:35"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "12:37"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "12:39"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "12:41"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW148D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -5037,7 +10035,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW149",
+    "odpt:trainNumber": "MMW148U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "12:34"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "12:36"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "12:38"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "12:40"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "12:42"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "12:44"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW149D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -5071,7 +10103,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW150",
+    "odpt:trainNumber": "MMW149U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "12:37"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "12:39"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "12:41"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "12:43"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "12:45"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "12:47"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW150D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -5105,7 +10171,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW151",
+    "odpt:trainNumber": "MMW150U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "12:40"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "12:42"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "12:44"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "12:46"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "12:48"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "12:50"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW151D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -5139,7 +10239,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW152",
+    "odpt:trainNumber": "MMW151U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "12:43"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "12:45"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "12:47"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "12:49"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "12:51"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "12:53"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW152D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -5173,7 +10307,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW153",
+    "odpt:trainNumber": "MMW152U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "12:46"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "12:48"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "12:50"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "12:52"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "12:54"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "12:56"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW153D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -5207,7 +10375,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW154",
+    "odpt:trainNumber": "MMW153U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "12:49"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "12:51"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "12:53"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "12:55"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "12:57"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "12:59"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW154D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -5241,7 +10443,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW155",
+    "odpt:trainNumber": "MMW154U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "12:52"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "12:54"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "12:56"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "12:58"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "13:00"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "13:02"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW155D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -5275,7 +10511,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW156",
+    "odpt:trainNumber": "MMW155U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "12:55"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "12:57"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "12:59"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "13:01"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "13:03"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "13:05"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW156D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -5309,7 +10579,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW157",
+    "odpt:trainNumber": "MMW156U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "12:58"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "13:00"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "13:02"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "13:04"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "13:06"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "13:08"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW157D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -5343,7 +10647,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW158",
+    "odpt:trainNumber": "MMW157U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "13:01"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "13:03"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "13:05"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "13:07"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "13:09"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "13:11"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW158D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -5377,7 +10715,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW159",
+    "odpt:trainNumber": "MMW158U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "13:04"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "13:06"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "13:08"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "13:10"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "13:12"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "13:14"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW159D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -5411,7 +10783,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW160",
+    "odpt:trainNumber": "MMW159U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "13:07"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "13:09"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "13:11"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "13:13"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "13:15"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "13:17"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW160D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -5445,7 +10851,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW161",
+    "odpt:trainNumber": "MMW160U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "13:10"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "13:12"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "13:14"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "13:16"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "13:18"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "13:20"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW161D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -5479,7 +10919,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW162",
+    "odpt:trainNumber": "MMW161U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "13:13"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "13:15"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "13:17"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "13:19"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "13:21"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "13:23"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW162D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -5513,7 +10987,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW163",
+    "odpt:trainNumber": "MMW162U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "13:16"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "13:18"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "13:20"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "13:22"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "13:24"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "13:26"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW163D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -5547,7 +11055,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW164",
+    "odpt:trainNumber": "MMW163U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "13:19"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "13:21"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "13:23"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "13:25"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "13:27"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "13:29"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW164D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -5581,7 +11123,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW165",
+    "odpt:trainNumber": "MMW164U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "13:22"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "13:24"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "13:26"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "13:28"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "13:30"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "13:32"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW165D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -5615,7 +11191,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW166",
+    "odpt:trainNumber": "MMW165U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "13:25"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "13:27"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "13:29"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "13:31"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "13:33"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "13:35"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW166D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -5649,7 +11259,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW167",
+    "odpt:trainNumber": "MMW166U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "13:28"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "13:30"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "13:32"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "13:34"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "13:36"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "13:38"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW167D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -5683,7 +11327,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW168",
+    "odpt:trainNumber": "MMW167U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "13:31"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "13:33"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "13:35"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "13:37"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "13:39"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "13:41"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW168D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -5717,7 +11395,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW169",
+    "odpt:trainNumber": "MMW168U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "13:34"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "13:36"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "13:38"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "13:40"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "13:42"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "13:44"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW169D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -5751,7 +11463,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW170",
+    "odpt:trainNumber": "MMW169U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "13:37"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "13:39"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "13:41"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "13:43"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "13:45"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "13:47"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW170D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -5785,7 +11531,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW171",
+    "odpt:trainNumber": "MMW170U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "13:40"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "13:42"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "13:44"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "13:46"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "13:48"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "13:50"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW171D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -5819,7 +11599,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW172",
+    "odpt:trainNumber": "MMW171U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "13:43"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "13:45"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "13:47"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "13:49"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "13:51"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "13:53"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW172D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -5853,7 +11667,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW173",
+    "odpt:trainNumber": "MMW172U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "13:46"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "13:48"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "13:50"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "13:52"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "13:54"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "13:56"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW173D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -5887,7 +11735,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW174",
+    "odpt:trainNumber": "MMW173U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "13:49"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "13:51"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "13:53"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "13:55"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "13:57"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "13:59"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW174D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -5921,7 +11803,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW175",
+    "odpt:trainNumber": "MMW174U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "13:52"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "13:54"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "13:56"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "13:58"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "14:00"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "14:02"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW175D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -5955,7 +11871,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW176",
+    "odpt:trainNumber": "MMW175U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "13:55"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "13:57"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "13:59"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "14:01"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "14:03"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "14:05"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW176D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -5989,7 +11939,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW177",
+    "odpt:trainNumber": "MMW176U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "13:58"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "14:00"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "14:02"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "14:04"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "14:06"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "14:08"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW177D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -6023,7 +12007,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW178",
+    "odpt:trainNumber": "MMW177U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "14:01"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "14:03"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "14:05"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "14:07"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "14:09"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "14:11"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW178D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -6057,7 +12075,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW179",
+    "odpt:trainNumber": "MMW178U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "14:04"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "14:06"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "14:08"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "14:10"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "14:12"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "14:14"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW179D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -6091,7 +12143,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW180",
+    "odpt:trainNumber": "MMW179U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "14:07"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "14:09"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "14:11"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "14:13"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "14:15"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "14:17"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW180D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -6125,7 +12211,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW181",
+    "odpt:trainNumber": "MMW180U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "14:10"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "14:12"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "14:14"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "14:16"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "14:18"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "14:20"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW181D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -6159,7 +12279,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW182",
+    "odpt:trainNumber": "MMW181U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "14:13"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "14:15"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "14:17"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "14:19"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "14:21"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "14:23"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW182D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -6193,7 +12347,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW183",
+    "odpt:trainNumber": "MMW182U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "14:16"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "14:18"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "14:20"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "14:22"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "14:24"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "14:26"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW183D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -6227,7 +12415,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW184",
+    "odpt:trainNumber": "MMW183U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "14:19"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "14:21"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "14:23"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "14:25"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "14:27"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "14:29"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW184D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -6261,7 +12483,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW185",
+    "odpt:trainNumber": "MMW184U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "14:22"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "14:24"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "14:26"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "14:28"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "14:30"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "14:32"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW185D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -6295,7 +12551,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW186",
+    "odpt:trainNumber": "MMW185U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "14:25"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "14:27"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "14:29"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "14:31"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "14:33"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "14:35"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW186D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -6329,7 +12619,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW187",
+    "odpt:trainNumber": "MMW186U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "14:28"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "14:30"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "14:32"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "14:34"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "14:36"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "14:38"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW187D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -6363,7 +12687,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW188",
+    "odpt:trainNumber": "MMW187U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "14:31"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "14:33"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "14:35"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "14:37"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "14:39"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "14:41"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW188D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -6397,7 +12755,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW189",
+    "odpt:trainNumber": "MMW188U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "14:34"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "14:36"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "14:38"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "14:40"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "14:42"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "14:44"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW189D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -6431,7 +12823,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW190",
+    "odpt:trainNumber": "MMW189U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "14:37"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "14:39"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "14:41"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "14:43"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "14:45"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "14:47"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW190D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -6465,7 +12891,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW191",
+    "odpt:trainNumber": "MMW190U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "14:40"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "14:42"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "14:44"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "14:46"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "14:48"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "14:50"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW191D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -6499,7 +12959,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW192",
+    "odpt:trainNumber": "MMW191U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "14:43"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "14:45"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "14:47"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "14:49"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "14:51"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "14:53"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW192D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -6533,7 +13027,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW193",
+    "odpt:trainNumber": "MMW192U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "14:46"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "14:48"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "14:50"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "14:52"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "14:54"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "14:56"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW193D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -6567,7 +13095,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW194",
+    "odpt:trainNumber": "MMW193U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "14:49"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "14:51"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "14:53"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "14:55"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "14:57"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "14:59"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW194D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -6601,7 +13163,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW195",
+    "odpt:trainNumber": "MMW194U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "14:52"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "14:54"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "14:56"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "14:58"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "15:00"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "15:02"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW195D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -6635,7 +13231,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW196",
+    "odpt:trainNumber": "MMW195U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "14:55"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "14:57"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "14:59"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "15:01"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "15:03"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "15:05"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW196D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -6669,7 +13299,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW197",
+    "odpt:trainNumber": "MMW196U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "14:58"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "15:00"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "15:02"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "15:04"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "15:06"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "15:08"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW197D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -6703,7 +13367,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW198",
+    "odpt:trainNumber": "MMW197U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "15:01"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "15:03"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "15:05"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "15:07"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "15:09"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "15:11"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW198D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -6737,7 +13435,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW199",
+    "odpt:trainNumber": "MMW198U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "15:04"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "15:06"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "15:08"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "15:10"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "15:12"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "15:14"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW199D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -6771,7 +13503,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW200",
+    "odpt:trainNumber": "MMW199U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "15:07"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "15:09"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "15:11"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "15:13"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "15:15"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "15:17"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW200D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -6805,7 +13571,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW201",
+    "odpt:trainNumber": "MMW200U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "15:10"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "15:12"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "15:14"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "15:16"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "15:18"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "15:20"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW201D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -6839,7 +13639,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW202",
+    "odpt:trainNumber": "MMW201U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "15:13"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "15:15"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "15:17"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "15:19"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "15:21"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "15:23"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW202D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -6873,7 +13707,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW203",
+    "odpt:trainNumber": "MMW202U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "15:16"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "15:18"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "15:20"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "15:22"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "15:24"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "15:26"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW203D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -6907,7 +13775,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW204",
+    "odpt:trainNumber": "MMW203U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "15:19"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "15:21"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "15:23"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "15:25"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "15:27"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "15:29"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW204D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -6941,7 +13843,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW205",
+    "odpt:trainNumber": "MMW204U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "15:22"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "15:24"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "15:26"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "15:28"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "15:30"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "15:32"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW205D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -6975,7 +13911,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW206",
+    "odpt:trainNumber": "MMW205U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "15:25"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "15:27"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "15:29"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "15:31"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "15:33"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "15:35"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW206D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -7009,7 +13979,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW207",
+    "odpt:trainNumber": "MMW206U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "15:28"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "15:30"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "15:32"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "15:34"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "15:36"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "15:38"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW207D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -7043,7 +14047,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW208",
+    "odpt:trainNumber": "MMW207U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "15:31"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "15:33"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "15:35"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "15:37"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "15:39"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "15:41"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW208D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -7077,7 +14115,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW209",
+    "odpt:trainNumber": "MMW208U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "15:34"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "15:36"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "15:38"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "15:40"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "15:42"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "15:44"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW209D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -7111,7 +14183,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW210",
+    "odpt:trainNumber": "MMW209U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "15:37"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "15:39"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "15:41"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "15:43"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "15:45"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "15:47"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW210D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -7145,7 +14251,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW211",
+    "odpt:trainNumber": "MMW210U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "15:40"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "15:42"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "15:44"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "15:46"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "15:48"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "15:50"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW211D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -7179,7 +14319,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW212",
+    "odpt:trainNumber": "MMW211U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "15:43"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "15:45"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "15:47"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "15:49"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "15:51"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "15:53"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW212D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -7213,7 +14387,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW213",
+    "odpt:trainNumber": "MMW212U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "15:46"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "15:48"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "15:50"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "15:52"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "15:54"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "15:56"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW213D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -7247,7 +14455,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW214",
+    "odpt:trainNumber": "MMW213U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "15:49"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "15:51"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "15:53"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "15:55"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "15:57"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "15:59"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW214D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -7281,7 +14523,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW215",
+    "odpt:trainNumber": "MMW214U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "15:52"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "15:54"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "15:56"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "15:58"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "16:00"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "16:02"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW215D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -7315,7 +14591,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW216",
+    "odpt:trainNumber": "MMW215U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "15:55"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "15:57"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "15:59"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "16:01"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "16:03"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "16:05"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW216D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -7349,7 +14659,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW217",
+    "odpt:trainNumber": "MMW216U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "15:58"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "16:00"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "16:02"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "16:04"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "16:06"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "16:08"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW217D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -7383,7 +14727,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW218",
+    "odpt:trainNumber": "MMW217U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "16:01"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "16:03"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "16:05"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "16:07"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "16:09"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "16:11"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW218D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -7417,7 +14795,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW219",
+    "odpt:trainNumber": "MMW218U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "16:04"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "16:06"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "16:08"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "16:10"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "16:12"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "16:14"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW219D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -7451,7 +14863,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW220",
+    "odpt:trainNumber": "MMW219U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "16:07"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "16:09"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "16:11"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "16:13"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "16:15"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "16:17"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW220D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -7485,7 +14931,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW221",
+    "odpt:trainNumber": "MMW220U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "16:10"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "16:12"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "16:14"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "16:16"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "16:18"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "16:20"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW221D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -7519,7 +14999,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW222",
+    "odpt:trainNumber": "MMW221U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "16:13"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "16:15"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "16:17"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "16:19"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "16:21"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "16:23"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW222D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -7553,7 +15067,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW223",
+    "odpt:trainNumber": "MMW222U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "16:16"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "16:18"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "16:20"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "16:22"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "16:24"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "16:26"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW223D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -7587,7 +15135,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW224",
+    "odpt:trainNumber": "MMW223U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "16:19"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "16:21"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "16:23"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "16:25"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "16:27"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "16:29"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW224D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -7621,7 +15203,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW225",
+    "odpt:trainNumber": "MMW224U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "16:22"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "16:24"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "16:26"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "16:28"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "16:30"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "16:32"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW225D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -7655,7 +15271,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW226",
+    "odpt:trainNumber": "MMW225U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "16:25"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "16:27"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "16:29"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "16:31"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "16:33"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "16:35"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW226D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -7689,7 +15339,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW227",
+    "odpt:trainNumber": "MMW226U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "16:28"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "16:30"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "16:32"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "16:34"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "16:36"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "16:38"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW227D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -7723,7 +15407,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW228",
+    "odpt:trainNumber": "MMW227U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "16:31"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "16:33"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "16:35"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "16:37"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "16:39"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "16:41"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW228D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -7757,7 +15475,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW229",
+    "odpt:trainNumber": "MMW228U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "16:34"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "16:36"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "16:38"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "16:40"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "16:42"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "16:44"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW229D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -7791,7 +15543,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW230",
+    "odpt:trainNumber": "MMW229U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "16:37"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "16:39"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "16:41"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "16:43"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "16:45"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "16:47"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW230D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -7825,7 +15611,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW231",
+    "odpt:trainNumber": "MMW230U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "16:40"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "16:42"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "16:44"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "16:46"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "16:48"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "16:50"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW231D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -7859,7 +15679,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW232",
+    "odpt:trainNumber": "MMW231U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "16:43"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "16:45"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "16:47"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "16:49"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "16:51"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "16:53"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW232D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -7893,7 +15747,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW233",
+    "odpt:trainNumber": "MMW232U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "16:46"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "16:48"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "16:50"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "16:52"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "16:54"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "16:56"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW233D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -7927,7 +15815,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW234",
+    "odpt:trainNumber": "MMW233U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "16:49"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "16:51"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "16:53"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "16:55"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "16:57"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "16:59"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW234D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -7961,7 +15883,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW235",
+    "odpt:trainNumber": "MMW234U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "16:52"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "16:54"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "16:56"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "16:58"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "17:00"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "17:02"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW235D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -7995,7 +15951,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW236",
+    "odpt:trainNumber": "MMW235U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "16:55"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "16:57"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "16:59"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "17:01"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "17:03"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "17:05"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW236D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -8029,7 +16019,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW237",
+    "odpt:trainNumber": "MMW236U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "16:58"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "17:00"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "17:02"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "17:04"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "17:06"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "17:08"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW237D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -8063,7 +16087,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW238",
+    "odpt:trainNumber": "MMW237U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "17:01"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "17:03"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "17:05"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "17:07"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "17:09"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "17:11"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW238D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -8097,7 +16155,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW239",
+    "odpt:trainNumber": "MMW238U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "17:04"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "17:06"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "17:08"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "17:10"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "17:12"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "17:14"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW239D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -8131,7 +16223,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW240",
+    "odpt:trainNumber": "MMW239U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "17:07"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "17:09"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "17:11"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "17:13"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "17:15"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "17:17"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW240D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -8165,7 +16291,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW241",
+    "odpt:trainNumber": "MMW240U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "17:10"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "17:12"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "17:14"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "17:16"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "17:18"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "17:20"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW241D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -8199,7 +16359,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW242",
+    "odpt:trainNumber": "MMW241U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "17:13"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "17:15"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "17:17"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "17:19"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "17:21"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "17:23"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW242D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -8233,7 +16427,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW243",
+    "odpt:trainNumber": "MMW242U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "17:16"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "17:18"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "17:20"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "17:22"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "17:24"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "17:26"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW243D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -8267,7 +16495,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW244",
+    "odpt:trainNumber": "MMW243U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "17:19"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "17:21"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "17:23"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "17:25"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "17:27"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "17:29"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW244D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -8301,7 +16563,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW245",
+    "odpt:trainNumber": "MMW244U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "17:22"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "17:24"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "17:26"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "17:28"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "17:30"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "17:32"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW245D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -8335,7 +16631,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW246",
+    "odpt:trainNumber": "MMW245U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "17:25"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "17:27"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "17:29"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "17:31"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "17:33"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "17:35"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW246D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -8369,7 +16699,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW247",
+    "odpt:trainNumber": "MMW246U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "17:28"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "17:30"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "17:32"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "17:34"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "17:36"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "17:38"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW247D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -8403,7 +16767,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW248",
+    "odpt:trainNumber": "MMW247U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "17:31"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "17:33"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "17:35"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "17:37"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "17:39"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "17:41"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW248D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -8437,7 +16835,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW249",
+    "odpt:trainNumber": "MMW248U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "17:34"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "17:36"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "17:38"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "17:40"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "17:42"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "17:44"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW249D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -8471,7 +16903,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW250",
+    "odpt:trainNumber": "MMW249U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "17:37"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "17:39"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "17:41"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "17:43"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "17:45"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "17:47"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW250D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -8505,7 +16971,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW251",
+    "odpt:trainNumber": "MMW250U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "17:40"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "17:42"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "17:44"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "17:46"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "17:48"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "17:50"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW251D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -8539,7 +17039,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW252",
+    "odpt:trainNumber": "MMW251U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "17:43"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "17:45"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "17:47"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "17:49"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "17:51"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "17:53"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW252D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -8573,7 +17107,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW253",
+    "odpt:trainNumber": "MMW252U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "17:46"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "17:48"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "17:50"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "17:52"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "17:54"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "17:56"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW253D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -8607,7 +17175,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW254",
+    "odpt:trainNumber": "MMW253U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "17:49"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "17:51"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "17:53"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "17:55"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "17:57"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "17:59"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW254D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -8641,7 +17243,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW255",
+    "odpt:trainNumber": "MMW254U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "17:52"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "17:54"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "17:56"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "17:58"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "18:00"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "18:02"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW255D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -8675,7 +17311,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW256",
+    "odpt:trainNumber": "MMW255U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "17:55"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "17:57"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "17:59"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "18:01"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "18:03"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "18:05"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW256D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -8709,7 +17379,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW257",
+    "odpt:trainNumber": "MMW256U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "17:58"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "18:00"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "18:02"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "18:04"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "18:06"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "18:08"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW257D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -8743,7 +17447,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW258",
+    "odpt:trainNumber": "MMW257U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "18:01"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "18:03"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "18:05"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "18:07"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "18:09"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "18:11"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW258D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -8777,7 +17515,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW259",
+    "odpt:trainNumber": "MMW258U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "18:04"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "18:06"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "18:08"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "18:10"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "18:12"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "18:14"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW259D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -8811,7 +17583,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW260",
+    "odpt:trainNumber": "MMW259U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "18:07"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "18:09"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "18:11"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "18:13"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "18:15"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "18:17"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW260D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -8845,7 +17651,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW261",
+    "odpt:trainNumber": "MMW260U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "18:10"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "18:12"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "18:14"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "18:16"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "18:18"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "18:20"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW261D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -8879,7 +17719,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW262",
+    "odpt:trainNumber": "MMW261U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "18:13"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "18:15"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "18:17"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "18:19"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "18:21"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "18:23"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW262D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -8913,7 +17787,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW263",
+    "odpt:trainNumber": "MMW262U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "18:16"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "18:18"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "18:20"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "18:22"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "18:24"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "18:26"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW263D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -8947,7 +17855,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW264",
+    "odpt:trainNumber": "MMW263U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "18:19"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "18:21"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "18:23"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "18:25"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "18:27"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "18:29"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW264D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -8981,7 +17923,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW265",
+    "odpt:trainNumber": "MMW264U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "18:22"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "18:24"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "18:26"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "18:28"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "18:30"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "18:32"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW265D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -9015,7 +17991,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW266",
+    "odpt:trainNumber": "MMW265U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "18:25"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "18:27"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "18:29"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "18:31"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "18:33"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "18:35"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW266D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -9049,7 +18059,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW267",
+    "odpt:trainNumber": "MMW266U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "18:28"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "18:30"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "18:32"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "18:34"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "18:36"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "18:38"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW267D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -9083,7 +18127,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW268",
+    "odpt:trainNumber": "MMW267U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "18:31"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "18:33"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "18:35"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "18:37"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "18:39"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "18:41"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW268D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -9117,7 +18195,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW269",
+    "odpt:trainNumber": "MMW268U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "18:34"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "18:36"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "18:38"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "18:40"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "18:42"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "18:44"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW269D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -9151,7 +18263,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW270",
+    "odpt:trainNumber": "MMW269U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "18:37"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "18:39"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "18:41"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "18:43"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "18:45"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "18:47"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW270D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -9185,7 +18331,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW271",
+    "odpt:trainNumber": "MMW270U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "18:40"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "18:42"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "18:44"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "18:46"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "18:48"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "18:50"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW271D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -9219,7 +18399,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW272",
+    "odpt:trainNumber": "MMW271U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "18:43"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "18:45"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "18:47"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "18:49"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "18:51"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "18:53"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW272D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -9253,7 +18467,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW273",
+    "odpt:trainNumber": "MMW272U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "18:46"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "18:48"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "18:50"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "18:52"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "18:54"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "18:56"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW273D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -9287,7 +18535,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW274",
+    "odpt:trainNumber": "MMW273U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "18:49"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "18:51"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "18:53"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "18:55"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "18:57"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "18:59"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW274D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -9321,7 +18603,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW275",
+    "odpt:trainNumber": "MMW274U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "18:52"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "18:54"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "18:56"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "18:58"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "19:00"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "19:02"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW275D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -9355,7 +18671,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW276",
+    "odpt:trainNumber": "MMW275U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "18:55"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "18:57"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "18:59"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "19:01"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "19:03"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "19:05"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW276D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -9389,7 +18739,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW277",
+    "odpt:trainNumber": "MMW276U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "18:58"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "19:00"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "19:02"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "19:04"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "19:06"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "19:08"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW277D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -9423,7 +18807,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW278",
+    "odpt:trainNumber": "MMW277U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "19:01"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "19:03"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "19:05"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "19:07"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "19:09"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "19:11"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW278D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -9457,7 +18875,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW279",
+    "odpt:trainNumber": "MMW278U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "19:04"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "19:06"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "19:08"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "19:10"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "19:12"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "19:14"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW279D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -9491,7 +18943,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW280",
+    "odpt:trainNumber": "MMW279U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "19:07"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "19:09"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "19:11"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "19:13"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "19:15"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "19:17"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW280D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -9525,7 +19011,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW281",
+    "odpt:trainNumber": "MMW280U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "19:10"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "19:12"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "19:14"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "19:16"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "19:18"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "19:20"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW281D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -9559,7 +19079,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW282",
+    "odpt:trainNumber": "MMW281U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "19:13"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "19:15"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "19:17"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "19:19"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "19:21"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "19:23"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW282D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -9593,7 +19147,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW283",
+    "odpt:trainNumber": "MMW282U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "19:16"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "19:18"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "19:20"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "19:22"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "19:24"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "19:26"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW283D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -9627,7 +19215,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW284",
+    "odpt:trainNumber": "MMW283U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "19:19"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "19:21"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "19:23"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "19:25"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "19:27"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "19:29"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW284D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -9661,7 +19283,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW285",
+    "odpt:trainNumber": "MMW284U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "19:22"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "19:24"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "19:26"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "19:28"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "19:30"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "19:32"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW285D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -9695,7 +19351,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW286",
+    "odpt:trainNumber": "MMW285U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "19:25"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "19:27"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "19:29"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "19:31"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "19:33"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "19:35"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW286D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -9729,7 +19419,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW287",
+    "odpt:trainNumber": "MMW286U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "19:28"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "19:30"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "19:32"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "19:34"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "19:36"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "19:38"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW287D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -9763,7 +19487,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW288",
+    "odpt:trainNumber": "MMW287U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "19:31"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "19:33"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "19:35"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "19:37"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "19:39"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "19:41"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW288D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -9797,7 +19555,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW289",
+    "odpt:trainNumber": "MMW288U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "19:34"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "19:36"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "19:38"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "19:40"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "19:42"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "19:44"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW289D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -9831,7 +19623,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW290",
+    "odpt:trainNumber": "MMW289U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "19:37"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "19:39"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "19:41"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "19:43"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "19:45"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "19:47"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW290D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -9865,7 +19691,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW291",
+    "odpt:trainNumber": "MMW290U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "19:40"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "19:42"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "19:44"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "19:46"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "19:48"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "19:50"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW291D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -9899,7 +19759,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW292",
+    "odpt:trainNumber": "MMW291U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "19:43"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "19:45"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "19:47"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "19:49"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "19:51"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "19:53"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW292D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -9933,7 +19827,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW293",
+    "odpt:trainNumber": "MMW292U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "19:46"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "19:48"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "19:50"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "19:52"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "19:54"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "19:56"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW293D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -9967,7 +19895,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW294",
+    "odpt:trainNumber": "MMW293U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "19:49"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "19:51"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "19:53"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "19:55"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "19:57"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "19:59"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW294D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -10001,7 +19963,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW295",
+    "odpt:trainNumber": "MMW294U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "19:52"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "19:54"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "19:56"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "19:58"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "20:00"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "20:02"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW295D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -10035,7 +20031,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW296",
+    "odpt:trainNumber": "MMW295U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "19:55"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "19:57"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "19:59"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "20:01"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "20:03"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "20:05"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW296D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -10069,7 +20099,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW297",
+    "odpt:trainNumber": "MMW296U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "19:58"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "20:00"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "20:02"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "20:04"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "20:06"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "20:08"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW297D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -10103,7 +20167,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW298",
+    "odpt:trainNumber": "MMW297U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "20:01"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "20:03"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "20:05"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "20:07"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "20:09"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "20:11"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW298D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -10137,7 +20235,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW299",
+    "odpt:trainNumber": "MMW298U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "20:04"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "20:06"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "20:08"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "20:10"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "20:12"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "20:14"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW299D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -10171,7 +20303,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW300",
+    "odpt:trainNumber": "MMW299U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "20:07"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "20:09"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "20:11"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "20:13"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "20:15"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "20:17"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW300D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -10205,7 +20371,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW301",
+    "odpt:trainNumber": "MMW300U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "20:10"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "20:12"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "20:14"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "20:16"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "20:18"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "20:20"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW301D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -10239,7 +20439,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW302",
+    "odpt:trainNumber": "MMW301U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "20:13"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "20:15"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "20:17"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "20:19"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "20:21"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "20:23"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW302D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -10273,7 +20507,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW303",
+    "odpt:trainNumber": "MMW302U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "20:16"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "20:18"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "20:20"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "20:22"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "20:24"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "20:26"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW303D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -10307,7 +20575,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW304",
+    "odpt:trainNumber": "MMW303U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "20:19"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "20:21"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "20:23"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "20:25"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "20:27"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "20:29"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW304D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -10341,7 +20643,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW305",
+    "odpt:trainNumber": "MMW304U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "20:22"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "20:24"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "20:26"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "20:28"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "20:30"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "20:32"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW305D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -10375,7 +20711,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW306",
+    "odpt:trainNumber": "MMW305U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "20:25"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "20:27"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "20:29"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "20:31"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "20:33"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "20:35"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW306D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -10409,7 +20779,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW307",
+    "odpt:trainNumber": "MMW306U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "20:28"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "20:30"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "20:32"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "20:34"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "20:36"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "20:38"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW307D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -10443,7 +20847,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW308",
+    "odpt:trainNumber": "MMW307U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "20:31"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "20:33"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "20:35"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "20:37"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "20:39"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "20:41"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW308D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -10477,7 +20915,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW309",
+    "odpt:trainNumber": "MMW308U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "20:34"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "20:36"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "20:38"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "20:40"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "20:42"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "20:44"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW309D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -10511,7 +20983,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW310",
+    "odpt:trainNumber": "MMW309U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "20:37"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "20:39"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "20:41"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "20:43"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "20:45"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "20:47"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW310D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -10545,7 +21051,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW311",
+    "odpt:trainNumber": "MMW310U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "20:40"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "20:42"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "20:44"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "20:46"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "20:48"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "20:50"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW311D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -10579,7 +21119,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW312",
+    "odpt:trainNumber": "MMW311U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "20:43"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "20:45"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "20:47"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "20:49"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "20:51"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "20:53"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW312D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -10613,7 +21187,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW313",
+    "odpt:trainNumber": "MMW312U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "20:46"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "20:48"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "20:50"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "20:52"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "20:54"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "20:56"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW313D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -10647,7 +21255,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW314",
+    "odpt:trainNumber": "MMW313U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "20:49"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "20:51"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "20:53"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "20:55"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "20:57"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "20:59"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW314D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -10681,7 +21323,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW315",
+    "odpt:trainNumber": "MMW314U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "20:52"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "20:54"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "20:56"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "20:58"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "21:00"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "21:02"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW315D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -10715,7 +21391,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW316",
+    "odpt:trainNumber": "MMW315U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "20:55"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "20:57"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "20:59"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "21:01"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "21:03"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "21:05"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW316D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -10749,7 +21459,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW317",
+    "odpt:trainNumber": "MMW316U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "20:58"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "21:00"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "21:02"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "21:04"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "21:06"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "21:08"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW317D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -10783,7 +21527,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW318",
+    "odpt:trainNumber": "MMW317U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "21:01"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "21:03"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "21:05"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "21:07"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "21:09"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "21:11"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW318D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -10817,7 +21595,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW319",
+    "odpt:trainNumber": "MMW318U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "21:04"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "21:06"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "21:08"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "21:10"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "21:12"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "21:14"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW319D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -10851,7 +21663,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW320",
+    "odpt:trainNumber": "MMW319U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "21:07"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "21:09"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "21:11"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "21:13"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "21:15"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "21:17"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW320D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -10885,7 +21731,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW321",
+    "odpt:trainNumber": "MMW320U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "21:10"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "21:12"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "21:14"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "21:16"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "21:18"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "21:20"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW321D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -10919,7 +21799,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW322",
+    "odpt:trainNumber": "MMW321U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "21:13"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "21:15"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "21:17"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "21:19"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "21:21"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "21:23"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW322D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -10953,7 +21867,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW323",
+    "odpt:trainNumber": "MMW322U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "21:16"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "21:18"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "21:20"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "21:22"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "21:24"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "21:26"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW323D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -10987,7 +21935,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW324",
+    "odpt:trainNumber": "MMW323U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "21:19"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "21:21"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "21:23"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "21:25"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "21:27"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "21:29"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW324D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -11021,7 +22003,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW325",
+    "odpt:trainNumber": "MMW324U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "21:22"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "21:24"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "21:26"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "21:28"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "21:30"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "21:32"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW325D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -11055,7 +22071,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW326",
+    "odpt:trainNumber": "MMW325U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "21:25"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "21:27"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "21:29"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "21:31"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "21:33"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "21:35"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW326D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -11089,7 +22139,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW327",
+    "odpt:trainNumber": "MMW326U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "21:28"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "21:30"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "21:32"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "21:34"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "21:36"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "21:38"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW327D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -11123,7 +22207,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW328",
+    "odpt:trainNumber": "MMW327U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "21:31"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "21:33"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "21:35"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "21:37"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "21:39"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "21:41"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW328D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -11157,7 +22275,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW329",
+    "odpt:trainNumber": "MMW328U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "21:34"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "21:36"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "21:38"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "21:40"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "21:42"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "21:44"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW329D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -11191,7 +22343,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW330",
+    "odpt:trainNumber": "MMW329U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "21:37"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "21:39"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "21:41"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "21:43"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "21:45"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "21:47"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW330D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -11225,7 +22411,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW331",
+    "odpt:trainNumber": "MMW330U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "21:40"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "21:42"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "21:44"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "21:46"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "21:48"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "21:50"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW331D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -11259,7 +22479,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW332",
+    "odpt:trainNumber": "MMW331U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "21:43"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "21:45"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "21:47"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "21:49"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "21:51"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "21:53"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW332D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -11293,7 +22547,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW333",
+    "odpt:trainNumber": "MMW332U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "21:46"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "21:48"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "21:50"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "21:52"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "21:54"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "21:56"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW333D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -11327,7 +22615,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW334",
+    "odpt:trainNumber": "MMW333U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "21:49"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "21:51"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "21:53"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "21:55"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "21:57"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "21:59"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW334D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -11361,7 +22683,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW335",
+    "odpt:trainNumber": "MMW334U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "21:52"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "21:54"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "21:56"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "21:58"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "22:00"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "22:02"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW335D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -11395,7 +22751,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW336",
+    "odpt:trainNumber": "MMW335U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "21:55"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "21:57"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "21:59"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "22:01"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "22:03"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "22:05"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW336D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -11429,7 +22819,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW337",
+    "odpt:trainNumber": "MMW336U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "21:58"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "22:00"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "22:02"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "22:04"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "22:06"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "22:08"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW337D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -11463,7 +22887,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW338",
+    "odpt:trainNumber": "MMW337U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "22:01"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "22:03"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "22:05"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "22:07"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "22:09"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "22:11"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW338D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -11497,7 +22955,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW339",
+    "odpt:trainNumber": "MMW338U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "22:04"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "22:06"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "22:08"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "22:10"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "22:12"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "22:14"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW339D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -11531,7 +23023,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW340",
+    "odpt:trainNumber": "MMW339U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "22:07"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "22:09"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "22:11"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "22:13"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "22:15"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "22:17"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW340D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -11565,7 +23091,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW341",
+    "odpt:trainNumber": "MMW340U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "22:10"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "22:12"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "22:14"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "22:16"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "22:18"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "22:20"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW341D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -11599,7 +23159,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW342",
+    "odpt:trainNumber": "MMW341U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "22:13"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "22:15"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "22:17"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "22:19"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "22:21"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "22:23"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW342D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -11633,7 +23227,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW343",
+    "odpt:trainNumber": "MMW342U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "22:16"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "22:18"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "22:20"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "22:22"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "22:24"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "22:26"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW343D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -11667,7 +23295,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW344",
+    "odpt:trainNumber": "MMW343U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "22:19"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "22:21"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "22:23"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "22:25"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "22:27"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "22:29"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW344D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -11701,7 +23363,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW345",
+    "odpt:trainNumber": "MMW344U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "22:22"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "22:24"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "22:26"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "22:28"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "22:30"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "22:32"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW345D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -11735,7 +23431,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW346",
+    "odpt:trainNumber": "MMW345U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "22:25"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "22:27"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "22:29"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "22:31"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "22:33"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "22:35"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW346D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -11769,7 +23499,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW347",
+    "odpt:trainNumber": "MMW346U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "22:28"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "22:30"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "22:32"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "22:34"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "22:36"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "22:38"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW347D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -11803,7 +23567,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW348",
+    "odpt:trainNumber": "MMW347U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "22:31"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "22:33"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "22:35"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "22:37"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "22:39"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "22:41"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW348D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -11837,7 +23635,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW349",
+    "odpt:trainNumber": "MMW348U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "22:34"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "22:36"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "22:38"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "22:40"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "22:42"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "22:44"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW349D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -11871,7 +23703,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW350",
+    "odpt:trainNumber": "MMW349U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "22:37"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "22:39"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "22:41"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "22:43"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "22:45"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "22:47"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW350D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -11905,7 +23771,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW351",
+    "odpt:trainNumber": "MMW350U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "22:40"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "22:42"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "22:44"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "22:46"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "22:48"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "22:50"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW351D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -11939,7 +23839,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW352",
+    "odpt:trainNumber": "MMW351U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "22:43"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "22:45"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "22:47"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "22:49"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "22:51"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "22:53"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW352D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -11973,7 +23907,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW353",
+    "odpt:trainNumber": "MMW352U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "22:46"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "22:48"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "22:50"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "22:52"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "22:54"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "22:56"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW353D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -12007,7 +23975,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW354",
+    "odpt:trainNumber": "MMW353U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "22:49"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "22:51"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "22:53"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "22:55"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "22:57"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "22:59"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW354D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -12041,7 +24043,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW355",
+    "odpt:trainNumber": "MMW354U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "22:52"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "22:54"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "22:56"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "22:58"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "23:00"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "23:02"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW355D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -12075,7 +24111,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW356",
+    "odpt:trainNumber": "MMW355U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "22:55"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "22:57"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "22:59"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "23:01"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "23:03"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "23:05"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW356D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -12109,7 +24179,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW357",
+    "odpt:trainNumber": "MMW356U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "22:58"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "23:00"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "23:02"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "23:04"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "23:06"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "23:08"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW357D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -12143,7 +24247,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW358",
+    "odpt:trainNumber": "MMW357U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "23:01"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "23:03"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "23:05"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "23:07"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "23:09"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "23:11"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW358D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -12177,7 +24315,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW359",
+    "odpt:trainNumber": "MMW358U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "23:04"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "23:06"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "23:08"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "23:10"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "23:12"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "23:14"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW359D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -12211,7 +24383,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW360",
+    "odpt:trainNumber": "MMW359U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "23:07"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "23:09"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "23:11"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "23:13"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "23:15"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "23:17"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW360D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -12245,7 +24451,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW361",
+    "odpt:trainNumber": "MMW360U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "23:10"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "23:12"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "23:14"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "23:16"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "23:18"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "23:20"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW361D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -12279,7 +24519,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW362",
+    "odpt:trainNumber": "MMW361U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "23:13"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "23:15"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "23:17"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "23:19"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "23:21"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "23:23"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW362D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -12313,7 +24587,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW363",
+    "odpt:trainNumber": "MMW362U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "23:16"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "23:18"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "23:20"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "23:22"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "23:24"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "23:26"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW363D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -12347,7 +24655,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW364",
+    "odpt:trainNumber": "MMW363U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "23:19"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "23:21"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "23:23"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "23:25"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "23:27"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "23:29"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW364D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -12381,7 +24723,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW365",
+    "odpt:trainNumber": "MMW364U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "23:22"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "23:24"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "23:26"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "23:28"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "23:30"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "23:32"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW365D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -12415,7 +24791,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW366",
+    "odpt:trainNumber": "MMW365U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "23:25"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "23:27"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "23:29"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "23:31"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "23:33"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "23:35"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW366D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -12449,7 +24859,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW367",
+    "odpt:trainNumber": "MMW366U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "23:28"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "23:30"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "23:32"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "23:34"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "23:36"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "23:38"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW367D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -12483,7 +24927,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW368",
+    "odpt:trainNumber": "MMW367U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "23:31"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "23:33"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "23:35"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "23:37"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "23:39"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "23:41"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW368D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -12517,7 +24995,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW369",
+    "odpt:trainNumber": "MMW368U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "23:34"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "23:36"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "23:38"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "23:40"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "23:42"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "23:44"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW369D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -12551,7 +25063,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW370",
+    "odpt:trainNumber": "MMW369U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "23:37"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "23:39"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "23:41"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "23:43"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "23:45"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "23:47"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW370D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -12585,7 +25131,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW371",
+    "odpt:trainNumber": "MMW370U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "23:40"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "23:42"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "23:44"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "23:46"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "23:48"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "23:50"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW371D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -12619,7 +25199,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW372",
+    "odpt:trainNumber": "MMW371U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "23:43"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "23:45"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "23:47"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "23:49"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "23:51"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "23:53"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW372D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -12653,7 +25267,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW373",
+    "odpt:trainNumber": "MMW372U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "23:46"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "23:48"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "23:50"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "23:52"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "23:54"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "23:56"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW373D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -12687,7 +25335,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW374",
+    "odpt:trainNumber": "MMW373U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "23:49"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "23:51"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "23:53"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "23:55"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "23:57"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "23:59"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW374D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -12721,7 +25403,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW375",
+    "odpt:trainNumber": "MMW374U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "23:52"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "23:54"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "23:56"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "23:58"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "24:00"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "24:02"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW375D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -12755,7 +25471,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW376",
+    "odpt:trainNumber": "MMW375U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "23:55"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "23:57"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "23:59"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "24:01"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "24:03"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "24:05"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW376D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -12789,7 +25539,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW377",
+    "odpt:trainNumber": "MMW376U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "23:58"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "24:00"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "24:02"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "24:04"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "24:06"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "24:08"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW377D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -12823,7 +25607,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW378",
+    "odpt:trainNumber": "MMW377U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "24:01"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "24:03"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "24:05"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "24:07"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "24:09"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "24:11"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW378D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -12857,7 +25675,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW379",
+    "odpt:trainNumber": "MMW378U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "24:04"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "24:06"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "24:08"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "24:10"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "24:12"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "24:14"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW379D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -12891,7 +25743,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW380",
+    "odpt:trainNumber": "MMW379U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "24:07"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "24:09"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "24:11"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "24:13"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "24:15"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "24:17"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW380D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -12925,7 +25811,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMW381",
+    "odpt:trainNumber": "MMW380U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "24:10"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "24:12"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "24:14"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "24:16"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "24:18"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "24:20"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMW381D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Weekday",
     "odpt:railDirection": "Outbound",
@@ -12959,7 +25879,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH001",
+    "odpt:trainNumber": "MMW381U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Weekday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "24:13"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "24:15"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "24:17"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "24:19"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "24:21"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "24:23"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH001D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -12993,7 +25947,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH002",
+    "odpt:trainNumber": "MMH001U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "05:13"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "05:15"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "05:17"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "05:19"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "05:21"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "05:23"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH002D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -13027,7 +26015,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH003",
+    "odpt:trainNumber": "MMH002U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "05:18"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "05:20"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "05:22"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "05:24"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "05:26"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "05:28"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH003D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -13061,7 +26083,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH004",
+    "odpt:trainNumber": "MMH003U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "05:23"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "05:25"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "05:27"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "05:29"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "05:31"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "05:33"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH004D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -13095,7 +26151,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH005",
+    "odpt:trainNumber": "MMH004U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "05:28"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "05:30"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "05:32"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "05:34"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "05:36"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "05:38"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH005D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -13129,7 +26219,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH006",
+    "odpt:trainNumber": "MMH005U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "05:33"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "05:35"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "05:37"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "05:39"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "05:41"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "05:43"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH006D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -13163,7 +26287,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH007",
+    "odpt:trainNumber": "MMH006U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "05:38"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "05:40"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "05:42"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "05:44"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "05:46"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "05:48"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH007D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -13197,7 +26355,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH008",
+    "odpt:trainNumber": "MMH007U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "05:43"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "05:45"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "05:47"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "05:49"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "05:51"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "05:53"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH008D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -13231,7 +26423,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH009",
+    "odpt:trainNumber": "MMH008U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "05:48"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "05:50"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "05:52"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "05:54"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "05:56"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "05:58"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH009D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -13265,7 +26491,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH010",
+    "odpt:trainNumber": "MMH009U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "05:53"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "05:55"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "05:57"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "05:59"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "06:01"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "06:03"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH010D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -13299,7 +26559,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH011",
+    "odpt:trainNumber": "MMH010U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "05:58"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "06:00"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "06:02"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "06:04"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "06:06"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "06:08"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH011D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -13333,7 +26627,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH012",
+    "odpt:trainNumber": "MMH011U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "06:03"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "06:05"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "06:07"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "06:09"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "06:11"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "06:13"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH012D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -13367,7 +26695,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH013",
+    "odpt:trainNumber": "MMH012U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "06:08"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "06:10"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "06:12"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "06:14"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "06:16"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "06:18"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH013D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -13401,7 +26763,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH014",
+    "odpt:trainNumber": "MMH013U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "06:13"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "06:15"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "06:17"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "06:19"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "06:21"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "06:23"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH014D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -13435,7 +26831,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH015",
+    "odpt:trainNumber": "MMH014U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "06:18"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "06:20"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "06:22"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "06:24"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "06:26"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "06:28"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH015D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -13469,7 +26899,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH016",
+    "odpt:trainNumber": "MMH015U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "06:23"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "06:25"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "06:27"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "06:29"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "06:31"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "06:33"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH016D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -13503,7 +26967,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH017",
+    "odpt:trainNumber": "MMH016U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "06:28"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "06:30"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "06:32"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "06:34"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "06:36"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "06:38"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH017D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -13537,7 +27035,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH018",
+    "odpt:trainNumber": "MMH017U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "06:33"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "06:35"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "06:37"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "06:39"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "06:41"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "06:43"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH018D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -13571,7 +27103,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH019",
+    "odpt:trainNumber": "MMH018U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "06:38"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "06:40"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "06:42"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "06:44"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "06:46"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "06:48"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH019D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -13605,7 +27171,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH020",
+    "odpt:trainNumber": "MMH019U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "06:43"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "06:45"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "06:47"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "06:49"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "06:51"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "06:53"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH020D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -13639,7 +27239,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH021",
+    "odpt:trainNumber": "MMH020U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "06:48"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "06:50"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "06:52"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "06:54"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "06:56"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "06:58"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH021D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -13673,7 +27307,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH022",
+    "odpt:trainNumber": "MMH021U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "06:53"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "06:55"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "06:57"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "06:59"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "07:01"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "07:03"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH022D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -13707,7 +27375,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH023",
+    "odpt:trainNumber": "MMH022U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "06:58"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "07:00"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "07:02"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "07:04"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "07:06"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "07:08"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH023D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -13741,7 +27443,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH024",
+    "odpt:trainNumber": "MMH023U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "07:03"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "07:05"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "07:07"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "07:09"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "07:11"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "07:13"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH024D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -13775,7 +27511,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH025",
+    "odpt:trainNumber": "MMH024U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "07:08"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "07:10"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "07:12"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "07:14"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "07:16"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "07:18"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH025D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -13809,7 +27579,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH026",
+    "odpt:trainNumber": "MMH025U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "07:13"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "07:15"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "07:17"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "07:19"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "07:21"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "07:23"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH026D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -13843,7 +27647,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH027",
+    "odpt:trainNumber": "MMH026U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "07:18"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "07:20"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "07:22"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "07:24"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "07:26"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "07:28"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH027D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -13877,7 +27715,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH028",
+    "odpt:trainNumber": "MMH027U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "07:23"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "07:25"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "07:27"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "07:29"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "07:31"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "07:33"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH028D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -13911,7 +27783,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH029",
+    "odpt:trainNumber": "MMH028U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "07:28"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "07:30"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "07:32"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "07:34"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "07:36"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "07:38"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH029D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -13945,7 +27851,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH030",
+    "odpt:trainNumber": "MMH029U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "07:33"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "07:35"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "07:37"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "07:39"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "07:41"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "07:43"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH030D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -13979,7 +27919,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH031",
+    "odpt:trainNumber": "MMH030U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "07:38"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "07:40"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "07:42"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "07:44"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "07:46"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "07:48"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH031D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -14013,7 +27987,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH032",
+    "odpt:trainNumber": "MMH031U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "07:43"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "07:45"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "07:47"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "07:49"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "07:51"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "07:53"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH032D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -14047,7 +28055,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH033",
+    "odpt:trainNumber": "MMH032U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "07:48"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "07:50"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "07:52"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "07:54"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "07:56"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "07:58"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH033D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -14081,7 +28123,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH034",
+    "odpt:trainNumber": "MMH033U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "07:53"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "07:55"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "07:57"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "07:59"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "08:01"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "08:03"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH034D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -14115,7 +28191,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH035",
+    "odpt:trainNumber": "MMH034U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "07:58"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "08:00"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "08:02"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "08:04"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "08:06"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "08:08"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH035D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -14149,7 +28259,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH036",
+    "odpt:trainNumber": "MMH035U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "08:03"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "08:05"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "08:07"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "08:09"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "08:11"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "08:13"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH036D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -14183,7 +28327,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH037",
+    "odpt:trainNumber": "MMH036U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "08:08"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "08:10"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "08:12"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "08:14"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "08:16"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "08:18"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH037D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -14217,7 +28395,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH038",
+    "odpt:trainNumber": "MMH037U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "08:13"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "08:15"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "08:17"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "08:19"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "08:21"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "08:23"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH038D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -14251,7 +28463,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH039",
+    "odpt:trainNumber": "MMH038U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "08:18"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "08:20"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "08:22"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "08:24"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "08:26"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "08:28"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH039D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -14285,7 +28531,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH040",
+    "odpt:trainNumber": "MMH039U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "08:23"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "08:25"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "08:27"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "08:29"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "08:31"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "08:33"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH040D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -14319,7 +28599,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH041",
+    "odpt:trainNumber": "MMH040U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "08:28"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "08:30"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "08:32"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "08:34"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "08:36"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "08:38"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH041D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -14353,7 +28667,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH042",
+    "odpt:trainNumber": "MMH041U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "08:33"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "08:35"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "08:37"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "08:39"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "08:41"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "08:43"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH042D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -14387,7 +28735,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH043",
+    "odpt:trainNumber": "MMH042U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "08:38"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "08:40"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "08:42"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "08:44"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "08:46"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "08:48"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH043D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -14421,7 +28803,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH044",
+    "odpt:trainNumber": "MMH043U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "08:43"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "08:45"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "08:47"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "08:49"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "08:51"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "08:53"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH044D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -14455,7 +28871,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH045",
+    "odpt:trainNumber": "MMH044U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "08:48"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "08:50"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "08:52"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "08:54"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "08:56"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "08:58"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH045D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -14489,7 +28939,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH046",
+    "odpt:trainNumber": "MMH045U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "08:53"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "08:55"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "08:57"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "08:59"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "09:01"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "09:03"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH046D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -14523,7 +29007,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH047",
+    "odpt:trainNumber": "MMH046U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "08:58"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "09:00"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "09:02"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "09:04"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "09:06"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "09:08"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH047D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -14557,7 +29075,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH048",
+    "odpt:trainNumber": "MMH047U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "09:03"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "09:05"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "09:07"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "09:09"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "09:11"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "09:13"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH048D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -14591,7 +29143,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH049",
+    "odpt:trainNumber": "MMH048U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "09:08"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "09:10"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "09:12"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "09:14"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "09:16"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "09:18"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH049D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -14625,7 +29211,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH050",
+    "odpt:trainNumber": "MMH049U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "09:13"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "09:15"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "09:17"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "09:19"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "09:21"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "09:23"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH050D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -14659,7 +29279,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH051",
+    "odpt:trainNumber": "MMH050U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "09:18"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "09:20"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "09:22"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "09:24"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "09:26"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "09:28"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH051D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -14693,7 +29347,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH052",
+    "odpt:trainNumber": "MMH051U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "09:23"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "09:25"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "09:27"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "09:29"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "09:31"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "09:33"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH052D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -14727,7 +29415,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH053",
+    "odpt:trainNumber": "MMH052U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "09:28"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "09:30"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "09:32"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "09:34"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "09:36"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "09:38"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH053D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -14761,7 +29483,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH054",
+    "odpt:trainNumber": "MMH053U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "09:33"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "09:35"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "09:37"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "09:39"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "09:41"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "09:43"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH054D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -14795,7 +29551,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH055",
+    "odpt:trainNumber": "MMH054U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "09:38"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "09:40"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "09:42"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "09:44"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "09:46"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "09:48"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH055D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -14829,7 +29619,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH056",
+    "odpt:trainNumber": "MMH055U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "09:43"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "09:45"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "09:47"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "09:49"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "09:51"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "09:53"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH056D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -14863,7 +29687,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH057",
+    "odpt:trainNumber": "MMH056U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "09:48"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "09:50"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "09:52"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "09:54"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "09:56"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "09:58"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH057D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -14897,7 +29755,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH058",
+    "odpt:trainNumber": "MMH057U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "09:53"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "09:55"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "09:57"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "09:59"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "10:01"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "10:03"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH058D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -14931,7 +29823,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH059",
+    "odpt:trainNumber": "MMH058U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "09:58"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "10:00"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "10:02"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "10:04"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "10:06"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "10:08"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH059D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -14965,7 +29891,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH060",
+    "odpt:trainNumber": "MMH059U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "10:03"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "10:05"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "10:07"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "10:09"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "10:11"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "10:13"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH060D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -14999,7 +29959,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH061",
+    "odpt:trainNumber": "MMH060U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "10:08"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "10:10"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "10:12"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "10:14"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "10:16"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "10:18"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH061D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -15033,7 +30027,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH062",
+    "odpt:trainNumber": "MMH061U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "10:13"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "10:15"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "10:17"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "10:19"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "10:21"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "10:23"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH062D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -15067,7 +30095,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH063",
+    "odpt:trainNumber": "MMH062U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "10:18"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "10:20"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "10:22"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "10:24"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "10:26"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "10:28"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH063D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -15101,7 +30163,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH064",
+    "odpt:trainNumber": "MMH063U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "10:23"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "10:25"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "10:27"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "10:29"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "10:31"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "10:33"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH064D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -15135,7 +30231,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH065",
+    "odpt:trainNumber": "MMH064U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "10:28"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "10:30"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "10:32"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "10:34"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "10:36"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "10:38"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH065D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -15169,7 +30299,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH066",
+    "odpt:trainNumber": "MMH065U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "10:33"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "10:35"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "10:37"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "10:39"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "10:41"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "10:43"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH066D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -15203,7 +30367,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH067",
+    "odpt:trainNumber": "MMH066U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "10:38"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "10:40"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "10:42"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "10:44"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "10:46"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "10:48"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH067D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -15237,7 +30435,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH068",
+    "odpt:trainNumber": "MMH067U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "10:43"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "10:45"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "10:47"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "10:49"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "10:51"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "10:53"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH068D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -15271,7 +30503,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH069",
+    "odpt:trainNumber": "MMH068U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "10:48"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "10:50"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "10:52"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "10:54"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "10:56"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "10:58"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH069D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -15305,7 +30571,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH070",
+    "odpt:trainNumber": "MMH069U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "10:53"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "10:55"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "10:57"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "10:59"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "11:01"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "11:03"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH070D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -15339,7 +30639,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH071",
+    "odpt:trainNumber": "MMH070U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "10:58"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "11:00"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "11:02"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "11:04"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "11:06"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "11:08"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH071D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -15373,7 +30707,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH072",
+    "odpt:trainNumber": "MMH071U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "11:03"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "11:05"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "11:07"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "11:09"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "11:11"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "11:13"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH072D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -15407,7 +30775,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH073",
+    "odpt:trainNumber": "MMH072U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "11:08"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "11:10"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "11:12"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "11:14"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "11:16"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "11:18"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH073D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -15441,7 +30843,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH074",
+    "odpt:trainNumber": "MMH073U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "11:13"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "11:15"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "11:17"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "11:19"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "11:21"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "11:23"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH074D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -15475,7 +30911,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH075",
+    "odpt:trainNumber": "MMH074U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "11:18"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "11:20"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "11:22"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "11:24"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "11:26"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "11:28"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH075D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -15509,7 +30979,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH076",
+    "odpt:trainNumber": "MMH075U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "11:23"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "11:25"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "11:27"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "11:29"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "11:31"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "11:33"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH076D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -15543,7 +31047,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH077",
+    "odpt:trainNumber": "MMH076U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "11:28"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "11:30"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "11:32"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "11:34"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "11:36"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "11:38"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH077D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -15577,7 +31115,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH078",
+    "odpt:trainNumber": "MMH077U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "11:33"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "11:35"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "11:37"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "11:39"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "11:41"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "11:43"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH078D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -15611,7 +31183,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH079",
+    "odpt:trainNumber": "MMH078U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "11:38"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "11:40"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "11:42"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "11:44"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "11:46"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "11:48"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH079D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -15645,7 +31251,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH080",
+    "odpt:trainNumber": "MMH079U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "11:43"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "11:45"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "11:47"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "11:49"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "11:51"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "11:53"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH080D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -15679,7 +31319,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH081",
+    "odpt:trainNumber": "MMH080U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "11:48"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "11:50"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "11:52"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "11:54"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "11:56"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "11:58"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH081D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -15713,7 +31387,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH082",
+    "odpt:trainNumber": "MMH081U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "11:53"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "11:55"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "11:57"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "11:59"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "12:01"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "12:03"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH082D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -15747,7 +31455,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH083",
+    "odpt:trainNumber": "MMH082U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "11:58"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "12:00"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "12:02"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "12:04"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "12:06"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "12:08"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH083D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -15781,7 +31523,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH084",
+    "odpt:trainNumber": "MMH083U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "12:03"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "12:05"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "12:07"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "12:09"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "12:11"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "12:13"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH084D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -15815,7 +31591,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH085",
+    "odpt:trainNumber": "MMH084U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "12:08"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "12:10"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "12:12"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "12:14"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "12:16"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "12:18"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH085D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -15849,7 +31659,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH086",
+    "odpt:trainNumber": "MMH085U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "12:13"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "12:15"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "12:17"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "12:19"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "12:21"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "12:23"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH086D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -15883,7 +31727,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH087",
+    "odpt:trainNumber": "MMH086U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "12:18"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "12:20"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "12:22"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "12:24"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "12:26"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "12:28"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH087D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -15917,7 +31795,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH088",
+    "odpt:trainNumber": "MMH087U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "12:23"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "12:25"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "12:27"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "12:29"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "12:31"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "12:33"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH088D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -15951,7 +31863,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH089",
+    "odpt:trainNumber": "MMH088U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "12:28"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "12:30"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "12:32"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "12:34"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "12:36"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "12:38"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH089D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -15985,7 +31931,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH090",
+    "odpt:trainNumber": "MMH089U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "12:33"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "12:35"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "12:37"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "12:39"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "12:41"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "12:43"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH090D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -16019,7 +31999,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH091",
+    "odpt:trainNumber": "MMH090U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "12:38"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "12:40"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "12:42"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "12:44"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "12:46"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "12:48"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH091D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -16053,7 +32067,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH092",
+    "odpt:trainNumber": "MMH091U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "12:43"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "12:45"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "12:47"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "12:49"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "12:51"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "12:53"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH092D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -16087,7 +32135,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH093",
+    "odpt:trainNumber": "MMH092U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "12:48"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "12:50"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "12:52"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "12:54"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "12:56"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "12:58"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH093D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -16121,7 +32203,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH094",
+    "odpt:trainNumber": "MMH093U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "12:53"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "12:55"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "12:57"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "12:59"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "13:01"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "13:03"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH094D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -16155,7 +32271,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH095",
+    "odpt:trainNumber": "MMH094U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "12:58"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "13:00"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "13:02"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "13:04"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "13:06"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "13:08"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH095D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -16189,7 +32339,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH096",
+    "odpt:trainNumber": "MMH095U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "13:03"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "13:05"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "13:07"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "13:09"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "13:11"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "13:13"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH096D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -16223,7 +32407,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH097",
+    "odpt:trainNumber": "MMH096U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "13:08"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "13:10"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "13:12"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "13:14"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "13:16"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "13:18"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH097D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -16257,7 +32475,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH098",
+    "odpt:trainNumber": "MMH097U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "13:13"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "13:15"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "13:17"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "13:19"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "13:21"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "13:23"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH098D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -16291,7 +32543,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH099",
+    "odpt:trainNumber": "MMH098U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "13:18"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "13:20"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "13:22"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "13:24"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "13:26"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "13:28"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH099D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -16325,7 +32611,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH100",
+    "odpt:trainNumber": "MMH099U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "13:23"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "13:25"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "13:27"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "13:29"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "13:31"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "13:33"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH100D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -16359,7 +32679,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH101",
+    "odpt:trainNumber": "MMH100U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "13:28"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "13:30"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "13:32"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "13:34"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "13:36"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "13:38"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH101D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -16393,7 +32747,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH102",
+    "odpt:trainNumber": "MMH101U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "13:33"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "13:35"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "13:37"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "13:39"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "13:41"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "13:43"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH102D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -16427,7 +32815,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH103",
+    "odpt:trainNumber": "MMH102U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "13:38"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "13:40"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "13:42"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "13:44"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "13:46"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "13:48"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH103D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -16461,7 +32883,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH104",
+    "odpt:trainNumber": "MMH103U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "13:43"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "13:45"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "13:47"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "13:49"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "13:51"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "13:53"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH104D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -16495,7 +32951,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH105",
+    "odpt:trainNumber": "MMH104U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "13:48"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "13:50"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "13:52"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "13:54"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "13:56"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "13:58"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH105D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -16529,7 +33019,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH106",
+    "odpt:trainNumber": "MMH105U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "13:53"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "13:55"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "13:57"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "13:59"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "14:01"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "14:03"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH106D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -16563,7 +33087,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH107",
+    "odpt:trainNumber": "MMH106U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "13:58"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "14:00"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "14:02"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "14:04"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "14:06"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "14:08"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH107D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -16597,7 +33155,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH108",
+    "odpt:trainNumber": "MMH107U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "14:03"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "14:05"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "14:07"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "14:09"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "14:11"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "14:13"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH108D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -16631,7 +33223,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH109",
+    "odpt:trainNumber": "MMH108U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "14:08"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "14:10"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "14:12"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "14:14"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "14:16"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "14:18"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH109D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -16665,7 +33291,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH110",
+    "odpt:trainNumber": "MMH109U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "14:13"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "14:15"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "14:17"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "14:19"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "14:21"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "14:23"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH110D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -16699,7 +33359,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH111",
+    "odpt:trainNumber": "MMH110U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "14:18"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "14:20"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "14:22"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "14:24"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "14:26"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "14:28"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH111D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -16733,7 +33427,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH112",
+    "odpt:trainNumber": "MMH111U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "14:23"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "14:25"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "14:27"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "14:29"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "14:31"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "14:33"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH112D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -16767,7 +33495,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH113",
+    "odpt:trainNumber": "MMH112U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "14:28"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "14:30"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "14:32"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "14:34"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "14:36"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "14:38"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH113D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -16801,7 +33563,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH114",
+    "odpt:trainNumber": "MMH113U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "14:33"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "14:35"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "14:37"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "14:39"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "14:41"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "14:43"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH114D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -16835,7 +33631,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH115",
+    "odpt:trainNumber": "MMH114U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "14:38"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "14:40"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "14:42"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "14:44"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "14:46"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "14:48"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH115D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -16869,7 +33699,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH116",
+    "odpt:trainNumber": "MMH115U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "14:43"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "14:45"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "14:47"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "14:49"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "14:51"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "14:53"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH116D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -16903,7 +33767,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH117",
+    "odpt:trainNumber": "MMH116U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "14:48"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "14:50"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "14:52"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "14:54"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "14:56"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "14:58"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH117D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -16937,7 +33835,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH118",
+    "odpt:trainNumber": "MMH117U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "14:53"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "14:55"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "14:57"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "14:59"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "15:01"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "15:03"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH118D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -16971,7 +33903,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH119",
+    "odpt:trainNumber": "MMH118U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "14:58"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "15:00"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "15:02"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "15:04"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "15:06"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "15:08"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH119D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -17005,7 +33971,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH120",
+    "odpt:trainNumber": "MMH119U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "15:03"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "15:05"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "15:07"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "15:09"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "15:11"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "15:13"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH120D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -17039,7 +34039,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH121",
+    "odpt:trainNumber": "MMH120U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "15:08"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "15:10"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "15:12"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "15:14"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "15:16"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "15:18"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH121D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -17073,7 +34107,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH122",
+    "odpt:trainNumber": "MMH121U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "15:13"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "15:15"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "15:17"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "15:19"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "15:21"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "15:23"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH122D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -17107,7 +34175,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH123",
+    "odpt:trainNumber": "MMH122U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "15:18"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "15:20"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "15:22"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "15:24"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "15:26"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "15:28"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH123D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -17141,7 +34243,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH124",
+    "odpt:trainNumber": "MMH123U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "15:23"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "15:25"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "15:27"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "15:29"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "15:31"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "15:33"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH124D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -17175,7 +34311,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH125",
+    "odpt:trainNumber": "MMH124U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "15:28"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "15:30"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "15:32"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "15:34"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "15:36"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "15:38"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH125D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -17209,7 +34379,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH126",
+    "odpt:trainNumber": "MMH125U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "15:33"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "15:35"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "15:37"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "15:39"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "15:41"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "15:43"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH126D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -17243,7 +34447,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH127",
+    "odpt:trainNumber": "MMH126U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "15:38"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "15:40"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "15:42"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "15:44"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "15:46"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "15:48"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH127D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -17277,7 +34515,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH128",
+    "odpt:trainNumber": "MMH127U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "15:43"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "15:45"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "15:47"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "15:49"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "15:51"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "15:53"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH128D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -17311,7 +34583,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH129",
+    "odpt:trainNumber": "MMH128U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "15:48"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "15:50"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "15:52"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "15:54"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "15:56"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "15:58"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH129D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -17345,7 +34651,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH130",
+    "odpt:trainNumber": "MMH129U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "15:53"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "15:55"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "15:57"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "15:59"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "16:01"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "16:03"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH130D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -17379,7 +34719,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH131",
+    "odpt:trainNumber": "MMH130U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "15:58"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "16:00"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "16:02"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "16:04"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "16:06"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "16:08"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH131D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -17413,7 +34787,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH132",
+    "odpt:trainNumber": "MMH131U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "16:03"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "16:05"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "16:07"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "16:09"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "16:11"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "16:13"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH132D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -17447,7 +34855,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH133",
+    "odpt:trainNumber": "MMH132U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "16:08"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "16:10"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "16:12"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "16:14"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "16:16"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "16:18"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH133D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -17481,7 +34923,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH134",
+    "odpt:trainNumber": "MMH133U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "16:13"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "16:15"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "16:17"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "16:19"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "16:21"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "16:23"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH134D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -17515,7 +34991,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH135",
+    "odpt:trainNumber": "MMH134U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "16:18"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "16:20"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "16:22"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "16:24"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "16:26"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "16:28"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH135D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -17549,7 +35059,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH136",
+    "odpt:trainNumber": "MMH135U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "16:23"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "16:25"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "16:27"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "16:29"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "16:31"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "16:33"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH136D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -17583,7 +35127,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH137",
+    "odpt:trainNumber": "MMH136U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "16:28"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "16:30"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "16:32"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "16:34"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "16:36"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "16:38"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH137D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -17617,7 +35195,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH138",
+    "odpt:trainNumber": "MMH137U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "16:33"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "16:35"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "16:37"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "16:39"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "16:41"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "16:43"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH138D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -17651,7 +35263,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH139",
+    "odpt:trainNumber": "MMH138U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "16:38"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "16:40"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "16:42"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "16:44"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "16:46"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "16:48"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH139D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -17685,7 +35331,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH140",
+    "odpt:trainNumber": "MMH139U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "16:43"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "16:45"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "16:47"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "16:49"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "16:51"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "16:53"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH140D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -17719,7 +35399,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH141",
+    "odpt:trainNumber": "MMH140U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "16:48"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "16:50"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "16:52"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "16:54"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "16:56"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "16:58"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH141D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -17753,7 +35467,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH142",
+    "odpt:trainNumber": "MMH141U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "16:53"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "16:55"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "16:57"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "16:59"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "17:01"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "17:03"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH142D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -17787,7 +35535,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH143",
+    "odpt:trainNumber": "MMH142U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "16:58"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "17:00"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "17:02"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "17:04"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "17:06"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "17:08"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH143D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -17821,7 +35603,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH144",
+    "odpt:trainNumber": "MMH143U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "17:03"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "17:05"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "17:07"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "17:09"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "17:11"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "17:13"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH144D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -17855,7 +35671,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH145",
+    "odpt:trainNumber": "MMH144U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "17:08"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "17:10"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "17:12"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "17:14"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "17:16"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "17:18"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH145D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -17889,7 +35739,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH146",
+    "odpt:trainNumber": "MMH145U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "17:13"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "17:15"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "17:17"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "17:19"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "17:21"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "17:23"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH146D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -17923,7 +35807,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH147",
+    "odpt:trainNumber": "MMH146U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "17:18"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "17:20"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "17:22"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "17:24"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "17:26"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "17:28"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH147D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -17957,7 +35875,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH148",
+    "odpt:trainNumber": "MMH147U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "17:23"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "17:25"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "17:27"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "17:29"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "17:31"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "17:33"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH148D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -17991,7 +35943,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH149",
+    "odpt:trainNumber": "MMH148U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "17:28"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "17:30"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "17:32"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "17:34"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "17:36"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "17:38"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH149D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -18025,7 +36011,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH150",
+    "odpt:trainNumber": "MMH149U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "17:33"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "17:35"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "17:37"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "17:39"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "17:41"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "17:43"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH150D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -18059,7 +36079,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH151",
+    "odpt:trainNumber": "MMH150U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "17:38"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "17:40"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "17:42"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "17:44"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "17:46"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "17:48"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH151D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -18093,7 +36147,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH152",
+    "odpt:trainNumber": "MMH151U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "17:43"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "17:45"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "17:47"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "17:49"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "17:51"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "17:53"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH152D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -18127,7 +36215,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH153",
+    "odpt:trainNumber": "MMH152U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "17:48"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "17:50"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "17:52"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "17:54"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "17:56"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "17:58"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH153D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -18161,7 +36283,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH154",
+    "odpt:trainNumber": "MMH153U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "17:53"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "17:55"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "17:57"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "17:59"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "18:01"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "18:03"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH154D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -18195,7 +36351,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH155",
+    "odpt:trainNumber": "MMH154U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "17:58"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "18:00"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "18:02"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "18:04"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "18:06"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "18:08"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH155D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -18229,7 +36419,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH156",
+    "odpt:trainNumber": "MMH155U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "18:03"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "18:05"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "18:07"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "18:09"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "18:11"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "18:13"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH156D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -18263,7 +36487,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH157",
+    "odpt:trainNumber": "MMH156U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "18:08"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "18:10"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "18:12"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "18:14"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "18:16"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "18:18"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH157D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -18297,7 +36555,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH158",
+    "odpt:trainNumber": "MMH157U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "18:13"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "18:15"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "18:17"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "18:19"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "18:21"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "18:23"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH158D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -18331,7 +36623,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH159",
+    "odpt:trainNumber": "MMH158U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "18:18"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "18:20"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "18:22"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "18:24"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "18:26"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "18:28"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH159D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -18365,7 +36691,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH160",
+    "odpt:trainNumber": "MMH159U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "18:23"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "18:25"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "18:27"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "18:29"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "18:31"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "18:33"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH160D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -18399,7 +36759,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH161",
+    "odpt:trainNumber": "MMH160U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "18:28"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "18:30"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "18:32"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "18:34"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "18:36"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "18:38"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH161D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -18433,7 +36827,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH162",
+    "odpt:trainNumber": "MMH161U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "18:33"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "18:35"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "18:37"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "18:39"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "18:41"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "18:43"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH162D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -18467,7 +36895,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH163",
+    "odpt:trainNumber": "MMH162U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "18:38"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "18:40"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "18:42"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "18:44"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "18:46"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "18:48"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH163D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -18501,7 +36963,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH164",
+    "odpt:trainNumber": "MMH163U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "18:43"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "18:45"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "18:47"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "18:49"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "18:51"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "18:53"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH164D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -18535,7 +37031,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH165",
+    "odpt:trainNumber": "MMH164U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "18:48"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "18:50"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "18:52"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "18:54"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "18:56"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "18:58"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH165D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -18569,7 +37099,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH166",
+    "odpt:trainNumber": "MMH165U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "18:53"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "18:55"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "18:57"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "18:59"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "19:01"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "19:03"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH166D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -18603,7 +37167,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH167",
+    "odpt:trainNumber": "MMH166U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "18:58"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "19:00"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "19:02"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "19:04"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "19:06"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "19:08"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH167D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -18637,7 +37235,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH168",
+    "odpt:trainNumber": "MMH167U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "19:03"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "19:05"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "19:07"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "19:09"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "19:11"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "19:13"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH168D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -18671,7 +37303,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH169",
+    "odpt:trainNumber": "MMH168U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "19:08"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "19:10"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "19:12"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "19:14"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "19:16"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "19:18"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH169D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -18705,7 +37371,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH170",
+    "odpt:trainNumber": "MMH169U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "19:13"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "19:15"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "19:17"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "19:19"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "19:21"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "19:23"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH170D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -18739,7 +37439,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH171",
+    "odpt:trainNumber": "MMH170U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "19:18"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "19:20"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "19:22"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "19:24"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "19:26"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "19:28"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH171D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -18773,7 +37507,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH172",
+    "odpt:trainNumber": "MMH171U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "19:23"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "19:25"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "19:27"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "19:29"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "19:31"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "19:33"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH172D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -18807,7 +37575,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH173",
+    "odpt:trainNumber": "MMH172U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "19:28"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "19:30"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "19:32"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "19:34"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "19:36"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "19:38"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH173D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -18841,7 +37643,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH174",
+    "odpt:trainNumber": "MMH173U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "19:33"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "19:35"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "19:37"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "19:39"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "19:41"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "19:43"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH174D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -18875,7 +37711,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH175",
+    "odpt:trainNumber": "MMH174U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "19:38"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "19:40"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "19:42"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "19:44"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "19:46"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "19:48"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH175D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -18909,7 +37779,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH176",
+    "odpt:trainNumber": "MMH175U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "19:43"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "19:45"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "19:47"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "19:49"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "19:51"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "19:53"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH176D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -18943,7 +37847,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH177",
+    "odpt:trainNumber": "MMH176U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "19:48"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "19:50"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "19:52"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "19:54"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "19:56"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "19:58"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH177D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -18977,7 +37915,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH178",
+    "odpt:trainNumber": "MMH177U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "19:53"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "19:55"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "19:57"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "19:59"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "20:01"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "20:03"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH178D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -19011,7 +37983,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH179",
+    "odpt:trainNumber": "MMH178U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "19:58"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "20:00"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "20:02"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "20:04"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "20:06"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "20:08"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH179D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -19045,7 +38051,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH180",
+    "odpt:trainNumber": "MMH179U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "20:03"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "20:05"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "20:07"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "20:09"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "20:11"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "20:13"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH180D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -19079,7 +38119,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH181",
+    "odpt:trainNumber": "MMH180U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "20:08"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "20:10"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "20:12"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "20:14"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "20:16"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "20:18"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH181D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -19113,7 +38187,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH182",
+    "odpt:trainNumber": "MMH181U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "20:13"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "20:15"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "20:17"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "20:19"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "20:21"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "20:23"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH182D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -19147,7 +38255,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH183",
+    "odpt:trainNumber": "MMH182U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "20:18"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "20:20"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "20:22"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "20:24"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "20:26"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "20:28"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH183D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -19181,7 +38323,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH184",
+    "odpt:trainNumber": "MMH183U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "20:23"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "20:25"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "20:27"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "20:29"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "20:31"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "20:33"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH184D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -19215,7 +38391,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH185",
+    "odpt:trainNumber": "MMH184U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "20:28"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "20:30"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "20:32"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "20:34"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "20:36"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "20:38"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH185D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -19249,7 +38459,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH186",
+    "odpt:trainNumber": "MMH185U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "20:33"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "20:35"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "20:37"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "20:39"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "20:41"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "20:43"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH186D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -19283,7 +38527,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH187",
+    "odpt:trainNumber": "MMH186U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "20:38"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "20:40"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "20:42"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "20:44"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "20:46"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "20:48"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH187D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -19317,7 +38595,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH188",
+    "odpt:trainNumber": "MMH187U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "20:43"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "20:45"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "20:47"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "20:49"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "20:51"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "20:53"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH188D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -19351,7 +38663,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH189",
+    "odpt:trainNumber": "MMH188U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "20:48"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "20:50"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "20:52"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "20:54"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "20:56"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "20:58"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH189D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -19385,7 +38731,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH190",
+    "odpt:trainNumber": "MMH189U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "20:53"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "20:55"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "20:57"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "20:59"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "21:01"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "21:03"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH190D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -19419,7 +38799,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH191",
+    "odpt:trainNumber": "MMH190U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "20:58"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "21:00"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "21:02"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "21:04"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "21:06"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "21:08"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH191D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -19453,7 +38867,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH192",
+    "odpt:trainNumber": "MMH191U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "21:03"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "21:05"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "21:07"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "21:09"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "21:11"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "21:13"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH192D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -19487,7 +38935,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH193",
+    "odpt:trainNumber": "MMH192U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "21:08"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "21:10"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "21:12"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "21:14"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "21:16"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "21:18"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH193D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -19521,7 +39003,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH194",
+    "odpt:trainNumber": "MMH193U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "21:13"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "21:15"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "21:17"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "21:19"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "21:21"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "21:23"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH194D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -19555,7 +39071,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH195",
+    "odpt:trainNumber": "MMH194U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "21:18"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "21:20"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "21:22"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "21:24"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "21:26"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "21:28"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH195D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -19589,7 +39139,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH196",
+    "odpt:trainNumber": "MMH195U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "21:23"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "21:25"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "21:27"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "21:29"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "21:31"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "21:33"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH196D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -19623,7 +39207,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH197",
+    "odpt:trainNumber": "MMH196U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "21:28"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "21:30"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "21:32"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "21:34"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "21:36"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "21:38"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH197D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -19657,7 +39275,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH198",
+    "odpt:trainNumber": "MMH197U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "21:33"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "21:35"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "21:37"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "21:39"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "21:41"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "21:43"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH198D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -19691,7 +39343,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH199",
+    "odpt:trainNumber": "MMH198U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "21:38"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "21:40"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "21:42"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "21:44"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "21:46"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "21:48"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH199D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -19725,7 +39411,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH200",
+    "odpt:trainNumber": "MMH199U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "21:43"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "21:45"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "21:47"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "21:49"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "21:51"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "21:53"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH200D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -19759,7 +39479,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH201",
+    "odpt:trainNumber": "MMH200U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "21:48"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "21:50"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "21:52"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "21:54"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "21:56"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "21:58"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH201D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -19793,7 +39547,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH202",
+    "odpt:trainNumber": "MMH201U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "21:53"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "21:55"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "21:57"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "21:59"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "22:01"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "22:03"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH202D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -19827,7 +39615,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH203",
+    "odpt:trainNumber": "MMH202U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "21:58"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "22:00"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "22:02"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "22:04"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "22:06"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "22:08"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH203D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -19861,7 +39683,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH204",
+    "odpt:trainNumber": "MMH203U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "22:03"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "22:05"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "22:07"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "22:09"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "22:11"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "22:13"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH204D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -19895,7 +39751,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH205",
+    "odpt:trainNumber": "MMH204U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "22:08"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "22:10"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "22:12"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "22:14"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "22:16"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "22:18"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH205D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -19929,7 +39819,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH206",
+    "odpt:trainNumber": "MMH205U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "22:13"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "22:15"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "22:17"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "22:19"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "22:21"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "22:23"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH206D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -19963,7 +39887,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH207",
+    "odpt:trainNumber": "MMH206U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "22:18"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "22:20"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "22:22"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "22:24"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "22:26"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "22:28"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH207D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -19997,7 +39955,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH208",
+    "odpt:trainNumber": "MMH207U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "22:23"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "22:25"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "22:27"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "22:29"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "22:31"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "22:33"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH208D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -20031,7 +40023,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH209",
+    "odpt:trainNumber": "MMH208U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "22:28"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "22:30"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "22:32"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "22:34"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "22:36"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "22:38"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH209D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -20065,7 +40091,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH210",
+    "odpt:trainNumber": "MMH209U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "22:33"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "22:35"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "22:37"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "22:39"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "22:41"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "22:43"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH210D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -20099,7 +40159,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH211",
+    "odpt:trainNumber": "MMH210U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "22:38"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "22:40"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "22:42"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "22:44"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "22:46"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "22:48"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH211D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -20133,7 +40227,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH212",
+    "odpt:trainNumber": "MMH211U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "22:43"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "22:45"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "22:47"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "22:49"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "22:51"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "22:53"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH212D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -20167,7 +40295,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH213",
+    "odpt:trainNumber": "MMH212U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "22:48"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "22:50"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "22:52"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "22:54"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "22:56"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "22:58"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH213D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -20201,7 +40363,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH214",
+    "odpt:trainNumber": "MMH213U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "22:53"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "22:55"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "22:57"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "22:59"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "23:01"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "23:03"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH214D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -20235,7 +40431,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH215",
+    "odpt:trainNumber": "MMH214U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "22:58"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "23:00"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "23:02"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "23:04"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "23:06"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "23:08"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH215D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -20269,7 +40499,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH216",
+    "odpt:trainNumber": "MMH215U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "23:03"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "23:05"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "23:07"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "23:09"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "23:11"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "23:13"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH216D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -20303,7 +40567,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH217",
+    "odpt:trainNumber": "MMH216U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "23:08"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "23:10"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "23:12"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "23:14"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "23:16"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "23:18"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH217D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -20337,7 +40635,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH218",
+    "odpt:trainNumber": "MMH217U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "23:13"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "23:15"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "23:17"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "23:19"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "23:21"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "23:23"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH218D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -20371,7 +40703,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH219",
+    "odpt:trainNumber": "MMH218U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "23:18"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "23:20"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "23:22"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "23:24"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "23:26"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "23:28"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH219D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -20405,7 +40771,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH220",
+    "odpt:trainNumber": "MMH219U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "23:23"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "23:25"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "23:27"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "23:29"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "23:31"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "23:33"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH220D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -20439,7 +40839,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH221",
+    "odpt:trainNumber": "MMH220U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "23:28"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "23:30"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "23:32"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "23:34"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "23:36"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "23:38"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH221D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -20473,7 +40907,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH222",
+    "odpt:trainNumber": "MMH221U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "23:33"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "23:35"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "23:37"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "23:39"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "23:41"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "23:43"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH222D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -20507,7 +40975,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH223",
+    "odpt:trainNumber": "MMH222U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "23:38"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "23:40"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "23:42"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "23:44"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "23:46"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "23:48"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH223D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -20541,7 +41043,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH224",
+    "odpt:trainNumber": "MMH223U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "23:43"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "23:45"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "23:47"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "23:49"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "23:51"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "23:53"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH224D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -20575,7 +41111,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH225",
+    "odpt:trainNumber": "MMH224U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "23:48"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "23:50"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "23:52"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "23:54"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "23:56"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "23:58"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH225D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -20609,7 +41179,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH226",
+    "odpt:trainNumber": "MMH225U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "23:53"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "23:55"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "23:57"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "23:59"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "24:01"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "24:03"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH226D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -20643,7 +41247,41 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
     ]
   },
   {
-    "odpt:trainNumber": "MMH227",
+    "odpt:trainNumber": "MMH226U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "23:58"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "24:00"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "24:02"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "24:04"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "24:06"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "24:08"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH227D",
     "odpt:railway": "MinatoMirai",
     "odpt:calendar": "Holiday",
     "odpt:railDirection": "Outbound",
@@ -20673,6 +41311,40 @@ window.MinatoMirai_MANUAL_TIMETABLES = [
       {
         "odpt:station": "Motomachi-Chukagai",
         "odpt:arrivalTime": "24:00"
+      }
+    ]
+  },
+  {
+    "odpt:trainNumber": "MMH227U",
+    "odpt:railway": "MinatoMirai",
+    "odpt:calendar": "Holiday",
+    "odpt:railDirection": "Inbound",
+    "odpt:trainType": "Local",
+    "odpt:destinationStation": "Yokohama",
+    "odpt:trainTimetableObject": [
+      {
+        "odpt:station": "Motomachi-Chukagai",
+        "odpt:departureTime": "24:03"
+      },
+      {
+        "odpt:station": "Nihon-odori",
+        "odpt:departureTime": "24:05"
+      },
+      {
+        "odpt:station": "Bashamichi",
+        "odpt:departureTime": "24:07"
+      },
+      {
+        "odpt:station": "Minato-Mirai",
+        "odpt:departureTime": "24:09"
+      },
+      {
+        "odpt:station": "Shin-Takashima",
+        "odpt:departureTime": "24:11"
+      },
+      {
+        "odpt:station": "Yokohama",
+        "odpt:arrivalTime": "24:13"
       }
     ]
   }
