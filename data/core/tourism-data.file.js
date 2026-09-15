@@ -35257,7 +35257,7 @@ window.RAILWAY_TOURISM = {
           "답례품으로도 최적"
         ]
       },
-      "address": "東京都足立区西竹の塚一丁目"
+      "address": "東京都足立区栗原3-9-7"
     },
     {
       "name": "たいやき117",
@@ -37842,7 +37842,7 @@ window.RAILWAY_TOURISM = {
           "식사빵 다양"
         ]
       },
-      "address": "東京都足立区東保木間二丁目"
+      "address": "東京都足立区東保木間2-33-1"
     },
     {
       "name": "AREUM BAGEL 北千住店",
