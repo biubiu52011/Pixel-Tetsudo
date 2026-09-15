@@ -519,20 +519,17 @@
         });
         if (bestIcon) return bestIcon;
       }
-      // v4.3.6xx: 临海线（Rinkai）车型精确判断（基于列车运用规律）
-      // 规则：
-      //   K结尾 → JR E233系7000番台（直通埼京线列车）
-      //   F/T结尾 → 临海线自己的车
-      //     最后两位数字是 71, 73, 81 → 71-000形（新车）
-      //     其他数字 → 70-000形（老车）
+      // v4.3.6xx: 临海线（Rinkai）车型精确判断
+      // 核心判断：看operator，不是看车次号后缀
+      //   operator=JR-East → JR E233系7000番台（从JR直通过来的列车）
+      //   operator=TWR → 临海线自己的车，按运用号后两位区分70/71-000形
       if (lineId === 'Rinkai' || operator === 'TWR') {
-        var _tnStr = String(_tn || '');
-        // 判断是否是K后缀（直通列车）
-        if (/K$/.test(_tnStr)) {
-          // JR E233系7000番台（直通埼京线）
+        // 如果是JR的车（从JR实时数据来的），直接显示E233系7000番台
+        if (operator === 'JR-East' || operator === 'JR東日本') {
           return "../images/列车/JR東日本/E233系7000番台.png";
         }
-        // 临海线自己的车（F/T结尾）：提取最后两位数字判断车型
+        // 临海线自己的车（TWR）：按运用号后两位区分新旧车
+        var _tnStr = String(_tn || '');
         var _tnNum = _tnStr.replace(/[^0-9]/g, '');
         var lastTwo = _tnNum.length >= 2 ? parseInt(_tnNum.slice(-2)) : 0;
         // 71, 73, 81 → 71-000形（新车），其他 → 70-000形（老车）
