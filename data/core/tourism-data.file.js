@@ -13872,7 +13872,7 @@ window.RAILWAY_TOURISM = {
           "일본 산업 발전의 걸음도 학습."
         ]
       },
-      "address": "東京都千代田区一番町"
+      "address": "東京都千代田区一番町25"
     },
     {
       "name": "ZAKUROらんぷ家",
@@ -18373,7 +18373,7 @@ window.RAILWAY_TOURISM = {
           "히가시긴자 가부키좀 옆 노포"
         ]
       },
-      "address": "東京都中央区銀座四丁目"
+      "address": "東京都中央区銀座4-13-6"
     },
     {
       "name": "香源（こうげん）",
@@ -18448,7 +18448,7 @@ window.RAILWAY_TOURISM = {
           "친구끼리 체험도 추천"
         ]
       },
-      "address": "東京都中央区銀座四丁目"
+      "address": "東京都中央区銀座4-14-15"
     },
     {
       "name": "小津和紙",
