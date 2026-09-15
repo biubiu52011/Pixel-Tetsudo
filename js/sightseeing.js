@@ -368,11 +368,8 @@ function renderGrid() {
       renderAll();
     }
     // 4.3.561: 以本地文件方式打开无 geolocation 权限，直接降级（不等 8 秒）
-    if (typeof location !== 'undefined' && location.protocol === 'file:') {
-      clearTimeout(guard);
-      locFallback();
-      return;
-    }
+    // 4.3.626: 移除 file: 硬降级——本地打磨环境（豆包内置浏览器/Chrome）对 file:// 可弹窗授权，
+    //          重新定位应真实发起定位尝试；无权限时由 error 回调 / 4s guard 降级，与原路径一致。
     if (typeof navigator === 'undefined' || !navigator.geolocation) {
       clearTimeout(guard);
       locFallback();
