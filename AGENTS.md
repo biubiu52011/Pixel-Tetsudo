@@ -1633,3 +1633,20 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 **验证**：全量站名审计——Kitakami「manual有而本地无」3 站消失、Tsugaru 幽灵站清零（剩余 14 站均为 manual 时刻表未覆盖的真站）；集成测试 73 线/737 列车/vehicleType 缺失 0/覆盖率 100% 无回归；node --check 通过。
 **遗留（任务 3，大工程）**：JR 地方线 manual 时刻表覆盖不全（38 线「本地有而 manual 无」——Tsugaru 14 站 manual 仅 4 站、OuMain 45 站 manual 仅 19 站等），为 4.3.524 官网提取限制，需逐线从 JR 官网重新提取完整时刻表。
 **commit**：4.3.643（5 文件）
+
+## 4.3.644（2026-09-16，时刻表级交叉验证 + 4 类修正）
+**用户指令**：「你同时做时刻表交叉验证吗」——在组织者补全 38 线 manual 期间并行推进**时刻表级交叉验证**（区别于既有车型×直通断言）。
+**新验证脚本**：`work/yurikamome_timetable/tt_cross_validate.js`——4 维度：A 终点真实性（终点 ∈ 全局已知站集，虚构终点检测）；B 直通归属（终点不在本线站表时须属直通先，BFS 3 跳）；C vehicleType 可解析（内嵌优先 + VehicleTypeMap.resolve fallback）；D 班次覆盖（首末班/密度异常）。
+**验证结果**：虚构终点 0；车型缺失 6→0；DEST_LINE_OUT 713→577（全为实在线外终点）。
+**修正 4 类**：
+1. **二子玉川 ID 合并**（4.3.496 漏网双键）：Futako-tamagawa（大井町線）→ **Futako-Tamagawa**（田園都市線），同坐标双实体合并，stationLines 合并 [TokyuDenEn, TokyuOimachi]，i18n/name_map 同步。
+2. **直通表补 4 组**（through-service.js，均为实存直通·两线本地均有·此前未登録）：
+   - Gono⇄OuMain @Kawabe（川部，五能線→弘前/青森/秋田）
+   - Kamaishi⇄TohokuMain @Hanamaki（花巻，釜石線→盛岡）
+   - OuMain⇄Tazawako @Omagari（大曲，奥羽→田沢湖線）
+   - TokyuOimachi⇄TokyuDenEn @Futako-Tamagawa（大井町線→中央林間）
+3. **误混入列车删除**：Tsugaru 4632M×2（奥羽本線新青森行き誤入津軽線——津軽線実在终点僅蟹田/青森）；OuMain 9288B（仙台行き・発駅なし不完全记录）。
+4. **3 线 Rapid 车型补全**（vehicle-type-map.js，车型交叉验证发现）：Kounan（花輪線）Rapid=キハ110系、Miyo（弥彦線）Rapid=E127系、Tadami（只見線）Rapid=キハ110系/キハ40系（候補）——此前仅 Local 条目致 6 条 Rapid 列车 VTYPE_MISS。
+**新发现（报告未修）**：①**不完整记录 490 条**（trainTimetableObject 单站——着/発のみ 1 エントリ，4.3.524 駅時刻表抽出限制，如 ChuoMain 225/Suigun 26/OuMain 折返駅 153；东急 3 条区間列車経路欠落）——其时刻正确但经路不全，推定覆盖弱；待组织者任务 3 官网再提取时补全。②**着/発分離形式**（各駅着/発別エントリ，ChuoTatsuno/Shinonoi）确认为正常结构非缺陷。③**TokyuMeguro⇄相鉄直通 387 条**（ShinYokohama/Shonandai/Ebina 终点）——4.3.495 记録の「拍板待ち」項目（東急新横浜線本地欠落），未处理待用户裁决。④秩父直通（TokyuToyoko→SeibuChichibu 1 条）因本地缺飯能站未登録，正常线外终点。
+**验证**：集成 73 线/811 列车/vehicleType 缺失 0/覆盖率 100%；verify_through_vtype 55/55；coverage 113 线/336 条目；tt_cross_validate 虚构终点 0。
+**commit**：4.3.644（8 文件）
