@@ -1574,3 +1574,11 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 - 大井町線：田園都市線直通（中央林間・長津田）追加 5000系/2020系
 **検証**：verify_through.py 19/19 OK（副都心/西武/東武/相鉄/みなとみらい/都営/埼玉高速/田園都市直通全部期待车辆一致）；6505 列 100% vehicleType；node --check 8 文件 OK；integration mock 平日 138 列/土曜 94 列全部付与。
 **commit**：6fa9995（4 文件）
+
+## 4.3.638（2026-09-16，全直通线路 vehicleType overlay 查表）
+**问题**：用户「所有线路都应该和直通线路进行交叉验证」——东急 8 线已完成内嵌 vehicleType，但京急/小田急/西武/みなとみらい/JR首都圈/东武/京王/相铁/东京メトロ/都営等其余直通线路 manual 无车型。
+**根因**：data-fusion.js ensureManualTimetable 有门控——ODPT 已有 TrainTimetable 的线路永不加载 manual，仅靠丢 manual 文件无法注入 vehicleType；全量重建 45 条时刻表成本高。
+**方案**：vehicleType overlay 查表法——新建 data/timetables/vehicle-type-map.js（IIFE window.VehicleTypeMap，52 线/200 trainType 条目），train-position-estimator.js estimateLinePositions 内 	t['vehicleType'] || VehicleTypeMap.resolve(lineId, trainType, destinationStation) 查表 fallback。destOperator 用 URN parts[1]（operator 名）直接解析（如 odpt.Station:TokyoMetro.Fukutoshin.Wakoshi → TokyoMetro），消除京急 Main/相铁 Main railway 短名冲突；LINE_GROUP 仅作旧格式 fallback。东急内嵌优先不受影响。
+**覆盖**：52/55 直通线路（东京メトロ 7/都営 3/东武 3/京王 2/相铁 3/京急 1/小田急 2/西武 2/みなとみらい/JR首都圈 24/中央本線）；缺 3 线=京成系（Keisei/KeiseiOshiage/NaritaSkyAccess，ODPT 无 StationTimetable，需纯手工，待用户拍板）。
+**验证**：work/verify_through_vtype.js 46/46 OK（千代田→小田急4000形、副都心→东武50070/西武40000、半藏门→东急5000/东武30000、日比谷→东武70000/TH-LINER、浅草→京急1000/京成3000、埼京→相铁12000、横须贺→E235系等）；work/verify_vtype_coverage.js 52/55；node --check 通过；trains.html 引用 v=4.3.638。
+**commit**：579902c（3 文件）
