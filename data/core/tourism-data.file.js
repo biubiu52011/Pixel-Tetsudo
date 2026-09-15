@@ -32860,7 +32860,7 @@ window.RAILWAY_TOURISM = {
           "조깅 코스"
         ]
       },
-      "address": "東京都足立区千住仲町"
+      "address": "東京都足立区本木1-3～鹿浜1-1先"
     },
     {
       "name": "大橋公園",
