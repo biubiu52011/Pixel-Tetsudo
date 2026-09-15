@@ -17,8 +17,38 @@
     seasonal: 'tourism.tag_seasonal',
     event: 'tourism.tag_event',
     park: 'tourism.tag_park',
-    modern: 'tourism.tag_modern'
+    modern: 'tourism.tag_modern',
+    cafe: 'tourism.tag_cafe',
+    sweets: 'tourism.tag_sweets',
+    drink: 'tourism.tag_drink',
+    bar: 'tourism.tag_bar',
+    bakery: 'tourism.tag_bakery',
+    restaurant: 'tourism.tag_restaurant',
+    local_specialty: 'tourism.tag_local_specialty'
   };
+
+  // 4.3.798: 三分类独立页——scope 从 #smModule data-scope 读取（event/shop/spot）
+  const SCOPE_TAG_SETS = {
+    event: ['all', 'event'],
+    shop: ['all', 'food', 'shopping', 'cafe', 'sweets', 'drink', 'bar', 'bakery', 'restaurant', 'local_specialty'],
+    spot: ['all', 'shrine', 'history', 'nature', 'landmark', 'seasonal', 'park', 'modern']
+  };
+  const SCOPE_TITLES = {
+    event: 'tourism.scope_event',
+    shop: 'tourism.scope_shop',
+    spot: 'tourism.scope_spot'
+  };
+  function getScope() {
+    return (dom.container && dom.container.getAttribute('data-scope')) || null;
+  }
+  // scope 归属过滤：活动=含event；店铺=含food/shopping且不含event；景点=其余（不含event/food/shopping）
+  function scopeFilter(spot, scope) {
+    if (!scope) return true;
+    var tags = (spot && spot.tags) || [];
+    if (scope === 'event') return tags.indexOf('event') >= 0;
+    if (scope === 'shop') return !(tags.indexOf('event') >= 0) && (tags.indexOf('food') >= 0 || tags.indexOf('shopping') >= 0);
+    return !(tags.indexOf('event') >= 0) && !(tags.indexOf('food') >= 0) && !(tags.indexOf('shopping') >= 0);
+  }
 
   // 4.3.572: 无图景点按类别显示概括性文字（替代 emoji 图标——用户指示"别出现拉面这种"）
   function labelForTags(tags) {
@@ -79,7 +109,9 @@
 
   function renderHeader() {
     if (!dom.header) return;
-    let html = '<h2 data-i18n="tourism.title">' + t('tourism.title') + '</h2>';
+    var scope = getScope();
+    var titleKey = (scope && SCOPE_TITLES[scope]) || 'tourism.title';
+    var html = '<h2 data-i18n="' + titleKey + '">' + t(titleKey) + '</h2>';
     // Phase 43-A: removed sm-auto-badge
 
     dom.header.innerHTML = html;
@@ -89,7 +121,9 @@
     if (!dom.tagFilters) return;
     // 4.3.575: 分类按数据量排序（night 数据为 0 已移除——点开即空白；未来补夜景数据可加回）
     // 4.3.794: 新增 event（活动：祭り/花火/市集）分类
-    const tags = ['all', 'shrine', 'history', 'shopping', 'nature', 'food', 'landmark', 'seasonal', 'event', 'park', 'modern'];
+    // 4.3.798: 三分类独立页——标签集随 scope 变化（event/shop/spot），home 聚合页保持原全量集
+    const scope = getScope();
+    const tags = (scope && SCOPE_TAG_SETS[scope]) || ['all', 'shrine', 'history', 'shopping', 'nature', 'food', 'landmark', 'seasonal', 'event', 'park', 'modern'];
     dom.tagFilters.innerHTML = tags.map(function(tag) {
       const label = t(TAG_LABELS[tag]) || tag;
       // 4.3.571: 标签纯文字（emoji 图标已移除）
@@ -149,9 +183,13 @@
     }
 
     // Delegate to unified TourismProximity API
+    // 4.3.798: scope 决定候选范围——活动页取全东京（event 稀疏，radius 50000），
+    // 店铺/景点页扩至 4km/50 条保障 scope 过滤后仍有余量
+    const scopeNow = getScope();
+    const nearOpt = (scopeNow === 'event') ? { radius: 50000, limit: 100 } : { radius: 4000, limit: 50 };
     let nearby = [];
     try {
-      nearby = TourismProximity.getNearbySpotsByStation(stationKey, { radius: 3500, limit: 30 });
+      nearby = TourismProximity.getNearbySpotsByStation(stationKey, nearOpt);
     } catch(e) {
       console.warn('[Sightseeing] getNearbySpotsByStation failed:', e);
     }
@@ -208,11 +246,16 @@ function renderGrid() {
     const allSpots = getAllSpotsDynamic();
     const stationCoords = getStationCoords();
     const sCoord = stationCoords[stationKey];
-    let spotList = allSpots;
+    const scopeNow = getScope();
+    // 4.3.798: scope 归属过滤（活动=含event / 店铺=food·shopping / 景点=其余）
+    let spotList = allSpots.filter(function(s) { return scopeFilter(s, scopeNow); });
     if (sCoord && sCoord[0] && sCoord[1]) {
-      spotList = allSpots.filter(function(s) {
-        return s.distM !== null && s.distM <= 3000;
-      });
+      // 活动页不过滤 3000m（event 稀疏，全量按距离排序）；店铺/景点页保持附近推荐语义
+      if (scopeNow !== 'event') {
+        spotList = spotList.filter(function(s) {
+          return s.distM !== null && s.distM <= 3000;
+        });
+      }
     }
     // Apply tag filter
     if (state.activeTags.size > 0 && !state.activeTags.has('all')) {
