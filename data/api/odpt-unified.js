@@ -179,15 +179,10 @@
         "TokyoMonorail": {
             base: "https://api-challenge.odpt.org/api/v4/",
             train: null,  // 东京单轨不提供列车位置API
-            trainTimetable: "odpt:TrainTimetable?odpt:operator=odpt.Operator:TokyoMonorail",
-            trainInformation: "odpt:TrainInformation?odpt:operator=odpt.Operator:TokyoMonorail"
-        },
-        "MinatoMirai": {
-            base: "https://api.odpt.org/api/v4/",
-            train: null,
-            trainTimetable: "odpt:TrainTimetable?odpt:operator=odpt.Operator:MinatoMirai",
-            trainInformation: null  // 港未来线不提供运行情报API
+            trainTimetable: null,  // ODPT无数据
+            trainInformation: null  // ODPT无数据
         }
+        // MinatoMirai（港未来线）：ODPT完全无数据，移除
     };
 
     // 构建完整URL
@@ -278,7 +273,7 @@
         "Kururi": "JR-East",
         "Marunouchi": "TokyoMetro",
         "MarunouchiBranch": "TokyoMetro",
-        "MinatoMirai": "MinatoMirai",
+        // MinatoMirai：ODPT无数据，移除映射
         "Mita": "Toei",
         "Mito": "JR-East",
         "Miyo": "JR-East",
@@ -379,7 +374,7 @@
         "SotetsuIzumino": "Sotetsu",
         "SotetsuShin-Yokohama": "Sotetsu",
         "TokaidoMain": "JR-East",
-        "TokyoMonorail": "TokyoMonorail",
+        // TokyoMonorail：ODPT无数据，移除映射
         "TokyuIkegami": "Tokyu",
         "TokyuKodomonokuni": "Tokyu",
         "TokyuMeguro": "Tokyu",
