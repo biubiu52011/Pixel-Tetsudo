@@ -8560,18 +8560,6 @@ window.RAILWAY_DATA = {
    "lat": 36.14357222,
    "lng": 139.45910833
   },
-  "Aomori-Chuo": {
-   "lat": 39.55485278,
-   "lng": 141.15981389
-  },
-  "Madarame": {
-   "lat": 35.69083333,
-   "lng": 139.70027778
-  },
-  "Ozawanai": {
-   "lat": 39.31457778,
-   "lng": 140.77575556
-  },
   "Hashira": {
    "lat": 35.67892,
    "lng": 139.84485
@@ -8755,6 +8743,42 @@ window.RAILWAY_DATA = {
   "Eda-Banetsu": {
    "lat": 37.179528,
    "lng": 140.825806
+  },
+  "Aburakawa": {
+   "lat": 40.857031,
+   "lng": 140.690442
+  },
+  "Tsugaru-Miyata": {
+   "lat": 40.887119,
+   "lng": 140.674475
+  },
+  "Okunai": {
+   "lat": 40.903064,
+   "lng": 140.672336
+  },
+  "Satsumi": {
+   "lat": 40.917228,
+   "lng": 140.665956
+  },
+  "Yomogita": {
+   "lat": 40.969322,
+   "lng": 140.654569
+  },
+  "Gozawa": {
+   "lat": 40.987611,
+   "lng": 140.652417
+  },
+  "Seheji": {
+   "lat": 41.007806,
+   "lng": 140.648283
+  },
+  "Ohira": {
+   "lat": 41.06585278,
+   "lng": 140.55948333
+  },
+  "Okawadai": {
+   "lat": 41.163203,
+   "lng": 140.50755
   }
  },
  "lines": {
@@ -23371,7 +23395,6 @@ window.RAILWAY_DATA = {
     "Namioka",
     "Daishaka",
     "Tsurugasaka",
-    "Tsugaru-Shinjo",
     "Shin-Aomori",
     "Aomori"
    ],
@@ -25701,19 +25724,23 @@ window.RAILWAY_DATA = {
    "branchOf": null,
    "stations": [
     "Aomori",
-    "Aomori-Chuo",
-    "Tsugaru-Shinjo",
-    "Madarame",
-    "Gosogawa",
+    "Aburakawa",
+    "Tsugaru-Miyata",
+    "Okunai",
+    "Satsumi",
     "Ushirogata",
     "Nakasawa",
+    "Yomogita",
+    "Gozawa",
+    "Seheji",
     "Kanita",
     "Naka-Oguni",
-    "Minmaya",
-    "Sotogahama",
-    "Imabetsu",
+    "Ohira",
     "Tsugaru-Futamata",
-    "Ozawanai"
+    "Okawadai",
+    "Imabetsu",
+    "Tsugaru-Hamana",
+    "Minmaya"
    ],
    "durations": [
     2,
@@ -31604,7 +31631,16 @@ window.RAILWAY_DATA = {
   "荒屋新町": "Araya-Shinmachi",
   "兄畑": "Anihata",
   "野辺山": "Nobeyama",
-  "龍岡城": "Ryuogajo"
+  "龍岡城": "Ryuogajo",
+  "油川": "Aburakawa",
+  "津軽宮田": "Tsugaru-Miyata",
+  "奥内": "Okunai",
+  "左堰": "Satsumi",
+  "蓬田": "Yomogita",
+  "郷沢": "Gozawa",
+  "瀬辺地": "Seheji",
+  "大平": "Ohira",
+  "大川平": "Okawadai"
  },
  "stationLines": {
   "Omiya": [
@@ -36605,10 +36641,6 @@ window.RAILWAY_DATA = {
   "Tsurugasaka": [
    "OuMain"
   ],
-  "Tsugaru-Shinjo": [
-   "OuMain",
-   "Tsugaru"
-  ],
   "Shin-Aomori": [
    "OuMain"
   ],
@@ -37699,15 +37731,6 @@ window.RAILWAY_DATA = {
   "Shimomaruko": [
    "TokyuTamagawa"
   ],
-  "Aomori-Chuo": [
-   "Tsugaru"
-  ],
-  "Madarame": [
-   "Tsugaru"
-  ],
-  "Gosogawa": [
-   "Tsugaru"
-  ],
   "Ushirogata": [
    "Tsugaru"
   ],
@@ -37723,16 +37746,10 @@ window.RAILWAY_DATA = {
   "Minmaya": [
    "Tsugaru"
   ],
-  "Sotogahama": [
-   "Tsugaru"
-  ],
   "Imabetsu": [
    "Tsugaru"
   ],
   "Tsugaru-Futamata": [
-   "Tsugaru"
-  ],
-  "Ozawanai": [
    "Tsugaru"
   ],
   "Mutsu-Morita": [
@@ -39681,6 +39698,33 @@ window.RAILWAY_DATA = {
   ],
   "Eda-Banetsu": [
    "BanetsuEast"
+  ],
+  "Aburakawa": [
+   "Tsugaru"
+  ],
+  "Tsugaru-Miyata": [
+   "Tsugaru"
+  ],
+  "Okunai": [
+   "Tsugaru"
+  ],
+  "Satsumi": [
+   "Tsugaru"
+  ],
+  "Yomogita": [
+   "Tsugaru"
+  ],
+  "Gozawa": [
+   "Tsugaru"
+  ],
+  "Seheji": [
+   "Tsugaru"
+  ],
+  "Ohira": [
+   "Tsugaru"
+  ],
+  "Okawadai": [
+   "Tsugaru"
   ]
  },
  "lineStationOrder": {
@@ -41729,7 +41773,6 @@ window.RAILWAY_DATA = {
    "Namioka": 60,
    "Daishaka": 61,
    "Tsurugasaka": 62,
-   "Tsugaru-Shinjo": 63,
    "Shin-Aomori": 64,
    "Aomori": 65
   },
@@ -42223,22 +42266,23 @@ window.RAILWAY_DATA = {
   },
   "Tsugaru": {
    "Aomori": 0,
-   "Aomori-Chuo": 1,
-   "Tsugaru-Shinjo": 2,
-   "Madarame": 3,
-   "Gosogawa": 4,
+   "Aburakawa": 1,
+   "Tsugaru-Miyata": 2,
+   "Okunai": 3,
+   "Satsumi": 4,
    "Ushirogata": 5,
    "Nakasawa": 6,
-   "Kanita": 7,
-   "Naka-Oguni": 8,
-   "Minmaya": 9,
-   "Sotogahama": 10,
-   "Imabetsu": 11,
-   "Tsugaru-Futamata": 12,
-   "Ozawanai": 13,
-   "Mutsu-Yanagita": 14,
-   "Mutsu-Iwasaki": 15,
-   "Mutsu-Morita": 16
+   "Yomogita": 7,
+   "Gozawa": 8,
+   "Seheji": 9,
+   "Kanita": 10,
+   "Naka-Oguni": 11,
+   "Ohira": 12,
+   "Tsugaru-Futamata": 13,
+   "Okawadai": 14,
+   "Imabetsu": 15,
+   "Tsugaru-Hamana": 16,
+   "Minmaya": 17
   },
   "TsukubaExpress": {
    "Akihabara": 0,

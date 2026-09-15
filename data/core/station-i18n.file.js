@@ -8201,12 +8201,6 @@ window.RAILWAY_I18N = {
   "ko": "츠루가사카",
   "en": "Tsuruga-Saka"
  },
- "Tsugaru-Shinjo": {
-  "ja": "津軽新城",
-  "zh": "津轻新城",
-  "ko": "쓰가루 신조",
-  "en": "Tsugaru-Shinjō"
- },
  "Shin-Aomori": {
   "ja": "新青森",
   "zh": "新青森",
@@ -12755,24 +12749,6 @@ window.RAILWAY_I18N = {
   "ko": "히가시이시노마키",
   "en": "Higashi-Ishinomaki"
  },
- "Aomori-Chuo": {
-  "ja": "青森中央",
-  "zh": "青森中央",
-  "ko": "아오모리츄오",
-  "en": "Aomori-Chuo"
- },
- "Madarame": {
-  "ja": "班目",
-  "zh": "班目",
-  "ko": "마다라메",
-  "en": "Madarame"
- },
- "Gosogawa": {
-  "ja": "五所川",
-  "zh": "五所川",
-  "ko": "고소가와",
-  "en": "Gosogawa"
- },
  "Ushirogata": {
   "ja": "後潟",
   "zh": "后潟",
@@ -12803,12 +12779,6 @@ window.RAILWAY_I18N = {
   "ko": "민마야",
   "en": "Minmaya"
  },
- "Sotogahama": {
-  "ja": "外ヶ浜",
-  "zh": "外滨",
-  "ko": "소토가하마",
-  "en": "Sotogahama"
- },
  "Imabetsu": {
   "ja": "今別",
   "zh": "今别",
@@ -12820,12 +12790,6 @@ window.RAILWAY_I18N = {
   "zh": "津轻二股",
   "ko": "츠가루후타마타",
   "en": "Tsugaru-Futamata"
- },
- "Ozawanai": {
-  "ja": "小沢内",
-  "zh": "小泽内",
-  "ko": "오자와나이",
-  "en": "Ozawanai"
  },
  "Mutsu-Yanagita": {
   "ja": "陸奥柳田",
@@ -19428,5 +19392,68 @@ window.RAILWAY_I18N = {
   "ko": "에다",
   "en": "Eda",
   "zh-CN": "江田"
+ },
+ "Aburakawa": {
+  "ja": "油川",
+  "zh": "油川",
+  "ko": "아부라카와",
+  "en": "Aburakawa",
+  "zh-CN": "油川"
+ },
+ "Tsugaru-Miyata": {
+  "ja": "津軽宮田",
+  "zh": "津軽宮田",
+  "ko": "쓰가루미야타",
+  "en": "Tsugaru-Miyata",
+  "zh-CN": "津軽宮田"
+ },
+ "Okunai": {
+  "ja": "奥内",
+  "zh": "奥内",
+  "ko": "오쿠나이",
+  "en": "Okunai",
+  "zh-CN": "奥内"
+ },
+ "Satsumi": {
+  "ja": "左堰",
+  "zh": "左堰",
+  "ko": "사쓰미",
+  "en": "Satsumi",
+  "zh-CN": "左堰"
+ },
+ "Yomogita": {
+  "ja": "蓬田",
+  "zh": "蓬田",
+  "ko": "요모기타",
+  "en": "Yomogita",
+  "zh-CN": "蓬田"
+ },
+ "Gozawa": {
+  "ja": "郷沢",
+  "zh": "郷沢",
+  "ko": "고자와",
+  "en": "Gozawa",
+  "zh-CN": "郷沢"
+ },
+ "Seheji": {
+  "ja": "瀬辺地",
+  "zh": "瀬辺地",
+  "ko": "세헤지",
+  "en": "Seheji",
+  "zh-CN": "瀬辺地"
+ },
+ "Ohira": {
+  "ja": "大平",
+  "zh": "大平",
+  "ko": "오히라",
+  "en": "Ohira",
+  "zh-CN": "大平"
+ },
+ "Okawadai": {
+  "ja": "大川平",
+  "zh": "大川平",
+  "ko": "오카와다이",
+  "en": "Okawadai",
+  "zh-CN": "大川平"
  }
 };
