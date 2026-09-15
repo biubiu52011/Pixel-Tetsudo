@@ -31130,7 +31130,7 @@ window.RAILWAY_TOURISM = {
           "선물에도."
         ]
       },
-      "address": "東京都江戸川区東葛西六丁目"
+      "address": "東京都江戸川区東葛西6-15-1"
     },
     {
       "name": "TEMARU OMUSUBI STAND",
