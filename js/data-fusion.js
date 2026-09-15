@@ -560,22 +560,16 @@
               estimated: false
             };
             // v4.3.6xx: 双向直通列车处理
-            // 1. 从临海线开出去的车（fromStation=新木场）→ 在埼京线线路图上，按临海线车型显示
-            var fromStationKey = String(fromId).split(".").pop();
-            var isFromRinkai = (fromStationKey === 'ShinKiba' || fromStationKey === 'Shin-Kiba');
-            if (isFromRinkai && lid === 'Saikyo') {
-              // 这是从临海线开出去的车，用临海线的operator来判断车型
+            // 1. 临海线的车（operator=TWR）开到JR区间了 → 在JR线路图上显示临海线车型
+            var trainOperator = t["odpt:operator"] || "";
+            var isRinkaiTrain = (trainOperator === 'odpt.Operator:TWR' || trainOperator === 'TWR');
+            if (isRinkaiTrain && (lid === 'Saikyo' || lid === 'Kawagoe')) {
+              // 这是临海线的车，现在开到埼京线/川越线区间了
               positionData.trainClass = window.TrainIcons.getTrainClass(
                 'Rinkai', 'TWR',
                 trainId + '_' + idx, idx, rawType
               );
-              positionData.isThroughToRinkai = true;
-            } else if (isFromRinkai && lid === 'Kawagoe') {
-              positionData.trainClass = window.TrainIcons.getTrainClass(
-                'Rinkai', 'TWR',
-                trainId + '_' + idx, idx, rawType
-              );
-              positionData.isThroughToRinkai = true;
+              positionData.isRinkaiThrough = true;
             } else {
               // v5: 车型判断（数据层）——与推定列车同一字段语义（TrainIcons.getTrainClass 复用渲染选择逻辑）
               try {
@@ -587,13 +581,10 @@
                 }
               } catch(e) {}
             }
-            // 2. JR开进来的车（destinationStation=新木场，且已经到大崎站）→ 也加到临海线posMap
+            // 2. JR的车开往新木场（destinationStation=ShinKiba）→ 也加到临海线posMap
             if (destStation === 'ShinKiba' || destStation === 'Shin-Kiba') {
-              // 判断这列车现在是不是已经到大崎站了（大崎是临海线的西端起点）
-              var osakiIdx = targetLine.line.stations.indexOf('Osaki');
-              // 如果当前站在大崎站或更靠近新木场的方向，说明已经进入临海线区间了
-              // 或者如果这列车的railway是埼京线，且fromStation在大崎以西，说明即将进入临海线
-              // 简单判断：只要终点站是新木场，就把它加到临海线的posMap里（在大崎站的位置）
+              // 这是JR的车，终点是临海线的新木场站
+              // 如果它已经到大崎站附近了，就把它加到临海线的posMap里
               var rinkaiLine = allLines['Rinkai'];
               if (rinkaiLine && rinkaiLine.stations) {
                 var rinkaiOsakiIdx = rinkaiLine.stations.indexOf('Osaki');
@@ -609,7 +600,7 @@
                     trainType: rawType,
                     typeName: typeName,
                     estimated: false,
-                    isThroughFromJR: true,
+                    isJRThrough: true,
                     trainClass: window.TrainIcons.getTrainClass('Rinkai', 'JR-East', trainId + '_' + idx, idx, rawType)
                   };
                   if (rinkaiExistingIdx >= 0) {
