@@ -6885,7 +6885,7 @@ window.RAILWAY_TOURISM = {
           "北千住역에서 도보 4분"
         ]
       },
-      "address": "東京都足立区千住仲町"
+      "address": "東京都足立区千住2-11-1（勝専寺）"
     },
     {
       "name": "鹿浜の獅子舞",
@@ -33840,7 +33840,7 @@ window.RAILWAY_TOURISM = {
           "사계절 꽃"
         ]
       },
-      "address": "東京都足立区東領家五丁目"
+      "address": "東京都足立区鹿浜2-44-1"
     },
     {
       "name": "足立堀之内公園",
@@ -35765,7 +35765,7 @@ window.RAILWAY_TOURISM = {
           "깔끔하면서 깊은 국물"
         ]
       },
-      "address": "東京都足立区竹の塚三丁目"
+      "address": "東京都足立区竹の塚3-5-1"
     },
     {
       "name": "osteria YOSHI",
@@ -36906,7 +36906,7 @@ window.RAILWAY_TOURISM = {
           "뜨거운 사키 비교 세트도"
         ]
       },
-      "address": "東京都足立区梅島一丁目"
+      "address": "東京都足立区梅島1-10-12"
     },
     {
       "name": "寿司と炭火 大地",
