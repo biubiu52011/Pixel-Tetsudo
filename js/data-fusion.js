@@ -120,7 +120,10 @@
         var _rF = raw["odpt:trainInformationRange"];
         if (_rF != null) {
           var _rS = typeof _rF === "string" ? _rF : (_rF.ja || _rF.en || "");
-          if (_rS) result.interval = _rS;
+          if (_rS) {
+            // v4.3.626: 清理 Range 原文——去"駅間/間"尾缀、〜～－−统一为→（"全線"保留原样）
+            result.interval = _rS.replace(/\u99c5\u9593$/, "").replace(/\u9593$/, "").replace(/[\u301c\uff5e\uff0d\u2212]/g, "\u2192");
+          }
         }
       }
       if (!result.interval) {
@@ -153,16 +156,21 @@
       // 区间/原因仍走结构化字段优先 + 文本兜底（概览用），原文全文照常展示。
       // 仅排除"正常声明"文本（平常どおり/遅延なし/ありません等）→ 保持 normal，避免把正常当情报误报黄色。
       if (result.status === "normal" && text && !(_stF === "Normal" || /^odpt\./.test(_stF))) {
-        var _normalDecl = /\u5e73\u5e38\u3069\u304a\u308a|\u5e73\u5e38\u904b\u8ee2|\u5e73\u5e38\u30c0\u30a4\u30e4|\u9045\u5ef6\u306a\u3057|\u3042\u308a\u307e\u305b\u3093|\u3054\u3056\u3044\u307e\u305b\u3093|\u306a\u3057|\u89e3\u6d88|\u9589\u9381|\u518d\u958b\u3057\u307e\u3057\u305f|\u3092\u518d\u958b/;
+        var _normalDecl = /\u5e73\u5e38|\u9045\u5ef6\u306a\u3057|\u3042\u308a\u307e\u305b\u3093|\u3054\u3056\u3044\u307e\u305b\u3093|\u306a\u3057|\u89e3\u6d88|\u9589\u9381|\u518d\u958b\u3057\u307e\u3057\u305f|\u3092\u518d\u958b/;
         if (!_normalDecl.test(text)) result.status = "info";
       }
       // 延迟分钟：排除时刻（18時08分頃 的 "08分" 不是延迟）
       var m = text.match(/(?:\u7d04|\u304a\u3088\u305d)?\s*(\d{1,3})\s*(?:\u5206\u9593|\u5206|min)(?!\u9803|\u5f8c|\u4ee5)/i);
       if (m) result.maxDelay = parseInt(m[1], 10);
       // 区间（文本回退，仅字段缺失时）：站间（A〜B）优先；其次"○○線内"（如 京急線内）
+      // 区间（文本回退，仅字段缺失时）：站间（A〜B）优先；其次"○○線内"（如 京急線内）
       if (!result.interval) {
         var im = text.match(/([^\s\-。，,、]+?)\s*[\u301c\uff5e\uff0d\u2212\u81f3\u2192-]\s*([^\s\-。，,、]+?)(?:\u99c5|\u9593|(?=[。，,、\s]))/);
-        if (im) result.interval = im[1] + "\u2192" + im[2];
+        if (im) {
+          // v4.3.626: 排除日期误提取（"１０月１３日（火）〜１５日（木）"不是区间）
+          var _ivFrag = im[1] + "\u2192" + im[2];
+          if (!/[\u6708\u65e5\uff08\uff09\u66dc]/.test(_ivFrag)) result.interval = _ivFrag;
+        }
         else {
           var inM = text.match(/([^\s。，,、]{1,8}?\u7dda\u5185)/);
           if (inM) result.interval = inM[1];
