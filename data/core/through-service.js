@@ -83,7 +83,14 @@
     "Hachiko": ["KawagoeWest"],
     "OdakyuTama": ["Chiyoda", "Odawara"],
     "Odawara": ["Chiyoda", "OdakyuTama"],
-    "ChuoSobuLocal": ["Tozai"]
+        "ChuoSobuLocal": ["Tozai"],
+    // 地方線直通（4.3.644 補完）
+    "Gono": ["OuMain"],
+    "Kamaishi": ["TohokuMain"],
+    "OuMain": ["Gono", "Tazawako"],
+    "Tazawako": ["OuMain"],
+    "TokyuOimachi": ["TokyuDenEn"],
+    "TokyuDenEn": ["TokyuOimachi"]
   };
 
   // 接続駅（線路図の直通マーカーを実際の接続駅のみに限定）
@@ -155,7 +162,14 @@
     // 相鉄（埼京・東横とはデータ上接続駅なし→マーカー非表示）
     "SotetsuMain": { "Saikyo": [], "TokyuToyoko": [], "SotetsuIzumino": ["Futamatagawa", "Futamatagawa"], "SotetsuShin-Yokohama": ["Nishiya"] },
     "SotetsuIzumino": { "SotetsuMain": ["Futamatagawa", "Futamatagawa"] },
-    "SotetsuShin-Yokohama": { "SotetsuMain": ["Nishiya"] }
+        "SotetsuShin-Yokohama": { "SotetsuMain": ["Nishiya"] },
+    // 地方線直通・大井町線直通（4.3.644 補完）
+    "Gono": { "OuMain": ["Kawabe"] },
+    "Kamaishi": { "TohokuMain": ["Hanamaki"] },
+    "OuMain": { "Gono": ["Kawabe"], "Tazawako": ["Omagari"] },
+    "Tazawako": { "OuMain": ["Omagari"] },
+    "TokyuOimachi": { "TokyuDenEn": ["Futako-Tamagawa"] },
+    "TokyuDenEn": { "TokyuOimachi": ["Futako-Tamagawa"] }
   };
 
   /** Direct through-service neighbours of a line (1 hop). */

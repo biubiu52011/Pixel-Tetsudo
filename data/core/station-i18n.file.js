@@ -3938,12 +3938,6 @@ window.RAILWAY_I18N = {
   "ko": "카미노게",
   "en": "Kaminoge"
  },
- "Futako-tamagawa": {
-  "ja": "二子玉川",
-  "zh": "二子玉川",
-  "ko": "후타코타마가와",
-  "en": "Futako-tamagawa"
- },
  "Fudo-mae": {
   "ja": "不動前",
   "zh": "不动前",

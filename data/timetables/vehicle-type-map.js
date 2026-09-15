@@ -940,13 +940,13 @@
     },
     'Kounan': {
       'Local': { 'default': 'キハ110系' }
-    },
+    , 'Rapid': { 'default': 'キハ110系' } },
     'Mito': {
       'Local': { 'default': 'E501系 / E531系' }
     },
     'Miyo': {
       'Local': { 'default': 'E127系' }
-    },
+    , 'Rapid': { 'default': 'E127系' } },
     'Ofunato': {
       'Local': { 'default': 'キハ110系' },
       'Rapid': { 'default': 'キハ110系' }
@@ -1012,7 +1012,7 @@
     },
     'Tadami': {
       'Local': { 'default': 'キハ110系 / キハ40系（候補）' }
-    },
+    , 'Rapid': { 'default': 'キハ110系 / キハ40系（候補）' } },
     'Tazawako': {
       'Local': { 'default': '701系5000番台' },
       'Rapid': { 'default': '701系5000番台' },

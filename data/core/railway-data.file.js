@@ -5772,10 +5772,6 @@ window.RAILWAY_DATA = {
    "lat": 35.611844,
    "lng": 139.639125
   },
-  "Futako-tamagawa": {
-   "lat": 35.612226,
-   "lng": 139.627213
-  },
   "Fudo-mae": {
    "lat": 35.625773,
    "lng": 139.713598
@@ -27403,7 +27399,7 @@ window.RAILWAY_DATA = {
     "Oyamadai",
     "Todoroki",
     "Kaminoge",
-    "Futako-tamagawa",
+    "Futako-Tamagawa",
     "Mizonokuchi"
    ],
    "transferStations": [
@@ -30157,7 +30153,7 @@ window.RAILWAY_DATA = {
   "二俣川": "Futamatagawa",
   "二俣新町": "Futamatashimmachi",
   "二子新地": "Futako-Shinchi",
-  "二子玉川": "Futako-tamagawa",
+  "二子玉川": "Futako-Tamagawa",
   "二宮": "Ninomiya",
   "二重橋前〈丸の内〉": "Nijubashimae<Marunouchi>",
   "五井": "Goi",
@@ -34002,7 +33998,8 @@ window.RAILWAY_DATA = {
    "TokyuDenEn"
   ],
   "Futako-Tamagawa": [
-   "TokyuDenEn"
+   "TokyuDenEn",
+   "TokyuOimachi"
   ],
   "Futako-Shinchi": [
    "TokyuDenEn"
@@ -38468,9 +38465,6 @@ window.RAILWAY_DATA = {
   "Kaminoge": [
    "TokyuOimachi"
   ],
-  "Futako-tamagawa": [
-   "TokyuOimachi"
-  ],
   "Fudo-mae": [
    "TokyuMeguro"
   ],
@@ -42652,8 +42646,8 @@ window.RAILWAY_DATA = {
    "Oyamadai": 11,
    "Todoroki": 12,
    "Kaminoge": 13,
-   "Futako-tamagawa": 14,
-   "Mizonokuchi": 15
+   "Mizonokuchi": 15,
+   "Futako-Tamagawa": 14
   },
   "TokyuMeguro": {
    "Meguro": 0,
