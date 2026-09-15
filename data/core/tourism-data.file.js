@@ -28333,7 +28333,7 @@ window.RAILWAY_TOURISM = {
           "초보자 OK."
         ]
       },
-      "address": "東京都千代田区麹町三丁目"
+      "address": "東京都千代田区麹町3-12-7"
     },
     {
       "name": "山田松香木店",
