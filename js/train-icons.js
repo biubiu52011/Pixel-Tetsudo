@@ -520,16 +520,20 @@
         if (bestIcon) return bestIcon;
       }
       // v4.3.6xx: 临海线（Rinkai）车型判断
-      // 临海线有两种车型：70-000形（旧车）和 71-000形（新车）
-      // 由于ODPT的trainNumber是班次号不是车辆番号，我们无法精确判断每班车用哪种车
-      // 解决方案：根据班次号哈希随机分配（约60%新车40%旧车，符合实际比例）
-      // 注意：直通埼京线的列车是JR E233系7000番台，但我们没有终点站数据无法区分
+      // 班次号后缀规则：
+      //   K后缀 → JR东日本E233系7000番台（直通埼京线列车）
+      //   其他后缀（F/S/T等）→ 临海线自己的车，随机分配70-000形/71-000形
       if (lineId === 'Rinkai' || operator === 'TWR') {
-        // 根据班次号计算哈希，分配车型
+        var _tnStr = String(_tn || '');
+        // 判断是否是K后缀（直通列车）
+        if (/K$/.test(_tnStr)) {
+          // JR E233系7000番台（直通埼京线）
+          return "../images/列车/JR東日本/E233系7000番台.png";
+        }
+        // 临海线自己的车：根据班次号哈希随机分配70-000形/71-000形
         var hash = 0;
-        var str = String(_tn || '');
-        for (var i = 0; i < str.length; i++) {
-          hash = (hash * 31 + str.charCodeAt(i)) & 0xFFFFFFFF;
+        for (var i = 0; i < _tnStr.length; i++) {
+          hash = (hash * 31 + _tnStr.charCodeAt(i)) & 0xFFFFFFFF;
         }
         // 60%概率是71-000形（新车），40%概率是70-000形（旧车）
         var rand = Math.abs(hash) % 100;
