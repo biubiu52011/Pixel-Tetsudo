@@ -162,20 +162,7 @@
       // 延迟分钟：排除时刻（18時08分頃 的 "08分" 不是延迟）
       var m = text.match(/(?:\u7d04|\u304a\u3088\u305d)?\s*(\d{1,3})\s*(?:\u5206\u9593|\u5206|min)(?!\u9803|\u5f8c|\u4ee5)/i);
       if (m) result.maxDelay = parseInt(m[1], 10);
-      // 区间（文本回退，仅字段缺失时）：站间（A〜B）优先；其次"○○線内"（如 京急線内）
-      // 区间（文本回退，仅字段缺失时）：站间（A〜B）优先；其次"○○線内"（如 京急線内）
-      if (!result.interval) {
-        var im = text.match(/([^\s\-。，,、]+?)\s*[\u301c\uff5e\uff0d\u2212\u81f3\u2192-]\s*([^\s\-。，,、]+?)(?:\u99c5|\u9593|(?=[。，,、\s]))/);
-        if (im) {
-          // v4.3.626: 排除日期误提取（"１０月１３日（火）〜１５日（木）"不是区间）
-          var _ivFrag = im[1] + "\u2192" + im[2];
-          if (!/[\u6708\u65e5\uff08\uff09\u66dc]/.test(_ivFrag)) result.interval = _ivFrag;
-        }
-        else {
-          var inM = text.match(/([^\s。，,、]{1,8}?\u7dda\u5185)/);
-          if (inM) result.interval = inM[1];
-        }
-      }
+      // v4.3.628: 区间仅认 ODPT 结构化字段（Range/stationFrom/stationTo，见上）；不做文本兜底提取（写不好就不猜）
       // 原因（文本回退，仅字段缺失时）：优先"発生した/発生し"之后，其次通用模式
       if (!result.cause) {
         var cm = text.match(/(?:\u767a\u751f\u3057\u305f|\u767a\u751f\u3057)([^。\n，,、\s\u3067\u301c\uff5e\uff0d\u2212\u81f3\u2192-]+?)(?:\u306e\u305f\u3081|\u306e\u5f71\u97ff|\u306b\u3088\u308a|\u306b\u3088\u308b)/);

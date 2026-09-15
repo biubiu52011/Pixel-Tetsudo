@@ -83,10 +83,16 @@
           + '<span class="rs-interval-arrow">\u2192</span>'
           + '<span class="rs-station-end">' + escapeHtml(tStation(parts[1])) + '</span>';
       } else {
-        // Single-ended interval ("東京方面"): localize the "方面" suffix per language
         var _int = interval;
-        if (window.DataState && typeof window.DataState.localizeInterval === "function") _int = window.DataState.localizeInterval(_int);
-        intervalHtml = '<span class="rs-station-text">' + escapeHtml(_int) + '</span>';
+        if (String(_int).indexOf("\u5168\u7dda") >= 0) {
+          // v4.3.628: ODPT Range="全線" 复用 status.all_lines 多语言（非 ja 界面不显示日文原样）
+          intervalHtml = "<span class=\"rs-station-text\">" + escapeHtml(t("status.all_lines")) + "</span>";
+        } else {
+          // Single-ended interval ("東京方面"): localize the "方面" suffix per language
+          if (window.DataState && typeof window.DataState.localizeInterval === "function") _int = window.DataState.localizeInterval(_int);
+          intervalHtml = "<span class=\"rs-station-text\">" + escapeHtml(_int) + "</span>";
+          _singleEndInterval = true;
+        }
         _singleEndInterval = true;
       }
     }
