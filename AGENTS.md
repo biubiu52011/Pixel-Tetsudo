@@ -1544,3 +1544,13 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 批次G（e80453f 前，c8123e9+2b9b4f3）：关东圈 24 线 185 站（京急/武藏野/南武/东海道/横须贺/西武池袋/东武伊势崎/野田/高崎/京王/田园都市/相铁/横滨/港未来/临海/多摩单轨/总武本线/中央本线/青梅/五日市/成田/八高/京成/东急系）→ 429→612 站；变体重键又现（Futako-tamagawa 等 2 键）已通用合并修复。
 批次H（e80453f）：关东圈收官 30 线 71 站（东武日光/宇都宫/相模/京叶/相铁泉/横滨蓝/京王相模原/高尾/小田急江之岛/新交通/西武秩父/京成千叶/东京单轨/鹤见/外房/内房/久留里/横滨绿/儿童国/南武支/京王新/小田急多摩/西武多摩湖/多摩川/京成千原/成田SKYACCESS/相铁新横滨/竞马场/动物园/山口/丰岛/狭山等）→ 612→682 站（1 变体合并）。严格解析 ✓，已 push（远端 e80453f）。
 **剩余**：仅远郊线路（东北/北陆/甲信越，约 1500 站）无真实出口——无观光景点覆盖，wiki 数据稀疏，待用户指示。
+## 4.3.630（2026-09-15，换乘站错误修复——有明/大糸線站名撞车分离）
+**用户指示**："现在很多换乘站也有错误"——百合鸥线路图"有明"站下方错误显示"大糸線"换乘标签。
+**根因实证**：大糸線（长野）穂高～安曇追分间有同名"有明駅"（wiki 实证：安曇野市、駅番号31、読"ありあけ"、坐标 36.3591889,137.8786639）——本地与百合鸥有明（东京临海 35.63468,139.79325）共用 ID `Ariake`，导致 stationLines["Ariake"]=["Yurikamome","Oito"]、且 Yurikamome/Oito 双向错误声明换乘（transferStations 各 1 条 Ariake→对方线）。
+**修复**（**真源 = data/core/railway_data.json + station_i18n.json**，.file.js 由 gen-file-data.js 生成——教训：http 加载 json、file:// 才加载 .file.js，改数据必须改 json 再重生成）：
+1. stations 新增 `Shinshu-Ariake`（36.3591889,137.8786639）；`Oito.stations[11]`：Ariake→Shinshu-Ariake
+2. stationLines：Ariake=["Yurikamome"]、Shinshu-Ariake=["Oito"]；LSO Oito：Ariake→Shinshu-Ariake（11）
+3. i18n 新增 Shinshu-Ariake 4 语言（ja/zh=有明、ko=아리아케、en=Ariake）；删幽灵 `Arimari`（i18n 孤儿）
+4. 删 Yurikamome.transferStations 的 Ariake→Oito 声明 + Oito.transferStations 的 Ariake→Yurikamome 反向声明
+**全量扫描（换乘声明有效性）**：89 条"换乘站不在目标线站表"经坐标精化（最近站>4km）判定 **0 条真错误**——其余全部是合法异名换乘（上野⇄京成上野、浜松町⇄モノレール浜松町等）；另发现 **185 个孤儿 stationLines**（站不在任何线站表、无 i18n、无 name_map 引用，含 21 个有劣质坐标的孤立实体 Tanaka/Naiuchi/Douzawa/Ariumi/Edorigoshi/Shirakino/Aono/Otasa/Shibaraki/Fukakai/Juni/Ohata/Hayashi/Shihodo/Ikuta-kaku/Hanyu-Naichi/Echigo-Yamabe/Sato-Taki/Sata/Hon-Nara/Tonami）——不影响线路图/换乘标签显示（换乘图只从 transferStations 构建），列入数据卫生待清（未处理）。
+**验证**：node --check 双 .file.js；浏览器（清 pt_db localStorage 缓存后）——百合鸥"大糸線"标签消失、大糸線页无"ゆりかもめ"、有明在穂高～安曇追分间正确；ChuoRapid 東京/新宿/御茶ノ水/高尾换乘徽章全对；json 按 1 空格缩进重写（diff 28 行）。

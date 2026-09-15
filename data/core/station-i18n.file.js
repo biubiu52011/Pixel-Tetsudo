@@ -9838,12 +9838,6 @@ window.RAILWAY_I18N = {
     "ko": "호다카",
     "en": "Hodaka"
   },
-  "Arimari": {
-    "ja": "有明",
-    "zh": "有明",
-    "ko": "아리마리",
-    "en": "Ariake"
-  },
   "Azumi": {
     "ja": "安曇",
     "zh": "安昙",
@@ -19427,5 +19421,11 @@ window.RAILWAY_I18N = {
     "en": "Kenkyu Gakuen",
     "zh": "研究学园",
     "ko": "研究学园"
+  },
+  "Shinshu-Ariake": {
+    "ja": "有明",
+    "zh": "有明",
+    "ko": "아리아케",
+    "en": "Ariake"
   }
 };

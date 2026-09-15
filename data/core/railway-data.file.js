@@ -8751,6 +8751,10 @@ window.RAILWAY_DATA = {
   "Shizu-Suigun": {
    "lat": 36.61694,
    "lng": 140.38611
+  },
+  "Shinshu-Ariake": {
+   "lat": 36.3591889,
+   "lng": 137.8786639
   }
  },
  "lines": {
@@ -16004,12 +16008,6 @@ window.RAILWAY_DATA = {
      "note": ""
     },
     {
-     "station": "Ariake",
-     "lineId": "Oito",
-     "type": "in",
-     "note": ""
-    },
-    {
      "station": "Toyosu",
      "lineId": "Yurakucho",
      "type": "in",
@@ -23182,7 +23180,7 @@ window.RAILWAY_DATA = {
     "Toyoshina",
     "Hakuyacho",
     "Hotaka",
-    "Ariake",
+    "Shinshu-Ariake",
     "Azumi-Oiwake",
     "Hosono",
     "Kita-Hosono",
@@ -23250,12 +23248,6 @@ window.RAILWAY_DATA = {
     {
      "station": "Matsumoto",
      "lineId": "Shinonoi",
-     "type": "in",
-     "note": ""
-    },
-    {
-     "station": "Ariake",
-     "lineId": "Yurikamome",
      "type": "in",
      "note": ""
     }
@@ -33177,8 +33169,7 @@ window.RAILWAY_DATA = {
    "Yurikamome"
   ],
   "Ariake": [
-   "Yurikamome",
-   "Oito"
+   "Yurikamome"
   ],
   "Ariake-tennis-no-mori": [
    "Yurikamome"
@@ -39687,6 +39678,9 @@ window.RAILWAY_DATA = {
   ],
   "Yatakawa": [
    "Suigun"
+  ],
+  "Shinshu-Ariake": [
+   "Oito"
   ]
  },
  "lineStationOrder": {
@@ -41634,7 +41628,6 @@ window.RAILWAY_DATA = {
    "Toyoshina": 8,
    "Kashiwabara": 9,
    "Hotaka": 10,
-   "Ariake": 11,
    "Azumi-Oiwake": 12,
    "Hosono": 13,
    "Kita-Hosono": 14,
@@ -41656,7 +41649,8 @@ window.RAILWAY_DATA = {
    "Hakuba-Oike": 30,
    "Chikuni": 31,
    "Minami-Otari": 32,
-   "Hitoichiba": 5
+   "Hitoichiba": 5,
+   "Shinshu-Ariake": 11
   },
   "Ominato": {
    "Noheji": 0,
