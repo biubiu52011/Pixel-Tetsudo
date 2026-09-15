@@ -1713,3 +1713,18 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 **验证**：tt_cross 問題統計 {}（299→0）、integrate 73 線/835 列車/0 缺失/100%、verify_through_vtype 63/63、verify_vtype_coverage 115 線/340 条目、scan_dep_out 0。
 **品質確認**：新補直通列車の trainTimetableObject は本線内通過駅のみ（東急系 TKYToyokoIW006 等と同一設計——直通行先のみ他線記録）——一致。
 **残タスク**：OdakyuTama/Enoshima、SeibuChichibu/Yurakucho_Seibu、KeikyuAirport/Kurihama/Zushi の直通列車未補（ODPT に直通终点あり）；MinatoMirai は ODPT StationTimetable 0 件（データ源無し、東横線側 manual で直通確認可）。
+
+## 4.3.797（2026-09-16，剩余直通线补全 + 东急接续站补齐）
+**用户指示**：继续补全剩余直通线的直通列车 + 修复既有直通列车接续站（JOIN station）缺失。
+**方法**：4 个并行子代理（3 新直通补全 + 1 东急接续站修复）。
+**产出**：
+- **小田急多摩線 OdakyuTama**：466→592（+126）——新宿/我孫子/北綾瀬直通，末站=代々木上原 arrival
+- **小田急江ノ島線 OdakyuEnoshima**：1094→1216（+122）——新宿/町田/北千住直通
+- **西武秩父線 SeibuChichibu**：208→246（+38）——池袋LEx34/元町中華街1/秩父鉄道長瀞2/三峰口1
+- **西武有楽町線 Yurakucho_Seibu**：511→1049（+538）——新木場129/元町中華街132/池袋線各駅
+- **京急空港線 KeikyuAirport**：724→1031（+307）——印旛/成田/逗子/高砂直通
+- **京急久里浜線 KeikyuKurihama**：515→606（+91）——青砥71/高砂14/印旛3/成田1
+- **京急逗子線 KeikyuZushi**：447→557（+110）——羽田108/青砥2
+- **东急接续站补齐**：TokyuToyoko 544列追加横浜/ TokyuDenEn 430列追加渋谷/ TokyuMeguro 433列追加目黒/ TokyuOimachi 2列追加二子玉川（ODPT无到着时刻，用站间运行时间估算，标 estimated:true）
+**验证**：node --check 11文件全过；verify_through_vtype 63/63；verify_vtype_coverage 69/69 Missing none（115线/340条目）；integrate_all_lines OK；tt_cross_validate {}；scan_dep_out 0。
+**commit**：4.3.797
