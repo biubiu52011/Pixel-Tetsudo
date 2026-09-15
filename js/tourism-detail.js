@@ -12,6 +12,7 @@
     shrine:   "linear-gradient(135deg, #DC143C 0%, #FF6B6B 100%)",
     night:    "linear-gradient(135deg, #191970 0%, #4169E1 100%)",
     seasonal: "linear-gradient(135deg, #FF69B4 0%, #FFB6C1 100%)",
+    event:    "linear-gradient(135deg, #FF4500 0%, #FFD700 100%)",
     museum:   "linear-gradient(135deg, #4A4A4A 0%, #8B8B8B 100%)",
     landmark: "linear-gradient(135deg, #008803 0%, #00AA00 100%)",
     park:     "linear-gradient(135deg, #2E8B57 0%, #3CB371 100%)",
@@ -130,7 +131,7 @@ var currentStationKey = null;
 
   function getHeroClassForGradient(gradient) {
     var norm = gradient.replace(/\s+/g, " ").trim();
-    var order = ["default","landmark","history","nature","food","shrine","night","seasonal","museum","park","local","temple"];
+    var order = ["default","landmark","history","nature","food","shrine","night","seasonal","event","museum","park","local","temple"];
     for (var i = 0; i < order.length; i++) {
       var ref = THEME_GRADIENTS[order[i]];
       if (ref && norm.indexOf(ref.replace(/\s+/g, " ").trim().substring(0, 25)) >= 0) {

@@ -6182,7 +6182,8 @@
       "desc": "毎年7月、荒川河川敷で開催される足立区を代表する夏の風物詩。多くの観客でにぎわう。",
       "tags": [
         "all",
-        "seasonal"
+        "seasonal",
+        "event"
       ],
       "image": "../images/観光地/足立の花火.jpg",
       "bestTime": "開催日",
@@ -6247,7 +6248,8 @@
       "desc": "西保木間の大乗院で1月に行われる伝統行事。ワラで作った大蛇をイチョウの木に掲げ、五穀豊穣を祈る足立区無形民俗文化財。",
       "tags": [
         "all",
-        "seasonal"
+        "seasonal",
+        "event"
       ],
       "image": "../images/観光地/じんがんなわ祭.jpg",
       "bestTime": "開催日",
@@ -6832,7 +6834,8 @@
       "desc": "千住の金蔵寺で行われる閻魔大王にまつわる春の祭礼。江戸時代から続く下町の信仰行事。",
       "tags": [
         "all",
-        "seasonal"
+        "seasonal",
+        "event"
       ],
       "image": "../images/観光地/閻魔祭.jpg",
       "bestTime": "開催日",
@@ -6897,7 +6900,8 @@
       "desc": "鹿浜地区の4社で輪番奉納される三匹獅子舞。江戸時代から続く足立区無形民俗文化財。",
       "tags": [
         "all",
-        "seasonal"
+        "seasonal",
+        "event"
       ],
       "image": "../images/観光地/鹿浜の獅子舞.jpg",
       "bestTime": "開催日",
@@ -14446,7 +14450,8 @@
       "desc": "和光市駅前で月2回（第2・第4水曜）開かれる軽トラ市。和光市産の旬野菜を直接買える。",
       "tags": [
         "all",
-        "shopping"
+        "shopping",
+        "event"
       ],
       "image": "../images/観光地/軽トラ市.jpg",
       "bestTime": "昼（第2・第4水曜）",
@@ -14926,7 +14931,8 @@
       "desc": "奥浅草の革とモノづくり祭典「浅草エーラウンド」で銀座線レザークラフトキットが手に入る。",
       "tags": [
         "all",
-        "landmark"
+        "landmark",
+        "event"
       ],
       "image": "../images/観光地/東京メトロ特設ブース（エーラウンド・マーケット）.jpg",
       "bestTime": "昼（開催日のみ）",

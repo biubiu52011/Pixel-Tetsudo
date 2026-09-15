@@ -15,6 +15,7 @@
     food: 'tourism.tag_food',
     landmark: 'tourism.tag_landmark',
     seasonal: 'tourism.tag_seasonal',
+    event: 'tourism.tag_event',
     park: 'tourism.tag_park',
     modern: 'tourism.tag_modern'
   };
@@ -87,7 +88,8 @@
   function renderTagFilters() {
     if (!dom.tagFilters) return;
     // 4.3.575: 分类按数据量排序（night 数据为 0 已移除——点开即空白；未来补夜景数据可加回）
-    const tags = ['all', 'shrine', 'history', 'shopping', 'nature', 'food', 'landmark', 'seasonal', 'park', 'modern'];
+    // 4.3.794: 新增 event（活动：祭り/花火/市集）分类
+    const tags = ['all', 'shrine', 'history', 'shopping', 'nature', 'food', 'landmark', 'seasonal', 'event', 'park', 'modern'];
     dom.tagFilters.innerHTML = tags.map(function(tag) {
       const label = t(TAG_LABELS[tag]) || tag;
       // 4.3.571: 标签纯文字（emoji 图标已移除）
@@ -268,6 +270,10 @@ function renderGrid() {
       const thumbHtml = image ? 
         '<img class="sm-thumb-img" src="' + encodeURI(image) + '" alt="' + _escSpot(name) + '">' :
         '<span class="sm-thumb-icon">' + labelForTags(tags) + '</span>';
+
+      // 4.3.794: 活动样式——event 条目显示"開催"角标 + 节日色卡片
+      const isEvent = tags.indexOf('event') >= 0;
+      const eventBadgeHtml = isEvent ? '<span class="sm-event-badge">' + _escSpot(t('tourism.event_badge')) + '</span>' : '';
       
       // Localize distance text with current language (cached distanceText is ja-only)
       let distText = '';
@@ -287,8 +293,8 @@ function renderGrid() {
 
       const detailUrl = 'tourism-detail.html?station=' + encodeURIComponent(stationKey) + '&index=' + idx + '&name=' + encodeURIComponent(name);
 
-      return '<a href="' + detailUrl + '" class="sm-card" data-index="' + idx + '">' +
-        '<div class="sm-thumb' + (image ? '' : ' sm-thumb-noimg') + '">' + thumbHtml + '</div>' +
+      return '<a href="' + detailUrl + '" class="sm-card' + (isEvent ? ' sm-card--event' : '') + '" data-index="' + idx + '">' +
+        '<div class="sm-thumb' + (image ? '' : ' sm-thumb-noimg') + '">' + eventBadgeHtml + thumbHtml + '</div>' +
         '<div class="sm-body">' +
           '<h3>' + _escSpot(name) + '</h3>' +
           distRowHtml +
