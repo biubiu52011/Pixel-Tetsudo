@@ -28029,7 +28029,7 @@ window.RAILWAY_TOURISM = {
           "토핑 자유."
         ]
       },
-      "address": "東京都中央区銀座三丁目"
+      "address": "東京都中央区銀座3-14-4"
     },
     {
       "name": "GINZA HAKKO 木の香（きのか）",
@@ -28104,7 +28104,7 @@ window.RAILWAY_TOURISM = {
           "국내 최대급 구색."
         ]
       },
-      "address": "東京都中央区銀座七丁目"
+      "address": "東京都中央区銀座7-10-5"
     },
     {
       "name": "日比谷松本楼",
@@ -30674,7 +30674,7 @@ window.RAILWAY_TOURISM = {
           "에도마에 노포."
         ]
       },
-      "address": "東京都中央区築地二丁目"
+      "address": "東京都中央区築地2-15-19"
     },
     {
       "name": "スケボーパーク＆スケボースクール「RAMP ZERO」",
