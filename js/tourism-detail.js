@@ -234,12 +234,17 @@ var currentStationKey = null;
     var feeLabel = (_isShop && /[円前後〜～]/.test(spotFee))
       ? t('detail.info_fee_per_person')
       : t('detail.info_fee');
-    // Info grid (hours, fees)
+    // Info grid (hours, fees) + 4.3.797: 地址行细分（全宽跨列）
+    var spotAddress = spot.address || '';
+    var addressRow = spotAddress
+      ? '<div class="info-row info-row--full"><span class="info-label">' + t('detail.address') + '</span><span class="info-value">' + escapeHtml(spotAddress) + '</span></div>'
+      : '';
     var infoHtml = '<div class="article-section">'
       + '<h3 class="section-heading">' + t('detail.basic_info') + '</h3>'
       + '<div class="info-grid">'
       + '<div class="info-row"><span class="info-label">' + t('detail.info_hours') + '</span><span class="info-value">' + escapeHtml(spotHours) + '</span></div>'
       + '<div class="info-row"><span class="info-label">' + feeLabel + '</span><span class="info-value">' + escapeHtml(spotFee) + '</span></div>'
+      + addressRow
       + '</div></div>';
 
     // Map container (OSM iframe)

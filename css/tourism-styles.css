@@ -878,6 +878,14 @@
   color: var(--text);
   font-weight: 600;
 }
+/* 4.3.797: 地址行细分——跨两列全宽，长地址自动换行 */
+.info-row--full {
+  grid-column: 1 / -1;
+}
+.info-row--full .info-value {
+  word-break: break-word;
+  line-height: 1.5;
+}
 
 
 /* === Leaflet map === */
