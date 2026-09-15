@@ -36762,7 +36762,7 @@ window.RAILWAY_TOURISM = {
           "주간 바뀌는 카레 인기"
         ]
       },
-      "address": "東京都足立区扇三丁目"
+      "address": "東京都足立区扇3-8-15"
     },
     {
       "name": "食堂ソラノシタ",
@@ -36978,7 +36978,7 @@ window.RAILWAY_TOURISM = {
           "숯불·오뎅도"
         ]
       },
-      "address": "東京都足立区綾瀬"
+      "address": "東京都足立区綾瀬2-24-11"
     },
     {
       "name": "きく鮨",
@@ -37553,7 +37553,7 @@ window.RAILWAY_TOURISM = {
           "겨울 한정 나가미 나베"
         ]
       },
-      "address": "東京都足立区千住二丁目"
+      "address": "東京都足立区千住2-62"
     },
     {
       "name": "定食屋 かあちゃん",
