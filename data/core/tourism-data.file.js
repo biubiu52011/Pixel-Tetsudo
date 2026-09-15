@@ -5391,7 +5391,7 @@ window.RAILWAY_TOURISM = {
           "扇大橋역에서 도보 14분"
         ]
       },
-      "address": "東京都足立区宮城"
+      "address": "東京都足立区宮城1-38-6"
     },
     {
       "name": "島氷川神社",
@@ -5586,7 +5586,7 @@ window.RAILWAY_TOURISM = {
           "梅島역에서 도보 13분"
         ]
       },
-      "address": "東京都足立区関原二丁目"
+      "address": "東京都足立区関原2-35"
     },
     {
       "name": "梅島天満宮",
@@ -6625,7 +6625,7 @@ window.RAILWAY_TOURISM = {
           "扇大橋역에서 도보 3분"
         ]
       },
-      "address": "東京都足立区扇二丁目"
+      "address": "東京都足立区扇2-9-3"
     },
     {
       "name": "伊興 若宮八幡宮",
