@@ -1582,3 +1582,12 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 **覆盖**：52/55 直通线路（东京メトロ 7/都営 3/东武 3/京王 2/相铁 3/京急 1/小田急 2/西武 2/みなとみらい/JR首都圈 24/中央本線）；缺 3 线=京成系（Keisei/KeiseiOshiage/NaritaSkyAccess，ODPT 无 StationTimetable，需纯手工，待用户拍板）。
 **验证**：work/verify_through_vtype.js 46/46 OK（千代田→小田急4000形、副都心→东武50070/西武40000、半藏门→东急5000/东武30000、日比谷→东武70000/TH-LINER、浅草→京急1000/京成3000、埼京→相铁12000、横须贺→E235系等）；work/verify_vtype_coverage.js 52/55；node --check 通过；trains.html 引用 v=4.3.638。
 **commit**：579902c（3 文件）
+
+## 4.3.639（2026-09-16，京成 3 线 vehicleType 手工补全——55/55 全覆盖）
+**用户指示**：「继续处理」——补完 4.3.638 遗留的京成系 3 线（Keisei/KeiseiOshiage/NaritaSkyAccess）。
+**数据来源**：ODPT 实证确认京成全 operator 无 Train/TrainTimetable/StationTimetable/TrainType 数据（challenge+center 双 API 均 0 件）——纯手工补 MAP 条目，不生成 manual 时刻表。车型基于公开资料（京成公式・wiki・鉄道ファン）：3000形（主力通勤・浅草直通 8 両）、3100形（2019 年・Sky Access 直通用 50 番台）、3700形/3600形/3400形/3050形（既有通勤）、AE2代目（スカイライナー専用）。
+**MAP 新增**（vehicle-type-map.js）：
+- Keisei（京成本線，7 trainType）：Local/Rapid/LimitedExpress/RapidLimitedExpress/CommuterLimitedExpress/AccessExpress/Skyliner——直通先 Toei（都営浅草線）单独标注 8 両対応車
+- KeiseiOshiage（押上線，4 trainType）：Local/Rapid/LimitedExpress/AccessExpress——直通先 Toei 标注
+- NaritaSkyAccess（成田スカイアクセス線，2 trainType）：AccessExpress/Skyliner
+**验证**：work/verify_vtype_coverage.js 55/55（Through-service lines total: 55 / Covered: 55 / Missing: none）；work/verify_through_vtype.js 55/55 OK（含新增 9 条京成断言：Keisei Local→Toei/Keisei、Keisei LimitedExpress→Toei、Keisei AccessExpress→Keisei、Keisei Skyliner→Keisei、KeiseiOshiage Local/LimitedExpress→Toei、NaritaSkyAccess AccessExpress/Skyliner→Keisei）；node --check 通过；trains.html v=4.3.639。
