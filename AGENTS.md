@@ -1691,3 +1691,13 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 **許容線外（ALLOW_DEST_OUT）**：chiba（5050M あずさ50号 千葉直通，実在特急）/ urawamisono / hatogaya（埼玉高速鉄道，本地未収録線）——実在の遠方行先として tt_cross 許容
 **验证**：tt_cross 問題統計 {}（DEST_LINE_OUT 577→0）、integrate_all_lines 73 線/811 列車/vehicleType 缺失 0/100%、verify_through_vtype 63/63（+8 新直通断言）、verify_vtype_coverage 115 線/340 条目/Missing none、発站線外 0。
 **commit**：4.3.771（through-service.js / vehicle-type-map.js / OuMain-manual.js / trains.html / AGENTS.md）
+
+## 4.3.793（2026-09-16，私铁直通列车时刻表补全：京急/小田急/西武）
+**用户指示**：「其他线路的直通时刻表对查了？」——发现多条私铁 manual 缺直通列车记录（终点全在本线内），ODPT StationTimetable 实际包含大量直通列车。
+**方法**：3 个并行子代理，用 ODPT StationTimetable stitch（greedy 跨站照合，参照 gen_tokyu_manual.py 东急样板）补入直通列车。
+**产出**：
+- **京急本線 Keikyu**：2207→2782 条（+575 直通）——浅草線/京成/北総/芝山直通（青砥185/成田空港152/京成高砂95/印旛日本医大79/押上6/芝山千代田6 等）
+- **小田急小田原線 Odawara**：2147→2283 条（+136 直通）——千代田線/常磐線直通（我孫子83/北綾瀬22/綾瀬16/柏4/北千住7/取手3/松戸1）
+- **西武池袋線 Ikebukuro**：2032→2083 条（+51 直通）——有楽町線/副都心線/みなとみらい線直通（元町中華街18/新木場4/西武秩父33）
+**验证**：node --check 3文件全过；verify_through_vtype 63/63；verify_vtype_coverage 66/66 Missing none（115线/340条目）；integrate_all_lines OK；tt_cross_validate 仅1条预期 DEST_LINE_OUT（ODTW056→北綾瀬=千代田線直通）；scan_dep_out 0。
+**commit**：4.3.793
