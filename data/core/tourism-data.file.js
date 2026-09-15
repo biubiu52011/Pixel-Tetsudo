@@ -3701,7 +3701,7 @@ window.RAILWAY_TOURISM = {
           "역에서 출발"
         ]
       },
-      "address": "東京都足立区六町一丁目"
+      "address": "東京都足立区六町1-6-7"
     },
     {
       "name": "東岳寺",
@@ -3766,7 +3766,7 @@ window.RAILWAY_TOURISM = {
           "다케노즈카역에서 도보 5분"
         ]
       },
-      "address": "東京都足立区西竹の塚二丁目"
+      "address": "東京都足立区伊興本町1-5-16"
     },
     {
       "name": "実性寺",
@@ -3831,7 +3831,7 @@ window.RAILWAY_TOURISM = {
           "谷塚역에서 도보 19분"
         ]
       },
-      "address": "東京都足立区花畑三丁目"
+      "address": "東京都足立区花畑3-17-18"
     },
     {
       "name": "長建寺",
