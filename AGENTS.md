@@ -1563,3 +1563,14 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 **踩坑**：兜底遍历 stations 时把源数据自带的大小写变体站（16 组如 Shin-Maruko/Shin-maruko）也写了 → 重复键 → 2dbb0bc 已推送含重复键 → 立即通用合并修复（b560546，16 键合并 2189→2173）+ 重新推送。
 **终态**：exits 2173 站（真实 647 + 駅前兜底 1526）；严格解析 ✓、无重复键 ✓、无孤立键 ✓；景点最近站命中 517/517（无 miss，变体站非景点最近站）。
 **备注**：railway_data.json 源数据 16 组重复站（Kokusai-Tenjijo/KokusaiTenjijo 等）本身未修——但 exits 已统一到权威键，JS 键查找不受影响（实测证明）。
+
+## 4.3.630（2026-09-16，東急直通列車 vehicleType 行先グループ別正確化）
+**问题**：用户「整个检查一下是否能对应车辆，特别是直通」——直通列车的 vehicleType 未包含直通先车辆。
+**根因**：行先 URN 的 parts[2] 是路線 ID 而非 operator（odpt.Station:TokyoMetro.Fukutoshin.Wakoshi → Fukutoshin）；旧 VEHICLE_MAP 按「线×种别」固定赋值、不看行先，直通列车只有自社车辆。
+**修复**（work/yurikamome_timetable/gen_tokyu_manual.py，gitignore 対象）：
+- LINE_GROUP：路線 ID → 直通先グループ（Tokyu/Minatomirai/TokyoMetro/Toei/Tobu/Seibu/SaitamaRailway/Sotetsu/DenEnToshi）
+- 東横線：種別×行先グループ精确对应（各停 8両/特急 10両 的差异已反映）
+- 田園都市・目黒・大井町：基本 + 直通先追加
+- 大井町線：田園都市線直通（中央林間・長津田）追加 5000系/2020系
+**検証**：verify_through.py 19/19 OK（副都心/西武/東武/相鉄/みなとみらい/都営/埼玉高速/田園都市直通全部期待车辆一致）；6505 列 100% vehicleType；node --check 8 文件 OK；integration mock 平日 138 列/土曜 94 列全部付与。
+**commit**：6fa9995（4 文件）
