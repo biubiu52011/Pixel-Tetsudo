@@ -26,7 +26,7 @@
   var THROUGH_SERVICE_MAP = {
     // 東武スカイツリーライン・伊勢崎線（東武動物公園で相互直通）
     "TobuSkytree": ["Hibiya", "Hanzomon", "Asakusa", "TobuIsesaki"],
-    "TobuIsesaki": ["Hibiya", "Hanzomon", "TobuSkytree"],
+    "TobuIsesaki": ["Hibiya", "Hanzomon", "TobuSkytree", "TobuNikko"],
     // 東京メトロ
     "Hibiya": ["TobuSkytree", "TobuIsesaki"],
     "Hanzomon": ["TobuSkytree", "TobuIsesaki", "TokyuDenEn"],
@@ -41,10 +41,10 @@
     // 東急
     "TokyuToyoko": ["MinatoMirai", "Fukutoshin"],
     "MinatoMirai": ["TokyuToyoko"],
-    "TokyuMeguro": ["Mita", "Namboku"],
-    "TokyuDenEn": ["Hanzomon"],
+    "TokyuMeguro": ["Mita", "Namboku", "SotetsuShin-Yokohama"],
+    "TokyuDenEn": ["Hanzomon", "TokyuOimachi"],
     // 西武有楽町線（小竹向原-練馬）— the through path to 西武池袋線 runs via this line
-    "Yurakucho_Seibu": ["Fukutoshin", "Ikebukuro"],
+    "Yurakucho_Seibu": ["Fukutoshin", "Ikebukuro", "SeibuChichibu"],
     // 西武池袋線（データ線ではない——BFS 中継のみ、表示対象外）
     "Ikebukuro": ["Yurakucho_Seibu"],
     // 東武東上線
@@ -57,7 +57,7 @@
     // 相鉄
     "SotetsuMain": ["Saikyo", "TokyuToyoko", "SotetsuIzumino", "SotetsuShin-Yokohama"],
     "SotetsuIzumino": ["SotetsuMain"],
-    "SotetsuShin-Yokohama": ["SotetsuMain"],
+    "SotetsuShin-Yokohama": ["SotetsuMain", "TokyuMeguro"],
     // JR
     "Saikyo": ["Kawagoe", "Rinkai", "SotetsuMain"],
     "Kawagoe": ["Saikyo", "KawagoeWest"],
@@ -70,7 +70,7 @@
     "ShonanShinjuku": ["UtsunomiyaJR", "Takasaki", "Yokosuka"],
     "UenoTokyo": ["UtsunomiyaJR", "Takasaki", "Joban", "Tokaido"],
     "ChuoRapid": ["Ome", "Itsukaichi", "ChuoMain"],
-    "ChuoMain": ["ChuoRapid"],
+    "ChuoMain": ["ChuoRapid", "Shinonoi", "ChuoTatsuno"],
     "SobuRapid": ["Yokosuka"],
     "Yokosuka": ["SobuRapid", "ShonanShinjuku"],
     "JobanLocal": ["Chiyoda"],
@@ -90,7 +90,12 @@
     "OuMain": ["Gono", "Tazawako"],
     "Tazawako": ["OuMain"],
     "TokyuOimachi": ["TokyuDenEn"],
-    "TokyuDenEn": ["TokyuOimachi"]
+    // 直通 6 組補完（4.3.711）
+    "TobuNikko": ["TobuIsesaki"],
+    "ChuoTatsuno": ["ChuoMain"],
+    "Shinonoi": ["ChuoMain", "Shinetsu"],
+    "Shinetsu": ["Shinonoi"],
+    "SeibuChichibu": ["Yurakucho_Seibu"]
   };
 
   // 接続駅（線路図の直通マーカーを実際の接続駅のみに限定）
@@ -102,7 +107,7 @@
     // 副都心・有楽町・西武・東上・東横
     "Fukutoshin": { "Tojo": ["Wakoshi"], "TokyuToyoko": ["Shibuya"], "Yurakucho_Seibu": ["Kotake-Mukaihara"] },
     "Yurakucho": { "Tojo": ["Wakoshi"], "Yurakucho_Seibu": ["Kotake-Mukaihara"] },
-    "Yurakucho_Seibu": { "Fukutoshin": ["Kotake-Mukaihara"], "Yurakucho": ["Kotake-Mukaihara"] },
+    "Yurakucho_Seibu": { "Fukutoshin": ["Kotake-Mukaihara"], "Yurakucho": ["Kotake-Mukaihara"], "SeibuChichibu": [] },
     "Tojo": { "Fukutoshin": ["Wakoshi"], "Yurakucho": ["Wakoshi"] },
     "TokyuToyoko": { "Fukutoshin": ["Shibuya"], "MinatoMirai": ["Yokohama"] },
     "MinatoMirai": { "TokyuToyoko": ["Yokohama"] },
@@ -110,7 +115,7 @@
     "Hanzomon": { "TobuSkytree": ["Oshiage"], "TobuIsesaki": ["Oshiage"], "TokyuDenEn": ["Shibuya"] },
     // 東武スカイツリー・伊勢崎（東武動物公園）
     "TobuSkytree": { "Hanzomon": ["Oshiage"], "Hibiya": ["Kita-Senju"], "TobuIsesaki": ["Tobu-Dobutsu-Koen"] },
-    "TobuIsesaki": { "Hibiya": ["Kita-Senju"], "Hanzomon": ["Oshiage"], "TobuSkytree": ["Tobu-Dobutsu-Koen"] },
+    "TobuIsesaki": { "Hibiya": ["Kita-Senju"], "Hanzomon": ["Oshiage"], "TobuSkytree": ["Tobu-Dobutsu-Koen"], "TobuNikko": ["Tobu-Dobutsu-Koen"] },
     "Hibiya": { "TobuSkytree": ["Kita-Senju"], "TobuIsesaki": ["Kita-Senju"] },
     // 浅草・京成・京急
     "Asakusa": { "Keikyu": ["Sengakuji"], "Keisei": ["Oshiage"], "KeiseiOshiage": ["Oshiage"] },
@@ -141,7 +146,7 @@
     "Ito": { "Tokaido": ["Atami"] },
     // 中央線
     "ChuoRapid": { "Ome": ["Tachikawa"], "Itsukaichi": ["Haijima"], "ChuoMain": ["Takao"] },
-    "ChuoMain": { "ChuoRapid": ["Takao"] },
+    "ChuoMain": { "ChuoRapid": ["Takao"], "Shinonoi": ["Shiojiri"], "ChuoTatsuno": ["Okaya"] },
     "Ome": { "ChuoRapid": ["Tachikawa"] },
     "Itsukaichi": { "ChuoRapid": ["Haijima"] },
     // 総武快速×横須賀
@@ -158,18 +163,24 @@
     // 南北・三田・目黒
     "Namboku": { "TokyuMeguro": ["Meguro"] },
     "Mita": { "TokyuMeguro": ["Meguro"] },
-    "TokyuMeguro": { "Mita": ["Meguro"], "Namboku": ["Meguro"] },
+    "TokyuMeguro": { "Mita": ["Meguro"], "Namboku": ["Meguro"], "SotetsuShin-Yokohama": [] },
     // 相鉄（埼京・東横とはデータ上接続駅なし→マーカー非表示）
     "SotetsuMain": { "Saikyo": [], "TokyuToyoko": [], "SotetsuIzumino": ["Futamatagawa", "Futamatagawa"], "SotetsuShin-Yokohama": ["Nishiya"] },
     "SotetsuIzumino": { "SotetsuMain": ["Futamatagawa", "Futamatagawa"] },
-        "SotetsuShin-Yokohama": { "SotetsuMain": ["Nishiya"] },
+        "SotetsuShin-Yokohama": { "SotetsuMain": ["Nishiya"], "TokyuMeguro": ["Shin-Yokohama"] },
     // 地方線直通・大井町線直通（4.3.644 補完）
     "Gono": { "OuMain": ["Kawabe"] },
     "Kamaishi": { "TohokuMain": ["Hanamaki"] },
     "OuMain": { "Gono": ["Kawabe"], "Tazawako": ["Omagari"] },
     "Tazawako": { "OuMain": ["Omagari"] },
     "TokyuOimachi": { "TokyuDenEn": ["Futako-Tamagawa"] },
-    "TokyuDenEn": { "TokyuOimachi": ["Futako-Tamagawa"] }
+    "TokyuDenEn": { "TokyuOimachi": ["Futako-Tamagawa"] },
+    // 直通 6 組補完 JOIN（4.3.711）
+    "TobuNikko": { "TobuIsesaki": ["Tobu-Dobutsu-Koen"] },
+    "ChuoTatsuno": { "ChuoMain": ["Okaya"] },
+    "Shinonoi": { "ChuoMain": ["Shiojiri"], "Shinetsu": ["Shinonoi"] },
+    "Shinetsu": { "Shinonoi": ["Shinonoi"] },
+    "SeibuChichibu": { "Yurakucho_Seibu": [] }
   };
 
   /** Direct through-service neighbours of a line (1 hop). */

@@ -1670,3 +1670,24 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 **验证**：发站线外 0 条；集成 73 线/811 列车/vehicleType 缺失 0/覆盖 100%；直通车型 55/55；tt_cross 虚构终点 0、DEST_LINE_OUT 577（全为合法线外终点：TokyuMeguro→相鉄 387 + TokyuDenEn→南栗橋 95 + ChuoMain→松本/長野 94 + 秩父 1）。
 **遗留**：①不完整记录 491 条（单站着/発のみ，含 Gono 青森/秋田着のみ直通列车、Suigun 折返、东急区間列車 3 条）——4.3.524/708 官网提取限制，时刻正确但经路不全；②TokyuMeguro⇄相鉄 387 条（4.3.495 拍板待ち）；③秩父直通 1 条（本地缺飯能）；④京成時刻表本体未做（ODPT 无数据）。
 **commit**：4.3.710（OuMain-manual.js / Gono-manual.js）
+## 4.3.771（2026-09-16，直通 6 組補完・「能連上就是直通」判定）
+**用户指示**：「你看如果能连上说不定就是直通」——将 tt_cross DEST_LINE_OUT 577 条线外终点中能经站表连通的实存直通补入直通表。
+**判定法**：线外终点在本地站表中存在且与某直通链 BFS 可达 = 实存直通 → 追加 THROUGH_SERVICE_MAP / THROUGH_JOIN_STATIONS。
+**追加 6 组直通（MAP+JOIN）**：
+1. TokyuMeguro⇄SotetsuShin-Yokohama @Shin-Yokohama（目黒線⇄相鉄新横浜線，中间東急新横浜線本地缺线；JOIN 東急側 [] 抑制 / 相鉄側 ["Shin-Yokohama"]）——新横浜/湘南台/海老名 387 条解消
+2. TobuIsesaki⇄TobuNikko @Tobu-Dobutsu-Koen（伊勢崎線⇄日光線，南栗橋）——95 条解消
+3. ChuoMain⇄Shinonoi @Shiojiri（中央本線⇄篠ノ井線，松本）
+4. Shinonoi⇄Shinetsu @Shinonoi（篠ノ井線⇄信越本線，長野）
+5. ChuoMain⇄ChuoTatsuno @Okaya（中央本線⇄辰野支線，辰野）——中央本線系 94 条解消
+6. Yurakucho_Seibu⇄SeibuChichibu（西武池袋⇄秩父，飯能欠落 JOIN [] 抑制）——秩父 1 条解消
+**并发发现・修正**：
+- **TokyuDenEn MAP 重复 key 修正**（4.3.644 引入 bug）：["Hanzomon"] 被追加的 ["TokyuOimachi"] 覆盖，田園都市⇄半蔵門直通消失——合并 ["Hanzomon","TokyuOimachi"] 复旧（南栗橋链此前中途断裂）
+- **OuMain 残留田沢湖線列車 20 条削除**（4.3.710 削除漏れ）：824M/826M/828M/832M/834M/838M/840M/844M/850M/854M×平日/土休——全部经 Tazawako manual 存在确认，OuMain 安全删除（796→776）
+- **scan_dep_out.py 解析 bug 修正**：const 匹配改 var＋注释除去（発站線外 0 正确判定）
+**车型 MAP 追加/修正**：
+- TobuNikko（Local 東武50000系/50050系、LimitedExpress N100系スペーシアX/100系スペーシア/500系リバティ）＋ TokyuOimachi（6020系 等）——直通線 66 線全カバー（Missing none）
+- ChuoMain Local/Rapid 修正为「211系 / E233系0番台（候補）」——高尾以西主力 211系、E233系0番台 是高尾以東中央快速用（ChuoMain manual 含高尾発着 JC 列車，种别区分：ChuoSpecialRapid/CommuterRapid 保持 E233系0番台）
+- TokyuMeguro 追加 SotetsuShin-Yokohama destGroup（相鉄20000系 表示、Local/Express 両方）
+**許容線外（ALLOW_DEST_OUT）**：chiba（5050M あずさ50号 千葉直通，実在特急）/ urawamisono / hatogaya（埼玉高速鉄道，本地未収録線）——実在の遠方行先として tt_cross 許容
+**验证**：tt_cross 問題統計 {}（DEST_LINE_OUT 577→0）、integrate_all_lines 73 線/811 列車/vehicleType 缺失 0/100%、verify_through_vtype 63/63（+8 新直通断言）、verify_vtype_coverage 115 線/340 条目/Missing none、発站線外 0。
+**commit**：4.3.771（through-service.js / vehicle-type-map.js / OuMain-manual.js / trains.html / AGENTS.md）
