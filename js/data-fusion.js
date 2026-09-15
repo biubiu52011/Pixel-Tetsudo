@@ -911,6 +911,32 @@
         var p = new Promise(function(res, rej) {
           s.onload = function() {
             if (!window[varName]) { rej(new Error(varName + ' undefined (naming mismatch?)')); return; }
+            // v4.3.6xx: 手动时刻表加载后，立即合并到posMap（原来只在初始化时合并一次）
+            try {
+              var manualTT = window[varName];
+              var mLine = allLines[lineId];
+              if (mLine && mLine.stations && manualTT && manualTT.length > 0) {
+                var mEst = window.TrainPositionEstimator.estimateLinePositions(
+                  lineId, mLine, manualTT, odptData.delayInfo, mLine.operator
+                );
+                if (mEst && mEst.length > 0) {
+                  if (!posMap[lineId]) posMap[lineId] = [];
+                  var haveId = {};
+                  posMap[lineId].forEach(function(p) { if (p && p.trainId) haveId[p.trainId] = true; });
+                  var mAdded = 0;
+                  mEst.forEach(function(p) {
+                    if (p && p.trainId && !haveId[p.trainId]) {
+                      posMap[lineId].push(p);
+                      haveId[p.trainId] = true;
+                      mAdded++;
+                    }
+                  });
+                  if (mAdded > 0) {
+                    console.debug("[DataFusion] ensureManual: " + lineId + " +" + mAdded + " estimated trains");
+                  }
+                }
+              }
+            } catch(mErr) { console.debug("[DataFusion] ensureManual->mergeManual error:", mErr.message); }
             try { doEstimation(); } catch(e) { console.debug("[DataFusion] ensureManual->doEstimation error:", e.message); }
             try { fuseAll(); } catch(e) { console.debug("[DataFusion] ensureManual->fuseAll error:", e.message); }
             res(true);
