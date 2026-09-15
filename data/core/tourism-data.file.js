@@ -33238,7 +33238,7 @@ window.RAILWAY_TOURISM = {
           "아이 동반 인기"
         ]
       },
-      "address": "東京都足立区新田"
+      "address": "東京都足立区新田3-34-1"
     },
     {
       "name": "江北公園",
