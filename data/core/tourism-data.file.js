@@ -33313,7 +33313,7 @@ window.RAILWAY_TOURISM = {
           "동네 쉼터"
         ]
       },
-      "address": "東京都足立区鹿浜五丁目"
+      "address": "東京都足立区鹿浜2-44-1"
     },
     {
       "name": "総合スポーツセンター公園",
@@ -38348,7 +38348,7 @@ window.RAILWAY_TOURISM = {
           "차지 300엔"
         ]
       },
-      "address": "東京都足立区西新井栄町二丁目"
+      "address": "東京都足立区西新井栄町2-8-3"
     },
     {
       "name": "Bar Sora [宇宙]",
