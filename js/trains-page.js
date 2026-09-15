@@ -2280,7 +2280,12 @@
       labelText = _resolveStationLoose(dn) || dn;
     }
     if (!labelText) return;
-    var dirSym = moveDir === 'down' ? '▼' : (moveDir === 'up' ? '▲' : ((isLoopDir && !_isOedoBranchTrain(lineId, p)) ? '' : '▶'));
+    // v4.3.6xx: 环线只显示内环/外环文字，不加箭头；普通线路用▲▼上下箭头 + 终点站名
+    var dirSym = '';
+    if (!isLoopDir || _isOedoBranchTrain(lineId, p)) {
+      // 普通直线：Inbound=▲（往上走/往上行）、Outbound=▼（往下走/往下行）
+      dirSym = moveDir === 'down' ? '▼' : (moveDir === 'up' ? '▲' : '');
+    }
     var ldir = document.createElementNS(svgNS, "text");
     ldir.setAttribute("data-train-label-for", String(trainUid));
     ldir.setAttribute("data-label-pos", "dir");
