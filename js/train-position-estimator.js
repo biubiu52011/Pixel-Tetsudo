@@ -464,7 +464,8 @@
             railDirection: directionName,
             destinationStation: destinationStation,
             trainClass: trainClass,
-            vehicleType: tt['vehicleType'] || ''
+            vehicleType: tt['vehicleType'] ||
+              (window.VehicleTypeMap ? window.VehicleTypeMap.resolve(lineId, tt['odpt:trainType'], tt['odpt:destinationStation']) : '')
           });
         }
       }
