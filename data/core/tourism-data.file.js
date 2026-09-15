@@ -32409,7 +32409,7 @@ window.RAILWAY_TOURISM = {
           "우메지마 도보 6분"
         ]
       },
-      "address": "東京都足立区梅田七丁目"
+      "address": "東京都足立区梅田7-28-10"
     },
     {
       "name": "TAMBOURIN CURRY＆BAR",
@@ -33163,7 +33163,7 @@ window.RAILWAY_TOURISM = {
           "터널 인기"
         ]
       },
-      "address": "東京都足立区青井三丁目"
+      "address": "東京都足立区青井3-18-15"
     },
     {
       "name": "新田さくら公園",
