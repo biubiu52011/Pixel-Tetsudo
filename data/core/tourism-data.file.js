@@ -4351,7 +4351,7 @@ window.RAILWAY_TOURISM = {
           "舎人역에서 도보 5분"
         ]
       },
-      "address": "東京都足立区入谷一丁目"
+      "address": "東京都足立区入谷1-19-20"
     },
     {
       "name": "源正寺",
@@ -4416,7 +4416,7 @@ window.RAILWAY_TOURISM = {
           "다케노즈카역에서 도보 11분"
         ]
       },
-      "address": "東京都足立区伊興一丁目"
+      "address": "東京都足立区伊興2-2-35"
     },
     {
       "name": "千住神社",
@@ -4871,7 +4871,7 @@ window.RAILWAY_TOURISM = {
           "綾瀬역에서 도보 8분"
         ]
       },
-      "address": "東京都足立区綾瀬"
+      "address": "東京都足立区綾瀬1-14-20"
     },
     {
       "name": "善立寺",
@@ -4936,7 +4936,7 @@ window.RAILWAY_TOURISM = {
           "五反野역에서 도보 12분"
         ]
       },
-      "address": "東京都足立区梅田一丁目"
+      "address": "東京都足立区梅田1-26-10"
     },
     {
       "name": "本木氷川神社",
@@ -5131,7 +5131,7 @@ window.RAILWAY_TOURISM = {
           "高野역에서 도보 8분"
         ]
       },
-      "address": "東京都足立区江北二丁目"
+      "address": "東京都足立区江北2-4-3"
     },
     {
       "name": "高砂神社",
@@ -5326,7 +5326,7 @@ window.RAILWAY_TOURISM = {
           "大師前역에서 도보 4분"
         ]
       },
-      "address": "東京都足立区栗原三丁目"
+      "address": "東京都足立区栗原3-6-6"
     },
     {
       "name": "宮城氷川神社",
@@ -5910,7 +5910,7 @@ window.RAILWAY_TOURISM = {
           "千住大橋역에서 도보 7분"
         ]
       },
-      "address": "東京都足立区千住仲町"
+      "address": "東京都足立区千住1-2-9"
     },
     {
       "name": "天祖神社",
@@ -6105,7 +6105,7 @@ window.RAILWAY_TOURISM = {
           "千住大橋역에서 도보 7분"
         ]
       },
-      "address": "東京都足立区千住中居町"
+      "address": "東京都足立区千住中居町2-3"
     },
     {
       "name": "花畑大鷲神社",
