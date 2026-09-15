@@ -9421,7 +9421,7 @@ window.RAILWAY_TOURISM = {
         "ko": "조조지 절"
       },
       "desc_i18n": {
-        "ja": "徳川将軍家の菩提寺。江戸時代から続く浄土宗の大本山で、東京タワーを背景にした大門と本堂の景観が有名。",
+        "ja": "徳川将軍家の菩提寺。江戸時代から続く浄土宗の大本山で、東京タワーを背景にした大門と本堂の景観が有名。国指定文化財の三解脱門や徳川家霊廟も見どころ。",
         "zh": "德川将军家的菩提寺，江户时代延续至今的净土宗大本山，以东京塔为背景的山门与正殿景观闻名。",
         "en": "The family temple of the Tokugawa shoguns. Head temple of the Jodo sect since the Edo period, famous for its main gate and hall set against Tokyo Tower.",
         "ko": "도쿠가와 장군가의 보리사. 에도 시대부터 이어지는 정토종 대본산으로 도쿄타워를 배경으로 한 대문과 본당 경관으로 유명하다."
@@ -9444,26 +9444,28 @@ window.RAILWAY_TOURISM = {
         "en": "Year-round",
         "ko": "연중"
       },
-      "tips_i18n": [
-        {
-          "ja": "三解脱門は国の重要文化財",
-          "zh": "三解脱门为国家重要文化财产",
-          "en": "The Sangedatsumon gate is a National Important Cultural Property",
-          "ko": "삼해탈문은 국가 중요 문화재"
-        },
-        {
-          "ja": "東京タワーと大門のコラボ写真が人気",
-          "zh": "东京塔与山门同框是经典机位",
-          "en": "A classic photo spot combining Tokyo Tower and the gate",
-          "ko": "도쿄타워와 대문이 함께 나오는 사진이 인기"
-        },
-        {
-          "ja": "徳川将軍家の霊廟も拝観できる",
-          "zh": "可参拜德川将军家灵庙",
-          "en": "The Tokugawa shogun mausoleums can also be visited",
-          "ko": "도쿠가와 장군가의 영묘도 참배 가능"
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "三解脱門は国の重要文化財",
+          "東京タワーと大門のコラボ写真が人気",
+          "徳川将軍家の霊廟も拝観できる"
+        ],
+        "zh": [
+          "三解脱门为国家重要文化财产",
+          "东京塔与山门同框是经典机位",
+          "可参拜德川将军家灵庙"
+        ],
+        "en": [
+          "The Sangedatsumon gate is a National Important Cultural Property",
+          "A classic photo spot combining Tokyo Tower and the gate",
+          "The Tokugawa shogun mausoleums can also be visited"
+        ],
+        "ko": [
+          "삼해탈문은 국가 중요 문화재",
+          "도쿄타워와 대문이 함께 나오는 사진이 인기",
+          "도쿠가와 장군가의 영묘도 참배 가능"
+        ]
+      },
       "image": "../images/観光地/増上寺.jpg"
     },
     {
@@ -9495,7 +9497,7 @@ window.RAILWAY_TOURISM = {
         "ko": "도쿄 미드타운"
       },
       "desc_i18n": {
-        "ja": "六本木の複合商業施設。デザイン性の高い建築と緑豊かな広場が特徴。",
+        "ja": "六本木の複合商業施設。デザイン性の高い建築と緑豊かな広場が特徴で、ミッドタウンガーデンや21_21 DESIGN SIGHTなどの文化施設も充実。",
         "zh": "六本木的综合商业设施，以设计感强的建筑和绿意盎然的广场为特色。",
         "en": "A complex commercial facility in Roppongi, known for its design-driven architecture and green plazas.",
         "ko": "롯폰기의 복합 상업 시설. 디자인성이 높은 건축과 녹지가 풍부한 광장이 특징."
@@ -9518,26 +9520,28 @@ window.RAILWAY_TOURISM = {
         "en": "Year-round",
         "ko": "연중"
       },
-      "tips_i18n": [
-        {
-          "ja": "ガーデンエリアは無料で散策できる",
-          "zh": "花园区域可免费漫步",
-          "en": "The garden area is free to stroll",
-          "ko": "가든 에리어는 무료로 산책 가능"
-        },
-        {
-          "ja": "春は桜の名所としても有名",
-          "zh": "春季也是赏樱名所",
-          "en": "Famous for cherry blossoms in spring",
-          "ko": "봄에는 벚꽃 명소로도 유명"
-        },
-        {
-          "ja": "21_21 DESIGN SIGHT は建築ファン必見",
-          "zh": "21_21 DESIGN SIGHT 建筑迷必看",
-          "en": "21_21 DESIGN SIGHT is a must-see for design fans",
-          "ko": "21_21 DESIGN SIGHT는 디자인 팬 필견"
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "ガーデンエリアは無料で散策できる",
+          "春は桜の名所としても有名",
+          "21_21 DESIGN SIGHT は建築ファン必見"
+        ],
+        "zh": [
+          "花园区域可免费漫步",
+          "春季也是赏樱名所",
+          "21_21 DESIGN SIGHT 建筑迷必看"
+        ],
+        "en": [
+          "The garden area is free to stroll",
+          "Famous for cherry blossoms in spring",
+          "21_21 DESIGN SIGHT is a must-see for design fans"
+        ],
+        "ko": [
+          "가든 에리어는 무료로 산책 가능",
+          "봄에는 벚꽃 명소로도 유명",
+          "21_21 DESIGN SIGHT는 디자인 팬 필견"
+        ]
+      },
       "image": "../images/観光地/東京ミッドタウン.jpg"
     },
     {
@@ -9568,7 +9572,7 @@ window.RAILWAY_TOURISM = {
         "ko": "츠키지 시장"
       },
       "desc_i18n": {
-        "ja": "豊洲移転後も残る活気ある市場街。海鮮丼や玉子焼きなど食の宝庫。",
+        "ja": "豊洲移転後も残る活気ある市場街。約400店舗が軒を連ね、海鮮丼・玉子焼き・だし巻きなど食の宝庫。朝から多くの観光客で賑わう。",
         "zh": "丰洲搬迁后仍充满活力的市场街，海鲜丼、玉子烧等美食宝库。",
         "en": "A lively market street that remains after the Toyosu relocation. A food treasure trove of seafood bowls and tamagoyaki.",
         "ko": "도요스 이전 후에도 남은 활기찬 시장가. 해산물 덮밥, 계란말이 등 미식의 보고."
@@ -9591,26 +9595,28 @@ window.RAILWAY_TOURISM = {
         "en": "Early morning to noon",
         "ko": "이른 아침~오전"
       },
-      "tips_i18n": [
-        {
-          "ja": "朝早い時間帯が新鮮な食材でおすすめ",
-          "zh": "清晨时段食材最新鲜",
-          "en": "Early morning offers the freshest food",
-          "ko": "이른 아침 시간대가 신선한 식재료로 추천"
-        },
-        {
-          "ja": "玉子焼きの食べ歩きが定番",
-          "zh": "边走边吃玉子烧是经典",
-          "en": "Eating tamagoyaki while walking is a classic",
-          "ko": "계란말이 먹으면서 걷는 것이 정석"
-        },
-        {
-          "ja": "日曜・祝日は休みの店が多い",
-          "zh": "周日节假日许多店休业",
-          "en": "Many shops close on Sundays and holidays",
-          "ko": "일요일·공휴일은 쉬는 점포가 많음"
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "朝早い時間帯が新鮮な食材でおすすめ",
+          "玉子焼きの食べ歩きが定番",
+          "日曜・祝日は休みの店が多い"
+        ],
+        "zh": [
+          "清晨时段食材最新鲜",
+          "边走边吃玉子烧是经典",
+          "周日节假日许多店休业"
+        ],
+        "en": [
+          "Early morning offers the freshest food",
+          "Eating tamagoyaki while walking is a classic",
+          "Many shops close on Sundays and holidays"
+        ],
+        "ko": [
+          "이른 아침 시간대가 신선한 식재료로 추천",
+          "계란말이 먹으면서 걷는 것이 정석",
+          "일요일·공휴일은 쉬는 점포가 많음"
+        ]
+      },
       "image": "../images/観光地/築地場外市場.jpg"
     },
     {
@@ -9641,7 +9647,7 @@ window.RAILWAY_TOURISM = {
         "ko": "히비야 공원"
       },
       "desc_i18n": {
-        "ja": "日本初の洋風公園として1903年に開園。大噴水や公会堂があり、都会のオアシス。",
+        "ja": "日本初の洋風公園として1903年に開園。大噴水や日比谷公会堂、鶴の噴水などがあり、都会のオアシスとして親しまれる。",
         "zh": "1903年开园的日本首个西式公园，拥有大喷泉与公会堂，是都市绿洲。",
         "en": "Opened in 1903 as Japan's first Western-style park. A downtown oasis with a large fountain and Hibiya Public Hall.",
         "ko": "1903년 개원한 일본 최초의 서양식 공원. 대분수와 공회당이 있으며 도심의 오아시스."
@@ -9664,26 +9670,28 @@ window.RAILWAY_TOURISM = {
         "en": "Year-round",
         "ko": "연중"
       },
-      "tips_i18n": [
-        {
-          "ja": "大噴水周辺は映画のロケ地としても有名",
-          "zh": "大喷泉周边是著名电影取景地",
-          "en": "The fountain area is a famous film location",
-          "ko": "대분수 주변은 영화 촬영지로도 유명"
-        },
-        {
-          "ja": "秋は銀杏並木が見事",
-          "zh": "秋季银杏并木很美",
-          "en": "Beautiful ginkgo avenue in autumn",
-          "ko": "가을에는 은행나무 가로수가 장관"
-        },
-        {
-          "ja": "ランチタイムは近隣のビジネスパーソンで賑わう",
-          "zh": "午间聚集周边上班族",
-          "en": "Bustling with office workers at lunchtime",
-          "ko": "점심시간에는 인근 직장인들로 북적"
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "大噴水周辺は映画のロケ地としても有名",
+          "秋は銀杏並木が見事",
+          "ランチタイムは近隣のビジネスパーソンで賑わう"
+        ],
+        "zh": [
+          "大喷泉周边是著名电影取景地",
+          "秋季银杏并木很美",
+          "午间聚集周边上班族"
+        ],
+        "en": [
+          "The fountain area is a famous film location",
+          "Beautiful ginkgo avenue in autumn",
+          "Bustling with office workers at lunchtime"
+        ],
+        "ko": [
+          "대분수 주변은 영화 촬영지로도 유명",
+          "가을에는 은행나무 가로수가 장관",
+          "점심시간에는 인근 직장인들로 북적"
+        ]
+      },
       "image": "../images/観光地/日比谷公園.jpg"
     },
     {
@@ -9714,7 +9722,7 @@ window.RAILWAY_TOURISM = {
         "ko": "신주쿠 골든가이"
       },
       "desc_i18n": {
-        "ja": "約200軒の小さなバーが密集する昭和レトロな飲み屋街。文化人の聖地としても知られる。",
+        "ja": "約200軒の小さなバーが密集する昭和レトロな飲み屋街。映画や文学に登場する文化人の聖地としても知られる。",
         "zh": "约200家小酒吧密集的昭和复古酒馆街，也是文人墨客的圣地。",
         "en": "A retro Showa-era bar district with about 200 tiny bars. Known as a cultural landmark of Tokyo nightlife.",
         "ko": "약 200개의 작은 바가 밀집한 쇼와 레트로 술집 거리. 문화인의 성지로도 알려짐."
@@ -9737,26 +9745,28 @@ window.RAILWAY_TOURISM = {
         "en": "Night",
         "ko": "밤"
       },
-      "tips_i18n": [
-        {
-          "ja": "昭和レトロな街並みは写真映えする",
-          "zh": "昭和复古街景很出片",
-          "en": "The Showa-retro streets are photogenic",
-          "ko": "쇼와 레트로 거리 풍경이 사진에 잘 담김"
-        },
-        {
-          "ja": "一部の店は紹介制のため事前リサーチを",
-          "zh": "部分店铺为介绍制，建议提前调查",
-          "en": "Some bars are member-only, so research ahead",
-          "ko": "일부 점포는 소개제이므로 사전 조사 필요"
-        },
-        {
-          "ja": "路地の雰囲気を味わうだけでも楽しい",
-          "zh": "光感受巷弄氛围也很有趣",
-          "en": "Enjoyable just to soak up the alley atmosphere",
-          "ko": "골목 분위기를 즐기는 것만으로도 재미있음"
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "昭和レトロな街並みは写真映えする",
+          "一部の店は紹介制のため事前リサーチを",
+          "路地の雰囲気を味わうだけでも楽しい"
+        ],
+        "zh": [
+          "昭和复古街景很出片",
+          "部分店铺为介绍制，建议提前调查",
+          "光感受巷弄氛围也很有趣"
+        ],
+        "en": [
+          "The Showa-retro streets are photogenic",
+          "Some bars are member-only, so research ahead",
+          "Enjoyable just to soak up the alley atmosphere"
+        ],
+        "ko": [
+          "쇼와 레트로 거리 풍경이 사진에 잘 담김",
+          "일부 점포는 소개제이므로 사전 조사 필요",
+          "골목 분위기를 즐기는 것만으로도 재미있음"
+        ]
+      },
       "image": "../images/観光地/新宿ゴールデン街.jpg"
     },
     {
@@ -9787,7 +9797,7 @@ window.RAILWAY_TOURISM = {
         "ko": "요요기 공원"
       },
       "desc_i18n": {
-        "ja": "明治神宮に隣接する都内最大級の公園。広大な芝生広場と緑豊かな森が広がる。",
+        "ja": "明治神宮に隣接する都内最大級の公園。広大な芝生広場と緑豊かな森が広がり、週末は多くの人で賑わう。",
         "zh": "毗邻明治神宫的东京最大级公园，拥有广阔草坪与茂密森林。",
         "en": "One of Tokyo's largest parks, next to Meiji Jingu, with vast lawns and lush forest.",
         "ko": "메이지 신궁에 인접한 도쿄 최대급 공원. 넓은 잔디밭과 푸르른 숲이 펼쳐짐."
@@ -9810,26 +9820,28 @@ window.RAILWAY_TOURISM = {
         "en": "Year-round",
         "ko": "연중"
       },
-      "tips_i18n": [
-        {
-          "ja": "春は桜、秋は紅葉の名所",
-          "zh": "春季赏樱、秋季赏枫的名所",
-          "en": "Famous for cherry blossoms in spring and autumn colors",
-          "ko": "봄 벚꽃, 가을 단풍 명소"
-        },
-        {
-          "ja": "週末はフリーマーケットやイベントが開催されることも",
-          "zh": "周末有时举办跳蚤市场和活动",
-          "en": "Weekend flea markets and events sometimes held",
-          "ko": "주말에는 플리마켓이나 이벤트가 열리기도 함"
-        },
-        {
-          "ja": "原宿・表参道観光のついでに立ち寄りやすい",
-          "zh": "适合在原宿表参道观光顺路到访",
-          "en": "Easy stop while sightseeing Harajuku/Omotesando",
-          "ko": "하라주쿠·오모테산도 관광 중 들르기 좋음"
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "春は桜、秋は紅葉の名所",
+          "週末はフリーマーケットやイベントが開催されることも",
+          "原宿・表参道観光のついでに立ち寄りやすい"
+        ],
+        "zh": [
+          "春季赏樱、秋季赏枫的名所",
+          "周末有时举办跳蚤市场和活动",
+          "适合在原宿表参道观光顺路到访"
+        ],
+        "en": [
+          "Famous for cherry blossoms in spring and autumn colors",
+          "Weekend flea markets and events sometimes held",
+          "Easy stop while sightseeing Harajuku/Omotesando"
+        ],
+        "ko": [
+          "봄 벚꽃, 가을 단풍 명소",
+          "주말에는 플리마켓이나 이벤트가 열리기도 함",
+          "하라주쿠·오모테산도 관광 중 들르기 좋음"
+        ]
+      },
       "image": "../images/観光地/代々木公園.jpg"
     },
     {
@@ -9861,7 +9873,7 @@ window.RAILWAY_TOURISM = {
         "ko": "리쿠기엔 정원"
       },
       "desc_i18n": {
-        "ja": "徳川五代将軍綱吉の側用人・柳沢吉保が造営した回遊式築山泉水庭園。",
+        "ja": "江戸時代に徳川五代将軍綱吉の側用人・柳沢吉保が造営した回遊式築山泉水庭園。都内随一の大名庭園として知られる。",
         "zh": "由德川五代将军纲吉的侧用人柳泽吉保营造的回游式筑山泉水庭园。",
         "en": "A strolling-style garden built by Yanagisawa Yoshiyasu, chamberlain to the 5th Tokugawa shogun.",
         "ko": "도쿠가와 5대 쇼군 쓰나요시의 측근 야나기사와 요시야스가 조성한 회유식 정원."
@@ -9884,26 +9896,28 @@ window.RAILWAY_TOURISM = {
         "en": "Spring (weeping cherry) / Autumn (fall colors)",
         "ko": "봄（수양벚꽃）·가을（단풍）"
       },
-      "tips_i18n": [
-        {
-          "ja": "春の枝垂れ桜はライトアップも行われる",
-          "zh": "春季垂枝樱有夜间点灯",
-          "en": "Spring weeping cherry blossoms are lit up at night",
-          "ko": "봄 수양벚꽃은 라이트업도 진행"
-        },
-        {
-          "ja": "茶屋では抹茶を楽しめる",
-          "zh": "茶屋可品尝抹茶",
-          "en": "Matcha is available at the teahouse",
-          "ko": "찻집에서 말차를 즐길 수 있음"
-        },
-        {
-          "ja": "紅葉シーズンは夜間特別公開あり",
-          "zh": "红叶季有夜间特别开放",
-          "en": "Special night openings during autumn colors",
-          "ko": "단풍 시즌에는 야간 특별 공개 있음"
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "春の枝垂れ桜はライトアップも行われる",
+          "茶屋では抹茶を楽しめる",
+          "紅葉シーズンは夜間特別公開あり"
+        ],
+        "zh": [
+          "春季垂枝樱有夜间点灯",
+          "茶屋可品尝抹茶",
+          "红叶季有夜间特别开放"
+        ],
+        "en": [
+          "Spring weeping cherry blossoms are lit up at night",
+          "Matcha is available at the teahouse",
+          "Special night openings during autumn colors"
+        ],
+        "ko": [
+          "봄 수양벚꽃은 라이트업도 진행",
+          "찻집에서 말차를 즐길 수 있음",
+          "단풍 시즌에는 야간 특별 공개 있음"
+        ]
+      },
       "image": "../images/観光地/六義園.jpg"
     },
     {
@@ -9934,7 +9948,7 @@ window.RAILWAY_TOURISM = {
         "ko": "네즈 신사"
       },
       "desc_i18n": {
-        "ja": "1706年に徳川綱吉が造営した社殿が現存。楼門や本殿などが重要文化財。",
+        "ja": "1706年に徳川綱吉が造営した社殿が現存する由緒ある神社。楼門・本殿・唐門などが重要文化財に指定され、境内のつつじ苑も有名。",
         "zh": "现存1706年德川纲吉营造的社殿，楼门、正殿等为国家重要文化财产。",
         "en": "Founded in 1706 by Tokugawa Tsunayoshi, with Important Cultural Property buildings and a famous azalea garden.",
         "ko": "1706년 도쿠가와 쓰나요시가 조성한 사전이 현존. 누문, 본전 등이 중요 문화재."
@@ -9957,26 +9971,28 @@ window.RAILWAY_TOURISM = {
         "en": "Year-round (azaleas mid-April to early May)",
         "ko": "연중（진달래는 4월 중순~5월 초）"
       },
-      "tips_i18n": [
-        {
-          "ja": "文豪・夏目漱石も通った神社",
-          "zh": "文豪夏目漱石也曾造访的神社",
-          "en": "Frequented by the novelist Natsume Soseki",
-          "ko": "문호 나쓰메 소세키도 다니던 신사"
-        },
-        {
-          "ja": "つつじ苑は約100種3000株",
-          "zh": "杜鹃苑约100种3000株",
-          "en": "The azalea garden has about 100 varieties / 3,000 plants",
-          "ko": "진달래원은 약 100종 3,000그루"
-        },
-        {
-          "ja": "千駄木・谷中の散策コースに組み込める",
-          "zh": "可并入千驮木·谷中散步路线",
-          "en": "Fits into a Sentagaya/Yanaka walking route",
-          "ko": "센다기·야나카 산책 코스에 포함 가능"
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "文豪・夏目漱石も通った神社",
+          "つつじ苑は約100種3000株",
+          "千駄木・谷中の散策コースに組み込める"
+        ],
+        "zh": [
+          "文豪夏目漱石也曾造访的神社",
+          "杜鹃苑约100种3000株",
+          "可并入千驮木·谷中散步路线"
+        ],
+        "en": [
+          "Frequented by the novelist Natsume Soseki",
+          "The azalea garden has about 100 varieties / 3,000 plants",
+          "Fits into a Sentagaya/Yanaka walking route"
+        ],
+        "ko": [
+          "문호 나쓰메 소세키도 다니던 신사",
+          "진달래원은 약 100종 3,000그루",
+          "센다기·야나카 산책 코스에 포함 가능"
+        ]
+      },
       "image": "../images/観光地/根津神社.jpg"
     },
     {
@@ -10007,7 +10023,7 @@ window.RAILWAY_TOURISM = {
         "ko": "야나카 긴자 상점가"
       },
       "desc_i18n": {
-        "ja": "昭和の風情が残る下町商店街。約60店舗が軒を連ね、食べ歩きと猫スポットで人気。",
+        "ja": "昭和の風情が残る下町商店街。約60店舗が軒を連ね、食べ歩きグルメや猫スポットとして人気。夕暮れの夕焼けだんだんが有名。",
         "zh": "保留昭和风情的下町商店街，约60家店铺林立，是边走边吃与撸猫的人气地。",
         "en": "A nostalgic Showa-era shopping street with about 60 shops, popular for street food and cat spotting.",
         "ko": "쇼와 정취가 남은 하정 상점가. 약 60개 점포가 늘어서 있으며 먹거리와 고양이 명소로 인기."
@@ -10030,26 +10046,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime to evening",
         "ko": "낮~저녁"
       },
-      "tips_i18n": [
-        {
-          "ja": "夕焼けだんだんは日没前がおすすめ",
-          "zh": "夕阳阶梯建议日落前前往",
-          "en": "Visit Yuyake-dandan before sunset",
-          "ko": "석양 계단은 해지기 전 추천"
-        },
-        {
-          "ja": "谷中ぎんざ名物の肉のサトウのメンチカツ",
-          "zh": "谷中银座名物肉之SATO炸肉饼",
-          "en": "Try the famous menchi-katsu at Niku no Sato",
-          "ko": "야나카 긴자 명물 니쿠노사토의 멘치카츠"
-        },
-        {
-          "ja": "「谷根千」散策の中心",
-          "zh": "「谷根千」散步的中心",
-          "en": "The heart of the \"Yanesen\" walking area",
-          "ko": "\"야네센\" 산책의 중심"
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "夕焼けだんだんは日没前がおすすめ",
+          "谷中ぎんざ名物の肉のサトウのメンチカツ",
+          "「谷根千」散策の中心"
+        ],
+        "zh": [
+          "夕阳阶梯建议日落前前往",
+          "谷中银座名物肉之SATO炸肉饼",
+          "「谷根千」散步的中心"
+        ],
+        "en": [
+          "Visit Yuyake-dandan before sunset",
+          "Try the famous menchi-katsu at Niku no Sato",
+          "The heart of the \"Yanesen\" walking area"
+        ],
+        "ko": [
+          "석양 계단은 해지기 전 추천",
+          "야나카 긴자 명물 니쿠노사토의 멘치카츠",
+          "\"야네센\" 산책의 중심"
+        ]
+      },
       "image": "../images/観光地/谷中銀座商店街.jpg"
     },
     {
@@ -10081,7 +10099,7 @@ window.RAILWAY_TOURISM = {
         "ko": "국립서양미술관"
       },
       "desc_i18n": {
-        "ja": "ル・コルビュジエ設計の本館が世界遺産に登録。モネやルノワールなど西洋美術の名作を多数所蔵。",
+        "ja": "ル・コルビュジエ設計の本館が世界遺産に登録されている美術館。モネやルノワールなど西洋美術の名作を多数所蔵。",
         "zh": "勒·柯布西耶设计的主馆为世界遗产，收藏莫奈、雷诺阿等西洋美术名作。",
         "en": "A UNESCO World Heritage building designed by Le Corbusier, housing masterpieces of Western art from Monet to Rodin.",
         "ko": "르 코르뷔지에가 설계한 본관이 세계유산으로 등록. 모네, 르누아르 등 서양 미술 명작 다수 소장."
@@ -10104,26 +10122,28 @@ window.RAILWAY_TOURISM = {
         "en": "Year-round",
         "ko": "연중"
       },
-      "tips_i18n": [
-        {
-          "ja": "本館建築はユネスコ世界遺産「ル・コルビュジエの建築作品」の一部",
-          "zh": "主馆建筑是联合国教科文组织世界遗产的一部分",
-          "en": "The main building is part of the Le Corbusier UNESCO World Heritage listing",
-          "ko": "본관 건축은 유네스코 세계유산의 일부"
-        },
-        {
-          "ja": "ロダンの「考える人」は庭で無料鑑賞できる",
-          "zh": "罗丹的《思想者》可在庭园免费观赏",
-          "en": "Rodin's Thinker can be viewed free in the garden",
-          "ko": "로댕의 「생각하는 사람」은 정원에서 무료 감상 가능"
-        },
-        {
-          "ja": "月曜休館",
-          "zh": "周一闭馆",
-          "en": "Closed on Mondays",
-          "ko": "월요일 휴관"
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "本館建築はユネスコ世界遺産「ル・コルビュジエの建築作品」の一部",
+          "ロダンの「考える人」は庭で無料鑑賞できる",
+          "月曜休館"
+        ],
+        "zh": [
+          "主馆建筑是联合国教科文组织世界遗产的一部分",
+          "罗丹的《思想者》可在庭园免费观赏",
+          "周一闭馆"
+        ],
+        "en": [
+          "The main building is part of the Le Corbusier UNESCO World Heritage listing",
+          "Rodin's Thinker can be viewed free in the garden",
+          "Closed on Mondays"
+        ],
+        "ko": [
+          "본관 건축은 유네스코 세계유산의 일부",
+          "로댕의 「생각하는 사람」은 정원에서 무료 감상 가능",
+          "월요일 휴관"
+        ]
+      },
       "image": "../images/観光地/国立西洋美術館.jpg"
     },
     {
@@ -10154,7 +10174,7 @@ window.RAILWAY_TOURISM = {
         "ko": "에도 도쿄 박물관"
       },
       "desc_i18n": {
-        "ja": "江戸から東京までの歴史・文化を体感できる博物館。実物大の日本橋模型が迫力。",
+        "ja": "江戸から東京までの歴史・文化を体感できる博物館。実物大の日本橋模型やジオラマなど迫力の展示が魅力。",
         "zh": "可体验江户到东京历史文化的博物馆，实物大日本桥模型极具震撼。",
         "en": "A museum of Edo-Tokyo history and culture with a full-scale Nihonbashi bridge model.",
         "ko": "에도에서 도쿄까지의 역사·문화를 체험할 수 있는 박물관. 실물 크기 니혼바시 모형이 압권."
@@ -10177,26 +10197,28 @@ window.RAILWAY_TOURISM = {
         "en": "Year-round",
         "ko": "연중"
       },
-      "tips_i18n": [
-        {
-          "ja": "日本橋の実物大模型は圧巻",
-          "zh": "实物大日本桥模型非常震撼",
-          "en": "The full-scale Nihonbashi model is stunning",
-          "ko": "실물 크기 니혼바시 모형은 압권"
-        },
-        {
-          "ja": "建物は解体・改修工事中のため要確認（2027年再開予定）",
-          "zh": "建筑正处拆除改建中请确认（预计2027年重开）",
-          "en": "Building under renovation (reopening planned 2027) - check before visiting",
-          "ko": "건물은 해체·개수 공사 중이므로 확인 필요（2027년 재개관 예정）"
-        },
-        {
-          "ja": "両国国技館と合わせて観光できる",
-          "zh": "可与两国国技馆一并观光",
-          "en": "Combine with a visit to Ryogoku Kokugikan",
-          "ko": "료고쿠 국기관과 함께 관광 가능"
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "日本橋の実物大模型は圧巻",
+          "建物は解体・改修工事中のため要確認（2027年再開予定）",
+          "両国国技館と合わせて観光できる"
+        ],
+        "zh": [
+          "实物大日本桥模型非常震撼",
+          "建筑正处拆除改建中请确认（预计2027年重开）",
+          "可与两国国技馆一并观光"
+        ],
+        "en": [
+          "The full-scale Nihonbashi model is stunning",
+          "Building under renovation (reopening planned 2027) - check before visiting",
+          "Combine with a visit to Ryogoku Kokugikan"
+        ],
+        "ko": [
+          "실물 크기 니혼바시 모형은 압권",
+          "건물은 해체·개수 공사 중이므로 확인 필요（2027년 재개관 예정）",
+          "료고쿠 국기관과 함께 관광 가능"
+        ]
+      },
       "image": "../images/観光地/江戸東京博物館.jpg"
     },
     {
@@ -10228,7 +10250,7 @@ window.RAILWAY_TOURISM = {
         "ko": "가메이도 텐진 신사"
       },
       "desc_i18n": {
-        "ja": "菅原道真公を祀る「東の天満宮」。池に架かる太鼓橋と藤棚が有名。",
+        "ja": "菅原道真公を祀る「東の天満宮」。境内の池に架かる太鼓橋と藤棚が有名で、藤の名所として親しまれる。",
         "zh": "供奉菅原道真公的「东之天满宫」，以池上太鼓桥与紫藤架闻名。",
         "en": "A Tenjin shrine to Sugawara no Michizane, famous for its drum bridge and wisteria trellis.",
         "ko": "스가와라 미치자네를 모신 「동쪽 텐만구」. 연못 위 북 모양 다리와 등나무 시렁이 유명."
@@ -10251,26 +10273,28 @@ window.RAILWAY_TOURISM = {
         "en": "Late Apr-early May (wisteria)",
         "ko": "4월 하순~5월 상순（등나무）"
       },
-      "tips_i18n": [
-        {
-          "ja": "藤の季節はライトアップも開催",
-          "zh": "紫藤季举办夜间点灯",
-          "en": "The wisteria season features night illuminations",
-          "ko": "등나무 시즌에는 라이트업도 개최"
-        },
-        {
-          "ja": "太鼓橋からの眺めが美しい",
-          "zh": "太鼓桥上的眺望很美",
-          "en": "Beautiful views from the drum bridge",
-          "ko": "북 모양 다리에서의 조망이 아름다움"
-        },
-        {
-          "ja": "学業成就の神様として有名",
-          "zh": "以学业成就之神闻名",
-          "en": "Famous as a god of academic success",
-          "ko": "학업 성취의 신으로 유명"
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "藤の季節はライトアップも開催",
+          "太鼓橋からの眺めが美しい",
+          "学業成就の神様として有名"
+        ],
+        "zh": [
+          "紫藤季举办夜间点灯",
+          "太鼓桥上的眺望很美",
+          "以学业成就之神闻名"
+        ],
+        "en": [
+          "The wisteria season features night illuminations",
+          "Beautiful views from the drum bridge",
+          "Famous as a god of academic success"
+        ],
+        "ko": [
+          "등나무 시즌에는 라이트업도 개최",
+          "북 모양 다리에서의 조망이 아름다움",
+          "학업 성취의 신으로 유명"
+        ]
+      },
       "image": "../images/観光地/亀戸天神社.jpg"
     },
     {
@@ -10301,7 +10325,7 @@ window.RAILWAY_TOURISM = {
         "ko": "센가쿠지 절"
       },
       "desc_i18n": {
-        "ja": "赤穂浪士の眠る寺として有名な曹洞宗の寺院。大石内蔵助ら47士の墓所がある。",
+        "ja": "赤穂浪士の眠る寺として有名な曹洞宗の寺院。大石内蔵助ら47士の墓所があり、義士祭（12月14日）には多くの参拝者が訪れる。",
         "zh": "以安葬赤穗浪士闻名的曹洞宗寺院，有大量内藏助等47士的墓所。",
         "en": "A Soto Zen temple known as the resting place of the 47 Ronin, including Oishi Kuranosuke.",
         "ko": "아코 낭사의 잠든 사찰로 유명한 조동종 사원. 오이시 쿠라노스케 등 47사의 묘소가 있음."
@@ -10324,26 +10348,28 @@ window.RAILWAY_TOURISM = {
         "en": "Year-round",
         "ko": "연중"
       },
-      "tips_i18n": [
-        {
-          "ja": "義士祭は毎年12月14日",
-          "zh": "义士祭每年12月14日",
-          "en": "Gishi-sai festival held every Dec 14",
-          "ko": "의사제는 매년 12월 14일"
-        },
-        {
-          "ja": "大石内蔵助の墓所は必見",
-          "zh": "大量内藏助墓所必看",
-          "en": "Oishi Kuranosuke's grave is a must-see",
-          "ko": "오이시 쿠라노스케의 묘소는 필견"
-        },
-        {
-          "ja": "山門は国の重要文化財",
-          "zh": "山门为国家重要文化财产",
-          "en": "The main gate is an Important Cultural Property",
-          "ko": "산문은 국가 중요 문화재"
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "義士祭は毎年12月14日",
+          "大石内蔵助の墓所は必見",
+          "山門は国の重要文化財"
+        ],
+        "zh": [
+          "义士祭每年12月14日",
+          "大量内藏助墓所必看",
+          "山门为国家重要文化财产"
+        ],
+        "en": [
+          "Gishi-sai festival held every Dec 14",
+          "Oishi Kuranosuke's grave is a must-see",
+          "The main gate is an Important Cultural Property"
+        ],
+        "ko": [
+          "의사제는 매년 12월 14일",
+          "오이시 쿠라노스케의 묘소는 필견",
+          "산문은 국가 중요 문화재"
+        ]
+      },
       "image": "../images/観光地/泉岳寺.jpg"
     },
     {
@@ -10374,7 +10400,7 @@ window.RAILWAY_TOURISM = {
         "ko": "고토쿠지 절"
       },
       "desc_i18n": {
-        "ja": "「招き猫発祥の地」として知られる寺院。数千体の招き猫が並ぶ猫好きの聖地。",
+        "ja": "「招き猫発祥の地」として知られる寺院。境内には参拝者が奉納した数千体の招き猫が並び、猫好きの聖地となっている。",
         "zh": "以「招财猫发祥地」闻名的寺院，数千尊招财猫并列，是猫奴圣地。",
         "en": "Known as the birthplace of the maneki-neko (beckoning cat). Thousands of cats line the grounds, a pilgrimage site for cat lovers.",
         "ko": "「고양이를 부르는 고양이」 발상지로 알려진 사찰. 수천 마리의 마네키네코가 늘어선 고양이 애호가의 성지."
@@ -10397,26 +10423,28 @@ window.RAILWAY_TOURISM = {
         "en": "Year-round",
         "ko": "연중"
       },
-      "tips_i18n": [
-        {
-          "ja": "招き猫の奉納所には数千体の招き猫",
-          "zh": "奉纳所里供奉着数千尊招财猫",
-          "en": "Thousands of maneki-neko cats at the offering hall",
-          "ko": "봉납소에는 수천 마리의 마네키네코"
-        },
-        {
-          "ja": "井伊直弼の墓所もある",
-          "zh": "也有井伊直弼的墓所",
-          "en": "Tomb of Ii Naosuke is also here",
-          "ko": "이이 나오스케의 묘소도 있음"
-        },
-        {
-          "ja": "招き猫は帰りに購入して奉納するのが人気",
-          "zh": "回程购买招财猫并奉纳是流行做法",
-          "en": "Popular to buy a cat on the way out and offer it back",
-          "ko": "귀가길에 마네키네코를 사서 봉납하는 것이 인기"
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "招き猫の奉納所には数千体の招き猫",
+          "井伊直弼の墓所もある",
+          "招き猫は帰りに購入して奉納するのが人気"
+        ],
+        "zh": [
+          "奉纳所里供奉着数千尊招财猫",
+          "也有井伊直弼的墓所",
+          "回程购买招财猫并奉纳是流行做法"
+        ],
+        "en": [
+          "Thousands of maneki-neko cats at the offering hall",
+          "Tomb of Ii Naosuke is also here",
+          "Popular to buy a cat on the way out and offer it back"
+        ],
+        "ko": [
+          "봉납소에는 수천 마리의 마네키네코",
+          "이이 나오스케의 묘소도 있음",
+          "귀가길에 마네키네코를 사서 봉납하는 것이 인기"
+        ]
+      },
       "image": "../images/観光地/豪徳寺.jpg"
     },
     {
@@ -10447,7 +10475,7 @@ window.RAILWAY_TOURISM = {
         "ko": "테츠가쿠도 공원"
       },
       "desc_i18n": {
-        "ja": "哲学者・井上円了が創設した世界唯一の「哲学のテーマパーク」。",
+        "ja": "哲学者・井上円了が創設した世界唯一の「哲学のテーマパーク」。哲学の概念を空間で表現した庭園で、六賢台や哲理門などがある。",
         "zh": "哲学家井上圆了创建的世界唯一「哲学主题公园」。",
         "en": "The world's only \"philosophy theme park,\" created by philosopher Inoue Enryo.",
         "ko": "철학자 이노우에 엔료가 창설한 세계 유일의 「철학 테마파크」."
@@ -10470,26 +10498,28 @@ window.RAILWAY_TOURISM = {
         "en": "Year-round",
         "ko": "연중"
       },
-      "tips_i18n": [
-        {
-          "ja": "哲理門や六賢台など哲学にちなんだ建造物が点在",
-          "zh": "哲理门、六贤台等哲学主题建筑散布",
-          "en": "Philosophy-themed structures dot the grounds",
-          "ko": "철리문, 육현대 등 철학 관련 건조물이 곳곳에"
-        },
-        {
-          "ja": "春は桜、秋は紅葉の名所",
-          "zh": "春樱秋枫的名所",
-          "en": "Cherry blossoms in spring, autumn colors in fall",
-          "ko": "봄 벚꽃, 가을 단풍 명소"
-        },
-        {
-          "ja": "園内の建物の一部は登録有形文化財",
-          "zh": "园内部分建筑为登录有形文化财",
-          "en": "Some buildings are Registered Tangible Cultural Properties",
-          "ko": "원내 건물 일부는 등록 유형 문화재"
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "哲理門や六賢台など哲学にちなんだ建造物が点在",
+          "春は桜、秋は紅葉の名所",
+          "園内の建物の一部は登録有形文化財"
+        ],
+        "zh": [
+          "哲理门、六贤台等哲学主题建筑散布",
+          "春樱秋枫的名所",
+          "园内部分建筑为登录有形文化财"
+        ],
+        "en": [
+          "Philosophy-themed structures dot the grounds",
+          "Cherry blossoms in spring, autumn colors in fall",
+          "Some buildings are Registered Tangible Cultural Properties"
+        ],
+        "ko": [
+          "철리문, 육현대 등 철학 관련 건조물이 곳곳에",
+          "봄 벚꽃, 가을 단풍 명소",
+          "원내 건물 일부는 등록 유형 문화재"
+        ]
+      },
       "image": "../images/観光地/哲学堂公園.jpg"
     },
     {
@@ -10520,7 +10550,7 @@ window.RAILWAY_TOURISM = {
         "ko": "젠푸쿠지 공원"
       },
       "desc_i18n": {
-        "ja": "井の頭公園と並ぶ杉並区のオアシス。上池・下池を中心にした緑豊かな公園。",
+        "ja": "井の頭公園と並ぶ杉並区のオアシス。上池・下池の2つの池を中心にした緑豊かな公園で、カワセミなど野鳥観察の名所。",
         "zh": "与井之头公园并列的杉并区绿洲，以上池下池为中心的绿意公园。",
         "en": "A green oasis in Suginami with two ponds, a renowned birdwatching spot.",
         "ko": "이노카시라 공원과 나란히 손꼽히는 스기나미구의 오아시스. 상연못·하연못을 중심으로 한 녹음 공원."
@@ -10543,26 +10573,28 @@ window.RAILWAY_TOURISM = {
         "en": "Year-round",
         "ko": "연중"
       },
-      "tips_i18n": [
-        {
-          "ja": "カワセミが生息しバードウォッチングに人気",
-          "zh": "有翠鸟栖息，是观鸟胜地",
-          "en": "Home to kingfishers, popular for birdwatching",
-          "ko": "물총새가 서식하며 버드워칭으로 인기"
-        },
-        {
-          "ja": "池周辺の散策路が整備されている",
-          "zh": "池畔步道完善",
-          "en": "Well-maintained walking paths around the ponds",
-          "ko": "연못 주변 산책로가 정비되어 있음"
-        },
-        {
-          "ja": "井の頭公園まで徒歩圏",
-          "zh": "步行可达井之头公园",
-          "en": "Within walking distance of Inokashira Park",
-          "ko": "이노카시라 공원까지 도보권"
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "カワセミが生息しバードウォッチングに人気",
+          "池周辺の散策路が整備されている",
+          "井の頭公園まで徒歩圏"
+        ],
+        "zh": [
+          "有翠鸟栖息，是观鸟胜地",
+          "池畔步道完善",
+          "步行可达井之头公园"
+        ],
+        "en": [
+          "Home to kingfishers, popular for birdwatching",
+          "Well-maintained walking paths around the ponds",
+          "Within walking distance of Inokashira Park"
+        ],
+        "ko": [
+          "물총새가 서식하며 버드워칭으로 인기",
+          "연못 주변 산책로가 정비되어 있음",
+          "이노카시라 공원까지 도보권"
+        ]
+      },
       "image": "../images/観光地/善福寺公園.jpg"
     },
     {
@@ -10593,7 +10625,7 @@ window.RAILWAY_TOURISM = {
         "ko": "히카리가오카 공원"
       },
       "desc_i18n": {
-        "ja": "練馬区と板橋区にまたがる都内最大級の公園。広大な雑木林とバラ園がある。",
+        "ja": "練馬区と板橋区にまたがる都内最大級の公園。旧成田山の森を生かした広大な雑木林とバラ園、野球場など多彩な施設がある。",
         "zh": "横跨练马区与板桥区的东京最大级公园，拥有广阔杂木林与玫瑰园。",
         "en": "One of Tokyo's largest parks, spanning Nerima and Itabashi, with vast woodland and a rose garden.",
         "ko": "네리마구와 이타바시구에 걸친 도쿄 최대급 공원. 넓은 잡목림과 장미원이 있음."
@@ -10616,26 +10648,28 @@ window.RAILWAY_TOURISM = {
         "en": "Year-round",
         "ko": "연중"
       },
-      "tips_i18n": [
-        {
-          "ja": "バラ園は春と秋に見頃",
-          "zh": "玫瑰园春季秋季最美",
-          "en": "Rose garden best in spring and autumn",
-          "ko": "장미원은 봄과 가을에 절정"
-        },
-        {
-          "ja": "雑木林は野鳥観察にも人気",
-          "zh": "杂木林也适合观鸟",
-          "en": "Woodland popular for birdwatching",
-          "ko": "잡목림은 조류 관찰에도 인기"
-        },
-        {
-          "ja": "グラウンドやテニスコートも充実",
-          "zh": "球场与网球场等设施完善",
-          "en": "Well-equipped with sports fields and tennis courts",
-          "ko": "운동장, 테니스 코트 등 시설 충실"
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "バラ園は春と秋に見頃",
+          "雑木林は野鳥観察にも人気",
+          "グラウンドやテニスコートも充実"
+        ],
+        "zh": [
+          "玫瑰园春季秋季最美",
+          "杂木林也适合观鸟",
+          "球场与网球场等设施完善"
+        ],
+        "en": [
+          "Rose garden best in spring and autumn",
+          "Woodland popular for birdwatching",
+          "Well-equipped with sports fields and tennis courts"
+        ],
+        "ko": [
+          "장미원은 봄과 가을에 절정",
+          "잡목림은 조류 관찰에도 인기",
+          "운동장, 테니스 코트 등 시설 충실"
+        ]
+      },
       "image": "../images/観光地/光が丘公園.jpg"
     },
     {
@@ -10666,7 +10700,7 @@ window.RAILWAY_TOURISM = {
         "ko": "오지 이나리 신사"
       },
       "desc_i18n": {
-        "ja": "「王子稲荷」として親しまれる関東最古の稲荷神社。狐の石像が多数安置されている。",
+        "ja": "「王子稲荷」として親しまれる関東最古の稲荷神社。桜の名所としても知られ、狐の石像が多数安置されている。",
         "zh": "被亲切称为「王子稻荷」的关东最古老稻荷神社，供奉众多狐狸石像。",
         "en": "One of the Kanto region's oldest Inari shrines, famous for its fox statues and cherry blossoms.",
         "ko": "\"오지 이나리\"로 친숙한 간토 최고(最古)의 이나리 신사. 여우 석상이 다수 안치."
@@ -10689,26 +10723,28 @@ window.RAILWAY_TOURISM = {
         "en": "Year-round",
         "ko": "연중"
       },
-      "tips_i18n": [
-        {
-          "ja": "江戸時代の「王子狐の行列」が有名",
-          "zh": "江户时代的「王子狐狸行列」很有名",
-          "en": "Famous for the Edo-era \"Oji Fox Parade\"",
-          "ko": "에도 시대의 「오지 여우 행렬」이 유명"
-        },
-        {
-          "ja": "境内の桜は開花時期にライトアップ",
-          "zh": "院内樱花花期有点灯",
-          "en": "Cherry blossoms lit up in season",
-          "ko": "경내 벚꽃은 개화기에 라이트업"
-        },
-        {
-          "ja": "音無川沿いの桜並木が美しい",
-          "zh": "音无川沿岸的樱花并木很美",
-          "en": "Beautiful cherry avenue along Otonashigawa river",
-          "ko": "오토나시가와 강변 벚꽃 가로수가 아름다움"
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "江戸時代の「王子狐の行列」が有名",
+          "境内の桜は開花時期にライトアップ",
+          "音無川沿いの桜並木が美しい"
+        ],
+        "zh": [
+          "江户时代的「王子狐狸行列」很有名",
+          "院内樱花花期有点灯",
+          "音无川沿岸的樱花并木很美"
+        ],
+        "en": [
+          "Famous for the Edo-era \"Oji Fox Parade\"",
+          "Cherry blossoms lit up in season",
+          "Beautiful cherry avenue along Otonashigawa river"
+        ],
+        "ko": [
+          "에도 시대의 「오지 여우 행렬」이 유명",
+          "경내 벚꽃은 개화기에 라이트업",
+          "오토나시가와 강변 벚꽃 가로수가 아름다움"
+        ]
+      },
       "image": "../images/観光地/王子稲荷神社.jpg"
     },
     {
@@ -10740,7 +10776,7 @@ window.RAILWAY_TOURISM = {
         "ko": "호리키리 창포원"
       },
       "desc_i18n": {
-        "ja": "江戸時代から続く花菖蒲の名所。約6000株の花菖蒲が咲き誇る。",
+        "ja": "江戸時代から続く花菖蒲の名所。約6000株の花菖蒲が咲き誇る6月の見頃には、多くの花見客で賑わう。",
         "zh": "江户时代延续至今的花菖蒲名所，约6000株花菖蒲盛开。",
         "en": "An iris garden since the Edo period, with about 6,000 irises blooming in June.",
         "ko": "에도 시대부터 이어져 온 창포 명소. 약 6,000그루의 창포가 만개."
@@ -10763,26 +10799,28 @@ window.RAILWAY_TOURISM = {
         "en": "Early-mid June (irises)",
         "ko": "6월 상순~중순（창포）"
       },
-      "tips_i18n": [
-        {
-          "ja": "6月の花菖蒲まつりが有名",
-          "zh": "6月花菖蒲祭很有名",
-          "en": "The June iris festival is famous",
-          "ko": "6월 창포 축제가 유명"
-        },
-        {
-          "ja": "江戸時代の浮世絵にも描かれた名所",
-          "zh": "江户时代浮世绘也曾描绘的名所",
-          "en": "A famous spot depicted in Edo-era ukiyo-e",
-          "ko": "에도 시대 우키요에에도 그려진 명소"
-        },
-        {
-          "ja": "周辺は「堀切」の下町情緒が残る",
-          "zh": "周边保留堀切的下町风情",
-          "en": "The surrounding Horikiri area keeps downtown charm",
-          "ko": "주변은 호리키리의 하정 정취가 남아 있음"
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "6月の花菖蒲まつりが有名",
+          "江戸時代の浮世絵にも描かれた名所",
+          "周辺は「堀切」の下町情緒が残る"
+        ],
+        "zh": [
+          "6月花菖蒲祭很有名",
+          "江户时代浮世绘也曾描绘的名所",
+          "周边保留堀切的下町风情"
+        ],
+        "en": [
+          "The June iris festival is famous",
+          "A famous spot depicted in Edo-era ukiyo-e",
+          "The surrounding Horikiri area keeps downtown charm"
+        ],
+        "ko": [
+          "6월 창포 축제가 유명",
+          "에도 시대 우키요에에도 그려진 명소",
+          "주변은 호리키리의 하정 정취가 남아 있음"
+        ]
+      },
       "image": "../images/観光地/堀切菖蒲園.jpg"
     },
     {
@@ -10814,7 +10852,7 @@ window.RAILWAY_TOURISM = {
         "ko": "메구로 가죠엔"
       },
       "desc_i18n": {
-        "ja": "大正時代から続く「昭和の竜宮城」。豪華な装飾の建築と百段階段が見どころ。",
+        "ja": "大正時代から続く「昭和の竜宮城」。豪華な装飾が施された建築と、江戸時代の美術品を展示する百段階段が見どころ。",
         "zh": "大正时代延续至今的「昭和龙宫城」，以豪华装饰建筑与百段阶梯为看点。",
         "en": "A \"Showa-era Dragon Palace\" since the Taisho period, famed for its ornate interiors and Hyakudan Kaidan staircase.",
         "ko": "다이쇼 시대부터 이어져 온 「쇼와의 용궁성」. 호화로운 장식 건축과 백단 계단이 볼거리."
@@ -10837,26 +10875,28 @@ window.RAILWAY_TOURISM = {
         "en": "Year-round",
         "ko": "연중"
       },
-      "tips_i18n": [
-        {
-          "ja": "「百段階段」は昭和初期の芸術の粋",
-          "zh": "「百段阶梯」凝聚昭和初期艺术精华",
-          "en": "The \"Hyakudan Kaidan\" is a masterpiece of early Showa art",
-          "ko": "「백단 계단」은 쇼와 초기 예술의 정수"
-        },
-        {
-          "ja": "結婚式場としても有名",
-          "zh": "作为婚礼会场也很有名",
-          "en": "Also famous as a wedding venue",
-          "ko": "결혼식장으로도 유명"
-        },
-        {
-          "ja": "ランチやスイーツも楽しめる",
-          "zh": "可享用餐点与甜点",
-          "en": "Lunch and sweets are also available",
-          "ko": "런치와 디저트도 즐길 수 있음"
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "「百段階段」は昭和初期の芸術の粋",
+          "結婚式場としても有名",
+          "ランチやスイーツも楽しめる"
+        ],
+        "zh": [
+          "「百段阶梯」凝聚昭和初期艺术精华",
+          "作为婚礼会场也很有名",
+          "可享用餐点与甜点"
+        ],
+        "en": [
+          "The \"Hyakudan Kaidan\" is a masterpiece of early Showa art",
+          "Also famous as a wedding venue",
+          "Lunch and sweets are also available"
+        ],
+        "ko": [
+          "「백단 계단」은 쇼와 초기 예술의 정수",
+          "결혼식장으로도 유명",
+          "런치와 디저트도 즐길 수 있음"
+        ]
+      },
       "image": "../images/観光地/目黒雅叙園.jpg"
     },
     {
@@ -10888,7 +10928,7 @@ window.RAILWAY_TOURISM = {
         "ko": "갓파바시 주방용품 거리"
       },
       "desc_i18n": {
-        "ja": "料理道具のプロ向け問屋街。食品サンプルや包丁・漆器など約170店が集まる。",
+        "ja": "料理道具のプロ向け問屋街。食品サンプル専門店や包丁・鍋・漆器など約170店が集まる。浅草観光のついでに寄れる買い物スポット。",
         "zh": "面向专业人士的厨具批发街，食品样品、菜刀、漆器等约170家店铺聚集。",
         "en": "A wholesale street for kitchenware, with about 170 shops selling food samples, knives and lacquerware.",
         "ko": "프로용 주방용품 도매 거리. 식품 샘플과 칼·칠기 등 약 170개 점포가 모여 있다."
@@ -10911,26 +10951,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "食品サンプルを買える専門店あり",
-          "zh": "有可购买食品样品的专门店",
-          "en": "Specialty shops sell food samples",
-          "ko": "식품 샘플을 살 수 있는 전문점 있음"
-        },
-        {
-          "ja": "合羽橋本通りは日曜日が歩行者天国",
-          "zh": "合羽桥本通周日为步行者天堂",
-          "en": "Kappabashi-dori is pedestrian-only on Sundays",
-          "ko": "갓파바시 본도리는 일요일 보행자 천국"
-        },
-        {
-          "ja": "浅草寺から徒歩10分",
-          "zh": "距浅草寺步行10分钟",
-          "en": "10 min walk from Senso-ji",
-          "ko": "센소지에서 도보 10분"
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "食品サンプルを買える専門店あり",
+          "合羽橋本通りは日曜日が歩行者天国",
+          "浅草寺から徒歩10分"
+        ],
+        "zh": [
+          "有可购买食品样品的专门店",
+          "合羽桥本通周日为步行者天堂",
+          "距浅草寺步行10分钟"
+        ],
+        "en": [
+          "Specialty shops sell food samples",
+          "Kappabashi-dori is pedestrian-only on Sundays",
+          "10 min walk from Senso-ji"
+        ],
+        "ko": [
+          "식품 샘플을 살 수 있는 전문점 있음",
+          "갓파바시 본도리는 일요일 보행자 천국",
+          "센소지에서 도보 10분"
+        ]
+      },
       "image": "../images/観光地/かっぱ橋道具街.jpg"
     },
     {
@@ -10962,7 +11004,7 @@ window.RAILWAY_TOURISM = {
         "ko": "진보초 헌책방 거리"
       },
       "desc_i18n": {
-        "ja": "世界最大級の古書店街。古書店と名物カレー店が集まる「本とカレーの街」。",
+        "ja": "世界最大級の古書店街。約170店の古書店に加え、名物カレー店や老舗喫茶も集まる「本とカレーの街」。",
         "zh": "世界最大规模的古书街，古书店与名物咖喱店云集的「书与咖喱之街」。",
         "en": "One of the world largest used-book districts - a town of books and famous curry shops.",
         "ko": "세계 최대급 헌책방 거리. 헌책방과 명물 카레집이 모인 「책과 카레의 거리」."
@@ -10985,26 +11027,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime to evening",
         "ko": "낮~저녁"
       },
-      "tips_i18n": [
-        {
-          "ja": "夏の神田古本まつりが有名",
-          "zh": "夏季神田旧书节很有名",
-          "en": "Famous Kanda used-book fair in summer",
-          "ko": "여름 간다 헌책 축제가 유명"
-        },
-        {
-          "ja": "名物カレー店（ボンディ・キッチン南海など）",
-          "zh": "名物咖喱店（Bondy、Kitchen Nankai等）",
-          "en": "Famous curry shops (Bondy, Kitchen Nankai...)",
-          "ko": "명물 카레집（본디·키친 난카이 등）"
-        },
-        {
-          "ja": "三省堂書店本店も見どころ",
-          "zh": "三省堂书店总店也是看点",
-          "en": "Sanseido Bookstore main store is a must-see",
-          "ko": "산세이도 서점 본점도 볼거리"
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "夏の神田古本まつりが有名",
+          "名物カレー店（ボンディ・キッチン南海など）",
+          "三省堂書店本店も見どころ"
+        ],
+        "zh": [
+          "夏季神田旧书节很有名",
+          "名物咖喱店（Bondy、Kitchen Nankai等）",
+          "三省堂书店总店也是看点"
+        ],
+        "en": [
+          "Famous Kanda used-book fair in summer",
+          "Famous curry shops (Bondy, Kitchen Nankai...)",
+          "Sanseido Bookstore main store is a must-see"
+        ],
+        "ko": [
+          "여름 간다 헌책 축제가 유명",
+          "명물 카레집（본디·키친 난카이 등）",
+          "산세이도 서점 본점도 볼거리"
+        ]
+      },
       "image": "../images/観光地/神保町古書店街.jpg"
     },
     {
@@ -11035,7 +11079,7 @@ window.RAILWAY_TOURISM = {
         "ko": "아메요코（아메야 요코초）"
       },
       "desc_i18n": {
-        "ja": "上野・御徒町間の高架下に広がる活気ある市場通り。約400店が軒を連ねる。",
+        "ja": "上野・御徒町間の高架下に広がる活気ある市場通り。菓子・乾物・衣料・雑貨など約400店が軒を連ねる。",
         "zh": "上野与御徒町之间高架桥下的活力市场街，约400家店铺林立。",
         "en": "A lively market street under the elevated tracks between Ueno and Okachimachi, with about 400 shops.",
         "ko": "우에노·오카치마치 사이 고가 아래 펼쳐진 활기찬 시장 거리. 약 400개 점포."
@@ -11058,26 +11102,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime to night",
         "ko": "낮~밤"
       },
-      "tips_i18n": [
-        {
-          "ja": "大晦日の買い出し風景が有名",
-          "zh": "大晦日采购场景很有名",
-          "en": "Famous New Year Eve shopping crowds",
-          "ko": "섣달그믐 장보기 풍경이 유명"
-        },
-        {
-          "ja": "ドライフルーツとナッツの量り売り",
-          "zh": "干果与坚果按量称重售卖",
-          "en": "Dried fruits and nuts sold by weight",
-          "ko": "건과일과 견과류 계량 판매"
-        },
-        {
-          "ja": "上野駅・御徒町駅からすぐ",
-          "zh": "距上野站・御徒町站很近",
-          "en": "Right next to Ueno and Okachimachi stations",
-          "ko": "우에노·오카치마치 역에서 가까움"
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "大晦日の買い出し風景が有名",
+          "ドライフルーツとナッツの量り売り",
+          "上野駅・御徒町駅からすぐ"
+        ],
+        "zh": [
+          "大晦日采购场景很有名",
+          "干果与坚果按量称重售卖",
+          "距上野站・御徒町站很近"
+        ],
+        "en": [
+          "Famous New Year Eve shopping crowds",
+          "Dried fruits and nuts sold by weight",
+          "Right next to Ueno and Okachimachi stations"
+        ],
+        "ko": [
+          "섣달그믐 장보기 풍경이 유명",
+          "건과일과 견과류 계량 판매",
+          "우에노·오카치마치 역에서 가까움"
+        ]
+      },
       "image": "../images/観光地/アメヤ横丁.jpg"
     },
     {
@@ -11108,7 +11154,7 @@ window.RAILWAY_TOURISM = {
         "ko": "스가모 지조도리 상점가"
       },
       "desc_i18n": {
-        "ja": "「おばあちゃんの原宿」と呼ばれる巣鴨のメイン商店街。とげぬき地蔵尊の参道に約180店。",
+        "ja": "「おばあちゃんの原宿」と呼ばれる巣鴨のメイン商店街。とげぬき地蔵尊への参道に約180店が並ぶ。",
         "zh": "被称为「奶奶的原宿」的巢鸭主商店街，通往拔刺地藏尊的参道上约180家店。",
         "en": "Sugamo main street nicknamed \"Harajuku for grannies\", with about 180 shops along the path to Togenuki Jizo.",
         "ko": "「할머니의 하라주쿠」라 불리는 스가모의 메인 상점가. 지조존 참배길에 약 180개 점포."
@@ -11131,26 +11177,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "とげぬき地蔵尊（高岩寺）へ参拝",
-          "zh": "参拜拔刺地藏尊（高岩寺）",
-          "en": "Visit Togenuki Jizo (Kogan-ji)",
-          "ko": "토게누키 지조존（고간지） 참배"
-        },
-        {
-          "ja": "名物の赤パンツと塩大福",
-          "zh": "名物红内裤与盐大福",
-          "en": "Famous red underwear and shio-daifuku",
-          "ko": "명물 빨간 팬티와 소금 다이후쿠"
-        },
-        {
-          "ja": "4のつく日は縁日",
-          "zh": "带4的日子是庙会日",
-          "en": "Festival days on dates with 4",
-          "ko": "4가 들어가는 날은 엔니치"
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "とげぬき地蔵尊（高岩寺）へ参拝",
+          "名物の赤パンツと塩大福",
+          "4のつく日は縁日"
+        ],
+        "zh": [
+          "参拜拔刺地藏尊（高岩寺）",
+          "名物红内裤与盐大福",
+          "带4的日子是庙会日"
+        ],
+        "en": [
+          "Visit Togenuki Jizo (Kogan-ji)",
+          "Famous red underwear and shio-daifuku",
+          "Festival days on dates with 4"
+        ],
+        "ko": [
+          "토게누키 지조존（고간지） 참배",
+          "명물 빨간 팬티와 소금 다이후쿠",
+          "4가 들어가는 날은 엔니치"
+        ]
+      },
       "image": "../images/観光地/巣鴨地蔵通り商店街.jpg"
     },
     {
@@ -11181,7 +11229,7 @@ window.RAILWAY_TOURISM = {
         "ko": "토고시 긴자 상점가"
       },
       "desc_i18n": {
-        "ja": "東京一の長さ約1.3kmの商店街。約400店が連なり食べ歩きグルメが人気。",
+        "ja": "東京一の長さ約1.3kmを誇る商店街。約400店が連なり、食べ歩きグルメが人気の下町商店街。",
         "zh": "全长约1.3km、东京最长的商店街，约400家店铺相连，边走边吃的美食很受欢迎。",
         "en": "Tokyo longest shopping street (about 1.3 km) with about 400 shops, popular for street food.",
         "ko": "도쿄에서 가장 긴 약 1.3km 상점가. 약 400개 점포, 먹거리 산책이 인기."
@@ -11204,26 +11252,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime to evening",
         "ko": "낮~저녁"
       },
-      "tips_i18n": [
-        {
-          "ja": "名物コロッケを食べ歩き",
-          "zh": "边走边吃名物炸肉饼",
-          "en": "Try the famous croquettes",
-          "ko": "명물 크로켓 먹으며 산책"
-        },
-        {
-          "ja": "まぐろの目玉焼きで有名な老舗も",
-          "zh": "有以金枪鱼目玉烧闻名的老店",
-          "en": "Old shop famous for tuna \"medamayaki\"",
-          "ko": "참치 눈알구이로 유명한 노포도 있음"
-        },
-        {
-          "ja": "都営浅草線戸越銀座駅からすぐ",
-          "zh": "距都营浅草线户越银座站很近",
-          "en": "Right next to Togoshi-Ginza station",
-          "ko": "도에이 아사쿠사선 토고시긴자 역 바로 앞"
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "名物コロッケを食べ歩き",
+          "まぐろの目玉焼きで有名な老舗も",
+          "都営浅草線戸越銀座駅からすぐ"
+        ],
+        "zh": [
+          "边走边吃名物炸肉饼",
+          "有以金枪鱼目玉烧闻名的老店",
+          "距都营浅草线户越银座站很近"
+        ],
+        "en": [
+          "Try the famous croquettes",
+          "Old shop famous for tuna \"medamayaki\"",
+          "Right next to Togoshi-Ginza station"
+        ],
+        "ko": [
+          "명물 크로켓 먹으며 산책",
+          "참치 눈알구이로 유명한 노포도 있음",
+          "도에이 아사쿠사선 토고시긴자 역 바로 앞"
+        ]
+      },
       "image": "../images/観光地/戸越銀座商店街.jpg"
     },
     {
@@ -11254,7 +11304,7 @@ window.RAILWAY_TOURISM = {
         "ko": "스나마치 긴자 상점가"
       },
       "desc_i18n": {
-        "ja": "「人情の街」として知られる下町商店街。約140店が軒を連ね、惣菜・おでんが自慢。",
+        "ja": "「人情の街」として知られる下町商店街。約140店が軒を連ね、安くて旨い惣菜・おでんが自慢。",
         "zh": "以「人情之街」闻名的下町商店街，约140家店铺，熟食与关东煮是一绝。",
         "en": "A friendly downtown shopping street with about 140 shops, famous for affordable deli food and oden.",
         "ko": "「인정의 거리」로 알려진 하정 상점가. 약 140개 점포, 반찬·오뎅이 자랑."
@@ -11277,26 +11327,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime to evening",
         "ko": "낮~저녁"
       },
-      "tips_i18n": [
-        {
-          "ja": "名物おでんの老舗「いっ葉」",
-          "zh": "名物关东煮老店「一叶」",
-          "en": "Famous oden shop \"Ippa\"",
-          "ko": "명물 오뎅 노포 「잇파」"
-        },
-        {
-          "ja": "夕方の惣菜買い出しが楽しい",
-          "zh": "傍晚买熟食很有乐趣",
-          "en": "Evening deli shopping is fun",
-          "ko": "저녁 반찬 장보기가 즐거움"
-        },
-        {
-          "ja": "都心に残る下町人情",
-          "zh": "市中心留存的下町人情",
-          "en": "Downtown warmth still alive in the city",
-          "ko": "도심에 남은 하정 인정"
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "名物おでんの老舗「いっ葉」",
+          "夕方の惣菜買い出しが楽しい",
+          "都心に残る下町人情"
+        ],
+        "zh": [
+          "名物关东煮老店「一叶」",
+          "傍晚买熟食很有乐趣",
+          "市中心留存的下町人情"
+        ],
+        "en": [
+          "Famous oden shop \"Ippa\"",
+          "Evening deli shopping is fun",
+          "Downtown warmth still alive in the city"
+        ],
+        "ko": [
+          "명물 오뎅 노포 「잇파」",
+          "저녁 반찬 장보기가 즐거움",
+          "도심에 남은 하정 인정"
+        ]
+      },
       "image": "../images/観光地/砂町銀座商店街.jpg"
     },
     {
@@ -11327,7 +11379,7 @@ window.RAILWAY_TOURISM = {
         "ko": "고엔지 준죠 상점가"
       },
       "desc_i18n": {
-        "ja": "「純情商店街」の名で親しまれる高円寺駅北口の商店街。古着・ライブハウス・個性派カフェが集まる。",
+        "ja": "「純情商店街」の名で親しまれる高円寺駅北口の商店街。古着店・ライブハウス・個性派カフェが集まる。",
         "zh": "以「纯情商店街」之名闻名的高圆寺站北口商店街，古着店、livehouse、个性咖啡馆云集。",
         "en": "Koenji north-exit shopping street, home to vintage shops, live houses and quirky cafes.",
         "ko": "「준죠 상점가」로 친숙한 고엔지 역 북쪽 출구 상점가. 빈티지샵·라이브하우스·개성파 카페."
@@ -11350,26 +11402,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime to night",
         "ko": "낮~밤"
       },
-      "tips_i18n": [
-        {
-          "ja": "8月の高円寺阿波おどりが圧巻",
-          "zh": "8月的高圆寺阿波舞盛况空前",
-          "en": "Spectacular Koenji Awa Odori in August",
-          "ko": "8월 고엔지 아와오도리가 압권"
-        },
-        {
-          "ja": "古着・サブカル発信地",
-          "zh": "古着与亚文化发源地",
-          "en": "A hub of vintage fashion and subculture",
-          "ko": "빈티지·서브컬처 발신지"
-        },
-        {
-          "ja": "気まぐれな営業の店が多い",
-          "zh": "随性营业的店铺很多",
-          "en": "Many shops keep irregular hours",
-          "ko": "기분대로 영업하는 점포가 많음"
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "8月の高円寺阿波おどりが圧巻",
+          "古着・サブカル発信地",
+          "気まぐれな営業の店が多い"
+        ],
+        "zh": [
+          "8月的高圆寺阿波舞盛况空前",
+          "古着与亚文化发源地",
+          "随性营业的店铺很多"
+        ],
+        "en": [
+          "Spectacular Koenji Awa Odori in August",
+          "A hub of vintage fashion and subculture",
+          "Many shops keep irregular hours"
+        ],
+        "ko": [
+          "8월 고엔지 아와오도리가 압권",
+          "빈티지·서브컬처 발신지",
+          "기분대로 영업하는 점포가 많음"
+        ]
+      },
       "image": "../images/観光地/高円寺純情商店街.jpg"
     },
     {
@@ -11400,7 +11454,7 @@ window.RAILWAY_TOURISM = {
         "ko": "주조 긴자 상점가"
       },
       "desc_i18n": {
-        "ja": "アーケードの下に約180店が並ぶ活気ある下町商店街。十条名物のとんこつラーメン発祥の地。",
+        "ja": "アーケードの下に精肉店・鮮魚店・惣菜店など約180店が並ぶ活気ある下町商店街。",
         "zh": "拱廊下有约180家店铺的活力下町商店街，是十条名物豚骨拉面的发源地。",
         "en": "A lively covered shopping street with about 180 shops - birthplace of Jujo famous tonkotsu ramen.",
         "ko": "아케이드 아래 약 180개 점포가 늘어선 활기찬 하정 상점가. 돈코츠라멘 발상지."
@@ -11423,26 +11477,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime to evening",
         "ko": "낮~저녁"
       },
-      "tips_i18n": [
-        {
-          "ja": "十条名物「とんこつラーメン」発祥の地",
-          "zh": "十条名物豚骨拉面发源地",
-          "en": "Birthplace of Jujo tonkotsu ramen",
-          "ko": "주조 명물 돈코츠라멘 발상지"
-        },
-        {
-          "ja": "アーケード商店街で雨の日も安心",
-          "zh": "拱廊商店街雨天也安心",
-          "en": "Covered arcade, fine even in rain",
-          "ko": "아케이드라 비 오는 날도 안심"
-        },
-        {
-          "ja": "都内屈指の物価の安さ",
-          "zh": "都内屈指可数的物价便宜",
-          "en": "Among the cheapest prices in Tokyo",
-          "ko": "도내 손꼽히는 저렴한 물가"
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "十条名物「とんこつラーメン」発祥の地",
+          "アーケード商店街で雨の日も安心",
+          "都内屈指の物価の安さ"
+        ],
+        "zh": [
+          "十条名物豚骨拉面发源地",
+          "拱廊商店街雨天也安心",
+          "都内屈指可数的物价便宜"
+        ],
+        "en": [
+          "Birthplace of Jujo tonkotsu ramen",
+          "Covered arcade, fine even in rain",
+          "Among the cheapest prices in Tokyo"
+        ],
+        "ko": [
+          "주조 명물 돈코츠라멘 발상지",
+          "아케이드라 비 오는 날도 안심",
+          "도내 손꼽히는 저렴한 물가"
+        ]
+      },
       "image": "../images/観光地/十条銀座商店街.jpg"
     },
     {
@@ -11474,7 +11530,7 @@ window.RAILWAY_TOURISM = {
         "ko": "지유가오카"
       },
       "desc_i18n": {
-        "ja": "おしゃれな雑貨店・スイーツ店・セレクトショップが集まる大人の街。",
+        "ja": "おしゃれな雑貨店・スイーツ店・セレクトショップが集まる大人の街。スイーツ激戦区として名高い。",
         "zh": "时尚杂货店、甜品店、精选店云集的成熟街区。",
         "en": "A stylish town of select shops, sweets and lifestyle stores.",
         "ko": "세련된 잡화점·디저트 가게·셀렉트숍이 모인 어른의 거리."
@@ -11497,26 +11553,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime to night",
         "ko": "낮~밤"
       },
-      "tips_i18n": [
-        {
-          "ja": "スイーツフォレストで食べ歩き",
-          "zh": "在甜点森林边走边吃",
-          "en": "Food crawl at Sweets Forest",
-          "ko": "스위츠 포레스트에서 먹거리 산책"
-        },
-        {
-          "ja": "路地裏に個性派ショップが点在",
-          "zh": "小巷中散布个性店铺",
-          "en": "Unique shops hidden in the backstreets",
-          "ko": "골목마다 개성파 숍이 산재"
-        },
-        {
-          "ja": "駅前の「熊野神社」も穴場",
-          "zh": "站前的「熊野神社」也是小众景点",
-          "en": "Kumano Shrine by the station is a hidden gem",
-          "ko": "역 앞 구마노 신사도 숨은 명소"
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "スイーツフォレストで食べ歩き",
+          "路地裏に個性派ショップが点在",
+          "駅前の「熊野神社」も穴場"
+        ],
+        "zh": [
+          "在甜点森林边走边吃",
+          "小巷中散布个性店铺",
+          "站前的「熊野神社」也是小众景点"
+        ],
+        "en": [
+          "Food crawl at Sweets Forest",
+          "Unique shops hidden in the backstreets",
+          "Kumano Shrine by the station is a hidden gem"
+        ],
+        "ko": [
+          "스위츠 포레스트에서 먹거리 산책",
+          "골목마다 개성파 숍이 산재",
+          "역 앞 구마노 신사도 숨은 명소"
+        ]
+      },
       "image": "../images/観光地/自由が丘.jpg"
     },
     {
@@ -11548,7 +11606,7 @@ window.RAILWAY_TOURISM = {
         "ko": "카구라자카"
       },
       "desc_i18n": {
-        "ja": "花街の面影を残す石畳の路地と料亭・老舗が並ぶ大人の街。",
+        "ja": "花街の面影を残す石畳の路地と料亭・老舗が並ぶ大人の街。「東京の小パリ」とも呼ばれる。",
         "zh": "保留花街风貌的石板路小巷与料亭、老店林立的成熟街区。",
         "en": "An elegant town of stone-paved alleys, ryotei and long-established shops, once a geisha district.",
         "ko": "하나마치의 면모를 남긴 돌길 골목과 료테이·노포가 늘어선 어른의 거리."
@@ -11571,26 +11629,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime to night",
         "ko": "낮~밤"
       },
-      "tips_i18n": [
-        {
-          "ja": "石畳の路地（兵庫横丁・かくれんぼ横丁）",
-          "zh": "石板小巷（兵库横丁、捉迷藏横丁）",
-          "en": "Stone-paved alleys (Hyogo Yokocho, Kakurenbo Yokocho)",
-          "ko": "돌길 골목（효고 요코초·카쿠렌보 요코초）"
-        },
-        {
-          "ja": "毘沙門天（善国寺）へ参拝",
-          "zh": "参拜毗沙门天（善国寺）",
-          "en": "Visit Bishamonten (Zenkokuji)",
-          "ko": "비샤몬텐（젠코쿠지） 참배"
-        },
-        {
-          "ja": "夜の大人の散策がおすすめ",
-          "zh": "推荐夜晚的成熟漫步",
-          "en": "Evening strolls are recommended",
-          "ko": "밤의 어른 산책 추천"
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "石畳の路地（兵庫横丁・かくれんぼ横丁）",
+          "毘沙門天（善国寺）へ参拝",
+          "夜の大人の散策がおすすめ"
+        ],
+        "zh": [
+          "石板小巷（兵库横丁、捉迷藏横丁）",
+          "参拜毗沙门天（善国寺）",
+          "推荐夜晚的成熟漫步"
+        ],
+        "en": [
+          "Stone-paved alleys (Hyogo Yokocho, Kakurenbo Yokocho)",
+          "Visit Bishamonten (Zenkokuji)",
+          "Evening strolls are recommended"
+        ],
+        "ko": [
+          "돌길 골목（효고 요코초·카쿠렌보 요코초）",
+          "비샤몬텐（젠코쿠지） 참배",
+          "밤의 어른 산책 추천"
+        ]
+      },
       "image": "../images/観光地/神楽坂.jpg"
     },
     {
@@ -11621,7 +11681,7 @@ window.RAILWAY_TOURISM = {
         "ko": "다이칸야마 츠타야 서점"
       },
       "desc_i18n": {
-        "ja": "T-SITEの核となるコンセプト書店。白いガラス建築に本・雑貨・カフェが融合する。",
+        "ja": "「T-SITE」の核となるコンセプト書店。3棟の白いガラス建築に本・雑貨・カフェが融合する文化発信地。",
         "zh": "T-SITE 核心概念书店，白色玻璃建筑融合书籍、杂货与咖啡。",
         "en": "The concept bookstore at the heart of T-SITE, blending books, lifestyle goods and a cafe in white glass buildings.",
         "ko": "T-SITE의 핵심 콘셉트 서점. 하얀 유리 건축에 책·잡화·카페가 융합."
@@ -11644,26 +11704,28 @@ window.RAILWAY_TOURISM = {
         "en": "Morning to night",
         "ko": "아침~밤"
       },
-      "tips_i18n": [
-        {
-          "ja": "世界で最も美しい書店20選に選出",
-          "zh": "入选世界最美书店20选",
-          "en": "Selected among the world most beautiful bookstores",
-          "ko": "세계에서 가장 아름다운 서점 20선 선정"
-        },
-        {
-          "ja": "犬連れOKのグリーンエリア",
-          "zh": "可带狗的绿地空间",
-          "en": "Dog-friendly green area",
-          "ko": "반려견 동반 가능한 그린 에어리어"
-        },
-        {
-          "ja": "夜遅くまで営業",
-          "zh": "营业至深夜",
-          "en": "Open until late night",
-          "ko": "늦은 밤까지 영업"
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "世界で最も美しい書店20選に選出",
+          "犬連れOKのグリーンエリア",
+          "夜遅くまで営業"
+        ],
+        "zh": [
+          "入选世界最美书店20选",
+          "可带狗的绿地空间",
+          "营业至深夜"
+        ],
+        "en": [
+          "Selected among the world most beautiful bookstores",
+          "Dog-friendly green area",
+          "Open until late night"
+        ],
+        "ko": [
+          "세계에서 가장 아름다운 서점 20선 선정",
+          "반려견 동반 가능한 그린 에어리어",
+          "늦은 밤까지 영업"
+        ]
+      },
       "image": "../images/観光地/代官山蔦屋書店.jpg"
     },
     {
@@ -11695,7 +11757,7 @@ window.RAILWAY_TOURISM = {
         "ko": "긴자 키무라야 본점"
       },
       "desc_i18n": {
-        "ja": "1869年創業、あんぱん発祥の店。銀座4丁目交差点に建つ老舗。",
+        "ja": "1869年創業、あんぱん発祥の店。銀座4丁目交差点に建つ老舗で、酒種あんぱんは今も変わらぬ味。",
         "zh": "1869年创业、红豆面包发源的老店，位于银座四丁目路口。",
         "en": "Founded 1869, birthplace of anpan, standing at the Ginza 4-chome crossing.",
         "ko": "1869년 창업, 앙팡 발상지의 노포. 긴자 4초메 교차로에 위치."
@@ -11718,26 +11780,28 @@ window.RAILWAY_TOURISM = {
         "en": "Morning to evening",
         "ko": "아침~저녁"
       },
-      "tips_i18n": [
-        {
-          "ja": "あんぱん発祥の店（1869年創業）",
-          "zh": "红豆面包发源店（1869年创业）",
-          "en": "Birthplace of anpan (est. 1869)",
-          "ko": "앙팡 발상지（1869년 창업）"
-        },
-        {
-          "ja": "名物の酒種あんぱん",
-          "zh": "名物酒种红豆面包",
-          "en": "Famous sakadane anpan",
-          "ko": "명물 사카다네 앙팡"
-        },
-        {
-          "ja": "2階の喫茶室でモーニングも",
-          "zh": "2楼茶室也有早餐",
-          "en": "Morning sets at the 2F tea room",
-          "ko": "2층 다방에서 모닝도 가능"
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "あんぱん発祥の店（1869年創業）",
+          "名物の酒種あんぱん",
+          "2階の喫茶室でモーニングも"
+        ],
+        "zh": [
+          "红豆面包发源店（1869年创业）",
+          "名物酒种红豆面包",
+          "2楼茶室也有早餐"
+        ],
+        "en": [
+          "Birthplace of anpan (est. 1869)",
+          "Famous sakadane anpan",
+          "Morning sets at the 2F tea room"
+        ],
+        "ko": [
+          "앙팡 발상지（1869년 창업）",
+          "명물 사카다네 앙팡",
+          "2층 다방에서 모닝도 가능"
+        ]
+      },
       "image": "../images/観光地/銀座木村家本店.jpg"
     },
     {
@@ -11768,7 +11832,7 @@ window.RAILWAY_TOURISM = {
         "ko": "간다 마츠야"
       },
       "desc_i18n": {
-        "ja": "1884年創業の老舗そば店。江戸前そばの伝統を守るせいろと木造2階建ての佇まい。",
+        "ja": "1884年創業の老舗そば店。江戸前そばの伝統を守る「せいろ」と昭和の佇まいの木造2階建てが名物。",
         "zh": "1884年创业的老字号荞麦面店，守护江户前荞麦传统，木造二层小楼充满昭和风情。",
         "en": "Soba shop founded in 1884, preserving Edo-style soba tradition in a Showa-era wooden building.",
         "ko": "1884년 창업의 노포 소바 가게. 에도마에 소바 전통과 목조 2층 건물."
@@ -11791,26 +11855,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "創業1884年の老舗",
-          "zh": "1884年创业的老店",
-          "en": "Founded in 1884",
-          "ko": "1884년 창업 노포"
-        },
-        {
-          "ja": "せいろと天ぷらの名店",
-          "zh": "蒸笼荞麦与天妇罗名店",
-          "en": "Famous for seiro soba and tempura",
-          "ko": "세이로 소바와 덴푸라 명점"
-        },
-        {
-          "ja": "昼時は行列必至",
-          "zh": "午餐时段必排队",
-          "en": "Expect a queue at lunch",
-          "ko": "점심때는 줄서기 필수"
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "創業1884年の老舗",
+          "せいろと天ぷらの名店",
+          "昼時は行列必至"
+        ],
+        "zh": [
+          "1884年创业的老店",
+          "蒸笼荞麦与天妇罗名店",
+          "午餐时段必排队"
+        ],
+        "en": [
+          "Founded in 1884",
+          "Famous for seiro soba and tempura",
+          "Expect a queue at lunch"
+        ],
+        "ko": [
+          "1884년 창업 노포",
+          "세이로 소바와 덴푸라 명점",
+          "점심때는 줄서기 필수"
+        ]
+      },
       "image": "../images/観光地/神田まつや.jpg"
     },
     {
@@ -11840,7 +11906,7 @@ window.RAILWAY_TOURISM = {
         "ko": "아사쿠사 타이야키 구라쿠"
       },
       "desc_i18n": {
-        "ja": "浅草でたい焼きの手焼き体験（要予約）ができる人気店。あんこたっぷりの一丁焼きが自慢。",
+        "ja": "浅草でたい焼きの手焼き体験（要予約）ができる人気店。あんこたっぷりの昔ながらの一丁焼きが自慢。",
         "zh": "浅草人气鲷鱼烧店，可体验亲手烤制鲷鱼烧（需预约）。红豆馅饱满的一丁烧是招牌。",
         "en": "Popular Asakusa taiyaki shop offering hands-on baking experience (reservation required). Famous for its generously filled one-piece taiyaki.",
         "ko": "아사쿠사의 인기 타이야키 가게. 직접 구워보는 체험(예약 필요)이 가능하며 앙금 가득한 타이야키가 자랑."
@@ -11863,26 +11929,28 @@ window.RAILWAY_TOURISM = {
         "en": "Afternoon",
         "ko": "오후"
       },
-      "tips_i18n": [
-        {
-          "ja": "手焼きたい焼き体験が人気（要予約）",
-          "zh": "手烤鲷鱼烧体验人气（需预约）",
-          "en": "Hand-baked taiyaki experience is popular (reservation required)",
-          "ko": "직접 굽는 타이야키 체험 인기（예약 필요）"
-        },
-        {
-          "ja": "あんこたっぷりの一丁焼き",
-          "zh": "红豆馅饱满的一丁烧",
-          "en": "Generously filled one-piece taiyaki",
-          "ko": "앙금 가득한 일정 구이"
-        },
-        {
-          "ja": "テイクアウト中心",
-          "zh": "以外带为主",
-          "en": "Take-out focused",
-          "ko": "테이크아웃 중심"
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "手焼きたい焼き体験が人気（要予約）",
+          "あんこたっぷりの一丁焼き",
+          "テイクアウト中心"
+        ],
+        "zh": [
+          "手烤鲷鱼烧体验人气（需预约）",
+          "红豆馅饱满的一丁烧",
+          "以外带为主"
+        ],
+        "en": [
+          "Hand-baked taiyaki experience is popular (reservation required)",
+          "Generously filled one-piece taiyaki",
+          "Take-out focused"
+        ],
+        "ko": [
+          "직접 굽는 타이야키 체험 인기（예약 필요）",
+          "앙금 가득한 일정 구이",
+          "테이크아웃 중심"
+        ]
+      },
       "image": "../images/観光地/浅草たい焼き工房 求楽.jpg"
     },
     {
@@ -11912,7 +11980,7 @@ window.RAILWAY_TOURISM = {
         "ko": "메구로 미츠보시 식당"
       },
       "desc_i18n": {
-        "ja": "目黒駅近くの昭和レトロな洋食店。ふわとろオムライスが名物。観葉植物が並ぶ木造の店先が目印。",
+        "ja": "目黒駅近くの昭和レトロな洋食店。ふわとろオムライスが名物で、観葉植物が並ぶ木造の店先が目印。",
         "zh": "目黑站附近的昭和复古西餐店。招牌是松软嫩滑的蛋包饭，店门口摆放绿植的木造门面是其标志。",
         "en": "Showa-retro Western restaurant near Meguro Station. Famous for fluffy omelette rice, marked by a wooden storefront lined with plants.",
         "ko": "메구로역 근처 쇼와 레트로 양식당. 부드러운 오므라이스가 명물이며 식물이 늘어선 목조 점포가 랜드마크."
@@ -11935,26 +12003,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "ふわとろオムライスが名物",
-          "zh": "松软嫩滑的蛋包饭是招牌",
-          "en": "Famous for fluffy omelette rice",
-          "ko": "부드러운 오므라이스가 명물"
-        },
-        {
-          "ja": "現金のみ（CASH ONLY）",
-          "zh": "仅收现金",
-          "en": "Cash only",
-          "ko": "현금만 가능"
-        },
-        {
-          "ja": "ランチは早めの来店を",
-          "zh": "午餐建议早到",
-          "en": "Arrive early for lunch",
-          "ko": "점심은 일찍 방문 추천"
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "ふわとろオムライスが名物",
+          "現金のみ（CASH ONLY）",
+          "ランチは早めの来店を"
+        ],
+        "zh": [
+          "松软嫩滑的蛋包饭是招牌",
+          "仅收现金",
+          "午餐建议早到"
+        ],
+        "en": [
+          "Famous for fluffy omelette rice",
+          "Cash only",
+          "Arrive early for lunch"
+        ],
+        "ko": [
+          "부드러운 오므라이스가 명물",
+          "현금만 가능",
+          "점심은 일찍 방문 추천"
+        ]
+      },
       "image": "../images/観光地/めぐろ三ツ星食堂.jpg"
     },
     {
@@ -12015,26 +12085,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime to evening",
         "ko": "낮~저녁"
       },
-      "tips_i18n": [
-        {
-          "ja": "白い洋館の外観とステンドグラスは必見。",
-          "zh": "白色洋楼外观与彩色玻璃必看。",
-          "en": "The white Western facade and stained glass are must-sees.",
-          "ko": "하얀 양관 외관과 스테인드글라스 필견."
-        },
-        {
-          "ja": "戦火から蔵書を守った職員の逸話も。",
-          "zh": "还有从战火中守护藏书的职员轶事。",
-          "en": "Hear the tale of staff who saved books from wartime fires.",
-          "ko": "전화에서 장서를 지킨 직원 일화도."
-        },
-        {
-          "ja": "清澄庭園と合わせて読書散策コースに。",
-          "zh": "可与清澄庭园连成读书散步路线。",
-          "en": "Combine with Kiyosumi Teien for a reading walk.",
-          "ko": "기요스미 정원과 묶어 독서 산책 코스로."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "白い洋館の外観とステンドグラスは必見。",
+          "戦火から蔵書を守った職員の逸話も。",
+          "清澄庭園と合わせて読書散策コースに。"
+        ],
+        "zh": [
+          "白色洋楼外观与彩色玻璃必看。",
+          "还有从战火中守护藏书的职员轶事。",
+          "可与清澄庭园连成读书散步路线。"
+        ],
+        "en": [
+          "The white Western facade and stained glass are must-sees.",
+          "Hear the tale of staff who saved books from wartime fires.",
+          "Combine with Kiyosumi Teien for a reading walk."
+        ],
+        "ko": [
+          "하얀 양관 외관과 스테인드글라스 필견.",
+          "전화에서 장서를 지킨 직원 일화도.",
+          "기요스미 정원과 묶어 독서 산책 코스로."
+        ]
+      }
     },
     {
       "name": "REJOUIR（レジュイール）",
@@ -12092,26 +12164,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime to evening",
         "ko": "낮~저녁"
       },
-      "tips_i18n": [
-        {
-          "ja": "ネクタイなどは糸をほどいてからシミ抜きすることも。",
-          "zh": "领带等有时会拆线后再除渍。",
-          "en": "Ties are sometimes unpicked before stain removal.",
-          "ko": "넥타이 등은 실을 풀고 때를 빼기도 함."
-        },
-        {
-          "ja": "ヨーロッパ修行の「服のお医者さん」。",
-          "zh": "留洋欧洲的\"衣物医生\"。",
-          "en": "A \"doctor of clothes\" trained in Europe.",
-          "ko": "유럽에서 수련한 \"옷의 의사\"."
-        },
-        {
-          "ja": "品物ごとに料金が変わる無料表制。",
-          "zh": "按衣物议价，无固定价目表。",
-          "en": "No price list; each item priced individually.",
-          "ko": "품목마다 가격이 달라 가격표가 없음."
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "ネクタイなどは糸をほどいてからシミ抜きすることも。",
+          "ヨーロッパ修行の「服のお医者さん」。",
+          "品物ごとに料金が変わる無料表制。"
+        ],
+        "zh": [
+          "领带等有时会拆线后再除渍。",
+          "留洋欧洲的\"衣物医生\"。",
+          "按衣物议价，无固定价目表。"
+        ],
+        "en": [
+          "Ties are sometimes unpicked before stain removal.",
+          "A \"doctor of clothes\" trained in Europe.",
+          "No price list; each item priced individually."
+        ],
+        "ko": [
+          "넥타이 등은 실을 풀고 때를 빼기도 함.",
+          "유럽에서 수련한 \"옷의 의사\".",
+          "품목마다 가격이 달라 가격표가 없음."
+        ]
+      },
       "address": "東京都港区南麻布1-5-18 FRビル"
     },
     {
@@ -12171,26 +12245,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime to night",
         "ko": "낮~밤"
       },
-      "tips_i18n": [
-        {
-          "ja": "目の前のツリーハウスは登って記念写真。",
-          "zh": "爬上眼前的树屋拍照留念。",
-          "en": "Climb the treehouse out front for a photo.",
-          "ko": "눈앞의 나무집에 올라 기념사진."
-        },
-        {
-          "ja": "1・2階は花屋、3階・屋上がカフェ。",
-          "zh": "1、2楼是花店，3楼与屋顶是咖啡馆。",
-          "en": "Floors 1–2 are the florist; floor 3 and rooftop are the café.",
-          "ko": "1·2층은 꽃집, 3층·옥상이 카페."
-        },
-        {
-          "ja": "夜カフェや花の買い物にも使える癒し空間。",
-          "zh": "可用于夜咖啡或买花的治愈空间。",
-          "en": "A healing space for evening coffee or flowers.",
-          "ko": "밤 카페나 꽃 쇼핑에도 좋은 힐링 공간."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "目の前のツリーハウスは登って記念写真。",
+          "1・2階は花屋、3階・屋上がカフェ。",
+          "夜カフェや花の買い物にも使える癒し空間。"
+        ],
+        "zh": [
+          "爬上眼前的树屋拍照留念。",
+          "1、2楼是花店，3楼与屋顶是咖啡馆。",
+          "可用于夜咖啡或买花的治愈空间。"
+        ],
+        "en": [
+          "Climb the treehouse out front for a photo.",
+          "Floors 1–2 are the florist; floor 3 and rooftop are the café.",
+          "A healing space for evening coffee or flowers."
+        ],
+        "ko": [
+          "눈앞의 나무집에 올라 기념사진.",
+          "1·2층은 꽃집, 3층·옥상이 카페.",
+          "밤 카페나 꽃 쇼핑에도 좋은 힐링 공간."
+        ]
+      }
     },
     {
       "name": "東京ミッドタウン（ユビキタス・アートツアー®）",
@@ -12248,26 +12324,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime to evening",
         "ko": "낮~저녁"
       },
-      "tips_i18n": [
-        {
-          "ja": "プラザインフォメーションで専用端末を借りるだけ。",
-          "zh": "在服务台借用专用终端即可。",
-          "en": "Just borrow a device at the plaza information desk.",
-          "ko": "플라자 안내에서 전용 단말기를 빌리기만."
-        },
-        {
-          "ja": "雨の日コースや30分ハイライトなど7コース。",
-          "zh": "有雨天路线、30分钟精华等7条路线。",
-          "en": "Seven routes including a rainy-day course and a 30-minute highlight.",
-          "ko": "우천 코스·30분 하이라이트 등 7개 코스."
-        },
-        {
-          "ja": "テキストは5ヶ国語対応、一人旅にも。",
-          "zh": "文本支持5国语言，适合独自游览。",
-          "en": "Text in five languages; great solo.",
-          "ko": "텍스트 5개국어 대응, 혼자 여행에도."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "プラザインフォメーションで専用端末を借りるだけ。",
+          "雨の日コースや30分ハイライトなど7コース。",
+          "テキストは5ヶ国語対応、一人旅にも。"
+        ],
+        "zh": [
+          "在服务台借用专用终端即可。",
+          "有雨天路线、30分钟精华等7条路线。",
+          "文本支持5国语言，适合独自游览。"
+        ],
+        "en": [
+          "Just borrow a device at the plaza information desk.",
+          "Seven routes including a rainy-day course and a 30-minute highlight.",
+          "Text in five languages; great solo."
+        ],
+        "ko": [
+          "플라자 안내에서 전용 단말기를 빌리기만.",
+          "우천 코스·30분 하이라이트 등 7개 코스.",
+          "텍스트 5개국어 대응, 혼자 여행에도."
+        ]
+      }
     },
     {
       "name": "名主の滝公園",
@@ -12327,26 +12405,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "주간"
       },
-      "tips_i18n": [
-        {
-          "ja": "8mの男滝をはじめ4つの滝が涼しげ。",
-          "zh": "落差8米的男泷等4座瀑布清凉宜人。",
-          "en": "Four falls, including the 8 m Otoko-daki, feel cool.",
-          "ko": "8m 남자락을 비롯한 4개 폭포가 서늘함."
-        },
-        {
-          "ja": "広重「絵本江戸土産」の世界に浸れる。",
-          "zh": "沉浸在广重《绘本江户土产》的世界。",
-          "en": "Step into the world of Hiroshige's \"Ehon Edo Miyage\".",
-          "ko": "히로시게 「에혼에도미야게」의 세계에."
-        },
-        {
-          "ja": "夏の避暑・秋のピクニックに一年中おすすめ。",
-          "zh": "全年皆宜，夏避暑、秋野餐。",
-          "en": "Good year-round: summer cool-down or autumn picnic.",
-          "ko": "여름 피서·가을 소풍에 연중 추천."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "8mの男滝をはじめ4つの滝が涼しげ。",
+          "広重「絵本江戸土産」の世界に浸れる。",
+          "夏の避暑・秋のピクニックに一年中おすすめ。"
+        ],
+        "zh": [
+          "落差8米的男泷等4座瀑布清凉宜人。",
+          "沉浸在广重《绘本江户土产》的世界。",
+          "全年皆宜，夏避暑、秋野餐。"
+        ],
+        "en": [
+          "Four falls, including the 8 m Otoko-daki, feel cool.",
+          "Step into the world of Hiroshige's \"Ehon Edo Miyage\".",
+          "Good year-round: summer cool-down or autumn picnic."
+        ],
+        "ko": [
+          "8m 남자락을 비롯한 4개 폭포가 서늘함.",
+          "히로시게 「에혼에도미야게」의 세계에.",
+          "여름 피서·가을 소풍에 연중 추천."
+        ]
+      }
     },
     {
       "name": "榎本ハンバーグ研究所",
@@ -12404,26 +12484,28 @@ window.RAILWAY_TOURISM = {
         "en": "Lunch",
         "ko": "런치"
       },
-      "tips_i18n": [
-        {
-          "ja": "注文ごとに焼き上げるふわジューシーな一品。",
-          "zh": "现点现煎、蓬松多汁的一道。",
-          "en": "A fluffy, juicy patty grilled to order.",
-          "ko": "주문할 때마다 구워내는 폭신 육즙 한 그릇."
-        },
-        {
-          "ja": "最高の瞬間を味わうためお急ぎ客はお断り。",
-          "zh": "为品尝最佳时刻，恕不接待赶时间客人。",
-          "en": "They turn away rushed diners to serve the peak moment.",
-          "ko": "최고의 순간을 위해 급한 손님은 사절."
-        },
-        {
-          "ja": "西ケ原駅すぐ、ランチが狙い目。",
-          "zh": "西原站旁，午餐为佳。",
-          "en": "Right at Nishi-Gahara Station; lunch is the pick.",
-          "ko": "니시가하라역 바로, 런치가 제격."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "注文ごとに焼き上げるふわジューシーな一品。",
+          "最高の瞬間を味わうためお急ぎ客はお断り。",
+          "西ケ原駅すぐ、ランチが狙い目。"
+        ],
+        "zh": [
+          "现点现煎、蓬松多汁的一道。",
+          "为品尝最佳时刻，恕不接待赶时间客人。",
+          "西原站旁，午餐为佳。"
+        ],
+        "en": [
+          "A fluffy, juicy patty grilled to order.",
+          "They turn away rushed diners to serve the peak moment.",
+          "Right at Nishi-Gahara Station; lunch is the pick."
+        ],
+        "ko": [
+          "주문할 때마다 구워내는 폭신 육즙 한 그릇.",
+          "최고의 순간을 위해 급한 손님은 사절.",
+          "니시가하라역 바로, 런치가 제격."
+        ]
+      }
     },
     {
       "name": "フランス料理 でぐち弐番",
@@ -12481,26 +12563,28 @@ window.RAILWAY_TOURISM = {
         "en": "Lunch & dinner",
         "ko": "점심·저녁"
       },
-      "tips_i18n": [
-        {
-          "ja": "ミシュランビブグルマン掲載の実力店。",
-          "zh": "米其林必比登推介的实力店。",
-          "en": "A Michelin Bib Gourmand–listed gem.",
-          "ko": "미슐랭 비브르망 기재된 실력집."
-        },
-        {
-          "ja": "駅0分で本格フレンチがリーズナブル。",
-          "zh": "出站即享实惠正宗法式。",
-          "en": "Authentic French a minute from the station at a fair price.",
-          "ko": "역 0분 정통 프렌치를 합리적으로."
-        },
-        {
-          "ja": "記念日やシーズンイベントにも。",
-          "zh": "也适合纪念日与节庆。",
-          "en": "Also ideal for anniversaries and seasonal events.",
-          "ko": "기념일이나 시즌 이벤트에도."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "ミシュランビブグルマン掲載の実力店。",
+          "駅0分で本格フレンチがリーズナブル。",
+          "記念日やシーズンイベントにも。"
+        ],
+        "zh": [
+          "米其林必比登推介的实力店。",
+          "出站即享实惠正宗法式。",
+          "也适合纪念日与节庆。"
+        ],
+        "en": [
+          "A Michelin Bib Gourmand–listed gem.",
+          "Authentic French a minute from the station at a fair price.",
+          "Also ideal for anniversaries and seasonal events."
+        ],
+        "ko": [
+          "미슐랭 비브르망 기재된 실력집.",
+          "역 0분 정통 프렌치를 합리적으로.",
+          "기념일이나 시즌 이벤트에도."
+        ]
+      }
     },
     {
       "name": "パパブブレ 中野店",
@@ -12558,26 +12642,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime to evening",
         "ko": "낮~저녁"
       },
-      "tips_i18n": [
-        {
-          "ja": "宝石のようなポップな飴がずらり。",
-          "zh": "宝石般缤纷的糖果琳琅满目。",
-          "en": "Rows of jewel-like pop candies.",
-          "ko": "보석 같은 팝한 사탕이 가득."
-        },
-        {
-          "ja": "目の前で職人が飴を切る実演。",
-          "zh": "店员现场切糖演示。",
-          "en": "Watch artisans cut the candy by hand.",
-          "ko": "눈앞에서 장인이 사탕을 자르는 시연."
-        },
-        {
-          "ja": "贈り物やお土産にも最適。",
-          "zh": "适合送礼与伴手礼。",
-          "en": "Great for gifts and souvenirs.",
-          "ko": "선물이나 기념품에도 최적."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "宝石のようなポップな飴がずらり。",
+          "目の前で職人が飴を切る実演。",
+          "贈り物やお土産にも最適。"
+        ],
+        "zh": [
+          "宝石般缤纷的糖果琳琅满目。",
+          "店员现场切糖演示。",
+          "适合送礼与伴手礼。"
+        ],
+        "en": [
+          "Rows of jewel-like pop candies.",
+          "Watch artisans cut the candy by hand.",
+          "Great for gifts and souvenirs."
+        ],
+        "ko": [
+          "보석 같은 팝한 사탕이 가득.",
+          "눈앞에서 장인이 사탕을 자르는 시연.",
+          "선물이나 기념품에도 최적."
+        ]
+      }
     },
     {
       "name": "あぶまた味噌",
@@ -12635,26 +12721,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "주간"
       },
-      "tips_i18n": [
-        {
-          "ja": "目印は店先の大きなお釜。",
-          "zh": "门口的大酱缸是标志。",
-          "en": "The big vat out front is the landmark.",
-          "ko": "가게 앞 큰 가마가 표시."
-        },
-        {
-          "ja": "塩分わずか6%、とろり甘口。",
-          "zh": "盐分仅6%、醇厚甘甜。",
-          "en": "Only 6% salt, mellow and sweet.",
-          "ko": "염도 겨우 6%, 녹아드는 단맛."
-        },
-        {
-          "ja": "一口なめたらクセになる伝統の味。",
-          "zh": "尝一口就上瘾的传统味道。",
-          "en": "One taste and you're hooked on the tradition.",
-          "ko": "한 입 맛보면 빠지는 전통의 맛."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "目印は店先の大きなお釜。",
+          "塩分わずか6%、とろり甘口。",
+          "一口なめたらクセになる伝統の味。"
+        ],
+        "zh": [
+          "门口的大酱缸是标志。",
+          "盐分仅6%、醇厚甘甜。",
+          "尝一口就上瘾的传统味道。"
+        ],
+        "en": [
+          "The big vat out front is the landmark.",
+          "Only 6% salt, mellow and sweet.",
+          "One taste and you're hooked on the tradition."
+        ],
+        "ko": [
+          "가게 앞 큰 가마가 표시.",
+          "염도 겨우 6%, 녹아드는 단맛.",
+          "한 입 맛보면 빠지는 전통의 맛."
+        ]
+      }
     },
     {
       "name": "ベーゼンドルファー東京",
@@ -12712,26 +12800,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime to evening",
         "ko": "낮~저녁"
       },
-      "tips_i18n": [
-        {
-          "ja": "世界三大ピアノの一つを自由に試弾。",
-          "zh": "自由试弹世界三大钢琴之一。",
-          "en": "Freely try one of the world's three great pianos.",
-          "ko": "세계 3대 피아노 중 하나를 자유롭게 시연."
-        },
-        {
-          "ja": "熟練職人の手作業、年250台の希少品。",
-          "zh": "熟练匠人手作，年产250台的珍品。",
-          "en": "Handmade by master craftsmen; only 250 a year.",
-          "ko": "숙련 장인 수작업, 연 250대 희귀품."
-        },
-        {
-          "ja": "予約すればスタジオ利用も可。",
-          "zh": "预约即可使用录音室。",
-          "en": "Studio use available by reservation.",
-          "ko": "예약하면 스튜디오 이용도 가능."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "世界三大ピアノの一つを自由に試弾。",
+          "熟練職人の手作業、年250台の希少品。",
+          "予約すればスタジオ利用も可。"
+        ],
+        "zh": [
+          "自由试弹世界三大钢琴之一。",
+          "熟练匠人手作，年产250台的珍品。",
+          "预约即可使用录音室。"
+        ],
+        "en": [
+          "Freely try one of the world's three great pianos.",
+          "Handmade by master craftsmen; only 250 a year.",
+          "Studio use available by reservation."
+        ],
+        "ko": [
+          "세계 3대 피아노 중 하나를 자유롭게 시연.",
+          "숙련 장인 수작업, 연 250대 희귀품.",
+          "예약하면 스튜디오 이용도 가능."
+        ]
+      }
     },
     {
       "name": "フナバシ屋",
@@ -12789,26 +12879,28 @@ window.RAILWAY_TOURISM = {
         "en": "Night",
         "ko": "밤"
       },
-      "tips_i18n": [
-        {
-          "ja": "見た目に反してスッキリ飲みやすい小松菜ハイボール。",
-          "zh": "与外观相反、清爽顺口的小松菜 Highball。",
-          "en": "The komatsuna highball is surprisingly smooth despite its look.",
-          "ko": "비주얼과 달리 깔끔하게 넘어가는 코마츠나 하이볼."
-        },
-        {
-          "ja": "半年かけて完成した地元密着の一杯。",
-          "zh": "耗时半年完成的本地招牌一杯。",
-          "en": "A local drink perfected over six months.",
-          "ko": "반년 걸려 완성한 지역 밀착 한 잔."
-        },
-        {
-          "ja": "西船橋駅すぐ、夜の飲み会に。",
-          "zh": "西船桥站旁，适合夜晚小聚。",
-          "en": "Right by Nishi-Funabashi Station for an evening out.",
-          "ko": "니시후나바시역 바로, 밤 술자리에."
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "見た目に反してスッキリ飲みやすい小松菜ハイボール。",
+          "半年かけて完成した地元密着の一杯。",
+          "西船橋駅すぐ、夜の飲み会に。"
+        ],
+        "zh": [
+          "与外观相反、清爽顺口的小松菜 Highball。",
+          "耗时半年完成的本地招牌一杯。",
+          "西船桥站旁，适合夜晚小聚。"
+        ],
+        "en": [
+          "The komatsuna highball is surprisingly smooth despite its look.",
+          "A local drink perfected over six months.",
+          "Right by Nishi-Funabashi Station for an evening out."
+        ],
+        "ko": [
+          "비주얼과 달리 깔끔하게 넘어가는 코마츠나 하이볼.",
+          "반년 걸려 완성한 지역 밀착 한 잔.",
+          "니시후나바시역 바로, 밤 술자리에."
+        ]
+      },
       "address": "千葉県船橋市西船4-23-10"
     },
     {
@@ -12868,26 +12960,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "주간"
       },
-      "tips_i18n": [
-        {
-          "ja": "再現街並みで昭和の漁を体感。",
-          "zh": "在重现街景中体验昭和渔业。",
-          "en": "Feel 1950s fishing in the recreated streets.",
-          "ko": "재현 거리에서 쇼와 어업 체험."
-        },
-        {
-          "ja": "実際にべか舟・打瀬船に乗れる。",
-          "zh": "可实际乘坐紫菜船与打濑船。",
-          "en": "Actually board nori boats and utase ships.",
-          "ko": "실제 벳카배·우타세선에 탑승."
-        },
-        {
-          "ja": "東京湾で一番小さな木造船も必見。",
-          "zh": "东京湾最小木造渔船也值得一看。",
-          "en": "Tokyo Bay's smallest wooden fishing boat is a must.",
-          "ko": "도쿄만에서 가장 작은 목선도 필견."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "再現街並みで昭和の漁を体感。",
+          "実際にべか舟・打瀬船に乗れる。",
+          "東京湾で一番小さな木造船も必見。"
+        ],
+        "zh": [
+          "在重现街景中体验昭和渔业。",
+          "可实际乘坐紫菜船与打濑船。",
+          "东京湾最小木造渔船也值得一看。"
+        ],
+        "en": [
+          "Feel 1950s fishing in the recreated streets.",
+          "Actually board nori boats and utase ships.",
+          "Tokyo Bay's smallest wooden fishing boat is a must."
+        ],
+        "ko": [
+          "재현 거리에서 쇼와 어업 체험.",
+          "실제 벳카배·우타세선에 탑승.",
+          "도쿄만에서 가장 작은 목선도 필견."
+        ]
+      }
     },
     {
       "name": "中台製作所",
@@ -12945,26 +13039,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "주간"
       },
-      "tips_i18n": [
-        {
-          "ja": "神輿作りの全工程を自社で行う稀有な工房。",
-          "zh": "神轿制作全工序自研自造的稀有工房。",
-          "en": "A rare workshop doing the whole mikoshi process in-house.",
-          "ko": "미코시 제작 전 공정을 자사에서 하는 희귀 공방."
-        },
-        {
-          "ja": "これまで2千基の製作・修理実績。",
-          "zh": "迄今制作、修理2千座实绩。",
-          "en": "2,000 mikoshi made or repaired to date.",
-          "ko": "지금까지 2천 기 제작·수리 실적."
-        },
-        {
-          "ja": "職人の技を間近で見学できる。",
-          "zh": "可近距离观看匠人技艺。",
-          "en": "Watch craftsmen at work up close.",
-          "ko": "장인의 기술을 가까이에서 견학 가능."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "神輿作りの全工程を自社で行う稀有な工房。",
+          "これまで2千基の製作・修理実績。",
+          "職人の技を間近で見学できる。"
+        ],
+        "zh": [
+          "神轿制作全工序自研自造的稀有工房。",
+          "迄今制作、修理2千座实绩。",
+          "可近距离观看匠人技艺。"
+        ],
+        "en": [
+          "A rare workshop doing the whole mikoshi process in-house.",
+          "2,000 mikoshi made or repaired to date.",
+          "Watch craftsmen at work up close."
+        ],
+        "ko": [
+          "미코시 제작 전 공정을 자사에서 하는 희귀 공방.",
+          "지금까지 2천 기 제작·수리 실적.",
+          "장인의 기술을 가까이에서 견학 가능."
+        ]
+      }
     },
     {
       "name": "東京証券取引所",
@@ -13022,26 +13118,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime (weekdays)",
         "ko": "주간 (평일)"
       },
-      "tips_i18n": [
-        {
-          "ja": "仮想1000万円で株の仕組みを楽しく学ぶ。",
-          "zh": "用虚拟1000万快乐学股票原理。",
-          "en": "Learn stock mechanics with a virtual ¥10M.",
-          "ko": "가상 1,000만 엔으로 주식 구조를 재미있게 학습."
-        },
-        {
-          "ja": "団体10名以上は案内付きツアー可。",
-          "zh": "10人以上团体可导览。",
-          "en": "Guided tours for groups of 10+.",
-          "ko": "단체 10명 이상 안내 투어 가능."
-        },
-        {
-          "ja": "日本最大・売買シェア約90％の市場。",
-          "zh": "日本最大、成交占比约90%的市场。",
-          "en": "Japan's largest bourse, ~90% of share volume.",
-          "ko": "일본 최대·매매 점유율 약 90% 시장."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "仮想1000万円で株の仕組みを楽しく学ぶ。",
+          "団体10名以上は案内付きツアー可。",
+          "日本最大・売買シェア約90％の市場。"
+        ],
+        "zh": [
+          "用虚拟1000万快乐学股票原理。",
+          "10人以上团体可导览。",
+          "日本最大、成交占比约90%的市场。"
+        ],
+        "en": [
+          "Learn stock mechanics with a virtual ¥10M.",
+          "Guided tours for groups of 10+.",
+          "Japan's largest bourse, ~90% of share volume."
+        ],
+        "ko": [
+          "가상 1,000만 엔으로 주식 구조를 재미있게 학습.",
+          "단체 10명 이상 안내 투어 가능.",
+          "일본 최대·매매 점유율 약 90% 시장."
+        ]
+      }
     },
     {
       "name": "木挽町よしや",
@@ -13099,26 +13197,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime to evening",
         "ko": "낮~저녁"
       },
-      "tips_i18n": [
-        {
-          "ja": "1日1300個売れる名物どら焼き。",
-          "zh": "日销1300个的招牌铜锣烧。",
-          "en": "The signature dorayaki sells 1,300 a day.",
-          "ko": "하루 1,300개 팔리는 명물 도라야키."
-        },
-        {
-          "ja": "1個からオリジナル焼印を製作可。",
-          "zh": "1个起即可定制烙印。",
-          "en": "Custom branding from a single piece.",
-          "ko": "1개부터 오리지널 날인 제작 가능."
-        },
-        {
-          "ja": "一枚皮で餡を挟む珍しい製法。",
-          "zh": "一张皮夹馅的少见做法。",
-          "en": "A rare single-pancake construction.",
-          "ko": "한 장의 피로 팥을 끼운 희귀 제법."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "1日1300個売れる名物どら焼き。",
+          "1個からオリジナル焼印を製作可。",
+          "一枚皮で餡を挟む珍しい製法。"
+        ],
+        "zh": [
+          "日销1300个的招牌铜锣烧。",
+          "1个起即可定制烙印。",
+          "一张皮夹馅的少见做法。"
+        ],
+        "en": [
+          "The signature dorayaki sells 1,300 a day.",
+          "Custom branding from a single piece.",
+          "A rare single-pancake construction."
+        ],
+        "ko": [
+          "하루 1,300개 팔리는 명물 도라야키.",
+          "1개부터 오리지널 날인 제작 가능.",
+          "한 장의 피로 팥을 끼운 희귀 제법."
+        ]
+      }
     },
     {
       "name": "ストックプラス",
@@ -13176,26 +13276,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime to evening",
         "ko": "낮~저녁"
       },
-      "tips_i18n": [
-        {
-          "ja": "名前の文字や家紋・桜などのイラスト入れ可。",
-          "zh": "可加姓名文字与家纹、樱花等图案。",
-          "en": "Add your name, family crests, cherry blossoms and more.",
-          "ko": "이름 문자나 가문 문양·벚꽃 등 일러스트 가능."
-        },
-        {
-          "ja": "空いていれば15分ほどで完成。",
-          "zh": "人少约15分钟完成。",
-          "en": "Done in ~15 minutes if not busy.",
-          "ko": "한가하면 약 15분이면 완성."
-        },
-        {
-          "ja": "歌舞伎座観劇の記念にぴったり。",
-          "zh": "适合作为歌舞伎座观剧纪念。",
-          "en": "A perfect Kabukiza souvenir.",
-          "ko": "가부키초 관람 기념에 제격."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "名前の文字や家紋・桜などのイラスト入れ可。",
+          "空いていれば15分ほどで完成。",
+          "歌舞伎座観劇の記念にぴったり。"
+        ],
+        "zh": [
+          "可加姓名文字与家纹、樱花等图案。",
+          "人少约15分钟完成。",
+          "适合作为歌舞伎座观剧纪念。"
+        ],
+        "en": [
+          "Add your name, family crests, cherry blossoms and more.",
+          "Done in ~15 minutes if not busy.",
+          "A perfect Kabukiza souvenir."
+        ],
+        "ko": [
+          "이름 문자나 가문 문양·벚꽃 등 일러스트 가능.",
+          "한가하면 약 15분이면 완성.",
+          "가부키초 관람 기념에 제격."
+        ]
+      }
     },
     {
       "name": "HARIOランプワークファクトリー",
@@ -13253,26 +13355,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime to evening",
         "ko": "낮~저녁"
       },
-      "tips_i18n": [
-        {
-          "ja": "1921年創業、理化学ガラスの老舗。",
-          "zh": "1921年创业、理化玻璃老铺。",
-          "en": "Founded 1921; a lab-glass veteran.",
-          "ko": "1921년 창업, 이화학 유리 노포."
-        },
-        {
-          "ja": "手加工でしか出せないガラスアクセサリー。",
-          "zh": "仅手工才能制作的玻璃饰品。",
-          "en": "Glass jewelry only handwork can achieve.",
-          "ko": "핸드워크로만 가능한 유리 액세서리."
-        },
-        {
-          "ja": "小伝馬町駅すぐ、江戸切子の街散策に。",
-          "zh": "小传马町站旁，适合漫步江户切子街。",
-          "en": "Right at Kodemmachō; good for exploring Edo-kiriko town.",
-          "ko": "코덴마초 역 바로, 에도키리코 거리 산책에."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "1921年創業、理化学ガラスの老舗。",
+          "手加工でしか出せないガラスアクセサリー。",
+          "小伝馬町駅すぐ、江戸切子の街散策に。"
+        ],
+        "zh": [
+          "1921年创业、理化玻璃老铺。",
+          "仅手工才能制作的玻璃饰品。",
+          "小传马町站旁，适合漫步江户切子街。"
+        ],
+        "en": [
+          "Founded 1921; a lab-glass veteran.",
+          "Glass jewelry only handwork can achieve.",
+          "Right at Kodemmachō; good for exploring Edo-kiriko town."
+        ],
+        "ko": [
+          "1921년 창업, 이화학 유리 노포.",
+          "핸드워크로만 가능한 유리 액세서리.",
+          "코덴마초 역 바로, 에도키리코 거리 산책에."
+        ]
+      }
     },
     {
       "name": "日比谷公園大音楽堂（日比谷野音）",
@@ -13332,26 +13436,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "주간"
       },
-      "tips_i18n": [
-        {
-          "ja": "抽選に当たれば一般人でも舞台に立てる。",
-          "zh": "抽中者普通民众也能登台。",
-          "en": "Anyone can take the stage if they win the lottery.",
-          "ko": "추첨에 당첨되면 일반인도 무대에."
-        },
-        {
-          "ja": "ロックファンなら一度は立ちたい名舞台。",
-          "zh": "摇滚迷都想站上一次的名舞台。",
-          "en": "A stage rock fans dream of playing.",
-          "ko": "록 팬이라면 한 번은 서고 싶은 명무대."
-        },
-        {
-          "ja": "公園散策がてら外観を眺めるだけでも。",
-          "zh": "散步公园时看看外观也不错。",
-          "en": "Even seeing the facade on a park stroll.",
-          "ko": "공원 산책 겸 외관 구경만으로도."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "抽選に当たれば一般人でも舞台に立てる。",
+          "ロックファンなら一度は立ちたい名舞台。",
+          "公園散策がてら外観を眺めるだけでも。"
+        ],
+        "zh": [
+          "抽中者普通民众也能登台。",
+          "摇滚迷都想站上一次的名舞台。",
+          "散步公园时看看外观也不错。"
+        ],
+        "en": [
+          "Anyone can take the stage if they win the lottery.",
+          "A stage rock fans dream of playing.",
+          "Even seeing the facade on a park stroll."
+        ],
+        "ko": [
+          "추첨에 당첨되면 일반인도 무대에.",
+          "록 팬이라면 한 번은 서고 싶은 명무대.",
+          "공원 산책 겸 외관 구경만으로도."
+        ]
+      }
     },
     {
       "name": "日比谷図書文化館",
@@ -13411,26 +13517,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime to evening",
         "ko": "낮~저녁"
       },
-      "tips_i18n": [
-        {
-          "ja": "図書館の本をカフェに持ち込みOK。",
-          "zh": "可将图书馆书籍带入咖啡馆。",
-          "en": "Bring library books into the café.",
-          "ko": "도서관 책을 카페에 반입 OK."
-        },
-        {
-          "ja": "三角の近代建築外観は必見。",
-          "zh": "三角现代建筑外观必看。",
-          "en": "The triangular modernist facade is a must.",
-          "ko": "삼각형 근대 건축 외관 필견."
-        },
-        {
-          "ja": "都会の喧騒を離れたコーヒー読書。",
-          "zh": "远离喧嚣的咖啡阅读。",
-          "en": "Coffee and books away from the bustle.",
-          "ko": "도시 소음에서 떨어진 커피 독서."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "図書館の本をカフェに持ち込みOK。",
+          "三角の近代建築外観は必見。",
+          "都会の喧騒を離れたコーヒー読書。"
+        ],
+        "zh": [
+          "可将图书馆书籍带入咖啡馆。",
+          "三角现代建筑外观必看。",
+          "远离喧嚣的咖啡阅读。"
+        ],
+        "en": [
+          "Bring library books into the café.",
+          "The triangular modernist facade is a must.",
+          "Coffee and books away from the bustle."
+        ],
+        "ko": [
+          "도서관 책을 카페에 반입 OK.",
+          "삼각형 근대 건축 외관 필견.",
+          "도시 소음에서 떨어진 커피 독서."
+        ]
+      }
     },
     {
       "name": "如水会館 カフェ&パブ マーキュリー",
@@ -13489,26 +13597,28 @@ window.RAILWAY_TOURISM = {
         "en": "Afternoon",
         "ko": "오후"
       },
-      "tips_i18n": [
-        {
-          "ja": "50年以上愛される白いモンブラン。",
-          "zh": "畅销50余年的白色蒙布朗。",
-          "en": "A white Mont-Blanc loved for 50+ years.",
-          "ko": "50년 이상 사랑받는 하얀 몽블랑."
-        },
-        {
-          "ja": "裏ごし栗たっぷり、口どけなめらか。",
-          "zh": "栗蓉满满、入口即化。",
-          "en": "Full of sieved chestnut, melting smooth.",
-          "ko": "체에 친 밤 가득, 입에서 사르륵."
-        },
-        {
-          "ja": "歴史ある会館でいただく贅沢なひととき。",
-          "zh": "在历史会馆享受奢华一刻。",
-          "en": "A luxurious moment in a historic hall.",
-          "ko": "역사 있는 회관에서 누리는 럭셔리 순간."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "50年以上愛される白いモンブラン。",
+          "裏ごし栗たっぷり、口どけなめらか。",
+          "歴史ある会館でいただく贅沢なひととき。"
+        ],
+        "zh": [
+          "畅销50余年的白色蒙布朗。",
+          "栗蓉满满、入口即化。",
+          "在历史会馆享受奢华一刻。"
+        ],
+        "en": [
+          "A white Mont-Blanc loved for 50+ years.",
+          "Full of sieved chestnut, melting smooth.",
+          "A luxurious moment in a historic hall."
+        ],
+        "ko": [
+          "50년 이상 사랑받는 하얀 몽블랑.",
+          "체에 친 밤 가득, 입에서 사르륵.",
+          "역사 있는 회관에서 누리는 럭셔리 순간."
+        ]
+      }
     },
     {
       "name": "日本カメラ博物館",
@@ -13567,26 +13677,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "주간"
       },
-      "tips_i18n": [
-        {
-          "ja": "ライター型・時計型など珍しいカメラが満載。",
-          "zh": "打火机、钟表等稀有相机满载。",
-          "en": "Packed with rare lighter- and watch-shaped cameras.",
-          "ko": "라이터형·시계형 등 희귀 카메라 가득."
-        },
-        {
-          "ja": "地下に広がる知られざるカメラ史。",
-          "zh": "地下展开的鲜为人知相机史。",
-          "en": "A hidden camera history underground.",
-          "ko": "지하에 펼쳐진 숨은 카메라사."
-        },
-        {
-          "ja": "日本の産業発展の歩みも学べる。",
-          "zh": "也能了解日本产业发展历程。",
-          "en": "Also learn Japan's industrial rise.",
-          "ko": "일본 산업 발전의 걸음도 학습."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "ライター型・時計型など珍しいカメラが満載。",
+          "地下に広がる知られざるカメラ史。",
+          "日本の産業発展の歩みも学べる。"
+        ],
+        "zh": [
+          "打火机、钟表等稀有相机满载。",
+          "地下展开的鲜为人知相机史。",
+          "也能了解日本产业发展历程。"
+        ],
+        "en": [
+          "Packed with rare lighter- and watch-shaped cameras.",
+          "A hidden camera history underground.",
+          "Also learn Japan's industrial rise."
+        ],
+        "ko": [
+          "라이터형·시계형 등 희귀 카메라 가득.",
+          "지하에 펼쳐진 숨은 카메라사.",
+          "일본 산업 발전의 걸음도 학습."
+        ]
+      }
     },
     {
       "name": "ZAKUROらんぷ家",
@@ -13644,26 +13756,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime to evening",
         "ko": "낮~저녁"
       },
-      "tips_i18n": [
-        {
-          "ja": "2～3時間でオリジナルランプが完成。",
-          "zh": "2–3小时完成原创灯。",
-          "en": "Finish an original lamp in 2–3 hours.",
-          "ko": "2~3시간이면 오리지널 램프 완성."
-        },
-        {
-          "ja": "灯りをつけた瞬間の感動は格別。",
-          "zh": "点亮瞬间的感动特别。",
-          "en": "The moment you light it is special.",
-          "ko": "불을 켠 순간의 감동은 각별."
-        },
-        {
-          "ja": "空きがあれば当日体験も可。",
-          "zh": "有空位当天也可体验。",
-          "en": "Same-day sessions if space allows.",
-          "ko": "빈자리 있으면 당일 체험도 가능."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "2～3時間でオリジナルランプが完成。",
+          "灯りをつけた瞬間の感動は格別。",
+          "空きがあれば当日体験も可。"
+        ],
+        "zh": [
+          "2–3小时完成原创灯。",
+          "点亮瞬间的感动特别。",
+          "有空位当天也可体验。"
+        ],
+        "en": [
+          "Finish an original lamp in 2–3 hours.",
+          "The moment you light it is special.",
+          "Same-day sessions if space allows."
+        ],
+        "ko": [
+          "2~3시간이면 오리지널 램프 완성.",
+          "불을 켠 순간의 감동은 각별.",
+          "빈자리 있으면 당일 체험도 가능."
+        ]
+      }
     },
     {
       "name": "ポポー",
@@ -13721,26 +13835,28 @@ window.RAILWAY_TOURISM = {
         "en": "Morning",
         "ko": "아침~오전"
       },
-      "tips_i18n": [
-        {
-          "ja": "卵・カツ・コロッケ・フルーツまで種類豊富。",
-          "zh": "鸡蛋、炸猪排、可乐饼、水果样样齐全。",
-          "en": "From egg and cutlet to croquette and fruit.",
-          "ko": "달걀·가츠·고로케·과일까지 종류 풍성."
-        },
-        {
-          "ja": "売り切れ次第終了、早起きが必須。",
-          "zh": "售完即止，必须早起。",
-          "en": "Sells out early; get up early.",
-          "ko": "매진 시 종료, 일찍 가야 함."
-        },
-        {
-          "ja": "ぎゅうぎゅう具のサンドイッチは圧巻。",
-          "zh": "塞满馅料的三明治震撼。",
-          "en": "The overstuffed sandwiches are stunning.",
-          "ko": "가득 찬 속 샌드위치는 압권."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "卵・カツ・コロッケ・フルーツまで種類豊富。",
+          "売り切れ次第終了、早起きが必須。",
+          "ぎゅうぎゅう具のサンドイッチは圧巻。"
+        ],
+        "zh": [
+          "鸡蛋、炸猪排、可乐饼、水果样样齐全。",
+          "售完即止，必须早起。",
+          "塞满馅料的三明治震撼。"
+        ],
+        "en": [
+          "From egg and cutlet to croquette and fruit.",
+          "Sells out early; get up early.",
+          "The overstuffed sandwiches are stunning."
+        ],
+        "ko": [
+          "달걀·가츠·고로케·과일까지 종류 풍성.",
+          "매진 시 종료, 일찍 가야 함.",
+          "가득 찬 속 샌드위치는 압권."
+        ]
+      }
     },
     {
       "name": "Butterfly dogcandy（バタフライ ドッグキャンディ）",
@@ -13798,26 +13914,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime to evening",
         "ko": "낮~저녁"
       },
-      "tips_i18n": [
-        {
-          "ja": "初心者も大歓迎、1回で作る体験レッスン。",
-          "zh": "新手欢迎，一次完成体验课。",
-          "en": "Beginners welcome; one-session trial lessons.",
-          "ko": "초보도 환영, 1회 완성 체험 레슨."
-        },
-        {
-          "ja": "超小型犬から大型犬までパターン完備。",
-          "zh": "超小型到大型犬纸样齐全。",
-          "en": "Patterns from teacup to large breeds.",
-          "ko": "초소형견부터 대형견까지 패턴 완비."
-        },
-        {
-          "ja": "愛犬にぴったりの一着を手作り。",
-          "zh": "为爱犬手工做一件合身衣。",
-          "en": "Hand-make the perfect outfit for your dog.",
-          "ko": "사랑하는 강아지에 딱 맞는 옷을 직접."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "初心者も大歓迎、1回で作る体験レッスン。",
+          "超小型犬から大型犬までパターン完備。",
+          "愛犬にぴったりの一着を手作り。"
+        ],
+        "zh": [
+          "新手欢迎，一次完成体验课。",
+          "超小型到大型犬纸样齐全。",
+          "为爱犬手工做一件合身衣。"
+        ],
+        "en": [
+          "Beginners welcome; one-session trial lessons.",
+          "Patterns from teacup to large breeds.",
+          "Hand-make the perfect outfit for your dog."
+        ],
+        "ko": [
+          "초보도 환영, 1회 완성 체험 레슨.",
+          "초소형견부터 대형견까지 패턴 완비.",
+          "사랑하는 강아지에 딱 맞는 옷을 직접."
+        ]
+      }
     },
     {
       "name": "アミューズミュージアム",
@@ -13875,26 +13993,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "주간"
       },
-      "tips_i18n": [
-        {
-          "ja": "90年間公開禁止だった幻の浮世絵コレクション。",
-          "zh": "90年间禁止公开的梦幻浮世绘收藏。",
-          "en": "A phantom ukiyo-e collection hidden for 90 years.",
-          "ko": "90년간 공개 금지였던 환상의 우키요에 컬렉션."
-        },
-        {
-          "ja": "浮世絵シアターで高精細映像を上映。",
-          "zh": "浮世绘剧场放映高清影像。",
-          "en": "Ukiyo-e Theater screens high-definition films.",
-          "ko": "우키요에 시어터에서 고화질 영상 상영."
-        },
-        {
-          "ja": "世界でここだけで見られる作品群。",
-          "zh": "全世界仅此处可看的作品群。",
-          "en": "Works you can see only here.",
-          "ko": "세계에서 여기서만 볼 수 있는 작품."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "90年間公開禁止だった幻の浮世絵コレクション。",
+          "浮世絵シアターで高精細映像を上映。",
+          "世界でここだけで見られる作品群。"
+        ],
+        "zh": [
+          "90年间禁止公开的梦幻浮世绘收藏。",
+          "浮世绘剧场放映高清影像。",
+          "全世界仅此处可看的作品群。"
+        ],
+        "en": [
+          "A phantom ukiyo-e collection hidden for 90 years.",
+          "Ukiyo-e Theater screens high-definition films.",
+          "Works you can see only here."
+        ],
+        "ko": [
+          "90년간 공개 금지였던 환상의 우키요에 컬렉션.",
+          "우키요에 시어터에서 고화질 영상 상영.",
+          "세계에서 여기서만 볼 수 있는 작품."
+        ]
+      }
     },
     {
       "name": "日の出湯",
@@ -13953,26 +14073,28 @@ window.RAILWAY_TOURISM = {
         "en": "Afternoon to night",
         "ko": "오후~밤"
       },
-      "tips_i18n": [
-        {
-          "ja": "樹齢1000年の古代檜風呂で柔らかなお湯。",
-          "zh": "千年古桧浴缸中的柔滑泉水。",
-          "en": "Soft water in a 1,000-year-old hinoki tub.",
-          "ko": "수령 1,000년 고대 편백탕의 부드러운 물."
-        },
-        {
-          "ja": "業界初・炭酸シャワー完備。",
-          "zh": "业界首个碳酸淋浴齐全。",
-          "en": "The industry's first carbonated shower.",
-          "ko": "업계 최초 탄산 샤워 완비."
-        },
-        {
-          "ja": "牧場直送牛乳（￥250）で仕上げる。",
-          "zh": "以牧场直送牛奶（¥250）收尾。",
-          "en": "Finish with farm-fresh milk (¥250).",
-          "ko": "목장 직송 우유 (¥250)로 마무리."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "樹齢1000年の古代檜風呂で柔らかなお湯。",
+          "業界初・炭酸シャワー完備。",
+          "牧場直送牛乳（￥250）で仕上げる。"
+        ],
+        "zh": [
+          "千年古桧浴缸中的柔滑泉水。",
+          "业界首个碳酸淋浴齐全。",
+          "以牧场直送牛奶（¥250）收尾。"
+        ],
+        "en": [
+          "Soft water in a 1,000-year-old hinoki tub.",
+          "The industry's first carbonated shower.",
+          "Finish with farm-fresh milk (¥250)."
+        ],
+        "ko": [
+          "수령 1,000년 고대 편백탕의 부드러운 물.",
+          "업계 최초 탄산 샤워 완비.",
+          "목장 직송 우유 (¥250)로 마무리."
+        ]
+      }
     },
     {
       "name": "宮本卯之助商店　太皷館",
@@ -14031,26 +14153,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "주간"
       },
-      "tips_i18n": [
-        {
-          "ja": "ゾウ・キリン製の珍しい太鼓も展示。",
-          "zh": "象、长颈鹿制的奇特太鼓也有。",
-          "en": "Rare drums made from elephant and giraffe hide.",
-          "ko": "코끼리·기린 가죽 희귀 북도 전시."
-        },
-        {
-          "ja": "「♪」マークの太鼓は自由に叩いてOK。",
-          "zh": "带\"♪\"标记的太鼓可自由敲击。",
-          "en": "Drums marked \"♪\" are free to strike.",
-          "ko": "「♪」 표시 북은 자유 타격 OK."
-        },
-        {
-          "ja": "田原町の穴場で音も体験。",
-          "zh": "田原町隐藏景点，还能体验声响。",
-          "en": "A hidden Tamachan spot where sound comes alive.",
-          "ko": "다와라초 숨은 명소에서 소리도 체험."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "ゾウ・キリン製の珍しい太鼓も展示。",
+          "「♪」マークの太鼓は自由に叩いてOK。",
+          "田原町の穴場で音も体験。"
+        ],
+        "zh": [
+          "象、长颈鹿制的奇特太鼓也有。",
+          "带\"♪\"标记的太鼓可自由敲击。",
+          "田原町隐藏景点，还能体验声响。"
+        ],
+        "en": [
+          "Rare drums made from elephant and giraffe hide.",
+          "Drums marked \"♪\" are free to strike.",
+          "A hidden Tamachan spot where sound comes alive."
+        ],
+        "ko": [
+          "코끼리·기린 가죽 희귀 북도 전시.",
+          "「♪」 표시 북은 자유 타격 OK.",
+          "다와라초 숨은 명소에서 소리도 체험."
+        ]
+      }
     },
     {
       "name": "柴田慶信商店",
@@ -14108,26 +14232,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime to evening",
         "ko": "낮~저녁"
       },
-      "tips_i18n": [
-        {
-          "ja": "天然杉の白木がご飯の水分を程よく吸収。",
-          "zh": "天然杉白木适度吸收米饭水分。",
-          "en": "Natural cedar just absorbs the right moisture.",
-          "ko": "천연 삼나무 백목이 밥 수분을 적당히 흡수."
-        },
-        {
-          "ja": "冷めても美味しい曲げわっぱ弁当。",
-          "zh": "冷掉也好吃的曲木便当。",
-          "en": "Mage-wappa bento stays good even cold.",
-          "ko": "식어도 맛있는 마게왓파 도시락."
-        },
-        {
-          "ja": "伝統的工芸品指定の逸品。",
-          "zh": "传统工艺品指定珍品。",
-          "en": "A designated traditional craft.",
-          "ko": "전통 공예품 지정 명품."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "天然杉の白木がご飯の水分を程よく吸収。",
+          "冷めても美味しい曲げわっぱ弁当。",
+          "伝統的工芸品指定の逸品。"
+        ],
+        "zh": [
+          "天然杉白木适度吸收米饭水分。",
+          "冷掉也好吃的曲木便当。",
+          "传统工艺品指定珍品。"
+        ],
+        "en": [
+          "Natural cedar just absorbs the right moisture.",
+          "Mage-wappa bento stays good even cold.",
+          "A designated traditional craft."
+        ],
+        "ko": [
+          "천연 삼나무 백목이 밥 수분을 적당히 흡수.",
+          "식어도 맛있는 마게왓파 도시락.",
+          "전통 공예품 지정 명품."
+        ]
+      }
     },
     {
       "name": "軽トラ市",
@@ -14185,26 +14311,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime (2nd & 4th Wed)",
         "ko": "주간 (둘째·넷째 수요일)"
       },
-      "tips_i18n": [
-        {
-          "ja": "和光市産の旬野菜がずらり。",
-          "zh": "和光市产时令蔬菜琳琅满目。",
-          "en": "Rows of in-season Wakō vegetables.",
-          "ko": "와코시 산 제철 채소가 가득."
-        },
-        {
-          "ja": "店員に今日のおすすめを聞けば献立が即決。",
-          "zh": "问店员今日推荐即定菜单。",
-          "en": "Ask the vendor for today's pick to decide dinner.",
-          "ko": "점원에게 오늘 추천을 물어보면 메뉴가 즉결."
-        },
-        {
-          "ja": "月2回の朝市、新鮮そのもの。",
-          "zh": "每月2次早市、食材超鲜。",
-          "en": "Twice-monthly morning market, ultra fresh.",
-          "ko": "한 달 2회 아침 시장, 신선함 그대로."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "和光市産の旬野菜がずらり。",
+          "店員に今日のおすすめを聞けば献立が即決。",
+          "月2回の朝市、新鮮そのもの。"
+        ],
+        "zh": [
+          "和光市产时令蔬菜琳琅满目。",
+          "问店员今日推荐即定菜单。",
+          "每月2次早市、食材超鲜。"
+        ],
+        "en": [
+          "Rows of in-season Wakō vegetables.",
+          "Ask the vendor for today's pick to decide dinner.",
+          "Twice-monthly morning market, ultra fresh."
+        ],
+        "ko": [
+          "와코시 산 제철 채소가 가득.",
+          "점원에게 오늘 추천을 물어보면 메뉴가 즉결.",
+          "한 달 2회 아침 시장, 신선함 그대로."
+        ]
+      }
     },
     {
       "name": "駅前商店ひまわり",
@@ -14262,26 +14390,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime to evening",
         "ko": "낮~저녁"
       },
-      "tips_i18n": [
-        {
-          "ja": "和光市産野菜の「ぴくる酢」が名物。",
-          "zh": "和光产蔬菜做的\"醋腌\"是名物。",
-          "en": "Local-vegetable \"pickle vinegar\" is a specialty.",
-          "ko": "와코시 산 채소 「피쿠르스」가 명물."
-        },
-        {
-          "ja": "イチゴ・ブルーベリーのカステラも。",
-          "zh": "草莓、蓝莓蜂蜜蛋糕也有。",
-          "en": "Also strawberry and blueberry castella.",
-          "ko": "딸기·블루베리 카스테라도."
-        },
-        {
-          "ja": "和光土産はここで揃う。",
-          "zh": "和光伴手礼在此齐全。",
-          "en": "All your Wakō souvenirs in one spot.",
-          "ko": "와코 기념품은 여기서."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "和光市産野菜の「ぴくる酢」が名物。",
+          "イチゴ・ブルーベリーのカステラも。",
+          "和光土産はここで揃う。"
+        ],
+        "zh": [
+          "和光产蔬菜做的\"醋腌\"是名物。",
+          "草莓、蓝莓蜂蜜蛋糕也有。",
+          "和光伴手礼在此齐全。"
+        ],
+        "en": [
+          "Local-vegetable \"pickle vinegar\" is a specialty.",
+          "Also strawberry and blueberry castella.",
+          "All your Wakō souvenirs in one spot."
+        ],
+        "ko": [
+          "와코시 산 채소 「피쿠르스」가 명물.",
+          "딸기·블루베리 카스테라도.",
+          "와코 기념품은 여기서."
+        ]
+      }
     },
     {
       "name": "NOE CAFE",
@@ -14339,26 +14469,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime to evening",
         "ko": "낮~저녁"
       },
-      "tips_i18n": [
-        {
-          "ja": "まるでドールハウスのような店内。",
-          "zh": "宛如玩偶屋的店内。",
-          "en": "A café that feels like a dollhouse itself.",
-          "ko": "마치 돌하우스 같은 실내."
-        },
-        {
-          "ja": "シカゴ・ロンドン・パリの逸品が並ぶ。",
-          "zh": "陈列芝加哥、伦敦、巴黎珍品。",
-          "en": "Pieces from Chicago, London, and Paris.",
-          "ko": "시카고·런던·파리 명품이 진열."
-        },
-        {
-          "ja": "撮影OK、フォトジェニックな時間。",
-          "zh": "可拍照、出片时光。",
-          "en": "Photos welcome; very photogenic.",
-          "ko": "촬영 OK, 포토제닉한 시간."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "まるでドールハウスのような店内。",
+          "シカゴ・ロンドン・パリの逸品が並ぶ。",
+          "撮影OK、フォトジェニックな時間。"
+        ],
+        "zh": [
+          "宛如玩偶屋的店内。",
+          "陈列芝加哥、伦敦、巴黎珍品。",
+          "可拍照、出片时光。"
+        ],
+        "en": [
+          "A café that feels like a dollhouse itself.",
+          "Pieces from Chicago, London, and Paris.",
+          "Photos welcome; very photogenic."
+        ],
+        "ko": [
+          "마치 돌하우스 같은 실내.",
+          "시카고·런던·파리 명품이 진열.",
+          "촬영 OK, 포토제닉한 시간."
+        ]
+      }
     },
     {
       "name": "YOGA ME！",
@@ -14416,26 +14548,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime to night",
         "ko": "낮~밤"
       },
-      "tips_i18n": [
-        {
-          "ja": "「個人」を意味するイシュタ・ヨガ。",
-          "zh": "意为\"个人\"的伊师塔瑜伽。",
-          "en": "\"Isha\" means the individual in Sanskrit.",
-          "ko": "\"개인\"을 뜻하는 이슈타 요가."
-        },
-        {
-          "ja": "自分の体に合ったヨガが見つかる。",
-          "zh": "找到适合自己身体的瑜伽。",
-          "en": "Find the yoga that fits your own body.",
-          "ko": "자기 몸에 맞는 요가를 찾는다."
-        },
-        {
-          "ja": "今の自分と向き合う時間に。",
-          "zh": "与当下自己对话的时光。",
-          "en": "A time to face yourself as you are.",
-          "ko": "지금의 자신과 마주하는 시간에."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "「個人」を意味するイシュタ・ヨガ。",
+          "自分の体に合ったヨガが見つかる。",
+          "今の自分と向き合う時間に。"
+        ],
+        "zh": [
+          "意为\"个人\"的伊师塔瑜伽。",
+          "找到适合自己身体的瑜伽。",
+          "与当下自己对话的时光。"
+        ],
+        "en": [
+          "\"Isha\" means the individual in Sanskrit.",
+          "Find the yoga that fits your own body.",
+          "A time to face yourself as you are."
+        ],
+        "ko": [
+          "\"개인\"을 뜻하는 이슈타 요가.",
+          "자기 몸에 맞는 요가를 찾는다.",
+          "지금의 자신과 마주하는 시간에."
+        ]
+      }
     },
     {
       "name": "獣肉酒家　米とサーカス",
@@ -14493,26 +14627,28 @@ window.RAILWAY_TOURISM = {
         "en": "Night",
         "ko": "밤"
       },
-      "tips_i18n": [
-        {
-          "ja": "鹿・熊・ワニまで世界の獣肉がずらり。",
-          "zh": "鹿、熊、鳄鱼等世界野味齐全。",
-          "en": "From venison and bear to crocodile.",
-          "ko": "사슴·곰·악어까지 세계 야생고기 가득."
-        },
-        {
-          "ja": "味は食べてからのお楽しみ。",
-          "zh": "味道吃了再说。",
-          "en": "The taste is a surprise until you try.",
-          "ko": "맛은 먹어본 다음의 즐거움."
-        },
-        {
-          "ja": "カンガルーは低糖質で美容・ダイエット向き。",
-          "zh": "袋鼠肉低糖、适合美容减肥。",
-          "en": "Kangaroo is low-carb, good for dieting.",
-          "ko": "캥거루는 저당질로 미용·다이어트에."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "鹿・熊・ワニまで世界の獣肉がずらり。",
+          "味は食べてからのお楽しみ。",
+          "カンガルーは低糖質で美容・ダイエット向き。"
+        ],
+        "zh": [
+          "鹿、熊、鳄鱼等世界野味齐全。",
+          "味道吃了再说。",
+          "袋鼠肉低糖、适合美容减肥。"
+        ],
+        "en": [
+          "From venison and bear to crocodile.",
+          "The taste is a surprise until you try.",
+          "Kangaroo is low-carb, good for dieting."
+        ],
+        "ko": [
+          "사슴·곰·악어까지 세계 야생고기 가득.",
+          "맛은 먹어본 다음의 즐거움.",
+          "캥거루는 저당질로 미용·다이어트에."
+        ]
+      }
     },
     {
       "name": "高田馬場ミャンマー語教室",
@@ -14570,26 +14706,28 @@ window.RAILWAY_TOURISM = {
         "en": "Day & night",
         "ko": "낮·밤"
       },
-      "tips_i18n": [
-        {
-          "ja": "先生とのつながりが国際交流の第一歩。",
-          "zh": "与老师的缘分是国际交流第一步。",
-          "en": "Bonding with teachers is the first step to exchange.",
-          "ko": "선생님과의 인연이 국제교류의 첫걸음."
-        },
-        {
-          "ja": "アジア文化にグッと近づける。",
-          "zh": "拉近与亚洲文化的距离。",
-          "en": "Get closer to Asian culture.",
-          "ko": "아시아 문화에 바짝 다가갈 수."
-        },
-        {
-          "ja": "ビザ免除で注目のミャンマー。",
-          "zh": "免签受关注的缅甸。",
-          "en": "Myanmar, now visa-exempt and in the spotlight.",
-          "ko": "비자 면제로 주목받는 미얀마."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "先生とのつながりが国際交流の第一歩。",
+          "アジア文化にグッと近づける。",
+          "ビザ免除で注目のミャンマー。"
+        ],
+        "zh": [
+          "与老师的缘分是国际交流第一步。",
+          "拉近与亚洲文化的距离。",
+          "免签受关注的缅甸。"
+        ],
+        "en": [
+          "Bonding with teachers is the first step to exchange.",
+          "Get closer to Asian culture.",
+          "Myanmar, now visa-exempt and in the spotlight."
+        ],
+        "ko": [
+          "선생님과의 인연이 국제교류의 첫걸음.",
+          "아시아 문화에 바짝 다가갈 수.",
+          "비자 면제로 주목받는 미얀마."
+        ]
+      }
     },
     {
       "name": "東京メトロ特設ブース（エーラウンド・マーケット）",
@@ -14647,26 +14785,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime (event days only)",
         "ko": "주간 (개최일 한정)"
       },
-      "tips_i18n": [
-        {
-          "ja": "銀座線1000形車両をレザーで再現。",
-          "zh": "用皮革重现银座线1000型车辆。",
-          "en": "Recreate the Ginza Line 1000 series in leather.",
-          "ko": "긴자선 1000형 차량을 가죽으로 재현."
-        },
-        {
-          "ja": "特別な道具不要、初心者でも簡単。",
-          "zh": "无需特殊工具、新手也简单。",
-          "en": "No special tools; easy for beginners.",
-          "ko": "특별 도구 불필요, 초보자도 간단."
-        },
-        {
-          "ja": "その場で組み立て体験スペースも。",
-          "zh": "现场设有组装体验区。",
-          "en": "On-site assembly space provided.",
-          "ko": "현장 조립 체험 스페이스도."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "銀座線1000形車両をレザーで再現。",
+          "特別な道具不要、初心者でも簡単。",
+          "その場で組み立て体験スペースも。"
+        ],
+        "zh": [
+          "用皮革重现银座线1000型车辆。",
+          "无需特殊工具、新手也简单。",
+          "现场设有组装体验区。"
+        ],
+        "en": [
+          "Recreate the Ginza Line 1000 series in leather.",
+          "No special tools; easy for beginners.",
+          "On-site assembly space provided."
+        ],
+        "ko": [
+          "긴자선 1000형 차량을 가죽으로 재현.",
+          "특별 도구 불필요, 초보자도 간단.",
+          "현장 조립 체험 스페이스도."
+        ]
+      }
     },
     {
       "name": "小川広場（東京メトロ特設ブース）",
@@ -14724,26 +14864,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime (event days only)",
         "ko": "주간 (개최일 한정)"
       },
-      "tips_i18n": [
-        {
-          "ja": "神田は400店以上のカレー激戦区。",
-          "zh": "神田是400余家咖喱激战区。",
-          "en": "Kanda is a curry battleground of 400+ shops.",
-          "ko": "칸다는 400여 개 카레 격전지."
-        },
-        {
-          "ja": "駅員考案の自慢カレーをひとくち。",
-          "zh": "一口品尝站务员设计的得意咖喱。",
-          "en": "Sample station staff's proud curries.",
-          "ko": "역원 고안의 자랑 카레를 한 입."
-        },
-        {
-          "ja": "予選勝ち抜いた20店が頂点を競う。",
-          "zh": "预选赛胜出的20店争夺顶点。",
-          "en": "20 finalists battle for the top.",
-          "ko": "예선 뚫은 20점이 정점을 다툼."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "神田は400店以上のカレー激戦区。",
+          "駅員考案の自慢カレーをひとくち。",
+          "予選勝ち抜いた20店が頂点を競う。"
+        ],
+        "zh": [
+          "神田是400余家咖喱激战区。",
+          "一口品尝站务员设计的得意咖喱。",
+          "预选赛胜出的20店争夺顶点。"
+        ],
+        "en": [
+          "Kanda is a curry battleground of 400+ shops.",
+          "Sample station staff's proud curries.",
+          "20 finalists battle for the top."
+        ],
+        "ko": [
+          "칸다는 400여 개 카레 격전지.",
+          "역원 고안의 자랑 카레를 한 입.",
+          "예선 뚫은 20점이 정점을 다툼."
+        ]
+      }
     },
     {
       "name": "東京ドームシティアトラクションズ 「ビッグ・オー」",
@@ -14801,26 +14943,28 @@ window.RAILWAY_TOURISM = {
         "en": "Day & night",
         "ko": "낮·밤"
       },
-      "tips_i18n": [
-        {
-          "ja": "世界初・中でカラオケができる観覧車。",
-          "zh": "世界首个舱内可唱K的摩天轮。",
-          "en": "The world's first karaoke Ferris wheel.",
-          "ko": "세계 최초·안에서 노래방이 가능한 대관람차."
-        },
-        {
-          "ja": "夜は夜景の中で熱唱も。",
-          "zh": "夜晚可在夜景中欢唱。",
-          "en": "Sing out loud under the night lights.",
-          "ko": "밤에는 야경 속에서 열창도."
-        },
-        {
-          "ja": "1周15分、絶景を見下ろして開放感。",
-          "zh": "转一圈15分钟、俯瞰绝景超畅快。",
-          "en": "15 minutes of sweeping views and freedom.",
-          "ko": "1바퀴 15분, 절경을 내려다보며 개방감."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "世界初・中でカラオケができる観覧車。",
+          "夜は夜景の中で熱唱も。",
+          "1周15分、絶景を見下ろして開放感。"
+        ],
+        "zh": [
+          "世界首个舱内可唱K的摩天轮。",
+          "夜晚可在夜景中欢唱。",
+          "转一圈15分钟、俯瞰绝景超畅快。"
+        ],
+        "en": [
+          "The world's first karaoke Ferris wheel.",
+          "Sing out loud under the night lights.",
+          "15 minutes of sweeping views and freedom."
+        ],
+        "ko": [
+          "세계 최초·안에서 노래방이 가능한 대관람차.",
+          "밤에는 야경 속에서 열창도.",
+          "1바퀴 15분, 절경을 내려다보며 개방감."
+        ]
+      }
     },
     {
       "name": "L’ESSENTIELLE（レセンシエル）",
@@ -14878,26 +15022,28 @@ window.RAILWAY_TOURISM = {
         "en": "Afternoon",
         "ko": "오후"
       },
-      "tips_i18n": [
-        {
-          "ja": "香りが記憶に残るケーキを目指す。",
-          "zh": "以香气留下记忆的蛋糕为目标。",
-          "en": "Cakes designed to stay in memory through scent.",
-          "ko": "향기가 기억에 남는 케이크를 지향."
-        },
-        {
-          "ja": "ローズや山椒など意外な組み合わせ。",
-          "zh": "玫瑰与花椒等意外搭配。",
-          "en": "Surprising pairings like rose and sanshō.",
-          "ko": "로즈나 산초 등 의외의 조합."
-        },
-        {
-          "ja": "美しい見た目とあふれる香り。",
-          "zh": "外观精美、香气四溢。",
-          "en": "Beautiful looks and generous aroma.",
-          "ko": "아름다운 비주얼과 넘치는 향."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "香りが記憶に残るケーキを目指す。",
+          "ローズや山椒など意外な組み合わせ。",
+          "美しい見た目とあふれる香り。"
+        ],
+        "zh": [
+          "以香气留下记忆的蛋糕为目标。",
+          "玫瑰与花椒等意外搭配。",
+          "外观精美、香气四溢。"
+        ],
+        "en": [
+          "Cakes designed to stay in memory through scent.",
+          "Surprising pairings like rose and sanshō.",
+          "Beautiful looks and generous aroma."
+        ],
+        "ko": [
+          "향기가 기억에 남는 케이크를 지향.",
+          "로즈나 산초 등 의외의 조합.",
+          "아름다운 비주얼과 넘치는 향."
+        ]
+      }
     },
     {
       "name": "林泉寺（縛られ地蔵尊）",
@@ -14956,26 +15102,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "주간"
       },
-      "tips_i18n": [
-        {
-          "ja": "願いを縛り、叶ったら解く。",
-          "zh": "许愿绑绳、灵验解绳。",
-          "en": "Tie a rope to wish, untie it when granted.",
-          "ko": "소원을 매고, 이루면 푼다."
-        },
-        {
-          "ja": "他では出会えない縛られ地蔵。",
-          "zh": "别处难得一见的被缚地藏。",
-          "en": "A \"bound Jizō\" you rarely see elsewhere.",
-          "ko": "다른 곳에선 만나기 힘든 묶인 지장."
-        },
-        {
-          "ja": "江戸時代から続く祈りの風習。",
-          "zh": "延续江户时代的祈祷习俗。",
-          "en": "A prayer custom since the Edo period.",
-          "ko": "에도 시대부터 이어지는 기도 풍습."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "願いを縛り、叶ったら解く。",
+          "他では出会えない縛られ地蔵。",
+          "江戸時代から続く祈りの風習。"
+        ],
+        "zh": [
+          "许愿绑绳、灵验解绳。",
+          "别处难得一见的被缚地藏。",
+          "延续江户时代的祈祷习俗。"
+        ],
+        "en": [
+          "Tie a rope to wish, untie it when granted.",
+          "A \"bound Jizō\" you rarely see elsewhere.",
+          "A prayer custom since the Edo period."
+        ],
+        "ko": [
+          "소원을 매고, 이루면 푼다.",
+          "다른 곳에선 만나기 힘든 묶인 지장.",
+          "에도 시대부터 이어지는 기도 풍습."
+        ]
+      }
     },
     {
       "name": "マツダ映画社",
@@ -15033,26 +15181,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "주간"
       },
-      "tips_i18n": [
-        {
-          "ja": "一人でも試写室を貸し切れる。",
-          "zh": "一人也能包下试映室。",
-          "en": "Hire the screening room even solo.",
-          "ko": "혼자서도 시사실을 대관 가능."
-        },
-        {
-          "ja": "弁士による無声映画鑑賞会を各地で。",
-          "zh": "活动弁士讲解的无声电影鉴赏会。",
-          "en": "Live silent films with a katsuben narrator.",
-          "ko": "변사가 곁들이는 무성영화 감상회."
-        },
-        {
-          "ja": "6,000巻におよぶ古典映画ライブラリー。",
-          "zh": "6000卷古典电影宝库。",
-          "en": "A 6,000-reel classic-film library.",
-          "ko": "6,000권에 달하는 고전 영화 장서."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "一人でも試写室を貸し切れる。",
+          "弁士による無声映画鑑賞会を各地で。",
+          "6,000巻におよぶ古典映画ライブラリー。"
+        ],
+        "zh": [
+          "一人也能包下试映室。",
+          "活动弁士讲解的无声电影鉴赏会。",
+          "6000卷古典电影宝库。"
+        ],
+        "en": [
+          "Hire the screening room even solo.",
+          "Live silent films with a katsuben narrator.",
+          "A 6,000-reel classic-film library."
+        ],
+        "ko": [
+          "혼자서도 시사실을 대관 가능.",
+          "변사가 곁들이는 무성영화 감상회.",
+          "6,000권에 달하는 고전 영화 장서."
+        ]
+      }
     },
     {
       "name": "東京スパイスハウス",
@@ -15110,26 +15260,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime to evening",
         "ko": "낮~저녁"
       },
-      "tips_i18n": [
-        {
-          "ja": "試食しながら自分好みを選べる。",
-          "zh": "可试吃后选到心仪款。",
-          "en": "Taste as you find your own blend.",
-          "ko": "시식하며 취향을 고를 수."
-        },
-        {
-          "ja": "世界各国のスパイスが博物館陳列。",
-          "zh": "各国香料如博物馆陈列。",
-          "en": "World spices displayed like a museum.",
-          "ko": "세계 각국 스파이스가 박물관 진열."
-        },
-        {
-          "ja": "カレー作りの幅がぐっと広がる。",
-          "zh": "让做咖喱的选择大大拓宽。",
-          "en": "Greatly widens your curry repertoire.",
-          "ko": "커리 만들기 폭이 확 넓어짐."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "試食しながら自分好みを選べる。",
+          "世界各国のスパイスが博物館陳列。",
+          "カレー作りの幅がぐっと広がる。"
+        ],
+        "zh": [
+          "可试吃后选到心仪款。",
+          "各国香料如博物馆陈列。",
+          "让做咖喱的选择大大拓宽。"
+        ],
+        "en": [
+          "Taste as you find your own blend.",
+          "World spices displayed like a museum.",
+          "Greatly widens your curry repertoire."
+        ],
+        "ko": [
+          "시식하며 취향을 고를 수.",
+          "세계 각국 스파이스가 박물관 진열.",
+          "커리 만들기 폭이 확 넓어짐."
+        ]
+      }
     },
     {
       "name": "米農家の店",
@@ -15188,26 +15340,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "주간"
       },
-      "tips_i18n": [
-        {
-          "ja": "イカそっくり寿司はナタデココと大葉。",
-          "zh": "酷似鱿鱼的寿司是椰果加大叶。",
-          "en": "The squid-look sushi is nata-de-coco and shiso.",
-          "ko": "오징어 똑같은 초밥은 코코넛젤리와 깻잎."
-        },
-        {
-          "ja": "いくらそっくりはタピオカの醤油漬け。",
-          "zh": "酷似鲑鱼籽的是酱油泡珍珠。",
-          "en": "The ikura-look is soy-pickled tapioca.",
-          "ko": "연어알 똑같은 것은 타피오카 간장 절임."
-        },
-        {
-          "ja": "栄養価の高いスペルト小麦の麺も。",
-          "zh": "营养丰富的斯佩尔特小麦面也有。",
-          "en": "Also nutrient-dense spelt-wheat noodles.",
-          "ko": "영양가 높은 스펠트 밀 국수도."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "イカそっくり寿司はナタデココと大葉。",
+          "いくらそっくりはタピオカの醤油漬け。",
+          "栄養価の高いスペルト小麦の麺も。"
+        ],
+        "zh": [
+          "酷似鱿鱼的寿司是椰果加大叶。",
+          "酷似鲑鱼籽的是酱油泡珍珠。",
+          "营养丰富的斯佩尔特小麦面也有。"
+        ],
+        "en": [
+          "The squid-look sushi is nata-de-coco and shiso.",
+          "The ikura-look is soy-pickled tapioca.",
+          "Also nutrient-dense spelt-wheat noodles."
+        ],
+        "ko": [
+          "오징어 똑같은 초밥은 코코넛젤리와 깻잎.",
+          "연어알 똑같은 것은 타피오카 간장 절임.",
+          "영양가 높은 스펠트 밀 국수도."
+        ]
+      }
     },
     {
       "name": "JUNGLE BOOKS",
@@ -15265,26 +15419,28 @@ window.RAILWAY_TOURISM = {
         "en": "Afternoon",
         "ko": "오후"
       },
-      "tips_i18n": [
-        {
-          "ja": "古本を見に行くついでに占ってもらえる。",
-          "zh": "淘书间隙顺便占卜。",
-          "en": "Get a reading while you look at books.",
-          "ko": "헌책 구경 겸 점을 볼 수."
-        },
-        {
-          "ja": "30分以内なら何件でも相談OK。",
-          "zh": "30分钟内可问多件事。",
-          "en": "Ask as many questions as fit in 30 min.",
-          "ko": "30분 안이면 몇 건이든 상담 OK."
-        },
-        {
-          "ja": "入りやすい古書店スタイル。",
-          "zh": "易进门的旧书店风格。",
-          "en": "An easy-to-enter used-book vibe.",
-          "ko": "들르기 쉬운 헌책방 스타일."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "古本を見に行くついでに占ってもらえる。",
+          "30分以内なら何件でも相談OK。",
+          "入りやすい古書店スタイル。"
+        ],
+        "zh": [
+          "淘书间隙顺便占卜。",
+          "30分钟内可问多件事。",
+          "易进门的旧书店风格。"
+        ],
+        "en": [
+          "Get a reading while you look at books.",
+          "Ask as many questions as fit in 30 min.",
+          "An easy-to-enter used-book vibe."
+        ],
+        "ko": [
+          "헌책 구경 겸 점을 볼 수.",
+          "30분 안이면 몇 건이든 상담 OK.",
+          "들르기 쉬운 헌책방 스타일."
+        ]
+      }
     },
     {
       "name": "10minutes（テンミニッツ）",
@@ -15343,26 +15499,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime to evening",
         "ko": "낮~저녁"
       },
-      "tips_i18n": [
-        {
-          "ja": "一見雑貨屋、実はおしゃれな釣具店。",
-          "zh": "乍看杂货铺、实为时尚渔具店。",
-          "en": "Looks like a lifestyle shop, actually a tackle store.",
-          "ko": "겉보기엔 잡화점, 알고 보면 세련된 낚시점."
-        },
-        {
-          "ja": "カラフルなルアーは眺めているだけで楽しい。",
-          "zh": "缤纷拟饵光看也享受。",
-          "en": "Colorful lures are fun just to gaze at.",
-          "ko": "알록달록 루어는 보고만 있어도 즐거움."
-        },
-        {
-          "ja": "釣りウェアやバッグは普段使いもOK。",
-          "zh": "钓鱼服饰与包可日常使用。",
-          "en": "Wearable fishing clothes and bags for daily use.",
-          "ko": "낚시 웨어·가방은 평소 사용도 OK."
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "一見雑貨屋、実はおしゃれな釣具店。",
+          "カラフルなルアーは眺めているだけで楽しい。",
+          "釣りウェアやバッグは普段使いもOK。"
+        ],
+        "zh": [
+          "乍看杂货铺、实为时尚渔具店。",
+          "缤纷拟饵光看也享受。",
+          "钓鱼服饰与包可日常使用。"
+        ],
+        "en": [
+          "Looks like a lifestyle shop, actually a tackle store.",
+          "Colorful lures are fun just to gaze at.",
+          "Wearable fishing clothes and bags for daily use."
+        ],
+        "ko": [
+          "겉보기엔 잡화점, 알고 보면 세련된 낚시점.",
+          "알록달록 루어는 보고만 있어도 즐거움.",
+          "낚시 웨어·가방은 평소 사용도 OK."
+        ]
+      },
       "address": "東京都豊島区西池袋2-35-9"
     },
     {
@@ -15421,26 +15579,28 @@ window.RAILWAY_TOURISM = {
         "en": "Night",
         "ko": "밤"
       },
-      "tips_i18n": [
-        {
-          "ja": "看板「ハムユイバーグ」は予約必須。",
-          "zh": "招牌\"咸鱼肉饼\"必须预约。",
-          "en": "The signature \"ham-yu burger\" requires booking.",
-          "ko": "간판 \"하무유 버그\"는 예약 필수."
-        },
-        {
-          "ja": "広東・潮州に東南アジアも融合。",
-          "zh": "广东、潮州融合东南亚风味。",
-          "en": "Cantonese & Teochew fused with SE Asian notes.",
-          "ko": "광둥·조주에 동남아까지 융합."
-        },
-        {
-          "ja": "香港の食を知る写真家がプロデュース。",
-          "zh": "通晓香港美食的摄影家监制。",
-          "en": "Produced by a photographer who knows Hong Kong food.",
-          "ko": "홍콩 식을 아는 사진가가 프로듀스."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "看板「ハムユイバーグ」は予約必須。",
+          "広東・潮州に東南アジアも融合。",
+          "香港の食を知る写真家がプロデュース。"
+        ],
+        "zh": [
+          "招牌\"咸鱼肉饼\"必须预约。",
+          "广东、潮州融合东南亚风味。",
+          "通晓香港美食的摄影家监制。"
+        ],
+        "en": [
+          "The signature \"ham-yu burger\" requires booking.",
+          "Cantonese & Teochew fused with SE Asian notes.",
+          "Produced by a photographer who knows Hong Kong food."
+        ],
+        "ko": [
+          "간판 \"하무유 버그\"는 예약 필수.",
+          "광둥·조주에 동남아까지 융합.",
+          "홍콩 식을 아는 사진가가 프로듀스."
+        ]
+      }
     },
     {
       "name": "HININE NOTE（ハイナインノート）",
@@ -15499,26 +15659,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime to evening",
         "ko": "낮~저녁"
       },
-      "tips_i18n": [
-        {
-          "ja": "表紙だけで50種類以上。",
-          "zh": "仅封面就有50多种。",
-          "en": "50+ covers alone.",
-          "ko": "표지만 50종류 이상."
-        },
-        {
-          "ja": "製本は約15分、選ぶ時間も楽しい。",
-          "zh": "制作约15分钟，挑选也享受。",
-          "en": "Binding ~15 min; choosing is half the fun.",
-          "ko": "제본 약 15분, 고르는 시간도 즐거움."
-        },
-        {
-          "ja": "印刷のプロが紙の質感まで選べる。",
-          "zh": "印刷专家任你挑纸质。",
-          "en": "Print pros let you pick the paper feel.",
-          "ko": "인쇄 전문가가 종이 질감까지 선택 가능."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "表紙だけで50種類以上。",
+          "製本は約15分、選ぶ時間も楽しい。",
+          "印刷のプロが紙の質感まで選べる。"
+        ],
+        "zh": [
+          "仅封面就有50多种。",
+          "制作约15分钟，挑选也享受。",
+          "印刷专家任你挑纸质。"
+        ],
+        "en": [
+          "50+ covers alone.",
+          "Binding ~15 min; choosing is half the fun.",
+          "Print pros let you pick the paper feel."
+        ],
+        "ko": [
+          "표지만 50종류 이상.",
+          "제본 약 15분, 고르는 시간도 즐거움.",
+          "인쇄 전문가가 종이 질감까지 선택 가능."
+        ]
+      }
     },
     {
       "name": "Balmy Cafe （バルミーカフェ）",
@@ -15577,26 +15739,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "주간"
       },
-      "tips_i18n": [
-        {
-          "ja": "約1000種類のオリジナルハンガーが並ぶ。",
-          "zh": "约1000种原创衣架林立。",
-          "en": "~1,000 original hangers on show.",
-          "ko": "약 1,000종 오리지널 행거가 즐비."
-        },
-        {
-          "ja": "ニット専用など機能的な逸品も。",
-          "zh": "针织专用等功能佳品也有。",
-          "en": "Functional gems like knit-specific hangers.",
-          "ko": "니트 전용 등 기능적 명품도."
-        },
-        {
-          "ja": "1本300円～から購入OK。",
-          "zh": "1支300日元起即可购入。",
-          "en": "Buy a hanger from ¥300.",
-          "ko": "1개 300엔~부터 구입 OK."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "約1000種類のオリジナルハンガーが並ぶ。",
+          "ニット専用など機能的な逸品も。",
+          "1本300円～から購入OK。"
+        ],
+        "zh": [
+          "约1000种原创衣架林立。",
+          "针织专用等功能佳品也有。",
+          "1支300日元起即可购入。"
+        ],
+        "en": [
+          "~1,000 original hangers on show.",
+          "Functional gems like knit-specific hangers.",
+          "Buy a hanger from ¥300."
+        ],
+        "ko": [
+          "약 1,000종 오리지널 행거가 즐비.",
+          "니트 전용 등 기능적 명품도.",
+          "1개 300엔~부터 구입 OK."
+        ]
+      }
     },
     {
       "name": "PostCoffee（ポストコーヒー）",
@@ -15654,26 +15818,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime to evening",
         "ko": "낮~저녁"
       },
-      "tips_i18n": [
-        {
-          "ja": "プロが好みを診断して豆を提案。",
-          "zh": "专家诊断喜好推荐豆子。",
-          "en": "A pro diagnoses your taste and suggests beans.",
-          "ko": "전문가가 취향을 진단해 원두를 제안."
-        },
-        {
-          "ja": "淹れ方レクチャーも受けられる。",
-          "zh": "也可接受冲泡指导。",
-          "en": "Also learn how to brew your way.",
-          "ko": "내리는 법 레슨도 가능."
-        },
-        {
-          "ja": "冷めても変化する風味を楽しむ。",
-          "zh": "享受放凉后风味变化。",
-          "en": "Enjoy how the flavor changes as it cools.",
-          "ko": "식어도 변하는 풍미를 즐기기."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "プロが好みを診断して豆を提案。",
+          "淹れ方レクチャーも受けられる。",
+          "冷めても変化する風味を楽しむ。"
+        ],
+        "zh": [
+          "专家诊断喜好推荐豆子。",
+          "也可接受冲泡指导。",
+          "享受放凉后风味变化。"
+        ],
+        "en": [
+          "A pro diagnoses your taste and suggests beans.",
+          "Also learn how to brew your way.",
+          "Enjoy how the flavor changes as it cools."
+        ],
+        "ko": [
+          "전문가가 취향을 진단해 원두를 제안.",
+          "내리는 법 레슨도 가능.",
+          "식어도 변하는 풍미를 즐기기."
+        ]
+      }
     },
     {
       "name": "スパイスマジック カルカッタ南口店",
@@ -15731,26 +15897,28 @@ window.RAILWAY_TOURISM = {
         "en": "Lunch & dinner",
         "ko": "점심·저녁"
       },
-      "tips_i18n": [
-        {
-          "ja": "北インドとは別物の南インド料理。",
-          "zh": "与北印度截然不同的南印度菜。",
-          "en": "South Indian cuisine, worlds apart from the north.",
-          "ko": "북인도와는 별개의 남인도 요리."
-        },
-        {
-          "ja": "パリパリ巨大ドーサプレートが一番人気。",
-          "zh": "酥脆巨大多莎套餐最受欢迎。",
-          "en": "The crispy giant dosa plate is top.",
-          "ko": "바삭한 거대 도사 플레이트가 최고 인기."
-        },
-        {
-          "ja": "豆と野菜のカレー「サンバル」を味わって。",
-          "zh": "尝尝豆蔬咖喱\"Sambar\"。",
-          "en": "Taste the lentil-vegetable \"sambar\".",
-          "ko": "콩과 채소 카레 \"Sambar\"를 맛보기."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "北インドとは別物の南インド料理。",
+          "パリパリ巨大ドーサプレートが一番人気。",
+          "豆と野菜のカレー「サンバル」を味わって。"
+        ],
+        "zh": [
+          "与北印度截然不同的南印度菜。",
+          "酥脆巨大多莎套餐最受欢迎。",
+          "尝尝豆蔬咖喱\"Sambar\"。"
+        ],
+        "en": [
+          "South Indian cuisine, worlds apart from the north.",
+          "The crispy giant dosa plate is top.",
+          "Taste the lentil-vegetable \"sambar\"."
+        ],
+        "ko": [
+          "북인도와는 별개의 남인도 요리.",
+          "바삭한 거대 도사 플레이트가 최고 인기.",
+          "콩과 채소 카레 \"Sambar\"를 맛보기."
+        ]
+      }
     },
     {
       "name": "浅草聚楽",
@@ -15809,26 +15977,28 @@ window.RAILWAY_TOURISM = {
         "en": "Lunch",
         "ko": "런치"
       },
-      "tips_i18n": [
-        {
-          "ja": "10銭ハヤシライスや3銭コロッケ。",
-          "zh": "10钱海烩饭、3钱可乐饼。",
-          "en": "10-sen hashed rice and 3-sen croquette.",
-          "ko": "10전 하야시라이스와 3전 고로케."
-        },
-        {
-          "ja": "日本独自の洋食\"YOSHOKU\"を堪能。",
-          "zh": "品味日本独创洋食\"YOSHOKU\"。",
-          "en": "Savor Japan's unique \"YOSHOKU\".",
-          "ko": "일본 독자 양식 \"YOSHOKU\"를 만끽."
-        },
-        {
-          "ja": "外国人観光客にも人気の浅草グルメ。",
-          "zh": "也受外国游客欢迎的浅草美食。",
-          "en": "Asakusa food popular with visitors.",
-          "ko": "외국인 관광객에게도 인기 아사쿠사 맛집."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "10銭ハヤシライスや3銭コロッケ。",
+          "日本独自の洋食\"YOSHOKU\"を堪能。",
+          "外国人観光客にも人気の浅草グルメ。"
+        ],
+        "zh": [
+          "10钱海烩饭、3钱可乐饼。",
+          "品味日本独创洋食\"YOSHOKU\"。",
+          "也受外国游客欢迎的浅草美食。"
+        ],
+        "en": [
+          "10-sen hashed rice and 3-sen croquette.",
+          "Savor Japan's unique \"YOSHOKU\".",
+          "Asakusa food popular with visitors."
+        ],
+        "ko": [
+          "10전 하야시라이스와 3전 고로케.",
+          "일본 독자 양식 \"YOSHOKU\"를 만끽.",
+          "외국인 관광객에게도 인기 아사쿠사 맛집."
+        ]
+      }
     },
     {
       "name": "White atelier BY CONVERSE 原宿店",
@@ -15886,26 +16056,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime to evening",
         "ko": "낮~저녁"
       },
-      "tips_i18n": [
-        {
-          "ja": "世界に一足だけのスニーカー作り。",
-          "zh": "打造世界上唯一一双鞋。",
-          "en": "Make the world's only pair of sneakers.",
-          "ko": "세상에 단 한 컬레뿐인 스니커즈 만들기."
-        },
-        {
-          "ja": "チャーム選びやお絵かきに夢中。",
-          "zh": "沉迷选挂件与绘画。",
-          "en": "Get lost choosing charms and doodling.",
-          "ko": "참 고르기와 그림 그리기에 푹 빠짐."
-        },
-        {
-          "ja": "夢中になってあっという間の時間。",
-          "zh": "沉迷之中时间飞逝。",
-          "en": "Time flies once you start.",
-          "ko": "빠져들면 눈 깜짝할 새."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "世界に一足だけのスニーカー作り。",
+          "チャーム選びやお絵かきに夢中。",
+          "夢中になってあっという間の時間。"
+        ],
+        "zh": [
+          "打造世界上唯一一双鞋。",
+          "沉迷选挂件与绘画。",
+          "沉迷之中时间飞逝。"
+        ],
+        "en": [
+          "Make the world's only pair of sneakers.",
+          "Get lost choosing charms and doodling.",
+          "Time flies once you start."
+        ],
+        "ko": [
+          "세상에 단 한 컬레뿐인 스니커즈 만들기.",
+          "참 고르기와 그림 그리기에 푹 빠짐.",
+          "빠져들면 눈 깜짝할 새."
+        ]
+      }
     },
     {
       "name": "麺昇 神の手",
@@ -15964,26 +16136,28 @@ window.RAILWAY_TOURISM = {
         "en": "Lunch & dinner",
         "ko": "점심·저녁"
       },
-      "tips_i18n": [
-        {
-          "ja": "鉄板焼13年の料理人が生んだ一杯。",
-          "zh": "铁板烧13年厨师创制的一碗。",
-          "en": "A bowl by a 13-year teppanyaki chef.",
-          "ko": "테판야키 13년 요리사가 빚은 한 그릇."
-        },
-        {
-          "ja": "目の前で大きな炎が燃えるフランベ。",
-          "zh": "眼前燃起大火的点火表演。",
-          "en": "A big flambé flame right before your eyes.",
-          "ko": "눈앞에서 큰 불길이 타오르는 플람베."
-        },
-        {
-          "ja": "痺れる辛味噌スープがクセになる。",
-          "zh": "发麻辣味噌汤令人上瘾。",
-          "en": "The numbing spicy-miso soup is addictive.",
-          "ko": "얼얼한 매운 된장 국물이 중독성."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "鉄板焼13年の料理人が生んだ一杯。",
+          "目の前で大きな炎が燃えるフランベ。",
+          "痺れる辛味噌スープがクセになる。"
+        ],
+        "zh": [
+          "铁板烧13年厨师创制的一碗。",
+          "眼前燃起大火的点火表演。",
+          "发麻辣味噌汤令人上瘾。"
+        ],
+        "en": [
+          "A bowl by a 13-year teppanyaki chef.",
+          "A big flambé flame right before your eyes.",
+          "The numbing spicy-miso soup is addictive."
+        ],
+        "ko": [
+          "테판야키 13년 요리사가 빚은 한 그릇.",
+          "눈앞에서 큰 불길이 타오르는 플람베.",
+          "얼얼한 매운 된장 국물이 중독성."
+        ]
+      }
     },
     {
       "name": "神楽坂飯店",
@@ -16042,26 +16216,28 @@ window.RAILWAY_TOURISM = {
         "en": "Lunch & dinner",
         "ko": "점심·저녁"
       },
-      "tips_i18n": [
-        {
-          "ja": "60分以内に完食でジャンボ餃子無料。",
-          "zh": "60分钟内吃完超大饺子免费。",
-          "en": "Finish the jumbo gyoza in 60 min and it's free.",
-          "ko": "60분 안에 완식하면 점보 교자 무료."
-        },
-        {
-          "ja": "何人かでシェアして楽しむのもOK。",
-          "zh": "多人分享享用也OK。",
-          "en": "Sharing with friends is also fine.",
-          "ko": "여러 사람이 나눠 먹어도 OK."
-        },
-        {
-          "ja": "一升チャーハンなど大盛りメニューも。",
-          "zh": "还有一升炒饭等大份菜单。",
-          "en": "Also one-shō fried rice and other mega portions.",
-          "ko": "한 되 볶음밥 등 대량 메뉴도."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "60分以内に完食でジャンボ餃子無料。",
+          "何人かでシェアして楽しむのもOK。",
+          "一升チャーハンなど大盛りメニューも。"
+        ],
+        "zh": [
+          "60分钟内吃完超大饺子免费。",
+          "多人分享享用也OK。",
+          "还有一升炒饭等大份菜单。"
+        ],
+        "en": [
+          "Finish the jumbo gyoza in 60 min and it's free.",
+          "Sharing with friends is also fine.",
+          "Also one-shō fried rice and other mega portions."
+        ],
+        "ko": [
+          "60분 안에 완식하면 점보 교자 무료.",
+          "여러 사람이 나눠 먹어도 OK.",
+          "한 되 볶음밥 등 대량 메뉴도."
+        ]
+      }
     },
     {
       "name": "藝大アートプラザ",
@@ -16121,26 +16297,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "주간"
       },
-      "tips_i18n": [
-        {
-          "ja": "藝大関係作家の作品を購入できる。",
-          "zh": "可购买艺大相关作家作品。",
-          "en": "Buy works by artists tied to Geidai.",
-          "ko": "게이다이 관련 작가 작품을 구매 가능."
-        },
-        {
-          "ja": "企画展の作品はその場で購入可。",
-          "zh": "企划展作品当场可购。",
-          "en": "Exhibited works are purchasable.",
-          "ko": "기획전 작품은 현장에서 구입 가능."
-        },
-        {
-          "ja": "上野公園散策の合間にアートを。",
-          "zh": "上野公园散步间隙赏艺术。",
-          "en": "Art between walks in Ueno Park.",
-          "ko": "우에노 공원 산책 사이에 아트를."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "藝大関係作家の作品を購入できる。",
+          "企画展の作品はその場で購入可。",
+          "上野公園散策の合間にアートを。"
+        ],
+        "zh": [
+          "可购买艺大相关作家作品。",
+          "企划展作品当场可购。",
+          "上野公园散步间隙赏艺术。"
+        ],
+        "en": [
+          "Buy works by artists tied to Geidai.",
+          "Exhibited works are purchasable.",
+          "Art between walks in Ueno Park."
+        ],
+        "ko": [
+          "게이다이 관련 작가 작품을 구매 가능.",
+          "기획전 작품은 현장에서 구입 가능.",
+          "우에노 공원 산책 사이에 아트를."
+        ]
+      }
     },
     {
       "name": "古城",
@@ -16199,26 +16377,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "주간"
       },
-      "tips_i18n": [
-        {
-          "ja": "地下に広がる中世ヨーロッパの世界。",
-          "zh": "地下展开的中世欧洲世界。",
-          "en": "A medieval European world underground.",
-          "ko": "지하에 펼쳐진 중세 유럽 세계."
-        },
-        {
-          "ja": "オーダーメイドの大きなステンドグラス。",
-          "zh": "定制的大型彩色玻璃窗。",
-          "en": "A huge custom stained-glass window.",
-          "ko": "맞춤 제작된 대형 스테인드글라스."
-        },
-        {
-          "ja": "名物ミックスサンドをゆったり味わう。",
-          "zh": "悠闲品尝招牌混合三明治。",
-          "en": "Savor the signature mixed sandwich slowly.",
-          "ko": "명물 믹스샌드를 여유롭게."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "地下に広がる中世ヨーロッパの世界。",
+          "オーダーメイドの大きなステンドグラス。",
+          "名物ミックスサンドをゆったり味わう。"
+        ],
+        "zh": [
+          "地下展开的中世欧洲世界。",
+          "定制的大型彩色玻璃窗。",
+          "悠闲品尝招牌混合三明治。"
+        ],
+        "en": [
+          "A medieval European world underground.",
+          "A huge custom stained-glass window.",
+          "Savor the signature mixed sandwich slowly."
+        ],
+        "ko": [
+          "지하에 펼쳐진 중세 유럽 세계.",
+          "맞춤 제작된 대형 스테인드글라스.",
+          "명물 믹스샌드를 여유롭게."
+        ]
+      }
     },
     {
       "name": "Saci Pereré",
@@ -16277,26 +16457,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime (weekends)",
         "ko": "주간 (주말)"
       },
-      "tips_i18n": [
-        {
-          "ja": "生演奏とサンバの距離が近い。",
-          "zh": "现场演奏与桑巴近距离。",
-          "en": "Up-close live music and samba.",
-          "ko": "라이브와 삼바의 거리가 가깝다."
-        },
-        {
-          "ja": "東京にいながらブラジル旅行気分。",
-          "zh": "身在东京却如巴西旅行。",
-          "en": "A Brazil trip while staying in Tokyo.",
-          "ko": "도쿄에 있으면서 브라질 여행 기분."
-        },
-        {
-          "ja": "ライブ日程はHPでチェック。",
-          "zh": "演出日程请查官网。",
-          "en": "Check the site for the live schedule.",
-          "ko": "라이브 일정은 HP에서 확인."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "生演奏とサンバの距離が近い。",
+          "東京にいながらブラジル旅行気分。",
+          "ライブ日程はHPでチェック。"
+        ],
+        "zh": [
+          "现场演奏与桑巴近距离。",
+          "身在东京却如巴西旅行。",
+          "演出日程请查官网。"
+        ],
+        "en": [
+          "Up-close live music and samba.",
+          "A Brazil trip while staying in Tokyo.",
+          "Check the site for the live schedule."
+        ],
+        "ko": [
+          "라이브와 삼바의 거리가 가깝다.",
+          "도쿄에 있으면서 브라질 여행 기분.",
+          "라이브 일정은 HP에서 확인."
+        ]
+      }
     },
     {
       "name": "市谷の杜 本と活字館",
@@ -16355,26 +16537,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "주간"
       },
-      "tips_i18n": [
-        {
-          "ja": "職人が活字を拾い印刷機を回す様子。",
-          "zh": "观看匠人拣字、开动印刷机。",
-          "en": "Watch craftsmen set type and run presses.",
-          "ko": "장인이 활자를 골라 인쇄기를 돌리는 모습."
-        },
-        {
-          "ja": "予約なしでしおり印刷が無料体験。",
-          "zh": "免预约即可免费体验书签印刷。",
-          "en": "Free bookmark printing with no booking.",
-          "ko": "예약 없이 책갈피 인쇄 무료 체험."
-        },
-        {
-          "ja": "中庭やカフェで一休みも。",
-          "zh": "中庭与咖啡馆也可小憩。",
-          "en": "Rest in the courtyard or café.",
-          "ko": "중정이나 카페에서 잠시 쉬어도."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "職人が活字を拾い印刷機を回す様子。",
+          "予約なしでしおり印刷が無料体験。",
+          "中庭やカフェで一休みも。"
+        ],
+        "zh": [
+          "观看匠人拣字、开动印刷机。",
+          "免预约即可免费体验书签印刷。",
+          "中庭与咖啡馆也可小憩。"
+        ],
+        "en": [
+          "Watch craftsmen set type and run presses.",
+          "Free bookmark printing with no booking.",
+          "Rest in the courtyard or café."
+        ],
+        "ko": [
+          "장인이 활자를 골라 인쇄기를 돌리는 모습.",
+          "예약 없이 책갈피 인쇄 무료 체험.",
+          "중정이나 카페에서 잠시 쉬어도."
+        ]
+      }
     },
     {
       "name": "gonno bakery market",
@@ -16432,26 +16616,28 @@ window.RAILWAY_TOURISM = {
         "en": "Morning to midday",
         "ko": "아침~낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "絵本から飛び出したようなかわいいパン。",
-          "zh": "如绘本跳出的可爱面包。",
-          "en": "Cute breads as if from a picture book.",
-          "ko": "그림책에서 튀어나온 듯 귀여운 빵."
-        },
-        {
-          "ja": "ベーコンエピなどおつまみパンも。",
-          "zh": "培根法式麦穗等下酒菜面包也有。",
-          "en": "Bacon epi and other snackable loaves.",
-          "ko": "베이컨 에피 등 안주 빵도."
-        },
-        {
-          "ja": "TVCM出演のメガネ食パンを要チェック。",
-          "zh": "必看电视广告出镜的眼镜吐司。",
-          "en": "Don't miss the CM-star glasses toast.",
-          "ko": "TV CM 출연 안경 식빵 체크 필수."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "絵本から飛び出したようなかわいいパン。",
+          "ベーコンエピなどおつまみパンも。",
+          "TVCM出演のメガネ食パンを要チェック。"
+        ],
+        "zh": [
+          "如绘本跳出的可爱面包。",
+          "培根法式麦穗等下酒菜面包也有。",
+          "必看电视广告出镜的眼镜吐司。"
+        ],
+        "en": [
+          "Cute breads as if from a picture book.",
+          "Bacon epi and other snackable loaves.",
+          "Don't miss the CM-star glasses toast."
+        ],
+        "ko": [
+          "그림책에서 튀어나온 듯 귀여운 빵.",
+          "베이컨 에피 등 안주 빵도.",
+          "TV CM 출연 안경 식빵 체크 필수."
+        ]
+      }
     },
     {
       "name": "魔法の文学館",
@@ -16510,26 +16696,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "주간"
       },
-      "tips_i18n": [
-        {
-          "ja": "いちご色の「コリコの町」が広がる。",
-          "zh": "草莓色\"科里科小镇\"展开。",
-          "en": "The strawberry-pink \"Koriko Town\" unfolds.",
-          "ko": "딸기색 \"코리코 마을\"이 펼쳐짐."
-        },
-        {
-          "ja": "約16,000冊の児童書が自由に読める。",
-          "zh": "约16000册童书自由阅读。",
-          "en": "Read freely among ~16,000 children's books.",
-          "ko": "약 16,000권 아동서를 자유롭게."
-        },
-        {
-          "ja": "最上階カフェ・キキのいちご色クリームソーダ。",
-          "zh": "顶楼琪琪咖啡馆的草莓色奶油苏打。",
-          "en": "The strawberry cream soda at top-floor Café Kiki.",
-          "ko": "최상층 카페 키키의 딸기색 크림소다."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "いちご色の「コリコの町」が広がる。",
+          "約16,000冊の児童書が自由に読める。",
+          "最上階カフェ・キキのいちご色クリームソーダ。"
+        ],
+        "zh": [
+          "草莓色\"科里科小镇\"展开。",
+          "约16000册童书自由阅读。",
+          "顶楼琪琪咖啡馆的草莓色奶油苏打。"
+        ],
+        "en": [
+          "The strawberry-pink \"Koriko Town\" unfolds.",
+          "Read freely among ~16,000 children's books.",
+          "The strawberry cream soda at top-floor Café Kiki."
+        ],
+        "ko": [
+          "딸기색 \"코리코 마을\"이 펼쳐짐.",
+          "약 16,000권 아동서를 자유롭게.",
+          "최상층 카페 키키의 딸기색 크림소다."
+        ]
+      }
     },
     {
       "name": "にっぽんの洋食 赤坂 津つ井",
@@ -16588,26 +16776,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime (weekdays)",
         "ko": "주간 (평일)"
       },
-      "tips_i18n": [
-        {
-          "ja": "箸で食べる和魂洋才のビフテキ丼。",
-          "zh": "用筷子吃的和魂洋才牛排饭。",
-          "en": "Chopsticks-eaten, Japan-spirit bifteki-don.",
-          "ko": "젓가락으로 먹는 화혼양채 비프덮밥."
-        },
-        {
-          "ja": "日本の調味料で仕上げる\"母の味\"。",
-          "zh": "以日本调味收尾的\"母亲味\"。",
-          "en": "A \"mother's taste\" finished with Japanese seasonings.",
-          "ko": "일본 조미료로 마무리하는 \"엄마 맛\"."
-        },
-        {
-          "ja": "1950年創業の老舗の看板料理。",
-          "zh": "1950年创业老店的招牌菜。",
-          "en": "The 1950 shop's signature dish.",
-          "ko": "1950년 창업 노포의 간판 요리."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "箸で食べる和魂洋才のビフテキ丼。",
+          "日本の調味料で仕上げる\"母の味\"。",
+          "1950年創業の老舗の看板料理。"
+        ],
+        "zh": [
+          "用筷子吃的和魂洋才牛排饭。",
+          "以日本调味收尾的\"母亲味\"。",
+          "1950年创业老店的招牌菜。"
+        ],
+        "en": [
+          "Chopsticks-eaten, Japan-spirit bifteki-don.",
+          "A \"mother's taste\" finished with Japanese seasonings.",
+          "The 1950 shop's signature dish."
+        ],
+        "ko": [
+          "젓가락으로 먹는 화혼양채 비프덮밥.",
+          "일본 조미료로 마무리하는 \"엄마 맛\".",
+          "1950년 창업 노포의 간판 요리."
+        ]
+      }
     },
     {
       "name": "SOBA CAFE IKEMORI 赤坂",
@@ -16665,26 +16855,28 @@ window.RAILWAY_TOURISM = {
         "en": "Lunch",
         "ko": "런치"
       },
-      "tips_i18n": [
-        {
-          "ja": "乱切り麺に黒胡椒が絡む革命つけそば。",
-          "zh": "乱切面拌黑胡椒的革命蘸面。",
-          "en": "Rough-cut noodles with black pepper tsukesoba.",
-          "ko": "마구 자른 면에 검은 후추가 어우러진 혁명 붙어 소바."
-        },
-        {
-          "ja": "そば粉を贅沢にふった「そばソフト」も。",
-          "zh": "奢侈撒荞麦粉的\"荞麦软冰\"也有。",
-          "en": "Also a soba-powder \"soba soft-serve\".",
-          "ko": "메밀가루를 아낌없이 뿌린 \"소바 소프트\"도."
-        },
-        {
-          "ja": "そばの常識が覆る一杯。",
-          "zh": "颠覆荞麦常识的一碗。",
-          "en": "A bowl that rewrites soba common sense.",
-          "ko": "소바 상식을 뒤집는 한 그릇."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "乱切り麺に黒胡椒が絡む革命つけそば。",
+          "そば粉を贅沢にふった「そばソフト」も。",
+          "そばの常識が覆る一杯。"
+        ],
+        "zh": [
+          "乱切面拌黑胡椒的革命蘸面。",
+          "奢侈撒荞麦粉的\"荞麦软冰\"也有。",
+          "颠覆荞麦常识的一碗。"
+        ],
+        "en": [
+          "Rough-cut noodles with black pepper tsukesoba.",
+          "Also a soba-powder \"soba soft-serve\".",
+          "A bowl that rewrites soba common sense."
+        ],
+        "ko": [
+          "마구 자른 면에 검은 후추가 어우러진 혁명 붙어 소바.",
+          "메밀가루를 아낌없이 뿌린 \"소바 소프트\"도.",
+          "소바 상식을 뒤집는 한 그릇."
+        ]
+      }
     },
     {
       "name": "横十間川親水公園",
@@ -16740,26 +16932,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "運航日は期間により異なるので事前に要確認",
-          "zh": "运营日随季节不同需事前确认",
-          "en": "Operating days vary by season—check ahead",
-          "ko": "운항일은 계절에 따라 상이하니 사전 확인"
-        },
-        {
-          "ja": "希望者は自分で櫓を漕いで乗船体験",
-          "zh": "如愿可亲自摇橹体验乘船",
-          "en": "Row the oar yourself if you like",
-          "ko": "희망 시 직접 노를 저어 본다"
-        },
-        {
-          "ja": "海辺乗船場で受付を済ませた順に乗船",
-          "zh": "海辺码头按受理顺序上船",
-          "en": "Board in order of registration at the Umibe pier",
-          "ko": "우미베 선착장 접수 순서로 승선"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "運航日は期間により異なるので事前に要確認",
+          "希望者は自分で櫓を漕いで乗船体験",
+          "海辺乗船場で受付を済ませた順に乗船"
+        ],
+        "zh": [
+          "运营日随季节不同需事前确认",
+          "如愿可亲自摇橹体验乘船",
+          "海辺码头按受理顺序上船"
+        ],
+        "en": [
+          "Operating days vary by season—check ahead",
+          "Row the oar yourself if you like",
+          "Board in order of registration at the Umibe pier"
+        ],
+        "ko": [
+          "운항일은 계절에 따라 상이하니 사전 확인",
+          "희망 시 직접 노를 저어 본다",
+          "우미베 선착장 접수 순서로 승선"
+        ]
+      }
     },
     {
       "name": "BLUE BOTTLE COFFEE 清澄白河ロースタリー&カフェ",
@@ -16812,26 +17006,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "バリスタに豆や淹れ方を質問できる",
-          "zh": "可向咖啡师请教豆种与冲法",
-          "en": "Ask baristas about beans and brewing",
-          "ko": "바리스타에게 원두·내리는 법을 질문"
-        },
-        {
-          "ja": "隣接のロースタリーで焙煎を見学",
-          "zh": "可参观相邻烘焙工坊",
-          "en": "Watch roasting in the adjacent roastery",
-          "ko": "인접 로스터리에서 로스팅 견학"
-        },
-        {
-          "ja": "清澄白河はコーヒー店巡りに最適",
-          "zh": "清澄白河适合咖啡巡礼",
-          "en": "Kiyosumi-Shirakawa is perfect for a coffee crawl",
-          "ko": "기요스미시라카와는 커피 숍 순회에 최적"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "バリスタに豆や淹れ方を質問できる",
+          "隣接のロースタリーで焙煎を見学",
+          "清澄白河はコーヒー店巡りに最適"
+        ],
+        "zh": [
+          "可向咖啡师请教豆种与冲法",
+          "可参观相邻烘焙工坊",
+          "清澄白河适合咖啡巡礼"
+        ],
+        "en": [
+          "Ask baristas about beans and brewing",
+          "Watch roasting in the adjacent roastery",
+          "Kiyosumi-Shirakawa is perfect for a coffee crawl"
+        ],
+        "ko": [
+          "바리스타에게 원두·내리는 법을 질문",
+          "인접 로스터리에서 로스팅 견학",
+          "기요스미시라카와는 커피 숍 순회에 최적"
+        ]
+      }
     },
     {
       "name": "清澄白河フジマル醸造所",
@@ -16884,26 +17080,28 @@ window.RAILWAY_TOURISM = {
         "en": "Nighttime",
         "ko": "밤"
       },
-      "tips_i18n": [
-        {
-          "ja": "テイスティングルームで飲み比べ可",
-          "zh": "可在品鉴室比较多款自酿",
-          "en": "Compare wines in the tasting room",
-          "ko": "테이스팅룸에서 음료 비교"
-        },
-        {
-          "ja": "自家醸造ワインとイタリアンのペアリング",
-          "zh": "自酿葡萄酒与意式料理搭配",
-          "en": "Pair house wine with Italian food",
-          "ko": "자가 양조 와인과 이탈리안 페어링"
-        },
-        {
-          "ja": "平日はディナー中心の営業",
-          "zh": "平日以晚餐为主",
-          "en": "Dinner-focused on weekdays",
-          "ko": "평일은 디너 중심 영업"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "テイスティングルームで飲み比べ可",
+          "自家醸造ワインとイタリアンのペアリング",
+          "平日はディナー中心の営業"
+        ],
+        "zh": [
+          "可在品鉴室比较多款自酿",
+          "自酿葡萄酒与意式料理搭配",
+          "平日以晚餐为主"
+        ],
+        "en": [
+          "Compare wines in the tasting room",
+          "Pair house wine with Italian food",
+          "Dinner-focused on weekdays"
+        ],
+        "ko": [
+          "테이스팅룸에서 음료 비교",
+          "자가 양조 와인과 이탈리안 페어링",
+          "평일은 디너 중심 영업"
+        ]
+      }
     },
     {
       "name": "日進ワールドデリカテッセン",
@@ -16957,26 +17155,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "精肉コーナーが目玉・珍しい肉がずらり",
-          "zh": "精肉柜台是看点，珍肉成排",
-          "en": "The exotic meat counter is the highlight",
-          "ko": "정육 코너가 하이라이트"
-        },
-        {
-          "ja": "世界の輸入菓子・酒・野菜が豊富",
-          "zh": "进口糖果、酒、蔬菜丰富",
-          "en": "Huge range of imported sweets, wine, produce",
-          "ko": "수입 과자·주류·채소 풍부"
-        },
-        {
-          "ja": "外国人客が約7割という国際的な店",
-          "zh": "约七成顾客为外国人的国际化店铺",
-          "en": "Roughly 70% foreign shoppers",
-          "ko": "외국인 고객 약 7할의 국제적 매장"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "精肉コーナーが目玉・珍しい肉がずらり",
+          "世界の輸入菓子・酒・野菜が豊富",
+          "外国人客が約7割という国際的な店"
+        ],
+        "zh": [
+          "精肉柜台是看点，珍肉成排",
+          "进口糖果、酒、蔬菜丰富",
+          "约七成顾客为外国人的国际化店铺"
+        ],
+        "en": [
+          "The exotic meat counter is the highlight",
+          "Huge range of imported sweets, wine, produce",
+          "Roughly 70% foreign shoppers"
+        ],
+        "ko": [
+          "정육 코너가 하이라이트",
+          "수입 과자·주류·채소 풍부",
+          "외국인 고객 약 7할의 국제적 매장"
+        ]
+      }
     },
     {
       "name": "AND THE FRIET",
@@ -17030,26 +17230,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "芋の品種とカットを選べる",
-          "zh": "可选土豆品种与切法",
-          "en": "Choose potato variety and cut",
-          "ko": "감자 품종과 컷 선택"
-        },
-        {
-          "ja": "自家製ディップやトッピング豊富",
-          "zh": "自制蘸酱与浇头丰富",
-          "en": "Plenty of house-made dips and toppings",
-          "ko": "수제 딥·토핑 풍부"
-        },
-        {
-          "ja": "パッケージもおしゃれで写真映え",
-          "zh": "包装时尚很上镜",
-          "en": "Stylish packaging, very photogenic",
-          "ko": "패키지가 세련되어 사진 찍기 좋음"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "芋の品種とカットを選べる",
+          "自家製ディップやトッピング豊富",
+          "パッケージもおしゃれで写真映え"
+        ],
+        "zh": [
+          "可选土豆品种与切法",
+          "自制蘸酱与浇头丰富",
+          "包装时尚很上镜"
+        ],
+        "en": [
+          "Choose potato variety and cut",
+          "Plenty of house-made dips and toppings",
+          "Stylish packaging, very photogenic"
+        ],
+        "ko": [
+          "감자 품종과 컷 선택",
+          "수제 딥·토핑 풍부",
+          "패키지가 세련되어 사진 찍기 좋음"
+        ]
+      }
     },
     {
       "name": "亜細亜割烹 蓮月",
@@ -17102,26 +17304,28 @@ window.RAILWAY_TOURISM = {
         "en": "Nighttime",
         "ko": "밤"
       },
-      "tips_i18n": [
-        {
-          "ja": "シェフは中国東北で修行した餃子の匠",
-          "zh": "主厨曾在中国东北修行",
-          "en": "Chef trained in NE China",
-          "ko": "셰프는 중국 둥베이에서 수행"
-        },
-        {
-          "ja": "カリッモチッの手作り餃子が名物",
-          "zh": "外脆内糯手工饺子是招牌",
-          "en": "Crispy-chewy handmade gyoza is the signature",
-          "ko": "바삭쫄깃 수제 만두가 명물"
-        },
-        {
-          "ja": "立地でなく味で勝負する店",
-          "zh": "不靠地段靠口味取胜的店",
-          "en": "Wins on taste, not location",
-          "ko": "입지 아닌 맛으로 승부하는 집"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "シェフは中国東北で修行した餃子の匠",
+          "カリッモチッの手作り餃子が名物",
+          "立地でなく味で勝負する店"
+        ],
+        "zh": [
+          "主厨曾在中国东北修行",
+          "外脆内糯手工饺子是招牌",
+          "不靠地段靠口味取胜的店"
+        ],
+        "en": [
+          "Chef trained in NE China",
+          "Crispy-chewy handmade gyoza is the signature",
+          "Wins on taste, not location"
+        ],
+        "ko": [
+          "셰프는 중국 둥베이에서 수행",
+          "바삭쫄깃 수제 만두가 명물",
+          "입지 아닌 맛으로 승부하는 집"
+        ]
+      }
     },
     {
       "name": "北区飛鳥山博物館",
@@ -17176,26 +17380,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "実物大の竪穴住居復元が目玉",
-          "zh": "实物大竖穴住居复原是看点",
-          "en": "Full-size pit-dwelling reconstruction is the draw",
-          "ko": "실물 움집 복원이 하이라이트"
-        },
-        {
-          "ja": "飛鳥山公園散策とあわせて楽しめる",
-          "zh": "可与飞鸟山公园散步一并游览",
-          "en": "Combine with a stroll in Asukayama Park",
-          "ko": "아스카야마 공원 산책과 함께"
-        },
-        {
-          "ja": "駅から少し歩くが公園内の静かな施設",
-          "zh": "园内静谧设施，距车站稍远",
-          "en": "Quiet museum, a short walk from the station",
-          "ko": "공원 내 고요한 시설"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "実物大の竪穴住居復元が目玉",
+          "飛鳥山公園散策とあわせて楽しめる",
+          "駅から少し歩くが公園内の静かな施設"
+        ],
+        "zh": [
+          "实物大竖穴住居复原是看点",
+          "可与飞鸟山公园散步一并游览",
+          "园内静谧设施，距车站稍远"
+        ],
+        "en": [
+          "Full-size pit-dwelling reconstruction is the draw",
+          "Combine with a stroll in Asukayama Park",
+          "Quiet museum, a short walk from the station"
+        ],
+        "ko": [
+          "실물 움집 복원이 하이라이트",
+          "아스카야마 공원 산책과 함께",
+          "공원 내 고요한 시설"
+        ]
+      }
     },
     {
       "name": "国立印刷局 東京工場",
@@ -17248,26 +17454,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "事前電話予約と書類提出が必要",
-          "zh": "需事前电话预约并提交材料",
-          "en": "Phone booking and paperwork required",
-          "ko": "사전 전화 예약·서류 제출 필요"
-        },
-        {
-          "ja": "大きな印刷機でお札が刷られる様子は迫力",
-          "zh": "大型印刷机印钞场面震撼",
-          "en": "Huge presses printing bills are impressive",
-          "ko": "대형 인쇄기가 지폐 찍는 모습이 장관"
-        },
-        {
-          "ja": "偽造防止技術も学べる",
-          "zh": "还可了解防伪技术",
-          "en": "Learn anti-counterfeiting tech too",
-          "ko": "위조 방지 기술도 학습 가능"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "事前電話予約と書類提出が必要",
+          "大きな印刷機でお札が刷られる様子は迫力",
+          "偽造防止技術も学べる"
+        ],
+        "zh": [
+          "需事前电话预约并提交材料",
+          "大型印刷机印钞场面震撼",
+          "还可了解防伪技术"
+        ],
+        "en": [
+          "Phone booking and paperwork required",
+          "Huge presses printing bills are impressive",
+          "Learn anti-counterfeiting tech too"
+        ],
+        "ko": [
+          "사전 전화 예약·서류 제출 필요",
+          "대형 인쇄기가 지폐 찍는 모습이 장관",
+          "위조 방지 기술도 학습 가능"
+        ]
+      }
     },
     {
       "name": "赤水門の鷹狩り訓練",
@@ -17320,26 +17528,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "不定期開催で遭遇できたらラッキー",
-          "zh": "不定期举行，遇到是运气好",
-          "en": "Irregular—sightings are lucky",
-          "ko": "부정기 개최, 마주치면 행운"
-        },
-        {
-          "ja": "主に日曜・荒川河川敷",
-          "zh": "主要周日在荒川河滩",
-          "en": "Mostly Sundays on the Arakawa riverbed",
-          "ko": "주로 일요일 아라카와 강변"
-        },
-        {
-          "ja": "上空を飛ぶ鷹を探してみよう",
-          "zh": "抬头寻找飞翔的鹰",
-          "en": "Look for hawks soaring overhead",
-          "ko": "하늘을 나는 매를 찾아보자"
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "不定期開催で遭遇できたらラッキー",
+          "主に日曜・荒川河川敷",
+          "上空を飛ぶ鷹を探してみよう"
+        ],
+        "zh": [
+          "不定期举行，遇到是运气好",
+          "主要周日在荒川河滩",
+          "抬头寻找飞翔的鹰"
+        ],
+        "en": [
+          "Irregular—sightings are lucky",
+          "Mostly Sundays on the Arakawa riverbed",
+          "Look for hawks soaring overhead"
+        ],
+        "ko": [
+          "부정기 개최, 마주치면 행운",
+          "주로 일요일 아라카와 강변",
+          "하늘을 나는 매를 찾아보자"
+        ]
+      },
       "address": "東京都北区志茂5-41-1（旧岩淵水門）"
     },
     {
@@ -17393,26 +17603,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "名物は8段重ねソフトクリーム490円",
-          "zh": "招牌8层软冰淇淋490日元",
-          "en": "Signature 8-tier soft-serve, ¥490",
-          "ko": "명물 8단 소프트크림 490엔"
-        },
-        {
-          "ja": "味はおまかせの8種類",
-          "zh": "口味由店家搭配共8种",
-          "en": "Eight chef's-choice flavors",
-          "ko": "맛은 맡김 8종"
-        },
-        {
-          "ja": "長さを測りたくなるフォトジェニックさ",
-          "zh": "让人想量长度的上镜甜点",
-          "en": "So tall you'll want to measure it",
-          "ko": "길이 재보고 싶어지는 비주얼"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "名物は8段重ねソフトクリーム490円",
+          "味はおまかせの8種類",
+          "長さを測りたくなるフォトジェニックさ"
+        ],
+        "zh": [
+          "招牌8层软冰淇淋490日元",
+          "口味由店家搭配共8种",
+          "让人想量长度的上镜甜点"
+        ],
+        "en": [
+          "Signature 8-tier soft-serve, ¥490",
+          "Eight chef's-choice flavors",
+          "So tall you'll want to measure it"
+        ],
+        "ko": [
+          "명물 8단 소프트크림 490엔",
+          "맛은 맡김 8종",
+          "길이 재보고 싶어지는 비주얼"
+        ]
+      }
     },
     {
       "name": "中野ビール工房",
@@ -17465,26 +17677,28 @@ window.RAILWAY_TOURISM = {
         "en": "Nighttime",
         "ko": "밤"
       },
-      "tips_i18n": [
-        {
-          "ja": "常時5種類の自家製地ビールを飲み比べ",
-          "zh": "常年约5种自酿地啤酒可品鉴",
-          "en": "Compare ~5 house-brewed beers",
-          "ko": "상시 5종 수제 맥주 비교"
-        },
-        {
-          "ja": "ビールもおつまみも全て500円均一",
-          "zh": "啤酒与下酒菜全部500日元",
-          "en": "All beer and snacks are ¥500",
-          "ko": "맥주·안주 모두 500엔"
-        },
-        {
-          "ja": "季節限定ビールも狙い目",
-          "zh": "季节限定啤酒值得一试",
-          "en": "Seasonal brews are a draw",
-          "ko": "계절 한정 맥주도 노릴 만"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "常時5種類の自家製地ビールを飲み比べ",
+          "ビールもおつまみも全て500円均一",
+          "季節限定ビールも狙い目"
+        ],
+        "zh": [
+          "常年约5种自酿地啤酒可品鉴",
+          "啤酒与下酒菜全部500日元",
+          "季节限定啤酒值得一试"
+        ],
+        "en": [
+          "Compare ~5 house-brewed beers",
+          "All beer and snacks are ¥500",
+          "Seasonal brews are a draw"
+        ],
+        "ko": [
+          "상시 5종 수제 맥주 비교",
+          "맥주·안주 모두 500엔",
+          "계절 한정 맥주도 노릴 만"
+        ]
+      }
     },
     {
       "name": "ゴールドカレー 中野坂上店",
@@ -17537,26 +17751,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "最大10kgの大食いカレーに挑戦可",
-          "zh": "可挑战最大10kg大胃王咖喱",
-          "en": "Take on up to a 10kg curry",
-          "ko": "최대 10kg 대식 카레 도전"
-        },
-        {
-          "ja": "60分で完食で賞金10万円",
-          "zh": "60分钟吃完奖10万日元",
-          "en": "¥100,000 prize if you finish in 60 min",
-          "ko": "60분 완식 시 상금 10만엔"
-        },
-        {
-          "ja": "金沢カレーの濃厚な味わい",
-          "zh": "金泽咖喱浓郁风味",
-          "en": "Rich Kanazawa-style curry",
-          "ko": "가나자와 카레의 진한 풍미"
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "最大10kgの大食いカレーに挑戦可",
+          "60分で完食で賞金10万円",
+          "金沢カレーの濃厚な味わい"
+        ],
+        "zh": [
+          "可挑战最大10kg大胃王咖喱",
+          "60分钟吃完奖10万日元",
+          "金泽咖喱浓郁风味"
+        ],
+        "en": [
+          "Take on up to a 10kg curry",
+          "¥100,000 prize if you finish in 60 min",
+          "Rich Kanazawa-style curry"
+        ],
+        "ko": [
+          "최대 10kg 대식 카레 도전",
+          "60분 완식 시 상금 10만엔",
+          "가나자와 카레의 진한 풍미"
+        ]
+      },
       "address": "東京都中野区中央1-35-6 レッチフィールド中野坂上2F"
     },
     {
@@ -17610,26 +17826,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "西船橋産ニンジンの饅頭が名物",
-          "zh": "西船桥产胡萝卜馒头是招牌",
-          "en": "Carrot buns from local carrots are the draw",
-          "ko": "니시후나바시산 당근 만두가 명물"
-        },
-        {
-          "ja": "小松菜を使った蒸し菓子も",
-          "zh": "小松菜蒸点心也不错",
-          "en": "Try komatsuna steamed sweets",
-          "ko": "청경채 찐 과자도"
-        },
-        {
-          "ja": "創業80年の手作り和菓子を土産に",
-          "zh": "创业80年手作和果子作伴手礼",
-          "en": "80-year handmade sweets make great gifts",
-          "ko": "창업 80년 수제 화과자를 선물로"
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "西船橋産ニンジンの饅頭が名物",
+          "小松菜を使った蒸し菓子も",
+          "創業80年の手作り和菓子を土産に"
+        ],
+        "zh": [
+          "西船桥产胡萝卜馒头是招牌",
+          "小松菜蒸点心也不错",
+          "创业80年手作和果子作伴手礼"
+        ],
+        "en": [
+          "Carrot buns from local carrots are the draw",
+          "Try komatsuna steamed sweets",
+          "80-year handmade sweets make great gifts"
+        ],
+        "ko": [
+          "니시후나바시산 당근 만두가 명물",
+          "청경채 찐 과자도",
+          "창업 80년 수제 화과자를 선물로"
+        ]
+      },
       "address": "千葉県船橋市西船4-21-3"
     },
     {
@@ -17683,26 +17901,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "茅葺屋根の古民家で当時の漁具を展示",
-          "zh": "茅草屋顶古民家展示当时渔具",
-          "en": "Fishing tools on show in the thatched house",
-          "ko": "초가지붕 고택에 당시 어구 전시"
-        },
-        {
-          "ja": "水害に備えた屋根裏部屋が特徴",
-          "zh": "特征是防洪阁楼",
-          "en": "A flood-proof attic is a feature",
-          "ko": "수해 대비한 다락방이 특징"
-        },
-        {
-          "ja": "住宅周りは貝殻舗装という工夫",
-          "zh": "住宅周围用贝壳铺路",
-          "en": "Shells pave the surroundings",
-          "ko": "집 주변은 조개 포장"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "茅葺屋根の古民家で当時の漁具を展示",
+          "水害に備えた屋根裏部屋が特徴",
+          "住宅周りは貝殻舗装という工夫"
+        ],
+        "zh": [
+          "茅草屋顶古民家展示当时渔具",
+          "特征是防洪阁楼",
+          "住宅周围用贝壳铺路"
+        ],
+        "en": [
+          "Fishing tools on show in the thatched house",
+          "A flood-proof attic is a feature",
+          "Shells pave the surroundings"
+        ],
+        "ko": [
+          "초가지붕 고택에 당시 어구 전시",
+          "수해 대비한 다락방이 특징",
+          "집 주변은 조개 포장"
+        ]
+      }
     },
     {
       "name": "海巖山 徳願寺",
@@ -17756,26 +17976,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "宮本武蔵ゆかりの地として知られる",
-          "zh": "因宫本武藏渊源而知名",
-          "en": "Known for its Musashi connection",
-          "ko": "미야모토 무사시 인연의 땅"
-        },
-        {
-          "ja": "武蔵作「八方にらみの達磨図」は年1回公開",
-          "zh": "武藏所绘达摩图一年公开一次",
-          "en": "Musashi's Daruma is shown once a year",
-          "ko": "무사시의 다마마도는 연 1회 공개"
-        },
-        {
-          "ja": "11月16日のお十夜会が見頃",
-          "zh": "11月16日的十夜会是看点",
-          "en": "The Nov 16 O-Juya-e is the time to go",
-          "ko": "11월 16일 주야회가 절정"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "宮本武蔵ゆかりの地として知られる",
+          "武蔵作「八方にらみの達磨図」は年1回公開",
+          "11月16日のお十夜会が見頃"
+        ],
+        "zh": [
+          "因宫本武藏渊源而知名",
+          "武藏所绘达摩图一年公开一次",
+          "11月16日的十夜会是看点"
+        ],
+        "en": [
+          "Known for its Musashi connection",
+          "Musashi's Daruma is shown once a year",
+          "The Nov 16 O-Juya-e is the time to go"
+        ],
+        "ko": [
+          "미야모토 무사시 인연의 땅",
+          "무사시의 다마마도는 연 1회 공개",
+          "11월 16일 주야회가 절정"
+        ]
+      }
     },
     {
       "name": "常夜灯公園",
@@ -17828,26 +18050,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "1812年建立の石造常夜灯が目印",
-          "zh": "建于1812年的石造常夜灯为标志",
-          "en": "The 1812 stone lantern is the landmark",
-          "ko": "1812년 석조 조초등이 표지"
-        },
-        {
-          "ja": "夕暮れ時の川沿いの景色が美しい",
-          "zh": "黄昏河边景色优美",
-          "en": "Beautiful riverside views at dusk",
-          "ko": "해 질 녘 강변 풍경이 아름다움"
-        },
-        {
-          "ja": "ランニングや散歩に人気の河岸",
-          "zh": "跑步散步人气河岸",
-          "en": "Popular riverbank for running and walks",
-          "ko": "러닝·산책 인기 둔치"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "1812年建立の石造常夜灯が目印",
+          "夕暮れ時の川沿いの景色が美しい",
+          "ランニングや散歩に人気の河岸"
+        ],
+        "zh": [
+          "建于1812年的石造常夜灯为标志",
+          "黄昏河边景色优美",
+          "跑步散步人气河岸"
+        ],
+        "en": [
+          "The 1812 stone lantern is the landmark",
+          "Beautiful riverside views at dusk",
+          "Popular riverbank for running and walks"
+        ],
+        "ko": [
+          "1812년 석조 조초등이 표지",
+          "해 질 녘 강변 풍경이 아름다움",
+          "러닝·산책 인기 둔치"
+        ]
+      }
     },
     {
       "name": "銀之塔",
@@ -17901,26 +18125,28 @@ window.RAILWAY_TOURISM = {
         "en": "Nighttime",
         "ko": "밤"
       },
-      "tips_i18n": [
-        {
-          "ja": "名物は栄養満点のタンシチュー",
-          "zh": "招牌是营养丰富的牛舌炖菜",
-          "en": "Nutritious tongue stew is the signature",
-          "ko": "명물은 영양 만점 혀 스튜"
-        },
-        {
-          "ja": "歌舞伎役者ゆかりの店として知られる",
-          "zh": "与歌舞伎演员渊源深厚",
-          "en": "Linked to Kabuki actors",
-          "ko": "가부키 배우 인연의 집"
-        },
-        {
-          "ja": "東銀座・歌舞伎座近くの老舗",
-          "zh": "东银座歌舞伎座旁的老店",
-          "en": "Long-standing spot near Kabukiza",
-          "ko": "히가시긴자 가부키좀 옆 노포"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "名物は栄養満点のタンシチュー",
+          "歌舞伎役者ゆかりの店として知られる",
+          "東銀座・歌舞伎座近くの老舗"
+        ],
+        "zh": [
+          "招牌是营养丰富的牛舌炖菜",
+          "与歌舞伎演员渊源深厚",
+          "东银座歌舞伎座旁的老店"
+        ],
+        "en": [
+          "Nutritious tongue stew is the signature",
+          "Linked to Kabuki actors",
+          "Long-standing spot near Kabukiza"
+        ],
+        "ko": [
+          "명물은 영양 만점 혀 스튜",
+          "가부키 배우 인연의 집",
+          "히가시긴자 가부키좀 옆 노포"
+        ]
+      }
     },
     {
       "name": "香源（こうげん）",
@@ -17973,26 +18199,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "お香ワークショップは予約制・約90分",
-          "zh": "香薰工坊需预约约90分钟",
-          "en": "Book the ~90-min workshop",
-          "ko": "향 워크숍 예약제·약 90분"
-        },
-        {
-          "ja": "1階には約5000種のお香を販売",
-          "zh": "一楼售约5000种香",
-          "en": "~5,000 incense kinds sold on 1F",
-          "ko": "1층에 약 5000종 향 판매"
-        },
-        {
-          "ja": "友人同士での体験もおすすめ",
-          "zh": "推荐朋友结伴体验",
-          "en": "Great to try with friends",
-          "ko": "친구끼리 체험도 추천"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "お香ワークショップは予約制・約90分",
+          "1階には約5000種のお香を販売",
+          "友人同士での体験もおすすめ"
+        ],
+        "zh": [
+          "香薰工坊需预约约90分钟",
+          "一楼售约5000种香",
+          "推荐朋友结伴体验"
+        ],
+        "en": [
+          "Book the ~90-min workshop",
+          "~5,000 incense kinds sold on 1F",
+          "Great to try with friends"
+        ],
+        "ko": [
+          "향 워크숍 예약제·약 90분",
+          "1층에 약 5000종 향 판매",
+          "친구끼리 체험도 추천"
+        ]
+      }
     },
     {
       "name": "小津和紙",
@@ -18046,26 +18274,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "3000種の和紙が壁一面に並ぶ",
-          "zh": "3000种和纸摆满墙",
-          "en": "~3,000 washi papers line the walls",
-          "ko": "3000종 화지가 벽면에 진열"
-        },
-        {
-          "ja": "手漉き・機械漉きで書き心地が段違い",
-          "zh": "手漉与机漉书写手感迥异",
-          "en": "Hand-made vs machine-made feel very different",
-          "ko": "수제·기계 제지 필감이 판이"
-        },
-        {
-          "ja": "店の人が紙の選び方を教えてくれる",
-          "zh": "店员会教如何选纸",
-          "en": "Staff help you pick the right paper",
-          "ko": "점원이 종이 고르는 법을 안내"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "3000種の和紙が壁一面に並ぶ",
+          "手漉き・機械漉きで書き心地が段違い",
+          "店の人が紙の選び方を教えてくれる"
+        ],
+        "zh": [
+          "3000种和纸摆满墙",
+          "手漉与机漉书写手感迥异",
+          "店员会教如何选纸"
+        ],
+        "en": [
+          "~3,000 washi papers line the walls",
+          "Hand-made vs machine-made feel very different",
+          "Staff help you pick the right paper"
+        ],
+        "ko": [
+          "3000종 화지가 벽면에 진열",
+          "수제·기계 제지 필감이 판이",
+          "점원이 종이 고르는 법을 안내"
+        ]
+      }
     },
     {
       "name": "和牛すき焼き 伊勢重",
@@ -18118,26 +18348,28 @@ window.RAILWAY_TOURISM = {
         "en": "Nighttime",
         "ko": "밤"
       },
-      "tips_i18n": [
-        {
-          "ja": "明治創業150年のすき焼きの味",
-          "zh": "明治创业150年的寿喜烧味道",
-          "en": "150 years of Meiji-era sukiyaki",
-          "ko": "메이지 창업 150년 스키야키 맛"
-        },
-        {
-          "ja": "もう一つの名物・牛佃煮は土産に人気",
-          "zh": "另一招牌牛肉佃煮人气伴手礼",
-          "en": "Beef tsukudani is a popular gift",
-          "ko": "또 하나의 명물 츠쿠다니는 선물 인기"
-        },
-        {
-          "ja": "佃煮は9:30から店頭販売",
-          "zh": "佃煮9:30起店内售卖",
-          "en": "Tsukudani sold from 9:30",
-          "ko": "츠쿠다니는 9:30부터 판매"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "明治創業150年のすき焼きの味",
+          "もう一つの名物・牛佃煮は土産に人気",
+          "佃煮は9:30から店頭販売"
+        ],
+        "zh": [
+          "明治创业150年的寿喜烧味道",
+          "另一招牌牛肉佃煮人气伴手礼",
+          "佃煮9:30起店内售卖"
+        ],
+        "en": [
+          "150 years of Meiji-era sukiyaki",
+          "Beef tsukudani is a popular gift",
+          "Tsukudani sold from 9:30"
+        ],
+        "ko": [
+          "메이지 창업 150년 스키야키 맛",
+          "또 하나의 명물 츠쿠다니는 선물 인기",
+          "츠쿠다니는 9:30부터 판매"
+        ]
+      }
     },
     {
       "name": "国立公文書館",
@@ -18190,26 +18422,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "江戸幕府から引き継いだ文書を展示",
-          "zh": "展示江户幕府以来的文书",
-          "en": "Documents from the Edo shogunate",
-          "ko": "에도 막부 이래 문서 전시"
-        },
-        {
-          "ja": "企画展・特別展の貴重文書は必見",
-          "zh": "企画展特展的贵重文书必看",
-          "en": "Special exhibitions are a must",
-          "ko": "기획전·특별전 귀중 문서는 필견"
-        },
-        {
-          "ja": "北の丸公園の散策とあわせて",
-          "zh": "可与北之丸公园散步一并游览",
-          "en": "Combine with a Kitanomaru Park walk",
-          "ko": "기타노마루 공원 산책과 함께"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "江戸幕府から引き継いだ文書を展示",
+          "企画展・特別展の貴重文書は必見",
+          "北の丸公園の散策とあわせて"
+        ],
+        "zh": [
+          "展示江户幕府以来的文书",
+          "企画展特展的贵重文书必看",
+          "可与北之丸公园散步一并游览"
+        ],
+        "en": [
+          "Documents from the Edo shogunate",
+          "Special exhibitions are a must",
+          "Combine with a Kitanomaru Park walk"
+        ],
+        "ko": [
+          "에도 막부 이래 문서 전시",
+          "기획전·특별전 귀중 문서는 필견",
+          "기타노마루 공원 산책과 함께"
+        ]
+      }
     },
     {
       "name": "毎日書道図書館",
@@ -18262,26 +18496,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "書道専門図書館は日本唯一",
-          "zh": "日本唯一书法专门图书馆",
-          "en": "Japan's only calligraphy library",
-          "ko": "일본 유일 서예 전문 도서관"
-        },
-        {
-          "ja": "蔵書は1万5000冊以上",
-          "zh": "藏书1.5万册以上",
-          "en": "15,000+ volumes",
-          "ko": "장서 1만 5천 권 이상"
-        },
-        {
-          "ja": "開館日は火・木・第1土曜を中心",
-          "zh": "开馆日以火、木、第1周六为主",
-          "en": "Open mainly Tue, Thu, 1st Sat",
-          "ko": "개관일은 화·목·제1토 중심"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "書道専門図書館は日本唯一",
+          "蔵書は1万5000冊以上",
+          "開館日は火・木・第1土曜を中心"
+        ],
+        "zh": [
+          "日本唯一书法专门图书馆",
+          "藏书1.5万册以上",
+          "开馆日以火、木、第1周六为主"
+        ],
+        "en": [
+          "Japan's only calligraphy library",
+          "15,000+ volumes",
+          "Open mainly Tue, Thu, 1st Sat"
+        ],
+        "ko": [
+          "일본 유일 서예 전문 도서관",
+          "장서 1만 5천 권 이상",
+          "개관일은 화·목·제1토 중심"
+        ]
+      }
     },
     {
       "name": "最高裁判所",
@@ -18334,26 +18570,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "大法廷の見学ツアーに参加できる",
-          "zh": "可参加大法庭参观导览",
-          "en": "Join a Grand Bench tour",
-          "ko": "대법정 견학 투어 참가 가능"
-        },
-        {
-          "ja": "前後の壁のタペストリーが太陽と月",
-          "zh": "前后壁挂毯象征日月",
-          "en": "Tapestries of sun and moon",
-          "ko": "앞뒤 벽 태피스트리가 해와 달"
-        },
-        {
-          "ja": "通常の裁判傍聴でも訪れられる",
-          "zh": "也可旁听日常裁判",
-          "en": "You can also attend a public hearing",
-          "ko": "일반 재판 참관으로도 방문 가능"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "大法廷の見学ツアーに参加できる",
+          "前後の壁のタペストリーが太陽と月",
+          "通常の裁判傍聴でも訪れられる"
+        ],
+        "zh": [
+          "可参加大法庭参观导览",
+          "前后壁挂毯象征日月",
+          "也可旁听日常裁判"
+        ],
+        "en": [
+          "Join a Grand Bench tour",
+          "Tapestries of sun and moon",
+          "You can also attend a public hearing"
+        ],
+        "ko": [
+          "대법정 견학 투어 참가 가능",
+          "앞뒤 벽 태피스트리가 해와 달",
+          "일반 재판 참관으로도 방문 가능"
+        ]
+      }
     },
     {
       "name": "江戸うさぎ",
@@ -18406,26 +18644,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "1日200～300個売れる妖怪いちご大福",
-          "zh": "日销200-300个的妖怪草莓大福",
-          "en": "200-300 yokai daifuku sold daily",
-          "ko": "하루 200-300개 팔리는 요괴 딸기 다이후쿠"
-        },
-        {
-          "ja": "イチゴの舌がのぞくキャラ和菓子",
-          "zh": "露出草莓舌头的角色和果子",
-          "en": "Character sweet with a strawberry tongue",
-          "ko": "딸기 혀를 내민 캐릭터 화과자"
-        },
-        {
-          "ja": "フォトジェニックで土産にも人気",
-          "zh": "上镜可爱，人气伴手礼",
-          "en": "Photogenic and a popular gift",
-          "ko": "사진 찍기 좋아 선물 인기"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "1日200～300個売れる妖怪いちご大福",
+          "イチゴの舌がのぞくキャラ和菓子",
+          "フォトジェニックで土産にも人気"
+        ],
+        "zh": [
+          "日销200-300个的妖怪草莓大福",
+          "露出草莓舌头的角色和果子",
+          "上镜可爱，人气伴手礼"
+        ],
+        "en": [
+          "200-300 yokai daifuku sold daily",
+          "Character sweet with a strawberry tongue",
+          "Photogenic and a popular gift"
+        ],
+        "ko": [
+          "하루 200-300개 팔리는 요괴 딸기 다이후쿠",
+          "딸기 혀를 내민 캐릭터 화과자",
+          "사진 찍기 좋아 선물 인기"
+        ]
+      }
     },
     {
       "name": "美火土陶椀（みかど とうわん）",
@@ -18478,26 +18718,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "初心者でも電動ろくろを使える",
-          "zh": "初学者也可使用电动拉坯机",
-          "en": "Beginners may use the electric wheel",
-          "ko": "초보자도 전기 물레 사용 가능"
-        },
-        {
-          "ja": "作った器に名前や絵付けも可",
-          "zh": "做好的器皿可刻名绘画",
-          "en": "Add names or designs to your piece",
-          "ko": "만든 그릇에 이름·그림 넣기 가능"
-        },
-        {
-          "ja": "焼き上がりは約2週間後",
-          "zh": "烧制约两周后完成",
-          "en": "Fired and ready in about two weeks",
-          "ko": "완성은 약 2주 후"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "初心者でも電動ろくろを使える",
+          "作った器に名前や絵付けも可",
+          "焼き上がりは約2週間後"
+        ],
+        "zh": [
+          "初学者也可使用电动拉坯机",
+          "做好的器皿可刻名绘画",
+          "烧制约两周后完成"
+        ],
+        "en": [
+          "Beginners may use the electric wheel",
+          "Add names or designs to your piece",
+          "Fired and ready in about two weeks"
+        ],
+        "ko": [
+          "초보자도 전기 물레 사용 가능",
+          "만든 그릇에 이름·그림 넣기 가능",
+          "완성은 약 2주 후"
+        ]
+      }
     },
     {
       "name": "黒猫舎（くろねこしゃ）",
@@ -18550,26 +18792,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "見た目が可愛い猫むすびが名物",
-          "zh": "外观可爱的猫饭团是招牌",
-          "en": "The cute cat onigiri is the draw",
-          "ko": "겉모습 귀여운 고양이 주먹밥이 명물"
-        },
-        {
-          "ja": "具は猫の大好物・鮭",
-          "zh": "馅料是猫最爱的鲑鱼",
-          "en": "Filled with salmon, a cat favorite",
-          "ko": "속은 고양이가 좋아하는 연어"
-        },
-        {
-          "ja": "レトロな雰囲気の純喫茶",
-          "zh": "复古氛围纯喫茶",
-          "en": "A retro, old-school kissaten",
-          "ko": "레트로 분위기 순다방"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "見た目が可愛い猫むすびが名物",
+          "具は猫の大好物・鮭",
+          "レトロな雰囲気の純喫茶"
+        ],
+        "zh": [
+          "外观可爱的猫饭团是招牌",
+          "馅料是猫最爱的鲑鱼",
+          "复古氛围纯喫茶"
+        ],
+        "en": [
+          "The cute cat onigiri is the draw",
+          "Filled with salmon, a cat favorite",
+          "A retro, old-school kissaten"
+        ],
+        "ko": [
+          "겉모습 귀여운 고양이 주먹밥이 명물",
+          "속은 고양이가 좋아하는 연어",
+          "레트로 분위기 순다방"
+        ]
+      }
     },
     {
       "name": "やげん堀 新仲見世本店",
@@ -18622,26 +18866,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "創業1625年の七味発祥の店",
-          "zh": "创业1625年七味发祥老店",
-          "en": "Founded 1625, birthplace of shichimi",
-          "ko": "창업 1625년 시치미 발상점"
-        },
-        {
-          "ja": "大辛・中辛・小辛から選び薬味を増減",
-          "zh": "从大中小辛中选辣度增减配料",
-          "en": "Pick heat level and adjust botanicals",
-          "ko": "대중소 매운맛 고르고 향료 가감"
-        },
-        {
-          "ja": "自分好みのオリジナル七味を土産に",
-          "zh": "自制专属七味作伴手礼",
-          "en": "Your own blend makes a great gift",
-          "ko": "나만의 오리지널 시치미를 선물로"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "創業1625年の七味発祥の店",
+          "大辛・中辛・小辛から選び薬味を増減",
+          "自分好みのオリジナル七味を土産に"
+        ],
+        "zh": [
+          "创业1625年七味发祥老店",
+          "从大中小辛中选辣度增减配料",
+          "自制专属七味作伴手礼"
+        ],
+        "en": [
+          "Founded 1625, birthplace of shichimi",
+          "Pick heat level and adjust botanicals",
+          "Your own blend makes a great gift"
+        ],
+        "ko": [
+          "창업 1625년 시치미 발상점",
+          "대중소 매운맛 고르고 향료 가감",
+          "나만의 오리지널 시치미를 선물로"
+        ]
+      }
     },
     {
       "name": "山本そろばん店",
@@ -18694,26 +18940,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "店先の巨大そろばんが目印",
-          "zh": "店头大算盘为标志",
-          "en": "The giant abacus out front is the marker",
-          "ko": "가게 앞 거대 산수가 표지"
-        },
-        {
-          "ja": "2メートル近い139桁そろばんも展示",
-          "zh": "近2米139位算盘也在展示",
-          "en": "A ~2m, 139-digit abacus is on show",
-          "ko": "약 2미터 139자리 전산도 전시"
-        },
-        {
-          "ja": "お土産用のミニそろばんも人気",
-          "zh": "迷你算盘伴手礼人气",
-          "en": "Mini abacus souvenirs are popular",
-          "ko": "미니 산수 기념품도 인기"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "店先の巨大そろばんが目印",
+          "2メートル近い139桁そろばんも展示",
+          "お土産用のミニそろばんも人気"
+        ],
+        "zh": [
+          "店头大算盘为标志",
+          "近2米139位算盘也在展示",
+          "迷你算盘伴手礼人气"
+        ],
+        "en": [
+          "The giant abacus out front is the marker",
+          "A ~2m, 139-digit abacus is on show",
+          "Mini abacus souvenirs are popular"
+        ],
+        "ko": [
+          "가게 앞 거대 산수가 표지",
+          "약 2미터 139자리 전산도 전시",
+          "미니 산수 기념품도 인기"
+        ]
+      }
     },
     {
       "name": "mic",
@@ -18766,26 +19014,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "後ろポケットに入れやすい財布が人気",
-          "zh": "易入后袋的钱包人气",
-          "en": "Back-pocket friendly wallets are popular",
-          "ko": "뒷주머니에 넣기 쉬운 지갑 인기"
-        },
-        {
-          "ja": "2003年グッドデザイン賞受賞",
-          "zh": "2003年获优良设计奖",
-          "en": "Won a 2003 Good Design Award",
-          "ko": "2003 굿디자인상 수상"
-        },
-        {
-          "ja": "機能美を追求した革製品",
-          "zh": "追求功能美的皮革制品",
-          "en": "Leather goods built for function",
-          "ko": "기능미를 추구한 가죽 제품"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "後ろポケットに入れやすい財布が人気",
+          "2003年グッドデザイン賞受賞",
+          "機能美を追求した革製品"
+        ],
+        "zh": [
+          "易入后袋的钱包人气",
+          "2003年获优良设计奖",
+          "追求功能美的皮革制品"
+        ],
+        "en": [
+          "Back-pocket friendly wallets are popular",
+          "Won a 2003 Good Design Award",
+          "Leather goods built for function"
+        ],
+        "ko": [
+          "뒷주머니에 넣기 쉬운 지갑 인기",
+          "2003 굿디자인상 수상",
+          "기능미를 추구한 가죽 제품"
+        ]
+      }
     },
     {
       "name": "ペリカンカフェ",
@@ -18838,26 +19088,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "老舗パン屋ペリカン直営のカフェ",
-          "zh": "老牌面包屋Pelican直营咖啡",
-          "en": "Run by the 75-year Pelican bakery",
-          "ko": "노포 빵집 페리칸 직영 카페"
-        },
-        {
-          "ja": "名物は厚切り食パンの炭焼きトースト",
-          "zh": "招牌厚切吐司炭烤吐司",
-          "en": "Charcoal-grilled thick-cut toast sells out",
-          "ko": "명물 두툼한 식빵 숯불 토스트"
-        },
-        {
-          "ja": "午前中に売り切れる日もある早めの時間がおすすめ",
-          "zh": "上午可能售罄，建议趁早",
-          "en": "Mornings can sell out—come early",
-          "ko": "오전에 매진되는 날도 있어 일찍 추천"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "老舗パン屋ペリカン直営のカフェ",
+          "名物は厚切り食パンの炭焼きトースト",
+          "午前中に売り切れる日もある早めの時間がおすすめ"
+        ],
+        "zh": [
+          "老牌面包屋Pelican直营咖啡",
+          "招牌厚切吐司炭烤吐司",
+          "上午可能售罄，建议趁早"
+        ],
+        "en": [
+          "Run by the 75-year Pelican bakery",
+          "Charcoal-grilled thick-cut toast sells out",
+          "Mornings can sell out—come early"
+        ],
+        "ko": [
+          "노포 빵집 페리칸 직영 카페",
+          "명물 두툼한 식빵 숯불 토스트",
+          "오전에 매진되는 날도 있어 일찍 추천"
+        ]
+      }
     },
     {
       "name": "鳥のいるカフェ 浅草店",
@@ -18910,26 +19162,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "100羽以上の鳥と放鳥ルームで触れ合える",
-          "zh": "放飞房可与100多只鸟互动",
-          "en": "Interact with 100+ birds in the free-flight room",
-          "ko": "방사 실에서 100마리 이상 새와 교감"
-        },
-        {
-          "ja": "服を汚さないポンチョ無料貸出",
-          "zh": "免费出借斗篷防衣服弄脏",
-          "en": "Free ponchos keep you clean",
-          "ko": "옷 오염 방지 판초 무료 대여"
-        },
-        {
-          "ja": "気に入れば連れて帰れる鳥も",
-          "zh": "喜欢的鸟也可带回家饲养",
-          "en": "Some birds can be adopted home",
-          "ko": "마음에 들면 집에 데려갈 수 있는 새도"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "100羽以上の鳥と放鳥ルームで触れ合える",
+          "服を汚さないポンチョ無料貸出",
+          "気に入れば連れて帰れる鳥も"
+        ],
+        "zh": [
+          "放飞房可与100多只鸟互动",
+          "免费出借斗篷防衣服弄脏",
+          "喜欢的鸟也可带回家饲养"
+        ],
+        "en": [
+          "Interact with 100+ birds in the free-flight room",
+          "Free ponchos keep you clean",
+          "Some birds can be adopted home"
+        ],
+        "ko": [
+          "방사 실에서 100마리 이상 새와 교감",
+          "옷 오염 방지 판초 무료 대여",
+          "마음에 들면 집에 데려갈 수 있는 새도"
+        ]
+      }
     },
     {
       "name": "ニホニウム通り",
@@ -18982,26 +19236,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "理化学研究所での113番元素合成を記念",
-          "zh": "纪念理研合成113号元素",
-          "en": "Marks element 113 synthesized at RIKEN",
-          "ko": "이화학연구소 113번 원소 합성 기념"
-        },
-        {
-          "ja": "元素記号1～118番のプレートを探す散歩",
-          "zh": "散步寻找1~118号元素铭牌",
-          "en": "Hunt for plaques of elements 1-118",
-          "ko": "원소기호 1~118번 플레이트를 찾는 산책"
-        },
-        {
-          "ja": "通り沿いのNhモニュメントが目印",
-          "zh": "沿途Nh雕塑为标志",
-          "en": "The Nh monument marks the street",
-          "ko": "거리의 Nh 조형물이 표지"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "理化学研究所での113番元素合成を記念",
+          "元素記号1～118番のプレートを探す散歩",
+          "通り沿いのNhモニュメントが目印"
+        ],
+        "zh": [
+          "纪念理研合成113号元素",
+          "散步寻找1~118号元素铭牌",
+          "沿途Nh雕塑为标志"
+        ],
+        "en": [
+          "Marks element 113 synthesized at RIKEN",
+          "Hunt for plaques of elements 1-118",
+          "The Nh monument marks the street"
+        ],
+        "ko": [
+          "이화학연구소 113번 원소 합성 기념",
+          "원소기호 1~118번 플레이트를 찾는 산책",
+          "거리의 Nh 조형물이 표지"
+        ]
+      }
     },
     {
       "name": "365 Anniversary",
@@ -19054,26 +19310,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "名物はきめ細かいロールケーキ「和光ロール」",
-          "zh": "招牌是细腻蓬松的年轮蛋糕和光Roll",
-          "en": "The fluffy 'Wako Roll' is the draw",
-          "ko": "명물은 고운 롤케이크 '와코롤'"
-        },
-        {
-          "ja": "記念日にはメッセージ入り特注ケーキ",
-          "zh": "纪念日可定制带信息蛋糕",
-          "en": "Custom message cakes for anniversaries",
-          "ko": "기념일엔 메시지入 맞춤 케이크"
-        },
-        {
-          "ja": "仕事帰りの手土産にも人気",
-          "zh": "下班带伴手礼也人气",
-          "en": "Popular as an after-work gift",
-          "ko": "퇴길 선물로도 인기"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "名物はきめ細かいロールケーキ「和光ロール」",
+          "記念日にはメッセージ入り特注ケーキ",
+          "仕事帰りの手土産にも人気"
+        ],
+        "zh": [
+          "招牌是细腻蓬松的年轮蛋糕和光Roll",
+          "纪念日可定制带信息蛋糕",
+          "下班带伴手礼也人气"
+        ],
+        "en": [
+          "The fluffy 'Wako Roll' is the draw",
+          "Custom message cakes for anniversaries",
+          "Popular as an after-work gift"
+        ],
+        "ko": [
+          "명물은 고운 롤케이크 '와코롤'",
+          "기념일엔 메시지入 맞춤 케이크",
+          "퇴길 선물로도 인기"
+        ]
+      }
     },
     {
       "name": "音楽喫茶アカシア",
@@ -19127,26 +19385,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "珍しいクラシックレコードが楽しめる",
-          "zh": "可聆听稀有古典唱片",
-          "en": "Hear rare classical records",
-          "ko": "진귀한 클래식 LP 감상"
-        },
-        {
-          "ja": "俳句・英会話など曜日替わり教室",
-          "zh": "俳句、英语会话等星期更替教室",
-          "en": "Weekly classes: haiku, English, more",
-          "ko": "하이쿠·영어회화 등 요일별 교실"
-        },
-        {
-          "ja": "単発参加も可能で新しい趣味探しに",
-          "zh": "可单次参加寻找新爱好",
-          "en": "Drop in to try a new hobby",
-          "ko": "일일 참가로 새 취미 발견"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "珍しいクラシックレコードが楽しめる",
+          "俳句・英会話など曜日替わり教室",
+          "単発参加も可能で新しい趣味探しに"
+        ],
+        "zh": [
+          "可聆听稀有古典唱片",
+          "俳句、英语会话等星期更替教室",
+          "可单次参加寻找新爱好"
+        ],
+        "en": [
+          "Hear rare classical records",
+          "Weekly classes: haiku, English, more",
+          "Drop in to try a new hobby"
+        ],
+        "ko": [
+          "진귀한 클래식 LP 감상",
+          "하이쿠·영어회화 등 요일별 교실",
+          "일일 참가로 새 취미 발견"
+        ]
+      }
     },
     {
       "name": "べんてん",
@@ -19199,26 +19459,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "メニューはラーメン・塩・つけ麺のみ",
-          "zh": "菜单仅拉面、盐味、沾面",
-          "en": "Only ramen, shio, and tsukemen",
-          "ko": "메뉴는 라멘·시오·츠케멘 뿐"
-        },
-        {
-          "ja": "営業は11時～14時半の3時間半のみ",
-          "zh": "营业仅11点到14点半3个半小时",
-          "en": "Open just 11:00-14:30 (3.5 hrs)",
-          "ko": "영업 11-14:30 단 3시간 반"
-        },
-        {
-          "ja": "行列必至・スープ切れで早仕舞い",
-          "zh": "必排队，汤尽早打烊",
-          "en": "A line is guaranteed; closes when soup runs out",
-          "ko": "항시 대기, 국물 소진 시 조기 마감"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "メニューはラーメン・塩・つけ麺のみ",
+          "営業は11時～14時半の3時間半のみ",
+          "行列必至・スープ切れで早仕舞い"
+        ],
+        "zh": [
+          "菜单仅拉面、盐味、沾面",
+          "营业仅11点到14点半3个半小时",
+          "必排队，汤尽早打烊"
+        ],
+        "en": [
+          "Only ramen, shio, and tsukemen",
+          "Open just 11:00-14:30 (3.5 hrs)",
+          "A line is guaranteed; closes when soup runs out"
+        ],
+        "ko": [
+          "메뉴는 라멘·시오·츠케멘 뿐",
+          "영업 11-14:30 단 3시간 반",
+          "항시 대기, 국물 소진 시 조기 마감"
+        ]
+      }
     },
     {
       "name": "ゲーセンミカド",
@@ -19271,26 +19533,28 @@ window.RAILWAY_TOURISM = {
         "en": "Nighttime",
         "ko": "밤"
       },
-      "tips_i18n": [
-        {
-          "ja": "80～90年代のレトロゲームが現役稼働",
-          "zh": "80-90年代复古游戏仍在运行",
-          "en": "1980s-90s retro cabinets still run",
-          "ko": "80~90년대 레트로 게임 현역 가동"
-        },
-        {
-          "ja": "世界中の強豪ゲーマーが集まる聖地",
-          "zh": "汇集全球高手的圣地",
-          "en": "A mecca for top players worldwide",
-          "ko": "세계의 강호가 모이는 성지"
-        },
-        {
-          "ja": "高田馬場駅すぐの好立地",
-          "zh": "高田马场站旁绝佳位置",
-          "en": "Steps from Takadanobaba Station",
-          "ko": "다카다노바바역 바로 앞"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "80～90年代のレトロゲームが現役稼働",
+          "世界中の強豪ゲーマーが集まる聖地",
+          "高田馬場駅すぐの好立地"
+        ],
+        "zh": [
+          "80-90年代复古游戏仍在运行",
+          "汇集全球高手的圣地",
+          "高田马场站旁绝佳位置"
+        ],
+        "en": [
+          "1980s-90s retro cabinets still run",
+          "A mecca for top players worldwide",
+          "Steps from Takadanobaba Station"
+        ],
+        "ko": [
+          "80~90년대 레트로 게임 현역 가동",
+          "세계의 강호가 모이는 성지",
+          "다카다노바바역 바로 앞"
+        ]
+      }
     },
     {
       "name": "レッドロック",
@@ -19343,26 +19607,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "名物は卵黄がのったローストビーフ丼",
-          "zh": "招牌是卧着蛋黄的烤牛肉盖饭",
-          "en": "The roast beef bowl with egg yolk is iconic",
-          "ko": "명물은 계란 노른자 얹은 로스트비프 덮밥"
-        },
-        {
-          "ja": "開店前から行列ができる人気店",
-          "zh": "开门前就排队的人气店",
-          "en": "A line forms before opening",
-          "ko": "오픈 전부터 대기 인기점"
-        },
-        {
-          "ja": "ボリューム満点で写真映え",
-          "zh": "分量十足很上镜",
-          "en": "Huge portions, very photogenic",
-          "ko": "푸짐한 양으로 사진 찍기 좋음"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "名物は卵黄がのったローストビーフ丼",
+          "開店前から行列ができる人気店",
+          "ボリューム満点で写真映え"
+        ],
+        "zh": [
+          "招牌是卧着蛋黄的烤牛肉盖饭",
+          "开门前就排队的人气店",
+          "分量十足很上镜"
+        ],
+        "en": [
+          "The roast beef bowl with egg yolk is iconic",
+          "A line forms before opening",
+          "Huge portions, very photogenic"
+        ],
+        "ko": [
+          "명물은 계란 노른자 얹은 로스트비프 덮밥",
+          "오픈 전부터 대기 인기점",
+          "푸짐한 양으로 사진 찍기 좋음"
+        ]
+      }
     },
     {
       "name": "寒天工房 讃岐屋",
@@ -19416,26 +19682,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "創業100年の寒天専門店",
-          "zh": "创业百年寒天专门店",
-          "en": "A 100-year agar specialist",
-          "ko": "창업 100년 한천 전문점"
-        },
-        {
-          "ja": "大きめ寒天・細めところてんがこだわり",
-          "zh": "大块寒天、细条碎寒天是讲究",
-          "en": "Thick kanten, thin tokoroten are the craft",
-          "ko": "두툼한 한천·가는 토코로텐이 고집"
-        },
-        {
-          "ja": "縁側に座って街行く人を眺める",
-          "zh": "坐在廊下看行人往来",
-          "en": "Sit on the engawa and watch the street",
-          "ko": "툇마루에 앉아 행인을 본다"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "創業100年の寒天専門店",
+          "大きめ寒天・細めところてんがこだわり",
+          "縁側に座って街行く人を眺める"
+        ],
+        "zh": [
+          "创业百年寒天专门店",
+          "大块寒天、细条碎寒天是讲究",
+          "坐在廊下看行人往来"
+        ],
+        "en": [
+          "A 100-year agar specialist",
+          "Thick kanten, thin tokoroten are the craft",
+          "Sit on the engawa and watch the street"
+        ],
+        "ko": [
+          "창업 100년 한천 전문점",
+          "두툼한 한천·가는 토코로텐이 고집",
+          "툇마루에 앉아 행인을 본다"
+        ]
+      }
     },
     {
       "name": "InSPYre（インスパイヤ）",
@@ -19488,26 +19756,28 @@ window.RAILWAY_TOURISM = {
         "en": "Nighttime",
         "ko": "밤"
       },
-      "tips_i18n": [
-        {
-          "ja": "レーザー網を避け暗号を解く10分ミッション",
-          "zh": "避激光解暗号的10分钟任务",
-          "en": "Dodge lasers and crack codes in 10 min",
-          "ko": "레이저 피하고 암호 푸는 10분 임무"
-        },
-        {
-          "ja": "頭も体力も使うリアル潜入ゲーム",
-          "zh": "动脑又动身体的真实潜入游戏",
-          "en": "A real infiltration game for mind and body",
-          "ko": "머리와 체력을 쓰는 실내 잠입 게임"
-        },
-        {
-          "ja": "新宿駅から徒歩5分の好立地",
-          "zh": "距新宿站步行5分",
-          "en": "5 min walk from Shinjuku Station",
-          "ko": "신주쿠역 도보 5분"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "レーザー網を避け暗号を解く10分ミッション",
+          "頭も体力も使うリアル潜入ゲーム",
+          "新宿駅から徒歩5分の好立地"
+        ],
+        "zh": [
+          "避激光解暗号的10分钟任务",
+          "动脑又动身体的真实潜入游戏",
+          "距新宿站步行5分"
+        ],
+        "en": [
+          "Dodge lasers and crack codes in 10 min",
+          "A real infiltration game for mind and body",
+          "5 min walk from Shinjuku Station"
+        ],
+        "ko": [
+          "레이저 피하고 암호 푸는 10분 임무",
+          "머리와 체력을 쓰는 실내 잠입 게임",
+          "신주쿠역 도보 5분"
+        ]
+      }
     },
     {
       "name": "文京シビックセンター 25階 展望ラウンジ",
@@ -19560,26 +19830,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "地上105mの無料展望ラウンジ",
-          "zh": "地上105米免费展望休息室",
-          "en": "Free 105m observation lounge",
-          "ko": "지상 105m 무료 전망 라운지"
-        },
-        {
-          "ja": "晴れた日の西側には富士山が見える",
-          "zh": "晴天西侧可看富士山",
-          "en": "See Mt Fuji to the west on clear days",
-          "ko": "맑은 날 서쪽으로 후지산"
-        },
-        {
-          "ja": "南側にはレストランも併設",
-          "zh": "南侧有餐厅",
-          "en": "A restaurant sits on the south side",
-          "ko": "남측에는 레스토랑도"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "地上105mの無料展望ラウンジ",
+          "晴れた日の西側には富士山が見える",
+          "南側にはレストランも併設"
+        ],
+        "zh": [
+          "地上105米免费展望休息室",
+          "晴天西侧可看富士山",
+          "南侧有餐厅"
+        ],
+        "en": [
+          "Free 105m observation lounge",
+          "See Mt Fuji to the west on clear days",
+          "A restaurant sits on the south side"
+        ],
+        "ko": [
+          "지상 105m 무료 전망 라운지",
+          "맑은 날 서쪽으로 후지산",
+          "남측에는 레스토랑도"
+        ]
+      }
     },
     {
       "name": "札幌軒",
@@ -19632,26 +19904,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "全国丼グランプリ5年連続金賞の札幌丼",
-          "zh": "全国盖饭大赛5年连金的札幌丼",
-          "en": "5-year gold-winning Sapporo-don",
-          "ko": "전국 덮밥 그랑프리 5년 연속 금상 삿포로동"
-        },
-        {
-          "ja": "甘辛い肉と紅生姜の相性抜群",
-          "zh": "甜辣肉与红姜绝配",
-          "en": "Sweet-spicy meat pairs with red ginger",
-          "ko": "달콤짭짤한 고기와 단무지 궁합"
-        },
-        {
-          "ja": "茗荷谷駅すぐの立地",
-          "zh": "茗荷谷站旁",
-          "en": "Steps from Myogadani Station",
-          "ko": "묘가다니역 바로 앞"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "全国丼グランプリ5年連続金賞の札幌丼",
+          "甘辛い肉と紅生姜の相性抜群",
+          "茗荷谷駅すぐの立地"
+        ],
+        "zh": [
+          "全国盖饭大赛5年连金的札幌丼",
+          "甜辣肉与红姜绝配",
+          "茗荷谷站旁"
+        ],
+        "en": [
+          "5-year gold-winning Sapporo-don",
+          "Sweet-spicy meat pairs with red ginger",
+          "Steps from Myogadani Station"
+        ],
+        "ko": [
+          "전국 덮밥 그랑프리 5년 연속 금상 삿포로동",
+          "달콤짭짤한 고기와 단무지 궁합",
+          "묘가다니역 바로 앞"
+        ]
+      }
     },
     {
       "name": "喫茶 蔵",
@@ -19704,26 +19978,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "大正12年の質屋蔵を改装した店内",
-          "zh": "大正12年当铺仓库改造店内",
-          "en": "Inside a 1923 pawnbroker's kura storehouse",
-          "ko": "다이쇼 12년 전당포 창고 개조 실내"
-        },
-        {
-          "ja": "暖かなオレンジの光が心地よい",
-          "zh": "温暖橙光令人放松",
-          "en": "Warm orange lighting soothes",
-          "ko": "따뜻한 주황 빛이 편안"
-        },
-        {
-          "ja": "ケーキ・ランチ・コーヒーがそろう",
-          "zh": "蛋糕、午餐、咖啡齐备",
-          "en": "Cake, lunch and coffee all on offer",
-          "ko": "케이크·런치·커피 완비"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "大正12年の質屋蔵を改装した店内",
+          "暖かなオレンジの光が心地よい",
+          "ケーキ・ランチ・コーヒーがそろう"
+        ],
+        "zh": [
+          "大正12年当铺仓库改造店内",
+          "温暖橙光令人放松",
+          "蛋糕、午餐、咖啡齐备"
+        ],
+        "en": [
+          "Inside a 1923 pawnbroker's kura storehouse",
+          "Warm orange lighting soothes",
+          "Cake, lunch and coffee all on offer"
+        ],
+        "ko": [
+          "다이쇼 12년 전당포 창고 개조 실내",
+          "따뜻한 주황 빛이 편안",
+          "케이크·런치·커피 완비"
+        ]
+      }
     },
     {
       "name": "patisserie emplir（パティスリー アンプリル）",
@@ -19776,26 +20052,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "賞味期限1時間の綾瀬モンブランが名物",
-          "zh": "赏味期限1小时的绫濑Mont Blanc是招牌",
-          "en": "The 1-hour Ayase Mont Blanc is iconic",
-          "ko": "맛있는 시간 1시간 아야세 몽블랑이 명물"
-        },
-        {
-          "ja": "注文後に絞られるクリームのバランス",
-          "zh": "下单后现挤奶油的绝妙平衡",
-          "en": "Freshly piped cream at order time",
-          "ko": "주문 후 짜는 크림의 균형"
-        },
-        {
-          "ja": "赤いドアが目印のかわいい店",
-          "zh": "红门为标志的可爱小店",
-          "en": "A cute shop with a red door",
-          "ko": "빨간 문이 표지인 귀여운 가게"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "賞味期限1時間の綾瀬モンブランが名物",
+          "注文後に絞られるクリームのバランス",
+          "赤いドアが目印のかわいい店"
+        ],
+        "zh": [
+          "赏味期限1小时的绫濑Mont Blanc是招牌",
+          "下单后现挤奶油的绝妙平衡",
+          "红门为标志的可爱小店"
+        ],
+        "en": [
+          "The 1-hour Ayase Mont Blanc is iconic",
+          "Freshly piped cream at order time",
+          "A cute shop with a red door"
+        ],
+        "ko": [
+          "맛있는 시간 1시간 아야세 몽블랑이 명물",
+          "주문 후 짜는 크림의 균형",
+          "빨간 문이 표지인 귀여운 가게"
+        ]
+      }
     },
     {
       "name": "欧風カレー&シチュー専門店 トマト",
@@ -19849,26 +20127,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "36種のスパイスを約140時間煮込む",
-          "zh": "36种香料熬制约140小时",
-          "en": "36 spices simmered ~140 hours",
-          "ko": "36종 향신료 약 140시간 끓이기"
-        },
-        {
-          "ja": "旨み凝縮のコク深い欧風カレー",
-          "zh": "鲜味浓缩醇厚欧风咖喱",
-          "en": "Rich, umami-packed European curry",
-          "ko": "감칠맛 응축 진한 유럽식 카레"
-        },
-        {
-          "ja": "ランチ・ディナーとも売切れ次第終了",
-          "zh": "午晚市售完即止",
-          "en": "Closes when sold out at either service",
-          "ko": "런치·디너 모두 소진 시 종료"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "36種のスパイスを約140時間煮込む",
+          "旨み凝縮のコク深い欧風カレー",
+          "ランチ・ディナーとも売切れ次第終了"
+        ],
+        "zh": [
+          "36种香料熬制约140小时",
+          "鲜味浓缩醇厚欧风咖喱",
+          "午晚市售完即止"
+        ],
+        "en": [
+          "36 spices simmered ~140 hours",
+          "Rich, umami-packed European curry",
+          "Closes when sold out at either service"
+        ],
+        "ko": [
+          "36종 향신료 약 140시간 끓이기",
+          "감칠맛 응축 진한 유럽식 카레",
+          "런치·디너 모두 소진 시 종료"
+        ]
+      }
     },
     {
       "name": "オバケン シーズン５ 「畏怖 咽び家」",
@@ -19921,26 +20201,28 @@ window.RAILWAY_TOURISM = {
         "en": "Nighttime",
         "ko": "밤"
       },
-      "tips_i18n": [
-        {
-          "ja": "住宅街に突如現れるミッションクリア型",
-          "zh": "住宅区突现的通关任务型",
-          "en": "A mission-clear haunt in a housing tract",
-          "ko": "주택가에 갑자기 나타난 미션형"
-        },
-        {
-          "ja": "有名遊園地のお化け屋敷を手がける演出",
-          "zh": "打造知名游乐园鬼屋的演出",
-          "en": "By the makers of famous theme-park haunts",
-          "ko": "유명 놀이공원 귀신집 제작진"
-        },
-        {
-          "ja": "集合場所の住所は当日のお楽しみ",
-          "zh": "集合地址当天揭晓",
-          "en": "Meeting address revealed on the day",
-          "ko": "집합 주소는 당일 공개"
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "住宅街に突如現れるミッションクリア型",
+          "有名遊園地のお化け屋敷を手がける演出",
+          "集合場所の住所は当日のお楽しみ"
+        ],
+        "zh": [
+          "住宅区突现的通关任务型",
+          "打造知名游乐园鬼屋的演出",
+          "集合地址当天揭晓"
+        ],
+        "en": [
+          "A mission-clear haunt in a housing tract",
+          "By the makers of famous theme-park haunts",
+          "Meeting address revealed on the day"
+        ],
+        "ko": [
+          "주택가에 갑자기 나타난 미션형",
+          "유명 놀이공원 귀신집 제작진",
+          "집합 주소는 당일 공개"
+        ]
+      },
       "address": "東京都杉並区方南2-4-29（集合は方南町駅1番出口・現地住所非公開）"
     },
     {
@@ -19996,26 +20278,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "熊谷守一美術館に併設のカフェ",
-          "zh": "熊谷守一美术馆附设咖啡",
-          "en": "Cafe inside the Kumagai Morikazu Museum",
-          "ko": "쿠마가이 모리카쿠 미술관 병설 카페"
-        },
-        {
-          "ja": "画家の次女が手びねりした器でコーヒー",
-          "zh": "用画家次女手捏器皿喝咖啡",
-          "en": "Drink from Kaya's hand-thrown cups",
-          "ko": "화가 차녀가 빚은 그릇에 커피"
-        },
-        {
-          "ja": "コーヒーと焼き菓子のみの静かな空間",
-          "zh": "可只来咖啡馆或看完美术馆顺道",
-          "en": "Come just for coffee or after the museum",
-          "ko": "카페만 이용·관람 후 방문 모두 가능"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "熊谷守一美術館に併設のカフェ",
+          "画家の次女が手びねりした器でコーヒー",
+          "コーヒーと焼き菓子のみの静かな空間"
+        ],
+        "zh": [
+          "熊谷守一美术馆附设咖啡",
+          "用画家次女手捏器皿喝咖啡",
+          "可只来咖啡馆或看完美术馆顺道"
+        ],
+        "en": [
+          "Cafe inside the Kumagai Morikazu Museum",
+          "Drink from Kaya's hand-thrown cups",
+          "Come just for coffee or after the museum"
+        ],
+        "ko": [
+          "쿠마가이 모리카쿠 미술관 병설 카페",
+          "화가 차녀가 빚은 그릇에 커피",
+          "카페만 이용·관람 후 방문 모두 가능"
+        ]
+      }
     },
     {
       "name": "ウクレレ・マニア",
@@ -20068,26 +20352,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "ビンテージから初心者向けまで勢揃い",
-          "zh": "从复古到初学者款齐聚",
-          "en": "From vintage to beginner models",
-          "ko": "빈티지부터 초보용까지 일괄"
-        },
-        {
-          "ja": "卸直営で比較的リーズナブル",
-          "zh": "批发直营价格亲民",
-          "en": "Wholesale-direct, relatively affordable",
-          "ko": "도매 직영으로 비교적 저렴"
-        },
-        {
-          "ja": "HPの合い言葉でハワイアンコーヒー無料",
-          "zh": "凭官网暗号免费喝夏威夷咖啡",
-          "en": "Say the HP keyword for free Hawaiian coffee",
-          "ko": "HP 암호 말하면 하와이안 커피 무료"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "ビンテージから初心者向けまで勢揃い",
+          "卸直営で比較的リーズナブル",
+          "HPの合い言葉でハワイアンコーヒー無料"
+        ],
+        "zh": [
+          "从复古到初学者款齐聚",
+          "批发直营价格亲民",
+          "凭官网暗号免费喝夏威夷咖啡"
+        ],
+        "en": [
+          "From vintage to beginner models",
+          "Wholesale-direct, relatively affordable",
+          "Say the HP keyword for free Hawaiian coffee"
+        ],
+        "ko": [
+          "빈티지부터 초보용까지 일괄",
+          "도매 직영으로 비교적 저렴",
+          "HP 암호 말하면 하와이안 커피 무료"
+        ]
+      }
     },
     {
       "name": "久米繊維工業ファクトリーショップ",
@@ -20140,26 +20426,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "国産Tシャツの老舗メーカー直営",
-          "zh": "国产T恤老牌厂商直营",
-          "en": "Direct shop of a domestic T-shirt pioneer",
-          "ko": "국산 티셔츠 노포 직영"
-        },
-        {
-          "ja": "デコパーツを選んで世界に一枚のTシャツ",
-          "zh": "选装饰件做世界独一T恤",
-          "en": "Pick decorations for a one-of-a-kind tee",
-          "ko": "데코 부품 골라 세계에 하나뿐인 티셔츠"
-        },
-        {
-          "ja": "ワークショップは事前予約制",
-          "zh": "工坊需事前预约",
-          "en": "Workshops need booking ahead",
-          "ko": "워크숍은 사전 예약제"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "国産Tシャツの老舗メーカー直営",
+          "デコパーツを選んで世界に一枚のTシャツ",
+          "ワークショップは事前予約制"
+        ],
+        "zh": [
+          "国产T恤老牌厂商直营",
+          "选装饰件做世界独一T恤",
+          "工坊需事前预约"
+        ],
+        "en": [
+          "Direct shop of a domestic T-shirt pioneer",
+          "Pick decorations for a one-of-a-kind tee",
+          "Workshops need booking ahead"
+        ],
+        "ko": [
+          "국산 티셔츠 노포 직영",
+          "데코 부품 골라 세계에 하나뿐인 티셔츠",
+          "워크숍은 사전 예약제"
+        ]
+      }
     },
     {
       "name": "somenova（ソメノバ）",
@@ -20212,26 +20500,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "初心者から本格派まで体験可能",
-          "zh": "从新手到行家都可体验",
-          "en": "For beginners through enthusiasts",
-          "ko": "초보자부터 본격파까지 체험 가능"
-        },
-        {
-          "ja": "一番人気はうずまき模様のタイダイ染め",
-          "zh": "最人气是漩涡纹扎染",
-          "en": "Spiral tie-dye is the favorite",
-          "ko": "가장 인기는 소용돌이 무늬 타이다이"
-        },
-        {
-          "ja": "出来上がりは広げる瞬間までのお楽しみ",
-          "zh": "成品打开前都是惊喜",
-          "en": "The reveal is half the fun",
-          "ko": "펼치는 순간까지의 즐거움"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "初心者から本格派まで体験可能",
+          "一番人気はうずまき模様のタイダイ染め",
+          "出来上がりは広げる瞬間までのお楽しみ"
+        ],
+        "zh": [
+          "从新手到行家都可体验",
+          "最人气是漩涡纹扎染",
+          "成品打开前都是惊喜"
+        ],
+        "en": [
+          "For beginners through enthusiasts",
+          "Spiral tie-dye is the favorite",
+          "The reveal is half the fun"
+        ],
+        "ko": [
+          "초보자부터 본격파까지 체험 가능",
+          "가장 인기는 소용돌이 무늬 타이다이",
+          "펼치는 순간까지의 즐거움"
+        ]
+      }
     },
     {
       "name": "LABOUR AND WAIT TOKYO",
@@ -20284,26 +20574,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "ロンドン本店に次ぐ世界第2号店",
-          "zh": "伦敦本店之后世界第二家店",
-          "en": "The world's second store after London",
-          "ko": "런던 본점에 이은 세계 2호점"
-        },
-        {
-          "ja": "完成度が高く機能的な生活道具",
-          "zh": "完成度高、功能的生活用具",
-          "en": "Highly finished, functional goods",
-          "ko": "완성도 높고 기능적인 생활 도구"
-        },
-        {
-          "ja": "ブラシだけで20種類以上という品揃え",
-          "zh": "光是刷子就有20多种",
-          "en": "20+ kinds of brushes alone",
-          "ko": "브러시만 20종 이상이라는 품셈"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "ロンドン本店に次ぐ世界第2号店",
+          "完成度が高く機能的な生活道具",
+          "ブラシだけで20種類以上という品揃え"
+        ],
+        "zh": [
+          "伦敦本店之后世界第二家店",
+          "完成度高、功能的生活用具",
+          "光是刷子就有20多种"
+        ],
+        "en": [
+          "The world's second store after London",
+          "Highly finished, functional goods",
+          "20+ kinds of brushes alone"
+        ],
+        "ko": [
+          "런던 본점에 이은 세계 2호점",
+          "완성도 높고 기능적인 생활 도구",
+          "브러시만 20종 이상이라는 품셈"
+        ]
+      }
     },
     {
       "name": "Dear Bear",
@@ -20356,26 +20648,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "世界の上質なテディベアが数千種類",
-          "zh": "数千种高品质泰迪熊",
-          "en": "Thousands of fine teddy bears",
-          "ko": "세계 고급 곰인형 수천 종"
-        },
-        {
-          "ja": "100年ものの数十万円クマも展示",
-          "zh": "也展示百年、数十万日元的熊",
-          "en": "Rare ~100-year-old bears on view",
-          "ko": "100년대 수십만엔 곰도 전시"
-        },
-        {
-          "ja": "千円以下の手頃なクマやキーホルダーも",
-          "zh": "千元以下亲民熊和钥匙扣",
-          "en": "Affordable bears and keychains under ¥1,000",
-          "ko": "1,000엔 이하 부담 없는 곰·키홀더"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "世界の上質なテディベアが数千種類",
+          "100年ものの数十万円クマも展示",
+          "千円以下の手頃なクマやキーホルダーも"
+        ],
+        "zh": [
+          "数千种高品质泰迪熊",
+          "也展示百年、数十万日元的熊",
+          "千元以下亲民熊和钥匙扣"
+        ],
+        "en": [
+          "Thousands of fine teddy bears",
+          "Rare ~100-year-old bears on view",
+          "Affordable bears and keychains under ¥1,000"
+        ],
+        "ko": [
+          "세계 고급 곰인형 수천 종",
+          "100년대 수십만엔 곰도 전시",
+          "1,000엔 이하 부담 없는 곰·키홀더"
+        ]
+      }
     },
     {
       "name": "トウキョウミタイワラ",
@@ -20430,26 +20724,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "ひよこ豆で作る甘い団子ブンディラドゥが人気",
-          "zh": "鹰嘴豆甜团Bundi Laddu人气",
-          "en": "The chickpea Bundi Laddu is a hit",
-          "ko": "병아리콩 만든 단고 번디 라두 인기"
-        },
-        {
-          "ja": "店員もコックも全員インド人の本格派",
-          "zh": "店员厨师全是印度人的正宗派",
-          "en": "Fully Indian staff, fully authentic",
-          "ko": "직원·요리사 모두 인도인 정통파"
-        },
-        {
-          "ja": "店内にはカフェも併設",
-          "zh": "店内附设咖啡",
-          "en": "A cafe is attached inside",
-          "ko": "매장 내 카페 병설"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "ひよこ豆で作る甘い団子ブンディラドゥが人気",
+          "店員もコックも全員インド人の本格派",
+          "店内にはカフェも併設"
+        ],
+        "zh": [
+          "鹰嘴豆甜团Bundi Laddu人气",
+          "店员厨师全是印度人的正宗派",
+          "店内附设咖啡"
+        ],
+        "en": [
+          "The chickpea Bundi Laddu is a hit",
+          "Fully Indian staff, fully authentic",
+          "A cafe is attached inside"
+        ],
+        "ko": [
+          "병아리콩 만든 단고 번디 라두 인기",
+          "직원·요리사 모두 인도인 정통파",
+          "매장 내 카페 병설"
+        ]
+      }
     },
     {
       "name": "黄金湯",
@@ -20502,26 +20798,28 @@ window.RAILWAY_TOURISM = {
         "en": "Nighttime",
         "ko": "밤"
       },
-      "tips_i18n": [
-        {
-          "ja": "1932年創業の銭湯をフルリニューアル",
-          "zh": "翻新1932年创业澡堂",
-          "en": "Renovated 1932 bathhouse",
-          "ko": "1932년 창업 센토 풀 리뉴얼"
-        },
-        {
-          "ja": "番台バーでオリジナルペールエール",
-          "zh": "柜台吧台喝原创淡色艾尔",
-          "en": "Original pale ale at the bandai bar",
-          "ko": "반다이 바에서 오리지널 페일에일"
-        },
-        {
-          "ja": "2階に宿泊施設も併設",
-          "zh": "二楼附设住宿",
-          "en": "Sleeping quarters on 2F",
-          "ko": "2층에 숙박 시설 병설"
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "1932年創業の銭湯をフルリニューアル",
+          "番台バーでオリジナルペールエール",
+          "2階に宿泊施設も併設"
+        ],
+        "zh": [
+          "翻新1932年创业澡堂",
+          "柜台吧台喝原创淡色艾尔",
+          "二楼附设住宿"
+        ],
+        "en": [
+          "Renovated 1932 bathhouse",
+          "Original pale ale at the bandai bar",
+          "Sleeping quarters on 2F"
+        ],
+        "ko": [
+          "1932년 창업 센토 풀 리뉴얼",
+          "반다이 바에서 오리지널 페일에일",
+          "2층에 숙박 시설 병설"
+        ]
+      },
       "address": "東京都墨田区太平4-14-6 金澤マンション1F"
     },
     {
@@ -20575,26 +20873,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "完全個室制でこぶたをひとりじめ",
-          "zh": "全包间独享小猪",
-          "en": "Private rooms to enjoy pigs alone",
-          "ko": "완전개실제로 새끼돼지 독점"
-        },
-        {
-          "ja": "人懐っこいこぶたが駆け寄ってくる",
-          "zh": "亲人小猪凑过来",
-          "en": "Friendly pigs come right over",
-          "ko": "다정한 새끼돼지가 달려옴"
-        },
-        {
-          "ja": "日本初のマイクロブタお散歩体験も",
-          "zh": "日本首次迷你猪散步体验",
-          "en": "Japan's first micro-pig walk",
-          "ko": "일본 첫 미니돼지 산책 체험"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "完全個室制でこぶたをひとりじめ",
+          "人懐っこいこぶたが駆け寄ってくる",
+          "日本初のマイクロブタお散歩体験も"
+        ],
+        "zh": [
+          "全包间独享小猪",
+          "亲人小猪凑过来",
+          "日本首次迷你猪散步体验"
+        ],
+        "en": [
+          "Private rooms to enjoy pigs alone",
+          "Friendly pigs come right over",
+          "Japan's first micro-pig walk"
+        ],
+        "ko": [
+          "완전개실제로 새끼돼지 독점",
+          "다정한 새끼돼지가 달려옴",
+          "일본 첫 미니돼지 산책 체험"
+        ]
+      }
     },
     {
       "name": "北海道めんこい くまちゃん温泉 渋谷本館",
@@ -20647,26 +20947,28 @@ window.RAILWAY_TOURISM = {
         "en": "Nighttime",
         "ko": "밤"
       },
-      "tips_i18n": [
-        {
-          "ja": "テーブルの絵本を見て具材を選ぶ",
-          "zh": "看桌上绘本选食材",
-          "en": "Choose ingredients from a picture book",
-          "ko": "탁자의 그림책을 보고 재료 선택"
-        },
-        {
-          "ja": "煮えるとくまちゃんが転がる演出",
-          "zh": "煮开小熊咕噜倒下演出",
-          "en": "The bear tips over as it boils",
-          "ko": "끓으면 곰이 굴러떨어지는 연출"
-        },
-        {
-          "ja": "一人鍋専門店で一人でも安心",
-          "zh": "单人火锅专门店一人也安心",
-          "en": "One-person nabe—safe solo",
-          "ko": "1인 냄비 전문점이라 혼자도 안심"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "テーブルの絵本を見て具材を選ぶ",
+          "煮えるとくまちゃんが転がる演出",
+          "一人鍋専門店で一人でも安心"
+        ],
+        "zh": [
+          "看桌上绘本选食材",
+          "煮开小熊咕噜倒下演出",
+          "单人火锅专门店一人也安心"
+        ],
+        "en": [
+          "Choose ingredients from a picture book",
+          "The bear tips over as it boils",
+          "One-person nabe—safe solo"
+        ],
+        "ko": [
+          "탁자의 그림책을 보고 재료 선택",
+          "끓으면 곰이 굴러떨어지는 연출",
+          "1인 냄비 전문점이라 혼자도 안심"
+        ]
+      }
     },
     {
       "name": "ほぼ上野オスシマチ",
@@ -20720,26 +21022,28 @@ window.RAILWAY_TOURISM = {
         "en": "Nighttime",
         "ko": "밤"
       },
-      "tips_i18n": [
-        {
-          "ja": "イクラ山盛りのマウント寿司が名物",
-          "zh": "鲑鱼籽山Mount寿司是招牌",
-          "en": "The ikura Mount Sushi is iconic",
-          "ko": "이꾸라 산 마운트 스시가 명물"
-        },
-        {
-          "ja": "アイスコーンにのったマグロユッケも",
-          "zh": "冰淇淋甜筒金枪鱼脍也值得",
-          "en": "Tuna yukke in an ice-cream cone",
-          "ko": "아이스콘에 담은 참치 육회도"
-        },
-        {
-          "ja": "見た目も味も楽しむ新感覚寿司",
-          "zh": "视觉与味觉并享的新感觉寿司",
-          "en": "New-style sushi for eyes and palate",
-          "ko": "보는 맛 먹는 맛 신감각 스시"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "イクラ山盛りのマウント寿司が名物",
+          "アイスコーンにのったマグロユッケも",
+          "見た目も味も楽しむ新感覚寿司"
+        ],
+        "zh": [
+          "鲑鱼籽山Mount寿司是招牌",
+          "冰淇淋甜筒金枪鱼脍也值得",
+          "视觉与味觉并享的新感觉寿司"
+        ],
+        "en": [
+          "The ikura Mount Sushi is iconic",
+          "Tuna yukke in an ice-cream cone",
+          "New-style sushi for eyes and palate"
+        ],
+        "ko": [
+          "이꾸라 산 마운트 스시가 명물",
+          "아이스콘에 담은 참치 육회도",
+          "보는 맛 먹는 맛 신감각 스시"
+        ]
+      }
     },
     {
       "name": "東京都恩賜上野動物園",
@@ -20792,26 +21096,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "パンダはもちろん鳥たちも個性豊か",
-          "zh": "熊猫之外鸟类个性丰富",
-          "en": "Pandas aside, the birds have fans",
-          "ko": "판다 외 새들도 개성 만점"
-        },
-        {
-          "ja": "一躍有名になったハシビロコウは必見",
-          "zh": "一举成名的鲸头鹳必看",
-          "en": "The famous shoebill is a must",
-          "ko": "일약 유명해진 하시비로코우 필견"
-        },
-        {
-          "ja": "ピンクのベニイロフラミンゴも見もの",
-          "zh": "粉红火烈鸟也值得一看",
-          "en": "The pink flamingos are a sight",
-          "ko": "분홍 플라밍고도 볼거리"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "パンダはもちろん鳥たちも個性豊か",
+          "一躍有名になったハシビロコウは必見",
+          "ピンクのベニイロフラミンゴも見もの"
+        ],
+        "zh": [
+          "熊猫之外鸟类个性丰富",
+          "一举成名的鲸头鹳必看",
+          "粉红火烈鸟也值得一看"
+        ],
+        "en": [
+          "Pandas aside, the birds have fans",
+          "The famous shoebill is a must",
+          "The pink flamingos are a sight"
+        ],
+        "ko": [
+          "판다 외 새들도 개성 만점",
+          "일약 유명해진 하시비로코우 필견",
+          "분홍 플라밍고도 볼거리"
+        ]
+      }
     },
     {
       "name": "市谷亀岡八幡宮",
@@ -20865,26 +21171,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "ペットの七五三やご祈祷が予約制で可能",
-          "zh": "宠物七五三祈福可预约办理",
-          "en": "Book pet Shichigosan and prayers",
-          "ko": "반려동물 칠오삼·기도 예약제 가능"
-        },
-        {
-          "ja": "犬・猫・ウサギ・亀・フェレットまで",
-          "zh": "猫狗兔子乌龟雪貂皆可",
-          "en": "Cats, dogs, rabbits, turtles, ferrets too",
-          "ko": "개·고양이·토끼·거북이·페럿까지"
-        },
-        {
-          "ja": "境内でペット用お守りを授与",
-          "zh": "境内授宠物御守",
-          "en": "Pet amulets are given on site",
-          "ko": "경내에서 반려동물용 부적 수여"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "ペットの七五三やご祈祷が予約制で可能",
+          "犬・猫・ウサギ・亀・フェレットまで",
+          "境内でペット用お守りを授与"
+        ],
+        "zh": [
+          "宠物七五三祈福可预约办理",
+          "猫狗兔子乌龟雪貂皆可",
+          "境内授宠物御守"
+        ],
+        "en": [
+          "Book pet Shichigosan and prayers",
+          "Cats, dogs, rabbits, turtles, ferrets too",
+          "Pet amulets are given on site"
+        ],
+        "ko": [
+          "반려동물 칠오삼·기도 예약제 가능",
+          "개·고양이·토끼·거북이·페럿까지",
+          "경내에서 반려동물용 부적 수여"
+        ]
+      }
     },
     {
       "name": "JICA地球ひろば 食のゾーン J's Cafe",
@@ -20937,26 +21245,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "月替わりで世界の郷土料理が楽しめる",
-          "zh": "月换世界各国乡土料理",
-          "en": "Monthly rotating world home cooking",
-          "ko": "월 교체 세계 향토 요리"
-        },
-        {
-          "ja": "TFTセットは1食20円が途上国へ寄付",
-          "zh": "TFT套餐每单20日元捐发展中国家",
-          "en": "TFT meals donate ¥20 to school lunches",
-          "ko": "TFT 세트는 1식 20엔이 개도국으로 기부"
-        },
-        {
-          "ja": "ランチ後はJICAの展示も見学可",
-          "zh": "午餐后可看JICA展览",
-          "en": "See the JICA exhibits after lunch",
-          "ko": "런치 후 JICA 전시도 관람"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "月替わりで世界の郷土料理が楽しめる",
+          "TFTセットは1食20円が途上国へ寄付",
+          "ランチ後はJICAの展示も見学可"
+        ],
+        "zh": [
+          "月换世界各国乡土料理",
+          "TFT套餐每单20日元捐发展中国家",
+          "午餐后可看JICA展览"
+        ],
+        "en": [
+          "Monthly rotating world home cooking",
+          "TFT meals donate ¥20 to school lunches",
+          "See the JICA exhibits after lunch"
+        ],
+        "ko": [
+          "월 교체 세계 향토 요리",
+          "TFT 세트는 1식 20엔이 개도국으로 기부",
+          "런치 후 JICA 전시도 관람"
+        ]
+      }
     },
     {
       "name": "NECOT COFFEE HOUSE",
@@ -21009,26 +21319,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "保護猫たちと自由に暮らす空間",
-          "zh": "与保护猫自由生活空间",
-          "en": "A free-roam rescue-cat space",
-          "ko": "보호묵과 자유롭게 사는 공간"
-        },
-        {
-          "ja": "お膝の上に乗ってくる人懐っこい子も",
-          "zh": "也有跳上膝盖亲人的猫",
-          "en": "Friendly cats may hop on your lap",
-          "ko": "무릎에 올라오는 다정한 고양이도"
-        },
-        {
-          "ja": "ねこのお昼寝を眺めるだけで癒やされる",
-          "zh": "只看猫打盹也治愈",
-          "en": "Watching them nap is healing",
-          "ko": "고양이 낮잠을 보기만 해도 힐링"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "保護猫たちと自由に暮らす空間",
+          "お膝の上に乗ってくる人懐っこい子も",
+          "ねこのお昼寝を眺めるだけで癒やされる"
+        ],
+        "zh": [
+          "与保护猫自由生活空间",
+          "也有跳上膝盖亲人的猫",
+          "只看猫打盹也治愈"
+        ],
+        "en": [
+          "A free-roam rescue-cat space",
+          "Friendly cats may hop on your lap",
+          "Watching them nap is healing"
+        ],
+        "ko": [
+          "보호묵과 자유롭게 사는 공간",
+          "무릎에 올라오는 다정한 고양이도",
+          "고양이 낮잠을 보기만 해도 힐링"
+        ]
+      }
     },
     {
       "name": "The Mixology",
@@ -21081,26 +21393,28 @@ window.RAILWAY_TOURISM = {
         "en": "Nighttime",
         "ko": "밤"
       },
-      "tips_i18n": [
-        {
-          "ja": "果物や野菜を使ったミクソロジーカクテル",
-          "zh": "用水果蔬菜做的调酒艺术鸡尾酒",
-          "en": "Mixology cocktails from fruit and veg",
-          "ko": "과일·채소를 쓴 믹솔로지 칵테일"
-        },
-        {
-          "ja": "遠心分離機など最新器材を導入",
-          "zh": "导入离心机等最新设备",
-          "en": "Cutting-edge equipment on site",
-          "ko": "원심분리기 등 최신 설비 도입"
-        },
-        {
-          "ja": "赤坂駅すぐの隠れ家的バー",
-          "zh": "赤坂站旁隐秘酒吧",
-          "en": "A hidden bar steps from Akasaka",
-          "ko": "아카사카역 바로 앞 히든 바"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "果物や野菜を使ったミクソロジーカクテル",
+          "遠心分離機など最新器材を導入",
+          "赤坂駅すぐの隠れ家的バー"
+        ],
+        "zh": [
+          "用水果蔬菜做的调酒艺术鸡尾酒",
+          "导入离心机等最新设备",
+          "赤坂站旁隐秘酒吧"
+        ],
+        "en": [
+          "Mixology cocktails from fruit and veg",
+          "Cutting-edge equipment on site",
+          "A hidden bar steps from Akasaka"
+        ],
+        "ko": [
+          "과일·채소를 쓴 믹솔로지 칵테일",
+          "원심분리기 등 최신 설비 도입",
+          "아카사카역 바로 앞 히든 바"
+        ]
+      }
     },
     {
       "name": "生姜サウナ 金の亀",
@@ -21153,26 +21467,28 @@ window.RAILWAY_TOURISM = {
         "en": "Nighttime",
         "ko": "밤"
       },
-      "tips_i18n": [
-        {
-          "ja": "焼き生姜ロウリュと生姜水風呂",
-          "zh": "烤生姜ロウリュ与生姜水浴",
-          "en": "Roasted-ginger loyly and ginger cold bath",
-          "ko": "구운 생강 로우뤼와 생강 냉탕"
-        },
-        {
-          "ja": "水分補給の生姜水に生姜味噌汁まで",
-          "zh": "补水有生姜水、生姜味噌汤",
-          "en": "Ginger water and ginger miso soup to drink",
-          "ko": "수분 보충 생강물·생강 된장국"
-        },
-        {
-          "ja": "発汗・血行促進したい人に",
-          "zh": "适合想发汗促循环的人",
-          "en": "Great for sweating and circulation",
-          "ko": "발한·혈행 촉진 원하는 사람에게"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "焼き生姜ロウリュと生姜水風呂",
+          "水分補給の生姜水に生姜味噌汁まで",
+          "発汗・血行促進したい人に"
+        ],
+        "zh": [
+          "烤生姜ロウリュ与生姜水浴",
+          "补水有生姜水、生姜味噌汤",
+          "适合想发汗促循环的人"
+        ],
+        "en": [
+          "Roasted-ginger loyly and ginger cold bath",
+          "Ginger water and ginger miso soup to drink",
+          "Great for sweating and circulation"
+        ],
+        "ko": [
+          "구운 생강 로우뤼와 생강 냉탕",
+          "수분 보충 생강물·생강 된장국",
+          "발한·혈행 촉진 원하는 사람에게"
+        ]
+      }
     },
     {
       "name": "深川吉野屋",
@@ -21226,26 +21542,28 @@ window.RAILWAY_TOURISM = {
         "en": "Night",
         "ko": "밤"
       },
-      "tips_i18n": [
-        {
-          "ja": "完全予約制・貸切専用なので事前に電話予約を",
-          "zh": "完全预约·仅包船，需提前电话预订",
-          "en": "Reservation and charter required in advance",
-          "ko": "완전예약·전세 전용이므로 사전 전화 예약"
-        },
-        {
-          "ja": "デッキから夜景を撮るなら三脚は軽量が便利",
-          "zh": "甲板拍夜景建议带轻便三脚架",
-          "en": "A lightweight tripod is handy for night photos from the deck",
-          "ko": "갑판에서 야경 촬영 시 가벼운 삼각대 편리"
-        },
-        {
-          "ja": "冬は防寒、夏は夕涼みにちょうどいい",
-          "zh": "冬季注意保暖，夏季纳凉正合适",
-          "en": "Dress warm in winter; ideal for cool summer evenings",
-          "ko": "겨울 방한·여름 더위 식히기 좋음"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "完全予約制・貸切専用なので事前に電話予約を",
+          "デッキから夜景を撮るなら三脚は軽量が便利",
+          "冬は防寒、夏は夕涼みにちょうどいい"
+        ],
+        "zh": [
+          "完全预约·仅包船，需提前电话预订",
+          "甲板拍夜景建议带轻便三脚架",
+          "冬季注意保暖，夏季纳凉正合适"
+        ],
+        "en": [
+          "Reservation and charter required in advance",
+          "A lightweight tripod is handy for night photos from the deck",
+          "Dress warm in winter; ideal for cool summer evenings"
+        ],
+        "ko": [
+          "완전예약·전세 전용이므로 사전 전화 예약",
+          "갑판에서 야경 촬영 시 가벼운 삼각대 편리",
+          "겨울 방한·여름 더위 식히기 좋음"
+        ]
+      }
     },
     {
       "name": "霊巌寺",
@@ -21299,26 +21617,28 @@ window.RAILWAY_TOURISM = {
         "en": "All day",
         "ko": "종일"
       },
-      "tips_i18n": [
-        {
-          "ja": "本堂左手の巨大地蔵が目印",
-          "zh": "本堂左手的巨大地藏是标志",
-          "en": "The giant Jizo to the left of the main hall is the landmark",
-          "ko": "본당 왼손 거대 지즈가 표지"
-        },
-        {
-          "ja": "写真撮影は静かに",
-          "zh": "拍照请保持安静",
-          "en": "Keep quiet when taking photos",
-          "ko": "촬영은 조용히"
-        },
-        {
-          "ja": "近隣はカフェ街なので散策とセットで",
-          "zh": "附近是咖啡街，适合顺道散步",
-          "en": "Pair with a walk through the nearby café district",
-          "ko": "인근 카페 거리 산책과 세트로"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "本堂左手の巨大地蔵が目印",
+          "写真撮影は静かに",
+          "近隣はカフェ街なので散策とセットで"
+        ],
+        "zh": [
+          "本堂左手的巨大地藏是标志",
+          "拍照请保持安静",
+          "附近是咖啡街，适合顺道散步"
+        ],
+        "en": [
+          "The giant Jizo to the left of the main hall is the landmark",
+          "Keep quiet when taking photos",
+          "Pair with a walk through the nearby café district"
+        ],
+        "ko": [
+          "본당 왼손 거대 지즈가 표지",
+          "촬영은 조용히",
+          "인근 카페 거리 산책과 세트로"
+        ]
+      }
     },
     {
       "name": "Brew Parlor 3615",
@@ -21371,26 +21691,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "初心者は店員が丁寧に淹れ方を教えてくれる",
-          "zh": "店员会耐心教新手冲法",
-          "en": "Staff gently teach beginners how to brew",
-          "ko": "초보자는 점원이 내리는 법을 친절히 지도"
-        },
-        {
-          "ja": "器具やカップは自分で選ぶ",
-          "zh": "器具与杯子均可自选",
-          "en": "Choose your own dripper and cup",
-          "ko": "도구·잔은 직접 선택"
-        },
-        {
-          "ja": "朝7時から開いている",
-          "zh": "早7点开始营业",
-          "en": "Opens as early as 7 a.m.",
-          "ko": "아침 7시부터 영업"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "初心者は店員が丁寧に淹れ方を教えてくれる",
+          "器具やカップは自分で選ぶ",
+          "朝7時から開いている"
+        ],
+        "zh": [
+          "店员会耐心教新手冲法",
+          "器具与杯子均可自选",
+          "早7点开始营业"
+        ],
+        "en": [
+          "Staff gently teach beginners how to brew",
+          "Choose your own dripper and cup",
+          "Opens as early as 7 a.m."
+        ],
+        "ko": [
+          "초보자는 점원이 내리는 법을 친절히 지도",
+          "도구·잔은 직접 선택",
+          "아침 7시부터 영업"
+        ]
+      }
     },
     {
       "name": "麻布 香雅堂",
@@ -21444,26 +21766,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "初心者向け「組香」体験が人気",
-          "zh": "面向初学者的“组香”体验受欢迎",
-          "en": "The beginner 'kumikō' game is popular",
-          "ko": "초보자용 '조향' 체험이 인기"
-        },
-        {
-          "ja": "体験詳細は店舗へ要問合せ",
-          "zh": "体验详情请向店铺咨询",
-          "en": "Ask the shop for workshop details",
-          "ko": "체험 상세는 점포 문의"
-        },
-        {
-          "ja": "香道具や香木、お線香も購入可",
-          "zh": "香具、香木、线香均可购买",
-          "en": "Incense tools, fragrant woods and sticks also sold",
-          "ko": "향도구·향목·향도 구매 가능"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "初心者向け「組香」体験が人気",
+          "体験詳細は店舗へ要問合せ",
+          "香道具や香木、お線香も購入可"
+        ],
+        "zh": [
+          "面向初学者的“组香”体验受欢迎",
+          "体验详情请向店铺咨询",
+          "香具、香木、线香均可购买"
+        ],
+        "en": [
+          "The beginner 'kumikō' game is popular",
+          "Ask the shop for workshop details",
+          "Incense tools, fragrant woods and sticks also sold"
+        ],
+        "ko": [
+          "초보자용 '조향' 체험이 인기",
+          "체험 상세는 점포 문의",
+          "향도구·향목·향도 구매 가능"
+        ]
+      }
     },
     {
       "name": "AFRIKA ROSE/アフリカの花屋",
@@ -21516,26 +21840,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "大輪バラは通常の1.5〜2倍のボリューム",
-          "zh": "大轮玫瑰有普通1.5~2倍的量感",
-          "en": "The oversized roses are 1.5-2x the volume",
-          "ko": "대형 장미는 보통의 1.5~2배 볼륨"
-        },
-        {
-          "ja": "花もちは1〜2週間と長い",
-          "zh": "花可保1~2周耐久",
-          "en": "They last 1-2 weeks",
-          "ko": "꽃은 1~2주간 오래 감"
-        },
-        {
-          "ja": "自宅用にも贈り物にも",
-          "zh": "自用或送礼皆宜",
-          "en": "Great for home or gifting",
-          "ko": "자택용·선물용 모두"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "大輪バラは通常の1.5〜2倍のボリューム",
+          "花もちは1〜2週間と長い",
+          "自宅用にも贈り物にも"
+        ],
+        "zh": [
+          "大轮玫瑰有普通1.5~2倍的量感",
+          "花可保1~2周耐久",
+          "自用或送礼皆宜"
+        ],
+        "en": [
+          "The oversized roses are 1.5-2x the volume",
+          "They last 1-2 weeks",
+          "Great for home or gifting"
+        ],
+        "ko": [
+          "대형 장미는 보통의 1.5~2배 볼륨",
+          "꽃은 1~2주간 오래 감",
+          "자택용·선물용 모두"
+        ]
+      }
     },
     {
       "name": "国立新美術館",
@@ -21589,26 +21915,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "同エリアのサントリー美術館等とはしご",
-          "zh": "可串联同区域三得利美术馆",
-          "en": "Hop between Suntory Museum and 21_21 DESIGN SIGHT",
-          "ko": "인근 산토리 미술관 등과 연계 관람"
-        },
-        {
-          "ja": "金曜は夜まで開館",
-          "zh": "周五开放至夜间",
-          "en": "Open late on Fridays",
-          "ko": "금요일은 밤까지 개관"
-        },
-        {
-          "ja": "チケットは展覧会ごとに料金が異なる",
-          "zh": "票价因展览而异",
-          "en": "Ticket prices vary by exhibition",
-          "ko": "티켓은 전시마다 요금 상이"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "同エリアのサントリー美術館等とはしご",
+          "金曜は夜まで開館",
+          "チケットは展覧会ごとに料金が異なる"
+        ],
+        "zh": [
+          "可串联同区域三得利美术馆",
+          "周五开放至夜间",
+          "票价因展览而异"
+        ],
+        "en": [
+          "Hop between Suntory Museum and 21_21 DESIGN SIGHT",
+          "Open late on Fridays",
+          "Ticket prices vary by exhibition"
+        ],
+        "ko": [
+          "인근 산토리 미술관 등과 연계 관람",
+          "금요일은 밤까지 개관",
+          "티켓은 전시마다 요금 상이"
+        ]
+      }
     },
     {
       "name": "東書文庫",
@@ -21662,26 +21990,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "完全予約制なので事前連絡を",
-          "zh": "完全预约制请提前联系",
-          "en": "Reservation is required",
-          "ko": "완전예약제라 사전 연락"
-        },
-        {
-          "ja": "入館無料",
-          "zh": "免费入馆",
-          "en": "Admission is free",
-          "ko": "입관 무료"
-        },
-        {
-          "ja": "時代ごとの教科書を見比べられる",
-          "zh": "可对比各时代教科书",
-          "en": "Compare textbooks across eras",
-          "ko": "시대별 교과서 비교 관람"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "完全予約制なので事前連絡を",
+          "入館無料",
+          "時代ごとの教科書を見比べられる"
+        ],
+        "zh": [
+          "完全预约制请提前联系",
+          "免费入馆",
+          "可对比各时代教科书"
+        ],
+        "en": [
+          "Reservation is required",
+          "Admission is free",
+          "Compare textbooks across eras"
+        ],
+        "ko": [
+          "완전예약제라 사전 연락",
+          "입관 무료",
+          "시대별 교과서 비교 관람"
+        ]
+      }
     },
     {
       "name": "フランス菓子CADOT",
@@ -21735,26 +22065,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "看板マドレーヌは川端康成も愛用",
-          "zh": "招牌玛德琳川端康成也爱",
-          "en": "The signature madeleine was Kawabata's favorite",
-          "ko": "간판 마들렌은 가와바타가 애용"
-        },
-        {
-          "ja": "店内に直筆の推薦文が飾られる",
-          "zh": "店内挂有亲笔推荐文",
-          "en": "Kawabata's handwritten recommendation hangs inside",
-          "ko": "내점에 친필 추천문 게시"
-        },
-        {
-          "ja": "おみやげにも最適",
-          "zh": "适合做伴手礼",
-          "en": "Ideal as a souvenir",
-          "ko": "기념 선물에도 최적"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "看板マドレーヌは川端康成も愛用",
+          "店内に直筆の推薦文が飾られる",
+          "おみやげにも最適"
+        ],
+        "zh": [
+          "招牌玛德琳川端康成也爱",
+          "店内挂有亲笔推荐文",
+          "适合做伴手礼"
+        ],
+        "en": [
+          "The signature madeleine was Kawabata's favorite",
+          "Kawabata's handwritten recommendation hangs inside",
+          "Ideal as a souvenir"
+        ],
+        "ko": [
+          "간판 마들렌은 가와바타가 애용",
+          "내점에 친필 추천문 게시",
+          "기념 선물에도 최적"
+        ]
+      }
     },
     {
       "name": "小山酒造",
@@ -21810,26 +22142,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "蔵見学は平日11:00・14:00発・約40分",
-          "zh": "酒窖参观平日11:00·14:00出发约40分钟",
-          "en": "Tours start 11:00 & 14:00 on weekdays, ~40 min",
-          "ko": "양조장 견학 평일 11:00·14:00~ 약 40분"
-        },
-        {
-          "ja": "名物は丸健水産の出汁で割る「出汁割」",
-          "zh": "名物是用丸健水产高汤勾兑的“高汤兑酒”",
-          "en": "The local way: mix sake with oden broth",
-          "ko": "명물은 마루케 스산의 다시로 타는 '다시 와리'"
-        },
-        {
-          "ja": "100年の町蔵を見学できる",
-          "zh": "可参观百年町酿酒厂",
-          "en": "See a century-old local brewery",
-          "ko": "100년 동네 양조장 견학"
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "蔵見学は平日11:00・14:00発・約40分",
+          "名物は丸健水産の出汁で割る「出汁割」",
+          "100年の町蔵を見学できる"
+        ],
+        "zh": [
+          "酒窖参观平日11:00·14:00出发约40分钟",
+          "名物是用丸健水产高汤勾兑的“高汤兑酒”",
+          "可参观百年町酿酒厂"
+        ],
+        "en": [
+          "Tours start 11:00 & 14:00 on weekdays, ~40 min",
+          "The local way: mix sake with oden broth",
+          "See a century-old local brewery"
+        ],
+        "ko": [
+          "양조장 견학 평일 11:00·14:00~ 약 40분",
+          "명물은 마루케 스산의 다시로 타는 '다시 와리'",
+          "100년 동네 양조장 견학"
+        ]
+      },
       "address": "東京都北区岩淵町26-10"
     },
     {
@@ -21883,26 +22217,28 @@ window.RAILWAY_TOURISM = {
         "en": "Night",
         "ko": "밤"
       },
-      "tips_i18n": [
-        {
-          "ja": "数量限定「中落ち」は早めに",
-          "zh": "限量“中落”要赶早",
-          "en": "The limited 'nakaochi' sells out fast",
-          "ko": "수량 한정 '중오치'는 일찍"
-        },
-        {
-          "ja": "赤身・トロ・希少部位も揃う",
-          "zh": "赤身、大脂、稀有部位齐全",
-          "en": "Lean, otoro and rare cuts all available",
-          "ko": "아카미·오토로·희소 부위"
-        },
-        {
-          "ja": "夜がおすすめ",
-          "zh": "推荐晚间",
-          "en": "Best visited at night",
-          "ko": "저녁 추천"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "数量限定「中落ち」は早めに",
+          "赤身・トロ・希少部位も揃う",
+          "夜がおすすめ"
+        ],
+        "zh": [
+          "限量“中落”要赶早",
+          "赤身、大脂、稀有部位齐全",
+          "推荐晚间"
+        ],
+        "en": [
+          "The limited 'nakaochi' sells out fast",
+          "Lean, otoro and rare cuts all available",
+          "Best visited at night"
+        ],
+        "ko": [
+          "수량 한정 '중오치'는 일찍",
+          "아카미·오토로·희소 부위",
+          "저녁 추천"
+        ]
+      }
     },
     {
       "name": "新井山 梅照院（新井薬師）",
@@ -21955,26 +22291,28 @@ window.RAILWAY_TOURISM = {
         "en": "All day",
         "ko": "종일"
       },
-      "tips_i18n": [
-        {
-          "ja": "名水を持ち帰る人も多い",
-          "zh": "很多人来汲水带回家",
-          "en": "Many bring containers to take water home",
-          "ko": "명수를 길어가는 이 많음"
-        },
-        {
-          "ja": "新井地名の由来にもなった井戸",
-          "zh": "是新井地名由来的井",
-          "en": "The well that named the area",
-          "ko": "아라이 지명 유래가 된 우물"
-        },
-        {
-          "ja": "商店街散策の途中に立ち寄れる",
-          "zh": "可在逛商店街途中顺道",
-          "en": "Stop by while strolling the shopping street",
-          "ko": "상점가 산책 도중 들르기"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "名水を持ち帰る人も多い",
+          "新井地名の由来にもなった井戸",
+          "商店街散策の途中に立ち寄れる"
+        ],
+        "zh": [
+          "很多人来汲水带回家",
+          "是新井地名由来的井",
+          "可在逛商店街途中顺道"
+        ],
+        "en": [
+          "Many bring containers to take water home",
+          "The well that named the area",
+          "Stop by while strolling the shopping street"
+        ],
+        "ko": [
+          "명수를 길어가는 이 많음",
+          "아라이 지명 유래가 된 우물",
+          "상점가 산책 도중 들르기"
+        ]
+      }
     },
     {
       "name": "八津御嶽神社",
@@ -22028,26 +22366,28 @@ window.RAILWAY_TOURISM = {
         "en": "All day",
         "ko": "종일"
       },
-      "tips_i18n": [
-        {
-          "ja": "モダンな社殿は一見の価値あり",
-          "zh": "现代神殿值得一看",
-          "en": "The modern hall is worth a visit",
-          "ko": "모던한 신전은 일견 가치"
-        },
-        {
-          "ja": "拍手の音の響きに注目",
-          "zh": "留意拍手的回响",
-          "en": "Listen for the resonant clap sound",
-          "ko": "박수 소리 울림에 주목"
-        },
-        {
-          "ja": "中野新橋駅からも6分",
-          "zh": "从中野新桥站也6分钟",
-          "en": "Also 6 min from Naka-Nobabashi",
-          "ko": "나카노신바시역에서도 6분"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "モダンな社殿は一見の価値あり",
+          "拍手の音の響きに注目",
+          "中野新橋駅からも6分"
+        ],
+        "zh": [
+          "现代神殿值得一看",
+          "留意拍手的回响",
+          "从中野新桥站也6分钟"
+        ],
+        "en": [
+          "The modern hall is worth a visit",
+          "Listen for the resonant clap sound",
+          "Also 6 min from Naka-Nobabashi"
+        ],
+        "ko": [
+          "모던한 신전은 일견 가치",
+          "박수 소리 울림에 주목",
+          "나카노신바시역에서도 6분"
+        ]
+      }
     },
     {
       "name": "神田川の散歩道",
@@ -22102,26 +22442,28 @@ window.RAILWAY_TOURISM = {
         "en": "All day",
         "ko": "종일"
       },
-      "tips_i18n": [
-        {
-          "ja": "末広橋付近が撮影ポイント",
-          "zh": "末广桥附近是拍摄点",
-          "en": "Suehiro Bridge is the photo spot",
-          "ko": "스에히로바시 부근이 촬영 포인트"
-        },
-        {
-          "ja": "混雑を避けてゆったり鑑賞",
-          "zh": "避开拥挤从容赏樱",
-          "en": "Enjoy cherry blossoms away from the crowds",
-          "ko": "혼잡 피해 여유 감상"
-        },
-        {
-          "ja": "四季折々の草花が楽しめる",
-          "zh": "四季花草皆宜",
-          "en": "Enjoy flowers through the seasons",
-          "ko": "사계절 꽃 감상"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "末広橋付近が撮影ポイント",
+          "混雑を避けてゆったり鑑賞",
+          "四季折々の草花が楽しめる"
+        ],
+        "zh": [
+          "末广桥附近是拍摄点",
+          "避开拥挤从容赏樱",
+          "四季花草皆宜"
+        ],
+        "en": [
+          "Suehiro Bridge is the photo spot",
+          "Enjoy cherry blossoms away from the crowds",
+          "Enjoy flowers through the seasons"
+        ],
+        "ko": [
+          "스에히로바시 부근이 촬영 포인트",
+          "혼잡 피해 여유 감상",
+          "사계절 꽃 감상"
+        ]
+      }
     },
     {
       "name": "Kakuya Coffee Stand",
@@ -22174,26 +22516,28 @@ window.RAILWAY_TOURISM = {
         "en": "Night",
         "ko": "밤"
       },
-      "tips_i18n": [
-        {
-          "ja": "夕方から深夜までの営業",
-          "zh": "营业至深夜",
-          "en": "Open from evening to late night",
-          "ko": "저녁~심야 영업"
-        },
-        {
-          "ja": "場所が変わることがあるので事前確認",
-          "zh": "地点可能变更请事先确认",
-          "en": "Location may shift—check first",
-          "ko": "장소가 바뀔 수 있어 사전 확인"
-        },
-        {
-          "ja": "こだわりの1種類を味わう",
-          "zh": "品味精选一款豆",
-          "en": "Savor the single curated bean",
-          "ko": "고집의 한 종류를 맛보기"
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "夕方から深夜までの営業",
+          "場所が変わることがあるので事前確認",
+          "こだわりの1種類を味わう"
+        ],
+        "zh": [
+          "营业至深夜",
+          "地点可能变更请事先确认",
+          "品味精选一款豆"
+        ],
+        "en": [
+          "Open from evening to late night",
+          "Location may shift—check first",
+          "Savor the single curated bean"
+        ],
+        "ko": [
+          "저녁~심야 영업",
+          "장소가 바뀔 수 있어 사전 확인",
+          "고집의 한 종류를 맛보기"
+        ]
+      },
       "address": "千葉県船橋市西船5-15-5 2F"
     },
     {
@@ -22247,26 +22591,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "豪快な看板が目印",
-          "zh": "醒目大字招牌是标志",
-          "en": "The bold signboard is the landmark",
-          "ko": "호쾌한 간판이 표지"
-        },
-        {
-          "ja": "店主との釣り談義も楽しみ",
-          "zh": "与店主聊钓鱼也是乐趣",
-          "en": "Chat fishing talk with the owner",
-          "ko": "점주와의 낚시 대화도 묘미"
-        },
-        {
-          "ja": "初心者にも丁寧に教えてくれる",
-          "zh": "对新手也耐心讲解",
-          "en": "Helpful to beginners",
-          "ko": "초보자에게도 친절히 지도"
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "豪快な看板が目印",
+          "店主との釣り談義も楽しみ",
+          "初心者にも丁寧に教えてくれる"
+        ],
+        "zh": [
+          "醒目大字招牌是标志",
+          "与店主聊钓鱼也是乐趣",
+          "对新手也耐心讲解"
+        ],
+        "en": [
+          "The bold signboard is the landmark",
+          "Chat fishing talk with the owner",
+          "Helpful to beginners"
+        ],
+        "ko": [
+          "호쾌한 간판이 표지",
+          "점주와의 낚시 대화도 묘미",
+          "초보자에게도 친절히 지도"
+        ]
+      },
       "address": "千葉県浦安市北栄3-26-5"
     },
     {
@@ -22320,26 +22666,28 @@ window.RAILWAY_TOURISM = {
         "en": "All day",
         "ko": "종일"
       },
-      "tips_i18n": [
-        {
-          "ja": "泥地面30cmあたりを飛ぶ個体を探す",
-          "zh": "找距泥面约30cm飞行的个体",
-          "en": "Look for insects flying ~30cm above the mud",
-          "ko": "진흙 바닥 30cm 부근 나는 개체 찾기"
-        },
-        {
-          "ja": "天然記念物のため採集禁止",
-          "zh": "因是天然纪念物禁止采集",
-          "en": "Collecting is prohibited (natural monument)",
-          "ko": "천연기념물이므로 채집 금지"
-        },
-        {
-          "ja": "双眼鏡があると便利",
-          "zh": "有望远镜更方便",
-          "en": "Binoculars help",
-          "ko": "쌍안경 있으면 편리"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "泥地面30cmあたりを飛ぶ個体を探す",
+          "天然記念物のため採集禁止",
+          "双眼鏡があると便利"
+        ],
+        "zh": [
+          "找距泥面约30cm飞行的个体",
+          "因是天然纪念物禁止采集",
+          "有望远镜更方便"
+        ],
+        "en": [
+          "Look for insects flying ~30cm above the mud",
+          "Collecting is prohibited (natural monument)",
+          "Binoculars help"
+        ],
+        "ko": [
+          "진흙 바닥 30cm 부근 나는 개체 찾기",
+          "천연기념물이므로 채집 금지",
+          "쌍안경 있으면 편리"
+        ]
+      }
     },
     {
       "name": "みずほ銀行兜町支店",
@@ -22393,26 +22741,28 @@ window.RAILWAY_TOURISM = {
         "en": "All day",
         "ko": "종일"
       },
-      "tips_i18n": [
-        {
-          "ja": "南側壁面の「銀行発祥の地」銘版",
-          "zh": "南侧墙面“银行发祥地”铭牌",
-          "en": "The 'birthplace of banking' plaque on the south wall",
-          "ko": "남측 벽면 '은행 발상지' 명판"
-        },
-        {
-          "ja": "西側の歴史展示パネルも必見",
-          "zh": "西侧历史展板也必看",
-          "en": "See the history panels on the west side",
-          "ko": "서측 역사 전시 패널도 필견"
-        },
-        {
-          "ja": "定休日でも外壁は見られる",
-          "zh": "休息日也可看外壁",
-          "en": "The exterior is viewable even on holidays",
-          "ko": "정기휴무일도 외벽 관람 가능"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "南側壁面の「銀行発祥の地」銘版",
+          "西側の歴史展示パネルも必見",
+          "定休日でも外壁は見られる"
+        ],
+        "zh": [
+          "南侧墙面“银行发祥地”铭牌",
+          "西侧历史展板也必看",
+          "休息日也可看外壁"
+        ],
+        "en": [
+          "The 'birthplace of banking' plaque on the south wall",
+          "See the history panels on the west side",
+          "The exterior is viewable even on holidays"
+        ],
+        "ko": [
+          "남측 벽면 '은행 발상지' 명판",
+          "서측 역사 전시 패널도 필견",
+          "정기휴무일도 외벽 관람 가능"
+        ]
+      }
     },
     {
       "name": "Iron Fairies",
@@ -22465,26 +22815,28 @@ window.RAILWAY_TOURISM = {
         "en": "Night",
         "ko": "밤"
       },
-      "tips_i18n": [
-        {
-          "ja": "妖精モチーフのカクテルがフォトジェニック",
-          "zh": "妖精主题鸡尾酒很上镜",
-          "en": "Fairy-themed cocktails are photogenic",
-          "ko": "요정 모티브 칵테일이 포토제닉"
-        },
-        {
-          "ja": "地下の隠れ家的空間",
-          "zh": "地下秘密基地般空间",
-          "en": "A hidden underground lair",
-          "ko": "지하 은신처 같은 공간"
-        },
-        {
-          "ja": "営業時間が遅くまで",
-          "zh": "营业至深夜",
-          "en": "Open until late",
-          "ko": "늦은 시간까지 영업"
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "妖精モチーフのカクテルがフォトジェニック",
+          "地下の隠れ家的空間",
+          "営業時間が遅くまで"
+        ],
+        "zh": [
+          "妖精主题鸡尾酒很上镜",
+          "地下秘密基地般空间",
+          "营业至深夜"
+        ],
+        "en": [
+          "Fairy-themed cocktails are photogenic",
+          "A hidden underground lair",
+          "Open until late"
+        ],
+        "ko": [
+          "요정 모티브 칵테일이 포토제닉",
+          "지하 은신처 같은 공간",
+          "늦은 시간까지 영업"
+        ]
+      },
       "address": "東京都中央区銀座5-9-5 チアーズ銀座B1F"
     },
     {
@@ -22539,26 +22891,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "全部かき混ぜて食べるのが作法",
-          "zh": "全部拌匀吃是吃法",
-          "en": "The rule: mix it all up before eating",
-          "ko": "모두 비벼 먹는 것이 작법"
-        },
-        {
-          "ja": "客の9割が注文する名物",
-          "zh": "九成客人都点的名物",
-          "en": "Nine in ten order the signature dish",
-          "ko": "손님 9할이 주문하는 명물"
-        },
-        {
-          "ja": "ランチが狙い目",
-          "zh": "午餐时段好选择",
-          "en": "Lunch is the best bet",
-          "ko": "런치가 노림"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "全部かき混ぜて食べるのが作法",
+          "客の9割が注文する名物",
+          "ランチが狙い目"
+        ],
+        "zh": [
+          "全部拌匀吃是吃法",
+          "九成客人都点的名物",
+          "午餐时段好选择"
+        ],
+        "en": [
+          "The rule: mix it all up before eating",
+          "Nine in ten order the signature dish",
+          "Lunch is the best bet"
+        ],
+        "ko": [
+          "모두 비벼 먹는 것이 작법",
+          "손님 9할이 주문하는 명물",
+          "런치가 노림"
+        ]
+      }
     },
     {
       "name": "江戸切子の店 華硝 日本橋店（はなしょう）",
@@ -22613,26 +22967,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "体験は約60分・要予約",
-          "zh": "体验约60分钟需预约",
-          "en": "Workshop takes ~60 min, reservation needed",
-          "ko": "체험 약 60분·예약 필요"
-        },
-        {
-          "ja": "完成したぐい呑は一生モノ",
-          "zh": "完成的小酒杯是一生之物",
-          "en": "Your finished sake cup lasts a lifetime",
-          "ko": "완성한 고쿠쿠는 평생 소장품"
-        },
-        {
-          "ja": "1名から予約可",
-          "zh": "1人起可预约",
-          "en": "Bookable from a single person",
-          "ko": "1인부터 예약 가능"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "体験は約60分・要予約",
+          "完成したぐい呑は一生モノ",
+          "1名から予約可"
+        ],
+        "zh": [
+          "体验约60分钟需预约",
+          "完成的小酒杯是一生之物",
+          "1人起可预约"
+        ],
+        "en": [
+          "Workshop takes ~60 min, reservation needed",
+          "Your finished sake cup lasts a lifetime",
+          "Bookable from a single person"
+        ],
+        "ko": [
+          "체험 약 60분·예약 필요",
+          "완성한 고쿠쿠는 평생 소장품",
+          "1인부터 예약 가능"
+        ]
+      }
     },
     {
       "name": "TOSPA（トスパ）",
@@ -22685,26 +23041,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "カラフルな国旗が店先にずらり",
-          "zh": "店头彩色国旗排开",
-          "en": "Colorful flags line the storefront",
-          "ko": "화려한 국기가 점포 앞에 즐비"
-        },
-        {
-          "ja": "オーダーフラッグは記念や贈り物に",
-          "zh": "定制旗适合纪念或送礼",
-          "en": "Order a flag for keepsakes or gifts",
-          "ko": "오더 플래그는 기념·선물에"
-        },
-        {
-          "ja": "職人の手仕事の1枚",
-          "zh": "匠人手工制旗",
-          "en": "A handcrafted piece by artisans",
-          "ko": "장인 수작업 한 장"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "カラフルな国旗が店先にずらり",
+          "オーダーフラッグは記念や贈り物に",
+          "職人の手仕事の1枚"
+        ],
+        "zh": [
+          "店头彩色国旗排开",
+          "定制旗适合纪念或送礼",
+          "匠人手工制旗"
+        ],
+        "en": [
+          "Colorful flags line the storefront",
+          "Order a flag for keepsakes or gifts",
+          "A handcrafted piece by artisans"
+        ],
+        "ko": [
+          "화려한 국기가 점포 앞에 즐비",
+          "오더 플래그는 기념·선물에",
+          "장인 수작업 한 장"
+        ]
+      }
     },
     {
       "name": "パレスサイクリング",
@@ -22757,26 +23115,28 @@ window.RAILWAY_TOURISM = {
         "en": "All day",
         "ko": "종일"
       },
-      "tips_i18n": [
-        {
-          "ja": "自転車持参で解放区間を走る",
-          "zh": "自带自行车骑开放路段",
-          "en": "Bring your own bike to ride the closed course",
-          "ko": "자전거 지참 후 개방 구간 주행"
-        },
-        {
-          "ja": "日曜午前がねらい目",
-          "zh": "周日上午最佳",
-          "en": "Sunday morning is ideal",
-          "ko": "일요일 오전이 노림"
-        },
-        {
-          "ja": "皇居と丸の内ビル街を一望",
-          "zh": "一览皇居与丸之内楼群",
-          "en": "Views of the Palace and Marunouchi towers",
-          "ko": "황거와 마루노우니 빌 거리 조망"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "自転車持参で解放区間を走る",
+          "日曜午前がねらい目",
+          "皇居と丸の内ビル街を一望"
+        ],
+        "zh": [
+          "自带自行车骑开放路段",
+          "周日上午最佳",
+          "一览皇居与丸之内楼群"
+        ],
+        "en": [
+          "Bring your own bike to ride the closed course",
+          "Sunday morning is ideal",
+          "Views of the Palace and Marunouchi towers"
+        ],
+        "ko": [
+          "자전거 지참 후 개방 구간 주행",
+          "일요일 오전이 노림",
+          "황거와 마루노우니 빌 거리 조망"
+        ]
+      }
     },
     {
       "name": "東京国立近代美術館工芸館",
@@ -22831,26 +23191,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "重要文化財の建築自体が見どころ",
-          "zh": "重要文化财建筑本身即看点",
-          "en": "The Important Cultural Property building is the draw",
-          "ko": "중요문화재 건축 자체가 볼거리"
-        },
-        {
-          "ja": "人間国宝の作品を間近で",
-          "zh": "近距离看人间国宝作品",
-          "en": "See Living National Treasure works up close",
-          "ko": "인간국보 작품을 가까이"
-        },
-        {
-          "ja": "北の丸公園散策とセットで",
-          "zh": "可与北之丸公园散步串联",
-          "en": "Pair with a Kitanomaru Park stroll",
-          "ko": "기타노마루 공원 산책과 세트"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "重要文化財の建築自体が見どころ",
+          "人間国宝の作品を間近で",
+          "北の丸公園散策とセットで"
+        ],
+        "zh": [
+          "重要文化财建筑本身即看点",
+          "近距离看人间国宝作品",
+          "可与北之丸公园散步串联"
+        ],
+        "en": [
+          "The Important Cultural Property building is the draw",
+          "See Living National Treasure works up close",
+          "Pair with a Kitanomaru Park stroll"
+        ],
+        "ko": [
+          "중요문화재 건축 자체가 볼거리",
+          "인간국보 작품을 가까이",
+          "기타노마루 공원 산책과 세트"
+        ]
+      }
     },
     {
       "name": "竹尾 見本帖本店",
@@ -22904,26 +23266,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "2Fの展示は1〜2ヶ月で入替",
-          "zh": "2楼展览1~2个月更换",
-          "en": "The 2F show rotates every 1-2 months",
-          "ko": "2층 전시는 1~2개월 교체"
-        },
-        {
-          "ja": "まるで美術館のような店内",
-          "zh": "店内如美术馆",
-          "en": "The store feels like a museum",
-          "ko": "미술관 같은 매장"
-        },
-        {
-          "ja": "紙そのものの手触りを楽しむ",
-          "zh": "享受纸张本身的手感",
-          "en": "Feel the paper itself",
-          "ko": "종이 자체의 촉감 즐기기"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "2Fの展示は1〜2ヶ月で入替",
+          "まるで美術館のような店内",
+          "紙そのものの手触りを楽しむ"
+        ],
+        "zh": [
+          "2楼展览1~2个月更换",
+          "店内如美术馆",
+          "享受纸张本身的手感"
+        ],
+        "en": [
+          "The 2F show rotates every 1-2 months",
+          "The store feels like a museum",
+          "Feel the paper itself"
+        ],
+        "ko": [
+          "2층 전시는 1~2개월 교체",
+          "미술관 같은 매장",
+          "종이 자체의 촉감 즐기기"
+        ]
+      }
     },
     {
       "name": "赤坂四川飯店",
@@ -22978,26 +23342,28 @@ window.RAILWAY_TOURISM = {
         "en": "Night",
         "ko": "밤"
       },
-      "tips_i18n": [
-        {
-          "ja": "陳麻婆豆腐が不動の人気",
-          "zh": "陈麻婆豆腐人气不减",
-          "en": "Chen mapo tofu is the permanent favorite",
-          "ko": "천마파두부가 불변 인기"
-        },
-        {
-          "ja": "花椒の痺れる辛さが本格",
-          "zh": "花椒麻味正统",
-          "en": "The numbing Sichuan pepp is authentic",
-          "ko": "화자오의 마비하는 매운맛이 본격"
-        },
-        {
-          "ja": "夜がゆっくり楽しめる",
-          "zh": "晚间可从容享用",
-          "en": "Relax more in the evening",
-          "ko": "저녁이 여유롭게"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "陳麻婆豆腐が不動の人気",
+          "花椒の痺れる辛さが本格",
+          "夜がゆっくり楽しめる"
+        ],
+        "zh": [
+          "陈麻婆豆腐人气不减",
+          "花椒麻味正统",
+          "晚间可从容享用"
+        ],
+        "en": [
+          "Chen mapo tofu is the permanent favorite",
+          "The numbing Sichuan pepp is authentic",
+          "Relax more in the evening"
+        ],
+        "ko": [
+          "천마파두부가 불변 인기",
+          "화자오의 마비하는 매운맛이 본격",
+          "저녁이 여유롭게"
+        ]
+      }
     },
     {
       "name": "Cha Tea",
@@ -23050,26 +23416,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "1人から受けられる体験レッスン",
-          "zh": "1人起可上体验课",
-          "en": "Try a one-person taster lesson",
-          "ko": "1인부터 받는 체험 레슨"
-        },
-        {
-          "ja": "チケット制で都合の良い日に",
-          "zh": "凭券制可安排方便日",
-          "en": "Ticket system for flexible dates",
-          "ko": "티켓제로 편한 날에"
-        },
-        {
-          "ja": "紅茶歴史や道具選びも学べる",
-          "zh": "可学红茶历史与选具",
-          "en": "Learn tea history and choosing teaware",
-          "ko": "홍차 역사·도구 고르기도"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "1人から受けられる体験レッスン",
+          "チケット制で都合の良い日に",
+          "紅茶歴史や道具選びも学べる"
+        ],
+        "zh": [
+          "1人起可上体验课",
+          "凭券制可安排方便日",
+          "可学红茶历史与选具"
+        ],
+        "en": [
+          "Try a one-person taster lesson",
+          "Ticket system for flexible dates",
+          "Learn tea history and choosing teaware"
+        ],
+        "ko": [
+          "1인부터 받는 체험 레슨",
+          "티켓제로 편한 날에",
+          "홍차 역사·도구 고르기도"
+        ]
+      }
     },
     {
       "name": "creer ijima（クレエ・イジマ）",
@@ -23122,26 +23490,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "ワックス原型から金属鋳造まで",
-          "zh": "从蜡原型到金属铸造",
-          "en": "From wax model to metal casting",
-          "ko": "왁스 원형~금속 주조까지"
-        },
-        {
-          "ja": "金やプラチナも選べる",
-          "zh": "金、铂金也可选",
-          "en": "Gold and platinum also possible",
-          "ko": "금·플래티넘도 선택"
-        },
-        {
-          "ja": "所要0.5〜1時間と手軽",
-          "zh": "0.5~1小时轻松",
-          "en": "Just 0.5-1 hour, easy",
-          "ko": "소요 0.5~1시간으로 가볍게"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "ワックス原型から金属鋳造まで",
+          "金やプラチナも選べる",
+          "所要0.5〜1時間と手軽"
+        ],
+        "zh": [
+          "从蜡原型到金属铸造",
+          "金、铂金也可选",
+          "0.5~1小时轻松"
+        ],
+        "en": [
+          "From wax model to metal casting",
+          "Gold and platinum also possible",
+          "Just 0.5-1 hour, easy"
+        ],
+        "ko": [
+          "왁스 원형~금속 주조까지",
+          "금·플래티넘도 선택",
+          "소요 0.5~1시간으로 가볍게"
+        ]
+      }
     },
     {
       "name": "バッグ工房　ヴィドゥルス",
@@ -23194,26 +23564,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "留め金や内側も本物そのまま",
-          "zh": "卡扣与内里原样保留",
-          "en": "Hardware and lining kept as original",
-          "ko": "잠금쇠·안감도 본래 그대로"
-        },
-        {
-          "ja": "卒業後の記念保管にぴったり",
-          "zh": "适合毕业后纪念保存",
-          "en": "Perfect for keeping graduation memories",
-          "ko": "졸업 후 기념 보관에 제격"
-        },
-        {
-          "ja": "思い出を手元に残せる",
-          "zh": "把回忆留在身边",
-          "en": "Keep your memories close",
-          "ko": "추억을 곁에 남기기"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "留め金や内側も本物そのまま",
+          "卒業後の記念保管にぴったり",
+          "思い出を手元に残せる"
+        ],
+        "zh": [
+          "卡扣与内里原样保留",
+          "适合毕业后纪念保存",
+          "把回忆留在身边"
+        ],
+        "en": [
+          "Hardware and lining kept as original",
+          "Perfect for keeping graduation memories",
+          "Keep your memories close"
+        ],
+        "ko": [
+          "잠금쇠·안감도 본래 그대로",
+          "졸업 후 기념 보관에 제격",
+          "추억을 곁에 남기기"
+        ]
+      }
     },
     {
       "name": "浅草リトルシアター",
@@ -23266,26 +23638,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "芸人の息遣いが聞こえる距離",
-          "zh": "近到能听见演员呼吸",
-          "en": "Close enough to hear the performers breathe",
-          "ko": "연예인 숨결이 들리는 거리"
-        },
-        {
-          "ja": "小学生は無料",
-          "zh": "小学生免费",
-          "en": "Elementary students free",
-          "ko": "초등학생 무료"
-        },
-        {
-          "ja": "浅草散歩の途中で大笑い",
-          "zh": "浅草散步途中大笑一场",
-          "en": "Laugh between Asakusa sightseeing",
-          "ko": "아사쿠사 산책 도중 폭소"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "芸人の息遣いが聞こえる距離",
+          "小学生は無料",
+          "浅草散歩の途中で大笑い"
+        ],
+        "zh": [
+          "近到能听见演员呼吸",
+          "小学生免费",
+          "浅草散步途中大笑一场"
+        ],
+        "en": [
+          "Close enough to hear the performers breathe",
+          "Elementary students free",
+          "Laugh between Asakusa sightseeing"
+        ],
+        "ko": [
+          "연예인 숨결이 들리는 거리",
+          "초등학생 무료",
+          "아사쿠사 산책 도중 폭소"
+        ]
+      }
     },
     {
       "name": "きものレンタルwargo東京浅草店",
@@ -23338,26 +23712,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "レギュラープランは手頃な価格",
-          "zh": "常规套餐价格亲民",
-          "en": "Regular plan is affordable",
-          "ko": "레귤러 플랜은 부담 없는 가격"
-        },
-        {
-          "ja": "着物で浅草寺や仲見世へ",
-          "zh": "穿和服去浅草寺与仲见世",
-          "en": "Walk Sensoji and Nakamise in kimono",
-          "ko": "키모노로 센소지·나카미세"
-        },
-        {
-          "ja": "事前予約がおすすめ",
-          "zh": "建议提前预约",
-          "en": "Booking recommended",
-          "ko": "사전 예약 추천"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "レギュラープランは手頃な価格",
+          "着物で浅草寺や仲見世へ",
+          "事前予約がおすすめ"
+        ],
+        "zh": [
+          "常规套餐价格亲民",
+          "穿和服去浅草寺与仲见世",
+          "建议提前预约"
+        ],
+        "en": [
+          "Regular plan is affordable",
+          "Walk Sensoji and Nakamise in kimono",
+          "Booking recommended"
+        ],
+        "ko": [
+          "레귤러 플랜은 부담 없는 가격",
+          "키모노로 센소지·나카미세",
+          "사전 예약 추천"
+        ]
+      }
     },
     {
       "name": "Sabö Asaichi(サボウアサイチ)",
@@ -23410,26 +23786,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "おからパンのモーニングが名物",
-          "zh": "豆渣面包早餐是名物",
-          "en": "The okara bread breakfast is the draw",
-          "ko": "오카라 빵 모닝이 명물"
-        },
-        {
-          "ja": "日替わりランチはSNSで確認",
-          "zh": "午市每日换看SNS确认",
-          "en": "Check SNS for the daily lunch",
-          "ko": "일일 런치는 SNS 확인"
-        },
-        {
-          "ja": "早朝から開いている",
-          "zh": "清晨即营业",
-          "en": "Opens early in the morning",
-          "ko": "아침 일찍 영업"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "おからパンのモーニングが名物",
+          "日替わりランチはSNSで確認",
+          "早朝から開いている"
+        ],
+        "zh": [
+          "豆渣面包早餐是名物",
+          "午市每日换看SNS确认",
+          "清晨即营业"
+        ],
+        "en": [
+          "The okara bread breakfast is the draw",
+          "Check SNS for the daily lunch",
+          "Opens early in the morning"
+        ],
+        "ko": [
+          "오카라 빵 모닝이 명물",
+          "일일 런치는 SNS 확인",
+          "아침 일찍 영업"
+        ]
+      }
     },
     {
       "name": "Readin’ Writin’",
@@ -23482,26 +23860,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "子どもから高齢者まで参加可",
-          "zh": "儿童到老人均可参加",
-          "en": "Open from children to seniors",
-          "ko": "아이부터 노인까지 참가 가능"
-        },
-        {
-          "ja": "書くことを趣味にしたい人に",
-          "zh": "适合想把写作当爱好的人",
-          "en": "For anyone wanting writing as a hobby",
-          "ko": "쓰는 것을 취미로 원하는 사람"
-        },
-        {
-          "ja": "読むことと書くことをつなぐ",
-          "zh": "连接阅读与写作",
-          "en": "It links reading and writing",
-          "ko": "읽기와 쓰기를 잇는 수업"
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "子どもから高齢者まで参加可",
+          "書くことを趣味にしたい人に",
+          "読むことと書くことをつなぐ"
+        ],
+        "zh": [
+          "儿童到老人均可参加",
+          "适合想把写作当爱好的人",
+          "连接阅读与写作"
+        ],
+        "en": [
+          "Open from children to seniors",
+          "For anyone wanting writing as a hobby",
+          "It links reading and writing"
+        ],
+        "ko": [
+          "아이부터 노인까지 참가 가능",
+          "쓰는 것을 취미로 원하는 사람",
+          "읽기와 쓰기를 잇는 수업"
+        ]
+      },
       "address": "東京都台東区寿2-4-7"
     },
     {
@@ -23555,26 +23935,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "初心者向け体験レッスンあり",
-          "zh": "有面向初学者的体验课",
-          "en": "Beginner taster lessons available",
-          "ko": "초보자용 체험 레슨 있음"
-        },
-        {
-          "ja": "すべての二胡の音色を聴き比べ",
-          "zh": "可对比试听所有二胡音色",
-          "en": "Compare the sound of every erhu",
-          "ko": "모든 이얼후 음색을 들어보기"
-        },
-        {
-          "ja": "楽器選びの相談もしやすい",
-          "zh": "便于商量选乐器",
-          "en": "Easy to get advice on choosing one",
-          "ko": "악기 고르기도 상의 쉬움"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "初心者向け体験レッスンあり",
+          "すべての二胡の音色を聴き比べ",
+          "楽器選びの相談もしやすい"
+        ],
+        "zh": [
+          "有面向初学者的体验课",
+          "可对比试听所有二胡音色",
+          "便于商量选乐器"
+        ],
+        "en": [
+          "Beginner taster lessons available",
+          "Compare the sound of every erhu",
+          "Easy to get advice on choosing one"
+        ],
+        "ko": [
+          "초보자용 체험 레슨 있음",
+          "모든 이얼후 음색을 들어보기",
+          "악기 고르기도 상의 쉬움"
+        ]
+      }
     },
     {
       "name": "小島米店 成増店",
@@ -23627,26 +24009,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "変わり種おにぎりを選ぶ楽しみ",
-          "zh": "挑选创意饭团的乐趣",
-          "en": "The fun of choosing novelty onigiri",
-          "ko": "변종 주먹밥 고르는 재미"
-        },
-        {
-          "ja": "名店の米で握られる",
-          "zh": "用名店米捏制",
-          "en": "Made with the shop's rice",
-          "ko": "명점 쌀로 지어"
-        },
-        {
-          "ja": "朝早くから購入可",
-          "zh": "清早即可购买",
-          "en": "Open early in the morning",
-          "ko": "아침 일찍 구입 가능"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "変わり種おにぎりを選ぶ楽しみ",
+          "名店の米で握られる",
+          "朝早くから購入可"
+        ],
+        "zh": [
+          "挑选创意饭团的乐趣",
+          "用名店米捏制",
+          "清早即可购买"
+        ],
+        "en": [
+          "The fun of choosing novelty onigiri",
+          "Made with the shop's rice",
+          "Open early in the morning"
+        ],
+        "ko": [
+          "변종 주먹밥 고르는 재미",
+          "명점 쌀로 지어",
+          "아침 일찍 구입 가능"
+        ]
+      }
     },
     {
       "name": "ゆ～ポッポ",
@@ -23699,26 +24083,28 @@ window.RAILWAY_TOURISM = {
         "en": "Night",
         "ko": "밤"
       },
-      "tips_i18n": [
-        {
-          "ja": "露天風呂から星空を",
-          "zh": "露天浴池望星空",
-          "en": "Stargaze from the open-air bath",
-          "ko": "노천탕에서 밤하늘"
-        },
-        {
-          "ja": "風呂上がりのクリームソーダも",
-          "zh": "浴后奶油苏打也赞",
-          "en": "Try the cream soda after your bath",
-          "ko": "탕 후 크림소다도"
-        },
-        {
-          "ja": "都内でも早いバリアフリー導入",
-          "zh": "东京较早导入无障碍",
-          "en": "Among Tokyo's earliest barrier-free sentos",
-          "ko": "도쿄에서도 이른 배리어프리"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "露天風呂から星空を",
+          "風呂上がりのクリームソーダも",
+          "都内でも早いバリアフリー導入"
+        ],
+        "zh": [
+          "露天浴池望星空",
+          "浴后奶油苏打也赞",
+          "东京较早导入无障碍"
+        ],
+        "en": [
+          "Stargaze from the open-air bath",
+          "Try the cream soda after your bath",
+          "Among Tokyo's earliest barrier-free sentos"
+        ],
+        "ko": [
+          "노천탕에서 밤하늘",
+          "탕 후 크림소다도",
+          "도쿄에서도 이른 배리어프리"
+        ]
+      }
     },
     {
       "name": "CRIOLLO（クリオロ）",
@@ -23771,26 +24157,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "糖質制限スイーツが珍しく美味",
-          "zh": "低糖甜点罕见地美味",
-          "en": "The low-sugar sweets are unusually tasty",
-          "ko": "저당 스위츠가 진귀하게 맛"
-        },
-        {
-          "ja": "スリム・レアチーズ・フレーズが定番",
-          "zh": "纤细草莓芝士是定番",
-          "en": "The slim rare-cheese fraise is a staple",
-          "ko": "슬림 레어치즈 프레즈가 정석"
-        },
-        {
-          "ja": "見た目も宝石のよう",
-          "zh": "外观如宝石",
-          "en": "The cakes look like jewels",
-          "ko": "비주얼도 보석처럼"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "糖質制限スイーツが珍しく美味",
+          "スリム・レアチーズ・フレーズが定番",
+          "見た目も宝石のよう"
+        ],
+        "zh": [
+          "低糖甜点罕见地美味",
+          "纤细草莓芝士是定番",
+          "外观如宝石"
+        ],
+        "en": [
+          "The low-sugar sweets are unusually tasty",
+          "The slim rare-cheese fraise is a staple",
+          "The cakes look like jewels"
+        ],
+        "ko": [
+          "저당 스위츠가 진귀하게 맛",
+          "슬림 레어치즈 프레즈가 정석",
+          "비주얼도 보석처럼"
+        ]
+      }
     },
     {
       "name": "早稲田松竹",
@@ -23843,26 +24231,28 @@ window.RAILWAY_TOURISM = {
         "en": "Night",
         "ko": "밤"
       },
-      "tips_i18n": [
-        {
-          "ja": "名作を二本立てで楽しむ",
-          "zh": "双场连看名作",
-          "en": "Enjoy classics on a double bill",
-          "ko": "명작을 두 편 연속으로"
-        },
-        {
-          "ja": "学生復活プロジェクトの歴史あり",
-          "zh": "有学生复活计划的历史",
-          "en": "Born from a student revival project",
-          "ko": "학생 부활 프로젝트 역사"
-        },
-        {
-          "ja": "リーズナブルな鑑賞料金",
-          "zh": "票价实惠",
-          "en": "Affordable ticket prices",
-          "ko": "합리적인 관람료"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "名作を二本立てで楽しむ",
+          "学生復活プロジェクトの歴史あり",
+          "リーズナブルな鑑賞料金"
+        ],
+        "zh": [
+          "双场连看名作",
+          "有学生复活计划的历史",
+          "票价实惠"
+        ],
+        "en": [
+          "Enjoy classics on a double bill",
+          "Born from a student revival project",
+          "Affordable ticket prices"
+        ],
+        "ko": [
+          "명작을 두 편 연속으로",
+          "학생 부활 프로젝트 역사",
+          "합리적인 관람료"
+        ]
+      }
     },
     {
       "name": "アジアンクッキングスタジオ",
@@ -23915,26 +24305,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "一品は一人ずつ作れる",
-          "zh": "有1道可独立操作",
-          "en": "At least one dish you make yourself",
-          "ko": "한 품은 1인씩 직접"
-        },
-        {
-          "ja": "レッスンは1回ごとの申込み",
-          "zh": "单次报名即可",
-          "en": "Book per single class",
-          "ko": "레슨 1회씩 신청"
-        },
-        {
-          "ja": "盛り付け写真の後は試食タイム",
-          "zh": "摆盘拍照后进入试吃",
-          "en": "Taste your food after styling shots",
-          "ko": "플레이팅 촬영 후 시식"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "一品は一人ずつ作れる",
+          "レッスンは1回ごとの申込み",
+          "盛り付け写真の後は試食タイム"
+        ],
+        "zh": [
+          "有1道可独立操作",
+          "单次报名即可",
+          "摆盘拍照后进入试吃"
+        ],
+        "en": [
+          "At least one dish you make yourself",
+          "Book per single class",
+          "Taste your food after styling shots"
+        ],
+        "ko": [
+          "한 품은 1인씩 직접",
+          "레슨 1회씩 신청",
+          "플레이팅 촬영 후 시식"
+        ]
+      }
     },
     {
       "name": "Pia Cuore（ピアクオーレ）",
@@ -23988,26 +24380,28 @@ window.RAILWAY_TOURISM = {
         "en": "Night",
         "ko": "밤"
       },
-      "tips_i18n": [
-        {
-          "ja": "カクテルショーは要予約",
-          "zh": "调酒表演需预约",
-          "en": "The cocktail show needs a reservation",
-          "ko": "칵테일 쇼는 예약"
-        },
-        {
-          "ja": "味も折り紙付き",
-          "zh": "味道也有口碑",
-          "en": "The cocktails also taste great",
-          "ko": "맛도 보장"
-        },
-        {
-          "ja": "大人の夜のエンタメ",
-          "zh": "成人夜间娱乐",
-          "en": "Adult evening entertainment",
-          "ko": "어른 밤 엔터테인먼트"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "カクテルショーは要予約",
+          "味も折り紙付き",
+          "大人の夜のエンタメ"
+        ],
+        "zh": [
+          "调酒表演需预约",
+          "味道也有口碑",
+          "成人夜间娱乐"
+        ],
+        "en": [
+          "The cocktail show needs a reservation",
+          "The cocktails also taste great",
+          "Adult evening entertainment"
+        ],
+        "ko": [
+          "칵테일 쇼는 예약",
+          "맛도 보장",
+          "어른 밤 엔터테인먼트"
+        ]
+      }
     },
     {
       "name": "おかめ工房",
@@ -24060,26 +24454,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "型紙と糊で立体感ある柄を",
-          "zh": "用型纸与糊染出立体纹样",
-          "en": "Stencil and resist paste give dimensional patterns",
-          "ko": "형지와 풀로 입체 무늬"
-        },
-        {
-          "ja": "沖縄モチーフ中心に自由に",
-          "zh": "以冲绳图案为中心自由发挥",
-          "en": "Mostly Okinawan motifs, freely arranged",
-          "ko": "오키나와 모티브 중심 자유롭게"
-        },
-        {
-          "ja": "水のきれいな落合の街",
-          "zh": "水质清澈的落合街",
-          "en": "In clean-water Ochiai town",
-          "ko": "물 맑은 오치아이 거리"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "型紙と糊で立体感ある柄を",
+          "沖縄モチーフ中心に自由に",
+          "水のきれいな落合の街"
+        ],
+        "zh": [
+          "用型纸与糊染出立体纹样",
+          "以冲绳图案为中心自由发挥",
+          "水质清澈的落合街"
+        ],
+        "en": [
+          "Stencil and resist paste give dimensional patterns",
+          "Mostly Okinawan motifs, freely arranged",
+          "In clean-water Ochiai town"
+        ],
+        "ko": [
+          "형지와 풀로 입체 무늬",
+          "오키나와 모티브 중심 자유롭게",
+          "물 맑은 오치아이 거리"
+        ]
+      }
     },
     {
       "name": "パン家のどん助",
@@ -24132,26 +24528,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "明太子パン兄弟を食べ比べ",
-          "zh": "对比吃明太子面包兄弟",
-          "en": "Compare the two mentaiko brothers",
-          "ko": "명란 빵 형제 먹어보기"
-        },
-        {
-          "ja": "焼き上がり時間は看板で確認",
-          "zh": "出炉时间看看板确认",
-          "en": "Check the board for bake times",
-          "ko": "굽는 시간은 간판 확인"
-        },
-        {
-          "ja": "猫の手ごまあんぱんなど変わり種も",
-          "zh": "猫手芝麻包等创意也有",
-          "en": "Novelty buns like cat-paw anpan",
-          "ko": "고양이 손 깨물빵 등 변종도"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "明太子パン兄弟を食べ比べ",
+          "焼き上がり時間は看板で確認",
+          "猫の手ごまあんぱんなど変わり種も"
+        ],
+        "zh": [
+          "对比吃明太子面包兄弟",
+          "出炉时间看看板确认",
+          "猫手芝麻包等创意也有"
+        ],
+        "en": [
+          "Compare the two mentaiko brothers",
+          "Check the board for bake times",
+          "Novelty buns like cat-paw anpan"
+        ],
+        "ko": [
+          "명란 빵 형제 먹어보기",
+          "굽는 시간은 간판 확인",
+          "고양이 손 깨물빵 등 변종도"
+        ]
+      }
     },
     {
       "name": "レストランツムラ",
@@ -24204,26 +24602,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "ぷるんぷるん卵のオムライス",
-          "zh": "滑嫩蛋皮蛋包饭",
-          "en": "The jiggly-egg omelet rice",
-          "ko": "말랑말랑 계란 오므라이스"
-        },
-        {
-          "ja": "ハンバーグやグラタンも人気",
-          "zh": "汉堡排、焗菜也受欢迎",
-          "en": "Hamburg and gratin also popular",
-          "ko": "함바그·그라탕도 인기"
-        },
-        {
-          "ja": "行列必至の人気店",
-          "zh": "排队名店",
-          "en": "Expect a queue",
-          "ko": "웨이팅 필수 인기점"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "ぷるんぷるん卵のオムライス",
+          "ハンバーグやグラタンも人気",
+          "行列必至の人気店"
+        ],
+        "zh": [
+          "滑嫩蛋皮蛋包饭",
+          "汉堡排、焗菜也受欢迎",
+          "排队名店"
+        ],
+        "en": [
+          "The jiggly-egg omelet rice",
+          "Hamburg and gratin also popular",
+          "Expect a queue"
+        ],
+        "ko": [
+          "말랑말랑 계란 오므라이스",
+          "함바그·그라탕도 인기",
+          "웨이팅 필수 인기점"
+        ]
+      }
     },
     {
       "name": "小石川図書館",
@@ -24277,26 +24677,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "区外利用者も手続きすれば可",
-          "zh": "区外读者手续后可利用",
-          "en": "Non-residents can register to use it",
-          "ko": "구 외 이용자도 수속하면 이용"
-        },
-        {
-          "ja": "水曜正午・土曜夜・日曜朝はおすすめ時間",
-          "zh": "周三正午·周六晚·周日早为推荐时段",
-          "en": "Wed noon / Sat evening / Sun morning are pick hours",
-          "ko": "수요일 정오·토요일 밤·일요일 아침 추천 시간"
-        },
-        {
-          "ja": "レコードをかける特別な時間",
-          "zh": "听唱片的特别时光",
-          "en": "A special time with records playing",
-          "ko": "레코드를 트는 특별한 시간"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "区外利用者も手続きすれば可",
+          "水曜正午・土曜夜・日曜朝はおすすめ時間",
+          "レコードをかける特別な時間"
+        ],
+        "zh": [
+          "区外读者手续后可利用",
+          "周三正午·周六晚·周日早为推荐时段",
+          "听唱片的特别时光"
+        ],
+        "en": [
+          "Non-residents can register to use it",
+          "Wed noon / Sat evening / Sun morning are pick hours",
+          "A special time with records playing"
+        ],
+        "ko": [
+          "구 외 이용자도 수속하면 이용",
+          "수요일 정오·토요일 밤·일요일 아침 추천 시간",
+          "레코드를 트는 특별한 시간"
+        ]
+      }
     },
     {
       "name": "さかづきBrewing",
@@ -24349,26 +24751,28 @@ window.RAILWAY_TOURISM = {
         "en": "Night",
         "ko": "밤"
       },
-      "tips_i18n": [
-        {
-          "ja": "名前で味を想像して注文",
-          "zh": "凭酒名想象口味再点",
-          "en": "Order by imagining the taste from the name",
-          "ko": "이름으로 맛을 상상해 주문"
-        },
-        {
-          "ja": "ここだけの北千住産ビール",
-          "zh": "只此一家的北千住产啤酒",
-          "en": "Kitasenju-only brews",
-          "ko": "여기뿐인 기타센주산 맥주"
-        },
-        {
-          "ja": "昼から開く土日が狙い目",
-          "zh": "周末白天开门为佳",
-          "en": "Weekends opening early are ideal",
-          "ko": "점심부터 여는 주말이 노림"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "名前で味を想像して注文",
+          "ここだけの北千住産ビール",
+          "昼から開く土日が狙い目"
+        ],
+        "zh": [
+          "凭酒名想象口味再点",
+          "只此一家的北千住产啤酒",
+          "周末白天开门为佳"
+        ],
+        "en": [
+          "Order by imagining the taste from the name",
+          "Kitasenju-only brews",
+          "Weekends opening early are ideal"
+        ],
+        "ko": [
+          "이름으로 맛을 상상해 주문",
+          "여기뿐인 기타센주산 맥주",
+          "점심부터 여는 주말이 노림"
+        ]
+      }
     },
     {
       "name": "アヤセベーカリー",
@@ -24421,26 +24825,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "一升パンは写真映え抜群",
-          "zh": "一升面包极上镜",
-          "en": "The issho bread is very photogenic",
-          "ko": "일승빵은 사진 빼곤"
-        },
-        {
-          "ja": "パンボックスも人気",
-          "zh": "面包礼盒也受欢迎",
-          "en": "The bread box is also popular",
-          "ko": "빵 박스도 인기"
-        },
-        {
-          "ja": "事前オーダーが必要",
-          "zh": "需提前下单",
-          "en": "Advance order required",
-          "ko": "사전 오더 필요"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "一升パンは写真映え抜群",
+          "パンボックスも人気",
+          "事前オーダーが必要"
+        ],
+        "zh": [
+          "一升面包极上镜",
+          "面包礼盒也受欢迎",
+          "需提前下单"
+        ],
+        "en": [
+          "The issho bread is very photogenic",
+          "The bread box is also popular",
+          "Advance order required"
+        ],
+        "ko": [
+          "일승빵은 사진 빼곤",
+          "빵 박스도 인기",
+          "사전 오더 필요"
+        ]
+      }
     },
     {
       "name": "ラべイユ",
@@ -24493,26 +24899,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "瓶詰めハチミツを見比べる",
-          "zh": "对比瓶装蜂蜜",
-          "en": "Compare the bottled honeys",
-          "ko": "병에 든 꿀을 비교"
-        },
-        {
-          "ja": "野菜やハーブ蜜源も豊富",
-          "zh": "蔬菜、香草蜜源也丰富",
-          "en": "Many vegetable and herbal origins",
-          "ko": "채소·허브 밀원도 풍부"
-        },
-        {
-          "ja": "無添加アカシアサブレは手土産に",
-          "zh": "无添加金合欢酥饼适合伴手礼",
-          "en": "The additive-free acacia sablé makes a gift",
-          "ko": "무첨가 아카시아 사블레는 답례품"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "瓶詰めハチミツを見比べる",
+          "野菜やハーブ蜜源も豊富",
+          "無添加アカシアサブレは手土産に"
+        ],
+        "zh": [
+          "对比瓶装蜂蜜",
+          "蔬菜、香草蜜源也丰富",
+          "无添加金合欢酥饼适合伴手礼"
+        ],
+        "en": [
+          "Compare the bottled honeys",
+          "Many vegetable and herbal origins",
+          "The additive-free acacia sablé makes a gift"
+        ],
+        "ko": [
+          "병에 든 꿀을 비교",
+          "채소·허브 밀원도 풍부",
+          "무첨가 아카시아 사블레는 답례품"
+        ]
+      }
     },
     {
       "name": "アイノワール",
@@ -24567,26 +24975,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "白いメレンゲのオムライス",
-          "zh": "白色蛋白霜蛋包饭",
-          "en": "The white meringue omelet rice",
-          "ko": "하얀 머랭 오므라이스"
-        },
-        {
-          "ja": "鉄板でスフレ食感に変化",
-          "zh": "铁板上变舒芙蕾口感",
-          "en": "Soufflé texture on the iron plate",
-          "ko": "철판에서 수플레 식감으로"
-        },
-        {
-          "ja": "中のチキンピラフとの相性抜群",
-          "zh": "与内里鸡肉饭绝佳搭配",
-          "en": "Pairs with the hidden chicken pilaf",
-          "ko": "속 치킨필라프와 궁합 최고"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "白いメレンゲのオムライス",
+          "鉄板でスフレ食感に変化",
+          "中のチキンピラフとの相性抜群"
+        ],
+        "zh": [
+          "白色蛋白霜蛋包饭",
+          "铁板上变舒芙蕾口感",
+          "与内里鸡肉饭绝佳搭配"
+        ],
+        "en": [
+          "The white meringue omelet rice",
+          "Soufflé texture on the iron plate",
+          "Pairs with the hidden chicken pilaf"
+        ],
+        "ko": [
+          "하얀 머랭 오므라이스",
+          "철판에서 수플레 식감으로",
+          "속 치킨필라프와 궁합 최고"
+        ]
+      }
     },
     {
       "name": "不二茶",
@@ -24640,26 +25050,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "猫耳カップで写真映え",
-          "zh": "猫耳杯很上镜",
-          "en": "The cat-ear cup is photogenic",
-          "ko": "고양이 귀 컵으로 사진빨"
-        },
-        {
-          "ja": "甘さや氷の量を調節可",
-          "zh": "甜度、冰量可调",
-          "en": "Adjust sweetness and ice level",
-          "ko": "당도·얼음량 조절"
-        },
-        {
-          "ja": "大粒・小粒タピオカを選ぶ",
-          "zh": "选大粒/小粒珍珠",
-          "en": "Choose large or small boba",
-          "ko": "대·소 타피오카 선택"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "猫耳カップで写真映え",
+          "甘さや氷の量を調節可",
+          "大粒・小粒タピオカを選ぶ"
+        ],
+        "zh": [
+          "猫耳杯很上镜",
+          "甜度、冰量可调",
+          "选大粒/小粒珍珠"
+        ],
+        "en": [
+          "The cat-ear cup is photogenic",
+          "Adjust sweetness and ice level",
+          "Choose large or small boba"
+        ],
+        "ko": [
+          "고양이 귀 컵으로 사진빨",
+          "당도·얼음량 조절",
+          "대·소 타피오카 선택"
+        ]
+      }
     },
     {
       "name": "chura＊chura",
@@ -24714,26 +25126,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "揚げたてサーターアンダギー",
-          "zh": "现炸冲绳甜甜圈",
-          "en": "Fresh fried sata-andagi",
-          "ko": "갓 튀긴 사타안다기"
-        },
-        {
-          "ja": "紅芋クリームなどトッピング可",
-          "zh": "可加紫薯奶油等topping",
-          "en": "Add purple-sweet-potato cream toppings",
-          "ko": "자색고구마 크림 등 토핑"
-        },
-        {
-          "ja": "シーサーのラテアート",
-          "zh": "石狮拉花拿铁",
-          "en": "Shisa latte art",
-          "ko": "시사 라테아트"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "揚げたてサーターアンダギー",
+          "紅芋クリームなどトッピング可",
+          "シーサーのラテアート"
+        ],
+        "zh": [
+          "现炸冲绳甜甜圈",
+          "可加紫薯奶油等topping",
+          "石狮拉花拿铁"
+        ],
+        "en": [
+          "Fresh fried sata-andagi",
+          "Add purple-sweet-potato cream toppings",
+          "Shisa latte art"
+        ],
+        "ko": [
+          "갓 튀긴 사타안다기",
+          "자색고구마 크림 등 토핑",
+          "시사 라테아트"
+        ]
+      }
     },
     {
       "name": "押上温泉 大黒湯",
@@ -24786,26 +25200,28 @@ window.RAILWAY_TOURISM = {
         "en": "Night",
         "ko": "밤"
       },
-      "tips_i18n": [
-        {
-          "ja": "翌朝まで入れるオールナイト",
-          "zh": "营业至次日晨",
-          "en": "Open all night until morning",
-          "ko": "익일 아침까지 올나이트"
-        },
-        {
-          "ja": "日替わり薬湯が楽しみ",
-          "zh": "每日药汤有趣",
-          "en": "Look forward to the daily herbal bath",
-          "ko": "일일 약탕이 묘미"
-        },
-        {
-          "ja": "朝風呂で一日を始める",
-          "zh": "朝浴开启一天",
-          "en": "Start the day with a morning bath",
-          "ko": "아침 목욕으로 하루 시작"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "翌朝まで入れるオールナイト",
+          "日替わり薬湯が楽しみ",
+          "朝風呂で一日を始める"
+        ],
+        "zh": [
+          "营业至次日晨",
+          "每日药汤有趣",
+          "朝浴开启一天"
+        ],
+        "en": [
+          "Open all night until morning",
+          "Look forward to the daily herbal bath",
+          "Start the day with a morning bath"
+        ],
+        "ko": [
+          "익일 아침까지 올나이트",
+          "일일 약탕이 묘미",
+          "아침 목욕으로 하루 시작"
+        ]
+      }
     },
     {
       "name": "SCAI THE BATHHOUSE（スカイザバスハウス）",
@@ -24858,26 +25274,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "外観は昔の銭湯そのまま",
-          "zh": "外观仍是旧钱汤原样",
-          "en": "The facade stays an old sento",
-          "ko": "외관은 옛 센토 그대로"
-        },
-        {
-          "ja": "中は白いモダンなギャラリー",
-          "zh": "内部是白色现代画廊",
-          "en": "Inside is a white modern gallery",
-          "ko": "내부는 하얀 모던 갤러리"
-        },
-        {
-          "ja": "谷中散策の途中にふらり",
-          "zh": "谷中散步途中顺道",
-          "en": "Drop by while strolling Yanaka",
-          "ko": "야나카 산책 도중 불쑥"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "外観は昔の銭湯そのまま",
+          "中は白いモダンなギャラリー",
+          "谷中散策の途中にふらり"
+        ],
+        "zh": [
+          "外观仍是旧钱汤原样",
+          "内部是白色现代画廊",
+          "谷中散步途中顺道"
+        ],
+        "en": [
+          "The facade stays an old sento",
+          "Inside is a white modern gallery",
+          "Drop by while strolling Yanaka"
+        ],
+        "ko": [
+          "외관은 옛 센토 그대로",
+          "내부는 하얀 모던 갤러리",
+          "야나카 산책 도중 불쑥"
+        ]
+      }
     },
     {
       "name": "MOKUBAZA（モクバザ）",
@@ -24930,26 +25348,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "チーズキーマカレーが看板",
-          "zh": "芝士辣肉沫咖喱是招牌",
-          "en": "The cheese keema curry is the signboard",
-          "ko": "치즈 키마 커리가 간판"
-        },
-        {
-          "ja": "開店前から行列",
-          "zh": "开门前就排队",
-          "en": "Queues form before opening",
-          "ko": "개점 전부터 웨이팅"
-        },
-        {
-          "ja": "20時間以上かけて丁寧に仕込む",
-          "zh": "耗时20小时以上用心准备",
-          "en": "Meticulously prepared over 20+ hours",
-          "ko": "20시간 이상 정성 들여 준비"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "チーズキーマカレーが看板",
+          "開店前から行列",
+          "20時間以上かけて丁寧に仕込む"
+        ],
+        "zh": [
+          "芝士辣肉沫咖喱是招牌",
+          "开门前就排队",
+          "耗时20小时以上用心准备"
+        ],
+        "en": [
+          "The cheese keema curry is the signboard",
+          "Queues form before opening",
+          "Meticulously prepared over 20+ hours"
+        ],
+        "ko": [
+          "치즈 키마 커리가 간판",
+          "개점 전부터 웨이팅",
+          "20시간 이상 정성 들여 준비"
+        ]
+      }
     },
     {
       "name": "M’amour（マムール）",
@@ -25003,26 +25423,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "ラ・ロシェールのグラスが手頃",
-          "zh": "拉·罗歇爾杯子价格亲民",
-          "en": "La Rochère glasses are affordable",
-          "ko": "라로셰르 잔이 부담"
-        },
-        {
-          "ja": "1点1000円程度から",
-          "zh": "1件1000日元起",
-          "en": "From around ¥1,000 a piece",
-          "ko": "1점 1,000엔 정도부터"
-        },
-        {
-          "ja": "アポイント制なので事前連絡を",
-          "zh": "预约制请提前联系",
-          "en": "Appointment system—contact ahead",
-          "ko": "아포인트제라 사전 연락"
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "ラ・ロシェールのグラスが手頃",
+          "1点1000円程度から",
+          "アポイント制なので事前連絡を"
+        ],
+        "zh": [
+          "拉·罗歇爾杯子价格亲民",
+          "1件1000日元起",
+          "预约制请提前联系"
+        ],
+        "en": [
+          "La Rochère glasses are affordable",
+          "From around ¥1,000 a piece",
+          "Appointment system—contact ahead"
+        ],
+        "ko": [
+          "라로셰르 잔이 부담",
+          "1점 1,000엔 정도부터",
+          "아포인트제라 사전 연락"
+        ]
+      },
       "address": "東京都目黒区下目黒5-1-11"
     },
     {
@@ -25076,26 +25498,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "ダージリン・アッサムなど産地別",
-          "zh": "按产地分大吉岭、阿萨姆等",
-          "en": "Darjeeling, Assam and more by origin",
-          "ko": "다질링·아삼 등 산지별"
-        },
-        {
-          "ja": "定番から季節限定まで",
-          "zh": "从定番到季节限定",
-          "en": "From staples to seasonal blends",
-          "ko": "정석부터 계절 한정까지"
-        },
-        {
-          "ja": "好みの一杯を見つける",
-          "zh": "找到喜欢的一杯",
-          "en": "Find your favorite cup",
-          "ko": "취향의 한 잔 찾기"
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "ダージリン・アッサムなど産地別",
+          "定番から季節限定まで",
+          "好みの一杯を見つける"
+        ],
+        "zh": [
+          "按产地分大吉岭、阿萨姆等",
+          "从定番到季节限定",
+          "找到喜欢的一杯"
+        ],
+        "en": [
+          "Darjeeling, Assam and more by origin",
+          "From staples to seasonal blends",
+          "Find your favorite cup"
+        ],
+        "ko": [
+          "다질링·아삼 등 산지별",
+          "정석부터 계절 한정까지",
+          "취향의 한 잔 찾기"
+        ]
+      },
       "address": "東京都江戸川区西葛西3-3-15"
     },
     {
@@ -25149,26 +25573,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "キャンバスに柄を打ち込む",
-          "zh": "在画布上戳图案",
-          "en": "Punch your design into the canvas",
-          "ko": "캔버스에 문양을 타건"
-        },
-        {
-          "ja": "カラフルな糸壁がフォトジェニック",
-          "zh": "彩色线墙很出片",
-          "en": "The colorful yarn wall is photogenic",
-          "ko": "화려한 실 벽이 포토제닉"
-        },
-        {
-          "ja": "事前予約制",
-          "zh": "需预约",
-          "en": "Reservation required",
-          "ko": "사전 예약제"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "キャンバスに柄を打ち込む",
+          "カラフルな糸壁がフォトジェニック",
+          "事前予約制"
+        ],
+        "zh": [
+          "在画布上戳图案",
+          "彩色线墙很出片",
+          "需预约"
+        ],
+        "en": [
+          "Punch your design into the canvas",
+          "The colorful yarn wall is photogenic",
+          "Reservation required"
+        ],
+        "ko": [
+          "캔버스에 문양을 타건",
+          "화려한 실 벽이 포토제닉",
+          "사전 예약제"
+        ]
+      }
     },
     {
       "name": "篠原まるよし風鈴",
@@ -25222,26 +25648,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "自分だけの音色を作る",
-          "zh": "做独一的音色",
-          "en": "Make your own unique chime",
-          "ko": "나만의 음색 만들기"
-        },
-        {
-          "ja": "鳴り口がギザギザの江戸風鈴",
-          "zh": "裂口锯齿的江户风铃",
-          "en": "The notched mouth of an Edo bell",
-          "ko": "울림구가 톱니 에도 후린"
-        },
-        {
-          "ja": "佐竹商店街の散策とセット",
-          "zh": "可与佐竹商店街散步串联",
-          "en": "Pair with a Satake shopping-street stroll",
-          "ko": "사타케 상점가 산책과 세트"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "自分だけの音色を作る",
+          "鳴り口がギザギザの江戸風鈴",
+          "佐竹商店街の散策とセット"
+        ],
+        "zh": [
+          "做独一的音色",
+          "裂口锯齿的江户风铃",
+          "可与佐竹商店街散步串联"
+        ],
+        "en": [
+          "Make your own unique chime",
+          "The notched mouth of an Edo bell",
+          "Pair with a Satake shopping-street stroll"
+        ],
+        "ko": [
+          "나만의 음색 만들기",
+          "울림구가 톱니 에도 후린",
+          "사타케 상점가 산책과 세트"
+        ]
+      }
     },
     {
       "name": "B-PUMP TOKYO 秋葉原",
@@ -25294,26 +25722,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "LED光る壁はここだけ",
-          "zh": "LED发光墙仅此一家",
-          "en": "The glowing LED wall is unique here",
-          "ko": "LED 빛나는 벽은 여기뿐"
-        },
-        {
-          "ja": "初心者にはスタッフが丁寧に",
-          "zh": "职员对新手耐心指导",
-          "en": "Staff guide beginners gently",
-          "ko": "초보자는 스태프가 친절히"
-        },
-        {
-          "ja": "靴レンタル可",
-          "zh": "鞋可租借",
-          "en": "Shoe rental available",
-          "ko": "슈즈 대여 가능"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "LED光る壁はここだけ",
+          "初心者にはスタッフが丁寧に",
+          "靴レンタル可"
+        ],
+        "zh": [
+          "LED发光墙仅此一家",
+          "职员对新手耐心指导",
+          "鞋可租借"
+        ],
+        "en": [
+          "The glowing LED wall is unique here",
+          "Staff guide beginners gently",
+          "Shoe rental available"
+        ],
+        "ko": [
+          "LED 빛나는 벽은 여기뿐",
+          "초보자는 스태프가 친절히",
+          "슈즈 대여 가능"
+        ]
+      }
     },
     {
       "name": "TAIKO-LAB 青山",
@@ -25366,26 +25796,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "バチを持って音楽に合わせ",
-          "zh": "持鼓棒随乐而动",
-          "en": "Hold bachi and move to the music",
-          "ko": "북채 들고 음악에 맞춰"
-        },
-        {
-          "ja": "仕事帰りの参加も多い",
-          "zh": "下班参加者也多",
-          "en": "Many join after work",
-          "ko": "퇴근길 참가도 많음"
-        },
-        {
-          "ja": "頭も体もフル回転",
-          "zh": "头脑身体全开",
-          "en": "Mind and body fully engaged",
-          "ko": "머리도 몸도 풀가동"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "バチを持って音楽に合わせ",
+          "仕事帰りの参加も多い",
+          "頭も体もフル回転"
+        ],
+        "zh": [
+          "持鼓棒随乐而动",
+          "下班参加者也多",
+          "头脑身体全开"
+        ],
+        "en": [
+          "Hold bachi and move to the music",
+          "Many join after work",
+          "Mind and body fully engaged"
+        ],
+        "ko": [
+          "북채 들고 음악에 맞춰",
+          "퇴근길 참가도 많음",
+          "머리도 몸도 풀가동"
+        ]
+      }
     },
     {
       "name": "パンダ茶房by銀座清月堂",
@@ -25439,26 +25871,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "パンダシルエットのパフェ",
-          "zh": "熊猫剪影芭菲",
-          "en": "The panda-silhouette parfait",
-          "ko": "판다 실루엣 파르페"
-        },
-        {
-          "ja": "店内はぬいぐるいだらけ",
-          "zh": "店内到处是玩偶",
-          "en": "The shop is full of plushies",
-          "ko": "매장은 인형투성이"
-        },
-        {
-          "ja": "上野動物園帰りに立ち寄り",
-          "zh": "上野动物园回程顺道",
-          "en": "Drop by after Ueno Zoo",
-          "ko": "우노 동물원 귀가길에"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "パンダシルエットのパフェ",
+          "店内はぬいぐるいだらけ",
+          "上野動物園帰りに立ち寄り"
+        ],
+        "zh": [
+          "熊猫剪影芭菲",
+          "店内到处是玩偶",
+          "上野动物园回程顺道"
+        ],
+        "en": [
+          "The panda-silhouette parfait",
+          "The shop is full of plushies",
+          "Drop by after Ueno Zoo"
+        ],
+        "ko": [
+          "판다 실루엣 파르페",
+          "매장은 인형투성이",
+          "우노 동물원 귀가길에"
+        ]
+      }
     },
     {
       "name": "LASOLA Bhutan Restaurant",
@@ -25512,26 +25946,28 @@ window.RAILWAY_TOURISM = {
         "en": "Night",
         "ko": "밤"
       },
-      "tips_i18n": [
-        {
-          "ja": "看板はチーズと唐辛子のエマダツィ",
-          "zh": "招牌是芝士辣椒艾玛达西",
-          "en": "The star is ema datshi, cheese and chili",
-          "ko": "간판은 치즈와 고추 에마다츠"
-        },
-        {
-          "ja": "辛さ調節できるモモもあり",
-          "zh": "有可调辣度的饺子",
-          "en": "Momo dumplings let you control heat",
-          "ko": "맵기 조절 모모도 있음"
-        },
-        {
-          "ja": "食後は体の芯から温まる",
-          "zh": "饭后由内而外暖身",
-          "en": "Warms you up from within after eating",
-          "ko": "먹으면 몸속부터 훈훈"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "看板はチーズと唐辛子のエマダツィ",
+          "辛さ調節できるモモもあり",
+          "食後は体の芯から温まる"
+        ],
+        "zh": [
+          "招牌是芝士辣椒艾玛达西",
+          "有可调辣度的饺子",
+          "饭后由内而外暖身"
+        ],
+        "en": [
+          "The star is ema datshi, cheese and chili",
+          "Momo dumplings let you control heat",
+          "Warms you up from within after eating"
+        ],
+        "ko": [
+          "간판은 치즈와 고추 에마다츠",
+          "맵기 조절 모모도 있음",
+          "먹으면 몸속부터 훈훈"
+        ]
+      }
     },
     {
       "name": "なぎさポニーランド",
@@ -25585,26 +26021,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "にんじんは棒の先で安全",
-          "zh": "胡萝卜用棒尖喂安全",
-          "en": "Feed carrots safely on a stick",
-          "ko": "당근은 막대 끝으로 안전"
-        },
-        {
-          "ja": "7頭のポニーとふれあえる",
-          "zh": "与7匹小马互动",
-          "en": "Meet seven ponies",
-          "ko": "7마리 포니와 교감"
-        },
-        {
-          "ja": "乗馬は小学6年生以下対象",
-          "zh": "骑马限小学六年级以下",
-          "en": "Riding for under-12s",
-          "ko": "승마는 초등 6학년 이하"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "にんじんは棒の先で安全",
+          "7頭のポニーとふれあえる",
+          "乗馬は小学6年生以下対象"
+        ],
+        "zh": [
+          "胡萝卜用棒尖喂安全",
+          "与7匹小马互动",
+          "骑马限小学六年级以下"
+        ],
+        "en": [
+          "Feed carrots safely on a stick",
+          "Meet seven ponies",
+          "Riding for under-12s"
+        ],
+        "ko": [
+          "당근은 막대 끝으로 안전",
+          "7마리 포니와 교감",
+          "승마는 초등 6학년 이하"
+        ]
+      }
     },
     {
       "name": "地下鉄博物館",
@@ -25658,26 +26096,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "運転シミュレーターが大人気",
-          "zh": "驾驶模拟器大受欢迎",
-          "en": "The driving simulator is the hit",
-          "ko": "운전 시뮬레이터가 대인기"
-        },
-        {
-          "ja": "車体がガタゴト揺れる臨場感",
-          "zh": "车体晃动临场感十足",
-          "en": "Rattling cars add realism",
-          "ko": "차체가 덜컹덜컹 흔들리는 현장감"
-        },
-        {
-          "ja": "入場料220円と手頃",
-          "zh": "门票220日元亲民",
-          "en": "Admission is just ¥220",
-          "ko": "입장료 220엔으로 부담"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "運転シミュレーターが大人気",
+          "車体がガタゴト揺れる臨場感",
+          "入場料220円と手頃"
+        ],
+        "zh": [
+          "驾驶模拟器大受欢迎",
+          "车体晃动临场感十足",
+          "门票220日元亲民"
+        ],
+        "en": [
+          "The driving simulator is the hit",
+          "Rattling cars add realism",
+          "Admission is just ¥220"
+        ],
+        "ko": [
+          "운전 시뮬레이터가 대인기",
+          "차체가 덜컹덜컹 흔들리는 현장감",
+          "입장료 220엔으로 부담"
+        ]
+      }
     },
     {
       "name": "Akasaka Zen Space",
@@ -25731,26 +26171,28 @@ window.RAILWAY_TOURISM = {
         "en": "Night",
         "ko": "밤"
       },
-      "tips_i18n": [
-        {
-          "ja": "仕事終わりの19時開始",
-          "zh": "下班19点开始",
-          "en": "Starts at 7 p.m. after work",
-          "ko": "퇴근 후 19시 시작"
-        },
-        {
-          "ja": "大都会の中の静寂",
-          "zh": "大都市中的静谧",
-          "en": "Silence amid the metropolis",
-          "ko": "대도시 속 정적"
-        },
-        {
-          "ja": "自分と向き合う時間",
-          "zh": "直面自我的时间",
-          "en": "Time to face yourself",
-          "ko": "자신과 마주하는 시간"
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "仕事終わりの19時開始",
+          "大都会の中の静寂",
+          "自分と向き合う時間"
+        ],
+        "zh": [
+          "下班19点开始",
+          "大都市中的静谧",
+          "直面自我的时间"
+        ],
+        "en": [
+          "Starts at 7 p.m. after work",
+          "Silence amid the metropolis",
+          "Time to face yourself"
+        ],
+        "ko": [
+          "퇴근 후 19시 시작",
+          "대도시 속 정적",
+          "자신과 마주하는 시간"
+        ]
+      },
       "address": "東京都港区赤坂6-4-10 赤坂ZENビル7F"
     },
     {
@@ -25804,26 +26246,28 @@ window.RAILWAY_TOURISM = {
         "en": "Night",
         "ko": "밤"
       },
-      "tips_i18n": [
-        {
-          "ja": "宝石のようなボンボンショコラ",
-          "zh": "宝石般的夹心巧克力",
-          "en": "Jewel-like bonbons",
-          "ko": "보석 같은 봉봉 쇼콜라"
-        },
-        {
-          "ja": "ノンアルコールメニューもあり",
-          "zh": "也有无酒精菜单",
-          "en": "Non-alcoholic options too",
-          "ko": "논알코올 메뉴도"
-        },
-        {
-          "ja": "初めてのバーにも安心",
-          "zh": "初次去酒吧也安心",
-          "en": "Great for first-time bar-goers",
-          "ko": "처음 바 체험에도 안심"
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "宝石のようなボンボンショコラ",
+          "ノンアルコールメニューもあり",
+          "初めてのバーにも安心"
+        ],
+        "zh": [
+          "宝石般的夹心巧克力",
+          "也有无酒精菜单",
+          "初次去酒吧也安心"
+        ],
+        "en": [
+          "Jewel-like bonbons",
+          "Non-alcoholic options too",
+          "Great for first-time bar-goers"
+        ],
+        "ko": [
+          "보석 같은 봉봉 쇼콜라",
+          "논알코올 메뉴도",
+          "처음 바 체험에도 안심"
+        ]
+      }
     },
     {
       "name": "アタゴール",
@@ -25853,7 +26297,7 @@ window.RAILWAY_TOURISM = {
         "ko": "아타귈"
       },
       "desc_i18n": {
-        "ja": "元オリエント急行のシェフが営む、青い列車を横に抱えた本格フレンチ。",
+        "ja": "元オリエント急行シェフが営む、青い列車が目印の本格フレンチレストラン。",
         "zh": "由曾任东方快车主厨的店主掌厨，店旁停着一列蓝色列车的正宗法式餐厅。",
         "en": "An authentic French restaurant beside a blue train carriage, run by a former Orient Express chef.",
         "ko": "오리엔트 급행 출신 셰프가 운영하는, 푸른 열차가 눈에 띄는 정통 프렌치 레스토랑."
@@ -25876,26 +26320,28 @@ window.RAILWAY_TOURISM = {
         "en": "Evening",
         "ko": "저녁"
       },
-      "tips_i18n": [
-        {
-          "ja": "食後は列車内のラウンジで。",
-          "zh": "餐后可在列车改造的酒廊小酌。",
-          "en": "Finish with a drink in the train lounge.",
-          "ko": "식후에는 열차 라운지에서."
-        },
-        {
-          "ja": "ランチは完売に注意。",
-          "zh": "午餐可能提早售完。",
-          "en": "Lunch can sell out early.",
-          "ko": "런치는 조기 매진 주의."
-        },
-        {
-          "ja": "事前予約が安心。",
-          "zh": "建议提前预约。",
-          "en": "Reservation recommended.",
-          "ko": "사전 예약이 안심."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "食後は列車内のラウンジで。",
+          "ランチは完売に注意。",
+          "事前予約が安心。"
+        ],
+        "zh": [
+          "餐后可在列车改造的酒廊小酌。",
+          "午餐可能提早售完。",
+          "建议提前预约。"
+        ],
+        "en": [
+          "Finish with a drink in the train lounge.",
+          "Lunch can sell out early.",
+          "Reservation recommended."
+        ],
+        "ko": [
+          "식후에는 열차 라운지에서.",
+          "런치는 조기 매진 주의.",
+          "사전 예약이 안심."
+        ]
+      }
     },
     {
       "name": "グラス・ラボ",
@@ -25948,26 +26394,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "液だれしない醤油差し作り。",
-          "zh": "制作不滴漏的酱油瓶。",
-          "en": "Make a drip-free cruet.",
-          "ko": "흐르지 않는 간지병 만들기."
-        },
-        {
-          "ja": "子どもも参加OK。",
-          "zh": "儿童也可参加。",
-          "en": "Kids welcome.",
-          "ko": "아이도 참가 OK."
-        },
-        {
-          "ja": "力加減がカギ。",
-          "zh": "力道是关键。",
-          "en": "Control of force is key.",
-          "ko": "힘 조절이 관건."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "液だれしない醤油差し作り。",
+          "子どもも参加OK。",
+          "力加減がカギ。"
+        ],
+        "zh": [
+          "制作不滴漏的酱油瓶。",
+          "儿童也可参加。",
+          "力道是关键。"
+        ],
+        "en": [
+          "Make a drip-free cruet.",
+          "Kids welcome.",
+          "Control of force is key."
+        ],
+        "ko": [
+          "흐르지 않는 간지병 만들기.",
+          "아이도 참가 OK.",
+          "힘 조절이 관건."
+        ]
+      }
     },
     {
       "name": "清澄庭園",
@@ -26021,26 +26469,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "池の涼亭が名物。",
-          "zh": "池上浮莲亭是看点。",
-          "en": "The sukiya teahouse over the pond.",
-          "ko": "연못 위 량정이 명물."
-        },
-        {
-          "ja": "涼亭は要予約。",
-          "zh": "凉亭参观需预约。",
-          "en": "Teahouse needs reservation.",
-          "ko": "량정은 사전 예약."
-        },
-        {
-          "ja": "四季の散策に最適。",
-          "zh": "四季散步皆宜。",
-          "en": "Great for all seasons.",
-          "ko": "사계절 산책에 최적."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "池の涼亭が名物。",
+          "涼亭は要予約。",
+          "四季の散策に最適。"
+        ],
+        "zh": [
+          "池上浮莲亭是看点。",
+          "凉亭参观需预约。",
+          "四季散步皆宜。"
+        ],
+        "en": [
+          "The sukiya teahouse over the pond.",
+          "Teahouse needs reservation.",
+          "Great for all seasons."
+        ],
+        "ko": [
+          "연못 위 량정이 명물.",
+          "량정은 사전 예약.",
+          "사계절 산책에 최적."
+        ]
+      }
     },
     {
       "name": "麻布十番 麻の葉",
@@ -26093,26 +26543,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "歌舞伎柄が人気。",
-          "zh": "歌舞伎纹样最受欢迎。",
-          "en": "Kabuki patterns are popular.",
-          "ko": "가부키 무늬가 인기."
-        },
-        {
-          "ja": "絵のように飾れる。",
-          "zh": "可如画作般装饰。",
-          "en": "Hang it like art.",
-          "ko": "그림처럼 장식 가능."
-        },
-        {
-          "ja": "職人技を見学。",
-          "zh": "近观匠人技艺。",
-          "en": "Watch the craftsmen.",
-          "ko": "장인 기술을 가까이."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "歌舞伎柄が人気。",
+          "絵のように飾れる。",
+          "職人技を見学。"
+        ],
+        "zh": [
+          "歌舞伎纹样最受欢迎。",
+          "可如画作般装饰。",
+          "近观匠人技艺。"
+        ],
+        "en": [
+          "Kabuki patterns are popular.",
+          "Hang it like art.",
+          "Watch the craftsmen."
+        ],
+        "ko": [
+          "가부키 무늬가 인기.",
+          "그림처럼 장식 가능.",
+          "장인 기술을 가까이."
+        ]
+      }
     },
     {
       "name": "東京都立中央図書館",
@@ -26167,26 +26619,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "特別文庫が必見。",
-          "zh": "特别文库必看。",
-          "en": "The special archive is a must.",
-          "ko": "특별문고 필견."
-        },
-        {
-          "ja": "公園とセットで。",
-          "zh": "结合公园散步。",
-          "en": "Combine with the park.",
-          "ko": "공원과 묶어서."
-        },
-        {
-          "ja": "24万点の貴重資料。",
-          "zh": "24万件珍贵资料。",
-          "en": "240,000 rare items.",
-          "ko": "24만 점의 귀중 자료."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "特別文庫が必見。",
+          "公園とセットで。",
+          "24万点の貴重資料。"
+        ],
+        "zh": [
+          "特别文库必看。",
+          "结合公园散步。",
+          "24万件珍贵资料。"
+        ],
+        "en": [
+          "The special archive is a must.",
+          "Combine with the park.",
+          "240,000 rare items."
+        ],
+        "ko": [
+          "특별문고 필견.",
+          "공원과 묶어서.",
+          "24만 점의 귀중 자료."
+        ]
+      }
     },
     {
       "name": "Thai Food Dining Shangri-La（タイ フード ダイニング シャングリ・ラ）",
@@ -26241,26 +26695,28 @@ window.RAILWAY_TOURISM = {
         "en": "Evening",
         "ko": "저녁"
       },
-      "tips_i18n": [
-        {
-          "ja": "広尾で世界旅行気分。",
-          "zh": "在广尾体验世界风味。",
-          "en": "World flavors in Hiroo.",
-          "ko": "히로오에서 세계여행 기분."
-        },
-        {
-          "ja": "ランチ・ディナーOK。",
-          "zh": "午晚餐皆宜。",
-          "en": "Lunch and dinner.",
-          "ko": "런치·디너 OK."
-        },
-        {
-          "ja": "大使館街の一軒。",
-          "zh": "使馆街中的一家店。",
-          "en": "One shop in the embassy district.",
-          "ko": "대사관가의 한 집."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "広尾で世界旅行気分。",
+          "ランチ・ディナーOK。",
+          "大使館街の一軒。"
+        ],
+        "zh": [
+          "在广尾体验世界风味。",
+          "午晚餐皆宜。",
+          "使馆街中的一家店。"
+        ],
+        "en": [
+          "World flavors in Hiroo.",
+          "Lunch and dinner.",
+          "One shop in the embassy district."
+        ],
+        "ko": [
+          "히로오에서 세계여행 기분.",
+          "런치·디너 OK.",
+          "대사관가의 한 집."
+        ]
+      }
     },
     {
       "name": "乃木神社",
@@ -26314,26 +26770,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "夫婦円満の御守が人気。",
-          "zh": "夫妻圆满御守人气高。",
-          "en": "Popular couple charms.",
-          "ko": "부부 화합의 부적이 인기."
-        },
-        {
-          "ja": "境内のハートを探そう。",
-          "zh": "找找境内的爱心纹样。",
-          "en": "Find the hidden heart.",
-          "ko": "구내의 하트를 찾아보자."
-        },
-        {
-          "ja": "縁結びにも。",
-          "zh": "也适合结缘祈福。",
-          "en": "Good for matchmaking.",
-          "ko": "인연 맺기에도."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "夫婦円満の御守が人気。",
+          "境内のハートを探そう。",
+          "縁結びにも。"
+        ],
+        "zh": [
+          "夫妻圆满御守人气高。",
+          "找找境内的爱心纹样。",
+          "也适合结缘祈福。"
+        ],
+        "en": [
+          "Popular couple charms.",
+          "Find the hidden heart.",
+          "Good for matchmaking."
+        ],
+        "ko": [
+          "부부 화합의 부적이 인기.",
+          "구내의 하트를 찾아보자.",
+          "인연 맺기에도."
+        ]
+      }
     },
     {
       "name": "王子扇屋",
@@ -26387,26 +26845,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "ほかほか厚焼き。",
-          "zh": "热腾腾的厚蛋烧。",
-          "en": "Fluffy thick omelet.",
-          "ko": "따끈한 두툼 계란말이."
-        },
-        {
-          "ja": "落語『王子の狐』の味。",
-          "zh": "落语《王子之狐》中的味道。",
-          "en": "Taste from the rakugo tale.",
-          "ko": "라쿠고 '오지의 여우' 맛."
-        },
-        {
-          "ja": "手土産にも。",
-          "zh": "也适合伴手礼。",
-          "en": "Great as a souvenir.",
-          "ko": "답례품으로도."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "ほかほか厚焼き。",
+          "落語『王子の狐』の味。",
+          "手土産にも。"
+        ],
+        "zh": [
+          "热腾腾的厚蛋烧。",
+          "落语《王子之狐》中的味道。",
+          "也适合伴手礼。"
+        ],
+        "en": [
+          "Fluffy thick omelet.",
+          "Taste from the rakugo tale.",
+          "Great as a souvenir."
+        ],
+        "ko": [
+          "따끈한 두툼 계란말이.",
+          "라쿠고 '오지의 여우' 맛.",
+          "답례품으로도."
+        ]
+      }
     },
     {
       "name": "思月園",
@@ -26460,26 +26920,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "全国の銘茶が並ぶ。",
-          "zh": "陈列全国名茶。",
-          "en": "Fine teas from across Japan.",
-          "ko": "전국 명차가 진열."
-        },
-        {
-          "ja": "淹れ方も教われる。",
-          "zh": "还能学习冲泡法。",
-          "en": "Learn how to brew.",
-          "ko": "우리는 법도 배움."
-        },
-        {
-          "ja": "自分好みを探そう。",
-          "zh": "寻找心仪的一款。",
-          "en": "Find your favorite.",
-          "ko": "취향을 찾아보자."
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "全国の銘茶が並ぶ。",
+          "淹れ方も教われる。",
+          "自分好みを探そう。"
+        ],
+        "zh": [
+          "陈列全国名茶。",
+          "还能学习冲泡法。",
+          "寻找心仪的一款。"
+        ],
+        "en": [
+          "Fine teas from across Japan.",
+          "Learn how to brew.",
+          "Find your favorite."
+        ],
+        "ko": [
+          "전국 명차가 진열.",
+          "우리는 법도 배움.",
+          "취향을 찾아보자."
+        ]
+      },
       "address": "東京都北区赤羽1-33-6"
     },
     {
@@ -26533,26 +26995,28 @@ window.RAILWAY_TOURISM = {
         "en": "Evening",
         "ko": "저녁"
       },
-      "tips_i18n": [
-        {
-          "ja": "パクチー2kgに挑戦。",
-          "zh": "挑战2公斤香菜。",
-          "en": "Challenge 2kg of cilantro.",
-          "ko": "고수 2kg 도전."
-        },
-        {
-          "ja": "4名以上で参加可。",
-          "zh": "4人以上可参加。",
-          "en": "4+ participants only.",
-          "ko": "4인 이상부터 참가."
-        },
-        {
-          "ja": "完食で特典。",
-          "zh": "完食有福利。",
-          "en": "Finish it for perks.",
-          "ko": "완식 시 혜택."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "パクチー2kgに挑戦。",
+          "4名以上で参加可。",
+          "完食で特典。"
+        ],
+        "zh": [
+          "挑战2公斤香菜。",
+          "4人以上可参加。",
+          "完食有福利。"
+        ],
+        "en": [
+          "Challenge 2kg of cilantro.",
+          "4+ participants only.",
+          "Finish it for perks."
+        ],
+        "ko": [
+          "고수 2kg 도전.",
+          "4인 이상부터 참가.",
+          "완식 시 혜택."
+        ]
+      }
     },
     {
       "name": "むし社",
@@ -26605,26 +27069,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "カブト・クワガタ人気。",
-          "zh": "独角仙与锹甲受欢迎。",
-          "en": "Beetles and stag beetles.",
-          "ko": "장수풍뎅이·사슴벌레 인기."
-        },
-        {
-          "ja": "蝶標本は雑貨にも。",
-          "zh": "蝴蝶标本可作装饰。",
-          "en": "Butterfly specimens as decor.",
-          "ko": "나비 표본은 인테리어로도."
-        },
-        {
-          "ja": "初心者も安心。",
-          "zh": "新手也安心。",
-          "en": "Beginners welcome.",
-          "ko": "초보자도 안심."
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "カブト・クワガタ人気。",
+          "蝶標本は雑貨にも。",
+          "初心者も安心。"
+        ],
+        "zh": [
+          "独角仙与锹甲受欢迎。",
+          "蝴蝶标本可作装饰。",
+          "新手也安心。"
+        ],
+        "en": [
+          "Beetles and stag beetles.",
+          "Butterfly specimens as decor.",
+          "Beginners welcome."
+        ],
+        "ko": [
+          "장수풍뎅이·사슴벌레 인기.",
+          "나비 표본은 인테리어로도.",
+          "초보자도 안심."
+        ]
+      },
       "address": "東京都中野区大和町1-4-2 白鳳ビル302"
     },
     {
@@ -26679,26 +27145,28 @@ window.RAILWAY_TOURISM = {
         "en": "Evening",
         "ko": "저녁"
       },
-      "tips_i18n": [
-        {
-          "ja": "18種の薬用スパイス。",
-          "zh": "18种药用香料。",
-          "en": "18 medicinal spices.",
-          "ko": "18가지 약용 향신료."
-        },
-        {
-          "ja": "スープカレーをナンで。",
-          "zh": "用烤饼蘸汤咖喱。",
-          "en": "Soup curry with naan.",
-          "ko": "수프 카레를 난으로."
-        },
-        {
-          "ja": "現地風の〆。",
-          "zh": "当地风味的收尾。",
-          "en": "Local-style finish.",
-          "ko": "현지풍 마무리."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "18種の薬用スパイス。",
+          "スープカレーをナンで。",
+          "現地風の〆。"
+        ],
+        "zh": [
+          "18种药用香料。",
+          "用烤饼蘸汤咖喱。",
+          "当地风味的收尾。"
+        ],
+        "en": [
+          "18 medicinal spices.",
+          "Soup curry with naan.",
+          "Local-style finish."
+        ],
+        "ko": [
+          "18가지 약용 향신료.",
+          "수프 카레를 난으로.",
+          "현지풍 마무리."
+        ]
+      }
     },
     {
       "name": "麺屋あらき竃の番人外伝",
@@ -26751,26 +27219,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "第四のラーメン。",
-          "zh": "第四种拉面。",
-          "en": "The fourth ramen.",
-          "ko": "제4의 라멘."
-        },
-        {
-          "ja": "スパイス香る一杯。",
-          "zh": "香料扑鼻的一碗。",
-          "en": "A spiced bowl.",
-          "ko": "향신료 향 가득."
-        },
-        {
-          "ja": "深夜まで営業。",
-          "zh": "营业至深夜。",
-          "en": "Open late.",
-          "ko": "심야까지 영업."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "第四のラーメン。",
+          "スパイス香る一杯。",
+          "深夜まで営業。"
+        ],
+        "zh": [
+          "第四种拉面。",
+          "香料扑鼻的一碗。",
+          "营业至深夜。"
+        ],
+        "en": [
+          "The fourth ramen.",
+          "A spiced bowl.",
+          "Open late."
+        ],
+        "ko": [
+          "제4의 라멘.",
+          "향신료 향 가득.",
+          "심야까지 영업."
+        ]
+      }
     },
     {
       "name": "猫実周辺",
@@ -26823,26 +27293,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "アプリで猫検索。",
-          "zh": "用App查找猫咪。",
-          "en": "Find cats via the app.",
-          "ko": "앱으로 고양이 검색."
-        },
-        {
-          "ja": "街で猫に会える。",
-          "zh": "街头能遇见猫。",
-          "en": "Meet cats on the street.",
-          "ko": "거리에서 고양이를."
-        },
-        {
-          "ja": "『ニャンだぁ！らんど』で。",
-          "zh": "搭配喵乐园App。",
-          "en": "With the Nyanda! Land app.",
-          "ko": "냥다! 랜드와 함께."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "アプリで猫検索。",
+          "街で猫に会える。",
+          "『ニャンだぁ！らんど』で。"
+        ],
+        "zh": [
+          "用App查找猫咪。",
+          "街头能遇见猫。",
+          "搭配喵乐园App。"
+        ],
+        "en": [
+          "Find cats via the app.",
+          "Meet cats on the street.",
+          "With the Nyanda! Land app."
+        ],
+        "ko": [
+          "앱으로 고양이 검색.",
+          "거리에서 고양이를.",
+          "냥다! 랜드와 함께."
+        ]
+      }
     },
     {
       "name": "Le Chou （ル シュー）",
@@ -26895,26 +27367,28 @@ window.RAILWAY_TOURISM = {
         "en": "Evening",
         "ko": "저녁"
       },
-      "tips_i18n": [
-        {
-          "ja": "ここだけの菱焼酎。",
-          "zh": "仅此一处的菱实烧酒。",
-          "en": "Unique water caltrop shochu.",
-          "ko": "여기뿐인 마름 소주."
-        },
-        {
-          "ja": "まろやかな口当たり。",
-          "zh": "入口柔和圆润。",
-          "en": "Mellow on the palate.",
-          "ko": "부드러운 목넘김."
-        },
-        {
-          "ja": "駅近フレンチ。",
-          "zh": "车站旁的法式餐厅。",
-          "en": "French food near the station.",
-          "ko": "역 근처 프렌치."
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "ここだけの菱焼酎。",
+          "まろやかな口当たり。",
+          "駅近フレンチ。"
+        ],
+        "zh": [
+          "仅此一处的菱实烧酒。",
+          "入口柔和圆润。",
+          "车站旁的法式餐厅。"
+        ],
+        "en": [
+          "Unique water caltrop shochu.",
+          "Mellow on the palate.",
+          "French food near the station."
+        ],
+        "ko": [
+          "여기뿐인 마름 소주.",
+          "부드러운 목넘김.",
+          "역 근처 프렌치."
+        ]
+      },
       "address": "千葉県浦安市北栄2-7-1-103"
     },
     {
@@ -26946,7 +27420,7 @@ window.RAILWAY_TOURISM = {
         "ko": "불랑주리 뒤데스탱"
       },
       "desc_i18n": {
-        "ja": "妙典のブーランジェリー。パン世界選手権で優勝した経験を持つシェフが焼き上げる、本格ハード系のパンが人気。",
+        "ja": "妙典のブーランジェリー。パーン世界選手権で優勝した経験を持つシェフが焼き上げる、本格ハード系のパンが人気。",
         "zh": "妙典的面包房，由曾获世界面包大赛冠军的主厨烤制，正宗欧式硬面包受欢迎。",
         "en": "A bakery in Myoden whose chef won a world bread championship, known for authentic hard-crust loaves.",
         "ko": "묘덴의 베이커리. 세계 빵 선수권에서 우승한 경험이 있는 셰프가 구워내는 본진 하드계 빵이 인기."
@@ -26969,26 +27443,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "世界一シェフの味。",
-          "zh": "世界冠军厨师的味道。",
-          "en": "Champion chef's bread.",
-          "ko": "세계일등 셰프의 빵."
-        },
-        {
-          "ja": "厨房が見える。",
-          "zh": "可看厨房操作。",
-          "en": "Watch the kitchen.",
-          "ko": "주방이 보임."
-        },
-        {
-          "ja": "売り切れ次第閉店。",
-          "zh": "售完即关门。",
-          "en": "Closes when sold out.",
-          "ko": "완매 시 영업 종료."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "世界一シェフの味。",
+          "厨房が見える。",
+          "売り切れ次第閉店。"
+        ],
+        "zh": [
+          "世界冠军厨师的味道。",
+          "可看厨房操作。",
+          "售完即关门。"
+        ],
+        "en": [
+          "Champion chef's bread.",
+          "Watch the kitchen.",
+          "Closes when sold out."
+        ],
+        "ko": [
+          "세계일등 셰프의 빵.",
+          "주방이 보임.",
+          "완매 시 영업 종료."
+        ]
+      }
     },
     {
       "name": "兜神社",
@@ -27042,26 +27518,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "兜岩に手を合わせて。",
-          "zh": "向兜岩合掌祈福。",
-          "en": "Pay respects at the rock.",
-          "ko": "가부토이와에 합장."
-        },
-        {
-          "ja": "武将の伝承が残る。",
-          "zh": "流传着武将传说。",
-          "en": "Legends of warriors.",
-          "ko": "무장의 전승."
-        },
-        {
-          "ja": "地名の由来。",
-          "zh": "地名之由来。",
-          "en": "Origin of the area name.",
-          "ko": "지명의 유래."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "兜岩に手を合わせて。",
+          "武将の伝承が残る。",
+          "地名の由来。"
+        ],
+        "zh": [
+          "向兜岩合掌祈福。",
+          "流传着武将传说。",
+          "地名之由来。"
+        ],
+        "en": [
+          "Pay respects at the rock.",
+          "Legends of warriors.",
+          "Origin of the area name."
+        ],
+        "ko": [
+          "가부토이와에 합장.",
+          "무장의 전승.",
+          "지명의 유래."
+        ]
+      }
     },
     {
       "name": "喫茶YOU",
@@ -27114,26 +27592,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "ふわとろ卵。",
-          "zh": "蓬松流心蛋。",
-          "en": "Fluffy, runny egg.",
-          "ko": "폭신한 계란."
-        },
-        {
-          "ja": "役者も御用達。",
-          "zh": "歌舞伎演员也常来。",
-          "en": "Loved by Kabuki actors.",
-          "ko": "배우도 단골."
-        },
-        {
-          "ja": "行列必至。",
-          "zh": "必排长队。",
-          "en": "Expect a line.",
-          "ko": "웨이팅 필수."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "ふわとろ卵。",
+          "役者も御用達。",
+          "行列必至。"
+        ],
+        "zh": [
+          "蓬松流心蛋。",
+          "歌舞伎演员也常来。",
+          "必排长队。"
+        ],
+        "en": [
+          "Fluffy, runny egg.",
+          "Loved by Kabuki actors.",
+          "Expect a line."
+        ],
+        "ko": [
+          "폭신한 계란.",
+          "배우도 단골.",
+          "웨이팅 필수."
+        ]
+      }
     },
     {
       "name": "BANANA JUICE",
@@ -27186,26 +27666,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "完熟バナナのみ。",
-          "zh": "只用熟成香蕉。",
-          "en": "Ripe bananas only.",
-          "ko": "완숙 바나나만."
-        },
-        {
-          "ja": "売り切れ次第終了。",
-          "zh": "售完即止。",
-          "en": "Closes when sold out.",
-          "ko": "완매 시 종료."
-        },
-        {
-          "ja": "トッピング自由。",
-          "zh": "配料可自选。",
-          "en": "Custom toppings.",
-          "ko": "토핑 자유."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "完熟バナナのみ。",
+          "売り切れ次第終了。",
+          "トッピング自由。"
+        ],
+        "zh": [
+          "只用熟成香蕉。",
+          "售完即止。",
+          "配料可自选。"
+        ],
+        "en": [
+          "Ripe bananas only.",
+          "Closes when sold out.",
+          "Custom toppings."
+        ],
+        "ko": [
+          "완숙 바나나만.",
+          "완매 시 종료.",
+          "토핑 자유."
+        ]
+      }
     },
     {
       "name": "GINZA HAKKO 木の香（きのか）",
@@ -27258,26 +27740,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "焼き絵付け体験。",
-          "zh": "体验烙画彩绘。",
-          "en": "Wood-burn your doll.",
-          "ko": "나무 태워 그리기."
-        },
-        {
-          "ja": "少人数制で安心。",
-          "zh": "小班教学安心。",
-          "en": "Small groups, beginner-friendly.",
-          "ko": "소수 제한으로 안심."
-        },
-        {
-          "ja": "国内最大級の品揃え。",
-          "zh": "日本最大套娃阵容。",
-          "en": "Largest selection in Japan.",
-          "ko": "국내 최대급 구색."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "焼き絵付け体験。",
+          "少人数制で安心。",
+          "国内最大級の品揃え。"
+        ],
+        "zh": [
+          "体验烙画彩绘。",
+          "小班教学安心。",
+          "日本最大套娃阵容。"
+        ],
+        "en": [
+          "Wood-burn your doll.",
+          "Small groups, beginner-friendly.",
+          "Largest selection in Japan."
+        ],
+        "ko": [
+          "나무 태워 그리기.",
+          "소수 제한으로 안심.",
+          "국내 최대급 구색."
+        ]
+      }
     },
     {
       "name": "日比谷松本楼",
@@ -27334,26 +27818,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "明治のビーフカレー。",
-          "zh": "明治时代的牛肉咖喱。",
-          "en": "Meiji-era beef curry.",
-          "ko": "메이지 시대 비프 카레."
-        },
-        {
-          "ja": "公園の中の一軒。",
-          "zh": "公园中的一家店。",
-          "en": "A house in the park.",
-          "ko": "공원 속 한 집."
-        },
-        {
-          "ja": "100年の味。",
-          "zh": "百年味道。",
-          "en": "A 100-year flavor.",
-          "ko": "100년의 맛."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "明治のビーフカレー。",
+          "公園の中の一軒。",
+          "100年の味。"
+        ],
+        "zh": [
+          "明治时代的牛肉咖喱。",
+          "公园中的一家店。",
+          "百年味道。"
+        ],
+        "en": [
+          "Meiji-era beef curry.",
+          "A house in the park.",
+          "A 100-year flavor."
+        ],
+        "ko": [
+          "메이지 시대 비프 카레.",
+          "공원 속 한 집.",
+          "100년의 맛."
+        ]
+      }
     },
     {
       "name": "科学技術館",
@@ -27406,26 +27892,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "5階ワークスが人気。",
-          "zh": "5楼Work区人气高。",
-          "en": "The 5th-floor Works is popular.",
-          "ko": "5층 워크스 인기."
-        },
-        {
-          "ja": "シャボン玉の中へ。",
-          "zh": "走进巨型肥皂泡。",
-          "en": "Inside a giant soap bubble.",
-          "ko": "거품 안에 들어가기."
-        },
-        {
-          "ja": "触って学ぶ。",
-          "zh": "边摸边学。",
-          "en": "Learn by touching.",
-          "ko": "만지며 배우기."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "5階ワークスが人気。",
+          "シャボン玉の中へ。",
+          "触って学ぶ。"
+        ],
+        "zh": [
+          "5楼Work区人气高。",
+          "走进巨型肥皂泡。",
+          "边摸边学。"
+        ],
+        "en": [
+          "The 5th-floor Works is popular.",
+          "Inside a giant soap bubble.",
+          "Learn by touching."
+        ],
+        "ko": [
+          "5층 워크스 인기.",
+          "거품 안에 들어가기.",
+          "만지며 배우기."
+        ]
+      }
     },
     {
       "name": "みやびカタックダンスアカデミー",
@@ -27478,26 +27966,28 @@ window.RAILWAY_TOURISM = {
         "en": "Evening",
         "ko": "저녁"
       },
-      "tips_i18n": [
-        {
-          "ja": "古代からの古典。",
-          "zh": "自古相传的古典。",
-          "en": "An ancient classical dance.",
-          "ko": "고대부터 내려온 고전."
-        },
-        {
-          "ja": "リズムが脳に良い。",
-          "zh": "节奏活化大脑。",
-          "en": "Rhythm trains the brain.",
-          "ko": "리듬이 두뇌에 좋음."
-        },
-        {
-          "ja": "初心者OK。",
-          "zh": "新手可参加。",
-          "en": "Beginners welcome.",
-          "ko": "초보자 OK."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "古代からの古典。",
+          "リズムが脳に良い。",
+          "初心者OK。"
+        ],
+        "zh": [
+          "自古相传的古典。",
+          "节奏活化大脑。",
+          "新手可参加。"
+        ],
+        "en": [
+          "An ancient classical dance.",
+          "Rhythm trains the brain.",
+          "Beginners welcome."
+        ],
+        "ko": [
+          "고대부터 내려온 고전.",
+          "리듬이 두뇌에 좋음.",
+          "초보자 OK."
+        ]
+      }
     },
     {
       "name": "山田松香木店",
@@ -27552,26 +28042,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "老舗の香り体験。",
-          "zh": "体验老铺香气。",
-          "en": "Experience historic scents.",
-          "ko": "노포의 향 체험."
-        },
-        {
-          "ja": "匂袋・煉香作り。",
-          "zh": "制作香袋与炼香。",
-          "en": "Make sachets and incense paste.",
-          "ko": "향낭·연향 만들기."
-        },
-        {
-          "ja": "丁寧にレクチャー。",
-          "zh": "店员细心讲解。",
-          "en": "Guided by staff.",
-          "ko": "친절한 강습."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "老舗の香り体験。",
+          "匂袋・煉香作り。",
+          "丁寧にレクチャー。"
+        ],
+        "zh": [
+          "体验老铺香气。",
+          "制作香袋与炼香。",
+          "店员细心讲解。"
+        ],
+        "en": [
+          "Experience historic scents.",
+          "Make sachets and incense paste.",
+          "Guided by staff."
+        ],
+        "ko": [
+          "노포의 향 체험.",
+          "향낭·연향 만들기.",
+          "친절한 강습."
+        ]
+      }
     },
     {
       "name": "JAMBO",
@@ -27624,26 +28116,28 @@ window.RAILWAY_TOURISM = {
         "en": "Evening",
         "ko": "저녁"
       },
-      "tips_i18n": [
-        {
-          "ja": "多彩な編み髪スタイル。",
-          "zh": "多样编发造型。",
-          "en": "Various braided styles.",
-          "ko": "다양한 땋은 머리."
-        },
-        {
-          "ja": "協会認定オーナー。",
-          "zh": "协会认证主理人。",
-          "en": "Certified by the association.",
-          "ko": "협회 인증 오너."
-        },
-        {
-          "ja": "初めても安心。",
-          "zh": "首次体验也安心。",
-          "en": "First-timers welcome.",
-          "ko": "처음도 안심."
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "多彩な編み髪スタイル。",
+          "協会認定オーナー。",
+          "初めても安心。"
+        ],
+        "zh": [
+          "多样编发造型。",
+          "协会认证主理人。",
+          "首次体验也安心。"
+        ],
+        "en": [
+          "Various braided styles.",
+          "Certified by the association.",
+          "First-timers welcome."
+        ],
+        "ko": [
+          "다양한 땋은 머리.",
+          "협회 인증 오너.",
+          "처음도 안심."
+        ]
+      },
       "address": "東京都荒川区西日暮里6-42-8 安藤ビル1F"
     },
     {
@@ -27698,26 +28192,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "江戸の木目金。",
-          "zh": "江户木目金。",
-          "en": "Edo-era mokume-gane.",
-          "ko": "에도의 메쿠메가네."
-        },
-        {
-          "ja": "指輪のオーダー。",
-          "zh": "定制戒指。",
-          "en": "Custom rings.",
-          "ko": "반지 오더."
-        },
-        {
-          "ja": "世界も注目。",
-          "zh": "世界瞩目工艺。",
-          "en": "World-acclaimed technique.",
-          "ko": "세계도 주목."
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "江戸の木目金。",
+          "指輪のオーダー。",
+          "世界も注目。"
+        ],
+        "zh": [
+          "江户木目金。",
+          "定制戒指。",
+          "世界瞩目工艺。"
+        ],
+        "en": [
+          "Edo-era mokume-gane.",
+          "Custom rings.",
+          "World-acclaimed technique."
+        ],
+        "ko": [
+          "에도의 메쿠메가네.",
+          "반지 오더.",
+          "세계도 주목."
+        ]
+      },
       "address": "東京都中央区銀座1-18-6 井門銀座一丁目ビル B1階"
     },
     {
@@ -27771,26 +28267,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "4色の奥深さ。",
-          "zh": "四色之深奥。",
-          "en": "The depth of 4 colors.",
-          "ko": "4가지 물감의 깊이."
-        },
-        {
-          "ja": "無形文化財の技。",
-          "zh": "无形文化财技艺。",
-          "en": "An intangible folk-craft skill.",
-          "ko": "무형문화재의 기술."
-        },
-        {
-          "ja": "三位一体の絵。",
-          "zh": "绘师雕师摺师合作。",
-          "en": "Three craftsmen, one print.",
-          "ko": "세 장인의 협업."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "4色の奥深さ。",
+          "無形文化財の技。",
+          "三位一体の絵。"
+        ],
+        "zh": [
+          "四色之深奥。",
+          "无形文化财技艺。",
+          "绘师雕师摺师合作。"
+        ],
+        "en": [
+          "The depth of 4 colors.",
+          "An intangible folk-craft skill.",
+          "Three craftsmen, one print."
+        ],
+        "ko": [
+          "4가지 물감의 깊이.",
+          "무형문화재의 기술.",
+          "세 장인의 협업."
+        ]
+      }
     },
     {
       "name": "アミューズ カフェシアター",
@@ -27844,26 +28342,28 @@ window.RAILWAY_TOURISM = {
         "en": "Evening",
         "ko": "저녁"
       },
-      "tips_i18n": [
-        {
-          "ja": "出演者が至近距離。",
-          "zh": "演员近在咫尺。",
-          "en": "Up-close performers.",
-          "ko": "출연자와 가까운 거리."
-        },
-        {
-          "ja": "料理も出演者が。",
-          "zh": "演员负责送餐。",
-          "en": "Performers serve the food.",
-          "ko": "음식도 출연자가."
-        },
-        {
-          "ja": "ほぼ毎日公演。",
-          "zh": "几乎每天公演。",
-          "en": "Shows almost daily.",
-          "ko": "거의 매일 공연."
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "出演者が至近距離。",
+          "料理も出演者が。",
+          "ほぼ毎日公演。"
+        ],
+        "zh": [
+          "演员近在咫尺。",
+          "演员负责送餐。",
+          "几乎每天公演。"
+        ],
+        "en": [
+          "Up-close performers.",
+          "Performers serve the food.",
+          "Shows almost daily."
+        ],
+        "ko": [
+          "출연자와 가까운 거리.",
+          "음식도 출연자가.",
+          "거의 매일 공연."
+        ]
+      },
       "address": "東京都台東区浅草2-10 ドン・キホーテビル7F"
     },
     {
@@ -27918,26 +28418,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "自分だけの下駄。",
-          "zh": "打造专属木屐。",
-          "en": "Custom geta sandals.",
-          "ko": "나만의 게타."
-        },
-        {
-          "ja": "100年超の老舗。",
-          "zh": "百年老铺。",
-          "en": "Over 100 years old.",
-          "ko": "100년 넘은 노포."
-        },
-        {
-          "ja": "職人が仕立てる。",
-          "zh": "匠人量身定制。",
-          "en": "Made by craftsmen.",
-          "ko": "장인이 맞춤."
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "自分だけの下駄。",
+          "100年超の老舗。",
+          "職人が仕立てる。"
+        ],
+        "zh": [
+          "打造专属木屐。",
+          "百年老铺。",
+          "匠人量身定制。"
+        ],
+        "en": [
+          "Custom geta sandals.",
+          "Over 100 years old.",
+          "Made by craftsmen."
+        ],
+        "ko": [
+          "나만의 게타.",
+          "100년 넘은 노포.",
+          "장인이 맞춤."
+        ]
+      },
       "address": "東京都台東区雷門2-13-4 岡本ビル2F"
     },
     {
@@ -27991,26 +28493,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "天ぷら衣づくり。",
-          "zh": "制作天妇罗衣。",
-          "en": "Make tempura batter.",
-          "ko": "덴푸라 옷 만들기."
-        },
-        {
-          "ja": "小学生からOK。",
-          "zh": "小学生起可参加。",
-          "en": "Elementary kids welcome.",
-          "ko": "초등학생부터 OK."
-        },
-        {
-          "ja": "80年の技術。",
-          "zh": "80年技艺。",
-          "en": "80+ years of craft.",
-          "ko": "80년의 기술."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "天ぷら衣づくり。",
+          "小学生からOK。",
+          "80年の技術。"
+        ],
+        "zh": [
+          "制作天妇罗衣。",
+          "小学生起可参加。",
+          "80年技艺。"
+        ],
+        "en": [
+          "Make tempura batter.",
+          "Elementary kids welcome.",
+          "80+ years of craft."
+        ],
+        "ko": [
+          "덴푸라 옷 만들기.",
+          "초등학생부터 OK.",
+          "80년의 기술."
+        ]
+      }
     },
     {
       "name": "ほていや 中塚商店",
@@ -28063,26 +28567,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "三社祭の大豆。",
-          "zh": "三社祭的撒豆。",
-          "en": "Sansha Matsuri beans.",
-          "ko": "산사마쓰리 콩."
-        },
-        {
-          "ja": "45種類揃う。",
-          "zh": "45种齐备。",
-          "en": "45 kinds available.",
-          "ko": "45종 구비."
-        },
-        {
-          "ja": "レトロな店先。",
-          "zh": "复古门面。",
-          "en": "A retro storefront.",
-          "ko": "레트로한 가게 앞."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "三社祭の大豆。",
+          "45種類揃う。",
+          "レトロな店先。"
+        ],
+        "zh": [
+          "三社祭的撒豆。",
+          "45种齐备。",
+          "复古门面。"
+        ],
+        "en": [
+          "Sansha Matsuri beans.",
+          "45 kinds available.",
+          "A retro storefront."
+        ],
+        "ko": [
+          "산사마쓰리 콩.",
+          "45종 구비.",
+          "레트로한 가게 앞."
+        ]
+      }
     },
     {
       "name": "新倉ふるさと民家園",
@@ -28136,26 +28642,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "湧き水を巡る。",
-          "zh": "探访涌泉。",
-          "en": "Walk around the springs.",
-          "ko": "샘물을 둘러보기."
-        },
-        {
-          "ja": "マップ片手に。",
-          "zh": "带上地图。",
-          "en": "Use the map.",
-          "ko": "지도 한장 들고."
-        },
-        {
-          "ja": "自然豊かな街。",
-          "zh": "自然丰茂的街区。",
-          "en": "A green residential area.",
-          "ko": "자연 풍성한 동네."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "湧き水を巡る。",
+          "マップ片手に。",
+          "自然豊かな街。"
+        ],
+        "zh": [
+          "探访涌泉。",
+          "带上地图。",
+          "自然丰茂的街区。"
+        ],
+        "en": [
+          "Walk around the springs.",
+          "Use the map.",
+          "A green residential area."
+        ],
+        "ko": [
+          "샘물을 둘러보기.",
+          "지도 한장 들고.",
+          "자연 풍성한 동네."
+        ]
+      }
     },
     {
       "name": "和光市バッティングセンター",
@@ -28208,26 +28716,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "20球200円。",
-          "zh": "20球200日元。",
-          "en": "20 balls for 200 yen.",
-          "ko": "20구 200엔."
-        },
-        {
-          "ja": "レトロな内装。",
-          "zh": "复古装修。",
-          "en": "Retro interiors.",
-          "ko": "레트로 인테리어."
-        },
-        {
-          "ja": "ストレス発散。",
-          "zh": "发泄压力。",
-          "en": "Release stress.",
-          "ko": "스트레스 해소."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "20球200円。",
+          "レトロな内装。",
+          "ストレス発散。"
+        ],
+        "zh": [
+          "20球200日元。",
+          "复古装修。",
+          "发泄压力。"
+        ],
+        "en": [
+          "20 balls for 200 yen.",
+          "Retro interiors.",
+          "Release stress."
+        ],
+        "ko": [
+          "20구 200엔.",
+          "레트로 인테리어.",
+          "스트레스 해소."
+        ]
+      }
     },
     {
       "name": "Lito rukka（リトルッカ）",
@@ -28280,26 +28790,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "コク深いビーガン料理。",
-          "zh": "醇厚的纯素料理。",
-          "en": "Rich vegan flavors.",
-          "ko": "깊은 비건 요리."
-        },
-        {
-          "ja": "オーガニック野菜。",
-          "zh": "有机蔬菜。",
-          "en": "Organic vegetables.",
-          "ko": "유기농 채소."
-        },
-        {
-          "ja": "完全予約制。",
-          "zh": "完全预约制。",
-          "en": "Reservation only.",
-          "ko": "완전 예약제."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "コク深いビーガン料理。",
+          "オーガニック野菜。",
+          "完全予約制。"
+        ],
+        "zh": [
+          "醇厚的纯素料理。",
+          "有机蔬菜。",
+          "完全预约制。"
+        ],
+        "en": [
+          "Rich vegan flavors.",
+          "Organic vegetables.",
+          "Reservation only."
+        ],
+        "ko": [
+          "깊은 비건 요리.",
+          "유기농 채소.",
+          "완전 예약제."
+        ]
+      }
     },
     {
       "name": "つばさ基地",
@@ -28352,26 +28864,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "バク転・殺陣。",
-          "zh": "后空翻与武术。",
-          "en": "Backflips and swordplay.",
-          "ko": "공중제비·검술."
-        },
-        {
-          "ja": "初心者OK。",
-          "zh": "新手可参加。",
-          "en": "Beginners welcome.",
-          "ko": "초보자 OK."
-        },
-        {
-          "ja": "子どもクラスも。",
-          "zh": "也有儿童班。",
-          "en": "Kids' classes too.",
-          "ko": "어린이 반도."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "バク転・殺陣。",
+          "初心者OK。",
+          "子どもクラスも。"
+        ],
+        "zh": [
+          "后空翻与武术。",
+          "新手可参加。",
+          "也有儿童班。"
+        ],
+        "en": [
+          "Backflips and swordplay.",
+          "Beginners welcome.",
+          "Kids' classes too."
+        ],
+        "ko": [
+          "공중제비·검술.",
+          "초보자 OK.",
+          "어린이 반도."
+        ]
+      }
     },
     {
       "name": "シチズンプラザスケートリンク",
@@ -28425,26 +28939,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "手ぶらでOK。",
-          "zh": "空手即可。",
-          "en": "Skate rental available.",
-          "ko": "맨손으로 OK."
-        },
-        {
-          "ja": "初心者教室も。",
-          "zh": "也有新手课。",
-          "en": "Lessons for beginners.",
-          "ko": "초보 교실도."
-        },
-        {
-          "ja": "いつでも滑れる。",
-          "zh": "随时可滑。",
-          "en": "Skate any day.",
-          "ko": "언제든 탈 수 있음."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "手ぶらでOK。",
+          "初心者教室も。",
+          "いつでも滑れる。"
+        ],
+        "zh": [
+          "空手即可。",
+          "也有新手课。",
+          "随时可滑。"
+        ],
+        "en": [
+          "Skate rental available.",
+          "Lessons for beginners.",
+          "Skate any day."
+        ],
+        "ko": [
+          "맨손으로 OK.",
+          "초보 교실도.",
+          "언제든 탈 수 있음."
+        ]
+      }
     },
     {
       "name": "Viet Shop（ベトショップ）",
@@ -28497,26 +29013,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "調味料が豊富。",
-          "zh": "调味料丰富。",
-          "en": "A rich sauce selection.",
-          "ko": "양념 다양."
-        },
-        {
-          "ja": "ベトナムビールも。",
-          "zh": "也有越南啤酒。",
-          "en": "Vietnamese beer too.",
-          "ko": "베트남 맥주도."
-        },
-        {
-          "ja": "木曜は蒸し春巻き。",
-          "zh": "周四卖蒸春卷。",
-          "en": "Steamed spring rolls on Thursdays.",
-          "ko": "목요일은 찐 춘권."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "調味料が豊富。",
+          "ベトナムビールも。",
+          "木曜は蒸し春巻き。"
+        ],
+        "zh": [
+          "调味料丰富。",
+          "也有越南啤酒。",
+          "周四卖蒸春卷。"
+        ],
+        "en": [
+          "A rich sauce selection.",
+          "Vietnamese beer too.",
+          "Steamed spring rolls on Thursdays."
+        ],
+        "ko": [
+          "양념 다양.",
+          "베트남 맥주도.",
+          "목요일은 찐 춘권."
+        ]
+      }
     },
     {
       "name": "プネウマカレー",
@@ -28569,26 +29087,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "いりこアンチョビ。",
-          "zh": "沙丁鱼凤尾鱼。",
-          "en": "Iriko anchovy chicken.",
-          "ko": "이리코 앤초비."
-        },
-        {
-          "ja": "売り切れ次第閉店。",
-          "zh": "售完即止。",
-          "en": "Closes when sold out.",
-          "ko": "완매 시 종료."
-        },
-        {
-          "ja": "店長SNSも話題。",
-          "zh": "店长SNS也热门。",
-          "en": "The owner's SNS is fun.",
-          "ko": "점장 SNS도 화제."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "いりこアンチョビ。",
+          "売り切れ次第閉店。",
+          "店長SNSも話題。"
+        ],
+        "zh": [
+          "沙丁鱼凤尾鱼。",
+          "售完即止。",
+          "店长SNS也热门。"
+        ],
+        "en": [
+          "Iriko anchovy chicken.",
+          "Closes when sold out.",
+          "The owner's SNS is fun."
+        ],
+        "ko": [
+          "이리코 앤초비.",
+          "완매 시 종료.",
+          "점장 SNS도 화제."
+        ]
+      }
     },
     {
       "name": "味覚庵",
@@ -28641,26 +29161,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "最高級の梅干し。",
-          "zh": "顶级梅子干。",
-          "en": "Premium umeboshi.",
-          "ko": "최고급 매실."
-        },
-        {
-          "ja": "試食して選べる。",
-          "zh": "可试吃挑选。",
-          "en": "Taste before you choose.",
-          "ko": "시식 후 선택."
-        },
-        {
-          "ja": "8種類揃う。",
-          "zh": "8种齐备。",
-          "en": "8 varieties.",
-          "ko": "8종류 구비."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "最高級の梅干し。",
+          "試食して選べる。",
+          "8種類揃う。"
+        ],
+        "zh": [
+          "顶级梅子干。",
+          "可试吃挑选。",
+          "8种齐备。"
+        ],
+        "en": [
+          "Premium umeboshi.",
+          "Taste before you choose.",
+          "8 varieties."
+        ],
+        "ko": [
+          "최고급 매실.",
+          "시식 후 선택.",
+          "8종류 구비."
+        ]
+      }
     },
     {
       "name": "なぜ蕎麦にラー油を入れるのか",
@@ -28714,26 +29236,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "ラー油つけそば。",
-          "zh": "辣油蘸荞麦。",
-          "en": "Chili-oil dipping soba.",
-          "ko": "라유 찍먹 소바."
-        },
-        {
-          "ja": "千円以下で満腹。",
-          "zh": "千元内吃饱。",
-          "en": "Fill up under 1000 yen.",
-          "ko": "1000엔 이하로 배불리."
-        },
-        {
-          "ja": "トッピング自由。",
-          "zh": "配料随意加。",
-          "en": "Free toppings.",
-          "ko": "토핑 자유."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "ラー油つけそば。",
+          "千円以下で満腹。",
+          "トッピング自由。"
+        ],
+        "zh": [
+          "辣油蘸荞麦。",
+          "千元内吃饱。",
+          "配料随意加。"
+        ],
+        "en": [
+          "Chili-oil dipping soba.",
+          "Fill up under 1000 yen.",
+          "Free toppings."
+        ],
+        "ko": [
+          "라유 찍먹 소바.",
+          "1000엔 이하로 배불리.",
+          "토핑 자유."
+        ]
+      }
     },
     {
       "name": "源覚寺（こんにゃくゑんま）",
@@ -28786,26 +29310,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "こんにゃく供養。",
-          "zh": "蒟蒻供养。",
-          "en": "Konnyaku offerings.",
-          "ko": "곤약 공양."
-        },
-        {
-          "ja": "眼病平癒の由来。",
-          "zh": "眼病痊愈的由来。",
-          "en": "Legend of eye healing.",
-          "ko": "눈병 치유 유래."
-        },
-        {
-          "ja": "優しい閻魔様。",
-          "zh": "温柔的阎魔大人。",
-          "en": "A kind Enma.",
-          "ko": "자상한 염마님."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "こんにゃく供養。",
+          "眼病平癒の由来。",
+          "優しい閻魔様。"
+        ],
+        "zh": [
+          "蒟蒻供养。",
+          "眼病痊愈的由来。",
+          "温柔的阎魔大人。"
+        ],
+        "en": [
+          "Konnyaku offerings.",
+          "Legend of eye healing.",
+          "A kind Enma."
+        ],
+        "ko": [
+          "곤약 공양.",
+          "눈병 치유 유래.",
+          "자상한 염마님."
+        ]
+      }
     },
     {
       "name": "東京大学大学院理学系研究科附属植物園（小石川植物園）",
@@ -28859,26 +29385,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "1648年開園。",
-          "zh": "1648年开园。",
-          "en": "Founded in 1648.",
-          "ko": "1648년 개원."
-        },
-        {
-          "ja": "約4000種。",
-          "zh": "约4000种植物。",
-          "en": "About 4000 species.",
-          "ko": "약 4000종."
-        },
-        {
-          "ja": "大人400円。",
-          "zh": "成人400日元。",
-          "en": "400 yen for adults.",
-          "ko": "어른 400엔."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "1648年開園。",
+          "約4000種。",
+          "大人400円。"
+        ],
+        "zh": [
+          "1648年开园。",
+          "约4000种植物。",
+          "成人400日元。"
+        ],
+        "en": [
+          "Founded in 1648.",
+          "About 4000 species.",
+          "400 yen for adults."
+        ],
+        "ko": [
+          "1648년 개원.",
+          "약 4000종.",
+          "어른 400엔."
+        ]
+      }
     },
     {
       "name": "しょうぶ沼公園",
@@ -28932,26 +29460,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "6月が見頃。",
-          "zh": "6月为最佳。",
-          "en": "Best in early June.",
-          "ko": "6월이 절정."
-        },
-        {
-          "ja": "140品種8100株。",
-          "zh": "140品种8100株。",
-          "en": "140 varieties, 8100 plants.",
-          "ko": "140품종 8100주."
-        },
-        {
-          "ja": "ピクニックにも。",
-          "zh": "也适合野餐。",
-          "en": "Good for picnics.",
-          "ko": "피크닉에도."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "6月が見頃。",
+          "140品種8100株。",
+          "ピクニックにも。"
+        ],
+        "zh": [
+          "6月为最佳。",
+          "140品种8100株。",
+          "也适合野餐。"
+        ],
+        "en": [
+          "Best in early June.",
+          "140 varieties, 8100 plants.",
+          "Good for picnics."
+        ],
+        "ko": [
+          "6월이 절정.",
+          "140품종 8100주.",
+          "피크닉에도."
+        ]
+      }
     },
     {
       "name": "東京武道館",
@@ -29004,26 +29534,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "なぎなた入門。",
-          "zh": "薙刀入门。",
-          "en": "Try naginata.",
-          "ko": "나기나타 입문."
-        },
-        {
-          "ja": "初心者歓迎。",
-          "zh": "欢迎新手。",
-          "en": "Beginners welcome.",
-          "ko": "초보자 환영."
-        },
-        {
-          "ja": "道場やトレ室。",
-          "zh": "道场与训练室。",
-          "en": "Dojos and training rooms.",
-          "ko": "도장·트레이닝실."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "なぎなた入門。",
+          "初心者歓迎。",
+          "道場やトレ室。"
+        ],
+        "zh": [
+          "薙刀入门。",
+          "欢迎新手。",
+          "道场与训练室。"
+        ],
+        "en": [
+          "Try naginata.",
+          "Beginners welcome.",
+          "Dojos and training rooms."
+        ],
+        "ko": [
+          "나기나타 입문.",
+          "초보자 환영.",
+          "도장·트레이닝실."
+        ]
+      }
     },
     {
       "name": "アキッチョ デシカ",
@@ -29076,26 +29608,28 @@ window.RAILWAY_TOURISM = {
         "en": "Evening",
         "ko": "저녁"
       },
-      "tips_i18n": [
-        {
-          "ja": "50cmピザ。",
-          "zh": "50厘米披萨。",
-          "en": "A 50cm pizza.",
-          "ko": "50cm 피자."
-        },
-        {
-          "ja": "リアルオークション。",
-          "zh": "现场拍卖。",
-          "en": "A live auction.",
-          "ko": "라이브 경매."
-        },
-        {
-          "ja": "雨の日は穴場。",
-          "zh": "雨天是捡漏时机。",
-          "en": "Rainy days are a deal.",
-          "ko": "비 오는 날이 명당."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "50cmピザ。",
+          "リアルオークション。",
+          "雨の日は穴場。"
+        ],
+        "zh": [
+          "50厘米披萨。",
+          "现场拍卖。",
+          "雨天是捡漏时机。"
+        ],
+        "en": [
+          "A 50cm pizza.",
+          "A live auction.",
+          "Rainy days are a deal."
+        ],
+        "ko": [
+          "50cm 피자.",
+          "라이브 경매.",
+          "비 오는 날이 명당."
+        ]
+      }
     },
     {
       "name": "味噌一 高円寺本店",
@@ -29150,26 +29684,28 @@ window.RAILWAY_TOURISM = {
         "en": "Evening",
         "ko": "저녁"
       },
-      "tips_i18n": [
-        {
-          "ja": "52種のタレ。",
-          "zh": "52种调味汁。",
-          "en": "52-ingredient tare.",
-          "ko": "52가지 소스."
-        },
-        {
-          "ja": "20円でトッピング。",
-          "zh": "捐20円得配料。",
-          "en": "Donate 20 yen for toppings.",
-          "ko": "20엔 내면 토핑."
-        },
-        {
-          "ja": "一部は寄付。",
-          "zh": "部分用于捐款。",
-          "en": "Part goes to charity.",
-          "ko": "일부 기부."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "52種のタレ。",
+          "20円でトッピング。",
+          "一部は寄付。"
+        ],
+        "zh": [
+          "52种调味汁。",
+          "捐20円得配料。",
+          "部分用于捐款。"
+        ],
+        "en": [
+          "52-ingredient tare.",
+          "Donate 20 yen for toppings.",
+          "Part goes to charity."
+        ],
+        "ko": [
+          "52가지 소스.",
+          "20엔 내면 토핑.",
+          "일부 기부."
+        ]
+      }
     },
     {
       "name": "上川口屋（かみかわぐちや）",
@@ -29224,26 +29760,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "加賀藩御用達。",
-          "zh": "加贺藩御用。",
-          "en": "Former Kaga clan supplier.",
-          "ko": "가가번 공납."
-        },
-        {
-          "ja": "13代目が守る。",
-          "zh": "第13代主理。",
-          "en": "Run by the 13th owner.",
-          "ko": "13대가 지킴."
-        },
-        {
-          "ja": "昔ながらの佇まい。",
-          "zh": "古色古香。",
-          "en": "A nostalgic look.",
-          "ko": "옛날 풍경."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "加賀藩御用達。",
+          "13代目が守る。",
+          "昔ながらの佇まい。"
+        ],
+        "zh": [
+          "加贺藩御用。",
+          "第13代主理。",
+          "古色古香。"
+        ],
+        "en": [
+          "Former Kaga clan supplier.",
+          "Run by the 13th owner.",
+          "A nostalgic look."
+        ],
+        "ko": [
+          "가가번 공납.",
+          "13대가 지킴.",
+          "옛날 풍경."
+        ]
+      }
     },
     {
       "name": "ペンギンのいるBAR　池袋",
@@ -29297,26 +29835,28 @@ window.RAILWAY_TOURISM = {
         "en": "Evening",
         "ko": "저녁"
       },
-      "tips_i18n": [
-        {
-          "ja": "餌やり体験。",
-          "zh": "喂食体验。",
-          "en": "Feed the penguins.",
-          "ko": "먹이 주기 체험."
-        },
-        {
-          "ja": "フード充実。",
-          "zh": "餐饮丰富。",
-          "en": "A full food menu.",
-          "ko": "푸드도 알참."
-        },
-        {
-          "ja": "家族でも。",
-          "zh": "全家可去。",
-          "en": "Family-friendly.",
-          "ko": "가족과도."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "餌やり体験。",
+          "フード充実。",
+          "家族でも。"
+        ],
+        "zh": [
+          "喂食体验。",
+          "餐饮丰富。",
+          "全家可去。"
+        ],
+        "en": [
+          "Feed the penguins.",
+          "A full food menu.",
+          "Family-friendly."
+        ],
+        "ko": [
+          "먹이 주기 체험.",
+          "푸드도 알참.",
+          "가족과도."
+        ]
+      }
     },
     {
       "name": "タイランド",
@@ -29369,26 +29909,28 @@ window.RAILWAY_TOURISM = {
         "en": "Evening",
         "ko": "저녁"
       },
-      "tips_i18n": [
-        {
-          "ja": "現地直輸入の食材。",
-          "zh": "全部当地直送食材。",
-          "en": "Ingredients imported directly.",
-          "ko": "현지 직수입 식재료."
-        },
-        {
-          "ja": "メコンハイボール。",
-          "zh": "湄公威士忌嗨棒。",
-          "en": "Try a Mekhong highball.",
-          "ko": "메콩 하이볼."
-        },
-        {
-          "ja": "リトルバンコクの草分け。",
-          "zh": "小曼谷先驱。",
-          "en": "A Little Bangkok pioneer.",
-          "ko": "리틀 방콕 선구자."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "現地直輸入の食材。",
+          "メコンハイボール。",
+          "リトルバンコクの草分け。"
+        ],
+        "zh": [
+          "全部当地直送食材。",
+          "湄公威士忌嗨棒。",
+          "小曼谷先驱。"
+        ],
+        "en": [
+          "Ingredients imported directly.",
+          "Try a Mekhong highball.",
+          "A Little Bangkok pioneer."
+        ],
+        "ko": [
+          "현지 직수입 식재료.",
+          "메콩 하이볼.",
+          "리틀 방콕 선구자."
+        ]
+      }
     },
     {
       "name": "PAPIER LABO. （パピエラボ.）",
@@ -29441,26 +29983,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "オリジナル紙雑貨。",
-          "zh": "原创纸杂货。",
-          "en": "Original paper goods.",
-          "ko": "오리지널 종이 잡화."
-        },
-        {
-          "ja": "印刷物オーダー可。",
-          "zh": "可定制印刷品。",
-          "en": "Order custom prints.",
-          "ko": "인쇄물 주문 가능."
-        },
-        {
-          "ja": "活版印刷の風合い。",
-          "zh": "活版印刷质感。",
-          "en": "Letterpress texture.",
-          "ko": "활판 인쇄 질감."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "オリジナル紙雑貨。",
+          "印刷物オーダー可。",
+          "活版印刷の風合い。"
+        ],
+        "zh": [
+          "原创纸杂货。",
+          "可定制印刷品。",
+          "活版印刷质感。"
+        ],
+        "en": [
+          "Original paper goods.",
+          "Order custom prints.",
+          "Letterpress texture."
+        ],
+        "ko": [
+          "오리지널 종이 잡화.",
+          "인쇄물 주문 가능.",
+          "활판 인쇄 질감."
+        ]
+      }
     },
     {
       "name": "茶割",
@@ -29513,26 +30057,28 @@ window.RAILWAY_TOURISM = {
         "en": "Evening",
         "ko": "저녁"
       },
-      "tips_i18n": [
-        {
-          "ja": "100種のお茶割り。",
-          "zh": "百种茶兑酒。",
-          "en": "100 tea highballs.",
-          "ko": "100가지 차 하이볼."
-        },
-        {
-          "ja": "唐揚げも100種。",
-          "zh": "炸鸡也有百种。",
-          "en": "100 kinds of karaage.",
-          "ko": "가라아게도 100가지."
-        },
-        {
-          "ja": "ベストな組み合わせ。",
-          "zh": "寻找最佳搭配。",
-          "en": "Find your combo.",
-          "ko": "최고의 조합 찾기."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "100種のお茶割り。",
+          "唐揚げも100種。",
+          "ベストな組み合わせ。"
+        ],
+        "zh": [
+          "百种茶兑酒。",
+          "炸鸡也有百种。",
+          "寻找最佳搭配。"
+        ],
+        "en": [
+          "100 tea highballs.",
+          "100 kinds of karaage.",
+          "Find your combo."
+        ],
+        "ko": [
+          "100가지 차 하이볼.",
+          "가라아게도 100가지.",
+          "최고의 조합 찾기."
+        ]
+      }
     },
     {
       "name": "卍力",
@@ -29585,26 +30131,28 @@ window.RAILWAY_TOURISM = {
         "en": "Evening",
         "ko": "저녁"
       },
-      "tips_i18n": [
-        {
-          "ja": "14種スパイス。",
-          "zh": "14种香料。",
-          "en": "14 spices.",
-          "ko": "14가지 향신료."
-        },
-        {
-          "ja": "五感で味わう。",
-          "zh": "用五感品味。",
-          "en": "Savor with all senses.",
-          "ko": "오감으로 맛보기."
-        },
-        {
-          "ja": "行列必至。",
-          "zh": "必排长队。",
-          "en": "Expect a line.",
-          "ko": "웨이팅 필수."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "14種スパイス。",
+          "五感で味わう。",
+          "行列必至。"
+        ],
+        "zh": [
+          "14种香料。",
+          "用五感品味。",
+          "必排长队。"
+        ],
+        "en": [
+          "14 spices.",
+          "Savor with all senses.",
+          "Expect a line."
+        ],
+        "ko": [
+          "14가지 향신료.",
+          "오감으로 맛보기.",
+          "웨이팅 필수."
+        ]
+      }
     },
     {
       "name": "BEER VISTA BREWRY",
@@ -29657,26 +30205,28 @@ window.RAILWAY_TOURISM = {
         "en": "Evening",
         "ko": "저녁"
       },
-      "tips_i18n": [
-        {
-          "ja": "自家製クラフトビール。",
-          "zh": "自酿精酿啤酒。",
-          "en": "House craft beer.",
-          "ko": "자가 양조 크래프트."
-        },
-        {
-          "ja": "Itsumonoエール。",
-          "zh": "Itsumono艾尔。",
-          "en": "The Itsumono ale.",
-          "ko": "이츠모노 에일."
-        },
-        {
-          "ja": "印刷所リノベ。",
-          "zh": "印刷厂改造。",
-          "en": "A renovated print shop.",
-          "ko": "인쇄소 리모델링."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "自家製クラフトビール。",
+          "Itsumonoエール。",
+          "印刷所リノベ。"
+        ],
+        "zh": [
+          "自酿精酿啤酒。",
+          "Itsumono艾尔。",
+          "印刷厂改造。"
+        ],
+        "en": [
+          "House craft beer.",
+          "The Itsumono ale.",
+          "A renovated print shop."
+        ],
+        "ko": [
+          "자가 양조 크래프트.",
+          "이츠모노 에일.",
+          "인쇄소 리모델링."
+        ]
+      }
     },
     {
       "name": "築地玉寿司　晴海通り店",
@@ -29730,26 +30280,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "職人衣装で。",
-          "zh": "穿职人服装体验。",
-          "en": "Dress as a chef.",
-          "ko": "장인 복장으로."
-        },
-        {
-          "ja": "握った寿司を味わう。",
-          "zh": "品尝自己捏的寿司。",
-          "en": "Eat what you made.",
-          "ko": "직접 쥔 초밥."
-        },
-        {
-          "ja": "江戸前の老舗。",
-          "zh": "江户前老铺。",
-          "en": "An Edomae classic.",
-          "ko": "에도마에 노포."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "職人衣装で。",
+          "握った寿司を味わう。",
+          "江戸前の老舗。"
+        ],
+        "zh": [
+          "穿职人服装体验。",
+          "品尝自己捏的寿司。",
+          "江户前老铺。"
+        ],
+        "en": [
+          "Dress as a chef.",
+          "Eat what you made.",
+          "An Edomae classic."
+        ],
+        "ko": [
+          "장인 복장으로.",
+          "직접 쥔 초밥.",
+          "에도마에 노포."
+        ]
+      }
     },
     {
       "name": "スケボーパーク＆スケボースクール「RAMP ZERO」",
@@ -29802,26 +30354,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "高架下パーク。",
-          "zh": "高架下公园。",
-          "en": "Under the tracks.",
-          "ko": "고가 밑 파크."
-        },
-        {
-          "ja": "体験レッスン。",
-          "zh": "体验课程。",
-          "en": "Trial lessons.",
-          "ko": "체험 레슨."
-        },
-        {
-          "ja": "多様な交流。",
-          "zh": "多元交流。",
-          "en": "Cross-cultural fun.",
-          "ko": "다양한 교류."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "高架下パーク。",
+          "体験レッスン。",
+          "多様な交流。"
+        ],
+        "zh": [
+          "高架下公园。",
+          "体验课程。",
+          "多元交流。"
+        ],
+        "en": [
+          "Under the tracks.",
+          "Trial lessons.",
+          "Cross-cultural fun."
+        ],
+        "ko": [
+          "고가 밑 파크.",
+          "체험 레슨.",
+          "다양한 교류."
+        ]
+      }
     },
     {
       "name": "クロサワ楽器 お茶の水駅前店",
@@ -29874,26 +30428,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "楽器街の超大型店。",
-          "zh": "乐器街超大店。",
-          "en": "A mega music store.",
-          "ko": "악기거리 초대형점."
-        },
-        {
-          "ja": "ビンテージギター。",
-          "zh": "古董吉他。",
-          "en": "Vintage guitars.",
-          "ko": "빈티지 기타."
-        },
-        {
-          "ja": "試奏OK。",
-          "zh": "可试奏。",
-          "en": "You can play them.",
-          "ko": "시연 OK."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "楽器街の超大型店。",
+          "ビンテージギター。",
+          "試奏OK。"
+        ],
+        "zh": [
+          "乐器街超大店。",
+          "古董吉他。",
+          "可试奏。"
+        ],
+        "en": [
+          "A mega music store.",
+          "Vintage guitars.",
+          "You can play them."
+        ],
+        "ko": [
+          "악기거리 초대형점.",
+          "빈티지 기타.",
+          "시연 OK."
+        ]
+      }
     },
     {
       "name": "上野の森アートスクール（上野の森美術館）",
@@ -29948,26 +30504,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "多彩なクラス。",
-          "zh": "多样课程。",
-          "en": "Varied classes.",
-          "ko": "다양한 반."
-        },
-        {
-          "ja": "作品展に出品。",
-          "zh": "作品可参展。",
-          "en": "Exhibit your work.",
-          "ko": "작품 전시 출품."
-        },
-        {
-          "ja": "初心者OK。",
-          "zh": "新手可参加。",
-          "en": "Beginners welcome.",
-          "ko": "초보자 OK."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "多彩なクラス。",
+          "作品展に出品。",
+          "初心者OK。"
+        ],
+        "zh": [
+          "多样课程。",
+          "作品可参展。",
+          "新手可参加。"
+        ],
+        "en": [
+          "Varied classes.",
+          "Exhibit your work.",
+          "Beginners welcome."
+        ],
+        "ko": [
+          "다양한 반.",
+          "작품 전시 출품.",
+          "초보자 OK."
+        ]
+      }
     },
     {
       "name": "ジンジャーエール専門店「孝芳堂」",
@@ -30021,26 +30579,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "スパイス調合。",
-          "zh": "调配香料。",
-          "en": "Blend 6 spices.",
-          "ko": "향신료 배합."
-        },
-        {
-          "ja": "テーマ自由。",
-          "zh": "主题自定。",
-          "en": "Pick any theme.",
-          "ko": "테마 자유."
-        },
-        {
-          "ja": "こだわり素材。",
-          "zh": "严选素材。",
-          "en": "Carefully sourced.",
-          "ko": "고집 재료."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "スパイス調合。",
+          "テーマ自由。",
+          "こだわり素材。"
+        ],
+        "zh": [
+          "调配香料。",
+          "主题自定。",
+          "严选素材。"
+        ],
+        "en": [
+          "Blend 6 spices.",
+          "Pick any theme.",
+          "Carefully sourced."
+        ],
+        "ko": [
+          "향신료 배합.",
+          "테마 자유.",
+          "고집 재료."
+        ]
+      }
     },
     {
       "name": "杉本とうふ店",
@@ -30095,26 +30655,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "寄せ豆腐が絶品。",
-          "zh": "嫩豆腐绝佳。",
-          "en": "Delicious fresh tofu.",
-          "ko": "만든 두부 일품."
-        },
-        {
-          "ja": "豆乳140円。",
-          "zh": "豆浆140日元。",
-          "en": "Soy milk 140 yen.",
-          "ko": "두유 140엔."
-        },
-        {
-          "ja": "開店直後はホット。",
-          "zh": "刚开门是热的。",
-          "en": "Hot just after opening.",
-          "ko": "개점 직후는 따뜻."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "寄せ豆腐が絶品。",
+          "豆乳140円。",
+          "開店直後はホット。"
+        ],
+        "zh": [
+          "嫩豆腐绝佳。",
+          "豆浆140日元。",
+          "刚开门是热的。"
+        ],
+        "en": [
+          "Delicious fresh tofu.",
+          "Soy milk 140 yen.",
+          "Hot just after opening."
+        ],
+        "ko": [
+          "만든 두부 일품.",
+          "두유 140엔.",
+          "개점 직후는 따뜻."
+        ]
+      }
     },
     {
       "name": "Studio Aurora",
@@ -30168,26 +30730,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "50種の花。",
-          "zh": "50种花。",
-          "en": "50 flower types.",
-          "ko": "50종 꽃."
-        },
-        {
-          "ja": "自由に束ねる。",
-          "zh": "自由搭配。",
-          "en": "Arrange freely.",
-          "ko": "자유롭게 묶기."
-        },
-        {
-          "ja": "贈り物にも。",
-          "zh": "适合送礼。",
-          "en": "Great as a gift.",
-          "ko": "선물에도."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "50種の花。",
+          "自由に束ねる。",
+          "贈り物にも。"
+        ],
+        "zh": [
+          "50种花。",
+          "自由搭配。",
+          "适合送礼。"
+        ],
+        "en": [
+          "50 flower types.",
+          "Arrange freely.",
+          "Great as a gift."
+        ],
+        "ko": [
+          "50종 꽃.",
+          "자유롭게 묶기.",
+          "선물에도."
+        ]
+      }
     },
     {
       "name": "TEMARU OMUSUBI STAND",
@@ -30241,26 +30805,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "15～20種類。",
-          "zh": "15至20种。",
-          "en": "15–20 varieties.",
-          "ko": "15~20종."
-        },
-        {
-          "ja": "TKGやお茶漬け。",
-          "zh": "可做蛋拌饭或茶泡饭。",
-          "en": "Enjoy as TKG or chazuke.",
-          "ko": "계란밥·차즈케로."
-        },
-        {
-          "ja": "沖縄即席味噌汁。",
-          "zh": "冲绳速溶味噌汤。",
-          "en": "Okinawan instant miso soup.",
-          "ko": "오키나와 즉석 미소."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "15～20種類。",
+          "TKGやお茶漬け。",
+          "沖縄即席味噌汁。"
+        ],
+        "zh": [
+          "15至20种。",
+          "可做蛋拌饭或茶泡饭。",
+          "冲绳速溶味噌汤。"
+        ],
+        "en": [
+          "15–20 varieties.",
+          "Enjoy as TKG or chazuke.",
+          "Okinawan instant miso soup."
+        ],
+        "ko": [
+          "15~20종.",
+          "계란밥·차즈케로.",
+          "오키나와 즉석 미소."
+        ]
+      }
     },
     {
       "name": "赤坂青野",
@@ -30315,26 +30881,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "夏限定の冷やし。",
-          "zh": "夏季限定冰镇。",
-          "en": "Summer-only cold dango.",
-          "ko": "여름 한정 냉층."
-        },
-        {
-          "ja": "とろり餡。",
-          "zh": "柔滑糖浆。",
-          "en": "Runny sweet sauce.",
-          "ko": "흐르는 소스."
-        },
-        {
-          "ja": "赤坂の風物詩。",
-          "zh": "赤坂夏日风物诗。",
-          "en": "Akasaka's summer classic.",
-          "ko": "아카사카 여름 풍물."
-        }
-      ]
+      "tips_i18n": {
+        "ja": [
+          "夏限定の冷やし。",
+          "とろり餡。",
+          "赤坂の風物詩。"
+        ],
+        "zh": [
+          "夏季限定冰镇。",
+          "柔滑糖浆。",
+          "赤坂夏日风物诗。"
+        ],
+        "en": [
+          "Summer-only cold dango.",
+          "Runny sweet sauce.",
+          "Akasaka's summer classic."
+        ],
+        "ko": [
+          "여름 한정 냉층.",
+          "흐르는 소스.",
+          "아카사카 여름 풍물."
+        ]
+      }
     },
     {
       "name": "豆虎 赤坂焙煎所",
@@ -30388,26 +30956,28 @@ window.RAILWAY_TOURISM = {
         "en": "Daytime",
         "ko": "낮"
       },
-      "tips_i18n": [
-        {
-          "ja": "20種以上の豆。",
-          "zh": "20种以上咖啡豆。",
-          "en": "20+ bean varieties.",
-          "ko": "20종 이상 원두."
-        },
-        {
-          "ja": "焙煎度指定可。",
-          "zh": "可指定烘焙度。",
-          "en": "Choose the roast.",
-          "ko": "로스팅 지정 가능."
-        },
-        {
-          "ja": "初心者は相談。",
-          "zh": "新手可咨询。",
-          "en": "Ask the staff.",
-          "ko": "초보자는 상담."
-        }
-      ],
+      "tips_i18n": {
+        "ja": [
+          "20種以上の豆。",
+          "焙煎度指定可。",
+          "初心者は相談。"
+        ],
+        "zh": [
+          "20种以上咖啡豆。",
+          "可指定烘焙度。",
+          "新手可咨询。"
+        ],
+        "en": [
+          "20+ bean varieties.",
+          "Choose the roast.",
+          "Ask the staff."
+        ],
+        "ko": [
+          "20종 이상 원두.",
+          "로스팅 지정 가능.",
+          "초보자는 상담."
+        ]
+      },
       "address": "東京都港区赤坂3-6-18 赤坂ニューロイヤルビル1F"
     },
     {
