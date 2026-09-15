@@ -12382,9 +12382,9 @@ window.RAILWAY_TOURISM = {
       },
       "desc_i18n": {
         "ja": "ハンバーグ研究30年の榎本稔さんが焼く、ふわふわジューシーなハンバーグ。注文ごとに丁寧に焼き上げる。",
-        "zh": "由钻研汉堡30年的榎本稔现点现煎、蓬松多汁的汉堡排。",
-        "en": "Fluffy, juicy hamburgers grilled to order by Minoru Enomoto, a 30-year hamburger researcher.",
-        "ko": "함박 연구 30년의 에노모토 미노루씨가 주문마다 정성껏 구워내는 폭신하고 육즙 가득한 함박스테이크."
+        "zh": "由钻研汉堡排30年的榎本稔烹制、蓬松多汁的汉堡排。每一份都精心现烤。",
+        "en": "Fluffy, juicy hamburg steaks grilled by Enomoto Minoru, a 30-year hamburg researcher — each one cooked to order with care.",
+        "ko": "햄버그 스테이크를 30년 연구해 온 에노모토 미노루가 구워내는 포슬포슬 촉촉한 함버그. 주문마다 정성껏 구워요."
       },
       "hours_i18n": {
         "ja": "月～土 11:00～15:30(L.O.15:00)・18:00～21:30(L.O.21:00)、日祝 11:00～15:30（不定休）",
@@ -27602,9 +27602,9 @@ window.RAILWAY_TOURISM = {
       },
       "desc_i18n": {
         "ja": "西日暮里のヘアブレイディング専門サロン。アフロやドレッド向けの編み込みを中心としたヘアスタイルを得意とする。",
-        "zh": "西日暮里的编发专门沙龙，擅长非洲辫、脏辫等编发造型。",
-        "en": "A braiding salon in Nishi-Nippori specializing in braided styles such as afro and dreadlocks.",
-        "ko": "니시닛포리의 헤어 브레이딩 전문 살롱. 아프로·드레드용 땋아 올림 스타일을 잘한다."
+        "zh": "西日暮里的编发专门沙龙。以适合非洲式爆炸头、脏辫的编发造型为中心。",
+        "en": "A hair-braiding salon in Nishi-Nippori, specializing in braided styles for afros and dreadlocks.",
+        "ko": "니시닛포리의 브레이드 전문 살롱. 아프로나 드레드락에 어울리는 땋기 헤어스타일을 중심으로 해요."
       },
       "hours_i18n": {
         "ja": "11:00～19:00(完全予約制)／水日曜休",
@@ -30661,9 +30661,9 @@ window.RAILWAY_TOURISM = {
       },
       "desc_i18n": {
         "ja": "亀有駅近くの環七通り沿いで10年以上営業しているインド・アジアン料理店。看板メニューのインドカレーは、そのメニューの多さに驚かされます。 ランチのカレーは9種類から、ディナーなら30種類以上から選ぶことができます。ナンも8種類、ビリヤニも4種類と、思わず迷ってしまう豊富さ。カレーのほかにもサモサやチキンティッカなど、インド・ネパールを中心とするアジア料理全般がそろっています。カレーの辛さは甘口から激辛まで、ディナーだとレベル1〜50で選ぶことができるという段階の多さもうれしいポイント。夜はパーティーコースの用意もあり、宴会利用も多いのだとか。 「ちょっと入りづらいかもしれないけれど、入ったらいいところですよ」と胸を張るのは、ネパール出身のスタッフ・アシスさん。厨房に立つのはアシスさんのお父さんで、お店のスタッフはネパール出身の方がほとんど。お客さんとの楽しげな会話や活気ある雰囲気も魅力です。 ※ 本ページの内容は、「やみつき必至！ 辛さがおいしい一品」の記事を基に作成しております。 ※ この情報は、2025年2月4日時点のものです",
-        "zh": "龟有站步行6分钟的印度咖喱餐厅，现烤薄饼配咖喱与酸奶饮料。",
-        "en": "Indian curry 6 min from Kameari, fresh naan with curry and lassi.",
-        "ko": "가메아리 도보 6분, 갓 구운 난과 커리, 라씨."
+        "zh": "位于龟有站附近环七大道沿线、已营业10年以上的印度·亚洲料理店。招牌印度咖喱种类之多令人惊叹。午餐可选9种咖喱，晚餐则有30种以上；馕也有8种、印度香饭4种，丰富到让人挑花眼。除了咖喱，还备有萨莫萨、鸡肉提卡等以印度、尼泊尔为中心的亚洲料理。咖喱辣度从微甜到极辣，晚餐更可在1~50级中选择，阶梯之细是贴心之处。夜间还提供派对套餐，宴会使用也很多。\"也许有点难走进来，但进来会发现是家好店\"，来自尼泊尔的店员阿西斯自豪地说。掌勺的是阿西斯的父亲，店里员工大多是尼泊尔出身。与客人愉快的交谈和活力十足的氛围也是魅力所在。※本页内容基于《必上瘾！辣得美味的一品》报道编撰。※信息截至2025年2月4日。",
+        "en": "An Indian-Asian restaurant on Route 7 near Kameari Station, in business for over 10 years. The sheer variety of the signature Indian curries is a surprise. Lunch offers 9 curries; dinner, 30-plus. Naan comes in 8 kinds, biryani in 4 — enough to make you hesitate. Beyond curry there is samosa, chicken tikka and the whole span of South Asian cooking centered on India and Nepal. Spice levels run from mild to searing, and at dinner you can pick from levels 1–50. Party courses are available at night, and group bookings are common. \"It may feel a little hard to step inside, but once you do, it's a good place,\" says Asis, a Nepali staffer, proudly. His father runs the kitchen, and most of the staff are from Nepal. The lively chatter with customers and the energetic atmosphere are part of the charm. ※Based on the article \"Addictive! Spicy and Delicious.\" ※As of February 4, 2025.",
+        "ko": "카메아리역 근처 환7번 도로변에서 10년 넘게 영업 중인 인도·아시아 요리집. 시그니처 인도 카레는 메뉴가 많아 놀라게 돼요. 점심 카레는 9종, 디너는 30종 이상에서 고를 수 있어요. 난도 8종, 비리야니도 4종으로 고민하게 만드는 풍부함. 카레 외에도 사모사, 치킨 티카 등 인도·네팔 중심의 아시아 요리가 두루 갖춰져 있어요. 카레 매운맛은 순한 맛부터 아주 매운 맛까지, 디너는 레벨 1~50으로 고를 수 있는 단계의 세분화가 기특한 포인트. 밤에는 파티 코스도 준비되어 회식 이용도 많다고 해요. \"좀 들어가기 어려울 수도 있는데, 들어가면 좋은 곳이에요\"라고 자랑하는 것은 네팔 출신 스태프 아시스 씨. 주방은 아시스 씨의 아버지가 서고 직원 대부분이 네팔 출신이에요. 손님과 즐거운 대화와 활기찬 분위기도 매력이에요. ※본 페이지 내용은 \"중독 확실! 매운맛이 맛있는 한 접시\" 기사를 바탕으로 작성했어요. ※정보 기준일: 2025년 2월 4일."
       },
       "hours_i18n": {
         "ja": "11:00～15:00・17:00～23:00（土曜・日曜・祝日は11:00～23:00）（定休日なし）",
@@ -30735,9 +30735,9 @@ window.RAILWAY_TOURISM = {
       },
       "desc_i18n": {
         "ja": "2023年、日光街道沿いにオープンしたのは辛つけ麺の店。店主の藤井さんは、大師前の「麺屋 多伊夢」で8年ほど修業して独立しました。 石鍋で提供されるグツグツと煮えたぎる辛つけのスープは、鶏ガラ出汁の旨みと野菜の甘みが強くこってり濃厚。老舗製麺所「浅草開化楼」に特注する全粒粉の太麺によく絡み、具材の黒毛和牛の牛スジ肉はとろけるようなやわらかさ。汗を拭きつつも箸が止まらなくなります。辛さは大・中・小から選ぶことができ、食べ始めてから辛さを追加することも可能。スープ割りのサービスもあり、こちらは柚子が効いていて濃厚な味わいから一転、さっぱりと締められます。「スープで割って、ライスにチーズをトッピングして食べるお客さんも多いですよ」と藤井さん。 辛いだけでなく、甘みや旨みとのバランスが見事な一杯。寒い季節はもちろん、気温にかかわらず恋しくなりそうです。 ※ 本ページの内容は、「やみつき必至！ 辛さがおいしい一品」の記事を基に作成しております。 ※ この情報は、2025年2月4日時点のものです",
-        "zh": "北千住站西口附近的蘸面专卖店，浓稠红汤配粗面。",
-        "en": "A dipping-specialty shop near Kitasenju west exit; thick red tare with thick noodles.",
-        "ko": "기타센주 서쪽 출구 근처 츠케멘 전문점, 진한 붉은 국물에 굵은 면."
+        "zh": "2023年开在日光街道沿线的辣蘸面店。店主藤井在\"大师前\"的\"麺屋 多伊夢\"修业约8年后独立。用石锅端上、咕嘟沸腾的辣蘸汤，鸡骨高汤的鲜味与蔬菜的甘甜浓郁醇厚；与老牌制面所\"浅草開化楼\"特制的全粒粉粗面完美契合，配料黑毛和牛牛筋入口即化般软嫩。边擦汗边停不下筷子。辣度可选大·中·小，开吃后也能追加。还有汤割服务，加入柚子后，从浓醇一转清爽收尾。\"用汤把面吃完、再在米饭上撒芝士吃的客人也很多哦\"，藤井说。辣之外，与甘甜鲜味的平衡堪称一绝。寒冷的季节自不必说，无论气温如何都会让人想念这一碗。※本页内容基于《必上瘾！辣得美味的一品》报道编撰。※信息截至2025年2月4日。",
+        "en": "Opened in 2023 along Nikko Kaido, this is a spicy tsukemen (dipping noodle) shop. Owner Fujii trained about eight years at \"Menya Tai\" in Daishi-mae before going independent. The bubbling-hot spicy broth arrives in a stone pot — rich and thick with chicken-bone umami and vegetable sweetness. It clings beautifully to the whole-wheat thick noodles specially ordered from the veteran mill \"Asakusa Kaikoro,\" and the black-haired wagyu beef tendon melts in your mouth. You'll be wiping sweat but can't stop your chopsticks. Heat levels range from large to small, and you can add more spice as you eat. A soup-dilution service lets you finish light and refreshing with a hint of yuzu after the rich start. \"Lots of customers use the broth to finish, then top rice with cheese,\" says Fujii. Spicy, yes — but the balance of sweetness and umami is masterful. A bowl you'll crave regardless of season. ※Based on the article \"Addictive! Spicy and Delicious.\" ※As of February 4, 2025.",
+        "ko": "2023년 닛코 가도에 문을 연 매운 츠케멘 전문점. 주인장 후지이는 \"다이시마에\"의 \"멘야 타\"에서 8년 정도 수련하고 독립했어요. 돌솥에 담겨 부글부글 끓는 매운 츠케소스는 닭뼈 육수의 감칠맛과 채소의 단맛이 강하고 진득진득. 노포 제면소 \"아사쿠사 카이코로\"에 특주한 통밀로 굵은 면과 잘 어울리고, 토핑 흑모 와규 양지살은 녹을 듯 부드러워요. 땀을 닦으면서도 젓가락이 멈추지 않게 돼요. 매운맛은 대·중·소에서 고를 수 있고 먹다가 추가도 가능. 스프 가리(육수로 마무리) 서비스도 있어 유자가 향긋한 산뜻한 마무리가 가능해요. \"육수로 마무리하고 밥 위에 치즈를 올려 먹는 손님도 많아요\"라고 후지이 씨. 맵기만 한 게 아니라 단맛과 감칠맛의 균형이 훌륭한 한 그릇. 추운 계절은 물론, 기온과 관계없이 그리워질 한 그릇이에요. ※본 페이지 내용은 \"중독 확실! 매운맛이 맛있는 한 접시\" 기사를 바탕으로 작성했어요. ※정보 기준일: 2025년 2월 4일."
       },
       "hours_i18n": {
         "ja": "11:00〜15:00・17:30〜21:30（スープがなくなり次第終了）（定休日水曜）",
@@ -30809,9 +30809,9 @@ window.RAILWAY_TOURISM = {
       },
       "desc_i18n": {
         "ja": "「食べることが好きなんです」と話す店主の伊豆和也さん。前職で経営に携わった経験や転勤で日本各地のグルメを味わったことも活かし、脱サラして神田淡路町の名店『麺巧 潮（めんこう うしお）』で修業、2019年に開店しました。 メニューは「淡麗醤油」と「濃厚煮干し」の2本柱。「淡麗醤油」のスープは4種類の醤油をブレンドし、火入れと熟成で完成まで1週間かけた、醤油のうまみが効いた味です。しっかりした歯応えの麺は修業先で身につけた製麺の経験と技術を活かし、製麺所に特注しているもの。 独立当初は都心への出店も考えていたといいますが、「西新井の地元住民の方々やたくさんの常連のお客さまに支えられたこともあり、ここで恩返しをしていきたいです」と伊豆さん。「西新井駅前再開発による立ち退きのため北千住に移転しますが、そこはあくまで2号店。いつか本店を西新井につくります」。 ※2024年12月に北千住へ移転。 ※ 本ページの内容は、「心もあたたまる極上ラーメン」の記事を基に作成しております。 ※ この情報は、2024年10月23日時点のものです",
-        "zh": "北千住站西口的酱油拉面店，叉烧溏心蛋配料丰富。",
-        "en": "Shoyu ramen near Kitasenju west exit, loaded with chashu and ajitama.",
-        "ko": "기타센주 서쪽 출구 간장 라멘. 차슈와 반숙란이 푸짐."
+        "zh": "\"就是喜欢美食\"，店主伊豆和也说。他活用前职经营经验与调职时尝遍日本各地美食的阅历，辞去公司职务后在神田淡路町名店\"麺巧 潮\"修业，于2019年开店。菜单以\"淡丽酱油\"与\"浓厚煮干\"两大柱为核心。\"淡丽酱油\"的汤底融合四种酱油，经过加热与熟成、历时一周完成，酱油的鲜味突出；面条嚼劲扎实，是活用修业所学制面经验与技术、向制面所特别定制的。独立时也曾考虑进驻都心，\"但一直被西新井的本地居民和众多常客支持，想在这里报答大家\"，伊豆说。\"因西新井站前再开发需要搬迁，将移至北千住，但那只是2号店。总有一天会把本店开在西新井。\"※2024年12月已迁至北千住。※本页内容基于《温暖人心的顶级拉面》报道编撰。※信息截至2024年10月23日。",
+        "en": "\"I just love food,\" says owner Izu Kazuya. Drawing on management experience from his old job and tastes gathered through transfers all over Japan, he left the corporate world, trained at the acclaimed Kanda-Awajicho shop \"Menko Ushio,\" and opened here in 2019. The menu stands on two pillars: \"tanrei shoyu\" (light soy) and \"noukou niboshi\" (rich dried-sardine). The soy broth blends four kinds of soy sauce and takes a full week — searing and aging — to finish, with the umami of the soy forward. The chewy noodles are specially ordered from a mill using the techniques he learned in training. He once considered opening in central Tokyo, but \"the local people of Nishiarai and many regulars have supported me, so I want to give back here,\" says Izu. \"I'll move to Kitasenju because of the redevelopment in front of Nishiarai Station, but that's just a second shop. Someday I'll build the main shop in Nishiarai.\" ※Moved to Kitasenju in December 2024. ※Based on the article \"Heartwarming Premium Ramen.\" ※As of October 23, 2024.",
+        "ko": "\"먹는 걸 좋아해요\"라고 말하는 주인장 이즈 카즈야. 전직에서 경영에 참여한 경험과 전근으로 일본 각지의 미식을 맛본 것도 살려 회사를 그만두고 간다아와지초의 명점 \"멘코 우시오\"에서 수련한 뒤 2019년에 개업했어요. 메뉴는 \"담려 간장\"과 \"진한 니보시\" 두 축. \"담려 간장\" 수프는 4종 간장을 블렌드해 가열과 숙성으로 완성까지 1주일 걸린, 간장의 감칠맛이 살아있는 맛이에요. 쫄깃한 면은 수련처에서 익힌 제면 경험과 기술을 살려 제면소에 특주한 것. 독립 당시 도심 출점도 생각했다고 하지만 \"니시아라이 지역 주민들과 많은 단골 손님에게 지지받아 여기서 보답하고 싶어요\"라고 이즈 씨. \"니시아라이역 앞 재개발로 키타센주로 이전하지만, 그건 어디까지나 2호점. 언젠가 본점을 니시아라이에 만들 거예요.\" ※2024년 12월 키타센주로 이전. ※본 페이지 내용은 \"마음도 따뜻해지는 최고의 라멘\" 기사를 바탕으로 작성했어요. ※정보 기준일: 2024년 10월 23일."
       },
       "hours_i18n": {
         "ja": "（火～土）11:00〜21:00・（日）11:00〜16:00（LO.閉店15分前）（定休日月曜、第2・4火曜）",
@@ -30883,9 +30883,9 @@ window.RAILWAY_TOURISM = {
       },
       "desc_i18n": {
         "ja": "浄瑠璃のひとつ・新内節（しんないぶし）の曲名からとった名を冠する喫茶店『蘭蝶』。店内にはいつもオールディーズの名曲が流れています。「音楽がいいね、と言ってくれるお客さんも多いですよ」と店主の岡田さん。以前は貸切でライブを開催することも多かったとか。 岡田さんの両親がこの店をオープンしたのが1969年のこと。「半世紀以上、元旦以外は休むことなく毎日営業しています」と岡田さんは胸を張る。1987年に建て替えて以来の建物は、当時の空気をそのまま閉じ込めたかのような内装。過去には映画やドラマのロケ地にもなったほか、アイドルグループのミュージックビデオに登場したことからファンが訪れることも多いそう。 創業当時からほとんど変わっていないというメニューのなかで、人気なのはやはりナポリタン。濃厚なトマトケチャップの味が麺にしっかりと絡んだ“喫茶店の味”は絶品です。 ※ 本ページの内容は、「レトロを楽しむ 街の純喫茶」の記事を基に作成しております。 ※ この情報は、2024年6月17日時点のものです",
-        "zh": "绫濑站步行5分钟的老牌喫茶店，经典ナポリタン意面配咖啡。",
-        "en": "Long-running kissaten 5 min from Ayase; classic napolitan spaghetti with coffee.",
-        "ko": "아야세 도보 5분, 나폴리탄이 명물인 오래된 찻집."
+        "zh": "店名取自净琉璃的一种·新内节的曲名。店内总流淌着老歌金曲。\"说「音乐真不错」的客人很多哦\"，店主冈田说，以前还常包场举办现场演出。冈田的父母于1969年开了这家店。\"半个多世纪以来，除元旦外天天营业，从不休息\"，冈田自豪地说。1987年改建以来的建筑，内装仿佛将当时的气息原封不动封存其中。过去不仅做过电影、电视剧的取景地，还因出现在偶像团体的MV中而常有粉丝到访。在创业以来几乎未变的菜单中，最受欢迎的还是那不勒斯意面。浓郁番茄酱的滋味充分裹在面条上的\"喫茶店之味\"，堪称绝品。※本页内容基于《乐享复古·街角纯喫茶》报道编撰。※信息截至2024年6月17日。",
+        "en": "The name comes from a piece of shinnai-bushi, a style of joruri narrative music. Oldies always play in the shop. \"Lots of customers tell me the music is nice,\" says owner Okada, who used to host live performances by private hire. His parents opened the café in 1969. \"For over half a century we've been open every single day except New Year's Day,\" Okada boasts. The building, rebuilt in 1987, feels as if it has preserved the air of that era. The shop has served as a film and drama location, and fans often visit after an idol group's music video featured it. Of the menu, barely changed since the beginning, the favorite is still Napolitan — tomato-ketchup-rich sauce clinging firmly to the noodles, the definitive kissaten taste. ※Based on the article \"Enjoy Retro: Neighborhood Kissaten.\" ※As of June 17, 2024.",
+        "ko": "조루리(일본 전통 설창)의 하나인 신나이부시 곡명에서 딴 이름의 커피숍. 매장에는 언제나 올디즈 명곡이 흘러요. \"\"음악이 좋네\"라고 말해 주는 손님도 많아요\"라고 하는 주인장 오카다. 예전에는 대관으로 라이브를 열기도 자주 했다고. 오카다 씨 부모님이 이 가게를 연 게 1969년. \"반세기 넘게 정월 초하루 빼고는 쉬는 날 없이 매일 영업해요\"라고 오카다 씨는 자랑해요. 1987년에 재건축한 이후의 건물은 그 시절 공기를 그대로 담은 듯한 인테리어. 과거에는 영화·드라마 촬영지가 되기도 했고 아이돌 그룹 뮤직비디오에 등장한 뒤 팬들이 자주 찾기도 한다고. 창업 당시부터 거의 변하지 않았다는 메뉴 중 인기는 역시 나폴리탄. 진한 토마토 케첩 맛이 면에 잘 배인 \"커피숍의 맛\"은 절품이에요. ※본 페이지 내용은 \"레트로를 즐기는 동네 퓨어 커피숍\" 기사를 바탕으로 작성했어요. ※정보 기준일: 2024년 6월 17일."
       },
       "hours_i18n": {
         "ja": "8:00〜21:00（日・祝は〜20:00）（定休日無）",
@@ -31031,9 +31031,9 @@ window.RAILWAY_TOURISM = {
       },
       "desc_i18n": {
         "ja": "飲食業界に長く携わってきた店主の柴田ロナルドブライアンさん。もともとバーをやりたかったという柴田さんがにんにく料理専門店をオープンしたのは、青森県産のブランドにんにく「福地ホワイト」との出会いがきっかけでした。「福地ホワイトだからこそ、メニューの幅も広がりました。にんにくってこんなにおいしい！ということを伝えたい」と柴田さん。「福地ホワイト」はフルーツにんにくと呼ばれるほど水分量が多く、食べやすくて嫌なにおいも残らないのが特徴です。 にんにくペーストをたっぷり使った「かるぼな〜ら」は、牛乳やバターを使わないため、濃厚な味わいなのにさっぱりとしていて重たくないのが魅力。「にんにくのアヒージョ」ならほくほくとしてやわらかいにんにくを堪能できます。にんにく好きはもちろん、苦手な方でもぜひ試してみたい一品ばかりです。 ※ 本ページの内容は、「格別！ 五反野グルメに舌鼓」の記事を基に作成しております。 ※ この情報は、2024年9月20日時点のものです",
-        "zh": "五反野站附近的大蒜主题小酒馆，整蒜阿吉约与大蒜菜肴配啤酒。",
-        "en": "Garlic-themed izakaya near Gotanno; whole-garlic ajillo and garlic dishes with beer.",
-        "ko": "고탄노 근처 마늘 테마 선술집. 통마늘 아히요와 요리."
+        "zh": "在餐饮业打拼多年的店主柴田罗纳德·布莱恩。原本想做酒吧的柴田，开设大蒜料理专门店的契机是与青森县产名牌大蒜\"福地白\"的相遇。\"正因为是福地白，菜单的幅度也变宽了。想告诉大家大蒜竟能这么好吃！\"，柴田说。\"福地白\"被称为水果大蒜，水分多、易入口，而且不会留下难闻的气味。大量使用大蒜酱的\"かるぼな〜ら\"，因不使用牛奶和黄油，浓郁却清爽不腻。若是\"大蒜阿希霍\"，可以尽情品尝粉糯软嫩的大蒜。不仅大蒜爱好者，就连平时不吃的人也值得一试。※本页内容基于《绝妙！五反野美食盛宴》报道编撰。※信息截至2024年9月20日。",
+        "en": "Owner Shibata Ronald Brian has spent years in the restaurant trade. He originally wanted a bar, but a meeting with Aomori's branded garlic \"Fukuchi White\" led him to open a garlic specialist. \"Because it's Fukuchi White, the menu could expand this much. I want to tell everyone how delicious garlic can be!\" says Shibata. Dubbed \"fruit garlic,\" Fukuchi White is high in moisture, easy to eat and leaves no unpleasant odor. The \"Calbo-na~ra,\" loaded with garlic paste, uses no milk or butter — rich but refreshing, never heavy. The \"garlic ajillo\" lets you savor soft, fluffy whole garlic. Dishes made for garlic lovers — and well worth a try even for those who aren't. ※Based on the article \"Exceptional! Gotanno Gourmet.\" ※As of September 20, 2024.",
+        "ko": "외식업계에 오래 몸담아 온 주인장 시바타 로널드 브라이언. 원래 바를 하고 싶었다는 시바타 씨가 마늘 요리 전문점을 연 계기는 아오모리현산 브랜드 마늘 \"후쿠치 화이트\"와의 만남. \"후쿠치 화이트라서 메뉴의 폭도 넓어졌어요. 마늘이 이렇게 맛있다는 걸 알리고 싶어요!\"라고 시바타 씨. \"과일 마늘\"이라 불릴 만큼 수분이 많아 먹기 쉽고 나쁜 냄새도 남지 않는 것이 특징. 마늘 페이스트를 듬뿍 쓴 \"카르보나~라\"는 우유와 버터를 쓰지 않아 진한데도 산뜻하고 무겁지 않아요. \"마늘 아히요\"라면 포근포근 부드러운 마늘을 마음껏 즐길 수 있어요. 마늘 애호가는 물론 마늘을 못 먹는 분들도 꼭 시도해 보고 싶은 메뉴뿐이에요. ※본 페이지 내용은 \"각별해! 고탄노 미식에 감탄\" 기사를 바탕으로 작성했어요. ※정보 기준일: 2024년 9월 20일."
       },
       "hours_i18n": {
         "ja": "17:00〜23:00（定休日火曜・水曜）",
@@ -31105,9 +31105,9 @@ window.RAILWAY_TOURISM = {
       },
       "desc_i18n": {
         "ja": "『Bistro un saule』として2014年にオープンし、2024年2月にリニューアル。フレンチを土台に和やモダンを組み合わせた創作料理の店に生まれ変わりました。 「五反野の街だけでなく、世界に向けて日本料理の魅力を発信したい」と、店主の一柳晶紀さん。魚介たっぷりのパエリア出汁で炊く「欧風土鍋御飯」は、和洋の魅力が調和した味に箸が止まらなくなること間違いなし。蒸し料理にもこだわっているといい、色とりどりの採れたて野菜を味わえる「安曇野（あずみの）野菜の蒸し野菜盛」は多いときで10種以上もの野菜がせいろに並びます。ほかにも、シュウマイや餃子はヨーロッパの練り物と組み合わせるなど、工夫と遊び心が光る料理ばかり。アルコールも、ワインのほかホッピーや日本酒、焼酎まで幅広く取り揃えています。新しい味との出会いが楽しみなお店です。 ※ 本ページの内容は、「格別！ 五反野グルメに舌鼓」の記事を基に作成しております。 ※ この情報は、2024年9月20日時点のものです",
-        "zh": "五反野站步行6分钟的创意小酒馆，蒸笼蔬菜与时令前菜。",
-        "en": "Creative bistro 6 min from Gotanno with steamed vegetables and seasonal appetizers.",
-        "ko": "고탄노 도보 6분, 찜 채소와 계절 전채가 있는 비스트로."
+        "zh": "2014年以\"Bistro un saule\"开业，2024年2月翻新，转型为以法餐为基础、融合和风与现代风格的创作料理店。\"想把日本料理的魅力不仅传给五反野的街区，更传向世界\"，店主一柳晶纪说。用海鲜满满的海鲜饭高汤炊煮的\"欧风土锅御饭\"，和洋魅力交融，美味到让人停不下筷子。对蒸菜也颇为讲究，色彩缤纷的新鲜时蔬\"安昙野蔬菜蒸笼拼盘\"最多时一笼超过10种蔬菜。此外，烧麦与饺子搭配欧洲鱼糕等，处处是巧思与玩心。酒类方面，除葡萄酒外还备有Hoppy、日本酒、烧酒等广泛选择。期待与新味道的相遇。※本页内容基于《绝妙！五反野美食盛宴》报道编撰。※信息截至2024年9月20日。",
+        "en": "Opened in 2014 as \"Bistro un saule\" and reborn in February 2024 as creative cooking built on French roots blended with Japanese and modern touches. \"I want to share the appeal of Japanese cooking not just with Gotanno but with the world,\" says owner Ichiryu Akinori. The \"European earthen-pot rice\" cooked in a paella-style broth brimming with seafood is a harmony of East and West that you can't stop eating. Steaming gets the same care: the \"Azumino vegetable steamer platter\" can hold 10-plus kinds of fresh seasonal vegetables. Shumai and gyoza are paired with European-style fish paste — inventive, playful dishes throughout. Beyond wine, the drinks list spans Hoppy, sake and shochu. A place to look forward to meeting new flavors. ※Based on the article \"Exceptional! Gotanno Gourmet.\" ※As of September 20, 2024.",
+        "ko": "2014년 \"비스토로 앙 솔\"로 문을 열어 2024년 2월 리뉴얼. 프렌치를 기반으로 일본과 모던을 결합한 창작 요리집으로 다시 태어났어요. \"고탄노 거리뿐 아니라 세계를 향해 일본 요리의 매력을 알리고 싶어요\"라고 하는 주인장 이치류 아키노리. 해산물 가득한 파에야 육수로 짓는 \"유럽풍 뚝배기 밥\"은 화양의 매력이 조화된 맛에 젓가락이 멈추지 않게 돼요. 찜 요리에도 공을 들인다는데 알록달록한 제철 채소를 즐기는 \"아즈미노 채소 찜\"은 많을 때 10종 이상의 채소가 시루에 올라가요. 그 외에도 슈마이·교자는 유럽풍 어묵과 조합하는 등 아이디어와 장난기가 빛나는 요리뿐. 주류도 와인 외에 호피, 일본주, 소주까지 폭넓게 갖춰요. 새로운 맛과의 만남이 기대되는 가게예요. ※본 페이지 내용은 \"각별해! 고탄노 미식에 감탄\" 기사를 바탕으로 작성했어요. ※정보 기준일: 2024년 9월 20일."
       },
       "hours_i18n": {
         "ja": "17:00〜24:00（定休日火曜）",
@@ -31179,9 +31179,9 @@ window.RAILWAY_TOURISM = {
       },
       "desc_i18n": {
         "ja": "配送専門の青果店であり、都内でサラダのテイクアウト専門店も営む「野菜の丸平」が2023年から始めたかき氷店。「メンバーでアイディアを出し合って、何軒も食べてまわったり、いくつも試作したりしました」とスタッフの廣野さん。フルーツを引き立てるための氷の形や乗せ方など、試行錯誤を重ねたといいます。 5〜6種類あるかき氷はどれもフルーツが主役。老舗の純氷メーカー「小野田商店」の氷を使用し、果汁たっぷりな自家製フルーツソースと練乳がかかっています。プロが旬を見極めた新鮮なフルーツをこれだけ贅沢に楽しむことができるとあらば、毎週のように食べに来るお客さんがいるというのも納得です。 店内には、社長自らデザインしたというお店のロゴや、創作の「グルメ賞ノミネート」というステッカーなど、遊び心たっぷりで待ち時間も楽しめそうです。 ※ 本ページの内容は、「ひんやりと幸せ気分のかき氷」の記事を基に作成しております。 ※ この情報は、2024年8月15日時点のものです",
-        "zh": "西新井大师西站附近的咖啡甜品店，巨大蜜瓜刨冰是招牌。",
-        "en": "A cafe near Nishiaraidaishi-nishi; giant melon shaved ice is the signature.",
-        "ko": "니시아라이타이시니시 근처. 거대 멜론 빙수가 시그니처."
+        "zh": "专营配送的青果店、在都内经营沙拉外卖专门店的\"野菜の丸平\"，于2023年推出的刨冰店。\"大家一起出点子，连吃好几家店、反复试作\"，店员广野说。为了凸显水果，冰的形状、摆放方式等都经过了反复摸索。5~6种刨冰全都是水果唱主角。使用老牌纯冰厂商\"小野田商店\"的冰，淋上果汁满满的自制水果酱与炼乳。当季水果由专业人士把关，能如此奢侈地享用，难怪每周都来吃的客人络绎不绝。店内还有社长亲自设计的Logo、原创的\"美食奖提名\"贴纸等，充满玩心，等待的时间也不无聊。※本页内容基于《清凉的幸福时光·刨冰》报道编撰。※信息截至2024年8月15日。",
+        "en": "\"Yasai no Maruhei\" — a delivery-focused produce store that also runs salad takeout shops in Tokyo — started this shaved-ice shop in 2023. \"We pooled ideas, ate our way around countless shops and ran many trials,\" says staffer Hirono. The shape of the ice and how fruit sits on it were refined over and over to let the fruit shine. All five or six varieties are fruit-forward, served on ice from veteran pure-ice maker \"Onoda Shoten,\" finished with juice-rich homemade fruit sauce and condensed milk. With professionals picking peak-season fruit this lavishly, it's no wonder some customers come almost weekly. The shop logo, designed by the president himself, and playful stickers like a \"Gourmet Award Nominee\" keep even the wait entertaining. ※Based on the article \"Cool, Happy Moments: Shaved Ice.\" ※As of August 15, 2024.",
+        "ko": "배송 전문 청과점이자 도쿄에서 샐러드 테이크아웃 전문점도 운영하는 \"야사이노 마루헤이\"가 2023년부터 시작한 빙수집. \"멤버들이 아이디어를 모아 여러 가게를 먹어 다니고 여러 번 시제품을 만들었어요\"라고 말하는 스태프 히로노. 과일을 살리기 위한 얼음 모양이나 올리는 방식까지 시행착오를 거듭했다고. 5~6종의 빙수는 전부 과일이 주인공. 노포 순빙 제조사 \"오노다 상점\"의 얼음을 사용하고 과즙 가득한 수제 과일 소스와 연유를 뿌려요. 프로가 제철을 골라낸 신선한 과일을 이렇게 호화롭게 즐길 수 있다니 매주 찾는 손님이 있다는 것도 수긍이 돼요. 매장에는 사장이 직접 디자인했다는 로고와 창작 \"미식상 후보\" 스티커 등 장난기 가득해 대기 시간도 즐거워요. ※본 페이지 내용은 \"시원하고 행복한 빙수\" 기사를 바탕으로 작성했어요. ※정보 기준일: 2024년 8월 15일."
       },
       "hours_i18n": {
         "ja": "店舗による",
@@ -31253,9 +31253,9 @@ window.RAILWAY_TOURISM = {
       },
       "desc_i18n": {
         "ja": "店主の中田洋子さんが、自宅の倉庫を改装して喫茶店にしたのが2010年のこと。2021年から提供を始めたかき氷は3〜4種類で、なかでも「珈琲」はコーヒーが自慢の喫茶店ならでは。氷の中にはコーヒーゼリーとバニラアイスが入っていて、最後まで飽きることなく楽しめます。 コーヒーは、以前中田さんが近くに住んでいたという京都の『小川珈琲』の豆を使用。「この店でしか食べられないものというコンセプトで考えています」と中田さんが話すように、「コーヒーぜんざい」や「ナポリうどん」など食事メニューは工夫が光るラインナップ。お客さんのリクエストをきっかけに始まった、中田さんの長女・美香さんが作る土・日限定のケーキも評判です。 「井戸端介護」というイベントも定期的に実施するなど、地域の交流の場としてもにぎわう『珈琲はんなり』。おいしいコーヒーと食事はもちろん、おしゃべりを楽しみに訪れる方も多そうです。 ※ 本ページの内容は、「ひんやりと幸せ気分のかき氷」の記事を基に作成しております。 ※ この情報は、2024年8月15日時点のものです",
-        "zh": "大师前站附近的木造咖啡屋，黑蜜黄豆粉刨冰温润治愈。",
-        "en": "Wooden café near Daishimae; warm brown-sugar kinako shaved ice.",
-        "ko": "다이시마에 근처 나무 찻집. 흑밀강 콩가루 빙수."
+        "zh": "店主中田洋子将自家仓库改装成喫茶店，始于2010年。2021年开始供应的刨冰有3~4种，其中\"咖啡\"款是自家咖啡引以为傲的喫茶店才有的味道——冰块里藏着咖啡果冻与香草冰淇淋，可以一直享受到最后。咖啡豆选用中田曾住在附近时的京都\"小川珈琲\"。正如中田所说\"以只有这家店才能吃到的东西为理念\"，从\"咖啡善哉\"到\"那不勒斯乌冬\"，餐点菜单处处见巧思。因客人要求而开始、由中田长女美香制作的周末限定蛋糕也广受好评。定期举办\"井戸端介護\"活动等，作为地区交流场所热闹非凡。美味的咖啡与餐点自不必说，冲着闲聊而来的客人也很多。※本页内容基于《清凉的幸福时光·刨冰》报道编撰。※信息截至2024年8月15日。",
+        "en": "Owner Nakada Yoko converted her home storehouse into a kissaten (traditional café) in 2010. Shaved ice appeared in 2021 in three or four varieties; the \"coffee\" one is special to a shop proud of its coffee — coffee jelly and vanilla ice cream hidden inside the ice, good to the last bite. The beans come from Kyoto's \"Ogawa Coffee,\" where Yoko once lived nearby. As she says, \"we aim for things you can eat only here,\" so the food menu shines with inventions like \"coffee zenzai\" and \"Napolitan udon.\" Weekend-only cakes by her eldest daughter Mika, born from customer requests, are a hit too. Regularly hosting \"Idobata Kaigo\" gatherings and more, the shop bustles as a community hub — fine coffee and food, of course, but plenty of guests come just to chat. ※Based on the article \"Cool, Happy Moments: Shaved Ice.\" ※As of August 15, 2024.",
+        "ko": "주인장 나카다 요코가 자택 창고를 개조해 커피숍으로 만든 게 2010년. 2021년부터 시작한 빙수는 3~4종으로, 그중 \"커피\"는 커피에 자부심 있는 커피숍다운 메뉴. 얼음 속에 커피 젤리와 바닐라 아이스크림이 들어 있어 끝까지 질리지 않고 즐길 수 있어요. 커피 원두는 예전에 근처에 살았다는 교토 \"오가와 커피\"의 것. \"이 가게에서만 먹을 수 있는 것을 콘셉트로 생각해요\"라는 말처럼 \"커피 젠자이\" \"나폴리 우동\" 등 식사 메뉴도 아이디어가 돋보여요. 손님 요청으로 시작해 장녀 미카가 만드는 주말 한정 케이크도 평판이 좋아요. \"이도바타 개호\"라는 행사도 정기적으로 여는 등 지역 교류의 장으로 북적여요. 맛있는 커피와 식사는 물론, 수다를 즐기러 찾는 손님도 많을 것 같아요. ※본 페이지 내용은 \"시원하고 행복한 빙수\" 기사를 바탕으로 작성했어요. ※정보 기준일: 2024년 8월 15일."
       },
       "hours_i18n": {
         "ja": "11:00〜17:00（土曜・日曜は12:00〜）（定休日水曜、第2・4火曜）",
@@ -31327,9 +31327,9 @@ window.RAILWAY_TOURISM = {
       },
       "desc_i18n": {
         "ja": "舎人氷川神社の参道脇にあるこの店がオープンしたのは2020年。当初は喫茶店としてのスタートで、その後カレーもメニューに加わりました。 「独学でカレーを作っていた友人が、あちこちのお店を食べ歩いて完成させた味なんですよ」と話すのは、オーナーの柿沼節也さん。ほろりと崩れるやわらかなチキンが絶品の「チキン2辛」は、鰹出汁を効かせた大阪スタイルのスパイスカレー。スパイスの向こうにしっかりと旨みを感じられます。 もうひとつの名物が、オープン当初に考案したキューバサンド。柿沼さんが旅先で食べた味をアレンジしたもので、辛いものが苦手でカレーを食べられない子ども連れに重宝されているそうです。 さらに、自家製のデザートも人気。サラダ・ケーキ・ドリンクをつけられる豪華3点セット880円を追加すれば、大満足のランチ＆カフェタイムになりそうです。 ※ 本ページの内容は、「スパイス香り立つ！ 絶品カレー」の記事を基に作成しております。 ※ この情報は、2024年8月13日時点のものです",
-        "zh": "见沼亲水公园站附近的喫茶店，香料鸡肉咖喱配藏红花饭。",
-        "en": "Kissaten near Minuma-Shinsui-Koen; spice chicken curry with saffron rice.",
-        "ko": "미누마신스이코엔 근처. 향신료 치킨 커리에 사프란 라이스."
+        "zh": "位于舎人氷川神社参道旁，2020年开业。起初是喫茶店，后来菜单里加入了咖喱。\"自学做咖喱的朋友吃遍各家店、反复打磨而成的味道\"，店主柿沼节也说。入口即化的软嫩鸡肉堪称绝品的\"鸡肉2辛\"，是加入鲣鱼高汤的大阪风香料咖喱，香料之下能扎实地感受到鲜味。另一道名物是开业之初构思的古巴三明治。这是柿沼将旅途中吃到的味道改良而来，据说对不吃辣、吃不了咖喱的带娃家庭特别有用。此外自制甜点也人气十足。追加880日元即可得到沙拉+蛋糕+饮品的高级3点套餐，午餐&咖啡时光必将大满足。※本页内容基于《香气四溢！绝品咖喱》报道编撰。※信息截至2024年8月13日。",
+        "en": "By the approach to Toneri Hikawa Shrine, opened in 2020 — first as a kissaten, with curry added later. \"A friend who taught himself to make curry toured countless shops to perfect this flavor,\" says owner Kakinuma Setsuya. The \"Chicken 2-kara,\" with fall-apart tender chicken, is an Osaka-style spice curry with katsuo (bonito) broth — real umami behind the spices. Another signature is the Cuban sandwich devised at opening, adapting a taste Kakinuma found while traveling; reportedly a lifesaver for families with kids who can't handle spicy curry. Homemade desserts are popular too, and a lavish 880-yen set adds salad, cake and a drink for a thoroughly satisfying lunch-and-café time. ※Based on the article \"Aromatic! Superb Curry.\" ※As of August 13, 2024.",
+        "ko": "토네리 히카와 신사 참배길 옆에 2020년 문을 연 곳. 처음엔 커피숍으로 시작해 나중에 카레가 메뉴에 더해졌어요. \"독학으로 카레를 만들던 친구가 여러 가게를 먹어 다니며 완성한 맛이에요\"라고 말하는 오너 카키누마 세츠야. 흐물흐물 부드러운 치킨이 절품인 \"치킨 2카라\"는 가쓰오 육수를 넣은 오사카 스타일 스파이스 카레. 향신료 너머로 감칠맛이 확실히 느껴져요. 또 하나의 명물은 개업 초에 고안한 쿠바 샌드위치. 카키누마 씨가 여행지에서 먹은 맛을 변형한 것으로 매운 음식을 못 먹는 아이 동반 가족에게 유용하다고 해요. 수제 디저트도 인기. 샐러드·케이크·음료를 골라 담을 수 있는 호화 3종 세트 880엔을 추가하면 알찬 점심&카페 타임이 될 거예요. ※본 페이지 내용은 \"향신료 향기 가득! 절품 카레\" 기사를 바탕으로 작성했어요. ※정보 기준일: 2024년 8월 13일."
       },
       "hours_i18n": {
         "ja": "10:30〜15:00・17:00〜21:00（定休日月曜）",
@@ -31401,9 +31401,9 @@ window.RAILWAY_TOURISM = {
       },
       "desc_i18n": {
         "ja": "カレー店では珍しく深夜3時まで営業しており、2軒目に利用する人も多い『TOS CURRY』。「お客さんとの会話をヒントに新しいメニューを考えることもあります」と店主の佐藤亮志さん。ちょっとしたおつまみから低温調理の肉料理まで、バラエティ豊かなメニューが揃います。 チキンカツカレーは、鶏ガラと野菜の出汁をベースにスパイスとルウでまとめた一皿。ラーメン店で得たアイディアを出発点に、スパイスの配合を勉強しブラッシュアップして完成させた味で、さまざまな飲食店での経験が活かされています。 ミニサラダセットにするとついてくるサラダの自家製ドレッシングは、完全予約制で販売もするほど人気なのだとか。手作りのマヨネーズをベースにゴマ、醤油、ニンニクが効いたくせになる味です。 ほかにもジンギスカンカレーなど、数カ月に一度変わるメニューもあり見逃せません。選ぶ楽しさがあり、次に訪れる際の楽しみも増えそうです。 ※ 本ページの内容は、「スパイス香り立つ！ 絶品カレー」の記事を基に作成しております。 ※ この情報は、2024年8月13日時点のものです",
-        "zh": "梅岛站步行6分钟的咖喱店，炸猪排咖喱饭配黄色米饭。",
-        "en": "Curry shop 6 min from Umejima; katsu curry over yellow rice.",
-        "ko": "우메지마 도보 6분. 카츠 카레에 노란 라이스."
+        "zh": "营业到深夜3点的咖喱店，作为二茬店使用的人很多。\"有时也会以客人的对话为灵感想新菜单\"，店主佐藤亮志说。从轻食小菜到低温烹调的肉料理，菜单丰富多样。鸡排咖喱是以鸡骨与蔬菜高汤为基底、用香料和咖喱糊调和的一盘。以拉面店得来的灵感为起点，钻研香料配比、反复改良而成，融汇了他在多家餐饮店的历练。搭配迷你沙拉套餐附带的沙拉，其自制酱汁人气高到需要完全预约制购买。以自制蛋黄酱为基底，芝麻、酱油、大蒜风味十足，是让人上瘾的味道。此外还有成吉思汗咖喱等数月一换的限定菜单，不容错过。挑选的乐趣与日俱增，下次到访也更值得期待。※本页内容基于《香气四溢！绝品咖喱》报道编撰。※信息截至2024年8月13日。",
+        "en": "A curry shop open until 3 a.m. — rare for the genre — and a favorite second stop of the night. \"Sometimes I think up new menu items from conversations with customers,\" says owner Sato Ryoji. The menu ranges from light snacks to low-temperature-cooked meat dishes. The chicken katsu curry layers spices and roux over a broth of chicken bones and vegetables. Born from ideas picked up at a ramen shop, refined through study of spice blends, the flavor draws on experience at many restaurants. A mini salad set comes with a homemade dressing so popular it is sold separately by reservation — a base of handmade mayonnaise with sesame, soy sauce and garlic for an addictive kick. Seasonal items like Jingisukan curry rotate every few months, worth watching for. The joy of choosing makes every visit something to look forward to. ※Based on the article \"Aromatic! Superb Curry.\" ※As of August 13, 2024.",
+        "ko": "카레집으로는 드물게 새벽 3시까지 영업해 2차로 찾는 손님이 많은 곳. \"손님과의 대화에서 힌트를 얻어 새 메뉴를 생각하기도 해요\"라고 말하는 주인장 사토 료지. 가벼운 안주부터 저온 조리 육류 요리까지 다양한 메뉴가 갖춰져 있어요. 치킨까스카레는 닭뼈와 채소 육수를 베이스로 향신료와 루로 마무리한 한 그릇. 라멘집에서 얻은 아이디어를 출발점으로 향신료 배합을 연구해 다듬은 맛으로 여러 식당 경험이 살아 있어요. 미니 샐러드 세트에 딸려 오는 샐러드의 수제 드레싱은 완전 예약제로 판매할 정도로 인기. 수제 마요네즈에 참깨·간장·마늘이 어우러진 중독성 있는 맛이에요. 그 외에도 진기스칸 카레 등 몇 달에 한 번 바뀌는 메뉴도 있어 놓칠 수 없어요. 고르는 재미가 있고 다음 방문의 즐거움도 커질 것 같아요. ※본 페이지 내용은 \"향신료 향기 가득! 절품 카레\" 기사를 바탕으로 작성했어요. ※정보 기준일: 2024년 8월 13일."
       },
       "hours_i18n": {
         "ja": "17:00〜27:00（金曜・土曜・日曜は12:00〜14:00・17:00〜27:00） ※2024年9月以降は18:00〜27:00（金曜・土曜・日曜は12:00～14:00・18:00～27:00）になります。（定休日水曜 ※2024年9月以降は月曜・第3日曜が定休日になります。）",
@@ -31475,9 +31475,9 @@ window.RAILWAY_TOURISM = {
       },
       "desc_i18n": {
         "ja": "お皿にカレーと副菜を盛り付け、それらを混ぜて味わうのが特徴のひとつでもあるスリランカカレー。「味がひとつではないところがいいなと思いました」と店主・長田勇気さん。バンド活動もしていた長田さんは、音楽のように自由度が高いカレーに可能性を感じたといいます。 看板メニューの「本日のスリランカカレー」は、ココナッツがベースのスリランカの味にアレンジを加えたもので、香り豊かなスパイスとさまざまな味や食感の副菜が絶妙なバランス。使用しているバスマティライスは香りがよく味の主張は控えめで、カレーや副菜の味をより引き立てます。 また、お酒の種類やおつまみにぴったりな一品料理も多く、長田さんのおすすめは白ワイン。夜だけでなく、ランチでもお酒と一緒にカレーを楽しむお客さんも少なくないそうです。 2015年に店を構えて以降、姉妹店「ビリヤニ食堂」「デビルカレー」が北千住にオープンするなど、長田さんが生み出す味はスパイス好きを虜にしています。 ※ 本ページの内容は、「スパイス香り立つ！ 絶品カレー」の記事を基に作成しております。 ※ この情報は、2024年8月13日時点のものです",
-        "zh": "北千住站西口4分钟的南印风蕉叶咖喱定食。",
-        "en": "South-Indian banana-leaf thali 4 min from Kitasenju west exit.",
-        "ko": "기타센주 서쪽 출구 4분, 남인도 바나나 잎 커리 정식."
+        "zh": "将咖喱与配菜盛在同一盘中、边拌边吃的斯里兰卡咖喱，是这家店的特色之一。\"喜欢它味道不单一的地方\"，店主长田勇气说。曾活跃于乐队的长田，从咖喱如音乐般自由的高自由度中看到了可能。招牌的\"今日斯里兰卡咖喱\"以椰子为基底，对斯里兰卡风味加以改良，香料香气馥郁，多样的配菜在味道与口感上达到绝妙平衡。所用的巴斯马蒂香米香气突出、味道克制，更能衬托咖喱与配菜。酒类与下酒小菜也很丰富，长田最推荐白葡萄酒。不仅是夜晚，午餐时边喝酒边吃咖喱的客人也不在少数。自2015年开店以来，北千住相继开出姐妹店\"Biriyani食堂\"\"Devil Curry\"，长田创造的滋味俘获了无数香料爱好者。※本页内容基于《香气四溢！绝品咖喱》报道编撰。※信息截至2024年8月13日。",
+        "en": "Sri Lankan curry where rice, curry and sides are arranged on one plate and mixed together as you eat — that is one of this shop's signatures. \"I love that the flavors aren't just one note,\" says owner Osada Yuki. A former band member, Osada saw in curry the same free-form possibilities as music. The signature \"Today's Sri Lankan Curry\" reworks the coconut-based Sri Lankan style with fragrant spices and a medley of sides in perfect balance of flavor and texture. The basmati rice is aromatic yet mild, letting the curry and sides shine. There is also a wide range of drinks and bar snacks — Osada's pick is white wine. Plenty of guests enjoy curry with alcohol even at lunch, not just at night. Since opening in 2015, sister shops \"Biriyani Shokudo\" and \"Devil Curry\" have joined him in Kitasenju, and his cooking keeps winning over spice lovers. ※Based on the article \"Aromatic! Superb Curry.\" ※As of August 13, 2024.",
+        "ko": "접시에 카레와 반찬을 함께 담아 비벼 먹는 스리랑카 카레가 이 집의 특징 중 하나예요. \"맛이 하나가 아닌 점이 좋았어요\"라고 말하는 주인장 오사다 유키. 밴드 활동을 하기도 했던 그는 음악처럼 자유도 높은 카레에서 가능성을 느꼈다고 해요. 시그니처 \"오늘의 스리랑카 카레\"는 코코넛 베이스의 스리랑카 맛을 변형한 것으로 향긋한 향신료와 다양한 맛·식감의 반찬이 절묘한 균형을 이뤄요. 쓰는 바스마티 쌀은 향이 좋고 맛이 절제되어 카레와 반찬을 더 살려줘요. 술과 안주도 다양하며 주인장 추천은 화이트 와인. 밤뿐 아니라 점심에도 술과 함께 카레를 즐기는 손님이 적지 않다고 해요. 2015년 개업 이후 자매점 \"비리야니 식당\" \"데빌 카레\"가 키타센주에 문을 여는 등 오사다 씨의 맛은 향신료 마니아를 사로잡고 있어요. ※본 페이지 내용은 \"향신료 향기 가득! 절품 카레\" 기사를 바탕으로 작성했어요. ※정보 기준일: 2024년 8월 13일."
       },
       "hours_i18n": {
         "ja": "11:30～21:00（カレーが無くなり次第終了）（定休日不定休）",
@@ -31549,9 +31549,9 @@ window.RAILWAY_TOURISM = {
       },
       "desc_i18n": {
         "ja": "大切に育てるという意味の「かしづく」と「菓子好き」をかけた店名のこの店は、月に2回ほど営業する駄菓子店。理学療法士である佐々木隆紘さんが2021年にスタートし、2023年に一度移転しました。 佐々木さんが患者と接するなかで、子どもの成長には親以外の大人と触れ合う場が必要と考えたことが開業のきっかけ。「些細な変化に気づいたり、相手を肯定する言葉選びをしたりすることを心がけています」と佐々木さん。学校帰りの子どもたちが真剣に駄菓子を選んだり、佐々木さん夫妻とおしゃべりしたり、営業日の夕方は和気あいあいとした雰囲気。地域の子どもたちのサードプレイスであり、大人たちとの接点としても機能しています。 駄菓子に夢中なのは子どもだけではなく、一緒に訪れた両親も楽しんでいることも多いとか。佐々木さんの学生時代のつながりをきっかけに、店の理念に共感し応援してくれる車椅子バスケの選手もよく訪れており、地域の交流の場を楽しんでいます。 ※ 本ページの内容は、「世代を超えて楽しめる！ 心踊る駄菓子屋」の記事を基に作成しております。 ※ この情報は、2024年7月3日時点のものです",
-        "zh": "北绫濑站附近的怀旧零食店，玻璃罐装平价复古零食。",
-        "en": "Nostalgic dagashi shop near Kita-Ayase; cheap retro candy in jars.",
-        "ko": "기타아야세 근회 추억의 간식점. 단지에 담긋 싼 옛날 과자."
+        "zh": "店名取自\"かしづく（悉心培育）\"与\"喜欢零食\"的双关，每月营业约两次的怀旧零食店。由理学治疗师佐佐木隆纮于2021年创办，2023年曾迁址一次。佐佐木在接触患者时感到，孩子的成长需要与父母之外的大人接触的场所，这便是开店的契机。\"留意细微的变化，注意选择肯定对方的措辞\"，佐佐木说。放学后的孩子们认真地挑选零食、与佐佐木夫妇闲聊，营业日的傍晚充满和乐的氛围。这里既是地区孩子们的\"第三空间\"，也承担着他们与大人之间的连接点。沉浸在零食中的不只孩子，同来的父母也常常乐在其中。因佐佐木学生时代的人脉而认同这家店理念、前来支持的轮椅篮球选手也时常到访，尽情享受这片地区交流的场所。※本页内容基于《跨越世代同乐！令人心动的零食店》报道编撰。※信息截至2024年7月3日。",
+        "en": "The name plays on \"kashizuku\" (to nurture with care) and \"kashi-zuki\" (snack lover). This retro candy shop opens about twice a month. Physiotherapist Sasaki Takahiro started it in 2021 and relocated once in 2023. Meeting patients convinced him that children need places to interact with adults other than their parents — that became the reason he opened. \"I try to notice small changes and choose words that affirm people,\" says Sasaki. After school, kids pick candy in earnest, chat with the Sasaki couple, and weekday evenings fill with a warm, friendly buzz. The shop is a \"third place\" for local children and a bridge to adults as well. And it isn't just kids who get lost in the candy — parents who come along often enjoy it too. Wheelchair basketball players who connected with Sasaki through his student days and believe in the shop's mission also drop by often, savoring this hub of community exchange. ※Based on the article \"A Candy Shop That Delights Across Generations.\" ※As of July 3, 2024.",
+        "ko": "\"소중히 키운다\"는 뜻의 \"카시즈쿠\"와 \"과자 좋아함\"을 겹친 가게 이름. 월 2회쯤 여는 복고풍 과자가게예요. 물리치료사 사사키 타카히로가 2021년 시작했고 2023년에 한 번 이전했어요. 환자들을 만나면서 아이의 성장에는 부모 외의 어른과 접할 장소가 필요하다고 느낀 것이 개업 계기. \"사소한 변화를 알아차리고 상대를 긍정하는 말을 고르는 것을 마음에 새기고 있어요\"라고 사사키 씨는 말해요. 하교길 아이들이 진지하게 과자를 고르고 사사키 부부와 수다를 떨며, 영업일 저녁은 화기애애한 분위기예요. 지역 아이들의 \"제3의 공간\"이자 어른들과의 접점으로도 기능해요. 과자에 빠지는 건 아이들만이 아니에요. 함께 온 부모님들도 즐기는 경우가 많다고. 사사키 씨 학창 시절 인연으로 가게 이념에 공감해 응원해 주는 휠체어 농구 선수들도 자주 찾아와 지역 교류의 장을 즐겨요. ※본 페이지 내용은 \"세대를 넘어 함께 즐기는! 마음 설레는 과자가게\" 기사를 바탕으로 작성했어요. ※정보 기준일: 2024년 7월 3일."
       },
       "hours_i18n": {
         "ja": "店舗による",
@@ -31623,9 +31623,9 @@ window.RAILWAY_TOURISM = {
       },
       "desc_i18n": {
         "ja": "2019年にオープンした駄菓子と雑貨の店。「近所には幼稚園や小学校もあるし、少しでも子どもたちが遊ぶ場所をつくれたらいいなと思って」と店主の小倉さん。当時、老齢の愛犬と一緒に過ごせる働き方を探していたことがきっかけとなり、それが店名の由来にもなっています。また、地域猫であり看板猫だった故・しろちゃんのファンも多かったとか。 店内には中央に大きな雛壇があり、そこに所狭しと駄菓子が並ぶ様子は圧巻です。自宅の車庫を改装した店内はDIYで、小倉さんの家族がお店を作る仕事の経験を活かして考えたもの。『ドラえもん』のマンガの絵をもとに図面を書き起こして発注した「どこでもドア」など、こだわりがたっぷり詰まった空間です。 2〜3軒の問屋から仕入れるという駄菓子は数えきれないほどの種類がそろい、おもちゃも含めると約600種も！ ついつい目移りしてしまいます。 ※ 本ページの内容は、「世代を超えて楽しめる！ 心踊る駄菓子屋」の記事を基に作成しております。 ※ この情報は、2024年7月3日時点のものです",
-        "zh": "北千住站西口的复古玩具杂货店，彩饰缤纷的小店。",
-        "en": "Colorful retro toy & sundry shop near Kitasenju west exit.",
-        "ko": "기타센주 서쪽 출구, 알록달록 복고 장난감 잡화점."
+        "zh": "2019年开业的零食与杂货店。\"附近有幼儿园和小学，想尽量给孩子们一个玩耍的地方\"，店主小仓说。当时他正在寻找能与年迈爱犬共度时光的工作方式，这成为开店的契机，店名也由此而来。看板猫、已故的\"小小白\"（しろちゃん）也拥有众多粉丝。店内中央有一座大型陈列台，上面密密摆满零食，颇为壮观。店面由自家车库改造，全部DIY，设计融合了小仓家人从事店铺建造工作的经验。以《哆啦A梦》漫画为蓝本绘成图纸、专门订制的\"任意门\"等，处处是充满讲究的空间。从两三家批发商进货的零食种类数不胜数，加上玩具约有600种！不知不觉就看花了眼。※本页内容基于《跨越世代同乐！令人心动的零食店》报道编撰。※信息截至2024年7月3日。",
+        "en": "A dagashi (retro candy) and goods shop that opened in 2019. \"There are kindergartens and an elementary school nearby — I hoped to give kids a place to play,\" says owner Ogura. The trigger was wanting a way to work while caring for his elderly dog, which is also where the name comes from. Shiro-chan, the beloved former shop-cat, still has many fans. A big tiered display dominates the center of the shop, packed edge-to-edge with retro sweets — a sight to behold. The interior, converted DIY-style from the family garage, draws on his family's experience building stores; even the \"Dokodemo Door\" was drafted from Doraemon manga panels and ordered custom-made. Sweets sourced from two or three wholesalers run into the hundreds, and with toys it's some 600 items — your eyes can't help but wander. ※Based on the article \"A Candy Shop That Delights Across Generations.\" ※As of July 3, 2024.",
+        "ko": "2019년에 문을 연 과자·잡화 가게. \"근처에 유치원과 초등학교가 있어서 아이들이 놀 수 있는 공간을 조금이라도 만들고 싶었어요\"라고 말하는 주인장 오구라. 당시 늙은 반려견과 함께 보낼 수 있는 일하는 방식을 찾고 있던 것이 계기가 됐고 가게 이름의 유래이기도 해요. 간판고양이였던 고 시로쨩의 팬도 많았다고. 매장 중앙에는 큰 단상이 있고 그 위에 빼곡히 과자가 늘어선 모습이 압권. 자택 차고를 개조한 매장은 DIY로 오구라 가족이 가게 만드는 일을 했던 경험을 살려 만든 것. \"도라에몽\" 만화 그림을 바탕으로 도면을 그려 발주한 \"어디로든 문\" 등 정성이 가득한 공간이에요. 2~3곳 도매상에서 들여온다는 과자는 셀 수 없을 만큼 많고 장난감까지 합치면 약 600종! 자꾸 눈이 가요. ※본 페이지 내용은 \"세대를 넘어 함께 즐기는! 마음 설레는 과자가게\" 기사를 바탕으로 작성했어요. ※정보 기준일: 2024년 7월 3일."
       },
       "hours_i18n": {
         "ja": "14:00～17:00（定休日火曜・水曜）",
@@ -31697,9 +31697,9 @@ window.RAILWAY_TOURISM = {
       },
       "desc_i18n": {
         "ja": "「日本各地の銘柄を楽しんでもらいたい」という店主の思いから、国産クラフトビールを専門に扱うビアバーです。 生樽は常時2種、ボトルは6種の計8種類、選りすぐりの国産クラフトビールを飲むことができます。メニューにはビールのタイプ、アルコール度数のほか産地も記載されているので、好きな地域のビールを選んでみるのも楽しみのひとつです。店主の石塚さんはイタリア料理店で料理長を務めた経験を活かして、軽めの酒肴からピザ、パスタまで多彩な料理も提供。足立市場へ足を運んで目利きした海鮮のメニューが特に評判です。 店は2018年に千住大橋でオープンし、2022年に現在の北千住に移転。地域に密着した落ち着いた雰囲気も心地よく過ごせます。日々変わっていくビールリストと旬の料理を楽しみに、足しげく通いたいお店です。 ※ 本ページの内容は、「味も香りも個性いろいろ クラフトビールを飲もう！」の記事を基に作成しております。 ※ この情報は、2024年4月24日時点のものです",
-        "zh": "北千住站西口的精酿啤酒酒吧，木吧台与鲜酿杯。",
-        "en": "Craft beer bar near Kitasenju west exit with a warm wooden counter.",
-        "ko": "기타센주 서쪽 출구 수제맥주 바, 나무 카운터."
+        "zh": "店主怀着\"想让客人品尝日本各地的精酿\"的愿望，开设了专营国产精酿啤酒的啤酒吧。生啤常备2种、瓶装6种共8种精选国产精酿可供品尝。菜单除注明啤酒类型、酒精度外还标注产地，挑选喜欢地区的啤酒也是一种乐趣。店主石塚活用曾在意大利餐厅担任料理长的经验，从清淡酒肴到披萨、意面，提供丰富多彩的料理。亲自去足立市场挑选的海鲜菜品尤其受到好评。2018年开业于千住大桥，2022年迁至现址北千住。扎根当地、沉稳放松的氛围让人安心舒适。这是一家让人想反复光顾、期待每日更新的啤酒单与时令料理的店。※本页内容基于《味与香各具个性·来喝精酿啤酒吧！》报道编撰。※信息截至2024年4月24日。",
+        "en": "Born of the owner's wish to \"let people enjoy brews from all over Japan,\" this beer bar specializes in domestic craft beer: two taps and six bottles, eight carefully chosen beers in all. The menu lists each beer's type, ABV and region, so picking a favorite area is half the fun. Owner Ishizuka draws on his time as head chef at an Italian restaurant, serving everything from light snacks to pizza and pasta; seafood he hand-picks at Adachi Market earns particular praise. The bar opened in Senju-Ohashi in 2018 and moved to Kitasenju in 2022. Rooted in the neighborhood with a calm, settled mood, it's a place you want to keep coming back to for the ever-rotating beer list and seasonal dishes. ※Based on the article \"Flavor and Aroma, Each Unique: Drink Craft Beer!\" ※As of April 24, 2024.",
+        "ko": "\"일본 각지의 브랜드를 즐기게 해주고 싶다\"는 주인장의 바람에서 국산 크래프트 맥주 전문 비어바. 생맥주 상시 2종, 병 6종 총 8종의 엄선된 국산 크래프트 맥주를 마실 수 있어요. 메뉴에는 맥주 타입, 도수 외에도 산지가 적혀 있어 좋아하는 지역 맥주를 골라 보는 재미도 있어요. 주인장 이시즈카는 이탈리아 요리점에서 조리장을 지낸 경험을 살려 가벼운 안주부터 피자, 파스타까지 다채로운 요리를 제공해요. 아다치 시장에 직접 가서 고른 해산물 메뉴가 특히 평판이 좋아요. 2018년 센주오하시에서 문을 열고 2022년 지금의 키타센주로 이전. 지역에 뿌리내린 차분한 분위기도 편안하게 지내기 좋아요. 매일 바뀌는 맥주 리스트와 제철 요리를 기대하며 자주 가고 싶은 가게예요. ※본 페이지 내용은 \"맛도 향기도 개성 다양! 크래프트 맥주를 마시자!\" 기사를 바탕으로 작성했어요. ※정보 기준일: 2024년 4월 24일."
       },
       "hours_i18n": {
         "ja": "17:00～23:30（LO23:00）（定休日日曜）",
@@ -31771,9 +31771,9 @@ window.RAILWAY_TOURISM = {
       },
       "desc_i18n": {
         "ja": "足立区内に新たなビールの醸造所が誕生！ 2024年2月から販売をスタートしました。銘柄はその名も「あだちビール」。現在は醸造所での直販のほか、区内の酒屋で購入または飲食店で飲むことができます。 小さな醸造所ですが、麦芽の糖化から発酵、貯酒、瓶詰めまで、すべての工程を所内で行い、3～4週間ほどの時間をかけてビールを仕上げます。麦芽とホップのバランスや温度管理、異なる製法によって、ピルスナー、ペールエール、IPA、ヴァイツェン、ポーターの5種類を醸造しています。醸造責任者の宮原さんの厳しい品質管理により、いずれもビール好きをうならせる出来栄えです。「あだち」の名を冠した話題のクラフトビール、いち早く飲んでみましょう！ ※ 本ページの内容は、「味も香りも個性いろいろ クラフトビールを飲もう！」の記事を基に作成しております。 ※ この情報は、2024年4月24日時点のものです",
-        "zh": "足立区本地精酿啤酒厂直营门店，ADACHI BEER 现酿现饮。",
-        "en": "Taproom of Adachi's local craft brewery; ADACHI BEER on tap.",
-        "ko": "아다치구 지역 수제맥주 브루어리 직영 펍."
+        "zh": "足立区内诞生了新的啤酒酿造所！2024年2月开始发售，品牌名为\"あだち啤酒\"。目前除酿造所直售外，还可在区内的酒铺购买或在餐饮店品尝。虽然规模不大，但从麦芽糖化到发酵、贮酒、装瓶，全部工序都在所内完成，历时3~4周酿成。通过麦芽与啤酒花的平衡、温度管理以及不同制法，酿造皮尔森、淡色艾尔、IPA、小麦啤酒、波特5个品种。酿造负责人宫原严格的质量管理，让每一款都足以令啤酒爱好者赞叹。冠以\"あだち\"之名的热门精酿啤酒，抢先来一杯吧！※本页内容基于《味与香各具个性·来喝精酿啤酒吧！》报道编撰。※信息截至2024年4月24日。",
+        "en": "A new brewery has arrived in Adachi! Sales began in February 2024 under the brand name \"Adachi Beer.\" For now you can buy it directly at the brewery, at liquor stores in the ward, or drink it at local restaurants. Small as the brewery is, every step — from mashing malt through fermentation, lagering and bottling — happens in-house, taking three to four weeks per batch. Balancing malt and hops, managing temperature and varying technique, they brew five styles: pilsner, pale ale, IPA, weizen and porter. Head brewer Miyahara's strict quality control makes every one impress even beer connoisseurs. The buzzworthy craft beer bearing the \"Adachi\" name — be the first to try it! ※Based on the article \"Flavor and Aroma, Each Unique: Drink Craft Beer!\" ※As of April 24, 2024.",
+        "ko": "아다치구에 새로운 맥주 양조장이 탄생! 2024년 2월부터 판매를 시작했어요. 브랜드명은 그 이름 \"아다치 맥주\". 현재 양조장 직판 외에 구내 주류점에서 사거나 음식점에서 마실 수 있어요. 작은 양조장이지만 맥아 당화부터 발효, 저장, 병입까지 모든 공정을 내부에서 진행해 3~4주 정도 걸려 맥주를 완성해요. 맥아와 홉의 균형, 온도 관리, 다른 제법으로 필스너, 페일에일, IPA, 바이젠, 포터 5종을 양조해요. 양조 책임자 미야하라의 엄격한 품질 관리로 어느 것이나 맥주 애호가를 감탄시키는 완성도. \"아다치\" 이름을 건 화제의 크래프트 맥주, 가장 먼저 마셔 보아요! ※본 페이지 내용은 \"맛도 향기도 개성 다양! 크래프트 맥주를 마시자!\" 기사를 바탕으로 작성했어요. ※정보 기준일: 2024년 4월 24일."
       },
       "hours_i18n": {
         "ja": "14:00～20:00、土曜・日曜11:00～20:00（定休日月曜）",
@@ -31846,9 +31846,9 @@ window.RAILWAY_TOURISM = {
       },
       "desc_i18n": {
         "ja": "荒川の土手に沿って延びる、約4.4キロにもおよぶ桜並木。春には五色桜が次々と咲き、土手の風を浴びながらのんびり散歩できる。",
-        "zh": "沿荒川河堤的樱花散步道，春天五色樱次第开放，可远眺桥梁。",
-        "en": "A cherry promenade along the Arakawa embankment; five-toned cherries bloom in spring with bridge views.",
-        "ko": "아라카와 강둑 벚꽃 산책길. 봄이면 오색 벚꽃이 차례로 피어요."
+        "zh": "沿荒川河堤延伸、绵延约4.4公里的樱花道。春天五色樱次第绽放，沐浴着河堤的清风悠然漫步。",
+        "en": "A cherry promenade stretching about 4.4 km along the Arakawa embankment. In spring, five-toned cherries bloom one after another — stroll leisurely in the breeze off the riverbank.",
+        "ko": "아라카와 강둑을 따라 약 4.4km 이어지는 벚꽃길. 봄이면 오색 벚꽃이 차례로 피어나 강바람을 맞으며 한가롭게 산책할 수 있어요."
       },
       "hours_i18n": {
         "ja": "終日開放",
@@ -33262,9 +33262,9 @@ window.RAILWAY_TOURISM = {
       },
       "desc_i18n": {
         "ja": "1960年の創業より、お子様が6年間笑顔で過ごせるよう願いを込めて、ランドセルを作り続けています。 ※中村鞄製作所ランドセルは百貨店・量販店でのお取扱いはございません。",
-        "zh": "知名书包（randoseru）制造商直营旗舰店。",
-        "en": "Flagship store of a renowned randoseru school-bag maker.",
-        "ko": "유명 란도셀 제조사 직영 플래그십 스토어."
+        "zh": "自1960年创业以来，怀着让孩子6年都笑容满面的心愿，一直制作书包（ランドセル）。※中村鞄製作所的书包不在百货店、量贩店销售。",
+        "en": "Since its founding in 1960, Nakamura Kaban has made randoseru with the wish that each child will spend six happy, smiling years with theirs. ※Nakamura Kaban randoseru are not sold at department stores or mass retailers.",
+        "ko": "1960년 창업 이래 아이가 6년간 웃으며 보낼 수 있길 바라는 마음을 담아 란도셀을 만들고 있어요. ※나카무라 카방 란도셀은 백화점·대형마트에서 취급하지 않아요."
       },
       "hours_i18n": {
         "ja": "9:30～17:30（電話：9:00～17:00） ※事前に ホームページ から来店予約が必要（定休日不定休）",
@@ -33336,9 +33336,9 @@ window.RAILWAY_TOURISM = {
       },
       "desc_i18n": {
         "ja": "ベルクス足立花畑中央店は、ショッピングモール型1号店になります。モール内には、皆様の健康を応援するベルクススポーツクラブ＜ベルスポ＞をはじめ、 皆様の健康と暮らしに役立つ多種多様なテナントが入っています。 足立花畑中央店独自の企画としては、毎月1回日曜日に大朝市を開催しています。 また、2020年にセルフレジを導入し、レジの混雑緩和及び、お客様により快適にお買い物しやすい店づくりに努めています。",
-        "zh": "带自行车停车场的大型综合购物商场。",
-        "en": "A large shopping mall with a big bicycle parking area.",
-        "ko": "자전거 주차장이 넓은 종합 쇼핑몰."
+        "zh": "ベルクス足立花畑中央店是购物中心型1号店。商场内有支持大家健康的ベルク斯体育俱乐部〈ベルスポ〉，以及众多有益健康与生活的各类租户。作为足立花畑中央店的独立企划，每月第1个周日举办大型早市。2020年引入自助收银，致力于缓解排队、让顾客购物更舒适。",
+        "en": "Berux Adachi-Hanahata Chuo is the first mall-style location of the chain. Inside, alongside the Berux Sports Club (Beruspo) that supports everyone's health, a wide variety of tenants serve daily life and well-being. Its signature event is a large morning market held on the first Sunday of every month, and since 2020 self-checkout lanes have kept lines short and shopping comfortable.",
+        "ko": "베르크스 아다치 하나하타 중앙점은 쇼핑몰형 1호점이에요. 몰 안에는 건강을 응원하는 베르크스 스포츠 클럽 <베르스포>를 비롯해 건강과 생활에 유용한 다양한 테넌트가 입점해 있어요. 아다치 하나하타 중앙점만의 기획으로 매월 첫째 주 일요일 대형 아침시장을 열어요. 2020년에 셀프 계산대를 도입해 계산대 혼잡을 줄이고 더 편안하게 쇼핑할 수 있게 노력하고 있어요."
       },
       "hours_i18n": {
         "ja": "【月曜～土曜】10:00～21:00 【日曜】9:00～21:00（定休日不定休）",
@@ -33388,7 +33388,7 @@ window.RAILWAY_TOURISM = {
         139.8299134
       ],
       "dist": "3 min walk",
-      "desc": "「TOKYOACRYLSHOP」はオリジナルのアクリル板を販売する専門ショップです。世界でここでしか買えないカ",
+      "desc": "「TOKYOACRYLSHOP」はオリジナルのアクリル板を販売する専門ショップです。世界でここでしか買えないカラーを取り揃え、アクリル素材を使ったものづくり体験もできます。",
       "tags": [
         "all",
         "shopping"
@@ -33409,10 +33409,10 @@ window.RAILWAY_TOURISM = {
         "ko": "도쿄 아크릴"
       },
       "desc_i18n": {
-        "ja": "「TOKYOACRYLSHOP」はオリジナルのアクリル板を販売する専門ショップです。世界でここでしか買えないカ",
-        "zh": "亚克力材料与手作体验的工坊商店。",
-        "en": "An acrylic materials and hands-on craft workshop shop.",
-        "ko": "아크릴 재료와 공예 체험 공방."
+        "ja": "「TOKYOACRYLSHOP」はオリジナルのアクリル板を販売する専門ショップです。世界でここでしか買えないカラーを取り揃え、アクリル素材を使ったものづくり体験もできます。",
+        "zh": "\"TOKYOACRYLSHOP\"是销售原创亚克力板的专门店。备有全世界仅此可购的独家色彩，还可体验使用亚克力材料的手工制作。",
+        "en": "\"TOKYOACRYLSHOP\" is a specialist store selling original acrylic sheets, offering colors found nowhere else in the world, plus hands-on making experiences with acrylic.",
+        "ko": "\"TOKYOACRYLSHOP\"은 오리지널 아크릴 판을 판매하는 전문점이에요. 세계에서 여기서만 살 수 있는 컬러를 갖추고 아크릴 소재를 활용한 만들기 체험도 할 수 있어요."
       },
       "hours_i18n": {
         "ja": "13:00〜20:00 詳しくは こちら（定休日日曜、火曜、木曜、土曜（臨時休業あり・月曜が祝日の場合は火曜休業） 詳しくは こちら）",
@@ -33462,7 +33462,7 @@ window.RAILWAY_TOURISM = {
         139.823794
       ],
       "dist": "10 min walk",
-      "desc": "ハンドメイドの雑貨、アクセサリー、洋服などを揃えたセレクトショップです。商品は作家さんから直接仕入れた一点もの",
+      "desc": "ハンドメイドの雑貨、アクセサリー、洋服などを揃えたセレクトショップです。商品は作家さんから直接仕入れた一点ものが多く、ドライフラワーなども並びます。",
       "tags": [
         "all",
         "shopping"
@@ -33483,10 +33483,10 @@ window.RAILWAY_TOURISM = {
         "ko": "데코라."
       },
       "desc_i18n": {
-        "ja": "ハンドメイドの雑貨、アクセサリー、洋服などを揃えたセレクトショップです。商品は作家さんから直接仕入れた一点もの",
-        "zh": "干花与小摆件点缀的复古手作杂货店。",
-        "en": "A retro craft & sundry shop adorned with dried flowers.",
-        "ko": "드라이플라워가 어우러진 복고 공방 잡화점."
+        "ja": "ハンドメイドの雑貨、アクセサリー、洋服などを揃えたセレクトショップです。商品は作家さんから直接仕入れた一点ものが多く、ドライフラワーなども並びます。",
+        "zh": "汇集手工杂货、饰品、服饰等的精选店。商品多为直接从作家处采购的孤品，还陈列着干花等。",
+        "en": "A select shop carrying handmade sundries, accessories and clothing — many pieces sourced one-of-a-kind directly from makers, alongside dried flowers and more.",
+        "ko": "핸드메이드 잡화, 액세서리, 의류 등을 갖춘 셀렉트 숍. 상품은 작가에게 직접 들여온 하나뿐인 작품이 많고 드라이플라워 등도 진열돼 있어요."
       },
       "hours_i18n": {
         "ja": "11:00~18:00（定休日月曜、火曜）",
@@ -33558,9 +33558,9 @@ window.RAILWAY_TOURISM = {
       },
       "desc_i18n": {
         "ja": "ふわりと漂う革の香りに包まれる土屋鞄製造所の実店舗。ランドセルと大人向けの鞄製品を販売しています。 季節限定でレザークラフトを体験できるワークショップも開催。 工房併設の本店では、我々の原点である「ランドセル作り」がご覧いただけます。職人の作業風景を通して、人の手の温もりをぜひ感じてください。",
-        "zh": "老牌手工皮包店直营本店，木质货架陈列皮革包。",
-        "en": "Head store of a heritage leather bag maker; bags on wooden shelves.",
-        "ko": "오래된 가죽 가방 브랜드 직영점, 나무 진열대."
+        "zh": "被皮革香气轻柔包裹的土屋鞄制造所实体店。销售小学生书包（ランドセル）与成人用包袋。还定期举办可体验皮革工艺的季节限定工作坊。在附设工房的本店，可以看到我们原点的\"书包制作\"。透过工匠的作业身影，感受人手的温度。",
+        "en": "The physical store of Tsuchiya Kaban, wrapped in the soft scent of leather, selling randoseru school bags and bags for adults. Seasonal leather-craft workshops are also offered. At the flagship store with its attached workshop, you can watch \"randoseru making\" — our origin — and feel the warmth of human hands in the craftsmen's work.",
+        "ko": "은은한 가죽 향기에 감싸이는 츠치야 카방의 실제 매장. 란도셀과 성인용 가방을 판매해요. 계절 한정으로 가죽 공예 체험 워크숍도 열려요. 공방이 함께 있는 본점에서는 우리의 출발점인 \"란도셀 만들기\"를 볼 수 있어요. 장인의 작업 모습을 통해 사람 손의 온기를 꼭 느껴 보세요."
       },
       "hours_i18n": {
         "ja": "10:00~18:00（定休日火曜（臨時休業あり））",
@@ -33633,9 +33633,9 @@ window.RAILWAY_TOURISM = {
       },
       "desc_i18n": {
         "ja": "1973年創業以来、バウムクーヘンひと筋の専門店。 ごまかしのないバウムクーヘン本来の味にこだわり続けて、研究・開発された商品が“元祖・長崎バウムクーヘン”です。 驚くほどのしっとりとした食感、他に類を見ないやわらかさ、余計なものはひとつもない本物のバウムクーヘンの味を心ゆくまでご堪能ください。",
-        "zh": "元祖长崎蜂蜜蛋糕（蛋糕卷）老铺。",
-        "en": "Long-established baumkuchen confectionery.",
-        "ko": "원조 나가사키 바우쿠헨 과자점."
+        "zh": "1973年创业以来，一心专做年轮蛋糕（バウムクーヘン）的专门店。坚持不加掩饰的年轮蛋糕本味，研究开发出的商品正是\"元祖·长崎年轮蛋糕\"。惊人地湿润绵密、别处难寻的柔软，没有任何多余之物的真正年轮蛋糕，请尽情享用。",
+        "en": "A Baumkuchen specialist devoted solely to the cake since its founding in 1973. The result of relentless pursuit of the honest, unadorned flavor of Baumkuchen is the \"Ganso Nagasaki Baumkuchen.\" Enjoy its astonishingly moist texture and unrivaled softness — a genuine Baumkuchen with nothing extra, to be savored to the last bite.",
+        "ko": "1973년 창업 이래 바움쿠헨 한길만 걸어온 전문점. 꾸밈없는 바움쿠헨 본연의 맛을 고집하며 연구·개발한 상품이 \"원조·나가사키 바움쿠헨\"이에요. 놀랍도록 촉촉한 식감, 유례없는 부드러움, 불필요한 것이 하나도 없는 진짜 바움쿠헨의 맛을 마음껏 즐겨 보세요."
       },
       "hours_i18n": {
         "ja": "9:00～18:00（定休日日曜、祝日）",
@@ -33707,9 +33707,9 @@ window.RAILWAY_TOURISM = {
       },
       "desc_i18n": {
         "ja": "日本人作家による生活道具、洋服、服飾小物、雑貨等の販売。 18:00よりバー営業をしています。 路地裏の小さなお店ですがいらした方がリラックスできる空間を心がけています。",
-        "zh": "夜间暖光的画廊兼酒吧小店。",
-        "en": "A small warm-lit gallery-bar in the evening.",
-        "ko": "밤에 따뜻한 조명이 흐르는 갤러리 바."
+        "zh": "销售日本作家制作的生活道具、服装、服饰小物、杂货等。18:00起转为酒吧营业。虽是巷子里的迷你小店，却致力于营造让来客放松的空间。",
+        "en": "Selling daily tools, clothing, accessories and sundries by Japanese makers; from 6 p.m. it turns into a bar. A tiny shop in a back alley, but one devoted to a space where visitors can relax.",
+        "ko": "일본 작가들의 생활 도구, 옷, 패션 소품, 잡화 등을 판매해요. 18시부터는 바 영업을 시작해요. 골목 안 작은 가게지만 찾는 분들이 편안히 쉬어갈 수 있는 공간을 마음에 두고 있어요."
       },
       "hours_i18n": {
         "ja": "13:00~24:00（変動あり） 詳しくはInstagram（ @baku_tokyo ）をご覧ください。（定休日火曜（臨時休業あり） 詳しくはInstagram（ @baku_tokyo ）をご覧ください。）",
@@ -33782,9 +33782,9 @@ window.RAILWAY_TOURISM = {
       },
       "desc_i18n": {
         "ja": "カジュアルからエレガントまで、幅広いデザインのバッグをご提案させて頂いております。 企画から製造、販売、そしてアフターケア。 一貫した体制の中で、一つ一つの商品を大切に。 商品の生産の他にも、熟練した縫製技術を活かし、バッグの修理や、ランドセルのリメイクも行っております。",
-        "zh": "白色调皮包展厅内附咖啡的复合空间。",
-        "en": "A bright white bag showroom with an attached café.",
-        "ko": "하얀 가죽 가방 쇼룸에 카페가 있는 복합 공간."
+        "zh": "从休闲到优雅，提供设计多样的包袋。从企划到制造、销售乃至售后，在一贯的体制中珍视每一件商品。除生产外，还活用熟练的缝制技术，承接包袋修理与书包的改做（リメイク）。",
+        "en": "Bags in a wide range of designs, from casual to elegant. From planning through manufacturing, sales and aftercare, every item is made with care within one integrated system. Beyond production, the workshop's skilled stitching is put to work repairing bags and remaking randoseru.",
+        "ko": "캐주얼부터 엘레간트까지 폭넓은 디자인의 가방을 제안해요. 기획부터 제조, 판매, 사후관리까지 일관된 체제 속에서 하나하나의 상품을 소중히 다뤄요. 상품 생산 외에도 숙련된 봉제 기술을 살려 가방 수리와 란도셀 리메이크도 진행해요."
       },
       "hours_i18n": {
         "ja": "ショールーム 9:30～18:00 カフェ [ランチ] 11:00～14:00 [ティータイム]14:00～17:30 (ラストオーダー17:00)（定休日日曜、祝日、GW、夏期・冬期休業）",
