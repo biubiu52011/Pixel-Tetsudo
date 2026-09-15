@@ -34445,7 +34445,7 @@ window.RAILWAY_TOURISM = {
           "화·일요일 휴무"
         ]
       },
-      "address": "東京都足立区加平一丁目"
+      "address": "東京都足立区東和5-12-24"
     },
     {
       "name": "DECOLA．",
@@ -34670,7 +34670,7 @@ window.RAILWAY_TOURISM = {
           "일·공휴일 휴무"
         ]
       },
-      "address": "東京都足立区南花畑二丁目"
+      "address": "東京都足立区南花畑2-12-8"
     },
     {
       "name": "select gallery & bar “baku”",
