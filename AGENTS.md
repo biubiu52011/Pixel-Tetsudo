@@ -1650,3 +1650,12 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 **新发现（报告未修）**：①**不完整记录 490 条**（trainTimetableObject 单站——着/発のみ 1 エントリ，4.3.524 駅時刻表抽出限制，如 ChuoMain 225/Suigun 26/OuMain 折返駅 153；东急 3 条区間列車経路欠落）——其时刻正确但经路不全，推定覆盖弱；待组织者任务 3 官网再提取时补全。②**着/発分離形式**（各駅着/発別エントリ，ChuoTatsuno/Shinonoi）确认为正常结构非缺陷。③**TokyuMeguro⇄相鉄直通 387 条**（ShinYokohama/Shonandai/Ebina 终点）——4.3.495 记録の「拍板待ち」項目（東急新横浜線本地欠落），未处理待用户裁决。④秩父直通（TokyuToyoko→SeibuChichibu 1 条）因本地缺飯能站未登録，正常线外终点。
 **验证**：集成 73 线/811 列车/vehicleType 缺失 0/覆盖率 100%；verify_through_vtype 55/55；coverage 113 线/336 条目；tt_cross_validate 虚构终点 0。
 **commit**：4.3.644（8 文件）
+
+## 4.3.708（2026-09-16，38条JR地方线manual时刻表站覆盖补全）
+**用户指示**：补全「本地站表有而 manual 无」的站——此前 manual 仅覆盖部分站（如 Tsugaru 4/18、OuMain 19/45），列车推定只能覆盖已有站。
+**方法**：4 个并行子代理，从 JR 東日本公式時刻表（timetables.jreast.co.jp 2609版）全线路矩阵表（timetable-v/<表ID>{d1,d2,u1,u2}.html，行=车站、列=列车）逐列车提取每站着发时刻，重建完整 trainTimetableObject。
+**产出**：38 条线 manual 重建，合计 7853 条列车记录，站覆盖 966/1007（96%）。
+- 完全覆盖（100%）：BanetsuEast/BanetsuWest/Echigo/Hachinohe/Hakushin/Iiyama/Ishinomaki/Kamaishi/Karasuyama/Komii/Mito/Miyo/Ominato/Oito(35/36)/Ryomo/Senseki/SensekiTohoku/Senzan/Suigun/SuigunBranch/Tadami/Tazawako/Uetsu/Yamada/Yonezawa
+- 合理缺口（官方源限制）：Gono(42/43 中田通过)、Kesennuma(17/18 東志津川无站)、Kitakami(11/15 北上線每日仅2~4班)、Kounan(26/27 Koma无站)、Ofunato(24/25 上鹿折BRT通过)、OuMain(61/65)、RikutoEast(15/25 鳴子温泉～新庄无数字表)、RikutsuWest(8/10 羽前前波/高屋全通过)、Shinetsu(55/56 Toyooka无站)、TohokuMain(74/75 東水沢通过)、Tsugaru(11/18 蟹田～三厩区间停运)、Yamagata(34/36 赤岩无站/大沢全通过)
+**验证**：node --check 38文件全过；verify_through_vtype 55/55；verify_vtype_coverage 113线/336条目；integrate_all_lines 73线/811列车/0缺失/vehicleType 100%。
+**commit**：4.3.708
