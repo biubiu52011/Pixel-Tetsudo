@@ -24104,7 +24104,7 @@ window.RAILWAY_TOURISM = {
           "아침 일찍 영업"
         ]
       },
-      "address": "東京都台東区松が谷二丁目"
+      "address": "東京都台東区東上野6-1-15"
     },
     {
       "name": "Readin’ Writin’",
