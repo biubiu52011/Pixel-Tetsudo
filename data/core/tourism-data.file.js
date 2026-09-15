@@ -34820,7 +34820,7 @@ window.RAILWAY_TOURISM = {
           "가죽 구경"
         ]
       },
-      "address": "東京都足立区東綾瀬"
+      "address": "東京都足立区東綾瀬3-5-7"
     },
     {
       "name": "東横INN草加駅西口",
