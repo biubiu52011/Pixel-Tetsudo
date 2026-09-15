@@ -1474,3 +1474,9 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 **注意**：并发会话提交 e1d2b02（清理已闭业景点 BOOK AND BED TOKYO 池袋本店，spots 519→518），与本批数据无冲突。
 **验证**：JSON 合法（spots 518）；浏览器实测亀有 4 景全显示本站北口、浅草桥跨站推荐正确（両国国技館→両国東口190m）；提交 971d1f6。
 **剩余**：约 40 条线 ~90 站待处理（Oedo 14/Namboku 13/Tozai 13/Hibiya 11/Fukutoshin 11/Yurakucho 10/Chiyoda 已完成等）。
+## 4.3.624（2026-09-15，出口数据按线路补全——第三/四/五批，16→337 站）
+**继续按线路处理**（用户多次指令）。第三批 7 线 46 站（e57ed40：Oedo/Namboku/Tozai/Hibiya/Fukutoshin/Yurakucho/Hanzomon）→ 第四批 19 线 199 站（f3f6409：Mita/Asakusa/Ginza/ChuoRapid/SeibuShinjuku/Keisei/TokyuToyoko/KeihinTohoku/Shinjuku/Odawara/Tojo/Keiyo/Saikyo/SobuRapid/KeioInokashira/TokyuMeguro/Yurikamome/Daishi_Tobu/MarunouchiBranch）→ 第五批 山手线+千代田支线+高田馬場手动补（ea27279）。总 16→337 站。
+**踩坑**：合并脚本 stdout 被 `Select-Object -First 60` 截断会 SIGPIPE 杀死 python，json.dump 写一半 → tourism_data.json 截断损坏 → git checkout 恢复重合并（教训：合并勿用管道截断输出）。
+**并发**：e1d2b02（清闭业景点 519→518）、902308c（清 PostCoffee 重复 518→517）、0d3f775（定位按钮降级）——均无冲突。
+**覆盖**：517 景中最近站有出口 289（56%），缺 95 站。剩余缺口 wiki 无出口方位名（千住大橋13/六町8/田原町8/清澄白河8/五反野6/扇大橋6/西日暮里6/市ヶ谷6/赤坂6/京成津川5，均为地下铁编号口或小站）。
+**待决**：95 站"站中心出入口兜底"未拍板；结构迁移（出口并入 railway_data.json stations）未拍板；push 未执行（本轮新增 5 个 commit：971d1f6/9dd2f9b/e57ed40/f3f6409/ea27279）。
