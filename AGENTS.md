@@ -1554,3 +1554,7 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 4. 删 Yurikamome.transferStations 的 Ariake→Oito 声明 + Oito.transferStations 的 Ariake→Yurikamome 反向声明
 **全量扫描（换乘声明有效性）**：89 条"换乘站不在目标线站表"经坐标精化（最近站>4km）判定 **0 条真错误**——其余全部是合法异名换乘（上野⇄京成上野、浜松町⇄モノレール浜松町等）；另发现 **185 个孤儿 stationLines**（站不在任何线站表、无 i18n、无 name_map 引用，含 21 个有劣质坐标的孤立实体 Tanaka/Naiuchi/Douzawa/Ariumi/Edorigoshi/Shirakino/Aono/Otasa/Shibaraki/Fukakai/Juni/Ohata/Hayashi/Shihodo/Ikuta-kaku/Hanyu-Naichi/Echigo-Yamabe/Sato-Taki/Sata/Hon-Nara/Tonami）——不影响线路图/换乘标签显示（换乘图只从 transferStations 构建），列入数据卫生待清（未处理）。
 **验证**：node --check 双 .file.js；浏览器（清 pt_db localStorage 缓存后）——百合鸥"大糸線"标签消失、大糸線页无"ゆりかもめ"、有明在穂高～安曇追分间正确；ChuoRapid 東京/新宿/御茶ノ水/高尾换乘徽章全对；json 按 1 空格缩进重写（diff 28 行）。
+
+## 4.3.628（2026-09-15，出口数据按线路补全——远郊批次，682→742 站）
+批次I（9883a24）：远郊 50 线 60 站（东北/常磐/奥羽/羽越/信越/磐越西/上越/山形/只见/大糸/越后/饭山/五能/水郡/米坂/釜石/陆羽东/小海/八户/弘南/仙山/吾妻/气仙沼/仙石/田泽湖/北上/仙石东北/津轻/山田/磐越东/水户/篠之井/石卷/大船渡/白新/陆羽西/佐野/鹿岛/伊东/水郡支/中央辰野/东金/三好/两毛/小泉/乌山/桐生/日光/男鹿）。远郊 wiki 出口信息稀疏（50 线仅 63 站有口）。严格解析 ✓、无孤立键、已 push（远端 9883a24）。
+**剩余**：37 条线路完全无出口数据（wiki 无任何方位口信息，均为远郊小线/地方线，无观光景点覆盖）。
