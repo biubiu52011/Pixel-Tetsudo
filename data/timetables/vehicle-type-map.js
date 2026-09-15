@@ -884,6 +884,250 @@
         'default': '京成AE2代目（スカイライナー専用・成田空港アクセス）'
       }
     },
+
+    // ================================================================
+    // 無直通路線（デフォルトのみ）— 4.3.640
+    // ================================================================
+
+    // --- JR 東日本地方線 ---
+    'BanetsuEast': {
+      'Local': { 'default': 'キハ110系' }
+    },
+    'BanetsuWest': {
+      'Local': { 'default': 'キハ110系' },
+      'Rapid': { 'default': 'キハ110系' }
+    },
+    'ChuoTatsuno': {
+      'Local': { 'default': '211系 / E127系100番台' },
+      'Rapid': { 'default': '211系 / E127系100番台' },
+      'LimitedExpress': { 'default': 'E353系（あずさ・かいじ）（候補）' }
+    },
+    'Echigo': {
+      'Local': { 'default': 'E127系' }
+    },
+    'Gono': {
+      'Local': { 'default': 'キハ40系（候補）' },
+      'Rapid': { 'default': 'HB-E300系（リゾートしらかみ）' }
+    },
+    'Hachinohe': {
+      'Local': { 'default': 'キハE130形500番台' }
+    },
+    'Iiyama': {
+      'Local': { 'default': 'キハ110系' },
+      'Rapid': { 'default': 'キハ110系' }
+    },
+    'Ishinomaki': {
+      'Local': { 'default': 'キハ110系' },
+      'Rapid': { 'default': 'キハ110系0番台（快速南三陸）' }
+    },
+    'Kamaishi': {
+      'Local': { 'default': 'HB-E220系' },
+      'Rapid': { 'default': 'HB-E220系（快速はまゆり）' }
+    },
+    'Karasuyama': {
+      'Local': { 'default': 'EV-E301系（ACCUM）' }
+    },
+    'Kesennuma': {
+      'Local': { 'default': 'キハ110系' },
+      'Rapid': { 'default': 'キハ110系' }
+    },
+    'Kitakami': {
+      'Local': { 'default': 'キハ110系' }
+    },
+    'Komii': {
+      'Local': { 'default': 'キハ110系100番台' },
+      'Rapid': { 'default': 'キハ110系100番台（HIGH RAIL 1375）' }
+    },
+    'Kounan': {
+      'Local': { 'default': 'キハ110系' }
+    },
+    'Mito': {
+      'Local': { 'default': 'E501系 / E531系' }
+    },
+    'Miyo': {
+      'Local': { 'default': 'E127系' }
+    },
+    'Ofunato': {
+      'Local': { 'default': 'キハ110系' },
+      'Rapid': { 'default': 'キハ110系' }
+    },
+    'Oga': {
+      'Local': { 'default': 'EV-E801系（ACCUM）' }
+    },
+    'Oito': {
+      'Local': { 'default': 'E127系100番台' },
+      'Rapid': { 'default': 'HB-E300系（リゾートビューふるさと）' },
+      'LimitedExpress': { 'default': 'E353系（あずさ）（候補）' }
+    },
+    'Ominato': {
+      'Local': { 'default': 'キハ100系 / キハ110系' },
+      'Rapid': { 'default': 'キハ100系 / キハ110系' }
+    },
+    'OuMain': {
+      'Local': { 'default': '701系 / E721系' },
+      'Rapid': { 'default': '701系 / E721系' },
+      'LimitedExpress': { 'default': 'E6系（こまち）/ E3系・E8系（つばさ）（候補）' }
+    },
+    'RikutoEast': {
+      'Local': { 'default': 'キハ110系' },
+      'Rapid': { 'default': 'キハ110系' }
+    },
+    'RikutsuWest': {
+      'Local': { 'default': 'キハ110系' },
+      'Rapid': { 'default': 'キハ110系' }
+    },
+    'Ryomo': {
+      'Local': { 'default': 'E231系1000番台 / E233系' },
+      'Rapid': { 'default': 'E231系1000番台 / E233系' }
+    },
+    'Senseki': {
+      'Local': { 'default': 'E131系800番台' },
+      'Rapid': { 'default': 'E131系800番台' },
+      'SpecialRapid': { 'default': 'E131系800番台' }
+    },
+    'SensekiTohoku': {
+      'Local': { 'default': 'HB-E210系' },
+      'Rapid': { 'default': 'HB-E210系' },
+      'SpecialRapid': { 'default': 'HB-E210系' }
+    },
+    'Senzan': {
+      'Local': { 'default': 'E721系 / 701系' },
+      'Rapid': { 'default': 'E721系 / 701系' }
+    },
+    'Shinetsu': {
+      'Local': { 'default': '115系 / E129系（候補）' },
+      'Rapid': { 'default': 'E129系（候補）' },
+      'LimitedExpress': { 'default': 'E653系（しらゆき）（候補）' }
+    },
+    'Shinonoi': {
+      'Local': { 'default': '211系 / E127系100番台' },
+      'Rapid': { 'default': '211系' },
+      'LimitedExpress': { 'default': '383系（しなの・JR東海）/ E353系（あずさ）（候補）' }
+    },
+    'Suigun': {
+      'Local': { 'default': 'キハE130系 / キハ110系（候補）' }
+    },
+    'SuigunBranch': {
+      'Local': { 'default': 'キハE130系 / キハ110系（候補）' }
+    },
+    'Tadami': {
+      'Local': { 'default': 'キハ110系 / キハ40系（候補）' }
+    },
+    'Tazawako': {
+      'Local': { 'default': '701系5000番台' },
+      'Rapid': { 'default': '701系5000番台' },
+      'LimitedExpress': { 'default': 'E6系（こまち）（候補）' }
+    },
+    'TohokuMain': {
+      'Local': { 'default': '701系 / E721系' }
+    },
+    'Tsugaru': {
+      'Local': { 'default': 'キハ40系' }
+    },
+    'Uetsu': {
+      'Local': { 'default': '701系 / E721系' },
+      'Rapid': { 'default': '701系 / E653系（らくらくトレイン村上）（候補）' },
+      'LimitedExpress': { 'default': 'E653系（いなほ）' }
+    },
+    'Yamada': {
+      'Local': { 'default': 'キハ110系' }
+    },
+    'Yamagata': {
+      'Local': { 'default': '701系5500番台' },
+      'Rapid': { 'default': '701系5500番台' },
+      'LimitedExpress': { 'default': 'E8系 / E3系（つばさ）（候補）' }
+    },
+    'Yonezawa': {
+      'Local': { 'default': 'キハ110系' }
+    },
+
+    // --- 私鉄・モノレール・新交通 ---
+    'Daishi_Keikyu': {
+      'Local': { 'default': '1500形 / 新1000形（4両編成）' }
+    },
+    'KeikyuAirport': {
+      'Local': { 'default': '新1000形 / 1500形 / 600形' },
+      'Express': { 'default': '新1000形 / 1500形' },
+      'LimitedExpress': { 'default': '新1000形 / 1500形 / 600形' },
+      'RapidLimitedExpress': { 'default': '新1000形 / 2100形 / 1500形' },
+      'AirportRapidLimitedExpress': { 'default': '新1000形 / 1500形 / 600形' }
+    },
+    'KeikyuKurihama': {
+      'Local': { 'default': '新1000形 / 1500形' },
+      'LimitedExpress': { 'default': '新1000形 / 2100形 / 1500形' },
+      'RapidLimitedExpress': { 'default': '新1000形 / 2100形 / 1500形' },
+      'EveningWing': { 'default': '2100形 / 新1000形1890番台（Le Ciel）' },
+      'MorningWing': { 'default': '2100形 / 新1000形1890番台（Le Ciel）' }
+    },
+    'KeikyuZushi': {
+      'Local': { 'default': '新1000形（4両編成）' },
+      'Express': { 'default': '新1000形' },
+      'LimitedExpress': { 'default': '新1000形 / 1500形' }
+    },
+    'Haijima': {
+      'Local': { 'default': '20000系 / 30000系 / 2000系' },
+      'SemiExpress': { 'default': '20000系 / 30000系 / 2000系' },
+      'Express': { 'default': '20000系 / 30000系 / 2000系' },
+      'HaijimaLiner': { 'default': '40000系（Laview）' }
+    },
+    'Kokubunji': {
+      'Local': { 'default': '新2000系（2000系）/ 8000系（候補）' }
+    },
+    'SeibuChichibu': {
+      'Local': { 'default': '4000系 / 7000系' },
+      'LimitedExpress': { 'default': '40000系（Laview）' },
+      'S-TRAIN': { 'default': '40000系（Laview）' }
+    },
+    'SeibuEn': {
+      'Local': { 'default': '新101系（ワンマン）/ 9000系（候補）' }
+    },
+    'SeibuShinjuku': {
+      'Local': { 'default': '2000系 / 20000系 / 30000系' },
+      'Express': { 'default': '2000系 / 20000系 / 30000系' },
+      'SemiExpress': { 'default': '2000系 / 20000系 / 30000系' },
+      'CommuterExpress': { 'default': '2000系 / 20000系 / 30000系' },
+      'RapidExpress': { 'default': '2000系 / 20000系 / 30000系' },
+      'LimitedExpress': { 'default': '40000系（Laview・候補）' },
+      'HaijimaLiner': { 'default': '40000系（Laview）' }
+    },
+    'SeibuTamagawa': {
+      'Local': { 'default': '新101系（ワンマン専用塗装）/ 7000系（候補）' }
+    },
+    'SeibuTamako': {
+      'Local': { 'default': '新101系（ワンマン）/ 7000系' }
+    },
+    'SeibuToshima': {
+      'Local': { 'default': '新101系（ワンマン・候補）' }
+    },
+    'SeibuYamaguchi': {
+      'Local': { 'default': '8500系（レオライナー、新型導入中）' }
+    },
+    'Seibu_Sayama': {
+      'Local': { 'default': '7000系（2026年ワンマン化）' },
+      'SemiExpress': { 'default': '7000系 / 4000系（候補）' }
+    },
+    'OdakyuEnoshima': {
+      'Local': { 'default': '1000形 / 8000形 / 3000形' },
+      'Express': { 'default': '1000形 / 4000形 / 3000形' },
+      'RapidExpress': { 'default': '1000形 / 4000形' },
+      'LimitedExpress': { 'default': '30000形 EXEα / 60000形 MSE / 70000形 GSE' }
+    },
+    'NewShuttle': {
+      'Local': { 'default': '2000系 / 2020系（1050系は順次引退）' }
+    },
+    'TokyoMonorail': {
+      'AirportRapid': { 'default': '10000形' },
+      'SectionRapid': { 'default': '10000形' },
+      'Local': { 'default': '10000形 / 2000形（候補）' }
+    },
+    'Yurikamome': {
+      'Local': { 'default': '7300系 / 7500系（7000系は全廃）' }
+    },
+    'Hakushin': {
+      'Local': { 'default': 'E129系' },
+      'Rapid': { 'default': 'E129系' },
+      'LimitedExpress': { 'default': 'E653系（特急いなほ）' }
+    },
   };
 
   /**

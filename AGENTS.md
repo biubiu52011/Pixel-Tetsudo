@@ -1591,3 +1591,12 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 - KeiseiOshiage（押上線，4 trainType）：Local/Rapid/LimitedExpress/AccessExpress——直通先 Toei 标注
 - NaritaSkyAccess（成田スカイアクセス線，2 trainType）：AccessExpress/Skyliner
 **验证**：work/verify_vtype_coverage.js 55/55（Through-service lines total: 55 / Covered: 55 / Missing: none）；work/verify_through_vtype.js 55/55 OK（含新增 9 条京成断言：Keisei Local→Toei/Keisei、Keisei LimitedExpress→Toei、Keisei AccessExpress→Keisei、Keisei Skyliner→Keisei、KeiseiOshiage Local/LimitedExpress→Toei、NaritaSkyAccess AccessExpress/Skyliner→Keisei）；node --check 通过；trains.html v=4.3.639。
+
+## 4.3.640（2026-09-16，无直通线路 vehicleType 全量补全）
+**用户指示**：「继续进行验证」——把无直通线路的车型也纳入 vehicle-type-map.js，实现所有 manual 线路全覆盖。
+**范围**：63 条无直通 manual 线路（东急 5 线已内嵌 vehicleType 无需重复）→ 补 58 条（JR 地方线 39 + 私铁/单轨/新交通 19）。
+**新增 MAP 条目**（全部无直通 → 仅 `default`，无需 destGroup 分支）：
+- JR 地方线 39 线（72 trainType）：磐越東/西線（キハ110系）、越後線（E127系）、五能線（キハ40/HB-E300系リゾートしらかみ）、八戸線（キハE130形500番台）、飯山線（キハ110系）、石巻線（キハ110系）、釜石線（HB-E220系，2026年3月置換）、烏山線（EV-E301系 ACCUM）、気仙沼線/北上線/小海線/花輪線/大船渡線/男鹿線（EV-E801系）/大湊線/奥羽本線（701/E721系）/陸羽東西線/両毛線（E231/E233系）/仙石線（E131系800番台，2026年置換）/仙石東北ライン（HB-E210系）/仙山線/信越本線/篠ノ井線/水郡線/只見線/田沢湖線（701系5000番台+E6系こまち）/東北本線/津軽線/羽越本線（E653系いなほ）/山田線/山形線（E8/E3系つばさ）/米坂線/水戸線（E501/E531系）/弥彦線（E127系）/大糸線（E127系100番台+HB-E300系）/辰野支線（211系+E353系）
+- 私铁/单轨/新交通 19 线：京急大師/空港/久里浜/逗子線（新1000形/1500形/2100形）、西武拜島/国分寺/秩父/西武園/新宿/多摩川/多摩湖/豊島/山口/狭山線（各西武形式含40000系 Laview）、小田急江ノ島線（1000形/4000形/ロマンスカー）、ニューシャトル（2000系/2020系）、東京モノレール（10000形）、ゆりかもめ（7300系/7500系）、白新線（E129系+E653系いなほ）
+**车型实证修正**（子代理研究发现）：仙石線 205系→E131系800番台（2026年置換完了）、仙石東北ライン HB-E211→HB-E210系（系类名修正）、釜石線 キハ110→HB-E220系、男鹿線 キハ40→EV-E801系、ゆりかもめ 7000系→7300/7500系（2020年全廃）、ニューシャトル 1050系→2000/2020系（2026年引退）、西武狭山線 新101系→7000系（2026年ワンマン化）、白新線 E127系→E129系。
+**验证**：node --check 通过；work/verify_vtype_coverage.js 55/55（直通线不变）；work/verify_through_vtype.js 55/55 OK；work/verify_full_coverage.js 112 MAP + 5 东急内嵌 = 117 线（剩余 49 线为 JR 通勤线/支线/其他 operator，不在 manual 无直通范围内）；MAP 总计 113 线/333 trainType 条目；trains.html v=4.3.640。
