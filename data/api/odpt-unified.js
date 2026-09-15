@@ -87,7 +87,7 @@
         },
         "Keio": {
             base: "https://api-challenge.odpt.org/api/v4/",
-            train: null,  // 京王不提供列车位置API
+            train: "odpt:Train?odpt:operator=odpt.Operator:Keio",  // v4.3.6xx: 实测有67列实时列车，原配置错误为null
             trainTimetable: "odpt:TrainTimetable?odpt:operator=odpt.Operator:Keio",
             trainInformation: "odpt:TrainInformation?odpt:operator=odpt.Operator:Keio"
         },
