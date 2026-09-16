@@ -10,7 +10,7 @@
       "desc": "駅直結で雨に濡れずに買い物できる。ファッションから雑貨（Loftあり）、カフェまで一通り揃っていて、時間つぶしにも困らない。",
       "tags": [
         "all",
-        "shopping"
+        "landmark"
       ],
       "image": "../images/観光地/LUMINE 北千住.jpg",
       "bestTime": "11:00～20:30",
@@ -473,8 +473,8 @@
       "desc": "池袋のランドマーク的存在。ショッピングモールに水族館、展望台、ナンジャタウンまで入っていて、一日中いても飽きない。",
       "tags": [
         "all",
-        "shopping",
-        "landmark"
+        "landmark",
+        "modern"
       ],
       "image": "../images/観光地/サンシャインシティ.jpg",
       "bestTime": "10:00～22:00",
@@ -549,8 +549,7 @@
       "desc": "東口直結。日本でも有数の売り場面積を誇る百貨店。地下食品街（デパチカ）は東京でもトップクラスの品揃えで、屋上の庭園も穴場。",
       "tags": [
         "all",
-        "shopping",
-        "food"
+        "landmark"
       ],
       "image": "../images/観光地/西武百貨店 池袋本店.jpg",
       "bestTime": "10:00～21:00",
@@ -625,8 +624,7 @@
       "desc": "西口直結で西武と向かい合う。レストラン街「SPICE」が複数フロアを占めていて、全国の人気店がここに集まっている。食いしん坊にはたまらない。",
       "tags": [
         "all",
-        "shopping",
-        "food"
+        "landmark"
       ],
       "image": "../images/観光地/東武百貨店 池袋店.jpg",
       "bestTime": "10:00～21:00",
@@ -1006,7 +1004,7 @@
       "desc": "南千住で一番大きな複合商業施設。スーパー、ドラッグストア、ユニクロにリーズナブルなレストランと、日常の買い物はここでだいたい済む。",
       "tags": [
         "all",
-        "shopping"
+        "landmark"
       ],
       "image": "../images/観光地/LaLa Terrace 南千住.jpg",
       "bestTime": "10:00～21:00",
@@ -2331,7 +2329,7 @@
       "desc": "池袋駅西口直結のショッピングセンター。ファッションから雑貨、カフェまで揃い、雨の日でも濡れずに買い物ができる。",
       "tags": [
         "all",
-        "shopping"
+        "landmark"
       ],
       "image": "../images/観光地/LUMINE 池袋.jpg",
       "bestTime": "11:00～21:00",
@@ -2557,7 +2555,8 @@
       "desc": "池袋駅東口から徒歩1分のファッションビル。アニメ・サブカル系ショップも多く、若者文化の発信地。",
       "tags": [
         "all",
-        "shopping"
+        "landmark",
+        "modern"
       ],
       "image": "../images/観光地/池袋PARCO.jpg",
       "bestTime": "11:00～21:00",
@@ -8247,8 +8246,7 @@
       "tags": [
         "all",
         "landmark",
-        "modern",
-        "shopping"
+        "modern"
       ],
       "bestTime": "夕方～夜",
       "hours": "施設により異なる",
@@ -34344,7 +34342,7 @@
         139.7922
       ],
       "dist": "千住大橋駅から徒歩約6分",
-      "desc": "1960年の創業より、お子様が6年間笑顔で過ごせるよう願いを込めて、ランドセルを作り続けています。 ※中村鞄製作所ランドセルは百貨店・量販店でのお取扱いはございません。",
+      "desc": "1960年創業のランドセル専門工房。百貨店や量販店では扱わず、自社工房で一点ずつ作り続ける姿勢が支持される。",
       "tags": [
         "all",
         "shopping"
@@ -34365,10 +34363,10 @@
         "ko": "나카무라 가방 제작소 도쿄 본점"
       },
       "desc_i18n": {
-        "ja": "1960年の創業より、お子様が6年間笑顔で過ごせるよう願いを込めて、ランドセルを作り続けています。 ※中村鞄製作所ランドセルは百貨店・量販店でのお取扱いはございません。",
-        "zh": "自1960年创业以来，怀着让孩子6年都笑容满面的心愿，一直制作书包（ランドセル）。※中村鞄製作所的书包不在百货店、量贩店销售。",
-        "en": "Since its founding in 1960, Nakamura Kaban has made randoseru with the wish that each child will spend six happy, smiling years with theirs. ※Nakamura Kaban randoseru are not sold at department stores or mass retailers.",
-        "ko": "1960년 창업 이래 아이가 6년간 웃으며 보낼 수 있길 바라는 마음을 담아 란도셀을 만들고 있어요. ※나카무라 카방 란도셀은 백화점·대형마트에서 취급하지 않아요."
+        "ja": "1960年創業のランドセル専門工房。百貨店や量販店では扱わず、自社工房で一点ずつ作り続ける姿勢が支持される。",
+        "zh": "1960年创业的书包专门工房。不在百货店和量贩店销售，坚持在自家工房逐一制作，这份匠心深受信赖。",
+        "en": "A randoseru specialist workshop founded in 1960. Not sold at department stores or mass retailers; its craftsmen keep making each bag by hand in their own workshop.",
+        "ko": "1960년 창업한 란도셀 전문 공방이에요. 백화점·대형마트에서는 취급하지 않고 자체 공방에서 하나씩 만드는 태도가 신뢰를 받아요."
       },
       "hours_i18n": {
         "ja": "9:30～17:30（電話：9:00～17:00） ※事前に ホームページ から来店予約が必要（定休日不定休）",
@@ -34419,10 +34417,10 @@
         139.8123
       ],
       "dist": "谷塚駅から徒歩約17分",
-      "desc": "ベルクス足立花畑中央店は、ショッピングモール型1号店になります。モール内には、皆様の健康を応援するベルクススポーツクラブ＜ベルスポ＞をはじめ、 皆様の健康と暮らしに役立つ多種多様なテナントが入っています。 足立花畑中央店独自の企画としては、毎月1回日曜日に大朝市を開催しています。 また、2020年にセルフレジを導入し、レジの混雑緩和及び、お客様により快適にお買い物しやすい店づくりに努めています。",
+      "desc": "足立花畑の住宅地に構えるショッピングモール型のスーパー。スポーツクラブや多彩なテナントが入り、毎月第1日曜には大朝市が開かれる。地元の暮らしに密着した買い物拠点。",
       "tags": [
         "all",
-        "shopping"
+        "landmark"
       ],
       "image": "../images/観光地/ベルクス 足立花畑中央店.jpg",
       "bestTime": "【月曜～土曜】10:00～21:00 【日曜】9:00～21:00（定休日不定休）",
@@ -34440,10 +34438,10 @@
         "ko": "벨크스 아다치하나하타"
       },
       "desc_i18n": {
-        "ja": "ベルクス足立花畑中央店は、ショッピングモール型1号店になります。モール内には、皆様の健康を応援するベルクススポーツクラブ＜ベルスポ＞をはじめ、 皆様の健康と暮らしに役立つ多種多様なテナントが入っています。 足立花畑中央店独自の企画としては、毎月1回日曜日に大朝市を開催しています。 また、2020年にセルフレジを導入し、レジの混雑緩和及び、お客様により快適にお買い物しやすい店づくりに努めています。",
-        "zh": "ベルクス足立花畑中央店是购物中心型1号店。商场内有支持大家健康的ベルク斯体育俱乐部〈ベルスポ〉，以及众多有益健康与生活的各类租户。作为足立花畑中央店的独立企划，每月第1个周日举办大型早市。2020年引入自助收银，致力于缓解排队、让顾客购物更舒适。",
-        "en": "Berux Adachi-Hanahata Chuo is the first mall-style location of the chain. Inside, alongside the Berux Sports Club (Beruspo) that supports everyone's health, a wide variety of tenants serve daily life and well-being. Its signature event is a large morning market held on the first Sunday of every month, and since 2020 self-checkout lanes have kept lines short and shopping comfortable.",
-        "ko": "베르크스 아다치 하나하타 중앙점은 쇼핑몰형 1호점이에요. 몰 안에는 건강을 응원하는 베르크스 스포츠 클럽 <베르스포>를 비롯해 건강과 생활에 유용한 다양한 테넌트가 입점해 있어요. 아다치 하나하타 중앙점만의 기획으로 매월 첫째 주 일요일 대형 아침시장을 열어요. 2020년에 셀프 계산대를 도입해 계산대 혼잡을 줄이고 더 편안하게 쇼핑할 수 있게 노력하고 있어요."
+        "ja": "足立花畑の住宅地に構えるショッピングモール型のスーパー。スポーツクラブや多彩なテナントが入り、毎月第1日曜には大朝市が開かれる。地元の暮らしに密着した買い物拠点。",
+        "zh": "位于足立花畑住宅区的购物中心型超市。设有体育俱乐部及多种租户，每月第1个周日举办大型早市。与当地生活紧密相连的购物据点。",
+        "en": "A mall-style supermarket in the Hanahata residential area of Adachi. It houses a sports club and diverse tenants, and hosts a big morning market on the first Sunday of every month — a shopping hub rooted in local life.",
+        "ko": "아다치 하나하타 주택가에 자리한 쇼핑몰형 슈퍼마켓이에요. 스포츠 클럽과 다양한 테넌트가 들어서 있고 매월 첫째 주 일요일에는 대형 아침시장이 열려요. 지역 생활에 밀착한 쇼핑 거점이에요."
       },
       "hours_i18n": {
         "ja": "【月曜～土曜】10:00～21:00 【日曜】9:00～21:00（定休日不定休）",
@@ -34494,7 +34492,7 @@
         139.8299134
       ],
       "dist": "3 min walk",
-      "desc": "「TOKYOACRYLSHOP」はオリジナルのアクリル板を販売する専門ショップです。世界でここでしか買えないカラーを取り揃え、アクリル素材を使ったものづくり体験もできます。",
+      "desc": "世界でここでしか買えないオリジナルカラーのアクリル板を扱う専門店。板を選ぶだけでなく、アクリル素材でものづくりを楽しむ体験もできる。",
       "tags": [
         "all",
         "shopping"
@@ -34515,10 +34513,10 @@
         "ko": "도쿄 아크릴"
       },
       "desc_i18n": {
-        "ja": "「TOKYOACRYLSHOP」はオリジナルのアクリル板を販売する専門ショップです。世界でここでしか買えないカラーを取り揃え、アクリル素材を使ったものづくり体験もできます。",
-        "zh": "\"TOKYOACRYLSHOP\"是销售原创亚克力板的专门店。备有全世界仅此可购的独家色彩，还可体验使用亚克力材料的手工制作。",
-        "en": "\"TOKYOACRYLSHOP\" is a specialist store selling original acrylic sheets, offering colors found nowhere else in the world, plus hands-on making experiences with acrylic.",
-        "ko": "\"TOKYOACRYLSHOP\"은 오리지널 아크릴 판을 판매하는 전문점이에요. 세계에서 여기서만 살 수 있는 컬러를 갖추고 아크릴 소재를 활용한 만들기 체험도 할 수 있어요."
+        "ja": "世界でここでしか買えないオリジナルカラーのアクリル板を扱う専門店。板を選ぶだけでなく、アクリル素材でものづくりを楽しむ体験もできる。",
+        "zh": "销售全世界独此一家的原创色亚克力板专门店。不仅能挑选板材，还能体验用亚克力材质进行手工制作。",
+        "en": "A specialist shop for original acrylic sheets in colors found nowhere else in the world. Beyond choosing sheets, you can enjoy hands-on making with acrylic.",
+        "ko": "세계에서 여기서만 구할 수 있는 오리지널 컬러 아크릴 판을 다루는 전문점이에요. 판을 고르는 것뿐 아니라 아크릴 소재로 만들기를 즐길 수 있는 체험도 있어요."
       },
       "hours_i18n": {
         "ja": "13:00〜20:00 詳しくは こちら（定休日日曜、火曜、木曜、土曜（臨時休業あり・月曜が祝日の場合は火曜休業） 詳しくは こちら）",
@@ -34644,7 +34642,7 @@
         139.7663
       ],
       "dist": "西新井駅前",
-      "desc": "ふわりと漂う革の香りに包まれる土屋鞄製造所の実店舗。ランドセルと大人向けの鞄製品を販売しています。 季節限定でレザークラフトを体験できるワークショップも開催。 工房併設の本店では、我々の原点である「ランドセル作り」がご覧いただけます。職人の作業風景を通して、人の手の温もりをぜひ感じてください。",
+      "desc": "革の香りに包まれる工房併設の本店。ランドセルから大人用の鞄まで並び、季節限定のレザークラフト体験も開催。職人の手仕事を間近で見られる。",
       "tags": [
         "all",
         "shopping"
@@ -34665,10 +34663,10 @@
         "ko": "츠치야 가방 제조소 니시아라이 본점"
       },
       "desc_i18n": {
-        "ja": "ふわりと漂う革の香りに包まれる土屋鞄製造所の実店舗。ランドセルと大人向けの鞄製品を販売しています。 季節限定でレザークラフトを体験できるワークショップも開催。 工房併設の本店では、我々の原点である「ランドセル作り」がご覧いただけます。職人の作業風景を通して、人の手の温もりをぜひ感じてください。",
-        "zh": "被皮革香气轻柔包裹的土屋鞄制造所实体店。销售小学生书包（ランドセル）与成人用包袋。还定期举办可体验皮革工艺的季节限定工作坊。在附设工房的本店，可以看到我们原点的\"书包制作\"。透过工匠的作业身影，感受人手的温度。",
-        "en": "The physical store of Tsuchiya Kaban, wrapped in the soft scent of leather, selling randoseru school bags and bags for adults. Seasonal leather-craft workshops are also offered. At the flagship store with its attached workshop, you can watch \"randoseru making\" — our origin — and feel the warmth of human hands in the craftsmen's work.",
-        "ko": "은은한 가죽 향기에 감싸이는 츠치야 카방의 실제 매장. 란도셀과 성인용 가방을 판매해요. 계절 한정으로 가죽 공예 체험 워크숍도 열려요. 공방이 함께 있는 본점에서는 우리의 출발점인 \"란도셀 만들기\"를 볼 수 있어요. 장인의 작업 모습을 통해 사람 손의 온기를 꼭 느껴 보세요."
+        "ja": "革の香りに包まれる工房併設の本店。ランドセルから大人用の鞄まで並び、季節限定のレザークラフト体験も開催。職人の手仕事を間近で見られる。",
+        "zh": "被皮革香气包围、附设工房的总店。从书包到成人用包袋一应俱全，还定期举办季节限定的皮革工艺体验，能近距离观看工匠的手艺。",
+        "en": "The flagship store with an attached workshop, wrapped in the scent of leather. It carries randoseru and adult bags, holds seasonal leather-craft workshops, and lets you watch craftsmen at work up close.",
+        "ko": "가죽 향기에 감싸인 공방 겸 본점이에요. 란도셀부터 성인용 가방까지 갖추고 있고 계절 한정 가죽 공예 체험도 열려요. 장인의 손길을 가까이서 볼 수 있어요."
       },
       "hours_i18n": {
         "ja": "10:00~18:00（定休日火曜（臨時休業あり））",
@@ -34869,7 +34867,7 @@
         139.831628
       ],
       "dist": "15 min walk",
-      "desc": "カジュアルからエレガントまで、幅広いデザインのバッグをご提案させて頂いております。 企画から製造、販売、そしてアフターケア。 一貫した体制の中で、一つ一つの商品を大切に。 商品の生産の他にも、熟練した縫製技術を活かし、バッグの修理や、ランドセルのリメイクも行っております。",
+      "desc": "千住で鞄づくりを続ける老舗メーカーのショールーム＆カフェ。工場併設ならではの修理やランドセル・リメイクにも対応し、カフェで一息つきながら革製品に触れられる。",
       "tags": [
         "all",
         "shopping"
@@ -34890,10 +34888,10 @@
         "ko": "이토 가방 쇼룸 & 카페"
       },
       "desc_i18n": {
-        "ja": "カジュアルからエレガントまで、幅広いデザインのバッグをご提案させて頂いております。 企画から製造、販売、そしてアフターケア。 一貫した体制の中で、一つ一つの商品を大切に。 商品の生産の他にも、熟練した縫製技術を活かし、バッグの修理や、ランドセルのリメイクも行っております。",
-        "zh": "从休闲到优雅，提供设计多样的包袋。从企划到制造、销售乃至售后，在一贯的体制中珍视每一件商品。除生产外，还活用熟练的缝制技术，承接包袋修理与书包的改做（リメイク）。",
-        "en": "Bags in a wide range of designs, from casual to elegant. From planning through manufacturing, sales and aftercare, every item is made with care within one integrated system. Beyond production, the workshop's skilled stitching is put to work repairing bags and remaking randoseru.",
-        "ko": "캐주얼부터 엘레간트까지 폭넓은 디자인의 가방을 제안해요. 기획부터 제조, 판매, 사후관리까지 일관된 체제 속에서 하나하나의 상품을 소중히 다뤄요. 상품 생산 외에도 숙련된 봉제 기술을 살려 가방 수리와 란도셀 리메이크도 진행해요."
+        "ja": "千住で鞄づくりを続ける老舗メーカーのショールーム＆カフェ。工場併設ならではの修理やランドセル・リメイクにも対応し、カフェで一息つきながら革製品に触れられる。",
+        "zh": "在千住持续制包的老牌厂商直营展厅&咖啡馆。依托工厂可承接修理和书包改做，还能在咖啡馆歇脚时亲手感受皮革制品。",
+        "en": "A showroom & café run by a long-established bag maker in Senju. With a factory attached, it handles repairs and randoseru remakes; you can also take a break at the café while browsing leather goods.",
+        "ko": "센쥬에서 가방을 만들어 온 전통 제조사의 쇼룸&카페예요. 공장이 함께 있어 수리와 란도셀 리메이크도 가능하고, 카페에서 쉬며 가죽 제품을 살펴볼 수 있어요."
       },
       "hours_i18n": {
         "ja": "ショールーム 9:30～18:00 カフェ [ランチ] 11:00～14:00 [ティータイム]14:00～17:30 (ラストオーダー17:00)（定休日日曜、祝日、GW、夏期・冬期休業）",
