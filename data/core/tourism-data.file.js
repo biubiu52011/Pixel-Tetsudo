@@ -235,10 +235,9 @@ window.RAILWAY_TOURISM = {
       "dist": "5 min walk",
       "desc": "江戸時代は日光街道の宿場町だった通り。今でも老舗の菓子屋や昭和レトロな居酒屋が残っていて、歩いているだけでタイムスリップした気分になれる。",
       "tags": [
-        "history",
         "all",
-        "food",
-        "shopping"
+        "landmark",
+        "history"
       ],
       "image": "../images/観光地/宿場町通り商店街.jpg",
       "bestTime": "昼～夜",
@@ -775,7 +774,7 @@ window.RAILWAY_TOURISM = {
       "desc": "サンシャインシティの脇にある通り。女性向けのアニメショップや同人誌店、執事喫茶が集まっていて、独特のカルチャーを感じられる。",
       "tags": [
         "all",
-        "shopping",
+        "landmark",
         "modern"
       ],
       "image": "../images/観光地/乙女ロード.jpg",
@@ -2187,8 +2186,8 @@ window.RAILWAY_TOURISM = {
       "desc": "住宅街の真ん中にひっそり残るレトロな商店街。昭和時代から続く手作り豆腐店や老舗の菓子屋があって、歩いているだけで下町の活気を感じられる。",
       "tags": [
         "all",
-        "shopping",
-        "food"
+        "landmark",
+        "history"
       ],
       "image": "../images/観光地/柳原商栄会商店街.jpg",
       "bestTime": "昼～夜",
@@ -2258,8 +2257,8 @@ window.RAILWAY_TOURISM = {
       "desc": "駅から歩いて10分ほど。近くの大学キャンパスに近いせいか、通りの両側にリーズナブルな焼肉店、ドラッグストア、弁当屋、学生向けの居酒屋がびっしり並んでいる。",
       "tags": [
         "all",
-        "shopping",
-        "food"
+        "landmark",
+        "history"
       ],
       "image": "../images/観光地/千住旭町商店街（学園通り）.jpg",
       "bestTime": "昼～夜",
@@ -7407,8 +7406,7 @@ window.RAILWAY_TOURISM = {
       "desc": "高級ブランド店や老舗が並ぶ東京を代表する繁華街。週末は歩行者天国になり、和光の時計台や歌舞伎座など見どころも豊富。",
       "tags": [
         "all",
-        "landmark",
-        "shopping"
+        "landmark"
       ],
       "bestTime": "土日（歩行者天国）",
       "hours": "店舗により異なる",
@@ -7864,7 +7862,7 @@ window.RAILWAY_TOURISM = {
       "tags": [
         "all",
         "landmark",
-        "shopping"
+        "modern"
       ],
       "bestTime": "日中・夜",
       "hours": "常時（交差点）",
@@ -8779,8 +8777,8 @@ window.RAILWAY_TOURISM = {
       "desc": "サブカルチャーと古着の聖地。個性的なカフェやライブハウスが密集し、古着屋巡りや本多劇場での演劇など、一日中歩き回れる街。",
       "tags": [
         "all",
-        "shopping",
-        "landmark"
+        "landmark",
+        "modern"
       ],
       "bestTime": "午後～夜",
       "hours": "店舗により異なる",
@@ -8855,8 +8853,8 @@ window.RAILWAY_TOURISM = {
       "desc": "サブカル・オタク文化の聖地。マンガ・フィギュア・中古品がびっしり並ぶ。",
       "tags": [
         "all",
-        "shopping",
-        "landmark"
+        "landmark",
+        "modern"
       ],
       "bestTime": "午後",
       "hours": "店舗により異なる（10:00～20:00）",
@@ -9696,9 +9694,8 @@ window.RAILWAY_TOURISM = {
       "desc": "六本木の複合商業施設。デザイン性の高い建築と緑豊かな広場が特徴で、ミッドタウンガーデンや21_21 DESIGN SIGHTなどの文化施設も充実。",
       "tags": [
         "all",
-        "shopping",
-        "modern",
-        "landmark"
+        "landmark",
+        "modern"
       ],
       "bestTime": "通年",
       "hours": "店舗・施設により異なる（多くは 11:00-21:00）",
@@ -10230,8 +10227,8 @@ window.RAILWAY_TOURISM = {
       "desc": "昭和の風情が残る下町商店街。約60店舗が軒を連ね、食べ歩きグルメや猫スポットとして人気。夕暮れの夕焼けだんだんが有名。",
       "tags": [
         "all",
-        "shopping",
-        "food"
+        "landmark",
+        "history"
       ],
       "bestTime": "昼〜夕方",
       "hours": "店舗により異なる（多くは 10:00-18:00 前後）",
@@ -11376,7 +11373,7 @@ window.RAILWAY_TOURISM = {
       "desc": "「おばあちゃんの原宿」と呼ばれる巣鴨のメイン商店街。とげぬき地蔵尊への参道に約180店が並ぶ。",
       "tags": [
         "all",
-        "shopping",
+        "landmark",
         "history"
       ],
       "bestTime": "昼",
@@ -11452,8 +11449,8 @@ window.RAILWAY_TOURISM = {
       "desc": "東京一の長さ約1.3kmを誇る商店街。約400店が連なり、食べ歩きグルメが人気の下町商店街。",
       "tags": [
         "all",
-        "shopping",
-        "food"
+        "landmark",
+        "history"
       ],
       "bestTime": "昼〜夕方",
       "hours": "店舗により異なる（多くは 10:00-19:00）",
@@ -11528,8 +11525,8 @@ window.RAILWAY_TOURISM = {
       "desc": "「人情の街」として知られる下町商店街。約140店が軒を連ね、安くて旨い惣菜・おでんが自慢。",
       "tags": [
         "all",
-        "shopping",
-        "food"
+        "landmark",
+        "history"
       ],
       "bestTime": "昼〜夕方",
       "hours": "店舗により異なる（多くは 10:00-19:00）",
@@ -11604,8 +11601,8 @@ window.RAILWAY_TOURISM = {
       "desc": "「純情商店街」の名で親しまれる高円寺駅北口の商店街。古着店・ライブハウス・個性派カフェが集まる。",
       "tags": [
         "all",
-        "shopping",
-        "food"
+        "landmark",
+        "history"
       ],
       "bestTime": "昼〜夜",
       "hours": "店舗により異なる（多くは 10:00-21:00）",
@@ -11680,8 +11677,8 @@ window.RAILWAY_TOURISM = {
       "desc": "アーケードの下に精肉店・鮮魚店・惣菜店など約180店が並ぶ活気ある下町商店街。",
       "tags": [
         "all",
-        "shopping",
-        "food"
+        "landmark",
+        "history"
       ],
       "bestTime": "昼〜夕方",
       "hours": "店舗により異なる（多くは 9:00-19:00）",
@@ -13900,7 +13897,6 @@ window.RAILWAY_TOURISM = {
       "desc": "半蔵門駅すぐ地下にあるカメラ専門博物館。日本初の市販カメラ「チェリー手提暗函」のレプリカも展示。",
       "tags": [
         "all",
-        "shopping",
         "landmark"
       ],
       "image": "../images/観光地/日本カメラ博物館.jpg",
@@ -14382,7 +14378,7 @@ window.RAILWAY_TOURISM = {
       "desc": "世界の太鼓約200点を展示する資料館。7割以上は実際に叩くことができる体験型ミュージアム。",
       "tags": [
         "all",
-        "shopping",
+        "landmark",
         "history"
       ],
       "image": "../images/観光地/宮本卯之助商店 太皷館.jpg",
@@ -22337,7 +22333,7 @@ window.RAILWAY_TOURISM = {
       "desc": "日本初の教科書専門図書館。鎌倉時代から現代までの教科書を所蔵し、明治期の資料は国の重要文化財。",
       "tags": [
         "all",
-        "shopping",
+        "landmark",
         "history"
       ],
       "image": "../images/観光地/東書文庫.jpg",
@@ -24604,7 +24600,8 @@ window.RAILWAY_TOURISM = {
       "desc": "学生の支援で復活した名画座。往年の名作を二本立てで上映する、高田馬場を代表する映画館。",
       "tags": [
         "all",
-        "shopping"
+        "landmark",
+        "history"
       ],
       "image": "../images/観光地/早稲田松竹.jpg",
       "bestTime": "夜",
@@ -26567,8 +26564,8 @@ window.RAILWAY_TOURISM = {
       "desc": "コンクリート打ちっ放しのモダン空間と日本庭園を備えた座禅スポット。月1回19時開始の座禅会に参加できる。",
       "tags": [
         "all",
-        "shopping",
-        "nature"
+        "nature",
+        "landmark"
       ],
       "image": "../images/観光地/Akasaka Zen Space.jpg",
       "bestTime": "夜",
