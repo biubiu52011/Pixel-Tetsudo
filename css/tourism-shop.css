@@ -23,6 +23,9 @@
 .article-content--shop .dp-price-label { font-size: 12px; }
 .article-content--shop .dp-dist { font-size: 13px; color: #666; line-height: 1.4; text-align: right; }
 .article-content--shop .dp-chips { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 6px; }
+/* 融合信息行（店名卡内嵌） */
+.article-content--shop .dp-info-merged { margin-top: 10px; border-top: 1px solid #f0f0f0; padding-top: 10px; }
+.article-content--shop .dp-info-merged .dp-info-row { padding: 3px 0; }
 
 /* 通用白色卡片 */
 .article-content--shop .dp-card { background: #fff; border-radius: 12px; margin: 0 12px 12px; padding: 14px;

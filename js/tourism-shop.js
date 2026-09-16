@@ -28,16 +28,8 @@
     return '<div class="dp-hero ' + ctx.heroClass + '">' + img + '<div class="dp-hero-shade"></div>' + photoTag + '</div>';
   }
 
-  // ② 店名卡：店名 + 类型徽章 + 分类芯片（点评身份层，费用/距离已并入信息卡）
+  // ② 店名卡（融合信息行）：店名 + 类型徽章 + 费用/人均 + 营业时间 + 距离 + 地址 + 分类芯片
   function buildHeadCard(ctx) {
-    return '<div class="dp-head">'
-      + '<div class="dp-head-row"><h1 class="dp-name">' + C.escapeHtml(ctx.spotName) + '</h1>' + ctx.typeBadge + '</div>'
-      + (ctx.tagsHtml ? '<div class="dp-chips">' + ctx.tagsHtml + '</div>' : '')
-      + '</div>';
-  }
-
-  // ③ 信息卡（费用/人均 → 营业时间 → 距离 → 地址；点评权重首位融合层）
-  function buildInfoCard(ctx) {
     var ICON = {
       fee:   '<svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M11 8v1h.01V8h1v2h2v1h-2v3.5A1.5 1.5 0 0 0 15.5 16H14v1h1.5a2.5 2.5 0 0 0 2.5-2.5V9h-2V8h-3zm2-4H3a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h10v-1H3V5h10v3zm4-1h-3v1h3v13a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1h-2z"/></svg>',
       hours: '<svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M12 2c-5.52 0-10 4.48-10 10s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg>',
@@ -45,20 +37,23 @@
       addr:  '<svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg>'
     };
     var rows = '';
-    // 费用/人均（首位）
     rows += '<div class="dp-info-row"><span class="dp-ico">' + ICON.fee + '</span><span class="dp-info-label">' + feeLabelFor(ctx.spotFee) + '</span><span class="dp-info-val">' + C.escapeHtml(ctx.spotFee) + '</span></div>';
-    // 营业时间
     rows += '<div class="dp-info-row"><span class="dp-ico">' + ICON.hours + '</span><span class="dp-info-label">' + C.t('detail.info_hours') + '</span><span class="dp-info-val">' + C.escapeHtml(ctx.spotHours) + '</span></div>';
-    // 距离
     if (ctx.dist && (ctx.dist.distMain || ctx.dist.distText)) {
       rows += '<div class="dp-info-row"><span class="dp-ico">' + ICON.dist + '</span><span class="dp-info-label">' + C.t('detail.distance') + '</span><span class="dp-info-val">' + C.distValueHtml(ctx.dist) + '</span></div>';
     }
-    // 地址
     if (ctx.spotAddress) {
       rows += '<div class="dp-info-row"><span class="dp-ico">' + ICON.addr + '</span><span class="dp-info-label">' + C.t('detail.address') + '</span><span class="dp-info-val">' + C.escapeHtml(ctx.spotAddress) + '</span></div>';
     }
-    return '<div class="dp-card dp-info">' + rows + '</div>';
+    return '<div class="dp-head">'
+      + '<div class="dp-head-row"><h1 class="dp-name">' + C.escapeHtml(ctx.spotName) + '</h1>' + ctx.typeBadge + '</div>'
+      + '<div class="dp-info-merged">' + rows + '</div>'
+      + (ctx.tagsHtml ? '<div class="dp-chips">' + ctx.tagsHtml + '</div>' : '')
+      + '</div>';
   }
+
+  // ③ 信息卡已融合进店名卡（4.3.838），保留空实现保持渲染调用链不变
+  function buildInfoCard(ctx) { return '' }
 
   // ④ 介绍
   function buildAboutCard(ctx) {
