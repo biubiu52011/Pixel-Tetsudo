@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Pixel Tetsudo - Train Icon Mapping
  * 列车车型图标映射表
  * 图标来源: trainfrontview.net (32x38px)
@@ -578,5 +578,5 @@
     OPERATOR_ICONS: OPERATOR_ICONS
   };
 
-  console.log("[TrainIcons] initialized with", Object.keys(LINE_ICONS).length, "line icons and", Object.keys(OPERATOR_ICONS).length, "operator defaults");
+  console.debug("[TrainIcons] initialized with", Object.keys(LINE_ICONS).length, "line icons and", Object.keys(OPERATOR_ICONS).length, "operator defaults");
 })();

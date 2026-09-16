@@ -192,7 +192,7 @@
       //    中央本線已独立 CO 卡（4.3.414），TRUNK_MAIN_LINE_IDS 余项（Shinetsu/TokaidoMain/TohokuMain）
       //    均非运行系统的直通延伸段。未来确有需要时在此显式登记，例：{ ChuoRapid: ["ChuoMain"] }。
       var trunk = (window.DataState && window.DataState.TRUNK_MAIN_LINE_IDS) || [];
-      var _TRUNK_EXTENSION_ALLOW = {};
+      var _TRUNK_EXTENSION_ALLOW = (window.RuntimeConfig && window.RuntimeConfig.TRUNK_EXTENSION_ALLOW) || {};
       for (var ti = 0; ti < trunk.length; ti++) {
         var tlid = trunk[ti];
         if (!_TRUNK_EXTENSION_ALLOW[tlid]) continue;
@@ -1403,7 +1403,7 @@
       var ICON = 16; // v4.3.497: 换乘图标统一 16px（与站名字号一致，用户尝试）
       var GAP = 2;
       var PER_ROW = 4;
-      var MAX_ROWS = 3; // v4.3.613: 2→3 行——JR 大站（东京/新宿）换乘超 8 条，截断致"同一套系统无法区分"
+      var MAX_ROWS = (window.RuntimeConfig && window.RuntimeConfig.TRANSFER_MAX_ROWS) || 3; // v4.3.613: 2→3 行——JR 大站（东京/新宿）换乘超 8 条，截断致"同一套系统无法区分"
       var maxShow = PER_ROW * MAX_ROWS;
       var nonThru = txLines.filter(function(t) { return !t.through; });
       // v4.3.613 系统级去重：同一运营系统只显示一个徽章——

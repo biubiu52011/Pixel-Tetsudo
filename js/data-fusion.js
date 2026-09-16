@@ -1,12 +1,12 @@
-/*
+﻿/*
  * Pixel Tetsudo - DataFusion v11 (Position Support)
  */
 (function() {
   "use strict";
 
   var FUSION_VERSION = 11;
-  var REFRESH_INTERVAL = 15000;
-  var POSITION_INTERVAL = 60000;
+  // v4.3.x: 实时轮询间隔 — 见 runtime-config.js REFRESH_INTERVAL
+  // v4.3.x: 位置轮询间隔 — 见 runtime-config.js POSITION_INTERVAL
 
   var odptData = { trains: {}, delayInfo: {}, realtimePositions: {} };
   var subscribers = [];
@@ -312,92 +312,18 @@
   // 五日市線 武蔵引田：ODPT MusashiHikida（官方罗马音 Hikida）→ 项目 Musashi-Hikita（历史拼写 d/t 混淆，冻结待用户决定是否修数据）
   // v4.3.472: 都電荒川線 26 站——ODPT 驼峰 ID vs 本地下划线 ID 命名体系不同，导致 17 条 odpt:Train 仅 Kajiwara/Asukayama/Waseda 3 站命中（页面只显示 2 条实时列车）
   // v4.3.473: 面影橋 Freeze 例外——本地第 29 站 Kataomo_Bashi(片倉橋) 已正名为 Omokagebashi(面影橋)，Omokagebashi 别名随之移除（站 ID 现已直接一致）
-  var STATION_ALIAS = {
-    "MusashiHikida": "Musashi-Hikida", // v4.3.475: 本地站 ID 已正名 Musashi-Hikida（ODPT MusashiHikida 驼峰→本地连字符，语义同值）
-    "Minowabashi": "Sannomi_Bashi",
-    "ArakawaItchumae": "Arakawa_Ichi_Mae",
-    "Arakawakuyakushomae": "Arakawa_Kuyakusho_Mae",
-    "ArakawaNichome": "Arakawa_Ni",
-    "ArakawaNanachome": "Arakawa_Nana",
-    "MachiyaEkimae": "Machiya_Eki_Mae",
-    "MachiyaNichome": "Machiya_Ni",
-    "HigashiOguSanchome": "Higashi_Oku_San",
-    "Kumanomae": "Kuma_Mae",
-    "Miyanomae": "Miyano_Mae",
-    "Odai": "Kodai",
-    "ArakawaYuenchimae": "Arakawa_Yuengiei_Mae",
-    "ArakawaShakomae": "Arakawa_Shako_Mae",
-    "Sakaecho": "Eimachi",
-    "OjiEkimae": "Oji_Eki_Mae",
-    "TakinogawaItchome": "Takino_Kawa_Ichome",
-    "NishigaharaYonchome": "Nishi_Kbara_Yon",
-    "ShinKoshinzuka": "Shin_Kosenzuka",
-    "Koshinzuka": "Kosenzuka",
-    "Sugamoshinden": "Sugamo_Shimmachi",
-    "OtsukaEkimae": "Otsuka_Eki_Mae",
-    "Mukohara": "Mukaiohara",
-    "HigashiIkebukuroYonchome": "Higashi_Ikebukuro_Yon",
-    "TodenZoshigaya": "Toei_Zoshigaya",
-    "Kishibojimmae": "Onishimogami_Mae",
-    "Gakushuinshita": "Gakuin_Mae",
-    // v4.3.474: 全量通查（白天 621 条 odpt:Train）追加 14 条命名映射——
-    // 东武东上/京急/京叶/高崎/总武快速/青梅/武藏野/常磐缓行 等站 ID 拼写差异
-    // （Oyama 不在此列：Tojo 大山与 Utsunomiya 小山共用 ODPT ID，走下方 STATION_ALIAS_BY_RAILWAY）
-    "Kasumigaseki": "Kasumigaseki-Tojo",     // Tobu Tojo 霞ヶ関（本地加线后缀防冲突）
-    "Shimbamba": "Shin-Baba",                // Keikyu Main 新馬場
-    "Umeyashiki": "Umayabashi",              // Keikyu Main 梅屋敷（本地 ID 误拼，alias 兜底）
-    "Futamatashimmachi": "Futamata-Shinmachi", // JR Keiyo 二俣新町
-    "KasaiRinkaiPark": "Kasai-Rinkai-Koen",  // JR Keiyo 葛西臨海公園
-    "KitaKonosu": "Kita-Kounosu",            // JR Takasaki 北鴻巣
-    "ShinNihombashi": "Shin-Nihonbashi",     // JR SobuRapid 新日本橋
-    "Ozaku": "Kosaku",                       // JR Ome 小作（ODPT Ozaku 旧式拼写）
-    "Kawasakidaishi": "Kawasaki_Daishi",     // Keikyu Daishi 川崎大師
-    "YrpNobi": "YRP-Nohbi",                  // Keikyu Kurihama YRP野比
-    "Misakiguchi": "Misasaki-Guchi",         // Keikyu Kurihama 三崎口（本地 ID 误拼，alias 兜底）
-    "ShimMatsudo": "Shin-Matsudo",           // JR Musashino/JobanLocal 新松戸
-    "HanedaAirportTerminal1and2": "Haneda-Kuko-T1T2", // Keikyu Airport 羽田空港第1・第2ターミナル
-    // v4.3.474 追加（第 2 批，全量通查继续暴露）
-    "Yaita": "Yaida",                        // JR Utsunomiya 矢板（本地 ID 误拼 Yaida，alias 兜底）
-    "Konosu": "Kounosu",                     // JR Takasaki 鴻巣
-    "Kojimashinden": "Kojima_Shinden",       // Keikyu Daishi 小島新田
-    "Jimmuji": "Jinmuji",                    // Keikyu Zushi 神武寺（ODPT Jimmuji 误拼）
-    "Ryugasakishi": "Ryugasaki",             // JR Joban 龍ケ崎市
-    "Omurai": "Komura_i",                    // Tobu Kameido 小村井
-    "ShimMisato": "Shin-Misato",             // JR Musashino 新三郷（ODPT Shim 少 n）
-    "Kojiya": "Kokuji",                      // Keikyu Airport 糀谷（本地 ID 误拼，alias 兜底）
-    "Motohasunuma": "Hon-Hasuneuma",         // Toei Mita 本蓮沼（本地 ID 误拼，alias 兜底）
-    "Daishimae": "Daishi_Mae",               // Tobu Daishi 大師前
-    "Hamura": "Hamu",                        // JR Ome 羽村（本地 ID 截断误拼，alias 兜底）
-    "HanedaAirportTerminal3": "Haneda-Kuko-T3", // Keikyu Airport 羽田空港第3ターミナル
-    "Suzukicho": "Suzukimachi",              // Keikyu Daishi 鈴木町（本地 ID 误拼，alias 兜底）
-    "Daishibashi": "Daishi_Bashi",           // Keikyu Daishi 大師橋
-    // v4.3.479: 常磐線仙台側・東金線・成田線支線・南武線浜川崎支線（ODPT 驼峰/同值差异）
-    "MinamiSendai": "Minami-Sendai",          // JR Joban 南仙台
-    "HigashiAbiko": "Higashi-Abiko",          // JR NaritaAbikoBranch 東我孫子
-    "ShimosaManzaki": "Shimosa-Manzaki",      // JR NaritaAbikoBranch 下総松崎
-    "NaritaAirportTerminal2and3": "Airport-Terminal-2", // JR NaritaAirportBranch 空港第２ビル（京成共用物理站）
-    "NaritaAirportTerminal1": "Narita-Airport",          // JR NaritaAirportBranch 成田空港（京成共用物理站）
-    "HamaKawasaki": "Hama-Kawasaki"           // JR NambuBranch 浜川崎（Tsurumi 共用站）
-  };
+  // v4.3.416+: ODPT 站 ID 与本地冻结站表拼写差异别名——见 data/core/runtime-config.js STATION_ALIAS
   // v4.3.474: railway 感知别名（优先于全局 STATION_ALIAS）——ODPT 同名站 ID 在不同线指向不同本地站
   // Oyama：Tojo=大山(本地 Ooyama) / Utsunomiya=小山(本地 Oyama)，必须按 railway 区分
   // v4.3.479: Kohoku——Nippori_Toneri=江北(本地 Kohoku) / NaritaAbikoBranch=湖北(本地 Kohoku-Narita 分 ID)
-  var STATION_ALIAS_BY_RAILWAY = {
-    "Tojo": { "Oyama": "Ooyama" },
-    "NaritaAbikoBranch": { "Kohoku": "Kohoku-Narita" }
-  };
+  // v4.3.474+: Railway 感知别名——见 data/core/runtime-config.js STATION_ALIAS_BY_RAILWAY
 
   // v4.3.494: 直通系统（ODPT 独立 railway 推送、本地无同名线）的列车归属表。
   // 根因: 相鉄直通(SotetsuDirect)列车 railway=JR-East.SotetsuDirect, fromStation 为专属站 ID
   //   (Osaki/武蔵小杉/西大井/羽沢横浜国大) —— 本地无 SotetsuDirect 线 → 反查无映射 →
   //   fallback 站数最多 → Yamanote(30站) 误配山手线详情图。
   // 处理: prefer 顺序选择归属线(跨 operator 放行 SotetsuShin-Yokohama), exclude 排除环线。
-  var THROUGH_RAILWAY_FALLBACK = {
-    "SotetsuDirect": {
-      exclude: ["Yamanote"],
-      prefer: ["SotetsuShin-Yokohama", "Yokosuka", "Saikyo", "ShonanShinjuku"]
-    }
-  };
+  var THROUGH_RAILWAY_FALLBACK = (window.RuntimeConfig && window.RuntimeConfig.THROUGH_RAILWAY_FALLBACK) || {"SotetsuDirect":{"exclude":["Yamanote"],"prefer":["SotetsuShin-Yokohama","Yokosuka","Saikyo","ShonanShinjuku"]}};
 
   function loadTrainPositions() {
     try {
@@ -779,7 +705,7 @@
       // v4.3.489: 加入 JR-East——ODPT JR-East 时刻表已按 railway 分批入库，
       // 此白名单只控制"缺时刻表的线是否补拉"，JR 地方线（东北/上越/奥羽等）无实时位置，
       // 必须靠按需补时刻表推定才能显示
-      var priorityOps = ['JR-East', 'TokyoMetro', 'Toei', 'YokohamaMunicipal', 'Keio', 'Sotetsu', 'Tokyu', 'Tobu', 'TWR', 'MIR', 'TamaMonorail'];
+      var priorityOps = (window.RuntimeConfig && window.RuntimeConfig.PRIORITY_OPS) || ['JR-East', 'TokyoMetro', 'Toei', 'YokohamaMunicipal', 'Keio', 'Sotetsu', 'Tokyu', 'Tobu', 'TWR', 'MIR', 'TamaMonorail'];
       var allLines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : {};
 
       // 扩展需要加载的线路，包括直通运行的线路
@@ -812,7 +738,7 @@
 
       // v4.3.446: 上限 12→24——支線（丸ノ内線支線等）を含めても主線の時刻表ロードを阻まない
       // （ODPT 150ms 間隔・3 並行、24 リクエストでも 1 秒前後に収まる）
-      toLoad = toLoad.slice(0, 24);
+      toLoad = toLoad.slice(0, (window.RuntimeConfig && window.RuntimeConfig.TIMETABLE_LOAD_BATCH) || 24);
 
       if (toLoad.length === 0) return Promise.resolve();
 
@@ -898,7 +824,8 @@
           // 用户大概率会切换的几条线，提前在后台加载，不用等到用户点击才加载
           if (isTrainsPage && window.DataFusion && window.DataFusion.ensureManualTimetable) {
             setTimeout(function() {
-              var warmupLines = ['Yamanote', 'ChuoRapid', 'KeihinTohoku', 'SeibuEn', 'Keikyu', 'Odawara'];
+              // v4.3.6xx: 后台预加载线路白名单 — 见 runtime-config.js TRAIN_WARMUP_LINES
+              var warmupLines = (window.RuntimeConfig && window.RuntimeConfig.TRAIN_WARMUP_LINES) || ['Yamanote', 'ChuoRapid', 'KeihinTohoku', 'SeibuEn', 'Keikyu', 'Odawara'];
               warmupLines.forEach(function(lid) {
                 window.DataFusion.ensureManualTimetable(lid).catch(function(){});
               });

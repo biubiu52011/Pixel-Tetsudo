@@ -573,5 +573,5 @@
     isLimitedExpress: isLimitedExpress
   };
 
-  console.log("[PositionEstimator] v" + ESTIMATOR_VERSION + " initialized");
+  console.debug("[PositionEstimator] v" + ESTIMATOR_VERSION + " initialized");
 })();

@@ -509,8 +509,8 @@
     }
     // ========== API Rate Limiting ==========
     // 为每个API服务维护请求队列，确保不超过频率限制
-    var API_RATE_LIMIT = 150;   // v4.3.395: 最小请求间隔（毫秒）。实测 ODPT 12 并发无间隔全 200（总耗时 248ms），原 1000ms 串行把等待放大 40 倍
-    var API_MAX_CONCURRENCY = 3;  // 每域最大并发（滑动窗口）
+    var API_RATE_LIMIT = (window.RuntimeConfig && window.RuntimeConfig.API_RATE_LIMIT) || 150;   // v4.3.395: 最小请求间隔（毫秒）。实测 ODPT 12 并发无间隔全 200（总耗时 248ms），原 1000ms 串行把等待放大 40 倍
+    var API_MAX_CONCURRENCY = (window.RuntimeConfig && window.RuntimeConfig.API_MAX_CONCURRENCY) || 3;  // 每域最大并发（滑动窗口）
     var apiLastRequestTime = {
         'api-challenge.odpt.org': 0,
         'api.odpt.org': 0
@@ -657,7 +657,7 @@
             var self = this;
             return this.getTimetableForRailway(operator, railway).then(function(data) {
                 var rows = (data && data.length > 0) ? data : [];
-                if (rows.length >= 1000) {
+                if (rows.length >= ((window.RuntimeConfig && window.RuntimeConfig.TT_TRUNCATE_LIMIT) || 1000)) {
                     return splitTruncatedByCalendar(operator, railway).then(function(merged) {
                         var final = merged.length > rows.length ? merged : rows;
                         self._timetableCache[ck] = final;
@@ -1194,7 +1194,7 @@
                     return window.ODPTClient.getTimetableForRailway(op, lid).then(function(data) {
                         var rows = (data && data.length > 0) ? data : [];
                         // 截断线：按日历拆分重拉合并（替换截断数据）
-                        if (rows.length >= 1000) {
+                        if (rows.length >= ((window.RuntimeConfig && window.RuntimeConfig.TT_TRUNCATE_LIMIT) || 1000)) {
                             return splitTruncatedByCalendar(op, lid).then(function(merged) {
                                 return merged.length > rows.length ? merged : rows;  // 拆分失败/无增益时回退
                             });

@@ -758,7 +758,7 @@
       "detail.highlights": "\ud558\uc774\ub77c\uc774\ud2b8",
       "detail.info_code": "\ub178\uc120 \ucf54\ub4dc",
       "detail.info_duration": "\uc804\uccb4 \uc2dc\uac04",
-"detail.info_fee": "\uc6a9\uae08",
+"detail.info_fee": "\uc694\uae08",
 "detail.i18n_missing": "\uc77c\uc758 \uc5f0\uc0ac\uc758 \ucf58\ud150\ucf54\uc7a8\uc744 \uc81c\uac90\uc98d\uc218\uc628\uc9c0 \uc54a\uc558\uc2b5\ub2c8\ub2e4",
 "detail.info_fee_per_person": "1\uc778\ub2f9",
       "detail.info_hours": "\uc6b4\uc601 \uc2dc\uac04",
