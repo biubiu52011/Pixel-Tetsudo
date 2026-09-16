@@ -61,3 +61,10 @@ work/
 node_modules/
 # Agent backups
 *.bak*
+
+# Auto-merged bundles (not referenced by any page)
+data/core/data-core-bundle.js
+js/i18n-common.js
+
+# External data artifacts
+twr-gtfs.zip
