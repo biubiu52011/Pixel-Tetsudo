@@ -275,7 +275,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼～夜",
         "zh": "白天～晚上",
-        "en": "Daytime～Night",
+        "en": "昼～夜",
         "ko": "낮~밤"
       },
       "tips_i18n": {
@@ -813,7 +813,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼～夜",
         "zh": "白天～晚上",
-        "en": "Daytime～Night",
+        "en": "昼～夜",
         "ko": "낮~밤"
       },
       "tips_i18n": {
@@ -1192,7 +1192,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "通年",
         "zh": "全年",
-        "en": "Year-round",
+        "en": "通年",
         "ko": "연중"
       },
       "tips_i18n": {
@@ -1267,7 +1267,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "通年",
         "zh": "全年",
-        "en": "Year-round",
+        "en": "通年",
         "ko": "연중"
       },
       "tips_i18n": {
@@ -1342,7 +1342,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "通年",
         "zh": "全年",
-        "en": "Year-round",
+        "en": "通年",
         "ko": "연중"
       },
       "tips_i18n": {
@@ -1415,7 +1415,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "通年",
         "zh": "全年",
-        "en": "Year-round",
+        "en": "通年",
         "ko": "연중"
       },
       "tips_i18n": {
@@ -1486,7 +1486,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "通年",
         "zh": "全年",
-        "en": "Year-round",
+        "en": "通年",
         "ko": "연중"
       },
       "tips_i18n": {
@@ -1560,7 +1560,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "通年",
         "zh": "全年",
-        "en": "Year-round",
+        "en": "通年",
         "ko": "연중"
       },
       "tips_i18n": {
@@ -1841,7 +1841,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "通年",
         "zh": "全年",
-        "en": "Year-round",
+        "en": "通年",
         "ko": "연중"
       },
       "tips_i18n": {
@@ -2058,7 +2058,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "春～秋",
         "zh": "春季至秋季",
-        "en": "Spring～Autumn",
+        "en": "春～秋",
         "ko": "봄~가을"
       },
       "tips_i18n": {
@@ -2281,7 +2281,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼～夜",
         "zh": "白天～晚上",
-        "en": "Daytime～Night",
+        "en": "昼～夜",
         "ko": "낮~밤"
       },
       "tips_i18n": {
@@ -2352,7 +2352,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼～夜",
         "zh": "白天～晚上",
-        "en": "Daytime～Night",
+        "en": "昼～夜",
         "ko": "낮~밤"
       },
       "tips_i18n": {
@@ -8780,7 +8780,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "午後",
         "zh": "下午",
-        "en": "Afternoon",
+        "en": "午後",
         "ko": "오후"
       },
       "tips_i18n": {
@@ -8932,7 +8932,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "春・秋",
         "zh": "春季・秋季",
-        "en": "Spring・Autumn",
+        "en": "春・秋",
         "ko": "봄·가을"
       },
       "tips_i18n": {
@@ -9545,7 +9545,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "通年",
         "zh": "全年",
-        "en": "Year-round",
+        "en": "通年",
         "ko": "연중"
       },
       "tips_i18n": {
@@ -9621,7 +9621,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "通年",
         "zh": "全年",
-        "en": "Year-round",
+        "en": "通年",
         "ko": "연중"
       },
       "tips_i18n": {
@@ -9773,7 +9773,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "通年",
         "zh": "全年",
-        "en": "Year-round",
+        "en": "通年",
         "ko": "연중"
       },
       "tips_i18n": {
@@ -9849,7 +9849,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "夜",
         "zh": "夜间",
-        "en": "Night",
+        "en": "夜",
         "ko": "밤"
       },
       "tips_i18n": {
@@ -9925,7 +9925,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "通年",
         "zh": "全年",
-        "en": "Year-round",
+        "en": "通年",
         "ko": "연중"
       },
       "tips_i18n": {
@@ -10231,7 +10231,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "通年",
         "zh": "全年",
-        "en": "Year-round",
+        "en": "通年",
         "ko": "연중"
       },
       "tips_i18n": {
@@ -10307,7 +10307,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "通年",
         "zh": "全年",
-        "en": "Year-round",
+        "en": "通年",
         "ko": "연중"
       },
       "tips_i18n": {
@@ -10460,7 +10460,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "通年",
         "zh": "全年",
-        "en": "Year-round",
+        "en": "通年",
         "ko": "연중"
       },
       "tips_i18n": {
@@ -10536,7 +10536,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "通年",
         "zh": "全年",
-        "en": "Year-round",
+        "en": "通年",
         "ko": "연중"
       },
       "tips_i18n": {
@@ -10612,7 +10612,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "通年",
         "zh": "全年",
-        "en": "Year-round",
+        "en": "通年",
         "ko": "연중"
       },
       "tips_i18n": {
@@ -10688,7 +10688,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "通年",
         "zh": "全年",
-        "en": "Year-round",
+        "en": "通年",
         "ko": "연중"
       },
       "tips_i18n": {
@@ -10764,7 +10764,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "通年",
         "zh": "全年",
-        "en": "Year-round",
+        "en": "通年",
         "ko": "연중"
       },
       "tips_i18n": {
@@ -10840,7 +10840,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "通年",
         "zh": "全年",
-        "en": "Year-round",
+        "en": "通年",
         "ko": "연중"
       },
       "tips_i18n": {
@@ -10994,7 +10994,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "通年",
         "zh": "全年",
-        "en": "Year-round",
+        "en": "通年",
         "ko": "연중"
       },
       "tips_i18n": {
@@ -11071,7 +11071,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -11224,7 +11224,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼〜夜",
         "zh": "白天至夜晚",
-        "en": "Daytime〜Night",
+        "en": "昼〜夜",
         "ko": "낮~밤"
       },
       "tips_i18n": {
@@ -11300,7 +11300,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -11528,7 +11528,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼〜夜",
         "zh": "白天至夜晚",
-        "en": "Daytime〜Night",
+        "en": "昼〜夜",
         "ko": "낮~밤"
       },
       "tips_i18n": {
@@ -11681,7 +11681,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼〜夜",
         "zh": "白天至夜晚",
-        "en": "Daytime〜Night",
+        "en": "昼〜夜",
         "ko": "낮~밤"
       },
       "tips_i18n": {
@@ -11758,7 +11758,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼〜夜",
         "zh": "白天至夜晚",
-        "en": "Daytime〜Night",
+        "en": "昼〜夜",
         "ko": "낮~밤"
       },
       "tips_i18n": {
@@ -11834,7 +11834,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "朝〜夜",
         "zh": "早晨至夜晚",
-        "en": "Morning〜Night",
+        "en": "朝〜夜",
         "ko": "아침~밤"
       },
       "tips_i18n": {
@@ -12011,7 +12011,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -12120,7 +12120,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "午後",
         "zh": "下午",
-        "en": "Afternoon",
+        "en": "午後",
         "ko": "오후"
       },
       "tips_i18n": {
@@ -12219,7 +12219,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -12487,7 +12487,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼～夜",
         "zh": "白天～晚上",
-        "en": "Daytime～Night",
+        "en": "昼～夜",
         "ko": "낮~밤"
       },
       "tips_i18n": {
@@ -12673,7 +12673,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "주간"
       },
       "tips_i18n": {
@@ -12753,7 +12753,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "午餐",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "런치"
       },
       "tips_i18n": {
@@ -12857,7 +12857,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼・夜",
         "zh": "午晚",
-        "en": "Daytime・Night",
+        "en": "昼・夜",
         "ko": "점심·저녁"
       },
       "tips_i18n": {
@@ -13017,7 +13017,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "주간"
       },
       "tips_i18n": {
@@ -13177,7 +13177,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "夜",
         "zh": "晚上",
-        "en": "Night",
+        "en": "夜",
         "ko": "밤"
       },
       "tips_i18n": {
@@ -13258,7 +13258,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "주간"
       },
       "tips_i18n": {
@@ -13338,7 +13338,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "주간"
       },
       "tips_i18n": {
@@ -13774,7 +13774,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "주간"
       },
       "tips_i18n": {
@@ -14051,7 +14051,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "주간"
       },
       "tips_i18n": {
@@ -14371,7 +14371,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "주간"
       },
       "tips_i18n": {
@@ -14452,7 +14452,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼～夜",
         "zh": "白天～晚上",
-        "en": "Daytime～Night",
+        "en": "昼～夜",
         "ko": "오후~밤"
       },
       "tips_i18n": {
@@ -14533,7 +14533,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "주간"
       },
       "tips_i18n": {
@@ -14948,7 +14948,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼～夜",
         "zh": "白天～晚上",
-        "en": "Daytime～Night",
+        "en": "昼～夜",
         "ko": "낮~밤"
       },
       "tips_i18n": {
@@ -15028,7 +15028,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "夜",
         "zh": "晚上",
-        "en": "Night",
+        "en": "夜",
         "ko": "밤"
       },
       "tips_i18n": {
@@ -15458,7 +15458,7 @@ window.RAILWAY_TOURISM = {
         "ja": "一人あたり1,000円前後（ケーキ・カフェ）",
         "zh": "人均约1000日元（蛋糕·咖啡）",
         "en": "approx. 1,000 JPY per person (cake / cafe)",
-        "ko": "11인당 약 1,000엔 (케이크·카페)"
+        "ko": "111인당 약 1,000엔 (케이크·카페)"
       },
       "bestTime_i18n": {
         "ja": "昼～夕方",
@@ -15544,7 +15544,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "주간"
       },
       "tips_i18n": {
@@ -15624,7 +15624,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "주간"
       },
       "tips_i18n": {
@@ -15819,7 +15819,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "주간"
       },
       "tips_i18n": {
@@ -15980,7 +15980,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼～夜",
         "zh": "白天～晚上",
-        "en": "Daytime～Night",
+        "en": "昼～夜",
         "ko": "낮~저녁"
       },
       "tips_i18n": {
@@ -16060,7 +16060,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "夜",
         "zh": "晚上",
-        "en": "Night",
+        "en": "夜",
         "ko": "밤"
       },
       "tips_i18n": {
@@ -16222,7 +16222,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "주간"
       },
       "tips_i18n": {
@@ -16382,7 +16382,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼・夜",
         "zh": "午晚",
-        "en": "Daytime・Night",
+        "en": "昼・夜",
         "ko": "점심·저녁"
       },
       "tips_i18n": {
@@ -16497,7 +16497,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "午餐",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "런치"
       },
       "tips_i18n": {
@@ -16727,7 +16727,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼・夜",
         "zh": "午晚",
-        "en": "Daytime・Night",
+        "en": "昼・夜",
         "ko": "점심·저녁"
       },
       "tips_i18n": {
@@ -16842,7 +16842,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼・夜",
         "zh": "午晚",
-        "en": "Daytime・Night",
+        "en": "昼・夜",
         "ko": "점심·저녁"
       },
       "tips_i18n": {
@@ -16924,7 +16924,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "주간"
       },
       "tips_i18n": {
@@ -17005,7 +17005,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "주간"
       },
       "tips_i18n": {
@@ -17167,7 +17167,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "주간"
       },
       "tips_i18n": {
@@ -17247,7 +17247,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "朝～昼",
         "zh": "上午～中午",
-        "en": "Morning～Daytime",
+        "en": "朝～昼",
         "ko": "아침~낮"
       },
       "tips_i18n": {
@@ -17376,7 +17376,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "주간"
       },
       "tips_i18n": {
@@ -17585,7 +17585,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "午餐",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "런치"
       },
       "tips_i18n": {
@@ -17697,7 +17697,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -17772,7 +17772,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -17871,7 +17871,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "夜",
         "zh": "夜间",
-        "en": "Night",
+        "en": "夜",
         "ko": "밤"
       },
       "tips_i18n": {
@@ -17981,7 +17981,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -18057,7 +18057,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -18132,7 +18132,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "夜",
         "zh": "夜间",
-        "en": "Night",
+        "en": "夜",
         "ko": "밤"
       },
       "tips_i18n": {
@@ -18243,7 +18243,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -18318,7 +18318,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -18393,7 +18393,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -18468,7 +18468,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -18578,7 +18578,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "夜",
         "zh": "夜间",
-        "en": "Night",
+        "en": "夜",
         "ko": "밤"
       },
       "tips_i18n": {
@@ -18677,7 +18677,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -18786,7 +18786,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -18861,7 +18861,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -18937,7 +18937,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -19012,7 +19012,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -19088,7 +19088,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "夜",
         "zh": "夜间",
-        "en": "Night",
+        "en": "夜",
         "ko": "밤"
       },
       "tips_i18n": {
@@ -19197,7 +19197,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -19273,7 +19273,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -19348,7 +19348,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "夜",
         "zh": "夜间",
-        "en": "Night",
+        "en": "夜",
         "ko": "밤"
       },
       "tips_i18n": {
@@ -19470,7 +19470,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -19545,7 +19545,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -19620,7 +19620,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -19695,7 +19695,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -19804,7 +19804,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -19879,7 +19879,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -19988,7 +19988,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -20063,7 +20063,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -20138,7 +20138,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -20213,7 +20213,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -20322,7 +20322,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -20411,7 +20411,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -20486,7 +20486,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -20562,7 +20562,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -20671,7 +20671,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -20770,7 +20770,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "夜",
         "zh": "夜间",
-        "en": "Night",
+        "en": "夜",
         "ko": "밤"
       },
       "tips_i18n": {
@@ -20845,7 +20845,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -20955,7 +20955,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -21064,7 +21064,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "夜",
         "zh": "夜间",
-        "en": "Night",
+        "en": "夜",
         "ko": "밤"
       },
       "tips_i18n": {
@@ -21139,7 +21139,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -21214,7 +21214,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -21323,7 +21323,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -21432,7 +21432,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -21508,7 +21508,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -21617,7 +21617,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "夜",
         "zh": "夜间",
-        "en": "Night",
+        "en": "夜",
         "ko": "밤"
       },
       "tips_i18n": {
@@ -21694,7 +21694,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -21769,7 +21769,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -21844,7 +21844,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -21919,7 +21919,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -21994,7 +21994,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -22069,7 +22069,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -22146,7 +22146,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -22221,7 +22221,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "夜",
         "zh": "夜间",
-        "en": "Night",
+        "en": "夜",
         "ko": "밤"
       },
       "tips_i18n": {
@@ -22296,7 +22296,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -22371,7 +22371,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "夜",
         "zh": "夜间",
-        "en": "Night",
+        "en": "夜",
         "ko": "밤"
       },
       "tips_i18n": {
@@ -22447,7 +22447,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "夜",
         "zh": "夜间",
-        "en": "Night",
+        "en": "夜",
         "ko": "밤"
       },
       "tips_i18n": {
@@ -22546,7 +22546,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -22622,7 +22622,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -22697,7 +22697,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -22772,7 +22772,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -22847,7 +22847,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "夜",
         "zh": "夜间",
-        "en": "Night",
+        "en": "夜",
         "ko": "밤"
       },
       "tips_i18n": {
@@ -22970,7 +22970,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "夜",
         "zh": "夜间",
-        "en": "Night",
+        "en": "夜",
         "ko": "밤"
       },
       "tips_i18n": {
@@ -23046,7 +23046,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "夜",
         "zh": "夜晚",
-        "en": "Night",
+        "en": "夜",
         "ko": "밤"
       },
       "tips_i18n": {
@@ -23221,7 +23221,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -23297,7 +23297,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -23372,7 +23372,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -23447,7 +23447,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -23523,7 +23523,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -23599,7 +23599,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -23677,7 +23677,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -23752,7 +23752,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "夜",
         "zh": "夜晚",
-        "en": "Night",
+        "en": "夜",
         "ko": "밤"
       },
       "tips_i18n": {
@@ -24102,7 +24102,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "夜",
         "zh": "夜晚",
-        "en": "Night",
+        "en": "夜",
         "ko": "밤"
       },
       "tips_i18n": {
@@ -24177,7 +24177,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -24403,7 +24403,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "夜",
         "zh": "夜晚",
-        "en": "Night",
+        "en": "夜",
         "ko": "밤"
       },
       "tips_i18n": {
@@ -24503,7 +24503,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -24628,7 +24628,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -24703,7 +24703,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -24855,7 +24855,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -24931,7 +24931,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -25008,7 +25008,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "夜",
         "zh": "夜晚",
-        "en": "Night",
+        "en": "夜",
         "ko": "밤"
       },
       "tips_i18n": {
@@ -25117,7 +25117,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -25192,7 +25192,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -25268,7 +25268,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -25344,7 +25344,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -25419,7 +25419,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -25494,7 +25494,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -25569,7 +25569,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -25644,7 +25644,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -25719,7 +25719,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -25794,7 +25794,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "夜",
         "zh": "夜晚",
-        "en": "Night",
+        "en": "夜",
         "ko": "밤"
       },
       "tips_i18n": {
@@ -25869,7 +25869,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -25945,7 +25945,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "夜",
         "zh": "夜晚",
-        "en": "Night",
+        "en": "夜",
         "ko": "밤"
       },
       "tips_i18n": {
@@ -26020,7 +26020,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -26096,7 +26096,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "夜",
         "zh": "夜晚",
-        "en": "Night",
+        "en": "夜",
         "ko": "밤"
       },
       "tips_i18n": {
@@ -26186,7 +26186,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -26261,7 +26261,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -26370,7 +26370,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -26446,7 +26446,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -26521,7 +26521,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "夜",
         "zh": "夜晚",
-        "en": "Night",
+        "en": "夜",
         "ko": "밤"
       },
       "tips_i18n": {
@@ -26596,7 +26596,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -26695,7 +26695,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -26771,7 +26771,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -26848,7 +26848,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -26924,7 +26924,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "夜",
         "zh": "夜晚",
-        "en": "Night",
+        "en": "夜",
         "ko": "밤"
       },
       "tips_i18n": {
@@ -26999,7 +26999,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -27074,7 +27074,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -27150,7 +27150,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -27225,7 +27225,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -27324,7 +27324,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -27400,7 +27400,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -27475,7 +27475,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -27550,7 +27550,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -27626,7 +27626,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -27726,7 +27726,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "夜",
         "zh": "夜晚",
-        "en": "Night",
+        "en": "夜",
         "ko": "밤"
       },
       "tips_i18n": {
@@ -27802,7 +27802,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -27878,7 +27878,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -27954,7 +27954,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "夜",
         "zh": "夜晚",
-        "en": "Night",
+        "en": "夜",
         "ko": "밤"
       },
       "tips_i18n": {
@@ -28029,7 +28029,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "夜",
         "zh": "夜晚",
-        "en": "Night",
+        "en": "夜",
         "ko": "밤"
       },
       "tips_i18n": {
@@ -28104,7 +28104,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "夜",
         "zh": "晚上",
-        "en": "Night",
+        "en": "夜",
         "ko": "저녁"
       },
       "tips_i18n": {
@@ -28179,7 +28179,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -28255,7 +28255,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -28330,7 +28330,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -28407,7 +28407,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -28484,7 +28484,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "夜",
         "zh": "晚上",
-        "en": "Night",
+        "en": "夜",
         "ko": "저녁"
       },
       "tips_i18n": {
@@ -28560,7 +28560,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -28636,7 +28636,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -28712,7 +28712,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -28787,7 +28787,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "夜",
         "zh": "晚上",
-        "en": "Night",
+        "en": "夜",
         "ko": "저녁"
       },
       "tips_i18n": {
@@ -28862,7 +28862,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -28938,7 +28938,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "夜",
         "zh": "晚上",
-        "en": "Night",
+        "en": "夜",
         "ko": "저녁"
       },
       "tips_i18n": {
@@ -29037,7 +29037,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -29136,7 +29136,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -29211,7 +29211,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "夜",
         "zh": "晚上",
-        "en": "Night",
+        "en": "夜",
         "ko": "저녁"
       },
       "tips_i18n": {
@@ -29287,7 +29287,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -29363,7 +29363,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -29438,7 +29438,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -29527,7 +29527,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -29602,7 +29602,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -29705,7 +29705,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -29814,7 +29814,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -29889,7 +29889,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "夜",
         "zh": "晚上",
-        "en": "Night",
+        "en": "夜",
         "ko": "저녁"
       },
       "tips_i18n": {
@@ -29966,7 +29966,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -30041,7 +30041,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "夜",
         "zh": "晚上",
-        "en": "Night",
+        "en": "夜",
         "ko": "저녁"
       },
       "tips_i18n": {
@@ -30117,7 +30117,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -30216,7 +30216,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -30292,7 +30292,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "夜",
         "zh": "晚上",
-        "en": "Night",
+        "en": "夜",
         "ko": "저녁"
       },
       "tips_i18n": {
@@ -30382,7 +30382,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -30457,7 +30457,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -30532,7 +30532,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -30608,7 +30608,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -30684,7 +30684,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -30759,7 +30759,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -30834,7 +30834,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -30911,7 +30911,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -30986,7 +30986,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -31061,7 +31061,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -31170,7 +31170,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -31246,7 +31246,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -31345,7 +31345,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -31421,7 +31421,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -31497,7 +31497,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -31572,7 +31572,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -31647,7 +31647,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "夜",
         "zh": "晚上",
-        "en": "Night",
+        "en": "夜",
         "ko": "저녁"
       },
       "tips_i18n": {
@@ -31724,7 +31724,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "夜",
         "zh": "晚上",
-        "en": "Night",
+        "en": "夜",
         "ko": "저녁"
       },
       "tips_i18n": {
@@ -31835,7 +31835,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -31956,7 +31956,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "夜",
         "zh": "晚上",
-        "en": "Night",
+        "en": "夜",
         "ko": "저녁"
       },
       "tips_i18n": {
@@ -32045,7 +32045,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "夜",
         "zh": "晚上",
-        "en": "Night",
+        "en": "夜",
         "ko": "저녁"
       },
       "tips_i18n": {
@@ -32120,7 +32120,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -32195,7 +32195,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "夜",
         "zh": "晚上",
-        "en": "Night",
+        "en": "夜",
         "ko": "저녁"
       },
       "tips_i18n": {
@@ -32270,7 +32270,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "夜",
         "zh": "晚上",
-        "en": "Night",
+        "en": "夜",
         "ko": "저녁"
       },
       "tips_i18n": {
@@ -32393,7 +32393,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "夜",
         "zh": "晚上",
-        "en": "Night",
+        "en": "夜",
         "ko": "저녁"
       },
       "tips_i18n": {
@@ -32503,7 +32503,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -32612,7 +32612,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -32687,7 +32687,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -32765,7 +32765,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -32841,7 +32841,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -32966,7 +32966,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -33100,7 +33100,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -33176,7 +33176,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -33321,7 +33321,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -33411,7 +33411,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "昼",
         "zh": "白天",
-        "en": "Daytime",
+        "en": "昼",
         "ko": "낮"
       },
       "tips_i18n": {
@@ -35087,7 +35087,7 @@ window.RAILWAY_TOURISM = {
         "ja": "一人あたり3,000円〜",
         "zh": "人均 3,000日元起",
         "en": "approx. 3,000 JPY per person",
-        "ko": "11인당 약 3,000엔"
+        "ko": "111인당 약 3,000엔"
       },
       "bestTime_i18n": {
         "ja": "営業時間内",
@@ -38951,7 +38951,7 @@ window.RAILWAY_TOURISM = {
         "ja": "一人あたり3,000円〜4,000円",
         "zh": "人均 3,000～4,000日元",
         "en": "approx. 3,000–4,000 JPY per person",
-        "ko": "11인당 약 3,000~4,000엔"
+        "ko": "111인당 약 3,000~4,000엔"
       },
       "bestTime_i18n": {
         "ja": "ランチ",
@@ -41349,7 +41349,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "朝〜夜",
         "zh": "早到晚",
-        "en": "Morning〜Night",
+        "en": "朝〜夜",
         "ko": "아침~밤"
       },
       "tips_i18n": {
@@ -42846,7 +42846,7 @@ window.RAILWAY_TOURISM = {
       "bestTime_i18n": {
         "ja": "午後",
         "zh": "下午",
-        "en": "Afternoon",
+        "en": "午後",
         "ko": "오후"
       },
       "tips_i18n": {
