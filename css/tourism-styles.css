@@ -887,37 +887,6 @@
   line-height: 1.5;
 }
 
-/* 4.3.799: 观光三分类页签条（活动/景点/店铺独立页顶部切换） */
-.tourism-subnav {
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  scrollbar-width: none;
-  gap: 0;
-  margin: 0 8px 4px;
-  background: var(--bg3);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-}
-.tourism-subnav::-webkit-scrollbar { display: none; }
-.subnav-btn {
-  flex: 1 0 auto;
-  white-space: nowrap;
-  text-align: center;
-  font-size: 12px;
-  font-weight: 700;
-  padding: 8px 14px;
-  color: var(--text-muted);
-  text-decoration: none;
-  border-bottom: 2px solid transparent;
-  transition: color .2s, border-color .2s, background .2s;
-}
-.subnav-btn.active {
-  color: var(--green);
-  background: var(--card);
-  border-bottom-color: var(--green);
-}
-
 
 /* === Leaflet map === */
 #tourismMap {
