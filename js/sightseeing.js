@@ -21,50 +21,25 @@
     play: 'tourism.tag_play'
   };
 
-  // 4.3.826: 点评网站式分类——一级功能大类（互斥）+ 二级子分类（选中一级后渐进展开）
-  // 非类型维度（landmark/family/駅直結 等）保留在 TAG_LABELS 作卡片徽章，不进筛选条
-  const TAG_GROUPS = [
+  // 4.3.826: 点评网站式平级分类——一级功能大类（互斥），选中即按 match 标签过滤
+  // 非类型维度（landmark/family/駅直结 等）保留在 TAG_LABELS 作卡片徽章，不进筛选条
+  const TAG_FILTERS = [
     { key: 'culture', label: 'tourism.group_culture',
-      match: ['shrine', 'temple', 'museum', 'history', 'modern'],
-      subs: [
-        { key: 'shrine',  label: 'tourism.tag_shrine',  match: ['shrine', 'temple'] },
-        { key: 'history', label: 'tourism.tag_history', match: ['history'] },
-        { key: 'modern',  label: 'tourism.tag_modern',  match: ['modern'] }
-      ]},
+      match: ['shrine', 'temple', 'museum', 'history', 'modern']
+    },
     { key: 'gourmet', label: 'tourism.group_gourmet',
-      match: ['food', 'restaurant', 'cafe', 'sweets', 'drink', 'bar', 'bakery', 'local_specialty', 'family'],
-      subs: [
-        { key: 'restaurant', label: 'tourism.tag_restaurant', match: ['restaurant', 'family'] },
-        { key: 'cafe',       label: 'tourism.tag_cafe',       match: ['cafe'] },
-        { key: 'sweets',     label: 'tourism.tag_sweets',     match: ['sweets'] },
-        { key: 'bar',        label: 'tourism.tag_bar',        match: ['bar', 'drink'] },
-        { key: 'bakery',     label: 'tourism.tag_bakery',     match: ['bakery'] },
-        { key: 'local_specialty', label: 'tourism.tag_local_specialty', match: ['local_specialty'] }
-      ]},
+      match: ['food', 'restaurant', 'cafe', 'sweets', 'drink', 'bar', 'bakery', 'local_specialty', 'family']
+    },
     { key: 'shopping', label: 'tourism.group_shopping',
-      match: ['shopping', 'shop', 'hotel'],
-      subs: [
-        { key: 'shopping', label: 'tourism.tag_shopping', match: ['shopping', 'hotel'] },
-        { key: 'shop',     label: 'tourism.tag_shop',     match: ['shop'] }
-      ]},
+      match: ['shopping', 'shop', 'hotel']
+    },
     { key: 'nature', label: 'tourism.group_nature',
-      match: ['nature', 'park'],
-      subs: [
-        { key: 'park',   label: 'tourism.tag_park',   match: ['park'] },
-        { key: 'nature', label: 'tourism.tag_nature', match: ['nature'] }
-      ]},
+      match: ['nature', 'park']
+    },
     { key: 'experience', label: 'tourism.group_experience',
-      match: ['play', 'event', 'seasonal'],
-      subs: [
-        { key: 'play',  label: 'tourism.tag_play',  match: ['play'] },
-        { key: 'event', label: 'tourism.tag_event', match: ['event', 'seasonal'] }
-      ]}
+      match: ['play', 'event', 'seasonal']
+    }
   ];
-  function _findGroup(key) {
-    if (!key) return null;
-    for (var i = 0; i < TAG_GROUPS.length; i++) if (TAG_GROUPS[i].key === key) return TAG_GROUPS[i];
-    return null;
-  }
 
   // 4.3.572: 无图景点按类别显示概括性文字（替代 emoji 图标——用户指示"别出现拉面这种"）
   function labelForTags(tags) {
@@ -84,8 +59,7 @@
     userLat: null,
     userLng: null,
     selectedStation: null,
-    activeGroup: null,   // 4.3.826: 一级大类 key（null=すべて）
-    activeSub: null,     // 4.3.826: 二级子类 key（null=大类内全部）
+    activeTag: null,   // 4.3.826: 一级大类 key（null=すべて）
     autoDetected: false
   };
 
@@ -136,20 +110,11 @@
     if (!dom.tagFilters) return;
     // 4.3.826: 点评网站式——一级互斥大类；选中后展开二级子分类行（纯文字，无 emoji）
     var html = '<div class="sm-tag-row">';
-    html += '<button class="sm-tag-btn' + (state.activeGroup === null ? ' active' : '') + '" data-tag="all"><span class="tag-label">' + t('tourism.tag_all') + '</span></button>';
-    TAG_GROUPS.forEach(function(g) {
-      html += '<button class="sm-tag-btn' + (state.activeGroup === g.key ? ' active' : '') + '" data-group="' + g.key + '"><span class="tag-label">' + t(g.label) + '</span></button>';
+    html += '<button class="sm-tag-btn' + (state.activeTag === null ? ' active' : '') + '" data-tag="all"><span class="tag-label">' + t('tourism.tag_all') + '</span></button>';
+    TAG_FILTERS.forEach(function(f) {
+      html += '<button class="sm-tag-btn' + (state.activeTag === f.key ? ' active' : '') + '" data-filter="' + f.key + '"><span class="tag-label">' + t(f.label) + '</span></button>';
     });
     html += '</div>';
-    var cur = _findGroup(state.activeGroup);
-    if (cur && cur.subs && cur.subs.length) {
-      html += '<div class="sm-tag-row sm-tag-row-sub">';
-      html += '<button class="sm-tag-btn sm-tag-sub' + (state.activeSub === null ? ' active' : '') + '" data-group="' + cur.key + '" data-sub=""><span class="tag-label">' + t('tourism.tag_all') + '</span></button>';
-      cur.subs.forEach(function(s) {
-        html += '<button class="sm-tag-btn sm-tag-sub' + (state.activeSub === s.key ? ' active' : '') + '" data-group="' + cur.key + '" data-sub="' + s.key + '"><span class="tag-label">' + t(s.label) + '</span></button>';
-      });
-      html += '</div>';
-    }
     dom.tagFilters.innerHTML = html;
 
     // Event delegation - bind once on the container
@@ -159,26 +124,11 @@
         const btn = e.target.closest('.sm-tag-btn');
         if (!btn) return;
         e.preventDefault();
-        const tag = btn.getAttribute('data-tag');
-        const group = btn.getAttribute('data-group');
-        const sub = btn.getAttribute('data-sub');
-        if (tag === 'all' && group === null) {
-          // 一级"すべて"：清空全部筛选
-          state.activeGroup = null;
-          state.activeSub = null;
-        } else if (group !== null && sub === null) {
-          // 一级大类：再点取消，点其他切换
-          if (state.activeGroup === group) {
-            state.activeGroup = null;
-            state.activeSub = null;
-          } else {
-            state.activeGroup = group;
-            state.activeSub = null;
-          }
-        } else if (group !== null) {
-          // 二级子分类：data-sub=""（すべて）或具体子类
-          state.activeGroup = group;
-          state.activeSub = sub || null;
+        const filter = btn.getAttribute('data-filter');
+        if (filter === null) {
+          state.activeTag = null;
+        } else {
+          state.activeTag = state.activeTag === filter ? null : filter;
         }
         renderGrid();
         renderTagFilters();
@@ -280,17 +230,14 @@ function renderGrid() {
         return s.distM !== null && s.distM <= 3000;
       });
     }
-    // Apply tag filter — 4.3.826: 一级大类（组内任一 tag）或二级子类（子类 match）
-    if (state.activeGroup) {
-      var g = _findGroup(state.activeGroup);
-      if (g) {
+    // Apply tag filter
+    if (state.activeTag) {
+      var f = null;
+      for (var i = 0; i < TAG_FILTERS.length; i++) if (TAG_FILTERS[i].key === state.activeTag) { f = TAG_FILTERS[i]; break; }
+      if (f) {
         spotList = spotList.filter(function(s) {
           var tags = s.tags || [];
-          if (!state.activeSub) return tags.some(function(t) { return g.match.indexOf(t) >= 0; });
-          var sub = null;
-          if (g.subs) for (var i = 0; i < g.subs.length; i++) if (g.subs[i].key === state.activeSub) { sub = g.subs[i]; break; }
-          if (!sub) return tags.some(function(t) { return g.match.indexOf(t) >= 0; });
-          return tags.some(function(t) { return sub.match.indexOf(t) >= 0; });
+          return tags.some(function(t) { return f.match.indexOf(t) >= 0; });
         });
       }
     }

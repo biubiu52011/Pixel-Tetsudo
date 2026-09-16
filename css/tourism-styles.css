@@ -114,16 +114,6 @@
   grid-template-columns: repeat(auto-fit, minmax(96px, 1fr));
   gap: var(--space-3);
 }
-.sm-tag-row + .sm-tag-row {
-  border-top: 1px dashed var(--border);
-  padding-top: var(--space-3);
-}
-.sm-tag-row-sub .sm-tag-btn {
-  font-size: 11px;
-  padding: 4px 2px;
-  border-width: 1px;
-  box-shadow: none;
-}
 .sm-tags {
   display: flex;
   gap: var(--space-4);
