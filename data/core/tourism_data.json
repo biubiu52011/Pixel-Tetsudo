@@ -8693,82 +8693,6 @@
       "address": "東京都大田区羽田空港3-3-2"
     },
     {
-      "name": "下北沢",
-      "coord": [
-        35.6618,
-        139.6683
-      ],
-      "dist": "0 min walk",
-      "desc": "サブカルチャーと古着の聖地。個性的なカフェやライブハウスが密集し、古着屋巡りや本多劇場での演劇など、一日中歩き回れる街。",
-      "tags": [
-        "all",
-        "landmark",
-        "modern"
-      ],
-      "bestTime": "午後～夜",
-      "hours": "店舗により異なる",
-      "fee": "無料",
-      "tips": [
-        "古着屋を巡る",
-        "本多劇場で演劇",
-        "ミュージックシーン発祥地"
-      ],
-      "name_i18n": {
-        "ja": "下北沢",
-        "zh": "下北泽",
-        "en": "Shimokitazawa",
-        "ko": "시모키타자와"
-      },
-      "desc_i18n": {
-        "ja": "サブカルチャーと古着の聖地。個性的なカフェやライブハウスが密集し、古着屋巡りや本多劇場での演劇など、一日中歩き回れる街。",
-        "zh": "亚文化与古着圣地。个性咖啡馆与Live House密集，逛古着店、在本多剧场看戏，是可以逛上一整天的街区。",
-        "en": "A mecca of subculture and vintage clothing, packed with unique cafés and live houses — a neighborhood you can wander all day, from thrift stores to plays at Honda Gekijo.",
-        "ko": "서브컬처와 빈티지 의류의 성지. 개성 있는 카페와 라이브하우스가 밀집해 있고 빈티지 숍 투어, 혼다 극장 연극까지 하루 종일 돌아다닐 수 있는 거리예요."
-      },
-      "hours_i18n": {
-        "ja": "店舗により異なる",
-        "zh": "因店铺而异",
-        "en": "Varies by store",
-        "ko": "점포별 상이"
-      },
-      "fee_i18n": {
-        "ja": "無料",
-        "zh": "免费",
-        "en": "Free",
-        "ko": "무료"
-      },
-      "bestTime_i18n": {
-        "ja": "午後～夜",
-        "zh": "下午～夜晚",
-        "en": "Afternoon to night",
-        "ko": "오후~밤"
-      },
-      "tips_i18n": {
-        "ja": [
-          "古着屋を巡る",
-          "本多劇場で演劇",
-          "ミュージックシーン発祥地"
-        ],
-        "zh": [
-          "逛古着店",
-          "在本多剧场看戏剧",
-          "音乐现场的发源地"
-        ],
-        "en": [
-          "Browse vintage stores",
-          "See a play at Honda Gekijo",
-          "Birthplace of a vibrant music scene"
-        ],
-        "ko": [
-          "빈티지 숍 투어",
-          "혼다 극장에서 연극",
-          "음악 신의 발상지"
-        ]
-      },
-      "image": "../images/観光地/下北沢.jpg",
-      "address": "東京都世田谷区北沢2-24-3"
-    },
-    {
       "name": "中野ブロードウェイ",
       "coord": [
         35.7079,
@@ -38529,6 +38453,230 @@
         ]
       },
       "address": "東京都足立区千住旭町41-8"
+    },
+    {
+      "name": "本多劇場",
+      "coord": [
+        35.66175,
+        139.66851
+      ],
+      "desc": "1982年開場の演劇専用劇場。下北沢の小劇場文化の中心で、若手俳優・演出家の登竜門として知られる。レンガ調の外観が目印。",
+      "tags": [
+        "all",
+        "landmark",
+        "history"
+      ],
+      "bestTime": "公演の前後",
+      "hours": "11:00～19:00（公演により異なる）",
+      "fee": "公演による",
+      "tips": [
+        "下北沢駅から徒歩3分",
+        "若手劇団の公演も多い",
+        "小劇場ならではの近い距離感"
+      ],
+      "name_i18n": {
+        "ja": "本多劇場",
+        "zh": "本多剧场",
+        "en": "Honda Gekijo Theater",
+        "ko": "혼다 극장"
+      },
+      "desc_i18n": {
+        "ja": "1982年開場の演劇専用劇場。下北沢の小劇場文化の中心で、若手俳優・演出家の登竜門として知られる。レンガ調の外観が目印。",
+        "zh": "1982年开场的戏剧专用剧场。下北泽小剧场文化的中心，被誉为年轻演员与导演的登龙门。红砖风格外观是其标志。",
+        "en": "A theater dedicated to stage drama since 1982. The heart of Shimokitazawa's small-theater culture, known as a stepping stone for young actors and directors. Its brick facade is a local landmark.",
+        "ko": "1982년 개관한 연극 전용 극장이에요. 시모키타자와 소극장 문화의 중심으로 젊은 배우·연출가들의 등용문으로 알려져 있어요. 벽돌풍 외관이 랜드마크예요."
+      },
+      "hours_i18n": {
+        "ja": "11:00～19:00（公演により異なる）",
+        "zh": "11:00～19:00（依演出而异）",
+        "en": "11:00–19:00 (varies by performance)",
+        "ko": "11:00~19:00（공연에 따라 상이）"
+      },
+      "fee_i18n": {
+        "ja": "公演による",
+        "zh": "依演出而定",
+        "en": "Varies by performance",
+        "ko": "공연에 따라 상이"
+      },
+      "bestTime_i18n": {
+        "ja": "公演の前後",
+        "zh": "演出前后",
+        "en": "Around showtimes",
+        "ko": "공연 전후"
+      },
+      "tips_i18n": {
+        "ja": [
+          "下北沢駅から徒歩3分",
+          "若手劇団の公演も多い",
+          "小劇場ならではの近い距離感"
+        ],
+        "zh": [
+          "距下北泽站步行3分钟",
+          "年轻剧团的公演也很多",
+          "小剧场独有的近距离感"
+        ],
+        "en": [
+          "3 min walk from Shimokitazawa Stn.",
+          "Many performances by young troupes",
+          "An intimate small-theater atmosphere"
+        ],
+        "ko": [
+          "시모키타자와 역에서 도보 3분",
+          "젊은 극단 공연도 많아요",
+          "소극장 특유의 가까운 거리감"
+        ]
+      },
+      "image": "",
+      "address": "東京都世田谷区北沢2-10-15"
+    },
+    {
+      "name": "下北沢SHELTER",
+      "coord": [
+        35.661482,
+        139.6694661
+      ],
+      "desc": "1991年に新宿LOFTの姉妹店としてオープンした伝説のライブハウス。Hi-STANDARDやASIAN KUNG-FU GENERATIONもアマチュア時代に出演。キャパ約250人、ステージと客席が近いアットホームな空間。",
+      "tags": [
+        "all",
+        "landmark",
+        "modern"
+      ],
+      "bestTime": "ライブ開催の夜",
+      "hours": "イベントにより異なる（開場18:00～が多い）",
+      "fee": "公演による",
+      "tips": [
+        "下北沢駅から徒歩3分",
+        "インディーズ発掘の聖地",
+        "『ぼっち・ざ・ろっく！』の聖地"
+      ],
+      "name_i18n": {
+        "ja": "下北沢SHELTER",
+        "zh": "下北泽SHELTER",
+        "en": "Shimokitazawa SHELTER",
+        "ko": "시모키타자와 SHELTER"
+      },
+      "desc_i18n": {
+        "ja": "1991年に新宿LOFTの姉妹店としてオープンした伝説のライブハウス。Hi-STANDARDやASIAN KUNG-FU GENERATIONもアマチュア時代に出演。キャパ約250人、ステージと客席が近いアットホームな空間。",
+        "zh": "1991年作为新宿LOFT姊妹店开幕的传奇Live House。Hi-STANDARD、ASIAN KUNG-FU GENERATION在独立时期也曾在此演出。容量约250人，舞台与观众席距离近，氛围温馨。",
+        "en": "A legendary live house that opened in 1991 as a sister venue of Shinjuku LOFT. Hi-STANDARD and ASIAN KUNG-FU GENERATION played here in their indie days. Capacity around 250; the stage and floor sit close for an intimate show.",
+        "ko": "1991년 신주쿠 LOFT의 자매점으로 문을 연 전설의 라이브하우스예요. Hi-STANDARD, ASIAN KUNG-FU GENERATION도 인디 시절 공연했어요. 약 250명 규모로 무대와 객석이 가까운 아늑한 공간이에요."
+      },
+      "hours_i18n": {
+        "ja": "イベントにより異なる（開場18:00～が多い）",
+        "zh": "依活动而定（多为18:00开场）",
+        "en": "Varies by event (doors usually 18:00)",
+        "ko": "이벤트에 따라 상이（주로 18:00 개장）"
+      },
+      "fee_i18n": {
+        "ja": "公演による",
+        "zh": "依演出而定",
+        "en": "Varies by show",
+        "ko": "공연에 따라 상이"
+      },
+      "bestTime_i18n": {
+        "ja": "ライブ開催の夜",
+        "zh": "演出当天的夜晚",
+        "en": "Nights with live shows",
+        "ko": "라이브가 있는 밤"
+      },
+      "tips_i18n": {
+        "ja": [
+          "下北沢駅から徒歩3分",
+          "インディーズ発掘の聖地",
+          "『ぼっち・ざ・ろっく！』の聖地"
+        ],
+        "zh": [
+          "距下北泽站步行3分钟",
+          "独立乐队的发掘圣地",
+          "《孤独摇滚！》取景圣地"
+        ],
+        "en": [
+          "3 min walk from Shimokitazawa Stn.",
+          "A mecca for discovering indie acts",
+          "A pilgrimage site for “Bocchi the Rock!”"
+        ],
+        "ko": [
+          "시모키타자와 역에서 도보 3분",
+          "인디 밴드 발굴의 성지",
+          "《봇치 더 록!》 성지"
+        ]
+      },
+      "image": "",
+      "address": "東京都世田谷区北沢2-6-10 仙田商会仙田ビルB1"
+    },
+    {
+      "name": "東洋百貨店 別館",
+      "coord": [
+        35.6612531,
+        139.6684769
+      ],
+      "desc": "2004年から下北沢の古着文化を牽引してきた東洋百貨店の別館。高架下のミカン下北に移り、個性派古着店や雑貨店が1フロアに軒を連ねる。",
+      "tags": [
+        "all",
+        "shopping"
+      ],
+      "bestTime": "午後",
+      "hours": "11:00～20:00（店舗により異なる）",
+      "fee": "無料",
+      "tips": [
+        "下北沢駅すぐ",
+        "古着・雑貨の掘り出し物",
+        "個性派ショップが集合"
+      ],
+      "name_i18n": {
+        "ja": "東洋百貨店 別館",
+        "zh": "东洋百货店 别馆",
+        "en": "Toyo Department Store Annex",
+        "ko": "도요 백화점 별관"
+      },
+      "desc_i18n": {
+        "ja": "2004年から下北沢の古着文化を牽引してきた東洋百貨店の別館。高架下のミカン下北に移り、個性派古着店や雑貨店が1フロアに軒を連ねる。",
+        "zh": "自2004年起引领下北泽古着文化的东洋百货店别馆。迁至高架下的MIKAN下北，个性古着店与杂货店在同一楼层鳞次栉比。",
+        "en": "The annex of Toyo Department Store, which has led Shimokitazawa's vintage culture since 2004. Now under the railway viaduct at MIKAN Shimokita, quirky vintage and goods stores line one floor.",
+        "ko": "2004년부터 시모키타자와 빈티지 문화를 이끌어 온 도요 백화점 별관이에요. 고가 아래 미칸 시모키타로 이전해 개성파 빈티지 숍과 잡화점이 한 층에 즐비해요."
+      },
+      "hours_i18n": {
+        "ja": "11:00～20:00（店舗により異なる）",
+        "zh": "11:00～20:00（依店铺而异）",
+        "en": "11:00–20:00 (varies by store)",
+        "ko": "11:00~20:00（점포에 따라 상이）"
+      },
+      "fee_i18n": {
+        "ja": "無料",
+        "zh": "免费",
+        "en": "Free",
+        "ko": "무료"
+      },
+      "bestTime_i18n": {
+        "ja": "午後",
+        "zh": "下午",
+        "en": "Afternoon",
+        "ko": "오후"
+      },
+      "tips_i18n": {
+        "ja": [
+          "下北沢駅すぐ",
+          "古着・雑貨の掘り出し物",
+          "個性派ショップが集合"
+        ],
+        "zh": [
+          "紧邻下北泽站",
+          "古着·杂货的淘宝地",
+          "个性店铺云集"
+        ],
+        "en": [
+          "Right by Shimokitazawa Stn.",
+          "Vintage and goods treasure hunt",
+          "A cluster of quirky stores"
+        ],
+        "ko": [
+          "시모키타자와 역 바로 옆",
+          "빈티지·잡화 보물찾기",
+          "개성파 숍이 모인 곳"
+        ]
+      },
+      "image": "",
+      "address": "東京都世田谷区北沢2-11-15 ミカン下北A-101"
     }
   ],
   "station_exits": {
