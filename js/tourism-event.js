@@ -100,7 +100,8 @@
     var extra = (ctx.spotHours && ctx.spotHours !== C.t('detail.unavailable'))
       ? '<div class="info-row"><span class="info-label">' + C.t('detail.info_hours') + '</span><span class="info-value">' + C.escapeHtml(ctx.spotHours) + '</span></div>'
       : '';
-    var feeRow = '<div class="info-row"><span class="info-label">' + C.t('detail.info_fee') + '</span><span class="info-value">' + C.escapeHtml(ctx.spotFee) + '</span></div>';
+    var feeLabel = /[円前後〜～]/.test(ctx.spotFee) ? C.t('detail.info_fee_per_person') : C.t('detail.info_fee');
+    var feeRow = '<div class="info-row"><span class="info-label">' + feeLabel + '</span><span class="info-value">' + C.escapeHtml(ctx.spotFee) + '</span></div>';
     return '<div class="article-section"><h3 class="section-heading">' + C.t('detail.basic_info') + '</h3><div class="info-grid">'
       + periodRow + extra + feeRow + ctx.addressRow + '</div></div>';
   }
