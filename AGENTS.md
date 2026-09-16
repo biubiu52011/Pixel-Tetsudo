@@ -1818,3 +1818,13 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 
 **验证**：node --check OK / verify_through_vtype.js 63/63 / verify_vtype_coverage.js Missing none(69/69) / integrate_all_lines.js vehicleType 缺失0/覆盖率100.0%(863列車)。
 **遗留**：残り 20 条「（候補）」(JR 通勤/地方12条 + 西武 Laview1条 + 不明上下文5条 + 東京单轨1条 + 京急系等)は次回核查。
+## 4.3.811（2026-09-16，ChuoTatsuno 特急誤配置削除 + 西武2条候補確定判断）
+**问题**：剩余 3 条候補中的 ChuoTatsuno LimitedExpress——特急（あずさ・かいじ）物理上不走辰野支線（都走中央本線本線経由），但 ChuoTatsuno manual 有 63 条 LimitedExpress（岡谷→塩尻のみ）——与 ChuoMain manual 完全重複（1M/5M/13M/17M/5003M 等全部已在 ChuoMain 以本線停站记录）。
+**修正**：
+- ChuoTatsuno-manual.js：LimitedExpress 63 条削除（331→268 条）——Local 260 + Rapid 8 保持（辰野支線の普通・快速は実在）
+- vehicle-type-map.js：ChuoTatsuno LimitedExpress エントリ（'E353系（あずさ・かいじ）（候補）'）削除（MAP 340→339 条目）
+**西武2条候補判断（公式+記事核验，維持候補）**：
+- 狭山線 SemiExpress（4本）4000系：西武公式 7000系ページ「狭山線を中心に 2026/6/27 営業運転開始」——7000系は狭山線で運用中（Local エントリは確定）；但準急4本の実際の運用車両が 7000系か 4000系かは未実証（4000系は秩父線メイン）→ 「7000系 / 4000系（候補）」維持
+- 多摩川線 7000系：7000系（元東急9000系・サステナ車両）は狭山線デビュー（2026/6/27）、多摩川線・多摩湖線・秩父線への拡大は今後（東急テクノ/鉄道コム/auone 記事）→ 現在多摩川線は新101系（ワンマン）主力、「新101系（ワンマン専用塗装）/ 7000系（候補）」維持
+**验证**：node --check 両ファイル；tt_cross {}（Tsugaru 18班警告は既存・無関係）；tt_join_check 1853/0/0；verify_through_vtype 63/63；verify_vtype_coverage MAP 115線/339条目 Missing none。
+**commit**：1dbbf47
