@@ -138,7 +138,7 @@
       html += '<div class="history-entry" data-id="' + entry.id + '">';
       html += '<div class="history-route">';
       html += '<span class="history-from">' + escapeHtml(window.RailwayDB ? window.RailwayDB.resolveStationName(entry.from, window.currentLang) || entry.from : entry.from) + "</span>";
-      html += '<span class="history-arrow">→</span>';
+      html += '<svg class="history-arrow" viewBox="0 0 14 14" width="10" height="10" fill="currentColor" aria-hidden="true" focusable="false"><path fill-rule="evenodd" clip-rule="evenodd" transform="rotate(90 7 7)" d="M6.646.146a.5.5 0 0 1 .708 0l3.5 3.5a.5.5 0 0 1-.354.854H8V13a1 1 0 1 1-2 0V4.5H3.5a.5.5 0 0 1-.354-.854z"/></svg>';
       html += '<span class="history-to">' + escapeHtml(window.RailwayDB ? window.RailwayDB.resolveStationName(entry.to, window.currentLang) || entry.to : entry.to) + "</span>";
       html += "</div>";
       html += '<div class="history-meta">';
@@ -149,7 +149,7 @@
         html += '<span class="history-lines">' + escapeHtml(lines) + "</span>";
       }
       html += '<span class="history-time">' + timeStr + "</span>";
-      html += '<button class="history-delete-btn" data-id="' + entry.id + '">✕</button>';
+      html += '<button class="history-delete-btn" data-id="' + entry.id + '"><svg class="pt-icon" viewBox="0 0 14 14" width="11" height="11" fill="currentColor" aria-hidden="true" focusable="false"><path fill-rule="evenodd" clip-rule="evenodd" d="M1.707.293A1 1 0 0 0 .293 1.707L5.586 7 .293 12.293a1 1 0 1 0 1.414 1.414L7 8.414l5.293 5.293a1 1 0 0 0 1.414-1.414L8.414 7l5.293-5.293A1 1 0 0 0 12.293.293L7 5.586z"/></svg></button>';
       html += "</div>";
       html += "</div>";
     });

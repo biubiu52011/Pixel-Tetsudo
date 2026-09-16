@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api-challenge.odpt.org https://api.odpt.org; upgrade-insecure-requests; frame-src https://www.openstreetmap.org; object-src none;"><meta name="color-scheme" content="light"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="theme-color" content="#008803"><meta name="mobile-web-app-capable" content="yes"><meta name="description" content="Pixel Tetsudo - Route Search"><meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(self)"><meta name="referrer" content="strict-origin-when-cross-origin"><title>Pixel Tetsudo</title><link rel="icon" href="../images/pixel-tetsudo.ico" type="image/x-icon">
-<link rel="stylesheet" href="../css/style.css?v=4.3.638">
+<link rel="stylesheet" href="../css/style.css?v=4.3.832">
 <link rel="stylesheet" href="../css/lang-bar.css?v=4.3.638">
 <link rel="stylesheet" href="../css/tourism-styles.css?v=4.3.802">
 </head>
@@ -17,7 +17,7 @@ Pixel Tetsudo</h1>
 </div>
 <div class="lang-switcher-wrapper">
 <button id="langToggleBtn" class="lang-toggle-btn" title="Switch Language" aria-haspopup="listbox" aria-expanded="false" aria-label="Switch language">
-<img src="../images/Language.png" alt="Language" class="lang-icon"></button>
+<svg class="lang-icon" viewBox="0 0 14 14" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false"><path fill-rule="evenodd" clip-rule="evenodd" d="M1.502 7a5.498 5.498 0 0 1 7.702-5.038v.276a1.68 1.68 0 0 1-1.68 1.68 1.68 1.68 0 0 0-1.68 1.736v1.388a1.68 1.68 0 0 1-1.68 1.68H1.777A5.5 5.5 0 0 1 1.502 7m8.212 4.782a5.5 5.5 0 0 0 2.518-3.089l-.136-.1a3.2 3.2 0 0 0-1.417-.354H8.807a1.543 1.543 0 0 0 0 3.074 1.09 1.09 0 0 1 .907.47M7 .002a6.998 6.998 0 1 0 0 13.996A6.998 6.998 0 0 0 7 .002"/></svg></button>
 <div id="langSwitcher" class="lang-switcher">
 <div class="lang-options" role="listbox" aria-label="Select language">
 <button class="lang-btn active" data-lang="ja" role="option" aria-selected="true">
@@ -57,8 +57,7 @@ English</button>
 <input type="text" id="searchFrom" class="search-input" data-i18n-placeholder="search.fromPlaceholder" placeholder="出発駅を入力"><div id="fromSuggestions" class="suggestions">
 </div>
 </div>
-<button id="swapBtn" class="swap-btn" aria-label="swap" title="交換">
-&#x21c4;</button>
+<button id="swapBtn" class="swap-btn" aria-label="swap" title="交換"><svg class="pt-icon" viewBox="0 0 14 14" width="16" height="16" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path fill-rule="evenodd" clip-rule="evenodd" d="M8 0a1 1 0 0 0 0 2h1.5a.5.5 0 0 1 .5.5v6H8.5a.5.5 0 0 0-.354.854l2.5 2.5a.5.5 0 0 0 .708 0l2.5-2.5A.5.5 0 0 0 13.5 8.5H12v-6A2.5 2.5 0 0 0 9.5 0zM3.354 2.146a.5.5 0 0 0-.708 0l-2.5 2.5A.5.5 0 0 0 .5 5.5H2v6A2.5 2.5 0 0 0 4.5 14H6a1 1 0 1 0 0-2H4.5a.5.5 0 0 1-.5-.5v-6h1.5a.5.5 0 0 0 .354-.854z"/></svg></button>
 <div class="input-group">
 <label class="input-label" data-i18n="search.toLabel">
 到着駅</label>
@@ -84,7 +83,7 @@ English</button>
 </span>
     </div>
     <button id="smRelocateBtn" class="sm-relocate-btn" title="現在位置に更新" aria-label="Relocate to current position">
-<svg class="sm-relocate-icon" viewBox="0 0 1024 1024" width="16" height="16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M684.032 403.456q-17.408-8.192-15.872-22.016t11.776-22.016q3.072-2.048 19.968-15.872t41.472-33.28q-43.008-49.152-102.4-77.312t-129.024-28.16q-64.512 0-120.832 24.064t-98.304 66.048-66.048 98.304-24.064 120.832q0 63.488 24.064 119.808t66.048 98.304 98.304 66.048 120.832 24.064q53.248 0 100.864-16.896t87.04-47.616 67.584-72.192 41.472-90.624q7.168-23.552 26.624-38.912t46.08-15.36q31.744 0 53.76 22.528t22.016 53.248q0 14.336-5.12 27.648-21.504 71.68-63.488 132.096t-99.84 103.936-128.512 68.096-148.48 24.576q-95.232 0-179.2-35.84t-145.92-98.304-98.304-145.92-36.352-178.688 36.352-179.2 98.304-145.92 145.92-98.304 179.2-36.352q105.472 0 195.584 43.52t153.6 118.272q23.552-17.408 39.424-30.208t19.968-15.872q6.144-5.12 13.312-7.68t13.312 0 10.752 10.752 6.656 24.576q1.024 9.216 2.048 31.232t2.048 51.2 1.024 60.416-1.024 58.88q-1.024 34.816-16.384 50.176-8.192 8.192-24.576 9.216t-34.816-3.072q-27.648-6.144-60.928-13.312t-63.488-14.848-53.248-14.336-29.184-9.728z" p-id="7294"></path></svg>
+<svg class="sm-relocate-icon" viewBox="0 0 14 14" width="16" height="16" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path fill-rule="evenodd" clip-rule="evenodd" d="M7 0c2.622 0 4.806 2.184 4.806 4.805 0 .856-.294 1.7-.705 2.464-.413.768-.959 1.484-1.501 2.094a16 16 0 0 1-1.521 1.49 9 9 0 0 1-.546.433 3 3 0 0 1-.195.13 1 1 0 0 1-.174.083.54.54 0 0 1-.405-.03 1 1 0 0 1-.098-.053 3 3 0 0 1-.196-.133 9 9 0 0 1-.545-.435A16 16 0 0 1 4.4 9.352c-.542-.612-1.088-1.33-1.5-2.095-.411-.762-.706-1.603-.706-2.452C2.194 2.184 4.378 0 7 0m0 6.24a1.435 1.435 0 1 1 0-2.87 1.435 1.435 0 0 1 0 2.87m3.1 3.916q.276-.31.55-.65h1.343c.2 0 .38.12.46.303l1.497 3.495a.5.5 0 0 1-.46.697H.51a.5.5 0 0 1-.46-.697l1.498-3.495a.5.5 0 0 1 .46-.303h1.355q.266.33.537.636c.662.746 1.33 1.376 1.85 1.821.26.223.487.402.661.528q.13.095.232.157.049.03.11.06.03.014.079.03a.55.55 0 0 0 .414-.03q.06-.029.11-.059.101-.061.231-.155c.174-.126.4-.304.661-.525.52-.442 1.19-1.069 1.851-1.813"/></svg>
 </button>
   </div>
   <div id="smTagFilters" class="sm-tag-filters">
@@ -103,7 +102,7 @@ English</button>
 © 2026 Pixel Tetsudo</footer>
 </div>
 <script src="../data/core/db-loader.js?v=4.3.638"></script><script src="../data/core/station-i18n.file.js?v=4.3.638"></script><script src="../data/core/transfer-hints.js?v=4.3.638"></script><script src="../js/station-resolver.js?v=4.3.638"></script><script src="../js/translations.js?v=4.3.821"></script><script src="../js/common.js?v=4.3.638"></script><script src="../js/lang-init.js?v=4.3.638"></script><script src="../data/api/odpt-links.js?v=4.3.638"></script><script src="../js/odpt-lazy.js?v=4.3.638"></script><script src="../data/api/odpt-unified.js?v=4.3.638"></script><script src="../js/data-fusion.js?v=4.3.638"></script>
-<script src="../data/core/through-service.js?v=4.3.804"></script><script src="../js/fare-estimator.js?v=4.3.638"></script><script src="../data/core/line-operation-systems.js?v=4.3.638"></script><script src="../js/route-search.js?v=4.3.638"></script><script src="../js/search-ui.js?v=4.3.638"></script><script src="../data/core/platform-data.js?v=4.3.638"></script><script src="../js/route-timetable.js?v=4.3.638"></script><script src="../js/tourism-proximity.js?v=4.3.638"></script><script src="../js/sightseeing.js?v=4.3.821"></script><script src="../js/history.js?v=4.3.638"></script></body>
+<script src="../data/core/through-service.js?v=4.3.804"></script><script src="../js/fare-estimator.js?v=4.3.638"></script><script src="../data/core/line-operation-systems.js?v=4.3.638"></script><script src="../js/route-search.js?v=4.3.638"></script><script src="../js/search-ui.js?v=4.3.832"></script><script src="../data/core/platform-data.js?v=4.3.638"></script><script src="../js/route-timetable.js?v=4.3.638"></script><script src="../js/tourism-proximity.js?v=4.3.638"></script><script src="../js/sightseeing.js?v=4.3.821"></script><script src="../js/history.js?v=4.3.832"></script></body>
 </html>
 
 

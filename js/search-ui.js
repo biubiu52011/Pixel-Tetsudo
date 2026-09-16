@@ -350,7 +350,7 @@
               var badgeParts = [];
               if (seg.fromLine) badgeParts.push(this._lineBadge(seg.fromLine));
               if (seg.toLines && seg.toLines.length) {
-                if (badgeParts.length) badgeParts.push('<span class="journey-line-arrow">&rarr;</span>');
+                if (badgeParts.length) badgeParts.push('<svg class="journey-line-arrow" viewBox="0 0 14 14" width="12" height="12" fill="currentColor" aria-hidden="true" focusable="false"><path fill-rule="evenodd" clip-rule="evenodd" transform="rotate(90 7 7)" d="M6.646.146a.5.5 0 0 1 .708 0l3.5 3.5a.5.5 0 0 1-.354.854H8V13a1 1 0 1 1-2 0V4.5H3.5a.5.5 0 0 1-.354-.854z"/></svg>');
                 for (var bi = 0; bi < seg.toLines.length; bi++) badgeParts.push(this._lineBadge(seg.toLines[bi]));
               }
               lineChange = '<span class="journey-line-icons">' + badgeParts.join('') + '</span>';
@@ -359,8 +359,8 @@
             if (seg.through) { html += ' journey-transfer--through'; }
             html += '" data-tx-idx="' + i + '">';
             var _txIconSvg = seg.through
-              ? '<svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 5.6h9"/><path d="M9.4 3.4l2.4 2.2-2.4 2.2"/><path d="M13.5 10.4h-9"/><path d="M6.6 8.2l-2.4 2.2 2.4 2.2"/></svg>'
-              : '<svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2.8a5.4 5.4 0 1 1-5.3 4.2"/><path d="M2.7 5.2v3.1h3.2"/></svg>';
+              ? '<svg class="journey-tx-icon" viewBox="0 0 14 14" width="13" height="13" fill="currentColor" aria-hidden="true" focusable="false"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.146A.5.5 0 0 0 8.5.5V2h-6A2.5 2.5 0 0 0 0 4.5V6a1 1 0 0 0 2 0V4.5a.5.5 0 0 1 .5-.5h6v1.5a.5.5 0 0 0 .854.354l2.5-2.5a.5.5 0 0 0 0-.708zM5.19 8.038a.5.5 0 0 1 .31.462V10h6a.5.5 0 0 0 .5-.5V8a1 1 0 1 1 2 0v1.5a2.5 2.5 0 0 1-2.5 2.5h-6v1.5a.5.5 0 0 1-.854.354l-2.5-2.5a.5.5 0 0 1 0-.708l2.5-2.5a.5.5 0 0 1 .545-.108"/></svg>'
+              : '<svg class="journey-tx-icon" viewBox="0 0 14 14" width="13" height="13" fill="currentColor" aria-hidden="true" focusable="false"><path fill-rule="evenodd" clip-rule="evenodd" d="M10.998 1.068a1 1 0 0 1-.29.64l-2 2-7 7A1 1 0 0 1 .292 9.292L6.586 3 5.293 1.707A1 1 0 0 1 6 0h4a1 1 0 0 1 .674.261M7.414 11l6.293-6.293a1 1 0 0 0-1.414-1.414l-7 7-2 2a.996.996 0 0 0-.05 1.36q.038.045.083.086A1 1 0 0 0 4 14h4a1 1 0 0 0 .707-1.707z"/></svg>';
             html += '<span class="journey-transfer-icon">' + _txIconSvg + '</span>';
             html += '<span class="journey-transfer-station">' + window.escapeHtml(txSt) + '</span>';
             html += '<span class="journey-transfer-text';
