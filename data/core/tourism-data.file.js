@@ -6236,7 +6236,59 @@ window.RAILWAY_TOURISM = {
           "역에서 출발"
         ]
       },
-      "address": "東京都足立区千住大川町先"
+      "address": "東京都足立区千住大川町先",
+      "pastEditions": [
+        {
+          "num": 46,
+          "date": "2024-07-20",
+          "note": {
+            "ja": "",
+            "zh": "",
+            "en": "",
+            "ko": ""
+          }
+        },
+        {
+          "num": 47,
+          "date": "2025-05-31",
+          "note": {
+            "ja": "強風のため中止",
+            "zh": "因强风中止",
+            "en": "Canceled (strong winds)",
+            "ko": "강풍으로 중지"
+          }
+        },
+        {
+          "num": 48,
+          "date": "2026-05-30",
+          "note": {
+            "ja": "",
+            "zh": "",
+            "en": "",
+            "ko": ""
+          }
+        }
+      ],
+      "videos": [
+        {
+          "videoId": "KLOkjRZe_4I",
+          "title": {
+            "ja": "第48回（2026）TBS NEWS 生中継",
+            "zh": "第48届（2026）TBS NEWS 直播",
+            "en": "48th (2026) TBS NEWS Live",
+            "ko": "제48회(2026) TBS NEWS 생중계"
+          }
+        },
+        {
+          "videoId": "ZwLZuObb0Eo",
+          "title": {
+            "ja": "第48回（2026）フィナーレ 8K",
+            "zh": "第48届（2026）终场 8K",
+            "en": "48th (2026) Finale 8K",
+            "ko": "제48회(2026) 피날레 8K"
+          }
+        }
+      ]
     },
     {
       "name": "じんがんなわ祭",
