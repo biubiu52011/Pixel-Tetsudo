@@ -1,0 +1,10 @@
+/* Tourism Detail - Shop (4.3.802) 店铺独立详情页样式 */
+.type-badge--shop { background: #FF6347; }
+
+/* 店铺样式：人均大字强调（暖橙） */
+.article-content--shop .qi-price .qi-label { color: #E8590C; font-weight: 800; }
+.article-content--shop .qi-price .qi-value { font-size: 22px; font-weight: 800; color: #E8590C; line-height: 1.2; }
+
+/* 店铺菜单板块（大众点评式推荐）——暖色列表标识 */
+.article-content--shop .menu-list { margin-top: 8px; }
+.article-content--shop .menu-list li::marker { color: #E8590C; }

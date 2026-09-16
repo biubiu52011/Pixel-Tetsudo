@@ -1,0 +1,7 @@
+/* Tourism Detail - Event (4.3.802) 活动独立详情页样式 */
+.type-badge--event { background: #FF4500; }
+
+/* 活動樣式：開催時期强调（橙红） */
+.article-content--event .qi-period .qi-label { color: #FF4500; font-weight: 800; }
+.article-content--event .qi-period .qi-value { font-weight: 800; color: #FF4500; font-size: 17px; }
+.article-content--event .article-hero--event { position: relative; }
