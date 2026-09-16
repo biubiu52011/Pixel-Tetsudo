@@ -6428,6 +6428,38 @@
           "end": "2027-01-07",
           "allDay": true
         }
+      ],
+      "pastEditions": [
+        {
+          "num": 1,
+          "date": "1469",
+          "note": {
+            "ja": "文明年間（1469-1487）に始まったと伝わる。大乗院の薬師堂に白蛇がいなくなった後、藁の大蛇を編み奉納して厄除けが始まった。",
+            "zh": "传说始于文明年间（1469-1487）。大乗院药师堂白蛇消失后，居民编稻草巨蛇奉纳驱厄，仪式由此开始。",
+            "en": "Traditionally started in the Bunmei era (1469-1487), after the white snake of Daijo-in ceased to appear.",
+            "ko": "분메이 연간(1469-1487)에 시작했다고 전해짐. 다이지인 약사堂的 흰 뱀이 사라진 후 짚 뱀을 봉납하며 시작."
+          }
+        },
+        {
+          "num": "",
+          "date": "2009",
+          "note": {
+            "ja": "平成21年（2009）からは成人の日（1月第2月曜日）に開催日を固定。以前は1月7日（七草節句）に行われていた。",
+            "zh": "自平成21年（2009）起固定在成人之日（1月第二个周一）举办，此前固定在1月7日（七草节）。",
+            "en": "Since 2009 (Heisei 21), held on Coming of Age Day. Previously held on January 7th.",
+            "ko": "2009년(헤이세이 21년)부터 청춘의 날(1월 둘째 월요일)로 확정. 이전에는 1월 7일에 열림."
+          }
+        },
+        {
+          "num": "",
+          "date": "2022-03",
+          "note": {
+            "ja": "東京都指定無形民俗文化財に指定。500年以上途絶えることなく継承された取り組みが評価された。",
+            "zh": "被指定为东京都指定无形民俗文化财，500年以上未曾中断的传承获得认可。",
+            "en": "Designated as a Tokyo Metropolitan Intangible Folk Cultural Asset, recognized for 500+ years of unbroken tradition.",
+            "ko": "도쿄도 지정 무형민속문화재로 지정. 500년 이상 중단 없이 이어온 전통이 평가됨."
+          }
+        }
       ]
     },
     {
@@ -7032,6 +7064,28 @@
           "end": "2027-07-16",
           "allDay": true
         }
+      ],
+      "pastEditions": [
+        {
+          "num": 1,
+          "date": "1335",
+          "note": {
+            "ja": "建武2年（1335）の寺創建とともに閻魔大王信仰が始まったと伝わる。千住宿の飯盛女供養塔（千住宿の歴史）も寺内にある。",
+            "zh": "建武二年（1335）寺庙创立时阎魔大王信仰开始流传。寺内还有千住宿游女供养塔。",
+            "en": "Enma Oño faith began with the temple’s founding in 1335 (Kenmu 2).",
+            "ko": "건무 2년(1335) 사찰 창건과 함께 엔마대왕 신앙이 시작. 사찰 내에 천주 숙여녀 공양탑도 있음."
+          }
+        },
+        {
+          "num": "",
+          "date": "1837",
+          "note": {
+            "ja": "天保8年（1837）の大飢饉に飢死者を供養するため、千住二丁目名主永野彦右衛門が発起して天保10年（1839）に無縁塔が建立。",
+            "zh": "天保八年（1837）大饥荒后，千住二丁目名主永野彦右卫门发起，于天保十年（1839）建无縁塔供奉饿死者。",
+            "en": "In 1837 (Tenpo 8), a famine memorial tower was built in 1839 for those who died of starvation.",
+            "ko": "1837년(덴포 8년) 대기근으로 사망자를 공양하기 위해 무연탑을 1839년에 세움."
+          }
+        }
       ]
     },
     {
@@ -7104,7 +7158,19 @@
         "zh": "2027年9月中旬（例大祭・2天，日程每年浮动）",
         "en": "Mid-Sep 2027 (annual festival, 2 days; dates vary yearly)",
         "ko": "2027년 9월 중순(예대제·2일, 일정은 해마다 변동)"
-      }
+      },
+      "pastEditions": [
+        {
+          "num": 1,
+          "date": "1603",
+          "note": {
+            "ja": "江戸時代前期（1603年頃）に伝承が始まったとされる。鹿浜東・島・糀屋・古内の四集落で輪番奉納、北野神社を祀る東集落に笛・舞の伝承がある。",
+            "zh": "相传于江户时代前期（约1603年）开始传承。鹿浜东、岛、糀屋、古内四个集落轮流奉纳，笛与舞的传承在鹿浜东集落。",
+            "en": "Tracing back to early Edo period (~1603). Performed in rotation by 4 settlements; the flutist and dancers are preserved in Higashi.",
+            "ko": "에도 시대 초기(약 1603년경)부터 전승. 4개 집약에서 순번으로 봉납, 북/춤은 히가시集락에 전승."
+          }
+        }
+      ]
     },
     {
       "name": "長門鎮守八幡神社",
@@ -14750,6 +14816,18 @@
           "allDay": true,
           "rrule": "FREQ=MONTHLY;BYDAY=2WE,4WE"
         }
+      ],
+      "pastEditions": [
+        {
+          "num": 1,
+          "date": "2016",
+          "note": {
+            "ja": "和光市駅南口「駅前いこいの広場」で開市。和光市産の旬野菜を直販する月2回の定期市（第2・第4水曜日）。",
+            "zh": "在和光市站南口「站前休息广场」开始举办。和光市产时令蔬菜直销，每月两次定期市集（第2、第4个周三）。",
+            "en": "Started at Wako Station South Exit \"Ekimae Ikoi Plaza\". Bi-weekly market (2nd & 4th Wednesday) selling local seasonal vegetables.",
+            "ko": "와코역 남쪽 출구 \"역전 쉼터 광장\"에서 시작. 월 2회 정기 시장(둘째·넷째 수요일)."
+          }
+        }
       ]
     },
     {
@@ -15265,7 +15343,29 @@
           "현장 조립 체험 스페이스도."
         ]
       },
-      "address": "東京都台東区今戸一丁目"
+      "address": "東京都台東区今戸一丁目",
+      "pastEditions": [
+        {
+          "num": 1,
+          "date": "2013",
+          "note": {
+            "ja": "「浅草エーラウンド」イベントとして2013年に開始。革工房・地域店舗巡りの「革とモノづくりの祭典」。東京メトロ特設ブース（レザークラフトキット販売）は2019年秋から参加。",
+            "zh": "作为\"浅草A Round\"活动，2013年开始举办。东京地铁特设展位（皮革手工套件销售）自2019年秋季参加。",
+            "en": "Asakusa A-Round started in 2013. Tokyo Metro special booth (leather craft kits) joined from Fall 2019.",
+            "ko": "아사쿠사 A-Round은 2013년 시작. 도쿄메트로 특별부스(레더크래프트 키트)는 2019년 가을부터 참가."
+          }
+        },
+        {
+          "num": "",
+          "date": "2019-10-19",
+          "note": {
+            "ja": "東京メトロ特設ブース初出展（2019年10月19日・20日）。銀座線開業時車両デザインの革製模型キット「革でつくる銀座線」（500円、各日先着300個）を販売。",
+            "zh": "东京地铁特设展位首次参展（2019年10月19日·20日）。销售银座线开业时车辆设计的革制模型套件\"用皮革制作银座线\"（500日元，每日限300个）。",
+            "en": "First appearance of Tokyo Metro booth (Oct 19-20, 2019). Sold \"Build the Ginza Line in Leather\" kits (500 yen, 300/day first come).",
+            "ko": "도쿄메트로 부스 첫 참가(2019년 10월 19일·20일). \"가죽으로 만드는 가와사키 라인\" 키트 판매(500엔, 하루 300개 한정)."
+          }
+        }
+      ]
     },
     {
       "name": "小川広場（東京メトロ特設ブース）",
