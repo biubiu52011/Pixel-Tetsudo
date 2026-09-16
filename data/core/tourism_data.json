@@ -17294,19 +17294,23 @@
       "menu": [
         {
           "item": "チョコタルト",
-          "price": "180円"
+          "price": "180円",
+          "img": "../images/料理/gonno_0_choco-tart.jpg"
         },
         {
           "item": "クリームパン",
-          "price": "200円"
+          "price": "200円",
+          "img": "../images/料理/gonno_1_cream-bun.jpg"
         },
         {
           "item": "パンの盛り合わせ",
-          "price": "250円"
+          "price": "250円",
+          "img": "../images/料理/gonno_2_bread-assort.jpg"
         },
         {
           "item": "フレッシュトマトとバジルのピッツァ",
-          "price": "950円"
+          "price": "950円",
+          "img": "../images/料理/gonno_3_pizza.jpg"
         }
       ],
       "menu_i18n": [
@@ -17500,19 +17504,23 @@
       "menu": [
         {
           "item": "オムライス",
-          "price": "2,000円"
+          "price": "2,000円",
+          "img": "../images/料理/tsutsui_0_omurice.jpg"
         },
         {
           "item": "ハンバーグ",
-          "price": "2,860円"
+          "price": "2,860円",
+          "img": "../images/料理/tsutsui_1_hamburg.jpg"
         },
         {
           "item": "ビーフシチュー",
-          "price": "3,800円（半 2,200円）"
+          "price": "3,800円（半 2,200円）",
+          "img": "../images/料理/tsutsui_2_beef-stew.jpg"
         },
         {
           "item": "赤坂御膳",
-          "price": "5,500円"
+          "price": "5,500円",
+          "img": "../images/料理/tsutsui_3_akasaka-gozen.jpg"
         }
       ],
       "menu_i18n": [
@@ -19387,15 +19395,18 @@
       "menu": [
         {
           "item": "すき焼き 上",
-          "price": "2,052円"
+          "price": "2,052円",
+          "img": "../images/料理/iseju_0_sukiyaki.jpg"
         },
         {
           "item": "すき焼き重",
-          "price": "2,700円"
+          "price": "2,700円",
+          "img": "../images/料理/iseju_1_sukiyaki-don.jpg"
         },
         {
           "item": "すき焼き 特上",
-          "price": "3,024円"
+          "price": "3,024円",
+          "img": "../images/料理/iseju_2_sukiyaki-tokujo.jpg"
         },
         {
           "item": "すき焼きAコース",
@@ -22883,19 +22894,23 @@
       "menu": [
         {
           "item": "季節のフルーツカクテル",
-          "price": "1,540円"
+          "price": "1,540円",
+          "img": "../images/料理/mixology_0_cocktail.jpg"
         },
         {
           "item": "燻製生チョコ",
-          "price": "1,000円"
+          "price": "1,000円",
+          "img": "../images/料理/mixology_1_smoked-choco.jpg"
         },
         {
           "item": "おつまみ盛り合わせ",
-          "price": "2,200円"
+          "price": "2,200円",
+          "img": "../images/料理/mixology_2_otsumami.jpg"
         },
         {
           "item": "メンフィス風リブ",
-          "price": "2,600円"
+          "price": "2,600円",
+          "img": "../images/料理/mixology_3_ribs.jpg"
         }
       ],
       "menu_i18n": [
@@ -23784,15 +23799,18 @@
       "menu": [
         {
           "item": "マグロマート盛り（1人前）",
-          "price": "880円"
+          "price": "880円",
+          "img": "../images/料理/maguro_0_sashimi.jpg"
         },
         {
           "item": "マグロ漬け丼",
-          "price": "880円"
+          "price": "880円",
+          "img": "../images/料理/maguro_1_zuke-don.jpg"
         },
         {
           "item": "生うに",
-          "price": "980円"
+          "price": "980円",
+          "img": "../images/料理/maguro_2_uni.jpg"
         },
         {
           "item": "マグロコース",
@@ -24532,19 +24550,23 @@
       "menu": [
         {
           "item": "ムルギーランチ",
-          "price": "1,600円"
+          "price": "1,600円",
+          "img": "../images/料理/nile_0_murgi.jpg"
         },
         {
           "item": "チキンマサラ",
-          "price": "1,550円"
+          "price": "1,550円",
+          "img": "../images/料理/nile_1_chicken-masala.jpg"
         },
         {
           "item": "チャンナマサラ",
-          "price": "1,350円"
+          "price": "1,350円",
+          "img": "../images/料理/nile_2_chana-masala.jpg"
         },
         {
           "item": "ラサム",
-          "price": "650円"
+          "price": "650円",
+          "img": "../images/料理/nile_3_rasam.jpg"
         }
       ],
       "menu_i18n": [
@@ -31868,7 +31890,8 @@
         },
         {
           "item": "ばら売りキャラメル",
-          "price": "10円"
+          "price": "10円",
+          "img": "../images/料理/kamikawaguchiya_2_caramel.jpg"
         },
         {
           "item": "ふうせんガム",
@@ -32294,19 +32317,23 @@
       "menu": [
         {
           "item": "スパイス・ラー麺（ネギ）",
-          "price": "1,030円"
+          "price": "1,030円",
+          "img": "../images/料理/manriki_0_spice-ramen.jpg"
         },
         {
           "item": "スパイス・味玉ラー麺",
-          "price": "1,240円"
+          "price": "1,240円",
+          "img": "../images/料理/manriki_1_ajitama.jpg"
         },
         {
           "item": "スパイス・パクチーラー麺",
-          "price": "1,280円"
+          "price": "1,280円",
+          "img": "../images/料理/manriki_2_cilantro.jpg"
         },
         {
           "item": "スパイス・特製ラー麺",
-          "price": "1,530円"
+          "price": "1,530円",
+          "img": "../images/料理/manriki_3_tokusei.jpg"
         }
       ],
       "menu_i18n": [
@@ -32861,19 +32888,23 @@
       "menu": [
         {
           "item": "甘口ジンジャーエール",
-          "price": "700円"
+          "price": "700円",
+          "img": "../images/料理/koho_0_amakuchi.jpg"
         },
         {
           "item": "辛口ジンジャーエール",
-          "price": "700円"
+          "price": "700円",
+          "img": "../images/料理/koho_1_karakuchi.jpg"
         },
         {
           "item": "ジンジャーエール極辛",
-          "price": "900円"
+          "price": "900円",
+          "img": "../images/料理/koho_2_gokukara.jpg"
         },
         {
           "item": "ジンジャーシロップ（200ml）",
-          "price": "3,300円"
+          "price": "3,300円",
+          "img": "../images/料理/koho_3_syrup.jpg"
         }
       ],
       "menu_i18n": [
@@ -33759,15 +33790,18 @@
       "menu": [
         {
           "item": "担々麺",
-          "price": "1,100円"
+          "price": "1,100円",
+          "img": "../images/料理/kasan_0_tantan.jpg"
         },
         {
           "item": "辣々麺",
-          "price": "1,200円"
+          "price": "1,200円",
+          "img": "../images/料理/kasan_1_lala.jpg"
         },
         {
           "item": "CURRY辣々麺",
-          "price": "1,200円"
+          "price": "1,200円",
+          "img": "../images/料理/kasan_2_curry-lala.jpg"
         },
         {
           "item": "替玉",
