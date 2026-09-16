@@ -907,8 +907,7 @@
     },
     'ChuoTatsuno': {
       'Local': { 'default': '211系 / E127系100番台' },
-      'Rapid': { 'default': '211系 / E127系100番台' },
-      'LimitedExpress': { 'default': 'E353系（あずさ・かいじ）（候補）' }
+      'Rapid': { 'default': '211系 / E127系100番台' }
     },
     'Echigo': {
       'Local': { 'default': 'E127系' }
