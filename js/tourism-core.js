@@ -282,7 +282,11 @@
     return html + '</ul></div>';
   }
 
-  function handleBack() { window.history.back(); }
+  // 4.3.839: history.length<=1（新标签/外部直开详情，无历史可退）时 fallback 跳 home 观光列表；正常 history.back() 行为不变
+  function handleBack() {
+    if (history.length <= 1) { location.href = 'home.html#tourism'; return; }
+    history.back();
+  }
 
   function translateUI() {
     var backBtnText = document.getElementById("backBtnText");
