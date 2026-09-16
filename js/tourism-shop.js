@@ -13,7 +13,7 @@
 
   // 人均标签：含价格(円/前後/〜/～)才叫"人均"；無料/実費占位类店铺用通用"费用"
   function feeLabelFor(spotFee) {
-    return /[円前後〜～]/.test(spotFee) ? C.t('detail.info_fee_per_person') : C.t('detail.info_fee');
+    return C.t('detail.info_fee_per_person');
   }
 
   // ① 顶部图集：有图 → 大图可点开全屏；无图 → 类型渐变占位
