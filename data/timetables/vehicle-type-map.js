@@ -1079,7 +1079,7 @@
       'HaijimaLiner': { 'default': '40000系（Laview）' }
     },
     'Kokubunji': {
-      'Local': { 'default': '新2000系（2000系）/ 8000系（候補）' }
+      'Local': { 'default': '新2000系（2000系）/ 8000系' }
     },
     'SeibuChichibu': {
       'Local': { 'default': '4000系 / 7000系' },
@@ -1087,7 +1087,7 @@
       'S-TRAIN': { 'default': '40000系（Laview）' }
     },
     'SeibuEn': {
-      'Local': { 'default': '新101系（ワンマン）/ 9000系（候補）' }
+      'Local': { 'default': '新101系 / 9000系' }
     },
     'SeibuShinjuku': {
       'Local': { 'default': '2000系 / 20000系 / 30000系' },
@@ -1095,7 +1095,7 @@
       'SemiExpress': { 'default': '2000系 / 20000系 / 30000系' },
       'CommuterExpress': { 'default': '2000系 / 20000系 / 30000系' },
       'RapidExpress': { 'default': '2000系 / 20000系 / 30000系' },
-      'LimitedExpress': { 'default': '40000系（Laview・候補）' },
+      'LimitedExpress': { 'default': '10000系（レッドアロー）' },
       'HaijimaLiner': { 'default': '40000系（Laview）' }
     },
     'SeibuTamagawa': {
@@ -1105,7 +1105,7 @@
       'Local': { 'default': '新101系（ワンマン）/ 7000系' }
     },
     'SeibuToshima': {
-      'Local': { 'default': '新101系（ワンマン・候補）' }
+      'Local': { 'default': '2000系（8両編成・池袋線直通）' }
     },
     'SeibuYamaguchi': {
       'Local': { 'default': '8500系（レオライナー、新型導入中）' }
@@ -1126,7 +1126,7 @@
     'TokyoMonorail': {
       'AirportRapid': { 'default': '10000形' },
       'SectionRapid': { 'default': '10000形' },
-      'Local': { 'default': '10000形 / 2000形（候補）' }
+      'Local': { 'default': '10000形 / 2000形' }
     },
     'Yurikamome': {
       'Local': { 'default': '7300系 / 7500系（7000系は全廃）' }
