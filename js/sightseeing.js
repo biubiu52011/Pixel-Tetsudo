@@ -21,6 +21,51 @@
     play: 'tourism.tag_play'
   };
 
+  // 4.3.826: 点评网站式分类——一级功能大类（互斥）+ 二级子分类（选中一级后渐进展开）
+  // 非类型维度（landmark/family/駅直結 等）保留在 TAG_LABELS 作卡片徽章，不进筛选条
+  const TAG_GROUPS = [
+    { key: 'culture', label: 'tourism.group_culture',
+      match: ['shrine', 'temple', 'museum', 'history', 'modern'],
+      subs: [
+        { key: 'shrine',  label: 'tourism.tag_shrine',  match: ['shrine', 'temple'] },
+        { key: 'history', label: 'tourism.tag_history', match: ['history'] },
+        { key: 'modern',  label: 'tourism.tag_modern',  match: ['modern'] }
+      ]},
+    { key: 'gourmet', label: 'tourism.group_gourmet',
+      match: ['food', 'restaurant', 'cafe', 'sweets', 'drink', 'bar', 'bakery', 'local_specialty', 'family'],
+      subs: [
+        { key: 'restaurant', label: 'tourism.tag_restaurant', match: ['restaurant', 'family'] },
+        { key: 'cafe',       label: 'tourism.tag_cafe',       match: ['cafe'] },
+        { key: 'sweets',     label: 'tourism.tag_sweets',     match: ['sweets'] },
+        { key: 'bar',        label: 'tourism.tag_bar',        match: ['bar', 'drink'] },
+        { key: 'bakery',     label: 'tourism.tag_bakery',     match: ['bakery'] },
+        { key: 'local_specialty', label: 'tourism.tag_local_specialty', match: ['local_specialty'] }
+      ]},
+    { key: 'shopping', label: 'tourism.group_shopping',
+      match: ['shopping', 'shop', 'hotel'],
+      subs: [
+        { key: 'shopping', label: 'tourism.tag_shopping', match: ['shopping', 'hotel'] },
+        { key: 'shop',     label: 'tourism.tag_shop',     match: ['shop'] }
+      ]},
+    { key: 'nature', label: 'tourism.group_nature',
+      match: ['nature', 'park'],
+      subs: [
+        { key: 'park',   label: 'tourism.tag_park',   match: ['park'] },
+        { key: 'nature', label: 'tourism.tag_nature', match: ['nature'] }
+      ]},
+    { key: 'experience', label: 'tourism.group_experience',
+      match: ['play', 'event', 'seasonal'],
+      subs: [
+        { key: 'play',  label: 'tourism.tag_play',  match: ['play'] },
+        { key: 'event', label: 'tourism.tag_event', match: ['event', 'seasonal'] }
+      ]}
+  ];
+  function _findGroup(key) {
+    if (!key) return null;
+    for (var i = 0; i < TAG_GROUPS.length; i++) if (TAG_GROUPS[i].key === key) return TAG_GROUPS[i];
+    return null;
+  }
+
   // 4.3.572: 无图景点按类别显示概括性文字（替代 emoji 图标——用户指示"别出现拉面这种"）
   function labelForTags(tags) {
     if (Array.isArray(tags)) {
@@ -39,7 +84,8 @@
     userLat: null,
     userLng: null,
     selectedStation: null,
-    activeTags: new Set(),
+    activeGroup: null,   // 4.3.826: 一级大类 key（null=すべて）
+    activeSub: null,     // 4.3.826: 二级子类 key（null=大类内全部）
     autoDetected: false
   };
 
@@ -88,15 +134,23 @@
 
   function renderTagFilters() {
     if (!dom.tagFilters) return;
-    // 4.3.575: 分类按数据量排序（night 数据为 0 已移除——点开即空白；未来补夜景数据可加回）
-    // 4.3.794: 新增 event（活动：祭り/花火/市集）分类
-    const tags = ['all', 'shrine', 'history', 'shopping', 'nature', 'food', 'landmark', 'seasonal', 'event', 'park', 'modern', 'play'];
-    dom.tagFilters.innerHTML = tags.map(function(tag) {
-      const label = t(TAG_LABELS[tag]) || tag;
-      // 4.3.571: 标签纯文字（emoji 图标已移除）
-      return '<button class="sm-tag-btn' + (state.activeTags.size === 0 || state.activeTags.has(tag) ? ' active' : '') + 
-             '" data-tag="' + tag + '"><span class="tag-label">' + label + '</span></button>';
-    }).join('');
+    // 4.3.826: 点评网站式——一级互斥大类；选中后展开二级子分类行（纯文字，无 emoji）
+    var html = '<div class="sm-tag-row">';
+    html += '<button class="sm-tag-btn' + (state.activeGroup === null ? ' active' : '') + '" data-tag="all"><span class="tag-label">' + t('tourism.tag_all') + '</span></button>';
+    TAG_GROUPS.forEach(function(g) {
+      html += '<button class="sm-tag-btn' + (state.activeGroup === g.key ? ' active' : '') + '" data-group="' + g.key + '"><span class="tag-label">' + t(g.label) + '</span></button>';
+    });
+    html += '</div>';
+    var cur = _findGroup(state.activeGroup);
+    if (cur && cur.subs && cur.subs.length) {
+      html += '<div class="sm-tag-row sm-tag-row-sub">';
+      html += '<button class="sm-tag-btn sm-tag-sub' + (state.activeSub === null ? ' active' : '') + '" data-group="' + cur.key + '" data-sub=""><span class="tag-label">' + t('tourism.tag_all') + '</span></button>';
+      cur.subs.forEach(function(s) {
+        html += '<button class="sm-tag-btn sm-tag-sub' + (state.activeSub === s.key ? ' active' : '') + '" data-group="' + cur.key + '" data-sub="' + s.key + '"><span class="tag-label">' + t(s.label) + '</span></button>';
+      });
+      html += '</div>';
+    }
+    dom.tagFilters.innerHTML = html;
 
     // Event delegation - bind once on the container
     if (!dom.tagFilters.dataset.bound) {
@@ -106,14 +160,25 @@
         if (!btn) return;
         e.preventDefault();
         const tag = btn.getAttribute('data-tag');
-        if (tag === 'all') {
-          state.activeTags.clear();
-        } else {
-          if (state.activeTags.has(tag)) {
-            state.activeTags.delete(tag);
+        const group = btn.getAttribute('data-group');
+        const sub = btn.getAttribute('data-sub');
+        if (tag === 'all' && group === null) {
+          // 一级"すべて"：清空全部筛选
+          state.activeGroup = null;
+          state.activeSub = null;
+        } else if (group !== null && sub === null) {
+          // 一级大类：再点取消，点其他切换
+          if (state.activeGroup === group) {
+            state.activeGroup = null;
+            state.activeSub = null;
           } else {
-            state.activeTags.add(tag);
+            state.activeGroup = group;
+            state.activeSub = null;
           }
+        } else if (group !== null) {
+          // 二级子分类：data-sub=""（すべて）或具体子类
+          state.activeGroup = group;
+          state.activeSub = sub || null;
         }
         renderGrid();
         renderTagFilters();
@@ -215,11 +280,19 @@ function renderGrid() {
         return s.distM !== null && s.distM <= 3000;
       });
     }
-    // Apply tag filter
-    if (state.activeTags.size > 0 && !state.activeTags.has('all')) {
-      spotList = spotList.filter(function(s) {
-        return s.tags && s.tags.some(function(t) { return state.activeTags.has(t); });
-      });
+    // Apply tag filter — 4.3.826: 一级大类（组内任一 tag）或二级子类（子类 match）
+    if (state.activeGroup) {
+      var g = _findGroup(state.activeGroup);
+      if (g) {
+        spotList = spotList.filter(function(s) {
+          var tags = s.tags || [];
+          if (!state.activeSub) return tags.some(function(t) { return g.match.indexOf(t) >= 0; });
+          var sub = null;
+          if (g.subs) for (var i = 0; i < g.subs.length; i++) if (g.subs[i].key === state.activeSub) { sub = g.subs[i]; break; }
+          if (!sub) return tags.some(function(t) { return g.match.indexOf(t) >= 0; });
+          return tags.some(function(t) { return sub.match.indexOf(t) >= 0; });
+        });
+      }
     }
     // 4.3.575: 有图优先 + 距离排序（无图卡压缩缩略区后排后，避免列表前部出现空白块）
     spotList.sort(function(a, b) {
@@ -238,13 +311,6 @@ function renderGrid() {
     if (dom.empty) dom.empty.classList.add('hidden');
     // Limit to top 30 (39 registered spots; keep far sights like Asakusa/Skytree visible)
     spotList = spotList.slice(0, 30);
-
-    if (state.activeTags.size > 0) {
-      spotList = spotList.filter(function(s) {
-        const tags = s.tags || [];
-        return tags.indexOf('all') >= 0 || Array.from(state.activeTags).some(function(t) { return tags.indexOf(t) >= 0; });
-      });
-    }
 
     spotList = spotList.filter(function(s) { return !s.isAcross; });
     spotList.sort(function(a, b) {

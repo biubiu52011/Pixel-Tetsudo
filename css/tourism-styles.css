@@ -99,13 +99,30 @@
 /* === Tag filters === */
 /* 4.3.580: flex 换行改为 grid 5 列均分——宽屏下最后一行不再只余 2 个标签造成大片空隙；
    任意宽度均为 5+5 两行，标签等宽对齐 */
+/* 4.3.826: 点评网站式两级分类——一级大类行 + 二级子类行（选中一级才出现），
+   行内 auto-fit 均分，窄屏自动降列数，不产生整行空白 */
 .sm-tag-filters {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: var(--space-3);
   padding: 14px 16px;
   border-bottom: 1px solid var(--border);
   background: var(--card);
+}
+.sm-tag-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(96px, 1fr));
+  gap: var(--space-3);
+}
+.sm-tag-row + .sm-tag-row {
+  border-top: 1px dashed var(--border);
+  padding-top: var(--space-3);
+}
+.sm-tag-row-sub .sm-tag-btn {
+  font-size: 11px;
+  padding: 4px 2px;
+  border-width: 1px;
+  box-shadow: none;
 }
 .sm-tags {
   display: flex;
@@ -133,10 +150,12 @@
 @media (max-width: 420px) {
   .sm-tag-filters { gap: var(--space-2); padding: 12px 10px; }
   .sm-tag-btn { font-size: 11px; padding: 6px 0; }
+  .sm-tag-row { grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); gap: var(--space-2); }
 }
 @media (max-width: 340px) {
   .sm-tag-filters { gap: 2px; padding: 12px 6px; }
   .sm-tag-btn { font-size: 10px; padding: 6px 0; }
+  .sm-tag-row { grid-template-columns: repeat(auto-fit, minmax(72px, 1fr)); gap: 2px; }
 }
 .sm-tag-btn:hover {
   border-color: var(--green);
