@@ -1,17 +1,56 @@
-/* Tourism Detail - Shop (4.3.802) 店铺独立详情页样式 */
-.type-badge--shop { background: #FF6347; }
+/* Tourism Detail - Shop (4.3.821) 大众点评风格店铺详情页样式 */
+.type-badge--shop { background: #FF6B00; }
 
-/* 店铺样式：人均大字强调（暖橙） */
-.article-content--shop .qi-price .qi-label { color: #E8590C; font-weight: 800; }
-.article-content--shop .qi-price .qi-value { font-size: 22px; font-weight: 800; color: #E8590C; line-height: 1.2; }
+.article-content--shop { background: #f5f5f5; }
 
-/* 店铺菜单板块（大众点评式推荐）——暖色列表标识 */
-.article-content--shop .menu-list { margin-top: 8px; }
-.article-content--shop .menu-list li::marker { color: #E8590C; }
+/* ① 顶部图集：大图 + 底部渐变 + 图片按钮 */
+.article-content--shop .dp-hero { position: relative; height: 250px; overflow: hidden; background: #333; }
+.article-content--shop .dp-hero-img { width: 100%; height: 100%; object-fit: cover; display: block; cursor: zoom-in; }
+.article-content--shop .dp-hero-shade { position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, rgba(0,0,0,0.02) 45%, rgba(0,0,0,0.38) 100%); }
+.article-content--shop .dp-photo-tag { position: absolute; right: 12px; bottom: 12px; z-index: 2;
+  background: rgba(0,0,0,0.55); color: #fff; border: none; border-radius: 14px; padding: 4px 12px;
+  font-size: 12px; cursor: pointer; font-family: inherit; }
 
-/* 价目表样式（4.3.815）：菜单项 + 点线 + 单价 */
-.article-content--shop .menu-priced li::marker { content: none; }
-.article-content--shop .menu-row { display: flex; align-items: baseline; gap: 8px; padding: 3px 0; }
-.article-content--shop .menu-item { flex-shrink: 0; }
-.article-content--shop .menu-dots { flex: 1; border-bottom: 1.5px dotted #c9c9c9; transform: translateY(-4px); min-width: 12px; }
-.article-content--shop .menu-price { flex-shrink: 0; font-weight: 700; color: #E8590C; white-space: nowrap; }
+/* ② 店名卡（点评式白色卡片，上移覆盖图沿） */
+.article-content--shop .dp-head { background: #fff; border-radius: 12px; margin: -26px 12px 12px; padding: 14px 14px 12px;
+  position: relative; z-index: 3; box-shadow: 0 1px 6px rgba(0,0,0,0.08); }
+.article-content--shop .dp-head-row { display: flex; align-items: center; gap: 8px; }
+.article-content--shop .dp-name { font-size: 22px; font-weight: 800; margin: 0; line-height: 1.3; }
+.article-content--shop .dp-meta { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-top: 8px; flex-wrap: wrap; }
+.article-content--shop .dp-price { display: flex; align-items: baseline; gap: 6px; color: #E8590C; }
+.article-content--shop .dp-price b { font-size: 22px; font-weight: 800; }
+.article-content--shop .dp-price-label { font-size: 12px; }
+.article-content--shop .dp-dist { font-size: 13px; color: #666; line-height: 1.4; text-align: right; }
+.article-content--shop .dp-chips { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 6px; }
+
+/* 通用白色卡片 */
+.article-content--shop .dp-card { background: #fff; border-radius: 12px; margin: 0 12px 12px; padding: 14px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
+.article-content--shop .dp-sec-title { margin: 0 0 10px; font-size: 16px; font-weight: 800; }
+.article-content--shop .dp-text { margin: 0; line-height: 1.75; font-size: 14px; color: #333; }
+
+/* ③ 商户信息卡 */
+.article-content--shop .dp-info-row { display: flex; gap: 8px; padding: 6px 0; align-items: baseline; font-size: 14px; }
+.article-content--shop .dp-ico { flex-shrink: 0; font-size: 15px; }
+.article-content--shop .dp-info-label { color: #999; flex-shrink: 0; width: 74px; }
+.article-content--shop .dp-info-val { flex: 1; color: #333; line-height: 1.5; }
+
+/* ⑤ 推荐菜/价目表：菜名 + 点线 + 暖橙单价 */
+.article-content--shop .dp-menu-row { display: flex; align-items: baseline; gap: 8px; padding: 6px 0; }
+.article-content--shop .dp-menu-item { flex-shrink: 0; font-size: 14px; }
+.article-content--shop .dp-menu-dots { flex: 1; border-bottom: 1.5px dotted #d5d5d5; transform: translateY(-4px); min-width: 12px; }
+.article-content--shop .dp-menu-price { flex-shrink: 0; color: #E8590C; font-weight: 800; white-space: nowrap; font-size: 14px; }
+
+/* 地图卡片 */
+.article-content--shop .dp-card .map-container { border-radius: 8px; overflow: hidden; }
+
+/* AI 整理注记 */
+.article-content--shop .dp-note { padding: 0 14px 18px; font-size: 12px; color: #999; line-height: 1.6; }
+
+/* 图片灯箱 */
+.dp-lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 9999;
+  display: flex; align-items: center; justify-content: center; }
+.dp-lightbox-img { max-width: 92vw; max-height: 88vh; border-radius: 8px; }
+.dp-lightbox-close { position: absolute; top: 12px; right: 18px; background: none; border: none;
+  color: #fff; font-size: 34px; line-height: 1; cursor: pointer; }
