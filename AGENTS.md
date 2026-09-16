@@ -1759,3 +1759,11 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 - Kamaishi 9555D：补矢幅停站
 **验证**：tt_join_check 1853 | 接続駅無し **0** | 方向異常 **0**；verify_through_vtype 63/63；node --check 3文件全过。
 **commit**：4.3.801
+## 4.3.804（2026-09-16，京急支线直通边提交漏补完 + through-service 版本号全站同步）
+**问题**：复检发现 4.3.797 组织者补的京急支线直通列车（空港/久里浜/逗子）对应的 THROUGH_SERVICE_MAP/JOIN 直通边**未提交**（工作区残留 M data/core/through-service.js）——manual 已提交但直通边漏了；且 trains.html 的 through-service.js 版本号停在 v=4.3.569（4.3.794 直通边改动未全站生效，home/realtime 停在 v=4.3.638）。
+**修正**：
+- through-service.js：京急支线直通边提交漏补完——THROUGH_SERVICE_MAP += KeikyuAirport/Kurihama/Zushi→Keikyu（支線→本線）；THROUGH_JOIN_STATIONS += Keikyu:{KeikyuAirport:[Keikyu-Kamata京急蒲田], KeikyuKurihama:[Horinouchi堀ノ内], KeikyuZushi:[Kanazawa-Hakkei金沢八景]}（実在直通・接続駅正確）
+- pages/home/realtime/trains.html：through-service.js 版本号全站统一 → v=4.3.804（4.3.794 直通边 Yurakucho_Seibu⇄Yurakucho/Ikebukuro⇄Fukutoshin 生效）
+**验证**：tt_cross {}、tt_join_check 1853/0/0、verify_through_vtype 63/63。
+**commit**：d015ec8
+**注**：并行会话持续占用版本号（观光 4.3.799-803）——バージョン番号衝突に注意（本主线 4.3.793-804 与观光线 4.3.795-803 交错）。
