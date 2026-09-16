@@ -7068,32 +7068,32 @@ window.RAILWAY_TOURISM = {
       "pastEditions": [
         {
           "num": 1,
-          "date": "1282",
+          "date": "2025-07-15",
           "note": {
-            "ja": "弘安5年（1282）に創建された浄土宗の古刹。千住の赤門寺として親しまれ、朱塗りの山門（赤門）は千住の街のランドマーク。通常は閉じられているが、閻魔開きの際にのみ開かれる。",
-            "zh": "弘安5年（1282）创立的净土宗古刹，称\"千住赤门寺\"，朱漆山门（赤门）是千住街的地标。平时关闭，仅在阎魔开时开启。",
-            "en": "Founded 1282 (Kōan 5) as a Jōdoshū old temple, known as Senju Red-Gate Temple. The vermilion mountain gate is a local landmark; normally closed, opened only during Enma-biki.",
-            "ko": "공안 5년(1282)에 창건된 정토종 고찰. 천주 적문사라 불리며, 홍칠 산문(적문)은 지역 랜드마크. 평소 폐쇄되어 엔마비기 때에만 개문됨."
+            "ja": "令和7年7月15日（火）・16日（水）に開催。閻魔堂開帳・露店・参拝。宿場町開宿400年記念ののぼりが山門に掲出された。",
+            "zh": "令和7年（2025）7月15日（周二）・16日（周三）举办。阎魔堂开帐、摊位、参拜。山门挂出宿场町开宿400周年纪念旗。",
+            "en": "Held Jul 15 (Tue)–16 (Wed), 2025 (Reiwa 7). Enma hall opening, stalls, worship; a banner marking 400 years since Senju was established as a post station was displayed at the gate.",
+            "ko": "레이와 7년(2025) 7월 15일(화)·16일(수) 개최. 엔마당 개장·노점·참배. 숙방촌 개숙 400주년 기념 깃발을 산문에 게출."
           }
         },
         {
           "num": 2,
-          "date": "1600",
+          "date": "2026-07-15",
           "note": {
-            "ja": "徳川家との縁が深い寺院。院号「大鷲院」に示される大鷲大明神像を本堂内に安置し、江戸時代には勝専寺で二ノ酉の市が立った（花畑大鷲神社の一ノ酉・浅草鷲神社の三ノ酉と並ぶ）。勝専寺での酉の市は明治期に廃絶。",
-            "zh": "与德川家渊源颇深的寺庙。院号「大鹫院」，本堂内供奉大鹫大明神像；江户时代胜专寺举办「二之酉」市（与花畑大鹫神社的「一之酉」、浅草鹫神社的「三之酉」并列）。胜专寺的酉的市场于明治时期废止。",
-            "en": "A temple with deep ties to the Tokugawa house. Its in-name \"Great Eagle\" (Osō-in) enshrines a Daimeishin image in the main hall; in the Edo period the Second Tō market was held here (alongside the First at Hanabatake and the Third at Asakusa). The Tō market at Shosenji was abolished in the Meiji period.",
-            "ko": "도쿠가와 가문과 인연이 깊은 사찰. 인호 \"대유인\"에 대유대명신상을 본당에 봉안하며, 에도 시대에는 승전문사에 니노토 시장이 열림(한바타케 일노토·아사쿠사 산노토와 병렬). 승전문사의 토 시장은 메이지기에 폐절."
+            "ja": "2026年7月に開催・終了。次の回として2027年1月15日（金）・16日（土）が案内された。",
+            "zh": "2026年7月举办并已结束，官方随后预告了下一次2027年1月15日（周五）・16日（周六）。",
+            "en": "Held and concluded in Jul 2026. The next edition, Jan 15 (Fri)–16 (Sat) 2027, was announced.",
+            "ko": "2026년 7월에 개최·종료. 다음 회차로 2027년 1월 15일(금)·16일(토)이 안내됨."
           }
         },
         {
           "num": 3,
-          "date": "1906",
+          "date": "2027-01-15",
           "note": {
-            "ja": "本堂はインドの某寺を模して明治39年（1906）に建立。コンクリート造・レンガ張り建築で、今に残る。",
-            "zh": "本堂仿印度某寺样式，于明治39年（1906）建立，混凝土/砖贴结构，保存至今。",
-            "en": "The main hall, modeled on an Indian temple, was built in 1906 (Meiji 39). Concrete-and-brick construction, still standing today.",
-            "ko": "본당은 인도 사찰을 모방해 메이지 39년(1906)에 건립. 콘크리트·벽돌 구조, 현재까지 보존."
+            "ja": "2027年1月15日（金）・16日（土）開催予定。閻魔堂開帳・参拝・露店。開催時間と露店出店は公式発表で随時更新。",
+            "zh": "预计2027年1月15日（周五）・16日（周六）举办。阎魔堂开帐、参拜、摊位；举办时间与摊位详情以官方公布为准。",
+            "en": "Scheduled for Jan 15 (Fri)–16 (Sat) 2027. Enma hall opening, worship, stalls; times and stall details to be confirmed officially.",
+            "ko": "2027년 1월 15일(금)·16일(토) 개최 예정. 엔마당 개장·참배·노점. 개최 시간과 노점 구성은 공식 발표에 따름."
           }
         }
       ]
