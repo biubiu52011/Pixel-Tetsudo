@@ -1767,3 +1767,17 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 **验证**：tt_cross {}、tt_join_check 1853/0/0、verify_through_vtype 63/63。
 **commit**：d015ec8
 **注**：并行会话持续占用版本号（观光 4.3.799-803）——バージョン番号衝突に注意（本主线 4.3.793-804 与观光线 4.3.795-803 交错）。
+
+## 4.3.808（2026-09-16，車両形式推定表 JR 特急 13 件 ODPT+公式核验）
+**用户指示**："那就继续核查"——vehicle-type-map.js 内 JR 特急/快速 13 件「（候補）」を JR 東日本公式・各社公式 PDF・有力鉄道情報サイトで核验。核查记录：`work/verify_vtype_B_jr_express.md`。
+**核验結果（13 件）**：
+- CONFIRM（候補除去のみ）7 件——ChuoSobuLocal LimitedExpress=E353系（あずさ・かいじ）/ Takasaki LimitedExpress=E257系（草津・四萬・あかぎ）/ UtsunomiyaJR LimitedExpress=E253系（日光・きぬがわ）/ Oito LimitedExpress=E353系（あずさ）/ Shinetsu LimitedExpress=E653系（しらゆき）/ Shinonoi LimitedExpress=383系（しなの・JR東海）/ E353系（あずさ）/ Tazawako LimitedExpress=E6系（こまち）
+- CORRECT（文字列修正）5 件——
+  - ShonanShinjuku LimitedExpress：E257系→**E253系**（JR 東日本公式「きぬがわ（253系）」、大宮支社 2025-12-19 プレスでも 253系1000代 6両編成）
+  - ChuoMain LimitedExpress：E353系(あずさ・かいじ) / E257系→**E353系（あずさ・かいじ）**（E257系は 2019-03 で完全置換済、現役残存なし）
+  - OuMain LimitedExpress：E6系（こまち）/ E3系・E8系（つばさ）→**E6系（こまち）/ E8系（つばさ）**（JR 東日本仙台支社 2025-05-23 プレス：E3系は 2025 年度内に定期運行終了、2026-03 改正で E8系統一）
+  - Uetsu Rapid：701系 / E653系（らくらくトレイン村上）→**701系 / E721系**（快速らくらくトレイン村上は 2021-03-12 廃止、E653系残留記述は誤り。現行快速は普通と同じ 701系/E721系）
+  - Yamagata LimitedExpress：E8系 / E3系（つばさ）→**E8系（つばさ）**（上記同、E3系定期運用終了）
+- KEEP（誤配置疑い・条目削除検討）1 件——ChuoTatsuno LimitedExpress=E353系（あずさ・かいじ）（候補）のまま。あずさ・かいじは本線（岡谷～塩尻直結）経由で辰野支線を通らない（Enpedia 停車駅表で確認）。ODPT 上で該当列車が存在するか別途確認のうえ不要なら削除。
+**验证**：node --check OK；verify_through_vtype.js 63/63；verify_vtype_coverage.js Missing none（MAP 115 線/340 条目）；integrate_all_lines.js ODPT 模擬 7/7。
+**遗留**：残り「（候補）」条目——相鉄直通 6 件（Sotetsu destGroup）、浅草-京成/北総/芝山 6 件、JR 通勤/地方 11 件、西武 Laview 1 件、不明上下文 5 件（新101系/新2000系/7000系/4000系）、東京单轨 1 件——後続バッチで核査。
