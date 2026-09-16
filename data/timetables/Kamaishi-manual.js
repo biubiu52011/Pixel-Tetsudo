@@ -4324,6 +4324,54 @@ window.Kamaishi_MANUAL_TIMETABLES = [
         "odpt:departureTime": "13:25"
       },
       {
+        "odpt:arrivalStation": "odpt.Station:JR-East.TohokuMain.Hanamaki-Kuko",
+        "odpt:arrivalTime": "13:31",
+        "odpt:departureStation": "odpt.Station:JR-East.TohokuMain.Hanamaki-Kuko",
+        "odpt:departureTime": "13:31"
+      },
+      {
+        "odpt:arrivalStation": "odpt.Station:JR-East.TohokuMain.Ishidorii",
+        "odpt:arrivalTime": "13:36",
+        "odpt:departureStation": "odpt.Station:JR-East.TohokuMain.Ishidorii",
+        "odpt:departureTime": "13:36"
+      },
+      {
+        "odpt:arrivalStation": "odpt.Station:JR-East.TohokuMain.Hizume",
+        "odpt:arrivalTime": "13:42",
+        "odpt:departureStation": "odpt.Station:JR-East.TohokuMain.Hizume",
+        "odpt:departureTime": "13:42"
+      },
+      {
+        "odpt:arrivalStation": "odpt.Station:JR-East.TohokuMain.Shiwa-Chuo",
+        "odpt:arrivalTime": "13:44",
+        "odpt:departureStation": "odpt.Station:JR-East.TohokuMain.Shiwa-Chuo",
+        "odpt:departureTime": "13:44"
+      },
+      {
+        "odpt:arrivalStation": "odpt.Station:JR-East.TohokuMain.Furudate",
+        "odpt:arrivalTime": "13:48",
+        "odpt:departureStation": "odpt.Station:JR-East.TohokuMain.Furudate",
+        "odpt:departureTime": "13:48"
+      },
+      {
+        "odpt:arrivalStation": "odpt.Station:JR-East.TohokuMain.Yahaba",
+        "odpt:arrivalTime": "13:52",
+        "odpt:departureStation": "odpt.Station:JR-East.TohokuMain.Yahaba",
+        "odpt:departureTime": "13:52"
+      },
+      {
+        "odpt:arrivalStation": "odpt.Station:JR-East.TohokuMain.Iwate-Iioka",
+        "odpt:arrivalTime": "13:57",
+        "odpt:departureStation": "odpt.Station:JR-East.TohokuMain.Iwate-Iioka",
+        "odpt:departureTime": "13:57"
+      },
+      {
+        "odpt:arrivalStation": "odpt.Station:JR-East.TohokuMain.Senbokucho",
+        "odpt:arrivalTime": "14:01",
+        "odpt:departureStation": "odpt.Station:JR-East.TohokuMain.Senbokucho",
+        "odpt:departureTime": "14:01"
+      },
+      {
         "odpt:arrivalStation": "odpt.Station:JR-East.Morioka",
         "odpt:arrivalTime": "14:05"
       }
@@ -4346,6 +4394,54 @@ window.Kamaishi_MANUAL_TIMETABLES = [
         "odpt:departureTime": "13:25"
       },
       {
+        "odpt:arrivalStation": "odpt.Station:JR-East.TohokuMain.Hanamaki-Kuko",
+        "odpt:arrivalTime": "13:31",
+        "odpt:departureStation": "odpt.Station:JR-East.TohokuMain.Hanamaki-Kuko",
+        "odpt:departureTime": "13:31"
+      },
+      {
+        "odpt:arrivalStation": "odpt.Station:JR-East.TohokuMain.Ishidorii",
+        "odpt:arrivalTime": "13:36",
+        "odpt:departureStation": "odpt.Station:JR-East.TohokuMain.Ishidorii",
+        "odpt:departureTime": "13:36"
+      },
+      {
+        "odpt:arrivalStation": "odpt.Station:JR-East.TohokuMain.Hizume",
+        "odpt:arrivalTime": "13:42",
+        "odpt:departureStation": "odpt.Station:JR-East.TohokuMain.Hizume",
+        "odpt:departureTime": "13:42"
+      },
+      {
+        "odpt:arrivalStation": "odpt.Station:JR-East.TohokuMain.Shiwa-Chuo",
+        "odpt:arrivalTime": "13:44",
+        "odpt:departureStation": "odpt.Station:JR-East.TohokuMain.Shiwa-Chuo",
+        "odpt:departureTime": "13:44"
+      },
+      {
+        "odpt:arrivalStation": "odpt.Station:JR-East.TohokuMain.Furudate",
+        "odpt:arrivalTime": "13:48",
+        "odpt:departureStation": "odpt.Station:JR-East.TohokuMain.Furudate",
+        "odpt:departureTime": "13:48"
+      },
+      {
+        "odpt:arrivalStation": "odpt.Station:JR-East.TohokuMain.Yahaba",
+        "odpt:arrivalTime": "13:52",
+        "odpt:departureStation": "odpt.Station:JR-East.TohokuMain.Yahaba",
+        "odpt:departureTime": "13:52"
+      },
+      {
+        "odpt:arrivalStation": "odpt.Station:JR-East.TohokuMain.Iwate-Iioka",
+        "odpt:arrivalTime": "13:57",
+        "odpt:departureStation": "odpt.Station:JR-East.TohokuMain.Iwate-Iioka",
+        "odpt:departureTime": "13:57"
+      },
+      {
+        "odpt:arrivalStation": "odpt.Station:JR-East.TohokuMain.Senbokucho",
+        "odpt:arrivalTime": "14:01",
+        "odpt:departureStation": "odpt.Station:JR-East.TohokuMain.Senbokucho",
+        "odpt:departureTime": "14:01"
+      },
+      {
         "odpt:arrivalStation": "odpt.Station:JR-East.Morioka",
         "odpt:arrivalTime": "14:05"
       }
@@ -4364,6 +4460,12 @@ window.Kamaishi_MANUAL_TIMETABLES = [
       {
         "odpt:departureStation": "odpt.Station:JR-East.Hanamaki",
         "odpt:departureTime": "22:35"
+      },
+      {
+        "odpt:arrivalStation": "odpt.Station:JR-East.TohokuMain.Yahaba",
+        "odpt:arrivalTime": "22:55",
+        "odpt:departureStation": "odpt.Station:JR-East.TohokuMain.Yahaba",
+        "odpt:departureTime": "22:55"
       },
       {
         "odpt:arrivalStation": "odpt.Station:JR-East.Morioka",

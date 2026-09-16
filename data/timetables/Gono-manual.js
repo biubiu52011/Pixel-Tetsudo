@@ -7405,6 +7405,12 @@ window.Gono_MANUAL_TIMETABLES = [
         "estimated": true
       },
       {
+        "odpt:arrivalStation": "odpt.Station:JR-East.Ou.Shin-Aomori",
+        "odpt:arrivalTime": "13:27",
+        "odpt:departureStation": "odpt.Station:JR-East.Ou.Shin-Aomori",
+        "odpt:departureTime": "13:27"
+      },
+      {
         "odpt:arrivalStation": "odpt.Station:JR-East.Aomori",
         "odpt:arrivalTime": "13:34"
       }
@@ -7430,6 +7436,12 @@ window.Gono_MANUAL_TIMETABLES = [
         "odpt:departureStation": "odpt.Station:JR-East.Ou.Kawabe",
         "odpt:departureTime": "19:04",
         "estimated": true
+      },
+      {
+        "odpt:arrivalStation": "odpt.Station:JR-East.Ou.Shin-Aomori",
+        "odpt:arrivalTime": "19:27",
+        "odpt:departureStation": "odpt.Station:JR-East.Ou.Shin-Aomori",
+        "odpt:departureTime": "19:27"
       },
       {
         "odpt:arrivalStation": "odpt.Station:JR-East.Aomori",
@@ -7459,6 +7471,12 @@ window.Gono_MANUAL_TIMETABLES = [
         "estimated": true
       },
       {
+        "odpt:arrivalStation": "odpt.Station:JR-East.Ou.Shin-Aomori",
+        "odpt:arrivalTime": "13:27",
+        "odpt:departureStation": "odpt.Station:JR-East.Ou.Shin-Aomori",
+        "odpt:departureTime": "13:27"
+      },
+      {
         "odpt:arrivalStation": "odpt.Station:JR-East.Aomori",
         "odpt:arrivalTime": "13:34"
       }
@@ -7484,6 +7502,12 @@ window.Gono_MANUAL_TIMETABLES = [
         "odpt:departureStation": "odpt.Station:JR-East.Ou.Kawabe",
         "odpt:departureTime": "19:04",
         "estimated": true
+      },
+      {
+        "odpt:arrivalStation": "odpt.Station:JR-East.Ou.Shin-Aomori",
+        "odpt:arrivalTime": "19:27",
+        "odpt:departureStation": "odpt.Station:JR-East.Ou.Shin-Aomori",
+        "odpt:departureTime": "19:27"
       },
       {
         "odpt:arrivalStation": "odpt.Station:JR-East.Aomori",
@@ -7513,6 +7537,24 @@ window.Gono_MANUAL_TIMETABLES = [
         "odpt:departureTime": "12:25"
       },
       {
+        "odpt:arrivalStation": "odpt.Station:JR-East.Ou.Moritake",
+        "odpt:arrivalTime": "12:36",
+        "odpt:departureStation": "odpt.Station:JR-East.Ou.Moritake",
+        "odpt:departureTime": "12:36"
+      },
+      {
+        "odpt:arrivalStation": "odpt.Station:JR-East.Ou.Hachirogata",
+        "odpt:arrivalTime": "12:59",
+        "odpt:departureStation": "odpt.Station:JR-East.Ou.Hachirogata",
+        "odpt:departureTime": "12:59"
+      },
+      {
+        "odpt:arrivalStation": "odpt.Station:JR-East.Ou.Oiwake",
+        "odpt:arrivalTime": "13:16",
+        "odpt:departureStation": "odpt.Station:JR-East.Ou.Oiwake",
+        "odpt:departureTime": "13:17"
+      },
+      {
         "odpt:arrivalStation": "odpt.Station:JR-East.Akita",
         "odpt:arrivalTime": "13:29"
       }
@@ -7540,6 +7582,18 @@ window.Gono_MANUAL_TIMETABLES = [
         "odpt:departureTime": "18:06"
       },
       {
+        "odpt:arrivalStation": "odpt.Station:JR-East.Ou.Hachirogata",
+        "odpt:arrivalTime": "18:31",
+        "odpt:departureStation": "odpt.Station:JR-East.Ou.Hachirogata",
+        "odpt:departureTime": "18:31"
+      },
+      {
+        "odpt:arrivalStation": "odpt.Station:JR-East.Ou.Oiwake",
+        "odpt:arrivalTime": "18:47",
+        "odpt:departureStation": "odpt.Station:JR-East.Ou.Oiwake",
+        "odpt:departureTime": "18:48"
+      },
+      {
         "odpt:arrivalStation": "odpt.Station:JR-East.Akita",
         "odpt:arrivalTime": "19:01"
       }
@@ -7565,6 +7619,18 @@ window.Gono_MANUAL_TIMETABLES = [
       {
         "odpt:departureStation": "odpt.Station:JR-East.Higashi-Noshiro",
         "odpt:departureTime": "19:49"
+      },
+      {
+        "odpt:arrivalStation": "odpt.Station:JR-East.Ou.Hachirogata",
+        "odpt:arrivalTime": "20:16",
+        "odpt:departureStation": "odpt.Station:JR-East.Ou.Hachirogata",
+        "odpt:departureTime": "20:16"
+      },
+      {
+        "odpt:arrivalStation": "odpt.Station:JR-East.Ou.Oiwake",
+        "odpt:arrivalTime": "20:29",
+        "odpt:departureStation": "odpt.Station:JR-East.Ou.Oiwake",
+        "odpt:departureTime": "20:30"
       },
       {
         "odpt:arrivalStation": "odpt.Station:JR-East.Akita",
@@ -7594,6 +7660,24 @@ window.Gono_MANUAL_TIMETABLES = [
         "odpt:departureTime": "12:25"
       },
       {
+        "odpt:arrivalStation": "odpt.Station:JR-East.Ou.Moritake",
+        "odpt:arrivalTime": "12:36",
+        "odpt:departureStation": "odpt.Station:JR-East.Ou.Moritake",
+        "odpt:departureTime": "12:36"
+      },
+      {
+        "odpt:arrivalStation": "odpt.Station:JR-East.Ou.Hachirogata",
+        "odpt:arrivalTime": "12:59",
+        "odpt:departureStation": "odpt.Station:JR-East.Ou.Hachirogata",
+        "odpt:departureTime": "12:59"
+      },
+      {
+        "odpt:arrivalStation": "odpt.Station:JR-East.Ou.Oiwake",
+        "odpt:arrivalTime": "13:16",
+        "odpt:departureStation": "odpt.Station:JR-East.Ou.Oiwake",
+        "odpt:departureTime": "13:17"
+      },
+      {
         "odpt:arrivalStation": "odpt.Station:JR-East.Akita",
         "odpt:arrivalTime": "13:29"
       }
@@ -7621,6 +7705,18 @@ window.Gono_MANUAL_TIMETABLES = [
         "odpt:departureTime": "18:06"
       },
       {
+        "odpt:arrivalStation": "odpt.Station:JR-East.Ou.Hachirogata",
+        "odpt:arrivalTime": "18:31",
+        "odpt:departureStation": "odpt.Station:JR-East.Ou.Hachirogata",
+        "odpt:departureTime": "18:31"
+      },
+      {
+        "odpt:arrivalStation": "odpt.Station:JR-East.Ou.Oiwake",
+        "odpt:arrivalTime": "18:47",
+        "odpt:departureStation": "odpt.Station:JR-East.Ou.Oiwake",
+        "odpt:departureTime": "18:48"
+      },
+      {
         "odpt:arrivalStation": "odpt.Station:JR-East.Akita",
         "odpt:arrivalTime": "19:01"
       }
@@ -7646,6 +7742,18 @@ window.Gono_MANUAL_TIMETABLES = [
       {
         "odpt:departureStation": "odpt.Station:JR-East.Higashi-Noshiro",
         "odpt:departureTime": "19:49"
+      },
+      {
+        "odpt:arrivalStation": "odpt.Station:JR-East.Ou.Hachirogata",
+        "odpt:arrivalTime": "20:16",
+        "odpt:departureStation": "odpt.Station:JR-East.Ou.Hachirogata",
+        "odpt:departureTime": "20:16"
+      },
+      {
+        "odpt:arrivalStation": "odpt.Station:JR-East.Ou.Oiwake",
+        "odpt:arrivalTime": "20:29",
+        "odpt:departureStation": "odpt.Station:JR-East.Ou.Oiwake",
+        "odpt:departureTime": "20:30"
       },
       {
         "odpt:arrivalStation": "odpt.Station:JR-East.Akita",
