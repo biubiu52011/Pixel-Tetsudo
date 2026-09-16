@@ -36,16 +36,32 @@
 .article-content--shop .dp-info-label { color: #999; flex-shrink: 0; width: 74px; }
 .article-content--shop .dp-info-val { flex: 1; color: #333; line-height: 1.5; }
 
-/* ⑤ 推荐菜/价目表：点评式卡片网格（最多10道，有图显图、无图首字徽章，无emoji） */
+/* ⑤ 推荐菜/价目表：横向滚动卡片 + 全屏模态（最多10道，有图显图、无图首字徽章） */
 .article-content--shop .dp-menu-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
 .article-content--shop .dp-menu-count { font-size: 12px; color: #999; background: #f6f6f6; padding: 2px 10px; border-radius: 10px; white-space: nowrap; }
-.article-content--shop .dp-menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(108px, 1fr)); gap: 12px 10px; }
-.article-content--shop .dp-dish { min-width: 0; }
+.article-content--shop .dp-menu-carousel { display: flex; overflow-x: auto; gap: 10px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+.article-content--shop .dp-menu-carousel::-webkit-scrollbar { display: none; }
+.article-content--shop .dp-menu-viewall { font-size: 13px; color: #E8590C; background: none; border: none; cursor: pointer; padding: 4px 8px; border-radius: 8px; font-family: inherit; }
+.article-content--shop .dp-menu-viewall:hover { background: #fff3ed; }
+.article-content--shop .dp-dish { flex-shrink: 0; width: 110px; scroll-snap-align: start; }
 .article-content--shop .dp-dish-thumb { aspect-ratio: 1 / 1; border-radius: 10px; overflow: hidden; position: relative; background: #f3f1ec; display: flex; align-items: center; justify-content: center; }
 .article-content--shop .dp-dish-img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .article-content--shop .dp-dish-badge { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 30px; font-weight: 800; color: #fff; background: linear-gradient(135deg, #ffb45e, #E8590C); user-select: none; }
 .article-content--shop .dp-dish-name { font-size: 13px; color: #333; margin-top: 6px; line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .article-content--shop .dp-dish-price { font-size: 13px; color: #E8590C; font-weight: 800; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* 全屏菜单模态 */
+.dp-menu-modal { position: fixed; inset: 0; z-index: 10000; background: rgba(0,0,0,0.55); backdrop-filter: blur(4px); display: none; align-items: flex-end; justify-content: center; }
+.dp-menu-modal.is-open { display: flex; }
+.dp-menu-modal-inner { background: #fff; width: 100%; max-width: 480px; max-height: 88vh; border-radius: 16px 16px 0 0; display: flex; flex-direction: column; overflow: hidden; }
+.dp-menu-modal-title { margin: 0; padding: 16px 16px 12px; font-size: 16px; font-weight: 800; border-bottom: 1px solid #f0f0f0; flex-shrink: 0; }
+.dp-menu-modal-grid { padding: 12px; overflow-y: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(108px, 1fr)); gap: 12px 10px; }
+.dp-menu-modal-close { position: absolute; top: 12px; right: 16px; background: rgba(255,255,255,0.9); border: none; border-radius: 50%; width: 32px; height: 32px; font-size: 20px; cursor: pointer; line-height: 1; color: #333; z-index: 1; }
+/* 移动端适配 */
+@media (max-width: 640px) {
+  .article-content--shop .dp-dish { width: 96px; }
+  .dp-menu-modal-inner { max-height: 92vh; }
+  .dp-menu-modal-grid { grid-template-columns: repeat(2, 1fr); }
+}
 
 /* 地图卡片 */
 .article-content--shop .dp-card .map-container { border-radius: 8px; overflow: hidden; }

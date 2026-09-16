@@ -57,34 +57,55 @@
     return '<div class="dp-card"><h3 class="dp-sec-title">' + C.t('detail.about') + '</h3><p class="dp-text">' + C.escapeHtml(ctx.desc) + '</p></div>';
   }
 
-  // ⑤ 推荐菜/价目表：有 menu（[{item,price,img?}]）→ 点评式"推荐菜"卡片网格（最多10道，有图显图、无图用店名首字徽章，无emoji）；无 → 文本贴士回退
+  // ⑤ 推荐菜/价目表：横向滚动卡片 + 全屏模态（最多10道，有图显图、无图用店名首字徽章）；无 → 文本贴士回退
   function buildMenuCard(spot) {
     if (spot.menu && spot.menu.length > 0) {
       var isFood = (spot.tags || []).indexOf('food') >= 0;
       var titleKey = isFood ? 'detail.menu' : 'detail.goods';
       var list = spot.menu.slice(0, 10);
-      var html = '<div class="dp-card dp-menu">'
-        + '<div class="dp-menu-head"><h3 class="dp-sec-title">' + C.t(titleKey) + '</h3>'
-        + '<span class="dp-menu-count">' + C.t('detail.menu_count').replace('{n}', list.length) + '</span></div>'
-        + '<div class="dp-menu-grid">';
       var badgeChar = String(spot.name || '').trim().charAt(0) || '食';
+
+      // 横向滚动预览行（含"查看全部"按钮）
+      var html = '<div class="dp-card dp-menu">';
+      html += '<div class="dp-menu-head"><h3 class="dp-sec-title">' + C.t(titleKey) + '</h3>';
+      if (list.length > 5) html += '<button class="dp-menu-viewall" data-modal="' + ('dpMenuModal_' + (spot.menu._idx || 0)) + '">' + C.t('detail.view_all') + ' &rsaquo;</button>';
+      html += '</div><div class="dp-menu-carousel">';
       for (var mi = 0; mi < list.length; mi++) {
         var it = list[mi];
         var itemText = (spot.menu_i18n && spot.menu_i18n[mi] && spot.menu_i18n[mi][C.state.lang])
           || (spot.menu_i18n && spot.menu_i18n[mi] && spot.menu_i18n[mi].ja)
           || it.item;
         var thumb = it.img
-          ? '<img class="dp-dish-img" src="' + C.escapeHtml(it.img) + '" alt="' + C.escapeHtml(itemText) + '" loading="lazy" data-lightbox="' + C.escapeHtml(it.img) + '">'
+          ? '<img class="dp-dish-img" src="' + C.escapeHtml(it.img) + '" alt="' + C.escapeHtml(itemText) + '" loading="lazy" data-lightbox="' + C.escapeHtml(it.img) + '">' 
           : '<span class="dp-dish-badge">' + C.escapeHtml(badgeChar) + '</span>';
         html += '<div class="dp-dish"><div class="dp-dish-thumb">' + thumb + '</div>'
-          + '<div class="dp-dish-name">' + C.escapeHtml(itemText) + '</div>'
-          + '<div class="dp-dish-price">' + C.escapeHtml(it.price) + '</div></div>';
+          + '<div class="dp-dish-name">' + C.escapeHtml(itemText) + '</div></div>';
       }
-      return html + '</div></div>';
+      html += '</div></div>';
+
+      // 全屏菜单模态
+      var modalId = 'dpMenuModal_' + (spot.menu._idx || 0);
+      html += '<div class="dp-menu-modal" id="' + modalId + '" role="dialog" aria-modal="true" aria-label="' + C.escapeHtml(C.t(titleKey)) + '">';
+      html += '<button class="dp-menu-modal-close" aria-label="Close">&times;</button>';
+      html += '<div class="dp-menu-modal-inner"><h3 class="dp-menu-modal-title">' + C.t(titleKey) + '</h3>';
+      html += '<div class="dp-menu-modal-grid">';
+      for (var mi2 = 0; mi2 < spot.menu.length; mi2++) {
+        var it2 = spot.menu[mi2];
+        var itemText2 = (spot.menu_i18n && spot.menu_i18n[mi2] && spot.menu_i18n[mi2][C.state.lang])
+          || (spot.menu_i18n && spot.menu_i18n[mi2] && spot.menu_i18n[mi2].ja)
+          || it2.item;
+        var thumb2 = it2.img
+          ? '<img class="dp-dish-img" src="' + C.escapeHtml(it2.img) + '" alt="' + C.escapeHtml(itemText2) + '" loading="lazy" data-lightbox="' + C.escapeHtml(it2.img) + '">' 
+          : '<span class="dp-dish-badge">' + C.escapeHtml(badgeChar) + '</span>';
+        html += '<div class="dp-dish"><div class="dp-dish-thumb">' + thumb2 + '</div>'
+          + '<div class="dp-dish-name">' + C.escapeHtml(itemText2) + '</div>'
+          + '<div class="dp-dish-price">' + C.escapeHtml(it2.price) + '</div></div>';
+      }
+      html += '</div></div></div>';
+      return html;
     }
     return '<div class="dp-card">' + C.buildTipsHtml(spot, 'detail.menu', 'menu-list') + '</div>';
   }
-
   // ⑥ 位置地图
   function buildMapCard(ctx) {
     return '<div class="dp-card"><h3 class="dp-sec-title">' + C.t('detail.location') + '</h3>'
@@ -100,6 +121,7 @@
     if (!container) return;
     container.innerHTML = '<div class="article-content article-content--shop">' + html + '</div>';
     bindLightbox();
+    bindMenuModal();
     setTimeout(function () { C.initMap(ctx.mapLat, ctx.mapLng, ctx.spotName); }, 50);
     var pageTitle = ctx.spotName + ' | ' + (ctx.dist.stationName || '') + ' | PIXEL TETSUDO';
     document.title = pageTitle;
@@ -134,6 +156,25 @@
     }
   }
 
+
+  // 菜单全屏模态（查看全部）
+  function bindMenuModal() {
+    var viewBtns = document.querySelectorAll('button.dp-menu-viewall');
+    for (var vi = 0; vi < viewBtns.length; vi++) {
+      viewBtns[vi].addEventListener('click', function() {
+        var modalId = this.getAttribute('data-modal');
+        var modal = document.getElementById(modalId);
+        if (modal) modal.classList.add('is-open');
+      });
+    }
+    var modals = document.querySelectorAll('.dp-menu-modal');
+    for (var mi = 0; mi < modals.length; mi++) {
+      var modal = modals[mi];
+      modal.querySelector('.dp-menu-modal-close').addEventListener('click', function() { modal.classList.remove('is-open'); document.body.style.overflow=''; });
+      modal.addEventListener('click', function(e) { if (e.target === modal) { modal.classList.remove('is-open'); document.body.style.overflow=''; } });
+    }
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { var open = document.querySelector('.dp-menu-modal.is-open'); if (open) { open.classList.remove('is-open'); document.body.style.overflow=''; } } });
+  }
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", function () { C.start(renderShopPage); });
   } else {
