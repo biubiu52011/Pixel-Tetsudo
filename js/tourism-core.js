@@ -282,10 +282,9 @@
     return html + '</ul></div>';
   }
 
-  // 4.3.839: history.length<=1（新标签/外部直开详情，无历史可退）时 fallback 跳 home 观光列表；正常 history.back() 行为不变
+  // 4.3.840: 返回按钮语义责任 = 回到来源一览页（home 观光模块），不再依赖浏览器历史状态
   function handleBack() {
-    if (history.length <= 1) { location.href = 'home.html#tourism'; return; }
-    history.back();
+    location.href = 'home.html';
   }
 
   function translateUI() {
