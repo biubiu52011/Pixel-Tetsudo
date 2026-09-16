@@ -39,6 +39,7 @@
       "detail.info_code": "Line Code",
       "detail.info_duration": "Total Time",
       "detail.info_fee": "Fee",
+      "detail.i18n_missing": "Content not available in this language",
       "detail.info_fee_per_person": "Per Person",
       "detail.info_hours": "Hours",
       "detail.address": "Address",
@@ -277,8 +278,9 @@
       "detail.highlights": "\u4eae\u70b9",
       "detail.info_code": "\u7ebf\u8def\u4ee3\u7801",
       "detail.info_duration": "\u603b\u65f6\u957f",
-      "detail.info_fee": "\u5165\u573a\u8d39",
-      "detail.info_fee_per_person": "\u4eba\u5747",
+"detail.info_fee": "\u5165\u573a\u8d39",
+"detail.i18n_missing": "\u6682\u65e0\u8be5\u8bed\u8a00\u5185\u5bb9",
+"detail.info_fee_per_person": "\u4eba\u5747",
       "detail.info_hours": "\u8425\u4e1a\u65f6\u95f4",
       "detail.address": "\u5730\u5740",
       "detail.info_operator": "\u8fd0\u8425\u65b9",
@@ -516,8 +518,9 @@
       "detail.highlights": "\u89c1\u3069\u3053\u308d",
       "detail.info_code": "\u7dda\u8def\u4ee3\u7801",
       "detail.info_duration": "\u5168\u4f53\u6642\u9593",
-      "detail.info_fee": "\u5165\u5834\u6599",
-      "detail.info_fee_per_person": "\u4e00\u4eba\u5f53\u305f\u308a",
+"detail.info_fee": "\u5165\u5834\u6599",
+"detail.i18n_missing": "\u3053\u306e\u8a9e\u8a9e\u306e\u3053\u3082\u306f\u672a\u63d0\u4f9b\u3067\u3059",
+"detail.info_fee_per_person": "\u4e00\u4eba\u5f53\u305f\u308a",
       "detail.info_hours": "\u71df\u696d\u6642\u9593",
       "detail.address": "\u4f4f\u6240",
       "detail.info_operator": "\u904b\u8ec9\u4e8b\u696d\u8005",
@@ -755,8 +758,9 @@
       "detail.highlights": "\ud558\uc774\ub77c\uc774\ud2b8",
       "detail.info_code": "\ub178\uc120 \ucf54\ub4dc",
       "detail.info_duration": "\uc804\uccb4 \uc2dc\uac04",
-      "detail.info_fee": "\uc785\uc7a5\ub8cc",
-      "detail.info_fee_per_person": "1\uc778\ub2f9",
+"detail.info_fee": "\uc785\uc7a5\ub8cc",
+"detail.i18n_missing": "\uc77c\uc758 \uc5f0\uc0ac\uc758 \ucf58\ud150\ucf54\uc7a8\uc744 \uc81c\uac90\uc98d\uc218\uc628\uc9c0 \uc54a\uc558\uc2b5\ub2c8\ub2e4",
+"detail.info_fee_per_person": "1\uc778\ub2f9",
       "detail.info_hours": "\uc6b4\uc601 \uc2dc\uac04",
       "detail.address": "\uc8fc\uc18c",
       "detail.info_operator": "\uc6b4\uc601\uc0ac",
@@ -973,10 +977,6 @@
 
 
  
-
-
-
-
 
 
 

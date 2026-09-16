@@ -217,9 +217,12 @@
     var stationBadge = dist.stationName
       ? '<span class="station-badge"><img src="../images/icon-metro-station.svg" alt="" class="station-icon">' + escapeHtml(dist.stationName) + '</span>'
       : '';
-    var spotHours = translateCommonTerms(getI18nField(spot, 'hours') || t('detail.unavailable'));
-    var spotFee = translateCommonTerms(getI18nField(spot, 'fee') || t('detail.unavailable'));
-    var spotBestTime = translateCommonTerms(getI18nField(spot, 'bestTime') || t('detail.fallback_best_time'));
+    var spotHours = getI18nField(spot, 'hours') || t('detail.i18n_missing');
+    spotHours = translateCommonTerms(spotHours);
+    var spotFee = getI18nField(spot, 'fee') || t('detail.i18n_missing');
+    spotFee = translateCommonTerms(spotFee);
+    var spotBestTime = getI18nField(spot, 'bestTime') || t('detail.fallback_best_time');
+    spotBestTime = translateCommonTerms(spotBestTime);
     var spotAddress = spot.address || '';
     var addressRow = spotAddress
       ? '<div class="info-row info-row--full"><span class="info-label">' + t('detail.address') + '</span><span class="info-value">' + escapeHtml(spotAddress) + '</span></div>'
@@ -269,9 +272,8 @@
       + '<ul class="tips-list' + (extraClass ? ' ' + extraClass : '') + '">';
     if (spot.tips && spot.tips.length > 0) {
       for (var ti = 0; ti < spot.tips.length; ti++) {
-        var tipText = (spot.tips_i18n && spot.tips_i18n[state.lang] && spot.tips_i18n[state.lang][ti])
-          || (spot.tips_i18n && spot.tips_i18n.ja && spot.tips_i18n.ja[ti])
-          || spot.tips[ti];
+      var tipText = (spot.tips_i18n && spot.tips_i18n[state.lang] && spot.tips_i18n[state.lang][ti])
+          || spot.tips[ti] || t('detail.i18n_missing');
         html += '<li>' + escapeHtml(tipText) + '</li>';
       }
     } else {

@@ -75,9 +75,8 @@
       html += '</div><div class="dp-menu-carousel">';
       for (var mi = 0; mi < list.length; mi++) {
         var it = list[mi];
-        var itemText = (spot.menu_i18n && spot.menu_i18n[mi] && spot.menu_i18n[mi][C.state.lang])
-          || (spot.menu_i18n && spot.menu_i18n[mi] && spot.menu_i18n[mi].ja)
-          || it.item;
+      var itemText = (spot.menu_i18n && spot.menu_i18n[mi] && spot.menu_i18n[mi][C.state.lang])
+          || it.item || C.t('detail.i18n_missing');
         var thumb = it.img
           ? '<img class="dp-dish-img" src="' + C.escapeHtml(it.img) + '" alt="' + C.escapeHtml(itemText) + '" loading="lazy" data-lightbox="' + C.escapeHtml(it.img) + '">' 
           : '<span class="dp-dish-badge">' + C.escapeHtml(badgeChar) + '</span>';
@@ -94,9 +93,8 @@
       html += '<div class="dp-menu-modal-grid">';
       for (var mi2 = 0; mi2 < spot.menu.length; mi2++) {
         var it2 = spot.menu[mi2];
-        var itemText2 = (spot.menu_i18n && spot.menu_i18n[mi2] && spot.menu_i18n[mi2][C.state.lang])
-          || (spot.menu_i18n && spot.menu_i18n[mi2] && spot.menu_i18n[mi2].ja)
-          || it2.item;
+      var itemText2 = (spot.menu_i18n && spot.menu_i18n[mi2] && spot.menu_i18n[mi2][C.state.lang])
+          || it2.item || C.t('detail.i18n_missing');
         var thumb2 = it2.img
           ? '<img class="dp-dish-img" src="' + C.escapeHtml(it2.img) + '" alt="' + C.escapeHtml(itemText2) + '" loading="lazy" data-lightbox="' + C.escapeHtml(it2.img) + '">' 
           : '<span class="dp-dish-badge">' + C.escapeHtml(badgeChar) + '</span>';

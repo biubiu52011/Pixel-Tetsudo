@@ -6384,12 +6384,6 @@ window.RAILWAY_TOURISM = {
         "en": "A traditional rite held each January at Daijo-in in Nishi-Hokima, hanging a straw serpent on a ginkgo to pray for harvest; an Adachi intangible folk culture property.",
         "ko": "니시호키마의 다이조인에서 1월에 열리는 전통 행사. 볏짚으로 만든 큰 뱀을 은행나무에 걸어 오곡풍요를 기원하는 아다치구 무형민속문화재."
       },
-      "hours_i18n": {
-        "ja": "",
-        "zh": "",
-        "en": "",
-        "ko": ""
-      },
       "fee_i18n": {
         "ja": "無料",
         "zh": "免费",
@@ -6983,12 +6977,6 @@ window.RAILWAY_TOURISM = {
         "en": "A spring rite linked to Enma Dai-o at Konzo-ji in Senju, a downtown faith event dating from the Edo period.",
         "ko": "센주 곤조지에서 열리는 염마대왕 관련 봄 제례. 에도 시대부터 이어져 온 을거리 신앙 행사이다."
       },
-      "hours_i18n": {
-        "ja": "",
-        "zh": "",
-        "en": "",
-        "ko": ""
-      },
       "fee_i18n": {
         "ja": "無料",
         "zh": "免费",
@@ -7066,12 +7054,6 @@ window.RAILWAY_TOURISM = {
         "zh": "在鹿滨地区四座神社轮流奉纳的三匹狮子舞。自江户时代延续的足立区无形民俗文化财。",
         "en": "A three-lion dance rotated among four shrines in the Shikahama area, an Adachi intangible folk culture property from the Edo period.",
         "ko": "시카하마 지역 4개 신사에서 번갈아 봉납하는 삼핑 사자춤. 에도 시대부터 이어진 아다치구 무형민속문화재."
-      },
-      "hours_i18n": {
-        "ja": "",
-        "zh": "",
-        "en": "",
-        "ko": ""
       },
       "fee_i18n": {
         "ja": "無料",
