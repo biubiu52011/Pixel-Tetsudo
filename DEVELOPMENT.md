@@ -1,3 +1,21 @@
+# Pixel-Tetsudo — 開発技術文書（統合版）
+
+> 元の 4 文書を統合した唯一の開発技術文書。
+> 元ファイル：AGENTS.md / LINE-DIAGRAM-SPEC.md / 4.3.31_design.md / README.md
+> 統合日：2026-09-17
+
+## 目次
+
+1. 開発ルール（ハードルール）
+2. 線路図設計規定（LINE-DIAGRAM-SPEC）
+3. 設計文書（4.3.31 Line-to-Line Service Relation Layer）
+4. 基本情報（README）
+5. 変更ログ（4.3.489 以降）
+
+---
+
+# 1. 開発ルール（ハードルール）
+
 # Pixel-Tetsudo - Agent Development Rules
 
 This file defines the hard rules for any AI agent working on this project.
@@ -280,121 +298,9 @@ If the answer is NO, the change is REJECTED.
 
 ---
 
-## 4.3.489（2026-09-10，历史问题大扫除·时刻表推定修复）
-**问题盘点**：对话历史提出未修复项——①首都圈外 JR 无实时映射；②时刻表推定未覆盖。
-**根因实证（ODPT API 实拉）**：
-- odpt:Train（实时位置）仅 370 条、覆盖 22 条全部首都圈通勤系统——地方线 ODPT 无 Train 记录，属数据源限制
-- odpt:TrainTimetable（时刻表）单请求恰 1000 条截断，仅返回 5 线（ChuoRapid 926 条占满）——其余 83 条 JR 线时刻表全部丢失
-- 逐 railway 探测 88 条：35 条有时刻表（首都圈 22 + Ome/Itsukaichi/Hachiko/Kawagoe/Kururi/Togane/Ito/Sagami/Narita/Sotobo/Uchibo + Agatsuma 10/Joetsu 10/Kashima 64），41 条地方线（东北/上越/奥羽/信越等）ODPT 无时刻表数据
-**修复**：
-- data/api/odpt-unified.js loadTimetableData：JR-East 改按 railway 分批拉取（collectTimetableByRailway，20 条/批链式，fetchODPT 自带 3 并发限速）——从 LINE_TO_OPERATOR 收集全部 85 条 JR-East 本地线（非 LINE_RAILWAY_CODE，62 条同名透传线不在此表），探测标记 window.ODPT_TT_PROBED 防空线重试。实测覆盖 39 railway / 19625 条（旧逻辑 5 线/1000 条）
-- js/data-fusion.js loadMissingTimetables：priorityOps 白名单加入 JR-East（原仅私铁/地铁，JR 永不补缺）；toLoad filter 排除已探测线（ODPT_TT_PROBED）
-**验证**：e2e 实拉 86 线探测全完成、关键线路（Yamanote/ChuoRapid/Ome/Agatsuma/Joetsu/Kashima）全部到位、Tokaido 1384 条合并正确；node --check 双文件；integration_test.js 28/28
-**未修复项（数据源限制，非代码缺陷）**：41 条地方线（BanetsuEast/Echigo/Ou/Ryomo/Uetsu 等）ODPT 无 Train/TrainTimetable 数据，实时与推定均无法覆盖；UI 按现状显示（无实时时状态缺失）
-
-- 2026-09-10 ユーザー指示（小田原線站表混入修正・Freeze 例外、ODPT 準拠）: 小田原線（Odawara）駅リストを ODPT 公式（odpt:Railway:Odakyu.Odawara 47 駅站序 + odpt:Station API）に完全準拠させ再構築（4.3.493）。除去 5 駅——JR 東海道系 4 駅（Oiso 大磯/Ninomiya 二宮/Kozu 国府津/Kamonomiya 鴨宮、Odakyu Station API に記録なし）＋箱根登山鉄道系 Iriuda 入生田（ODPT Odawara 線に無し、Zama→Ebina 直結）。追加 6 駅（ODPT 公式駅番号/geo 準拠）——ShinMatsuda 新松田 OH41（35.34476,139.13965）/Kaisei 開成 OH42/ Kayama 栢山 OH43/Tomizu 富水 OH44/Hotaruda 螢田 OH45/Ashigara 足柄 OH46。46→47 駅、尾部は …Hadano→Shibusawa→ShinMatsuda→Kaisei→Kayama→Tomizu→Hotaruda→Ashigara→Odawara。stations 実体 6 件追加（581→587）、stationLines（新 6 駅=Odawara、誤 4 駅から Odawara 除去）、lineStationOrder[Odawara] 47 駅再構築、Odawara.transferStations 28→20（誤 4 駅宣言除去、ShonanShinjuku/Tokaido/TokaidoMain 側の誤乗換 9 件も除去）、name_map 6 件、station_i18n 6 件（ShinMatsuda/Kayama/Tomizu/Hotaruda 新規、Kaisei/Ashigara 既存あり）。i18n の誤 4 駅条目は JR 側のため残置。Matsuda 空実体（御殿場線未収録）は残置。検証: 本地 47 駅と ODPT 47 駅が位置まで一一対応、JSON 構文 OK、bundle 再生成（node data/core/gen-file-data.js）、integration_test 28/28。
-## 4.3.494（2026-09-10，SotetsuDirect 相鉄直通列车误配山手线修复）
-**问题**：Known Debt P1——相鉄直通列车显示在山手线详细图（posMap 误配）。
-**根因实证（ODPT API 实拉）**：
-- ODPT 用独立 railway `odpt.Railway:JR-East.SotetsuDirect` 推送相鉄直通列车，fromStation 为 SotetsuDirect 专属站 ID（Osaki/MusashiKosugi/NishiOi/HazawaYokohamaKokudai）
-- 本地无 SotetsuDirect 线 → LINE_RAILWAY_CODE 反查无映射 → fallback "站数最多" → Yamanote（30 站，Osaki 共用）误配
-- 羽沢横浜国大始发列车因 operator 过滤（列车 operator=JR-East vs SotetsuShin-Yokohama 线 operator=Sotetsu）匹配不到任何线而丢失
-**修复**（js/data-fusion.js）：
-- 新增 THROUGH_RAILWAY_FALLBACK 表：SotetsuDirect → exclude:["Yamanote"] + prefer:["SotetsuShin-Yokohama","Yokosuka","Saikyo","ShonanShinjuku"]
-- matchingLines 收集：直通系统 prefer 表内线路跨 operator 放行（SotetsuShin-Yokohama 可承接 JR-East 列车）
-- fallback 选择：直通系统按 prefer 顺序归属，排除环线；普通线路逻辑不变
-**验证**：Osaki→Saikyo / MusashiKosugi→Yokosuka / NishiOi→Yokosuka / HazawaYokohamaKokudai→SotetsuShin-Yokohama 全对；对照组 Yamanote 正常列车不受影响；node --check 通过；integration_test.js 28/28
-**遗留**：LINE_RAILWAY_CODE 未加 SotetsuDirect 条目（本地无此线，加了反查也匹配不到）；夜间 SotetsuDirect 列车仅 1 列（283M MusashiKosugi→Ebina），白天班次多的归属行为待用户线上验收
-
-## 4.3.495（2026-09-11，直通运行补全 + 异名换乘映射补全）
-**问题**：用户连续追问"直通运行补全了吗"——THROUGH_SERVICE_MAP 有 7 组真实直通缺失；历史梳理的 43 组异名换乘中 32 组无连接声明、全部未落地。
-**直通补全**（data/core/through-service.js）——THROUGH_SERVICE_MAP + THROUGH_JOIN_STATIONS 新增 7 组（接续站经 ODPT/本地站表逐一核实）：
-- 千代田線⇄小田急本線（Yoyogi-Uehara 代々木上原）——原只有多摩線，缺本線
-- 東海道線⇄伊東線（Atami 熱海）
-- 武蔵野線⇄京葉線（Musashino 側 Nishi-Funabashi 标记；京葉線站表无西船橋→Keiyo→Musashino 用 [] 抑制标记，物理直通保留）
-- 中央快速⇄中央本線（Takao 高尾）
-- 八高線⇄川越線西段（Komagawa 高麗川）
-- 東武スカイツリーライン⇄伊勢崎線（Tobu-Dobutsu-Koen 東武動物公園）
-- 京成⇄成田スカイアクセス（Keisei-Takasago 京成高砂）
-- 附带：小田急本線⇄多摩線（Odawara⇄OdakyuTama，新百合ヶ丘；多摩線站表无 Shin-Yurigaoka→[] 抑制）
-- 未补（本地缺线）：相鉄新横浜⇄東急新横浜（TokyuShin-Yokohama 不存在）、浅草線⇄北総（Hokuso 不存在）——需用户拍板是否新增线路
-**异名换乘补全**（data/core/transfer-hints.js）——name_mismatch 新增 57 组条目（原 17 → 74），覆盖历史梳理 32 组无连接声明（後楽園⇄春日、三田⇄田町、上野広小路⇄仲御徒町⇄上野御徒町⇄御徒町、淡路町⇄小川町⇄新御茶ノ水、馬喰横山⇄馬喰町⇄東日本橋、溜池山王⇄国会議事堂前、日比谷⇄有楽町、汐留⇄新橋、秋葉原⇄岩本町、神田⇄岩本町、東京⇄大手町、大手町⇄二重橋前、新日本橋⇄三越前、泉岳寺⇄高輪ゲートウェイ、虎ノ門⇄虎ノ門ヒルズ、人形町⇄水天宮前、銀座⇄銀座一丁目、立川⇄立川北/立川南、秋津⇄新秋津、大塚⇄大塚駅前、戸越⇄戸越銀座、牛田⇄京成関屋、本八幡⇄京成八幡、新越谷⇄南越谷、朝霞台⇄北朝霞、武蔵溝ノ口⇄溝の口、豪徳寺⇄山下）——站外换乘（outside:true）按实际步行关系标注；ID 拼写按 name_map 核实（新日本橋=Shin-Nihonbashi、秋津=Akitsu、新秋津=Shin-Akitsu、大塚駅前=Otsuka_Eki_Mae、戸越銀座=Togoshi-ginza）。合并重复键（Ningyocho/Shibuya×2）。
-**验证**：through-service 语法+MAP 双向对称（余 5 处为既有设计：京王線未收录/SotetsuMain→TokyuToyoko 缺中间线/Ome·Itsukaichi 单向）+JOIN 白名单站存在性；BFS 可达 8 项全对（含浅草線→成田空港多跳链）；transfer-hints 语法+无重复键+connects 站全部存在+4 语言完整；e2e 直通判定 9 项（含 2 对照）+标记位置 11 处全对；integration_test.js 28/28
-**遗留**：京王線/新京成/関東鉄道等本地未收录线的异名换乘未覆盖（9 组缺站类）；ID 拼写不一致（Shinbashi vs Shimbashi 等 230 孤立坐标）按 Freeze 规则未动，列入 Known Debt 待评估
-
-## 4.3.496（2026-09-11，车站订正方案 A·ODPT 权威矫正）
-**用户指示**："先订正车站"——不按任何版本，只读取 ODPT API 矫正。方案 A=确定性修复（ID 错位合并 + 坐标 + 显示名 + みなとみらい線重建 + 幽灵引用清理）。
-**数据模型审计结论**：lines[].stations 引用 2516 站（解析层真身）；stations 坐标实体 587 个（覆盖 23%）；stationLines 键=line 引用集合；lineStationOrder={站ID:序号}。大小写/连字符错位 27 组是功能性 bug（STATION_COORDS[ref] 直查失效→实时位置匹配全失效）。
-**ID 规范化（程序化，44 组）**：实体键统一对齐到 line 引用键——Akasaka-mitsuke→Akasaka-Mitsuke、Aoyama-itchome→Aoyama-Itchome、Chuo-rinkan→Chuo-Rinkan、Den-en-chofu→Denen-chofu、Futamata-gawa→Futamatagawa、Hongo-dai→Hongodai、Iruma-shi→Irumashi、Ishikawadai→Ishikawa-dai、Konan-dai→Konandai、Makuhari-hongo→Makuharihongo、Mejiro-dai→Mejirodai、Midoridai→Midori-dai、Musashi-Kosugi→Musashi-kosugi、Nakameguro→Naka-Meguro、Nishi-kokubunji→Nishi-Kokubunji、Odaiba-Kaihinkoen/OdaibaKaihinkoen→Odaiba-kaihinkoen、Oimachi→Oi-Machi、Oizumigakuen→Oizumi-Gakuen、Sangenjaya→Sangen-jaya、Shimokitazawa→Shimo-Kitazawa、Shin-Toyosu→Shin-toyosu、Shinjuku-nishiguchi/Shin-juku-nishiguchi→Shinjuku-Nishiguchi、Shinjuku-sanchome/Shin-juku-sanchome→Shinjuku-Sanchome、Tama-plaza→Tama-Plaza、Tameike-sanno→Tameike-Sanno、Tobu-Utsunomiya→TobuUtsunomiya、Ueno-hirokoji→Ueno-Hirokoji、Shin-juku→Shinjuku、Shin-kiba/ShinKiba→Shin-Kiba、Toyo-su→Toyosu、Shirokane-takanawa→Shirokane-Takanawa、Kitasendai→Kita-Sendai、Musashisakai/Musashi-sakai→Musashi-Sakai、Azabu-juban→Azabu-Juban、Higashimurayama/Higashi-murayama→Higashi-Murayama、Hon-Jo→Honjo、Tokyo Teleport/TokyoTeleport→Tokyo-Teleport、Tokyo Big Sight/TokyoBigSight→Tokyo-Big-Sight、Nishi-takashimadaira→Nishi-Takashimadaira、Tama-center→Tama-Center、ShinKemigawa→Shin-Kemigawa、Sakuragi-cho→Sakuragicho、Kitasenju→Kita-Senju（多处已存在目标键时保留目标坐标）。改后 stations 587→562（幽灵变体删除）、name_map 1709→1706。
-**坐标订正（ODPT 官方）**：Yokohama 35.4437,139.638→35.46574,139.62252（10 线共用，偏移 2.6km）；0,0 补正 13 站——Kumagaya 36.13981,139.38992 / Kuroiso 36.97012,140.06015 / Musashi-Hikida 35.72969,139.27008（武蔵引田，五日市線）/ Shin-Nihonbashi 35.68904,139.7743 / Nakano-Sakaue 35.697085,139.682205 / Nishi-Shinjuku 35.694515,139.69256 / Nishi-Kasai 35.664562,139.8596 / Shirokane-Takanawa 35.643283,139.734344 / Nishi-Takashimadaira 35.791965,139.645421 / Ueno-Okachimachi 35.707949,139.773351 / Shin-Ochanomizu 35.696925,139.76545 / Tokyo-Teleport 35.62754,139.77885 / Oyama 36.31344,139.80663。
-**みなとみらい線重建**：旧站表 Yokohama→Nihon-odori→Motomachi-Chukagai→Minato-Mirai-21→Bay-Cross 错误（含虚构 Bay-Cross、错 ID Minato-Mirai-21）；重建为 ODPT/wiki 官方 6 站 Yokohama→Shin-Takashima(新高島 35.4597,139.6291)→Minato-Mirai(みなとみらい 35.4572,139.6329)→Bashamichi(馬車道 35.4504,139.6351 新建)→Nihon-odori(35.4476,139.6447)→Motomachi-Chukagai(35.4433,139.6507)。虚构实体/name_map/i18n 全删，站序/stationLines/LSO/i18n/name_map 同步。
-**显示名订正**：Yuki=雪→結城（水戸線）；Oyama=大山→小山（栃木，3 线共用；原"大山"误指小山，东武東上線大山未收录故删映射）；Konandai 河南台→港南台（京浜東北線）；Makuharihongo 幕張本郷新→幕張本郷；Mejirodai 目白台→めじろ台（京王高尾線）；Midori-dai 緑ヶ丘→みどり台（京成千葉線）；武蔵日向→Musashi-Hikida 错误映射删除（八高線 ODPT 站表无武蔵日向，Musashi-Hikida 仅为五日市線武蔵引田）；新橋→Shimbashi（Shinbashi 幽灵）。
-**线路站表修正**：UtsunomiyaJR 终点 TobuUtsunomiya/Tobu-Utsunomiya（東武宇都宮，错误）→ Utsunomiya（宇都宮，ODPT 证实），新建 Utsunomiya 实体 36.55975,139.89872；Keisei lineStationOrder 补 Keisei-Narashino（京成習志野，4.3.494 插入时漏同步，26 位，43 键补齐）。
-**引用同步**：transfer-hints.js（汐留⇄新橋 Shinbashi→Shimbashi 键/值、Tameike-sanno→Tameike-Sanno）；through-service.js（Futamata-Gawa/Futamata-gawa→Futamatagawa）；line-service-relations.js（Marunouchi/MarunouchiBranch handoverStations 修正为真实共享站 Nakano-Sakaue——原 Yurakucho/Shibuya/Shin-juku/Shinbashi/Akasaka-mitsuke 等为 LOS 误判幽灵）。
-**验证**：verify_A.js 30/30（ID 错位 0 残留、显示名 8 处、坐标 6 处、みなとみらい 10 项、一致性 5 项）；bundle 加载 OK（562/165/1706，Bay-Cross/Shin-juku 0 残留）；node gen-file-data.js 重生成；git diff 7 文件。
-**遗留（方案 B/C 待用户拍板）**：2132 个真实站（全部有 i18n/name_map）缺坐标实体，地方线覆盖率 0%——方案 B=ODPT 批量补齐（部分地方线 ODPT 无 geo 需 wiki）；230 幽灵中 87 个有坐标无引用（含 Saitama/Nagoya/Osaka/Kyoto 非首都圈真实站 + Takanawa/Iwatsunomachi 等变体 + 疑似虚构）——方案 C=逐站甄别清理。
-
-## 4.3.496-补（2026-09-11，ODPT+wiki 双源验证）
-**用户指示**："odpt加wiki验证"——对方案 A 已订正车站做 ODPT API + ja.wikipedia 双源复核。
-**验证方法**：JR 系走 challenge API 按 railway 拉站表（10 线 10 站坐标逐站比对全 OK）；地铁/私铁走主站 API 按 operator 全量拉取再匹配（TokyoMetro 144 站/Toei 141 站，6 站比对 OK）；ODPT 无 geo 的站（みなとみらい線 5 站/結城/京成ユーカリが丘）用 ja.wikipedia coord 模板兜底。
-**ODPT 坐标校准 3 站**：Kita-Senju 35.74884,139.80464→35.749904,139.805591（偏差 130m）；Azabu-Juban 35.654,139.7307→35.65481,139.737045（偏差 550m）；Shin-Okachimachi 35.7078,139.7778→35.707009,139.782166（偏差 380m，ODPT Oedo 新御徒町）。另确认 Tokyo-Teleport 35.62754,139.77885 与 TWR.Rinkai 官方完全一致（此前 NOT_FOUND 是 operator 名误用 Rinkai→TWR）。
-**wiki 坐标校准 6 站**（ja.wikipedia coord 模板实测）：みなとみらい線 5 站全部重新校准——Shin-Takashima 35.4597,139.6291→35.461889,139.626806 / Minato-Mirai 35.4572,139.6329→35.457889,139.632306 / Bashamichi 35.4504,139.6351→35.450139,139.636167 / Nihon-odori 35.4476,139.6447→35.446806,139.642611 / Motomachi-Chukagai 35.4433,139.6507→35.442417,139.650472；結城 Yuki 0,0→36.298219,139.872283（水戸線 ODPT 无数据，wiki 兜底）。
-**新发现并修复**：①Shin-Yuri-Ga-Oka/Shin-Yurigaoka 是**同一站（新百合ヶ丘）双键**（小田急 Odawara 引用后者@22、OdakyuTama 引用前者@0，坐标/i18n 相同）——合并为标准键 Shin-Yurigaoka（ODPT 实证 odpt.Station:Odakyu.Odawara.ShinYurigaoka），stationLines 合并 [Odawara,OdakyuTama]、LSO 同步、删除冗余实体/i18n；②京成ユーカリが丘 Yuri-ga-oka 是**真实站**（京成本線 志津～京成臼井 间 @33，i18n 已有 ja=ユーカリが丘）——ODPT 无此站数据，wiki 坐标 35.721739,140.156317 补实体 + stationLines[Keisei] + name_map；它与小田急百合ヶ丘 Yurigaoka（35.609103,139.516228，wiki 确认与本地一致）是**不同站**，verify_A 的 strip 归一化曾误报为错位。
-**并发会话协调（重要）**：验证期间发现并发会话的方案 B 已落地（stations 562→2280、2188 带坐标），且**覆盖了 4 个方案 A 已订正坐标**——Shirokane-Takanawa 35.6456,139.7317 / Konandai 35.5578,139.6278（偏差 20km！）/ Hongodai 35.5678,139.6378（偏差 20km！）/ Utsunomiya 36.5578,139.8939——已按 ODPT 权威全部恢复。方案 B 批量补坐标疑似使用劣质估算源，**建议方案 B 会话复核其补入的全部坐标**；92 站 0,0 残留（含 Matsuda 已知空实体）为方案 B 遗留未覆盖。
-**验证**：28 关键站双源对比全一致（check_all_verify.js）；verify_A.js 30/30（期望值更新为 wiki 校准值）；bundle 加载 OK（2280/165/1707，Keisei Yuri-ga-oka@33/Odawara Shin-Yurigaoka@22/OdakyuTama 首站全部实体闭环）；git diff 仍为 7 文件（含并发会话叠加）。
-
-## 4.3.497（2026-09-11，92 个 0,0 站处理·5 真实站修复）
-**用户指示**："wiki可以吗"→"那就进行吧"——继续 ODPT+wiki 双源矫正，处理 92 个 0,0 站。
-**分类**：audit_zero.js 全量分析——**5 站有线路引用（真实站，补坐标）**，**87 站无引用孤立实体**（疑似虚构/变体/非首都圈真实站，方案 C 甄别范围）。
-**坐标修复（ODPT 全部无数据，wiki 兜底）**：
-- Aoba-dori 青葉通→**あおば通**（仙石線仙台）38.26075,140.878444——wiki 页面名是「あおば通駅」非「青葉通駅」（之前 404 因页面名错）；显示名 i18n ja 青葉通→あおば通、name_map 青葉通→あおば通
-- **Hitotsubashi→Hitoichiba 改名**（大糸線）：实体 i18n ja=一日市場 暴露 ID 误译（一ノ橋→一日市場 ひといちば，一ノ橋駅 是北海道名寄本線廃駅与長野大糸線无关）；全链路改名——stations 键/Oito.stations@5/stationLines/LSO@5/name_map（一の橋→一日市場）/i18n（en Hitotsubashi→Hitoichiba、ko 히토츠바시→히토이치바）；坐标 36.259606,137.90415（wiki 一日市場駅，安曇野市）。※Hitotsubashi-Gakuen 一橋学園（西武国分寺線）是另一真实站，不受影响
-- Karasuyama 烏山（烏山線）36.650433,140.154969
-- Midori-dai みどり台（京成千葉線）35.624808,140.097711
-- Wada 和田（奥羽本線秋田）39.650889,140.217806——wiki「和田駅」页面确认含奥羽本線/秋田（此前疑同名歧义）
-**验证**：bundle 加载 OK（2280/165/1707）；5 站坐标全对；Oito@5=Hitoichiba+LSO=5+stationLines=[Oito] 链路完整；name_map/i18n 同步；0,0 残留 92→87。
-**遗留**：87 个 0,0 孤立实体（无 stationLines 无 lines 引用，含 銀座四丁目/江東縛り/未来海/武蔵ニューレ/国会議事堂 等疑似虚构 + Umeda/Midosuji/Tobata/Kerama 等非首都圈真实站）——方案 C 甄别清理，待用户拍板。
-
-## 4.3.498（2026-09-11，方案 C 第一批·大阪系孤立站删除）
-**用户指示**："首先先删除那些明显是大版的"——从 87 个 0,0 孤立实体中删除明显属大阪的站。
-**删除 6 站**（全部无 stationLines/无 lines 引用/无 transferStations 引用，安全删除）：Umeda 梅田 / Midosuji 御堂筋 / Tsukamoto 塚本 / Sakai 堺 / Nakatsu 中津 / Nishi-Nakajima 西中島（大阪市淀川区地名，非车站）。
-**范围**：stations 6 键、stationLines 6 键（本来无，确认清）、name_map 6 键（梅田/御堂筋/塚本/堺/中津/西中島）、station_i18n 6 键。全项目 grep 确认无其他 JS 引用（transfer-hints/through-service/odpt-unified/data-fusion/LOS 均无）。
-**验证**：stations 2280→2274、name_map 1707→1701、i18n 3220→3214；0,0 残留 87→81；bundle 重生成加载 OK（5 站修复保持完好：Aoba-dori/Hitoichiba/Karasuyama/Midori-dai/Wada 坐标全对、Oito@5 链路完整）。
-**剩余 81 个 0,0 孤立实体待甄别**：疑似虚构（銀座四丁目/江東縛り/未来海/武蔵ニューレ/国会議事堂/高橋平/奥多摩口新 等）、拼写变体（Musashynuigami/MinamiKemigawa/Nishi-fushimi 等）、非首都圈真实站（Tobata 戸畑/Kerama 嘉手納/Nagatoro 長瀞/Shimoda 下田/Kishibojin 岸本神社 等）、东京系地名（東大和駅/Higashi-Yamatokoji 等）——待用户逐类拍板。
-
-## 4.3.499（2026-09-11，方案 C 第二批·错别字系列删除）
-**用户指示**："然后 再处理错别字系列"——删除 0,0 孤立实体中明确的错别字/架空站名。
-**删除 68 站**（全部经安全断言：无 lines 引用/无 stationLines/无 transferStations 引用）：
-- 错别字类：Takahashimadaira 高橋平（→高島平 Takashimadaira 误字，正站已存在 Nishi-Takashimadaira）、Fudosan-mae 不動山前（→不動前 Fudomae）、Kokkai-gijido 国会議事堂（→国会議事堂前，缺"前"）、Kishibojin 岸本神社（→鬼子母神前 Kishibojin-mae）、Higashi-Yamatokoji 東大和駅（→東大和市駅）、Minami-Kemigawa 南亀浦 + MinamiKemigawa 南検見川（京成千葉線無此二站，正站为 検見川）、Narashino 習志野/成相野（市名非站名）、Kasai-Rinkai 葛西臨海（→葛西臨海公園）、MakuhariSeaside 幕張海浜 + "Makuhari Seaside"（→海浜幕張 Kaihin-Makuhari 倒置）、Nishi-Akiru 西秋留（東秋留存在但西秋留不存在）等
-- 架空类：Ginza-yonchome 銀座四丁目/Koto-shibari 江東縛り/Miraikai 未来海/Musashinurare 武蔵ニューレ/Musashi-Saiwai 武蔵彩輝/Takahatafujimidai 高畑富士見台/Tamagawa-Enzei-ji 多摩川円蔵寺/Okutama-guchi 奥多摩口新/Tokyo-domae 東京ドーム前/Kanagawa-NewTown 神奈川県ニュータウン/Kita-Saitama 北さいたま/Chuo-Ku 中央区/Shin-otemachi 新大手町/Denno 電波/Go-komon 五本松/Tadachi 立派/Yokojimma 横島/Kototoi 言知/Mitarashi 御駄志/Mukaiminato 向岬/Yanauchi 柳内/Kimachi 木町/Choju 長寿/Meguro-Dai 目黒台/Midoricho 緑町/Minami-Nagasaki 南長崎/Nishi-Ikebukuro 西池袋/Nishi-Kichijoji 西吉祥寺/Nishi-Totsuka 西戸塚/Nishi-koen 西公園/Nishi-takaido 西高尾/Nishifujisawa 西藤沢/Fuchubashi 府中橋/Nishi-Fuchubashi 西府中橋/Higashi-Hachioji 東八王子/Higashi-Maruko 東丸島/Higashi-gotanda 東品川/Inokashira 井の頭/Miyagi 宮城/Nambu 南武/Nishi-fushimi 西伏見/Shin-rinkan 新林間/Wakasu 若洲/Minami-Wakasu 南若洲/Kit-Otsuka 北大塚/Kita-Yamato 北大和/Koji-mae 工房前/Musashi-Mitsuwadai 武蔵三澤台/Musashi-Nakagawa 武蔵中川/Musashi-Yamanaka 武蔵山中/Yukinoshita 雪之下/Hachiman-gaika 八幡外華/Hachiman-Honmachi 八幡本町/Minowa-shita 箕輪下/Musashynuigami 武蔵新上/Sakae(空壳) 等
-**保留 13 站**（实存站但本地无对应线路/无法判定，非错别字）：Chichibu 秩父（秩父鉄道）/Daizen-ji 大善寺（JR九州久大本線）/Hachiman 八幡（各地同名，无法判定）/Kerama 嘉手納（沖縄地名）/Kotaki 小滝（大糸線JR西区間実在駅）/Matsuda 松田（御殿場線，已知残置）/Nagatoro 長瀞（秩父鉄道）/Nakahara 中原（各地同名）/Nishi-Kawasaki 西川崎（南武支線実在駅，本地南武線未收支線）/Shimoda 下田（伊豆急行）/Shiroi 白井（北総鉄道）/Tateshina 立科（長野県地名）/Tobata 戸畑（JR九州鹿児島本線）
-**范围**：stations 68 键、stationLines 68 键（本来无）、name_map 68 键（値指向删除站的映射全清）、station_i18n 68 键。
-**验证**：删除前安全断言通过（无任何引用）；stations 2274→2206、name_map 1701→1636、i18n 3214→3148；0,0 残留 81→13；bundle 重生成加载 OK（5 站修复+Oito 链路保持完好）。
-**剩余 13 个 0,0 站**：全部为实存站但本地未收录对应线路（秩父鉄道/伊豆急/北総/JR九州 等）或同名无法判定——不在首都圈 JR 东范围，保留待用户决定是否清理。
-
-## 4.3.500（2026-09-11，方案 C 第三批·串门站点删除，0,0 清零）
-**用户指示**："所以还是属于串门站点？"（确认 13 个保留站性质）→"那你现在先补上吧"——用户裁定 13 个 0,0 保留站全部属"串门站点"（外地/外线路真实站混入本地数据），执行删除。
-**删除 13 站**（安全断言全过：无 lines 引用/无 stationLines/无 transferStations/无 name_map 他指）：
-- 纯串门 10 站：Chichibu 秩父/Nagatoro 長瀞（秩父鉄道）/Shimoda 下田（伊豆急）/Shiroi 白井（北総）/Tobata 戸畑/Daizen-ji 大善寺（JR九州）/Kerama 嘉手納（沖縄）/Tateshina 立科（長野県地名，无站）/Hachiman 八幡/Nakahara 中原（同名无法判定）
-- 沾边 3 站（本地未收录对应区间，删除并记录**重建提示**）：Nishi-Kawasaki 西川崎（南武支線 尻手～浜川崎，本地南武線未收支線）/Kotaki 小滝（大糸線 JR 西区間 南小谷～糸魚川，本地 Oito 只收松本～南小谷）/Matsuda 松田（御殿場線，4.3.493 曾记录残置，本次用户拍板删除）
-**范围**：stations 13 键、stationLines 13 键、name_map 13 键、station_i18n 13 键。
-**验证**：stations 2206→2193、name_map 1636→1623、i18n 3148→3135；**0,0 残留 81→13→0**；bundle 重生成加载 OK（5 站修复+Oito 链路保持完好）。
-**重建提示（未来若补以下线路需重建这 3 站）**：南武支線（川崎～尻手～浜川崎，含西川崎）→需重建 Nishi-Kawasaki；大糸線 JR 西区間（南小谷～糸魚川，含小滝）→需重建 Kotaki；御殿場線（含松田）→需重建 Matsuda。
-**0,0 全清零**：92 个 0,0 站处理全部完成（4.3.497 补 5 真实站坐标 + 4.3.498 删 6 大阪 + 4.3.499 删 68 错别字 + 4.3.500 删 13 串门）。
-
-## 4.3.524（2026-09-11，全 JR 缺失时刻表补全·手动时刻表复合模式通用化）
-**用户指示**："补充所有 jr 缺失的时刻表"——将 4.3.521 仅覆盖中央本線（ChuoMain）的手动时刻表复合模式推广到全部 ODPT 无时刻表的 JR 本地线路。※并发会话已占用 4.3.522/523（支线横排），本轮为 4.3.524。
-**数据来源**：JR 東日本公式时刻表网站（timetables.jreast.co.jp，**2609 版 = 2026 年 9 月改正**）公开时刻表，人工整理为 ODPT TrainTimetable 兼容格式（odpt:trainNumber/railway/calendar/railDirection/trainType/destinationStation/trainTimetableObject）。时刻=事实不受著作权保护；用户批准"自建库"方案。
-**缺失清单（ODPT 实测）**：41 条 ODPT 有时刻表 / 45 条无时刻表。45 条中 43 条 JR 本地线 + ChuoMain（已有）+ ChuoTatsuno 补入，最终 **40 条新生成**（Tonami/Tōnami 无本地线不补）。
-**生成管线**：JR 官网搜索入口 `st_search.cgi?rosen=<数字ID>` → 线路站列表 → 每站数字时刻表链接（`2609/timetable-v/<表ID>{d1,d2,u1,u2}.html` = 下り平日/下り土休/上り平日/上り土休）。**候选验证循环**：本地站表首/末站在官网列表页收集全部时刻表 ID 候选 → 逐 ID 下载 d1 页，站行 ja 名与本地站表匹配分最高者（≥min(5,本地站数)）即本线表——修正了初版"取首 ID"的多处错表（Tadami 误取磐越西線 261→262、Yamada 误取新幹線 258→980、Ryomo 235→237、RikutoEast 248→268、Yonezawa 249→252、Hachinohe 277 等）。**同表分段抽取**：OuMain/Yamagata 共 249 表（福島～青森）、Senseki/SensekiTohoku 共表（521S）、Suigun/SuigunBranch 共 243 表。站行 4 位时刻格式 0559→05:59；着/発 行分别保留。运転日过滤：平日表保留平日/全日、土休表保留土/全日。ja→ID 用 name_map 反查 + i18n ja 兜底（2933 条）+ EXTRA_JA 特例（小野→Ono 辰野支線、宮木→Miyaki 等）。
-**产物**：`data/timetables/{40 线}-manual.js` 新生成 + `ChuoMain-manual.js`（4.3.529 由 chuomain-manual.js 重命名，变量名 `window.ChuoMain_MANUAL_TIMETABLES`，原 CHUO_MAIN 与线路 ID 不匹配会导致通用扫描跳过）。合计 **6647 条**（chuomain 791 + 新 5856）。北上線（Kitakami）仅 6 条为真实班次（官网 251 表平日下り 2 本 725D/735D，地方线实况非解析缺陷）。
-**data-fusion v4.3.524 通用化**（js/data-fusion.js）：复合模式块从写死 'ChuoMain' 改为 `collectManualTimetableLines()` 自动扫描 window 上 `<lineId>_MANUAL_TIMETABLES`（后缀 18 字符）变量，逐线 estimateLinePositions 后按 trainId 与 posMap 合并去重（实时优先）。HTML 接线：trains.html 在 data-fusion.js 前插入 41 个 `<script src="../data/timetables/*-manual.js?v=4.3.524">`。
-**验证**：41/41 文件 node --check 全过；collect 扫描 41/41 全接线、无本地线缺失；10:00 模拟推定 33/41 线有列车（129+ 列）；单线核对（Shinonoi 1551M 塩尻05:59→松本06:16、Senseki/SensekiTohoku 分段首站 Aoba-dori/Sendai、chuomain 791 完好）；integration_test 28/28 未跑（数据文件不影响既有逻辑）。
-**遗留（数据源限制）**：北上線/大船渡線等极稀班次线路推定列车稀少（真实情况）；地方线深夜/清晨无车时推定为空（正常）；仅 ODPT 无时刻表的 43 条 JR 本地线 + 中央本線覆盖，ODPT 有时刻表的线路仍走官方数据。
-
-Last updated: 2026-09-11
-Version: RC-2
 ---
+
+# 1.5 データ不変ルール・表示同一性・その他ハードルール
 
 ## Canonical Data Freeze Rule
 The following data is LOCKED. Never modify for any reason:
@@ -515,6 +421,632 @@ Before tagging a release:
 
 
 ---
+
+---
+
+# 2. 線路図設計規定（LINE-DIAGRAM-SPEC）
+
+# 像素铁道 线路图设计规定（Line Diagram Design Spec）
+
+> 版本：v1.0（草案，待用户确认）
+> 日期：2026-09-11
+> 适用范围：所有线路图视觉元素——trains 详情页 SVG 线路图、线路卡片、状态徽章
+> 单一事实来源：本规范 + `js/trains-page.js` GEOM 令牌 + `css/style.css` 设计变量
+> 数值现状来源：trains-page.js / style.css 实采（代码行号已标注，改动后需同步）
+
+---
+
+## 1. 字体体系
+
+### 1.1 字体族（全局唯一）
+| 项 | 值 | 来源 |
+|---|---|---|
+| 主字体 | `'Fusion Pixel'`（像素字体） | style.css @font-face |
+| 语言包 | 拉丁 / 日文 / 简体中文 / 繁体中文 / 韩文（5 个 ttf） | style.css |
+| 回退 | `'Courier New', monospace` | style.css body |
+| SVG 站名/支线名 | 显式 `'Fusion Pixel', 'Courier New', monospace`（v4.3.498 起，原 sans-serif） | trains-page.js 934/1320 |
+
+### 1.2 字号刻度（两套体系）
+**A. CSS 设计令牌**（页面 UI）：
+| 令牌 | 值 |
+|---|---|
+| `--font-xs` | 10px |
+| `--font-sm` | 11px |
+| `--font-md` | 13px |
+| `--font-lg` | 14px |
+| `--font-xl` | 16px |
+
+**B. SVG 线路图内字号**（trains-page.js）：
+| 元素 | 移动 | 桌面 | 来源 |
+|---|---|---|---|
+| 站名（普通/换乘/顶底，统一） | 16 | 16 | 928-932 |
+| 换乘 chip 标记字号 | 12 | 10 | 408 |
+| 延伸段线名 | 12 | 12 | 804 |
+| 支线名 | 14 | 14 | 1318 |
+| 方向文本（ldir） | 8 | 8 | 1675 |
+| 直通时刻 | 11（compact 9） | 6 | 1082 |
+| "+n" 溢出标记 | 7 | 7 | 1096 |
+
+### 1.3 字重与颜色
+| 元素 | 字重 | 填充色 | 来源 |
+|---|---|---|---|
+| 换乘站站名 | 700 | 线色 | 933/935 |
+| 普通站站名 | 500 | `#555` | 933/935 |
+
+### 1.4 站名自适应（clamp）
+- 站名超宽时**缩小字号**（shrink, never clip），下限 **10px**（v4.3.504：原 12 下调——六形环左列上方站名在 58px 环内窄空间需 10px 完整放下，5 字=55px 恰好贴右列圆点左缘）。
+- 可用宽度由 `data-clamp-avail` 计算（环线/侧列各有公式，见 6.3）。
+
+---
+
+## 2. 几何尺寸体系（GEOM 设计令牌）
+
+### 2.1 设计令牌表（trains-page.js 26-35）
+| 令牌 | 值 | 含义 |
+|---|---|---|
+| `BRANCH_COL_W` | 96 | 支线列宽（站名 16px 最长 6 字 + 换乘 chip 余量） |
+| `BRANCH_STUB` | 20 | 主线 → 支线水平引出长度 |
+| `MAIN_BASE_W_MOBILE` | 410 | 移动端基准画布宽 |
+| `MAIN_BASE_W_MIN` | 440 | 桌面画布宽下限 |
+| `MAIN_BASE_W_MAX` | 820 | 桌面画布宽上限 |
+
+### 2.2 环线宽度（标准宽度，2026-09-10 用户裁定）
+| 项 | 值 | 说明 |
+|---|---|---|
+| 环宽基准 `rectW` | **48** | 山手线双列 + 六形环圆环部分统一（4.3.495/496） |
+| 移动端环宽 | 72px（48×1.5） | |
+| 桌面端环宽 | 76.8px（48×1.6） | |
+| 画布宽 `svgW` | `rectW + 150×scale`（派生式） | 两侧站名空间恒定 75×scale |
+
+### 2.3 缩放系数
+| 场景 | 移动 | 桌面 | 来源 |
+|---|---|---|---|
+| 六形环几何 `scale6` | 1.5 | 1.6 | 532 |
+| 站名/标记内 `_sc6` | 1.5 | 1.3 | 941-944 |
+| 山手线双列 `loopScale` | 1.5 | 1.6 | — |
+
+---
+
+## 3. 车站节点规格
+
+### 3.1 圆点（统一渲染函数 _renderStationNode）
+| 元素 | 半径 | fill | stroke | 线宽 | 来源 |
+|---|---|---|---|---|---|
+| 普通站 | r=**7**（v4.3.499 放大，原 4） | 线色 | `#fff` | 2 | 907-910 |
+| 换乘站（junction） | r=**12**（v4.3.499 放大，原 7） | `#fff` | 线色 | 2.5 | 907-910 |
+
+站名偏移随圆点联动（v4.3.499）：普通站水平 10 / 换乘站水平 14（均 ≥ r+2）；top 普通 y-10 / 换乘 y-14；bottom 普通 y+15 / 换乘 y+19；换乘 chip 下移（ty+11 junction / ty+7 普通）。验证：相邻站/环线双列/六形环/tail 列均无冲突，左列站名空间仅 -2px。
+
+### 3.2 直通标记（列车直通箭头）
+| 元素 | 值 | 来源 |
+|---|---|---|
+| 外圈 | r=8 | 1494 |
+| 内圈 | r=3 | 1502 |
+
+---
+
+## 4. 线路与线宽
+
+| 元素 | 线宽 | 透明度 | 来源 |
+|---|---|---|---|
+| 主线 | 5 | 1.0 | 633 |
+| 环线外框（标准环） | 5 | 0.35 | 737 |
+| 六形环结构线 | 3/5 | 1.0/0.35 | 633-664 |
+| 延伸段 | 4 | 0.5 | 794-800 |
+| 支线 | 3 | 1.0 | 1282-1294 |
+| 并行线 | 3 | 0.55 | 822 |
+
+---
+
+## 5. 图标体系
+
+### 5.1 换乘图标（trains 详情 chip）
+| 项 | 移动 | 桌面 | 来源 |
+|---|---|---|---|
+| 图标尺寸 ICON | **16**（v4.3.497 统一，原 20） | 16 | 969 |
+| 图标间距 GAP | 2 | 2 | 970 |
+| 每行上限 | 4（窄列自适应降为 3/2） | 4 | 971/998 |
+| 行数上限 | 2 | 2 | 972 |
+| 溢出显示 | "+n" | "+n" | 989 |
+
+**对齐规则（v4.3.501 用户规定）**：换乘图标块必须有一边与站名文字侧边对齐——站名在圆点右侧（anchor=start）→ chip 左缘=文字左缘（ix0=tx）；站名在左侧（anchor=end）→ chip 右缘=文字右缘（ix0=tx-totalW）；顶底站名（anchor=middle）→ chip 居中于文字。空间不足时先降 PER_ROW（3/2）保持对齐，仅极端挤压才 clamp。
+
+### 5.2 线路徽章（卡片）
+| 项 | 值 | 来源 |
+|---|---|---|
+| `--badge-size` | 36px | style.css |
+| fallback 图标框 | 36×36（内图 28×28） | style.css .rs-line-icon-fallback |
+| 徽章内字号 | 11px | style.css .rs-code-badge |
+
+### 5.3 车型图标
+- 来源：train-icons.js `LINE_ICONS` / `OPERATOR_ICONS`（映射表，无尺寸定义）
+- 渲染尺寸继承卡片徽章（36px 容器）
+
+---
+
+## 6. 布局规则
+
+### 6.1 站间距 sp（按站数分档，487-490）
+| 站数 | 移动 | 桌面 |
+|---|---|---|
+| ≤20 | 72 | 62 |
+| 21-30 | 66 | 58 |
+| 31-50 | 60 | 54 |
+| >50 | 56 | 50 |
+
+顶部/底部留白：topP=18、botP=16（有直通标签时 +26）。
+
+### 6.2 站名锚点与偏移（916-924）
+- **左右侧站名与圆点同行、垂直居中**（v4.3.500：`dominant-baseline: central`，ty=圆心）
+| side | tx | ty | anchor |
+|---|---|---|---|
+| top | x | y-14（换乘）/y-10 | middle |
+| bottom | x | y+19/y+15 | middle |
+| left（六形环枝干站：光丘尾，v4.3.511 用户指令站名朝左——右缘避让左列上方站名带（文字带 y±8 重叠即避让，被避让站右缘左移、画布左限由 clamp 缩字兜底；v4.3.513 桌面三区分离后避让不触发、全 16px，移动端仍触发）；Tochomae junction 保持岔路朝右 v4.3.505） | 光丘尾：左 x-10（避让时右缘=左列站名左缘−4）；Tochomae：右 x+14 | y（central） | 光丘尾 end / Tochomae start |
+| left（六形环主干环站：左列，v4.3.511 用户指令统一朝左——左列上方麻布十番〜新宿由朝右改朝左，与左列下方一致；v4.3.513 桌面三区分离后无穿线，移动端左列上方站名加白色描边遮线） | x-10（上方）/ x-14 或 x-10（下方） | y（central） | end |
+| left（六形环周长模式 tail，v4.3.506） | x+14/x+10 | y（central） | start |
+| left | x-14/x-10 | y（central） | end |
+| dual（双列） | x-16/x-12 | y（central） | end |
+| right（六形环周长均布，v4.3.502 已停用） | x-14/x-10 | y（central） | end |
+| right（六形环右列，v4.3.502 双列） | x+14/x+10 | y（central） | start |
+| right（默认） | x+14/x+10 | y（central） | start |
+
+- 支线站（数据覆盖）：tx=bx+10、ty=bsy（central），同普通站规格（1310）。
+- **支线分叉布局（v4.3.516，用户指示"双支线或以上不要弯折方案""要么两条直线在左边或者右边别再有拐弯"）**：直线线型支线 **≥2 条**时**全部同侧直排（左侧）**——每条支线 junction 行水平直 stub（无下移拐弯）+ 垂直列；单支线保持右侧弯折（现状）。左侧支线 bx=mainCx−_branchStubL−支线序号×_branchColW（**_branchStubL=主干最大站名宽+22**，避开主干朝左站名带 gap 10；**_branchColW=max(96, 左支线最大站名宽+14)**，列间竖线不穿前列名带 gap ≥4）、站名朝左（tx=bx−10，anchor=end）、支线名朝左；**支线 junction 站（支线与主干的接续站，v4.3.520 起不限 stations[0]——我孫子支线 junction 成田在站表末位也命中）主干站名朝右**（tx=mainCx+12、anchor=start，Tochomae 岔路朝右先例）——直 stub 不穿 junction 站名带。svgW=max(_baseW, mainCx+12+最长 junction 站名宽+_rightPad)，mainCx=max(_baseW/2, _leftNeed+20)。适用：鶴見線（大川列0 bx 232.1/海芝浦列1 bx 136.1 桌面）、成田線（空港列0/我孫子列1，列距 119.6；**v4.3.520 修复我孫子支线整条缺失**——junction 成田在支线站表末位 [我孫子…成田]，旧代码只查 stations[0] 找不到 junction 跳过渲染；现统一 `_branchJunctionStation` 解析（支线站表第一个出现在主干站表的站），junction 在末位时渲染站序反转从 junction 向下延伸）。
+- 换乘 chip 顶部：ty+14（换乘站）/ty+9（普通站），避让圆点底缘 +2px（995）。
+
+### 6.3 环线布局
+- **标准环线（山手线）**：双列画法（JR 官方视觉），右列田端→東京→品川、左列駒込→大崎；站名空间 = 75×scale/侧。
+- **六形环（大江户线，v4.3.504 支线从环左/右侧 1/2 处展开）**：环段 27 站 + 都庁前分左右两列（14/14）——**都庁前（junction）在环左缘、左列第 7 位**（y=loopCy−0.5/14×rectH，中点偏上 36px，参考实际在环左半故从左侧展开）；左列（顶→下）= [麻布十番…新宿, 都庁前, 新宿西口…春日]，右列（顶→下）= [本郷三丁目…赤羽橋]。站序流 都庁前→左列下（春日）→环底→右列下（本郷三丁目）→右列上（赤羽橋）→环顶→左列上（麻布十番…新宿）→都庁前（闭合）。**光丘尾（10 站）从都庁前水平 stub 向左后垂直向上**——v4.3.511 起 stubX=**max(leftMargin+10×scale6, leftMargin+10+105.6)**（竖线右移：光丘尾站名改朝左后，6 字全尺寸文字左缘仍 ≥ leftMargin）。**站名侧（v4.3.511）**：**主干左列统一朝左**——左列上方（麻布十番…新宿）由朝右改朝左（用户指令），左列下方不变；**枝干光丘尾 10 站站名朝左**（用户指令），右缘动态避让左列上方站名带（文字带 y±8 重叠且右缘越过其左缘 → 右缘左移 4px；画布左限由 clamp 缩字兜底）；**Tochomae junction 保持岔路朝右**（v4.3.505 用户裁定）。右列朝右不变。**4.3.513 回归修复（三区分离）**：v4.3.512 stubX 右移后竖线（x≈128.4）从朝左的左列上方文字带中间穿过（用户投诉"线路和文字堆叠"）——桌面 tail 列上限 `_tailCap` 扩至 **223.6（=10+105.6+10+88+10）**，tailAreaWidth=223.6、svgW=429、junctionX=236.4，实现**光丘尾文字带[12.8,118.4] \| stub 竖线 128.4 \| 左列上方文字带[138.4,226.4] \| 环 236.4** 三区分离（双侧 gap 10px）：光丘尾不再触发避让（全 16px 无 clamp）、左列上方 6 站 16px 无穿线；移动端容器 1:1 硬约束（tailAreaWidth 上限 144 < 223.6）无法三区分离，保留 4.3.512 几何，**左列上方站名加白色描边（paint-order stroke 3px）遮线**（线路从文字后穿过，光丘尾避让/clamp 行为不变）。当前视觉（移动 410 容器实测）：光丘尾 9 站 16px 全尺寸 + 落合南長崎 11.5px（避让国立競技場）、左列上方 6 站 16px 全尺寸恢复、都庁前 14.2px（clamp）、右列/左列下方不变。朝右的 left 站（仅 Tochomae）走窄空间 clamp（到右列圆点前）。右列站名空间 = marginRight−16（移动 76 / 桌面 68px）。环高 = 山手线公式 + 换乘 chip 高度动态放大（_colPitch6）；svgH 公式 `max(rectH+120, 2×(marginTopBot+0.5/14×rectH+tailTotalHeight))`。
+- 站名 clamp 公式：双列左列 `tx-4`、右列 `svgW-2-tx`（通用）；六形环仅 Tochomae（junction 朝右）走 `max(40, floor(junctionX+loopRectW−7−4−tx))`（v4.3.504/511）；光丘尾朝左走通用 `tx-4`（tx=避让后右缘，落合南長崎 5 字经 clamp 缩至 11.5px）。
+
+### 6.4 直通标签
+- 首末站上方/下方 26px 留白，∧/∨ 方向标记（481-485）。
+
+---
+
+## 7. 触控与间距（移动端）
+| 项 | 值 |
+|---|---|
+| 触控目标下限 | 44×44px（iOS HIG / MD3） |
+| 列表项下限 | 48px 高 |
+| 线路卡片 | `--pad-lg`（12px 14px） |
+
+---
+
+## 8. 现状不统一项（待统一，v1.0 起草时发现）
+
+| # | 问题 | 位置 | 建议 |
+|---|---|---|---|
+| 1 | 直通时刻字号 11/9/6 三档分散，桌面仅 6px 过小 | 1082 | 并入字号刻度表，桌面提到 8 |
+| 2 | "+n" 溢出标记 7px、方向 8px 为裸数字，未入令牌 | 1096/1675 | 抽为令牌 |
+| 3 | `_sc6`（1.3）与 `scale6`（1.6）桌面不一致 | 532/939 | 统一为 1.6 或明确各自语义 |
+| 4 | 换乘标记字号（12/10）与 chip 图标（20/16）无命名关系 | 408/969 | 统一命名（TX_*） |
+
+---
+
+## 9. 修订记录
+
+| 日期 | 版本 | 内容 |
+| 2026-09-11 | v1.0 | 初稿：盘点现状并成文；环宽 48 标准、GEOM 令牌、字体/图标/节点/线宽/布局统一规格 |
+| 日期 | 版本 | 内容 |
+| 2026-09-11 | 4.3.497 | 换乘图标统一 16px（原移动 20/桌面 16） |
+| 2026-09-11 | 4.3.498 | 站名/支线名用像素字体（Fusion Pixel 栈） |
+| 2026-09-11 | 4.3.499 | 站圆点放大（普通 4→7 / 换乘 7→12，≥70%） |
+| 2026-09-11 | 4.3.500 | 站名与圆点同行垂直居中（dominant-baseline central） |
+| 2026-09-11 | 4.3.501 | 换乘图标与站名侧边对齐规则固化（5.1 节） |
+| 2026-09-11 | 4.3.502 | 六形环（大江户线）环段改左右二分（双列，6.3 节） |
+| 2026-09-11 | 4.3.503 | 六形环支线从环中心支出去——都庁前（junction）移到环顶正中央（x=loopCx），光丘尾从正上方垂直向上；环段改左 14/右 13 列，站名方向/紧致按 o.y 与 junctionY 判定（6.2/6.3 节） |
+| 2026-09-11 | 4.3.504 | 支线改从环左侧 1/2 处展开（用户裁定：左/右参考车站实际在左半/右半，2/1 处=中点）——都庁前回到左列第 7 位（左缘、中点偏上 0.5/14×rectH），光丘尾水平 stub 后向上（10 站全在环上半部左侧带）；左列站序 [S32..S37, 都庁前, S11..S17]、右列 [S18..S31]；左列上方站名朝环内（clamp 到右列圆点前 58px 窄空间，clamp 下限 12→10）；svgH 缩短至 rectH+120（tail 不再伸出环顶）（6.2/6.3/1.4 节） |
+| 2026-09-11 | 4.3.505 | 岔路站名统一朝右——都庁前（岔路 junction）站名由朝左改为朝右（与光丘尾 10 站一致，用户线上截图确认"岔路的站名也在右"）；左列下方站（新宿西口…春日）仍朝左。Tochomae clamp 走左列上方分支（到右列圆点前，3 字缩至 14.5px=51px，贴圆点 4px）（6.2/6.3 节） |
+| 2026-09-11 | 4.3.506 | 站名侧改为占用检测规则（用户裁定"不是统一要随机应变：左侧被占用就在右侧，右侧被占用就在左侧"）——新增 `_pickSixLabelSide(o, geometry, svgW)`：依次检测①空间（放不下 16px 全尺寸文字宽）②线路（stub 线，Tochomae 左占用）③文字带（光丘尾站名带，左列上方站左占用）④对面圆点（左列站右 / 右列站左占用）；方向结果与 4.3.504/505 视觉一致但由占用动态决定。_renderStationNode 预取站名记 labelLen。clamp 窄空间分支改由 `_sixSide==='right'` 触发（6.2/6.3 节） |
+| 2026-09-11 | 4.3.507 | 占用检测收窄范围（用户裁定"我说的规定是针对那根岔"）——占用检测**只用于岔路站**（光丘尾 10 站 + Tochomae junction）；环站（左列/右列）恢复 4.3.504 固定规则（左列上方朝右、左列下方朝左、右列朝右）。视觉不变（岔路站检测结果与固定规则一致），规则边界明确（6.2/6.3 节） |
+| 2026-09-11 | 4.3.508 | 占用检测语义精化（用户裁定"按照双排规则主干该在哪在哪里，枝干如果发现某一侧被主干占用默认就在另外一侧"）——主干（环站）站名按双排固定规则不动（4.3.504）；枝干（光丘尾 + Tochomae）站名侧=占用检测：①空间（可用空间 < clamp 下限 10px×字数×1.1，右侧到主干边界【光丘尾→环左缘 / Tochomae→右列圆点左缘】、左侧到画布左缘）②线路（Tochomae 左侧 stub 线骑线）；单侧占用→放另一侧，双侧同况→默认右。占用阈值从 16px 全尺寸降为 10px 下限（clamp 保证不碰主干），检测语义由"全局几何"改为"被主干/画布挤压"。视觉不变（6.2/6.3 节） |
+| 2026-09-11 | 4.3.510 | 枝干站名侧改为站名重叠检测（用户纠正："我说的是站名，你在折腾什么"——检测对象是站名文字带而非空间/几何）——枝干（光丘尾 10 站 + Tochomae junction）站名放某一侧时，若与主干（环）站名文字带重叠（被主干站名占用）则放另一侧；双侧都不重叠默认朝右；画布边界硬约束（放不下即占用）。主干站名带方向按双排固定规则。视觉不变（当前布局枝干全朝右，站名带互不重叠） |
+| 2026-09-11 | 4.3.509 | 枝干占用检测方向修正（用户质疑"还是把方向搞反了"）——去掉"左侧被画布/stub 占用→放右"的双侧检测（左侧无主干元素，非"被主干占用"）；改为**枝干站名默认朝右**（v4.3.505 岔路站名标准），**只检测右侧是否被主干（环）占用**：右侧可用空间（到主干边界：光丘尾→环左缘 / Tochomae→右列圆点左缘）< clamp 下限文字宽 → 放左，否则默认右。视觉不变（当前布局枝干全朝右），检测语义与用户规则精确对齐（6.2/6.3 节） |
+| 2026-09-11 | 4.3.512 | 两段站名改朝左（用户指令："把西新宿五丁目-光が丘区间的站点的文字和麻布十番-新宿调整到左侧"）——**光丘尾 10 站站名朝左**（stubX 右移至 max(leftMargin+10×scale6, leftMargin+115.6)，竖线 x≈128，6 字全尺寸朝左文字左缘 ≥ leftMargin；右缘动态避让左列上方站名带【文字带 y±8 重叠且右缘越过其左缘 → 右缘左移 4px】，画布左限由 clamp 缩字兜底——移动 410 容器实测 9 站 16px、仅落合南長崎 11.5px）；**左列上方 6 站（麻布十番…新宿）站名朝左**（由朝右改朝左，环内小字问题解除——16px 全尺寸恢复）；Tochomae junction 保持岔路朝右（4.3.505）、右列朝右、左列下方朝左不变；`_pickSixLabelSide` 左列站名带假设同步改朝左（6.2/6.3 节） |
+| 2026-09-11 | 4.3.513 | 修复 4.3.512 视觉回归（用户投诉"线路和文字堆叠"）——竖线从朝左的左列上方文字带中间穿过。**桌面三区分离**：tail 列上限 `_tailCap` 扩至 223.6（=10+105.6+10+88+10），tailAreaWidth=223.6、svgW=429、junctionX=236.4——光丘尾文字带[12.8,118.4] \| stub 竖线 128.4 \| 左列上方文字带[138.4,226.4] \| 环 236.4 三区分离（双侧 gap 10px），光丘尾避让不再触发（全 16px 无 clamp）、左列上方 6 站 16px 无穿线、都庁前朝右 [250.4,303.2] 不碰 stub。**移动端描边兜底**：容器 1:1 硬约束（tailAreaWidth 上限 144 < 223.6）无法三区分离，保留 4.3.512 几何，左列上方站名加白色描边（paint-order stroke 3px）遮线（线路从文字后穿过）；光丘尾避让/clamp 行为不变。`_tailCap` 移动分支保持 BRANCH_COL_W×scale6（6.2/6.3 节） |
+| 2026-09-11 | 4.3.514 | 支线宽度取决于文本最多的那个站（用户指示）——stubX 与桌面 `_tailCap` 不再硬编码 105.6/88，动态扫描光丘尾列（stub 前 10 站）与左列上方站名的最大文字宽（`_sixNameW`，字数×16×1.1，与 _pickSixLabelSide 同源）：stubX=max(leftMargin+10×scale6, leftMargin+10+_tailWidest)、桌面 _tailCap=max(96×1.6, 10+_tailWidest+10+_leftTopWidest+10)。当前日文下 _tailWidest=105.6（西新宿五丁目）/ _leftTopWidest=88（国立競技場）→ 桌面 223.6/429.2/236.4/128.4、移动 144/350/156/127.6，与 4.3.513 视觉一致；语言切换/站名变化时自动适应（6.2/6.3 节） |
+| 2026-09-11 | 4.3.515 | 双支线及以上左右交替分叉（用户指示"这个时候就不要采用弯折方案而使用ㅕㅑ这类"）——直线线型支线 ≥2 条时：偶数支线朝右（ㅑ，现状几何）、奇数支线朝左（ㅕ，镜像）；单支线保持右侧弯折。左侧支线 `_branchStubL`=主干最大站名宽+22（避开主干朝左站名带 gap 10），bx=mainCx−_branchStubL−左列序×BRANCH_COL_W，站名朝左（anchor=end）、支线名朝左；**左侧连接线沿主干下移 20px 再水平分叉**（水平线不穿 junction 主干站名带）。svgW=mainCx+_rightNeed+20、mainCx=max(_baseW/2, _leftNeed+20)（_baseW 主导时主线位置不变）；branchGeom 列车定位同步。适用：鶴見線（海芝浦右/大川左，桌面 bx 344.5/232.1）、成田線（空港右/我孫子左）。検証: node --check OK、几何仿真（桌面/移动）gap 10 无穿字、主线 mainCx/svgW 不变（6.2 节） |
+| 2026-09-11 | 4.3.516 | 多支线全左直排（用户："我的意思要么两条直线在左边或者右边别再有拐弯"——4.3.515 一左一右时左侧支线下移 20px 被判定为"拐弯"，回退该方案）——直线线型支线 ≥2 条时**全部同一侧（左侧）直排**：junction 行水平直 stub（无拐弯）+ 垂直列；`_branchColW`=max(96, 左支线最大站名宽+14)（列间竖线不穿前列名带 gap≥4）；**支线 junction 站（各支线 stations[0]）主干站名朝右**（tx=mainCx+12、anchor=start，Tochomae 岔路朝右先例）——直 stub 不穿 junction 站名带。svgW=max(_baseW, mainCx+12+最长 junction 站名宽+_rightPad)、mainCx=max(_baseW/2, _leftNeed+20)；branchGeom 同步。适用：鶴見線（大川列0 bx 232.1/海芝浦列1 bx 136.1 桌面；移动 mainCx 205→273.2 不缩放）、成田線（空港列0/我孫子列1，列距 119.6；移动 mainCx 349.6 svgW 438.4 缩放 0.935）。検証: node --check OK、几何仿真（桌面/移动）四档——名带全画布内、列间 gap 4/33、junction 名朝右不溢出、直 stub 无穿字（6.2 节） |
+| 2026-09-11 | 4.3.517 | 修复时刻表推定提示重复堆积（用户："底部重复这么多次提示你是怕人瞎吗"）——`updateEstimatedNote` 的 note 插在 el 之后（`insertAdjacentElement('afterend')`，兄弟节点），旧清理代码却只在 el 内部查 `.tp-est-note`（永远删不到），每次增量刷新/重建都堆一个新条。改为清理 el 父级下全部 `.tp-est-note` 再插唯一一个（父级 querySelectorAll + 逐个 remove）。验证：node --check OK；线上 #Tsurumi DOM 由 6 个 note 变 1 个 |
+| 2026-09-11 | 4.3.520 | 修复成田线我孫子支线整条缺失——支线 junction 不再限定 stations[0]：新增 `_branchJunctionStation(branchStations, mainStations)`（取支线站表第一个出现在主干站表的站，返回 {station, at}），统一渲染 junction 查找、branchGeom、_isBranchJunction（改 indexOf 扫描）、_jMaxW6（junction 名宽用实际 junction 站）4 处；junction 在支线站表末位时渲染/几何站序反转从 junction 向下延伸（成田→下総松崎→…→我孫子）。初版渲染层误传 stations（renderTrainMap 无此变量）致全线路图崩溃，4.3.520b 改从 stationCoords 提取 _mainIds7 传入；4.3.521 bump v 参数绕过浏览器缓存（4.3.520b 修复后未 bump，缓存命中初版 bug）。验证：线上 #Narita 我孫子支线整条渲染（junction 成田 y=142 向下 10 站到 742，两条水平直 stub 349.6-257.2/349.6-137.6 无拐弯）、#Tsurumi 回归 2 列推定 |
+| 2026-09-11 | 4.3.522/523 | 短支线线 → 支线水平直线横排（用户："鶴見線为什么没有拉直"——4.3.516 的"junction 行水平直 stub + 垂直列"整体仍是 ⊥ 拐弯，未达"两条直线"要求）——新增 `_branchH` 判定（**双支线及以上**且该线所有支线非 junction 站数 ≤ 4 才横排；单支线如丸ノ内方南町/千代田北綾瀬保持右侧弯折现状【4.3.523 修正，初版误横排单支线】，含长支线的线如成田我孫子 9 站保持竖列现状）：支线从 junction 圆点**直接一条水平直线**延伸到最后一站（无 stub、无竖列、无拐弯），支线站横排（跳过 junction，主干已画）、站距 `_branchHSp`=全支线最宽站名+12（"支线宽度取决于文本最多的那个"）、站名朝侧边与圆点同行（左支线 anchor=end）、支线名放远端上方；mainCx 左需求改用 `_leftNeedH`=最长支线长+最宽站名+余量（鹤见线 197 < _baseW/2，viewBox 不变）；branchGeom 列车定位同步横排。影响面核实（railway_data 全量支线分组）：仅鶴見線触发横排。验证：node --check OK；线上 #Tsurumi 两条水平直线（海芝浦 332.5→202.9:266、大川 332.5→267.7:328），支线竖列 0 条 |
+| 2026-09-12 | 4.3.547 | 成田線拆三条（用户："成田线JR官方拆成三条"——JR 官方成田線为「本線（佐倉～松岸）」「空港支線（成田～成田空港）」「我孫子支線（我孫子～成田）」三条，合计 27 站）——本地 Narita 本线站表原为佐倉→…→松岸→銚子（17 站，銚子为総武本線终点被误收，銚子→SobuMain 换乘声明/stationLines 均错误引用）；改为官方三条：Narita 本線删銚子 17→16 站（佐倉～松岸，durations 17→15、transferStations 删銚子条目）、SobuMain.transferStations 删銚子→Narita 声明、stationLines[Choshi] 删 Narita、LSO[Narita] 删銚子；空港支線（3 站）/我孫子支線（10 站）已正确不变；三条合计 27 站与官方「駅数 27」一致。bump db-loader.js ?v=4.3.547（数据 localStorage 缓存 key 跟随 db-loader 版本，不 bump 则命中旧缓存）。验证：本地三条数据断言全过（銚子 0 残留）、bundle 重生成 |
+| 2026-09-12 | 4.3.548 | 成田線图 junction 重复绘制修复（用户："你自己看"——双支线竖列把 junction「成田」当支线首站重复画，主干 1 + 两竖列各 1 共 3 个「成田」，支线竖线从重复站起头视觉纠缠）——computeRouteGeometry branchGeom 竖列与 renderTrainMap 竖列均加 `if (站===junction) continue`（对照横排 _branchH 早有 skip），支线只画独有站，独有站从 junction 下方一档起（_bK 从 1 起，同横排 _bHi+1 规则）。效果：圆点 29→27、成田仅主干 1 次、支线竖列自下総松崎/空港第2ビル 起。bump trains-page.js ?v=4.3.548 |
+| 2026-09-12 | 4.3.549 | 成田線 junction 站名/换乘 chip y=undefined 修复（深度检查成田線查不到实时：ODPT challenge 实测三条线 odpt:Train 均 0 条——数据源不推送成田線实时位置，属覆盖限制；时刻表推定正常 728 条/11 列车标记）——renderTrainMap 主干 junction 分支漏传 ty（`tx: _bJ7 ? (sc.x+12) : undefined` 无 ty），_renderStationNode 1159 行 `ty = o.ty` 取 undefined → 站名 text y=undefined、换乘 chip iy0=ty+14=NaN 不渲染（成田線是多支線首条触发 _bJ7 的线）；补 `ty: _bJ7 ? sc.y : undefined`。验证：本地 DOM 成田站名 y=142、chip rect/image y=150/151、坏 y 0。bump trains-page.js ?v=4.3.549 |
+| 2026-09-12 | 4.3.550 | 双支线及以上左右分侧（用户："成田线现在这样可读性很差"换画法——4.3.516/522 双支线全左：成田我孫子 9 站竖列 + 空港 2 站被拖成拐弯竖列全挤左侧）——**每条支线独立画法**：非 junction 站 ≤4 → 水平直线横排（h）、>4 → 竖列（v）（原全局 _branchH 阈值）；**位置规则**：竖列支线在左、横排支线在右（仅当存在竖列支线时；全部横排如鶴見線保持全左现状不回归）；`_bCol` 改同侧内序号（左右分别从 0 计）；**junction 站名**在存在右支线时转圆点上方居中 + 白色描边（paint-order stroke 3px 遮主干竖线），换乘 chip 仍放圆点下方（iy0 判据改 anchor==="middle"——非 loop 线 isJunction=false 的坑）；svgW 右侧需求含右横排支线（_rightNeed=横排长+站名带，修复 var 提升陷阱：_branchHSp 定义前移）；branchGeom/renderTrainMap 同步 branchModes。效果：成田線 我孫子竖列左（x=317.6 9 站）+ 空港横排右（x=527.6/645.2 2 站）+ 成田站名上方描边，viewBox 820→852；鶴見線全横排左/千代田单支線右 不回归。bump trains-page.js ?v=4.3.550 |
+| 2026-09-12 | 4.3.551 | 所有插线叉出去部分也要算站间距（用户指示）——**横排支线站距 = 全支线最宽名 + 标准站间距(sp)**（原 +12 仅文本 padding；竖列支线站距本就 = sp，横排补上后站名间隙 = sp，与主干/竖列视觉统一）：成田空港 117.6→167.6（=105.6+62）、鹤见 64.8→114.8（=52.8+62）；svgW 成田 852→952（_rightNeed 自动跟随 _branchHSp）。**配套 svgH 完备化**：竖列支线底部计入 svgH（原只按主干 stationCoords 站间距算，junction 靠上+长竖列支线时支线底部会被 viewBox 裁剪）——branchGeom 构建后取全部支线坐标最大 y，超过主干底时 svgH = max(原 svgH, 支线底+sp+botP)。验证：成田空港 587.6/755.2（站距 167.6）成田站名 y=126、我孫子竖列 307.6:204→700（站距 62 无回归）、viewBox 952×1026；鹤见 viewBox 820×654 不变、横排站距 114.8 站名间隙 62；千代田 820×1344 无回归；node --check OK。bump trains-page.js ?v=4.3.550→4.3.551 |
+| 2026-09-12 | 4.3.552 | 详情页返回按钮改纯退回（用户："发现问题返回是返回对应一览页，不是退回"）——原实现 history.back() 优先 + fallback（history.length<=1 时 `location.hash=""` 清 hash 跳一览页）；问题：①直开详情（新标签 history.length=1）时 fallback 直接跳一览页，违背"退回"语义；②`location.hash=""` 会产生新 history entry（hlen 1→2），用户再点返回反而 back() 回详情，形成"详情→一览→详情"循环。修复：返回按钮一律 `window.history.back()`（与 tourism-detail handleBack 完全同步）——有历史退到来源页（列表/主页/上一详情，hashchange 兜底恢复视图）；无历史（直开详情）时 back() 无操作、详情保持，与浏览器后退按钮行为一致。验证：本地 DOM——直开 #Tsurumi（hlen=1）点返回 URL/hash/详情均不变（不再跳一览页）；列表→详情→返回回列表（hash 空）；详情→列表→成田详情→返回回列表；node --check OK。bump trains-page.js ?v=4.3.551→4.3.552 |
+| 2026-09-12 | 4.3.553 | 右侧支线 stub（叉出段）≥ 标准站间距（用户："你算了站间距后为什么设计成这样"——南武線手机截图：浜川崎支線竖列紧贴主线，两条竖线视觉像双线并行；4.3.551「插线叉出去那一部分也要算站间距」只覆盖了横排站距，右侧单支线竖列的 stub 仍是固定 20px 未算站间距）——新增 `_branchStubR = Math.max(GEOM.BRANCH_STUB, sp)`（站间距 sp 是"插线叉出段"的统一基准），替换右侧竖列 4 处固定 stub：_rightNeed 单支线（598）、svgW 单支线（934）、branchGeom 右侧竖列 x（1030）、renderTrainMap 右侧竖列 x（1737，geometry 增传 branchStubR）；左侧竖列 _branchStubL（主干最宽名+22）与横排站距 _branchHSp（名宽+sp）不受影响。效果：南武線/丸ノ内方南町/千代田北綾瀬 支线竖线 x=主线+20 → +sp（南武線 410→468、丸ノ内 410→468），支线站名随之右移 10px（478 起），svgW 不变（南武線/丸ノ内 820）；成田/鶴見 不回归（双支线右横排、全横排左 均不用右侧竖列 stub）。验证：node --check OK、本地 DOM 四线——南武線 竖线 410/468+站名 478、丸ノ内 410/468+方南町 478、成田 我孫子 307.6/空港 587.6+755.2/成田 410 middle 全不变、鶴見 海芝浦 170.4/大川 285.2/浅野 422 全不变。bump trains-page.js ?v=4.3.552→4.3.553 |
+| 2026-09-12 | 4.3.554 | 竖列支线第一站与 junction 同行（用户："我是想要岔路的第一个站和出去的站在一行"——竖列支线此前独有站从 junction 下方一档开始，第一站落到主干下一站行、岔路起点视觉下沉）——branchGeom 竖列 `_bK` 1→0、renderTrainMap 竖列 `_bK2` 1→0：支线跳过 junction 后**第一站与 junction 同一水平行**水平叉出，再竖列向下（横排支线第一站本就与 junction 同行 y=by，竖列规则统一；"岔路的第一站和出去的站在一行"= junction 行即岔路点行）。效果：南武線 八丁畷/尻手 y=76 同行、成田 下総松崎/成田同行（viewBox 952×1026 不变）、千代田 北綾瀬/綾瀬同行（viewBox 820×1344→1282 缩短一档）、丸ノ内 西新宿五丁目/中野坂上同行、方南町为第二站 y=366。验证：node --check OK、本地 DOM 四线同行全过。bump trains-page.js ?v=4.3.553→4.3.554（4.3.553 已被 stub 修复占用并 push，同行修复必须新版本号绕缓存） |
+| 2026-09-12 | 4.3.555 | 竖列支线竖线只画到最后一个站（用户截图问"那么多余的部分是"——丸ノ内方南町支线竖线 308→462 在方南町圆点下方多出 96px 空线，列车标记还落在空线段上）——竖线终点原 `branchTop + 站数×sp`（junction 上一档起 + 含 junction 全站计数），4.3.548 跳过 junction、4.3.554 第一站同行后该公式多出 2×sp−20px：改为**精确计数支线独有站**（跳过 junction），终点 = junction 行 + (独有站数−1)×sp = 最后一站 y（单站支线零长竖线）。效果：丸ノ内 308→366、南武線 76→250（浜川崎）、千代田 零长（北綾瀬同行）、成田我孫子竖列 142→638（我孫子）。验证：node --check OK、本地 DOM 四线竖线终点=最后一站圆点。bump trains-page.js ?v=4.3.554→4.3.555 |
+| 2026-09-12 | 4.3.556 | 返回按钮统一回到线路一览（用户："所有返回统一回到一览"——反转 4.3.552 纯退回）——trainsBackBtn 点击由 `history.back()` 改为 `location.hash = ""`：清 hash 触发 hashchange 兜底 hideLineView()，无论从哪进入详情（列表/主页/上一详情/直开新标签），点返回一律回到线路一览页（trains 页唯一返回入口）。清 hash 产生新 history entry（直开详情 hlen 1→2），浏览器后退仍回详情——标准浏览器历史行为，与"返回按钮=回一览"语义一致。验证：node --check OK；本地 DOM 两场景——列表→南武→返回：URL #Nambu→#、detailHidden true、listHidden false；直开 #Nambu（hlen=1）→返回：同样回列表（4.3.552 时直开详情 back() 无操作）。bump trains-page.js ?v=4.3.555→4.3.556 |
+
+
+---
+
+# 3. 設計文書（4.3.31 Line-to-Line Service Relation Layer）
+
+# 4.3.31 Line-to-Line Service Relation Layer Design
+
+Task: READ-ONLY ARCHITECTURE DESIGN
+Baseline: HEAD=4d72d25 | Canonical=156/509/1703/93
+---
+
+## 1. Problem Statement
+
+### 1.1 Three-Layer Architecture Gap
+
+Layer 1: Line Identity          (railway_data.json lines[id])
+Layer 2: Physical Topology      (stationLines + lineStationOrder)
+Layer 3: Display Grouping       (LineOperationSystems)
+
+MISSING: Line-to-Line Service Relation
+
+### 1.2 Specific Gaps
+
+| Gap | Symptom | Impact |
+|-----|---------|--------|
+| No through-service expression | Saikyo->Sotetsu->MinatoMirai->Rinkai: 0 shared stations | Realtime/Trains cannot show actual service relations |
+| Incomplete line segments | Yokosuka has only 8 stations (south section) | Yokosuka-SobuRapid through-service unprovable from stationLines |
+| Branch data gap | Ome/Itsukaichi/ChuoKonosu/Sotobo/Uchibo: 0 shared with parent | branchOf exists but stationLines does not reflect connection |
+| Alias ambiguity | TobuIsesaki(code=TI) vs Isesaki(code=TIS) | Duplicate display |
+| REGIONAL semantic blur | 52 lines mixed, maxShared=54 from 3 alias lines | Cannot distinguish truly connected lines |
+
+### 1.3 Core Contradiction
+
+LineOperationSystems carries two concepts:
+1. Display Group (UI ordering/badge)
+2. Through-Service Relation (operational intent, not implemented)
+
+This makes it impossible to determine whether a multi-line OS is pure display grouping or actual through-service.
+---
+
+## 2. Relation Type Definitions
+
+| Type | Const | Meaning | Example |
+|------|-------|---------|---------|
+| THROUGH_SERVICE | TS | Same train runs continuously across both lines | Saikyo <-> Kawagoe (Omiya) |
+| PHYSICAL_CONNECT | PC | Lines share a station/track connection | Saikyo <-> ShonanShinjuku (share Omiya/Urawa) |
+| BRANCH_OF | BR | Child line is a branch of parent line | Ome -> ChuoRapid |
+| ALIAS_OF | AL | Same physical line, different naming | TobuIsesaki <-> Isesaki (suspected) |
+| DISPLAY_GROUP | DG | UI-only grouping, no operational meaning | JR_EAST/JO badge |
+| UNKNOWN | UN | Data insufficient to determine | TobuNikko <-> Nikkoku |
+
+Key Principle: SHARED_STATION >= 1 does NOT imply THROUGH_SERVICE. It only implies PHYSICAL_CONNECT (and even that requires verification).
+
+---
+
+## 3. Data Model: line-service-relations.js
+
+New file: data/core/line-service-relations.js
+
+Schema per relation entry:
+- id: string (unique)
+- lineA: string (line_id from railway_data.json)
+- lineB: string (line_id from railway_data.json)
+- type: THROUGH_SERVICE | PHYSICAL_CONNECT | BRANCH_OF | ALIAS_OF | DISPLAY_GROUP | UNKNOWN
+- confidence: HIGH | MEDIUM | LOW | UNKNOWN
+- evidence: string (what proves this relation)
+- source: string (railway_data.branchOf / stationLines / manual)
+- active: boolean
+
+Relationship to existing data:
+- railway_data.json (FROZEN): lines[].branchOf -> maps to BRANCH_OF relations
+- stationLines[]: derives PHYSICAL_CONNECT evidence
+- LineOperationSystems (UNCHANGED): continues as Display Group source
+---
+
+## 4. Relation Mapping for All 156 Lines
+
+### 4.1 BRANCH_OF Relations (from branchOf field)
+
+| Branch | Parent | Shared Stations | Issue |
+|--------|--------|----------------|-------|
+| Ome | ChuoRapid | 0 | DATA GAP: Ome has only 18 stations, missing connection station |
+| Itsukaichi | ChuoRapid | 0 | DATA GAP: Itsukaichi has only 6 stations |
+| ChuoKonosu | ChuoRapid | 0 | DATA GAP: ChuoKonosu has only 6 stations |
+| Agatsuma | Takasaki | 1 (Takasaki) | OK |
+| Sotobo | SobuRapid | 0 | DATA GAP: Sotobo has only 3 stations |
+| SuigunBranch | Suigun | 1 (Kami-Sugaya) | OK |
+| Uchibo | SobuRapid | 0 | DATA GAP: Uchibo has only 4 stations |
+
+Conclusion: 5/7 branch relations have stationLines data gaps. Relation Layer will record with confidence=LOW.
+
+### 4.2 Verified THROUGH_SERVICE Relations
+
+| Pair | Evidence | Confidence |
+|------|----------|------------|
+| Saikyo <-> Kawagoe | Shared Omiya (1 station), LOS JA system | HIGH |
+| TobuSkytree <-> Skytree | Shared 21 stations, LOS TS system | HIGH |
+| TobuSkytree <-> TobuNoda | Shared 7 stations, LOS TS system | MEDIUM |
+| Skytree <-> TobuNoda | Shared 7 stations, LOS TS system | MEDIUM |
+| Marunouchi <-> MarunouchiBranch | Shared 7 stations, LOS M system | HIGH |
+| SeibuIkebukuro <-> Ikebukuro | Shared 18 stations (subset), LOS SI system | HIGH |
+
+### 4.3 Cross-Operator Through-Service (Data Gaps)
+
+| Chain | Current Data | Gap |
+|-------|-------------|-----|
+| Saikyo -> SotetsuMain | 0 shared | Saikyo uses Urawa, SotetsuMain uses Minami-Urawa (same station different ID) |
+| SotetsuMain -> MinatoMirai | Shared Yokohama (1) | OK |
+| MinatoMirai -> Rinkai | 0 shared | Rinkai data incomplete |
+| Yokosuka <-> SobuRapid | 0 shared | Yokosuka has only 8 southern stations missing Tokyo-Yokohama northern section |
+
+These: THROUGH_SERVICE + confidence=LOW + evidence station data incomplete.
+
+### 4.4 TYPE-C Detailed Classification
+
+| OS | Lines | Classification | Reason |
+|----|-------|---------------|--------|
+| JR_EAST/JC | ChuoRapid <-> ChuoKonosu | BRANCH_OF (LOW) | branchOf=ChuoRapid stationLines missing connection |
+| JR_EAST/JO | Yokosuka <-> SobuRapid | THROUGH_SERVICE (LOW) | Actual Yokosuka-Sobu Rapid Line data incomplete |
+| TOBU/TI | TobuIsesaki <-> Isesaki | ALIAS_OF (MEDIUM) | Same Japanese name different codes TI vs TIS |
+| TOBU/TN | TobuNikko <-> Nikkoku | UNKNOWN | Different station sets 21 vs 9 unclear |
+| TOBU/TTJ | Tojo <-> Utsunomiya | THROUGH_SERVICE (UNKNOWN) | Real through-service exists 0 shared stations in data |
+
+### 4.5 REGIONAL Re-classification
+
+REGIONAL 52 lines should NOT be a single through-service cluster.
+
+| Sub-group | Lines | Type | Basis |
+|-----------|-------|------|-------|
+| Alias group | Yonezawa Tsugaru TohokuMain | ALIAS_OF | Share 54 stations same physical track |
+| Connected | Shinetsu <-> Shinonoi | PHYSICAL_CONNECT | 41 shared stations |
+| Connected | Senseki <-> Yamagata | PHYSICAL_CONNECT | 31 shared stations |
+| Connected | Kiryu <-> Sagami <-> Sano | PHYSICAL_CONNECT | 18 shared each |
+| Isolated | Remaining ~40 lines | No relation | 0 shared stations |
+---
+
+## 5. Architecture Integration Design
+
+### 5.1 New Five-Layer Architecture
+
+Layer 1: Line Identity          (railway_data.json lines[id])
+Layer 2: Physical Topology      (stationLines + lineStationOrder)
+Layer 3: Service Relation       (line-service-relations.js) [NEW]
+Layer 4: Operating System       (LineOperationSystems unchanged)
+Layer 5: Presentation           (LinePresentationService extended)
+
+### 5.2 LinePresentationService Extension
+
+Current API:
+- getDisplayOrder(allLines) -> ordered line IDs (by LOS)
+
+Extended API (backward compatible):
+- getServiceChains() -> [{lineIds array type TS confidence HIGH}]
+- getRelatedLines(lineId) -> [{lineId type confidence evidence}]
+- isThroughService(lineA lineB) -> boolean
+
+### 5.3 DataState.renderList() Impact
+
+Current rendering:
+  group by OPERATOR -> sort by LOS order -> render cards
+
+Extended rendering (optional enhancement NOT required for 4.3.31):
+  group by OPERATOR
+    -> group by OS system (LOS)
+      -> within system: show THROUGH_SERVICE chains first
+      -> then: remaining lines
+    -> render cards with chain indicators
+
+---
+
+## 6. File Structure
+
+data/core/
+  railway_data.json           (FROZEN - 156/509/1703/93)
+  line-operation-systems.js   (UNCHANGED - Display Group)
+  line-service-relations.js   (NEW - Service Relation Layer)
+
+js/
+  line-presentation-service.js  (EXTEND - add getServiceChains getRelatedLines)
+  data-state.js                 (no change required for basic functionality)
+
+---
+
+## 7. Risk Assessment
+
+| Risk | Level | Mitigation |
+|------|-------|------------|
+| New file load order issue | LOW | Load in db-loader.js in correct order |
+| LinePresentationService extension affects existing sort | MEDIUM | Backward compatible fallback to LOS order when no relations |
+| Relation Layer duplicates LOS | LOW | Clear separation LOS=Display Relations=Service |
+| Data quality dependency | HIGH | confidence field + evidence description do not fake certainty |
+
+---
+
+## 8. Follow-up Phase Plan
+
+| Phase | Content | Modifies Data? |
+|-------|---------|----------------|
+| 4.3.32 | Implementation Impact Audit | No |
+| 4.3.33 | line-service-relations.js data population | Yes (new file) |
+| 4.3.34 | LinePresentationService extension | Yes (JS) |
+| 4.3.35 | DataState/Realtime/Trains rendering enhancement | Yes (JS+CSS) |
+| 4.3.36 | stationLines data quality fix (independent task) | Yes (data governance) |
+
+---
+
+## 9. Conclusion
+
+4.3.31 design complete.
+
+Core deliverables:
+1. Six relation type definitions (THROUGH_SERVICE / PHYSICAL_CONNECT / BRANCH_OF / ALIAS_OF / DISPLAY_GROUP / UNKNOWN)
+2. line-service-relations.js file schema design
+3. Relation mapping for all 156 lines (distinguishing verified / data-gap / alias)
+4. Five-layer architecture with clear responsibility separation
+5. Follow-up phases 4.3.32-4.3.36 implementation roadmap
+
+Next: 4.3.32 Implementation Impact Audit
+
+This document is a read-only design artifact. No code or data files are modified.
+
+
+---
+
+# 4. 基本情報（README）
+
+# Pixel Tetsudo（像素铁道）
+
+東京首都圏の鉄道路線検索・運行状況・観光スポットを扱うピクセル風 Web アプリ。
+
+## 运行方式（必须通过本地服务器）
+
+项目数据通过 `fetch` 加载（`data/core/railway_data.json` 等），**双击 HTML（file:// 协议）无法工作**，必须用本地 HTTP 服务器：
+
+```bash
+python -m http.server 8017
+```
+
+然后访问：
+
+```
+http://localhost:8017/pages/home.html
+```
+
+数据加载成功的标志：浏览器控制台（F12）输出
+`509 stations, 159 lines, 94 tourism stations`。
+
+## 页面入口
+
+| 页面 | 路径 |
+|------|------|
+| 首页（路线检索） | `pages/home.html`（唯一入口，`index.html` 会自动跳转） |
+| 运行状况 | `pages/realtime.html` |
+| 列车实时 | `pages/trains.html` |
+| 搜索履历 | `pages/history.html` |
+
+## 开发约定
+
+详见 `AGENTS.md`（三层数据架构、显示身份规则、规范数据冻结等）。
+
+
+---
+
+# 5. 変更ログ
+
+## 5.1 4.3.489–4.3.524（データ凍結・駅名修正・時刻表補全）
+
+## 4.3.489（2026-09-10，历史问题大扫除·时刻表推定修复）
+**问题盘点**：对话历史提出未修复项——①首都圈外 JR 无实时映射；②时刻表推定未覆盖。
+**根因实证（ODPT API 实拉）**：
+- odpt:Train（实时位置）仅 370 条、覆盖 22 条全部首都圈通勤系统——地方线 ODPT 无 Train 记录，属数据源限制
+- odpt:TrainTimetable（时刻表）单请求恰 1000 条截断，仅返回 5 线（ChuoRapid 926 条占满）——其余 83 条 JR 线时刻表全部丢失
+- 逐 railway 探测 88 条：35 条有时刻表（首都圈 22 + Ome/Itsukaichi/Hachiko/Kawagoe/Kururi/Togane/Ito/Sagami/Narita/Sotobo/Uchibo + Agatsuma 10/Joetsu 10/Kashima 64），41 条地方线（东北/上越/奥羽/信越等）ODPT 无时刻表数据
+**修复**：
+- data/api/odpt-unified.js loadTimetableData：JR-East 改按 railway 分批拉取（collectTimetableByRailway，20 条/批链式，fetchODPT 自带 3 并发限速）——从 LINE_TO_OPERATOR 收集全部 85 条 JR-East 本地线（非 LINE_RAILWAY_CODE，62 条同名透传线不在此表），探测标记 window.ODPT_TT_PROBED 防空线重试。实测覆盖 39 railway / 19625 条（旧逻辑 5 线/1000 条）
+- js/data-fusion.js loadMissingTimetables：priorityOps 白名单加入 JR-East（原仅私铁/地铁，JR 永不补缺）；toLoad filter 排除已探测线（ODPT_TT_PROBED）
+**验证**：e2e 实拉 86 线探测全完成、关键线路（Yamanote/ChuoRapid/Ome/Agatsuma/Joetsu/Kashima）全部到位、Tokaido 1384 条合并正确；node --check 双文件；integration_test.js 28/28
+**未修复项（数据源限制，非代码缺陷）**：41 条地方线（BanetsuEast/Echigo/Ou/Ryomo/Uetsu 等）ODPT 无 Train/TrainTimetable 数据，实时与推定均无法覆盖；UI 按现状显示（无实时时状态缺失）
+
+- 2026-09-10 ユーザー指示（小田原線站表混入修正・Freeze 例外、ODPT 準拠）: 小田原線（Odawara）駅リストを ODPT 公式（odpt:Railway:Odakyu.Odawara 47 駅站序 + odpt:Station API）に完全準拠させ再構築（4.3.493）。除去 5 駅——JR 東海道系 4 駅（Oiso 大磯/Ninomiya 二宮/Kozu 国府津/Kamonomiya 鴨宮、Odakyu Station API に記録なし）＋箱根登山鉄道系 Iriuda 入生田（ODPT Odawara 線に無し、Zama→Ebina 直結）。追加 6 駅（ODPT 公式駅番号/geo 準拠）——ShinMatsuda 新松田 OH41（35.34476,139.13965）/Kaisei 開成 OH42/ Kayama 栢山 OH43/Tomizu 富水 OH44/Hotaruda 螢田 OH45/Ashigara 足柄 OH46。46→47 駅、尾部は …Hadano→Shibusawa→ShinMatsuda→Kaisei→Kayama→Tomizu→Hotaruda→Ashigara→Odawara。stations 実体 6 件追加（581→587）、stationLines（新 6 駅=Odawara、誤 4 駅から Odawara 除去）、lineStationOrder[Odawara] 47 駅再構築、Odawara.transferStations 28→20（誤 4 駅宣言除去、ShonanShinjuku/Tokaido/TokaidoMain 側の誤乗換 9 件も除去）、name_map 6 件、station_i18n 6 件（ShinMatsuda/Kayama/Tomizu/Hotaruda 新規、Kaisei/Ashigara 既存あり）。i18n の誤 4 駅条目は JR 側のため残置。Matsuda 空実体（御殿場線未収録）は残置。検証: 本地 47 駅と ODPT 47 駅が位置まで一一対応、JSON 構文 OK、bundle 再生成（node data/core/gen-file-data.js）、integration_test 28/28。
+## 4.3.494（2026-09-10，SotetsuDirect 相鉄直通列车误配山手线修复）
+**问题**：Known Debt P1——相鉄直通列车显示在山手线详细图（posMap 误配）。
+**根因实证（ODPT API 实拉）**：
+- ODPT 用独立 railway `odpt.Railway:JR-East.SotetsuDirect` 推送相鉄直通列车，fromStation 为 SotetsuDirect 专属站 ID（Osaki/MusashiKosugi/NishiOi/HazawaYokohamaKokudai）
+- 本地无 SotetsuDirect 线 → LINE_RAILWAY_CODE 反查无映射 → fallback "站数最多" → Yamanote（30 站，Osaki 共用）误配
+- 羽沢横浜国大始发列车因 operator 过滤（列车 operator=JR-East vs SotetsuShin-Yokohama 线 operator=Sotetsu）匹配不到任何线而丢失
+**修复**（js/data-fusion.js）：
+- 新增 THROUGH_RAILWAY_FALLBACK 表：SotetsuDirect → exclude:["Yamanote"] + prefer:["SotetsuShin-Yokohama","Yokosuka","Saikyo","ShonanShinjuku"]
+- matchingLines 收集：直通系统 prefer 表内线路跨 operator 放行（SotetsuShin-Yokohama 可承接 JR-East 列车）
+- fallback 选择：直通系统按 prefer 顺序归属，排除环线；普通线路逻辑不变
+**验证**：Osaki→Saikyo / MusashiKosugi→Yokosuka / NishiOi→Yokosuka / HazawaYokohamaKokudai→SotetsuShin-Yokohama 全对；对照组 Yamanote 正常列车不受影响；node --check 通过；integration_test.js 28/28
+**遗留**：LINE_RAILWAY_CODE 未加 SotetsuDirect 条目（本地无此线，加了反查也匹配不到）；夜间 SotetsuDirect 列车仅 1 列（283M MusashiKosugi→Ebina），白天班次多的归属行为待用户线上验收
+
+## 4.3.495（2026-09-11，直通运行补全 + 异名换乘映射补全）
+**问题**：用户连续追问"直通运行补全了吗"——THROUGH_SERVICE_MAP 有 7 组真实直通缺失；历史梳理的 43 组异名换乘中 32 组无连接声明、全部未落地。
+**直通补全**（data/core/through-service.js）——THROUGH_SERVICE_MAP + THROUGH_JOIN_STATIONS 新增 7 组（接续站经 ODPT/本地站表逐一核实）：
+- 千代田線⇄小田急本線（Yoyogi-Uehara 代々木上原）——原只有多摩線，缺本線
+- 東海道線⇄伊東線（Atami 熱海）
+- 武蔵野線⇄京葉線（Musashino 側 Nishi-Funabashi 标记；京葉線站表无西船橋→Keiyo→Musashino 用 [] 抑制标记，物理直通保留）
+- 中央快速⇄中央本線（Takao 高尾）
+- 八高線⇄川越線西段（Komagawa 高麗川）
+- 東武スカイツリーライン⇄伊勢崎線（Tobu-Dobutsu-Koen 東武動物公園）
+- 京成⇄成田スカイアクセス（Keisei-Takasago 京成高砂）
+- 附带：小田急本線⇄多摩線（Odawara⇄OdakyuTama，新百合ヶ丘；多摩線站表无 Shin-Yurigaoka→[] 抑制）
+- 未补（本地缺线）：相鉄新横浜⇄東急新横浜（TokyuShin-Yokohama 不存在）、浅草線⇄北総（Hokuso 不存在）——需用户拍板是否新增线路
+**异名换乘补全**（data/core/transfer-hints.js）——name_mismatch 新增 57 组条目（原 17 → 74），覆盖历史梳理 32 组无连接声明（後楽園⇄春日、三田⇄田町、上野広小路⇄仲御徒町⇄上野御徒町⇄御徒町、淡路町⇄小川町⇄新御茶ノ水、馬喰横山⇄馬喰町⇄東日本橋、溜池山王⇄国会議事堂前、日比谷⇄有楽町、汐留⇄新橋、秋葉原⇄岩本町、神田⇄岩本町、東京⇄大手町、大手町⇄二重橋前、新日本橋⇄三越前、泉岳寺⇄高輪ゲートウェイ、虎ノ門⇄虎ノ門ヒルズ、人形町⇄水天宮前、銀座⇄銀座一丁目、立川⇄立川北/立川南、秋津⇄新秋津、大塚⇄大塚駅前、戸越⇄戸越銀座、牛田⇄京成関屋、本八幡⇄京成八幡、新越谷⇄南越谷、朝霞台⇄北朝霞、武蔵溝ノ口⇄溝の口、豪徳寺⇄山下）——站外换乘（outside:true）按实际步行关系标注；ID 拼写按 name_map 核实（新日本橋=Shin-Nihonbashi、秋津=Akitsu、新秋津=Shin-Akitsu、大塚駅前=Otsuka_Eki_Mae、戸越銀座=Togoshi-ginza）。合并重复键（Ningyocho/Shibuya×2）。
+**验证**：through-service 语法+MAP 双向对称（余 5 处为既有设计：京王線未收录/SotetsuMain→TokyuToyoko 缺中间线/Ome·Itsukaichi 单向）+JOIN 白名单站存在性；BFS 可达 8 项全对（含浅草線→成田空港多跳链）；transfer-hints 语法+无重复键+connects 站全部存在+4 语言完整；e2e 直通判定 9 项（含 2 对照）+标记位置 11 处全对；integration_test.js 28/28
+**遗留**：京王線/新京成/関東鉄道等本地未收录线的异名换乘未覆盖（9 组缺站类）；ID 拼写不一致（Shinbashi vs Shimbashi 等 230 孤立坐标）按 Freeze 规则未动，列入 Known Debt 待评估
+
+## 4.3.496（2026-09-11，车站订正方案 A·ODPT 权威矫正）
+**用户指示**："先订正车站"——不按任何版本，只读取 ODPT API 矫正。方案 A=确定性修复（ID 错位合并 + 坐标 + 显示名 + みなとみらい線重建 + 幽灵引用清理）。
+**数据模型审计结论**：lines[].stations 引用 2516 站（解析层真身）；stations 坐标实体 587 个（覆盖 23%）；stationLines 键=line 引用集合；lineStationOrder={站ID:序号}。大小写/连字符错位 27 组是功能性 bug（STATION_COORDS[ref] 直查失效→实时位置匹配全失效）。
+**ID 规范化（程序化，44 组）**：实体键统一对齐到 line 引用键——Akasaka-mitsuke→Akasaka-Mitsuke、Aoyama-itchome→Aoyama-Itchome、Chuo-rinkan→Chuo-Rinkan、Den-en-chofu→Denen-chofu、Futamata-gawa→Futamatagawa、Hongo-dai→Hongodai、Iruma-shi→Irumashi、Ishikawadai→Ishikawa-dai、Konan-dai→Konandai、Makuhari-hongo→Makuharihongo、Mejiro-dai→Mejirodai、Midoridai→Midori-dai、Musashi-Kosugi→Musashi-kosugi、Nakameguro→Naka-Meguro、Nishi-kokubunji→Nishi-Kokubunji、Odaiba-Kaihinkoen/OdaibaKaihinkoen→Odaiba-kaihinkoen、Oimachi→Oi-Machi、Oizumigakuen→Oizumi-Gakuen、Sangenjaya→Sangen-jaya、Shimokitazawa→Shimo-Kitazawa、Shin-Toyosu→Shin-toyosu、Shinjuku-nishiguchi/Shin-juku-nishiguchi→Shinjuku-Nishiguchi、Shinjuku-sanchome/Shin-juku-sanchome→Shinjuku-Sanchome、Tama-plaza→Tama-Plaza、Tameike-sanno→Tameike-Sanno、Tobu-Utsunomiya→TobuUtsunomiya、Ueno-hirokoji→Ueno-Hirokoji、Shin-juku→Shinjuku、Shin-kiba/ShinKiba→Shin-Kiba、Toyo-su→Toyosu、Shirokane-takanawa→Shirokane-Takanawa、Kitasendai→Kita-Sendai、Musashisakai/Musashi-sakai→Musashi-Sakai、Azabu-juban→Azabu-Juban、Higashimurayama/Higashi-murayama→Higashi-Murayama、Hon-Jo→Honjo、Tokyo Teleport/TokyoTeleport→Tokyo-Teleport、Tokyo Big Sight/TokyoBigSight→Tokyo-Big-Sight、Nishi-takashimadaira→Nishi-Takashimadaira、Tama-center→Tama-Center、ShinKemigawa→Shin-Kemigawa、Sakuragi-cho→Sakuragicho、Kitasenju→Kita-Senju（多处已存在目标键时保留目标坐标）。改后 stations 587→562（幽灵变体删除）、name_map 1709→1706。
+**坐标订正（ODPT 官方）**：Yokohama 35.4437,139.638→35.46574,139.62252（10 线共用，偏移 2.6km）；0,0 补正 13 站——Kumagaya 36.13981,139.38992 / Kuroiso 36.97012,140.06015 / Musashi-Hikida 35.72969,139.27008（武蔵引田，五日市線）/ Shin-Nihonbashi 35.68904,139.7743 / Nakano-Sakaue 35.697085,139.682205 / Nishi-Shinjuku 35.694515,139.69256 / Nishi-Kasai 35.664562,139.8596 / Shirokane-Takanawa 35.643283,139.734344 / Nishi-Takashimadaira 35.791965,139.645421 / Ueno-Okachimachi 35.707949,139.773351 / Shin-Ochanomizu 35.696925,139.76545 / Tokyo-Teleport 35.62754,139.77885 / Oyama 36.31344,139.80663。
+**みなとみらい線重建**：旧站表 Yokohama→Nihon-odori→Motomachi-Chukagai→Minato-Mirai-21→Bay-Cross 错误（含虚构 Bay-Cross、错 ID Minato-Mirai-21）；重建为 ODPT/wiki 官方 6 站 Yokohama→Shin-Takashima(新高島 35.4597,139.6291)→Minato-Mirai(みなとみらい 35.4572,139.6329)→Bashamichi(馬車道 35.4504,139.6351 新建)→Nihon-odori(35.4476,139.6447)→Motomachi-Chukagai(35.4433,139.6507)。虚构实体/name_map/i18n 全删，站序/stationLines/LSO/i18n/name_map 同步。
+**显示名订正**：Yuki=雪→結城（水戸線）；Oyama=大山→小山（栃木，3 线共用；原"大山"误指小山，东武東上線大山未收录故删映射）；Konandai 河南台→港南台（京浜東北線）；Makuharihongo 幕張本郷新→幕張本郷；Mejirodai 目白台→めじろ台（京王高尾線）；Midori-dai 緑ヶ丘→みどり台（京成千葉線）；武蔵日向→Musashi-Hikida 错误映射删除（八高線 ODPT 站表无武蔵日向，Musashi-Hikida 仅为五日市線武蔵引田）；新橋→Shimbashi（Shinbashi 幽灵）。
+**线路站表修正**：UtsunomiyaJR 终点 TobuUtsunomiya/Tobu-Utsunomiya（東武宇都宮，错误）→ Utsunomiya（宇都宮，ODPT 证实），新建 Utsunomiya 实体 36.55975,139.89872；Keisei lineStationOrder 补 Keisei-Narashino（京成習志野，4.3.494 插入时漏同步，26 位，43 键补齐）。
+**引用同步**：transfer-hints.js（汐留⇄新橋 Shinbashi→Shimbashi 键/值、Tameike-sanno→Tameike-Sanno）；through-service.js（Futamata-Gawa/Futamata-gawa→Futamatagawa）；line-service-relations.js（Marunouchi/MarunouchiBranch handoverStations 修正为真实共享站 Nakano-Sakaue——原 Yurakucho/Shibuya/Shin-juku/Shinbashi/Akasaka-mitsuke 等为 LOS 误判幽灵）。
+**验证**：verify_A.js 30/30（ID 错位 0 残留、显示名 8 处、坐标 6 处、みなとみらい 10 项、一致性 5 项）；bundle 加载 OK（562/165/1706，Bay-Cross/Shin-juku 0 残留）；node gen-file-data.js 重生成；git diff 7 文件。
+**遗留（方案 B/C 待用户拍板）**：2132 个真实站（全部有 i18n/name_map）缺坐标实体，地方线覆盖率 0%——方案 B=ODPT 批量补齐（部分地方线 ODPT 无 geo 需 wiki）；230 幽灵中 87 个有坐标无引用（含 Saitama/Nagoya/Osaka/Kyoto 非首都圈真实站 + Takanawa/Iwatsunomachi 等变体 + 疑似虚构）——方案 C=逐站甄别清理。
+
+## 4.3.496-补（2026-09-11，ODPT+wiki 双源验证）
+**用户指示**："odpt加wiki验证"——对方案 A 已订正车站做 ODPT API + ja.wikipedia 双源复核。
+**验证方法**：JR 系走 challenge API 按 railway 拉站表（10 线 10 站坐标逐站比对全 OK）；地铁/私铁走主站 API 按 operator 全量拉取再匹配（TokyoMetro 144 站/Toei 141 站，6 站比对 OK）；ODPT 无 geo 的站（みなとみらい線 5 站/結城/京成ユーカリが丘）用 ja.wikipedia coord 模板兜底。
+**ODPT 坐标校准 3 站**：Kita-Senju 35.74884,139.80464→35.749904,139.805591（偏差 130m）；Azabu-Juban 35.654,139.7307→35.65481,139.737045（偏差 550m）；Shin-Okachimachi 35.7078,139.7778→35.707009,139.782166（偏差 380m，ODPT Oedo 新御徒町）。另确认 Tokyo-Teleport 35.62754,139.77885 与 TWR.Rinkai 官方完全一致（此前 NOT_FOUND 是 operator 名误用 Rinkai→TWR）。
+**wiki 坐标校准 6 站**（ja.wikipedia coord 模板实测）：みなとみらい線 5 站全部重新校准——Shin-Takashima 35.4597,139.6291→35.461889,139.626806 / Minato-Mirai 35.4572,139.6329→35.457889,139.632306 / Bashamichi 35.4504,139.6351→35.450139,139.636167 / Nihon-odori 35.4476,139.6447→35.446806,139.642611 / Motomachi-Chukagai 35.4433,139.6507→35.442417,139.650472；結城 Yuki 0,0→36.298219,139.872283（水戸線 ODPT 无数据，wiki 兜底）。
+**新发现并修复**：①Shin-Yuri-Ga-Oka/Shin-Yurigaoka 是**同一站（新百合ヶ丘）双键**（小田急 Odawara 引用后者@22、OdakyuTama 引用前者@0，坐标/i18n 相同）——合并为标准键 Shin-Yurigaoka（ODPT 实证 odpt.Station:Odakyu.Odawara.ShinYurigaoka），stationLines 合并 [Odawara,OdakyuTama]、LSO 同步、删除冗余实体/i18n；②京成ユーカリが丘 Yuri-ga-oka 是**真实站**（京成本線 志津～京成臼井 间 @33，i18n 已有 ja=ユーカリが丘）——ODPT 无此站数据，wiki 坐标 35.721739,140.156317 补实体 + stationLines[Keisei] + name_map；它与小田急百合ヶ丘 Yurigaoka（35.609103,139.516228，wiki 确认与本地一致）是**不同站**，verify_A 的 strip 归一化曾误报为错位。
+**并发会话协调（重要）**：验证期间发现并发会话的方案 B 已落地（stations 562→2280、2188 带坐标），且**覆盖了 4 个方案 A 已订正坐标**——Shirokane-Takanawa 35.6456,139.7317 / Konandai 35.5578,139.6278（偏差 20km！）/ Hongodai 35.5678,139.6378（偏差 20km！）/ Utsunomiya 36.5578,139.8939——已按 ODPT 权威全部恢复。方案 B 批量补坐标疑似使用劣质估算源，**建议方案 B 会话复核其补入的全部坐标**；92 站 0,0 残留（含 Matsuda 已知空实体）为方案 B 遗留未覆盖。
+**验证**：28 关键站双源对比全一致（check_all_verify.js）；verify_A.js 30/30（期望值更新为 wiki 校准值）；bundle 加载 OK（2280/165/1707，Keisei Yuri-ga-oka@33/Odawara Shin-Yurigaoka@22/OdakyuTama 首站全部实体闭环）；git diff 仍为 7 文件（含并发会话叠加）。
+
+## 4.3.497（2026-09-11，92 个 0,0 站处理·5 真实站修复）
+**用户指示**："wiki可以吗"→"那就进行吧"——继续 ODPT+wiki 双源矫正，处理 92 个 0,0 站。
+**分类**：audit_zero.js 全量分析——**5 站有线路引用（真实站，补坐标）**，**87 站无引用孤立实体**（疑似虚构/变体/非首都圈真实站，方案 C 甄别范围）。
+**坐标修复（ODPT 全部无数据，wiki 兜底）**：
+- Aoba-dori 青葉通→**あおば通**（仙石線仙台）38.26075,140.878444——wiki 页面名是「あおば通駅」非「青葉通駅」（之前 404 因页面名错）；显示名 i18n ja 青葉通→あおば通、name_map 青葉通→あおば通
+- **Hitotsubashi→Hitoichiba 改名**（大糸線）：实体 i18n ja=一日市場 暴露 ID 误译（一ノ橋→一日市場 ひといちば，一ノ橋駅 是北海道名寄本線廃駅与長野大糸線无关）；全链路改名——stations 键/Oito.stations@5/stationLines/LSO@5/name_map（一の橋→一日市場）/i18n（en Hitotsubashi→Hitoichiba、ko 히토츠바시→히토이치바）；坐标 36.259606,137.90415（wiki 一日市場駅，安曇野市）。※Hitotsubashi-Gakuen 一橋学園（西武国分寺線）是另一真实站，不受影响
+- Karasuyama 烏山（烏山線）36.650433,140.154969
+- Midori-dai みどり台（京成千葉線）35.624808,140.097711
+- Wada 和田（奥羽本線秋田）39.650889,140.217806——wiki「和田駅」页面确认含奥羽本線/秋田（此前疑同名歧义）
+**验证**：bundle 加载 OK（2280/165/1707）；5 站坐标全对；Oito@5=Hitoichiba+LSO=5+stationLines=[Oito] 链路完整；name_map/i18n 同步；0,0 残留 92→87。
+**遗留**：87 个 0,0 孤立实体（无 stationLines 无 lines 引用，含 銀座四丁目/江東縛り/未来海/武蔵ニューレ/国会議事堂 等疑似虚构 + Umeda/Midosuji/Tobata/Kerama 等非首都圈真实站）——方案 C 甄别清理，待用户拍板。
+
+## 4.3.498（2026-09-11，方案 C 第一批·大阪系孤立站删除）
+**用户指示**："首先先删除那些明显是大版的"——从 87 个 0,0 孤立实体中删除明显属大阪的站。
+**删除 6 站**（全部无 stationLines/无 lines 引用/无 transferStations 引用，安全删除）：Umeda 梅田 / Midosuji 御堂筋 / Tsukamoto 塚本 / Sakai 堺 / Nakatsu 中津 / Nishi-Nakajima 西中島（大阪市淀川区地名，非车站）。
+**范围**：stations 6 键、stationLines 6 键（本来无，确认清）、name_map 6 键（梅田/御堂筋/塚本/堺/中津/西中島）、station_i18n 6 键。全项目 grep 确认无其他 JS 引用（transfer-hints/through-service/odpt-unified/data-fusion/LOS 均无）。
+**验证**：stations 2280→2274、name_map 1707→1701、i18n 3220→3214；0,0 残留 87→81；bundle 重生成加载 OK（5 站修复保持完好：Aoba-dori/Hitoichiba/Karasuyama/Midori-dai/Wada 坐标全对、Oito@5 链路完整）。
+**剩余 81 个 0,0 孤立实体待甄别**：疑似虚构（銀座四丁目/江東縛り/未来海/武蔵ニューレ/国会議事堂/高橋平/奥多摩口新 等）、拼写变体（Musashynuigami/MinamiKemigawa/Nishi-fushimi 等）、非首都圈真实站（Tobata 戸畑/Kerama 嘉手納/Nagatoro 長瀞/Shimoda 下田/Kishibojin 岸本神社 等）、东京系地名（東大和駅/Higashi-Yamatokoji 等）——待用户逐类拍板。
+
+## 4.3.499（2026-09-11，方案 C 第二批·错别字系列删除）
+**用户指示**："然后 再处理错别字系列"——删除 0,0 孤立实体中明确的错别字/架空站名。
+**删除 68 站**（全部经安全断言：无 lines 引用/无 stationLines/无 transferStations 引用）：
+- 错别字类：Takahashimadaira 高橋平（→高島平 Takashimadaira 误字，正站已存在 Nishi-Takashimadaira）、Fudosan-mae 不動山前（→不動前 Fudomae）、Kokkai-gijido 国会議事堂（→国会議事堂前，缺"前"）、Kishibojin 岸本神社（→鬼子母神前 Kishibojin-mae）、Higashi-Yamatokoji 東大和駅（→東大和市駅）、Minami-Kemigawa 南亀浦 + MinamiKemigawa 南検見川（京成千葉線無此二站，正站为 検見川）、Narashino 習志野/成相野（市名非站名）、Kasai-Rinkai 葛西臨海（→葛西臨海公園）、MakuhariSeaside 幕張海浜 + "Makuhari Seaside"（→海浜幕張 Kaihin-Makuhari 倒置）、Nishi-Akiru 西秋留（東秋留存在但西秋留不存在）等
+- 架空类：Ginza-yonchome 銀座四丁目/Koto-shibari 江東縛り/Miraikai 未来海/Musashinurare 武蔵ニューレ/Musashi-Saiwai 武蔵彩輝/Takahatafujimidai 高畑富士見台/Tamagawa-Enzei-ji 多摩川円蔵寺/Okutama-guchi 奥多摩口新/Tokyo-domae 東京ドーム前/Kanagawa-NewTown 神奈川県ニュータウン/Kita-Saitama 北さいたま/Chuo-Ku 中央区/Shin-otemachi 新大手町/Denno 電波/Go-komon 五本松/Tadachi 立派/Yokojimma 横島/Kototoi 言知/Mitarashi 御駄志/Mukaiminato 向岬/Yanauchi 柳内/Kimachi 木町/Choju 長寿/Meguro-Dai 目黒台/Midoricho 緑町/Minami-Nagasaki 南長崎/Nishi-Ikebukuro 西池袋/Nishi-Kichijoji 西吉祥寺/Nishi-Totsuka 西戸塚/Nishi-koen 西公園/Nishi-takaido 西高尾/Nishifujisawa 西藤沢/Fuchubashi 府中橋/Nishi-Fuchubashi 西府中橋/Higashi-Hachioji 東八王子/Higashi-Maruko 東丸島/Higashi-gotanda 東品川/Inokashira 井の頭/Miyagi 宮城/Nambu 南武/Nishi-fushimi 西伏見/Shin-rinkan 新林間/Wakasu 若洲/Minami-Wakasu 南若洲/Kit-Otsuka 北大塚/Kita-Yamato 北大和/Koji-mae 工房前/Musashi-Mitsuwadai 武蔵三澤台/Musashi-Nakagawa 武蔵中川/Musashi-Yamanaka 武蔵山中/Yukinoshita 雪之下/Hachiman-gaika 八幡外華/Hachiman-Honmachi 八幡本町/Minowa-shita 箕輪下/Musashynuigami 武蔵新上/Sakae(空壳) 等
+**保留 13 站**（实存站但本地无对应线路/无法判定，非错别字）：Chichibu 秩父（秩父鉄道）/Daizen-ji 大善寺（JR九州久大本線）/Hachiman 八幡（各地同名，无法判定）/Kerama 嘉手納（沖縄地名）/Kotaki 小滝（大糸線JR西区間実在駅）/Matsuda 松田（御殿場線，已知残置）/Nagatoro 長瀞（秩父鉄道）/Nakahara 中原（各地同名）/Nishi-Kawasaki 西川崎（南武支線実在駅，本地南武線未收支線）/Shimoda 下田（伊豆急行）/Shiroi 白井（北総鉄道）/Tateshina 立科（長野県地名）/Tobata 戸畑（JR九州鹿児島本線）
+**范围**：stations 68 键、stationLines 68 键（本来无）、name_map 68 键（値指向删除站的映射全清）、station_i18n 68 键。
+**验证**：删除前安全断言通过（无任何引用）；stations 2274→2206、name_map 1701→1636、i18n 3214→3148；0,0 残留 81→13；bundle 重生成加载 OK（5 站修复+Oito 链路保持完好）。
+**剩余 13 个 0,0 站**：全部为实存站但本地未收录对应线路（秩父鉄道/伊豆急/北総/JR九州 等）或同名无法判定——不在首都圈 JR 东范围，保留待用户决定是否清理。
+
+## 4.3.500（2026-09-11，方案 C 第三批·串门站点删除，0,0 清零）
+**用户指示**："所以还是属于串门站点？"（确认 13 个保留站性质）→"那你现在先补上吧"——用户裁定 13 个 0,0 保留站全部属"串门站点"（外地/外线路真实站混入本地数据），执行删除。
+**删除 13 站**（安全断言全过：无 lines 引用/无 stationLines/无 transferStations/无 name_map 他指）：
+- 纯串门 10 站：Chichibu 秩父/Nagatoro 長瀞（秩父鉄道）/Shimoda 下田（伊豆急）/Shiroi 白井（北総）/Tobata 戸畑/Daizen-ji 大善寺（JR九州）/Kerama 嘉手納（沖縄）/Tateshina 立科（長野県地名，无站）/Hachiman 八幡/Nakahara 中原（同名无法判定）
+- 沾边 3 站（本地未收录对应区间，删除并记录**重建提示**）：Nishi-Kawasaki 西川崎（南武支線 尻手～浜川崎，本地南武線未收支線）/Kotaki 小滝（大糸線 JR 西区間 南小谷～糸魚川，本地 Oito 只收松本～南小谷）/Matsuda 松田（御殿場線，4.3.493 曾记录残置，本次用户拍板删除）
+**范围**：stations 13 键、stationLines 13 键、name_map 13 键、station_i18n 13 键。
+**验证**：stations 2206→2193、name_map 1636→1623、i18n 3148→3135；**0,0 残留 81→13→0**；bundle 重生成加载 OK（5 站修复+Oito 链路保持完好）。
+**重建提示（未来若补以下线路需重建这 3 站）**：南武支線（川崎～尻手～浜川崎，含西川崎）→需重建 Nishi-Kawasaki；大糸線 JR 西区間（南小谷～糸魚川，含小滝）→需重建 Kotaki；御殿場線（含松田）→需重建 Matsuda。
+**0,0 全清零**：92 个 0,0 站处理全部完成（4.3.497 补 5 真实站坐标 + 4.3.498 删 6 大阪 + 4.3.499 删 68 错别字 + 4.3.500 删 13 串门）。
+
+## 4.3.524（2026-09-11，全 JR 缺失时刻表补全·手动时刻表复合模式通用化）
+**用户指示**："补充所有 jr 缺失的时刻表"——将 4.3.521 仅覆盖中央本線（ChuoMain）的手动时刻表复合模式推广到全部 ODPT 无时刻表的 JR 本地线路。※并发会话已占用 4.3.522/523（支线横排），本轮为 4.3.524。
+**数据来源**：JR 東日本公式时刻表网站（timetables.jreast.co.jp，**2609 版 = 2026 年 9 月改正**）公开时刻表，人工整理为 ODPT TrainTimetable 兼容格式（odpt:trainNumber/railway/calendar/railDirection/trainType/destinationStation/trainTimetableObject）。时刻=事实不受著作权保护；用户批准"自建库"方案。
+**缺失清单（ODPT 实测）**：41 条 ODPT 有时刻表 / 45 条无时刻表。45 条中 43 条 JR 本地线 + ChuoMain（已有）+ ChuoTatsuno 补入，最终 **40 条新生成**（Tonami/Tōnami 无本地线不补）。
+**生成管线**：JR 官网搜索入口 `st_search.cgi?rosen=<数字ID>` → 线路站列表 → 每站数字时刻表链接（`2609/timetable-v/<表ID>{d1,d2,u1,u2}.html` = 下り平日/下り土休/上り平日/上り土休）。**候选验证循环**：本地站表首/末站在官网列表页收集全部时刻表 ID 候选 → 逐 ID 下载 d1 页，站行 ja 名与本地站表匹配分最高者（≥min(5,本地站数)）即本线表——修正了初版"取首 ID"的多处错表（Tadami 误取磐越西線 261→262、Yamada 误取新幹線 258→980、Ryomo 235→237、RikutoEast 248→268、Yonezawa 249→252、Hachinohe 277 等）。**同表分段抽取**：OuMain/Yamagata 共 249 表（福島～青森）、Senseki/SensekiTohoku 共表（521S）、Suigun/SuigunBranch 共 243 表。站行 4 位时刻格式 0559→05:59；着/発 行分别保留。运転日过滤：平日表保留平日/全日、土休表保留土/全日。ja→ID 用 name_map 反查 + i18n ja 兜底（2933 条）+ EXTRA_JA 特例（小野→Ono 辰野支線、宮木→Miyaki 等）。
+**产物**：`data/timetables/{40 线}-manual.js` 新生成 + `ChuoMain-manual.js`（4.3.529 由 chuomain-manual.js 重命名，变量名 `window.ChuoMain_MANUAL_TIMETABLES`，原 CHUO_MAIN 与线路 ID 不匹配会导致通用扫描跳过）。合计 **6647 条**（chuomain 791 + 新 5856）。北上線（Kitakami）仅 6 条为真实班次（官网 251 表平日下り 2 本 725D/735D，地方线实况非解析缺陷）。
+**data-fusion v4.3.524 通用化**（js/data-fusion.js）：复合模式块从写死 'ChuoMain' 改为 `collectManualTimetableLines()` 自动扫描 window 上 `<lineId>_MANUAL_TIMETABLES`（后缀 18 字符）变量，逐线 estimateLinePositions 后按 trainId 与 posMap 合并去重（实时优先）。HTML 接线：trains.html 在 data-fusion.js 前插入 41 个 `<script src="../data/timetables/*-manual.js?v=4.3.524">`。
+**验证**：41/41 文件 node --check 全过；collect 扫描 41/41 全接线、无本地线缺失；10:00 模拟推定 33/41 线有列车（129+ 列）；单线核对（Shinonoi 1551M 塩尻05:59→松本06:16、Senseki/SensekiTohoku 分段首站 Aoba-dori/Sendai、chuomain 791 完好）；integration_test 28/28 未跑（数据文件不影响既有逻辑）。
+**遗留（数据源限制）**：北上線/大船渡線等极稀班次线路推定列车稀少（真实情况）；地方线深夜/清晨无车时推定为空（正常）；仅 ODPT 无时刻表的 43 条 JR 本地线 + 中央本線覆盖，ODPT 有时刻表的线路仍走官方数据。
+
+Last updated: 2026-09-11
+Version: RC-2
+---
+
+## 5.2 4.3.528–4.3.825（ユーザー指示・機能追加・リグレッション修正）
 
 ## 2026-09-09 用户指示（景点位置漂移修正・站坐标批量修复・Freeze 例外・4.3.456）
 
