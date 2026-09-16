@@ -66,7 +66,7 @@
       var isFood = (spot.tags || []).indexOf('food') >= 0;
       var titleKey = isFood ? 'detail.menu' : 'detail.goods';
       var list = spot.menu.slice(0, 10);
-      var badgeChar = String(spot.name || '').trim().charAt(0) || '食';
+      var badgeChar = String(spot.name || '').trim().charAt(0) || C.t('detail.badge_initial_fallback');
 
       // 横向滚动预览行（含"查看全部"按钮）
       var html = '<div class="dp-card dp-menu">';
@@ -89,7 +89,7 @@
       // 全屏菜单模态
       var modalId = 'dpMenuModal_' + (spot.menu._idx || 0);
       html += '<div class="dp-menu-modal" id="' + modalId + '" role="dialog" aria-modal="true" aria-label="' + C.escapeHtml(C.t(titleKey)) + '">';
-      html += '<button class="dp-menu-modal-close" aria-label="Close">&times;</button>';
+      html += '<button class="dp-menu-modal-close" aria-label="' + C.escapeHtml(C.t('detail.close')) + '">&times;</button>';
       html += '<div class="dp-menu-modal-inner"><h3 class="dp-menu-modal-title">' + C.t(titleKey) + '</h3>';
       html += '<div class="dp-menu-modal-grid">';
       for (var mi2 = 0; mi2 < spot.menu.length; mi2++) {
@@ -136,7 +136,7 @@
     if (!overlay) {
       overlay = document.createElement('div');
       overlay.className = 'dp-lightbox';
-      overlay.innerHTML = '<button class="dp-lightbox-close" aria-label="Close">&times;</button><img class="dp-lightbox-img" alt="">';
+      overlay.innerHTML = '<button class="dp-lightbox-close" aria-label="' + C.escapeHtml(C.t('detail.close')) + '">&times;</button><img class="dp-lightbox-img" alt="">';
       overlay.style.display = 'none';
       document.body.appendChild(overlay);
       var imgEl = overlay.querySelector('.dp-lightbox-img');
