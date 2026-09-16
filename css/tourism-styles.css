@@ -915,6 +915,24 @@
 /* 景点样式：绿色主视觉（地标/自然系） */
 .article-content--spot .type-badge--spot { background: #008803; }
 
+/* 4.3.801: 店铺菜单板块（大众点评式推荐）——标题左侧暖色竖条标识 */
+.article-content--shop .section-heading:first-of-type + .tips-list,
+.menu-list { margin-top: 8px; }
+.article-content--shop .menu-list li::marker { color: #E8590C; }
+
+/* 4.3.801: AI 整理声明（详情页底部） */
+.ai-note {
+  margin-top: 16px;
+  padding: 10px 12px;
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  background: var(--bg3);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-sm);
+  word-break: break-word;
+}
+
 
 /* === Leaflet map === */
 #tourismMap {

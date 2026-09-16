@@ -258,10 +258,11 @@ var currentStationKey = null;
       ? '<span class="station-badge"><img src="../images/icon-metro-station.svg" alt="" class="station-icon">' + escapeHtml(stationName) + '</span>'
       : '';
 
-    // Tips section
+    // Tips section —— 4.3.801: 店铺显示"メニュー・おすすめ"（大众点评式推荐板块），其余类型保持"訪問Tips"
+    var tipsTitleKey = (spotType === 'shop') ? 'detail.menu' : 'detail.tips';
     var tipsHtml = '<div class="article-section">'
-      + '<h3 class="section-heading">' + t('detail.tips') + '</h3>'
-      + '<ul class="tips-list">';
+      + '<h3 class="section-heading">' + t(tipsTitleKey) + '</h3>'
+      + '<ul class="tips-list' + (spotType === 'shop' ? ' menu-list' : '') + '">';
     if (spot.tips && spot.tips.length > 0) {
       for (var ti = 0; ti < spot.tips.length; ti++) {
         var tipText = (spot.tips_i18n && spot.tips_i18n[lang] && spot.tips_i18n[lang][ti]) || (spot.tips_i18n && spot.tips_i18n.ja && spot.tips_i18n.ja[ti]) || spot.tips[ti];
@@ -312,6 +313,8 @@ var currentStationKey = null;
       bodySections += tipsHtml + infoHtml;
     }
     bodySections += mapSection;
+    // 4.3.801: AI 整理声明（全部类型详情页底部）
+    bodySections += '<div class="ai-note">' + escapeHtml(t('detail.ai_note')) + '</div>';
 
     var html = '<div class="article-hero ' + heroClass + '">'
       + imageHtml
