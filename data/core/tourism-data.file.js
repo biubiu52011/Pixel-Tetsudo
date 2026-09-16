@@ -1738,11 +1738,13 @@ window.RAILWAY_TOURISM = {
       "menu": [
         {
           "item": "うな重（小）",
-          "price": "6,000円"
+          "price": "6,000円",
+          "img": "../images/料理/obana_0_unaju-s.jpg"
         },
         {
           "item": "うな重（大）",
-          "price": "7,000円"
+          "price": "7,000円",
+          "img": "../images/料理/obana_1_unaju-l.jpg"
         },
         {
           "item": "白焼",
@@ -1750,7 +1752,8 @@ window.RAILWAY_TOURISM = {
         },
         {
           "item": "蒲焼（小）",
-          "price": "5,600円"
+          "price": "5,600円",
+          "img": "../images/料理/obana_3_kabayaki.jpg"
         },
         {
           "item": "蒲焼（大）",
@@ -16541,19 +16544,23 @@ window.RAILWAY_TOURISM = {
       "menu": [
         {
           "item": "オムライス",
-          "price": "1,408円"
+          "price": "1,408円",
+          "img": "../images/料理/asakusa-juraku_0_omurice.jpg"
         },
         {
           "item": "オムハヤシ",
-          "price": "1,628円"
+          "price": "1,628円",
+          "img": "../images/料理/asakusa-juraku_1_omu-hayashi.jpg"
         },
         {
           "item": "100％ビーフダブルハンバーグ",
-          "price": "1,738円"
+          "price": "1,738円",
+          "img": "../images/料理/asakusa-juraku_2_hamburg.jpg"
         },
         {
           "item": "海老フライ",
-          "price": "1,925円"
+          "price": "1,925円",
+          "img": "../images/料理/asakusa-juraku_3_ebi-fry.jpg"
         },
         {
           "item": "大人のお子様ランチ",
@@ -16561,7 +16568,8 @@ window.RAILWAY_TOURISM = {
         },
         {
           "item": "うな重セット",
-          "price": "3,850円"
+          "price": "3,850円",
+          "img": "../images/料理/asakusa-juraku_5_unaju.jpg"
         }
       ],
       "menu_i18n": [
@@ -32974,11 +32982,13 @@ window.RAILWAY_TOURISM = {
       "menu": [
         {
           "item": "絹豆腐",
-          "price": "145円"
+          "price": "145円",
+          "img": "../images/料理/sugimoto_0_kinu.jpg"
         },
         {
           "item": "木綿豆腐",
-          "price": "180円"
+          "price": "180円",
+          "img": "../images/料理/sugimoto_1_momen.jpg"
         },
         {
           "item": "寄せ豆腐",
@@ -32986,11 +32996,13 @@ window.RAILWAY_TOURISM = {
         },
         {
           "item": "豆乳",
-          "price": "130円"
+          "price": "130円",
+          "img": "../images/料理/sugimoto_3_tonyu.jpg"
         },
         {
           "item": "油揚げ",
-          "price": "95円"
+          "price": "95円",
+          "img": "../images/料理/sugimoto_4_aburaage.jpg"
         }
       ],
       "menu_i18n": [
@@ -33180,19 +33192,23 @@ window.RAILWAY_TOURISM = {
       "menu": [
         {
           "item": "焼鮭とクリームチーズのマヨおむすび",
-          "price": "460円"
+          "price": "460円",
+          "img": "../images/料理/temaru_0_sake.jpg"
         },
         {
           "item": "韓国おむすびチュモッパ",
-          "price": "450円"
+          "price": "450円",
+          "img": "../images/料理/temaru_1_chumoppa.jpg"
         },
         {
           "item": "じゃこガーリック",
-          "price": "460円"
+          "price": "460円",
+          "img": "../images/料理/temaru_2_jako.jpg"
         },
         {
           "item": "大人のわかめおむすび",
-          "price": "390円"
+          "price": "390円",
+          "img": "../images/料理/temaru_3_wakame.jpg"
         },
         {
           "item": "ツナマヨとかつお節の佃煮おむすび",
@@ -33609,23 +33625,28 @@ window.RAILWAY_TOURISM = {
       "menu": [
         {
           "item": "ミックスフライ定食",
-          "price": "1,000円"
+          "price": "1,000円",
+          "img": "../images/料理/frypan_0_mix-fry.jpg"
         },
         {
           "item": "チキンソースカツ丼",
-          "price": "1,100円"
+          "price": "1,100円",
+          "img": "../images/料理/frypan_1_chicken-katsudon.jpg"
         },
         {
           "item": "ロースソースカツ丼",
-          "price": "1,100円"
+          "price": "1,100円",
+          "img": "../images/料理/frypan_2_roast-katsudon.jpg"
         },
         {
           "item": "ロースカツカレー",
-          "price": "1,300円"
+          "price": "1,300円",
+          "img": "../images/料理/frypan_3_katsukare.jpg"
         },
         {
           "item": "特大ロースソースカツ丼",
-          "price": "1,400円"
+          "price": "1,400円",
+          "img": "../images/料理/frypan_4_tokudai-katsudon.jpg"
         }
       ],
       "menu_i18n": [
@@ -37556,7 +37577,8 @@ window.RAILWAY_TOURISM = {
       "menu": [
         {
           "item": "草だんご 12粒",
-          "price": "500円"
+          "price": "500円",
+          "img": "../images/料理/taguchiya_0_kusa-dango.jpg"
         },
         {
           "item": "草だんご 20粒",
@@ -37568,11 +37590,13 @@ window.RAILWAY_TOURISM = {
         },
         {
           "item": "酒饅頭（1個）",
-          "price": "100円"
+          "price": "100円",
+          "img": "../images/料理/taguchiya_3_sake-manju.jpg"
         },
         {
           "item": "3色氷",
-          "price": "500円"
+          "price": "500円",
+          "img": "../images/料理/taguchiya_4_shaved-ice.jpg"
         }
       ],
       "menu_i18n": [
@@ -37798,7 +37822,8 @@ window.RAILWAY_TOURISM = {
       "menu": [
         {
           "item": "ライスカレー",
-          "price": "580円"
+          "price": "580円",
+          "img": "../images/料理/katsumeshiya_0_curry.jpg"
         },
         {
           "item": "じゃんじゃん定食",
@@ -37806,15 +37831,18 @@ window.RAILWAY_TOURISM = {
         },
         {
           "item": "豚キムチ定食",
-          "price": "850円"
+          "price": "850円",
+          "img": "../images/料理/katsumeshiya_2_buta-kimchi.jpg"
         },
         {
           "item": "肉ひつまぶし定食",
-          "price": "980円"
+          "price": "980円",
+          "img": "../images/料理/katsumeshiya_3_hitsumabushi.jpg"
         },
         {
           "item": "ロースカツ定食",
-          "price": "1,080円"
+          "price": "1,080円",
+          "img": "../images/料理/katsumeshiya_4_roast-katsu.jpg"
         }
       ],
       "menu_i18n": [
@@ -39512,23 +39540,28 @@ window.RAILWAY_TOURISM = {
       "menu": [
         {
           "item": "餃子（1ヶ）",
-          "price": "121円"
+          "price": "121円",
+          "img": "../images/料理/jagi_0_gyoza.jpg"
         },
         {
           "item": "ロールレタス水餃子",
-          "price": "297円"
+          "price": "297円",
+          "img": "../images/料理/jagi_1_mizu-gyoza.jpg"
         },
         {
           "item": "麻婆豆腐かネギ",
-          "price": "880円"
+          "price": "880円",
+          "img": "../images/料理/jagi_2_mapo.jpg"
         },
         {
           "item": "元祖ジャギ炒飯",
-          "price": "858円"
+          "price": "858円",
+          "img": "../images/料理/jagi_3_chahan.jpg"
         },
         {
           "item": "金玉黒炒飯",
-          "price": "935円"
+          "price": "935円",
+          "img": "../images/料理/jagi_4_kuro-chahan.jpg"
         },
         {
           "item": "ジャギ台湾",
@@ -39540,7 +39573,8 @@ window.RAILWAY_TOURISM = {
         },
         {
           "item": "超ごま団子",
-          "price": "583円"
+          "price": "583円",
+          "img": "../images/料理/jagi_7_goma-dango.jpg"
         },
         {
           "item": "中華爛漫コース（飲放付）",
@@ -40194,7 +40228,8 @@ window.RAILWAY_TOURISM = {
       "menu": [
         {
           "item": "あだち菜うどん（ごぼう天ぷら付）",
-          "price": "715円"
+          "price": "715円",
+          "img": "../images/料理/sora-shita_0_udon.jpg"
         },
         {
           "item": "本日の給食",
@@ -40202,11 +40237,13 @@ window.RAILWAY_TOURISM = {
         },
         {
           "item": "食堂のカレーライス",
-          "price": "770円"
+          "price": "770円",
+          "img": "../images/料理/sora-shita_2_curry.jpg"
         },
         {
           "item": "合挽きハンバーグカレー",
-          "price": "1,078円"
+          "price": "1,078円",
+          "img": "../images/料理/sora-shita_3_hamburg-curry.jpg"
         },
         {
           "item": "本日の豆皿定食",
@@ -42133,23 +42170,28 @@ window.RAILWAY_TOURISM = {
       "menu": [
         {
           "item": "酎ハイ",
-          "price": "300円"
+          "price": "300円",
+          "img": "../images/料理/zawa_0_chuhai.jpg"
         },
         {
           "item": "煮込み",
-          "price": "200円"
+          "price": "200円",
+          "img": "../images/料理/zawa_1_nikomi.jpg"
         },
         {
           "item": "鶏レバー醤油漬け",
-          "price": "300円"
+          "price": "300円",
+          "img": "../images/料理/zawa_2_reba.jpg"
         },
         {
           "item": "白子ポン酢",
-          "price": "450円"
+          "price": "450円",
+          "img": "../images/料理/zawa_3_shirako.jpg"
         },
         {
           "item": "ホタテとホタルイカの天麩羅",
-          "price": "500円"
+          "price": "500円",
+          "img": "../images/料理/zawa_4_tempura.jpg"
         }
       ],
       "menu_i18n": [
