@@ -44,6 +44,12 @@
       return C.buildTipsHtml(spot, 'detail.tips');
     }
     var items = '';
+    if (spot.nextDate) {
+      items += '<div class="edition-next">'
+        + '<span class="edition-next-label">' + C.t('detail.next_edition') + '</span>'
+        + '<span class="edition-next-date">' + C.escapeHtml(pickI18n(spot.nextDate)) + '</span>'
+        + '</div>';
+    }
     if (hasEditions) {
       items += '<div class="edition-list">' + spot.pastEditions.map(function(e) {
         var label = C.t('detail.edition').replace('{n}', e.num);
