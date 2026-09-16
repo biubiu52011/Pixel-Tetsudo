@@ -294,7 +294,7 @@ function renderGrid() {
       // 4.3.802: 详情页按类型路由到三个独立详情页（活动/景点/店铺）
       const detailType = (tags.indexOf('event') >= 0) ? 'event'
         : (tags.indexOf('food') >= 0 || tags.indexOf('shopping') >= 0) ? 'shop' : 'spot';
-      const detailUrl = 'tourism-detail-' + detailType + '.html?station=' + encodeURIComponent(stationKey) + '&index=' + idx + '&name=' + encodeURIComponent(name);
+      const detailUrl = 'tourism-' + detailType + '.html?station=' + encodeURIComponent(stationKey) + '&index=' + idx + '&name=' + encodeURIComponent(name);
 
       return '<a href="' + detailUrl + '" class="sm-card' + (isEvent ? ' sm-card--event' : '') + '" data-index="' + idx + '">' +
         '<div class="sm-thumb' + (image ? '' : ' sm-thumb-noimg') + '">' + eventBadgeHtml + thumbHtml + '</div>' +

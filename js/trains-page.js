@@ -2461,7 +2461,7 @@
         });
       }
       // hash 路由兜底：history.back() 后 hash 变化时恢复对应视图
-      // （与 tourism-detail 的 history.back() 行为同步，避免页内返回后停留在详情）
+      // （与 tourism 详情页的 history.back() 行为同步，避免页内返回后停留在详情）
       window.addEventListener("hashchange", function() {
         var h = (window.location.hash || "").replace(/^#/, "");
         if (!h) {

@@ -1,6 +1,6 @@
 /*
  * Tourism Detail Core (4.3.802) - 三类型详情页公共底座
- * 由 tourism-detail-event.js / tourism-detail-spot.js / tourism-detail-shop.js 共享：
+ * 由 tourism-event.js / tourism-spot.js / tourism-shop.js 共享：
  *   - 数据加载流程（DataLoader / 轮询兜底）
  *   - 条目查找 / 距离·出站指引计算（跨站最优出口融合口径 4.3.621）
  *   - 公共章节构建（about / map / 徽章 / 字段）

@@ -887,7 +887,7 @@
   line-height: 1.5;
 }
 
-/* 4.3.802: 三类型详情页公共样式——类型专属样式已拆至 tourism-detail-{event,spot,shop}.css */
+/* 4.3.802: 三类型详情页公共样式——类型专属样式已拆至 tourism-{event,spot,shop}.css */
 .type-badge {
   display: inline-block;
   font-size: 11px;
