@@ -28,12 +28,35 @@
       + hoursRow + feeRow + ctx.addressRow + '</div></div>';
   }
 
+  // 菜单/价目表板块：有 menu 数据（[{item,price}]）→ 大众点评式价目表（菜名+点线+价格）；
+  // 无 menu 数据时回退到文本贴士（既有数据兼容）。餐饮店标题=メニュー，非餐饮店=商品・価格帯。
+  function buildMenuHtml(spot) {
+    if (spot.menu && spot.menu.length > 0) {
+      var isFood = (spot.tags || []).indexOf('food') >= 0;
+      var titleKey = isFood ? 'detail.menu' : 'detail.goods';
+      var html = '<div class="article-section">'
+        + '<h3 class="section-heading">' + C.t(titleKey) + '</h3>'
+        + '<ul class="tips-list menu-list menu-priced">';
+      for (var mi = 0; mi < spot.menu.length; mi++) {
+        var it = spot.menu[mi];
+        var itemText = (spot.menu_i18n && spot.menu_i18n[mi] && spot.menu_i18n[mi][C.state.lang])
+          || (spot.menu_i18n && spot.menu_i18n[mi] && spot.menu_i18n[mi].ja)
+          || it.item;
+        html += '<li class="menu-row"><span class="menu-item">' + C.escapeHtml(itemText) + '</span>'
+          + '<span class="menu-dots"></span>'
+          + '<span class="menu-price">' + C.escapeHtml(it.price) + '</span></li>';
+      }
+      return html + '</ul></div>';
+    }
+    return C.buildTipsHtml(spot, 'detail.menu', 'menu-list');
+  }
+
   function renderArticle(spot, stationKey) {
     var ctx = C.buildContext(spot, stationKey);
     var quickInfo = buildQuickInfo(ctx);
     var infoHtml = buildInfoGrid(ctx);
-    // 店铺：メニュー・おすすめ 板块（大众点评式，沿用真实采集数据）
-    var menuHtml = C.buildTipsHtml(spot, 'detail.menu', 'menu-list');
+    // 店铺：メニュー・おすすめ → 价目表板块（大众点评式；有 menu 数据时显示单价）
+    var menuHtml = buildMenuHtml(spot);
     var body = ctx.aboutSection + infoHtml + menuHtml + ctx.mapSection
       + '<div class="ai-note">' + C.escapeHtml(C.t('detail.ai_note')) + '</div>';
     C.renderInto(ctx, quickInfo, body);

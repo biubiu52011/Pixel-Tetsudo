@@ -8,3 +8,10 @@
 /* 店铺菜单板块（大众点评式推荐）——暖色列表标识 */
 .article-content--shop .menu-list { margin-top: 8px; }
 .article-content--shop .menu-list li::marker { color: #E8590C; }
+
+/* 价目表样式（4.3.815）：菜单项 + 点线 + 单价 */
+.article-content--shop .menu-priced li::marker { content: none; }
+.article-content--shop .menu-row { display: flex; align-items: baseline; gap: 8px; padding: 3px 0; }
+.article-content--shop .menu-item { flex-shrink: 0; }
+.article-content--shop .menu-dots { flex: 1; border-bottom: 1.5px dotted #c9c9c9; transform: translateY(-4px); min-width: 12px; }
+.article-content--shop .menu-price { flex-shrink: 0; font-weight: 700; color: #E8590C; white-space: nowrap; }
