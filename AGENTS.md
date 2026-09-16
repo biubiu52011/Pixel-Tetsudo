@@ -1828,3 +1828,11 @@ ow > null+5 永不成立 → 清晨车永不收车；部分站段记录（320/43
 - 多摩川線 7000系：7000系（元東急9000系・サステナ車両）は狭山線デビュー（2026/6/27）、多摩川線・多摩湖線・秩父線への拡大は今後（東急テクノ/鉄道コム/auone 記事）→ 現在多摩川線は新101系（ワンマン）主力、「新101系（ワンマン専用塗装）/ 7000系（候補）」維持
 **验证**：node --check 両ファイル；tt_cross {}（Tsugaru 18班警告は既存・無関係）；tt_join_check 1853/0/0；verify_through_vtype 63/63；verify_vtype_coverage MAP 115線/339条目 Missing none。
 **commit**：1dbbf47
+
+## 4.3.812（2026-09-16）幽灵站清理 + 缺口补齐
+**问题**：用户点名 Shin-Marunouchi 幽灵站——stations 中未被任何线路引用、坐标与真实站完全重复的 8 个幽灵站（Shin-Marunouchi↔Tokyo / Sotsu-Shin-Yokohama↔Shin-Yokohama / Nishi-fuchu↔Nishifu / Hikaridai↔Hikarigaoka / Oshida↔Ojima / Nishi-takahashimadaira↔Nishi-Takashimadaira / Futa-ba↔Futaba / Sago↔Sagoshi）。
+**处理**：
+- railway_data.json stations 删除 8 个幽灵键（2189→2186）；name_map 修正 5 个指向幽灵的映射（光が丘→Hikarigaoka、大島→Ojima、西高島平/西高橋平→Nishi-Takashimadaira、西府駅→Nishifu）
+- tourism_data.json station_exits 删除 7 个幽灵条目 + 补齐 13 个归一化缺失站駅前兜底（Miyanosaka 等，豪徳寺缺口）→ 2179 站
+- 景点最近站命中 516/516；Python 严格解析通过（PowerShell ConvertFrom-Json 大小写不敏感属误报）
+**commit**：5b62ce1（已推送）
