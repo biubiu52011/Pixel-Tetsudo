@@ -3126,7 +3126,8 @@ window.RAILWAY_TOURISM = {
       "dist": "",
       "desc": "足立区大谷田にある天然温泉の日帰り施設。露天風呂やサウナを備え、区民の憩いの場となっている。",
       "tags": [
-        "all"
+        "all",
+        "play"
       ],
       "image": "../images/観光地/大谷田温泉明神の湯.jpg",
       "bestTime": "日中",
@@ -17920,7 +17921,8 @@ window.RAILWAY_TOURISM = {
       "desc": "中野で自家製地ビールが飲める店。店奥の工房で作られた常時5種類のビールとおつまみがすべて500円均一。",
       "tags": [
         "all",
-        "landmark"
+        "landmark",
+        "play"
       ],
       "image": "../images/観光地/中野ビール工房.jpg",
       "bestTime": "夜",
@@ -22210,7 +22212,6 @@ window.RAILWAY_TOURISM = {
       "desc": "乃木坂・六本木のアートゾーンに建つ国立新美術館。ガラス張りの大空間で企画展・公募展を鑑賞できる。",
       "tags": [
         "all",
-        "food",
         "landmark"
       ],
       "image": "../images/観光地/国立新美術館.jpg",
@@ -23878,7 +23879,8 @@ window.RAILWAY_TOURISM = {
       "desc": "ランドセル修理工房。6年間使った思い出のランドセルを、手のひらサイズの精巧なミニチュアに加工。",
       "tags": [
         "all",
-        "landmark"
+        "landmark",
+        "play"
       ],
       "image": "../images/観光地/バッグ工房 ヴィドゥルス.jpg",
       "bestTime": "昼",
@@ -23953,7 +23955,8 @@ window.RAILWAY_TOURISM = {
       "desc": "自称・世界一小さな劇場。30人も入れば満員の近さで、365日マンガライブが楽しめる浅草の小劇場。",
       "tags": [
         "all",
-        "landmark"
+        "landmark",
+        "play"
       ],
       "image": "../images/観光地/浅草リトルシアター.jpg",
       "bestTime": "昼",
@@ -24780,7 +24783,8 @@ window.RAILWAY_TOURISM = {
       "desc": "川沿いの染物体験工房。沖縄の伝統技法「紅型（びんがた）染め」を、自由な構図で体験できる。",
       "tags": [
         "all",
-        "history"
+        "history",
+        "play"
       ],
       "image": "../images/観光地/おかめ工房.jpg",
       "bestTime": "昼",
@@ -25536,7 +25540,8 @@ window.RAILWAY_TOURISM = {
       "desc": "スカイツリー近くの銭湯。露天風呂・高濃度炭酸泉・日替わり薬湯を備え、翌朝10時までオールナイト営業。",
       "tags": [
         "all",
-        "landmark"
+        "landmark",
+        "play"
       ],
       "image": "../images/観光地/押上温泉 大黒湯.jpg",
       "bestTime": "夜",
@@ -29089,7 +29094,8 @@ window.RAILWAY_TOURISM = {
       "desc": "和光市駅近くに残る昭和の街のバッティングセンター。手頃な料金で気軽にバッティングが楽しめる庶民的な施設。",
       "tags": [
         "all",
-        "landmark"
+        "landmark",
+        "play"
       ],
       "image": "../images/観光地/和光市バッティングセンター.jpg",
       "bestTime": "昼",
@@ -29315,7 +29321,8 @@ window.RAILWAY_TOURISM = {
       "tags": [
         "all",
         "food",
-        "landmark"
+        "landmark",
+        "play"
       ],
       "image": "../images/観光地/シチズンプラザスケートリンク.jpg",
       "bestTime": "昼",
@@ -30901,7 +30908,8 @@ window.RAILWAY_TOURISM = {
         "all",
         "food",
         "nature",
-        "landmark"
+        "landmark",
+        "play"
       ],
       "image": "../images/観光地/上野の森アートスクール（上野の森美術館）.jpg",
       "bestTime": "昼",
@@ -38900,7 +38908,8 @@ window.RAILWAY_TOURISM = {
       "tags": [
         "all",
         "landmark",
-        "history"
+        "history",
+        "play"
       ],
       "bestTime": "公演の前後",
       "hours": "11:00～19:00（公演により異なる）",
@@ -38975,7 +38984,8 @@ window.RAILWAY_TOURISM = {
       "tags": [
         "all",
         "landmark",
-        "modern"
+        "modern",
+        "play"
       ],
       "bestTime": "ライブ開催の夜",
       "hours": "イベントにより異なる（開場18:00～が多い）",

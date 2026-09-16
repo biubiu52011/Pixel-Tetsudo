@@ -17,7 +17,8 @@
     seasonal: 'tourism.tag_seasonal',
     event: 'tourism.tag_event',
     park: 'tourism.tag_park',
-    modern: 'tourism.tag_modern'
+    modern: 'tourism.tag_modern',
+    play: 'tourism.tag_play'
   };
 
   // 4.3.572: 无图景点按类别显示概括性文字（替代 emoji 图标——用户指示"别出现拉面这种"）
@@ -89,7 +90,7 @@
     if (!dom.tagFilters) return;
     // 4.3.575: 分类按数据量排序（night 数据为 0 已移除——点开即空白；未来补夜景数据可加回）
     // 4.3.794: 新增 event（活动：祭り/花火/市集）分类
-    const tags = ['all', 'shrine', 'history', 'shopping', 'nature', 'food', 'landmark', 'seasonal', 'event', 'park', 'modern'];
+    const tags = ['all', 'shrine', 'history', 'shopping', 'nature', 'food', 'landmark', 'seasonal', 'event', 'park', 'modern', 'play'];
     dom.tagFilters.innerHTML = tags.map(function(tag) {
       const label = t(TAG_LABELS[tag]) || tag;
       // 4.3.571: 标签纯文字（emoji 图标已移除）

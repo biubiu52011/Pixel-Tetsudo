@@ -141,10 +141,11 @@
   }
 
   // 条目三类型判定（活动/店铺/景点）——列表路由与详情渲染共用
+  // 4.3.817: 玩乐·体验（play）归店铺口径（用户指示：吃喝玩乐都算店，百货商店按景点）
   function getSpotType(spot) {
     var tags = (spot && spot.tags) || [];
     if (tags.indexOf('event') >= 0) return 'event';
-    if (tags.indexOf('food') >= 0 || tags.indexOf('shopping') >= 0) return 'shop';
+    if (tags.indexOf('food') >= 0 || tags.indexOf('shopping') >= 0 || tags.indexOf('play') >= 0) return 'shop';
     return 'spot';
   }
 
