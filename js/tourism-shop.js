@@ -114,8 +114,8 @@
 
   function renderShopPage(spot, stationKey) {
     var ctx = C.buildContext(spot, stationKey);
-    var html = buildHero(ctx) + buildHeadCard(ctx) + buildInfoCard(ctx)
-      + buildAboutCard(ctx) + buildMenuCard(spot) + buildMapCard(ctx)
+    var html = buildHero(ctx) + buildHeadCard(ctx)
+      + buildMenuCard(spot) + buildInfoCard(ctx) + buildAboutCard(ctx) + buildMapCard(ctx)
       + '<div class="dp-note">' + C.escapeHtml(C.t('detail.ai_note')) + '</div>';
     var container = document.getElementById('articleContainer');
     if (!container) return;
