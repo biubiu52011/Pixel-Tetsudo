@@ -57,22 +57,30 @@
     return '<div class="dp-card"><h3 class="dp-sec-title">' + C.t('detail.about') + '</h3><p class="dp-text">' + C.escapeHtml(ctx.desc) + '</p></div>';
   }
 
-  // ⑤ 推荐菜/价目表：有 menu（[{item,price}]）→ 点评式菜名+点线+橙价；无 → 文本贴士回退
+  // ⑤ 推荐菜/价目表：有 menu（[{item,price,img?}]）→ 点评式"推荐菜"卡片网格（最多10道，有图显图、无图用店名首字徽章，无emoji）；无 → 文本贴士回退
   function buildMenuCard(spot) {
     if (spot.menu && spot.menu.length > 0) {
       var isFood = (spot.tags || []).indexOf('food') >= 0;
       var titleKey = isFood ? 'detail.menu' : 'detail.goods';
-      var html = '<div class="dp-card dp-menu"><h3 class="dp-sec-title">' + C.t(titleKey) + '</h3>';
-      for (var mi = 0; mi < spot.menu.length; mi++) {
-        var it = spot.menu[mi];
+      var list = spot.menu.slice(0, 10);
+      var html = '<div class="dp-card dp-menu">'
+        + '<div class="dp-menu-head"><h3 class="dp-sec-title">' + C.t(titleKey) + '</h3>'
+        + '<span class="dp-menu-count">' + C.t('detail.menu_count').replace('{n}', list.length) + '</span></div>'
+        + '<div class="dp-menu-grid">';
+      var badgeChar = String(spot.name || '').trim().charAt(0) || '食';
+      for (var mi = 0; mi < list.length; mi++) {
+        var it = list[mi];
         var itemText = (spot.menu_i18n && spot.menu_i18n[mi] && spot.menu_i18n[mi][C.state.lang])
           || (spot.menu_i18n && spot.menu_i18n[mi] && spot.menu_i18n[mi].ja)
           || it.item;
-        html += '<div class="dp-menu-row"><span class="dp-menu-item">' + C.escapeHtml(itemText) + '</span>'
-          + '<span class="dp-menu-dots"></span>'
-          + '<span class="dp-menu-price">' + C.escapeHtml(it.price) + '</span></div>';
+        var thumb = it.img
+          ? '<img class="dp-dish-img" src="' + C.escapeHtml(it.img) + '" alt="' + C.escapeHtml(itemText) + '" loading="lazy" data-lightbox="' + C.escapeHtml(it.img) + '">'
+          : '<span class="dp-dish-badge">' + C.escapeHtml(badgeChar) + '</span>';
+        html += '<div class="dp-dish"><div class="dp-dish-thumb">' + thumb + '</div>'
+          + '<div class="dp-dish-name">' + C.escapeHtml(itemText) + '</div>'
+          + '<div class="dp-dish-price">' + C.escapeHtml(it.price) + '</div></div>';
       }
-      return html + '</div>';
+      return html + '</div></div>';
     }
     return '<div class="dp-card">' + C.buildTipsHtml(spot, 'detail.menu', 'menu-list') + '</div>';
   }
