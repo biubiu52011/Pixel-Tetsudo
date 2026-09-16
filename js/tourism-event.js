@@ -1,7 +1,9 @@
 /*
- * Tourism Detail - Event (4.3.805) 活动独立详情页
+ * Tourism Detail - Event (4.3.807) 活动独立详情页
  * 专属样式：開催時期优先（快速条第一槽）+ 入場料信息网格 + 正文 紹介→情報→歴代開催・映像→地図
  * 4.3.805: tips 板块改为"歴代開催・映像"——历届举办时间（pastEditions）+ YouTube 嵌套播放（videos）；无数据的活动回退原 tips
+ * 4.3.806: 新增"次回開催"高亮条（nextDate）
+ * 4.3.807: 次回開催行加"カレンダーに追加"——生成 .ics 下载（nextDateTime 结构化日期；未定日期的活动不显示按钮）
  */
 (function() {
   "use strict";
@@ -9,12 +11,79 @@
   var C = window.TourismDetailCore;
   if (!C) { console.error('[TourismDetailEvent] Core missing'); return; }
 
+  // 当前渲染的活动（供日历下载委托使用）
+  var currentSpot = null;
+
   // i18n 对象（{ja,zh,en,ko}）按当前语言取值，ja 兜底
   function pickI18n(obj) {
     var l = window.currentLang || 'ja';
     if (obj && obj[l]) return obj[l];
     if (obj && obj.ja) return obj.ja;
     return '';
+  }
+
+  // UTC 日期加天数 → YYYYMMDD（全天事件 DTEND 需结束日+1）
+  function addDaysUTC(isoDate, n) {
+    var d = new Date(isoDate + 'T00:00:00Z');
+    d.setUTCDate(d.getUTCDate() + n);
+    return d.toISOString().slice(0, 10);
+  }
+
+  // 生成 .ics 文本（支持多 VEVENT 与 RRULE 重复规则）
+  function buildIcs(spot) {
+    var summary = pickI18n(spot.name_i18n) || spot.name || '';
+    var desc = (spot.desc_i18n && spot.desc_i18n[window.currentLang || 'ja']) || spot.desc || '';
+    var esc = function(v) {
+      return String(v).replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\r?\n/g, '\\n');
+    };
+    var stamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+    var lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//PixelTetsudo//Adachi Tourism//JA', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH'];
+    var base = 'pixeltetsudo-' + String(spot.name).toLowerCase().replace(/[^a-z0-9\u4e00-\u9fff]+/g, '-');
+    (spot.nextDateTime || []).forEach(function(ev, i) {
+      lines.push('BEGIN:VEVENT');
+      lines.push('UID:' + base + '-' + ev.start + '-' + i + '@pixeltetsudo');
+      lines.push('DTSTAMP:' + stamp);
+      if (ev.allDay) {
+        lines.push('DTSTART;VALUE=DATE:' + ev.start.replace(/-/g, ''));
+        lines.push('DTEND;VALUE=DATE:' + addDaysUTC(ev.end, 1).replace(/-/g, ''));
+      } else {
+        lines.push('DTSTART:' + String(ev.start).replace(/[-:]/g, ''));
+        lines.push('DTEND:' + String(ev.end).replace(/[-:]/g, ''));
+      }
+      if (ev.rrule) lines.push('RRULE:' + ev.rrule);
+      lines.push('SUMMARY:' + esc(summary));
+      if (desc) lines.push('DESCRIPTION:' + esc(desc));
+      if (spot.address) lines.push('LOCATION:' + esc(spot.address));
+      lines.push('END:VEVENT');
+    });
+    lines.push('END:VCALENDAR');
+    return lines.join('\r\n');
+  }
+
+  // 触发 .ics 下载
+  function downloadIcs(spot) {
+    var content = buildIcs(spot);
+    var blob = new Blob([content], { type: 'text/calendar;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    var first = (spot.nextDateTime && spot.nextDateTime[0]) ? spot.nextDateTime[0].start : 'schedule';
+    a.href = url;
+    a.download = (spot.name || 'event') + '_' + first + '.ics';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function() { URL.revokeObjectURL(url); }, 1000);
+  }
+
+  // 点击委托：日历添加按钮
+  function bindCalendarDownload() {
+    var container = document.getElementById('articleContainer');
+    if (!container || container.getAttribute('data-cal-bind')) return;
+    container.setAttribute('data-cal-bind', '1');
+    container.addEventListener('click', function(e) {
+      var btn = e.target.closest ? e.target.closest('.btn-add-calendar') : null;
+      if (btn && currentSpot) downloadIcs(currentSpot);
+    });
   }
 
   // 快速信息条：開催時期 + 距離
@@ -45,9 +114,13 @@
     }
     var items = '';
     if (spot.nextDate) {
+      var calBtn = (Array.isArray(spot.nextDateTime) && spot.nextDateTime.length > 0)
+        ? '<button type="button" class="btn-add-calendar">' + C.escapeHtml(C.t('detail.add_calendar')) + '</button>'
+        : '';
       items += '<div class="edition-next">'
         + '<span class="edition-next-label">' + C.t('detail.next_edition') + '</span>'
         + '<span class="edition-next-date">' + C.escapeHtml(pickI18n(spot.nextDate)) + '</span>'
+        + calBtn
         + '</div>';
     }
     if (hasEditions) {
@@ -75,6 +148,7 @@
   }
 
   function renderArticle(spot, stationKey) {
+    currentSpot = spot;
     var ctx = C.buildContext(spot, stationKey);
     var quickInfo = buildQuickInfo(ctx);
     var infoHtml = buildInfoGrid(ctx);
@@ -84,9 +158,12 @@
     C.renderInto(ctx, quickInfo, body);
   }
 
+  bindCalendarDownload();
+
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", function() { C.start(renderArticle); });
+    document.addEventListener("DOMContentLoaded", function() { bindCalendarDownload(); C.start(renderArticle); });
   } else {
+    bindCalendarDownload();
     C.start(renderArticle);
   }
 })();

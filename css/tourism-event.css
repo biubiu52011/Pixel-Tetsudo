@@ -19,6 +19,15 @@
 }
 .article-content--event .edition-next-date { font-weight: 700; font-size: 15px; color: #222; }
 
+/* 4.3.807 カレンダーに追加 */
+.article-content--event .btn-add-calendar {
+  margin-left: auto; border: 0; cursor: pointer;
+  padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 700;
+  background: #FF4500; color: #fff; transition: opacity 0.15s;
+}
+.article-content--event .btn-add-calendar:hover { opacity: 0.85; }
+.article-content--event .btn-add-calendar:active { transform: scale(0.97); }
+
 /* 4.3.805 歴代開催・映像 */
 .article-content--event .edition-list { display: flex; flex-direction: column; gap: 8px; margin: 4px 0 14px; }
 .article-content--event .edition-item {
