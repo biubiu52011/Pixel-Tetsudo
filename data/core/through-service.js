@@ -54,6 +54,10 @@
     "Keisei": ["Asakusa", "KeiseiOshiage", "NaritaSkyAccess"],
     "KeiseiOshiage": ["Asakusa", "Keisei"],
     "NaritaSkyAccess": ["Keisei"],
+    // 京急支線（空港線/久里浜線/逗子線 → 本線直通）
+    "KeikyuAirport": ["Keikyu"],
+    "KeikyuKurihama": ["Keikyu"],
+    "KeikyuZushi": ["Keikyu"],
     // 相鉄
     "SotetsuMain": ["Saikyo", "TokyuToyoko", "SotetsuIzumino", "SotetsuShin-Yokohama"],
     "SotetsuIzumino": ["SotetsuMain"],
@@ -119,7 +123,10 @@
     "Hibiya": { "TobuSkytree": ["Kita-Senju"], "TobuIsesaki": ["Kita-Senju"] },
     // 浅草・京成・京急
     "Asakusa": { "Keikyu": ["Sengakuji"], "Keisei": ["Oshiage"], "KeiseiOshiage": ["Oshiage"] },
-    "Keikyu": { "Asakusa": ["Sengakuji"] },
+    "Keikyu": { "Asakusa": ["Sengakuji"], "KeikyuAirport": ["Keikyu-Kamata"], "KeikyuKurihama": ["Horinouchi"], "KeikyuZushi": ["Kanazawa-Hakkei"] },
+    "KeikyuAirport": { "Keikyu": ["Keikyu-Kamata"] },
+    "KeikyuKurihama": { "Keikyu": ["Horinouchi"] },
+    "KeikyuZushi": { "Keikyu": ["Kanazawa-Hakkei"] },
     "Keisei": { "Asakusa": ["Oshiage"], "KeiseiOshiage": ["Aoto"], "NaritaSkyAccess": ["Keisei-Takasago"] },
     "KeiseiOshiage": { "Asakusa": ["Oshiage"], "Keisei": ["Aoto"] },
     "NaritaSkyAccess": { "Keisei": ["Keisei-Takasago"] },
