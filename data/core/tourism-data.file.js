@@ -181,7 +181,7 @@ window.RAILWAY_TOURISM = {
       "desc_i18n": {
         "ja": "古民家を改装した観光案内所。無料で地図がもらえるし、スタッフのおじさんが色々親切に教えてくれる。散歩の起点に最適。",
         "zh": "传统民居改建的观光案内所。可以免费拿地图，工作人员大叔会很亲切地介绍各种信息。适合作为散步起点。",
-        "en": "A tourist info center renovated from an old folk house. You can get free maps, and the staff are genuinely helpful. A great starting point for a walk.",
+        "en": "Tourist info center in a renovated old house; free maps and helpful staff, great start for a walk.",
         "ko": "고택을 개조한 관광안내소. 무료로 지도를 받을 수 있고 직원분들이 친절하게 알려주세요. 산책 시작점으로 최적이에요."
       },
       "hours_i18n": {
@@ -251,7 +251,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "宿場町通り商店街",
         "zh": "宿场町通商店街",
-        "en": "Shukubamachi-dori Shopping Street",
+        "en": "Shukubamachi-dori",
         "ko": "슈쿠바마치도리 상점가"
       },
       "desc_i18n": {
@@ -327,19 +327,19 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "横山家住宅",
         "zh": "横山家住宅",
-        "en": "Yokoyama Family Residence",
+        "en": "Yokoyama House",
         "ko": "요코야마 가옥"
       },
       "desc_i18n": {
         "ja": "江戸後期に建てられた貴重な家屋。正門の柱には、江戸末期の戦争でついたという日本刀の斬り傷が今も残っている。外観だけでも見る価値あり。",
         "zh": "江户后期建造的珍贵建筑。正门柱子上至今还留着江户末期战争中日本刀砍过的伤痕。光是看外观就值得一去。",
-        "en": "A valuable house built in the late Edo period. The front gate pillar still bears sword cuts from a battle at the end of the Edo era. Worth seeing even just from the outside.",
+        "en": "Late Edo period house; front gate pillar still bears sword cuts from the end of the era, worth seeing outside.",
         "ko": "에도 후기에 지어진 귀중한 가옥. 정문 기둥에는 에도 말기 전쟁으로 생긴 일본도 칼자국이 아직 남아있어요. 외관만 봐도 볼 가치가 있어요."
       },
       "hours_i18n": {
         "ja": "外観のみ公開（内部非公開）",
         "zh": "仅外观开放（内部不开放）",
-        "en": "Exterior only（Interior not open）",
+        "en": "Exterior only",
         "ko": "외관만 공개（내부 비공개）"
       },
       "fee_i18n": {
@@ -413,7 +413,7 @@ window.RAILWAY_TOURISM = {
       "desc_i18n": {
         "ja": "荒川の河川敷にある広場。視界が開けていて、電車とスカイツリーと夕日を一緒に撮れる隠れた名所。夕暮れ時が特に綺麗。",
         "zh": "荒川河堤上的广场。视野开阔，是能同时拍到电车、晴空塔和夕阳的小众名所。黄昏时分特别美。",
-        "en": "A plaza on the Arakawa riverbed. Open views make it a hidden spot for shooting trains, Skytree, and sunsets all together. Especially beautiful at dusk.",
+        "en": "Plaza on the Arakawa riverbed; open views for photos of trains, Skytree, and sunsets, best at dusk.",
         "ko": "아라카와 강둑에 있는 광장. 시야가 탁 트여 있어 전철과 스카이트리, 석양을 한 번에 담을 수 있는 숨은 명소. 해 질 녘이 특히 아름다워요."
       },
       "hours_i18n": {
@@ -601,9 +601,9 @@ window.RAILWAY_TOURISM = {
           "屋顶庭院是小众好去处"
         ],
         "en": [
-          "Direct east exit access",
-          "Well-stocked basement food hall",
-          "Rooftop garden is a hidden gem"
+          "East exit",
+          "Basement food hall",
+          "Rooftop garden"
         ],
         "ko": [
           "동쪽 출구 직결",
@@ -719,7 +719,7 @@ window.RAILWAY_TOURISM = {
       "desc_i18n": {
         "ja": "世界最大級のアニメグッズ専門店。全9階建てで、二次元好きにはたまらない聖地。期間限定のイベントやコラボグッズも頻繁に開催されている。",
         "zh": "世界最大级的动漫周边专卖店。全9层，是二次元爱好者的圣地。期间限定活动和联名周边也频繁举办。",
-        "en": "One of the worlds largest anime merchandise stores. 9 floors total — a sacred place for anime fans. Limited-time events and collaboration goods happen frequently.",
+        "en": "One of the largest anime merchandise stores; 9 floors with frequent limited-time events and collabs.",
         "ko": "세계 최대 규모의 애니메이션 굿즈 전문점. 총 9층으로, 2차원 팬이라면 꼭 가봐야 할 성지. 기간 한정 이벤트와 콜라보 굿즈도 자주 열려요."
       },
       "hours_i18n": {
@@ -795,7 +795,7 @@ window.RAILWAY_TOURISM = {
       "desc_i18n": {
         "ja": "サンシャインシティの脇にある通り。女性向けのアニメショップや同人誌店、執事喫茶が集まっていて、独特のカルチャーを感じられる。",
         "zh": "阳光城旁边的一条街道。聚集了面向女性的动漫周边店、同人志商店和执事咖啡厅，能感受到独特的文化氛围。",
-        "en": "A street next to Sunshine City. Lined with anime shops targeting women, doujinshi stores, and butler cafes — you can feel a unique subculture here.",
+        "en": "Street next to Sunshine City; anime shops for women, doujinshi stores, butler cafes, unique subculture.",
         "ko": "선샤인 시티 옆에 있는 거리. 여성 대상 애니메이션 숍, 동인지 숍, 집사 카페가 모여 있어 독특한 서브컬처를 느낄 수 있어요."
       },
       "hours_i18n": {
@@ -865,13 +865,13 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "池袋西口公園",
         "zh": "池袋西口公园 (IWGP)",
-        "en": "Ikebukuro West Exit Park (IWGP)",
+        "en": "Ikebukuro West Park",
         "ko": "이케부쿠로 서구 공원 (IWGP)"
       },
       "desc_i18n": {
         "ja": "小説とドラマで有名になった場所。今は大型野外劇場とおしゃれなカフェがある現代的なアート広場に生まれ変わっている。昼も夜も雰囲気がいい。",
         "zh": "因小说和电视剧而出名的地方。现在已经改造成有大型露天剧场和时尚咖啡厅的现代艺术广场。白天夜晚氛围都很好。",
-        "en": "Made famous by a novel and TV drama. Now reborn as a modern art plaza with a large outdoor theater and stylish cafes. Great atmosphere day and night.",
+        "en": "Famous from a novel and TV drama; now a modern art plaza with outdoor theater and cafes.",
         "ko": "소설과 드라마로 유명해진 곳. 지금은 대형 야외 극장과 세련된 카페가 있는 현대적인 아트 광장으로 거듭났어요. 낮에도 밤에도 분위기가 좋아요."
       },
       "hours_i18n": {
@@ -1023,7 +1023,7 @@ window.RAILWAY_TOURISM = {
       "desc_i18n": {
         "ja": "南千住で一番大きな複合商業施設。スーパー、ドラッグストア、ユニクロにリーズナブルなレストランと、日常の買い物はここでだいたい済む。",
         "zh": "南千住最大的复合型商业设施。超市、药妆店、优衣库和平价餐厅，日常购物在这里基本都能搞定。",
-        "en": "The largest commercial complex in Minami-Senju. Supermarket, drugstore, Uniqlo, and affordable restaurants — you can handle most daily shopping here.",
+        "en": "Largest complex in Minami-Senju; supermarket, drugstore, Uniqlo, affordable restaurants for daily shopping.",
         "ko": "미나미센쥬에서 가장 큰 복합 상업 시설. 슈퍼, 드럭스토어, 유니클로에 저렴한 레스토랑까지, 일상 쇼핑은 여기서 대부분 해결돼요."
       },
       "hours_i18n": {
@@ -1099,7 +1099,7 @@ window.RAILWAY_TOURISM = {
       "desc_i18n": {
         "ja": "駅に直結していて便利。イタリアンや定食、生活雑貨店など、気軽に入れる飲食店が中心。ちょっとした食事や買い物にちょうどいい。",
         "zh": "车站直结很方便。以意式餐厅、定食、生活杂货店等轻松进入的餐饮店为主。吃个便饭或买点东西正好。",
-        "en": "Conveniently connected directly to the station. Mostly casual eateries like Italian restaurants, teishoku places, and lifestyle goods shops. Perfect for a quick meal or small shopping trip.",
+        "en": "Directly connected to the station; mostly casual eateries and lifestyle shops, great for quick meals or shopping.",
         "ko": "역과 직결되어 편리해요. 이탈리안이나 정식, 생활 잡화점 등 가볍게 들어갈 수 있는 식당이 중심. 가벼운 식사나 쇼핑에 딱 좋아요."
       },
       "hours_i18n": {
@@ -1132,9 +1132,9 @@ window.RAILWAY_TOURISM = {
           "也能买生活杂货"
         ],
         "en": [
-          "Direct station access",
-          "Well-stocked with eateries",
-          "Lifestyle goods also available"
+          "Direct to station",
+          "Eateries",
+          "Lifestyle goods"
         ],
         "ko": [
           "역 직결",
@@ -1174,7 +1174,7 @@ window.RAILWAY_TOURISM = {
       "desc_i18n": {
         "ja": "隅田川沿いに広がる大きな公園。スカイツリーが真正面に見えて、夕日がめちゃくちゃ綺麗。ジョギングする人や犬の散歩する人で賑わっている。",
         "zh": "沿着隅田川展开的大公园。晴空塔就在正前方，夕阳超美。跑步和遛狗的人很多，很热闹。",
-        "en": "A large park spreading along the Sumida River. Skytree is visible right in front, and the sunsets are stunning. Bustling with joggers and dog walkers.",
+        "en": "Large park along the Sumida River; Skytree visible up front, stunning sunsets, busy with joggers.",
         "ko": "스미다 강가에 펼쳐진 큰 공원. 스카이트리가 정면에 보이고 석양이 정말 아름다워요. 조깅하는 사람과 강아지 산책하는 사람으로 붐비고 있어요."
       },
       "hours_i18n": {
@@ -1255,7 +1255,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "境内自由参拝",
         "zh": "院内自由参拜",
-        "en": "Free worship on grounds",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -1330,7 +1330,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "境内自由参拝",
         "zh": "院内自由参拜",
-        "en": "Free worship on grounds",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -1403,7 +1403,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "境内自由参拝",
         "zh": "院内自由参拜",
-        "en": "Free worship on grounds",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -1548,7 +1548,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "境内自由参拝",
         "zh": "院内自由参拜",
-        "en": "Free worship on grounds",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -1610,7 +1610,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "千住桜堤",
         "zh": "千住樱堤",
-        "en": "Senju Sakura Tsutsumi",
+        "en": "Senju Sakura",
         "ko": "센주 사쿠라 츠츠미"
       },
       "desc_i18n": {
@@ -1829,7 +1829,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "境内自由参拝",
         "zh": "院内自由参拜",
-        "en": "Free worship on grounds",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -1904,7 +1904,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "常時公開（屋外）",
         "zh": "常年公开（室外）",
-        "en": "Always open (outdoor)",
+        "en": "Open",
         "ko": "상시 공개(야외)"
       },
       "fee_i18n": {
@@ -1975,7 +1975,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "境内自由参拝",
         "zh": "院内自由参拜",
-        "en": "Free worship on grounds",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -2257,7 +2257,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "柳原商栄会商店街",
         "zh": "柳原商荣会商店街",
-        "en": "Yanagihara Shoueikai Shopping Street",
+        "en": "Yanagihara Shopping St.",
         "ko": "야나기하라 쇼에이카이 상점가"
       },
       "desc_i18n": {
@@ -2702,7 +2702,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "南池袋公園",
         "zh": "南池袋公园",
-        "en": "Minami-Ikebukuro Park",
+        "en": "Minami-Ike Park",
         "ko": "미나미이케부쿠로 공원"
       },
       "desc_i18n": {
@@ -3015,7 +3015,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -3273,7 +3273,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -3326,7 +3326,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "西加平神社",
         "zh": "西加平神社",
-        "en": "Nishikatahira Shrine",
+        "en": "Nishikatahira",
         "ko": "니시카타히라 신사"
       },
       "desc_i18n": {
@@ -3338,7 +3338,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -3403,7 +3403,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -3468,7 +3468,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -3533,7 +3533,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -3598,7 +3598,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -3663,7 +3663,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -3728,7 +3728,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -3781,7 +3781,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "東岳寺",
         "zh": "东岳寺",
-        "en": "Tokugaku-ji Temple",
+        "en": "Tokugakuji",
         "ko": "도가쿠지"
       },
       "desc_i18n": {
@@ -3793,7 +3793,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -3846,7 +3846,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "実性寺",
         "zh": "实性寺",
-        "en": "Jissho-ji Temple",
+        "en": "Jissoji",
         "ko": "잇쇼지"
       },
       "desc_i18n": {
@@ -3858,7 +3858,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -3911,7 +3911,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "長建寺",
         "zh": "长建寺",
-        "en": "Choken-ji Temple",
+        "en": "Chokenji",
         "ko": "조겐지"
       },
       "desc_i18n": {
@@ -3923,7 +3923,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -3988,7 +3988,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -4053,7 +4053,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -4106,7 +4106,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "浄光寺",
         "zh": "净光寺",
-        "en": "Joko-ji Temple",
+        "en": "Jokoji",
         "ko": "조코지"
       },
       "desc_i18n": {
@@ -4118,7 +4118,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -4171,7 +4171,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "法受寺",
         "zh": "法受寺",
-        "en": "Hojiu-ji Temple",
+        "en": "Hojyuuji",
         "ko": "호주지"
       },
       "desc_i18n": {
@@ -4183,7 +4183,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -4236,7 +4236,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "金蔵寺",
         "zh": "金藏寺",
-        "en": "Konzo-ji Temple",
+        "en": "Konzoji",
         "ko": "곤조지"
       },
       "desc_i18n": {
@@ -4248,7 +4248,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -4313,7 +4313,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -4366,7 +4366,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "南光寺",
         "zh": "南光寺",
-        "en": "Nanko-ji Temple",
+        "en": "Nanko",
         "ko": "난코지"
       },
       "desc_i18n": {
@@ -4378,7 +4378,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -4431,7 +4431,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "源正寺",
         "zh": "源正寺",
-        "en": "Gensho-ji Temple",
+        "en": "Genshoji",
         "ko": "겐쇼지"
       },
       "desc_i18n": {
@@ -4443,7 +4443,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -4508,7 +4508,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -4573,7 +4573,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -4638,7 +4638,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -4691,7 +4691,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "炎天寺",
         "zh": "炎天寺",
-        "en": "Enten-ji Temple",
+        "en": "Entenji",
         "ko": "엔텐지"
       },
       "desc_i18n": {
@@ -4703,7 +4703,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -4768,7 +4768,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -4833,7 +4833,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -4898,7 +4898,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -4951,7 +4951,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "善立寺",
         "zh": "善立寺",
-        "en": "Zenryu-ji Temple",
+        "en": "Zenriyuuji",
         "ko": "젠류지"
       },
       "desc_i18n": {
@@ -4963,7 +4963,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -5028,7 +5028,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -5081,7 +5081,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "瑞応寺",
         "zh": "瑞应寺",
-        "en": "Zuio-ji Temple",
+        "en": "Zuioji",
         "ko": "즈이오지"
       },
       "desc_i18n": {
@@ -5093,7 +5093,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -5146,7 +5146,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "恵明寺",
         "zh": "惠明寺",
-        "en": "Emei-ji Temple",
+        "en": "Emeiji",
         "ko": "에메이지"
       },
       "desc_i18n": {
@@ -5158,7 +5158,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -5223,7 +5223,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -5288,7 +5288,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -5341,7 +5341,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "満願寺",
         "zh": "满愿寺",
-        "en": "Mangan-ji Temple",
+        "en": "Manganji",
         "ko": "만간지"
       },
       "desc_i18n": {
@@ -5353,7 +5353,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -5418,7 +5418,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -5483,7 +5483,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -5548,7 +5548,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -5601,7 +5601,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "関原八幡神社",
         "zh": "关原八幡神社",
-        "en": "Sekihara Hachiman Shrine",
+        "en": "Sekihara Hachiman",
         "ko": "세키하라 하치만 신사"
       },
       "desc_i18n": {
@@ -5613,7 +5613,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -5666,7 +5666,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "梅島天満宮",
         "zh": "梅岛天满宫",
-        "en": "Umejima Tenmangu Shrine",
+        "en": "Umejima Tenmangu",
         "ko": "우메지마 덴만구"
       },
       "desc_i18n": {
@@ -5678,7 +5678,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -5807,7 +5807,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -5872,7 +5872,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -5937,7 +5937,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -6002,7 +6002,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -6055,7 +6055,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "白幡八幡神社",
         "zh": "白幡八幡神社",
-        "en": "Shirahata Hachiman Shrine",
+        "en": "Shirahata Hachiman",
         "ko": "시라하타 하치만 신사"
       },
       "desc_i18n": {
@@ -6067,7 +6067,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -6120,7 +6120,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "常護寺",
         "zh": "常护寺",
-        "en": "Jogo-ji Temple",
+        "en": "Jogoji",
         "ko": "조고지"
       },
       "desc_i18n": {
@@ -6132,7 +6132,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -6197,7 +6197,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -6251,7 +6251,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "足立の花火",
         "zh": "足立花火大会",
-        "en": "Adachi Fireworks Festival",
+        "en": "Adachi Fireworks",
         "ko": "아다치 불꽃놀이"
       },
       "desc_i18n": {
@@ -6459,7 +6459,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -6524,7 +6524,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -6577,7 +6577,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "六月八幡神社",
         "zh": "六月八幡神社",
-        "en": "Rokugatsu Hachiman Shrine",
+        "en": "Rokugatsu Hachiman",
         "ko": "로쿠가츠 하치만 신사"
       },
       "desc_i18n": {
@@ -6589,7 +6589,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -6654,7 +6654,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -6719,7 +6719,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -6784,7 +6784,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -6849,7 +6849,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -6914,7 +6914,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -6968,7 +6968,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "閻魔祭",
         "zh": "阎魔祭",
-        "en": "Enma Festival",
+        "en": "Enma",
         "ko": "엔마 축제"
       },
       "desc_i18n": {
@@ -7123,7 +7123,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -7188,7 +7188,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -7253,7 +7253,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "参拝自由（境内）",
         "zh": "院内自由参拜",
-        "en": "Free to worship (within the grounds)",
+        "en": "Free (grounds)",
         "ko": "경내 자유 참배"
       },
       "fee_i18n": {
@@ -7320,7 +7320,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "外苑は常時開放",
         "zh": "外苑全天开放",
-        "en": "Outer Garden open at all times",
+        "en": "Outer Garden",
         "ko": "외원은 상시 개방"
       },
       "fee_i18n": {
@@ -7384,7 +7384,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "東京駅丸の内駅舎",
         "zh": "东京站丸之内站房",
-        "en": "Tokyo Station Marunouchi Building",
+        "en": "Tokyo Sta Marunouchi Bldg",
         "ko": "도쿄역 마루노우치 역사"
       },
       "desc_i18n": {
@@ -7396,7 +7396,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "駅舎は常時見学可",
         "zh": "站房全天可参观",
-        "en": "Station building open at all times",
+        "en": "Station building",
         "ko": "역사는 상시 견학 가능"
       },
       "fee_i18n": {
@@ -7460,7 +7460,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "日本橋",
         "zh": "日本桥",
-        "en": "Nihonbashi Bridge",
+        "en": "Nihonbashi",
         "ko": "니혼바시"
       },
       "desc_i18n": {
@@ -7472,7 +7472,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "常時",
         "zh": "全天",
-        "en": "Always open",
+        "en": "Open",
         "ko": "상시"
       },
       "fee_i18n": {
@@ -7548,7 +7548,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "9:00～23:00（展望台）",
         "zh": "9:00～23:00（瞭望台）",
-        "en": "9:00–23:00 (observation deck)",
+        "en": "9:00-23:00",
         "ko": "9:00~23:00（전망대）"
       },
       "fee_i18n": {
@@ -7624,7 +7624,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "展望台 10:00～22:00",
         "zh": "瞭望台 10:00～22:00",
-        "en": "Observation deck 10:00–22:00",
+        "en": "10:00-22:00",
         "ko": "전망대 10:00~22:00"
       },
       "fee_i18n": {
@@ -7688,7 +7688,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "東京都庁展望室",
         "zh": "东京都厅展望室",
-        "en": "Tokyo Metropolitan Government Building Observatory",
+        "en": "Tokyo Metro Gov Bldg",
         "ko": "도쿄도청 전망실"
       },
       "desc_i18n": {
@@ -7764,7 +7764,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "新宿御苑",
         "zh": "新宿御苑",
-        "en": "Shinjuku Gyoen National Garden",
+        "en": "Shinjuku Gyoen",
         "ko": "신주쿠 교엔"
       },
       "desc_i18n": {
@@ -7852,7 +7852,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "常時（交差点）",
         "zh": "全天（路口）",
-        "en": "Always open (crossing)",
+        "en": "Open",
         "ko": "상시（교차로）"
       },
       "fee_i18n": {
@@ -8069,7 +8069,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "小石川後楽園",
         "zh": "小石川后乐园",
-        "en": "Koishikawa Korakuen Garden",
+        "en": "Koishikawa Korakuen",
         "ko": "코이시카와 코라쿠엔"
       },
       "desc_i18n": {
@@ -8310,7 +8310,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "競り見学 5:00～（予約制）",
         "zh": "拍卖参观 5:00起（预约制）",
-        "en": "Auction viewing from 5:00 (reservation required)",
+        "en": "From 5:00 (res.)",
         "ko": "경매 견학 5:00~（예약제）"
       },
       "fee_i18n": {
@@ -8451,7 +8451,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "目黒川（桜並木）",
         "zh": "目黑川（樱花道）",
-        "en": "Meguro River (Cherry Blossom Promenade)",
+        "en": "Meguro Rvr (Cherry Blossom)",
         "ko": "메구로가와（벚꽃길）"
       },
       "desc_i18n": {
@@ -8463,7 +8463,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "常時",
         "zh": "全天",
-        "en": "Always open",
+        "en": "Open",
         "ko": "상시"
       },
       "fee_i18n": {
@@ -8604,7 +8604,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "池上本門寺",
         "zh": "池上本门寺",
-        "en": "Ikegami Honmonji Temple",
+        "en": "Ikegami Honmonji",
         "ko": "이케가미 혼몬지"
       },
       "desc_i18n": {
@@ -8920,7 +8920,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "常時",
         "zh": "全天",
-        "en": "Always open",
+        "en": "Open",
         "ko": "상시"
       },
       "fee_i18n": {
@@ -9227,7 +9227,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "常時",
         "zh": "全天",
-        "en": "Always open",
+        "en": "Open",
         "ko": "상시"
       },
       "fee_i18n": {
@@ -9292,7 +9292,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "旧古河庭園",
         "zh": "旧古河庭园",
-        "en": "Former Furukawa Garden",
+        "en": "Furukawa Garden",
         "ko": "구 후루카와 정원"
       },
       "desc_i18n": {
@@ -9521,7 +9521,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "増上寺",
         "zh": "增上寺",
-        "en": "Zojoji Temple",
+        "en": "Zojoji",
         "ko": "조조지 절"
       },
       "desc_i18n": {
@@ -9761,7 +9761,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "終日開放（一部施設あり）",
         "zh": "全天开放（部分设施）",
-        "en": "Open all day (some facilities)",
+        "en": "Open all day (some)",
         "ko": "종일 개방（일부 시설）"
       },
       "fee_i18n": {
@@ -9978,7 +9978,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "六義園",
         "zh": "六义园",
-        "en": "Rikugien Garden",
+        "en": "Rikugien",
         "ko": "리쿠기엔 정원"
       },
       "desc_i18n": {
@@ -10066,7 +10066,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "境内自由（社務所 9:00-17:00）",
         "zh": "院内自由（社务所 9:00-17:00）",
-        "en": "Grounds free (office 9:00-17:00)",
+        "en": "Free (grounds)",
         "ko": "경내 자유（사무소 9:00-17:00）"
       },
       "fee_i18n": {
@@ -10130,7 +10130,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "谷中銀座商店街",
         "zh": "谷中银座商店街",
-        "en": "Yanaka Ginza Shopping Street",
+        "en": "Yanaka Ginza",
         "ko": "야나카 긴자 상점가"
       },
       "desc_i18n": {
@@ -10207,7 +10207,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "国立西洋美術館",
         "zh": "国立西洋美术馆",
-        "en": "National Museum of Western Art",
+        "en": "Western Art Museum",
         "ko": "국립서양미술관"
       },
       "desc_i18n": {
@@ -10360,7 +10360,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "亀戸天神社",
         "zh": "龟户天神社",
-        "en": "Kameido Tenjin Shrine",
+        "en": "Kameido Tenjin",
         "ko": "가메이도 텐진 신사"
       },
       "desc_i18n": {
@@ -10436,7 +10436,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "泉岳寺",
         "zh": "泉岳寺",
-        "en": "Sengakuji Temple",
+        "en": "Sengakuji",
         "ko": "센가쿠지 절"
       },
       "desc_i18n": {
@@ -10448,7 +10448,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "境内 7:00-17:00（季節により変動）",
         "zh": "院内7:00-17:00（随季节变动）",
-        "en": "Grounds 7:00-17:00 (varies by season)",
+        "en": "7:00-17:00",
         "ko": "경내 7:00-17:00（계절에 따라 변동）"
       },
       "fee_i18n": {
@@ -10512,7 +10512,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "豪徳寺",
         "zh": "豪德寺",
-        "en": "Gotokuji Temple",
+        "en": "Gotokuji",
         "ko": "고토쿠지 절"
       },
       "desc_i18n": {
@@ -10524,7 +10524,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "境内 9:00-17:00（招き猫の奉納所も同時間）",
         "zh": "院内9:00-17:00（招财猫奉纳所同期）",
-        "en": "Grounds 9:00-17:00 (cat offering area same hours)",
+        "en": "9:00-17:00",
         "ko": "경내 9:00-17:00（마네키네코 봉납소 동일）"
       },
       "fee_i18n": {
@@ -10752,7 +10752,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "終日開放（一部施設あり）",
         "zh": "全天开放（部分设施）",
-        "en": "Open all day (some facilities)",
+        "en": "Open all day (some)",
         "ko": "종일 개방（일부 시설）"
       },
       "fee_i18n": {
@@ -11200,7 +11200,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "アメヤ横丁",
         "zh": "阿美横丁",
-        "en": "Ameya-Yokocho (Ameyoko)",
+        "en": "Ameyoko",
         "ko": "아메요코（아메야 요코초）"
       },
       "desc_i18n": {
@@ -11352,7 +11352,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "戸越銀座商店街",
         "zh": "户越银座商店街",
-        "en": "Togoshi Ginza Shopping Street",
+        "en": "Togoshi Ginza",
         "ko": "토고시 긴자 상점가"
       },
       "desc_i18n": {
@@ -11428,7 +11428,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "砂町銀座商店街",
         "zh": "砂町银座商店街",
-        "en": "Sunamachi Ginza Shopping Street",
+        "en": "Sunamachi Ginza",
         "ko": "스나마치 긴자 상점가"
       },
       "desc_i18n": {
@@ -12637,7 +12637,7 @@ window.RAILWAY_TOURISM = {
       "hours": {
         "ja": "終日開園（自由散策）",
         "zh": "全天开放（自由散步）",
-        "en": "Open all day (free stroll)",
+        "en": "Open all day",
         "ko": "종일 개장 (자유 산책)"
       },
       "fee": "入園無料",
@@ -12661,7 +12661,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "終日開園（自由散策）",
         "zh": "全天开放（自由散步）",
-        "en": "Open all day (free stroll)",
+        "en": "Open all day",
         "ko": "종일 개장 (자유 산책)"
       },
       "fee_i18n": {
@@ -13382,7 +13382,7 @@ window.RAILWAY_TOURISM = {
       "hours": {
         "ja": "見学ギャラリー 土日祝休",
         "zh": "参观廊周六日祝休",
-        "en": "Observation gallery closed weekends & holidays",
+        "en": "Closed wknd/hol",
         "ko": "견학 갤러리 토·일·공휴일 휴관"
       },
       "fee": "入場無料（体験自由）",
@@ -13406,7 +13406,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "見学ギャラリー 土日祝休",
         "zh": "参观廊周六日祝休",
-        "en": "Observation gallery closed weekends & holidays",
+        "en": "Closed wknd/hol",
         "ko": "견학 갤러리 토·일·공휴일 휴관"
       },
       "fee_i18n": {
@@ -14577,7 +14577,7 @@ window.RAILWAY_TOURISM = {
       "hours": {
         "ja": "10:30～19:00（無休）",
         "zh": "10:30–19:00（无休）",
-        "en": "10:30–19:00 (open daily)",
+        "en": "10:30-19:00",
         "ko": "10:30~19:00 (연중무휴)"
       },
       "fee": "曲げわっぱ弁当箱 12,000円〜",
@@ -14670,7 +14670,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "軽トラ市",
         "zh": "轻卡市集",
-        "en": "Keitora-ichi (Light-Truck Market)",
+        "en": "Keitora Market",
         "ko": "경트럭 시장"
       },
       "desc_i18n": {
@@ -15106,7 +15106,7 @@ window.RAILWAY_TOURISM = {
       "hours": {
         "ja": "詳細は公式HP参照（不定休）",
         "zh": "详见官网（不定休）",
-        "en": "See official site (irregular)",
+        "en": "See site",
         "ko": "상세는 공식 HP 참조 (부정휴무)"
       },
       "fee": "レッスン 2,000円〜（グループ）",
@@ -15455,10 +15455,10 @@ window.RAILWAY_TOURISM = {
         "ko": "10:00~19:00 (목요일 휴무)"
       },
       "fee_i18n": {
-        "ja": "予算1,000円前後（ケーキ・カフェ）",
+        "ja": "一人あたり1,000円前後（ケーキ・カフェ）",
         "zh": "人均约1000日元（蛋糕·咖啡）",
-        "en": "~1,000 JPY (cake / cafe)",
-        "ko": "약 1,000엔 (케이크·카페)"
+        "en": "approx. 1,000 JPY per person (cake / cafe)",
+        "ko": "1인당 약 1,000엔 (케이크·카페)"
       },
       "bestTime_i18n": {
         "ja": "昼～夕方",
@@ -17352,7 +17352,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "魔法の文学館",
         "zh": "魔法文学馆",
-        "en": "Mahō no Bungakukan (Magical Literature Museum)",
+        "en": "Magic Literature Museum",
         "ko": "마법의 문학관"
       },
       "desc_i18n": {
@@ -17760,7 +17760,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "8:00～19:00／年中無休",
         "zh": "8:00~19:00／全年无休",
-        "en": "8:00-19:00 / open daily",
+        "en": "8:00-19:00",
         "ko": "8:00-19:00 / 연중무휴"
       },
       "fee_i18n": {
@@ -17969,7 +17969,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "8:30～21:00／年中無休",
         "zh": "8:30~21:00／全年无休",
-        "en": "8:30-21:00 / open daily",
+        "en": "8:30-21:00",
         "ko": "8:30-21:00 / 연중무휴"
       },
       "fee_i18n": {
@@ -18120,7 +18120,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "17:00～／不定休",
         "zh": "17:00起／不定期休",
-        "en": "From 17:00 / irregular holidays",
+        "en": "From 17:00",
         "ko": "17:00~ / 부정기 휴무"
       },
       "fee_i18n": {
@@ -18381,7 +18381,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "不定期（主に日曜）",
         "zh": "不定期（主要周日）",
-        "en": "Irregular (mostly Sundays)",
+        "en": "Irregular",
         "ko": "부정기(주로 일요일)"
       },
       "fee_i18n": {
@@ -18774,7 +18774,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "9:30～18:00／日曜休み",
         "zh": "9:30~18:00／周日休",
-        "en": "9:30-18:00 / closed Sun",
+        "en": "9:30-18:00",
         "ko": "9:30-18:00 / 일요일 휴무"
       },
       "fee_i18n": {
@@ -18837,7 +18837,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "旧大塚家住宅",
         "zh": "旧大冢家住宅",
-        "en": "Former Otsuka Family Residence",
+        "en": "Otsuka House",
         "ko": "구 오츠카 가옥"
       },
       "desc_i18n": {
@@ -18988,7 +18988,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "常夜灯公園",
         "zh": "常夜灯公园",
-        "en": "Jonyoko (Night-Lantern) Park",
+        "en": "Jonyoko Park",
         "ko": "조초등 공원"
       },
       "desc_i18n": {
@@ -19446,7 +19446,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "国立公文書館",
         "zh": "国立公文书馆",
-        "en": "National Archives of Japan",
+        "en": "Japan Archives",
         "ko": "국립공문서관"
       },
       "desc_i18n": {
@@ -19521,7 +19521,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "毎日書道図書館",
         "zh": "每日书道图书馆",
-        "en": "Mainichi Calligraphy Library",
+        "en": "Mainichi Calligraphy Lib.",
         "ko": "마이니치 서예 도서관"
       },
       "desc_i18n": {
@@ -19596,7 +19596,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "最高裁判所",
         "zh": "最高法院",
-        "en": "Supreme Court of Japan",
+        "en": "Supreme Court",
         "ko": "최고재판소"
       },
       "desc_i18n": {
@@ -19929,7 +19929,7 @@ window.RAILWAY_TOURISM = {
         {
           "ja": "猫FACE（猫形最中）",
           "zh": "猫脸最中",
-          "en": "Cat FACE (cat-shaped monaka)",
+          "en": "Neko FACE (monaka)",
           "ko": "캣 FACE(고양이 모나카)"
         },
         {
@@ -20717,7 +20717,7 @@ window.RAILWAY_TOURISM = {
         {
           "ja": "味玉",
           "zh": "溏心蛋",
-          "en": "Ajitama (seasoned egg)",
+          "en": "Ajitama (egg)",
           "ko": "아지타마"
         }
       ]
@@ -21052,7 +21052,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "11:00～翌5:00／無休",
         "zh": "11:00~次日5:00／无休",
-        "en": "11:00-05:00 next day / open",
+        "en": "11:00-5:00",
         "ko": "11:00~익일 5:00 / 무휴"
       },
       "fee_i18n": {
@@ -21420,11 +21420,11 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "10:00～20:00／不定休",
         "zh": "10:00~20:00／不定期休",
-        "en": "10:00-20:00 / irregular",
+        "en": "10:00-20:00",
         "ko": "10:00-20:00 / 부정기 휴무"
       },
       "fee_i18n": {
-        "ja": "予算1,000円前後",
+        "ja": "一人あたり1,000円前後",
         "zh": "人均约1000日元",
         "en": "Budget ~1,000 JPY",
         "ko": "예산 약 1,000엔"
@@ -22284,7 +22284,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "完全予約制（不定休）",
         "zh": "完全预约制（不定期休）",
-        "en": "By reservation only (irregular)",
+        "en": "By res. only",
         "ko": "완전 예약제 (부정기 휴무)"
       },
       "fee_i18n": {
@@ -22359,7 +22359,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "11:00～22:30／不定休",
         "zh": "11:00~22:30／不定期休",
-        "en": "11:00-22:30 / irregular",
+        "en": "11:00-22:30",
         "ko": "11:00-22:30 / 부정기 휴무"
       },
       "fee_i18n": {
@@ -22598,7 +22598,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "市谷亀岡八幡宮",
         "zh": "市谷龟冈八幡宫",
-        "en": "Ichigaya Kameoka Hachiman-gu",
+        "en": "Kameoka Hachiman",
         "ko": "이치가야 가메오카 하치만구"
       },
       "desc_i18n": {
@@ -22610,7 +22610,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "9:00～16:00／年中無休",
         "zh": "9:00~16:00／全年无休",
-        "en": "9:00-16:00 / open daily",
+        "en": "9:00-16:00",
         "ko": "9:00-16:00 / 연중무휴"
       },
       "fee_i18n": {
@@ -23209,7 +23209,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "7:00～19:00／水曜定休",
         "zh": "7:00~19:00／周三定休",
-        "en": "7:00-19:00 / closed Wednesdays",
+        "en": "7:00-19:00",
         "ko": "7:00~19:00 / 수요일 정기휴무"
       },
       "fee_i18n": {
@@ -23423,7 +23423,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "国立新美術館",
         "zh": "国立新美术馆",
-        "en": "The National Art Center, Tokyo",
+        "en": "Nat'l Art Center Tokyo",
         "ko": "국립신미술관"
       },
       "desc_i18n": {
@@ -23576,7 +23576,7 @@ window.RAILWAY_TOURISM = {
         "ja": "フランス菓子CADOT",
         "zh": "法式甜点CADOT",
         "en": "Patisserie CADOT",
-        "ko": "카도"
+        "ko": "프랑스과자 CADOT"
       },
       "desc_i18n": {
         "ja": "日本で初めて本場フランス形のマドレーヌを販売した洋菓子店。川端康成も愛した名店。",
@@ -23591,7 +23591,7 @@ window.RAILWAY_TOURISM = {
         "ko": "9:00~19:00 / 부정기 휴무 (월 2회)"
       },
       "fee_i18n": {
-        "ja": "ケーキ 1個 400円〜／予算 1,000円前後",
+        "ja": "ケーキ 1個 400円〜／一人あたり1,000円前後",
         "zh": "蛋糕一个约400日元起／预算约1000日元",
         "en": "Cake from ¥400 each / budget around ¥1,000",
         "ko": "케이크 1개 400엔~／예산 약 1,000엔"
@@ -23938,7 +23938,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "終日参拝可",
         "zh": "全天可参拜",
-        "en": "Open for worship all day",
+        "en": "All day",
         "ko": "종일 참배 가능"
       },
       "fee_i18n": {
@@ -24153,7 +24153,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "福弘釣具店",
         "zh": "福弘钓具店",
-        "en": "Fukuhoro Fishing Tackle",
+        "en": "Fukuhoro",
         "ko": "후쿠히로 낚싯구"
       },
       "desc_i18n": {
@@ -24165,7 +24165,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "6:00～18:00／不定休",
         "zh": "6:00~18:00／不定期休",
-        "en": "6:00-18:00 / irregular holidays",
+        "en": "6:00-18:00",
         "ko": "6:00~18:00 / 부정기 휴무"
       },
       "fee_i18n": {
@@ -25707,7 +25707,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "6:00〜20:00／月曜定休",
         "zh": "6:00~20:00／周一休",
-        "en": "6:00-20:00 / closed Mondays",
+        "en": "6:00-20:00",
         "ko": "6:00~20:00 / 월요일 정기휴무"
       },
       "fee_i18n": {
@@ -25933,7 +25933,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "上映時間による／無休",
         "zh": "依上映时间／无休",
-        "en": "Varies by screening / open daily",
+        "en": "By show",
         "ko": "상영 시간에 따름 / 무휴"
       },
       "fee_i18n": {
@@ -27463,7 +27463,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "詳細は公式へ／不定休",
         "zh": "详见官方／不定期休",
-        "en": "See official site / irregular holidays",
+        "en": "See site",
         "ko": "상세는 공식 / 부정기 휴무"
       },
       "fee_i18n": {
@@ -28231,7 +28231,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "清澄庭園",
         "zh": "清澄庭园",
-        "en": "Kiyosumi Teien Garden",
+        "en": "Kiyosumi Garden",
         "ko": "키요스미 정원"
       },
       "desc_i18n": {
@@ -28243,7 +28243,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "詳細は庭園HP参照／年中無休",
         "zh": "详见庭园官网／全年无休",
-        "en": "See the garden's official website / Open all year round",
+        "en": "See site",
         "ko": "자세한 내용은 정원 공식 사이트 참조 / 연중무휴"
       },
       "fee_i18n": {
@@ -28548,7 +28548,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "詳細は社務所HP参照／年中無休",
         "zh": "详见社务所官网／全年无休",
-        "en": "See the shrine office's website / Open all year round",
+        "en": "See site",
         "ko": "자세한 내용은 신사 사무소 공식 사이트 참조 / 연중무휴"
       },
       "fee_i18n": {
@@ -28624,7 +28624,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "11:00～19:00／不定休",
         "zh": "11:00～19:00／不定期休息",
-        "en": "11:00–19:00 / Irregular holidays",
+        "en": "11:00-19:00",
         "ko": "11:00~19:00／부정기 휴무"
       },
       "fee_i18n": {
@@ -29124,7 +29124,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "詳細はまち歩きガイド参照",
         "zh": "详见街区散步指南",
-        "en": "See the town-walk guide",
+        "en": "See guide",
         "ko": "자세한 내용은 마을 산책 가이드 참조"
       },
       "fee_i18n": {
@@ -29339,7 +29339,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "兜神社",
         "zh": "兜神社",
-        "en": "Kabuto Shrine",
+        "en": "Kabuto",
         "ko": "가부토 신사"
       },
       "desc_i18n": {
@@ -29351,7 +29351,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "詳細は神社HP参照／年中無休",
         "zh": "详见神社官网／全年无休",
-        "en": "See the shrine's official website / Open all year round",
+        "en": "See site",
         "ko": "자세한 내용은 신사 공식 사이트 참조 / 연중무휴"
       },
       "fee_i18n": {
@@ -29590,7 +29590,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "11:00～20:00／不定休",
         "zh": "11:00～20:00／不定期休息",
-        "en": "11:00–20:00 / Irregular holidays",
+        "en": "11:00-20:00",
         "ko": "11:00~20:00／부정기 휴무"
       },
       "fee_i18n": {
@@ -30163,7 +30163,7 @@ window.RAILWAY_TOURISM = {
         {
           "ja": "彫金体験",
           "zh": "雕金体验",
-          "en": "Metal engraving experience",
+          "en": "Engraving exp.",
           "ko": "조금 체험"
         }
       ]
@@ -30370,7 +30370,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "10:00～19:00／無休",
         "zh": "10:00～19:00／无休",
-        "en": "10:00–19:00 / Open daily",
+        "en": "10:00-19:00",
         "ko": "10:00~19:00／무휴"
       },
       "fee_i18n": {
@@ -30596,7 +30596,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "詳細は和光市HP参照",
         "zh": "详见和光市官网",
-        "en": "See Wako City's official website",
+        "en": "See site",
         "ko": "자세한 내용은 와코시 공식 사이트 참조"
       },
       "fee_i18n": {
@@ -31158,7 +31158,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "9:00～19:00／日祝休",
         "zh": "9:00～19:00／周日・节假日休息",
-        "en": "9:00–19:00 / Closed Sun & holidays",
+        "en": "9:00-19:00",
         "ko": "9:00~19:00／일·공휴일 휴무"
       },
       "fee_i18n": {
@@ -31333,7 +31333,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "詳細は寺務所HP参照／年中無休",
         "zh": "详见寺务所官网／全年无休",
-        "en": "See the temple office's website / Open all year round",
+        "en": "See site",
         "ko": "자세한 내용은 사찰 사무소 공식 사이트 참조 / 연중무휴"
       },
       "fee_i18n": {
@@ -31397,7 +31397,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "小石川植物園",
         "zh": "小石川植物园",
-        "en": "Koishikawa Botanical Gardens",
+        "en": "Koishikawa Botanical Gdn.",
         "ko": "고이시카와 식물원"
       },
       "desc_i18n": {
@@ -31485,7 +31485,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "詳細は公園HP参照／年中無休",
         "zh": "详见公园官网／全年无休",
-        "en": "See the park's official website / Open all year round",
+        "en": "See site",
         "ko": "자세한 내용은 공원 공식 사이트 참조 / 연중무휴"
       },
       "fee_i18n": {
@@ -31560,7 +31560,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "詳細は武道館HP参照／月曜休",
         "zh": "详见武道馆官网／周一休息",
-        "en": "See the Budokan's website / Closed Mondays",
+        "en": "See site",
         "ko": "자세한 내용은 부도칸 공식 사이트 참조 / 월요일 휴무"
       },
       "fee_i18n": {
@@ -31712,7 +31712,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "11:00～翌5:00／無休",
         "zh": "11:00～次日5:00／无休",
-        "en": "11:00–5:00 a.m. / Open daily",
+        "en": "11:00-5:00",
         "ko": "11:00~다음 날 5:00／무휴"
       },
       "fee_i18n": {
@@ -32183,7 +32183,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "17:00～23:00／無休",
         "zh": "17:00～23:00／无休",
-        "en": "17:00–23:00 / Open daily",
+        "en": "17:00-23:00",
         "ko": "17:00~23:00／무휴"
       },
       "fee_i18n": {
@@ -32954,7 +32954,7 @@ window.RAILWAY_TOURISM = {
       "hours_i18n": {
         "ja": "8:00～19:30／水日祝休",
         "zh": "8:00～19:30／周三・周日・节假日休息",
-        "en": "8:00–19:30 / Closed Wed, Sun & holidays",
+        "en": "8:00-19:30",
         "ko": "8:00~19:30／수·일·공휴일 휴무"
       },
       "fee_i18n": {
@@ -33046,7 +33046,7 @@ window.RAILWAY_TOURISM = {
         {
           "ja": "油揚げ",
           "zh": "油炸豆腐",
-          "en": "Fried tofu pouch",
+          "en": "Aburaage",
           "ko": "유부"
         }
       ]
@@ -33812,7 +33812,7 @@ window.RAILWAY_TOURISM = {
         {
           "ja": "替玉",
           "zh": "加面",
-          "en": "Extra noodles",
+          "en": "Sari",
           "ko": "사리 추가"
         }
       ]
@@ -34196,7 +34196,7 @@ window.RAILWAY_TOURISM = {
       "fee_i18n": {
         "ja": "飲食は実費",
         "zh": "店内消费另计",
-        "en": "Paid on consumption",
+        "en": "Free",
         "ko": "이용료 별도"
       },
       "bestTime_i18n": {
@@ -35084,10 +35084,10 @@ window.RAILWAY_TOURISM = {
         "ko": "17:00~23:30(LO 23:00)(일요일 휴무)"
       },
       "fee_i18n": {
-        "ja": "平均予算 3,000円〜",
-        "zh": "人均预算 3,000日元起",
-        "en": "Average budget from ¥3,000",
-        "ko": "평균 예산 3,000엔~"
+        "ja": "一人あたり3,000円〜",
+        "zh": "人均 3,000日元起",
+        "en": "approx. 3,000 JPY per person",
+        "ko": "1인당 약 3,000엔"
       },
       "bestTime_i18n": {
         "ja": "営業時間内",
@@ -35285,7 +35285,7 @@ window.RAILWAY_TOURISM = {
       "fee_i18n": {
         "ja": "無料",
         "zh": "店内消费另计",
-        "en": "Paid on consumption",
+        "en": "Free",
         "ko": "이용료 별도"
       },
       "bestTime_i18n": {
@@ -35361,7 +35361,7 @@ window.RAILWAY_TOURISM = {
       "fee_i18n": {
         "ja": "無料",
         "zh": "店内消费另计",
-        "en": "Paid on consumption",
+        "en": "Free",
         "ko": "이용료 별도"
       },
       "bestTime_i18n": {
@@ -35437,7 +35437,7 @@ window.RAILWAY_TOURISM = {
       "fee_i18n": {
         "ja": "無料",
         "zh": "店内消费另计",
-        "en": "Paid on consumption",
+        "en": "Free",
         "ko": "이용료 별도"
       },
       "bestTime_i18n": {
@@ -35512,7 +35512,7 @@ window.RAILWAY_TOURISM = {
       "fee_i18n": {
         "ja": "無料",
         "zh": "店内消费另计",
-        "en": "Paid on consumption",
+        "en": "Free",
         "ko": "이용료 별도"
       },
       "bestTime_i18n": {
@@ -35588,7 +35588,7 @@ window.RAILWAY_TOURISM = {
       "fee_i18n": {
         "ja": "無料",
         "zh": "店内消费另计",
-        "en": "Paid on consumption",
+        "en": "Free",
         "ko": "이용료 별도"
       },
       "bestTime_i18n": {
@@ -35663,7 +35663,7 @@ window.RAILWAY_TOURISM = {
       "fee_i18n": {
         "ja": "無料",
         "zh": "店内消费另计",
-        "en": "Paid on consumption",
+        "en": "Free",
         "ko": "이용료 별도"
       },
       "bestTime_i18n": {
@@ -35738,7 +35738,7 @@ window.RAILWAY_TOURISM = {
       "fee_i18n": {
         "ja": "無料",
         "zh": "店内消费另计",
-        "en": "Paid on consumption",
+        "en": "Free",
         "ko": "이용료 별도"
       },
       "bestTime_i18n": {
@@ -35813,7 +35813,7 @@ window.RAILWAY_TOURISM = {
       "fee_i18n": {
         "ja": "無料",
         "zh": "店内消费另计",
-        "en": "Paid on consumption",
+        "en": "Free",
         "ko": "이용료 별도"
       },
       "bestTime_i18n": {
@@ -35888,7 +35888,7 @@ window.RAILWAY_TOURISM = {
       "fee_i18n": {
         "ja": "無料",
         "zh": "店内消费另计",
-        "en": "Paid on consumption",
+        "en": "Free",
         "ko": "이용료 별도"
       },
       "bestTime_i18n": {
@@ -35945,7 +35945,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "上沼田東公園",
         "zh": "上沼田东公园",
-        "en": "Kami-Numata-Higashi Park",
+        "en": "Kami-Numata Park",
         "ko": "카미누마타 히가시 공원"
       },
       "desc_i18n": {
@@ -35963,7 +35963,7 @@ window.RAILWAY_TOURISM = {
       "fee_i18n": {
         "ja": "無料",
         "zh": "店内消费另计",
-        "en": "Paid on consumption",
+        "en": "Free",
         "ko": "이용료 별도"
       },
       "bestTime_i18n": {
@@ -36020,7 +36020,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "大谷田南公園",
         "zh": "大谷田南公园（交通公园）",
-        "en": "Ōyata-Minami Park (Traffic Park)",
+        "en": "Oyata Park",
         "ko": "오야타미나미 공원(교통공원)"
       },
       "desc_i18n": {
@@ -36038,7 +36038,7 @@ window.RAILWAY_TOURISM = {
       "fee_i18n": {
         "ja": "無料",
         "zh": "店内消费另计",
-        "en": "Paid on consumption",
+        "en": "Free",
         "ko": "이용료 별도"
       },
       "bestTime_i18n": {
@@ -36114,7 +36114,7 @@ window.RAILWAY_TOURISM = {
       "fee_i18n": {
         "ja": "無料",
         "zh": "店内消费另计",
-        "en": "Paid on consumption",
+        "en": "Free",
         "ko": "이용료 별도"
       },
       "bestTime_i18n": {
@@ -36171,7 +36171,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "都立東綾瀬公園",
         "zh": "都立东绫濑公园",
-        "en": "Tōyō Adachi Higashi-Ayase Park",
+        "en": "Higashi-Ayase Park",
         "ko": "도리츠 히가시아야세 공원"
       },
       "desc_i18n": {
@@ -36189,7 +36189,7 @@ window.RAILWAY_TOURISM = {
       "fee_i18n": {
         "ja": "無料",
         "zh": "店内消费另计",
-        "en": "Paid on consumption",
+        "en": "Free",
         "ko": "이용료 별도"
       },
       "bestTime_i18n": {
@@ -36265,7 +36265,7 @@ window.RAILWAY_TOURISM = {
       "fee_i18n": {
         "ja": "無料",
         "zh": "店内消费另计",
-        "en": "Paid on consumption",
+        "en": "Free",
         "ko": "이용료 별도"
       },
       "bestTime_i18n": {
@@ -36341,7 +36341,7 @@ window.RAILWAY_TOURISM = {
       "fee_i18n": {
         "ja": "無料",
         "zh": "店内消费另计",
-        "en": "Paid on consumption",
+        "en": "Free",
         "ko": "이용료 별도"
       },
       "bestTime_i18n": {
@@ -36417,7 +36417,7 @@ window.RAILWAY_TOURISM = {
       "fee_i18n": {
         "ja": "無料",
         "zh": "店内消费另计",
-        "en": "Paid on consumption",
+        "en": "Free",
         "ko": "이용료 별도"
       },
       "bestTime_i18n": {
@@ -36493,7 +36493,7 @@ window.RAILWAY_TOURISM = {
       "fee_i18n": {
         "ja": "無料",
         "zh": "店内消费另计",
-        "en": "Paid on consumption",
+        "en": "Free",
         "ko": "이용료 별도"
       },
       "bestTime_i18n": {
@@ -36569,7 +36569,7 @@ window.RAILWAY_TOURISM = {
       "fee_i18n": {
         "ja": "無料",
         "zh": "店内消费另计",
-        "en": "Paid on consumption",
+        "en": "Free",
         "ko": "이용료 별도"
       },
       "bestTime_i18n": {
@@ -36645,7 +36645,7 @@ window.RAILWAY_TOURISM = {
       "fee_i18n": {
         "ja": "無料",
         "zh": "店内消费另计",
-        "en": "Paid on consumption",
+        "en": "Free",
         "ko": "이용료 별도"
       },
       "bestTime_i18n": {
@@ -36795,7 +36795,7 @@ window.RAILWAY_TOURISM = {
       "fee_i18n": {
         "ja": "入場無料／お買い物実費",
         "zh": "店内消费另计",
-        "en": "Paid on consumption",
+        "en": "Free",
         "ko": "이용료 별도"
       },
       "bestTime_i18n": {
@@ -37378,7 +37378,7 @@ window.RAILWAY_TOURISM = {
       "fee_i18n": {
         "ja": "宿泊料金",
         "zh": "店内消费另计",
-        "en": "Paid on consumption",
+        "en": "Free",
         "ko": "이용료 별도"
       },
       "bestTime_i18n": {
@@ -37643,7 +37643,7 @@ window.RAILWAY_TOURISM = {
         {
           "ja": "3色氷",
           "zh": "三色刨冰",
-          "en": "Tricolor shaved ice",
+          "en": "Sambo bingou",
           "ko": "삼색 빙수"
         }
       ]
@@ -38407,7 +38407,7 @@ window.RAILWAY_TOURISM = {
         {
           "ja": "千住小町",
           "zh": "千住小町（豆沙点心）",
-          "en": "Senju Komachi (bean sweet)",
+          "en": "Senju Komachi",
           "ko": "센주 코마치(팥소 과자)"
         }
       ]
@@ -38948,10 +38948,10 @@ window.RAILWAY_TOURISM = {
         "ko": "18:00～23:00"
       },
       "fee_i18n": {
-        "ja": "予算 3,000円〜4,000円",
-        "zh": "预算 3,000～4,000日元",
-        "en": "Budget ¥3,000–4,000",
-        "ko": "예산 3,000~4,000엔"
+        "ja": "一人あたり3,000円〜4,000円",
+        "zh": "人均 3,000～4,000日元",
+        "en": "approx. 3,000–4,000 JPY per person",
+        "ko": "1인당 약 3,000~4,000엔"
       },
       "bestTime_i18n": {
         "ja": "ランチ",
@@ -39783,7 +39783,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "焼小籠包 ぎょうざ 樹苞 六町本店",
         "zh": "煎小笼包 饺子 树苞 六町本店",
-        "en": "Kibo (Yaki-xiaolongbao)",
+        "en": "Kibo",
         "ko": "기보"
       },
       "desc_i18n": {
@@ -41288,7 +41288,7 @@ window.RAILWAY_TOURISM = {
         {
           "ja": "煮込み",
           "zh": "炖煮",
-          "en": "Nikomi (stew)",
+          "en": "Nikomi",
           "ko": "니코미"
         },
         {
@@ -42214,7 +42214,7 @@ window.RAILWAY_TOURISM = {
         {
           "ja": "酎ハイ",
           "zh": "嗨棒（烧酒苏打）",
-          "en": "Chu-hi (shochu highball)",
+          "en": "Chu-hi",
           "ko": "츄하이"
         },
         {
@@ -42540,7 +42540,7 @@ window.RAILWAY_TOURISM = {
         {
           "ja": "君の宇宙",
           "zh": "你的宇宙（招牌鸡尾酒）",
-          "en": "Kimi no Uchū (signature cocktail)",
+          "en": "Kimi no Uchu",
           "ko": "너의 우주"
         },
         {
@@ -42637,7 +42637,7 @@ window.RAILWAY_TOURISM = {
         {
           "ja": "マリー",
           "zh": "玛丽（鸡尾酒）",
-          "en": "Marie (cocktail)",
+          "en": "Marie",
           "ko": "마리"
         },
         {
@@ -42672,7 +42672,7 @@ window.RAILWAY_TOURISM = {
       "name_i18n": {
         "ja": "本多劇場",
         "zh": "本多剧场",
-        "en": "Honda Gekijo Theater",
+        "en": "Honda Gekijo",
         "ko": "혼다 극장"
       },
       "desc_i18n": {
@@ -62156,3 +62156,4 @@ window.RAILWAY_TOURISM = {
     ]
   }
 };
+
