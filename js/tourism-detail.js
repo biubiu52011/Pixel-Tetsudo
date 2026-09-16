@@ -17,6 +17,7 @@
     landmark: "linear-gradient(135deg, #008803 0%, #00AA00 100%)",
     park:     "linear-gradient(135deg, #2E8B57 0%, #3CB371 100%)",
     local:    "linear-gradient(135deg, #8B7355 0%, #D2B48C 100%)",
+    shopping: "linear-gradient(135deg, #FF6347 0%, #FFA500 100%)",
     temple:   "linear-gradient(135deg, #B8860B 0%, #DAA520 100%)",
     default:  "linear-gradient(135deg, #008803 0%, #006600 100%)"
   };
@@ -129,6 +130,49 @@ var currentStationKey = null;
     return THEME_GRADIENTS.default;
   }
 
+  // 4.3.800: 条目三类型判定（活动/店铺/景点）——驱动三种独立详情样式
+  function getSpotType(spot) {
+    var tags = (spot && spot.tags) || [];
+    if (tags.indexOf('event') >= 0) return 'event';
+    if (tags.indexOf('food') >= 0 || tags.indexOf('shopping') >= 0) return 'shop';
+    return 'spot';
+  }
+
+  // 4.3.800: 三种类型各自的快速信息条
+  // 活动=開催時期+距離（时间优先）｜景点=距離+ベストタイム（现状）｜店铺=人均+距離（消费优先）
+  function buildQuickInfo(type, distValueHtml, spotFee, spotBestTime) {
+    var distanceItem = '<div class="qi-item"><div class="qi-label">' + t('detail.distance') + '</div><div class="qi-value">' + distValueHtml + '</div></div>';
+    if (type === 'event') {
+      var periodItem = '<div class="qi-item qi-period"><div class="qi-label">' + t('detail.period') + '</div><div class="qi-value">' + escapeHtml(spotBestTime) + '</div></div>';
+      return '<div class="detail-quick-info">' + periodItem + distanceItem + '</div>';
+    }
+    if (type === 'shop') {
+      var _feeLabel = /[円前後〜～]/.test(spotFee) ? t('detail.info_fee_per_person') : t('detail.info_fee');
+      var priceItem = '<div class="qi-item qi-price"><div class="qi-label">' + _feeLabel + '</div><div class="qi-value">' + escapeHtml(spotFee) + '</div></div>';
+      return '<div class="detail-quick-info">' + priceItem + distanceItem + '</div>';
+    }
+    var bestItem = '<div class="qi-item"><div class="qi-label">' + t('detail.best_time') + '</div><div class="qi-value">' + escapeHtml(spotBestTime) + '</div></div>';
+    return '<div class="detail-quick-info">' + distanceItem + bestItem + '</div>';
+  }
+
+  // 4.3.800: 三种类型各自的信息网格
+  // 活动=開催時期(+開催時間)/入場料/住所｜景点·店铺=営業時間/費用(人均)/住所
+  function buildInfoGrid(type, spotHours, spotFee, spotBestTime, addressRow) {
+    var feeLabel = (type === 'shop' && /[円前後〜～]/.test(spotFee))
+      ? t('detail.info_fee_per_person')
+      : t('detail.info_fee');
+    var feeRow = '<div class="info-row"><span class="info-label">' + feeLabel + '</span><span class="info-value">' + escapeHtml(spotFee) + '</span></div>';
+    var head = '<div class="article-section"><h3 class="section-heading">' + t('detail.basic_info') + '</h3><div class="info-grid">';
+    if (type === 'event') {
+      var periodRow = '<div class="info-row"><span class="info-label">' + t('detail.period') + '</span><span class="info-value">' + escapeHtml(spotBestTime) + '</span></div>';
+      // 活动无固定营业时间：仅具体时间（軽トラ市・特設ブース）才显示"開催時間"行
+      var extra = (spotHours && spotHours !== t('detail.unavailable')) ? '<div class="info-row"><span class="info-label">' + t('detail.info_hours') + '</span><span class="info-value">' + escapeHtml(spotHours) + '</span></div>' : '';
+      return head + periodRow + extra + feeRow + addressRow + '</div></div>';
+    }
+    var hoursRow = '<div class="info-row"><span class="info-label">' + t('detail.info_hours') + '</span><span class="info-value">' + escapeHtml(spotHours) + '</span></div>';
+    return head + hoursRow + feeRow + addressRow + '</div></div>';
+  }
+
   function getHeroClassForGradient(gradient) {
     var norm = gradient.replace(/\s+/g, " ").trim();
     var order = ["default","landmark","history","nature","food","shrine","night","seasonal","event","museum","park","local","temple"];
@@ -205,6 +249,9 @@ var currentStationKey = null;
     for (var i = 0; i < tags.length; i++) {
       var tagKey = 'tourism.tag_' + tags[i].replace(/-/g,'_'); tagsHtml += '<span class="tag-badge ' + escapeHtml(tags[i]) + '">' + escapeHtml(t(tagKey)) + '</span>';
     }
+    // 4.3.800: 三类型独立样式——类型徽章（イベント/スポット/ショップ）
+    var spotType = getSpotType(spot);
+    var typeBadge = '<span class="type-badge type-badge--' + spotType + '">' + escapeHtml(t('detail.type_' + spotType)) + '</span>';
 
     // Station badge
     var stationBadge = stationName
@@ -227,61 +274,58 @@ var currentStationKey = null;
 
     var spotHours = translateCommonTerms(getI18nField(spot, 'hours', lang) || t('detail.unavailable'), lang);
     var spotFee = translateCommonTerms(getI18nField(spot, 'fee', lang) || t('detail.unavailable'), lang);
-    // 店铺类（餐饮/购物）费用标签用"人均"（在店消费场景），非店铺用"入场费"
-    var _isShop = spot.tags && (spot.tags.indexOf('food') >= 0 || spot.tags.indexOf('shopping') >= 0);
-    // 4.3.599: 费用标签按内容自适应——店铺类且含价格(円/前後/〜/～)才叫"人均"；
-    // 無料/実費占位类店铺（免费参观、按实际消费无标价）用通用"费用"，避免"人均：無料"语义错配
-    var feeLabel = (_isShop && /[円前後〜～]/.test(spotFee))
-      ? t('detail.info_fee_per_person')
-      : t('detail.info_fee');
-    // Info grid (hours, fees) + 4.3.797: 地址行细分（全宽跨列）
+    var spotBestTime = translateCommonTerms(getI18nField(spot, 'bestTime', lang) || t('detail.fallback_best_time'), lang);
+    // Info grid (hours, fees) + 4.3.797: 地址行细分（全宽跨列）+ 4.3.800: 按类型构建
     var spotAddress = spot.address || '';
     var addressRow = spotAddress
       ? '<div class="info-row info-row--full"><span class="info-label">' + t('detail.address') + '</span><span class="info-value">' + escapeHtml(spotAddress) + '</span></div>'
       : '';
-    var infoHtml = '<div class="article-section">'
-      + '<h3 class="section-heading">' + t('detail.basic_info') + '</h3>'
-      + '<div class="info-grid">'
-      + '<div class="info-row"><span class="info-label">' + t('detail.info_hours') + '</span><span class="info-value">' + escapeHtml(spotHours) + '</span></div>'
-      + '<div class="info-row"><span class="info-label">' + feeLabel + '</span><span class="info-value">' + escapeHtml(spotFee) + '</span></div>'
-      + addressRow
-      + '</div></div>';
+    var infoHtml = buildInfoGrid(spotType, spotHours, spotFee, spotBestTime, addressRow);
 
     // Map container (OSM iframe)
     var mapHtml = '<div id="tourismMap" class="map-container"><div class="map-loading">' + (typeof t === 'function' ? t('detail.map_loading') : 'Loading map...') + '</div></div>';
 
     // Quick info bar
-    var spotBestTime = translateCommonTerms(getI18nField(spot, 'bestTime', lang) || t('detail.fallback_best_time'), lang);
     // v4.3.621: 距离块 = 出站指引融合（主行 站+出口+距离，副行 步行分钟）；无最优出口时回退原值
     var distValueHtml = distMain
       ? '<span class="qi-main">' + escapeHtml(distMain) + '</span>' + (distSub ? '<br><span class="qi-sub">' + escapeHtml(distSub) + '</span>' : '')
       : escapeHtml(distText || t('detail.near_station'));
-    var quickInfo = '<div class="detail-quick-info">' + '<div class="qi-item"><div class="qi-label">' + t('detail.distance') + '</div><div class="qi-value">' + distValueHtml + '</div></div>' + '<div class="qi-item"><div class="qi-label">' + t('detail.best_time') + '</div><div class="qi-value">' + escapeHtml(spotBestTime) + '</div></div>' + '</div>';
+    // 4.3.800: 三种类型各自的快速信息条（活动=時期+距離，景点=距離+ベストタイム，店铺=人均+距離）
+    var quickInfo = buildQuickInfo(spotType, distValueHtml, spotFee, spotBestTime);
 
     var heroClass = getHeroClassForGradient(gradient);
-    var html = '<div class="article-hero ' + heroClass + '">'
-      + imageHtml
-      + '<div class="article-hero-overlay"></div>'
-      + '<div class="article-hero-content">'
-      + '<div class="hero-meta">' + stationBadge + tagsHtml + '</div>'
-      + '<h1 class="article-title">' + escapeHtml(spotName) + '</h1>'
-      + '</div></div>'
-      + quickInfo
-      + '<div class="article-body">'
-      + '<div class="article-section">'
+    var aboutSection = '<div class="article-section">'
       + '<h3 class="section-heading">' + t('detail.about') + '</h3>'
       + '<p class="article-text">' + escapeHtml(desc) + '</p>'
-      + '</div>'
-      + tipsHtml
-      + infoHtml
-      + '<div class="article-section">'
+      + '</div>';
+    var mapSection = '<div class="article-section">'
       + '<h3 class="section-heading">' + t('detail.location') + '</h3>'
       + '<div class="map-info">'
       + mapHtml
       + '</div>'
       + '</div>';
+    // 4.3.800: 三类型正文顺序——活动/店铺信息前置（時期/人均优先），景点贴士前置（现状）
+    var bodySections = aboutSection;
+    if (spotType === 'event' || spotType === 'shop') {
+      bodySections += infoHtml + tipsHtml;
+    } else {
+      bodySections += tipsHtml + infoHtml;
+    }
+    bodySections += mapSection;
 
-    container.innerHTML = '<div class="article-content">' + html + '</div>';
+    var html = '<div class="article-hero ' + heroClass + '">'
+      + imageHtml
+      + '<div class="article-hero-overlay"></div>'
+      + '<div class="article-hero-content">'
+      + '<div class="hero-meta">' + stationBadge + typeBadge + tagsHtml + '</div>'
+      + '<h1 class="article-title">' + escapeHtml(spotName) + '</h1>'
+      + '</div></div>'
+      + quickInfo
+      + '<div class="article-body">'
+      + bodySections
+      + '</div>';
+
+    container.innerHTML = '<div class="article-content article-content--' + spotType + '">' + html + '</div>';
     // Initialize map after DOM is ready
     setTimeout(function() { initMap(mapLat, mapLng, spotName); }, 50);
     var pageTitle = spotName + ' | ' + (stationName || '') + ' | PIXEL TETSUDO';

@@ -887,6 +887,34 @@
   line-height: 1.5;
 }
 
+/* 4.3.800: 观光详情三类型独立样式——活动/景点/店铺各有专属视觉语言 */
+.type-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 999px;
+  color: #fff;
+  letter-spacing: .05em;
+  vertical-align: middle;
+  text-shadow: 0 1px 2px rgba(0,0,0,.25);
+}
+.type-badge--event { background: #FF4500; }
+.type-badge--shop  { background: #FF6347; }
+.type-badge--spot  { background: #008803; }
+
+/* 活动样式：開催時期强调（橙红） */
+.article-content--event .qi-period .qi-label { color: #FF4500; font-weight: 800; }
+.article-content--event .qi-period .qi-value { font-weight: 800; color: #FF4500; font-size: 17px; }
+.article-content--event .article-hero--event { position: relative; }
+
+/* 店铺样式：人均大字强调（暖橙） */
+.article-content--shop .qi-price .qi-label { color: #E8590C; font-weight: 800; }
+.article-content--shop .qi-price .qi-value { font-size: 22px; font-weight: 800; color: #E8590C; line-height: 1.2; }
+
+/* 景点样式：绿色主视觉（地标/自然系） */
+.article-content--spot .type-badge--spot { background: #008803; }
+
 
 /* === Leaflet map === */
 #tourismMap {
