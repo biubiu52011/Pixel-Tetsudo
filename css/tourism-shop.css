@@ -32,7 +32,8 @@
 
 /* ③ 商户信息卡 */
 .article-content--shop .dp-info-row { display: flex; gap: 8px; padding: 6px 0; align-items: baseline; font-size: 14px; }
-.article-content--shop .dp-ico { flex-shrink: 0; font-size: 15px; }
+.article-content--shop .dp-ico { flex-shrink: 0; font-size: 15px; display: flex; align-items: center; }
+.article-content--shop .dp-ico svg { width: 15px; height: 15px; flex-shrink: 0; }
 .article-content--shop .dp-info-label { color: #999; flex-shrink: 0; width: 74px; }
 .article-content--shop .dp-info-val { flex: 1; color: #333; line-height: 1.5; }
 

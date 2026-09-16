@@ -43,11 +43,11 @@
   function buildInfoCard(ctx) {
     var rows = '';
     if (ctx.spotAddress) {
-      rows += '<div class="dp-info-row"><span class="dp-ico">\uD83D\uDCCD</span><span class="dp-info-label">' + C.t('detail.address') + '</span><span class="dp-info-val">' + C.escapeHtml(ctx.spotAddress) + '</span></div>';
+      rows += '<div class="dp-info-row"><span class="dp-ico"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg></span><span class="dp-info-label">' + C.t('detail.address') + '</span><span class="dp-info-val">' + C.escapeHtml(ctx.spotAddress) + '</span></div>';
     }
-    rows += '<div class="dp-info-row"><span class="dp-ico">\uD83D\uDD52</span><span class="dp-info-label">' + C.t('detail.info_hours') + '</span><span class="dp-info-val">' + C.escapeHtml(ctx.spotHours) + '</span></div>';
+    rows += '<div class="dp-info-row"><span class="dp-ico"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M12 2c-5.52 0-10 4.48-10 10s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg></span><span class="dp-info-label">' + C.t('detail.info_hours') + '</span><span class="dp-info-val">' + C.escapeHtml(ctx.spotHours) + '</span></div>';
     if (ctx.dist && (ctx.dist.distMain || ctx.dist.distText)) {
-      rows += '<div class="dp-info-row"><span class="dp-ico">\uD83D\uDE87</span><span class="dp-info-label">' + C.t('detail.distance') + '</span><span class="dp-info-val">' + C.distValueHtml(ctx.dist) + '</span></div>';
+      rows += '<div class="dp-info-row"><span class="dp-ico"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M4 15V9a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v6a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3zm2-1h12V10H6v4zm1 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm10 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2zM5 7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v1H5V7z"/></svg></span><span class="dp-info-label">' + C.t('detail.distance') + '</span><span class="dp-info-val">' + C.distValueHtml(ctx.dist) + '</span></div>';
     }
     return '<div class="dp-card dp-info">' + rows + '</div>';
   }
