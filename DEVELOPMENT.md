@@ -1175,7 +1175,7 @@ CSP：connect-src 仅 self + ODPT/MapTiler 白名单；新端点必须先登记
 
 错误与降级：fetch 失败/限流/403 由前端兜底（小田急 403 → 显示“暂无延误情报”）；ODPT 限流经 rateLimitedFetch 排队节流
 
-缓存：ODPT 时刻表经 IndexedDB 缓存（RTCache / ODPTClient 内部缓存），localStorage 旧缓存自动迁移
+缓存：ODPT 时刻表经 IndexedDB 缓存（RTCache / ODPTClient 内部缓存）；线路库经 localStorage 双键缓存——pt_db_v{ver}（railway+i18n，全页面共用）与 pt_tourism_v{ver}（tourism，仅观光相关页面）；页面级开关 PT_SKIP_TOURISM 可跳过 tourism_data.json 的下载/解析/缓存读写（realtime 等不需要旅游数据的页面）；localStorage 旧缓存自动迁移
 
 ### 7.2 全局错误码规范
 
