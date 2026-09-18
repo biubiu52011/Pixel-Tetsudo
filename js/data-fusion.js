@@ -40,8 +40,12 @@
   // ========== Data Loading ==========
   function emitUpdate(fusedData) {
     if (fusedData) { _lastFusedData = fusedData; }
-    try { subscribers.forEach(function(cb) { cb(fusedData); }); } catch(e) { console.debug("[DataFusion] Subscriber error:", e.message); }
+    // v4.3.842: 先提交 DATA_FUSION 再通知订阅者——原顺序为「先 cb 后赋值」，
+    // 订阅回调内 getFusedData() 经 window.DATA_FUSION || _lastFusedData 读到
+    // 上一次的旧值（首屏空融合后为 truthy 空对象），Priority 1 判空失败回退
+    // DataLayer 基线 → 延误状态在 15s REFRESH_INTERVAL 二次融合前永不显示。
     try { window.DATA_FUSION = fusedData; } catch(e) {}
+    try { subscribers.forEach(function(cb) { cb(fusedData); }); } catch(e) { console.debug("[DataFusion] Subscriber error:", e.message); }
   }
 
   function subscribe(callback) {
