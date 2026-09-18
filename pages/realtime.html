@@ -84,6 +84,8 @@
 <script src="../data/core/line-operation-systems.js?v=4.3.638"></script>
 <script src="../js/line-presentation-service.js?v=4.3.638"></script>
 <script src="../data/api/odpt-links.js?v=4.3.638"></script>
+<!-- v4.3.842: realtime 页启用 ODPT_LAZY（delay-only）——只拉 TrainInformation 延误，跳过 Train 位置与 TrainTimetable 全量时刻表（realtime 页不渲染位置/时刻表）；请求数由 ~110 降至 ~15，并消除 429 限流与 loadTrainPositions 报错 -->
+<script src="../js/odpt-lazy.js?v=4.3.842"></script>
 <script src="../data/api/odpt-unified.js?v=4.3.638"></script>
 <script src="../data/core/runtime-config.js?v=4.3.833"></script>
 <script src="../js/translations.js?v=4.3.638"></script>
