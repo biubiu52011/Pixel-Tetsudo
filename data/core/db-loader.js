@@ -937,6 +937,10 @@ function applyData(data, i18n) {
     return "0";
   })();
   var DB_CACHE_KEY = "pt_db_v" + DB_CACHE_VERSION;
+  // v4.3.842: tourism 独立缓存键（pt_tourism_v*）——realtime 等页面
+  // 通过 PT_SKIP_TOURISM 跳过 2.24MB tourism_data.json 的下载/解析/缓存读写。
+  var TOURISM_CACHE_KEY = "pt_tourism_v" + DB_CACHE_VERSION;
+  var SKIP_TOURISM = !!(window.PT_SKIP_TOURISM);
 
   function cacheRead() {
     try {
@@ -948,10 +952,27 @@ function applyData(data, i18n) {
     } catch(e) { return null; }
   }
 
-  function cacheWrite(railway, i18n, tourism) {
+  function cacheReadTourism() {
+    if (SKIP_TOURISM) return null;
     try {
-      localStorage.setItem(DB_CACHE_KEY, JSON.stringify({ railway: railway, i18n: i18n, tourism: tourism, ts: Date.now() }));
+      var raw = localStorage.getItem(TOURISM_CACHE_KEY);
+      if (!raw) return null;
+      var obj = JSON.parse(raw);
+      return (obj && obj.tourism) ? obj.tourism : null;
+    } catch(e) { return null; }
+  }
+
+  function cacheWrite(railway, i18n) {
+    try {
+      localStorage.setItem(DB_CACHE_KEY, JSON.stringify({ railway: railway, i18n: i18n, ts: Date.now() }));
     } catch(e) { /* quota / private mode: ignore */ }
+  }
+
+  function cacheWriteTourism(tourism) {
+    if (SKIP_TOURISM) return;
+    try {
+      localStorage.setItem(TOURISM_CACHE_KEY, JSON.stringify({ tourism: tourism, ts: Date.now() }));
+    } catch(e) {}
   }
 
   // 清理旧版本缓存（只留当前版本）
@@ -959,7 +980,7 @@ function applyData(data, i18n) {
     try {
       for (var i = localStorage.length - 1; i >= 0; i--) {
         var k = localStorage.key(i);
-        if (k && k.indexOf("pt_db_v") === 0 && k !== DB_CACHE_KEY) localStorage.removeItem(k);
+        if (k && (k.indexOf("pt_db_v") === 0 || k.indexOf("pt_tourism_v") === 0) && k !== DB_CACHE_KEY && k !== TOURISM_CACHE_KEY) localStorage.removeItem(k);
       }
     } catch(e) {}
   }
@@ -977,6 +998,7 @@ function applyData(data, i18n) {
           if (obj.ts > bestTs) { bestTs = obj.ts; best = obj; }
         } catch(e) {}
       }
+      if (best) best.tourism = cacheReadTourism();
       return best;
     } catch(e) { return null; }
   }
@@ -1020,20 +1042,28 @@ function applyData(data, i18n) {
 
   // 远程加载：并行 + 超时 + 重试 + 应用 + 写缓存（i18n/tourism 容错，railway 必须成功）
   function fetchRemote() {
-    return Promise.all([
+    var prom = [
       fetchJSON(DATA_FILE),
-      fetchJSON(STATION_I18N_FILE).then(function(r) { return r; }, function() { return {}; }),
-      fetchJSON(TOURISM_DATA_FILE).then(function(r) { return r; }, function() { return {}; })
-    ]).then(function(results) {
+      fetchJSON(STATION_I18N_FILE).then(function(r) { return r; }, function() { return {}; })
+    ];
+    if (!SKIP_TOURISM) {
+      prom.push(fetchJSON(TOURISM_DATA_FILE).then(function(r) { return r; }, function() { return {}; }));
+    }
+    return Promise.all(prom).then(function(results) {
       applyData(results[0], results[1]);
-      applyTourismData(results[2]);
+      if (SKIP_TOURISM) {
+        applyTourismData({});
+      } else {
+        applyTourismData(results[2]);
+        cacheWriteTourism(results[2]);
+      }
       cleanOldCaches();
-      cacheWrite(results[0], results[1], results[2]);
+      cacheWrite(results[0], results[1]);
       loaded = true;
       console.log(
         Object.keys(results[0].stations).length + " stations, " +
         Object.keys(results[0].lines).length + " lines, " +
-        (results[2] && results[2].spots ? results[2].spots.length : 0) + " tourism spots");
+        (SKIP_TOURISM ? "tourism skipped" : ((results[2] && results[2].spots ? results[2].spots.length : 0) + " tourism spots")));
       return results;
     });
   }
@@ -1054,7 +1084,8 @@ function applyData(data, i18n) {
     });
   }
   function loadFileBundles() {
-    return FILE_BUNDLES.reduce(function(p, u) {
+    var bundles = SKIP_TOURISM ? FILE_BUNDLES.slice(0, 2) : FILE_BUNDLES;
+    return bundles.reduce(function(p, u) {
       return p.then(function() { return loadScript(u); });
     }, Promise.resolve());
   }
@@ -1069,7 +1100,7 @@ function load() {
       return loadFileBundles().then(function() {
         if (window.RAILWAY_DATA && window.RAILWAY_DATA.stations) {
           applyData(window.RAILWAY_DATA, window.RAILWAY_I18N || {});
-          applyTourismData(window.RAILWAY_TOURISM || {});
+          if (!SKIP_TOURISM) applyTourismData(window.RAILWAY_TOURISM || {});
           loaded = true;
           return;
         }
@@ -1082,10 +1113,11 @@ function load() {
     // Strategy B (v4.3.387): stale-while-revalidate
     // 1) 缓存命中 → 立即应用（首屏秒开），后台刷新数据
     var cached = cacheRead();
+    var cachedTourism = cacheReadTourism();
     if (cached) {
       try {
         applyData(cached.railway, cached.i18n);
-        applyTourismData(cached.tourism);
+        applyTourismData(cachedTourism);
         loaded = true;
         console.log("[DbLoader] Cache hit (v" + DB_CACHE_VERSION + "), background refresh scheduled");
         fetchRemote().catch(function(err) {
@@ -1106,7 +1138,7 @@ function load() {
       if (fallback) {
         try {
           applyData(fallback.railway, fallback.i18n);
-          applyTourismData(fallback.tourism);
+          applyTourismData(fallback.tourism || {});
           loaded = true;
           console.warn("[DbLoader] Remote failed, using older cache fallback:", err.message);
           return fallback;
