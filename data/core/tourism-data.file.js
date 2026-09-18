@@ -45050,8 +45050,8 @@ window.RAILWAY_TOURISM = {
     "Shin-Kiba": [
       {
         "name": "北口",
-        "lat": 35.661769,
-        "lng": 139.8253
+        "lat": 35.64604,
+        "lng": 139.82678
       }
     ],
     "Meguro": [
@@ -52608,8 +52608,8 @@ window.RAILWAY_TOURISM = {
     "Shinonome": [
       {
         "name": "駅前",
-        "lat": 35.6378,
-        "lng": 139.7978
+        "lat": 35.64060,
+        "lng": 139.80328
       }
     ],
     "Naka-mejima": [
@@ -53142,13 +53142,6 @@ window.RAILWAY_TOURISM = {
         "name": "駅前",
         "lat": 35.63468,
         "lng": 139.79325
-      }
-    ],
-    "Kokusai-Tenjijo": [
-      {
-        "name": "駅前",
-        "lat": 35.63457,
-        "lng": 139.79163
       }
     ],
     "Makuhari-Hong": [
@@ -61953,11 +61946,11 @@ window.RAILWAY_TOURISM = {
         "lng": 140.41950556
       }
     ],
-    "Tokyo-Showa-Center": [
+    "KokusaiTenjijo": [
       {
         "name": "駅前",
-        "lat": 35.68111111,
-        "lng": 139.76666667
+        "lat": 35.63457,
+        "lng": 139.79163
       }
     ],
     "Rikuchu-Yama": [

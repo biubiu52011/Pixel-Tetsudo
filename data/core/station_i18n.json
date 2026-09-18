@@ -1479,8 +1479,8 @@
  },
  "KokusaiTenjijo": {
   "ja": "国際展示場",
-  "zh": "国際展示场",
-  "ko": "코쿠사이테ㄴ지조",
+  "zh": "国际展示场",
+  "ko": "코쿠사이텐지조",
   "en": "KokusaiTenjijo"
  },
  "Gotanda": {
@@ -6604,10 +6604,10 @@
   "en": "Tokyo International Cruise Terminal"
  },
  "Tokyo-Teleport": {
-  "ja": "テレコムセンター",
-  "zh": "东京电讯",
+  "ja": "東京テレポート",
+  "zh": "东京电讯站",
   "ko": "도쿄텔레포트",
-  "en": "Telecom Center"
+  "en": "Tokyo Teleport"
  },
  "Fune-no-Kagakukan": {
   "ja": "船の科学館",
@@ -6657,12 +6657,6 @@
   "ko": "요코하마시에이",
   "en": "Yokohama-Municipal"
  },
- "Kokusai-Tenjijo": {
-  "ja": "国際展示場",
-  "zh": "国际展示场",
-  "ko": "코쿠사이텐지조",
-  "en": "KokusaiTenjijo"
- },
  "Kokusai-Tenjijo-Seimon": {
   "ja": "国際展示場正門",
   "zh": "国际展示场正门",
@@ -6680,12 +6674,6 @@
   "zh": "竹芝",
   "ko": "타케시바",
   "en": "Takeshiba"
- },
- "Tokyo-Showa-Center": {
-  "ja": "東京昭和記念館",
-  "zh": "东京昭和纪念馆",
-  "ko": "도쿄쇼와센터",
-  "en": "Tokyo-Showa-Center"
  },
  "Rokuchou": {
   "ja": "六町",

@@ -157,8 +157,8 @@
       "lng": 139.7928
     },
     "Shin-Kiba": {
-      "lat": 35.6606,
-      "lng": 139.8253
+      "lat": 35.64604,
+      "lng": 139.82678
     },
     "Tatsumi": {
       "lat": 35.6467,
@@ -481,8 +481,8 @@
       "lng": 139.7839
     },
     "Shinonome": {
-      "lat": 35.6378,
-      "lng": 139.7978
+      "lat": 35.64060,
+      "lng": 139.80328
     },
     "Kachidoki": {
       "lat": 35.6617,
@@ -1103,10 +1103,6 @@
     "Ariake": {
       "lat": 35.63468,
       "lng": 139.79325
-    },
-    "Kokusai-Tenjijo": {
-      "lat": 35.63457,
-      "lng": 139.79163
     },
     "Makuhari-Hong": {
       "lat": 35.6729,
@@ -8491,10 +8487,6 @@
     "Semi": {
       "lat": 38.755125,
       "lng": 140.41950556
-    },
-    "Tokyo-Showa-Center": {
-      "lat": 35.68111111,
-      "lng": 139.76666667
     },
     "Rikuchu-Yama": {
       "lat": 40.06608611,
@@ -23692,7 +23684,7 @@
       "stations": [
         "Shin-Kiba",
         "Shinonome",
-        "Tokyo-Showa-Center",
+        "KokusaiTenjijo",
         "Tokyo-Teleport",
         "Tennozu-Ise",
         "Shinagawa-Sea-Side",
@@ -36707,7 +36699,7 @@
     "Shinonome": [
       "Rinkai"
     ],
-    "Tokyo-Showa-Center": [
+    "KokusaiTenjijo": [
       "Rinkai"
     ],
     "Tokyo-Teleport": [
@@ -41780,7 +41772,7 @@
     "Rinkai": {
       "Shin-Kiba": 0,
       "Shinonome": 1,
-      "Tokyo-Showa-Center": 2,
+      "KokusaiTenjijo": 2,
       "Tokyo-Teleport": 3,
       "Tennozu-Ise": 4,
       "Shinagawa-Sea-Side": 5,
