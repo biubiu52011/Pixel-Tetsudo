@@ -568,7 +568,7 @@
     // 行数上限若再调，同步 min 值）。一点空隙 SP_GAP=34（= ICON16 + 顶隙6 + 底距12，chip 底部与
     // 下一站圆点顶缘可见空隙 17-23px）。站间距 = 全线各站换乘图标的高最大值 + 空隙（移动/桌面统一，
     // 不再按站数分档）；环线双列 _colPitch 同式复用。
-    var ROW_H = 18, SP_GAP = 25; // v4.3.853: 空隙 28→25 不重叠极限（G>=21+2*(rows-1)：3行贴边/2行留2/1行留4；G=21会压圆点）
+    var ROW_H = 18, SP_GAP = 22; // v4.3.855: 空隙 25→22（用户要求；3行站chip压圆点3px，1/2行余量大）
     var _chipPitch = function(ids) {
       var mx = ROW_H + SP_GAP;
       for (var _cp = 0; _cp < ids.length; _cp++) {
@@ -580,17 +580,14 @@
     };
     var sp = _chipPitch(stations);
     var topP = 18 + thrTopPad, botP = 16 + thrBotPad;
-    // v4.3.854: 主直线**逐段**定距——每段站距 = 上一站 chip 图标的高 + 空隙（不再全线统一取 max）。
-    // 几何：站 i chip 块底 = y_i + 14 + rows_i*ROW_H + 2*(rows_i-1)，下一站圆点顶缘 = y_{i+1}-7
-    // => _spSeg[i] = rows_i*18 + SP_GAP（1行43/2行61/3行79/4行97；可见留白 4/2/0）。
-    // sp（全线 max）保留给支线/融合延长段用。
+    // v4.3.855: 主直线**全线统一**定距（用户：要统一站间距，回退 v4.3.854 逐段）——每段 = sp（全线 max）。
     var _spRows = [];
     for (var _sr = 0; _sr < stations.length; _sr++) {
       var _txN = (transferMap[stations[_sr]] || []).filter(function(t) { return !t.through; }).length;
       _spRows.push(Math.max(1, Math.ceil(Math.min(_txN, 16) / 4)));
     }
     var _spSeg = [];
-    for (var _sr2 = 0; _sr2 < stations.length; _sr2++) _spSeg.push(_spRows[_sr2] * ROW_H + SP_GAP);
+    for (var _sr2 = 0; _sr2 < stations.length; _sr2++) _spSeg.push(sp); // v4.3.855: 全线统一 sp
     var _yAt = function(i) { var y = topP; for (var _yi = 0; _yi < i && _yi < _spSeg.length; _yi++) y += _spSeg[_yi]; return y; };
     
     // Get branch lines
