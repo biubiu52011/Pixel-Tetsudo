@@ -363,10 +363,10 @@
             } catch (_e) {}
             if (seg.fromLine || (seg.toLines && seg.toLines.length)) {
               var badgeParts = [];
-              if (seg.fromLine) badgeParts.push(this._lineBadge(seg.fromLine));
+              if (seg.fromLine) badgeParts.push(this._lineBadge(seg.fromLine, _arrPlat));
               if (seg.toLines && seg.toLines.length) {
                 if (badgeParts.length) badgeParts.push('<svg class="journey-line-arrow" viewBox="0 0 14 14" width="12" height="12" fill="currentColor" aria-hidden="true" focusable="false"><path fill-rule="evenodd" clip-rule="evenodd" transform="rotate(90 7 7)" d="M6.646.146a.5.5 0 0 1 .708 0l3.5 3.5a.5.5 0 0 1-.354.854H8V13a1 1 0 1 1-2 0V4.5H3.5a.5.5 0 0 1-.354-.854z"/></svg>');
-                for (var bi = 0; bi < seg.toLines.length; bi++) badgeParts.push(this._lineBadge(seg.toLines[bi]));
+                for (var bi = 0; bi < seg.toLines.length; bi++) badgeParts.push(this._lineBadge(seg.toLines[bi], _depPlat));
               }
               lineChange = '<span class="journey-line-icons">' + badgeParts.join('') + '</span>';
             }
@@ -380,15 +380,7 @@
             html += '<span class="journey-transfer-station">' + window.escapeHtml(txSt) + '</span>';
             html += '<span class="journey-transfer-text';
             if (seg.through) { html += ' journey-transfer-text--through'; }
-            var _txTxt = t(seg.through ? 'search_result.through' : 'search_result.transfer');
-            if (_arrPlat || _depPlat) {
-              var _seg = '';
-              if (_arrPlat) _seg += window.escapeHtml(_arrPlat);
-              if (_arrPlat && _depPlat) _seg += '&rarr;';
-              if (_depPlat) _seg += window.escapeHtml(_depPlat);
-              _txTxt += ' <span class="journey-transfer-plats">' + _seg + '</span>';
-            }
-            html += '">' + _txTxt + '</span>';
+            html += '">' + t(seg.through ? 'search_result.through' : 'search_result.transfer') + '</span>';
             if (lineChange) { html += lineChange; }
             if (!seg.through && seg.station && window.getTransferHint) {
               var hintTxt = window.getTransferHint(seg.station, lang);

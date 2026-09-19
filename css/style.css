@@ -59,7 +59,7 @@
 .journey-line-badge{display:inline-flex;align-items:center;gap:3px;flex-shrink:0;}
 .journey-line-name{font-size:11px;color:var(--text);font-weight:600;white-space:nowrap;}
 .journey-transfer-hint{font-size:11px;color:var(--yellow,#b8860b);flex-basis:100%;margin-top:2px;}
-.journey-transfer-plats{color:#1b7a1b;font-weight:700;}
+.journey-line-platform{font-weight:700;margin-left:1px;}
 
 
 .journey-transfer--through{background:rgba(46,125,50,0.06);border-color:rgba(46,125,50,0.25)!important;}
