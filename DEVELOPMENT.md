@@ -342,7 +342,7 @@ search-ui.js 渲染结果；点击线路可跳转 trains.html 查看该线实时
 | pages/ | 页面（7 个，见 3.6） | 每页职责单一；只允许引用 ../css/ ../js/ ../data/ ../images/ ../fonts/ |
 | css/ | 样式 | 全局 style.css；页面专属样式独立文件；禁止页面内联 style（CSP style-src 'self'） |
 | js/ | 前端模块 | 按数据/业务/展示三层组织（见 3.7）；模块职责单一，禁止跨层依赖 |
-| data/core/ | 构建期生成数据 + 加载器（db-loader.js、*.file.js、源 JSON） | 生成文件禁止手工编辑；冻结数据修改必须走 Freeze 例外，改后重跑生成脚本 |
+| data/core/ | 构建期生成数据 + 加载器（db-loader.js、*.file.js、源 JSON）+ 运行时常量表 | 生成文件（*.file.js、config-bundle.js）禁止手工编辑；冻结数据修改必须走 Freeze 例外，改后重跑 gen-file-data.js；改 7 个运行时常量表后重跑 gen-config-bundle.js |
 | data/api/ | ODPT 客户端（odpt-unified.js）与链接（odpt-links.js） | ODPT 访问唯一入口；首页经 odpt-lazy.js 惰性加载 |
 | data/timetables/ | 手动时刻表（*-manual.js）+ vehicle-type-map.js | 命名 <RailwayId>-manual.js；仅 ODPT 无数据的线路允许手工整理 |
 | fonts/ | 像素字体（ja/ko/zh-hans/zh-hant/latin） | 唯一字体源，禁止使用系统字体替代 |
@@ -1776,6 +1776,9 @@ RailwayDB.resolveLineName / resolveStationName / tOp 是唯一允许的显示名
 ### 运行契约（Runtime Contract）
 
 规范数据由 db-loader.js 通过 fetch 加载（railway_data.json / station_i18n.json / tourism_data.json）。
+
+运行时常量由 data/config-bundle.js 一次性 <script> 引入（构建产物，禁止手改）。它由 data/core/gen-config-bundle.js 按序拼接 7 个源表生成：transfer-hints → runtime-config → through-service → line-operation-systems → platform-data → line-service-relations → train-type-defs。改任一源表后必须重跑 
+ode data/core/gen-config-bundle.js。大三件（railway/tourism/i18n）保持独立文件以保留细粒度缓存，不并入 bundle。旧的 data-core-bundle.js 已删除。
 
 file:// 协议会阻断 fetch（CORS），因此双击打开页面无法工作。项目必须通过 HTTP 服务：
 
