@@ -294,16 +294,17 @@
 
     // Line badge: icon image from RailwayDB line.image (provider-owned field),
     // falling back to the resolved display name so a missing icon never blanks out.
-    _lineBadge: function(lid) {
+    _lineBadge: function(lid, plat) {
       if (!lid) return '';
       var nm = (window.RailwayDB && window.RailwayDB.resolveLineName) ? window.RailwayDB.resolveLineName(lid, window.currentLang) : lid;
       var line = (window.RailwayDB && window.RailwayDB.getLine) ? window.RailwayDB.getLine(lid) : null;
       var img = (window.LineOperationSystemsResolveIcon && window.LineOperationSystemsResolveIcon(lid)) || (line && line.image && !/(グループ|ロゴ|マーク|アイコン|シンボル)/.test(line.image) ? line.image : '');
       if (!img && line && window.TransitConstants && window.TransitConstants.isJRERoute && window.TransitConstants.isJRERoute(line)) img = "../images/鉄道/JR東日本/JRグループ.png";
+      var _platChip = plat ? '<span class="journey-line-platform">' + window.escapeHtml(plat) + '</span>' : '';
       if (img) {
-        return '<span class="journey-line-badge"><img class="journey-line-icon" src="' + window.escapeHtml(img) + '" alt="' + window.escapeHtml(nm) + '" title="' + window.escapeHtml(nm) + '" loading="lazy"><span class="journey-line-name">' + window.escapeHtml(nm) + '</span></span>';
+        return '<span class="journey-line-badge"><img class="journey-line-icon" src="' + window.escapeHtml(img) + '" alt="' + window.escapeHtml(nm) + '" title="' + window.escapeHtml(nm) + '" loading="lazy"><span class="journey-line-name">' + window.escapeHtml(nm) + '</span>' + _platChip + '</span>';
       }
-      return '<span class="journey-line-name-fallback">' + window.escapeHtml(nm) + '</span>';
+      return '<span class="journey-line-name-fallback">' + window.escapeHtml(nm) + _platChip + '</span>';
     },
 
     renderResults: function(result, t) {
@@ -348,12 +349,24 @@
           if (seg.type === 'transfer') {
             var txSt = window.RailwayDB && window.RailwayDB.resolveStationName ? window.RailwayDB.resolveStationName(seg.station, lang) : (seg.station || '');
             var lineChange = '';
+            // v4.3.845: 上下车番线一体化到线徽章——前一乘车段到达站台 / 下一乘车段出发站台
+            var _arrPlat = null, _depPlat = null;
+            try {
+              if (!seg.through && window.PlatformResolver && window.PlatformResolver.resolve) {
+                if (i > 0 && segs[i-1] && segs[i-1].type === 'ride') {
+                  _arrPlat = window.PlatformResolver.resolve(segs[i-1].lineId, seg.station, segs[i-1].direction);
+                }
+                if (i < segs.length - 1 && segs[i+1] && segs[i+1].type === 'ride') {
+                  _depPlat = window.PlatformResolver.resolve(segs[i+1].lineId, seg.station, segs[i+1].direction);
+                }
+              }
+            } catch (_e) {}
             if (seg.fromLine || (seg.toLines && seg.toLines.length)) {
               var badgeParts = [];
-              if (seg.fromLine) badgeParts.push(this._lineBadge(seg.fromLine));
+              if (seg.fromLine) badgeParts.push(this._lineBadge(seg.fromLine, _arrPlat));
               if (seg.toLines && seg.toLines.length) {
                 if (badgeParts.length) badgeParts.push('<svg class="journey-line-arrow" viewBox="0 0 14 14" width="12" height="12" fill="currentColor" aria-hidden="true" focusable="false"><path fill-rule="evenodd" clip-rule="evenodd" transform="rotate(90 7 7)" d="M6.646.146a.5.5 0 0 1 .708 0l3.5 3.5a.5.5 0 0 1-.354.854H8V13a1 1 0 1 1-2 0V4.5H3.5a.5.5 0 0 1-.354-.854z"/></svg>');
-                for (var bi = 0; bi < seg.toLines.length; bi++) badgeParts.push(this._lineBadge(seg.toLines[bi]));
+                for (var bi = 0; bi < seg.toLines.length; bi++) badgeParts.push(this._lineBadge(seg.toLines[bi], _depPlat));
               }
               lineChange = '<span class="journey-line-icons">' + badgeParts.join('') + '</span>';
             }
@@ -369,26 +382,6 @@
             if (seg.through) { html += ' journey-transfer-text--through'; }
             html += '">' + t(seg.through ? 'search_result.through' : 'search_result.transfer') + '</span>';
             if (lineChange) { html += lineChange; }
-            // v4.3.845: 换乘条显示上下车番线——前一乘车段到达站台 / 下一乘车段出发站台
-            if (!seg.through && window.PlatformResolver && window.PlatformResolver.resolve) {
-              var _arrPlat = null, _depPlat = null;
-              try {
-                if (i > 0 && segs[i-1] && segs[i-1].type === 'ride') {
-                  _arrPlat = window.PlatformResolver.resolve(segs[i-1].lineId, seg.station, segs[i-1].direction);
-                }
-                if (i < segs.length - 1 && segs[i+1] && segs[i+1].type === 'ride') {
-                  _depPlat = window.PlatformResolver.resolve(segs[i+1].lineId, seg.station, segs[i+1].direction);
-                }
-              } catch (_e) {}
-              if (_arrPlat || _depPlat) {
-                var _pt = '<span class="journey-transfer-platforms">';
-                if (_arrPlat) { _pt += '<span class="jtp-getoff">' + window.escapeHtml(t('search.platform').replace('{p}', _arrPlat)) + '</span>'; }
-                if (_arrPlat && _depPlat) { _pt += '<span class="jtp-arrow">&rarr;</span>'; }
-                if (_depPlat) { _pt += '<span class="jtp-board">' + window.escapeHtml(t('search.platform').replace('{p}', _depPlat)) + '</span>'; }
-                _pt += '</span>';
-                html += _pt;
-              }
-            }
             if (!seg.through && seg.station && window.getTransferHint) {
               var hintTxt = window.getTransferHint(seg.station, lang);
               if (hintTxt) { html += '<span class="journey-transfer-hint">' + window.escapeHtml(hintTxt) + '</span>'; }
