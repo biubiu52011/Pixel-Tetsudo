@@ -21,23 +21,8 @@
     var d = document.createElement("div"); d.textContent = s; return d.innerHTML;
   };
 
-  // === GEOM 设计令牌（v4.3.482：统一线路图度量，行业惯例网格）===
-  // 所有线路共用一套宽度语义，不再一条线一套魔法数字。
-  var GEOM = {
-    // 支线列宽：站名 16px（最长 6 字≈106px）+ 换乘 chip 余量，统一全支线
-    BRANCH_COL_W: 96,
-    // 分叉引出长度（主线列 → 支线列的水平 stub）
-    BRANCH_STUB: 20,
-    // 主线基准画布宽（v4.3.543: 固定档位，不再按容器宽度 clamp——图的实际像素与窗口宽度无关）
-    MAIN_BASE_W_MOBILE: 410,
-    // v4.3.605: 移动端内容画布基准 = 山手线环线 svgW（48*1.5 + 150*1.5 = 297）。
-    // 所有线路共用同一内容密度：直线型不再 1:1 跟随容器宽（字小、中间细条留白），
-    // 而是与山手线同倍率视觉放大（约 1.5x）。svgW = max(_baseW, 内容需求) 自动扩展。
-    MOBILE_CONTENT_W: 297,
-    // v4.3.543 停用：MAIN_BASE_W_MIN（440）原为容器宽度 clamp 下界，固定基准后无引用，保留作历史
-    MAIN_BASE_W_MIN: 440,
-    MAIN_BASE_W_MAX: 820
-  };
+  // === GEOM 设计令牌 → trains-config.js ===
+  var GEOM = window.TrainsConfig.GEOM;
 
   function getLinesData() {
     // Priority 1: DataFusion fused data (has realtimePositions for train location)
