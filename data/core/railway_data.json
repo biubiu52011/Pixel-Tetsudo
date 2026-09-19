@@ -10489,17 +10489,12 @@
         "Mikawashima",
         "Minami-Senju",
         "Kita-Senju",
-        "Ayase",
-        "Kameari",
-        "Kanamachi",
         "Matsudo",
-        "Mabashi",
-        "Shin-Matsudo",
-        "Kita-Kogane",
         "Kashiwa",
         "Abiko",
         "Tennodai",
-        "Toride"
+        "Toride",
+        "Tsuchiura"
       ],
       "durations": [
         4,
@@ -12647,10 +12642,6 @@
       "durationTotalMin": 50,
       "branchOf": null,
       "stations": [
-        "Ueno",
-        "Nippori",
-        "Mikawashima",
-        "Minami-Senju",
         "Kita-Senju",
         "Ayase",
         "Kameari",
