@@ -481,7 +481,7 @@
       "lng": 139.7839
     },
     "Shinonome": {
-      "lat": 35.64060,
+      "lat": 35.6406,
       "lng": 139.80328
     },
     "Kachidoki": {
@@ -39808,17 +39808,11 @@
       "Mikawashima": 5,
       "Minami-Senju": 6,
       "Kita-Senju": 7,
-      "Ayase": 8,
-      "Kameari": 9,
-      "Kanamachi": 10,
-      "Matsudo": 11,
-      "Mabashi": 12,
-      "Shin-Matsudo": 13,
-      "Kita-Kogane": 14,
-      "Kashiwa": 15,
-      "Abiko": 16,
-      "Tennodai": 17,
-      "Toride": 18
+      "Matsudo": 8,
+      "Kashiwa": 9,
+      "Abiko": 10,
+      "Tennodai": 11,
+      "Toride": 12
     },
     "Keiyo": {
       "Tokyo": 0,
@@ -39977,25 +39971,21 @@
       "Atami": 13
     },
     "JobanLocal": {
-      "Ueno": 0,
-      "Nippori": 1,
-      "Mikawashima": 2,
-      "Minami-Senju": 3,
-      "Kita-Senju": 4,
-      "Ayase": 5,
-      "Kameari": 6,
-      "Kanamachi": 7,
-      "Matsudo": 8,
-      "Kita-Matsudo": 9,
-      "Mabashi": 10,
-      "Shin-Matsudo": 11,
-      "Kita-Kogane": 12,
-      "Minami-Kashiwa": 13,
-      "Kashiwa": 14,
-      "Kita-Kashiwa": 15,
-      "Abiko": 16,
-      "Tennodai": 17,
-      "Toride": 18
+      "Kita-Senju": 0,
+      "Ayase": 1,
+      "Kameari": 2,
+      "Kanamachi": 3,
+      "Matsudo": 4,
+      "Kita-Matsudo": 5,
+      "Mabashi": 6,
+      "Shin-Matsudo": 7,
+      "Kita-Kogane": 8,
+      "Minami-Kashiwa": 9,
+      "Kashiwa": 10,
+      "Kita-Kashiwa": 11,
+      "Abiko": 12,
+      "Tennodai": 13,
+      "Toride": 14
     },
     "Ginza": {
       "Shibuya": 0,
