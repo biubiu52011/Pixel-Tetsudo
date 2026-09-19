@@ -481,7 +481,7 @@ window.RAILWAY_DATA = {
       "lng": 139.7839
     },
     "Shinonome": {
-      "lat": 35.64060,
+      "lat": 35.6406,
       "lng": 139.80328
     },
     "Kachidoki": {
@@ -8735,6 +8735,34 @@ window.RAILWAY_DATA = {
     "Okawadai": {
       "lat": 41.163203,
       "lng": 140.50755
+    },
+    "Koriyama": {
+      "lat": 37.3958,
+      "lng": 140.389
+    },
+    "Aotsu": {
+      "lat": 37.654247,
+      "lng": 138.873478
+    },
+    "Mutsu-Yanagita": {
+      "lat": 40.740678,
+      "lng": 140.123367
+    },
+    "Echigo-Iwasawa": {
+      "lat": 37.240667,
+      "lng": 138.796803
+    },
+    "Tsugaru-Shinjo": {
+      "lat": 40.828022,
+      "lng": 140.672072
+    },
+    "Fukushima": {
+      "lat": 37.75444,
+      "lng": 140.45861
+    },
+    "Echigo-Hirose": {
+      "lat": 37.274306,
+      "lng": 138.981194
     }
   },
   "lines": {
@@ -8865,12 +8893,6 @@ window.RAILWAY_DATA = {
         {
           "station": "Omiya",
           "lineId": "Takasaki",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Omiya",
-          "lineId": "Noda",
           "type": "in",
           "note": ""
         },
@@ -10430,12 +10452,6 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Omiya",
-          "lineId": "Noda",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Omiya",
           "lineId": "Kawagoe",
           "type": "in",
           "note": ""
@@ -10489,17 +10505,17 @@ window.RAILWAY_DATA = {
         "Mikawashima",
         "Minami-Senju",
         "Kita-Senju",
-        "Ayase",
-        "Kameari",
-        "Kanamachi",
         "Matsudo",
-        "Mabashi",
-        "Shin-Matsudo",
-        "Kita-Kogane",
         "Kashiwa",
         "Abiko",
         "Tennodai",
-        "Toride"
+        "Toride",
+        "Fujishiro",
+        "Ryugasakishi",
+        "Ushiku",
+        "Hitachino-Ushiku",
+        "Arakawaoki",
+        "Tsuchiura"
       ],
       "durations": [
         4,
@@ -10778,12 +10794,6 @@ window.RAILWAY_DATA = {
         {
           "station": "Kashiwa",
           "lineId": "JobanLocal",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Kashiwa",
-          "lineId": "Noda",
           "type": "in",
           "note": ""
         },
@@ -11176,12 +11186,6 @@ window.RAILWAY_DATA = {
         {
           "station": "Omiya",
           "lineId": "Takasaki",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Omiya",
-          "lineId": "Noda",
           "type": "in",
           "note": ""
         },
@@ -11931,12 +11935,6 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Omiya",
-          "lineId": "Noda",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Omiya",
           "lineId": "Kawagoe",
           "type": "in",
           "note": ""
@@ -11956,12 +11954,6 @@ window.RAILWAY_DATA = {
         {
           "station": "Omiya",
           "lineId": "UtsunomiyaJR",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Shinmachi",
-          "lineId": "Kounan",
           "type": "in",
           "note": ""
         },
@@ -12647,10 +12639,6 @@ window.RAILWAY_DATA = {
       "durationTotalMin": 50,
       "branchOf": null,
       "stations": [
-        "Ueno",
-        "Nippori",
-        "Mikawashima",
-        "Minami-Senju",
         "Kita-Senju",
         "Ayase",
         "Kameari",
@@ -12716,12 +12704,6 @@ window.RAILWAY_DATA = {
         {
           "station": "Kashiwa",
           "lineId": "Joban",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Kashiwa",
-          "lineId": "Noda",
           "type": "in",
           "note": ""
         },
@@ -13606,12 +13588,6 @@ window.RAILWAY_DATA = {
           "note": ""
         },
         {
-          "station": "Iriya",
-          "lineId": "Sagami",
-          "type": "in",
-          "note": ""
-        },
-        {
           "station": "Minami-Senju",
           "lineId": "Joban",
           "type": "in",
@@ -14101,12 +14077,6 @@ window.RAILWAY_DATA = {
         {
           "station": "Monzen-Nakacho",
           "lineId": "Oedo",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Minami-Sunamachi",
-          "lineId": "Yurakucho",
           "type": "in",
           "note": ""
         },
@@ -15115,12 +15085,6 @@ window.RAILWAY_DATA = {
         {
           "station": "Omotesando",
           "lineId": "Hanzomon",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Akasaka",
-          "lineId": "Kounan",
           "type": "in",
           "note": ""
         },
@@ -16414,12 +16378,6 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Tamagawa",
-          "lineId": "Suigun",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Tamagawa",
           "lineId": "TokyuTamagawa",
           "type": "in",
           "note": ""
@@ -17095,12 +17053,6 @@ window.RAILWAY_DATA = {
           "note": ""
         },
         {
-          "station": "Yamato",
-          "lineId": "Kounan",
-          "type": "in",
-          "note": ""
-        },
-        {
           "station": "Shonandai",
           "lineId": "YokohamaBlue",
           "type": "in",
@@ -17466,12 +17418,6 @@ window.RAILWAY_DATA = {
         {
           "station": "Ichikawa",
           "lineId": "ChuoSobuLocal",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Funabashi",
-          "lineId": "Noda",
           "type": "in",
           "note": ""
         },
@@ -18112,12 +18058,6 @@ window.RAILWAY_DATA = {
         {
           "station": "Yamato",
           "lineId": "OdakyuEnoshima",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Yamato",
-          "lineId": "Kounan",
           "type": "in",
           "note": ""
         },
@@ -19272,12 +19212,6 @@ window.RAILWAY_DATA = {
           "note": ""
         },
         {
-          "station": "Aotsu",
-          "lineId": "Echigo",
-          "type": "in",
-          "note": ""
-        },
-        {
           "station": "Aizu-Kawaguchi",
           "lineId": "Tadami",
           "type": "in",
@@ -19464,12 +19398,6 @@ window.RAILWAY_DATA = {
         {
           "station": "Higashi-Nakano",
           "lineId": "Oedo",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Okubo",
-          "lineId": "OuMain",
           "type": "in",
           "note": ""
         },
@@ -19703,12 +19631,6 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Funabashi",
-          "lineId": "Noda",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Funabashi",
           "lineId": "SobuRapid",
           "type": "in",
           "note": ""
@@ -19910,12 +19832,6 @@ window.RAILWAY_DATA = {
           "note": ""
         },
         {
-          "station": "Aotsu",
-          "lineId": "BanetsuWest",
-          "type": "in",
-          "note": ""
-        },
-        {
           "station": "Yoshida",
           "lineId": "Miyo",
           "type": "in",
@@ -20047,26 +19963,8 @@ window.RAILWAY_DATA = {
           "note": ""
         },
         {
-          "station": "Mutsu-Iwasaki",
-          "lineId": "Tsugaru",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Mutsu-Yanagita",
-          "lineId": "Tsugaru",
-          "type": "in",
-          "note": ""
-        },
-        {
           "station": "Kawabe",
           "lineId": "OuMain",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Kawabe",
-          "lineId": "Suigun",
           "type": "in",
           "note": ""
         }
@@ -20260,12 +20158,6 @@ window.RAILWAY_DATA = {
           "lineId": "Kokubunji",
           "type": "in",
           "note": ""
-        },
-        {
-          "station": "Ogawa",
-          "lineId": "Suigun",
-          "type": "in",
-          "note": ""
         }
       ],
       "nameZh": "拜岛线",
@@ -20351,12 +20243,6 @@ window.RAILWAY_DATA = {
       ],
       "throughServices": [],
       "transferStations": [
-        {
-          "station": "Echigo-Iwasawa",
-          "lineId": "Yonezawa",
-          "type": "in",
-          "note": ""
-        },
         {
           "station": "Echigo-Kawaguchi",
           "lineId": "Joetsu",
@@ -20560,12 +20446,6 @@ window.RAILWAY_DATA = {
         {
           "station": "Kogota",
           "lineId": "TohokuMain",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Wakuya",
-          "lineId": "Ofunato",
           "type": "in",
           "note": ""
         },
@@ -21062,12 +20942,6 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Omiya",
-          "lineId": "Noda",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Omiya",
           "lineId": "NewShuttle",
           "type": "in",
           "note": ""
@@ -21189,13 +21063,6 @@ window.RAILWAY_DATA = {
           "toStation": "Tenkubashi",
           "type": "in",
           "note": ""
-        },
-        {
-          "station": "Haneda-Kuko-T1T2",
-          "lineId": "TokyoMonorail",
-          "toStation": "Haneda Airport Terminal 1",
-          "type": "out",
-          "note": "東京モノレール羽田空港第1ターミナル，徒歩約5分"
         },
         {
           "station": "Haneda-Kuko-T1T2",
@@ -21939,12 +21806,6 @@ window.RAILWAY_DATA = {
           "note": ""
         },
         {
-          "station": "Rikuzen-Minato",
-          "lineId": "Ofunato",
-          "type": "in",
-          "note": ""
-        },
-        {
           "station": "Kesennuma",
           "lineId": "Ofunato",
           "type": "in",
@@ -22115,12 +21976,6 @@ window.RAILWAY_DATA = {
         {
           "station": "Ogawa",
           "lineId": "Haijima",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Ogawa",
-          "lineId": "Suigun",
           "type": "in",
           "note": ""
         },
@@ -22322,12 +22177,6 @@ window.RAILWAY_DATA = {
         {
           "station": "Yamato",
           "lineId": "SotetsuMain",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Yamato",
-          "lineId": "Mito",
           "type": "in",
           "note": ""
         }
@@ -23478,18 +23327,6 @@ window.RAILWAY_DATA = {
           "note": ""
         },
         {
-          "station": "Kawabe",
-          "lineId": "Suigun",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Tsugaru-Shinjo",
-          "lineId": "Tsugaru",
-          "type": "in",
-          "note": ""
-        },
-        {
           "station": "Aomori",
           "lineId": "Tsugaru",
           "type": "in",
@@ -24254,12 +24091,6 @@ window.RAILWAY_DATA = {
           "note": ""
         },
         {
-          "station": "Rikuzen-Ono",
-          "lineId": "Ofunato",
-          "type": "in",
-          "note": ""
-        },
-        {
           "station": "Yamoto",
           "lineId": "SensekiTohoku",
           "type": "in",
@@ -24965,12 +24796,6 @@ window.RAILWAY_DATA = {
           "note": ""
         },
         {
-          "station": "Shizu-Suigun",
-          "lineId": "Keisei",
-          "type": "in",
-          "note": ""
-        },
-        {
           "station": "Tamagawa",
           "lineId": "TokyuToyoko",
           "type": "in",
@@ -25377,12 +25202,6 @@ window.RAILWAY_DATA = {
           "note": ""
         },
         {
-          "station": "Hanaizumi",
-          "lineId": "Ofunato",
-          "type": "in",
-          "note": ""
-        },
-        {
           "station": "Ichinoseki",
           "lineId": "Ofunato",
           "type": "in",
@@ -25641,12 +25460,6 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Tamagawa",
-          "lineId": "Suigun",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Tamagawa",
           "lineId": "TokyuMeguro",
           "type": "in",
           "note": ""
@@ -25721,12 +25534,6 @@ window.RAILWAY_DATA = {
       "transferStations": [
         {
           "station": "Aomori",
-          "lineId": "OuMain",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Tsugaru-Shinjo",
           "lineId": "OuMain",
           "type": "in",
           "note": ""
@@ -26205,18 +26012,6 @@ window.RAILWAY_DATA = {
           "note": ""
         },
         {
-          "station": "Higashi-Sakata",
-          "lineId": "RikutsuWest",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Sakata",
-          "lineId": "RikutsuWest",
-          "type": "in",
-          "note": ""
-        },
-        {
           "station": "Kamihama",
           "lineId": "Shinetsu",
           "type": "in",
@@ -26567,12 +26362,6 @@ window.RAILWAY_DATA = {
         {
           "station": "Yonezawa",
           "lineId": "Yamagata",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Oguni",
-          "lineId": "BanetsuEast",
           "type": "in",
           "note": ""
         },
@@ -27177,12 +26966,6 @@ window.RAILWAY_DATA = {
           "note": ""
         },
         {
-          "station": "Shinden",
-          "lineId": "Senseki",
-          "type": "in",
-          "note": ""
-        },
-        {
           "station": "Kasukabe",
           "lineId": "Noda",
           "type": "in",
@@ -27394,12 +27177,6 @@ window.RAILWAY_DATA = {
           "note": ""
         },
         {
-          "station": "Oyamadai",
-          "lineId": "Kamaishi",
-          "type": "in",
-          "note": ""
-        },
-        {
           "station": "Mizonokuchi",
           "lineId": "TokyuDenEn",
           "type": "in",
@@ -27458,12 +27235,6 @@ window.RAILWAY_DATA = {
         {
           "station": "Tamagawa",
           "lineId": "TokyuToyoko",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Tamagawa",
-          "lineId": "Suigun",
           "type": "in",
           "note": ""
         },
@@ -28008,12 +27779,6 @@ window.RAILWAY_DATA = {
         {
           "station": "Omiya",
           "lineId": "Takasaki",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Omiya",
-          "lineId": "Noda",
           "type": "in",
           "note": ""
         },
@@ -28893,38 +28658,8 @@ window.RAILWAY_DATA = {
       "throughServices": [],
       "transferStations": [
         {
-          "station": "Aizu-Hongo",
-          "lineId": "BanetsuWest",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Aizu-Takada",
-          "lineId": "BanetsuWest",
-          "type": "in",
-          "note": ""
-        },
-        {
           "station": "Negishi",
           "lineId": "KeihinTohoku",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Aizu-Hinohara",
-          "lineId": "BanetsuWest",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Aizu-Kawaguchi",
-          "lineId": "BanetsuWest",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Echigo-Hirose",
-          "lineId": "Yonezawa",
           "type": "in",
           "note": ""
         },
@@ -29202,12 +28937,6 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Omiya",
-          "lineId": "Noda",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Omiya",
           "lineId": "Kawagoe",
           "type": "in",
           "note": ""
@@ -29237,12 +28966,6 @@ window.RAILWAY_DATA = {
           "note": ""
         },
         {
-          "station": "Nogi",
-          "lineId": "Suigun",
-          "type": "in",
-          "note": ""
-        },
-        {
           "station": "Oyama",
           "lineId": "Mito",
           "type": "in",
@@ -29256,12 +28979,6 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Hoshakuji",
-          "lineId": "Karasuyama",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Nishinasuno",
           "lineId": "Karasuyama",
           "type": "in",
           "note": ""
@@ -39808,17 +39525,17 @@ window.RAILWAY_DATA = {
       "Mikawashima": 5,
       "Minami-Senju": 6,
       "Kita-Senju": 7,
-      "Ayase": 8,
-      "Kameari": 9,
-      "Kanamachi": 10,
-      "Matsudo": 11,
-      "Mabashi": 12,
-      "Shin-Matsudo": 13,
-      "Kita-Kogane": 14,
-      "Kashiwa": 15,
-      "Abiko": 16,
-      "Tennodai": 17,
-      "Toride": 18
+      "Matsudo": 8,
+      "Kashiwa": 9,
+      "Abiko": 10,
+      "Tennodai": 11,
+      "Toride": 12,
+      "Fujishiro": 13,
+      "Ryugasakishi": 14,
+      "Ushiku": 15,
+      "Hitachino-Ushiku": 16,
+      "Arakawaoki": 17,
+      "Tsuchiura": 18
     },
     "Keiyo": {
       "Tokyo": 0,
@@ -39977,25 +39694,21 @@ window.RAILWAY_DATA = {
       "Atami": 13
     },
     "JobanLocal": {
-      "Ueno": 0,
-      "Nippori": 1,
-      "Mikawashima": 2,
-      "Minami-Senju": 3,
-      "Kita-Senju": 4,
-      "Ayase": 5,
-      "Kameari": 6,
-      "Kanamachi": 7,
-      "Matsudo": 8,
-      "Kita-Matsudo": 9,
-      "Mabashi": 10,
-      "Shin-Matsudo": 11,
-      "Kita-Kogane": 12,
-      "Minami-Kashiwa": 13,
-      "Kashiwa": 14,
-      "Kita-Kashiwa": 15,
-      "Abiko": 16,
-      "Tennodai": 17,
-      "Toride": 18
+      "Kita-Senju": 0,
+      "Ayase": 1,
+      "Kameari": 2,
+      "Kanamachi": 3,
+      "Matsudo": 4,
+      "Kita-Matsudo": 5,
+      "Mabashi": 6,
+      "Shin-Matsudo": 7,
+      "Kita-Kogane": 8,
+      "Minami-Kashiwa": 9,
+      "Kashiwa": 10,
+      "Kita-Kashiwa": 11,
+      "Abiko": 12,
+      "Tennodai": 13,
+      "Toride": 14
     },
     "Ginza": {
       "Shibuya": 0,
@@ -43078,6 +42791,65 @@ window.RAILWAY_DATA = {
       "Kawasaki": 5,
       "Yokohama": 6,
       "Ofuna": 7
+    },
+    "JobanMedium": {
+      "Tsuchiura": 0,
+      "Kandatsu": 1,
+      "Takahama": 2,
+      "Ishioka": 3,
+      "Hatori": 4,
+      "Iwama": 5,
+      "Tomobe": 6,
+      "Uchihara": 7,
+      "Akatsuka": 8,
+      "Kairakuen": 9,
+      "Mito": 10,
+      "Katsuta": 11,
+      "Sawa": 12,
+      "Tokai": 13,
+      "Omika": 14,
+      "Hitachi-Taga": 15,
+      "Hitachi": 16,
+      "Kobuki": 17,
+      "Juo": 18,
+      "Takahagi": 19,
+      "Naka-Minato": 20,
+      "Isohara": 21,
+      "Otsukoh": 22,
+      "Nakoso": 23,
+      "Ueda": 24,
+      "Izumi": 25,
+      "Yumoto": 26,
+      "Uchigo": 27,
+      "Iwaki": 28,
+      "Kusano": 29,
+      "Yotsukura": 30,
+      "Kumanoyu": 31,
+      "Tsukuda": 32,
+      "Hirono": 33,
+      "J-Village": 34,
+      "Kido": 35,
+      "Tatsuta": 36,
+      "Tomioka": 37,
+      "Yonomori": 38,
+      "Ono": 39,
+      "Futaba": 40,
+      "Namie": 41,
+      "Mamoto": 42,
+      "Odaka": 43,
+      "Matsukawa": 44,
+      "Haranomachi": 45,
+      "Kashima": 46,
+      "Soma": 47,
+      "Komagamine": 48,
+      "Shinchi": 49,
+      "Sakamoto": 50,
+      "Yamashita": 51,
+      "Hama-Yoshida": 52,
+      "Watari": 53,
+      "Okuma": 54,
+      "Iwanuma": 55,
+      "Sendai": 56
     }
   }
 };

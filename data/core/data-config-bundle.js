@@ -957,8 +957,8 @@ window.getTransferHint = function(stationId, lang) {
 
   // ========== UI 策略常量 ==========
 
-  /** 换乘 chip 行数上限（per station）。v4.3.613: 2→3 行——JR 大站（东京/新宿）换乘超 8 条，2 行截断致"同一套系统无法区分"。 */
-  var TRANSFER_MAX_ROWS = 3;
+  /** 换乘 chip 行数上限（per station）。v4.3.613: 2→3 行（JR 大站东京/新宿换乘超 8 条）；v4.3.849: 3→4 行（4×4=16 个图标上限，用户裁定）。 */
+  var TRANSFER_MAX_ROWS = 4;
 
   window.RuntimeConfig = {
     // 线路层级

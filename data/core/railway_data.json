@@ -8735,6 +8735,34 @@
     "Okawadai": {
       "lat": 41.163203,
       "lng": 140.50755
+    },
+    "Koriyama": {
+      "lat": 37.3958,
+      "lng": 140.389
+    },
+    "Aotsu": {
+      "lat": 37.654247,
+      "lng": 138.873478
+    },
+    "Mutsu-Yanagita": {
+      "lat": 40.740678,
+      "lng": 140.123367
+    },
+    "Echigo-Iwasawa": {
+      "lat": 37.240667,
+      "lng": 138.796803
+    },
+    "Tsugaru-Shinjo": {
+      "lat": 40.828022,
+      "lng": 140.672072
+    },
+    "Fukushima": {
+      "lat": 37.75444,
+      "lng": 140.45861
+    },
+    "Echigo-Hirose": {
+      "lat": 37.274306,
+      "lng": 138.981194
     }
   },
   "lines": {
@@ -8865,12 +8893,6 @@
         {
           "station": "Omiya",
           "lineId": "Takasaki",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Omiya",
-          "lineId": "Noda",
           "type": "in",
           "note": ""
         },
@@ -10430,12 +10452,6 @@
         },
         {
           "station": "Omiya",
-          "lineId": "Noda",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Omiya",
           "lineId": "Kawagoe",
           "type": "in",
           "note": ""
@@ -10778,12 +10794,6 @@
         {
           "station": "Kashiwa",
           "lineId": "JobanLocal",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Kashiwa",
-          "lineId": "Noda",
           "type": "in",
           "note": ""
         },
@@ -11176,12 +11186,6 @@
         {
           "station": "Omiya",
           "lineId": "Takasaki",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Omiya",
-          "lineId": "Noda",
           "type": "in",
           "note": ""
         },
@@ -11931,12 +11935,6 @@
         },
         {
           "station": "Omiya",
-          "lineId": "Noda",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Omiya",
           "lineId": "Kawagoe",
           "type": "in",
           "note": ""
@@ -11956,12 +11954,6 @@
         {
           "station": "Omiya",
           "lineId": "UtsunomiyaJR",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Shinmachi",
-          "lineId": "Kounan",
           "type": "in",
           "note": ""
         },
@@ -12712,12 +12704,6 @@
         {
           "station": "Kashiwa",
           "lineId": "Joban",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Kashiwa",
-          "lineId": "Noda",
           "type": "in",
           "note": ""
         },
@@ -13602,12 +13588,6 @@
           "note": ""
         },
         {
-          "station": "Iriya",
-          "lineId": "Sagami",
-          "type": "in",
-          "note": ""
-        },
-        {
           "station": "Minami-Senju",
           "lineId": "Joban",
           "type": "in",
@@ -14097,12 +14077,6 @@
         {
           "station": "Monzen-Nakacho",
           "lineId": "Oedo",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Minami-Sunamachi",
-          "lineId": "Yurakucho",
           "type": "in",
           "note": ""
         },
@@ -15111,12 +15085,6 @@
         {
           "station": "Omotesando",
           "lineId": "Hanzomon",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Akasaka",
-          "lineId": "Kounan",
           "type": "in",
           "note": ""
         },
@@ -16410,12 +16378,6 @@
         },
         {
           "station": "Tamagawa",
-          "lineId": "Suigun",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Tamagawa",
           "lineId": "TokyuTamagawa",
           "type": "in",
           "note": ""
@@ -17091,12 +17053,6 @@
           "note": ""
         },
         {
-          "station": "Yamato",
-          "lineId": "Kounan",
-          "type": "in",
-          "note": ""
-        },
-        {
           "station": "Shonandai",
           "lineId": "YokohamaBlue",
           "type": "in",
@@ -17462,12 +17418,6 @@
         {
           "station": "Ichikawa",
           "lineId": "ChuoSobuLocal",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Funabashi",
-          "lineId": "Noda",
           "type": "in",
           "note": ""
         },
@@ -18108,12 +18058,6 @@
         {
           "station": "Yamato",
           "lineId": "OdakyuEnoshima",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Yamato",
-          "lineId": "Kounan",
           "type": "in",
           "note": ""
         },
@@ -19268,12 +19212,6 @@
           "note": ""
         },
         {
-          "station": "Aotsu",
-          "lineId": "Echigo",
-          "type": "in",
-          "note": ""
-        },
-        {
           "station": "Aizu-Kawaguchi",
           "lineId": "Tadami",
           "type": "in",
@@ -19460,12 +19398,6 @@
         {
           "station": "Higashi-Nakano",
           "lineId": "Oedo",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Okubo",
-          "lineId": "OuMain",
           "type": "in",
           "note": ""
         },
@@ -19699,12 +19631,6 @@
         },
         {
           "station": "Funabashi",
-          "lineId": "Noda",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Funabashi",
           "lineId": "SobuRapid",
           "type": "in",
           "note": ""
@@ -19906,12 +19832,6 @@
           "note": ""
         },
         {
-          "station": "Aotsu",
-          "lineId": "BanetsuWest",
-          "type": "in",
-          "note": ""
-        },
-        {
           "station": "Yoshida",
           "lineId": "Miyo",
           "type": "in",
@@ -20043,26 +19963,8 @@
           "note": ""
         },
         {
-          "station": "Mutsu-Iwasaki",
-          "lineId": "Tsugaru",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Mutsu-Yanagita",
-          "lineId": "Tsugaru",
-          "type": "in",
-          "note": ""
-        },
-        {
           "station": "Kawabe",
           "lineId": "OuMain",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Kawabe",
-          "lineId": "Suigun",
           "type": "in",
           "note": ""
         }
@@ -20256,12 +20158,6 @@
           "lineId": "Kokubunji",
           "type": "in",
           "note": ""
-        },
-        {
-          "station": "Ogawa",
-          "lineId": "Suigun",
-          "type": "in",
-          "note": ""
         }
       ],
       "nameZh": "拜岛线",
@@ -20347,12 +20243,6 @@
       ],
       "throughServices": [],
       "transferStations": [
-        {
-          "station": "Echigo-Iwasawa",
-          "lineId": "Yonezawa",
-          "type": "in",
-          "note": ""
-        },
         {
           "station": "Echigo-Kawaguchi",
           "lineId": "Joetsu",
@@ -20556,12 +20446,6 @@
         {
           "station": "Kogota",
           "lineId": "TohokuMain",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Wakuya",
-          "lineId": "Ofunato",
           "type": "in",
           "note": ""
         },
@@ -21058,12 +20942,6 @@
         },
         {
           "station": "Omiya",
-          "lineId": "Noda",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Omiya",
           "lineId": "NewShuttle",
           "type": "in",
           "note": ""
@@ -21185,13 +21063,6 @@
           "toStation": "Tenkubashi",
           "type": "in",
           "note": ""
-        },
-        {
-          "station": "Haneda-Kuko-T1T2",
-          "lineId": "TokyoMonorail",
-          "toStation": "Haneda Airport Terminal 1",
-          "type": "out",
-          "note": "東京モノレール羽田空港第1ターミナル，徒歩約5分"
         },
         {
           "station": "Haneda-Kuko-T1T2",
@@ -21935,12 +21806,6 @@
           "note": ""
         },
         {
-          "station": "Rikuzen-Minato",
-          "lineId": "Ofunato",
-          "type": "in",
-          "note": ""
-        },
-        {
           "station": "Kesennuma",
           "lineId": "Ofunato",
           "type": "in",
@@ -22111,12 +21976,6 @@
         {
           "station": "Ogawa",
           "lineId": "Haijima",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Ogawa",
-          "lineId": "Suigun",
           "type": "in",
           "note": ""
         },
@@ -22318,12 +22177,6 @@
         {
           "station": "Yamato",
           "lineId": "SotetsuMain",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Yamato",
-          "lineId": "Mito",
           "type": "in",
           "note": ""
         }
@@ -23474,18 +23327,6 @@
           "note": ""
         },
         {
-          "station": "Kawabe",
-          "lineId": "Suigun",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Tsugaru-Shinjo",
-          "lineId": "Tsugaru",
-          "type": "in",
-          "note": ""
-        },
-        {
           "station": "Aomori",
           "lineId": "Tsugaru",
           "type": "in",
@@ -24250,12 +24091,6 @@
           "note": ""
         },
         {
-          "station": "Rikuzen-Ono",
-          "lineId": "Ofunato",
-          "type": "in",
-          "note": ""
-        },
-        {
           "station": "Yamoto",
           "lineId": "SensekiTohoku",
           "type": "in",
@@ -24961,12 +24796,6 @@
           "note": ""
         },
         {
-          "station": "Shizu-Suigun",
-          "lineId": "Keisei",
-          "type": "in",
-          "note": ""
-        },
-        {
           "station": "Tamagawa",
           "lineId": "TokyuToyoko",
           "type": "in",
@@ -25373,12 +25202,6 @@
           "note": ""
         },
         {
-          "station": "Hanaizumi",
-          "lineId": "Ofunato",
-          "type": "in",
-          "note": ""
-        },
-        {
           "station": "Ichinoseki",
           "lineId": "Ofunato",
           "type": "in",
@@ -25637,12 +25460,6 @@
         },
         {
           "station": "Tamagawa",
-          "lineId": "Suigun",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Tamagawa",
           "lineId": "TokyuMeguro",
           "type": "in",
           "note": ""
@@ -25717,12 +25534,6 @@
       "transferStations": [
         {
           "station": "Aomori",
-          "lineId": "OuMain",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Tsugaru-Shinjo",
           "lineId": "OuMain",
           "type": "in",
           "note": ""
@@ -26201,18 +26012,6 @@
           "note": ""
         },
         {
-          "station": "Higashi-Sakata",
-          "lineId": "RikutsuWest",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Sakata",
-          "lineId": "RikutsuWest",
-          "type": "in",
-          "note": ""
-        },
-        {
           "station": "Kamihama",
           "lineId": "Shinetsu",
           "type": "in",
@@ -26563,12 +26362,6 @@
         {
           "station": "Yonezawa",
           "lineId": "Yamagata",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Oguni",
-          "lineId": "BanetsuEast",
           "type": "in",
           "note": ""
         },
@@ -27173,12 +26966,6 @@
           "note": ""
         },
         {
-          "station": "Shinden",
-          "lineId": "Senseki",
-          "type": "in",
-          "note": ""
-        },
-        {
           "station": "Kasukabe",
           "lineId": "Noda",
           "type": "in",
@@ -27390,12 +27177,6 @@
           "note": ""
         },
         {
-          "station": "Oyamadai",
-          "lineId": "Kamaishi",
-          "type": "in",
-          "note": ""
-        },
-        {
           "station": "Mizonokuchi",
           "lineId": "TokyuDenEn",
           "type": "in",
@@ -27454,12 +27235,6 @@
         {
           "station": "Tamagawa",
           "lineId": "TokyuToyoko",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Tamagawa",
-          "lineId": "Suigun",
           "type": "in",
           "note": ""
         },
@@ -28004,12 +27779,6 @@
         {
           "station": "Omiya",
           "lineId": "Takasaki",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Omiya",
-          "lineId": "Noda",
           "type": "in",
           "note": ""
         },
@@ -28889,38 +28658,8 @@
       "throughServices": [],
       "transferStations": [
         {
-          "station": "Aizu-Hongo",
-          "lineId": "BanetsuWest",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Aizu-Takada",
-          "lineId": "BanetsuWest",
-          "type": "in",
-          "note": ""
-        },
-        {
           "station": "Negishi",
           "lineId": "KeihinTohoku",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Aizu-Hinohara",
-          "lineId": "BanetsuWest",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Aizu-Kawaguchi",
-          "lineId": "BanetsuWest",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Echigo-Hirose",
-          "lineId": "Yonezawa",
           "type": "in",
           "note": ""
         },
@@ -29198,12 +28937,6 @@
         },
         {
           "station": "Omiya",
-          "lineId": "Noda",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Omiya",
           "lineId": "Kawagoe",
           "type": "in",
           "note": ""
@@ -29233,12 +28966,6 @@
           "note": ""
         },
         {
-          "station": "Nogi",
-          "lineId": "Suigun",
-          "type": "in",
-          "note": ""
-        },
-        {
           "station": "Oyama",
           "lineId": "Mito",
           "type": "in",
@@ -29252,12 +28979,6 @@
         },
         {
           "station": "Hoshakuji",
-          "lineId": "Karasuyama",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Nishinasuno",
           "lineId": "Karasuyama",
           "type": "in",
           "note": ""
