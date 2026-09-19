@@ -808,6 +808,7 @@
     syncStatusMap();
     checkCacheStale();
     fuseAll();
+    var REFRESH_INTERVAL = (window.RuntimeConfig && window.RuntimeConfig.REFRESH_INTERVAL) || 15000;
     _refreshTimer = setInterval(function() { try { fuseAll(); } catch(e) { console.debug("[DataFusion] fuseAll error:", e.message); } }, REFRESH_INTERVAL);
     _cacheTimer = setInterval(function() { try { saveToCache(); } catch(e) {} }, REFRESH_INTERVAL);
     (function pollUnified() {
