@@ -211,8 +211,6 @@
   }
   // ========== Route Geometry Cache (Single source of truth for coordinates) ==========
   var _routeGeometryCache = {};
-  function _isMobileView() { return typeof window !== "undefined" && window.innerWidth < 600; }
-  function _geomKey(lineId) { return lineId + (_isMobileView() ? "__m" : "__d"); }
 
   // ========== Transfer map cache: stationId -> interchange lines (excluding the line itself) ==========
   var _transferMapCache = null;
@@ -344,75 +342,7 @@
   // 色块徽章宽度（无图标线的统一徽章，v4.3.613）
   // v4.3.614: 徽章文字改线名（当前语言）而非记号——HAC 等记号普通用户看不懂，
   // 图片徽章内含线名可读，色块徽章同理显示线名（截 4 字）
-  function _badgeW(it, isMobile) {
-    var txt = (it.name || it.lineId || "").slice(0, 4);
-    return txt.length * (isMobile ? 7 : 5) + 8;
-  }
 
-  // Industry-standard through-service affordance (mirrors JR/Tokyo Metro
-  // "相互直通運転" station signage):
-  //   - boxed label "∨/∧直通〇〇線" (arrow = direction the through train continues)
-  //   - title: "Operator Line（相互直通運転）" with i18n operator + through label
-  function _throughBadgeText(lineObj) {
-    var opName = (lineObj.operator && window.tOp) ? window.tOp(lineObj.operator) : "";
-    var base = (opName ? opName + " " : "") + lineObj.name;
-    if (lineObj.through) {
-      var thru = (window.t ? window.t("train.throughService", "相互直通運転") : "相互直通運転");
-      base = base + "（" + thru + "）";
-    } else if (lineObj.type === "out") {
-      // Out-of-station interchange: mark explicitly so users know a gates-out
-      // walk is required, with any note (e.g. "東武浅草，徒歩約5分").
-      var outLbl = (window.t ? window.t("train.transferOut", "站外換乘") : "站外換乘");
-      var _note = lineObj.note || "";
-      // Localize the walk-time fragment ("徒歩約N分") to the active language;
-      // station names inside the note stay as canonical Japanese (proper nouns).
-      var _walkM = _note.match(/徒歩約(\d+)分/);
-      if (_walkM) {
-        var _n = parseInt(_walkM[1], 10);
-        var _lng = window.currentLang || "ja";
-        var _wl = _lng === "en" ? ("approx " + _n + " min walk")
-          : _lng === "zh" ? ("步行約" + _n + "分")
-          : _lng === "ko" ? ("도보 약 " + _n + "분")
-          : ("徒歩約" + _n + "分");
-        _note = _note.replace(/，?徒歩約\d+分/, "，" + _wl);
-      }
-      base = base + "（" + outLbl + (_note ? " " + _note : "") + "）";
-    }
-    return base;
-  }
-  // Short display name for a through-partner line: prefer the "○○ライン" alias in
-  // parentheses (e.g. 伊勢崎線（スカイツリーライン）→ スカイツリーライン), then truncate.
-  function _throughShortName(lineObj, mobile) {
-    var nm = lineObj.name;
-    var m = nm.match(/[（(]([^）)]*ライン)[）)]/);
-    if (m) nm = m[1];
-    var maxN = mobile ? 6 : 10;
-    return nm.length > maxN ? nm.slice(0, maxN) + "…" : nm;
-  }
-  // Size (w/h in px) of the boxed through-service label, used both for layout
-  // anchoring (position calculation) and by the renderer itself.
-  function _throughChipSize(lineObj, mobile) {
-    var nm = _throughShortName(lineObj, mobile);
-    // 方向箭头改为 SVG 矢量绘制（不受字体字形影响），文本不再含 ∧/∨/< 字符。
-    // 4.3.442: "直通" prefix localized (ja 直通 / zh 直通 / ko 직통 / en Through )
-    var throughLbl = (typeof window.t === "function" && window.t("train.through")) ? window.t("train.through") : "直通";
-    var label = throughLbl + nm;
-    var fs = mobile ? 12 : 10;
-    var w = label.length * (mobile ? 12 : 10) + 8 + (mobile ? 12 : 10);
-    var h = (mobile ? 19 : 12) + 4;
-    return { w: w + 2, h: h, label: label };
-  }
-  // Industry-standard through-service affordance (mirrors JR/Tokyo Metro station
-  // signage "相互直通運転"): a rounded boxed label reading "∨直通〇〇線" / "∧直通〇〇線",
-  // where the arrow points in the direction the through train continues on the map
-  // (up=∧, down=∨). Returns the consumed width so flow layouts can advance.
-  function _hexToRgba(hex, a) {
-    var h = String(hex || "#555").replace("#", "");
-    if (h.length === 3) h = h.split("").map(function(c){ return c + c; }).join("");
-    var n = parseInt(h, 16);
-    if (isNaN(n)) { h = "555"; n = parseInt(h, 16); }
-    return "rgba(" + ((n >> 16) & 255) + "," + ((n >> 8) & 255) + "," + (n & 255) + "," + a + ")";
-  }
   function _renderThroughChip(layer, ns, x, y, lineObj, iconSize, mobile) {
     var sz = _throughChipSize(lineObj, mobile);
     var label = sz.label;
