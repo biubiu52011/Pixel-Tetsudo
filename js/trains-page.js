@@ -568,7 +568,7 @@
     // 行数上限若再调，同步 min 值）。一点空隙 SP_GAP=34（= ICON16 + 顶隙6 + 底距12，chip 底部与
     // 下一站圆点顶缘可见空隙 17-23px）。站间距 = 全线各站换乘图标的高最大值 + 空隙（移动/桌面统一，
     // 不再按站数分档）；环线双列 _colPitch 同式复用。
-    var ROW_H = 18, SP_GAP = 28; // v4.3.856: 22→28（用户：不折叠、稍微留点空；3行留3px缝/2行5/1行7）
+    var ROW_H = 18, SP_GAP = 32; // v4.3.857: 28→32（用户：有点近；3行留7px缝/2行9/1行11）
     var _chipPitch = function(ids) {
       var mx = ROW_H + SP_GAP;
       for (var _cp = 0; _cp < ids.length; _cp++) {
