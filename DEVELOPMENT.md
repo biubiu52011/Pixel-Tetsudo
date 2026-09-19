@@ -1256,7 +1256,6 @@ LINE_RAILWAY_CODE：线路 ID → ODPT railway 代码（resolveRailwayCode 解�
 | 字段 | 类型 | 说明 |
 | --- | --- | --- |
 | spots / events / shops | 对象数组 | 景点/活动/店铺三类条目 |
-| 条目字段 | — | name（名称）、coord（[lat, lng]）、dist（步行距离）、desc（多语言描述）、tags[]（标签）、image（图片路径）、bestTime/hours（营业/时间）等 |
 
 本地存储
 
@@ -1690,7 +1689,6 @@ B 需要 X→ B 从 A 的内部复制/重写 X→ B 正常工作了→ A 从未�
 
 | 债务 | 优先级 | 延期理由 |
 | --- | --- | --- |
-| 13 个图片路径修复 | 待处理 | 素材映射，无产品影响 |
 
 ### 架构基线（Architecture Baselines）
 

@@ -29356,7 +29356,7 @@
       "region": "Nagano Area",
       "type": "branch",
       "branchOf": "ChuoMain",
-      "image": "../images/鉄道/JR東日本/中央本線.png",
+      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": 12,
       "stations": [
         "Okaya",
@@ -29762,7 +29762,7 @@
       "operator": "JR-East",
       "region": "Tokyo Area",
       "type": "straight",
-      "image": "../images/鉄道/JR東日本/上野東京ライン.png",
+      "image": "../images/鉄道/JR東日本/JRグループ.png",
       "durationTotalMin": 26,
       "branchOf": null,
       "stations": [

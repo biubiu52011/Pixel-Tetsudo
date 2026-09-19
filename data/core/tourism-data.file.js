@@ -2462,7 +2462,6 @@ window.RAILWAY_TOURISM = {
     "landmark",
     "nature"
    ],
-   "image": "../images/観光地/スカイツリー.jpg",
    "bestTime": "10:00～21:00（展望台）",
    "hours": "8:00～22:00（施設により異なる）",
    "fee": "有料（天望デッキ 大人2,100円～）",
