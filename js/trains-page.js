@@ -740,7 +740,7 @@
       var leftMargin = 8 * scale6;
       // v4.3.502: 双列后右列站名朝外（anchor=start），marginRight 需容纳站名——
       // 移动 92 / 桌面 84（右列站名空间 = marginRight−16 ≥ 68px，4 字站名全尺寸显示）。
-      var marginRight = 20 * scale6 + (_isMobileView() ? 92 : 84);
+      var marginRight = 20 * scale6 + (_isMobileView() ? 64 : 84);
       var marginTopBot = 40 * scale6;
       // v4.3.482: tail 列宽与直线支线同源（GEOM.BRANCH_COL_W × 本图缩放系数）。
       // 移动端容器是 1:1 硬约束，tail 列让位给环（保底 BRANCH_COL_W×1.1 ≈ 现状 105px）。
@@ -769,7 +769,9 @@
                                             _cw6Content - leftMargin - loopRectW - marginRight));
       
       var naturalW = leftMargin + tailAreaWidth + loopRectW + marginRight;
-      if (_isMobileView() && naturalW > _cw6Content) {
+      if (_isMobileView()) {
+        loopRectW = Math.max(_cw6Content - leftMargin - tailAreaWidth - marginRight, 48 * scale6);
+      } else if (naturalW > _cw6Content) {
         loopRectW = Math.max(_cw6Content - leftMargin - tailAreaWidth - marginRight, 48 * scale6);
       }
       svgW = leftMargin + tailAreaWidth + loopRectW + marginRight;
@@ -1298,24 +1300,26 @@
           _sixSide = "left";
           _sixTx = o.x - 10;
           var _scs6 = geometry.stationCoords || [];
-          for (var _b6 = 0; _b6 < _scs6.length; _b6++) {
-            var _bc6 = _scs6[_b6];
-            if (_bc6.stationId === o.stationId) continue;
-            if (Math.abs(_bc6.x - geometry.junctionX) >= 0.5) continue; // 只看左列站
-            if (!(_bc6.y < geometry.junctionY)) continue;               // 只看左列上方
-            if (Math.abs(_bc6.y - o.y) >= 16) continue;                 // 文字带（±8）不重叠
-            var _bn6 = (window.RailwayDB && window.RailwayDB.resolveStationName)
-              ? (window.RailwayDB.resolveStationName(_bc6.stationId, window.currentLang) || _bc6.stationId)
-              : _bc6.stationId;
-            var _bw6 = (_bn6 || "").length * 16 * 1.1;
-            var _bl6 = geometry.junctionX - 10 - _bw6;                  // 左列站名朝左的左缘
-            var _lim6 = _bl6 - 4;
-            if (_sixTx > _lim6) _sixTx = _lim6;
+          if (!isMobileView) {
+            for (var _b6 = 0; _b6 < _scs6.length; _b6++) {
+              var _bc6 = _scs6[_b6];
+              if (_bc6.stationId === o.stationId) continue;
+              if (Math.abs(_bc6.x - geometry.junctionX) >= 0.5) continue; // 只看左列站
+              if (!(_bc6.y < geometry.junctionY)) continue;               // 只看左列上方
+              if (Math.abs(_bc6.y - o.y) >= 16) continue;                 // 文字带（±8）不重叠
+              var _bn6 = (window.RailwayDB && window.RailwayDB.resolveStationName)
+                ? (window.RailwayDB.resolveStationName(_bc6.stationId, window.currentLang) || _bc6.stationId)
+                : _bc6.stationId;
+              var _bw6 = (_bn6 || "").length * 16 * 1.1;
+              var _bl6 = geometry.junctionX - 10 - _bw6;                  // 左列站名朝左的左缘
+              var _lim6 = _bl6 - 4;
+              if (_sixTx > _lim6) _sixTx = _lim6;
+            }
           }
         }
       } else {
-        // 主干环站：左列统一朝左（左列上方由朝右改朝左，v4.3.511）
-        _sixSide = "left";
+        // 主干环站：v4.3.846 移动端环左列改朝右进环内，桌面端保持朝左
+        _sixSide = isMobileView ? "right" : "left";
       }
       tx = (_sixTx != null) ? _sixTx : ((_sixSide === "right") ? (o.x + (isJunction ? 14 : 10)) : (o.x - (isJunction ? 14 : 10)));
       ty = o.y; anchor = (_sixSide === "right") ? "start" : "end";
@@ -1367,7 +1371,7 @@
         if (side === "left" && _sixSide === "right") {
           var _rDotL6 = geometry.junctionX + (geometry.loopRectW || 72) - 7;
           _clampAvail = o.x < geometry.junctionX
-            ? Math.max(40, Math.floor(geometry.junctionX - tx - 4))
+            ? (isMobileView ? Math.max(40, Math.floor(tx - 4)) : Math.max(40, Math.floor(geometry.junctionX - tx - 4)))
             : Math.max(40, Math.floor(_rDotL6 - 4 - tx));
         }
       } else if (geometry.junctionX === null || o.x >= geometry.junctionX) {
