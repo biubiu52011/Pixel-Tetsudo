@@ -2,28 +2,9 @@
 
 /* 返回按钮：trains-detail 为 flex column 容器，默认 stretch 会把按钮拉成整行巨长条；对齐 tourism 详情页的紧凑按钮（内容宽度） */
 .trains-detail .back-btn { align-self: flex-start; }
-
-.tp-fade-in { animation: tpFadeIn 0.2s ease; }
 @keyframes tpFadeIn {
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
-}
-
-.detail-header {
-  display: flex; align-items: center; gap: 12px;
-  padding: 4px 0 16px; border-bottom: 2px solid var(--border);
-  margin-bottom: 16px;
-}
-.detail-code {
-  width: var(--badge-size); height: var(--badge-size); border-radius: var(--radius-sm);
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-}
-.detail-code-text { color: var(--white); font-size: 12px; font-weight: 700; }
-.detail-title-wrap { flex: 1; min-width: 0; }
-.detail-delay-text {
-  font-size: 12px; color: var(--orange); margin-top: 4px;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .info-row {
   display: flex; justify-content: space-between; align-items: center;
@@ -48,7 +29,6 @@
    两种尺寸均可读。移动端容器 449px < 520px 时仍是 100% 不变。 */
 .tp-map-wrap svg { height: auto; display: block; max-width: 520px; margin-left: auto; margin-right: auto; }
 .tp-no-data { text-align: center; color: var(--text-muted); font-size: 13px; padding: 16px; }
-.tp-no-data-sub { font-size: 11px; color: var(--text-muted); }
 
 /* 容器外・下方中央の推定データ注記（v4.3.469） */
 .tp-est-note {
