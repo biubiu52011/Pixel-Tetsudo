@@ -68,3 +68,7 @@ js/i18n-common.js
 
 # External data artifacts
 twr-gtfs.zip
+
+# User working docs (not part of repo)
+DEVELOPMENT_修订稿_*.docx
+~$*.docx
