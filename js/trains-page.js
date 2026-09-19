@@ -728,8 +728,8 @@
       // v4.3.483c: 缩放系数对齐山手线 loopScale（移动 1.5 / 桌面 1.6）。
       // v4.3.496: 用户裁定环线标准宽度——六形环圆环部分与山手线统一（48 基准，移动 72px/桌面 76.8px）。
       var scale6 = _isMobileView() ? 1.5 : 1.6;
-      var spLoop6 = 26 * scale6;
-      var loopRectW = 48 * scale6; // v4.3.496: 环宽对齐山手线标准（48 基准），给光丘尾留水平空间
+      var spLoop6 = _isMobileView() ? 39 : 41.6;
+      var loopRectW = _isMobileView() ? 72 : 76.8; // v4.3.496: 环宽对齐山手线标准（48 基准），给光丘尾留水平空间
       // v4.3.502: 六形环环段改左右二分（双列）——环高用山手线公式（站数/2 列 × 36 基准 −80），
       // 并按各列最宽换乘 chip 高度动态放大（_colPitch6，与山手线 _colPitch 同款）。
       var loopRectH = Math.max(loopStations.length * 36 / 2 - 80, 140) * scale6;
@@ -751,11 +751,11 @@
       var _needH6 = _pitch6 * (_halfN - 1);
       if (_needH6 > loopRectH) loopRectH = _needH6;
       
-      var leftMargin = 8 * scale6;
+      var leftMargin = _isMobileView() ? 12 : 12.8;
       // v4.3.502: 双列后右列站名朝外（anchor=start），marginRight 需容纳站名——
       // 移动 92 / 桌面 84（右列站名空间 = marginRight−16 ≥ 68px，4 字站名全尺寸显示）。
-      var marginRight = 20 * scale6 + (_isMobileView() ? 64 : 84);
-      var marginTopBot = 40 * scale6;
+      var marginRight = _isMobileView() ? 30 : 32 + (_isMobileView() ? 64 : 84);
+      var marginTopBot = _isMobileView() ? 60 : 64;
       // v4.3.482: tail 列宽与直线支线同源（GEOM.BRANCH_COL_W × 本图缩放系数）。
       // 移动端容器是 1:1 硬约束，tail 列让位给环（保底 BRANCH_COL_W×1.1 ≈ 现状 105px）。
       // v4.3.514: 支线宽度取决于文本最多的那个站（用户指示）——不硬编码 105.6/88，
@@ -776,7 +776,7 @@
       // 全尺寸文字带"（三区分离：光丘尾文字带|竖线|左列上方文字带|环，junctionX≥stubX+10+88+10）；
       // 移动端容器 1:1 硬约束下 tailCap 保持现状（剩余穿线站名用白色描边遮线，见 _renderStationNode）。
       var _tailCap = _isMobileView()
-        ? GEOM.BRANCH_COL_W * scale6
+        ? _isMobileView() ? 144 : 153.6
         : Math.max(GEOM.BRANCH_COL_W * 1.6, 10 + _tailWidest + 10 + _leftTopWidest + 10);
       var tailAreaWidth = Math.min(_tailCap,
                                    Math.max(GEOM.BRANCH_COL_W * 1.1,
@@ -784,9 +784,9 @@
       
       var naturalW = leftMargin + tailAreaWidth + loopRectW + marginRight;
       if (_isMobileView()) {
-        loopRectW = Math.max(_cw6Content - leftMargin - tailAreaWidth - marginRight, 48 * scale6);
+        loopRectW = Math.max(_cw6Content - leftMargin - tailAreaWidth - marginRight, _isMobileView() ? 72 : 76.8);
       } else if (naturalW > _cw6Content) {
-        loopRectW = Math.max(_cw6Content - leftMargin - tailAreaWidth - marginRight, 48 * scale6);
+        loopRectW = Math.max(_cw6Content - leftMargin - tailAreaWidth - marginRight, _isMobileView() ? 72 : 76.8);
       }
       svgW = leftMargin + tailAreaWidth + loopRectW + marginRight;
       // Tail 高度先算（依赖 loopRectH），svgH 须同时容纳环（垂直居中）与向上伸出的光丘尾。
@@ -815,7 +815,7 @@
       // v4.3.511: 光丘尾站名改朝左（用户指令）——竖线右移，保证最宽站
       // （西新宿五丁目 6 字 ≈105.6px）全尺寸朝左时文字左缘仍 ≥ leftMargin（12/12.8px）。
       // v4.3.514: 宽度取光丘尾列实际最长站名（_tailWidest 动态），不硬编码 105.6。
-      var stubX = Math.max(leftMargin + 10 * scale6, leftMargin + 10 + _tailWidest);
+      var stubX = Math.max(leftMargin + _isMobileView() ? 15 : 16, leftMargin + 10 + _tailWidest);
       var stubY = junctionY;
       
       // Tail station coordinates: first = junction (Tochomae, 环左缘 1/2 处), rest = along vertical line at stubX
@@ -906,9 +906,9 @@
       var loopRectH = Math.max(stations.length * 36 / 2 - 80, 140) * loopScale;
       // v4.3.495: 双列基准再缩减 50%（96→48）；svgW 派生式（rectW+150×scale）自动跟随，
       // 两侧站名空间恒 75×scale 不变。移动 rectW 72px/svgW 297px，桌面 76.8px/316.8px。
-      var rectW = 48 * loopScale, rectH = loopRectH;
-      svgW = rectW + 150 * loopScale;
-      svgH = loopRectH + 80 * loopScale;
+      var rectW = _isMobileView() ? 72 : 76.8, rectH = loopRectH;
+      svgW = rectW + _isMobileView() ? 225 : 240;
+      svgH = loopRectH + _isMobileView() ? 120 : 128;
       var cx = svgW / 2, cy = svgH / 2;
       var isDoubleColumnLoop = line.isDoubleColumnLoop === true;
       var halfW = rectW / 2, halfH = rectH / 2;
@@ -930,7 +930,7 @@
         if (_needH > loopRectH) {
           rectH = _needH;
           halfH = rectH / 2;
-          svgH = rectH + 100 * loopScale;
+          svgH = rectH + _isMobileView() ? 150 : 160;
           cy = svgH / 2;
         }
         for (var ri = 0; ri < _rightSeq.length; ri++) {
