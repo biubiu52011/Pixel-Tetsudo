@@ -346,13 +346,30 @@ search-ui.js 渲染结果；点击线路可跳转 trains.html 查看该线实时
 | data/api/ | ODPT 客户端（odpt-unified.js）与链接（odpt-links.js） | ODPT 访问唯一入口；首页经 odpt-lazy.js 惰性加载 |
 | data/timetables/ | 手动时刻表（*-manual.js）+ vehicle-type-map.js | 命名 <RailwayId>-manual.js；仅 ODPT 无数据的线路允许手工整理 |
 | fonts/ | 像素字体（ja/ko/zh-hans/zh-hant/latin） | 唯一字体源，禁止使用系统字体替代 |
-| images/ | 素材（按业务主题分子目录；根级仅放全站图标/站点标记） | 按业务主题分子目录；文件名全库唯一；列车子目录按型番系/形 + 涂装样式括弧命名 |
+| images/ | 素材库，按业务主题分四个子目录；根级仅放全站图标/站点标记（pixel-tetsudo.ico、Language.png、icon-metro-station.svg、地铁站点.svg） | 见下方「图库管理规范」：四个子目录各自的用途与命名 |
 | scripts/ | 数据治理脚本（i18n 审计/对齐/提交前检查） | serve.py 为本地开发服务器（.gitignore 排除不入库）；生成脚本产出必须落 data/core 或 data/timetables |
 | archive/ | 已废弃脚本存档 | 只读存档，禁止再被页面引用 |
 | recovery/ | 数据修复现场 | baseline/ 与统一线路清单为 CI guard 依赖必须入库（.gitignore 白名单）；其余修复现场用完归档或清理 |
 | work/.work/ | 本地工作区（工具脚本、serve.env） | 仅本地使用，禁止被页面引用；敏感文件必须 .gitignore |
 | .github/ | CI/CD 工作流（GitHub Actions） | push/PR 到 main 触发 validate（guard 检查）+ 自动部署 GitHub Pages；guard 脚本依赖 recovery/baseline/ |
 | node_modules/ | 工具依赖 | 禁止在其中放置项目文件或临时文件（.tmp_* 等应立即清理） |
+
+#### 3.5.1 图库管理规范（images/）
+
+图库按业务主题分四个子目录，**文件名全库唯一**，禁止跨子目录重名；新素材必须先确定归属子目录再落盘。
+
+| 子目录 | 用途 | 命名规范 | 被谁引用 |
+| --- | --- | --- | --- |
+| images/列车/<運営者>/ | 列车形态/涂装图标（按型番系） | 型番系/形 + 涂装样式括弧，如 E231系（山手線）.png | train-icons.js / LINE_ICONS、operResolvedIcon |
+| images/鉄道/<運営者>/ | 线路/运营者 logo（按线路名） | 与线路名一致，如 JR東日本/京浜東北線.png | railway_data.json 的 line.image、LOS ResolveIcon |
+| images/観光地/ | 景点/活动/店铺主图 | 与条目显示名一致，如 北千住丸井.jpg | tourism_data.json 的 image 字段（../images/観光地/...） |
+| images/料理/<店ID>_<序号>_<菜名>.jpg | 餐饮多图 | <店slug>_<序号>_<菜名>.jpg，如 sakusa-juraku_0_omurice.jpg | 店铺详情页按店 ID 前缀加载 |
+| images/ 根级 | 全站唯一图标/站点标记 | 仅 pixel-tetsudo.ico、Language.png、icon-metro-station.svg、地铁站点.svg；禁止在根级堆放业务素材 | HTML link rel=icon / 地图标记 |
+
+硬规则：
+- 图片路径在数据中以 ../images/...（相对 pages/）写入；移动/重命名图片必须同步改数据引用，断链清零（见 Q&A「图片/资源引用断了」）。
+- 禁止把临时截图、PSD、源文件入库；只放最终展示图。
+- 线路 logo 与列车图标分目录存放：line.image 只指向 鉄道/ 下的线路 logo，列车形态图标只指向 列车/ 下的型番系图，二者不得混用。
 
 ### 3.6 页面结构
 
