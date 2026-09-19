@@ -10,6 +10,27 @@
     toInput: null,
     searchBtn: null,
     resultsDiv: null,
+
+    // Public API: fill from/to inputs by station ID. Single source for both
+    // ?from=&to= URL restore (init) and history restore (SearchHistory.restoreFromRecent).
+    // Sets value + authoritative data-station-id; callers do not poke internals.
+    setRoute: function(fromId, toId) {
+      var db = window.RailwayDB;
+      var lang = window.currentLang || 'ja';
+      var fill = function(input, id) {
+        if (!input || !id) return;
+        var name = (db && db.resolveStationName) ? (db.resolveStationName(id, lang) || id) : id;
+        input.value = name;
+        // Dispatch input first so the listener's stale-ID cleanup + suggestion
+        // refresh runs, then stamp the authoritative station ID after.
+        input.dispatchEvent(new Event('input'));
+        input.setAttribute('data-station-id', id);
+      };
+      fill(this.fromInput, fromId);
+      fill(this.toInput, toId);
+      if (fromId) this._setFromSourceHint(fromId, (db && db.resolveStationName) ? db.resolveStationName(fromId, lang) : null);
+    },
+
     init: function() {
       this.container = document.getElementById('searchContainer');
       if (!this.container) {
@@ -22,31 +43,13 @@
       this.swapBtn = document.getElementById('swapBtn');
       this.resultsDiv = document.getElementById('searchResults');
 
-      // Phase 42-D: Parse ?from=StationKey URL param
+      // Parse ?from=/&to= URL params and fill inputs via the public setRoute().
       var _params = null;
       try { _params = new URLSearchParams(window.location.search); } catch(e) {}
       var _fromParam = _params ? _params.get('from') : null;
-      if (_fromParam) {
-        var _resolvedName = null;
-        if (window.RailwayDB && window.RailwayDB.resolveStationName) {
-          _resolvedName = window.RailwayDB.resolveStationName(_fromParam, window.currentLang || 'ja');
-        }
-        if (this.fromInput) {
-          this.fromInput.value = _resolvedName || _fromParam;
-          this.fromInput.setAttribute('data-station-id', _fromParam || '');
-        }
-        this._setFromSourceHint(_fromParam, _resolvedName);
-      }
-
-      // Phase 42-E: Parse ?to=StationKey URL param
       var _toParam = _params ? _params.get('to') : null;
-      if (_toParam && this.toInput) {
-        var _toResolvedName = null;
-        if (window.RailwayDB && window.RailwayDB.resolveStationName) {
-          _toResolvedName = window.RailwayDB.resolveStationName(_toParam, window.currentLang || 'ja');
-        }
-        this.toInput.value = _toResolvedName || _toParam;
-        this.toInput.setAttribute('data-station-id', _toParam || '');
+      if (_fromParam || _toParam) {
+        this.setRoute(_fromParam, _toParam);
       }
 
 

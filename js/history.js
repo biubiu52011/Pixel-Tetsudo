@@ -221,23 +221,10 @@
   }
 
   function restoreFromRecent(fromId, toId) {
-    if (!window.SearchUI) return;
-    var db = window.RailwayDB;
-    var lang = window.currentLang || "ja";
-    if (db && db.resolveStationName) {
-      var fromName = db.resolveStationName(fromId, lang) || fromId;
-      var toName = db.resolveStationName(toId, lang) || toId;
-      if (window.SearchUI.fromInput) {
-        window.SearchUI.fromInput.value = fromName;
-        window.SearchUI.fromInput.setAttribute("data-station-id", fromId || "");
-      }
-      if (window.SearchUI.toInput) {
-        window.SearchUI.toInput.value = toName;
-        window.SearchUI.toInput.setAttribute("data-station-id", toId || "");
-      }
-
-      if (window.SearchUI.fromInput) window.SearchUI.fromInput.dispatchEvent(new Event("input"));
-      if (window.SearchUI.toInput) window.SearchUI.toInput.dispatchEvent(new Event("input"));
+    // Delegate to SearchUI's public API; History no longer pokes its internal
+    // fromInput/toInput elements or data-station-id attributes directly.
+    if (window.SearchUI && window.SearchUI.setRoute) {
+      window.SearchUI.setRoute(fromId, toId);
     }
   }
 
