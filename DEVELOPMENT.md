@@ -1288,6 +1288,16 @@ LINE_RAILWAY_CODE：线路 ID → ODPT railway 代码（resolveRailwayCode 解�
 
 资源要求：纯静态文件（HTML/CSS/JS/图片/字体），无构建期外的计算资源需求
 
+**本地启动**：
+
+```bash
+python scripts/serve.py
+```
+
+然后访问 http://localhost:8017/pages/home.html（双击 file:// 无法工作，数据走 fetch）。
+
+数据加载成功标志：浏览器控制台（F12）输出线路/车站/观光条目计数。
+
 ### 8.2 CI/CD 构建部署流程
 
 GitHub Actions 自动 CI/CD（.github/workflows/ci-cd.yml）：push/PR 到 main 触发 validate——括号平衡、实体保全、架构完整性、首页 UI 保全、localhost 引用、CSP 内联样式检查；push 通过后自动部署 GitHub Pages（pages.yml）。本地提交前验证流程：
@@ -2027,35 +2037,5 @@ data-state.js（基础功能无需变更）
 # 附录 B 基本信息（README）
 
 > 面向日本全国，提供铁路路线检索・运行状况・观光景点信息的像素风 Web 应用；目前仅完成东部地区线路。
-
-## 运行方式（必须通过本地服务器）
-
-项目数据通过 fetch 加载（data/core/railway_data.json 等），双击 HTML（file:// 协议）无法工作，必须用本地 HTTP 服务器启动：
-
-```bash
-python serve.py
-```
-
-然后访问：
-
-> http://localhost:8017/pages/home.html
-
-> 注：serve.py 为本地开发服务器（.gitignore 排除、不入库；线上由 GitHub Pages 托管），提供静态托管 + /api-proxy/ 官方 API 代理（替代 python -m http.server 8017）。
-
-数据加载成功的标志：浏览器控制台（F12）输出
-线路/车站/观光条目计数（数量以数据文件实际为准）。
-
-## 页面入口
-
-| 页面 | 路径 |
-| --- | --- |
-| 首页（路线检索） | pages/home.html（唯一入口） |
-| 运行状况 | pages/realtime.html |
-| 列车实时 | pages/trains.html |
-| 搜索履历 | pages/history.html |
-
-## 开发约定
-
-开发约定：三层数据架构、显示身份规则、规范数据冻结等硬规则见第 11 章；线路图绘制规范见 5.4。
 
 > |（注：部分内容可能由 AI 生成）
