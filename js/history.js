@@ -204,30 +204,6 @@
       window.onLanguageChange(function() { renderHistory(); });
     }
   }
-
-  function getRecentRoutes(n) {
-    n = n || 5;
-    const history = getHistory();
-    return history.slice(0, n).map(function(e) {
-      return {
-        fromId: e.fromId || e.from,
-        toId: e.toId || e.to,
-        fromName: e.fromName || e.from,
-        toName: e.toName || e.to,
-        durationMin: e.durationMin || 0,
-        timestamp: e.timestamp
-      };
-    });
-  }
-
-  function restoreFromRecent(fromId, toId) {
-    // Delegate to SearchUI's public API; History no longer pokes its internal
-    // fromInput/toInput elements or data-station-id attributes directly.
-    if (window.SearchUI && window.SearchUI.setRoute) {
-      window.SearchUI.setRoute(fromId, toId);
-    }
-  }
-
   window.SearchHistory = {
     init: init,
     getHistory: getHistory,
@@ -235,8 +211,6 @@
     clearHistory: clearHistory,
     removeEntry: removeEntry,
     renderHistory: renderHistory,
-    getRecentRoutes: getRecentRoutes,
-    restoreFromRecent: restoreFromRecent
   };
 
   // v4.3.592: 除 window.t 外还需等 RailwayDB 数据就绪（DataLoader.isLoaded）——
@@ -258,4 +232,3 @@
     safeInit();
   }
 })();
-

@@ -15,12 +15,9 @@
     // ?from=&to= URL restore (init) and history restore (SearchHistory.restoreFromRecent).
     // Sets value + authoritative data-station-id; callers do not poke internals.
     setRoute: function(fromId, toId) {
-      var db = window.RailwayDB;
-      var lang = window.currentLang || 'ja';
       var fill = function(input, id) {
         if (!input || !id) return;
-        var name = (db && db.resolveStationName) ? (db.resolveStationName(id, lang) || id) : id;
-        input.value = name;
+        input.value = id;
         // Dispatch input first so the listener's stale-ID cleanup + suggestion
         // refresh runs, then stamp the authoritative station ID after.
         input.dispatchEvent(new Event('input'));
@@ -28,7 +25,6 @@
       };
       fill(this.fromInput, fromId);
       fill(this.toInput, toId);
-      if (fromId) this._setFromSourceHint(fromId, (db && db.resolveStationName) ? db.resolveStationName(fromId, lang) : null);
     },
 
     init: function() {
@@ -481,17 +477,6 @@
 
 
 
-    _setFromSourceHint: function(stationKey, displayName) {
-      var existing = document.getElementById('fromSourceHint');
-      if (existing) existing.remove();
-      if (!this.fromInput) return;
-      var hint = document.createElement('div');
-      hint.id = 'fromSourceHint';
-      hint.className = 'from-source-hint';
-      var _t = window.t || function(k) { return k; };
-      hint.textContent = _t('search.from_source_hint', '来自观光景点') + ': ' + (displayName || stationKey);
-      this.fromInput.parentNode.appendChild(hint);
-    },
   };
 
   window.SearchUI = SearchUI;
