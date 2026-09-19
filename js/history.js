@@ -14,10 +14,42 @@
       var parsed = data ? JSON.parse(data) : [];
       if (!parsed) return [];
       var list = Array.isArray(parsed) ? parsed : [parsed];
-      return migrateHistory(list);
+      list = migrateHistory(list);
+      list = dedupHistory(list);
+      return list;
     } catch (e) {
       return [];
     }
+  }
+
+  // 整理存量：相同 from+to 合并为一条，count 累加。
+  // list 约定新条目在前（unshift），遍历时首个遇到的即最新，保留它并把后续同 key 的次数并进来。
+  function dedupHistory(list) {
+    if (!Array.isArray(list)) return list;
+    var map = {};
+    var out = [];
+    var changed = false;
+    list.forEach(function(e) {
+      if (!e || !e.from || !e.to) { out.push(e); return; }
+      var key = e.from + "||" + e.to;
+      if (!map[key]) {
+        e.count = e.count || 1;
+        map[key] = e;
+        out.push(e);
+      } else {
+        var ex = map[key];
+        ex.count = (ex.count || 1) + (e.count || 1);
+        if (e.timestamp && (!ex.timestamp || e.timestamp > ex.timestamp)) {
+          ex.timestamp = e.timestamp;
+          if (e.durationMin) ex.durationMin = e.durationMin;
+          if (e.path) ex.path = e.path;
+          if (e.lineInfo) ex.lineInfo = e.lineInfo;
+        }
+        changed = true;
+      }
+    });
+    if (changed) persistHistory(out);
+    return out;
   }
 
   // 旧版本遗留条目可能存了自由文本/罗马字 from/to（无 canonical ID）。
@@ -54,14 +86,41 @@
 
   function saveToHistory(from, to, result) {
     const history = getHistory();
+    const now = new Date().toISOString();
+
+    // 相同 from→to 的搜索合并为一条：移到最前、刷新时间/路径/耗时，count+1。
+    // 不再每次 unshift 新条目，避免历史里出现一堆一样的记录。
+    var existingIdx = -1;
+    for (var i = 0; i < history.length; i++) {
+      var h = history[i];
+      if (h && h.from === from && h.to === to) { existingIdx = i; break; }
+    }
+    if (existingIdx >= 0) {
+      var existing = history.splice(existingIdx, 1)[0];
+      existing.timestamp = now;
+      existing.durationMin = result ? result.durationMin : (existing.durationMin || 0);
+      existing.path = result ? result.path : (existing.path || []);
+      existing.lineInfo = result ? result.lineInfo : (existing.lineInfo || []);
+      existing.count = (existing.count || 1) + 1;
+      history.unshift(existing);
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
+      } catch (e) {
+        console.warn("[History] Failed to save:", e);
+      }
+      renderHistory();
+      return existing;
+    }
+
     const entry = {
       id: Date.now(),
-      timestamp: new Date().toISOString(),
+      timestamp: now,
       from: from,
       to: to,
       durationMin: result ? result.durationMin : 0,
       path: result ? result.path : [],
-      lineInfo: result ? result.lineInfo : []
+      lineInfo: result ? result.lineInfo : [],
+      count: 1
     };
     history.unshift(entry);
     if (history.length > MAX_HISTORY) {
@@ -173,6 +232,9 @@
       html += '<div class="history-meta">';
       if (entry.durationMin > 0) {
         html += '<span class="history-duration">' + entry.durationMin + " " + t("unit.minute") + "</span>";
+      }
+      if (entry.count && entry.count > 1) {
+        html += '<span class="history-count">×' + entry.count + "</span>";
       }
       if (lines) {
         html += '<span class="history-lines">' + escapeHtml(lines) + "</span>";
