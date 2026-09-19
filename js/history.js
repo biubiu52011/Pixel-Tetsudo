@@ -11,25 +11,54 @@
   function getHistory() {
     try {
       const data = localStorage.getItem(STORAGE_KEY);
-      return data ? JSON.parse(data) : [];
+      var parsed = data ? JSON.parse(data) : [];
+      if (!parsed) return [];
+      var list = Array.isArray(parsed) ? parsed : [parsed];
+      return migrateHistory(list);
     } catch (e) {
       return [];
     }
   }
 
+  // 旧版本遗留条目可能存了自由文本/罗马字 from/to（无 canonical ID）。
+  // 这里统一反查成车站 ID，保证跳转与渲染走同一条 canonical 路径。
+  function migrateHistory(list) {
+    if (!Array.isArray(list)) return list;
+    var resolver = window.StationResolver;
+    if (!resolver || !resolver.resolve) return list;
+    var changed = false;
+    list.forEach(function(e) {
+      if (!e) return;
+      if (e.from) {
+        var r = resolver.resolve(e.from);
+        if (r && r.length && r[0].stationId) { e.from = r[0].stationId; changed = true; }
+      }
+      if (e.to) {
+        var r2 = resolver.resolve(e.to);
+        if (r2 && r2.length && r2[0].stationId) { e.to = r2[0].stationId; changed = true; }
+      }
+      // 清理已废弃的冗余字段（fromId/toId/fromName/toName）
+      delete e.fromId; delete e.toId; delete e.fromName; delete e.toName;
+    });
+    if (changed) persistHistory(list);
+    return list;
+  }
+
+  function persistHistory(list) {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+    } catch (e) {
+      console.warn('[History] persist failed:', e);
+    }
+  }
+
   function saveToHistory(from, to, result) {
     const history = getHistory();
-    const rid = window.RailwayDB ? window.RailwayDB.resolveStationName : null;
-    const lang = window.currentLang || "ja";
     const entry = {
       id: Date.now(),
       timestamp: new Date().toISOString(),
       from: from,
       to: to,
-      fromId: rid ? rid(from, lang) : from,
-      toId: rid ? rid(to, lang) : to,
-      fromName: rid ? (rid(from, lang) || from) : from,
-      toName: rid ? (rid(to, lang) || to) : to,
       durationMin: result ? result.durationMin : 0,
       path: result ? result.path : [],
       lineInfo: result ? result.lineInfo : []
