@@ -665,7 +665,7 @@
       "tourism.tag_night": "\u30ca\u30a4\u30c8",
       "tourism.tag_seasonal": "\u5b63\u7bc0",
       "tourism.tag_landmark": "ランドマーク",
-      "tourism.tag_mall": "百貨店・モール",
+      "tourism.tag_mall": "デパート",
       "tourism.tag_modern": "モダン",
       "tourism.tag_event": "イベント",
       "tourism.tag_play": "遊び・体験",
