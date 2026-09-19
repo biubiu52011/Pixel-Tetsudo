@@ -234,7 +234,8 @@
         html += '<span class="history-duration">' + entry.durationMin + " " + t("unit.minute") + "</span>";
       }
       if (entry.count && entry.count > 1) {
-        html += '<span class="history-count">×' + entry.count + "</span>";
+        var _timesStr = (t("history.times") || "").replace("{n}", entry.count);
+        html += '<span class="history-count">' + escapeHtml(_timesStr) + "</span>";
       }
       if (lines) {
         html += '<span class="history-lines">' + escapeHtml(lines) + "</span>";
