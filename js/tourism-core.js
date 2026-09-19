@@ -24,6 +24,7 @@
     park:     "linear-gradient(135deg, #2E8B57 0%, #3CB371 100%)",
     local:    "linear-gradient(135deg, #8B7355 0%, #D2B48C 100%)",
     shopping: "linear-gradient(135deg, #FF6347 0%, #FFA500 100%)",
+    mall:     "linear-gradient(135deg, #7B68EE 0%, #9370DB 100%)",
     temple:   "linear-gradient(135deg, #B8860B 0%, #DAA520 100%)",
     default:  "linear-gradient(135deg, #008803 0%, #006600 100%)"
   };
@@ -130,7 +131,7 @@
 
   function getHeroClassForGradient(gradient) {
     var norm = gradient.replace(/\s+/g, " ").trim();
-    var order = ["default","landmark","history","nature","food","shrine","night","seasonal","event","museum","park","local","temple"];
+    var order = ["default","landmark","history","nature","food","shrine","night","seasonal","event","museum","park","local","temple","mall"];
     for (var i = 0; i < order.length; i++) {
       var ref = THEME_GRADIENTS[order[i]];
       if (ref && norm.indexOf(ref.replace(/\s+/g, " ").trim().substring(0, 25)) >= 0) {

@@ -18,7 +18,20 @@
     event: 'tourism.tag_event',
     park: 'tourism.tag_park',
     modern: 'tourism.tag_modern',
-    play: 'tourism.tag_play'
+    play: 'tourism.tag_play',
+    // 4.3.9xx: 细分标签补全（数据在用但原 TAG_LABELS 未收录 → labelForTags 无图卡片空白）
+    restaurant: 'tourism.tag_restaurant',
+    cafe: 'tourism.tag_cafe',
+    sweets: 'tourism.tag_sweets',
+    drink: 'tourism.tag_drink',
+    bar: 'tourism.tag_bar',
+    bakery: 'tourism.tag_bakery',
+    shop: 'tourism.tag_shop',
+    hotel: 'tourism.tag_hotel',
+    local_specialty: 'tourism.tag_local_specialty',
+    family: 'tourism.tag_family',
+    museum: 'tourism.tag_museum',
+    mall: 'tourism.tag_mall'
   };
 
   // 4.3.826: 点评网站式平级分类——一级功能大类（互斥），选中即按 match 标签过滤
@@ -31,7 +44,7 @@
       match: ['food', 'restaurant', 'cafe', 'sweets', 'drink', 'bar', 'bakery', 'local_specialty', 'family']
     },
     { key: 'shopping', label: 'tourism.group_shopping',
-      match: ['shopping', 'shop', 'hotel']
+      match: ['shopping', 'shop', 'hotel', 'mall']
     },
     { key: 'nature', label: 'tourism.group_nature',
       match: ['nature', 'park']
@@ -306,8 +319,9 @@ function renderGrid() {
       }).join('');
 
       // 4.3.802: 详情页按类型路由到三个独立详情页（活动/景点/店铺）
+      // 4.3.9xx: play 与 getSpotType 口径对齐（吃喝玩乐都算店）
       const detailType = (tags.indexOf('event') >= 0) ? 'event'
-        : (tags.indexOf('food') >= 0 || tags.indexOf('shopping') >= 0) ? 'shop' : 'spot';
+        : (tags.indexOf('food') >= 0 || tags.indexOf('shopping') >= 0 || tags.indexOf('play') >= 0) ? 'shop' : 'spot';
       const detailUrl = 'tourism-' + detailType + '.html?station=' + encodeURIComponent(stationKey) + '&index=' + idx + '&name=' + encodeURIComponent(name);
 
       return '<a href="' + detailUrl + '" class="sm-card' + (isEvent ? ' sm-card--event' : '') + '" data-index="' + idx + '">' +

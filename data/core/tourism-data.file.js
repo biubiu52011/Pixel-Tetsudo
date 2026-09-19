@@ -10,7 +10,7 @@ window.RAILWAY_TOURISM = {
    "desc": "駅直結で雨に濡れずに買い物できる。ファッションから雑貨（Loftあり）、カフェまで一通り揃っていて、時間つぶしにも困らない。",
    "tags": [
     "all",
-    "landmark"
+    "mall"
    ],
    "image": "../images/観光地/LUMINE 北千住.jpg",
    "bestTime": "11:00～20:30",
@@ -85,7 +85,7 @@ window.RAILWAY_TOURISM = {
    "desc": "西口から直通。地下1階の「せんじゅ市」は和菓子や総菜が豊富で、帰りに寄るのにちょうどいい。",
    "tags": [
     "all",
-    "landmark"
+    "mall"
    ],
    "image": "../images/観光地/北千住丸井.jpg",
    "bestTime": "10:00～20:00",
@@ -235,7 +235,6 @@ window.RAILWAY_TOURISM = {
    "desc": "江戸時代は日光街道の宿場町だった通り。今でも老舗の菓子屋や昭和レトロな居酒屋が残っていて、歩いているだけでタイムスリップした気分になれる。",
    "tags": [
     "all",
-    "landmark",
     "history"
    ],
    "image": "../images/観光地/宿場町通り商店街.jpg",
@@ -471,8 +470,9 @@ window.RAILWAY_TOURISM = {
    "desc": "池袋のランドマーク的存在。ショッピングモールに水族館、展望台、ナンジャタウンまで入っていて、一日中いても飽きない。",
    "tags": [
     "all",
-    "landmark",
-    "modern"
+    "mall",
+    "modern",
+    "landmark"
    ],
    "image": "../images/観光地/サンシャインシティ.jpg",
    "bestTime": "10:00～22:00",
@@ -547,7 +547,7 @@ window.RAILWAY_TOURISM = {
    "desc": "東口直結。日本でも有数の売り場面積を誇る百貨店。地下食品街（デパチカ）は東京でもトップクラスの品揃えで、屋上の庭園も穴場。",
    "tags": [
     "all",
-    "landmark"
+    "mall"
    ],
    "image": "../images/観光地/西武百貨店 池袋本店.jpg",
    "bestTime": "10:00～21:00",
@@ -622,7 +622,7 @@ window.RAILWAY_TOURISM = {
    "desc": "西口直結で西武と向かい合う。レストラン街「SPICE」が複数フロアを占めていて、全国の人気店がここに集まっている。食いしん坊にはたまらない。",
    "tags": [
     "all",
-    "landmark"
+    "mall"
    ],
    "image": "../images/観光地/東武百貨店 池袋店.jpg",
    "bestTime": "10:00～21:00",
@@ -773,8 +773,8 @@ window.RAILWAY_TOURISM = {
    "desc": "サンシャインシティの脇にある通り。女性向けのアニメショップや同人誌店、執事喫茶が集まっていて、独特のカルチャーを感じられる。",
    "tags": [
     "all",
-    "landmark",
-    "modern"
+    "modern",
+    "shopping"
    ],
    "image": "../images/観光地/乙女ロード.jpg",
    "bestTime": "昼～夜",
@@ -850,7 +850,7 @@ window.RAILWAY_TOURISM = {
    "tags": [
     "all",
     "park",
-    "landmark"
+    "modern"
    ],
    "image": "../images/観光地/池袋西口公園.jpg",
    "bestTime": "日中～夜",
@@ -1002,7 +1002,7 @@ window.RAILWAY_TOURISM = {
    "desc": "南千住で一番大きな複合商業施設。スーパー、ドラッグストア、ユニクロにリーズナブルなレストランと、日常の買い物はここでだいたい済む。",
    "tags": [
     "all",
-    "landmark"
+    "mall"
    ],
    "image": "../images/観光地/LaLa Terrace 南千住.jpg",
    "bestTime": "10:00～21:00",
@@ -1877,8 +1877,7 @@ window.RAILWAY_TOURISM = {
    "desc": "葛飾北斎の『冨嶽三十六景』の1図「隅田川関屋の里」の舞台とされる場所。江戸時代は風光明媚な土地として知られ、墨堤通り（掃部堤）沿いの風景が浮世絵に数多く描かれた。",
    "tags": [
     "all",
-    "history",
-    "landmark"
+    "history"
    ],
    "image": "../images/観光地/関屋の里冨嶽三十六景.jpg",
    "bestTime": "日中",
@@ -2166,8 +2165,7 @@ window.RAILWAY_TOURISM = {
    "desc": "荒川に架かる東京都道314号の橋。足立区柳原と葛飾区堀切を結び、橋のたもとの河川敷は芝生が広がる。付近には首都高速の堀切ジャンクションがあり、鉄道・車両の撮影スポットとしても知られる。",
    "tags": [
     "all",
-    "nature",
-    "landmark"
+    "nature"
    ],
    "image": "../images/観光地/堀切橋（荒川）.jpg",
    "bestTime": "日中～夕日",
@@ -2242,7 +2240,6 @@ window.RAILWAY_TOURISM = {
    "desc": "住宅街の真ん中にひっそり残るレトロな商店街。昭和時代から続く手作り豆腐店や老舗の菓子屋があって、歩いているだけで下町の活気を感じられる。",
    "tags": [
     "all",
-    "landmark",
     "history"
    ],
    "image": "../images/観光地/柳原商栄会商店街.jpg",
@@ -2313,7 +2310,6 @@ window.RAILWAY_TOURISM = {
    "desc": "駅から歩いて10分ほど。近くの大学キャンパスに近いせいか、通りの両側にリーズナブルな焼肉店、ドラッグストア、弁当屋、学生向けの居酒屋がびっしり並んでいる。",
    "tags": [
     "all",
-    "landmark",
     "history"
    ],
    "image": "../images/観光地/千住旭町商店街（学園通り）.jpg",
@@ -2384,7 +2380,7 @@ window.RAILWAY_TOURISM = {
    "desc": "池袋駅西口直結のショッピングセンター。ファッションから雑貨、カフェまで揃い、雨の日でも濡れずに買い物ができる。",
    "tags": [
     "all",
-    "landmark"
+    "mall"
    ],
    "image": "../images/観光地/LUMINE 池袋.jpg",
    "bestTime": "11:00～21:00",
@@ -2609,7 +2605,7 @@ window.RAILWAY_TOURISM = {
    "desc": "池袋駅東口から徒歩1分のファッションビル。アニメ・サブカル系ショップも多く、若者文化の発信地。",
    "tags": [
     "all",
-    "landmark",
+    "mall",
     "modern"
    ],
    "image": "../images/観光地/池袋PARCO.jpg",
@@ -3053,7 +3049,9 @@ window.RAILWAY_TOURISM = {
    "dist": "3 min walk",
    "desc": "足立区の科学体験・子育て支援複合施設。大型遊具や体験型展示、プラネタリウムが楽しめる。",
    "tags": [
-    "all"
+    "all",
+    "museum",
+    "play"
    ],
    "image": "../images/観光地/ギャラクシティ.jpg",
    "bestTime": "日中",
@@ -3182,7 +3180,9 @@ window.RAILWAY_TOURISM = {
    "dist": "",
    "desc": "足立区の歴史・民俗・産業に関する資料を収蔵・展示する博物館。常設展示で区の歩みをたどり、地域の文化に触れられる。",
    "tags": [
-    "all"
+    "all",
+    "history",
+    "museum"
    ],
    "image": "../images/観光地/足立区立郷土博物館.jpg",
    "bestTime": "日中",
@@ -5716,7 +5716,8 @@ window.RAILWAY_TOURISM = {
    "dist": "2 min walk",
    "desc": "足立区千住にある美術館。日本画や工芸品を中心に展示し、無料で気軽に鑑賞できる。",
    "tags": [
-    "all"
+    "all",
+    "museum"
    ],
    "image": "../images/観光地/石洞美術館.jpg",
    "bestTime": "日中",
@@ -6361,7 +6362,7 @@ window.RAILWAY_TOURISM = {
    "tags": [
     "all",
     "seasonal",
-    "event"
+    "history"
    ],
    "image": "../images/観光地/じんがんなわ祭.jpg",
    "bestTime": "1月7日（早朝）",
@@ -6992,7 +6993,7 @@ window.RAILWAY_TOURISM = {
    "tags": [
     "all",
     "seasonal",
-    "event"
+    "shrine"
    ],
    "image": "../images/観光地/閻魔祭.jpg",
    "bestTime": "1月15日～16日／7月15日～16日",
@@ -7228,7 +7229,7 @@ window.RAILWAY_TOURISM = {
    "tags": [
     "all",
     "seasonal",
-    "event"
+    "history"
    ],
    "image": "../images/観光地/鹿浜の獅子舞.jpg",
    "bestTime": "9月中旬（例大祭・2日間）",
@@ -7811,7 +7812,8 @@ window.RAILWAY_TOURISM = {
    "tags": [
     "all",
     "landmark",
-    "modern"
+    "modern",
+    "mall"
    ],
    "bestTime": "夕方～夜（夜景）",
    "hours": "展望台 10:00～22:00",
@@ -8421,7 +8423,8 @@ window.RAILWAY_TOURISM = {
    "tags": [
     "all",
     "landmark",
-    "modern"
+    "modern",
+    "mall"
    ],
    "bestTime": "夕方～夜",
    "hours": "施設により異なる",
@@ -8496,8 +8499,7 @@ window.RAILWAY_TOURISM = {
    "desc": "築地から移転した東京の台所。早朝のマグロ競り見学や新鮮な海鮮丼が楽しめる。",
    "tags": [
     "all",
-    "food",
-    "landmark"
+    "food"
    ],
    "bestTime": "早朝～午前",
    "hours": "競り見学 5:00～（予約制）",
@@ -8955,7 +8957,8 @@ window.RAILWAY_TOURISM = {
    "tags": [
     "all",
     "landmark",
-    "modern"
+    "modern",
+    "mall"
    ],
    "bestTime": "午後",
    "hours": "店舗により異なる（10:00～20:00）",
@@ -9796,7 +9799,8 @@ window.RAILWAY_TOURISM = {
    "tags": [
     "all",
     "landmark",
-    "modern"
+    "modern",
+    "mall"
    ],
    "bestTime": "通年",
    "hours": "店舗・施設により異なる（多くは 11:00-21:00）",
@@ -10328,7 +10332,6 @@ window.RAILWAY_TOURISM = {
    "desc": "昭和の風情が残る下町商店街。約60店舗が軒を連ね、食べ歩きグルメや猫スポットとして人気。夕暮れの夕焼けだんだんが有名。",
    "tags": [
     "all",
-    "landmark",
     "history"
    ],
    "bestTime": "昼〜夕方",
@@ -11474,7 +11477,6 @@ window.RAILWAY_TOURISM = {
    "desc": "「おばあちゃんの原宿」と呼ばれる巣鴨のメイン商店街。とげぬき地蔵尊への参道に約180店が並ぶ。",
    "tags": [
     "all",
-    "landmark",
     "history"
    ],
    "bestTime": "昼",
@@ -11550,7 +11552,6 @@ window.RAILWAY_TOURISM = {
    "desc": "東京一の長さ約1.3kmを誇る商店街。約400店が連なり、食べ歩きグルメが人気の下町商店街。",
    "tags": [
     "all",
-    "landmark",
     "history"
    ],
    "bestTime": "昼〜夕方",
@@ -11626,7 +11627,6 @@ window.RAILWAY_TOURISM = {
    "desc": "「人情の街」として知られる下町商店街。約140店が軒を連ね、安くて旨い惣菜・おでんが自慢。",
    "tags": [
     "all",
-    "landmark",
     "history"
    ],
    "bestTime": "昼〜夕方",
@@ -11702,7 +11702,6 @@ window.RAILWAY_TOURISM = {
    "desc": "「純情商店街」の名で親しまれる高円寺駅北口の商店街。古着店・ライブハウス・個性派カフェが集まる。",
    "tags": [
     "all",
-    "landmark",
     "history"
    ],
    "bestTime": "昼〜夜",
@@ -11778,7 +11777,6 @@ window.RAILWAY_TOURISM = {
    "desc": "アーケードの下に精肉店・鮮魚店・惣菜店など約180店が並ぶ活気ある下町商店街。",
    "tags": [
     "all",
-    "landmark",
     "history"
    ],
    "bestTime": "昼〜夕方",
@@ -12760,7 +12758,8 @@ window.RAILWAY_TOURISM = {
    "desc": "東京ミッドタウン内外に点在する20点の彫刻・建築アートを、専用端末を借りて巡る音声ガイドツアー。",
    "tags": [
     "all",
-    "landmark"
+    "mall",
+    "museum"
    ],
    "image": "../images/観光地/東京ミッドタウン（ユビキタス・アートツアー®）.jpg",
    "bestTime": "昼～夕方",
@@ -13106,7 +13105,8 @@ window.RAILWAY_TOURISM = {
    "desc": "バルセロナ発のアートキャンディショップ日本1号店。目の前で飴をコンコンと切る様子は必見。",
    "tags": [
     "all",
-    "landmark"
+    "food",
+    "sweets"
    ],
    "image": "../images/観光地/パパブブレ 中野店.jpg",
    "bestTime": "昼～夕方",
@@ -13266,7 +13266,7 @@ window.RAILWAY_TOURISM = {
    "desc": "年間わずか約250台しか作られないウィーンの名器が試弾できるショールーム。中野坂上駅直結。",
    "tags": [
     "all",
-    "landmark"
+    "play"
    ],
    "image": "../images/観光地/ベーゼンドルファー東京.jpg",
    "bestTime": "昼～夕方",
@@ -13427,7 +13427,7 @@ window.RAILWAY_TOURISM = {
    "tags": [
     "all",
     "history",
-    "landmark"
+    "museum"
    ],
    "image": "../images/観光地/浦安市郷土博物館.jpg",
    "bestTime": "昼",
@@ -13507,7 +13507,8 @@ window.RAILWAY_TOURISM = {
    "desc": "嘉永元年創業、160余年の神輿製作所。江戸時代の神輿修理も手がけ、製作見学も可能。背の高い看板が目印。",
    "tags": [
     "all",
-    "landmark"
+    "history",
+    "play"
    ],
    "image": "../images/観光地/中台製作所.jpg",
    "bestTime": "昼",
@@ -13587,7 +13588,8 @@ window.RAILWAY_TOURISM = {
    "desc": "日本経済の中心、東証で1000万円の仮想売買体験や見学ギャラリーを楽しめる。",
    "tags": [
     "all",
-    "landmark"
+    "landmark",
+    "modern"
    ],
    "image": "../images/観光地/東京証券取引所.jpg",
    "bestTime": "昼（平日）",
@@ -13861,7 +13863,7 @@ window.RAILWAY_TOURISM = {
    "desc": "耐熱ガラスメーカーHARIOが江戸のガラス伝統を受け継ぐ工房。手吹きガラスのアクセサリーをギャラリーショップで。",
    "tags": [
     "all",
-    "landmark"
+    "play"
    ],
    "image": "../images/観光地/HARIOランプワークファクトリー.jpg",
    "bestTime": "昼～夕方",
@@ -14220,7 +14222,7 @@ window.RAILWAY_TOURISM = {
    "desc": "半蔵門駅すぐ地下にあるカメラ専門博物館。日本初の市販カメラ「チェリー手提暗函」のレプリカも展示。",
    "tags": [
     "all",
-    "landmark"
+    "museum"
    ],
    "image": "../images/観光地/日本カメラ博物館.jpg",
    "bestTime": "昼",
@@ -14300,7 +14302,7 @@ window.RAILWAY_TOURISM = {
    "desc": "トルコ伝統のモザイクランプを作れる体験工房。選びきれないほどのガラスをペタペタ貼って完成。",
    "tags": [
     "all",
-    "landmark"
+    "play"
    ],
    "image": "../images/観光地/ZAKUROらんぷ家.jpg",
    "bestTime": "昼～夕方",
@@ -14380,7 +14382,8 @@ window.RAILWAY_TOURISM = {
    "desc": "西日暮里駅すぐの老舗サンドイッチ屋。あふれんばかりの具が詰まったボリューム満点の一品。",
    "tags": [
     "all",
-    "landmark"
+    "food",
+    "restaurant"
    ],
    "image": "../images/観光地/ポポー.jpg",
    "bestTime": "朝～午前",
@@ -14460,7 +14463,7 @@ window.RAILWAY_TOURISM = {
    "desc": "オートクチュール経験のあるオーナーが教えるハンドメイドドッグウェア教室。小型犬～大型犬まで型紙あり。",
    "tags": [
     "all",
-    "landmark"
+    "play"
    ],
    "image": "../images/観光地/Butterfly dogcandy（バタフライ ドッグキャンディ）.jpg",
    "bestTime": "昼～夕方",
@@ -14540,7 +14543,7 @@ window.RAILWAY_TOURISM = {
    "desc": "ボストン美術館秘蔵「スポルディング・コレクション」の浮世絵を高精細デジタルで展示する浅草の博物館。",
    "tags": [
     "all",
-    "landmark"
+    "museum"
    ],
    "image": "../images/観光地/アミューズミュージアム.jpg",
    "bestTime": "昼",
@@ -14620,8 +14623,8 @@ window.RAILWAY_TOURISM = {
    "desc": "稲荷町のビルの中にあるおしゃれな銭湯。樹齢1000年の古代檜の浴槽と業界初の炭酸シャワーが自慢。",
    "tags": [
     "all",
-    "landmark",
-    "modern"
+    "modern",
+    "play"
    ],
    "image": "../images/観光地/日の出湯.jpg",
    "bestTime": "昼～夜",
@@ -14701,8 +14704,8 @@ window.RAILWAY_TOURISM = {
    "desc": "世界の太鼓約200点を展示する資料館。7割以上は実際に叩くことができる体験型ミュージアム。",
    "tags": [
     "all",
-    "landmark",
-    "history"
+    "history",
+    "museum"
    ],
    "image": "../images/観光地/宮本卯之助商店 太皷館.jpg",
    "bestTime": "昼",
@@ -14782,7 +14785,8 @@ window.RAILWAY_TOURISM = {
    "desc": "浅草で大館曲げわっぱを扱う工芸店。天然杉の弁当箱はご飯が冷めても美味しく抗菌効果も。",
    "tags": [
     "all",
-    "landmark"
+    "history",
+    "shopping"
    ],
    "image": "../images/観光地/柴田慶信商店.jpg",
    "bestTime": "昼～夕方",
@@ -14862,8 +14866,7 @@ window.RAILWAY_TOURISM = {
    "desc": "和光市駅前で月2回（第2・第4水曜）開かれる軽トラ市。和光市産の旬野菜を直接買える。",
    "tags": [
     "all",
-    "shopping",
-    "event"
+    "shopping"
    ],
    "image": "../images/観光地/軽トラ市.jpg",
    "bestTime": "昼（第2・第4水曜）",
@@ -15049,7 +15052,8 @@ window.RAILWAY_TOURISM = {
    "desc": "平和台の白いおとぎ話風カフェ。オーナーが20年かけて集めたドールハウス展示が楽しめる。",
    "tags": [
     "all",
-    "landmark"
+    "food",
+    "cafe"
    ],
    "image": "../images/観光地/NOE CAFE.jpg",
    "bestTime": "昼～夕方",
@@ -15129,7 +15133,7 @@ window.RAILWAY_TOURISM = {
    "desc": "小竹向原駅すぐの本格ヨガ教室。個人の骨格・体質に合わせる「イシュタ・ヨガ」が体験できる。",
    "tags": [
     "all",
-    "landmark"
+    "play"
    ],
    "image": "../images/観光地/YOGA ME！.jpg",
    "bestTime": "昼～夜",
@@ -15323,7 +15327,7 @@ window.RAILWAY_TOURISM = {
    "desc": "ミャンマー好きの日本人が運営する語学教室。国と国の架け橋を目指すアットホームな空間。",
    "tags": [
     "all",
-    "landmark"
+    "play"
    ],
    "image": "../images/観光地/高田馬場ミャンマー語教室.jpg",
    "bestTime": "昼・夜",
@@ -15403,8 +15407,7 @@ window.RAILWAY_TOURISM = {
    "desc": "奥浅草の革とモノづくり祭典「浅草エーラウンド」で銀座線レザークラフトキットが手に入る。",
    "tags": [
     "all",
-    "landmark",
-    "event"
+    "shopping"
    ],
    "image": "../images/観光地/東京メトロ特設ブース（エーラウンド・マーケット）.jpg",
    "bestTime": "昼（開催日のみ）",
@@ -15506,7 +15509,7 @@ window.RAILWAY_TOURISM = {
    "desc": "神田カレーグランプリ会場の小川広場。駅員考案のひとくちカレーを無料配布する東京メトロブース。",
    "tags": [
     "all",
-    "landmark"
+    "modern"
    ],
    "image": "../images/観光地/小川広場（東京メトロ特設ブース）.jpg",
    "bestTime": "昼（開催日のみ）",
@@ -15586,7 +15589,7 @@ window.RAILWAY_TOURISM = {
    "desc": "世界初のカラオケができる観覧車。5台に1台の割合でカラオケ付きゴンドラ、1周15分歌い放題。",
    "tags": [
     "all",
-    "landmark"
+    "play"
    ],
    "image": "../images/観光地/東京ドームシティアトラクションズ 「ビッグ・オー」.jpg",
    "bestTime": "昼・夜",
@@ -16425,7 +16428,7 @@ window.RAILWAY_TOURISM = {
    "tags": [
     "all",
     "food",
-    "landmark"
+    "cafe"
    ],
    "image": "../images/観光地/Balmy Cafe （バルミーカフェ）.jpg",
    "bestTime": "昼",
@@ -16930,7 +16933,7 @@ window.RAILWAY_TOURISM = {
    "tags": [
     "all",
     "food",
-    "landmark"
+    "restaurant"
    ],
    "image": "../images/観光地/麺昇 神の手.jpg",
    "bestTime": "昼・夜",
@@ -17125,9 +17128,7 @@ window.RAILWAY_TOURISM = {
    "desc": "東京藝術大学構内で学生・卒業生・教員の作品を買えるギャラリー兼ショップ。企画展も開催。",
    "tags": [
     "all",
-    "shopping",
-    "nature",
-    "landmark"
+    "shopping"
    ],
    "image": "../images/観光地/藝大アートプラザ.jpg",
    "bestTime": "昼",
@@ -17208,7 +17209,7 @@ window.RAILWAY_TOURISM = {
    "tags": [
     "all",
     "food",
-    "landmark"
+    "cafe"
    ],
    "image": "../images/観光地/古城.jpg",
    "bestTime": "昼",
@@ -17370,7 +17371,7 @@ window.RAILWAY_TOURISM = {
    "tags": [
     "all",
     "history",
-    "landmark"
+    "museum"
    ],
    "image": "../images/観光地/市谷の杜 本と活字館.jpg",
    "bestTime": "昼",
@@ -17904,7 +17905,6 @@ window.RAILWAY_TOURISM = {
     "all",
     "history",
     "nature",
-    "landmark",
     "park"
    ],
    "image": "../images/観光地/横十間川親水公園.jpg",
@@ -18450,8 +18450,8 @@ window.RAILWAY_TOURISM = {
    "tags": [
     "all",
     "nature",
-    "landmark",
-    "park"
+    "park",
+    "museum"
    ],
    "image": "../images/観光地/北区飛鳥山博物館.jpg",
    "bestTime": "昼",
@@ -18526,7 +18526,8 @@ window.RAILWAY_TOURISM = {
    "desc": "国立印刷局の東京工場で、お札の印刷風景を見学できる。裁断前の大判のまま刷られた紙幣は圧巻。事前予約制。",
    "tags": [
     "all",
-    "landmark"
+    "history",
+    "play"
    ],
    "image": "../images/観光地/国立印刷局 東京工場.jpg",
    "bestTime": "昼",
@@ -18785,8 +18786,8 @@ window.RAILWAY_TOURISM = {
    "desc": "中野で自家製地ビールが飲める店。店奥の工房で作られた常時5種類のビールとおつまみがすべて500円均一。",
    "tags": [
     "all",
-    "landmark",
-    "play"
+    "play",
+    "drink"
    ],
    "image": "../images/観光地/中野ビール工房.jpg",
    "bestTime": "夜",
@@ -19220,7 +19221,7 @@ window.RAILWAY_TOURISM = {
    "desc": "旧江戸川沿いに建つ1812年建立の常夜灯がシンボル。かつて成田山への参拝航路の中継地で、現在は川沿いのランニングコース。",
    "tags": [
     "all",
-    "landmark"
+    "park"
    ],
    "image": "../images/観光地/常夜灯公園.jpg",
    "bestTime": "昼",
@@ -19296,7 +19297,7 @@ window.RAILWAY_TOURISM = {
    "tags": [
     "all",
     "food",
-    "landmark"
+    "restaurant"
    ],
    "image": "../images/観光地/銀之塔.jpg",
    "bestTime": "夜",
@@ -19405,7 +19406,8 @@ window.RAILWAY_TOURISM = {
    "desc": "銀座のお香専門店。香りコンシェルジュと相談しながら、自分好みのお線香・匂い袋・練り香水を作る体験が人気。",
    "tags": [
     "all",
-    "landmark"
+    "shopping",
+    "play"
    ],
    "image": "../images/観光地/香源（こうげん）.jpg",
    "bestTime": "昼",
@@ -19481,7 +19483,7 @@ window.RAILWAY_TOURISM = {
    "tags": [
     "all",
     "history",
-    "landmark"
+    "shopping"
    ],
    "image": "../images/観光地/小津和紙.jpg",
    "bestTime": "昼",
@@ -19828,7 +19830,8 @@ window.RAILWAY_TOURISM = {
    "desc": "日本の司法の中心・半蔵門の最高裁判所。大法廷の見学ツアーがあり、太陽と月を表す4枚のタペストリーが必見。",
    "tags": [
     "all",
-    "landmark"
+    "landmark",
+    "modern"
    ],
    "image": "../images/観光地/最高裁判所.jpg",
    "bestTime": "昼",
@@ -20012,7 +20015,7 @@ window.RAILWAY_TOURISM = {
    "desc": "西日暮里の陶芸教室。茶道具専門の陶芸家が教え、初心者でも希望すれば電動ろくろで湯呑み作りが体験できる。",
    "tags": [
     "all",
-    "landmark"
+    "play"
    ],
    "image": "../images/観光地/美火土陶椀（みかど とうわん）.jpg",
    "bestTime": "昼",
@@ -20346,7 +20349,7 @@ window.RAILWAY_TOURISM = {
    "desc": "東上野の革財布工房。後ろポケットから取り出しやすい「ヒップポケットシリーズ」が人気で、2003年にグッドデザイン賞受賞。",
    "tags": [
     "all",
-    "landmark"
+    "play"
    ],
    "image": "../images/観光地/mic.jpg",
    "bestTime": "昼",
@@ -20619,7 +20622,7 @@ window.RAILWAY_TOURISM = {
    "desc": "和光市の理化学研究所で113番目の元素ニホニウム合成を記念して名付けられた通り。元素記号1～118番のプレートが埋められている。",
    "tags": [
     "all",
-    "landmark"
+    "history"
    ],
    "image": "../images/観光地/ニホニウム通り.jpg",
    "bestTime": "昼",
@@ -20770,7 +20773,7 @@ window.RAILWAY_TOURISM = {
    "tags": [
     "all",
     "food",
-    "landmark"
+    "cafe"
    ],
    "image": "../images/観光地/音楽喫茶アカシア.jpg",
    "bestTime": "昼",
@@ -20978,7 +20981,7 @@ window.RAILWAY_TOURISM = {
    "desc": "高田馬場のアーケードゲーム聖地。最新作はもちろん、1980～90年代のレトロゲームが今も稼働し、世界中のゲーマーが集まる。",
    "tags": [
     "all",
-    "landmark"
+    "play"
    ],
    "image": "../images/観光地/ゲーセンミカド.jpg",
    "bestTime": "夜",
@@ -21272,7 +21275,7 @@ window.RAILWAY_TOURISM = {
    "desc": "新宿歌舞伎町の本格スパイ体験アトラクション。エージェントとしてレーザーを避け、暗号を解き10分以内にミッションを遂行する。",
    "tags": [
     "all",
-    "landmark"
+    "play"
    ],
    "image": "../images/観光地/InSPYre（インスパイヤ）.jpg",
    "bestTime": "夜",
@@ -21422,7 +21425,8 @@ window.RAILWAY_TOURISM = {
    "desc": "茗荷谷の肉丼の名店。甘辛く炒めた肉とニラを紅生姜と合わせた「札幌丼」が、全国丼グランプリで5年連続金賞。",
    "tags": [
     "all",
-    "landmark"
+    "food",
+    "restaurant"
    ],
    "image": "../images/観光地/札幌軒.jpg",
    "bestTime": "昼",
@@ -21825,7 +21829,7 @@ window.RAILWAY_TOURISM = {
    "desc": "住宅街のど真ん中にあるミッションクリア型お化け屋敷。有名遊園地のお化け屋敷を手がけるオバケンがプロデュース。集合場所の住所は秘密。",
    "tags": [
     "all",
-    "landmark"
+    "play"
    ],
    "image": "../images/観光地/オバケン シーズン５ 「畏怖 咽び家」.jpg",
    "bestTime": "夜",
@@ -21901,8 +21905,7 @@ window.RAILWAY_TOURISM = {
    "tags": [
     "all",
     "food",
-    "nature",
-    "landmark"
+    "cafe"
    ],
    "image": "../images/観光地/Café Kaya.jpg",
    "bestTime": "昼",
@@ -21977,7 +21980,7 @@ window.RAILWAY_TOURISM = {
    "desc": "池袋のウクレレ専門店。世界中から集めたビンテージや珍しい形のウクレレが並び、卸直営で比較的リーズナブル。試し弾きも自由。",
    "tags": [
     "all",
-    "landmark"
+    "play"
    ],
    "image": "../images/観光地/ウクレレ・マニア.jpg",
    "bestTime": "昼",
@@ -22052,7 +22055,8 @@ window.RAILWAY_TOURISM = {
    "desc": "国産Tシャツの原点・久米繊維工業の直営店。丈夫で着心地の良いTシャツを買えるほか、世界に一枚のオリジナルTシャツ作りも。",
    "tags": [
     "all",
-    "landmark"
+    "shopping",
+    "play"
    ],
    "image": "../images/観光地/久米繊維工業ファクトリーショップ.jpg",
    "bestTime": "昼",
@@ -22127,7 +22131,7 @@ window.RAILWAY_TOURISM = {
    "desc": "人形町の老舗染料ブランド「みやこ染」が運営する染色体験ワークスペース。一番人気はTシャツのタイダイ染め。",
    "tags": [
     "all",
-    "landmark"
+    "play"
    ],
    "image": "../images/観光地/somenova（ソメノバ）.jpg",
    "bestTime": "昼",
@@ -22277,7 +22281,7 @@ window.RAILWAY_TOURISM = {
    "desc": "目黒に数千種類のテディベアが集まる専門店。100年近く前の激レア品から、千円以下の手頃なクマやキーホルダーまで揃う。",
    "tags": [
     "all",
-    "landmark"
+    "shopping"
    ],
    "image": "../images/観光地/Dear Bear.jpg",
    "bestTime": "昼",
@@ -22353,8 +22357,7 @@ window.RAILWAY_TOURISM = {
    "tags": [
     "all",
     "food",
-    "shopping",
-    "landmark"
+    "sweets"
    ],
    "image": "../images/観光地/トウキョウミタイワラ.jpg",
    "bestTime": "昼",
@@ -22429,7 +22432,7 @@ window.RAILWAY_TOURISM = {
    "desc": "錦糸町で1932年創業の銭湯をリニューアルしたデザイナーズ銭湯。番台バーでオリジナルペールエールを飲み、2階には宿泊も。",
    "tags": [
     "all",
-    "landmark"
+    "play"
    ],
    "image": "../images/観光地/黄金湯.jpg",
    "bestTime": "夜",
@@ -22655,7 +22658,7 @@ window.RAILWAY_TOURISM = {
    "tags": [
     "all",
     "food",
-    "landmark"
+    "restaurant"
    ],
    "image": "../images/観光地/ほぼ上野オスシマチ.jpg",
    "bestTime": "夜",
@@ -22754,6 +22757,7 @@ window.RAILWAY_TOURISM = {
    "desc": "上野の名物パンダだけでなく、ハシビロコウやピンクのフラミンゴ、ヘビクイワシなど世界の美しい鳥たちも人気。",
    "tags": [
     "all",
+    "nature",
     "landmark"
    ],
    "image": "../images/観光地/東京都恩賜上野動物園.jpg",
@@ -23178,7 +23182,7 @@ window.RAILWAY_TOURISM = {
    "desc": "生姜焼き専門店が作った唯一無二の生姜づくしサウナ。焼き生姜ロウリュに生姜水風呂、生姜水に生姜味噌汁まで、外からも中からも生姜三昧。",
    "tags": [
     "all",
-    "landmark"
+    "play"
    ],
    "image": "../images/観光地/生姜サウナ 金の亀.jpg",
    "bestTime": "夜",
@@ -23505,7 +23509,7 @@ window.RAILWAY_TOURISM = {
    "tags": [
     "all",
     "shopping",
-    "landmark"
+    "play"
    ],
    "image": "../images/観光地/麻布 香雅堂.jpg",
    "bestTime": "昼",
@@ -23655,6 +23659,7 @@ window.RAILWAY_TOURISM = {
    "desc": "乃木坂・六本木のアートゾーンに建つ国立新美術館。ガラス張りの大空間で企画展・公募展を鑑賞できる。",
    "tags": [
     "all",
+    "museum",
     "landmark"
    ],
    "image": "../images/観光地/国立新美術館.jpg",
@@ -23730,8 +23735,8 @@ window.RAILWAY_TOURISM = {
    "desc": "日本初の教科書専門図書館。鎌倉時代から現代までの教科書を所蔵し、明治期の資料は国の重要文化財。",
    "tags": [
     "all",
-    "landmark",
-    "history"
+    "history",
+    "museum"
    ],
    "image": "../images/観光地/東書文庫.jpg",
    "bestTime": "昼",
@@ -23960,7 +23965,8 @@ window.RAILWAY_TOURISM = {
    "desc": "ほぼ全てマグロメニューの中野の人気店。骨付きの中落ちをスプーンですくって豪快に味わう。",
    "tags": [
     "all",
-    "landmark"
+    "food",
+    "restaurant"
    ],
    "image": "../images/観光地/マグロマート.jpg",
    "bestTime": "夜",
@@ -24082,7 +24088,7 @@ window.RAILWAY_TOURISM = {
    "desc": "中野・新井薬師の梅照院。境内の「白龍権現水」は都内でも名水として知られ、汲みに訪れる人も多い。",
    "tags": [
     "all",
-    "landmark"
+    "shrine"
    ],
    "image": "../images/観光地/新井山 梅照院（新井薬師）.jpg",
    "bestTime": "終日",
@@ -24233,7 +24239,6 @@ window.RAILWAY_TOURISM = {
    "desc": "中野から新宿へ続く神田川沿いの散歩道。春は川面に垂れる桜が都内屈指の美しさを誇る隠れ名所。",
    "tags": [
     "all",
-    "food",
     "nature",
     "seasonal"
    ],
@@ -24834,9 +24839,8 @@ window.RAILWAY_TOURISM = {
    "desc": "江戸切子発祥の地・日本橋の専門店。職人と同じ道具で自分だけのカットグラスづくり体験ができる。",
    "tags": [
     "all",
-    "food",
     "history",
-    "landmark"
+    "play"
    ],
    "image": "../images/観光地/江戸切子の店 華硝 日本橋店（はなしょう）.jpg",
    "bestTime": "昼",
@@ -24986,7 +24990,7 @@ window.RAILWAY_TOURISM = {
    "desc": "毎週日曜に皇居外苑の一部車道が開放される自転車イベント。丸の内の街並みと緑の中をサイクリング。",
    "tags": [
     "all",
-    "landmark"
+    "play"
    ],
    "image": "../images/観光地/パレスサイクリング.jpg",
    "bestTime": "日曜昼",
@@ -25062,8 +25066,8 @@ window.RAILWAY_TOURISM = {
    "tags": [
     "all",
     "history",
-    "landmark",
-    "modern"
+    "modern",
+    "museum"
    ],
    "image": "../images/観光地/東京国立近代美術館工芸館.jpg",
    "bestTime": "昼",
@@ -25138,8 +25142,7 @@ window.RAILWAY_TOURISM = {
    "desc": "紙の専門商社・竹尾の小売店。美術品のように並ぶファインペーパーを選び、2Fでは紙の展示会も楽しめる。",
    "tags": [
     "all",
-    "shopping",
-    "landmark"
+    "shopping"
    ],
    "image": "../images/観光地/竹尾 見本帖本店.jpg",
    "bestTime": "昼",
@@ -25325,7 +25328,8 @@ window.RAILWAY_TOURISM = {
    "desc": "英国邸宅のような建物で紅茶を学ぶ教室。淹れ方の基本からティーパーティーの開き方までコースで学べる。",
    "tags": [
     "all",
-    "landmark"
+    "food",
+    "cafe"
    ],
    "image": "../images/観光地/Cha Tea.jpg",
    "bestTime": "昼",
@@ -25400,7 +25404,7 @@ window.RAILWAY_TOURISM = {
    "desc": "75年の歴史を持つ貴金属加工会社の直営店。ロストワックス技法でシルバーリングやペンダントを作る体験。",
    "tags": [
     "all",
-    "landmark"
+    "play"
    ],
    "image": "../images/観光地/creer ijima（クレエ・イジマ）.jpg",
    "bestTime": "昼",
@@ -25475,7 +25479,6 @@ window.RAILWAY_TOURISM = {
    "desc": "ランドセル修理工房。6年間使った思い出のランドセルを、手のひらサイズの精巧なミニチュアに加工。",
    "tags": [
     "all",
-    "landmark",
     "play"
    ],
    "image": "../images/観光地/バッグ工房 ヴィドゥルス.jpg",
@@ -25551,7 +25554,6 @@ window.RAILWAY_TOURISM = {
    "desc": "自称・世界一小さな劇場。30人も入れば満員の近さで、365日マンガライブが楽しめる浅草の小劇場。",
    "tags": [
     "all",
-    "landmark",
     "play"
    ],
    "image": "../images/観光地/浅草リトルシアター.jpg",
@@ -25627,7 +25629,7 @@ window.RAILWAY_TOURISM = {
    "desc": "浅草寺を着物で歩く着物レンタル店。着付け師範が着付けてくれ、リーズナブルな価格で浅草ぶらり。",
    "tags": [
     "all",
-    "landmark"
+    "play"
    ],
    "image": "../images/観光地/きものレンタルwargo東京浅草店.jpg",
    "bestTime": "昼",
@@ -25852,7 +25854,7 @@ window.RAILWAY_TOURISM = {
    "desc": "中国で二胡を修めた先生が開いた二胡教室。入門から講師養成まで豊富なコースと、先生手作りの二胡販売も。",
    "tags": [
     "all",
-    "landmark"
+    "play"
    ],
    "image": "../images/観光地/東京SOBOKU二胡スクール.jpg",
    "bestTime": "昼",
@@ -26002,7 +26004,7 @@ window.RAILWAY_TOURISM = {
    "desc": "平和台で愛される銭湯。晴れた日は露天風呂で星空を仰ぎ、バリアフリー対応で老若男女に親しまれる。",
    "tags": [
     "all",
-    "landmark"
+    "play"
    ],
    "image": "../images/観光地/ゆ～ポッポ.jpg",
    "bestTime": "夜",
@@ -26152,8 +26154,8 @@ window.RAILWAY_TOURISM = {
    "desc": "学生の支援で復活した名画座。往年の名作を二本立てで上映する、高田馬場を代表する映画館。",
    "tags": [
     "all",
-    "landmark",
-    "history"
+    "history",
+    "play"
    ],
    "image": "../images/観光地/早稲田松竹.jpg",
    "bestTime": "夜",
@@ -26304,7 +26306,8 @@ window.RAILWAY_TOURISM = {
    "tags": [
     "all",
     "food",
-    "landmark"
+    "drink",
+    "bar"
    ],
    "image": "../images/観光地/Pia Cuore（ピアクオーレ）.jpg",
    "bestTime": "夜",
@@ -26578,7 +26581,8 @@ window.RAILWAY_TOURISM = {
    "desc": "ふるふる卵が評判の洋食屋。特製デミグラスソースと絡むオムライスは、街で長く愛される行列メニュー。",
    "tags": [
     "all",
-    "landmark"
+    "food",
+    "restaurant"
    ],
    "image": "../images/観光地/レストランツムラ.jpg",
    "bestTime": "昼",
@@ -26653,8 +26657,7 @@ window.RAILWAY_TOURISM = {
    "desc": "約2万枚のレコード室を持つ図書館。ヘッドホンで試聴でき、職員のおすすめをかける時間帯もある。",
    "tags": [
     "all",
-    "nature",
-    "landmark"
+    "history"
    ],
    "image": "../images/観光地/小石川図書館.jpg",
    "bestTime": "昼",
@@ -26729,7 +26732,8 @@ window.RAILWAY_TOURISM = {
    "desc": "元大手ビールメーカー研究開発者が造る北千住産クラフトビール。個性的な銘柄名も楽しいタップルーム。",
    "tags": [
     "all",
-    "landmark"
+    "drink",
+    "play"
    ],
    "image": "../images/観光地/さかづきBrewing.jpg",
    "bestTime": "夜",
@@ -26903,7 +26907,8 @@ window.RAILWAY_TOURISM = {
    "desc": "世界10カ国・80種類以上のハチミツを扱う専門店。蜜源の違いを食べ比べ、無添加サブレも贈り物に人気。",
    "tags": [
     "all",
-    "landmark"
+    "food",
+    "sweets"
    ],
    "image": "../images/観光地/ラべイユ.jpg",
    "bestTime": "昼",
@@ -27055,8 +27060,7 @@ window.RAILWAY_TOURISM = {
    "tags": [
     "all",
     "food",
-    "nature",
-    "landmark"
+    "cafe"
    ],
    "image": "../images/観光地/chura＊chura.jpg",
    "bestTime": "昼",
@@ -27131,7 +27135,6 @@ window.RAILWAY_TOURISM = {
    "desc": "スカイツリー近くの銭湯。露天風呂・高濃度炭酸泉・日替わり薬湯を備え、翌朝10時までオールナイト営業。",
    "tags": [
     "all",
-    "landmark",
     "play"
    ],
    "image": "../images/観光地/押上温泉 大黒湯.jpg",
@@ -27207,7 +27210,7 @@ window.RAILWAY_TOURISM = {
    "desc": "200年の銭湯「柏湯」を改装した現代アートギャラリー。瓦屋根の下町情緒と白いモダン空間の対比が魅力。",
    "tags": [
     "all",
-    "landmark"
+    "museum"
    ],
    "image": "../images/観光地/SCAI THE BATHHOUSE（スカイザバスハウス）.jpg",
    "bestTime": "昼",
@@ -27532,7 +27535,7 @@ window.RAILWAY_TOURISM = {
    "desc": "日本初のタフティングスタジオ。タフティングガンで世界に一枚だけのラグマットを手作りするワークショップ。",
    "tags": [
     "all",
-    "landmark"
+    "play"
    ],
    "image": "../images/観光地/tufting studio KEKE.jpg",
    "bestTime": "昼",
@@ -27608,7 +27611,7 @@ window.RAILWAY_TOURISM = {
    "tags": [
     "all",
     "history",
-    "landmark"
+    "play"
    ],
    "image": "../images/観光地/篠原まるよし風鈴.jpg",
    "bestTime": "昼",
@@ -27683,7 +27686,7 @@ window.RAILWAY_TOURISM = {
    "desc": "国内最大級約600坪のメガ・ボルダリングジム。LEDが光るブルガリア製ウォールが目玉で初心者も安心。",
    "tags": [
     "all",
-    "landmark"
+    "play"
    ],
    "image": "../images/観光地/B-PUMP TOKYO 秋葉原.jpg",
    "bestTime": "昼",
@@ -27758,7 +27761,7 @@ window.RAILWAY_TOURISM = {
    "desc": "和太鼓とエアロビクスを融合した「TAIKOビクス」が体験できるスタジオ。音楽に合わせて叩きながら汗を流す。",
    "tags": [
     "all",
-    "landmark"
+    "play"
    ],
    "image": "../images/観光地/TAIKO-LAB 青山.jpg",
    "bestTime": "昼",
@@ -27834,7 +27837,7 @@ window.RAILWAY_TOURISM = {
    "tags": [
     "all",
     "food",
-    "landmark"
+    "cafe"
    ],
    "image": "../images/観光地/パンダ茶房by銀座清月堂.jpg",
    "bestTime": "昼",
@@ -28086,7 +28089,7 @@ window.RAILWAY_TOURISM = {
    "tags": [
     "all",
     "history",
-    "landmark"
+    "museum"
    ],
    "image": "../images/観光地/地下鉄博物館.jpg",
    "bestTime": "昼",
@@ -28162,7 +28165,7 @@ window.RAILWAY_TOURISM = {
    "tags": [
     "all",
     "nature",
-    "landmark"
+    "play"
    ],
    "image": "../images/観光地/Akasaka Zen Space.jpg",
    "bestTime": "夜",
@@ -28387,7 +28390,7 @@ window.RAILWAY_TOURISM = {
    "desc": "清澄白河にある江戸硝子のガラス工房。江戸切子の彫刻や万華鏡づくりなど、職人の技を少人数で体験できる。",
    "tags": [
     "all",
-    "landmark"
+    "play"
    ],
    "image": "../images/観光地/グラス・ラボ.jpg",
    "bestTime": "昼",
@@ -28995,7 +28998,8 @@ window.RAILWAY_TOURISM = {
    "desc": "中野のタイ屋台料理店。パクチーを山盛りにしたインパクト抜群のチャレンジラーメンがSNSで話題。",
    "tags": [
     "all",
-    "landmark"
+    "food",
+    "restaurant"
    ],
    "image": "../images/観光地/タイ屋台999(カオ・カオ・カオ).jpg",
    "bestTime": "夜",
@@ -29735,7 +29739,8 @@ window.RAILWAY_TOURISM = {
    "desc": "東銀座のバナナジュース専門店。完熟バナナだけを使い、砂糖を加えない濃厚で自然な甘さの一杯が味わえる。",
    "tags": [
     "all",
-    "landmark"
+    "food",
+    "drink"
    ],
    "image": "../images/観光地/BANANA JUICE.jpg",
    "bestTime": "昼",
@@ -30022,7 +30027,7 @@ window.RAILWAY_TOURISM = {
    "desc": "北の丸公園内の体験型科学博物館。約20のテーマごとに仕掛けを触って学べ、親子連れに人気の施設だ。",
    "tags": [
     "all",
-    "landmark"
+    "museum"
    ],
    "image": "../images/観光地/科学技術館.jpg",
    "bestTime": "昼",
@@ -30097,7 +30102,7 @@ window.RAILWAY_TOURISM = {
    "desc": "半蔵門近くでインド古典舞踊カタックを学べる教室。華やかな手振りと軽やかな足さばきのレッスンを受けられる。",
    "tags": [
     "all",
-    "landmark"
+    "play"
    ],
    "image": "../images/観光地/みやびカタックダンスアカデミー.jpg",
    "bestTime": "夜",
@@ -30173,8 +30178,7 @@ window.RAILWAY_TOURISM = {
    "tags": [
     "all",
     "history",
-    "nature",
-    "landmark"
+    "shopping"
    ],
    "image": "../images/観光地/山田松香木店.jpg",
    "bestTime": "昼",
@@ -30500,7 +30504,7 @@ window.RAILWAY_TOURISM = {
    "tags": [
     "all",
     "food",
-    "landmark"
+    "play"
    ],
    "image": "../images/観光地/アミューズ カフェシアター.jpg",
    "bestTime": "夜",
@@ -30740,7 +30744,8 @@ window.RAILWAY_TOURISM = {
    "desc": "浅草・田原町の豆菓子専門店。昔ながらの豆菓子や豆を使ったおつまみを、量り売りで幅広く扱う。",
    "tags": [
     "all",
-    "landmark"
+    "food",
+    "sweets"
    ],
    "image": "../images/観光地/ほていや 中塚商店.jpg",
    "bestTime": "昼",
@@ -30891,7 +30896,6 @@ window.RAILWAY_TOURISM = {
    "desc": "和光市駅近くに残る昭和の街のバッティングセンター。手頃な料金で気軽にバッティングが楽しめる庶民的な施設。",
    "tags": [
     "all",
-    "landmark",
     "play"
    ],
    "image": "../images/観光地/和光市バッティングセンター.jpg",
@@ -31042,7 +31046,7 @@ window.RAILWAY_TOURISM = {
    "desc": "小竹向原のアクション＆アクロバット専門スタジオ。トランポリンや壁を使った宙返りなどを、基礎から楽しく学べる。",
    "tags": [
     "all",
-    "landmark"
+    "play"
    ],
    "image": "../images/観光地/つばさ基地.jpg",
    "bestTime": "昼",
@@ -31117,8 +31121,6 @@ window.RAILWAY_TOURISM = {
    "desc": "高田馬場にある屋内スケートリンク。季節を問わず貸靴でスケートを楽しめる、都内では貴重な屋内施設だ。",
    "tags": [
     "all",
-    "food",
-    "landmark",
     "play"
    ],
    "image": "../images/観光地/シチズンプラザスケートリンク.jpg",
@@ -31553,7 +31555,7 @@ window.RAILWAY_TOURISM = {
    "desc": "後楽園駅近くにある由緒ある寺。こんにゃくをお供えする珍しい閻魔像で知られる。",
    "tags": [
     "all",
-    "landmark"
+    "shrine"
    ],
    "image": "../images/観光地/源覚寺（こんにゃくゑんま）.jpg",
    "bestTime": "昼",
@@ -31780,7 +31782,7 @@ window.RAILWAY_TOURISM = {
    "desc": "綾瀬駅近くにある都立の体育館。武道をはじめ各種競技やイベントが行われる。",
    "tags": [
     "all",
-    "landmark"
+    "modern"
    ],
    "image": "../images/観光地/東京武道館.jpg",
    "bestTime": "昼",
@@ -32403,7 +32405,9 @@ window.RAILWAY_TOURISM = {
    "desc": "目黒駅近くのバー。約100種類のお茶割りと、同じく100種をそろえる唐揚げから、自分好みの組み合わせを見つけられる。",
    "tags": [
     "all",
-    "landmark"
+    "food",
+    "drink",
+    "bar"
    ],
    "image": "../images/観光地/茶割.jpg",
    "bestTime": "夜",
@@ -32711,7 +32715,7 @@ window.RAILWAY_TOURISM = {
    "tags": [
     "all",
     "food",
-    "landmark"
+    "restaurant"
    ],
    "image": "../images/観光地/築地玉寿司 晴海通り店.jpg",
    "bestTime": "昼",
@@ -32820,7 +32824,7 @@ window.RAILWAY_TOURISM = {
    "desc": "南千住駅前の高架下にある全天候型スケートボードパーク。初心者向けの体験レッスンも開かれ、年齢や国籍を超えて交流できる。",
    "tags": [
     "all",
-    "landmark"
+    "play"
    ],
    "image": "../images/観光地/スケボーパーク＆スケボースクール「RAMP ZERO」.jpg",
    "bestTime": "昼",
@@ -32895,7 +32899,7 @@ window.RAILWAY_TOURISM = {
    "desc": "御茶ノ水駅前にある大型総合楽器店。国内外の弦楽器・管楽器が一堂に並ぶ。",
    "tags": [
     "all",
-    "landmark"
+    "shopping"
    ],
    "image": "../images/観光地/クロサワ楽器 お茶の水駅前店.jpg",
    "bestTime": "昼",
@@ -32970,9 +32974,6 @@ window.RAILWAY_TOURISM = {
    "desc": "上野の森美術館に併設された本格的な絵画・造形教室。初心者から経験者まで学べる。",
    "tags": [
     "all",
-    "food",
-    "nature",
-    "landmark",
     "play"
    ],
    "image": "../images/観光地/上野の森アートスクール（上野の森美術館）.jpg",
@@ -33048,8 +33049,8 @@ window.RAILWAY_TOURISM = {
    "desc": "市ケ谷駅近くのジンジャーエール専門店。手作りジンジャーシロップが人気。",
    "tags": [
     "all",
-    "shopping",
-    "landmark"
+    "food",
+    "drink"
    ],
    "image": "../images/観光地/ジンジャーエール専門店「孝芳堂」.jpg",
    "bestTime": "昼",
@@ -33308,7 +33309,7 @@ window.RAILWAY_TOURISM = {
    "tags": [
     "all",
     "nature",
-    "landmark"
+    "play"
    ],
    "image": "../images/観光地/Studio Aurora.jpg",
    "bestTime": "昼",
@@ -37009,7 +37010,7 @@ window.RAILWAY_TOURISM = {
    "desc": "足立花畑の住宅地に構えるショッピングモール型のスーパー。スポーツクラブや多彩なテナントが入り、毎月第1日曜には大朝市が開かれる。地元の暮らしに密着した買い物拠点。",
    "tags": [
     "all",
-    "landmark"
+    "shopping"
    ],
    "image": "../images/観光地/ベルクス 足立花畑中央店.jpg",
    "bestTime": "【月曜～土曜】10:00～21:00 【日曜】9:00～21:00（定休日不定休）",
@@ -42903,8 +42904,6 @@ window.RAILWAY_TOURISM = {
    "desc": "1982年開場の演劇専用劇場。下北沢の小劇場文化の中心で、若手俳優・演出家の登竜門として知られる。レンガ調の外観が目印。",
    "tags": [
     "all",
-    "landmark",
-    "history",
     "play"
    ],
    "bestTime": "公演の前後",
@@ -42979,7 +42978,6 @@ window.RAILWAY_TOURISM = {
    "desc": "1991年に新宿LOFTの姉妹店としてオープンした伝説のライブハウス。Hi-STANDARDやASIAN KUNG-FU GENERATIONもアマチュア時代に出演。キャパ約250人、ステージと客席が近いアットホームな空間。",
    "tags": [
     "all",
-    "landmark",
     "modern",
     "play"
    ],
@@ -43055,7 +43053,7 @@ window.RAILWAY_TOURISM = {
    "desc": "2004年から下北沢の古着文化を牽引してきた東洋百貨店の別館。高架下のミカン下北に移り、個性派古着店や雑貨店が1フロアに軒を連ねる。",
    "tags": [
     "all",
-    "landmark"
+    "mall"
    ],
    "bestTime": "午後",
    "hours": "11:00～20:00（店舗により異なる）",
@@ -43119,6 +43117,471 @@ window.RAILWAY_TOURISM = {
    },
    "image": "",
    "address": "東京都世田谷区北沢2-11-15 ミカン下北A-101"
+  },
+  {
+   "name": "隅田川花火大会",
+   "coord": [
+    35.7115,
+    139.8003
+   ],
+   "dist": "銀座線「浅草駅」徒歩10分",
+   "desc": "1733年両国の川開きから続く日本最古の花火大会。約2万発の花火がスカイツリーと浅草の夜景を彩る。",
+   "tags": [
+    "all",
+    "seasonal",
+    "event"
+   ],
+   "bestTime": "7月25日（19:00～20:30）",
+   "hours": "19:00～20:30",
+   "fee": "無料（有料観覧席あり）",
+   "tips": [
+    "東京メトロ銀座線「浅草駅」・都営浅草線「本所吾妻橋駅」から",
+    "荒天時は中止（当日午前8時発表）",
+    "有料観覧席は事前抽選・先着販売"
+   ],
+   "name_i18n": {
+    "ja": "隅田川花火大会",
+    "zh": "隅田川花火大会",
+    "en": "Sumida River Fireworks Festival",
+    "ko": "스미다가와 불꽃놀이"
+   },
+   "desc_i18n": {
+    "ja": "1733年両国の川開きから続く日本最古の花火大会。約2万発の花火がスカイツリーと浅草の夜景を彩る。",
+    "zh": "起源于1733年两国川开，是日本历史最悠久的花火大会。约2万发烟花点亮晴空塔与浅草的夜空。",
+    "en": "Japan's oldest fireworks festival, dating back to 1733. About 20,000 fireworks light up the night sky over Asakusa and Tokyo Skytree.",
+    "ko": "1733년 료고쿠 카와비라키에서 시작된 일본에서 가장 오래된 불꽃놀이. 약 2만 발이 스카이트리와 아사쿠사 밤하늘을 수놓아요."
+   },
+   "hours_i18n": {
+    "ja": "19:00～20:30",
+    "zh": "19:00–20:30",
+    "en": "19:00–20:30",
+    "ko": "19:00~20:30"
+   },
+   "fee_i18n": {
+    "ja": "無料（有料観覧席あり）",
+    "zh": "免费（另有付费观览席）",
+    "en": "Free (paid viewing seats available)",
+    "ko": "무료（유료 관람석 있음）"
+   },
+   "bestTime_i18n": {
+    "ja": "7月25日（19:00～20:30）",
+    "zh": "7月25日（19:00–20:30）",
+    "en": "Jul 25 (19:00–20:30)",
+    "ko": "7월 25일 (19:00~20:30)"
+   },
+   "tips_i18n": {
+    "ja": [
+     "東京メトロ銀座線「浅草駅」・都営浅草線「本所吾妻橋駅」から",
+     "荒天時は中止（当日午前8時発表）",
+     "有料観覧席は事前抽選・先着販売"
+    ],
+    "zh": [
+     "从东京地铁银座线「浅草站」、都营浅草线「本所吾妻桥站」前往",
+     "遇恶劣天气中止（当天上午8点公布）",
+     "付费观览席需提前抽选或先到先得"
+    ],
+    "en": [
+     "From Asakusa Sta (Ginza Line) or Honjo-Azumabashi Sta (Toei Asakusa Line)",
+     "Canceled in bad weather (announced 8am on the day)",
+     "Paid seats are lottery / first-come"
+    ],
+    "ko": [
+     "도쿄메트로 긴자선 아사쿠사역·도에이 아사쿠사선 혼조아즈마바시역에서",
+     "악천후 시 중지(당일 오전 8시 발표)",
+     "유료 관람석은 사전 추첨·선착순"
+    ]
+   },
+   "address": "東京都台東区・墨田区 隅田川（桜橋下流～言問橋上流／駒形橋下流～厩橋上流）",
+   "pastEditions": [
+    {
+     "num": 49,
+     "date": "2026-07-25",
+     "note": {
+      "ja": "第49回開催。約2万発。",
+      "zh": "第49届举办，约2万发。",
+      "en": "49th edition, approx. 20,000 fireworks.",
+      "ko": "제49회 개최. 약 2만 발."
+     }
+    }
+   ],
+   "nextDate": {
+    "ja": "2027年7月下旬（予定）※詳細は公式発表をご確認ください",
+    "zh": "2027年7月下旬（预定）※以官方公布为准",
+    "en": "Late Jul 2027 (TBA) ※check official announcement",
+    "ko": "2027년 7월 하순(예정) ※공식 발표 확인"
+   }
+  },
+  {
+   "name": "三社祭（浅草神社例大祭）",
+   "coord": [
+    35.7147,
+    139.7967
+   ],
+   "dist": "銀座線「浅草駅」徒歩5分",
+   "desc": "東京三大祭りの一つ。約100基の神輿と華やかな大行列で、浅草の街が3日間祭り一色に染まる。",
+   "tags": [
+    "all",
+    "seasonal",
+    "event"
+   ],
+   "bestTime": "5月15日～17日",
+   "hours": "例年5月第3金曜～日曜",
+   "fee": "無料",
+   "tips": [
+    "東京メトロ銀座線「浅草駅」から徒歩5分",
+    "16日（土）は町会神輿約100基の渡御",
+    "17日（日）早朝に本社神輿の宮出し"
+   ],
+   "name_i18n": {
+    "ja": "三社祭（浅草神社例大祭）",
+    "zh": "三社祭（浅草神社例大祭）",
+    "en": "Sanja Matsuri (Asakusa Shrine Festival)",
+    "ko": "산자 마쓰리（아사쿠사 신사 예대제）"
+   },
+   "desc_i18n": {
+    "ja": "東京三大祭りの一つ。約100基の神輿と華やかな大行列で、浅草の街が3日間祭り一色に染まる。",
+    "zh": "东京三大祭之一。约100台神轿与华丽的大游行，让浅草的街道三天沉浸在祭典氛围中。",
+    "en": "One of Tokyo's three great festivals. About 100 portable shrines and a grand procession fill Asakusa for three days.",
+    "ko": "도쿄 3대 축제 중 하나. 약 100기의 신여(미코시)와 화려한 대행렬로 아사쿠사 거리가 사흘간 축제 분위기에 물들어요."
+   },
+   "hours_i18n": {
+    "ja": "例年5月第3金曜～日曜",
+    "zh": "历年5月第3个周五至周日",
+    "en": "Usually the 3rd Fri–Sun of May",
+    "ko": "매년 5월 셋째 주 금~일"
+   },
+   "fee_i18n": {
+    "ja": "無料",
+    "zh": "免费",
+    "en": "Free",
+    "ko": "무료"
+   },
+   "bestTime_i18n": {
+    "ja": "5月15日～17日",
+    "zh": "5月15日–17日",
+    "en": "May 15–17",
+    "ko": "5월 15일~17일"
+   },
+   "tips_i18n": {
+    "ja": [
+     "東京メトロ銀座線「浅草駅」から徒歩5分",
+     "16日（土）は町会神輿約100基の渡御",
+     "17日（日）早朝に本社神輿の宮出し"
+    ],
+    "zh": [
+     "从东京地铁银座线「浅草站」步行5分钟",
+     "16日（周六）约100台町会神轿巡游",
+     "17日（周日）清晨本社神轿出宫"
+    ],
+    "en": [
+     "5-min walk from Asakusa Sta (Ginza Line)",
+     "Sat: ~100 neighborhood mikoshi parade",
+     "Sun: main mikoshi leaves the shrine at dawn"
+    ],
+    "ko": [
+     "도쿄메트로 긴자선 아사쿠사역에서 도보 5분",
+     "16일(토) 마을 미코시 약 100기 행진",
+     "17일(일) 새벽 본사 미코시 궁출"
+    ]
+   },
+   "address": "東京都台東区浅草2-3-1（浅草神社）",
+   "pastEditions": [
+    {
+     "num": "",
+     "date": "2026-05-15",
+     "note": {
+      "ja": "2026年5月15日～17日開催。",
+      "zh": "2026年5月15日–17日举办。",
+      "en": "Held May 15–17, 2026.",
+      "ko": "2026년 5월 15일~17일 개최."
+     }
+    }
+   ],
+   "nextDate": {
+    "ja": "2027年5月中旬（予定）※詳細は公式発表をご確認ください",
+    "zh": "2027年5月中旬（预定）※以官方公布为准",
+    "en": "Mid-May 2027 (TBA) ※check official announcement",
+    "ko": "2027년 5월 중순(예정) ※공식 발표 확인"
+   }
+  },
+  {
+   "name": "浅草サンバカーニバル パレードコンテスト",
+   "coord": [
+    35.7112,
+    139.795
+   ],
+   "dist": "銀座線「浅草駅」徒歩3分",
+   "desc": "北半球最大級のサンバカーニバル。約5,000人の踊り手が浅草の目抜き通りを練り歩く夏の風物詩。",
+   "tags": [
+    "all",
+    "seasonal",
+    "event"
+   ],
+   "bestTime": "8月29日（13:00～）",
+   "hours": "13:00～（小雨決行）",
+   "fee": "無料（有料観覧席あり）",
+   "tips": [
+    "東京メトロ銀座線「浅草駅」から徒歩3分",
+    "パレードは馬道通り～雷門通り",
+    "沿道は混雑するため早めの場所取りを"
+   ],
+   "name_i18n": {
+    "ja": "浅草サンバカーニバル パレードコンテスト",
+    "zh": "浅草森巴嘉年华游行大赛",
+    "en": "Asakusa Samba Carnival Parade Contest",
+    "ko": "아사쿠사 삼바 카니발 퍼레이드 콘테스트"
+   },
+   "desc_i18n": {
+    "ja": "北半球最大級のサンバカーニバル。約5,000人の踊り手が浅草の目抜き通りを練り歩く夏の風物詩。",
+    "zh": "北半球最大规模的森巴嘉年华。约5,000名舞者在浅草的主要街道上尽情舞动，是东京夏日的风景线。",
+    "en": "The largest samba carnival in the Northern Hemisphere. About 5,000 dancers parade through Asakusa's main streets.",
+    "ko": "북반구 최대 규모의 삼바 카니발. 약 5,000명의 무용수가 아사쿠사 중심가를 행진하는 여름 풍경."
+   },
+   "hours_i18n": {
+    "ja": "13:00～（小雨決行）",
+    "zh": "13:00起（小雨照常举行）",
+    "en": "From 13:00 (held in light rain)",
+    "ko": "13:00~ (약한 비에도 진행)"
+   },
+   "fee_i18n": {
+    "ja": "無料（有料観覧席あり）",
+    "zh": "免费（另有付费观览席）",
+    "en": "Free (paid viewing seats available)",
+    "ko": "무료（유료 관람석 있음）"
+   },
+   "bestTime_i18n": {
+    "ja": "8月29日（13:00～）",
+    "zh": "8月29日（13:00起）",
+    "en": "Aug 29 (from 13:00)",
+    "ko": "8월 29일 (13:00~)"
+   },
+   "tips_i18n": {
+    "ja": [
+     "東京メトロ銀座線「浅草駅」から徒歩3分",
+     "パレードは馬道通り～雷門通り",
+     "沿道は混雑するため早めの場所取りを"
+    ],
+    "zh": [
+     "从东京地铁银座线「浅草站」步行3分钟",
+     "游行路线为马道通～雷门通",
+     "沿途拥挤，建议提早占位"
+    ],
+    "en": [
+     "3-min walk from Asakusa Sta (Ginza Line)",
+     "Parade runs from Umamichi-dori to Kaminarimon-dori",
+     "Streets get crowded—claim a spot early"
+    ],
+    "ko": [
+     "도쿄메트로 긴자선 아사쿠사역에서 도보 3분",
+     "퍼레이드는 우마미치도리~카미나리몬도리",
+     "길가가 혼잡하니 일찍 자리 잡기"
+    ]
+   },
+   "address": "東京都台東区浅草（馬道通り～雷門通り）",
+   "pastEditions": [
+    {
+     "num": 41,
+     "date": "2026-08-29",
+     "note": {
+      "ja": "第41回開催。約5,000人が参加。",
+      "zh": "第41届举办，约5,000人参加。",
+      "en": "41st edition, approx. 5,000 participants.",
+      "ko": "제41회 개최. 약 5,000명 참가."
+     }
+    }
+   ],
+   "nextDate": {
+    "ja": "2027年8月下旬（予定）※詳細は公式発表をご確認ください",
+    "zh": "2027年8月下旬（预定）※以官方公布为准",
+    "en": "Late Aug 2027 (TBA) ※check official announcement",
+    "ko": "2027년 8월 하순(예정) ※공식 발표 확인"
+   }
+  },
+  {
+   "name": "神宮外苑花火大会",
+   "coord": [
+    35.6803,
+    139.717
+   ],
+   "dist": "銀座線「外苑前駅」徒歩5分",
+   "desc": "山手線内で唯一開催される花火大会。約1万発の花火とアーティストのライブが融合する東京の夏の風物詩。",
+   "tags": [
+    "all",
+    "seasonal",
+    "event"
+   ],
+   "bestTime": "8月8日（19:30～20:30）",
+   "hours": "19:30～20:30",
+   "fee": "有料（全席指定）",
+   "tips": [
+    "東京メトロ銀座線「外苑前駅」・千代田線「乃木坂駅」から",
+    "チケットは事前購入制",
+    "雨天決行・荒天時は翌日順延"
+   ],
+   "name_i18n": {
+    "ja": "神宮外苑花火大会",
+    "zh": "神宫外苑花火大会",
+    "en": "Jingu Gaien Fireworks Festival",
+    "ko": "진구 가이엔 불꽃놀이"
+   },
+   "desc_i18n": {
+    "ja": "山手線内で唯一開催される花火大会。約1万発の花火とアーティストのライブが融合する東京の夏の風物詩。",
+    "zh": "山手线内唯一举办的花火大会。约1万发烟花与艺人现场演出融合，是东京夏日的风物诗。",
+    "en": "The only fireworks festival held inside the Yamanote Line loop. About 10,000 fireworks fused with live artist performances.",
+    "ko": "야마노테선 안에서 유일하게 열리는 불꽃놀이. 약 1만 발과 아티스트 라이브가 어우러진 도쿄의 여름 풍경."
+   },
+   "hours_i18n": {
+    "ja": "19:30～20:30",
+    "zh": "19:30–20:30",
+    "en": "19:30–20:30",
+    "ko": "19:30~20:30"
+   },
+   "fee_i18n": {
+    "ja": "有料（全席指定）",
+    "zh": "收费（全席指定）",
+    "en": "Paid (reserved seating)",
+    "ko": "유료（전석 지정）"
+   },
+   "bestTime_i18n": {
+    "ja": "8月8日（19:30～20:30）",
+    "zh": "8月8日（19:30–20:30）",
+    "en": "Aug 8 (19:30–20:30)",
+    "ko": "8월 8일 (19:30~20:30)"
+   },
+   "tips_i18n": {
+    "ja": [
+     "東京メトロ銀座線「外苑前駅」・千代田線「乃木坂駅」から",
+     "チケットは事前購入制",
+     "雨天決行・荒天時は翌日順延"
+    ],
+    "zh": [
+     "从东京地铁银座线「外苑前站」、千代田线「乃木坂站」前往",
+     "门票需提前购买",
+     "小雨照常举行，恶劣天气顺延至次日"
+    ],
+    "en": [
+     "From Gaienmae Sta (Ginza Line) or Nogizaka Sta (Chiyoda Line)",
+     "Tickets must be purchased in advance",
+     "Held in rain; postponed a day in severe weather"
+    ],
+    "ko": [
+     "도쿄메트로 긴자선 가이엔마에역·지요다선 노기자카역에서",
+     "티켓 사전 구매제",
+     "우천 시 진행, 악천후 시 익일 순연"
+    ]
+   },
+   "address": "東京都新宿区霞ヶ丘町1-1（明治神宮外苑）",
+   "pastEditions": [
+    {
+     "num": 45,
+     "date": "2026-08-08",
+     "note": {
+      "ja": "第45回開催。約1万発。",
+      "zh": "第45届举办，约1万发。",
+      "en": "45th edition, approx. 10,000 fireworks.",
+      "ko": "제45회 개최. 약 1만 발."
+     }
+    }
+   ],
+   "nextDate": {
+    "ja": "2027年8月上旬（予定）※詳細は公式発表をご確認ください",
+    "zh": "2027年8月上旬（预定）※以官方公布为准",
+    "en": "Early Aug 2027 (TBA) ※check official announcement",
+    "ko": "2027년 8월 상순(예정) ※공식 발표 확인"
+   }
+  },
+  {
+   "name": "東京高円寺阿波おどり",
+   "coord": [
+    35.7055,
+    139.6498
+   ],
+   "dist": "JR中央線「高円寺駅」徒歩1分",
+   "desc": "約1万人の踊り手と約100万人の観客が集う、東京の夏を締めくくる阿波踊り。",
+   "tags": [
+    "all",
+    "seasonal",
+    "event"
+   ],
+   "bestTime": "8月29日～30日（17:00～20:00）",
+   "hours": "17:00～20:00",
+   "fee": "無料（協賛金任意）",
+   "tips": [
+    "JR中央線「高円寺駅」・丸ノ内線「新高円寺駅」から",
+    "駅南北の商店街と高南通りが会場",
+    "最終日も20:00まで熱気が続く"
+   ],
+   "name_i18n": {
+    "ja": "東京高円寺阿波おどり",
+    "zh": "东京高圆寺阿波舞",
+    "en": "Tokyo Koenji Awa Odori",
+    "ko": "도쿄 고엔지 아와오도리"
+   },
+   "desc_i18n": {
+    "ja": "約1万人の踊り手と約100万人の観客が集う、東京の夏を締めくくる阿波踊り。",
+    "zh": "约1万名舞者与约100万观众汇聚一堂，为东京夏日收尾的阿波舞盛典。",
+    "en": "About 10,000 dancers and 1 million spectators gather for this Awa dance that closes Tokyo's summer.",
+    "ko": "약 1만 명의 무용수와 약 100만 명의 관객이 모이는 도쿄 여름의 피날레 아와오도리."
+   },
+   "hours_i18n": {
+    "ja": "17:00～20:00",
+    "zh": "17:00–20:00",
+    "en": "17:00–20:00",
+    "ko": "17:00~20:00"
+   },
+   "fee_i18n": {
+    "ja": "無料（協賛金任意）",
+    "zh": "免费（赞助金自愿）",
+    "en": "Free (voluntary contribution)",
+    "ko": "무료（협찬금 자율）"
+   },
+   "bestTime_i18n": {
+    "ja": "8月29日～30日（17:00～20:00）",
+    "zh": "8月29日–30日（17:00–20:00）",
+    "en": "Aug 29–30 (17:00–20:00)",
+    "ko": "8월 29일~30일 (17:00~20:00)"
+   },
+   "tips_i18n": {
+    "ja": [
+     "JR中央線「高円寺駅」・丸ノ内線「新高円寺駅」から",
+     "駅南北の商店街と高南通りが会場",
+     "最終日も20:00まで熱気が続く"
+    ],
+    "zh": [
+     "从JR中央线「高圆寺站」、丸之内线「新高圆寺站」前往",
+     "会场为车站南北商店街和高南通",
+     "最后一天的热闹也持续到20:00"
+    ],
+    "en": [
+     "From Koenji Sta (JR Chuo Line) or Shinkoenji Sta (Marunouchi Line)",
+     "Venues: shopping streets north/south of the station & Taka-nan-dori",
+     "Energy lasts until 20:00 on the final day too"
+    ],
+    "ko": [
+     "JR 주오선 고엔지역·마루노우치선 신코엔지역에서",
+     "역 남북 상점가와 다카난도리가 회장",
+     "마지막 날도 20:00까지 열기 지속"
+    ]
+   },
+   "address": "東京都杉並区高円寺（駅前南北商店街・高南通り）",
+   "pastEditions": [
+    {
+     "num": 67,
+     "date": "2026-08-29",
+     "note": {
+      "ja": "第67回開催（8月29日・30日）。",
+      "zh": "第67届举办（8月29日·30日）。",
+      "en": "67th edition (Aug 29–30).",
+      "ko": "제67회 개최(8월 29일·30일)."
+     }
+    }
+   ],
+   "nextDate": {
+    "ja": "2027年8月下旬（予定）※詳細は公式発表をご確認ください",
+    "zh": "2027年8月下旬（预定）※以官方公布为准",
+    "en": "Late Aug 2027 (TBA) ※check official announcement",
+    "ko": "2027년 8월 하순(예정) ※공식 발표 확인"
+   }
   }
  ],
  "station_exits": {
