@@ -893,9 +893,9 @@ ODPT 封装：统一经 ODPTClient，参数为运营者代码（operator）；�
 
 尾段（tail，站数由数据决定）：从 junction 水平 stub 向外侧垂直展开——stubX=max(leftMargin+10×scale, leftMargin+10+尾段最长站名宽)（竖线位置：尾段站名居左后，全尺寸文字左缘仍 ≥ leftMargin）。
 
-站名侧（通用）：主干左列统一居左（上方与下方一致）、右列居右，junction 保持岔路居右；枝干尾段站名居左，右缘动态避让左列上方站名带（文字带 y±8 重叠且右缘越过其左缘 → 右缘左移 4px；画布左限由 clamp 缩字兜底）。
+站名侧（按端区分，v4.3.846）：桌面端——主干左列统一居左（上/下一致）、右列居右、junction 岔路居右；枝干尾段站名居左，右缘动态避让左列上方站名带（文字带 y±8 重叠且右缘越过其左缘 → 右缘左移 4px；画布左限由 clamp 缩字兜底）。移动端——环左列主干站站名改朝右进环内（窄屏根因：尾段与环左列两组朝左站名 x 范围重叠）；尾段站名仍居左，避让循环关闭（环左列已朝右，无重叠对象）。
 
-三区分离（桌面）：尾段文字带 | stub 竖线 | 左列上方站名带 | 环 互不重叠（双侧 gap 10px），尾段不再触发避让（全尺寸无 clamp）、左列上方无穿线；移动端容器 1:1 硬约束无法三区分离时保留最小几何，左列上方站名加白色描边（paint-order stroke 3px）遮线（线路从文字后穿过，尾段避让/clamp 行为不变）。
+三区分离（桌面）：尾段文字带 | stub 竖线 | 左列上方站名带 | 环 互不重叠（双侧 gap 10px），尾段不再触发避让（全尺寸无 clamp）、左列上方无穿线。移动端容器 1:1 硬约束（v4.3.846）：环宽 loopRectW 撑满剩余宽度、右边距 marginRight 收窄（92→64），环左列站名朝右进环内，尾段避让关闭；尾段站名居左若与环内线路重叠，仍以白色描边（paint-order stroke 3px）遮线。
 
 junction 的 left 站（站名居右）走窄空间 clamp（到右列圆点前）。右列站名空间 = marginRight−16。环高 = 标准环线基准环高 + 换乘 chip 高度动态放大（_colPitch6）；svgH 计算 max(rectH+120, 2×(marginTopBot+环半高+tailTotalHeight))。
 
@@ -903,8 +903,8 @@ junction 的 left 站（站名居右）走窄空间 clamp（到右列圆点前�
 
 | side | tx | ty | anchor |
 | --- | --- | --- | --- |
-| left（六形环枝干站（尾段站），站名居左——右缘避让左列上方站名带（文字带 y±8 重叠即避让，被避让站右缘左移、画布左限由 clamp 缩字兜底；桌面三区分离后避让不触发、全 16px，移动端仍触发）；junction 保持岔路居右） | 尾段站：左 x-10（避让时右缘=左列站名左缘−4）；junction：右 x+14 | y（central） | 尾段站 end / junction start |
-| left（六形环主干环站：左列，统一居左，与左列下方一致；桌面三区分离后无穿线，移动端左列上方站名加白色描边遮线） | x-10（上方）/ x-14 或 x-10（下方） | y（central） | end |
+| left（六形环枝干站（尾段站）：桌面站名居左——右缘避让左列上方站名带（文字带 y±8 重叠即避让，被避让站右缘左移、画布左限由 clamp 缩字兜底；桌面三区分离后避让不触发、全 16px）；v4.3.846 移动端避让循环关闭、尾段仍居左 tx=x−10；junction 保持岔路居右） | 尾段站：左 x−10（桌面避让时右缘=左列站名左缘−4）；junction：右 x+14 | y（central） | 尾段站 end / junction start |
+| left（六形环主干环站·左列：桌面统一居左、与左列下方一致、三区分离后无穿线；v4.3.846 移动端改朝右进环内 tx=x+10、anchor=start，避免窄屏与尾段站名重叠） | 桌面 x−10（上方）/ x−14 或 x−10（下方）；移动端 x+10 | y（central） | 桌面 end / 移动端 start |
 | left（六形环环周模式 tail） | x+14/x+10 | y（central） | start |
 | right（六形环环周均布，停用） | x-14/x-10 | y（central） | end |
 | right（六形环右列，双列） | x+14/x+10 | y（central） | start |
@@ -919,15 +919,15 @@ junction 的 left 站（站名居右）走窄空间 clamp（到右列圆点前�
 
 • 尾段（tail）：stubX=max(leftMargin+10×scale, leftMargin+10+尾段最长站名宽)；尾段站名居左后全尺寸文字左缘仍 ≥ leftMargin。
 
-• 站名侧：主干左列统一居左（上/下一致）、右列居右、junction 岔路居右；尾段站名居左。
+• 站名侧：桌面主干左列统一居左（上/下一致）、右列居右、junction 岔路居右、尾段站名居左；v4.3.846 移动端环左列主干站改朝右进环内、尾段仍居左。
 
-• 尾段避让：文字带 y±8 重叠且右缘越过左列上方站名带左缘 → 右缘左移 4px；画布左限由 clamp 缩字兜底。
+• 尾段避让（仅桌面）：文字带 y±8 重叠且右缘越过左列上方站名带左缘 → 右缘左移 4px；画布左限由 clamp 缩字兜底。v4.3.846 移动端避让循环关闭（环左列已朝右进环内，无重叠对象）。
 
 • 三区分离（桌面）：尾段文字带 | stub 竖线 | 左列上方站名带 | 环 互不重叠（双侧 gap 10px）。
 
-• 移动端：容器 1:1 无法三区分离时，左列上方站名加白色描边（paint-order stroke 3px）遮线。
+• 移动端（v4.3.846）：容器 1:1 环宽撑满剩余宽度、右边距收窄；环左列站名朝右进环内；尾段避让关闭；尾段居左若与环内线路重叠仍以白色描边（paint-order stroke 3px）遮线。
 
-• clamp：左列 tx-4 / 右列 svgW-2-tx；junction（岔路居右）max(40, floor(junctionX+loopRectW−7−4−tx))；尾段居左 tx-4。
+• clamp：左列 tx-4 / 右列 svgW-2-tx；junction（岔路居右）max(40, floor(junctionX+loopRectW−7−4−tx))；尾段居左 tx-4（v4.3.846 移动端尾段 clamp 统一走 tx-4 向左空间）。
 
 • 右列站名空间 = marginRight−16；环高 = 标准环线基准环高 + chip 高度动态放大。
 
@@ -1704,7 +1704,7 @@ B 需要 X→ B 从 A 的内部复制/重写 X→ B 正常工作了→ A 从未�
 
 • data/core/line-operation-systems.js：线路运行系统卡（显示分组）
 
-Freeze 例外流程（SOP）：①修订记录追加条目，标注「Freeze 例外」；②修改冻结文件（源 JSON，非构建产物）；③重跑构建 node data/core/gen-file-data.js；④验证（node --check 全部 JS + 渲染检查）；⑤提交（git 仓库即备份，随仓库版本管理）。
+Freeze 例外流程（SOP）：①修订记录追加条目，标注「Freeze 例外」；②修改冻结文件（源 JSON，非构建产物）；③重跑构建 node data/core/gen-file-data.js；④验证（node --check 全部 JS + node scripts/verify_transfer_pairs.js 换乘配对规则五/七/九校验，退出码须为 0 + 渲染检查）；⑤提交（git 仓库即备份，随仓库版本管理）。
 
 任何缺失的数据字段属于数据阻断（DATA-BLOCKED）：标注 DATA-BLOCKED 说明缺失字段与原因，不凭空编造内容兜底；确需补数据时按 Freeze 例外流程处理。
 
