@@ -475,7 +475,6 @@ API key 不硬编码：环境变量或 .work/serve.env（已被 .gitignore 排�
 | 页面 | 主体容器（必须存在的 id/class） | 专属 CSS | 专属模块（js） |
 | --- | --- | --- | --- |
 | home.html 搜索首页 | #searchContainer.search-card（搜索卡：search-inputs 双 input-group + #searchResults）+ #smModule.sm-module（观光推荐：sm-location-bar → #smTagFilters → #smGrid + #smEmpty） | tourism-styles.css | search-ui / route-search / route-timetable / fare-estimator / sightseeing / tourism-proximity / history |
-| trains.html 线路图+实时 | #trainsFilterBar.rs-filter-bar + #trainsLineListContent.pixel-card（线路列表）+ #trainsDetailView.trains-detail.hidden（详情：#trainsDetailTitle + #trainsMapContainer.tp-line-map） | trains.css | trains-page / data-state / train-icons / train-position-estimator / local-railway-data |
 | realtime.html 运行情报 | #realtimeFilterBar.rs-filter-bar + #realtimeStatusContainer.pixel-card（状态卡列表）+ #lineDetailModal.rs-modal（线路详情弹窗） | realtime.css | realtime-view / data-state / delay-translator / line-presentation-service / running-chain-resolver |
 | tourism-spot.html 景点详情 | section.tab-content.active → .tourism-detail-page → #articleContainer（内容由模块渲染） | tourism-styles + tourism-spot.css + leaflet/maplibre | tourism-core / tourism-spot / sightseeing / tourism-proximity / leaflet + maplibre（地图三件套） |
 | tourism-event.html 活动详情 | section.tab-content.active → .tourism-detail-page → #articleContainer（内容由模块渲染） | tourism-styles + tourism-event.css + leaflet/maplibre | tourism-core / tourism-event / sightseeing / tourism-proximity / 地图三件套 |
@@ -1014,7 +1013,6 @@ junction 的 left 站（站名居右）走窄空间 clamp（到右列圆点前�
 | 观光推荐 | #smModule.sm-module | 位置栏 + 标签筛选 + 卡片网格 |
 | 过滤条 | .rs-filter-bar | realtime/trains 共用样式 |
 | 状态卡/线路卡 | .pixel-card | realtime 状态卡、trains 线路列表 |
-| 详情视图 | .trains-detail（#trainsDetailView） | 线路图详情（含 #trainsMapContainer） |
 | 详情弹窗 | #lineDetailModal.rs-modal | realtime 线路详情（ODPT 原文全文） |
 | 地图 | .tourism-detail-page > #articleContainer | tourism 三页共用详情容器，含 Leaflet/MapLibre |
 | 页脚 | footer.pixel-footer | data-i18n="app.footer" |
@@ -1676,8 +1674,6 @@ B 需要 X→ B 从 A 的内部复制/重写 X→ B 正常工作了→ A 从未�
 | 债务 | 优先级 | 延期理由 |
 | --- | --- | --- |
 | CSS 孤儿类（5 个） | P3 | 风险低，由继承覆盖 |
-| odpt-unified.js 中的 console.log（2 处） | P3 | 非产品调试输出 |
-| js/trains-detail.js 孤儿 | P3 | 零消费方（无任何页面引用）；含未解析的 _rS/tStation/_lang 引用——不需要启用 |
 | 13 个图片路径修复 | 待处理 | 素材映射，无产品影响 |
 
 ### 架构基线（Architecture Baselines）
