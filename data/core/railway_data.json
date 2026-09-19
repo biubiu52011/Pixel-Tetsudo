@@ -43068,6 +43068,19 @@
       "Kawasaki": 5,
       "Yokohama": 6,
       "Ofuna": 7
+    },
+    "JobanMedium": {
+      "Tsuchiura": 0,
+      "Arakawaoki": 1,
+      "HitachinoUshiku": 2,
+      "Ushiku": 3,
+      "Hitachi-Ogawa": 4,
+      "Takahama": 5,
+      "Omika": 6,
+      "Hitachi-Taga": 7,
+      "Katsuta": 8,
+      "Higashi-Mito": 9,
+      "Mito": 10
     }
   }
 }
