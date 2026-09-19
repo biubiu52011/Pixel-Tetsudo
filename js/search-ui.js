@@ -300,7 +300,11 @@
       var line = (window.RailwayDB && window.RailwayDB.getLine) ? window.RailwayDB.getLine(lid) : null;
       var img = (window.LineOperationSystemsResolveIcon && window.LineOperationSystemsResolveIcon(lid)) || (line && line.image && !/(グループ|ロゴ|マーク|アイコン|シンボル)/.test(line.image) ? line.image : '');
       if (!img && line && window.TransitConstants && window.TransitConstants.isJRERoute && window.TransitConstants.isJRERoute(line)) img = "../images/鉄道/JR東日本/JRグループ.png";
-      var _platChip = plat ? '<span class="journey-line-platform">' + window.escapeHtml(plat) + '</span>' : '';
+      var _platChip = '';
+      if (plat) {
+        var _plabel = (window.t && window.t('search.platform')) ? window.t('search.platform').replace('{p}', plat) : (plat + '号站台');
+        _platChip = '<span class="journey-line-platform">' + window.escapeHtml(_plabel) + '</span>';
+      }
       if (img) {
         return '<span class="journey-line-badge"><img class="journey-line-icon" src="' + window.escapeHtml(img) + '" alt="' + window.escapeHtml(nm) + '" title="' + window.escapeHtml(nm) + '" loading="lazy"><span class="journey-line-name">' + window.escapeHtml(nm) + '</span>' + _platChip + '</span>';
       }
