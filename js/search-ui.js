@@ -42,20 +42,29 @@
       this.swapBtn = document.getElementById('swapBtn');
       this.resultsDiv = document.getElementById('searchResults');
 
-      // Parse ?from=/&to= URL params and fill inputs via the public setRoute().
+      // Parse ?from=/&to= URL params. Delay the actual fill until RailwayDB data
+      // is ready: resolving a romanized station ID (e.g. Kita-Senju) needs the name
+      // map; filling too early makes setRoute fall back to the raw roman ID in the
+      // input (the "romanized leak" when clicking a history entry).
       var _params = null;
       try { _params = new URLSearchParams(window.location.search); } catch(e) {}
       var _fromParam = _params ? _params.get('from') : null;
       var _toParam = _params ? _params.get('to') : null;
       if (_fromParam || _toParam) {
-        this.setRoute(_fromParam, _toParam);
-      }
-
-
-      // Clean URL after both params are parsed — inputs are already filled, no need to preserve
-      if (_fromParam || _toParam) {
-        var _cleanUrl = window.location.pathname;
-        window.history.replaceState({}, '' , _cleanUrl);
+        var self = this;
+        var _tries = 0;
+        (function _waitDb() {
+          var _ready = !!(window.RailwayDB && window.RailwayDB.resolveStationName &&
+                          window.DataLoader && window.DataLoader.isLoaded && window.DataLoader.isLoaded());
+          var _err = !!(window.DataLoader && window.DataLoader.getError && window.DataLoader.getError());
+          if (_ready || _err || _tries > 300) {
+            self.setRoute(_fromParam, _toParam);
+            try { window.history.replaceState({}, '', window.location.pathname); } catch(e) {}
+          } else {
+            _tries++;
+            setTimeout(_waitDb, 50);
+          }
+        })();
       }
       this.lastRouteResult = null;
       this.bindEvents();
