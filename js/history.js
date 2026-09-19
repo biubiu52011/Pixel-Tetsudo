@@ -233,7 +233,7 @@
       if (entry.durationMin > 0) {
         html += '<span class="history-duration">' + entry.durationMin + " " + t("unit.minute") + "</span>";
       }
-      if (entry.count && entry.count > 1) {
+      if (entry.count) {
         var _timesStr = (t("history.times") || "").replace("{n}", entry.count);
         html += '<span class="history-count">' + escapeHtml(_timesStr) + "</span>";
       }
