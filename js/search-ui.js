@@ -369,6 +369,26 @@
             if (seg.through) { html += ' journey-transfer-text--through'; }
             html += '">' + t(seg.through ? 'search_result.through' : 'search_result.transfer') + '</span>';
             if (lineChange) { html += lineChange; }
+            // v4.3.845: 换乘条显示上下车番线——前一乘车段到达站台 / 下一乘车段出发站台
+            if (!seg.through && window.PlatformResolver && window.PlatformResolver.resolve) {
+              var _arrPlat = null, _depPlat = null;
+              try {
+                if (i > 0 && segs[i-1] && segs[i-1].type === 'ride') {
+                  _arrPlat = window.PlatformResolver.resolve(segs[i-1].lineId, seg.station, segs[i-1].direction);
+                }
+                if (i < segs.length - 1 && segs[i+1] && segs[i+1].type === 'ride') {
+                  _depPlat = window.PlatformResolver.resolve(segs[i+1].lineId, seg.station, segs[i+1].direction);
+                }
+              } catch (_e) {}
+              if (_arrPlat || _depPlat) {
+                var _pt = '<span class="journey-transfer-platforms">';
+                if (_arrPlat) { _pt += '<span class="jtp-getoff">' + window.escapeHtml(t('search.platform').replace('{p}', _arrPlat)) + '</span>'; }
+                if (_arrPlat && _depPlat) { _pt += '<span class="jtp-arrow">&rarr;</span>'; }
+                if (_depPlat) { _pt += '<span class="jtp-board">' + window.escapeHtml(t('search.platform').replace('{p}', _depPlat)) + '</span>'; }
+                _pt += '</span>';
+                html += _pt;
+              }
+            }
             if (!seg.through && seg.station && window.getTransferHint) {
               var hintTxt = window.getTransferHint(seg.station, lang);
               if (hintTxt) { html += '<span class="journey-transfer-hint">' + window.escapeHtml(hintTxt) + '</span>'; }
