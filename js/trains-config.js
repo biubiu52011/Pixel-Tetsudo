@@ -9,3 +9,5 @@ window.TrainsConfig = {
     MAIN_BASE_W_MAX: 820
   }
 };
+// 全局别名（trains-geometry.js / trains-render.js 直接用 GEOM.XXX）
+window.GEOM = window.TrainsConfig.GEOM;
