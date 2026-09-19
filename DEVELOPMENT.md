@@ -1080,9 +1080,9 @@ CSP：script-src 'self'、style-src 'self'、connect-src 仅 self + ODPT/MapTile
 
 收藏（预留约定）：当前版本暂无收藏功能；如引入，沿用同一套机制——key 统一 pixel_tetsudo_* 前缀、JSON 数组、写入 try/catch 容错（localStorage 满/禁用时降级为内存态并 console.warn）、上限裁剪；收藏对象复用线路/车站/观光条目的规范 ID，不存渲染态 DOM
 
-## 6. 后端设计
+## 6. 数据层（本地底库 + ODPT 实时）
 
-> 本项目无传统业务后端（无应用服务器、无 SQL 数据库、无后台管理界面）。“后端”在本项目中指 轻量服务端 serve.py + 本地数据文件体系，以下按此如实描述。
+> 本项目无传统业务后端（无应用服务器、无 SQL 数据库、无后台管理界面）。"数据层"指 本地 JSON/JS 底库（静态基线）+ ODPT 实时通道（主源）+ serve.py（本地开发服务器/代理），以下按此如实描述。
 
 ### 6.1 系统模块划分
 
@@ -1111,7 +1111,7 @@ CSP：script-src 'self'、style-src 'self'、connect-src 仅 self + ODPT/MapTile
 | 密钥管理 | API key 走环境变量 / .work/serve.env（.gitignore 排除），不落代码；泄露即轮换并封锁端点 |
 | 关闭目录列表 | 防目录结构泄露；错误响应不回显内部细节 |
 
-### 6.3 数据库设计
+### 6.3 数据文件体系
 
 数据以 JSON/JS 文件 形式存放于仓库（无 SQL 数据库），由构建脚本生成浏览器可加载的 *.file.js 产物。
 
@@ -1177,7 +1177,7 @@ ODPT 无数据的线路使用本地 manual 时刻表，不向 ODPT 发起空请�
 
 其余硬规则以第 11 章开发规则为准
 
-## 7. API 接口文档
+## 7. ODPT 接口与数据通道
 
 ### 7.1 全局请求 / 响应统一格式
 
@@ -1246,7 +1246,7 @@ LINE_RAILWAY_CODE：线路 ID → ODPT railway 代码（resolveRailwayCode 解�
 
 数据融合：odpt-unified（实时）→ data-fusion（实时优先、推定补缺）→ 业务层
 
-### 7.5 后台管理接口
+### 7.5 后台管理接口（无，数据维护见 6.3）
 
 本项目无后台管理界面、无账号体系，因此无后台管理接口。数据维护通过直接编辑数据文件（见 6.3）+ 构建脚本重新生成完成；访问控制见 6.2。
 
@@ -1276,7 +1276,7 @@ LINE_RAILWAY_CODE：线路 ID → ODPT railway 代码（resolveRailwayCode 解�
 
 ## 8. 部署与运维
 
-### 8.1 服务器资源配置
+### 8.1 本地开发服务器（serve.py）
 
 本项目为纯静态站点 + 本地开发服务器，无独立服务器、无数据库服务器：
 
@@ -1329,7 +1329,7 @@ CDN：无自有 CDN；第三方依赖走 CSP 白名单——ODPT API、MapTiler 
 
 线上问题通过用户反馈 + 版本回滚处理（git 历史）
 
-### 8.6 数据库备份策略（本地线路库重点备份）
+### 8.6 数据文件备份策略（本地线路库重点备份）
 
 git 仓库即备份：data/core/railway_data.json 等冻结数据随仓库版本管理
 
