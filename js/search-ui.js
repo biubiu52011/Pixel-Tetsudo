@@ -15,9 +15,12 @@
     // ?from=&to= URL restore (init) and history restore (SearchHistory.restoreFromRecent).
     // Sets value + authoritative data-station-id; callers do not poke internals.
     setRoute: function(fromId, toId) {
+      var db = window.RailwayDB;
+      var lang = window.currentLang || 'ja';
       var fill = function(input, id) {
         if (!input || !id) return;
-        input.value = id;
+        var name = (db && db.resolveStationName) ? (db.resolveStationName(id, lang) || id) : id;
+        input.value = name;
         // Dispatch input first so the listener's stale-ID cleanup + suggestion
         // refresh runs, then stamp the authoritative station ID after.
         input.dispatchEvent(new Event('input'));
