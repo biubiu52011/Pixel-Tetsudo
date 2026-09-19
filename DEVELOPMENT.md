@@ -1675,18 +1675,10 @@ B 需要 X→ B 从 A 的内部复制/重写 X→ B 正常工作了→ A 从未�
 
 | 债务 | 优先级 | 延期理由 |
 | --- | --- | --- |
-| History <-> SearchUI 耦合（P2） | P2 | 需要 SearchUI 公共 API 重新设计 |
-| data/铁道/ 目录 | 已移除 | 依用户明确指示删除历史归档（git 历史完整保留）。带坏相对路径的双 home.html 已消除——入口仅为 pages/home.html |
-| data/api/line-operation-systems.js | 已移除 | data/core 的孤儿副本（零页面引用、缺 isStandalone）——已删除，保留 data/core/line-operation-systems.js 为唯一来源 |
 | CSS 孤儿类（5 个） | P3 | 风险低，由继承覆盖 |
 | odpt-unified.js 中的 console.log（2 处） | P3 | 非产品调试输出 |
 | js/trains-detail.js 孤儿 | P3 | 零消费方（无任何页面引用）；含未解析的 _rS/tStation/_lang 引用——不需要启用 |
-| LOS isStandalone / REGIONAL 伪分组 | 已移除 | 运行系统渲染退役了支线跳过机制；LOS 从权威运行系统表重新生成（支线位于其系统组内，如 Ome/Itsukaichi 在 JC 中） |
-| Yurakucho/Fukutoshin 站序错乱 | 已修复 | 官方站序 和光市-成増-赤塚-平和台-氷川台-小竹向原-千川-要町-池袋。旧数据有乐町线缺小竹向原、副都心线缺冰川台。官方证据修正 railway_data.json（Yurakucho +Kotake-Mukaihara / Fukutoshin +Hikawadai）。两线最初 9 站一致，共有区间为 和光市～池袋 的 1 段。 |
-| Odawara（小田原线）站表末端混入 JR 东海道系车站 | 已修复 | 按 ODPT 官方（Odakyu.Odawara 47 站/Station API OH41-46）全面修正——4 个错误站（Oiso/Ninomiya/Kozu/Kamonomiya）去除、Iriuda（箱根登山铁道站）去除、新站 6 件追加（ShinMatsuda 新松田 OH41/Kaisei 开成 OH42/Kayama 栢山 OH43/Tomizu 富水 OH44/Hotaruda 萤田 OH45/Ashigara 足柄 OH46）、按 46→47 站正序重建。 |
 | 13 个图片路径修复 | 待处理 | 素材映射，无产品影响 |
-| Noda（东武都市公园线）的 Sakae（荣）站 | 已修复 | 东武野田线不存在荣站（正确为逆井 Sakasai）。经 wiki 核验将 Noda 全面重建为正序 35 站、删除重复线 TobuNoda、28 个错误 ID 替换为正 ID 并补 i18n（见下方 Freeze 例外）。 |
-| SotetsuDirect（相铁直通）列车误配山手线 posMap | 已修复 | 经 ODPT 实证（JR-East.SotetsuDirect 独立 railway、fromStation 专属站 ID）修复——THROUGH_RAILWAY_FALLBACK 表（SotetsuDirect→prefer SotetsuShin-Yokohama/Yokosuka/Saikyo/ShonanShinjuku、exclude Yamanote）+ 羽泽横滨国大跨 operator 放行。验证：Osaki→Saikyo / MusashiKosugi→Yokosuka / NishiOi→Yokosuka / HazawaYokohamaKokudai→SotetsuShin-Yokohama，Yamanote 正常列车不受影响，integration_test 全部通过。 |
 
 ### 架构基线（Architecture Baselines）
 
