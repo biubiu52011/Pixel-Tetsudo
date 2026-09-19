@@ -580,6 +580,18 @@
     };
     var sp = _chipPitch(stations);
     var topP = 18 + thrTopPad, botP = 16 + thrBotPad;
+    // v4.3.854: 主直线**逐段**定距——每段站距 = 上一站 chip 图标的高 + 空隙（不再全线统一取 max）。
+    // 几何：站 i chip 块底 = y_i + 14 + rows_i*ROW_H + 2*(rows_i-1)，下一站圆点顶缘 = y_{i+1}-7
+    // => _spSeg[i] = rows_i*18 + SP_GAP（1行43/2行61/3行79/4行97；可见留白 4/2/0）。
+    // sp（全线 max）保留给支线/融合延长段用。
+    var _spRows = [];
+    for (var _sr = 0; _sr < stations.length; _sr++) {
+      var _txN = (transferMap[stations[_sr]] || []).filter(function(t) { return !t.through; }).length;
+      _spRows.push(Math.max(1, Math.ceil(Math.min(_txN, 16) / 4)));
+    }
+    var _spSeg = [];
+    for (var _sr2 = 0; _sr2 < stations.length; _sr2++) _spSeg.push(_spRows[_sr2] * ROW_H + SP_GAP);
+    var _yAt = function(i) { var y = topP; for (var _yi = 0; _yi < i && _yi < _spSeg.length; _yi++) y += _spSeg[_yi]; return y; };
     
     // Get branch lines
     var allLines = getLinesData();
@@ -1000,17 +1012,13 @@
         svgW = Math.max(_baseW, mainCx + _branchStubR + branchOffset + _rightPad);
       }
       
-      var _iconStep = (isMobileView ? 20 : 16) + 2;
-      var _extraY = 0;
+      // v4.3.854: 逐段定距（_yAt）替代旧「均匀 sp + _extraY 补偿」——旧补偿 min(换乘数,8) 与渲染 min(16) 不一致，已废
       for (var i = 0; i < stations.length; i++) {
-        var _txs = (transferMap[stations[i]] || []).filter(function(t) { return !t.through; });
-        var _rowsN = Math.ceil(Math.min(_txs.length, 8) / 4);
-        stationCoords.push({ x: mainCx, y: topP + i * sp + _extraY, side: 'dual', stationId: stations[i] });
-        if (_rowsN > 1) _extraY += (_rowsN - 1) * _iconStep;
+        stationCoords.push({ x: mainCx, y: _yAt(i), side: 'dual', stationId: stations[i] });
       }
       // svgH must be computed AFTER stationCoords is populated (with the
       // per-station 2-row chip compensation) or the viewBox clips the line.
-      svgH = (stationCoords.length ? stationCoords[stationCoords.length - 1].y : topP) + sp + botP;
+      svgH = (stationCoords.length ? stationCoords[stationCoords.length - 1].y : topP) + (_spSeg.length ? _spSeg[_spSeg.length - 1] : sp) + botP;
       var y1 = topP, y2 = stationCoords.length ? stationCoords[stationCoords.length - 1].y : (topP + (stations.length - 1) * sp);
       routeElements.push({
         type: 'line',
@@ -1071,7 +1079,7 @@
         var pColor = (window.LineOperationSystemsResolveColor && window.LineOperationSystemsResolveColor(sseg.partner)) || (allLines[sseg.partner] && allLines[sseg.partner].color) || "#888";
         routeElements.push({
           type: 'line',
-          attrs: { x1: mainCx - 7, y1: topP + sseg.start * sp, x2: mainCx - 7, y2: topP + sseg.end * sp, stroke: pColor, 'stroke-width': 3, 'stroke-linecap': 'round', opacity: 0.55 }
+          attrs: { x1: mainCx - 7, y1: _yAt(sseg.start), x2: mainCx - 7, y2: _yAt(sseg.end), stroke: pColor, 'stroke-width': 3, 'stroke-linecap': 'round', opacity: 0.55 }
         });
       }
     }
