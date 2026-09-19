@@ -686,6 +686,7 @@ ODPT 封装：统一经 ODPTClient，参数为运营者代码（operator）；�
 | BRANCH_COL_W | 96 | 支线列宽（站名 16px 最长 6 字 + 换乘 chip 余量） |
 | BRANCH_STUB | 20 | 主线 → 支线水平引出长度 |
 | MAIN_BASE_W_MOBILE | 410 | 移动端基准画布宽 |
+| MOBILE_CONTENT_W | 297 | 移动端内容区宽（= svgW 基准） |
 | MAIN_BASE_W_MIN | 440 | 桌面画布宽下限 |
 | MAIN_BASE_W_MAX | 820 | 桌面画布宽上限 |
 
