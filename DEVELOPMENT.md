@@ -92,6 +92,7 @@
     - [10.1 已知风险点](#101-项目已知风险点)
     - [10.2 常见问题](#102-开发--部署--数据维护常见问题)
   - [11. 开发规则（Hard Rules）](#11-开发规则hard-rules)
+  - [12. 架构基线（Architecture Baselines）](#12-架构基线architecture-baselines)
     - [线路层级规则](#线路层级规则line-hierarchy-rule硬规则)
     - [系统优先变更规则](#系统优先变更规则system-first-change-rule硬规则)
     - [变更前 / 结构性变更后](#变更前)
@@ -118,7 +119,7 @@
     - [模块核心规则](#模块核心规则module-main-heart-rule)
     - [发布门规则](#发布门规则release-gate-rule)
     - [运行契约](#运行契约runtime-contract)
-  - [12. 线路服务关系层设计](#12-线路服务关系层设计line-to-line-service-relation-layer)
+  - [13. 线路服务关系层设计](#13-线路服务关系层设计line-to-line-service-relation-layer)
     - [12.1 问题陈述](#121-问题陈述)
     - [12.2 关系类型定义](#122-关系类型定义)
     - [12.3 数据模型](#123-数据模型-line-service-relationsjs)
@@ -1689,11 +1690,13 @@ B 需要 X→ B 从 A 的内部复制/重写 X→ B 正常工作了→ A 从未�
 | 债务 | 优先级 | 延期理由 |
 | --- | --- | --- |
 
-### 11.22 架构基线（Architecture Baselines）
+## 12. 架构基线（Architecture Baselines）
 
-### 11.23 数据不变规则・显示同一性・其他硬规则
+### 12.1 架构基线（Architecture Baselines）
 
-### 11.24 规范数据冻结规则（Canonical Data Freeze Rule）
+### 12.2 数据不变规则・显示同一性・其他硬规则
+
+### 12.3 规范数据冻结规则（Canonical Data Freeze Rule）
 
 以下数据为锁定状态（默认冻结）。正常开发流程中不得直接修改；确需修改时必须走 Freeze 例外流程（见下），禁止绕过。
 
@@ -1707,12 +1710,12 @@ Freeze 例外流程（SOP）：①修订记录追加条目，标注「Freeze 例
 
 任何缺失的数据字段属于数据阻断（DATA-BLOCKED）：标注 DATA-BLOCKED 说明缺失字段与原因，不凭空编造内容兜底；确需补数据时按 Freeze 例外流程处理。
 
-### 11.25 显示身份规则（Display Identity Rule）
+### 12.4 显示身份规则（Display Identity Rule）
 
 RailwayDB.resolveLineName / resolveStationName / tOp 是唯一允许的显示名路径。
 绝不实现第二个解析器。绝不在用户可见输出中直接使用 line.name / line.nameJa / line.nameEn。
 
-### 11.26 三层数据架构规则（Three-Layer Data Architecture Rule）
+### 12.5 三层数据架构规则（Three-Layer Data Architecture Rule）
 
 | 层级 | 归属 | 职责 |
 | --- | --- | --- |
@@ -1723,7 +1726,7 @@ RailwayDB.resolveLineName / resolveStationName / tOp 是唯一允许的显示名
 
 项目使用三个有意的层级。不得合并它们：
 
-### 11.27 无孤儿迁移规则（No Orphan-Generating Migration Rule）
+### 12.6 无孤儿迁移规则（No Orphan-Generating Migration Rule）
 
 将能力从模块 A 迁移到模块 B 时：
 
@@ -1738,11 +1741,11 @@ RailwayDB.resolveLineName / resolveStationName / tOp 是唯一允许的显示名
 5. 移除后执行全局孤儿清扫
 消费方仍在引用时，绝不删除 Provider。
 
-### 11.28 只读优先规则（Read-Only First Rule）
+### 12.7 只读优先规则（Read-Only First Rule）
 
 每个评审/审计阶段都以只读分析开始。只有在明确批准后才修改代码。
 
-### 11.29 模块核心规则（Module Main-Heart Rule）
+### 12.8 模块核心规则（Module Main-Heart Rule）
 
 | 页面 | 核心 |
 | --- | --- |
@@ -1756,7 +1759,7 @@ RailwayDB.resolveLineName / resolveStationName / tOp 是唯一允许的显示名
 
 每个页面有且仅有一个核心：
 
-### 11.30 发布门规则（Release Gate Rule）
+### 12.9 发布门规则（Release Gate Rule）
 
 打版本标签前：
 
@@ -1770,7 +1773,7 @@ RailwayDB.resolveLineName / resolveStationName / tOp 是唯一允许的显示名
 
 5. main 分支与标签一起推送
 
-### 11.31 运行契约（Runtime Contract）
+### 12.10 运行契约（Runtime Contract）
 
 规范数据由 db-loader.js 通过 fetch 加载（railway_data.json / station_i18n.json / tourism_data.json）。
 
@@ -1787,11 +1790,11 @@ python serve.py（本地静态服务器 + /api-proxy/ 官方 API 代理替代 py
 
 唯一入口页面是 pages/home.html。不得在其他位置创建或恢复第二个 home.html。
 
-## 12. 线路服务关系层设计（Line-to-Line Service Relation Layer）
+## 13. 线路服务关系层设计（Line-to-Line Service Relation Layer）
 
 > 任务：只读架构设计（READ-ONLY ARCHITECTURE DESIGN）
 
-### 12.1 问题陈述
+### 13.1 问题陈述
 
 #### 12.1.1 三层架构的缺口
 
@@ -1821,7 +1824,7 @@ LineOperationSystems 承载两个概念：
 
 这导致无法判断一个多线 OS 究竟是纯显示分组还是真实直通服务。
 
-### 12.2 关系类型定义
+### 13.2 关系类型定义
 
 | 类型 | 常量 | 含义 | 示例 |
 | --- | --- | --- | --- |
@@ -1834,7 +1837,7 @@ LineOperationSystems 承载两个概念：
 
 关键原则：SHARED_STATION >= 1 并不蕴含 THROUGH_SERVICE，仅蕴含 PHYSICAL_CONNECT（且仍需验证）。
 
-### 12.3 数据模型 line-service-relations.js
+### 13.3 数据模型 line-service-relations.js
 
 新文件：data/core/line-service-relations.js
 
@@ -1864,9 +1867,9 @@ stationLines[]：推导 PHYSICAL_CONNECT 证据
 
 LineOperationSystems（保持不变）：继续作为显示分组来源
 
-### 12.4 全部线路关系映射
+### 13.4 全部线路关系映射
 
-#### 12.4.1 BRANCH_OF 关系（来自 branchOf 字段）
+#### 13.4.1 BRANCH_OF 关系（来自 branchOf 字段）
 
 | 支线 | 父线 | 共用站 | 问题 |
 | --- | --- | --- | --- |
@@ -1880,7 +1883,7 @@ LineOperationSystems（保持不变）：继续作为显示分组来源
 
 结论：7 条支线关系中 5 条存在 stationLines 数据缺口。关系层以 confidence=LOW 记录。
 
-#### 12.4.2 已验证的 THROUGH_SERVICE 关系
+#### 13.4.2 已验证的 THROUGH_SERVICE 关系
 
 | 线路对 | 证据 | 置信度 |
 | --- | --- | --- |
@@ -1891,7 +1894,7 @@ LineOperationSystems（保持不变）：继续作为显示分组来源
 | Marunouchi <-> MarunouchiBranch | 共用 7 站，LOS M 系统 | HIGH |
 | SeibuIkebukuro <-> Ikebukuro | 共用 18 站（子集），LOS SI 系统 | HIGH |
 
-#### 12.4.3 跨运营者直通（数据缺口）
+#### 13.4.3 跨运营者直通（数据缺口）
 
 | 链 | 当前数据 | 缺口 |
 | --- | --- | --- |
@@ -1902,7 +1905,7 @@ LineOperationSystems（保持不变）：继续作为显示分组来源
 
 以上：THROUGH_SERVICE + confidence=LOW + evidence 车站数据不完整。
 
-#### 12.4.4 TYPE-C 详细分类
+#### 13.4.4 TYPE-C 详细分类
 
 | OS | 线路 | 分类 | 理由 |
 | --- | --- | --- | --- |
@@ -1912,7 +1915,7 @@ LineOperationSystems（保持不变）：继续作为显示分组来源
 | TOBU/TN | TobuNikko <-> Nikkoku | UNKNOWN | 站集 21 vs 9 差异不明确 |
 | TOBU/TTJ | Tojo <-> Utsunomiya | THROUGH_SERVICE（UNKNOWN） | 实际存在直通服务，数据 0 共用站 |
 
-#### 12.4.5 REGIONAL 重新分类
+#### 13.4.5 REGIONAL 重新分类
 
 REGIONAL 52 线不应是单一直通服务簇。
 
@@ -1924,9 +1927,9 @@ REGIONAL 52 线不应是单一直通服务簇。
 | 相连 | Kiryu <-> Sagami <-> Sano | PHYSICAL_CONNECT | 各共用 18 站 |
 | 孤立 | 其余约 40 线 | 无关系 | 0 共用站 |
 
-### 12.5 架构集成设计
+### 13.5 架构集成设计
 
-#### 12.5.1 新五层架构
+#### 13.5.1 新五层架构
 
 第 1 层：线路身份（railway_data.json lines[id]）
 第 2 层：物理拓扑（stationLines + lineStationOrder）
@@ -1934,7 +1937,7 @@ REGIONAL 52 线不应是单一直通服务簇。
 第 4 层：运行系统（LineOperationSystems 不变）
 第 5 层：展示（LinePresentationService 扩展）
 
-#### 12.5.2 LinePresentationService 扩展
+#### 13.5.2 LinePresentationService 扩展
 
 当前 API：
 
@@ -1948,7 +1951,7 @@ getRelatedLines(lineId) → [{lineId，type，confidence，evidence}]
 
 isThroughService(lineA, lineB) → boolean
 
-#### 12.5.3 DataState.renderList 影响
+#### 13.5.3 DataState.renderList 影响
 
 当前渲染：
 按 OPERATOR 分组 → 按 LOS 顺序排序 → 渲染卡片
@@ -1960,7 +1963,7 @@ isThroughService(lineA, lineB) → boolean
 → 再显示其余线路
 → 渲染带链指示的卡片
 
-### 12.6 文件结构
+### 13.6 文件结构
 
 data/core/
 railway_data.json（冻结 FROZEN）
@@ -1971,7 +1974,7 @@ js/
 line-presentation-service.js（扩展 — 添加 getServiceChains / getRelatedLines）
 data-state.js（基础功能无需变更）
 
-### 12.7 风险评估
+### 13.7 风险评估
 
 | 风险 | 级别 | 缓解措施 |
 | --- | --- | --- |
@@ -1980,7 +1983,7 @@ data-state.js（基础功能无需变更）
 | 关系层与 LOS 重复 | 低 | 明确分离：LOS=显示，Relations=服务 |
 | 数据质量依赖 | 高 | confidence 字段 + evidence 描述，不伪造确定性 |
 
-### 12.8 后续阶段计划
+### 13.8 后续阶段计划
 
 | 阶段 | 内容 | 是否修改数据？ |
 | --- | --- | --- |
@@ -1990,7 +1993,7 @@ data-state.js（基础功能无需变更）
 | 4 | DataState/Realtime/Trains 渲染增强 | 是（JS+CSS） |
 | 5 | stationLines 数据质量修复（独立任务） | 是（数据治理） |
 
-### 12.9 结论
+### 13.9 结论
 
 设计完成。
 
