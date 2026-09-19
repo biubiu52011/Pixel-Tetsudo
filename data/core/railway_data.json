@@ -10494,6 +10494,7 @@
         "Abiko",
         "Tennodai",
         "Toride",
+        "Fujishiro",
         "Tsuchiura"
       ],
       "durations": [
@@ -39804,7 +39805,8 @@
       "Abiko": 10,
       "Tennodai": 11,
       "Toride": 12,
-      "Tsuchiura": 13
+      "Fujishiro": 13,
+      "Tsuchiura": 14
     },
     "Keiyo": {
       "Tokyo": 0,
