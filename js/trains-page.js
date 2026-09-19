@@ -563,12 +563,12 @@
       if (_throughDirForStation(lineId, stations[stations.length - 1])) thrBotPad = 26;
     }
     // v4.3.847-850: 站间距标准 = 换乘图标的高 + 一点空隙（共同规则 5.4.1.2.2，所有画法一致）——
-    // 换乘图标的高 = 行数 × 行高 ROW_H(22px/行，5.4.1.1.3)；行数 = ⌈min(换乘数,16)÷4⌉（每行最多 4 个、行数上限 4
+    // 换乘图标的高 = 行数 × 行高 ROW_H(18px/行 = ICON16+GAP2，5.4.1.1.3)；行数 = ⌈min(换乘数,16)÷4⌉（每行最多 4 个、行数上限 4
     // = RuntimeConfig.TRANSFER_MAX_ROWS，4×4=16 个图标上限，用户裁定 4.3.849；溢出 "+n"；
     // 行数上限若再调，同步 min 值）。一点空隙 SP_GAP=34（= ICON16 + 顶隙6 + 底距12，chip 底部与
     // 下一站圆点顶缘可见空隙 17-23px）。站间距 = 全线各站换乘图标的高最大值 + 空隙（移动/桌面统一，
     // 不再按站数分档）；环线双列 _colPitch 同式复用。
-    var ROW_H = 22, SP_GAP = 34;
+    var ROW_H = 18, SP_GAP = 34; // v4.3.851: 行高 22→18 对齐渲染口径（ICON 16 + GAP 2），3 行叠加 100→88
     var _chipPitch = function(ids) {
       var mx = ROW_H + SP_GAP;
       for (var _cp = 0; _cp < ids.length; _cp++) {
