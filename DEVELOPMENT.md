@@ -1801,13 +1801,13 @@ python serve.py（本地静态服务器 + /api-proxy/ 官方 API 代理替代 py
 
 > 本部分收纳附录 A 设计文档与附录 B 基本信息（README）完整原文，作为正文规则的权威参考细则；正文引用一律以「第 11 章」与「附录 A-B」编号为准。
 
-# 附录 A 设计文档（Line-to-Line Service Relation Layer）
+## 12. 线路服务关系层设计（Line-to-Line Service Relation Layer）
 
 > 任务：只读架构设计（READ-ONLY ARCHITECTURE DESIGN）
 
-## 1. 问题陈述
+### 12.1 问题陈述
 
-### 1.1 三层架构的缺口
+#### 12.1.1 三层架构的缺口
 
 第 1 层：线路身份（railway_data.json lines[id]）
 第 2 层：物理拓扑（stationLines + lineStationOrder）
@@ -1815,7 +1815,7 @@ python serve.py（本地静态服务器 + /api-proxy/ 官方 API 代理替代 py
 
 缺失：线路间服务关系（Line-to-Line Service Relation）
 
-### 1.2 具体缺口
+#### 12.1.2 具体缺口
 
 | 缺口 | 症状 | 影响 |
 | --- | --- | --- |
@@ -1825,7 +1825,7 @@ python serve.py（本地静态服务器 + /api-proxy/ 官方 API 代理替代 py
 | 别名歧义 | TobuIsesaki（code=TI）vs Isesaki（code=TIS） | 重复显示 |
 | REGIONAL 语义模糊 | 52 线混杂，maxShared=54 来自 3 条别名线 | 无法区分真正相连的线路 |
 
-### 1.3 核心矛盾
+#### 12.1.3 核心矛盾
 
 LineOperationSystems 承载两个概念：
 
@@ -1835,7 +1835,7 @@ LineOperationSystems 承载两个概念：
 
 这导致无法判断一个多线 OS 究竟是纯显示分组还是真实直通服务。
 
-## 2. 关系类型定义
+### 12.2 关系类型定义
 
 | 类型 | 常量 | 含义 | 示例 |
 | --- | --- | --- | --- |
@@ -1848,7 +1848,7 @@ LineOperationSystems 承载两个概念：
 
 关键原则：SHARED_STATION >= 1 并不蕴含 THROUGH_SERVICE，仅蕴含 PHYSICAL_CONNECT（且仍需验证）。
 
-## 3. 数据模型：line-service-relations.js
+### 12.3 数据模型 line-service-relations.js
 
 新文件：data/core/line-service-relations.js
 
@@ -1878,9 +1878,9 @@ stationLines[]：推导 PHYSICAL_CONNECT 证据
 
 LineOperationSystems（保持不变）：继续作为显示分组来源
 
-## 4. 全部线路关系映射
+### 12.4 全部线路关系映射
 
-### 4.1 BRANCH_OF 关系（来自 branchOf 字段）
+#### 12.4.1 BRANCH_OF 关系（来自 branchOf 字段）
 
 | 支线 | 父线 | 共用站 | 问题 |
 | --- | --- | --- | --- |
@@ -1894,7 +1894,7 @@ LineOperationSystems（保持不变）：继续作为显示分组来源
 
 结论：7 条支线关系中 5 条存在 stationLines 数据缺口。关系层以 confidence=LOW 记录。
 
-### 4.2 已验证的 THROUGH_SERVICE 关系
+#### 12.4.2 已验证的 THROUGH_SERVICE 关系
 
 | 线路对 | 证据 | 置信度 |
 | --- | --- | --- |
@@ -1905,7 +1905,7 @@ LineOperationSystems（保持不变）：继续作为显示分组来源
 | Marunouchi <-> MarunouchiBranch | 共用 7 站，LOS M 系统 | HIGH |
 | SeibuIkebukuro <-> Ikebukuro | 共用 18 站（子集），LOS SI 系统 | HIGH |
 
-### 4.3 跨运营者直通（数据缺口）
+#### 12.4.3 跨运营者直通（数据缺口）
 
 | 链 | 当前数据 | 缺口 |
 | --- | --- | --- |
@@ -1916,7 +1916,7 @@ LineOperationSystems（保持不变）：继续作为显示分组来源
 
 以上：THROUGH_SERVICE + confidence=LOW + evidence 车站数据不完整。
 
-### 4.4 TYPE-C 详细分类
+#### 12.4.4 TYPE-C 详细分类
 
 | OS | 线路 | 分类 | 理由 |
 | --- | --- | --- | --- |
@@ -1926,7 +1926,7 @@ LineOperationSystems（保持不变）：继续作为显示分组来源
 | TOBU/TN | TobuNikko <-> Nikkoku | UNKNOWN | 站集 21 vs 9 差异不明确 |
 | TOBU/TTJ | Tojo <-> Utsunomiya | THROUGH_SERVICE（UNKNOWN） | 实际存在直通服务，数据 0 共用站 |
 
-### 4.5 REGIONAL 重新分类
+#### 12.4.5 REGIONAL 重新分类
 
 REGIONAL 52 线不应是单一直通服务簇。
 
@@ -1938,9 +1938,9 @@ REGIONAL 52 线不应是单一直通服务簇。
 | 相连 | Kiryu <-> Sagami <-> Sano | PHYSICAL_CONNECT | 各共用 18 站 |
 | 孤立 | 其余约 40 线 | 无关系 | 0 共用站 |
 
-## 5. 架构集成设计
+### 12.5 架构集成设计
 
-### 5.1 新五层架构
+#### 12.5.1 新五层架构
 
 第 1 层：线路身份（railway_data.json lines[id]）
 第 2 层：物理拓扑（stationLines + lineStationOrder）
@@ -1948,7 +1948,7 @@ REGIONAL 52 线不应是单一直通服务簇。
 第 4 层：运行系统（LineOperationSystems 不变）
 第 5 层：展示（LinePresentationService 扩展）
 
-### 5.2 LinePresentationService 扩展
+#### 12.5.2 LinePresentationService 扩展
 
 当前 API：
 
@@ -1962,7 +1962,7 @@ getRelatedLines(lineId) → [{lineId，type，confidence，evidence}]
 
 isThroughService(lineA, lineB) → boolean
 
-### 5.3 DataState.renderList 影响
+#### 12.5.3 DataState.renderList 影响
 
 当前渲染：
 按 OPERATOR 分组 → 按 LOS 顺序排序 → 渲染卡片
@@ -1974,7 +1974,7 @@ isThroughService(lineA, lineB) → boolean
 → 再显示其余线路
 → 渲染带链指示的卡片
 
-## 6. 文件结构
+### 12.6 文件结构
 
 data/core/
 railway_data.json（冻结 FROZEN）
@@ -1985,7 +1985,7 @@ js/
 line-presentation-service.js（扩展 — 添加 getServiceChains / getRelatedLines）
 data-state.js（基础功能无需变更）
 
-## 7. 风险评估
+### 12.7 风险评估
 
 | 风险 | 级别 | 缓解措施 |
 | --- | --- | --- |
@@ -1994,7 +1994,7 @@ data-state.js（基础功能无需变更）
 | 关系层与 LOS 重复 | 低 | 明确分离：LOS=显示，Relations=服务 |
 | 数据质量依赖 | 高 | confidence 字段 + evidence 描述，不伪造确定性 |
 
-## 8. 后续阶段计划
+### 12.8 后续阶段计划
 
 | 阶段 | 内容 | 是否修改数据？ |
 | --- | --- | --- |
@@ -2004,7 +2004,7 @@ data-state.js（基础功能无需变更）
 | 4 | DataState/Realtime/Trains 渲染增强 | 是（JS+CSS） |
 | 5 | stationLines 数据质量修复（独立任务） | 是（数据治理） |
 
-## 9. 结论
+### 12.9 结论
 
 设计完成。
 
