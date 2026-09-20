@@ -649,14 +649,24 @@
             // junction 站名朝右解决（_isBranchJunction，见主干站渲染）
             var _connY = by;
             
-            // Branch line（junction 行水平直 stub）
-            var branchLine = document.createElementNS(svgNS, "line");
-            branchLine.setAttribute("x1", stationCoords[junctionIdx].x);
-            branchLine.setAttribute("y1", _connY);
-            branchLine.setAttribute("x2", bx);
-            branchLine.setAttribute("y2", _connY);
+            // Branch line（junction 行水平直 stub，拐角圆角）
+            var branchLine = document.createElementNS(svgNS, "path");
+            var _brx = stationCoords[junctionIdx].x;
+            var _bry = _connY;
+            var _brx2 = bx;
+            var _bry2 = _connY;
+            var _brR = 8; // 圆角半径
+            // L 形：从 junction 水平→拐角→垂直（向下）
+            var _brDir = (bx > stationCoords[junctionIdx].x) ? 1 : -1; // 右/左
+            var _brSign = (bx > stationCoords[junctionIdx].x) ? 1 : -1;
+            branchLine.setAttribute("d",
+              "M " + _brx + " " + _bry +
+              " L " + (_brx2 - _brR * _brDir) + " " + _bry +
+              " Q " + _brx2 + " " + _bry + " " + _brx2 + " " + (_bry + _brR) +
+              " L " + _brx2 + " " + _bry2);
             branchLine.setAttribute("stroke", bColor);
             branchLine.setAttribute("stroke-width", "5");
+            branchLine.setAttribute("fill", "none");
             branchLine.setAttribute("opacity", "0.6");
             staticLayer.appendChild(branchLine);
             
