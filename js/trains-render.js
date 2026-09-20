@@ -976,6 +976,12 @@
   // （Kiyosumi-Shirakawa）——去连字符+小写匹配项目站表后按项目 ID 解析显示名
   function _resolveStationLoose(id) {
     if (!id) return '';
+    // v4.3.902: ODPT 站别名映射（荒川线 Minowabashi→Sannomi_Bashi）
+    var _odptAlias = {
+      'Toei.Minowabashi': 'Sannomi_Bashi',
+      'Toei.Waseda': 'Waseda'
+    };
+    if (_odptAlias[id]) id = _odptAlias[id];
     var db = window.RailwayDB;
     var direct = (db && db.resolveStationName) ? db.resolveStationName(id, window.currentLang) : id;
     if (direct && direct !== id) return direct;
