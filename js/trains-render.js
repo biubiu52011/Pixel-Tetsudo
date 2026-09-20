@@ -401,7 +401,8 @@
         var sz = _throughChipSize(tt, isMobileView);
         var lx, ly;
         if (tt.dir === "up") {
-          lx = thruCursor;
+          // v4.3.894: 上下方向以站圆点圆心为中心（不是站名中心）
+          lx = o.x - sz.w / 2;
           ly = o.y - sz.h - (side === "top" ? 28 : 16);
         }
         else if (tt.dir === "down") {
@@ -413,7 +414,8 @@
           }
           var _scD = _extLast || { x: o.x, y: o.y };
           var _chipBot = iy0 + rows * ICON + (rows - 1) * GAP + 2;
-          lx = thruCursor;
+          // v4.3.894: 上下方向以站圆点圆心为中心
+          lx = o.x - sz.w / 2;
           ly = Math.max(_chipBot + 4, _scD.y + sz.h + 6);
         }
         else {
