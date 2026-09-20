@@ -15,26 +15,28 @@
     bg.setAttribute("stroke", lc);
     bg.setAttribute("stroke-width", "1");
     layer.appendChild(bg);
-    // Direction arrow：三角符号（▲▼▶），线色
+    // Direction arrow：SVG path 三角（▲▼▶），线色
     var dir = lineObj.dir || "middle";
-    var dirSym = (dir === "up") ? "▲" : (dir === "down") ? "▼" : "▶";
-    // v4.3.893: 上下方向箭头水平居中；中间方向与站圆点同水平线
-    var arr = document.createElementNS(ns, "text");
+    var arr = document.createElementNS(ns, "path");
+    var _ax, _ay, _d;
     if (dir === "middle") {
-      // 中间方向：箭头在 box 左，文字在右，整体与站圆点同 y
-      arr.setAttribute("x", x + 4);
-      arr.setAttribute("y", y + (mobile ? 11 : 9));
+      // 中间方向：箭头在 box 左
+      _ax = x + 6;
+      _ay = y + (mobile ? 8 : 6);
+      _d = "M" + (_ax - 3) + "," + (_ay - 3) + " L" + (_ax + 3) + "," + _ay + " L" + (_ax - 3) + "," + (_ay + 3) + " Z";
     } else {
       // 上下方向：箭头水平居中
       var _cw = sz.w - 2;
-      arr.setAttribute("x", x + _cw / 2);
-      arr.setAttribute("y", y + (mobile ? 11 : 9));
-      arr.setAttribute("text-anchor", "middle");
+      _ax = x + _cw / 2;
+      _ay = y + (mobile ? 7 : 5);
+      if (dir === "up") {
+        _d = "M" + (_ax - 3) + "," + (_ay + 3) + " L" + _ax + "," + (_ay - 3) + " L" + (_ax + 3) + "," + (_ay + 3) + " Z";
+      } else {
+        _d = "M" + (_ax - 3) + "," + (_ay - 3) + " L" + _ax + "," + (_ay + 3) + " L" + (_ax + 3) + "," + (_ay - 3) + " Z";
+      }
     }
-    arr.setAttribute("font-size", mobile ? 10 : 8);
+    arr.setAttribute("d", _d);
     arr.setAttribute("fill", lc);
-    if (dir !== "middle") arr.setAttribute("text-anchor", "middle");
-    arr.textContent = dirSym;
     layer.appendChild(arr);
     var txt = document.createElementNS(ns, "text");
     if (dir === "middle") {
