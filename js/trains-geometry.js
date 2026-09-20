@@ -476,7 +476,7 @@
       
       routeElements.push({
         type: 'rect',
-        attrs: { x: cx - halfW, y: cy - halfH, width: rectW, height: rectH, rx: 10, ry: 10, stroke: color, 'stroke-width': 5, fill: 'none', opacity: 1.0 }
+        attrs: { x: cx - halfW, y: cy - halfH, width: rectW, height: rectH, rx: 10, ry: 10, stroke: color, 'stroke-width': 5, fill: 'none', opacity: 0.6 }
       });
       
     } else {
@@ -537,7 +537,7 @@
       var y1 = topP, y2 = stationCoords.length ? stationCoords[stationCoords.length - 1].y : (topP + (stations.length - 1) * sp);
       routeElements.push({
         type: 'line',
-        attrs: { x1: mainCx, y1: y1, x2: mainCx, y2: y2, stroke: color, 'stroke-width': 5, 'stroke-linecap': 'round', opacity: 1.0 }
+        attrs: { x1: mainCx, y1: y1, x2: mainCx, y2: y2, stroke: color, 'stroke-width': 5, 'stroke-linecap': 'round', opacity: 0.6 }
       });
       // v4.3.409/4.3.422: 融合机制——直通运行系统延伸段几何（如横須賀線・総武快速線）
       // 延伸线接主线端点（東京站）后沿同一垂直方向、同一列继续排布（一条连续线）；
@@ -566,13 +566,13 @@
           // 连接线：主线端点 → 延伸段第一站（同列时即为垂直连续线）
           var jx = mainCx, jy = exl.joinAtEnd ? yBase : yStartRef;
           var exFirstY = exl.joinAtEnd ? (yBase + sp) : (yStartRef - sp);
-          routeElements.push({ type: 'line', attrs: { x1: jx, y1: jy, x2: mainCx + extOffsetX, y2: jy, stroke: exColor, 'stroke-width': 4, 'stroke-linecap': 'round', opacity: 1.0 } });
-          routeElements.push({ type: 'line', attrs: { x1: mainCx + extOffsetX, y1: jy, x2: mainCx + extOffsetX, y2: exFirstY, stroke: exColor, 'stroke-width': 4, 'stroke-linecap': 'round', opacity: 1.0 } });
+          routeElements.push({ type: 'line', attrs: { x1: jx, y1: jy, x2: mainCx + extOffsetX, y2: jy, stroke: exColor, 'stroke-width': 5, 'stroke-linecap': 'round', opacity: 0.6 } });
+          routeElements.push({ type: 'line', attrs: { x1: mainCx + extOffsetX, y1: jy, x2: mainCx + extOffsetX, y2: exFirstY, stroke: exColor, 'stroke-width': 5, 'stroke-linecap': 'round', opacity: 0.6 } });
           // 延伸段站内连线
           for (var exk2 = 0; exk2 < extStations.length - 1; exk2++) {
             var yA = exl.joinAtEnd ? (extStartY + (exk2 + 1) * sp) : (extStartY - (exk2 + 1) * sp);
             var yB = exl.joinAtEnd ? (extStartY + (exk2 + 2) * sp) : (extStartY - (exk2 + 2) * sp);
-            routeElements.push({ type: 'line', attrs: { x1: mainCx + extOffsetX, y1: yA, x2: mainCx + extOffsetX, y2: yB, stroke: exColor, 'stroke-width': 4, 'stroke-linecap': 'round', opacity: 1.0 } });
+            routeElements.push({ type: 'line', attrs: { x1: mainCx + extOffsetX, y1: yA, x2: mainCx + extOffsetX, y2: yB, stroke: exColor, 'stroke-width': 5, 'stroke-linecap': 'round', opacity: 0.6 } });
           }
           // 延伸段标题标签
           var _exName = (window.RailwayDB && window.RailwayDB.resolveLineName) ? window.RailwayDB.resolveLineName(exl.lid, window.currentLang) || exl.lid : exl.lid;
@@ -594,7 +594,7 @@
         var pColor = (window.LineOperationSystemsResolveColor && window.LineOperationSystemsResolveColor(sseg.partner)) || (allLines[sseg.partner] && allLines[sseg.partner].color) || "#888";
         routeElements.push({
           type: 'line',
-          attrs: { x1: mainCx - 7, y1: _yAt(sseg.start), x2: mainCx - 7, y2: _yAt(sseg.end), stroke: pColor, 'stroke-width': 3, 'stroke-linecap': 'round', opacity: 1.0 }
+          attrs: { x1: mainCx - 7, y1: _yAt(sseg.start), x2: mainCx - 7, y2: _yAt(sseg.end), stroke: pColor, 'stroke-width': 5, 'stroke-linecap': 'round', opacity: 0.6 }
         });
       }
     }

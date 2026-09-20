@@ -656,8 +656,8 @@
             branchLine.setAttribute("x2", bx);
             branchLine.setAttribute("y2", _connY);
             branchLine.setAttribute("stroke", bColor);
-            branchLine.setAttribute("stroke-width", "3");
-            branchLine.setAttribute("opacity", "0.5");
+            branchLine.setAttribute("stroke-width", "5");
+            branchLine.setAttribute("opacity", "0.6");
             staticLayer.appendChild(branchLine);
             
             // Branch vertical line
@@ -678,8 +678,8 @@
           }
           branchVLine.setAttribute("y2", _connY + Math.max(0, _vOwn - 1) * branchSp);
           branchVLine.setAttribute("stroke", bColor);
-          branchVLine.setAttribute("stroke-width", "3");
-          branchVLine.setAttribute("opacity", "0.5");
+          branchVLine.setAttribute("stroke-width", "5");
+          branchVLine.setAttribute("opacity", "0.6");
           staticLayer.appendChild(branchVLine);
           
           // Branch stations（主線と同じ _renderStationNode で統一描画——スタイルは完全に同一）
