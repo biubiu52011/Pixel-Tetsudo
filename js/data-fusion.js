@@ -364,10 +364,10 @@
           }
           // v4.3.416: 别名转换（ODPT 拼写差异站 ID → 项目站表 ID）
           // v4.3.474: railway 感知别名优先（Oyama=Tojo 大山/Oyama=Utsunomiya 小山 双义），再回退全局
-          if (STATION_ALIAS_BY_RAILWAY[railwayName] && STATION_ALIAS_BY_RAILWAY[railwayName][stationKey]) {
-            stationKey = STATION_ALIAS_BY_RAILWAY[railwayName][stationKey];
-          } else if (STATION_ALIAS[stationKey]) {
-            stationKey = STATION_ALIAS[stationKey];
+          if (window.RuntimeConfig.STATION_ALIAS_BY_RAILWAY[railwayName] && window.RuntimeConfig.STATION_ALIAS_BY_RAILWAY[railwayName][stationKey]) {
+            stationKey = window.RuntimeConfig.STATION_ALIAS_BY_RAILWAY[railwayName][stationKey];
+          } else if (window.RuntimeConfig.STATION_ALIAS[stationKey]) {
+            stationKey = window.RuntimeConfig.STATION_ALIAS[stationKey];
           }
           var delayMin = t["odpt:delay"] != null ? (parseInt(t["odpt:delay"], 10) || 0) : 0;
           var trainId = t["odpt:trainNumber"] || t["odpt:train"] || "";
