@@ -852,10 +852,25 @@ ODPT 封装：统一经 ODPTClient，参数为运营者代码（operator）；�
 
 直通标记：标在直通关系的实际接续站（THROUGH_JOIN_STATIONS 门控：未定义=全部共用站兜底、空数组=不标、列站=仅这些站），站名带外侧 26px 留白（线首上/线尾下）。途经非接续站不标。
 
-#### 5.4.1.14 列车标签（方向端点站名）
-单标签：图标上/下方显示 “▼/▲方向端点站名”（箭头 + 方向端点站名），不单独显示上下行方向词与终点标签
+#### 5.4.1.14 列车图标与标签
+列车图标（车型图片）：
 
-方向映射：抽象方向词 Inbound/Outbound 与方位词 Northbound/Southbound/Eastbound/Westbound 统一映射为 ▲/▼ 方向标签，不显示方位词原文与译文
+| 元素 | 值 | 说明 |
+| --- | --- | --- |
+| 尺寸 | 14 × 18 | viewBox 单位 |
+| 位置 | 居中在站圆点（x-7, y-9） | 与站圆点同心 |
+| 来源 | images/列车/<運営者>/<型番系>.png | train-icons.js LINE_ICONS 映射 |
+| estimated | .estimated class | 推定位置（非实时） |
+
+列车标签（方向端点站名）：
+
+| 元素 | 值 | 说明 |
+| --- | --- | --- |
+| 格式 | ▼/▲ + 种别名 + 终点站名 | 单标签，不单独显示上下行方向词 |
+| 字体 | 8px，#666 | SVG text |
+| 位置 | 图标上/下方 | moveDir=down→下方、up→上方 |
+| 方向映射 | Inbound/Outbound/Northbound 等 → ▲/▼ | 不显示方位词原文 |
+| 环线 | 只显示内回/外回文字，不加箭头 | |
 
 
 • 字体：全局唯一 Fusion Pixel（SVG 站名/支线名显式声明 “Fusion Pixel”, “Courier New”, monospace），回退 Courier New/monospace。
