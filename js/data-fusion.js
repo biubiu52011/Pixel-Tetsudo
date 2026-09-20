@@ -920,7 +920,7 @@
                 }
               }
             } catch(mErr) { console.debug("[DataFusion] ensureManual->mergeManual error:", mErr.message); }
-            try { doEstimation(); } catch(e) { console.debug("[DataFusion] ensureManual->doEstimation error:", e.message); }
+            try { if (typeof doEstimation === 'function') doEstimation(); } catch(e) { console.debug("[DataFusion] ensureManual->doEstimation error:", e.message); }
             try { fuseAll(); } catch(e) { console.debug("[DataFusion] ensureManual->fuseAll error:", e.message); }
             res(true);
           };
