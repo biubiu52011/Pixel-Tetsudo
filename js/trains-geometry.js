@@ -476,7 +476,7 @@
       
       routeElements.push({
         type: 'rect',
-        attrs: { x: cx - halfW, y: cy - halfH, width: rectW, height: rectH, rx: 10, ry: 10, stroke: color, 'stroke-width': 5, fill: 'none', opacity: 0.6 }
+        attrs: { x: cx - halfW, y: cy - halfH, width: rectW, height: rectH, rx: 20, ry: 20, stroke: color, 'stroke-width': 5, fill: 'none', opacity: 0.6 }
       });
       
     } else {
