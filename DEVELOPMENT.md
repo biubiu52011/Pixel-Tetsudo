@@ -872,6 +872,22 @@ ODPT 封装：统一经 ODPTClient，参数为运营者代码（operator）；�
 | 方向映射 | Inbound/Outbound/Northbound 等 → ▲/▼ | 不显示方位词原文 |
 | 环线 | 只显示内回/外回文字，不加箭头 | |
 
+#### 5.4.1.15 多列车重叠处理（同站多趟车）
+同一站有 ≥2 趟列车时，按方向分组水平偏移，避免图标重叠：
+
+| 线路类型 | 方向分组 | 偏移规则 |
+| --- | --- | --- |
+| 环线（标准环/六形环） | InnerLoop / OuterLoop 两组 | InnerLoop：垂直 -8；OuterLoop：垂直 +8；组内水平均分（间距 20px） |
+| 直线型 | Inbound/Outbound 两组 | Inbound：水平 -10；Outbound：水平 +10；组内水平均分（间距 18px） |
+
+偏移公式：
+- 环线：`offX = (trainIdx - (total - 1) / 2) * 20`
+- 直线：`offX = 方向偏移 ± (trainIdx - (total - 1) / 2) * 18`
+
+**3 趟以上并列**：
+- 同方向 ≥2 趟：水平均分（间距 18/20px），最多 3 趟并排（第 4 趟起换行/缩放，当前未实现）
+- 跨方向同站：先按方向分组偏移（Inbound/Outbound 或 Inner/Outer），组内再水平均分
+
 
 • 字体：全局唯一 Fusion Pixel（SVG 站名/支线名显式声明 “Fusion Pixel”, “Courier New”, monospace），回退 Courier New/monospace。
 
