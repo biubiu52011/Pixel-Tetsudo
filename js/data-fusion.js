@@ -330,6 +330,7 @@
   // v4.3.904: 提到外层作用域（ensureManualTimetable 需要访问）
   var allLines = null;
   var doEstimation = null;
+  var posMap = {};
   var THROUGH_RAILWAY_FALLBACK = (window.RuntimeConfig && window.RuntimeConfig.THROUGH_RAILWAY_FALLBACK) || {"SotetsuDirect":{"exclude":["Yamanote"],"prefer":["SotetsuShin-Yokohama","Yokosuka","Saikyo","ShonanShinjuku"]}};
 
   function loadTrainPositions() {
@@ -348,7 +349,7 @@
         return;
       }
       loadTrainPositions._retry = 0;
-      var posMap = {};
+      posMap = {};
       odptData.trains = {};
       Object.keys(window.ODPT_TRAINS).forEach(function(op) {
         var trains = window.ODPT_TRAINS[op] || [];
