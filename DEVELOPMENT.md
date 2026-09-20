@@ -158,6 +158,9 @@
 
 | 版本 | 日期 | 更新人 | 修订内容 |
 | --- | --- | --- | --- |
+| RC-4.3 | 2026-09-21 | 用户／开发会话 | **Freeze 例外**：清理第一类真坐标错误 16 组。①删孤儿 8 个：Imaichi/Aizu-Minamiwa/Waga/Narushima-Yonezawa/Douzawa/Juni/Kommata/Takine；②Jatenda 合并到 Hebita（仙石东北线同站）；③Ariake-8oh 改名陸中有明（八户线），删重复条目，坐标修正（东京有明→岩手）；④修 7 个站坐标：Higashi-Shizugawa/Higashi-Ishinomaki/Aizu-Oshio/Osawa-Yamagata/Ono/Nakagawa（相邻站插值）；⑤Aizu-Oshio.ja 会津塩→会津大塩；⑥Atago-2 从东北本线删除（东北本线无爱宕站）；⑦Kunai 合并到 Miyauchi（信越本线宫内站）。重跑 gen-file-data.js；verify_transfer_pairs.js 退出码 0 |
+| RC-4.2 | 2026-09-21| RC-4.2 | 2026-09-21 | 用户／开发会话 | **Freeze 例外**：清理同站双 ID 拼写冗余 19 组（ODPT 实证对齐）。A 类单边引用删孤儿 10 个：Shinbashi/Nihonbashi/Ginza-hitchome/Minami-Nagase/Nagase-Otakanomori/Aizuwakamatsu/Ashizawa/Rikuzen-Koizumi/Kaimen/Echigo-Sudara；B 类双方引用合并 9 组：Hongo-Sanchome/Shin-Maruko/Motosumiyoshi/Tamagawa-Josui/Tama-Dobutsukoen/Nishi-Tokorozawa/Tenku-Bashi/Shimo-takaido/Tennozu Isle（按 ODPT 驼峰/连字符规范对齐）；name_map 同步改指。重跑 gen-file-data.js；verify_transfer_pairs.js 退出码 0（1953 条不变） |
+| RC-4.1 | 2026-09-21| RC-4.1 | 2026-09-21 | 用户／开发会话 | **Freeze 例外**：清理坐标偏移的孤儿车站 ID。删 stations[Makuhari-Hong/Makuta/Minami-No/Hacchobori]（4 个均无线路引用、坐标与被引用变体差数百米至 7.5km）；name_map 改指：馬来田→Uma_Kita、八丁堀→Hatchobori；删 station_i18n 孤儿条目 Makuhari-Hong/Makuta/Minami-No/Hacchobori/Makuhari-Hongo；修 Hatchobori.en 误写 Hacchobori。重跑 gen-file-data.js；verify_transfer_pairs.js 退出码 0（1953 条不变） |
 | RC-4 | 2026-09-18 | 用户／开发会话 | 与确认稿 RC-3 对齐：第 11 章硬规则编号补回（系统优先变更「变更前」/ 无孤儿迁移 / 发布门）、附录 A 结论编号补回；移除 5.2 误混入的根入口路由行（该文件已删除，入口统一 pages/home.html） |
 | RC-3 | 2026-09-17 | 用户／开发会话 | 可读性优化：目录置顶（全文锚点）；多份开发文档整理合并（线路图设计规定并入正文 5.4，设计文档与 README 保留为附录 A/B）；设计文档全文中译；6.5 节重复内容清理；错别字修正 |
 | RC-2 | 2026-09-17 | 用户／开发会话 | 结构优化（章节重组、CRLF→LF、重复版本号标注〔并发会话〕）；语言统一为中文；新增第 3 章“系统架构设计”（含 3.10 页面结构规则，原第 0 章并入）；第 6 章按“系统模块划分 / 后台权限模型 / 数据库设计 / ODPT 实时数据对接 & 双库联动策略 / 核心业务规则”重组；第 7 章按 7.1-7.6 重排（全局格式 / 错误码 / 前台业务接口 / ODPT 封装 / 后台管理接口 / 数据字典）；新增第 8-10 章（部署与运维 / 测试规范 / 风险说明 & FAQ）；取消“用户指示”笔录形态，变更日志统一为标准条目 |
