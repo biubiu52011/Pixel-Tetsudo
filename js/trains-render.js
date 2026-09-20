@@ -1061,7 +1061,7 @@
   }
 
   function _trainMoveDir(p, lineId) {
-    var dn = String(p.railDirection || '').split('.').pop();
+    var dn = String(p.railDirection || '').split(':').pop(); // v4.3.898: 点号→冒号（odpt:RailDirection:Waseda 格式）
     // v4.3.475: 大江户线光丘段列车先于环线判定——tail 从都厅前竖直向上延伸到光丘，
     // 屏幕方向与站表 index 相反：往光丘=屏幕上方=▲、往都厅前=屏幕下方=▼。
     // v4.3.476: 光丘段区间车（光丘始发→环线，dest 为环线站如 清澄白河/都厅前 而非光丘）——
@@ -1101,7 +1101,7 @@
   function appendTrainLabels(trainLayer, svgNS, trainUid, px, py, p, lineId) {
     var moveDir = _trainMoveDir(p, lineId);
     var isLoopDir = _isLoopDirName(p.railDirection);
-    var dn = String(p.railDirection || '').split('.').pop();
+    var dn = String(p.railDirection || '').split(':').pop(); // v4.3.898: 点号→冒号（odpt:RailDirection:Waseda 格式）
     var lang = window.currentLang || 'ja';
     // v4.3.471: 单标签——箭头 + 方向端点站名；不再单独显示"上下行"方向词与终点。
     // 抽象方向词（Inbound/Outbound/Northbound 等无方向端点站）→ 用终点站名；环线 → 内回/外回。
