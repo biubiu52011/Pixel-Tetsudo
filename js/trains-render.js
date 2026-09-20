@@ -398,6 +398,13 @@
       var _grpCx = (side === "dual" || side === "left") ? (_nrx - _nmW / 2) : o.x;
       var thruCursor = _grpCx - thruTotalW / 2;
       var _scs = o.stationCoords || [];
+      // v4.3.914: 统计各方向 chip 数，多个时从边界排（避免 clamp 重叠）
+      var _upCount = 0, _downCount = 0;
+      for (var _uc = 0; _uc < thruList.length; _uc++) {
+        if (thruList[_uc].dir === "up") _upCount++;
+        else if (thruList[_uc].dir === "down") _downCount++;
+      }
+      var _upIdx = 0, _downIdx = 0;
       for (var tI2 = 0; tI2 < thruList.length; tI2++) {
         var tt = thruList[tI2];
         var sz = _throughChipSize(tt, isMobileView);
@@ -405,7 +412,13 @@
         if (tt.dir === "up") {
           // v4.3.894: 上下方向以站圆点圆心为中心（不是站名中心）
           lx = o.x - sz.w / 2;
-          ly = o.y - sz.h - (side === "top" ? 28 : 16) - tI2 * (sz.h + 4);
+          // v4.3.914: 多个 up chip 从 SVG 顶部向下排（站圆点上方空间不够时避免 clamp 重叠）
+          if (_upCount > 1) {
+            ly = 2 + _upIdx * (sz.h + 4);
+          } else {
+            ly = o.y - sz.h - (side === "top" ? 28 : 16);
+          }
+          _upIdx++;
         }
         else if (tt.dir === "down") {
           var _extLast = null;
@@ -418,7 +431,13 @@
           var _chipBot = iy0 + rows * ICON + (rows - 1) * GAP + 2;
           // v4.3.894: 上下方向以站圆点圆心为中心
           lx = o.x - sz.w / 2;
-          ly = Math.max(_chipBot + 4, _scD.y + sz.h + 6) + tI2 * (sz.h + 4);
+          // v4.3.914: 多个 down chip 从底部向上排
+          if (_downCount > 1) {
+            ly = Math.max(_chipBot + 4, _scD.y + sz.h + 6) + _downIdx * (sz.h + 4);
+          } else {
+            ly = Math.max(_chipBot + 4, _scD.y + sz.h + 6);
+          }
+          _downIdx++;
         }
         else {
           if (anchor === "start") { lx = o.x - sz.w - 8; }
