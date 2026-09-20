@@ -309,7 +309,7 @@
       // Tail 高度先算（依赖 loopRectH），svgH 须同时容纳环（垂直居中）与向上伸出的光丘尾。
       // v4.3.504: junction 在左列第 7 位（中点偏上 0.5/14×rectH），tail 顶 = loopCy−juncOff−tailTotalHeight ≥ 边距
       var tailCount = hikarigaokaStations.length - 1;
-      var tailTotalHeight = tailCount > 0 ? Math.min(loopRectH * 0.85, tailCount * _pitch6) + 32 : 0; // v4.3.878: spLoop6→_pitch6（支线竖列与环线统一站距）
+      var tailTotalHeight = tailCount > 0 ? (tailCount * _pitch6) + 32 : 0; // v4.3.883: 去掉 min(loopRectH*0.85) 限制（tail 实际高度超限时裁剪） // v4.3.878: spLoop6→_pitch6（支线竖列与环线统一站距）
       var tailStep = tailCount > 0 ? tailTotalHeight / tailCount : 0;
       var _juncOff6 = loopRectH * Math.abs(0.5 - (_juncIdx6 + 0.5) / _halfN); // 0.5/14×rectH ≈ 36px
       svgH = Math.max(loopRectH + marginTopBot * 2,
