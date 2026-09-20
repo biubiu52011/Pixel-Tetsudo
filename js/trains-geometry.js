@@ -246,7 +246,7 @@
       // v4.3.496: 用户裁定环线标准宽度——六形环圆环部分与山手线统一（48 基准，移动 72px/桌面 76.8px）。
       var scale6 = _isMobileView() ? 1.5 : 1.6;
       var spLoop6 = _isMobileView() ? 39 : 41.6;
-      var loopRectW = _isMobileView() ? 72 : 76.8; // v4.3.496: 环宽对齐山手线标准（48 基准），给光丘尾留水平空间
+      var loopRectW = _isMobileView() ? 63 : 67.2; // v4.3.881: 环宽基准 48→42 // v4.3.496: 环宽对齐山手线标准（48 基准），给光丘尾留水平空间
       // v4.3.502: 六形环环段改左右二分（双列）——环高用山手线公式（站数/2 列 × 36 基准 −80），
       // 并按各列最宽换乘 chip 高度动态放大（_colPitch6，与山手线 _colPitch 同款）。
       var loopRectH = Math.max(loopStations.length * 36 / 2 - 80, 140) * scale6;
@@ -301,9 +301,9 @@
       
       var naturalW = leftMargin + tailAreaWidth + loopRectW + marginRight;
       if (_isMobileView()) {
-        loopRectW = Math.max(_cw6Content - leftMargin - tailAreaWidth - marginRight, _isMobileView() ? 72 : 76.8);
+        loopRectW = Math.max(_cw6Content - leftMargin - tailAreaWidth - marginRight, _isMobileView() ? 63 : 67.2);
       } else if (naturalW > _cw6Content) {
-        loopRectW = Math.max(_cw6Content - leftMargin - tailAreaWidth - marginRight, _isMobileView() ? 72 : 76.8);
+        loopRectW = Math.max(_cw6Content - leftMargin - tailAreaWidth - marginRight, _isMobileView() ? 63 : 67.2);
       }
       svgW = leftMargin + tailAreaWidth + loopRectW + marginRight;
       // Tail 高度先算（依赖 loopRectH），svgH 须同时容纳环（垂直居中）与向上伸出的光丘尾。
@@ -423,7 +423,7 @@
       var loopRectH = Math.max(stations.length * 36 / 2 - 80, 140) * loopScale;
       // v4.3.495: 双列基准再缩减 50%（96→48）；svgW 派生式（rectW+150×scale）自动跟随，
       // 两侧站名空间恒 75×scale 不变。移动 rectW 72px/svgW 297px，桌面 76.8px/316.8px。
-      var rectW = _isMobileView() ? 72 : 76.8, rectH = loopRectH;
+      var rectW = _isMobileView() ? 63 : 67.2, rectH = loopRectH; // v4.3.881: 环宽基准 48→42
       svgW = rectW + _isMobileView() ? 225 : 240;
       svgH = loopRectH + _isMobileView() ? 120 : 128;
       var cx = svgW / 2, cy = svgH / 2;
