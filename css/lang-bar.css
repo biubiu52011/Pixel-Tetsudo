@@ -124,6 +124,7 @@
     background: transparent;
     font-size: var(--lang-font-size);
     font-weight: 500;
+    font-family: 'Fusion Pixel', monospace;
     cursor: pointer;
     text-align: left;
     border-radius: var(--radius-sm);
