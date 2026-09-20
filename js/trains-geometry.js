@@ -425,7 +425,7 @@
       // 两侧站名空间恒 75×scale 不变。移动 rectW 72px/svgW 297px，桌面 76.8px/316.8px。
       var rectW = _isMobileView() ? 63 : 67.2, rectH = loopRectH; // v4.3.881: 环宽基准 48→42
       svgW = rectW + _isMobileView() ? 225 : 240;
-      svgH = loopRectH + _isMobileView() ? 120 : 128;
+      svgH = loopRectH + (_isMobileView() ? 120 : 128); // v4.3.882: 加括号
       var cx = svgW / 2, cy = svgH / 2;
       var isDoubleColumnLoop = line.isDoubleColumnLoop === true;
       var halfW = rectW / 2, halfH = rectH / 2;
@@ -447,7 +447,7 @@
         if (_needH > loopRectH) {
           rectH = _needH;
           halfH = rectH / 2;
-          svgH = rectH + _isMobileView() ? 150 : 160;
+          svgH = rectH + (_isMobileView() ? 150 : 160); // v4.3.882: 加括号（运算符优先级 bug 修复）
           cy = svgH / 2;
         }
         for (var ri = 0; ri < _rightSeq.length; ri++) {
