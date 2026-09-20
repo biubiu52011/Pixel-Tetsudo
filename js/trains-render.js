@@ -18,17 +18,35 @@
     // Direction arrow：三角符号（▲▼▶），线色
     var dir = lineObj.dir || "middle";
     var dirSym = (dir === "up") ? "▲" : (dir === "down") ? "▼" : "▶";
+    // v4.3.893: 上下方向箭头水平居中；中间方向与站圆点同水平线
     var arr = document.createElementNS(ns, "text");
-    arr.setAttribute("x", x + 4);
-    arr.setAttribute("y", y + (mobile ? 11 : 9));
+    if (dir === "middle") {
+      // 中间方向：箭头在 box 左，文字在右，整体与站圆点同 y
+      arr.setAttribute("x", x + 4);
+      arr.setAttribute("y", y + (mobile ? 11 : 9));
+    } else {
+      // 上下方向：箭头水平居中
+      var _cw = sz.w - 2;
+      arr.setAttribute("x", x + _cw / 2);
+      arr.setAttribute("y", y + (mobile ? 11 : 9));
+      arr.setAttribute("text-anchor", "middle");
+    }
     arr.setAttribute("font-size", mobile ? 10 : 8);
     arr.setAttribute("fill", lc);
-    arr.setAttribute("text-anchor", "start");
+    if (dir !== "middle") arr.setAttribute("text-anchor", "middle");
     arr.textContent = dirSym;
     layer.appendChild(arr);
     var txt = document.createElementNS(ns, "text");
-    txt.setAttribute("x", x + 12);
-    txt.setAttribute("y", y + (mobile ? 12 : 9));
+    if (dir === "middle") {
+      txt.setAttribute("x", x + 12);
+      txt.setAttribute("y", y + (mobile ? 12 : 9));
+    } else {
+      // 上下方向：文字水平居中在箭头下方
+      var _cw2 = sz.w - 2;
+      txt.setAttribute("x", x + _cw2 / 2);
+      txt.setAttribute("y", y + (mobile ? 12 : 9));
+      txt.setAttribute("text-anchor", "middle");
+    }
     txt.setAttribute("font-size", mobile ? 12 : 10);
     txt.setAttribute("fill", lc);
     txt.setAttribute("font-weight", "700");
