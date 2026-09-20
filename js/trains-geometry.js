@@ -310,7 +310,7 @@
       // v4.3.504: junction 在左列第 7 位（中点偏上 0.5/14×rectH），tail 顶 = loopCy−juncOff−tailTotalHeight ≥ 边距
       var tailCount = hikarigaokaStations.length - 1;
       // v4.3.885: tail 站距 = 环线站距 / 2（支线紧凑，不撑高全图）
-      var tailStep = tailCount > 0 ? (_pitch6 / 4) : 0; // v4.3.887: /2→/4（再紧凑）
+      var tailStep = tailCount > 0 ? (_pitch6 / 2) : 0; // v4.3.888: /4→/2（对比测试）
       var tailTotalHeight = tailCount > 0 ? tailCount * tailStep + 32 : 0;
       var _juncOff6 = loopRectH * Math.abs(0.5 - (_juncIdx6 + 0.5) / _halfN); // 0.5/14×rectH ≈ 36px
       svgH = Math.max(loopRectH + marginTopBot * 2,
