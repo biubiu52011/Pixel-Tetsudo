@@ -327,13 +327,16 @@
   //   (Osaki/武蔵小杉/西大井/羽沢横浜国大) —— 本地无 SotetsuDirect 线 → 反查无映射 →
   //   fallback 站数最多 → Yamanote(30站) 误配山手线详情图。
   // 处理: prefer 顺序选择归属线(跨 operator 放行 SotetsuShin-Yokohama), exclude 排除环线。
+  // v4.3.904: 提到外层作用域（ensureManualTimetable 需要访问）
+  var allLines = null;
+  var doEstimation = null;
   var THROUGH_RAILWAY_FALLBACK = (window.RuntimeConfig && window.RuntimeConfig.THROUGH_RAILWAY_FALLBACK) || {"SotetsuDirect":{"exclude":["Yamanote"],"prefer":["SotetsuShin-Yokohama","Yokosuka","Saikyo","ShonanShinjuku"]}};
 
   function loadTrainPositions() {
     try {
       var positionSource = window.ODPT_TRAIN_POSITIONS || window.ODPT_TRAINS;
       if (!positionSource) return;
-      var allLines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : (window.UNIFIED_LINES || {});
+      allLines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : (window.UNIFIED_LINES || {});
       if (!allLines || Object.keys(allLines).length === 0) {
         // v4.3.413: DataLayer/UNIFIED_LINES 未就绪时延迟重试（最多 30 次），
         // 避免 ODPT 列车位置先于线路数据到达导致静默 return、实时位置永久丢失
@@ -546,7 +549,7 @@
       odptData.realtimePositions = posMap;
 
       // ===== Estimate positions for lines without realtime data =====
-      function doEstimation() {
+      doEstimation = function() {
         try {
           if (window.TrainPositionEstimator && typeof window.TrainPositionEstimator.estimateAllPositions === "function") {
             var timetableSource = window.ODPT_TIMETABLES || window.ODPT_TRAINS || {};
