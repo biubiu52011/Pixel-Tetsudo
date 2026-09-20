@@ -723,7 +723,7 @@ ODPT 封装：统一经 ODPTClient，参数为运营者代码（operator）；�
 | 换乘站站名 | 700 | 线色 | 933/935 |
 | 普通站站名 | 500 | #555 | 933/935 |
 
-• 站间距：sp = 换乘图标的高 + 一点空隙（共同规则，见 5.4.1.8），不再按站数分档。
+• 站间距：sp = 换乘图标的高 + 一点空隙（共同规则，见 5.4.1.5），不再按站数分档。
 
 • 顶部/底部留白：topP=18、botP=16（有直通标签时 +26）。
 
@@ -785,7 +785,7 @@ ODPT 封装：统一经 ODPTClient，参数为运营者代码（operator）；�
 
 • 字体：全局唯一 Fusion Pixel（回退 Courier New/monospace）；站名字号 16px（移动/桌面统一）。
 
-• 站间距：全线统一 = 全线最高换乘图标的高 + 一点空隙（max(行数)×18 + 32；详见 5.4.1.8）。
+• 站间距：全线统一 = 全线最高换乘图标的高 + 一点空隙（max(行数)×18 + 32；详见 5.4.1.5）。
 
 • 顶部/底部留白：topP=18 / botP=16（有直通标签 +26）。
 
@@ -864,7 +864,7 @@ ODPT 封装：统一经 ODPTClient，参数为运营者代码（operator）；�
 | 桌面端环宽 | 76.8px（48×1.6） |  |
 | 画布宽 | svgW=rectW+150×scale（派生式） |  |
 | 两侧站名空间 | 恒定 75×scale |  |
-| 列内垂直站距 | 换乘图标的高 + 一点空隙（同 5.4.1.8 共同规则） | _colPitch 复用 _chipPitch |
+| 列内垂直站距 | 换乘图标的高 + 一点空隙（同 5.4.1.5 共同规则） | _colPitch 复用 _chipPitch |
 
 验收 SOP（标准环线）——绘制完成后逐项核对：
 
@@ -888,7 +888,7 @@ ODPT 封装：统一经 ODPTClient，参数为运营者代码（operator）；�
 
 三区分离（桌面）：尾段文字带 | stub 竖线 | 左列上方站名带 | 环 互不重叠（双侧 gap 10px），尾段不再触发避让（全尺寸无 clamp）、左列上方无穿线。移动端容器 1:1 硬约束（v4.3.846）：环宽 loopRectW 撑满剩余宽度、右边距 marginRight 收窄（92→64），环左列站名朝右进环内，尾段避让关闭；尾段站名居左若与环内线路重叠，仍以白色描边（paint-order stroke 3px）遮线。
 
-junction 的 left 站（站名居右）走窄空间 clamp（到右列圆点前）。右列站名空间 = marginRight−16。环高 = 标准环线基准环高 + 换乘 chip 高度动态放大（_colPitch6，列内站距同 5.4.1.8 共同规则）；svgH 计算 max(rectH+120, 2×(marginTopBot+环半高+tailTotalHeight))。
+junction 的 left 站（站名居右）走窄空间 clamp（到右列圆点前）。右列站名空间 = marginRight−16。环高 = 标准环线基准环高 + 换乘 chip 高度动态放大（_colPitch6，列内站距同 5.4.1.5 共同规则）；svgH 计算 max(rectH+120, 2×(marginTopBot+环半高+tailTotalHeight))。
 
 站名 clamp 规则：双列左列 tx-4、右列 svgW-2-tx（通用）；junction（岔路居右）走 max(40, floor(junctionX+loopRectW−7−4−tx))；尾段居左走通用 tx-4（tx=避让后右缘，长站名经 clamp 缩字兜底）。
 
@@ -920,7 +920,7 @@ junction 的 left 站（站名居右）走窄空间 clamp（到右列圆点前�
 
 • clamp：左列 tx-4 / 右列 svgW-2-tx；junction（岔路居右）max(40, floor(junctionX+loopRectW−7−4−tx))；尾段居左 tx-4（v4.3.846 移动端尾段 clamp 统一走 tx-4 向左空间）。
 
-• 右列站名空间 = marginRight−16；环高 = 标准环线基准环高 + chip 高度动态放大（同 5.4.1.8 共同规则）。
+• 右列站名空间 = marginRight−16；环高 = 标准环线基准环高 + chip 高度动态放大（同 5.4.1.5 共同规则）。
 
 #### 5.4.3 支线布局（画法专属）
 

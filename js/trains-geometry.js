@@ -79,10 +79,10 @@
       if (_throughDirForStation(lineId, stations[0])) thrTopPad = 26;
       if (_throughDirForStation(lineId, stations[stations.length - 1])) thrBotPad = 26;
     }
-    // v4.3.847-850: 站间距标准 = 换乘图标的高 + 一点空隙（共同规则 5.4.1.2.2，所有画法一致）——
-    // 换乘图标的高 = 行数 × 行高 ROW_H(18px/行 = ICON16+GAP2，5.4.1.1.3)；行数 = ⌈min(换乘数,16)÷4⌉（每行最多 4 个、行数上限 4
+    // v4.3.847-850: 站间距标准 = 换乘图标的高 + 一点空隙（共同规则 5.4.1.5，所有画法一致）——
+    // 换乘图标的高 = 行数 × 行高 ROW_H(18px/行 = ICON16+GAP2，5.4.1.11)；行数 = ⌈min(换乘数,16)÷4⌉（每行最多 4 个、行数上限 4
     // = RuntimeConfig.TRANSFER_MAX_ROWS，4×4=16 个图标上限，用户裁定 4.3.849；溢出 "+n"；
-    // 行数上限若再调，同步 min 值）。一点空隙 SP_GAP=34（= ICON16 + 顶隙6 + 底距12，chip 底部与
+    // 行数上限若再调，同步 min 值）。一点空隙 SP_GAP=32（= ICON16 + 顶隙6 + 底距12，chip 底部与
     // 下一站圆点顶缘可见空隙 17-23px）。站间距 = 全线各站换乘图标的高最大值 + 空隙（移动/桌面统一，
     // 不再按站数分档）；环线双列 _colPitch 同式复用。
     var ROW_H = 18, SP_GAP = 32; // v4.3.857: 28→32（用户：有点近；3行留7px缝/2行9/1行11）
@@ -250,7 +250,7 @@
       // v4.3.502: 六形环环段改左右二分（双列）——环高用山手线公式（站数/2 列 × 36 基准 −80），
       // 并按各列最宽换乘 chip 高度动态放大（_colPitch6，与山手线 _colPitch 同款）。
       var loopRectH = Math.max(loopStations.length * 36 / 2 - 80, 140) * scale6;
-      var _colPitch6 = function(ids) { return _chipPitch(ids); }; // v4.3.847: 复用共同规则 _chipPitch（5.4.1.2.2）
+      var _colPitch6 = function(ids) { return _chipPitch(ids); }; // v4.3.847: 复用共同规则 _chipPitch（5.4.1.5）
       var _loopN = loopStations.length;
       // v4.3.504: 支线从环左侧 1/2 处展开（参考车站实际位置——都庁前在环左半）：
       // Tochomae(junction) 在左列第 7 位（环左缘、中点偏上 0.5/14×rectH，最接近 1/2 处）；
@@ -438,7 +438,7 @@
         // Vertical pitch adapts to the tallest interchange chip in each column
         // (name 16 + 3px gap + chip rows + 6px margin) so nothing overlaps.
         var _rightSeq = [8,7,6,5,4,3,2,1,0,29,28,27,26,25,24];
-        var _colPitch = function(ids) { return _chipPitch(ids); }; // v4.3.847: 复用共同规则 _chipPitch（5.4.1.2.2）
+        var _colPitch = function(ids) { return _chipPitch(ids); }; // v4.3.847: 复用共同规则 _chipPitch（5.4.1.5）
         var _rightIds = _rightSeq.map(function(si) { return stations[si]; });
         var _leftIds = [];
         for (var _li0 = 0; _li0 < 15; _li0++) _leftIds.push(stations[9 + _li0]);
