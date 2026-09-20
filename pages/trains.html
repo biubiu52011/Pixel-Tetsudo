@@ -40,63 +40,9 @@
   <link rel="preconnect" href="https://api-challenge.odpt.org" crossorigin>
 </head>
 
-<body>
+<body data-page="trains">
 
 <div id="app">
-
-<header class="pixel-header">
-
-<div class="header-container">
-
-<div class="header-text">
-
-<h1 class="pixel-title" data-i18n="app.title">
-  Pixel Tetsudo
-
-</h1>
-
-</div>
-
-
-
-<div class="lang-switcher-wrapper">
-
-<button id="langToggleBtn" class="lang-toggle-btn" title="Switch Language" aria-haspopup="listbox" aria-expanded="false" aria-label="Switch language">
-
-<img src="../images/Language.png" alt="Language" class="lang-icon">
-
-</button>
-
-<div id="langSwitcher" class="lang-switcher">
-
-<div class="lang-options" role="listbox" aria-label="Select language">
-
-<button class="lang-btn active" data-lang="ja" role="option" aria-selected="true">日本語</button>
-
-<button class="lang-btn" data-lang="zh" role="option" aria-selected="false">中文</button>
-
-<button class="lang-btn" data-lang="ko" role="option" aria-selected="false">한국어</button>
-
-<button class="lang-btn" data-lang="en" role="option" aria-selected="false">English</button>
-
-</div>
-
-</div>
-</div>
-</div>
-</header>
-
-<nav class="pixel-tabs">
-
-<a href="home.html" class="tab-btn" data-tab="search" data-i18n="tab.search">路線検索</a>
-
-<a href="realtime.html" class="tab-btn" data-tab="status" data-i18n="tab.status">運行状況/a>
-
-<a href="trains.html" class="tab-btn active" data-tab="trains" data-i18n="tab.trains">列車リアルタイム</a>
-
-<a href="history.html" class="tab-btn" data-tab="history" data-i18n="tab.history">履歴</a>
-
-</nav>
 
 <section id="tab-trains" class="tab-content active">
 
@@ -120,9 +66,6 @@
 </div>
 
 </section>
-
-<footer class="pixel-footer" data-i18n="app.footer">
-  © 2026 Pixel Tetsudo</footer>
 
 </div>
 
@@ -157,6 +100,8 @@
 <script src="../js/trains-geometry.js?v=4.3.905"></script>
 <script src="../js/trains-render.js?v=4.3.905"></script>
 <script src="../js/trains-page.js?v=4.3.905"></script>
+
+<script src="../js/framework.js?v=4.3.908"></script>
 
 </body>
 
