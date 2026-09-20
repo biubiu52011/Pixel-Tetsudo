@@ -1084,7 +1084,7 @@
     var cur = p.stationIndex || 0;
     var sts = (window.UNIFIED_LINES && window.UNIFIED_LINES[lineId]) ? (window.UNIFIED_LINES[lineId].stations || []) : [];
     // v4.3.900: 荒川线 ODPT 站名词典映射（Minowabashi=三ノ輪橋=Sannomi_Bashi）
-    var _aliasMap = { 'toei.minowabashi': 'sannomi_bashi' };
+    var _aliasMap = { 'toei.minowabashi': 'sannomi_bashi', 'toei.waseda': 'waseda' };
     var normTail = String(dn).replace(/-/g, '').toLowerCase();
     if (_aliasMap[normTail]) normTail = _aliasMap[normTail];
     for (var _di = 0; _di < sts.length; _di++) {
