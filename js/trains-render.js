@@ -15,27 +15,16 @@
     bg.setAttribute("stroke", lc);
     bg.setAttribute("stroke-width", "1");
     layer.appendChild(bg);
-    // Direction arrow drawn as an inline SVG path (vector, immune to font
-    // glyph availability): up=∧ / down=∨ / middle=→, stroke in the line colour.
+    // Direction arrow：三角符号（▲▼▶），线色
     var dir = lineObj.dir || "middle";
-    var ay = y + (mobile ? 9 : 6);
-    var _ax = x + 5;
-    var arrowD = "";
-    if (dir === "up") {
-      arrowD = "M" + (_ax - 3) + "," + (ay + 4) + " L" + _ax + "," + (ay - 3) + " L" + (_ax + 3) + "," + (ay + 4);
-    } else if (dir === "down") {
-      arrowD = "M" + (_ax - 3) + "," + (ay - 3) + " L" + _ax + "," + (ay + 4) + " L" + (_ax + 3) + "," + (ay - 3);
-    } else {
-      // 向右 >：与向上/向下完全旋转对称（高 6px -3~+3，宽 6px -3~+3）
-      arrowD = "M" + (_ax - 3) + "," + (ay - 3) + " L" + (_ax + 3) + "," + ay + " L" + (_ax - 3) + "," + (ay + 3);
-    }
-    var arr = document.createElementNS(ns, "path");
-    arr.setAttribute("d", arrowD);
-    arr.setAttribute("fill", "none");
-    arr.setAttribute("stroke", lc);
-    arr.setAttribute("stroke-width", mobile ? 2 : 1.8);
-    arr.setAttribute("stroke-linecap", "round");
-    arr.setAttribute("stroke-linejoin", "round");
+    var dirSym = (dir === "up") ? "▲" : (dir === "down") ? "▼" : "▶";
+    var arr = document.createElementNS(ns, "text");
+    arr.setAttribute("x", x + 4);
+    arr.setAttribute("y", y + (mobile ? 11 : 9));
+    arr.setAttribute("font-size", mobile ? 10 : 8);
+    arr.setAttribute("fill", lc);
+    arr.setAttribute("text-anchor", "start");
+    arr.textContent = dirSym;
     layer.appendChild(arr);
     var txt = document.createElementNS(ns, "text");
     txt.setAttribute("x", x + 12);
