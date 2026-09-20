@@ -1037,7 +1037,7 @@
     Asakusa:        { Northbound: +1, Southbound: -1 }, // 站表 西馬込→押上：北行=押上（站表后）
     Mita:           { Northbound: +1, Southbound: -1 }, // 站表 目黒→西高島平：北行=高島平（站表后）
     Shinjuku:       { Eastbound: +1, Westbound: -1 },   // 站表 新宿→本八幡：東行=本八幡（站表后）
-    Arakawa:        { Eastbound: +1, Westbound: -1 }    // v4.3.897: 站表 三ノ輪橋→早稲田：東行=早稲田（站表后=▼）
+    Arakawa:        { Northbound: +1, Southbound: -1 }    // v4.3.899: 站表 三ノ輪橋→早稲田：北行=早稲田（站表后=▼）
   };
 
   function _isLoopDirName(dirName) {
