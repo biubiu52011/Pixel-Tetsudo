@@ -381,7 +381,7 @@
           stroke: color, 
           'stroke-width': 5, 
           fill: 'none', 
-          opacity: 0.4 
+          opacity: 1.0 
         }
       });
       
@@ -475,7 +475,7 @@
       
       routeElements.push({
         type: 'rect',
-        attrs: { x: cx - halfW, y: cy - halfH, width: rectW, height: rectH, rx: 10, ry: 10, stroke: color, 'stroke-width': 5, fill: 'none', opacity: 0.35 }
+        attrs: { x: cx - halfW, y: cy - halfH, width: rectW, height: rectH, rx: 10, ry: 10, stroke: color, 'stroke-width': 5, fill: 'none', opacity: 1.0 }
       });
       
     } else {
