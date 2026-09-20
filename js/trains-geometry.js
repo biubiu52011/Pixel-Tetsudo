@@ -443,7 +443,7 @@
         var _leftIds = [];
         for (var _li0 = 0; _li0 < 15; _li0++) _leftIds.push(stations[9 + _li0]);
         var _pitch = Math.max(_colPitch(_rightIds), _colPitch(_leftIds));
-        var _needH = _pitch * 14;
+        var _needH = _pitch * (_rightSeq.length - 1); // v4.3.879: 14→动态（站数延长自动适配）
         if (_needH > loopRectH) {
           rectH = _needH;
           halfH = rectH / 2;
