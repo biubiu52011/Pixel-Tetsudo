@@ -90,7 +90,7 @@
       var mx = ROW_H + SP_GAP;
       for (var _cp = 0; _cp < ids.length; _cp++) {
         var _txN = (transferMap[ids[_cp]] || []).filter(function(t) { return !t.through; }).length;
-        var _rows = Math.ceil(Math.min(_txN, 16) / 4);
+        var _rows = Math.ceil(Math.min(_txN, 16) / 3); // v4.3.877: 4→3（窄列 PER_ROW 降级保守值，防 chip 超高重叠）
         mx = Math.max(mx, _rows * ROW_H + SP_GAP);
       }
       return mx;
