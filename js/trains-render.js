@@ -834,14 +834,18 @@
     var isLoop = stationCoords.length > 2 && (line.type === "loop" || line.isSixShapedLoop);
     
     // v4.3.919: 每站容量限制——推定算法把太多车堆在同一站（12 列车堆北绫濑），
-    // 物理上不可能。每站最多 3 列车，超出的丢弃（推定噪声）。
-    var _STATION_MAX = 3;
+    // 物理上不可能。端点站（一面一线）最多 1 列（马上要发车的那辆），
+    // 其他站最多 3 列。超出的丢弃（推定噪声/入库线）。
+    var _STATION_MAX_NORMAL = 3;
+    var _STATION_MAX_ENDPOINT = 1;
     var _stCount = {};
     var _filtered = [];
     for (var _ep = 0; _ep < positions.length; _ep++) {
       var _epIdx = Math.min(positions[_ep].stationIndex || 0, stationCoords.length - 1);
+      var _isEndpoint = (_epIdx === 0 || _epIdx === stationCoords.length - 1);
+      var _max = _isEndpoint ? _STATION_MAX_ENDPOINT : _STATION_MAX_NORMAL;
       _stCount[_epIdx] = (_stCount[_epIdx] || 0) + 1;
-      if (_stCount[_epIdx] <= _STATION_MAX) {
+      if (_stCount[_epIdx] <= _max) {
         _filtered.push(positions[_ep]);
       }
     }
