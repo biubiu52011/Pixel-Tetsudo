@@ -589,11 +589,16 @@
         var stationId = sc.stationId;
         var isJunction = geometry.junctionStation && stationId === geometry.junctionStation;
         var _bJ7 = _isBranchJunction(stationId);
-        // v4.3.944: 共线区间站（副都心线↔有乐町线 池袋/要町/千川）画双色半圆
+        // v4.3.956: 共线区间站（副都心线↔有乐町线 和光市→小竹向原）画双色半圆——两条线视图都同步
         var _sharedColor = '';
-        if (lineId === 'Fukutoshin' && ['Wakoshi', 'Chikatetsu-Narimasu', 'Chikatetsu-Akatsuka', 'Heiwadai', 'Hikawadai', 'Kotake-mukaihara'].indexOf(stationId) >= 0) {
-          var _ylL = (window.RailwayDB && window.RailwayDB.getAllLines) ? window.RailwayDB.getAllLines()['Yurakucho'] : null;
-          _sharedColor = _ylL ? (_ylL.color || '') : '';
+        var _sharedStations = ['Wakoshi', 'Chikatetsu-Narimasu', 'Chikatetsu-Akatsuka', 'Heiwadai', 'Hikawadai', 'Kotake-mukaihara'];
+        if (_sharedStations.indexOf(stationId) >= 0) {
+          var _allL = (window.RailwayDB && window.RailwayDB.getAllLines) ? window.RailwayDB.getAllLines() : null;
+          if (lineId === 'Fukutoshin' && _allL && _allL['Yurakucho']) {
+            _sharedColor = _allL['Yurakucho'].color || '';
+          } else if (lineId === 'Yurakucho' && _allL && _allL['Fukutoshin']) {
+            _sharedColor = _allL['Fukutoshin'].color || '';
+          }
         }
         _renderStationNode(staticLayer, svgNS, {
           x: sc.x, y: sc.y, stationId: stationId, isJunction: isJunction, color: color,
