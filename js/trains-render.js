@@ -15,31 +15,28 @@
     bg.setAttribute("stroke", lc);
     bg.setAttribute("stroke-width", "1");
     layer.appendChild(bg);
-    // v4.3.937: 箭头改圆头圆角描边折线（5.4.1.13：stroke-linecap/linejoin round，线宽桌面1.8/移动2，
-    // 不闭合、非字体字形）。原 fill 实心尖锐三角不规范、视觉生硬。形状：up=∧ / down=∨ / middle=→。
+    // v4.3.941: 实心圆角三角形（fill+stroke 同色，stroke-width 加宽 + linejoin round，边角圆润）
     var dir = lineObj.dir || "middle";
     var arr = document.createElementNS(ns, "path");
-    arr.setAttribute("fill", "none");
+    arr.setAttribute("fill", lc);
     arr.setAttribute("stroke", lc);
-    arr.setAttribute("stroke-width", mobile ? "2" : "1.8");
-    arr.setAttribute("stroke-linecap", "round");
+    arr.setAttribute("stroke-width", mobile ? "4" : "3.5");
     arr.setAttribute("stroke-linejoin", "round");
     var _ax, _ay, _d;
     if (dir === "middle") {
-      // 中间方向：→（圆头右箭头），箭头在 box 左
+      // 中间方向：→（实心圆角右三角），箭头在 box 左
       _ax = x + 6;
       _ay = y + (mobile ? 8 : 6);
-      // 与 up/down 旋转对称的开放 >（同构 6x4 三角），非横杆+翼
-      _d = "M" + (_ax - 3) + "," + (_ay - 2) + " L" + (_ax + 3) + "," + _ay + " L" + (_ax - 3) + "," + (_ay + 2);
+      _d = "M" + (_ax - 3) + "," + (_ay - 2) + " L" + (_ax + 3) + "," + _ay + " L" + (_ax - 3) + "," + (_ay + 2) + " Z";
     } else {
-      // 上下方向：箭头水平居中（∧ 尖朝上 / ∨ 尖朝下，开放折线）
+      // 上下方向：箭头水平居中（∧ 尖朝上 / ∨ 尖朝下，实心圆角三角）
       var _cw = sz.w - 2;
       _ax = x + _cw / 2;
       _ay = y + (mobile ? 7 : 5);
       if (dir === "up") {
-        _d = "M" + (_ax - 3) + "," + (_ay + 2) + " L" + _ax + "," + (_ay - 2) + " L" + (_ax + 3) + "," + (_ay + 2);
+        _d = "M" + (_ax - 3) + "," + (_ay + 2) + " L" + _ax + "," + (_ay - 2) + " L" + (_ax + 3) + "," + (_ay + 2) + " Z";
       } else {
-        _d = "M" + (_ax - 3) + "," + (_ay - 2) + " L" + _ax + "," + (_ay + 2) + " L" + (_ax + 3) + "," + (_ay - 2);
+        _d = "M" + (_ax - 3) + "," + (_ay - 2) + " L" + _ax + "," + (_ay + 2) + " L" + (_ax + 3) + "," + (_ay - 2) + " Z";
       }
     }
     arr.setAttribute("d", _d);
@@ -1223,17 +1220,16 @@
       var tri = document.createElementNS(svgNS, "path");
       var triY = _trainLabelY('dir', py, moveDir) - 3;
       var triX = px - 12;
-      // v4.3.937: 列车方向箭头同款圆头圆角描边折线（stroke round，开放三角），替代 fill 实心尖角。
-      // down=▼ 尖朝下(apex 在下方)、up=▲ 尖朝上(apex 在上方)。
+      // v4.3.941: 实心圆角三角形（fill+stroke 同色，stroke-width 加宽 + linejoin round）
+      // down=▼ 尖朝下、up=▲ 尖朝上。
       var _tay = triY + 1.5;
-      tri.setAttribute("fill", "none");
+      tri.setAttribute("fill", "#666");
       tri.setAttribute("stroke", "#666");
-      tri.setAttribute("stroke-width", _isMobileView() ? "1.8" : "1.5");
-      tri.setAttribute("stroke-linecap", "round");
+      tri.setAttribute("stroke-width", _isMobileView() ? "3.5" : "3");
       tri.setAttribute("stroke-linejoin", "round");
       var triD = dirSym === 'down'
-        ? 'M ' + (triX - 3.5) + ' ' + (_tay - 2.5) + ' L ' + triX + ' ' + (_tay + 2.5) + ' L ' + (triX + 3.5) + ' ' + (_tay - 2.5)
-        : 'M ' + (triX - 3.5) + ' ' + (_tay + 2.5) + ' L ' + triX + ' ' + (_tay - 2.5) + ' L ' + (triX + 3.5) + ' ' + (_tay + 2.5);
+        ? 'M ' + (triX - 3.5) + ' ' + (_tay - 2.5) + ' L ' + triX + ' ' + (_tay + 2.5) + ' L ' + (triX + 3.5) + ' ' + (_tay - 2.5) + ' Z'
+        : 'M ' + (triX - 3.5) + ' ' + (_tay + 2.5) + ' L ' + triX + ' ' + (_tay - 2.5) + ' L ' + (triX + 3.5) + ' ' + (_tay + 2.5) + ' Z';
       tri.setAttribute("d", triD);
       tri.setAttribute("class", "train-label-tri");
       trainLayer.appendChild(tri);
