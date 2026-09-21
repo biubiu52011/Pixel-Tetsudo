@@ -1115,6 +1115,8 @@
       if (/^Hikarigaoka$/i.test(_dest)) return 'up';
       return 'down';
     }
+    // v4.3.935: 千代田线北绫濑支线——KitaAyase 不在主线站表里，单独判定：往北绫濑=屏幕下方=▼
+    if (lineId === 'Chiyoda' && /^KitaAyase$/i.test(dn)) return 'down';
     if (/^(InnerLoop|Inner|OuterLoop|Outer)$/.test(dn)) return null;
     if (/^Inbound$/.test(dn)) return 'up';
     if (/^Outbound$/.test(dn)) return 'down';
