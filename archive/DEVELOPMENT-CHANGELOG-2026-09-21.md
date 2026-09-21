@@ -36,3 +36,18 @@
 **验证**：verify_push_optimize.js 扩至 74/74 断言全绿（全量 31 + lazy 19 + data-fusion 24）：E4 全量落盘 rawDelay/rawPositions、缓存命中先于拉取进入推送链、缓存 positions 触发 loadTrainPositions、过期缓存（60s > 30s）不推送、lazy 只落 rawDelay（模式隔离）。
 
 **遗留**：真实页面行为（切页空窗消除）由用户人工确认（项目打磨期规则：不系统截图确认，交付后由用户人工验收）。RTCache 写入失败静默降级（persist 判空 + try/catch），不影响拉取主链。
+
+## 4.3.937（2026-09-21，千代田线北綾瀬支线名标签超出 SVG 右缘被裁修复）
+
+**用户反馈**：线上 trains.html 千代田线详情图，北綾瀬支线名标签「千代田線（北綾瀬支線）」绿色像素字被右边界硬裁，手机端只显示到「千代田線（北綾瀬支」。
+
+**根因**：trains-render.js:752 branchName（竖列模式支线名标签，fill=#009944 线色，text-anchor=start 从 bx+6 向右排，font-size 14）画在了 trains-geometry.js:527 单支线 svgW 计算的包围盒之外——svgW 只预留支线竖列区（stubR + BRANCH_COL_W=96 + padding），未算标签文字本身宽度（14 字全 CJK ≈ 215.6px）。SVG 规则：超出 viewBox 右缘的内容直接不绘制，CSS width=100% 拉伸救不了（与推送优化无关，既有几何缺陷）。
+
+**修复**（js/trains-geometry.js:524-537）：单支线分支 svgW 追加 _singleBranchNameW——branchLines.length===1 时取 resolveLineName(branch.id)，按渲染 clamp 同公式（CJK 1.1 / 其他 0.55 × 14px）算标签文字宽计入 svgW。无支线（0 条）恒为 0，多支线（≥2 条）走另一分支不受影响。
+
+**验证**（node vm 沙箱真实跑 computeRouteGeometry，对比 git HEAD 旧版）：
+- 千代田线移动端 svgW 318.5 → 472.5（+154.0，标签右缘 420.1 完整入画，余量 52px）；桌面 334.5 → 488.5（+154.0）。
+- 回归 5 线 svgW 逐值不变：Yamanote / Ginza / Narita（多支线）/ Tsurumi（多支线）/ Oedo（六形环）。
+- 10/10 PASS；node --check 通过；pages/trains.html trains-geometry.js?v=4.3.905 bump 至 ?v=4.3.937。
+
+**遗留**：实际渲染效果（整字「千代田線（北綾瀬支線）」完整显示）由用户人工确认（项目打磨期规则）。多支线分支的竖列线名标签若遇同类问题另行处理（本次未动，超范围）。
