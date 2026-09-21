@@ -42,7 +42,7 @@
 
 /* Train icon smooth movement */
 .train-icon {
-  transition: x 1.2s cubic-bezier(0.4, 0, 0.2, 1), y 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: x 14s cubic-bezier(0.4, 0, 0.2, 1), y 14s cubic-bezier(0.4, 0, 0.2, 1);
 }
 /* v4.3.469: 推定列車の半透明を廃止——容器内はリアルタイムと同じ見た目に統一。
    データ出所は容器外の tp-est-note（*データは時刻表からの計算）で告知する。 */
