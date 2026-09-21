@@ -955,20 +955,48 @@
         var newY = py - 9;
         // v4.3.950: 环线沿曲线移动——用 JS 动画沿矩形边插值，不用 CSS transition 直线跳
         var _loopRect = stationCoords._loopRect;
-        if (isLoop && _loopRect && Math.abs(oldX - newX) > 0.5 || Math.abs(oldY - newY) > 0.5) {
-          var _oldPos = existingIcon._loopPos || 0;
+        var _needMove = Math.abs(oldX - newX) > 0.5 || Math.abs(oldY - newY) > 0.5;
+        if (isLoop && _loopRect && _needMove) {
           var _newSc = stationCoords[idx];
           var _newPos = (_newSc && _newSc._loopPos != null) ? _newSc._loopPos : 0;
-          // 方向：内环/外环决定沿周长正/反方向
-          var _dir = (direction.indexOf('Inner') >= 0) ? 1 : -1;
-          // 沿周长插值：从旧 pos 到新 pos，走最短路径
-          var _diff = _newPos - _oldPos;
-          if (_dir < 0) _diff = -_diff; // 外环反方向
-          // 用 CSS transition 不行（直线），改成直接设新位置（沿曲线由下一次刷新的 pos 变化体现）
-          existingIcon.setAttribute('x', newX);
-          existingIcon.setAttribute('y', newY);
-          existingIcon._loopPos = _newPos;
-        } else if (Math.abs(oldX - newX) > 0.5 || Math.abs(oldY - newY) > 0.5) {
+          var _oldPos = existingIcon._loopPos;
+          if (_oldPos == null) {
+            // 第一次：直接设位置，记录 pos
+            existingIcon.setAttribute('x', newX);
+            existingIcon.setAttribute('y', newY);
+            existingIcon._loopPos = _newPos;
+          } else {
+            // 沿矩形边插值动画（14 秒，匹配刷新间隔）
+            var _startPos = _oldPos;
+            var _endPos = _newPos;
+            var _perimeter = _loopRect.perimeter;
+            // 方向：内环=顺时针（+），外环=逆时针（-）
+            var _dirSign = (direction.indexOf('Inner') >= 0) ? 1 : -1;
+            // 计算最短路径差（沿周长）
+            var _rawDiff = _endPos - _startPos;
+            var _diff = _dirSign * _rawDiff;
+            // 确保沿最短方向走（不超过半圈）
+            if (Math.abs(_diff) > _perimeter / 2) {
+              _diff = (Math.abs(_diff) - _perimeter) * (_diff > 0 ? 1 : -1);
+            }
+            var _animStart = performance.now();
+            var _animDur = 14000; // 14 秒，匹配刷新间隔
+            var _icon = existingIcon;
+            var _rect = _loopRect;
+            function _animFrame(now) {
+              var _t = Math.min(1, (now - _animStart) / _animDur);
+              // 缓动：cubic-bezier(0.4, 0, 0.2, 1)
+              var _ease = _t < 0.5 ? 4 * _t * _t * _t : 1 - Math.pow(-2 * _t + 2, 3) / 2;
+              var _curPos = _startPos + _diff * _ease;
+              var _xy = _loopPosToXY(_curPos, _rect);
+              _icon.setAttribute('x', _xy.x - 7);
+              _icon.setAttribute('y', _xy.y - 9);
+              if (_t < 1) requestAnimationFrame(_animFrame);
+              else _icon._loopPos = _startPos + _diff;
+            }
+            requestAnimationFrame(_animFrame);
+          }
+        } else if (_needMove) {
           existingIcon.setAttribute('x', newX);
           existingIcon.setAttribute('y', newY);
         }
