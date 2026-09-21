@@ -15,43 +15,21 @@
     bg.setAttribute("stroke", lc);
     bg.setAttribute("stroke-width", "1");
     layer.appendChild(bg);
-    // v4.3.941: 实心圆角三角形（fill+stroke 同色，stroke-width 加宽 + linejoin round，边角圆润）
+    // v4.3.942: 统一画 → 右三角在 box 左边，不压文字（up/down 不再居中画 ∧/∨）
     var dir = lineObj.dir || "middle";
     var arr = document.createElementNS(ns, "path");
     arr.setAttribute("fill", lc);
     arr.setAttribute("stroke", lc);
-    arr.setAttribute("stroke-width", mobile ? "4" : "3.5");
+    arr.setAttribute("stroke-width", mobile ? "3.5" : "3");
     arr.setAttribute("stroke-linejoin", "round");
-    var _ax, _ay, _d;
-    if (dir === "middle") {
-      // 中间方向：→（实心圆角右三角），箭头在 box 左
-      _ax = x + 6;
-      _ay = y + (mobile ? 8 : 6);
-      _d = "M" + (_ax - 3) + "," + (_ay - 2) + " L" + (_ax + 3) + "," + _ay + " L" + (_ax - 3) + "," + (_ay + 2) + " Z";
-    } else {
-      // 上下方向：箭头水平居中（∧ 尖朝上 / ∨ 尖朝下，实心圆角三角）
-      var _cw = sz.w - 2;
-      _ax = x + _cw / 2;
-      _ay = y + (mobile ? 7 : 5);
-      if (dir === "up") {
-        _d = "M" + (_ax - 3) + "," + (_ay + 2) + " L" + _ax + "," + (_ay - 2) + " L" + (_ax + 3) + "," + (_ay + 2) + " Z";
-      } else {
-        _d = "M" + (_ax - 3) + "," + (_ay - 2) + " L" + _ax + "," + (_ay + 2) + " L" + (_ax + 3) + "," + (_ay - 2) + " Z";
-      }
-    }
+    var _ax = x + 6;
+    var _ay = y + (mobile ? 8 : 6);
+    var _d = "M" + (_ax - 3) + "," + (_ay - 2) + " L" + (_ax + 3) + "," + _ay + " L" + (_ax - 3) + "," + (_ay + 2) + " Z";
     arr.setAttribute("d", _d);
     layer.appendChild(arr);
     var txt = document.createElementNS(ns, "text");
-    if (dir === "middle") {
-      txt.setAttribute("x", x + 12);
-      txt.setAttribute("y", y + (mobile ? 12 : 9));
-    } else {
-      // 上下方向：文字水平居中在箭头下方
-      var _cw2 = sz.w - 2;
-      txt.setAttribute("x", x + _cw2 / 2);
-      txt.setAttribute("y", y + (mobile ? 12 : 9));
-      txt.setAttribute("text-anchor", "middle");
-    }
+    txt.setAttribute("x", x + 12);
+    txt.setAttribute("y", y + (mobile ? 12 : 9));
     txt.setAttribute("font-size", mobile ? 12 : 10);
     txt.setAttribute("fill", lc);
     txt.setAttribute("font-weight", "700");
