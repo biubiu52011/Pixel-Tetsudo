@@ -1312,9 +1312,9 @@
     if (dirSym) {
       var tri = document.createElementNS(svgNS, "path");
       var triY = _trainLabelY('dir', py, moveDir) - 3;
-      var triX = px - 12;
-      // v4.3.941: 实心圆角三角形（fill+stroke 同色，stroke-width 加宽 + linejoin round）
-      // down=▼ 尖朝下、up=▲ 尖朝上。
+      // v4.3.958: 方向三角移到列车右边，不压左边站标签
+      var triX = px + 12;
+      // 实心圆角三角形（fill+stroke 同色，stroke-width 加宽 + linejoin round）
       var _tay = triY + 1.5;
       tri.setAttribute("fill", "#666");
       tri.setAttribute("stroke", "#666");
@@ -1330,9 +1330,9 @@
     var ldir = document.createElementNS(svgNS, "text");
     ldir.setAttribute("data-train-label-for", String(trainUid));
     ldir.setAttribute("data-label-pos", "dir");
-    ldir.setAttribute("x", String(px));
+    ldir.setAttribute("x", String(px + 18));
     ldir.setAttribute("y", String(_trainLabelY('dir', py, moveDir)));
-    ldir.setAttribute("text-anchor", "middle");
+    ldir.setAttribute("text-anchor", "start");
     ldir.setAttribute("font-size", "8");
     ldir.setAttribute("fill", "#666");
     ldir.setAttribute("class", "train-label-dir");
