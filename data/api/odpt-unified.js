@@ -651,9 +651,16 @@
 
         // v4.3.589: 完整时刻表（搜索按需查询用）——单请求 ≥1000 条（ODPT 截断信号）时
         // 按日历拆分合并，避免缺班次；内存缓存复用，同线并发只发一次请求。
+        // v4.3.9xx (E3+E5): 缓存优先——ODPT_TIMETABLES 已含 IDB 缓存/全量加载数据时零请求
+        // （home 搜索经 lazy 模式轻量读 IDB 后命中；trains 全量加载后命中）
         getCompleteTimetable: function(operator, railway) {
             var ck = operator + ':' + railway;
             if (this._timetableCache[ck]) return Promise.resolve(this._timetableCache[ck]);
+            var cachedRows = this._getLocalTimetableRows(operator, railway);
+            if (cachedRows && cachedRows.length > 0) {
+                this._timetableCache[ck] = cachedRows;
+                return Promise.resolve(cachedRows);
+            }
             var self = this;
             return this.getTimetableForRailway(operator, railway).then(function(data) {
                 var rows = (data && data.length > 0) ? data : [];
@@ -676,6 +683,22 @@
         getCachedTimetable: function(operator, railway) {
             var key = operator + ':' + railway;
             return this._timetableCache[key] || null;
+        },
+
+        // E3+E5: 从已加载的 ODPT_TIMETABLES（IDB 缓存/全量加载产物）按线过滤——命中则搜索零请求
+        _getLocalTimetableRows: function(operator, railway) {
+            try {
+                var local = window.ODPT_TIMETABLES && window.ODPT_TIMETABLES[operator];
+                if (!local || !Array.isArray(local) || local.length === 0) return null;
+                var railwayParam = railway.indexOf('odpt.Railway:') === 0 ? railway : resolveRailwayCode(operator, railway);
+                var code = railwayParam.split(':').pop();  // 如 "Seibu.Kawagoe"
+                var rows = local.filter(function(tt) {
+                    if (!tt) return false;
+                    var rw = tt['odpt:railway'] || '';
+                    return rw === railwayParam || rw === railway || rw.indexOf('.' + railway) >= 0 || rw === 'odpt.Railway:' + code;
+                });
+                return rows.length > 0 ? rows : null;
+            } catch(e) { return null; }
         },
 
         // 缓存时刻表
@@ -1014,6 +1037,93 @@
     // 向后兼容：合并时刻表和实时位置
     window.ODPT_TRAINS = {};
 
+    // ========== ODPT_TT_PROBED 持久化（E2: localStorage，24h 滑动 TTL） ==========
+    // v4.3.9xx: probed 标记原为内存态——trains 页整页跳转后丢失，41 条 JR 地方线
+    // （ODPT 无时刻表）每次切页都重新探测。落 localStorage 后切页零重复请求。
+    var TT_PROBED_KEY = 'odpt_tt_probed_v1';
+    var TT_PROBED_TTL = 86400000;  // 24h
+
+    function _loadProbed() {
+        try {
+            if (window.ODPT_TT_PROBED) return;
+            var raw = localStorage.getItem(TT_PROBED_KEY);
+            if (!raw) return;
+            var data = JSON.parse(raw);
+            if (!data || data.v !== 1 || !data.lines) return;
+            if ((Date.now() - (data.ts || 0)) > TT_PROBED_TTL) return;
+            window.ODPT_TT_PROBED = data.lines;
+        } catch(e) {}
+    }
+    function _persistProbed() {
+        try {
+            var lines = window.ODPT_TT_PROBED || {};
+            if (Object.keys(lines).length === 0) return;
+            localStorage.setItem(TT_PROBED_KEY, JSON.stringify({ v: 1, ts: Date.now(), lines: lines }));
+        } catch(e) {}
+    }
+    _loadProbed();
+
+    // ========== 原始实时数据落盘 + stale-while-revalidate（E4: 切页零空窗） ==========
+    // v4.3.9xx: 页面整页跳转后，新页 loadRealtimeData 需 ~2-4s 拉完所有 operator 才推送，
+    // 期间 UI 显示「情報取得中」。方案：每次拉取成功后立即把原始 delay/positions 写入
+    // RTCache（IDB，key=rawDelay/rawPositions，带 ts）；新页启动先读缓存（30s 内新鲜）
+    // 立即渲染，再后台拉新数据覆盖——stale-while-revalidate。
+    // 注意：RTCache 的 positions/delayInfo 两键被 data-fusion 融合后数据占用（lineId 级），
+    // 这里用独立 raw 键（operator 级原始数据），互不覆盖。
+    var RAW_REALTIME_FRESH_MS = 30000;  // 缓存新鲜窗口（与 30s 轮询同周期）
+
+    function persistRawRealtime(delayOnly) {
+        try {
+            if (!window.RTCache || !window.RTCache.put) return;
+            window.RTCache.put('rawDelay', { ts: Date.now(), data: window.ODPT_DELAY_DATA });
+            // 位置仅在非惰性模式写——lazy（home）不拉 positions，写空会覆盖 trains 页刚落的真实位置
+            if (!delayOnly) {
+                window.RTCache.put('rawPositions', { ts: Date.now(), data: window.ODPT_TRAIN_POSITIONS });
+            }
+        } catch(e) { console.debug("[ODPT] persistRawRealtime error:", e.message); }
+    }
+
+    // 新页启动：读缓存（新鲜才用）→ 填充全局 → DataFusion 就绪后立即推送（重试等待）
+    function loadRawRealtimeCache() {
+        try {
+            if (!window.RTCache || !window.RTCache.get) return Promise.resolve();
+            return Promise.all([
+                window.RTCache.get('rawDelay'),
+                window.RTCache.get('rawPositions')
+            ]).then(function(results) {
+                var now = Date.now();
+                var delayRec = results[0], posRec = results[1];
+                var delayFresh = !!(delayRec && delayRec.ts && (now - delayRec.ts) <= RAW_REALTIME_FRESH_MS && delayRec.data && typeof delayRec.data === 'object');
+                var posFresh = !!(posRec && posRec.ts && (now - posRec.ts) <= RAW_REALTIME_FRESH_MS && posRec.data && typeof posRec.data === 'object');
+                if (delayFresh) window.ODPT_DELAY_DATA = delayRec.data;
+                if (posFresh) {
+                    window.ODPT_TRAIN_POSITIONS = posRec.data;
+                    // 向后兼容填充 ODPT_TRAINS（loadTrainPositions 与推定共用）
+                    Object.keys(posRec.data).forEach(function(op) {
+                        if (!window.ODPT_TRAINS[op]) window.ODPT_TRAINS[op] = posRec.data[op];
+                    });
+                }
+                if (delayFresh || posFresh) pushCachedRealtime(delayFresh, posFresh);
+            }).catch(function(e) {
+                console.debug("[ODPT] loadRawRealtimeCache error:", e.message);
+            });
+        } catch(e) { return Promise.resolve(); }
+    }
+
+    function pushCachedRealtime(hasDelay, hasPositions) {
+        // DataFusion 在 odpt-unified 之后加载——未就绪时重试（同 pushDelay 模式）
+        if (!window.DataFusion || !window.DataFusion.updateOdptData) {
+            setTimeout(function() { pushCachedRealtime(hasDelay, hasPositions); }, 300);
+            return;
+        }
+        try {
+            if (hasDelay) window.DataFusion.updateOdptData(window.ODPT_DELAY_DATA);
+            if (hasPositions && window.DataFusion.loadTrainPositions && Object.keys(window.ODPT_TRAIN_POSITIONS).length > 0) {
+                window.DataFusion.loadTrainPositions();
+            }
+        } catch(e) { console.debug("[ODPT] cached realtime push error:", e.message); }
+    }
+
     // ========== 加载实时数据（延误信息 + 实时位置）==========
     // 每30秒刷新一次
     // v4.3.590: delayOnly=true 时只拉运行情报/延误（惰性模式首页搜索徽章用），跳过列车位置与时刻表
@@ -1113,9 +1223,10 @@
         }
 
         // 延误情报独立推送；列车位置在 posPromises 就绪后推送（不阻塞、不依赖延误链）
-        Promise.all(delayPromises).then(pushDelay);
+        // v4.3.9xx (E4): 拉取完成即落盘原始数据（带 ts），供其他标签页/切页 stale-while-revalidate
+        Promise.all(delayPromises).then(function() { pushDelay(); persistRawRealtime(!!delayOnly); });
         if (delayOnly) return Promise.resolve();  // 惰性模式不拉位置
-        return Promise.all(posPromises).then(pushTrainPositions);
+        return Promise.all(posPromises).then(function() { pushTrainPositions(); persistRawRealtime(false); });
     }
     // ========== 加载时刻表数据（使用本地缓存）==========
     // 每小时刷新一次，优先使用本地缓存
@@ -1206,11 +1317,13 @@
                         // 请求失败：仍标记探测，避免后续对空线反复请求
                         if (!window.ODPT_TT_PROBED) window.ODPT_TT_PROBED = {};
                         window.ODPT_TT_PROBED[lid] = true;
+                        _persistProbed();
                         return [];
                     }).then(function(rows) {
                         // 探测标记：无论有无数据都记录，避免 loadMissingTimetables 对空线反复请求
                         if (!window.ODPT_TT_PROBED) window.ODPT_TT_PROBED = {};
                         window.ODPT_TT_PROBED[lid] = true;
+                        _persistProbed();
                         if (rows.length > 0) {
                             if (!newTimetables[op]) newTimetables[op] = [];
                             newTimetables[op] = newTimetables[op].concat(rows);
@@ -1281,7 +1394,11 @@
     function loadAllData() {
         // v4.3.6xx: 实时数据和时刻表数据并行加载（原来串行：实时→时刻表，慢一倍）
         // 实时数据优先返回，时刻表在后台并行拉取
-        var realtimePromise = loadRealtimeData();
+        // v4.3.9xx (E4): 先读原始实时缓存（stale-while-revalidate）再启动拉取——
+        // 缓存命中时新页立即渲染（DataFusion 就绪后推送），拉取完成覆盖，消除切页空窗
+        var realtimePromise = loadRawRealtimeCache().then(function() {
+            return loadRealtimeData();
+        });
         var timetablePromise = loadTimetableData(false);
         // 实时数据先resolve，时刻表不阻塞首屏
         return realtimePromise.then(function() {
@@ -1290,25 +1407,65 @@
         });
     }
 
-    // ========== Init ==========
-    function init() {
-        // 初始加载所有数据
-        loadAllData().catch(function(e) { console.warn("[ODPT] Init error:", e.message); });
+    // ========== 轮询生命周期（v4.3.9xx E1: visibilitychange 暂停/恢复） ==========
+    // 后台标签页（document.hidden）暂停 30s 实时轮询与 5min 时刻表过期检查；
+    // 回前台立即拉一次再恢复周期——多标签页下后台页不再产生无效 ODPT 请求。
+    var REALTIME_INTERVAL = 30000;
+    var TT_CHECK_INTERVAL = 300000;
+    var _rtPollTimer = null;
+    var _ttCheckTimer = null;
+    var _lazyMode = false;
 
-        // 实时数据每30秒刷新
-        setInterval(function() {
-            loadRealtimeData().catch(function(e) { console.warn("[ODPT] Realtime refresh error:", e.message); });
-        }, 30000);
-
-        // 时刻表每小时刷新（检查缓存是否过期）
-        setInterval(function() {
+    function _realtimeRefresh() {
+        loadRealtimeData(_lazyMode).catch(function(e) { console.warn("[ODPT] Realtime refresh error:", e.message); });
+    }
+    function startRealtimePolling() {
+        if (_rtPollTimer) return;
+        _rtPollTimer = setInterval(_realtimeRefresh, REALTIME_INTERVAL);
+    }
+    function stopRealtimePolling() {
+        if (_rtPollTimer) { clearInterval(_rtPollTimer); _rtPollTimer = null; }
+    }
+    function startTtCheckPolling() {
+        if (_ttCheckTimer) return;
+        _ttCheckTimer = setInterval(function() {
             shouldRefreshTimetables().then(function(need) {
                 if (need) {
                     console.debug("[ODPT] Timetable cache expired, refreshing...");
                     loadTimetableData(true).catch(function(e) { console.warn("[ODPT] Timetable refresh error:", e.message); });
                 }
             }).catch(function(e) { console.debug("[ODPT] shouldRefreshTimetables check error:", e.message); });
-        }, 300000);  // 每5分钟检查一次是否需要刷新
+        }, TT_CHECK_INTERVAL);
+    }
+    function stopTtCheckPolling() {
+        if (_ttCheckTimer) { clearInterval(_ttCheckTimer); _ttCheckTimer = null; }
+    }
+    function handleVisibilityChange() {
+        try {
+            if (document.hidden) {
+                stopRealtimePolling();
+                stopTtCheckPolling();
+            } else {
+                // 回前台：立即拉一次（不等下一周期），再恢复定时器
+                _realtimeRefresh();
+                startRealtimePolling();
+                // lazy 模式（delay-only）不建立时刻表过期检查轮询——保持首页零全量拉取
+                if (!_lazyMode) startTtCheckPolling();
+            }
+        } catch(e) { console.debug("[ODPT] visibilitychange handler error:", e.message); }
+    }
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    // ========== Init ==========
+    function init() {
+        // 初始加载所有数据
+        loadAllData().catch(function(e) { console.warn("[ODPT] Init error:", e.message); });
+
+        // 实时数据每30秒刷新
+        startRealtimePolling();
+
+        // 时刻表每小时刷新（检查缓存是否过期）
+        startTtCheckPolling();
 
         console.debug("[ODPT] Client initialized with", Object.keys(ODPT_ENDPOINTS).length, "operators");
     }
@@ -1319,12 +1476,27 @@
     // 会拉全部 operator 实时/时刻表，首页首屏不可承受）；搜索模块经 getCompleteTimetable 按需拉取。
     // v4.3.590: 惰性模式仍拉延误（TrainInformation，搜索延误徽章需要）并保持 30s 刷新，
     // 仅跳过列车位置（Train）与时刻表全量（TrainTimetable）——首页请求量 500+ → ~30。
+    // v4.3.9xx (E3+E5): 惰性模式追加轻量读时刻表缓存（IDB，不拉 API）——getCompleteTimetable
+    // 缓存优先命中 ODPT_TIMETABLES，搜索不再重复打 API；回前台同样立即刷新延误。
+    // v4.3.9xx (E4): lazy 同样先读 rawDelay 缓存再拉取——切回搜索页时延误徽章即刻显示。
     if (window.ODPT_LAZY === true) {
         console.debug("[ODPT] Lazy mode enabled - delay-only init");
-        loadRealtimeData(true).catch(function(e) { console.warn("[ODPT] Lazy delay init error:", e.message); });
-        setInterval(function() {
-            loadRealtimeData(true).catch(function(e) { console.warn("[ODPT] Lazy delay refresh error:", e.message); });
-        }, 30000);
+        _lazyMode = true;
+        loadTimetableCache().then(function(cached) {
+            if (cached && Object.keys(cached).length > 0) {
+                window.ODPT_TIMETABLES = cached;
+                // 填充ODPT_TRAINS（向后兼容，避免搜索路由误判无时刻表数据）
+                Object.keys(cached).forEach(function(op) {
+                    if (!window.ODPT_TRAINS[op]) {
+                        window.ODPT_TRAINS[op] = cached[op];
+                    }
+                });
+            }
+        }).catch(function(e) { console.debug("[ODPT] Lazy timetable cache read skip:", e.message); });
+        loadRawRealtimeCache().then(function() {
+            return loadRealtimeData(true);
+        }).catch(function(e) { console.warn("[ODPT] Lazy delay init error:", e.message); });
+        startRealtimePolling();
     } else {
         init();
     }

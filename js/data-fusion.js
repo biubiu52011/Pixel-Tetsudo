@@ -17,6 +17,31 @@
   var _initialized = false;
   var _refreshTimer = null;
   var _cacheTimer = null;
+  // v4.3.9xx (E1): 融合/缓存轮询间隔（init 时从 RuntimeConfig 读取，回前台恢复时复用）
+  var _refreshIntervalMs = 15000;
+
+  // ========== 融合轮询生命周期（v4.3.9xx E1: visibilitychange 暂停/恢复） ==========
+  // 后台标签页暂停 15s fuseAll + saveToCache；回前台立即融合一次再恢复周期——
+  // 后台页不再产生计算与 IDB 写入开销（配合 odpt-unified 的拉取暂停双管齐下）。
+  function startFusionPolling() {
+    if (_refreshTimer || _cacheTimer) return;
+    _refreshTimer = setInterval(function() { try { fuseAll(); } catch(e) { console.debug("[DataFusion] fuseAll error:", e.message); } }, _refreshIntervalMs);
+    _cacheTimer = setInterval(function() { try { saveToCache(); } catch(e) {} }, _refreshIntervalMs);
+  }
+  function stopFusionPolling() {
+    if (_refreshTimer) { clearInterval(_refreshTimer); _refreshTimer = null; }
+    if (_cacheTimer) { clearInterval(_cacheTimer); _cacheTimer = null; }
+  }
+  document.addEventListener('visibilitychange', function() {
+    try {
+      if (document.hidden) {
+        stopFusionPolling();
+      } else {
+        try { fuseAll(); } catch(e) { console.debug("[DataFusion] visible->fuseAll error:", e.message); }
+        startFusionPolling();
+      }
+    } catch(e) { console.debug("[DataFusion] visibilitychange handler error:", e.message); }
+  });
 
   // ========== Station coordinate matching ==========
   function findStationIndex(line, lat, lon) {
@@ -821,9 +846,8 @@
     syncStatusMap();
     checkCacheStale();
     fuseAll();
-    var REFRESH_INTERVAL = (window.RuntimeConfig && window.RuntimeConfig.REFRESH_INTERVAL) || 15000;
-    _refreshTimer = setInterval(function() { try { fuseAll(); } catch(e) { console.debug("[DataFusion] fuseAll error:", e.message); } }, REFRESH_INTERVAL);
-    _cacheTimer = setInterval(function() { try { saveToCache(); } catch(e) {} }, REFRESH_INTERVAL);
+    _refreshIntervalMs = (window.RuntimeConfig && window.RuntimeConfig.REFRESH_INTERVAL) || 15000;
+    startFusionPolling();
     (function pollUnified() {
       var checkLines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : (window.UNIFIED_LINES || {});
       if (checkLines && Object.keys(checkLines).length > 0) {
