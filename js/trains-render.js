@@ -59,15 +59,29 @@
     o.labelLen = _sName.length;
 
     // Station circle
-    var circle = document.createElementNS(svgNS, "circle");
-    circle.setAttribute("cx", o.x);
-    circle.setAttribute("cy", o.y);
-    circle.setAttribute("r", isJunction ? "12" : "7"); // v4.3.499: 站圆点放大 ≥70%（普通 4→7 / 换乘 7→12）
-    circle.setAttribute("fill", isJunction ? color : "#fff");
-    circle.setAttribute("stroke", isJunction ? "#fff" : color);
-    circle.setAttribute("stroke-width", isJunction ? "2.5" : "2");
-    circle.setAttribute("data-station-index", o.si);
-    staticLayer.appendChild(circle);
+    if (o.sharedColor && !isJunction) {
+      // v4.3.944: 共线区间站——双色半圆（上半当前线色、下半共线另一条线色）
+      var _r = 7, _cx = o.x, _cy = o.y;
+      var _halfUp = document.createElementNS(svgNS, "path");
+      _halfUp.setAttribute("d", "M" + (_cx - _r) + "," + _cy + " A" + _r + "," + _r + " 0 0 0 " + (_cx + _r) + "," + _cy + " Z");
+      _halfUp.setAttribute("fill", color);
+      _halfUp.setAttribute("data-station-index", o.si);
+      staticLayer.appendChild(_halfUp);
+      var _halfDown = document.createElementNS(svgNS, "path");
+      _halfDown.setAttribute("d", "M" + (_cx - _r) + "," + _cy + " A" + _r + "," + _r + " 0 0 1 " + (_cx + _r) + "," + _cy + " Z");
+      _halfDown.setAttribute("fill", o.sharedColor);
+      staticLayer.appendChild(_halfDown);
+    } else {
+      var circle = document.createElementNS(svgNS, "circle");
+      circle.setAttribute("cx", o.x);
+      circle.setAttribute("cy", o.y);
+      circle.setAttribute("r", isJunction ? "12" : "7");
+      circle.setAttribute("fill", isJunction ? color : "#fff");
+      circle.setAttribute("stroke", isJunction ? "#fff" : color);
+      circle.setAttribute("stroke-width", isJunction ? "2.5" : "2");
+      circle.setAttribute("data-station-index", o.si);
+      staticLayer.appendChild(circle);
+    }
 
     // Station label position (o.tx/o.ty/o.anchor overrides win; otherwise derive from side)
     var tx, ty, anchor;
@@ -551,11 +565,18 @@
         var stationId = sc.stationId;
         var isJunction = geometry.junctionStation && stationId === geometry.junctionStation;
         var _bJ7 = _isBranchJunction(stationId);
+        // v4.3.944: 共线区间站（副都心线↔有乐町线 池袋/要町/千川）画双色半圆
+        var _sharedColor = '';
+        if (lineId === 'Fukutoshin' && ['Ikebukuro', 'Kanamecho', 'Senkawa'].indexOf(stationId) >= 0) {
+          var _ylL = (window.RailwayDB && window.RailwayDB.getAllLines) ? window.RailwayDB.getAllLines()['Yurakucho'] : null;
+          _sharedColor = _ylL ? (_ylL.color || '') : '';
+        }
         _renderStationNode(staticLayer, svgNS, {
           x: sc.x, y: sc.y, stationId: stationId, isJunction: isJunction, color: color,
           si: si, side: sc.side || "right", geometry: geometry, isMobileView: isMobileView,
           svgW: svgW, svgH: svgH, transferMap: transferMap, stationCoords: stationCoords,
           rS: _rS,
+          sharedColor: _sharedColor,
           skipTx: false,
           tx: _bJ7 ? (geometry.rightBranch ? sc.x : (sc.x + 12)) : undefined, // v4.3.550: 有右支线时 junction 站名转圆点上方居中
           ty: _bJ7 ? (geometry.rightBranch ? (sc.y - 16) : sc.y) : undefined, // v4.3.549: 补漏 ty——junction 站名与圆点同行（此前漏传 ty，text y=undefined / 换乘 chip y=NaN）
