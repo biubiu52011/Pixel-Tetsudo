@@ -398,6 +398,13 @@
   var THROUGH_PREFIX_RULES = {
     "Hanzomon": [
       { prefix: "B", icon: "../images/列车/東武鉄道/50000系.png" }
+    ],
+    // v4.3.923: 千代田線直通小田急急行（小田急4000系）——
+    // Bプレフィックス = 小田急4000系（小田急車が千代田線北綾瀬まで乗り入れ）。
+    // Aプレフィックス = 千代田線16000系（自社車、既定アイコン）。
+    // ※浪漫特急（ロマンスカー）は小田急線内のみ走行、千代田線まで乗り入れない。
+    "Chiyoda": [
+      { prefix: "B", icon: "../images/列车/小田急電鉄/4000系.png" }
     ]
   };
 
@@ -454,15 +461,11 @@
         if (/^30[0-3]/.test(_nt)) return "../images/列车/JR東日本/E257系2000番台.png"; // 30[0-3]xxM = 踊り子（E257系2000番台）
         if (/^30[7-9]/.test(_nt)) return "../images/列车/JR東日本/E257系2500番台.png"; // 30[7-9]xxM = 湘南（E257系2500番台）
       }
-      // v4.3.923: 千代田線直通小田急ロマンスカー（メトロ相模/メトロホームウェイ）——
-      // 北綾瀬まで乗り入れる小田急60000形MSE。千代田線の普通列車は16000系だが、
-      // ロマンスカー（trainType=Romancecar）は小田急60000形MSEを表示。
-      if (lineId === "Chiyoda" && trainType) {
-        var _tt = String(trainType).toLowerCase();
-        if (_tt.indexOf("romancecar") >= 0 || _tt.indexOf("romance") >= 0) {
-          return "../images/列车/小田急電鉄/60000形.png";
-        }
-      }
+      // v4.3.923: 千代田線直通小田急急行（小田急4000系）——
+      // 千代田線と小田急小田原線の相互直通は急行（4000系）。
+      // 浪漫特急（ロマンスカー）は小田急線内のみ走行、千代田線まで乗り入れない。
+      // Bプレフィックス = 小田急4000系（小田急車）。
+      // ※車号プレフィックス規則は THROUGH_PREFIX_RULES を参照。
       // Chuo/Sobu local: E231系500番台 + E235系0番台 并用（2025 起 E235 由山手线转用）
       if (lineId === "ChuoLocal" || lineId === "ChuoSobuLocal") {
         var n = 0;
