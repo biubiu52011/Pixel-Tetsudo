@@ -993,6 +993,10 @@
   // （Kiyosumi-Shirakawa）——去连字符+小写匹配项目站表后按项目 ID 解析显示名
   function _resolveStationLoose(id) {
     if (!id) return '';
+    // v4.3.918: 去掉 ODPT 前缀（odpt.Station:TokyoMetro.YoyogiUehara → YoyogiUehara）
+    // 站表 key 不带 TokyoMetro./Toei./JR-East. 前缀，直接查会 miss
+    var cleanId = String(id).split(':').pop().split('.').pop();
+    if (cleanId && cleanId !== id) id = cleanId;
     // v4.3.902: ODPT 站别名映射（荒川线 Minowabashi→Sannomi_Bashi）
     var _odptAlias = {
       'Toei.Minowabashi': 'Sannomi_Bashi',
