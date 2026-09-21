@@ -1308,13 +1308,16 @@
     if (!isLoopDir || _isOedoBranchTrain(lineId, p)) {
       dirSym = moveDir === 'down' ? 'down' : (moveDir === 'up' ? 'up' : '');
     }
-    // 画方向三角（SVG path）
+    // v4.3.960: 方向箭头+终点站为一个整体，列车图标对标这个整体的中央（X 居中）
+    var _labelY = _trainLabelY('dir', py, moveDir);
+    var labelGroup = document.createElementNS(svgNS, "g");
+    labelGroup.setAttribute("data-train-label-for", String(trainUid));
+    labelGroup.setAttribute("data-label-pos", "dir");
+    // 三角在 g 坐标系 (0, labelY)
     if (dirSym) {
       var tri = document.createElementNS(svgNS, "path");
-      var triY = _trainLabelY('dir', py, moveDir) - 3;
-      // v4.3.959: 三角在方向标签文字左边，整体在列车中心偏右，不压站标签
-      var triX = px - 8;
-      // 实心圆角三角形（fill+stroke 同色，stroke-width 加宽 + linejoin round）
+      var triY = _labelY - 3;
+      var triX = 0;
       var _tay = triY + 1.5;
       tri.setAttribute("fill", "#666");
       tri.setAttribute("stroke", "#666");
@@ -1325,19 +1328,25 @@
         : 'M ' + (triX - 3.5) + ' ' + (_tay + 2.5) + ' L ' + triX + ' ' + (_tay - 2.5) + ' L ' + (triX + 3.5) + ' ' + (_tay + 2.5) + ' Z';
       tri.setAttribute("d", triD);
       tri.setAttribute("class", "train-label-tri");
-      trainLayer.appendChild(tri);
+      labelGroup.appendChild(tri);
     }
+    // 文字在 g 坐标系 (8, labelY)
     var ldir = document.createElementNS(svgNS, "text");
-    ldir.setAttribute("data-train-label-for", String(trainUid));
-    ldir.setAttribute("data-label-pos", "dir");
-    ldir.setAttribute("x", String(px + 2));
-    ldir.setAttribute("y", String(_trainLabelY('dir', py, moveDir)));
+    ldir.setAttribute("x", "8");
+    ldir.setAttribute("y", String(_labelY));
     ldir.setAttribute("text-anchor", "start");
     ldir.setAttribute("font-size", "8");
     ldir.setAttribute("fill", "#666");
     ldir.setAttribute("class", "train-label-dir");
     ldir.textContent = labelText;
-    trainLayer.appendChild(ldir);
+    labelGroup.appendChild(ldir);
+    // append 后用 getBBox 居中在 px
+    trainLayer.appendChild(labelGroup);
+    try {
+      var _bbox = labelGroup.getBBox();
+      var _offsetX = px - (_bbox.x + _bbox.width / 2);
+      labelGroup.setAttribute("transform", "translate(" + _offsetX + ",0)");
+    } catch(_e) {}
   }
   
   function updateRunningInfo(el, positions) {
