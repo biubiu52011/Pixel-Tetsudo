@@ -871,7 +871,7 @@ function applyData(data, i18n) {
           Object.keys(nm).forEach(function(jpKey) {
             var val = nm[jpKey];
             if (typeof val !== 'string') return;
-            var lk = val.toLowerCase();
+            var lk = val.toLowerCase().replace(/-/g, ''); // v4.3.939: ODPT id 无连字符(Tokyu.MotomachiChukagai)与站表带连字符(Motomachi-Chukagai)归一
             // Prefer the key without trailing 駅 when both exist
             if (!valToKey[lk] || (jpKey.slice(-1) !== '\u99c5' && valToKey[lk].slice(-1) === '\u99c5')) {
               valToKey[lk] = jpKey;
@@ -879,7 +879,7 @@ function applyData(data, i18n) {
           });
           _nameMapCache.valToKey = valToKey;
         }
-        var matchedKey = valToKey[id.toLowerCase()];
+        var matchedKey = valToKey[String(id).toLowerCase().replace(/-/g, '')]; // v4.3.939: 查询侧同样去连字符
         if (matchedKey) {
           // Save the original English value before normalizing the key.
           var _enVal = nm[matchedKey];
