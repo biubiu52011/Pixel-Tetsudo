@@ -48,7 +48,9 @@
     var h = parseInt(p[0], 10);
     var m = parseInt(p[1], 10);
     if (isNaN(h) || isNaN(m)) return null;
-    if (h >= 24) h -= 24;  // 跨午夜
+    // v5: 运营日以 04:00 为界——0:00-3:59 属前一日深夜，折为 24:xx-27:xx（1440+ 单调轴）。
+    // 24:xx 自然保留为 1440+；不再 h-=24（会把 24:05 错位到当天凌晨 5 分，深夜班次全部漏搜）。
+    if (h < 4) h += 24;
     return h * 60 + m;
   }
 
@@ -158,7 +160,9 @@
     if (lines.length === 0) return Promise.resolve({});
 
     var now = new Date();
-    var nowMin = now.getHours() * 60 + now.getMinutes();
+    var nowH = now.getHours();
+    // v5: 与 parseTime 同轴——当前时刻 0:00-3:59 属前一日深夜（+24），避免深夜使用时漏掉跨午夜班次
+    var nowMin = (nowH < 4 ? nowH + 24 : nowH) * 60 + now.getMinutes();
     var cals = todayCalendars();
 
     var promises = lines.map(function(lid) {

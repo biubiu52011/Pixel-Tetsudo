@@ -153,6 +153,9 @@
       // v4: 跨零点时间不再 h-24（24:05→5 会把深夜列车错位到当天凌晨，被误判已到终点/收车丢弃）。
       // 保留原值使 24:xx = 1440+（次日凌晨偏移），与当天 0-1439 时间轴单调连续：
       // 23:50 发车 24:05 到达 → 1445，任何当天时刻（≤1439）都不会越过它
+      // v5: 运营日以 04:00 为界——0:00-3:59 属前一日深夜，统一 +24（00:09→24:09→1449），
+      // 与 24:xx 记法同处 1440+ 单调轴；03:54→27:54 等深夜延伸同样正确处理
+      if (h < 4) h += 24;
       return h * 60 + m;
     } catch(e) { return null; }
   }
@@ -160,7 +163,9 @@
   function getCurrentMinutes() {
     try {
       var now = new Date();
-      return now.getHours() * 60 + now.getMinutes();
+      var h = now.getHours();
+      // v5: 与 parseTimeToMinutes 同轴——当前时刻 0:00-3:59 按前一日深夜 +24
+      return (h < 4 ? h + 24 : h) * 60 + now.getMinutes();
     } catch(e) { return 0; }
   }
 
