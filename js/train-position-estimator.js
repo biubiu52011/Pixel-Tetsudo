@@ -402,6 +402,13 @@
           // 显式 !== null（0 = 00:00 是合法时间，原 depTime || arrTime 把 0 当 falsy 误判）
           var effectiveArrival = (arrTime !== null && arrTime !== undefined) ? arrTime : depTime;
           var effectiveDeparture = (depTime !== null && depTime !== undefined) ? depTime : arrTime;
+          // v4.3.920: 第一站还没发车，不显示——把时刻表上即将发车的车（15:10 发车，
+          // 当前 15:03）误算成在始发站待发车，导致 12 列车堆北绫濑。
+          // 只有已经从始发站发车的车才显示。
+          if (s === 0 && effectiveDeparture !== null && adjustedCurrentMin < effectiveDeparture) {
+            foundInService = false;
+            break;
+          }
           if (effectiveArrival !== null && adjustedCurrentMin >= effectiveArrival) {
             currentStationIndex = idx;
             foundInService = true;
