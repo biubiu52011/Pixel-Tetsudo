@@ -15,7 +15,7 @@
     bg.setAttribute("stroke", lc);
     bg.setAttribute("stroke-width", "1");
     layer.appendChild(bg);
-    // v4.3.945: 按方向画上下圆角三角（up=∧ / down=∨ / middle=→），box 左边不压文字
+    // v4.3.946: 直通标签箭头与列车方向标签统一（半宽3.5/半高2.5，up尖上/down尖下/middle右箭头）
     var dir = lineObj.dir || "middle";
     var arr = document.createElementNS(ns, "path");
     arr.setAttribute("fill", lc);
@@ -26,11 +26,11 @@
     var _ay = y + (mobile ? 8 : 6);
     var _d;
     if (dir === "up") {
-      // 向上三角（顶点在上）
-      _d = "M" + _ax + "," + (_ay - 3) + " L" + (_ax + 2.5) + "," + (_ay + 2) + " L" + (_ax - 2.5) + "," + (_ay + 2) + " Z";
+      // up=▲ 尖朝上（与列车方向标签一致：顶点在上）
+      _d = "M" + (_ax - 3.5) + " " + (_ay + 2.5) + " L " + _ax + " " + (_ay - 2.5) + " L " + (_ax + 3.5) + " " + (_ay + 2.5) + " Z";
     } else if (dir === "down") {
-      // 向下三角（顶点在下）
-      _d = "M" + (_ax - 2.5) + "," + (_ay - 2) + " L" + (_ax + 2.5) + "," + (_ay - 2) + " L" + _ax + "," + (_ay + 3) + " Z";
+      // down=▼ 尖朝下（与列车方向标签一致：顶点在下）
+      _d = "M" + (_ax - 3.5) + " " + (_ay - 2.5) + " L " + _ax + " " + (_ay + 2.5) + " L " + (_ax + 3.5) + " " + (_ay - 2.5) + " Z";
     } else {
       // middle：右三角
       _d = "M" + (_ax - 3) + "," + (_ay - 2) + " L" + (_ax + 3) + "," + _ay + " L" + (_ax - 3) + "," + (_ay + 2) + " Z";
