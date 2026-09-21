@@ -566,6 +566,8 @@
         });
       }
       
+      // v4.3.938: 竖列支线名标签移至 HTML 层图注（不撑宽 viewBox，保持全线路密度统一）
+      var _branchNoteItems = [];
       // Add branch lines (if any) - supports both loop and linear lines
       for (var bi = 0; bi < geometry.branchLines.length; bi++) {
         var branch = geometry.branchLines[bi];
@@ -726,19 +728,11 @@
             }
           }
           
-          // Branch name
-          var branchName = document.createElementNS(svgNS, "text");
-          branchName.setAttribute("x", (_bSideNow === "left") ? (bx - 6) : (bx + 6));
-          branchName.setAttribute("y", branchTop - 6);
-          // v4.3.448: 支線名も主線の文字階層に合わせ 13→14px（独立簡略値のまま残さない）
-          branchName.setAttribute("font-size", "14");
-          branchName.setAttribute("fill", bColor);
-          branchName.setAttribute("font-family", "Fusion Pixel, 'Courier New', monospace"); // v4.3.498: 支线名用像素字体（与全局一致）
-          branchName.setAttribute("font-weight", "600");
-          branchName.setAttribute("text-anchor", (_bSideNow === "left") ? "end" : "start"); // v4.3.515: 左侧支线名朝左
+          // v4.3.938: 竖列支线名不画进 SVG——长名（如「千代田線（北綾瀬支線）」）撑宽 viewBox
+          // 导致全图缩小、字比主流线小 37%。改收集到 HTML 层图注（.tp-map-wrap 顶部），
+          // 正常字号自动换行不裁切，viewBox 宽度与主流线统一为 297。
           var branchDisplayName = (window.RailwayDB && typeof window.RailwayDB.resolveLineName === "function") ? window.RailwayDB.resolveLineName(branch.id, window.currentLang) : (branch.nameJa || branch.name);
-          branchName.textContent = branchDisplayName;
-          staticLayer.appendChild(branchName);
+          _branchNoteItems.push({ name: branchDisplayName, color: bColor });
           } // v4.3.522: else（竖列现状）闭合
         }
       }
@@ -755,7 +749,21 @@
       // 一緒に初期化し、容器内はリアルタイムと同じ見た目に。データ出所の注記は容器外
       // （tp-est-note、下・中央）に置く。
       el.innerHTML = '<div class="tp-map-wrap"></div>';
-      el.querySelector('.tp-map-wrap').appendChild(svg);
+      var _mapWrap = el.querySelector('.tp-map-wrap');
+      // v4.3.938: 竖列支线名 HTML 图注（SVG 上方，线色着色，多条以 · 分隔）
+      if (_branchNoteItems.length) {
+        var _bnEl = document.createElement('div');
+        _bnEl.setAttribute('class', 'branch-note');
+        for (var _nbI = 0; _nbI < _branchNoteItems.length; _nbI++) {
+          var _spEl = document.createElement('span');
+          _spEl.style.color = _branchNoteItems[_nbI].color;
+          _spEl.textContent = _branchNoteItems[_nbI].name;
+          _bnEl.appendChild(_spEl);
+          if (_nbI < _branchNoteItems.length - 1) _bnEl.appendChild(document.createTextNode(' · '));
+        }
+        _mapWrap.appendChild(_bnEl);
+      }
+      _mapWrap.appendChild(svg);
 
       // v4.3.539: 线路图放大 150% 后初始视图居中裁切——视口中心对准图中心，
       // 左右两侧对称溢出，用户可向两端滚动查看（scrollLeft 全程可达，无 flex 溢出不可达问题）。

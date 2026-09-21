@@ -524,19 +524,9 @@
       } else {
         // 单支线/无支线：主线中心固定（现状）
         mainCx = _baseW / 2;
-        // v4.3.937: 右侧竖列支线名标签（trains-render.js branchName：text-anchor=start，从 bx+6 向右排，
-        // font-size 14）原未计入 svgW——「千代田線（北綾瀬支線）」整标签宽 ~215px 超出 viewBox 右缘被硬裁。
-        // 追加标签文字宽（CJK 1.1 / 其他 0.55 × 14，与 render clamp 同公式 802 行）。
-        var _singleBranchNameW = 0;
-        if (branchLines.length === 1) {
-          var _sbn = (window.RailwayDB && window.RailwayDB.resolveLineName)
-            ? (window.RailwayDB.resolveLineName(branchLines[0].id, window.currentLang) || "")
-            : (branchLines[0].nameJa || branchLines[0].name || "");
-          var _sbCjk = (_sbn.match(/[\u4e00-\u9fff\u3040-\u30ff]/g) || []).length;
-          var _sbOth = _sbn.length - _sbCjk;
-          _singleBranchNameW = (_sbCjk * 1.1 + _sbOth * 0.55) * 14;
-        }
-        svgW = Math.max(_baseW, mainCx + _branchStubR + branchOffset + _singleBranchNameW + _rightPad);
+        // v4.3.938: 不再把竖列支线名标签宽计入 svgW——标签已移至 HTML 层图注（trains-render.js
+        // .branch-note），viewBox 宽度与主流线一致（297），保持全线路字大小密度统一。
+        svgW = Math.max(_baseW, mainCx + _branchStubR + branchOffset + _rightPad);
       }
       
       // v4.3.854: 逐段定距（_yAt）替代旧「均匀 sp + _extraY 补偿」——旧补偿 min(换乘数,8) 与渲染 min(16) 不一致，已废

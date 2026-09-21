@@ -28,6 +28,8 @@
    （字 50-68px 巨大）；max-width 520px 使桌面倍率 ~1.75x，与移动端 1.51x 字号接近，
    两种尺寸均可读。移动端容器 449px < 520px 时仍是 100% 不变。 */
 .tp-map-wrap svg { height: auto; display: block; max-width: 520px; margin-left: auto; margin-right: auto; }
+/* v4.3.938: 竖列支线名 HTML 图注（SVG 上方，线色着色，正常字号自动换行不裁切——viewBox 不撑宽） */
+.branch-note { text-align: center; font-size: 14px; font-weight: 600; font-family: "Fusion Pixel", "Courier New", monospace; padding: 2px 8px 6px; line-height: 1.3; }
 .tp-no-data { text-align: center; color: var(--text-muted); font-size: 13px; padding: 16px; }
 
 /* 容器外・下方中央の推定データ注記（v4.3.469） */

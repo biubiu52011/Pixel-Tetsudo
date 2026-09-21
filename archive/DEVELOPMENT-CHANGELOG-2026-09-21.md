@@ -51,3 +51,19 @@
 - 10/10 PASS；node --check 通过；pages/trains.html trains-geometry.js?v=4.3.905 bump 至 ?v=4.3.937。
 
 **遗留**：实际渲染效果（整字「千代田線（北綾瀬支線）」完整显示）由用户人工确认（项目打磨期规则）。多支线分支的竖列线名标签若遇同类问题另行处理（本次未动，超范围）。
+## 4.3.938（2026-09-22，全线路图大小统一：竖列支线名移出 SVG，viewBox 宽度归一）
+
+**用户诉求**：4.3.937 把千代田线 viewBox 从 318.5 拉宽到 472.5（塞下长支线名）后，width=100% 等比缩放导致千代田整图比主流线小 37%——用户要求"所有线路图大小统一"。
+
+**量化现状**（survey_viewbox.js，166 线）：主流线 svgW=297（157/166），单支线线（千代田/丸之内/Nambu）被支线名标签撑到 457~472.5，Narita/Tsurumi 横排多支线 868~1747。width=100% + preserveAspectRatio meet 下，viewBox 越宽缩放越小——支线线字比主流线小 37%。高度（svgH 134~3734）随行数变化是物理必然，无法统一也不需统一。
+
+**方案 A 实施**（支线名移出 SVG，不撑宽 viewBox）：
+1. **trains-geometry.js**：撤回 4.3.937 的 _singleBranchNameW（不再把标签宽计入 svgW），单支线 svgW 回到 mainCx+stubR+branchOffset+pad 基准公式。
+2. **trains-render.js**：竖列分支的 branchName SVG text 元素删除（L729-741），改为收集 {name,color} 到 _branchNoteItems；L757 .tp-map-wrap 内 SVG 上方插入 .branch-note HTML 图注（线色着色，多条以 · 分隔）。横排 bHName（Narita/Tsurumi）不动——其宽度由横排支线列物理需要，非标签撑宽。
+3. **trains.css**：新增 .branch-note（14px 像素字体、居中、线色）。
+
+**验证**（survey_viewbox.js 复跑）：Chiyoda/Marunouchi 472.5→318.5、Nambu 457.1→318.5（-154/-138.6）；svgW 唯一值 8→6；与主流线 297 仅差 21.5px（7%，支线列物理宽度非标签）。node --check 通过；竖列 branchName grep 零残留。版本戳 trains.html 三处 bump 至 4.3.938。
+
+**效果**：所有竖列支线线（千代田/丸之内/Nambu）字大小回到主流线水平，切换线路密度不跳；「千代田線（北綾瀬支線）」完整显示在图上方 HTML 层，自动换行不裁切。
+
+**遗留**：Narita（1747）/Tsurumi（868）横排多支线线仍宽（横排布局物理需要），本次未动；Oedo 六形环 384/820 同理。若用户仍要求这些线也统一密度，需另行评估横排支线改竖向折叠方案。实际渲染由用户人工确认（项目打磨期规则）。
