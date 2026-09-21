@@ -406,7 +406,7 @@
     ]
   };
 
-  function _resolveTrainIcon(lineId, operator, trainId, stationIndex, trainType) {
+  function _resolveTrainIcon(lineId, operator, trainId, stationIndex, trainType, byOperator) {
     try {
       // v4.3.925: 千代田線直通小田急ロマンスカー（特急）——THROUGH_PREFIX_RULES より優先。
       // B プレフィックスは急行（小田急4000系）だが、特急（ロマンスカー）は 60000形MSE。
@@ -552,8 +552,9 @@
           return "../images/列车/東京臨海高速鉄道/70-000形.png";
         }
       }
-      // Check specific line icon first
-      if (LINE_ICONS[lineId]) return LINE_ICONS[lineId];
+      // v4.3.939: 直通车(byOperator)不按当前线兜底，用车籍 operator 默认——治跨线"变身"
+      // （同一趟车进不同线路视图用同一张图，不随当前显示线变）
+      if (!byOperator && LINE_ICONS[lineId]) return LINE_ICONS[lineId];
 
       // Fallback to operator default
       var opKey = operator;
@@ -569,24 +570,54 @@
     }
   }
 
-  function getTrainIcon(lineId, operator, trainId, stationIndex, trainType) {
-    return _resolveTrainIcon(lineId, operator, trainId, stationIndex, trainType);
+  function getTrainIcon(lineId, operator, trainId, stationIndex, trainType, byOperator) {
+    return _resolveTrainIcon(lineId, operator, trainId, stationIndex, trainType, byOperator);
   }
 
   // 车型判断（数据层）——复用与 getTrainIcon 完全相同的选择逻辑，返回型号名（图标文件名去扩展名）
   // Provider: TrainIcons.getTrainClass  Consumer: TrainPositionEstimator / DataFusion（position.trainClass）
-  function getTrainClass(lineId, operator, trainId, stationIndex, trainType) {
+  function getTrainClass(lineId, operator, trainId, stationIndex, trainType, byOperator) {
     try {
-      var icon = _resolveTrainIcon(lineId, operator, trainId, stationIndex, trainType);
+      var icon = _resolveTrainIcon(lineId, operator, trainId, stationIndex, trainType, byOperator);
       var name = String(icon || '').split('/').pop();
       name = name.replace(/\.png$/i, '');
       return name || '';
     } catch(e) { return ''; }
   }
 
+  // v4.3.940: 车型名 → 图标路径 反查表（从现有所有图标路径自动反推，零维护）
+  var VEHICLE_NAME_TO_ICON = {};
+  (function buildVehicleNameIndex() {
+    var seen = {};
+    function add(path) {
+      if (!path || seen[path]) return;
+      seen[path] = true;
+      var name = String(path).split('/').pop().replace(/\.png$/i, '');
+      if (name && !VEHICLE_NAME_TO_ICON[name]) VEHICLE_NAME_TO_ICON[name] = path;
+    }
+    Object.keys(LINE_ICONS).forEach(function(k){ add(LINE_ICONS[k]); });
+    Object.keys(OPERATOR_ICONS).forEach(function(k){ add(OPERATOR_ICONS[k]); });
+    Object.keys(VEHICLE_DEPLOYMENTS).forEach(function(vk){
+      VEHICLE_DEPLOYMENTS[vk].routes.forEach(function(r){ if (r.icon) add(r.icon); });
+    });
+  })();
+
+  // v4.3.940: 给车型候选字符串（"A / B / C"），返回第一个有图标的完整路径；都没图返回 null
+  function resolveVehicleIcon(candidatesStr) {
+    if (!candidatesStr) return null;
+    var parts = String(candidatesStr).split('/');
+    for (var i = 0; i < parts.length; i++) {
+      var name = parts[i].trim();
+      if (name && VEHICLE_NAME_TO_ICON[name]) return VEHICLE_NAME_TO_ICON[name];
+    }
+    return null;
+  }
+
   window.TrainIcons = {
     getTrainIcon: getTrainIcon,
     getTrainClass: getTrainClass,
+    resolveVehicleIcon: resolveVehicleIcon,
+    VEHICLE_NAME_TO_ICON: VEHICLE_NAME_TO_ICON,
     LINE_ICONS: LINE_ICONS,
     OPERATOR_ICONS: OPERATOR_ICONS
   };

@@ -15,28 +15,34 @@
     bg.setAttribute("stroke", lc);
     bg.setAttribute("stroke-width", "1");
     layer.appendChild(bg);
-    // Direction arrow：SVG path 三角（▲▼▶），线色
+    // v4.3.937: 箭头改圆头圆角描边折线（5.4.1.13：stroke-linecap/linejoin round，线宽桌面1.8/移动2，
+    // 不闭合、非字体字形）。原 fill 实心尖锐三角不规范、视觉生硬。形状：up=∧ / down=∨ / middle=→。
     var dir = lineObj.dir || "middle";
     var arr = document.createElementNS(ns, "path");
+    arr.setAttribute("fill", "none");
+    arr.setAttribute("stroke", lc);
+    arr.setAttribute("stroke-width", mobile ? "2" : "1.8");
+    arr.setAttribute("stroke-linecap", "round");
+    arr.setAttribute("stroke-linejoin", "round");
     var _ax, _ay, _d;
     if (dir === "middle") {
-      // 中间方向：箭头在 box 左
+      // 中间方向：→（圆头右箭头），箭头在 box 左
       _ax = x + 6;
       _ay = y + (mobile ? 8 : 6);
-      _d = "M" + (_ax - 3) + "," + (_ay - 3) + " L" + (_ax + 3) + "," + _ay + " L" + (_ax - 3) + "," + (_ay + 3) + " Z";
+      // 与 up/down 旋转对称的开放 >（同构 6x4 三角），非横杆+翼
+      _d = "M" + (_ax - 3) + "," + (_ay - 2) + " L" + (_ax + 3) + "," + _ay + " L" + (_ax - 3) + "," + (_ay + 2);
     } else {
-      // 上下方向：箭头水平居中
+      // 上下方向：箭头水平居中（∧ 尖朝上 / ∨ 尖朝下，开放折线）
       var _cw = sz.w - 2;
       _ax = x + _cw / 2;
       _ay = y + (mobile ? 7 : 5);
       if (dir === "up") {
-        _d = "M" + (_ax - 3) + "," + (_ay + 3) + " L" + _ax + "," + (_ay - 3) + " L" + (_ax + 3) + "," + (_ay + 3) + " Z";
+        _d = "M" + (_ax - 3) + "," + (_ay + 2) + " L" + _ax + "," + (_ay - 2) + " L" + (_ax + 3) + "," + (_ay + 2);
       } else {
-        _d = "M" + (_ax - 3) + "," + (_ay - 3) + " L" + _ax + "," + (_ay + 3) + " L" + (_ax + 3) + "," + (_ay - 3) + " Z";
+        _d = "M" + (_ax - 3) + "," + (_ay - 2) + " L" + _ax + "," + (_ay + 2) + " L" + (_ax + 3) + "," + (_ay - 2);
       }
     }
     arr.setAttribute("d", _d);
-    arr.setAttribute("fill", lc);
     layer.appendChild(arr);
     var txt = document.createElementNS(ns, "text");
     if (dir === "middle") {
@@ -932,7 +938,22 @@
         }
       } else {
         // Create new train icon
-        var iconSrc = (window.TrainIcons && typeof window.TrainIcons.getTrainIcon === "function") ? window.TrainIcons.getTrainIcon(p.fusionLineId || lineId, line.operator, trainUid, p.stationIndex, p.trainType) : "";
+        // v4.3.940: 优先用时刻表交叉验证出的车型候选（车号→车型，来自 ODPT TrainTimetable + VehicleTypeMap）
+        // v4.3.939: 车号级缓存 + 直通车按车籍 operator——同一趟车(同 trainId)进不同线路视图用同一张图
+        if (!window.__trainIconCache) window.__trainIconCache = {};
+        var _icKey = String(p.trainId || trainUid);
+        var iconSrc = window.__trainIconCache[_icKey];
+        if (!iconSrc && window.TRAIN_NO_VEHICLE && window.TRAIN_NO_VEHICLE[p.trainId] &&
+            window.TrainIcons && typeof window.TrainIcons.resolveVehicleIcon === "function") {
+          iconSrc = window.TrainIcons.resolveVehicleIcon(window.TRAIN_NO_VEHICLE[p.trainId].join(' / ')) || '';
+          if (iconSrc) window.__trainIconCache[_icKey] = iconSrc;
+        }
+        if (!iconSrc) {
+          var _carOp = p.trainOperator || line.operator;
+          var _byOp = !!p.trainOperator && _carOp !== line.operator;
+          iconSrc = (window.TrainIcons && typeof window.TrainIcons.getTrainIcon === "function") ? window.TrainIcons.getTrainIcon(p.fusionLineId || lineId, _carOp, trainUid, p.stationIndex, p.trainType, _byOp) : "";
+          if (iconSrc) window.__trainIconCache[_icKey] = iconSrc;
+        }
         var isEst = p.estimated === true;
         var iconCls = isEst ? "train-icon estimated" : "train-icon";
         
@@ -1118,6 +1139,20 @@
     // v4.3.935: 千代田线北绫濑支线——KitaAyase 不在主线站表里，单独判定：往北绫濑=屏幕下方=▼
     if (lineId === 'Chiyoda' && /^KitaAyase$/i.test(dn)) return 'down';
     if (/^(InnerLoop|Inner|OuterLoop|Outer)$/.test(dn)) return null;
+    // v4.3.938: 统一性——不论方位词是抽象词(Inbound/Northbound…)还是站名，优先用「终点站在本线站表中的
+    // index」自动推方向：终点在当前站之后(站表 index 更大)=往站表后方开=down，否则 up。新线自动正确，
+    // 不再依赖手工 DIR_AXIS_MAP 收录。终点不在本线站表(直通他线终点/无终点)时不命中，回落下方原判定。
+    var _dnDest = String(p.destinationStation || '').split('.').pop();
+    if (_dnDest) {
+      var _curD = p.stationIndex || 0;
+      var _stsD = (window.UNIFIED_LINES && window.UNIFIED_LINES[lineId]) ? (window.UNIFIED_LINES[lineId].stations || []) : [];
+      var _destN = _dnDest.replace(/-/g, '').toLowerCase();
+      for (var _ddi = 0; _ddi < _stsD.length; _ddi++) {
+        if (String(_stsD[_ddi]).replace(/-/g, '').toLowerCase() === _destN) {
+          return _ddi > _curD ? 'down' : (_ddi < _curD ? 'up' : null);
+        }
+      }
+    }
     if (/^Inbound$/.test(dn)) return 'up';
     if (/^Outbound$/.test(dn)) return 'down';
     // v4.3.473: 方位词用线路映射表判定（未建表线路返回 null → ▶ 兜底）
@@ -1188,11 +1223,18 @@
       var tri = document.createElementNS(svgNS, "path");
       var triY = _trainLabelY('dir', py, moveDir) - 3;
       var triX = px - 12;
+      // v4.3.937: 列车方向箭头同款圆头圆角描边折线（stroke round，开放三角），替代 fill 实心尖角。
+      // down=▼ 尖朝下(apex 在下方)、up=▲ 尖朝上(apex 在上方)。
+      var _tay = triY + 1.5;
+      tri.setAttribute("fill", "none");
+      tri.setAttribute("stroke", "#666");
+      tri.setAttribute("stroke-width", _isMobileView() ? "1.8" : "1.5");
+      tri.setAttribute("stroke-linecap", "round");
+      tri.setAttribute("stroke-linejoin", "round");
       var triD = dirSym === 'down'
-        ? 'M ' + triX + ' ' + triY + ' L ' + (triX + 4) + ' ' + (triY + 3) + ' L ' + (triX - 4) + ' ' + (triY + 3) + ' Z'
-        : 'M ' + triX + ' ' + (triY + 3) + ' L ' + (triX + 4) + ' ' + triY + ' L ' + (triX - 4) + ' ' + triY + ' Z';
+        ? 'M ' + (triX - 3.5) + ' ' + (_tay - 2.5) + ' L ' + triX + ' ' + (_tay + 2.5) + ' L ' + (triX + 3.5) + ' ' + (_tay - 2.5)
+        : 'M ' + (triX - 3.5) + ' ' + (_tay + 2.5) + ' L ' + triX + ' ' + (_tay - 2.5) + ' L ' + (triX + 3.5) + ' ' + (_tay + 2.5);
       tri.setAttribute("d", triD);
-      tri.setAttribute("fill", "#666");
       tri.setAttribute("class", "train-label-tri");
       trainLayer.appendChild(tri);
     }

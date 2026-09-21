@@ -475,12 +475,24 @@
               );
             }
           } catch(e) {}
+          var _vehicleType = tt['vehicleType'] ||
+            (window.VehicleTypeMap ? window.VehicleTypeMap.resolve(lineId, tt['odpt:trainType'], tt['odpt:destinationStation']) : '');
+          // v4.3.940: 车号→车型候选 全局表（实时车渲染查表用；同一车号跨线累积去重）
+          if (_vehicleType && trainNumber) {
+            if (!window.TRAIN_NO_VEHICLE) window.TRAIN_NO_VEHICLE = {};
+            var _exist = window.TRAIN_NO_VEHICLE[trainNumber] || [];
+            String(_vehicleType).split('/').forEach(function(s) {
+              var c = s.trim();
+              if (c && _exist.indexOf(c) < 0) _exist.push(c);
+            });
+            window.TRAIN_NO_VEHICLE[trainNumber] = _exist;
+          }
           positions.push({
             stationIndex: currentStationIndex,
             trainId: lineId + '_' + trainNumber,
             delayMin: delayMin,
             estimated: true,
-            extrapolated: extrapolated, // v6: 位置位于外推段（数据最远端之后）
+            extrapolated: extrapolated,
             trainType: tt['odpt:trainType'] || '',
             typeName: trainClassification.typeName,
             isLimitedExpress: trainClassification.isLimitedExpress,
@@ -488,8 +500,7 @@
             railDirection: directionName,
             destinationStation: destinationStation,
             trainClass: trainClass,
-            vehicleType: tt['vehicleType'] ||
-              (window.VehicleTypeMap ? window.VehicleTypeMap.resolve(lineId, tt['odpt:trainType'], tt['odpt:destinationStation']) : '')
+            vehicleType: _vehicleType
           });
         }
       }

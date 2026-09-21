@@ -512,6 +512,8 @@
             // v4.3.6xx: 双向直通列车处理
             // 1. 临海线的车（operator=TWR）开到JR区间了 → 在JR线路图上显示临海线车型
             var trainOperator = t["odpt:operator"] || "";
+            // v4.3.939: 存车自己的 operator（渲染层判断直通车、按车籍选图标，治跨线"变身"）
+            positionData.trainOperator = trainOperator.replace('odpt.Operator:', '') || '';
             var isRinkaiTrain = (trainOperator === 'odpt.Operator:TWR' || trainOperator === 'TWR');
             if (isRinkaiTrain && (lid === 'Saikyo' || lid === 'Kawagoe')) {
               // 这是临海线的车，现在开到埼京线/川越线区间了
