@@ -410,6 +410,14 @@
 
   function _resolveTrainIcon(lineId, operator, trainId, stationIndex, trainType) {
     try {
+      // v4.3.925: 千代田線直通小田急ロマンスカー（特急）——THROUGH_PREFIX_RULES より優先。
+      // B プレフィックスは急行（小田急4000系）だが、特急（ロマンスカー）は 60000形MSE。
+      if (lineId === "Chiyoda" && trainType) {
+        var _tt = String(trainType).toLowerCase();
+        if (_tt.indexOf("limitedexpress") >= 0) {
+          return "../images/列车/小田急電鉄/60000形.png";
+        }
+      }
       // 直通列車：車号プレフィックスで車籍系統を判定（例：半蔵門線 B 号 = 東武50000系）
       // trainId は「車号_駅idx」または「lineId_車号_駅idx」の2形式——車号は後ろから2番目のトークン
       var _tp = String(trainId || "").split("_");
@@ -460,16 +468,6 @@
         var _nt = String(_tn || '').replace(/[^0-9]/g, '');
         if (/^30[0-3]/.test(_nt)) return "../images/列车/JR東日本/E257系2000番台.png"; // 30[0-3]xxM = 踊り子（E257系2000番台）
         if (/^30[7-9]/.test(_nt)) return "../images/列车/JR東日本/E257系2500番台.png"; // 30[7-9]xxM = 湘南（E257系2500番台）
-      }
-      // v4.3.923: 千代田線直通小田急急行（小田急4000系）——
-      // v4.3.923: 千代田線と小田急小田原線の相互直通は特急（ロマンスカー）のみ。
-      // 普通車・急行の直通なし。ODPT trainType = odpt.TrainType:TokyoMetro.LimitedExpress。
-      // 小田急60000形MSE（メトロ相模/メトロホームウェイ）が北綾瀬まで乗り入れる。
-      if (lineId === "Chiyoda" && trainType) {
-        var _tt = String(trainType).toLowerCase();
-        if (_tt.indexOf("limitedexpress") >= 0) {
-          return "../images/列车/小田急電鉄/60000形.png";
-        }
       }
       // Chuo/Sobu local: E231系500番台 + E235系0番台 并用（2025 起 E235 由山手线转用）
       if (lineId === "ChuoLocal" || lineId === "ChuoSobuLocal") {
