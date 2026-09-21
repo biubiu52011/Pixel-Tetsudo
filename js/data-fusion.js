@@ -315,28 +315,47 @@
         relatedLines: _chainCtx.relatedLines || [],
         throughServiceGroup: _chainCtx.throughServiceGroup || null
       } : null;
-      // v4.3.957: 共线区间共用数据——副都心线视图里，共线区间（和光市→小竹向原，站索引0-5）的列车从有乐町线数据里拉
+      // v4.3.957: 共线区间共用数据 + v4.3.958: 直通线路列车合并
       var _rtPositions = odptData.realtimePositions[lineId] || [];
       if (lineId === 'Fukutoshin') {
-        var _ylPositions = odptData.realtimePositions['Yurakucho'] || [];
-        var _sharedStations = ['Wakoshi', 'Chikatetsu-Narimasu', 'Chikatetsu-Akatsuka', 'Heiwadai', 'Hikawadai', 'Kotake-mukaihara'];
         var _ownStations = line.stations || [];
-        // 把有乐町线共线区间的列车合并进来（去重：同 trainId 只保留一条）
         var _existingIds = {};
         _rtPositions.forEach(function(p) { _existingIds[p.trainId] = true; });
+        
+        // 共线区间：有乐町线
+        var _sharedStations = ['Wakoshi', 'Chikatetsu-Narimasu', 'Chikatetsu-Akatsuka', 'Heiwadai', 'Hikawadai', 'Kotake-mukaihara'];
+        var _ylPositions = odptData.realtimePositions['Yurakucho'] || [];
         _ylPositions.forEach(function(p) {
-          if (_existingIds[p.trainId]) return; // 已有，跳过
-          // 只保留共线区间的列车（站在共线站列表里）
+          if (_existingIds[p.trainId]) return;
           var _stName = (p.stationId || '').split('.').pop();
           if (_sharedStations.indexOf(_stName) < 0) return;
-          // 映射站索引：有乐町线站索引 → 副都心线站索引
           var _ylIdx = _ownStations.indexOf(_stName);
           if (_ylIdx >= 0) {
             p.stationIndex = _ylIdx;
             p.fusionLineId = 'Yurakucho';
             _rtPositions.push(p);
+            _existingIds[p.trainId] = true;
           }
         });
+        
+        // 直通线路：东武东上线（和光市直通）、西武有乐町线（小竹向原直通）、东急东横线（涉谷直通）
+        var _throughLines = ['TobuTojo', 'SeibuYurakucho', 'TokyuToyoko'];
+        for (var _tl = 0; _tl < _throughLines.length; _tl++) {
+          var _tlLine = _throughLines[_tl];
+          var _tlPositions = odptData.realtimePositions[_tlLine] || [];
+          _tlPositions.forEach(function(p) {
+            if (_existingIds[p.trainId]) return;
+            // 用站名映射：直通线站名 → 副都心线站索引
+            var _stName = (p.stationId || '').split('.').pop();
+            var _tlIdx = _ownStations.indexOf(_stName);
+            if (_tlIdx >= 0) {
+              p.stationIndex = _tlIdx;
+              p.fusionLineId = _tlLine;
+              _rtPositions.push(p);
+              _existingIds[p.trainId] = true;
+            }
+          });
+        }
       }
       return { id: lineId, name: line.name, nameEn: line.nameEn || line.name, code: line.code, color: (window.LineOperationSystemsResolveColor && window.LineOperationSystemsResolveColor(lineId)) || line.color, operator: line.operator, region: line.region, type: line.type, image: line.image, stations: line.stations || [], durations: line.durations || [], intervalTotal: line.durationTotalMin || 0, realtimePositions: _rtPositions, delayInfo: delayInfo, branchOf: line.branchOf || null, isSixShapedLoop: line.isSixShapedLoop === true, isDoubleColumnLoop: line.isDoubleColumnLoop === true, loopJunction: line.loopJunction || null, _chainMeta: _chainMeta };
     } catch(e) { console.debug("[DataFusion] fuseLine error for " + lineId + ":", e.message); return null; }
