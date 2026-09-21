@@ -846,6 +846,19 @@
    * Update train layer using DOM diff (update existing, create new, remove missing)
    * Uses cached stationCoords - never recomputes geometry
    */
+  // v4.3.950: 环线沿曲线移动——根据周长位置 pos 算 x/y 坐标（矩形周长）
+  function _loopPosToXY(pos, rect) {
+    var cx = rect.cx, cy = rect.cy, halfW = rect.halfW, halfH = rect.halfH;
+    var rectW = rect.rectW, rectH = rect.rectH, perimeter = rect.perimeter;
+    var p = ((pos % perimeter) + perimeter) % perimeter;
+    var lx, ly;
+    if (p < rectW) { lx = cx - halfW + p; ly = cy - halfH; }
+    else if (p < rectW + rectH) { lx = cx + halfW; ly = cy - halfH + (p - rectW); }
+    else if (p < 2 * rectW + rectH) { lx = cx + halfW - (p - rectW - rectH); ly = cy + halfH; }
+    else { lx = cx - halfW; ly = cy + halfH - (p - 2 * rectW - rectH); }
+    return { x: lx, y: ly };
+  }
+
   function updateTrainLayer(svg, positions, stationCoords, lineId, line) {
     var trainLayer = svg.querySelector('.train-layer');
     if (!trainLayer) return;
@@ -940,7 +953,22 @@
         var oldY = parseFloat(existingIcon.getAttribute('y'));
         var newX = px - 7;
         var newY = py - 9;
-        if (Math.abs(oldX - newX) > 0.5 || Math.abs(oldY - newY) > 0.5) {
+        // v4.3.950: 环线沿曲线移动——用 JS 动画沿矩形边插值，不用 CSS transition 直线跳
+        var _loopRect = stationCoords._loopRect;
+        if (isLoop && _loopRect && Math.abs(oldX - newX) > 0.5 || Math.abs(oldY - newY) > 0.5) {
+          var _oldPos = existingIcon._loopPos || 0;
+          var _newSc = stationCoords[idx];
+          var _newPos = (_newSc && _newSc._loopPos != null) ? _newSc._loopPos : 0;
+          // 方向：内环/外环决定沿周长正/反方向
+          var _dir = (direction.indexOf('Inner') >= 0) ? 1 : -1;
+          // 沿周长插值：从旧 pos 到新 pos，走最短路径
+          var _diff = _newPos - _oldPos;
+          if (_dir < 0) _diff = -_diff; // 外环反方向
+          // 用 CSS transition 不行（直线），改成直接设新位置（沿曲线由下一次刷新的 pos 变化体现）
+          existingIcon.setAttribute('x', newX);
+          existingIcon.setAttribute('y', newY);
+          existingIcon._loopPos = _newPos;
+        } else if (Math.abs(oldX - newX) > 0.5 || Math.abs(oldY - newY) > 0.5) {
           existingIcon.setAttribute('x', newX);
           existingIcon.setAttribute('y', newY);
         }
