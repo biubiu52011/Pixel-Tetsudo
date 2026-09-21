@@ -81,18 +81,18 @@
       _bg.setAttribute("stroke", "none");
       _bg.setAttribute("data-station-index", o.si);
       staticLayer.appendChild(_bg);
-      // 左半弧（棕色描边，只画外弧）
+      // 左半弧（金色=有乐町线色，和左边线一致）
       var _arcLeft = document.createElementNS(svgNS, "path");
       _arcLeft.setAttribute("d", "M " + _cx + " " + (_cy - _r) + " A " + _r + " " + _r + " 0 0 0 " + _cx + " " + (_cy + _r));
       _arcLeft.setAttribute("fill", "none");
-      _arcLeft.setAttribute("stroke", color);
+      _arcLeft.setAttribute("stroke", o.sharedColor);
       _arcLeft.setAttribute("stroke-width", "2");
       staticLayer.appendChild(_arcLeft);
-      // 右半弧（金色描边，只画外弧）
+      // 右半弧（棕色=副都心线色，和右边线一致）
       var _arcRight = document.createElementNS(svgNS, "path");
       _arcRight.setAttribute("d", "M " + _cx + " " + (_cy - _r) + " A " + _r + " " + _r + " 0 0 1 " + _cx + " " + (_cy + _r));
       _arcRight.setAttribute("fill", "none");
-      _arcRight.setAttribute("stroke", o.sharedColor);
+      _arcRight.setAttribute("stroke", color);
       _arcRight.setAttribute("stroke-width", "2");
       staticLayer.appendChild(_arcRight);
     } else {
