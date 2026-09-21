@@ -469,10 +469,12 @@
           else if (pos < rectW + rectH) { lx = cx + halfW; ly = cy - halfH + (pos - rectW); side = "right"; }
           else if (pos < 2 * rectW + rectH) { lx = cx + halfW - (pos - rectW - rectH); ly = cy + halfH; side = "bottom"; }
           else { lx = cx - halfW; ly = cy + halfH - (pos - 2 * rectW - rectH); side = "left"; }
-          loopPts.push({ x: lx, y: ly, side: side, stationId: stations[i] });
+          loopPts.push({ x: lx, y: ly, side: side, stationId: stations[i], _loopPos: pos });
         }
       }
+      // v4.3.950: 环线沿曲线移动——存矩形参数供渲染层沿周长插值
       stationCoords = loopPts;
+      stationCoords._loopRect = { cx: cx, cy: cy, halfW: halfW, halfH: halfH, rectW: rectW, rectH: rectH, perimeter: perimeter };
       
       routeElements.push({
         type: 'rect',
