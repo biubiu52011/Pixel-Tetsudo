@@ -315,7 +315,30 @@
         relatedLines: _chainCtx.relatedLines || [],
         throughServiceGroup: _chainCtx.throughServiceGroup || null
       } : null;
-      return { id: lineId, name: line.name, nameEn: line.nameEn || line.name, code: line.code, color: (window.LineOperationSystemsResolveColor && window.LineOperationSystemsResolveColor(lineId)) || line.color, operator: line.operator, region: line.region, type: line.type, image: line.image, stations: line.stations || [], durations: line.durations || [], intervalTotal: line.durationTotalMin || 0, realtimePositions: odptData.realtimePositions[lineId] || [], delayInfo: delayInfo, branchOf: line.branchOf || null, isSixShapedLoop: line.isSixShapedLoop === true, isDoubleColumnLoop: line.isDoubleColumnLoop === true, loopJunction: line.loopJunction || null, _chainMeta: _chainMeta };
+      // v4.3.957: 共线区间共用数据——副都心线视图里，共线区间（和光市→小竹向原，站索引0-5）的列车从有乐町线数据里拉
+      var _rtPositions = odptData.realtimePositions[lineId] || [];
+      if (lineId === 'Fukutoshin') {
+        var _ylPositions = odptData.realtimePositions['Yurakucho'] || [];
+        var _sharedStations = ['Wakoshi', 'Chikatetsu-Narimasu', 'Chikatetsu-Akatsuka', 'Heiwadai', 'Hikawadai', 'Kotake-mukaihara'];
+        var _ownStations = line.stations || [];
+        // 把有乐町线共线区间的列车合并进来（去重：同 trainId 只保留一条）
+        var _existingIds = {};
+        _rtPositions.forEach(function(p) { _existingIds[p.trainId] = true; });
+        _ylPositions.forEach(function(p) {
+          if (_existingIds[p.trainId]) return; // 已有，跳过
+          // 只保留共线区间的列车（站在共线站列表里）
+          var _stName = (p.stationId || '').split('.').pop();
+          if (_sharedStations.indexOf(_stName) < 0) return;
+          // 映射站索引：有乐町线站索引 → 副都心线站索引
+          var _ylIdx = _ownStations.indexOf(_stName);
+          if (_ylIdx >= 0) {
+            p.stationIndex = _ylIdx;
+            p.fusionLineId = 'Yurakucho';
+            _rtPositions.push(p);
+          }
+        });
+      }
+      return { id: lineId, name: line.name, nameEn: line.nameEn || line.name, code: line.code, color: (window.LineOperationSystemsResolveColor && window.LineOperationSystemsResolveColor(lineId)) || line.color, operator: line.operator, region: line.region, type: line.type, image: line.image, stations: line.stations || [], durations: line.durations || [], intervalTotal: line.durationTotalMin || 0, realtimePositions: _rtPositions, delayInfo: delayInfo, branchOf: line.branchOf || null, isSixShapedLoop: line.isSixShapedLoop === true, isDoubleColumnLoop: line.isDoubleColumnLoop === true, loopJunction: line.loopJunction || null, _chainMeta: _chainMeta };
     } catch(e) { console.debug("[DataFusion] fuseLine error for " + lineId + ":", e.message); return null; }
   }
 
