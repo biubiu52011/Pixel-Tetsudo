@@ -833,6 +833,21 @@
     var svgNS = "http://www.w3.org/2000/svg";
     var isLoop = stationCoords.length > 2 && (line.type === "loop" || line.isSixShapedLoop);
     
+    // v4.3.919: 端点站容量限制——一面一线站台最多 2 列车（一到一发），
+    // 多出的推定列车移到前一站（绫濑/区间），避免 12 列车堆在北绫濑这种端点站
+    var _ENDPOINT_MAX = 2;
+    var _epCount = {};
+    for (var _ep = 0; _ep < positions.length; _ep++) {
+      var _epIdx = Math.min(positions[_ep].stationIndex || 0, stationCoords.length - 1);
+      var _isEp = (_epIdx === 0 || _epIdx === stationCoords.length - 1);
+      if (_isEp) {
+        _epCount[_epIdx] = (_epCount[_epIdx] || 0) + 1;
+        if (_epCount[_epIdx] > _ENDPOINT_MAX) {
+          // 移到前一站（端点站是 0 → 移到 1；是最后一站 → 移到 length-2）
+          positions[_ep].stationIndex = (_epIdx === 0) ? 1 : (_epIdx - 1);
+        }
+      }
+    }
     // Count trains per station for offset
     var stationCount = {};
     var stationIdx = {};
