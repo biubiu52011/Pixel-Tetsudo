@@ -70,8 +70,8 @@
 
     // Station circle
     if (o.sharedColor && !isJunction) {
-      // v4.3.954: 共线区间站——白底圆 + 双色外弧描边（左半副都心线色、右半有乐町线色），中间不描边
-      var _r = 7, _cx = o.x, _cy = o.y;
+      // v4.3.955: 共线区间站——平移到两条线中间，白底圆 + 双色外弧描边
+      var _r = 7, _cx = o.x + 3, _cy = o.y; // 右移3px到双线中间
       // 白底圆（无描边）
       var _bg = document.createElementNS(svgNS, "circle");
       _bg.setAttribute("cx", _cx);
