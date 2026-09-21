@@ -76,12 +76,16 @@
       var _halfLeft = document.createElementNS(svgNS, "path");
       _halfLeft.setAttribute("d", "M" + _cx + "," + (_cy - _r) + " A" + _r + "," + _r + " 0 0 0 " + _cx + "," + (_cy + _r) + " Z");
       _halfLeft.setAttribute("fill", color);
+      _halfLeft.setAttribute("stroke", color);
+      _halfLeft.setAttribute("stroke-width", "2");
       _halfLeft.setAttribute("data-station-index", o.si);
       staticLayer.appendChild(_halfLeft);
       // 右半圆（有乐町线色）
       var _halfRight = document.createElementNS(svgNS, "path");
       _halfRight.setAttribute("d", "M" + _cx + "," + (_cy - _r) + " A" + _r + "," + _r + " 0 0 1 " + _cx + "," + (_cy + _r) + " Z");
       _halfRight.setAttribute("fill", o.sharedColor);
+      _halfRight.setAttribute("stroke", o.sharedColor);
+      _halfRight.setAttribute("stroke-width", "2");
       staticLayer.appendChild(_halfRight);
     } else {
       var circle = document.createElementNS(svgNS, "circle");
