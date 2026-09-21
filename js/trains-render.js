@@ -15,8 +15,8 @@
     bg.setAttribute("stroke", lc);
     bg.setAttribute("stroke-width", "1");
     layer.appendChild(bg);
-    // v4.3.947: 所有直通标签都画上下方向三角（与列车方向标签一致，半宽3.5/半高2.5），不要中间右箭头
-    var dir = lineObj.dir || "down";
+    // v4.3.948: 直通标签箭头——up=▲朝上 / down=▼朝下 / middle=→朝右（与列车方向标签统一尺寸）
+    var dir = lineObj.dir || "middle";
     var arr = document.createElementNS(ns, "path");
     arr.setAttribute("fill", lc);
     arr.setAttribute("stroke", lc);
@@ -28,9 +28,12 @@
     if (dir === "up") {
       // up=▲ 尖朝上
       _d = "M" + (_ax - 3.5) + " " + (_ay + 2.5) + " L " + _ax + " " + (_ay - 2.5) + " L " + (_ax + 3.5) + " " + (_ay + 2.5) + " Z";
-    } else {
-      // down=▼ 尖朝下（默认）
+    } else if (dir === "down") {
+      // down=▼ 尖朝下
       _d = "M" + (_ax - 3.5) + " " + (_ay - 2.5) + " L " + _ax + " " + (_ay + 2.5) + " L " + (_ax + 3.5) + " " + (_ay - 2.5) + " Z";
+    } else {
+      // middle=→ 尖朝右
+      _d = "M" + (_ax - 3) + "," + (_ay - 2.5) + " L" + (_ax + 3) + "," + _ay + " L" + (_ax - 3) + "," + (_ay + 2.5) + " Z";
     }
     arr.setAttribute("d", _d);
     layer.appendChild(arr);
