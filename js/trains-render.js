@@ -15,7 +15,7 @@
     bg.setAttribute("stroke", lc);
     bg.setAttribute("stroke-width", "1");
     layer.appendChild(bg);
-    // v4.3.942: 统一画 → 右三角在 box 左边，不压文字（up/down 不再居中画 ∧/∨）
+    // v4.3.945: 按方向画上下圆角三角（up=∧ / down=∨ / middle=→），box 左边不压文字
     var dir = lineObj.dir || "middle";
     var arr = document.createElementNS(ns, "path");
     arr.setAttribute("fill", lc);
@@ -24,7 +24,17 @@
     arr.setAttribute("stroke-linejoin", "round");
     var _ax = x + 6;
     var _ay = y + (mobile ? 8 : 6);
-    var _d = "M" + (_ax - 3) + "," + (_ay - 2) + " L" + (_ax + 3) + "," + _ay + " L" + (_ax - 3) + "," + (_ay + 2) + " Z";
+    var _d;
+    if (dir === "up") {
+      // 向上三角（顶点在上）
+      _d = "M" + _ax + "," + (_ay - 3) + " L" + (_ax + 2.5) + "," + (_ay + 2) + " L" + (_ax - 2.5) + "," + (_ay + 2) + " Z";
+    } else if (dir === "down") {
+      // 向下三角（顶点在下）
+      _d = "M" + (_ax - 2.5) + "," + (_ay - 2) + " L" + (_ax + 2.5) + "," + (_ay - 2) + " L" + _ax + "," + (_ay + 3) + " Z";
+    } else {
+      // middle：右三角
+      _d = "M" + (_ax - 3) + "," + (_ay - 2) + " L" + (_ax + 3) + "," + _ay + " L" + (_ax - 3) + "," + (_ay + 2) + " Z";
+    }
     arr.setAttribute("d", _d);
     layer.appendChild(arr);
     var txt = document.createElementNS(ns, "text");
