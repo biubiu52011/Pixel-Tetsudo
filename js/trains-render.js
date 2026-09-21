@@ -70,17 +70,19 @@
 
     // Station circle
     if (o.sharedColor && !isJunction) {
-      // v4.3.944: 共线区间站——双色半圆（上半当前线色、下半共线另一条线色）
+      // v4.3.951: 共线区间站——左右双色半圆（左半当前线色、右半共线另一条线色），跨双线
       var _r = 7, _cx = o.x, _cy = o.y;
-      var _halfUp = document.createElementNS(svgNS, "path");
-      _halfUp.setAttribute("d", "M" + (_cx - _r) + "," + _cy + " A" + _r + "," + _r + " 0 0 0 " + (_cx + _r) + "," + _cy + " Z");
-      _halfUp.setAttribute("fill", color);
-      _halfUp.setAttribute("data-station-index", o.si);
-      staticLayer.appendChild(_halfUp);
-      var _halfDown = document.createElementNS(svgNS, "path");
-      _halfDown.setAttribute("d", "M" + (_cx - _r) + "," + _cy + " A" + _r + "," + _r + " 0 0 1 " + (_cx + _r) + "," + _cy + " Z");
-      _halfDown.setAttribute("fill", o.sharedColor);
-      staticLayer.appendChild(_halfDown);
+      // 左半圆（副都心线色）
+      var _halfLeft = document.createElementNS(svgNS, "path");
+      _halfLeft.setAttribute("d", "M" + _cx + "," + (_cy - _r) + " A" + _r + "," + _r + " 0 0 0 " + _cx + "," + (_cy + _r) + " Z");
+      _halfLeft.setAttribute("fill", color);
+      _halfLeft.setAttribute("data-station-index", o.si);
+      staticLayer.appendChild(_halfLeft);
+      // 右半圆（有乐町线色）
+      var _halfRight = document.createElementNS(svgNS, "path");
+      _halfRight.setAttribute("d", "M" + _cx + "," + (_cy - _r) + " A" + _r + "," + _r + " 0 0 1 " + _cx + "," + (_cy + _r) + " Z");
+      _halfRight.setAttribute("fill", o.sharedColor);
+      staticLayer.appendChild(_halfRight);
     } else {
       var circle = document.createElementNS(svgNS, "circle");
       circle.setAttribute("cx", o.x);
