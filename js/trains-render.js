@@ -1175,11 +1175,24 @@
       var _tname = _td ? (_td[lang] || _td.ja) : String(p.trainType).split('.').pop();
       if (_tname && _tname !== 'unknown') labelText = _tname + ' ' + labelText;
     }
-    // v4.3.6xx: 环线只显示内环/外环文字，不加箭头；普通线路用▲▼上下箭头 + 终点站名
+    // v4.3.933: 环线只显示内环/外环文字，不加箭头；普通线路用 SVG path 画三角 + 终点站名
+    // （▲▼ 字符在 SVG text 里不显示——字体不支持，改用 path 画）
     var dirSym = '';
     if (!isLoopDir || _isOedoBranchTrain(lineId, p)) {
-      // 普通直线：Inbound=▲（往上走/往上行）、Outbound=▼（往下走/往下行）
-      dirSym = moveDir === 'down' ? '▼' : (moveDir === 'up' ? '▲' : '');
+      dirSym = moveDir === 'down' ? 'down' : (moveDir === 'up' ? 'up' : '');
+    }
+    // 画方向三角（SVG path）
+    if (dirSym) {
+      var tri = document.createElementNS(svgNS, "path");
+      var triY = _trainLabelY('dir', py, moveDir) - 3;
+      var triX = px - 12;
+      var triD = dirSym === 'down'
+        ? 'M ' + triX + ' ' + triY + ' L ' + (triX + 4) + ' ' + (triY + 3) + ' L ' + (triX - 4) + ' ' + (triY + 3) + ' Z'
+        : 'M ' + triX + ' ' + (triY + 3) + ' L ' + (triX + 4) + ' ' + triY + ' L ' + (triX - 4) + ' ' + triY + ' Z';
+      tri.setAttribute("d", triD);
+      tri.setAttribute("fill", "#666");
+      tri.setAttribute("class", "train-label-tri");
+      trainLayer.appendChild(tri);
     }
     var ldir = document.createElementNS(svgNS, "text");
     ldir.setAttribute("data-train-label-for", String(trainUid));
@@ -1190,7 +1203,7 @@
     ldir.setAttribute("font-size", "8");
     ldir.setAttribute("fill", "#666");
     ldir.setAttribute("class", "train-label-dir");
-    ldir.textContent = dirSym + labelText;
+    ldir.textContent = labelText;
     trainLayer.appendChild(ldir);
   }
   
