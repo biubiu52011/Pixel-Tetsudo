@@ -454,6 +454,15 @@
         if (/^30[0-3]/.test(_nt)) return "../images/列车/JR東日本/E257系2000番台.png"; // 30[0-3]xxM = 踊り子（E257系2000番台）
         if (/^30[7-9]/.test(_nt)) return "../images/列车/JR東日本/E257系2500番台.png"; // 30[7-9]xxM = 湘南（E257系2500番台）
       }
+      // v4.3.923: 千代田線直通小田急ロマンスカー（メトロ相模/メトロホームウェイ）——
+      // 北綾瀬まで乗り入れる小田急60000形MSE。千代田線の普通列車は16000系だが、
+      // ロマンスカー（trainType=Romancecar）は小田急60000形MSEを表示。
+      if (lineId === "Chiyoda" && trainType) {
+        var _tt = String(trainType).toLowerCase();
+        if (_tt.indexOf("romancecar") >= 0 || _tt.indexOf("romance") >= 0) {
+          return "../images/列车/小田急電鉄/60000形.png";
+        }
+      }
       // Chuo/Sobu local: E231系500番台 + E235系0番台 并用（2025 起 E235 由山手线转用）
       if (lineId === "ChuoLocal" || lineId === "ChuoSobuLocal") {
         var n = 0;
