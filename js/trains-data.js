@@ -225,7 +225,7 @@ function _getTransferMap(lineId) {
     if (t.lineId === lineId) continue;
     // v4.3.943: 共线区间不画换乘标记（副都心线↔有乐町线 池袋→要町→千川 共线段，小竹向原分岔点保留）
     if (lineId === 'Fukutoshin' && t.lineId === 'Yurakucho' &&
-        ['Ikebukuro', 'Kanamecho', 'Senkawa'].indexOf(t.station) >= 0) continue;
+        ['Wakoshi', 'Chikatetsu-narimasu', 'Chikatetsu-akatsuka', 'Heiwadai', 'Hikawadai', 'Kotake-mukaihara'].indexOf(t.station) >= 0) continue;
     var tl = src[t.lineId];
     if (!tl) continue;
     var _placeholderRe = /(グループ|ロゴ|マーク|アイコン|シンボル)/;

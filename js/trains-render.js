@@ -579,7 +579,7 @@
         var _bJ7 = _isBranchJunction(stationId);
         // v4.3.944: 共线区间站（副都心线↔有乐町线 池袋/要町/千川）画双色半圆
         var _sharedColor = '';
-        if (lineId === 'Fukutoshin' && ['Ikebukuro', 'Kanamecho', 'Senkawa'].indexOf(stationId) >= 0) {
+        if (lineId === 'Fukutoshin' && ['Wakoshi', 'Chikatetsu-narimasu', 'Chikatetsu-akatsuka', 'Heiwadai', 'Hikawadai', 'Kotake-mukaihara'].indexOf(stationId) >= 0) {
           var _ylL = (window.RailwayDB && window.RailwayDB.getAllLines) ? window.RailwayDB.getAllLines()['Yurakucho'] : null;
           _sharedColor = _ylL ? (_ylL.color || '') : '';
         }
