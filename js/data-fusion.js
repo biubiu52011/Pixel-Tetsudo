@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Pixel Tetsudo - DataFusion v11 (Position Support)
  */
 (function() {
@@ -565,6 +565,15 @@
               if (!posMap[lid] || posMap[lid].length === 0) {
                 posMap[lid] = estimated[lid];
                 estCount += estimated[lid].length;
+              } else if (estimated[lid]) {
+                // v4.3.929: 实时位置有列车但无 destinationStation → 从推定位置补终点站
+                var _estById = {};
+                estimated[lid].forEach(function(p) { if (p && p.trainId) _estById[p.trainId] = p; });
+                posMap[lid].forEach(function(p) {
+                  if (p && p.trainId && _estById[p.trainId] && !p.destinationStation) {
+                    p.destinationStation = _estById[p.trainId].destinationStation;
+                  }
+                });
               }
             });
             if (estCount > 0) {
