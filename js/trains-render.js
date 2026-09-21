@@ -87,6 +87,13 @@
       _halfRight.setAttribute("stroke", o.sharedColor);
       _halfRight.setAttribute("stroke-width", "2");
       staticLayer.appendChild(_halfRight);
+      // v4.3.952: 中间白色圆心
+      var _innerDot = document.createElementNS(svgNS, "circle");
+      _innerDot.setAttribute("cx", _cx);
+      _innerDot.setAttribute("cy", _cy);
+      _innerDot.setAttribute("r", "3");
+      _innerDot.setAttribute("fill", "#fff");
+      staticLayer.appendChild(_innerDot);
     } else {
       var circle = document.createElementNS(svgNS, "circle");
       circle.setAttribute("cx", o.x);
