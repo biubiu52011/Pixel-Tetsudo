@@ -1160,6 +1160,9 @@
       labelText = (LOOP_DIR_NAMES[dn] && LOOP_DIR_NAMES[dn][lang]) || (LOOP_DIR_NAMES[dn] ? LOOP_DIR_NAMES[dn].ja : '');
     } else if (/^(Inbound|Outbound|Northbound|Southbound|Eastbound|Westbound)$/.test(dn)) {
       labelText = _trainDestText(p.destinationStation);
+    } else if (p.destinationStation) {
+      // v4.3.930: 优先显示实际终点站（成城学园前/向丘游园/我孫子/取手等），而非方向名（代代木上原/北绫濑）
+      labelText = _trainDestText(p.destinationStation);
     } else if (dn) {
       labelText = _resolveStationLoose(dn) || dn;
     }
