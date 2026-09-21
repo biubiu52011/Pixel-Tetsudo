@@ -885,7 +885,8 @@
                         t: tt['odpt:trainType'] || '',
                         dir: tt['odpt:railDirection'] || '',
                         c: tt['odpt:calendar'] || '',  // v4.3.512: 压缩保留 calendar——v2 丢 calendar 导致缓存数据不做日历过滤（周六会推定平日班次）
-                        st: stations
+                        st: stations,
+                        d: tt['odpt:destinationStation'] || []  // v4.3.932: 压缩保留 destinationStation——列车终点站（取手/我孫子/本厚木等）
                     };
                 });
             });
@@ -917,7 +918,8 @@
                         'odpt:trainType': tt.t || '',
                         'odpt:railDirection': tt.dir || '',
                         'odpt:calendar': tt.c || '',  // v4.3.512: 还原 calendar，estimator 日历过滤恢复生效
-                        'odpt:trainTimetableObject': stations
+                        'odpt:trainTimetableObject': stations,
+                        'odpt:destinationStation': tt.d || []  // v4.3.932: 还原 destinationStation——列车终点站
                     };
                 });
             });
