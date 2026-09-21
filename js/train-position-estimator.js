@@ -451,6 +451,7 @@
           // v4.3.931: 终点站提取——odpt:destinationStation 字段在东京地铁时刻表中不存在，
           // 改为从 trainTimetableObject 最后一站（departureTime="" 的站）提取。
           var destStations = tt['odpt:destinationStation'] || [];
+          if (typeof destStations === 'string') destStations = [destStations]; // v4.3.940: 港未来线等时刻表 destinationStation 是字符串不是数组，直接 [0] 会取到首字符（M/Y）
           var destinationStation = destStations.length > 0 ? String(destStations[0]).split(".").pop() : "";
           if (!destinationStation) {
             var _tto = tt['odpt:trainTimetableObject'] || [];
