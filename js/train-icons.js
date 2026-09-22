@@ -417,9 +417,18 @@
         }
       }
       // 直通列車：車号プレフィックスで車籍系統を判定（例：半蔵門線 B 号 = 東武50000系）
-      // trainId は「車号_駅idx」または「lineId_車号_駅idx」の2形式——車号は後ろから2番目のトークン
+      // trainId は「車号_駅idx」「lineId_車号_駅idx」「lineId_車号」の3形式——車号を抽出
       var _tp = String(trainId || "").split("_");
-      var _tn = _tp.length >= 2 ? _tp[_tp.length - 2] : _tp[0];
+      var _tn;
+      if (_tp.length >= 2 && /^\d+$/.test(_tp[_tp.length - 1])) {
+        // 最後のトークンが数字＝駅idx → 車号は後ろから2番目
+        _tn = _tp[_tp.length - 2];
+      } else if (_tp.length >= 2) {
+        // 最後のトークンが数字でない＝推定列車（lineId_車号）→ 車号は最後のトークン
+        _tn = _tp[_tp.length - 1];
+      } else {
+        _tn = _tp[0];
+      }
       if (THROUGH_PREFIX_RULES[lineId]) {
         var _prules = THROUGH_PREFIX_RULES[lineId];
         for (var _pi = 0; _pi < _prules.length; _pi++) {
