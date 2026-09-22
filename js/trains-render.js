@@ -1184,6 +1184,7 @@
     Saikyo:         { Northbound: +1, Southbound: -1 }, // 站表 大崎→大宮：北行=大宮（站表后）
     Kawagoe:        { Southbound: -1 },                 // 站表 大宮→日進→西大宮→…→川越：南行=大宮方向（站表前）
     ShonanShinjuku: { Northbound: -1, Southbound: +1 }, // 站表 大宮→小田原：北行=大宮（站表前）
+    Joban:          { Northbound: +1, Southbound: -1 }, // 站表 品川→土浦：北行=土浦（站表后=▼）
     // ---- Toei ----
     Asakusa:        { Northbound: +1, Southbound: -1 }, // 站表 西馬込→押上：北行=押上（站表后）
     Mita:           { Northbound: +1, Southbound: -1 }, // 站表 目黒→西高島平：北行=高島平（站表后）
