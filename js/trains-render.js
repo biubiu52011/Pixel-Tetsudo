@@ -368,8 +368,7 @@
           } else {
             // v4.3.944: 单行 badge——异名/站外信息放旁边小字，不撑高线路图
             var _toName = txl.toStation ? (window.RailwayDB && window.RailwayDB.resolveStationName ? window.RailwayDB.resolveStationName(txl.toStation, window.currentLang) : txl.toStation) : "";
-            var _walkM = (txl.type === "out" && txl.note) ? txl.note.match(/徒歩約(\d+)分/) : null;
-            var _walkTxt = _walkM ? (isMobileView ? "徒歩" + _walkM[1] + "分" : _walkM[1] + "分") : "";
+
             var _lineName = (txl.name || txl.lineId || "").slice(0, 4);
             var bW = _badgeW(txl, isMobileView);
             var bH = isMobileView ? 15 : 11;
@@ -390,14 +389,9 @@
             bTxt.setAttribute("fill", "#fff");
             bTxt.textContent = _lineName;
             staticLayer.appendChild(bTxt);
-            // 站外换乘：虚线边框
-            if (txl.type === "out") {
-              bRect.setAttribute("stroke", "#fff");
-              bRect.setAttribute("stroke-width", "1.5");
-              bRect.setAttribute("stroke-dasharray", "3,2");
-            }
+
             // 异名换乘/站外步行：badge 旁边小字（右侧，不撑高）
-            var _sideTxt = _toName || _walkTxt;
+            var _sideTxt = _toName;
             if (_sideTxt) {
               var sTxt = document.createElementNS(svgNS, "text");
               sTxt.setAttribute("x", tix + bW + 3);
