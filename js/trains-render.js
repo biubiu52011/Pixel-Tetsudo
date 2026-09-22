@@ -1108,7 +1108,9 @@
           if (p.trainType) {
             var _tdefs = window.TRAIN_TYPE_NAMES || {};
             var _td = _tdefs[p.trainType];
-            _tip.push(_td ? (_td[window.currentLang] || _td.ja || String(p.trainType).split('.').pop()) : String(p.trainType).split('.').pop());
+            // v4.3.963: 查不到种别名表时不露罗马字
+            var _tt = _td ? (_td[window.currentLang] || _td.ja) : '';
+            if (_tt) _tip.push(_tt);
           }
           if (p.vehicleType) _tip.push(p.vehicleType);
           else if (p.trainClass) _tip.push(p.trainClass);
@@ -1378,7 +1380,8 @@
     if (_ovShow && _ovShow.showTrainType && p.trainType) {
       var _tdefs = window.TRAIN_TYPE_NAMES || {};
       var _td = _tdefs[p.trainType];
-      var _tname = _td ? (_td[lang] || _td.ja) : String(p.trainType).split('.').pop();
+      // v4.3.963: 种别名表查不到时不露罗马字——直接跳过，只显示行先
+      var _tname = _td ? (_td[lang] || _td.ja) : '';
       if (_tname && _tname !== 'unknown') labelText = _tname + ' ' + labelText;
     }
     // v4.3.933: 环线只显示内环/外环文字，不加箭头；普通线路用 SVG path 画三角 + 终点站名
