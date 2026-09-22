@@ -17583,11 +17583,15 @@
         },
         {
           "station": "Bakurocho",
-          "lineId": "Shinjuku"
+          "lineId": "Shinjuku",
+          "toStation": "Bakuro-Yokoyama",
+          "note": "Bakuro-Yokoyama"
         },
         {
           "station": "Funabashi",
-          "lineId": "Keisei"
+          "lineId": "Keisei",
+          "toStation": "Keisei-Funabashi",
+          "note": "Keisei-Funabashi"
         }
       ],
       "nameZh": "横须贺线・总武快速线",
@@ -26936,7 +26940,9 @@
         },
         {
           "station": "Gotokuji",
-          "lineId": "TokyuSetagaya"
+          "lineId": "TokyuSetagaya",
+          "toStation": "Yamashita",
+          "note": "Yamashita"
         },
         {
           "station": "Yoyogi-Hachiman",
@@ -27253,7 +27259,9 @@
         },
         {
           "station": "Ushida",
-          "lineId": "Keisei"
+          "lineId": "Keisei",
+          "toStation": "Keisei-Ushida",
+          "note": "Keisei-Ushida"
         },
         {
           "station": "Shin-Koshigaya",
@@ -27620,7 +27628,9 @@
       "transferStations": [
         {
           "station": "Yamashita",
-          "lineId": "Odawara"
+          "lineId": "Odawara",
+          "toStation": "Gotokuji",
+          "note": "Gotokuji"
         }
       ],
       "nameZh": "东急世田谷线",
