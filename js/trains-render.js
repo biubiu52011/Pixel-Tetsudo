@@ -1240,9 +1240,8 @@
         }
       }
     }
-    // v4.3.964: Inbound/Outbound 方向反过来——Inbound=往站表后=down，Outbound=往站表前=up
-    if (/^Inbound$/.test(dn)) return 'down';
-    if (/^Outbound$/.test(dn)) return 'up';
+    if (/^Inbound$/.test(dn)) return 'up';
+    if (/^Outbound$/.test(dn)) return 'down';
     // v4.3.473: 方位词用线路映射表判定（未建表线路返回 null → ▶ 兜底）
     if (/^(Northbound|Southbound|Eastbound|Westbound)$/.test(dn)) {
       var axis = (DIR_AXIS_MAP[lineId] && DIR_AXIS_MAP[lineId][dn]);
