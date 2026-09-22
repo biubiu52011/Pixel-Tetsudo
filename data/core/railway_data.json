@@ -9352,7 +9352,9 @@
         },
         {
           "station": "Okachimachi",
-          "lineId": "Oedo"
+          "lineId": "Oedo",
+          "toStation": "Ueno-Okachimachi",
+          "note": "Ueno-Okachimachi"
         },
         {
           "station": "Tsurumi",
@@ -13274,7 +13276,9 @@
         },
         {
           "station": "Awajicho",
-          "lineId": "Shinjuku"
+          "lineId": "Shinjuku",
+          "toStation": "Awajicho",
+          "note": "Awajicho"
         },
         {
           "station": "Korakuen",
@@ -14624,19 +14628,26 @@
           "station": "Shinjuku",
           "lineId": "SeibuShinjuku",
           "type": "out",
-          "note": "西武新宿，徒歩約8分"
+          "note": "Seibu-Shinjuku",
+          "toStation": "Seibu-Shinjuku"
         },
         {
           "station": "Ogawamachi",
-          "lineId": "Marunouchi"
+          "lineId": "Marunouchi",
+          "toStation": "Awajicho",
+          "note": "Awajicho"
         },
         {
           "station": "Bakuro-Yokoyama",
-          "lineId": "SobuRapid"
+          "lineId": "SobuRapid",
+          "toStation": "Bakuro-Yokoyama",
+          "note": "Bakuro-Yokoyama"
         },
         {
           "station": "Bakuro-Yokoyama",
-          "lineId": "Asakusa"
+          "lineId": "Asakusa",
+          "toStation": "Bakuro-Yokoyama",
+          "note": "Bakuro-Yokoyama"
         },
         {
           "station": "Moto-Yawata",
@@ -14956,19 +14967,27 @@
         },
         {
           "station": "Ueno-Okachimachi",
-          "lineId": "KeihinTohoku"
+          "lineId": "KeihinTohoku",
+          "toStation": "Okachimachi",
+          "note": "Okachimachi"
         },
         {
           "station": "Shinjuku-Nishiguchi",
-          "lineId": "Marunouchi"
+          "lineId": "Marunouchi",
+          "toStation": "Shinjuku",
+          "note": "Shinjuku"
         },
         {
           "station": "Shinjuku-Nishiguchi",
-          "lineId": "Shinjuku"
+          "lineId": "Shinjuku",
+          "toStation": "Shinjuku",
+          "note": "Shinjuku"
         },
         {
           "station": "Shinjuku-Nishiguchi",
-          "lineId": "Fukutoshin"
+          "lineId": "Fukutoshin",
+          "toStation": "Shinjuku-Sanchome",
+          "note": "Shinjuku-Sanchome"
         },
         {
           "station": "Kasuga",
@@ -19091,7 +19110,9 @@
         },
         {
           "station": "Onishimogami_Mae",
-          "lineId": "Fukutoshin"
+          "lineId": "Fukutoshin",
+          "toStation": "Nishi-Kasumigaseki",
+          "note": "Nishi-Kasumigaseki"
         },
         {
           "station": "Oji_Eki_Mae",
@@ -19111,7 +19132,9 @@
         },
         {
           "station": "Oji_Eki_Mae",
-          "lineId": "Namboku"
+          "lineId": "Namboku",
+          "toStation": "Oji",
+          "note": "Oji"
         }
       ],
       "nameZh": "都电荒川线",
