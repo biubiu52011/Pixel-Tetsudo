@@ -589,15 +589,13 @@
         var stationId = sc.stationId;
         var isJunction = geometry.junctionStation && stationId === geometry.junctionStation;
         var _bJ7 = _isBranchJunction(stationId);
-        // v4.3.956: 共线区间站（副都心线↔有乐町线 和光市→小竹向原）画双色半圆——两条线视图都同步
+        // v4.3.956: 共线区间站画双色半圆 + v4.3.960: 自动判断共线线
         var _sharedColor = '';
-        var _sharedStations = ['Wakoshi', 'Chikatetsu-Narimasu', 'Chikatetsu-Akatsuka', 'Heiwadai', 'Hikawadai', 'Kotake-mukaihara'];
-        if (_sharedStations.indexOf(stationId) >= 0) {
+        if (window.SharedTrackPairs && window.SharedTrackPairs.isSharedStation && window.SharedTrackPairs.isSharedStation(lineId, stationId)) {
           var _allL = (window.RailwayDB && window.RailwayDB.getAllLines) ? window.RailwayDB.getAllLines() : null;
-          if (lineId === 'Fukutoshin' && _allL && _allL['Yurakucho']) {
-            _sharedColor = _allL['Yurakucho'].color || '';
-          } else if (lineId === 'Yurakucho' && _allL && _allL['Fukutoshin']) {
-            _sharedColor = _allL['Fukutoshin'].color || '';
+          var _partners = window.SharedTrackPairs.getSharedLines(lineId) || [];
+          if (_allL && _partners.length > 0) {
+            _sharedColor = _allL[_partners[0]].color || '';
           }
         }
         _renderStationNode(staticLayer, svgNS, {

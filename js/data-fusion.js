@@ -315,28 +315,36 @@
         relatedLines: _chainCtx.relatedLines || [],
         throughServiceGroup: _chainCtx.throughServiceGroup || null
       } : null;
-      // v4.3.957: 共线区间共用数据 + v4.3.958: 直通线路列车合并
+      // v4.3.957: 共线区间共用数据 + v4.3.958: 直通线路列车合并 + v4.3.960: 自动判断共线线
       var _rtPositions = odptData.realtimePositions[lineId] || [];
-      if (lineId === 'Fukutoshin') {
+      var _sharedPartners = (window.SharedTrackPairs && window.SharedTrackPairs.getSharedLines) ? window.SharedTrackPairs.getSharedLines(lineId) : [];
+      if (_sharedPartners.length > 0) {
         var _ownStations = line.stations || [];
         var _existingIds = {};
         _rtPositions.forEach(function(p) { _existingIds[p.trainId] = true; });
         
-        // 共线区间：有乐町线
-        var _sharedStations = ['Wakoshi', 'Chikatetsu-Narimasu', 'Chikatetsu-Akatsuka', 'Heiwadai', 'Hikawadai', 'Kotake-mukaihara'];
-        var _ylPositions = odptData.realtimePositions['Yurakucho'] || [];
-        _ylPositions.forEach(function(p) {
-          if (_existingIds[p.trainId]) return;
-          var _stName = (p.stationId || '').split('.').pop();
-          if (_sharedStations.indexOf(_stName) < 0) return;
-          var _ylIdx = _ownStations.indexOf(_stName);
-          if (_ylIdx >= 0) {
-            p.stationIndex = _ylIdx;
-            p.fusionLineId = 'Yurakucho';
-            _rtPositions.push(p);
-            _existingIds[p.trainId] = true;
-          }
-        });
+        // 共线区间：自动遍历所有共线线
+        for (var _sp = 0; _sp < _sharedPartners.length; _sp++) {
+          var _spLine = _sharedPartners[_sp];
+          var _spPositions = odptData.realtimePositions[_spLine] || [];
+          _spPositions.forEach(function(p) {
+            if (_existingIds[p.trainId]) return;
+            var _stName = (p.stationId || '').split('.').pop();
+            // 自动判断是否共线站
+            if (window.SharedTrackPairs && window.SharedTrackPairs.isSharedStation) {
+              if (!window.SharedTrackPairs.isSharedStation(lineId, _stName)) return;
+            } else {
+              return;
+            }
+            var _spIdx = _ownStations.indexOf(_stName);
+            if (_spIdx >= 0) {
+              p.stationIndex = _spIdx;
+              p.fusionLineId = _spLine;
+              _rtPositions.push(p);
+              _existingIds[p.trainId] = true;
+            }
+          });
+        }
         
       // v4.3.959: 自动合并所有直通线路列车——用 getThroughServiceLines 自动获取直通线
       var _throughLines = getThroughServiceLines(lineId) || [];

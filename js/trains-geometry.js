@@ -779,3 +779,22 @@
     if (rightOccupied && !leftOccupied) return "left";
     return "right"; // 双侧同况（都空/都占）→ 默认朝右
   }
+
+  // v4.3.960: 暴露共线线路配置表——其他模块自动获取共线线
+  window.SharedTrackPairs = {
+    getSharedLines: function(lineId) {
+      return _SHARED_TRACK_PAIRS[lineId] || [];
+    },
+    isSharedStation: function(lineId, stationId) {
+      var partners = _SHARED_TRACK_PAIRS[lineId] || [];
+      if (!partners.length) return false;
+      var allLines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : {};
+      var ownStations = (allLines[lineId] && allLines[lineId].stations) || [];
+      if (ownStations.indexOf(stationId) < 0) return false;
+      for (var i = 0; i < partners.length; i++) {
+        var pStations = (allLines[partners[i]] && allLines[partners[i]].stations) || [];
+        if (pStations.indexOf(stationId) >= 0) return true;
+      }
+      return false;
+    }
+  };
