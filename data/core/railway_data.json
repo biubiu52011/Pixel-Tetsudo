@@ -22619,18 +22619,6 @@
           "note": ""
         },
         {
-          "station": "Narita",
-          "lineId": "SobuMain",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Sawara",
-          "lineId": "Kashima",
-          "type": "in",
-          "note": ""
-        },
-        {
           "station": "Katori",
           "lineId": "Kashima",
           "type": "in",
