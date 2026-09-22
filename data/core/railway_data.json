@@ -14665,7 +14665,9 @@
         },
         {
           "station": "Moto-Yawata",
-          "lineId": "Keisei"
+          "lineId": "Keisei",
+          "toStation": "Keisei-Yawata",
+          "note": "Keisei-Yawata"
         },
         {
           "station": "Shinjuku-Sanchome",
@@ -15230,7 +15232,9 @@
         },
         {
           "station": "Yoyogi-Koen",
-          "lineId": "Odawara"
+          "lineId": "Odawara",
+          "toStation": "Yoyogi-Hachiman",
+          "note": "Yoyogi-Hachiman"
         }
       ],
       "branches": [
@@ -15888,7 +15892,9 @@
         },
         {
           "station": "Zoshigaya",
-          "lineId": "Arakawa"
+          "lineId": "Arakawa",
+          "toStation": "Kishibojinmae",
+          "note": "Kishibojinmae"
         },
         {
           "station": "Shinjuku-Sanchome",
@@ -16976,7 +16982,9 @@
         },
         {
           "station": "Keisei-Yawata",
-          "lineId": "Shinjuku"
+          "lineId": "Shinjuku",
+          "toStation": "Moto-Yawata",
+          "note": "Moto-Yawata"
         },
         {
           "station": "Keisei-Funabashi",
@@ -22660,7 +22668,9 @@
         },
         {
           "station": "Narita",
-          "lineId": "Keisei"
+          "lineId": "Keisei",
+          "toStation": "Keisei-Narita",
+          "note": "Keisei-Narita"
         }
       ],
       "nameZh": "成田线",
@@ -25659,7 +25669,9 @@
         },
         {
           "station": "Narimasu",
-          "lineId": "Yurakucho"
+          "lineId": "Yurakucho",
+          "toStation": "Chikatetsu-Narimasu",
+          "note": "Chikatetsu-Narimasu"
         }
       ],
       "nameZh": "东上线",
@@ -26928,7 +26940,9 @@
         },
         {
           "station": "Yoyogi-Hachiman",
-          "lineId": "Chiyoda"
+          "lineId": "Chiyoda",
+          "toStation": "Yoyogi-Koen",
+          "note": "Yoyogi-Koen"
         }
       ],
       "nameZh": "小田原线",
@@ -27243,7 +27257,9 @@
         },
         {
           "station": "Shin-Koshigaya",
-          "lineId": "Musashino"
+          "lineId": "Musashino",
+          "toStation": "Minami-Koshigaya",
+          "note": "Minami-Koshigaya"
         }
       ],
       "nameZh": "东武晴空塔线",
