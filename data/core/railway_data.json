@@ -13294,7 +13294,9 @@
         },
         {
           "station": "Shinjuku-Sanchome",
-          "lineId": "Oedo"
+          "lineId": "Oedo",
+          "toStation": "Shinjuku-Sanchome",
+          "note": "Shinjuku-Sanchome"
         },
         {
           "station": "Korakuen",
@@ -14667,7 +14669,9 @@
         },
         {
           "station": "Shinjuku-Sanchome",
-          "lineId": "Oedo"
+          "lineId": "Oedo",
+          "toStation": "Shinjuku-Sanchome",
+          "note": "Shinjuku-Sanchome"
         }
       ],
       "nameZh": "新宿线",
@@ -15220,7 +15224,9 @@
         },
         {
           "station": "Machiya",
-          "lineId": "Arakawa"
+          "lineId": "Arakawa",
+          "toStation": "Machiya_Eki_Mae",
+          "note": "Machiya_Eki_Mae"
         },
         {
           "station": "Yoyogi-Koen",
@@ -15629,7 +15635,9 @@
         },
         {
           "station": "Oji",
-          "lineId": "Arakawa"
+          "lineId": "Arakawa",
+          "toStation": "Oji_Eki_Mae",
+          "note": "Oji_Eki_Mae"
         },
         {
           "station": "Korakuen",
@@ -15884,7 +15892,9 @@
         },
         {
           "station": "Shinjuku-Sanchome",
-          "lineId": "Oedo"
+          "lineId": "Oedo",
+          "toStation": "Shinjuku-Sanchome",
+          "note": "Shinjuku-Sanchome"
         }
       ],
       "nameZh": "副都心线",
@@ -16982,7 +16992,9 @@
         },
         {
           "station": "Machiya",
-          "lineId": "Arakawa"
+          "lineId": "Arakawa",
+          "toStation": "Machiya_Eki_Mae",
+          "note": "Machiya_Eki_Mae"
         }
       ],
       "nameZh": "本线",
@@ -17229,11 +17241,15 @@
       "transferStations": [
         {
           "station": "Tama-Center",
-          "lineId": "OdakyuTama"
+          "lineId": "OdakyuTama",
+          "toStation": "Odakyu-Tama-Center",
+          "note": "Odakyu-Tama-Center"
         },
         {
           "station": "Tama-Center",
-          "lineId": "KeioSagami"
+          "lineId": "KeioSagami",
+          "toStation": "Keio-Tama-Center",
+          "note": "Keio-Tama-Center"
         }
       ],
       "nameZh": "多摩单轨线",
@@ -18980,7 +18996,9 @@
         },
         {
           "station": "Otsuka",
-          "lineId": "Arakawa"
+          "lineId": "Arakawa",
+          "toStation": "Otsuka_Eki_Mae",
+          "note": "Otsuka_Eki_Mae"
         }
       ],
       "isDoubleColumnLoop": true,
@@ -19122,7 +19140,9 @@
         },
         {
           "station": "Otsuka_Eki_Mae",
-          "lineId": "Yamanote"
+          "lineId": "Yamanote",
+          "toStation": "Otsuka",
+          "note": "Otsuka"
         },
         {
           "station": "Onishimogami_Mae",
@@ -19132,11 +19152,15 @@
         },
         {
           "station": "Oji_Eki_Mae",
-          "lineId": "KeihinTohoku"
+          "lineId": "KeihinTohoku",
+          "toStation": "Oji",
+          "note": "Oji"
         },
         {
           "station": "Machiya_Eki_Mae",
-          "lineId": "Chiyoda"
+          "lineId": "Chiyoda",
+          "toStation": "Machiya",
+          "note": "Machiya"
         },
         {
           "station": "Kuma_Mae",
@@ -19144,7 +19168,9 @@
         },
         {
           "station": "Machiya_Eki_Mae",
-          "lineId": "Keisei"
+          "lineId": "Keisei",
+          "toStation": "Machiya",
+          "note": "Machiya"
         },
         {
           "station": "Oji_Eki_Mae",
@@ -21733,7 +21759,9 @@
         },
         {
           "station": "Keio-Nagayama",
-          "lineId": "OdakyuTama"
+          "lineId": "OdakyuTama",
+          "toStation": "Odakyu-Nagayama",
+          "note": "Odakyu-Nagayama"
         },
         {
           "station": "Keio-Tama-Center",
@@ -22982,7 +23010,9 @@
       "transferStations": [
         {
           "station": "Odakyu-Ei-Zan",
-          "lineId": "KeioSagami"
+          "lineId": "KeioSagami",
+          "toStation": "Keio-Nagayama",
+          "note": "Keio-Nagayama"
         },
         {
           "station": "Odakyu-Tama-Center",
@@ -25617,11 +25647,15 @@
         },
         {
           "station": "Shimo-Akatsuka",
-          "lineId": "Yurakucho"
+          "lineId": "Yurakucho",
+          "toStation": "Chikatetsu-Akatsuka",
+          "note": "Chikatetsu-Akatsuka"
         },
         {
           "station": "Asakadai",
-          "lineId": "Musashino"
+          "lineId": "Musashino",
+          "toStation": "Kita-Asaka",
+          "note": "Kita-Asaka"
         },
         {
           "station": "Narimasu",
@@ -26288,7 +26322,8 @@
           "station": "Tobu-Utsunomiya",
           "lineId": "UtsunomiyaJR",
           "type": "out",
-          "note": "徒歩連絡"
+          "note": "UtsunomiyaJR",
+          "toStation": "UtsunomiyaJR"
         }
       ],
       "nameZh": "宇都宫线",
