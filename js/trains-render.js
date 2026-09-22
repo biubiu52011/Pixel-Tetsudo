@@ -366,13 +366,11 @@
             tImg.appendChild(tTitle);
             staticLayer.appendChild(tImg);
           } else {
-            // v4.3.613: 无图标线统一为色块徽章（LOS 官方色 + 路线记号）——替代灰色小字，
-            // 与图片徽章同一套视觉语言（JR 换乘看板 = 色块+记号）
-            // v4.3.941: 异名换乘显示换乘站名（如 三田 春日）
+            // v4.3.943: 换乘 badge 两行——上行线路名，下行异名换乘站名（如 春日）
             var _toName = txl.toStation ? (window.RailwayDB && window.RailwayDB.resolveStationName ? window.RailwayDB.resolveStationName(txl.toStation, window.currentLang) : txl.toStation) : "";
-            var badgeTxt = ((txl.name || txl.lineId || "") + (_toName ? " " + _toName : "")).slice(0, 6);
-            var bW = _badgeW(txl, isMobileView);
-            var bH = isMobileView ? 15 : 11;
+            var _lineName = (txl.name || txl.lineId || "").slice(0, 4);
+            var bW = Math.max(_badgeW(txl, isMobileView), _toName ? (_toName.length * (isMobileView ? 7 : 5) + 8) : 0);
+            var bH = isMobileView ? (_toName ? 24 : 15) : (_toName ? 18 : 11);
             var bRect = document.createElementNS(svgNS, "rect");
             bRect.setAttribute("x", tix);
             bRect.setAttribute("y", tiy);
@@ -381,15 +379,37 @@
             bRect.setAttribute("rx", "2");
             bRect.setAttribute("fill", txl.color || "#8a8a8a");
             staticLayer.appendChild(bRect);
-            var bTxt = document.createElementNS(svgNS, "text");
-            bTxt.setAttribute("x", tix + bW / 2);
-            bTxt.setAttribute("y", tiy + bH / 2 + (isMobileView ? 3.2 : 2.2));
-            bTxt.setAttribute("text-anchor", "middle");
-            bTxt.setAttribute("font-size", isMobileView ? "9" : "6.5");
-            bTxt.setAttribute("font-weight", "600");
-            bTxt.setAttribute("fill", "#fff");
-            bTxt.textContent = badgeTxt;
-            staticLayer.appendChild(bTxt);
+            // 上行：线路名
+            var bTxt1 = document.createElementNS(svgNS, "text");
+            bTxt1.setAttribute("x", tix + bW / 2);
+            bTxt1.setAttribute("y", tiy + (isMobileView ? 10 : 7.5));
+            bTxt1.setAttribute("text-anchor", "middle");
+            bTxt1.setAttribute("font-size", isMobileView ? "9" : "6.5");
+            bTxt1.setAttribute("font-weight", "600");
+            bTxt1.setAttribute("fill", "#fff");
+            bTxt1.textContent = _lineName;
+            staticLayer.appendChild(bTxt1);
+            // 下行：异名换乘站名（如果有）或站外换乘步行时间
+            var _walkM = (txl.type === "out" && txl.note) ? txl.note.match(/徒歩約(\d+)分/) : null;
+            var _walkTxt = _walkM ? (isMobileView ? "徒歩" + _walkM[1] + "分" : _walkM[1] + "分") : "";
+            var _secondLine = _toName || _walkTxt;
+            if (_secondLine) {
+              var bTxt2 = document.createElementNS(svgNS, "text");
+              bTxt2.setAttribute("x", tix + bW / 2);
+              bTxt2.setAttribute("y", tiy + (isMobileView ? 20 : 15));
+              bTxt2.setAttribute("text-anchor", "middle");
+              bTxt2.setAttribute("font-size", isMobileView ? "8" : "5.5");
+              bTxt2.setAttribute("font-weight", "500");
+              bTxt2.setAttribute("fill", "#fff");
+              bTxt2.textContent = _secondLine;
+              staticLayer.appendChild(bTxt2);
+            }
+            // 站外换乘：虚线边框
+            if (txl.type === "out") {
+              bRect.setAttribute("stroke", "#fff");
+              bRect.setAttribute("stroke-width", "1");
+              bRect.setAttribute("stroke-dasharray", "2,2");
+            }
           }
           _rowCur += (txl.image ? ICON : _badgeW(txl, isMobileView)) + GAP;
         }
