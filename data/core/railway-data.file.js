@@ -8852,12 +8852,6 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Tabata",
-          "lineId": "Namboku",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Tabata",
           "lineId": "Yamanote",
           "type": "in",
           "note": ""
@@ -9340,23 +9334,33 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Shin-Koyasu",
-          "lineId": "Keikyu"
+          "lineId": "Keikyu",
+          "toStation": "Keikyu-Shin-Koyasu",
+          "note": "Keikyu-Shin-Koyasu"
         },
         {
           "station": "Higashi-Kanagawa",
-          "lineId": "Keikyu"
+          "lineId": "Keikyu",
+          "toStation": "Keikyu-Higashi-Kanagawa",
+          "note": "Keikyu-Higashi-Kanagawa"
         },
         {
           "station": "Takanawa-Gateway",
-          "lineId": "Asakusa"
+          "lineId": "Asakusa",
+          "toStation": "Sengakuji",
+          "note": "Sengakuji"
         },
         {
           "station": "Okachimachi",
-          "lineId": "Oedo"
+          "lineId": "Oedo",
+          "toStation": "Ueno-Okachimachi",
+          "note": "Ueno-Okachimachi"
         },
         {
           "station": "Tsurumi",
-          "lineId": "Keikyu"
+          "lineId": "Keikyu",
+          "toStation": "Keikyu-Tsurumi",
+          "note": "Keikyu-Tsurumi"
         }
       ],
       "nameZh": "京滨东北线・根岸线",
@@ -10990,11 +10994,15 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Kita-Asaka",
-          "lineId": "Tojo"
+          "lineId": "Tojo",
+          "toStation": "Asaka",
+          "note": "Asaka"
         },
         {
           "station": "Minami-Koshigaya",
-          "lineId": "TobuSkytree"
+          "lineId": "TobuSkytree",
+          "toStation": "Minami-Koshigaya",
+          "note": "Minami-Koshigaya"
         }
       ],
       "nameZh": "武藏野线",
@@ -13274,15 +13282,27 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Awajicho",
-          "lineId": "Shinjuku"
+          "lineId": "Shinjuku",
+          "toStation": "Awajicho",
+          "note": "Awajicho"
         },
         {
           "station": "Korakuen",
-          "lineId": "Mita"
+          "lineId": "Mita",
+          "toStation": "Kasuga",
+          "note": "春日"
         },
         {
           "station": "Shinjuku-Sanchome",
-          "lineId": "Oedo"
+          "lineId": "Oedo",
+          "toStation": "Shinjuku-Sanchome",
+          "note": "Shinjuku-Sanchome"
+        },
+        {
+          "station": "Korakuen",
+          "lineId": "Oedo",
+          "toStation": "Kasuga",
+          "note": "春日"
         }
       ],
       "branches": [
@@ -13810,11 +13830,15 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Chikatetsu-Akatsuka",
-          "lineId": "Tojo"
+          "lineId": "Tojo",
+          "toStation": "Akatsuka",
+          "note": "Akatsuka"
         },
         {
           "station": "Chikatetsu-Narimasu",
-          "lineId": "Tojo"
+          "lineId": "Tojo",
+          "toStation": "Narimasu",
+          "note": "Narimasu"
         }
       ],
       "nameZh": "有乐町线",
@@ -14224,7 +14248,9 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Sengakuji",
-          "lineId": "KeihinTohoku"
+          "lineId": "KeihinTohoku",
+          "toStation": "Takanawa-Gateway",
+          "note": "Takanawa-Gateway"
         }
       ],
       "nameZh": "浅草线",
@@ -14406,7 +14432,15 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Kasuga",
-          "lineId": "Marunouchi"
+          "lineId": "Marunouchi",
+          "toStation": "Korakuen",
+          "note": "後楽園"
+        },
+        {
+          "station": "Kasuga",
+          "lineId": "Namboku",
+          "toStation": "Korakuen",
+          "note": "後楽園"
         }
       ],
       "nameZh": "三田线",
@@ -14608,27 +14642,38 @@ window.RAILWAY_DATA = {
           "station": "Shinjuku",
           "lineId": "SeibuShinjuku",
           "type": "out",
-          "note": "西武新宿，徒歩約8分"
+          "note": "Seibu-Shinjuku",
+          "toStation": "Seibu-Shinjuku"
         },
         {
           "station": "Ogawamachi",
-          "lineId": "Marunouchi"
+          "lineId": "Marunouchi",
+          "toStation": "Awajicho",
+          "note": "Awajicho"
         },
         {
           "station": "Bakuro-Yokoyama",
-          "lineId": "SobuRapid"
+          "lineId": "SobuRapid",
+          "toStation": "Bakuro-Yokoyama",
+          "note": "Bakuro-Yokoyama"
         },
         {
           "station": "Bakuro-Yokoyama",
-          "lineId": "Asakusa"
+          "lineId": "Asakusa",
+          "toStation": "Bakuro-Yokoyama",
+          "note": "Bakuro-Yokoyama"
         },
         {
           "station": "Moto-Yawata",
-          "lineId": "Keisei"
+          "lineId": "Keisei",
+          "toStation": "Keisei-Yawata",
+          "note": "Keisei-Yawata"
         },
         {
           "station": "Shinjuku-Sanchome",
-          "lineId": "Oedo"
+          "lineId": "Oedo",
+          "toStation": "Shinjuku-Sanchome",
+          "note": "Shinjuku-Sanchome"
         }
       ],
       "nameZh": "新宿线",
@@ -14940,19 +14985,39 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Ueno-Okachimachi",
-          "lineId": "KeihinTohoku"
+          "lineId": "KeihinTohoku",
+          "toStation": "Okachimachi",
+          "note": "Okachimachi"
         },
         {
           "station": "Shinjuku-Nishiguchi",
-          "lineId": "Marunouchi"
+          "lineId": "Marunouchi",
+          "toStation": "Shinjuku",
+          "note": "Shinjuku"
         },
         {
           "station": "Shinjuku-Nishiguchi",
-          "lineId": "Shinjuku"
+          "lineId": "Shinjuku",
+          "toStation": "Shinjuku",
+          "note": "Shinjuku"
         },
         {
           "station": "Shinjuku-Nishiguchi",
-          "lineId": "Fukutoshin"
+          "lineId": "Fukutoshin",
+          "toStation": "Shinjuku-Sanchome",
+          "note": "Shinjuku-Sanchome"
+        },
+        {
+          "station": "Kasuga",
+          "lineId": "Marunouchi",
+          "toStation": "Korakuen",
+          "note": "後楽園"
+        },
+        {
+          "station": "Kasuga",
+          "lineId": "Namboku",
+          "toStation": "Korakuen",
+          "note": "後楽園"
         }
       ],
       "isSixShapedLoop": true,
@@ -15161,11 +15226,15 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Machiya",
-          "lineId": "Arakawa"
+          "lineId": "Arakawa",
+          "toStation": "Machiya_Eki_Mae",
+          "note": "Machiya_Eki_Mae"
         },
         {
           "station": "Yoyogi-Koen",
-          "lineId": "Odawara"
+          "lineId": "Odawara",
+          "toStation": "Yoyogi-Hachiman",
+          "note": "Yoyogi-Hachiman"
         }
       ],
       "branches": [
@@ -15424,7 +15493,7 @@ window.RAILWAY_DATA = {
         "Todaimae",
         "Hon-Komagome",
         "Komagome",
-        "Tabata",
+        "Iidabashi",
         "Nishigahara",
         "Oji",
         "Oji-Kamiya",
@@ -15539,25 +15608,7 @@ window.RAILWAY_DATA = {
           "note": ""
         },
         {
-          "station": "Korakuen",
-          "lineId": "Marunouchi",
-          "type": "in",
-          "note": ""
-        },
-        {
           "station": "Komagome",
-          "lineId": "Yamanote",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Tabata",
-          "lineId": "KeihinTohoku",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Tabata",
           "lineId": "Yamanote",
           "type": "in",
           "note": ""
@@ -15576,7 +15627,27 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Oji",
-          "lineId": "Arakawa"
+          "lineId": "Arakawa",
+          "toStation": "Oji_Eki_Mae",
+          "note": "Oji_Eki_Mae"
+        },
+        {
+          "station": "Korakuen",
+          "lineId": "Marunouchi",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Korakuen",
+          "lineId": "Mita",
+          "toStation": "Kasuga",
+          "note": "春日"
+        },
+        {
+          "station": "Korakuen",
+          "lineId": "Oedo",
+          "toStation": "Kasuga",
+          "note": "春日"
         }
       ],
       "nameZh": "南北线",
@@ -15647,13 +15718,15 @@ window.RAILWAY_DATA = {
           "station": "Chikatetsu-Narimasu",
           "lineId": "Yurakucho",
           "type": "in",
-          "note": ""
+          "note": "Narimasu",
+          "toStation": "Narimasu"
         },
         {
           "station": "Chikatetsu-Akatsuka",
           "lineId": "Yurakucho",
           "type": "in",
-          "note": ""
+          "note": "Akatsuka",
+          "toStation": "Akatsuka"
         },
         {
           "station": "Heiwadai",
@@ -15807,11 +15880,15 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Zoshigaya",
-          "lineId": "Arakawa"
+          "lineId": "Arakawa",
+          "toStation": "Kishibojinmae",
+          "note": "Kishibojinmae"
         },
         {
           "station": "Shinjuku-Sanchome",
-          "lineId": "Oedo"
+          "lineId": "Oedo",
+          "toStation": "Shinjuku-Sanchome",
+          "note": "Shinjuku-Sanchome"
         }
       ],
       "nameZh": "副都心线",
@@ -15926,10 +16003,6 @@ window.RAILWAY_DATA = {
           "lineId": "Yurakucho",
           "type": "in",
           "note": ""
-        },
-        {
-          "station": "Ariake",
-          "lineId": "Rinkai"
         }
       ],
       "nameZh": "百合鸥",
@@ -16054,67 +16127,78 @@ window.RAILWAY_DATA = {
           "station": "Seibu-Shinjuku",
           "lineId": "ChuoRapid",
           "type": "out",
-          "note": "西武新宿⇄新宿，徒歩約8分"
+          "note": "新宿",
+          "toStation": "Shinjuku"
         },
         {
           "station": "Seibu-Shinjuku",
           "lineId": "Saikyo",
           "type": "out",
-          "note": "西武新宿⇄新宿，徒歩約8分"
+          "note": "新宿",
+          "toStation": "Shinjuku"
         },
         {
           "station": "Seibu-Shinjuku",
           "lineId": "ShonanShinjuku",
           "type": "out",
-          "note": "西武新宿⇄新宿，徒歩約8分"
+          "note": "新宿",
+          "toStation": "Shinjuku"
         },
         {
           "station": "Seibu-Shinjuku",
           "lineId": "Marunouchi",
           "type": "out",
-          "note": "西武新宿⇄新宿，徒歩約8分"
+          "note": "新宿",
+          "toStation": "Shinjuku"
         },
         {
           "station": "Seibu-Shinjuku",
           "lineId": "Shinjuku",
           "type": "out",
-          "note": "西武新宿⇄新宿，徒歩約8分"
+          "note": "新宿",
+          "toStation": "Shinjuku"
         },
         {
           "station": "Seibu-Shinjuku",
           "lineId": "Oedo",
           "type": "out",
-          "note": "西武新宿⇄新宿，徒歩約8分"
+          "note": "新宿",
+          "toStation": "Shinjuku"
         },
         {
           "station": "Seibu-Shinjuku",
           "lineId": "Yamanote",
           "type": "out",
-          "note": "西武新宿⇄新宿，徒歩約8分"
+          "note": "新宿",
+          "toStation": "Shinjuku"
         },
         {
           "station": "Seibu-Shinjuku",
           "lineId": "ChuoSobuLocal",
           "type": "out",
-          "note": "西武新宿⇄新宿，徒歩約8分"
+          "note": "新宿",
+          "toStation": "Shinjuku"
         },
         {
           "station": "Seibu-Shinjuku",
           "lineId": "KeioMain",
           "type": "out",
-          "note": "西武新宿⇄新宿，徒歩約8分"
+          "note": "新宿",
+          "toStation": "Shinjuku"
         },
         {
           "station": "Seibu-Shinjuku",
           "lineId": "KeioShin",
           "type": "out",
-          "note": "西武新宿⇄新宿，徒歩約8分"
+          "note": "新宿",
+          "toStation": "Shinjuku"
         },
         {
           "station": "Seibu-Shinjuku",
           "lineId": "Odawara",
           "type": "out",
-          "note": "西武新宿⇄新宿，徒歩約8分"
+          "note": "新宿",
+          "toStation": "Shinjuku"
         }
       ],
       "nameZh": "新宿线",
@@ -16822,7 +16906,8 @@ window.RAILWAY_DATA = {
           "station": "Keisei-Tsudanuma",
           "lineId": "KeiseiChiba",
           "type": "in",
-          "note": ""
+          "note": "Tsudanuma",
+          "toStation": "Tsudanuma"
         },
         {
           "station": "Keisei-Ueno",
@@ -16875,23 +16960,33 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Keisei-Sekiya",
-          "lineId": "TobuSkytree"
+          "lineId": "TobuSkytree",
+          "toStation": "Sekiya",
+          "note": "Sekiya"
         },
         {
           "station": "Keisei-Yawata",
-          "lineId": "Shinjuku"
+          "lineId": "Shinjuku",
+          "toStation": "Moto-Yawata",
+          "note": "Moto-Yawata"
         },
         {
           "station": "Keisei-Funabashi",
-          "lineId": "SobuRapid"
+          "lineId": "SobuRapid",
+          "toStation": "Funabashi",
+          "note": "Funabashi"
         },
         {
           "station": "Keisei-Narita",
-          "lineId": "Narita"
+          "lineId": "Narita",
+          "toStation": "Narita",
+          "note": "Narita"
         },
         {
           "station": "Machiya",
-          "lineId": "Arakawa"
+          "lineId": "Arakawa",
+          "toStation": "Machiya_Eki_Mae",
+          "note": "Machiya_Eki_Mae"
         }
       ],
       "nameZh": "本线",
@@ -17138,11 +17233,15 @@ window.RAILWAY_DATA = {
       "transferStations": [
         {
           "station": "Tama-Center",
-          "lineId": "OdakyuTama"
+          "lineId": "OdakyuTama",
+          "toStation": "Odakyu-Tama-Center",
+          "note": "Odakyu-Tama-Center"
         },
         {
           "station": "Tama-Center",
-          "lineId": "KeioSagami"
+          "lineId": "KeioSagami",
+          "toStation": "Keio-Tama-Center",
+          "note": "Keio-Tama-Center"
         }
       ],
       "nameZh": "多摩单轨线",
@@ -17468,11 +17567,15 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Bakurocho",
-          "lineId": "Shinjuku"
+          "lineId": "Shinjuku",
+          "toStation": "Bakuro-Yokoyama",
+          "note": "Bakuro-Yokoyama"
         },
         {
           "station": "Funabashi",
-          "lineId": "Keisei"
+          "lineId": "Keisei",
+          "toStation": "Keisei-Funabashi",
+          "note": "Keisei-Funabashi"
         }
       ],
       "nameZh": "横须贺线・总武快速线",
@@ -17775,13 +17878,15 @@ window.RAILWAY_DATA = {
           "station": "Keikyu-Kamata",
           "lineId": "KeikyuAirport",
           "type": "in",
-          "note": ""
+          "note": "Kamata",
+          "toStation": "Kamata"
         },
         {
           "station": "Keikyu-Kawasaki",
           "lineId": "Daishi_Keikyu",
           "type": "in",
-          "note": ""
+          "note": "Kawasaki",
+          "toStation": "Kawasaki"
         },
         {
           "station": "Yokohama",
@@ -17863,19 +17968,27 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Keikyu-Shin-Koyasu",
-          "lineId": "KeihinTohoku"
+          "lineId": "KeihinTohoku",
+          "toStation": "Shin-Koyasu",
+          "note": "Shin-Koyasu"
         },
         {
           "station": "Keikyu-Shin-Koyasu",
-          "lineId": "TokaidoMain"
+          "lineId": "TokaidoMain",
+          "toStation": "Shin-Koyasu",
+          "note": "Shin-Koyasu"
         },
         {
           "station": "Keikyu-Higashi-Kanagawa",
-          "lineId": "KeihinTohoku"
+          "lineId": "KeihinTohoku",
+          "toStation": "Higashi-Kanagawa",
+          "note": "Higashi-Kanagawa"
         },
         {
           "station": "Keikyu-Tsurumi",
-          "lineId": "KeihinTohoku"
+          "lineId": "KeihinTohoku",
+          "toStation": "Tsurumi",
+          "note": "Tsurumi"
         }
       ],
       "nameZh": "本线",
@@ -18491,12 +18604,6 @@ window.RAILWAY_DATA = {
           "note": ""
         },
         {
-          "station": "Tabata",
-          "lineId": "Namboku",
-          "type": "in",
-          "note": ""
-        },
-        {
           "station": "Komagome",
           "lineId": "Namboku",
           "type": "in",
@@ -18885,7 +18992,9 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Otsuka",
-          "lineId": "Arakawa"
+          "lineId": "Arakawa",
+          "toStation": "Otsuka_Eki_Mae",
+          "note": "Otsuka_Eki_Mae"
         }
       ],
       "isDoubleColumnLoop": true,
@@ -19027,19 +19136,27 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Otsuka_Eki_Mae",
-          "lineId": "Yamanote"
+          "lineId": "Yamanote",
+          "toStation": "Otsuka",
+          "note": "Otsuka"
         },
         {
           "station": "Onishimogami_Mae",
-          "lineId": "Fukutoshin"
+          "lineId": "Fukutoshin",
+          "toStation": "Nishi-Kasumigaseki",
+          "note": "Nishi-Kasumigaseki"
         },
         {
           "station": "Oji_Eki_Mae",
-          "lineId": "KeihinTohoku"
+          "lineId": "KeihinTohoku",
+          "toStation": "Oji",
+          "note": "Oji"
         },
         {
           "station": "Machiya_Eki_Mae",
-          "lineId": "Chiyoda"
+          "lineId": "Chiyoda",
+          "toStation": "Machiya",
+          "note": "Machiya"
         },
         {
           "station": "Kuma_Mae",
@@ -19047,11 +19164,15 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Machiya_Eki_Mae",
-          "lineId": "Keisei"
+          "lineId": "Keisei",
+          "toStation": "Machiya",
+          "note": "Machiya"
         },
         {
           "station": "Oji_Eki_Mae",
-          "lineId": "Namboku"
+          "lineId": "Namboku",
+          "toStation": "Oji",
+          "note": "Oji"
         }
       ],
       "nameZh": "都电荒川线",
@@ -19114,12 +19235,6 @@ window.RAILWAY_DATA = {
         {
           "station": "Koriyama",
           "lineId": "BanetsuWest",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Koriyama",
-          "lineId": "Suigun",
           "type": "in",
           "note": ""
         },
@@ -19243,12 +19358,6 @@ window.RAILWAY_DATA = {
         {
           "station": "Koriyama",
           "lineId": "BanetsuEast",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Koriyama",
-          "lineId": "Suigun",
           "type": "in",
           "note": ""
         },
@@ -19770,7 +19879,8 @@ window.RAILWAY_DATA = {
           "station": "Keikyu-Kawasaki",
           "lineId": "Keikyu",
           "type": "in",
-          "note": ""
+          "note": "Kawasaki",
+          "toStation": "Kawasaki"
         }
       ],
       "nameZh": "大师线",
@@ -21113,7 +21223,8 @@ window.RAILWAY_DATA = {
           "station": "Keikyu-Kamata",
           "lineId": "Keikyu",
           "type": "in",
-          "note": ""
+          "note": "Kamata",
+          "toStation": "Kamata"
         },
         {
           "station": "Tenku-Bashi",
@@ -21632,15 +21743,21 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Keio-Nagayama",
-          "lineId": "OdakyuTama"
+          "lineId": "OdakyuTama",
+          "toStation": "Odakyu-Nagayama",
+          "note": "Odakyu-Nagayama"
         },
         {
           "station": "Keio-Tama-Center",
-          "lineId": "OdakyuTama"
+          "lineId": "OdakyuTama",
+          "toStation": "Tama",
+          "note": "Tama"
         },
         {
           "station": "Keio-Tama-Center",
-          "lineId": "TamaMonorail"
+          "lineId": "TamaMonorail",
+          "toStation": "Tama",
+          "note": "Tama"
         }
       ],
       "nameZh": "相模原线",
@@ -22478,18 +22595,6 @@ window.RAILWAY_DATA = {
           "note": ""
         },
         {
-          "station": "Narita",
-          "lineId": "SobuMain",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Sawara",
-          "lineId": "Kashima",
-          "type": "in",
-          "note": ""
-        },
-        {
           "station": "Katori",
           "lineId": "Kashima",
           "type": "in",
@@ -22527,7 +22632,9 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Narita",
-          "lineId": "Keisei"
+          "lineId": "Keisei",
+          "toStation": "Keisei-Narita",
+          "note": "Keisei-Narita"
         }
       ],
       "nameZh": "成田线",
@@ -22877,15 +22984,21 @@ window.RAILWAY_DATA = {
       "transferStations": [
         {
           "station": "Odakyu-Ei-Zan",
-          "lineId": "KeioSagami"
+          "lineId": "KeioSagami",
+          "toStation": "Keio-Nagayama",
+          "note": "Keio-Nagayama"
         },
         {
           "station": "Odakyu-Tama-Center",
-          "lineId": "KeioSagami"
+          "lineId": "KeioSagami",
+          "toStation": "Tama",
+          "note": "Tama"
         },
         {
           "station": "Odakyu-Tama-Center",
-          "lineId": "TamaMonorail"
+          "lineId": "TamaMonorail",
+          "toStation": "Tama",
+          "note": "Tama"
         }
       ],
       "nameZh": "多摩线",
@@ -23659,7 +23772,9 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "KokusaiTenjijo",
-          "lineId": "Yurikamome"
+          "lineId": "Yurikamome",
+          "toStation": "Tokyo-Big-Sight",
+          "note": "东京国际展示场"
         }
       ],
       "nameZh": "临海线",
@@ -24371,7 +24486,7 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Uzen-Chitose",
-          "lineId": "OuMain",
+          "lineId": "Yamagata",
           "type": "in",
           "note": ""
         },
@@ -24383,7 +24498,7 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Kita-Yamagata",
-          "lineId": "OuMain",
+          "lineId": "Yamagata",
           "type": "in",
           "note": ""
         },
@@ -24395,7 +24510,7 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Yamagata",
-          "lineId": "OuMain",
+          "lineId": "Yamagata",
           "type": "in",
           "note": ""
         },
@@ -25232,14 +25347,8 @@ window.RAILWAY_DATA = {
           "note": ""
         },
         {
-          "station": "Koriyama",
-          "lineId": "Suigun",
-          "type": "in",
-          "note": ""
-        },
-        {
           "station": "Fukushima",
-          "lineId": "OuMain",
+          "lineId": "Yamagata",
           "type": "in",
           "note": ""
         },
@@ -25508,15 +25617,21 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Shimo-Akatsuka",
-          "lineId": "Yurakucho"
+          "lineId": "Yurakucho",
+          "toStation": "Chikatetsu-Akatsuka",
+          "note": "Chikatetsu-Akatsuka"
         },
         {
           "station": "Asakadai",
-          "lineId": "Musashino"
+          "lineId": "Musashino",
+          "toStation": "Kita-Asaka",
+          "note": "Kita-Asaka"
         },
         {
           "station": "Narimasu",
-          "lineId": "Yurakucho"
+          "lineId": "Yurakucho",
+          "toStation": "Chikatetsu-Narimasu",
+          "note": "Chikatetsu-Narimasu"
         }
       ],
       "nameZh": "东上线",
@@ -26108,12 +26223,6 @@ window.RAILWAY_DATA = {
           "note": ""
         },
         {
-          "station": "Kita-Amarume",
-          "lineId": "RikutsuWest",
-          "type": "in",
-          "note": ""
-        },
-        {
           "station": "Kamihama",
           "lineId": "Shinetsu",
           "type": "in",
@@ -26179,7 +26288,8 @@ window.RAILWAY_DATA = {
           "station": "Tobu-Utsunomiya",
           "lineId": "UtsunomiyaJR",
           "type": "out",
-          "note": "徒歩連絡"
+          "note": "UtsunomiyaJR",
+          "toStation": "UtsunomiyaJR"
         }
       ],
       "nameZh": "宇都宫线",
@@ -26457,7 +26567,7 @@ window.RAILWAY_DATA = {
       "transferStations": [
         {
           "station": "Yonezawa",
-          "lineId": "OuMain",
+          "lineId": "Yamagata",
           "type": "in",
           "note": ""
         },
@@ -26780,11 +26890,15 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Gotokuji",
-          "lineId": "TokyuSetagaya"
+          "lineId": "TokyuSetagaya",
+          "toStation": "Yamashita",
+          "note": "Yamashita"
         },
         {
           "station": "Yoyogi-Hachiman",
-          "lineId": "Chiyoda"
+          "lineId": "Chiyoda",
+          "toStation": "Yoyogi-Koen",
+          "note": "Yoyogi-Koen"
         }
       ],
       "nameZh": "小田原线",
@@ -27095,11 +27209,15 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Ushida",
-          "lineId": "Keisei"
+          "lineId": "Keisei",
+          "toStation": "Keisei-Ushida",
+          "note": "Keisei-Ushida"
         },
         {
           "station": "Shin-Koshigaya",
-          "lineId": "Musashino"
+          "lineId": "Musashino",
+          "toStation": "Minami-Koshigaya",
+          "note": "Minami-Koshigaya"
         }
       ],
       "nameZh": "东武晴空塔线",
@@ -27302,7 +27420,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "东急大井町线",
-      "nameKo": "도큐 오이마치선"
+      "nameKo": "도큐 오이마치선",
+      "name": "東急大井町線"
     },
     "TokyuMeguro": {
       "nameJa": "東急目黒線",
@@ -27376,7 +27495,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "东急目黑线",
-      "nameKo": "도큐 메구로선"
+      "nameKo": "도큐 메구로선",
+      "name": "東急目黒線"
     },
     "TokyuIkegami": {
       "nameJa": "東急池上線",
@@ -27434,7 +27554,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "东急池上线",
-      "nameKo": "도큐 이케가미선"
+      "nameKo": "도큐 이케가미선",
+      "name": "東急池上線"
     },
     "TokyuSetagaya": {
       "nameJa": "東急世田谷線",
@@ -27457,11 +27578,14 @@ window.RAILWAY_DATA = {
       "transferStations": [
         {
           "station": "Yamashita",
-          "lineId": "Odawara"
+          "lineId": "Odawara",
+          "toStation": "Gotokuji",
+          "note": "Gotokuji"
         }
       ],
       "nameZh": "东急世田谷线",
-      "nameKo": "도큐 세타가야선"
+      "nameKo": "도큐 세타가야선",
+      "name": "東急世田谷線"
     },
     "TokyuKodomonokuni": {
       "nameJa": "東急こどもの国線",
@@ -27489,7 +27613,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "东急儿童国线",
-      "nameKo": "도큐 코도모노쿠니선"
+      "nameKo": "도큐 코도모노쿠니선",
+      "name": "東急こどもの国線"
     },
     "Hachiko": {
       "nameJa": "八高線",
@@ -27598,7 +27723,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "八高线",
-      "nameKo": "하치코선"
+      "nameKo": "하치코선",
+      "name": "八高線"
     },
     "KeiseiOshiage": {
       "nameJa": "京成押上線",
@@ -27641,7 +27767,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "押上线",
-      "nameKo": "오시아게선"
+      "nameKo": "오시아게선",
+      "name": "京成押上線"
     },
     "KeiseiKanamachi": {
       "nameJa": "京成金町線",
@@ -27669,7 +27796,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "金町线",
-      "nameKo": "카나마치선"
+      "nameKo": "카나마치선",
+      "name": "京成金町線"
     },
     "KeiseiChiba": {
       "nameJa": "京成千葉線",
@@ -27694,7 +27822,8 @@ window.RAILWAY_DATA = {
           "station": "Keisei-Tsudanuma",
           "lineId": "Keisei",
           "type": "in",
-          "note": ""
+          "note": "Tsudanuma",
+          "toStation": "Tsudanuma"
         },
         {
           "station": "Chiba-Chuo",
@@ -27704,7 +27833,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "千叶线",
-      "nameKo": "치바선"
+      "nameKo": "치바선",
+      "name": "京成千葉線"
     },
     "KeiseiChihara": {
       "nameJa": "京成千原線",
@@ -27729,7 +27859,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "千原线",
-      "nameKo": "치하라선"
+      "nameKo": "치하라선",
+      "name": "京成千原線"
     },
     "NaritaSkyAccess": {
       "nameJa": "成田スカイアクセス線",
@@ -27784,7 +27915,8 @@ window.RAILWAY_DATA = {
         8,
         6
       ],
-      "durationTotalMin": 36
+      "durationTotalMin": 36,
+      "name": "成田空港線"
     },
     "SotetsuIzumino": {
       "nameJa": "相鉄いずみ野線",
@@ -27823,7 +27955,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "泉野线",
-      "nameKo": "이즈미노선"
+      "nameKo": "이즈미노선",
+      "name": "相鉄いずみ野線"
     },
     "SotetsuShin-Yokohama": {
       "nameJa": "相鉄新横浜線",
@@ -27857,7 +27990,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "相铁新横滨线",
-      "nameKo": "소테츠 신요코하마선"
+      "nameKo": "소테츠 신요코하마선",
+      "name": "相鉄新横浜線"
     },
     "NewShuttle": {
       "nameJa": "埼玉新都市交通伊奈線（ニューシャトル）",
@@ -27925,7 +28059,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "埼玉新都市交通伊奈线（新穿梭）",
-      "nameKo": "사이타마 신도시 교통 이나선（뉴 셔틀）"
+      "nameKo": "사이타마 신도시 교통 이나선（뉴 셔틀）",
+      "name": "ニューシャトル"
     },
     "TokyoMonorail": {
       "nameJa": "東京モノレール羽田空港線",
@@ -27991,7 +28126,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "东京单轨电车羽田机场线",
-      "nameKo": "도쿄 모노레일 하네다 공항선"
+      "nameKo": "도쿄 모노레일 하네다 공항선",
+      "name": "東京モノレール"
     },
     "SobuMain": {
       "nameJa": "総武本線",
@@ -28062,7 +28198,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "总武本线",
-      "nameKo": "소부 본선"
+      "nameKo": "소부 본선",
+      "name": "総武本線"
     },
     "ChuoMain": {
       "nameJa": "中央本線",
@@ -28140,7 +28277,8 @@ window.RAILWAY_DATA = {
         "ChuoTatsuno"
       ],
       "nameZh": "中央本线",
-      "nameKo": "주오 본선"
+      "nameKo": "주오 본선",
+      "name": "中央本線"
     },
     "TokaidoMain": {
       "nameJa": "東海道本線",
@@ -28690,11 +28828,14 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Shin-Koyasu",
-          "lineId": "Keikyu"
+          "lineId": "Keikyu",
+          "toStation": "Keikyu-Shin-Koyasu",
+          "note": "Keikyu-Shin-Koyasu"
         }
       ],
       "nameZh": "东海道本线",
-      "nameKo": "도카이도 본선"
+      "nameKo": "도카이도 본선",
+      "name": "東海道本線"
     },
     "Tadami": {
       "name": "只见线",
@@ -31318,7 +31459,7 @@ window.RAILWAY_DATA = {
     "黒磯": "Kuroiso",
     "前橋": "Maebashi",
     "三崎港": "Miura-Kaigan",
-    "元町中国街": "Motomachi-Chukagai",
+    "元町・中華街": "Motomachi-Chukagai",
     "向島": "Mukojima",
     "武蔵吉田": "Musashi-Yoshida",
     "武蔵野": "Musashino",
@@ -31505,7 +31646,6 @@ window.RAILWAY_DATA = {
     ],
     "Tabata": [
       "KeihinTohoku",
-      "Namboku",
       "Yamanote"
     ],
     "Nishi-Nippori": [
@@ -32537,7 +32677,8 @@ window.RAILWAY_DATA = {
       "Yurakucho",
       "Tozai",
       "Oedo",
-      "ChuoSobuLocal"
+      "ChuoSobuLocal",
+      "Namboku"
     ],
     "Ichigaya": [
       "Yurakucho",
@@ -40059,12 +40200,12 @@ window.RAILWAY_DATA = {
       "Todaimae": 10,
       "Hon-Komagome": 11,
       "Komagome": 12,
-      "Tabata": 13,
       "Nishigahara": 14,
       "Oji": 15,
       "Oji-Kamiya": 16,
       "Shimo": 17,
-      "Akabane-Iwabuchi": 18
+      "Akabane-Iwabuchi": 18,
+      "Iidabashi": 13
     },
     "Fukutoshin": {
       "Wakoshi": 0,

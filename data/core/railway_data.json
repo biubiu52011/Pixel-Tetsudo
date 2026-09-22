@@ -8852,12 +8852,6 @@
         },
         {
           "station": "Tabata",
-          "lineId": "Namboku",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Tabata",
           "lineId": "Yamanote",
           "type": "in",
           "note": ""
@@ -15499,7 +15493,7 @@
         "Todaimae",
         "Hon-Komagome",
         "Komagome",
-        "Tabata",
+        "Iidabashi",
         "Nishigahara",
         "Oji",
         "Oji-Kamiya",
@@ -15615,18 +15609,6 @@
         },
         {
           "station": "Komagome",
-          "lineId": "Yamanote",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Tabata",
-          "lineId": "KeihinTohoku",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Tabata",
           "lineId": "Yamanote",
           "type": "in",
           "note": ""
@@ -18618,12 +18600,6 @@
         {
           "station": "Tabata",
           "lineId": "KeihinTohoku",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Tabata",
-          "lineId": "Namboku",
           "type": "in",
           "note": ""
         },
@@ -31670,7 +31646,6 @@
     ],
     "Tabata": [
       "KeihinTohoku",
-      "Namboku",
       "Yamanote"
     ],
     "Nishi-Nippori": [
@@ -32702,7 +32677,8 @@
       "Yurakucho",
       "Tozai",
       "Oedo",
-      "ChuoSobuLocal"
+      "ChuoSobuLocal",
+      "Namboku"
     ],
     "Ichigaya": [
       "Yurakucho",
@@ -40224,12 +40200,12 @@
       "Todaimae": 10,
       "Hon-Komagome": 11,
       "Komagome": 12,
-      "Tabata": 13,
       "Nishigahara": 14,
       "Oji": 15,
       "Oji-Kamiya": 16,
       "Shimo": 17,
-      "Akabane-Iwabuchi": 18
+      "Akabane-Iwabuchi": 18,
+      "Iidabashi": 13
     },
     "Fukutoshin": {
       "Wakoshi": 0,
