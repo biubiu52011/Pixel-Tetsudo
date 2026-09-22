@@ -464,33 +464,44 @@
               }
             }
           }
-          // v5: 车型判断（数据层）——TrainIcons.getTrainClass 复用渲染层同一套选择逻辑，
-          // 输入与渲染 trainUid 同构（lineId_trainNumber_stationIndex），车号规则解析一致
-          var trainClass = '';
-          try {
-            if (window.TrainIcons && typeof window.TrainIcons.getTrainClass === "function") {
-              trainClass = window.TrainIcons.getTrainClass(
-                lineId, line.operator,
-                lineId + '_' + trainNumber + '_' + currentStationIndex,
-                currentStationIndex, tt['odpt:trainType']
-              );
-            }
-          } catch(e) {}
-          var _vehicleType = tt['vehicleType'] ||
-            (window.VehicleTypeMap ? window.VehicleTypeMap.resolve(lineId, tt['odpt:trainType'], tt['odpt:destinationStation']) : '');
-          // v4.3.940: 车号→车型候选 全局表（实时车渲染查表用；同一车号跨线累积去重）
-          if (_vehicleType && trainNumber) {
-            if (!window.TRAIN_NO_VEHICLE) window.TRAIN_NO_VEHICLE = {};
-            var _exist = window.TRAIN_NO_VEHICLE[trainNumber] || [];
-            String(_vehicleType).split('/').forEach(function(s) {
-              var c = s.trim();
-              if (c && _exist.indexOf(c) < 0) _exist.push(c);
-            });
-            window.TRAIN_NO_VEHICLE[trainNumber] = _exist;
+          // v4.3.950: 车型判定统一入口 TrainVehicle（S0 manual 实证 / S2 车号累积 / S3 查表
+          // 交叉验证；不猜——无有依据候选时 trainClass/vehicleType 为空，图标由渲染层兜底）
+          if (window.TrainVehicle && typeof window.TrainVehicle.registerVehicle === 'function') {
+            window.TrainVehicle.registerVehicle(trainNumber, tt['vehicleType']); // S2 车号级实证
+          }
+          var vehCtx = {
+            lineId: lineId,
+            operator: line.operator,
+            trainNumber: trainNumber,
+            stationIndex: currentStationIndex,
+            trainType: tt['odpt:trainType'],
+            destinationStation: tt['odpt:destinationStation'],
+            vehicleTypeManual: tt['vehicleType'] || '',
+            trainId: lineId + '_' + trainNumber + '_' + currentStationIndex
+          };
+          var vehResult = (window.TrainVehicle && typeof window.TrainVehicle.resolve === 'function')
+            ? window.TrainVehicle.resolve(vehCtx)
+            : { name: '', vehicleTypeStr: '' };
+          var trainClass = vehResult.name || '';
+          var _vehicleType = vehResult.vehicleTypeStr || '';
+          // 兼容回退：TrainVehicle 未加载时维持旧逻辑（manual || VehicleTypeMap / getTrainClass）
+          if (!window.TrainVehicle) {
+            _vehicleType = tt['vehicleType'] ||
+              (window.VehicleTypeMap ? window.VehicleTypeMap.resolve(lineId, tt['odpt:trainType'], tt['odpt:destinationStation']) : '');
+            try {
+              if (window.TrainIcons && typeof window.TrainIcons.getTrainClass === "function") {
+                trainClass = window.TrainIcons.getTrainClass(
+                  lineId, line.operator,
+                  lineId + '_' + trainNumber + '_' + currentStationIndex,
+                  currentStationIndex, tt['odpt:trainType']
+                );
+              }
+            } catch(e) {}
           }
           positions.push({
             stationIndex: currentStationIndex,
             trainId: lineId + '_' + trainNumber,
+            trainNumber: trainNumber,  // v4.3.950: 纯车号——渲染层查 TRAIN_NO_VEHICLE 用（修复 key 不匹配）
             delayMin: delayMin,
             estimated: true,
             extrapolated: extrapolated,

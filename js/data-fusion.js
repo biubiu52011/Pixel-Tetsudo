@@ -408,6 +408,20 @@
   var posMap = {};
   var THROUGH_RAILWAY_FALLBACK = (window.RuntimeConfig && window.RuntimeConfig.THROUGH_RAILWAY_FALLBACK) || {"SotetsuDirect":{"exclude":["Yamanote"],"prefer":["SotetsuShin-Yokohama","Yokosuka","Saikyo","ShonanShinjuku"]}};
 
+  // v4.3.950: 车型判定统一入口辅助——TrainVehicle.resolve 优先（多源交叉验证，不猜），
+  // 缺失时回退旧逻辑 TrainIcons.getTrainClass（图标推定，兼容未加载新脚本的页面）
+  function resolveTrainClass(vehCtx, fbLineId, fbOp, fbTrainId, fbIdx, fbType) {
+    try {
+      if (window.TrainVehicle && typeof window.TrainVehicle.resolve === 'function') {
+        return window.TrainVehicle.resolve(vehCtx).name || '';
+      }
+      if (window.TrainIcons && typeof window.TrainIcons.getTrainClass === 'function') {
+        return window.TrainIcons.getTrainClass(fbLineId, fbOp, fbTrainId, fbIdx, fbType) || '';
+      }
+    } catch(e) {}
+    return '';
+  }
+
   function loadTrainPositions() {
     try {
       var positionSource = window.ODPT_TRAIN_POSITIONS || window.ODPT_TRAINS;
@@ -551,7 +565,8 @@
             }
             var positionData = { 
               stationIndex: idx, 
-              trainId: trainId, 
+              trainId: trainId,
+              trainNumber: trainId,  // v4.3.950: 纯车号——渲染层查 TRAIN_NO_VEHICLE 用（修复 key 不匹配）
               delayMin: delayMin,
               railDirection: directionName,
               destinationStation: destStation,
@@ -567,23 +582,21 @@
             var isRinkaiTrain = (trainOperator === 'odpt.Operator:TWR' || trainOperator === 'TWR');
             if (isRinkaiTrain && (lid === 'Saikyo' || lid === 'Kawagoe')) {
               // 这是临海线的车，现在开到埼京线/川越线区间了
-              positionData.trainClass = window.TrainIcons.getTrainClass(
-                'Rinkai', 'TWR',
-                trainId + '_' + idx, idx, rawType
+              positionData.trainClass = resolveTrainClass(
+                { lineId: 'Rinkai', operator: 'TWR', trainNumber: trainId, stationIndex: idx, trainType: rawType, destinationStation: destStations, trainId: trainId + '_' + idx },
+                'Rinkai', 'TWR', trainId + '_' + idx, idx, rawType
               );
               positionData.isRinkaiThrough = true;
             } else {
               // v5: 车型判断（数据层）——用列车自己的operator判断，不是当前线路的operator
               // 这样直通过来的车（比如东急的车开到半藏门线）就会显示东急的车型，而不是地铁的车型
               try {
-                if (window.TrainIcons && typeof window.TrainIcons.getTrainClass === "function") {
-                  // 从odpt:operator提取operator简称（去掉odpt.Operator:前缀）
-                  var trainOpShort = trainOperator.replace('odpt.Operator:', '') || '';
-                  positionData.trainClass = window.TrainIcons.getTrainClass(
-                    lid, trainOpShort,
-                    trainId + '_' + idx, idx, rawType
-                  );
-                }
+                // 从odpt:operator提取operator简称（去掉odpt.Operator:前缀）
+                var trainOpShort = trainOperator.replace('odpt.Operator:', '') || '';
+                positionData.trainClass = resolveTrainClass(
+                  { lineId: lid, operator: trainOpShort, trainNumber: trainId, stationIndex: idx, trainType: rawType, destinationStation: destStations, trainId: trainId + '_' + idx },
+                  lid, trainOpShort, trainId + '_' + idx, idx, rawType
+                );
               } catch(e) {}
             }
             // 2. JR的车开往新木场（destinationStation=ShinKiba）→ 也加到临海线posMap
@@ -599,6 +612,7 @@
                   var rinkaiPositionData = {
                     stationIndex: rinkaiOsakiIdx, // 大崎站
                     trainId: trainId,
+                    trainNumber: trainId,  // v4.3.950: 纯车号
                     delayMin: delayMin,
                     railDirection: directionName,
                     destinationStation: destStation,
@@ -606,7 +620,10 @@
                     typeName: typeName,
                     estimated: false,
                     isJRThrough: true,
-                    trainClass: window.TrainIcons.getTrainClass('Rinkai', 'JR-East', trainId + '_' + idx, idx, rawType)
+                    trainClass: resolveTrainClass(
+                      { lineId: 'Rinkai', operator: 'JR-East', trainNumber: trainId, stationIndex: idx, trainType: rawType, destinationStation: destStations, trainId: trainId + '_' + idx },
+                      'Rinkai', 'JR-East', trainId + '_' + idx, idx, rawType
+                    )
                   };
                   if (rinkaiExistingIdx >= 0) {
                     posMap['Rinkai'][rinkaiExistingIdx] = rinkaiPositionData;

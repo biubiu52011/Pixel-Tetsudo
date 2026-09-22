@@ -1024,15 +1024,38 @@
         }
       } else {
         // Create new train icon
-        // v4.3.940: 优先用时刻表交叉验证出的车型候选（车号→车型，来自 ODPT TrainTimetable + VehicleTypeMap）
+        // v4.3.950: 车型判定统一入口——图标直接取 TrainVehicle.resolve().iconPath
+        // （S0 manual / S2 车号候选 / S3 静态查表 → 图标库；无候选回退 S4 图标规则），
+        // 修复 v4.3.940 缺陷：①估计车 trainId="lineId_trainNumber" 查不到纯车号 key；
+        // ②S3 查表结果（如 UenoTokyo→E231系1000番台）不进图标路径，导致 fallback 山手线 E235。
         // v4.3.939: 车号级缓存 + 直通车按车籍 operator——同一趟车(同 trainId)进不同线路视图用同一张图
         if (!window.__trainIconCache) window.__trainIconCache = {};
         var _icKey = String(p.trainId || trainUid);
         var iconSrc = window.__trainIconCache[_icKey];
-        if (!iconSrc && window.TRAIN_NO_VEHICLE && window.TRAIN_NO_VEHICLE[p.trainId] &&
-            window.TrainIcons && typeof window.TrainIcons.resolveVehicleIcon === "function") {
-          iconSrc = window.TrainIcons.resolveVehicleIcon(window.TRAIN_NO_VEHICLE[p.trainId].join(' / ')) || '';
+        if (!iconSrc && window.TrainVehicle && typeof window.TrainVehicle.resolve === 'function') {
+          var _vrCtx = {
+            lineId: p.fusionLineId || lineId,
+            operator: p.trainOperator || line.operator,
+            trainNumber: p.trainNumber || p.trainId,
+            stationIndex: p.stationIndex,
+            trainType: p.trainType,
+            destinationStation: p.destinationStation,
+            byOperator: !!p.trainOperator && (p.trainOperator || '') !== line.operator,
+            trainId: trainUid
+          };
+          iconSrc = window.TrainVehicle.resolve(_vrCtx).iconPath || '';
           if (iconSrc) window.__trainIconCache[_icKey] = iconSrc;
+        }
+        // 回退：TrainVehicle 未加载，或 resolve 无图——旧查表 + S4 图标规则
+        if (!iconSrc) {
+          var _candArr = null;
+          if (window.TRAIN_NO_VEHICLE) {
+            _candArr = window.TRAIN_NO_VEHICLE[p.trainNumber || p.trainId] || null;
+          }
+          if (_candArr && _candArr.length > 0 && window.TrainIcons && typeof window.TrainIcons.resolveVehicleIcon === "function") {
+            iconSrc = window.TrainIcons.resolveVehicleIcon(_candArr.join(' / ')) || '';
+            if (iconSrc) window.__trainIconCache[_icKey] = iconSrc;
+          }
         }
         if (!iconSrc) {
           var _carOp = p.trainOperator || line.operator;
