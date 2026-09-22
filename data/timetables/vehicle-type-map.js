@@ -1,3 +1,4 @@
+      var _lastVt = null;
 /**
  * vehicle-type-map.js — 车型・等级 vehicleType overlay 查表
  *
@@ -1576,8 +1577,10 @@
       if (trainTypeUrn) {
         tshort = String(trainTypeUrn).split(':').pop().split('.').pop();
       }
+      var _exactType = true;
       var tmap = cfg[tshort];
       if (!tmap) {
+        _exactType = false;
         // v4.3.963: trainType 查不到时回落到该线路已配置的第一个有 default 的类型（通常是 Local）
         // 避免 Yamanote 只配了 Local 时查 Rapid/Express 直接 miss
         for (var _tk in cfg) { if (cfg[_tk] && cfg[_tk]['default']) { tmap = cfg[_tk]; break; } }
@@ -1602,16 +1605,22 @@
       if (tmap['destStation'] && parts) {
       var stName = parts[parts.length - 1] || '';
       var stVt = tmap['destStation'][stName];
-      if (stVt) return stVt;
+        if (stVt) { _lastVt = { name: stVt, exact: true }; return stVt; }
     }
-    return (dgroup && tmap[dgroup]) || tmap['default'] || '';
+    var _vt = (dgroup && tmap[dgroup]) || tmap['default'] || '';
+      if (_vt) { _lastVt = { name: _vt, exact: _exactType }; }
+      return _vt;
     } catch(e) { return ''; }
   }
+  function _getLastMeta() { return _lastVt; }
 
+  // v4.3.963: 模块级变量——resolveVehicleType 最后一次查表结果（含 exact 标志）
+  var _lastVt = null;
   window.VehicleTypeMap = {
     LINE_GROUP: LINE_GROUP,
     MAP: MAP,
-    resolve: resolveVehicleType
+    resolve: resolveVehicleType,
+    getLastMeta: _getLastMeta
   };
 
 })();
