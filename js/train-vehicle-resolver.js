@@ -492,6 +492,141 @@ var LINE_GROUP = {
     'Ome': 'JR-East', 'Haijima': 'JR-East', 'UenoTokyo': 'JR-East',
     'Ito': 'JR-East', 'Uchibo': 'JR-East', 'Sotobo': 'JR-East',
     'TokyuShinYokohama': 'Tokyu', 'ToyoRapid': 'ToyoRapid',
+    // JR-East 補完 (57 線)
+    'Saikyo': 'JR-East',
+    'KawagoeWest': 'JR-East',
+    'ChuoMain': 'JR-East',
+    'ChuoTatsuno': 'JR-East',
+    'Tsurumi': 'JR-East',
+    'TsurumiUmiShibaura': 'JR-East',
+    'TsurumiOkawa': 'JR-East',
+    'KeihinTohoku': 'JR-East',
+    'NambuBranch': 'JR-East',
+    'SobuRapid': 'JR-East',
+    'UtsunomiyaJR': 'JR-East',
+    'NaritaAbikoBranch': 'JR-East',
+    'NaritaAirportBranch': 'JR-East',
+    'Togane': 'JR-East',
+    'Sagami': 'JR-East',
+    'SobuMain': 'JR-East',
+    'Agatsuma': 'JR-East',
+    'BanetsuEast': 'JR-East',
+    'BanetsuWest': 'JR-East',
+    'Echigo': 'JR-East',
+    'Gono': 'JR-East',
+    'Hachinohe': 'JR-East',
+    'Hakushin': 'JR-East',
+    'Iiyama': 'JR-East',
+    'Ishinomaki': 'JR-East',
+    'Joetsu': 'JR-East',
+    'Kamaishi': 'JR-East',
+    'Kitakami': 'JR-East',
+    'Karasuyama': 'JR-East',
+    'Kashima': 'JR-East',
+    'Kesennuma': 'JR-East',
+    'Komii': 'JR-East',
+    'Kounan': 'JR-East',
+    'Kururi': 'JR-East',
+    'Mito': 'JR-East',
+    'Miyo': 'JR-East',
+    'Ofunato': 'JR-East',
+    'Oga': 'JR-East',
+    'Oito': 'JR-East',
+    'Ominato': 'JR-East',
+    'OuMain': 'JR-East',
+    'RikutoEast': 'JR-East',
+    'RikutsuWest': 'JR-East',
+    'Ryomo': 'JR-East',
+    'Yamada': 'JR-East',
+    'Senseki': 'JR-East',
+    'SensekiTohoku': 'JR-East',
+    'Senzan': 'JR-East',
+    'Shinonoi': 'JR-East',
+    'Suigun': 'JR-East',
+    'SuigunBranch': 'JR-East',
+    'Tadami': 'JR-East',
+    'Tazawako': 'JR-East',
+    'Tsugaru': 'JR-East',
+    'Uetsu': 'JR-East',
+    'Yamagata': 'JR-East',
+    'Yonezawa': 'JR-East',
+    // TokyoMetro 補完 (4 線)
+    'ChiyodaBranch': 'TokyoMetro',
+    'Ginza': 'TokyoMetro',
+    'Marunouchi': 'TokyoMetro',
+    'MarunouchiBranch': 'TokyoMetro',
+    // Toei 補完 (2 線)
+    'Arakawa': 'Toei',
+    'Nippori_Toneri': 'Toei',
+    // Tobu 補完 (10 線)
+    'Noda': 'Tobu',
+    'TobuIsesaki': 'Tobu',
+    'TobuNikko': 'Tobu',
+    'Nikkoku': 'Tobu',
+    'Daishi_Tobu': 'Tobu',
+    'Tobu_Kameido': 'Tobu',
+    'Ogose': 'Tobu',
+    'Koizumi': 'Tobu',
+    'Sano': 'Tobu',
+    'Kiryu': 'Tobu',
+    // Seibu 補完 (7 線)
+    'SeibuToshima': 'Seibu',
+    'Yurakucho_Seibu': 'Seibu',
+    'Seibu_Sayama': 'Seibu',
+    'SeibuEn': 'Seibu',
+    'SeibuTamako': 'Seibu',
+    'SeibuTamagawa': 'Seibu',
+    'SeibuYamaguchi': 'Seibu',
+    // TOKYU 補完 (7 線)
+    'TokyuDenEn': 'TOKYU',
+    'TokyuToyoko': 'TOKYU',
+    'TokyuOimachi': 'TOKYU',
+    'TokyuMeguro': 'TOKYU',
+    'TokyuIkegami': 'TOKYU',
+    'TokyuSetagaya': 'TOKYU',
+    'TokyuKodomonokuni': 'TOKYU',
+    // YokohamaMunicipal 補完 (2 線)
+    'YokohamaBlue': 'YokohamaMunicipal',
+    'YokohamaGreen': 'YokohamaMunicipal',
+    // Keio 補完 (7 線)
+    'KeioInokashira': 'Keio',
+    'KeioMain': 'Keio',
+    'KeioShin': 'Keio',
+    'KeioSagami': 'Keio',
+    'KeioTakao': 'Keio',
+    'KeioKeibajo': 'Keio',
+    'KeioZoo': 'Keio',
+    // Odakyu 補完 (2 線)
+    'OdakyuEnoshima': 'Odakyu',
+    'OdakyuTama': 'Odakyu',
+    // Keisei 補完 (5 線)
+    'Keisei': 'Keisei',
+    'KeiseiOshiage': 'Keisei',
+    'KeiseiKanamachi': 'Keisei',
+    'KeiseiChiba': 'Keisei',
+    'KeiseiChihara': 'Keisei',
+    // Keikyu 補完 (5 線)
+    'Keikyu': 'Keikyu',
+    'KeikyuAirport': 'Keikyu',
+    'KeikyuKurihama': 'Keikyu',
+    'KeikyuZushi': 'Keikyu',
+    'Daishi_Keikyu': 'Keikyu',
+    // Sotetsu 補完 (3 線)
+    'SotetsuMain': 'Sotetsu',
+    'SotetsuIzumino': 'Sotetsu',
+    'SotetsuShin-Yokohama': 'Sotetsu',
+    // TsukubaExpress 補完 (1 線)
+    'TsukubaExpress': 'TsukubaExpress',
+    // TamaMonorail 補完 (1 線)
+    'TamaMonorail': 'TamaMonorail',
+    // MinatoMirai 補完 (1 線)
+    'MinatoMirai': 'MinatoMirai',
+    // Yurikamome 補完 (1 線)
+    'Yurikamome': 'Yurikamome',
+    // SaitamaNewUrbanTransit 補完 (1 線)
+    'NewShuttle': 'SaitamaNewUrbanTransit',
+    // TokyoMonorail 補完 (1 線)
+    'TokyoMonorail': 'TokyoMonorail',
   }
 
 var MAP = {
@@ -543,8 +678,12 @@ var MAP = {
       'Express': { 'default': '6020系（7両） / 6000系', 'TokyuDenEn': '6020系（7両） / 6000系 / 5000系 / 2020系' },
     },
     'TobuNikko': {
-      'Local': { 'default': '東武50000系 / 50050系' },
-      'LimitedExpress': { 'default': 'N100系「スペーシアX」 / 100系「スペーシア」 / 500系「リバティ」' },
+      'Local': { 'default': '東武50000系 / 50050系 / 10000型 / 10030型 / 10050型' },
+      'Express': { 'default': '東武50000系 / 50050系 / 10000型 / 10030型 / 10050型' },
+      'SemiExpress': { 'default': '東武50000系 / 50050系 / 10000型 / 10030型 / 10050型' },
+      'SectionExpress': { 'default': '東武50000系 / 50050系 / 10000型 / 10030型 / 10050型' },
+      'SectionSemiExpress': { 'default': '東武50000系 / 50050系 / 10000型 / 10030型 / 10050型' },
+      'LimitedExpress': { 'default': 'N100系「スペーシアX」 / 100系「スペーシア」 / 500系「リバティ」', 'destStation': { 'AizuTajima': '500系「リバティ会津」', 'Shinjuku': '500系「リバティ」' } },
     },
     'TokyuMeguro': {
       'Local': { 'default': '3000系 / 5080系 / 3020系', 'TokyoMetro': '3000系 / 5080系 / 3020系 / 東京メトロ9000系', 'Toei': '3000系 / 5080系 / 3020系 / 都営6300形 / 6500形', 'SaitamaRailway': '3000系 / 5080系 / 3020系 / 埼玉高速2000系', 'Sotetsu': '3000系 / 5080系 / 3020系 / 相鉄20000系', 'SotetsuShin-Yokohama': '3000系 / 5080系 / 3020系 / 相鉄20000系' },
@@ -850,19 +989,19 @@ var MAP = {
     // 京王 2 線
     // ================================================================
     'Keio': {
-      'Local': { 'default': '8000系 / 9000系 / 7000系', 'Toei': '8000系 / 9000系 / 都営10-300形' },
-      'Rapid': { 'default': '8000系 / 9000系 / 7000系', 'Toei': '8000系 / 9000系 / 都営10-300形' },
-      'SemiExpress': { 'default': '8000系 / 9000系 / 7000系', 'Toei': '8000系 / 9000系 / 都営10-300形' },
-      'Express': { 'default': '8000系 / 9000系 / 7000系', 'Toei': '8000系 / 9000系 / 都営10-300形' },
-      'LimitedExpress': { 'default': '8000系 / 9000系 / 7000系', 'Toei': '8000系 / 9000系 / 都営10-300形' },
+      'Local': { 'default': '7000系 / 8000系 / 9000系 / 5000系', 'Toei': '7000系 / 8000系 / 9000系 / 5000系 / 都営10-300形' },
+      'Rapid': { 'default': '7000系 / 8000系 / 9000系 / 5000系', 'Toei': '7000系 / 8000系 / 9000系 / 5000系 / 都営10-300形' },
+      'SemiExpress': { 'default': '7000系 / 8000系 / 9000系 / 5000系', 'Toei': '7000系 / 8000系 / 9000系 / 5000系 / 都営10-300形' },
+      'Express': { 'default': '7000系 / 8000系 / 9000系 / 5000系', 'Toei': '7000系 / 8000系 / 9000系 / 5000系 / 都営10-300形' },
+      'LimitedExpress': { 'default': '7000系 / 8000系 / 9000系 / 5000系', 'Toei': '7000系 / 8000系 / 9000系 / 5000系 / 都営10-300形' },
       'KeioLiner': { 'default': '5000系' },
     },
     'KeioMain': {
-      'Local': { 'default': '8000系 / 9000系 / 7000系', 'Toei': '8000系 / 9000系 / 都営10-300形' },
-      'Rapid': { 'default': '8000系 / 9000系 / 7000系', 'Toei': '8000系 / 9000系 / 都営10-300形' },
-      'SemiExpress': { 'default': '8000系 / 9000系 / 7000系', 'Toei': '8000系 / 9000系 / 都営10-300形' },
-      'Express': { 'default': '8000系 / 9000系 / 7000系', 'Toei': '8000系 / 9000系 / 都営10-300形' },
-      'LimitedExpress': { 'default': '8000系 / 9000系 / 7000系', 'Toei': '8000系 / 9000系 / 都営10-300形' },
+      'Local': { 'default': '7000系 / 8000系 / 9000系 / 5000系', 'Toei': '7000系 / 8000系 / 9000系 / 5000系 / 都営10-300形' },
+      'Rapid': { 'default': '7000系 / 8000系 / 9000系 / 5000系', 'Toei': '7000系 / 8000系 / 9000系 / 5000系 / 都営10-300形' },
+      'SemiExpress': { 'default': '7000系 / 8000系 / 9000系 / 5000系', 'Toei': '7000系 / 8000系 / 9000系 / 5000系 / 都営10-300形' },
+      'Express': { 'default': '7000系 / 8000系 / 9000系 / 5000系', 'Toei': '7000系 / 8000系 / 9000系 / 5000系 / 都営10-300形' },
+      'LimitedExpress': { 'default': '7000系 / 8000系 / 9000系 / 5000系', 'Toei': '7000系 / 8000系 / 9000系 / 5000系 / 都営10-300形' },
       'KeioLiner': { 'default': '5000系' },
     },
 
@@ -1156,9 +1295,9 @@ var MAP = {
       },
     },
     'Kawagoe': {
-      'Local': { 'default': '209系3100番台 / E233系7000番台', 'Sotetsu': '相鉄12000系 / 相鉄新7000系' },
-      'Rapid': { 'default': 'E233系7000番台', 'Sotetsu': '相鉄12000系 / 相鉄新7000系' },
-      'CommuterRapid': { 'default': 'E233系7000番台', 'Sotetsu': '相鉄12000系 / 相鉄新7000系' },
+      'Local': { 'default': '209系3100番台 / E233系7000番台', 'Sotetsu': '相鉄12000系 / 相鉄新7000系', 'TWR': 'E233系7000番台 / 70-000形' },
+      'Rapid': { 'default': 'E233系7000番台', 'Sotetsu': '相鉄12000系 / 相鉄新7000系', 'TWR': 'E233系7000番台 / 70-000形' },
+      'CommuterRapid': { 'default': 'E233系7000番台', 'Sotetsu': '相鉄12000系 / 相鉄新7000系', 'TWR': 'E233系7000番台 / 70-000形' },
     },
     'KawagoeWest': {
       'Local': { 'default': '209系3000番台' },
@@ -1185,7 +1324,9 @@ var MAP = {
       'SpecialRapid': { 'default': 'E233系0番台' },
     },
     'Rinkai': {
-      'Local': { 'default': 'E233系7000番台' },
+      'Local': { 'default': '70-000形', 'JR-East': 'E233系7000番台' },
+      'Rapid': { 'default': '70-000形', 'JR-East': 'E233系7000番台' },
+      'CommuterRapid': { 'default': '70-000形', 'JR-East': 'E233系7000番台' },
     },
     'Saikyo': {
       'Local': { 'default': 'E233系7000番台', 'Sotetsu': '相鉄12000系 / 相鉄新7000系' },
@@ -1200,7 +1341,17 @@ var MAP = {
     },
     'SobuRapid': {
       'Rapid': { 'default': 'E235系1000番台' },
-      'LimitedExpress': { 'default': 'E259系（成田エクスプレス） / E257系500番台（わかしお・さざなみ）' },
+      'LimitedExpress': {
+        'default': 'E259系（成田エクスプレス）/ E257系500番台（しおさい）',
+        'destStation': {
+          'NaritaAirportTerminal1': 'E259系（成田エクスプレス）',
+          'NaritaAirportTerminal2': 'E259系（成田エクスプレス）',
+          'Choshi': 'E257系500番台（しおさい）',
+          'Sakura': 'E257系500番台（しおさい）',
+          'Naruto': 'E257系500番台（しおさい）',
+          'Matsumoto': 'E353系（あずさ・富士回遊）'
+        }
+      },
     },
     'Sotobo': {
       'Rapid': { 'default': 'E233系 / E235系1000番台' },
@@ -1217,7 +1368,15 @@ var MAP = {
       'Local': { 'default': 'E231系1000番台 / E233系1000番台' },
       'Rapid': { 'default': 'E231系1000番台 / E233系1000番台' },
       'SpecialRapid': { 'default': 'E231系1000番台 / E233系1000番台' },
-      'LimitedExpress': { 'default': 'E257系1500番台（踊り子） / 伊豆急行8000系' },
+      'LimitedExpress': {
+        'default': 'E257系2000番台 / 2500番台 / 伊豆急行8000系',
+        'destStation': {
+          'IzukyuShimoda': 'E257系2000番台 / 2500番台（踊り子）/ 伊豆急行8000系',
+          'Odawara': 'E257系2000番台 / 2500番台（湘南）',
+          'Hiratsuka': 'E257系2000番台 / 2500番台（湘南）',
+          'Izumoshi': '285系（サンライズ出雲）'
+        }
+      },
     },
     'Uchibo': {
       'Local': { 'default': 'E233系 / E235系1000番台' },
@@ -1256,30 +1415,47 @@ var MAP = {
     // ================================================================
 
     // 京成本線（京成上野～成田空港）
+    // 車両情報: 京成公式「車両紹介」(accessj/sharyou.php) + 2022/2/26 ダイヤ改正（特急・通勤特急新設）
     'Keisei': {
       'Local': {
-        'default': '京成3000形 / 3700形 / 3600形 / 3050形',
-        'Toei': '京成3000形(8両) / 京成3700形（浅草線直通）'
+        'default': '3000形 / 3050形 / 3700形 / 3600形 / 3500形 / 3400形',
+        'Toei': '京成3000形 / 3050形 / 都営5500形（浅草線直通）',
+        'Keikyu': '京急1500形 / 600形 / 都営5500形 / 京成3000形'
       },
       'Rapid': {
-        'default': '京成3600形 / 3700形 / 3000形',
-        'Toei': '京成3000形(8両) / 京成3700形（浅草線直通）'
+        'default': '3000形 / 3050形 / 3700形 / 3600形',
+        'Toei': '京成3000形 / 3050形 / 都営5500形（浅草線直通）',
+        'Keikyu': '京急1500形 / 600形 / 都営5500形 / 京成3000形'
       },
       'LimitedExpress': {
-        'default': '京成3000形 / 3700形',
-        'Toei': '京成3000形(8両) / 京成3700形（浅草線直通）'
+        'default': '3000形 / 3050形 / 3700形（特急）',
+        'Toei': '京成3000形 / 3050形 / 都営5500形（浅草線直通）',
+        'Keikyu': '京急1500形 / 600形 / 都営5500形 / 京成3000形'
       },
       'RapidLimitedExpress': {
-        'default': '京成3000形 / 3700形'
+        'default': '3000形 / 3050形 / 3700形（快速特急）',
+        'Toei': '京成3000形 / 3050形 / 都営5500形（浅草線直通）',
+        'Keikyu': '京急1500形 / 600形 / 都営5500形 / 京成3000形'
       },
       'CommuterLimitedExpress': {
-        'default': '京成3000形 / 3700形'
+        'default': '3000形 / 3050形 / 都営5500形（通勤特急）',
+        'Toei': '京成3000形 / 3050形 / 都営5500形（浅草線直通）',
+        'Keikyu': '京急1500形 / 600形 / 都営5500形 / 京成3000形'
       },
       'AccessExpress': {
-        'default': '京成3100形(50番台) / 京成3000形（スカイアクセス）'
+        'default': '3100形 / 3050形（スカイアクセス）',
+        'Toei': '京成3100形 / 3050形 / 都営5500形',
+        'Keikyu': '京急1500形 / 600形 / 京成3100形 / 3050形',
+        'Hokuso': '京成3100形 / 3050形 / 北総7500形（スカイアクセス直通）'
       },
       'Skyliner': {
-        'default': '京成AE2代目（スカイライナー専用）'
+        'default': 'AE形（スカイライナー）'
+      },
+      'MorningLiner': {
+        'default': 'AE100形 / AE形（ライナー車両）'
+      },
+      'EveningLiner': {
+        'default': 'AE100形 / AE形（ライナー車両）'
       }
     },
 
@@ -1553,6 +1729,213 @@ var MAP = {
       'Rapid': { 'default': 'E129系' },
       'LimitedExpress': { 'default': 'E653系（特急いなほ）' }
     },
+
+    // ================================================================
+    // 4.3.952 追加：無直通・混跑線の車両精密化（2026-09 公開資料で交叉検証）
+    // 出典: 各路線 Wikipedia「使用車両」節 + 各社公式発表（2026-09 時点）
+    // 混跑線は「/」で取り得る形式を列挙（種別で分離できる線は種別別に定義）
+    // ================================================================
+
+    // --- 東京メトロ・都営（無直通・単一運用） ---
+    'Ginza': {
+      'Local': { 'default': '1000系' },
+    },
+    'Marunouchi': {
+      'Local': { 'default': '2000系' },
+    },
+    'MarunouchiBranch': {
+      'Local': { 'default': '2000系' },
+    },
+    'ChiyodaBranch': {
+      'Local': { 'default': '16000系 / 05系' },
+    },
+    'Oedo': {
+      'Local': { 'default': '12-000形 / 12-600形' },
+    },
+    'Arakawa': {
+      'Local': { 'default': '7700形 / 8800形 / 8900形 / 9000形' },
+    },
+    'Nippori_Toneri': {
+      'Local': { 'default': '330形' },
+    },
+
+    // --- 東武ローカル（小泉・佐野・桐生は 10000 系系譜に統一進行中） ---
+    'TobuUtsunomiya': {
+      'Local': { 'default': '20400型' },
+    },
+    'Noda': {
+      'Local': { 'default': '8000系 / 10030系 / 60000系 / 80000系' },
+      'Express': { 'default': '8000系 / 10030系 / 60000系 / 80000系' },
+      'SectionExpress': { 'default': '8000系 / 10030系 / 60000系 / 80000系' },
+    },
+    'Daishi_Tobu': {
+      'Local': { 'default': '8000系' },
+    },
+    'Kiryu': {
+      'Local': { 'default': '10000型 / 10030型50番台' },
+      'LimitedExpress': { 'default': '500系（リバティりょうもう）/ 200型（りょうもう）' },
+    },
+    'Koizumi': {
+      'Local': { 'default': '10000系10050型' },
+    },
+    'Ogose': {
+      'Local': { 'default': '8000系' },
+    },
+    'Sano': {
+      'Local': { 'default': '10000系10000型 / 10050型' },
+      'LimitedExpress': { 'default': '500系（リバティりょうもう）' },
+    },
+    'Tobu_Kameido': {
+      'Local': { 'default': '10000型 / 10030型' },
+    },
+    'Nikkoku': {
+      'Local': { 'default': '20400型', 'Aizu': '6050系100番台' },
+      'Rapid': { 'default': '20400型', 'Aizu': '6050系100番台' },
+      'LimitedExpress': { 'default': 'N100系（スペーシアX）/ 100系（きぬ）/ 500系（リバティ）' },
+    },
+
+    // --- 京王（本線系統の支線群：7000系は退役進行中だが 2026-09 時点で運用中） ---
+    'KeioInokashira': {
+      'Local': { 'default': '1000系' },
+      'Express': { 'default': '1000系' },
+    },
+    'KeioSagami': {
+      'Local': { 'default': '7000系 / 8000系 / 9000系 / 5000系' },
+      'Rapid': { 'default': '7000系 / 8000系 / 9000系 / 5000系' },
+      'SemiExpress': { 'default': '7000系 / 8000系 / 9000系 / 5000系' },
+      'Express': { 'default': '7000系 / 8000系 / 9000系 / 5000系' },
+      'LimitedExpress': { 'default': '7000系 / 8000系 / 9000系 / 5000系' },
+      'KeioLiner': { 'default': '5000系' },
+    },
+    'KeioShin': {
+      'Local': { 'default': '7000系 / 8000系 / 9000系 / 5000系', 'Toei': '7000系 / 8000系 / 9000系 / 5000系 / 都営10-300形' },
+      'Rapid': { 'default': '7000系 / 8000系 / 9000系 / 5000系', 'Toei': '7000系 / 8000系 / 9000系 / 5000系 / 都営10-300形' },
+      'SemiExpress': { 'default': '7000系 / 8000系 / 9000系 / 5000系', 'Toei': '7000系 / 8000系 / 9000系 / 5000系 / 都営10-300形' },
+      'Express': { 'default': '7000系 / 8000系 / 9000系 / 5000系', 'Toei': '7000系 / 8000系 / 9000系 / 5000系 / 都営10-300形' },
+      'LimitedExpress': { 'default': '7000系 / 8000系 / 9000系 / 5000系', 'Toei': '7000系 / 8000系 / 9000系 / 5000系 / 都営10-300形' },
+    },
+    'KeioTakao': {
+      'Local': { 'default': '7000系 / 8000系 / 9000系 / 5000系' },
+      'Rapid': { 'default': '7000系 / 8000系 / 9000系 / 5000系' },
+      'SemiExpress': { 'default': '7000系 / 8000系 / 9000系 / 5000系' },
+      'Express': { 'default': '7000系 / 8000系 / 9000系 / 5000系' },
+      'LimitedExpress': { 'default': '7000系 / 8000系 / 9000系 / 5000系' },
+      'KeioLiner': { 'default': '5000系' },
+    },
+    'KeioKeibajo': {
+      'Local': { 'default': '7000系 / 8000系 / 9000系 / 5000系' },
+    },
+    'KeioZoo': {
+      'Local': { 'default': '7000系 / 8000系 / 9000系 / 5000系' },
+    },
+
+    // --- 横浜市営・新交通 ---
+    'YokohamaBlue': {
+      'Local': { 'default': '3000形 / 4000形' },
+      'Rapid': { 'default': '3000形 / 4000形' },
+    },
+    'YokohamaGreen': {
+      'Local': { 'default': '10000形' },
+    },
+    'TamaMonorail': {
+      'Local': { 'default': '1000系' },
+    },
+    'TsukubaExpress': {
+      'Local': { 'default': 'TX-1000系 / TX-2000系 / TX-3000系' },
+      'Rapid': { 'default': 'TX-1000系 / TX-2000系 / TX-3000系' },
+      'SemiRapid': { 'default': 'TX-1000系 / TX-2000系 / TX-3000系' },
+      'CommuterRapid': { 'default': 'TX-1000系 / TX-2000系 / TX-3000系' },
+    },
+
+    // --- JR 東日本 首都圏（無直通・単一運用 / 混跑） ---
+    'Yamanote': {
+      'Local': { 'default': 'E235系' },
+    },
+    'KeihinTohoku': {
+      'Local': { 'default': 'E233系1000番台' },
+      'Rapid': { 'default': 'E233系1000番台' },
+    },
+    'Tsurumi': {
+      'Local': { 'default': 'E131系1000番台' },
+    },
+    'TsurumiUmiShibaura': {
+      'Local': { 'default': 'E131系1000番台' },
+    },
+    'TsurumiOkawa': {
+      'Local': { 'default': 'E131系1000番台' },
+    },
+    'Nambu': {
+      'Local': { 'default': 'E233系8000番台' },
+      'Rapid': { 'default': 'E233系8000番台' },
+    },
+    'NambuBranch': {
+      'Local': { 'default': 'E127系0番台' },
+    },
+    'Sagami': {
+      'Local': { 'default': 'E131系500番台' },
+    },
+    'Yokohama': {
+      'Local': { 'default': 'E233系6000番台' },
+      'Rapid': { 'default': 'E233系6000番台' },
+    },
+    'Kashima': {
+      'Local': { 'default': 'E131系' },
+    },
+    'Kururi': {
+      'Local': { 'default': 'キハE130形100番台' },
+    },
+    'SobuMain': {
+      'Local': { 'default': '209系2000番台 / 2100番台' },
+      'Rapid': { 'default': 'E235系1000番台' },
+      'LimitedExpress': {
+        'default': 'E257系500番台（しおさい）/ E259系（成田エクスプレス）',
+        'destStation': {
+          'NaritaAirportTerminal1': 'E259系（成田エクスプレス）',
+          'NaritaAirportTerminal2': 'E259系（成田エクスプレス）',
+          'Choshi': 'E257系500番台（しおさい）',
+          'Sakura': 'E257系500番台（しおさい）',
+          'Naruto': 'E257系500番台（しおさい）',
+          'Matsumoto': 'E353系（あずさ・富士回遊）'
+        }
+      },
+    },
+    'TokaidoMain': {
+      'Local': { 'default': 'E231系1000番台 / E233系1000番台' },
+      'Rapid': { 'default': 'E231系1000番台 / E233系1000番台' },
+      'SpecialRapid': { 'default': 'E231系1000番台 / E233系1000番台' },
+      'LimitedExpress': {
+        'default': 'E257系2000番台 / 2500番台 / 伊豆急行8000系',
+        'destStation': {
+          'IzukyuShimoda': 'E257系2000番台 / 2500番台（踊り子）/ 伊豆急行8000系',
+          'Odawara': 'E257系2000番台 / 2500番台（湘南）',
+          'Hiratsuka': 'E257系2000番台 / 2500番台（湘南）',
+          'Izumoshi': '285系（サンライズ出雲）'
+        }
+      },
+    },
+    'JobanMain': {
+      'Local': { 'default': 'E531系' },
+      'Rapid': { 'default': 'E531系' },
+      'SpecialRapid': { 'default': 'E531系' },
+      'LimitedExpress': { 'default': 'E657系（ひたち・ときわ）' },
+    },
+    'Togane': {
+      'Local': { 'default': '209系2100番台 / E233系5000番台' },
+    },
+    'NaritaAbikoBranch': {
+      'Local': { 'default': 'E231系0番台' },
+    },
+    'NaritaAirportBranch': {
+      'Local': { 'default': '209系2000番台 / 2100番台' },
+      'Rapid': { 'default': 'E235系1000番台' },
+      'LimitedExpress': { 'default': 'E259系（成田エクスプレス）' },
+    },
+    'Agatsuma': {
+      'LimitedExpress': { 'default': 'E257系2500番台 / 5500番台（草津・四万）' },
+    },
+    'Joetsu': {
+      'LimitedExpress': { 'default': 'E257系2500番台 / 5500番台（草津・四万）' },
+    },
   }
 
 function resolveVehicleType(lineId, trainTypeUrn, destUrn) {
@@ -1581,27 +1964,33 @@ function resolveVehicleType(lineId, trainTypeUrn, destUrn) {
           dgroup = LINE_GROUP[rw] || '';
         }
       }
-      return (dgroup && tmap[dgroup]) || tmap['default'] || '';
+      if (tmap['destStation']) {
+      var stName = parts[parts.length - 1] || '';
+      var stVt = tmap['destStation'][stName];
+      if (stVt) return stVt;
+    }
+    return (dgroup && tmap[dgroup]) || tmap['default'] || '';
     } catch(e) { return ''; }
   }
 
   // ============================================================
-  // 算法：S4 图标规则（train-icons.js _resolveTrainIcon 内联版）
-  // stations 可选（部署区间需要站表；无则跳过部署区间规则）
+  // 算法：S4 图标规则——逐字内联 train-icons.js 的 _resolveTrainIcon（同源，改 icons 一处即同步）
+  // Node 环境调用前 patch window.UNIFIED_LINES shim（部署区间规则需站表；stations 由 ctx 传入）
   // ============================================================
-  function resolveTrainIconByRules(lineId, operator, trainId, stationIndex, trainType, byOperator, stations) {
+  function _resolveTrainIcon(lineId, operator, trainId, stationIndex, trainType, byOperator) {
     try {
-      // 千代田線直通小田急ロマンスカー（特急）优先
+      // v4.3.925: 千代田線直通小田急ロマンスカー（特急）——THROUGH_PREFIX_RULES より優先。
+      // B プレフィックスは急行（小田急4000系）だが、特急（ロマンスカー）は 60000形MSE。
       if (lineId === "Chiyoda" && trainType) {
         var _tt = String(trainType).toLowerCase();
         if (_tt.indexOf("limitedexpress") >= 0) {
           return "../images/列车/小田急電鉄/60000形.png";
         }
       }
-      // 車号解析：trainId = 「車号_駅idx」或「lineId_車号_駅idx」——車号是后数第2个 token
+      // 直通列車：車号プレフィックスで車籍系統を判定（例：半蔵門線 B 号 = 東武50000系）
+      // trainId は「車号_駅idx」または「lineId_車号_駅idx」の2形式——車号は後ろから2番目のトークン
       var _tp = String(trainId || "").split("_");
       var _tn = _tp.length >= 2 ? _tp[_tp.length - 2] : _tp[0];
-      // 车号前缀规则
       if (THROUGH_PREFIX_RULES[lineId]) {
         var _prules = THROUGH_PREFIX_RULES[lineId];
         for (var _pi = 0; _pi < _prules.length; _pi++) {
@@ -1612,7 +2001,7 @@ function resolveVehicleType(lineId, trainTypeUrn, destUrn) {
           }
         }
       }
-      // 车号后缀规则
+      // 直通列車：車号末尾で車籍系統を判定（現在線のデフォルト車両より優先）
       if (THROUGH_SUFFIX_RULES[lineId]) {
         var _rules = THROUGH_SUFFIX_RULES[lineId];
         for (var _ri = 0; _ri < _rules.length; _ri++) {
@@ -1623,21 +2012,33 @@ function resolveVehicleType(lineId, trainTypeUrn, destUrn) {
           }
         }
       }
-      // 特急车号判別（仅 LimitedExpress）
+      // v4.3.525: N'EX（E259系）・しおさい（E257系500番台）・日光/きぬがわ（253系）——ODPT trainType 一律
+      // LimitedExpress（愛称不出现），車号で判別。実測（2026-09-11 ODPT 実拉）：
+      //   20xxM=N'EX（2041/2043M）、22xxM=N'EX 新宿・大船発着系（2234/2245M）、40xxM=しおさい、
+      //   10xxM=日光・きぬがわ（1082M=きぬがわ2号 鬼怒川温泉→新宿、停站时刻与 JR 公式完全一致）
+      // N'EX は成田線/総武快速に加え横須賀線（2034/2043M 大船発着）・湘南新宿ライン（2245M 新宿発）も走行。
+      // ※車号規則は trainType が LimitedExpress の時のみ発火（例：Tokaido 325M は Local なのに 32xx 号段で
+      // 特急誤爆した実測事例がある——特急のみ車号判別し、普通列車は車号規則に触れさせない）。
       var _isLE = String(trainType || '').toLowerCase().indexOf('limitedexpress') >= 0;
       if (_isLE && (lineId === 'Narita' || lineId === 'SobuRapid' || lineId === 'Yokosuka' || lineId === 'ShonanShinjuku')) {
         var _nn = String(_tn || '').replace(/[^0-9]/g, '');
-        if (/^2[02]/.test(_nn)) return "../images/列车/JR東日本/E259系.png";
-        if (/^40/.test(_nn) && (lineId === 'Narita' || lineId === 'SobuRapid')) return "../images/列车/JR東日本/E257系500番台.png";
-        if (/^1[0-9]/.test(_nn) && lineId === 'ShonanShinjuku') return "../images/列车/JR東日本/253系.png";
+        if (/^2[02]/.test(_nn)) return "../images/列车/JR東日本/E259系.png";   // 20xxM/22xxM = 成田エクスプレス
+        if (/^40/.test(_nn) && (lineId === 'Narita' || lineId === 'SobuRapid')) return "../images/列车/JR東日本/E257系500番台.png"; // しおさい
+        if (/^1[0-9]/.test(_nn) && lineId === 'ShonanShinjuku') return "../images/列车/JR東日本/253系.png"; // 日光・きぬがわ（湘南新宿ライン区間）
       }
-      // 東海道線特急（踊り子・湘南）
+      // v4.3.525: 東海道線特急（踊り子・湘南）——現行車両 E257系2000番台（踊り子）・2500番台（湘南）
+      // （ペニンシュラブルー塗装）。v4.3.526 用 E261系（サフィール踊り子）代替，v4.3.527 用户补齐图库
+      // 素材后改为真实车型。
+      // ※30xx 号段のみ対象（325M 等 32xx の Local を誤爆しないよう /^30/ に限定）。
+      // v4.3.527 車号段実測（ODPT TrainTimetable JR-East.Tokaido 46 条 LimitedExpress）：
+      //   3001M-3031M → 踊り子（dest 伊豆急下田/東京返程）、3071M-3096M → 湘南（dest 小田原/平塚/新宿/東京）
+      // 湘南新宿ライン上 30xxM（3091M-3096M 新宿発着湘南、編成表 3093M 湘南23号 E257系9両）同属湘南段。
       if (_isLE && (lineId === 'Tokaido' || lineId === 'ShonanShinjuku')) {
         var _nt = String(_tn || '').replace(/[^0-9]/g, '');
-        if (/^30[0-3]/.test(_nt)) return "../images/列车/JR東日本/E257系2000番台.png";
-        if (/^30[7-9]/.test(_nt)) return "../images/列车/JR東日本/E257系2500番台.png";
+        if (/^30[0-3]/.test(_nt)) return "../images/列车/JR東日本/E257系2000番台.png"; // 30[0-3]xxM = 踊り子（E257系2000番台）
+        if (/^30[7-9]/.test(_nt)) return "../images/列车/JR東日本/E257系2500番台.png"; // 30[7-9]xxM = 湘南（E257系2500番台）
       }
-      // 中央緩行 E231/E235 交替
+      // Chuo/Sobu local: E231系500番台 + E235系0番台 并用（2025 起 E235 由山手线转用）
       if (lineId === "ChuoLocal" || lineId === "ChuoSobuLocal") {
         var n = 0;
         if (typeof trainId === "number") { n = Math.abs(trainId) % 2; }
@@ -1646,9 +2047,9 @@ function resolveVehicleType(lineId, trainTypeUrn, destUrn) {
           ? "../images/列车/JR東日本/E231系総武中央線.png"
           : "../images/列车/JR東日本/E235系総武中央線.png";
       }
-      // 部署区间（需 stations 站表；priority 高者优先）
-      if (typeof stationIndex === "number" && stations) {
-        var sts = stations;
+      // Vehicle deployment zones first (211系長野色/E127/E129/特急 etc., priority 高者优先)
+      if (typeof stationIndex === "number" && window.UNIFIED_LINES && window.UNIFIED_LINES[lineId]) {
+        var sts = window.UNIFIED_LINES[lineId].stations || [];
         var typeName = "";
         if (trainType) {
           var tp = String(trainType).split(":");
@@ -1662,6 +2063,13 @@ function resolveVehicleType(lineId, trainTypeUrn, destUrn) {
             if (r.typeMatch) {
               if (!typeName) return;
               var matched = false;
+              // v4.3.484: JR-East ODPT 特急 trainType 一律 "odpt.TrainType:JR-East.LimitedExpress"
+              // （实测 Chuo かいじ/あずさ・Joban ひたち/ときわ 均不带具体列车名），导致原有
+              // typeMatch 具体名规则（Azusa/Kaiji/Hitachi/Tokiwa 等）全部失效、特急显示成普通车。
+              // typeMatch 规则均属"特急・観光列車"区段（按 line 隔离），遇到通用 LimitedExpress 视为命中；
+              // 具体名匹配保留（東武 SpaciaX/京成 Skyliner/小田急 SuperHakone/N'EX NaritaExpress 等独立类型）。
+              // ※注意：京急の LimitedExpress/RapidLimitedExpress は「快特」（普通運賃の快速）——京急に
+              // typeMatch 規則を追加する際は誤爆注意（現在は規則なしで影響なし）。
               var tnLower = typeName.toLowerCase();
               if (tnLower.indexOf('limitedexpress') >= 0) {
                 matched = true;
@@ -1695,33 +2103,59 @@ function resolveVehicleType(lineId, trainTypeUrn, destUrn) {
         });
         if (bestIcon) return bestIcon;
       }
-      // 临海线：按 operator 判车籍
+      // v4.3.6xx: 临海线（Rinkai）车型精确判断
+      // 核心判断：看operator，不是看车次号后缀
+      //   operator=JR-East → JR E233系7000番台（从JR直通过来的列车）
+      //   operator=TWR → 临海线自己的车，按运用号后两位区分70/71-000形
       if (lineId === 'Rinkai' || operator === 'TWR') {
+        // 如果是JR的车（从JR实时数据来的），直接显示E233系7000番台
         if (operator === 'JR-East' || operator === 'JR東日本') {
           return "../images/列车/JR東日本/E233系7000番台.png";
         }
+        // 临海线自己的车（TWR）：按运用号后两位区分新旧车
         var _tnStr = String(_tn || '');
         var _tnNum = _tnStr.replace(/[^0-9]/g, '');
         var lastTwo = _tnNum.length >= 2 ? parseInt(_tnNum.slice(-2)) : 0;
+        // 71, 73, 81 → 71-000形（新车），其他 → 70-000形（老车）
         if ([71, 73, 81].indexOf(lastTwo) >= 0) {
           return "../images/列车/東京臨海高速鉄道/71-000形.png";
         } else {
           return "../images/列车/東京臨海高速鉄道/70-000形.png";
         }
       }
-      // 线路默认（直通车 byOperator 时跳过，用车籍 operator）
+      // v4.3.939: 直通车(byOperator)不按当前线兜底，用车籍 operator 默认——治跨线"变身"
+      // （同一趟车进不同线路视图用同一张图，不随当前显示线变）
       if (!byOperator && LINE_ICONS[lineId]) return LINE_ICONS[lineId];
-      // 运营商默认
-      var opKey = String(operator || '').replace(/^odpt\.Operator:/, '');
+
+      // Fallback to operator default
+      var opKey = operator;
+      if (window.TransitConstants && typeof window.TransitConstants.normalizeOp === "function") {
+        opKey = window.TransitConstants.normalizeOp(operator);
+      }
       if (OPERATOR_ICONS[opKey]) return OPERATOR_ICONS[opKey];
-      // 兜底
+
+      // Ultimate fallback
       return "../images/列车/JR東日本/E235系山手線.png";
     } catch(e) {
       return "../images/列车/JR東日本/E235系山手線.png";
     }
   }
 
-  // ============================================================
+  // 适配层：resolver 暴露的 API 是 resolveTrainIconByRules(lineId, operator, trainId, stationIndex, trainType, byOperator, stations)
+  // 而 _resolveTrainIcon(lineId, operator, trainId, stationIndex, trainType, byOperator) 内部用 window.UNIFIED_LINES[lineId].stations
+  // Node CLI/测试没有 window——这里临时把 stations 注入一个 shim 到 window.UNIFIED_LINES（浏览器环境已有，则不覆盖）
+  function resolveTrainIconByRules(lineId, operator, trainId, stationIndex, trainType, byOperator, stations) {
+    if (stations && typeof window !== 'undefined') {
+      var had = window.UNIFIED_LINES && window.UNIFIED_LINES[lineId];
+      if (!had) {
+        if (!window.UNIFIED_LINES) window.UNIFIED_LINES = {};
+        window.UNIFIED_LINES[lineId] = { stations: stations };
+      }
+    }
+    var _r = _resolveTrainIcon(lineId, operator, trainId, stationIndex, trainType, byOperator);
+    return _r || '../images/列车/JR東日本/E235系山手線.png';
+  }
+
   // S2 车号 → 车型候选 累积表
   // ============================================================
   var TRAIN_NO_VEHICLE = {};
@@ -1764,7 +2198,12 @@ function resolveVehicleType(lineId, trainTypeUrn, destUrn) {
 
   function resolveIconForName(name) {
     if (!name) return '';
-    return VEHICLE_NAME_TO_ICON[name] || '';
+    var candidates = String(name).split('/');
+    for (var i = 0; i < candidates.length; i++) {
+      var hit = VEHICLE_NAME_TO_ICON[candidates[i]];
+      if (hit) return hit;
+    }
+    return '';
   }
 
   /**
