@@ -19233,5 +19233,517 @@
     "ko": "오카와다이",
     "en": "Okawadai",
     "zh-CN": "大川平"
+  },
+  "Ainono": {
+    "ja": "相野々",
+    "en": "Ainono"
+  },
+  "Aizu-Bange": {
+    "ja": "会津坂下",
+    "en": "Aizu-Bange"
+  },
+  "Aizu-Gamo": {
+    "ja": "会津蒲生",
+    "en": "Aizu-Gamo"
+  },
+  "Aizu-Kosugawa": {
+    "ja": "会津越川",
+    "en": "Aizu-Kosugawa"
+  },
+  "Akasakata": {
+    "ja": "赤坂田",
+    "en": "Akasakata"
+  },
+  "Aonuma": {
+    "ja": "青沼",
+    "en": "Aonuma"
+  },
+  "Aozu": {
+    "ja": "青津",
+    "en": "Aozu"
+  },
+  "Arahama": {
+    "ja": "荒浜",
+    "en": "Arahama"
+  },
+  "Ashidaki": {
+    "ja": "足滝",
+    "en": "Ashidaki"
+  },
+  "Ashikaga": {
+    "ja": "足利",
+    "en": "Ashikaga"
+  },
+  "Ashikaga-Flower-Park": {
+    "ja": "あしかがフラワーパーク",
+    "en": "Ashikaga-Flower-Park"
+  },
+  "Dobukai": {
+    "ja": "土深井",
+    "en": "Dobukai"
+  },
+  "Ezuriko": {
+    "ja": "江釣子",
+    "en": "Ezuriko"
+  },
+  "Fujine": {
+    "ja": "富士根",
+    "en": "Fujine"
+  },
+  "Gejo": {
+    "ja": "下条",
+    "en": "Gejo"
+  },
+  "Hachisu": {
+    "ja": "八筋",
+    "en": "Hachisu"
+  },
+  "Haguroshita": {
+    "ja": "羽黒下",
+    "en": "Haguroshita"
+  },
+  "Hakuyacho": {
+    "ja": "柏葉町",
+    "en": "Hakuyacho"
+  },
+  "Henashi": {
+    "ja": "艫作",
+    "en": "Henashi"
+  },
+  "Higashi-Obuke": {
+    "ja": "東生部",
+    "en": "Higashi-Obuke"
+  },
+  "Higashi-Odate": {
+    "ja": "東大館",
+    "en": "Higashi-Odate"
+  },
+  "Hirataki": {
+    "ja": "平滝",
+    "en": "Hirataki"
+  },
+  "Honna": {
+    "ja": "本名",
+    "en": "Honna"
+  },
+  "Hosoura": {
+    "ja": "細浦",
+    "en": "Hosoura"
+  },
+  "Iwafune": {
+    "ja": "岩舟",
+    "en": "Iwafune"
+  },
+  "Iwajuku": {
+    "ja": "岩宿",
+    "en": "Iwajuku"
+  },
+  "Iwamurada": {
+    "ja": "岩村田",
+    "en": "Iwamurada"
+  },
+  "Junisho": {
+    "ja": "十二所",
+    "en": "Junisho"
+  },
+  "Kaesa": {
+    "ja": "加佐",
+    "en": "Kaesa"
+  },
+  "Kami-Shishiori": {
+    "ja": "上鹿折",
+    "en": "Kami-Shishiori"
+  },
+  "Kamijo": {
+    "ja": "上条",
+    "en": "Kamijo"
+  },
+  "Kamisakai": {
+    "ja": "上坂城",
+    "en": "Kamisakai"
+  },
+  "Kamitokoro": {
+    "ja": "上所",
+    "en": "Kamitokoro"
+  },
+  "Kazuma": {
+    "ja": "一間",
+    "en": "Kazuma"
+  },
+  "Kazuno-Hanawa": {
+    "ja": "鹿角花輪",
+    "en": "Kazuno-Hanawa"
+  },
+  "Kita-Nakagomi": {
+    "ja": "北中込",
+    "en": "Kita-Nakagomi"
+  },
+  "Kita-Otari": {
+    "ja": "北小谷",
+    "en": "Kita-Otari"
+  },
+  "Kita-Sanjo": {
+    "ja": "北三条",
+    "en": "Kita-Sanjo"
+  },
+  "Kitamori": {
+    "ja": "北森",
+    "en": "Kitamori"
+  },
+  "Komagata": {
+    "ja": "駒形",
+    "en": "Komagata"
+  },
+  "Komatsukawa": {
+    "ja": "小松川",
+    "en": "Komatsukawa"
+  },
+  "Komoro": {
+    "ja": "小諸",
+    "en": "Komoro"
+  },
+  "Koryu": {
+    "ja": "光流",
+    "en": "Koryu"
+  },
+  "Koumi": {
+    "ja": "小海",
+    "en": "Koumi"
+  },
+  "Kunisada": {
+    "ja": "国定",
+    "en": "Kunisada"
+  },
+  "Kurosawa": {
+    "ja": "黒沢",
+    "en": "Kurosawa"
+  },
+  "Maebashi-Oshima": {
+    "ja": "前橋大島",
+    "en": "Maebashi-Oshima"
+  },
+  "Managashi": {
+    "ja": "万願",
+    "en": "Managashi"
+  },
+  "Matsubarako": {
+    "ja": "松原湖",
+    "en": "Matsubarako"
+  },
+  "Matsuo-Hachimantai": {
+    "ja": "松尾八幡平",
+    "en": "Matsuo-Hachimantai"
+  },
+  "Mitsuoka": {
+    "ja": "三岡",
+    "en": "Mitsuoka"
+  },
+  "Mori-Miyanohara": {
+    "ja": "森宮野原",
+    "en": "Mori-Miyanohara"
+  },
+  "Naka-Otsari": {
+    "ja": "中大瀬",
+    "en": "Naka-Otsari"
+  },
+  "Nakagomi": {
+    "ja": "中込",
+    "en": "Nakagomi"
+  },
+  "Nakasato": {
+    "ja": "中里",
+    "en": "Nakasato"
+  },
+  "Nakata": {
+    "ja": "中田",
+    "en": "Nakata"
+  },
+  "Namezu": {
+    "ja": "名連",
+    "en": "Namezu"
+  },
+  "Nanukamachi": {
+    "ja": "七日町",
+    "en": "Nanukamachi"
+  },
+  "Niigata-University": {
+    "ja": "新潟大学",
+    "en": "Niigata-University"
+  },
+  "Niitsuki": {
+    "ja": "新津木",
+    "en": "Niitsuki"
+  },
+  "Niitsuru": {
+    "ja": "新鶴",
+    "en": "Niitsuru"
+  },
+  "Nishi-Nakadori": {
+    "ja": "西中通",
+    "en": "Nishi-Nakadori"
+  },
+  "Nishi-Tsubame": {
+    "ja": "西燕",
+    "en": "Nishi-Tsubame"
+  },
+  "Nobiru": {
+    "ja": "野火止",
+    "en": "Nobiru"
+  },
+  "Obuke": {
+    "ja": "生部",
+    "en": "Obuke"
+  },
+  "Odo": {
+    "ja": "大戸",
+    "en": "Odo"
+  },
+  "Oginojo": {
+    "ja": "荻野城",
+    "en": "Oginojo"
+  },
+  "Ogita": {
+    "ja": "小木田",
+    "en": "Ogita"
+  },
+  "Ohirashita": {
+    "ja": "大平下",
+    "en": "Ohirashita"
+  },
+  "Ojimaya": {
+    "ja": "小島谷",
+    "en": "Ojimaya"
+  },
+  "Omaigoshi": {
+    "ja": "大間越",
+    "en": "Omaigoshi"
+  },
+  "Omata": {
+    "ja": "小俣",
+    "en": "Omata"
+  },
+  "Omoigawa": {
+    "ja": "思川",
+    "en": "Omoigawa"
+  },
+  "Orikabe": {
+    "ja": "折壁",
+    "en": "Orikabe"
+  },
+  "Oshirakawa": {
+    "ja": "白川",
+    "en": "Oshirakawa"
+  },
+  "Otabe": {
+    "ja": "小田部",
+    "en": "Otabe"
+  },
+  "Otaki-Onsen": {
+    "ja": "大滝温泉",
+    "en": "Otaki-Onsen"
+  },
+  "Otariguchi": {
+    "ja": "小樽口",
+    "en": "Otariguchi"
+  },
+  "Otomo": {
+    "ja": "大友",
+    "en": "Otomo"
+  },
+  "Rikuchu-Kanzaki": {
+    "ja": "陸中鹿崎",
+    "en": "Rikuchu-Kanzaki"
+  },
+  "Rikuchu-Osato": {
+    "ja": "陸中大郷",
+    "en": "Rikuchu-Osato"
+  },
+  "Rikuzen-Hamada": {
+    "ja": "陸前浜田",
+    "en": "Rikuzen-Hamada"
+  },
+  "Rikuzen-Otsuka": {
+    "ja": "陸前大塚",
+    "en": "Rikuzen-Otsuka"
+  },
+  "Rikuzen-Takata": {
+    "ja": "陸前高田",
+    "en": "Rikuzen-Takata"
+  },
+  "Rikuzen-Tomiyama": {
+    "ja": "陸前富山",
+    "en": "Rikuzen-Tomiyama"
+  },
+  "Ryugasakishi": {
+    "ja": "龍ケ崎市",
+    "en": "Ryugasakishi"
+  },
+  "Sakari": {
+    "ja": "盛",
+    "en": "Sakari"
+  },
+  "Saku-Hirose": {
+    "ja": "佐布広瀬",
+    "en": "Saku-Hirose"
+  },
+  "Saku-Uminokuchi": {
+    "ja": "佐久海ノ口",
+    "en": "Saku-Uminokuchi"
+  },
+  "Sakudaira": {
+    "ja": "佐久平",
+    "en": "Sakudaira"
+  },
+  "Sawajiri": {
+    "ja": "沢尻",
+    "en": "Sawajiri"
+  },
+  "Shibahira": {
+    "ja": "柴平",
+    "en": "Shibahira"
+  },
+  "Shibajuku": {
+    "ja": "柴宿",
+    "en": "Shibajuku"
+  },
+  "Shimo-Funato": {
+    "ja": "下船渡",
+    "en": "Shimo-Funato"
+  },
+  "Shinano-Moriue": {
+    "ja": "信濃森上",
+    "en": "Shinano-Moriue"
+  },
+  "Shinano-Taira": {
+    "ja": "信濃平",
+    "en": "Shinano-Taira"
+  },
+  "Shishiori-Karakuwa": {
+    "ja": "鹿折唐桑",
+    "en": "Shishiori-Karakuwa"
+  },
+  "Surisawa": {
+    "ja": "摺沢",
+    "en": "Surisawa"
+  },
+  "Tadami": {
+    "ja": "只見",
+    "en": "Tadami"
+  },
+  "Tairadate": {
+    "ja": "平館",
+    "en": "Tairadate"
+  },
+  "Takagimachi": {
+    "ja": "滝",
+    "en": "Takagimachi"
+  },
+  "Takaiwa": {
+    "ja": "高岩",
+    "en": "Takaiwa"
+  },
+  "Takekoma": {
+    "ja": "竹駒",
+    "en": "Takekoma"
+  },
+  "Takiya": {
+    "ja": "滝谷",
+    "en": "Takiya"
+  },
+  "Tategahana": {
+    "ja": "立ヶ花",
+    "en": "Tategahana"
+  },
+  "Tatekawame": {
+    "ja": "立川目",
+    "en": "Tatekawame"
+  },
+  "Tatsuokajo": {
+    "ja": "龍岡城",
+    "en": "Tatsuokajo"
+  },
+  "Tayama": {
+    "ja": "田山",
+    "en": "Tayama"
+  },
+  "Tetaru": {
+    "ja": "手樽",
+    "en": "Tetaru"
+  },
+  "Togari-Nozawa-Onsen": {
+    "ja": "戸狩野沢温泉",
+    "en": "Togari-Nozawa-Onsen"
+  },
+  "Tomita": {
+    "ja": "富田",
+    "en": "Tomita"
+  },
+  "Tona": {
+    "ja": "戸奈",
+    "en": "Tona"
+  },
+  "Tsubame": {
+    "ja": "燕",
+    "en": "Tsubame"
+  },
+  "Tsugaru-Hamana": {
+    "ja": "津軽浜名",
+    "en": "Tsugaru-Hamana"
+  },
+  "Umijiri": {
+    "ja": "海尻",
+    "en": "Umijiri"
+  },
+  "Uminoguchi": {
+    "ja": "海ノ口",
+    "en": "Uminoguchi"
+  },
+  "Uonuma-Tanaka": {
+    "ja": "魚沼田中",
+    "en": "Uonuma-Tanaka"
+  },
+  "Waka-Sennin": {
+    "ja": "若仙人",
+    "en": "Waka-Sennin"
+  },
+  "Wakamiya": {
+    "ja": "若宮",
+    "en": "Wakamiya"
+  },
+  "Wakinosawa": {
+    "ja": "脇野沢",
+    "en": "Wakinosawa"
+  },
+  "WeSPa-Tsubakiyama": {
+    "ja": "WeSPa椿山",
+    "en": "WeSPa-Tsubakiyama"
+  },
+  "Yahagi": {
+    "ja": "矢作",
+    "en": "Yahagi"
+  },
+  "Yamamae": {
+    "ja": "山前",
+    "en": "Yamamae"
+  },
+  "Yokokawame": {
+    "ja": "横川目",
+    "en": "Yokokawame"
+  },
+  "Yokoma": {
+    "ja": "横間",
+    "en": "Yokoma"
+  },
+  "Yuda-Kinshuko": {
+    "ja": "湯田錦秋湖",
+    "en": "Yuda-Kinshuko"
+  },
+  "Yuda-Kogen": {
+    "ja": "湯田高原",
+    "en": "Yuda-Kogen"
+  },
+  "Yuze-Onsen": {
+    "ja": "湯瀬温泉",
+    "en": "Yuze-Onsen"
   }
 }
