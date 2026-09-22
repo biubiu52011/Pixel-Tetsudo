@@ -125,8 +125,12 @@
       'Express': { 'default': '6020系（7両） / 6000系', 'TokyuDenEn': '6020系（7両） / 6000系 / 5000系 / 2020系' },
     },
     'TobuNikko': {
-      'Local': { 'default': '東武50000系 / 50050系' },
-      'LimitedExpress': { 'default': 'N100系「スペーシアX」 / 100系「スペーシア」 / 500系「リバティ」' },
+      'Local': { 'default': '東武50000系 / 50050系 / 10000型 / 10030型 / 10050型' },
+      'Express': { 'default': '東武50000系 / 50050系 / 10000型 / 10030型 / 10050型' },
+      'SemiExpress': { 'default': '東武50000系 / 50050系 / 10000型 / 10030型 / 10050型' },
+      'SectionExpress': { 'default': '東武50000系 / 50050系 / 10000型 / 10030型 / 10050型' },
+      'SectionSemiExpress': { 'default': '東武50000系 / 50050系 / 10000型 / 10030型 / 10050型' },
+      'LimitedExpress': { 'default': 'N100系「スペーシアX」 / 100系「スペーシア」 / 500系「リバティ」', 'destStation': { 'AizuTajima': '500系「リバティ会津」', 'Shinjuku': '500系「リバティ」' } },
     },
     'TokyuMeguro': {
       'Local': { 'default': '3000系 / 5080系 / 3020系', 'TokyoMetro': '3000系 / 5080系 / 3020系 / 東京メトロ9000系', 'Toei': '3000系 / 5080系 / 3020系 / 都営6300形 / 6500形', 'SaitamaRailway': '3000系 / 5080系 / 3020系 / 埼玉高速2000系', 'Sotetsu': '3000系 / 5080系 / 3020系 / 相鉄20000系', 'SotetsuShin-Yokohama': '3000系 / 5080系 / 3020系 / 相鉄20000系' },
@@ -432,19 +436,19 @@
     // 京王 2 線
     // ================================================================
     'Keio': {
-      'Local': { 'default': '8000系 / 9000系 / 7000系', 'Toei': '8000系 / 9000系 / 都営10-300形' },
-      'Rapid': { 'default': '8000系 / 9000系 / 7000系', 'Toei': '8000系 / 9000系 / 都営10-300形' },
-      'SemiExpress': { 'default': '8000系 / 9000系 / 7000系', 'Toei': '8000系 / 9000系 / 都営10-300形' },
-      'Express': { 'default': '8000系 / 9000系 / 7000系', 'Toei': '8000系 / 9000系 / 都営10-300形' },
-      'LimitedExpress': { 'default': '8000系 / 9000系 / 7000系', 'Toei': '8000系 / 9000系 / 都営10-300形' },
+      'Local': { 'default': '7000系 / 8000系 / 9000系 / 5000系', 'Toei': '7000系 / 8000系 / 9000系 / 5000系 / 都営10-300形' },
+      'Rapid': { 'default': '7000系 / 8000系 / 9000系 / 5000系', 'Toei': '7000系 / 8000系 / 9000系 / 5000系 / 都営10-300形' },
+      'SemiExpress': { 'default': '7000系 / 8000系 / 9000系 / 5000系', 'Toei': '7000系 / 8000系 / 9000系 / 5000系 / 都営10-300形' },
+      'Express': { 'default': '7000系 / 8000系 / 9000系 / 5000系', 'Toei': '7000系 / 8000系 / 9000系 / 5000系 / 都営10-300形' },
+      'LimitedExpress': { 'default': '7000系 / 8000系 / 9000系 / 5000系', 'Toei': '7000系 / 8000系 / 9000系 / 5000系 / 都営10-300形' },
       'KeioLiner': { 'default': '5000系' },
     },
     'KeioMain': {
-      'Local': { 'default': '8000系 / 9000系 / 7000系', 'Toei': '8000系 / 9000系 / 都営10-300形' },
-      'Rapid': { 'default': '8000系 / 9000系 / 7000系', 'Toei': '8000系 / 9000系 / 都営10-300形' },
-      'SemiExpress': { 'default': '8000系 / 9000系 / 7000系', 'Toei': '8000系 / 9000系 / 都営10-300形' },
-      'Express': { 'default': '8000系 / 9000系 / 7000系', 'Toei': '8000系 / 9000系 / 都営10-300形' },
-      'LimitedExpress': { 'default': '8000系 / 9000系 / 7000系', 'Toei': '8000系 / 9000系 / 都営10-300形' },
+      'Local': { 'default': '7000系 / 8000系 / 9000系 / 5000系', 'Toei': '7000系 / 8000系 / 9000系 / 5000系 / 都営10-300形' },
+      'Rapid': { 'default': '7000系 / 8000系 / 9000系 / 5000系', 'Toei': '7000系 / 8000系 / 9000系 / 5000系 / 都営10-300形' },
+      'SemiExpress': { 'default': '7000系 / 8000系 / 9000系 / 5000系', 'Toei': '7000系 / 8000系 / 9000系 / 5000系 / 都営10-300形' },
+      'Express': { 'default': '7000系 / 8000系 / 9000系 / 5000系', 'Toei': '7000系 / 8000系 / 9000系 / 5000系 / 都営10-300形' },
+      'LimitedExpress': { 'default': '7000系 / 8000系 / 9000系 / 5000系', 'Toei': '7000系 / 8000系 / 9000系 / 5000系 / 都営10-300形' },
       'KeioLiner': { 'default': '5000系' },
     },
 
@@ -738,9 +742,9 @@
       },
     },
     'Kawagoe': {
-      'Local': { 'default': '209系3100番台 / E233系7000番台', 'Sotetsu': '相鉄12000系 / 相鉄新7000系' },
-      'Rapid': { 'default': 'E233系7000番台', 'Sotetsu': '相鉄12000系 / 相鉄新7000系' },
-      'CommuterRapid': { 'default': 'E233系7000番台', 'Sotetsu': '相鉄12000系 / 相鉄新7000系' },
+      'Local': { 'default': '209系3100番台 / E233系7000番台', 'Sotetsu': '相鉄12000系 / 相鉄新7000系', 'TWR': 'E233系7000番台 / 70-000形' },
+      'Rapid': { 'default': 'E233系7000番台', 'Sotetsu': '相鉄12000系 / 相鉄新7000系', 'TWR': 'E233系7000番台 / 70-000形' },
+      'CommuterRapid': { 'default': 'E233系7000番台', 'Sotetsu': '相鉄12000系 / 相鉄新7000系', 'TWR': 'E233系7000番台 / 70-000形' },
     },
     'KawagoeWest': {
       'Local': { 'default': '209系3000番台' },
@@ -767,7 +771,9 @@
       'SpecialRapid': { 'default': 'E233系0番台' },
     },
     'Rinkai': {
-      'Local': { 'default': 'E233系7000番台' },
+      'Local': { 'default': '70-000形', 'JR-East': 'E233系7000番台' },
+      'Rapid': { 'default': '70-000形', 'JR-East': 'E233系7000番台' },
+      'CommuterRapid': { 'default': '70-000形', 'JR-East': 'E233系7000番台' },
     },
     'Saikyo': {
       'Local': { 'default': 'E233系7000番台', 'Sotetsu': '相鉄12000系 / 相鉄新7000系' },
@@ -782,7 +788,17 @@
     },
     'SobuRapid': {
       'Rapid': { 'default': 'E235系1000番台' },
-      'LimitedExpress': { 'default': 'E259系（成田エクスプレス） / E257系500番台（わかしお・さざなみ）' },
+      'LimitedExpress': {
+        'default': 'E259系（成田エクスプレス）/ E257系500番台（しおさい）',
+        'destStation': {
+          'NaritaAirportTerminal1': 'E259系（成田エクスプレス）',
+          'NaritaAirportTerminal2': 'E259系（成田エクスプレス）',
+          'Choshi': 'E257系500番台（しおさい）',
+          'Sakura': 'E257系500番台（しおさい）',
+          'Naruto': 'E257系500番台（しおさい）',
+          'Matsumoto': 'E353系（あずさ・富士回遊）'
+        }
+      },
     },
     'Sotobo': {
       'Rapid': { 'default': 'E233系 / E235系1000番台' },
@@ -799,7 +815,15 @@
       'Local': { 'default': 'E231系1000番台 / E233系1000番台' },
       'Rapid': { 'default': 'E231系1000番台 / E233系1000番台' },
       'SpecialRapid': { 'default': 'E231系1000番台 / E233系1000番台' },
-      'LimitedExpress': { 'default': 'E257系1500番台（踊り子） / 伊豆急行8000系' },
+      'LimitedExpress': {
+        'default': 'E257系2000番台 / 2500番台 / 伊豆急行8000系',
+        'destStation': {
+          'IzukyuShimoda': 'E257系2000番台 / 2500番台（踊り子）/ 伊豆急行8000系',
+          'Odawara': 'E257系2000番台 / 2500番台（湘南）',
+          'Hiratsuka': 'E257系2000番台 / 2500番台（湘南）',
+          'Izumoshi': '285系（サンライズ出雲）'
+        }
+      },
     },
     'Uchibo': {
       'Local': { 'default': 'E233系 / E235系1000番台' },
@@ -838,30 +862,47 @@
     // ================================================================
 
     // 京成本線（京成上野～成田空港）
+    // 車両情報: 京成公式「車両紹介」(accessj/sharyou.php) + 2022/2/26 ダイヤ改正（特急・通勤特急新設）
     'Keisei': {
       'Local': {
-        'default': '京成3000形 / 3700形 / 3600形 / 3050形',
-        'Toei': '京成3000形(8両) / 京成3700形（浅草線直通）'
+        'default': '3000形 / 3050形 / 3700形 / 3600形 / 3500形 / 3400形',
+        'Toei': '京成3000形 / 3050形 / 都営5500形（浅草線直通）',
+        'Keikyu': '京急1500形 / 600形 / 都営5500形 / 京成3000形'
       },
       'Rapid': {
-        'default': '京成3600形 / 3700形 / 3000形',
-        'Toei': '京成3000形(8両) / 京成3700形（浅草線直通）'
+        'default': '3000形 / 3050形 / 3700形 / 3600形',
+        'Toei': '京成3000形 / 3050形 / 都営5500形（浅草線直通）',
+        'Keikyu': '京急1500形 / 600形 / 都営5500形 / 京成3000形'
       },
       'LimitedExpress': {
-        'default': '京成3000形 / 3700形',
-        'Toei': '京成3000形(8両) / 京成3700形（浅草線直通）'
+        'default': '3000形 / 3050形 / 3700形（特急）',
+        'Toei': '京成3000形 / 3050形 / 都営5500形（浅草線直通）',
+        'Keikyu': '京急1500形 / 600形 / 都営5500形 / 京成3000形'
       },
       'RapidLimitedExpress': {
-        'default': '京成3000形 / 3700形'
+        'default': '3000形 / 3050形 / 3700形（快速特急）',
+        'Toei': '京成3000形 / 3050形 / 都営5500形（浅草線直通）',
+        'Keikyu': '京急1500形 / 600形 / 都営5500形 / 京成3000形'
       },
       'CommuterLimitedExpress': {
-        'default': '京成3000形 / 3700形'
+        'default': '3000形 / 3050形 / 都営5500形（通勤特急）',
+        'Toei': '京成3000形 / 3050形 / 都営5500形（浅草線直通）',
+        'Keikyu': '京急1500形 / 600形 / 都営5500形 / 京成3000形'
       },
       'AccessExpress': {
-        'default': '京成3100形(50番台) / 京成3000形（スカイアクセス）'
+        'default': '3100形 / 3050形（スカイアクセス）',
+        'Toei': '京成3100形 / 3050形 / 都営5500形',
+        'Keikyu': '京急1500形 / 600形 / 京成3100形 / 3050形',
+        'Hokuso': '京成3100形 / 3050形 / 北総7500形（スカイアクセス直通）'
       },
       'Skyliner': {
-        'default': '京成AE2代目（スカイライナー専用）'
+        'default': 'AE形（スカイライナー）'
+      },
+      'MorningLiner': {
+        'default': 'AE100形 / AE形（ライナー車両）'
+      },
+      'EveningLiner': {
+        'default': 'AE100形 / AE形（ライナー車両）'
       }
     },
 
@@ -1135,6 +1176,213 @@
       'Rapid': { 'default': 'E129系' },
       'LimitedExpress': { 'default': 'E653系（特急いなほ）' }
     },
+
+    // ================================================================
+    // 4.3.952 追加：無直通・混跑線の車両精密化（2026-09 公開資料で交叉検証）
+    // 出典: 各路線 Wikipedia「使用車両」節 + 各社公式発表（2026-09 時点）
+    // 混跑線は「/」で取り得る形式を列挙（種別で分離できる線は種別別に定義）
+    // ================================================================
+
+    // --- 東京メトロ・都営（無直通・単一運用） ---
+    'Ginza': {
+      'Local': { 'default': '1000系' },
+    },
+    'Marunouchi': {
+      'Local': { 'default': '2000系' },
+    },
+    'MarunouchiBranch': {
+      'Local': { 'default': '2000系' },
+    },
+    'ChiyodaBranch': {
+      'Local': { 'default': '16000系 / 05系' },
+    },
+    'Oedo': {
+      'Local': { 'default': '12-000形 / 12-600形' },
+    },
+    'Arakawa': {
+      'Local': { 'default': '7700形 / 8800形 / 8900形 / 9000形' },
+    },
+    'Nippori_Toneri': {
+      'Local': { 'default': '330形' },
+    },
+
+    // --- 東武ローカル（小泉・佐野・桐生は 10000 系系譜に統一進行中） ---
+    'TobuUtsunomiya': {
+      'Local': { 'default': '20400型' },
+    },
+    'Noda': {
+      'Local': { 'default': '8000系 / 10030系 / 60000系 / 80000系' },
+      'Express': { 'default': '8000系 / 10030系 / 60000系 / 80000系' },
+      'SectionExpress': { 'default': '8000系 / 10030系 / 60000系 / 80000系' },
+    },
+    'Daishi_Tobu': {
+      'Local': { 'default': '8000系' },
+    },
+    'Kiryu': {
+      'Local': { 'default': '10000型 / 10030型50番台' },
+      'LimitedExpress': { 'default': '500系（リバティりょうもう）/ 200型（りょうもう）' },
+    },
+    'Koizumi': {
+      'Local': { 'default': '10000系10050型' },
+    },
+    'Ogose': {
+      'Local': { 'default': '8000系' },
+    },
+    'Sano': {
+      'Local': { 'default': '10000系10000型 / 10050型' },
+      'LimitedExpress': { 'default': '500系（リバティりょうもう）' },
+    },
+    'Tobu_Kameido': {
+      'Local': { 'default': '10000型 / 10030型' },
+    },
+    'Nikkoku': {
+      'Local': { 'default': '20400型', 'Aizu': '6050系100番台' },
+      'Rapid': { 'default': '20400型', 'Aizu': '6050系100番台' },
+      'LimitedExpress': { 'default': 'N100系（スペーシアX）/ 100系（きぬ）/ 500系（リバティ）' },
+    },
+
+    // --- 京王（本線系統の支線群：7000系は退役進行中だが 2026-09 時点で運用中） ---
+    'KeioInokashira': {
+      'Local': { 'default': '1000系' },
+      'Express': { 'default': '1000系' },
+    },
+    'KeioSagami': {
+      'Local': { 'default': '7000系 / 8000系 / 9000系 / 5000系' },
+      'Rapid': { 'default': '7000系 / 8000系 / 9000系 / 5000系' },
+      'SemiExpress': { 'default': '7000系 / 8000系 / 9000系 / 5000系' },
+      'Express': { 'default': '7000系 / 8000系 / 9000系 / 5000系' },
+      'LimitedExpress': { 'default': '7000系 / 8000系 / 9000系 / 5000系' },
+      'KeioLiner': { 'default': '5000系' },
+    },
+    'KeioShin': {
+      'Local': { 'default': '7000系 / 8000系 / 9000系 / 5000系', 'Toei': '7000系 / 8000系 / 9000系 / 5000系 / 都営10-300形' },
+      'Rapid': { 'default': '7000系 / 8000系 / 9000系 / 5000系', 'Toei': '7000系 / 8000系 / 9000系 / 5000系 / 都営10-300形' },
+      'SemiExpress': { 'default': '7000系 / 8000系 / 9000系 / 5000系', 'Toei': '7000系 / 8000系 / 9000系 / 5000系 / 都営10-300形' },
+      'Express': { 'default': '7000系 / 8000系 / 9000系 / 5000系', 'Toei': '7000系 / 8000系 / 9000系 / 5000系 / 都営10-300形' },
+      'LimitedExpress': { 'default': '7000系 / 8000系 / 9000系 / 5000系', 'Toei': '7000系 / 8000系 / 9000系 / 5000系 / 都営10-300形' },
+    },
+    'KeioTakao': {
+      'Local': { 'default': '7000系 / 8000系 / 9000系 / 5000系' },
+      'Rapid': { 'default': '7000系 / 8000系 / 9000系 / 5000系' },
+      'SemiExpress': { 'default': '7000系 / 8000系 / 9000系 / 5000系' },
+      'Express': { 'default': '7000系 / 8000系 / 9000系 / 5000系' },
+      'LimitedExpress': { 'default': '7000系 / 8000系 / 9000系 / 5000系' },
+      'KeioLiner': { 'default': '5000系' },
+    },
+    'KeioKeibajo': {
+      'Local': { 'default': '7000系 / 8000系 / 9000系 / 5000系' },
+    },
+    'KeioZoo': {
+      'Local': { 'default': '7000系 / 8000系 / 9000系 / 5000系' },
+    },
+
+    // --- 横浜市営・新交通 ---
+    'YokohamaBlue': {
+      'Local': { 'default': '3000形 / 4000形' },
+      'Rapid': { 'default': '3000形 / 4000形' },
+    },
+    'YokohamaGreen': {
+      'Local': { 'default': '10000形' },
+    },
+    'TamaMonorail': {
+      'Local': { 'default': '1000系' },
+    },
+    'TsukubaExpress': {
+      'Local': { 'default': 'TX-1000系 / TX-2000系 / TX-3000系' },
+      'Rapid': { 'default': 'TX-1000系 / TX-2000系 / TX-3000系' },
+      'SemiRapid': { 'default': 'TX-1000系 / TX-2000系 / TX-3000系' },
+      'CommuterRapid': { 'default': 'TX-1000系 / TX-2000系 / TX-3000系' },
+    },
+
+    // --- JR 東日本 首都圏（無直通・単一運用 / 混跑） ---
+    'Yamanote': {
+      'Local': { 'default': 'E235系' },
+    },
+    'KeihinTohoku': {
+      'Local': { 'default': 'E233系1000番台' },
+      'Rapid': { 'default': 'E233系1000番台' },
+    },
+    'Tsurumi': {
+      'Local': { 'default': 'E131系1000番台' },
+    },
+    'TsurumiUmiShibaura': {
+      'Local': { 'default': 'E131系1000番台' },
+    },
+    'TsurumiOkawa': {
+      'Local': { 'default': 'E131系1000番台' },
+    },
+    'Nambu': {
+      'Local': { 'default': 'E233系8000番台' },
+      'Rapid': { 'default': 'E233系8000番台' },
+    },
+    'NambuBranch': {
+      'Local': { 'default': 'E127系0番台' },
+    },
+    'Sagami': {
+      'Local': { 'default': 'E131系500番台' },
+    },
+    'Yokohama': {
+      'Local': { 'default': 'E233系6000番台' },
+      'Rapid': { 'default': 'E233系6000番台' },
+    },
+    'Kashima': {
+      'Local': { 'default': 'E131系' },
+    },
+    'Kururi': {
+      'Local': { 'default': 'キハE130形100番台' },
+    },
+    'SobuMain': {
+      'Local': { 'default': '209系2000番台 / 2100番台' },
+      'Rapid': { 'default': 'E235系1000番台' },
+      'LimitedExpress': {
+        'default': 'E257系500番台（しおさい）/ E259系（成田エクスプレス）',
+        'destStation': {
+          'NaritaAirportTerminal1': 'E259系（成田エクスプレス）',
+          'NaritaAirportTerminal2': 'E259系（成田エクスプレス）',
+          'Choshi': 'E257系500番台（しおさい）',
+          'Sakura': 'E257系500番台（しおさい）',
+          'Naruto': 'E257系500番台（しおさい）',
+          'Matsumoto': 'E353系（あずさ・富士回遊）'
+        }
+      },
+    },
+    'TokaidoMain': {
+      'Local': { 'default': 'E231系1000番台 / E233系1000番台' },
+      'Rapid': { 'default': 'E231系1000番台 / E233系1000番台' },
+      'SpecialRapid': { 'default': 'E231系1000番台 / E233系1000番台' },
+      'LimitedExpress': {
+        'default': 'E257系2000番台 / 2500番台 / 伊豆急行8000系',
+        'destStation': {
+          'IzukyuShimoda': 'E257系2000番台 / 2500番台（踊り子）/ 伊豆急行8000系',
+          'Odawara': 'E257系2000番台 / 2500番台（湘南）',
+          'Hiratsuka': 'E257系2000番台 / 2500番台（湘南）',
+          'Izumoshi': '285系（サンライズ出雲）'
+        }
+      },
+    },
+    'JobanMain': {
+      'Local': { 'default': 'E531系' },
+      'Rapid': { 'default': 'E531系' },
+      'SpecialRapid': { 'default': 'E531系' },
+      'LimitedExpress': { 'default': 'E657系（ひたち・ときわ）' },
+    },
+    'Togane': {
+      'Local': { 'default': '209系2100番台 / E233系5000番台' },
+    },
+    'NaritaAbikoBranch': {
+      'Local': { 'default': 'E231系0番台' },
+    },
+    'NaritaAirportBranch': {
+      'Local': { 'default': '209系2000番台 / 2100番台' },
+      'Rapid': { 'default': 'E235系1000番台' },
+      'LimitedExpress': { 'default': 'E259系（成田エクスプレス）' },
+    },
+    'Agatsuma': {
+      'LimitedExpress': { 'default': 'E257系2500番台 / 5500番台（草津・四万）' },
+    },
+    'Joetsu': {
+      'LimitedExpress': { 'default': 'E257系2500番台 / 5500番台（草津・四万）' },
+    },
   };
 
   /**
@@ -1172,7 +1420,12 @@
           dgroup = LINE_GROUP[rw] || '';
         }
       }
-      return (dgroup && tmap[dgroup]) || tmap['default'] || '';
+      if (tmap['destStation']) {
+      var stName = parts[parts.length - 1] || '';
+      var stVt = tmap['destStation'][stName];
+      if (stVt) return stVt;
+    }
+    return (dgroup && tmap[dgroup]) || tmap['default'] || '';
     } catch(e) { return ''; }
   }
 
