@@ -406,18 +406,67 @@
     ]
   };
 
+
+  // v4.3.962: trainType+车号段规则表——把 _resolveTrainIcon 里散落的手写 if 特例收进声明式数据
+  // 每条规则：{ lines, op, trainType, regex, icon }
+  //   lines: 限定 lineId 数组（null = 不限）；op: 限定 operator（null = 不限）
+  //   trainType: 限定 trainType 短名子串（null = 不限）；regex: 车号纯数字正则
+  // 命中顺序：从上到下，第一条命中即返回（与原来 if 块顺序等价）
+  var TRAIN_TYPE_ICON_RULES = [
+    // v4.3.925: 千代田线直通小田急ロマンスカー（特急）——60000形MSE
+    { lines: ['Chiyoda'], op: null, trainType: 'limitedexpress', regex: null,
+      icon: '../images/列车/小田急電鉄/60000形.png' },
+    // v4.3.525: 有料特急车号判別（仅 LimitedExpress 时生效，防止 Local 误爆）
+    { lines: ['Narita','SobuRapid','Yokosuka','ShonanShinjuku'], op: null,
+      trainType: 'limitedexpress', regex: /^2[02]/,
+      icon: '../images/列车/JR東日本/E259系.png' },
+    { lines: ['Narita','SobuRapid'], op: null,
+      trainType: 'limitedexpress', regex: /^40/,
+      icon: '../images/列车/JR東日本/E257系500番台.png' },
+    { lines: ['ShonanShinjuku'], op: null,
+      trainType: 'limitedexpress', regex: /^1[0-9]/,
+      icon: '../images/列车/JR東日本/253系.png' },
+    // v4.3.525: 东海道线特急（踊り子/湘南）
+    { lines: ['Tokaido','ShonanShinjuku'], op: null,
+      trainType: 'limitedexpress', regex: /^30[0-3]/,
+      icon: '../images/列车/JR東日本/E257系2000番台.png' },
+    { lines: ['Tokaido','ShonanShinjuku'], op: null,
+      trainType: 'limitedexpress', regex: /^30[7-9]/,
+      icon: '../images/列车/JR東日本/E257系2500番台.png' },
+  ];
+
+  // v4.3.962: 线路级车型特例（奇偶交替/尾号区分等）
+  // 每条：{ lines, op, fn } —— fn(trainId, trainNumberPure) 返回 icon 或 null
+  var LINE_ICON_OVERRIDES = [
+    // ChuoLocal/ChuoSobuLocal: E231/E235 奇偶交替（trainId 字符码求和 mod 2）
+    { lines: ['ChuoLocal','ChuoSobuLocal'], op: null, fn: function(trainId) {
+      var n = 0;
+      if (typeof trainId === 'number') n = Math.abs(trainId) % 2;
+      else if (typeof trainId === 'string') {
+        var s = 0; for (var i = 0; i < trainId.length; i++) s += trainId.charCodeAt(i);
+        n = s % 2;
+      }
+      return n === 0
+        ? '../images/列车/JR東日本/E231系総武中央線.png'
+        : '../images/列车/JR東日本/E235系総武中央線.png';
+    }},
+    // Rinkai: JR直通 → E233系7000番台
+    { lines: ['Rinkai'], op: 'JR-East', fn: function() {
+      return '../images/列车/JR東日本/E233系7000番台.png';
+    }},
+    // Rinkai: TWR 自有车按运用号后两位（71/73/81 → 71-000形，其他 → 70-000形）
+    { lines: ['Rinkai'], op: 'TWR', fn: function(trainId, tn) {
+      var _tnNum = String(tn || '').replace(/[^0-9]/g, '');
+      var lastTwo = _tnNum.length >= 2 ? parseInt(_tnNum.slice(-2)) : 0;
+      return [71, 73, 81].indexOf(lastTwo) >= 0
+        ? '../images/列车/東京臨海高速鉄道/71-000形.png'
+        : '../images/列车/東京臨海高速鉄道/70-000形.png';
+    }},
+  ];
+
   function _resolveTrainIcon(lineId, operator, trainId, stationIndex, trainType, byOperator) {
     try {
-      // v4.3.925: 千代田線直通小田急ロマンスカー（特急）——THROUGH_PREFIX_RULES より優先。
-      // B プレフィックスは急行（小田急4000系）だが、特急（ロマンスカー）は 60000形MSE。
-      if (lineId === "Chiyoda" && trainType) {
-        var _tt = String(trainType).toLowerCase();
-        if (_tt.indexOf("limitedexpress") >= 0) {
-          return "../images/列车/小田急電鉄/60000形.png";
-        }
-      }
-      // 直通列車：車号プレフィックスで車籍系統を判定（例：半蔵門線 B 号 = 東武50000系）
-      // trainId は「車号_駅idx」または「lineId_車号_駅idx」の2形式——車号は後ろから2番目のトークン
+      // 直通列车：车号前缀/后缀规则（原有逻辑保留）
       var _tp = String(trainId || "").split("_");
       var _tn = _tp.length >= 2 ? _tp[_tp.length - 2] : _tp[0];
       if (THROUGH_PREFIX_RULES[lineId]) {
@@ -430,7 +479,6 @@
           }
         }
       }
-      // 直通列車：車号末尾で車籍系統を判定（現在線のデフォルト車両より優先）
       if (THROUGH_SUFFIX_RULES[lineId]) {
         var _rules = THROUGH_SUFFIX_RULES[lineId];
         for (var _ri = 0; _ri < _rules.length; _ri++) {
@@ -441,116 +489,29 @@
           }
         }
       }
-      // v4.3.525: N'EX（E259系）・しおさい（E257系500番台）・日光/きぬがわ（253系）——ODPT trainType 一律
-      // LimitedExpress（愛称不出现），車号で判別。実測（2026-09-11 ODPT 実拉）：
-      //   20xxM=N'EX（2041/2043M）、22xxM=N'EX 新宿・大船発着系（2234/2245M）、40xxM=しおさい、
-      //   10xxM=日光・きぬがわ（1082M=きぬがわ2号 鬼怒川温泉→新宿、停站时刻与 JR 公式完全一致）
-      // N'EX は成田線/総武快速に加え横須賀線（2034/2043M 大船発着）・湘南新宿ライン（2245M 新宿発）も走行。
-      // ※車号規則は trainType が LimitedExpress の時のみ発火（例：Tokaido 325M は Local なのに 32xx 号段で
-      // 特急誤爆した実測事例がある——特急のみ車号判別し、普通列車は車号規則に触れさせない）。
-      var _isLE = String(trainType || '').toLowerCase().indexOf('limitedexpress') >= 0;
-      if (_isLE && (lineId === 'Narita' || lineId === 'SobuRapid' || lineId === 'Yokosuka' || lineId === 'ShonanShinjuku')) {
-        var _nn = String(_tn || '').replace(/[^0-9]/g, '');
-        if (/^2[02]/.test(_nn)) return "../images/列车/JR東日本/E259系.png";   // 20xxM/22xxM = 成田エクスプレス
-        if (/^40/.test(_nn) && (lineId === 'Narita' || lineId === 'SobuRapid')) return "../images/列车/JR東日本/E257系500番台.png"; // しおさい
-        if (/^1[0-9]/.test(_nn) && lineId === 'ShonanShinjuku') return "../images/列车/JR東日本/253系.png"; // 日光・きぬがわ（湘南新宿ライン区間）
+      // v4.3.962: trainType+车号段规则表查表（替代原手写 if 块，行为等价）
+      var _tnPure = String(_tn || '').replace(/[^0-9]/g, '');
+      var _ttLower = String(trainType || '').toLowerCase();
+      var _ttShort = _ttLower.indexOf(':') >= 0 ? _ttLower.split(':').pop() : _ttLower;
+      var _opShort = String(operator || '').replace(/^odpt\.Operator:/, '');
+      if (window.TransitConstants && typeof window.TransitConstants.normalizeOp === 'function') {
+        _opShort = window.TransitConstants.normalizeOp(_opShort) || _opShort;
       }
-      // v4.3.525: 東海道線特急（踊り子・湘南）——現行車両 E257系2000番台（踊り子）・2500番台（湘南）
-      // （ペニンシュラブルー塗装）。v4.3.526 用 E261系（サフィール踊り子）代替，v4.3.527 用户补齐图库
-      // 素材后改为真实车型。
-      // ※30xx 号段のみ対象（325M 等 32xx の Local を誤爆しないよう /^30/ に限定）。
-      // v4.3.527 車号段実測（ODPT TrainTimetable JR-East.Tokaido 46 条 LimitedExpress）：
-      //   3001M-3031M → 踊り子（dest 伊豆急下田/東京返程）、3071M-3096M → 湘南（dest 小田原/平塚/新宿/東京）
-      // 湘南新宿ライン上 30xxM（3091M-3096M 新宿発着湘南、編成表 3093M 湘南23号 E257系9両）同属湘南段。
-      if (_isLE && (lineId === 'Tokaido' || lineId === 'ShonanShinjuku')) {
-        var _nt = String(_tn || '').replace(/[^0-9]/g, '');
-        if (/^30[0-3]/.test(_nt)) return "../images/列车/JR東日本/E257系2000番台.png"; // 30[0-3]xxM = 踊り子（E257系2000番台）
-        if (/^30[7-9]/.test(_nt)) return "../images/列车/JR東日本/E257系2500番台.png"; // 30[7-9]xxM = 湘南（E257系2500番台）
+      for (var _ti = 0; _ti < TRAIN_TYPE_ICON_RULES.length; _ti++) {
+        var _rule = TRAIN_TYPE_ICON_RULES[_ti];
+        if (_rule.lines && _rule.lines.indexOf(lineId) < 0) continue;
+        if (_rule.op && _rule.op !== _opShort) continue;
+        if (_rule.trainType && _ttShort.indexOf(_rule.trainType) < 0) continue;
+        if (_rule.regex && !_rule.regex.test(_tnPure)) continue;
+        return _rule.icon;
       }
-      // Chuo/Sobu local: E231系500番台 + E235系0番台 并用（2025 起 E235 由山手线转用）
-      if (lineId === "ChuoLocal" || lineId === "ChuoSobuLocal") {
-        var n = 0;
-        if (typeof trainId === "number") { n = Math.abs(trainId) % 2; }
-        else if (typeof trainId === "string") { var s = 0; for (var i = 0; i < trainId.length; i++) s += trainId.charCodeAt(i); n = s % 2; }
-        return n === 0
-          ? "../images/列车/JR東日本/E231系総武中央線.png"
-          : "../images/列车/JR東日本/E235系総武中央線.png";
-      }
-      // Vehicle deployment zones first (211系長野色/E127/E129/特急 etc., priority 高者优先)
-      if (typeof stationIndex === "number" && window.UNIFIED_LINES && window.UNIFIED_LINES[lineId]) {
-        var sts = window.UNIFIED_LINES[lineId].stations || [];
-        var typeName = "";
-        if (trainType) {
-          var tp = String(trainType).split(":");
-          typeName = tp.length > 1 ? tp[tp.length - 1] : String(trainType);
-        }
-        var bestIcon = null, bestPri = -1;
-        Object.keys(VEHICLE_DEPLOYMENTS).forEach(function(vk) {
-          var v = VEHICLE_DEPLOYMENTS[vk];
-          v.routes.forEach(function(r) {
-            if (r.line !== lineId || !r.icon) return;
-            if (r.typeMatch) {
-              if (!typeName) return;
-              var matched = false;
-              // v4.3.484: JR-East ODPT 特急 trainType 一律 "odpt.TrainType:JR-East.LimitedExpress"
-              // （实测 Chuo かいじ/あずさ・Joban ひたち/ときわ 均不带具体列车名），导致原有
-              // typeMatch 具体名规则（Azusa/Kaiji/Hitachi/Tokiwa 等）全部失效、特急显示成普通车。
-              // typeMatch 规则均属"特急・観光列車"区段（按 line 隔离），遇到通用 LimitedExpress 视为命中；
-              // 具体名匹配保留（東武 SpaciaX/京成 Skyliner/小田急 SuperHakone/N'EX NaritaExpress 等独立类型）。
-              // ※注意：京急の LimitedExpress/RapidLimitedExpress は「快特」（普通運賃の快速）——京急に
-              // typeMatch 規則を追加する際は誤爆注意（現在は規則なしで影響なし）。
-              var tnLower = typeName.toLowerCase();
-              if (tnLower.indexOf('limitedexpress') >= 0) {
-                matched = true;
-              } else {
-                for (var i = 0; i < r.typeMatch.length; i++) {
-                  if (tnLower.indexOf(String(r.typeMatch[i]).toLowerCase()) >= 0) { matched = true; break; }
-                }
-              }
-              if (!matched) return;
-            }
-            var lo = 0, hi = sts.length - 1;
-            if (r.from && r.to) {
-              var fi = sts.indexOf(r.from);
-              var ti = sts.indexOf(r.to);
-              if (fi === -1 || ti === -1) return;
-              lo = Math.min(fi, ti); hi = Math.max(fi, ti);
-            } else if (r.from) {
-              var f2 = sts.indexOf(r.from);
-              if (f2 === -1) return;
-              lo = f2;
-            } else if (r.to) {
-              var t2 = sts.indexOf(r.to);
-              if (t2 === -1) return;
-              hi = t2;
-            }
-            if (stationIndex >= lo && stationIndex <= hi) {
-              var pri = r.priority || 0;
-              if (pri > bestPri) { bestPri = pri; bestIcon = r.icon; }
-            }
-          });
-        });
-        if (bestIcon) return bestIcon;
-      }
-      // v4.3.6xx: 临海线（Rinkai）车型精确判断
-      // 核心判断：看operator，不是看车次号后缀
-      //   operator=JR-East → JR E233系7000番台（从JR直通过来的列车）
-      //   operator=TWR → 临海线自己的车，按运用号后两位区分70/71-000形
-      if (lineId === 'Rinkai' || operator === 'TWR') {
-        // 如果是JR的车（从JR实时数据来的），直接显示E233系7000番台
-        if (operator === 'JR-East' || operator === 'JR東日本') {
-          return "../images/列车/JR東日本/E233系7000番台.png";
-        }
-        // 临海线自己的车（TWR）：按运用号后两位区分新旧车
-        var _tnStr = String(_tn || '');
-        var _tnNum = _tnStr.replace(/[^0-9]/g, '');
-        var lastTwo = _tnNum.length >= 2 ? parseInt(_tnNum.slice(-2)) : 0;
-        // 71, 73, 81 → 71-000形（新车），其他 → 70-000形（老车）
-        if ([71, 73, 81].indexOf(lastTwo) >= 0) {
-          return "../images/列车/東京臨海高速鉄道/71-000形.png";
-        } else {
-          return "../images/列车/東京臨海高速鉄道/70-000形.png";
-        }
+      // v4.3.962: 线路级车型特例查表（奇偶交替/尾号区分等）
+      for (var _oi = 0; _oi < LINE_ICON_OVERRIDES.length; _oi++) {
+        var _ovr = LINE_ICON_OVERRIDES[_oi];
+        if (_ovr.lines && _ovr.lines.indexOf(lineId) < 0) continue;
+        if (_ovr.op && _ovr.op !== _opShort) continue;
+        var _ovIcon = _ovr.fn(trainId, _tn);
+        if (_ovIcon) return _ovIcon;
       }
       // v4.3.939: 直通车(byOperator)不按当前线兜底，用车籍 operator 默认——治跨线"变身"
       // （同一趟车进不同线路视图用同一张图，不随当前显示线变）
