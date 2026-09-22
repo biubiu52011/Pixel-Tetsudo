@@ -209,25 +209,10 @@
 
   /** BFS closure: every line reachable through any number of through runs. */
   function getThroughServiceLines(lineId) {
+    // v4.3.965: 只返回直接直通的线路（一跳），不做多跳BFS——避免西武列车跑到东武线等接续错误
     try {
-      var result = [];
-      var visited = {};
-      var queue = [lineId];
-      visited[lineId] = true;
-      while (queue.length > 0) {
-        var current = queue.shift();
-        var through = THROUGH_SERVICE_MAP[current];
-        if (through && Array.isArray(through)) {
-          through.forEach(function(lid) {
-            if (!visited[lid]) {
-              visited[lid] = true;
-              result.push(lid);
-              queue.push(lid);
-            }
-          });
-        }
-      }
-      return result;
+      var through = THROUGH_SERVICE_MAP[lineId];
+      return (through && Array.isArray(through)) ? through.slice() : [];
     } catch(e) { return []; }
   }
 
