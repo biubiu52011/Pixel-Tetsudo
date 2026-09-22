@@ -1,5 +1,7 @@
 /* trains-render.js: 列车页 SVG 渲染（全局） */
 
+
+
   function _renderThroughChip(layer, ns, x, y, lineObj, iconSize, mobile) {
     var sz = _throughChipSize(lineObj, mobile);
     var label = sz.label;
@@ -1219,33 +1221,13 @@
     Outer: { ja: "外回り", zh: "外环", en: "Outer", ko: "외선" }
   };
 
-  // v4.3.473: 方位词（Northbound/Southbound/Eastbound/Westbound）→ 站表方向映射。
-  // +1 = 该方位词的列车沿站表正向行驶（方向端点在站表后部）→ ▼（标签在图标下方）
-  // -1 = 沿站表反向行驶（方向端点在站表前部）→ ▲（标签在图标上方）
-  // 判定依据：2026-09-10 ODPT odpt:Train 实时样本（odpt:fromStation→odpt:toStation 沿站表 index 增减，
-  // 各条目样本 100% 一致）。站表方向以 railway_data.json 冻结站表为准。
-  // 未列入的线路/方向保持 ▶ 兜底（不猜测方向）。
-  var DIR_AXIS_MAP = {
-    // ---- JR-East ----
-    KeihinTohoku:   { Northbound: -1, Southbound: +1 }, // 站表 大宮→大船：北行=大宮（站表前）
-    ChuoSobuLocal:  { Eastbound: +1, Westbound: -1 },   // 站表 三鷹→千葉：東行=千葉（站表后）
-    Saikyo:         { Northbound: +1, Southbound: -1 }, // 站表 大崎→大宮：北行=大宮（站表后）
-    Kawagoe:        { Southbound: -1 },                 // 站表 大宮→日進→西大宮→…→川越：南行=大宮方向（站表前）
-    ShonanShinjuku: { Northbound: -1, Southbound: +1 }, // 站表 大宮→小田原：北行=大宮（站表前）
-    Joban:          { Northbound: +1, Southbound: -1 }, // 站表 品川→土浦：北行=土浦（站表后=▼）
-    // ---- Toei ----
-    Asakusa:        { Northbound: +1, Southbound: -1 }, // 站表 西馬込→押上：北行=押上（站表后）
-    Mita:           { Northbound: +1, Southbound: -1 }, // 站表 目黒→西高島平：北行=高島平（站表后）
-    Shinjuku:       { Eastbound: +1, Westbound: -1 },   // 站表 新宿→本八幡：東行=本八幡（站表后）
-    Arakawa:        { Northbound: +1, Southbound: -1 }    // v4.3.899: 站表 三ノ輪橋→早稲田：北行=早稲田（站表后=▼）
-  };
-
   // v4.3.962: 线路级显示特例表——把光丘段/北绫濑/东急种别等分散的 if 特例收进一张表
   // 字段含义：
   //   branchTrain: { startIdx, endIdx, destRegex } —— 分支段列车识别（Oedo 光丘段）
   //   branchDir:   { upDest, downDest }          —— 分支段方向判定（up=往光丘, down=往都厅前）
   //   branchStation: { regex, dir }              —— 支线站名特判（Chiyoda KitaAyase → down）
-//   showTrainType: true                   —— 显示列车等级种别名（东急线）
+  //   showTrainType: true                   —— 显示列车等级种别名（东急线）
+  //   dirAxis: { dirName: ±1 }             —— 方位词→站表方向映射（v4.3.962b：原 DIR_AXIS_MAP 收口）
   var LINE_DISPLAY_OVERRIDES = {
     // 大江户线光丘段：站表 [1..10] 为光丘段，枢纽 [0]=Tochomae
     Oedo: {
@@ -1258,6 +1240,19 @@
     },
     // 东急线：显示列车等级种别名（TRAIN_TYPE_NAMES）
     Tokyu: { showTrainType: true } // 前缀匹配——所有 lineId 以 'Tokyu' 开头的线路
+    ,
+    // ---- v4.3.962b: 方位词→站表方向映射（原 DIR_AXIS_MAP 收口，判定依据 2026-09-10 ODPT 实时样本）----
+    // +1 = 该方位词的列车沿站表正向行驶 → ▼；-1 = 反向 → ▲
+    KeihinTohoku:   { dirAxis: { Northbound: -1, Southbound: +1 } },
+    ChuoSobuLocal:  { dirAxis: { Eastbound: +1, Westbound: -1 } },
+    Saikyo:         { dirAxis: { Northbound: +1, Southbound: -1 } },
+    Kawagoe:        { dirAxis: { Southbound: -1 } },
+    ShonanShinjuku: { dirAxis: { Northbound: -1, Southbound: +1 } },
+    Joban:          { dirAxis: { Northbound: +1, Southbound: -1 } },
+    Asakusa:        { dirAxis: { Northbound: +1, Southbound: -1 } },
+    Mita:           { dirAxis: { Northbound: +1, Southbound: -1 } },
+    Shinjuku:       { dirAxis: { Eastbound: +1, Westbound: -1 } },
+    Arakawa:        { dirAxis: { Northbound: +1, Southbound: -1 } }
   };
   function _getLineOverride(lineId) {
     if (!LINE_DISPLAY_OVERRIDES[lineId]) {
@@ -1329,7 +1324,8 @@
     if (/^Outbound$/.test(dn)) return 'down';
     // v4.3.473: 方位词用线路映射表判定（未建表线路返回 null → ▶ 兜底）
     if (/^(Northbound|Southbound|Eastbound|Westbound)$/.test(dn)) {
-      var axis = (DIR_AXIS_MAP[lineId] && DIR_AXIS_MAP[lineId][dn]);
+      var _ovDirAxis = _getLineOverride(lineId);
+      var axis = (_ovDirAxis && _ovDirAxis.dirAxis && _ovDirAxis.dirAxis[dn]);
       if (axis === undefined) return null;
       return axis > 0 ? 'down' : 'up';
     }

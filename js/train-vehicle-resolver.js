@@ -2052,15 +2052,15 @@ function _resolveTrainIcon(lineId, operator, trainId, stationIndex, trainType, b
           }
         }
       }
-      // v4.3.962: trainType+车号段规则表查表（替代原手写 if 块，行为等价）
-      var _tnPure = String(_tn || '').replace(/[^0-9]/g, '');
-      var _ttLower = String(trainType || '').toLowerCase();
-      var _ttShort = _ttLower.indexOf(':') >= 0 ? _ttLower.split(':').pop() : _ttLower;
-      var _opShort = String(operator || '').replace(/^odpt\.Operator:/, '');
-      if (window.TransitConstants && typeof window.TransitConstants.normalizeOp === 'function') {
-        _opShort = window.TransitConstants.normalizeOp(_opShort) || _opShort;
-      }
-      for (var _ti = 0; _ti < TRAIN_TYPE_ICON_RULES.length; _ti++) {
+    // v4.3.962: trainType+车号段规则表查表（替代原手写 if 块，行为等价）
+    var _tnPure = String(_tn || '').replace(/[^0-9]/g, '');
+    var _ttLower = String(trainType || '').toLowerCase();
+    var _ttShort = _ttLower.indexOf(':') >= 0 ? _ttLower.split(':').pop() : _ttLower;
+    var _opShort = String(operator || '').replace(/^odpt\.Operator:/, '');
+    // v4.3.962b: 统一 normalizeOp 调用（原两处重复，收口到一次）
+    var _normOp = (window.TransitConstants && typeof window.TransitConstants.normalizeOp === 'function') ? window.TransitConstants.normalizeOp : null;
+    if (_normOp) _opShort = _normOp(_opShort) || _opShort;
+    for (var _ti = 0; _ti < TRAIN_TYPE_ICON_RULES.length; _ti++) {
         var _rule = TRAIN_TYPE_ICON_RULES[_ti];
         if (_rule.lines && _rule.lines.indexOf(lineId) < 0) continue;
         if (_rule.op && _rule.op !== _opShort) continue;
@@ -2082,9 +2082,7 @@ function _resolveTrainIcon(lineId, operator, trainId, stationIndex, trainType, b
 
       // Fallback to operator default
       var opKey = operator;
-      if (window.TransitConstants && typeof window.TransitConstants.normalizeOp === "function") {
-        opKey = window.TransitConstants.normalizeOp(operator);
-      }
+      if (_normOp) opKey = _normOp(operator);
       if (OPERATOR_ICONS[opKey]) return OPERATOR_ICONS[opKey];
 
       // Ultimate fallback
