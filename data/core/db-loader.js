@@ -840,6 +840,19 @@ function applyData(data, i18n) {
           if (lang === 'ja' && _i18n.ja) return _i18n.ja;
           if (lang === 'en' && _i18n.en) return _i18n.en;
         }
+        // v4.3.962: 宽松匹配——直接查找没命中时，去掉连字符再查（NaritaAirportTerminal1 vs Narita-Airport-Terminal-1）
+        if (_stationI18n) {
+          var _normId = String(id).replace(/-/g, '');
+          for (var _k in _stationI18n) {
+            if (String(_k).replace(/-/g, '') === _normId) {
+              var _i18n2 = _stationI18n[_k];
+              if (lang === 'zh' && _i18n2.zh) return _i18n2.zh;
+              if (lang === 'ko' && _i18n2.ko) return _i18n2.ko;
+              if (lang === 'ja' && _i18n2.ja) return _i18n2.ja;
+              if (lang === 'en' && _i18n2.en) return _i18n2.en;
+            }
+          }
+        }
         var nm = data.name_map;
         var _hasJp = /[\u4e00-\u9fff\u3040-\u309f\u30a0-\u30ff]/.test(id);
 
