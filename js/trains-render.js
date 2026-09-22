@@ -368,7 +368,9 @@
           } else {
             // v4.3.613: 无图标线统一为色块徽章（LOS 官方色 + 路线记号）——替代灰色小字，
             // 与图片徽章同一套视觉语言（JR 换乘看板 = 色块+记号）
-            var badgeTxt = (txl.name || txl.lineId || "").slice(0, 4);
+            // v4.3.941: 异名换乘显示换乘站名（如 三田 春日）
+            var _toName = txl.toStation ? (window.RailwayDB && window.RailwayDB.resolveStationName ? window.RailwayDB.resolveStationName(txl.toStation, window.currentLang) : txl.toStation) : "";
+            var badgeTxt = ((txl.name || txl.lineId || "") + (_toName ? " " + _toName : "")).slice(0, 6);
             var bW = _badgeW(txl, isMobileView);
             var bH = isMobileView ? 15 : 11;
             var bRect = document.createElementNS(svgNS, "rect");

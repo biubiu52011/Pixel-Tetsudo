@@ -13278,11 +13278,19 @@
         },
         {
           "station": "Korakuen",
-          "lineId": "Mita"
+          "lineId": "Mita",
+          "toStation": "Kasuga",
+          "note": "春日"
         },
         {
           "station": "Shinjuku-Sanchome",
           "lineId": "Oedo"
+        },
+        {
+          "station": "Korakuen",
+          "lineId": "Oedo",
+          "toStation": "Kasuga",
+          "note": "春日"
         }
       ],
       "branches": [
@@ -14406,7 +14414,15 @@
         },
         {
           "station": "Kasuga",
-          "lineId": "Marunouchi"
+          "lineId": "Marunouchi",
+          "toStation": "Korakuen",
+          "note": "後楽園"
+        },
+        {
+          "station": "Kasuga",
+          "lineId": "Namboku",
+          "toStation": "Korakuen",
+          "note": "後楽園"
         }
       ],
       "nameZh": "三田线",
@@ -14953,6 +14969,18 @@
         {
           "station": "Shinjuku-Nishiguchi",
           "lineId": "Fukutoshin"
+        },
+        {
+          "station": "Kasuga",
+          "lineId": "Marunouchi",
+          "toStation": "Korakuen",
+          "note": "後楽園"
+        },
+        {
+          "station": "Kasuga",
+          "lineId": "Namboku",
+          "toStation": "Korakuen",
+          "note": "後楽園"
         }
       ],
       "isSixShapedLoop": true,
@@ -15539,12 +15567,6 @@
           "note": ""
         },
         {
-          "station": "Korakuen",
-          "lineId": "Marunouchi",
-          "type": "in",
-          "note": ""
-        },
-        {
           "station": "Komagome",
           "lineId": "Yamanote",
           "type": "in",
@@ -15577,6 +15599,24 @@
         {
           "station": "Oji",
           "lineId": "Arakawa"
+        },
+        {
+          "station": "Korakuen",
+          "lineId": "Marunouchi",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Korakuen",
+          "lineId": "Mita",
+          "toStation": "Kasuga",
+          "note": "春日"
+        },
+        {
+          "station": "Korakuen",
+          "lineId": "Oedo",
+          "toStation": "Kasuga",
+          "note": "春日"
         }
       ],
       "nameZh": "南北线",

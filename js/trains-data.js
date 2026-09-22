@@ -238,7 +238,7 @@ function _getTransferMap(lineId) {
     map[t.station].push({
       lineId: t.lineId, image: img, name: nm, operator: tl.operator || "",
       code: tl.code || "",
-      color: (window.LineOperationSystemsResolveColor && window.LineOperationSystemsResolveColor(t.lineId)) || tl.color || "", type: t.type === "out" ? "out" : "in", note: t.note || ""
+      color: (window.LineOperationSystemsResolveColor && window.LineOperationSystemsResolveColor(t.lineId)) || tl.color || "", type: t.type === "out" ? "out" : "in", note: t.note || "", toStation: t.toStation || ""
     });
   }
   var throughLines = (window.ThroughService && window.ThroughService.getDirectThroughLines) ? window.ThroughService.getDirectThroughLines(lineId) : [];
