@@ -491,7 +491,7 @@ var LINE_ICON_OVERRIDES = [
   // 数据：VehicleTypeMap 查表（来自 vehicle-type-map.js）
   // ============================================================
 
-var LINE_GROUP = {
+ var LINE_GROUP = {
     // 東急
     'Toyoko': 'Tokyu', 'Meguro': 'Tokyu', 'Oimachi': 'Tokyu',
     'Ikegami': 'Tokyu', 'Setagaya': 'Tokyu', 'TokyuTamagawa': 'Tokyu',
@@ -679,7 +679,43 @@ var LINE_GROUP = {
     'TokyoMonorail': 'TokyoMonorail',
   }
 
-var MAP = {
+ var LINE_ALIAS_MAP = {
+    // 东急支线（7 线）
+    "TokyuTamagawa":     "TokyuOimachi",   // 多摩川线 7000系
+    "TokyuIkegami":      "TokyuOimachi",   // 池上线 7000系
+    "TokyuKodomonokuni": "TokyuOimachi",   // 儿玉线 Y000系
+    "TokyuSetagaya":     "TokyuOimachi",   // 世田谷线
+    "Tamagawa":          "SeibuTamagawa",  // 西武多摩川线
+    "Ikegami":           "TokyuOimachi",   // 池上线（无前缀别名）
+    "Kodomonokuni":      "TokyuOimachi",   // 儿玉线（无前缀别名）
+    "Denentoshi":        "TokyuDenEn",     // 田园都市线别名
+    "Oimachi":           "TokyuOimachi",   // 大井町线（无前缀别名）
+    "Meguro":            "TokyuMeguro",    // 目黑线（无前缀别名）
+    "Toyoko":            "TokyuToyoko",    // 东横线（无前缀别名）
+    // 京成支线（4 线）
+    "KeiseiMain":        "Keisei",         // 京成本线（别名）
+    "KeiseiKanamachi":   "KeiseiOshiage",  // 金町线 80000形
+    "KeiseiChiba":       "KeiseiOshiage",  // 千叶线 80000形
+    "KeiseiChihara":     "KeiseiOshiage",  // 千原线 80000形
+    "Oshiage":           "KeiseiOshiage",  // 押上线（无前缀别名）
+    "Kanamachi":         "KeiseiOshiage",  // 金町线（无前缀别名）
+    "Chiba":             "KeiseiOshiage",  // 千叶线（无前缀别名）
+    "Chihara":           "KeiseiOshiage",  // 千原线（无前缀别名）
+    // 京急 / 相铁 / 京王 别名
+    "KeikyuMain":            "Keikyu",             // 京急本线
+    "Sotetsu":               "SotetsuMain",        // 相铁本线
+    "SotetsuShinyokohama":   "SotetsuShin-Yokohama", // 相铁新横滨线
+    "Inokashira":            "KeioInokashira",     // 井之头线
+    "Keio-Hachioji":         "KeioTakao",          // 京王八王子线 → 京王高尾线
+    // 其他无 MAP 配置的线路
+    "ChuoLocal":           "ChuoSobuLocal",        // 中央缓行 → 中央总武缓行
+    "TobuTojo":            "Tojo",                 // 东武东上线
+    "Yamaguchi":           "SeibuYamaguchi",       // 西武山口线
+    "NaritaAccess":        "NaritaAirportBranch",   // 成田Access → 成田机场支线
+    "YokohamaMunicipal":   "YokohamaBlue",          // 横滨市电 → 横滨蓝线
+  }
+
+ var MAP = {
     // ================================================================
     // 東急（参照用——manual 既に内嵌、本表はフォールバックのみ）
     // ================================================================
@@ -1988,9 +2024,10 @@ var MAP = {
     },
   }
 
-function resolveVehicleType(lineId, trainTypeUrn, destUrn) {
+ function resolveVehicleType(lineId, trainTypeUrn, destUrn) {
     try {
-      var cfg = MAP[lineId];
+      var _lid = LINE_ALIAS_MAP[lineId] || lineId;
+      var cfg = MAP[_lid];
       if (!cfg) return '';
       var tshort = '';
       if (trainTypeUrn) {
@@ -2330,6 +2367,7 @@ function resolveVehicleIcon(candidatesStr) {
     TRAIN_TYPE_ICON_RULES: TRAIN_TYPE_ICON_RULES,
     LINE_ICON_OVERRIDES: LINE_ICON_OVERRIDES,
     MAP: MAP,
+    LINE_ALIAS_MAP: LINE_ALIAS_MAP,
     _table: function() { return TRAIN_NO_VEHICLE; },
     cli: cli
   };
