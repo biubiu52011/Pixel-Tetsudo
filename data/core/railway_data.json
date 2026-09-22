@@ -9348,7 +9348,9 @@
         },
         {
           "station": "Takanawa-Gateway",
-          "lineId": "Asakusa"
+          "lineId": "Asakusa",
+          "toStation": "Sengakuji",
+          "note": "Sengakuji"
         },
         {
           "station": "Okachimachi",
@@ -10992,11 +10994,15 @@
         },
         {
           "station": "Kita-Asaka",
-          "lineId": "Tojo"
+          "lineId": "Tojo",
+          "toStation": "Asaka",
+          "note": "Asaka"
         },
         {
           "station": "Minami-Koshigaya",
-          "lineId": "TobuSkytree"
+          "lineId": "TobuSkytree",
+          "toStation": "Minami-Koshigaya",
+          "note": "Minami-Koshigaya"
         }
       ],
       "nameZh": "武藏野线",
@@ -13822,11 +13828,15 @@
         },
         {
           "station": "Chikatetsu-Akatsuka",
-          "lineId": "Tojo"
+          "lineId": "Tojo",
+          "toStation": "Akatsuka",
+          "note": "Akatsuka"
         },
         {
           "station": "Chikatetsu-Narimasu",
-          "lineId": "Tojo"
+          "lineId": "Tojo",
+          "toStation": "Narimasu",
+          "note": "Narimasu"
         }
       ],
       "nameZh": "有乐町线",
@@ -14236,7 +14246,9 @@
         },
         {
           "station": "Sengakuji",
-          "lineId": "KeihinTohoku"
+          "lineId": "KeihinTohoku",
+          "toStation": "Takanawa-Gateway",
+          "note": "Takanawa-Gateway"
         }
       ],
       "nameZh": "浅草线",
@@ -15706,13 +15718,15 @@
           "station": "Chikatetsu-Narimasu",
           "lineId": "Yurakucho",
           "type": "in",
-          "note": ""
+          "note": "Narimasu",
+          "toStation": "Narimasu"
         },
         {
           "station": "Chikatetsu-Akatsuka",
           "lineId": "Yurakucho",
           "type": "in",
-          "note": ""
+          "note": "Akatsuka",
+          "toStation": "Akatsuka"
         },
         {
           "station": "Heiwadai",
@@ -16946,7 +16960,9 @@
         },
         {
           "station": "Keisei-Sekiya",
-          "lineId": "TobuSkytree"
+          "lineId": "TobuSkytree",
+          "toStation": "Sekiya",
+          "note": "Sekiya"
         },
         {
           "station": "Keisei-Yawata",
