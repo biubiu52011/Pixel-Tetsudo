@@ -778,11 +778,22 @@
             }
           }
           
-          // v4.3.938: 竖列支线名不画进 SVG——长名（如「千代田線（北綾瀬支線）」）撑宽 viewBox
-          // 导致全图缩小、字比主流线小 37%。改收集到 HTML 层图注（.tp-map-wrap 顶部），
-          // 正常字号自动换行不裁切，viewBox 宽度与主流线统一为 297。
-          var branchDisplayName = (window.RailwayDB && typeof window.RailwayDB.resolveLineName === "function") ? window.RailwayDB.resolveLineName(branch.id, window.currentLang) : (branch.nameJa || branch.name);
-          _branchNoteItems.push({ name: branchDisplayName, color: bColor });
+          // v4.3.942: 竖列支线名放回 SVG 层，显示在支线远端旁边（短名，去掉主线名前缀）
+          var _fullName = (window.RailwayDB && typeof window.RailwayDB.resolveLineName === "function") ? window.RailwayDB.resolveLineName(branch.id, window.currentLang) : (branch.nameJa || branch.name);
+          // 提取括号里的短名：丸ノ内線（方南町支線）→ 方南町支線
+          var _shortName = _fullName;
+          var _m = _fullName.match(/[（(](.+?)[）)]/);
+          if (_m) _shortName = _m[1];
+          var _bNameEl = document.createElementNS(svgNS, "text");
+          _bNameEl.setAttribute("x", bx);
+          _bNameEl.setAttribute("y", _connY + Math.max(0, _vOwn - 1) * branchSp + 18);
+          _bNameEl.setAttribute("text-anchor", "middle");
+          _bNameEl.setAttribute("font-size", "10");
+          _bNameEl.setAttribute("fill", bColor);
+          _bNameEl.setAttribute("font-weight", "600");
+          _bNameEl.setAttribute("font-family", "Fusion Pixel, 'Courier New', monospace");
+          _bNameEl.textContent = _shortName;
+          staticLayer.appendChild(_bNameEl);
           } // v4.3.522: else（竖列现状）闭合
         }
       }
