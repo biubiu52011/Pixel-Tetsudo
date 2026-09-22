@@ -950,9 +950,7 @@
         else if (direction.indexOf('Outer') >= 0) offY = 8;
         offX = (trainIdxAt - (totalAt - 1) / 2) * 20;
       } else {
-        // v4.3.949: 普通线多车同站改垂直排开（上下排），不水平排开——避免下行列车往右偏压到站标签
-        if (direction.indexOf('Inbound') >= 0 || direction.indexOf('Inner') >= 0) offX = -10;
-        else if (direction.indexOf('Outbound') >= 0 || direction.indexOf('Outer') >= 0) offX = 10;
+        // v4.3.963: 列车都在线路上（不左右分开），多车同站垂直排开
         offY = (trainIdxAt - (totalAt - 1) / 2) * 18;
       }
       
