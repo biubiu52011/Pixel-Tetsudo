@@ -9340,11 +9340,15 @@
         },
         {
           "station": "Shin-Koyasu",
-          "lineId": "Keikyu"
+          "lineId": "Keikyu",
+          "toStation": "Keikyu-Shin-Koyasu",
+          "note": "Keikyu-Shin-Koyasu"
         },
         {
           "station": "Higashi-Kanagawa",
-          "lineId": "Keikyu"
+          "lineId": "Keikyu",
+          "toStation": "Keikyu-Higashi-Kanagawa",
+          "note": "Keikyu-Higashi-Kanagawa"
         },
         {
           "station": "Takanawa-Gateway",
@@ -9360,7 +9364,9 @@
         },
         {
           "station": "Tsurumi",
-          "lineId": "Keikyu"
+          "lineId": "Keikyu",
+          "toStation": "Keikyu-Tsurumi",
+          "note": "Keikyu-Tsurumi"
         }
       ],
       "nameZh": "京滨东北线・根岸线",
@@ -16015,10 +16021,6 @@
           "lineId": "Yurakucho",
           "type": "in",
           "note": ""
-        },
-        {
-          "station": "Ariake",
-          "lineId": "Rinkai"
         }
       ],
       "nameZh": "百合鸥",
@@ -17984,15 +17986,21 @@
         },
         {
           "station": "Keikyu-Shin-Koyasu",
-          "lineId": "KeihinTohoku"
+          "lineId": "KeihinTohoku",
+          "toStation": "Shin-Koyasu",
+          "note": "Shin-Koyasu"
         },
         {
           "station": "Keikyu-Shin-Koyasu",
-          "lineId": "TokaidoMain"
+          "lineId": "TokaidoMain",
+          "toStation": "Shin-Koyasu",
+          "note": "Shin-Koyasu"
         },
         {
           "station": "Keikyu-Higashi-Kanagawa",
-          "lineId": "KeihinTohoku"
+          "lineId": "KeihinTohoku",
+          "toStation": "Higashi-Kanagawa",
+          "note": "Higashi-Kanagawa"
         },
         {
           "station": "Keikyu-Tsurumi",
@@ -19256,12 +19264,6 @@
         },
         {
           "station": "Koriyama",
-          "lineId": "Suigun",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Koriyama",
           "lineId": "TohokuMain",
           "type": "in",
           "note": ""
@@ -19380,12 +19382,6 @@
         {
           "station": "Koriyama",
           "lineId": "BanetsuEast",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Koriyama",
-          "lineId": "Suigun",
           "type": "in",
           "note": ""
         },
@@ -23812,7 +23808,9 @@
         },
         {
           "station": "KokusaiTenjijo",
-          "lineId": "Yurikamome"
+          "lineId": "Yurikamome",
+          "toStation": "Tokyo-Big-Sight",
+          "note": "东京国际展示场"
         }
       ],
       "nameZh": "临海线",
@@ -24524,7 +24522,7 @@
         },
         {
           "station": "Uzen-Chitose",
-          "lineId": "OuMain",
+          "lineId": "Yamagata",
           "type": "in",
           "note": ""
         },
@@ -24536,7 +24534,7 @@
         },
         {
           "station": "Kita-Yamagata",
-          "lineId": "OuMain",
+          "lineId": "Yamagata",
           "type": "in",
           "note": ""
         },
@@ -24548,7 +24546,7 @@
         },
         {
           "station": "Yamagata",
-          "lineId": "OuMain",
+          "lineId": "Yamagata",
           "type": "in",
           "note": ""
         },
@@ -25385,14 +25383,8 @@
           "note": ""
         },
         {
-          "station": "Koriyama",
-          "lineId": "Suigun",
-          "type": "in",
-          "note": ""
-        },
-        {
           "station": "Fukushima",
-          "lineId": "OuMain",
+          "lineId": "Yamagata",
           "type": "in",
           "note": ""
         },
@@ -26267,12 +26259,6 @@
           "note": ""
         },
         {
-          "station": "Kita-Amarume",
-          "lineId": "RikutsuWest",
-          "type": "in",
-          "note": ""
-        },
-        {
           "station": "Kamihama",
           "lineId": "Shinetsu",
           "type": "in",
@@ -26617,7 +26603,7 @@
       "transferStations": [
         {
           "station": "Yonezawa",
-          "lineId": "OuMain",
+          "lineId": "Yamagata",
           "type": "in",
           "note": ""
         },
@@ -28878,7 +28864,9 @@
         },
         {
           "station": "Shin-Koyasu",
-          "lineId": "Keikyu"
+          "lineId": "Keikyu",
+          "toStation": "Keikyu-Shin-Koyasu",
+          "note": "Keikyu-Shin-Koyasu"
         }
       ],
       "nameZh": "东海道本线",
