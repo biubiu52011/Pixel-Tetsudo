@@ -393,8 +393,8 @@
             // 站外换乘：虚线边框
             if (txl.type === "out") {
               bRect.setAttribute("stroke", "#fff");
-              bRect.setAttribute("stroke-width", "1");
-              bRect.setAttribute("stroke-dasharray", "2,2");
+              bRect.setAttribute("stroke-width", "1.5");
+              bRect.setAttribute("stroke-dasharray", "3,2");
             }
             // 异名换乘/站外步行：badge 旁边小字（右侧，不撑高）
             var _sideTxt = _toName || _walkTxt;
@@ -404,7 +404,7 @@
               sTxt.setAttribute("y", tiy + bH / 2 + (isMobileView ? 3 : 2));
               sTxt.setAttribute("font-size", isMobileView ? "7" : "5");
               sTxt.setAttribute("font-weight", "500");
-              sTxt.setAttribute("fill", "#666");
+              sTxt.setAttribute("fill", "#333");
               sTxt.textContent = _sideTxt;
               staticLayer.appendChild(sTxt);
             }
