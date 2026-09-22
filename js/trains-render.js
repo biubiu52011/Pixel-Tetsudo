@@ -366,11 +366,13 @@
             tImg.appendChild(tTitle);
             staticLayer.appendChild(tImg);
           } else {
-            // v4.3.943: 换乘 badge 两行——上行线路名，下行异名换乘站名（如 春日）
+            // v4.3.944: 单行 badge——异名/站外信息放旁边小字，不撑高线路图
             var _toName = txl.toStation ? (window.RailwayDB && window.RailwayDB.resolveStationName ? window.RailwayDB.resolveStationName(txl.toStation, window.currentLang) : txl.toStation) : "";
+            var _walkM = (txl.type === "out" && txl.note) ? txl.note.match(/徒歩約(\d+)分/) : null;
+            var _walkTxt = _walkM ? (isMobileView ? "徒歩" + _walkM[1] + "分" : _walkM[1] + "分") : "";
             var _lineName = (txl.name || txl.lineId || "").slice(0, 4);
-            var bW = Math.max(_badgeW(txl, isMobileView), _toName ? (_toName.length * (isMobileView ? 7 : 5) + 8) : 0);
-            var bH = isMobileView ? (_toName ? 24 : 15) : (_toName ? 18 : 11);
+            var bW = _badgeW(txl, isMobileView);
+            var bH = isMobileView ? 15 : 11;
             var bRect = document.createElementNS(svgNS, "rect");
             bRect.setAttribute("x", tix);
             bRect.setAttribute("y", tiy);
@@ -379,36 +381,32 @@
             bRect.setAttribute("rx", "2");
             bRect.setAttribute("fill", txl.color || "#8a8a8a");
             staticLayer.appendChild(bRect);
-            // 上行：线路名
-            var bTxt1 = document.createElementNS(svgNS, "text");
-            bTxt1.setAttribute("x", tix + bW / 2);
-            bTxt1.setAttribute("y", tiy + (isMobileView ? 10 : 7.5));
-            bTxt1.setAttribute("text-anchor", "middle");
-            bTxt1.setAttribute("font-size", isMobileView ? "9" : "6.5");
-            bTxt1.setAttribute("font-weight", "600");
-            bTxt1.setAttribute("fill", "#fff");
-            bTxt1.textContent = _lineName;
-            staticLayer.appendChild(bTxt1);
-            // 下行：异名换乘站名（如果有）或站外换乘步行时间
-            var _walkM = (txl.type === "out" && txl.note) ? txl.note.match(/徒歩約(\d+)分/) : null;
-            var _walkTxt = _walkM ? (isMobileView ? "徒歩" + _walkM[1] + "分" : _walkM[1] + "分") : "";
-            var _secondLine = _toName || _walkTxt;
-            if (_secondLine) {
-              var bTxt2 = document.createElementNS(svgNS, "text");
-              bTxt2.setAttribute("x", tix + bW / 2);
-              bTxt2.setAttribute("y", tiy + (isMobileView ? 20 : 15));
-              bTxt2.setAttribute("text-anchor", "middle");
-              bTxt2.setAttribute("font-size", isMobileView ? "8" : "5.5");
-              bTxt2.setAttribute("font-weight", "500");
-              bTxt2.setAttribute("fill", "#fff");
-              bTxt2.textContent = _secondLine;
-              staticLayer.appendChild(bTxt2);
-            }
+            var bTxt = document.createElementNS(svgNS, "text");
+            bTxt.setAttribute("x", tix + bW / 2);
+            bTxt.setAttribute("y", tiy + bH / 2 + (isMobileView ? 3.2 : 2.2));
+            bTxt.setAttribute("text-anchor", "middle");
+            bTxt.setAttribute("font-size", isMobileView ? "9" : "6.5");
+            bTxt.setAttribute("font-weight", "600");
+            bTxt.setAttribute("fill", "#fff");
+            bTxt.textContent = _lineName;
+            staticLayer.appendChild(bTxt);
             // 站外换乘：虚线边框
             if (txl.type === "out") {
               bRect.setAttribute("stroke", "#fff");
               bRect.setAttribute("stroke-width", "1");
               bRect.setAttribute("stroke-dasharray", "2,2");
+            }
+            // 异名换乘/站外步行：badge 旁边小字（右侧，不撑高）
+            var _sideTxt = _toName || _walkTxt;
+            if (_sideTxt) {
+              var sTxt = document.createElementNS(svgNS, "text");
+              sTxt.setAttribute("x", tix + bW + 3);
+              sTxt.setAttribute("y", tiy + bH / 2 + (isMobileView ? 3 : 2));
+              sTxt.setAttribute("font-size", isMobileView ? "7" : "5");
+              sTxt.setAttribute("font-weight", "500");
+              sTxt.setAttribute("fill", "#666");
+              sTxt.textContent = _sideTxt;
+              staticLayer.appendChild(sTxt);
             }
           }
           _rowCur += (txl.image ? ICON : _badgeW(txl, isMobileView)) + GAP;
