@@ -27302,7 +27302,8 @@
         }
       ],
       "nameZh": "东急大井町线",
-      "nameKo": "도큐 오이마치선"
+      "nameKo": "도큐 오이마치선",
+      "name": "東急大井町線"
     },
     "TokyuMeguro": {
       "nameJa": "東急目黒線",
@@ -27376,7 +27377,8 @@
         }
       ],
       "nameZh": "东急目黑线",
-      "nameKo": "도큐 메구로선"
+      "nameKo": "도큐 메구로선",
+      "name": "東急目黒線"
     },
     "TokyuIkegami": {
       "nameJa": "東急池上線",
@@ -27434,7 +27436,8 @@
         }
       ],
       "nameZh": "东急池上线",
-      "nameKo": "도큐 이케가미선"
+      "nameKo": "도큐 이케가미선",
+      "name": "東急池上線"
     },
     "TokyuSetagaya": {
       "nameJa": "東急世田谷線",
@@ -27461,7 +27464,8 @@
         }
       ],
       "nameZh": "东急世田谷线",
-      "nameKo": "도큐 세타가야선"
+      "nameKo": "도큐 세타가야선",
+      "name": "東急世田谷線"
     },
     "TokyuKodomonokuni": {
       "nameJa": "東急こどもの国線",
@@ -27489,7 +27493,8 @@
         }
       ],
       "nameZh": "东急儿童国线",
-      "nameKo": "도큐 코도모노쿠니선"
+      "nameKo": "도큐 코도모노쿠니선",
+      "name": "東急こどもの国線"
     },
     "Hachiko": {
       "nameJa": "八高線",
@@ -27598,7 +27603,8 @@
         }
       ],
       "nameZh": "八高线",
-      "nameKo": "하치코선"
+      "nameKo": "하치코선",
+      "name": "八高線"
     },
     "KeiseiOshiage": {
       "nameJa": "京成押上線",
@@ -27641,7 +27647,8 @@
         }
       ],
       "nameZh": "押上线",
-      "nameKo": "오시아게선"
+      "nameKo": "오시아게선",
+      "name": "京成押上線"
     },
     "KeiseiKanamachi": {
       "nameJa": "京成金町線",
@@ -27669,7 +27676,8 @@
         }
       ],
       "nameZh": "金町线",
-      "nameKo": "카나마치선"
+      "nameKo": "카나마치선",
+      "name": "京成金町線"
     },
     "KeiseiChiba": {
       "nameJa": "京成千葉線",
@@ -27704,7 +27712,8 @@
         }
       ],
       "nameZh": "千叶线",
-      "nameKo": "치바선"
+      "nameKo": "치바선",
+      "name": "京成千葉線"
     },
     "KeiseiChihara": {
       "nameJa": "京成千原線",
@@ -27729,7 +27738,8 @@
         }
       ],
       "nameZh": "千原线",
-      "nameKo": "치하라선"
+      "nameKo": "치하라선",
+      "name": "京成千原線"
     },
     "NaritaSkyAccess": {
       "nameJa": "成田スカイアクセス線",
@@ -27784,7 +27794,8 @@
         8,
         6
       ],
-      "durationTotalMin": 36
+      "durationTotalMin": 36,
+      "name": "成田空港線"
     },
     "SotetsuIzumino": {
       "nameJa": "相鉄いずみ野線",
@@ -27823,7 +27834,8 @@
         }
       ],
       "nameZh": "泉野线",
-      "nameKo": "이즈미노선"
+      "nameKo": "이즈미노선",
+      "name": "相鉄いずみ野線"
     },
     "SotetsuShin-Yokohama": {
       "nameJa": "相鉄新横浜線",
@@ -27857,7 +27869,8 @@
         }
       ],
       "nameZh": "相铁新横滨线",
-      "nameKo": "소테츠 신요코하마선"
+      "nameKo": "소테츠 신요코하마선",
+      "name": "相鉄新横浜線"
     },
     "NewShuttle": {
       "nameJa": "埼玉新都市交通伊奈線（ニューシャトル）",
@@ -27925,7 +27938,8 @@
         }
       ],
       "nameZh": "埼玉新都市交通伊奈线（新穿梭）",
-      "nameKo": "사이타마 신도시 교통 이나선（뉴 셔틀）"
+      "nameKo": "사이타마 신도시 교통 이나선（뉴 셔틀）",
+      "name": "ニューシャトル"
     },
     "TokyoMonorail": {
       "nameJa": "東京モノレール羽田空港線",
@@ -27991,7 +28005,8 @@
         }
       ],
       "nameZh": "东京单轨电车羽田机场线",
-      "nameKo": "도쿄 모노레일 하네다 공항선"
+      "nameKo": "도쿄 모노레일 하네다 공항선",
+      "name": "東京モノレール"
     },
     "SobuMain": {
       "nameJa": "総武本線",
@@ -28062,7 +28077,8 @@
         }
       ],
       "nameZh": "总武本线",
-      "nameKo": "소부 본선"
+      "nameKo": "소부 본선",
+      "name": "総武本線"
     },
     "ChuoMain": {
       "nameJa": "中央本線",
@@ -28140,7 +28156,8 @@
         "ChuoTatsuno"
       ],
       "nameZh": "中央本线",
-      "nameKo": "주오 본선"
+      "nameKo": "주오 본선",
+      "name": "中央本線"
     },
     "TokaidoMain": {
       "nameJa": "東海道本線",
@@ -28694,7 +28711,8 @@
         }
       ],
       "nameZh": "东海道本线",
-      "nameKo": "도카이도 본선"
+      "nameKo": "도카이도 본선",
+      "name": "東海道本線"
     },
     "Tadami": {
       "name": "只见线",
