@@ -552,8 +552,8 @@
         var lineId = lineIds[i];
         var line = allLines[lineId];
 
-        // Skip lines that already have realtime positions
-        if (existingPositions && existingPositions[lineId] && existingPositions[lineId].length > 0) continue;
+        // v4.3.961: 不再跳过有实时位置的线路——中距离线路实时数据只覆盖一部分区间，
+        // 需要用推定补全缺失区间的列车（合并时去重）
         if (!line || !line.operator) continue;
 
         // Normalize operator ID
@@ -586,7 +586,15 @@
 
         var positions = estimateLinePositions(lineId, line, lineTimetable, delayInfo, opId);
         if (positions.length > 0) {
-          estimated[lineId] = positions;
+          // v4.3.961: 合并到现有实时数据（去重：同 trainId 只保留一条）
+          var existing = (existingPositions && existingPositions[lineId]) || [];
+          var _existingIds = {};
+          existing.forEach(function(p) { _existingIds[p.trainId] = true; });
+          var _merged = existing.slice();
+          positions.forEach(function(p) {
+            if (!_existingIds[p.trainId]) _merged.push(p);
+          });
+          estimated[lineId] = _merged;
         }
       }
 
