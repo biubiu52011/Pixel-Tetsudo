@@ -16094,67 +16094,78 @@
           "station": "Seibu-Shinjuku",
           "lineId": "ChuoRapid",
           "type": "out",
-          "note": "西武新宿⇄新宿，徒歩約8分"
+          "note": "新宿",
+          "toStation": "Shinjuku"
         },
         {
           "station": "Seibu-Shinjuku",
           "lineId": "Saikyo",
           "type": "out",
-          "note": "西武新宿⇄新宿，徒歩約8分"
+          "note": "新宿",
+          "toStation": "Shinjuku"
         },
         {
           "station": "Seibu-Shinjuku",
           "lineId": "ShonanShinjuku",
           "type": "out",
-          "note": "西武新宿⇄新宿，徒歩約8分"
+          "note": "新宿",
+          "toStation": "Shinjuku"
         },
         {
           "station": "Seibu-Shinjuku",
           "lineId": "Marunouchi",
           "type": "out",
-          "note": "西武新宿⇄新宿，徒歩約8分"
+          "note": "新宿",
+          "toStation": "Shinjuku"
         },
         {
           "station": "Seibu-Shinjuku",
           "lineId": "Shinjuku",
           "type": "out",
-          "note": "西武新宿⇄新宿，徒歩約8分"
+          "note": "新宿",
+          "toStation": "Shinjuku"
         },
         {
           "station": "Seibu-Shinjuku",
           "lineId": "Oedo",
           "type": "out",
-          "note": "西武新宿⇄新宿，徒歩約8分"
+          "note": "新宿",
+          "toStation": "Shinjuku"
         },
         {
           "station": "Seibu-Shinjuku",
           "lineId": "Yamanote",
           "type": "out",
-          "note": "西武新宿⇄新宿，徒歩約8分"
+          "note": "新宿",
+          "toStation": "Shinjuku"
         },
         {
           "station": "Seibu-Shinjuku",
           "lineId": "ChuoSobuLocal",
           "type": "out",
-          "note": "西武新宿⇄新宿，徒歩約8分"
+          "note": "新宿",
+          "toStation": "Shinjuku"
         },
         {
           "station": "Seibu-Shinjuku",
           "lineId": "KeioMain",
           "type": "out",
-          "note": "西武新宿⇄新宿，徒歩約8分"
+          "note": "新宿",
+          "toStation": "Shinjuku"
         },
         {
           "station": "Seibu-Shinjuku",
           "lineId": "KeioShin",
           "type": "out",
-          "note": "西武新宿⇄新宿，徒歩約8分"
+          "note": "新宿",
+          "toStation": "Shinjuku"
         },
         {
           "station": "Seibu-Shinjuku",
           "lineId": "Odawara",
           "type": "out",
-          "note": "西武新宿⇄新宿，徒歩約8分"
+          "note": "新宿",
+          "toStation": "Shinjuku"
         }
       ],
       "nameZh": "新宿线",
@@ -16862,7 +16873,8 @@
           "station": "Keisei-Tsudanuma",
           "lineId": "KeiseiChiba",
           "type": "in",
-          "note": ""
+          "note": "Tsudanuma",
+          "toStation": "Tsudanuma"
         },
         {
           "station": "Keisei-Ueno",
@@ -16923,11 +16935,15 @@
         },
         {
           "station": "Keisei-Funabashi",
-          "lineId": "SobuRapid"
+          "lineId": "SobuRapid",
+          "toStation": "Funabashi",
+          "note": "Funabashi"
         },
         {
           "station": "Keisei-Narita",
-          "lineId": "Narita"
+          "lineId": "Narita",
+          "toStation": "Narita",
+          "note": "Narita"
         },
         {
           "station": "Machiya",
@@ -17815,13 +17831,15 @@
           "station": "Keikyu-Kamata",
           "lineId": "KeikyuAirport",
           "type": "in",
-          "note": ""
+          "note": "Kamata",
+          "toStation": "Kamata"
         },
         {
           "station": "Keikyu-Kawasaki",
           "lineId": "Daishi_Keikyu",
           "type": "in",
-          "note": ""
+          "note": "Kawasaki",
+          "toStation": "Kawasaki"
         },
         {
           "station": "Yokohama",
@@ -17915,7 +17933,9 @@
         },
         {
           "station": "Keikyu-Tsurumi",
-          "lineId": "KeihinTohoku"
+          "lineId": "KeihinTohoku",
+          "toStation": "Tsurumi",
+          "note": "Tsurumi"
         }
       ],
       "nameZh": "本线",
@@ -19810,7 +19830,8 @@
           "station": "Keikyu-Kawasaki",
           "lineId": "Keikyu",
           "type": "in",
-          "note": ""
+          "note": "Kawasaki",
+          "toStation": "Kawasaki"
         }
       ],
       "nameZh": "大师线",
@@ -21153,7 +21174,8 @@
           "station": "Keikyu-Kamata",
           "lineId": "Keikyu",
           "type": "in",
-          "note": ""
+          "note": "Kamata",
+          "toStation": "Kamata"
         },
         {
           "station": "Tenku-Bashi",
@@ -21676,11 +21698,15 @@
         },
         {
           "station": "Keio-Tama-Center",
-          "lineId": "OdakyuTama"
+          "lineId": "OdakyuTama",
+          "toStation": "Tama",
+          "note": "Tama"
         },
         {
           "station": "Keio-Tama-Center",
-          "lineId": "TamaMonorail"
+          "lineId": "TamaMonorail",
+          "toStation": "Tama",
+          "note": "Tama"
         }
       ],
       "nameZh": "相模原线",
@@ -22921,11 +22947,15 @@
         },
         {
           "station": "Odakyu-Tama-Center",
-          "lineId": "KeioSagami"
+          "lineId": "KeioSagami",
+          "toStation": "Tama",
+          "note": "Tama"
         },
         {
           "station": "Odakyu-Tama-Center",
-          "lineId": "TamaMonorail"
+          "lineId": "TamaMonorail",
+          "toStation": "Tama",
+          "note": "Tama"
         }
       ],
       "nameZh": "多摩线",
@@ -27742,7 +27772,8 @@
           "station": "Keisei-Tsudanuma",
           "lineId": "Keisei",
           "type": "in",
-          "note": ""
+          "note": "Tsudanuma",
+          "toStation": "Tsudanuma"
         },
         {
           "station": "Chiba-Chuo",
