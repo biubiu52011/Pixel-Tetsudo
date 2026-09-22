@@ -338,24 +338,24 @@
           }
         });
         
-        // 直通线路：东武东上线（和光市直通）、西武有乐町线（小竹向原直通）、东急东横线（涉谷直通）
-        var _throughLines = ['TobuTojo', 'SeibuYurakucho', 'TokyuToyoko'];
-        for (var _tl = 0; _tl < _throughLines.length; _tl++) {
-          var _tlLine = _throughLines[_tl];
-          var _tlPositions = odptData.realtimePositions[_tlLine] || [];
-          _tlPositions.forEach(function(p) {
-            if (_existingIds[p.trainId]) return;
-            // 用站名映射：直通线站名 → 副都心线站索引
-            var _stName = (p.stationId || '').split('.').pop();
-            var _tlIdx = _ownStations.indexOf(_stName);
-            if (_tlIdx >= 0) {
-              p.stationIndex = _tlIdx;
-              p.fusionLineId = _tlLine;
-              _rtPositions.push(p);
-              _existingIds[p.trainId] = true;
-            }
-          });
-        }
+      // v4.3.959: 自动合并所有直通线路列车——用 getThroughServiceLines 自动获取直通线
+      var _throughLines = getThroughServiceLines(lineId) || [];
+      for (var _tl = 0; _tl < _throughLines.length; _tl++) {
+        var _tlLine = _throughLines[_tl];
+        var _tlPositions = odptData.realtimePositions[_tlLine] || [];
+        _tlPositions.forEach(function(p) {
+          if (_existingIds[p.trainId]) return;
+          // 用站名映射：直通线站名 → 当前线站索引
+          var _stName = (p.stationId || '').split('.').pop();
+          var _tlIdx = _ownStations.indexOf(_stName);
+          if (_tlIdx >= 0) {
+            p.stationIndex = _tlIdx;
+            p.fusionLineId = _tlLine;
+            _rtPositions.push(p);
+            _existingIds[p.trainId] = true;
+          }
+        });
+      }
       }
       return { id: lineId, name: line.name, nameEn: line.nameEn || line.name, code: line.code, color: (window.LineOperationSystemsResolveColor && window.LineOperationSystemsResolveColor(lineId)) || line.color, operator: line.operator, region: line.region, type: line.type, image: line.image, stations: line.stations || [], durations: line.durations || [], intervalTotal: line.durationTotalMin || 0, realtimePositions: _rtPositions, delayInfo: delayInfo, branchOf: line.branchOf || null, isSixShapedLoop: line.isSixShapedLoop === true, isDoubleColumnLoop: line.isDoubleColumnLoop === true, loopJunction: line.loopJunction || null, _chainMeta: _chainMeta };
     } catch(e) { console.debug("[DataFusion] fuseLine error for " + lineId + ":", e.message); return null; }
