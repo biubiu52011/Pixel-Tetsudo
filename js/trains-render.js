@@ -378,7 +378,7 @@
             bRect.setAttribute("width", bW);
             bRect.setAttribute("height", bH);
             bRect.setAttribute("rx", "2");
-            bRect.setAttribute("fill", txl.color || "#8a8a8a");
+            bRect.setAttribute("fill", txl.color || (window.TrainsColors ? window.TrainsColors.LABEL_FALLBACK : "#8a8a8a"));
             staticLayer.appendChild(bRect);
             var bTxt = document.createElementNS(svgNS, "text");
             bTxt.setAttribute("x", tix + bW / 2);
@@ -1240,6 +1240,36 @@
     Arakawa:        { Northbound: +1, Southbound: -1 }    // v4.3.899: 站表 三ノ輪橋→早稲田：北行=早稲田（站表后=▼）
   };
 
+  // v4.3.962: 线路级显示特例表——把光丘段/北绫濑/东急种别等分散的 if 特例收进一张表
+  // 字段含义：
+  //   branchTrain: { startIdx, endIdx, destRegex } —— 分支段列车识别（Oedo 光丘段）
+  //   branchDir:   { upDest, downDest }          —— 分支段方向判定（up=往光丘, down=往都厅前）
+  //   branchStation: { regex, dir }              —— 支线站名特判（Chiyoda KitaAyase → down）
+//   showTrainType: true                   —— 显示列车等级种别名（东急线）
+  var LINE_DISPLAY_OVERRIDES = {
+    // 大江户线光丘段：站表 [1..10] 为光丘段，枢纽 [0]=Tochomae
+    Oedo: {
+      branchTrain: { startIdx: 1, endIdx: 10, destRegex: /^Hikarigaoka$/i },
+      branchDir: { upDest: /^Hikarigaoka$/i, downDest: null }
+    },
+    // 千代田线北绫濑支线：KitaAyase 不在主线站表，单独判定
+    Chiyoda: {
+      branchStation: { regex: /^KitaAyase$/i, dir: 'down' }
+    },
+    // 东急线：显示列车等级种别名（TRAIN_TYPE_NAMES）
+    Tokyu: { showTrainType: true } // 前缀匹配——所有 lineId 以 'Tokyu' 开头的线路
+  };
+  function _getLineOverride(lineId) {
+    if (!LINE_DISPLAY_OVERRIDES[lineId]) {
+      // 前缀匹配（如 Tokyu → TokyuToyoko/TokyuMeguro 等）
+      for (var k in LINE_DISPLAY_OVERRIDES) {
+        if (lineId.indexOf(k) === 0 && LINE_DISPLAY_OVERRIDES[k].showTrainType) return LINE_DISPLAY_OVERRIDES[k];
+      }
+      return null;
+    }
+    return LINE_DISPLAY_OVERRIDES[lineId];
+  }
+
   function _isLoopDirName(dirName) {
     if (!dirName) return false;
     return !!LOOP_DIR_NAMES[String(dirName).split('.').pop()];
@@ -1249,13 +1279,15 @@
   // 站表 [0]=Tochomae（环线/光丘段枢纽）、[1..10]=光丘段（西新宿五丁目→光丘，竖直开放尾）。
   // 光丘段列车虽被 ODPT 标成 InnerLoop/OuterLoop，但没有"回り"语义——应显示真实终点（光丘/都厅前）。
   function _isOedoBranchTrain(lineId, p) {
-    if (lineId !== 'Oedo' || !p) return false;
+    if (!p) return false;
+    var _ov = _getLineOverride(lineId);
+    if (!_ov || !_ov.branchTrain) return false;
     var si = p.stationIndex || 0;
-    if (si >= 1 && si <= 10) return true; // 当前位置在光丘段
+    var bt = _ov.branchTrain;
+    if (si >= bt.startIdx && si <= bt.endIdx) return true;
     if (si === 0) {
-      // 都厅前枢纽出发的车：dest=光丘 则进入光丘段；dest=都厅前 是环线折返
       var _d0 = String(p.destinationStation || '').split('.').pop();
-      if (/^Hikarigaoka$/i.test(_d0)) return true;
+      if (bt.destRegex && bt.destRegex.test(_d0)) return true;
     }
     return false;
   }
@@ -1267,12 +1299,17 @@
     // v4.3.476: 光丘段区间车（光丘始发→环线，dest 为环线站如 清澄白河/都厅前 而非光丘）——
     // 终点非光丘即沿光丘段往都厅前方向移动（光丘段只有往返两向），一律 ▼。
     if (_isOedoBranchTrain(lineId, p)) {
-      var _dest = String(p.destinationStation || '').split('.').pop();
-      if (/^Hikarigaoka$/i.test(_dest)) return 'up';
+      var _ovDir = _getLineOverride(lineId);
+      var _dest2 = String(p.destinationStation || '').split('.').pop();
+      if (_ovDir && _ovDir.branchDir && _ovDir.branchDir.upDest && _ovDir.branchDir.upDest.test(_dest2)) return 'up';
       return 'down';
     }
-    // v4.3.935: 千代田线北绫濑支线——KitaAyase 不在主线站表里，单独判定：往北绫濑=屏幕下方=▼
-    if (lineId === 'Chiyoda' && /^KitaAyase$/i.test(dn)) return 'down';
+    // v4.3.962: 支线站名特判（Chiyoda KitaAyase → down）
+    var _ovKita = _getLineOverride(lineId);
+    if (_ovKita && _ovKita.branchStation) {
+      var _bsReg = _ovKita.branchStation.regex;
+      if (_bsReg && _bsReg.test(dn)) return _ovKita.branchStation.dir;
+    }
     if (/^(InnerLoop|Inner|OuterLoop|Outer)$/.test(dn)) return null;
     // v4.3.938: 统一性——不论方位词是抽象词(Inbound/Northbound…)还是站名，优先用「终点站在本线站表中的
     // index」自动推方向：终点在当前站之后(站表 index 更大)=往站表后方开=down，否则 up。新线自动正确，
@@ -1341,7 +1378,8 @@
     if (!labelText) return;
     // v4.3.53x: 东急线列车等级（种别）显示——ODPT trainType → 种别名（TRAIN_TYPE_NAMES），
     // 标签格式：方向箭头 + 种别名 + 终点站（例：▼ 特急 元町・中華街）
-    if (lineId.indexOf('Tokyu') === 0 && p.trainType) {
+    var _ovShow = _getLineOverride(lineId);
+    if (_ovShow && _ovShow.showTrainType && p.trainType) {
       var _tdefs = window.TRAIN_TYPE_NAMES || {};
       var _td = _tdefs[p.trainType];
       var _tname = _td ? (_td[lang] || _td.ja) : String(p.trainType).split('.').pop();

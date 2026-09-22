@@ -24,7 +24,7 @@ function getLinesData() {
       name: l.name || ids[i],
       nameEn: l.nameEn || l.name || ids[i],
       code: l.code || ids[i],
-      color: (window.LineOperationSystemsResolveColor && window.LineOperationSystemsResolveColor(ids[i])) || l.color || "#888888",
+      color: (window.LineOperationSystemsResolveColor && window.LineOperationSystemsResolveColor(ids[i])) || l.color || (window.TrainsColors ? window.TrainsColors.LINE_UNKNOWN : "#888888"),
       operator: l.operator || "Unknown",
       region: l.region || "",
       type: l.type || "straight",

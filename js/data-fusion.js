@@ -580,8 +580,10 @@
             // v4.3.939: 存车自己的 operator（渲染层判断直通车、按车籍选图标，治跨线"变身"）
             positionData.trainOperator = trainOperator.replace('odpt.Operator:', '') || '';
             var isRinkaiTrain = (trainOperator === 'odpt.Operator:TWR' || trainOperator === 'TWR');
-            if (isRinkaiTrain && (lid === 'Saikyo' || lid === 'Kawagoe')) {
-              // 这是临海线的车，现在开到埼京线/川越线区间了
+            // 临海线（TWR）列车开到了 JR 区间（Saikyo/Kawagoe）→ 用 Rinkai 车型
+            // 通过 ThroughService 判断当前 lid 是否与 Rinkai 直通
+            var _tsRinkaiPartner = (window.ThroughService && window.ThroughService.getDirectThroughLines) ? (window.ThroughService.getDirectThroughLines(lid) || []) : [];
+            if (isRinkaiTrain && _tsRinkaiPartner.indexOf('Rinkai') >= 0) {
               positionData.trainClass = resolveTrainClass(
                 { lineId: 'Rinkai', operator: 'TWR', trainNumber: trainId, stationIndex: idx, trainType: rawType, destinationStation: destStations, trainId: trainId + '_' + idx },
                 'Rinkai', 'TWR', trainId + '_' + idx, idx, rawType
@@ -599,39 +601,47 @@
                 );
               } catch(e) {}
             }
-            // 2. JR的车开往新木场（destinationStation=ShinKiba）→ 也加到临海线posMap
-            if (destStation === 'ShinKiba' || destStation === 'Shin-Kiba') {
-              // 这是JR的车，终点是临海线的新木场站
-              // 如果它已经到大崎站附近了，就把它加到临海线的posMap里
-              var rinkaiLine = allLines['Rinkai'];
-              if (rinkaiLine && rinkaiLine.stations) {
-                var rinkaiOsakiIdx = rinkaiLine.stations.indexOf('Osaki');
-                if (rinkaiOsakiIdx >= 0) {
-                  if (!posMap['Rinkai']) posMap['Rinkai'] = [];
-                  var rinkaiExistingIdx = posMap['Rinkai'].findIndex(function(p) { return p.trainId === trainId; });
-                  var rinkaiPositionData = {
-                    stationIndex: rinkaiOsakiIdx, // 大崎站
-                    trainId: trainId,
-                    trainNumber: trainId,  // v4.3.950: 纯车号
-                    delayMin: delayMin,
-                    railDirection: directionName,
-                    destinationStation: destStation,
-                    trainType: rawType,
-                    typeName: typeName,
-                    estimated: false,
-                    isJRThrough: true,
-                    trainClass: resolveTrainClass(
-                      { lineId: 'Rinkai', operator: 'JR-East', trainNumber: trainId, stationIndex: idx, trainType: rawType, destinationStation: destStations, trainId: trainId + '_' + idx },
-                      'Rinkai', 'JR-East', trainId + '_' + idx, idx, rawType
-                    )
-                  };
-                  if (rinkaiExistingIdx >= 0) {
-                    posMap['Rinkai'][rinkaiExistingIdx] = rinkaiPositionData;
-                  } else {
-                    posMap['Rinkai'].push(rinkaiPositionData);
+            // 2. JR车终点在直通先线路 → 插入对方线 posMap（From ThroughService join station 派生）
+            var _throughPartners = (window.ThroughService && window.ThroughService.getDirectThroughLines) ? window.ThroughService.getDirectThroughLines(lid) : [];
+            if (_throughPartners.length > 0) {
+              var _destSt = String(destStation || '').split('.').pop(); // URN 末段
+              _throughPartners.forEach(function(_partnerLid) {
+                var _joinSts = (window.ThroughService && window.ThroughService.getJoinStations) ? window.ThroughService.getJoinStations(_partnerLid, lid) : null;
+                // joinSts 是对方线的换乘站（如 Rinkai↔Saikyo = Osaki）；列车终点必须在对方线站表内
+                var _pLine = allLines[_partnerLid];
+                if (!_pLine || !_pLine.stations) return;
+                var _normDest = _destSt.replace(/-/g, '').toLowerCase();
+                var _inPartnerLine = _pLine.stations.some(function(st) { return st.replace(/-/g, '').toLowerCase() === _normDest; });
+                if (!_inPartnerLine) return;
+                // 插入位置：join station 在对方线站表中的 index
+                var _insertIdx = _pLine.stations.length - 1; // 默认放最后一站
+                if (_joinSts && _joinSts.length > 0) {
+                  var _jsNorm = _joinSts.map(function(s) { return s.replace(/-/g, '').toLowerCase(); });
+                  for (var _j = 0; _j < _pLine.stations.length; _j++) {
+                    if (_jsNorm.indexOf(_pLine.stations[_j].replace(/-/g, '').toLowerCase()) >= 0) { _insertIdx = _j; break; }
                   }
                 }
-              }
+                if (!posMap[_partnerLid]) posMap[_partnerLid] = [];
+                var _existIdx = posMap[_partnerLid].findIndex(function(p) { return p.trainId === trainId; });
+                var _pLineOp = (window.TransitConstants && window.TransitConstants.normalizeOp) ? window.TransitConstants.normalizeOp((allLines[_partnerLid] && allLines[_partnerLid].operator) || '') : '';
+                var _pPosData = {
+                  stationIndex: _insertIdx,
+                  trainId: trainId,
+                  trainNumber: trainId,
+                  delayMin: delayMin,
+                  railDirection: directionName,
+                  destinationStation: destStation,
+                  trainType: rawType,
+                  typeName: typeName,
+                  estimated: false,
+                  isJRThrough: true,
+                  trainClass: resolveTrainClass(
+                    { lineId: _partnerLid, operator: _pLineOp, trainNumber: trainId, stationIndex: idx, trainType: rawType, destinationStation: destStations, trainId: trainId + '_' + idx },
+                    _partnerLid, _pLineOp, trainId + '_' + idx, idx, rawType
+                  )
+                };
+                if (_existIdx >= 0) posMap[_partnerLid][_existIdx] = _pPosData; else posMap[_partnerLid].push(_pPosData);
+              });
             }
             if (existingIdx >= 0) {
               posMap[lid][existingIdx] = positionData;

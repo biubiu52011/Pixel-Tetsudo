@@ -67,7 +67,7 @@
     }
     
     var stations = line.stations || [];
-    var color = line.color || "#008803";
+    var color = line.color || (window.TrainsColors ? window.TrainsColors.LINE_FALLBACK : "#008803");
     var isLoop = line.type === "loop";
     var isSixShapedLoop = line.isSixShapedLoop === true;
     // Transfer map for interchange station icons (single source; read-only)

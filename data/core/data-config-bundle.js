@@ -955,6 +955,14 @@ window.getTransferHint = function(stationId, lang) {
   /** trains 页后台预加载线路白名单（用户高频切换的线路）。打开 trains.html 后 2 秒开始后台加载。 */
   var TRAIN_WARMUP_LINES = ['Yamanote', 'ChuoRapid', 'KeihinTohoku', 'SeibuEn', 'Keikyu', 'Odawara'];
 
+  /**
+   * 快速通过站白名单——route-search 计算时跳过这些站的停站+加减速时间（按 EXPRESS_PASS_RATIO 折扣）。
+   * 数据源：各线公式停站表（wiki）。Joban=常磐快速 松戸〜柏 间ノンストップ（通过 亀有/馬橋/新松戸/北小金）。
+   */
+  var EXPRESS_SKIP_STATIONS = {
+    'Joban': { 'Kameari': 1, 'Mabashi': 1, 'Shin-Matsudo': 1, 'Kita-Kogane': 1 }
+  };
+
   // ========== UI 策略常量 ==========
 
   /** 换乘 chip 行数上限（per station）。v4.3.613: 2→3 行（JR 大站东京/新宿换乘超 8 条）；v4.3.849: 3→4 行（4×4=16 个图标上限，用户裁定）。 */
@@ -978,10 +986,13 @@ window.getTransferHint = function(stationId, lang) {
     REFRESH_INTERVAL: REFRESH_INTERVAL,
     POSITION_INTERVAL: POSITION_INTERVAL,
     TRAIN_WARMUP_LINES: TRAIN_WARMUP_LINES,
+    // 快速通过站（route-search）
+    EXPRESS_SKIP_STATIONS: EXPRESS_SKIP_STATIONS,
     // UI 策略
     TRANSFER_MAX_ROWS: TRANSFER_MAX_ROWS
   };
 })();
+
 
 // ===== through-service.js =====
 /*
@@ -1195,6 +1206,8 @@ window.getTransferHint = function(stationId, lang) {
 
   /** BFS closure: every line reachable through any number of through runs. */
   function getThroughServiceLines(lineId) {
+    // v4.3.966: 多跳BFS找所有直通线路，但排除跨公司接续（西武线不应该出现在东武线视图里）
+    // 同公司内的多跳是允许的（东武晴空塔线→东武伊势崎线→东武日光线）
     try {
       var result = [];
       var visited = {};
@@ -3550,6 +3563,17 @@ window.TRAIN_TYPE_NAMES = {
   "odpt.TrainType:Tokyu.LimitedExpress":           { ja: "特急",     en: "Limited Express", zh: "特急", ko: "특급" },
   "odpt.TrainType:Tokyu.F-Liner":                  { ja: "Fライナー", en: "F-Liner", zh: "F-Liner", ko: "F라이너" },
   "odpt.TrainType:Tokyu.S-TRAIN":                  { ja: "S-TRAIN",  en: "S-TRAIN", zh: "S-TRAIN", ko: "S-TRAIN" },
-  "odpt.TrainType:Tokyu.SemiExpress":              { ja: "準急",     en: "Semi Express", zh: "准急", ko: "준급" }
+  "odpt.TrainType:Tokyu.SemiExpress":              { ja: "準急",     en: "Semi Express", zh: "准急", ko: "준급" },
+
+  // ===== 京成（2026-09-22 京成本線導入）=====
+  "odpt.TrainType:Keisei.Skyliner":                 { ja: "スカイライナー", en: "Skyliner", zh: "Skyliner", ko: "스카이라이너" },
+  "odpt.TrainType:Keisei.AccessExpress":            { ja: "アクセス特急", en: "Access Express", zh: "Access特急", ko: "액세스특급" },
+  "odpt.TrainType:Keisei.RapidLimitedExpress":      { ja: "快速特急", en: "Rapid Ltd. Exp.", zh: "快速特急", ko: "쾌속특급" },
+  "odpt.TrainType:Keisei.LimitedExpress":           { ja: "特急", en: "Limited Express", zh: "特急", ko: "특급" },
+  "odpt.TrainType:Keisei.CommuterLimitedExpress":   { ja: "通勤特急", en: "Commuter Ltd. Exp.", zh: "通勤特急", ko: "통근특급" },
+  "odpt.TrainType:Keisei.Rapid":                    { ja: "快速", en: "Rapid", zh: "快速", ko: "쾌속" },
+  "odpt.TrainType:Keisei.Local":                    { ja: "普通", en: "Local", zh: "普通", ko: "보통" },
+  "odpt.TrainType:Keisei.MorningLiner":             { ja: "モーニングライナー", en: "Morning Liner", zh: "Morning Liner", ko: "모닝라이너" },
+  "odpt.TrainType:Keisei.EveningLiner":             { ja: "イブニングライナー", en: "Evening Liner", zh: "Evening Liner", ko: "이브닝라이너" },
 };
 

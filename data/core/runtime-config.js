@@ -158,6 +158,14 @@
   /** trains 页后台预加载线路白名单（用户高频切换的线路）。打开 trains.html 后 2 秒开始后台加载。 */
   var TRAIN_WARMUP_LINES = ['Yamanote', 'ChuoRapid', 'KeihinTohoku', 'SeibuEn', 'Keikyu', 'Odawara'];
 
+  /**
+   * 快速通过站白名单——route-search 计算时跳过这些站的停站+加减速时间（按 EXPRESS_PASS_RATIO 折扣）。
+   * 数据源：各线公式停站表（wiki）。Joban=常磐快速 松戸〜柏 间ノンストップ（通过 亀有/馬橋/新松戸/北小金）。
+   */
+  var EXPRESS_SKIP_STATIONS = {
+    'Joban': { 'Kameari': 1, 'Mabashi': 1, 'Shin-Matsudo': 1, 'Kita-Kogane': 1 }
+  };
+
   // ========== UI 策略常量 ==========
 
   /** 换乘 chip 行数上限（per station）。v4.3.613: 2→3 行（JR 大站东京/新宿换乘超 8 条）；v4.3.849: 3→4 行（4×4=16 个图标上限，用户裁定）。 */
@@ -181,6 +189,8 @@
     REFRESH_INTERVAL: REFRESH_INTERVAL,
     POSITION_INTERVAL: POSITION_INTERVAL,
     TRAIN_WARMUP_LINES: TRAIN_WARMUP_LINES,
+    // 快速通过站（route-search）
+    EXPRESS_SKIP_STATIONS: EXPRESS_SKIP_STATIONS,
     // UI 策略
     TRANSFER_MAX_ROWS: TRANSFER_MAX_ROWS
   };

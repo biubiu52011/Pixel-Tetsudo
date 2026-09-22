@@ -80,9 +80,8 @@
   // 值 0.5 经常磐快速实时间校准（4 个通过站 3+3+3+4=13分 → 6.5分，合计 ~31.5分）。
   // 数据源：各线公式停站表（wiki）。Joban=常磐快速 松戸〜柏间ノンストップ（通过 亀有/馬橋/新松戸/北小金）。
   const EXPRESS_PASS_RATIO = 0.5;
-  const EXPRESS_SKIP_STATIONS = {
-    'Joban': { 'Kameari': 1, 'Mabashi': 1, 'Shin-Matsudo': 1, 'Kita-Kogane': 1 }
-  };
+  // v4.3.962: 从 RuntimeConfig 读取，兜底保留原表
+  const EXPRESS_SKIP_STATIONS = (window.RuntimeConfig && window.RuntimeConfig.EXPRESS_SKIP_STATIONS) || { 'Joban': { 'Kameari': 1, 'Mabashi': 1, 'Shin-Matsudo': 1, 'Kita-Kogane': 1 } };
 
   // Minimal binary min-heap for Dijkstra priority queue.
   function _MinHeap() {

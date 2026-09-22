@@ -24,7 +24,8 @@
     function updateOperatorNames() {
         if (typeof window.t === 'function' && typeof window.TransitConstants === 'object') {
             var _opNames = {};
-            var _opIds = ['JR-East','TokyoMetro','Toei','Seibu','Tobu','Tokyu','Keio','Odakyu','Keisei','Keikyu','Sotetsu','YokohamaMunicipal','TWR','MinatoMirai','MIR','Rinkai','TsukubaExpress','Yurikamome','TamaMonorail','TokyoMonorail','SaitamaNewUrbanTransit'];
+            // v4.3.962: 从 TransitConstants.OP_ORDER 派生，不再手写重复清单
+            var _opIds = (window.TransitConstants && Array.isArray(window.TransitConstants.OP_ORDER)) ? window.TransitConstants.OP_ORDER.slice() : [];
             for (var _i = 0; _i < _opIds.length; _i++) {
                 var _key = 'op.' + _opIds[_i];
                 _opNames[_opIds[_i]] = window.t(_key) || _opIds[_i];
@@ -250,4 +251,3 @@
         init();
     }
 })();
-
