@@ -2034,7 +2034,12 @@ var LINE_ICON_OVERRIDES = [
         tshort = String(trainTypeUrn).split(':').pop().split('.').pop();
       }
       var tmap = cfg[tshort];
-      if (!tmap) return '';
+      if (!tmap) {
+        // v4.3.963: trainType 查不到时回落到该线路已配置的第一个有 default 的类型（通常是 Local）
+        // 避免 Yamanote 只配了 Local 时查 Rapid/Express 直接 miss
+        for (var _tk in cfg) { if (cfg[_tk] && cfg[_tk]['default']) { tmap = cfg[_tk]; break; } }
+        if (!tmap) return '';
+      }
       var dgroup = '';
       var urn = Array.isArray(destUrn) ? destUrn[0] : destUrn;
       if (urn) {
@@ -2051,7 +2056,7 @@ var LINE_ICON_OVERRIDES = [
           dgroup = LINE_GROUP[rw] || '';
         }
       }
-      if (tmap['destStation']) {
+      if (tmap['destStation'] && parts) {
       var stName = parts[parts.length - 1] || '';
       var stVt = tmap['destStation'][stName];
       if (stVt) return stVt;
