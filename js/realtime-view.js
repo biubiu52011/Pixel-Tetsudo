@@ -178,6 +178,44 @@
     // Show modal
     modal.classList.add("active");
     document.body.classList.add("modal-open");
+    // v4.3.964: 嫁接官方接口——弹窗打开后异步经 RunInfoAPI.query() 拉取最新文字更新運行情報区
+    // （ODPT TrainInformation / 官网原文；5 分钟内存缓存防重复请求）
+    refreshCauseFromAPI(modal, lineId, line, delayInfo, cause, status);
+  }
+
+  // v4.3.964: 经 RunInfoAPI.query() 拉取官方接口文字，更新弹窗「運行情報」正文（纯文字 + 链接行）
+  function refreshCauseFromAPI(modal, lineId, line, fallbackDelayInfo, fallbackCause, fallbackStatus) {
+    if (!modal || !window.RunInfoAPI || typeof window.RunInfoAPI.query !== "function") return;
+    try {
+      window.RunInfoAPI.query(lineId, line).then(function(r) {
+        if (!r || !r.text) return;                    // 无数据/失败：保留现有显示
+        var causeSection = modal.querySelector(".rs-cause-section");
+        if (!causeSection) return;
+        // 用 API 结果生成正文（与初始渲染同逻辑：纯文字 + URL 链接行）
+        var lang = window.currentLang || "ja";
+        var causeHtml;
+        if (lang === "ja" || !_needsJaTranslate(r.text)) {
+          causeHtml = escapeHtml(r.text);
+        } else {
+          causeHtml = _translatedText(r.text, lang, { cause: fallbackCause || r.text, status: r.status || fallbackStatus, lineId: lineId });
+        }
+        var textEl = causeSection.querySelector(".rs-cause-text");
+        if (textEl) textEl.innerHTML = causeHtml;
+        // 清理旧的链接行再渲染
+        var oldLinks = causeSection.querySelector(".rs-cause-links");
+        if (oldLinks) oldLinks.remove();
+        if (r.links && r.links.length > 0) {
+          var linksWrap = document.createElement("div");
+          linksWrap.className = "rs-cause-links";
+          var lh = "";
+          for (var i = 0; i < r.links.length; i++) {
+            lh += '<a class="rs-cause-link" href="' + escapeHtml(r.links[i]) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(r.links[i]) + '</a>';
+          }
+          linksWrap.innerHTML = lh;
+          causeSection.appendChild(linksWrap);
+        }
+      }).catch(function() {});
+    } catch(e) {}
   }
 
   // v4.3.963: 网页源运行情报操作区（WebRunInfo）
@@ -212,6 +250,8 @@
     var btn = el.querySelector('[data-act="refresh"]');
     if (btn) btn.addEventListener("click", function() {
       if (!window.WebRunInfo) return;
+      // v4.3.964: 先清 RunInfoAPI 缓存再抓取，确保弹窗拿到最新文字
+      if (window.RunInfoAPI && typeof window.RunInfoAPI.invalidate === "function") window.RunInfoAPI.invalidate(_currentModalLine);
       window.WebRunInfo.refresh(op).then(function() {
         try { if (_currentModalLine && _latestLines) openModal(_currentModalLine, _latestLines); } catch(e) {}
       });
@@ -226,6 +266,7 @@
       var ta = el.querySelector(".rs-webinfo-textarea");
       if (!ta || !ta.value || !ta.value.trim()) return;
       window.WebRunInfo.setManual(op, ta.value.trim());
+      if (window.RunInfoAPI && typeof window.RunInfoAPI.invalidate === "function") window.RunInfoAPI.invalidate(_currentModalLine);
       try { if (_currentModalLine && _latestLines) openModal(_currentModalLine, _latestLines); } catch(e) {}
     });
     var cancelBtn = el.querySelector('[data-act="cancel"]');

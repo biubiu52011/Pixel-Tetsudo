@@ -104,10 +104,20 @@
 
   // ========== 统一查询 API ==========
   // query(lineId, line) -> Promise<{status, text, links[], updatedAt, source} | null>
+  var _cache = {};          // lineId -> { t: timestamp, r: result }
+  var CACHE_TTL_MS = 5 * 60 * 1000; // 5 分钟内存缓存（避免每次弹窗重复请求官方接口/官网）
+
   function query(lineId, line) {
     var lineObj = line || (window.DataLayer && window.DataLayer.getLine ? window.DataLayer.getLine(lineId) : null)
       || (window.UNIFIED_LINES && window.UNIFIED_LINES[lineId]) || null;
 
+    // 缓存命中（5 分钟内直接返回同一结果，降低 ODPT 请求量防 429）
+    var cached = _cache[lineId];
+    if (cached && (Date.now() - cached.t) < CACHE_TTL_MS) {
+      return Promise.resolve(cached.r);
+    }
+
+    var p;
     // ① 官网网页源（千叶/湘南——ODPT 无数据）
     if (window.WebRunInfo && window.WebRunInfo.isWebLine && window.WebRunInfo.isWebLine(lineId)) {
       try {
@@ -115,40 +125,53 @@
         if (w && (w.detail || w.cause)) {
           var rawText = w.detail || w.cause || "";
           var ex = extractLinks(rawText);
-          return Promise.resolve({
+          p = Promise.resolve({
             status: w.status || "normal",
             text: ex.cleanText,
             links: ex.links,
             updatedAt: w.updatedAt || null,
             source: w.source || "web"
           });
+        } else {
+          p = Promise.resolve({ status: "no_data", text: "", links: [], updatedAt: null, source: null });
         }
-        return Promise.resolve({ status: "no_data", text: "", links: [], updatedAt: null, source: null });
-      } catch (e) { return Promise.resolve(null); }
+      } catch (e) { p = Promise.resolve(null); }
+    } else {
+      // ② ODPT 官方接口（TrainInformation）
+      var op = getOperator(lineObj);
+      if (op) {
+        p = fetchODPT(op).then(function(records) {
+          var text = pickText(records, lineObj);
+          if (text) {
+            var ex = extractLinks(text);
+            return {
+              status: aggregateStatus(records, lineObj) || "normal",
+              text: ex.cleanText,
+              links: ex.links,
+              updatedAt: Date.now(),
+              source: "odpt"
+            };
+          }
+          // ODPT 无该线路报文 → 降级③
+          return localFallback(lineId, lineObj);
+        });
+      } else {
+        // ③ 本地兜底
+        p = Promise.resolve(localFallback(lineId, lineObj));
+      }
     }
 
-    // ② ODPT 官方接口（TrainInformation）
-    var op = getOperator(lineObj);
-    if (op) {
-      return fetchODPT(op).then(function(records) {
-        var text = pickText(records, lineObj);
-        if (text) {
-          var ex = extractLinks(text);
-          return {
-            status: aggregateStatus(records, lineObj) || "normal",
-            text: ex.cleanText,
-            links: ex.links,
-            updatedAt: Date.now(),
-            source: "odpt"
-          };
-        }
-        // ODPT 无该线路报文 → 降级③
-        return localFallback(lineId, lineObj);
-      });
-    }
+    // 写缓存（null 也缓存，避免无数据线路反复请求）
+    return p.then(function(r) {
+      try { _cache[lineId] = { t: Date.now(), r: r }; } catch(e) {}
+      return r;
+    });
+  }
 
-    // ③ 本地兜底
-    return Promise.resolve(localFallback(lineId, lineObj));
+  // 供手动刷新：清除某线路缓存（WebRunInfo 手动更新后调用，让弹窗重新 query）
+  function invalidate(lineId) {
+    if (lineId) { delete _cache[lineId]; }
+    else { _cache = {}; }
   }
 
   function aggregateStatus(records, line) {
@@ -183,6 +206,7 @@
   window.RunInfoAPI = {
     version: MODULE_VERSION,
     query: query,
+    invalidate: invalidate,
     extractLinks: extractLinks,
     isWebLine: function(lineId) {
       return !!(window.WebRunInfo && window.WebRunInfo.isWebLine && window.WebRunInfo.isWebLine(lineId));
