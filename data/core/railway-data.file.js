@@ -31001,6 +31001,8 @@ window.RAILWAY_DATA = {
       "durationTotalMin": 100,
       "branchOf": null,
       "stations": [
+        "Ueno",
+        "Tokyo",
         "Omiya",
         "Kumagaya",
         "Honjo-Waseda",
@@ -31013,6 +31015,8 @@ window.RAILWAY_DATA = {
         "Niigata"
       ],
       "durations": [
+        4,
+        5,
         18,
         8,
         9,
@@ -33741,7 +33745,8 @@ window.RAILWAY_DATA = {
       "UtsunomiyaJR",
       "JobanLocal",
       "UenoTokyo",
-      "TohokuShinkansen"
+      "TohokuShinkansen",
+      "JoetsuShinkansen"
     ],
     "Okachimachi": [
       "KeihinTohoku",
@@ -33776,7 +33781,8 @@ window.RAILWAY_DATA = {
       "UtsunomiyaJR",
       "UenoTokyo",
       "TohokuShinkansen",
-      "TokaidoShinkansen"
+      "TokaidoShinkansen",
+      "JoetsuShinkansen"
     ],
     "Yurakucho": [
       "KeihinTohoku",
@@ -45413,16 +45419,18 @@ window.RAILWAY_DATA = {
       "Shin-Aomori": 22
     },
     "JoetsuShinkansen": {
-      "Omiya": 0,
-      "Kumagaya": 1,
-      "Honjo-Waseda": 2,
-      "Takasaki": 3,
-      "Jomo-Kogen": 4,
-      "Echigo-Yuzawa": 5,
-      "Urasa": 6,
-      "Nagaoka": 7,
-      "Tsubame-Sanjo": 8,
-      "Niigata": 9
+      "Tokyo": 0,
+      "Ueno": 1,
+      "Omiya": 2,
+      "Kumagaya": 3,
+      "Honjo-Waseda": 4,
+      "Takasaki": 5,
+      "Jomo-Kogen": 6,
+      "Echigo-Yuzawa": 7,
+      "Urasa": 8,
+      "Nagaoka": 9,
+      "Tsubame-Sanjo": 10,
+      "Niigata": 11
     },
     "HokurikuShinkansen": {
       "Takasaki": 0,

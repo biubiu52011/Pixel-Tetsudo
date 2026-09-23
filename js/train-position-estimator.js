@@ -556,6 +556,28 @@
         timetableIndex[op] = idx;
       });
 
+      // v4.3.974: 手动时刻表并入推定池——window 上已注入的 <lineId>_MANUAL_TIMETABLES
+      // （route-timetable 搜索已消费；推定器此前只吃 ODPT 池，无 ODPT 的新干线等线路推定空白）
+      // 按 (operator, railway) 并入，使这些线路的时刻表推定可用
+      Object.keys(window).forEach(function(gk) {
+        if (gk.indexOf("_MANUAL_TIMETABLES") < 0) return;
+        var m = window[gk];
+        if (!Array.isArray(m) || m.length === 0) return;
+        m.forEach(function(tt) {
+          if (!tt || !tt["odpt:railway"]) return;
+          try {
+            var _rp = String(tt["odpt:railway"]).split(":");
+            var _dot = _rp[1] ? _rp[1].split(".") : [];
+            if (_dot.length < 2) return;
+            var _op = _dot.slice(0, -1).join(".");
+            var _rk = _dot[_dot.length - 1];
+            if (!_op || !_rk) return;
+            (timetableIndex[_op] = timetableIndex[_op] || {});
+            (timetableIndex[_op][_rk] = timetableIndex[_op][_rk] || []).push(tt);
+          } catch (e) {}
+        });
+      });
+
       if (Object.keys(timetableIndex).length === 0) return estimated;
 
       // Process each line
