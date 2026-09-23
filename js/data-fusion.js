@@ -297,7 +297,15 @@
               : { status: "normal", maxDelay: 0, interval: null, cause: null });
         }
       } catch(_e) {}
-      var delayInfo = apiInfo || (_hasLocal && { status: localStatus.status, maxDelay: localStatus.maxDelay, interval: localStatus.interval, cause: localStatus.cause }) || fallbackDelay;
+      // v4.3.963: 网页源运行情报（WebRunInfo，千叶/湘南官网渠道）——ODPT 无数据线路经此注入；
+      // 优先级 apiInfo(ODPT) > webInfo(官网) > localStatus(手动覆盖) > fallback
+      var webInfo = null;
+      try {
+        if (window.WebRunInfo && window.WebRunInfo.getDelayInfo) {
+          webInfo = window.WebRunInfo.getDelayInfo(lineId, line);
+        }
+      } catch(_we) {}
+      var delayInfo = apiInfo || webInfo || (_hasLocal && { status: localStatus.status, maxDelay: localStatus.maxDelay, interval: localStatus.interval, cause: localStatus.cause }) || fallbackDelay;
       // Attach running-chain resolution context (transient, not persistent)
       var _chainCtx = null;
       try {

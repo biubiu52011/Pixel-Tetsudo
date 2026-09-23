@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api-challenge.odpt.org https://api.odpt.org; upgrade-insecure-requests; frame-src https://www.openstreetmap.org; object-src none;">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https://www.shonan-monorail.co.jp https://chiba-monorail.co.jp; font-src 'self'; connect-src 'self' https://api-challenge.odpt.org https://api.odpt.org https://r.jina.ai; upgrade-insecure-requests; frame-src https://www.openstreetmap.org; object-src none;">
   <meta name="color-scheme" content="light"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -15,7 +15,7 @@
   <link rel="icon" href="../images/pixel-tetsudo.ico" type="image/x-icon">
   <link rel="stylesheet" href="../css/style.css?v=4.3.868">
   <link rel="stylesheet" href="../css/lang-bar.css?v=4.3.840">
-  <link rel="stylesheet" href="../css/realtime.css?v=4.3.638">
+  <link rel="stylesheet" href="../css/realtime.css?v=4.3.963">
   <link rel="preconnect" href="https://api.odpt.org" crossorigin>
   <link rel="preconnect" href="https://api-challenge.odpt.org" crossorigin>
 
@@ -74,6 +74,7 @@
           <div class="rs-info-label"></div>
           <div class="rs-updated-time"></div>
         </div>
+        <div class="rs-webinfo-controls"></div>
       </div>
     </div>
   </div>
@@ -89,14 +90,15 @@
 <!-- v4.3.842: realtime 页启用 ODPT_LAZY（delay-only）——只拉 TrainInformation 延误，跳过 Train 位置与 TrainTimetable 全量时刻表（realtime 页不渲染位置/时刻表）；请求数由 ~110 降至 ~15，并消除 429 限流与 loadTrainPositions 报错 -->
 <script src="../js/odpt-lazy.js?v=4.3.842"></script>
 <script src="../data/api/odpt-unified.js?v=4.3.638"></script>
-<script src="../js/translations.js?v=4.3.638"></script>
-<script src="../js/common.js?v=4.3.638"></script>
+<script src="../js/translations.js?v=4.3.963"></script>
+<script src="../js/common.js?v=4.3.963"></script>
 <script src="../js/data-state.js?v=4.3.638"></script>
 <script src="../js/lang-init.js?v=4.3.638"></script>
 <script src="../js/running-chain-resolver.js?v=4.3.638"></script>
 <script src="../js/train-vehicle.js?v=4.3.950"></script>
 <script src="../js/train-position-estimator.js?v=4.3.950"></script>
-<script src="../js/data-fusion.js?v=4.3.948"></script>
+<script src="../js/runinfo-web.js?v=4.3.963"></script>
+<script src="../js/data-fusion.js?v=4.3.963"></script>
 <script src="../js/delay-translator.js?v=4.3.638"></script>
 <script src="../js/realtime-view.js?v=4.3.638"></script>
 </body>

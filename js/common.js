@@ -67,7 +67,10 @@
     "TamaMonorail": "TAMA_MONORAIL",
     "Yurikamome": "YURIKAMOME", "TsukubaExpress": "TSUKUBA_EXPRESS",
     "SaitamaNewUrbanTransit": "SAITAMA_NEW_URBAN_TRANSIT",
-    "TokyoMonorail": "TOKYO_MONORAIL"
+    "TokyoMonorail": "TOKYO_MONORAIL",
+    // v4.3.963: 新增两家单轨运营商（千葉都市モノレール / 湘南モノレール）
+    "ChibaUrbanMonorail": "CHIBA_URBAN_MONORAIL",
+    "ShonanMonorail": "SHONAN_MONORAIL"
   };
   window.TransitConstants = {
     OP_ORDER: [
@@ -77,7 +80,9 @@
       "Keikyu", "Keisei", "Sotetsu",
       "TWR", "MinatoMirai", "MIR", "Rinkai",
       "TsukubaExpress", "Yurikamome", "TamaMonorail",
-      "TokyoMonorail", "SaitamaNewUrbanTransit"
+      "TokyoMonorail", "SaitamaNewUrbanTransit",
+      // v4.3.963: 新增两家单轨运营商（千葉都市モノレール / 湘南モノレール）
+      "ChibaUrbanMonorail", "ShonanMonorail"
     ],
     NORMALIZE: TRANSIT_NORMALIZE,
     // JRE (JR東日本) 白名单：路線記号 JA~JY 全覆盖；無記号の地方線（operator=JR-East）兜底
