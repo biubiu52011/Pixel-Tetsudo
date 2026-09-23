@@ -31292,9 +31292,12 @@
       "region": "Tohoku Area",
       "type": "straight",
       "image": "../images/鉄道/JR東日本/Shinkansen_jre.png",
-      "durationTotalMin": 65,
+      "durationTotalMin": 178,
       "branchOf": null,
       "stations": [
+        "Tokyo",
+        "Ueno",
+        "Omiya",
         "Fukushima",
         "Yonezawa",
         "Takahata",
@@ -31308,6 +31311,9 @@
         "Shinjo"
       ],
       "durations": [
+        6,
+        20,
+        67,
         12,
         8,
         6,
@@ -31437,9 +31443,13 @@
       "region": "Tohoku Area",
       "type": "straight",
       "image": "../images/鉄道/JR東日本/Shinkansen_jre.png",
-      "durationTotalMin": 55,
+      "durationTotalMin": 193,
       "branchOf": null,
       "stations": [
+        "Tokyo",
+        "Ueno",
+        "Omiya",
+        "Sendai",
         "Morioka",
         "Shizukuishi",
         "Tazawako",
@@ -31448,6 +31458,10 @@
         "Akita"
       ],
       "durations": [
+        6,
+        20,
+        68,
+        43,
         10,
         12,
         12,
@@ -33674,7 +33688,9 @@
       "UenoTokyo",
       "TohokuShinkansen",
       "JoetsuShinkansen",
-      "HokurikuShinkansen"
+      "HokurikuShinkansen",
+      "YamagataShinkansen",
+      "AkitaShinkansen"
     ],
     "Saitama-Shintoshin": [
       "KeihinTohoku",
@@ -33758,7 +33774,9 @@
       "UenoTokyo",
       "TohokuShinkansen",
       "JoetsuShinkansen",
-      "HokurikuShinkansen"
+      "HokurikuShinkansen",
+      "YamagataShinkansen",
+      "AkitaShinkansen"
     ],
     "Okachimachi": [
       "KeihinTohoku",
@@ -33795,7 +33813,9 @@
       "TohokuShinkansen",
       "TokaidoShinkansen",
       "JoetsuShinkansen",
-      "HokurikuShinkansen"
+      "HokurikuShinkansen",
+      "YamagataShinkansen",
+      "AkitaShinkansen"
     ],
     "Yurakucho": [
       "KeihinTohoku",
@@ -38935,7 +38955,8 @@
       "SensekiTohoku",
       "Senzan",
       "TohokuMain",
-      "TohokuShinkansen"
+      "TohokuShinkansen",
+      "AkitaShinkansen"
     ],
     "Tsutsujigaoka-2": [
       "Senseki"
@@ -45474,25 +45495,32 @@
       "Tsuruga": 23
     },
     "YamagataShinkansen": {
-      "Fukushima": 0,
-      "Yonezawa": 1,
-      "Takahata": 2,
-      "Akayu": 3,
-      "Kaminoyama-Onsen": 4,
-      "Yamagata": 5,
-      "Tendo": 6,
-      "Sakuranbo-Higashine": 7,
-      "Murayama": 8,
-      "Oishida": 9,
-      "Shinjo": 10
+      "Tokyo": 0,
+      "Ueno": 1,
+      "Omiya": 2,
+      "Fukushima": 3,
+      "Yonezawa": 4,
+      "Takahata": 5,
+      "Akayu": 6,
+      "Kaminoyama-Onsen": 7,
+      "Yamagata": 8,
+      "Tendo": 9,
+      "Sakuranbo-Higashine": 10,
+      "Murayama": 11,
+      "Oishida": 12,
+      "Shinjo": 13
     },
     "AkitaShinkansen": {
-      "Morioka": 0,
-      "Shizukuishi": 1,
-      "Tazawako": 2,
-      "Kakunodate": 3,
-      "Omagari": 4,
-      "Akita": 5
+      "Tokyo": 0,
+      "Ueno": 1,
+      "Omiya": 2,
+      "Sendai": 3,
+      "Morioka": 4,
+      "Shizukuishi": 5,
+      "Tazawako": 6,
+      "Kakunodate": 7,
+      "Omagari": 8,
+      "Akita": 9
     },
     "HokkaidoShinkansen": {
       "Shin-Aomori": 0,
