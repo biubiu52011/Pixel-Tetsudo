@@ -122,6 +122,7 @@
     "ShimosaManzaki": "Shimosa-Manzaki",
     "NaritaAirportTerminal2and3": "Airport-Terminal-2",
     "NaritaAirportTerminal1": "Narita-Airport",
+    "NaritaAirportTerminal2": "Airport-Terminal-2",
     "HamaKawasaki": "Hama-Kawasaki"
   };
 

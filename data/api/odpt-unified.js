@@ -482,6 +482,7 @@
     "KeiseiChiba": "Chiba",
     "KeiseiKanamachi": "Kanamachi",
     "KeiseiOshiage": "Oshiage",
+    "NaritaSkyAccess": "NaritaSkyAccess",
     // 西武（Haijima=拝島線——4.3.471 起本地 line ID 已正名 Haijima，同名透传即命中 ODPT）
     "Seibu_Sayama": "Sayama",
     "SeibuEn": "Seibuen",
