@@ -9055,6 +9055,10 @@ window.RAILWAY_DATA = {
     "Murayama": {
       "lat": 38.4953,
       "lng": 140.3706
+    },
+    "Nishi-Akashi": {
+      "lat": 34.6493,
+      "lng": 134.9872
     }
   },
   "lines": {
@@ -31807,6 +31811,7 @@ window.RAILWAY_DATA = {
       "stations": [
         "Shin-Osaka",
         "Shin-Kobe",
+        "Nishi-Akashi",
         "Himeji",
         "Aioi-Hyogo",
         "Okayama",
@@ -33673,7 +33678,8 @@ window.RAILWAY_DATA = {
     "山形": "Yamagata",
     "天童": "Tendo",
     "さくらんぼ東根": "Sakuranbo-Higashine",
-    "上田": "Ueda"
+    "上田": "Ueda",
+    "西明石": "Nishi-Akashi"
   },
   "stationLines": {
     "Omiya": [
@@ -41974,6 +41980,9 @@ window.RAILWAY_DATA = {
     ],
     "Nagasaki": [
       "NishiKyushuShinkansen"
+    ],
+    "Nishi-Akashi": [
+      "SanyoShinkansen"
     ]
   },
   "lineStationOrder": {
@@ -45550,22 +45559,23 @@ window.RAILWAY_DATA = {
     "SanyoShinkansen": {
       "Shin-Osaka": 0,
       "Shin-Kobe": 1,
-      "Himeji": 2,
-      "Aioi-Hyogo": 3,
-      "Okayama": 4,
-      "Shin-Kurashiki": 5,
-      "Fukuyama": 6,
-      "Shin-Onomichi": 7,
-      "Mihara": 8,
-      "Higashi-Hiroshima": 9,
-      "Hiroshima": 10,
-      "Shin-Iwakuni": 11,
-      "Tokuyama": 12,
-      "Shin-Yamaguchi": 13,
-      "Asa": 14,
-      "Shin-Shimonoseki": 15,
-      "Kokura": 16,
-      "Hakata": 17
+      "Nishi-Akashi": 2,
+      "Himeji": 3,
+      "Aioi-Hyogo": 4,
+      "Okayama": 5,
+      "Shin-Kurashiki": 6,
+      "Fukuyama": 7,
+      "Shin-Onomichi": 8,
+      "Mihara": 9,
+      "Higashi-Hiroshima": 10,
+      "Hiroshima": 11,
+      "Shin-Iwakuni": 12,
+      "Tokuyama": 13,
+      "Shin-Yamaguchi": 14,
+      "Asa": 15,
+      "Shin-Shimonoseki": 16,
+      "Kokura": 17,
+      "Hakata": 18
     },
     "KyushuShinkansen": {
       "Hakata": 0,
