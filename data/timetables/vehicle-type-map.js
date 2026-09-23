@@ -907,9 +907,9 @@
       'SpecialRapid': { 'default': 'E233系0番台' },
     },
     'Rinkai': {
-      'Local': { 'default': '71-000形 / 70-000形', 'JR-East': 'E233系7000番台' },
-      'Rapid': { 'default': '71-000形 / 70-000形', 'JR-East': 'E233系7000番台' },
-      'CommuterRapid': { 'default': '71-000形 / 70-000形', 'JR-East': 'E233系7000番台' },
+      'Local': { 'default': 'E233系7000番台 / 71-000形 / 70-000形', 'JR-East': 'E233系7000番台' },
+      'Rapid': { 'default': 'E233系7000番台 / 71-000形 / 70-000形', 'JR-East': 'E233系7000番台' },
+      'CommuterRapid': { 'default': 'E233系7000番台 / 71-000形 / 70-000形', 'JR-East': 'E233系7000番台' },
     },
     'Saikyo': {
       'Local': { 'default': 'E233系7000番台', 'Sotetsu': '相鉄12000系 / 相鉄新7000系' },
