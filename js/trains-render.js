@@ -443,8 +443,9 @@
       }
       if (_upCount > 1) _upTotalW += (_upCount - 1) * 6;
       if (_downCount > 1) _downTotalW += (_downCount - 1) * 6;
-      var _upCursor = o.x - _upTotalW / 2;  // up chip 水平流起点（居中在站圆点 x）
-      var _downCursor = o.x - _downTotalW / 2;
+      // v4.3.949: up/down chip 左对齐到线路 x（不再居中在站圆点 x）
+      var _upCursor = o.x + 12;  // up chip 水平流起点（左对齐到线路 x 右侧）
+      var _downCursor = o.x + 12;
       var _upIdx = 0, _downIdx = 0;
       for (var tI2 = 0; tI2 < thruList.length; tI2++) {
         var tt = thruList[tI2];
