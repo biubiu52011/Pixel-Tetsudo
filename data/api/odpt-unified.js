@@ -558,7 +558,7 @@
                 // 执行实际的fetch
                 fetch(request.url, {
                     headers: { "Accept": "application/json" },
-                    signal: AbortSignal.timeout(15000)
+                    signal: AbortSignal.timeout(8000)
                 }).then(function(resp) {
                     if (!resp.ok) throw new Error("HTTP " + resp.status);
                     return resp.json();
@@ -587,7 +587,7 @@
                 // 未知域名，直接fetch
                 fetch(url, {
                     headers: { "Accept": "application/json" },
-                    signal: AbortSignal.timeout(15000)
+                    signal: AbortSignal.timeout(8000)
                 }).then(resolve).catch(reject);
                 return;
             }
@@ -781,7 +781,7 @@
     // IndexedDB 异步写入、容量 GB 级；localStorage 保留为隐私模式/禁用 IDB 时的兜底。
     var TIMETABLE_CACHE_KEY = 'odpt_timetable_cache_v6';
     var LEGACY_LS_CACHE_KEY = 'odpt_timetable_cache_v3'; // 旧 localStorage 缓存，首次迁移后清除
-    var TIMETABLE_CACHE_TTL = 3600000;  // 1小时过期
+    var TIMETABLE_CACHE_TTL = 86400000;  // v4.3.995: 1h→24h——固定ダイヤ，1h TTL 致用户间隔>1h 即全量重拉 ~91 个 TrainTimetable 请求（3并发×150ms+大响应，弱网30s+）；24h TTL 降到每天最多一次
     var IDB_DB_NAME = 'pixel-tetsudo';
     var IDB_STORE = 'odpt_cache';
     var _idbDbPromise = null;
@@ -1064,6 +1064,33 @@
     }
     _loadProbed();
 
+    // ========== ODPT_TT_EMPTY 空线标记（v4.3.995: 与 probed 分离） ==========
+    // probed 语义="探测过"（有数据线也会标记，缓存过期时需重拉数据不能跳过）；
+    // EMPTY 专门记录"ODPT 无数据/失败"的空线（JR 地方线 83 条大部分无 TrainTimetable），
+    // 全量拉取 collectTimetableByRailway 跳过空线——91 请求 → 只拉有数据的 ~51 线，
+    // 弱网下首屏等待显著缩短（配合 24h TTL，用户每天最多一次全量）。
+    var TT_EMPTY_KEY = 'odpt_tt_empty_v1';
+    var TT_EMPTY_TTL = 86400000 * 7;  // 7天（空线判定长期稳定，改点才可能新增时刻表）
+    function _loadEmpty() {
+        try {
+            if (window.ODPT_TT_EMPTY) return;
+            var raw = localStorage.getItem(TT_EMPTY_KEY);
+            if (!raw) return;
+            var data = JSON.parse(raw);
+            if (!data || data.v !== 1 || !data.lines) return;
+            if ((Date.now() - (data.ts || 0)) > TT_EMPTY_TTL) return;
+            window.ODPT_TT_EMPTY = data.lines;
+        } catch(e) {}
+    }
+    function _persistEmpty() {
+        try {
+            var lines = window.ODPT_TT_EMPTY || {};
+            if (Object.keys(lines).length === 0) return;
+            localStorage.setItem(TT_EMPTY_KEY, JSON.stringify({ v: 1, ts: Date.now(), lines: lines }));
+        } catch(e) {}
+    }
+    _loadEmpty();
+
     // ========== 原始实时数据落盘 + stale-while-revalidate（E4: 切页零空窗） ==========
     // v4.3.9xx: 页面整页跳转后，新页 loadRealtimeData 需 ~2-4s 拉完所有 operator 才推送，
     // 期间 UI 显示「情報取得中」。方案：每次拉取成功后立即把原始 delay/positions 写入
@@ -1293,6 +1320,8 @@
         // 其余 83 条 JR 线路时刻表全部丢失，导致时刻表推定无法覆盖地方线）
         function collectTimetableByRailway(op, localLineIds) {
             var batch = localLineIds.filter(function(lid) {
+                // v4.3.995: 跳过已探测的空线（ODPT 无时刻表的地方线）——全量拉取 91→~51
+                if (window.ODPT_TT_EMPTY && window.ODPT_TT_EMPTY[lid]) return false;
                 return ODPT_ENDPOINTS[op] && ODPT_ENDPOINTS[op].trainTimetable;
             });
             // v4.3.489: 分批并行拉取——fetchODPT 自带 3 并发 + 150ms 滑动窗口限速；
@@ -1315,16 +1344,25 @@
                         }
                         return rows;
                     }).catch(function() {
-                        // 请求失败：仍标记探测，避免后续对空线反复请求
+                        // 请求失败：标记探测+空线（v4.3.995: EMPTY 供全量拉取跳过）
                         if (!window.ODPT_TT_PROBED) window.ODPT_TT_PROBED = {};
                         window.ODPT_TT_PROBED[lid] = true;
                         _persistProbed();
+                        if (!window.ODPT_TT_EMPTY) window.ODPT_TT_EMPTY = {};
+                        window.ODPT_TT_EMPTY[lid] = true;
+                        _persistEmpty();
                         return [];
                     }).then(function(rows) {
                         // 探测标记：无论有无数据都记录，避免 loadMissingTimetables 对空线反复请求
                         if (!window.ODPT_TT_PROBED) window.ODPT_TT_PROBED = {};
                         window.ODPT_TT_PROBED[lid] = true;
                         _persistProbed();
+                        // v4.3.995: 空响应也标记 EMPTY（全量拉取跳过），有数据不标记
+                        if (rows.length === 0) {
+                            if (!window.ODPT_TT_EMPTY) window.ODPT_TT_EMPTY = {};
+                            window.ODPT_TT_EMPTY[lid] = true;
+                            _persistEmpty();
+                        }
                         if (rows.length > 0) {
                             if (!newTimetables[op]) newTimetables[op] = [];
                             newTimetables[op] = newTimetables[op].concat(rows);
