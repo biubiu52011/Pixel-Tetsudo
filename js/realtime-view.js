@@ -220,9 +220,13 @@
 
   // v4.3.963: 网页源运行情报操作区（WebRunInfo）
   function renderWebRunInfoControls(modal, lineId) {
-    if (!modal || !window.WebRunInfo || !window.WebRunInfo.isWebLine || !window.WebRunInfo.isWebLine(lineId)) return;
-    var el = modal.querySelector(".rs-webinfo-controls");
+    var el = modal ? modal.querySelector(".rs-webinfo-controls") : null;
     if (!el) return;
+    // v4.3.965: 非官网线路必须清空容器——modal 是共享的，上次千叶/湘南弹窗渲染的官网区会残留到 ODPT 线路弹窗
+    if (!window.WebRunInfo || !window.WebRunInfo.isWebLine || !window.WebRunInfo.isWebLine(lineId)) {
+      el.innerHTML = "";
+      return;
+    }
     var op = window.WebRunInfo.getOperatorForLine(lineId);
     var info = window.WebRunInfo.getInfo ? window.WebRunInfo.getInfo(op) : null;
     var siteUrl = window.WebRunInfo.getSiteUrl ? window.WebRunInfo.getSiteUrl(op) : null;

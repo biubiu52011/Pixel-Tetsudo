@@ -96,8 +96,14 @@
       if (rec && rec["odpt:suspension"] === true) return "suspended";
       if (rec && rec["odpt:delay"] === true) return "delayed";
       var txt = String((rec && rec["odpt:text"]) || "");
-      if (/\u904b\u8ee2\u898b\u5408\u308f\u305b|\u904b\u8ee2\u3092\u4e2d\u6b62|\u904b\u4f11/.test(txt)) return "suspended";
-      if (/\u9045\u5ef6/.test(txt)) return "delayed";
+      // v4.3.965: 补齐变体——運転を見合わせ/運転中止/運転を取りやめ/ダイヤ乱れ/遅れ等
+      if (/\u904b\u8ee2\u898b\u5408\u308f\u305b|\u904b\u8ee2\u3092\u898b\u5408\u308f\u305b|\u904b\u8ee2\u3092\u4e2d\u6b62|\u904b\u8ee2\u4e2d\u6b62|\u904b\u8ee2\u3092\u53d6\u308a\u3084\u3081/.test(txt)) return "suspended";
+      // v4.3.965: 一部運休/一部区間 → notice（须先于裸「運休」判定，避免误判 suspended）
+      if (/\u4e00\u90e8.*(?:\u904b\u4f11|\u904b\u884c)/.test(txt)) return "notice";
+      // v4.3.965: 正常声明优先于遅延/乱れ——「遅延はありません」不是延迟
+      if (/\u5e73\u5e38|\u9045\u5ef6\u306a\u3057|\u9045\u5ef6\u306f\u3042\u308a\u307e\u305b\u3093|\u3042\u308a\u307e\u305b\u3093|\u3054\u3056\u3044\u307e\u305b\u3093|\u89e3\u6d88|\u518d\u958b/.test(txt)) return "normal";
+      if (/\u9045\u5ef6|\u30c0\u30a4\u30e4\u4e71\u308c|\u4e71\u308c|\u9045\u308c/.test(txt)) return "delayed";
+      if (/\u5168\u7dda\u904b\u4f11|\u904b\u4f11/.test(txt)) return "suspended";
       return "normal";
     } catch (e) { return "normal"; }
   }

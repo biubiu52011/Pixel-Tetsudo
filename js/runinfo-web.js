@@ -86,10 +86,13 @@
   function mapStatus(text) {
     if (!text) return null;
     var s = String(text);
-    if (/\u904b\u8ee2\u898b\u5408\u308f\u305b|\u904b\u8ee2\u3092\u4e2d\u6b62|\u904b\u8ee2\u4e2d\u6b62|\u904b\u8ee2\u3092\u53d6\u308a\u3084\u3081|\u904b\u4f11/.test(s)) return "suspended";  // 運転見合わせ/運転を中止/運転中止/運転を取りやめ/運休
-    if (/\u9045\u5ef6|\u30c0\u30a4\u30e4\u4e71\u308c|\u4e71\u308c/.test(s)) return "delayed";          // 遅延/ダイヤ乱れ/乱れ
-    if (/\u4e00\u90e8\u904b\u4f11|\u4e00\u90e8.*\u904b\u884c/.test(s)) return "notice";              // 一部運休/一部運転
-    if (/\u5e73\u5e38/.test(s)) return "normal";                                                     // 平常
+    // v4.3.965: 补齐变体——運転を見合わせ/運転を取りやめ/ダイヤ乱れ/遅れ；
+    // 顺序：強異常(見合わせ/中止) → 一部運休(notice) → 正常声明 → 遅延 → 裸運休(suspended)
+    if (/\u904b\u8ee2\u898b\u5408\u308f\u305b|\u904b\u8ee2\u3092\u898b\u5408\u308f\u305b|\u904b\u8ee2\u3092\u4e2d\u6b62|\u904b\u8ee2\u4e2d\u6b62|\u904b\u8ee2\u3092\u53d6\u308a\u3084\u3081/.test(s)) return "suspended";
+    if (/\u4e00\u90e8.*(?:\u904b\u4f11|\u904b\u884c)/.test(s)) return "notice";
+    if (/\u5e73\u5e38|\u9045\u5ef6\u306a\u3057|\u9045\u5ef6\u306f\u3042\u308a\u307e\u305b\u3093|\u3042\u308a\u307e\u305b\u3093|\u3054\u3056\u3044\u307e\u305b\u3093|\u89e3\u6d88|\u518d\u958b/.test(s)) return "normal";
+    if (/\u9045\u5ef6|\u30c0\u30a4\u30e4\u4e71\u308c|\u4e71\u308c|\u9045\u308c/.test(s)) return "delayed";
+    if (/\u5168\u7dda\u904b\u4f11|\u904b\u4f11/.test(s)) return "suspended";
     return null;
   }
 
