@@ -478,13 +478,13 @@
     { lines: ['Rinkai'], op: 'JR-East', fn: function() {
       return '../images/列车/JR東日本/E233系7000番台.png';
     }},
-    // Rinkai: TWR 自有车按运用号后两位（71/73/81 → 71-000形，其他 → 70-000形）
+    // v4.3.991: Rinkai TWR 自有车——运用号与编成无固定对应（71-000形 2025.10 デビュー，
+    // 2026年8月現在 71-000形 Z11-Z15 5編成 vs 70-000形 Z1/Z2/Z3/Z7 4編成，每日轮换），
+    // 运用号无法区分新旧（用户核实"车号无区别"）；列次号 T 后缀=線内完結列車（自有车），
+    // 默认現役主力 71-000形（标签层以"71-000形 / 70-000形"诚实表达不确定）；
+    // K/F/S 后缀=JR埼京線直通（E233系7000番台，另规则处理）。
     { lines: ['Rinkai'], op: 'TWR', fn: function(trainId, tn) {
-      var _tnNum = String(tn || '').replace(/[^0-9]/g, '');
-      var lastTwo = _tnNum.length >= 2 ? parseInt(_tnNum.slice(-2)) : 0;
-      return [71, 73, 81].indexOf(lastTwo) >= 0
-        ? '../images/列车/東京臨海高速鉄道/71-000形.png'
-        : '../images/列车/東京臨海高速鉄道/70-000形.png';
+      return '../images/列车/東京臨海高速鉄道/71-000形.png';
     }},
   ];
 
@@ -1230,23 +1230,35 @@
   // v4.3.987: 显示名解析——返回最终应展示的车型名（仅 alias 展开路径同步，
   // 如退役车→現役車：都営5300形→5500形、ロマンスカー 10000形→小田急電鉄30000形EXEα、
   // 東武5000系→50000系）；override 锁定/近似兜底保持原候选名（标签显示真实车型）。
+  // v4.3.991: 多候选全部可解析 → 返回完整串（诚实表达不确定，如混跑"71-000形 / 70-000形"）；
+  //            部分可解析 → 返回首个可解析项；单候选 → 原名/别名展开（与 4.3.987 一致）
   function resolveVehicleDisplayName(candidatesStr, lineId) {
     if (!candidatesStr) return null;
     var parts = String(candidatesStr).split("/");
+    var _hits = [];
     for (var i = 0; i < parts.length; i++) {
       var name = parts[i].trim();
       if (!name) continue;
-      if (VEHICLE_NAME_TO_ICON[name]) return name;            // 精确命中：显示原名
-      var _al = VEHICLE_NAME_ALIASES[name];                   // 别名表
-      if (_al && VEHICLE_NAME_TO_ICON[_al]) return _al;
-      var _base = name.replace(/（[^）]*）/g, "").replace(/\([^)]*\)/g, "").trim();
-      if (_base !== name) {
-        if (VEHICLE_NAME_TO_ICON[_base]) return _base;
-        var _al2 = VEHICLE_NAME_ALIASES[_base];
-        if (_al2 && VEHICLE_NAME_TO_ICON[_al2]) return _al2;
+      var _hit = '';
+      if (VEHICLE_NAME_TO_ICON[name]) _hit = name;            // 精确命中：显示原名
+      else {
+        var _al = VEHICLE_NAME_ALIASES[name];                 // 别名表
+        if (_al && VEHICLE_NAME_TO_ICON[_al]) _hit = _al;
+        else {
+          var _base = name.replace(/（[^）]*）/g, "").replace(/\([^)]*\)/g, "").trim();
+          if (_base !== name) {
+            if (VEHICLE_NAME_TO_ICON[_base]) _hit = _base;
+            else { var _al2 = VEHICLE_NAME_ALIASES[_base]; if (_al2 && VEHICLE_NAME_TO_ICON[_al2]) _hit = _al2; }
+          }
+        }
       }
+      if (_hit) _hits.push(_hit);
     }
-    return null;
+    if (!_hits.length) return null;
+    var _nonEmpty = 0;
+    for (var j = 0; j < parts.length; j++) if (parts[j].trim()) _nonEmpty++;
+    if (_hits.length === _nonEmpty && _hits.length > 1) return _hits.join(" / ");
+    return _hits[0];
   }
 
   // v4.3.964: 三层查找——精确匹配 → 别名表 → 去括注基础名匹配

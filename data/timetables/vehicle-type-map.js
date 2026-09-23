@@ -878,9 +878,9 @@
       },
     },
     'Kawagoe': {
-      'Local': { 'default': '209系3100番台 / E233系7000番台', 'Sotetsu': '相鉄12000系 / 相鉄新7000系', 'TWR': 'E233系7000番台 / 70-000形' },
-      'Rapid': { 'default': 'E233系7000番台', 'Sotetsu': '相鉄12000系 / 相鉄新7000系', 'TWR': 'E233系7000番台 / 70-000形' },
-      'CommuterRapid': { 'default': 'E233系7000番台', 'Sotetsu': '相鉄12000系 / 相鉄新7000系', 'TWR': 'E233系7000番台 / 70-000形' },
+      'Local': { 'default': '209系3100番台 / E233系7000番台', 'Sotetsu': '相鉄12000系 / 相鉄新7000系', 'TWR': 'E233系7000番台 / 71-000形 / 70-000形' },
+      'Rapid': { 'default': 'E233系7000番台', 'Sotetsu': '相鉄12000系 / 相鉄新7000系', 'TWR': 'E233系7000番台 / 71-000形 / 70-000形' },
+      'CommuterRapid': { 'default': 'E233系7000番台', 'Sotetsu': '相鉄12000系 / 相鉄新7000系', 'TWR': 'E233系7000番台 / 71-000形 / 70-000形' },
     },
     'KawagoeWest': {
       'Local': { 'default': '209系3000番台' },
@@ -907,9 +907,9 @@
       'SpecialRapid': { 'default': 'E233系0番台' },
     },
     'Rinkai': {
-      'Local': { 'default': '70-000形', 'JR-East': 'E233系7000番台' },
-      'Rapid': { 'default': '70-000形', 'JR-East': 'E233系7000番台' },
-      'CommuterRapid': { 'default': '70-000形', 'JR-East': 'E233系7000番台' },
+      'Local': { 'default': '71-000形 / 70-000形', 'JR-East': 'E233系7000番台' },
+      'Rapid': { 'default': '71-000形 / 70-000形', 'JR-East': 'E233系7000番台' },
+      'CommuterRapid': { 'default': '71-000形 / 70-000形', 'JR-East': 'E233系7000番台' },
     },
     'Saikyo': {
       'Local': { 'default': 'E233系7000番台', 'Sotetsu': '相鉄12000系 / 相鉄新7000系' },

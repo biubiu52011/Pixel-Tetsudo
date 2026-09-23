@@ -225,8 +225,13 @@
       }
     }
 
+    // v4.3.991: 标签诚实化——manual 为多候选串（如混跑"71-000形 / 70-000形"）时传原文串，
+    // resolveVehicleDisplayName 对全部可解析的多候选返回完整串（表达不确定），不再只显示第一项；
+    // 单候选/其他来源保持原名与 alias 展开（4.3.987 一致化不回归）。
     if (chosen && iconPath && window.TrainIcons && typeof window.TrainIcons.resolveVehicleDisplayName === 'function') {
-      var _disp = window.TrainIcons.resolveVehicleDisplayName(chosen, ctx.lineId);
+      var _dispSrc = (chosenSrc === 'manual' && ctx.vehicleTypeManual) ? ctx.vehicleTypeManual
+        : (chosen || (orderArr.length ? orderArr.join(' / ') : ''));
+      var _disp = window.TrainIcons.resolveVehicleDisplayName(_dispSrc, ctx.lineId);
       if (_disp && _disp !== chosen) chosen = _disp;
     }
 

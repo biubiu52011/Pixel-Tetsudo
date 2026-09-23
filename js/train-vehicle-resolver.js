@@ -485,13 +485,13 @@ var LINE_ICON_OVERRIDES = [
     { lines: ['Rinkai'], op: 'JR-East', fn: function() {
       return '../images/列车/JR東日本/E233系7000番台.png';
     }},
-    // Rinkai: TWR 自有车按运用号后两位（71/73/81 → 71-000形，其他 → 70-000形）
+    // v4.3.991: Rinkai TWR 自有车——运用号与编成无固定对应（71-000形 2025.10 デビュー，
+    // 2026年8月現在 71-000形 Z11-Z15 5編成 vs 70-000形 Z1/Z2/Z3/Z7 4編成，每日轮换），
+    // 运用号无法区分新旧（用户核实"车号无区别"）；列次号 T 后缀=線内完結列車（自有车），
+    // 默认現役主力 71-000形（标签层以"71-000形 / 70-000形"诚实表达不确定）；
+    // K/F/S 后缀=JR埼京線直通（E233系7000番台，另规则处理）。
     { lines: ['Rinkai'], op: 'TWR', fn: function(trainId, tn) {
-      var _tnNum = String(tn || '').replace(/[^0-9]/g, '');
-      var lastTwo = _tnNum.length >= 2 ? parseInt(_tnNum.slice(-2)) : 0;
-      return [71, 73, 81].indexOf(lastTwo) >= 0
-        ? '../images/列车/東京臨海高速鉄道/71-000形.png'
-        : '../images/列车/東京臨海高速鉄道/70-000形.png';
+      return '../images/列车/東京臨海高速鉄道/71-000形.png';
     }},
   ]
 
@@ -2042,9 +2042,9 @@ var LINE_ICON_OVERRIDES = [
       },
     },
     'Kawagoe': {
-      'Local': { 'default': '209系3100番台 / E233系7000番台', 'Sotetsu': '相鉄12000系 / 相鉄新7000系', 'TWR': 'E233系7000番台 / 70-000形' },
-      'Rapid': { 'default': 'E233系7000番台', 'Sotetsu': '相鉄12000系 / 相鉄新7000系', 'TWR': 'E233系7000番台 / 70-000形' },
-      'CommuterRapid': { 'default': 'E233系7000番台', 'Sotetsu': '相鉄12000系 / 相鉄新7000系', 'TWR': 'E233系7000番台 / 70-000形' },
+      'Local': { 'default': '209系3100番台 / E233系7000番台', 'Sotetsu': '相鉄12000系 / 相鉄新7000系', 'TWR': 'E233系7000番台 / 71-000形 / 70-000形' },
+      'Rapid': { 'default': 'E233系7000番台', 'Sotetsu': '相鉄12000系 / 相鉄新7000系', 'TWR': 'E233系7000番台 / 71-000形 / 70-000形' },
+      'CommuterRapid': { 'default': 'E233系7000番台', 'Sotetsu': '相鉄12000系 / 相鉄新7000系', 'TWR': 'E233系7000番台 / 71-000形 / 70-000形' },
     },
     'KawagoeWest': {
       'Local': { 'default': '209系3000番台' },
@@ -2071,9 +2071,9 @@ var LINE_ICON_OVERRIDES = [
       'SpecialRapid': { 'default': 'E233系0番台' },
     },
     'Rinkai': {
-      'Local': { 'default': '70-000形', 'JR-East': 'E233系7000番台' },
-      'Rapid': { 'default': '70-000形', 'JR-East': 'E233系7000番台' },
-      'CommuterRapid': { 'default': '70-000形', 'JR-East': 'E233系7000番台' },
+      'Local': { 'default': '71-000形 / 70-000形', 'JR-East': 'E233系7000番台' },
+      'Rapid': { 'default': '71-000形 / 70-000形', 'JR-East': 'E233系7000番台' },
+      'CommuterRapid': { 'default': '71-000形 / 70-000形', 'JR-East': 'E233系7000番台' },
     },
     'Saikyo': {
       'Local': { 'default': 'E233系7000番台', 'Sotetsu': '相鉄12000系 / 相鉄新7000系' },
@@ -2727,7 +2727,7 @@ var LINE_ICON_OVERRIDES = [
     var _vt = (dgroup && tmap[dgroup]) || tmap['default'] || '';
       if (_vt) { _lastVt = { name: _vt, exact: _exactType }; }
       return _vt;
-    } catch(e) { return ''; }
+    } catch(e) { if (window.console && window.console.error) window.console.error('VTM-ERR[' + lineId + ',' + trainTypeUrn + ']: ' + (e && e.message)); return ''; }
   }
 
   var _lastVt = null;
