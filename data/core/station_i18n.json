@@ -19745,5 +19745,575 @@
   "Yuze-Onsen": {
     "ja": "湯瀬温泉",
     "en": "Yuze-Onsen"
+  },
+  "Inzai-Makinohara": {
+    "ja": "印西牧の原",
+    "zh": "印西牧之原",
+    "ko": "인자imakino-hara",
+    "en": "Inzai-Makinohara"
+  },
+  "NaritaAirportTerminal2": {
+    "ja": "成田空港第2ターミナル",
+    "zh": "成田机场第2航站楼",
+    "ko": "나리타공항 제2터미널",
+    "en": "Narita Airport Terminal 2"
+  },
+  "HanedaAirportTerminal1and2": {
+    "ja": "羽田空港第1・第2ターミナル(京急)",
+    "zh": "羽田机场第1·第2航站楼(京急)",
+    "ko": "하네다공항 제1·제2터미널(케이큐)",
+    "en": "Haneda Airport Terminal 1・2 (Keikyu)"
+  },
+  "ArakawaShakomae": {
+    "ja": "荒川車庫前",
+    "zh": "荒川车库前",
+    "ko": "아라와카코쇼마에",
+    "en": "Arakawa-Shakomae"
+  },
+  "Sakaecho": {
+    "ja": "坂橋",
+    "zh": "坂桥",
+    "ko": "사که바し",
+    "en": "Sakaecho"
+  },
+  "OjiEkimae": {
+    "ja": "王子駅前",
+    "zh": "王子站前",
+    "ko": "오지駅前",
+    "en": "Oji-Ekimae"
+  },
+  "TakinogawaItchome": {
+    "ja": "滝野川一丁目",
+    "zh": "泷野川一丁目",
+    "ko": "다키노가와1쵸메",
+    "en": "Takinogawa-itchome"
+  },
+  "NishigaharaYonchome": {
+    "ja": "西ヶ原四丁目",
+    "zh": "西原四丁目",
+    "ko": "니시가하라4쵸메",
+    "en": "Nishigahara-yonchome"
+  },
+  "ShinKoshinzuka": {
+    "ja": "新庚申塚",
+    "zh": "新庚申冢",
+    "ko": "신코슈인즈카",
+    "en": "Shin-koshinzuka"
+  },
+  "Koshinzuka": {
+    "ja": "庚申塚",
+    "zh": "庚申冢",
+    "ko": "코슈인즈카",
+    "en": "Koshinzuka"
+  },
+  "Sugamoshinden": {
+    "ja": "巣鴨新田",
+    "zh": "巢鸭新田",
+    "ko": "스ガ모신덴",
+    "en": "Sugamo-shinden"
+  },
+  "OtsukaEkimae": {
+    "ja": "大塚駅前",
+    "zh": "大冢站前",
+    "ko": "오쓰카駅前",
+    "en": "Otsuka-ekimae"
+  },
+  "Mukohara": {
+    "ja": "向原",
+    "zh": "向原",
+    "ko": "ムコハラ",
+    "en": "Mukohara"
+  },
+  "HigashiIkebukuroYonchome": {
+    "ja": "東池袋四丁目",
+    "zh": "东池袋四丁目",
+    "ko": "히가시아게2쵸메",
+    "en": "Higashiikebukuro-yonchome"
+  },
+  "TodenZoshigaya": {
+    "ja": "都電雑司ヶ谷",
+    "zh": "都电杂司谷",
+    "ko": "도덴조시가가や",
+    "en": "Toden-zoshigaya"
+  },
+  "Kishibojimmae": {
+    "ja": "鬼子母神前",
+    "zh": "鬼子母神前",
+    "ko": "키시보지마마에",
+    "en": "Kishibojimmae"
+  },
+  "Gakushuinshita": {
+    "ja": "学習院下",
+    "zh": "学习院下",
+    "ko": "가쿠슈인시타",
+    "en": "Gakushuin-shita"
+  },
+  "Minowabashi": {
+    "ja": "三ノ輪橋",
+    "zh": "三轮桥",
+    "ko": "サンノワハシ",
+    "en": "Minowabashi"
+  },
+  "ArakawaYuenchimae": {
+    "ja": "荒川遊園地前",
+    "zh": "荒川游园前",
+    "ko": "아라와카유엔치마에",
+    "en": "Arakawa-yuenchimae"
+  },
+  "Odai": {
+    "ja": "小台",
+    "zh": "小台",
+    "ko": "오ダイ",
+    "en": "Odai"
+  },
+  "Miyanomae": {
+    "ja": "宮ノ前",
+    "zh": "宫前",
+    "ko": "ミヤノマ에",
+    "en": "Miyanomae"
+  },
+  "Kumanomae": {
+    "ja": "熊野前",
+    "zh": "熊野前",
+    "ko": "ク마ノマ에",
+    "en": "Kumanomae"
+  },
+  "HigashiOguSanchome": {
+    "ja": "東尾久三丁目",
+    "zh": "东尾久三丁目",
+    "ko": "ヒ가시オグ3쵸메",
+    "en": "Higashi-ogu-sanchome"
+  },
+  "MachiyaNichome": {
+    "ja": "町屋二丁目",
+    "zh": "町屋二丁目",
+    "ko": "マチヤ2쵸메",
+    "en": "Machiya-nichome"
+  },
+  "MachiyaEkimae": {
+    "ja": "町屋駅前",
+    "zh": "町屋站前",
+    "ko": "マチヤ駅前",
+    "en": "Machiya-ekimae"
+  },
+  "ArakawaNanachome": {
+    "ja": "荒川七丁目",
+    "zh": "荒川七丁目",
+    "ko": "아라와카7쵸메",
+    "en": "Arakawa-nanachome"
+  },
+  "ArakawaNichome": {
+    "ja": "荒川二丁目",
+    "zh": "荒川二丁目",
+    "ko": "아라와카2쵸메",
+    "en": "Arakawa-nichome"
+  },
+  "Arakawakuyakushomae": {
+    "ja": "荒川区役所前",
+    "zh": "荒川区政府前",
+    "ko": "아라와카코쿠야쿠쇼마에",
+    "en": "Arakawa-kuyakusho-mae"
+  },
+  "ArakawaItchumae": {
+    "ja": "荒川一中前",
+    "zh": "荒川一中前",
+    "ko": "아라와카1추마에",
+    "en": "Arakawa-itchumae"
+  },
+  "ImbaNihonIdai": {
+    "ja": "印旛日本医大",
+    "zh": "印旛日本医大",
+    "ko": "임바니혼イダイ",
+    "en": "Imba-Nihon-idai"
+  },
+  "ShibayamaChiyoda": {
+    "ja": "柴山千代田",
+    "zh": "柴山千代田",
+    "ko": "시바야마치よだ",
+    "en": "Shibayama-chiyoda"
+  },
+  "ToyoKatsutadai": {
+    "ja": "豊受台",
+    "zh": "丰受台",
+    "ko": "토요カツタダイ",
+    "en": "Toyo-katsutadai"
+  },
+  "Daishimae": {
+    "ja": "大島前",
+    "zh": "大岛前",
+    "ko": "ダイシマエ",
+    "en": "Daishimae"
+  },
+  "ShimMatsudo": {
+    "ja": "下松戸",
+    "zh": "下松户",
+    "ko": "シマツ松戸",
+    "en": "Shim-matsudo"
+  },
+  "ShimMaebashi": {
+    "ja": "前橋",
+    "zh": "前桥",
+    "ko": "シマエバシ",
+    "en": "Shim-maebashi"
+  },
+  "Shiwa-Chuo": {
+    "ja": "志井中央",
+    "zh": "志井中央",
+    "ko": "시와추오",
+    "en": "Shiwa-chuo"
+  },
+  "Senbokucho": {
+    "ja": "千代田町",
+    "zh": "千代田町",
+    "ko": "センボクチョウ",
+    "en": "Senbokucho"
+  },
+  "HakoneYumoto": {
+    "ja": "箱根湯本",
+    "zh": "箱根汤本",
+    "ko": "하코네유모토",
+    "en": "Hakone-yumoto"
+  },
+  "Kawaguchiko": {
+    "ja": "河口湖",
+    "zh": "河口湖",
+    "ko": "카와구치코",
+    "en": "Kawaguchiko"
+  },
+  "IzukyuShimoda": {
+    "ja": "伊豆急下田",
+    "zh": "伊豆急下田",
+    "ko": "이주큐시모다",
+    "en": "Izukyu-shimoda"
+  },
+  "Izukogen": {
+    "ja": "伊豆高原",
+    "zh": "伊豆高原",
+    "ko": "이도코텐",
+    "en": "Izukogen"
+  },
+  "FuchukeibaSeimommae": {
+    "ja": "富ケ原馬場",
+    "zh": "富原马场",
+    "ko": "フチケババ場",
+    "en": "Fuchukeiba-seimomae"
+  },
+  "Musashinodai": {
+    "ja": "武蔵野台",
+    "zh": "武藏野台",
+    "ko": "ムサシノダイ",
+    "en": "Musashinodai"
+  },
+  "HirayamajoshiKoen": {
+    "ja": "平山城公園",
+    "zh": "平山公园",
+    "ko": "히라야마조シコエン",
+    "en": "Hirayamajoshi-koen"
+  },
+  "KasaiRinkaiPark": {
+    "ja": "笠寺臨海公園",
+    "zh": "笠寺滨海公园",
+    "ko": "カサイリンカイパーク",
+    "en": "Kasai-rinkai-park"
+  },
+  "Futamatashimmachi": {
+    "ja": "二人町",
+    "zh": "二人町",
+    "ko": "フタマタシマチ",
+    "en": "Futamatashimachi"
+  },
+  "Jiroembashi": {
+    "ja": "二之橋",
+    "zh": "二之桥",
+    "ko": "ジロエンハシ",
+    "en": "Jiroembashi"
+  },
+  "Sammaibashi": {
+    "ja": "三ツ橋",
+    "zh": "三桥",
+    "ko": "サンマイハシ",
+    "en": "Sammaibashi"
+  },
+  "HigashiKoizumi": {
+    "ja": "東小豆沢",
+    "zh": "东小豆泽",
+    "ko": "ヒ가シコヰズミ",
+    "en": "Higashi-koizumi"
+  },
+  "NishiKoizumi": {
+    "ja": "西小豆沢",
+    "zh": "西小豆泽",
+    "ko": "ニシコヰズミ",
+    "en": "Nishi-koizumi"
+  },
+  "HonNakano": {
+    "ja": "本中野",
+    "zh": "本中野",
+    "ko": "ホンナカノ",
+    "en": "Hon-nakano"
+  },
+  "Koizumimachi": {
+    "ja": "小豆沢町",
+    "zh": "小豆泽町",
+    "ko": "コヰズミマチ",
+    "en": "Koizumimachi"
+  },
+  "KazusaKameyama": {
+    "ja": "葛城山",
+    "zh": "葛城山",
+    "ko": "카즈サカメヤマ",
+    "en": "Kazusa-kameyama"
+  },
+  "KazusaMatsuoka": {
+    "ja": "松丘",
+    "zh": "松丘",
+    "ko": "カズサマツオカ",
+    "en": "Kazusa-matsuoka"
+  },
+  "Shimogori": {
+    "ja": "下郡",
+    "zh": "下郡",
+    "ko": "シモゴリ",
+    "en": "Shimogori"
+  },
+  "Makuta": {
+    "ja": "真庫",
+    "zh": "真库",
+    "ko": "マクタ",
+    "en": "Makuta"
+  },
+  "HigashiYokota": {
+    "ja": "横田",
+    "zh": "横田",
+    "ko": "ヒガシヨコタ",
+    "en": "Higashi-yokota"
+  },
+  "HigashiKiyokawa": {
+    "ja": "清川",
+    "zh": "清川",
+    "ko": "ヒガシキヨカワ",
+    "en": "Higashi-kiyokawa"
+  },
+  "KazusaKiyokawa": {
+    "ja": "葛城清川",
+    "zh": "葛城清川",
+    "ko": "カズサキヨカワ",
+    "en": "Kazusa-kiyokawa"
+  },
+  "NakanoShimbashi": {
+    "ja": "中野新橋",
+    "zh": "中野新桥",
+    "ko": "ナカノシンバシ",
+    "en": "Nakano-shimbashi"
+  },
+  "Motohasunuma": {
+    "ja": "元橋沼",
+    "zh": "元桥沼",
+    "ko": "モトハスヌマ",
+    "en": "Motohasunuma"
+  },
+  "ShimMisato": {
+    "ja": "三郷",
+    "zh": "三乡",
+    "ko": "シムミサト",
+    "en": "Shim-misato"
+  },
+  "UrawaMisono": {
+    "ja": "浦和みそ野",
+    "zh": "浦和味噌野",
+    "ko": "ウラワミソノ",
+    "en": "Urawa-misono"
+  },
+  "Hatogaya": {
+    "ja": "鳩ヶ谷",
+    "zh": "鸠谷",
+    "ko": "ハトガヤ",
+    "en": "Hatogaya"
+  },
+  "ShimosaKozaki": {
+    "ja": "下総古崎",
+    "zh": "下总古崎",
+    "ko": "シモサコザキ",
+    "en": "Shimosa-kozaki"
+  },
+  "NaritaAirportTerminal2and3": {
+    "ja": "成田空港第2・3ターミナル",
+    "zh": "成田机场2・3航站楼",
+    "ko": "나라타공항T2・T3",
+    "en": "Narita Airport T2&3"
+  },
+  "AizuTajima": {
+    "ja": "会津田島",
+    "zh": "会津田岛",
+    "ko": "아이즈타지마",
+    "en": "Aizu-tajima"
+  },
+  "HigashiMoro": {
+    "ja": "東最上",
+    "zh": "东最上",
+    "ko": "히가시모로",
+    "en": "Higashi-moro"
+  },
+  "Kawakado": {
+    "ja": "河角",
+    "zh": "河角",
+    "ko": "가와코ト",
+    "en": "Kawakado"
+  },
+  "Hamura": {
+    "ja": "羽村",
+    "zh": "羽村",
+    "ko": "하ムラ",
+    "en": "Hamura"
+  },
+  "Ozaku": {
+    "ja": "小田急",
+    "zh": "小田急",
+    "ko": "オザク",
+    "en": "Ozaku"
+  },
+  "Kori": {
+    "ja": "小栗",
+    "zh": "小栗",
+    "ko": "コリ",
+    "en": "Kori"
+  },
+  "TennozuIsle": {
+    "ja": "天王洲",
+    "zh": "天王洲",
+    "ko": "텐노주",
+    "en": "Tennozu-isle"
+  },
+  "Jatenda": {
+    "ja": "ジャテンダ",
+    "zh": "Jatenda",
+    "ko": "ジャテンダ",
+    "en": "Jatenda"
+  },
+  "Kunai": {
+    "ja": "熊出",
+    "zh": "熊出",
+    "ko": "쿤나이",
+    "en": "Kunai"
+  },
+  "Iigura": {
+    "ja": "生井",
+    "zh": "生井",
+    "ko": "이가",
+    "en": "Igura"
+  },
+  "ShinNihombashi": {
+    "ja": "新日本橋",
+    "zh": "新日本桥",
+    "ko": "신니혼바シ",
+    "en": "Shin-nihonbashi"
+  },
+  "Konosu": {
+    "ja": "古野",
+    "zh": "古野",
+    "ko": "코노ス",
+    "en": "Konosu"
+  },
+  "KitaKonosu": {
+    "ja": "北古野",
+    "zh": "北古野",
+    "ko": "키타코ノス",
+    "en": "Kita-konosu"
+  },
+  "Shimmachi": {
+    "ja": "下町",
+    "zh": "下町",
+    "ko": "し町",
+    "en": "Shimmachi"
+  },
+  "Numazu": {
+    "ja": "沼津",
+    "zh": "沼津",
+    "ko": "ヌマジ",
+    "en": "Numazu"
+  },
+  "Omurai": {
+    "ja": "小名井",
+    "zh": "小名井",
+    "ko": "オムライ",
+    "en": "Omurai"
+  },
+  "Atago-2": {
+    "ja": "赤塔",
+    "zh": "赤塔",
+    "ko": "アタグ",
+    "en": "Atago-2"
+  },
+  "Shuzenji": {
+    "ja": "修善寺",
+    "zh": "修善寺",
+    "ko": "슈젠지",
+    "en": "Shuzenji"
+  },
+  "Izumoshi": {
+    "ja": "出目",
+    "zh": "出目",
+    "ko": "이주모シ",
+    "en": "Izumoshi"
+  },
+  "Haneda": {
+    "ja": "羽田",
+    "zh": "羽田",
+    "ko": "하네다",
+    "en": "Haneda"
+  },
+  "Tennozu": {
+    "ja": "天王洲",
+    "zh": "天王洲",
+    "ko": "텐노주",
+    "en": "Tennozu"
+  },
+  "Ryutsu": {
+    "ja": "竜ヶ崎",
+    "zh": "龙崎",
+    "ko": "リュウツ",
+    "en": "Ryutsu"
+  },
+  "Jichiidai": {
+    "ja": "自治台",
+    "zh": "自治台",
+    "ko": "지치다이",
+    "en": "Jichiidai"
+  },
+  "Kamasusaka": {
+    "ja": "間蔵ヶ",
+    "zh": "间藏",
+    "ko": "カマスガ",
+    "en": "Kamasusaka"
+  },
+  "Yaita": {
+    "ja": "矢板",
+    "zh": "矢板",
+    "ko": "ヤイタ",
+    "en": "Yaita"
+  },
+  "CenterMinami": {
+    "ja": "センター南",
+    "zh": "中心南",
+    "ko": "센터남",
+    "en": "Center-Minami"
+  },
+  "CenterKita": {
+    "ja": "センター北",
+    "zh": "中心北",
+    "ko": "센터북",
+    "en": "Center-Kita"
+  },
+  "Takata": {
+    "ja": "高田",
+    "zh": "高田",
+    "ko": "타カタ",
+    "en": "Takata"
+  },
+  "Misakiguchi": {
+    "ja": "三ツ沢口",
+    "zh": "三泽口",
+    "ko": "미사키구치",
+    "en": "Misakiguchi"
   }
 }
