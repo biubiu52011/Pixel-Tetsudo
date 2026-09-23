@@ -165,7 +165,16 @@
     }
 
     // 2) 决策：按来源可信度顺序取首选候选（不猜——仅取有依据的）
+    // v4.3.989: manual 为多候选串（ODPT 数据宽泛，如"8000系/11000系/20000系"）时，
+    // 若 S2 车号级已有跨线累积实证（A 线 ODPT 实时/时刻表注册），优先 S2——
+    // 保证直通列车在 B 线（时刻表推定、无实时车型）视图继承 A 线同列次号车型，
+    // 杜绝"宽泛候选第一项"压过车号级实证导致跨视图换图标。
     var order = ['manual', 'odpt', 'trainNo', 'map'];
+    var _manualCands = splitCandidates(ctx.vehicleTypeManual);
+    var _trainNoCands = getCandidates(trainNumber);
+    if (_manualCands.length > 1 && _trainNoCands.length > 0) {
+      order = ['trainNo', 'manual', 'odpt', 'map'];
+    }
     var chosen = '';
     var chosenSrc = '';
     for (var oi = 0; oi < order.length; oi++) {
