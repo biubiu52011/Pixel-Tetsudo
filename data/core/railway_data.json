@@ -29940,6 +29940,51 @@
           "note": ""
         }
       ]
+    },
+    "ChibaMonorail1": {
+      "name": "ChibaMonorail1",
+      "jaName": "千葉都市モノレール1号線",
+      "stations": [
+        "ChibaMinato",
+        "Shiyakusho",
+        "Chiba",
+        "Sakaecho",
+        "IzumikawaKoen",
+        "KenchoMae"
+      ]
+    },
+    "ChibaMonorail2": {
+      "name": "ChibaMonorail2",
+      "jaName": "千葉都市モノレール2号線",
+      "stations": [
+        "Chiba",
+        "ChibaKoen",
+        "Sakusabe",
+        "Tendai",
+        "Anagawa",
+        "SportsCenter",
+        "DobutsuKoen",
+        "Mitsuwadai",
+        "Tsuga",
+        "Sakuragi",
+        "Kokuradai",
+        "ChishirodaiKita",
+        "Chishirodai"
+      ]
+    },
+    "ShonanMonorail": {
+      "name": "ShonanMonorail",
+      "jaName": "湘南モノレール",
+      "stations": [
+        "Ofuna",
+        "Fujimicho",
+        "ShonanMachiya",
+        "ShonanFukasawa",
+        "NishiKamakura",
+        "Kataseyama",
+        "Mejiroyamashita",
+        "ShonanEnoshima"
+      ]
     }
   },
   "name_map": {
