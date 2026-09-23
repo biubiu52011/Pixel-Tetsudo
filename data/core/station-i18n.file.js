@@ -5697,10 +5697,10 @@ window.RAILWAY_I18N = {
     "en": "Kanagawa-shimmachi"
   },
   "Kanazawa": {
-    "ja": "金沢文庫",
-    "zh": "金泽文库",
+    "ja": "金沢",
+    "zh": "金泽",
     "ko": "카나자와",
-    "en": "Kanazawa-bunko"
+    "en": "Kanazawa"
   },
   "Kanazawa-Bunko": {
     "ja": "金沢文庫",
@@ -18877,10 +18877,10 @@ window.RAILWAY_I18N = {
     "zh": "生田"
   },
   "Kakunodate": {
-    "ja": "角馆",
-    "en": "Kakunodate",
-    "ko": "角馆",
-    "zh": "角馆"
+    "ja": "角館",
+    "zh": "角馆",
+    "ko": "각관",
+    "en": "Kakunodate"
   },
   "Uguisuno": {
     "ja": "莺野",
@@ -19592,7 +19592,9 @@ window.RAILWAY_I18N = {
   },
   "Sakudaira": {
     "ja": "佐久平",
-    "en": "Sakudaira"
+    "en": "Sakudaira",
+    "zh": "佐久平",
+    "ko": "사쿠다이라"
   },
   "Sawajiri": {
     "ja": "沢尻",
@@ -20447,6 +20449,431 @@ window.RAILWAY_I18N = {
     "zh": "湘南江之岛",
     "ko": "쇼난에노시마",
     "en": "Shonan-Enoshima"
+  },
+  "Nasushiobara": {
+    "ja": "那須塩原",
+    "zh": "那须盐原",
+    "ko": "나스시오바라",
+    "en": "Nasushiobara"
+  },
+  "Shiroishi-Zao": {
+    "ja": "白石蔵王",
+    "zh": "白石藏王",
+    "ko": "시로이시자오",
+    "en": "Shiroishi-Zao"
+  },
+  "Kurikoma-Kogen": {
+    "ja": "くりこま高原",
+    "zh": "栗驹高原",
+    "ko": "쿠리코마코겐",
+    "en": "Kurikoma-Kogen"
+  },
+  "Mizusawa-Esashi": {
+    "ja": "水沢江刺",
+    "zh": "水泽江刺",
+    "ko": "미즈사와에사시",
+    "en": "Mizusawa-Esashi"
+  },
+  "Iwate-Numakunai": {
+    "ja": "いわて沼宮内",
+    "zh": "岩手沼宫内",
+    "ko": "이와테누마쿠나이",
+    "en": "Iwate-Numakunai"
+  },
+  "Ninohe": {
+    "ja": "二戸",
+    "zh": "二户",
+    "ko": "니노헤",
+    "en": "Ninohe"
+  },
+  "Shichinohe-Towada": {
+    "ja": "七戸十和田",
+    "zh": "七户十和田",
+    "ko": "시치노헤토와다",
+    "en": "Shichinohe-Towada"
+  },
+  "Honjo-Waseda": {
+    "ja": "本庄早稲田",
+    "zh": "本庄早稻田",
+    "ko": "혼조와세다",
+    "en": "Honjo-Waseda"
+  },
+  "Jomo-Kogen": {
+    "ja": "上毛高原",
+    "zh": "上毛高原",
+    "ko": "조모코겐",
+    "en": "Jomo-Kogen"
+  },
+  "Annaka-Haruna": {
+    "ja": "安中榛名",
+    "zh": "安中榛名",
+    "ko": "안나카하루나",
+    "en": "Annaka-Haruna"
+  },
+  "Karuizawa": {
+    "ja": "軽井沢",
+    "zh": "轻井泽",
+    "ko": "카루이자와",
+    "en": "Karuizawa"
+  },
+  "Myoko-Kogen": {
+    "ja": "妙高高原",
+    "zh": "妙高高原",
+    "ko": "묘코코겐",
+    "en": "Myoko-Kogen"
+  },
+  "Itoigawa": {
+    "ja": "糸魚川",
+    "zh": "丝鱼川",
+    "ko": "이토이가와",
+    "en": "Itoigawa"
+  },
+  "Kurobe-Unazukionsen": {
+    "ja": "黒部宇奈月温泉",
+    "zh": "黑部宇奈月温泉",
+    "ko": "쿠로베우나즈키온천",
+    "en": "Kurobe-Unazukionsen"
+  },
+  "Toyama": {
+    "ja": "富山",
+    "zh": "富山",
+    "ko": "토야마",
+    "en": "Toyama"
+  },
+  "Shin-Takaoka": {
+    "ja": "新高岡",
+    "zh": "新高冈",
+    "ko": "신타카오카",
+    "en": "Shin-Takaoka"
+  },
+  "Komatsu": {
+    "ja": "小松",
+    "zh": "小松",
+    "ko": "코마츠",
+    "en": "Komatsu"
+  },
+  "Kaga-Onsen": {
+    "ja": "加賀温泉",
+    "zh": "加贺温泉",
+    "ko": "카가온천",
+    "en": "Kaga-Onsen"
+  },
+  "Awara-Onsen": {
+    "ja": "芦原温泉",
+    "zh": "芦原温泉",
+    "ko": "아와라온천",
+    "en": "Awara-Onsen"
+  },
+  "Fukui-Echizen": {
+    "ja": "福井",
+    "zh": "福井",
+    "ko": "후쿠이",
+    "en": "Fukui"
+  },
+  "Echizen-Takefu": {
+    "ja": "越前たけふ",
+    "zh": "越前武生",
+    "ko": "에치젠타케후",
+    "en": "Echizen-Takefu"
+  },
+  "Tsuruga": {
+    "ja": "敦賀",
+    "zh": "敦贺",
+    "ko": "츠루가",
+    "en": "Tsuruga"
+  },
+  "Sagae": {
+    "ja": "寒河江",
+    "zh": "寒河江",
+    "ko": "사가에",
+    "en": "Sagae"
+  },
+  "Tateishi": {
+    "ja": "立川",
+    "zh": "立川",
+    "ko": "다테이시",
+    "en": "Tateishi"
+  },
+  "Okutsugaru-Imabetsu": {
+    "ja": "奥津軽いまべつ",
+    "zh": "奥津轻今别",
+    "ko": "오쓰가루이마베쓰",
+    "en": "Okutsugaru-Imabetsu"
+  },
+  "Kikonai": {
+    "ja": "木古内",
+    "zh": "木古内",
+    "ko": "키코나이",
+    "en": "Kikonai"
+  },
+  "Shin-Hakodate-Hokuto": {
+    "ja": "新函館北斗",
+    "zh": "新函馆北斗",
+    "ko": "신하코다테호쿠토",
+    "en": "Shin-Hakodate-Hokuto"
+  },
+  "Mishima": {
+    "ja": "三島",
+    "zh": "三岛",
+    "ko": "미시마",
+    "en": "Mishima"
+  },
+  "Shin-Fuji": {
+    "ja": "新富士",
+    "zh": "新富士",
+    "ko": "신후지",
+    "en": "Shin-Fuji"
+  },
+  "Shizuoka": {
+    "ja": "静岡",
+    "zh": "静冈",
+    "ko": "시즈오카",
+    "en": "Shizuoka"
+  },
+  "Kakegawa": {
+    "ja": "掛川",
+    "zh": "挂川",
+    "ko": "카케가와",
+    "en": "Kakegawa"
+  },
+  "Hamamatsu": {
+    "ja": "浜松",
+    "zh": "滨松",
+    "ko": "하마마츠",
+    "en": "Hamamatsu"
+  },
+  "Toyohashi": {
+    "ja": "豊橋",
+    "zh": "丰桥",
+    "ko": "토요하시",
+    "en": "Toyohashi"
+  },
+  "Mikawa-Anjo": {
+    "ja": "三河安城",
+    "zh": "三河安城",
+    "ko": "미카와안조",
+    "en": "Mikawa-Anjo"
+  },
+  "Nagoya": {
+    "ja": "名古屋",
+    "zh": "名古屋",
+    "ko": "나고야",
+    "en": "Nagoya"
+  },
+  "Gifu-Hashima": {
+    "ja": "岐阜羽島",
+    "zh": "岐阜羽岛",
+    "ko": "기후하시마",
+    "en": "Gifu-Hashima"
+  },
+  "Maibara": {
+    "ja": "米原",
+    "zh": "米原",
+    "ko": "마이바라",
+    "en": "Maibara"
+  },
+  "Kyoto": {
+    "ja": "京都",
+    "zh": "京都",
+    "ko": "교토",
+    "en": "Kyoto"
+  },
+  "Shin-Osaka": {
+    "ja": "新大阪",
+    "zh": "新大阪",
+    "ko": "신오사카",
+    "en": "Shin-Osaka"
+  },
+  "Shin-Kobe": {
+    "ja": "新神戸",
+    "zh": "新神户",
+    "ko": "신코베",
+    "en": "Shin-Kobe"
+  },
+  "Himeji": {
+    "ja": "姫路",
+    "zh": "姬路",
+    "ko": "히메지",
+    "en": "Himeji"
+  },
+  "Aioi-Hyogo": {
+    "ja": "相生",
+    "zh": "相生",
+    "ko": "아이오이",
+    "en": "Aioi"
+  },
+  "Okayama": {
+    "ja": "岡山",
+    "zh": "冈山",
+    "ko": "오카야마",
+    "en": "Okayama"
+  },
+  "Shin-Kurashiki": {
+    "ja": "新倉敷",
+    "zh": "新仓敷",
+    "ko": "신쿠라시키",
+    "en": "Shin-Kurashiki"
+  },
+  "Fukuyama": {
+    "ja": "福山",
+    "zh": "福山",
+    "ko": "후쿠야마",
+    "en": "Fukuyama"
+  },
+  "Shin-Onomichi": {
+    "ja": "新尾道",
+    "zh": "新尾道",
+    "ko": "신오노미치",
+    "en": "Shin-Onomichi"
+  },
+  "Mihara": {
+    "ja": "三原",
+    "zh": "三原",
+    "ko": "미하라",
+    "en": "Mihara"
+  },
+  "Higashi-Hiroshima": {
+    "ja": "東広島",
+    "zh": "东广岛",
+    "ko": "히가시히로시마",
+    "en": "Higashi-Hiroshima"
+  },
+  "Hiroshima": {
+    "ja": "広島",
+    "zh": "广岛",
+    "ko": "히로시마",
+    "en": "Hiroshima"
+  },
+  "Shin-Iwakuni": {
+    "ja": "新岩国",
+    "zh": "新岩国",
+    "ko": "신이와쿠니",
+    "en": "Shin-Iwakuni"
+  },
+  "Tokuyama": {
+    "ja": "徳山",
+    "zh": "德山",
+    "ko": "토쿠야마",
+    "en": "Tokuyama"
+  },
+  "Shin-Yamaguchi": {
+    "ja": "新山口",
+    "zh": "新山口",
+    "ko": "신야마구치",
+    "en": "Shin-Yamaguchi"
+  },
+  "Asa": {
+    "ja": "厚狭",
+    "zh": "厚狭",
+    "ko": "아사",
+    "en": "Asa"
+  },
+  "Shin-Shimonoseki": {
+    "ja": "新下関",
+    "zh": "新下关",
+    "ko": "신시모노세키",
+    "en": "Shin-Shimonoseki"
+  },
+  "Kokura": {
+    "ja": "小倉",
+    "zh": "小仓",
+    "ko": "코쿠라",
+    "en": "Kokura"
+  },
+  "Hakata": {
+    "ja": "博多",
+    "zh": "博多",
+    "ko": "하카타",
+    "en": "Hakata"
+  },
+  "Shin-Tosu": {
+    "ja": "新鳥栖",
+    "zh": "新鸟栖",
+    "ko": "신토스",
+    "en": "Shin-Tosu"
+  },
+  "Kurume": {
+    "ja": "久留米",
+    "zh": "久留米",
+    "ko": "쿠루메",
+    "en": "Kurume"
+  },
+  "Chikugo-Funagoya": {
+    "ja": "筑後船小屋",
+    "zh": "筑后船小屋",
+    "ko": "치고후나고야",
+    "en": "Chikugo-Funagoya"
+  },
+  "Shin-Omuta": {
+    "ja": "新大牟田",
+    "zh": "新大牟田",
+    "ko": "신오무타",
+    "en": "Shin-Omuta"
+  },
+  "Shin-Tamana": {
+    "ja": "新玉名",
+    "zh": "新玉名",
+    "ko": "신타마나",
+    "en": "Shin-Tamana"
+  },
+  "Kumamoto": {
+    "ja": "熊本",
+    "zh": "熊本",
+    "ko": "쿠마모토",
+    "en": "Kumamoto"
+  },
+  "Shin-Yatsushiro": {
+    "ja": "新八代",
+    "zh": "新八代",
+    "ko": "신야츠시로",
+    "en": "Shin-Yatsushiro"
+  },
+  "Shin-Minamata": {
+    "ja": "新水俣",
+    "zh": "新水俣",
+    "ko": "신미나마타",
+    "en": "Shin-Minamata"
+  },
+  "Kagoshima-Izumi": {
+    "ja": "出水",
+    "zh": "出水",
+    "ko": "이즈미",
+    "en": "Izumi"
+  },
+  "Satsuma-Sendai": {
+    "ja": "川内",
+    "zh": "川内",
+    "ko": "센다이",
+    "en": "Sendai"
+  },
+  "Kagoshima-Chuo": {
+    "ja": "鹿児島中央",
+    "zh": "鹿儿岛中央",
+    "ko": "가고시마추오",
+    "en": "Kagoshima-Chuo"
+  },
+  "Takeo-Onsen": {
+    "ja": "武雄温泉",
+    "zh": "武雄温泉",
+    "ko": "다케오온센",
+    "en": "Takeo-Onsen"
+  },
+  "Ureshino-Onsen": {
+    "ja": "嬉野温泉",
+    "zh": "嬉野温泉",
+    "ko": "우레시노온센",
+    "en": "Ureshino-Onsen"
+  },
+  "Shin-Omura": {
+    "ja": "新大村",
+    "zh": "新大村",
+    "ko": "신오무라",
+    "en": "Shin-Omura"
+  },
+  "Isahaya": {
+    "ja": "諫早",
+    "zh": "谏早",
+    "ko": "이사야",
+    "en": "Isahaya"
   }
-}
-;
+};

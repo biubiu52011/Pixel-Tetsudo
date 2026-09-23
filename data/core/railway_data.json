@@ -425,8 +425,8 @@
       "lng": 139.1944
     },
     "Nagasaki": {
-      "lat": 35.6889,
-      "lng": 139.6839
+      "lat": 32.7447,
+      "lng": 129.8737
     },
     "Taishakuten": {
       "lat": 35.75671,
@@ -8719,6 +8719,342 @@
     "ShonanEnoshima": {
       "lat": 35.311723,
       "lng": 139.4876121
+    },
+    "Nasushiobara": {
+      "lat": 36.9315625,
+      "lng": 140.0206943
+    },
+    "Shin-Shirakawa": {
+      "lat": 37.1230906,
+      "lng": 140.1884461
+    },
+    "Shiroishi-Zao": {
+      "lat": 37.9954269,
+      "lng": 140.6331751
+    },
+    "Furukawa": {
+      "lat": 38.57902,
+      "lng": 140.967092
+    },
+    "Kurikoma-Kogen": {
+      "lat": 38.7487492,
+      "lng": 141.0716252
+    },
+    "Mizusawa-Esashi": {
+      "lat": 39.1451474,
+      "lng": 141.1887494
+    },
+    "Morioka": {
+      "lat": 39.7014998,
+      "lng": 141.1365544
+    },
+    "Iwate-Numakunai": {
+      "lat": 39.960584,
+      "lng": 141.2172841
+    },
+    "Ninohe": {
+      "lat": 40.2601909,
+      "lng": 141.2856309
+    },
+    "Shichinohe-Towada": {
+      "lat": 40.7199799,
+      "lng": 141.1536689
+    },
+    "Shin-Aomori": {
+      "lat": 40.8281478,
+      "lng": 140.6934998
+    },
+    "Honjo-Waseda": {
+      "lat": 36.2190937,
+      "lng": 139.1804481
+    },
+    "Jomo-Kogen": {
+      "lat": 36.6931627,
+      "lng": 138.9776328
+    },
+    "Annaka-Haruna": {
+      "lat": 36.3625792,
+      "lng": 138.8493964
+    },
+    "Karuizawa": {
+      "lat": 36.3431582,
+      "lng": 138.6368
+    },
+    "Sakudaira": {
+      "lat": 36.2778148,
+      "lng": 138.4635836
+    },
+    "Nagano": {
+      "lat": 36.6436122,
+      "lng": 138.1881321
+    },
+    "Iiyama": {
+      "lat": 36.8457513,
+      "lng": 138.3598056
+    },
+    "Myoko-Kogen": {
+      "lat": 36.8721825,
+      "lng": 138.2117975
+    },
+    "Itoigawa": {
+      "lat": 37.0433062,
+      "lng": 137.8617531
+    },
+    "Kurobe-Unazukionsen": {
+      "lat": 36.8743189,
+      "lng": 137.481437
+    },
+    "Toyama": {
+      "lat": 36.7015836,
+      "lng": 137.2129394
+    },
+    "Shin-Takaoka": {
+      "lat": 36.7266441,
+      "lng": 137.0113496
+    },
+    "Kanazawa": {
+      "lat": 36.5780818,
+      "lng": 136.6478206
+    },
+    "Komatsu": {
+      "lat": 36.4021245,
+      "lng": 136.4530136
+    },
+    "Kaga-Onsen": {
+      "lat": 36.3203882,
+      "lng": 136.3504996
+    },
+    "Awara-Onsen": {
+      "lat": 36.215542,
+      "lng": 136.2353609
+    },
+    "Fukui-Echizen": {
+      "lat": 36.0621411,
+      "lng": 136.2221908
+    },
+    "Echizen-Takefu": {
+      "lat": 35.8951842,
+      "lng": 136.1988513
+    },
+    "Tsuruga": {
+      "lat": 35.6456178,
+      "lng": 136.0759786
+    },
+    "Sagae": {
+      "lat": 38.3716369,
+      "lng": 140.2751598
+    },
+    "Tateishi": {
+      "lat": 38.5958204,
+      "lng": 140.3753583
+    },
+    "Shinjo": {
+      "lat": 38.7626088,
+      "lng": 140.30602
+    },
+    "Shizukuishi": {
+      "lat": 39.689373,
+      "lng": 140.9749699
+    },
+    "Tazawako": {
+      "lat": 39.7002861,
+      "lng": 140.7223789
+    },
+    "Kakunodate": {
+      "lat": 39.5917027,
+      "lng": 140.571025
+    },
+    "Omagari": {
+      "lat": 39.4656823,
+      "lng": 140.479891
+    },
+    "Akita": {
+      "lat": 39.7170137,
+      "lng": 140.1295542
+    },
+    "Okutsugaru-Imabetsu": {
+      "lat": 41.1446396,
+      "lng": 140.5149641
+    },
+    "Kikonai": {
+      "lat": 41.6785581,
+      "lng": 140.4342536
+    },
+    "Shin-Hakodate-Hokuto": {
+      "lat": 41.9046072,
+      "lng": 140.6486986
+    },
+    "Mishima": {
+      "lat": 35.126028,
+      "lng": 138.911831
+    },
+    "Shin-Fuji": {
+      "lat": 35.14273,
+      "lng": 138.66351
+    },
+    "Shizuoka": {
+      "lat": 34.97181,
+      "lng": 138.389552
+    },
+    "Kakegawa": {
+      "lat": 34.769397,
+      "lng": 138.014616
+    },
+    "Hamamatsu": {
+      "lat": 34.7047,
+      "lng": 137.734
+    },
+    "Toyohashi": {
+      "lat": 34.763055,
+      "lng": 137.382176
+    },
+    "Mikawa-Anjo": {
+      "lat": 34.968345,
+      "lng": 137.061429
+    },
+    "Gifu-Hashima": {
+      "lat": 35.315513,
+      "lng": 136.686037
+    },
+    "Maibara": {
+      "lat": 35.314762,
+      "lng": 136.289992
+    },
+    "Shin-Osaka": {
+      "lat": 34.733485,
+      "lng": 135.497888
+    },
+    "Shin-Kobe": {
+      "lat": 34.707221,
+      "lng": 135.196924
+    },
+    "Himeji": {
+      "lat": 34.827899,
+      "lng": 134.689497
+    },
+    "Aioi-Hyogo": {
+      "lat": 34.817615,
+      "lng": 134.473503
+    },
+    "Okayama": {
+      "lat": 34.66675,
+      "lng": 133.918266
+    },
+    "Shin-Kurashiki": {
+      "lat": 34.565093,
+      "lng": 133.678577
+    },
+    "Fukuyama": {
+      "lat": 34.489386,
+      "lng": 133.36225
+    },
+    "Shin-Onomichi": {
+      "lat": 34.430063,
+      "lng": 133.190328
+    },
+    "Mihara": {
+      "lat": 34.400267,
+      "lng": 133.08293
+    },
+    "Higashi-Hiroshima": {
+      "lat": 34.388893,
+      "lng": 132.760132
+    },
+    "Hiroshima": {
+      "lat": 34.397826,
+      "lng": 132.475577
+    },
+    "Shin-Iwakuni": {
+      "lat": 34.164574,
+      "lng": 132.149513
+    },
+    "Tokuyama": {
+      "lat": 34.051018,
+      "lng": 131.802094
+    },
+    "Shin-Yamaguchi": {
+      "lat": 34.094417,
+      "lng": 131.396509
+    },
+    "Asa": {
+      "lat": 34.053791,
+      "lng": 131.159963
+    },
+    "Shin-Shimonoseki": {
+      "lat": 34.007068,
+      "lng": 130.949768
+    },
+    "Kokura": {
+      "lat": 33.88676,
+      "lng": 130.882184
+    },
+    "Hakata": {
+      "lat": 33.590041,
+      "lng": 130.419903
+    },
+    "Shin-Tosu": {
+      "lat": 33.369791,
+      "lng": 130.491417
+    },
+    "Kurume": {
+      "lat": 33.320642,
+      "lng": 130.501404
+    },
+    "Chikugo-Funagoya": {
+      "lat": 33.178155,
+      "lng": 130.492436
+    },
+    "Shin-Omuta": {
+      "lat": 33.071199,
+      "lng": 130.48876
+    },
+    "Shin-Tamana": {
+      "lat": 32.942555,
+      "lng": 130.573568
+    },
+    "Kumamoto": {
+      "lat": 32.790412,
+      "lng": 130.688622
+    },
+    "Shin-Yatsushiro": {
+      "lat": 32.517694,
+      "lng": 130.634954
+    },
+    "Shin-Minamata": {
+      "lat": 32.210579,
+      "lng": 130.428667
+    },
+    "Kagoshima-Izumi": {
+      "lat": 32.089886,
+      "lng": 130.35735
+    },
+    "Satsuma-Sendai": {
+      "lat": 31.813784,
+      "lng": 130.312256
+    },
+    "Kagoshima-Chuo": {
+      "lat": 31.583713,
+      "lng": 130.541791
+    },
+    "Takeo-Onsen": {
+      "lat": 33.196401,
+      "lng": 130.022957
+    },
+    "Ureshino-Onsen": {
+      "lat": 33.106611,
+      "lng": 129.998973
+    },
+    "Shin-Omura": {
+      "lat": 32.932981,
+      "lng": 129.95705
+    },
+    "Isahaya": {
+      "lat": 32.851581,
+      "lng": 130.041437
+    },
+    "Murayama": {
+      "lat": 38.4953,
+      "lng": 140.3706
     }
   },
   "lines": {
@@ -30272,6 +30608,1291 @@
       ],
       "nameZh": "湘南单轨",
       "nameKo": "쇼난 모노레일"
+    },
+    "TohokuShinkansen": {
+      "name": "TohokuShinkansen",
+      "nameEn": "Tohoku Shinkansen",
+      "nameJa": "東北新幹線",
+      "code": "Tohoku",
+      "color": "#00b2e5",
+      "operator": "JR-East",
+      "region": "Tohoku Area",
+      "type": "straight",
+      "image": "../images/鉄道/JR東日本/Shinkansen_jre.png",
+      "durationTotalMin": 220,
+      "branchOf": null,
+      "stations": [
+        "Tokyo",
+        "Ueno",
+        "Omiya",
+        "Oyama",
+        "Utsunomiya",
+        "Nasushiobara",
+        "Shin-Shirakawa",
+        "Koriyama",
+        "Fukushima",
+        "Shiroishi-Zao",
+        "Sendai",
+        "Furukawa",
+        "Kurikoma-Kogen",
+        "Ichinoseki",
+        "Mizusawa-Esashi",
+        "Kitakami",
+        "Shin-Hanamaki",
+        "Morioka",
+        "Iwate-Numakunai",
+        "Ninohe",
+        "Hachinohe",
+        "Shichinohe-Towada",
+        "Shin-Aomori"
+      ],
+      "durations": [
+        4,
+        5,
+        14,
+        8,
+        12,
+        8,
+        18,
+        13,
+        12,
+        10,
+        9,
+        8,
+        8,
+        7,
+        7,
+        7,
+        10,
+        9,
+        8,
+        13,
+        9,
+        9
+      ],
+      "throughServices": [],
+      "transferStations": [
+        {
+          "station": "Tokyo",
+          "lineId": "KeihinTohoku",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Tokyo",
+          "lineId": "Yokosuka",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Tokyo",
+          "lineId": "ChuoRapid",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Tokyo",
+          "lineId": "Joban",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Tokyo",
+          "lineId": "Keiyo",
+          "type": "out",
+          "note": "地下深層，徒歩約10分"
+        },
+        {
+          "station": "Tokyo",
+          "lineId": "Takasaki",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Tokyo",
+          "lineId": "Tokaido",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Tokyo",
+          "lineId": "Yamanote",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Tokyo",
+          "lineId": "SobuRapid",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Tokyo",
+          "lineId": "TokaidoMain",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Tokyo",
+          "lineId": "UtsunomiyaJR",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Tokyo",
+          "lineId": "Marunouchi",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Ueno",
+          "lineId": "KeihinTohoku",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Ueno",
+          "lineId": "Joban",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Ueno",
+          "lineId": "Takasaki",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Ueno",
+          "lineId": "Ginza",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Ueno",
+          "lineId": "Hibiya",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Ueno",
+          "lineId": "Yamanote",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Ueno",
+          "lineId": "UtsunomiyaJR",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Omiya",
+          "lineId": "KeihinTohoku",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Omiya",
+          "lineId": "Saikyo",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Omiya",
+          "lineId": "ShonanShinjuku",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Omiya",
+          "lineId": "Takasaki",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Omiya",
+          "lineId": "Kawagoe",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Omiya",
+          "lineId": "Noda",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Omiya",
+          "lineId": "NewShuttle",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Omiya",
+          "lineId": "UtsunomiyaJR",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Oyama",
+          "lineId": "Mito",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Oyama",
+          "lineId": "Ryomo",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Oyama",
+          "lineId": "UtsunomiyaJR",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Utsunomiya",
+          "lineId": "UtsunomiyaJR",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Shin-Shirakawa",
+          "lineId": "TohokuMain",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Koriyama",
+          "lineId": "BanetsuEast",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Koriyama",
+          "lineId": "BanetsuWest",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Koriyama",
+          "lineId": "TohokuMain",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Fukushima",
+          "lineId": "TohokuMain",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Fukushima",
+          "lineId": "Yamagata",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Sendai",
+          "lineId": "JobanMain",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Sendai",
+          "lineId": "Senseki",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Sendai",
+          "lineId": "Senzan",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Sendai",
+          "lineId": "TohokuMain",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Furukawa",
+          "lineId": "RikutoEast",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Ichinoseki",
+          "lineId": "Ofunato",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Ichinoseki",
+          "lineId": "TohokuMain",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Kitakami",
+          "lineId": "TohokuMain",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Kitakami",
+          "lineId": "Kitakami",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Shin-Hanamaki",
+          "lineId": "Kamaishi",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Morioka",
+          "lineId": "Yamada",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Morioka",
+          "lineId": "Tazawako",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Morioka",
+          "lineId": "TohokuMain",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Hachinohe",
+          "lineId": "Hachinohe",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Shin-Aomori",
+          "lineId": "OuMain",
+          "type": "in",
+          "note": ""
+        }
+      ],
+      "nameZh": "东北新干线",
+      "nameKo": "도호쿠 신칸센"
+    },
+    "JoetsuShinkansen": {
+      "name": "JoetsuShinkansen",
+      "nameEn": "Joetsu Shinkansen",
+      "nameJa": "上越新幹線",
+      "code": "Joetsu",
+      "color": "#00a7e1",
+      "operator": "JR-East",
+      "region": "Kanto Area",
+      "type": "straight",
+      "image": "../images/鉄道/JR東日本/Shinkansen_jre.png",
+      "durationTotalMin": 100,
+      "branchOf": null,
+      "stations": [
+        "Omiya",
+        "Kumagaya",
+        "Honjo-Waseda",
+        "Takasaki",
+        "Jomo-Kogen",
+        "Echigo-Yuzawa",
+        "Urasa",
+        "Nagaoka",
+        "Tsubame-Sanjo",
+        "Niigata"
+      ],
+      "durations": [
+        18,
+        8,
+        9,
+        14,
+        16,
+        9,
+        14,
+        9,
+        9
+      ],
+      "throughServices": [],
+      "transferStations": [
+        {
+          "station": "Omiya",
+          "lineId": "KeihinTohoku",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Omiya",
+          "lineId": "Saikyo",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Omiya",
+          "lineId": "ShonanShinjuku",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Omiya",
+          "lineId": "Takasaki",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Omiya",
+          "lineId": "Kawagoe",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Omiya",
+          "lineId": "Noda",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Omiya",
+          "lineId": "NewShuttle",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Omiya",
+          "lineId": "UtsunomiyaJR",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Kumagaya",
+          "lineId": "Takasaki",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Takasaki",
+          "lineId": "Takasaki",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Takasaki",
+          "lineId": "Joetsu",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Takasaki",
+          "lineId": "Shinetsu",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Takasaki",
+          "lineId": "Hachiko",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Takasaki",
+          "lineId": "Ryomo",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Echigo-Yuzawa",
+          "lineId": "Joetsu",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Urasa",
+          "lineId": "Joetsu",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Nagaoka",
+          "lineId": "Shinetsu",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Nagaoka",
+          "lineId": "Joetsu",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Tsubame-Sanjo",
+          "lineId": "Miyo",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Niigata",
+          "lineId": "Echigo",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Niigata",
+          "lineId": "Hakushin",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Niigata",
+          "lineId": "Shinetsu",
+          "type": "in",
+          "note": ""
+        }
+      ],
+      "nameZh": "上越新干线",
+      "nameKo": "조에쓰 신칸센"
+    },
+    "HokurikuShinkansen": {
+      "name": "HokurikuShinkansen",
+      "nameEn": "Hokuriku Shinkansen",
+      "nameJa": "北陸新幹線",
+      "code": "Hokuriku",
+      "color": "#00b2e5",
+      "operator": "JR-East",
+      "region": "Hokuriku Area",
+      "type": "straight",
+      "image": "../images/鉄道/JR東日本/Shinkansen_jre.png",
+      "durationTotalMin": 145,
+      "branchOf": null,
+      "stations": [
+        "Takasaki",
+        "Annaka-Haruna",
+        "Karuizawa",
+        "Sakudaira",
+        "Ueda",
+        "Nagano",
+        "Iiyama",
+        "Myoko-Kogen",
+        "Itoigawa",
+        "Kurobe-Unazukionsen",
+        "Toyama",
+        "Shin-Takaoka",
+        "Kanazawa",
+        "Komatsu",
+        "Kaga-Onsen",
+        "Awara-Onsen",
+        "Fukui-Echizen",
+        "Echizen-Takefu",
+        "Tsuruga"
+      ],
+      "durations": [
+        8,
+        12,
+        11,
+        8,
+        14,
+        10,
+        12,
+        10,
+        12,
+        9,
+        8,
+        12,
+        8,
+        8,
+        7,
+        9,
+        8,
+        9
+      ],
+      "throughServices": [],
+      "transferStations": [
+        {
+          "station": "Takasaki",
+          "lineId": "Takasaki",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Takasaki",
+          "lineId": "Joetsu",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Takasaki",
+          "lineId": "Shinetsu",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Takasaki",
+          "lineId": "Hachiko",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Takasaki",
+          "lineId": "Ryomo",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Ueda",
+          "lineId": "JobanMain",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Nagano",
+          "lineId": "Shinetsu",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Iiyama",
+          "lineId": "Iiyama",
+          "type": "in",
+          "note": ""
+        }
+      ],
+      "nameZh": "北陆新干线",
+      "nameKo": "호쿠리쿠 신칸센"
+    },
+    "YamagataShinkansen": {
+      "name": "YamagataShinkansen",
+      "nameEn": "Yamagata Shinkansen",
+      "nameJa": "山形新幹線",
+      "code": "Yamagata",
+      "color": "#e60012",
+      "operator": "JR-East",
+      "region": "Tohoku Area",
+      "type": "straight",
+      "image": "../images/鉄道/JR東日本/Shinkansen_jre.png",
+      "durationTotalMin": 65,
+      "branchOf": null,
+      "stations": [
+        "Fukushima",
+        "Yonezawa",
+        "Takahata",
+        "Akayu",
+        "Kaminoyama-Onsen",
+        "Yamagata",
+        "Tendo",
+        "Sakuranbo-Higashine",
+        "Murayama",
+        "Oishida",
+        "Shinjo"
+      ],
+      "durations": [
+        12,
+        8,
+        6,
+        8,
+        9,
+        8,
+        7,
+        8,
+        10,
+        9
+      ],
+      "throughServices": [],
+      "transferStations": [
+        {
+          "station": "Fukushima",
+          "lineId": "TohokuMain",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Fukushima",
+          "lineId": "Yamagata",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Yonezawa",
+          "lineId": "Yamagata",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Yonezawa",
+          "lineId": "Yonezawa",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Takahata",
+          "lineId": "Yamagata",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Akayu",
+          "lineId": "Yamagata",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Kaminoyama-Onsen",
+          "lineId": "Yamagata",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Yamagata",
+          "lineId": "Senzan",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Yamagata",
+          "lineId": "Yamagata",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Tendo",
+          "lineId": "Yamagata",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Sakuranbo-Higashine",
+          "lineId": "Yamagata",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Murayama",
+          "lineId": "Yamagata",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Oishida",
+          "lineId": "Yamagata",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Shinjo",
+          "lineId": "OuMain",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Shinjo",
+          "lineId": "RikutoEast",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Shinjo",
+          "lineId": "RikutsuWest",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Shinjo",
+          "lineId": "Yamagata",
+          "type": "in",
+          "note": ""
+        }
+      ],
+      "nameZh": "山形新干线",
+      "nameKo": "야마가타 신칸센"
+    },
+    "AkitaShinkansen": {
+      "name": "AkitaShinkansen",
+      "nameEn": "Akita Shinkansen",
+      "nameJa": "秋田新幹線",
+      "code": "Akita",
+      "color": "#e60012",
+      "operator": "JR-East",
+      "region": "Tohoku Area",
+      "type": "straight",
+      "image": "../images/鉄道/JR東日本/Shinkansen_jre.png",
+      "durationTotalMin": 55,
+      "branchOf": null,
+      "stations": [
+        "Morioka",
+        "Shizukuishi",
+        "Tazawako",
+        "Kakunodate",
+        "Omagari",
+        "Akita"
+      ],
+      "durations": [
+        10,
+        12,
+        12,
+        10,
+        12
+      ],
+      "throughServices": [],
+      "transferStations": [
+        {
+          "station": "Morioka",
+          "lineId": "Yamada",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Morioka",
+          "lineId": "Tazawako",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Morioka",
+          "lineId": "TohokuMain",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Shizukuishi",
+          "lineId": "Tazawako",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Tazawako",
+          "lineId": "Tazawako",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Omagari",
+          "lineId": "OuMain",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Omagari",
+          "lineId": "Tazawako",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Akita",
+          "lineId": "OuMain",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Akita",
+          "lineId": "Uetsu",
+          "type": "in",
+          "note": ""
+        }
+      ],
+      "nameZh": "秋田新干线",
+      "nameKo": "아키타 신칸센"
+    },
+    "HokkaidoShinkansen": {
+      "name": "HokkaidoShinkansen",
+      "nameEn": "Hokkaido Shinkansen",
+      "nameJa": "北海道新幹線",
+      "code": "Hokkaido",
+      "color": "#00b2e5",
+      "operator": "JR-East",
+      "region": "Hokkaido Area",
+      "type": "straight",
+      "image": "../images/鉄道/JR北海道/Shinkansen_jrh.png",
+      "durationTotalMin": 30,
+      "branchOf": null,
+      "stations": [
+        "Shin-Aomori",
+        "Okutsugaru-Imabetsu",
+        "Kikonai",
+        "Shin-Hakodate-Hokuto"
+      ],
+      "durations": [
+        7,
+        9,
+        12
+      ],
+      "throughServices": [],
+      "transferStations": [
+        {
+          "station": "Shin-Aomori",
+          "lineId": "OuMain",
+          "type": "in",
+          "note": ""
+        }
+      ],
+      "nameZh": "北海道新干线",
+      "nameKo": "홋카이도 신칸센"
+    },
+    "TokaidoShinkansen": {
+      "name": "TokaidoShinkansen",
+      "nameEn": "Tokaido Shinkansen",
+      "nameJa": "東海道新幹線",
+      "code": "Tokaido",
+      "color": "#00a7e1",
+      "operator": "JR-Central",
+      "region": "Tokai Area",
+      "type": "straight",
+      "image": "../images/鉄道/JR東海/Shinkansen_jrc.png",
+      "durationTotalMin": 145,
+      "branchOf": null,
+      "stations": [
+        "Tokyo",
+        "Shinagawa",
+        "Shin-Yokohama",
+        "Odawara",
+        "Atami",
+        "Mishima",
+        "Shin-Fuji",
+        "Shizuoka",
+        "Kakegawa",
+        "Hamamatsu",
+        "Toyohashi",
+        "Mikawa-Anjo",
+        "Nagoya",
+        "Gifu-Hashima",
+        "Maibara",
+        "Kyoto",
+        "Shin-Osaka"
+      ],
+      "durations": [
+        5,
+        11,
+        13,
+        15,
+        12,
+        10,
+        12,
+        10,
+        12,
+        12,
+        10,
+        12,
+        14,
+        12,
+        14,
+        15
+      ],
+      "throughServices": [],
+      "transferStations": [
+        {
+          "station": "Tokyo",
+          "lineId": "KeihinTohoku",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Tokyo",
+          "lineId": "Yokosuka",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Tokyo",
+          "lineId": "ChuoRapid",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Tokyo",
+          "lineId": "Joban",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Tokyo",
+          "lineId": "Keiyo",
+          "type": "out",
+          "note": "地下深層，徒歩約10分"
+        },
+        {
+          "station": "Tokyo",
+          "lineId": "Takasaki",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Tokyo",
+          "lineId": "Tokaido",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Tokyo",
+          "lineId": "Yamanote",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Tokyo",
+          "lineId": "SobuRapid",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Tokyo",
+          "lineId": "TokaidoMain",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Tokyo",
+          "lineId": "UtsunomiyaJR",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Tokyo",
+          "lineId": "Marunouchi",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Shinagawa",
+          "lineId": "KeihinTohoku",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Shinagawa",
+          "lineId": "Yokosuka",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Shinagawa",
+          "lineId": "Joban",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Shinagawa",
+          "lineId": "Tokaido",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Shinagawa",
+          "lineId": "Keikyu",
+          "type": "out",
+          "note": "京急品川，徒歩約3分"
+        },
+        {
+          "station": "Shinagawa",
+          "lineId": "Yamanote",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Shinagawa",
+          "lineId": "TokaidoMain",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Shin-Yokohama",
+          "lineId": "YokohamaBlue",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Shin-Yokohama",
+          "lineId": "Yokohama",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Shin-Yokohama",
+          "lineId": "SotetsuShin-Yokohama",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Odawara",
+          "lineId": "ShonanShinjuku",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Odawara",
+          "lineId": "Tokaido",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Odawara",
+          "lineId": "Odawara",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Odawara",
+          "lineId": "TokaidoMain",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Atami",
+          "lineId": "Tokaido",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Atami",
+          "lineId": "Ito",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Atami",
+          "lineId": "TokaidoMain",
+          "type": "in",
+          "note": ""
+        }
+      ],
+      "nameZh": "东海道新干线",
+      "nameKo": "도카이도 신칸센"
+    },
+    "SanyoShinkansen": {
+      "name": "SanyoShinkansen",
+      "nameEn": "Sanyo Shinkansen",
+      "nameJa": "山陽新幹線",
+      "code": "Sanyo",
+      "color": "#00b2e5",
+      "operator": "JR-West",
+      "region": "Kansai Area",
+      "type": "straight",
+      "image": "../images/鉄道/JR西日本/Shinkansen_jrw.png",
+      "durationTotalMin": 130,
+      "branchOf": null,
+      "stations": [
+        "Shin-Osaka",
+        "Shin-Kobe",
+        "Himeji",
+        "Aioi-Hyogo",
+        "Okayama",
+        "Shin-Kurashiki",
+        "Fukuyama",
+        "Shin-Onomichi",
+        "Mihara",
+        "Higashi-Hiroshima",
+        "Hiroshima",
+        "Shin-Iwakuni",
+        "Tokuyama",
+        "Shin-Yamaguchi",
+        "Asa",
+        "Shin-Shimonoseki",
+        "Kokura",
+        "Hakata"
+      ],
+      "durations": [
+        12,
+        18,
+        10,
+        14,
+        10,
+        10,
+        10,
+        8,
+        12,
+        12,
+        12,
+        10,
+        10,
+        8,
+        10,
+        10,
+        12
+      ],
+      "throughServices": [],
+      "transferStations": [],
+      "nameZh": "山阳新干线",
+      "nameKo": "산요 신칸센"
+    },
+    "KyushuShinkansen": {
+      "name": "KyushuShinkansen",
+      "nameEn": "Kyushu Shinkansen",
+      "nameJa": "九州新幹線",
+      "code": "Kyushu",
+      "color": "#e60012",
+      "operator": "JR-Kyushu",
+      "region": "Kyushu Area",
+      "type": "straight",
+      "image": "../images/鉄道/JR九州/Shinkansen_jrk.png",
+      "durationTotalMin": 80,
+      "branchOf": null,
+      "stations": [
+        "Hakata",
+        "Shin-Tosu",
+        "Kurume",
+        "Chikugo-Funagoya",
+        "Shin-Omuta",
+        "Shin-Tamana",
+        "Kumamoto",
+        "Shin-Yatsushiro",
+        "Shin-Minamata",
+        "Kagoshima-Izumi",
+        "Satsuma-Sendai",
+        "Kagoshima-Chuo"
+      ],
+      "durations": [
+        8,
+        10,
+        8,
+        8,
+        8,
+        10,
+        12,
+        10,
+        8,
+        10,
+        12
+      ],
+      "throughServices": [],
+      "transferStations": [],
+      "nameZh": "九州新干线",
+      "nameKo": "규슈 신칸센"
+    },
+    "NishiKyushuShinkansen": {
+      "name": "NishiKyushuShinkansen",
+      "nameEn": "Nishi-Kyushu Shinkansen",
+      "nameJa": "西九州新幹線",
+      "code": "NishiKyushu",
+      "color": "#e60012",
+      "operator": "JR-Kyushu",
+      "region": "Kyushu Area",
+      "type": "straight",
+      "image": "../images/鉄道/JR九州/Shinkansen_jrk.png",
+      "durationTotalMin": 20,
+      "branchOf": "KyushuShinkansen",
+      "stations": [
+        "Takeo-Onsen",
+        "Ureshino-Onsen",
+        "Shin-Omura",
+        "Isahaya",
+        "Nagasaki"
+      ],
+      "durations": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "throughServices": [],
+      "transferStations": [],
+      "nameZh": "西九州新干线",
+      "nameKo": "니시규슈 신칸센"
     }
   },
   "name_map": {
@@ -31922,7 +33543,109 @@
     "福岡": "Fukuoka",
     "広島": "Hiroshima",
     "神戸": "Kobe",
-    "仙台": "Sendai"
+    "仙台": "Sendai",
+    "那須塩原": "Nasushiobara",
+    "新白河": "Shin-Shirakawa",
+    "白石蔵王": "Shiroishi-Zao",
+    "古川": "Furukawa",
+    "くりこま高原": "Kurikoma-Kogen",
+    "水沢江刺": "Mizusawa-Esashi",
+    "盛岡": "Morioka",
+    "いわて沼宮内": "Iwate-Numakunai",
+    "二戸": "Ninohe",
+    "七戸十和田": "Shichinohe-Towada",
+    "新青森": "Shin-Aomori",
+    "本庄早稲田": "Honjo-Waseda",
+    "上毛高原": "Jomo-Kogen",
+    "安中榛名": "Annaka-Haruna",
+    "軽井沢": "Karuizawa",
+    "佐久平": "Sakudaira",
+    "長野": "Nagano",
+    "飯山": "Iiyama",
+    "妙高高原": "Myoko-Kogen",
+    "糸魚川": "Itoigawa",
+    "黒部宇奈月温泉": "Kurobe-Unazukionsen",
+    "富山": "Toyama",
+    "新高岡": "Shin-Takaoka",
+    "金沢": "Kanazawa",
+    "小松": "Komatsu",
+    "加賀温泉": "Kaga-Onsen",
+    "芦原温泉": "Awara-Onsen",
+    "福井": "Fukui-Echizen",
+    "越前たけふ": "Echizen-Takefu",
+    "敦賀": "Tsuruga",
+    "寒河江": "Sagae",
+    "新庄": "Shinjo",
+    "雫石": "Shizukuishi",
+    "田沢湖": "Tazawako",
+    "角館": "Kakunodate",
+    "大曲": "Omagari",
+    "秋田": "Akita",
+    "奥津軽いまべつ": "Okutsugaru-Imabetsu",
+    "木古内": "Kikonai",
+    "新函館北斗": "Shin-Hakodate-Hokuto",
+    "三島": "Mishima",
+    "新富士": "Shin-Fuji",
+    "静岡": "Shizuoka",
+    "掛川": "Kakegawa",
+    "浜松": "Hamamatsu",
+    "豊橋": "Toyohashi",
+    "三河安城": "Mikawa-Anjo",
+    "岐阜羽島": "Gifu-Hashima",
+    "米原": "Maibara",
+    "新大阪": "Shin-Osaka",
+    "新神戸": "Shin-Kobe",
+    "姫路": "Himeji",
+    "相生": "Aioi-Hyogo",
+    "岡山": "Okayama",
+    "新倉敷": "Shin-Kurashiki",
+    "福山": "Fukuyama",
+    "新尾道": "Shin-Onomichi",
+    "三原": "Mihara",
+    "東広島": "Higashi-Hiroshima",
+    "新岩国": "Shin-Iwakuni",
+    "徳山": "Tokuyama",
+    "新山口": "Shin-Yamaguchi",
+    "厚狭": "Asa",
+    "新下関": "Shin-Shimonoseki",
+    "小倉": "Kokura",
+    "博多": "Hakata",
+    "新鳥栖": "Shin-Tosu",
+    "久留米": "Kurume",
+    "筑後船小屋": "Chikugo-Funagoya",
+    "新大牟田": "Shin-Omuta",
+    "新玉名": "Shin-Tamana",
+    "熊本": "Kumamoto",
+    "新八代": "Shin-Yatsushiro",
+    "新水俣": "Shin-Minamata",
+    "出水": "Kagoshima-Izumi",
+    "川内": "Satsuma-Sendai",
+    "鹿児島中央": "Kagoshima-Chuo",
+    "武雄温泉": "Takeo-Onsen",
+    "嬉野温泉": "Ureshino-Onsen",
+    "新大村": "Shin-Omura",
+    "諫早": "Isahaya",
+    "村山": "Murayama",
+    "大石田": "Oishida",
+    "郡山": "Koriyama",
+    "福島": "Fukushima",
+    "一ノ関": "Ichinoseki",
+    "北上": "Kitakami",
+    "新花巻": "Shin-Hanamaki",
+    "八戸": "Hachinohe",
+    "越後湯沢": "Echigo-Yuzawa",
+    "浦佐": "Urasa",
+    "長岡": "Nagaoka",
+    "燕三条": "Tsubame-Sanjo",
+    "新潟": "Niigata",
+    "米沢": "Yonezawa",
+    "高畠": "Takahata",
+    "赤湯": "Akayu",
+    "かみのやま温泉": "Kaminoyama-Onsen",
+    "山形": "Yamagata",
+    "天童": "Tendo",
+    "さくらんぼ東根": "Sakuranbo-Higashine",
+    "上田": "Ueda"
   },
   "stationLines": {
     "Omiya": [
@@ -31934,7 +33657,9 @@
       "Noda",
       "NewShuttle",
       "UtsunomiyaJR",
-      "UenoTokyo"
+      "UenoTokyo",
+      "TohokuShinkansen",
+      "JoetsuShinkansen"
     ],
     "Saitama-Shintoshin": [
       "KeihinTohoku",
@@ -32015,7 +33740,8 @@
       "Yamanote",
       "UtsunomiyaJR",
       "JobanLocal",
-      "UenoTokyo"
+      "UenoTokyo",
+      "TohokuShinkansen"
     ],
     "Okachimachi": [
       "KeihinTohoku",
@@ -32048,7 +33774,9 @@
       "Yamanote",
       "TokaidoMain",
       "UtsunomiyaJR",
-      "UenoTokyo"
+      "UenoTokyo",
+      "TohokuShinkansen",
+      "TokaidoShinkansen"
     ],
     "Yurakucho": [
       "KeihinTohoku",
@@ -32090,7 +33818,8 @@
       "Keikyu",
       "Yamanote",
       "TokaidoMain",
-      "UenoTokyo"
+      "UenoTokyo",
+      "TokaidoShinkansen"
     ],
     "Oimachi": [
       "Rinkai",
@@ -32602,7 +34331,8 @@
       "ShonanShinjuku",
       "Tokaido",
       "Odawara",
-      "TokaidoMain"
+      "TokaidoMain",
+      "TokaidoShinkansen"
     ],
     "Oku": [
       "Takasaki",
@@ -32636,7 +34366,8 @@
       "Takasaki"
     ],
     "Kumagaya": [
-      "Takasaki"
+      "Takasaki",
+      "JoetsuShinkansen"
     ],
     "Kagohara": [
       "Takasaki"
@@ -32665,7 +34396,9 @@
       "Joetsu",
       "Shinetsu",
       "Hachiko",
-      "Ryomo"
+      "Ryomo",
+      "JoetsuShinkansen",
+      "HokurikuShinkansen"
     ],
     "Kokudo": [
       "Tsurumi"
@@ -32770,7 +34503,8 @@
     "Atami": [
       "Tokaido",
       "Ito",
-      "TokaidoMain"
+      "TokaidoMain",
+      "TokaidoShinkansen"
     ],
     "Ayase": [
       "JobanLocal",
@@ -33798,7 +35532,8 @@
     "Shin-Yokohama": [
       "YokohamaBlue",
       "Yokohama",
-      "SotetsuShin-Yokohama"
+      "SotetsuShin-Yokohama",
+      "TokaidoShinkansen"
     ],
     "Kita-shin-yokohama": [
       "YokohamaBlue"
@@ -34746,7 +36481,8 @@
     "Koriyama": [
       "BanetsuEast",
       "BanetsuWest",
-      "TohokuMain"
+      "TohokuMain",
+      "TohokuShinkansen"
     ],
     "Koriyama-Tomita": [
       "BanetsuWest"
@@ -35013,7 +36749,8 @@
     "Niigata": [
       "Echigo",
       "Hakushin",
-      "Shinetsu"
+      "Shinetsu",
+      "JoetsuShinkansen"
     ],
     "Higashi-Noshiro": [
       "Gono",
@@ -35149,7 +36886,8 @@
       "OuMain"
     ],
     "Hachinohe": [
-      "Hachinohe"
+      "Hachinohe",
+      "TohokuShinkansen"
     ],
     "Nasho": [
       "Hachinohe"
@@ -35277,7 +37015,8 @@
       "Iiyama"
     ],
     "Iiyama": [
-      "Iiyama"
+      "Iiyama",
+      "HokurikuShinkansen"
     ],
     "Kita-Iiyama": [
       "Iiyama"
@@ -35536,7 +37275,8 @@
       "Joetsu"
     ],
     "Echigo-Yuzawa": [
-      "Joetsu"
+      "Joetsu",
+      "JoetsuShinkansen"
     ],
     "Ishiuchi": [
       "Joetsu"
@@ -35551,7 +37291,8 @@
       "Joetsu"
     ],
     "Urasa": [
-      "Joetsu"
+      "Joetsu",
+      "JoetsuShinkansen"
     ],
     "Yairo": [
       "Joetsu"
@@ -35584,7 +37325,8 @@
       "Kamaishi"
     ],
     "Shin-Hanamaki": [
-      "Kamaishi"
+      "Kamaishi",
+      "TohokuShinkansen"
     ],
     "Oyamadai": [
       "TokyuOimachi"
@@ -36262,7 +38004,8 @@
     "Oyama": [
       "Mito",
       "Ryomo",
-      "UtsunomiyaJR"
+      "UtsunomiyaJR",
+      "TohokuShinkansen"
     ],
     "Higashi-Yuki": [
       "Mito"
@@ -36306,7 +38049,8 @@
       "Shinetsu"
     ],
     "Tsubame-Sanjo": [
-      "Miyo"
+      "Miyo",
+      "JoetsuShinkansen"
     ],
     "Yahiko": [
       "Miyo"
@@ -36434,7 +38178,8 @@
     ],
     "Ichinoseki": [
       "Ofunato",
-      "TohokuMain"
+      "TohokuMain",
+      "TohokuShinkansen"
     ],
     "Mataki": [
       "Ofunato"
@@ -36625,7 +38370,9 @@
     ],
     "Fukushima": [
       "TohokuMain",
-      "Yamagata"
+      "Yamagata",
+      "TohokuShinkansen",
+      "YamagataShinkansen"
     ],
     "Niwasaka": [
       "Yamagata"
@@ -36641,16 +38388,19 @@
     ],
     "Yonezawa": [
       "Yamagata",
-      "Yonezawa"
+      "Yonezawa",
+      "YamagataShinkansen"
     ],
     "Okitama": [
       "Yamagata"
     ],
     "Takahata": [
-      "Yamagata"
+      "Yamagata",
+      "YamagataShinkansen"
     ],
     "Akayu": [
-      "Yamagata"
+      "Yamagata",
+      "YamagataShinkansen"
     ],
     "Nakagawa": [
       "Yamagata"
@@ -36659,11 +38409,13 @@
       "Yamagata"
     ],
     "Kaminoyama-Onsen": [
-      "Yamagata"
+      "Yamagata",
+      "YamagataShinkansen"
     ],
     "Yamagata": [
       "Senzan",
-      "Yamagata"
+      "Yamagata",
+      "YamagataShinkansen"
     ],
     "Kita-Yamagata": [
       "Senzan",
@@ -36683,25 +38435,29 @@
       "Yamagata"
     ],
     "Tendo": [
-      "Yamagata"
+      "Yamagata",
+      "YamagataShinkansen"
     ],
     "Midaregawa": [
       "Yamagata"
     ],
     "Sakuranbo-Higashine": [
-      "Yamagata"
+      "Yamagata",
+      "YamagataShinkansen"
     ],
     "Higashine": [
       "Yamagata"
     ],
     "Murayama": [
-      "Yamagata"
+      "Yamagata",
+      "YamagataShinkansen"
     ],
     "Sodesaki": [
       "Yamagata"
     ],
     "Oishida": [
-      "Yamagata"
+      "Yamagata",
+      "YamagataShinkansen"
     ],
     "Kita-Oishida": [
       "Yamagata"
@@ -36716,7 +38472,8 @@
       "OuMain",
       "RikutoEast",
       "RikutsuWest",
-      "Yamagata"
+      "Yamagata",
+      "YamagataShinkansen"
     ],
     "Izumita": [
       "OuMain"
@@ -36771,7 +38528,8 @@
     ],
     "Omagari": [
       "OuMain",
-      "Tazawako"
+      "Tazawako",
+      "AkitaShinkansen"
     ],
     "Jinguji": [
       "OuMain"
@@ -36796,7 +38554,8 @@
     ],
     "Akita": [
       "OuMain",
-      "Uetsu"
+      "Uetsu",
+      "AkitaShinkansen"
     ],
     "Izumi-Sotoasahikawa": [
       "OuMain"
@@ -36896,7 +38655,9 @@
       "OuMain"
     ],
     "Shin-Aomori": [
-      "OuMain"
+      "OuMain",
+      "TohokuShinkansen",
+      "HokkaidoShinkansen"
     ],
     "Aomori": [
       "OuMain",
@@ -36909,7 +38670,8 @@
       "RikutoEast"
     ],
     "Furukawa": [
-      "RikutoEast"
+      "RikutoEast",
+      "TohokuShinkansen"
     ],
     "Tsukume": [
       "RikutoEast"
@@ -37092,7 +38854,9 @@
     "Morioka": [
       "Yamada",
       "Tazawako",
-      "TohokuMain"
+      "TohokuMain",
+      "TohokuShinkansen",
+      "AkitaShinkansen"
     ],
     "Kami-Morioka": [
       "Yamada"
@@ -37150,7 +38914,8 @@
       "Senseki",
       "SensekiTohoku",
       "Senzan",
-      "TohokuMain"
+      "TohokuMain",
+      "TohokuShinkansen"
     ],
     "Tsutsujigaoka-2": [
       "Senseki"
@@ -37328,7 +39093,8 @@
       "Shinetsu"
     ],
     "Nagano": [
-      "Shinetsu"
+      "Shinetsu",
+      "HokurikuShinkansen"
     ],
     "Naoetsu": [
       "Shinetsu"
@@ -37393,7 +39159,8 @@
     ],
     "Nagaoka": [
       "Shinetsu",
-      "Joetsu"
+      "Joetsu",
+      "JoetsuShinkansen"
     ],
     "Kita-Nagaoka": [
       "Shinetsu"
@@ -37614,7 +39381,8 @@
       "Tazawako"
     ],
     "Shizukuishi": [
-      "Tazawako"
+      "Tazawako",
+      "AkitaShinkansen"
     ],
     "Haruki": [
       "Tazawako"
@@ -37626,7 +39394,8 @@
       "Tazawako"
     ],
     "Tazawako": [
-      "Tazawako"
+      "Tazawako",
+      "AkitaShinkansen"
     ],
     "Sasimaki": [
       "Tazawako"
@@ -37672,7 +39441,8 @@
       "TohokuMain"
     ],
     "Shin-Shirakawa": [
-      "TohokuMain"
+      "TohokuMain",
+      "TohokuShinkansen"
     ],
     "Shirakawa": [
       "TohokuMain"
@@ -37829,7 +39599,8 @@
     ],
     "Kitakami": [
       "TohokuMain",
-      "Kitakami"
+      "Kitakami",
+      "TohokuShinkansen"
     ],
     "Murasakino": [
       "TohokuMain"
@@ -39353,7 +41124,8 @@
       "JobanMain"
     ],
     "Ueda": [
-      "JobanMain"
+      "JobanMain",
+      "HokurikuShinkansen"
     ],
     "Izumi": [
       "JobanMain"
@@ -39796,7 +41568,8 @@
       "UtsunomiyaJR"
     ],
     "Utsunomiya": [
-      "UtsunomiyaJR"
+      "UtsunomiyaJR",
+      "TohokuShinkansen"
     ],
     "Uzen-Zennami": [
       "RikutsuWest"
@@ -39938,6 +41711,227 @@
     ],
     "Okawadai": [
       "Tsugaru"
+    ],
+    "Nasushiobara": [
+      "TohokuShinkansen"
+    ],
+    "Shiroishi-Zao": [
+      "TohokuShinkansen"
+    ],
+    "Kurikoma-Kogen": [
+      "TohokuShinkansen"
+    ],
+    "Mizusawa-Esashi": [
+      "TohokuShinkansen"
+    ],
+    "Iwate-Numakunai": [
+      "TohokuShinkansen"
+    ],
+    "Ninohe": [
+      "TohokuShinkansen"
+    ],
+    "Shichinohe-Towada": [
+      "TohokuShinkansen"
+    ],
+    "Honjo-Waseda": [
+      "JoetsuShinkansen"
+    ],
+    "Jomo-Kogen": [
+      "JoetsuShinkansen"
+    ],
+    "Annaka-Haruna": [
+      "HokurikuShinkansen"
+    ],
+    "Karuizawa": [
+      "HokurikuShinkansen"
+    ],
+    "Sakudaira": [
+      "HokurikuShinkansen"
+    ],
+    "Myoko-Kogen": [
+      "HokurikuShinkansen"
+    ],
+    "Itoigawa": [
+      "HokurikuShinkansen"
+    ],
+    "Kurobe-Unazukionsen": [
+      "HokurikuShinkansen"
+    ],
+    "Toyama": [
+      "HokurikuShinkansen"
+    ],
+    "Shin-Takaoka": [
+      "HokurikuShinkansen"
+    ],
+    "Kanazawa": [
+      "HokurikuShinkansen"
+    ],
+    "Komatsu": [
+      "HokurikuShinkansen"
+    ],
+    "Kaga-Onsen": [
+      "HokurikuShinkansen"
+    ],
+    "Awara-Onsen": [
+      "HokurikuShinkansen"
+    ],
+    "Fukui-Echizen": [
+      "HokurikuShinkansen"
+    ],
+    "Echizen-Takefu": [
+      "HokurikuShinkansen"
+    ],
+    "Tsuruga": [
+      "HokurikuShinkansen"
+    ],
+    "Kakunodate": [
+      "AkitaShinkansen"
+    ],
+    "Okutsugaru-Imabetsu": [
+      "HokkaidoShinkansen"
+    ],
+    "Kikonai": [
+      "HokkaidoShinkansen"
+    ],
+    "Shin-Hakodate-Hokuto": [
+      "HokkaidoShinkansen"
+    ],
+    "Mishima": [
+      "TokaidoShinkansen"
+    ],
+    "Shin-Fuji": [
+      "TokaidoShinkansen"
+    ],
+    "Shizuoka": [
+      "TokaidoShinkansen"
+    ],
+    "Kakegawa": [
+      "TokaidoShinkansen"
+    ],
+    "Hamamatsu": [
+      "TokaidoShinkansen"
+    ],
+    "Toyohashi": [
+      "TokaidoShinkansen"
+    ],
+    "Mikawa-Anjo": [
+      "TokaidoShinkansen"
+    ],
+    "Nagoya": [
+      "TokaidoShinkansen"
+    ],
+    "Gifu-Hashima": [
+      "TokaidoShinkansen"
+    ],
+    "Maibara": [
+      "TokaidoShinkansen"
+    ],
+    "Kyoto": [
+      "TokaidoShinkansen"
+    ],
+    "Shin-Osaka": [
+      "TokaidoShinkansen",
+      "SanyoShinkansen"
+    ],
+    "Shin-Kobe": [
+      "SanyoShinkansen"
+    ],
+    "Himeji": [
+      "SanyoShinkansen"
+    ],
+    "Aioi-Hyogo": [
+      "SanyoShinkansen"
+    ],
+    "Okayama": [
+      "SanyoShinkansen"
+    ],
+    "Shin-Kurashiki": [
+      "SanyoShinkansen"
+    ],
+    "Fukuyama": [
+      "SanyoShinkansen"
+    ],
+    "Shin-Onomichi": [
+      "SanyoShinkansen"
+    ],
+    "Mihara": [
+      "SanyoShinkansen"
+    ],
+    "Higashi-Hiroshima": [
+      "SanyoShinkansen"
+    ],
+    "Hiroshima": [
+      "SanyoShinkansen"
+    ],
+    "Shin-Iwakuni": [
+      "SanyoShinkansen"
+    ],
+    "Tokuyama": [
+      "SanyoShinkansen"
+    ],
+    "Shin-Yamaguchi": [
+      "SanyoShinkansen"
+    ],
+    "Asa": [
+      "SanyoShinkansen"
+    ],
+    "Shin-Shimonoseki": [
+      "SanyoShinkansen"
+    ],
+    "Kokura": [
+      "SanyoShinkansen"
+    ],
+    "Hakata": [
+      "SanyoShinkansen",
+      "KyushuShinkansen"
+    ],
+    "Shin-Tosu": [
+      "KyushuShinkansen"
+    ],
+    "Kurume": [
+      "KyushuShinkansen"
+    ],
+    "Chikugo-Funagoya": [
+      "KyushuShinkansen"
+    ],
+    "Shin-Omuta": [
+      "KyushuShinkansen"
+    ],
+    "Shin-Tamana": [
+      "KyushuShinkansen"
+    ],
+    "Kumamoto": [
+      "KyushuShinkansen"
+    ],
+    "Shin-Yatsushiro": [
+      "KyushuShinkansen"
+    ],
+    "Shin-Minamata": [
+      "KyushuShinkansen"
+    ],
+    "Kagoshima-Izumi": [
+      "KyushuShinkansen"
+    ],
+    "Satsuma-Sendai": [
+      "KyushuShinkansen"
+    ],
+    "Kagoshima-Chuo": [
+      "KyushuShinkansen"
+    ],
+    "Takeo-Onsen": [
+      "NishiKyushuShinkansen"
+    ],
+    "Ureshino-Onsen": [
+      "NishiKyushuShinkansen"
+    ],
+    "Shin-Omura": [
+      "NishiKyushuShinkansen"
+    ],
+    "Isahaya": [
+      "NishiKyushuShinkansen"
+    ],
+    "Nagasaki": [
+      "NishiKyushuShinkansen"
     ]
   },
   "lineStationOrder": {
@@ -43392,6 +45386,151 @@
       "Okuma": 54,
       "Iwanuma": 55,
       "Sendai": 56
+    },
+    "TohokuShinkansen": {
+      "Tokyo": 0,
+      "Ueno": 1,
+      "Omiya": 2,
+      "Oyama": 3,
+      "Utsunomiya": 4,
+      "Nasushiobara": 5,
+      "Shin-Shirakawa": 6,
+      "Koriyama": 7,
+      "Fukushima": 8,
+      "Shiroishi-Zao": 9,
+      "Sendai": 10,
+      "Furukawa": 11,
+      "Kurikoma-Kogen": 12,
+      "Ichinoseki": 13,
+      "Mizusawa-Esashi": 14,
+      "Kitakami": 15,
+      "Shin-Hanamaki": 16,
+      "Morioka": 17,
+      "Iwate-Numakunai": 18,
+      "Ninohe": 19,
+      "Hachinohe": 20,
+      "Shichinohe-Towada": 21,
+      "Shin-Aomori": 22
+    },
+    "JoetsuShinkansen": {
+      "Omiya": 0,
+      "Kumagaya": 1,
+      "Honjo-Waseda": 2,
+      "Takasaki": 3,
+      "Jomo-Kogen": 4,
+      "Echigo-Yuzawa": 5,
+      "Urasa": 6,
+      "Nagaoka": 7,
+      "Tsubame-Sanjo": 8,
+      "Niigata": 9
+    },
+    "HokurikuShinkansen": {
+      "Takasaki": 0,
+      "Annaka-Haruna": 1,
+      "Karuizawa": 2,
+      "Sakudaira": 3,
+      "Ueda": 4,
+      "Nagano": 5,
+      "Iiyama": 6,
+      "Myoko-Kogen": 7,
+      "Itoigawa": 8,
+      "Kurobe-Unazukionsen": 9,
+      "Toyama": 10,
+      "Shin-Takaoka": 11,
+      "Kanazawa": 12,
+      "Komatsu": 13,
+      "Kaga-Onsen": 14,
+      "Awara-Onsen": 15,
+      "Fukui-Echizen": 16,
+      "Echizen-Takefu": 17,
+      "Tsuruga": 18
+    },
+    "YamagataShinkansen": {
+      "Fukushima": 0,
+      "Yonezawa": 1,
+      "Takahata": 2,
+      "Akayu": 3,
+      "Kaminoyama-Onsen": 4,
+      "Yamagata": 5,
+      "Tendo": 6,
+      "Sakuranbo-Higashine": 7,
+      "Murayama": 8,
+      "Oishida": 9,
+      "Shinjo": 10
+    },
+    "AkitaShinkansen": {
+      "Morioka": 0,
+      "Shizukuishi": 1,
+      "Tazawako": 2,
+      "Kakunodate": 3,
+      "Omagari": 4,
+      "Akita": 5
+    },
+    "HokkaidoShinkansen": {
+      "Shin-Aomori": 0,
+      "Okutsugaru-Imabetsu": 1,
+      "Kikonai": 2,
+      "Shin-Hakodate-Hokuto": 3
+    },
+    "TokaidoShinkansen": {
+      "Tokyo": 0,
+      "Shinagawa": 1,
+      "Shin-Yokohama": 2,
+      "Odawara": 3,
+      "Atami": 4,
+      "Mishima": 5,
+      "Shin-Fuji": 6,
+      "Shizuoka": 7,
+      "Kakegawa": 8,
+      "Hamamatsu": 9,
+      "Toyohashi": 10,
+      "Mikawa-Anjo": 11,
+      "Nagoya": 12,
+      "Gifu-Hashima": 13,
+      "Maibara": 14,
+      "Kyoto": 15,
+      "Shin-Osaka": 16
+    },
+    "SanyoShinkansen": {
+      "Shin-Osaka": 0,
+      "Shin-Kobe": 1,
+      "Himeji": 2,
+      "Aioi-Hyogo": 3,
+      "Okayama": 4,
+      "Shin-Kurashiki": 5,
+      "Fukuyama": 6,
+      "Shin-Onomichi": 7,
+      "Mihara": 8,
+      "Higashi-Hiroshima": 9,
+      "Hiroshima": 10,
+      "Shin-Iwakuni": 11,
+      "Tokuyama": 12,
+      "Shin-Yamaguchi": 13,
+      "Asa": 14,
+      "Shin-Shimonoseki": 15,
+      "Kokura": 16,
+      "Hakata": 17
+    },
+    "KyushuShinkansen": {
+      "Hakata": 0,
+      "Shin-Tosu": 1,
+      "Kurume": 2,
+      "Chikugo-Funagoya": 3,
+      "Shin-Omuta": 4,
+      "Shin-Tamana": 5,
+      "Kumamoto": 6,
+      "Shin-Yatsushiro": 7,
+      "Shin-Minamata": 8,
+      "Kagoshima-Izumi": 9,
+      "Satsuma-Sendai": 10,
+      "Kagoshima-Chuo": 11
+    },
+    "NishiKyushuShinkansen": {
+      "Takeo-Onsen": 0,
+      "Ureshino-Onsen": 1,
+      "Shin-Omura": 2,
+      "Isahaya": 3,
+      "Nagasaki": 4
     }
   },
   "line_types": {
