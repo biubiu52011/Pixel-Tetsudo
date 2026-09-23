@@ -534,6 +534,8 @@ var LINE_ICON_OVERRIDES = [
     "埼玉新都市交通2000系（05編成）": "../images/列车/埼玉新都市交通/2000系（05編成）.png",
     "埼玉新都市交通2000系（06編成）": "../images/列车/埼玉新都市交通/2000系（06編成）.png",
     "埼玉新都市交通2000系（07編成）": "../images/列车/埼玉新都市交通/2000系（07編成）.png",
+    "相模鉄道13000系": "../images/列车/相模鉄道/13000系.png",
+    "相模鉄道11000系（新塗装）": "../images/列车/相模鉄道/11000系（新塗装）.png",
     "埼玉高速鉄道2000形": "../images/列车/埼玉高速鉄道/2000形.png",
     "多摩都市モノレール1000系": "../images/列车/多摩都市モノレール/1000系.png",
     "多摩都市モノレール1000系（別2）": "../images/列车/多摩都市モノレール/1000系（別2）.png",
@@ -856,7 +858,11 @@ var LINE_ICON_OVERRIDES = [
     "OdakyuTama": { "2000形": "小田急電鉄2000形" },
     "Odawara": { "2000形": "小田急電鉄2000形" },
     "TokyoMonorail": { "2000形": "東京モノレール2000形" },
-    "SaitamaRailway": { "2000形": "埼玉高速鉄道2000形" }
+    "SaitamaRailway": { "2000形": "埼玉高速鉄道2000形" },
+    // v4.3.979: 相鉄系裸 key 被東武/メトロ抢占——按线路指向相鉄 key（素材未注册时兜底线路默认，不显示别社图标）
+    "SotetsuMain": { "8000系": "相鉄8000系", "9000系": "相鉄9000系", "21000系": "相鉄21000系", "相鉄21000系": "相鉄21000系", "相鉄20000系": "相鉄20000系" },
+    "SotetsuIzumino": { "8000系": "相鉄8000系", "9000系": "相鉄9000系", "21000系": "相鉄21000系", "相鉄21000系": "相鉄21000系", "相鉄20000系": "相鉄20000系" },
+    "SotetsuShin-Yokohama": { "8000系": "相鉄8000系", "9000系": "相鉄9000系", "21000系": "相鉄21000系", "相鉄21000系": "相鉄21000系", "相鉄20000系": "相鉄20000系" }
   }
 
   var VEHICLE_NAME_ALIASES = {
@@ -918,9 +924,8 @@ var LINE_ICON_OVERRIDES = [
     "20000形": "20000系",
     "50000形": "50000系",
     "9020系": "9000系",
-    "相鉄20000系": "20000系",
     "相鉄新7000系": "7000系",
-    "相鉄12000系": "13000系",
+    "相鉄12000系": "相模鉄道13000系",
     "7500系（7000系は全廃）": "7500系",
     "東急5050系": "5050系",
     "5050系4000番台": "5050系",
@@ -1056,6 +1061,8 @@ var LINE_ICON_OVERRIDES = [
     "かがやき": "E7系",
     "とき": "E7系",
     "はくたか": "E7系",
+    "あさま": "E7系",
+    "つるぎ": "E7系",
     "E8系": "E8系つばさ",
     "つばさ": "E8系つばさ",
     "H5系はやぶさ": "H5系",
@@ -2752,6 +2759,8 @@ function resolveVehicleIcon(candidatesStr, lineId) {
       var name = parts[i].trim();
       if (!name) continue;
       // 0. 线路感知同名解抢（v4.3.977）：同名车型被别社抢占时，按线路优先取专属图标
+      // v4.3.979: 覆盖为「锁定」语义——线路有该车型映射条目时，目标图标未注册则返回 null
+      //           （走 S4 线路默认兜底），绝不落回别社同名图标
       if (lineId && LINE_VEHICLE_OVERRIDES[lineId]) {
         var _ov = LINE_VEHICLE_OVERRIDES[lineId];
         var _ovt = _ov[name];
@@ -2759,7 +2768,10 @@ function resolveVehicleIcon(candidatesStr, lineId) {
           var _ovb = name.replace(/（[^）]*）/g, "").replace(/\([^)]*\)/g, "").trim();
           _ovt = _ov[_ovb];
         }
-        if (_ovt && VEHICLE_NAME_TO_ICON[_ovt]) return VEHICLE_NAME_TO_ICON[_ovt];
+        if (_ovt) {
+          if (VEHICLE_NAME_TO_ICON[_ovt]) return VEHICLE_NAME_TO_ICON[_ovt];
+          return null;
+        }
       }
       // 1. 精确匹配
       if (VEHICLE_NAME_TO_ICON[name]) return VEHICLE_NAME_TO_ICON[name];
