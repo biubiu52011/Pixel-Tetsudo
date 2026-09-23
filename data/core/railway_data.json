@@ -43061,5 +43061,29 @@
       "Iwanuma": 55,
       "Sendai": 56
     }
+  },
+  "line_types": {
+    "ChuoRapid": "rapid",
+    "SobuRapid": "rapid",
+    "Joban": "rapid",
+    "JobanLocal": "local",
+    "Saikyo": "rapid",
+    "ShonanShinjuku": "rapid",
+    "Tokaido": "rapid",
+    "Yokosuka": "rapid",
+    "Utsunomiya": "rapid",
+    "Takasaki": "rapid",
+    "KeihinTohoku": "rapid",
+    "Yamanote": "local",
+    "Ome": "rapid",
+    "Itsukaichi": "rapid",
+    "Kawagoe": "rapid",
+    "KawagoeWest": "rapid",
+    "Nambu": "rapid",
+    "Yokohama": "rapid",
+    "Musashino": "rapid",
+    "Keiyo": "rapid",
+    "ChuoSobuLocal": "local",
+    "Negishi": "rapid"
   }
 }

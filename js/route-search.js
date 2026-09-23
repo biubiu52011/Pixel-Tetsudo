@@ -393,15 +393,8 @@
   /**
    * Convert a BFS route result into RouteSegment[] array.
    */
-  // 運行系統が示す種別（保守的マッピング：確実な系統のみ表示、他は null）
-  const TRAIN_TYPE_BY_LINE = {
-    ChuoRapid: "rapid", SobuRapid: "rapid", Joban: "rapid", JobanLocal: "local",
-    Saikyo: "rapid", ShonanShinjuku: "rapid", Tokaido: "rapid", Yokosuka: "rapid",
-    Utsunomiya: "rapid", Takasaki: "rapid", KeihinTohoku: "rapid", Yamanote: "local",
-    Ome: "rapid", Itsukaichi: "rapid", Kawagoe: "rapid", KawagoeWest: "rapid",
-    Nambu: "rapid", Yokohama: "rapid", Musashino: "rapid", Keiyo: "rapid",
-    ChuoSobuLocal: "local", Negishi: "rapid"
-  };
+  // v4.3.947: 列车类型映射从数据层 line_types 读取（不再硬编码）
+  const TRAIN_TYPE_BY_LINE = (window.RailwayDB && window.RailwayDB.getData && window.RailwayDB.getData().line_types) || {};
 
   function buildRouteSegments(route) {
     if (!route || !route.lineInfo || route.lineInfo.length === 0) return [];
