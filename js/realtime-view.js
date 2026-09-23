@@ -122,20 +122,41 @@
     causeSection.querySelector(".rs-section-title").textContent = _detailTitles[(window.currentLang || "ja")] || "運行情報";
     var causeHtml;
     var _transSource = "";
+    // v4.3.964: 正文只展示文字——原文中的 URL 提取为 links（下方渲染为可点击链接），不碎片化解析
+    var _srcText = delayInfo.detail || cause || "";
+    var _exLinks = [];
+    var _cleanSrc = _srcText;
+    if (window.RunInfoAPI && typeof window.RunInfoAPI.extractLinks === "function") {
+      try {
+        var _ex = window.RunInfoAPI.extractLinks(_srcText);
+        _cleanSrc = _ex.cleanText;
+        _exLinks = _ex.links || [];
+      } catch(e) {}
+    }
     if (status === "loading") {
       causeHtml = '<span class="rs-text-muted">' + t("status.loading") + '</span>';
     } else if (status === "no_data" || status === "no_odpt") {
       causeHtml = '<span class="rs-text-muted">' + t("status.no_data") + '</span>';
-    } else if (delayInfo.detail) {
-      _transSource = delayInfo.detail;
-      causeHtml = _translatedText(delayInfo.detail, window.currentLang || "ja", { cause: cause, status: status, lineId: lineId });
-    } else if (cause) {
-      _transSource = cause;
-      causeHtml = _translatedText(cause, window.currentLang || "ja", { cause: cause, status: status, lineId: lineId });
+    } else if (_cleanSrc) {
+      _transSource = _cleanSrc;
+      causeHtml = _translatedText(_cleanSrc, window.currentLang || "ja", { cause: cause, status: status, lineId: lineId });
     } else {
       causeHtml = '<span class="rs-text-muted">' + t("status.none") + '</span>';
     }
     causeSection.querySelector(".rs-cause-text").innerHTML = causeHtml;
+    // v4.3.964: 原文中提取的 URL 渲染为可点击链接行（正文保持纯文字）
+    if (_exLinks.length > 0) {
+      try {
+        var _linksWrap = document.createElement("div");
+        _linksWrap.className = "rs-cause-links";
+        var _lh = "";
+        for (var _i = 0; _i < _exLinks.length; _i++) {
+          _lh += '<a class="rs-cause-link" href="' + escapeHtml(_exLinks[_i]) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(_exLinks[_i]) + '</a>';
+        }
+        _linksWrap.innerHTML = _lh;
+        causeSection.appendChild(_linksWrap);
+      } catch(e) {}
+    }
     // Updated time section
     var updatedSection = modal.querySelector(".rs-updated-section");
     updatedSection.querySelector(".rs-info-label").textContent = t("status.updated");
