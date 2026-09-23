@@ -31175,9 +31175,14 @@
       "region": "Hokuriku Area",
       "type": "straight",
       "image": "../images/鉄道/JR東日本/Shinkansen_jre.png",
-      "durationTotalMin": 145,
+      "durationTotalMin": 233,
       "branchOf": null,
       "stations": [
+        "Tokyo",
+        "Ueno",
+        "Omiya",
+        "Kumagaya",
+        "Honjo-Waseda",
         "Takasaki",
         "Annaka-Haruna",
         "Karuizawa",
@@ -31199,6 +31204,11 @@
         "Tsuruga"
       ],
       "durations": [
+        6,
+        20,
+        13,
+        9,
+        10,
         8,
         12,
         11,
@@ -33663,7 +33673,8 @@
       "UtsunomiyaJR",
       "UenoTokyo",
       "TohokuShinkansen",
-      "JoetsuShinkansen"
+      "JoetsuShinkansen",
+      "HokurikuShinkansen"
     ],
     "Saitama-Shintoshin": [
       "KeihinTohoku",
@@ -33746,7 +33757,8 @@
       "JobanLocal",
       "UenoTokyo",
       "TohokuShinkansen",
-      "JoetsuShinkansen"
+      "JoetsuShinkansen",
+      "HokurikuShinkansen"
     ],
     "Okachimachi": [
       "KeihinTohoku",
@@ -33782,7 +33794,8 @@
       "UenoTokyo",
       "TohokuShinkansen",
       "TokaidoShinkansen",
-      "JoetsuShinkansen"
+      "JoetsuShinkansen",
+      "HokurikuShinkansen"
     ],
     "Yurakucho": [
       "KeihinTohoku",
@@ -34373,7 +34386,8 @@
     ],
     "Kumagaya": [
       "Takasaki",
-      "JoetsuShinkansen"
+      "JoetsuShinkansen",
+      "HokurikuShinkansen"
     ],
     "Kagohara": [
       "Takasaki"
@@ -41740,7 +41754,8 @@
       "TohokuShinkansen"
     ],
     "Honjo-Waseda": [
-      "JoetsuShinkansen"
+      "JoetsuShinkansen",
+      "HokurikuShinkansen"
     ],
     "Jomo-Kogen": [
       "JoetsuShinkansen"
@@ -45433,25 +45448,30 @@
       "Niigata": 11
     },
     "HokurikuShinkansen": {
-      "Takasaki": 0,
-      "Annaka-Haruna": 1,
-      "Karuizawa": 2,
-      "Sakudaira": 3,
-      "Ueda": 4,
-      "Nagano": 5,
-      "Iiyama": 6,
-      "Myoko-Kogen": 7,
-      "Itoigawa": 8,
-      "Kurobe-Unazukionsen": 9,
-      "Toyama": 10,
-      "Shin-Takaoka": 11,
-      "Kanazawa": 12,
-      "Komatsu": 13,
-      "Kaga-Onsen": 14,
-      "Awara-Onsen": 15,
-      "Fukui-Echizen": 16,
-      "Echizen-Takefu": 17,
-      "Tsuruga": 18
+      "Tokyo": 0,
+      "Ueno": 1,
+      "Omiya": 2,
+      "Kumagaya": 3,
+      "Honjo-Waseda": 4,
+      "Takasaki": 5,
+      "Annaka-Haruna": 6,
+      "Karuizawa": 7,
+      "Sakudaira": 8,
+      "Ueda": 9,
+      "Nagano": 10,
+      "Iiyama": 11,
+      "Myoko-Kogen": 12,
+      "Itoigawa": 13,
+      "Kurobe-Unazukionsen": 14,
+      "Toyama": 15,
+      "Shin-Takaoka": 16,
+      "Kanazawa": 17,
+      "Komatsu": 18,
+      "Kaga-Onsen": 19,
+      "Awara-Onsen": 20,
+      "Fukui-Echizen": 21,
+      "Echizen-Takefu": 22,
+      "Tsuruga": 23
     },
     "YamagataShinkansen": {
       "Fukushima": 0,
