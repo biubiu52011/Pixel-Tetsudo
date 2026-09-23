@@ -31582,7 +31582,15 @@
     "郷沢": "Gozawa",
     "瀬辺地": "Seheji",
     "大平": "Ohira",
-    "大川平": "Okawadai"
+    "大川平": "Okawadai",
+    "大阪": "Osaka",
+    "京都": "Kyoto",
+    "名古屋": "Nagoya",
+    "札幌": "Sapporo",
+    "福岡": "Fukuoka",
+    "広島": "Hiroshima",
+    "神戸": "Kobe",
+    "仙台": "Sendai"
   },
   "stationLines": {
     "Omiya": [

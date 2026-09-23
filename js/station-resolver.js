@@ -111,24 +111,7 @@
     }
   }
 
-  var _MAJOR_STATION_FALLBACK = {
-    "\u6771\u4eac": "Tokyo",
-    "\u4e0a\u91ce": "Ueno",
-    "\u5927\u962a": "Osaka",
-    "\u4eac\u90fd": "Kyoto",
-    "\u540d\u53e4\u5c4b": "Nagoya",
-    "\u672d\u5e4c": "Sapporo",
-    "\u798f\u5ca1": "Fukuoka",
-    "\u5e83\u5cf6": "Hiroshima",
-    "\u7984\u5c71": "Kobe",
-    "\u5bbe\u9999": "Sendai",
-    "\u79cb\u8449\u539f": "Akihabara",
-    "\u65b0\u5bbf": "Shinjuku",
-    "\u6e0b\u8c37": "Shibuya",
-    "\u6c60\u888b": "Ikebukuro",
-    "\u54c1\u5ddd": "Shinagawa",
-    "\u9280\u5ea7": "Ginza"
-  };
+
 
   function resolve(query) {
     if (!query || !query.trim()) return [];
@@ -138,11 +121,6 @@
     var qLower = q.toLowerCase();
 
     if (isJp) {
-      if (_MAJOR_STATION_FALLBACK[q]) {
-        var fid = _MAJOR_STATION_FALLBACK[q];
-        var normFid = _normalizeId(fid);
-        return [{ stationId: normFid, displayName: fid, status: "EXACT" }];
-      }
       // Official ja display name reverse lookup first: bypasses broken name_map targets
       // (e.g. 新橋 name_map->"Shinbashi" while the real station is Shimbashi; 北千住->Kitasenju vs Kita-Senju)
       if (_jpToCanon[q]) {
