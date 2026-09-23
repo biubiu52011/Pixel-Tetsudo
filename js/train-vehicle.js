@@ -102,10 +102,10 @@
   }
 
   // 图标库反查（S0–S3 候选 → 图标路径）
-  function resolveIconForName(name) {
+  function resolveIconForName(name, lineId) {
     if (!name) return '';
     if (window.TrainIcons && typeof window.TrainIcons.resolveVehicleIcon === 'function') {
-      return window.TrainIcons.resolveVehicleIcon(name) || '';
+      return window.TrainIcons.resolveVehicleIcon(name, lineId) || '';
     }
     return '';
   }
@@ -187,7 +187,7 @@
     else if (chosenSrc === 'icons') confidence = 'low';
 
     // 4) 图标：候选 → 图标库；无图标再走 S4 规则兜底
-    var iconPath = chosen ? resolveIconForName(chosen) : '';
+    var iconPath = chosen ? resolveIconForName(chosen, ctx.lineId) : '';
     if (!iconPath) iconPath = resolveIconByRules(ctx);
 
     // 5) 推定名兜底（S4）：S0–S3 无依据时，用图标规则命中的图标文件名作为推定车型——

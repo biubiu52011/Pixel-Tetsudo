@@ -907,6 +907,16 @@
   // v4.3.964: 车型名别名表——manual vehicleType 名与图标文件名不一致时的映射层
   // 覆盖：operator 前缀（東京メトロ05系→05系）、variant 括注（7000系（候補）→7000系）、
   //       系列变体（E231系→E231系0番台）、跨名（3050形→3050形（LED））
+  // v4.3.977: 线路感知同名解抢表——同名车型被别社图标库抢占时的线路专属指向
+  // （例：NewShuttle 伊奈線的 2000系/2020系 会被東京メトロ/東急同名 key 抢占，需按线路指向埼玉资产）
+  var LINE_VEHICLE_OVERRIDES = {
+    "NewShuttle": {
+      "2000系": "埼玉新都市交通2000系",
+      "2020系": "2020系（2021編成）",
+      "2020系（1050系は順次引退）": "2020系（2021編成）"
+    }
+  };
+
   var VEHICLE_NAME_ALIASES = {
     "1500形": "1000形（1300番台）",
     "新1000形": "1000形（1300番台）",
@@ -1125,12 +1135,22 @@
   };
 
   // v4.3.964: 三层查找——精确匹配 → 别名表 → 去括注基础名匹配
-  function resolveVehicleIcon(candidatesStr) {
+  function resolveVehicleIcon(candidatesStr, lineId) {
     if (!candidatesStr) return null;
     var parts = String(candidatesStr).split("/");
     for (var i = 0; i < parts.length; i++) {
       var name = parts[i].trim();
       if (!name) continue;
+      // 0. 线路感知同名解抢（v4.3.977）：同名车型被别社抢占时，按线路优先取专属图标
+      if (lineId && LINE_VEHICLE_OVERRIDES[lineId]) {
+        var _ov = LINE_VEHICLE_OVERRIDES[lineId];
+        var _ovt = _ov[name];
+        if (!_ovt) {
+          var _ovb = name.replace(/（[^）]*）/g, "").replace(/\([^)]*\)/g, "").trim();
+          _ovt = _ov[_ovb];
+        }
+        if (_ovt && VEHICLE_NAME_TO_ICON[_ovt]) return VEHICLE_NAME_TO_ICON[_ovt];
+      }
       // 1. 精确匹配
       if (VEHICLE_NAME_TO_ICON[name]) return VEHICLE_NAME_TO_ICON[name];
       // 2. 别名表
