@@ -84,7 +84,23 @@
       // v4.3.963: 新增两家单轨运营商（千葉都市モノレール / 湘南モノレール）
       "ChibaUrbanMonorail", "ShonanMonorail",
       // v4.3.971: 新干线运营商（東海道/山陽/九州/北海道新幹線）
-      "JR-Central", "JR-Kyushu", "JR-Hokkaido"
+      "JR-Central", "JR-Kyushu", "JR-Hokkaido",
+      "JR-Shikoku",
+      "Kintetsu",
+      "Hankyu",
+      "Hanshin",
+      "Keihan",
+      "Nankai",
+      "Meitetsu",
+      "Nishitetsu",
+      "OsakaMetro",
+      "NagoyaMunicipal",
+      "KyotoMunicipal",
+      "KobeMunicipal",
+      "SapporoMunicipal",
+      "SendaiMunicipal",
+      "FukuokaMunicipal",
+      "HiroshimaElectric"
     ],
     NORMALIZE: TRANSIT_NORMALIZE,
     // JRE (JR東日本) 白名单：路線記号 JA~JY 全覆盖；無記号の地方線（operator=JR-East）兜底
