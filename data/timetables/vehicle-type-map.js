@@ -858,7 +858,7 @@
       'Local': { 'default': '209系3000番台' },
     },
     'Ito': {
-      'Local': { 'default': 'E233系1000番台 / 伊豆急行8000系' },
+      'Local': { 'default': 'E231系1000番台 / 伊豆急行8000系' },
       'LimitedExpress': { 'default': 'E257系1500番台（踊り子）' },
     },
     'Itsukaichi': {
@@ -917,9 +917,9 @@
       'CommuterRapid': { 'default': 'E233系7000番台', 'Sotetsu': '相鉄12000系 / 相鉄新7000系' },
     },
     'ShonanShinjuku': {
-      'Local': { 'default': 'E231系1000番台 / E233系1000番台' },
-      'Rapid': { 'default': 'E231系1000番台 / E233系1000番台' },
-      'SpecialRapid': { 'default': 'E231系1000番台 / E233系1000番台' },
+      'Local': { 'default': 'E231系1000番台 / E233系3000番台' },
+      'Rapid': { 'default': 'E231系1000番台 / E233系3000番台' },
+      'SpecialRapid': { 'default': 'E231系1000番台 / E233系3000番台' },
       'LimitedExpress': { 'default': 'E253系（日光・きぬがわ）' },
     },
     'SobuRapid': {
@@ -948,9 +948,9 @@
       'LimitedExpress': { 'default': 'E257系（草津・四萬・あかぎ）' },
     },
     'Tokaido': {
-      'Local': { 'default': 'E231系1000番台 / E233系1000番台' },
-      'Rapid': { 'default': 'E231系1000番台 / E233系1000番台' },
-      'SpecialRapid': { 'default': 'E231系1000番台 / E233系1000番台' },
+      'Local': { 'default': 'E231系1000番台 / E233系3000番台' },
+      'Rapid': { 'default': 'E231系1000番台 / E233系3000番台' },
+      'SpecialRapid': { 'default': 'E231系1000番台 / E233系3000番台' },
       'LimitedExpress': {
         'default': 'E257系2000番台 / 2500番台 / 伊豆急行8000系',
         'destStation': {
@@ -967,8 +967,8 @@
       'LimitedExpress': { 'default': 'E257系500番台（さざなみ）' },
     },
     'UenoTokyo': {
-      'Local': { 'default': 'E231系1000番台 / E233系1000番台' },
-      'Rapid': { 'default': 'E231系1000番台 / E233系1000番台' },
+      'Local': { 'default': 'E231系1000番台 / E233系3000番台' },
+      'Rapid': { 'default': 'E231系1000番台 / E233系3000番台' },
     },
     'UtsunomiyaJR': {
       'Local': { 'default': 'E231系1000番台 / E233系3000番台' },
@@ -1483,9 +1483,9 @@
       },
     },
     'TokaidoMain': {
-      'Local': { 'default': 'E231系1000番台 / E233系1000番台' },
-      'Rapid': { 'default': 'E231系1000番台 / E233系1000番台' },
-      'SpecialRapid': { 'default': 'E231系1000番台 / E233系1000番台' },
+      'Local': { 'default': 'E231系1000番台 / E233系3000番台' },
+      'Rapid': { 'default': 'E231系1000番台 / E233系3000番台' },
+      'SpecialRapid': { 'default': 'E231系1000番台 / E233系3000番台' },
       'LimitedExpress': {
         'default': 'E257系2000番台 / 2500番台 / 伊豆急行8000系',
         'destStation': {
@@ -1521,7 +1521,6 @@
     },
   };
 
-  /**
   // v4.3.963: LINE_ALIAS_MAP——LINE_ICONS 有条目但 MAP 没 key 的线路，
   // 查表前先把 lineId 归一化到最近的有配置的线路（同系统主线）。
   var LINE_ALIAS_MAP = {
@@ -1559,15 +1558,14 @@
     "NaritaAccess":        "NaritaAirportBranch",   // 成田Access → 成田机场支线
     "YokohamaMunicipal":   "YokohamaBlue",          // 横滨市电 → 横滨蓝线
   };
-
-   * 車両形式を推定する公開API。
-   * destOperator は URN parts[1]（例: "Station:TokyoMetro" → "TokyoMetro"）から直接取得。
-   * これにより京急 Main / 相鉄 Main のような railway 短名衝突を回避する。
-   * @param {string} lineId       本地 line ID
-   * @param {string} trainTypeUrn odpt:trainType URN
-   * @param {string|array} destUrn destinationStation URN（先頭要素）
-   * @returns {string} 車両形式文字列（空文字=不明）
-   */
+  // 車両形式を推定する公開API。
+  // destOperator は URN parts[1]（例: "Station:TokyoMetro" → "TokyoMetro"）から直接取得。
+  // これにより京急 Main / 相鉄 Main のような railway 短名衝突を回避する。
+  // @param {string} lineId       本地 line ID
+  // @param {string} trainTypeUrn odpt:trainType URN
+  // @param {string|array} destUrn destinationStation URN（先頭要素）
+  // @returns {string} 車両形式文字列（空文字=不明）
+  // /
   function resolveVehicleType(lineId, trainTypeUrn, destUrn) {
     try {
       var _lid = LINE_ALIAS_MAP[lineId] || lineId;
@@ -1610,7 +1608,7 @@
     var _vt = (dgroup && tmap[dgroup]) || tmap['default'] || '';
       if (_vt) { _lastVt = { name: _vt, exact: _exactType }; }
       return _vt;
-    } catch(e) { return ''; }
+    } catch(e) { if (window.console && window.console.error) window.console.error('VTM-ERR[' + lineId + ',' + trainTypeUrn + ']: ' + (e && e.message)); return ''; }
   }
   function _getLastMeta() { return _lastVt; }
 

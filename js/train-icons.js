@@ -184,8 +184,8 @@
     "Gono": "../images/列车/JR東日本/HB-E220系.png", // 五能線：HB-E220系
     "Yokohama": "../images/列车/JR東日本/E233系6000番台.png", // 横浜線：E233系6000番台
     // 上野東京ライン（宇都宮・高崎 ↔ 東海道）＝同一系統 E233系湘南色；宇都宮線(Oyama) 同車
-    "Tokaido": "../images/列车/JR東日本/E233系湘南色.png",
-    "Takasaki": "../images/列车/JR東日本/E233系湘南色.png",
+    "Tokaido": "../images/列车/JR東日本/E233系3000番台.png",
+    "Takasaki": "../images/列车/JR東日本/E233系3000番台.png",
     "Musashino": "../images/列车/JR東日本/E231系0番台.png",
     "Uetsu": "../images/列车/JR東日本/701系100番台.png",
     "Ryomo": "../images/列车/JR東日本/211系湘南色.png",
@@ -262,7 +262,7 @@
     "OdakyuTama": "../images/列车/小田急電鉄/3000形.png", // 4.3.278：多摩線 日中各停6両主力=3000形（维基#車両 同江ノ島線論理）
     // 4.3.273 JR 系統補全
     "Nambu": "../images/列车/JR東日本/E233系8000番台.png",     // 南武線：E233系8000番台（図庫既有）
-    "TokaidoMain": "../images/列车/JR東日本/E233系湘南色.png", // 東海道本線：上野東京ライン系統（Tokaido 同一車両）
+    "TokaidoMain": "../images/列车/JR東日本/E233系3000番台.png", // 東海道本線：上野東京ライン系統（Tokaido 同一車両）
     // 4.3.276 恢复实车图（原判定误判）
     "Sagami": "../images/列车/JR東日本/E131系500番台.png",   // 相模線
     "Tsurumi": "../images/列车/JR東日本/E131系1000番台.png",  // 鶴見線
@@ -369,7 +369,7 @@
     // ===== 4.3.279 复查修复（fallback 误判纠正）=====
     "Nippori_Toneri": "../images/列车/都営地下鉄/330形.png", // 日暮里・舎人ライナー：AGT 330形（4.3.457 図庫更新——実車図に変更）
     "TokyuSetagaya": "../images/鉄道/東急電鉄/世田谷線.png", // 世田谷線：路面電車（300系），原错误fallback到2020系
-    "UtsunomiyaJR": "../images/列车/JR東日本/E233系湘南色.png", // 4.3.481：键名修正 Oyama→UtsunomiyaJR（Oyama 是车站 ID，线路 ID 是 UtsunomiyaJR，错键导致宇都宮線 fallback E235）；上野東京ライン同一車両
+    "UtsunomiyaJR": "../images/列车/JR東日本/E233系3000番台.png", // 4.3.481：键名修正 Oyama→UtsunomiyaJR（Oyama 是车站 ID，线路 ID 是 UtsunomiyaJR，错键导致宇都宮線 fallback E235）；上野東京ライン同一車両
     "BanetsuEast": "../images/列车/JR東日本/キハ110系.png", // 磐越東線：キハ110系
     "Iiyama": "../images/列车/JR東日本/キハ110系.png", // 飯山線：キハ110系
     "Ishinomaki": "../images/列车/JR東日本/キハ110系.png", // 石巻線：キハ110系
@@ -620,6 +620,9 @@
     "京成電鉄3100形": "../images/列车/京成電鉄/3100形.png",
     "京成電鉄AE100形": "../images/列车/京成電鉄/AE100形.png",
     "JR東日本E253系": "../images/列车/JR東日本/E253系.png",
+    "JR東日本E231系1000番台": "../images/列车/JR東日本/E231系1000番台.png",
+    "JR東日本E233系1000番台": "../images/列车/JR東日本/E233系1000番台.png",
+    "JR東日本E233系3000番台": "../images/列车/JR東日本/E233系3000番台.png",
     "JR東海383系": "../images/列车/JR東海/383系.png",
     "JR西日本285系": "../images/列车/JR西日本/285系.png",
     "横浜高速鉄道Y500系": "../images/列车/横浜高速鉄道/Y500系.png",
@@ -1147,6 +1150,7 @@
     "E131系": "E131系0番台",
     "E501系": "E501系（常磐線）",
     "E253系（日光・きぬがわ）": "JR東日本E253系",
+    "E233系湘南色": "JR東日本E233系3000番台",
     "E257系": "E257系500番台",
     "E257系（草津・四萬・あかぎ）": "E257系500番台",
     "E257系500番台（わかしお・さざなみ）": "E257系500番台",
