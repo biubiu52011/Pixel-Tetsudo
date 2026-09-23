@@ -43085,5 +43085,18 @@
     "Keiyo": "rapid",
     "ChuoSobuLocal": "local",
     "Negishi": "rapid"
+  },
+  "through_fallback": {
+    "SotetsuDirect": {
+      "exclude": [
+        "Yamanote"
+      ],
+      "prefer": [
+        "SotetsuShin-Yokohama",
+        "Yokosuka",
+        "Saikyo",
+        "ShonanShinjuku"
+      ]
+    }
   }
 }

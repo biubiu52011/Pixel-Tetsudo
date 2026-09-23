@@ -406,7 +406,8 @@
   var allLines = null;
   var doEstimation = null;
   var posMap = {};
-  var THROUGH_RAILWAY_FALLBACK = (window.RuntimeConfig && window.RuntimeConfig.THROUGH_RAILWAY_FALLBACK) || {"SotetsuDirect":{"exclude":["Yamanote"],"prefer":["SotetsuShin-Yokohama","Yokosuka","Saikyo","ShonanShinjuku"]}};
+  // v4.3.948: 直通线 fallback 配置从数据层 through_fallback 读取（不再硬编码）
+  var THROUGH_RAILWAY_FALLBACK = (window.RailwayDB && window.RailwayDB.getData && window.RailwayDB.getData().through_fallback) || {};
 
   // v4.3.950: 车型判定统一入口辅助——TrainVehicle.resolve 优先（多源交叉验证，不猜），
   // 缺失时回退旧逻辑 TrainIcons.getTrainClass（图标推定，兼容未加载新脚本的页面）
