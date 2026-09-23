@@ -144,7 +144,9 @@
     "SaitamaNewUrbanTransit": "../images/列车/埼玉新都市交通/2000系.png", // 4.3.276：AGT实车图恢复
     "TokyoMonorail": "../images/列车/東京モノレール/10000形.png", // 4.3.457：東京モノレール現役主力 10000形（1000形は引退）
     "NipporiToneri": "../images/列车/都営地下鉄/330形.png", // 4.3.457：日暮里・舎人ライナー = AGT新交通（330形），実車図に変更
-    "MinatoMirai": "../images/列车/東急電鉄/5050系.png"
+    "MinatoMirai": "../images/列车/東急電鉄/5050系.png",
+    "ChibaUrbanMonorail": "../images/列车/千葉都市モノレール/Number_prefix_Chiba_monorail.png", // 千葉都市モノレール（悬垂式，0形・1000形）
+    "ShonanMonorail": "../images/列车/湘南モノレール/ShonanMonorail_logo_M.png" // 湘南モノレール（江の島線，5000系）
   };
 
   // Specific line icons (override operator defaults)
@@ -312,6 +314,10 @@
     "KeiseiKanamachi": "../images/列车/京成電鉄/80000形.png",
     "KeiseiOshiage": "../images/列车/京成電鉄/80000形.png",
     "NaritaSkyAccess": "../images/列车/京成電鉄/3900系.png", // 4.3.458：普通列車＝3900形（スカイライナーは typeMatch AE形）
+    // 千葉都市モノレール・湘南モノレール（单轨新交通）
+    "ChibaMonorail1": "../images/列车/千葉都市モノレール/Number_prefix_Chiba_monorail.png",
+    "ChibaMonorail2": "../images/列车/千葉都市モノレール/Number_prefix_Chiba_monorail.png",
+    "ShonanMonorail": "../images/列车/湘南モノレール/ShonanMonorail_logo_M.png",
 
     // Keio specific（4.3.278：新增车型素材 1000系=井の頭線用）
     "Inokashira": "../images/列车/京王電鉄/1000系.png",

@@ -8627,6 +8627,98 @@ window.RAILWAY_DATA = {
     "Echigo-Hirose": {
       "lat": 37.274306,
       "lng": 138.981194
+    },
+    "ChibaMinato": {
+      "lat": 35.60671,
+      "lng": 140.1028
+    },
+    "Shiyakusho": {
+      "lat": 35.607186,
+      "lng": 140.107797
+    },
+    "Sakaecho": {
+      "lat": 35.612961,
+      "lng": 140.118622
+    },
+    "YoshikawaKoen": {
+      "lat": 35.608792,
+      "lng": 140.120071
+    },
+    "KenchoMae": {
+      "lat": 35.60366,
+      "lng": 140.122171
+    },
+    "ChibaKoen": {
+      "lat": 35.6198055,
+      "lng": 140.1178236
+    },
+    "Sakusabe": {
+      "lat": 35.6256955,
+      "lng": 140.1152507
+    },
+    "Tendai": {
+      "lat": 35.6314182,
+      "lng": 140.1127865
+    },
+    "Anagawa": {
+      "lat": 35.6397529,
+      "lng": 140.1121607
+    },
+    "SportsCenter": {
+      "lat": 35.6432352,
+      "lng": 140.1161569
+    },
+    "DobutsuKoen": {
+      "lat": 35.642965,
+      "lng": 140.125503
+    },
+    "Mitsuwadai": {
+      "lat": 35.6384274,
+      "lng": 140.1350891
+    },
+    "Sakuragi": {
+      "lat": 35.631298,
+      "lng": 140.160716
+    },
+    "Kokuradai": {
+      "lat": 35.6268014,
+      "lng": 140.1719774
+    },
+    "ChishirodaiKita": {
+      "lat": 35.6271936,
+      "lng": 140.1824672
+    },
+    "Chishirodai": {
+      "lat": 35.6214434,
+      "lng": 140.1895784
+    },
+    "Fujimicho": {
+      "lat": 35.3455078,
+      "lng": 139.5293956
+    },
+    "ShonanMachiya": {
+      "lat": 35.3379091,
+      "lng": 139.5226788
+    },
+    "ShonanFukasawa": {
+      "lat": 35.332876,
+      "lng": 139.5188738
+    },
+    "NishiKamakura": {
+      "lat": 35.319383,
+      "lng": 139.504306
+    },
+    "Kataseyama": {
+      "lat": 35.3172707,
+      "lng": 139.4961511
+    },
+    "Mejiroyamashita": {
+      "lat": 35.3139868,
+      "lng": 139.4914141
+    },
+    "ShonanEnoshima": {
+      "lat": 35.311723,
+      "lng": 139.4876121
     }
   },
   "lines": {
@@ -29940,6 +30032,246 @@ window.RAILWAY_DATA = {
           "note": ""
         }
       ]
+    },
+    "ChibaMonorail1": {
+      "name": "ChibaMonorail1",
+      "nameEn": "Chiba Urban Monorail Line 1",
+      "nameJa": "千葉都市モノレール1号線",
+      "code": "CM1",
+      "color": "#00A651",
+      "operator": "ChibaUrbanMonorail",
+      "region": "Chiba Area",
+      "type": "straight",
+      "image": "../images/鉄道/千葉都市モノレール/千葉都市モノレール1号線.png",
+      "durationTotalMin": 10,
+      "branchOf": null,
+      "stations": [
+        "ChibaMinato",
+        "Shiyakusho",
+        "Chiba",
+        "Sakaecho",
+        "YoshikawaKoen",
+        "KenchoMae"
+      ],
+      "durations": [
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "throughServices": [],
+      "transferStations": [
+        {
+          "station": "ChibaMinato",
+          "lineId": "Keiyo",
+          "toStation": "Chiba-Minato",
+          "type": "out",
+          "note": "JR京葉線千葉みなと，同站並設"
+        },
+        {
+          "station": "Chiba",
+          "lineId": "SobuMain",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Chiba",
+          "lineId": "SobuRapid",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Chiba",
+          "lineId": "ChuoSobuLocal",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Chiba",
+          "lineId": "Sotobo",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Chiba",
+          "lineId": "Uchibo",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Chiba",
+          "lineId": "KeiseiChiba",
+          "toStation": "Keisei-Chiba",
+          "type": "out",
+          "note": "京成千葉，徒歩連絡"
+        }
+      ],
+      "nameZh": "千叶单轨1号线",
+      "nameKo": "치바 어반 모노레일 1호선"
+    },
+    "ChibaMonorail2": {
+      "name": "ChibaMonorail2",
+      "nameEn": "Chiba Urban Monorail Line 2",
+      "nameJa": "千葉都市モノレール2号線",
+      "code": "CM2",
+      "color": "#E60012",
+      "operator": "ChibaUrbanMonorail",
+      "region": "Chiba Area",
+      "type": "straight",
+      "image": "../images/鉄道/千葉都市モノレール/千葉都市モノレール2号線.png",
+      "durationTotalMin": 24,
+      "branchOf": null,
+      "stations": [
+        "Chiba",
+        "ChibaKoen",
+        "Sakusabe",
+        "Tendai",
+        "Anagawa",
+        "SportsCenter",
+        "DobutsuKoen",
+        "Mitsuwadai",
+        "Tsuga",
+        "Sakuragi",
+        "Kokuradai",
+        "ChishirodaiKita",
+        "Chishirodai"
+      ],
+      "durations": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "throughServices": [],
+      "transferStations": [
+        {
+          "station": "Chiba",
+          "lineId": "SobuMain",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Chiba",
+          "lineId": "SobuRapid",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Chiba",
+          "lineId": "ChuoSobuLocal",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Chiba",
+          "lineId": "Sotobo",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Chiba",
+          "lineId": "Uchibo",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Chiba",
+          "lineId": "KeiseiChiba",
+          "toStation": "Keisei-Chiba",
+          "type": "out",
+          "note": "京成千葉，徒歩連絡"
+        },
+        {
+          "station": "Tsuga",
+          "lineId": "SobuMain",
+          "type": "in",
+          "note": ""
+        }
+      ],
+      "nameZh": "千叶单轨2号线",
+      "nameKo": "치바 어반 모노레일 2호선"
+    },
+    "ShonanMonorail": {
+      "name": "ShonanMonorail",
+      "nameEn": "Shonan Monorail",
+      "nameJa": "湘南モノレール",
+      "code": "SM",
+      "color": "#00A0E9",
+      "operator": "ShonanMonorail",
+      "region": "Kanagawa Area",
+      "type": "straight",
+      "image": "../images/鉄道/湘南モノレール/湘南モノレール江の島線.png",
+      "durationTotalMin": 14,
+      "branchOf": null,
+      "stations": [
+        "Ofuna",
+        "Fujimicho",
+        "ShonanMachiya",
+        "ShonanFukasawa",
+        "NishiKamakura",
+        "Kataseyama",
+        "Mejiroyamashita",
+        "ShonanEnoshima"
+      ],
+      "durations": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "throughServices": [],
+      "transferStations": [
+        {
+          "station": "Ofuna",
+          "lineId": "Tokaido",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Ofuna",
+          "lineId": "TokaidoMain",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Ofuna",
+          "lineId": "Yokosuka",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Ofuna",
+          "lineId": "KeihinTohoku",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Ofuna",
+          "lineId": "ShonanShinjuku",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Ofuna",
+          "lineId": "UenoTokyo",
+          "type": "in",
+          "note": ""
+        }
+      ],
+      "nameZh": "湘南单轨",
+      "nameKo": "쇼난 모노레일"
     }
   },
   "name_map": {
@@ -31582,7 +31914,15 @@ window.RAILWAY_DATA = {
     "郷沢": "Gozawa",
     "瀬辺地": "Seheji",
     "大平": "Ohira",
-    "大川平": "Okawadai"
+    "大川平": "Okawadai",
+    "大阪": "Osaka",
+    "京都": "Kyoto",
+    "名古屋": "Nagoya",
+    "札幌": "Sapporo",
+    "福岡": "Fukuoka",
+    "広島": "Hiroshima",
+    "神戸": "Kobe",
+    "仙台": "Sendai"
   },
   "stationLines": {
     "Omiya": [
@@ -43052,6 +43392,43 @@ window.RAILWAY_DATA = {
       "Okuma": 54,
       "Iwanuma": 55,
       "Sendai": 56
+    }
+  },
+  "line_types": {
+    "ChuoRapid": "rapid",
+    "SobuRapid": "rapid",
+    "Joban": "rapid",
+    "JobanLocal": "local",
+    "Saikyo": "rapid",
+    "ShonanShinjuku": "rapid",
+    "Tokaido": "rapid",
+    "Yokosuka": "rapid",
+    "Utsunomiya": "rapid",
+    "Takasaki": "rapid",
+    "KeihinTohoku": "rapid",
+    "Yamanote": "local",
+    "Ome": "rapid",
+    "Itsukaichi": "rapid",
+    "Kawagoe": "rapid",
+    "KawagoeWest": "rapid",
+    "Nambu": "rapid",
+    "Yokohama": "rapid",
+    "Musashino": "rapid",
+    "Keiyo": "rapid",
+    "ChuoSobuLocal": "local",
+    "Negishi": "rapid"
+  },
+  "through_fallback": {
+    "SotetsuDirect": {
+      "exclude": [
+        "Yamanote"
+      ],
+      "prefer": [
+        "SotetsuShin-Yokohama",
+        "Yokosuka",
+        "Saikyo",
+        "ShonanShinjuku"
+      ]
     }
   }
 }

@@ -10,9 +10,10 @@
   const CACHE_TTL = 60000; // 1 minute
 
   // Cache storage
-  const cache = {};
-  const cacheTime = {};
+  const cache = Object.create(null);
+  const cacheTime = Object.create(null);
   const cacheOrder = [];
+  const inFlight = Object.create(null);
 
   // Cache management
   function updateCacheOrder(key) {
@@ -35,7 +36,7 @@
   }
 
   function setCache(key, data) {
-    if (cache.hasOwnProperty(key)) {
+    if (Object.prototype.hasOwnProperty.call(cache, key)) {
       updateCacheOrder(key);
     } else if (cacheOrder.length >= MAX_CACHE_SIZE) {
       evictOldItem();
@@ -47,25 +48,52 @@
     }
   }
 
+  function fetchWithTimeout(url, ms) {
+    ms = ms || 5000;
+    if (typeof AbortSignal !== 'undefined' && typeof AbortSignal.timeout === 'function') {
+      return fetch(url, { signal: AbortSignal.timeout(ms) });
+    }
+    if (typeof AbortController === 'undefined') {
+      return fetch(url);
+    }
+    var ctrl = new AbortController();
+    var timer = setTimeout(function() { ctrl.abort(); }, ms);
+    return fetch(url, { signal: ctrl.signal }).then(
+      function(res) { clearTimeout(timer); return res; },
+      function(err) { clearTimeout(timer); throw err; }
+    );
+  }
+
   // JSON fetch with caching
   function fetchJSON(url, fallbackKey) {
-    return fetch(url, { signal: AbortSignal.timeout(5000) })
+    var cacheKey = fallbackKey || url;
+    if (isCacheValid(cacheKey)) {
+      updateCacheOrder(cacheKey);
+      return Promise.resolve(cache[cacheKey]);
+    }
+    if (inFlight[cacheKey]) return inFlight[cacheKey];
+
+    inFlight[cacheKey] = fetchWithTimeout(url, 5000)
       .then(function(res) {
         if (!res.ok) throw new Error('HTTP ' + res.status);
         return res.json();
       })
       .then(function(data) {
-        if (fallbackKey) setCache(fallbackKey, data);
+        setCache(cacheKey, data);
         return data;
       })
       .catch(function(err) {
         console.warn('[DataLayer] Fetch failed:', err.message);
-        if (fallbackKey && isCacheValid(fallbackKey)) {
+        if (isCacheValid(cacheKey)) {
           console.warn('[DataLayer] Using cached fallback');
-          return cache[fallbackKey];
+          return cache[cacheKey];
         }
         throw err;
+      })
+      .finally(function() {
+        delete inFlight[cacheKey];
       });
+    return inFlight[cacheKey];
   }
 
   // Line data helpers
@@ -136,9 +164,9 @@ window.DataLayer = {
       for (var key in cache) delete cache[key];
       for (var key in cacheTime) delete cacheTime[key];
       cacheOrder.length = 0;
+      for (var reqKey in inFlight) delete inFlight[reqKey];
     }
   };
 
 })();
-
 

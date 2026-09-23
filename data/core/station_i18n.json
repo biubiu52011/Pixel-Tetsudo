@@ -19771,9 +19771,9 @@
     "en": "Arakawa-Shakomae"
   },
   "Sakaecho": {
-    "ja": "坂橋",
-    "zh": "坂桥",
-    "ko": "사که바し",
+    "ja": "栄町",
+    "zh": "荣町",
+    "ko": "사카에초",
     "en": "Sakaecho"
   },
   "OjiEkimae": {
@@ -20315,5 +20315,137 @@
     "zh": "三泽口",
     "ko": "미사키구치",
     "en": "Misakiguchi"
+  },
+  "ChibaMinato": {
+    "ja": "千葉みなと",
+    "zh": "千叶港",
+    "ko": "치바미나토",
+    "en": "Chiba-Minato"
+  },
+  "Shiyakusho": {
+    "ja": "市役所前",
+    "zh": "市役所前",
+    "ko": "시야쿠쇼마에",
+    "en": "Shiyakusho-Mae"
+  },
+  "YoshikawaKoen": {
+    "ja": "葭川公園",
+    "zh": "葭川公园",
+    "ko": "요시카와코엔",
+    "en": "Yoshikawa-Koen"
+  },
+  "KenchoMae": {
+    "ja": "県庁前",
+    "zh": "县厅前",
+    "ko": "겐초마에",
+    "en": "Kencho-Mae"
+  },
+  "ChibaKoen": {
+    "ja": "千葉公園",
+    "zh": "千叶公园",
+    "ko": "치바코엔",
+    "en": "Chiba-Koen"
+  },
+  "Sakusabe": {
+    "ja": "作草部",
+    "zh": "作草部",
+    "ko": "사쿠사베",
+    "en": "Sakusabe"
+  },
+  "Tendai": {
+    "ja": "天台",
+    "zh": "天台",
+    "ko": "덴다이",
+    "en": "Tendai"
+  },
+  "Anagawa": {
+    "ja": "穴川",
+    "zh": "穴川",
+    "ko": "아나가와",
+    "en": "Anagawa"
+  },
+  "SportsCenter": {
+    "ja": "スポーツセンター",
+    "zh": "体育中心",
+    "ko": "스포츠센터",
+    "en": "Sports Center"
+  },
+  "DobutsuKoen": {
+    "ja": "動物公園",
+    "zh": "动物公园",
+    "ko": "도부쓰코엔",
+    "en": "Dobutsu-Koen"
+  },
+  "Mitsuwadai": {
+    "ja": "みつわ台",
+    "zh": "三和台",
+    "ko": "미쓰와다이",
+    "en": "Mitsuwadai"
+  },
+  "Sakuragi": {
+    "ja": "桜木",
+    "zh": "樱木",
+    "ko": "사쿠라기",
+    "en": "Sakuragi"
+  },
+  "Kokuradai": {
+    "ja": "小倉台",
+    "zh": "小仓台",
+    "ko": "오구라다이",
+    "en": "Kokuradai"
+  },
+  "ChishirodaiKita": {
+    "ja": "千城台北",
+    "zh": "千城台北",
+    "ko": "지시로다이키타",
+    "en": "Chishirodai-Kita"
+  },
+  "Chishirodai": {
+    "ja": "千城台",
+    "zh": "千城台",
+    "ko": "지시로다이",
+    "en": "Chishirodai"
+  },
+  "Fujimicho": {
+    "ja": "富士見町",
+    "zh": "富士见町",
+    "ko": "후지미초",
+    "en": "Fujimicho"
+  },
+  "ShonanMachiya": {
+    "ja": "湘南町屋",
+    "zh": "湘南町屋",
+    "ko": "쇼난마치야",
+    "en": "Shonan-Machiya"
+  },
+  "ShonanFukasawa": {
+    "ja": "湘南深沢",
+    "zh": "湘南深泽",
+    "ko": "쇼난후카사와",
+    "en": "Shonan-Fukasawa"
+  },
+  "NishiKamakura": {
+    "ja": "西鎌倉",
+    "zh": "西镰仓",
+    "ko": "니시카마쿠라",
+    "en": "Nishi-Kamakura"
+  },
+  "Kataseyama": {
+    "ja": "片瀬山",
+    "zh": "片濑山",
+    "ko": "가타세야마",
+    "en": "Kataseyama"
+  },
+  "Mejiroyamashita": {
+    "ja": "目白山下",
+    "zh": "目白山下",
+    "ko": "메지로야마시타",
+    "en": "Mejiro-Yamashita"
+  },
+  "ShonanEnoshima": {
+    "ja": "湘南江の島",
+    "zh": "湘南江之岛",
+    "ko": "쇼난에노시마",
+    "en": "Shonan-Enoshima"
   }
 }

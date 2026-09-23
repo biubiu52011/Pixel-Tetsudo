@@ -10,9 +10,15 @@
   var RT_DB_NAME = "PixelTetsudoRT";
   var RT_STORE_NAME = "realtime";
   var _rtDb = null;
+  var _rtDbPromise = null;
+  var _rtDbDisabled = false;
+  var _rtMemory = {};
+  var _loadPromise = null;
 
   function openRTDb() {
-    return new Promise(function(resolve, reject) {
+    if (_rtDbDisabled || typeof indexedDB === "undefined") return Promise.resolve(null);
+    if (_rtDbPromise) return _rtDbPromise;
+    _rtDbPromise = new Promise(function(resolve, reject) {
       if (_rtDb) { resolve(_rtDb); return; }
       var req = indexedDB.open(RT_DB_NAME, 1);
       req.onupgradeneeded = function(e) {
@@ -21,30 +27,64 @@
           db.createObjectStore(RT_STORE_NAME, { keyPath: "key" });
         }
       };
-      req.onsuccess = function(e) { _rtDb = e.target.result; resolve(_rtDb); };
-      req.onerror = function() { reject(req.error); };
+      req.onsuccess = function(e) {
+        _rtDb = e.target.result;
+        _rtDb.onversionchange = function() {
+          try { _rtDb.close(); } catch(_e) {}
+          _rtDb = null;
+          _rtDbPromise = null;
+        };
+        resolve(_rtDb);
+      };
+      req.onerror = function() { reject(req.error || new Error("IndexedDB open failed")); };
+      req.onblocked = function() { reject(new Error("IndexedDB blocked")); };
     });
+    _rtDbPromise = _rtDbPromise.catch(function(err) {
+      console.warn("[RTCache] IndexedDB unavailable, using memory cache:", err.message);
+      _rtDb = null;
+      _rtDbPromise = null;
+      _rtDbDisabled = true;
+      return null;
+    });
+    return _rtDbPromise;
   }
 
   function rtPut(key, value) {
     return openRTDb().then(function(db) {
+      if (!db) {
+        _rtMemory[key] = { value: value, ts: Date.now() };
+        return;
+      }
       return new Promise(function(resolve, reject) {
-        var tx = db.transaction(RT_STORE_NAME, "readwrite");
-        tx.objectStore(RT_STORE_NAME).put({ key: key, value: value, ts: Date.now() });
-        tx.oncomplete = function() { resolve(); };
-        tx.onerror = function() { reject(tx.error); };
+        try {
+          var tx = db.transaction(RT_STORE_NAME, "readwrite");
+          tx.objectStore(RT_STORE_NAME).put({ key: key, value: value, ts: Date.now() });
+          tx.oncomplete = function() { resolve(); };
+          tx.onerror = function() { reject(tx.error); };
+          tx.onabort = function() { reject(tx.error); };
+        } catch(e) { reject(e); }
       });
+    }).catch(function(err) {
+      console.warn("[RTCache] Write fell back to memory:", err.message);
+      _rtMemory[key] = { value: value, ts: Date.now() };
     });
   }
 
   function rtGet(key) {
     return openRTDb().then(function(db) {
+      if (!db) return _rtMemory[key] ? _rtMemory[key].value : null;
       return new Promise(function(resolve, reject) {
-        var tx = db.transaction(RT_STORE_NAME, "readonly");
-        var req = tx.objectStore(RT_STORE_NAME).get(key);
-        req.onsuccess = function() { resolve(req.result ? req.result.value : null); };
-        req.onerror = function() { reject(tx.error); };
+        try {
+          var tx = db.transaction(RT_STORE_NAME, "readonly");
+          var req = tx.objectStore(RT_STORE_NAME).get(key);
+          req.onsuccess = function() { resolve(req.result ? req.result.value : null); };
+          req.onerror = function() { reject(tx.error); };
+          tx.onabort = function() { reject(tx.error); };
+        } catch(e) { reject(e); }
       });
+    }).catch(function(err) {
+      console.warn("[RTCache] Read fell back to memory:", err.message);
+      return _rtMemory[key] ? _rtMemory[key].value : null;
     });
   }
 
@@ -679,6 +719,9 @@ function applyData(data, i18n) {
         "TokaidoMain": "../images/鉄道/JR東日本/東海道線.png",
         "UtsunomiyaJR": "../images/鉄道/JR東日本/宇都宮線.png",
         "SotetsuShin-Yokohama": "../images/鉄道/相鉄/相鉄新横浜線.png",
+        "ChibaMonorail1": "../images/鉄道/千葉都市モノレール/千葉都市モノレール1号線.png",
+        "ChibaMonorail2": "../images/鉄道/千葉都市モノレール/千葉都市モノレール2号線.png",
+        "ShonanMonorail": "../images/鉄道/湘南モノレール/湘南モノレール江の島線.png",
         "ChiyodaBranch": "../images/列车/東京メトロ/05系（北綾瀬）.png", // 4.3.457：図庫整理で北綾瀬支線.png→05系（北綾瀬）.png に改名
       };
       Object.keys(LINE_IMAGE_FIXES).forEach(function(lid) {
@@ -1105,12 +1148,13 @@ function applyData(data, i18n) {
 
 function load() {
     if (loaded) return Promise.resolve();
+    if (_loadPromise) return _loadPromise;
 
     // Strategy A: file:// protocol - skip fetch (CORS blocks it), use script data directly.
     var isFileProtocol = (window.location.protocol === 'file:');
     if (isFileProtocol) {
       // file:// bundles: <script src> loads where fetch is CORS-blocked.
-      return loadFileBundles().then(function() {
+      _loadPromise = loadFileBundles().then(function() {
         if (window.RAILWAY_DATA && window.RAILWAY_DATA.stations) {
           applyData(window.RAILWAY_DATA, window.RAILWAY_I18N || {});
           if (!SKIP_TOURISM) applyTourismData(window.RAILWAY_TOURISM || {});
@@ -1120,7 +1164,11 @@ function load() {
         error = new Error("No data source available under file:// protocol");
         console.error("[DbLoader] Failed to load data under file:// protocol");
         throw error;
+      }).catch(function(err) {
+        _loadPromise = null;
+        throw err;
       });
+      return _loadPromise;
     }
 
     // Strategy B (v4.3.387): stale-while-revalidate
@@ -1145,7 +1193,7 @@ function load() {
     }
 
     // 2) 无缓存 → 远程加载（超时 + 重试）
-    return fetchRemote().catch(function(err) {
+    _loadPromise = fetchRemote().catch(function(err) {
       // 3) 远程失败 → 旧版本缓存兜底（避免白屏 / Render failed）
       var fallback = readAnyCache();
       if (fallback) {
@@ -1160,7 +1208,11 @@ function load() {
       error = err;
       console.error("[DbLoader] Failed to load:", err.message);
       throw err;
+    }).catch(function(err) {
+      _loadPromise = null;
+      throw err;
     });
+    return _loadPromise;
   }
 
   window.DataLoader = {
@@ -1191,7 +1243,5 @@ function load() {
     event.preventDefault();
   });
 })();
-
-
 
 
