@@ -146,7 +146,12 @@
     "NipporiToneri": "../images/列车/都営地下鉄/330形.png", // 4.3.457：日暮里・舎人ライナー = AGT新交通（330形），実車図に変更
     "MinatoMirai": "../images/列车/東急電鉄/5050系.png",
     "ChibaUrbanMonorail": "../images/列车/千葉都市モノレール/Number_prefix_Chiba_monorail.png", // 千葉都市モノレール（悬垂式，0形・1000形）
-    "ShonanMonorail": "../images/列车/湘南モノレール/ShonanMonorail_logo_M.png" // 湘南モノレール（江の島線，5000系）
+    "ShonanMonorail": "../images/列车/湘南モノレール/ShonanMonorail_logo_M.png", // 湘南モノレール（江の島線，5000系）
+    // ===== 新幹線JR各社デフォルト（車両アイコン）=====
+    "JR-Central": "../images/列车/JR東海/N700系（東海）.png", // JR東海：東海道・山陽新幹線 N700系
+    "JR-West": "../images/列车/JR西日本/500系.png", // JR西日本：山陽新幹線 500系
+    "JR-Kyushu": "../images/列车/JR九州/800系.png", // JR九州：九州新幹線 800系
+    "JR-Hokkaido": "../images/列车/JR東日本/H5系.png" // JR北海道：北海道新幹線 H5系（画像資産はJR東日本ディレクトリに集約）
   };
 
   // Specific line icons (override operator defaults)
@@ -382,7 +387,20 @@
     "Ito": "../images/列车/JR東日本/E231系1000番台.png", // 伊東線：E231系1000番台（湘南色近郊型）
     "Kashima": "../images/列车/JR東日本/E131系0番台.png", // 鹿島線：E131系0番台
     "SensekiTohoku": "../images/列车/JR東日本/HB-E210系.png", // 仙石東北ライン：HB-E210系
-    "Daishi_Tobu": "../images/列车/東武鉄道/1000系.png" // 東武大師線：1000系（現役主力）
+    "Daishi_Tobu": "../images/列车/東武鉄道/1000系.png", // 東武大師線：1000系（現役主力）
+
+    // ===== 新幹線（2026-09-23 登録：22枚の車両アイコン + 5社ロゴ）=====
+    // 各線の代表形式（最も象徴的な現行車両）を選定。
+    "TohokuShinkansen": "../images/列车/JR東日本/E5系.png",       // 東北新幹線：E5系はやぶさ
+    "JoetsuShinkansen": "../images/列车/JR東日本/E7系.png",        // 上越新幹線：E7系
+    "HokurikuShinkansen": "../images/列车/JR東日本/E7系.png",      // 北陸新幹線：E7系（W7系と同形状）
+    "YamagataShinkansen": "../images/列车/JR東日本/E8系つばさ.png", // 山形新幹線：E8系つばさ（2024年〜新型）
+    "AkitaShinkansen": "../images/列车/JR東日本/E6系こまち.png",    // 秋田新幹線：E6系こまち
+    "HokkaidoShinkansen": "../images/列车/JR東日本/H5系.png",      // 北海道新幹線：H5系
+    "TokaidoShinkansen": "../images/列车/JR東海/N700系（東海）.png", // 東海道新幹線：N700系
+    "SanyoShinkansen": "../images/列车/JR西日本/500系.png",        // 山陽新幹線：500系
+    "KyushuShinkansen": "../images/列车/JR九州/800系.png",          // 九州新幹線：800系つばめ
+    "NishiKyushuShinkansen": "../images/列车/JR九州/800系.png"      // 西九州新幹線：800系（かもめ）
   };
 
   // v4.3.450: 直通列車の車号規則——ODPT Train には車両形式フィールドが無いため、
