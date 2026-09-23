@@ -203,8 +203,13 @@
       }
     }
 
+    if (chosen && iconPath && window.TrainIcons && typeof window.TrainIcons.resolveVehicleDisplayName === 'function') {
+      var _disp = window.TrainIcons.resolveVehicleDisplayName(chosen, ctx.lineId);
+      if (_disp && _disp !== chosen) chosen = _disp;
+    }
+
     return {
-      name: chosen,                                  // 车型名（S0–S3 实证或 S4 推定；无依据为空）
+      name: chosen,                                  // 车型名（S0–S3 实证或 S4 推定；alias 后与图标一致）
       candidates: orderArr,                          // 全部候选（S0→S3 稳定顺序）
       sources: chosen ? (pool[chosen] ? pool[chosen].sources.slice() : (chosenSrc ? [chosenSrc] : [])) : [],
       source: chosenSrc,                             // 决策来源：manual/odpt/trainNo/map/icons/''（''=无依据）

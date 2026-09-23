@@ -1218,6 +1218,28 @@
     "500系（こだま）": "500系",
   };
 
+  // v4.3.987: 显示名解析——返回最终应展示的车型名（仅 alias 展开路径同步，
+  // 如退役车→現役車：都営5300形→5500形、ロマンスカー 10000形→小田急電鉄30000形EXEα、
+  // 東武5000系→50000系）；override 锁定/近似兜底保持原候选名（标签显示真实车型）。
+  function resolveVehicleDisplayName(candidatesStr, lineId) {
+    if (!candidatesStr) return null;
+    var parts = String(candidatesStr).split("/");
+    for (var i = 0; i < parts.length; i++) {
+      var name = parts[i].trim();
+      if (!name) continue;
+      if (VEHICLE_NAME_TO_ICON[name]) return name;            // 精确命中：显示原名
+      var _al = VEHICLE_NAME_ALIASES[name];                   // 别名表
+      if (_al && VEHICLE_NAME_TO_ICON[_al]) return _al;
+      var _base = name.replace(/（[^）]*）/g, "").replace(/\([^)]*\)/g, "").trim();
+      if (_base !== name) {
+        if (VEHICLE_NAME_TO_ICON[_base]) return _base;
+        var _al2 = VEHICLE_NAME_ALIASES[_base];
+        if (_al2 && VEHICLE_NAME_TO_ICON[_al2]) return _al2;
+      }
+    }
+    return null;
+  }
+
   // v4.3.964: 三层查找——精确匹配 → 别名表 → 去括注基础名匹配
   function resolveVehicleIcon(candidatesStr, lineId) {
     if (!candidatesStr) return null;
@@ -1260,6 +1282,7 @@
     getTrainIcon: getTrainIcon,
     getTrainClass: getTrainClass,
     resolveVehicleIcon: resolveVehicleIcon,
+    resolveVehicleDisplayName: resolveVehicleDisplayName,
     VEHICLE_NAME_TO_ICON: VEHICLE_NAME_TO_ICON,
     LINE_ICONS: LINE_ICONS,
     OPERATOR_ICONS: OPERATOR_ICONS
