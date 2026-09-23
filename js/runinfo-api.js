@@ -97,6 +97,8 @@
       if (rec && rec["odpt:delay"] === true) return "delayed";
       var txt = String((rec && rec["odpt:text"]) || "");
       // v4.3.965: 补齐变体——運転を見合わせ/運転中止/運転を取りやめ/ダイヤ乱れ/遅れ等
+      // v4.3.966: 直通運転…中止/見合わせ/運休 = 直通运转中止（非全线停运）→ notice，先于 suspended
+      if (/\u76f4\u901a.*(?:\u4e2d\u6b62|\u898b\u5408\u308f\u305b|\u904b\u4f11)/.test(txt)) return "notice";
       if (/\u904b\u8ee2\u898b\u5408\u308f\u305b|\u904b\u8ee2\u3092\u898b\u5408\u308f\u305b|\u904b\u8ee2\u3092\u4e2d\u6b62|\u904b\u8ee2\u4e2d\u6b62|\u904b\u8ee2\u3092\u53d6\u308a\u3084\u3081/.test(txt)) return "suspended";
       // v4.3.965: 一部運休/一部区間 → notice（须先于裸「運休」判定，避免误判 suspended）
       if (/\u4e00\u90e8.*(?:\u904b\u4f11|\u904b\u884c)/.test(txt)) return "notice";

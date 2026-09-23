@@ -88,6 +88,8 @@
     var s = String(text);
     // v4.3.965: 补齐变体——運転を見合わせ/運転を取りやめ/ダイヤ乱れ/遅れ；
     // 顺序：強異常(見合わせ/中止) → 一部運休(notice) → 正常声明 → 遅延 → 裸運休(suspended)
+    // v4.3.966: 直通運転…中止/見合わせ/運休 = 直通运转中止（非全线停运）→ notice，先于 suspended
+    if (/\u76f4\u901a.*(?:\u4e2d\u6b62|\u898b\u5408\u308f\u305b|\u904b\u4f11)/.test(s)) return "notice";
     if (/\u904b\u8ee2\u898b\u5408\u308f\u305b|\u904b\u8ee2\u3092\u898b\u5408\u308f\u305b|\u904b\u8ee2\u3092\u4e2d\u6b62|\u904b\u8ee2\u4e2d\u6b62|\u904b\u8ee2\u3092\u53d6\u308a\u3084\u3081/.test(s)) return "suspended";
     if (/\u4e00\u90e8.*(?:\u904b\u4f11|\u904b\u884c)/.test(s)) return "notice";
     if (/\u5e73\u5e38|\u9045\u5ef6\u306a\u3057|\u9045\u5ef6\u306f\u3042\u308a\u307e\u305b\u3093|\u3042\u308a\u307e\u305b\u3093|\u3054\u3056\u3044\u307e\u305b\u3093|\u89e3\u6d88|\u518d\u958b/.test(s)) return "normal";
