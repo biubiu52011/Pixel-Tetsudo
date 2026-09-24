@@ -1716,6 +1716,7 @@ window.LineOperationSystems = {
       order: 1
     }
   ],
+  // 以下运营商分组为预备，等线路数据导入后补全 lineIds
   "JR_CENTRAL": [
     {
       code: "CF",
@@ -1724,7 +1725,7 @@ window.LineOperationSystems = {
       nameEn: "Tokaido Shinkansen",
       nameKo: "도카이도 신칸센",
       color: "#00bb00",
-      lineIds: ["TokaidoShinkansen"],
+      lineIds: [],
       order: 1
     }
   ],
@@ -1736,7 +1737,7 @@ window.LineOperationSystems = {
       nameEn: "JR West (Osaka Loop Line, Kobe Line, Kyoto Line, etc.)",
       nameKo: "JR 서일본 (오사카 순환선, 고베선, 교토선 등)",
       color: "#009933",
-      lineIds: ["OsakaLoop", "TokaidoMain", "SanyoMain", "OsakaHigashi", "Nara", "Sagano", "Hanwa", "KansaiMain", "SaninMain", "SanyoShinkansen", "HokurikuShinkansen"],
+      lineIds: [],
       order: 1
     }
   ],
@@ -1748,7 +1749,7 @@ window.LineOperationSystems = {
       nameEn: "JR Kyushu (Kagoshima Main Line, Nippo Main Line, etc.)",
       nameKo: "JR 규슈 (가고시마 본선, 닛포 본선 등)",
       color: "#0066b3",
-      lineIds: ["KagoshimaMain", "NippoMain", "KyushuShinkansen", "NishiKyushuShinkansen", "Chikuho", "Karatsu", "Kyudai", "Hohi", "IbusukiMakurazaki", "Kashii", "Sasaguri", "NagasakiMain"],
+      lineIds: [],
       order: 1
     }
   ],
@@ -1760,7 +1761,7 @@ window.LineOperationSystems = {
       nameEn: "JR Hokkaido (Hakodate Main Line, Chitose Line, etc.)",
       nameKo: "JR 홋카이도 (하코다테 본선, 지토세선 등)",
       color: "#0099ff",
-      lineIds: ["HakodateMain", "Chitose", "Sassho", "Nemuro", "Sekihoku", "Muroran", "HokkaidoShinkansen"],
+      lineIds: [],
       order: 1
     }
   ],
@@ -1772,7 +1773,7 @@ window.LineOperationSystems = {
       nameEn: "JR Shikoku (Yosan Line, Dosan Line, etc.)",
       nameKo: "JR 시코쿠 (요산선, 도산선 등)",
       color: "#00cc66",
-      lineIds: ["Yosan", "Dosan", "Tokushima", "Mugi"],
+      lineIds: [],
       order: 1
     }
   ],
@@ -1784,7 +1785,7 @@ window.LineOperationSystems = {
       nameEn: "Hankyu Railway (Kyoto Line, Takarazuka Line, Kobe Line)",
       nameKo: "한큐 전철 (교토선, 다카라즈카선, 고베선)",
       color: "#2b6cb0",
-      lineIds: ["HankyuKyoto", "HankyuTakarazuka", "HankyuKobe"],
+      lineIds: [],
       order: 1
     }
   ],
@@ -1796,7 +1797,7 @@ window.LineOperationSystems = {
       nameEn: "Hanshin Electric Railway (Main Line, Namba Line)",
       nameKo: "한신 전기 철도 (본선, 난바선)",
       color: "#0033cc",
-      lineIds: ["HanshinMain", "HanshinNamba"],
+      lineIds: [],
       order: 1
     }
   ],
@@ -1808,7 +1809,7 @@ window.LineOperationSystems = {
       nameEn: "Kintetsu Railway (Osaka Line, Nara Line, Kyoto Line, etc.)",
       nameKo: "긴키 일본 철도 (오사카선, 나라선, 교토선 등)",
       color: "#e60012",
-      lineIds: ["KintetsuOsaka", "KintetsuNara", "KintetsuKyoto", "KintetsuNagoya", "KintetsuYamatoji", "KintetsuYoshino"],
+      lineIds: [],
       order: 1
     }
   ],
@@ -1820,7 +1821,7 @@ window.LineOperationSystems = {
       nameEn: "Nankai Electric Railway (Main Line, Koya Line)",
       nameKo: "난카이 전기 철도 (본선, 고야선)",
       color: "#cc0033",
-      lineIds: ["NankaiMain", "NankaiKoya", "NankaiAirport"],
+      lineIds: [],
       order: 1
     }
   ],
@@ -1832,7 +1833,7 @@ window.LineOperationSystems = {
       nameEn: "Sanyo Electric Railway (Main Line, Aboshi Line)",
       nameKo: "산요 전기 철도 (본선, 아보시선)",
       color: "#0077cc",
-      lineIds: ["SanyoMain"],
+      lineIds: [],
       order: 1
     }
   ],
@@ -1844,7 +1845,7 @@ window.LineOperationSystems = {
       nameEn: "Osaka Metro (Midosuji Line, Tanimachi Line, etc.)",
       nameKo: "오사카 메트로 (미도스지선, 다니마치선 등)",
       color: "#ff9900",
-      lineIds: ["Midosuji", "Tanimachi", "Yotsubashi", "Chuo", "Sennichimae", "Sakaisuji", "NagahoriTsurumiryokuchi", "Imazatosuji"],
+      lineIds: [],
       order: 1
     }
   ],
@@ -1856,7 +1857,7 @@ window.LineOperationSystems = {
       nameEn: "Meitetsu (Nagoya Main Line, Inuyama Line, etc.)",
       nameKo: "나고야 철도 (나고야 본선, 이누야마선 등)",
       color: "#e60012",
-      lineIds: ["MeitetsuNagoya", "MeitetsuInuyama", "MeitetsuToyota", "MeitetsuTokoname", "MeitetsuSeto", "MeitetsuKomaki"],
+      lineIds: [],
       order: 1
     }
   ],
@@ -1868,7 +1869,7 @@ window.LineOperationSystems = {
       nameEn: "Nishi-Nippon Railroad (Tenjin Omuta Line, Kaizuka Line)",
       nameKo: "서일본 철도 (덴진 오무타선, 가이즈카선)",
       color: "#009944",
-      lineIds: ["NishitetsuTenjinOmuta", "NishitetsuKaizuka"],
+      lineIds: [],
       order: 1
     }
   ],
