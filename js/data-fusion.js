@@ -682,13 +682,30 @@
             );
             var estCount = 0;
             Object.keys(estimated).forEach(function(lid) {
+              var _est = estimated[lid];
+              if (!_est || !_est.length) return;
+              // v4.3.1002: 无条件合并（去重：实时/直通插入优先，推定补缺）——
+              // 此前 posMap 非空（有实时或直通插入列车）时推定列车全丢，
+              // 导致副都心/千代田/日比谷/東西 等直通线页面只剩 1-3 列直通插入车（卡 join/末站），
+              // 自社时刻表列车（银座/丸ノ内等无直通实时插入的线推定全量正常）完全缺失。
               if (!posMap[lid] || posMap[lid].length === 0) {
-                posMap[lid] = estimated[lid];
-                estCount += estimated[lid].length;
-              } else if (estimated[lid]) {
+                posMap[lid] = _est.slice();
+                estCount += _est.length;
+              } else {
+                var _haveId = {};
+                posMap[lid].forEach(function(p) { if (p && p.trainId) _haveId[p.trainId] = true; });
+                var _addN = 0;
+                _est.forEach(function(p) {
+                  if (p && p.trainId && !_haveId[p.trainId]) {
+                    posMap[lid].push(p);
+                    _haveId[p.trainId] = true;
+                    _addN++;
+                  }
+                });
+                estCount += _addN;
                 // v4.3.929: 实时位置有列车但无 destinationStation → 从推定位置补终点站
                 var _estById = {};
-                estimated[lid].forEach(function(p) { if (p && p.trainId) _estById[p.trainId] = p; });
+                _est.forEach(function(p) { if (p && p.trainId) _estById[p.trainId] = p; });
                 posMap[lid].forEach(function(p) {
                   if (p && p.trainId && _estById[p.trainId] && !p.destinationStation) {
                     p.destinationStation = _estById[p.trainId].destinationStation;
