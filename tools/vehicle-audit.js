@@ -343,6 +343,82 @@ function runDeploy(opts) {
   return 0;
 }
 
+// ---------- cross（时刻表交叉验证直通对） ----------
+// 证据：a 线时刻表记录的终点站 URN 中出现 b 线站（直通列车终点在对方线）
+// 简化 URN 数据（终点站只有站名/短URN）→ 标注"数据格式限制"，不误判为误配
+function runCross(w) {
+  const MAP = w.VehicleTypeMap.MAP, TS = w.ThroughService;
+  const edges = new Set(); const pairs = [];
+  for (const a of Object.keys(MAP)) {
+    for (const b of (TS.getDirectThroughLines(a) || [])) {
+      if (a === b || !MAP[b]) continue;
+      const key = [a, b].sort().join('|');
+      if (!edges.has(key)) { edges.add(key); pairs.push([a, b]); }
+    }
+  }
+  const lineKeys = {};      // lid -> Set["op.line"]
+  const formatLimited = {}; // lid -> true（destinationStation 无线路段）
+  const noFile = {};
+  for (const pair of pairs) for (const lid of [pair[0], pair[1]]) {
+    if (lineKeys[lid] !== undefined) continue;
+    const f = path.join(ROOT, 'data/timetables', lid + '-manual.js');
+    if (!fs.existsSync(f)) { lineKeys[lid] = null; noFile[lid] = true; continue; }
+    let arr = null;
+    try {
+      const t2 = fs.readFileSync(f, 'utf8');
+      const m = t2.match(/=\s*(\[[\s\S]*)/);
+      if (m) {
+        let body = m[1];
+        const semi = body.lastIndexOf(';');
+        if (semi >= 0) body = body.slice(0, semi);
+        arr = JSON.parse(body);
+      }
+    } catch (e) { lineKeys[lid] = null; continue; }
+    if (!Array.isArray(arr)) { lineKeys[lid] = null; continue; }
+    const keys = new Set();
+    for (const r of arr) {
+      const v = r['odpt:destinationStation'];
+      const vals = Array.isArray(v) ? v : (typeof v === 'string' ? [v] : []);
+      for (const x of vals) {
+        if (typeof x !== 'string') continue;
+        if (x.startsWith('odpt.Station:')) {
+          const pp = x.slice('odpt.Station:'.length).split('.');
+          if (pp.length >= 3) keys.add(pp[0] + '.' + pp[1]);
+          else if (pp.length >= 1 && pp[0]) formatLimited[lid] = true;
+        } else if (x.length > 0) {
+          formatLimited[lid] = true; // 纯站名
+        }
+      }
+    }
+    lineKeys[lid] = keys;
+  }
+  // 线路段短名别名（同线不同段命名差异，用于交叉验证匹配）
+  const SEG_ALIAS = { 'NaritaAbikoBranch': 'Narita', 'NaritaAirportBranch': 'Narita', 'Chuo': 'ChuoMain' };
+  const norm = (s) => SEG_ALIAS[s] || s;
+  const suspect = [], formatLimit = [], ok = [];
+  for (const [a, b] of pairs) {
+    const ka = lineKeys[a] || new Set(), kb = lineKeys[b] || new Set();
+    const aLines = new Set([...ka].map(k => norm(k.split('.')[1])));
+    const bLines = new Set([...kb].map(k => norm(k.split('.')[1])));
+    const hitA = [...ka].some(k => bLines.has(norm(k.split('.')[1])));
+    const hitB = [...kb].some(k => aLines.has(norm(k.split('.')[1])));
+    if (hitA || hitB) ok.push([a, b]);
+    else if (noFile[a] || noFile[b] || formatLimited[a] || formatLimited[b]) formatLimit.push([a, b]);
+    else suspect.push([a, b]);
+  }
+  console.log(`交叉验证直通对: ${pairs.length} | 有时刻表证据: ${ok.length} | 数据格式限制(无法验证): ${formatLimit.length} | 存疑: ${suspect.length}`);
+  if (suspect.length) {
+    console.log('\n=== 存疑（両线均有完整URN但无直通站证据）——需人工裁决 ===');
+    for (const [a, b] of suspect) console.log(`  ${a} ⇄ ${b}`);
+  }
+  if (formatLimit.length) {
+    console.log('\n=== 数据格式限制（终点站无线路段，无法交叉验证，按业界常识保留） ===');
+    for (const [a, b] of formatLimit) console.log(`  ${a} ⇄ ${b}`);
+  }
+  return suspect.length ? 1 : 0;
+}
+
+
 // ---------- main ----------
 const { spawnSync } = require('child_process');
 function main() {
@@ -360,6 +436,8 @@ function main() {
         return runFix(w, { apply: has('--apply'), dryRun: !has('--apply'), limit: val('--limit', '') ? Number(val('--limit', '')) : 0, json: has('--json') });
       case 'verify':
         return runVerify(w, rest);
+      case 'cross':
+        return runCross(w);
       case 'deploy':
         return runDeploy({ noPush: has('--no-push'), message: val('--message', ''), bump: val('--bump', '') });
       default:
