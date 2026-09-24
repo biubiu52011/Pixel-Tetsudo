@@ -1716,6 +1716,162 @@ window.LineOperationSystems = {
       order: 1
     }
   ],
+  "JR_CENTRAL": [
+    {
+      code: "CF",
+      nameJa: "東海道新幹線",
+      nameZh: "东海道新干线",
+      nameEn: "Tokaido Shinkansen",
+      nameKo: "도카이도 신칸센",
+      color: "#00bb00",
+      lineIds: ["TokaidoShinkansen"],
+      order: 1
+    }
+  ],
+  "JR_WEST": [
+    {
+      code: "JR西日本",
+      nameJa: "JR西日本（大阪環状線・神戸線・京都線など）",
+      nameZh: "JR西日本（大阪环状线・神户线・京都线等）",
+      nameEn: "JR West (Osaka Loop Line, Kobe Line, Kyoto Line, etc.)",
+      nameKo: "JR 서일본 (오사카 순환선, 고베선, 교토선 등)",
+      color: "#009933",
+      lineIds: ["OsakaLoop", "TokaidoMain", "SanyoMain", "OsakaHigashi", "Nara", "Sagano", "Hanwa", "KansaiMain", "SaninMain", "SanyoShinkansen", "HokurikuShinkansen"],
+      order: 1
+    }
+  ],
+  "JR_KYUSHU": [
+    {
+      code: "JR九州",
+      nameJa: "JR九州（鹿児島本線・日豊本線など）",
+      nameZh: "JR九州（鹿儿岛本线・日丰本线等）",
+      nameEn: "JR Kyushu (Kagoshima Main Line, Nippo Main Line, etc.)",
+      nameKo: "JR 규슈 (가고시마 본선, 닛포 본선 등)",
+      color: "#0066b3",
+      lineIds: ["KagoshimaMain", "NippoMain", "KyushuShinkansen", "NishiKyushuShinkansen", "Chikuho", "Karatsu", "Kyudai", "Hohi", "IbusukiMakurazaki", "Kashii", "Sasaguri", "NagasakiMain"],
+      order: 1
+    }
+  ],
+  "JR_HOKKAIDO": [
+    {
+      code: "JR北海道",
+      nameJa: "JR北海道（函館本線・千歳線など）",
+      nameZh: "JR北海道（函馆本线・千岁线等）",
+      nameEn: "JR Hokkaido (Hakodate Main Line, Chitose Line, etc.)",
+      nameKo: "JR 홋카이도 (하코다테 본선, 지토세선 등)",
+      color: "#0099ff",
+      lineIds: ["HakodateMain", "Chitose", "Sassho", "Nemuro", "Sekihoku", "Muroran", "HokkaidoShinkansen"],
+      order: 1
+    }
+  ],
+  "JR_SHIKOKU": [
+    {
+      code: "JR四国",
+      nameJa: "JR四国（予讃線・土讃線など）",
+      nameZh: "JR四国（予赞线・土赞线等）",
+      nameEn: "JR Shikoku (Yosan Line, Dosan Line, etc.)",
+      nameKo: "JR 시코쿠 (요산선, 도산선 등)",
+      color: "#00cc66",
+      lineIds: ["Yosan", "Dosan", "Tokushima", "Mugi"],
+      order: 1
+    }
+  ],
+  "HANKYU": [
+    {
+      code: "HK",
+      nameJa: "阪急電鉄（京都線・宝塚線・神戸線）",
+      nameZh: "阪急电车（京都线・宝塚线・神户线）",
+      nameEn: "Hankyu Railway (Kyoto Line, Takarazuka Line, Kobe Line)",
+      nameKo: "한큐 전철 (교토선, 다카라즈카선, 고베선)",
+      color: "#2b6cb0",
+      lineIds: ["HankyuKyoto", "HankyuTakarazuka", "HankyuKobe"],
+      order: 1
+    }
+  ],
+  "HANSHIN": [
+    {
+      code: "HS",
+      nameJa: "阪神電気鉄道（本線・難波線）",
+      nameZh: "阪神电车（本线・难波线）",
+      nameEn: "Hanshin Electric Railway (Main Line, Namba Line)",
+      nameKo: "한신 전기 철도 (본선, 난바선)",
+      color: "#0033cc",
+      lineIds: ["HanshinMain", "HanshinNamba"],
+      order: 1
+    }
+  ],
+  "KINTETSU": [
+    {
+      code: "A",
+      nameJa: "近畿日本鉄道（大阪線・奈良線・京都線など）",
+      nameZh: "近畿日本铁道（大阪线・奈良线・京都线等）",
+      nameEn: "Kintetsu Railway (Osaka Line, Nara Line, Kyoto Line, etc.)",
+      nameKo: "긴키 일본 철도 (오사카선, 나라선, 교토선 등)",
+      color: "#e60012",
+      lineIds: ["KintetsuOsaka", "KintetsuNara", "KintetsuKyoto", "KintetsuNagoya", "KintetsuYamatoji", "KintetsuYoshino"],
+      order: 1
+    }
+  ],
+  "NANKAI": [
+    {
+      code: "NK",
+      nameJa: "南海電気鉄道（本線・高野線）",
+      nameZh: "南海电车（本线・高野线）",
+      nameEn: "Nankai Electric Railway (Main Line, Koya Line)",
+      nameKo: "난카이 전기 철도 (본선, 고야선)",
+      color: "#cc0033",
+      lineIds: ["NankaiMain", "NankaiKoya", "NankaiAirport"],
+      order: 1
+    }
+  ],
+  "SANYO": [
+    {
+      code: "SY",
+      nameJa: "山陽電気鉄道（本線・網干線）",
+      nameZh: "山阳电车（本线・网干线）",
+      nameEn: "Sanyo Electric Railway (Main Line, Aboshi Line)",
+      nameKo: "산요 전기 철도 (본선, 아보시선)",
+      color: "#0077cc",
+      lineIds: ["SanyoMain"],
+      order: 1
+    }
+  ],
+  "OSAKA_METRO": [
+    {
+      code: "Osaka Metro",
+      nameJa: "Osaka Metro（御堂筋線・谷町線など）",
+      nameZh: "Osaka Metro（御堂筋线・谷町线等）",
+      nameEn: "Osaka Metro (Midosuji Line, Tanimachi Line, etc.)",
+      nameKo: "오사카 메트로 (미도스지선, 다니마치선 등)",
+      color: "#ff9900",
+      lineIds: ["Midosuji", "Tanimachi", "Yotsubashi", "Chuo", "Sennichimae", "Sakaisuji", "NagahoriTsurumiryokuchi", "Imazatosuji"],
+      order: 1
+    }
+  ],
+  "MEITETSU": [
+    {
+      code: "MY",
+      nameJa: "名古屋鉄道（名古屋本線・犬山線など）",
+      nameZh: "名古屋铁道（名古屋本线・犬山线等）",
+      nameEn: "Meitetsu (Nagoya Main Line, Inuyama Line, etc.)",
+      nameKo: "나고야 철도 (나고야 본선, 이누야마선 등)",
+      color: "#e60012",
+      lineIds: ["MeitetsuNagoya", "MeitetsuInuyama", "MeitetsuToyota", "MeitetsuTokoname", "MeitetsuSeto", "MeitetsuKomaki"],
+      order: 1
+    }
+  ],
+  "NISHITETSU": [
+    {
+      code: "N",
+      nameJa: "西日本鉄道（天神大牟田線・貝塚線）",
+      nameZh: "西日本铁道（天神大牟田线・贝冢线）",
+      nameEn: "Nishi-Nippon Railroad (Tenjin Omuta Line, Kaizuka Line)",
+      nameKo: "서일본 철도 (덴진 오무타선, 가이즈카선)",
+      color: "#009944",
+      lineIds: ["NishitetsuTenjinOmuta", "NishitetsuKaizuka"],
+      order: 1
+    }
+  ],
 };
 
 /*
