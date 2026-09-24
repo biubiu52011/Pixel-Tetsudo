@@ -175,13 +175,14 @@
     if (_manualCands.length > 1 && _trainNoCands.length > 0) {
       order = ['trainNo', 'manual', 'odpt', 'map'];
     }
-    // v4.3.1006b: S2 与 manual 同源同候选（estimator 把 manual 候选串原样转存 S2）不构成实证——
-    // 若 trainNo 候选只是 manual 候选串的复制（无跨线/实时新增信息），放行下方加权映射；
-    // 只有 S2 携带 manual 之外的新候选（如跨线车号级实证）才阻断加权、保持实证优先。
-    var _fleetEligible = _manualCands.length > 1;
+    // v4.3.1006b/c: 加权候选池统一按 orderArr（S0 manual + S3 map 全候选）判定——
+    // 候选串可能来自 S0 manual（estimator 转存）或 S3 map（Arakawa ODPT 无车型、vehicleType 空，
+    // 候选串由 vehicle-type-map.js MAP 提供），两种情况都应按保有数比例映射；
+    // S2 若携带 orderArr 之外的新候选（跨线/实时车号级实证）才阻断加权、保持实证优先。
+    var _fleetEligible = orderArr.length > 1;
     if (_fleetEligible && _trainNoCands.length > 0) {
-      var _sameAsManual = _trainNoCands.length === _manualCands.length &&
-        _trainNoCands.every(function(c) { return _manualCands.indexOf(c) >= 0; });
+      var _sameAsManual = _trainNoCands.length === orderArr.length &&
+        _trainNoCands.every(function(c) { return orderArr.indexOf(c) >= 0; });
       if (!_sameAsManual) _fleetEligible = false;
     }
     var chosen = '';
@@ -193,9 +194,10 @@
     if (_fleetEligible &&
         window.TrainIcons && window.TrainIcons.VEHICLE_FLEET_WEIGHTS && lineId) {
       var _fleet = window.TrainIcons.VEHICLE_FLEET_WEIGHTS[lineId] || {};
-      var _wArr = _fleet[ctx.vehicleTypeManual] || _fleet['*'];
-      if (_wArr && _wArr.length === _manualCands.length) {
-        var _seed = (trainNumber || '') + '|' + lineId + '|' + ctx.vehicleTypeManual;
+      var _fleetKey = orderArr.join(' / ');
+      var _wArr = _fleet[_fleetKey] || _fleet['*'];
+      if (_wArr && _wArr.length === orderArr.length) {
+        var _seed = (trainNumber || '') + '|' + lineId + '|' + _fleetKey;
         var _h = 0;
         for (var _si = 0; _si < _seed.length; _si++) _h = ((_h * 31) + _seed.charCodeAt(_si)) >>> 0;
         var _total = 0;
@@ -206,7 +208,7 @@
           if (_r < _acc) { _fleetIdx = _wi; break; }
         }
         if (_fleetIdx < 0) _fleetIdx = _wArr.length - 1;
-        chosen = _manualCands[_fleetIdx];
+        chosen = orderArr[_fleetIdx];
         chosenSrc = 'fleet';
       }
     }
