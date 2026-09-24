@@ -279,7 +279,8 @@
       confidence: confidence,
       iconPath: iconPath,
       // 兼容原 vehicleType 候选串格式（"A / B / C"，稳定顺序）
-      vehicleTypeStr: orderArr.join(' / ')
+      // v4.3.1007b: 加权随机映射已确定单一车型时,vehicleTypeStr 与 name 一致(title 不再显示候选串)
+      vehicleTypeStr: (chosenSrc === 'fleet' && chosen) ? chosen : orderArr.join(' / ')
     };
   }
 
