@@ -2600,7 +2600,7 @@ var LINE_ICON_OVERRIDES = [
       'Local': { 'default': '12-000形 / 12-600形' },
     },
     'Arakawa': {
-      'Local': { 'default': '7700形 / 8800形 / 8900形 / 9000形' },
+      'Local': { 'default': '7700形 / 8500形 / 8800形 / 8900形 / 9000形' },
     },
     'Nippori_Toneri': {
       'Local': { 'default': '330形' },
