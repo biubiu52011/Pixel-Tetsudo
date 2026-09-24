@@ -484,6 +484,11 @@
           // v4.3.454: 终点站提取（odpt:destinationStation）——供详情图列车标签显示终点/方向
           var destStations = t["odpt:destinationStation"] || [];
           var destStation = destStations.length > 0 ? String(destStations[0]).split(".").pop() : "";
+          // v4.3.1000: 环线列车（odpt:railDirection 内/外回り）——ODPT destinationStation 固定线路基准站
+          // （实测山手線 26 列全为 Osaki"大崎"、无行先意义）；改由实时方向作标签行先，
+          // 位置仍由 fromStation（stationIndex）实时驱动。大江戸線等同理受益。
+          if (directionName === 'InnerLoop') destStation = '内回り';
+          else if (directionName === 'OuterLoop') destStation = '外回り';
           var matchingLines = [];
           Object.keys(allLines).forEach(function(lid) {
             var line = allLines[lid];
