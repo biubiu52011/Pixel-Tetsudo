@@ -1022,7 +1022,7 @@ window.getTransferHint = function(stationId, lang) {
 
   var THROUGH_SERVICE_MAP = {
     // 東武スカイツリーライン・伊勢崎線（東武動物公園で相互直通）
-    "TobuSkytree": ["Hibiya", "Hanzomon", "Asakusa", "TobuIsesaki"],
+    "TobuSkytree": ["Hibiya", "Hanzomon", "TobuIsesaki"],
     "TobuIsesaki": ["Hibiya", "Hanzomon", "TobuSkytree", "TobuNikko"],
     // 東京メトロ
     "Hibiya": ["TobuSkytree", "TobuIsesaki"],
