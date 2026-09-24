@@ -122,6 +122,8 @@ window.TRAIN_TYPE_NAMES = {
   "odpt.TrainType:MIR.Local":                          { ja: "各駅停車", en: "Local", zh: "各站停车", ko: "각역정차" },
   "odpt.TrainType:SaitamaRailway.Local":               { ja: "普通", en: "Local", zh: "普通", ko: "보통" },
   "odpt.TrainType:TamaMonorail.Local":                 { ja: "普通", en: "Local", zh: "普通", ko: "보통" },
+  "odpt.TrainType:ChibaMonorail.Local":                 { ja: "普通", en: "Local", zh: "普通", ko: "보통" },
+  "odpt.TrainType:ShonanMonorail.Local":                { ja: "普通", en: "Local", zh: "普通", ko: "보통" },
   "odpt.TrainType:TokyoMonorail.AirportRapid":         { ja: "空港快速", en: "Airport Rapid", zh: "机场快速", ko: "공항쾌속" },
   "odpt.TrainType:TokyoMonorail.Local":                 { ja: "普通", en: "Local", zh: "普通", ko: "보통" },
   "odpt.TrainType:TokyoMonorail.SectionRapid":          { ja: "区間快速", en: "Section Rapid", zh: "区间快速", ko: "구간쾌속" },
