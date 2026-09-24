@@ -1002,6 +1002,10 @@
   // 防重入：_manualLoading 记录共享 Promise，同线路并发调用只发一次请求。
   // 结果归属：调用方（trains-page）在 .then 中校验 currentLine，用户切走线路后旧结果不覆盖新状态。
   var _manualLoading = {};
+  // v4.3.1016: ODPT 有时刻表也尝试加载 manual——ODPT 时刻表无 vehicleType（53939 条实测 0 条带车型），
+  // manual 时刻表带 vehicleType（172/178 文件）——车型判定需 manual 实证（S0/S2）。
+  // 404（该线无 manual 文件）→ 标记 _manualMissing 并回退 ODPT，零重复请求。
+  var _manualMissing = {};
 
   function _hasOdptTimetable(lineId) {
     try {
@@ -1029,8 +1033,12 @@
       try {
         var varName = lineId + '_MANUAL_TIMETABLES';
         if (window[varName]) { resolve(true); return; }
-        // ODPT 已有该线时刻表（首都圈等）→ 无需 manual，零请求
-        if (window.ODPT_TIMETABLES && _hasOdptTimetable(lineId)) { resolve(true); return; }
+        // v4.3.1016: ODPT 已有该线时刻表（首都圈等）→ 仍尝试加载 manual（车型实证）：
+        // ODPT 时刻表无 vehicleType，manual 带 vehicleType；文件不存在（404）由 onerror 回退 ODPT。
+        if (window.ODPT_TIMETABLES && _hasOdptTimetable(lineId)) {
+          if (_manualMissing[lineId]) { resolve(true); return; }
+          // fall through 到加载流程；onerror 时回退 ODPT
+        }
         // 加载中：复用同一 Promise，避免并发重复请求
         if (_manualLoading[lineId]) { _manualLoading[lineId].then(resolve, reject); return; }
         var s = document.createElement('script');
@@ -1069,7 +1077,12 @@
             try { fuseAll(); } catch(e) { console.debug("[DataFusion] ensureManual->fuseAll error:", e.message); }
             res(true);
           };
-          s.onerror = function() { rej(new Error('manual file not found (ODPT 无数据且无 manual 文件?)')); };
+          s.onerror = function() {
+            _manualMissing[lineId] = true;
+            // ODPT 有该线时刻表 → 回退 ODPT（零阻断）；否则才报缺数据
+            if (window.ODPT_TIMETABLES && _hasOdptTimetable(lineId)) { res(true); }
+            else { rej(new Error('manual file not found (ODPT 无数据且无 manual 文件?)')); }
+          };
         });
         _manualLoading[lineId] = p;
         p.then(function() { delete _manualLoading[lineId]; }, function() { delete _manualLoading[lineId]; });
