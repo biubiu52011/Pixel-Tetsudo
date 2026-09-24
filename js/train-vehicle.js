@@ -175,13 +175,22 @@
     if (_manualCands.length > 1 && _trainNoCands.length > 0) {
       order = ['trainNo', 'manual', 'odpt', 'map'];
     }
+    // v4.3.1006b: S2 与 manual 同源同候选（estimator 把 manual 候选串原样转存 S2）不构成实证——
+    // 若 trainNo 候选只是 manual 候选串的复制（无跨线/实时新增信息），放行下方加权映射；
+    // 只有 S2 携带 manual 之外的新候选（如跨线车号级实证）才阻断加权、保持实证优先。
+    var _fleetEligible = _manualCands.length > 1;
+    if (_fleetEligible && _trainNoCands.length > 0) {
+      var _sameAsManual = _trainNoCands.length === _manualCands.length &&
+        _trainNoCands.every(function(c) { return _manualCands.indexOf(c) >= 0; });
+      if (!_sameAsManual) _fleetEligible = false;
+    }
     var chosen = '';
     var chosenSrc = '';
     // v4.3.1006: 保有数比例加权随机映射（用户决策 2026-09-24）——
     // 候选串无法精确识别（如都電五选一"7700形/8500形/8800形/8900形/9000形"）且无 S2 车号实证时，
     // 按官网在籍数权重做确定性 hash 选型：同一车次（trainId）每次稳定同一车型，
     // 杜绝"全线一个兜底跑天下"；权重表 VEHICLE_FLEET_WEIGHTS（train-icons.js）人工按官网核验。
-    if (_manualCands.length > 1 && _trainNoCands.length === 0 &&
+    if (_fleetEligible &&
         window.TrainIcons && window.TrainIcons.VEHICLE_FLEET_WEIGHTS && lineId) {
       var _fleet = window.TrainIcons.VEHICLE_FLEET_WEIGHTS[lineId] || {};
       var _wArr = _fleet[ctx.vehicleTypeManual] || _fleet['*'];
