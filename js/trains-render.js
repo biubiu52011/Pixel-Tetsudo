@@ -1069,7 +1069,9 @@
             trainType: p.trainType,
             destinationStation: p.destinationStation,
             byOperator: !!p.trainOperator && (p.trainOperator || '') !== line.operator,
-            trainId: trainUid
+            trainId: trainUid,
+            // v4.3.1018: S0 manual 实证透传——推算侧直通列车重新 resolve 时不丢 manual vehicleType
+            vehicleTypeManual: p.vehicleTypeManual || ''
           };
           iconSrc = window.TrainVehicle.resolve(_vrCtx).iconPath || '';
           if (iconSrc) window.__trainIconCache[_icKey] = iconSrc;

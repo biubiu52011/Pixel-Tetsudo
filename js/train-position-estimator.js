@@ -512,7 +512,9 @@
             railDirection: directionName,
             destinationStation: destinationStation,
             trainClass: trainClass,
-            vehicleType: _vehicleType
+            vehicleType: _vehicleType,
+            // v4.3.1018: manual vehicleType 透传渲染层
+            vehicleTypeManual: tt['vehicleType'] || ''
           });
         }
       }
