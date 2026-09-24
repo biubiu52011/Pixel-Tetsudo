@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Pixel Tetsudo - Train Icon Mapping
  * 列车车型图标映射表
  * 图标来源: trainfrontview.net (32x38px)
@@ -123,14 +123,14 @@
   // Operator default icons (fallback)
   var OPERATOR_ICONS = {
     "JR-East": "../images/列车/JR東日本/E235系山手線.png",
-    "JR West": "../images/列车/JR東日本/E235系山手線.png",
+    "JR West": "../images/列车/JR西日本/w223.png", // 4.3.950：JR西日本現役主力通勤車（223系），原误用JR東日本E235系已修正
     "TokyoMetro": "../images/列车/東京メトロ/1000系.png",
     "Toei": "../images/列车/都営地下鉄/6300形.png", // 4.3.266：原都営浅草線.png 为电子设备占位图，1000形.png 与東武1000系重复已删，改用 6300形（三田線）
     "YokohamaMunicipal": "../images/列车/横浜市交通局/4000形.png",
     "Keio": "../images/列车/京王電鉄/2000系.png", // 4.3.277：京王.png 与 2000系.png 同一图（哈希一致），归并至 2000系.png
     "Odakyu": "../images/列车/小田急電鉄/4000系.png", // 4.3.275：小田急系統共通 4000系（千代田直通の現役主力、小田原/江ノ島/多摩 同一車輛体系）
     "Seibu": "../images/列车/西武鉄道/30000系.png", // 4.3.270：西武运营商默认 = 30000系（通勤主力）
-    "Tobu": "../images/列车/東武鉄道/8000系.png", // 4.3.274：東武標準一般車
+    "Tobu": "../images/列车/東武鉄道/70000系.png", // 4.3.950：東武現役主力（晴空塔线/日光线，2017年投入），原8000系为退役老车已替换
     "Tokyu": "../images/列车/東急電鉄/2020系.png",
     "Keikyu": "../images/列车/京急電鉄/1000系.png",
     "Keisei": "../images/列车/京成電鉄/80000形.png", // 4.3.457：京成本線系主力 80000形（3200形は引退進行）
@@ -2034,3 +2034,5 @@ var LINE_VEHICLE_OVERRIDES = {
 
   console.debug("[TrainIcons] initialized with", Object.keys(LINE_ICONS).length, "line icons and", Object.keys(OPERATOR_ICONS).length, "operator defaults");
 })();
+
+
