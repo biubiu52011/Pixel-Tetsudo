@@ -1130,6 +1130,105 @@ var FLEET_ICON_POOLS = {
   "都営5500形": ["../images/列车/都営地下鉄/toky5500.png"],
   "都営6500形": ["../images/列车/都営地下鉄/toky6500.png"]
 };
+
+// v4.3.1026: 编成/保有权重
+var VEHICLE_FLEET_WEIGHTS = {
+  "7700形 / 8500形 / 8800形 / 8900形 / 9000形": [8,5,10,8,2],
+  // v4.3.1026: 東京臨海高速鉄道（raillab 東臨運輸区編成表 2026-09 快照）：
+  // 运用中 70-000形 编成 1/2/3/7（4编成）、71-000形 编成 Z11~Z14（4编成）= 4:4
+  // E233系7000番台 = 埼京線直通（operator=JR-East 已单独锁定，此低权重仅兜底未知场景）
+  "E233系7000番台 / 71-000形 / 70-000形": [1,4,4]
+};
+
+// v4.3.1025: 编成/涂装池
+var FLEET_ICON_POOLS = {
+  "E209系": ["../images/列车/JR東日本/e209bbb.png", "../images/列车/JR東日本/e209c.png", "../images/列车/JR東日本/e209hk.png", "../images/列车/JR東日本/e209jg.png", "../images/列车/JR東日本/e209jg2.png", "../images/列车/JR東日本/e209jg3.png", "../images/列车/JR東日本/e209jg4.png", "../images/列车/JR東日本/e209jy.png", "../images/列车/JR東日本/e209jy1.png", "../images/列车/JR東日本/e209kt.png", "../images/列车/JR東日本/e209kt0.png", "../images/列车/JR東日本/e209kt2.png", "../images/列车/JR東日本/e209kt3.png", "../images/列车/JR東日本/e209kt_ad.png", "../images/列车/JR東日本/e209ky.png", "../images/列车/JR東日本/e209ky1.png", "../images/列车/JR東日本/e209mu.png", "../images/列车/JR東日本/e209na.png", "../images/列车/JR東日本/e209na2.png", "../images/列车/JR東日本/e209na3.png", "../images/列车/JR東日本/e209or1.png", "../images/列车/JR東日本/e209so.png", "../images/列车/JR東日本/e209so1.png", "../images/列车/JR東日本/e209sta.png", "../images/列车/JR東日本/e209_kt.png", "../images/列车/JR東日本/e209_kt2.png"],
+  "313系": ["../images/列车/JR東海/c313.png", "../images/列车/JR東海/c313bb.png", "../images/列车/JR東海/c313ce.png", "../images/列车/JR東海/c313h.png", "../images/列车/JR東海/c313hp.png", "../images/列车/JR東海/c313p.png"],
+  "315系": ["../images/列车/JR東海/c315.png", "../images/列车/JR東海/c315k.png"],
+  "383系": ["../images/列车/JR東海/c383.png", "../images/列车/JR東海/c383k.png", "../images/列车/JR東海/c383k_.png"],
+  "7000系": ["../images/列车/東急電鉄/7000系.png", "../images/列车/ゆりかもめ/yrkm7000-1.png", "../images/列车/ゆりかもめ/yrkm7000-2.png", "../images/列车/ゆりかもめ/yrkm7000-3.png", "../images/列车/ゆりかもめ/yrkm7000-4.png"],
+  "埼玉新都市交通1000系": ["../images/列车/埼玉新都市交通/nstl1054.png", "../images/列车/埼玉新都市交通/nstl1000gr.png", "../images/列车/埼玉新都市交通/nstl1000re.png", "../images/列车/埼玉新都市交通/nstl1051gr.png", "../images/列车/埼玉新都市交通/nstl1051re.png", "../images/列车/埼玉新都市交通/nstl1051rw1.png", "../images/列车/埼玉新都市交通/nstl1051wb1.png", "../images/列车/埼玉新都市交通/nstl1052nm.png", "../images/列车/埼玉新都市交通/nstl1053g.png", "../images/列车/埼玉新都市交通/nstl1053g1.png", "../images/列车/埼玉新都市交通/nstl1053ng.png", "../images/列车/埼玉新都市交通/nstl1054_1.png"],
+  "埼玉新都市交通2000系": ["../images/列车/埼玉新都市交通/nstl2000.png", "../images/列车/埼玉新都市交通/nstl2002.png", "../images/列车/埼玉新都市交通/nstl2003.png", "../images/列车/埼玉新都市交通/nstl2004.png", "../images/列车/埼玉新都市交通/nstl2005.png", "../images/列车/埼玉新都市交通/nstl2006.png", "../images/列车/埼玉新都市交通/nstl2007.png"],
+  "埼玉新都市交通2020系": ["../images/列车/埼玉新都市交通/nstl2026.png", "../images/列车/埼玉新都市交通/nstl2025.png", "../images/列车/埼玉新都市交通/nstl2024.png", "../images/列车/埼玉新都市交通/nstl2023.png", "../images/列车/埼玉新都市交通/nstl2022.png", "../images/列车/埼玉新都市交通/nstl2021.png", "../images/列车/埼玉新都市交通/nstl2026b.png"],
+  "1000系": ["../images/列车/多摩モノレール/mn-tma1000.png", "../images/列车/多摩モノレール/mn-tma1000w.png", "../images/列车/多摩モノレール/mn-tma1016.png"],
+  "都電6000形": ["../images/列车/東京さくらトラム/todn6000.png", "../images/列车/東京さくらトラム/todn6000y.png"],
+  "都電7000形": ["../images/列车/東京さくらトラム/todn7000.png", "../images/列车/東京さくらトラム/todn7000n.png", "../images/列车/東京さくらトラム/todn7000y.png", "../images/列车/東京さくらトラム/todn7000yn.png", "../images/列车/東京さくらトラム/todn7001.png", "../images/列车/東京さくらトラム/todn7003.png", "../images/列车/東京さくらトラム/todn7007.png"],
+  "都電7500形": ["../images/列车/東京さくらトラム/todn7500.png", "../images/列车/東京さくらトラム/todn7500y.png", "../images/列车/東京さくらトラム/todn7501.png"],
+  "都電7700形": ["../images/列车/東京さくらトラム/todn7700.png", "../images/列车/東京さくらトラム/todn7701.png", "../images/列车/東京さくらトラム/todn7702.png"],
+  "都電8500形": ["../images/列车/東京さくらトラム/todn8500.png", "../images/列车/東京さくらトラム/todn8500y.png"],
+  "都電8800形": ["../images/列车/東京さくらトラム/todn8800.png", "../images/列车/東京さくらトラム/todn8801.png", "../images/列车/東京さくらトラム/todn8802.png", "../images/列车/東京さくらトラム/todn8803.png"],
+  "都電8900形": ["../images/列车/東京さくらトラム/todn8900.png", "../images/列车/東京さくらトラム/todn8901.png", "../images/列车/東京さくらトラム/todn8902.png", "../images/列车/東京さくらトラム/todn8903.png"],
+  "都電9000形": ["../images/列车/東京さくらトラム/todn9000.png", "../images/列车/東京さくらトラム/todn9002.png"],
+  "東京モノレール1000形": ["../images/列车/東京モノレール/1000形（別）.png", "../images/列车/東京モノレール/mn-tky1000b.png", "../images/列车/東京モノレール/mn-tky1000o.png", "../images/列车/東京モノレール/mn-tky1000r.png", "../images/列车/東京モノレール/mn-tky1003.png", "../images/列车/東京モノレール/mn-tky1004.png"],
+  "東京モノレール10000形": ["../images/列车/東京モノレール/mn-tky10000.png", "../images/列车/東京モノレール/mn-tky10000o.png"],
+  "東京モノレール100形": ["../images/列车/東京モノレール/mn-tky100.png", "../images/列车/東京モノレール/mn-tky100r.png"],
+  "東京モノレール2000形": ["../images/列车/東京モノレール/mn-tky2000.png", "../images/列车/東京モノレール/mn-tky2001.png"],
+  "東京モノレール330形": ["../images/列车/東京モノレール/mn-tky33.png"],
+  "70-000形": ["../images/列车/東京臨海高速鉄道/twr70000.png", "../images/列车/東京臨海高速鉄道/twr70001.png", "../images/列车/東京臨海高速鉄道/twr70002.png"],
+  "東急電鉄1000系": ["../images/列车/東急電鉄/1000系（別）.png", "../images/列车/東急電鉄/1000系（別2）.png", "../images/列车/東急電鉄/1000系（別3）.png"],
+  "東武9000系": ["../images/列车/東武鉄道/tob9000.png", "../images/列车/東武鉄道/9000系（別）.png"],
+  "東武10000系": ["../images/列车/東武鉄道/tob10000.png", "../images/列车/東武鉄道/tob10000p.png", "../images/列车/東武鉄道/tob10001.png"],
+  "東武10030系": ["../images/列车/東武鉄道/10030系（別）.png", "../images/列车/東武鉄道/tob10030b.png", "../images/列车/東武鉄道/tob10030kin.png", "../images/列车/東武鉄道/tob10030kinp.png", "../images/列车/東武鉄道/tob10031b.png", "../images/列车/東武鉄道/tob10032b.png", "../images/列车/東武鉄道/tob10033b.png"],
+  "東武10050系": ["../images/列车/東武鉄道/tob10050.png", "../images/列车/東武鉄道/tob10050p.png", "../images/列车/東武鉄道/tob10051.png", "../images/列车/東武鉄道/tob10051p.png", "../images/列车/東武鉄道/tob10052.png"],
+  "東武100系": ["../images/列车/東武鉄道/tob100.png", "../images/列车/東武鉄道/tob100drc.png", "../images/列车/東武鉄道/tob100g.png", "../images/列车/東武鉄道/tob100m.png", "../images/列车/東武鉄道/tob100o.png", "../images/列车/東武鉄道/tob100re.png", "../images/列车/東武鉄道/tob100v.png"],
+  "東武20000系": ["../images/列车/東武鉄道/tob20000.png", "../images/列车/東武鉄道/tob20000b.png"],
+  "東武200系": ["../images/列车/東武鉄道/tob200.png", "../images/列车/東武鉄道/tob200b.png", "../images/列车/東武鉄道/tob200bw.png", "../images/列车/東武鉄道/tob200r.png"],
+  "東武30000系": ["../images/列车/東武鉄道/tob30000.png", "../images/列车/東武鉄道/tob30000f.png", "../images/列车/東武鉄道/tob30001.png"],
+  "東武50000系": ["../images/列车/東武鉄道/tob50000.png", "../images/列车/東武鉄道/tob50000ll.png", "../images/列车/東武鉄道/tob50002.png"],
+  "東武50050系": ["../images/列车/東武鉄道/50000系.png", "../images/列车/東武鉄道/tob50051.png", "../images/列车/東武鉄道/tob50052.png", "../images/列车/東武鉄道/tob50053.png", "../images/列车/東武鉄道/tob50054.png", "../images/列车/東武鉄道/tob50055.png", "../images/列车/東武鉄道/tob50056.png"],
+  "東武50070系": ["../images/列车/東武鉄道/50070系.png", "../images/列车/東武鉄道/tob50070.png"],
+  "東武50090系": ["../images/列车/東武鉄道/50090系.png", "../images/列车/東武鉄道/tob50090.png", "../images/列车/東武鉄道/tob50090kwr.png", "../images/列车/東武鉄道/tob50090kwv.png", "../images/列车/東武鉄道/tob50091.png"],
+  "東武60000系": ["../images/列车/東武鉄道/tob60000.png", "../images/列车/東武鉄道/tob60000f.png", "../images/列车/東武鉄道/tob60001.png"],
+  "東武70090系": ["../images/列车/東武鉄道/70090系.png", "../images/列车/東武鉄道/tob70090.png"],
+  "東武8000系": ["../images/列车/東武鉄道/tob8000.png", "../images/列车/東武鉄道/tob8000-1.png", "../images/列车/東武鉄道/tob8000-1o.png", "../images/列车/東武鉄道/tob8000-2.png", "../images/列车/東武鉄道/tob8000c.png", "../images/列车/東武鉄道/tob8000o.png", "../images/列车/東武鉄道/tob8000up.png"],
+  "東武80000系": ["../images/列车/東武鉄道/80000系.png", "../images/列车/東武鉄道/tob80000.png"],
+  "東武90000系": ["../images/列车/東武鉄道/tob90000.png"],
+  "横浜市交通局10000形": ["../images/列车/横浜市交通局/yok10000.png", "../images/列车/横浜市交通局/yok10001.png", "../images/列车/横浜市交通局/yok10002.png"],
+  "横浜市交通局1000形": ["../images/列车/横浜市交通局/yok1000.png", "../images/列车/横浜市交通局/yok1000h.png", "../images/列车/横浜市交通局/yok1000jg.png"],
+  "横浜市交通局2000形": ["../images/列车/横浜市交通局/yok2000.png", "../images/列车/横浜市交通局/yok2000h.png"],
+  "横浜市交通局3000形": ["../images/列车/横浜市交通局/yok3000h.png", "../images/列车/横浜市交通局/yok3000n.png", "../images/列车/横浜市交通局/yok3000n2.png", "../images/列车/横浜市交通局/yok3000s.png", "../images/列车/横浜市交通局/yok3000v.png", "../images/列车/横浜市交通局/yok3001n2.png", "../images/列车/横浜市交通局/yok3001s2.png"],
+  "相模鉄道10000系": ["../images/列车/相模鉄道/sote10000.png", "../images/列车/相模鉄道/sote10000b.png", "../images/列车/相模鉄道/sote10000n.png", "../images/列车/相模鉄道/sote10002.png"],
+  "相模鉄道11000系": ["../images/列车/相模鉄道/sote11000.png", "../images/列车/相模鉄道/sote11000b.png"],
+  "相模鉄道8000系": ["../images/列车/相模鉄道/8000系.png", "../images/列车/相模鉄道/sote8000b.png", "../images/列车/相模鉄道/sote8000n.png", "../images/列车/相模鉄道/sote8001.png", "../images/列车/相模鉄道/sote8002.png", "../images/列车/相模鉄道/sote8003.png", "../images/列车/相模鉄道/sote8005.png", "../images/列车/相模鉄道/sote8006.png", "../images/列车/相模鉄道/sote8006f.png"],
+  "相模鉄道9000系": ["../images/列车/相模鉄道/9000系.png", "../images/列车/相模鉄道/sote9002l.png", "../images/列车/相模鉄道/sote9007.png"],
+  "西武10000系": ["../images/列车/西武鉄道/seb10000.png", "../images/列车/西武鉄道/10000系（別）.png", "../images/列车/西武鉄道/seb10000b.png", "../images/列车/西武鉄道/seb10000r.png", "../images/列车/西武鉄道/seb10001.png", "../images/列车/西武鉄道/seb10002.png"],
+  "西武101系": ["../images/列车/西武鉄道/seb101.png", "../images/列车/西武鉄道/seb101b.png", "../images/列车/西武鉄道/seb101n.png", "../images/列车/西武鉄道/seb101nbj.png", "../images/列车/西武鉄道/seb101no.png", "../images/列车/西武鉄道/seb101nr.png", "../images/列车/西武鉄道/seb101p.png", "../images/列车/西武鉄道/seb101pmo.png", "../images/列车/西武鉄道/seb101psk.png", "../images/列车/西武鉄道/seb101psk1.png", "../images/列车/西武鉄道/seb101sk.png", "../images/列车/西武鉄道/seb101tg1.png", "../images/列车/西武鉄道/seb101tg2.png", "../images/列车/西武鉄道/seb101tg3.png", "../images/列车/西武鉄道/seb101tg4.png", "../images/列车/西武鉄道/seb101w.png"],
+  "西武20000系": ["../images/列车/西武鉄道/seb20000.png", "../images/列车/西武鉄道/seb20000n.png", "../images/列车/西武鉄道/seb20001.png", "../images/列车/西武鉄道/seb20002.png"],
+  "西武2000系": ["../images/列车/西武鉄道/seb2000.png", "../images/列车/西武鉄道/seb2000l.png", "../images/列车/西武鉄道/seb2000o.png", "../images/列车/西武鉄道/seb2000of.png", "../images/列车/西武鉄道/seb2000p.png", "../images/列车/西武鉄道/seb2000yb.png"],
+  "西武30000系": ["../images/列车/西武鉄道/seb30000.png", "../images/列车/西武鉄道/seb30000dr.png", "../images/列车/西武鉄道/seb30000ko.png", "../images/列车/西武鉄道/seb30001.png", "../images/列车/西武鉄道/seb30002.png", "../images/列车/西武鉄道/seb30003.png"],
+  "西武40000系": ["../images/列车/西武鉄道/40000系.png", "../images/列车/西武鉄道/seb40000.png", "../images/列车/西武鉄道/seb40000tko.png", "../images/列车/西武鉄道/seb40000tkr.png"],
+  "西武4000系": ["../images/列车/西武鉄道/seb4000.png", "../images/列车/西武鉄道/seb4000r.png"],
+  "西武6000系": ["../images/列车/西武鉄道/seb6000.png", "../images/列车/西武鉄道/seb6000ll.png", "../images/列车/西武鉄道/seb6000nll.png", "../images/列车/西武鉄道/seb6000yw.png"],
+  "西武9000系": ["../images/列车/西武鉄道/seb9000.png", "../images/列车/西武鉄道/seb9000r.png"],
+  "都営10-000形": ["../images/列车/都営地下鉄/toky10000.png", "../images/列车/都営地下鉄/toky10000n.png", "../images/列车/都営地下鉄/toky10000p.png", "../images/列车/都営地下鉄/toky10001.png", "../images/列车/都営地下鉄/toky10001p.png", "../images/列车/都営地下鉄/toky10002.png", "../images/列车/都営地下鉄/toky10002p.png", "../images/列车/都営地下鉄/toky10003p.png"],
+  "都営10-490形": ["../images/列车/都営地下鉄/toky10490.png", "../images/列车/都営地下鉄/toky10490l.png"],
+  "都営10-520形": ["../images/列车/都営地下鉄/toky10520.png", "../images/列车/都営地下鉄/toky10520l.png"],
+  "都営12-000形": ["../images/列车/都営地下鉄/toky12000.png", "../images/列车/都営地下鉄/toky12000o.png", "../images/列车/都営地下鉄/toky12000o1.png", "../images/列车/都営地下鉄/toky12001.png", "../images/列车/都営地下鉄/toky12002.png"],
+  "都営12-600形": ["../images/列车/都営地下鉄/toky12600.png", "../images/列车/都営地下鉄/toky12601.png"],
+  "都営5000形": ["../images/列车/都営地下鉄/toky5000.png", "../images/列车/都営地下鉄/toky5000o.png"],
+  "都営5200形": ["../images/列车/都営地下鉄/toky5200.png", "../images/列车/都営地下鉄/toky5201.png", "../images/列车/都営地下鉄/toky5202.png"],
+  "都営5300形": ["../images/列车/都営地下鉄/toky5300.png", "../images/列车/都営地下鉄/toky5300a.png", "../images/列车/都営地下鉄/toky5301.png"],
+  "都営6000形": ["../images/列车/都営地下鉄/toky6000.png", "../images/列车/都営地下鉄/toky6000o.png", "../images/列车/都営地下鉄/toky6000r.png", "../images/列车/都営地下鉄/toky6001.png", "../images/列车/都営地下鉄/toky6002.png"],
+  "都営6300形": ["../images/列车/都営地下鉄/toky6300.png", "../images/列车/都営地下鉄/toky6300a.png", "../images/列车/都営地下鉄/toky6300b.png"],
+  "TX-1000系": ["../images/列车/首都圏新都市鉄道/tx1000.png", "../images/列车/首都圏新都市鉄道/tx1000f.png"],
+  "TX-2000系": ["../images/列车/首都圏新都市鉄道/tx2000.png", "../images/列车/首都圏新都市鉄道/tx2000rf.png", "../images/列车/首都圏新都市鉄道/tx2001.png", "../images/列车/首都圏新都市鉄道/tx2005.png"],
+  "373系": ["../images/列车/JR東海/c373.png"],
+  "都電4000形": ["../images/列车/東京さくらトラム/todn4000.png"],
+  "都電5500形": ["../images/列车/東京さくらトラム/todn5500.png"],
+  "都電8000形": ["../images/列车/東京さくらトラム/todn8000.png"],
+  "東京モノレール500形": ["../images/列车/東京モノレール/mn-tky500.png"],
+  "東京モノレール700形": ["../images/列车/東京モノレール/mn-tky700.png"],
+  "横浜市交通局4000形": ["../images/列车/横浜市交通局/yok4000.png"],
+  "都営10-250形": ["../images/列车/都営地下鉄/toky10250.png"],
+  "都営10-300形": ["../images/列车/都営地下鉄/toky10300.png"],
+  "都営12-690形": ["../images/列车/都営地下鉄/toky12690.png"],
+  "都営12-700形": ["../images/列车/都営地下鉄/toky12700.png"],
+  "都営300形": ["../images/列车/都営地下鉄/toky300.png"],
+  "都営320形": ["../images/列车/都営地下鉄/toky320.png"],
+  "都営330形": ["../images/列车/都営地下鉄/toky330.png"],
+  "都営5500形": ["../images/列车/都営地下鉄/toky5500.png"],
+  "都営6500形": ["../images/列车/都営地下鉄/toky6500.png"]
+};
   // v4.3.973: 额外车型图标注册表——未被 LINE_ICONS/OPERATOR_ICONS/VEHICLE_DEPLOYMENTS 引用的变体资产（新干线各系变体等），
   // 一并注入反查索引，使别名/直接解析都能命中
   var EXTRA_VEHICLE_ICONS = {
@@ -1551,6 +1650,8 @@ var FLEET_ICON_POOLS = {
   // v4.3.977: 线路感知同名解抢表 + 车型名别名表（resolver 内联）
   var LINE_ICON_NAME_REDIRECT = {};
 
+var LINE_ICON_NAME_REDIRECT = {};
+
 var LINE_VEHICLE_OVERRIDES = {
   "Arakawa": {
     "4000形": "都電4000形",
@@ -1593,7 +1694,7 @@ var LINE_VEHICLE_OVERRIDES = {
     "2000形": "東京モノレール2000形",
     "10000形": "東京モノレール10000形"
   }
-};
+};;
 
   var VEHICLE_NAME_ALIASES = {
     "1500形": "1000形（1300番台）",
@@ -3686,6 +3787,96 @@ function _resolveVehicleIconBase(candidatesStr, lineId) {
     return null;
   }
 
+function _poolPickByIcon(icon, seedStr) {
+    if (!icon) return null;
+    for (var _pk in FLEET_ICON_POOLS) {
+      var _pp = FLEET_ICON_POOLS[_pk];
+      if (_pp.indexOf(icon) >= 0) {
+        if (_pp.length < 2) return icon;
+        var _s = String(seedStr || _pk);
+        var _h = 0;
+        for (var _i = 0; _i < _s.length; _i++) _h = (_h * 31 + _s.charCodeAt(_i)) >>> 0;
+        return _pp[_h % _pp.length];
+      }
+    }
+    return icon;
+  }
+
+function _resolveVehicleIconBase(candidatesStr, lineId) {
+    if (!candidatesStr) return null;
+    var parts = String(candidatesStr).split("/");
+    var _hits = []; // v4.3.1026: 收集全部命中 {n: 候选名, icon}，支持编成/保有权重
+    for (var i = 0; i < parts.length; i++) {
+      var name = parts[i].trim();
+      if (!name) continue;
+      // 0. 线路感知同名解抢（v4.3.977）：同名车型被别社抢占时，按线路优先取专属图标
+      // v4.3.979: 覆盖为「锁定」语义——线路有该车型映射条目时，目标图标未注册则返回 null
+      //           （走 S4 线路默认兜底），绝不落回别社同名图标
+      if (lineId && LINE_VEHICLE_OVERRIDES[lineId]) {
+        var _ov = LINE_VEHICLE_OVERRIDES[lineId];
+        var _ovt = _ov[name];
+        if (!_ovt) {
+          var _ovb = name.replace(/（[^）]*）/g, "").replace(/\([^)]*\)/g, "").trim();
+          _ovt = _ov[_ovb];
+        }
+        if (_ovt) {
+          if (VEHICLE_NAME_TO_ICON[_ovt]) { _hits.push({ n: name, icon: VEHICLE_NAME_TO_ICON[_ovt] }); continue; }
+          // v4.3.988: override 目标支持 alias 展开（如 相模鉄道21000系→相模鉄道13000系近似），
+          // 保持锁定语义——命中别名目标仍有图则用之，否则 return null 走 S4 线路默认，
+          // 绝不落回别社同名图/候选池别社车。
+          var _ovAl = VEHICLE_NAME_ALIASES[_ovt];
+          if (_ovAl && VEHICLE_NAME_TO_ICON[_ovAl]) { _hits.push({ n: name, icon: VEHICLE_NAME_TO_ICON[_ovAl] }); continue; }
+          return null;
+        }
+      }
+      // v4.3.1006: 线路感知裸名重定向（同名被别社抢占：都電8800/8900形 → 都営图标）
+      if (lineId && LINE_ICON_NAME_REDIRECT[lineId] && LINE_ICON_NAME_REDIRECT[lineId][name]) {
+        var _rd = LINE_ICON_NAME_REDIRECT[lineId][name];
+        if (VEHICLE_NAME_TO_ICON[_rd]) { _hits.push({ n: name, icon: VEHICLE_NAME_TO_ICON[_rd] }); continue; }
+      }
+      // 1. 精确匹配
+      if (VEHICLE_NAME_TO_ICON[name]) { _hits.push({ n: name, icon: VEHICLE_NAME_TO_ICON[name] }); continue; }
+      // 2. 别名表
+      var _al = VEHICLE_NAME_ALIASES[name];
+      if (_al && VEHICLE_NAME_TO_ICON[_al]) { _hits.push({ n: name, icon: VEHICLE_NAME_TO_ICON[_al] }); continue; }
+      // 3. 去掉（…）/（…）括注后重试
+      var _base = name.replace(/（[^）]*）/g, "").replace(/\([^)]*\)/g, "").trim();
+      if (_base !== name) {
+        if (VEHICLE_NAME_TO_ICON[_base]) { _hits.push({ n: name, icon: VEHICLE_NAME_TO_ICON[_base] }); continue; }
+        var _al2 = VEHICLE_NAME_ALIASES[_base];
+        if (_al2 && VEHICLE_NAME_TO_ICON[_al2]) { _hits.push({ n: name, icon: VEHICLE_NAME_TO_ICON[_al2] }); continue; }
+      }
+    }
+    if (!_hits.length) return null;
+    // v4.3.1026: 编成/保有权重（VEHICLE_FLEET_WEIGHTS：key=候选串原文，数组按候选顺序对齐）
+    var _w = VEHICLE_FLEET_WEIGHTS[candidatesStr];
+    if (_w) {
+      var _cum = 0, _vals = [];
+      for (var k = 0; k < _hits.length; k++) {
+        var _wi = 0;
+        for (var n = 0; n < parts.length; n++) {
+          if (parts[n].trim() === _hits[k].n) { _wi = _w[n] || 0; break; }
+        }
+        if (_wi > 0) { _cum += _wi; _vals.push({ hit: _hits[k], c: _cum }); }
+      }
+      if (_cum > 0) {
+        // 30 分钟时间窗 seed：刷新稳定、时段间轮换（近似运用表分段）
+        // v4.3.1026b: xorshift 散列——连续时间窗下分布均匀（31 乘法哈希对连续输入有周期偏差）
+        var _seed = String(candidatesStr) + '|' + Math.floor(Date.now() / 1800000);
+        var _hh = 0;
+        for (var q = 0; q < _seed.length; q++) _hh = (_hh * 31 + _seed.charCodeAt(q)) >>> 0;
+        var _x = _hh >>> 0;
+        _x ^= (_x << 13); _x >>>= 0;
+        _x ^= (_x >> 17);
+        _x ^= (_x << 5); _x >>>= 0;
+        var _r = _x % _cum;
+        for (var v = 0; v < _vals.length; v++) if (_r < _vals[v].c) return _vals[v].hit.icon;
+        return _vals[_vals.length - 1].hit.icon;
+      }
+    }
+    return _hits[0].icon;
+  }
+
 function resolveVehicleIcon(candidatesStr, lineId) {
   var _raw = _resolveVehicleIconBase(candidatesStr, lineId);
   return _poolPickByIcon(_raw, candidatesStr);
@@ -3901,8 +4092,11 @@ function resolveVehicleIcon(candidatesStr, lineId) {
     resolveTrainIconByRules: resolveTrainIconByRules,
     resolveVehicleType: resolveVehicleType,
     resolveVehicleIcon: resolveVehicleIcon,
+    resolveVehicleIcon: resolveVehicleIcon,
     VEHICLE_NAME_TO_ICON: VEHICLE_NAME_TO_ICON,
     VEHICLE_NAME_ALIASES: VEHICLE_NAME_ALIASES,
+    FLEET_ICON_POOLS: FLEET_ICON_POOLS,
+    VEHICLE_FLEET_WEIGHTS: VEHICLE_FLEET_WEIGHTS,
     FLEET_ICON_POOLS: FLEET_ICON_POOLS,
     LINE_VEHICLE_OVERRIDES: LINE_VEHICLE_OVERRIDES,
     LINE_ICONS: LINE_ICONS,

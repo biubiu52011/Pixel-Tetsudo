@@ -1499,7 +1499,11 @@
   // v4.3.1006: 保有数比例加权表——候选串无法精确识别时的确定性随机映射权重
 // 数据来源：都営交通局官网（令和7年4月1日現在 在籍33両：7700形8/8500形5/8800形10/8900形8/9000形2）
 var VEHICLE_FLEET_WEIGHTS = {
-  "7700形 / 8500形 / 8800形 / 8900形 / 9000形": [8,5,10,8,2]
+  "7700形 / 8500形 / 8800形 / 8900形 / 9000形": [8,5,10,8,2],
+  // v4.3.1026: 東京臨海高速鉄道（raillab 東臨運輸区編成表 2026-09 快照）：
+  // 运用中 70-000形 编成 1/2/3/7（4编成）、71-000形 编成 Z11~Z14（4编成）= 4:4
+  // E233系7000番台 = 埼京線直通（operator=JR-East 已单独锁定，此低权重仅兜底未知场景）
+  "E233系7000番台 / 71-000形 / 70-000形": [1,4,4]
 };
 // v4.3.1025: FLEET_ICON_POOLS 编成/涂装池——同车型多涂装/多编成图，按候选串稳定取图（跨线不变）
 var FLEET_ICON_POOLS = {
@@ -1944,6 +1948,7 @@ var LINE_VEHICLE_OVERRIDES = {
   function _resolveVehicleIconBase(candidatesStr, lineId) {
     if (!candidatesStr) return null;
     var parts = String(candidatesStr).split("/");
+    var _hits = []; // v4.3.1026: 收集全部命中 {n: 候选名, icon}，支持编成/保有权重
     for (var i = 0; i < parts.length; i++) {
       var name = parts[i].trim();
       if (!name) continue;
@@ -1958,34 +1963,61 @@ var LINE_VEHICLE_OVERRIDES = {
           _ovt = _ov[_ovb];
         }
         if (_ovt) {
-          if (VEHICLE_NAME_TO_ICON[_ovt]) return VEHICLE_NAME_TO_ICON[_ovt];
+          if (VEHICLE_NAME_TO_ICON[_ovt]) { _hits.push({ n: name, icon: VEHICLE_NAME_TO_ICON[_ovt] }); continue; }
           // v4.3.988: override 目标支持 alias 展开（如 相模鉄道21000系→相模鉄道13000系近似），
           // 保持锁定语义——命中别名目标仍有图则用之，否则 return null 走 S4 线路默认，
           // 绝不落回别社同名图/候选池别社车。
           var _ovAl = VEHICLE_NAME_ALIASES[_ovt];
-          if (_ovAl && VEHICLE_NAME_TO_ICON[_ovAl]) return VEHICLE_NAME_TO_ICON[_ovAl];
+          if (_ovAl && VEHICLE_NAME_TO_ICON[_ovAl]) { _hits.push({ n: name, icon: VEHICLE_NAME_TO_ICON[_ovAl] }); continue; }
           return null;
         }
       }
       // v4.3.1006: 线路感知裸名重定向（同名被别社抢占：都電8800/8900形 → 都営图标）
       if (lineId && LINE_ICON_NAME_REDIRECT[lineId] && LINE_ICON_NAME_REDIRECT[lineId][name]) {
         var _rd = LINE_ICON_NAME_REDIRECT[lineId][name];
-        if (VEHICLE_NAME_TO_ICON[_rd]) return VEHICLE_NAME_TO_ICON[_rd];
+        if (VEHICLE_NAME_TO_ICON[_rd]) { _hits.push({ n: name, icon: VEHICLE_NAME_TO_ICON[_rd] }); continue; }
       }
       // 1. 精确匹配
-      if (VEHICLE_NAME_TO_ICON[name]) return VEHICLE_NAME_TO_ICON[name];
+      if (VEHICLE_NAME_TO_ICON[name]) { _hits.push({ n: name, icon: VEHICLE_NAME_TO_ICON[name] }); continue; }
       // 2. 别名表
       var _al = VEHICLE_NAME_ALIASES[name];
-      if (_al && VEHICLE_NAME_TO_ICON[_al]) return VEHICLE_NAME_TO_ICON[_al];
+      if (_al && VEHICLE_NAME_TO_ICON[_al]) { _hits.push({ n: name, icon: VEHICLE_NAME_TO_ICON[_al] }); continue; }
       // 3. 去掉（…）/（…）括注后重试
       var _base = name.replace(/（[^）]*）/g, "").replace(/\([^)]*\)/g, "").trim();
       if (_base !== name) {
-        if (VEHICLE_NAME_TO_ICON[_base]) return VEHICLE_NAME_TO_ICON[_base];
+        if (VEHICLE_NAME_TO_ICON[_base]) { _hits.push({ n: name, icon: VEHICLE_NAME_TO_ICON[_base] }); continue; }
         var _al2 = VEHICLE_NAME_ALIASES[_base];
-        if (_al2 && VEHICLE_NAME_TO_ICON[_al2]) return VEHICLE_NAME_TO_ICON[_al2];
+        if (_al2 && VEHICLE_NAME_TO_ICON[_al2]) { _hits.push({ n: name, icon: VEHICLE_NAME_TO_ICON[_al2] }); continue; }
       }
     }
-    return null;
+    if (!_hits.length) return null;
+    // v4.3.1026: 编成/保有权重（VEHICLE_FLEET_WEIGHTS：key=候选串原文，数组按候选顺序对齐）
+    var _w = VEHICLE_FLEET_WEIGHTS[candidatesStr];
+    if (_w) {
+      var _cum = 0, _vals = [];
+      for (var k = 0; k < _hits.length; k++) {
+        var _wi = 0;
+        for (var n = 0; n < parts.length; n++) {
+          if (parts[n].trim() === _hits[k].n) { _wi = _w[n] || 0; break; }
+        }
+        if (_wi > 0) { _cum += _wi; _vals.push({ hit: _hits[k], c: _cum }); }
+      }
+      if (_cum > 0) {
+        // 30 分钟时间窗 seed：刷新稳定、时段间轮换（近似运用表分段）
+        // v4.3.1026b: xorshift 散列——连续时间窗下分布均匀（31 乘法哈希对连续输入有周期偏差）
+        var _seed = String(candidatesStr) + '|' + Math.floor(Date.now() / 1800000);
+        var _hh = 0;
+        for (var q = 0; q < _seed.length; q++) _hh = (_hh * 31 + _seed.charCodeAt(q)) >>> 0;
+        var _x = _hh >>> 0;
+        _x ^= (_x << 13); _x >>>= 0;
+        _x ^= (_x >> 17);
+        _x ^= (_x << 5); _x >>>= 0;
+        var _r = _x % _cum;
+        for (var v = 0; v < _vals.length; v++) if (_r < _vals[v].c) return _vals[v].hit.icon;
+        return _vals[_vals.length - 1].hit.icon;
+      }
+    }
+    return _hits[0].icon;
   }
 
   window.TrainIcons = {
