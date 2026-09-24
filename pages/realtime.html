@@ -33,9 +33,9 @@
         </button>
         <div id="langSwitcher" class="lang-switcher">
           <div class="lang-options" role="listbox" aria-label="Select language">
-            <button class="lang-btn active" data-lang="ja" role="option" aria-selected="true">日本語</button>
-            <button class="lang-btn" data-lang="zh" role="option" aria-selected="false">中文</button>
-            <button class="lang-btn" data-lang="ko" role="option" aria-selected="false">한국어</button>
+            <button class="lang-btn active" data-lang="ja" role="option" aria-selected="true">譌･譛ｬ隱・/button>
+            <button class="lang-btn" data-lang="zh" role="option" aria-selected="false">荳ｭ譁・/button>
+            <button class="lang-btn" data-lang="ko" role="option" aria-selected="false">﨑懋ｵｭ・ｴ</button>
             <button class="lang-btn" data-lang="en" role="option" aria-selected="false">English</button>
           </div>
       </div>
@@ -43,14 +43,14 @@
 </div>
 </header>
 
-  <nav class="pixel-tabs"><a href="home.html" class="tab-btn" data-tab="search" data-i18n="tab.search">路線検索</a><a href="realtime.html" class="tab-btn active" data-tab="status" data-i18n="tab.status">運行状況</a><a href="trains.html" class="tab-btn" data-tab="trains" data-i18n="tab.trains">列車リアルタイム</a><a href="history.html" class="tab-btn" data-tab="history" data-i18n="tab.history">履歴</a></nav>
+  <nav class="pixel-tabs"><a href="home.html" class="tab-btn" data-tab="search" data-i18n="tab.search">霍ｯ邱壽､懃ｴ｢</a><a href="realtime.html" class="tab-btn active" data-tab="status" data-i18n="tab.status">驕玖｡檎憾豕・/a><a href="trains.html" class="tab-btn" data-tab="trains" data-i18n="tab.trains">蛻苓ｻ翫Μ繧｢繝ｫ繧ｿ繧､繝</a><a href="history.html" class="tab-btn" data-tab="history" data-i18n="tab.history">螻･豁ｴ</a></nav>
 
   <section id="tab-status" class="tab-content active">
     <div id="realtimeFilterBar" class="rs-filter-bar"></div>
     <div id="realtimeStatusContainer" class="pixel-card"></div>
   </section>
 
-  <footer class="pixel-footer" data-i18n="app.footer">© 2026 Pixel Tetsudo</footer>
+  <footer class="pixel-footer" data-i18n="app.footer">ﾂｩ 2026 Pixel Tetsudo</footer>
 
   <div id="lineDetailModal" class="rs-modal">
     <div class="rs-modal-content">
@@ -80,14 +80,14 @@
   </div>
 </div>
 
-<!-- v4.3.842: realtime 页跳过 tourism_data.json（2.24MB 下载/解析/缓存读写） -->
+<!-- v4.3.842: realtime 鬘ｵ霍ｳ霑・tourism_data.json・・.24MB 荳玖ｽｽ/隗｣譫・郛灘ｭ倩ｯｻ蜀呻ｼ・-->
 <script src="../js/page-config-realtime.js?v=4.3.842"></script>
 <script src="../data/core/db-loader.js?v=4.3.1023"></script>
 <script src="../js/data-layer.js?v=4.3.638"></script>
-<script src="../data/core/data-config-bundle.js?v=4.3.844"></script>
+<script src="../data/core/data-config-bundle.js?v=4.3.1028"></script>
 <script src="../js/line-presentation-service.js?v=4.3.638"></script>
 <script src="../data/api/odpt-links.js?v=4.3.638"></script>
-<!-- v4.3.842: realtime 页启用 ODPT_LAZY（delay-only）——只拉 TrainInformation 延误，跳过 Train 位置与 TrainTimetable 全量时刻表（realtime 页不渲染位置/时刻表）；请求数由 ~110 降至 ~15，并消除 429 限流与 loadTrainPositions 报错 -->
+<!-- v4.3.842: realtime 鬘ｵ蜷ｯ逕ｨ ODPT_LAZY・・elay-only・俄披泌宵諡・TrainInformation 蟒ｶ隸ｯ・瑚ｷｳ霑・Train 菴咲ｽｮ荳・TrainTimetable 蜈ｨ驥乗慮蛻ｻ陦ｨ・・ealtime 鬘ｵ荳肴ｸｲ譟謎ｽ咲ｽｮ/譌ｶ蛻ｻ陦ｨ・会ｼ幄ｯｷ豎よ焚逕ｱ ~110 髯崎・ ~15・悟ｹｶ豸磯勁 429 髯先ｵ∽ｸ・loadTrainPositions 謚･髞・-->
 <script src="../js/odpt-lazy.js?v=4.3.842"></script>
 <script src="../data/api/odpt-unified.js?v=4.3.638"></script>
 <script src="../js/translations.js?v=4.3.972"></script>

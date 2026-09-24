@@ -919,6 +919,7 @@ window.getTransferHint = function(stationId, lang) {
     "ShimosaManzaki": "Shimosa-Manzaki",
     "NaritaAirportTerminal2and3": "Airport-Terminal-2",
     "NaritaAirportTerminal1": "Narita-Airport",
+    "NaritaAirportTerminal2": "Airport-Terminal-2",
     "HamaKawasaki": "Hama-Kawasaki"
   };
 
@@ -951,6 +952,32 @@ window.getTransferHint = function(stationId, lang) {
 
   /** 列车位置轮询间隔（毫秒）。比延误轮询慢，位置变化频率较低。 */
   var POSITION_INTERVAL = 60000;
+
+  // ========== ODPT 缓存 / 轮询 / 存储 key 规则 ==========
+
+  /** 时刻表 IDB 主键（新版 v6） */
+  var ODPT_TIMETABLE_CACHE_KEY = 'odpt_timetable_cache_v6';
+
+  /** 旧 localStorage 缓存 key（v3，迁移后清除） */
+  var ODPT_LEGACY_LS_CACHE_KEY = 'odpt_timetable_cache_v3';
+
+  /** 时刻表缓存 TTL（毫秒，24h） */
+  var ODPT_TIMETABLE_CACHE_TTL = 86400000;
+
+  /** ODPT_TT_PROBED 持久化 key（localStorage，24h 滑动 TTL） */
+  var ODPT_TT_PROBED_KEY = 'odpt_tt_probed_v1';
+
+  /** ODPT_TT_PROBED TTL（毫秒，24h） */
+  var ODPT_TT_PROBED_TTL = 86400000;
+
+  /** 实时数据轮询间隔（毫秒，ODPTClient 后台刷新） */
+  var ODPT_REALTIME_INTERVAL = 30000;
+
+  /** DataLayer 内存缓存条目上限 */
+  var DATA_LAYER_MAX_CACHE_SIZE = 50;
+
+  /** DataLayer 内存缓存 TTL（毫秒） */
+  var DATA_LAYER_CACHE_TTL = 60000;
 
   /** trains 页后台预加载线路白名单（用户高频切换的线路）。打开 trains.html 后 2 秒开始后台加载。 */
   var TRAIN_WARMUP_LINES = ['Yamanote', 'ChuoRapid', 'KeihinTohoku', 'SeibuEn', 'Keikyu', 'Odawara'];
@@ -986,6 +1013,16 @@ window.getTransferHint = function(stationId, lang) {
     REFRESH_INTERVAL: REFRESH_INTERVAL,
     POSITION_INTERVAL: POSITION_INTERVAL,
     TRAIN_WARMUP_LINES: TRAIN_WARMUP_LINES,
+    // ODPT 缓存 / 轮询 / 存储 key
+    ODPT_TIMETABLE_CACHE_KEY: ODPT_TIMETABLE_CACHE_KEY,
+    ODPT_LEGACY_LS_CACHE_KEY: ODPT_LEGACY_LS_CACHE_KEY,
+    ODPT_TIMETABLE_CACHE_TTL: ODPT_TIMETABLE_CACHE_TTL,
+    ODPT_TT_PROBED_KEY: ODPT_TT_PROBED_KEY,
+    ODPT_TT_PROBED_TTL: ODPT_TT_PROBED_TTL,
+    ODPT_REALTIME_INTERVAL: ODPT_REALTIME_INTERVAL,
+    // DataLayer 缓存参数
+    DATA_LAYER_MAX_CACHE_SIZE: DATA_LAYER_MAX_CACHE_SIZE,
+    DATA_LAYER_CACHE_TTL: DATA_LAYER_CACHE_TTL,
     // 快速通过站（route-search）
     EXPRESS_SKIP_STATIONS: EXPRESS_SKIP_STATIONS,
     // UI 策略
@@ -1022,7 +1059,7 @@ window.getTransferHint = function(stationId, lang) {
 
   var THROUGH_SERVICE_MAP = {
     // 東武スカイツリーライン・伊勢崎線（東武動物公園で相互直通）
-    "TobuSkytree": ["Hibiya", "Hanzomon", "TobuIsesaki"],
+    "TobuSkytree": ["Hibiya", "Hanzomon", "Asakusa", "TobuIsesaki"],
     "TobuIsesaki": ["Hibiya", "Hanzomon", "TobuSkytree", "TobuNikko"],
     // 東京メトロ
     "Hibiya": ["TobuSkytree", "TobuIsesaki"],
@@ -1096,7 +1133,21 @@ window.getTransferHint = function(stationId, lang) {
     "ChuoTatsuno": ["ChuoMain"],
     "Shinonoi": ["ChuoMain", "Shinetsu"],
     "Shinetsu": ["Shinonoi"],
-    "SeibuChichibu": ["Yurakucho_Seibu"]
+    "SeibuChichibu": ["Yurakucho_Seibu"],
+    // JR-West 関西・JR-Kyushu 直通（4.3.1024）
+    "OsakaLoop": ["Hanwa", "KansaiMain"],
+    "Hanwa": ["OsakaLoop"],
+    "KansaiMain": ["OsakaLoop", "Nara"],
+    "Nara": ["KansaiMain"],
+    "TokaidoKansai": ["SanyoMain"],
+    "SanyoMain": ["TokaidoKansai", "KagoshimaMain"],
+    "Gakkentoshi": ["OsakaHigashi"],
+    "OsakaHigashi": ["Gakkentoshi"],
+    "KagoshimaMain": ["SanyoMain", "NagasakiMain", "Nippo", "Hohi"],
+    "NagasakiMain": ["KagoshimaMain"],
+    "Nippo": ["KagoshimaMain", "Kyudai", "Hohi"],
+    "Kyudai": ["Nippo"],
+    "Hohi": ["KagoshimaMain", "Nippo"]
   };
 
   // 接続駅（線路図の直通マーカーを実際の接続駅のみに限定）
@@ -1184,7 +1235,21 @@ window.getTransferHint = function(stationId, lang) {
     "ChuoTatsuno": { "ChuoMain": ["Okaya"] },
     "Shinonoi": { "ChuoMain": ["Shiojiri"], "Shinetsu": ["Shinonoi"] },
     "Shinetsu": { "Shinonoi": ["Shinonoi"] },
-    "SeibuChichibu": { "Yurakucho_Seibu": [] }
+    "SeibuChichibu": { "Yurakucho_Seibu": [] },
+    // JR-West 関西・JR-Kyushu 直通接続駅（4.3.1024）
+    "OsakaLoop": { "Hanwa": ["Tennoji"], "KansaiMain": ["Tennoji"] },
+    "Hanwa": { "OsakaLoop": ["Tennoji"] },
+    "KansaiMain": { "OsakaLoop": ["Tennoji"], "Nara": ["Kizu"] },
+    "Nara": { "KansaiMain": ["Kizu"] },
+    "TokaidoKansai": { "SanyoMain": ["Kobe"] },
+    "SanyoMain": { "TokaidoKansai": ["Kobe"], "KagoshimaMain": ["Moji"] },
+    "Gakkentoshi": { "OsakaHigashi": ["Kyobashi-Osaka"] },
+    "OsakaHigashi": { "Gakkentoshi": ["Kyobashi-Osaka"] },
+    "KagoshimaMain": { "SanyoMain": ["Moji"], "NagasakiMain": ["Tosu"], "Nippo": ["Kokura"], "Hohi": ["Kumamoto"] },
+    "NagasakiMain": { "KagoshimaMain": ["Tosu"] },
+    "Nippo": { "KagoshimaMain": ["Kokura"], "Kyudai": ["Oita"], "Hohi": ["Oita"] },
+    "Kyudai": { "Nippo": ["Oita"] },
+    "Hohi": { "KagoshimaMain": ["Kumamoto"], "Nippo": ["Oita"] }
   };
 
   /** Direct through-service neighbours of a line (1 hop). */
@@ -2962,6 +3027,163 @@ window.LineOperationSystems = {
       order: 1
     }
   ],
+  // 以下运营商分组为预备，等线路数据导入后补全 lineIds
+  "JR_CENTRAL": [
+    {
+      code: "CF",
+      nameJa: "東海道新幹線",
+      nameZh: "东海道新干线",
+      nameEn: "Tokaido Shinkansen",
+      nameKo: "도카이도 신칸센",
+      color: "#00bb00",
+      lineIds: [],
+      order: 1
+    }
+  ],
+  "JR_WEST": [
+    {
+      code: "JR西日本",
+      nameJa: "JR西日本（大阪環状線・神戸線・京都線など）",
+      nameZh: "JR西日本（大阪环状线・神户线・京都线等）",
+      nameEn: "JR West (Osaka Loop Line, Kobe Line, Kyoto Line, etc.)",
+      nameKo: "JR 서일본 (오사카 순환선, 고베선, 교토선 등)",
+      color: "#009933",
+      lineIds: [],
+      order: 1
+    }
+  ],
+  "JR_KYUSHU": [
+    {
+      code: "JR九州",
+      nameJa: "JR九州（鹿児島本線・日豊本線など）",
+      nameZh: "JR九州（鹿儿岛本线・日丰本线等）",
+      nameEn: "JR Kyushu (Kagoshima Main Line, Nippo Main Line, etc.)",
+      nameKo: "JR 규슈 (가고시마 본선, 닛포 본선 등)",
+      color: "#0066b3",
+      lineIds: [],
+      order: 1
+    }
+  ],
+  "JR_HOKKAIDO": [
+    {
+      code: "JR北海道",
+      nameJa: "JR北海道（函館本線・千歳線など）",
+      nameZh: "JR北海道（函馆本线・千岁线等）",
+      nameEn: "JR Hokkaido (Hakodate Main Line, Chitose Line, etc.)",
+      nameKo: "JR 홋카이도 (하코다테 본선, 지토세선 등)",
+      color: "#0099ff",
+      lineIds: [],
+      order: 1
+    }
+  ],
+  "JR_SHIKOKU": [
+    {
+      code: "JR四国",
+      nameJa: "JR四国（予讃線・土讃線など）",
+      nameZh: "JR四国（予赞线・土赞线等）",
+      nameEn: "JR Shikoku (Yosan Line, Dosan Line, etc.)",
+      nameKo: "JR 시코쿠 (요산선, 도산선 등)",
+      color: "#00cc66",
+      lineIds: [],
+      order: 1
+    }
+  ],
+  "HANKYU": [
+    {
+      code: "HK",
+      nameJa: "阪急電鉄（京都線・宝塚線・神戸線）",
+      nameZh: "阪急电车（京都线・宝塚线・神户线）",
+      nameEn: "Hankyu Railway (Kyoto Line, Takarazuka Line, Kobe Line)",
+      nameKo: "한큐 전철 (교토선, 다카라즈카선, 고베선)",
+      color: "#2b6cb0",
+      lineIds: [],
+      order: 1
+    }
+  ],
+  "HANSHIN": [
+    {
+      code: "HS",
+      nameJa: "阪神電気鉄道（本線・難波線）",
+      nameZh: "阪神电车（本线・难波线）",
+      nameEn: "Hanshin Electric Railway (Main Line, Namba Line)",
+      nameKo: "한신 전기 철도 (본선, 난바선)",
+      color: "#0033cc",
+      lineIds: [],
+      order: 1
+    }
+  ],
+  "KINTETSU": [
+    {
+      code: "A",
+      nameJa: "近畿日本鉄道（大阪線・奈良線・京都線など）",
+      nameZh: "近畿日本铁道（大阪线・奈良线・京都线等）",
+      nameEn: "Kintetsu Railway (Osaka Line, Nara Line, Kyoto Line, etc.)",
+      nameKo: "긴키 일본 철도 (오사카선, 나라선, 교토선 등)",
+      color: "#e60012",
+      lineIds: [],
+      order: 1
+    }
+  ],
+  "NANKAI": [
+    {
+      code: "NK",
+      nameJa: "南海電気鉄道（本線・高野線）",
+      nameZh: "南海电车（本线・高野线）",
+      nameEn: "Nankai Electric Railway (Main Line, Koya Line)",
+      nameKo: "난카이 전기 철도 (본선, 고야선)",
+      color: "#cc0033",
+      lineIds: [],
+      order: 1
+    }
+  ],
+  "SANYO": [
+    {
+      code: "SY",
+      nameJa: "山陽電気鉄道（本線・網干線）",
+      nameZh: "山阳电车（本线・网干线）",
+      nameEn: "Sanyo Electric Railway (Main Line, Aboshi Line)",
+      nameKo: "산요 전기 철도 (본선, 아보시선)",
+      color: "#0077cc",
+      lineIds: [],
+      order: 1
+    }
+  ],
+  "OSAKA_METRO": [
+    {
+      code: "Osaka Metro",
+      nameJa: "Osaka Metro（御堂筋線・谷町線など）",
+      nameZh: "Osaka Metro（御堂筋线・谷町线等）",
+      nameEn: "Osaka Metro (Midosuji Line, Tanimachi Line, etc.)",
+      nameKo: "오사카 메트로 (미도스지선, 다니마치선 등)",
+      color: "#ff9900",
+      lineIds: [],
+      order: 1
+    }
+  ],
+  "MEITETSU": [
+    {
+      code: "MY",
+      nameJa: "名古屋鉄道（名古屋本線・犬山線など）",
+      nameZh: "名古屋铁道（名古屋本线・犬山线等）",
+      nameEn: "Meitetsu (Nagoya Main Line, Inuyama Line, etc.)",
+      nameKo: "나고야 철도 (나고야 본선, 이누야마선 등)",
+      color: "#e60012",
+      lineIds: [],
+      order: 1
+    }
+  ],
+  "NISHITETSU": [
+    {
+      code: "N",
+      nameJa: "西日本鉄道（天神大牟田線・貝塚線）",
+      nameZh: "西日本铁道（天神大牟田线・贝冢线）",
+      nameEn: "Nishi-Nippon Railroad (Tenjin Omuta Line, Kaizuka Line)",
+      nameKo: "서일본 철도 (덴진 오무타선, 가이즈카선)",
+      color: "#009944",
+      lineIds: [],
+      order: 1
+    }
+  ],
 };
 
 /*
@@ -3673,6 +3895,8 @@ window.TRAIN_TYPE_NAMES = {
   "odpt.TrainType:MIR.Local":                          { ja: "各駅停車", en: "Local", zh: "各站停车", ko: "각역정차" },
   "odpt.TrainType:SaitamaRailway.Local":               { ja: "普通", en: "Local", zh: "普通", ko: "보통" },
   "odpt.TrainType:TamaMonorail.Local":                 { ja: "普通", en: "Local", zh: "普通", ko: "보통" },
+  "odpt.TrainType:ChibaMonorail.Local":                 { ja: "普通", en: "Local", zh: "普通", ko: "보통" },
+  "odpt.TrainType:ShonanMonorail.Local":                { ja: "普通", en: "Local", zh: "普通", ko: "보통" },
   "odpt.TrainType:TokyoMonorail.AirportRapid":         { ja: "空港快速", en: "Airport Rapid", zh: "机场快速", ko: "공항쾌속" },
   "odpt.TrainType:TokyoMonorail.Local":                 { ja: "普通", en: "Local", zh: "普通", ko: "보통" },
   "odpt.TrainType:TokyoMonorail.SectionRapid":          { ja: "区間快速", en: "Section Rapid", zh: "区间快速", ko: "구간쾌속" },

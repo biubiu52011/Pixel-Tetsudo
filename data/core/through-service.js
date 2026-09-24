@@ -99,7 +99,21 @@
     "ChuoTatsuno": ["ChuoMain"],
     "Shinonoi": ["ChuoMain", "Shinetsu"],
     "Shinetsu": ["Shinonoi"],
-    "SeibuChichibu": ["Yurakucho_Seibu"]
+    "SeibuChichibu": ["Yurakucho_Seibu"],
+    // JR-West 関西・JR-Kyushu 直通（4.3.1024）
+    "OsakaLoop": ["Hanwa", "KansaiMain"],
+    "Hanwa": ["OsakaLoop"],
+    "KansaiMain": ["OsakaLoop", "Nara"],
+    "Nara": ["KansaiMain"],
+    "TokaidoKansai": ["SanyoMain"],
+    "SanyoMain": ["TokaidoKansai", "KagoshimaMain"],
+    "Gakkentoshi": ["OsakaHigashi"],
+    "OsakaHigashi": ["Gakkentoshi"],
+    "KagoshimaMain": ["SanyoMain", "NagasakiMain", "Nippo", "Hohi"],
+    "NagasakiMain": ["KagoshimaMain"],
+    "Nippo": ["KagoshimaMain", "Kyudai", "Hohi"],
+    "Kyudai": ["Nippo"],
+    "Hohi": ["KagoshimaMain", "Nippo"]
   };
 
   // 接続駅（線路図の直通マーカーを実際の接続駅のみに限定）
@@ -187,7 +201,21 @@
     "ChuoTatsuno": { "ChuoMain": ["Okaya"] },
     "Shinonoi": { "ChuoMain": ["Shiojiri"], "Shinetsu": ["Shinonoi"] },
     "Shinetsu": { "Shinonoi": ["Shinonoi"] },
-    "SeibuChichibu": { "Yurakucho_Seibu": [] }
+    "SeibuChichibu": { "Yurakucho_Seibu": [] },
+    // JR-West 関西・JR-Kyushu 直通接続駅（4.3.1024）
+    "OsakaLoop": { "Hanwa": ["Tennoji"], "KansaiMain": ["Tennoji"] },
+    "Hanwa": { "OsakaLoop": ["Tennoji"] },
+    "KansaiMain": { "OsakaLoop": ["Tennoji"], "Nara": ["Kizu"] },
+    "Nara": { "KansaiMain": ["Kizu"] },
+    "TokaidoKansai": { "SanyoMain": ["Kobe"] },
+    "SanyoMain": { "TokaidoKansai": ["Kobe"], "KagoshimaMain": ["Moji"] },
+    "Gakkentoshi": { "OsakaHigashi": ["Kyobashi-Osaka"] },
+    "OsakaHigashi": { "Gakkentoshi": ["Kyobashi-Osaka"] },
+    "KagoshimaMain": { "SanyoMain": ["Moji"], "NagasakiMain": ["Tosu"], "Nippo": ["Kokura"], "Hohi": ["Kumamoto"] },
+    "NagasakiMain": { "KagoshimaMain": ["Tosu"] },
+    "Nippo": { "KagoshimaMain": ["Kokura"], "Kyudai": ["Oita"], "Hohi": ["Oita"] },
+    "Kyudai": { "Nippo": ["Oita"] },
+    "Hohi": { "KagoshimaMain": ["Kumamoto"], "Nippo": ["Oita"] }
   };
 
   /** Direct through-service neighbours of a line (1 hop). */

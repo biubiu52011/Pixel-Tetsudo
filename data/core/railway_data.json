@@ -35703,7 +35703,38 @@
     1
    ],
    "throughServices": [],
-   "transferStations": [],
+   "transferStations": [
+    {
+     "station": "Osaka",
+     "lineId": "TokaidoKansai",
+     "type": "in",
+     "note": "同站换乘"
+    },
+    {
+     "station": "Osaka",
+     "lineId": "OsakaLoop",
+     "type": "out",
+     "note": "环状线内外回り"
+    },
+    {
+     "station": "Tennoji",
+     "lineId": "Hanwa",
+     "type": "in",
+     "note": "同站换乘"
+    },
+    {
+     "station": "Tennoji",
+     "lineId": "KansaiMain",
+     "type": "in",
+     "note": "同站换乘"
+    },
+    {
+     "station": "Kyobashi-Osaka",
+     "lineId": "Gakkentoshi",
+     "type": "in",
+     "note": "同站换乘"
+    }
+   ],
    "nameZh": "大阪环状线",
    "nameKo": "오사카 순환선"
   },
@@ -35979,7 +36010,56 @@
     4
    ],
    "throughServices": [],
-   "transferStations": [],
+   "transferStations": [
+    {
+     "station": "Kobe",
+     "lineId": "TokaidoKansai",
+     "type": "in/out",
+     "note": "神戸駅 東海道線(京都方面)"
+    },
+    {
+     "station": "Himeji",
+     "lineId": "SanyoShinkansen",
+     "type": "in/out",
+     "note": "姫路駅 新幹線"
+    },
+    {
+     "station": "Himeji",
+     "lineId": "Bantan",
+     "type": "in/out",
+     "note": "播但線"
+    },
+    {
+     "station": "Himeji",
+     "lineId": "HimejiLine",
+     "type": "in/out",
+     "note": "姫新線"
+    },
+    {
+     "station": "Okayama",
+     "lineId": "SanyoShinkansen",
+     "type": "in/out",
+     "note": "岡山駅 新幹線"
+    },
+    {
+     "station": "Hiroshima",
+     "lineId": "SanyoShinkansen",
+     "type": "in/out",
+     "note": "広島駅 新幹線"
+    },
+    {
+     "station": "Shimonoseki",
+     "lineId": "SaninMain",
+     "type": "in/out",
+     "note": "下関駅 山陰本線(山陽本線と接続)"
+    },
+    {
+     "station": "Moji",
+     "lineId": "KagoshimaMain",
+     "type": "in/out",
+     "note": "門司 鹿児島本線(鹿児島線)"
+    }
+   ],
    "nameZh": "山阳本线",
    "nameKo": "산요 본선"
   },
@@ -36109,7 +36189,44 @@
     3
    ],
    "throughServices": [],
-   "transferStations": [],
+   "transferStations": [
+    {
+     "station": "Osaka",
+     "lineId": "TokaidoKansai",
+     "type": "in/out",
+     "note": "大和路線から京都/神戸線"
+    },
+    {
+     "station": "Osaka",
+     "lineId": "OsakaLoop",
+     "type": "in/out",
+     "note": "大阪環状線"
+    },
+    {
+     "station": "Osaka",
+     "lineId": "Fukuchiyama",
+     "type": "in/out",
+     "note": "JR東西線"
+    },
+    {
+     "station": "Tennoji",
+     "lineId": "OsakaLoop",
+     "type": "in/out",
+     "note": "天王寺 大阪環状線"
+    },
+    {
+     "station": "Tennoji",
+     "lineId": "Hanwa",
+     "type": "in/out",
+     "note": "天王寺 阪和線"
+    },
+    {
+     "station": "Nara",
+     "lineId": "Nara",
+     "type": "in/out",
+     "note": "奈良駅 奈良線(関西本線と和歌山方面)"
+    }
+   ],
    "nameZh": "关西本线(大和路线)",
    "nameKo": "칸사이 본선(야마토지선)"
   },
@@ -36201,7 +36318,20 @@
     3
    ],
    "throughServices": [],
-   "transferStations": [],
+   "transferStations": [
+    {
+     "station": "Tennoji",
+     "lineId": "OsakaLoop",
+     "type": "in",
+     "note": "同站换乘"
+    },
+    {
+     "station": "Tennoji",
+     "lineId": "KansaiMain",
+     "type": "in",
+     "note": "同站换乘"
+    }
+   ],
    "nameZh": "阪和线",
    "nameKo": "한와선"
   },
@@ -36263,7 +36393,32 @@
     4
    ],
    "throughServices": [],
-   "transferStations": [],
+   "transferStations": [
+    {
+     "station": "Kyoto",
+     "lineId": "TokaidoShinkansen",
+     "type": "in",
+     "note": "新干线换乘"
+    },
+    {
+     "station": "Kyoto",
+     "lineId": "TokaidoKansai",
+     "type": "in",
+     "note": "同站换乘"
+    },
+    {
+     "station": "Kyoto",
+     "lineId": "SaninMain",
+     "type": "in",
+     "note": "同站换乘"
+    },
+    {
+     "station": "Kizu",
+     "lineId": "Gakkentoshi",
+     "type": "in",
+     "note": "同站换乘"
+    }
+   ],
    "nameZh": "奈良线",
    "nameKo": "나라선"
   },
@@ -36327,7 +36482,26 @@
     5
    ],
    "throughServices": [],
-   "transferStations": [],
+   "transferStations": [
+    {
+     "station": "Kyoto",
+     "lineId": "TokaidoShinkansen",
+     "type": "in",
+     "note": "新干线换乘"
+    },
+    {
+     "station": "Kyoto",
+     "lineId": "TokaidoKansai",
+     "type": "in",
+     "note": "同站换乘"
+    },
+    {
+     "station": "Kyoto",
+     "lineId": "SaninMain",
+     "type": "in",
+     "note": "同站换乘"
+    }
+   ],
    "nameZh": "湖西线",
    "nameKo": "고세이선"
   },
@@ -36671,7 +36845,44 @@
     5
    ],
    "throughServices": [],
-   "transferStations": [],
+   "transferStations": [
+    {
+     "station": "Kyoto",
+     "lineId": "TokaidoShinkansen",
+     "type": "in/out",
+     "note": "京都駅 嵯峨野線ホームから新幹線"
+    },
+    {
+     "station": "Kyoto",
+     "lineId": "TokaidoKansai",
+     "type": "in/out",
+     "note": "山陽/東海道線(京都線)乗換"
+    },
+    {
+     "station": "Kyoto",
+     "lineId": "Nara",
+     "type": "in/out",
+     "note": "奈良線乗換"
+    },
+    {
+     "station": "Shimonoseki",
+     "lineId": "SanyoMain",
+     "type": "in/out",
+     "note": "下関駅 山陽本線"
+    },
+    {
+     "station": "Fukuchiyama",
+     "lineId": "Fukuchiyama",
+     "type": "in/out",
+     "note": "福知山駅 福知山線(宝塚線)・丹波縦断"
+    },
+    {
+     "station": "Tottori",
+     "lineId": "SaninMain",
+     "type": "in/out",
+     "note": "鳥取駅 因美線乗換(参考)"
+    }
+   ],
    "nameZh": "山阴本线(嵯峨野线)",
    "nameKo": "산인 본선(사가노선)"
   },
@@ -36735,7 +36946,20 @@
     4
    ],
    "throughServices": [],
-   "transferStations": [],
+   "transferStations": [
+    {
+     "station": "Osaka",
+     "lineId": "TokaidoKansai",
+     "type": "in",
+     "note": "同站换乘"
+    },
+    {
+     "station": "Osaka",
+     "lineId": "OsakaLoop",
+     "type": "in",
+     "note": "同站换乘"
+    }
+   ],
    "nameZh": "福知山线(JR宝塚线)",
    "nameKo": "후쿠치야마선(JR 다카라즈카선)"
   },
@@ -36785,7 +37009,26 @@
     3
    ],
    "throughServices": [],
-   "transferStations": [],
+   "transferStations": [
+    {
+     "station": "Shin-Osaka",
+     "lineId": "TokaidoShinkansen",
+     "type": "in",
+     "note": "新干线换乘"
+    },
+    {
+     "station": "Shin-Osaka",
+     "lineId": "SanyoShinkansen",
+     "type": "in",
+     "note": "新干线换乘"
+    },
+    {
+     "station": "Shin-Osaka",
+     "lineId": "TokaidoKansai",
+     "type": "in",
+     "note": "同站换乘"
+    }
+   ],
    "nameZh": "大阪东线",
    "nameKo": "오사카 히가시선"
   },
@@ -36841,7 +37084,20 @@
     5
    ],
    "throughServices": [],
-   "transferStations": [],
+   "transferStations": [
+    {
+     "station": "Himeji",
+     "lineId": "SanyoShinkansen",
+     "type": "in",
+     "note": "新干线换乘"
+    },
+    {
+     "station": "Himeji",
+     "lineId": "SanyoMain",
+     "type": "in",
+     "note": "同站换乘"
+    }
+   ],
    "nameZh": "播但线",
    "nameKo": "반탄선"
   },
@@ -36933,7 +37189,20 @@
     5
    ],
    "throughServices": [],
-   "transferStations": [],
+   "transferStations": [
+    {
+     "station": "Himeji",
+     "lineId": "SanyoShinkansen",
+     "type": "in",
+     "note": "新干线换乘"
+    },
+    {
+     "station": "Himeji",
+     "lineId": "SanyoMain",
+     "type": "in",
+     "note": "同站换乘"
+    }
+   ],
    "nameZh": "姬新线",
    "nameKo": "기신선"
   },
@@ -36995,7 +37264,14 @@
     5
    ],
    "throughServices": [],
-   "transferStations": [],
+   "transferStations": [
+    {
+     "station": "Kakogawa",
+     "lineId": "SanyoMain",
+     "type": "in",
+     "note": "同站换乘"
+    }
+   ],
    "nameZh": "加古川线",
    "nameKo": "카코가와선"
   },
@@ -37063,7 +37339,20 @@
     3
    ],
    "throughServices": [],
-   "transferStations": [],
+   "transferStations": [
+    {
+     "station": "Kyobashi-Osaka",
+     "lineId": "OsakaLoop",
+     "type": "in",
+     "note": "同站换乘"
+    },
+    {
+     "station": "Kizu",
+     "lineId": "Nara",
+     "type": "in",
+     "note": "同站换乘"
+    }
+   ],
    "nameZh": "学研都市线(片町线)",
    "nameKo": "가켄토시선(카타마치선)"
   },
@@ -37149,7 +37438,62 @@
     3
    ],
    "throughServices": [],
-   "transferStations": [],
+   "transferStations": [
+    {
+     "station": "Kyoto",
+     "lineId": "TokaidoShinkansen",
+     "type": "in/out",
+     "note": "京都駅 新幹線乗換"
+    },
+    {
+     "station": "Kyoto",
+     "lineId": "Nara",
+     "type": "in/out",
+     "note": "奈良線乗換"
+    },
+    {
+     "station": "Kyoto",
+     "lineId": "Kosei",
+     "type": "in/out",
+     "note": "湖西線/琵琶湖線乗換"
+    },
+    {
+     "station": "Shin-Osaka",
+     "lineId": "TokaidoShinkansen",
+     "type": "in/out",
+     "note": "新大阪 新幹線乗換"
+    },
+    {
+     "station": "Shin-Osaka",
+     "lineId": "SanyoShinkansen",
+     "type": "in/out",
+     "note": "新大阪 九州方面新幹線"
+    },
+    {
+     "station": "Shin-Osaka",
+     "lineId": "OsakaHigashi",
+     "type": "in/out",
+     "note": "おおさか東線"
+    },
+    {
+     "station": "Osaka",
+     "lineId": "OsakaLoop",
+     "type": "in/out",
+     "note": "大阪環状線"
+    },
+    {
+     "station": "Osaka",
+     "lineId": "Fukuchiyama",
+     "type": "in/out",
+     "note": "JR東西線・宝塚線経由"
+    },
+    {
+     "station": "Kobe",
+     "lineId": "SanyoMain",
+     "type": "in/out",
+     "note": "神戸駅 山陽本線へ直通/乗換"
+    }
+   ],
    "nameZh": "东海道本线(JR京都线/JR神户线)",
    "nameKo": "도카이도 본선(JR 교토선/JR 고베선)"
   },
@@ -37361,7 +37705,92 @@
     3
    ],
    "throughServices": [],
-   "transferStations": [],
+   "transferStations": [
+    {
+     "station": "Kokura",
+     "lineId": "SanyoShinkansen",
+     "type": "out",
+     "note": "小倉駅 山陽新干线"
+    },
+    {
+     "station": "Kokura",
+     "lineId": "Nippo",
+     "type": "out",
+     "note": "小倉駅 日豊本线"
+    },
+    {
+     "station": "Kumamoto",
+     "lineId": "KyushuShinkansen",
+     "type": "out",
+     "note": "熊本駅 新干线"
+    },
+    {
+     "station": "Kumamoto",
+     "lineId": "Hohi",
+     "type": "out",
+     "note": "熊本駅 豊肥本线"
+    },
+    {
+     "station": "Kumamoto",
+     "lineId": "Misumi",
+     "type": "out",
+     "note": "熊本駅 三角線"
+    },
+    {
+     "station": "Kagoshima-Chuo",
+     "lineId": "KyushuShinkansen",
+     "type": "out",
+     "note": "鹿児島中央駅 新干线"
+    },
+    {
+     "station": "Kagoshima-Chuo",
+     "lineId": "Nippo",
+     "type": "out",
+     "note": "鹿児島中央駅 日豊本线"
+    },
+    {
+     "station": "Kagoshima-Chuo",
+     "lineId": "IbusukiMakurazaki",
+     "type": "out",
+     "note": "鹿児島中央駅 指宿枕崎线"
+    },
+    {
+     "station": "Tosu",
+     "lineId": "NagasakiMain",
+     "type": "out",
+     "note": "鳥栖駅 长崎本线"
+    },
+    {
+     "station": "Kurume",
+     "lineId": "KyushuShinkansen",
+     "type": "out",
+     "note": "久留米駅 新干线(新鸟栖)"
+    },
+    {
+     "station": "Kurume",
+     "lineId": "Kyudai",
+     "type": "out",
+     "note": "久留米駅 久大本线"
+    },
+    {
+     "station": "Moji",
+     "lineId": "SanyoMain",
+     "type": "out",
+     "note": "門司駅 山陽本线(JR-West)"
+    },
+    {
+     "station": "Kashii",
+     "lineId": "KashiiLine",
+     "type": "out",
+     "note": "香椎駅 香椎线"
+    },
+    {
+     "station": "Yoshizuka",
+     "lineId": "Sasaguri",
+     "type": "out",
+     "note": "吉塚駅 篠栗線"
+    }
+   ],
    "nameZh": "鹿儿岛本线",
    "nameKo": "가고시마 본선"
   },
@@ -37449,7 +37878,26 @@
     3
    ],
    "throughServices": [],
-   "transferStations": [],
+   "transferStations": [
+    {
+     "station": "Nagasaki",
+     "lineId": "NishiKyushuShinkansen",
+     "type": "out",
+     "note": "長崎駅 西九州新干线"
+    },
+    {
+     "station": "Tosu",
+     "lineId": "KagoshimaMain",
+     "type": "out",
+     "note": "鳥栖駅 鹿儿岛本线"
+    },
+    {
+     "station": "Kōhoku-Saga",
+     "lineId": "Sasebo",
+     "type": "out",
+     "note": "江北駅 佐世保线"
+    }
+   ],
    "nameZh": "长崎本线",
    "nameKo": "나가사키 본선"
   },
@@ -37695,7 +38143,44 @@
     3
    ],
    "throughServices": [],
-   "transferStations": [],
+   "transferStations": [
+    {
+     "station": "Kokura",
+     "lineId": "SanyoShinkansen",
+     "type": "out",
+     "note": "小倉駅 山陽新干线"
+    },
+    {
+     "station": "Kokura",
+     "lineId": "KagoshimaMain",
+     "type": "out",
+     "note": "小倉駅 鹿儿岛本线"
+    },
+    {
+     "station": "Kagoshima-Chuo",
+     "lineId": "KyushuShinkansen",
+     "type": "out",
+     "note": "鹿児島中央駅 新干线"
+    },
+    {
+     "station": "Kagoshima-Chuo",
+     "lineId": "KagoshimaMain",
+     "type": "out",
+     "note": "鹿児島中央駅 鹿儿岛本线"
+    },
+    {
+     "station": "Oita",
+     "lineId": "Kyudai",
+     "type": "out",
+     "note": "大分駅 久大本线"
+    },
+    {
+     "station": "Oita",
+     "lineId": "Hohi",
+     "type": "out",
+     "note": "大分駅 豊肥本线"
+    }
+   ],
    "nameZh": "日丰本线",
    "nameKo": "닛포 본선"
   },
@@ -37789,7 +38274,44 @@
     3
    ],
    "throughServices": [],
-   "transferStations": [],
+   "transferStations": [
+    {
+     "station": "Kurume",
+     "lineId": "KyushuShinkansen",
+     "type": "out",
+     "note": "久留米駅 新干线(新鸟栖)"
+    },
+    {
+     "station": "Kurume",
+     "lineId": "KagoshimaMain",
+     "type": "out",
+     "note": "久留米駅 鹿儿岛本线"
+    },
+    {
+     "station": "Oita",
+     "lineId": "Nippo",
+     "type": "out",
+     "note": "大分駅 日豊本线"
+    },
+    {
+     "station": "Oita",
+     "lineId": "Hohi",
+     "type": "out",
+     "note": "大分駅 豊肥本线"
+    },
+    {
+     "station": "Hita",
+     "lineId": "Kyudai",
+     "type": "out",
+     "note": "日田駅 久大本线关键站"
+    },
+    {
+     "station": "Yufuin",
+     "lineId": "Kyudai",
+     "type": "out",
+     "note": "由布院駅 观光特急停靠"
+    }
+   ],
    "nameZh": "久大本线",
    "nameKo": "큐다이 본선"
   },
@@ -37883,7 +38405,38 @@
     3
    ],
    "throughServices": [],
-   "transferStations": [],
+   "transferStations": [
+    {
+     "station": "Kumamoto",
+     "lineId": "KyushuShinkansen",
+     "type": "out",
+     "note": "熊本駅 新干线"
+    },
+    {
+     "station": "Kumamoto",
+     "lineId": "KagoshimaMain",
+     "type": "out",
+     "note": "熊本駅 鹿儿岛本线"
+    },
+    {
+     "station": "Oita",
+     "lineId": "Nippo",
+     "type": "out",
+     "note": "大分駅 日豊本线"
+    },
+    {
+     "station": "Oita",
+     "lineId": "Kyudai",
+     "type": "out",
+     "note": "大分駅 久大本线"
+    },
+    {
+     "station": "Aso",
+     "lineId": "Hohi",
+     "type": "out",
+     "note": "阿蘇駅 豊肥本线观光站"
+    }
+   ],
    "nameZh": "丰肥本线",
    "nameKo": "호히 본선"
   },
@@ -37927,7 +38480,20 @@
     3
    ],
    "throughServices": [],
-   "transferStations": [],
+   "transferStations": [
+    {
+     "station": "Chōjabaru",
+     "lineId": "KashiiLine",
+     "type": "out",
+     "note": "長者原駅 香椎线"
+    },
+    {
+     "station": "Yoshizuka",
+     "lineId": "KagoshimaMain",
+     "type": "out",
+     "note": "吉塚駅 鹿儿岛本线"
+    }
+   ],
    "nameZh": "篠栗线",
    "nameKo": "사사구리 선"
   },
@@ -37973,7 +38539,14 @@
     3
    ],
    "throughServices": [],
-   "transferStations": [],
+   "transferStations": [
+    {
+     "station": "Kumamoto",
+     "lineId": "KagoshimaMain",
+     "type": "out",
+     "note": "熊本駅 鹿儿岛本线"
+    }
+   ],
    "nameZh": "三角线",
    "nameKo": "미스미 선"
   },
@@ -38065,7 +38638,26 @@
     3
    ],
    "throughServices": [],
-   "transferStations": [],
+   "transferStations": [
+    {
+     "station": "Kagoshima-Chuo",
+     "lineId": "KyushuShinkansen",
+     "type": "out",
+     "note": "鹿児島中央駅 新干线"
+    },
+    {
+     "station": "Kagoshima-Chuo",
+     "lineId": "KagoshimaMain",
+     "type": "out",
+     "note": "鹿児島中央駅 鹿儿岛本线"
+    },
+    {
+     "station": "Ibusuki",
+     "lineId": "IbusukiMakurazaki",
+     "type": "out",
+     "note": "指宿駅 指宿枕崎线关键站"
+    }
+   ],
    "nameZh": "指宿枕崎线",
    "nameKo": "이부스키마쿠라자키 선"
   },
@@ -38089,7 +38681,32 @@
     3
    ],
    "throughServices": [],
-   "transferStations": [],
+   "transferStations": [
+    {
+     "station": "Hakata",
+     "lineId": "KyushuShinkansen",
+     "type": "out",
+     "note": "博多駅 新干线换乘"
+    },
+    {
+     "station": "Hakata",
+     "lineId": "SanyoShinkansen",
+     "type": "out",
+     "note": "博多駅 山陽新干线"
+    },
+    {
+     "station": "Hakata",
+     "lineId": "KagoshimaMain",
+     "type": "out",
+     "note": "博多駅 鹿儿岛本线"
+    },
+    {
+     "station": "Hakata",
+     "lineId": "Sasaguri",
+     "type": "out",
+     "note": "博多駅 篠栗線"
+    }
+   ],
    "nameZh": "博多南线",
    "nameKo": "하카타미나미 선"
   },
@@ -38141,7 +38758,20 @@
     3
    ],
    "throughServices": [],
-   "transferStations": [],
+   "transferStations": [
+    {
+     "station": "Kashii",
+     "lineId": "KagoshimaMain",
+     "type": "out",
+     "note": "香椎駅 鹿儿岛本线"
+    },
+    {
+     "station": "Chōjabaru",
+     "lineId": "Sasaguri",
+     "type": "out",
+     "note": "長者原駅 篠栗線"
+    }
+   ],
    "nameZh": "香椎线",
    "nameKo": "카시이 선"
   },
@@ -38189,7 +38819,20 @@
     3
    ],
    "throughServices": [],
-   "transferStations": [],
+   "transferStations": [
+    {
+     "station": "Kōhoku-Saga",
+     "lineId": "NagasakiMain",
+     "type": "out",
+     "note": "江北駅 长崎本线"
+    },
+    {
+     "station": "Takeo-Onsen",
+     "lineId": "NishiKyushuShinkansen",
+     "type": "out",
+     "note": "武雄温泉駅 西九州新干线"
+    }
+   ],
    "nameZh": "佐世保线",
    "nameKo": "사세보 선"
   }
