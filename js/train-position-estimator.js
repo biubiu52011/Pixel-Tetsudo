@@ -453,6 +453,9 @@
           var destStations = tt['odpt:destinationStation'] || [];
           if (typeof destStations === 'string') destStations = [destStations]; // v4.3.940: 港未来线等时刻表 destinationStation 是字符串不是数组，直接 [0] 会取到首字符（M/Y）
           var destinationStation = destStations.length > 0 ? String(destStations[0]).split(".").pop() : "";
+          // v4.3.1021: 完整目的站 URN 透传——S3 直通 key（operator/线路短名粒度）依赖 URN 的
+          // parts[1]=operator、parts[2]=线路短名；截断成站名后 dest 粒度永久失效（直通 key 永不命中）
+          var destinationStationUrn = destStations.length > 0 ? String(destStations[0]) : "";
           if (!destinationStation) {
             var _tto = tt['odpt:trainTimetableObject'] || [];
             for (var _ti = _tto.length - 1; _ti >= 0; _ti--) {
@@ -460,6 +463,7 @@
               if (_dep === '') {
                 var _st = _tto[_ti]['odpt:station'] || '';
                 destinationStation = String(_st).split('.').pop();
+                destinationStationUrn = String(_st);
                 break;
               }
             }
@@ -475,7 +479,7 @@
             trainNumber: trainNumber,
             stationIndex: currentStationIndex,
             trainType: tt['odpt:trainType'],
-            destinationStation: tt['odpt:destinationStation'],
+            destinationStation: destinationStationUrn || tt['odpt:destinationStation'] || '',
             vehicleTypeManual: tt['vehicleType'] || '',
             trainId: lineId + '_' + trainNumber + '_' + currentStationIndex
           };
@@ -511,6 +515,7 @@
             isThroughTrain: trainClassification.isThroughTrain,
             railDirection: directionName,
             destinationStation: destinationStation,
+            destinationStationUrn: destinationStationUrn,
             trainClass: trainClass,
             vehicleType: _vehicleType,
             // v4.3.1018: manual vehicleType 透传渲染层
