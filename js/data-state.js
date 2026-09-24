@@ -29,7 +29,7 @@
     if (!s) return "";
     if (typeof s !== "string") return "";
     if (s.indexOf("&") < 0 && s.indexOf("<") < 0 && s.indexOf(">") < 0 && s.indexOf('"') < 0 && s.indexOf("'") < 0) return s;
-    var d = document.createElement("div"); d.textContent = s; return d.innerHTML;
+    return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
   }
 
   function getDelayInfo(line) {
@@ -583,5 +583,4 @@
     window.DataState.init();
   }
 })();
-
 

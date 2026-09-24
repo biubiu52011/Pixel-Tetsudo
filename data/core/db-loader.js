@@ -127,9 +127,10 @@ function applyData(data, i18n) {
     
     // ========== Data Correction Layer ==========
     // Fix known data issues in railway_data.json (locked file)
-    (function applyDataCorrections() {
       // v4.3.473: 1-3 号修正（Kataomo_Bashi→Omokage_Bashi 面影橋）已删除——
       // 冻结数据已按 ODPT 官方 ID 正名为 Omokagebashi（Freeze 例外），运行时补丁使命完成。
+    window.DataCorrectionRules = (function() {
+      function apply(data, stationI18n) {
       
       // 4. Fix line ID with diacritics: Tōnami -> Tonami
       if (window.UNIFIED_LINES['Tōnami']) {
@@ -728,7 +729,11 @@ function applyData(data, i18n) {
         var line = window.UNIFIED_LINES[lid];
         if (line) line.image = LINE_IMAGE_FIXES[lid];
       });
+      } // apply
+
+      return { apply: apply };
     })();
+    window.DataCorrectionRules.apply(data, _stationI18n);
     
     Object.keys(window.UNIFIED_LINES).forEach(function(lid) {
       var l = window.UNIFIED_LINES[lid];
@@ -1243,5 +1248,4 @@ function load() {
     event.preventDefault();
   });
 })();
-
 

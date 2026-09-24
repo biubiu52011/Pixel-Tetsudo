@@ -156,6 +156,32 @@
   /** 列车位置轮询间隔（毫秒）。比延误轮询慢，位置变化频率较低。 */
   var POSITION_INTERVAL = 60000;
 
+  // ========== ODPT 缓存 / 轮询 / 存储 key 规则 ==========
+
+  /** 时刻表 IDB 主键（新版 v6） */
+  var ODPT_TIMETABLE_CACHE_KEY = 'odpt_timetable_cache_v6';
+
+  /** 旧 localStorage 缓存 key（v3，迁移后清除） */
+  var ODPT_LEGACY_LS_CACHE_KEY = 'odpt_timetable_cache_v3';
+
+  /** 时刻表缓存 TTL（毫秒，24h） */
+  var ODPT_TIMETABLE_CACHE_TTL = 86400000;
+
+  /** ODPT_TT_PROBED 持久化 key（localStorage，24h 滑动 TTL） */
+  var ODPT_TT_PROBED_KEY = 'odpt_tt_probed_v1';
+
+  /** ODPT_TT_PROBED TTL（毫秒，24h） */
+  var ODPT_TT_PROBED_TTL = 86400000;
+
+  /** 实时数据轮询间隔（毫秒，ODPTClient 后台刷新） */
+  var ODPT_REALTIME_INTERVAL = 30000;
+
+  /** DataLayer 内存缓存条目上限 */
+  var DATA_LAYER_MAX_CACHE_SIZE = 50;
+
+  /** DataLayer 内存缓存 TTL（毫秒） */
+  var DATA_LAYER_CACHE_TTL = 60000;
+
   /** trains 页后台预加载线路白名单（用户高频切换的线路）。打开 trains.html 后 2 秒开始后台加载。 */
   var TRAIN_WARMUP_LINES = ['Yamanote', 'ChuoRapid', 'KeihinTohoku', 'SeibuEn', 'Keikyu', 'Odawara'];
 
@@ -190,6 +216,16 @@
     REFRESH_INTERVAL: REFRESH_INTERVAL,
     POSITION_INTERVAL: POSITION_INTERVAL,
     TRAIN_WARMUP_LINES: TRAIN_WARMUP_LINES,
+    // ODPT 缓存 / 轮询 / 存储 key
+    ODPT_TIMETABLE_CACHE_KEY: ODPT_TIMETABLE_CACHE_KEY,
+    ODPT_LEGACY_LS_CACHE_KEY: ODPT_LEGACY_LS_CACHE_KEY,
+    ODPT_TIMETABLE_CACHE_TTL: ODPT_TIMETABLE_CACHE_TTL,
+    ODPT_TT_PROBED_KEY: ODPT_TT_PROBED_KEY,
+    ODPT_TT_PROBED_TTL: ODPT_TT_PROBED_TTL,
+    ODPT_REALTIME_INTERVAL: ODPT_REALTIME_INTERVAL,
+    // DataLayer 缓存参数
+    DATA_LAYER_MAX_CACHE_SIZE: DATA_LAYER_MAX_CACHE_SIZE,
+    DATA_LAYER_CACHE_TTL: DATA_LAYER_CACHE_TTL,
     // 快速通过站（route-search）
     EXPRESS_SKIP_STATIONS: EXPRESS_SKIP_STATIONS,
     // UI 策略

@@ -780,8 +780,9 @@
     // 5-10MB 配额会触顶（曾触发 partial 降级丢数据），且 JSON.stringify 大对象同步执行会阻塞主线程。
     // IndexedDB 异步写入、容量 GB 级；localStorage 保留为隐私模式/禁用 IDB 时的兜底。
     var TIMETABLE_CACHE_KEY = 'odpt_timetable_cache_v6';
-    var LEGACY_LS_CACHE_KEY = 'odpt_timetable_cache_v3'; // 旧 localStorage 缓存，首次迁移后清除
-    var TIMETABLE_CACHE_TTL = 86400000;  // v4.3.995: 1h→24h——固定ダイヤ，1h TTL 致用户间隔>1h 即全量重拉 ~91 个 TrainTimetable 请求（3并发×150ms+大响应，弱网30s+）；24h TTL 降到每天最多一次
+    // 缓存 key / TTL / 轮询间隔统一由 RuntimeConfig 提供（见 data/core/runtime-config.js）
+    var LEGACY_LS_CACHE_KEY = (window.RuntimeConfig && window.RuntimeConfig.ODPT_LEGACY_LS_CACHE_KEY) || 'odpt_timetable_cache_v3';
+    var TIMETABLE_CACHE_TTL = (window.RuntimeConfig && window.RuntimeConfig.ODPT_TIMETABLE_CACHE_TTL) || 86400000;
     var IDB_DB_NAME = 'pixel-tetsudo';
     var IDB_STORE = 'odpt_cache';
     var _idbDbPromise = null;
@@ -1042,7 +1043,8 @@
     // v4.3.9xx: probed 标记原为内存态——trains 页整页跳转后丢失，41 条 JR 地方线
     // （ODPT 无时刻表）每次切页都重新探测。落 localStorage 后切页零重复请求。
     var TT_PROBED_KEY = 'odpt_tt_probed_v1';
-    var TT_PROBED_TTL = 86400000;  // 24h
+    var TT_PROBED_KEY = (window.RuntimeConfig && window.RuntimeConfig.ODPT_TT_PROBED_KEY) || 'odpt_tt_probed_v1';
+    var TT_PROBED_TTL = (window.RuntimeConfig && window.RuntimeConfig.ODPT_TT_PROBED_TTL) || 86400000;
 
     function _loadProbed() {
         try {
@@ -1450,6 +1452,7 @@
     // 后台标签页（document.hidden）暂停 30s 实时轮询与 5min 时刻表过期检查；
     // 回前台立即拉一次再恢复周期——多标签页下后台页不再产生无效 ODPT 请求。
     var REALTIME_INTERVAL = 30000;
+    REALTIME_INTERVAL = (window.RuntimeConfig && window.RuntimeConfig.ODPT_REALTIME_INTERVAL) || REALTIME_INTERVAL;
     var TT_CHECK_INTERVAL = 300000;
     var _rtPollTimer = null;
     var _ttCheckTimer = null;
