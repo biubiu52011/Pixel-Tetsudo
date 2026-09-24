@@ -603,6 +603,8 @@
     "京王電鉄9000系": "../images/列车/京王電鉄/9000系.png",
     // v4.3.1004: 都電荒川線9000形（レトロ車、9001えんじ/9002青、ダブルルーフ、官网+百科实证）专属图标
     "9000形": "../images/列车/都営地下鉄/9000形.png",
+    "都営8800形": "../images/列车/都営地下鉄/8800形.png",
+    "都営8900形": "../images/列车/都営地下鉄/8900形.png",
     "埼玉新都市交通2000形": "../images/列车/埼玉新都市交通/2000形.png",
     "埼玉新都市交通2000系": "../images/列车/埼玉新都市交通/2000系.png",
     "埼玉新都市交通2000系（01編成）": "../images/列车/埼玉新都市交通/2000系（01編成）.png",
@@ -946,7 +948,21 @@
   //       系列变体（E231系→E231系0番台）、跨名（3050形→3050形（LED））
   // v4.3.977: 线路感知同名解抢表——同名车型被别社图标库抢占时的线路专属指向
   // （例：NewShuttle 伊奈線的 2000系/2020系 会被東京メトロ/東急同名 key 抢占，需按线路指向埼玉资产）
-  var LINE_VEHICLE_OVERRIDES = {
+  // v4.3.1006: 保有数比例加权表——候选串无法精确识别时的确定性随机映射权重
+// 数据来源：都営交通局官网（令和7年4月1日現在 在籍33両：7700形8/8500形5/8800形10/8900形8/9000形2）
+var VEHICLE_FLEET_WEIGHTS = {
+  "Arakawa": {
+    "7700形 / 8500形 / 8800形 / 8900形 / 9000形": [8, 5, 10, 8, 2]
+  }
+};
+
+// v4.3.1006: 线路感知裸名重定向——同名裸型号被别社抢占时（都電8800形/8900形 裸键=京成），
+// 图标解析重定向到本线所属公司图标（显示名保持裸名"8800形"，杜绝"名=都電、图=京成"错配）
+var LINE_ICON_NAME_REDIRECT = {
+  "Arakawa": { "8800形": "都営8800形", "8900形": "都営8900形" }
+};
+
+var LINE_VEHICLE_OVERRIDES = {
     "NewShuttle": {
       "2000系": "埼玉新都市交通2000系",
       "2000系（01編成）": "埼玉新都市交通2000系（01編成）",
@@ -1403,6 +1419,11 @@
           return null;
         }
       }
+      // v4.3.1006: 线路感知裸名重定向（同名被别社抢占：都電8800/8900形 → 都営图标）
+      if (lineId && LINE_ICON_NAME_REDIRECT[lineId] && LINE_ICON_NAME_REDIRECT[lineId][name]) {
+        var _rd = LINE_ICON_NAME_REDIRECT[lineId][name];
+        if (VEHICLE_NAME_TO_ICON[_rd]) return VEHICLE_NAME_TO_ICON[_rd];
+      }
       // 1. 精确匹配
       if (VEHICLE_NAME_TO_ICON[name]) return VEHICLE_NAME_TO_ICON[name];
       // 2. 别名表
@@ -1425,6 +1446,7 @@
     resolveVehicleIcon: resolveVehicleIcon,
     resolveVehicleDisplayName: resolveVehicleDisplayName,
     VEHICLE_NAME_TO_ICON: VEHICLE_NAME_TO_ICON,
+    VEHICLE_FLEET_WEIGHTS: VEHICLE_FLEET_WEIGHTS,
     LINE_ICONS: LINE_ICONS,
     OPERATOR_ICONS: OPERATOR_ICONS
   };

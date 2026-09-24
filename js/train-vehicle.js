@@ -177,13 +177,39 @@
     }
     var chosen = '';
     var chosenSrc = '';
-    for (var oi = 0; oi < order.length; oi++) {
-      var srcName = order[oi];
-      var found = null;
-      Object.keys(pool).forEach(function(c) {
-        if (!found && pool[c].sources.indexOf(srcName) >= 0) found = c;
-      });
-      if (found) { chosen = found; chosenSrc = srcName; break; }
+    // v4.3.1006: 保有数比例加权随机映射（用户决策 2026-09-24）——
+    // 候选串无法精确识别（如都電五选一"7700形/8500形/8800形/8900形/9000形"）且无 S2 车号实证时，
+    // 按官网在籍数权重做确定性 hash 选型：同一车次（trainId）每次稳定同一车型，
+    // 杜绝"全线一个兜底跑天下"；权重表 VEHICLE_FLEET_WEIGHTS（train-icons.js）人工按官网核验。
+    if (_manualCands.length > 1 && _trainNoCands.length === 0 &&
+        window.TrainIcons && window.TrainIcons.VEHICLE_FLEET_WEIGHTS && lineId) {
+      var _fleet = window.TrainIcons.VEHICLE_FLEET_WEIGHTS[lineId] || {};
+      var _wArr = _fleet[ctx.vehicleTypeManual] || _fleet['*'];
+      if (_wArr && _wArr.length === _manualCands.length) {
+        var _seed = (trainNumber || '') + '|' + lineId + '|' + ctx.vehicleTypeManual;
+        var _h = 0;
+        for (var _si = 0; _si < _seed.length; _si++) _h = ((_h * 31) + _seed.charCodeAt(_si)) >>> 0;
+        var _total = 0;
+        _wArr.forEach(function(w) { _total += w; });
+        var _r = _h % _total, _acc = 0, _fleetIdx = -1;
+        for (var _wi = 0; _wi < _wArr.length; _wi++) {
+          _acc += _wArr[_wi];
+          if (_r < _acc) { _fleetIdx = _wi; break; }
+        }
+        if (_fleetIdx < 0) _fleetIdx = _wArr.length - 1;
+        chosen = _manualCands[_fleetIdx];
+        chosenSrc = 'fleet';
+      }
+    }
+    if (!chosen) {
+      for (var oi = 0; oi < order.length; oi++) {
+        var srcName = order[oi];
+        var found = null;
+        Object.keys(pool).forEach(function(c) {
+          if (!found && pool[c].sources.indexOf(srcName) >= 0) found = c;
+        });
+        if (found) { chosen = found; chosenSrc = srcName; break; }
+      }
     }
 
     // 3) 可信度
@@ -194,6 +220,7 @@
     else if (chosenSrc === 'trainNo') confidence = crossCount >= 2 ? 'high' : 'medium';
     else if (chosenSrc === 'map') confidence = 'medium';
     else if (chosenSrc === 'icons') confidence = 'low';
+    else if (chosenSrc === 'fleet') confidence = 'low';   // v4.3.1006: 保有数比例加权随机映射（低置信度推定）
 
     // 4) 图标：候选 → 图标库；无图标再走 S4 规则兜底
     var iconPath = chosen ? resolveIconForName(chosen, ctx.lineId) : '';

@@ -529,6 +529,8 @@ var LINE_ICON_OVERRIDES = [
     "京王電鉄9000系": "../images/列车/京王電鉄/9000系.png",
     // v4.3.1004: 都電荒川線9000形（レトロ車、9001えんじ/9002青、ダブルルーフ、官网+百科实证）专属图标
     "9000形": "../images/列车/都営地下鉄/9000形.png",
+    "都営8800形": "../images/列车/都営地下鉄/8800形.png",
+    "都営8900形": "../images/列车/都営地下鉄/8900形.png",
     "埼玉新都市交通2000形": "../images/列车/埼玉新都市交通/2000形.png",
     "埼玉新都市交通2000系": "../images/列车/埼玉新都市交通/2000系.png",
     "埼玉新都市交通2000系（01編成）": "../images/列车/埼玉新都市交通/2000系（01編成）.png",
@@ -2942,6 +2944,11 @@ function resolveVehicleIcon(candidatesStr, lineId) {
           if (_ovAl && VEHICLE_NAME_TO_ICON[_ovAl]) return VEHICLE_NAME_TO_ICON[_ovAl];
           return null;
         }
+      }
+      // v4.3.1006: 线路感知裸名重定向（同名被别社抢占：都電8800/8900形 → 都営图标）
+      if (lineId && LINE_ICON_NAME_REDIRECT[lineId] && LINE_ICON_NAME_REDIRECT[lineId][name]) {
+        var _rd = LINE_ICON_NAME_REDIRECT[lineId][name];
+        if (VEHICLE_NAME_TO_ICON[_rd]) return VEHICLE_NAME_TO_ICON[_rd];
       }
       // 1. 精确匹配
       if (VEHICLE_NAME_TO_ICON[name]) return VEHICLE_NAME_TO_ICON[name];
