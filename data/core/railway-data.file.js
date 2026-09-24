@@ -12767,6 +12767,1102 @@ window.RAILWAY_DATA = {
   "Sasebo": {
    "lat": 33.12167,
    "lng": 130.41167
+  },
+  "Nishi-Aioi": {
+   "lat": 34.8015663,
+   "lng": 134.4509652
+  },
+  "Sakoshi": {
+   "lat": 34.7687073,
+   "lng": 134.4175822
+  },
+  "Banshu-Ako": {
+   "lat": 34.7566491,
+   "lng": 134.3931736
+  },
+  "Tewa": {
+   "lat": 34.752,
+   "lng": 134.36
+  },
+  "Bizen-Fukukawa": {
+   "lat": 34.749,
+   "lng": 134.33
+  },
+  "Sanga": {
+   "lat": 34.7462659,
+   "lng": 134.2978026
+  },
+  "Hinase": {
+   "lat": 34.7350623,
+   "lng": 134.2767326
+  },
+  "Iri": {
+   "lat": 34.7415563,
+   "lng": 134.2244942
+  },
+  "Bizen-Katakami": {
+   "lat": 34.7483104,
+   "lng": 134.197022
+  },
+  "Nishi-Katakami": {
+   "lat": 34.745183,
+   "lng": 134.1837126
+  },
+  "Inbe": {
+   "lat": 34.7387229,
+   "lng": 134.1608757
+  },
+  "Kazatoko": {
+   "lat": 34.7278144,
+   "lng": 134.1196763
+  },
+  "Osafune": {
+   "lat": 34.6996334,
+   "lng": 134.0987214
+  },
+  "Oodomi": {
+   "lat": 34.6636077,
+   "lng": 134.0729369
+  },
+  "Saidaiji": {
+   "lat": 34.6619649,
+   "lng": 134.0373123
+  },
+  "Oodara": {
+   "lat": 34.6655984,
+   "lng": 134.00643
+  },
+  "Shingu": {
+   "lat": 33.7250784,
+   "lng": 135.9940846
+  },
+  "Miwasaki": {
+   "lat": 33.6894155,
+   "lng": 135.9847756
+  },
+  "Kii-Sano": {
+   "lat": 33.6797315,
+   "lng": 135.9703859
+  },
+  "Ukui": {
+   "lat": 33.6624622,
+   "lng": 135.9722565
+  },
+  "Nachi": {
+   "lat": 33.6441612,
+   "lng": 135.9364572
+  },
+  "Kii-Temma": {
+   "lat": 33.6364693,
+   "lng": 135.9348611
+  },
+  "Kii-Katsuura": {
+   "lat": 33.628068,
+   "lng": 135.9415587
+  },
+  "Yukawa": {
+   "lat": 33.6094698,
+   "lng": 135.9248713
+  },
+  "Taiji": {
+   "lat": 33.590931,
+   "lng": 135.927477
+  },
+  "Shimosato": {
+   "lat": 33.5823864,
+   "lng": 135.9223563
+  },
+  "Kii-Uragami": {
+   "lat": 33.5603364,
+   "lng": 135.8939259
+  },
+  "Kii-Tahara": {
+   "lat": 33.5365057,
+   "lng": 135.8682835
+  },
+  "Koza": {
+   "lat": 33.5193248,
+   "lng": 135.8209054
+  },
+  "Kii-Hime": {
+   "lat": 33.4978284,
+   "lng": 135.7964617
+  },
+  "Kushimoto": {
+   "lat": 33.4755656,
+   "lng": 135.7816979
+  },
+  "Kii-Arita": {
+   "lat": 33.4907901,
+   "lng": 135.7360871
+  },
+  "Tanami": {
+   "lat": 33.4878812,
+   "lng": 135.718581
+  },
+  "Tako": {
+   "lat": 33.4902816,
+   "lng": 135.6779393
+  },
+  "Wabuka": {
+   "lat": 33.5010952,
+   "lng": 135.6549855
+  },
+  "Esumi": {
+   "lat": 33.5097869,
+   "lng": 135.6033361
+  },
+  "Miori": {
+   "lat": 33.51528,
+   "lng": 135.575713
+  },
+  "Susami": {
+   "lat": 33.5467576,
+   "lng": 135.4957192
+  },
+  "Kii-Hioki": {
+   "lat": 33.5853555,
+   "lng": 135.4577943
+  },
+  "Tsubaki": {
+   "lat": 33.6098979,
+   "lng": 135.403898
+  },
+  "Kii-Tonda": {
+   "lat": 33.6526809,
+   "lng": 135.3934047
+  },
+  "Shirahama": {
+   "lat": 33.6755612,
+   "lng": 135.3870263
+  },
+  "Asso": {
+   "lat": 33.6964224,
+   "lng": 135.417487
+  },
+  "Kii-Shinjo": {
+   "lat": 33.7210735,
+   "lng": 135.4020758
+  },
+  "Kii-Tanabe": {
+   "lat": 33.7328792,
+   "lng": 135.3845422
+  },
+  "Haya": {
+   "lat": 33.746941,
+   "lng": 135.35555
+  },
+  "Minabe": {
+   "lat": 33.7674776,
+   "lng": 135.3243949
+  },
+  "Iro": {
+   "lat": 33.7804911,
+   "lng": 135.279296
+  },
+  "Kirime": {
+   "lat": 33.7971183,
+   "lng": 135.2410195
+  },
+  "Inami": {
+   "lat": 33.8180411,
+   "lng": 135.2198737
+  },
+  "Inahara": {
+   "lat": 33.8524254,
+   "lng": 135.2290857
+  },
+  "Kasa": {
+   "lat": 33.8973972,
+   "lng": 135.2072466
+  },
+  "Dojoji": {
+   "lat": 33.9111395,
+   "lng": 135.1759676
+  },
+  "Gobo": {
+   "lat": 33.907868,
+   "lng": 135.1591382
+  },
+  "Kii-Uchihara": {
+   "lat": 33.9261503,
+   "lng": 135.1451867
+  },
+  "Kii-Yura": {
+   "lat": 33.9689596,
+   "lng": 135.1278778
+  },
+  "Hirokawa-Beach": {
+   "lat": 34.0130757,
+   "lng": 135.1635921
+  },
+  "Yuasa": {
+   "lat": 34.032036,
+   "lng": 135.1796999
+  },
+  "Fujinami": {
+   "lat": 34.05718,
+   "lng": 135.1966032
+  },
+  "Kii-Miyahara": {
+   "lat": 34.0779058,
+   "lng": 135.1707162
+  },
+  "Minoshima": {
+   "lat": 34.0861023,
+   "lng": 135.1246277
+  },
+  "Hatsushima": {
+   "lat": 34.100055,
+   "lng": 135.1156126
+  },
+  "Shimotsu": {
+   "lat": 34.1086917,
+   "lng": 135.1452054
+  },
+  "Kamogo": {
+   "lat": 34.1256474,
+   "lng": 135.1598889
+  },
+  "Hiyamizu": {
+   "lat": 34.1418596,
+   "lng": 135.1941732
+  },
+  "Kainan": {
+   "lat": 34.1542935,
+   "lng": 135.2144039
+  },
+  "Kuroe": {
+   "lat": 34.1701732,
+   "lng": 135.2102698
+  },
+  "Kimiidera": {
+   "lat": 34.1880057,
+   "lng": 135.1876099
+  },
+  "Miyamae": {
+   "lat": 34.2132217,
+   "lng": 135.1887578
+  },
+  "Fukuchigaki": {
+   "lat": 35.3282195,
+   "lng": 135.2944962
+  },
+  "Umezako": {
+   "lat": 35.3485468,
+   "lng": 135.3112042
+  },
+  "Magura": {
+   "lat": 35.4070099,
+   "lng": 135.3260297
+  },
+  "Nishi-Maizuru": {
+   "lat": 35.4416731,
+   "lng": 135.3305865
+  },
+  "Higashi-Maizuru": {
+   "lat": 35.4686275,
+   "lng": 135.3948317
+  },
+  "Sunami": {
+   "lat": 34.3702143,
+   "lng": 133.0838252
+  },
+  "Aki-Kosaki": {
+   "lat": 34.3380593,
+   "lng": 133.0399503
+  },
+  "Tadanoumi": {
+   "lat": 34.3367942,
+   "lng": 132.9912789
+  },
+  "Aki-Nagahama": {
+   "lat": 34.3379202,
+   "lng": 132.9619567
+  },
+  "Joge": {
+   "lat": 34.328,
+   "lng": 132.88
+  },
+  "Takehara": {
+   "lat": 34.339309,
+   "lng": 132.9100006
+  },
+  "Yoshina": {
+   "lat": 34.3206074,
+   "lng": 132.8657864
+  },
+  "Kazahaya": {
+   "lat": 34.3030682,
+   "lng": 132.7957848
+  },
+  "Yasuura": {
+   "lat": 34.2839081,
+   "lng": 132.744798
+  },
+  "Ando": {
+   "lat": 34.2543231,
+   "lng": 132.7222746
+  },
+  "Aki-Kawajiri": {
+   "lat": 34.2326849,
+   "lng": 132.6914509
+  },
+  "Nigata": {
+   "lat": 34.2217043,
+   "lng": 132.6553148
+  },
+  "Hiro": {
+   "lat": 34.2284501,
+   "lng": 132.6283311
+  },
+  "Aki-Aga": {
+   "lat": 34.2356695,
+   "lng": 132.6000304
+  },
+  "Kure": {
+   "lat": 34.2446363,
+   "lng": 132.5574725
+  },
+  "Kawaraishi": {
+   "lat": 34.2486771,
+   "lng": 132.541764
+  },
+  "Yoshiura": {
+   "lat": 34.2578132,
+   "lng": 132.5270989
+  },
+  "Karugahama": {
+   "lat": 34.2641368,
+   "lng": 132.5171401
+  },
+  "Kure-Portopia": {
+   "lat": 34.2918799,
+   "lng": 132.5126836
+  },
+  "Koyaura": {
+   "lat": 34.3025266,
+   "lng": 132.506211
+  },
+  "Mizushiri": {
+   "lat": 34.3202757,
+   "lng": 132.4992169
+  },
+  "Saka": {
+   "lat": 34.3387542,
+   "lng": 132.5107666
+  },
+  "Yano": {
+   "lat": 34.3522082,
+   "lng": 132.5323911
+  },
+  "Shin-Hiro": {
+   "lat": 34.2322353,
+   "lng": 132.6140953
+  },
+  "Mitaki": {
+   "lat": 34.4153511,
+   "lng": 132.4461735
+  },
+  "Aki-Nagatsuka": {
+   "lat": 34.428274,
+   "lng": 132.4560454
+  },
+  "Shimo-Gion": {
+   "lat": 34.4395351,
+   "lng": 132.4625325
+  },
+  "Furuichibashi": {
+   "lat": 34.450429,
+   "lng": 132.4683614
+  },
+  "Omachi": {
+   "lat": 34.4614612,
+   "lng": 132.4701168
+  },
+  "Midorii": {
+   "lat": 34.4675983,
+   "lng": 132.4759686
+  },
+  "Shichikenchaya": {
+   "lat": 34.4719961,
+   "lng": 132.4805594
+  },
+  "Bairin": {
+   "lat": 34.4808645,
+   "lng": 132.4942334
+  },
+  "Kami-Yagi": {
+   "lat": 34.4899154,
+   "lng": 132.5060318
+  },
+  "Nakashima": {
+   "lat": 34.5011709,
+   "lng": 132.5130306
+  },
+  "Suo-Shimogo": {
+   "lat": 34.1009948,
+   "lng": 131.4016811
+  },
+  "Kamigo": {
+   "lat": 34.1163523,
+   "lng": 131.401819
+  },
+  "Nihozu": {
+   "lat": 34.1288839,
+   "lng": 131.4154468
+  },
+  "toshi": {
+   "lat": 34.1472377,
+   "lng": 131.432831
+  },
+  "Yabara": {
+   "lat": 34.1504595,
+   "lng": 131.4458214
+  },
+  "Yudaonsen": {
+   "lat": 34.1598129,
+   "lng": 131.4601091
+  },
+  "Yamaguchi": {
+   "lat": 34.1726099,
+   "lng": 131.4808318
+  },
+  "Kami-Yamaguchi": {
+   "lat": 34.1825922,
+   "lng": 131.48498
+  },
+  "Miyano": {
+   "lat": 34.1912927,
+   "lng": 131.4985459
+  },
+  "Niho": {
+   "lat": 34.2165357,
+   "lng": 131.5362585
+  },
+  "Shinome": {
+   "lat": 34.2787128,
+   "lng": 131.5620367
+  },
+  "Chomonkyo": {
+   "lat": 34.304478,
+   "lng": 131.5787966
+  },
+  "Togawa": {
+   "lat": 34.3227616,
+   "lng": 131.6037854
+  },
+  "Mitani": {
+   "lat": 34.3418007,
+   "lng": 131.6245729
+  },
+  "Nagusa": {
+   "lat": 34.353824,
+   "lng": 131.651555
+  },
+  "Jifuku": {
+   "lat": 34.3631422,
+   "lng": 131.6748348
+  },
+  "Nabekura": {
+   "lat": 34.3783919,
+   "lng": 131.6945218
+  },
+  "Tokusa": {
+   "lat": 34.4001356,
+   "lng": 131.7204563
+  },
+  "Funahirayama": {
+   "lat": 34.421205,
+   "lng": 131.7341482
+  },
+  "Tsuwano": {
+   "lat": 34.4730785,
+   "lng": 131.7742343
+  },
+  "Aonoyama": {
+   "lat": 34.4809947,
+   "lng": 131.8033114
+  },
+  "Nichihara": {
+   "lat": 34.5327796,
+   "lng": 131.8318404
+  },
+  "Aobara": {
+   "lat": 34.5602093,
+   "lng": 131.8007579
+  },
+  "Higashi-Aobara": {
+   "lat": 34.5850882,
+   "lng": 131.7973982
+  },
+  "Iwami-Yokota": {
+   "lat": 34.6185332,
+   "lng": 131.8050505
+  },
+  "Nishi-Iwakuni": {
+   "lat": 34.1627087,
+   "lng": 132.1952113
+  },
+  "Kawanishi": {
+   "lat": 34.1566233,
+   "lng": 132.1773925
+  },
+  "Hashiranoya": {
+   "lat": 34.1433559,
+   "lng": 132.1543895
+  },
+  "Kinmeiji": {
+   "lat": 34.1041452,
+   "lng": 132.1015094
+  },
+  "Kuga": {
+   "lat": 34.0946354,
+   "lng": 132.0831301
+  },
+  "Suo-Takamori": {
+   "lat": 34.0908097,
+   "lng": 132.0465956
+  },
+  "Yonekawa": {
+   "lat": 34.0745031,
+   "lng": 132.0144021
+  },
+  "Takamizu": {
+   "lat": 34.0554116,
+   "lng": 131.9729105
+  },
+  "Katsuma": {
+   "lat": 34.0419935,
+   "lng": 131.9540907
+  },
+  "kawachi": {
+   "lat": 34.0310485,
+   "lng": 131.9342773
+  },
+  "Suo-Kubo": {
+   "lat": 34.0290793,
+   "lng": 131.919179
+  },
+  "Ikunoya": {
+   "lat": 34.0354265,
+   "lng": 131.8871446
+  },
+  "Suo-Hanaoka": {
+   "lat": 34.0359125,
+   "lng": 131.8680045
+  },
+  "Kami-Kagawa": {
+   "lat": 34.073765,
+   "lng": 131.3789708
+  },
+  "Fukamizo": {
+   "lat": 34.0469266,
+   "lng": 131.3713943
+  },
+  "Suo-Sayama": {
+   "lat": 34.0349155,
+   "lng": 131.3636508
+  },
+  "Iwakura": {
+   "lat": 34.023,
+   "lng": 131.36
+  },
+  "Ajisu": {
+   "lat": 34.0107308,
+   "lng": 131.3566754
+  },
+  "Zeniba": {
+   "lat": 33.9900994,
+   "lng": 131.3479915
+  },
+  "Maruo": {
+   "lat": 33.9701402,
+   "lng": 131.3368119
+  },
+  "Tokonami": {
+   "lat": 33.9525448,
+   "lng": 131.3053697
+  },
+  "Tokiwa": {
+   "lat": 33.9407959,
+   "lng": 131.2921651
+  },
+  "Kusae": {
+   "lat": 33.9367189,
+   "lng": 131.2742003
+  },
+  "Ube-Misaki": {
+   "lat": 33.9347455,
+   "lng": 131.2622377
+  },
+  "Higashi-Shinkawa": {
+   "lat": 33.9484365,
+   "lng": 131.2570771
+  },
+  "Kotoshiba": {
+   "lat": 33.9529019,
+   "lng": 131.2519804
+  },
+  "Ube-Shinkawa": {
+   "lat": 33.958623,
+   "lng": 131.2426329
+  },
+  "Iwahana": {
+   "lat": 33.9787845,
+   "lng": 131.2253602
+  },
+  "Wakamatsu": {
+   "lat": 33.9010409,
+   "lng": 130.8060264
+  },
+  "Fujinoki": {
+   "lat": 33.8933135,
+   "lng": 130.7819531
+  },
+  "Okudomi": {
+   "lat": 33.8890905,
+   "lng": 130.7643867
+  },
+  "Futajima": {
+   "lat": 33.8895677,
+   "lng": 130.7484618
+  },
+  "Higashi-Mizumaki": {
+   "lat": 33.8404845,
+   "lng": 130.7081496
+  },
+  "Nakama": {
+   "lat": 33.8278908,
+   "lng": 130.7094017
+  },
+  "Chikuzen-Gabu": {
+   "lat": 33.8181678,
+   "lng": 130.7017944
+  },
+  "Kurate": {
+   "lat": 33.797818,
+   "lng": 130.6995624
+  },
+  "Chikuzen-Ueki": {
+   "lat": 33.7765069,
+   "lng": 130.708235
+  },
+  "Shinnyu": {
+   "lat": 33.7639101,
+   "lng": 130.7135661
+  },
+  "Katsuno": {
+   "lat": 33.728586,
+   "lng": 130.7165665
+  },
+  "Kotake": {
+   "lat": 33.6966012,
+   "lng": 130.7105537
+  },
+  "Namazuta": {
+   "lat": 33.6689677,
+   "lng": 130.7024736
+  },
+  "Urata": {
+   "lat": 33.6564927,
+   "lng": 130.6992405
+  },
+  "Shin-Iizuka": {
+   "lat": 33.6441682,
+   "lng": 130.6942077
+  },
+  "Iizuka": {
+   "lat": 33.6286803,
+   "lng": 130.6895265
+  },
+  "Kami-Honami": {
+   "lat": 33.5670759,
+   "lng": 130.6455144
+  },
+  "Chikuzen-Uchino": {
+   "lat": 33.5402138,
+   "lng": 130.6383676
+  },
+  "Chikuzen-Yamashiro": {
+   "lat": 33.4773114,
+   "lng": 130.5738084
+  },
+  "Harada-Fukuoka": {
+   "lat": 33.4521,
+   "lng": 130.5532
+  },
+  "Kami-Mio": {
+   "lat": 33.622975,
+   "lng": 130.7134136
+  },
+  "Shimo-Kamoo": {
+   "lat": 33.6146731,
+   "lng": 130.7286022
+  },
+  "Chikuzen-Shonai": {
+   "lat": 33.6164844,
+   "lng": 130.7384017
+  },
+  "Funao-Fukuoka": {
+   "lat": 33.6300863,
+   "lng": 130.7671276
+  },
+  "Tagawa-Gotoji": {
+   "lat": 33.6303531,
+   "lng": 130.8000701
+  },
+  "Haiki": {
+   "lat": 33.1337013,
+   "lng": 129.7992906
+  },
+  "HuisTenBosch": {
+   "lat": 33.0917944,
+   "lng": 129.796595
+  },
+  "Haigusaki": {
+   "lat": 33.0869453,
+   "lng": 129.8012474
+  },
+  "Koshikigo": {
+   "lat": 33.063528,
+   "lng": 129.8345972
+  },
+  "Kawatana": {
+   "lat": 33.0684952,
+   "lng": 129.863469
+  },
+  "Sonogi": {
+   "lat": 33.0396733,
+   "lng": 129.9150283
+  },
+  "Chiwata": {
+   "lat": 33.0129826,
+   "lng": 129.9457207
+  },
+  "Matsubara-Nagasaki": {
+   "lat": 32.9780626,
+   "lng": 129.9462376
+  },
+  "Omura-Sharyo": {
+   "lat": 32.9554354,
+   "lng": 129.9442278
+  },
+  "Takematsu": {
+   "lat": 32.9400476,
+   "lng": 129.9529155
+  },
+  "Suwa-Nagasaki": {
+   "lat": 32.9234921,
+   "lng": 129.9603116
+  },
+  "Omura-Nagasaki": {
+   "lat": 32.9107294,
+   "lng": 129.9623676
+  },
+  "Iwamatsu": {
+   "lat": 32.8903864,
+   "lng": 129.9817224
+  },
+  "Tayoshi": {
+   "lat": 31.8792032,
+   "lng": 131.4303808
+  },
+  "Minamikata-Miyazaki": {
+   "lat": 31.8553,
+   "lng": 131.4341
+  },
+  "Kibana": {
+   "lat": 31.8314754,
+   "lng": 131.4367719
+  },
+  "Undokoen-Miyazaki": {
+   "lat": 31.8197182,
+   "lng": 131.4425394
+  },
+  "Sobayama": {
+   "lat": 31.8133583,
+   "lng": 131.4483391
+  },
+  "Kodomonokuni-Miyazaki": {
+   "lat": 31.8072738,
+   "lng": 131.4570693
+  },
+  "Aoshima-Miyazaki": {
+   "lat": 31.7997348,
+   "lng": 131.4670192
+  },
+  "Oryuzako": {
+   "lat": 31.7895063,
+   "lng": 131.4675091
+  },
+  "Uchiumi-Miyazaki": {
+   "lat": 31.7586564,
+   "lng": 131.4672973
+  },
+  "Kochi-Uchiumi": {
+   "lat": 31.7377864,
+   "lng": 131.4658756
+  },
+  "Ibiino": {
+   "lat": 31.7110111,
+   "lng": 131.4561455
+  },
+  "Kitago-Miyazaki": {
+   "lat": 31.6781426,
+   "lng": 131.3736336
+  },
+  "Uchinoda": {
+   "lat": 31.64257,
+   "lng": 131.372654
+  },
+  "Obi": {
+   "lat": 31.6273825,
+   "lng": 131.3619584
+  },
+  "Nichinan": {
+   "lat": 31.6031361,
+   "lng": 131.3812045
+  },
+  "Aburatsu": {
+   "lat": 31.5867567,
+   "lng": 131.3962637
+  },
+  "Doto": {
+   "lat": 31.5570545,
+   "lng": 131.3823226
+  },
+  "Nangō-Miyazaki": {
+   "lat": 31.5360072,
+   "lng": 131.3726464
+  },
+  "Taninokuchi": {
+   "lat": 31.5337292,
+   "lng": 131.3446722
+  },
+  "Enobaru": {
+   "lat": 31.5347974,
+   "lng": 131.3064175
+  },
+  "Hyuga-Okamoto": {
+   "lat": 31.5106775,
+   "lng": 131.248623
+  },
+  "Hyuga-Kitakata": {
+   "lat": 31.4830746,
+   "lng": 131.243332
+  },
+  "Kushima": {
+   "lat": 31.4612,
+   "lng": 131.2215
+  },
+  "Fukushima-Imamachi": {
+   "lat": 31.4569028,
+   "lng": 131.2033174
+  },
+  "Fukushima-Takamatsu": {
+   "lat": 31.4585974,
+   "lng": 131.1783161
+  },
+  "Osumi-Natsui": {
+   "lat": 31.4698302,
+   "lng": 131.1363203
+  },
+  "Shibushi": {
+   "lat": 31.4730414,
+   "lng": 131.0980283
+  },
+  "Ogi-Saga": {
+   "lat": 33.2857519,
+   "lng": 130.1986873
+  },
+  "Higashi-Taku": {
+   "lat": 33.2854199,
+   "lng": 130.1424692
+  },
+  "Naka-Taku": {
+   "lat": 33.2832982,
+   "lng": 130.1123688
+  },
+  "Taku": {
+   "lat": 33.2880886,
+   "lng": 130.0961414
+  },
+  "Kyuragi": {
+   "lat": 33.323344,
+   "lng": 130.0604379
+  },
+  "Iwaya-Saga": {
+   "lat": 33.3314685,
+   "lng": 130.0384158
+  },
+  "Ochi-Saga": {
+   "lat": 33.3469265,
+   "lng": 130.0199157
+  },
+  "Homuta": {
+   "lat": 33.3724013,
+   "lng": 129.9963746
+  },
+  "Yamamoto-Saga": {
+   "lat": 33.393373,
+   "lng": 129.9811041
+  },
+  "Onizuka": {
+   "lat": 33.4202036,
+   "lng": 129.9869667
+  },
+  "Karatsu": {
+   "lat": 33.4462729,
+   "lng": 129.9677507
+  },
+  "Nishi-Karatsu": {
+   "lat": 33.4616571,
+   "lng": 129.9576107
+  },
+  "Meinohama": {
+   "lat": 33.5837095,
+   "lng": 130.3251041
+  },
+  "Shimoyamato": {
+   "lat": 33.5818916,
+   "lng": 130.3080639
+  },
+  "Imajuku": {
+   "lat": 33.5793544,
+   "lng": 130.2736272
+  },
+  "Kyudai-Gakkentoshi": {
+   "lat": 33.5781634,
+   "lng": 130.2598996
+  },
+  "Susenji": {
+   "lat": 33.5707876,
+   "lng": 130.24627
+  },
+  "Hatae": {
+   "lat": 33.5639695,
+   "lng": 130.2268454
+  },
+  "Itoshima-KokoMae": {
+   "lat": 33.5607018,
+   "lng": 130.2133204
+  },
+  "Chikuzen-Maebaru": {
+   "lat": 33.5571401,
+   "lng": 130.1992925
+  },
+  "Misakigaoka": {
+   "lat": 33.5499248,
+   "lng": 130.1855539
+  },
+  "Kaburi": {
+   "lat": 33.5433486,
+   "lng": 130.1763314
+  },
+  "Ikisan": {
+   "lat": 33.534333,
+   "lng": 130.1682491
+  },
+  "Chikuzen-Fukae": {
+   "lat": 33.5150331,
+   "lng": 130.1394483
+  },
+  "Dairi": {
+   "lat": 33.5088943,
+   "lng": 130.1060468
+  },
+  "Fukuyoshi": {
+   "lat": 33.5015927,
+   "lng": 130.0796877
+  },
+  "Shikaka": {
+   "lat": 33.4843844,
+   "lng": 130.0474654
+  },
+  "Hamasaki": {
+   "lat": 33.4467721,
+   "lng": 130.0364636
+  },
+  "Nijinomatsubara": {
+   "lat": 33.4410618,
+   "lng": 130.0162027
+  },
+  "Higashi-Karatsu": {
+   "lat": 33.4394053,
+   "lng": 129.9968487
+  },
+  "Watada": {
+   "lat": 33.4369348,
+   "lng": 129.9807718
+  },
+  "Miyazaki-Kuko": {
+   "lat": 31.8724607,
+   "lng": 131.4401622
+  },
+  "Hyuga-Shonai": {
+   "lat": 31.7622233,
+   "lng": 131.0615539
+  },
+  "Tanigashira": {
+   "lat": 31.7887804,
+   "lng": 131.0541646
+  },
+  "Mangatsuka": {
+   "lat": 31.8173891,
+   "lng": 131.0640691
+  },
+  "Higashi-Takasaki": {
+   "lat": 31.8408469,
+   "lng": 131.0651592
+  },
+  "Takasaki-Shinden": {
+   "lat": 31.8762741,
+   "lng": 131.062472
+  },
+  "Hyuga-Maeda": {
+   "lat": 31.908543,
+   "lng": 131.040666
+  },
+  "Takaharu": {
+   "lat": 31.9268539,
+   "lng": 130.9988134
+  },
+  "Hirohara": {
+   "lat": 31.958065,
+   "lng": 130.984816
+  },
+  "Kobayashi-Miyazaki": {
+   "lat": 31.9834,
+   "lng": 130.9567
+  },
+  "Nishi-Kobayashi": {
+   "lat": 32.0095409,
+   "lng": 130.9217282
+  },
+  "Ebino-Iino": {
+   "lat": 32.0304524,
+   "lng": 130.8706681
+  },
+  "Ebino-Ue": {
+   "lat": 32.0356098,
+   "lng": 130.8500084
+  },
+  "Ebino": {
+   "lat": 32.0422993,
+   "lng": 130.8159272
+  },
+  "Kyomachi-Onsen": {
+   "lat": 32.0453249,
+   "lng": 130.7676343
+  },
+  "Tsurumaru": {
+   "lat": 32.0306628,
+   "lng": 130.7488093
+  },
+  "Yoshimatsu": {
+   "lat": 32.012007,
+   "lng": 130.7384104
   }
  },
  "lines": {
@@ -38835,6 +39931,1158 @@ window.RAILWAY_DATA = {
    ],
    "nameZh": "佐世保线",
    "nameKo": "사세보 선"
+  },
+  "Ako": {
+   "name": "Ako",
+   "nameEn": "Ako Line",
+   "nameJa": "赤穂線",
+   "code": "Ako",
+   "color": "#009944",
+   "operator": "JR-West",
+   "region": "Chugoku Area",
+   "type": "local",
+   "image": "",
+   "durationTotalMin": 55,
+   "stations": [
+    "Aioi-Hyogo",
+    "Nishi-Aioi",
+    "Sakoshi",
+    "Banshu-Ako",
+    "Tewa",
+    "Bizen-Fukukawa",
+    "Sanga",
+    "Hinase",
+    "Iri",
+    "Bizen-Katakami",
+    "Nishi-Katakami",
+    "Inbe",
+    "Kazatoko",
+    "Osafune",
+    "Oku",
+    "Oodomi",
+    "Saidaiji",
+    "Oodara",
+    "Toukou-Yama"
+   ],
+   "durations": [
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3
+   ],
+   "throughServices": [],
+   "transferStations": [
+    {
+     "station": "Aioi-Hyogo",
+     "lineId": "SanyoMain",
+     "type": "in",
+     "note": "山陽本線接続"
+    },
+    {
+     "station": "Toukou-Yama",
+     "lineId": "SanyoMain",
+     "type": "in",
+     "note": "山陽本線接続"
+    }
+   ],
+   "nameZh": "赤穗线",
+   "nameKo": "아코선"
+  },
+  "KiseiWest": {
+   "name": "KiseiWest",
+   "nameEn": "Kisei Main Line (Kinokuni Line)",
+   "nameJa": "紀勢本線（きのくに線）",
+   "code": "KiseiWest",
+   "color": "#2e8b57",
+   "operator": "JR-West",
+   "region": "Kansai Area",
+   "type": "local",
+   "image": "",
+   "durationTotalMin": 200,
+   "stations": [
+    "Shingu",
+    "Miwasaki",
+    "Kii-Sano",
+    "Ukui",
+    "Nachi",
+    "Kii-Temma",
+    "Kii-Katsuura",
+    "Yukawa",
+    "Taiji",
+    "Shimosato",
+    "Kii-Uragami",
+    "Kii-Tahara",
+    "Koza",
+    "Kii-Hime",
+    "Kushimoto",
+    "Kii-Arita",
+    "Tanami",
+    "Tako",
+    "Wabuka",
+    "Esumi",
+    "Miori",
+    "Susami",
+    "Kii-Hioki",
+    "Tsubaki",
+    "Kii-Tonda",
+    "Shirahama",
+    "Asso",
+    "Kii-Shinjo",
+    "Kii-Tanabe",
+    "Haya",
+    "Minabe",
+    "Iro",
+    "Kirime",
+    "Inami",
+    "Inahara",
+    "Kasa",
+    "Dojoji",
+    "Gobo",
+    "Kii-Uchihara",
+    "Kii-Yura",
+    "Hirokawa-Beach",
+    "Yuasa",
+    "Fujinami",
+    "Kii-Miyahara",
+    "Minoshima",
+    "Hatsushima",
+    "Shimotsu",
+    "Kamogo",
+    "Hiyamizu",
+    "Kainan",
+    "Kuroe",
+    "Kimiidera",
+    "Miyamae",
+    "Wakayama"
+   ],
+   "durations": [
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3
+   ],
+   "throughServices": [],
+   "transferStations": [
+    {
+     "station": "Wakayama",
+     "lineId": "Hanwa",
+     "type": "in",
+     "note": "阪和線接続"
+    }
+   ],
+   "nameZh": "纪势本线（纪伊国线）",
+   "nameKo": "키세이 본선"
+  },
+  "Maizuru": {
+   "name": "Maizuru",
+   "nameEn": "Maizuru Line",
+   "nameJa": "舞鶴線",
+   "code": "Maizuru",
+   "color": "#4682b4",
+   "operator": "JR-West",
+   "region": "Kansai Area",
+   "type": "local",
+   "image": "",
+   "durationTotalMin": 30,
+   "stations": [
+    "Ayabe",
+    "Fukuchigaki",
+    "Umezako",
+    "Magura",
+    "Nishi-Maizuru",
+    "Higashi-Maizuru"
+   ],
+   "durations": [
+    3,
+    3,
+    3,
+    3,
+    3
+   ],
+   "throughServices": [],
+   "transferStations": [
+    {
+     "station": "Ayabe",
+     "lineId": "SaninMain",
+     "type": "in",
+     "note": "山陰本線接続"
+    }
+   ],
+   "nameZh": "舞鹤线",
+   "nameKo": "마이즈루선"
+  },
+  "Kure": {
+   "name": "Kure",
+   "nameEn": "Kure Line",
+   "nameJa": "呉線",
+   "code": "Kure",
+   "color": "#2e8b57",
+   "operator": "JR-West",
+   "region": "Chugoku Area",
+   "type": "local",
+   "image": "",
+   "durationTotalMin": 70,
+   "stations": [
+    "Mihara",
+    "Sunami",
+    "Aki-Kosaki",
+    "Tadanoumi",
+    "Aki-Nagahama",
+    "Joge",
+    "Takehara",
+    "Yoshina",
+    "Akitsu",
+    "Kazahaya",
+    "Yasuura",
+    "Ando",
+    "Aki-Kawajiri",
+    "Nigata",
+    "Hiro",
+    "Aki-Aga",
+    "Kure",
+    "Kawaraishi",
+    "Yoshiura",
+    "Karugahama",
+    "Tenno",
+    "Kure-Portopia",
+    "Koyaura",
+    "Mizushiri",
+    "Saka",
+    "Yano",
+    "Umidashi",
+    "Shin-Hiro",
+    "Kouyou",
+    "Tenjin-Kawa",
+    "Hiroshima"
+   ],
+   "durations": [
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3
+   ],
+   "throughServices": [],
+   "transferStations": [
+    {
+     "station": "Mihara",
+     "lineId": "SanyoMain",
+     "type": "in",
+     "note": "山陽本線接続"
+    },
+    {
+     "station": "Hiroshima",
+     "lineId": "SanyoMain",
+     "type": "in",
+     "note": "山陽本線接続"
+    },
+    {
+     "station": "Hiroshima",
+     "lineId": "SanyoShinkansen",
+     "type": "in",
+     "note": "新幹線接続"
+    },
+    {
+     "station": "Umidashi",
+     "lineId": "SanyoMain",
+     "type": "in",
+     "note": "海田市で山陽本線接続"
+    }
+   ],
+   "nameZh": "吴线",
+   "nameKo": "쿠레선"
+  },
+  "Kabe": {
+   "name": "Kabe",
+   "nameEn": "Kabe Line",
+   "nameJa": "可部線",
+   "code": "Kabe",
+   "color": "#4682b4",
+   "operator": "JR-West",
+   "region": "Chugoku Area",
+   "type": "local",
+   "image": "",
+   "durationTotalMin": 25,
+   "stations": [
+    "Yokokawa",
+    "Mitaki",
+    "Aki-Nagatsuka",
+    "Shimo-Gion",
+    "Furuichibashi",
+    "Omachi",
+    "Midorii",
+    "Shichikenchaya",
+    "Bairin",
+    "Kami-Yagi",
+    "Nakashima",
+    "Kabe"
+   ],
+   "durations": [
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3
+   ],
+   "throughServices": [],
+   "transferStations": [
+    {
+     "station": "Yokokawa",
+     "lineId": "SanyoMain",
+     "type": "in",
+     "note": "山陽本線接続"
+    }
+   ],
+   "nameZh": "可部线",
+   "nameKo": "카베선"
+  },
+  "Yamaguchi": {
+   "name": "Yamaguchi",
+   "nameEn": "Yamaguchi Line",
+   "nameJa": "山口線",
+   "code": "Yamaguchi",
+   "color": "#8b4513",
+   "operator": "JR-West",
+   "region": "Chugoku Area",
+   "type": "local",
+   "image": "",
+   "durationTotalMin": 90,
+   "stations": [
+    "Shin-Yamaguchi",
+    "Suo-Shimogo",
+    "Kamigo",
+    "Nihozu",
+    "toshi",
+    "Yabara",
+    "Yudaonsen",
+    "Yamaguchi",
+    "Kami-Yamaguchi",
+    "Miyano",
+    "Niho",
+    "Shinome",
+    "Chomonkyo",
+    "Togawa",
+    "Mitani",
+    "Nagusa",
+    "Jifuku",
+    "Nabekura",
+    "Tokusa",
+    "Funahirayama",
+    "Tsuwano",
+    "Aonoyama",
+    "Nichihara",
+    "Aobara",
+    "Higashi-Aobara",
+    "Iwami-Yokota",
+    "Matsumoto",
+    "Masuda"
+   ],
+   "durations": [
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3
+   ],
+   "throughServices": [],
+   "transferStations": [
+    {
+     "station": "Shin-Yamaguchi",
+     "lineId": "SanyoMain",
+     "type": "in",
+     "note": "山陽本線接続"
+    },
+    {
+     "station": "Shin-Yamaguchi",
+     "lineId": "SanyoShinkansen",
+     "type": "in",
+     "note": "新幹線接続"
+    },
+    {
+     "station": "Masuda",
+     "lineId": "SaninMain",
+     "type": "in",
+     "note": "山陰本線接続"
+    }
+   ],
+   "nameZh": "山口线",
+   "nameKo": "야마구치선"
+  },
+  "Iwakado": {
+   "name": "Iwakado",
+   "nameEn": "Iwaka Line",
+   "nameJa": "岩徳線",
+   "code": "Iwakado",
+   "color": "#8b4513",
+   "operator": "JR-West",
+   "region": "Chugoku Area",
+   "type": "local",
+   "image": "",
+   "durationTotalMin": 45,
+   "stations": [
+    "Iwakuni",
+    "Nishi-Iwakuni",
+    "Kawanishi",
+    "Hashiranoya",
+    "Kinmeiji",
+    "Kuga",
+    "Suo-Takamori",
+    "Yonekawa",
+    "Takamizu",
+    "Katsuma",
+    "kawachi",
+    "Suo-Kubo",
+    "Ikunoya",
+    "Suo-Hanaoka",
+    "Kushi-Ke-Hama",
+    "Tokuyama"
+   ],
+   "durations": [
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3
+   ],
+   "throughServices": [],
+   "transferStations": [
+    {
+     "station": "Iwakuni",
+     "lineId": "SanyoMain",
+     "type": "in",
+     "note": "山陽本線接続"
+    },
+    {
+     "station": "Tokuyama",
+     "lineId": "SanyoMain",
+     "type": "in",
+     "note": "山陽本線接続"
+    },
+    {
+     "station": "Tokuyama",
+     "lineId": "SanyoShinkansen",
+     "type": "in",
+     "note": "新幹線接続"
+    },
+    {
+     "station": "Kushi-Ke-Hama",
+     "lineId": "SanyoMain",
+     "type": "in",
+     "note": "櫛ケ浜で山陽本線接続"
+    }
+   ],
+   "nameZh": "岩德线",
+   "nameKo": "이와쿠치선"
+  },
+  "Ube": {
+   "name": "Ube",
+   "nameEn": "Ube Line",
+   "nameJa": "宇部線",
+   "code": "Ube",
+   "color": "#4682b4",
+   "operator": "JR-West",
+   "region": "Chugoku Area",
+   "type": "local",
+   "image": "",
+   "durationTotalMin": 40,
+   "stations": [
+    "Shin-Yamaguchi",
+    "Kami-Kagawa",
+    "Fukamizo",
+    "Suo-Sayama",
+    "Iwakura",
+    "Ajisu",
+    "Zeniba",
+    "Maruo",
+    "Tokonami",
+    "Tokiwa",
+    "Kusae",
+    "Ube-Misaki",
+    "Higashi-Shinkawa",
+    "Kotoshiba",
+    "Ube-Shinkawa",
+    "Ino",
+    "Iwahana",
+    "Ube"
+   ],
+   "durations": [
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3
+   ],
+   "throughServices": [],
+   "transferStations": [
+    {
+     "station": "Shin-Yamaguchi",
+     "lineId": "SanyoMain",
+     "type": "in",
+     "note": "山陽本線接続"
+    },
+    {
+     "station": "Shin-Yamaguchi",
+     "lineId": "SanyoShinkansen",
+     "type": "in",
+     "note": "新幹線接続"
+    },
+    {
+     "station": "Ube",
+     "lineId": "SanyoMain",
+     "type": "in",
+     "note": "山陽本線（宇部駅）接続"
+    }
+   ],
+   "nameZh": "宇部线",
+   "nameKo": "우베선"
+  },
+  "Chikuho": {
+   "name": "Chikuho",
+   "nameEn": "Chikuho Main Line",
+   "nameJa": "筑豊本線",
+   "code": "Chikuho",
+   "color": "#0070c0",
+   "operator": "JR-Kyushu",
+   "region": "Kyushu Area",
+   "type": "straight",
+   "image": "",
+   "durationTotalMin": 60,
+   "branchOf": null,
+   "stations": [
+    "Wakamatsu",
+    "Fujinoki",
+    "Okudomi",
+    "Futajima",
+    "Orio",
+    "Higashi-Mizumaki",
+    "Nakama",
+    "Chikuzen-Gabu",
+    "Kurate",
+    "Chikuzen-Ueki",
+    "Shinnyu",
+    "Nogata",
+    "Katsuno",
+    "Kotake",
+    "Namazuta",
+    "Urata",
+    "Shin-Iizuka",
+    "Iizuka",
+    "Tendo",
+    "Katsuragawa",
+    "Kami-Honami",
+    "Chikuzen-Uchino",
+    "Chikuzen-Yamashiro",
+    "Harada-Fukuoka"
+   ],
+   "durations": [
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3
+   ],
+   "throughServices": [],
+   "transferStations": [
+    {
+     "station": "Orio",
+     "lineId": "KagoshimaMain",
+     "type": "out",
+     "note": "折尾駅 鹿儿岛本线"
+    },
+    {
+     "station": "Katsuragawa",
+     "lineId": "Sasaguri",
+     "type": "out",
+     "note": "桂川駅 篠栗線"
+    }
+   ],
+   "nameZh": "筑丰本线",
+   "nameKo": "치쿠호 본선"
+  },
+  "Gotoji": {
+   "name": "Gotoji",
+   "nameEn": "Gotoji Line",
+   "nameJa": "後藤寺線",
+   "code": "Gotoji",
+   "color": "#7030a0",
+   "operator": "JR-Kyushu",
+   "region": "Kyushu Area",
+   "type": "straight",
+   "image": "",
+   "durationTotalMin": 15,
+   "branchOf": null,
+   "stations": [
+    "Shin-Iizuka",
+    "Kami-Mio",
+    "Shimo-Kamoo",
+    "Chikuzen-Shonai",
+    "Funao-Fukuoka",
+    "Tagawa-Gotoji"
+   ],
+   "durations": [
+    3,
+    3,
+    3,
+    3,
+    3
+   ],
+   "throughServices": [],
+   "transferStations": [
+    {
+     "station": "Shin-Iizuka",
+     "lineId": "Chikuho",
+     "type": "in",
+     "note": "新飯塚駅 筑豊本線"
+    }
+   ],
+   "nameZh": "后藤寺线",
+   "nameKo": "고토지 선"
+  },
+  "Omura": {
+   "name": "Omura",
+   "nameEn": "Omura Line",
+   "nameJa": "大村線",
+   "code": "Omura",
+   "color": "#00b0f0",
+   "operator": "JR-Kyushu",
+   "region": "Kyushu Area",
+   "type": "straight",
+   "image": "",
+   "durationTotalMin": 45,
+   "branchOf": null,
+   "stations": [
+    "Haiki",
+    "HuisTenBosch",
+    "Haigusaki",
+    "Koshikigo",
+    "Kawatana",
+    "Sonogi",
+    "Chiwata",
+    "Matsubara-Nagasaki",
+    "Omura-Sharyo",
+    "Takematsu",
+    "Shin-Omura",
+    "Suwa-Nagasaki",
+    "Omura-Nagasaki",
+    "Iwamatsu",
+    "Isahaya"
+   ],
+   "durations": [
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3
+   ],
+   "throughServices": [],
+   "transferStations": [
+    {
+     "station": "Isahaya",
+     "lineId": "NagasakiMain",
+     "type": "out",
+     "note": "諫早駅 长崎本线"
+    }
+   ],
+   "nameZh": "大村线",
+   "nameKo": "오무라 선"
+  },
+  "Nichinan": {
+   "name": "Nichinan",
+   "nameEn": "Nichinan Line",
+   "nameJa": "日南線",
+   "code": "Nichinan",
+   "color": "#00b050",
+   "operator": "JR-Kyushu",
+   "region": "Kyushu Area",
+   "type": "straight",
+   "image": "",
+   "durationTotalMin": 120,
+   "branchOf": null,
+   "stations": [
+    "Minami-Miyazaki",
+    "Tayoshi",
+    "Minamikata-Miyazaki",
+    "Kibana",
+    "Undokoen-Miyazaki",
+    "Sobayama",
+    "Kodomonokuni-Miyazaki",
+    "Aoshima-Miyazaki",
+    "Oryuzako",
+    "Uchiumi-Miyazaki",
+    "Kochi-Uchiumi",
+    "Ibiino",
+    "Kitago-Miyazaki",
+    "Uchinoda",
+    "Obi",
+    "Nichinan",
+    "Aburatsu",
+    "Doto",
+    "Nangō-Miyazaki",
+    "Taninokuchi",
+    "Enobaru",
+    "Hyuga-Okamoto",
+    "Hyuga-Kitakata",
+    "Kushima",
+    "Fukushima-Imamachi",
+    "Fukushima-Takamatsu",
+    "Osumi-Natsui",
+    "Shibushi"
+   ],
+   "durations": [
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3
+   ],
+   "throughServices": [],
+   "transferStations": [
+    {
+     "station": "Minami-Miyazaki",
+     "lineId": "Nippo",
+     "type": "out",
+     "note": "南宮崎駅 日豊本線"
+    }
+   ],
+   "nameZh": "日南线",
+   "nameKo": "니치난 선"
+  },
+  "Karatsu": {
+   "name": "Karatsu",
+   "nameEn": "Karatsu Line",
+   "nameJa": "唐津線",
+   "code": "Karatsu",
+   "color": "#00b0a0",
+   "operator": "JR-Kyushu",
+   "region": "Kyushu Area",
+   "type": "straight",
+   "image": "",
+   "durationTotalMin": 70,
+   "branchOf": null,
+   "stations": [
+    "Saga",
+    "Nabeshima",
+    "Kubota-Saga",
+    "Ogi-Saga",
+    "Higashi-Taku",
+    "Naka-Taku",
+    "Taku",
+    "Kyuragi",
+    "Iwaya-Saga",
+    "Ochi-Saga",
+    "Homuta",
+    "Yamamoto-Saga",
+    "Onizuka",
+    "Karatsu",
+    "Nishi-Karatsu"
+   ],
+   "durations": [
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3
+   ],
+   "throughServices": [],
+   "transferStations": [
+    {
+     "station": "Saga",
+     "lineId": "NagasakiMain",
+     "type": "out",
+     "note": "佐賀駅 长崎本线"
+    },
+    {
+     "station": "Kubota-Saga",
+     "lineId": "NagasakiMain",
+     "type": "out",
+     "note": "久保田駅 长崎本线"
+    },
+    {
+     "station": "Karatsu",
+     "lineId": "Chikuhi",
+     "type": "out",
+     "note": "唐津駅 筑肥线"
+    },
+    {
+     "station": "Nishi-Karatsu",
+     "lineId": "Chikuhi",
+     "type": "out",
+     "note": "西唐津駅 筑肥线"
+    }
+   ],
+   "nameZh": "唐津线",
+   "nameKo": "카라츠 선"
+  },
+  "Chikuhi": {
+   "name": "Chikuhi",
+   "nameEn": "Chikuhi Line",
+   "nameJa": "筑肥線",
+   "code": "Chikuhi",
+   "color": "#0070c0",
+   "operator": "JR-Kyushu",
+   "region": "Kyushu Area",
+   "type": "straight",
+   "image": "",
+   "durationTotalMin": 60,
+   "branchOf": null,
+   "stations": [
+    "Meinohama",
+    "Shimoyamato",
+    "Imajuku",
+    "Kyudai-Gakkentoshi",
+    "Susenji",
+    "Hatae",
+    "Itoshima-KokoMae",
+    "Chikuzen-Maebaru",
+    "Misakigaoka",
+    "Kaburi",
+    "Ikisan",
+    "Chikuzen-Fukae",
+    "Dairi",
+    "Fukuyoshi",
+    "Shikaka",
+    "Hamasaki",
+    "Nijinomatsubara",
+    "Higashi-Karatsu",
+    "Watada",
+    "Karatsu",
+    "Nishi-Karatsu"
+   ],
+   "durations": [
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3
+   ],
+   "throughServices": [],
+   "transferStations": [
+    {
+     "station": "Karatsu",
+     "lineId": "Karatsu",
+     "type": "out",
+     "note": "唐津駅 唐津线"
+    },
+    {
+     "station": "Nishi-Karatsu",
+     "lineId": "Karatsu",
+     "type": "out",
+     "note": "西唐津駅 唐津线"
+    }
+   ],
+   "nameZh": "筑肥线",
+   "nameKo": "치쿠히 선"
+  },
+  "MiyazakiAirport": {
+   "name": "MiyazakiAirport",
+   "nameEn": "Miyazaki Airport Line",
+   "nameJa": "宮崎空港線",
+   "code": "MiyazakiAirport",
+   "color": "#ed7d31",
+   "operator": "JR-Kyushu",
+   "region": "Kyushu Area",
+   "type": "straight",
+   "image": "",
+   "durationTotalMin": 5,
+   "branchOf": null,
+   "stations": [
+    "Minami-Miyazaki",
+    "Tayoshi",
+    "Miyazaki-Kuko"
+   ],
+   "durations": [
+    3,
+    3
+   ],
+   "throughServices": [],
+   "transferStations": [
+    {
+     "station": "Minami-Miyazaki",
+     "lineId": "Nippo",
+     "type": "out",
+     "note": "南宮崎駅 日豊本線"
+    },
+    {
+     "station": "Tayoshi",
+     "lineId": "Nichinan",
+     "type": "out",
+     "note": "田吉駅 日南线"
+    }
+   ],
+   "nameZh": "宫崎机场线",
+   "nameKo": "미야자키 공항선"
+  },
+  "Kitto": {
+   "name": "Kitto",
+   "nameEn": "Kitto Line",
+   "nameJa": "吉都線",
+   "code": "Kitto",
+   "color": "#bf9000",
+   "operator": "JR-Kyushu",
+   "region": "Kyushu Area",
+   "type": "straight",
+   "image": "",
+   "durationTotalMin": 70,
+   "branchOf": null,
+   "stations": [
+    "Miyakonojo",
+    "Hyuga-Shonai",
+    "Tanigashira",
+    "Mangatsuka",
+    "Higashi-Takasaki",
+    "Takasaki-Shinden",
+    "Hyuga-Maeda",
+    "Takaharu",
+    "Hirohara",
+    "Kobayashi-Miyazaki",
+    "Nishi-Kobayashi",
+    "Ebino-Iino",
+    "Ebino-Ue",
+    "Ebino",
+    "Kyomachi-Onsen",
+    "Tsurumaru",
+    "Yoshimatsu"
+   ],
+   "durations": [
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3
+   ],
+   "throughServices": [],
+   "transferStations": [
+    {
+     "station": "Miyakonojo",
+     "lineId": "Nippo",
+     "type": "out",
+     "note": "都城駅 日豊本線"
+    }
+   ],
+   "nameZh": "吉都线",
+   "nameKo": "킷토 선"
   }
  },
  "name_map": {
@@ -41505,7 +43753,284 @@ window.RAILWAY_DATA = {
   "大塔": "Daitō",
   "日宇": "Hiui",
   "佐世保": "Sasebo",
-  "入野(鹿児島)": "Iriuno"
+  "入野(鹿児島)": "Iriuno",
+  "西相生": "Nishi-Aioi",
+  "坂越": "Sakoshi",
+  "播州赤穂": "Banshu-Ako",
+  "天和": "Tewa",
+  "備前福河": "Bizen-Fukukawa",
+  "寒河": "Sanga",
+  "日生": "Hinase",
+  "伊里": "Iri",
+  "備前片上": "Bizen-Katakami",
+  "西片上": "Nishi-Katakami",
+  "伊部": "Inbe",
+  "香登": "Kazatoko",
+  "長船": "Osafune",
+  "邑久": "Oku",
+  "大富": "Oodomi",
+  "西大寺": "Saidaiji",
+  "大多羅": "Oodara",
+  "新宮": "Shingu",
+  "三輪崎": "Miwasaki",
+  "紀伊佐野": "Kii-Sano",
+  "宇久井": "Ukui",
+  "那智": "Nachi",
+  "紀伊天満": "Kii-Temma",
+  "紀伊勝浦": "Kii-Katsuura",
+  "湯川": "Yukawa",
+  "太地": "Taiji",
+  "下里": "Shimosato",
+  "紀伊浦神": "Kii-Uragami",
+  "紀伊田原": "Kii-Tahara",
+  "古座": "Koza",
+  "紀伊姫": "Kii-Hime",
+  "串本": "Kushimoto",
+  "紀伊有田": "Kii-Arita",
+  "田並": "Tanami",
+  "田子": "Tako",
+  "和深": "Wabuka",
+  "江住": "Esumi",
+  "見老津": "Miori",
+  "周参見": "Susami",
+  "紀伊日置": "Kii-Hioki",
+  "椿": "Tsubaki",
+  "紀伊富田": "Kii-Tonda",
+  "白浜": "Shirahama",
+  "朝来": "Asso",
+  "紀伊新庄": "Kii-Shinjo",
+  "紀伊田辺": "Kii-Tanabe",
+  "芳養": "Haya",
+  "南部": "Minabe",
+  "岩代": "Iro",
+  "切目": "Kirime",
+  "印南": "Inami",
+  "稲原": "Inahara",
+  "和佐": "Kasa",
+  "道成寺": "Dojoji",
+  "御坊": "Gobo",
+  "紀伊内原": "Kii-Uchihara",
+  "紀伊由良": "Kii-Yura",
+  "広川ビーチ": "Hirokawa-Beach",
+  "湯浅": "Yuasa",
+  "藤並": "Fujinami",
+  "紀伊宮原": "Kii-Miyahara",
+  "箕島": "Minoshima",
+  "初島": "Hatsushima",
+  "下津": "Shimotsu",
+  "加茂郷": "Kamogo",
+  "冷水浦": "Hiyamizu",
+  "海南": "Kainan",
+  "黒江": "Kuroe",
+  "紀三井寺": "Kimiidera",
+  "宮前": "Miyamae",
+  "淵垣": "Fukuchigaki",
+  "梅迫": "Umezako",
+  "真倉": "Magura",
+  "西舞鶴": "Nishi-Maizuru",
+  "東舞鶴": "Higashi-Maizuru",
+  "須波": "Sunami",
+  "安芸幸崎": "Aki-Kosaki",
+  "忠海": "Tadanoumi",
+  "安芸長浜": "Aki-Nagahama",
+  "大乗": "Joge",
+  "竹原": "Takehara",
+  "吉名": "Yoshina",
+  "安芸津": "Akitsu",
+  "風早": "Kazahaya",
+  "安浦": "Yasuura",
+  "安登": "Ando",
+  "安芸川尻": "Aki-Kawajiri",
+  "仁方": "Nigata",
+  "広": "Hiro",
+  "安芸阿賀": "Aki-Aga",
+  "呉": "Kure",
+  "川原石": "Kawaraishi",
+  "吉浦": "Yoshiura",
+  "かるが浜": "Karugahama",
+  "天応": "Tenno",
+  "呉ポートピア": "Kure-Portopia",
+  "小屋浦": "Koyaura",
+  "水尻": "Mizushiri",
+  "坂": "Saka",
+  "矢野": "Yano",
+  "新広": "Shin-Hiro",
+  "三滝": "Mitaki",
+  "安芸長束": "Aki-Nagatsuka",
+  "下祇園": "Shimo-Gion",
+  "古市橋": "Furuichibashi",
+  "緑井": "Midorii",
+  "七軒茶屋": "Shichikenchaya",
+  "梅林": "Bairin",
+  "上八木": "Kami-Yagi",
+  "中島": "Nakashima",
+  "可部": "Kabe",
+  "周防下郷": "Suo-Shimogo",
+  "上郷": "Kamigo",
+  "仁保津": "Nihozu",
+  "大歳": "toshi",
+  "矢原": "Yabara",
+  "湯田温泉": "Yudaonsen",
+  "山口": "Yamaguchi",
+  "上山口": "Kami-Yamaguchi",
+  "宮野": "Miyano",
+  "仁保": "Niho",
+  "篠目": "Shinome",
+  "長門峡": "Chomonkyo",
+  "渡川": "Togawa",
+  "三谷": "Mitani",
+  "名草": "Nagusa",
+  "地福": "Jifuku",
+  "鍋倉": "Nabekura",
+  "徳佐": "Tokusa",
+  "船平山": "Funahirayama",
+  "津和野": "Tsuwano",
+  "青野山": "Aonoyama",
+  "日原": "Nichihara",
+  "青原": "Aobara",
+  "東青原": "Higashi-Aobara",
+  "石見横田": "Iwami-Yokota",
+  "本俣賀": "Matsumoto",
+  "西岩国": "Nishi-Iwakuni",
+  "川西": "Kawanishi",
+  "柱野": "Hashiranoya",
+  "欽明路": "Kinmeiji",
+  "玖珂": "Kuga",
+  "周防高森": "Suo-Takamori",
+  "米川": "Yonekawa",
+  "高水": "Takamizu",
+  "勝間": "Katsuma",
+  "大河内": "kawachi",
+  "周防久保": "Suo-Kubo",
+  "生野屋": "Ikunoya",
+  "周防花岡": "Suo-Hanaoka",
+  "上嘉川": "Kami-Kagawa",
+  "深溝": "Fukamizo",
+  "周防佐山": "Suo-Sayama",
+  "岩倉": "Iwakura",
+  "阿知須": "Ajisu",
+  "岐波": "Zeniba",
+  "丸尾": "Maruo",
+  "床波": "Tokonami",
+  "常盤": "Tokiwa",
+  "草江": "Kusae",
+  "宇部岬": "Ube-Misaki",
+  "東新川": "Higashi-Shinkawa",
+  "琴芝": "Kotoshiba",
+  "宇部新川": "Ube-Shinkawa",
+  "居能": "Ino",
+  "岩鼻": "Iwahana",
+  "若松": "Wakamatsu",
+  "藤ノ木": "Fujinoki",
+  "奥洞海": "Okudomi",
+  "二島": "Futajima",
+  "東水巻": "Higashi-Mizumaki",
+  "中間": "Nakama",
+  "筑前垣生": "Chikuzen-Gabu",
+  "鞍手": "Kurate",
+  "筑前植木": "Chikuzen-Ueki",
+  "新入": "Shinnyu",
+  "直方": "Nogata",
+  "勝野": "Katsuno",
+  "小竹": "Kotake",
+  "鯰田": "Namazuta",
+  "浦田": "Urata",
+  "新飯塚": "Shin-Iizuka",
+  "飯塚": "Iizuka",
+  "天道": "Tendo",
+  "上穂波": "Kami-Honami",
+  "筑前内野": "Chikuzen-Uchino",
+  "筑前山家": "Chikuzen-Yamashiro",
+  "上三緒": "Kami-Mio",
+  "下鴨生": "Shimo-Kamoo",
+  "筑前庄内": "Chikuzen-Shonai",
+  "船尾": "Funao-Fukuoka",
+  "田川後藤寺": "Tagawa-Gotoji",
+  "ハウステンボス": "HuisTenBosch",
+  "南風崎": "Haigusaki",
+  "小串郷": "Koshikigo",
+  "川棚": "Kawatana",
+  "彼杵": "Sonogi",
+  "千綿": "Chiwata",
+  "大村車両基地": "Omura-Sharyo",
+  "竹松": "Takematsu",
+  "諏訪": "Suwa-Nagasaki",
+  "大村": "Omura-Nagasaki",
+  "岩松": "Iwamatsu",
+  "田吉": "Tayoshi",
+  "南方": "Minamikata-Miyazaki",
+  "木花": "Kibana",
+  "運動公園": "Undokoen-Miyazaki",
+  "曽山寺": "Sobayama",
+  "子供の国": "Kodomonokuni-Miyazaki",
+  "青島": "Aoshima-Miyazaki",
+  "折生迫": "Oryuzako",
+  "内海": "Uchiumi-Miyazaki",
+  "小内海": "Kochi-Uchiumi",
+  "伊比井": "Ibiino",
+  "北郷": "Kitago-Miyazaki",
+  "内之田": "Uchinoda",
+  "飫肥": "Obi",
+  "日南": "Nichinan",
+  "油津": "Aburatsu",
+  "大堂津": "Doto",
+  "南郷": "Nangō-Miyazaki",
+  "谷之口": "Taninokuchi",
+  "榎原": "Enobaru",
+  "日向大束": "Hyuga-Okamoto",
+  "日向北方": "Hyuga-Kitakata",
+  "串間": "Kushima",
+  "福島今町": "Fukushima-Imamachi",
+  "福島高松": "Fukushima-Takamatsu",
+  "大隅夏井": "Osumi-Natsui",
+  "志布志": "Shibushi",
+  "小城": "Ogi-Saga",
+  "東多久": "Higashi-Taku",
+  "中多久": "Naka-Taku",
+  "多久": "Taku",
+  "厳木": "Kyuragi",
+  "岩屋": "Iwaya-Saga",
+  "相知": "Ochi-Saga",
+  "本牟田部": "Homuta",
+  "山本": "Yamamoto-Saga",
+  "鬼塚": "Onizuka",
+  "唐津": "Karatsu",
+  "西唐津": "Nishi-Karatsu",
+  "姪浜": "Meinohama",
+  "下山門": "Shimoyamato",
+  "今宿": "Imajuku",
+  "九大学研都市": "Kyudai-Gakkentoshi",
+  "周船寺": "Susenji",
+  "波多江": "Hatae",
+  "糸島高校前": "Itoshima-KokoMae",
+  "筑前前原": "Chikuzen-Maebaru",
+  "美咲が丘": "Misakigaoka",
+  "加布里": "Kaburi",
+  "一貴山": "Ikisan",
+  "筑前深江": "Chikuzen-Fukae",
+  "大入": "Dairi",
+  "福吉": "Fukuyoshi",
+  "鹿家": "Shikaka",
+  "浜崎": "Hamasaki",
+  "虹ノ松原": "Nijinomatsubara",
+  "東唐津": "Higashi-Karatsu",
+  "和多田": "Watada",
+  "宮崎空港": "Miyazaki-Kuko",
+  "日向庄内": "Hyuga-Shonai",
+  "谷頭": "Tanigashira",
+  "万ケ塚": "Mangatsuka",
+  "東高崎": "Higashi-Takasaki",
+  "高崎新田": "Takasaki-Shinden",
+  "日向前田": "Hyuga-Maeda",
+  "高原": "Takaharu",
+  "広原": "Hirohara",
+  "西小林": "Nishi-Kobayashi",
+  "えびの飯野": "Ebino-Iino",
+  "えびの上江": "Ebino-Ue",
+  "えびの": "Ebino",
+  "京町温泉": "Kyomachi-Onsen",
+  "鶴丸": "Tsurumaru",
+  "吉松": "Yoshimatsu"
  },
  "stationLines": {
   "Omiya": [
@@ -42209,7 +44734,8 @@ window.RAILWAY_DATA = {
   ],
   "Oku": [
    "Takasaki",
-   "UtsunomiyaJR"
+   "UtsunomiyaJR",
+   "Ako"
   ],
   "Miyahara": [
    "Takasaki"
@@ -43117,7 +45643,8 @@ window.RAILWAY_DATA = {
    "SeibuShinjuku"
   ],
   "Nogata": [
-   "SeibuShinjuku"
+   "SeibuShinjuku",
+   "Chikuho"
   ],
   "Toritsu-Kasei": [
    "SeibuShinjuku"
@@ -43792,7 +46319,8 @@ window.RAILWAY_DATA = {
    "Ome"
   ],
   "Kabe": [
-   "Ome"
+   "Ome",
+   "Kabe"
   ],
   "Higashi-Ome": [
    "Ome"
@@ -44885,7 +47413,8 @@ window.RAILWAY_DATA = {
    "Iiyama"
   ],
   "Kasa": [
-   "Iiyama"
+   "Iiyama",
+   "KiseiWest"
   ],
   "Hachi": [
    "Iiyama"
@@ -45008,7 +47537,8 @@ window.RAILWAY_DATA = {
    "Ikebukuro"
   ],
   "Akitsu": [
-   "Ikebukuro"
+   "Ikebukuro",
+   "Kure"
   ],
   "Nishi-Tokorozawa": [
    "Ikebukuro",
@@ -45102,7 +47632,8 @@ window.RAILWAY_DATA = {
   ],
   "Ino": [
    "Joetsu",
-   "Ryomo"
+   "Ryomo",
+   "Ube"
   ],
   "Shin-Maebashi": [
    "Joetsu",
@@ -46095,7 +48626,8 @@ window.RAILWAY_DATA = {
    "Oga"
   ],
   "Tenno": [
-   "Oga"
+   "Oga",
+   "Kure"
   ],
   "Funakoshi": [
    "Oga"
@@ -46121,7 +48653,8 @@ window.RAILWAY_DATA = {
   ],
   "Matsumoto": [
    "Oito",
-   "Shinonoi"
+   "Shinonoi",
+   "Yamaguchi"
   ],
   "Kita-Matsumoto": [
    "Oito"
@@ -46315,7 +48848,8 @@ window.RAILWAY_DATA = {
   ],
   "Tendo": [
    "Yamagata",
-   "YamagataShinkansen"
+   "YamagataShinkansen",
+   "Chikuho"
   ],
   "Midaregawa": [
    "Yamagata"
@@ -46962,7 +49496,8 @@ window.RAILWAY_DATA = {
   ],
   "Yokokawa": [
    "Shinetsu",
-   "SanyoMain"
+   "SanyoMain",
+   "Kabe"
   ],
   "Shinonoi": [
    "Shinetsu",
@@ -49742,7 +52277,8 @@ window.RAILWAY_DATA = {
   ],
   "Aioi-Hyogo": [
    "SanyoShinkansen",
-   "SanyoMain"
+   "SanyoMain",
+   "Ako"
   ],
   "Okayama": [
    "SanyoShinkansen",
@@ -49761,25 +52297,30 @@ window.RAILWAY_DATA = {
   ],
   "Mihara": [
    "SanyoShinkansen",
-   "SanyoMain"
+   "SanyoMain",
+   "Kure"
   ],
   "Higashi-Hiroshima": [
    "SanyoShinkansen"
   ],
   "Hiroshima": [
    "SanyoShinkansen",
-   "SanyoMain"
+   "SanyoMain",
+   "Kure"
   ],
   "Shin-Iwakuni": [
    "SanyoShinkansen"
   ],
   "Tokuyama": [
    "SanyoShinkansen",
-   "SanyoMain"
+   "SanyoMain",
+   "Iwakado"
   ],
   "Shin-Yamaguchi": [
    "SanyoShinkansen",
-   "SanyoMain"
+   "SanyoMain",
+   "Yamaguchi",
+   "Ube"
   ],
   "Asa": [
    "SanyoShinkansen",
@@ -49854,11 +52395,13 @@ window.RAILWAY_DATA = {
    "NishiKyushuShinkansen"
   ],
   "Shin-Omura": [
-   "NishiKyushuShinkansen"
+   "NishiKyushuShinkansen",
+   "Omura"
   ],
   "Isahaya": [
    "NishiKyushuShinkansen",
-   "NagasakiMain"
+   "NagasakiMain",
+   "Omura"
   ],
   "Nagasaki": [
    "NishiKyushuShinkansen",
@@ -49943,7 +52486,8 @@ window.RAILWAY_DATA = {
   ],
   "Katsuragawa": [
    "TokaidoKansai",
-   "Sasaguri"
+   "Sasaguri",
+   "Chikuho"
   ],
   "Mukouchou": [
    "TokaidoKansai"
@@ -50134,7 +52678,8 @@ window.RAILWAY_DATA = {
    "SanyoMain"
   ],
   "Toukou-Yama": [
-   "SanyoMain"
+   "SanyoMain",
+   "Ako"
   ],
   "Takashima": [
    "SanyoMain"
@@ -50221,13 +52766,16 @@ window.RAILWAY_DATA = {
    "SanyoMain"
   ],
   "Umidashi": [
-   "SanyoMain"
+   "SanyoMain",
+   "Kure"
   ],
   "Kouyou": [
-   "SanyoMain"
+   "SanyoMain",
+   "Kure"
   ],
   "Tenjin-Kawa": [
-   "SanyoMain"
+   "SanyoMain",
+   "Kure"
   ],
   "Shin-Shiro-Shima": [
    "SanyoMain"
@@ -50269,7 +52817,8 @@ window.RAILWAY_DATA = {
    "SanyoMain"
   ],
   "Iwakuni": [
-   "SanyoMain"
+   "SanyoMain",
+   "Iwakado"
   ],
   "Minami-Iwakuni": [
    "SanyoMain"
@@ -50309,7 +52858,8 @@ window.RAILWAY_DATA = {
    "Hanwa"
   ],
   "Kushi-Ke-Hama": [
-   "SanyoMain"
+   "SanyoMain",
+   "Iwakado"
   ],
   "Shinnanyou": [
    "SanyoMain"
@@ -50342,7 +52892,8 @@ window.RAILWAY_DATA = {
    "SanyoMain"
   ],
   "Ube": [
-   "SanyoMain"
+   "SanyoMain",
+   "Ube"
   ],
   "Onoda": [
    "SanyoMain"
@@ -50605,7 +53156,8 @@ window.RAILWAY_DATA = {
    "Hanwa"
   ],
   "Wakayama": [
-   "Hanwa"
+   "Hanwa",
+   "KiseiWest"
   ],
   "Toufukuji": [
    "Nara"
@@ -50792,7 +53344,8 @@ window.RAILWAY_DATA = {
    "SaninMain"
   ],
   "Ayabe": [
-   "SaninMain"
+   "SaninMain",
+   "Maizuru"
   ],
   "Takatsu-Kyoto": [
    "SaninMain"
@@ -51078,7 +53631,8 @@ window.RAILWAY_DATA = {
    "SaninMain"
   ],
   "Masuda": [
-   "SaninMain"
+   "SaninMain",
+   "Yamaguchi"
   ],
   "Toda-Obama": [
    "SaninMain"
@@ -51592,7 +54146,8 @@ window.RAILWAY_DATA = {
    "KagoshimaMain"
   ],
   "Orio": [
-   "KagoshimaMain"
+   "KagoshimaMain",
+   "Chikuho"
   ],
   "Mizumaki": [
    "KagoshimaMain"
@@ -51837,13 +54392,16 @@ window.RAILWAY_DATA = {
    "NagasakiMain"
   ],
   "Saga": [
-   "NagasakiMain"
+   "NagasakiMain",
+   "Karatsu"
   ],
   "Nabeshima": [
-   "NagasakiMain"
+   "NagasakiMain",
+   "Karatsu"
   ],
   "Kubota-Saga": [
-   "NagasakiMain"
+   "NagasakiMain",
+   "Karatsu"
   ],
   "Ushizu": [
    "NagasakiMain"
@@ -52155,7 +54713,9 @@ window.RAILWAY_DATA = {
    "Nippo"
   ],
   "Minami-Miyazaki": [
-   "Nippo"
+   "Nippo",
+   "Nichinan",
+   "MiyazakiAirport"
   ],
   "Kanō": [
    "Nippo"
@@ -52670,6 +55230,832 @@ window.RAILWAY_DATA = {
   ],
   "Sasebo": [
    "Sasebo"
+  ],
+  "Nishi-Aioi": [
+   "Ako"
+  ],
+  "Sakoshi": [
+   "Ako"
+  ],
+  "Banshu-Ako": [
+   "Ako"
+  ],
+  "Tewa": [
+   "Ako"
+  ],
+  "Bizen-Fukukawa": [
+   "Ako"
+  ],
+  "Sanga": [
+   "Ako"
+  ],
+  "Hinase": [
+   "Ako"
+  ],
+  "Iri": [
+   "Ako"
+  ],
+  "Bizen-Katakami": [
+   "Ako"
+  ],
+  "Nishi-Katakami": [
+   "Ako"
+  ],
+  "Inbe": [
+   "Ako"
+  ],
+  "Kazatoko": [
+   "Ako"
+  ],
+  "Osafune": [
+   "Ako"
+  ],
+  "Oodomi": [
+   "Ako"
+  ],
+  "Saidaiji": [
+   "Ako"
+  ],
+  "Oodara": [
+   "Ako"
+  ],
+  "Shingu": [
+   "KiseiWest"
+  ],
+  "Miwasaki": [
+   "KiseiWest"
+  ],
+  "Kii-Sano": [
+   "KiseiWest"
+  ],
+  "Ukui": [
+   "KiseiWest"
+  ],
+  "Nachi": [
+   "KiseiWest"
+  ],
+  "Kii-Temma": [
+   "KiseiWest"
+  ],
+  "Kii-Katsuura": [
+   "KiseiWest"
+  ],
+  "Yukawa": [
+   "KiseiWest"
+  ],
+  "Taiji": [
+   "KiseiWest"
+  ],
+  "Shimosato": [
+   "KiseiWest"
+  ],
+  "Kii-Uragami": [
+   "KiseiWest"
+  ],
+  "Kii-Tahara": [
+   "KiseiWest"
+  ],
+  "Koza": [
+   "KiseiWest"
+  ],
+  "Kii-Hime": [
+   "KiseiWest"
+  ],
+  "Kushimoto": [
+   "KiseiWest"
+  ],
+  "Kii-Arita": [
+   "KiseiWest"
+  ],
+  "Tanami": [
+   "KiseiWest"
+  ],
+  "Tako": [
+   "KiseiWest"
+  ],
+  "Wabuka": [
+   "KiseiWest"
+  ],
+  "Esumi": [
+   "KiseiWest"
+  ],
+  "Miori": [
+   "KiseiWest"
+  ],
+  "Susami": [
+   "KiseiWest"
+  ],
+  "Kii-Hioki": [
+   "KiseiWest"
+  ],
+  "Tsubaki": [
+   "KiseiWest"
+  ],
+  "Kii-Tonda": [
+   "KiseiWest"
+  ],
+  "Shirahama": [
+   "KiseiWest"
+  ],
+  "Asso": [
+   "KiseiWest"
+  ],
+  "Kii-Shinjo": [
+   "KiseiWest"
+  ],
+  "Kii-Tanabe": [
+   "KiseiWest"
+  ],
+  "Haya": [
+   "KiseiWest"
+  ],
+  "Minabe": [
+   "KiseiWest"
+  ],
+  "Iro": [
+   "KiseiWest"
+  ],
+  "Kirime": [
+   "KiseiWest"
+  ],
+  "Inami": [
+   "KiseiWest"
+  ],
+  "Inahara": [
+   "KiseiWest"
+  ],
+  "Dojoji": [
+   "KiseiWest"
+  ],
+  "Gobo": [
+   "KiseiWest"
+  ],
+  "Kii-Uchihara": [
+   "KiseiWest"
+  ],
+  "Kii-Yura": [
+   "KiseiWest"
+  ],
+  "Hirokawa-Beach": [
+   "KiseiWest"
+  ],
+  "Yuasa": [
+   "KiseiWest"
+  ],
+  "Fujinami": [
+   "KiseiWest"
+  ],
+  "Kii-Miyahara": [
+   "KiseiWest"
+  ],
+  "Minoshima": [
+   "KiseiWest"
+  ],
+  "Hatsushima": [
+   "KiseiWest"
+  ],
+  "Shimotsu": [
+   "KiseiWest"
+  ],
+  "Kamogo": [
+   "KiseiWest"
+  ],
+  "Hiyamizu": [
+   "KiseiWest"
+  ],
+  "Kainan": [
+   "KiseiWest"
+  ],
+  "Kuroe": [
+   "KiseiWest"
+  ],
+  "Kimiidera": [
+   "KiseiWest"
+  ],
+  "Miyamae": [
+   "KiseiWest"
+  ],
+  "Fukuchigaki": [
+   "Maizuru"
+  ],
+  "Umezako": [
+   "Maizuru"
+  ],
+  "Magura": [
+   "Maizuru"
+  ],
+  "Nishi-Maizuru": [
+   "Maizuru"
+  ],
+  "Higashi-Maizuru": [
+   "Maizuru"
+  ],
+  "Sunami": [
+   "Kure"
+  ],
+  "Aki-Kosaki": [
+   "Kure"
+  ],
+  "Tadanoumi": [
+   "Kure"
+  ],
+  "Aki-Nagahama": [
+   "Kure"
+  ],
+  "Joge": [
+   "Kure"
+  ],
+  "Takehara": [
+   "Kure"
+  ],
+  "Yoshina": [
+   "Kure"
+  ],
+  "Kazahaya": [
+   "Kure"
+  ],
+  "Yasuura": [
+   "Kure"
+  ],
+  "Ando": [
+   "Kure"
+  ],
+  "Aki-Kawajiri": [
+   "Kure"
+  ],
+  "Nigata": [
+   "Kure"
+  ],
+  "Hiro": [
+   "Kure"
+  ],
+  "Aki-Aga": [
+   "Kure"
+  ],
+  "Kure": [
+   "Kure"
+  ],
+  "Kawaraishi": [
+   "Kure"
+  ],
+  "Yoshiura": [
+   "Kure"
+  ],
+  "Karugahama": [
+   "Kure"
+  ],
+  "Kure-Portopia": [
+   "Kure"
+  ],
+  "Koyaura": [
+   "Kure"
+  ],
+  "Mizushiri": [
+   "Kure"
+  ],
+  "Saka": [
+   "Kure"
+  ],
+  "Yano": [
+   "Kure"
+  ],
+  "Shin-Hiro": [
+   "Kure"
+  ],
+  "Mitaki": [
+   "Kabe"
+  ],
+  "Aki-Nagatsuka": [
+   "Kabe"
+  ],
+  "Shimo-Gion": [
+   "Kabe"
+  ],
+  "Furuichibashi": [
+   "Kabe"
+  ],
+  "Omachi": [
+   "Kabe"
+  ],
+  "Midorii": [
+   "Kabe"
+  ],
+  "Shichikenchaya": [
+   "Kabe"
+  ],
+  "Bairin": [
+   "Kabe"
+  ],
+  "Kami-Yagi": [
+   "Kabe"
+  ],
+  "Nakashima": [
+   "Kabe"
+  ],
+  "Suo-Shimogo": [
+   "Yamaguchi"
+  ],
+  "Kamigo": [
+   "Yamaguchi"
+  ],
+  "Nihozu": [
+   "Yamaguchi"
+  ],
+  "toshi": [
+   "Yamaguchi"
+  ],
+  "Yabara": [
+   "Yamaguchi"
+  ],
+  "Yudaonsen": [
+   "Yamaguchi"
+  ],
+  "Yamaguchi": [
+   "Yamaguchi"
+  ],
+  "Kami-Yamaguchi": [
+   "Yamaguchi"
+  ],
+  "Miyano": [
+   "Yamaguchi"
+  ],
+  "Niho": [
+   "Yamaguchi"
+  ],
+  "Shinome": [
+   "Yamaguchi"
+  ],
+  "Chomonkyo": [
+   "Yamaguchi"
+  ],
+  "Togawa": [
+   "Yamaguchi"
+  ],
+  "Mitani": [
+   "Yamaguchi"
+  ],
+  "Nagusa": [
+   "Yamaguchi"
+  ],
+  "Jifuku": [
+   "Yamaguchi"
+  ],
+  "Nabekura": [
+   "Yamaguchi"
+  ],
+  "Tokusa": [
+   "Yamaguchi"
+  ],
+  "Funahirayama": [
+   "Yamaguchi"
+  ],
+  "Tsuwano": [
+   "Yamaguchi"
+  ],
+  "Aonoyama": [
+   "Yamaguchi"
+  ],
+  "Nichihara": [
+   "Yamaguchi"
+  ],
+  "Aobara": [
+   "Yamaguchi"
+  ],
+  "Higashi-Aobara": [
+   "Yamaguchi"
+  ],
+  "Iwami-Yokota": [
+   "Yamaguchi"
+  ],
+  "Nishi-Iwakuni": [
+   "Iwakado"
+  ],
+  "Kawanishi": [
+   "Iwakado"
+  ],
+  "Hashiranoya": [
+   "Iwakado"
+  ],
+  "Kinmeiji": [
+   "Iwakado"
+  ],
+  "Kuga": [
+   "Iwakado"
+  ],
+  "Suo-Takamori": [
+   "Iwakado"
+  ],
+  "Yonekawa": [
+   "Iwakado"
+  ],
+  "Takamizu": [
+   "Iwakado"
+  ],
+  "Katsuma": [
+   "Iwakado"
+  ],
+  "kawachi": [
+   "Iwakado"
+  ],
+  "Suo-Kubo": [
+   "Iwakado"
+  ],
+  "Ikunoya": [
+   "Iwakado"
+  ],
+  "Suo-Hanaoka": [
+   "Iwakado"
+  ],
+  "Kami-Kagawa": [
+   "Ube"
+  ],
+  "Fukamizo": [
+   "Ube"
+  ],
+  "Suo-Sayama": [
+   "Ube"
+  ],
+  "Iwakura": [
+   "Ube"
+  ],
+  "Ajisu": [
+   "Ube"
+  ],
+  "Zeniba": [
+   "Ube"
+  ],
+  "Maruo": [
+   "Ube"
+  ],
+  "Tokonami": [
+   "Ube"
+  ],
+  "Tokiwa": [
+   "Ube"
+  ],
+  "Kusae": [
+   "Ube"
+  ],
+  "Ube-Misaki": [
+   "Ube"
+  ],
+  "Higashi-Shinkawa": [
+   "Ube"
+  ],
+  "Kotoshiba": [
+   "Ube"
+  ],
+  "Ube-Shinkawa": [
+   "Ube"
+  ],
+  "Iwahana": [
+   "Ube"
+  ],
+  "Wakamatsu": [
+   "Chikuho"
+  ],
+  "Fujinoki": [
+   "Chikuho"
+  ],
+  "Okudomi": [
+   "Chikuho"
+  ],
+  "Futajima": [
+   "Chikuho"
+  ],
+  "Higashi-Mizumaki": [
+   "Chikuho"
+  ],
+  "Nakama": [
+   "Chikuho"
+  ],
+  "Chikuzen-Gabu": [
+   "Chikuho"
+  ],
+  "Kurate": [
+   "Chikuho"
+  ],
+  "Chikuzen-Ueki": [
+   "Chikuho"
+  ],
+  "Shinnyu": [
+   "Chikuho"
+  ],
+  "Katsuno": [
+   "Chikuho"
+  ],
+  "Kotake": [
+   "Chikuho"
+  ],
+  "Namazuta": [
+   "Chikuho"
+  ],
+  "Urata": [
+   "Chikuho"
+  ],
+  "Shin-Iizuka": [
+   "Chikuho",
+   "Gotoji"
+  ],
+  "Iizuka": [
+   "Chikuho"
+  ],
+  "Kami-Honami": [
+   "Chikuho"
+  ],
+  "Chikuzen-Uchino": [
+   "Chikuho"
+  ],
+  "Chikuzen-Yamashiro": [
+   "Chikuho"
+  ],
+  "Harada-Fukuoka": [
+   "Chikuho"
+  ],
+  "Kami-Mio": [
+   "Gotoji"
+  ],
+  "Shimo-Kamoo": [
+   "Gotoji"
+  ],
+  "Chikuzen-Shonai": [
+   "Gotoji"
+  ],
+  "Funao-Fukuoka": [
+   "Gotoji"
+  ],
+  "Tagawa-Gotoji": [
+   "Gotoji"
+  ],
+  "Haiki": [
+   "Omura"
+  ],
+  "HuisTenBosch": [
+   "Omura"
+  ],
+  "Haigusaki": [
+   "Omura"
+  ],
+  "Koshikigo": [
+   "Omura"
+  ],
+  "Kawatana": [
+   "Omura"
+  ],
+  "Sonogi": [
+   "Omura"
+  ],
+  "Chiwata": [
+   "Omura"
+  ],
+  "Matsubara-Nagasaki": [
+   "Omura"
+  ],
+  "Omura-Sharyo": [
+   "Omura"
+  ],
+  "Takematsu": [
+   "Omura"
+  ],
+  "Suwa-Nagasaki": [
+   "Omura"
+  ],
+  "Omura-Nagasaki": [
+   "Omura"
+  ],
+  "Iwamatsu": [
+   "Omura"
+  ],
+  "Tayoshi": [
+   "Nichinan",
+   "MiyazakiAirport"
+  ],
+  "Minamikata-Miyazaki": [
+   "Nichinan"
+  ],
+  "Kibana": [
+   "Nichinan"
+  ],
+  "Undokoen-Miyazaki": [
+   "Nichinan"
+  ],
+  "Sobayama": [
+   "Nichinan"
+  ],
+  "Kodomonokuni-Miyazaki": [
+   "Nichinan"
+  ],
+  "Aoshima-Miyazaki": [
+   "Nichinan"
+  ],
+  "Oryuzako": [
+   "Nichinan"
+  ],
+  "Uchiumi-Miyazaki": [
+   "Nichinan"
+  ],
+  "Kochi-Uchiumi": [
+   "Nichinan"
+  ],
+  "Ibiino": [
+   "Nichinan"
+  ],
+  "Kitago-Miyazaki": [
+   "Nichinan"
+  ],
+  "Uchinoda": [
+   "Nichinan"
+  ],
+  "Obi": [
+   "Nichinan"
+  ],
+  "Nichinan": [
+   "Nichinan"
+  ],
+  "Aburatsu": [
+   "Nichinan"
+  ],
+  "Doto": [
+   "Nichinan"
+  ],
+  "Nangō-Miyazaki": [
+   "Nichinan"
+  ],
+  "Taninokuchi": [
+   "Nichinan"
+  ],
+  "Enobaru": [
+   "Nichinan"
+  ],
+  "Hyuga-Okamoto": [
+   "Nichinan"
+  ],
+  "Hyuga-Kitakata": [
+   "Nichinan"
+  ],
+  "Kushima": [
+   "Nichinan"
+  ],
+  "Fukushima-Imamachi": [
+   "Nichinan"
+  ],
+  "Fukushima-Takamatsu": [
+   "Nichinan"
+  ],
+  "Osumi-Natsui": [
+   "Nichinan"
+  ],
+  "Shibushi": [
+   "Nichinan"
+  ],
+  "Ogi-Saga": [
+   "Karatsu"
+  ],
+  "Higashi-Taku": [
+   "Karatsu"
+  ],
+  "Naka-Taku": [
+   "Karatsu"
+  ],
+  "Taku": [
+   "Karatsu"
+  ],
+  "Kyuragi": [
+   "Karatsu"
+  ],
+  "Iwaya-Saga": [
+   "Karatsu"
+  ],
+  "Ochi-Saga": [
+   "Karatsu"
+  ],
+  "Homuta": [
+   "Karatsu"
+  ],
+  "Yamamoto-Saga": [
+   "Karatsu"
+  ],
+  "Onizuka": [
+   "Karatsu"
+  ],
+  "Karatsu": [
+   "Karatsu",
+   "Chikuhi"
+  ],
+  "Nishi-Karatsu": [
+   "Karatsu",
+   "Chikuhi"
+  ],
+  "Meinohama": [
+   "Chikuhi"
+  ],
+  "Shimoyamato": [
+   "Chikuhi"
+  ],
+  "Imajuku": [
+   "Chikuhi"
+  ],
+  "Kyudai-Gakkentoshi": [
+   "Chikuhi"
+  ],
+  "Susenji": [
+   "Chikuhi"
+  ],
+  "Hatae": [
+   "Chikuhi"
+  ],
+  "Itoshima-KokoMae": [
+   "Chikuhi"
+  ],
+  "Chikuzen-Maebaru": [
+   "Chikuhi"
+  ],
+  "Misakigaoka": [
+   "Chikuhi"
+  ],
+  "Kaburi": [
+   "Chikuhi"
+  ],
+  "Ikisan": [
+   "Chikuhi"
+  ],
+  "Chikuzen-Fukae": [
+   "Chikuhi"
+  ],
+  "Dairi": [
+   "Chikuhi"
+  ],
+  "Fukuyoshi": [
+   "Chikuhi"
+  ],
+  "Shikaka": [
+   "Chikuhi"
+  ],
+  "Hamasaki": [
+   "Chikuhi"
+  ],
+  "Nijinomatsubara": [
+   "Chikuhi"
+  ],
+  "Higashi-Karatsu": [
+   "Chikuhi"
+  ],
+  "Watada": [
+   "Chikuhi"
+  ],
+  "Miyazaki-Kuko": [
+   "MiyazakiAirport"
+  ],
+  "Miyakonojo": [
+   "Kitto"
+  ],
+  "Hyuga-Shonai": [
+   "Kitto"
+  ],
+  "Tanigashira": [
+   "Kitto"
+  ],
+  "Mangatsuka": [
+   "Kitto"
+  ],
+  "Higashi-Takasaki": [
+   "Kitto"
+  ],
+  "Takasaki-Shinden": [
+   "Kitto"
+  ],
+  "Hyuga-Maeda": [
+   "Kitto"
+  ],
+  "Takaharu": [
+   "Kitto"
+  ],
+  "Hirohara": [
+   "Kitto"
+  ],
+  "Kobayashi-Miyazaki": [
+   "Kitto"
+  ],
+  "Nishi-Kobayashi": [
+   "Kitto"
+  ],
+  "Ebino-Iino": [
+   "Kitto"
+  ],
+  "Ebino-Ue": [
+   "Kitto"
+  ],
+  "Ebino": [
+   "Kitto"
+  ],
+  "Kyomachi-Onsen": [
+   "Kitto"
+  ],
+  "Tsurumaru": [
+   "Kitto"
+  ],
+  "Yoshimatsu": [
+   "Kitto"
   ]
  },
  "lineStationOrder": {
@@ -57403,6 +60789,351 @@ window.RAILWAY_DATA = {
    "Daitō": 11,
    "Hiui": 12,
    "Sasebo": 13
+  },
+  "Ako": {
+   "Aioi-Hyogo": 0,
+   "Nishi-Aioi": 1,
+   "Sakoshi": 2,
+   "Banshu-Ako": 3,
+   "Tewa": 4,
+   "Bizen-Fukukawa": 5,
+   "Sanga": 6,
+   "Hinase": 7,
+   "Iri": 8,
+   "Bizen-Katakami": 9,
+   "Nishi-Katakami": 10,
+   "Inbe": 11,
+   "Kazatoko": 12,
+   "Osafune": 13,
+   "Oku": 14,
+   "Oodomi": 15,
+   "Saidaiji": 16,
+   "Oodara": 17,
+   "Toukou-Yama": 18
+  },
+  "KiseiWest": {
+   "Shingu": 0,
+   "Miwasaki": 1,
+   "Kii-Sano": 2,
+   "Ukui": 3,
+   "Nachi": 4,
+   "Kii-Temma": 5,
+   "Kii-Katsuura": 6,
+   "Yukawa": 7,
+   "Taiji": 8,
+   "Shimosato": 9,
+   "Kii-Uragami": 10,
+   "Kii-Tahara": 11,
+   "Koza": 12,
+   "Kii-Hime": 13,
+   "Kushimoto": 14,
+   "Kii-Arita": 15,
+   "Tanami": 16,
+   "Tako": 17,
+   "Wabuka": 18,
+   "Esumi": 19,
+   "Miori": 20,
+   "Susami": 21,
+   "Kii-Hioki": 22,
+   "Tsubaki": 23,
+   "Kii-Tonda": 24,
+   "Shirahama": 25,
+   "Asso": 26,
+   "Kii-Shinjo": 27,
+   "Kii-Tanabe": 28,
+   "Haya": 29,
+   "Minabe": 30,
+   "Iro": 31,
+   "Kirime": 32,
+   "Inami": 33,
+   "Inahara": 34,
+   "Kasa": 35,
+   "Dojoji": 36,
+   "Gobo": 37,
+   "Kii-Uchihara": 38,
+   "Kii-Yura": 39,
+   "Hirokawa-Beach": 40,
+   "Yuasa": 41,
+   "Fujinami": 42,
+   "Kii-Miyahara": 43,
+   "Minoshima": 44,
+   "Hatsushima": 45,
+   "Shimotsu": 46,
+   "Kamogo": 47,
+   "Hiyamizu": 48,
+   "Kainan": 49,
+   "Kuroe": 50,
+   "Kimiidera": 51,
+   "Miyamae": 52,
+   "Wakayama": 53
+  },
+  "Maizuru": {
+   "Ayabe": 0,
+   "Fukuchigaki": 1,
+   "Umezako": 2,
+   "Magura": 3,
+   "Nishi-Maizuru": 4,
+   "Higashi-Maizuru": 5
+  },
+  "Kure": {
+   "Mihara": 0,
+   "Sunami": 1,
+   "Aki-Kosaki": 2,
+   "Tadanoumi": 3,
+   "Aki-Nagahama": 4,
+   "Joge": 5,
+   "Takehara": 6,
+   "Yoshina": 7,
+   "Akitsu": 8,
+   "Kazahaya": 9,
+   "Yasuura": 10,
+   "Ando": 11,
+   "Aki-Kawajiri": 12,
+   "Nigata": 13,
+   "Hiro": 14,
+   "Aki-Aga": 15,
+   "Kure": 16,
+   "Kawaraishi": 17,
+   "Yoshiura": 18,
+   "Karugahama": 19,
+   "Tenno": 20,
+   "Kure-Portopia": 21,
+   "Koyaura": 22,
+   "Mizushiri": 23,
+   "Saka": 24,
+   "Yano": 25,
+   "Umidashi": 26,
+   "Shin-Hiro": 27,
+   "Kouyou": 28,
+   "Tenjin-Kawa": 29,
+   "Hiroshima": 30
+  },
+  "Kabe": {
+   "Yokokawa": 0,
+   "Mitaki": 1,
+   "Aki-Nagatsuka": 2,
+   "Shimo-Gion": 3,
+   "Furuichibashi": 4,
+   "Omachi": 5,
+   "Midorii": 6,
+   "Shichikenchaya": 7,
+   "Bairin": 8,
+   "Kami-Yagi": 9,
+   "Nakashima": 10,
+   "Kabe": 11
+  },
+  "Yamaguchi": {
+   "Shin-Yamaguchi": 0,
+   "Suo-Shimogo": 1,
+   "Kamigo": 2,
+   "Nihozu": 3,
+   "toshi": 4,
+   "Yabara": 5,
+   "Yudaonsen": 6,
+   "Yamaguchi": 7,
+   "Kami-Yamaguchi": 8,
+   "Miyano": 9,
+   "Niho": 10,
+   "Shinome": 11,
+   "Chomonkyo": 12,
+   "Togawa": 13,
+   "Mitani": 14,
+   "Nagusa": 15,
+   "Jifuku": 16,
+   "Nabekura": 17,
+   "Tokusa": 18,
+   "Funahirayama": 19,
+   "Tsuwano": 20,
+   "Aonoyama": 21,
+   "Nichihara": 22,
+   "Aobara": 23,
+   "Higashi-Aobara": 24,
+   "Iwami-Yokota": 25,
+   "Matsumoto": 26,
+   "Masuda": 27
+  },
+  "Iwakado": {
+   "Iwakuni": 0,
+   "Nishi-Iwakuni": 1,
+   "Kawanishi": 2,
+   "Hashiranoya": 3,
+   "Kinmeiji": 4,
+   "Kuga": 5,
+   "Suo-Takamori": 6,
+   "Yonekawa": 7,
+   "Takamizu": 8,
+   "Katsuma": 9,
+   "kawachi": 10,
+   "Suo-Kubo": 11,
+   "Ikunoya": 12,
+   "Suo-Hanaoka": 13,
+   "Kushi-Ke-Hama": 14,
+   "Tokuyama": 15
+  },
+  "Ube": {
+   "Shin-Yamaguchi": 0,
+   "Kami-Kagawa": 1,
+   "Fukamizo": 2,
+   "Suo-Sayama": 3,
+   "Iwakura": 4,
+   "Ajisu": 5,
+   "Zeniba": 6,
+   "Maruo": 7,
+   "Tokonami": 8,
+   "Tokiwa": 9,
+   "Kusae": 10,
+   "Ube-Misaki": 11,
+   "Higashi-Shinkawa": 12,
+   "Kotoshiba": 13,
+   "Ube-Shinkawa": 14,
+   "Ino": 15,
+   "Iwahana": 16,
+   "Ube": 17
+  },
+  "Chikuho": {
+   "Wakamatsu": 0,
+   "Fujinoki": 1,
+   "Okudomi": 2,
+   "Futajima": 3,
+   "Orio": 4,
+   "Higashi-Mizumaki": 5,
+   "Nakama": 6,
+   "Chikuzen-Gabu": 7,
+   "Kurate": 8,
+   "Chikuzen-Ueki": 9,
+   "Shinnyu": 10,
+   "Nogata": 11,
+   "Katsuno": 12,
+   "Kotake": 13,
+   "Namazuta": 14,
+   "Urata": 15,
+   "Shin-Iizuka": 16,
+   "Iizuka": 17,
+   "Tendo": 18,
+   "Katsuragawa": 19,
+   "Kami-Honami": 20,
+   "Chikuzen-Uchino": 21,
+   "Chikuzen-Yamashiro": 22,
+   "Harada-Fukuoka": 23
+  },
+  "Gotoji": {
+   "Shin-Iizuka": 0,
+   "Kami-Mio": 1,
+   "Shimo-Kamoo": 2,
+   "Chikuzen-Shonai": 3,
+   "Funao-Fukuoka": 4,
+   "Tagawa-Gotoji": 5
+  },
+  "Omura": {
+   "Haiki": 0,
+   "HuisTenBosch": 1,
+   "Haigusaki": 2,
+   "Koshikigo": 3,
+   "Kawatana": 4,
+   "Sonogi": 5,
+   "Chiwata": 6,
+   "Matsubara-Nagasaki": 7,
+   "Omura-Sharyo": 8,
+   "Takematsu": 9,
+   "Shin-Omura": 10,
+   "Suwa-Nagasaki": 11,
+   "Omura-Nagasaki": 12,
+   "Iwamatsu": 13,
+   "Isahaya": 14
+  },
+  "Nichinan": {
+   "Minami-Miyazaki": 0,
+   "Tayoshi": 1,
+   "Minamikata-Miyazaki": 2,
+   "Kibana": 3,
+   "Undokoen-Miyazaki": 4,
+   "Sobayama": 5,
+   "Kodomonokuni-Miyazaki": 6,
+   "Aoshima-Miyazaki": 7,
+   "Oryuzako": 8,
+   "Uchiumi-Miyazaki": 9,
+   "Kochi-Uchiumi": 10,
+   "Ibiino": 11,
+   "Kitago-Miyazaki": 12,
+   "Uchinoda": 13,
+   "Obi": 14,
+   "Nichinan": 15,
+   "Aburatsu": 16,
+   "Doto": 17,
+   "Nangō-Miyazaki": 18,
+   "Taninokuchi": 19,
+   "Enobaru": 20,
+   "Hyuga-Okamoto": 21,
+   "Hyuga-Kitakata": 22,
+   "Kushima": 23,
+   "Fukushima-Imamachi": 24,
+   "Fukushima-Takamatsu": 25,
+   "Osumi-Natsui": 26,
+   "Shibushi": 27
+  },
+  "Karatsu": {
+   "Saga": 0,
+   "Nabeshima": 1,
+   "Kubota-Saga": 2,
+   "Ogi-Saga": 3,
+   "Higashi-Taku": 4,
+   "Naka-Taku": 5,
+   "Taku": 6,
+   "Kyuragi": 7,
+   "Iwaya-Saga": 8,
+   "Ochi-Saga": 9,
+   "Homuta": 10,
+   "Yamamoto-Saga": 11,
+   "Onizuka": 12,
+   "Karatsu": 13,
+   "Nishi-Karatsu": 14
+  },
+  "Chikuhi": {
+   "Meinohama": 0,
+   "Shimoyamato": 1,
+   "Imajuku": 2,
+   "Kyudai-Gakkentoshi": 3,
+   "Susenji": 4,
+   "Hatae": 5,
+   "Itoshima-KokoMae": 6,
+   "Chikuzen-Maebaru": 7,
+   "Misakigaoka": 8,
+   "Kaburi": 9,
+   "Ikisan": 10,
+   "Chikuzen-Fukae": 11,
+   "Dairi": 12,
+   "Fukuyoshi": 13,
+   "Shikaka": 14,
+   "Hamasaki": 15,
+   "Nijinomatsubara": 16,
+   "Higashi-Karatsu": 17,
+   "Watada": 18,
+   "Karatsu": 19,
+   "Nishi-Karatsu": 20
+  },
+  "MiyazakiAirport": {
+   "Minami-Miyazaki": 0,
+   "Tayoshi": 1,
+   "Miyazaki-Kuko": 2
+  },
+  "Kitto": {
+   "Miyakonojo": 0,
+   "Hyuga-Shonai": 1,
+   "Tanigashira": 2,
+   "Mangatsuka": 3,
+   "Higashi-Takasaki": 4,
+   "Takasaki-Shinden": 5,
+   "Hyuga-Maeda": 6,
+   "Takaharu": 7,
+   "Hirohara": 8,
+   "Kobayashi-Miyazaki": 9,
+   "Nishi-Kobayashi": 10,
+   "Ebino-Iino": 11,
+   "Ebino-Ue": 12,
+   "Ebino": 13,
+   "Kyomachi-Onsen": 14,
+   "Tsurumaru": 15,
+   "Yoshimatsu": 16
   }
  },
  "line_types": {
