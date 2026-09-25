@@ -508,6 +508,7 @@
             trainNumber: trainNumber,  // v4.3.950: 纯车号——渲染层查 TRAIN_NO_VEHICLE 用（修复 key 不匹配）
             delayMin: delayMin,
             estimated: true,
+            positionSource: tt._positionSource || "train-timetable",
             extrapolated: extrapolated,
             trainType: tt['odpt:trainType'] || '',
             typeName: trainClassification.typeName,
@@ -573,6 +574,7 @@
         m.forEach(function(tt) {
           if (!tt || !tt["odpt:railway"]) return;
           try {
+            tt._positionSource = "station-timetable";
             var _rp = String(tt["odpt:railway"]).split(":");
             var _dot = _rp[1] ? _rp[1].split(".") : [];
             if (_dot.length < 2) return;

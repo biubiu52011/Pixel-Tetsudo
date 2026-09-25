@@ -588,7 +588,8 @@
               destinationStation: destStation,
               trainType: rawType,
               typeName: typeName,
-              estimated: false
+              estimated: false,
+              positionSource: "realtime-api"
             };
             // v4.3.6xx: 双向直通列车处理
             // 1. 临海线的车（operator=TWR）开到JR区间了 → 在JR线路图上显示临海线车型
@@ -650,6 +651,7 @@
                   trainType: rawType,
                   typeName: typeName,
                   estimated: false,
+                  positionSource: "realtime-api",
                   isJRThrough: true,
                   trainClass: resolveTrainClass(
                     { lineId: _partnerLid, operator: _pLineOp, trainNumber: trainId, stationIndex: idx, trainType: rawType, destinationStation: destStations, trainId: trainId + '_' + idx },
@@ -739,6 +741,7 @@
               var manualTT = window[manualLineId + '_MANUAL_TIMETABLES'];
               if (!manualTT || !Array.isArray(manualTT) || manualTT.length === 0) return;
               try {
+                manualTT.forEach(function(tt) { if (tt) tt._positionSource = "station-timetable"; });
                 var mLine = allLines[manualLineId];
                 if (mLine && mLine.stations) {
                   var mEst = window.TrainPositionEstimator.estimateLinePositions(
@@ -751,6 +754,7 @@
                     var mAdded = 0;
                     mEst.forEach(function(p) {
                       if (p && p.trainId && !haveId[p.trainId]) {
+                        p.positionSource = "station-timetable";
                         posMap[manualLineId].push(p);
                         haveId[p.trainId] = true;
                         mAdded++;
@@ -1052,6 +1056,7 @@
               var manualTT = window[varName];
               var mLine = allLines[lineId];
               if (mLine && mLine.stations && manualTT && manualTT.length > 0) {
+                manualTT.forEach(function(tt) { if (tt) tt._positionSource = "station-timetable"; });
                 var mEst = window.TrainPositionEstimator.estimateLinePositions(
                   lineId, mLine, manualTT, odptData.delayInfo, mLine.operator
                 );
@@ -1062,6 +1067,7 @@
                   var mAdded = 0;
                   mEst.forEach(function(p) {
                     if (p && p.trainId && !haveId[p.trainId]) {
+                      p.positionSource = "station-timetable";
                       posMap[lineId].push(p);
                       haveId[p.trainId] = true;
                       mAdded++;

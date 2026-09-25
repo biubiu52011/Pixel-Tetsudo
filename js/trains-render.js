@@ -500,7 +500,7 @@
       if (!positions || !positions.length) return;
       var anyEst = false;
       for (var _ei = 0; _ei < positions.length; _ei++) {
-        if (positions[_ei] && positions[_ei].estimated === true) { anyEst = true; break; }
+        if (_trainPositionRank(positions[_ei]) > 0) { anyEst = true; break; }
       }
       if (!anyEst) return;
       var note = document.createElement("div");
@@ -510,9 +510,29 @@
     } catch(e) { /* note is best-effort */ }
   }
 
+  function _trainPositionRank(p) {
+    if (!p) return 3;
+    if (p.positionSource === "realtime-api" || p.estimated === false) return 0;
+    if (p.positionSource === "train-timetable") return 1;
+    if (p.positionSource === "station-timetable") return 2;
+    return p.estimated === true ? 1 : 0;
+  }
+
+  function _sortTrainPositionsBySource(positions) {
+    return (positions || []).slice().sort(function(a, b) {
+      var ar = _trainPositionRank(a);
+      var br = _trainPositionRank(b);
+      if (ar !== br) return ar - br;
+      var ai = a && a.stationIndex != null ? a.stationIndex : 9999;
+      var bi = b && b.stationIndex != null ? b.stationIndex : 9999;
+      if (ai !== bi) return ai - bi;
+      return String((a && (a.trainNumber || a.trainId)) || "").localeCompare(String((b && (b.trainNumber || b.trainId)) || ""));
+    });
+  }
+
   function renderTrainMap(el, line, lineId) {
     try {
-      var positions = getRealtimePositions(lineId);
+      var positions = _sortTrainPositionsBySource(getRealtimePositions(lineId));
       var _lang = window.currentLang || "ja";
       var _rS = (window.RailwayDB && window.RailwayDB.resolveStationName) ? function(id){ return window.RailwayDB.resolveStationName(id, _lang) || id; } : function(id){ return id; };
       
@@ -907,6 +927,7 @@
   function updateTrainLayer(svg, positions, stationCoords, lineId, line) {
     var trainLayer = svg.querySelector('.train-layer');
     if (!trainLayer) return;
+    positions = _sortTrainPositionsBySource(positions);
     
     var svgNS = "http://www.w3.org/2000/svg";
     var isLoop = stationCoords.length > 2 && (line.type === "loop" || line.isSixShapedLoop);
