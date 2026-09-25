@@ -1,5 +1,5 @@
 /*
- * Pixel Tetsudo - Web RunInfo (v4.3.963)
+ * Pixel Tetsudo - Web RunInfo (v4.3.967)
  * 官网运行情报模块：为 ODPT 无运行情报数据的运营商（千葉都市モノレール / 湘南モノレール）
  * 提供运行状况数据源。
  *
@@ -12,11 +12,14 @@
  *   跨域加载（不受 CORS 限制）做零依赖实时状态判定。
  *
  * 数据流（多通道，按可用性自动降级）：
- *   ① 同源代理（localhost 部署 /proxy?url=… 时启用，可全自动）
- *   ② 官网直连 fetch（若官网日后开放 CORS 自动生效）
+ *   ① 同源代理（本地部署 /proxy?url=… 时启用，可全自动）
+ *   ② r.jina.ai 公共阅读代理（静态部署唯一全文通道；千叶 429 限流，失败即降级）
  *   ③ 湘南信号图 <img> 状态检测（实时状态，零 CORS 依赖）
  *   ④ 手动粘贴官网原文（可靠兜底，localStorage 持久化，不自动覆盖）
  *   → getDelayInfo() 供 DataFusion 融合 → realtime 弹窗直接显示官网原文全文
+ *
+ * v4.3.967：官网直连通道移除——两家官网响应头均无 Access-Control-Allow-Origin，
+ *   静态部署下浏览器直连必然被 CORS 拦截；r.jina.ai 为静态部署唯一全文通道
  *
  * 展示规则（遵循用户锁定口径）：
  *   弹窗運行情報区直接显示官网原文全文，不做碎片化关键词解析；
@@ -25,7 +28,7 @@
 (function() {
   "use strict";
 
-  var MODULE_VERSION = "4.3.963";
+  var MODULE_VERSION = "4.3.967";
   var STORAGE_KEY = "pt_runinfo_web_v1";
   var REFRESH_INTERVAL_MS = 5 * 60 * 1000;   // 自动轮询间隔（5 分钟）
   var FETCH_TIMEOUT_MS = 15000;
@@ -190,7 +193,7 @@
   }
 
   // ========== HTML 抓取（多通道） ==========
-  // 通道 ① 同源代理：若应用从 localhost 打开且存在 /proxy 端点，则使用（Python 端无 CORS 限制）
+  // 通道 ① 同源代理：若同源本地部署存在 /proxy 端点，则使用（Python 端无 CORS 限制）
   function trySameOriginProxy(op) {
     return new Promise(function(resolve) {
       try {
@@ -204,26 +207,7 @@
       } catch(e) { resolve(null); }
     });
   }
-  // 通道 ② 官网直连（CORS 开放时生效）
-  function tryDirect(op) {
-    return new Promise(function(resolve) {
-      try {
-        var ctrl = null;
-        try { ctrl = new AbortController(); } catch(e) {}
-        var timer = setTimeout(function() { try { if (ctrl) ctrl.abort(); } catch(e) {} resolve(null); }, FETCH_TIMEOUT_MS);
-        var opts = { method: "GET", headers: { "Accept": "text/html" } };
-        if (ctrl) opts.signal = ctrl.signal;
-        fetch(SOURCES[op].site, opts).then(function(res) {
-          if (!res.ok) { clearTimeout(timer); resolve(null); return; }
-          res.arrayBuffer().then(function(buf) {
-            clearTimeout(timer);
-            resolve({ ok: true, buf: buf, ct: res.headers.get("content-type") || "" });
-          }).catch(function() { clearTimeout(timer); resolve(null); });
-        }).catch(function() { clearTimeout(timer); resolve(null); });
-      } catch(e) { resolve(null); }
-    });
-  }
-  // 通道 ③ r.jina.ai（对 UTF-8 页面可用；Shift-JIS 页面会乱码——解码后校验，乱码则丢弃）
+  // 通道 ② r.jina.ai（对 UTF-8 页面可用；Shift-JIS 页面会乱码——解码后校验，乱码则丢弃）
   function tryJina(op) {
     return new Promise(function(resolve) {
       try {
@@ -277,23 +261,17 @@
   }
 
   function fetchHTML(op) {
-    // 通道顺序：同源代理 → 直连 → r.jina.ai；首个产出含区块标题的文本即采用
+    // 通道顺序：同源代理 → r.jina.ai；首个产出含区块标题的文本即采用
     return trySameOriginProxy(op).then(function(r1) {
       if (r1) {
         var d1 = decodeResponse(r1.buf, r1.ct);
         if (parseSiteText(d1.text, op)) return d1.text;
       }
-      return tryDirect(op).then(function(r2) {
-        if (r2) {
-          var d2 = decodeResponse(r2.buf, r2.ct);
-          if (parseSiteText(d2.text, op)) return d2.text;
-        }
-        return tryJina(op).then(function(r3) {
-          if (!r3) return null;
-          var d3 = decodeResponse(r3.buf, r3.ct);
-          if (parseSiteText(d3.text, op)) return d3.text;
-          return null;
-        });
+      return tryJina(op).then(function(r3) {
+        if (!r3) return null;
+        var d3 = decodeResponse(r3.buf, r3.ct);
+        if (parseSiteText(d3.text, op)) return d3.text;
+        return null;
       });
     });
   }
