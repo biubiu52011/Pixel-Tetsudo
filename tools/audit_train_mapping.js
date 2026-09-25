@@ -95,7 +95,9 @@ function main() {
     { name: 'Karasuyama', ctx: { lineId: 'Karasuyama', operator: 'JR-East', trainId: 'x_1' }, expect: /EV-E301/ },
     { name: 'Toei old Asakusa alias', ctx: { lineId: 'Asakusa', operator: 'Toei', vehicleTypeManual: '5300形', trainId: 'x_1' }, expect: /5500形/ },
     { name: 'Metro Marunouchi old alias', ctx: { lineId: 'Marunouchi', operator: 'TokyoMetro', vehicleTypeManual: '02系', trainId: 'x_1' }, expect: /2000系/ },
-    { name: 'Rinkai 71', ctx: { lineId: 'Rinkai', operator: 'TWR', trainId: 'x_1' }, expect: /71-000形/ }
+    { name: 'Rinkai 71', ctx: { lineId: 'Rinkai', operator: 'TWR', trainId: 'x_1' }, expect: /71-000形/ },
+    { name: 'Chuo-Sobu local default', ctx: { lineId: 'ChuoSobuLocal', operator: 'JR-East', trainId: '1000C' }, expect: /E231系総武中央線/, forbid: /E235系総武中央線|常磐LED/ },
+    { name: 'Chuo-Sobu local timetable vehicle', ctx: { lineId: 'ChuoSobuLocal', operator: 'JR-East', vehicleTypeManual: 'E231系500番台 / E231系0番台', trainId: '1000C' }, expect: /E231系総武中央線/, forbid: /E235系総武中央線|常磐LED/ }
   ];
   probes.forEach((p) => {
     const r = win.TrainVehicle.resolve(p.ctx);

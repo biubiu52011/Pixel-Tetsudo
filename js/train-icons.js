@@ -158,8 +158,8 @@
   var LINE_ICONS = {
   "Yamanote": "../images/列车/JR東日本/E235系山手線.png",
   "KeihinTohoku": "../images/列车/JR東日本/E233系1000番台.png",
-  "ChuoLocal": "../images/列车/JR東日本/E235系総武中央線.png",
-  "ChuoSobuLocal": "../images/列车/JR東日本/E235系総武中央線.png",
+  "ChuoLocal": "../images/列车/JR東日本/E231系総武中央線.png",
+  "ChuoSobuLocal": "../images/列车/JR東日本/E231系総武中央線.png",
   "ChuoRapid": "../images/列车/JR東日本/E233系0番台.png",
   "ChuoMain": "../images/列车/JR東日本/E233系0番台.png",
   "Ome": "../images/列车/JR東日本/E233系青梅線.png",
@@ -421,17 +421,9 @@
   // v4.3.962: 线路级车型特例（奇偶交替/尾号区分等）
   // 每条：{ lines, op, fn } —— fn(trainId, trainNumberPure) 返回 icon 或 null
   var LINE_ICON_OVERRIDES = [
-    // ChuoLocal/ChuoSobuLocal: E231/E235 奇偶交替（trainId 字符码求和 mod 2）
+    // ChuoLocal/ChuoSobuLocal: current regular stock is E231系500番台 / E231系0番台.
     { lines: ['ChuoLocal','ChuoSobuLocal'], op: null, fn: function(trainId) {
-      var n = 0;
-      if (typeof trainId === 'number') n = Math.abs(trainId) % 2;
-      else if (typeof trainId === 'string') {
-        var s = 0; for (var i = 0; i < trainId.length; i++) s += trainId.charCodeAt(i);
-        n = s % 2;
-      }
-      return n === 0
-        ? '../images/列车/JR東日本/E231系総武中央線.png'
-        : '../images/列车/JR東日本/E235系総武中央線.png';
+      return '../images/列车/JR東日本/E231系総武中央線.png';
     }},
     // Rinkai: JR直通 → E233系7000番台
     { lines: ['Rinkai'], op: 'JR-East', fn: function() {
@@ -2021,7 +2013,7 @@ TOBU_LINE_IDS.forEach(function(lineId) {
     "2100番台": "E209系（京葉線）",
     "209系2000番台": "E209系（京葉線）",
     "209系2100番台": "E209系（京葉線）",
-    "E231系500番台": "E231系常磐LED",
+    "E231系500番台": "E231系総武中央線",
     "E231系900番台": "E231系0番台",
     "100系 Revaty": "500系（リバティ）",
     "500系「リバティ」": "500系（リバティ）",
@@ -2065,7 +2057,7 @@ TOBU_LINE_IDS.forEach(function(lineId) {
     "20000系（日比谷線直通）": "東武70000系",
     "E231系": "E231系0番台",
     "E233系": "E233系0番台",
-    "E235系": "E235系総武中央線",
+    "E235系": "E235系山手線",
     "E127系": "E127系0番台",
     "E127系100番台": "E127系0番台",
     "E131系": "E131系0番台",
