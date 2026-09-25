@@ -499,13 +499,18 @@
       for (var _oi = 0; _oi < _oldNotes.length; _oi++) _oldNotes[_oi].remove();
       if (!positions || !positions.length) return;
       var anyEst = false;
+      var anyRealtime = false;
       for (var _ei = 0; _ei < positions.length; _ei++) {
-        if (_trainPositionRank(positions[_ei]) > 0) { anyEst = true; break; }
+        var _rank = _trainPositionRank(positions[_ei]);
+        if (_rank === 0) anyRealtime = true;
+        else anyEst = true;
       }
       if (!anyEst) return;
       var note = document.createElement("div");
       note.className = "tp-est-note";
-      note.textContent = t("trains.estimated_note") || "*Data calculated from timetable";
+      note.textContent = anyRealtime
+        ? (t("trains.estimated_mixed_note") || "*Only supplemental non-realtime positions are estimated")
+        : (t("trains.estimated_note") || "*Data calculated from timetable");
       el.insertAdjacentElement('afterend', note);
     } catch(e) { /* note is best-effort */ }
   }
