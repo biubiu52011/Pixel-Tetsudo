@@ -173,15 +173,11 @@
       updateTime = t("status.unknown");
     }
     updatedSection.querySelector(".rs-updated-time").textContent = updateTime;
-    // v4.3.963: 网页源运行情报操作区（千叶/湘南官网渠道：来源标识/打开官网/刷新/手动更新）
-    try { renderWebRunInfoControls(modal, lineId); } catch(e) {}
     // Show modal
     modal.classList.add("active");
     document.body.classList.add("modal-open");
-    // v4.3.964: 嫁接官方接口——弹窗打开后异步经 RunInfoAPI.query() 拉取最新文字更新運行情報区
-    // （ODPT TrainInformation / 官网原文；5 分钟内存缓存防重复请求）
-    refreshCauseFromAPI(modal, lineId, line, delayInfo, cause, status);
-  }
+    // v4.3.968: 弹窗统一设计——打开后经 RunInfoAPI.query() 异步刷新運行情報正文（ODPT/官网同一通道，不区分接口）
+    try { refreshCauseFromAPI(modal, lineId, line, delayInfo, cause, status); } catch(e) {}
 
   // v4.3.964: 经 RunInfoAPI.query() 拉取官方接口文字，更新弹窗「運行情報」正文（纯文字 + 链接行）
   function refreshCauseFromAPI(modal, lineId, line, fallbackDelayInfo, fallbackCause, fallbackStatus) {
@@ -218,67 +214,6 @@
     } catch(e) {}
   }
 
-  // v4.3.963: 网页源运行情报操作区（WebRunInfo）
-  function renderWebRunInfoControls(modal, lineId) {
-    var el = modal ? modal.querySelector(".rs-webinfo-controls") : null;
-    if (!el) return;
-    // v4.3.965: 非官网线路必须清空容器——modal 是共享的，上次千叶/湘南弹窗渲染的官网区会残留到 ODPT 线路弹窗
-    if (!window.WebRunInfo || !window.WebRunInfo.isWebLine || !window.WebRunInfo.isWebLine(lineId)) {
-      el.innerHTML = "";
-      return;
-    }
-    var op = window.WebRunInfo.getOperatorForLine(lineId);
-    var info = window.WebRunInfo.getInfo ? window.WebRunInfo.getInfo(op) : null;
-    var siteUrl = window.WebRunInfo.getSiteUrl ? window.WebRunInfo.getSiteUrl(op) : null;
-    var srcLabel = (info && info.source === "manual") ? t("web.manual") : t("web.auto");
-    var updated = "";
-    if (info && info.updatedAt) {
-      var _d = new Date(info.updatedAt);
-      updated = _d.getHours().toString().padStart(2, "0") + ":" + _d.getMinutes().toString().padStart(2, "0");
-    }
-    var html = '<div class="rs-webinfo-row">'
-      + '<span class="rs-webinfo-src">' + escapeHtml(t("web.source")) + ': ' + escapeHtml(srcLabel) + (updated ? ' (' + escapeHtml(updated) + ')' : '') + '</span>';
-    if (siteUrl) {
-      html += '<a class="rs-webinfo-link" href="' + escapeHtml(siteUrl) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(t("web.open_site")) + '</a>';
-    }
-    html += '<button type="button" class="rs-webinfo-btn" data-act="refresh">' + escapeHtml(t("web.refresh")) + '</button>'
-      + '<button type="button" class="rs-webinfo-btn" data-act="manual">' + escapeHtml(t("web.manual_update")) + '</button>'
-      + '</div>'
-      + '<div class="rs-webinfo-manual" hidden>'
-      + '<textarea class="rs-webinfo-textarea" rows="4" placeholder="' + escapeHtml(t("web.paste_hint")) + '"></textarea>'
-      + '<div class="rs-webinfo-manual-actions">'
-      + '<button type="button" class="rs-webinfo-btn" data-act="save">' + escapeHtml(t("web.save")) + '</button>'
-      + '<button type="button" class="rs-webinfo-btn" data-act="cancel">' + escapeHtml(t("detail.close")) + '</button>'
-      + '</div></div>';
-    el.innerHTML = html;
-    var btn = el.querySelector('[data-act="refresh"]');
-    if (btn) btn.addEventListener("click", function() {
-      if (!window.WebRunInfo) return;
-      // v4.3.964: 先清 RunInfoAPI 缓存再抓取，确保弹窗拿到最新文字
-      if (window.RunInfoAPI && typeof window.RunInfoAPI.invalidate === "function") window.RunInfoAPI.invalidate(_currentModalLine);
-      window.WebRunInfo.refresh(op).then(function() {
-        try { if (_currentModalLine && _latestLines) openModal(_currentModalLine, _latestLines); } catch(e) {}
-      });
-    });
-    var manualBtn = el.querySelector('[data-act="manual"]');
-    if (manualBtn) manualBtn.addEventListener("click", function() {
-      var box = el.querySelector(".rs-webinfo-manual");
-      if (box) box.hidden = false;
-    });
-    var saveBtn = el.querySelector('[data-act="save"]');
-    if (saveBtn) saveBtn.addEventListener("click", function() {
-      var ta = el.querySelector(".rs-webinfo-textarea");
-      if (!ta || !ta.value || !ta.value.trim()) return;
-      window.WebRunInfo.setManual(op, ta.value.trim());
-      if (window.RunInfoAPI && typeof window.RunInfoAPI.invalidate === "function") window.RunInfoAPI.invalidate(_currentModalLine);
-      try { if (_currentModalLine && _latestLines) openModal(_currentModalLine, _latestLines); } catch(e) {}
-    });
-    var cancelBtn = el.querySelector('[data-act="cancel"]');
-    if (cancelBtn) cancelBtn.addEventListener("click", function() {
-      var box = el.querySelector(".rs-webinfo-manual");
-      if (box) box.hidden = true;
-    });
-  }
 
   function closeModal() {
     _currentModalLine = null;
@@ -496,6 +431,6 @@
         try { openModal(_currentModalLine, _latestLines); } catch(e) {}
       }
     });
-    }
-  init();
+  }
+  }
 })();

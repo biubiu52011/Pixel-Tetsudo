@@ -17,7 +17,7 @@
 (function() {
   "use strict";
 
-  var MODULE_VERSION = "4.3.964";
+  var MODULE_VERSION = "4.3.968"; // v4.3.968: 统一弹窗操作区——通用手动覆盖（任意线路可用）
 
   // ========== URL 提取 ==========
   // 从原文中提取 https:// 链接，正文保留纯文字。返回 { cleanText, links[] }
@@ -115,9 +115,36 @@
   var _cache = {};          // lineId -> { t: timestamp, r: result }
   var CACHE_TTL_MS = 5 * 60 * 1000; // 5 分钟内存缓存（避免每次弹窗重复请求官方接口/官网）
 
+  // v4.3.968: 弹窗统一操作区——通用手动覆盖（任意线路可用；持久化与 WebRunInfo 手动缓存分离）
+  var _manualOverride = {};  // lineId -> { text, status, updatedAt }
+
+  function setManualOverride(lineId, text) {
+    if (!lineId || !text) return null;
+    _manualOverride[lineId] = { text: String(text), status: "notice", updatedAt: Date.now() };
+    invalidate(lineId);
+    try { document.dispatchEvent(new CustomEvent("pt-runinfo-updated", { detail: { lineId: lineId } })); } catch(e) {}
+    return _manualOverride[lineId];
+  }
+
+  function getManualOverride(lineId) {
+    return lineId ? _manualOverride[lineId] : null;
+  }
+
   function query(lineId, line) {
     var lineObj = line || (window.DataLayer && window.DataLayer.getLine ? window.DataLayer.getLine(lineId) : null)
       || (window.UNIFIED_LINES && window.UNIFIED_LINES[lineId]) || null;
+    // v4.3.968: 统一弹窗操作区——手动覆盖对所有线路一致；覆盖后仍走同一 query 输出契约
+    var _ov = getManualOverride(lineId);
+    if (_ov) {
+      var _ovEx = extractLinks(_ov.text);
+      return Promise.resolve({
+        status: _ov.status || "notice",
+        text: _ovEx.cleanText,
+        links: _ovEx.links,
+        updatedAt: _ov.updatedAt || null,
+        source: "manual"
+      });
+    }
 
     // 缓存命中（5 分钟内直接返回同一结果，降低 ODPT 请求量防 429）
     var cached = _cache[lineId];
@@ -216,6 +243,9 @@
     query: query,
     invalidate: invalidate,
     extractLinks: extractLinks,
+    // v4.3.968: 统一弹窗操作区的手动输入入口（ODPT/官网线路同一行为）
+    setManualOverride: setManualOverride,
+    getManualOverride: getManualOverride,
     isWebLine: function(lineId) {
       return !!(window.WebRunInfo && window.WebRunInfo.isWebLine && window.WebRunInfo.isWebLine(lineId));
     }
