@@ -178,6 +178,7 @@
     document.body.classList.add("modal-open");
     // v4.3.968: 弹窗统一设计——打开后经 RunInfoAPI.query() 异步刷新運行情報正文（ODPT/官网同一通道，不区分接口）
     try { refreshCauseFromAPI(modal, lineId, line, delayInfo, cause, status); } catch(e) {}
+  }
 
   // v4.3.964: 经 RunInfoAPI.query() 拉取官方接口文字，更新弹窗「運行情報」正文（纯文字 + 链接行）
   function refreshCauseFromAPI(modal, lineId, line, fallbackDelayInfo, fallbackCause, fallbackStatus) {
@@ -432,5 +433,5 @@
       }
     });
   }
-  }
+  init();
 })();
