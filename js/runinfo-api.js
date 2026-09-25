@@ -17,7 +17,7 @@
 (function() {
   "use strict";
 
-  var MODULE_VERSION = "4.3.968"; // v4.3.968: 统一弹窗操作区——通用手动覆盖（任意线路可用）
+  var MODULE_VERSION = "4.3.969"; // v4.3.969: 官网网页源不再对外返回 URL 链接行
 
   // ========== URL 提取 ==========
   // 从原文中提取 https:// 链接，正文保留纯文字。返回 { cleanText, links[] }
@@ -163,7 +163,7 @@
           p = Promise.resolve({
             status: w.status || "normal",
             text: ex.cleanText,
-            links: ex.links,
+            links: [],
             updatedAt: w.updatedAt || null,
             source: w.source || "web"
           });

@@ -122,15 +122,17 @@
     causeSection.querySelector(".rs-section-title").textContent = _detailTitles[(window.currentLang || "ja")] || "運行情報";
     var causeHtml;
     var _transSource = "";
-    // v4.3.964: 正文只展示文字——原文中的 URL 提取为 links（下方渲染为可点击链接），不碎片化解析
+    // v4.3.969: 官网网页源只保留正文，不再展示 URL 链接行。
     var _srcText = delayInfo.detail || cause || "";
     var _exLinks = [];
     var _cleanSrc = _srcText;
+    var _isWebSource = (delayInfo && delayInfo.source === "web")
+      || (window.WebRunInfo && typeof window.WebRunInfo.isWebLine === "function" && window.WebRunInfo.isWebLine(lineId));
     if (window.RunInfoAPI && typeof window.RunInfoAPI.extractLinks === "function") {
       try {
         var _ex = window.RunInfoAPI.extractLinks(_srcText);
         _cleanSrc = _ex.cleanText;
-        _exLinks = _ex.links || [];
+        _exLinks = _isWebSource ? [] : (_ex.links || []);
       } catch(e) {}
     }
     if (status === "loading") {
@@ -144,7 +146,7 @@
       causeHtml = '<span class="rs-text-muted">' + t("status.none") + '</span>';
     }
     causeSection.querySelector(".rs-cause-text").innerHTML = causeHtml;
-    // v4.3.964: 原文中提取的 URL 渲染为可点击链接行（正文保持纯文字）
+    // v4.3.964: 非官网来源的 URL 渲染为可点击链接行（正文保持纯文字）
     if (_exLinks.length > 0) {
       try {
         var _linksWrap = document.createElement("div");
