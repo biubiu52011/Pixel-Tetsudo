@@ -572,6 +572,7 @@
   "16000系": "../images/列车/東京メトロ/16000系.png",
   "17000系": "../images/列车/東京メトロ/17000系.png",
   "2020系": "../images/列车/東急電鉄/2020系.png",
+  "東急2020系": "../images/列车/東急電鉄/2020系.png",
   "9000系": "../images/列车/東京メトロ/9000系.png",
   "10000系": "../images/列车/東京メトロ/10000系.png",
   "05系（北綾瀬）": "../images/列车/東京メトロ/05系（北綾瀬）.png",
@@ -621,7 +622,13 @@
   "H5系": "../images/列车/JR東日本/H5系.png",
   "N700系（東海）": "../images/列车/JR東海/N700系（東海）.png",
   "500系": "../images/列车/JR西日本/500系.png",
+  "273系": "../images/列车/JR西日本/w273.png",
+  "227系": "../images/列车/JR西日本/w227ok.png",
   "800系": "../images/列车/JR九州/800系.png",
+  "YC1系": "../images/列车/JR九州/k70000b.png",
+  "H100形": "../images/列车/JR北海道/h100.png",
+  "H100系": "../images/列车/JR北海道/h100.png",
+  "737系": "../images/列车/JR北海道/h737.png",
   "E657系": "../images/列车/JR東日本/E657系.png",
   "E257系500番台": "../images/列车/JR東日本/E257系500番台.png",
   "E353系": "../images/列车/JR東日本/E353系.png",
@@ -1661,6 +1668,13 @@ var TOBU_VEHICLE_LOCKS = {
 };
 var TOBU_LINE_IDS = ["TobuSkytree", "TobuIsesaki", "TobuNikko", "Tojo", "Noda", "TobuUtsunomiya", "Daishi_Tobu", "Tobu_Kameido", "Ogose", "Koizumi", "Sano", "Kiryu", "Nikkoku"];
 
+function _canonicalVehicleIconPath(name, lineId) {
+  var n = String(name || "").trim();
+  if (!n || /[\/\\]/.test(n)) return null;
+  if (/^東武/.test(n)) return "../images/列车/東武鉄道/" + n + ".png";
+  return null;
+}
+
 var LINE_ICON_NAME_REDIRECT = {
   "Arakawa": { "8800形": "都営8800形", "8900形": "都営8900形" },
   "TokyuToyoko": { "5000系": "東急電鉄5000系", "5050系": "東急5050系", "5050系4000番台": "東急5050系4000番台", "横浜高速Y500系": "横浜高速鉄道Y500系", "Y500系": "横浜高速鉄道Y500系" },
@@ -1695,7 +1709,8 @@ var LINE_VEHICLE_OVERRIDES = {
     "9000形": "都電9000形"
   },
   "Asakusa": {
-    "5300形": "都営5300形",
+    "5300形": "都営5500形",
+    "都営5300形": "都営5500形",
     "5500形": "都営5500形"
   },
   "Mita": {
@@ -1707,11 +1722,75 @@ var LINE_VEHICLE_OVERRIDES = {
     "12-600形": "都営12-600形"
   },
   "Shinjuku": {
+    "10-000形": "都営10-300形",
+    "都営10-000形": "都営10-300形",
     "10-300形": "都営10-300形"
   },
   "NewShuttle": {
     "2000系": "埼玉新都市交通2000系",
-    "2020系": "埼玉新都市交通2020系"
+    "2020系": "埼玉新都市交通2020系",
+    "1050系": "埼玉新都市交通2020系"
+  },
+  "Karasuyama": {
+    "キハ40": "EV-E301系",
+    "キハ40系": "EV-E301系",
+    "キハ40系（烏山線）": "EV-E301系"
+  },
+  "Narita": {
+    "253系": "E259系",
+    "253系N'EX": "E259系",
+    "253系（成田エクスプレス）": "E259系",
+    "255系": "E257系500番台",
+    "255系（房総特急）": "E257系500番台"
+  },
+  "SobuRapid": {
+    "255系": "E257系500番台",
+    "255系（房総特急）": "E257系500番台"
+  },
+  "Uchibo": {
+    "255系": "E257系500番台",
+    "255系（房総特急）": "E257系500番台"
+  },
+  "Sotobo": {
+    "255系": "E257系500番台",
+    "255系（房総特急）": "E257系500番台"
+  },
+  "Marunouchi": {
+    "02系": "東京メトロ2000系"
+  },
+  "MarunouchiBranch": {
+    "02系": "東京メトロ2000系"
+  },
+  "Chiyoda": {
+    "6000系": "東京メトロ16000系",
+    "東京メトロ6000系": "東京メトロ16000系"
+  },
+  "Fukutoshin": {
+    "7000系": "東京メトロ17000系",
+    "東京メトロ7000系": "東京メトロ17000系"
+  },
+  "Yurakucho": {
+    "7000系": "東京メトロ17000系",
+    "東京メトロ7000系": "東京メトロ17000系"
+  },
+  "SotetsuMain": {
+    "新7000系": "相模鉄道12000系",
+    "相鉄新7000系": "相模鉄道12000系",
+    "相鉄7000系": "相模鉄道12000系"
+  },
+  "SotetsuIzumino": {
+    "新7000系": "相模鉄道12000系",
+    "相鉄新7000系": "相模鉄道12000系",
+    "相鉄7000系": "相模鉄道12000系"
+  },
+  "SotetsuShin-Yokohama": {
+    "新7000系": "相模鉄道12000系",
+    "相鉄新7000系": "相模鉄道12000系",
+    "相鉄7000系": "相模鉄道12000系"
+  },
+  "Saikyo": {
+    "相鉄新7000系": "相模鉄道12000系",
+    "相鉄7000系": "相模鉄道12000系"
   },
   "TokyoMonorail": {
     "100形": "東京モノレール100形",
@@ -1740,7 +1819,9 @@ var LINE_VEHICLE_OVERRIDES = {
     "5000系": "東急電鉄5000系",
     "50050系": "東武50050系",
     "50050型": "東武50050系",
-    "東武50050系": "東武50050系"
+    "東武50050系": "東武50050系",
+    "8500系": "東急2020系",
+    "東急8500系": "東急2020系"
   },
   "Hanzomon": {
     "50050系": "東武50050系",
@@ -1748,6 +1829,8 @@ var LINE_VEHICLE_OVERRIDES = {
     "東武50050系": "東武50050系"
   },
   "Hibiya": {
+    "03系": "東京メトロ13000系",
+    "東京メトロ03系": "東京メトロ13000系",
     "20000系": "東武70000系",
     "20050系": "東武70000系",
     "20000系（日比谷線直通）": "東武70000系",
@@ -1791,6 +1874,18 @@ var LINE_VEHICLE_OVERRIDES = {
   "KeioInokashira": {
     "1000系": "京王電鉄1000系",
     "3000系": "京王電鉄3000系"
+  },
+  "Odawara": {
+    "50000形": "70000形",
+    "小田急50000形": "70000形",
+    "VSE": "70000形",
+    "50000形 VSE": "70000形"
+  },
+  "OdakyuTama": {
+    "50000形": "70000形",
+    "小田急50000形": "70000形",
+    "VSE": "70000形",
+    "50000形 VSE": "70000形"
   }
 };
 TOBU_LINE_IDS.forEach(function(lineId) {
@@ -1819,6 +1914,8 @@ TOBU_LINE_IDS.forEach(function(lineId) {
     "都営5500形（通勤特急）": "5500形",
     "都営5500形（浅草線直通）": "5500形",
     "都営6300形": "6300形",
+    "都営10-000形": "10-300形",
+    "10-000形": "10-300形",
     "都営10-300形": "10-300形",
     "12-600形": "12-690形",
     "小田急4000形": "4000系",
@@ -1865,9 +1962,15 @@ TOBU_LINE_IDS.forEach(function(lineId) {
     "70000形 GSE": "70000系",
     "30000形 EXEα": "小田急電鉄30000形EXEα",
     "20000形": "20000系",
-    "50000形": "50000系",
+    "小田急50000形": "70000形",
+    "小田急50000形VSE": "70000形",
+    "小田急50000形（VSE）": "70000形",
+    "VSE": "70000形",
+    "50000形": "70000形",
     "9020系": "9000系",
-    "相鉄新7000系": "7000系",
+    "相鉄7000系": "相模鉄道12000系",
+    "相鉄新7000系": "相模鉄道12000系",
+    "新7000系": "相模鉄道12000系",
     "相鉄12000系": "相模鉄道12000系",
     "7500系（7000系は全廃）": "7500系",
     "東急5050系": "5050系",
@@ -1886,6 +1989,14 @@ TOBU_LINE_IDS.forEach(function(lineId) {
     "北総9100形": "9100形",
     "東武50090系（TJライナー専用）": "50090系",
     "東武70090系（THライナー専用・日比谷線直通）": "70090系",
+    "東京メトロ02系": "東京メトロ2000系",
+    "東京メトロ03系": "東京メトロ13000系",
+    "東京メトロ6000系": "東京メトロ16000系",
+    "東京メトロ7000系": "東京メトロ17000系",
+    "メトロ02系": "東京メトロ2000系",
+    "メトロ03系": "東京メトロ13000系",
+    "メトロ6000系": "東京メトロ16000系",
+    "メトロ7000系": "東京メトロ17000系",
     "都営6500形": "6500形",
     "西武40000系(デュアルシート)": "40000系",
     "新2000系（2000系）": "西武鉄道2000系",
@@ -1970,6 +2081,10 @@ TOBU_LINE_IDS.forEach(function(lineId) {
     "E257系1500番台（踊り子）": "E257系2000番台",
     "E259系": "E259系",
     "E259系（成田エクスプレス）": "E259系",
+    "253系N'EX": "E259系",
+    "253系（成田エクスプレス）": "E259系",
+    "255系": "E257系500番台",
+    "255系（房総特急）": "E257系500番台",
     "E353系": "E353系",
     "E353系（あずさ）": "E353系",
     "E353系（あずさ・富士回遊）": "E353系",
@@ -1980,6 +2095,7 @@ TOBU_LINE_IDS.forEach(function(lineId) {
     "E653系（しらゆき）": "E653系",
     "EV-E301系": "EV-E301系",
     "EV-E301系（ACCUM）": "EV-E301系",
+    "キハ40系（烏山線）": "EV-E301系",
     "EV-E801系（ACCUM）": "EV-E801系（男鹿線）",
     "HB-E300系（リゾートビューふるさと）": "HB-E300系（リゾートしらかみ・橅・別）",
     "211系": "211系湘南色",
@@ -1995,6 +2111,22 @@ TOBU_LINE_IDS.forEach(function(lineId) {
     "キハE130形100番台": "キハE130系100番台",
     "キハE120形": "キハE120系（只見線）",
     "キハ40系": "キハ40系（リゾートしらかみ・くまげら）",
+    "381系": "273系",
+    "381系（やくも）": "273系",
+    "117系": "227系",
+    "キハ143形": "737系",
+    "キハ143系": "737系",
+    "キハ66系": "YC1系",
+    "キハ67系": "YC1系",
+    "キハ66・67": "YC1系",
+    "キハ66・67系": "YC1系",
+    "JR東海211系": "315系",
+    "JR東海311系": "313系",
+    "JR東海213系5000番台": "313系",
+    "213系5000番台": "313系",
+    "923 T4": "923系ドクターイエロー",
+    "923系T4": "923系ドクターイエロー",
+    "ドクターイエローT4": "923系ドクターイエロー",
     "1100系": "11000系（新塗装）",
     "Y500系": "横浜高速鉄道Y500系",
     "横浜高速Y500系": "横浜高速鉄道Y500系",
@@ -2132,6 +2264,8 @@ TOBU_LINE_IDS.forEach(function(lineId) {
           _ovt = _ov[_ovb];
         }
         if (_ovt) {
+          var _ovCanonical = _canonicalVehicleIconPath(_ovt, lineId);
+          if (_ovCanonical) { _hits.push({ n: name, icon: _ovCanonical }); continue; }
           if (VEHICLE_NAME_TO_ICON[_ovt]) { _hits.push({ n: name, icon: VEHICLE_NAME_TO_ICON[_ovt] }); continue; }
           // v4.3.988: override 目标支持 alias 展开（如 相模鉄道21000系→相模鉄道13000系近似），
           // 保持锁定语义——命中别名目标仍有图则用之，否则 return null 走 S4 线路默认，
@@ -2144,18 +2278,26 @@ TOBU_LINE_IDS.forEach(function(lineId) {
       // v4.3.1006: 线路感知裸名重定向（同名被别社抢占：都電8800/8900形 → 都営图标）
       if (lineId && LINE_ICON_NAME_REDIRECT[lineId] && LINE_ICON_NAME_REDIRECT[lineId][name]) {
         var _rd = LINE_ICON_NAME_REDIRECT[lineId][name];
+        var _rdCanonical = _canonicalVehicleIconPath(_rd, lineId);
+        if (_rdCanonical) { _hits.push({ n: name, icon: _rdCanonical }); continue; }
         if (VEHICLE_NAME_TO_ICON[_rd]) { _hits.push({ n: name, icon: VEHICLE_NAME_TO_ICON[_rd] }); continue; }
       }
       // 1. 精确匹配
+      var _canonical = _canonicalVehicleIconPath(name, lineId);
+      if (_canonical) { _hits.push({ n: name, icon: _canonical }); continue; }
       if (VEHICLE_NAME_TO_ICON[name]) { _hits.push({ n: name, icon: VEHICLE_NAME_TO_ICON[name] }); continue; }
       // 2. 别名表
       var _al = VEHICLE_NAME_ALIASES[name];
+      var _alCanonical = _canonicalVehicleIconPath(_al, lineId);
+      if (_alCanonical) { _hits.push({ n: name, icon: _alCanonical }); continue; }
       if (_al && VEHICLE_NAME_TO_ICON[_al]) { _hits.push({ n: name, icon: VEHICLE_NAME_TO_ICON[_al] }); continue; }
       // 3. 去掉（…）/（…）括注后重试
       var _base = name.replace(/（[^）]*）/g, "").replace(/\([^)]*\)/g, "").trim();
       if (_base !== name) {
         if (VEHICLE_NAME_TO_ICON[_base]) { _hits.push({ n: name, icon: VEHICLE_NAME_TO_ICON[_base] }); continue; }
         var _al2 = VEHICLE_NAME_ALIASES[_base];
+        var _al2Canonical = _canonicalVehicleIconPath(_al2, lineId);
+        if (_al2Canonical) { _hits.push({ n: name, icon: _al2Canonical }); continue; }
         if (_al2 && VEHICLE_NAME_TO_ICON[_al2]) { _hits.push({ n: name, icon: VEHICLE_NAME_TO_ICON[_al2] }); continue; }
       }
     }
