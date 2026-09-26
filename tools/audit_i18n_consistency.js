@@ -166,7 +166,27 @@ function main() {
     ['en', 'op.MIR', 'Metropolitan Intercity Railway'],
     ['zh', 'op.MIR', '首都圈新都市铁道'],
     ['ja', 'op.MIR', '首都圏新都市鉄道'],
-    ['ko', 'op.MIR', '수도권 신도시 철도']
+    ['ko', 'op.MIR', '수도권 신도시 철도'],
+    ['en', 'op.Sotetsu', 'Sotetsu Railway'],
+    ['zh', 'op.Sotetsu', '相模铁道'],
+    ['ja', 'op.Sotetsu', '相模鉄道'],
+    ['ko', 'op.Sotetsu', '사가미 철도'],
+    ['en', 'op.TWR', 'Tokyo Waterfront Area Rapid Transit'],
+    ['zh', 'op.TWR', '东京临海高速铁道'],
+    ['ja', 'op.TWR', '東京臨海高速鉄道'],
+    ['ko', 'op.TWR', '도쿄 임해 고속철도'],
+    ['en', 'op.Rinkai', 'Tokyo Waterfront Area Rapid Transit'],
+    ['zh', 'op.Rinkai', '东京临海高速铁道'],
+    ['ja', 'op.Rinkai', '東京臨海高速鉄道'],
+    ['ko', 'op.Rinkai', '도쿄 임해 고속철도'],
+    ['en', 'op.MinatoMirai', 'Yokohama Minatomirai Railway'],
+    ['zh', 'op.MinatoMirai', '横滨高速铁道'],
+    ['ja', 'op.MinatoMirai', '横浜高速鉄道'],
+    ['ko', 'op.MinatoMirai', '요코하마 고속철도'],
+    ['en', 'op.TsukubaExpress', 'Metropolitan Intercity Railway'],
+    ['zh', 'op.TsukubaExpress', '首都圈新都市铁道'],
+    ['ja', 'op.TsukubaExpress', '首都圏新都市鉄道'],
+    ['ko', 'op.TsukubaExpress', '수도권 신도시 철도']
   ];
   semanticChecks.forEach(([lang, key, expected]) => {
     assertEquals(errors, 'translation-semantic-drift', translations[lang] && translations[lang][key], expected, { lang, key });
