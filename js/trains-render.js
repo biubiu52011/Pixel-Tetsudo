@@ -17,6 +17,11 @@
     bg.setAttribute("stroke", lc);
     bg.setAttribute("stroke-width", "1");
     layer.appendChild(bg);
+    if (lineObj.title) {
+      var bgTitle = document.createElementNS(ns, "title");
+      bgTitle.textContent = lineObj.title;
+      bg.appendChild(bgTitle);
+    }
     // v4.3.948: 直通标签箭头——up=▲朝上 / down=▼朝下 / middle=→朝右（与列车方向标签统一尺寸）
     var dir = lineObj.dir || "middle";
     var arr = document.createElementNS(ns, "path");
@@ -41,8 +46,8 @@
     layer.appendChild(arr);
     var txt = document.createElementNS(ns, "text");
     txt.setAttribute("x", x + 12);
-    txt.setAttribute("y", y + (mobile ? 12 : 9));
-    txt.setAttribute("font-size", mobile ? 12 : 10);
+    txt.setAttribute("y", y + (mobile ? 14 : 12));
+    txt.setAttribute("font-size", sz.fontSize || (mobile ? 11 : 9));
     txt.setAttribute("fill", lc);
     txt.setAttribute("font-weight", "700");
     txt.textContent = label;
@@ -425,38 +430,19 @@
       for (var tI = 0; tI < txLines.length; tI++) {
         if (txLines[tI] && txLines[tI].through) thruList.push(txLines[tI]);
       }
-      var thruTotalW = 0;
-      for (var tW = 0; tW < thruList.length; tW++) thruTotalW += _throughChipSize(thruList[tW], isMobileView).w;
-      if (thruList.length > 1) thruTotalW += (thruList.length - 1) * 6;
-      var _nrx = o.x - (isJunction ? 14 : 10);
-      var _nmW = (stationName || "").length * (isMobileView ? 16 : 14);
-      var _grpCx = (side === "dual" || side === "left") ? (_nrx - _nmW / 2) : o.x;
-      var thruCursor = _grpCx - thruTotalW / 2;
+      thruList = _normalizeThroughChipList(thruList);
       var _scs = o.stationCoords || [];
-      // v4.3.914: 统计各方向 chip 数与总宽，多个同方向 chip 水平并排（同方向=同一直通引出）
-      var _upCount = 0, _downCount = 0;
-      var _upTotalW = 0, _downTotalW = 0;
-      for (var _uc = 0; _uc < thruList.length; _uc++) {
-        var _us = _throughChipSize(thruList[_uc], isMobileView);
-        if (thruList[_uc].dir === "up") { _upCount++; _upTotalW += _us.w; }
-        else if (thruList[_uc].dir === "down") { _downCount++; _downTotalW += _us.w; }
-      }
-      if (_upCount > 1) _upTotalW += (_upCount - 1) * 6;
-      if (_downCount > 1) _downTotalW += (_downCount - 1) * 6;
-      // v4.3.949: up/down chip 左对齐到线路 x（不再居中在站圆点 x）
-      var _upCursor = o.x + 12;  // up chip 水平流起点（左对齐到线路 x 右侧）
-      var _downCursor = o.x + 12;
-      var _upIdx = 0, _downIdx = 0;
       for (var tI2 = 0; tI2 < thruList.length; tI2++) {
         var tt = thruList[tI2];
         var sz = _throughChipSize(tt, isMobileView);
         var lx, ly;
+        var _slot = tt._throughSlot || 0;
+        var _rowH = sz.rowH || (sz.h + 4);
+        var _leftLane = (anchor === "start" || side === "left" || side === "dual");
+        var _laneX = _leftLane ? (o.x - sz.w - 12) : (o.x + 12);
         if (tt.dir === "up") {
-          // v4.3.914: 多个同方向直通 chip 水平并排，整体居中在站圆点上方（上野东京线=东海道延长，同方向直通应并排而非堆叠）
-          lx = _upCursor;
-          _upCursor += sz.w + 6;
-          ly = o.y - sz.h - (side === "top" ? 28 : 16);
-          _upIdx++;
+          lx = _laneX;
+          ly = o.y - 16 - (_slot + 1) * _rowH;
         }
         else if (tt.dir === "down") {
           var _extLast = null;
@@ -467,18 +453,13 @@
           }
           var _scD = _extLast || { x: o.x, y: o.y };
           var _chipBot = iy0 + rows * ICON + (rows - 1) * GAP + 2;
-          // v4.3.914: 多个 down chip 水平并排，整体居中
-          lx = _downCursor;
-          _downCursor += sz.w + 6;
-          ly = Math.max(_chipBot + 4, _scD.y + sz.h + 6);
-          _downIdx++;
+          lx = _laneX;
+          ly = Math.max(_chipBot + 4, _scD.y + 8) + _slot * _rowH;
         }
         else {
-          if (anchor === "start") { lx = o.x - sz.w - 8; }
-          else { lx = o.x + (isJunction ? 14 : 10) + 4; }
-          ly = o.y - sz.h / 2 + tI2 * (sz.h + 4);
+          lx = _leftLane ? (o.x - sz.w - 12) : (o.x + (isJunction ? 18 : 14));
+          ly = o.y - sz.h / 2 + _slot * _rowH;
         }
-        thruCursor += sz.w + 6;
         lx = Math.max(2, Math.min(lx, svgW - sz.w - 2));
         ly = Math.max(2, Math.min(ly, svgH - sz.h - 2));
         _renderThroughChip(staticLayer, svgNS, lx, ly, tt, ICON, isMobileView);

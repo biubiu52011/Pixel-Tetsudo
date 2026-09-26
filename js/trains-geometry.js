@@ -76,8 +76,21 @@
     // start station, ∨ label BELOW the last station.
     var thrTopPad = 0, thrBotPad = 0;
     if (stations.length > 1) {
-      if (_throughDirForStation(lineId, stations[0])) thrTopPad = 26;
-      if (_throughDirForStation(lineId, stations[stations.length - 1])) thrBotPad = 26;
+      var _thrRowH = _isMobileView() ? 26 : 22;
+      var _throughRowsAt = function(stationId, dir) {
+        var tx = transferMap[stationId] || [];
+        var n = 0;
+        for (var _tr = 0; _tr < tx.length; _tr++) {
+          if (!tx[_tr] || !tx[_tr].through) continue;
+          var d = tx[_tr].dir || _throughDirForStation(lineId, stationId, tx[_tr].lineId) || "middle";
+          if (!dir || d === dir) n++;
+        }
+        return Math.min(n, 3);
+      };
+      var _topRows = _throughRowsAt(stations[0], "up") || (_throughDirForStation(lineId, stations[0]) === "up" ? 1 : 0);
+      var _botRows = _throughRowsAt(stations[stations.length - 1], "down") || (_throughDirForStation(lineId, stations[stations.length - 1]) === "down" ? 1 : 0);
+      if (_topRows) thrTopPad = _topRows * _thrRowH + 10;
+      if (_botRows) thrBotPad = _botRows * _thrRowH + 10;
     }
     // v4.3.847-850: 站间距标准 = 换乘图标的高 + 一点空隙（共同规则 5.4.1.5，所有画法一致）——
     // 换乘图标的高 = 行数 × 行高 ROW_H(18px/行 = ICON16+GAP2，5.4.1.11)；行数 = ⌈min(换乘数,16)÷4⌉（每行最多 4 个、行数上限 4
@@ -89,9 +102,11 @@
     var _chipPitch = function(ids) {
       var mx = ROW_H + SP_GAP;
       for (var _cp = 0; _cp < ids.length; _cp++) {
-        var _txN = (transferMap[ids[_cp]] || []).filter(function(t) { return !t.through; }).length;
+        var _txLines = transferMap[ids[_cp]] || [];
+        var _txN = _txLines.filter(function(t) { return !t.through; }).length;
+        var _thrRows = _throughChipRows(_txLines);
         var _rows = Math.ceil(Math.min(_txN, 16) / 3); // v4.3.877: 4→3（窄列 PER_ROW 降级保守值，防 chip 超高重叠）
-        mx = Math.max(mx, _rows * ROW_H + SP_GAP);
+        mx = Math.max(mx, _rows * ROW_H + SP_GAP + _thrRows * (_isMobileView() ? 26 : 22));
       }
       return mx;
     };

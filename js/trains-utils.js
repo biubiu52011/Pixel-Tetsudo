@@ -34,21 +34,70 @@ function _throughBadgeText(lineObj) {
 }
 
 function _throughShortName(lineObj, mobile) {
+  if (lineObj && lineObj.overflowCount) return "+" + lineObj.overflowCount;
   var nm = lineObj.name;
   var m = nm.match(/[（(]([^）)]*ライン)[）)]/);
   if (m) nm = m[1];
-  var maxN = mobile ? 6 : 10;
+  var maxN = mobile ? 5 : 7;
   return nm.length > maxN ? nm.slice(0, maxN) + "…" : nm;
 }
 
 function _throughChipSize(lineObj, mobile) {
   var nm = _throughShortName(lineObj, mobile);
   var throughLbl = (typeof window.t === "function" && window.t("train.through")) ? window.t("train.through") : "直通";
-  var label = throughLbl + nm;
-  var fs = mobile ? 12 : 10;
-  var w = label.length * (mobile ? 12 : 10) + 8 + (mobile ? 12 : 10);
-  var h = (mobile ? 19 : 12) + 4;
-  return { w: w + 2, h: h, label: label };
+  var label = lineObj && lineObj.overflowCount ? (throughLbl + nm) : (throughLbl + nm);
+  return {
+    w: mobile ? 118 : 96,
+    h: mobile ? 22 : 18,
+    label: label,
+    fontSize: mobile ? 11 : 9,
+    rowH: mobile ? 26 : 22
+  };
+}
+
+function _normalizeThroughChipList(items) {
+  var byDir = { up: [], down: [], middle: [] };
+  for (var i = 0; i < (items || []).length; i++) {
+    var it = items[i];
+    if (!it || !it.through) continue;
+    var dir = it.dir === "up" || it.dir === "down" ? it.dir : "middle";
+    byDir[dir].push(it);
+  }
+  var out = [];
+  ["up", "down", "middle"].forEach(function(dir) {
+    byDir[dir].sort(function(a, b) {
+      return String(a.lineId || a.name || "").localeCompare(String(b.lineId || b.name || ""));
+    });
+    var maxVisible = 2;
+    for (var j = 0; j < byDir[dir].length && j < maxVisible; j++) {
+      byDir[dir][j]._throughSlot = j;
+      byDir[dir][j]._throughDirGroup = dir;
+      out.push(byDir[dir][j]);
+    }
+    if (byDir[dir].length > maxVisible) {
+      out.push({
+        through: true,
+        dir: dir,
+        _throughSlot: maxVisible,
+        _throughDirGroup: dir,
+        overflowCount: byDir[dir].length - maxVisible,
+        name: "+" + (byDir[dir].length - maxVisible),
+        color: "#6e6e73",
+        title: byDir[dir].slice(maxVisible).map(function(x) { return x.name || x.lineId || ""; }).join(" / ")
+      });
+    }
+  });
+  return out;
+}
+
+function _throughChipRows(items, dir) {
+  var n = 0;
+  for (var i = 0; i < (items || []).length; i++) {
+    if (!items[i] || !items[i].through) continue;
+    var d = items[i].dir === "up" || items[i].dir === "down" ? items[i].dir : "middle";
+    if (!dir || d === dir) n++;
+  }
+  return Math.min(n, 3);
 }
 
 function _hexToRgba(hex, a) {
