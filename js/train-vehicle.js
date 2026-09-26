@@ -149,6 +149,9 @@
       });
     }
 
+    var _explicitVehicleInput = splitCandidates(ctx.vehicleTypeManual).length > 0 ||
+      splitCandidates(ctx.odptVehicleType).length > 0;
+
     addFrom(ctx.vehicleTypeManual, 'manual');      // S0
     addFrom(ctx.odptVehicleType, 'odpt');          // S1
     getCandidates(trainNumber).forEach(function(c) { // S2
@@ -235,10 +238,11 @@
 
     // 4) 图标：候选 → 图标库；无图标再走 S4 规则兜底
     var iconPath = chosen ? resolveIconForName(chosen, ctx.lineId) : '';
+    var _explicitUnknownVehicle = !!(chosen && _explicitVehicleInput && !iconPath);
     // v4.3.988: 直通稳定——首选候选在本视图无图时，回退遍历候选池中带公司前缀的
     // 候选按车籍解析（如 相鉄20000系 在東武視図無图 → 相模鉄道20000系），
     // 确保同一趟直通列车跨线路视图显示同一张车籍图标，杜绝 S4 视图默认图换图标。
-    if (!iconPath && orderArr.length > 1) {
+    if (!iconPath && !_explicitUnknownVehicle && orderArr.length > 1) {
       var _compRe = /鉄道|電鉄|メトロ|都営|京成|京王|京急|東急|東武|西武|相鉄|小田急|JR|モノレール|新都市|高速|埼玉|ゆりかもめ/;
       for (var _ci = 0; _ci < orderArr.length && !iconPath; _ci++) {
         var _cc = orderArr[_ci];
@@ -248,7 +252,11 @@
         }
       }
     }
-    if (!iconPath) iconPath = resolveIconByRules(ctx);
+    if (!iconPath && !_explicitUnknownVehicle) iconPath = resolveIconByRules(ctx);
+    if (!chosen && iconPath && lineId !== 'Yamanote' &&
+        /\/E235系山手線\.png$/i.test(String(iconPath))) {
+      iconPath = '';
+    }
 
     // 5) 推定名兜底（S4）：S0–S3 无依据时，用图标规则命中的图标文件名作为推定车型——
     //    LINE_ICONS/部署区间/运营商图标均为人工按 ODPT 时刻表与部署核验的线路主力车型，

@@ -1660,9 +1660,114 @@ var TOBU_VEHICLE_LOCKS = {
 };
 var TOBU_LINE_IDS = ["TobuSkytree", "TobuIsesaki", "TobuNikko", "Tojo", "Noda", "TobuUtsunomiya", "Daishi_Tobu", "Tobu_Kameido", "Ogose", "Koizumi", "Sano", "Kiryu", "Nikkoku"];
 
+var CANONICAL_VEHICLES = {
+  "jr-east-e235-0-yamanote": {
+    displayName: "E235系0番台（山手線）",
+    iconName: "E235系山手線",
+    asset: "../images/列车/JR東日本/E235系山手線.png",
+    aliases: ["E235系0番台（山手線）", "E235系山手線"]
+  },
+  "jr-east-e231-800-tozai-through": {
+    displayName: "E231系800番台（東西線直通）",
+    iconName: "E231系800番台（東西線直通）",
+    asset: "../images/列车/JR東日本/E231系800番台（東西線直通・青帯）.png",
+    aliases: ["E231系800番台（東西線直通）", "JR E231系"]
+  },
+  "toyo-rapid-2000-tozai-through": {
+    displayName: "東葉高速2000系",
+    iconName: "東葉高速鉄道2000系",
+    asset: "../images/列车/東葉高速鉄道/2000系.png",
+    aliases: ["東葉高速2000系", "東葉高速鉄道2000系"]
+  },
+  "jr-east-e233-2000-joban-local-chiyoda": {
+    displayName: "E233系2000番台",
+    iconName: "E233系2000番台",
+    asset: "../images/列车/JR東日本/E233系2000番台.png",
+    aliases: ["E233系2000番台", "JR E233系"]
+  },
+  "jr-east-e531-joban-medium": {
+    displayName: "E531系",
+    iconName: "E531系",
+    asset: "../images/列车/JR東日本/E531系.png",
+    aliases: ["E531系"]
+  },
+  "jr-east-e231-0-joban-rapid": {
+    displayName: "E231系0番台",
+    iconName: "E231系0番台",
+    asset: "../images/列车/JR東日本/E231系0番台.png",
+    aliases: ["E231系0番台"]
+  },
+  "jr-east-e233-7000-saikyo": {
+    displayName: "E233系7000番台",
+    iconName: "E233系7000番台",
+    asset: "../images/列车/JR東日本/E233系7000番台.png",
+    aliases: ["E233系7000番台"]
+  },
+  "jr-east-e233-5000-keiyo": {
+    displayName: "E233系5000番台",
+    iconName: "E233系5000番台",
+    asset: "../images/列车/JR東日本/E233系5000番台.png",
+    aliases: ["E233系5000番台"]
+  },
+  "jr-east-e231-0-musashino": {
+    displayName: "E231系0番台",
+    iconName: "E231系0番台",
+    asset: "../images/列车/JR東日本/E231系0番台.png",
+    aliases: ["E231系0番台"]
+  },
+  "jr-east-e231-1000-shonan-shinjuku": {
+    displayName: "E231系1000番台",
+    iconName: "E231系1000番台",
+    asset: "../images/列车/JR東日本/E231系1000番台.png",
+    aliases: ["E231系1000番台"]
+  },
+  "jr-east-e233-3000-shonan-shinjuku": {
+    displayName: "E233系3000番台",
+    iconName: "E233系3000番台",
+    asset: "../images/列车/JR東日本/E233系3000番台.png",
+    aliases: ["E233系3000番台"]
+  },
+  "jr-east-e257-2000-odoriko": {
+    displayName: "E257系2000番台",
+    iconName: "E257系2000番台",
+    asset: "../images/列车/JR東日本/E257系2000番台.png",
+    aliases: ["E257系2000番台"]
+  },
+  "jr-east-e257-2500-odoriko-shonan": {
+    displayName: "E257系2500番台",
+    iconName: "E257系2500番台",
+    asset: "../images/列车/JR東日本/E257系2500番台.png",
+    aliases: ["E257系2500番台"]
+  },
+  "jr-east-253-1000-nikko-kinugawa": {
+    displayName: "253系（日光・きぬがわ）",
+    iconName: "253系（日光・きぬがわ）",
+    asset: "../images/列车/JR東日本/253系（日光・きぬがわ）.png",
+    aliases: ["253系（日光・きぬがわ）", "E253系（日光・きぬがわ）", "JR東日本E253系"]
+  }
+};
+var CANONICAL_VEHICLE_ALIAS_INDEX = {};
+Object.keys(CANONICAL_VEHICLES).forEach(function(id) {
+  var rec = CANONICAL_VEHICLES[id];
+  rec.id = id;
+  CANONICAL_VEHICLE_ALIAS_INDEX[id] = rec;
+  CANONICAL_VEHICLE_ALIAS_INDEX[rec.displayName] = rec;
+  CANONICAL_VEHICLE_ALIAS_INDEX[rec.iconName] = rec;
+  (rec.aliases || []).forEach(function(alias) {
+    CANONICAL_VEHICLE_ALIAS_INDEX[alias] = rec;
+  });
+});
+
+function resolveCanonicalVehicle(name) {
+  var n = String(name || "").trim();
+  return n ? (CANONICAL_VEHICLE_ALIAS_INDEX[n] || null) : null;
+}
+
 function _canonicalVehicleIconPath(name, lineId) {
   var n = String(name || "").trim();
   if (!n || /[\/\\]/.test(n)) return null;
+  var rec = resolveCanonicalVehicle(n);
+  if (rec) return rec.asset;
   if (/^東武/.test(n)) return "../images/列车/東武鉄道/" + n + ".png";
   return null;
 }
@@ -2062,7 +2167,7 @@ TOBU_LINE_IDS.forEach(function(lineId) {
     "E127系100番台": "E127系0番台",
     "E131系": "E131系0番台",
     "E501系": "E501系（常磐線）",
-    "E253系（日光・きぬがわ）": "JR東日本E253系",
+    "E253系（日光・きぬがわ）": "253系（日光・きぬがわ）",
     "E233系湘南色": "JR東日本E233系3000番台",
     "E257系": "E257系500番台",
     "E257系（草津・四萬・あかぎ）": "E257系500番台",
@@ -2180,10 +2285,12 @@ TOBU_LINE_IDS.forEach(function(lineId) {
       var name = parts[i].trim();
       if (!name) continue;
       var _hit = '';
+      var _canonicalDisplay = resolveCanonicalVehicle(name);
+      if (_canonicalDisplay) _hit = _canonicalDisplay.displayName;
       // v4.3.996: 显示名同步线路锁定——同名裸型号按线路展开涂装/车籍
       // （"211系"在中央東線→"211系長野色"、"E233系"在外房→"E233系5000番台"），
       // 与 resolveVehicleIcon 图标决策一致，杜绝"名=湘南色、图=長野色"错配。
-      if (lineId && LINE_VEHICLE_OVERRIDES[lineId]) {
+      if (!_hit && lineId && LINE_VEHICLE_OVERRIDES[lineId]) {
         var _ov2 = LINE_VEHICLE_OVERRIDES[lineId];
         var _ovt2 = _ov2[name];
         if (!_ovt2) {
@@ -2328,6 +2435,8 @@ TOBU_LINE_IDS.forEach(function(lineId) {
     getTrainClass: getTrainClass,
     resolveVehicleIcon: resolveVehicleIcon,
     resolveVehicleDisplayName: resolveVehicleDisplayName,
+    resolveCanonicalVehicle: resolveCanonicalVehicle,
+    CANONICAL_VEHICLES: CANONICAL_VEHICLES,
     VEHICLE_NAME_TO_ICON: VEHICLE_NAME_TO_ICON,
     VEHICLE_FLEET_WEIGHTS: VEHICLE_FLEET_WEIGHTS,
     FLEET_ICON_POOLS: FLEET_ICON_POOLS,
