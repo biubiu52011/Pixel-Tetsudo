@@ -56,7 +56,7 @@ function getRealtimePositions(lineId) {
         all.push(np);
       }
     }
-    return all;
+    return _dedupeTrainPositions(all, lineId);
   }
   var _src = (window.RailwayDB && window.RailwayDB.getAllLines) ? window.RailwayDB.getAllLines() : getLinesData();
   var _brs = [];
@@ -80,9 +80,74 @@ function getRealtimePositions(lineId) {
         _all2.push(_np2);
       }
     }
-    return _all2;
+    return _dedupeTrainPositions(_all2, lineId);
   }
-  return positions;
+  return _dedupeTrainPositions(positions, lineId);
+}
+
+function _positionSourceRank(p) {
+  if (!p) return 9;
+  if (p.positionSource === "realtime-api" || p.estimated === false) return 0;
+  if (p.positionSource === "train-timetable") return 1;
+  if (p.positionSource === "station-timetable") return 2;
+  return p.estimated === true ? 1 : 0;
+}
+
+function _trainIdentityKey(p) {
+  if (!p) return "";
+  var id = p.trainNumber || p.trainId || "";
+  id = String(id).trim();
+  if (!id) return "";
+  return id.replace(/^odpt\.Train:/, "")
+           .replace(/^odpt\.TrainTimetable:/, "")
+           .replace(/^odpt\.[^:]+:/, "")
+           .replace(/[@#].*$/, "")
+           .toUpperCase();
+}
+
+function _positionCompleteness(p) {
+  if (!p) return 0;
+  var score = 0;
+  if (p.segmentToIndex != null) score += 4;
+  if (p.segmentProgress != null) score += 3;
+  if (p.stationId) score += 2;
+  if (p.destinationStation) score += 1;
+  return score;
+}
+
+function _preferTrainPosition(next, cur) {
+  if (!cur) return next;
+  var nr = _positionSourceRank(next);
+  var cr = _positionSourceRank(cur);
+  if (nr !== cr) return nr < cr ? next : cur;
+  var nc = _positionCompleteness(next);
+  var cc = _positionCompleteness(cur);
+  if (nc !== cc) return nc > cc ? next : cur;
+  if (!!next.fusionLineId !== !!cur.fusionLineId) return next.fusionLineId ? cur : next;
+  return cur;
+}
+
+function _dedupeTrainPositions(positions, lineId) {
+  positions = positions || [];
+  var byId = {};
+  var order = [];
+  var out = [];
+  for (var i = 0; i < positions.length; i++) {
+    var p = positions[i];
+    var key = _trainIdentityKey(p);
+    if (!key) {
+      out.push(p);
+      continue;
+    }
+    if (!byId[key]) {
+      byId[key] = p;
+      order.push(key);
+    } else {
+      byId[key] = _preferTrainPosition(p, byId[key]);
+    }
+  }
+  for (var j = 0; j < order.length; j++) out.push(byId[order[j]]);
+  return out;
 }
 
 function _getBasePositions(lineId) {
