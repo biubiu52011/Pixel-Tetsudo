@@ -1703,6 +1703,12 @@ var CANONICAL_VEHICLES = {
     asset: "../images/列车/JR東日本/E233系7000番台.png",
     aliases: ["E233系7000番台"]
   },
+  "jr-east-209-3500-hachiko-kawagoe": {
+    displayName: "209系3500番台",
+    iconName: "E209系3500番台",
+    asset: "../images/列车/JR東日本/E209系3500番台.png",
+    aliases: ["209系3500番台", "E209系3500番台"]
+  },
   "jr-east-e233-5000-keiyo": {
     displayName: "E233系5000番台",
     iconName: "E233系5000番台",

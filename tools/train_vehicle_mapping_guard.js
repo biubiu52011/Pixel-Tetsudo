@@ -135,7 +135,9 @@ function main() {
   expectMap(win, 'Joban special rapid P0', 'Joban', 'SpecialRapid', 'E531系', ['E231系1000番台', 'E233系3000番台']);
   expectMap(win, 'Keiyo local P1', 'Keiyo', 'Local', 'E233系5000番台', ['E231系900番台']);
   expectMap(win, 'Musashino local P1', 'Musashino', 'Local', 'E231系0番台', ['E231系900番台']);
+  expectMap(win, 'Hachiko local Phase3B', 'Hachiko', 'Local', '209系3500番台', ['209系3000番台']);
   expectMap(win, 'Kawagoe local P1', 'Kawagoe', 'Local', 'E233系7000番台', ['209系3100番台', '209系3000番台']);
+  expectMap(win, 'KawagoeWest local Phase3B', 'KawagoeWest', 'Local', '209系3500番台', ['209系3000番台']);
   expectMap(win, 'ShonanShinjuku rapid P0', 'ShonanShinjuku', 'Rapid', 'E231系1000番台 / E233系3000番台', ['E235系1000番台']);
   expectMap(win, 'Ito Odoriko P1', 'Ito', 'LimitedExpress', 'E257系2000番台 / E257系2500番台', ['E257系1500番台']);
   expectMap(win, 'UtsunomiyaJR Nikko P1', 'UtsunomiyaJR', 'LimitedExpress', '253系（日光・きぬがわ）', ['E253系']);
@@ -143,6 +145,7 @@ function main() {
   expectIcon(win, 'E235 0 Yamanote', 'E235系0番台（山手線）', 'Yamanote', 'E235系山手線.png', ['E235系1000番台.png', 'E235系総武中央線.png']);
   expectIcon(win, 'E235 1000 Yokosuka', 'E235系1000番台', 'Yokosuka', 'E235系1000番台.png', ['E235系山手線.png', 'E235系総武中央線.png']);
   expectIcon(win, 'Tozai E231-800', 'E231系800番台（東西線直通）', 'Tozai', 'E231系800番台（東西線直通・青帯）.png', ['E231系総武中央線.png']);
+  expectIcon(win, 'Hachiko 209-3500', '209系3500番台', 'Hachiko', 'E209系3500番台.png', ['E209系（京葉線）.png']);
   expectIcon(win, 'Nikko formal 253', '253系（日光・きぬがわ）', 'UtsunomiyaJR', '253系（日光・きぬがわ）.png', ['E253系.png']);
 
   const canonical = win.TrainIcons.resolveCanonicalVehicle('jr-east-e235-0-yamanote');
@@ -167,6 +170,30 @@ function main() {
     operator: 'JR-East',
     trainType: trainType('JR-East', 'Rapid')
   }, 'E231系1000番台', 'E231系1000番台.png', ['E235系1000番台.png']);
+
+  expectRuntime(win, 'Hachiko runtime Phase3B', {
+    lineId: 'Hachiko',
+    operator: 'JR-East',
+    trainType: trainType('JR-East', 'Local')
+  }, '209系3500番台', 'E209系3500番台.png', ['E209系（京葉線）.png']);
+
+  expectRuntime(win, 'KawagoeWest runtime Phase3B', {
+    lineId: 'KawagoeWest',
+    operator: 'JR-East',
+    trainType: trainType('JR-East', 'Local')
+  }, '209系3500番台', 'E209系3500番台.png', ['E209系（京葉線）.png']);
+
+  expectRuntime(win, 'Yokosuka local accepted safe behavior', {
+    lineId: 'Yokosuka',
+    operator: 'JR-East',
+    trainType: trainType('JR-East', 'Local')
+  }, 'E235系1000番台', 'E235系1000番台.png', ['E235系山手線.png', 'E235系総武中央線.png']);
+
+  expectRuntime(win, 'Yokosuka rapid accepted safe behavior', {
+    lineId: 'Yokosuka',
+    operator: 'JR-East',
+    trainType: trainType('JR-East', 'Rapid')
+  }, 'E235系1000番台', 'E235系1000番台.png', ['E235系山手線.png', 'E235系総武中央線.png']);
 
   expectRuntime(win, 'ABSENT vehicle known route default', {
     lineId: 'Yamanote',

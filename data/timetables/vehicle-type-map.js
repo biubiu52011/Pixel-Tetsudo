@@ -952,7 +952,7 @@
       'LimitedExpress': { 'default': 'E353系（あずさ・かいじ）' },
     },
     'Hachiko': {
-      'Local': { 'default': '209系3000番台' },
+      'Local': { 'default': '209系3500番台' },
     },
     'Ito': {
       'Local': { 'default': 'E231系1000番台 / 伊豆急行8000系' },
@@ -980,7 +980,7 @@
       'CommuterRapid': { 'default': 'E233系7000番台', 'Sotetsu': '相鉄12000系', 'TWR': 'E233系7000番台 / 71-000形 / 70-000形' },
     },
     'KawagoeWest': {
-      'Local': { 'default': '209系3000番台' },
+      'Local': { 'default': '209系3500番台' },
     },
     'Keiyo': {
       'Local': { 'default': 'E233系5000番台' },
