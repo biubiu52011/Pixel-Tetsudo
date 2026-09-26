@@ -19,6 +19,7 @@ const path = require("path");
 
 const ROOT = path.resolve(__dirname, "..");
 const DATA_FILE = path.join(ROOT, "data/core/tourism-data.file.js");
+const TERM_MAP_FILE = path.join(ROOT, "data/core/i18n-term-map.json");
 
 function readData() {
   const raw = fs.readFileSync(DATA_FILE, "utf8");
@@ -42,25 +43,11 @@ function shortFieldRatioRange() {
   return [0.25, 4];
 }
 
-// Standard term replacements for short UI-ish fields.
-const TERM_MAP = {
-  ja: {
-    "一人当たり": "一人あたり",
-    "一人当り": "一人あたり"
-  },
-  zh: {
-    "预算": "人均",
-    "平均预算": "人均"
-  },
-  en: {
-    "per person": "per person",
-    "Per Person": "per person"
-  },
-  ko: {
-    "1인당": "1인당",
-    "인당": "1인당"
-  }
-};
+function readTermMap() {
+  return JSON.parse(fs.readFileSync(TERM_MAP_FILE, "utf8"));
+}
+
+const TERM_MAP = readTermMap();
 
 function normalizeTerms(value, lang) {
   if (!value) return value;
