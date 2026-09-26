@@ -4,6 +4,7 @@ const vm = require('vm');
 
 const ROOT = path.resolve(__dirname, '..');
 const LANGS = ['en', 'zh', 'ja', 'ko'];
+const pageSync = require('./sync_i18n_pages.js');
 
 function read(rel) {
   return fs.readFileSync(path.join(ROOT, rel), 'utf8');
@@ -152,6 +153,13 @@ function main() {
   collectPageI18nKeys().forEach(({ file, key }) => {
     const missing = LANGS.filter((lang) => !(translations[lang] || {}).hasOwnProperty(key));
     if (missing.length) errors.push({ type: 'page-i18n-key-missing', file, key, missing });
+  });
+
+  pageSync.collectPageEntries().forEach((entry) => {
+    const expected = translations.ja && translations.ja[entry.key];
+    if (expected && entry.value && expected !== entry.value) {
+      errors.push({ type: 'page-ja-fallback-drift', file: entry.file, kind: entry.kind, key: entry.key, page: entry.value, translationsJa: expected });
+    }
   });
 
   const semanticChecks = [

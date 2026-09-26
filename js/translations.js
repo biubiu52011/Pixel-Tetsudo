@@ -548,7 +548,7 @@
     },
     ja: {
       "app.footer": "\u00a9 2026 Pixel Tetsudo",
-      "app.title": "ピクセル鉄道",
+      "app.title": "Pixel Tetsudo",
       "detail.about": "\u6982\u8981",
       "detail.basic_info": "\u57fa\u672c\u60c5\u5831",
       "detail.at_station": "\u99c5\u5185",
