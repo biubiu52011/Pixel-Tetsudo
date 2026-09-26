@@ -1,0 +1,1165 @@
+{
+  "date": "2026-09-27",
+  "root_cause": "production_baseline.json was last synchronized to the 2026-09-15 railway snapshot and did not follow later canonical railway expansions plus station-id normalization work.",
+  "baseline_origin": {
+    "baseline_version": "4.3.500+",
+    "created_at": "2026-08-27T05:16:56.717180",
+    "last_updated": "2026-09-15",
+    "canonical_sha256": "7974A2940E0C25AAD051BC6BE1E1B52DBCECD8E20345B07F582DE74C0F70C359",
+    "effective_commit_with_matching_railway_sha": "1227b6d033cd79869530b05810899b879138f7fb",
+    "latest_commit_with_same_railway_sha_before_expansion": "fbbbcb0d4ceb5f93ded441012fd294b14a8ec9f2"
+  },
+  "new_entities_are_expected_expansion": {
+    "new_lines_count_before_migration": 54,
+    "new_stations_count_before_relation_repair": 1330,
+    "notes": [
+      "New lines are from later JR/Shinkansen/monorail/private-line canonical additions.",
+      "Station gain is dominated by those same later railway database expansions."
+    ]
+  },
+  "lost_station_id_audit": [
+    {
+      "old_id": "Aizu-Minamiwa",
+      "current_id": "Aizu-Minamiwa",
+      "status": "RESTORED",
+      "reason": "baseline entity existed in Tadami order but was missing as a station object; restored with inferred coordinates"
+    },
+    {
+      "old_id": "Aizuwakamatsu",
+      "current_id": "Aizu-Wakamatsu",
+      "status": "NORMALIZED",
+      "reason": "hyphen/case normalization in Tadami"
+    },
+    {
+      "old_id": "Aomori-Chuo",
+      "current_id": "Aburakawa",
+      "status": "REPLACED",
+      "reason": "old Tsugaru order contained an incorrect station after Aomori; current canonical order uses Aburakawa"
+    },
+    {
+      "old_id": "Ashizawa",
+      "current_id": "Ashizawa",
+      "status": "RESTORED",
+      "reason": "baseline entity existed in Kitakami order but was missing as a station object; restored with inferred coordinates"
+    },
+    {
+      "old_id": "Atago-2",
+      "current_id": "Atago-Miyagi",
+      "status": "NORMALIZED",
+      "reason": "ambiguous duplicate station id normalized for TohokuMain"
+    },
+    {
+      "old_id": "Douzawa",
+      "current_id": "Douzawa",
+      "status": "RESTORED",
+      "reason": "baseline entity existed in Kamaishi order but was missing as a station object; restored with inferred coordinates"
+    },
+    {
+      "old_id": "Echigo-Sudara",
+      "current_id": "Echigo-Suhara",
+      "status": "NORMALIZED",
+      "reason": "typo normalization in Yonezawa/Yonesaka context"
+    },
+    {
+      "old_id": "Eda-Tokyu",
+      "current_id": "Eda",
+      "status": "NORMALIZED",
+      "reason": "operator suffix removed in TokyuDenEn"
+    },
+    {
+      "old_id": "Futa-ba",
+      "current_id": "Futaba",
+      "status": "NORMALIZED",
+      "reason": "hyphen normalization"
+    },
+    {
+      "old_id": "Futako-tamagawa",
+      "current_id": "Futako-Tamagawa",
+      "status": "NORMALIZED",
+      "reason": "case normalization"
+    },
+    {
+      "old_id": "Ginza-hitchome",
+      "current_id": "Ginza-Itchome",
+      "status": "NORMALIZED",
+      "reason": "romanization typo normalization"
+    },
+    {
+      "old_id": "Hacchobori",
+      "current_id": "Hatchobori",
+      "status": "NORMALIZED",
+      "reason": "romanization normalization"
+    },
+    {
+      "old_id": "Hikaridai",
+      "current_id": "Hikarigaoka",
+      "status": "REPLACED",
+      "reason": "orphan baseline id; replaced by current canonical Hikarigaoka station where the old spelling was not referenced by any active line"
+    },
+    {
+      "old_id": "Hongosanchome",
+      "current_id": "Hongo-Sanchome",
+      "status": "NORMALIZED",
+      "reason": "hyphen/case normalization in Oedo"
+    },
+    {
+      "old_id": "Imaichi",
+      "current_id": "Shimo-Imaichi",
+      "status": "REPLACED",
+      "reason": "orphan baseline id; current canonical Nikko area uses specific Shimo-Imaichi/Kami-Imaichi station ids"
+    },
+    {
+      "old_id": "Jatenda",
+      "current_id": "Jatenda",
+      "status": "RESTORED",
+      "reason": "baseline entity existed in SensekiTohoku order but was missing as a station object; restored with inferred coordinates"
+    },
+    {
+      "old_id": "Juni",
+      "current_id": "Juni",
+      "status": "RESTORED",
+      "reason": "baseline entity existed in Kounan/Hanamawa order but was missing as a station object; restored with inferred coordinates"
+    },
+    {
+      "old_id": "Kaimen",
+      "current_id": "Kaimen",
+      "status": "RESTORED",
+      "reason": "baseline entity existed in Komii/Koumi order but was missing as a station object; restored with inferred coordinates"
+    },
+    {
+      "old_id": "Kokusai-Tenjijo",
+      "current_id": "KokusaiTenjijo",
+      "status": "NORMALIZED",
+      "reason": "hyphen normalization in Rinkai"
+    },
+    {
+      "old_id": "Kommata",
+      "current_id": "Kommata",
+      "status": "RESTORED",
+      "reason": "baseline entity existed in BanetsuEast order but was missing as a station object; restored with inferred coordinates"
+    },
+    {
+      "old_id": "Kunai",
+      "current_id": "Kunai",
+      "status": "RESTORED",
+      "reason": "baseline entity existed in Shinetsu order but was missing as a station object; restored with inferred coordinates"
+    },
+    {
+      "old_id": "Madarame",
+      "current_id": "Okunai",
+      "status": "REPLACED",
+      "reason": "old Tsugaru order contained incorrect/obsolete station id; current canonical sequence replaces that position with Okunai"
+    },
+    {
+      "old_id": "Makuhari-Hong",
+      "current_id": "Makuharihongo",
+      "status": "NORMALIZED",
+      "reason": "abbreviated id normalized"
+    },
+    {
+      "old_id": "Makuta",
+      "current_id": "Uma_Kita",
+      "status": "REPLACED",
+      "reason": "known baseline limitation: erroneous Makuta phantom id, real canonical station is Uma_Kita"
+    },
+    {
+      "old_id": "Minami-Nagase",
+      "current_id": "Minami-Nagareyama",
+      "status": "RENAMED",
+      "reason": "incorrect TsukubaExpress id replaced by canonical Minami-Nagareyama"
+    },
+    {
+      "old_id": "Minami-No",
+      "current_id": "Minamino",
+      "status": "NORMALIZED",
+      "reason": "hyphen normalization"
+    },
+    {
+      "old_id": "Miyanomachi",
+      "current_id": "Miyanosaka",
+      "status": "REPLACED",
+      "reason": "TokyuSetagaya position 6 corrected to Miyanosaka"
+    },
+    {
+      "old_id": "Moto-sumiyoshi",
+      "current_id": "Motosumiyoshi",
+      "status": "NORMALIZED",
+      "reason": "hyphen normalization in TokyuMeguro"
+    },
+    {
+      "old_id": "Musashi-Shintada",
+      "current_id": "Musashi-Nitta",
+      "status": "REPLACED",
+      "reason": "TokyuTamagawa station id corrected to Musashi-Nitta"
+    },
+    {
+      "old_id": "Nagase-Otakanomori",
+      "current_id": "Nagareyama-Otakanomori",
+      "status": "RENAMED",
+      "reason": "incorrect TsukubaExpress id replaced by canonical Nagareyama-Otakanomori"
+    },
+    {
+      "old_id": "Narushima-Yonezawa",
+      "current_id": "Narushima-Yonezawa",
+      "status": "RESTORED",
+      "reason": "baseline entity existed in Yonezawa order but was missing as a station object; restored with inferred coordinates"
+    },
+    {
+      "old_id": "Nihonbashi",
+      "current_id": "Nihombashi",
+      "status": "NORMALIZED",
+      "reason": "romanization normalization"
+    },
+    {
+      "old_id": "Nishi-fuchu",
+      "current_id": "Nishifu",
+      "status": "REPLACED",
+      "reason": "orphan baseline id; current canonical area station id is Nishifu"
+    },
+    {
+      "old_id": "Nishi-takahashimadaira",
+      "current_id": "Nishi-Takashimadaira",
+      "status": "NORMALIZED",
+      "reason": "case normalization"
+    },
+    {
+      "old_id": "Nishi_Tokorozawa",
+      "current_id": "Nishi-Tokorozawa",
+      "status": "NORMALIZED",
+      "reason": "separator normalization in Seibu_Sayama"
+    },
+    {
+      "old_id": "Oshida",
+      "current_id": "Oishida",
+      "status": "REPLACED",
+      "reason": "orphan baseline id matched to current canonical Oishida spelling"
+    },
+    {
+      "old_id": "Ozawanai",
+      "current_id": "Okawadai",
+      "status": "REPLACED",
+      "reason": "old Tsugaru order contained incorrect/obsolete station id; current canonical sequence replaces that position with Okawadai"
+    },
+    {
+      "old_id": "Rikuzen-Koizumi",
+      "current_id": "Rikuzen-Koisumi",
+      "status": "NORMALIZED",
+      "reason": "romanization normalization in Ofunato/BRT context"
+    },
+    {
+      "old_id": "Sago",
+      "current_id": "Sasago",
+      "status": "REPLACED",
+      "reason": "orphan baseline typo matched to canonical Sasago"
+    },
+    {
+      "old_id": "Shimotakaido",
+      "current_id": "Shimo-takaido",
+      "status": "NORMALIZED",
+      "reason": "hyphen normalization in KeioMain"
+    },
+    {
+      "old_id": "Shin-Marunouchi",
+      "current_id": null,
+      "status": "REPLACED",
+      "reason": "orphan baseline phantom id not referenced by any active relation; removed from canonical station set during cleanup"
+    },
+    {
+      "old_id": "Shin-maruko",
+      "current_id": "Shin-Maruko",
+      "status": "NORMALIZED",
+      "reason": "case normalization in TokyuMeguro"
+    },
+    {
+      "old_id": "Shinbashi",
+      "current_id": "Shimbashi",
+      "status": "NORMALIZED",
+      "reason": "romanization normalization"
+    },
+    {
+      "old_id": "Sotsu-Shin-Yokohama",
+      "current_id": "Shin-Yokohama",
+      "status": "REPLACED",
+      "reason": "orphan baseline typo replaced by canonical Shin-Yokohama"
+    },
+    {
+      "old_id": "Takine",
+      "current_id": "Takine",
+      "status": "RESTORED",
+      "reason": "baseline entity existed in BanetsuEast order but was missing as a station object; restored with inferred coordinates"
+    },
+    {
+      "old_id": "Tama-Dobutsu-koen",
+      "current_id": "Tama-Dobutsukoen",
+      "status": "NORMALIZED",
+      "reason": "hyphen normalization in KeioZoo"
+    },
+    {
+      "old_id": "Tamagawa_Josui",
+      "current_id": "Tamagawa-Josui",
+      "status": "NORMALIZED",
+      "reason": "separator normalization in Haijima"
+    },
+    {
+      "old_id": "Tenkubashi",
+      "current_id": "Tenku-Bashi",
+      "status": "NORMALIZED",
+      "reason": "hyphen normalization in TokyoMonorail"
+    },
+    {
+      "old_id": "Tennozu-Ise",
+      "current_id": "Tennozu Isle",
+      "status": "RENAMED",
+      "reason": "Rinkai/Tokyo Monorail station id corrected to Tennozu Isle"
+    },
+    {
+      "old_id": "Tokyo-Showa-Center",
+      "current_id": "KokusaiTenjijo",
+      "status": "REPLACED",
+      "reason": "old Rinkai station position 2 corrected to KokusaiTenjijo"
+    },
+    {
+      "old_id": "Waga",
+      "current_id": "Waga",
+      "status": "RESTORED",
+      "reason": "baseline entity existed in Kitakami order but was missing as a station object; restored with inferred coordinates"
+    },
+    {
+      "old_id": "Yaguchi-Watari",
+      "current_id": "Yaguchi-No-Watashi",
+      "status": "NORMALIZED",
+      "reason": "TokyuTamagawa station id normalized to canonical romanization"
+    }
+  ],
+  "relation_mismatch_audit_before_fix": {
+    "lineStationOrder_to_stationLines_count": 133,
+    "stationLines_to_lineStationOrder_count": 25,
+    "lineStationOrder_to_stationLines": [
+      {
+        "line_id": "Joban",
+        "station_id": "Fujishiro",
+        "cause": "data structure expansion missing reverse relation"
+      },
+      {
+        "line_id": "Joban",
+        "station_id": "Ryugasakishi",
+        "cause": "station ID migration"
+      },
+      {
+        "line_id": "Joban",
+        "station_id": "Ushiku",
+        "cause": "data structure expansion missing reverse relation"
+      },
+      {
+        "line_id": "Joban",
+        "station_id": "Hitachino-Ushiku",
+        "cause": "data structure expansion missing reverse relation"
+      },
+      {
+        "line_id": "Joban",
+        "station_id": "Arakawaoki",
+        "cause": "data structure expansion missing reverse relation"
+      },
+      {
+        "line_id": "Joban",
+        "station_id": "Tsuchiura",
+        "cause": "data structure expansion missing reverse relation"
+      },
+      {
+        "line_id": "ShonanShinjuku",
+        "station_id": "Nishi-Oi",
+        "cause": "data structure expansion missing reverse relation"
+      },
+      {
+        "line_id": "ShonanShinjuku",
+        "station_id": "Kamonomiya",
+        "cause": "data structure expansion missing reverse relation"
+      },
+      {
+        "line_id": "Tokaido",
+        "station_id": "Tsujido",
+        "cause": "data structure expansion missing reverse relation"
+      },
+      {
+        "line_id": "Tokaido",
+        "station_id": "Ninomiya",
+        "cause": "data structure expansion missing reverse relation"
+      },
+      {
+        "line_id": "Tokaido",
+        "station_id": "Kamonomiya",
+        "cause": "data structure expansion missing reverse relation"
+      },
+      {
+        "line_id": "Tokaido",
+        "station_id": "Hayakawa",
+        "cause": "data structure expansion missing reverse relation"
+      },
+      {
+        "line_id": "Tokaido",
+        "station_id": "Nebukawa",
+        "cause": "data structure expansion missing reverse relation"
+      },
+      {
+        "line_id": "Tokaido",
+        "station_id": "Manazuru",
+        "cause": "data structure expansion missing reverse relation"
+      },
+      {
+        "line_id": "Tokaido",
+        "station_id": "Yugawara",
+        "cause": "data structure expansion missing reverse relation"
+      },
+      {
+        "line_id": "Oedo",
+        "station_id": "Hongosanchome",
+        "cause": "station ID migration"
+      },
+      {
+        "line_id": "BanetsuEast",
+        "station_id": "Kommata",
+        "cause": "station ID migration"
+      },
+      {
+        "line_id": "BanetsuEast",
+        "station_id": "Takine",
+        "cause": "station ID migration"
+      },
+      {
+        "line_id": "Haijima",
+        "station_id": "Tamagawa_Josui",
+        "cause": "station ID migration"
+      },
+      {
+        "line_id": "Kamaishi",
+        "station_id": "Douzawa",
+        "cause": "station ID migration"
+      },
+      {
+        "line_id": "Kitakami",
+        "station_id": "Waga",
+        "cause": "station ID migration"
+      },
+      {
+        "line_id": "Kitakami",
+        "station_id": "Ashizawa",
+        "cause": "station ID migration"
+      },
+      {
+        "line_id": "KeioMain",
+        "station_id": "Shimotakaido",
+        "cause": "station ID migration"
+      },
+      {
+        "line_id": "KeioZoo",
+        "station_id": "Tama-Dobutsu-koen",
+        "cause": "station ID migration"
+      },
+      {
+        "line_id": "Komii",
+        "station_id": "Kaimen",
+        "cause": "station ID migration"
+      },
+      {
+        "line_id": "Kounan",
+        "station_id": "Juni",
+        "cause": "station ID migration"
+      },
+      {
+        "line_id": "Ofunato",
+        "station_id": "Rikuzen-Koizumi",
+        "cause": "station ID migration"
+      },
+      {
+        "line_id": "Rinkai",
+        "station_id": "Tennozu-Ise",
+        "cause": "station ID migration"
+      },
+      {
+        "line_id": "Seibu_Sayama",
+        "station_id": "Nishi_Tokorozawa",
+        "cause": "station ID migration"
+      },
+      {
+        "line_id": "SensekiTohoku",
+        "station_id": "Kobe",
+        "cause": "data structure expansion missing reverse relation"
+      },
+      {
+        "line_id": "SensekiTohoku",
+        "station_id": "Jatenda",
+        "cause": "station ID migration"
+      },
+      {
+        "line_id": "Shinetsu",
+        "station_id": "Kunai",
+        "cause": "station ID migration"
+      },
+      {
+        "line_id": "TohokuMain",
+        "station_id": "Atago-2",
+        "cause": "station ID migration"
+      },
+      {
+        "line_id": "Tsugaru",
+        "station_id": "Tsugaru-Hamana",
+        "cause": "station ID migration"
+      },
+      {
+        "line_id": "TsukubaExpress",
+        "station_id": "Minami-Nagase",
+        "cause": "station ID migration"
+      },
+      {
+        "line_id": "TsukubaExpress",
+        "station_id": "Nagase-Otakanomori",
+        "cause": "station ID migration"
+      },
+      {
+        "line_id": "Yonezawa",
+        "station_id": "Narushima-Yonezawa",
+        "cause": "station ID migration"
+      },
+      {
+        "line_id": "Yonezawa",
+        "station_id": "Echigo-Sudara",
+        "cause": "station ID migration"
+      },
+      {
+        "line_id": "TokyuMeguro",
+        "station_id": "Shin-maruko",
+        "cause": "station ID migration"
+      },
+      {
+        "line_id": "TokyuMeguro",
+        "station_id": "Moto-sumiyoshi",
+        "cause": "station ID migration"
+      },
+      {
+        "line_id": "Hachiko",
+        "station_id": "Ogawamachi",
+        "cause": "data structure expansion missing reverse relation"
+      },
+      {
+        "line_id": "TokyoMonorail",
+        "station_id": "Tenkubashi",
+        "cause": "station ID migration"
+      },
+      {
+        "line_id": "Tadami",
+        "station_id": "Aizuwakamatsu",
+        "cause": "station ID migration"
+      },
+      {
+        "line_id": "Tadami",
+        "station_id": "Aizu-Minamiwa",
+        "cause": "station ID migration"
+      },
+      {
+        "line_id": "UenoTokyo",
+        "station_id": "Saitama-Shintoshin",
+        "cause": "data structure expansion missing reverse relation"
+      },
+      {
+        "line_id": "UenoTokyo",
+        "station_id": "Akabane",
+        "cause": "data structure expansion missing reverse relation"
+      },
+      {
+        "line_id": "UenoTokyo",
+        "station_id": "Oku",
+        "cause": "data structure expansion missing reverse relation"
+      },
+      {
+        "line_id": "UenoTokyo",
+        "station_id": "Shimbashi",
+        "cause": "data structure expansion missing reverse relation"
+      },
+      {
+        "line_id": "UenoTokyo",
+        "station_id": "Totsuka",
+        "cause": "data structure expansion missing reverse relation"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Tsuchiura",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Kandatsu",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Takahama",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Ishioka",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Hatori",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Iwama",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Tomobe",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Uchihara",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Akatsuka",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Kairakuen",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Mito",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Katsuta",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Sawa",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Tokai",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Omika",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Hitachi-Taga",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Hitachi",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Kobuki",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Juo",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Takahagi",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Naka-Minato",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Isohara",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Otsukoh",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Nakoso",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Ueda",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Izumi",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Yumoto",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Uchigo",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Iwaki",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Kusano",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Yotsukura",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Kumanoyu",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Tsukuda",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Hirono",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "J-Village",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Kido",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Tatsuta",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Tomioka",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Yonomori",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Ono",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Futaba",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Namie",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Mamoto",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Odaka",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Matsukawa",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Haranomachi",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Kashima",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Soma",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Komagamine",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Shinchi",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Sakamoto",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Yamashita",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Hama-Yoshida",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Watari",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Okuma",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Iwanuma",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "JobanMedium",
+        "station_id": "Sendai",
+        "cause": "line ID migration / stale non-canonical line"
+      },
+      {
+        "line_id": "ChibaMonorail1",
+        "station_id": "ChibaMinato",
+        "cause": "new line expansion missing reverse relation"
+      },
+      {
+        "line_id": "ChibaMonorail1",
+        "station_id": "Shiyakusho",
+        "cause": "new line expansion missing reverse relation"
+      },
+      {
+        "line_id": "ChibaMonorail1",
+        "station_id": "Chiba",
+        "cause": "new line expansion missing reverse relation"
+      },
+      {
+        "line_id": "ChibaMonorail1",
+        "station_id": "Sakaecho",
+        "cause": "new line expansion missing reverse relation"
+      },
+      {
+        "line_id": "ChibaMonorail1",
+        "station_id": "YoshikawaKoen",
+        "cause": "new line expansion missing reverse relation"
+      },
+      {
+        "line_id": "ChibaMonorail1",
+        "station_id": "KenchoMae",
+        "cause": "new line expansion missing reverse relation"
+      },
+      {
+        "line_id": "ChibaMonorail2",
+        "station_id": "Chiba",
+        "cause": "new line expansion missing reverse relation"
+      },
+      {
+        "line_id": "ChibaMonorail2",
+        "station_id": "ChibaKoen",
+        "cause": "new line expansion missing reverse relation"
+      },
+      {
+        "line_id": "ChibaMonorail2",
+        "station_id": "Sakusabe",
+        "cause": "new line expansion missing reverse relation"
+      },
+      {
+        "line_id": "ChibaMonorail2",
+        "station_id": "Tendai",
+        "cause": "new line expansion missing reverse relation"
+      },
+      {
+        "line_id": "ChibaMonorail2",
+        "station_id": "Anagawa",
+        "cause": "new line expansion missing reverse relation"
+      },
+      {
+        "line_id": "ChibaMonorail2",
+        "station_id": "SportsCenter",
+        "cause": "new line expansion missing reverse relation"
+      },
+      {
+        "line_id": "ChibaMonorail2",
+        "station_id": "DobutsuKoen",
+        "cause": "new line expansion missing reverse relation"
+      },
+      {
+        "line_id": "ChibaMonorail2",
+        "station_id": "Mitsuwadai",
+        "cause": "new line expansion missing reverse relation"
+      },
+      {
+        "line_id": "ChibaMonorail2",
+        "station_id": "Tsuga",
+        "cause": "new line expansion missing reverse relation"
+      },
+      {
+        "line_id": "ChibaMonorail2",
+        "station_id": "Sakuragi",
+        "cause": "new line expansion missing reverse relation"
+      },
+      {
+        "line_id": "ChibaMonorail2",
+        "station_id": "Kokuradai",
+        "cause": "new line expansion missing reverse relation"
+      },
+      {
+        "line_id": "ChibaMonorail2",
+        "station_id": "ChishirodaiKita",
+        "cause": "new line expansion missing reverse relation"
+      },
+      {
+        "line_id": "ChibaMonorail2",
+        "station_id": "Chishirodai",
+        "cause": "new line expansion missing reverse relation"
+      },
+      {
+        "line_id": "ShonanMonorail",
+        "station_id": "Ofuna",
+        "cause": "new line expansion missing reverse relation"
+      },
+      {
+        "line_id": "ShonanMonorail",
+        "station_id": "Fujimicho",
+        "cause": "new line expansion missing reverse relation"
+      },
+      {
+        "line_id": "ShonanMonorail",
+        "station_id": "ShonanMachiya",
+        "cause": "new line expansion missing reverse relation"
+      },
+      {
+        "line_id": "ShonanMonorail",
+        "station_id": "ShonanFukasawa",
+        "cause": "new line expansion missing reverse relation"
+      },
+      {
+        "line_id": "ShonanMonorail",
+        "station_id": "NishiKamakura",
+        "cause": "new line expansion missing reverse relation"
+      },
+      {
+        "line_id": "ShonanMonorail",
+        "station_id": "Kataseyama",
+        "cause": "new line expansion missing reverse relation"
+      },
+      {
+        "line_id": "ShonanMonorail",
+        "station_id": "Mejiroyamashita",
+        "cause": "new line expansion missing reverse relation"
+      },
+      {
+        "line_id": "ShonanMonorail",
+        "station_id": "ShonanEnoshima",
+        "cause": "new line expansion missing reverse relation"
+      }
+    ],
+    "stationLines_to_lineStationOrder": [
+      {
+        "line_id": "JobanLocal",
+        "station_id": "Nippori",
+        "cause": "stale stationLines relation"
+      },
+      {
+        "line_id": "JobanLocal",
+        "station_id": "Ueno",
+        "cause": "stale stationLines relation"
+      },
+      {
+        "line_id": "JobanLocal",
+        "station_id": "Mikawashima",
+        "cause": "stale stationLines relation"
+      },
+      {
+        "line_id": "JobanLocal",
+        "station_id": "Minami-Senju",
+        "cause": "stale stationLines relation"
+      },
+      {
+        "line_id": "Joban",
+        "station_id": "Shin-Matsudo",
+        "cause": "stale stationLines relation"
+      },
+      {
+        "line_id": "Joban",
+        "station_id": "Ayase",
+        "cause": "stale stationLines relation"
+      },
+      {
+        "line_id": "Joban",
+        "station_id": "Kameari",
+        "cause": "stale stationLines relation"
+      },
+      {
+        "line_id": "Joban",
+        "station_id": "Kanamachi",
+        "cause": "stale stationLines relation"
+      },
+      {
+        "line_id": "Joban",
+        "station_id": "Mabashi",
+        "cause": "stale stationLines relation"
+      },
+      {
+        "line_id": "Joban",
+        "station_id": "Kita-Kogane",
+        "cause": "stale stationLines relation"
+      },
+      {
+        "line_id": "Oedo",
+        "station_id": "Hongo-Sanchome",
+        "cause": "stale stationLines relation"
+      },
+      {
+        "line_id": "TokyuMeguro",
+        "station_id": "Shin-Maruko",
+        "cause": "stale stationLines relation"
+      },
+      {
+        "line_id": "TokyuMeguro",
+        "station_id": "Motosumiyoshi",
+        "cause": "stale stationLines relation"
+      },
+      {
+        "line_id": "Haijima",
+        "station_id": "Tamagawa-Josui",
+        "cause": "stale stationLines relation"
+      },
+      {
+        "line_id": "KeioZoo",
+        "station_id": "Tama-Dobutsukoen",
+        "cause": "stale stationLines relation"
+      },
+      {
+        "line_id": "Tsugaru",
+        "station_id": "Mutsu-Iwasaki",
+        "cause": "stale stationLines relation"
+      },
+      {
+        "line_id": "Tsugaru",
+        "station_id": "Mutsu-Yanagita",
+        "cause": "stale stationLines relation"
+      },
+      {
+        "line_id": "Seibu_Sayama",
+        "station_id": "Nishi-Tokorozawa",
+        "cause": "stale stationLines relation"
+      },
+      {
+        "line_id": "Shinetsu",
+        "station_id": "Miyauchi",
+        "cause": "stale stationLines relation"
+      },
+      {
+        "line_id": "TokyoMonorail",
+        "station_id": "Tenku-Bashi",
+        "cause": "stale stationLines relation"
+      },
+      {
+        "line_id": "SensekiTohoku",
+        "station_id": "Hebita",
+        "cause": "stale stationLines relation"
+      },
+      {
+        "line_id": "Hachiko",
+        "station_id": "Ogawa-machi",
+        "cause": "stale stationLines relation"
+      },
+      {
+        "line_id": "Tsugaru",
+        "station_id": "Mutsu-Morita",
+        "cause": "stale stationLines relation"
+      },
+      {
+        "line_id": "KeioMain",
+        "station_id": "Shimo-takaido",
+        "cause": "stale stationLines relation"
+      },
+      {
+        "line_id": "Rinkai",
+        "station_id": "Tennozu Isle",
+        "cause": "stale stationLines relation"
+      }
+    ],
+    "resolution": "Repaired canonical station ids in lineStationOrder, removed orphan JobanMedium order, added missing reverse stationLines for current canonical orders, and removed stale reverse stationLines that were not present in any current lineStationOrder."
+  },
+  "tourism_spots_audit": {
+    "baseline_count": 517,
+    "current_count": 516,
+    "net_loss": 1,
+    "classification": "intentional data cleanup / tourism model curation",
+    "removed_names": [
+      "じんがんなわ祭",
+      "閻魔祭",
+      "鹿浜の獅子舞",
+      "銀座（銀座四丁目交差点）",
+      "下北沢",
+      "軽トラ市",
+      "東京メトロ特設ブース（エーラウンド・マーケット）",
+      "アイノワール",
+      "unsaule"
+    ],
+    "added_names": [
+      "本多劇場",
+      "下北沢SHELTER",
+      "東洋百貨店 別館",
+      "隅田川花火大会",
+      "三社祭（浅草神社例大祭）",
+      "浅草サンバカーニバル パレードコンテスト",
+      "神宮外苑花火大会",
+      "東京高円寺阿波おどり"
+    ],
+    "reason": "The net -1 is not a single accidental deleted record; the tourism dataset was curated by replacing several broad/incorrect shop/event/place rows with more specific current event, theatre, and shopping records."
+  },
+  "post_fix_relation_counts": {
+    "stationLines_total_refs": 4577,
+    "lineStationOrder_total_refs": 4577
+  }
+}
