@@ -116,6 +116,89 @@ function assertNoCurrentFictionalAsset(win) {
   });
 }
 
+function assertNoFilenameDependentIdentity(win) {
+  [
+    'E209系',
+    'E209系（房総）',
+    'E209系（京葉線）',
+    'E209系3500番台',
+    'E231系常磐LED',
+    'E235系山手線',
+    'E235系総武中央線',
+    'E723系',
+    'E253系',
+    'JR東日本E253系',
+    'E209系（e209_kt2）',
+    'E209系（e209_kt）',
+    'E209系（e209c）',
+    'E209系（e209hk）',
+    'E209系（e209jg2）',
+    'E209系（e209jg3）',
+    'E209系（e209jg4）',
+    'E209系（e209jg）',
+    'E209系（e209jy1）',
+    'E209系（e209jy）',
+    'E209系（e209kt0）',
+    'E209系（e209kt2）',
+    'E209系（e209kt3）',
+    'E209系（e209kt_ad）',
+    'E209系（e209kt）',
+    'E209系（e209ky1）',
+    'E209系（e209ky）',
+    'E209系（e209mu）',
+    'E209系（e209na2）',
+    'E209系（e209na3）',
+    'E209系（e209na）',
+    'E209系（e209or1）',
+    'E209系（e209so1）',
+    'E209系（e209so）',
+    'E209系（e209sta）'
+  ].forEach((name) => {
+    assert(!win.TrainIcons.VEHICLE_NAME_TO_ICON[name], 'filename basename remains in vehicle identity index', { name });
+    assert(!win.TrainIcons.VEHICLE_NAME_ALIASES[name], 'filename basename remains in vehicle alias index', { name });
+  });
+}
+
+function assertCanonicalAssetRenameSimulation(win) {
+  const cases = [
+    {
+      id: 'jr-east-e235-0-yamanote',
+      query: 'E235系0番台（山手線）',
+      lineId: 'Yamanote',
+      simulatedAsset: '../images/列车/JR東日本/__phase4b_simulated_yamanote.png'
+    },
+    {
+      id: 'jr-east-209-3500-hachiko-kawagoe',
+      query: '209系3500番台',
+      lineId: 'Hachiko',
+      simulatedAsset: '../images/列车/JR東日本/__phase4b_simulated_209_3500.png'
+    },
+    {
+      id: 'jr-east-253-1000-nikko-kinugawa',
+      query: '253系（日光・きぬがわ）',
+      lineId: 'UtsunomiyaJR',
+      simulatedAsset: '../images/列车/JR東日本/__phase4b_simulated_253.png'
+    }
+  ];
+  cases.forEach((entry) => {
+    const vehicle = win.TrainIcons.CANONICAL_VEHICLES[entry.id];
+    assert(vehicle, 'canonical vehicle missing for rename simulation', entry);
+    const originalAsset = vehicle.asset;
+    const before = win.TrainIcons.resolveCanonicalVehicle(entry.query);
+    assert(before && before.id === entry.id, 'canonical query did not resolve before rename simulation', { entry, before });
+    vehicle.asset = entry.simulatedAsset;
+    try {
+      const after = win.TrainIcons.resolveCanonicalVehicle(entry.query);
+      assert(after && after.id === entry.id, 'canonical id changed after simulated asset rename', { entry, after });
+      assert(after.displayName === before.displayName, 'canonical display changed after simulated asset rename', { entry, before, after });
+      const icon = win.TrainIcons.resolveVehicleIcon(entry.query, entry.lineId);
+      assert(icon === entry.simulatedAsset, 'asset locator did not follow simulated rename', { entry, icon });
+    } finally {
+      vehicle.asset = originalAsset;
+    }
+  });
+}
+
 function assertDeterministic(win, label, ctx) {
   const first = win.TrainVehicle.resolve(Object.assign({ trainNumber: `det-${label}` }, ctx));
   for (let i = 0; i < 100; i += 1) {
@@ -243,6 +326,8 @@ function main() {
   });
 
   assertNoCurrentFictionalAsset(win);
+  assertNoFilenameDependentIdentity(win);
+  assertCanonicalAssetRenameSimulation(win);
 
   Object.values(win.TrainIcons.CANONICAL_VEHICLES).forEach((vehicle) => {
     assert(imageExists(vehicle.asset), 'canonical asset missing', vehicle);
@@ -252,6 +337,8 @@ function main() {
     status: 'PASS',
     p0: 3,
     p1: 5,
+    filenameDependentVehicleIdentity: 0,
+    renameSimulation: 'PASS',
     currentResolverFictionalAssets: 0,
     missingReferences: 0
   }, null, 2));

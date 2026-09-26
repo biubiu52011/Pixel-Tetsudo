@@ -513,10 +513,7 @@
   // Provider: TrainIcons.getTrainClass  Consumer: TrainPositionEstimator / DataFusion（position.trainClass）
   function getTrainClass(lineId, operator, trainId, stationIndex, trainType, byOperator) {
     try {
-      var icon = _resolveTrainIcon(lineId, operator, trainId, stationIndex, trainType, byOperator);
-      var name = String(icon || '').split('/').pop();
-      name = name.replace(/\.png$/i, '');
-      return name || '';
+      return _resolveTrainRuleDisplayName(lineId, operator, trainId, stationIndex, trainType, byOperator) || '';
     } catch(e) { return ''; }
   }
 
@@ -1463,6 +1460,48 @@
     "TX-2000系（別3）": "../images/列车/首都圏新都市鉄道/TX-2000系（別3）.png",
     "TX-2000系（別）": "../images/列车/首都圏新都市鉄道/TX-2000系（別）.png",
   };
+  // Phase4B: 以下名称来自旧 physical PNG basename，只能作为 asset locator，不能自动成为车型 identity。
+  var ASSET_LOCATOR_ONLY_NAMES = {
+    "E209系": true,
+    "E209系（房総）": true,
+    "E209系（京葉線）": true,
+    "E209系3500番台": true,
+    "E231系常磐LED": true,
+    "E235系山手線": true,
+    "E235系総武中央線": true,
+    "E723系": true,
+    "E253系": true,
+    "JR東日本E253系": true,
+    "E209系（e209_kt2）": true,
+    "E209系（e209_kt）": true,
+    "E209系（e209c）": true,
+    "E209系（e209hk）": true,
+    "E209系（e209jg2）": true,
+    "E209系（e209jg3）": true,
+    "E209系（e209jg4）": true,
+    "E209系（e209jg）": true,
+    "E209系（e209jy1）": true,
+    "E209系（e209jy）": true,
+    "E209系（e209kt0）": true,
+    "E209系（e209kt2）": true,
+    "E209系（e209kt3）": true,
+    "E209系（e209kt_ad）": true,
+    "E209系（e209kt）": true,
+    "E209系（e209ky1）": true,
+    "E209系（e209ky）": true,
+    "E209系（e209mu）": true,
+    "E209系（e209na2）": true,
+    "E209系（e209na3）": true,
+    "E209系（e209na）": true,
+    "E209系（e209or1）": true,
+    "E209系（e209so1）": true,
+    "E209系（e209so）": true,
+    "E209系（e209sta）": true
+  };
+  Object.keys(ASSET_LOCATOR_ONLY_NAMES).forEach(function(name) {
+    delete VEHICLE_NAME_TO_ICON[name];
+  });
+
   // v4.3.975: 反推遍历改为通用递归收集——扫描所有含 icon 字段的表（LINE_ICONS/OPERATOR_ICONS/
   // VEHICLE_DEPLOYMENTS/THROUGH_PREFIX_RULES/TRAIN_TYPE_ICON_RULES/EXTRA_VEHICLE_ICONS），
   // 嵌套对象/数组里的图标路径也全部入表，不再遗漏规则表资产
@@ -1472,6 +1511,7 @@
       if (!path || seen[path]) return;
       seen[path] = true;
       var name = String(path).split('/').pop().replace(/\.png$/i, '');
+      if (ASSET_LOCATOR_ONLY_NAMES[name]) return;
       if (name && !VEHICLE_NAME_TO_ICON[name]) VEHICLE_NAME_TO_ICON[name] = path;
     }
     function collectIcon(obj) {
@@ -1496,7 +1536,7 @@
       var _p = EXTRA_VEHICLE_ICONS[k];
       add(_p);
       var _base = String(_p).split('/').pop().replace(/\.png$/i, '');
-      if (k !== _base && !VEHICLE_NAME_TO_ICON[k]) VEHICLE_NAME_TO_ICON[k] = _p;
+      if (k !== _base && !ASSET_LOCATOR_ONLY_NAMES[k] && !VEHICLE_NAME_TO_ICON[k]) VEHICLE_NAME_TO_ICON[k] = _p;
     });
   })();
 
@@ -1697,6 +1737,12 @@ var CANONICAL_VEHICLES = {
     asset: "../images/列车/JR東日本/E231系0番台.png",
     aliases: ["E231系0番台"]
   },
+  "jr-east-e231-0-joban-rapid-led": {
+    displayName: "E231系0番台（常磐快速線・LED）",
+    iconName: "E231系0番台（常磐快速線・LED）",
+    asset: "../images/列车/JR東日本/E231系常磐LED.png",
+    aliases: ["E231系0番台（常磐快速線・LED）"]
+  },
   "jr-east-e233-7000-saikyo": {
     displayName: "E233系7000番台",
     iconName: "E233系7000番台",
@@ -1708,6 +1754,12 @@ var CANONICAL_VEHICLES = {
     iconName: "E209系3500番台",
     asset: "../images/列车/JR東日本/E209系3500番台.png",
     aliases: ["209系3500番台", "E209系3500番台"]
+  },
+  "jr-east-209-2000-2100-boso-keiyo": {
+    displayName: "209系2000番台 / 2100番台",
+    iconName: "209系2000番台 / 2100番台",
+    asset: "../images/列车/JR東日本/E209系（京葉線）.png",
+    aliases: ["209系2000番台", "209系2100番台", "2100番台"]
   },
   "jr-east-e233-5000-keiyo": {
     displayName: "E233系5000番台",
@@ -1776,6 +1828,21 @@ function _canonicalVehicleIconPath(name, lineId) {
   if (rec) return rec.asset;
   if (/^東武/.test(n)) return "../images/列车/東武鉄道/" + n + ".png";
   return null;
+}
+
+var LINE_ICON_CANONICAL_IDS = {
+  "Yamanote": "jr-east-e235-0-yamanote",
+  "Joban": "jr-east-e231-0-joban-rapid-led",
+  "Kawagoe": "jr-east-209-3500-hachiko-kawagoe",
+  "KawagoeWest": "jr-east-209-3500-hachiko-kawagoe"
+};
+
+function _resolveTrainRuleDisplayName(lineId, operator, trainId, stationIndex, trainType, byOperator) {
+  if (!byOperator && LINE_ICON_CANONICAL_IDS[lineId]) {
+    var rec = CANONICAL_VEHICLES[LINE_ICON_CANONICAL_IDS[lineId]];
+    return rec ? rec.displayName : '';
+  }
+  return '';
 }
 
 var LINE_ICON_NAME_REDIRECT = {
@@ -2277,6 +2344,12 @@ TOBU_LINE_IDS.forEach(function(lineId) {
     "かもめ": "800系",
     "500系（こだま）": "500系",
   };
+  Object.keys(ASSET_LOCATOR_ONLY_NAMES).forEach(function(name) {
+    delete VEHICLE_NAME_ALIASES[name];
+  });
+  ["E235系", "209系", "209系3000番台", "209系3100番台"].forEach(function(name) {
+    delete VEHICLE_NAME_ALIASES[name];
+  });
 
   // v4.3.987: 显示名解析——返回最终应展示的车型名（仅 alias 展开路径同步，
   // 如退役车→現役車：都営5300形→5500形、ロマンスカー 10000形→小田急電鉄30000形EXEα、
@@ -2444,6 +2517,7 @@ TOBU_LINE_IDS.forEach(function(lineId) {
     resolveCanonicalVehicle: resolveCanonicalVehicle,
     CANONICAL_VEHICLES: CANONICAL_VEHICLES,
     VEHICLE_NAME_TO_ICON: VEHICLE_NAME_TO_ICON,
+    VEHICLE_NAME_ALIASES: VEHICLE_NAME_ALIASES,
     VEHICLE_FLEET_WEIGHTS: VEHICLE_FLEET_WEIGHTS,
     FLEET_ICON_POOLS: FLEET_ICON_POOLS,
     LINE_ICONS: LINE_ICONS,

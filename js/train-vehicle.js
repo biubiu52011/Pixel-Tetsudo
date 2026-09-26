@@ -258,18 +258,8 @@
       iconPath = '';
     }
 
-    // 5) 推定名兜底（S4）：S0–S3 无依据时，用图标规则命中的图标文件名作为推定车型——
-    //    LINE_ICONS/部署区间/运营商图标均为人工按 ODPT 时刻表与部署核验的线路主力车型，
-    //    非模型臆测（source='icons', confidence='low'）。唯一排除项：终极兜底 E235系山手線
-    //    不得用于非山手线（避免"东京通勤车乱入地方线"旧病复发）。
-    if (!chosen && iconPath) {
-      var _iconName = String(iconPath).split('/').pop().replace(/\.png$/i, '');
-      if (_iconName && !(_iconName === 'E235系山手線' && lineId !== 'Yamanote')) {
-        chosen = _iconName;
-        chosenSrc = 'icons';
-        confidence = 'low';
-      }
-    }
+    // 5) S4 图标兜底只提供视觉 locator，不再从 PNG basename 反推出车型身份。
+    // 车型身份必须来自 S0-S3 或 canonical/alias 层，避免 physical filename 承担 identity。
 
     // v4.3.991: 标签诚实化——manual 为多候选串（如混跑"71-000形 / 70-000形"）时传原文串，
     // resolveVehicleDisplayName 对全部可解析的多候选返回完整串（表达不确定），不再只显示第一项；
