@@ -96,6 +96,15 @@
   }
 
   function getSPOTS() { return window.TOURISM_SPOTS || []; }
+  function getSpotType(spot) {
+    if (window.TourismType && window.TourismType.getSpotType) {
+      return window.TourismType.getSpotType(spot);
+    }
+    var tags = (spot && spot.tags) || [];
+    if (tags.indexOf('event') >= 0) return 'event';
+    if (tags.indexOf('food') >= 0 || tags.indexOf('shopping') >= 0 || tags.indexOf('play') >= 0) return 'shop';
+    return 'spot';
+  }
   function isAcrossRiver(stationLat, stationLng, spotLat, spotLng) {
     for (const river of RIVERS) {
       const distToRiver = Math.abs(spotLat - river.lat) * 111000;
@@ -320,8 +329,7 @@ function renderGrid() {
 
       // 4.3.802: 详情页按类型路由到三个独立详情页（活动/景点/店铺）
       // 4.3.9xx: play 与 getSpotType 口径对齐（吃喝玩乐都算店）
-      const detailType = (tags.indexOf('event') >= 0) ? 'event'
-        : (tags.indexOf('food') >= 0 || tags.indexOf('shopping') >= 0 || tags.indexOf('play') >= 0) ? 'shop' : 'spot';
+      const detailType = getSpotType(s);
       const detailUrl = 'tourism-' + detailType + '.html?station=' + encodeURIComponent(stationKey) + '&index=' + idx + '&name=' + encodeURIComponent(name);
 
       return '<a href="' + detailUrl + '" class="sm-card' + (isEvent ? ' sm-card--event' : '') + '" data-index="' + idx + '">' +
@@ -496,7 +504,6 @@ function renderGrid() {
     init();
   }
 })();
-
 
 
 

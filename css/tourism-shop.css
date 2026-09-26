@@ -53,6 +53,9 @@
 .article-content--shop .dp-dish-badge { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 30px; font-weight: 800; color: #fff; background: linear-gradient(135deg, #ffb45e, #E8590C); user-select: none; }
 .article-content--shop .dp-dish-name { font-size: 13px; color: #333; margin-top: 6px; line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .article-content--shop .dp-dish-price { font-size: 13px; color: #E8590C; font-weight: 800; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.article-content--shop .dp-pick-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.article-content--shop .dp-pick-list li { position: relative; padding: 9px 10px 9px 24px; border-radius: 8px; background: #fff7f1; color: #333; font-size: 14px; line-height: 1.55; }
+.article-content--shop .dp-pick-list li::before { content: ""; position: absolute; left: 10px; top: 17px; width: 5px; height: 5px; border-radius: 50%; background: #E8590C; }
 /* 全屏菜单模态 */
 .dp-menu-modal { position: fixed; inset: 0; z-index: 10000; background: rgba(0,0,0,0.55); backdrop-filter: blur(4px); display: none; align-items: flex-end; justify-content: center; }
 .dp-menu-modal.is-open { display: flex; }

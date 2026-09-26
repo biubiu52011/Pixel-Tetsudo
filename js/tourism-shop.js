@@ -105,7 +105,18 @@
       html += '</div></div></div>';
       return html;
     }
-    return '<div class="dp-card">' + C.buildTipsHtml(spot, 'detail.menu', 'menu-list') + '</div>';
+    var titleKey = ((spot.tags || []).indexOf('food') >= 0) ? 'detail.menu' : 'detail.goods';
+    var htmlFallback = '<div class="dp-card dp-shop-picks"><h3 class="dp-sec-title">' + C.t(titleKey) + '</h3><ul class="dp-pick-list">';
+    if (spot.tips && spot.tips.length > 0) {
+      for (var ti = 0; ti < spot.tips.length; ti++) {
+        var tipText = (spot.tips_i18n && spot.tips_i18n[C.state.lang] && spot.tips_i18n[C.state.lang][ti])
+          || spot.tips[ti] || C.t('detail.i18n_missing');
+        htmlFallback += '<li>' + C.escapeHtml(tipText) + '</li>';
+      }
+    } else {
+      htmlFallback += '<li>' + C.escapeHtml(C.t('detail.i18n_missing')) + '</li>';
+    }
+    return htmlFallback + '</ul></div>';
   }
   // ⑥ 位置地图
   function buildMapCard(ctx) {

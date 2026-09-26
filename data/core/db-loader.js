@@ -1095,6 +1095,12 @@ function applyData(data, i18n) {
   function applyTourismData(override) {
     override = override || {};
     if (override.spots && Array.isArray(override.spots)) window.TOURISM_SPOTS = override.spots;
+    var buckets = (window.TourismType && window.TourismType.partitionSpots)
+      ? window.TourismType.partitionSpots(window.TOURISM_SPOTS || [])
+      : { event: [], shop: [], spot: (window.TOURISM_SPOTS || []) };
+    window.TOURISM_EVENTS = buckets.event;
+    window.TOURISM_SHOPS = buckets.shop;
+    window.TOURISM_SIGHTS = buckets.spot;
     // 4.3.558: 出入口坐标表（{ stationId: [{name,lat,lng}] }），算法按经纬度取最近出口
     window.STATION_EXITS = (override.station_exits && typeof override.station_exits === 'object') ? override.station_exits : {};
     window.TOURISM_DATA = {};
@@ -1248,4 +1254,3 @@ function load() {
     event.preventDefault();
   });
 })();
-
