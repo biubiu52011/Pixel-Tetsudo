@@ -380,6 +380,9 @@
         // Find current station based on time
         var currentStationIndex = -1;
         var foundInService = false;
+        var segmentToIndex = null;
+        var segmentProgress = 0;
+        var lastDepartedStop = null;
 
         for (var s = 0; s < fullStops.length; s++) {
           var stop = fullStops[s];
@@ -414,10 +417,21 @@
             foundInService = false;
             break;
           }
+          if (lastDepartedStop && effectiveArrival !== null && adjustedCurrentMin < effectiveArrival) {
+            currentStationIndex = lastDepartedStop.idx;
+            foundInService = true;
+            segmentToIndex = idx;
+            var _segDur = Math.max(1, effectiveArrival - lastDepartedStop.time);
+            segmentProgress = Math.max(0, Math.min(0.95, (adjustedCurrentMin - lastDepartedStop.time) / _segDur));
+            break;
+          }
           if (effectiveArrival !== null && adjustedCurrentMin >= effectiveArrival) {
             currentStationIndex = idx;
             foundInService = true;
             if (ext && idx > ext.lastIdx) extrapolated = true;
+          }
+          if (effectiveDeparture !== null && adjustedCurrentMin >= effectiveDeparture) {
+            lastDepartedStop = { idx: idx, time: effectiveDeparture };
           }
           // 尚未发车（停车中或未到达）即停——列车不会越过本站
           if (effectiveDeparture !== null && adjustedCurrentMin < effectiveDeparture) {
@@ -509,6 +523,8 @@
             delayMin: delayMin,
             estimated: true,
             positionSource: tt._positionSource || "train-timetable",
+            segmentToIndex: segmentToIndex,
+            segmentProgress: segmentProgress,
             extrapolated: extrapolated,
             trainType: tt['odpt:trainType'] || '',
             typeName: trainClassification.typeName,

@@ -585,6 +585,7 @@
       svg.setAttribute("data-lang", _lang);
       // Branch geometry for train placement (branch trains render on branch column)
       svg.__branchGeom = geometry.branchGeom || null;
+      svg.__geometry = geometry;
       
       // Background
       var bgRect = document.createElementNS(svgNS, "rect");
@@ -903,7 +904,7 @@
       } catch (e2) { /* clamp is a best-effort readability guard */ }
       
       // Now populate train layer
-      updateTrainLayer(svg, positions, stationCoords, lineId, line);
+      updateTrainLayer(svg, positions, stationCoords, lineId, line, geometry);
       updateRunningInfo(el, positions);
       updateEstimatedNote(el, positions);
       
@@ -929,10 +930,37 @@
     return { x: lx, y: ly };
   }
 
-  function updateTrainLayer(svg, positions, stationCoords, lineId, line) {
+  function _setTrainIconPosition(icon, px, py, p, lineId, isLoop) {
+    if (!icon) return;
+    var x = px - 7;
+    var y = py - 9;
+    var tag = String(icon.tagName || '').toLowerCase();
+    if (tag === 'image') {
+      icon.setAttribute('x', String(x));
+      icon.setAttribute('y', String(y));
+      var direction = p.railDirection || '';
+      if (!isLoop && direction.indexOf('Outbound') >= 0) {
+        icon.setAttribute('transform', 'translate(' + px + ', ' + py + ') scale(-1, 1) translate(' + (-px) + ', ' + (-py) + ')');
+      } else {
+        icon.removeAttribute('transform');
+      }
+      return;
+    }
+    if (tag === 'g') {
+      icon.setAttribute('transform', 'translate(' + px + ',' + py + ')');
+    }
+  }
+
+  function _removeTrainLabels(trainLayer, trainUid) {
+    var labels = trainLayer.querySelectorAll('[data-train-label-for="' + String(trainUid).replace(/"/g, '') + '"]');
+    for (var i = 0; i < labels.length; i++) labels[i].parentNode.removeChild(labels[i]);
+  }
+
+  function updateTrainLayer(svg, positions, stationCoords, lineId, line, geometry) {
     var trainLayer = svg.querySelector('.train-layer');
     if (!trainLayer) return;
     positions = _sortTrainPositionsBySource(positions);
+    geometry = geometry || svg.__geometry || { branchGeom: svg.__branchGeom || null };
     
     var svgNS = "http://www.w3.org/2000/svg";
     var isLoop = stationCoords.length > 2 && (line.type === "loop" || line.isSixShapedLoop);
@@ -954,62 +982,28 @@
       }
     }
     positions = _filtered;
-    // Count trains per station for offset
-    var stationCount = {};
-    var stationIdx = {};
-    for (var pi0 = 0; pi0 < positions.length; pi0++) {
-      var idx0 = Math.min(positions[pi0].stationIndex || 0, stationCoords.length - 1);
-      stationCount[idx0] = (stationCount[idx0] || 0) + 1;
-    }
+    var layout = (window.TrainTrackLayout && window.TrainTrackLayout.resolveAll)
+      ? window.TrainTrackLayout.resolveAll(positions, stationCoords, geometry, lineId, {
+          getMoveDir: _trainMoveDir,
+          fusionBaseIdx: _fusionBaseIdx,
+          laneGap: isLoop ? 9 : 11,
+          stackGap: isLoop ? 7 : 8
+        })
+      : null;
     
     var updatedIds = {};
     
     for (var pi = 0; pi < positions.length; pi++) {
       var p = positions[pi];
-      // v4.3.446: 支线融合列车——画在支线站列（branchGeom）上，与主线留出距离
-      var coord = null;
-      if (p.fusionLineId) {
-        var _bg = svg.__branchGeom || null;
-        if (_bg && _bg[p.fusionLineId]) {
-          var _bii = Math.min(p.stationIndex || 0, _bg[p.fusionLineId].length - 1);
-          coord = _bg[p.fusionLineId][_bii];
-        }
+      var loc = layout ? layout[pi] : null;
+      if (!loc) {
+        var idx = Math.min(p.stationIndex || 0, stationCoords.length - 1);
+        loc = { x: stationCoords[idx].x, y: stationCoords[idx].y, idx: idx, moveDir: _trainMoveDir(p, lineId) };
       }
-      if (!coord) {
-        // v4.3.409: 融合机制——延伸线（fusionLineId）列车按延伸几何 baseIdx 偏移
-        var idx;
-        if (p.fusionLineId) {
-          var fm = _fusionBaseIdx(lineId, p.fusionLineId);
-          idx = fm >= 0 ? fm + (p.stationIndex || 0) : (p.stationIndex || 0);
-        } else {
-          idx = p.stationIndex || 0;
-        }
-        idx = Math.min(idx, stationCoords.length - 1);
-        coord = stationCoords[idx];
-      }
-      if (!coord) continue;
-      
-      var px = coord.x;
-      var py = coord.y;
-      
-      // Offset multiple trains at same station
-      var trainIdxAt = stationIdx[idx] || 0;
-      stationIdx[idx] = trainIdxAt + 1;
-      var totalAt = stationCount[idx] || 1;
+      var idx = loc.idx;
       var direction = p.railDirection || '';
-      var offX = 0, offY = 0;
-      
-      if (isLoop) {
-        if (direction.indexOf('Inner') >= 0) offY = -8;
-        else if (direction.indexOf('Outer') >= 0) offY = 8;
-        offX = (trainIdxAt - (totalAt - 1) / 2) * 20;
-      } else {
-        // v4.3.963: 列车都在线路上（不左右分开），多车同站垂直排开
-        offY = (trainIdxAt - (totalAt - 1) / 2) * 18;
-      }
-      
-      px += offX;
-      py += offY;
+      var px = loc.x;
+      var py = loc.y;
       
       var trainUid = (p.trainId || ("train_" + pi)) + "_" + (p.stationIndex || 0);
       updatedIds[trainUid] = true;
@@ -1024,8 +1018,10 @@
         var newY = py - 9;
         // v4.3.950: 环线沿曲线移动——用 JS 动画沿矩形边插值，不用 CSS transition 直线跳
         var _loopRect = stationCoords._loopRect;
-        var _needMove = Math.abs(oldX - newX) > 0.5 || Math.abs(oldY - newY) > 0.5;
-        if (isLoop && _loopRect && _needMove) {
+        var _needMove = existingIcon.tagName && String(existingIcon.tagName).toLowerCase() === 'g'
+          ? true
+          : (!isFinite(oldX) || !isFinite(oldY) || Math.abs(oldX - newX) > 0.5 || Math.abs(oldY - newY) > 0.5);
+        if (isLoop && _loopRect && _needMove && !window.TrainTrackLayout) {
           var _newSc = stationCoords[idx];
           var _newPos = (_newSc && _newSc._loopPos != null) ? _newSc._loopPos : 0;
           var _oldPos = existingIcon._loopPos;
@@ -1058,24 +1054,19 @@
               var _ease = _t < 0.5 ? 4 * _t * _t * _t : 1 - Math.pow(-2 * _t + 2, 3) / 2;
               var _curPos = _startPos + _diff * _ease;
               var _xy = _loopPosToXY(_curPos, _rect);
-              _icon.setAttribute('x', _xy.x - 7);
-              _icon.setAttribute('y', _xy.y - 9);
+              _setTrainIconPosition(_icon, _xy.x, _xy.y, p, lineId, isLoop);
               if (_t < 1) requestAnimationFrame(_animFrame);
               else _icon._loopPos = _startPos + _diff;
             }
             requestAnimationFrame(_animFrame);
           }
         } else if (_needMove) {
-          existingIcon.setAttribute('x', newX);
-          existingIcon.setAttribute('y', newY);
+          _setTrainIconPosition(existingIcon, px, py, p, lineId, isLoop);
+        } else {
+          _setTrainIconPosition(existingIcon, px, py, p, lineId, isLoop);
         }
-        // v4.3.454/455: 终点/方向标签跟随列车移动（位置随移动方向）
-        var _mvDir = _trainMoveDir(p, lineId);
-        var _lb = trainLayer.querySelectorAll('[data-train-label-for="' + String(trainUid).replace(/"/g, '') + '"]');
-        for (var _li = 0; _li < _lb.length; _li++) {
-          _lb[_li].setAttribute('x', px);
-          _lb[_li].setAttribute('y', _trainLabelY(_lb[_li].getAttribute('data-label-pos'), py, _mvDir));
-        }
+        _removeTrainLabels(trainLayer, trainUid);
+        appendTrainLabels(trainLayer, svgNS, trainUid, px, py, p, lineId);
       } else {
         // Create new train icon
         // v4.3.950: 车型判定统一入口——图标直接取 TrainVehicle.resolve().iconPath
@@ -1125,8 +1116,6 @@
         if (iconSrc) {
           var newIcon = document.createElementNS(svgNS, "image");
           newIcon.setAttribute("data-train-id", String(trainUid));
-          newIcon.setAttribute("x", String(px - 7));
-          newIcon.setAttribute("y", String(py - 9));
           newIcon.setAttribute("width", "14");
           newIcon.setAttribute("height", "18");
           newIcon.setAttribute("href", iconSrc);
@@ -1148,11 +1137,7 @@
           // v4.3.6xx: 方向翻转——非环线 Outbound（下行）列车图标水平翻转
           // Inbound（上行）保持原方向（车头向右），Outbound（下行）车头向左
           // SVG image 翻转：translate 到中心后 scale(-1,1) 再 translate 回来
-          if (!isLoop && direction.indexOf('Outbound') >= 0) {
-            var centerX = px;
-            var centerY = py;
-            newIcon.setAttribute('transform', 'translate(' + centerX + ', ' + centerY + ') scale(-1, 1) translate(' + (-centerX) + ', ' + (-centerY) + ')');
-          }
+          _setTrainIconPosition(newIcon, px, py, p, lineId, isLoop);
           trainLayer.appendChild(newIcon);
           appendTrainLabels(trainLayer, svgNS, trainUid, px, py, p, lineId);
         } else {
@@ -1160,18 +1145,19 @@
           var newCircle = document.createElementNS(svgNS, "g");
           newCircle.setAttribute("data-train-id", String(trainUid));
           newCircle.setAttribute("class", iconCls);
+          newCircle.setAttribute("transform", "translate(" + px + "," + py + ")");
           
           var outerCircle = document.createElementNS(svgNS, "circle");
-          outerCircle.setAttribute("cx", px);
-          outerCircle.setAttribute("cy", py);
+          outerCircle.setAttribute("cx", "0");
+          outerCircle.setAttribute("cy", "0");
           outerCircle.setAttribute("r", "8");
           outerCircle.setAttribute("fill", color);
           outerCircle.setAttribute("opacity", "0.9");
           newCircle.appendChild(outerCircle);
           
           var innerCircle = document.createElementNS(svgNS, "circle");
-          innerCircle.setAttribute("cx", px);
-          innerCircle.setAttribute("cy", py);
+          innerCircle.setAttribute("cx", "0");
+          innerCircle.setAttribute("cy", "0");
           innerCircle.setAttribute("r", "3");
           innerCircle.setAttribute("fill", "#fff");
           newCircle.appendChild(innerCircle);

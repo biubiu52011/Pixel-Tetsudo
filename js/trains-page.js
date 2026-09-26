@@ -234,7 +234,10 @@
                 posHash += ids[i] + ":" + _pos.length + ":";
                 for (var _pi = 0; _pi < _pos.length; _pi++) {
                   var _tp = _pos[_pi];
-                  posHash += (_tp.trainId || ("t" + _pi)) + "@" + (_tp.stationIndex || 0) + ",";
+                  posHash += (_tp.trainId || ("t" + _pi)) + "@" + (_tp.stationIndex || 0)
+                    + ">" + (_tp.segmentToIndex == null ? "" : _tp.segmentToIndex)
+                    + ":" + (_tp.segmentProgress == null ? "" : Math.round(_tp.segmentProgress * 100))
+                    + ",";
                 }
                 posHash += ";";
               }
