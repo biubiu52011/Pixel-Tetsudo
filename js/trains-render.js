@@ -39,8 +39,12 @@
       // down=▼ 尖朝下
       _d = "M" + (_ax - 3.5) + " " + (_ay - 2.5) + " L " + _ax + " " + (_ay + 2.5) + " L " + (_ax + 3.5) + " " + (_ay - 2.5) + " Z";
     } else {
-      // middle=→ 尖朝右
-      _d = "M" + (_ax - 3) + "," + (_ay - 2.5) + " L" + (_ax + 3) + "," + _ay + " L" + (_ax - 3) + "," + (_ay + 2.5) + " Z";
+      // middle labels point away from the station: left-side chips use ←, right-side chips use →.
+      if (lineObj._throughSide === "left") {
+        _d = "M" + (_ax + 3) + "," + (_ay - 2.5) + " L" + (_ax - 3) + "," + _ay + " L" + (_ax + 3) + "," + (_ay + 2.5) + " Z";
+      } else {
+        _d = "M" + (_ax - 3) + "," + (_ay - 2.5) + " L" + (_ax + 3) + "," + _ay + " L" + (_ax - 3) + "," + (_ay + 2.5) + " Z";
+      }
     }
     arr.setAttribute("d", _d);
     layer.appendChild(arr);
@@ -457,11 +461,13 @@
           ly = Math.max(_chipBot + 4, _scD.y + 8) + _slot * _rowH;
         }
         else {
-          lx = _leftLane ? (o.x - sz.w - 12) : (o.x + (isJunction ? 18 : 14));
+          var _middleLeftLane = anchor === "start";
+          lx = _middleLeftLane ? (o.x - sz.w - 12) : (o.x + (isJunction ? 18 : 14));
           ly = o.y - sz.h / 2 + _slot * _rowH;
         }
         lx = Math.max(2, Math.min(lx, svgW - sz.w - 2));
         ly = Math.max(2, Math.min(ly, svgH - sz.h - 2));
+        tt._throughSide = lx < o.x ? "left" : "right";
         _renderThroughChip(staticLayer, svgNS, lx, ly, tt, ICON, isMobileView);
       }
     }
