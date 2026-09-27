@@ -46,12 +46,20 @@ function _throughChipSize(lineObj, mobile) {
   var nm = _throughShortName(lineObj, mobile);
   var throughLbl = (typeof window.t === "function" && window.t("train.through")) ? window.t("train.through") : "直通";
   var label = lineObj && lineObj.overflowCount ? (throughLbl + nm) : (throughLbl + nm);
+  var fontSize = mobile ? 11 : 9;
+  var charW = mobile ? 10 : 8;
+  var arrowSlot = mobile ? 18 : 16;
+  var padX = mobile ? 12 : 10;
+  var minW = mobile ? 104 : 84;
+  var maxW = mobile ? 148 : 124;
+  var rawW = arrowSlot + label.length * charW + padX;
+  var contentH = Math.max(fontSize + 8, mobile ? 20 : 16);
   return {
-    w: mobile ? 118 : 96,
-    h: mobile ? 22 : 18,
+    w: Math.max(minW, Math.min(maxW, rawW)),
+    h: contentH,
     label: label,
-    fontSize: mobile ? 11 : 9,
-    rowH: mobile ? 26 : 22
+    fontSize: fontSize,
+    rowH: contentH + (mobile ? 4 : 4)
   };
 }
 
