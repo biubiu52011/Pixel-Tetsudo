@@ -952,7 +952,7 @@
       'LimitedExpress': { 'default': 'E353系（あずさ・かいじ）' },
     },
     'Hachiko': {
-      'Local': { 'default': '209系3500番台' },
+      'Local': { 'default': '209系3000番台' },
     },
     'Ito': {
       'Local': { 'default': 'E231系1000番台 / 伊豆急行8000系' },
@@ -962,25 +962,49 @@
       'Local': { 'default': 'E233系0番台' },
     },
     'Joban': {
-      'Rapid': { 'default': 'E231系0番台' },
-      'Local': { 'default': 'E231系0番台' },
+      'Rapid': {
+        'default': 'E231系0番台（常磐快速線・LED）',
+        'destStation': {
+          'Tsuchiura': 'E531系',
+          'Mito': 'E531系',
+          'Katsuta': 'E531系',
+          'Hitachi': 'E531系',
+          'Takahagi': 'E531系',
+          'Iwaki': 'E531系',
+          'Haranomachi': 'E531系',
+          'Sendai': 'E531系'
+        }
+      },
+      'Local': {
+        'default': 'E231系0番台（常磐快速線・LED）',
+        'destStation': {
+          'Tsuchiura': 'E531系',
+          'Mito': 'E531系',
+          'Katsuta': 'E531系',
+          'Hitachi': 'E531系',
+          'Takahagi': 'E531系',
+          'Iwaki': 'E531系',
+          'Haranomachi': 'E531系',
+          'Sendai': 'E531系'
+        }
+      },
       'SpecialRapid': { 'default': 'E531系' },
       'LimitedExpress': { 'default': 'E657系（ときわ・ひたち）' },
     },
     'JobanLocal': {
       'Local': {
-        'default': 'E233系2000番台',
-        'TokyoMetro': '東京メトロ16000系 / E233系2000番台 / 小田急4000形',
-        'Odakyu': '小田急4000形 / 東京メトロ16000系'
+        'default': 'E233系2000番台 / 東京メトロ16000系 / 小田急4000形',
+        'TokyoMetro': 'E233系2000番台 / 東京メトロ16000系 / 小田急4000形',
+        'Odakyu': 'E233系2000番台 / 小田急4000形 / 東京メトロ16000系'
       },
     },
     'Kawagoe': {
-      'Local': { 'default': 'E233系7000番台', 'Sotetsu': '相鉄12000系', 'TWR': 'E233系7000番台 / 71-000形 / 70-000形' },
+      'Local': { 'default': '209系3100番台 / E233系7000番台', 'Sotetsu': '相鉄12000系', 'TWR': 'E233系7000番台 / 71-000形 / 70-000形' },
       'Rapid': { 'default': 'E233系7000番台', 'Sotetsu': '相鉄12000系', 'TWR': 'E233系7000番台 / 71-000形 / 70-000形' },
       'CommuterRapid': { 'default': 'E233系7000番台', 'Sotetsu': '相鉄12000系', 'TWR': 'E233系7000番台 / 71-000形 / 70-000形' },
     },
     'KawagoeWest': {
-      'Local': { 'default': '209系3500番台' },
+      'Local': { 'default': '209系3000番台' },
     },
     'Keiyo': {
       'Local': { 'default': 'E233系5000番台' },
@@ -988,7 +1012,7 @@
       'LimitedExpress': { 'default': 'E257系500番台' },
     },
     'Musashino': {
-      'Local': { 'default': 'E231系0番台' },
+      'Local': { 'default': 'E231系900番台' },
     },
     'Narita': {
       'Local': { 'default': '209系2000番台 / E231系0番台' },
@@ -1656,6 +1680,7 @@
   // v4.3.963: LINE_ALIAS_MAP——LINE_ICONS 有条目但 MAP 没 key 的线路，
   // 查表前先把 lineId 归一化到最近的有配置的线路（同系统主线）。
   var LINE_ALIAS_MAP = {
+    "JobanRapid":        "Joban",
     // 东急支线（7 线）
     "TokyuTamagawa":     "TokyuOimachi",   // 多摩川线 7000系
     "TokyuIkegami":      "TokyuOimachi",   // 池上线 7000系

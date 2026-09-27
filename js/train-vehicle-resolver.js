@@ -201,7 +201,7 @@ var LINE_ICONS = {
     "Joban": "../images/列车/JR東日本/E231系常磐LED.png", // 常磐線快速（品川〜取手）：E231系0番台（LED方向幕）が主力
     "JobanMain": "../images/列车/JR東日本/E531系.png", // 常磐線本線（取手〜仙台 中距離）：E531系が主力（4.3.480 追加）
     "JobanLocal": "../images/列车/JR東日本/E233系2000番台.png", // 常磐各停：JR E233系2000番台 主力（9-21 用户明确 B 前缀=E233系2000番台，非18000系；千代田直通16000系/小田急4000形走 MAP）
-    "JobanRapid": "../images/列车/JR東日本/E231系0番台.png", // 常磐快速線（上野〜取手）：E231系0番台主力（2021起E233系0番台增備混跑）；无manual线路默认，防兜底山手線
+    "JobanRapid": "../images/列车/JR東日本/E231系常磐LED.png", // 常磐快速線（上野〜取手）：E231系0番台常磐快速線色；无manual线路默认，防兜底山手線
     "Mito": "../images/列车/JR東日本/E531系.png",
     "Nikkoku": "../images/列车/JR東日本/E131系600番台.png", // 日光線：E131系600番台
     "Gono": "../images/列车/JR東日本/HB-E220系.png", // 五能線：HB-E220系
@@ -1749,11 +1749,29 @@ var CANONICAL_VEHICLES = {
     asset: "../images/列车/JR東日本/209系3500番台（八高・川越線）.png",
     aliases: ["209系3500番台", "209系3500番台（八高・川越線）"]
   },
+  "jr-east-209-3000-hachiko-kawagoe": {
+    displayName: "209系3000番台",
+    iconName: "209系3000番台（八高・川越線）",
+    asset: "../images/列车/JR東日本/209系3500番台（八高・川越線）.png",
+    aliases: ["209系3000番台", "209系3000番台（八高・川越線）"]
+  },
+  "jr-east-209-3100-kawagoe": {
+    displayName: "209系3100番台",
+    iconName: "209系3100番台（川越線）",
+    asset: "../images/列车/JR東日本/209系3500番台（八高・川越線）.png",
+    aliases: ["209系3100番台", "209系3100番台（川越線）"]
+  },
   "jr-east-209-2000-2100-boso-keiyo": {
     displayName: "209系2000番台 / 2100番台",
     iconName: "209系2000番台 / 2100番台",
-    asset: "../images/列车/JR東日本/E209系（京葉線）.png",
+    asset: "../images/列车/JR東日本/E209系（房総）.png",
     aliases: ["209系2000番台", "209系2100番台", "2100番台"]
+  },
+  "jr-east-e231-900-musashino": {
+    displayName: "E231系900番台",
+    iconName: "E231系900番台",
+    asset: "../images/列车/JR東日本/E231系0番台.png",
+    aliases: ["E231系900番台"]
   },
   "jr-east-253-1000-nikko-kinugawa": {
     displayName: "253系（日光・きぬがわ）",
@@ -1853,6 +1871,12 @@ var LINE_VEHICLE_OVERRIDES = {
     "キハ40": "EV-E301系",
     "キハ40系": "EV-E301系",
     "キハ40系（烏山線）": "EV-E301系"
+  },
+  "Joban": {
+    "E231系0番台": "E231系0番台（常磐快速線・LED）"
+  },
+  "JobanRapid": {
+    "E231系0番台": "E231系0番台（常磐快速線・LED）"
   },
   "Narita": {
     "253系": "E259系",
@@ -2083,9 +2107,9 @@ TOBU_LINE_IDS.forEach(function(lineId) {
     "2500番台（湘南）": "E257系2500番台",
     "2500番台（踊り子）": "E257系2500番台",
     "5500番台（草津・四万）": "E257系5500番台",
-    "2100番台": "E209系（京葉線）",
-    "209系2000番台": "E209系（京葉線）",
-    "209系2100番台": "E209系（京葉線）",
+    "2100番台": "209系2000番台 / 2100番台",
+    "209系2000番台": "209系2000番台 / 2100番台",
+    "209系2100番台": "209系2000番台 / 2100番台",
     "E231系500番台": "E231系総武中央線",
     "E231系900番台": "E231系0番台",
     "100系 Revaty": "500系（リバティ）",
@@ -2199,8 +2223,8 @@ TOBU_LINE_IDS.forEach(function(lineId) {
     "8000形": "8000系",
     "C57形（ばんえつ物語・別）": "C57形（ばんえつ物語）",
     "209系": "E209系（京葉線）",
-    "209系3000番台": "E209系（京葉線）",
-    "209系3100番台": "E209系（京葉線）",
+    "209系3000番台": "209系3500番台",
+    "209系3100番台": "209系3500番台",
     "250系（両毛）": "250系",
     "250型（りょうもう）": "東武250系",
     "250系（りょうもう）": "東武250系",
@@ -3224,16 +3248,40 @@ TOBU_LINE_IDS.forEach(function(lineId) {
       'Local': { 'default': 'E233系0番台' },
     },
     'Joban': {
-      'Rapid': { 'default': 'E231系1000番台 / E233系3000番台' },
-      'Local': { 'default': 'E231系1000番台 / E233系3000番台' },
-      'SpecialRapid': { 'default': 'E231系1000番台 / E233系3000番台' },
+      'Rapid': {
+        'default': 'E231系0番台（常磐快速線・LED）',
+        'destStation': {
+          'Tsuchiura': 'E531系',
+          'Mito': 'E531系',
+          'Katsuta': 'E531系',
+          'Hitachi': 'E531系',
+          'Takahagi': 'E531系',
+          'Iwaki': 'E531系',
+          'Haranomachi': 'E531系',
+          'Sendai': 'E531系'
+        }
+      },
+      'Local': {
+        'default': 'E231系0番台（常磐快速線・LED）',
+        'destStation': {
+          'Tsuchiura': 'E531系',
+          'Mito': 'E531系',
+          'Katsuta': 'E531系',
+          'Hitachi': 'E531系',
+          'Takahagi': 'E531系',
+          'Iwaki': 'E531系',
+          'Haranomachi': 'E531系',
+          'Sendai': 'E531系'
+        }
+      },
+      'SpecialRapid': { 'default': 'E531系' },
       'LimitedExpress': { 'default': 'E657系（ときわ・ひたち）' },
     },
     'JobanLocal': {
       'Local': {
-        'default': 'E233系2000番台',
-        'TokyoMetro': '東京メトロ16000系 / E233系2000番台 / 小田急4000形',
-        'Odakyu': '小田急4000形 / 東京メトロ16000系'
+        'default': 'E233系2000番台 / 東京メトロ16000系 / 小田急4000形',
+        'TokyoMetro': 'E233系2000番台 / 東京メトロ16000系 / 小田急4000形',
+        'Odakyu': 'E233系2000番台 / 小田急4000形 / 東京メトロ16000系'
       },
     },
     'Kawagoe': {
@@ -3245,8 +3293,8 @@ TOBU_LINE_IDS.forEach(function(lineId) {
       'Local': { 'default': '209系3000番台' },
     },
     'Keiyo': {
-      'Local': { 'default': 'E233系5000番台 / E231系900番台' },
-      'Rapid': { 'default': 'E233系5000番台 / E231系900番台' },
+      'Local': { 'default': 'E233系5000番台' },
+      'Rapid': { 'default': 'E233系5000番台' },
       'LimitedExpress': { 'default': 'E257系500番台' },
     },
     'Musashino': {
