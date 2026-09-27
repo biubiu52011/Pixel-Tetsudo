@@ -85,7 +85,7 @@
           var d = tx[_tr].dir || _throughDirForStation(lineId, stationId, tx[_tr].lineId) || "middle";
           if (!dir || d === dir) n++;
         }
-        return Math.min(n, 3);
+        return dir ? (n ? 1 : 0) : Math.min(n, 3);
       };
       var _topRows = _throughRowsAt(stations[0], "up") || (_throughDirForStation(lineId, stations[0]) === "up" ? 1 : 0);
       var _botRows = _throughRowsAt(stations[stations.length - 1], "down") || (_throughDirForStation(lineId, stations[stations.length - 1]) === "down" ? 1 : 0);

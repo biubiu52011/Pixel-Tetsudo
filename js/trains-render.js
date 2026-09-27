@@ -440,40 +440,64 @@
       }
       thruList = _normalizeThroughChipList(thruList);
       var _scs = o.stationCoords || [];
-      for (var tI2 = 0; tI2 < thruList.length; tI2++) {
-        var tt = thruList[tI2];
-        var sz = _throughChipSize(tt, isMobileView);
-        var lx, ly;
-        var _slot = tt._throughSlot || 0;
-        var _rowH = sz.rowH || (sz.h + 4);
-        var _leftLane = (anchor === "start" || side === "left" || side === "dual");
-        var _laneGap = (tt.dir === "up" || tt.dir === "down") ? 12 : (isMobileView ? 24 : 20);
-        var _laneX = _leftLane ? (o.x - sz.w - _laneGap) : (o.x + _laneGap);
-        if (tt.dir === "up") {
-          lx = _laneX;
-          ly = o.y - 16 - (_slot + 1) * _rowH;
+      var _chipGap = 6;
+      var _middleGap = 4;
+      var _laneGapMiddle = isMobileView ? 24 : 20;
+      var _renderChipAt = function(item, x0, y0) {
+        var s0 = _throughChipSize(item, isMobileView);
+        var lx0 = Math.max(2, Math.min(x0, svgW - s0.w - 2));
+        var ly0 = Math.max(2, Math.min(y0, svgH - s0.h - 2));
+        item._throughSide = lx0 < o.x ? "left" : "right";
+        _renderThroughChip(staticLayer, svgNS, lx0, ly0, item, ICON, isMobileView);
+      };
+      var _layoutEndpoint = function(dir, baseY) {
+        var list = thruList.filter(function(x) { return x && x.dir === dir; });
+        if (!list.length) return;
+        var totalW = 0;
+        var maxH = 0;
+        var sizes = [];
+        for (var li = 0; li < list.length; li++) {
+          sizes[li] = _throughChipSize(list[li], isMobileView);
+          totalW += sizes[li].w;
+          maxH = Math.max(maxH, sizes[li].h);
         }
-        else if (tt.dir === "down") {
-          var _extLast = null;
-          if (geometry.fusionMap && _scs.length) {
-            for (var _ei = _scs.length - 1; _ei >= 0; _ei--) {
-              if (_scs[_ei].fusionLineId) { _extLast = _scs[_ei]; break; }
-            }
-          }
-          var _scD = _extLast || { x: o.x, y: o.y };
-          var _chipBot = iy0 + rows * ICON + (rows - 1) * GAP + 2;
-          lx = _laneX;
-          ly = Math.max(_chipBot + 4, _scD.y + 8) + _slot * _rowH;
+        totalW += (list.length - 1) * _chipGap;
+        var cx = o.x - totalW / 2;
+        for (var lj = 0; lj < list.length; lj++) {
+          _renderChipAt(list[lj], cx, baseY + (maxH - sizes[lj].h) / 2);
+          cx += sizes[lj].w + _chipGap;
         }
-        else {
-          var _middleLeftLane = anchor === "start";
-          lx = _middleLeftLane ? (o.x - sz.w - _laneGap) : (o.x + _laneGap);
-          ly = o.y - sz.h / 2 + _slot * _rowH;
+      };
+      _layoutEndpoint("up", o.y - 16 - (isMobileView ? 26 : 22));
+      var _extLast = null;
+      if (geometry.fusionMap && _scs.length) {
+        for (var _ei = _scs.length - 1; _ei >= 0; _ei--) {
+          if (_scs[_ei].fusionLineId) { _extLast = _scs[_ei]; break; }
         }
-        lx = Math.max(2, Math.min(lx, svgW - sz.w - 2));
-        ly = Math.max(2, Math.min(ly, svgH - sz.h - 2));
-        tt._throughSide = lx < o.x ? "left" : "right";
-        _renderThroughChip(staticLayer, svgNS, lx, ly, tt, ICON, isMobileView);
+      }
+      var _scD = _extLast || { x: o.x, y: o.y };
+      var _chipBot = iy0 + rows * ICON + (rows - 1) * GAP + 2;
+      _layoutEndpoint("down", Math.max(_chipBot + 4, _scD.y + 8));
+
+      var _middleList = thruList.filter(function(x) {
+        return x && x.dir !== "up" && x.dir !== "down";
+      });
+      if (_middleList.length) {
+        var _middleSizes = [];
+        var _middleH = 0;
+        for (var mi = 0; mi < _middleList.length; mi++) {
+          _middleSizes[mi] = _throughChipSize(_middleList[mi], isMobileView);
+          _middleH += _middleSizes[mi].h;
+        }
+        _middleH += (_middleList.length - 1) * _middleGap;
+        var _middleY = o.y - _middleH / 2;
+        var _middleLeftLane = anchor === "start";
+        for (var mj = 0; mj < _middleList.length; mj++) {
+          var _ms = _middleSizes[mj];
+          var _mx = _middleLeftLane ? (o.x - _ms.w - _laneGapMiddle) : (o.x + _laneGapMiddle);
+          _renderChipAt(_middleList[mj], _mx, _middleY);
+          _middleY += _ms.h + _middleGap;
+        }
       }
     }
   }

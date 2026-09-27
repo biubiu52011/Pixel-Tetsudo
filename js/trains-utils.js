@@ -46,18 +46,6 @@ function _throughChipSize(lineObj, mobile) {
   var nm = _throughShortName(lineObj, mobile);
   var throughLbl = (typeof window.t === "function" && window.t("train.through")) ? window.t("train.through") : "直通";
   var label = lineObj && lineObj.overflowCount ? (throughLbl + nm) : (throughLbl + nm);
-  var dir = lineObj && (lineObj.dir === "up" || lineObj.dir === "down") ? lineObj.dir : "middle";
-  if (dir !== "middle") {
-    return {
-      w: mobile ? 118 : 96,
-      h: mobile ? 22 : 18,
-      label: label,
-      fontSize: mobile ? 11 : 9,
-      rowH: mobile ? 26 : 22,
-      arrowX: 6,
-      textX: 12
-    };
-  }
   var fontSize = mobile ? 11 : 9;
   var charW = mobile ? 10 : 8;
   var arrowSlot = mobile ? 12 : 11;
@@ -118,12 +106,24 @@ function _normalizeThroughChipList(items) {
 
 function _throughChipRows(items, dir) {
   var n = 0;
+  var hasUp = false;
+  var hasDown = false;
+  var middle = 0;
   for (var i = 0; i < (items || []).length; i++) {
     if (!items[i] || !items[i].through) continue;
     var d = items[i].dir === "up" || items[i].dir === "down" ? items[i].dir : "middle";
-    if (!dir || d === dir) n++;
+    if (dir) {
+      if (d === dir) n++;
+    } else if (d === "up") {
+      hasUp = true;
+    } else if (d === "down") {
+      hasDown = true;
+    } else {
+      middle++;
+    }
   }
-  return Math.min(n, 3);
+  if (dir) return n ? 1 : 0;
+  return (hasUp ? 1 : 0) + (hasDown ? 1 : 0) + Math.min(middle, 3);
 }
 
 function _hexToRgba(hex, a) {
