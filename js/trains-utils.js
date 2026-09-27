@@ -47,13 +47,12 @@ function _throughChipSize(lineObj, mobile) {
   var throughLbl = (typeof window.t === "function" && window.t("train.through")) ? window.t("train.through") : "直通";
   var label = lineObj && lineObj.overflowCount ? (throughLbl + nm) : (throughLbl + nm);
   var fontSize = mobile ? 11 : 9;
-  var charW = mobile ? 10 : 8;
   var arrowSlot = mobile ? 12 : 11;
-  var gap = charW;
+  var gap = mobile ? 10 : 8;
   var padX = mobile ? 5 : 4;
   var padEnd = mobile ? 8 : 6;
   var maxW = mobile ? 148 : 124;
-  var textW = label.length * charW;
+  var textW = _measureThroughLabelWidth(label, fontSize);
   var rawW = padX + arrowSlot + gap + textW + padEnd;
   var contentH = Math.max(fontSize + 8, mobile ? 20 : 16);
   var w = Math.min(maxW, rawW);
@@ -68,6 +67,53 @@ function _throughChipSize(lineObj, mobile) {
     arrowX: contentX + arrowSlot / 2,
     textX: contentX + arrowSlot + gap
   };
+}
+
+var _throughLabelMeasureCache = {};
+function _estimateThroughLabelWidth(label, fontSize) {
+  var w = 0;
+  var s = String(label || "");
+  for (var i = 0; i < s.length; i++) {
+    var code = s.charCodeAt(i);
+    if (/\s/.test(s.charAt(i))) w += fontSize * 0.5;
+    else if (code >= 0x3000 || code === 0x2026) w += fontSize;
+    else w += fontSize * 0.68;
+  }
+  return Math.ceil(w);
+}
+
+function _measureThroughLabelWidth(label, fontSize) {
+  var key = fontSize + "|" + label;
+  if (_throughLabelMeasureCache[key] != null) return _throughLabelMeasureCache[key];
+  var fallback = _estimateThroughLabelWidth(label, fontSize);
+  try {
+    if (typeof document === "undefined" || !document.body) {
+      _throughLabelMeasureCache[key] = fallback;
+      return fallback;
+    }
+    var ns = "http://www.w3.org/2000/svg";
+    var svg = document.createElementNS(ns, "svg");
+    var text = document.createElementNS(ns, "text");
+    svg.setAttribute("width", "0");
+    svg.setAttribute("height", "0");
+    svg.style.position = "absolute";
+    svg.style.left = "-9999px";
+    svg.style.top = "-9999px";
+    svg.style.visibility = "hidden";
+    text.setAttribute("font-family", "Fusion Pixel, 'Courier New', monospace");
+    text.setAttribute("font-size", fontSize);
+    text.setAttribute("font-weight", "700");
+    text.textContent = label;
+    svg.appendChild(text);
+    document.body.appendChild(svg);
+    var measured = Math.ceil(text.getComputedTextLength ? text.getComputedTextLength() : fallback);
+    document.body.removeChild(svg);
+    _throughLabelMeasureCache[key] = measured || fallback;
+    return _throughLabelMeasureCache[key];
+  } catch (e) {
+    _throughLabelMeasureCache[key] = fallback;
+    return fallback;
+  }
 }
 
 function _normalizeThroughChipList(items) {
