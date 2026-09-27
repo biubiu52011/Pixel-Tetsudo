@@ -30,7 +30,7 @@
     arr.setAttribute("stroke-width", mobile ? "3.5" : "3");
     arr.setAttribute("stroke-linejoin", "round");
     var _ax = x + 6;
-    var _ay = y + (mobile ? 8 : 6);
+    var _ay = y + h / 2;
     var _d;
     if (dir === "up") {
       // up=▲ 尖朝上
@@ -50,10 +50,11 @@
     layer.appendChild(arr);
     var txt = document.createElementNS(ns, "text");
     txt.setAttribute("x", x + 12);
-    txt.setAttribute("y", y + (mobile ? 14 : 12));
+    txt.setAttribute("y", y + h / 2);
     txt.setAttribute("font-size", sz.fontSize || (mobile ? 11 : 9));
     txt.setAttribute("fill", lc);
     txt.setAttribute("font-weight", "700");
+    txt.setAttribute("dominant-baseline", "central");
     txt.textContent = label;
     layer.appendChild(txt);
     return w + 2; // consumed width (for flow layout advance)
