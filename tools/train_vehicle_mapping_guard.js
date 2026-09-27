@@ -121,7 +121,7 @@ function assertNoFilenameDependentIdentity(win) {
     'E209系',
     'E209系（房総）',
     'E209系（京葉線）',
-    'E209系3500番台',
+    '209系3500番台（八高・川越線）',
     'E231系常磐LED',
     'E235系山手線',
     'E235系総武中央線',
@@ -130,12 +130,12 @@ function assertNoFilenameDependentIdentity(win) {
     'JR東日本E253系',
     'E209系（e209_kt2）',
     'E209系（e209_kt）',
-    'E209系（e209c）',
-    'E209系（e209hk）',
+    '209系2000・2100番台（房総地区）',
+    '209系3000番台（八高・川越線）',
     'E209系（e209jg2）',
-    'E209系（e209jg3）',
+    '209系1000番台（中央快速線）',
     'E209系（e209jg4）',
-    'E209系（e209jg）',
+    '209系1000番台（常磐緩行線）',
     'E209系（e209jy1）',
     'E209系（e209jy）',
     'E209系（e209kt0）',
@@ -144,13 +144,13 @@ function assertNoFilenameDependentIdentity(win) {
     'E209系（e209kt_ad）',
     'E209系（e209kt）',
     'E209系（e209ky1）',
-    'E209系（e209ky）',
-    'E209系（e209mu）',
+    '209系500番台（京葉線）',
+    '209系500番台（武蔵野線）',
     'E209系（e209na2）',
-    'E209系（e209na3）',
-    'E209系（e209na）',
+    '209系2200番台（南武線）',
+    '209系0番台（南武線）',
     'E209系（e209or1）',
-    'E209系（e209so1）',
+    '209系500番台（中央・総武緩行線・ミツ501-510）',
     'E209系（e209so）',
     'E209系（e209sta）'
   ].forEach((name) => {
@@ -228,7 +228,7 @@ function main() {
   expectIcon(win, 'E235 0 Yamanote', 'E235系0番台（山手線）', 'Yamanote', 'E235系山手線.png', ['E235系1000番台.png', 'E235系総武中央線.png']);
   expectIcon(win, 'E235 1000 Yokosuka', 'E235系1000番台', 'Yokosuka', 'E235系1000番台.png', ['E235系山手線.png', 'E235系総武中央線.png']);
   expectIcon(win, 'Tozai E231-800', 'E231系800番台（東西線直通）', 'Tozai', 'E231系800番台（東西線直通・青帯）.png', ['E231系総武中央線.png']);
-  expectIcon(win, 'Hachiko 209-3500', '209系3500番台', 'Hachiko', 'E209系3500番台.png', ['E209系（京葉線）.png']);
+  expectIcon(win, 'Hachiko 209-3500', '209系3500番台', 'Hachiko', '209系3500番台（八高・川越線）.png', ['E209系（京葉線）.png']);
   expectIcon(win, 'Nikko formal 253', '253系（日光・きぬがわ）', 'UtsunomiyaJR', '253系（日光・きぬがわ）.png', ['E253系.png']);
 
   const canonical = win.TrainIcons.resolveCanonicalVehicle('jr-east-e235-0-yamanote');
@@ -258,13 +258,13 @@ function main() {
     lineId: 'Hachiko',
     operator: 'JR-East',
     trainType: trainType('JR-East', 'Local')
-  }, '209系3500番台', 'E209系3500番台.png', ['E209系（京葉線）.png']);
+  }, '209系3500番台', '209系3500番台（八高・川越線）.png', ['E209系（京葉線）.png']);
 
   expectRuntime(win, 'KawagoeWest runtime Phase3B', {
     lineId: 'KawagoeWest',
     operator: 'JR-East',
     trainType: trainType('JR-East', 'Local')
-  }, '209系3500番台', 'E209系3500番台.png', ['E209系（京葉線）.png']);
+  }, '209系3500番台', '209系3500番台（八高・川越線）.png', ['E209系（京葉線）.png']);
 
   expectRuntime(win, 'Yokosuka local accepted safe behavior', {
     lineId: 'Yokosuka',

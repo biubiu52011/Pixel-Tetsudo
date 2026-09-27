@@ -16,7 +16,7 @@
   // Vehicle deployment zones: specific rolling stock only runs on listed segments
   var VEHICLE_DEPLOYMENTS = {
     // 埼京線 ↔ 川越線：大宮〜川越間は埼京線車両 E233系7000番台が直通担当
-    // （川越線独自区間 川越〜高麗川 は LINE_ICONS の E209系3500番台）
+    // （川越線独自区間 川越〜高麗川 は LINE_ICONS の 209系3500番台（八高・川越線））
     "SaikyoKawagoe": {
       routes: [
         { line: "Kawagoe", from: "Omiya", to: "Kawagoe", icon: "../images/列车/JR東日本/E233系7000番台.png", priority: 2 }
@@ -165,8 +165,8 @@
   "Ome": "../images/列车/JR東日本/E233系青梅線.png",
   "Itsukaichi": "../images/列车/JR東日本/E233系青梅線.png",
   "Saikyo": "../images/列车/JR東日本/E233系7000番台.png",
-  "Kawagoe": "../images/列车/JR東日本/E209系3500番台.png",
-  "KawagoeWest": "../images/列车/JR東日本/E209系3500番台.png",
+  "Kawagoe": "../images/列车/JR東日本/209系3500番台（八高・川越線）.png",
+  "KawagoeWest": "../images/列车/JR東日本/209系3500番台（八高・川越線）.png",
   "ShonanShinjuku": "../images/列车/JR東日本/E233系3000番台.png",
   "Yokosuka": "../images/列车/JR東日本/E235系1000番台.png",
   "SobuRapid": "../images/列车/JR東日本/E235系1000番台.png",
@@ -525,7 +525,7 @@
   "E233系0番台": "../images/列车/JR東日本/E233系0番台.png",
   "E233系青梅線": "../images/列车/JR東日本/E233系青梅線.png",
   "E233系7000番台": "../images/列车/JR東日本/E233系7000番台.png",
-  "E209系3500番台": "../images/列车/JR東日本/E209系3500番台.png",
+  "209系3500番台（八高・川越線）": "../images/列车/JR東日本/209系3500番台（八高・川越線）.png",
   "E233系3000番台": "../images/列车/JR東日本/E233系3000番台.png",
   "E235系1000番台": "../images/列车/JR東日本/E235系1000番台.png",
   "E231系常磐LED": "../images/列车/JR東日本/E231系常磐LED.png",
@@ -1465,7 +1465,7 @@
     "E209系": true,
     "E209系（房総）": true,
     "E209系（京葉線）": true,
-    "E209系3500番台": true,
+    "209系3500番台（八高・川越線）": true,
     "E231系常磐LED": true,
     "E235系山手線": true,
     "E235系総武中央線": true,
@@ -1474,12 +1474,12 @@
     "JR東日本E253系": true,
     "E209系（e209_kt2）": true,
     "E209系（e209_kt）": true,
-    "E209系（e209c）": true,
-    "E209系（e209hk）": true,
+    "209系2000・2100番台（房総地区）": true,
+    "209系3000番台（八高・川越線）": true,
     "E209系（e209jg2）": true,
-    "E209系（e209jg3）": true,
+    "209系1000番台（中央快速線）": true,
     "E209系（e209jg4）": true,
-    "E209系（e209jg）": true,
+    "209系1000番台（常磐緩行線）": true,
     "E209系（e209jy1）": true,
     "E209系（e209jy）": true,
     "E209系（e209kt0）": true,
@@ -1488,13 +1488,13 @@
     "E209系（e209kt_ad）": true,
     "E209系（e209kt）": true,
     "E209系（e209ky1）": true,
-    "E209系（e209ky）": true,
-    "E209系（e209mu）": true,
+    "209系500番台（京葉線）": true,
+    "209系500番台（武蔵野線）": true,
     "E209系（e209na2）": true,
-    "E209系（e209na3）": true,
-    "E209系（e209na）": true,
+    "209系2200番台（南武線）": true,
+    "209系0番台（南武線）": true,
     "E209系（e209or1）": true,
-    "E209系（e209so1）": true,
+    "209系500番台（中央・総武緩行線・ミツ501-510）": true,
     "E209系（e209so）": true,
     "E209系（e209sta）": true
   };
@@ -1557,7 +1557,7 @@ var VEHICLE_FLEET_WEIGHTS = {
 };
 // v4.3.1025: FLEET_ICON_POOLS 编成/涂装池——同车型多涂装/多编成图，按候选串稳定取图（跨线不变）
 var FLEET_ICON_POOLS = {
-  "E209系": ["../images/列车/JR東日本/E209系.png", "../images/列车/JR東日本/E209系（e209c）.png", "../images/列车/JR東日本/E209系（e209hk）.png", "../images/列车/JR東日本/E209系（e209jg）.png", "../images/列车/JR東日本/E209系（e209jg2）.png", "../images/列车/JR東日本/E209系（e209jg3）.png", "../images/列车/JR東日本/E209系（e209jg4）.png", "../images/列车/JR東日本/E209系（e209jy）.png", "../images/列车/JR東日本/E209系（e209jy1）.png", "../images/列车/JR東日本/E209系（e209kt）.png", "../images/列车/JR東日本/E209系（e209kt0）.png", "../images/列车/JR東日本/E209系（e209kt2）.png", "../images/列车/JR東日本/E209系（e209kt3）.png", "../images/列车/JR東日本/E209系（e209kt_ad）.png", "../images/列车/JR東日本/E209系（e209ky）.png", "../images/列车/JR東日本/E209系（e209ky1）.png", "../images/列车/JR東日本/E209系（e209mu）.png", "../images/列车/JR東日本/E209系（e209na）.png", "../images/列车/JR東日本/E209系（e209na2）.png", "../images/列车/JR東日本/E209系（e209na3）.png", "../images/列车/JR東日本/E209系（e209or1）.png", "../images/列车/JR東日本/E209系（e209so）.png", "../images/列车/JR東日本/E209系（e209so1）.png", "../images/列车/JR東日本/E209系（e209sta）.png", "../images/列车/JR東日本/E209系（e209_kt）.png", "../images/列车/JR東日本/E209系（e209_kt2）.png"],
+  "E209系": ["../images/列车/JR東日本/E209系.png", "../images/列车/JR東日本/209系2000・2100番台（房総地区）.png", "../images/列车/JR東日本/209系3000番台（八高・川越線）.png", "../images/列车/JR東日本/209系1000番台（常磐緩行線）.png", "../images/列车/JR東日本/E209系（e209jg2）.png", "../images/列车/JR東日本/209系1000番台（中央快速線）.png", "../images/列车/JR東日本/E209系（e209jg4）.png", "../images/列车/JR東日本/E209系（e209jy）.png", "../images/列车/JR東日本/E209系（e209jy1）.png", "../images/列车/JR東日本/E209系（e209kt）.png", "../images/列车/JR東日本/E209系（e209kt0）.png", "../images/列车/JR東日本/E209系（e209kt2）.png", "../images/列车/JR東日本/E209系（e209kt3）.png", "../images/列车/JR東日本/E209系（e209kt_ad）.png", "../images/列车/JR東日本/209系500番台（京葉線）.png", "../images/列车/JR東日本/E209系（e209ky1）.png", "../images/列车/JR東日本/209系500番台（武蔵野線）.png", "../images/列车/JR東日本/209系0番台（南武線）.png", "../images/列车/JR東日本/E209系（e209na2）.png", "../images/列车/JR東日本/209系2200番台（南武線）.png", "../images/列车/JR東日本/E209系（e209or1）.png", "../images/列车/JR東日本/E209系（e209so）.png", "../images/列车/JR東日本/209系500番台（中央・総武緩行線・ミツ501-510）.png", "../images/列车/JR東日本/E209系（e209sta）.png", "../images/列车/JR東日本/E209系（e209_kt）.png", "../images/列车/JR東日本/E209系（e209_kt2）.png"],
   "313系": ["../images/列车/JR東海/313系.png", "../images/列车/JR東海/313系（c313bb）.png", "../images/列车/JR東海/313系（c313ce）.png", "../images/列车/JR東海/313系（c313h）.png", "../images/列车/JR東海/313系（c313hp）.png", "../images/列车/JR東海/313系（c313p）.png"],
   "315系": ["../images/列车/JR東海/315系.png", "../images/列车/JR東海/315系（c315k）.png"],
   "383系": ["../images/列车/JR東海/383系（c383）.png", "../images/列车/JR東海/383系（c383k）.png", "../images/列车/JR東海/383系（c383k_）.png"],
@@ -1751,9 +1751,9 @@ var CANONICAL_VEHICLES = {
   },
   "jr-east-209-3500-hachiko-kawagoe": {
     displayName: "209系3500番台",
-    iconName: "E209系3500番台",
-    asset: "../images/列车/JR東日本/E209系3500番台.png",
-    aliases: ["209系3500番台", "E209系3500番台"]
+    iconName: "209系3500番台（八高・川越線）",
+    asset: "../images/列车/JR東日本/209系3500番台（八高・川越線）.png",
+    aliases: ["209系3500番台", "209系3500番台（八高・川越線）"]
   },
   "jr-east-209-2000-2100-boso-keiyo": {
     displayName: "209系2000番台 / 2100番台",
