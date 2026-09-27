@@ -48,15 +48,14 @@ function _throughChipSize(lineObj, mobile) {
   var label = lineObj && lineObj.overflowCount ? (throughLbl + nm) : (throughLbl + nm);
   var fontSize = mobile ? 11 : 9;
   var charW = mobile ? 10 : 8;
-  var arrowSlot = mobile ? 18 : 16;
-  var gap = mobile ? 5 : 4;
-  var padX = mobile ? 8 : 7;
-  var minW = mobile ? 104 : 84;
+  var arrowSlot = mobile ? 12 : 11;
+  var gap = mobile ? 3 : 3;
+  var padX = mobile ? 5 : 4;
   var maxW = mobile ? 148 : 124;
   var textW = label.length * charW;
   var rawW = padX * 2 + arrowSlot + gap + textW;
   var contentH = Math.max(fontSize + 8, mobile ? 20 : 16);
-  var w = Math.max(minW, Math.min(maxW, rawW));
+  var w = Math.min(maxW, rawW);
   var contentW = arrowSlot + gap + textW;
   var contentX = Math.max(padX, Math.floor((w - contentW) / 2));
   return {

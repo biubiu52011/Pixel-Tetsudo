@@ -447,7 +447,8 @@
         var _slot = tt._throughSlot || 0;
         var _rowH = sz.rowH || (sz.h + 4);
         var _leftLane = (anchor === "start" || side === "left" || side === "dual");
-        var _laneX = _leftLane ? (o.x - sz.w - 12) : (o.x + 12);
+        var _laneGap = isMobileView ? 24 : 20;
+        var _laneX = _leftLane ? (o.x - sz.w - _laneGap) : (o.x + _laneGap);
         if (tt.dir === "up") {
           lx = _laneX;
           ly = o.y - 16 - (_slot + 1) * _rowH;
@@ -466,7 +467,7 @@
         }
         else {
           var _middleLeftLane = anchor === "start";
-          lx = _middleLeftLane ? (o.x - sz.w - 12) : (o.x + (isJunction ? 18 : 14));
+          lx = _middleLeftLane ? (o.x - sz.w - _laneGap) : (o.x + _laneGap);
           ly = o.y - sz.h / 2 + _slot * _rowH;
         }
         lx = Math.max(2, Math.min(lx, svgW - sz.w - 2));
