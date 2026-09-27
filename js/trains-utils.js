@@ -49,17 +49,24 @@ function _throughChipSize(lineObj, mobile) {
   var fontSize = mobile ? 11 : 9;
   var charW = mobile ? 10 : 8;
   var arrowSlot = mobile ? 18 : 16;
-  var padX = mobile ? 12 : 10;
+  var gap = mobile ? 5 : 4;
+  var padX = mobile ? 8 : 7;
   var minW = mobile ? 104 : 84;
   var maxW = mobile ? 148 : 124;
-  var rawW = arrowSlot + label.length * charW + padX;
+  var textW = label.length * charW;
+  var rawW = padX * 2 + arrowSlot + gap + textW;
   var contentH = Math.max(fontSize + 8, mobile ? 20 : 16);
+  var w = Math.max(minW, Math.min(maxW, rawW));
+  var contentW = arrowSlot + gap + textW;
+  var contentX = Math.max(padX, Math.floor((w - contentW) / 2));
   return {
-    w: Math.max(minW, Math.min(maxW, rawW)),
+    w: w,
     h: contentH,
     label: label,
     fontSize: fontSize,
-    rowH: contentH + (mobile ? 4 : 4)
+    rowH: contentH + (mobile ? 4 : 4),
+    arrowX: contentX + arrowSlot / 2,
+    textX: contentX + arrowSlot + gap
   };
 }
 

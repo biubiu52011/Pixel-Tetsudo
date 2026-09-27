@@ -5,11 +5,11 @@
   function _renderThroughChip(layer, ns, x, y, lineObj, iconSize, mobile) {
     var sz = _throughChipSize(lineObj, mobile);
     var label = sz.label;
-    var w = sz.w - 2, h = sz.h;
+    var w = sz.w, h = sz.h;
     var lc = lineObj.color || "#555";
     var bg = document.createElementNS(ns, "rect");
-    bg.setAttribute("x", x - 1);
-    bg.setAttribute("y", y - 2);
+    bg.setAttribute("x", x);
+    bg.setAttribute("y", y);
     bg.setAttribute("width", w);
     bg.setAttribute("height", h);
     bg.setAttribute("rx", "3");
@@ -29,7 +29,7 @@
     arr.setAttribute("stroke", lc);
     arr.setAttribute("stroke-width", mobile ? "3.5" : "3");
     arr.setAttribute("stroke-linejoin", "round");
-    var _ax = x + 6;
+    var _ax = x + (sz.arrowX || 8);
     var _ay = y + h / 2;
     var _d;
     if (dir === "up") {
@@ -49,7 +49,7 @@
     arr.setAttribute("d", _d);
     layer.appendChild(arr);
     var txt = document.createElementNS(ns, "text");
-    txt.setAttribute("x", x + 12);
+    txt.setAttribute("x", x + (sz.textX || 14));
     txt.setAttribute("y", y + h / 2);
     txt.setAttribute("font-size", sz.fontSize || (mobile ? 11 : 9));
     txt.setAttribute("fill", lc);
@@ -57,7 +57,7 @@
     txt.setAttribute("dominant-baseline", "central");
     txt.textContent = label;
     layer.appendChild(txt);
-    return w + 2; // consumed width (for flow layout advance)
+    return w; // consumed width (for flow layout advance)
   }
   
   /**
