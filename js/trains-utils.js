@@ -49,7 +49,7 @@ function _throughChipSize(lineObj, mobile) {
   var fontSize = mobile ? 11 : 9;
   var charW = mobile ? 10 : 8;
   var arrowSlot = mobile ? 12 : 11;
-  var gap = charW * 2;
+  var gap = charW;
   var padX = mobile ? 5 : 4;
   var padEnd = mobile ? 8 : 6;
   var maxW = mobile ? 148 : 124;
