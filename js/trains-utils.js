@@ -46,6 +46,18 @@ function _throughChipSize(lineObj, mobile) {
   var nm = _throughShortName(lineObj, mobile);
   var throughLbl = (typeof window.t === "function" && window.t("train.through")) ? window.t("train.through") : "直通";
   var label = lineObj && lineObj.overflowCount ? (throughLbl + nm) : (throughLbl + nm);
+  var dir = lineObj && (lineObj.dir === "up" || lineObj.dir === "down") ? lineObj.dir : "middle";
+  if (dir !== "middle") {
+    return {
+      w: mobile ? 118 : 96,
+      h: mobile ? 22 : 18,
+      label: label,
+      fontSize: mobile ? 11 : 9,
+      rowH: mobile ? 26 : 22,
+      arrowX: 6,
+      textX: 12
+    };
+  }
   var fontSize = mobile ? 11 : 9;
   var charW = mobile ? 10 : 8;
   var arrowSlot = mobile ? 12 : 11;

@@ -447,7 +447,7 @@
         var _slot = tt._throughSlot || 0;
         var _rowH = sz.rowH || (sz.h + 4);
         var _leftLane = (anchor === "start" || side === "left" || side === "dual");
-        var _laneGap = isMobileView ? 24 : 20;
+        var _laneGap = (tt.dir === "up" || tt.dir === "down") ? 12 : (isMobileView ? 24 : 20);
         var _laneX = _leftLane ? (o.x - sz.w - _laneGap) : (o.x + _laneGap);
         if (tt.dir === "up") {
           lx = _laneX;
