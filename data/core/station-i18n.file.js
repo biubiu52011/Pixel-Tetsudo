@@ -19678,7 +19678,9 @@ window.RAILWAY_I18N = {
  },
  "Tomita": {
   "ja": "富田",
-  "en": "Tomita"
+  "en": "Tomita",
+  "zh": "富田",
+  "ko": "富田"
  },
  "Tona": {
   "ja": "戸奈",
@@ -19690,7 +19692,9 @@ window.RAILWAY_I18N = {
  },
  "Tsugaru-Hamana": {
   "ja": "津軽浜名",
-  "en": "Tsugaru-Hamana"
+  "en": "Tsugaru-Hamana",
+  "zh": "Tsugaru Hamana",
+  "ko": "Tsugaru Hamana"
  },
  "Umijiri": {
   "ja": "海尻",
@@ -27961,5 +27965,198 @@ window.RAILWAY_I18N = {
   "zh": "吉松",
   "ko": "요마",
   "en": "Yoshimatsu"
+ },
+ "Aizu-Minamiwa": {
+  "ja": "会津南若松",
+  "zh": "会津南若松",
+  "ko": "아이즈미나미와카마쓰",
+  "en": "Aizu-Minami-Wakamatsu"
+ },
+ "Ashizawa": {
+  "ja": "芦沢",
+  "zh": "芦泽",
+  "ko": "아시자와",
+  "en": "Ashizawa"
+ },
+ "Atago-Miyagi": {
+  "ja": "愛宕",
+  "zh": "爱宕",
+  "ko": "아타고",
+  "en": "Atago"
+ },
+ "Bakurōmae": {
+  "ja": "馬喰町",
+  "zh": "马喰町",
+  "ko": "바쿠로초",
+  "en": "Bakurocho"
+ },
+ "Douzawa": {
+  "ja": "堂沢",
+  "zh": "堂泽",
+  "ko": "도자와",
+  "en": "Douzawa"
+ },
+ "Haiki": {
+  "ja": "早岐",
+  "zh": "早岐",
+  "ko": "하이키",
+  "en": "Haiki"
+ },
+ "Harada-Fukuoka": {
+  "ja": "原田",
+  "zh": "原田",
+  "ko": "하라다",
+  "en": "Harada"
+ },
+ "Hotaru-Kaihinkogen": {
+  "ja": "蛍海浜公園",
+  "zh": "萤海滨公园",
+  "ko": "호타루카이힌코엔",
+  "en": "Hotaru-Kaihinkogen"
+ },
+ "Juni": {
+  "ja": "十二",
+  "zh": "十二",
+  "ko": "주니",
+  "en": "Juni"
+ },
+ "Kaimen": {
+  "ja": "海面",
+  "zh": "海面",
+  "ko": "카이멘",
+  "en": "Kaimen"
+ },
+ "Kegon": {
+  "ja": "華厳",
+  "zh": "华严",
+  "ko": "게곤",
+  "en": "Kegon"
+ },
+ "KinutaPark": {
+  "ja": "砧公園",
+  "zh": "砧公园",
+  "ko": "기누타공원",
+  "en": "Kinuta Park"
+ },
+ "Kobayashi-Miyazaki": {
+  "ja": "小林",
+  "zh": "小林",
+  "ko": "고바야시",
+  "en": "Kobayashi"
+ },
+ "Kommata": {
+  "ja": "小俣",
+  "zh": "小俣",
+  "ko": "고마타",
+  "en": "Kommata"
+ },
+ "Kusatsu": {
+  "ja": "草津",
+  "zh": "草津",
+  "ko": "구사쓰",
+  "en": "Kusatsu"
+ },
+ "Matsubara-Nagasaki": {
+  "ja": "松原",
+  "zh": "松原",
+  "ko": "마쓰바라",
+  "en": "Matsubara"
+ },
+ "Minami-Aoyama": {
+  "ja": "南青山",
+  "zh": "南青山",
+  "ko": "미나미아오야마",
+  "en": "Minami-Aoyama"
+ },
+ "Musashimurayama": {
+  "ja": "武蔵村山",
+  "zh": "武藏村山",
+  "ko": "무사시무라야마",
+  "en": "Musashimurayama"
+ },
+ "Narushima-Yonezawa": {
+  "ja": "成島",
+  "zh": "成岛",
+  "ko": "나루시마",
+  "en": "Narushima"
+ },
+ "Okachi": {
+  "ja": "御徒町",
+  "zh": "御徒町",
+  "ko": "오카치마치",
+  "en": "Okachimachi"
+ },
+ "Sesenji": {
+  "ja": "世泉寺",
+  "zh": "世泉寺",
+  "ko": "세센지",
+  "en": "Sesenji"
+ },
+ "Shin-Bayashi": {
+  "ja": "新林",
+  "zh": "新林",
+  "ko": "신바야시",
+  "en": "Shin-Bayashi"
+ },
+ "Shin-Odaimon": {
+  "ja": "新大井門",
+  "zh": "新大井门",
+  "ko": "신오다이몬",
+  "en": "Shin-Odaimon"
+ },
+ "Shin-osaki": {
+  "ja": "新大崎",
+  "zh": "新大崎",
+  "ko": "신오사키",
+  "en": "Shin-Osaki"
+ },
+ "Suginami": {
+  "ja": "杉並",
+  "zh": "杉并",
+  "ko": "스기나미",
+  "en": "Suginami"
+ },
+ "Takine": {
+  "ja": "滝根",
+  "zh": "泷根",
+  "ko": "다키네",
+  "en": "Takine"
+ },
+ "Tampopo": {
+  "ja": "たんぽぽ",
+  "zh": "蒲公英",
+  "ko": "단포포",
+  "en": "Tampopo"
+ },
+ "Teleport-Chuo": {
+  "ja": "テレポート中央",
+  "zh": "电讯港中央",
+  "ko": "텔레포트추오",
+  "en": "Teleport-Chuo"
+ },
+ "Tempozanto-Mae": {
+  "ja": "天保山東前",
+  "zh": "天保山东前",
+  "ko": "덴포잔토마에",
+  "en": "Tempozanto-Mae"
+ },
+ "Tsugaru-Shinjo": {
+  "ja": "津軽新城",
+  "zh": "津轻新城",
+  "ko": "쓰가루신조",
+  "en": "Tsugaru-Shinjo"
+ },
+ "Tsurumi-Ryokuchi": {
+  "ja": "鶴見緑地",
+  "zh": "鹤见绿地",
+  "ko": "쓰루미료쿠치",
+  "en": "Tsurumi-Ryokuchi"
+ },
+ "Waga": {
+  "ja": "和賀",
+  "zh": "和贺",
+  "ko": "와가",
+  "en": "Waga"
  }
-};
+}
+;
