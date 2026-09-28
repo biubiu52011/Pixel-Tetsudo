@@ -12,8 +12,7 @@
 
 <div class="header-container">
 <div class="header-text">
-<h1 class="pixel-title" data-i18n="app.title">
-Pixel Tetsudo</h1>
+<h1 class="pixel-title" data-i18n="app.title">ピクセル鉄道</h1>
 </div>
 <div class="lang-switcher-wrapper">
 <button id="langToggleBtn" class="lang-toggle-btn" title="Switch Language" aria-haspopup="listbox" aria-expanded="false" aria-label="Switch language">
@@ -35,50 +34,40 @@ English</button>
 </header>
 
 <nav class="pixel-tabs">
-<a href="home.html" class="tab-btn active" data-tab="search" data-i18n="tab.search">
-路線検索</a><a href="realtime.html" class="tab-btn" data-tab="status" data-i18n="tab.status">
-運行状況</a>
-<a href="trains.html" class="tab-btn" data-tab="trains" data-i18n="tab.trains">
-列車リアルタイム</a>
-<a href="history.html" class="tab-btn" data-tab="history" data-i18n="tab.history">
-検索履歴</a>
+<a href="home.html" class="tab-btn active" data-tab="search" data-i18n="tab.search">路線検索</a><a href="realtime.html" class="tab-btn" data-tab="status" data-i18n="tab.status">運行状況</a>
+<a href="trains.html" class="tab-btn" data-tab="trains" data-i18n="tab.trains">列車リアルタイム</a>
+<a href="history.html" class="tab-btn" data-tab="history" data-i18n="tab.history">検索履歴</a>
 </nav>
 <section id="tab-search" class="tab-content active">
 <div class="home-modules">
 <div id="searchContainer" class="search-card pixel-card">
 <div class="module-title">
-    <h2 data-i18n="search.title">
-路線検索</h2>
+    <h2 data-i18n="search.title">路線検索</h2>
   </div>
 <div class="search-inputs">
 <div class="input-group">
-<label class="input-label" data-i18n="search.fromLabel">
-出発駅</label>
+<label class="input-label" data-i18n="search.fromLabel">出発駅</label>
 <input type="text" id="searchFrom" class="search-input" data-i18n-placeholder="search.fromPlaceholder" placeholder="出発駅を入力してください"><div id="fromSuggestions" class="suggestions">
 </div>
 </div>
 <button id="swapBtn" class="swap-btn" aria-label="swap" title="入れ替え"><svg class="pt-icon" viewBox="0 0 14 14" width="16" height="16" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path fill-rule="evenodd" clip-rule="evenodd" d="M8 0a1 1 0 0 0 0 2h1.5a.5.5 0 0 1 .5.5v6H8.5a.5.5 0 0 0-.354.854l2.5 2.5a.5.5 0 0 0 .708 0l2.5-2.5A.5.5 0 0 0 13.5 8.5H12v-6A2.5 2.5 0 0 0 9.5 0zM3.354 2.146a.5.5 0 0 0-.708 0l-2.5 2.5A.5.5 0 0 0 .5 5.5H2v6A2.5 2.5 0 0 0 4.5 14H6a1 1 0 1 0 0-2H4.5a.5.5 0 0 1-.5-.5v-6h1.5a.5.5 0 0 0 .354-.854z"/></svg></button>
 <div class="input-group">
-<label class="input-label" data-i18n="search.toLabel">
-到着駅</label>
+<label class="input-label" data-i18n="search.toLabel">到着駅</label>
 <input type="text" id="searchTo" class="search-input" data-i18n-placeholder="search.toPlaceholder" placeholder="到着駅を入力してください"><div id="toSuggestions" class="suggestions">
 </div>
 </div>
-<button id="searchBtn" class="search-btn" data-i18n="search.btn">
-検索</button>
+<button id="searchBtn" class="search-btn" data-i18n="search.btn">検索</button>
 </div>
 <div id="searchResults" class="search-results">
 </div>
 </div>
 <div id="smModule" class="sm-module pixel-card">
   <div class="module-title">
-    <h2 data-i18n="tourism.title">
-観光スポット</h2>
+    <h2 data-i18n="tourism.title">観光スポット</h2>
   </div>
   <div class="sm-location-bar">
     <div class="sm-location-info">
-      <span class="sm-location-label" data-i18n="tourism.select_station">
-最寄り駅</span>
+      <span class="sm-location-label" data-i18n="tourism.select_station">最寄り駅</span>
       <span id="smStationDisplay" class="sm-station-display">
 </span>
     </div>
@@ -92,16 +81,14 @@ English</button>
     <div id="smGrid" class="sm-grid">
 </div>
     <div id="smEmpty" class="sm-empty hidden">
-            <span data-i18n="tourism.no_spots">
-周辺のスポットがありません</span>
+            <span data-i18n="tourism.no_spots">周辺のスポットがありません</span>
     </div>
   </div>
 </div>
 </div>
-</section><footer class="pixel-footer" data-i18n="app.footer">
-© 2026 Pixel Tetsudo</footer>
+</section><footer class="pixel-footer" data-i18n="app.footer">© 2026 ピクセル鉄道</footer>
 </div>
-<script src="../js/tourism-type.js?v=4.3.841"></script><script src="../data/core/db-loader.js?v=4.3.1030"></script><script src="../data/core/station-i18n.file.js?v=4.3.1030"></script><script src="../data/core/data-config-bundle.js?v=4.3.1028"></script><script src="../js/station-resolver.js?v=4.3.946"></script><script src="../js/translations.js?v=4.3.1042"></script><script src="../js/common.js?v=4.3.968"></script><script src="../js/lang-init.js?v=4.3.836"></script><script src="../data/api/odpt-links.js?v=4.3.836"></script><script src="../js/odpt-lazy.js?v=4.3.836"></script><script src="../data/api/odpt-unified.js?v=4.3.936"></script>
+<script src="../js/tourism-type.js?v=4.3.841"></script><script src="../data/core/db-loader.js?v=4.3.1030"></script><script src="../data/core/station-i18n.file.js?v=4.3.1030"></script><script src="../data/core/data-config-bundle.js?v=4.3.1028"></script><script src="../js/station-resolver.js?v=4.3.946"></script><script src="../js/translations.js?v=4.3.1043"></script><script src="../js/common.js?v=4.3.968"></script><script src="../js/lang-init.js?v=4.3.836"></script><script src="../data/api/odpt-links.js?v=4.3.836"></script><script src="../js/odpt-lazy.js?v=4.3.836"></script><script src="../data/api/odpt-unified.js?v=4.3.936"></script>
 <script src="../js/runinfo-web.js?v=4.3.968"></script>
 <script src="../js/data-fusion.js?v=4.3.968"></script>
 <script src="../js/runinfo-api.js?v=4.3.968"></script>

@@ -547,8 +547,8 @@
       "train.transferOut": "站外換乘",
     },
     ja: {
-      "app.footer": "\u00a9 2026 Pixel Tetsudo",
-      "app.title": "Pixel Tetsudo",
+      "app.footer": "\u00a9 2026 \u30d4\u30af\u30bb\u30eb\u9244\u9053",
+      "app.title": "\u30d4\u30af\u30bb\u30eb\u9244\u9053",
       "detail.about": "\u6982\u8981",
       "detail.basic_info": "\u57fa\u672c\u60c5\u5831",
       "detail.at_station": "\u99c5\u5185",
