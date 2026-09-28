@@ -1091,11 +1091,29 @@
     },
 
   };
-  function t(key) {
+  function t(key, fallback, params) {
+    if (fallback && typeof fallback === "object") {
+      params = fallback;
+      fallback = null;
+    }
     var lang = window.currentLang || "ja";
     var dict = translations[lang] || translations["ja"];
-    return dict[key] || key;
+    var value = dict[key];
+    if (value == null && lang !== "ja" && translations.ja) value = translations.ja[key];
+    if (value == null) {
+      value = fallback != null ? fallback : key;
+    }
+    return format(value, params);
   }
+
+  function format(template, params) {
+    if (!params || typeof params !== "object") return template;
+    return String(template).replace(/\{([^{}]+)\}/g, function(match, name) {
+      return Object.prototype.hasOwnProperty.call(params, name) ? params[name] : match;
+    });
+  }
+
+  window.translations = translations;
   window.t = t;
 })();
 

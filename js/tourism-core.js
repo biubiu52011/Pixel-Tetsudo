@@ -55,6 +55,13 @@
     return key;
   }
 
+  function isStationLabelReady(key) {
+    if (!key) return true;
+    if (!window.RailwayDB || !window.RailwayDB.resolveStationName) return false;
+    var ja = window.RailwayDB.resolveStationName(key, 'ja');
+    return !!(ja && ja !== key);
+  }
+
   // Get spot display name based on language
   function getSpotName(spot) {
     if (!spot) return '';
@@ -303,7 +310,9 @@
     var ct = document.getElementById('articleContainer');
     if (ct) ct.innerHTML = '<div class="td-loading-state"><div class="td-loading-dots">&bull;&bull;&bull;</div><div class="td-loading-text">' + t('detail.loading') + '</div></div>';
 
+    var bootAttempts = 0;
     function boot() {
+      bootAttempts++;
       state.allSpots = getAllSpots();
       var params = new URLSearchParams(window.location.search);
       var spotName = decodeURIComponent(params.get('name'));
@@ -311,7 +320,8 @@
       var spotIndex = parseInt(params.get('index')) || 0;
       state.currentStationKey = stationKey;
 
-      // Guard: station coords 未就绪时延后，避免 index 错位
+      // Guard: station coords / i18n 未就绪时延后，避免页眉站名先显示英文 ID。
+      if (stationKey && !isStationLabelReady(stationKey) && bootAttempts < 80) { setTimeout(boot, 100); return; }
       if (stationKey && window.TourismProximity) {
         var probe = TourismProximity.getNearbySpotsByStation(stationKey, { radius: 50000, limit: 100 });
         if (!probe || probe.length === 0) { setTimeout(boot, 200); return; }
