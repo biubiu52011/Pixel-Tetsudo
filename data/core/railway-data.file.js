@@ -47772,7 +47772,8 @@ window.RAILWAY_DATA = {
       "Joetsu"
     ],
     "Miyauchi": [
-      "Joetsu"
+      "Joetsu",
+      "Shinetsu"
     ],
     "Hanamaki": [
       "Kamaishi",
@@ -56211,9 +56212,6 @@ window.RAILWAY_DATA = {
     "Juni": [
       "Kounan"
     ],
-    "Kunai": [
-      "Shinetsu"
-    ],
     "Atago-Miyagi": [
       "TohokuMain"
     ],
@@ -58497,7 +58495,6 @@ window.RAILWAY_DATA = {
       "Echigo-Iwatsuka": 32,
       "Raikoji": 33,
       "Maekawa": 34,
-      "Kunai": 35,
       "Nagaoka": 36,
       "Kita-Nagaoka": 37,
       "Oshikiri": 38,
@@ -58517,7 +58514,8 @@ window.RAILWAY_DATA = {
       "Ogikawa": 52,
       "Kameda": 53,
       "Echigo-Ishiyama": 54,
-      "Niigata": 55
+      "Niigata": 55,
+      "Miyauchi": 35
     },
     "Shinonoi": {
       "Shiojiri": 0,
