@@ -13892,10 +13892,6 @@
       "lat": 37.37022778,
       "lng": 138.06890972000002
     },
-    "Jatenda": {
-      "lat": 38.44009028,
-      "lng": 141.31087361
-    },
     "Kunai": {
       "lat": 37.43769592666667,
       "lng": 138.83310537
@@ -41823,7 +41819,7 @@
     "新浦安": "Shin-Urayasu",
     "新狭山": "Shin-Sayama",
     "新田": "Shinden",
-    "新町": "Shimmachi",
+    "新町": "Shinmachi",
     "新白岡": "Shin-Shiraoka",
     "新百合ヶ丘": "Shin-Yurigaoka",
     "新秋津": "Shin-Akitsu",
@@ -56215,7 +56211,6 @@
     "Juni": [
       "Kounan"
     ],
-    "Jatenda": [],
     "Kunai": [
       "Shinetsu"
     ],
