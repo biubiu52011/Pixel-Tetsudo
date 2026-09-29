@@ -780,14 +780,12 @@ window.getTransferHint = function(stationId, lang) {
   var l = lang || window.currentLang || "ja";
 
   // Structured hints resolve entity labels through the central i18n dictionary.
-  if (hint.targetLineKey && hint.templateKey && typeof window.t === "function") {
-    var previousLang = window.currentLang;
-    var shouldRestore = l !== previousLang;
-    if (shouldRestore) window.currentLang = l;
-    var lineName = window.t(hint.targetLineKey, hint.targetLineKey);
-    var rendered = window.t(hint.templateKey, hint.templateKey, { line: lineName });
-    if (shouldRestore) window.currentLang = previousLang;
-    return rendered;
+  if (hint.targetLineKey && hint.templateKey && window.translations) {
+    var dict = window.translations[l] || window.translations.ja || {};
+    var fallbackDict = window.translations.ja || {};
+    var lineName = dict[hint.targetLineKey] || fallbackDict[hint.targetLineKey] || hint.targetLineKey;
+    var template = dict[hint.templateKey] || fallbackDict[hint.templateKey] || "{line}";
+    return String(template).replace(/\{line\}/g, lineName);
   }
 
   // Legacy notes remain supported while entries are migrated to structured data.
