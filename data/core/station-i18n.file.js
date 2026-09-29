@@ -18589,7 +18589,7 @@ window.RAILWAY_I18N = {
   "zh": "下馆"
  },
  "Shishido": {
-  "ja": "宍户",
+  "ja": "宍戸",
   "en": "Shishido",
   "ko": "시시도",
   "zh": "宍户"
@@ -18613,7 +18613,7 @@ window.RAILWAY_I18N = {
   "zh": "下菅谷"
  },
  "Urizura": {
-  "ja": "瓜连",
+  "ja": "瓜連",
   "en": "Urizura",
   "ko": "우리즈라",
   "zh": "瓜连"
@@ -18667,13 +18667,13 @@ window.RAILWAY_I18N = {
   "zh": "袋田"
  },
  "Hitachi-Daigo": {
-  "ja": "常陆大子",
+  "ja": "常陸大子",
   "en": "Hitachi Daigo",
   "ko": "히타치다이고",
   "zh": "常陆大子"
  },
  "Shimonomiya": {
-  "ja": "下野宫",
+  "ja": "下野宮",
   "en": "Shimonomiya",
   "ko": "시모노미야",
   "zh": "下野宫"
@@ -18685,7 +18685,7 @@ window.RAILWAY_I18N = {
   "zh": "矢祭山"
  },
  "Higashidate": {
-  "ja": "东馆",
+  "ja": "東館",
   "en": "Higashidate",
   "ko": "히가시다테",
   "zh": "东馆"
@@ -18715,7 +18715,7 @@ window.RAILWAY_I18N = {
   "zh": "近津"
  },
  "Nakatoyo": {
-  "ja": "中丰",
+  "ja": "中豊",
   "en": "Nakatoyo",
   "ko": "나카토요",
   "zh": "中丰"
@@ -18733,31 +18733,31 @@ window.RAILWAY_I18N = {
   "zh": "里白石"
  },
  "Nogisawa": {
-  "ja": "野木泽",
+  "ja": "野木沢",
   "en": "Nogisawa",
   "ko": "노기사와",
   "zh": "野木泽"
  },
  "Kawabeoki": {
-  "ja": "川边冲",
+  "ja": "川辺沖",
   "en": "Kawabeoki",
   "ko": "가와베오키",
   "zh": "川边冲"
  },
  "Izumigo": {
-  "ja": "泉乡",
+  "ja": "泉郷",
   "en": "Izumigo",
   "ko": "이즈미고",
   "zh": "泉乡"
  },
  "Kawahigashi": {
-  "ja": "川东",
+  "ja": "川東",
   "en": "Kawahigashi",
   "ko": "가와히가시",
   "zh": "川东"
  },
  "Oshioe": {
-  "ja": "小盐江",
+  "ja": "小塩江",
   "en": "Oshioe",
   "ko": "오시오에",
   "zh": "小盐江"
@@ -18775,7 +18775,7 @@ window.RAILWAY_I18N = {
   "zh": "似内"
  },
  "Tsuchizawa": {
-  "ja": "土泽",
+  "ja": "土沢",
   "en": "Tsuchizawa",
   "ko": "쓰치자와",
   "zh": "土泽"
@@ -18799,7 +18799,7 @@ window.RAILWAY_I18N = {
   "zh": "岩手二日町"
  },
  "Ayaori": {
-  "ja": "绫织",
+  "ja": "綾织",
   "en": "Ayaori",
   "ko": "아야오리",
   "zh": "绫织"
@@ -18823,7 +18823,7 @@ window.RAILWAY_I18N = {
   "zh": "岩手上乡"
  },
  "Ashigase": {
-  "ja": "足濑",
+  "ja": "足瀬",
   "en": "Ashigase",
   "ko": "아시가세",
   "zh": "足濑"
@@ -18853,13 +18853,13 @@ window.RAILWAY_I18N = {
   "zh": "大釜"
  },
  "Harukiba": {
-  "ja": "春木场",
+  "ja": "春木場",
   "en": "Harukiba",
   "ko": "하루키바",
   "zh": "春木场"
  },
  "Sashimaki": {
-  "ja": "刺卷",
+  "ja": "刺巻",
   "en": "Sashimaki",
   "ko": "사시마키",
   "zh": "刺卷"
@@ -18883,25 +18883,25 @@ window.RAILWAY_I18N = {
   "en": "Kakunodate"
  },
  "Uguisuno": {
-  "ja": "莺野",
+  "ja": "鶯野",
   "en": "Uguisuno",
   "ko": "우구이스노",
   "zh": "莺野"
  },
  "Ugo-Nagano": {
-  "ja": "羽后长野",
+  "ja": "羽後長野",
   "en": "Ugo Nagano",
   "ko": "우고나가노",
   "zh": "羽后长野"
  },
  "Yariminai": {
-  "ja": "鑓见内",
+  "ja": "鑓見内",
   "en": "Yariminai",
   "ko": "야리미나이",
   "zh": "鑓见内"
  },
  "Ugo-Yotsuya": {
-  "ja": "羽后四屋",
+  "ja": "羽後四屋",
   "en": "Ugo Yotsuya",
   "ko": "우고요쓰야",
   "zh": "羽后四屋"
@@ -18931,7 +18931,7 @@ window.RAILWAY_I18N = {
   "zh": "花原市"
  },
  "Sentoku": {
-  "ja": "千德",
+  "ja": "千徳",
   "en": "Sentoku",
   "ko": "센토쿠",
   "zh": "千德"
@@ -18955,7 +18955,7 @@ window.RAILWAY_I18N = {
   "zh": "手之子"
  },
  "Echigo-Shimoseki": {
-  "ja": "越后下关",
+  "ja": "越後下関",
   "en": "Echigo Shimoseki",
   "ko": "에치고시모세키",
   "zh": "越后下关"
@@ -18973,7 +18973,7 @@ window.RAILWAY_I18N = {
   "zh": "神俣"
  },
  "Iwaki-Tokiwa": {
-  "ja": "磐城常叶",
+  "ja": "磐城常葉",
   "en": "Iwaki Tokiwa",
   "ko": "이와키토키와",
   "zh": "磐城常叶"
@@ -18997,7 +18997,7 @@ window.RAILWAY_I18N = {
   "zh": "舞木"
  },
  "Akogashima": {
-  "ja": "安子岛",
+  "ja": "安子島",
   "en": "Akogashima",
   "ko": "아코가시마",
   "zh": "安子岛"
@@ -19009,13 +19009,13 @@ window.RAILWAY_I18N = {
   "zh": "中山宿"
  },
  "Joko": {
-  "ja": "上户",
+  "ja": "上戸",
   "en": "Joko",
   "ko": "조코",
   "zh": "上户"
  },
  "Okinashima": {
-  "ja": "翁岛",
+  "ja": "翁島",
   "en": "Okinashima",
   "ko": "오키나시마",
   "zh": "翁岛"
@@ -19039,7 +19039,7 @@ window.RAILWAY_I18N = {
   "zh": "尾登"
  },
  "Nozawa": {
-  "ja": "野泽",
+  "ja": "野沢",
   "en": "Nozawa",
   "ko": "노자와",
   "zh": "野泽"
@@ -19051,7 +19051,7 @@ window.RAILWAY_I18N = {
   "zh": "上野尻"
  },
  "Toyomi": {
-  "ja": "丰实",
+  "ja": "豊実",
   "en": "Toyomi",
   "ko": "도요미",
   "zh": "丰实"
@@ -19063,19 +19063,19 @@ window.RAILWAY_I18N = {
   "zh": "日出谷"
  },
  "Kanose": {
-  "ja": "鹿濑",
+  "ja": "鹿瀬",
   "en": "Kanose",
   "ko": "가노세",
   "zh": "鹿濑"
  },
  "Igashima": {
-  "ja": "五十岛",
+  "ja": "五十島",
   "en": "Igashima",
   "ko": "이가시마",
   "zh": "五十岛"
  },
  "Higashi-Gejo": {
-  "ja": "东下条",
+  "ja": "東下条",
   "en": "Higashi Gejo",
   "ko": "히가시게조",
   "zh": "东下条"
@@ -19087,19 +19087,19 @@ window.RAILWAY_I18N = {
   "zh": "咲花"
  },
  "Maoroshi": {
-  "ja": "马下",
+  "ja": "馬下",
   "en": "Maoroshi",
   "ko": "마오로시",
   "zh": "马下"
  },
  "Shinseki": {
-  "ja": "新关",
+  "ja": "新関",
   "en": "Shinseki",
   "ko": "신세키",
   "zh": "新关"
  },
  "Higashi-Niitsu": {
-  "ja": "东新津",
+  "ja": "東新津",
   "en": "Higashi Niitsu",
   "ko": "히가시니쓰",
   "zh": "东新津"
@@ -19117,7 +19117,7 @@ window.RAILWAY_I18N = {
   "ko": "야시오"
  },
  "Nagareyama-Central-Park": {
-  "ja": "流山中央公园",
+  "ja": "流山中央公園",
   "en": "Nagareyama Central Park",
   "zh": "流山中央公园",
   "ko": "나가레야마 센트럴 파크"
@@ -19129,13 +19129,13 @@ window.RAILWAY_I18N = {
   "ko": "미라이다이라"
  },
  "Midorino": {
-  "ja": "绿野",
+  "ja": "緑野",
   "en": "Midorino",
   "zh": "绿野",
   "ko": "미도리노"
  },
  "Kenkyu-Gakuen": {
-  "ja": "研究学园",
+  "ja": "研究学園",
   "en": "Kenkyu Gakuen",
   "zh": "研究学园",
   "ko": "겐큐가쿠엔"
@@ -19899,7 +19899,7 @@ window.RAILWAY_I18N = {
  "MachiyaEkimae": {
   "ja": "町屋駅前",
   "zh": "町屋站前",
-  "ko": "マチヤ駅前",
+  "ko": "마치야에키마에",
   "en": "Machiya-ekimae"
  },
  "ArakawaNanachome": {
@@ -19951,10 +19951,10 @@ window.RAILWAY_I18N = {
   "en": "Daishimae"
  },
  "ShimMatsudo": {
-  "ja": "下松戸",
-  "zh": "下松户",
-  "ko": "シマツ松戸",
-  "en": "Shim-matsudo"
+  "ja": "新松戸",
+  "zh": "新松户",
+  "ko": "신마쓰도",
+  "en": "Shin-Matsudo"
  },
  "ShimMaebashi": {
   "ja": "前橋",
@@ -19999,10 +19999,10 @@ window.RAILWAY_I18N = {
   "en": "Izukogen"
  },
  "FuchukeibaSeimommae": {
-  "ja": "富ケ原馬場",
-  "zh": "富原马场",
-  "ko": "フチケババ場",
-  "en": "Fuchukeiba-seimomae"
+  "ja": "府中競馬正門前",
+  "zh": "府中竞马正门前",
+  "ko": "후추케이바세이몬마에",
+  "en": "Fuchūkeiba-seimon-mae"
  },
  "Musashinodai": {
   "ja": "武蔵野台",
