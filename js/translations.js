@@ -273,6 +273,8 @@
       "web.save": "Save",
       "train.throughService": "through service",
       "train.through": "Through ",
+      "line.Rinkai": "Rinkai Line",
+      "transfer.outside_line": "(Connects to {line}, outside transfer)",
       "train.transferOut": "out-of-station transfer",
     },
     zh: {
@@ -544,6 +546,8 @@
       "web.save": "保存",
       "train.throughService": "相互直通运行",
       "train.through": "直通",
+      "line.Rinkai": "临海线",
+      "transfer.outside_line": "（换乘{line}・需出站）",
       "train.transferOut": "站外换乘",
     },
     ja: {
@@ -815,6 +819,8 @@
       "web.save": "保存",
       "train.throughService": "相互直通運転",
       "train.through": "直通",
+      "line.Rinkai": "りんかい線",
+      "transfer.outside_line": "（{line}連絡・改札外乗換）",
       "train.transferOut": "駅外乗換",
     },
     ko: {
@@ -1087,6 +1093,8 @@
       "web.save": "저장",
       "train.throughService": "상호 직통 운행",
       "train.through": "직통",
+      "line.Rinkai": "린카이선",
+      "transfer.outside_line": "（{line} 연결・역외 환승）",
       "train.transferOut": "역외 환승",
     },
 
