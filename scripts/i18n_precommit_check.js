@@ -43,8 +43,8 @@ for (const f of files) {
   ok = run("node --check " + f) && ok;
 }
 
-// 2. Align i18n from ja base (idempotent; fixes missing/length-mismatched values)
-ok = run("node scripts/align_i18n_from_ja.js") && ok;
+// 2. Audit only. Validation must not mutate the files being validated.
+// Translation alignment is an explicit maintenance action, never a pre-commit side effect.
 
 // 3. Audit (thresholds configurable via I18N_MIN_RATIO / I18N_MAX_RATIO)
 ok = run("node scripts/i18n_audit.js") && ok;
