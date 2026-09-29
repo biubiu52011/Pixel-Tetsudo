@@ -768,12 +768,8 @@ window.TRANSFER_HINTS = {
   },
   "Osaki": {
     type: "outside",
-    note: {
-      ja: "（りんかい線連絡・要出站）",
-      zh: "（连络临海线・需出站）",
-      en: "(Connects to Rinkai Line, outside transfer)",
-      ko: "（린카이선 연결・역외 환승）"
-    }
+    targetLineKey: "line.Rinkai",
+    templateKey: "transfer.outside_line"
   }
 };
 
@@ -781,7 +777,20 @@ window.TRANSFER_HINTS = {
 window.getTransferHint = function(stationId, lang) {
   if (!window.TRANSFER_HINTS || !window.TRANSFER_HINTS[stationId]) return null;
   var hint = window.TRANSFER_HINTS[stationId];
-  var l = lang || "ja";
+  var l = lang || window.currentLang || "ja";
+
+  // Structured hints resolve entity labels through the central i18n dictionary.
+  if (hint.targetLineKey && hint.templateKey && typeof window.t === "function") {
+    var previousLang = window.currentLang;
+    var shouldRestore = l !== previousLang;
+    if (shouldRestore) window.currentLang = l;
+    var lineName = window.t(hint.targetLineKey, hint.targetLineKey);
+    var rendered = window.t(hint.templateKey, hint.templateKey, { line: lineName });
+    if (shouldRestore) window.currentLang = previousLang;
+    return rendered;
+  }
+
+  // Legacy notes remain supported while entries are migrated to structured data.
   if (hint.note && hint.note[l]) return hint.note[l];
   if (hint.note && hint.note.ja) return hint.note.ja;
   return null;
