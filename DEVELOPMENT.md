@@ -109,7 +109,6 @@
     - [决策树](#决策树)
     - [能力归属检查](#能力归属检查所有功能开发强制)
     - [逻辑挪用规则](#逻辑挪用规则)
-    - [已知债务](#已知债务不需要自动修复)
     - [架构基线](#架构基线architecture-baselines)
     - [规范数据冻结规则](#规范数据冻结规则canonical-data-freeze-rule)
     - [显示身份规则](#显示身份规则display-identity-rule)
@@ -315,7 +314,7 @@ search-ui.js 渲染结果；点击线路可跳转 trains.html 查看该线实时
 | pages/ | 页面（7 个，见 3.6） | 每页职责单一；只允许引用 ../css/ ../js/ ../data/ ../images/ ../fonts/ |
 | css/ | 样式 | 全局 style.css；页面专属样式独立文件；禁止页面内联 style（CSP style-src 'self'） |
 | js/ | 前端模块 | 按数据/业务/展示三层组织（见 3.7）；模块职责单一，禁止跨层依赖 |
-| data/core/ | 构建期生成数据 + 加载器（db-loader.js、*.file.js、源 JSON）+ 运行时常量表 | 生成文件（*.file.js、data-config-bundle.js）禁止手工编辑；冻结数据修改必须走 Freeze 例外，改后重跑 gen-file-data.js；改 transfer-hints/runtime-config/through-service/line-operation-systems/platform-data/line-service-relations/train-type-defs 后重跑 gen-config-bundle.js |
+| data/core/ | 构建期生成数据 + 加载器（db-loader.js、*.file.js、源 JSON）+ 运行时常量表 | 生成文件（*.file.js、data-config-bundle.js）禁止手工编辑；canonical 数据修改必须直接修改源文件并重跑 gen-file-data.js；改 transfer-hints/runtime-config/through-service/line-operation-systems/platform-data/line-service-relations/train-type-defs 后重跑 gen-config-bundle.js |
 | data/api/ | ODPT 客户端（odpt-unified.js）与链接（odpt-links.js） | ODPT 访问唯一入口；不得在页面或业务模块绕过 ODPTClient 直连；首页经 odpt-lazy.js 惰性加载 |
 | data/timetables/ | 手动时刻表（*-manual.js）+ vehicle-type-map.js | 命名 <RailwayId>-manual.js；仅 ODPT 无数据的线路允许手工整理 |
 | fonts/ | 像素字体（ja/ko/zh-hans/zh-hant/latin） | 唯一字体源，禁止使用系统字体替代 |
@@ -574,7 +573,7 @@ CSS：全局 style.css + lang-bar.css；页面专属按页命名（trains.css、
 
 权威与核验：订正以 ODPT 为权威源；车型“不编造、核验有据才升、不确定保持候选”；改后跑校验脚本（verify_through_vtype.js 等）+ node --check
 
-冻结：railway_data.json 等冻结数据修改走第 11 章 Freeze 例外，改后重跑 gen-file-data.js
+冻结：railway_data.json 等canonical 数据修改遵循 Canonical-First，改后重跑 gen-file-data.js
 
 ### 4.6 UI 视觉统一规范（字体、间距、配色、SVG 绘制规则）
 
@@ -1065,7 +1064,7 @@ junction 的 left 站（站名居右）走窄空间 clamp（到右列圆点前�
 
 车型身份解析必须走统一证据链：S0 manual 内嵌 vehicleType；S1 ODPT 实时 vehicleType；S2 车号候选累积表；S3 VehicleTypeMap 静态查表；S4 TrainIcons 图标规则。S4 是低置信度视觉兜底，不等同于确定车型事实。
 
-E235系山手線作为 ultimate fallback 仍存在于当前 main 的 TrainIcons/TrainVehicleResolver 中；它只能作为图标兜底，不得在非 Yamanote 场景冒充确定车型名。若后续修复该 fallback，应同步更新本节和“已知债务”。
+E235系山手線作为 ultimate fallback 仍存在于当前 main 的 TrainIcons/TrainVehicleResolver 中；它只能作为图标兜底，不得在非 Yamanote 场景冒充确定车型名。若后续修复该 fallback，应同步更新对应当前规范与测试。
 
 #### 5.4.6 现状不统一项（待统一）
 
@@ -1135,7 +1134,7 @@ CSP：script-src 'self'、style-src 'self'、connect-src 仅 self + ODPT/MapTile
 
 | 模块 | 文件 | 说明 |
 | --- | --- | --- |
-| 本地线路库 | data/core/railway_data.json + station_i18n.json | 线路/车站/坐标/关联/多语言。冻结数据，修改须 Freeze 例外 |
+| 本地线路库 | data/core/railway_data.json + station_i18n.json | 线路/车站/坐标/关联/多语言。canonical 数据；修改源文件后必须重新生成并验证 |
 | 构建加载器 | data/core/db-loader.js + *.file.js | 加载 railway/tourism/i18n 等构建期数据，提供 RailwayDB/UNIFIED_LINES |
 | 运行时常量包 | data/core/data-config-bundle.js | 自动合并 transfer-hints、runtime-config、through-service、line-operation-systems、platform-data、line-service-relations、train-type-defs |
 | LOS | data/core/line-operation-systems.js | 运行系统显示分组、系统名、颜色、系统卡排序 |
@@ -1170,7 +1169,7 @@ CSP：script-src 'self'、style-src 'self'、connect-src 仅 self + ODPT/MapTile
 
 | 数据文件 | 内容 | 维护规则 |
 | --- | --- | --- |
-| data/core/railway_data.json | 线路（ODPT 推送 + 手工新增，以数据文件实际为准）、车站（含坐标/站序/换乘）、LOS 运行系统、站台/检票口/出口等关联 | 冻结数据：修改须 Freeze 例外，改后重跑生成脚本 |
+| data/core/railway_data.json | 线路（ODPT 推送 + 手工新增，以数据文件实际为准）、车站（含坐标/站序/换乘）、LOS 运行系统、站台/检票口/出口等关联 | canonical 数据：修改源文件后重跑生成脚本并验证 |
 | data/core/station_i18n.json | 车站多语言文本（ja/zh/ko/en） | 与线路库同源，改站名须同步 |
 | data/timetables/*-manual.js | ODPT 无数据线路的人工时刻表（<RailwayId>-manual.js） | 仅 ODPT 无数据的线路允许手工整理；命名规范 |
 | data/core/*.file.js | 构建产物（db-loader 加载） | 禁止手工编辑，由生成脚本（data/core/gen-file-data.js）重新生成 |
@@ -1222,7 +1221,7 @@ ODPT 无数据的线路使用本地 manual 时刻表，不向 ODPT 发起空请�
 
 直通判定：“能连上就是直通”——存在直通运行事实即登记直通关系
 
-冻结数据：railway_data.json 等冻结数据修改必须符合第 11 章 Canonical Data Freeze Rule（Freeze 例外）
+canonical 数据：railway_data.json 等事实源按 Canonical-First 规则维护
 
 显示同一性：数据不变规则与显示一致性要求见第 11 章「数据不变规则・显示同一性・其他硬规则」
 
@@ -1395,7 +1394,7 @@ CDN：无自有 CDN；第三方依赖走 CSP 白名单——ODPT API、MapTiler 
 
 git 仓库即备份：data/core/railway_data.json 等冻结数据随仓库版本管理
 
-冻结数据保护：修改必须符合第 11 章 Canonical Data Freeze Rule（Freeze 例外），改后重跑构建并提交
+canonical 数据保护：只修改事实源，不直接编辑生成产物；改后重跑构建、验证并提交
 
 无独立备份系统；恢复 = 从 git 历史回滚数据文件 + 重跑构建
 
@@ -1449,23 +1448,11 @@ ODPT API 全量对比矫正（JR 东全量对比矫正、ODPT railway ID 映射�
 
 ## 10. 风险说明 & 常见 FAQ
 
-### 10.1 项目已知风险点
-
-| 风险 | 当前状态 | 处理规则 |
-| --- | --- | --- |
-| train-vehicle-resolver.js 重复定义/重复导出 | 当前 main 仍可见 FLEET_ICON_POOLS、_poolPickByIcon、_resolveVehicleIconBase、resolveVehicleIcon 等重复定义/导出；JS 后定义覆盖前定义，node --check 不会报错 | 记录为已知债务，不写成规范；后续应做生成脚本与导出结构整理，并加重复键/重复函数检查 |
-| ultimate fallback 仍返回 E235系山手線 | TrainIcons/TrainVehicleResolver 中仍存在最终图标兜底；TrainVehicle 已阻止非山手线把它当确定车型名 | 只能作为低置信度视觉兜底；unknown 不得显示为确定车型 |
-| DEVELOPMENT 章节编号漂移 | 旧版 12/13 章与 TOC 存在编号错位 | 本 RC-5 已修复目录与章节；后续新增章节必须同步更新 TOC |
-| line-service-relations 与 LOS 混淆 | 旧文档把关系层描述为设计产物，当前 main 已有真实 line-service-relations.js | 文档明确 LOS=显示分组，Relations=服务关系，不互相替代 |
-| baseline 生命周期不完整 | 旧流程只强调 Freeze 例外，未完整描述合法 migration 后 baseline refresh | 第 12 章补齐 migration audit / approved removal manifest / baseline refresh / guard verification 事务 |
-| 脚本链依赖靠页面顺序维护 | trains 模块继续拆分后，load-order regression 风险上升 | 3.10.3 明确依赖契约；页面控制器最后加载 |
-| 自动 CI 覆盖有限 | GitHub Actions 以静态 guard 为主，无完整浏览器视觉回归 | 发布门保留本地浏览器实测与 console 检查 |
-
-### 10.2 开发 / 部署 / 数据维护常见问题
+### 10.1 开发 / 部署 / 数据维护常见问题
 
 Q：如何本地运行？ A：python scripts/serve.py（127.0.0.1:8017），必须通过本地服务器访问（file:// 部分功能受限）
 
-Q：如何修改冻结数据（railway_data.json）？ A：走 Freeze 例外流程：修订记录追加「Freeze 例外」条目 → 修改冻结文件 → 重跑 node data/core/gen-file-data.js → 验证 → 提交
+Q：如何修改 canonical 数据（railway_data.json）？ A：确认 canonical owner 与任务边界 → 直接修改源文件 → 重跑 node data/core/gen-file-data.js → 执行相关 guards / tests → 检查 git diff → 提交
 
 Q：为什么某线路没有实时数据？ A：ODPT 无该线路数据 → 使用本地 manual 时刻表 + 推定补缺，不发空请求
 
@@ -1756,24 +1743,15 @@ B 需要 X→ B 从 A 的内部复制/重写 X→ B 正常工作了→ A 从未�
 
 如果答案是否定的，变更被拒绝。
 
-### 11.21 已知债务（不需要自动修复）
-
-| 债务 | 优先级 | 延期理由 | 处理边界 |
-| --- | --- | --- | --- |
-| train-vehicle-resolver.js 中 FLEET_ICON_POOLS、_poolPickByIcon、_resolveVehicleIconBase、resolveVehicleIcon 等重复定义/重复导出 | P1 | 当前不会被 node --check 捕获，后定义覆盖前定义，存在 silent shadowing 风险 | 不在文档中规范化该行为；后续修复应先审生成脚本，再去重并加 guard |
-| TrainIcons/TrainVehicleResolver ultimate fallback 仍指向 E235系山手線 | P1 | 视觉层需要兜底图标，但 unknown 不能冒充非山手线车型 | 保持“图标可兜底、车型名不猜”的边界；若改为 neutral unknown 图标，同步更新文档 |
-| train-vehicle-resolver.js 体积过大且由 .work 生成脚本合成 | P2 | 自包含 CLI/浏览器双环境有现实需求，但生成源与产物 ownership 需更清楚 | 先记录生成来源；不得手工在产物内做长期维护 |
-| 页面 CSP 白名单分散在 HTML meta 中 | P2 | 当前为纯静态站，没有集中 CSP 构建器 | 新增外部源必须同步页面 meta 与文档；后续可考虑集中模板化 |
-
 ## 12. 架构基线（Architecture Baselines）
 
 ### 12.1 架构基线（Architecture Baselines）
 
 ### 12.2 数据不变规则・显示同一性・其他硬规则
 
-### 12.3 规范数据冻结规则（Canonical Data Freeze Rule）
+### 12.3 Canonical Data 修改规则
 
-以下数据为锁定状态（默认冻结）。正常开发流程中不得直接修改；确需修改时必须走 Freeze 例外流程（见下），禁止绕过。
+以下数据属于 canonical / architecture baseline。它们不是“禁止修改”的冻结副本；当任务确实要求修正事实源时，应直接修改 canonical source，再生成 derived data 并完成验证。不得通过第二套配置、兼容副本、临时 patch 或长期 fix 脚本绕开主文件。
 
 • data/core/railway_data.json：线路、车站、坐标、站序、换乘、stationLines / lineStationOrder、旅游关联等 canonical 实体。
 
@@ -1783,7 +1761,7 @@ B 需要 X→ B 从 A 的内部复制/重写 X→ B 正常工作了→ A 从未�
 
 • data/core/line-service-relations.js：线路服务关系层。它不是 railway_data.json 的替代品，但属于架构基线的一部分，更新后必须重跑 data-config-bundle。
 
-Freeze 例外流程（SOP）：①修订记录追加条目，标注「Freeze 例外」；②修改源文件（非构建产物）；③按影响范围重跑 node data/core/gen-file-data.js 和/或 node data/core/gen-config-bundle.js；④验证 node --check 相关 JS、python .github/workflows/ci_guard_check.py、python .github/workflows/arch_guard_check.py、python .github/workflows/home_ui_guard_check.py，涉及换乘时加跑 scripts/verify_transfer_pairs.js；⑤提交源文件、生成产物、审计文件与修订记录。
+Canonical 修改流程（SOP）：①确认任务修改边界与 canonical owner；②直接修改源文件，不修改生成产物；③按影响范围重跑 node data/core/gen-file-data.js 和/或 node data/core/gen-config-bundle.js；④运行相关 syntax / canonical / architecture / i18n / relation / UI guards；⑤确认 git diff 仅包含任务范围内的源文件与必要生成产物后提交。Git history 是恢复机制，不创建 _old/_bak/_new/fix2/fix3 等安全副本。
 
 Canonical migration 生命周期（事务式）：
 
@@ -1801,7 +1779,7 @@ Canonical migration 生命周期（事务式）：
 
 7. migration audit、approved removal manifest、production baseline、数据源和生成产物必须同一提交进入 main；不得只更新数据不更新基线，也不得只放宽基线不解释迁移。
 
-任何缺失的数据字段属于数据阻断（DATA-BLOCKED）：标注 DATA-BLOCKED 说明缺失字段与原因，不凭空编造内容兜底；确需补数据时按 Freeze 例外流程处理。
+任何缺失的数据字段属于数据阻断（DATA-BLOCKED）：标注 DATA-BLOCKED 说明缺失字段与原因，不凭空编造内容兜底；确需补数据时直接修正对应 canonical source，并完成生成与验证闭环。
 
 ### 12.4 显示身份规则（Display Identity Rule）
 
