@@ -61,22 +61,9 @@ function normalizeTerms(value, lang) {
 
 // Very conservative generated fallbacks for missing derived values.
 function fallbackForMissing(jaValue, lang, field) {
-  const ja = str(jaValue);
-  if (!ja) return "";
-  if (lang === "zh") {
-    // Keep the ja text itself as a safe placeholder rather than inventing a
-    // possibly-wrong Chinese translation. The UI already shows
-    // detail.i18n_missing only when this field is completely absent.
-    return ja;
-  }
-  if (lang === "en") {
-    // For proper nouns and short labels, transliteration is safer than guess.
-    return ja;
-  }
-  if (lang === "ko") {
-    return ja;
-  }
-  return ja;
+  // Validation must never fabricate a translation from JA.
+  // Missing derived-language content stays missing and must be reported by audit.
+  return "";
 }
 
 function alignShortValue(jaValue, currentValue, lang, field) {
@@ -84,11 +71,8 @@ function alignShortValue(jaValue, currentValue, lang, field) {
   const cur = str(currentValue);
   const [minRatio, maxRatio] = shortFieldRatioRange();
 
-  // If missing, fill with a safe placeholder (ja itself) so the language is
-  // present and the audit can flag it as "needs review" rather than crashing.
-  if (!cur && ja) {
-    return normalizeTerms(fallbackForMissing(ja, lang, field), lang);
-  }
+  // Missing translation remains missing. Audit is responsible for reporting it.
+  if (!cur && ja) return "";
 
   // If present but wildly off, replace with ja placeholder so the language
   // parity is restored.  The actual content should be re-translated later,
@@ -98,7 +82,9 @@ function alignShortValue(jaValue, currentValue, lang, field) {
   const curLen = len(cur);
   if (jaLen > 0 && curLen > 0) {
     if (curLen / jaLen < minRatio || curLen / jaLen > maxRatio) {
-      return normalizeTerms(fallbackForMissing(ja, lang, field), lang);
+      // Never overwrite a human translation merely because its length differs.
+      // Keep it intact; the read-only audit may flag it for review.
+      return normalizeTerms(cur, lang);
     }
   }
   return normalizeTerms(cur, lang);
