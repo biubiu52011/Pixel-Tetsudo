@@ -4,6 +4,11 @@
 
 /* global window */
 window.LineServiceRelations = [
+  { lineA: "Keikyu", lineB: "KeikyuAirport", relation: "BRANCH_OF", direction: "BIDIRECTIONAL", handoverStations: ["Keikyu-Kamata"], evidence: { source: "legacy through map reclassified as same-operator branch", confidence: "HIGH" } },
+  { lineA: "Keikyu", lineB: "KeikyuKurihama", relation: "BRANCH_OF", direction: "BIDIRECTIONAL", handoverStations: ["Horinouchi"], evidence: { source: "legacy through map reclassified as same-operator branch", confidence: "HIGH" } },
+  { lineA: "Keikyu", lineB: "KeikyuZushi", relation: "BRANCH_OF", direction: "BIDIRECTIONAL", handoverStations: ["Kanazawa-Hakkei"], evidence: { source: "legacy through map reclassified as same-operator branch", confidence: "HIGH" } },
+  { lineA: "SotetsuMain", lineB: "SotetsuIzumino", relation: "BRANCH_OF", direction: "BIDIRECTIONAL", handoverStations: ["Futamatagawa"], evidence: { source: "legacy through map reclassified as same-operator branch", confidence: "HIGH" } },
+  { lineA: "SotetsuMain", lineB: "SotetsuShin-Yokohama", relation: "BRANCH_OF", direction: "BIDIRECTIONAL", handoverStations: ["Nishiya"], evidence: { source: "legacy through map reclassified as same-operator branch", confidence: "HIGH" } },
   { lineA: "Chiyoda", lineB: "OdakyuTama", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Yoyogi-Uehara"], evidence: { source: "Tokyo Metro through-service network + legacy join station", confidence: "HIGH" } },
   { lineA: "Tozai", lineB: "ChuoSobuLocal", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Nakano"], evidence: { source: "Tokyo Metro through-service network + legacy join station", confidence: "HIGH" } },
   { lineA: "Yurakucho", lineB: "Tojo", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Wakoshi"], evidence: { source: "Tokyo Metro through-service network + legacy join station", confidence: "HIGH" } },
