@@ -95,7 +95,7 @@ function _positionSourceRank(p) {
 
 function _trainIdentityKey(p) {
   if (!p) return "";
-  var id = p.trainNumber || p.trainId || "";
+  var id = p.runningChainId || p.trainNumber || p.trainId || "";
   id = String(id).trim();
   if (!id) return "";
   return id.replace(/^odpt\.Train:/, "")
