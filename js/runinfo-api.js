@@ -252,6 +252,9 @@
     // v4.3.968: 统一弹窗操作区的手动输入入口（ODPT/官网线路同一行为）
     setManualOverride: setManualOverride,
     getManualOverride: getManualOverride,
+    // exposed for deterministic regression tests; not used by UI
+    _selectScopedRecords: selectScopedRecords,
+    _aggregateStatus: aggregateStatus,
     isWebLine: function(lineId) {
       return !!(window.WebRunInfo && window.WebRunInfo.isWebLine && window.WebRunInfo.isWebLine(lineId));
     }
