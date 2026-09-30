@@ -25,8 +25,11 @@
   // 后台标签页暂停 15s fuseAll + saveToCache；回前台立即融合一次再恢复周期——
   // 后台页不再产生计算与 IDB 写入开销（配合 odpt-unified 的拉取暂停双管齐下）。
   function startFusionPolling() {
-    if (_refreshTimer || _cacheTimer) return;
-    _refreshTimer = setInterval(function() { try { fuseAll(); } catch(e) { console.debug("[DataFusion] fuseAll error:", e.message); } }, _refreshIntervalMs);
+    if (_cacheTimer) return;
+    // Fusion is source-driven: ODPT updates, position loads, manual timetable
+    // completion and explicit refreshes already call fuseAll().  A second
+    // unconditional 15s fuse loop emitted identical snapshots and forced
+    // realtime.html to rebuild the full line list between 30s network polls.
     _cacheTimer = setInterval(function() { try { saveToCache(); } catch(e) {} }, _refreshIntervalMs);
   }
   function stopFusionPolling() {
