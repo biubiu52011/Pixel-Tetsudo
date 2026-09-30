@@ -309,23 +309,7 @@
       } catch(_we) {}
       var delayInfo = apiInfo || webInfo || (_hasLocal && { status: localStatus.status, maxDelay: localStatus.maxDelay, interval: localStatus.interval, cause: localStatus.cause }) || fallbackDelay;
       // Attach running-chain resolution context (transient, not persistent)
-      var _chainCtx = null;
-      try {
-        if (window.RunningChainResolver && window.UNIFIED_LINES) {
-          _chainCtx = window.RunningChainResolver.getResolutionContext(lineId, Object.keys(window.UNIFIED_LINES));
-        }
-      } catch(_e) {}
-      var _chainMeta = _chainCtx ? {
-        chainIdentity: _chainCtx.identity,
-        chainConfidence: _chainCtx.confidence,
-        chainReason: _chainCtx.reason,
-        isThroughService: _chainCtx.isThroughService,
-        isAlias: _chainCtx.isAlias,
-        isBranch: _chainCtx.isBranch,
-        relatedLines: _chainCtx.relatedLines || [],
-        throughServiceGroup: _chainCtx.throughServiceGroup || null
-      } : null;
-      // v4.3.957: 共线区间共用数据 + v4.3.958: 直通线路列车合并 + v4.3.960: 自动判断共线线
+
       var _rtPositions = odptData.realtimePositions[lineId] || [];
       var _sharedPartners = (window.SharedTrackPairs && window.SharedTrackPairs.getSharedLines) ? window.SharedTrackPairs.getSharedLines(lineId) : [];
       if (_sharedPartners.length > 0) {
