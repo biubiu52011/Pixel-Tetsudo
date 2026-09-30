@@ -1839,31 +1839,11 @@ var LINE_VEHICLE_OVERRIDES = {
     "2000系": "埼玉新都市交通2000系",
     "2020系": "埼玉新都市交通2020系",
   },
-  "Karasuyama": {
-  },
   "Joban": {
     "E231系0番台": "E231系0番台（常磐快速線・LED）"
   },
   "JobanRapid": {
     "E231系0番台": "E231系0番台（常磐快速線・LED）"
-  },
-  "Narita": {
-  },
-  "SobuRapid": {
-  },
-  "Uchibo": {
-  },
-  "Sotobo": {
-  },
-  "Marunouchi": {
-  },
-  "MarunouchiBranch": {
-  },
-  "Chiyoda": {
-  },
-  "Fukutoshin": {
-  },
-  "Yurakucho": {
   },
   "TokyoMonorail": {
     "100形": "東京モノレール100形",
@@ -1885,20 +1865,6 @@ var LINE_VEHICLE_OVERRIDES = {
     "50050型": "東武50050系",
     "東武50050系": "東武50050系"
   },
-  "Hibiya": {
-  },
-  "SotetsuMain": {
-  },
-  "SotetsuIzumino": {
-  },
-  "SotetsuShin-Yokohama": {
-  },
-  "Saikyo": {
-  },
-  "Odawara": {
-  },
-  "OdakyuTama": {
-  }
 };;
 TOBU_LINE_IDS.forEach(function(lineId) {
   LINE_VEHICLE_OVERRIDES[lineId] = Object.assign({}, TOBU_VEHICLE_LOCKS, LINE_VEHICLE_OVERRIDES[lineId] || {});
@@ -1909,7 +1875,6 @@ TOBU_LINE_IDS.forEach(function(lineId) {
 [
   ["TokyuDenEn", { "50050系": "東武50050系", "50050型": "東武50050系", "東武50050系": "東武50050系" }],
   ["Hanzomon", { "50050系": "東武50050系", "50050型": "東武50050系", "東武50050系": "東武50050系" }],
-  ["Hibiya", { "20000系": "東武70000系", "20050系": "東武70000系", "20000系（日比谷線直通）": "東武70000系", "東武20000系": "東武70000系" }]
 ].forEach(function(entry) {
   var lineId = entry[0];
   LINE_VEHICLE_OVERRIDES[lineId] = Object.assign({}, entry[1], LINE_VEHICLE_OVERRIDES[lineId] || {});
