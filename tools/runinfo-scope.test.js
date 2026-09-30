@@ -15,3 +15,19 @@ const global=[...records,{"odpt:trainInformationText":{"ja":"ダイヤが乱れ�
 assert.strictEqual(ctx.window.RunInfoAPI._aggregateStatus(global,B),"normal"); // own record wins over global
 assert.strictEqual(ctx.window.RunInfoAPI._aggregateStatus(global,{id:"Oedo"}),"delayed"); // no own record -> global only
 console.log("runinfo-scope: 5 PASS");
+
+
+// Cross-operator same-code invariant: railway short code is not globally unique.
+const tobuLine={id:"Utsunomiya",operator:"Tobu"};
+window.ODPTClient.LINE_RAILWAY_CODE.Utsunomiya="Utsunomiya";
+const sameCode=[
+ {"odpt:railway":"odpt.Railway:JR-East.Utsunomiya","odpt:trainInformationStatus":"Suspension","odpt:trainInformationText":{"ja":"JR suspended"}},
+ {"odpt:railway":"odpt.Railway:Tobu.Utsunomiya","odpt:trainInformationStatus":"Normal","odpt:trainInformationText":{"ja":"Tobu normal"}}
+];
+const tobuScoped=api._selectScopedRecords(sameCode,tobuLine);
+assert.strictEqual(tobuScoped.length,1);
+assert.strictEqual(tobuScoped[0]["odpt:railway"],"odpt.Railway:Tobu.Utsunomiya");
+assert.strictEqual(api._aggregateStatus(sameCode,tobuLine),"normal");
+const unresolved=api._selectScopedRecords(sameCode,{id:"Utsunomiya"});
+assert.strictEqual(unresolved.length,0);
+console.log("runinfo-scope namespace: 4 PASS");
