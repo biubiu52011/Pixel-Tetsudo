@@ -4,6 +4,7 @@
 
 /* global window */
 window.LineServiceRelations = [
+  { lineA: "Ome", lineB: "Itsukaichi", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Haijima"], evidence: { source: "JR East route/timetable path: Itsukaichi services enter Ome Line at Haijima", confidence: "HIGH" } },
   { lineA: "UenoTokyo", lineB: "UtsunomiyaJR", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "UenoTokyo is an operation-system identity, not a direct physical line handover at Omiya", confidence: "HIGH" } },
   { lineA: "UenoTokyo", lineB: "Takasaki", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "UenoTokyo is an operation-system identity, not a direct physical line handover at Omiya", confidence: "HIGH" } },
   { lineA: "UenoTokyo", lineB: "Joban", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "UenoTokyo is an operation-system identity; relationship must be modeled as service path, not direct line adjacency", confidence: "HIGH" } },
@@ -53,8 +54,8 @@ window.LineServiceRelations = [
   { lineA: "KeikyuMain", lineB: "Sakuragi", relation: "ALIAS_OF", direction: "BIDIRECTIONAL", handoverStations: [], evidence: { source: "stationLines identical sets 7", confidence: "HIGH" } },
   { lineA: "Agatsuma", lineB: "Takasaki", relation: "BRANCH_OF", direction: "BIDIRECTIONAL", handoverStations: ["Takasaki"], evidence: { source: "branchOf stationLines shared 1", confidence: "HIGH" } },
   { lineA: "SuigunBranch", lineB: "Suigun", relation: "BRANCH_OF", direction: "BIDIRECTIONAL", handoverStations: [""], evidence: { source: "branchOf stationLines shared 1", confidence: "HIGH" } },
-  { lineA: "Ome", lineB: "ChuoRapid", relation: "BRANCH_OF", direction: "BIDIRECTIONAL", handoverStations: [], evidence: { source: "branchOf only shared 0 data gap", confidence: "LOW" } },
-  { lineA: "Itsukaichi", lineB: "ChuoRapid", relation: "BRANCH_OF", direction: "BIDIRECTIONAL", handoverStations: [], evidence: { source: "branchOf only shared 0 data gap", confidence: "LOW" } },
+  { lineA: "Ome", lineB: "ChuoRapid", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Tachikawa"], evidence: { source: "JR East timetable shows continuous Ome-Tokyo trains across Tachikawa", confidence: "HIGH" } },
+  { lineA: "Itsukaichi", lineB: "ChuoRapid", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "legacy shortcut skips Ome Line between Tachikawa and Haijima; direct adjacency is invalid", confidence: "HIGH" } },
   { lineA: "ChuoKonosu", lineB: "ChuoRapid", relation: "BRANCH_OF", direction: "BIDIRECTIONAL", handoverStations: [], evidence: { source: "branchOf only shared 0 data gap", confidence: "LOW" } },
   { lineA: "Sotobo", lineB: "SobuRapid", relation: "BRANCH_OF", direction: "BIDIRECTIONAL", handoverStations: [], evidence: { source: "branchOf only shared 0 data gap", confidence: "LOW" } },
   { lineA: "Uchibo", lineB: "SobuRapid", relation: "BRANCH_OF", direction: "BIDIRECTIONAL", handoverStations: [], evidence: { source: "branchOf only shared 0 data gap", confidence: "LOW" } },
