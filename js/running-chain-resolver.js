@@ -93,6 +93,46 @@
     return ctx;
   }
 
+  function _stationKey(v){var p=String(v||"").split(".");return p[p.length-1]||"";}
+  function _timeMin(v){if(!v)return null;var m=String(v).match(/^(\\d{1,2}):(\\d{2})/);if(!m)return null;return parseInt(m[1],10)*60+parseInt(m[2],10);}
+  function _segment(tt,lineId){
+    var a=(tt&&tt["odpt:trainTimetableObject"])||[]; if(!a.length)return null;
+    var first=a[0]||{}, last=a[a.length-1]||{};
+    var firstStation=_stationKey(first["odpt:departureStation"]||first["odpt:arrivalStation"]||first["odpt:station"]);
+    var lastStation=_stationKey(last["odpt:arrivalStation"]||last["odpt:departureStation"]||last["odpt:station"]);
+    var firstTime=_timeMin(first["odpt:departureTime"]||first["odpt:arrivalTime"]);
+    var lastTime=_timeMin(last["odpt:arrivalTime"]||last["odpt:departureTime"]);
+    var trainNumber=String(tt["odpt:trainNumber"]||tt["odpt:train"]||"");
+    var id=String(tt["@id"]||tt["owl:sameAs"]||((tt["odpt:railway"]||lineId||"")+"|"+trainNumber));
+    return {lineId:lineId,id:id,trainNumber:trainNumber,firstStation:firstStation,lastStation:lastStation,firstTime:firstTime,lastTime:lastTime};
+  }
+  function resolveTimetableChain(tt,lineId,candidates){
+    if(!_initialized)buildIndexes();
+    var base=_segment(tt,lineId); if(!base)return {runningChainId:null,evidence:"NO_SEGMENT"};
+    var direct=_directThrough[lineId]||[]; if(!direct.length)return {runningChainId:base.id,evidence:"STANDALONE"};
+    var best=null;
+    (candidates||[]).forEach(function(x){
+      if(!x||direct.indexOf(x.lineId)<0)return;
+      var other=_segment(x.timetable,x.lineId); if(!other)return;
+      var rels=_lineRelations[lineId]||[], joins=[];
+      for(var i=0;i<rels.length;i++){var r=rels[i],o=r.lineA===lineId?r.lineB:r.lineA;if(o===x.lineId&&r.relation==="THROUGH_SERVICE"){joins=r.handoverStations||[];break;}}
+      if(!joins.length)return;
+      var forward=joins.indexOf(base.lastStation)>=0&&joins.indexOf(other.firstStation)>=0;
+      var reverse=joins.indexOf(other.lastStation)>=0&&joins.indexOf(base.firstStation)>=0;
+      if(!forward&&!reverse)return;
+      var dt=forward&&base.lastTime!==null&&other.firstTime!==null?other.firstTime-base.lastTime:
+             reverse&&other.lastTime!==null&&base.firstTime!==null?base.firstTime-other.lastTime:null;
+      if(dt===null||dt<0||dt>20)return;
+      var sameId=base.id===other.id, sameNo=base.trainNumber&&base.trainNumber===other.trainNumber;
+      if(!sameId&&!sameNo)return;
+      var score=(sameId?4:2)+(dt<=5?3:dt<=10?2:1);
+      if(!best||score>best.score)best={score:score,other:other,dt:dt,sameId:sameId};
+    });
+    if(!best)return {runningChainId:base.id,evidence:"NO_CONFIRMED_BOUNDARY"};
+    var ids=[base.id,best.other.id].sort();
+    return {runningChainId:"rc:"+ids.join("~"),evidence:best.sameId?"TIMETABLE_ID+BOUNDARY+TIME":"TRAIN_NUMBER+BOUNDARY+TIME",timeGapMin:best.dt,partnerLineId:best.other.lineId};
+  }
+
   function init(){if(_initialized)return;buildIndexes();}
 
   window.RunningChainResolver={
@@ -100,6 +140,7 @@
     getResolutionContext:function(lineId,allIds){if(!_initialized)buildIndexes();return computeCtx(lineId,allIds||(window.UNIFIED_LINES?Object.keys(window.UNIFIED_LINES):[]));},
     isDirectThroughService:function(a,b){if(!_initialized)buildIndexes();if(!a||!b||a===b)return false;return (_directThrough[a]||[]).indexOf(b)>=0;},
     getDirectThroughLines:function(lid){if(!_initialized)buildIndexes();return (_directThrough[lid]||[]).slice();},
+    resolveTimetableChain:resolveTimetableChain,
     hasRelation:function(a,b,rt){if(!_initialized)buildIndexes();var rs=_lineRelations[a]||[];for(var i=0;i<rs.length;i++){var o=rs[i].lineA===a?rs[i].lineB:rs[i].lineA;if(o===b&&(!rt||rs[i].relation===rt))return true;}return false;},
     _getIndexes:function(){return{relations:_lineRelations,aliasMap:_aliasMap,branchOfMap:_branchOfMap,directThrough:_directThrough};}
   };
