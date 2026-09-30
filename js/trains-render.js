@@ -450,27 +450,29 @@
         item._throughSide = lx0 < o.x ? "left" : "right";
         _renderThroughChip(staticLayer, svgNS, lx0, ly0, item, ICON, isMobileView);
       };
-      // DEVELOPMENT.md 5.4.1.13: endpoint through chips are centred on
-      // the join-station dot and stack vertically (chip height + 4px).
-      var _layoutEndpoint = function(dir) {
+      // Endpoint through chips: horizontal row centred on the endpoint dot.
+      // Middle through chips remain vertical in the side lane below.
+      var _layoutEndpoint = function(dir, baseY) {
         var list = thruList.filter(function(x) { return x && x.dir === dir; });
         if (!list.length) return;
-        var offset = 0;
+        var totalW = 0;
+        var maxH = 0;
+        var sizes = [];
         for (var li = 0; li < list.length; li++) {
-          var size = _throughChipSize(list[li], isMobileView);
-          var lx = o.x - size.w / 2;
-          var ly;
-          if (dir === "up") {
-            ly = o.y - 26 - size.h - offset;
-          } else {
-            ly = o.y + 26 + offset;
-          }
-          _renderChipAt(list[li], lx, ly);
-          offset += size.h + 4;
+          sizes[li] = _throughChipSize(list[li], isMobileView);
+          totalW += sizes[li].w;
+          maxH = Math.max(maxH, sizes[li].h);
+        }
+        totalW += (list.length - 1) * _chipGap;
+        var cx = o.x - totalW / 2;
+        for (var lj = 0; lj < list.length; lj++) {
+          _renderChipAt(list[lj], cx, baseY + (maxH - sizes[lj].h) / 2);
+          cx += sizes[lj].w + _chipGap;
         }
       };
-      _layoutEndpoint("up");
-      _layoutEndpoint("down");
+      _layoutEndpoint("up", o.y - 16 - (isMobileView ? 26 : 22));
+      var _chipBot = iy0 + rows * ICON + (rows - 1) * GAP + 2;
+      _layoutEndpoint("down", Math.max(_chipBot + 4, o.y + 8));
 
       var _middleList = thruList.filter(function(x) {
         return x && x.dir !== "up" && x.dir !== "down";
