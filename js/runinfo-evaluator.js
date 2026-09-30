@@ -1,0 +1,119 @@
+/*
+ * Pixel Tetsudo - RunInfo Evaluator
+ * Source-neutral operational-status evidence evaluator.
+ * Structured official signals win; text-only sources are interpreted conservatively.
+ */
+(function(root, factory) {
+  var api = factory();
+  if (typeof module === "object" && module.exports) module.exports = api;
+  if (root) root.RunInfoEvaluator = api;
+})(typeof window !== "undefined" ? window : null, function() {
+  "use strict";
+
+  var RANK = { unknown: 0, normal: 1, info: 2, notice: 3, delayed: 4, suspended: 5 };
+
+  function textOf(v) {
+    if (v == null) return "";
+    if (typeof v === "string") return v;
+    if (typeof v === "object") return String(v.ja || v["ja-Hrkt"] || v.en || v["zh-Hans"] || v["zh-Hant"] || v.ko || "");
+    return String(v);
+  }
+
+  function normalizeStructuredStatus(v) {
+    var s = textOf(v);
+    if (!s) return null;
+    var tail = s.split(":").pop();
+    if (/^(?:Normal|normal)$/i.test(tail)) return "normal";
+    if (/^(?:Delay|Delayed|delay)$/i.test(tail)) return "delayed";
+    if (/^(?:Suspension|Suspended|suspension)$/i.test(tail)) return "suspended";
+    return null;
+  }
+
+  function evaluateText(text) {
+    var s = textOf(text).replace(/\s+/g, " ").trim();
+    var evidence = [];
+    if (!s) return { status: "unknown", evidence: evidence, delayUpperBoundMinutes: null };
+
+    var threshold = s.match(/([０-９0-9]{1,3})\s*分以上(?:の)?(?:遅延|遅れ)[^。\n]*(?:ありません|ございません|なし)/);
+    if (threshold) {
+      var n = parseInt(threshold[1].replace(/[０-９]/g, function(c){ return String(c.charCodeAt(0)-0xFF10); }), 10);
+      evidence.push({ type: "DELAY_THRESHOLD_NEGATIVE", minutes: n });
+      return { status: "normal", evidence: evidence, delayUpperBoundMinutes: isNaN(n) ? null : n };
+    }
+
+    if (/平常(?:通り|どおり)|通常運行|正常運行|遅延(?:は)?ありません|遅延なし/.test(s)) {
+      evidence.push({ type: "EXPLICIT_NORMAL" });
+      return { status: "normal", evidence: evidence, delayUpperBoundMinutes: null };
+    }
+
+    var through = /直通(?:運転|運行)[^。\n]*(?:中止|取りやめ|見合わせ|運休)|(?:中止|取りやめ|見合わせ)[^。\n]*直通(?:運転|運行)/.test(s);
+    if (through) evidence.push({ type: "THROUGH_SERVICE_CANCELLED" });
+
+    var timetable = /ダイヤ(?:が|は)?(?:乱れ|乱れて)|ダイヤ乱れ|時刻表[^。\n]*(?:乱れ|変更)|遅延|遅れ/.test(s);
+    if (timetable) evidence.push({ type: "TIMETABLE_DISRUPTION" });
+
+    var partial = /一部(?:の)?(?:列車|電車|区間)?[^。\n]*(?:運休|運転見合わせ|運転を見合わせ|運転中止|取りやめ)/.test(s);
+    if (partial) evidence.push({ type: "PARTIAL_SERVICE_IMPACT" });
+
+    var whole = /全線[^。\n]*(?:運休|運転見合わせ|運転を見合わせ|運転中止|運転を中止|取りやめ)|全列車[^。\n]*(?:運休|取りやめ|運転を見合わせ)/.test(s);
+    if (whole) evidence.push({ type: "WHOLE_LINE_SUSPENSION" });
+
+    var explicitRangeSuspension = /[^。\n]{1,40}駅\s*[～〜－−-]\s*[^。\n]{1,40}駅(?:間)?[^。\n]*(?:運転見合わせ|運転を見合わせ|運休|運転中止)/.test(s);
+    if (explicitRangeSuspension) evidence.push({ type: "RANGE_SUSPENSION" });
+
+    if (whole || explicitRangeSuspension) return { status: "suspended", evidence: evidence, delayUpperBoundMinutes: null };
+    if (timetable) return { status: "delayed", evidence: evidence, delayUpperBoundMinutes: null };
+    if (through || partial) return { status: "notice", evidence: evidence, delayUpperBoundMinutes: null };
+
+    // A bare keyword is not enough to upgrade the whole line.
+    if (/運休|見合わせ|中止|運行情報|運転情報/.test(s)) {
+      evidence.push({ type: "UNSCOPED_OPERATIONAL_INFO" });
+      return { status: "info", evidence: evidence, delayUpperBoundMinutes: null };
+    }
+    return { status: "info", evidence: [{ type: "UNCLASSIFIED_TEXT" }], delayUpperBoundMinutes: null };
+  }
+
+  function evaluate(input) {
+    input = input || {};
+    var evidence = [];
+    var structured = normalizeStructuredStatus(input.structuredStatus);
+    if (structured) evidence.push({ type: "STRUCTURED_STATUS", value: structured });
+
+    if (input.suspension === true) {
+      structured = "suspended";
+      evidence.push({ type: "STRUCTURED_SUSPENSION" });
+    }
+
+    var delayMinutes = null;
+    if (input.delayMinutes != null && input.delayMinutes !== false) {
+      var n = parseInt(input.delayMinutes, 10);
+      if (!isNaN(n) && n > 0) {
+        delayMinutes = n;
+        if (structured !== "suspended") structured = "delayed";
+        evidence.push({ type: "STRUCTURED_DELAY", minutes: n });
+      }
+    } else if (input.delay === true) {
+      if (structured !== "suspended") structured = "delayed";
+      evidence.push({ type: "STRUCTURED_DELAY" });
+    }
+
+    // Official non-text signals (e.g. Shonan status image) are authoritative.
+    if (input.signalStatus && RANK[input.signalStatus] != null) {
+      structured = input.signalStatus;
+      evidence.push({ type: "OFFICIAL_SIGNAL", value: input.signalStatus });
+    }
+
+    var te = evaluateText(input.text || input.statusText || "");
+    evidence = evidence.concat(te.evidence || []);
+
+    return {
+      status: structured || te.status || "unknown",
+      maxDelay: delayMinutes,
+      delayUpperBoundMinutes: te.delayUpperBoundMinutes,
+      evidence: evidence,
+      source: input.source || null
+    };
+  }
+
+  return { version: "1.0.0", evaluate: evaluate, evaluateText: evaluateText, normalizeStructuredStatus: normalizeStructuredStatus };
+});
