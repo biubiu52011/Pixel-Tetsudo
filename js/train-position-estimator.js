@@ -526,6 +526,9 @@
           positions.push({
             stationIndex: currentStationIndex,
             trainId: lineId + '_' + trainNumber,
+            timetableIdentity: timetableIdentity,
+            runningChainId: timetableIdentity,
+            runningChainEvidence: "TIMETABLE_SEGMENT",
             trainNumber: trainNumber,  // v4.3.950: 纯车号——渲染层查 TRAIN_NO_VEHICLE 用（修复 key 不匹配）
             delayMin: delayMin,
             estimated: true,
