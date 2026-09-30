@@ -13,6 +13,7 @@
   var backBtn = null;
   var _selectedOperator = null;
   var _lastPositionsHash = '';
+  var _lastDetailStateHash = '';
   var t = window.t || function(k) { return k; };
   var escapeHtml = window.escapeHtml || function(s) {
     if (!s) return "";
@@ -243,8 +244,35 @@
               }
             }
           } catch(e) {}
+          // Detail rendering also depends on non-position state (delay/status,
+          // through/branch relation context and fused line metadata). A position-only
+          // hash left the detail SVG stale after a transient state removed an element:
+          // when the state recovered without train movement, no render was triggered.
+          var detailStateHash = '';
+          if (currentLine && lines[currentLine]) {
+            try {
+              var _dl = lines[currentLine];
+              var _dd = _dl.delayInfo || {};
+              var _cm = _dl._chainMeta || {};
+              detailStateHash = JSON.stringify({
+                id: currentLine,
+                status: _dl.status || '',
+                interval: _dl.interval || '',
+                cause: _dl.cause || '',
+                delayStatus: _dd.status || '',
+                delay: _dd.maxDelay == null ? '' : _dd.maxDelay,
+                delayCause: _dd.cause || '',
+                chain: _cm.identity || _cm.runningChainId || '',
+                related: _cm.relatedLines || [],
+                through: _cm.isThroughService || false,
+                branch: _cm.isBranch || false,
+                alias: _cm.isAlias || false
+              });
+            } catch(e) {}
+          }
           var currentLen = listEl.innerHTML.length;
-          // Always render if list is empty (initial load), otherwise only render if positions changed
+          // Always render if list is empty (initial load), otherwise render list on
+          // position changes; detail additionally reacts to its state signature.
           if (currentLen === 0) {
             renderList(listEl);
             renderFilterBar(document.getElementById("trainsFilterBar"));
@@ -259,9 +287,12 @@
                 try { showLineView(_lid); } catch(e) {}
               }
             }
-          } else if (posHash !== _lastPositionsHash) {
+          } else if (posHash !== _lastPositionsHash || detailStateHash !== _lastDetailStateHash) {
+            var _positionsChanged = posHash !== _lastPositionsHash;
+            var _detailStateChanged = detailStateHash !== _lastDetailStateHash;
             _lastPositionsHash = posHash;
-            renderList(listEl);
+            _lastDetailStateHash = detailStateHash;
+            if (_positionsChanged) renderList(listEl);
             // Restore hash-based navigation once data is ready (posHash changed = data arrived)
             var _h2 = window.location.hash;
             if (_h2 && _h2.length > 1) {
