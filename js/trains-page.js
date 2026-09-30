@@ -13,6 +13,9 @@
   var backBtn = null;
   var _selectedOperator = null;
   var _lastPositionsHash = '';
+  var _lastRenderedLine = null;
+  var _lastRenderedLineHash = '';
+  var _manualRequested = {};
   var t = window.t || function(k) { return k; };
   var escapeHtml = window.escapeHtml || function(s) {
     if (!s) return "";
@@ -29,11 +32,25 @@
   // 图片徽章内含线名可读，色块徽章同理显示线名（截 4 字）
 
   
-  function showLineView(lineId) {
+  function _linePositionHash(line) {
+    var ps = (line && (line.realtimePositions || line.cachedPositions)) || [];
+    var out = String(ps.length) + "|";
+    for (var i = 0; i < ps.length; i++) {
+      var p = ps[i] || {};
+      out += (p.runningChainId || p.trainId || ("t" + i)) + "@" + (p.stationIndex || 0)
+        + ">" + (p.segmentToIndex == null ? "" : p.segmentToIndex)
+        + ":" + (p.segmentProgress == null ? "" : Math.round(p.segmentProgress * 100)) + ",";
+    }
+    return out;
+  }
+
+  function showLineView(lineId, forceRender) {
     try {
       var lines = getLinesData();
       var fusedLine = lines[lineId];
       if (!fusedLine) return;
+      var nextHash = _linePositionHash(fusedLine);
+      var sameVisibleLine = currentLine === lineId && detailEl && !detailEl.classList.contains("hidden");
       currentLine = lineId;
       window.location.hash = lineId;
       if (listEl) listEl.classList.add("hidden");
@@ -61,15 +78,26 @@
         }
       }
       if (titleEl) titleEl.textContent = _title;
-      if (mapEl) renderTrainMap(mapEl, fusedLine, lineId);
+      if (mapEl && (forceRender || !sameVisibleLine || _lastRenderedLine !== lineId || _lastRenderedLineHash !== nextHash)) {
+        renderTrainMap(mapEl, fusedLine, lineId);
+        _lastRenderedLine = lineId;
+        _lastRenderedLineHash = nextHash;
+      }
       // v4.3.528: 手动时刻表按需加载——ODPT 无数据的 JR 地方线打开时才注入该线文件。
       // 加载完成后 DataFusion 内部已重推定+重融合；此处按结果归属检查后重渲染当前线路，
       // 用户切走线路时旧结果不覆盖新状态；加载失败保持首次渲染（与无数据现状一致）。
-      if (window.DataFusion && window.DataFusion.ensureManualTimetable) {
+      if (!_manualRequested[lineId] && window.DataFusion && window.DataFusion.ensureManualTimetable) {
+        _manualRequested[lineId] = true;
         window.DataFusion.ensureManualTimetable(lineId).then(function() {
           if (currentLine !== lineId) return;
           var fused2 = getLinesData()[lineId];
-          if (fused2 && mapEl) renderTrainMap(mapEl, fused2, lineId);
+          if (!fused2 || !mapEl) return;
+          var updatedHash = _linePositionHash(fused2);
+          if (_lastRenderedLine !== lineId || _lastRenderedLineHash !== updatedHash) {
+            renderTrainMap(mapEl, fused2, lineId);
+            _lastRenderedLine = lineId;
+            _lastRenderedLineHash = updatedHash;
+          }
         }).catch(function(e) {
           console.debug("[trains] manual timetable skip:", lineId, e.message);
         });
@@ -175,35 +203,12 @@
       loadCachedPositions(function() {
         renderList(listEl);
         renderFilterBar(document.getElementById("trainsFilterBar"));
-        // Data-ready poll: db-loader fetch is async; the first render may run before
-        // network data arrives (IndexedDB positions usually resolve first), leaving the
-        // list empty with no later re-render trigger. Same pattern as the realtime page.
-        // Respect an already-selected operator filter instead of overwriting it.
-        (function ensureDataReady() {
-          var _tries = 0;
-          (function tick() {
-            var _d = getLinesData();
-            if (_d && Object.keys(_d).length > 0) {
-              if (_selectedOperator === null) { renderList(listEl); } else { renderFiltered(listEl); }
-              renderFilterBar(document.getElementById("trainsFilterBar"));
-              return;
-            }
-            if (++_tries > 120) return; // ~60s cap (mobile GitHub Pages can be slow)
-            setTimeout(tick, 500);
-          })();
-        })();
-        // Restore hash-based navigation (poll until line data is ready; async load timing)
-        (function tryHash() {
-          var hash = window.location.hash;
-          if (!hash || hash.length <= 1) return;
-          var lid = hash.substring(1);
-          var lines = getLinesData();
-          if (lines[lid]) {
-            showLineView(lid);
-            return;
-          }
-          setTimeout(tryHash, 400);
-        })();
+        // DataState subscription below is the single async data-ready path.
+        // Avoid parallel 400/500ms polling loops that used to race the subscription
+        // and repeatedly rebuild the list/SVG during page transitions.
+        var initialHash = (window.location.hash || "").replace(/^#/, "");
+        var initialLines = getLinesData();
+        if (initialHash && initialLines && initialLines[initialHash]) showLineView(initialHash);
         if (backBtn) backBtn.textContent = "\u2190 " + t("line_map.back");
       });
       // Subscribe to DataState changes to handle late data loading
@@ -291,7 +296,7 @@
           }
           // Re-render line detail view if open
           if (currentLine && detailEl && !detailEl.classList.contains("hidden")) {
-            showLineView(currentLine);
+            showLineView(currentLine, true);
           }
         });
       }
