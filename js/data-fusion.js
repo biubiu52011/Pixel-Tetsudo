@@ -116,7 +116,7 @@
       if (!allLines || Object.keys(allLines).length === 0) return;
       var statusMap = localData.statusMap || {};
       Object.keys(allLines).forEach(function(id) {
-        if (!statusMap[id]) statusMap[id] = { status: "normal", maxDelay: 0, interval: null, cause: null };
+        if (!statusMap[id]) statusMap[id] = { status: "loading", maxDelay: null, interval: null, cause: null, source: "initial_check" };
       });
       localData.statusMap = statusMap;
     } catch(e) {}
@@ -334,7 +334,7 @@
       try {
         var _opLine = window.ODPTClient && window.ODPTClient.LINE_TO_OPERATOR ? (window.ODPTClient.LINE_TO_OPERATOR[lineId] || window.ODPTClient.LINE_TO_OPERATOR[line.name]) : null;
         if (_opLine && window.ODPTClient.supports && window.ODPTClient.supports(_opLine, 'trainInformation')) {
-          // v4.3.394: 三态 fallback——获取失败(null)→情報なし(no_odpt)；尚未完成首次加载(undefined)→情報取得中(loading)；成功但无记录→正常(normal)。绝不把"还在加载"伪装成"正常"
+          // RunInfo loading semantics: only explicit source evidence may produce normal. Missing/pending line data stays loading.
           var _opKey = TransitConstants && typeof TransitConstants.normalizeOp === "function" ? TransitConstants.normalizeOp(_opLine) : _opLine;
           var _opState = odptData.delayInfo && _opKey ? odptData.delayInfo[_opKey] : undefined;
           var _opFailed = _opState === null;
