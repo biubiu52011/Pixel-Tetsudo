@@ -272,6 +272,14 @@
     } catch(e) { return ""; }
   }
 
+  function extractRailwayIdentity(rec) {
+    try {
+      var rw = String((rec && rec["odpt:railway"]) || "");
+      var m = rw.match(/^odpt\.Railway:([^.]+)\.(.+)$/);
+      return m ? { operator: m[1], railwayCode: m[2], canonical: rw } : null;
+    } catch(e) { return null; }
+  }
+
   // v4.3.391: 聚合只接受无 railway 归属的记录（全网/多线报文）。
   // 有 odpt:railway 的记录专属其线——不得把 A 线的报文聚合显示到 B 线弹窗
   // （修复：都営新宿線无记录时误显浅草線报文）。
@@ -304,8 +312,9 @@
         var matched = null;
         for (var i = 0; i < raw.length; i++) {
           if (!raw[i]) continue;
-          var shortCode = extractRailwayShort(raw[i]);
-          if (shortCode && String(shortCode).toLowerCase() === String(code).toLowerCase()) {
+          var rid = extractRailwayIdentity(raw[i]);
+          if (rid && String(rid.operator).toLowerCase() === String(op).toLowerCase() &&
+              String(rid.railwayCode).toLowerCase() === String(code).toLowerCase()) {
             matched = raw[i];
             break;
           }
