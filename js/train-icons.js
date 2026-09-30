@@ -1401,7 +1401,7 @@ var VEHICLE_FLEET_WEIGHTS = {
 };
 // v4.3.1025: FLEET_ICON_POOLS 编成/涂装池——同车型多涂装/多编成图，按候选串稳定取图（跨线不变）
 var FLEET_ICON_POOLS = {
-  "E209系": ["../images/列车/JR東日本/209系_3500番代.png", "../images/列车/JR東日本/209系_2000・2100番代_房総地区.png", "../images/列车/JR東日本/209系_3500番代.png", "../images/列车/JR東日本/209系_500番代_京葉線.png", "../images/列车/JR東日本/209系_500番代_京葉線.png", "../images/列车/JR東日本/209系_500番代_京葉線.png", "../images/列车/JR東日本/209系_500番代_京葉線.png", "../images/列车/JR東日本/209系_500番代_京葉線.png", "../images/列车/JR東日本/209系_500番代_京葉線.png", "../images/列车/JR東日本/209系_500番代_京葉線.png", "../images/列车/JR東日本/209系_500番代_京葉線.png", "../images/列车/JR東日本/209系_500番代_京葉線.png", "../images/列车/JR東日本/209系_500番代_京葉線.png", "../images/列车/JR東日本/209系_500番代_京葉線.png", "../images/列车/JR東日本/209系_500番代_京葉線.png", "../images/列车/JR東日本/209系_3500番代.png", "../images/列车/JR東日本/209系_3500番代.png", "../images/列车/JR東日本/209系_3500番代.png", "../images/列车/JR東日本/209系_3500番代.png", "../images/列车/JR東日本/209系_500番代_京葉線.png", "../images/列车/JR東日本/209系_500番代_京葉線.png", "../images/列车/JR東日本/209系_500番代_京葉線.png", "../images/列车/JR東日本/209系_500番代_京葉線.png", "../images/列车/JR東日本/209系_500番代_京葉線.png"],
+  "E209系": ["../images/列车/JR東日本/209系_3500番代.png"], // v4.3.1046: E209系 不同番代涂装不同（八高・川越3500/房総2000・2100/京葉500），不得混合轮换——池仅固定 3500番代，其余番代走 canonical 专用图
   "383系": ["../images/列车/JR東海/383系.png", "../images/列车/JR東海/383系.png", "../images/列车/JR東海/383系.png"],
   "埼玉新都市交通2000系": ["../images/列车/埼玉新都市交通/2000系_01編成_レッドパープル.png", "../images/列车/埼玉新都市交通/2000系_02編成_オレンジ.png", "../images/列车/埼玉新都市交通/2000系_03編成_グリーン.png", "../images/列车/埼玉新都市交通/2000系_04編成_イエロー.png", "../images/列车/埼玉新都市交通/2000系_05編成_ブルー.png", "../images/列车/埼玉新都市交通/2000系_06編成_レッド.png", "../images/列车/埼玉新都市交通/2000系_07編成_さくら色.png"],
   "埼玉新都市交通2020系": ["../images/列车/埼玉新都市交通/2020系_26編成_ブルーサファイア＆クリソベリル.png", "../images/列车/埼玉新都市交通/2020系_25編成.png", "../images/列车/埼玉新都市交通/2020系_24編成.png", "../images/列车/埼玉新都市交通/2020系_23編成.png", "../images/列车/埼玉新都市交通/2020系_22編成.png", "../images/列车/埼玉新都市交通/2020系_21編成.png", "../images/列车/埼玉新都市交通/2020系_26編成_ハッピーレインボートレイン.png"],
@@ -1649,9 +1649,12 @@ function resolveCanonicalVehicle(name) {
 
 function _canonicalVehicleIconPath(name, lineId) {
   var n = String(name || "").trim();
-  if (!n || /[\/\\]/.test(n)) return null;
+  if (!n) return null;
+  // canonical 精确匹配优先：合法 displayName 可含斜杠（如 "209系2000番台 / 2100番台"）
   var rec = resolveCanonicalVehicle(n);
   if (rec) return rec.asset;
+  // 非 canonical 才拒路径分隔符（防止拼路径注入）
+  if (/[\/\\]/.test(n)) return null;
   // v4.3.1046: 图库规范命名（東武50000系→50000型.png 等）以静态映射优先；
   // 拼接兜底仅服务磁盘按「東武鉄道/東武XXX系.png」约定存在的资产（東武850系 等），不指向已删除旧名
   if (/^東武/.test(n)) {
