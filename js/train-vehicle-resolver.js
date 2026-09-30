@@ -1821,15 +1821,6 @@ function _resolveTrainRuleDisplayName(lineId, operator, trainId, stationIndex, t
   return '';
 }
 
-var LINE_ICON_NAME_REDIRECT = {
-  "TokyuDenEn": { "50050系": "東武50050系", "50050型": "東武50050系", "東武50050系": "東武50050系" },
-  "Hanzomon": { "50050系": "東武50050系", "50050型": "東武50050系", "東武50050系": "東武50050系" },
-  "Hibiya": { "20000系": "東武70000系", "20050系": "東武70000系", "20000系（日比谷線直通）": "東武70000系", "東武20000系": "東武70000系" }
-};
-TOBU_LINE_IDS.forEach(function(lineId) {
-  LINE_ICON_NAME_REDIRECT[lineId] = Object.assign({}, TOBU_VEHICLE_LOCKS, LINE_ICON_NAME_REDIRECT[lineId] || {});
-});
-
 var LINE_VEHICLE_OVERRIDES = {
   "Arakawa": {
     "4000形": "都電4000形",
@@ -1979,6 +1970,17 @@ var LINE_VEHICLE_OVERRIDES = {
 };;
 TOBU_LINE_IDS.forEach(function(lineId) {
   LINE_VEHICLE_OVERRIDES[lineId] = Object.assign({}, TOBU_VEHICLE_LOCKS, LINE_VEHICLE_OVERRIDES[lineId] || {});
+});
+
+// Line-aware identity disambiguation belongs in one table. These entries used to
+// live in a second LINE_ICON_NAME_REDIRECT pass, duplicating the same lookup layer.
+[
+  ["TokyuDenEn", { "50050系": "東武50050系", "50050型": "東武50050系", "東武50050系": "東武50050系" }],
+  ["Hanzomon", { "50050系": "東武50050系", "50050型": "東武50050系", "東武50050系": "東武50050系" }],
+  ["Hibiya", { "20000系": "東武70000系", "20050系": "東武70000系", "20000系（日比谷線直通）": "東武70000系", "東武20000系": "東武70000系" }]
+].forEach(function(entry) {
+  var lineId = entry[0];
+  LINE_VEHICLE_OVERRIDES[lineId] = Object.assign({}, entry[1], LINE_VEHICLE_OVERRIDES[lineId] || {});
 });
 
   var VEHICLE_NAME_ALIASES = {
@@ -4133,13 +4135,6 @@ function _resolveVehicleIconBase(candidatesStr, lineId) {
           if (_ovAl && VEHICLE_NAME_TO_ICON[_ovAl]) { _hits.push({ n: name, icon: VEHICLE_NAME_TO_ICON[_ovAl] }); continue; }
           return null;
         }
-      }
-      // v4.3.1006: 线路感知裸名重定向（同名被别社抢占：都電8800/8900形 → 都営图标）
-      if (lineId && LINE_ICON_NAME_REDIRECT[lineId] && LINE_ICON_NAME_REDIRECT[lineId][name]) {
-        var _rd = LINE_ICON_NAME_REDIRECT[lineId][name];
-        var _rdCanonical = _canonicalVehicleIconPath(_rd, lineId);
-        if (_rdCanonical) { _hits.push({ n: name, icon: _rdCanonical }); continue; }
-        if (VEHICLE_NAME_TO_ICON[_rd]) { _hits.push({ n: name, icon: VEHICLE_NAME_TO_ICON[_rd] }); continue; }
       }
       // 1. 精确匹配
       var _canonical = _canonicalVehicleIconPath(name, lineId);
