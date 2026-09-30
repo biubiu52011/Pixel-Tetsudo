@@ -162,6 +162,11 @@ def main():
         effective_ec[key] = ec.get(key, 0) + delta
     for name, expected in effective_ec.items():
         actual = counts.get(name, 0)
+        # stationLines is a sparse station->lines index. Its key count can legitimately
+        # decrease when an orphan/incorrect station relation is removed, so relationship
+        # preservation is validated below by total refs + bidirectional consistency.
+        if name == 'stationLines':
+            continue
         if actual < expected:
             errors.append('ENTITY LOSS: %s %d -> %d (lost %d)' % (name, expected, actual, expected - actual))
         elif actual > expected:
@@ -205,6 +210,22 @@ def main():
                 mismatch_b_items.append((sid, lid))
     mismatch_a = len(mismatch_a_items)
     mismatch_b = len(mismatch_b_items)
+    current_stationline_refs = sum(len(entries) for entries in cur_sl.values())
+    current_lineorder_refs = sum(len(sdict) for sdict in cur_slo.values())
+    baseline_rel = baseline.get('relation_counts', {})
+    expected_refs = baseline_rel.get('stationLines_total_refs')
+    approved_relation_removals = len(approved_removals.get('relations', set()))
+    if isinstance(expected_refs, int):
+        effective_expected_refs = expected_refs - approved_relation_removals
+        if current_stationline_refs < effective_expected_refs:
+            errors.append('RELATION LOSS: stationLines refs %d -> %d (lost %d)' % (
+                effective_expected_refs, current_stationline_refs, effective_expected_refs - current_stationline_refs))
+        elif current_stationline_refs > effective_expected_refs:
+            warnings.append('RELATION GAIN: stationLines refs %d -> %d' % (
+                effective_expected_refs, current_stationline_refs))
+    if current_stationline_refs != current_lineorder_refs:
+        errors.append('RELATION COUNT MISMATCH: stationLines=%d lineStationOrder=%d' % (
+            current_stationline_refs, current_lineorder_refs))
     if mismatch_a > 0:
         errors.append(format_full_list(
             'RELATION MISMATCH A (lineStationOrder -> stationLines)',
@@ -227,7 +248,10 @@ def main():
     print('Entity counts (effective baseline):')
     for name, expected in effective_ec.items():
         actual = counts.get(name, 0)
-        status = 'OK' if actual >= expected else 'LOSS (-%d)' % (expected - actual)
+        if name == 'stationLines':
+            status = 'INDEX KEYS (relations checked by total refs)'
+        else:
+            status = 'OK' if actual >= expected else 'LOSS (-%d)' % (expected - actual)
         print('  %s: %d [%s]' % (name, actual, status))
     print()
     print('ID preservation:')
