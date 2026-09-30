@@ -11,4 +11,7 @@ assert(/pt_runinfo_last_good_v1/.test(api) && /pt_runinfo_last_good_v1/.test(fus
 assert(!/if \(!statusMap\[id\]\) statusMap\[id\] = \{ status: "normal"/.test(fusion));
 assert(/source: "initial_check"/.test(fusion));
 assert(/: "loading";/.test(state));
-console.log("runinfo-loading-state: 9 PASS");
+assert(/LAST_GOOD_MAX_AGE_MS = 10 \* 60 \* 1000/.test(api));
+assert(/LAST_GOOD_MAX_AGE_MS = 10 \* 60 \* 1000/.test(fusion));
+assert(/Date\.now\(\) - v\.t/.test(api) && /Date\.now\(\) - v\.t/.test(fusion));
+console.log("runinfo-loading-state: 12 PASS");
