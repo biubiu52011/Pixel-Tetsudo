@@ -1032,278 +1032,51 @@ window.getTransferHint = function(stationId, lang) {
 
 
 // ===== through-service.js =====
-/*
- * Pixel Tetsudo - Through Service (直通運転) Provider
- *
- * Single source of truth for through-service (相互直通運転) relationships.
- * Provider: ThroughService
- * Consumers: DataFusion (timetable expansion), RouteSearch (transfer penalty), TrainsPage (display)
- *
- * Semantics of THROUGH_SERVICE_MAP:
- *   A -> [B, C] means a train can run through DIRECTLY between A and B/C
- *   (no intermediate line). Multi-hop chains are resolved by getThroughServiceLines()
- *   via BFS. Keys/values are real railway_data lineIds.
- *
- * THROUGH_JOIN_STATIONS (industry-standard 接続駅):
- *   A -> { B: [s1, s2] } means the A<->B through run joins at station s1/s2.
- *   This gates the through-service marker on line maps: a partner line only gets
- *   the ∧/∨/< marker at its actual join station, never at every shared station.
- *   Semantics of the value:
- *     undefined entry  -> not defined (fall back to all shared stations)
- *     null             -> same as undefined (fall back)
- *     []               -> defined but NO join station (marker suppressed)
- *     [s1, s2]         -> marker only at these stations
- */
 (function() {
   "use strict";
 
-  var THROUGH_SERVICE_MAP = {
-    // 東武スカイツリーライン・伊勢崎線（東武動物公園で相互直通）
-    "TobuSkytree": ["Hibiya", "Hanzomon", "Asakusa", "TobuIsesaki"],
-    "TobuIsesaki": ["Hibiya", "Hanzomon", "TobuSkytree", "TobuNikko"],
-    // 東京メトロ
-    "Hibiya": ["TobuSkytree", "TobuIsesaki"],
-    "Hanzomon": ["TobuSkytree", "TobuIsesaki", "TokyuDenEn"],
-    "Namboku": ["TokyuMeguro"],
-    "Chiyoda": ["JobanLocal", "OdakyuTama", "Odawara"],
-    "Tozai": ["ChuoSobuLocal"],
-    "Yurakucho": ["Tojo"],
-    "Fukutoshin": ["TokyuToyoko", "Tojo", "Yurakucho_Seibu"],
-    "Mita": ["TokyuMeguro"],
-    "Asakusa": ["Keikyu", "Keisei", "KeiseiOshiage"],
-    "Shinjuku": ["Keio", "KeioMain"],
-    // 東急
-    "TokyuToyoko": ["MinatoMirai", "Fukutoshin"],
-    "MinatoMirai": ["TokyuToyoko"],
-    "TokyuMeguro": ["Mita", "Namboku", "SotetsuShin-Yokohama"],
-    "TokyuDenEn": ["Hanzomon", "TokyuOimachi"],
-    // 西武有楽町線（小竹向原-練馬）— the through path to 西武池袋線 runs via this line
-    "Yurakucho_Seibu": ["Fukutoshin", "Ikebukuro", "SeibuChichibu", "Yurakucho"],
-    // 西武池袋線（データ線ではない——BFS 中継のみ、表示対象外）
-    "Ikebukuro": ["Yurakucho_Seibu", "Fukutoshin"],
-    // 東武東上線
-    "Tojo": ["Fukutoshin", "Yurakucho"],
-    // 京成・京急
-    "Keikyu": ["Asakusa"],
-    "Keisei": ["Asakusa", "KeiseiOshiage", "NaritaSkyAccess"],
-    "KeiseiOshiage": ["Asakusa", "Keisei"],
-    "NaritaSkyAccess": ["Keisei"],
-    // 京急支線（空港線/久里浜線/逗子線 → 本線直通）
-    "KeikyuAirport": ["Keikyu"],
-    "KeikyuKurihama": ["Keikyu"],
-    "KeikyuZushi": ["Keikyu"],
-    // 相鉄
-    "SotetsuMain": ["Saikyo", "TokyuToyoko", "SotetsuIzumino", "SotetsuShin-Yokohama"],
-    "SotetsuIzumino": ["SotetsuMain"],
-    "SotetsuShin-Yokohama": ["SotetsuMain", "TokyuMeguro"],
-    // JR
-    "Saikyo": ["Kawagoe", "Rinkai", "SotetsuMain"],
-    "Kawagoe": ["Saikyo", "KawagoeWest"],
-    "KawagoeWest": ["Kawagoe", "Hachiko"],
-    "Rinkai": ["Saikyo"],
-    "UtsunomiyaJR": ["ShonanShinjuku", "Tokaido"],
-    "Takasaki": ["ShonanShinjuku", "Tokaido"],
-    "Tokaido": ["UtsunomiyaJR", "Takasaki", "Ito"],
-    "Ito": ["Tokaido"],
-    "ShonanShinjuku": ["UtsunomiyaJR", "Takasaki", "Yokosuka"],
-    "UenoTokyo": ["UtsunomiyaJR", "Takasaki", "Joban", "Tokaido"],
-    "ChuoRapid": ["Ome", "Itsukaichi", "ChuoMain"],
-    "ChuoMain": ["ChuoRapid", "Shinonoi", "ChuoTatsuno"],
-    "SobuRapid": ["Yokosuka"],
-    "Yokosuka": ["SobuRapid", "ShonanShinjuku"],
-    "JobanLocal": ["Chiyoda"],
-    "Joban": ["Narita"],
-    "Narita": ["Joban"],
-    "Keiyo": ["Uchibo", "Sotobo", "Musashino"],
-    "Musashino": ["Keiyo"],
-    "Uchibo": ["Keiyo"],
-    "Sotobo": ["Keiyo"],
-    "Hachiko": ["KawagoeWest"],
-    "OdakyuTama": ["Chiyoda", "Odawara"],
-    "Odawara": ["Chiyoda", "OdakyuTama"],
-        "ChuoSobuLocal": ["Tozai"],
-    // 地方線直通（4.3.644 補完）
-    "Gono": ["OuMain"],
-    "Kamaishi": ["TohokuMain"],
-    "OuMain": ["Gono", "Tazawako"],
-    "Tazawako": ["OuMain"],
-    "TokyuOimachi": ["TokyuDenEn"],
-    // 直通 6 組補完（4.3.711）
-    "TobuNikko": ["TobuIsesaki"],
-    "ChuoTatsuno": ["ChuoMain"],
-    "Shinonoi": ["ChuoMain", "Shinetsu"],
-    "Shinetsu": ["Shinonoi"],
-    "SeibuChichibu": ["Yurakucho_Seibu"],
-    // JR-West 関西・JR-Kyushu 直通（4.3.1024）
-    "OsakaLoop": ["Hanwa", "KansaiMain"],
-    "Hanwa": ["OsakaLoop"],
-    "KansaiMain": ["OsakaLoop", "Nara"],
-    "Nara": ["KansaiMain"],
-    "TokaidoKansai": ["SanyoMain"],
-    "SanyoMain": ["TokaidoKansai", "KagoshimaMain"],
-    "Gakkentoshi": ["OsakaHigashi"],
-    "OsakaHigashi": ["Gakkentoshi"],
-    "KagoshimaMain": ["SanyoMain", "NagasakiMain", "Nippo", "Hohi"],
-    "NagasakiMain": ["KagoshimaMain"],
-    "Nippo": ["KagoshimaMain", "Kyudai", "Hohi"],
-    "Kyudai": ["Nippo"],
-    "Hohi": ["KagoshimaMain", "Nippo"]
-  };
+  function _relations() { return window.LineServiceRelations || []; }
 
-  // 接続駅（線路図の直通マーカーを実際の接続駅のみに限定）
-  var THROUGH_JOIN_STATIONS = {
-    // 埼京
-    "Saikyo": { "Kawagoe": ["Omiya"], "Rinkai": ["Osaki"], "SotetsuMain": [] },
-    "Kawagoe": { "Saikyo": ["Omiya"], "KawagoeWest": ["Kawagoe"] },
-    "Rinkai": { "Saikyo": ["Osaki"] },
-    // 副都心・有楽町・西武・東上・東横
-    "Fukutoshin": { "Tojo": ["Wakoshi"], "TokyuToyoko": ["Shibuya"], "Yurakucho_Seibu": ["Kotake-Mukaihara"] },
-    "Yurakucho": { "Tojo": ["Wakoshi"], "Yurakucho_Seibu": ["Kotake-Mukaihara"] },
-    "Yurakucho_Seibu": { "Fukutoshin": ["Kotake-Mukaihara"], "Yurakucho": ["Kotake-Mukaihara"], "SeibuChichibu": [] },
-    "Tojo": { "Fukutoshin": ["Wakoshi"], "Yurakucho": ["Wakoshi"] },
-    "TokyuToyoko": { "Fukutoshin": ["Shibuya"], "MinatoMirai": ["Yokohama"] },
-    "MinatoMirai": { "TokyuToyoko": ["Yokohama"] },
-    // 半蔵門・日比谷・東武
-    "Hanzomon": { "TobuSkytree": ["Oshiage"], "TobuIsesaki": ["Oshiage"], "TokyuDenEn": ["Shibuya"] },
-    // 東武スカイツリー・伊勢崎（東武動物公園）
-    "TobuSkytree": { "Hanzomon": ["Oshiage"], "Hibiya": ["Kita-Senju"], "TobuIsesaki": ["Tobu-Dobutsu-Koen"] },
-    "TobuIsesaki": { "Hibiya": ["Kita-Senju"], "Hanzomon": ["Oshiage"], "TobuSkytree": ["Tobu-Dobutsu-Koen"], "TobuNikko": ["Tobu-Dobutsu-Koen"] },
-    "Hibiya": { "TobuSkytree": ["Kita-Senju"], "TobuIsesaki": ["Kita-Senju"] },
-    // 浅草・京成・京急
-    "Asakusa": { "Keikyu": ["Sengakuji"], "Keisei": ["Oshiage"], "KeiseiOshiage": ["Oshiage"] },
-    "Keikyu": { "Asakusa": ["Sengakuji"], "KeikyuAirport": ["Keikyu-Kamata"], "KeikyuKurihama": ["Horinouchi"], "KeikyuZushi": ["Kanazawa-Hakkei"] },
-    "KeikyuAirport": { "Keikyu": ["Keikyu-Kamata"] },
-    "KeikyuKurihama": { "Keikyu": ["Horinouchi"] },
-    "KeikyuZushi": { "Keikyu": ["Kanazawa-Hakkei"] },
-    "Keisei": { "Asakusa": ["Oshiage"], "KeiseiOshiage": ["Aoto"], "NaritaSkyAccess": ["Keisei-Takasago"] },
-    "KeiseiOshiage": { "Asakusa": ["Oshiage"], "Keisei": ["Aoto"] },
-    "NaritaSkyAccess": { "Keisei": ["Keisei-Takasago"] },
-    // 千代田
-    "Chiyoda": { "JobanLocal": ["Ayase"], "OdakyuTama": ["Yoyogi-Uehara"], "Odawara": ["Yoyogi-Uehara"] },
-    "JobanLocal": { "Chiyoda": ["Ayase"] },
-    "OdakyuTama": { "Chiyoda": ["Yoyogi-Uehara"], "Odawara": [] },
-    "Odawara": { "Chiyoda": ["Yoyogi-Uehara"], "OdakyuTama": ["Shin-Yurigaoka"] },
-    // 東西
-    "Tozai": { "ChuoSobuLocal": ["Nakano"] },
-    "ChuoSobuLocal": { "Tozai": ["Nakano"] },
-    // 新宿線×京王（京王線はデータにないため表示されない）
-    "Shinjuku": { "Keio": ["Shinjuku"], "KeioMain": ["Shinjuku"] },
-    // 湘南新宿ライン
-    "ShonanShinjuku": { "UtsunomiyaJR": ["Omiya"], "Takasaki": ["Omiya"], "Yokosuka": ["Ofuna"] },
-    // 上野東京ライン
-    "UenoTokyo": { "UtsunomiyaJR": ["Omiya"], "Takasaki": ["Omiya"], "Joban": ["Ueno"], "Tokaido": [] },
-    "Takasaki": { "ShonanShinjuku": ["Omiya"], "UenoTokyo": ["Omiya"], "Tokaido": ["Tokyo"] },
-    "Yokosuka": { "ShonanShinjuku": ["Ofuna"], "SobuRapid": ["Tokyo"] },
-    "UtsunomiyaJR": { "ShonanShinjuku": ["Omiya"], "UenoTokyo": ["Omiya"], "Tokaido": ["Tokyo"] },
-    "Joban": { "UenoTokyo": ["Ueno"] },
-    "Tokaido": { "UtsunomiyaJR": ["Tokyo"], "Takasaki": ["Tokyo"], "UenoTokyo": ["Tokyo"], "Ito": ["Atami"] },
-    "Tokaido": { "UtsunomiyaJR": ["Tokyo"], "Takasaki": ["Tokyo"], "Ito": ["Atami"] },
-    "Ito": { "Tokaido": ["Atami"] },
-    // 中央線
-    "ChuoRapid": { "Ome": ["Tachikawa"], "Itsukaichi": ["Haijima"], "ChuoMain": ["Takao"] },
-    "ChuoMain": { "ChuoRapid": ["Takao"], "Shinonoi": ["Shiojiri"], "ChuoTatsuno": ["Okaya"] },
-    "Ome": { "ChuoRapid": ["Tachikawa"] },
-    "Itsukaichi": { "ChuoRapid": ["Haijima"] },
-    // 総武快速×横須賀
-    "SobuRapid": { "Yokosuka": ["Tokyo"] },
-    // 京葉
-    // 京葉（武蔵野⇄京葉は西船橋で直通するが、京葉線の駅表に西船橋は無い→京葉側マーカー抑制）
-    "Keiyo": { "Uchibo": ["Soga"], "Sotobo": ["Soga"], "Musashino": [] },
-    "Musashino": { "Keiyo": ["Nishi-Funabashi"] },
-    "Uchibo": { "Keiyo": ["Soga"] },
-    "Sotobo": { "Keiyo": ["Soga"] },
-    // 八高・川越線西（高麗川）
-    "Hachiko": { "KawagoeWest": ["Komagawa"] },
-    "KawagoeWest": { "Kawagoe": ["Kawagoe"], "Hachiko": ["Komagawa"] },
-    // 南北・三田・目黒
-    "Namboku": { "TokyuMeguro": ["Meguro"] },
-    "Mita": { "TokyuMeguro": ["Meguro"] },
-    "TokyuMeguro": { "Mita": ["Meguro"], "Namboku": ["Meguro"], "SotetsuShin-Yokohama": [] },
-    // 相鉄（埼京・東横とはデータ上接続駅なし→マーカー非表示）
-    "SotetsuMain": { "Saikyo": [], "TokyuToyoko": [], "SotetsuIzumino": ["Futamatagawa", "Futamatagawa"], "SotetsuShin-Yokohama": ["Nishiya"] },
-    "SotetsuIzumino": { "SotetsuMain": ["Futamatagawa", "Futamatagawa"] },
-        "SotetsuShin-Yokohama": { "SotetsuMain": ["Nishiya"], "TokyuMeguro": ["Shin-Yokohama"] },
-    // 地方線直通・大井町線直通（4.3.644 補完）
-    "Gono": { "OuMain": ["Kawabe"] },
-    "Kamaishi": { "TohokuMain": ["Hanamaki"] },
-    "OuMain": { "Gono": ["Kawabe"], "Tazawako": ["Omagari"] },
-    "Tazawako": { "OuMain": ["Omagari"] },
-    "TokyuOimachi": { "TokyuDenEn": ["Futako-Tamagawa"] },
-    "TokyuDenEn": { "TokyuOimachi": ["Futako-Tamagawa"] },
-    // 直通 6 組補完 JOIN（4.3.711）
-    "TobuNikko": { "TobuIsesaki": ["Tobu-Dobutsu-Koen"] },
-    "ChuoTatsuno": { "ChuoMain": ["Okaya"] },
-    "Shinonoi": { "ChuoMain": ["Shiojiri"], "Shinetsu": ["Shinonoi"] },
-    "Shinetsu": { "Shinonoi": ["Shinonoi"] },
-    "SeibuChichibu": { "Yurakucho_Seibu": [] },
-    // JR-West 関西・JR-Kyushu 直通接続駅（4.3.1024）
-    "OsakaLoop": { "Hanwa": ["Tennoji"], "KansaiMain": ["Tennoji"] },
-    "Hanwa": { "OsakaLoop": ["Tennoji"] },
-    "KansaiMain": { "OsakaLoop": ["Tennoji"], "Nara": ["Kizu"] },
-    "Nara": { "KansaiMain": ["Kizu"] },
-    "TokaidoKansai": { "SanyoMain": ["Kobe"] },
-    "SanyoMain": { "TokaidoKansai": ["Kobe"], "KagoshimaMain": ["Moji"] },
-    "Gakkentoshi": { "OsakaHigashi": ["Kyobashi-Osaka"] },
-    "OsakaHigashi": { "Gakkentoshi": ["Kyobashi-Osaka"] },
-    "KagoshimaMain": { "SanyoMain": ["Moji"], "NagasakiMain": ["Tosu"], "Nippo": ["Kokura"], "Hohi": ["Kumamoto"] },
-    "NagasakiMain": { "KagoshimaMain": ["Tosu"] },
-    "Nippo": { "KagoshimaMain": ["Kokura"], "Kyudai": ["Oita"], "Hohi": ["Oita"] },
-    "Kyudai": { "Nippo": ["Oita"] },
-    "Hohi": { "KagoshimaMain": ["Kumamoto"], "Nippo": ["Oita"] }
-  };
+  function _relation(lineId, partnerId) {
+    var rs = _relations();
+    for (var i = 0; i < rs.length; i++) {
+      var r = rs[i];
+      if (!r || r.relation !== "THROUGH_SERVICE") continue;
+      if ((r.lineA === lineId && r.lineB === partnerId) ||
+          (r.lineB === lineId && r.lineA === partnerId)) return r;
+    }
+    return null;
+  }
 
-  /** Direct through-service neighbours of a line (1 hop). */
   function getDirectThroughLines(lineId) {
-    try {
-      var t = THROUGH_SERVICE_MAP[lineId];
-      return (t && Array.isArray(t)) ? t.slice() : [];
-    } catch(e) { return []; }
+    var out = [], rs = _relations();
+    for (var i = 0; i < rs.length; i++) {
+      var r = rs[i];
+      if (!r || r.relation !== "THROUGH_SERVICE") continue;
+      var other = r.lineA === lineId ? r.lineB : (r.lineB === lineId ? r.lineA : null);
+      if (other && out.indexOf(other) < 0) out.push(other);
+    }
+    return out;
   }
 
-  /** Join stations for a line pair, or null when not defined (fall back to all shared stations). */
   function getJoinStations(lineId, partnerId) {
-    try {
-      var m = THROUGH_JOIN_STATIONS[lineId];
-      if (!m) return null;
-      return (m[partnerId] !== undefined) ? m[partnerId] : null;
-    } catch(e) { return null; }
+    var r = _relation(lineId, partnerId);
+    return r && Array.isArray(r.handoverStations) ? r.handoverStations.slice() : null;
   }
 
-  /** BFS closure: every line reachable through any number of through runs. */
-  function getThroughServiceLines(lineId) {
-    // v4.3.966: 多跳BFS找所有直通线路，但排除跨公司接续（西武线不应该出现在东武线视图里）
-    // 同公司内的多跳是允许的（东武晴空塔线→东武伊势崎线→东武日光线）
-    try {
-      var result = [];
-      var visited = {};
-      var queue = [lineId];
-      visited[lineId] = true;
-      while (queue.length > 0) {
-        var current = queue.shift();
-        var through = THROUGH_SERVICE_MAP[current];
-        if (through && Array.isArray(through)) {
-          through.forEach(function(lid) {
-            if (!visited[lid]) {
-              visited[lid] = true;
-              result.push(lid);
-              queue.push(lid);
-            }
-          });
-        }
-      }
-      return result;
-    } catch(e) { return []; }
-  }
-
-  function getMap() {
-    return THROUGH_SERVICE_MAP;
+  function getDisplayAnchors(lineId, partnerId) {
+    var r = _relation(lineId, partnerId);
+    if (!r) return null;
+    if (r.displayAnchors && Array.isArray(r.displayAnchors[lineId])) {
+      return r.displayAnchors[lineId].slice();
+    }
+    return Array.isArray(r.handoverStations) ? r.handoverStations.slice() : null;
   }
 
   window.ThroughService = {
-    getMap: getMap,
     getDirectThroughLines: getDirectThroughLines,
     getJoinStations: getJoinStations,
-    getThroughServiceLines: getThroughServiceLines
+    getDisplayAnchors: getDisplayAnchors
   };
 })();
 
