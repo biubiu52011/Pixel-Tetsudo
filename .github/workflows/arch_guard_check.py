@@ -24,6 +24,12 @@ def main():
     SKIP = {'recovery', '.git', 'node_modules', '__pycache__', 'data/core'}
     SCAN = [os.path.join(REPO_ROOT, 'js'), os.path.join(REPO_ROOT, 'pages')]
     known = {(x['file'].replace('\\', '/'), x['line']) for x in inv['findings']}
+    # Line numbers drift as files evolve. Keep a content signature as a secondary
+    # identity so previously reviewed UNIFIED_LINES uses do not become false positives.
+    known_content = {
+        (x['file'].replace('\\', '/'), ' '.join(str(x.get('content', '')).split()))
+        for x in inv['findings']
+    }
     new_errors = []
     new_warnings = []
     for sd in SCAN:
@@ -40,8 +46,9 @@ def main():
                 except: continue
                 for i, line in enumerate(lines):
                     key = (rel, i+1)
-                    if key in known: continue
                     s = line.strip()
+                    content_key = (rel, ' '.join(s.split()))
+                    if key in known or content_key in known_content: continue
                     if 'UNIFIED_LINES' in line and not (s.startswith('//') or s.startswith('/*') or s.startswith('*')):
                         new_warnings.append('UNCLASSIFIED_UNIFIED_LINES %s:%d: %s' % (rel, i+1, s[:80]))
                     if 'localhost' in line or '127.0.0.1' in line:
