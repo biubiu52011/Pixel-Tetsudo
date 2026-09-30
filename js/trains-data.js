@@ -300,7 +300,9 @@ function _throughDirForStation(lineId, stationId, throughLineId) {
 
 function _getTransferMap(lineId) {
   var _langNow = window.currentLang || "ja";
-  if (_transferMapCache && _transferMapCache.lineId === lineId && _transferMapCache.lang === _langNow) return _transferMapCache.map;
+  var _activeSystemIds = Array.isArray(window.TrainsActiveSystemLineIds) ? window.TrainsActiveSystemLineIds : [];
+  var _systemKey = _activeSystemIds.join(",");
+  if (_transferMapCache && _transferMapCache.lineId === lineId && _transferMapCache.lang === _langNow && _transferMapCache.systemKey === _systemKey) return _transferMapCache.map;
   var src = (window.RailwayDB && window.RailwayDB.getAllLines) ? window.RailwayDB.getAllLines() : getLinesData();
   var map = {};
   var own = src[lineId];
@@ -335,6 +337,9 @@ function _getTransferMap(lineId) {
   // chip can exist (e.g. Keiyo <-> Musashino at Nishi-Funabashi).
   for (var th = 0; th < throughLines.length; th++) {
     var thLineId = throughLines[th];
+    // A boundary between peer members of the active LOS is an internal system
+    // segment boundary, not a passenger-facing through-service transfer.
+    if (_activeSystemIds.indexOf(lineId) >= 0 && _activeSystemIds.indexOf(thLineId) >= 0) continue;
     var thLine = src[thLineId];
     if (!thLine) continue;
     var joins = (window.ThroughService && window.ThroughService.getDisplayAnchors) ?
@@ -370,6 +375,7 @@ function _getTransferMap(lineId) {
       if (!stArr) continue;
       for (var j2 = 0; j2 < stArr.length; j2++) {
         if (throughLines.indexOf(stArr[j2].lineId) >= 0) {
+          if (_activeSystemIds.indexOf(lineId) >= 0 && _activeSystemIds.indexOf(stArr[j2].lineId) >= 0) continue;
           var _js = (window.ThroughService && window.ThroughService.getDisplayAnchors) ?
             window.ThroughService.getDisplayAnchors(lineId, stArr[j2].lineId) :
             ((window.ThroughService && window.ThroughService.getJoinStations) ? window.ThroughService.getJoinStations(lineId, stArr[j2].lineId) : null);
@@ -381,7 +387,7 @@ function _getTransferMap(lineId) {
       }
     }
   }
-  _transferMapCache = { lineId: lineId, lang: _langNow, map: map };
+  _transferMapCache = { lineId: lineId, lang: _langNow, systemKey: _systemKey, map: map };
   return map;
 }
 
