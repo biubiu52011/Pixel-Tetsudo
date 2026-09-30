@@ -8,11 +8,11 @@
   var _lineRelations = {};
   var _aliasMap = {};
   var _branchOfMap = {};
-  var _throughServiceChains = {};
+  var _directThrough = {};
 
   function buildIndexes() {
     var rels = window.LineServiceRelations || [];
-    _lineRelations = {}; _aliasMap = {}; _branchOfMap = {}; _throughServiceChains = {};
+    _lineRelations = {}; _aliasMap = {}; _branchOfMap = {}; _directThrough = {};
     rels.forEach(function(rel) {
       if (!rel.lineA || !rel.lineB) return;
       if (!_lineRelations[rel.lineA]) _lineRelations[rel.lineA] = [];
@@ -22,17 +22,11 @@
       if (rel.relation === "ALIAS_OF") { _aliasMap[rel.lineA] = rel.lineB; _aliasMap[rel.lineB] = rel.lineA; }
       if (rel.relation === "BRANCH_OF") { _branchOfMap[rel.lineA] = rel.lineB; _branchOfMap[rel.lineB] = rel.lineA; }
     });
-    var nodes = {};
     rels.filter(function(r){return r.relation==="THROUGH_SERVICE";}).forEach(function(r){
-      nodes[r.lineA]=nodes[r.lineA]||[]; nodes[r.lineB]=nodes[r.lineB]||[];
-      nodes[r.lineA].push(r.lineB); nodes[r.lineB].push(r.lineA);
-    });
-    var visited={};
-    Object.keys(nodes).forEach(function(start){
-      if(visited[start])return;
-      var chain=[],queue=[start];visited[start]=true;
-      while(queue.length>0){var cur=queue.shift();chain.push(cur);(nodes[cur]||[]).forEach(function(n){if(!visited[n]){visited[n]=true;queue.push(n);}});}
-      if(chain.length>1)_throughServiceChains[chain.sort().join(",")]=chain;
+      _directThrough[r.lineA]=_directThrough[r.lineA]||[];
+      _directThrough[r.lineB]=_directThrough[r.lineB]||[];
+      _directThrough[r.lineA].push(r.lineB);
+      _directThrough[r.lineB].push(r.lineA);
     });
     _initialized=true;
   }
@@ -65,14 +59,15 @@
     if(!_initialized)buildIndexes();
     var ctx={lineId:lineId,identity:"STANDALONE",confidence:"NONE",reason:"no_candidate",isThroughService:false,isAlias:false,isBranch:false,throughServiceGroup:null,relatedLines:[]};
     if(_aliasMap[lineId]){ctx.identity="SAME";ctx.confidence="HIGH";ctx.reason="ALIAS_OF";ctx.isAlias=true;ctx.relatedLines=[_aliasMap[lineId]];return ctx;}
-    var tsk=null;
-    for(var k in _throughServiceChains){if(_throughServiceChains[k].indexOf(lineId)>=0){tsk=k;break;}}
-    if(tsk){
-      ctx.throughServiceGroup=tsk;ctx.isThroughService=true;
-      ctx.relatedLines=_throughServiceChains[tsk].filter(function(id){return id!==lineId;});
-      var bc="MEDIUM";
-      _throughServiceChains[tsk].forEach(function(nb){if(scoreEvidence(lineId,nb)>=3)bc="HIGH";});
-      ctx.identity="SAME";ctx.confidence=bc;ctx.reason="THROUGH_SERVICE";
+    var directThrough = (_directThrough[lineId] || []).slice();
+    if(directThrough.length>0){
+      ctx.isThroughService=true;
+      ctx.relatedLines=directThrough.slice();
+      ctx.confidence="HIGH";
+      ctx.reason="THROUGH_SERVICE_BOUNDARY";
+      // A line-level through relation is permission to evaluate a boundary,
+      // not proof that any particular train continues across it.
+      ctx.identity="STANDALONE";
     }
     (_lineRelations[lineId]||[]).forEach(function(r){
       var other=r.lineA===lineId?r.lineB:r.lineA;
@@ -103,10 +98,10 @@
   window.RunningChainResolver={
     init:init,
     getResolutionContext:function(lineId,allIds){if(!_initialized)buildIndexes();return computeCtx(lineId,allIds||(window.UNIFIED_LINES?Object.keys(window.UNIFIED_LINES):[]));},
-    isInThroughServiceChain:function(a,b){if(!_initialized)buildIndexes();if(!a||!b||a===b)return false;for(var k in _throughServiceChains){if(_throughServiceChains[k].indexOf(a)>=0&&_throughServiceChains[k].indexOf(b)>=0)return true;}return false;},
-    getThroughServiceChain:function(lid){if(!_initialized)buildIndexes();for(var k in _throughServiceChains){if(_throughServiceChains[k].indexOf(lid)>=0)return _throughServiceChains[k];}return null;},
+    isDirectThroughService:function(a,b){if(!_initialized)buildIndexes();if(!a||!b||a===b)return false;return (_directThrough[a]||[]).indexOf(b)>=0;},
+    getDirectThroughLines:function(lid){if(!_initialized)buildIndexes();return (_directThrough[lid]||[]).slice();},
     hasRelation:function(a,b,rt){if(!_initialized)buildIndexes();var rs=_lineRelations[a]||[];for(var i=0;i<rs.length;i++){var o=rs[i].lineA===a?rs[i].lineB:rs[i].lineA;if(o===b&&(!rt||rs[i].relation===rt))return true;}return false;},
-    _getIndexes:function(){return{relations:_lineRelations,aliasMap:_aliasMap,branchOfMap:_branchOfMap,throughServiceChains:_throughServiceChains};}
+    _getIndexes:function(){return{relations:_lineRelations,aliasMap:_aliasMap,branchOfMap:_branchOfMap,directThrough:_directThrough};}
   };
 
   if(window.LineServiceRelations){init();}else{
