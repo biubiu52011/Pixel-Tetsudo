@@ -76,14 +76,9 @@
       if (this.fromInput) this.fromInput.placeholder = t('search.fromPlaceholder');
       if (this.toInput) this.toInput.placeholder = t('search.toPlaceholder');
       if (this.searchBtn) this.searchBtn.textContent = t('search.btn');
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        el.textContent = t(key, el.textContent);
-      });
-      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-        const key = el.getAttribute('data-i18n-placeholder');
-        el.placeholder = t(key, el.placeholder);
-      });
+      // Static [data-i18n] / [data-i18n-placeholder] nodes are owned solely by
+      // lang-init.js. Do not rewrite arbitrary element textContent here: composite
+      // controls may contain structural icons/symbols that must survive language changes.
       // Clear suggestion caches so re-query resolves names in the new language
       this._suggestionCache = {};
       this._suggestionCacheDOM = {};
