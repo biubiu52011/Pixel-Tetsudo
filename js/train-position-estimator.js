@@ -366,7 +366,14 @@
         }
 
         var trainNumber = tt["odpt:trainNumber"] || tt["odpt:train"] || ("est_" + t);
-        if (processedTrainIds[trainNumber]) continue; // Avoid duplicates
+        // A train number is not a globally unique timetable identity. Keep
+        // distinct timetable objects/railway segments separate so a later
+        // service segment is not discarded merely because the public train
+        // number is reused.
+        var timetableObjectId = tt["@id"] || tt["owl:sameAs"] || "";
+        var timetableIdentity = timetableObjectId ||
+          ((tt["odpt:railway"] || lineId || "") + "|" + String(trainNumber));
+        if (processedTrainIds[timetableIdentity]) continue;
 
         var tto = tt["odpt:trainTimetableObject"];
         if (!tto || !Array.isArray(tto) || tto.length === 0) continue;
@@ -453,7 +460,7 @@
           }
           if (lastArrTime !== null && adjustedCurrentMin > lastArrTime + 5) continue; // 5 min grace
 
-          processedTrainIds[trainNumber] = true;
+          processedTrainIds[timetableIdentity] = true;
           var trainClassification = classifyTrain(tt['odpt:trainType'], trainNumber, lineId);
           // 提取方向字段
           var railDirection = tt['odpt:railDirection'] || '';
