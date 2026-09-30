@@ -111,8 +111,6 @@
       if (firstId === null) firstId = lid;
       var line = linesObj[lid] || {};
       var dInfo = getDelayInfo(line) || {};
-      var agg = getAggregatedDelay(lid, line);
-      if (agg) dInfo = agg;
       var status = dInfo.status ? dInfo.status : (dInfo ? "normal" : "no_data");
       if (!worst || statusRank(status) > statusRank(worst)) worst = status;
       if (mode === "trains") {
@@ -220,8 +218,6 @@
     options = options || {};
     var mode = options.mode || "realtime";
     var delayInfo = getDelayInfo(line) || {};
-    var _aggDelay = getAggregatedDelay(lineId, line);
-    if (_aggDelay) delayInfo = _aggDelay;
     var status = delayInfo && delayInfo.status ? delayInfo.status : (delayInfo ? "normal" : "no_data");
     var interval = delayInfo.interval || "";
     var lineColor = (window.LineOperationSystemsResolveColor && window.LineOperationSystemsResolveColor(lineId)) || line.color || "#00b643";
