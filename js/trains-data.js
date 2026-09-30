@@ -252,9 +252,16 @@ function _throughDirForStation(lineId, stationId, throughLineId) {
   if (idx2 < 0) return null;
   var targetIds = throughLineId ? [throughLineId] : thrIds;
   for (var ti = 0; ti < targetIds.length; ti++) {
-    var tl = src2[targetIds[ti]];
+    var targetId = targetIds[ti];
+    var tl = src2[targetId];
     if (!tl || !tl.stations) continue;
-    if (tl.stations.indexOf(stationId) < 0) continue;
+    // The canonical handover station is authoritative.  Do not require the
+    // partner's station array to duplicate the boundary station: line entities
+    // may model the two sides independently, especially in reverse view.
+    var joins = (window.ThroughService && window.ThroughService.getJoinStations) ?
+      window.ThroughService.getJoinStations(lineId, targetId) : null;
+    var isCanonicalJoin = Array.isArray(joins) && joins.indexOf(stationId) >= 0;
+    if (!isCanonicalJoin && tl.stations.indexOf(stationId) < 0) continue;
     if (idx2 === 0) return "up";
     if (idx2 === sts2.length - 1) return "down";
     var allAfterOnThrough = true;
