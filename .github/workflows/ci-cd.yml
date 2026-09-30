@@ -12,6 +12,12 @@ permissions:
   pages: write
   id-token: write
 
+# Only the newest Pages deployment matters. Consecutive pushes must not race
+# each other for the single github-pages environment.
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
 jobs:
   validate:
     name: Validate
