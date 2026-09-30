@@ -311,7 +311,10 @@
       visited[lineId] = true;
       while (queue.length > 0) {
         var current = queue.shift();
-        var through = THROUGH_SERVICE_MAP[current];
+        // Walk only authoritative direct THROUGH_SERVICE neighbours.
+        // This prevents the historical legacy graph from crossing canonical
+        // UNKNOWN / BRANCH_OF / PHYSICAL_CONNECT boundaries during closure.
+        var through = getDirectThroughLines(current);
         if (through && Array.isArray(through)) {
           through.forEach(function(lid) {
             if (!visited[lid]) {
