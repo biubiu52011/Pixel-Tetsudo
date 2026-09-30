@@ -163,7 +163,6 @@
     "UtsunomiyaJR": { "ShonanShinjuku": ["Omiya"], "UenoTokyo": ["Omiya"], "Tokaido": ["Tokyo"] },
     "Joban": { "UenoTokyo": ["Ueno"] },
     "Tokaido": { "UtsunomiyaJR": ["Tokyo"], "Takasaki": ["Tokyo"], "UenoTokyo": ["Tokyo"], "Ito": ["Atami"] },
-    "Tokaido": { "UtsunomiyaJR": ["Tokyo"], "Takasaki": ["Tokyo"], "Ito": ["Atami"] },
     "Ito": { "Tokaido": ["Atami"] },
     // 中央線
     "ChuoRapid": { "Ome": ["Tachikawa"], "Itsukaichi": ["Haijima"], "ChuoMain": ["Takao"] },
@@ -186,8 +185,8 @@
     "Mita": { "TokyuMeguro": ["Meguro"] },
     "TokyuMeguro": { "Mita": ["Meguro"], "Namboku": ["Meguro"], "SotetsuShin-Yokohama": [] },
     // 相鉄（埼京・東横とはデータ上接続駅なし→マーカー非表示）
-    "SotetsuMain": { "Saikyo": [], "TokyuToyoko": [], "SotetsuIzumino": ["Futamatagawa", "Futamatagawa"], "SotetsuShin-Yokohama": ["Nishiya"] },
-    "SotetsuIzumino": { "SotetsuMain": ["Futamatagawa", "Futamatagawa"] },
+    "SotetsuMain": { "Saikyo": [], "TokyuToyoko": [], "SotetsuIzumino": ["Futamatagawa"], "SotetsuShin-Yokohama": ["Nishiya"] },
+    "SotetsuIzumino": { "SotetsuMain": ["Futamatagawa"] },
         "SotetsuShin-Yokohama": { "SotetsuMain": ["Nishiya"], "TokyuMeguro": ["Shin-Yokohama"] },
     // 地方線直通・大井町線直通（4.3.644 補完）
     "Gono": { "OuMain": ["Kawabe"] },
