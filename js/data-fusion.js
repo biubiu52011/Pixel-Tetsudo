@@ -67,11 +67,13 @@
   }
 
   var LAST_GOOD_KEY = "pt_runinfo_last_good_v1";
+  var LAST_GOOD_MAX_AGE_MS = 10 * 60 * 1000;
   function getLastGoodDelay(lineId) {
     try {
       var all = JSON.parse(localStorage.getItem(LAST_GOOD_KEY) || "{}");
       var v = all[lineId];
-      if (!v || !v.r || !v.r.status) return null;
+      if (!v || !v.r || !v.r.status || !v.t) return null;
+      if ((Date.now() - v.t) > LAST_GOOD_MAX_AGE_MS) return null;
       var st = v.r.status;
       if (st === "loading" || st === "no_data" || st === "no_odpt" || st === "unknown") return null;
       return {
