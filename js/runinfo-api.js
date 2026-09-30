@@ -52,42 +52,50 @@
     } catch (e) { return Promise.resolve([]); }
   }
 
-  // ODPT record -> 该线路专属 text（含 odpt:railway 匹配）；无专属则聚合全网（不误报正常）
-  function pickText(records, line) {
-    if (!records || records.length === 0) return null;
+  // Select only records that are allowed to affect this line.
+  // Railway-specific records win; no-railway records are operator/global fallback only.
+  function selectScopedRecords(records, line) {
+    if (!records || records.length === 0) return [];
     var code = line && line.id ? line.id : "";
     if (window.ODPTClient && window.ODPTClient.LINE_RAILWAY_CODE && line && line.id &&
-        window.ODPTClient.LINE_RAILWAY_CODE[line.id]) {
-      code = window.ODPTClient.LINE_RAILWAY_CODE[line.id];
-    }
+        window.ODPTClient.LINE_RAILWAY_CODE[line.id]) code = window.ODPTClient.LINE_RAILWAY_CODE[line.id];
     function shortOf(rec) {
       try {
         var rw = (rec && rec["odpt:railway"]) || "";
         if (!rw) return "";
         var parts = String(rw).split(":");
-        if (parts.length < 2) return "";
         var dots = parts[parts.length - 1].split(".");
         return dots[dots.length - 1] || "";
       } catch (e) { return ""; }
     }
-    // ① 有 odpt:railway 的记录专属其线（A 线报文不得显示到 B 线弹窗）
-    var own = null;
-    for (var i = 0; i < records.length; i++) {
-      if (!records[i]) continue;
-      if (shortOf(records[i]).toLowerCase() === String(code).toLowerCase()) { own = records[i]; break; }
-    }
-    // ② 全网/多线报文聚合（无 railway 归属），取最严重状态
-    var worst = null;
-    var rank = { suspended: 3, delayed: 2, normal: 1 };
-    for (var j = 0; j < records.length; j++) {
-      if (!records[j]) continue;
-      if (shortOf(records[j])) continue;
-      var st = parseStatus(records[j]);
-      if (!worst || (rank[st] || 0) > (rank[worst.st] || 0)) worst = { rec: records[j], st: st };
-    }
-    var chosen = own || (worst ? worst.rec : null);
-    if (!chosen) return null;
-    return String(chosen["odpt:text"] || "");
+    var own = records.filter(function(rec) {
+      return rec && shortOf(rec).toLowerCase() === String(code).toLowerCase();
+    });
+    if (own.length) return own;
+    return records.filter(function(rec) { return rec && !shortOf(rec); });
+  }
+
+  function recordText(rec) {
+    if (!rec) return "";
+    var v = rec["odpt:trainInformationText"] || rec["odpt:text"] || "";
+    if (typeof v === "string") return v;
+    if (v && typeof v === "object") return String(v.ja || v["ja-Hrkt"] || v.en || v["zh-Hans"] || v["zh-Hant"] || v.ko || "");
+    return "";
+  }
+
+  function pickText(records, line) {
+    var scoped = selectScopedRecords(records, line);
+    if (!scoped.length) return null;
+    var rank = { suspended: 5, delayed: 4, notice: 3, info: 2, normal: 1, unknown: 0 };
+    var chosen = null, chosenRank = -1;
+    scoped.forEach(function(rec) {
+      var text = recordText(rec);
+      if (!text) return;
+      var st = parseStatus(rec);
+      var rr = rank[st] == null ? 0 : rank[st];
+      if (!chosen || rr > chosenRank) { chosen = rec; chosenRank = rr; }
+    });
+    return chosen ? recordText(chosen) : null;
   }
 
   // ODPT record -> 概览状态（统一 Evidence Evaluator）
@@ -207,11 +215,12 @@
   }
 
   function aggregateStatus(records, line) {
-    if (!records || records.length === 0) return null;
-    var rank = { suspended: 3, delayed: 2, normal: 1 };
+    var scoped = selectScopedRecords(records, line);
+    if (!scoped.length) return null;
+    var rank = { suspended: 5, delayed: 4, notice: 3, info: 2, normal: 1, unknown: 0 };
     var worst = null;
-    for (var i = 0; i < records.length; i++) {
-      var st = parseStatus(records[i]);
+    for (var i = 0; i < scoped.length; i++) {
+      var st = parseStatus(scoped[i]);
       if (!worst || (rank[st] || 0) > (rank[worst] || 0)) worst = st;
     }
     return worst;
