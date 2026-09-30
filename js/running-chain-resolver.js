@@ -55,44 +55,6 @@
     return s;
   }
 
-  function computeCtx(lineId,allIds){
-    if(!_initialized)buildIndexes();
-    var ctx={lineId:lineId,identity:"STANDALONE",confidence:"NONE",reason:"no_candidate",isThroughService:false,isAlias:false,isBranch:false,throughServiceGroup:null,relatedLines:[]};
-    if(_aliasMap[lineId]){ctx.identity="SAME";ctx.confidence="HIGH";ctx.reason="ALIAS_OF";ctx.isAlias=true;ctx.relatedLines=[_aliasMap[lineId]];return ctx;}
-    var directThrough = (_directThrough[lineId] || []).slice();
-    if(directThrough.length>0){
-      ctx.isThroughService=true;
-      ctx.relatedLines=directThrough.slice();
-      ctx.confidence="HIGH";
-      ctx.reason="THROUGH_SERVICE_BOUNDARY";
-      // A line-level through relation is permission to evaluate a boundary,
-      // not proof that any particular train continues across it.
-      ctx.identity="STANDALONE";
-    }
-    (_lineRelations[lineId]||[]).forEach(function(r){
-      var other=r.lineA===lineId?r.lineB:r.lineA;
-      if(other===lineId)return;
-      ctx.relatedLines.push(other);
-      if(r.relation==="BRANCH_OF" && r.lineA===lineId){
-        // Branch flag applies to the branch end (lineA) only; the trunk (lineB) stays standalone.
-        ctx.isBranch=true;
-        if(ctx.identity==="STANDALONE"){ctx.identity="SAME";ctx.confidence="LOW";ctx.reason="BRANCH_OF";}
-      }else if(r.relation==="PHYSICAL_CONNECT"&&ctx.identity==="STANDALONE"){
-        ctx.identity="SAME";ctx.confidence="LOW";ctx.reason="PHYSICAL_CONNECT";
-      }else if(r.relation==="UNKNOWN"&&ctx.identity==="STANDALONE"){
-        ctx.identity="UNKNOWN";ctx.confidence="LOW";ctx.reason="UNKNOWN_RELATION";
-      }
-    });
-    if(!ctx.isThroughService&&!ctx.isAlias){
-      var ln=(window.UNIFIED_LINES&&window.UNIFIED_LINES[lineId])||null;
-      if(ln&&ln.code){
-        var col=allIds.filter(function(id){var l=(window.UNIFIED_LINES&&window.UNIFIED_LINES[id])||null;return l&&l.code===ln.code&&l.operator!==ln.operator;});
-        if(col.length>0){ctx.identity="SEPARATE";ctx.confidence="HIGH";ctx.reason="CODE_COLLISION_DIFF_OP";}
-      }
-    }
-    return ctx;
-  }
-
   function _stationKey(v){var p=String(v||"").split(".");return p[p.length-1]||"";}
   function _timeMin(v){if(!v)return null;var m=String(v).match(/^(\\d{1,2}):(\\d{2})/);if(!m)return null;return parseInt(m[1],10)*60+parseInt(m[2],10);}
   function _segment(tt,lineId){
@@ -148,7 +110,6 @@
 
   window.RunningChainResolver={
     init:init,
-    getResolutionContext:function(lineId,allIds){if(!_initialized)buildIndexes();return computeCtx(lineId,allIds||(window.UNIFIED_LINES?Object.keys(window.UNIFIED_LINES):[]));},
     isDirectThroughService:function(a,b){if(!_initialized)buildIndexes();if(!a||!b||a===b)return false;return (_directThrough[a]||[]).indexOf(b)>=0;},
     getDirectThroughLines:function(lid){if(!_initialized)buildIndexes();return (_directThrough[lid]||[]).slice();},
     resolveTimetableChain:resolveTimetableChain,
