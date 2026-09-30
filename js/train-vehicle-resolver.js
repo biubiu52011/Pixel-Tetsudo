@@ -3998,10 +3998,11 @@ function _resolveTrainIcon(lineId, operator, trainId, stationIndex, trainType, b
       if (_normOp) opKey = _normOp(operator);
       if (OPERATOR_ICONS[opKey]) return OPERATOR_ICONS[opKey];
 
-      // Ultimate fallback
-      return "../images/列车/JR東日本/E235系山手線.png";
+      // No unrelated train should be fabricated when neither line nor operator
+      // provides a confident visual fallback.
+      return null;
     } catch(e) {
-      return "../images/列车/JR東日本/E235系山手線.png";
+      return null;
     }
   }
 
@@ -4117,7 +4118,7 @@ function resolveVehicleIcon(candidatesStr, lineId) {
   // mutates window.UNIFIED_LINES or requires a synthetic global line record.
   function resolveTrainIconByRules(lineId, operator, trainId, stationIndex, trainType, byOperator, stations) {
     var _r = _resolveTrainIcon(lineId, operator, trainId, stationIndex, trainType, byOperator);
-    return _r || '../images/列车/JR東日本/E235系山手線.png';
+    return _r || null;
   }
 
   // S2 车号 -> 车型候选 累积表
