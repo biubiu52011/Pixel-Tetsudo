@@ -60,6 +60,26 @@
     } catch(e) { return null; }
   }
 
+  // Segment-level display colors. This affects route rendering only; it does
+  // not change line identity, realtime ownership, or running-chain continuity.
+  function _segmentDisplayColor(lineId, fromStation, toStation, fallback) {
+    if (lineId !== "Joban") return fallback;
+    var all = (window.RailwayDB && window.RailwayDB.getAllLines) ? window.RailwayDB.getAllLines() : {};
+    var uenoTokyo = (window.LineOperationSystemsResolveColor && window.LineOperationSystemsResolveColor("UenoTokyo")) ||
+      (all.UenoTokyo && all.UenoTokyo.color) || "#9358b6";
+    // Joban station order is used only to identify the display boundary; the
+    // boundary itself is keyed by station ID so inserting stations does not
+    // silently move the color transition.
+    var sts = (all.Joban && all.Joban.stations) || [];
+    var ueno = sts.indexOf("Ueno");
+    var toride = sts.indexOf("Toride");
+    var from = sts.indexOf(fromStation);
+    var to = sts.indexOf(toStation);
+    if (ueno >= 0 && from >= 0 && to >= 0 && Math.max(from, to) <= ueno) return uenoTokyo;
+    if (toride >= 0 && from >= 0 && to >= 0 && Math.min(from, to) >= toride) return "#00b261";
+    return fallback;
+  }
+
   function computeRouteGeometry(line, lineId) {
     // Check cache first
     if (_routeGeometryCache[_geomKey(lineId)] && _routeGeometryCache[_geomKey(lineId)].lineHash === _computeLineHash(line)) {
@@ -554,10 +574,26 @@
       // per-station 2-row chip compensation) or the viewBox clips the line.
       svgH = (stationCoords.length ? stationCoords[stationCoords.length - 1].y : topP) + (_spSeg.length ? _spSeg[_spSeg.length - 1] : sp) + botP;
       var y1 = topP, y2 = stationCoords.length ? stationCoords[stationCoords.length - 1].y : (topP + (stations.length - 1) * sp);
-      routeElements.push({
-        type: 'line',
-        attrs: { x1: mainCx, y1: y1, x2: mainCx, y2: y2, stroke: color, 'stroke-width': 5, 'stroke-linecap': 'round', opacity: 0.6 }
-      });
+      // Draw ordinary main lines by station segment so display color can
+      // change exactly at a named boundary station (e.g. Joban at Ueno/Toride).
+      if (stationCoords.length > 1) {
+        for (var _segI = 0; _segI < stationCoords.length - 1; _segI++) {
+          var _segA = stationCoords[_segI], _segB = stationCoords[_segI + 1];
+          routeElements.push({
+            type: 'line',
+            attrs: {
+              x1: _segA.x, y1: _segA.y, x2: _segB.x, y2: _segB.y,
+              stroke: _segmentDisplayColor(lineId, _segA.stationId, _segB.stationId, color),
+              'stroke-width': 5, 'stroke-linecap': 'round', opacity: 0.6
+            }
+          });
+        }
+      } else {
+        routeElements.push({
+          type: 'line',
+          attrs: { x1: mainCx, y1: y1, x2: mainCx, y2: y2, stroke: color, 'stroke-width': 5, 'stroke-linecap': 'round', opacity: 0.6 }
+        });
+      }
       // v4.3.409/4.3.422: 融合机制——直通运行系统延伸段几何（如横須賀線・総武快速線）
       // 延伸线接主线端点（東京站）后沿同一垂直方向、同一列继续排布（一条连续线）；
       // 列车索引 = baseIdx + 延伸线站表索引
