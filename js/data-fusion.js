@@ -850,12 +850,6 @@
   }
 
   
-  // ========== 直通运行关系 ==========
-  // Data moved to data/core/through-service.js (single Provider: window.ThroughService).
-  function getThroughServiceLines(lineId) {
-    return (window.ThroughService && window.ThroughService.getThroughServiceLines) ? window.ThroughService.getThroughServiceLines(lineId) : [];
-  }
-
     // ========== 按需加载缺失线路的时刻表 ==========
   var _timetableLoading = {};
 
@@ -1116,8 +1110,7 @@
     saveToCache: saveToCache, refresh: function() { return fuseAll(); },
     // v4.3.528: 手动时刻表按需加载（ODPT 无时刻表的 JR 地方线，打开线路时才注入该线文件）
     ensureManualTimetable: ensureManualTimetable,
-    // Through-service (直通運転) providers: direct neighbours + BFS closure
-    getThroughServiceLines: getThroughServiceLines,
+    // Through-service runtime provider: direct canonical neighbours only.
     getDirectThroughLines: function(lineId) {
       return (window.ThroughService && window.ThroughService.getDirectThroughLines) ? window.ThroughService.getDirectThroughLines(lineId) : [];
     },
