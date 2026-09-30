@@ -217,17 +217,47 @@
     "Hohi": { "KagoshimaMain": ["Kumamoto"], "Nippo": ["Oita"] }
   };
 
-  /** Direct through-service neighbours of a line (1 hop). */
+  function getCanonicalThroughRelation(lineId, partnerId) {
+    var relations = window.LineServiceRelations;
+    if (!relations || typeof relations.length !== "number") return null;
+    for (var i = 0; i < relations.length; i++) {
+      var rel = relations[i];
+      if (!rel || rel.relation !== "THROUGH_SERVICE") continue;
+      if ((rel.lineA === lineId && rel.lineB === partnerId) ||
+          (rel.lineA === partnerId && rel.lineB === lineId)) return rel;
+    }
+    return null;
+  }
+
+  /** Direct through-service neighbours of a line (1 hop).
+   * Canonical relations are authoritative; the legacy map only fills relations
+   * that have not yet been migrated.
+   */
   function getDirectThroughLines(lineId) {
     try {
-      var t = THROUGH_SERVICE_MAP[lineId];
-      return (t && Array.isArray(t)) ? t.slice() : [];
+      var out = [];
+      var relations = window.LineServiceRelations;
+      if (relations && typeof relations.length === "number") {
+        for (var i = 0; i < relations.length; i++) {
+          var rel = relations[i];
+          if (!rel || rel.relation !== "THROUGH_SERVICE") continue;
+          var other = rel.lineA === lineId ? rel.lineB : (rel.lineB === lineId ? rel.lineA : null);
+          if (other && out.indexOf(other) < 0) out.push(other);
+        }
+      }
+      var legacy = THROUGH_SERVICE_MAP[lineId];
+      if (legacy && Array.isArray(legacy)) {
+        legacy.forEach(function(other) { if (out.indexOf(other) < 0) out.push(other); });
+      }
+      return out;
     } catch(e) { return []; }
   }
 
-  /** Join stations for a line pair, or null when not defined (fall back to all shared stations). */
+  /** Join stations for a line pair. Canonical handoverStations win when present. */
   function getJoinStations(lineId, partnerId) {
     try {
+      var canonical = getCanonicalThroughRelation(lineId, partnerId);
+      if (canonical && Array.isArray(canonical.handoverStations)) return canonical.handoverStations.slice();
       var m = THROUGH_JOIN_STATIONS[lineId];
       if (!m) return null;
       return (m[partnerId] !== undefined) ? m[partnerId] : null;
