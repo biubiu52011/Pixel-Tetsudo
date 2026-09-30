@@ -4,6 +4,14 @@
 
 /* global window */
 window.LineServiceRelations = [
+  { lineA: "OsakaLoop", lineB: "Hanwa", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Tennoji"], evidence: { source: "JR West timetable: Kanku/Kishu Rapid continues between Osaka Loop and Hanwa at Tennoji", confidence: "HIGH" } },
+  { lineA: "OsakaLoop", lineB: "KansaiMain", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Tennoji"], evidence: { source: "JR West timetable: Yamatoji Rapid continues between Osaka Loop and Kansai Main at Tennoji", confidence: "HIGH" } },
+  { lineA: "KansaiMain", lineB: "Nara", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "legacy edge at Kizu conflates Kansai Main/Yamatoji operation with Nara Line; no direct migration without train-path evidence", confidence: "LOW" } },
+  { lineA: "Gakkentoshi", lineB: "OsakaHigashi", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "legacy edge at Kyobashi-Osaka requires path verification; not migrated as direct through", confidence: "LOW" } },
+  { lineA: "ChuoRapid", lineB: "ChuoMain", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Takao"], evidence: { source: "adjacent operational boundary at Takao; legacy direct edge retained as local adjacency", confidence: "HIGH" } },
+  { lineA: "ChuoMain", lineB: "ChuoTatsuno", relation: "BRANCH_OF", direction: "BIDIRECTIONAL", handoverStations: ["Okaya"], evidence: { source: "Tatsuno route is a branch/alternate section of Chuo Main, not an independent through operator boundary", confidence: "HIGH" } },
+  { lineA: "ChuoMain", lineB: "Shinonoi", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Shiojiri"], evidence: { source: "adjacent Chuo Main/Shinonoi operation boundary at Shiojiri", confidence: "HIGH" } },
+  { lineA: "Shinonoi", lineB: "Shinetsu", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Shinonoi"], evidence: { source: "adjacent Shinonoi/Shinetsu operation boundary at Shinonoi", confidence: "HIGH" } },
   { lineA: "Ome", lineB: "Itsukaichi", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Haijima"], evidence: { source: "JR East route/timetable path: Itsukaichi services enter Ome Line at Haijima", confidence: "HIGH" } },
   { lineA: "UenoTokyo", lineB: "UtsunomiyaJR", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "UenoTokyo is an operation-system identity, not a direct physical line handover at Omiya", confidence: "HIGH" } },
   { lineA: "UenoTokyo", lineB: "Takasaki", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "UenoTokyo is an operation-system identity, not a direct physical line handover at Omiya", confidence: "HIGH" } },
