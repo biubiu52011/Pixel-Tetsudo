@@ -356,8 +356,11 @@
           });
         }
         
-      // v4.3.959: 自动合并所有直通线路列车——用 getThroughServiceLines 自动获取直通线
-      var _throughLines = getThroughServiceLines(lineId) || [];
+      // Merge only direct canonical through neighbours. Multi-hop graph
+      // reachability is not evidence that one physical train spans the chain;
+      // running-chain resolver owns A->B->C continuity decisions.
+      var _throughLines = (window.ThroughService && window.ThroughService.getDirectThroughLines) ?
+        (window.ThroughService.getDirectThroughLines(lineId) || []) : [];
       for (var _tl = 0; _tl < _throughLines.length; _tl++) {
         var _tlLine = _throughLines[_tl];
         var _tlPositions = odptData.realtimePositions[_tlLine] || [];
@@ -874,7 +877,11 @@
           seenLineIds[l.lineId] = true;
           expandedLines.push(l);
         }
-        var throughLines = getThroughServiceLines(l.lineId);
+        // Timetable prefetch is one-hop only. Do not turn graph reachability
+        // into an assumed train chain; further segments are loaded when their
+        // own evidence requires them.
+        var throughLines = (window.ThroughService && window.ThroughService.getDirectThroughLines) ?
+          (window.ThroughService.getDirectThroughLines(l.lineId) || []) : [];
         throughLines.forEach(function(tlid) {
           if (!seenLineIds[tlid]) {
             var throughLine = allLines && allLines[tlid];
