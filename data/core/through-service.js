@@ -268,6 +268,20 @@
     } catch(e) { return null; }
   }
 
+  /** UI anchor stations for a through relation.
+   * These may differ by side when a connector joins between passenger stations.
+   * Physical/service truth remains in handoverStations.
+   */
+  function getDisplayAnchors(lineId, partnerId) {
+    try {
+      var canonical = getCanonicalThroughRelation(lineId, partnerId);
+      if (canonical && canonical.displayAnchors && Array.isArray(canonical.displayAnchors[lineId])) {
+        return canonical.displayAnchors[lineId].slice();
+      }
+      return getJoinStations(lineId, partnerId);
+    } catch(e) { return null; }
+  }
+
   /** BFS closure: every line reachable through any number of through runs. */
   function getThroughServiceLines(lineId) {
     // v4.3.966: 多跳BFS找所有直通线路，但排除跨公司接续（西武线不应该出现在东武线视图里）
@@ -302,6 +316,7 @@
     getMap: getMap,
     getDirectThroughLines: getDirectThroughLines,
     getJoinStations: getJoinStations,
+    getDisplayAnchors: getDisplayAnchors,
     getThroughServiceLines: getThroughServiceLines
   };
 })();
