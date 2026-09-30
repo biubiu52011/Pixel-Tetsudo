@@ -267,12 +267,23 @@ function _throughDirForStation(lineId, stationId, throughLineId) {
     if (!isCanonicalJoin && !isDisplayAnchor && tl.stations.indexOf(stationId) < 0) continue;
     if (idx2 === 0) return "up";
     if (idx2 === sts2.length - 1) return "down";
-    // Asymmetric display anchors represent separate mouths of a connector whose
-    // physical handover station may not belong to this line entity.  Preserve
-    // them as directional anchors instead of collapsing them into "middle".
-    if (isDisplayAnchor && !isCanonicalJoin && anchors.length > 1) {
+    // Display anchors are UI mouths of a connector.  Their direction must be
+    // derived from the connector's outside direction, not from whether the
+    // station happens to be the first/last item in the anchor array.  For an
+    // interior anchor, compare its position with the partner handover/nearest
+    // shared corridor: the label belongs outside the station sequence.
+    if (isDisplayAnchor && !isCanonicalJoin) {
       var anchorIdx = anchors.indexOf(stationId);
-      return anchorIdx === 0 ? "up" : (anchorIdx === anchors.length - 1 ? "down" : "middle");
+      if (anchors.length > 1) {
+        // First mouth exits toward the preceding station; last mouth exits
+        // toward the following station. This keeps the chip outside the
+        // station-to-station segment instead of rendering as a middle side chip.
+        return anchorIdx === 0 ? "up" : "down";
+      }
+      // A single interior display mouth has no second UI anchor to infer from.
+      // Use its half of the line so it still renders outside the adjacent
+      // station interval rather than through the interval itself.
+      return idx2 <= (sts2.length - 1) / 2 ? "up" : "down";
     }
     var allAfterOnThrough = true;
     var afterCount = 0;
