@@ -426,26 +426,6 @@ var LINE_ICONS = {
     "NishiKyushuShinkansen": "../images/列车/JR九州/800系.png"      // 西九州新幹線：800系（かもめ）
   }
 
-var THROUGH_SUFFIX_RULES = {
-    "Keiyo": [
-      { suffix: "E", icon: "../images/列车/JR東日本/E231系0番台.png" }
-    ],
-    "Musashino": [
-      { suffix: "Y", icon: "../images/列车/JR東日本/E233系5000番台.png" }
-    ]
-  }
-
-var THROUGH_PREFIX_RULES = {
-    "Hanzomon": [
-      { prefix: "B", icon: "../images/列车/東武鉄道/50000系.png" }
-    ],
-    // v4.3.928: 千代田線 B プレフィックス = JR 常磐線各駅停車との直通車（E233系2000番台）。
-    // ODPT vehicleType 実測: "JR E233系"。小田急との直通は特急ロマンスカーのみ。
-    "Chiyoda": [
-      { prefix: "B", icon: "../images/列车/JR東日本/E233系2000番台.png" }
-    ]
-  }
-
 var TRAIN_TYPE_ICON_RULES = [
     // v4.3.925: 千代田线直通小田急ロマンスカー（特急）——60000形MSE
     { lines: ['Chiyoda'], op: null, trainType: 'limitedexpress', regex: null,
@@ -1627,7 +1607,7 @@ var FLEET_ICON_POOLS = {
   });
 
   // v4.3.975: 反推遍历改为通用递归收集——扫描所有含 icon 字段的表（LINE_ICONS/OPERATOR_ICONS/
-  // VEHICLE_DEPLOYMENTS/THROUGH_PREFIX_RULES/TRAIN_TYPE_ICON_RULES/EXTRA_VEHICLE_ICONS），
+  // VEHICLE_DEPLOYMENTS/TRAIN_TYPE_ICON_RULES/EXTRA_VEHICLE_ICONS），
   // 嵌套对象/数组里的图标路径也全部入表，不再遗漏规则表资产
   (function buildVehicleNameIndex() {
     var seen = {};
@@ -1652,7 +1632,6 @@ var FLEET_ICON_POOLS = {
     collectIcon(LINE_ICONS);
     collectIcon(OPERATOR_ICONS);
     collectIcon(VEHICLE_DEPLOYMENTS);
-    if (typeof THROUGH_PREFIX_RULES !== 'undefined') collectIcon(THROUGH_PREFIX_RULES);
     if (typeof TRAIN_TYPE_ICON_RULES !== 'undefined') collectIcon(TRAIN_TYPE_ICON_RULES);
     // v4.3.973/975: 额外变体资产与自动补全的未引用图标资产
     // v4.3.976: EXTRA 条目 key 优先直录（公司前缀 key 解同名抢占；文件 base 名兜底入表）
