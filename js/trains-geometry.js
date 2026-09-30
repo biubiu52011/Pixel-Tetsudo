@@ -76,7 +76,10 @@
     var from = sts.indexOf(fromStation);
     var to = sts.indexOf(toStation);
     if (ueno >= 0 && from >= 0 && to >= 0 && Math.max(from, to) <= ueno) return uenoTokyo;
-    if (toride >= 0 && from >= 0 && to >= 0 && Math.min(from, to) >= toride) return "#00b261";
+    // Medium-distance Joban services use the blue display band north of the
+    // rapid-operation boundary. This is presentation-only and does not create
+    // a separate railway identity.
+    if (toride >= 0 && from >= 0 && to >= 0 && Math.min(from, to) >= toride) return "#3333ff";
     return fallback;
   }
 
@@ -738,6 +741,17 @@
       isDualLoop6: isSixShapedLoop, // v4.3.502: 六形环环段左右二分（双列）——站名朝外、clamp 走通用
       sp: sp,
       color: color,
+      stationDisplayColor: function(stationId) {
+        if (lineId !== "Joban") return color;
+        var _idx = stations.indexOf(stationId);
+        if (_idx < 0) return color;
+        var _next = _idx < stations.length - 1 ? stations[_idx + 1] : stationId;
+        var _prev = _idx > 0 ? stations[_idx - 1] : stationId;
+        // Boundary stations adopt the color of the section entered after them.
+        if (stationId === "Ueno") return _segmentDisplayColor(lineId, stationId, _next, color);
+        if (stationId === "Toride") return "#3333ff";
+        return _segmentDisplayColor(lineId, _prev, _next, color);
+      },
       branchLines: branchLines,
       branchOffset: branchOffset,
       branchSides: (function() { var _ba = []; for (var _bi5 = 0; _bi5 < branchLines.length; _bi5++) _ba.push(_bSide(_bi5)); return _ba; })(), // v4.3.515: 每支线分叉侧（跨函数传给 renderTrainMap）
