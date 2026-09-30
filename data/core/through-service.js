@@ -259,8 +259,12 @@
       var canonical = getCanonicalThroughRelation(lineId, partnerId);
       if (canonical && Array.isArray(canonical.handoverStations)) return canonical.handoverStations.slice();
       var m = THROUGH_JOIN_STATIONS[lineId];
-      if (!m) return null;
-      return (m[partnerId] !== undefined) ? m[partnerId] : null;
+      if (m && m[partnerId] !== undefined) return m[partnerId];
+      // Legacy join data was historically populated asymmetrically even though
+      // through-service pairs are bidirectional. Mirror the partner lookup so
+      // both line views render the same handover marker without duplicating data.
+      var reverse = THROUGH_JOIN_STATIONS[partnerId];
+      return (reverse && reverse[lineId] !== undefined) ? reverse[lineId] : null;
     } catch(e) { return null; }
   }
 
