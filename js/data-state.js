@@ -38,36 +38,9 @@
     return null;
   }
 
-  // Through-service chain delay aggregation (read-only, UI layer only)
-  // Module-level function: consumed by renderCard(). Keep outside getDelayInfo.
-  function getAggregatedDelay(lineId, line) {
-    try {
-      if (!window.RunningChainResolver) return null;
-      var ctx = window.RunningChainResolver.getResolutionContext(lineId, Object.keys(window.UNIFIED_LINES || {}));
-      if (!ctx || !ctx.isThroughService || !ctx.relatedLines || ctx.relatedLines.length === 0) return null;
-      var maxDelay = 0;
-      var maxReason = null;
-      // Include current line in aggregation
-      var curDelay = line && line.delayInfo;
-      if (curDelay && curDelay.maxDelay != null && curDelay.maxDelay > maxDelay) {
-        maxDelay = curDelay.maxDelay;
-        maxReason = curDelay.cause || null;
-      }
-      ctx.relatedLines.forEach(function(relId) {
-        var relLine = (window.DataState && window.DataState.getLine) ? window.DataState.getLine(relId) : null;
-        if (!relLine || !relLine.delayInfo) return;
-        var d = relLine.delayInfo;
-        if (d && d.maxDelay != null && d.maxDelay > maxDelay) {
-          maxDelay = d.maxDelay;
-          maxReason = d.cause || null;
-        }
-      });
-      if (maxDelay > 0) {
-        return { status: "delayed", maxDelay: maxDelay, interval: null, cause: maxReason };
-      }
-    } catch(e) {}
-    return null;
-  }
+  // Operational status is line-owned. Through-service topology must not copy
+  // another line's delay/status onto this line; explicit through-service impacts
+  // are represented by RunInfoEvaluator instead.
 
   function getStatus(status) {
     if (!status) return STATUS_META.no_data;
