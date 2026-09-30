@@ -120,13 +120,17 @@
   var _cache = {};          // lineId -> { t: timestamp, r: result }
   var CACHE_TTL_MS = 5 * 60 * 1000;
   var LAST_GOOD_KEY = "pt_runinfo_last_good_v1";
+  // Operational status is highly time-sensitive. Persistent cache is only a
+  // brief stale-while-revalidate bridge, never historical truth.
+  var LAST_GOOD_MAX_AGE_MS = 10 * 60 * 1000;
 
   function readLastGood(lineId) {
     try {
       var all = JSON.parse(localStorage.getItem(LAST_GOOD_KEY) || "{}");
       var v = all[lineId];
-      if (!v || !v.r) return null;
-      return Object.assign({}, v.r, { stale: true, refreshing: true, cachedAt: v.t || null });
+      if (!v || !v.r || !v.t) return null;
+      if ((Date.now() - v.t) > LAST_GOOD_MAX_AGE_MS) return null;
+      return Object.assign({}, v.r, { stale: true, refreshing: true, cachedAt: v.t });
     } catch(e) { return null; }
   }
 
