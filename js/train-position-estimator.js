@@ -615,6 +615,31 @@
 
       if (Object.keys(timetableIndex).length === 0) return estimated;
 
+      function _normalizeTimetableOperator(op) {
+        var v = op || "";
+        if (window.TransitConstants && typeof window.TransitConstants.normalizeOp === "function") v = window.TransitConstants.normalizeOp(v);
+        var aliases = { "Rinkai": "TWR", "TsukubaExpress": "MIR" };
+        return aliases[v] || v;
+      }
+      function _lineTimetables(lid) {
+        var ln = allLines[lid]; if (!ln || !ln.operator) return [];
+        var oid = _normalizeTimetableOperator(ln.operator);
+        var ri = timetableIndex[oid]; if (!ri) return [];
+        var keys = {}, rwc = window.ODPTClient && window.ODPTClient.LINE_RAILWAY_CODE;
+        if (ri[lid]) keys[lid] = true;
+        if (rwc && rwc[lid] && ri[rwc[lid]]) keys[rwc[lid]] = true;
+        var out = []; Object.keys(keys).forEach(function(k){ out = out.concat(ri[k]); });
+        return out;
+      }
+      function _directChainCandidates(lid) {
+        var out = [];
+        if (!window.RunningChainResolver || typeof window.RunningChainResolver.getDirectThroughLines !== "function") return out;
+        (window.RunningChainResolver.getDirectThroughLines(lid) || []).forEach(function(pid){
+          _lineTimetables(pid).forEach(function(tt){ out.push({lineId:pid,timetable:tt}); });
+        });
+        return out;
+      }
+
       // Process each line
       for (var i = 0; i < lineIds.length; i++) {
         var lineId = lineIds[i];
@@ -653,6 +678,28 @@
         if (lineTimetable.length === 0) continue;
 
         var positions = estimateLinePositions(lineId, line, lineTimetable, delayInfo, opId);
+        if (positions.length > 0 && window.RunningChainResolver && typeof window.RunningChainResolver.resolveTimetableChain === "function") {
+          var chainCandidates = _directChainCandidates(lineId);
+          if (chainCandidates.length > 0) {
+            var byIdentity = {};
+            lineTimetable.forEach(function(tt) {
+              var n = tt["odpt:trainNumber"] || tt["odpt:train"] || "";
+              var tid = tt["@id"] || tt["owl:sameAs"] || ((tt["odpt:railway"] || lineId || "") + "|" + String(n));
+              byIdentity[String(tid)] = tt;
+            });
+            positions.forEach(function(pos) {
+              var sourceTT = byIdentity[String(pos.timetableIdentity || "")];
+              if (!sourceTT) return;
+              var resolved = window.RunningChainResolver.resolveTimetableChain(sourceTT, lineId, chainCandidates);
+              if (resolved && resolved.runningChainId) {
+                pos.runningChainId = resolved.runningChainId;
+                pos.runningChainEvidence = resolved.evidence || "TIMETABLE_SEGMENT";
+                if (resolved.partnerLineId) pos.runningChainPartnerLineId = resolved.partnerLineId;
+                if (resolved.timeGapMin !== undefined) pos.runningChainTimeGapMin = resolved.timeGapMin;
+              }
+            });
+          }
+        }
         if (positions.length > 0) {
           // v4.3.961: 合并到现有实时数据（去重：同 trainId 只保留一条）
           var existing = (existingPositions && existingPositions[lineId]) || [];
