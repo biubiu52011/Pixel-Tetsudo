@@ -174,38 +174,9 @@
   }
 
   /** BFS closure: every line reachable through any number of through runs. */
-  function getThroughServiceLines(lineId) {
-    // v4.3.966: 多跳BFS找所有直通线路，但排除跨公司接续（西武线不应该出现在东武线视图里）
-    // 同公司内的多跳是允许的（东武晴空塔线→东武伊势崎线→东武日光线）
-    try {
-      var result = [];
-      var visited = {};
-      var queue = [lineId];
-      visited[lineId] = true;
-      while (queue.length > 0) {
-        var current = queue.shift();
-        // Walk only authoritative direct THROUGH_SERVICE neighbours.
-        // This prevents the historical legacy graph from crossing canonical
-        // UNKNOWN / BRANCH_OF / PHYSICAL_CONNECT boundaries during closure.
-        var through = getDirectThroughLines(current);
-        if (through && Array.isArray(through)) {
-          through.forEach(function(lid) {
-            if (!visited[lid]) {
-              visited[lid] = true;
-              result.push(lid);
-              queue.push(lid);
-            }
-          });
-        }
-      }
-      return result;
-    } catch(e) { return []; }
-  }
-
   window.ThroughService = {
     getDirectThroughLines: getDirectThroughLines,
     getJoinStations: getJoinStations,
     getDisplayAnchors: getDisplayAnchors,
-    getThroughServiceLines: getThroughServiceLines
   };
 })();
