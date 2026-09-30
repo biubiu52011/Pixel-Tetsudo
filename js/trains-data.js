@@ -272,13 +272,10 @@ function _throughDirForStation(lineId, stationId, throughLineId) {
     // station happens to be the first/last item in the anchor array.  For an
     // interior anchor, compare its position with the partner handover/nearest
     // shared corridor: the label belongs outside the station sequence.
-    // Asymmetric display anchors represent separate mouths of a connector whose
-    // physical handover station may not belong to this line entity. Preserve
-    // their endpoint directions; a genuine interior anchor remains middle.
-    if (isDisplayAnchor && !isCanonicalJoin && anchors.length > 1) {
-      var anchorIdx = anchors.indexOf(stationId);
-      return anchorIdx === 0 ? "up" : (anchorIdx === anchors.length - 1 ? "down" : "middle");
-    }
+    // Layout direction is determined by the station's position on this line,
+    // never by display-anchor array order. Only the first/last station can be
+    // endpoint up/down; every interior through junction is middle (side lane).
+    if (isCanonicalJoin || isDisplayAnchor) return "middle";
     var allAfterOnThrough = true;
     var afterCount = 0;
     for (var ai = idx2 + 1; ai < sts2.length; ai++) {
