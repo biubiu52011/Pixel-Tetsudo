@@ -90,14 +90,14 @@ function main() {
 
   const probes = [
     { name: 'Tobu operator default', ctx: { lineId: 'Unknown', operator: 'Tobu', trainId: 'x_1' }, forbid: /8000系/ },
-    { name: 'MIR operator default', ctx: { lineId: 'Unknown', operator: 'MIR', trainId: 'x_1' }, expect: /TX-3000系/ },
+    { name: 'MIR operator default', ctx: { lineId: 'Unknown', operator: 'MIR', trainId: 'x_1' }, expect: /E235系_0番代/ }, // TX 图库已按人工审查清空，MIR 默认回落到终兜底
     { name: 'JR West operator default', ctx: { lineId: 'Unknown', operator: 'JR West', trainId: 'x_1' }, forbid: /JR東日本|E235系山手線/ },
     { name: 'Karasuyama', ctx: { lineId: 'Karasuyama', operator: 'JR-East', trainId: 'x_1' }, expect: /EV-E301/ },
     { name: 'Toei old Asakusa alias', ctx: { lineId: 'Asakusa', operator: 'Toei', vehicleTypeManual: '5300形', trainId: 'x_1' }, expect: /5500形/ },
     { name: 'Metro Marunouchi old alias', ctx: { lineId: 'Marunouchi', operator: 'TokyoMetro', vehicleTypeManual: '02系', trainId: 'x_1' }, expect: /2000系/ },
     { name: 'Rinkai 71', ctx: { lineId: 'Rinkai', operator: 'TWR', trainId: 'x_1' }, expect: /71-000形/ },
-    { name: 'Chuo-Sobu local default', ctx: { lineId: 'ChuoSobuLocal', operator: 'JR-East', trainId: '1000C' }, expect: /E231系総武中央線/, forbid: /E235系総武中央線|常磐LED/ },
-    { name: 'Chuo-Sobu local timetable vehicle', ctx: { lineId: 'ChuoSobuLocal', operator: 'JR-East', vehicleTypeManual: 'E231系500番台 / E231系0番台', trainId: '1000C' }, expect: /E231系総武中央線/, forbid: /E235系総武中央線|常磐LED/ }
+    { name: 'Chuo-Sobu local default', ctx: { lineId: 'ChuoSobuLocal', operator: 'JR-East', trainId: '1000C' }, expect: /E231系_0番代_中央・総武線/, forbid: /E235系総武中央線|常磐LED/ },
+    { name: 'Chuo-Sobu local timetable vehicle', ctx: { lineId: 'ChuoSobuLocal', operator: 'JR-East', vehicleTypeManual: 'E231系500番台 / E231系0番台', trainId: '1000C' }, expect: /E231系_0番代_中央・総武線/, forbid: /E235系総武中央線|常磐LED/ }
   ];
   probes.forEach((p) => {
     const r = win.TrainVehicle.resolve(p.ctx);

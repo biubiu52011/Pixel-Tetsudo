@@ -81,16 +81,16 @@ function expectUnknownRuntime(win, label, ctx) {
   const result = win.TrainVehicle.resolve(Object.assign({ trainNumber: `guard-unknown-${label}` }, ctx));
   const value = `${result.name || ''} ${result.iconPath || ''}`;
   [
-    'E235系山手線.png',
-    'E235系1000番台.png',
-    'E235系総武中央線.png',
-    'E231系0番台.png',
-    'E231系800番台',
-    'E231系1000番台.png',
-    'E233系2000番台.png',
-    'E233系3000番台.png',
-    'E233系5000番台.png',
-    'E233系7000番台.png'
+    // E235系_0番代.png 现在是通用终兜底（Unknown 场景合法命中），不列入 forbid
+    'E235系_1000番代.png',
+    'E235系_0番代_B31編成_中央・総武線.png',
+    'E231系_0番代.png',
+    'E231系_800番代',
+    'E231系_1000番代.png',
+    'E233系_2000番代.png',
+    'E233系_3000番代.png',
+    'E233系_5000番代.png',
+    'E233系_7000番代.png'
   ].forEach((needle) => {
     assert(!value.includes(needle), `${label}: UNKNOWN input guessed a real target vehicle`, { result, forbidden: needle });
   });
@@ -108,7 +108,7 @@ function walkMap(obj, out = []) {
 }
 
 function assertNoCurrentFictionalAsset(win) {
-  const badAsset = 'E235系総武中央線.png';
+  const badAsset = 'E235系総武中央線.png'; // 已随图库修正删除的虚构命名，任何解析都不会再命中
   const values = walkMap(win.VehicleTypeMap.MAP);
   values.forEach((value) => {
     const icon = win.TrainIcons.resolveVehicleIcon(value, '');
@@ -230,79 +230,79 @@ function main() {
   expectMap(win, 'Ito Odoriko P1', 'Ito', 'LimitedExpress', 'E257系2000番台 / E257系2500番台', ['E257系1500番台']);
   expectMap(win, 'UtsunomiyaJR Nikko P1', 'UtsunomiyaJR', 'LimitedExpress', '253系（日光・きぬがわ）', ['E253系']);
 
-  expectIcon(win, 'E235 0 Yamanote', 'E235系0番台（山手線）', 'Yamanote', 'E235系山手線.png', ['E235系1000番台.png', 'E235系総武中央線.png']);
-  expectIcon(win, 'E235 1000 Yokosuka', 'E235系1000番台', 'Yokosuka', 'E235系1000番台.png', ['E235系山手線.png', 'E235系総武中央線.png']);
-  expectIcon(win, 'Tozai E231-800', 'E231系800番台（東西線直通）', 'Tozai', 'E231系800番台（東西線直通・青帯）.png', ['E231系総武中央線.png']);
-  expectIcon(win, 'Boso 209-2000/2100', '209系2000番台 / 2100番台', 'SobuMain', 'E209系（房総）.png', ['E209系（京葉線）.png']);
-  expectIcon(win, 'Hachiko 209-3000', '209系3000番台', 'Hachiko', '209系3500番台（八高・川越線）.png', ['E209系（京葉線）.png']);
-  expectIcon(win, 'Musashino E231-900', 'E231系900番台', 'Musashino', 'E231系0番台.png', ['E231系常磐LED.png']);
-  expectIcon(win, 'Nikko formal 253', '253系（日光・きぬがわ）', 'UtsunomiyaJR', '253系（日光・きぬがわ）.png', ['E253系.png']);
+  expectIcon(win, 'E235 0 Yamanote', 'E235系0番台（山手線）', 'Yamanote', 'E235系_0番代.png', ['E235系_1000番代.png', 'E235系_0番代_B31編成_中央・総武線.png']);
+  expectIcon(win, 'E235 1000 Yokosuka', 'E235系1000番台', 'Yokosuka', 'E235系_1000番代.png', ['E235系_0番代.png', 'E235系_0番代_B31編成_中央・総武線.png']);
+  expectIcon(win, 'Tozai E231-800', 'E231系800番台（東西線直通）', 'Tozai', 'E231系_800番代.png', ['E231系_0番代_中央・総武線各駅停車.png']);
+  expectIcon(win, 'Boso 209-2000/2100', '209系2000番台 / 2100番台', 'SobuMain', '209系_2000・2100番代_房総地区.png', ['209系_500番代_京葉線.png']);
+  expectIcon(win, 'Hachiko 209-3000', '209系3000番台', 'Hachiko', '209系_3500番代.png', ['209系_500番代_京葉線.png']);
+  expectIcon(win, 'Musashino E231-900', 'E231系900番台', 'Musashino', 'E231系_0番代.png', ['E231系_0番代_常磐快速線.png']);
+  expectIcon(win, 'Nikko formal 253', '253系（日光・きぬがわ）', 'UtsunomiyaJR', '253系_1000番代.png', ['E253系.png']);
 
   const canonical = win.TrainIcons.resolveCanonicalVehicle('jr-east-e235-0-yamanote');
   assert(canonical && canonical.displayName === 'E235系0番台（山手線）', 'canonical id does not resolve to display name', { canonical });
-  assert(canonical.asset && canonical.asset.endsWith('E235系山手線.png'), 'canonical id does not resolve to asset', { canonical });
+  assert(canonical.asset && canonical.asset.endsWith('E235系_0番代.png'), 'canonical id does not resolve to asset', { canonical });
 
   expectRuntime(win, 'Yamanote runtime', {
     lineId: 'Yamanote',
     operator: 'JR-East',
     trainType: trainType('JR-East', 'Local')
-  }, 'E235系0番台（山手線）', 'E235系山手線.png', ['E235系1000番台.png', 'E235系総武中央線.png']);
+  }, 'E235系0番台（山手線）', 'E235系_0番代.png', ['E235系_1000番代.png', 'E235系_0番代_B31編成_中央・総武線.png']);
 
   expectRuntime(win, 'Joban rapid livery runtime', {
     lineId: 'Joban',
     operator: 'JR-East',
     trainType: trainType('JR-East', 'Rapid')
-  }, 'E231系0番台（常磐快速線・LED）', 'E231系常磐LED.png', ['E231系0番台.png']);
+  }, 'E231系0番台（常磐快速線・LED）', 'E231系_0番代_常磐快速線.png', ['E231系_0番代.png']);
 
   expectRuntime(win, 'Joban Tsuchiura medium-distance runtime', {
     lineId: 'Joban',
     operator: 'JR-East',
     trainType: trainType('JR-East', 'Local'),
     destinationStation: 'odpt.Station:JR-East.Joban.Tsuchiura'
-  }, 'E531系', 'E531系.png', ['E231系常磐LED.png']);
+  }, 'E531系', 'E531系.png', ['E231系_0番代_常磐快速線.png']);
 
   expectRuntime(win, 'Tozai JR-East runtime', {
     lineId: 'Tozai',
     operator: 'JR-East',
     trainType: trainType('TokyoMetro', 'Local'),
     destinationStation: 'odpt.Station:JR-East.ChuoSobuLocal.Nakano'
-  }, 'E231系800番台（東西線直通）', 'E231系800番台（東西線直通・青帯）.png', ['E231系総武中央線.png']);
+  }, 'E231系800番台（東西線直通）', 'E231系_800番代.png', ['E231系_0番代_中央・総武線各駅停車.png']);
 
   expectRuntime(win, 'ShonanShinjuku runtime', {
     lineId: 'ShonanShinjuku',
     operator: 'JR-East',
     trainType: trainType('JR-East', 'Rapid')
-  }, 'E231系1000番台', 'E231系1000番台.png', ['E235系1000番台.png']);
+  }, 'E231系1000番台', 'E231系_1000番代.png', ['E235系_1000番代.png']);
 
   expectRuntime(win, 'Hachiko runtime ODPT evidence', {
     lineId: 'Hachiko',
     operator: 'JR-East',
     trainType: trainType('JR-East', 'Local')
-  }, '209系3000番台', '209系3500番台（八高・川越線）.png', ['E209系（京葉線）.png']);
+  }, '209系3000番台', '209系_3500番代.png', ['209系_500番代_京葉線.png']);
 
   expectRuntime(win, 'KawagoeWest runtime ODPT evidence', {
     lineId: 'KawagoeWest',
     operator: 'JR-East',
     trainType: trainType('JR-East', 'Local')
-  }, '209系3000番台', '209系3500番台（八高・川越線）.png', ['E209系（京葉線）.png']);
+  }, '209系3000番台', '209系_3500番代.png', ['209系_500番代_京葉線.png']);
 
   expectRuntime(win, 'Yokosuka local accepted safe behavior', {
     lineId: 'Yokosuka',
     operator: 'JR-East',
     trainType: trainType('JR-East', 'Local')
-  }, 'E235系1000番台', 'E235系1000番台.png', ['E235系山手線.png', 'E235系総武中央線.png']);
+  }, 'E235系1000番台', 'E235系_1000番代.png', ['E235系_0番代.png', 'E235系_0番代_B31編成_中央・総武線.png']);
 
   expectRuntime(win, 'Yokosuka rapid accepted safe behavior', {
     lineId: 'Yokosuka',
     operator: 'JR-East',
     trainType: trainType('JR-East', 'Rapid')
-  }, 'E235系1000番台', 'E235系1000番台.png', ['E235系山手線.png', 'E235系総武中央線.png']);
+  }, 'E235系1000番台', 'E235系_1000番代.png', ['E235系_0番代.png', 'E235系_0番代_B31編成_中央・総武線.png']);
 
   expectRuntime(win, 'ABSENT vehicle known route default', {
     lineId: 'Yamanote',
     operator: 'JR-East',
     trainType: trainType('JR-East', 'Local')
-  }, 'E235系0番台（山手線）', 'E235系山手線.png', ['E235系1000番台.png']);
+  }, 'E235系0番台（山手線）', 'E235系_0番代.png', ['E235系_1000番代.png']);
 
   expectUnknownRuntime(win, 'unknown explicit E235 subseries', {
     lineId: 'UnknownRoute',
