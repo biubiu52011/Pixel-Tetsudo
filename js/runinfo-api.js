@@ -52,27 +52,42 @@
     } catch (e) { return Promise.resolve([]); }
   }
 
-  // Select only records that are allowed to affect this line.
-  // Railway-specific records win; no-railway records are operator/global fallback only.
+  // Canonical ODPT identity is operator namespace + railway code.
+  // Short railway codes are never globally unique and must not be matched alone.
+  function parseRailwayIdentity(rec) {
+    try {
+      var rw = String((rec && rec["odpt:railway"]) || "");
+      var m = rw.match(/^odpt\.Railway:([^.]+)\.(.+)$/);
+      return m ? { operator: m[1], railwayCode: m[2], canonical: rw } : null;
+    } catch (e) { return null; }
+  }
+
+  function expectedRailwayIdentity(line) {
+    if (!line) return null;
+    var operator = getOperator(line);
+    if (!operator && window.ODPTClient && window.ODPTClient.LINE_TO_OPERATOR && line.id) {
+      operator = window.ODPTClient.LINE_TO_OPERATOR[line.id] || null;
+    }
+    if (!operator) return null;
+    var code = line.id || "";
+    if (window.ODPTClient && window.ODPTClient.LINE_RAILWAY_CODE && line.id &&
+        window.ODPTClient.LINE_RAILWAY_CODE[line.id]) code = window.ODPTClient.LINE_RAILWAY_CODE[line.id];
+    return code ? { operator: operator, railwayCode: code } : null;
+  }
+
+  // Railway-specific records require a complete namespace match.
+  // Records without railway remain operator/global fallback because fetchODPT is operator-scoped.
   function selectScopedRecords(records, line) {
     if (!records || records.length === 0) return [];
-    var code = line && line.id ? line.id : "";
-    if (window.ODPTClient && window.ODPTClient.LINE_RAILWAY_CODE && line && line.id &&
-        window.ODPTClient.LINE_RAILWAY_CODE[line.id]) code = window.ODPTClient.LINE_RAILWAY_CODE[line.id];
-    function shortOf(rec) {
-      try {
-        var rw = (rec && rec["odpt:railway"]) || "";
-        if (!rw) return "";
-        var parts = String(rw).split(":");
-        var dots = parts[parts.length - 1].split(".");
-        return dots[dots.length - 1] || "";
-      } catch (e) { return ""; }
-    }
+    var expected = expectedRailwayIdentity(line);
+    if (!expected) return [];
     var own = records.filter(function(rec) {
-      return rec && shortOf(rec).toLowerCase() === String(code).toLowerCase();
+      var id = parseRailwayIdentity(rec);
+      return id && id.operator.toLowerCase() === String(expected.operator).toLowerCase() &&
+        id.railwayCode.toLowerCase() === String(expected.railwayCode).toLowerCase();
     });
     if (own.length) return own;
-    return records.filter(function(rec) { return rec && !shortOf(rec); });
+    return records.filter(function(rec) { return rec && !rec["odpt:railway"]; });
   }
 
   function recordText(rec) {
@@ -277,6 +292,8 @@
     getManualOverride: getManualOverride,
     // exposed for deterministic regression tests; not used by UI
     _selectScopedRecords: selectScopedRecords,
+    _parseRailwayIdentity: parseRailwayIdentity,
+    _expectedRailwayIdentity: expectedRailwayIdentity,
     _aggregateStatus: aggregateStatus,
     isWebLine: function(lineId) {
       return !!(window.WebRunInfo && window.WebRunInfo.isWebLine && window.WebRunInfo.isWebLine(lineId));
