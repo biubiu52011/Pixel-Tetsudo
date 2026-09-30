@@ -4014,7 +4014,6 @@ TOBU_LINE_IDS.forEach(function(lineId) {
 
   // ============================================================
   // 算法：S4 图标规则——逐字内联 train-icons.js 的 _resolveTrainIcon
-  // Node 环境调用前 patch window.UNIFIED_LINES shim（部署区间规则需站表；stations 由 ctx 传入）
   // ============================================================
 function _resolveTrainIcon(lineId, operator, trainId, stationIndex, trainType, byOperator) {
     try {
@@ -4089,68 +4088,6 @@ function getTrainClass(lineId, operator, trainId, stationIndex, trainType, byOpe
     try {
       return _resolveTrainRuleDisplayName(lineId, operator, trainId, stationIndex, trainType, byOperator) || '';
     } catch(e) { return ''; }
-  }
-
-function _poolPickByIcon(icon, seedStr) {
-    if (!icon) return null;
-    for (var _pk in FLEET_ICON_POOLS) {
-      var _pp = FLEET_ICON_POOLS[_pk];
-      if (_pp.indexOf(icon) >= 0) {
-        if (_pp.length < 2) return icon;
-        var _s = String(seedStr || _pk);
-        var _h = 0;
-        for (var _i = 0; _i < _s.length; _i++) _h = (_h * 31 + _s.charCodeAt(_i)) >>> 0;
-        return _pp[_h % _pp.length];
-      }
-    }
-    return icon;
-  }
-
-function _resolveVehicleIconBase(candidatesStr, lineId) {
-    if (!candidatesStr) return null;
-    var parts = String(candidatesStr).split("/");
-    for (var i = 0; i < parts.length; i++) {
-      var name = parts[i].trim();
-      if (!name) continue;
-      // 0. 线路感知同名解抢（v4.3.977）：同名车型被别社抢占时，按线路优先取专属图标
-      // v4.3.979: 覆盖为「锁定」语义——线路有该车型映射条目时，目标图标未注册则返回 null
-      //           （走 S4 线路默认兜底），绝不落回别社同名图标
-      if (lineId && LINE_VEHICLE_OVERRIDES[lineId]) {
-        var _ov = LINE_VEHICLE_OVERRIDES[lineId];
-        var _ovt = _ov[name];
-        if (!_ovt) {
-          var _ovb = name.replace(/（[^）]*）/g, "").replace(/\([^)]*\)/g, "").trim();
-          _ovt = _ov[_ovb];
-        }
-        if (_ovt) {
-          if (VEHICLE_NAME_TO_ICON[_ovt]) return VEHICLE_NAME_TO_ICON[_ovt];
-          // v4.3.988: override 目标支持 alias 展开（如 相模鉄道21000系→相模鉄道13000系近似），
-          // 保持锁定语义——命中别名目标仍有图则用之，否则 return null 走 S4 线路默认，
-          // 绝不落回别社同名图/候选池别社车。
-          var _ovAl = VEHICLE_NAME_ALIASES[_ovt];
-          if (_ovAl && VEHICLE_NAME_TO_ICON[_ovAl]) return VEHICLE_NAME_TO_ICON[_ovAl];
-          return null;
-        }
-      }
-      // v4.3.1006: 线路感知裸名重定向（同名被别社抢占：都電8800/8900形 → 都営图标）
-      if (lineId && LINE_ICON_NAME_REDIRECT[lineId] && LINE_ICON_NAME_REDIRECT[lineId][name]) {
-        var _rd = LINE_ICON_NAME_REDIRECT[lineId][name];
-        if (VEHICLE_NAME_TO_ICON[_rd]) return VEHICLE_NAME_TO_ICON[_rd];
-      }
-      // 1. 精确匹配
-      if (VEHICLE_NAME_TO_ICON[name]) return VEHICLE_NAME_TO_ICON[name];
-      // 2. 别名表
-      var _al = VEHICLE_NAME_ALIASES[name];
-      if (_al && VEHICLE_NAME_TO_ICON[_al]) return VEHICLE_NAME_TO_ICON[_al];
-      // 3. 去掉（…）/（…）括注后重试
-      var _base = name.replace(/（[^）]*）/g, "").replace(/\([^)]*\)/g, "").trim();
-      if (_base !== name) {
-        if (VEHICLE_NAME_TO_ICON[_base]) return VEHICLE_NAME_TO_ICON[_base];
-        var _al2 = VEHICLE_NAME_ALIASES[_base];
-        if (_al2 && VEHICLE_NAME_TO_ICON[_al2]) return VEHICLE_NAME_TO_ICON[_al2];
-      }
-    }
-    return null;
   }
 
 function _poolPickByIcon(icon, seedStr) {
@@ -4258,17 +4195,9 @@ function resolveVehicleIcon(candidatesStr, lineId) {
   return _poolPickByIcon(_raw, candidatesStr);
 }
 
-  // 适配层：resolver 暴露的 API 是 resolveTrainIconByRules(lineId, operator, trainId, stationIndex, trainType, byOperator, stations)
-  // 而 _resolveTrainIcon(lineId, operator, trainId, stationIndex, trainType, byOperator) 内部用 window.UNIFIED_LINES[lineId].stations
-  // Node 环境调用前 patch window.UNIFIED_LINES shim（部署区间规则需站表；stations 由 ctx 传入）
+  // Public adapter. Keep the stations argument for API compatibility; the resolver no longer
+  // mutates window.UNIFIED_LINES or requires a synthetic global line record.
   function resolveTrainIconByRules(lineId, operator, trainId, stationIndex, trainType, byOperator, stations) {
-    if (stations && typeof window !== 'undefined') {
-      var had = window.UNIFIED_LINES && window.UNIFIED_LINES[lineId];
-      if (!had) {
-        if (!window.UNIFIED_LINES) window.UNIFIED_LINES = {};
-        window.UNIFIED_LINES[lineId] = { stations: stations };
-      }
-    }
     var _r = _resolveTrainIcon(lineId, operator, trainId, stationIndex, trainType, byOperator);
     return _r || '../images/列车/JR東日本/E235系山手線.png';
   }
