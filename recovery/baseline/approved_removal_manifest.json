@@ -1,11 +1,13 @@
 {
   "removed_entities": {
     "lines": [],
-    "stations": [],
+    "stations": [
+      "Jatenda"
+    ],
     "relations": [],
     "tourism": []
   },
-  "reason": "none",
-  "approved_by": "system",
-  "approved_at": "2026-08-27"
+  "reason": "Jatenda was a confirmed legacy orphan station identity with no line membership; removed in 09c98bf3 after canonical identity cleanup.",
+  "approved_by": "canonical-cleanup",
+  "approved_at": "2026-09-29"
 }
