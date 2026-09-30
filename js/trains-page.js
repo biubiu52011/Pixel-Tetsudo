@@ -13,11 +13,6 @@
   var backBtn = null;
   var _selectedOperator = null;
   var _lastPositionsHash = '';
-  var _lastRenderedLine = null;
-  var _lastRenderedLineHash = '';
-  var _manualRequested = {};
-  var _listRenderQueued = false;
-  var _listRenderPending = false;
   var t = window.t || function(k) { return k; };
   var escapeHtml = window.escapeHtml || function(s) {
     if (!s) return "";
@@ -34,25 +29,11 @@
   // 图片徽章内含线名可读，色块徽章同理显示线名（截 4 字）
 
   
-  function _linePositionHash(line) {
-    var ps = (line && (line.realtimePositions || line.cachedPositions)) || [];
-    var out = String(ps.length) + "|";
-    for (var i = 0; i < ps.length; i++) {
-      var p = ps[i] || {};
-      out += (p.runningChainId || p.trainId || ("t" + i)) + "@" + (p.stationIndex || 0)
-        + ">" + (p.segmentToIndex == null ? "" : p.segmentToIndex)
-        + ":" + (p.segmentProgress == null ? "" : Math.round(p.segmentProgress * 100)) + ",";
-    }
-    return out;
-  }
-
-  function showLineView(lineId, forceRender) {
+  function showLineView(lineId) {
     try {
       var lines = getLinesData();
       var fusedLine = lines[lineId];
       if (!fusedLine) return;
-      var nextHash = _linePositionHash(fusedLine);
-      var sameVisibleLine = currentLine === lineId && detailEl && !detailEl.classList.contains("hidden");
       currentLine = lineId;
       window.location.hash = lineId;
       if (listEl) listEl.classList.add("hidden");
@@ -80,26 +61,15 @@
         }
       }
       if (titleEl) titleEl.textContent = _title;
-      if (mapEl && (forceRender || !sameVisibleLine || _lastRenderedLine !== lineId || _lastRenderedLineHash !== nextHash)) {
-        renderTrainMap(mapEl, fusedLine, lineId);
-        _lastRenderedLine = lineId;
-        _lastRenderedLineHash = nextHash;
-      }
+      if (mapEl) renderTrainMap(mapEl, fusedLine, lineId);
       // v4.3.528: 手动时刻表按需加载——ODPT 无数据的 JR 地方线打开时才注入该线文件。
       // 加载完成后 DataFusion 内部已重推定+重融合；此处按结果归属检查后重渲染当前线路，
       // 用户切走线路时旧结果不覆盖新状态；加载失败保持首次渲染（与无数据现状一致）。
-      if (!_manualRequested[lineId] && window.DataFusion && window.DataFusion.ensureManualTimetable) {
-        _manualRequested[lineId] = true;
+      if (window.DataFusion && window.DataFusion.ensureManualTimetable) {
         window.DataFusion.ensureManualTimetable(lineId).then(function() {
           if (currentLine !== lineId) return;
           var fused2 = getLinesData()[lineId];
-          if (!fused2 || !mapEl) return;
-          var updatedHash = _linePositionHash(fused2);
-          if (_lastRenderedLine !== lineId || _lastRenderedLineHash !== updatedHash) {
-            renderTrainMap(mapEl, fused2, lineId);
-            _lastRenderedLine = lineId;
-            _lastRenderedLineHash = updatedHash;
-          }
+          if (fused2 && mapEl) renderTrainMap(mapEl, fused2, lineId);
         }).catch(function(e) {
           console.debug("[trains] manual timetable skip:", lineId, e.message);
         });
@@ -150,35 +120,16 @@
     } catch(e) { if (callback) callback(); }
   }
 
-  function renderListNow(el) {
+  function renderList(el) {
     if (!el || !window.DataState) return;
     var lines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : {};
     var ul = Array.isArray(lines) ? (function(){ var d={}; lines.forEach(function(l){ d[l.id||l.line_id]=l; }); return d; })() : lines;
     if (!ul || Object.keys(ul).length === 0) {
+      // Sync loading animation with the realtime page (rs-loading spinner)
       el.innerHTML = '<div class="rs-loading"><div class="rs-loading-spinner"></div><span>' + t("trains.loading") + '</span></div>';
       return;
     }
-    var lineOrder = (window.LinePresentationService && window.UNIFIED_LINES) ? window.LinePresentationService.getDisplayOrder(window.UNIFIED_LINES) : [];
-    try { window.DataState.renderList(el, ul, { mode: "trains", lineOrder: lineOrder }); }
-    catch(e) { el.innerHTML = "<div class=\"rs-error\">Render failed</div>"; }
-  }
-
-  // Coalesce bursts from cache/DataFusion/DataState into one list rebuild.
-  // The list does not display train positions, so position-only updates must not
-  // repeatedly rebuild hundreds of line cards during page entry.
-  function renderList(el) {
-    if (!el) return;
-    _listRenderPending = true;
-    if (_listRenderQueued) return;
-    _listRenderQueued = true;
-    var schedule = window.requestIdleCallback || function(cb) { return setTimeout(cb, 0); };
-    schedule(function() {
-      _listRenderQueued = false;
-      if (!_listRenderPending) return;
-      _listRenderPending = false;
-      if (currentLine && detailEl && !detailEl.classList.contains("hidden")) return;
-      renderListNow(el);
-    }, { timeout: 120 });
+    var lineOrder = (window.LinePresentationService && window.UNIFIED_LINES) ? window.LinePresentationService.getDisplayOrder(window.UNIFIED_LINES) : []; try { window.DataState.renderList(el, ul, { mode: "trains", lineOrder: lineOrder }); } catch(e) { el.innerHTML = "<div class=\"rs-error\">Render failed</div>"; }
   }
 
   function init() {
@@ -224,12 +175,35 @@
       loadCachedPositions(function() {
         renderList(listEl);
         renderFilterBar(document.getElementById("trainsFilterBar"));
-        // DataState subscription below is the single async data-ready path.
-        // Avoid parallel 400/500ms polling loops that used to race the subscription
-        // and repeatedly rebuild the list/SVG during page transitions.
-        var initialHash = (window.location.hash || "").replace(/^#/, "");
-        var initialLines = getLinesData();
-        if (initialHash && initialLines && initialLines[initialHash]) showLineView(initialHash);
+        // Data-ready poll: db-loader fetch is async; the first render may run before
+        // network data arrives (IndexedDB positions usually resolve first), leaving the
+        // list empty with no later re-render trigger. Same pattern as the realtime page.
+        // Respect an already-selected operator filter instead of overwriting it.
+        (function ensureDataReady() {
+          var _tries = 0;
+          (function tick() {
+            var _d = getLinesData();
+            if (_d && Object.keys(_d).length > 0) {
+              if (_selectedOperator === null) { renderList(listEl); } else { renderFiltered(listEl); }
+              renderFilterBar(document.getElementById("trainsFilterBar"));
+              return;
+            }
+            if (++_tries > 120) return; // ~60s cap (mobile GitHub Pages can be slow)
+            setTimeout(tick, 500);
+          })();
+        })();
+        // Restore hash-based navigation (poll until line data is ready; async load timing)
+        (function tryHash() {
+          var hash = window.location.hash;
+          if (!hash || hash.length <= 1) return;
+          var lid = hash.substring(1);
+          var lines = getLinesData();
+          if (lines[lid]) {
+            showLineView(lid);
+            return;
+          }
+          setTimeout(tryHash, 400);
+        })();
         if (backBtn) backBtn.textContent = "\u2190 " + t("line_map.back");
       });
       // Subscribe to DataState changes to handle late data loading
@@ -287,8 +261,7 @@
             }
           } else if (posHash !== _lastPositionsHash) {
             _lastPositionsHash = posHash;
-            // Position changes affect only the open train map. The line list is
-            // static metadata and must not be rebuilt for every realtime batch.
+            renderList(listEl);
             // Restore hash-based navigation once data is ready (posHash changed = data arrived)
             var _h2 = window.location.hash;
             if (_h2 && _h2.length > 1) {
@@ -318,7 +291,7 @@
           }
           // Re-render line detail view if open
           if (currentLine && detailEl && !detailEl.classList.contains("hidden")) {
-            showLineView(currentLine, true);
+            showLineView(currentLine);
           }
         });
       }
