@@ -247,7 +247,25 @@
       }
       var legacy = THROUGH_SERVICE_MAP[lineId];
       if (legacy && Array.isArray(legacy)) {
-        legacy.forEach(function(other) { if (out.indexOf(other) < 0) out.push(other); });
+        legacy.forEach(function(other) {
+          // Any canonical classification is authoritative, including UNKNOWN,
+          // BRANCH_OF and PHYSICAL_CONNECT. Legacy may fill only an unmigrated
+          // pair; it must never resurrect a pair canonical has rejected as
+          // THROUGH_SERVICE.
+          var classified = false;
+          if (relations && typeof relations.length === "number") {
+            for (var ri = 0; ri < relations.length; ri++) {
+              var rr = relations[ri];
+              if (!rr) continue;
+              if ((rr.lineA === lineId && rr.lineB === other) ||
+                  (rr.lineA === other && rr.lineB === lineId)) {
+                classified = true;
+                break;
+              }
+            }
+          }
+          if (!classified && out.indexOf(other) < 0) out.push(other);
+        });
       }
       return out;
     } catch(e) { return []; }
