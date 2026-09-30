@@ -260,10 +260,20 @@ function _throughDirForStation(lineId, stationId, throughLineId) {
     // may model the two sides independently, especially in reverse view.
     var joins = (window.ThroughService && window.ThroughService.getJoinStations) ?
       window.ThroughService.getJoinStations(lineId, targetId) : null;
+    var anchors = (window.ThroughService && window.ThroughService.getDisplayAnchors) ?
+      window.ThroughService.getDisplayAnchors(lineId, targetId) : joins;
     var isCanonicalJoin = Array.isArray(joins) && joins.indexOf(stationId) >= 0;
-    if (!isCanonicalJoin && tl.stations.indexOf(stationId) < 0) continue;
+    var isDisplayAnchor = Array.isArray(anchors) && anchors.indexOf(stationId) >= 0;
+    if (!isCanonicalJoin && !isDisplayAnchor && tl.stations.indexOf(stationId) < 0) continue;
     if (idx2 === 0) return "up";
     if (idx2 === sts2.length - 1) return "down";
+    // Asymmetric display anchors represent separate mouths of a connector whose
+    // physical handover station may not belong to this line entity.  Preserve
+    // them as directional anchors instead of collapsing them into "middle".
+    if (isDisplayAnchor && !isCanonicalJoin && anchors.length > 1) {
+      var anchorIdx = anchors.indexOf(stationId);
+      return anchorIdx === 0 ? "up" : (anchorIdx === anchors.length - 1 ? "down" : "middle");
+    }
     var allAfterOnThrough = true;
     var afterCount = 0;
     for (var ai = idx2 + 1; ai < sts2.length; ai++) {
