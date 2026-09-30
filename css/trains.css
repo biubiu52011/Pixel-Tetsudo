@@ -71,3 +71,14 @@
     padding: 6px;
   }
 }
+
+
+/* v4.3.1047: defer layout/paint for off-screen line cards.
+   The trains list contains the full network; content-visibility keeps the
+   complete DOM/search/filter semantics while avoiding first-frame layout and
+   paint work for cards far below the viewport. */
+#trainsLineListContent .rs-line-card,
+#trainsLineListContent .rs-system-card {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 88px;
+}
