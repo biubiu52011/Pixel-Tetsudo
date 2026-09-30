@@ -619,7 +619,7 @@
           var extBaseIdx = stationCoords.length;
           for (var exk = 0; exk < extStations.length; exk++) {
             var exY = exl.joinAtEnd ? (extStartY + (exk + 1) * sp) : (extStartY - (exk + 1) * sp);
-            stationCoords.push({ x: mainCx + extOffsetX, y: exY, side: 'right', stationId: extStations[exk], fusionLineId: exl.lid });
+            stationCoords.push({ x: mainCx + extOffsetX, y: exY, side: exl.systemMember ? 'dual' : 'right', stationId: extStations[exk], fusionLineId: exl.lid });
           }
           // 连接线：主线端点 → 延伸段第一站（同列时即为垂直连续线）
           var jx = mainCx, jy = exl.joinAtEnd ? yBase : yStartRef;
