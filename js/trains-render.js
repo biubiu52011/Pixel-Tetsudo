@@ -658,7 +658,8 @@
           }
         }
         _renderStationNode(staticLayer, svgNS, {
-          x: sc.x, y: sc.y, stationId: stationId, isJunction: isJunction, color: color,
+          x: sc.x, y: sc.y, stationId: stationId, isJunction: isJunction,
+          color: geometry.stationDisplayColor ? geometry.stationDisplayColor(stationId) : color,
           si: si, side: sc.side || "right", geometry: geometry, isMobileView: isMobileView,
           svgW: svgW, svgH: svgH, transferMap: transferMap, stationCoords: stationCoords,
           rS: _rS,
