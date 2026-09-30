@@ -205,7 +205,7 @@
           }
           setTimeout(tryHash, 400);
         })();
-        if (backBtn) backBtn.textContent = "\u2190 " + t("line_map.back");
+        // Arrow is structural UI; only the nested label is translated by lang-init.
       });
       // Subscribe to DataState changes to handle late data loading
       if (window.DataState) {
