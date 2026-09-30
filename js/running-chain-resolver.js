@@ -106,12 +106,40 @@
     return {runningChainId:"rc:"+ids.join("~"),evidence:strong?"CONFIRMED_SEGMENT_GRAPH+TIMETABLE_ID":"CONFIRMED_SEGMENT_GRAPH+TRAIN_NUMBER",timeGapMin:maxGap,segmentCount:ids.length};
   }
 
+  function getResolutionContext(lineId, availableLineIds){
+    if(!_initialized)buildIndexes();
+    var allowed=null;
+    if(Array.isArray(availableLineIds)){allowed={};availableLineIds.forEach(function(id){allowed[id]=true;});}
+    var rels=_lineRelations[lineId]||[], related=[], through=[];
+    var isAlias=false,isBranch=false,aliasLineId=null,branchLineId=null;
+    rels.forEach(function(r){
+      var other=r.lineA===lineId?r.lineB:r.lineA;
+      if(!other||(allowed&&!allowed[other]))return;
+      if(related.indexOf(other)<0)related.push(other);
+      if(r.relation==="THROUGH_SERVICE"&&through.indexOf(other)<0)through.push(other);
+      if(r.relation==="ALIAS_OF"){isAlias=true;aliasLineId=other;}
+      if(r.relation==="BRANCH_OF"){isBranch=true;branchLineId=other;}
+    });
+    return {
+      lineId:lineId,
+      isThroughService:through.length>0,
+      relatedLines:through,
+      isAlias:isAlias,
+      aliasLineId:aliasLineId,
+      isBranch:isBranch,
+      branchLineId:branchLineId,
+      identity:(through.length||isAlias||isBranch)?"RELATED":"SEPARATE",
+      reason:(through.length?"THROUGH_SERVICE":(isAlias?"ALIAS_OF":(isBranch?"BRANCH_OF":"NO_DIRECT_RELATION")))
+    };
+  }
+
   function init(){if(_initialized)return;buildIndexes();}
 
   window.RunningChainResolver={
     init:init,
     isDirectThroughService:function(a,b){if(!_initialized)buildIndexes();if(!a||!b||a===b)return false;return (_directThrough[a]||[]).indexOf(b)>=0;},
     getDirectThroughLines:function(lid){if(!_initialized)buildIndexes();return (_directThrough[lid]||[]).slice();},
+    getResolutionContext:getResolutionContext,
     resolveTimetableChain:resolveTimetableChain,
     hasRelation:function(a,b,rt){if(!_initialized)buildIndexes();var rs=_lineRelations[a]||[];for(var i=0;i<rs.length;i++){var o=rs[i].lineA===a?rs[i].lineB:rs[i].lineA;if(o===b&&(!rt||rs[i].relation===rt))return true;}return false;},
     _getIndexes:function(){return{relations:_lineRelations,aliasMap:_aliasMap,branchOfMap:_branchOfMap,directThrough:_directThrough};}

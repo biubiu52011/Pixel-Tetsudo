@@ -311,59 +311,57 @@
       var delayInfo = apiInfo || webInfo || (_hasLocal && { status: localStatus.status, maxDelay: localStatus.maxDelay, interval: localStatus.interval, cause: localStatus.cause }) || fallbackDelay;
       // Attach running-chain resolution context (transient, not persistent)
 
-      var _rtPositions = odptData.realtimePositions[lineId] || [];
+      var _rtPositions = (odptData.realtimePositions[lineId] || []).slice();
+      var _ownStations = line.stations || [];
+      var _existingIds = {};
+      _rtPositions.forEach(function(p) { var _id = _positionIdentity(p); if (_id) _existingIds[_id] = true; });
+
       var _sharedPartners = (window.SharedTrackPairs && window.SharedTrackPairs.getSharedLines) ? window.SharedTrackPairs.getSharedLines(lineId) : [];
-      if (_sharedPartners.length > 0) {
-        var _ownStations = line.stations || [];
-        var _existingIds = {};
-        _rtPositions.forEach(function(p) { _existingIds[_positionIdentity(p)] = true; });
-        
-        // 共线区间：自动遍历所有共线线
-        for (var _sp = 0; _sp < _sharedPartners.length; _sp++) {
-          var _spLine = _sharedPartners[_sp];
-          var _spPositions = odptData.realtimePositions[_spLine] || [];
-          _spPositions.forEach(function(p) {
-            if (_existingIds[_positionIdentity(p)]) return;
-            var _stName = (p.stationId || '').split('.').pop();
-            // 自动判断是否共线站
-            if (window.SharedTrackPairs && window.SharedTrackPairs.isSharedStation) {
-              if (!window.SharedTrackPairs.isSharedStation(lineId, _stName)) return;
-            } else {
-              return;
-            }
-            var _spIdx = _ownStations.indexOf(_stName);
-            if (_spIdx >= 0) {
-              p.stationIndex = _spIdx;
-              p.fusionLineId = _spLine;
-              _rtPositions.push(p);
-              _existingIds[_positionIdentity(p)] = true;
-            }
-          });
-        }
-        
-      // Merge only direct canonical through neighbours. Multi-hop graph
-      // reachability is not evidence that one physical train spans the chain;
-      // running-chain resolver owns A->B->C continuity decisions.
+      for (var _sp = 0; _sp < _sharedPartners.length; _sp++) {
+        var _spLine = _sharedPartners[_sp];
+        var _spPositions = odptData.realtimePositions[_spLine] || [];
+        _spPositions.forEach(function(p) {
+          var _pid = _positionIdentity(p);
+          if (_pid && _existingIds[_pid]) return;
+          var _stName = (p.stationId || '').split('.').pop();
+          if (!window.SharedTrackPairs || !window.SharedTrackPairs.isSharedStation ||
+              !window.SharedTrackPairs.isSharedStation(lineId, _stName)) return;
+          var _spIdx = _ownStations.indexOf(_stName);
+          if (_spIdx >= 0) {
+            var _copy = Object.assign({}, p, { stationIndex: _spIdx, fusionLineId: _spLine });
+            _rtPositions.push(_copy);
+            if (_pid) _existingIds[_pid] = true;
+          }
+        });
+      }
+
+      // Direct canonical through neighbours are independent of shared-track
+      // membership.  The old nesting made this path unreachable for lines with
+      // no SharedTrackPairs entry (including Keiyo).
       var _throughLines = (window.ThroughService && window.ThroughService.getDirectThroughLines) ?
         (window.ThroughService.getDirectThroughLines(lineId) || []) : [];
       for (var _tl = 0; _tl < _throughLines.length; _tl++) {
         var _tlLine = _throughLines[_tl];
         var _tlPositions = odptData.realtimePositions[_tlLine] || [];
         _tlPositions.forEach(function(p) {
-          if (_existingIds[_positionIdentity(p)]) return;
-          // 用站名映射：直通线站名 → 当前线站索引
+          var _pid = _positionIdentity(p);
+          if (_pid && _existingIds[_pid]) return;
           var _stName = (p.stationId || '').split('.').pop();
           var _tlIdx = _ownStations.indexOf(_stName);
           if (_tlIdx >= 0) {
-            p.stationIndex = _tlIdx;
-            p.fusionLineId = _tlLine;
-            _rtPositions.push(p);
-            _existingIds[_positionIdentity(p)] = true;
+            var _copy = Object.assign({}, p, { stationIndex: _tlIdx, fusionLineId: _tlLine });
+            _rtPositions.push(_copy);
+            if (_pid) _existingIds[_pid] = true;
           }
         });
       }
-      }
-      return { id: lineId, name: line.name, nameEn: line.nameEn || line.name, code: line.code, color: (window.LineOperationSystemsResolveColor && window.LineOperationSystemsResolveColor(lineId)) || line.color, operator: line.operator, region: line.region, type: line.type, image: line.image, stations: line.stations || [], durations: line.durations || [], intervalTotal: line.durationTotalMin || 0, realtimePositions: _rtPositions, delayInfo: delayInfo, branchOf: line.branchOf || null, isSixShapedLoop: line.isSixShapedLoop === true, isDoubleColumnLoop: line.isDoubleColumnLoop === true, loopJunction: line.loopJunction || null };
+      var _chainMeta = null;
+      try {
+        if (window.RunningChainResolver && window.RunningChainResolver.getResolutionContext) {
+          _chainMeta = window.RunningChainResolver.getResolutionContext(lineId, Object.keys((window.UNIFIED_LINES || {})));
+        }
+      } catch(_ce) {}
+      return { id: lineId, name: line.name, nameEn: line.nameEn || line.name, code: line.code, color: (window.LineOperationSystemsResolveColor && window.LineOperationSystemsResolveColor(lineId)) || line.color, operator: line.operator, region: line.region, type: line.type, image: line.image, stations: line.stations || [], durations: line.durations || [], intervalTotal: line.durationTotalMin || 0, realtimePositions: _rtPositions, delayInfo: delayInfo, _chainMeta: _chainMeta, branchOf: line.branchOf || null, isSixShapedLoop: line.isSixShapedLoop === true, isDoubleColumnLoop: line.isDoubleColumnLoop === true, loopJunction: line.loopJunction || null };
     } catch(e) { console.debug("[DataFusion] fuseLine error for " + lineId + ":", e.message); return null; }
   }
 
@@ -470,6 +468,7 @@
           }
           // v4.3.454: 终点站提取（odpt:destinationStation）——供详情图列车标签显示终点/方向
           var destStations = t["odpt:destinationStation"] || [];
+          if (typeof destStations === "string") destStations = [destStations];
           var destStation = destStations.length > 0 ? String(destStations[0]).split(".").pop() : "";
           // v4.3.1000: 环线列车（odpt:railDirection 内/外回り）——ODPT destinationStation 固定线路基准站
           // （实测山手線 26 列全为 Osaki"大崎"、无行先意义）；改由实时方向作标签行先，
