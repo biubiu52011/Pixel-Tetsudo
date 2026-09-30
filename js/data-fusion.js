@@ -621,49 +621,10 @@
                 );
               } catch(e) {}
             }
-            // 2. JR车终点在直通先线路 → 插入对方线 posMap（From ThroughService join station 派生）
-            var _throughPartners = (window.ThroughService && window.ThroughService.getDirectThroughLines) ? window.ThroughService.getDirectThroughLines(lid) : [];
-            if (_throughPartners.length > 0) {
-              var _destSt = String(destStation || '').split('.').pop(); // URN 末段
-              _throughPartners.forEach(function(_partnerLid) {
-                var _joinSts = (window.ThroughService && window.ThroughService.getJoinStations) ? window.ThroughService.getJoinStations(_partnerLid, lid) : null;
-                // joinSts 是对方线的换乘站（如 Rinkai↔Saikyo = Osaki）；列车终点必须在对方线站表内
-                var _pLine = allLines[_partnerLid];
-                if (!_pLine || !_pLine.stations) return;
-                var _normDest = _destSt.replace(/-/g, '').toLowerCase();
-                var _inPartnerLine = _pLine.stations.some(function(st) { return st.replace(/-/g, '').toLowerCase() === _normDest; });
-                if (!_inPartnerLine) return;
-                // 插入位置：join station 在对方线站表中的 index
-                var _insertIdx = _pLine.stations.length - 1; // 默认放最后一站
-                if (_joinSts && _joinSts.length > 0) {
-                  var _jsNorm = _joinSts.map(function(s) { return s.replace(/-/g, '').toLowerCase(); });
-                  for (var _j = 0; _j < _pLine.stations.length; _j++) {
-                    if (_jsNorm.indexOf(_pLine.stations[_j].replace(/-/g, '').toLowerCase()) >= 0) { _insertIdx = _j; break; }
-                  }
-                }
-                if (!posMap[_partnerLid]) posMap[_partnerLid] = [];
-                var _existIdx = posMap[_partnerLid].findIndex(function(p) { return p.trainId === trainId; });
-                var _pLineOp = (window.TransitConstants && window.TransitConstants.normalizeOp) ? window.TransitConstants.normalizeOp((allLines[_partnerLid] && allLines[_partnerLid].operator) || '') : '';
-                var _pPosData = {
-                  stationIndex: _insertIdx,
-                  trainId: trainId,
-                  trainNumber: trainId,
-                  delayMin: delayMin,
-                  railDirection: directionName,
-                  destinationStation: destStation,
-                  trainType: rawType,
-                  typeName: typeName,
-                  estimated: false,
-                  positionSource: "realtime-api",
-                  isJRThrough: true,
-                  trainClass: resolveTrainClass(
-                    { lineId: _partnerLid, operator: _pLineOp, trainNumber: trainId, stationIndex: idx, trainType: rawType, destinationStation: destStations, trainId: trainId + '_' + idx },
-                    _partnerLid, _pLineOp, trainId + '_' + idx, idx, rawType
-                  )
-                };
-                if (_existIdx >= 0) posMap[_partnerLid][_existIdx] = _pPosData; else posMap[_partnerLid].push(_pPosData);
-              });
-            }
+            // Destination on a partner line is routing intent, not position
+            // evidence. Never synthesize a partner-line realtime position from
+            // destination alone. Cross-line continuity must be confirmed by
+            // timetable/running-chain evidence before rendering on that line.
             if (existingIdx >= 0) {
               posMap[lid][existingIdx] = positionData;
             } else {
