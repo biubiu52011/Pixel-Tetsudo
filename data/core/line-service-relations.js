@@ -4,6 +4,10 @@
 
 /* global window */
 window.LineServiceRelations = [
+  { lineA: "Asakusa", lineB: "Keisei", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "legacy shortcut skips Keisei Oshiage Line; direct adjacency is Asakusa <-> KeiseiOshiage at Oshiage", confidence: "HIGH" } },
+  { lineA: "Hanzomon", lineB: "TobuIsesaki", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "legacy shortcut duplicates path via TobuSkytree; do not infer direct adjacency", confidence: "HIGH" } },
+  { lineA: "Hibiya", lineB: "TobuIsesaki", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "legacy shortcut duplicates path via TobuSkytree; do not infer direct adjacency", confidence: "HIGH" } },
+  { lineA: "SotetsuMain", lineB: "TokyuToyoko", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "legacy shortcut skips Sotetsu/Tokyu Shin-Yokohama lines; do not infer direct adjacency", confidence: "HIGH" } },
   { lineA: "Keikyu", lineB: "KeikyuAirport", relation: "BRANCH_OF", direction: "BIDIRECTIONAL", handoverStations: ["Keikyu-Kamata"], evidence: { source: "legacy through map reclassified as same-operator branch", confidence: "HIGH" } },
   { lineA: "Keikyu", lineB: "KeikyuKurihama", relation: "BRANCH_OF", direction: "BIDIRECTIONAL", handoverStations: ["Horinouchi"], evidence: { source: "legacy through map reclassified as same-operator branch", confidence: "HIGH" } },
   { lineA: "Keikyu", lineB: "KeikyuZushi", relation: "BRANCH_OF", direction: "BIDIRECTIONAL", handoverStations: ["Kanazawa-Hakkei"], evidence: { source: "legacy through map reclassified as same-operator branch", confidence: "HIGH" } },
