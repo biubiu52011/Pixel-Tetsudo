@@ -350,11 +350,7 @@
           return { lines: dlDict, lineOrder: lpsOrder };
         }
       }
-      // Priority 3: Direct UNIFIED_LINES compat fallback
-      if (window.UNIFIED_LINES && Object.keys(window.UNIFIED_LINES).length > 0) {
-        var lpsOrder = (window.LinePresentationService && window.UNIFIED_LINES) ? window.LinePresentationService.getDisplayOrder(window.UNIFIED_LINES) : []; return { lines: window.UNIFIED_LINES, lineOrder: lpsOrder };
-      }
-      return null;
+       return null;
     }
 
     function render() {
@@ -376,7 +372,7 @@
     // Immediate check first
     render();
 
-    // Poll for UNIFIED_LINES (handles async data loading)
+    // Poll until the canonical DataLayer/DataFusion path is ready
     var _pollCount = 0;
     var _pollTimer = setInterval(function() {
       _pollCount++;
