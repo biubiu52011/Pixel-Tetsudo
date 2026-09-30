@@ -5,116 +5,11 @@
  * Provider: ThroughService
  * Consumers: DataFusion (timetable expansion), RouteSearch (transfer penalty), TrainsPage (display)
  *
- * Semantics of THROUGH_SERVICE_MAP:
- *   A -> [B, C] means a train can run through DIRECTLY between A and B/C
- *   (no intermediate line). Multi-hop chains are resolved by getThroughServiceLines()
- *   via BFS. Keys/values are real railway_data lineIds.
- *
- * THROUGH_JOIN_STATIONS (industry-standard 接続駅):
- *   A -> { B: [s1, s2] } means the A<->B through run joins at station s1/s2.
- *   This gates the through-service marker on line maps: a partner line only gets
- *   the ∧/∨/< marker at its actual join station, never at every shared station.
- *   Semantics of the value:
- *     undefined entry  -> not defined (fall back to all shared stations)
- *     null             -> same as undefined (fall back)
- *     []               -> defined but NO join station (marker suppressed)
- *     [s1, s2]         -> marker only at these stations
  */
 (function() {
   "use strict";
 
-  var THROUGH_SERVICE_MAP = {
-    // 東武スカイツリーライン・伊勢崎線（東武動物公園で相互直通）
-    "TobuSkytree": ["Hibiya", "Hanzomon", "Asakusa", "TobuIsesaki"],
-    "TobuIsesaki": ["Hibiya", "Hanzomon", "TobuSkytree", "TobuNikko"],
-    // 東京メトロ
-    "Hibiya": ["TobuSkytree", "TobuIsesaki"],
-    "Hanzomon": ["TobuSkytree", "TobuIsesaki", "TokyuDenEn"],
-    "Namboku": ["TokyuMeguro"],
-    "Chiyoda": ["JobanLocal", "OdakyuTama", "Odawara"],
-    "Tozai": ["ChuoSobuLocal"],
-    "Yurakucho": ["Tojo"],
-    "Fukutoshin": ["TokyuToyoko", "Tojo", "Yurakucho_Seibu"],
-    "Mita": ["TokyuMeguro"],
-    "Asakusa": ["Keikyu", "Keisei", "KeiseiOshiage"],
-    "Shinjuku": ["Keio", "KeioMain"],
-    // 東急
-    "TokyuToyoko": ["MinatoMirai", "Fukutoshin"],
-    "MinatoMirai": ["TokyuToyoko"],
-    "TokyuMeguro": ["Mita", "Namboku", "SotetsuShin-Yokohama"],
-    "TokyuDenEn": ["Hanzomon", "TokyuOimachi"],
-    // 西武有楽町線（小竹向原-練馬）— the through path to 西武池袋線 runs via this line
-    "Yurakucho_Seibu": ["Fukutoshin", "Ikebukuro", "SeibuChichibu", "Yurakucho"],
-    // 西武池袋線（データ線ではない——BFS 中継のみ、表示対象外）
-    "Ikebukuro": ["Yurakucho_Seibu", "Fukutoshin"],
-    // 東武東上線
-    "Tojo": ["Fukutoshin", "Yurakucho"],
-    // 京成・京急
-    "Keikyu": ["Asakusa"],
-    "Keisei": ["Asakusa", "KeiseiOshiage", "NaritaSkyAccess"],
-    "KeiseiOshiage": ["Asakusa", "Keisei"],
-    "NaritaSkyAccess": ["Keisei"],
-    // 京急支線（空港線/久里浜線/逗子線 → 本線直通）
-    "KeikyuAirport": ["Keikyu"],
-    "KeikyuKurihama": ["Keikyu"],
-    "KeikyuZushi": ["Keikyu"],
-    // 相鉄
-    "SotetsuMain": ["Saikyo", "TokyuToyoko", "SotetsuIzumino", "SotetsuShin-Yokohama"],
-    "SotetsuIzumino": ["SotetsuMain"],
-    "SotetsuShin-Yokohama": ["SotetsuMain", "TokyuMeguro"],
-    // JR
-    "Saikyo": ["Kawagoe", "Rinkai", "SotetsuMain"],
-    "Kawagoe": ["Saikyo", "KawagoeWest"],
-    "KawagoeWest": ["Kawagoe", "Hachiko"],
-    "Rinkai": ["Saikyo"],
-    "UtsunomiyaJR": ["ShonanShinjuku", "Tokaido"],
-    "Takasaki": ["ShonanShinjuku", "Tokaido"],
-    "Tokaido": ["UtsunomiyaJR", "Takasaki", "Ito"],
-    "Ito": ["Tokaido"],
-    "ShonanShinjuku": ["UtsunomiyaJR", "Takasaki", "Yokosuka"],
-    "UenoTokyo": ["UtsunomiyaJR", "Takasaki", "Joban", "Tokaido"],
-    "ChuoRapid": ["Ome", "Itsukaichi", "ChuoMain"],
-    "ChuoMain": ["ChuoRapid", "Shinonoi", "ChuoTatsuno"],
-    "SobuRapid": ["Yokosuka"],
-    "Yokosuka": ["SobuRapid", "ShonanShinjuku"],
-    "JobanLocal": ["Chiyoda"],
-    "Joban": ["Narita"],
-    "Narita": ["Joban"],
-    "Keiyo": ["Uchibo", "Sotobo", "Musashino"],
-    "Musashino": ["Keiyo"],
-    "Uchibo": ["Keiyo"],
-    "Sotobo": ["Keiyo"],
-    "Hachiko": ["KawagoeWest"],
-    "OdakyuTama": ["Chiyoda", "Odawara"],
-    "Odawara": ["Chiyoda", "OdakyuTama"],
-        "ChuoSobuLocal": ["Tozai"],
-    // 地方線直通（4.3.644 補完）
-    "Gono": ["OuMain"],
-    "Kamaishi": ["TohokuMain"],
-    "OuMain": ["Gono", "Tazawako"],
-    "Tazawako": ["OuMain"],
-    "TokyuOimachi": ["TokyuDenEn"],
-    // 直通 6 組補完（4.3.711）
-    "TobuNikko": ["TobuIsesaki"],
-    "ChuoTatsuno": ["ChuoMain"],
-    "Shinonoi": ["ChuoMain", "Shinetsu"],
-    "Shinetsu": ["Shinonoi"],
-    "SeibuChichibu": ["Yurakucho_Seibu"],
-    // JR-West 関西・JR-Kyushu 直通（4.3.1024）
-    "OsakaLoop": ["Hanwa", "KansaiMain"],
-    "Hanwa": ["OsakaLoop"],
-    "KansaiMain": ["OsakaLoop", "Nara"],
-    "Nara": ["KansaiMain"],
-    "TokaidoKansai": ["SanyoMain"],
-    "SanyoMain": ["TokaidoKansai", "KagoshimaMain"],
-    "Gakkentoshi": ["OsakaHigashi"],
-    "OsakaHigashi": ["Gakkentoshi"],
-    "KagoshimaMain": ["SanyoMain", "NagasakiMain", "Nippo", "Hohi"],
-    "NagasakiMain": ["KagoshimaMain"],
-    "Nippo": ["KagoshimaMain", "Kyudai", "Hohi"],
-    "Kyudai": ["Nippo"],
-    "Hohi": ["KagoshimaMain", "Nippo"]
-  };
+
 
   // 接続駅（線路図の直通マーカーを実際の接続駅のみに限定）
   var THROUGH_JOIN_STATIONS = {
@@ -245,28 +140,6 @@
           if (other && out.indexOf(other) < 0) out.push(other);
         }
       }
-      var legacy = THROUGH_SERVICE_MAP[lineId];
-      if (legacy && Array.isArray(legacy)) {
-        legacy.forEach(function(other) {
-          // Any canonical classification is authoritative, including UNKNOWN,
-          // BRANCH_OF and PHYSICAL_CONNECT. Legacy may fill only an unmigrated
-          // pair; it must never resurrect a pair canonical has rejected as
-          // THROUGH_SERVICE.
-          var classified = false;
-          if (relations && typeof relations.length === "number") {
-            for (var ri = 0; ri < relations.length; ri++) {
-              var rr = relations[ri];
-              if (!rr) continue;
-              if ((rr.lineA === lineId && rr.lineB === other) ||
-                  (rr.lineA === other && rr.lineB === lineId)) {
-                classified = true;
-                break;
-              }
-            }
-          }
-          if (!classified && out.indexOf(other) < 0) out.push(other);
-        });
-      }
       return out;
     } catch(e) { return []; }
   }
@@ -329,12 +202,7 @@
     } catch(e) { return []; }
   }
 
-  function getMap() {
-    return THROUGH_SERVICE_MAP;
-  }
-
   window.ThroughService = {
-    getMap: getMap,
     getDirectThroughLines: getDirectThroughLines,
     getJoinStations: getJoinStations,
     getDisplayAnchors: getDisplayAnchors,
