@@ -16,6 +16,8 @@
   var _lastRenderedLine = null;
   var _lastRenderedLineHash = '';
   var _manualRequested = {};
+  var _listRenderQueued = false;
+  var _listRenderPending = false;
   var t = window.t || function(k) { return k; };
   var escapeHtml = window.escapeHtml || function(s) {
     if (!s) return "";
@@ -148,16 +150,35 @@
     } catch(e) { if (callback) callback(); }
   }
 
-  function renderList(el) {
+  function renderListNow(el) {
     if (!el || !window.DataState) return;
     var lines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : {};
     var ul = Array.isArray(lines) ? (function(){ var d={}; lines.forEach(function(l){ d[l.id||l.line_id]=l; }); return d; })() : lines;
     if (!ul || Object.keys(ul).length === 0) {
-      // Sync loading animation with the realtime page (rs-loading spinner)
       el.innerHTML = '<div class="rs-loading"><div class="rs-loading-spinner"></div><span>' + t("trains.loading") + '</span></div>';
       return;
     }
-    var lineOrder = (window.LinePresentationService && window.UNIFIED_LINES) ? window.LinePresentationService.getDisplayOrder(window.UNIFIED_LINES) : []; try { window.DataState.renderList(el, ul, { mode: "trains", lineOrder: lineOrder }); } catch(e) { el.innerHTML = "<div class=\"rs-error\">Render failed</div>"; }
+    var lineOrder = (window.LinePresentationService && window.UNIFIED_LINES) ? window.LinePresentationService.getDisplayOrder(window.UNIFIED_LINES) : [];
+    try { window.DataState.renderList(el, ul, { mode: "trains", lineOrder: lineOrder }); }
+    catch(e) { el.innerHTML = "<div class=\"rs-error\">Render failed</div>"; }
+  }
+
+  // Coalesce bursts from cache/DataFusion/DataState into one list rebuild.
+  // The list does not display train positions, so position-only updates must not
+  // repeatedly rebuild hundreds of line cards during page entry.
+  function renderList(el) {
+    if (!el) return;
+    _listRenderPending = true;
+    if (_listRenderQueued) return;
+    _listRenderQueued = true;
+    var schedule = window.requestIdleCallback || function(cb) { return setTimeout(cb, 0); };
+    schedule(function() {
+      _listRenderQueued = false;
+      if (!_listRenderPending) return;
+      _listRenderPending = false;
+      if (currentLine && detailEl && !detailEl.classList.contains("hidden")) return;
+      renderListNow(el);
+    }, { timeout: 120 });
   }
 
   function init() {
@@ -266,7 +287,8 @@
             }
           } else if (posHash !== _lastPositionsHash) {
             _lastPositionsHash = posHash;
-            renderList(listEl);
+            // Position changes affect only the open train map. The line list is
+            // static metadata and must not be rebuilt for every realtime batch.
             // Restore hash-based navigation once data is ready (posHash changed = data arrived)
             var _h2 = window.location.hash;
             if (_h2 && _h2.length > 1) {
