@@ -66,6 +66,27 @@
     } catch(e) { return 0; }
   }
 
+  var LAST_GOOD_KEY = "pt_runinfo_last_good_v1";
+  function getLastGoodDelay(lineId) {
+    try {
+      var all = JSON.parse(localStorage.getItem(LAST_GOOD_KEY) || "{}");
+      var v = all[lineId];
+      if (!v || !v.r || !v.r.status) return null;
+      var st = v.r.status;
+      if (st === "loading" || st === "no_data" || st === "no_odpt" || st === "unknown") return null;
+      return {
+        status: st,
+        maxDelay: v.r.maxDelay == null ? null : v.r.maxDelay,
+        interval: v.r.interval || null,
+        cause: v.r.text || v.r.cause || null,
+        updatedAt: v.r.updatedAt || v.t || null,
+        source: "last_good",
+        stale: true,
+        refreshing: true
+      };
+    } catch(e) { return null; }
+  }
+
   // ========== Data Loading ==========
   function emitUpdate(fusedData) {
     if (fusedData) { _lastFusedData = fusedData; }
@@ -331,7 +352,8 @@
           webInfo = window.WebRunInfo.getDelayInfo(lineId, line);
         }
       } catch(_we) {}
-      var delayInfo = apiInfo || webInfo || (_hasLocal && { status: localStatus.status, maxDelay: localStatus.maxDelay, interval: localStatus.interval, cause: localStatus.cause }) || fallbackDelay;
+      var _lastGood = getLastGoodDelay(lineId);
+      var delayInfo = apiInfo || webInfo || (_hasLocal && { status: localStatus.status, maxDelay: localStatus.maxDelay, interval: localStatus.interval, cause: localStatus.cause }) || _lastGood || fallbackDelay;
       // Attach running-chain resolution context (transient, not persistent)
 
       var _rtPositions = (odptData.realtimePositions[lineId] || []).slice();
