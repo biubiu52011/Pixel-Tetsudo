@@ -307,6 +307,39 @@ function _getTransferMap(lineId) {
     });
   }
   var throughLines = (window.ThroughService && window.ThroughService.getDirectThroughLines) ? window.ThroughService.getDirectThroughLines(lineId) : [];
+
+  // Canonical through-service handovers are display relationships in their own
+  // right. Do not require a duplicate transferStations entry before a through
+  // chip can exist (e.g. Keiyo <-> Musashino at Nishi-Funabashi).
+  for (var th = 0; th < throughLines.length; th++) {
+    var thLineId = throughLines[th];
+    var thLine = src[thLineId];
+    if (!thLine) continue;
+    var joins = (window.ThroughService && window.ThroughService.getJoinStations) ? window.ThroughService.getJoinStations(lineId, thLineId) : null;
+    if (!Array.isArray(joins) || joins.length === 0) continue;
+    for (var jh = 0; jh < joins.length; jh++) {
+      var joinStation = joins[jh];
+      if (ownStations.indexOf(joinStation) < 0) continue;
+      if (!map[joinStation]) map[joinStation] = [];
+      var exists = false;
+      for (var eh = 0; eh < map[joinStation].length; eh++) {
+        if (map[joinStation][eh].lineId === thLineId) { exists = true; break; }
+      }
+      if (exists) continue;
+      var thPlaceholderRe = /(グループ|ロゴ|マーク|アイコン|シンボル)/;
+      var thLosIcon = (window.LineOperationSystemsResolveIcon && window.LineOperationSystemsResolveIcon(thLineId)) || "";
+      var thImg = (thLosIcon && !thPlaceholderRe.test(thLosIcon)) ? thLosIcon :
+                  (thLine.image && !thPlaceholderRe.test(thLine.image) ? thLine.image : "");
+      var thName = (window.RailwayDB && window.RailwayDB.resolveLineName) ? window.RailwayDB.resolveLineName(thLineId, window.currentLang) : (thLine.name || thLineId);
+      map[joinStation].push({
+        lineId: thLineId, image: thImg, name: thName, operator: thLine.operator || "",
+        code: thLine.code || "", color: (window.LineOperationSystemsResolveColor && window.LineOperationSystemsResolveColor(thLineId)) || thLine.color || "",
+        type: "in", note: "", toStation: "", through: true,
+        dir: _throughDirForStation(lineId, joinStation, thLineId) || "middle"
+      });
+    }
+  }
+
   if (throughLines.length > 0) {
     for (var i2 = 0; i2 < ownStations.length; i2++) {
       var stArr = map[ownStations[i2]];
