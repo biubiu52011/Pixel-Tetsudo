@@ -322,7 +322,9 @@ function _getTransferMap(lineId) {
     var thLineId = throughLines[th];
     var thLine = src[thLineId];
     if (!thLine) continue;
-    var joins = (window.ThroughService && window.ThroughService.getJoinStations) ? window.ThroughService.getJoinStations(lineId, thLineId) : null;
+    var joins = (window.ThroughService && window.ThroughService.getDisplayAnchors) ?
+      window.ThroughService.getDisplayAnchors(lineId, thLineId) :
+      ((window.ThroughService && window.ThroughService.getJoinStations) ? window.ThroughService.getJoinStations(lineId, thLineId) : null);
     if (!Array.isArray(joins) || joins.length === 0) continue;
     for (var jh = 0; jh < joins.length; jh++) {
       var joinStation = joins[jh];
@@ -353,7 +355,9 @@ function _getTransferMap(lineId) {
       if (!stArr) continue;
       for (var j2 = 0; j2 < stArr.length; j2++) {
         if (throughLines.indexOf(stArr[j2].lineId) >= 0) {
-          var _js = (window.ThroughService && window.ThroughService.getJoinStations) ? window.ThroughService.getJoinStations(lineId, stArr[j2].lineId) : null;
+          var _js = (window.ThroughService && window.ThroughService.getDisplayAnchors) ?
+            window.ThroughService.getDisplayAnchors(lineId, stArr[j2].lineId) :
+            ((window.ThroughService && window.ThroughService.getJoinStations) ? window.ThroughService.getJoinStations(lineId, stArr[j2].lineId) : null);
           if (_js === null || _js.indexOf(ownStations[i2]) >= 0) {
             stArr[j2].through = true;
             stArr[j2].dir = _throughDirForStation(lineId, ownStations[i2], stArr[j2].lineId) || "middle";
