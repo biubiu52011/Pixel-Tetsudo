@@ -4,6 +4,13 @@
 
 /* global window */
 window.LineServiceRelations = [
+  { lineA: "Chiyoda", lineB: "OdakyuTama", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Yoyogi-Uehara"], evidence: { source: "Tokyo Metro through-service network + legacy join station", confidence: "HIGH" } },
+  { lineA: "Tozai", lineB: "ChuoSobuLocal", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Nakano"], evidence: { source: "Tokyo Metro through-service network + legacy join station", confidence: "HIGH" } },
+  { lineA: "Yurakucho", lineB: "Tojo", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Wakoshi"], evidence: { source: "Tokyo Metro through-service network + legacy join station", confidence: "HIGH" } },
+  { lineA: "Yurakucho", lineB: "Yurakucho_Seibu", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Kotake-Mukaihara"], evidence: { source: "Tokyo Metro through-service network + legacy join station", confidence: "HIGH" } },
+  { lineA: "TokyuMeguro", lineB: "SotetsuShin-Yokohama", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Shin-Yokohama"], evidence: { source: "Tokyo Metro through-service network + legacy join station", confidence: "HIGH" } },
+  { lineA: "Keiyo", lineB: "Uchibo", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Soga"], evidence: { source: "JR East timetable/route network + legacy join station", confidence: "HIGH" } },
+  { lineA: "Keiyo", lineB: "Sotobo", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Soga"], evidence: { source: "JR East timetable/route network + legacy join station", confidence: "HIGH" } },
   { lineA: "Keiyo", lineB: "Musashino", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Nishi-Funabashi"], evidence: { source: "ThroughService direct relation; Musashino joins Keiyo operation at Nishi-Funabashi", confidence: "HIGH" } },
   { lineA: "Rinkai", lineB: "Saikyo", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Osaki"], evidence: { source: "ThroughService direct relation + join station", confidence: "HIGH" } },
   { lineA: "Hanzomon", lineB: "TokyuDenEn", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Shibuya"], evidence: { source: "ThroughService direct relation + join station", confidence: "HIGH" } },
