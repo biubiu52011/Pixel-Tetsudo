@@ -4,6 +4,11 @@
 
 /* global window */
 window.LineServiceRelations = [
+  { lineA: "Hachiko", lineB: "KawagoeWest", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Komagawa"], evidence: { source: "JR East Hachiko/Kawagoe continuous operation boundary at Komagawa", confidence: "HIGH" } },
+  { lineA: "Joban", lineB: "Narita", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "legacy relation omits Abiko branch path; Narita entity scope must be verified before direct migration", confidence: "LOW" } },
+  { lineA: "Gono", lineB: "OuMain", relation: "PHYSICAL_CONNECT", direction: "BIDIRECTIONAL", handoverStations: ["Kawabe"], evidence: { source: "adjacent network boundary at Kawabe; through-running varies by service and is not assumed globally", confidence: "MEDIUM" } },
+  { lineA: "Kamaishi", lineB: "TohokuMain", relation: "PHYSICAL_CONNECT", direction: "BIDIRECTIONAL", handoverStations: ["Hanamaki"], evidence: { source: "adjacent network boundary at Hanamaki; physical connection alone is not global through identity", confidence: "MEDIUM" } },
+  { lineA: "OuMain", lineB: "Tazawako", relation: "PHYSICAL_CONNECT", direction: "BIDIRECTIONAL", handoverStations: ["Omagari"], evidence: { source: "adjacent network boundary at Omagari; service-specific through running must be evidenced separately", confidence: "MEDIUM" } },
   { lineA: "OsakaLoop", lineB: "Hanwa", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Tennoji"], evidence: { source: "JR West timetable: Kanku/Kishu Rapid continues between Osaka Loop and Hanwa at Tennoji", confidence: "HIGH" } },
   { lineA: "OsakaLoop", lineB: "KansaiMain", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Tennoji"], evidence: { source: "JR West timetable: Yamatoji Rapid continues between Osaka Loop and Kansai Main at Tennoji", confidence: "HIGH" } },
   { lineA: "KansaiMain", lineB: "Nara", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "legacy edge at Kizu conflates Kansai Main/Yamatoji operation with Nara Line; no direct migration without train-path evidence", confidence: "LOW" } },
