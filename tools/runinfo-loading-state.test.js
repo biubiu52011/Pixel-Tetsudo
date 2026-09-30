@@ -1,10 +1,14 @@
 const fs=require("fs"),assert=require("assert");
 const fusion=fs.readFileSync(require("path").join(__dirname,"../js/data-fusion.js"),"utf8");
 const api=fs.readFileSync(require("path").join(__dirname,"../js/runinfo-api.js"),"utf8");
+const state=fs.readFileSync(require("path").join(__dirname,"../js/data-state.js"),"utf8");
 assert(!/aggregateStatus\(records, lineObj\) \|\| ["']normal/.test(api));
 assert(!/status:\s*w\.status \|\| ["']normal/.test(api));
 assert(!/status:\s*d\.status \|\| ["']normal/.test(api));
 assert(/awaiting_line_record/.test(fusion));
 assert(/getLastGoodDelay\(lineId\)/.test(fusion));
 assert(/pt_runinfo_last_good_v1/.test(api) && /pt_runinfo_last_good_v1/.test(fusion));
-console.log("runinfo-loading-state: 6 PASS");
+assert(!/if \(!statusMap\[id\]\) statusMap\[id\] = \{ status: "normal"/.test(fusion));
+assert(/source: "initial_check"/.test(fusion));
+assert(/: "loading";/.test(state));
+console.log("runinfo-loading-state: 9 PASS");
