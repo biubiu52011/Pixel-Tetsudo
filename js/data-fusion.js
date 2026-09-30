@@ -122,6 +122,19 @@
     var result = { status: "normal", maxDelay: 0, interval: null, cause: null };
     if (!raw) return result;
     try {
+      // Phase 1: shared evaluator owns status semantics; the legacy body below still owns
+      // interval/cause/detail extraction until the next migration phase.
+      var _sharedEval = null;
+      if (window.RunInfoEvaluator) {
+        _sharedEval = window.RunInfoEvaluator.evaluate({
+          source: "odpt",
+          structuredStatus: raw["odpt:trainInformationStatus"],
+          suspension: raw["odpt:suspension"] === true,
+          delay: raw["odpt:delay"] === true,
+          delayMinutes: (typeof raw["odpt:delay"] === "number") ? raw["odpt:delay"] : null,
+          text: raw["odpt:trainInformationText"] || raw["odpt:text"] || ""
+        });
+      }
       // v4.3.388: 权威状态字段优先（odpt:trainInformationStatus: Delay/Suspension/Normal）
       // v4.3.430: 字段可为对象 {ja:"自由文本"}（如 直通運転中止/運転見合わせ）——提取，标准枚举直接采用，自由文本并入 text 统一判定
       var _stRaw = raw["odpt:trainInformationStatus"];
@@ -213,6 +226,13 @@
         if (cm && cm[1]) result.cause = cm[1];
       }
     } catch(e) {}
+    if (_sharedEval) {
+      result.status = _sharedEval.status === "unknown" ? result.status : _sharedEval.status;
+      if (_sharedEval.maxDelay != null) result.maxDelay = _sharedEval.maxDelay;
+      else if (_sharedEval.delayUpperBoundMinutes != null) result.maxDelay = null;
+      result.delayUpperBoundMinutes = _sharedEval.delayUpperBoundMinutes;
+      result.evidence = _sharedEval.evidence;
+    }
     return result;
   }
 
