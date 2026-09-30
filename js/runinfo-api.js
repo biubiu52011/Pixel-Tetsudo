@@ -118,7 +118,26 @@
   // ========== 统一查询 API ==========
   // query(lineId, line) -> Promise<{status, text, links[], updatedAt, source} | null>
   var _cache = {};          // lineId -> { t: timestamp, r: result }
-  var CACHE_TTL_MS = 5 * 60 * 1000; // 5 分钟内存缓存（避免每次弹窗重复请求官方接口/官网）
+  var CACHE_TTL_MS = 5 * 60 * 1000;
+  var LAST_GOOD_KEY = "pt_runinfo_last_good_v1";
+
+  function readLastGood(lineId) {
+    try {
+      var all = JSON.parse(localStorage.getItem(LAST_GOOD_KEY) || "{}");
+      var v = all[lineId];
+      if (!v || !v.r) return null;
+      return Object.assign({}, v.r, { stale: true, refreshing: true, cachedAt: v.t || null });
+    } catch(e) { return null; }
+  }
+
+  function writeLastGood(lineId, r) {
+    if (!r || !r.status || r.status === "loading" || r.status === "no_data" || r.status === "no_odpt" || r.status === "unknown") return;
+    try {
+      var all = JSON.parse(localStorage.getItem(LAST_GOOD_KEY) || "{}");
+      all[lineId] = { t: Date.now(), r: r };
+      localStorage.setItem(LAST_GOOD_KEY, JSON.stringify(all));
+    } catch(e) {}
+  } // 5 分钟内存缓存（避免每次弹窗重复请求官方接口/官网）
 
   // v4.3.968: 弹窗统一操作区——通用手动覆盖（任意线路可用；持久化与 WebRunInfo 手动缓存分离）
   var _manualOverride = {};  // lineId -> { text, status, updatedAt }
@@ -166,7 +185,7 @@
           var rawText = w.detail || w.cause || "";
           var ex = extractLinks(rawText);
           p = Promise.resolve({
-            status: w.status || "normal",
+            status: w.status || "info",
             text: ex.cleanText,
             links: [],
             updatedAt: w.updatedAt || null,
@@ -185,7 +204,7 @@
           if (text) {
             var ex = extractLinks(text);
             return {
-              status: aggregateStatus(records, lineObj) || "normal",
+              status: aggregateStatus(records, lineObj) || "info",
               text: ex.cleanText,
               links: ex.links,
               updatedAt: Date.now(),
@@ -203,7 +222,7 @@
 
     // 写缓存（null 也缓存，避免无数据线路反复请求）
     return p.then(function(r) {
-      try { _cache[lineId] = { t: Date.now(), r: r }; } catch(e) {}
+      try { _cache[lineId] = { t: Date.now(), r: r }; writeLastGood(lineId, r); } catch(e) {}
       return r;
     });
   }
@@ -232,7 +251,7 @@
         var d = lineObj.delayInfo;
         var raw = d.detail || d.cause || "";
         var ex = extractLinks(raw);
-        return { status: d.status || "normal", text: ex.cleanText, links: ex.links, updatedAt: d.updatedAt || null, source: d.source || "local" };
+        return { status: d.status || "info", text: ex.cleanText, links: ex.links, updatedAt: d.updatedAt || null, source: d.source || "local" };
       }
       if (lineObj && lineObj.status) {
         var raw2 = lineObj.cause || "";
