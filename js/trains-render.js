@@ -1028,7 +1028,14 @@
       var trainUid = p.runningChainId || p.trainId || ("train_" + pi);
       updatedIds[trainUid] = true;
       
-      var existingIcon = trainLayer.querySelector('[data-train-id="' + String(trainUid).replace(/"/g, '') + '"]');
+      var existingIcon = null;
+      var _trainNodes = trainLayer.querySelectorAll('[data-train-id]');
+      for (var _tni = 0; _tni < _trainNodes.length; _tni++) {
+        if (_trainNodes[_tni].getAttribute('data-train-id') === String(trainUid)) {
+          existingIcon = _trainNodes[_tni];
+          break;
+        }
+      }
       
       if (existingIcon) {
         // Update existing icon position
