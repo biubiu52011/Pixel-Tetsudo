@@ -4,6 +4,15 @@
 
 /* global window */
 window.LineServiceRelations = [
+  { lineA: "UenoTokyo", lineB: "UtsunomiyaJR", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "UenoTokyo is an operation-system identity, not a direct physical line handover at Omiya", confidence: "HIGH" } },
+  { lineA: "UenoTokyo", lineB: "Takasaki", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "UenoTokyo is an operation-system identity, not a direct physical line handover at Omiya", confidence: "HIGH" } },
+  { lineA: "UenoTokyo", lineB: "Joban", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "UenoTokyo is an operation-system identity; relationship must be modeled as service path, not direct line adjacency", confidence: "HIGH" } },
+  { lineA: "UenoTokyo", lineB: "Tokaido", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "UenoTokyo is an operation-system identity; relationship must be modeled as service path, not direct line adjacency", confidence: "HIGH" } },
+  { lineA: "ShonanShinjuku", lineB: "UtsunomiyaJR", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "ShonanShinjuku is an operation-system identity, not a direct physical line node", confidence: "HIGH" } },
+  { lineA: "ShonanShinjuku", lineB: "Takasaki", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "ShonanShinjuku is an operation-system identity, not a direct physical line node", confidence: "HIGH" } },
+  { lineA: "ShonanShinjuku", lineB: "Yokosuka", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "ShonanShinjuku is an operation-system identity, not a direct physical line node", confidence: "HIGH" } },
+  { lineA: "Yokosuka", lineB: "SobuRapid", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Tokyo"], evidence: { source: "continuous Yokosuka/Sobu Rapid operation through Tokyo", confidence: "HIGH" } },
+  { lineA: "Tokaido", lineB: "Ito", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Atami"], evidence: { source: "continuous Tokaido/Ito operation through Atami", confidence: "HIGH" } },
   { lineA: "Asakusa", lineB: "Keisei", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "legacy shortcut skips Keisei Oshiage Line; direct adjacency is Asakusa <-> KeiseiOshiage at Oshiage", confidence: "HIGH" } },
   { lineA: "Hanzomon", lineB: "TobuIsesaki", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "legacy shortcut duplicates path via TobuSkytree; do not infer direct adjacency", confidence: "HIGH" } },
   { lineA: "Hibiya", lineB: "TobuIsesaki", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "legacy shortcut duplicates path via TobuSkytree; do not infer direct adjacency", confidence: "HIGH" } },
