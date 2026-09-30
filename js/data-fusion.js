@@ -88,7 +88,7 @@
 
   function syncStatusMap() {
     try {
-      var allLines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : (window.UNIFIED_LINES || {});
+      var allLines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : {};
       if (!allLines || Object.keys(allLines).length === 0) return;
       var statusMap = localData.statusMap || {};
       Object.keys(allLines).forEach(function(id) {
@@ -100,7 +100,7 @@
 
   function checkCacheStale() {
     try {
-      var rdbLines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : (window.UNIFIED_LINES || {});
+      var rdbLines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : {};
       if (!rdbLines || Object.keys(rdbLines).length === 0) return;
       var currentVersion = Object.keys(rdbLines).length;
       if (_lineControlVersion !== null && _lineControlVersion !== currentVersion) { _lastFusedData = null; }
@@ -276,7 +276,7 @@
 
   function fuseLine(lineId) {
     try {
-      var line = (window.DataLayer && window.DataLayer.getLine ? window.DataLayer.getLine(lineId) : null) || (localData.lines && localData.lines[lineId]) || (window.UNIFIED_LINES && window.UNIFIED_LINES[lineId]) || null;
+      var line = (window.DataLayer && window.DataLayer.getLine ? window.DataLayer.getLine(lineId) : null) || (localData.lines && localData.lines[lineId]) || null;
       if (!line) return null;
       // v4.3.398: localData 兜底对象可能缺 id 字段——补齐，否则 getApiDelayInfo 的
       // railway code 匹配（code=line.id）得到 undefined，matched 永远失败 → 有归属延误记录
@@ -373,13 +373,12 @@
       var allLineIds = {};
       var dlLines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : null;
       if (dlLines) Object.keys(dlLines).forEach(function(k) { allLineIds[k] = true; });
-      if (window.UNIFIED_LINES) Object.keys(window.UNIFIED_LINES).forEach(function(k) { allLineIds[k] = true; });
       if (localData.lines) Object.keys(localData.lines).forEach(function(k) { allLineIds[k] = true; });
       Object.keys(allLineIds).forEach(function(lineId) {
         var fused = fuseLine(lineId);
         if (fused) fusedLines[fused.id] = fused;
       });
-      var fusedData = { version: FUSION_VERSION, timestamp: new Date().toISOString(), lines: fusedLines, lineOrder: (window.LinePresentationService && (dlLines || window.UNIFIED_LINES)) ? window.LinePresentationService.getDisplayOrder(dlLines || window.UNIFIED_LINES) : Object.keys(allLineIds), odptOperatorsLoaded: Object.keys(odptData.delayInfo).length, totalLines: Object.keys(allLineIds).length };
+      var fusedData = { version: FUSION_VERSION, timestamp: new Date().toISOString(), lines: fusedLines, lineOrder: (window.LinePresentationService && dlLines) ? window.LinePresentationService.getDisplayOrder(dlLines) : Object.keys(allLineIds), odptOperatorsLoaded: Object.keys(odptData.delayInfo).length, totalLines: Object.keys(allLineIds).length };
       emitUpdate(fusedData);
       return fusedData;
     } catch(e) { console.error("[DataFusion] fuseAll error:", e.message); if (_lastFusedData) { emitUpdate(_lastFusedData); return _lastFusedData; } return null; }
@@ -425,9 +424,9 @@
     try {
       var positionSource = window.ODPT_TRAIN_POSITIONS || window.ODPT_TRAINS;
       if (!positionSource) return;
-      allLines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : (window.UNIFIED_LINES || {});
+      allLines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : {};
       if (!allLines || Object.keys(allLines).length === 0) {
-        // v4.3.413: DataLayer/UNIFIED_LINES 未就绪时延迟重试（最多 30 次），
+        // v4.3.413: DataLayer 未就绪时延迟重试（最多 30 次），
         // 避免 ODPT 列车位置先于线路数据到达导致静默 return、实时位置永久丢失
         if (!loadTrainPositions._retry) loadTrainPositions._retry = 0;
         if (loadTrainPositions._retry < 30) {
@@ -912,7 +911,7 @@
     _refreshIntervalMs = (window.RuntimeConfig && window.RuntimeConfig.REFRESH_INTERVAL) || 15000;
     startFusionPolling();
     (function pollUnified() {
-      var checkLines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : (window.UNIFIED_LINES || {});
+      var checkLines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : {};
       if (checkLines && Object.keys(checkLines).length > 0) {
         // v4.3.6xx: 数据就绪后，如果当前在 trains.html 线路详情页（hash 有 lineId），
         // 自动触发一次 ensureManualTimetable——showLineView 可能在 DataFusion 未就绪时
