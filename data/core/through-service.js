@@ -124,10 +124,7 @@
     return null;
   }
 
-  /** Direct through-service neighbours of a line (1 hop).
-   * Canonical relations are authoritative; the legacy map only fills relations
-   * that have not yet been migrated.
-   */
+  /** Direct canonical through-service neighbours of a line (1 hop). */
   function getDirectThroughLines(lineId) {
     try {
       var out = [];
@@ -172,8 +169,6 @@
       return getJoinStations(lineId, partnerId);
     } catch(e) { return null; }
   }
-
-  /** BFS closure: every line reachable through any number of through runs. */
   window.ThroughService = {
     getDirectThroughLines: getDirectThroughLines,
     getJoinStations: getJoinStations,
