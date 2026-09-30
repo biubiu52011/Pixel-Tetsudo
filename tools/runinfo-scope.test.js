@@ -31,3 +31,16 @@ assert.strictEqual(api._aggregateStatus(sameCode,tobuLine),"normal");
 const unresolved=api._selectScopedRecords(sameCode,{id:"Utsunomiya"});
 assert.strictEqual(unresolved.length,0);
 console.log("runinfo-scope namespace: 4 PASS");
+
+
+// Same-operator exact-code invariant: similar/prefix railway codes must not match.
+const similarCodes=[
+ {"odpt:railway":"odpt.Railway:Tobu.UtsunomiyaBranch","odpt:trainInformationStatus":"Suspension","odpt:trainInformationText":{"ja":"branch suspended"}},
+ {"odpt:railway":"odpt.Railway:Tobu.Kinugawa","odpt:trainInformationStatus":"Delay","odpt:trainInformationText":{"ja":"kinugawa delayed"}},
+ {"odpt:railway":"odpt.Railway:Tobu.Utsunomiya","odpt:trainInformationStatus":"Normal","odpt:trainInformationText":{"ja":"utsunomiya normal"}}
+];
+const exactScoped=api._selectScopedRecords(similarCodes,tobuLine);
+assert.strictEqual(exactScoped.length,1);
+assert.strictEqual(exactScoped[0]["odpt:railway"],"odpt.Railway:Tobu.Utsunomiya");
+assert.strictEqual(api._aggregateStatus(similarCodes,tobuLine),"normal");
+console.log("runinfo-scope exact-code: 3 PASS");
