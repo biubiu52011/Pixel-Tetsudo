@@ -9,6 +9,7 @@
   // v4.3.x: 位置轮询间隔 — 见 runtime-config.js POSITION_INTERVAL
 
   var odptData = { trains: {}, delayInfo: {}, realtimePositions: {} };
+  function _positionIdentity(p) { return p && (p.runningChainId || p.trainId) || ""; }
   var subscribers = [];
   var localData = { lines: {}, statusMap: {} };
   var _lastFusedData = null;
@@ -315,14 +316,14 @@
       if (_sharedPartners.length > 0) {
         var _ownStations = line.stations || [];
         var _existingIds = {};
-        _rtPositions.forEach(function(p) { _existingIds[p.trainId] = true; });
+        _rtPositions.forEach(function(p) { _existingIds[_positionIdentity(p)] = true; });
         
         // 共线区间：自动遍历所有共线线
         for (var _sp = 0; _sp < _sharedPartners.length; _sp++) {
           var _spLine = _sharedPartners[_sp];
           var _spPositions = odptData.realtimePositions[_spLine] || [];
           _spPositions.forEach(function(p) {
-            if (_existingIds[p.trainId]) return;
+            if (_existingIds[_positionIdentity(p)]) return;
             var _stName = (p.stationId || '').split('.').pop();
             // 自动判断是否共线站
             if (window.SharedTrackPairs && window.SharedTrackPairs.isSharedStation) {
@@ -335,7 +336,7 @@
               p.stationIndex = _spIdx;
               p.fusionLineId = _spLine;
               _rtPositions.push(p);
-              _existingIds[p.trainId] = true;
+              _existingIds[_positionIdentity(p)] = true;
             }
           });
         }
@@ -349,7 +350,7 @@
         var _tlLine = _throughLines[_tl];
         var _tlPositions = odptData.realtimePositions[_tlLine] || [];
         _tlPositions.forEach(function(p) {
-          if (_existingIds[p.trainId]) return;
+          if (_existingIds[_positionIdentity(p)]) return;
           // 用站名映射：直通线站名 → 当前线站索引
           var _stName = (p.stationId || '').split('.').pop();
           var _tlIdx = _ownStations.indexOf(_stName);
@@ -357,12 +358,12 @@
             p.stationIndex = _tlIdx;
             p.fusionLineId = _tlLine;
             _rtPositions.push(p);
-            _existingIds[p.trainId] = true;
+            _existingIds[_positionIdentity(p)] = true;
           }
         });
       }
       }
-      return { id: lineId, name: line.name, nameEn: line.nameEn || line.name, code: line.code, color: (window.LineOperationSystemsResolveColor && window.LineOperationSystemsResolveColor(lineId)) || line.color, operator: line.operator, region: line.region, type: line.type, image: line.image, stations: line.stations || [], durations: line.durations || [], intervalTotal: line.durationTotalMin || 0, realtimePositions: _rtPositions, delayInfo: delayInfo, branchOf: line.branchOf || null, isSixShapedLoop: line.isSixShapedLoop === true, isDoubleColumnLoop: line.isDoubleColumnLoop === true, loopJunction: line.loopJunction || null, _chainMeta: _chainMeta };
+      return { id: lineId, name: line.name, nameEn: line.nameEn || line.name, code: line.code, color: (window.LineOperationSystemsResolveColor && window.LineOperationSystemsResolveColor(lineId)) || line.color, operator: line.operator, region: line.region, type: line.type, image: line.image, stations: line.stations || [], durations: line.durations || [], intervalTotal: line.durationTotalMin || 0, realtimePositions: _rtPositions, delayInfo: delayInfo, branchOf: line.branchOf || null, isSixShapedLoop: line.isSixShapedLoop === true, isDoubleColumnLoop: line.isDoubleColumnLoop === true, loopJunction: line.loopJunction || null };
     } catch(e) { console.debug("[DataFusion] fuseLine error for " + lineId + ":", e.message); return null; }
   }
 
@@ -643,22 +644,22 @@
                 estCount += _est.length;
               } else {
                 var _haveId = {};
-                posMap[lid].forEach(function(p) { if (p && p.trainId) _haveId[p.trainId] = true; });
+                posMap[lid].forEach(function(p) { if (p && _positionIdentity(p)) _haveId[_positionIdentity(p)] = true; });
                 var _addN = 0;
                 _est.forEach(function(p) {
-                  if (p && p.trainId && !_haveId[p.trainId]) {
+                  if (p && _positionIdentity(p) && !_haveId[_positionIdentity(p)]) {
                     posMap[lid].push(p);
-                    _haveId[p.trainId] = true;
+                    _haveId[_positionIdentity(p)] = true;
                     _addN++;
                   }
                 });
                 estCount += _addN;
                 // v4.3.929: 实时位置有列车但无 destinationStation → 从推定位置补终点站
                 var _estById = {};
-                _est.forEach(function(p) { if (p && p.trainId) _estById[p.trainId] = p; });
+                _est.forEach(function(p) { if (p && _positionIdentity(p)) _estById[_positionIdentity(p)] = p; });
                 posMap[lid].forEach(function(p) {
-                  if (p && p.trainId && _estById[p.trainId] && !p.destinationStation) {
-                    p.destinationStation = _estById[p.trainId].destinationStation;
+                  if (p && _positionIdentity(p) && _estById[_positionIdentity(p)] && !p.destinationStation) {
+                    p.destinationStation = _estById[_positionIdentity(p)].destinationStation;
                   }
                 });
               }
@@ -698,13 +699,13 @@
                   if (mEst && mEst.length > 0) {
                     if (!posMap[manualLineId]) posMap[manualLineId] = [];
                     var haveId = {};
-                    posMap[manualLineId].forEach(function(p) { if (p && p.trainId) haveId[p.trainId] = true; });
+                    posMap[manualLineId].forEach(function(p) { if (p && _positionIdentity(p)) haveId[_positionIdentity(p)] = true; });
                     var mAdded = 0;
                     mEst.forEach(function(p) {
-                      if (p && p.trainId && !haveId[p.trainId]) {
+                      if (p && _positionIdentity(p) && !haveId[_positionIdentity(p)]) {
                         p.positionSource = "station-timetable";
                         posMap[manualLineId].push(p);
-                        haveId[p.trainId] = true;
+                        haveId[_positionIdentity(p)] = true;
                         mAdded++;
                       }
                     });
@@ -1009,13 +1010,13 @@
                 if (mEst && mEst.length > 0) {
                   if (!posMap[lineId]) posMap[lineId] = [];
                   var haveId = {};
-                  posMap[lineId].forEach(function(p) { if (p && p.trainId) haveId[p.trainId] = true; });
+                  posMap[lineId].forEach(function(p) { if (p && _positionIdentity(p)) haveId[_positionIdentity(p)] = true; });
                   var mAdded = 0;
                   mEst.forEach(function(p) {
-                    if (p && p.trainId && !haveId[p.trainId]) {
+                    if (p && _positionIdentity(p) && !haveId[_positionIdentity(p)]) {
                       p.positionSource = "station-timetable";
                       posMap[lineId].push(p);
-                      haveId[p.trainId] = true;
+                      haveId[_positionIdentity(p)] = true;
                       mAdded++;
                     }
                   });
