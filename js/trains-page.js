@@ -31,6 +31,22 @@
   // 图片徽章内含线名可读，色块徽章同理显示线名（截 4 字）
 
   
+  function _systemIdsForRoute(lineId) {
+    if (!lineId || !window.LineOperationSystems) return null;
+    for (var opKey in window.LineOperationSystems) {
+      var systems = window.LineOperationSystems[opKey];
+      if (!Array.isArray(systems)) continue;
+      for (var si = 0; si < systems.length; si++) {
+        var ids = systems[si] && systems[si].lineIds;
+        // System-card routes are keyed by their first member (data-line=firstId).
+        // Restore that exact LOS context for refresh/direct deep links without
+        // turning secondary members or branch deep links into the parent system.
+        if (Array.isArray(ids) && ids.length > 1 && ids[0] === lineId) return ids.slice();
+      }
+    }
+    return null;
+  }
+
   function showLineView(lineId, systemLineIds) {
     if (Array.isArray(systemLineIds) && systemLineIds.length > 1) currentSystemLineIds = systemLineIds.slice();
     else if (systemLineIds === null) currentSystemLineIds = null;
@@ -183,7 +199,7 @@
         if (!h) {
           hideLineView();
         } else if (h !== currentLine) {
-          try { showLineView(h); } catch(e) {}
+          try { showLineView(h, _systemIdsForRoute(h)); } catch(e) {}
         }
       });
       loadCachedPositions(function() {
@@ -213,7 +229,7 @@
           var lid = hash.substring(1);
           var lines = getLinesData();
           if (lines[lid]) {
-            showLineView(lid);
+            showLineView(lid, _systemIdsForRoute(lid));
             return;
           }
           setTimeout(tryHash, 400);
@@ -229,7 +245,7 @@
           if (_h3 && _h3.length > 1) {
             var _lid3 = _h3.substring(1);
             if (lines[_lid3] && (!currentLine || detailEl.classList.contains("hidden"))) {
-              try { showLineView(_lid3); } catch(e) {}
+              try { showLineView(_lid3, _systemIdsForRoute(_lid3)); } catch(e) {}
             }
           }
           // Build hash of positions to detect changes (check both realtimePositions and cachedPositions)
@@ -297,7 +313,7 @@
               var _lid = _h.substring(1);
               var _lns = getLinesData();
               if (_lns[_lid] && (!currentLine || detailEl.classList.contains("hidden"))) {
-                try { showLineView(_lid); } catch(e) {}
+                try { showLineView(_lid, _systemIdsForRoute(_lid)); } catch(e) {}
               }
             }
           } else if (posHash !== _lastPositionsHash || detailStateHash !== _lastDetailStateHash) {
@@ -312,7 +328,7 @@
               var _lid2 = _h2.substring(1);
               var _lns2 = getLinesData();
               if (_lns2[_lid2] && (!currentLine || detailEl.classList.contains("hidden"))) {
-                try { showLineView(_lid2); } catch(e) {}
+                try { showLineView(_lid2, _systemIdsForRoute(_lid2)); } catch(e) {}
               }
             }
             // (through-service info now lives inside the train map interchange icons)
