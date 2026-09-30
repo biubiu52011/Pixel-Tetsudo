@@ -176,7 +176,10 @@ function _fusionExtensionLines(lineId) {
     var first = own.stations[0], last = own.stations[own.stations.length - 1];
     var out = [];
     var sysLineIds = null;
-    if (window.LineOperationSystems) {
+    var activeSystemLineIds = Array.isArray(window.TrainsActiveSystemLineIds) ? window.TrainsActiveSystemLineIds : null;
+    if (activeSystemLineIds && activeSystemLineIds.indexOf(lineId) >= 0) {
+      sysLineIds = activeSystemLineIds;
+    } else if (window.LineOperationSystems) {
       var ops = window.LineOperationSystems;
       for (var ok in ops) {
         var list = ops[ok];
@@ -201,9 +204,9 @@ function _fusionExtensionLines(lineId) {
           var l2 = src[lid2];
           if (!l2 || !l2.stations || l2.stations.length < 2) continue;
           if (l2.stations[0] === last) {
-            out.push({ lid: lid2, joinAtEnd: true, baseIdx: own.stations.length - 1 });
+            out.push({ lid: lid2, joinAtEnd: true, baseIdx: own.stations.length - 1, systemMember: !!activeSystemLineIds });
           } else if (l2.stations[l2.stations.length - 1] === first) {
-            out.push({ lid: lid2, joinAtEnd: false, baseIdx: 0 });
+            out.push({ lid: lid2, joinAtEnd: false, baseIdx: 0, systemMember: !!activeSystemLineIds });
           }
         }
       }

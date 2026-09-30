@@ -14,6 +14,7 @@
   var _selectedOperator = null;
   var _lastPositionsHash = '';
   var _lastDetailStateHash = '';
+  var currentSystemLineIds = null;
   var t = window.t || function(k) { return k; };
   var escapeHtml = window.escapeHtml || function(s) {
     if (!s) return "";
@@ -30,7 +31,10 @@
   // 图片徽章内含线名可读，色块徽章同理显示线名（截 4 字）
 
   
-  function showLineView(lineId) {
+  function showLineView(lineId, systemLineIds) {
+    if (Array.isArray(systemLineIds) && systemLineIds.length > 1) currentSystemLineIds = systemLineIds.slice();
+    else if (systemLineIds === null) currentSystemLineIds = null;
+    window.TrainsActiveSystemLineIds = currentSystemLineIds ? currentSystemLineIds.slice() : null;
     try {
       var lines = getLinesData();
       var fusedLine = lines[lineId];
@@ -81,6 +85,8 @@
   function hideLineView() {
     try {
       currentLine = null;
+      currentSystemLineIds = null;
+      window.TrainsActiveSystemLineIds = null;
       if (listEl) listEl.classList.remove("hidden");
       if (filterBarEl) filterBarEl.classList.remove("hidden");
       if (detailEl) detailEl.classList.add("hidden");
@@ -152,7 +158,10 @@
           return;
         }
         var card = e.target.closest(".rs-line-card");
-        if (card) showLineView(card.dataset.line);
+        if (card) {
+          var _systemIds = card.dataset.lines ? card.dataset.lines.split(",").filter(Boolean) : null;
+          showLineView(card.dataset.line, _systemIds);
+        }
       });
       if (backBtn) {
         backBtn.addEventListener("click", function() {

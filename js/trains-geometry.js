@@ -632,9 +632,12 @@
             var yB = exl.joinAtEnd ? (extStartY + (exk2 + 2) * sp) : (extStartY - (exk2 + 2) * sp);
             routeElements.push({ type: 'line', attrs: { x1: mainCx + extOffsetX, y1: yA, x2: mainCx + extOffsetX, y2: yB, stroke: exColor, 'stroke-width': 5, 'stroke-linecap': 'round', opacity: 0.6 } });
           }
-          // 延伸段标题标签
-          var _exName = (window.RailwayDB && window.RailwayDB.resolveLineName) ? window.RailwayDB.resolveLineName(exl.lid, window.currentLang) || exl.lid : exl.lid;
-          routeElements.push({ type: 'text', attrs: { x: mainCx + extOffsetX, y: exl.joinAtEnd ? (extStartY + (extStations.length + 1) * sp) : (extStartY - (extStations.length + 1) * sp), 'text-anchor': 'middle', 'font-size': '12', fill: exColor, 'font-weight': '600' }, text: _exName });
+          // LOS system members are peer trunk segments, not subordinate extensions.
+          // Keep labels only for genuine external/trunk extensions.
+          if (!exl.systemMember) {
+            var _exName = (window.RailwayDB && window.RailwayDB.resolveLineName) ? window.RailwayDB.resolveLineName(exl.lid, window.currentLang) || exl.lid : exl.lid;
+            routeElements.push({ type: 'text', attrs: { x: mainCx + extOffsetX, y: exl.joinAtEnd ? (extStartY + (extStations.length + 1) * sp) : (extStartY - (extStations.length + 1) * sp), 'text-anchor': 'middle', 'font-size': '12', fill: exColor, 'font-weight': '600' }, text: _exName });
+          }
           fusionMap[exl.lid] = { baseIdx: extBaseIdx, joinAtEnd: exl.joinAtEnd, stationCount: extStations.length };
         }
         // svg 尺寸扩展：同列延伸只扩展高度（站名沿用主线站名区宽度）
