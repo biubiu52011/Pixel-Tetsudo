@@ -1,8 +1,7 @@
 name: Deploy to GitHub Pages
 
 on:
-  push:
-    branches: [main, master]
+  # Legacy manual deploy only. Push deployment is owned by ci-cd.yml.
   workflow_dispatch:
 
 permissions:
