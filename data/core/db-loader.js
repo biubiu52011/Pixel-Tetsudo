@@ -855,6 +855,13 @@ function applyData(data, i18n) {
       resolveLineName: function(id, lang) {
         if (!id) return '';
         lang = (lang || window.currentLang || 'ja').toLowerCase();
+
+        // Explicit line translations are display-name authority. Never derive a
+        // line label from its operator identity (e.g. Rinkai -> TWR).
+        var dict = window.translations && (window.translations[lang] || window.translations.ja);
+        var translated = dict && dict['line.' + id];
+        if (translated && translated !== ('line.' + id)) return translated;
+
         var line = data.lines ? data.lines[id] : null;
         if (!line) return id;
         var nameKey = 'name' + lang.charAt(0).toUpperCase() + lang.slice(1);
