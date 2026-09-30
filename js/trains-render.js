@@ -1022,7 +1022,10 @@
       var px = loc.x;
       var py = loc.y;
       
-      var trainUid = (p.trainId || ("train_" + pi)) + "_" + (p.stationIndex || 0);
+      // Stable physical-service identity: confirmed running chain first.
+      // Do not include stationIndex; doing so recreates the DOM node at every
+      // station/boundary and breaks continuity even when the chain is known.
+      var trainUid = p.runningChainId || p.trainId || ("train_" + pi);
       updatedIds[trainUid] = true;
       
       var existingIcon = trainLayer.querySelector('[data-train-id="' + String(trainUid).replace(/"/g, '') + '"]');
@@ -1092,7 +1095,7 @@
         // ②S3 查表结果（如 UenoTokyo→E231系1000番台）不进图标路径，导致 fallback 山手线 E235。
         // v4.3.939: 车号级缓存 + 直通车按车籍 operator——同一趟车(同 trainId)进不同线路视图用同一张图
         if (!window.__trainIconCache) window.__trainIconCache = {};
-        var _icKey = String(p.trainId || trainUid);
+        var _icKey = String(p.runningChainId || p.trainId || trainUid);
         var iconSrc = window.__trainIconCache[_icKey];
         if (!iconSrc && window.TrainVehicle && typeof window.TrainVehicle.resolve === 'function') {
           var _vrCtx = {
