@@ -711,13 +711,18 @@
           }
         }
         if (positions.length > 0) {
-          // v4.3.961: 合并到现有实时数据（去重：同 trainId 只保留一条）
+          // Merge by physical-service identity: confirmed running chain first,
+          // raw trainId only when no chain evidence exists.
           var existing = (existingPositions && existingPositions[lineId]) || [];
           var _existingIds = {};
-          existing.forEach(function(p) { _existingIds[p.trainId] = true; });
+          existing.forEach(function(p) {
+            var id = p && (p.runningChainId || p.trainId);
+            if (id) _existingIds[id] = true;
+          });
           var _merged = existing.slice();
           positions.forEach(function(p) {
-            if (!_existingIds[p.trainId]) _merged.push(p);
+            var id = p && (p.runningChainId || p.trainId);
+            if (id && !_existingIds[id]) { _merged.push(p); _existingIds[id] = true; }
           });
           estimated[lineId] = _merged;
         }
