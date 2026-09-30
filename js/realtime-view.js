@@ -55,7 +55,7 @@
     var line = linesObj[lineId];
     var delayInfo = getDelayInfo(line) || {};
     // Use window.DataState.getStatus for consistent NO_DATA handling
-    var status = delayInfo && delayInfo.status ? delayInfo.status : (delayInfo ? "normal" : "no_data");
+    var status = delayInfo && delayInfo.status ? delayInfo.status : "loading";
     var interval = delayInfo.interval || "";
     var cause = delayInfo.cause || "";
     var s = window.DataState && window.DataState.STATUS_META && window.DataState.STATUS_META[status] ? window.DataState.STATUS_META[status] : STATUS_META[status] || STATUS_META.no_data;
