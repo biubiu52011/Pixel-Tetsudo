@@ -679,7 +679,17 @@
 
         var positions = estimateLinePositions(lineId, line, lineTimetable, delayInfo, opId);
         if (positions.length > 0 && window.RunningChainResolver && typeof window.RunningChainResolver.resolveTimetableChain === "function") {
+          // Seed with direct neighbours, then add their direct neighbours as
+          // candidate segments only. The resolver still validates every edge
+          // against a canonical direct boundary before graph composition.
           var chainCandidates = _directChainCandidates(lineId);
+          var candidateLines = {};
+          chainCandidates.forEach(function(x){ candidateLines[x.lineId] = true; });
+          Object.keys(candidateLines).forEach(function(mid) {
+            _directChainCandidates(mid).forEach(function(x) {
+              if (x.lineId !== lineId) chainCandidates.push(x);
+            });
+          });
           if (chainCandidates.length > 0) {
             var byIdentity = {};
             lineTimetable.forEach(function(tt) {
