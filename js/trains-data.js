@@ -312,6 +312,10 @@ function _getTransferMap(lineId) {
     var t = declared[di];
     if (!t || !t.station || !t.lineId) continue;
     if (t.lineId === lineId) continue;
+    // Peer members of the active LOS are one passenger-facing operation system.
+    // Do not render their internal boundary as a transfer/through chip even when
+    // canonical transferStations contains the physical handover.
+    if (_activeSystemIds.indexOf(lineId) >= 0 && _activeSystemIds.indexOf(t.lineId) >= 0) continue;
     // v4.3.943: 共线区间不画换乘标记 + v4.3.960: 自动判断共线线
     if (window.SharedTrackPairs && window.SharedTrackPairs.isSharedStation) {
       if (window.SharedTrackPairs.isSharedStation(lineId, t.station)) continue;

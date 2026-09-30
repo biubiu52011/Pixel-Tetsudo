@@ -52,7 +52,11 @@
           var _found = false;
           for (var _si2 = 0; _si2 < _opSys2.length; _si2++) {
             var _sys2 = _opSys2[_si2];
-            if (_sys2.lineIds && _sys2.lineIds.indexOf(lineId) >= 0) {
+            var _matchesActiveSystem = currentSystemLineIds && currentSystemLineIds.length > 1
+              ? (_sys2.lineIds && _sys2.lineIds.length === currentSystemLineIds.length &&
+                 currentSystemLineIds.every(function(_id) { return _sys2.lineIds.indexOf(_id) >= 0; }))
+              : (_sys2.lineIds && _sys2.lineIds.indexOf(lineId) >= 0);
+            if (_matchesActiveSystem) {
               var _lang2 = window.currentLang || "ja";
               if (_lang2 === "zh" && _sys2.nameZh) _title = _sys2.nameZh;
               else if (_lang2 === "en" && _sys2.nameEn) _title = _sys2.nameEn;
