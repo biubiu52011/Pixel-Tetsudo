@@ -319,8 +319,8 @@
           var _opFailed = _opState === null;
           var _opLoading = _opState === undefined;
           fallbackDelay = _opFailed ? { status: "no_odpt", maxDelay: 0, interval: null, cause: null }
-            : (_opLoading ? { status: "loading", maxDelay: 0, interval: null, cause: null }
-              : { status: "normal", maxDelay: 0, interval: null, cause: null });
+            : (_opLoading ? { status: "loading", maxDelay: null, interval: null, cause: null }
+              : { status: "loading", maxDelay: null, interval: null, cause: null, source: "awaiting_line_record" });
         }
       } catch(_e) {}
       // v4.3.963: 网页源运行情报（WebRunInfo，千叶/湘南官网渠道）——ODPT 无数据线路经此注入；
