@@ -111,8 +111,13 @@
       if (firstId === null) firstId = lid;
       var line = linesObj[lid] || {};
       var dInfo = getDelayInfo(line) || {};
-      var status = dInfo.status ? dInfo.status : (dInfo ? "normal" : "no_data");
-      if (!worst || statusRank(status) > statusRank(worst)) worst = status;
+      var status = dInfo.status ? dInfo.status : "loading";
+      // A system card may only claim normal when every member is confirmed.
+      // Keep loading/no-data visible unless a real disruption has higher priority.
+      if (!worst) worst = status;
+      else if ((status === "loading" || status === "no_data" || status === "no_odpt") && worst === "normal") worst = status;
+      else if (!(worst === "loading" || worst === "no_data" || worst === "no_odpt") && statusRank(status) > statusRank(worst)) worst = status;
+      else if ((worst === "loading" || worst === "no_data" || worst === "no_odpt") && status !== "normal" && statusRank(status) > 3) worst = status;
       if (mode === "trains") {
         var stations = line.stations || [];
         // Loop lines (Yamanote / Oedo) have no meaningful termini: their drawn
