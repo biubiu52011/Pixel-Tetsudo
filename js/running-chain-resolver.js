@@ -106,31 +106,42 @@
     var id=String(tt["@id"]||tt["owl:sameAs"]||((tt["odpt:railway"]||lineId||"")+"|"+trainNumber));
     return {lineId:lineId,id:id,trainNumber:trainNumber,firstStation:firstStation,lastStation:lastStation,firstTime:firstTime,lastTime:lastTime};
   }
+  function _confirmedEdge(a,b,joins){
+    if(!a||!b||!joins||!joins.length)return null;
+    var forward=joins.indexOf(a.lastStation)>=0&&joins.indexOf(b.firstStation)>=0;
+    var reverse=joins.indexOf(b.lastStation)>=0&&joins.indexOf(a.firstStation)>=0;
+    if(!forward&&!reverse)return null;
+    var dt=forward&&a.lastTime!==null&&b.firstTime!==null?b.firstTime-a.lastTime:
+           reverse&&b.lastTime!==null&&a.firstTime!==null?a.firstTime-b.lastTime:null;
+    if(dt===null||dt<0||dt>20)return null;
+    var sameId=a.id===b.id, sameNo=a.trainNumber&&a.trainNumber===b.trainNumber;
+    if(!sameId&&!sameNo)return null;
+    return {dt:dt,sameId:sameId,score:(sameId?4:2)+(dt<=5?3:dt<=10?2:1)};
+  }
   function resolveTimetableChain(tt,lineId,candidates){
     if(!_initialized)buildIndexes();
     var base=_segment(tt,lineId); if(!base)return {runningChainId:null,evidence:"NO_SEGMENT"};
-    var direct=_directThrough[lineId]||[]; if(!direct.length)return {runningChainId:base.id,evidence:"STANDALONE"};
-    var best=null;
+    var segments=[base], seen={}; seen[base.lineId+"|"+base.id]=true;
     (candidates||[]).forEach(function(x){
-      if(!x||direct.indexOf(x.lineId)<0)return;
-      var other=_segment(x.timetable,x.lineId); if(!other)return;
-      var rels=_lineRelations[lineId]||[], joins=[];
-      for(var i=0;i<rels.length;i++){var r=rels[i],o=r.lineA===lineId?r.lineB:r.lineA;if(o===x.lineId&&r.relation==="THROUGH_SERVICE"){joins=r.handoverStations||[];break;}}
-      if(!joins.length)return;
-      var forward=joins.indexOf(base.lastStation)>=0&&joins.indexOf(other.firstStation)>=0;
-      var reverse=joins.indexOf(other.lastStation)>=0&&joins.indexOf(base.firstStation)>=0;
-      if(!forward&&!reverse)return;
-      var dt=forward&&base.lastTime!==null&&other.firstTime!==null?other.firstTime-base.lastTime:
-             reverse&&other.lastTime!==null&&base.firstTime!==null?base.firstTime-other.lastTime:null;
-      if(dt===null||dt<0||dt>20)return;
-      var sameId=base.id===other.id, sameNo=base.trainNumber&&base.trainNumber===other.trainNumber;
-      if(!sameId&&!sameNo)return;
-      var score=(sameId?4:2)+(dt<=5?3:dt<=10?2:1);
-      if(!best||score>best.score)best={score:score,other:other,dt:dt,sameId:sameId};
+      if(!x||!x.lineId||!x.timetable)return;
+      var s=_segment(x.timetable,x.lineId), key=s&&(s.lineId+"|"+s.id);
+      if(s&&!seen[key]){seen[key]=true;segments.push(s);}
     });
-    if(!best)return {runningChainId:base.id,evidence:"NO_CONFIRMED_BOUNDARY"};
-    var ids=[base.id,best.other.id].sort();
-    return {runningChainId:"rc:"+ids.join("~"),evidence:best.sameId?"TIMETABLE_ID+BOUNDARY+TIME":"TRAIN_NUMBER+BOUNDARY+TIME",timeGapMin:best.dt,partnerLineId:best.other.lineId};
+    var adj={}; segments.forEach(function(s){adj[s.lineId+"|"+s.id]=[];});
+    for(var i=0;i<segments.length;i++)for(var j=i+1;j<segments.length;j++){
+      var a=segments[i],b=segments[j];
+      if((_directThrough[a.lineId]||[]).indexOf(b.lineId)<0)continue;
+      var rels=_lineRelations[a.lineId]||[],joins=[];
+      for(var k=0;k<rels.length;k++){var r=rels[k],o=r.lineA===a.lineId?r.lineB:r.lineA;if(o===b.lineId&&r.relation==="THROUGH_SERVICE"){joins=r.handoverStations||[];break;}}
+      var ev=_confirmedEdge(a,b,joins); if(!ev)continue;
+      var ak=a.lineId+"|"+a.id,bk=b.lineId+"|"+b.id;
+      adj[ak].push({key:bk,ev:ev});adj[bk].push({key:ak,ev:ev});
+    }
+    var root=base.lineId+"|"+base.id,q=[root],vis={};vis[root]=true;var ids=[],strong=false,maxGap=0;
+    while(q.length){var cur=q.shift(),parts=cur.split("|");ids.push(parts.slice(1).join("|"));(adj[cur]||[]).forEach(function(e){if(e.ev.sameId)strong=true;if(e.ev.dt>maxGap)maxGap=e.ev.dt;if(!vis[e.key]){vis[e.key]=true;q.push(e.key);}});}
+    ids=ids.filter(function(v,i,a){return a.indexOf(v)===i;}).sort();
+    if(ids.length===1)return {runningChainId:base.id,evidence:"NO_CONFIRMED_BOUNDARY"};
+    return {runningChainId:"rc:"+ids.join("~"),evidence:strong?"CONFIRMED_SEGMENT_GRAPH+TIMETABLE_ID":"CONFIRMED_SEGMENT_GRAPH+TRAIN_NUMBER",timeGapMin:maxGap,segmentCount:ids.length};
   }
 
   function init(){if(_initialized)return;buildIndexes();}
