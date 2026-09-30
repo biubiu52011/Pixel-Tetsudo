@@ -122,7 +122,7 @@
 
   function renderList(el) {
     if (!el || !window.DataState) return;
-    var lines = window.DataLayer ? window.DataLayer.getAllLines() : (window.UNIFIED_LINES || {});
+    var lines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : {};
     var ul = Array.isArray(lines) ? (function(){ var d={}; lines.forEach(function(l){ d[l.id||l.line_id]=l; }); return d; })() : lines;
     if (!ul || Object.keys(ul).length === 0) {
       // Sync loading animation with the realtime page (rs-loading spinner)
@@ -312,7 +312,7 @@
 
   function renderFilterBar(container) {
     if (!container) return;
-    var lines = window.DataLayer ? window.DataLayer.getAllLines() : (window.UNIFIED_LINES || {});
+    var lines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : {};
     var ops = {};
     if (Array.isArray(lines)) {
       lines.forEach(function(l) { if (l.operator) ops[l.operator] = true; });
