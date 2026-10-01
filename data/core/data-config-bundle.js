@@ -835,31 +835,22 @@ window.getTransferHint = function(stationId, lang) {
    * 但不得合成列车位置。
    */
   var AUTHORITATIVE_REALTIME_LINES = {
-    // Tokyo Metro — official train realtime dataset; project railway IDs are direct/mapped.
-    "Ginza": true,
-    "Marunouchi": true,
-    "MarunouchiBranch": true,
-    "Hibiya": true,
-    "Tozai": true,
-    "Chiyoda": true,
-    "ChiyodaBranch": true,
-    "Yurakucho": true,
-    "Hanzomon": true,
-    "Namboku": true,
-    "Fukutoshin": true,
+    /*
+     * Authoritative means ALL of:
+     *   1) official JSON train-location coverage is complete for this project line;
+     *   2) the project has an explicit/canonical railway mapping;
+     *   3) the current runtime actually consumes that JSON feed through odpt:Train.
+     * GTFS-RT-only availability is not sufficient until a GTFS-RT consumer exists.
+     */
 
-    // Toei — official VehiclePosition realtime covers the four subway lines
-    // and Tokyo Sakura Tram. Nippori-Toneri is intentionally excluded here:
-    // the official realtime dataset's VehiclePosition resource description
-    // names subway + Sakura Tram, while Nippori-Toneri coverage differs by feed.
+    // Toei JSON Train Location. Mita is excluded because Meguro-Shirokane-takanawa
+    // is outside the official location feed.
     "Asakusa": true,
-    // Mita is intentionally excluded: official train-location data omits
-    // the Meguro-Shirokane-takanawa section, so it is not 100% authoritative.
     "Shinjuku": true,
     "Oedo": true,
     "Arakawa": true,
 
-    // Keio — official train-location dataset, with explicit project railway mapping.
+    // Keio JSON Train Location.
     "KeioMain": true,
     "KeioSagami": true,
     "KeioZoo": true,
@@ -868,14 +859,8 @@ window.getTransferHint = function(stationId, lang) {
     "KeioKeibajo": true,
     "KeioTakao": true,
 
-    // Yokohama Municipal Subway is intentionally not authoritative here yet.
-    // Official realtime exists as GTFS-RT, but the current runtime does not
-    // consume GTFS-RT and ODPT_ENDPOINTS.YokohamaMunicipal.train is null.
-
-    // Tobu — add only complete project lines that stay inside the official
-    // location-data coverage. Isesaki/Nikko and northern branch lines are not
-    // authoritative because the feed excludes north of Tatebayashi/Shin-Tochigi.
-    // Kameido is excluded because three intermediate sections are indistinguishable.
+    // Tobu JSON Train Location: only complete project lines inside official
+    // coverage. Kameido is excluded because several sections are indistinguishable.
     "TobuSkytree": true,
     "TobuNoda": true,
     "Noda": true,
@@ -883,17 +868,18 @@ window.getTransferHint = function(stationId, lang) {
     "Ogose": true,
     "Daishi_Tobu": true,
 
-    // Keikyu — official location data excludes only Shinagawa-Sengakuji on the
-    // Main Line. Independent branch lines remain fully inside covered territory.
+    // Keikyu JSON Train Location: Main is excluded because Shinagawa-Sengakuji
+    // is outside the feed; these independent branches remain fully covered.
     "KeikyuAirport": true,
     "KeikyuKurihama": true,
     "KeikyuZushi": true,
     "Daishi_Keikyu": true
 
-    // Keikyu Main stays non-authoritative because Shinagawa-Sengakuji is excluded.
-    // Tobu Isesaki/Nikko northern sections and Kameido also retain fallback for
-    // the official coverage/position-resolution limitations documented above.
-  };
+    // Tokyo Metro / Yokohama Municipal / MIR / TamaMonorail are intentionally
+    // not authoritative here until their currently published realtime format is
+    // consumed by this runtime rather than inferred from timetable positions.
+    // JR-East remains line/section-limited and is not blanket-authoritative.
+  }
 
   // ========== 直通运行 ==========
 
