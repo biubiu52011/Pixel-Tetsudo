@@ -853,10 +853,20 @@ window.getTransferHint = function(stationId, lang) {
     // the official realtime dataset's VehiclePosition resource description
     // names subway + Sakura Tram, while Nippori-Toneri coverage differs by feed.
     "Asakusa": true,
-    "Mita": true,
+    // Mita is intentionally excluded: official train-location data omits
+    // the Meguro-Shirokane-takanawa section, so it is not 100% authoritative.
     "Shinjuku": true,
     "Oedo": true,
-    "Arakawa": true
+    "Arakawa": true,
+
+    // Keio — official train-location dataset, with explicit project railway mapping.
+    "KeioMain": true,
+    "KeioSagami": true,
+    "KeioZoo": true,
+    "KeioShin": true,
+    "KeioInokashira": true,
+    "KeioKeibajo": true,
+    "KeioTakao": true
   };
 
   // ========== 直通运行 ==========
