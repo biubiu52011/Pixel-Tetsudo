@@ -1,0 +1,12 @@
+const fs=require("fs"),path=require("path"),assert=require("assert"),vm=require("vm");
+const root=path.join(__dirname,"..");
+const pages=["pages/home.html","pages/realtime.html","pages/trains.html","pages/history.html"];
+const required={"pages/home.html":["searchContainer","searchFrom","searchTo","searchBtn"],"pages/realtime.html":["realtimeFilterBar","realtimeStatusContainer","lineDetailModal"],"pages/trains.html":["trainsFilterBar","trainsLineListContent","trainsDetailView","trainsMapContainer"],"pages/history.html":[]};
+for(const page of pages){const html=fs.readFileSync(path.join(root,page),"utf8");for(const id of required[page])assert(html.includes('id="'+id+'"'),page+" missing #"+id);const scripts=[...html.matchAll(/<script\s+src="\.\.\/([^"?]+)(?:\?[^"]*)?"/g)].map(m=>m[1]);assert(scripts.length>0,page+" has no scripts");for(const src of scripts)assert(fs.existsSync(path.join(root,src)),page+" missing script "+src);}
+for(const js of ["js/data-state.js","js/data-fusion.js","js/runinfo-api.js","js/realtime-view.js","js/trains-page.js"]){new vm.Script(fs.readFileSync(path.join(root,js),"utf8"),{filename:js});}
+const home=fs.readFileSync(path.join(root,"pages/home.html"),"utf8");assert(home.indexOf("runinfo-evaluator.js")<home.indexOf("data-fusion.js"),"home evaluator must load before fusion");
+const fusion=fs.readFileSync(path.join(root,"js/data-fusion.js"),"utf8");assert(/lineIdentity:\s*_lineIdentity/.test(fusion),"fusion identity missing");assert(/if \(!operator \|\| !railwayCode\) return null/.test(fusion),"incomplete identity must remain unresolved");
+const state=fs.readFileSync(path.join(root,"js/data-state.js"),"utf8");assert(/line\.lineIdentity && line\.lineIdentity\.key/.test(state),"state must prefer fusion identity");assert(/data-line-identities=/.test(state),"system member identities missing");assert(/rs-branch-chip[^\n]+data-line-identity/.test(state),"branch identity missing");
+const realtime=fs.readFileSync(path.join(root,"js/realtime-view.js"),"utf8");assert(/expectedIdentity/.test(realtime)&&/card\.dataset\.lineIdentity/.test(realtime),"realtime identity guard missing");
+const trains=fs.readFileSync(path.join(root,"js/trains-page.js"),"utf8");assert(/currentLineIdentity/.test(trains)&&/expectedMemberIdentities/.test(trains)&&/chip\.dataset\.lineIdentity/.test(trains),"trains identity guards missing");
+console.log("frontend-smoke: PASS");
