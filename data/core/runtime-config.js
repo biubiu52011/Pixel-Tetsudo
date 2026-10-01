@@ -74,6 +74,29 @@
     "Oedo": true
   };
 
+  /**
+   * 实时位置覆盖策略（通用能力模型，不在融合算法中硬编码线路）。
+   *
+   * mode:
+   *   FULL      - 已证明完整覆盖；禁止 timetable 生成/补充位置。
+   *   HYBRID    - 默认。实时优先，缺失列车/区间允许 timetable 补位。
+   *   SEGMENTED - 只有声明区间的实时位置具权威性；区间外允许 timetable。
+   *   COARSE    - 实时源只能给出粗粒度位置；允许 timetable 提供更细位置，但不得覆盖
+   *               同一列车已有的实时事实。
+   *   UNKNOWN   - 覆盖完整性未知；行为等同 HYBRID，但明确禁止升级为 FULL。
+   *
+   * 规则：线路事实只写配置；DataFusion/Estimator 不得按具体 lineId 写专属分支。
+   */
+  var REALTIME_POSITION_POLICY = {
+    defaultMode: "HYBRID",
+    staleAfterMs: 90000,
+    lines: {
+      "Asakusa": { mode: "FULL" },
+      "Shinjuku": { mode: "FULL" },
+      "Oedo": { mode: "FULL" }
+    }
+  };
+
   // ========== ODPT 站 ID 别名映射（补丁式修复，随发现持续追加）==========
 
   /**
@@ -225,6 +248,7 @@
     THROUGH_RAILWAY_FALLBACK: THROUGH_RAILWAY_FALLBACK,
     PRIORITY_OPS: PRIORITY_OPS,
     AUTHORITATIVE_REALTIME_LINES: AUTHORITATIVE_REALTIME_LINES,
+    REALTIME_POSITION_POLICY: REALTIME_POSITION_POLICY,
     // ODPT 站 ID 别名
     STATION_ALIAS: STATION_ALIAS,
     STATION_ALIAS_BY_RAILWAY: STATION_ALIAS_BY_RAILWAY,
