@@ -398,7 +398,7 @@
         "YokohamaBlue": "YokohamaMunicipal",
         "YokohamaGreen": "YokohamaMunicipal",
         "Yokosuka": "JR-East",
-        "Yonezawa": "JR-East",
+        "Yonesaka": "JR-East",
         "Yurakucho": "TokyoMetro",
         "Yurakucho_Seibu": "Seibu",
         "Yurikamome": "Yurikamome"
@@ -476,7 +476,7 @@
     "Yamagata": "OuYamagata",
     "Hanawa": "Hanawa",
     "Yahiko": "Yahiko",
-    "Yonezawa": "Yonesaka",
+    "Yonesaka": "Yonesaka",
     "Koumi": "Koumi",
     // ===== v4.3.470: ODPT API 实测修正（2026-09-10，22 operator 全量 railway 对比）=====
     // 本地 line ID 与 ODPT odpt.Railway code 命名不同，原默认透传全部 404/空，实时数据接不上。
