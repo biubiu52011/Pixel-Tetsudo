@@ -93,8 +93,9 @@
         },
         "Keikyu": {
             base: "https://api-challenge.odpt.org/api/v4/",
-            // ODPT 2026 catalog currently exposes Keikyu status/static datasets but no
-            // documented train-location dataset. Do not issue an unsupported odpt:Train request.
+            // Official JSON Train Location exists, but this runtime currently has this endpoint
+            // disabled. Keep capability off until the endpoint is revalidated/wired end-to-end;
+            // authoritative-line policy must never claim a feed the runtime does not consume.
             train: null,
             trainTimetable: null,  // 京急不提供列车时刻表API
             trainInformation: "odpt:TrainInformation?odpt:operator=odpt.Operator:Keikyu"
@@ -127,10 +128,10 @@
         // ===== Center API 运营商 =====
         "TokyoMetro": {
             base: "https://api.odpt.org/api/v4/",
-            // ODPT v4 odpt:Train provides realtime train positions and can be filtered by railway.
-            // Keep timetable enabled for metadata/running-chain evidence until each railway is
-            // independently verified as authoritative full coverage.
-            train: "odpt:Train?odpt:operator=odpt.Operator:TokyoMetro",
+            // Current official realtime publication is not a documented JSON Train Location
+            // resource consumed by this runtime. Keep timetable/information, but do not issue
+            // speculative odpt:Train requests until a supported realtime consumer is wired.
+            train: null,
             trainTimetable: "odpt:TrainTimetable?odpt:operator=odpt.Operator:TokyoMetro",
             trainInformation: "odpt:TrainInformation?odpt:operator=odpt.Operator:TokyoMetro"
         },
@@ -177,7 +178,9 @@
         },
         "Keisei": {
             base: "https://api-challenge.odpt.org/api/v4/",
-            train: "odpt:Train?odpt:operator=odpt.Operator:Keisei",
+            // No currently documented JSON Train Location dataset in the official catalog.
+            // Do not infer realtime capability merely from operator availability.
+            train: null,
             trainTimetable: "odpt:TrainTimetable?odpt:operator=odpt.Operator:Keisei",
             trainInformation: "odpt:TrainInformation?odpt:operator=odpt.Operator:Keisei"
         },
