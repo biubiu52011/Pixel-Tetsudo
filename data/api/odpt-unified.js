@@ -657,6 +657,7 @@
         getApiKey: getApiKey,
         getApiLinks: getApiLinks,
         keysConfigured: keysConfigured,
+        validateAuthoritativeRealtimeConfig: validateAuthoritativeRealtimeConfig,
 
         // 获取运行情报/延误信息
         getTrainInformation: function(operator) {
@@ -1265,7 +1266,45 @@
     // ========== 加载实时数据（延误信息 + 实时位置）==========
     // 每30秒刷新一次
     // v4.3.590: delayOnly=true 时只拉运行情报/延误（惰性模式首页搜索徽章用），跳过列车位置与时刻表
+    /**
+     * Guard authoritative realtime policy against endpoint/config drift.
+     * Forward direction is strict: every authoritative line must resolve to an
+     * operator whose active runtime endpoint actually exposes odpt:Train.
+     * Reverse direction is intentionally not enforced because endpoint support
+     * does not imply complete line coverage.
+     *
+     * Invalid entries are disabled in-place (fail-open to timetable fallback)
+     * instead of leaving the line with no position source.
+     */
+    function validateAuthoritativeRealtimeConfig() {
+        var cfg = window.RuntimeConfig && window.RuntimeConfig.AUTHORITATIVE_REALTIME_LINES;
+        if (!cfg) return { ok: true, checked: 0, invalid: [] };
+
+        var invalid = [];
+        var checked = 0;
+        Object.keys(cfg).forEach(function(lineId) {
+            if (!cfg[lineId]) return;
+            checked++;
+            var operator = LINE_TO_OPERATOR[lineId] || null;
+            var ep = operator && ODPT_ENDPOINTS[operator];
+            if (!operator || !ep || !ep.train) {
+                invalid.push({
+                    lineId: lineId,
+                    operator: operator,
+                    reason: !operator ? "missing-operator" : (!ep ? "missing-endpoint" : "train-endpoint-disabled")
+                });
+                cfg[lineId] = false;
+            }
+        });
+
+        if (invalid.length) {
+            console.warn("[ODPT] authoritative realtime config downgraded:", invalid);
+        }
+        return { ok: invalid.length === 0, checked: checked, invalid: invalid };
+    }
+
     function loadRealtimeData(delayOnly) {
+        validateAuthoritativeRealtimeConfig();
         window.ODPT_DELAY_DATA = {};
         window.ODPT_TRAIN_POSITIONS = {};
         // 注意：不清空ODPT_TIMETABLES和ODPT_TRAINS，时刻表使用缓存
