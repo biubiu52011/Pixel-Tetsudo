@@ -85,6 +85,17 @@
    *               同一列车已有的实时事实。
    *   UNKNOWN   - 覆盖完整性未知；行为等同 HYBRID，但明确禁止升级为 FULL。
    *
+   * SEGMENTED fields:
+   *   coveredSegments:  [{ fromStation, toStation }]  实时权威覆盖区间；区间内禁止 timetable 造位置。
+   *   excludedSegments: [{ fromStation, toStation }]  已知实时缺口；缺口内允许 timetable 补位。
+   * 两者可并存：excludedSegments 优先。站 ID 无法解析时 fail-open，继续 timetable，避免误删列车。
+   *
+   * 合并不变量：
+   *   1) 同一列车 realtime position 永远优先，timetable 只能补 metadata。
+   *   2) HYBRID/UNKNOWN 默认允许补缺，不因“API 有返回”自动升级 FULL。
+   *   3) SEGMENTED 只在已声明权威区间抑制 timetable；区间外继续补。
+   *   4) COARSE 保留 realtime 为位置事实，timetable 可补缺失列车但不能覆盖同车实时位置。
+   *   5) running-chain 可跨覆盖边界传递 identity/service/destination 证据，不改变 positionSource。
    * 规则：线路事实只写配置；DataFusion/Estimator 不得按具体 lineId 写专属分支。
    */
   var REALTIME_POSITION_POLICY = {
