@@ -115,7 +115,7 @@
       "Takasaki": { mode: "SEGMENTED" },
 
       // Official source has insufficient positional granularity on part of this railway.
-      "Tobu_Kameido": { mode: "COARSE" },
+      "TobuKameido": { mode: "COARSE" },
 
       // Explicitly known not to be complete realtime-position sources.
       "TobuIsesaki": { mode: "HYBRID" },
