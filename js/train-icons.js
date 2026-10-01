@@ -142,8 +142,25 @@
     "TokyoMonorail": "../images/列车/東京モノレール/10000形.png", // 4.3.457：東京モノレール現役主力 10000形（1000形は引退）
     "NipporiToneri": "../images/列车/都営地下鉄/330形.png", // 4.3.457：日暮里・舎人ライナー = AGT新交通（330形），実車図に変更
     "MinatoMirai": "../images/列车/東急電鉄/5050系.png",
-    "ChibaUrbanMonorail": "../images/鉄道/千葉都市モノレール/Number_prefix_Chiba_monorail.png", // 千葉都市モノレール（悬垂式，0形・1000形）
-    "ShonanMonorail": "../images/鉄道/湘南モノレール/ShonanMonorail_logo_M.png", // 湘南モノレール（江の島線，5000系）
+    "ChibaUrbanMonorail": "../images/列车/千葉都市モノレール/0形.png", // 千葉都市モノレール（悬垂式，0形・1000形）
+    "ShonanMonorail": "../images/列车/湘南モノレール/5000系_5601編成_レッド.png", // 湘南モノレール（江の島線，5000系）
+    "MIR": "../images/列车/首都圏新都市鉄道/TX-3000系.png",
+    "TsukubaExpress": "../images/列车/首都圏新都市鉄道/TX-3000系.png",
+    "UtsunomiyaLightRail": "../images/列车/宇都宮ライトレール/HU300形_ライトライン.png",
+    "Enoden": "../images/列车/江ノ島電鉄/500形.png",
+    "Izukyu": "../images/列车/伊豆急行/8000系.png",
+    "Izuhakone": "../images/列车/伊豆箱根鉄道/3000系.png",
+    "HakoneTozan": "../images/列车/小田急箱根/3000・3100形.png",
+    "Isumi": "../images/列车/いすみ鉄道/いすみ300型.png",
+    "Hitachinaka": "../images/列车/ひたちなか海浜鉄道/キハ3710形_01.png",
+    "Watarase": "../images/列车/わたらせ渓谷鉄道/WKT-500形.png",
+    "Joshin": "../images/列车/上信電鉄/7000形.png",
+    "Yamaman": "../images/列车/山万/1000形_第1編成_こあら1号.png",
+    "Ryutetsu": "../images/列车/流鉄株式会社/5000形_5001編成_さくら.png",
+    "Moka": "../images/列车/真岡鐵道/モオカ14形_標準色_車両差分1.png",
+    "Chichibu": "../images/列车/秩父鉄道/7500系_7501編成.png",
+    "Choshi": "../images/列车/銚子電鉄/3000形_3001編成_澪つくしカラー.png",
+    "KashimaRinkai": "../images/列车/鹿島臨海鉄道/8000形.png",
     // ===== 新幹線JR各社デフォルト（車両アイコン）=====
     "JR-Central": "../images/列车/JR東海/N700系.png", // JR東海：東海道・山陽新幹線 N700系
     "JR-West": "../images/列车/JR西日本/500系.png", // JR西日本：山陽新幹線 500系
@@ -277,9 +294,9 @@
   "KeiseiChihara": "../images/列车/京成電鉄/80000形.png",
   "KeiseiKanamachi": "../images/列车/京成電鉄/80000形.png",
   "KeiseiOshiage": "../images/列车/京成電鉄/80000形.png",
-  "ChibaMonorail1": "../images/鉄道/千葉都市モノレール/Number_prefix_Chiba_monorail.png",
-  "ChibaMonorail2": "../images/鉄道/千葉都市モノレール/Number_prefix_Chiba_monorail.png",
-  "ShonanMonorail": "../images/鉄道/湘南モノレール/ShonanMonorail_logo_M.png",
+  "ChibaMonorail1": "../images/列车/千葉都市モノレール/0形.png",
+  "ChibaMonorail2": "../images/列车/千葉都市モノレール/0形.png",
+  "ShonanMonorail": "../images/列车/湘南モノレール/5000系_5601編成_レッド.png",
   "KeioMain": "../images/列车/京王電鉄/5000系.png",
   "Keio-Hachioji": "../images/列车/京王電鉄/5000系.png",
   "KeioSagami": "../images/列车/京王電鉄/9000系.png",
@@ -306,7 +323,7 @@
   "Miyo": "../images/列车/JR東日本/E129系.png",
   "SuigunBranch": "../images/列车/JR東日本/キハE130系0番台.png",
   "Nippori_Toneri": "../images/列车/都営地下鉄/330形.png",
-  "TokyuSetagaya": "../images/鉄道/東急電鉄/世田谷線.png",
+  "TokyuSetagaya": "../images/列车/東急電鉄/300系_301編成_玉電カラー.png",
   "UtsunomiyaJR": "../images/列车/JR東日本/E233系3000番台.png",
   "BanetsuEast": "../images/列车/JR東日本/キハ110系.png",
   "Iiyama": "../images/列车/JR東日本/キハ110系.png",
