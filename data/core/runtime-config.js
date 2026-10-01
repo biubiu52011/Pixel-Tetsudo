@@ -62,10 +62,15 @@
    * 仅登记已有仓库实测证据的线路；其他存在 train endpoint 的运营商不自动推定为 full。
    */
   var AUTHORITATIVE_REALTIME_LINES = {
+    // 4.3.468 line-level runtime verification:
+    // Toei odpt:Train -> Asakusa/Shinjuku/Mita/Oedo, all observed positions estimated:false.
+    // Arakawa is intentionally excluded: no authoritative odpt:Train position coverage.
+    // Do not promote a line merely because its operator exposes odpt:Train; require line-level
+    // evidence and no known timetable-position supplementation requirement.
     "Asakusa": true,
     "Shinjuku": true,
     "Mita": true,
-    "Oedo": true,
+    "Oedo": true
   };
 
   // ========== ODPT 站 ID 别名映射（补丁式修复，随发现持续追加）==========
