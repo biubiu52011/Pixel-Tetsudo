@@ -1752,10 +1752,10 @@ window.LineOperationSystems = {
       code: "OUM",
       nameJa: "奥羽本線",
       nameZh: "奥羽本线",
-      nameEn: "Ou Main Line",
+      nameEn: "Ou Line",
       nameKo: "오우 본선",
       color: "#ee7b28",
-      lineIds: ["OuMain"],
+      lineIds: ["Ou"],
       icon: "../images/鉄道/JR東日本/JRグループ.png",
       order: 54
     },
