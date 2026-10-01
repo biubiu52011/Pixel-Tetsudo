@@ -1061,6 +1061,14 @@
   function ensureManualTimetable(lineId) {
     return new Promise(function(resolve, reject) {
       try {
+        // Full official realtime coverage is authoritative for train position.
+        // Keep timetable data already loaded elsewhere for service/vehicle/chain
+        // evidence, but never lazy-load manual data that can synthesize positions.
+        if (window.RuntimeConfig && window.RuntimeConfig.AUTHORITATIVE_REALTIME_LINES &&
+            window.RuntimeConfig.AUTHORITATIVE_REALTIME_LINES[lineId]) {
+          resolve(true);
+          return;
+        }
         var varName = lineId + '_MANUAL_TIMETABLES';
         if (window[varName]) { resolve(true); return; }
         // v4.3.1016: ODPT 已有该线时刻表（首都圈等）→ 仍尝试加载 manual（车型实证）：
