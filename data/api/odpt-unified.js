@@ -503,10 +503,38 @@
     // （4.3.471: 北上線 Kitakami・山田線 Yamada 已正名，同名透传即命中 ODPT，垫片移除）
 };
 
+    // Canonical railway identity: operator namespace + railway code.
+    // A railway short code is never a globally unique identity.
+    function makeRailwayIdentity(operator, railwayCode) {
+      if (!operator || !railwayCode) return null;
+      return {
+        operator: String(operator),
+        railwayCode: String(railwayCode),
+        key: String(operator) + "::" + String(railwayCode),
+        odptRailway: "odpt.Railway:" + String(operator) + "." + String(railwayCode)
+      };
+    }
+
+    function parseRailwayIdentity(value) {
+      try {
+        var raw = typeof value === "string" ? value : ((value && value["odpt:railway"]) || "");
+        var m = String(raw).match(/^odpt\.Railway:([^.]+)\.(.+)$/);
+        return m ? makeRailwayIdentity(m[1], m[2]) : null;
+      } catch(e) { return null; }
+    }
+
+    function getLineRailwayIdentity(lineId) {
+      if (!lineId) return null;
+      var operator = LINE_TO_OPERATOR[lineId] || null;
+      var code = LINE_RAILWAY_CODE[lineId] || lineId;
+      return makeRailwayIdentity(operator, code);
+    }
+
     // 解析内部线路 key 为 ODPT Railway code（带别名）
     function resolveRailwayCode(operator, railway) {
       var code = LINE_RAILWAY_CODE[railway] || railway;
-      return 'odpt.Railway:' + operator + '.' + code;
+      var identity = makeRailwayIdentity(operator, code);
+      return identity ? identity.odptRailway : null;
     }
     // ========== API Rate Limiting ==========
     // 为每个API服务维护请求队列，确保不超过频率限制
@@ -616,6 +644,9 @@
         ENDPOINTS: ODPT_ENDPOINTS,
         LINE_TO_OPERATOR: LINE_TO_OPERATOR,
         LINE_RAILWAY_CODE: LINE_RAILWAY_CODE,
+        makeRailwayIdentity: makeRailwayIdentity,
+        parseRailwayIdentity: parseRailwayIdentity,
+        getLineRailwayIdentity: getLineRailwayIdentity,
         getApiKey: getApiKey,
         getApiLinks: getApiLinks,
         keysConfigured: keysConfigured,
