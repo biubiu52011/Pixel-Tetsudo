@@ -283,6 +283,17 @@
     } catch(e) { return null; }
   }
 
+  function buildLineIdentity(line, lineId) {
+    try {
+      line = line || {};
+      var operator = line.operator || getOperatorForLine(lineId, line.name) || "";
+      var railwayCode = "";
+      if (window.ODPTClient && window.ODPTClient.LINE_RAILWAY_CODE) railwayCode = window.ODPTClient.LINE_RAILWAY_CODE[lineId] || "";
+      if (!operator || !railwayCode) return null;
+      return { operator: String(operator), railwayCode: String(railwayCode), key: String(operator) + "::" + String(railwayCode) };
+    } catch(e) { return null; }
+  }
+
   // v4.3.391: 聚合只接受无 railway 归属的记录（全网/多线报文）。
   // 有 odpt:railway 的记录专属其线——不得把 A 线的报文聚合显示到 B 线弹窗
   // （修复：都営新宿線无记录时误显浅草線报文）。
@@ -420,7 +431,8 @@
           _chainMeta = window.RunningChainResolver.getResolutionContext(lineId, Object.keys((window.UNIFIED_LINES || {})));
         }
       } catch(_ce) {}
-      return { id: lineId, name: line.name, nameEn: line.nameEn || line.name, code: line.code, color: (window.LineOperationSystemsResolveColor && window.LineOperationSystemsResolveColor(lineId)) || line.color, operator: line.operator, region: line.region, type: line.type, image: line.image, stations: line.stations || [], durations: line.durations || [], intervalTotal: line.durationTotalMin || 0, realtimePositions: _rtPositions, delayInfo: delayInfo, _chainMeta: _chainMeta, branchOf: line.branchOf || null, isSixShapedLoop: line.isSixShapedLoop === true, isDoubleColumnLoop: line.isDoubleColumnLoop === true, loopJunction: line.loopJunction || null };
+      var _lineIdentity = buildLineIdentity(line, lineId);
+      return { id: lineId, name: line.name, nameEn: line.nameEn || line.name, code: line.code, color: (window.LineOperationSystemsResolveColor && window.LineOperationSystemsResolveColor(lineId)) || line.color, operator: line.operator, region: line.region, type: line.type, image: line.image, stations: line.stations || [], durations: line.durations || [], intervalTotal: line.durationTotalMin || 0, realtimePositions: _rtPositions, delayInfo: delayInfo, lineIdentity: _lineIdentity, _chainMeta: _chainMeta, branchOf: line.branchOf || null, isSixShapedLoop: line.isSixShapedLoop === true, isDoubleColumnLoop: line.isDoubleColumnLoop === true, loopJunction: line.loopJunction || null };
     } catch(e) { console.debug("[DataFusion] fuseLine error for " + lineId + ":", e.message); return null; }
   }
 
