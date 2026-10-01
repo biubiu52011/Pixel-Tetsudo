@@ -222,7 +222,6 @@
         "ChuoSobuLocal": "JR-East",
         "Daishi_Keikyu": "Keikyu",
         "Daishi_Tobu": "Tobu",
-        "Do-Arakawa": "Toei",
         "Echigo": "JR-East",
         "Fukutoshin": "TokyoMetro",
         "Ginza": "TokyoMetro",
