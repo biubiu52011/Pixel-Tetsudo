@@ -372,7 +372,7 @@
         "Utsunomiya": "Tobu",
         "Yamagata": "JR-East",
         "ChiyodaBranch": "TokyoMetro",
-        "ChuoMain": "JR-East",
+        "Chuo": "JR-East",
         "Hachiko": "JR-East",
         "KeiseiChiba": "Keisei",
         "KeiseiChihara": "Keisei",
@@ -380,7 +380,7 @@
         "KeiseiOshiage": "Keisei",
         "NaritaSkyAccess": "Keisei",
         "NewShuttle": "SaitamaRailway", // v4.3.470: ODPT 官方 operator 名实为 SaitamaRailway（埼玉新都市交通），本地原错写 SaitamaTransit
-        "SobuMain": "JR-East",
+        "Sobu": "JR-East",
         "SotetsuIzumino": "Sotetsu",
         "SotetsuShin-Yokohama": "Sotetsu",
         "TokaidoMain": "JR-East",
@@ -417,8 +417,8 @@
       "KeihinTohoku": "KeihinTohokuNegishi",
       "Marunouchi": "Marunouchi",
       "MarunouchiBranch": "MarunouchiBranch", // 丸ノ内線支線（方南町支線）独立 ODPT railway
-      "ChuoMain": "Chuo",
-      "SobuMain": "Sobu",
+      "Chuo": "Chuo",
+      "Sobu": "Sobu",
       "TokaidoMain": "Tokaido",
       "Ou": "Ou",
       "Joban": "JobanRapid",
