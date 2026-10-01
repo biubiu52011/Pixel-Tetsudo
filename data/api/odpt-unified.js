@@ -356,7 +356,7 @@
         "TobuNoda": "Tobu",
         "TobuSkytree": "Tobu",
         "Tobu_Kameido": "Tobu",
-        "TohokuMain": "JR-East",
+        "Tohoku": "JR-East",
         "Tojo": "Tobu",
         "Tokaido": "JR-East",
         "TokyuDenEn": "Tokyu",
@@ -467,7 +467,7 @@
     // v4.3.475: 都営新宿線显式映射（透传已命中 ODPT Toei.Shinjuku，此处文档化防歧义）
     "Shinjuku": "Shinjuku",
     "JobanMain": "Joban",
-    "TohokuMain": "Tohoku",
+    "Tohoku": "Tohoku",
     // v4.3.479: 新建支線/東金線同名透传文档化（ODPT 官方 railway code 与本地 ID 一致）
     "Togane": "Togane",
     "NaritaAbikoBranch": "NaritaAbikoBranch",
