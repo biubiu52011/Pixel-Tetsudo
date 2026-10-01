@@ -1917,10 +1917,10 @@ window.LineOperationSystems = {
       code: "YON",
       nameJa: "米坂線",
       nameZh: "米坂线",
-      nameEn: "Yonezawa Line",
+      nameEn: "Yonesaka Line",
       nameKo: "요네자와선",
       color: "#9b7eb9",
-      lineIds: ["Yonezawa"],
+      lineIds: ["Yonesaka"],
       icon: "../images/鉄道/JR東日本/JRグループ.png",
       order: 70
     }
