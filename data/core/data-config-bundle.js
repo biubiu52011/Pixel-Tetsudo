@@ -882,12 +882,18 @@ window.getTransferHint = function(stationId, lang) {
     "Noda": true,
     "Tojo": true,
     "Ogose": true,
-    "Daishi_Tobu": true
+    "Daishi_Tobu": true,
 
-    // Keikyu is intentionally not authoritative as a whole: Shinagawa-Sengakuji
-    // is excluded by the official location dataset. Tobu is also excluded here:
-    // lines north of Tatebayashi / Shin-Tochigi are outside coverage and part of
-    // Kameido cannot distinguish exact train position.
+    // Keikyu — official location data excludes only Shinagawa-Sengakuji on the
+    // Main Line. Independent branch lines remain fully inside covered territory.
+    "KeikyuAirport": true,
+    "KeikyuKurihama": true,
+    "KeikyuZushi": true,
+    "Daishi_Keikyu": true
+
+    // Keikyu Main stays non-authoritative because Shinagawa-Sengakuji is excluded.
+    // Tobu Isesaki/Nikko northern sections and Kameido also retain fallback for
+    // the official coverage/position-resolution limitations documented above.
   };
 
   // ========== 直通运行 ==========
