@@ -715,6 +715,52 @@
         return mode !== "FULL";
       }
 
+      // Generic coverage evaluator. Line-specific facts live only in RuntimeConfig.
+      // SEGMENTED accepts coveredSegments and/or excludedSegments as station-id ranges.
+      // Timetable positions are allowed only where realtime is not authoritative.
+      function _policyStationIndex(line, stationId) {
+        if (!line || !line.stations || stationId == null) return -1;
+        var key = String(stationId).split(".").pop();
+        var idx = line.stations.indexOf(key);
+        if (idx >= 0) return idx;
+        var norm = key.replace(/[-_]/g, "").toLowerCase();
+        for (var i = 0; i < line.stations.length; i++) {
+          if (String(line.stations[i]).replace(/[-_]/g, "").toLowerCase() === norm) return i;
+        }
+        return -1;
+      }
+
+      function _positionTouchesRange(position, line, range) {
+        if (!position || !line || !range) return false;
+        var a = _policyStationIndex(line, range.fromStation);
+        var b = _policyStationIndex(line, range.toStation);
+        if (a < 0 || b < 0) return false; // fail open: never suppress timetable on bad config
+        var lo = Math.min(a, b), hi = Math.max(a, b);
+        var p0 = Number(position.stationIndex);
+        var p1 = position.segmentToIndex == null ? p0 : Number(position.segmentToIndex);
+        if (!isFinite(p0)) return false;
+        if (!isFinite(p1)) p1 = p0;
+        return Math.max(Math.min(p0, p1), lo) <= Math.min(Math.max(p0, p1), hi);
+      }
+
+      function mayUseTimetableEstimate(lineId, position) {
+        var policy = getRealtimePositionPolicy(lineId);
+        var mode = policy.mode || "UNKNOWN";
+        if (mode === "FULL") return false;
+        if (mode !== "SEGMENTED") return true; // HYBRID / COARSE / UNKNOWN
+        var line = allLines[lineId];
+        var excluded = policy.excludedSegments || [];
+        for (var i = 0; i < excluded.length; i++) {
+          if (_positionTouchesRange(position, line, excluded[i])) return true;
+        }
+        var covered = policy.coveredSegments || [];
+        if (!covered.length) return true;
+        for (var j = 0; j < covered.length; j++) {
+          if (_positionTouchesRange(position, line, covered[j])) return false;
+        }
+        return true;
+      }
+
       doEstimation = function() {
         try {
           if (window.TrainPositionEstimator && typeof window.TrainPositionEstimator.estimateAllPositions === "function") {
@@ -737,14 +783,14 @@
               // 导致副都心/千代田/日比谷/東西 等直通线页面只剩 1-3 列直通插入车（卡 join/末站），
               // 自社时刻表列车（银座/丸ノ内等无直通实时插入的线推定全量正常）完全缺失。
               if (!posMap[lid] || posMap[lid].length === 0) {
-                posMap[lid] = _est.slice();
-                estCount += _est.length;
+                posMap[lid] = _est.filter(function(p) { return mayUseTimetableEstimate(lid, p); });
+                estCount += posMap[lid].length;
               } else {
                 var _haveId = {};
                 posMap[lid].forEach(function(p) { if (p && _positionIdentity(p)) _haveId[_positionIdentity(p)] = true; });
                 var _addN = 0;
                 _est.forEach(function(p) {
-                  if (p && _positionIdentity(p) && !_haveId[_positionIdentity(p)]) {
+                  if (p && _positionIdentity(p) && !_haveId[_positionIdentity(p)] && mayUseTimetableEstimate(lid, p)) {
                     posMap[lid].push(p);
                     _haveId[_positionIdentity(p)] = true;
                     _addN++;
@@ -800,7 +846,7 @@
                     posMap[manualLineId].forEach(function(p) { if (p && _positionIdentity(p)) haveId[_positionIdentity(p)] = true; });
                     var mAdded = 0;
                     mEst.forEach(function(p) {
-                      if (p && _positionIdentity(p) && !haveId[_positionIdentity(p)]) {
+                      if (p && _positionIdentity(p) && !haveId[_positionIdentity(p)] && mayUseTimetableEstimate(manualLineId, p)) {
                         p.positionSource = "station-timetable";
                         posMap[manualLineId].push(p);
                         haveId[_positionIdentity(p)] = true;
@@ -1117,7 +1163,7 @@
                   posMap[lineId].forEach(function(p) { if (p && _positionIdentity(p)) haveId[_positionIdentity(p)] = true; });
                   var mAdded = 0;
                   mEst.forEach(function(p) {
-                    if (p && _positionIdentity(p) && !haveId[_positionIdentity(p)]) {
+                    if (p && _positionIdentity(p) && !haveId[_positionIdentity(p)] && mayUseTimetableEstimate(lineId, p)) {
                       p.positionSource = "station-timetable";
                       posMap[lineId].push(p);
                       haveId[_positionIdentity(p)] = true;
