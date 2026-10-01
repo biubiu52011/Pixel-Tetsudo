@@ -44,3 +44,12 @@ assert.strictEqual(exactScoped.length,1);
 assert.strictEqual(exactScoped[0]["odpt:railway"],"odpt.Railway:Tobu.Utsunomiya");
 assert.strictEqual(ctx.window.RunInfoAPI._aggregateStatus(similarCodes,tobuLine),"normal");
 console.log("runinfo-scope exact-code: 3 PASS");
+
+
+// Structured-only official record must remain authoritative even without text.
+const structuredOnly=[
+ {"odpt:railway":"odpt.Railway:Tobu.Utsunomiya","odpt:trainInformationStatus":"Suspension","dc:date":"2026-10-01T12:00:00+09:00"}
+];
+assert.strictEqual(ctx.window.RunInfoAPI._selectScopedRecords(structuredOnly,tobuLine).length,1);
+assert.strictEqual(ctx.window.RunInfoAPI._aggregateStatus(structuredOnly,tobuLine),"suspended");
+console.log("runinfo-scope structured-only: 2 PASS");

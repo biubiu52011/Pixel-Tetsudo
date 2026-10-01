@@ -55,10 +55,13 @@
   // Canonical ODPT identity is operator namespace + railway code.
   // Short railway codes are never globally unique and must not be matched alone.
   function parseRailwayIdentity(rec) {
+    if (window.ODPTClient && typeof window.ODPTClient.parseRailwayIdentity === "function") {
+      return window.ODPTClient.parseRailwayIdentity(rec);
+    }
     try {
       var rw = String((rec && rec["odpt:railway"]) || "");
       var m = rw.match(/^odpt\.Railway:([^.]+)\.(.+)$/);
-      return m ? { operator: m[1], railwayCode: m[2], canonical: rw } : null;
+      return m ? { operator: m[1], railwayCode: m[2], key: m[1] + "::" + m[2] } : null;
     } catch (e) { return null; }
   }
 
@@ -219,18 +222,30 @@
       var op = getOperator(lineObj);
       if (op) {
         p = fetchODPT(op).then(function(records) {
-          var text = pickText(records, lineObj);
-          if (text) {
+          var scoped = selectScopedRecords(records, lineObj);
+          if (scoped.length) {
+            var text = pickText(scoped, lineObj) || "";
             var ex = extractLinks(text);
+            var sourceUpdatedAt = null, validUntil = null, timeOfOrigin = null;
+            scoped.forEach(function(rec) {
+              if (!sourceUpdatedAt && rec && rec["dc:date"]) sourceUpdatedAt = rec["dc:date"];
+              if (!validUntil && rec && rec["dct:valid"]) validUntil = rec["dct:valid"];
+              if (!timeOfOrigin && rec && rec["odpt:timeOfOrigin"]) timeOfOrigin = rec["odpt:timeOfOrigin"];
+            });
+            var fetchedAt = Date.now();
             return {
-              status: aggregateStatus(records, lineObj) || "info",
+              status: aggregateStatus(scoped, lineObj) || "info",
               text: ex.cleanText,
               links: ex.links,
-              updatedAt: Date.now(),
+              sourceUpdatedAt: sourceUpdatedAt,
+              validUntil: validUntil,
+              timeOfOrigin: timeOfOrigin,
+              fetchedAt: fetchedAt,
+              updatedAt: sourceUpdatedAt || fetchedAt,
               source: "odpt"
             };
           }
-          // ODPT 无该线路报文 → 降级③
+          // ODPT 无该线路/运营商作用域报文 → 降级③
           return localFallback(lineId, lineObj);
         });
       } else {

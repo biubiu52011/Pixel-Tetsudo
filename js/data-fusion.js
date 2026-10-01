@@ -142,7 +142,7 @@
   }
 
   function parseODPTDelay(raw) {
-    var result = { status: "normal", maxDelay: 0, interval: null, cause: null };
+    var result = { status: "unknown", maxDelay: null, interval: null, cause: null };
     if (!raw) return result;
     try {
       // Phase 1: shared evaluator owns status semantics; the legacy body below still owns
@@ -273,10 +273,13 @@
   }
 
   function extractRailwayIdentity(rec) {
+    if (window.ODPTClient && typeof window.ODPTClient.parseRailwayIdentity === "function") {
+      return window.ODPTClient.parseRailwayIdentity(rec);
+    }
     try {
       var rw = String((rec && rec["odpt:railway"]) || "");
       var m = rw.match(/^odpt\.Railway:([^.]+)\.(.+)$/);
-      return m ? { operator: m[1], railwayCode: m[2], canonical: rw } : null;
+      return m ? { operator: m[1], railwayCode: m[2], key: m[1] + "::" + m[2] } : null;
     } catch(e) { return null; }
   }
 
