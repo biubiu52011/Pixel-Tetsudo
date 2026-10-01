@@ -104,7 +104,28 @@
     lines: {
       "Asakusa": { mode: "FULL" },
       "Shinjuku": { mode: "FULL" },
-      "Oedo": { mode: "FULL" }
+      "Oedo": { mode: "FULL" },
+
+      // Known partial/limited sources. These declarations are facts, not algorithm branches.
+      // SEGMENTED without a verified local station range intentionally fails open to timetable.
+      "Mita": { mode: "SEGMENTED" },
+      "ChuoMain": { mode: "SEGMENTED" },
+      "Ome": { mode: "SEGMENTED" },
+      "Joban": { mode: "SEGMENTED" },
+      "Takasaki": { mode: "SEGMENTED" },
+
+      // Official source has insufficient positional granularity on part of this railway.
+      "Tobu_Kameido": { mode: "COARSE" },
+
+      // Explicitly known not to be complete realtime-position sources.
+      "TobuIsesaki": { mode: "HYBRID" },
+      "TobuNikko": { mode: "HYBRID" },
+      "Tsurumi": { mode: "HYBRID" },
+      "TsurumiUmiShibaura": { mode: "HYBRID" },
+      "TsurumiOkawa": { mode: "HYBRID" },
+      "NambuBranch": { mode: "HYBRID" },
+      "Sagami": { mode: "HYBRID" },
+      "Hachiko": { mode: "HYBRID" }
     }
   };
 
