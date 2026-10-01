@@ -63,27 +63,15 @@
    */
   var AUTHORITATIVE_REALTIME_LINES = {
     // 4.3.468 line-level runtime verification:
-    // Toei odpt:Train -> Asakusa/Shinjuku/Mita/Oedo, all observed positions estimated:false.
+    // Toei odpt:Train -> Asakusa/Shinjuku/Oedo observed estimated:false.
+    // Mita is intentionally excluded from full-coverage suppression: official Toei guidance
+    // excludes Meguro-Shirokanetakanawa from train-position service.
     // Arakawa is intentionally excluded: no authoritative odpt:Train position coverage.
     // Do not promote a line merely because its operator exposes odpt:Train; require line-level
     // evidence and no known timetable-position supplementation requirement.
     "Asakusa": true,
     "Shinjuku": true,
-    "Mita": true,
     "Oedo": true,
-
-    // Tokyo Metro: external ODPT coverage documentation identifies realtime train locations
-    // on all nine main lines. Branch identities are deliberately NOT inherited:
-    // MarunouchiBranch / ChiyodaBranch remain timetable-assisted until independently verified.
-    "Ginza": true,
-    "Marunouchi": true,
-    "Hibiya": true,
-    "Tozai": true,
-    "Chiyoda": true,
-    "Yurakucho": true,
-    "Hanzomon": true,
-    "Namboku": true,
-    "Fukutoshin": true
   };
 
   // ========== ODPT 站 ID 别名映射（补丁式修复，随发现持续追加）==========
