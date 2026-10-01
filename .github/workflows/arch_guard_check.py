@@ -64,6 +64,8 @@ def main():
         for token in ('makeRailwayIdentity', 'parseRailwayIdentity', 'getLineRailwayIdentity', 'operator + "::"'):
             if token not in identity_src:
                 new_errors.append('CANONICAL_IDENTITY_MISSING %s' % token)
+        if "rw.indexOf('.' + railway)" in identity_src:
+            new_errors.append('FUZZY_RAILWAY_IDENTITY_MATCH data/api/odpt-unified.js')
     except Exception:
         new_errors.append('CANONICAL_IDENTITY_FILE_UNREADABLE data/api/odpt-unified.js')
 
