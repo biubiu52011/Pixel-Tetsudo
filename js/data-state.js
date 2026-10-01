@@ -38,6 +38,16 @@
     return null;
   }
 
+  function getLineIdentity(line, lineId) {
+    line = line || {};
+    if (line.lineIdentity && line.lineIdentity.key) return String(line.lineIdentity.key);
+    var operator = line.operator || "";
+    var railwayCode = "";
+    if (window.ODPTClient && window.ODPTClient.LINE_RAILWAY_CODE && lineId) railwayCode = window.ODPTClient.LINE_RAILWAY_CODE[lineId] || "";
+    if (!operator || !railwayCode) return "";
+    return String(operator) + "::" + String(railwayCode);
+  }
+
   // Operational status is line-owned. Through-service topology must not copy
   // another line's delay/status onto this line; explicit through-service impacts
   // are represented by RunInfoEvaluator instead.
@@ -203,7 +213,12 @@
         iconHtml = '<div class="rs-system-badge">' + escapeHtml(code || "?") + '</div>';
       }
     }
-    return '<div class="rs-line-card rs-system-card" data-line="' + escapeHtml(firstId) + '" data-system="' + escapeHtml(code) + '" data-lines="' + escapeHtml(memberIds.join(",")) + '" data-line-color="' + escapeHtml(color) + '">'
+    var _memberIdentities = [];
+    for (var _mi = 0; _mi < memberIds.length; _mi++) {
+      var _mid = memberIds[_mi];
+      _memberIdentities.push(_mid + "=" + getLineIdentity(linesObj[_mid] || {}, _mid));
+    }
+    return '<div class="rs-line-card rs-system-card" data-line="' + escapeHtml(firstId) + '" data-line-identity="' + escapeHtml(getLineIdentity(linesObj[firstId] || {}, firstId)) + '" data-line-identities="' + escapeHtml(_memberIdentities.join("|")) + '" data-system="' + escapeHtml(code) + '" data-lines="' + escapeHtml(memberIds.join(",")) + '" data-line-color="' + escapeHtml(color) + '">'
       + iconHtml
       + '<div class="rs-line-info">'
       + '<div class="rs-line-name">' + escapeHtml(name) + '</div>'
@@ -360,13 +375,13 @@
         if (!bline) continue;
         var bName = bline.nameJa || bline.name || blid;
         if (window.RailwayDB && window.RailwayDB.resolveLineName) bName = window.RailwayDB.resolveLineName(blid, blang) || bName;
-        bItems.push('<span class="rs-branch-chip" data-line="' + escapeHtml(blid) + '" data-parent="' + escapeHtml(lineId) + '">' + escapeHtml(bName) + '</span>');
+        bItems.push('<span class="rs-branch-chip" data-line="' + escapeHtml(blid) + '" data-line-identity="' + escapeHtml(getLineIdentity(bline, blid)) + '" data-parent="' + escapeHtml(lineId) + '">' + escapeHtml(bName) + '</span>');
       }
       if (bItems.length > 0) {
         branchHtml = '<div class="rs-branch-row">' + bItems.join("") + '</div>';
       }
     }
-    return '<div class="rs-line-card" data-line="' + escapeHtml(lineId) + '" data-line-color="' + escapeHtml(lineColor) + '">' + _chainBadgeHtml
+    return '<div class="rs-line-card" data-line="' + escapeHtml(lineId) + '" data-line-identity="' + escapeHtml(getLineIdentity(line, lineId)) + '" data-line-color="' + escapeHtml(lineColor) + '">' + _chainBadgeHtml
       + '<div class="rs-line-header">'
       + iconHtml
       + '<div class="rs-line-info">'
@@ -528,6 +543,7 @@
     renderCard: renderCard,
     renderList: renderList,
     localizeInterval: _localizeInterval,
+    getLineIdentity: getLineIdentity,
     setLines: setLines,
     setPositions: setPositions,
     getLine: getLine,
