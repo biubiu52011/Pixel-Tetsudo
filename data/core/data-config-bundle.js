@@ -819,7 +819,7 @@ window.getTransferHint = function(stationId, lang) {
    * 信越本線(分断)/東海道本線/東北本線 — 类比京沪铁路，不是运行系统。
    * 中央本線已独立 CO 卡（4.3.414），不在此列。
    */
-  var TRUNK_MAIN_LINE_IDS = ["Shinetsu", "TokaidoMain", "TohokuMain"];
+  var TRUNK_MAIN_LINE_IDS = ["Shinetsu", "TokaidoMain", "Tohoku"];
 
   /**
    * 干线本名延伸白名单（显式登记，防止自动端点相接误判）。
@@ -3493,11 +3493,11 @@ window.EXIT_DATA = {
 };
 
 // 番線解決（Provider 公共 API）：查不到（无该线/站/方向）返回 null，展示层静默省略
-// v4.3.616: 干线本名别名归一——TokaidoMain/TohokuMain 为物理线路名，与运行系统
+// v4.3.616: 干线本名别名归一——TokaidoMain/Tohoku 为物理线路名，与运行系统
 // （Tokaido / UtsunomiyaJR）同轨同番线；搜索图已排除本名，此处兜底防旧缓存/直传
 var _PLATFORM_LINE_ALIAS = {
   "TokaidoMain": "Tokaido",      // 東海道本線（東京～熱海）= 東海道線運行系統 同軌同番線
-  "TohokuMain": "UtsunomiyaJR"   // 東北本線（東京～黒磯）= 宇都宮線運行系統 同軌同番線
+  "Tohoku": "UtsunomiyaJR"   // 東北本線（東京～黒磯）= 宇都宮線運行系統 同軌同番線
 };
 window.PlatformResolver = {
   resolve: function(lineId, stationId, direction) {
