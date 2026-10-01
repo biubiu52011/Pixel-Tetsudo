@@ -690,11 +690,29 @@
       odptData.realtimePositions = posMap;
 
       // ===== Estimate positions only where official realtime is not authoritative/full =====
-      function hasAuthoritativeRealtime(lineId) {
+      function getRealtimePositionPolicy(lineId) {
         try {
-          return !!(window.RuntimeConfig && window.RuntimeConfig.AUTHORITATIVE_REALTIME_LINES &&
-            window.RuntimeConfig.AUTHORITATIVE_REALTIME_LINES[lineId]);
-        } catch(e) { return false; }
+          var cfg = window.RuntimeConfig || {};
+          var model = cfg.REALTIME_POSITION_POLICY || {};
+          var linePolicy = model.lines && model.lines[lineId];
+          if (linePolicy && linePolicy.mode) return linePolicy;
+          // Backward compatibility while AUTHORITATIVE_REALTIME_LINES is being retired.
+          if (cfg.AUTHORITATIVE_REALTIME_LINES && cfg.AUTHORITATIVE_REALTIME_LINES[lineId]) {
+            return { mode: "FULL" };
+          }
+          return { mode: model.defaultMode || "HYBRID" };
+        } catch(e) {
+          return { mode: "UNKNOWN" };
+        }
+      }
+
+      function hasAuthoritativeRealtime(lineId) {
+        return getRealtimePositionPolicy(lineId).mode === "FULL";
+      }
+
+      function mayUseTimetablePosition(lineId) {
+        var mode = getRealtimePositionPolicy(lineId).mode;
+        return mode !== "FULL";
       }
 
       doEstimation = function() {
@@ -711,7 +729,7 @@
             Object.keys(estimated).forEach(function(lid) {
               // Full official realtime coverage owns position truth. Timetable remains loaded
               // for destination/service/running-chain evidence but must not synthesize positions.
-              if (hasAuthoritativeRealtime(lid)) return;
+              if (!mayUseTimetablePosition(lid)) return;
               var _est = estimated[lid];
               if (!_est || !_est.length) return;
               // v4.3.1002: 无条件合并（去重：实时/直通插入优先，推定补缺）——
@@ -766,7 +784,7 @@
             }
             var manualLines = collectManualTimetableLines();
             manualLines.forEach(function(manualLineId) {
-              if (hasAuthoritativeRealtime(manualLineId)) return;
+              if (!mayUseTimetablePosition(manualLineId)) return;
               var manualTT = window[manualLineId + '_MANUAL_TIMETABLES'];
               if (!manualTT || !Array.isArray(manualTT) || manualTT.length === 0) return;
               try {
@@ -814,7 +832,7 @@
           if (!line || !line.operator) return;
           // Full official realtime lines never need timetable position fallback, even when
           // the current API snapshot is legitimately empty (e.g. no trains at this moment).
-          if (hasAuthoritativeRealtime(lid)) return;
+          if (!mayUseTimetablePosition(lid)) return;
           var hasRealtime = posMap[lid] && posMap[lid].length > 0;
           var hasTimetable = timetableOps.indexOf(line.operator) >= 0;
           // 检查该线路是否有时刻表数据（按railway过滤）
@@ -834,7 +852,7 @@
             line.branches.forEach(function(bid3) {
               var bl3 = allLines[bid3];
               if (!bl3 || !bl3.operator) return;
-              if (hasAuthoritativeRealtime(bid3)) return;
+              if (!mayUseTimetablePosition(bid3)) return;
               var hasRt3 = posMap[bid3] && posMap[bid3].length > 0;
               var hasTt3 = false;
               if (window.ODPT_TIMETABLES && window.ODPT_TIMETABLES[bl3.operator]) {
