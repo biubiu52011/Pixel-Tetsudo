@@ -661,9 +661,77 @@
             return fetchODPT(buildUrl(operator, 'trainInformation')).then(extractData);
         },
 
-        // 获取列车实时位置
+        // 获取列车实时位置。这里故意只按 operator 拉取，不按预设 railway code 过滤：
+        // API 实际返回 identity 是事实源；LINE_RAILWAY_CODE 只能用于查询优化/本地映射。
         getTrainPositions: function(operator) {
             return fetchODPT(buildUrl(operator, 'train')).then(extractData);
+        },
+
+        // 盲查/诊断：枚举 operator 实际返回的 railway identity，并与本地预设反向比较。
+        // 不改变生产映射，不猜别名；用于发现“API 有数据但预设 code 错/缺”的情况。
+        auditRealtimeRailwayIdentities: function(operator, rows) {
+            try {
+                var data = Array.isArray(rows) ? rows : [];
+                var actual = {};
+                data.forEach(function(t) {
+                    if (!t) return;
+                    var id = parseRailwayIdentity(t);
+                    var raw = t["odpt:railway"] || "";
+                    var key = id ? id.key : ("UNPARSED::" + raw);
+                    if (!actual[key]) {
+                        actual[key] = {
+                            identity: id ? id.odptRailway : raw,
+                            operator: id ? id.operator : "",
+                            railwayCode: id ? id.railwayCode : "",
+                            count: 0,
+                            stations: {},
+                            sampleTrainNumbers: []
+                        };
+                    }
+                    var a = actual[key];
+                    a.count++;
+                    [t["odpt:fromStation"], t["odpt:toStation"]].forEach(function(st) {
+                        if (st) a.stations[String(st)] = true;
+                    });
+                    var no = t["odpt:trainNumber"] || "";
+                    if (no && a.sampleTrainNumbers.length < 5 && a.sampleTrainNumbers.indexOf(no) < 0) {
+                        a.sampleTrainNumbers.push(no);
+                    }
+                });
+
+                var expected = {};
+                Object.keys(LINE_TO_OPERATOR).forEach(function(lineId) {
+                    if (LINE_TO_OPERATOR[lineId] !== operator) return;
+                    var id = getLineRailwayIdentity(lineId);
+                    if (!id) return;
+                    if (!expected[id.key]) expected[id.key] = { identity: id.odptRailway, lineIds: [] };
+                    expected[id.key].lineIds.push(lineId);
+                });
+
+                var actualKeys = Object.keys(actual);
+                var expectedKeys = Object.keys(expected);
+                return {
+                    operator: operator,
+                    rowCount: data.length,
+                    actual: actualKeys.map(function(k) {
+                        var a = actual[k];
+                        return {
+                            identity: a.identity,
+                            operator: a.operator,
+                            railwayCode: a.railwayCode,
+                            count: a.count,
+                            stationCount: Object.keys(a.stations).length,
+                            sampleTrainNumbers: a.sampleTrainNumbers
+                        };
+                    }),
+                    unexpectedActual: actualKeys.filter(function(k) { return !expected[k]; }).map(function(k) { return actual[k].identity; }),
+                    expectedWithoutCurrentRows: expectedKeys.filter(function(k) { return !actual[k]; }).map(function(k) {
+                        return { identity: expected[k].identity, lineIds: expected[k].lineIds };
+                    })
+                };
+            } catch(e) {
+                return { operator: operator, rowCount: 0, actual: [], unexpectedActual: [], expectedWithoutCurrentRows: [], error: e.message };
+            }
         },
 
         // 获取列车时刻表
