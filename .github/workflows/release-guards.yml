@@ -24,6 +24,8 @@ jobs:
         run: node tools/train-image-assets.test.js
       - name: Canonical identity coverage
         run: node tools/line-identity-coverage.test.js
+      - name: ODPT credential model
+        run: node tools/odpt-credential-model.test.js
       - name: Existing running-chain tests
         shell: bash
         run: |
