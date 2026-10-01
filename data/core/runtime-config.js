@@ -55,6 +55,21 @@
     "Sotetsu", "Tokyu", "Tobu", "TWR", "MIR", "TamaMonorail"
   ];
 
+  /**
+   * 官方实时位置完整覆盖线路。
+   * 这些线路的 odpt:Train 已确认覆盖全线运行列车，因此 TrainTimetable
+   * 只作为班次/目的地/running-chain 证据，不再生成或补充列车位置。
+   * 仅登记已有仓库实测证据的线路；其他存在 train endpoint 的运营商不自动推定为 full。
+   */
+  var AUTHORITATIVE_REALTIME_LINES = {
+    "Asakusa": true,
+    "Shinjuku": true,
+    "Mita": true,
+    "Oedo": true,
+    "Arakawa": true,
+    "Do-Arakawa": true
+  };
+
   // ========== ODPT 站 ID 别名映射（补丁式修复，随发现持续追加）==========
 
   /**
@@ -205,6 +220,7 @@
     // 直通运行
     THROUGH_RAILWAY_FALLBACK: THROUGH_RAILWAY_FALLBACK,
     PRIORITY_OPS: PRIORITY_OPS,
+    AUTHORITATIVE_REALTIME_LINES: AUTHORITATIVE_REALTIME_LINES,
     // ODPT 站 ID 别名
     STATION_ALIAS: STATION_ALIAS,
     STATION_ALIAS_BY_RAILWAY: STATION_ALIAS_BY_RAILWAY,
