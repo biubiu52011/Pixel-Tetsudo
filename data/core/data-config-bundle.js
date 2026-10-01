@@ -866,7 +866,17 @@ window.getTransferHint = function(stationId, lang) {
     "KeioShin": true,
     "KeioInokashira": true,
     "KeioKeibajo": true,
-    "KeioTakao": true
+    "KeioTakao": true,
+
+    // Yokohama Municipal Subway — official train-location dataset covers the
+    // municipal subway; both project lines have explicit railway mappings.
+    "YokohamaBlue": true,
+    "YokohamaGreen": true
+
+    // Keikyu is intentionally not authoritative as a whole: Shinagawa-Sengakuji
+    // is excluded by the official location dataset. Tobu is also excluded here:
+    // lines north of Tatebayashi / Shin-Tochigi are outside coverage and part of
+    // Kameido cannot distinguish exact train position.
   };
 
   // ========== 直通运行 ==========
