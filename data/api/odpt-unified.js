@@ -93,7 +93,9 @@
         },
         "Keikyu": {
             base: "https://api-challenge.odpt.org/api/v4/",
-            train: "odpt:Train?odpt:operator=odpt.Operator:Keikyu",
+            // ODPT 2026 catalog currently exposes Keikyu status/static datasets but no
+            // documented train-location dataset. Do not issue an unsupported odpt:Train request.
+            train: null,
             trainTimetable: null,  // 京急不提供列车时刻表API
             trainInformation: "odpt:TrainInformation?odpt:operator=odpt.Operator:Keikyu"
         },
