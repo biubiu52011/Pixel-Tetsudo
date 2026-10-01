@@ -852,7 +852,7 @@ window.getTransferHint = function(stationId, lang) {
 
     // Keio JSON Train Location.
     "KeioMain": true,
-    "KeioSagami": true,
+    "KeioSagamihara": true,
     "KeioZoo": true,
     "KeioShin": true,
     "KeioInokashira": true,
@@ -1031,7 +1031,7 @@ window.getTransferHint = function(stationId, lang) {
   var DATA_LAYER_CACHE_TTL = 60000;
 
   /** trains 页后台预加载线路白名单（用户高频切换的线路）。打开 trains.html 后 2 秒开始后台加载。 */
-  var TRAIN_WARMUP_LINES = ['Yamanote', 'ChuoRapid', 'KeihinTohoku', 'SeibuEn', 'Keikyu', 'Odawara'];
+  var TRAIN_WARMUP_LINES = ['Yamanote', 'ChuoRapid', 'KeihinTohoku', 'Seibuen', 'Keikyu', 'Odawara'];
 
   /**
    * 快速通过站白名单——route-search 计算时跳过这些站的停站+加减速时间（按 EXPRESS_PASS_RATIO 折扣）。
@@ -2157,7 +2157,7 @@ window.LineOperationSystems = {
       nameEn: "Kinugawa Line",
       nameKo: "키누가와선",
       color: "#ffa600",
-      lineIds: ["Nikkoku"],
+      lineIds: ["Kinugawa"],
       icon: "../images/鉄道/東武鉄道/日光線 宇都宮線 鬼怒川線.png",
       order: 5
     },
@@ -2302,7 +2302,7 @@ window.LineOperationSystems = {
       nameEn: "Seibu-en Line",
       nameKo: "세이부엔선",
       color: "#1EAD4C",
-      lineIds: ["SeibuEn"],
+      lineIds: ["Seibuen"],
       icon: "../images/鉄道/西武鉄道/西武園線.png",
       order: 6
     },
@@ -2528,7 +2528,7 @@ window.LineOperationSystems = {
       nameEn: "Sagamihara Line",
       nameKo: "사가미하라선",
       color: "#dd0076",
-      lineIds: ["KeioSagami"],
+      lineIds: ["KeioSagamihara"],
       icon: "../images/鉄道/京王電鉄/相模原線.png",
       order: 4
     },
@@ -3548,7 +3548,7 @@ window.LineServiceRelations = [
   { lineA: "ChuoKonosu", lineB: "ChuoRapid", relation: "BRANCH_OF", direction: "BIDIRECTIONAL", handoverStations: [], evidence: { source: "branchOf only shared 0 data gap", confidence: "LOW" } },
   { lineA: "Sotobo", lineB: "SobuRapid", relation: "BRANCH_OF", direction: "BIDIRECTIONAL", handoverStations: [], evidence: { source: "branchOf only shared 0 data gap", confidence: "LOW" } },
   { lineA: "Uchibo", lineB: "SobuRapid", relation: "BRANCH_OF", direction: "BIDIRECTIONAL", handoverStations: [], evidence: { source: "branchOf only shared 0 data gap", confidence: "LOW" } },
-  { lineA: "TobuNikko", lineB: "Nikkoku", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "LOS TN 0 shared different sets", confidence: "UNKNOWN" } },
+  { lineA: "TobuNikko", lineB: "Kinugawa", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "LOS TN 0 shared different sets", confidence: "UNKNOWN" } },
   { lineA: "Tojo", lineB: "Utsunomiya", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "LOS TTJ 0 shared unprovable", confidence: "UNKNOWN" } },
 ];
 
