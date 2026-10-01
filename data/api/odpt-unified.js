@@ -279,15 +279,15 @@
         "Kiryu": "Tobu",
         "Koizumi": "Tobu",
         "Kokubunji": "Seibu",
-        "Komii": "JR-East",
-        "Kounan": "JR-East",
+        "Koumi": "JR-East",
+        "Hanawa": "JR-East",
         "Kururi": "JR-East",
         "Marunouchi": "TokyoMetro",
         "MarunouchiBranch": "TokyoMetro",
         // MinatoMirai：ODPT无数据，移除映射
         "Mita": "Toei",
         "Mito": "JR-East",
-        "Miyo": "JR-East",
+        "Yahiko": "JR-East",
         "Musashino": "JR-East",
         "Namboku": "TokyoMetro",
         "Nambu": "JR-East",
@@ -315,8 +315,8 @@
 
         "OuMain": "JR-East",
         "Oyama": "JR-East",
-        "RikutoEast": "JR-East",
-        "RikutsuWest": "JR-East",
+        "RikuuEast": "JR-East",
+        "RikuuWest": "JR-East",
         "Rinkai": "TWR",
 
         "Ryomo": "JR-East",
@@ -461,8 +461,8 @@
       "TamaMonorail": "TamaMonorail",
     
     "ChuoTatsuno": "ChuoTatsunoBranch",
-    "RikutoEast": "RikuEast",
-    "RikutsuWest": "RikuWest",
+    "RikuuEast": "RikuEast",
+    "RikuuWest": "RikuWest",
     "UtsunomiyaJR": "Utsunomiya",
     // v4.3.475: 東武宇都宮線（ODPT Tobu.Utsunomiya 独立 railway，与 JR 宇都宮線 UtsunomiyaJR→Utsunomiya 并存，operator 不同不冲突）
     "Utsunomiya": "Utsunomiya", // 東武宇都宮線。JR は UtsunomiyaJR + JR-East namespace で分離
@@ -476,10 +476,10 @@
     "NaritaAirportBranch": "NaritaAirportBranch",
     "NambuBranch": "NambuBranch",
     "Yamagata": "OuYamagata",
-    "Kounan": "Hanawa",
-    "Miyo": "Yahiko",
+    "Hanawa": "Hanawa",
+    "Yahiko": "Yahiko",
     "Yonezawa": "Yonesaka",
-    "Komii": "Koumi",
+    "Koumi": "Koumi",
     // ===== v4.3.470: ODPT API 实测修正（2026-09-10，22 operator 全量 railway 对比）=====
     // 本地 line ID 与 ODPT odpt.Railway code 命名不同，原默认透传全部 404/空，实时数据接不上。
     // 京急（ODPT 官方用 Main/Airport/Kurihama/Zushi/Daishi）
