@@ -868,10 +868,9 @@ window.getTransferHint = function(stationId, lang) {
     "KeioKeibajo": true,
     "KeioTakao": true,
 
-    // Yokohama Municipal Subway — official train-location dataset covers the
-    // municipal subway; both project lines have explicit railway mappings.
-    "YokohamaBlue": true,
-    "YokohamaGreen": true,
+    // Yokohama Municipal Subway is intentionally not authoritative here yet.
+    // Official realtime exists as GTFS-RT, but the current runtime does not
+    // consume GTFS-RT and ODPT_ENDPOINTS.YokohamaMunicipal.train is null.
 
     // Tobu — add only complete project lines that stay inside the official
     // location-data coverage. Isesaki/Nikko and northern branch lines are not
