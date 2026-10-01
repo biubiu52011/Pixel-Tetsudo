@@ -60,8 +60,8 @@
     "Tokaido": { "UtsunomiyaJR": ["Tokyo"], "Takasaki": ["Tokyo"], "UenoTokyo": ["Tokyo"], "Ito": ["Atami"] },
     "Ito": { "Tokaido": ["Atami"] },
     // 中央線
-    "ChuoRapid": { "Ome": ["Tachikawa"], "Itsukaichi": ["Haijima"], "ChuoMain": ["Takao"] },
-    "ChuoMain": { "ChuoRapid": ["Takao"], "Shinonoi": ["Shiojiri"], "ChuoTatsuno": ["Okaya"] },
+    "ChuoRapid": { "Ome": ["Tachikawa"], "Itsukaichi": ["Haijima"], "Chuo": ["Takao"] },
+    "Chuo": { "ChuoRapid": ["Takao"], "Shinonoi": ["Shiojiri"], "ChuoTatsuno": ["Okaya"] },
     "Ome": { "ChuoRapid": ["Tachikawa"] },
     "Itsukaichi": { "ChuoRapid": ["Haijima"] },
     // 総武快速×横須賀
@@ -92,8 +92,8 @@
     "TokyuDenEn": { "TokyuOimachi": ["Futako-Tamagawa"] },
     // 直通 6 組補完 JOIN（4.3.711）
     "TobuNikko": { "TobuIsesaki": ["Tobu-Dobutsu-Koen"] },
-    "ChuoTatsuno": { "ChuoMain": ["Okaya"] },
-    "Shinonoi": { "ChuoMain": ["Shiojiri"], "Shinetsu": ["Shinonoi"] },
+    "ChuoTatsuno": { "Chuo": ["Okaya"] },
+    "Shinonoi": { "Chuo": ["Shiojiri"], "Shinetsu": ["Shinonoi"] },
     "Shinetsu": { "Shinonoi": ["Shinonoi"] },
     "SeibuChichibu": { "Yurakucho_Seibu": [] },
     // JR-West 関西・JR-Kyushu 直通接続駅（4.3.1024）
