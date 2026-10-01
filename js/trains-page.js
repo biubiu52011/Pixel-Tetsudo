@@ -248,31 +248,26 @@
               try { showLineView(_lid3, _systemIdsForRoute(_lid3)); } catch(e) {}
             }
           }
-          // Build hash of positions to detect changes (check both realtimePositions and cachedPositions)
+          // The trains overview is structural (operator/line/termini) and does not
+          // render live train positions. Do not scan every line/train on each DataState
+          // emission just to decide whether to rebuild the overview. Position change
+          // detection is scoped to the currently open detail line below.
           var posHash = '';
-          try {
-            var ids = Object.keys(lines);
-            for (var i = 0; i < ids.length; i++) {
-              var l = lines[ids[i]];
-              var _pos = null;
-              if (l && l.realtimePositions && l.realtimePositions.length > 0) {
-                _pos = l.realtimePositions;
-              } else if (l && l.cachedPositions && l.cachedPositions.length > 0) {
-                _pos = l.cachedPositions;
+          if (currentLine && lines[currentLine]) {
+            try {
+              var _cl = lines[currentLine];
+              var _pos = (_cl.realtimePositions && _cl.realtimePositions.length > 0)
+                ? _cl.realtimePositions : (_cl.cachedPositions || []);
+              posHash = currentLine + ":" + _pos.length + ":";
+              for (var _pi = 0; _pi < _pos.length; _pi++) {
+                var _tp = _pos[_pi];
+                posHash += (_tp.runningChainId || _tp.trainId || ("t" + _pi)) + "@"
+                  + (_tp.stationIndex || 0) + ">"
+                  + (_tp.segmentToIndex == null ? "" : _tp.segmentToIndex) + ":"
+                  + (_tp.segmentProgress == null ? "" : Math.round(_tp.segmentProgress * 100)) + ",";
               }
-              if (_pos) {
-                posHash += ids[i] + ":" + _pos.length + ":";
-                for (var _pi = 0; _pi < _pos.length; _pi++) {
-                  var _tp = _pos[_pi];
-                  posHash += (_tp.trainId || ("t" + _pi)) + "@" + (_tp.stationIndex || 0)
-                    + ">" + (_tp.segmentToIndex == null ? "" : _tp.segmentToIndex)
-                    + ":" + (_tp.segmentProgress == null ? "" : Math.round(_tp.segmentProgress * 100))
-                    + ",";
-                }
-                posHash += ";";
-              }
-            }
-          } catch(e) {}
+            } catch(e) {}
+          }
           // Detail rendering also depends on non-position state (delay/status,
           // through/branch relation context and fused line metadata). A position-only
           // hash left the detail SVG stale after a transient state removed an element:
@@ -321,7 +316,9 @@
             var _detailStateChanged = detailStateHash !== _lastDetailStateHash;
             _lastPositionsHash = posHash;
             _lastDetailStateHash = detailStateHash;
-            if (_positionsChanged) renderList(listEl);
+            // Live position changes only affect the open detail map. The overview
+            // cards contain no train-position content, so rebuilding the full list here
+            // is pure DOM churn.
             // Restore hash-based navigation once data is ready (posHash changed = data arrived)
             var _h2 = window.location.hash;
             if (_h2 && _h2.length > 1) {
