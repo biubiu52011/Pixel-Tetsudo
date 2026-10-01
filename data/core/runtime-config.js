@@ -66,8 +66,6 @@
     "Shinjuku": true,
     "Mita": true,
     "Oedo": true,
-    "Arakawa": true,
-    "Do-Arakawa": true
   };
 
   // ========== ODPT 站 ID 别名映射（补丁式修复，随发现持续追加）==========
