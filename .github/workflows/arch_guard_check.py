@@ -55,6 +55,18 @@ def main():
                         new_errors.append('LOCALHOST %s:%d: %s' % (rel, i+1, s[:80]))
                     if 'file://' in line:
                         new_errors.append('FILE_PROTOCOL %s:%d: %s' % (rel, i+1, s[:80]))
+    # Canonical railway identity guard: integration code must not regress to
+    # railway-short-only matching. Namespace-aware matching belongs in ODPTClient.
+    identity_required = os.path.join(REPO_ROOT, 'data', 'api', 'odpt-unified.js')
+    try:
+        with open(identity_required, 'r', encoding='utf-8') as f:
+            identity_src = f.read()
+        for token in ('makeRailwayIdentity', 'parseRailwayIdentity', 'getLineRailwayIdentity', 'operator + "::"'):
+            if token not in identity_src:
+                new_errors.append('CANONICAL_IDENTITY_MISSING %s' % token)
+    except Exception:
+        new_errors.append('CANONICAL_IDENTITY_FILE_UNREADABLE data/api/odpt-unified.js')
+
     # Forbidden files
     for dp, _, fns in os.walk(REPO_ROOT):
         if any(d in dp for d in SKIP): continue
