@@ -686,7 +686,9 @@
         // v4.3.9xx (E3+E5): 缓存优先——ODPT_TIMETABLES 已含 IDB 缓存/全量加载数据时零请求
         // （home 搜索经 lazy 模式轻量读 IDB 后命中；trains 全量加载后命中）
         getCompleteTimetable: function(operator, railway) {
-            var ck = operator + ':' + railway;
+            var requestedIdentity = railway.indexOf('odpt.Railway:') === 0 ? parseRailwayIdentity(railway) : makeRailwayIdentity(operator, LINE_RAILWAY_CODE[railway] || railway);
+            if (!requestedIdentity) return Promise.resolve([]);
+            var ck = requestedIdentity.key;
             if (this._timetableCache[ck]) return Promise.resolve(this._timetableCache[ck]);
             var cachedRows = this._getLocalTimetableRows(operator, railway);
             if (cachedRows && cachedRows.length > 0) {
@@ -713,8 +715,8 @@
 
         // 获取缓存的时刻表（按线路）
         getCachedTimetable: function(operator, railway) {
-            var key = operator + ':' + railway;
-            return this._timetableCache[key] || null;
+            var identity = railway.indexOf('odpt.Railway:') === 0 ? parseRailwayIdentity(railway) : makeRailwayIdentity(operator, LINE_RAILWAY_CODE[railway] || railway);
+            return identity ? (this._timetableCache[identity.key] || null) : null;
         },
 
         // E3+E5: 从已加载的 ODPT_TIMETABLES（IDB 缓存/全量加载产物）按线过滤——命中则搜索零请求
@@ -722,12 +724,12 @@
             try {
                 var local = window.ODPT_TIMETABLES && window.ODPT_TIMETABLES[operator];
                 if (!local || !Array.isArray(local) || local.length === 0) return null;
-                var railwayParam = railway.indexOf('odpt.Railway:') === 0 ? railway : resolveRailwayCode(operator, railway);
-                var code = railwayParam.split(':').pop();  // 如 "Seibu.Kawagoe"
+                var expected = railway.indexOf('odpt.Railway:') === 0 ? parseRailwayIdentity(railway) : makeRailwayIdentity(operator, LINE_RAILWAY_CODE[railway] || railway);
+                if (!expected) return null;
                 var rows = local.filter(function(tt) {
                     if (!tt) return false;
-                    var rw = tt['odpt:railway'] || '';
-                    return rw === railwayParam || rw === railway || rw.indexOf('.' + railway) >= 0 || rw === 'odpt.Railway:' + code;
+                    var actual = parseRailwayIdentity(tt);
+                    return !!(actual && actual.key === expected.key);
                 });
                 return rows.length > 0 ? rows : null;
             } catch(e) { return null; }
@@ -735,8 +737,8 @@
 
         // 缓存时刻表
         cacheTimetable: function(operator, railway, data) {
-            var key = operator + ':' + railway;
-            this._timetableCache[key] = data;
+            var identity = railway.indexOf('odpt.Railway:') === 0 ? parseRailwayIdentity(railway) : makeRailwayIdentity(operator, LINE_RAILWAY_CODE[railway] || railway);
+            if (identity) this._timetableCache[identity.key] = data;
         },
 
         // 解析时间字符串为分钟数
