@@ -48,11 +48,14 @@
     window.DataState.renderList(container, linesObj, { mode: "realtime", lineOrder: lineOrderArr });
   }
 
-  function openModal(lineId, linesObj) {
-    _currentModalLine = lineId;
+  function openModal(lineId, linesObj, expectedIdentity) {
     var modal = document.getElementById("lineDetailModal");
     if (!modal || !linesObj || !linesObj[lineId]) return;
     var line = linesObj[lineId];
+    var actualIdentity = (window.DataState && window.DataState.getLineIdentity) ? window.DataState.getLineIdentity(line, lineId) : "";
+    if (expectedIdentity && actualIdentity && expectedIdentity !== actualIdentity) return;
+    _currentModalLine = lineId;
+    _currentModalIdentity = actualIdentity;
     var delayInfo = getDelayInfo(line) || {};
     // Use window.DataState.getStatus for consistent NO_DATA handling
     var status = delayInfo && delayInfo.status ? delayInfo.status : "loading";
@@ -220,6 +223,7 @@
 
   function closeModal() {
     _currentModalLine = null;
+    _currentModalIdentity = "";
     var modal = document.getElementById("lineDetailModal");
     if (!modal) return;
     modal.classList.remove("active");
@@ -230,6 +234,7 @@
   let _latestOrder = null;
   let _selectedOperator = null;
   let _currentModalLine = null;
+  let _currentModalIdentity = "";
 
 
   function escapeHtml(s) {
@@ -426,14 +431,14 @@
       if (card && _latestLines) {
         clearSelectedCards();
         card.classList.add('selected');
-        openModal(card.dataset.line, _latestLines);
+        openModal(card.dataset.line, _latestLines, card.dataset.lineIdentity || "");
       }
     });
-    if (typeof window.onLanguageChange === "function") { window.onLanguageChange(function() { render(); if (_selectedOperator) renderFiltered(); if (_currentModalLine && _latestLines) { openModal(_currentModalLine, _latestLines); } }); }
+    if (typeof window.onLanguageChange === "function") { window.onLanguageChange(function() { render(); if (_selectedOperator) renderFiltered(); if (_currentModalLine && _latestLines) { openModal(_currentModalLine, _latestLines, _currentModalIdentity); } }); }
     // v4.3.963: WebRunInfo 数据更新（自动抓取/手动输入）后重开弹窗
     document.addEventListener("pt-runinfo-updated", function() {
       if (_currentModalLine && _latestLines) {
-        try { openModal(_currentModalLine, _latestLines); } catch(e) {}
+        try { openModal(_currentModalLine, _latestLines, _currentModalIdentity); } catch(e) {}
       }
     });
   }

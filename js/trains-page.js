@@ -5,6 +5,7 @@
 (function() {
   "use strict";
   var currentLine = null;
+  var currentLineIdentity = "";
   var listEl = null;
   var detailEl = null;
   var titleEl = null;
@@ -47,7 +48,7 @@
     return null;
   }
 
-  function showLineView(lineId, systemLineIds) {
+  function showLineView(lineId, systemLineIds, expectedIdentity, expectedMemberIdentities) {
     if (Array.isArray(systemLineIds) && systemLineIds.length > 1) currentSystemLineIds = systemLineIds.slice();
     else if (systemLineIds === null) currentSystemLineIds = null;
     window.TrainsActiveSystemLineIds = currentSystemLineIds ? currentSystemLineIds.slice() : null;
@@ -55,7 +56,19 @@
       var lines = getLinesData();
       var fusedLine = lines[lineId];
       if (!fusedLine) return;
+      var actualIdentity = (window.DataState && window.DataState.getLineIdentity) ? window.DataState.getLineIdentity(fusedLine, lineId) : "";
+      expectedIdentity = expectedIdentity || "";
+      if (expectedIdentity && actualIdentity && expectedIdentity !== actualIdentity) return;
+      if (expectedMemberIdentities && Array.isArray(systemLineIds)) {
+        var renderedMembers = String(expectedMemberIdentities).split("|");
+        for (var _emi = 0; _emi < systemLineIds.length; _emi++) {
+          var _elid = systemLineIds[_emi], _eline = lines[_elid];
+          var _ekey = (window.DataState && window.DataState.getLineIdentity && _eline) ? window.DataState.getLineIdentity(_eline, _elid) : "";
+          if (renderedMembers.indexOf(_elid + "=" + _ekey) < 0) return;
+        }
+      }
       currentLine = lineId;
+      currentLineIdentity = actualIdentity;
       window.location.hash = lineId;
       if (listEl) listEl.classList.add("hidden");
       if (filterBarEl) filterBarEl.classList.add("hidden");
@@ -105,6 +118,7 @@
   function hideLineView() {
     try {
       currentLine = null;
+      currentLineIdentity = "";
       currentSystemLineIds = null;
       window.TrainsActiveSystemLineIds = null;
       if (listEl) listEl.classList.remove("hidden");
@@ -174,13 +188,13 @@
         // 支线 chip：从父线卡片进入支线详情（Line Hierarchy Rule）
         var chip = e.target.closest(".rs-branch-chip");
         if (chip && chip.dataset.line) {
-          showLineView(chip.dataset.line);
+          showLineView(chip.dataset.line, null, chip.dataset.lineIdentity || "");
           return;
         }
         var card = e.target.closest(".rs-line-card");
         if (card) {
           var _systemIds = card.dataset.lines ? card.dataset.lines.split(",").filter(Boolean) : null;
-          showLineView(card.dataset.line, _systemIds);
+          showLineView(card.dataset.line, _systemIds, card.dataset.lineIdentity || "", card.dataset.lineIdentities || "");
         }
       });
       if (backBtn) {
@@ -280,6 +294,7 @@
               var _cm = _dl._chainMeta || {};
               detailStateHash = JSON.stringify({
                 id: currentLine,
+                identity: currentLineIdentity,
                 status: _dl.status || '',
                 interval: _dl.interval || '',
                 cause: _dl.cause || '',
