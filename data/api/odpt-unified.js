@@ -1,6 +1,9 @@
 /**
  * Pixel Tetsudo - Unified ODPT API Client
  * 完整 API URL（含 key）直接存储，无需分离管理。
+ *
+ * SECURITY: 浏览器端混淆不是秘密存储；任何发送到客户端的 consumer key 都可被恢复。
+ * 真正隐藏 key 需要把 ODPT 请求迁移到受控的服务端/Edge proxy。
  * 
  * 三种API类型：
  * - trainInformation: 运行情报/延误信息 (odpt:TrainInformation)
@@ -12,7 +15,8 @@
 
     // ========== ODPT API 链接库（完整链接，编码存储） ==========
     // 所有 API 以完整链接存于 data/api/odpt-links.js（window.ODPT_LINKS_ENC）
-    // 库文件经 XOR(派生种子)+Base64 编码，避免 key 明文暴露于公开仓库
+    // XOR + Base64 仅避免 key 以明文字符串出现，不构成秘密存储或访问控制。
+    // 不要把此机制当作 credential protection；迁移到服务端/Edge proxy 后应删除客户端 key。
     var _linksCache = null;
     // 派生混淆种子（不明文存放完整种子）
     function _apiSeed() {
