@@ -353,17 +353,15 @@
           }
         });
       }
-      // Refresh filter bar, list, and line detail view on language switch
+      // Language changes re-fuse data through DataState. The DataState subscriber
+      // owns the detail-map refresh; rebuilding it again here races the same DOM
+      // with two render paths. Keep this callback limited to UI not owned by
+      // DataState (filter bar / overview labels).
       if (typeof window.onLanguageChange === "function") {
         window.onLanguageChange(function() {
           renderFilterBar(document.getElementById("trainsFilterBar"));
-          // Re-render list to update line names and operator titles (only if list is visible)
           if (listEl && detailEl && detailEl.classList.contains("hidden")) {
             renderList(listEl);
-          }
-          // Re-render line detail view if open
-          if (currentLine && detailEl && !detailEl.classList.contains("hidden")) {
-            showLineView(currentLine);
           }
         });
       }
