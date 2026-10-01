@@ -393,10 +393,16 @@
     if (window.DataFusion) {
       window.DataFusion.subscribe(function(fusedData) {
         if (fusedData && fusedData.lines && Object.keys(fusedData.lines).length > 0) {
-          render();
+          _latestLines = fusedData.lines;
+          _latestOrder = fusedData.lineOrder || [];
+          // One DataFusion emission must cause at most one full list rebuild.
+          // Previously selected-operator mode rendered the full list first and
+          // immediately replaced it with the filtered list, doubling DOM work.
           if (_selectedOperator) {
             renderFiltered();
             renderFilterBar(_latestLines);
+          } else {
+            render();
           }
         }
       });

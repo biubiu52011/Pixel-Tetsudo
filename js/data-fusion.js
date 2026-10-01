@@ -838,17 +838,12 @@
 
       try { fuseAll(); } catch(e) { console.debug("[DataFusion] loadTrainPositions->fuseAll error:", e.message); }
 
-      // v4.3.416: 延迟二次校准——ODPT_TRAINS 分批写入 / DataLayer 晚构建时，
-      // 首次调用可能漏掉部分线路（实测 Ome/Itsukaichi 偶发 0 而 ChuoRapid 正常），
-      // 3 秒后重跑一次补齐（幂等；每次 posPromises 完成后由 odpt-unified 重置 _calibrated）
-      if (!loadTrainPositions._calibrated) {
-        loadTrainPositions._calibrated = true;
-        clearTimeout(loadTrainPositions._calib);
-        loadTrainPositions._calib = setTimeout(function() {
-          loadTrainPositions._retry = 0;
-          try { loadTrainPositions(); } catch(e) {}
-        }, 3000);
-      }
+      // Realtime positions are now pushed only after the complete posPromises batch
+      // is settled and DataLayer is ready (odpt-unified pushTrainPositions). The old
+      // unconditional 3s calibration reran the entire assignment + estimation + fusion
+      // pipeline even when no source data changed, doubling main-thread work on mobile.
+      // Keep the compatibility flag but do not schedule an evidence-free full rerun.
+      loadTrainPositions._calibrated = true;
     } catch(e) { console.debug("[DataFusion] loadTrainPositions error:", e.message); }
   }
 

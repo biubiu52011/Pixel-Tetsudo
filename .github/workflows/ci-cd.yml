@@ -38,6 +38,7 @@ jobs:
           node tools/runinfo-evaluator.test.js
           node tools/runinfo-scope.test.js
           node tools/runinfo-loading-state.test.js
+          node tools/performance-lifecycle.test.js
 
       - name: Entity Preservation Guard
         run: |
