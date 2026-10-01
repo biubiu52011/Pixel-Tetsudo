@@ -22,7 +22,7 @@
    * 信越本線(分断)/東海道本線/東北本線 — 类比京沪铁路，不是运行系统。
    * 中央本線已独立 CO 卡（4.3.414），不在此列。
    */
-  var TRUNK_MAIN_LINE_IDS = ["Shinetsu", "TokaidoMain", "TohokuMain"];
+  var TRUNK_MAIN_LINE_IDS = ["Shinetsu", "TokaidoMain", "Tohoku"];
 
   /**
    * 干线本名延伸白名单（显式登记，防止自动端点相接误判）。
@@ -109,7 +109,7 @@
       // Known partial/limited sources. These declarations are facts, not algorithm branches.
       // SEGMENTED without a verified local station range intentionally fails open to timetable.
       "Mita": { mode: "SEGMENTED" },
-      "ChuoMain": { mode: "SEGMENTED" },
+      "Chuo": { mode: "SEGMENTED" },
       "Ome": { mode: "SEGMENTED" },
       "Joban": { mode: "SEGMENTED" },
       "Takasaki": { mode: "SEGMENTED" },
