@@ -854,7 +854,7 @@ window.getTransferHint = function(stationId, lang) {
     "KeioMain": true,
     "KeioSagamihara": true,
     "KeioZoo": true,
-    "KeioShin": true,
+    "KeioNew": true,
     "KeioInokashira": true,
     "KeioKeibajo": true,
     "KeioTakao": true,
@@ -2517,7 +2517,7 @@ window.LineOperationSystems = {
       nameEn: "Keio New Line",
       nameKo: "케이오 신선",
       color: "#dd0076",
-      lineIds: ["KeioShin"],
+      lineIds: ["KeioNew"],
       icon: "../images/鉄道/京王電鉄/京王新線.png",
       order: 3
     },
@@ -3342,7 +3342,7 @@ window.PLATFORM_DATA = {
     "Shinjuku": { "1": "1・2・3" }           // 下り（京王八王子・高尾山口・橋本方面）1・2・3
   },
   // ===== 京王新線（新宿@0 → 幡ヶ谷；下り=京王八王子方面=升序1） =====
-  "KeioShin": {
+  "KeioNew": {
     "Shinjuku": { "1": "4" }                 // 下り（京王八王子・高尾山口・橋本方面）4
   },
   // ===== 小田原線（新宿@0 → 小田原；下り=小田原方面=升序1；新宿为端点） =====
