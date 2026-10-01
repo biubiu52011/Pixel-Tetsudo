@@ -827,6 +827,38 @@ window.getTransferHint = function(stationId, lang) {
    */
   var TRUNK_EXTENSION_ALLOW = {};
 
+  /**
+   * 线路级官方实时位置权威表。
+   * 仅登记已由官方实时数据集明确覆盖、且项目已有一对一 railway 映射的线路。
+   * 注意：不得按 operator 整体推导；JR-East 等存在部分线路/部分区间覆盖，必须逐线验证后再加入。
+   * 值为 true 表示：位置真值只来自官方 realtime，时刻表仍可用于行先/运行链/车型证据，
+   * 但不得合成列车位置。
+   */
+  var AUTHORITATIVE_REALTIME_LINES = {
+    // Tokyo Metro — official train realtime dataset; project railway IDs are direct/mapped.
+    "Ginza": true,
+    "Marunouchi": true,
+    "MarunouchiBranch": true,
+    "Hibiya": true,
+    "Tozai": true,
+    "Chiyoda": true,
+    "ChiyodaBranch": true,
+    "Yurakucho": true,
+    "Hanzomon": true,
+    "Namboku": true,
+    "Fukutoshin": true,
+
+    // Toei — official VehiclePosition realtime covers the four subway lines
+    // and Tokyo Sakura Tram. Nippori-Toneri is intentionally excluded here:
+    // the official realtime dataset's VehiclePosition resource description
+    // names subway + Sakura Tram, while Nippori-Toneri coverage differs by feed.
+    "Asakusa": true,
+    "Mita": true,
+    "Shinjuku": true,
+    "Oedo": true,
+    "Arakawa": true
+  };
+
   // ========== 直通运行 ==========
 
   /**
@@ -999,6 +1031,7 @@ window.getTransferHint = function(stationId, lang) {
     // 线路层级
     TRUNK_MAIN_LINE_IDS: TRUNK_MAIN_LINE_IDS,
     TRUNK_EXTENSION_ALLOW: TRUNK_EXTENSION_ALLOW,
+    AUTHORITATIVE_REALTIME_LINES: AUTHORITATIVE_REALTIME_LINES,
     // 直通运行
     THROUGH_RAILWAY_FALLBACK: THROUGH_RAILWAY_FALLBACK,
     PRIORITY_OPS: PRIORITY_OPS,
