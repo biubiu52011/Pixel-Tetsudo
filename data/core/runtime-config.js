@@ -257,7 +257,7 @@
   var DATA_LAYER_CACHE_TTL = 60000;
 
   /** trains 页后台预加载线路白名单（用户高频切换的线路）。打开 trains.html 后 2 秒开始后台加载。 */
-  var TRAIN_WARMUP_LINES = ['Yamanote', 'ChuoRapid', 'KeihinTohoku', 'SeibuEn', 'Keikyu', 'Odawara'];
+  var TRAIN_WARMUP_LINES = ['Yamanote', 'ChuoRapid', 'KeihinTohoku', 'Seibuen', 'Keikyu', 'Odawara'];
 
   /**
    * 快速通过站白名单——route-search 计算时跳过这些站的停站+加减速时间（按 EXPRESS_PASS_RATIO 折扣）。
