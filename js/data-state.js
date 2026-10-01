@@ -434,7 +434,7 @@
         groups[op] = [];
         opOrder.push(op);
       }
-      groups[op].push({ id: lid, line: line, sortIdx: insertMap[lid] || 99999 });
+      groups[op].push({ id: lid, line: line, sortIdx: insertMap[lid] !== undefined ? insertMap[lid] : 99999 });
     }
 
     // Sort operator groups by OP_ORDER, unknown ops appended at end
@@ -451,8 +451,8 @@
           var idxA = a.sortIdx;
           var idxB = b.sortIdx;
           if (idxA !== idxB) return idxA - idxB;
-          var pA = presentationOrderMap[a.id] || 99999;
-          var pB = presentationOrderMap[b.id] || 99999;
+          var pA = presentationOrderMap[a.id] !== undefined ? presentationOrderMap[a.id] : 99999;
+          var pB = presentationOrderMap[b.id] !== undefined ? presentationOrderMap[b.id] : 99999;
           return pA - pB;
         });
       }
