@@ -871,7 +871,18 @@ window.getTransferHint = function(stationId, lang) {
     // Yokohama Municipal Subway — official train-location dataset covers the
     // municipal subway; both project lines have explicit railway mappings.
     "YokohamaBlue": true,
-    "YokohamaGreen": true
+    "YokohamaGreen": true,
+
+    // Tobu — add only complete project lines that stay inside the official
+    // location-data coverage. Isesaki/Nikko and northern branch lines are not
+    // authoritative because the feed excludes north of Tatebayashi/Shin-Tochigi.
+    // Kameido is excluded because three intermediate sections are indistinguishable.
+    "TobuSkytree": true,
+    "TobuNoda": true,
+    "Noda": true,
+    "Tojo": true,
+    "Ogose": true,
+    "Daishi_Tobu": true
 
     // Keikyu is intentionally not authoritative as a whole: Shinagawa-Sengakuji
     // is excluded by the official location dataset. Tobu is also excluded here:
