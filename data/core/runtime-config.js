@@ -71,7 +71,7 @@
     // evidence and no known timetable-position supplementation requirement.
     "Asakusa": true,
     "Shinjuku": true,
-    "Oedo": true,
+    "Oedo": true
   };
 
   // ========== ODPT 站 ID 别名映射（补丁式修复，随发现持续追加）==========
