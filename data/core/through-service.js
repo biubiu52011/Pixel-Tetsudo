@@ -84,10 +84,10 @@
     "SotetsuIzumino": { "SotetsuMain": ["Futamatagawa"] },
         "SotetsuShin-Yokohama": { "SotetsuMain": ["Nishiya"], "TokyuMeguro": ["Shin-Yokohama"] },
     // 地方線直通・大井町線直通（4.3.644 補完）
-    "Gono": { "OuMain": ["Kawabe"] },
-    "Kamaishi": { "TohokuMain": ["Hanamaki"] },
-    "OuMain": { "Gono": ["Kawabe"], "Tazawako": ["Omagari"] },
-    "Tazawako": { "OuMain": ["Omagari"] },
+    "Gono": { "Ou": ["Kawabe"] },
+    "Kamaishi": { "Tohoku": ["Hanamaki"] },
+    "Ou": { "Gono": ["Kawabe"], "Tazawako": ["Omagari"] },
+    "Tazawako": { "Ou": ["Omagari"] },
     "TokyuOimachi": { "TokyuDenEn": ["Futako-Tamagawa"] },
     "TokyuDenEn": { "TokyuOimachi": ["Futako-Tamagawa"] },
     // 直通 6 組補完 JOIN（4.3.711）
