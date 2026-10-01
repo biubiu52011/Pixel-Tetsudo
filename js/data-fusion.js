@@ -1082,8 +1082,7 @@
         // Full official realtime coverage is authoritative for train position.
         // Keep timetable data already loaded elsewhere for service/vehicle/chain
         // evidence, but never lazy-load manual data that can synthesize positions.
-        if (window.RuntimeConfig && window.RuntimeConfig.AUTHORITATIVE_REALTIME_LINES &&
-            window.RuntimeConfig.AUTHORITATIVE_REALTIME_LINES[lineId]) {
+        if (!mayUseTimetablePosition(lineId)) {
           resolve(true);
           return;
         }
