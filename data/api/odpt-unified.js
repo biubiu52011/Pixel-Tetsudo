@@ -313,7 +313,7 @@
         "Ome": "JR-East",
         "Ominato": "JR-East",
 
-        "OuMain": "JR-East",
+        "Ou": "JR-East",
         "Oyama": "JR-East",
         "RikuEast": "JR-East",
         "RikuWest": "JR-East",
@@ -420,7 +420,7 @@
       "ChuoMain": "Chuo",
       "SobuMain": "Sobu",
       "TokaidoMain": "Tokaido",
-      "OuMain": "Ou",
+      "Ou": "Ou",
       "Joban": "JobanRapid",
       "KeioMain": "Keio",
       "KeioSagami": "Sagamihara",
