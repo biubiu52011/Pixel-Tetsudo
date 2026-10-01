@@ -111,8 +111,13 @@
       if (firstId === null) firstId = lid;
       var line = linesObj[lid] || {};
       var dInfo = getDelayInfo(line) || {};
-      var status = dInfo.status ? dInfo.status : (dInfo ? "normal" : "no_data");
-      if (!worst || statusRank(status) > statusRank(worst)) worst = status;
+      var status = dInfo.status ? dInfo.status : "loading";
+      // A system card may only claim normal when every member is confirmed.
+      // Keep loading/no-data visible unless a real disruption has higher priority.
+      if (!worst) worst = status;
+      else if ((status === "loading" || status === "no_data" || status === "no_odpt") && worst === "normal") worst = status;
+      else if (!(worst === "loading" || worst === "no_data" || worst === "no_odpt") && statusRank(status) > statusRank(worst)) worst = status;
+      else if ((worst === "loading" || worst === "no_data" || worst === "no_odpt") && status !== "normal" && statusRank(status) > 3) worst = status;
       if (mode === "trains") {
         var stations = line.stations || [];
         // Loop lines (Yamanote / Oedo) have no meaningful termini: their drawn
@@ -218,7 +223,7 @@
     options = options || {};
     var mode = options.mode || "realtime";
     var delayInfo = getDelayInfo(line) || {};
-    var status = delayInfo && delayInfo.status ? delayInfo.status : (delayInfo ? "normal" : "no_data");
+    var status = delayInfo && delayInfo.status ? delayInfo.status : "loading";
     var interval = delayInfo.interval || "";
     var lineColor = (window.LineOperationSystemsResolveColor && window.LineOperationSystemsResolveColor(lineId)) || line.color || "#00b643";
     var displayName = (window.RailwayDB && window.RailwayDB.resolveLineName) ? window.RailwayDB.resolveLineName(lineId, window.currentLang) : (line.nameEn || line.name || lineId);

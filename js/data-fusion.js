@@ -66,6 +66,29 @@
     } catch(e) { return 0; }
   }
 
+  var LAST_GOOD_KEY = "pt_runinfo_last_good_v1";
+  var LAST_GOOD_MAX_AGE_MS = 10 * 60 * 1000;
+  function getLastGoodDelay(lineId) {
+    try {
+      var all = JSON.parse(localStorage.getItem(LAST_GOOD_KEY) || "{}");
+      var v = all[lineId];
+      if (!v || !v.r || !v.r.status || !v.t) return null;
+      if ((Date.now() - v.t) > LAST_GOOD_MAX_AGE_MS) return null;
+      var st = v.r.status;
+      if (st === "loading" || st === "no_data" || st === "no_odpt" || st === "unknown") return null;
+      return {
+        status: st,
+        maxDelay: v.r.maxDelay == null ? null : v.r.maxDelay,
+        interval: v.r.interval || null,
+        cause: v.r.text || v.r.cause || null,
+        updatedAt: v.r.updatedAt || v.t || null,
+        source: "last_good",
+        stale: true,
+        refreshing: true
+      };
+    } catch(e) { return null; }
+  }
+
   // ========== Data Loading ==========
   function emitUpdate(fusedData) {
     if (fusedData) { _lastFusedData = fusedData; }
@@ -95,7 +118,7 @@
       if (!allLines || Object.keys(allLines).length === 0) return;
       var statusMap = localData.statusMap || {};
       Object.keys(allLines).forEach(function(id) {
-        if (!statusMap[id]) statusMap[id] = { status: "normal", maxDelay: 0, interval: null, cause: null };
+        if (!statusMap[id]) statusMap[id] = { status: "loading", maxDelay: null, interval: null, cause: null, source: "initial_check" };
       });
       localData.statusMap = statusMap;
     } catch(e) {}
@@ -249,6 +272,14 @@
     } catch(e) { return ""; }
   }
 
+  function extractRailwayIdentity(rec) {
+    try {
+      var rw = String((rec && rec["odpt:railway"]) || "");
+      var m = rw.match(/^odpt\.Railway:([^.]+)\.(.+)$/);
+      return m ? { operator: m[1], railwayCode: m[2], canonical: rw } : null;
+    } catch(e) { return null; }
+  }
+
   // v4.3.391: 聚合只接受无 railway 归属的记录（全网/多线报文）。
   // 有 odpt:railway 的记录专属其线——不得把 A 线的报文聚合显示到 B 线弹窗
   // （修复：都営新宿線无记录时误显浅草線报文）。
@@ -281,8 +312,9 @@
         var matched = null;
         for (var i = 0; i < raw.length; i++) {
           if (!raw[i]) continue;
-          var shortCode = extractRailwayShort(raw[i]);
-          if (shortCode && String(shortCode).toLowerCase() === String(code).toLowerCase()) {
+          var rid = extractRailwayIdentity(raw[i]);
+          if (rid && String(rid.operator).toLowerCase() === String(op).toLowerCase() &&
+              String(rid.railwayCode).toLowerCase() === String(code).toLowerCase()) {
             matched = raw[i];
             break;
           }
@@ -313,14 +345,14 @@
       try {
         var _opLine = window.ODPTClient && window.ODPTClient.LINE_TO_OPERATOR ? (window.ODPTClient.LINE_TO_OPERATOR[lineId] || window.ODPTClient.LINE_TO_OPERATOR[line.name]) : null;
         if (_opLine && window.ODPTClient.supports && window.ODPTClient.supports(_opLine, 'trainInformation')) {
-          // v4.3.394: 三态 fallback——获取失败(null)→情報なし(no_odpt)；尚未完成首次加载(undefined)→情報取得中(loading)；成功但无记录→正常(normal)。绝不把"还在加载"伪装成"正常"
+          // RunInfo loading semantics: only explicit source evidence may produce normal. Missing/pending line data stays loading.
           var _opKey = TransitConstants && typeof TransitConstants.normalizeOp === "function" ? TransitConstants.normalizeOp(_opLine) : _opLine;
           var _opState = odptData.delayInfo && _opKey ? odptData.delayInfo[_opKey] : undefined;
           var _opFailed = _opState === null;
           var _opLoading = _opState === undefined;
           fallbackDelay = _opFailed ? { status: "no_odpt", maxDelay: 0, interval: null, cause: null }
-            : (_opLoading ? { status: "loading", maxDelay: 0, interval: null, cause: null }
-              : { status: "normal", maxDelay: 0, interval: null, cause: null });
+            : (_opLoading ? { status: "loading", maxDelay: null, interval: null, cause: null }
+              : { status: "loading", maxDelay: null, interval: null, cause: null, source: "awaiting_line_record" });
         }
       } catch(_e) {}
       // v4.3.963: 网页源运行情报（WebRunInfo，千叶/湘南官网渠道）——ODPT 无数据线路经此注入；
@@ -331,7 +363,8 @@
           webInfo = window.WebRunInfo.getDelayInfo(lineId, line);
         }
       } catch(_we) {}
-      var delayInfo = apiInfo || webInfo || (_hasLocal && { status: localStatus.status, maxDelay: localStatus.maxDelay, interval: localStatus.interval, cause: localStatus.cause }) || fallbackDelay;
+      var _lastGood = getLastGoodDelay(lineId);
+      var delayInfo = apiInfo || webInfo || (_hasLocal && { status: localStatus.status, maxDelay: localStatus.maxDelay, interval: localStatus.interval, cause: localStatus.cause }) || _lastGood || fallbackDelay;
       // Attach running-chain resolution context (transient, not persistent)
 
       var _rtPositions = (odptData.realtimePositions[lineId] || []).slice();

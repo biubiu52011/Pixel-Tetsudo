@@ -28,6 +28,17 @@ jobs:
       - name: Check Brace Balance
         run: python .github/workflows/brace_balance_check.py
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: RunInfo semantic and identity tests
+        run: |
+          node tools/runinfo-evaluator.test.js
+          node tools/runinfo-scope.test.js
+          node tools/runinfo-loading-state.test.js
+
       - name: Entity Preservation Guard
         run: |
           echo Running canonical entity preservation guard...

@@ -454,7 +454,7 @@
     "RikutsuWest": "RikuWest",
     "UtsunomiyaJR": "Utsunomiya",
     // v4.3.475: 東武宇都宮線（ODPT Tobu.Utsunomiya 独立 railway，与 JR 宇都宮線 UtsunomiyaJR→Utsunomiya 并存，operator 不同不冲突）
-    "TobuUtsunomiya": "Utsunomiya",
+    "Utsunomiya": "Utsunomiya", // 東武宇都宮線。JR は UtsunomiyaJR + JR-East namespace で分離
     // v4.3.475: 都営新宿線显式映射（透传已命中 ODPT Toei.Shinjuku，此处文档化防歧义）
     "Shinjuku": "Shinjuku",
     "JobanMain": "Joban",

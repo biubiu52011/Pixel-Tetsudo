@@ -52,27 +52,42 @@
     } catch (e) { return Promise.resolve([]); }
   }
 
-  // Select only records that are allowed to affect this line.
-  // Railway-specific records win; no-railway records are operator/global fallback only.
+  // Canonical ODPT identity is operator namespace + railway code.
+  // Short railway codes are never globally unique and must not be matched alone.
+  function parseRailwayIdentity(rec) {
+    try {
+      var rw = String((rec && rec["odpt:railway"]) || "");
+      var m = rw.match(/^odpt\.Railway:([^.]+)\.(.+)$/);
+      return m ? { operator: m[1], railwayCode: m[2], canonical: rw } : null;
+    } catch (e) { return null; }
+  }
+
+  function expectedRailwayIdentity(line) {
+    if (!line) return null;
+    var operator = getOperator(line);
+    if (!operator && window.ODPTClient && window.ODPTClient.LINE_TO_OPERATOR && line.id) {
+      operator = window.ODPTClient.LINE_TO_OPERATOR[line.id] || null;
+    }
+    if (!operator) return null;
+    var code = line.id || "";
+    if (window.ODPTClient && window.ODPTClient.LINE_RAILWAY_CODE && line.id &&
+        window.ODPTClient.LINE_RAILWAY_CODE[line.id]) code = window.ODPTClient.LINE_RAILWAY_CODE[line.id];
+    return code ? { operator: operator, railwayCode: code } : null;
+  }
+
+  // Railway-specific records require a complete namespace match.
+  // Records without railway remain operator/global fallback because fetchODPT is operator-scoped.
   function selectScopedRecords(records, line) {
     if (!records || records.length === 0) return [];
-    var code = line && line.id ? line.id : "";
-    if (window.ODPTClient && window.ODPTClient.LINE_RAILWAY_CODE && line && line.id &&
-        window.ODPTClient.LINE_RAILWAY_CODE[line.id]) code = window.ODPTClient.LINE_RAILWAY_CODE[line.id];
-    function shortOf(rec) {
-      try {
-        var rw = (rec && rec["odpt:railway"]) || "";
-        if (!rw) return "";
-        var parts = String(rw).split(":");
-        var dots = parts[parts.length - 1].split(".");
-        return dots[dots.length - 1] || "";
-      } catch (e) { return ""; }
-    }
+    var expected = expectedRailwayIdentity(line);
+    if (!expected) return [];
     var own = records.filter(function(rec) {
-      return rec && shortOf(rec).toLowerCase() === String(code).toLowerCase();
+      var id = parseRailwayIdentity(rec);
+      return id && id.operator.toLowerCase() === String(expected.operator).toLowerCase() &&
+        id.railwayCode.toLowerCase() === String(expected.railwayCode).toLowerCase();
     });
     if (own.length) return own;
-    return records.filter(function(rec) { return rec && !shortOf(rec); });
+    return records.filter(function(rec) { return rec && !rec["odpt:railway"]; });
   }
 
   function recordText(rec) {
@@ -118,7 +133,30 @@
   // ========== 统一查询 API ==========
   // query(lineId, line) -> Promise<{status, text, links[], updatedAt, source} | null>
   var _cache = {};          // lineId -> { t: timestamp, r: result }
-  var CACHE_TTL_MS = 5 * 60 * 1000; // 5 分钟内存缓存（避免每次弹窗重复请求官方接口/官网）
+  var CACHE_TTL_MS = 5 * 60 * 1000;
+  var LAST_GOOD_KEY = "pt_runinfo_last_good_v1";
+  // Operational status is highly time-sensitive. Persistent cache is only a
+  // brief stale-while-revalidate bridge, never historical truth.
+  var LAST_GOOD_MAX_AGE_MS = 10 * 60 * 1000;
+
+  function readLastGood(lineId) {
+    try {
+      var all = JSON.parse(localStorage.getItem(LAST_GOOD_KEY) || "{}");
+      var v = all[lineId];
+      if (!v || !v.r || !v.t) return null;
+      if ((Date.now() - v.t) > LAST_GOOD_MAX_AGE_MS) return null;
+      return Object.assign({}, v.r, { stale: true, refreshing: true, cachedAt: v.t });
+    } catch(e) { return null; }
+  }
+
+  function writeLastGood(lineId, r) {
+    if (!r || !r.status || r.status === "loading" || r.status === "no_data" || r.status === "no_odpt" || r.status === "unknown") return;
+    try {
+      var all = JSON.parse(localStorage.getItem(LAST_GOOD_KEY) || "{}");
+      all[lineId] = { t: Date.now(), r: r };
+      localStorage.setItem(LAST_GOOD_KEY, JSON.stringify(all));
+    } catch(e) {}
+  } // 5 分钟内存缓存（避免每次弹窗重复请求官方接口/官网）
 
   // v4.3.968: 弹窗统一操作区——通用手动覆盖（任意线路可用；持久化与 WebRunInfo 手动缓存分离）
   var _manualOverride = {};  // lineId -> { text, status, updatedAt }
@@ -166,7 +204,7 @@
           var rawText = w.detail || w.cause || "";
           var ex = extractLinks(rawText);
           p = Promise.resolve({
-            status: w.status || "normal",
+            status: w.status || "info",
             text: ex.cleanText,
             links: [],
             updatedAt: w.updatedAt || null,
@@ -185,7 +223,7 @@
           if (text) {
             var ex = extractLinks(text);
             return {
-              status: aggregateStatus(records, lineObj) || "normal",
+              status: aggregateStatus(records, lineObj) || "info",
               text: ex.cleanText,
               links: ex.links,
               updatedAt: Date.now(),
@@ -203,7 +241,7 @@
 
     // 写缓存（null 也缓存，避免无数据线路反复请求）
     return p.then(function(r) {
-      try { _cache[lineId] = { t: Date.now(), r: r }; } catch(e) {}
+      try { _cache[lineId] = { t: Date.now(), r: r }; writeLastGood(lineId, r); } catch(e) {}
       return r;
     });
   }
@@ -232,7 +270,7 @@
         var d = lineObj.delayInfo;
         var raw = d.detail || d.cause || "";
         var ex = extractLinks(raw);
-        return { status: d.status || "normal", text: ex.cleanText, links: ex.links, updatedAt: d.updatedAt || null, source: d.source || "local" };
+        return { status: d.status || "info", text: ex.cleanText, links: ex.links, updatedAt: d.updatedAt || null, source: d.source || "local" };
       }
       if (lineObj && lineObj.status) {
         var raw2 = lineObj.cause || "";
@@ -254,6 +292,8 @@
     getManualOverride: getManualOverride,
     // exposed for deterministic regression tests; not used by UI
     _selectScopedRecords: selectScopedRecords,
+    _parseRailwayIdentity: parseRailwayIdentity,
+    _expectedRailwayIdentity: expectedRailwayIdentity,
     _aggregateStatus: aggregateStatus,
     isWebLine: function(lineId) {
       return !!(window.WebRunInfo && window.WebRunInfo.isWebLine && window.WebRunInfo.isWebLine(lineId));
