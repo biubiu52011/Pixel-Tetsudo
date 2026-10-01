@@ -1195,10 +1195,10 @@ window.LineOperationSystems = {
       code: "CO",
       nameJa: "中央本線",
       nameZh: "中央本线",
-      nameEn: "Chuo Main Line",
+      nameEn: "Chuo Line",
       nameKo: "주오 본선",
       color: "#007ac0",
-      lineIds: ["ChuoMain", "ChuoTatsuno"],
+      lineIds: ["Chuo", "ChuoTatsuno"],
       order: 20
     },
     {
@@ -1477,10 +1477,10 @@ window.LineOperationSystems = {
       code: "SOB",
       nameJa: "総武本線",
       nameZh: "总武本线",
-      nameEn: "Sobu Main Line",
+      nameEn: "Sobu Line",
       nameKo: "소부 본선",
       color: "#fcc60d",
-      lineIds: ["SobuMain"],
+      lineIds: ["Sobu"],
       icon: "../images/鉄道/JR東日本/JRグループ.png",
       order: 29
     },
@@ -3266,7 +3266,7 @@ window.PLATFORM_DATA = {
     "Chiba": { "-1": "3・4・5・6" }          // 上り（東京方面）3・4・5・6（内房・外房線ホームと共用）
   },
   // ===== 総武本線（千葉@0 → 銚子@21；下り=佐倉・銚子方面=升序1） =====
-  "SobuMain": {
+  "Sobu": {
     "Chiba": { "1": "7・8" }                 // 下り（佐倉・八日市場・銚子）7・8
   },
   // ===== 内房線（千葉@0 → 安房鴨川@31；下り=木更津・館山方面=升序1） =====
