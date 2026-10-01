@@ -125,7 +125,10 @@
         // ===== Center API 运营商 =====
         "TokyoMetro": {
             base: "https://api.odpt.org/api/v4/",
-            train: null,  // 东京地铁不提供列车位置API
+            // ODPT v4 odpt:Train provides realtime train positions and can be filtered by railway.
+            // Keep timetable enabled for metadata/running-chain evidence until each railway is
+            // independently verified as authoritative full coverage.
+            train: "odpt:Train?odpt:operator=odpt.Operator:TokyoMetro",
             trainTimetable: "odpt:TrainTimetable?odpt:operator=odpt.Operator:TokyoMetro",
             trainInformation: "odpt:TrainInformation?odpt:operator=odpt.Operator:TokyoMetro"
         },
