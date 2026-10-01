@@ -87,10 +87,15 @@ function getRealtimePositions(lineId) {
 
 function _positionSourceRank(p) {
   if (!p) return 9;
-  if (p.positionSource === "realtime-api" || p.estimated === false) return 0;
+  // Source metadata is authoritative. DataFusion explicitly tags ODPT live
+  // positions as realtime-api and timetable-derived positions separately.
+  // Do not let an unrelated/legacy estimated:false record impersonate live API.
+  if (p.positionSource === "realtime-api") return 0;
   if (p.positionSource === "train-timetable") return 1;
   if (p.positionSource === "station-timetable") return 2;
-  return p.estimated === true ? 1 : 0;
+  if (p.estimated === true) return 3;
+  // Untagged legacy positions remain usable, but never outrank known sources.
+  return 4;
 }
 
 function _trainIdentityKey(p) {
