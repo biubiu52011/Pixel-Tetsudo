@@ -868,12 +868,9 @@ window.getTransferHint = function(stationId, lang) {
     "Ogose": true,
     "Daishi_Tobu": true,
 
-    // Keikyu JSON Train Location: Main is excluded because Shinagawa-Sengakuji
-    // is outside the feed; these independent branches remain fully covered.
-    "KeikyuAirport": true,
-    "KeikyuKurihama": true,
-    "KeikyuZushi": true,
-    "Daishi_Keikyu": true
+    // Keikyu is intentionally not authoritative yet. Official JSON location
+    // exists for covered territory, but ODPT_ENDPOINTS.Keikyu.train is currently
+    // disabled, so the runtime does not consume that position source end-to-end.
 
     // Tokyo Metro / Yokohama Municipal / MIR / TamaMonorail are intentionally
     // not authoritative here until their currently published realtime format is
