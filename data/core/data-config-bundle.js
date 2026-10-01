@@ -866,7 +866,7 @@ window.getTransferHint = function(stationId, lang) {
     "Noda": true,
     "Tojo": true,
     "Ogose": true,
-    "Daishi_Tobu": true,
+    "TobuDaishi": true,
 
     // Keikyu is intentionally not authoritative yet. Official JSON location
     // exists for covered territory, but ODPT_ENDPOINTS.Keikyu.train is currently
@@ -2179,7 +2179,7 @@ window.LineOperationSystems = {
       nameEn: "Daishi Line",
       nameKo: "다이시선",
       color: "#0f6cc3",
-      lineIds: ["Daishi_Tobu"],
+      lineIds: ["TobuDaishi"],
       icon: "../images/鉄道/東武鉄道/大師線.png",
       order: 7
     },
@@ -2190,7 +2190,7 @@ window.LineOperationSystems = {
       nameEn: "Kameido Line",
       nameKo: "카메이도선",
       color: "#0f6cc3",
-      lineIds: ["Tobu_Kameido"],
+      lineIds: ["TobuKameido"],
       icon: "../images/鉄道/東武鉄道/亀戸線.png",
       order: 8
     },
@@ -2291,7 +2291,7 @@ window.LineOperationSystems = {
       nameEn: "Sayama Line",
       nameKo: "사야마선",
       color: "#EF7A00",
-      lineIds: ["Seibu_Sayama"],
+      lineIds: ["SeibuSayama"],
       icon: "../images/鉄道/西武鉄道/西武狭山線.png",
       order: 5
     },
@@ -2721,7 +2721,7 @@ window.LineOperationSystems = {
       nameEn: "Daishi Line",
       nameKo: "다이시선",
       color: "#e60012",
-      lineIds: ["Daishi_Keikyu"],
+      lineIds: ["KeikyuDaishi"],
       icon: "../images/鉄道/京急電鉄/大師線.png",
       order: 5
     }
