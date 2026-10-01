@@ -61,7 +61,7 @@ def main():
     try:
         with open(identity_required, 'r', encoding='utf-8') as f:
             identity_src = f.read()
-        for token in ('makeRailwayIdentity', 'parseRailwayIdentity', 'getLineRailwayIdentity', 'operator + "::"'):
+        for token in ('makeRailwayIdentity', 'parseRailwayIdentity', 'getLineRailwayIdentity', 'key:', '"::"'):
             if token not in identity_src:
                 new_errors.append('CANONICAL_IDENTITY_MISSING %s' % token)
         if "rw.indexOf('.' + railway)" in identity_src:
