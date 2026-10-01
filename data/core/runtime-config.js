@@ -70,7 +70,20 @@
     "Asakusa": true,
     "Shinjuku": true,
     "Mita": true,
-    "Oedo": true
+    "Oedo": true,
+
+    // Tokyo Metro: external ODPT coverage documentation identifies realtime train locations
+    // on all nine main lines. Branch identities are deliberately NOT inherited:
+    // MarunouchiBranch / ChiyodaBranch remain timetable-assisted until independently verified.
+    "Ginza": true,
+    "Marunouchi": true,
+    "Hibiya": true,
+    "Tozai": true,
+    "Chiyoda": true,
+    "Yurakucho": true,
+    "Hanzomon": true,
+    "Namboku": true,
+    "Fukutoshin": true
   };
 
   // ========== ODPT 站 ID 别名映射（补丁式修复，随发现持续追加）==========
