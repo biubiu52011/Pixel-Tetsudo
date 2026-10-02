@@ -24,6 +24,7 @@ function loadRuntime() {
   [
     'js/train-icons.js',
     'data/timetables/vehicle-type-map.js',
+    'data/timetables/tobu-limited-express-vehicle-evidence.js',
     'js/train-vehicle.js'
   ].forEach((rel) => {
     vm.runInContext(read(rel), context, { filename: rel });
@@ -668,6 +669,26 @@ function main() {
   const tobuLtdCandidates = win.VehicleTypeMap.resolve('TobuSkytree', 'odpt.TrainType:Tobu.LimitedExpress', null);
   assert(/東武N100系|東武100系|東武500系|東武200系/.test(tobuLtdCandidates || ''),
     'Skytree LimitedExpress mapping must preserve multiple current vehicle candidates', { tobuLtdCandidates });
+
+    const tobuEvidence = win.TOBU_LIMITED_EXPRESS_VEHICLE_EVIDENCE;
+  assert(tobuEvidence && typeof tobuEvidence.resolve === 'function',
+    'Tobu official vehicle evidence resolver must be loaded');
+  assert(!tobuEvidence.resolve('1263', '', 'down', '2026-07-18', { lineId: 'TobuNikko', operator: 'Tobu' }),
+    'Duplicate Tobu 1263 without service identity must remain unknown');
+  assert(tobuEvidence.resolve('1263', 'スカイツリートレイン63号', 'down', '2026-07-04', { lineId: 'TobuNikko', operator: 'Tobu' }) === '東武634型',
+    '1263 SKYTREE TRAIN 63 must resolve to Tobu 634');
+  assert(tobuEvidence.resolve('1263', 'スペーシアX909号', 'down', '2026-07-18', { lineId: 'TobuNikko', operator: 'Tobu' }) === '東武N100系',
+    '1263 SPACIA X 909 must resolve to Tobu N100');
+  assert(!tobuEvidence.resolve('1263', 'スペーシアX909号', 'up', '2026-07-18', { lineId: 'TobuNikko', operator: 'Tobu' }),
+    'Tobu evidence must reject direction mismatch');
+  assert(!tobuEvidence.resolve('5021M', '', 'down', '2026-09-20', { lineId: 'TobuNikko', operator: 'Tobu' }),
+    '5021M without service identity must remain unknown when multiple dated candidates match');
+  assert(tobuEvidence.resolve('5021M', 'スペーシア日光21号', 'down', '2026-09-20', { lineId: 'TobuNikko', operator: 'Tobu' }) === '東武100系',
+    '5021M SPACIA Nikko 21 on its valid dates must resolve to Tobu 100');
+  assert(!tobuEvidence.resolve('5021M', 'スペーシア日光21号', 'down', '2026-10-03', { lineId: 'TobuNikko', operator: 'Tobu' }),
+    'Dated Tobu evidence must expire outside its validity window');
+  assert(tobuEvidence.resolve('1083M', 'きぬがわ3号', 'down', '2026-10-03', { lineId: 'TobuNikko', operator: 'JR-East' }) === 'JR東日本E253系',
+    'Current Kinugawa 3 evidence must resolve to JR East E253');
 
     assertNoCurrentFictionalAsset(win);
   assertNoFilenameDependentIdentity(win);
