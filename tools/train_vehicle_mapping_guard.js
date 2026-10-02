@@ -769,6 +769,12 @@ function main() {
       assert(!fBlock.includes('(8両/10両)'), lineKey + ' F-Liner must remain ten-car only');
     }
   }
+  assert(/'MinatoMirai':[\s\S]{0,2200}'default': '横浜高速鉄道Y500系\(8両\) \/ 東急5050系\(8両\) \/ 東急5000系\(8両\) \/ 東急5050系4000番台\(10両\)'/.test(vehicleMapSource),
+    'MinatoMirai local pool must preserve explicit eight/ten-car identities');
+  assert(/'MinatoMirai':[\s\S]{0,2600}'Tobu': '東急5050系4000番台\(10両\) \/ 東武9000型\(10両\) \/ 東武9050型\(10両\) \/ 東武50070系\(10両\) \/ 東京メトロ10000系\(10両\) \/ 東京メトロ17000系\(10両\)'/.test(vehicleMapSource),
+    'MinatoMirai-Tobu pool must remain ten-car only');
+  assert(!/'MinatoMirai':[\s\S]{0,2600}'Tobu': '[^']*(?:Y500|東急5050系\(8両\)|東急5000系\(8両\))/.test(vehicleMapSource),
+    'Eight-car MinatoMirai fleets must not enter the Tobu-bound pool');
   assertNoFilenameDependentIdentity(win);
   assertCanonicalAssetRenameSimulation(win);
 
