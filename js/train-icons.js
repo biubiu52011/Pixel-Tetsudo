@@ -1381,6 +1381,13 @@
     delete VEHICLE_NAME_TO_ICON[name];
   });
 
+  // Ambiguous bare series names are not global vehicle identities. They occur across
+  // multiple operators/modes and must resolve through line/operator-qualified context.
+  [
+    "1000系", "2000系", "3000系", "5000系", "6000系",
+    "7000系", "8000系", "9000系", "10000系"
+  ].forEach(function(name) { delete VEHICLE_NAME_TO_ICON[name]; });
+
   Object.assign(VEHICLE_NAME_TO_ICON, {
     "多摩都市モノレール1000系": "../images/列车/多摩都市モノレール/1000系_標準塗装.png",
     "東武10030系": "../images/列车/東武鉄道/10030型_未更新車.png",
