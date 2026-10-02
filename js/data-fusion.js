@@ -975,6 +975,7 @@
       }
 
       doEstimation = function() {
+        var _estPerfStart = _perfNow();
         try {
           if (window.TrainPositionEstimator && typeof window.TrainPositionEstimator.estimateAllPositions === "function") {
             // Timetable estimation consumes timetable rows only; never fall back to the
@@ -1166,6 +1167,7 @@
             });
           }
         } catch(estErr) { console.debug("[DataFusion] Position estimation error:", estErr.message); }
+        finally { _perfRecord("doEstimation", _estPerfStart, { positionLines: Object.keys(posMap || {}).length }); }
       }
 
       // 先进行一次估算（使用已有的时刻表数据）
