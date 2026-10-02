@@ -1149,8 +1149,6 @@
     window.ODPT_DELAY_DATA = {};       // 延误/运行情报
     window.ODPT_TRAIN_POSITIONS = {};  // 列车实时位置
     window.ODPT_TIMETABLES = {};       // 列车时刻表
-    // 向后兼容：合并时刻表和实时位置
-    window.ODPT_TRAINS = {};
 
     // ========== ODPT_TT_PROBED 持久化（E2: localStorage，24h 滑动 TTL） ==========
     // v4.3.9xx: probed 标记原为内存态——trains 页整页跳转后丢失，41 条 JR 地方线
@@ -1241,10 +1239,6 @@
                 if (delayFresh) window.ODPT_DELAY_DATA = delayRec.data;
                 if (posFresh) {
                     window.ODPT_TRAIN_POSITIONS = posRec.data;
-                    // 向后兼容填充 ODPT_TRAINS（loadTrainPositions 与推定共用）
-                    Object.keys(posRec.data).forEach(function(op) {
-                        if (!window.ODPT_TRAINS[op]) window.ODPT_TRAINS[op] = posRec.data[op];
-                    });
                 }
                 if (delayFresh || posFresh) pushCachedRealtime(delayFresh, posFresh);
             }).catch(function(e) {
@@ -1311,7 +1305,7 @@
         validateAuthoritativeRealtimeConfig();
         window.ODPT_DELAY_DATA = {};
         window.ODPT_TRAIN_POSITIONS = {};
-        // 注意：不清空ODPT_TIMETABLES和ODPT_TRAINS，时刻表使用缓存
+        // 注意：不清空 ODPT_TIMETABLES，时刻表使用缓存
 
         var ops = Object.keys(ODPT_ENDPOINTS);
         var loaded = { delay: 0, positions: 0 };
@@ -1341,11 +1335,9 @@
                     fetchODPT(buildUrl(op, 'train')).then(extractData).then(function(data) {
                         // v4.3.392: 成功即写入（空数组也写入），失败不拖垮全局推送
                         window.ODPT_TRAIN_POSITIONS[op] = (data && data.length > 0) ? data : [];
-                        window.ODPT_TRAINS[op] = window.ODPT_TRAIN_POSITIONS[op];  // 向后兼容
                         loaded.positions++;
                     }).catch(function(e) {
                         window.ODPT_TRAIN_POSITIONS[op] = null;
-                        window.ODPT_TRAINS[op] = null;
                         console.debug("[ODPT] " + op + " train positions fetch failed:", e && e.message);
                     })
                 );
@@ -1417,12 +1409,6 @@
             if (cachedTimetables && !forceRefresh) {
                 console.debug("[ODPT] Using cached timetables from IndexedDB/localStorage");
                 window.ODPT_TIMETABLES = cachedTimetables;
-                // 填充ODPT_TRAINS（向后兼容）
-                Object.keys(cachedTimetables).forEach(function(op) {
-                    if (!window.ODPT_TRAINS[op]) {
-                        window.ODPT_TRAINS[op] = cachedTimetables[op];
-                    }
-                });
                 return;
             }
             // 缓存过期或强制刷新，从API加载
@@ -1543,7 +1529,6 @@
                     });
                     newTimetables[op] = deduped;
                     window.ODPT_TIMETABLES[op] = deduped;
-                    if (!window.ODPT_TRAINS[op]) window.ODPT_TRAINS[op] = deduped;
                     loaded++;
                 }
             });
@@ -1566,9 +1551,6 @@
                     if (data && data.length > 0) {
                         newTimetables[op] = data;
                         window.ODPT_TIMETABLES[op] = data;
-                        if (!window.ODPT_TRAINS[op]) {
-                            window.ODPT_TRAINS[op] = data;
-                        }
                         loaded++;
                     }
                 });
@@ -1686,12 +1668,6 @@
         loadTimetableCache().then(function(cached) {
             if (cached && Object.keys(cached).length > 0) {
                 window.ODPT_TIMETABLES = cached;
-                // 填充ODPT_TRAINS（向后兼容，避免搜索路由误判无时刻表数据）
-                Object.keys(cached).forEach(function(op) {
-                    if (!window.ODPT_TRAINS[op]) {
-                        window.ODPT_TRAINS[op] = cached[op];
-                    }
-                });
             }
         }).catch(function(e) { console.debug("[ODPT] Lazy timetable cache read skip:", e.message); });
         loadRawRealtimeCache().then(function() {
