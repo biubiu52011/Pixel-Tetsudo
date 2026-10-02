@@ -51,4 +51,8 @@ assert.ok(
   src.includes('card.classList.contains("rs-system-card")'),
   "aggregated system cards must not be patched as ordinary single-line cards"
 );
-console.log("runinfo-list-sync: 7 PASS");
+assert.ok(
+  src.includes("renderSystemCardByCode"),
+  "aggregated system status changes must rerender only the affected system card"
+);
+console.log("runinfo-list-sync: 8 PASS");
