@@ -920,3 +920,15 @@ assert(!/"KeiseiKanamachi":\s*"KeiseiOshiage"/.test(vehicleMapSource) &&
        !/"KeiseiChiba":\s*"KeiseiOshiage"/.test(vehicleMapSource) &&
        !/"KeiseiChihara":\s*"KeiseiOshiage"/.test(vehicleMapSource),
   'Keisei branch IDs must not alias to Oshiage vehicle pools');
+
+// Batch guard: Tokyu Toyoko canonical operator + formation identities.
+const toyokoBlock = vehicleMapSource.match(/'TokyuToyoko': \{[\s\S]*?\n    \},\n    'TokyuDenEn'/)?.[0] || '';
+assert(!/(?<!東急)5050系|(?<!東急)5000系/.test(toyokoBlock),
+  'Toyoko stock must retain Tokyu operator identity');
+assert(!/東武9000型(?!\(10両\))|東武9050型(?!\(10両\))|東武50070系(?!\(10両\))/.test(toyokoBlock),
+  'Toyoko Tobu through stock must retain explicit ten-car identity');
+assert(!/西武6000系(?!\(10両\))|西武40000系(?!\(10両\))/.test(toyokoBlock),
+  'Toyoko Seibu through stock must retain explicit ten-car identity');
+const toyokoFLiner = toyokoBlock.match(/'F-Liner': \{[\s\S]*?\n      \}/)?.[0] || '';
+assert(!/東京メトロ17000系(?!\(10両\))/.test(toyokoFLiner),
+  'Toyoko F-Liner must not admit 8-car Metro 17000 formations');
