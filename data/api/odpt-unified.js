@@ -287,7 +287,6 @@
         // MinatoMirai：ODPT无数据，移除映射
         "Mita": "Toei",
         "Mito": "JR-East",
-        "Yahiko": "JR-East",
         "Musashino": "JR-East",
         "Namboku": "TokyoMetro",
         "Nambu": "JR-East",
