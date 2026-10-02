@@ -1,45 +1,34 @@
 /**
  * Tobu official limited-express vehicle evidence.
  * Effective: 2026-03-14 timetable revision.
- * Source: Tobu Railway official limited-express timetable.
  *
- * This table is evidence only: exact train numbers transcribed from rows where
- * train number and vehicle class are unambiguous. Never infer ranges/prefixes.
+ * IMPORTANT:
+ * - Exact train-number entries are admitted only when the official timetable
+ *   exposes a train number and vehicle class in the same verifiable column.
+ * - Never infer a vehicle from number ranges, prefixes, parity, line, or hash.
+ * - Service-name evidence is handled separately by train-position-estimator.js.
  */
 (function(){
   "use strict";
-  var byTrainNumber = {
-    // Nikko/Kinugawa direction — down services, verified official table samples.
-    "1025": "東武100系",
-    "1027": "東武500系",
-    "1127": "東武500系",
-    "1031": "東武N100系",
-    "1131": "東武500系",
-    "1033": "東武100系",
-    "1035": "東武100系",
-    "1037": "東武500系",
-    "1139": "東武500系",
 
-    // Nikko/Kinugawa direction — up services, verified official table samples.
-    "1034": "東武100系",
-    "1036": "東武500系",
-    "1136": "東武500系",
-    "1038": "東武100系",
-    "1140": "東武N100系",
-    "1042": "東武500系",
-    "1142": "東武500系",
-    "1144": "東武N100系",
-    "1046": "東武500系",
-    "1048": "東武N100系",
-    "1050": "東武500系"
+  // Keep this deliberately sparse. The official PDF text layer is columnar and
+  // some pages do not expose every train-number cell reliably. Unverifiable
+  // transcriptions are safer as unknown than as false high-confidence evidence.
+  var records = {
+    // Add only independently re-checkable official timetable columns here.
   };
+
+  function resolve(trainNumber) {
+    var key = String(trainNumber || "").trim();
+    var rec = records[key];
+    return rec && rec.vehicleType ? rec.vehicleType : "";
+  }
 
   window.TOBU_LIMITED_EXPRESS_VEHICLE_EVIDENCE = {
     effectiveDate: "2026-03-14",
     source: "Tobu Railway official limited-express timetable",
-    byTrainNumber: byTrainNumber,
-    resolve: function(trainNumber) {
-      return byTrainNumber[String(trainNumber || "").trim()] || "";
-    }
+    policy: "exact-verified-columns-only",
+    records: records,
+    resolve: resolve
   };
 })();
