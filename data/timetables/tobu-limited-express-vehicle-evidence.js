@@ -25,6 +25,8 @@
       { vehicleType: "東武634型", service: "スカイツリートレイン63号", direction: "down" },
       { vehicleType: "東武N100系", service: "スペーシアX909号", direction: "down" }
     ],
+    // JR East current timetable (2026-10): direct structured vehicle evidence.
+    "1083M": { vehicleType: "JR東日本E253系", service: "きぬがわ3号", direction: "down", validFrom: "2026-03-14" },
 
     // Nikko/Kinugawa regular services — official 2026-03-14 up timetable.
     // These train numbers and service identities are exposed in the same table.
@@ -103,7 +105,7 @@
       .toLowerCase();
   }
 
-  function resolve(trainNumber, trainName, direction) {
+  function resolve(trainNumber, trainName, direction, serviceDate) {
     var key = String(trainNumber || "").trim();
     var entry = records[key];
     if (!entry) return "";
@@ -118,6 +120,11 @@
       }
       if (direction && rec.direction &&
           String(direction).toLowerCase() !== String(rec.direction).toLowerCase()) return false;
+      if (serviceDate) {
+        var d = String(serviceDate).slice(0, 10);
+        if (rec.validFrom && d < rec.validFrom) return false;
+        if (rec.validUntil && d > rec.validUntil) return false;
+      }
       return true;
     });
     return matched.length === 1 ? (matched[0].vehicleType || "") : "";
