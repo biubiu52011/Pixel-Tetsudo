@@ -625,6 +625,19 @@ function main() {
   assert(/小田急4000形\(10両\)/.test(odawaraMetro) && /東京メトロ16000系\(10両\)/.test(odawaraMetro),
     'Odakyu Chiyoda-bound pool must remain subway-capable stock', { odawaraMetro });
 
+    const skytreeGround = win.VehicleTypeMap.resolve('TobuSkytree', 'odpt.TrainType:Tobu.Local', null);
+  assert(!/(東武50050系|都営5500形)/.test(skytreeGround),
+    'Skytree ground fallback must not imply Hanzomon or Toei Asakusa rolling stock', { skytreeGround });
+  const skytreeHanzomon = win.VehicleTypeMap.resolve('TobuSkytree', 'odpt.TrainType:Tobu.SemiExpress', 'odpt.Station:TokyoMetro.Hanzomon.Oshiage');
+  assert(/東武50050系\(10両\)/.test(skytreeHanzomon) && /東京メトロ18000系\(10両\)/.test(skytreeHanzomon),
+    'Skytree Hanzomon through pool must preserve explicit 10-car through stock', { skytreeHanzomon });
+  const skytreeTH = win.VehicleTypeMap.resolve('TobuSkytree', 'odpt.TrainType:Tobu.TH-LINER', 'odpt.Station:TokyoMetro.Hibiya.Kasumigaseki');
+  assert(/^東武70090系\(7両\)$/.test(skytreeTH),
+    'Skytree TH-LINER must resolve only to Tobu 70090', { skytreeTH });
+  const skytreeToei = win.VehicleTypeMap.resolve('TobuSkytree', 'odpt.TrainType:Tobu.Local', 'odpt.Station:Toei.Asakusa.Asakusa');
+  assert(!/都営5500形/.test(skytreeToei),
+    'Asakusa terminal context must not be confused with Toei Asakusa through service', { skytreeToei });
+
     assertNoCurrentFictionalAsset(win);
   assertNoFilenameDependentIdentity(win);
   assertCanonicalAssetRenameSimulation(win);
