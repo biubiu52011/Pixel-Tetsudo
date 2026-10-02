@@ -1110,6 +1110,8 @@
           'Tennodai': 'E231系0番台', 'Toride': 'E231系0番台'
         }
       },
+      // Through limited expresses on the Shinagawa-Ueno corridor are Joban services.
+      'LimitedExpress': { 'default': 'E657系（ひたち・ときわ）' },
     },
     'UtsunomiyaJR': {
       'Local': { 'default': 'E231系1000番台 / E233系3000番台' },
