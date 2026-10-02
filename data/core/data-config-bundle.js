@@ -852,7 +852,7 @@ window.getTransferHint = function(stationId, lang) {
 
     // Keio JSON Train Location.
     "KeioMain": true,
-    "KeioSagamiharahara": true,
+    "KeioSagamihara": true,
     "KeioDobutsuen": true,
     "KeioNew": true,
     "KeioInokashira": true,
@@ -2528,7 +2528,7 @@ window.LineOperationSystems = {
       nameEn: "Sagamihara Line",
       nameKo: "사가미하라선",
       color: "#dd0076",
-      lineIds: ["KeioSagamiharahara"],
+      lineIds: ["KeioSagamihara"],
       icon: "../images/鉄道/京王電鉄/相模原線.png",
       order: 4
     },
