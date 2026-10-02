@@ -851,3 +851,15 @@ assert(!/京成3100形(?!\(8両\))/.test(vehicleMapSource),
   'Keisei 3100 must retain its explicit eight-car identity');
 assert(!vehicleMapSource.includes('(8両)(8両)'),
   'formation normalization must not duplicate eight-car suffixes');
+
+// Keikyu identity / duplicate-key guards.
+assert(vehicleMapSource.includes("'Daishi_Keikyu': {\n      'Local': { 'default': '京急1500形 / 京急新1000形（4両編成）' }"),
+  'Daishi line must keep current Keikyu-qualified 1500/1000 identities');
+const kurihamaBlock = vehicleMapSource.match(/'KeikyuKurihama': \{[\s\S]*?\n    \},\n    'KeikyuZushi'/)?.[0] || '';
+assert((kurihamaBlock.match(/'MorningWing':/g) || []).length === 1 &&
+       (kurihamaBlock.match(/'EveningWing':/g) || []).length === 1,
+  'KeikyuKurihama must not contain duplicate Wing service keys');
+assert(!kurihamaBlock.includes("'default': '2100形") &&
+       !kurihamaBlock.includes("'default': '新1000形") &&
+       !kurihamaBlock.includes(" / 1500形"),
+  'KeikyuKurihama rolling-stock identities must retain the Keikyu operator prefix');
