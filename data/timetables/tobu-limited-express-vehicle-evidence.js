@@ -21,6 +21,10 @@
     "5026M": { vehicleType: "JR東日本E253系", service: "日光26号", direction: "up" },
     "5111M": { vehicleType: "東武100系", service: "スペーシアきぬがわ11号", direction: "down" },
     "5112M": { vehicleType: "東武100系", service: "スペーシアきぬがわ12号", direction: "up" },
+    "1263": [
+      { vehicleType: "東武634型", service: "スカイツリートレイン63号", direction: "down" },
+      { vehicleType: "東武N100系", service: "スペーシアX909号", direction: "down" }
+    ],
 
     // Nikko/Kinugawa regular services — official 2026-03-14 up timetable.
     // These train numbers and service identities are exposed in the same table.
