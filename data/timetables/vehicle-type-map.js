@@ -1700,7 +1700,6 @@
     "JobanRapid":        "Joban",
     // 东急支线（7 线）
     // 東急支線は専用 MAP を持つ。大井町線へ alias すると 6020/9000/9020系を誤配するため禁止。
-    "Tamagawa":          "TokyuTamagawa",
     "Ikegami":           "TokyuIkegami",
     "Kodomonokuni":      "TokyuKodomonokuni",
     "Setagaya":          "TokyuSetagaya"
