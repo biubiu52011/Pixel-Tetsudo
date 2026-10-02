@@ -1496,16 +1496,16 @@
                         // 被错误升级为“ODPT 无此线路时刻表”并持续屏蔽后续正常请求。
                         return { rows: rows, sourceOk: true };
                     }).catch(function() {
-                        if (!window.ODPT_TT_PROBED) window.ODPT_TT_PROBED = {};
-                        window.ODPT_TT_PROBED[lid] = true;
-                        _persistProbed();
+                        // 请求失败保持 UNKNOWN：不得持久化为“已探测”，下次刷新仍可重试。
                         return { rows: [], sourceOk: false };
                     }).then(function(result) {
                         var rows = result.rows || [];
-                        // 探测标记：无论成功/失败都记录，避免当前加载周期反复请求。
-                        if (!window.ODPT_TT_PROBED) window.ODPT_TT_PROBED = {};
-                        window.ODPT_TT_PROBED[lid] = true;
-                        _persistProbed();
+                        // PROBED 只表示 source 已成功响应；失败保持 UNKNOWN。
+                        if (result.sourceOk) {
+                            if (!window.ODPT_TT_PROBED) window.ODPT_TT_PROBED = {};
+                            window.ODPT_TT_PROBED[lid] = true;
+                            _persistProbed();
+                        }
                         // EMPTY 只表示“成功请求且 source 明确返回空数组”。
                         if (result.sourceOk && rows.length === 0) {
                             if (!window.ODPT_TT_EMPTY) window.ODPT_TT_EMPTY = {};
