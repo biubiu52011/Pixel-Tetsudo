@@ -491,7 +491,9 @@
 
   function loadTrainPositions() {
     try {
-      var positionSource = window.ODPT_TRAIN_POSITIONS || window.ODPT_TRAINS;
+      // Position truth must come only from the dedicated realtime container.
+      // ODPT_TRAINS is a legacy mixed compatibility bucket and may contain timetable rows.
+      var positionSource = window.ODPT_TRAIN_POSITIONS;
       if (!positionSource) return;
       allLines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : {};
       if (!allLines || Object.keys(allLines).length === 0) {
@@ -507,8 +509,8 @@
       loadTrainPositions._retry = 0;
       posMap = {};
       odptData.trains = {};
-      Object.keys(window.ODPT_TRAINS).forEach(function(op) {
-        var trains = window.ODPT_TRAINS[op] || [];
+      Object.keys(positionSource).forEach(function(op) {
+        var trains = positionSource[op] || [];
         odptData.trains[op] = trains;
         var top = TransitConstants && typeof TransitConstants.normalizeOp === "function" ? TransitConstants.normalizeOp(op) : op;
         trains.forEach(function(t) {
