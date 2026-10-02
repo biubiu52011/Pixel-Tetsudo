@@ -839,3 +839,15 @@ assert(/'Fukutoshin':[\s\S]{0,6500}'Minatomirai': '東京メトロ10000系\(10�
 assert(!/'Fukutoshin':[\s\S]{0,6500}'Tokyu': '[^']*(?:東武50070系|西武40000系)/.test(
   vehicleMapSource.match(/'F-Liner': \{[\s\S]*?\n      \},\n      'Local'/)?.[0] || ''
 ), 'F-Liner Tokyu pool must not collapse Tobu/Seibu branch stock into a mixed pool');
+
+// 2026 Keisei / Shibayama current-fleet guards.
+assert(!vehicleMapSource.includes('芝山鉄道3500形'),
+  'retired Shibayama 3500 must not return after 2026-03-31');
+assert(vehicleMapSource.includes('芝山鉄道3600形(4両)'),
+  'current Shibayama-owned 3600 four-car set must remain represented');
+assert(!/京成3050形(?!\(8両\))/.test(vehicleMapSource),
+  'Keisei 3050 must retain its explicit eight-car identity');
+assert(!/京成3100形(?!\(8両\))/.test(vehicleMapSource),
+  'Keisei 3100 must retain its explicit eight-car identity');
+assert(!vehicleMapSource.includes('(8両)(8両)'),
+  'formation normalization must not duplicate eight-car suffixes');
