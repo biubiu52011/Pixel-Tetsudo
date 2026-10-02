@@ -581,6 +581,15 @@ function main() {
   assert(/芝山鉄道3500形/.test(shibayama),
     'Shibayama must resolve its own 3500 stock instead of generic fallback', { shibayama });
 
+    const shinjukuKeio = win.VehicleTypeMap.resolve('Shinjuku', 'odpt.TrainType:Toei.Local', 'odpt.Station:Keio.Keio.Sasazuka');
+  assert(/京王電鉄9000系30番台/.test(shinjukuKeio) && /京王電鉄5000系/.test(shinjukuKeio) && /都営10-300形/.test(shinjukuKeio),
+    'Toei Shinjuku Keio through pool must preserve 9000-30/5000/10-300', { shinjukuKeio });
+  assert(!/(京王電鉄7000系|京王電鉄8000系)/.test(shinjukuKeio),
+    'Keio 7000/8000 must not enter the Toei Shinjuku through pool', { shinjukuKeio });
+  const keioToei = win.VehicleTypeMap.resolve('Keio', 'odpt.TrainType:Keio.Local', 'odpt.Station:Toei.Shinjuku.Shinjuku');
+  assert(!/(京王電鉄7000系|京王電鉄8000系)/.test(keioToei) && /9000系30番台/.test(keioToei),
+    'Keio Toei destination mapping must remain subway-capable stock only', { keioToei });
+
     assertNoCurrentFictionalAsset(win);
   assertNoFilenameDependentIdentity(win);
   assertCanonicalAssetRenameSimulation(win);
