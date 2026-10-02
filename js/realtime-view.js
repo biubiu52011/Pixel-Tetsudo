@@ -533,7 +533,8 @@
       _latestLines = fused.lines;
       _latestOrder = fused.lineOrder || [];
       try {
-        renderLinesList(container, fused.lines, _latestOrder);
+        var visibleLines = getFilteredLines();
+        renderLinesList(container, visibleLines, _latestOrder);
         renderFilterBar(fused.lines);
         scheduleListStatusRefresh(fused.lines, true);
       } catch (e) {
@@ -601,9 +602,8 @@
     });
     if (typeof window.onLanguageChange === "function") {
       window.onLanguageChange(function() {
-        // render() already respects the selected operator through getFilteredLines
-        // in subsequent reconciliation/status paths; do not immediately rebuild
-        // the same list a second time with renderFiltered().
+        // render() applies the current operator filter itself, so language
+        // changes need only one list rebuild.
         render();
         if (_currentModalLine && _latestLines) {
           openModal(_currentModalLine, _latestLines, _currentModalIdentity);
