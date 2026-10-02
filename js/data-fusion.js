@@ -435,8 +435,9 @@
   var allLines = null;
   var doEstimation = null;
   var posMap = {};
-  // v4.3.948: 直通线 fallback 配置从数据层 through_fallback 读取（不再硬编码）
-  var THROUGH_RAILWAY_FALLBACK = (window.RailwayDB && window.RailwayDB.getData && window.RailwayDB.getData().through_fallback) || {};
+  // Source railway scope admits canonical candidates across operator boundaries.
+  // It never orders candidates or resolves an ambiguous physical-train identity.
+  var SOURCE_RAILWAY_LINE_SCOPE = (window.RuntimeConfig && window.RuntimeConfig.SOURCE_RAILWAY_LINE_SCOPE) || {};
 
   // Vehicle identity has one authority. Rendering/icon rules must never infer
   // a train class back into the operational data model.
@@ -578,8 +579,8 @@
             // v4.3.494: 直通系统（SotetsuDirect）列车 operator=JR-East，但羽沢横浜国大归属
             // SotetsuShin-Yokohama 线（operator=Sotetsu）——prefer 表内线路跨 operator 放行，
             // 否则该站始发列车匹配不到任何线而丢失。
-            var _thruCfg = THROUGH_RAILWAY_FALLBACK[railwayName];
-            if (lop !== top && !(_thruCfg && _thruCfg.prefer.indexOf(lid) >= 0)) return;
+            var _sourceScope = SOURCE_RAILWAY_LINE_SCOPE[railwayName] || [];
+            if (lop !== top && _sourceScope.indexOf(lid) < 0) return;
             var idx = line.stations.indexOf(stationKey);
             // v4.3.407: ODPT 站 ID 与项目站表差异（连字符 Musashi-Nakahara→MusashiNakahara、
             // 大小写 Inagi-Naganuma→Inaginaganuma）——归一化（去连字符+小写）兜底匹配
@@ -618,19 +619,7 @@
                 }
               }
             }
-            // 2. 直通系统（v4.3.494）: 按 prefer 归属表顺序选择，排除环线
-            if (!targetLine && THROUGH_RAILWAY_FALLBACK[railwayName]) {
-              var _thru = THROUGH_RAILWAY_FALLBACK[railwayName];
-              for (var _pi = 0; _pi < _thru.prefer.length; _pi++) {
-                var _plid = _thru.prefer[_pi];
-                if (_thru.exclude && _thru.exclude.indexOf(_plid) >= 0) continue;
-                for (var _mi2 = 0; _mi2 < matchingLines.length; _mi2++) {
-                  if (matchingLines[_mi2].lid === _plid) { targetLine = matchingLines[_mi2]; break; }
-                }
-                if (targetLine) break;
-              }
-            }
-            // 3. Ambiguous source identity must stay unresolved.
+            // 2. Ambiguous source identity must stay unresolved.
             // A shared station, train number, or "longest line" is not evidence
             // of railway/operator ownership. Do not guess a target line when
             // canonical railway identity and verified through fallback cannot
@@ -766,10 +755,6 @@
           var model = cfg.REALTIME_POSITION_POLICY || {};
           var linePolicy = model.lines && model.lines[lineId];
           if (linePolicy && linePolicy.mode) return linePolicy;
-          // Backward compatibility while AUTHORITATIVE_REALTIME_LINES is being retired.
-          if (cfg.AUTHORITATIVE_REALTIME_LINES && cfg.AUTHORITATIVE_REALTIME_LINES[lineId]) {
-            return { mode: "FULL" };
-          }
           return { mode: model.defaultMode || "HYBRID" };
         } catch(e) {
           return { mode: "UNKNOWN" };
