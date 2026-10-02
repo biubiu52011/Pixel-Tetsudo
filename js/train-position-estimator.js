@@ -543,11 +543,6 @@
             railDirection: directionName,
             destinationStation: destinationStation,
             destinationStationUrn: destinationStationUrn,
-            // A loop-shaped railway does not imply that every train circles
-            // indefinitely. A concrete destination is train-level terminal
-            // evidence (short turn / depot-bound / terminating service).
-            loopServiceMode: destinationStation ? "TERMINATING" :
-              (/InnerLoop|OuterLoop|Inner|Outer/.test(String(directionName || "")) ? "CIRCULATING_OR_UNKNOWN" : "NOT_LOOP"),
             trainClass: trainClass,
             vehicleType: _vehicleType,
             // v4.3.1018: manual vehicleType 透传渲染层
