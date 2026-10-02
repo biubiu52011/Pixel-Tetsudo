@@ -232,6 +232,21 @@ function main() {
   expectMap(win, 'Tokyu Kodomonokuni local fleet', 'TokyuKodomonokuni', 'Local', 'Y000系', ['6020系', '9000系', '9020系']);
   expectMap(win, 'Tokyu Setagaya local fleet', 'TokyuSetagaya', 'Local', '300系', ['6020系', '9000系', '9020系']);
 
+  // S-TRAIN is a Seibu 40000 series reserved-seat through service across
+  // Seibu / Tokyo Metro / Tokyu / Minatomirai. Destination operator must
+  // not substitute another operator's ordinary through-service stock.
+  [
+    ['TokyuToyoko', null],
+    ['TokyuToyoko', 'odpt.Station:TokyoMetro.Fukutoshin.Ikebukuro'],
+    ['TokyuToyoko', 'odpt.Station:Minatomirai.Minatomirai.MotomachiChukagai'],
+    ['Fukutoshin', null],
+    ['Fukutoshin', 'odpt.Station:Tokyu.Toyoko.Yokohama'],
+    ['Fukutoshin', 'odpt.Station:Minatomirai.Minatomirai.MotomachiChukagai']
+  ].forEach(([lineId, dest]) => {
+    const vt = win.VehicleTypeMap.resolve(lineId, 'odpt.TrainType:Seibu.S-TRAIN', dest);
+    assert(vt === '西武40000系', 'S-TRAIN must resolve only Seibu 40000 series', { lineId, dest, vt });
+  });
+
 
   expectMap(win, 'Yamanote P1/critical', 'Yamanote', 'Local', 'E235系0番台（山手線）', ['E235系1000番台', 'E235系総武中央線']);
   expectMap(win, 'Tozai JR-East local P0', 'Tozai', 'Local', 'E231系800番台（東西線直通） / 東京メトロ05系 / 東京メトロ07系 / 東京メトロ15000系', ['E231系500番台', 'JR E231系'], 'odpt.Station:JR-East.ChuoSobuLocal.Nakano');
