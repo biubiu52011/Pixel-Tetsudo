@@ -750,6 +750,12 @@ function main() {
     'Sotetsu 13000 is line-internal only and must never enter through-service pools');
   assert(/'Fukutoshin':[\s\S]{0,5000}'Sotetsu': '東急5050系4000番台\(10両\) \/ 相鉄20000系\(10両\)'/.test(vehicleMapSource),
     'Fukutoshin-Sotetsu candidates must remain ten-car Toyoko-compatible fleets');
+  assert(/'Yurakucho':[\s\S]{0,4200}'Tobu': '東武9000型\(10両\) \/ 東武9050型\(10両\) \/ 東武50070系\(10両\) \/ 東京メトロ10000系\(10両\) \/ 東京メトロ17000系\(10両\)'/.test(vehicleMapSource),
+    'Yurakucho-Tobu candidates must retain the complete ten-car through fleet');
+  assert(!/'Yurakucho':[\s\S]{0,4200}'Tobu': '[^']*17000系\(8両\/10両\)/.test(vehicleMapSource),
+    'Eight-car Metro 17000 formations must not enter Tobu-bound Yurakucho pools');
+  assert(!/'(?:Yurakucho|Fukutoshin)'[\s\S]{0,6000}'(?:Tobu|TokyoMetro|Tokyu|Seibu|Sotetsu)': '[^']*90000系/.test(vehicleMapSource),
+    'Tobu 90000 must not be inferred into Metro through pools without operational evidence');
   assertNoFilenameDependentIdentity(win);
   assertCanonicalAssetRenameSimulation(win);
 
