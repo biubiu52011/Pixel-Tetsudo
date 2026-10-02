@@ -696,7 +696,10 @@
             // 通过 ThroughService 判断当前 lid 是否与 Rinkai 直通
             var _tsRinkaiPartner = (window.ThroughService && window.ThroughService.getDirectThroughLines) ? (window.ThroughService.getDirectThroughLines(lid) || []) : [];
             if (isRinkaiTrain && _tsRinkaiPartner.indexOf('Rinkai') >= 0) {
-              positionData.trainClass = resolveTrainClass(
+              // Keep an explicit realtime resolution authoritative. Rinkai is a
+              // fallback context only when the source record itself did not
+              // identify a usable vehicle.
+              positionData.trainClass = positionData.trainClass || resolveTrainClass(
                 { lineId: 'Rinkai', operator: 'TWR', trainNumber: trainId, stationIndex: idx, trainType: rawType, destinationStation: destStations, trainId: trainId + '_' + idx },
                 'Rinkai', 'TWR', trainId + '_' + idx, idx, rawType
               );
