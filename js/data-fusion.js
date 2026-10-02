@@ -1010,11 +1010,16 @@
           if (!mayUseTimetablePosition(lid)) return;
           var hasRealtime = posMap[lid] && posMap[lid].length > 0;
           var hasTimetable = timetableOps.indexOf(line.operator) >= 0;
-          // 检查该线路是否有时刻表数据（按railway过滤）
+          // Check timetable presence with the same canonical -> ODPT railway
+          // identity used by the estimator. Internal branch ids do not have to
+          // appear literally in odpt:railway.
           if (hasTimetable && window.ODPT_TIMETABLES[line.operator]) {
+            var _ttRailwayCode = (window.ODPTClient && window.ODPTClient.LINE_RAILWAY_CODE &&
+              window.ODPTClient.LINE_RAILWAY_CODE[lid]) || lid;
             var lineTimetables = window.ODPT_TIMETABLES[line.operator].filter(function(t) {
               var railway = t['odpt:railway'] || '';
-              return railway.indexOf(lid) >= 0 || railway.indexOf('.' + lid) >= 0;
+              return railway.indexOf(lid) >= 0 || railway.indexOf('.' + lid) >= 0 ||
+                railway.indexOf(_ttRailwayCode) >= 0 || railway.indexOf('.' + _ttRailwayCode) >= 0;
             });
             hasTimetable = lineTimetables.length > 0;
           }
@@ -1023,17 +1028,26 @@
           }
           // v4.3.446: 支線（branchOf 子線、丸ノ内線支線等）の時刻表も本体と同じく必要——
           // 支線は単独カード化せず体系内でリアルタイム配備するため、本体の需要に依存せず常に確保する
-          if (line && line.branches) {
-            line.branches.forEach(function(bid3) {
+          var _branchIds3 = [];
+          if (line && line.branches) _branchIds3 = line.branches.slice();
+          Object.keys(allLines).forEach(function(_bid3) {
+            if (_bid3 !== lid && allLines[_bid3] && allLines[_bid3].branchOf === lid &&
+                _branchIds3.indexOf(_bid3) < 0) _branchIds3.push(_bid3);
+          });
+          if (_branchIds3.length > 0) {
+            _branchIds3.forEach(function(bid3) {
               var bl3 = allLines[bid3];
               if (!bl3 || !bl3.operator) return;
               if (!mayUseTimetablePosition(bid3)) return;
               var hasRt3 = posMap[bid3] && posMap[bid3].length > 0;
               var hasTt3 = false;
               if (window.ODPT_TIMETABLES && window.ODPT_TIMETABLES[bl3.operator]) {
+                var _brRailwayCode3 = (window.ODPTClient && window.ODPTClient.LINE_RAILWAY_CODE &&
+                  window.ODPTClient.LINE_RAILWAY_CODE[bid3]) || bid3;
                 var lt3 = window.ODPT_TIMETABLES[bl3.operator].filter(function(t) {
                   var railway = t['odpt:railway'] || '';
-                  return railway.indexOf(bid3) >= 0 || railway.indexOf('.' + bid3) >= 0;
+                  return railway.indexOf(bid3) >= 0 || railway.indexOf('.' + bid3) >= 0 ||
+                    railway.indexOf(_brRailwayCode3) >= 0 || railway.indexOf('.' + _brRailwayCode3) >= 0;
                 });
                 hasTt3 = lt3.length > 0;
               }
