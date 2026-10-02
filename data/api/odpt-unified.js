@@ -1490,22 +1490,24 @@
                             });
                         }
                         return rows;
-                    }).catch(function() {
-                        // 请求失败：标记探测+空线（v4.3.995: EMPTY 供全量拉取跳过）
-                        if (!window.ODPT_TT_PROBED) window.ODPT_TT_PROBED = {};
-                        window.ODPT_TT_PROBED[lid] = true;
-                        _persistProbed();
-                        if (!window.ODPT_TT_EMPTY) window.ODPT_TT_EMPTY = {};
-                        window.ODPT_TT_EMPTY[lid] = true;
-                        _persistEmpty();
-                        return [];
                     }).then(function(rows) {
-                        // 探测标记：无论有无数据都记录，避免 loadMissingTimetables 对空线反复请求
+                        // 只有成功响应才能证明 source 对该 railway 返回空数据。
+                        // 网络/CORS/限流等异常不得写入 7 天 EMPTY 负缓存，否则一次瞬时失败会
+                        // 被错误升级为“ODPT 无此线路时刻表”并持续屏蔽后续正常请求。
+                        return { rows: rows, sourceOk: true };
+                    }).catch(function() {
                         if (!window.ODPT_TT_PROBED) window.ODPT_TT_PROBED = {};
                         window.ODPT_TT_PROBED[lid] = true;
                         _persistProbed();
-                        // v4.3.995: 空响应也标记 EMPTY（全量拉取跳过），有数据不标记
-                        if (rows.length === 0) {
+                        return { rows: [], sourceOk: false };
+                    }).then(function(result) {
+                        var rows = result.rows || [];
+                        // 探测标记：无论成功/失败都记录，避免当前加载周期反复请求。
+                        if (!window.ODPT_TT_PROBED) window.ODPT_TT_PROBED = {};
+                        window.ODPT_TT_PROBED[lid] = true;
+                        _persistProbed();
+                        // EMPTY 只表示“成功请求且 source 明确返回空数组”。
+                        if (result.sourceOk && rows.length === 0) {
                             if (!window.ODPT_TT_EMPTY) window.ODPT_TT_EMPTY = {};
                             window.ODPT_TT_EMPTY[lid] = true;
                             _persistEmpty();
