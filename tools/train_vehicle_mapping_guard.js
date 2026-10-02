@@ -365,6 +365,11 @@ function main() {
   assert(!chuoLocalLtd, 'ChuoSobuLocal must not inherit Chuo limited-express stock', { chuoLocalLtd });
   const unknownType = win.VehicleTypeMap.resolve('ChuoRapid', 'odpt.TrainType:JR-East.UnmappedSpecialService', null);
   assert(!unknownType, 'unmapped train type must remain unresolved instead of falling back to Local', { unknownType });
+  const shonanNikkoLtd = win.VehicleTypeMap.resolve('ShonanShinjuku', 'odpt.TrainType:JR-East.LimitedExpress', null);
+  assert(/253系1000番台/.test(shonanNikkoLtd) && /東武100系/.test(shonanNikkoLtd), 'ShonanShinjuku JR-Tobu limited express must preserve current 253-1000/Tobu100 candidates', { shonanNikkoLtd });
+  const utsunomiyaNikkoLtd = win.VehicleTypeMap.resolve('UtsunomiyaJR', 'odpt.TrainType:JR-East.LimitedExpress', null);
+  assert(/253系1000番台/.test(utsunomiyaNikkoLtd) && /東武100系/.test(utsunomiyaNikkoLtd), 'UtsunomiyaJR JR-Tobu limited express must preserve current 253-1000/Tobu100 candidates', { utsunomiyaNikkoLtd });
+
   const jobanLtd = win.VehicleTypeMap.resolve('Joban', 'odpt.TrainType:JR-East.LimitedExpress', null);
   assert(/E657/.test(jobanLtd), 'Joban operating system must resolve Hitachi/Tokiwa E657', { jobanLtd });
   const uenoTokyoLtd = win.VehicleTypeMap.resolve('UenoTokyo', 'odpt.TrainType:JR-East.LimitedExpress', null);
