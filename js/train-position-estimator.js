@@ -545,6 +545,11 @@
             destinationStationUrn: destinationStationUrn,
             trainClass: trainClass,
             vehicleType: _vehicleType,
+            vehicleIconPath: vehResult.iconPath || '',
+            vehicleSource: vehResult.source || '',
+            vehicleConfidence: vehResult.confidence || 'none',
+            vehicleResolution: vehResult,
+            vehicleResolvedUpstream: !!vehResult.iconPath,
             // v4.3.1018: manual vehicleType 透传渲染层
             vehicleTypeManual: tt['vehicleType'] || ''
           });
