@@ -207,14 +207,31 @@ function assertDeterministic(win, label, ctx) {
   }
 }
 
+function assertCompanyQualifiedTrainAssets() {
+  const root = path.join(ROOT, 'images', '列车');
+  fs.readdirSync(root, { withFileTypes: true }).filter((entry) => entry.isDirectory()).forEach((entry) => {
+    const company = entry.name;
+    const dir = path.join(root, company);
+    fs.readdirSync(dir, { withFileTypes: true }).filter((asset) => asset.isFile() && /\.png$/i.test(asset.name)).forEach((asset) => {
+      assert(asset.name.startsWith(company + '_'), 'train asset filename missing company namespace', {
+        company,
+        asset: asset.name,
+        expectedPrefix: company + '_'
+      });
+    });
+  });
+}
+
 function main() {
+  const win = loadRuntime();
+  assertCompanyQualifiedTrainAssets();
+
   // 東急支線は大井町線の車両を継承しない。
   expectMap(win, 'Tokyu Tamagawa local fleet', 'TokyuTamagawa', 'Local', '東急電鉄1000系 / 7000系', ['6020系', '9000系', '9020系']);
   expectMap(win, 'Tokyu Ikegami local fleet', 'TokyuIkegami', 'Local', '東急電鉄1000系 / 7000系', ['6020系', '9000系', '9020系']);
   expectMap(win, 'Tokyu Kodomonokuni local fleet', 'TokyuKodomonokuni', 'Local', 'Y000系', ['6020系', '9000系', '9020系']);
   expectMap(win, 'Tokyu Setagaya local fleet', 'TokyuSetagaya', 'Local', '300系', ['6020系', '9000系', '9020系']);
 
-  const win = loadRuntime();
 
   expectMap(win, 'Yamanote P1/critical', 'Yamanote', 'Local', 'E235系0番台（山手線）', ['E235系1000番台', 'E235系総武中央線']);
   expectMap(win, 'Tozai JR-East local P0', 'Tozai', 'Local', 'E231系800番台（東西線直通） / 東京メトロ05系 / 東京メトロ07系 / 東京メトロ15000系', ['E231系500番台', 'JR E231系'], 'odpt.Station:JR-East.ChuoSobuLocal.Nakano');
