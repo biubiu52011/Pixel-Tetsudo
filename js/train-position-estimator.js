@@ -529,6 +529,9 @@
             if (/SPACIA\s*X|スペーシア\s*X/i.test(_trainName)) {
               tt['vehicleType'] = '東武N100系';
               tt._vehicleEvidenceSource = 'tobu-official-2026-timetable-service-name';
+            } else if (/SKYTREE\s*Liner|スカイツリー\s*ライナー/i.test(_trainName)) {
+              tt['vehicleType'] = '東武500系';
+              tt._vehicleEvidenceSource = 'tobu-official-2026-timetable-service-name';
             } else if (/リバティ|Revaty|Liberty/i.test(_trainName)) {
               tt['vehicleType'] = '東武500系';
               tt._vehicleEvidenceSource = 'tobu-official-2026-timetable-service-name';
