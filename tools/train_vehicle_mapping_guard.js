@@ -662,6 +662,13 @@ function main() {
   assert(!fabricatedTobu,
     'Unknown Tobu model names must not fabricate asset paths', { fabricatedTobu });
 
+    const tobuGenericLtd = win.TrainIcons.getTrainIcon('TobuSkytree', 'Tobu', 'unknown_ltd', null, 'odpt.TrainType:Tobu.LimitedExpress', true);
+  assert(!tobuGenericLtd,
+    'Generic Tobu LimitedExpress must not collapse to one representative vehicle icon', { tobuGenericLtd });
+  const tobuLtdCandidates = win.VehicleTypeMap.resolve('TobuSkytree', 'odpt.TrainType:Tobu.LimitedExpress', null);
+  assert(/東武N100系|東武100系|東武500系|東武200系/.test(tobuLtdCandidates || ''),
+    'Skytree LimitedExpress mapping must preserve multiple current vehicle candidates', { tobuLtdCandidates });
+
     assertNoCurrentFictionalAsset(win);
   assertNoFilenameDependentIdentity(win);
   assertCanonicalAssetRenameSimulation(win);
