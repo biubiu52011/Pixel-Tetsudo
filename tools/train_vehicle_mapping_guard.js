@@ -722,6 +722,13 @@ function main() {
     'Through-service train-number suffix guessing must remain disabled');
   assert(!/lines:\s*\['Rinkai'\][\s\S]{0,200}E233系_7000/.test(trainIconsSource),
     'Rinkai trains must not default to JR E233-7000 without vehicle evidence');
+  const vehicleMapSource = fs.readFileSync(path.join(ROOT, 'data/timetables/vehicle-type-map.js'), 'utf8');
+  assert(/'Rinkai':\s*'JR E233系7000番台 \/ 東京臨海高速鉄道71-000形 \/ 東京臨海高速鉄道70-000形'/.test(vehicleMapSource),
+    'Rinkai-to-JR pool must include both current TWR generations and JR E233-7000');
+  assert(/'Saikyo':[\s\S]{0,900}'Rinkai':\s*'JR E233系7000番台 \/ 東京臨海高速鉄道71-000形 \/ 東京臨海高速鉄道70-000形'/.test(vehicleMapSource),
+    'Saikyo-to-Rinkai pool must include TWR 70-000 and 71-000');
+  assert(/'Saikyo':[\s\S]{0,900}'Sotetsu':\s*'JR E233系7000番台 \/ 相鉄12000系'/.test(vehicleMapSource),
+    'JR-Sotetsu through pool must retain both E233-7000 and Sotetsu 12000');
   assertNoFilenameDependentIdentity(win);
   assertCanonicalAssetRenameSimulation(win);
 
