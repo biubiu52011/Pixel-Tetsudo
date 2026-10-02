@@ -648,7 +648,13 @@
               trainType: rawType,
               typeName: typeName,
               estimated: false,
-              positionSource: "realtime-api"
+              positionSource: "realtime-api",
+              // Preserve ODPT dynamic-data freshness metadata for the train UI.
+              // Do not synthesize timestamps here: dc:date/dct:valid/frequency belong
+              // to the source response and are needed to distinguish fresh vs stale.
+              sourceUpdatedAt: t["dc:date"] || null,
+              sourceValidUntil: t["dct:valid"] || null,
+              sourceFrequency: t["odpt:frequency"] != null ? t["odpt:frequency"] : null
             };
             // v4.3.6xx: 双向直通列车处理
             // 1. 临海线的车（operator=TWR）开到JR区间了 → 在JR线路图上显示临海线车型
