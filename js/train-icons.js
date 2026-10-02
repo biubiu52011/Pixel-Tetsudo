@@ -352,14 +352,10 @@
   // v4.3.450: 直通列車の車号規則——ODPT Train には車両形式フィールドが無いため、
   // trainNumber の末尾記号で直通車の車籍を識別する（JR 社内直通 京葉↔武蔵野 など）。
   // 例：京葉線上の E 末尾 = 武蔵野線直通（E231系0番台）、武蔵野線上の Y 末尾 = 京葉線直通（E233系5000番台）。
-  var THROUGH_SUFFIX_RULES = {
-    "Keiyo": [
-      { suffix: "E", icon: "../images/列车/JR東日本/JR東日本_E231系_0番代.png" }
-    ],
-    "Musashino": [
-      { suffix: "Y", icon: "../images/列车/JR東日本/JR東日本_E233系5000番台.png" }
-    ]
-  };
+  // Train-number suffix guessing was removed for the same reason: a service
+  // suffix is operational context, not concrete rolling-stock evidence.
+  var THROUGH_SUFFIX_RULES = {};
+
 
   // Train-number prefix guessing was removed. Prefixes can identify an operation
   // pattern, but are not sufficient evidence for a concrete rolling-stock class.
@@ -412,9 +408,7 @@
     // りんかい線の快速/普通で営業運転)——列次号后缀(T/K/F)无法区分形式(车号无区别属实);
     // S0 manual 已标三形式多候选(E233系7000番台 / 71-000形 / 70-000形),此处仅作无依据兜底,
     // 默认 E233系7000番台(多数+ODPT標記一致)。
-    { lines: ['Rinkai'], op: 'TWR', fn: function(trainId, tn) {
-      return '../images/列车/JR東日本/JR東日本_E233系_7000番代.png';
-    }},
+
   ];
 
   function _resolveTrainIcon(lineId, operator, trainId, stationIndex, trainType, byOperator) {
