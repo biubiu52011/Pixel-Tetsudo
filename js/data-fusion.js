@@ -1206,10 +1206,37 @@
       Object.keys(posMap || {}).forEach(function(id) {
         if (!_seenEstimationSeed[id]) { _seenEstimationSeed[id] = true; _estimationSeeds.push(id); }
       });
-      var _estimationTargets = (_minuteKey !== _lastEstimationMinute)
-        ? null
-        : _expandDirtyLines(_estimationSeeds, allLines);
+      var _minuteAdvanced = _minuteKey !== _lastEstimationMinute;
+      var _estimationTargets = _expandDirtyLines(_estimationSeeds, allLines);
+      // Keep the current realtime neighbourhood synchronous so the visible
+      // snapshot is coherent, but never turn a minute boundary into one
+      // full-network main-thread task. Timetable-only lines still need their
+      // clock-driven positions advanced once per minute, so process the
+      // remainder cooperatively in small batches between browser turns.
       doEstimation(_estimationTargets);
+      if (_minuteAdvanced) {
+        var _targetSet = {};
+        (_estimationTargets || []).forEach(function(id) { _targetSet[id] = true; });
+        var _minuteRemainder = Object.keys(allLines || {}).filter(function(id) {
+          return !_targetSet[id] && mayUseTimetablePosition(id);
+        });
+        var _minuteBatchToken = _minuteKey;
+        var _minuteBatchSize = 8;
+        (function _runMinuteBatch(offset) {
+          if (_minuteBatchToken !== Math.floor(Date.now() / 60000)) return;
+          var batch = _minuteRemainder.slice(offset, offset + _minuteBatchSize);
+          if (!batch.length) return;
+          setTimeout(function() {
+            try {
+              doEstimation(batch);
+              fuseDirty(batch);
+            } catch(e) {
+              console.debug("[DataFusion] minute estimation batch error:", e.message);
+            }
+            _runMinuteBatch(offset + _minuteBatchSize);
+          }, 0);
+        })(0);
+      }
       _lastEstimationMinute = _minuteKey;
 
       // 识别需要估算但可能没有时刻表的线路，按需加载
