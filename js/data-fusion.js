@@ -1092,7 +1092,28 @@
               (estimated[_vlid] || []).forEach(_rememberChainVehicle);
             });
             Object.keys(estimated).forEach(function(_vlid) {
-              (estimated[_vlid] || []).forEach(_inheritChainVehicle);
+              (estimated[_vlid] || []).forEach(function(_p) {
+                _inheritChainVehicle(_p);
+                // Daily formation anchors are stronger than generic fleet/type
+                // evidence and propagate only through the resolved running chain.
+                if (window.TrainVehicle && typeof window.TrainVehicle.resolveFormationEvidence === "function") {
+                  var _fe = window.TrainVehicle.resolveFormationEvidence({
+                    lineId: _vlid,
+                    runningChainId: _p && _p.runningChainId,
+                    at: Date.now()
+                  });
+                  if (_fe) {
+                    _p.trainClass = _fe.vehicleName;
+                    _p.vehicleType = _fe.vehicleName;
+                    _p.vehicleIconPath = _fe.iconPath;
+                    _p.vehicleSource = _fe.source;
+                    _p.vehicleConfidence = _fe.confidence;
+                    _p.formationId = _fe.formationId;
+                    _p.formationServiceDate = _fe.serviceDate;
+                    _p.vehicleResolution = _fe;
+                  }
+                }
+              });
             });
 
             // Keep registry lifetime scoped to chains that still exist in the
