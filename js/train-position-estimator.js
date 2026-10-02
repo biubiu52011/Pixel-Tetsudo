@@ -11,6 +11,12 @@
   "use strict";
 
   var ESTIMATOR_VERSION = 7;
+  var _manualTimetableRegistry = {};
+
+  function registerManualTimetable(lineId, rows) {
+    if (!lineId || !Array.isArray(rows) || rows.length === 0) return;
+    _manualTimetableRegistry[lineId] = rows;
+  }
 
   // ========== 方向反转线路 ==========
   // 这些线路的ODPT站序和本地站表顺序相反，需要反转索引
@@ -584,12 +590,10 @@
         timetableIndex[op] = idx;
       });
 
-      // v4.3.974: 手动时刻表并入推定池——window 上已注入的 <lineId>_MANUAL_TIMETABLES
-      // （route-timetable 搜索已消费；推定器此前只吃 ODPT 池，无 ODPT 的新干线等线路推定空白）
-      // 按 (operator, railway) 并入，使这些线路的时刻表推定可用
-      Object.keys(window).forEach(function(gk) {
-        if (gk.indexOf("_MANUAL_TIMETABLES") < 0) return;
-        var m = window[gk];
+      // Manual timetables are explicitly registered when their lazy script
+      // finishes loading. Avoid Object.keys(window) on every estimation pass.
+      Object.keys(_manualTimetableRegistry).forEach(function(lineId) {
+        var m = _manualTimetableRegistry[lineId];
         if (!Array.isArray(m) || m.length === 0) return;
         m.forEach(function(tt) {
           if (!tt || !tt["odpt:railway"]) return;
@@ -734,6 +738,7 @@
     version: ESTIMATOR_VERSION,
     estimateLinePositions: estimateLinePositions,
     estimateAllPositions: estimateAllPositions,
+    registerManualTimetable: registerManualTimetable,
     getCurrentCalendar: getCurrentCalendar,
     getCurrentCalendars: getCurrentCalendars,
     getCurrentMinutes: getCurrentMinutes,
