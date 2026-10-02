@@ -309,20 +309,19 @@
     return /[\u3041-\u3096\u30A1-\u30FA\u30FC]/.test(s) || /[駅]/.test(s) || /線内/.test(s);
   }
 
-  var _origLabels = { ja: "日本語原文", zh: "查看日文原文", en: "View Japanese original", ko: "일본어 원문 보기" };
-
-  // 译文为主 + 原文折叠（非 ja 界面）；ja 界面或原文即目标语言时直出
-  // 4.3.445: 译文来自离线模板引擎 DelayTranslator（同步；未命中时安全回退原文）
+  // Non-Japanese UI renders the translated body only. The official Japanese
+  // source remains an internal factual input and is never exposed as a display
+  // fallback in another language.
   function _translatedText(text, lang, opts) {
     var safe = escapeHtml(text);
     if (lang === "ja" || !_needsJaTranslate(text)) return safe;
-    var tr = text;
-    if (window.DelayTranslator) {
-      var r = window.DelayTranslator.translate(text, opts || {}, lang);
-      tr = r.translated || text;
+    if (!window.DelayTranslator) return '<span class="rs-text-muted">' + escapeHtml(t("status.translation_unavailable") || t("status.no_data")) + '</span>';
+    var r = window.DelayTranslator.translate(text, opts || {}, lang);
+    var tr = r && r.translated ? r.translated : "";
+    if (!tr || _needsJaTranslate(tr)) {
+      return '<span class="rs-text-muted">' + escapeHtml(t("status.translation_unavailable") || t("status.no_data")) + '</span>';
     }
-    return '<div class="rs-cause-translated">' + escapeHtml(tr) + '</div>'
-      + '<details class="rs-cause-original"><summary>' + (_origLabels[lang] || _origLabels.en) + '</summary><div>' + safe + '</div></details>';
+    return '<div class="rs-cause-translated">' + escapeHtml(tr) + '</div>';
   }
 
   function sortOperators(ops) {
