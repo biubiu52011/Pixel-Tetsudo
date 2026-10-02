@@ -863,3 +863,19 @@ assert(!kurihamaBlock.includes("'default': '2100形") &&
        !kurihamaBlock.includes("'default': '新1000形") &&
        !kurihamaBlock.includes(" / 1500形"),
   'KeikyuKurihama rolling-stock identities must retain the Keikyu operator prefix');
+
+// Fukutoshin branch-boundary guards: Seibu and Tobu branches meet the Metro network,
+// but their rolling stock must not be inferred to cross into the opposite branch.
+const ikebukuroBlock = vehicleMapSource.match(/'Ikebukuro': \{[\s\S]*?\n    \},\n    'Yurakucho_Seibu'/)?.[0] || '';
+const seibuYurakuchoBlock = vehicleMapSource.match(/'Yurakucho_Seibu': \{[\s\S]*?\n    \},\n\n    \/\/ ={10,}/)?.[0] || '';
+const ikebukuroFLiner = ikebukuroBlock.match(/'F-Liner': \{[\s\S]*?\n      \}/)?.[0] || '';
+const seibuFLiner = seibuYurakuchoBlock.match(/'F-Liner': \{[\s\S]*?\n      \}/)?.[0] || '';
+assert(!/東武9000型|東武9050型|東武50070系/.test(ikebukuroFLiner),
+  'Tobu through stock must not leak into Seibu Ikebukuro F-Liner pool');
+assert(!/東武9000型|東武9050型|東武50070系/.test(seibuFLiner),
+  'Tobu through stock must not leak into Seibu Yurakucho F-Liner pool');
+const tojoBlock = vehicleMapSource.match(/'Tojo': \{[\s\S]*?\n    \},\n\n    \/\/ ={10,}\n    \/\/ 京王/)?.[0] || '';
+assert(!/東京メトロ17000系\(8両\/10両\)/.test(tojoBlock),
+  'Tojo through pools must not admit the 8-car Metro 17000 formation');
+assert(/東武50070系\(10両\)/.test(tojoBlock),
+  'Tojo through stock must retain explicit 10-car 50070 identity');
