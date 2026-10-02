@@ -187,120 +187,39 @@
 
   function parseODPTDelay(raw) {
     var result = { status: "unknown", maxDelay: null, interval: null, cause: null };
-    if (!raw) return result;
+    if (!raw || !window.RunInfoEvaluator) return result;
     try {
-      // Phase 1: shared evaluator owns status semantics; the legacy body below still owns
-      // interval/cause/detail extraction until the next migration phase.
-      var _sharedEval = null;
-      if (window.RunInfoEvaluator) {
-        _sharedEval = window.RunInfoEvaluator.evaluate({
-          source: "odpt",
-          structuredStatus: raw["odpt:trainInformationStatus"],
-          suspension: raw["odpt:suspension"] === true,
-          delay: raw["odpt:delay"] === true,
-          delayMinutes: (typeof raw["odpt:delay"] === "number") ? raw["odpt:delay"] : null,
-          text: raw["odpt:trainInformationText"] || raw["odpt:text"] || ""
-        });
-      }
-      // v4.3.388: 权威状态字段优先（odpt:trainInformationStatus: Delay/Suspension/Normal）
-      // v4.3.430: 字段可为对象 {ja:"自由文本"}（如 直通運転中止/運転見合わせ）——提取，标准枚举直接采用，自由文本并入 text 统一判定
-      var _stRaw = raw["odpt:trainInformationStatus"];
-      var _stF = "";
-      if (_stRaw != null) {
-        if (typeof _stRaw === "string") _stF = String(_stRaw).split(":").pop();
-        else if (typeof _stRaw === "object") _stF = (_stRaw.ja || _stRaw.en || _stRaw.zh || "");
-      }
-      if (_stF === "Suspension") result.status = "suspended";
-      else if (_stF === "Delay") result.status = "delayed";
-      // v4.3.629: 官方 status 自由文本值映射（官方给什么用什么，不读正文）——
-      // JR东: 運転見合わせ→中断 / 遅延→延误 / 一部運休→部分停运；私铁: 運行情報あり→info
-      if (_stF && result.status === "normal") {
-        // v4.3.966: 直通運転…中止/見合わせ/運休 = 直通运转中止（非全线停运）→ notice，先于 suspended
-        if (/\u76f4\u901a.*(?:\u4e2d\u6b62|\u898b\u5408\u308f\u305b|\u904b\u4f11)/.test(_stF)) result.status = "notice";
-        else if (/(?:\u904b\u8ee2\u898b\u5408\u308f\u305b|\u904b\u8ee2\u3092\u4e2d\u6b62|\u904b\u8ee2\u4e2d\u6b62|\u5168\u7dda\u904b\u4f11)/.test(_stF)) result.status = "suspended";
-        else if (/(?:\u9045\u5ef6|\u30c0\u30a4\u30e4\u4e71\u308c)/.test(_stF)) result.status = "delayed";
-        else if (/\u4e00\u90e8\u904b\u4f11/.test(_stF)) result.status = "notice";
-      }
-      result.statusText = _stF;
-      // Direct delay field first: odpt:Train responses carry odpt:delay (minutes)
-      if (raw["odpt:delay"] != null) {
-        var dMin0 = parseInt(raw["odpt:delay"], 10);
-        if (!isNaN(dMin0) && dMin0 > 0) { result.status = "delayed"; result.maxDelay = dMin0; }
-      }
-      var ti = raw["odpt:trainInformationText"] || "";
-      var text = typeof ti === "string" ? ti : (typeof ti === "object" && ti !== null ? (ti.ja || ti.en || ti.zh || JSON.stringify(ti)) : "");
-      // v4.3.430: 状态字段为自由文本（非标准枚举）时并入 text 统一判定（如 直通運転中止）
-      if (_stF && _stF !== "Normal" && _stF !== "Suspension" && _stF !== "Delay" && !/^odpt\./.test(_stF)) {
-        text = (text ? text + "\u3002" : "") + _stF;
-      }
-      // v4.3.390: 结构化字段优先（ODPT v4 schema 提供 Cause/Range/stationFrom/stationTo/resumeEstimate）
-      var _cF = raw["odpt:trainInformationCause"];
-      if (_cF != null) {
-        var _cS = typeof _cF === "string" ? _cF : (_cF.ja || _cF.en || "");
-        if (_cS) result.cause = _cS;
-      }
-      if (!result.interval) {
-        var _rF = raw["odpt:trainInformationRange"];
-        if (_rF != null) {
-          var _rS = typeof _rF === "string" ? _rF : (_rF.ja || _rF.en || "");
-          if (_rS) {
-            // v4.3.626: 清理 Range 原文——去"駅間/間"尾缀、〜～－−统一为→（"全線"保留原样）
-            result.interval = _rS.replace(/\u99c5\u9593$/, "").replace(/\u9593$/, "").replace(/[\u301c\uff5e\uff0d\u2212]/g, "\u2192");
-          }
-        }
-      }
-      if (!result.interval) {
-        var _fS = raw["odpt:stationFrom"];
-        var _tS = raw["odpt:stationTo"];
-        if (_fS || _tS) {
-          var _fId = _fS ? extractRailwayShort({ "odpt:railway": _fS }) : "";
-          var _tId = _tS ? extractRailwayShort({ "odpt:railway": _tS }) : "";
-          var _fN = _fId, _tN = _tId;
-          try {
-            if (_fId && window.RailwayDB && window.RailwayDB.resolveStationName) _fN = window.RailwayDB.resolveStationName(_fId) || _fId;
-            if (_tId && window.RailwayDB && window.RailwayDB.resolveStationName) _tN = window.RailwayDB.resolveStationName(_tId) || _tId;
-          } catch(e) {}
-          if (_fN && _tN) result.interval = _fN + "\u2192" + _tN;
-          else if (_fN) result.interval = _fN + "\u65b9\u9762";
-          else if (_tN) result.interval = _tN + "\u65b9\u9762";
-        }
-      }
-      var _rs = raw["odpt:resumeEstimate"];
-      if (_rs) {
-        var _rm = String(_rs).match(/(\d{2}):(\d{2})/);
-        if (_rm) result.resume = _rm[1] + ":" + _rm[2];
-      }
-      if (!text) return result;
-      // v4.3.389: 保留原文全文（弹窗直接显示，不依赖碎片解析）
-      result.detail = text;
-      // v4.3.623: 状态不再做文本关键词判定（用户裁定：不好判断就清理掉，只识别区间）。
-      // 状态仅采用 ODPT 结构化字段（Suspension/Delay/odpt:delay）；自由文本状态字段
-      // （如"運行情報あり"）统一归为 info = 有运行情报，不细分中断/延误——
-      // 区间/原因仍走结构化字段优先 + 文本兜底（概览用），原文全文照常展示。
-      // 仅排除"正常声明"文本（平常どおり/遅延なし/ありません等）→ 保持 normal，避免把正常当情报误报黄色。
-      if (result.status === "normal" && text && !(_stF === "Normal" || /^odpt\./.test(_stF))) {
-        var _normalDecl = /\u5e73\u5e38|\u9045\u5ef6\u306a\u3057|\u3042\u308a\u307e\u305b\u3093|\u3054\u3056\u3044\u307e\u305b\u3093|\u306a\u3057|\u89e3\u6d88|\u9589\u9381|\u518d\u958b\u3057\u307e\u3057\u305f|\u3092\u518d\u958b/;
-        if (!_normalDecl.test(text)) result.status = "info";
-      }
-      // 延迟分钟：排除时刻（18時08分頃 的 "08分" 不是延迟）
-      var m = text.match(/(?:\u7d04|\u304a\u3088\u305d)?\s*(\d{1,3})\s*(?:\u5206\u9593|\u5206|min)(?!\u9803|\u5f8c|\u4ee5)/i);
-      if (m) result.maxDelay = parseInt(m[1], 10);
-      // v4.3.628: 区间仅认 ODPT 结构化字段（Range/stationFrom/stationTo，见上）；不做文本兜底提取（写不好就不猜）
-      // 原因（文本回退，仅字段缺失时）：优先"発生した/発生し"之后，其次通用模式
-      if (!result.cause) {
-        var cm = text.match(/(?:\u767a\u751f\u3057\u305f|\u767a\u751f\u3057)([^。\n，,、\s\u3067\u301c\uff5e\uff0d\u2212\u81f3\u2192-]+?)(?:\u306e\u305f\u3081|\u306e\u5f71\u97ff|\u306b\u3088\u308a|\u306b\u3088\u308b)/);
-        if (!cm) cm = text.match(/(?:\u3067|、|，|,|\s|^)([^。\n，,、\s\u3067\u301c\uff5e\uff0d\u2212\u81f3\u2192-]+?)(?:\u306e\u305f\u3081|\u306e\u5f71\u97ff|\u306b\u3088\u308a|\u306b\u3088\u308b|\u304c\u539f\u56e0|\u306e\u767a\u751f|\u306b\u4f34\u3044)/);
-        if (cm && cm[1]) result.cause = cm[1];
-      }
-    } catch(e) {}
-    if (_sharedEval) {
-      result.status = _sharedEval.status === "unknown" ? result.status : _sharedEval.status;
-      if (_sharedEval.maxDelay != null) result.maxDelay = _sharedEval.maxDelay;
-      else if (_sharedEval.delayUpperBoundMinutes != null) result.maxDelay = null;
-      result.delayUpperBoundMinutes = _sharedEval.delayUpperBoundMinutes;
-      result.evidence = _sharedEval.evidence;
-    }
-    return result;
+      var stationName = function(v) {
+        if (!v) return "";
+        var id = extractRailwayShort({ "odpt:railway": v });
+        try {
+          if (id && window.RailwayDB && window.RailwayDB.resolveStationName) return window.RailwayDB.resolveStationName(id) || id;
+        } catch(e) {}
+        return id;
+      };
+      var statusRaw = raw["odpt:trainInformationStatus"];
+      var statusText = "";
+      if (statusRaw != null && typeof statusRaw === "object") statusText = statusRaw.ja || statusRaw.en || statusRaw.zh || "";
+      else if (statusRaw != null) statusText = String(statusRaw);
+      var ti = raw["odpt:trainInformationText"] || raw["odpt:text"] || "";
+      var text = typeof ti === "string" ? ti : (ti && typeof ti === "object" ? (ti.ja || ti.en || ti.zh || "") : "");
+      if (statusText && !/^(?:Normal|Suspension|Delay|odpt\.)/.test(statusText)) text = (text ? text + "。" : "") + statusText;
+      result = window.RunInfoEvaluator.evaluate({
+        source: "odpt",
+        structuredStatus: statusRaw,
+        suspension: raw["odpt:suspension"] === true,
+        delay: raw["odpt:delay"] === true,
+        delayMinutes: (typeof raw["odpt:delay"] === "number") ? raw["odpt:delay"] : null,
+        text: text,
+        cause: raw["odpt:trainInformationCause"],
+        range: raw["odpt:trainInformationRange"],
+        stationFromName: stationName(raw["odpt:stationFrom"]),
+        stationToName: stationName(raw["odpt:stationTo"]),
+        resumeEstimate: raw["odpt:resumeEstimate"]
+      });
+      result.statusText = statusText ? String(statusText).split(":").pop() : "";
+      return result;
+    } catch(e) { return result; }
   }
 
   // ========== v4.3.386: TrainInformation full-record matching ==========
