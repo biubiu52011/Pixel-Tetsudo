@@ -13,14 +13,20 @@
 
   // Evidence-backed vehicle identity follows the physical running chain, not
   // the currently rendered line. Never seed this registry from map/fleet/icon
-  // estimates; only realtime evidence already vetted upstream may enter it.
+  // estimates. Accept explicit manual/ODPT high-confidence evidence and
+  // train-number evidence only after it has become high-confidence.
   var _chainVehicleRegistry = {};
   // Keep confirmed realtime evidence across a short source dropout. Position
   // truth still comes from the current snapshot; this bridge only preserves
   // physical-train identity/vehicle evidence while timetable fallback takes over.
   var _CHAIN_EVIDENCE_TTL_MS = 3 * 60 * 1000;
   function _rememberChainVehicle(p) {
-    if (!p || !p.runningChainId || p.vehicleResolvedFromRealtime !== true || !p.vehicleIconPath) return;
+    if (!p || !p.runningChainId || !p.vehicleIconPath) return;
+    var _src = p.vehicleSource || (p.vehicleResolution && p.vehicleResolution.source) || "";
+    var _conf = p.vehicleConfidence || (p.vehicleResolution && p.vehicleResolution.confidence) || "none";
+    var _eligible = p.vehicleResolvedFromRealtime === true ||
+      ((_src === "manual" || _src === "odpt" || _src === "trainNo") && _conf === "high");
+    if (!_eligible) return;
     _chainVehicleRegistry[p.runningChainId] = {
       trainClass: p.trainClass || "",
       vehicleType: p.vehicleType || "",
@@ -940,6 +946,13 @@
                 }
                 _rememberChainVehicle(_rp);
               });
+            });
+            // High-confidence timetable/manual resolution can seed the same
+            // physical-chain registry before inheritance. This closes the old
+            // one-way path where only realtime evidence could survive a line or
+            // operator boundary.
+            Object.keys(estimated).forEach(function(_vlid) {
+              (estimated[_vlid] || []).forEach(_rememberChainVehicle);
             });
             Object.keys(estimated).forEach(function(_vlid) {
               (estimated[_vlid] || []).forEach(_inheritChainVehicle);
