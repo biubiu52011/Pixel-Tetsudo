@@ -3,6 +3,9 @@ const E = require("../js/runinfo-evaluator.js");
 function st(text){ return E.evaluate({text}).status; }
 assert.strictEqual(st("現在、平常通り運転しています。"), "normal");
 assert.strictEqual(st("現在、平常どおり運転しています。"), "normal");
+assert.strictEqual(st("平常運転"), "normal");
+assert.strictEqual(st("平常運行"), "normal");
+assert.strictEqual(st("通常運転"), "normal");
 let toei=E.evaluate({text:"現在、１５分以上の遅延はありません。"});
 assert.strictEqual(toei.status,"normal"); assert.strictEqual(toei.maxDelay,null); assert.strictEqual(toei.delayUpperBoundMinutes,15);
 assert.strictEqual(st("一部列車が運休しています。"),"notice");
@@ -13,4 +16,4 @@ assert.strictEqual(st("A駅～B駅間で運転を見合わせています。"),"
 assert.strictEqual(st("運休のお知らせがあります。"),"info");
 assert.strictEqual(E.evaluate({structuredStatus:"Suspension",text:"直通運転を中止しています。"}).status,"suspended");
 assert.strictEqual(E.evaluate({signalStatus:"delayed",text:""}).status,"delayed");
-console.log("runinfo-evaluator: 11 PASS");
+console.log("runinfo-evaluator: 14 PASS");
