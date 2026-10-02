@@ -502,18 +502,17 @@
 
   function reconcileRealtimeList(container, linesObj) {
     var _perfStart = (window.performance && performance.now) ? performance.now() : Date.now();
-    var filtered = getFilteredLines();
     var cards = container ? container.querySelectorAll(".rs-line-card") : [];
     if (!cards || cards.length === 0) { renderFiltered(); return; }
     var changed = [];
     var next = {};
-    Object.keys(filtered).forEach(function(id) {
-      next[id] = statusSignature(filtered[id]);
+    Object.keys(linesObj || {}).forEach(function(id) {
+      next[id] = statusSignature(linesObj[id]);
       if (_renderedStatusSignatures[id] !== next[id]) changed.push(id);
     });
     var oldIds = Object.keys(_renderedStatusSignatures);
     var structureChanged = oldIds.length !== Object.keys(next).length || oldIds.some(function(id) { return !next.hasOwnProperty(id); });
-    if (structureChanged || !patchRealtimeCards(container, filtered, changed)) renderFiltered();
+    if (structureChanged || !patchRealtimeCards(container, linesObj, changed)) renderFiltered();
     _renderedStatusSignatures = next;
     var _perfMs = (((window.performance && performance.now) ? performance.now() : Date.now()) - _perfStart);
     if (_perfMs >= 50 && window.console && console.warn) {
