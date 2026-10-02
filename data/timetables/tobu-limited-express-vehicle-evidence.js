@@ -27,6 +27,7 @@
     ],
     "5111M": { vehicleType: "東武100系", service: "スペーシアきぬがわ11号", direction: "down" },
     "5112M": { vehicleType: "東武100系", service: "スペーシアきぬがわ12号", direction: "up" },
+    "5113M": { vehicleType: "JR東日本E253系", service: "きぬがわ13号", direction: "down", validFrom: "2026-07-18", validUntil: "2026-08-08" },
     "1263": [
       { vehicleType: "東武634型", service: "スカイツリートレイン63号", direction: "down" },
       { vehicleType: "東武N100系", service: "スペーシアX909号", direction: "down" }
