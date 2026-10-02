@@ -53,6 +53,7 @@ function getRealtimePositions(lineId) {
         var np = {};
         for (var pk in ep[ej]) { if (ep[ej].hasOwnProperty(pk)) np[pk] = ep[ej][pk]; }
         np.fusionLineId = ext[ei].lid;
+        np.fusionRole = "extension";
         all.push(np);
       }
     }
@@ -77,6 +78,7 @@ function getRealtimePositions(lineId) {
         var _np2 = {};
         for (var _pk2 in _bp[_bj]) { if (_bp[_bj].hasOwnProperty(_pk2)) _np2[_pk2] = _bp[_bj][_pk2]; }
         _np2.fusionLineId = _blid;
+        _np2.fusionRole = "branch";
         _all2.push(_np2);
       }
     }
