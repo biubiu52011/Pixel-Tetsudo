@@ -943,13 +943,15 @@
       'CommuterRapid': { 'default': 'E233系0番台' },
       'OmeSpecialRapid': { 'default': 'E233系0番台' },
       'SpecialRapid': { 'default': 'E233系0番台' },
+      // Tokyo-Takao is presented as the Chuo Rapid operating system even when
+      // public infrastructure references call the corridor "Chuo Main Line".
+      'LimitedExpress': { 'default': 'E353系（あずさ・かいじ・富士回遊）' },
     },
     'ChuoSobuLocal': {
       'Local': {
         'default': 'E231系500番台 / E231系0番台',
         'TokyoMetro': 'E231系500番台 / E231系0番台 / 東京メトロ05系 / 東京メトロ07系 / 東京メトロ15000系'
       },
-      'LimitedExpress': { 'default': 'E353系（あずさ・かいじ）' },
     },
     'Hachiko': {
       'Local': { 'default': '209系3000番台' },
