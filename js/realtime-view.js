@@ -399,19 +399,34 @@
       var line = linesObj[lineId];
       if (!line) { needsFullRender = true; return; }
       var card = container.querySelector('.rs-line-card[data-line="' + String(lineId).replace(/"/g, '\\"') + '"]');
-      if (card && card.classList.contains("rs-system-card")) {
-        // One system card aggregates multiple member statuses; a single-line
-        // patch cannot safely recompute its worst-state icon.
-        needsFullRender = true;
-        return;
-      }
-      if (!card) {
-        // The line may be represented by a running-system card.
+      if (!card || (card && card.classList.contains("rs-system-card"))) {
+        // A running-system card aggregates several member statuses. Recompute
+        // that one card only; the surrounding operator/list shell stays mounted.
         var systemCards = container.querySelectorAll(".rs-system-card[data-lines]");
-        for (var i = 0; i < systemCards.length; i++) {
-          var members = (systemCards[i].dataset.lines || "").split(",");
-          if (members.indexOf(lineId) >= 0) { needsFullRender = true; break; }
+        var systemCard = card && card.classList.contains("rs-system-card") ? card : null;
+        if (!systemCard) {
+          for (var i = 0; i < systemCards.length; i++) {
+            var members = (systemCards[i].dataset.lines || "").split(",");
+            if (members.indexOf(lineId) >= 0) { systemCard = systemCards[i]; break; }
+          }
         }
+        if (systemCard && window.DataState && typeof window.DataState.renderSystemCardByCode === "function") {
+          var code = systemCard.dataset.system || "";
+          var systemHtml = window.DataState.renderSystemCardByCode(code, linesObj, { mode: "realtime" });
+          if (systemHtml) {
+            var systemWrap = document.createElement("div");
+            systemWrap.innerHTML = systemHtml;
+            var freshSystem = systemWrap.firstElementChild;
+            if (freshSystem) {
+              var color = freshSystem.getAttribute("data-line-color");
+              if (color) freshSystem.style.setProperty("--line-color", color);
+              systemCard.replaceWith(freshSystem);
+              return;
+            }
+          }
+        }
+        if (!card) return;
+        needsFullRender = true;
         return;
       }
       // A realtime card's static shell (name/icon/operator/order) is unchanged.
