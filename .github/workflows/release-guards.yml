@@ -9,13 +9,21 @@ on:
 permissions:
   contents: read
 
+# Guards validate release-specific invariants only. Runtime regression tests
+# belong to CI / CD, so the two workflows cannot drift on test discovery.
+concurrency:
+  group: release-guards-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   release-guards:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout
+        uses: actions/checkout@v5
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: "20"
       - name: Frontend smoke
@@ -26,18 +34,3 @@ jobs:
         run: node tools/line-identity-coverage.test.js
       - name: ODPT credential model
         run: node tools/odpt-credential-model.test.js
-      - name: Current runtime regression tests
-        shell: bash
-        run: |
-          set -e
-          found=0
-          for f in tools/runinfo-*.test.js tools/performance-lifecycle.test.js; do
-            [ -f "$f" ] || continue
-            found=1
-            echo "==> $f"
-            node "$f"
-          done
-          if [ "$found" -eq 0 ]; then
-            echo "No current runtime regression tests found"
-            exit 1
-          fi
