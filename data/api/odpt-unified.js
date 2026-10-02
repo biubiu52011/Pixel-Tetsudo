@@ -299,7 +299,7 @@
         "NambuBranch": "JR-East",
 
         "Kinugawa": "Tobu",
-        "Nippori_Toneri": "Toei",
+        "NipporiToneri": "Toei",
         "Noda": "Tobu",
         "OdakyuEnoshima": "Odakyu",
 
@@ -382,7 +382,7 @@
         "NewShuttle": "SaitamaRailway", // v4.3.470: ODPT 官方 operator 名实为 SaitamaRailway（埼玉新都市交通），本地原错写 SaitamaTransit
         "Sobu": "JR-East",
         "SotetsuIzumino": "Sotetsu",
-        "SotetsuShin-Yokohama": "Sotetsu",
+        "SotetsuShinYokohama": "Sotetsu",
         "TokaidoMain": "JR-East",
         // TokyoMonorail：ODPT无数据，移除映射
         "TokyuIkegami": "Tokyu",
@@ -400,7 +400,7 @@
         "Yokosuka": "JR-East",
         "Yonesaka": "JR-East",
         "Yurakucho": "TokyoMetro",
-        "Yurakucho_Seibu": "Seibu",
+        "SeibuYurakucho": "Seibu",
         "Yurikamome": "Yurikamome"
     };
 
@@ -431,7 +431,7 @@
       "TsurumiOkawa": "TsurumiOkawaBranch",
       "ChiyodaBranch": "Chiyoda",
       "Noda": "TobuUrbanPark",
-      "Nippori_Toneri": "NipporiToneri",
+      "NipporiToneri": "NipporiToneri",
       "TobuIsesaki": "Isesaki",
       "TobuDaishi": "Daishi",
       "KeioInokashira": "Inokashira",
@@ -446,7 +446,7 @@
       "YokohamaGreen": "Green",
       "SotetsuMain": "Main",
       "SotetsuIzumino": "Izumino",
-      "SotetsuShin-Yokohama": "Shinyokohama",
+      "SotetsuShinYokohama": "Shinyokohama",
       "TokyuDenEn": "DenEnToshi",
       "TokyuToyoko": "Toyoko",
       "TokyuMeguro": "Meguro",
@@ -500,12 +500,12 @@
     "SeibuTamako": "Tamako",
     "SeibuToshima": "Toshima",
     "SeibuYamaguchi": "Yamaguchi",
-    "Yurakucho_Seibu": "SeibuYurakucho",
+    "SeibuYurakucho": "SeibuYurakucho",
     // 小田急
     "OdakyuEnoshima": "Enoshima",
     "OdakyuTama": "Tama",
     // 相鉄・東京モノレール
-    "SotetsuShin-Yokohama": "SotetsuShinYokohama",
+    "SotetsuShinYokohama": "SotetsuShinYokohama",
     "TokyoMonorail": "HanedaAirport",
     // 埼玉新都市交通（operator 已改 SaitamaRailway，railway 同名）
     "NewShuttle": "SaitamaRailway",
