@@ -361,20 +361,10 @@
     ]
   };
 
-  // v4.3.453: 車号プレフィックス規則——直通線の車号先頭記号が車籍系統と一致する場合に使う。
-  // 半蔵門線の実測（ODPT 時刻表 994 件）: B プレフィックス 492 件の起点が全て東武側（南栗橋/久喜/
-  // 東武動物公園/押上）＝東武50000系、A プレフィックス 502 件の起点が全て東急側（中央林間/長津田/
-  // 二子玉川）＝東急2020系。メトロ自社・東急直通は半蔵門線既定アイコン（東急2020系）のまま。
-  var THROUGH_PREFIX_RULES = {
-    "Hanzomon": [
-      { prefix: "B", icon: "../images/列车/東武鉄道/東武鉄道_50000型.png" }
-    ],
-    // v4.3.928: 千代田線 B プレフィックス = JR 常磐線各駅停車との直通車（E233系2000番台）。
-    // ODPT vehicleType 実測: "JR E233系"。小田急との直通は特急ロマンスカーのみ。
-    "Chiyoda": [
-      { prefix: "B", icon: "../images/列车/JR東日本/JR東日本_E233系_2000番代.png" }
-    ]
-  };
+  // Train-number prefix guessing was removed. Prefixes can identify an operation
+  // pattern, but are not sufficient evidence for a concrete rolling-stock class.
+  var THROUGH_PREFIX_RULES = {};
+
 
 
   // v4.3.962: trainType+车号段规则表——把 _resolveTrainIcon 里散落的手写 if 特例收进声明式数据
