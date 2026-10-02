@@ -65,6 +65,18 @@
   // v4.3.9xx (E1): 融合/缓存轮询间隔（init 时从 RuntimeConfig 读取，回前台恢复时复用）
   var _refreshIntervalMs = 15000;
 
+  // Lightweight rolling performance telemetry for runtime diagnosis. Keep only
+  // recent samples so instrumentation cannot become its own memory/log problem.
+  var _perfSamples = [];
+  function _perfNow() { return (window.performance && performance.now) ? performance.now() : Date.now(); }
+  function _perfRecord(name, startedAt, meta) {
+    var ms = Math.round((_perfNow() - startedAt) * 10) / 10;
+    _perfSamples.push({ name: name, ms: ms, at: Date.now(), meta: meta || null });
+    if (_perfSamples.length > 40) _perfSamples.splice(0, _perfSamples.length - 40);
+    if (ms >= 200 && window.console && console.warn) console.warn("[PixelPerf]", name, ms + "ms", meta || "");
+    return ms;
+  }
+
   // ========== 融合轮询生命周期（v4.3.9xx E1: visibilitychange 暂停/恢复） ==========
   // 后台标签页暂停 15s fuseAll + saveToCache；回前台立即融合一次再恢复周期——
   // 后台页不再产生计算与 IDB 写入开销（配合 odpt-unified 的拉取暂停双管齐下）。
@@ -431,6 +443,7 @@
   }
 
   function fuseDirty(seedIds) {
+    var _perfStart = _perfNow();
     try {
       var dlLines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : null;
       if (!_lastFusedData || !_lastFusedData.lines || !dlLines) return fuseAll();
@@ -451,14 +464,17 @@
         odptOperatorsLoaded: Object.keys(odptData.delayInfo).length
       });
       emitUpdate(fusedData);
+      _perfRecord("fuseDirty", _perfStart, { seeds: (seedIds || []).length, dirty: dirtyIds.length });
       return fusedData;
     } catch(e) {
+      _perfRecord("fuseDirty:error", _perfStart, { seeds: (seedIds || []).length });
       console.debug("[DataFusion] fuseDirty fallback:", e.message);
       return fuseAll();
     }
   }
 
   function fuseAll() {
+    var _perfStart = _perfNow();
     try {
       var fusedLines = {};
       var allLineIds = {};
@@ -471,8 +487,9 @@
       });
       var fusedData = { version: FUSION_VERSION, timestamp: new Date().toISOString(), lines: fusedLines, lineOrder: (window.LinePresentationService && dlLines) ? window.LinePresentationService.getDisplayOrder(dlLines) : Object.keys(allLineIds), odptOperatorsLoaded: Object.keys(odptData.delayInfo).length, totalLines: Object.keys(allLineIds).length };
       emitUpdate(fusedData);
+      _perfRecord("fuseAll", _perfStart, { lines: Object.keys(fusedLines).length });
       return fusedData;
-    } catch(e) { console.error("[DataFusion] fuseAll error:", e.message); if (_lastFusedData) { emitUpdate(_lastFusedData); return _lastFusedData; } return null; }
+    } catch(e) { _perfRecord("fuseAll:error", _perfStart); console.error("[DataFusion] fuseAll error:", e.message); if (_lastFusedData) { emitUpdate(_lastFusedData); return _lastFusedData; } return null; }
   }
 
   // v4.3.416: ODPT 站 ID 与项目站表拼写差异别名（项目冻结数据不动，仅匹配层转换）
@@ -630,6 +647,7 @@
   var _realtimeEvidenceWithoutPosition = {};
 
   function loadTrainPositions() {
+    var _perfStart = _perfNow();
     try {
       // Position truth must come only from the dedicated realtime container.
       // Realtime positions come only from the dedicated ODPT position store.
@@ -1228,7 +1246,8 @@
           }
         });
         fuseDirty(Object.keys(_positionDirty));
-      } catch(e) { console.debug("[DataFusion] loadTrainPositions->fuseDirty error:", e.message); }
+        _perfRecord("loadTrainPositions", _perfStart, { dirty: Object.keys(_positionDirty).length, positionLines: Object.keys(posMap || {}).length });
+      } catch(e) { _perfRecord("loadTrainPositions:error", _perfStart); console.debug("[DataFusion] loadTrainPositions->fuseDirty error:", e.message); }
 
       // Realtime positions are now pushed only after the complete posPromises batch
       // is settled and DataLayer is ready (odpt-unified pushTrainPositions). The old
@@ -1509,6 +1528,7 @@
     getRealtimePositions: function(lineId) { return odptData.realtimePositions[lineId] || []; },
     loadTrainPositions: loadTrainPositions,
     getCachedData: function() { return _lastFusedData; },
+    getPerformanceSamples: function() { return _perfSamples.slice(); },
     saveToCache: saveToCache, refresh: function() { return fuseAll(); },
     // v4.3.528: 手动时刻表按需加载（ODPT 无时刻表的 JR 地方线，打开线路时才注入该线文件）
     ensureManualTimetable: ensureManualTimetable,
