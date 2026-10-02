@@ -1155,7 +1155,6 @@
 
       // 识别需要估算但可能没有时刻表的线路，按需加载
       try {
-        var timetableOps = Object.keys(window.ODPT_TIMETABLES || {});
         var linesNeedingTimetable = [];
         Object.keys(allLines).forEach(function(lid) {
           var line = allLines[lid];
