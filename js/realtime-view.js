@@ -255,6 +255,7 @@
     if (!modal) return;
     modal.classList.remove("active");
     document.body.classList.remove("modal-open");
+    clearSelectedCards();
   }
 
   let _latestLines = null;
