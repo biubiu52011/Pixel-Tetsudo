@@ -308,6 +308,7 @@
       formationId:f ? f.id : "",
       vehicleName:vehicleName,
       evidenceSource:anchor.evidenceSource || (f ? "daily-observation" : "official-timetable-vehicle"),
+      evidenceDetail:anchor.evidenceDetail || null,
       observedAt:anchor.observedAt || null
     };
     return true;
@@ -322,7 +323,7 @@
     return {
       formationId:a.formationId, vehicleName:a.vehicleName, iconPath:icon,
       serviceDate:a.serviceDate, source:"formation-evidence", confidence:"high",
-      evidenceSource:a.evidenceSource, observedAt:a.observedAt,
+      evidenceSource:a.evidenceSource, evidenceDetail:a.evidenceDetail || null, observedAt:a.observedAt,
       propagatedByRunningChain:true
     };
   }
