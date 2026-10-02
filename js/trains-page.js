@@ -15,6 +15,7 @@
   var _selectedOperator = null;
   var _lastPositionsHash = '';
   var _lastDetailStateHash = '';
+  var _realtimeExpiryTimer = null;
   var currentSystemLineIds = null;
   var t = window.t || function(k) { return k; };
   var escapeHtml = window.escapeHtml || function(s) {
@@ -46,6 +47,34 @@
       }
     }
     return null;
+  }
+
+  function _scheduleRealtimeExpiryRefresh(lineId, fusedLine) {
+    if (_realtimeExpiryTimer) {
+      clearTimeout(_realtimeExpiryTimer);
+      _realtimeExpiryTimer = null;
+    }
+    if (!lineId || !fusedLine || !Array.isArray(fusedLine.realtimePositions)) return;
+    var now = Date.now();
+    var nextExpiry = 0;
+    fusedLine.realtimePositions.forEach(function(p) {
+      if (!p || p.positionSource !== "realtime-api" || !p.sourceValidUntil) return;
+      var ts = Date.parse(p.sourceValidUntil);
+      if (!isNaN(ts) && ts >= now && (!nextExpiry || ts < nextExpiry)) nextExpiry = ts;
+    });
+    if (!nextExpiry) return;
+    // Re-render once immediately after the nearest ODPT dct:valid boundary.
+    // The renderer will filter the expired realtime row even if no new API
+    // snapshot has arrived yet.
+    _realtimeExpiryTimer = setTimeout(function() {
+      _realtimeExpiryTimer = null;
+      if (currentLine !== lineId || !detailEl || detailEl.classList.contains("hidden")) return;
+      var latest = getLinesData()[lineId];
+      if (latest && mapEl) {
+        renderTrainMap(mapEl, latest, lineId);
+        _scheduleRealtimeExpiryRefresh(lineId, latest);
+      }
+    }, Math.max(50, nextExpiry - now + 50));
   }
 
   function showLineView(lineId, systemLineIds, expectedIdentity, expectedMemberIdentities) {
@@ -100,6 +129,7 @@
       }
       if (titleEl) titleEl.textContent = _title;
       if (mapEl) renderTrainMap(mapEl, fusedLine, lineId);
+      _scheduleRealtimeExpiryRefresh(lineId, fusedLine);
       // v4.3.528: 手动时刻表按需加载——ODPT 无数据的 JR 地方线打开时才注入该线文件。
       // 加载完成后 DataFusion 内部已重推定+重融合；此处按结果归属检查后重渲染当前线路，
       // 用户切走线路时旧结果不覆盖新状态；加载失败保持首次渲染（与无数据现状一致）。
@@ -107,7 +137,10 @@
         window.DataFusion.ensureManualTimetable(lineId).then(function() {
           if (currentLine !== lineId) return;
           var fused2 = getLinesData()[lineId];
-          if (fused2 && mapEl) renderTrainMap(mapEl, fused2, lineId);
+          if (fused2 && mapEl) {
+            renderTrainMap(mapEl, fused2, lineId);
+            _scheduleRealtimeExpiryRefresh(lineId, fused2);
+          }
         }).catch(function(e) {
           console.debug("[trains] manual timetable skip:", lineId, e.message);
         });
@@ -119,6 +152,10 @@
     try {
       currentLine = null;
       currentLineIdentity = "";
+      if (_realtimeExpiryTimer) {
+        clearTimeout(_realtimeExpiryTimer);
+        _realtimeExpiryTimer = null;
+      }
       currentSystemLineIds = null;
       window.TrainsActiveSystemLineIds = null;
       if (listEl) listEl.classList.remove("hidden");
@@ -367,7 +404,10 @@
             if (currentLine && detailEl && !detailEl.classList.contains("hidden")) {
               var _lines = getLinesData();
               var _fusedLine = _lines[currentLine];
-              if (_fusedLine) renderTrainMap(mapEl, _fusedLine, currentLine);
+              if (_fusedLine) {
+                renderTrainMap(mapEl, _fusedLine, currentLine);
+                _scheduleRealtimeExpiryRefresh(currentLine, _fusedLine);
+              }
             }
           }
         });
