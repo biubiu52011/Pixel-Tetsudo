@@ -96,9 +96,13 @@
           if (renderedMembers.indexOf(_elid + "=" + _ekey) < 0) return;
         }
       }
+      // Route application is idempotent. DataState can emit several times while
+      // the same line is open; those emissions must update the map through the
+      // subscriber below, not re-enter the detail initialization path.
+      if (currentLine === lineId && currentLineIdentity === actualIdentity &&
+          detailEl && !detailEl.classList.contains("hidden")) return;
       currentLine = lineId;
       currentLineIdentity = actualIdentity;
-      window.location.hash = lineId;
       if (listEl) listEl.classList.add("hidden");
       if (filterBarEl) filterBarEl.classList.add("hidden");
       if (detailEl) detailEl.classList.remove("hidden");
@@ -229,13 +233,12 @@
         // 支线 chip：从父线卡片进入支线详情（Line Hierarchy Rule）
         var chip = e.target.closest(".rs-branch-chip");
         if (chip && chip.dataset.line) {
-          showLineView(chip.dataset.line, null, chip.dataset.lineIdentity || "");
+          window.location.hash = chip.dataset.line;
           return;
         }
         var card = e.target.closest(".rs-line-card");
-        if (card) {
-          var _systemIds = card.dataset.lines ? card.dataset.lines.split(",").filter(Boolean) : null;
-          showLineView(card.dataset.line, _systemIds, card.dataset.lineIdentity || "", card.dataset.lineIdentities || "");
+        if (card && card.dataset.line) {
+          window.location.hash = card.dataset.line;
         }
       });
       if (backBtn) {
@@ -249,14 +252,18 @@
       }
       // hash 路由兜底：history.back() 后 hash 变化时恢复对应视图
       // （与 tourism 详情页的 history.back() 行为同步，避免页内返回后停留在详情）
-      window.addEventListener("hashchange", function() {
+      function _applyRoute() {
         var h = (window.location.hash || "").replace(/^#/, "");
         if (!h) {
-          hideLineView();
-        } else if (h !== currentLine) {
-          try { showLineView(h, _systemIdsForRoute(h)); } catch(e) {}
+          if (currentLine || (detailEl && !detailEl.classList.contains("hidden"))) hideLineView();
+          return false;
         }
-      });
+        var lines = getLinesData();
+        if (!lines || !lines[h]) return false;
+        if (h === currentLine && detailEl && !detailEl.classList.contains("hidden")) return true;
+        try { showLineView(h, _systemIdsForRoute(h)); return true; } catch(e) { return false; }
+      }
+      window.addEventListener("hashchange", _applyRoute);
       loadCachedPositions(function() {
         renderList(listEl);
         renderFilterBar(document.getElementById("trainsFilterBar"));
@@ -284,24 +291,14 @@
             setTimeout(tick, 500);
           })();
         })();
-        // Restore hash-based navigation (poll until line data is ready; async load timing)
-        (function tryHash() {
+        // Route restoration is centralized in _applyRoute; this one bounded poll
+        // only waits for initial async data and cannot initialize the detail twice.
+        (function waitForInitialRoute() {
           var attempts = 0;
-          function tick() {
-            var hash = window.location.hash;
-            if (!hash || hash.length <= 1) return;
-            var lid = hash.substring(1);
-            var lines = getLinesData();
-            if (lines[lid]) {
-              showLineView(lid, _systemIdsForRoute(lid));
-              return;
-            }
-            // Do not poll a malformed/stale deep link forever. The normal
-            // DataState subscription below remains able to restore it if data
-            // arrives later.
-            if (++attempts < 25) setTimeout(tick, 400);
-          }
-          tick();
+          (function tick() {
+            if (_applyRoute()) return;
+            if (window.location.hash && ++attempts < 25) setTimeout(tick, 400);
+          })();
         })();
         // Arrow is structural UI; only the nested label is translated by lang-init.
       });
@@ -309,14 +306,8 @@
       if (window.DataState) {
         window.DataState.subscribe(function(lines, delayData, positions) {
           if (!lines || Object.keys(lines).length === 0 || !listEl) return;
-          // Unified hash-restore: whenever line data is present, honor a #lineId deep link
-          var _h3 = window.location.hash;
-          if (_h3 && _h3.length > 1) {
-            var _lid3 = _h3.substring(1);
-            if (lines[_lid3] && (!currentLine || detailEl.classList.contains("hidden"))) {
-              try { showLineView(_lid3, _systemIdsForRoute(_lid3)); } catch(e) {}
-            }
-          }
+          // A pending deep link may become resolvable when data arrives.
+          _applyRoute();
           // The trains overview is structural (operator/line/termini) and does not
           // render live train positions. Do not scan every line/train on each DataState
           // emission just to decide whether to rebuild the overview. Position change
@@ -381,16 +372,7 @@
             renderFilterBar(document.getElementById("trainsFilterBar"));
             _lastPositionsHash = posHash;
             _lastDetailStateHash = detailStateHash;
-            // (through-service info now lives inside the train map interchange icons)
-            // Restore hash-based navigation once data is ready (async load timing)
-            var _h = window.location.hash;
-            if (_h && _h.length > 1) {
-              var _lid = _h.substring(1);
-              var _lns = getLinesData();
-              if (_lns[_lid] && (!currentLine || detailEl.classList.contains("hidden"))) {
-                try { showLineView(_lid, _systemIdsForRoute(_lid)); } catch(e) {}
-              }
-            }
+            // Route restoration is handled once at subscriber entry.
           } else if (posHash !== _lastPositionsHash || detailStateHash !== _lastDetailStateHash) {
             var _positionsChanged = posHash !== _lastPositionsHash;
             var _detailStateChanged = detailStateHash !== _lastDetailStateHash;
@@ -399,15 +381,6 @@
             // Live position changes only affect the open detail map. The overview
             // cards contain no train-position content, so rebuilding the full list here
             // is pure DOM churn.
-            // Restore hash-based navigation once data is ready (posHash changed = data arrived)
-            var _h2 = window.location.hash;
-            if (_h2 && _h2.length > 1) {
-              var _lid2 = _h2.substring(1);
-              var _lns2 = getLinesData();
-              if (_lns2[_lid2] && (!currentLine || detailEl.classList.contains("hidden"))) {
-                try { showLineView(_lid2, _systemIdsForRoute(_lid2)); } catch(e) {}
-              }
-            }
             // (through-service info now lives inside the train map interchange icons)
             // Update train positions on map if detail view is open (incremental update for smooth animation)
             if (currentLine && detailEl && !detailEl.classList.contains("hidden")) {
