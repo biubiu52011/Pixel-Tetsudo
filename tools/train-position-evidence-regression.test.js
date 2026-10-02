@@ -13,6 +13,8 @@ assert(/_uniqueTimetableRailwayForTrain/.test(fusion),"missing unique timetable 
 assert(/keys\.length === 1 \? keys\[0\] : ""/.test(fusion),"railway recovery must require a unique match");
 assert(/_CHAIN_EVIDENCE_TTL_MS\s*=\s*3\s*\*\s*60\s*\*\s*1000/.test(fusion),"dropout evidence TTL missing");
 assert(/_realtimeEvidenceWithoutPosition/.test(fusion),"missing-position realtime evidence must be separated");
+assert(!/if \(!mayUseTimetablePosition\(lineId\)\)[\s\S]{0,120}resolve\(true\)/.test(fusion),"FULL realtime must not block manual vehicle evidence loading");
+assert(/TrainVehicle\.registerVehicle\(_mTrainNo, _mVehicle\)/.test(fusion),"manual timetable vehicle evidence must be registered independently of position");
 assert(/if \(!stationKey\)[\s\S]{0,800}return;/.test(fusion),"missing fromStation must not create realtime position");
 
 const resolver=read("js/running-chain-resolver.js");
