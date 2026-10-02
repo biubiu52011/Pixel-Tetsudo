@@ -208,6 +208,12 @@ function assertDeterministic(win, label, ctx) {
 }
 
 function main() {
+  // 東急支線は大井町線の車両を継承しない。
+  expectMap(win, 'Tokyu Tamagawa local fleet', 'TokyuTamagawa', 'Local', '東急電鉄1000系 / 7000系', ['6020系', '9000系', '9020系']);
+  expectMap(win, 'Tokyu Ikegami local fleet', 'TokyuIkegami', 'Local', '東急電鉄1000系 / 7000系', ['6020系', '9000系', '9020系']);
+  expectMap(win, 'Tokyu Kodomonokuni local fleet', 'TokyuKodomonokuni', 'Local', 'Y000系', ['6020系', '9000系', '9020系']);
+  expectMap(win, 'Tokyu Setagaya local fleet', 'TokyuSetagaya', 'Local', '300系', ['6020系', '9000系', '9020系']);
+
   const win = loadRuntime();
 
   expectMap(win, 'Yamanote P1/critical', 'Yamanote', 'Local', 'E235系0番台（山手線）', ['E235系1000番台', 'E235系総武中央線']);
