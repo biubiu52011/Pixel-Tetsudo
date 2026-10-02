@@ -1146,8 +1146,12 @@
         var _icKey = String(p.runningChainId || p.trainId || trainUid);
         // Realtime vehicle resolution is produced upstream from the actual
         // train-level source evidence. Prefer it over any display-line guess.
-        var iconSrc = p.positionSource === "realtime-api" && p.vehicleIconPath ? p.vehicleIconPath : window.__trainIconCache[_icKey];
-        if (iconSrc && p.positionSource === "realtime-api") {
+        var _hasRealtimeVehicleEvidence = p.positionSource === "realtime-api" &&
+          p.vehicleResolvedFromRealtime === true && !!p.vehicleIconPath;
+        var iconSrc = _hasRealtimeVehicleEvidence ? p.vehicleIconPath : window.__trainIconCache[_icKey];
+        // Only evidence-backed realtime identity is allowed to seed the stable
+        // train icon cache. A line-map/fleet estimate must remain replaceable.
+        if (iconSrc && _hasRealtimeVehicleEvidence) {
           window.__trainIconCache[_icKey] = iconSrc;
         }
         if (!iconSrc && window.TrainVehicle && typeof window.TrainVehicle.resolve === 'function') {
