@@ -571,6 +571,16 @@ function main() {
   const keikyuToei = win.VehicleTypeMap.resolve('Keikyu', 'odpt.TrainType:Keikyu.Local', 'odpt.Station:Toei.Asakusa.Oshiage');
   assert(!/1500形/.test(keikyuToei), 'retired Keikyu 1500 must not return through Toei destination mapping', { keikyuToei });
 
+    const hokuso = win.VehicleTypeMap.resolve('Hokuso', 'odpt.TrainType:Hokuso.Local', null);
+  assert(/北総7300形/.test(hokuso) && /北総7500形/.test(hokuso) && /北総9100形/.test(hokuso),
+    'Hokuso must resolve its own current fleet instead of falling back', { hokuso });
+  const hokusoAccess = win.VehicleTypeMap.resolve('Hokuso', 'odpt.TrainType:Hokuso.AccessExpress', 'odpt.Station:Keisei.NaritaSkyAccess.NaritaAirportTerminal1');
+  assert(/京成3100形/.test(hokusoAccess) && !/50番台/.test(hokusoAccess),
+    'Hokuso Access pool must use current Keisei 3100 identity without fictional 50-subseries', { hokusoAccess });
+  const shibayama = win.VehicleTypeMap.resolve('Shibayama', 'odpt.TrainType:Shibayama.Local', null);
+  assert(/芝山鉄道3500形/.test(shibayama),
+    'Shibayama must resolve its own 3500 stock instead of generic fallback', { shibayama });
+
     assertNoCurrentFictionalAsset(win);
   assertNoFilenameDependentIdentity(win);
   assertCanonicalAssetRenameSimulation(win);
