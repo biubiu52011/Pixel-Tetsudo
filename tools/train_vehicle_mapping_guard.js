@@ -689,6 +689,10 @@ function main() {
     'Dated Tobu evidence must expire outside its validity window');
   assert(tobuEvidence.resolve('1083M', 'きぬがわ3号', 'down', '2026-10-03', { lineId: 'TobuNikko', operator: 'JR-East' }) === 'JR東日本E253系',
     'Current Kinugawa 3 evidence must resolve to JR East E253');
+  assert(tobuEvidence.resolve('5113M', 'きぬがわ13号', 'down', '2026-11-21', { lineId: 'TobuNikko', operator: 'JR-East' }) === 'JR東日本E253系',
+    'Temporary Kinugawa 13 must resolve on an explicitly verified operating date');
+  assert(!tobuEvidence.resolve('5113M', 'きぬがわ13号', 'down', '2026-11-20', { lineId: 'TobuNikko', operator: 'JR-East' }),
+    'Temporary Kinugawa 13 must remain unknown outside explicitly verified operating dates');
 
     assertNoCurrentFictionalAsset(win);
   assertNoFilenameDependentIdentity(win);
