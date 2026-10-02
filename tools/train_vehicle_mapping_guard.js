@@ -466,7 +466,18 @@ function main() {
   });
   assert(!formationOtherChain, 'formation evidence must not leak to another running chain', formationOtherChain);
 
-  assertNoCurrentFictionalAsset(win);
+  [
+    ['Local', 'odpt.Station:TokyoMetro.Fukutoshin.Ikebukuro'],
+    ['Express', 'odpt.Station:TokyoMetro.Fukutoshin.Shibuya'],
+    ['RapidExpress', 'odpt.Station:Minatomirai.Minatomirai.MotomachiChukagai']
+  ].forEach(([type, dest]) => {
+    const vt = win.VehicleTypeMap.resolve('Tojo', 'odpt.TrainType:Tobu.' + type, dest);
+    assert(!/90000/.test(vt), 'Tobu 90000 must not be treated as Metro/Tokyu through-service stock', { type, dest, vt });
+  });
+  const ikeSTrain = win.VehicleTypeMap.resolve('Ikebukuro', 'odpt.TrainType:Seibu.S-TRAIN', null);
+  assert(ikeSTrain === '西武40000系', 'Seibu Ikebukuro S-TRAIN must resolve only Seibu 40000 series', { ikeSTrain });
+
+    assertNoCurrentFictionalAsset(win);
   assertNoFilenameDependentIdentity(win);
   assertCanonicalAssetRenameSimulation(win);
 
