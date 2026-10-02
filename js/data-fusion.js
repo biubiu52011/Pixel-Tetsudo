@@ -15,6 +15,10 @@
   // the currently rendered line. Never seed this registry from map/fleet/icon
   // estimates; only realtime evidence already vetted upstream may enter it.
   var _chainVehicleRegistry = {};
+  // Keep confirmed realtime evidence across a short source dropout. Position
+  // truth still comes from the current snapshot; this bridge only preserves
+  // physical-train identity/vehicle evidence while timetable fallback takes over.
+  var _CHAIN_EVIDENCE_TTL_MS = 3 * 60 * 1000;
   function _rememberChainVehicle(p) {
     if (!p || !p.runningChainId || p.vehicleResolvedFromRealtime !== true || !p.vehicleIconPath) return;
     _chainVehicleRegistry[p.runningChainId] = {
@@ -23,13 +27,18 @@
       vehicleIconPath: p.vehicleIconPath || "",
       vehicleSource: p.vehicleSource || "",
       vehicleConfidence: p.vehicleConfidence || "none",
-      vehicleResolution: p.vehicleResolution || null
+      vehicleResolution: p.vehicleResolution || null,
+      lastSeenAt: Date.now()
     };
   }
   function _inheritChainVehicle(p) {
     if (!p || !p.runningChainId) return p;
     var v = _chainVehicleRegistry[p.runningChainId];
     if (!v) return p;
+    if (v.lastSeenAt && (Date.now() - v.lastSeenAt) > _CHAIN_EVIDENCE_TTL_MS) {
+      delete _chainVehicleRegistry[p.runningChainId];
+      return p;
+    }
     p.trainClass = v.trainClass || p.trainClass || "";
     p.vehicleType = v.vehicleType || p.vehicleType || "";
     p.vehicleIconPath = v.vehicleIconPath || p.vehicleIconPath || "";
@@ -897,7 +906,15 @@
               });
             });
             Object.keys(_chainVehicleRegistry).forEach(function(_cid) {
-              if (!_activeChainIds[_cid]) delete _chainVehicleRegistry[_cid];
+              var _cv = _chainVehicleRegistry[_cid];
+              // Do not erase confirmed identity on the first missing realtime
+              // poll. A train can enter a no-signal/no-public-position segment
+              // while its timetable running chain remains valid. Expire only
+              // after a bounded dropout window; never use this cache as position.
+              if (!_activeChainIds[_cid] && (!_cv || !_cv.lastSeenAt ||
+                  (Date.now() - _cv.lastSeenAt) > _CHAIN_EVIDENCE_TTL_MS)) {
+                delete _chainVehicleRegistry[_cid];
+              }
             });
             var estCount = 0;
             Object.keys(estimated).forEach(function(lid) {
