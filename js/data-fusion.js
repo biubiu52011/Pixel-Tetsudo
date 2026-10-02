@@ -78,6 +78,7 @@
   var _resolutionLineIdsSource = null;
   var _resolutionLineIds = [];
   var _lastCacheSavedFusionAt = 0;
+  var _minuteEstimationGeneration = 0;
 
   function _getResolutionLineIds() {
     var src = window.UNIFIED_LINES || {};
@@ -1221,9 +1222,11 @@
           return !_targetSet[id] && mayUseTimetablePosition(id);
         });
         var _minuteBatchToken = _minuteKey;
+        var _minuteBatchGeneration = ++_minuteEstimationGeneration;
         var _minuteBatchSize = 8;
         (function _runMinuteBatch(offset) {
-          if (_minuteBatchToken !== Math.floor(Date.now() / 60000)) return;
+          if (_minuteBatchGeneration !== _minuteEstimationGeneration ||
+              _minuteBatchToken !== Math.floor(Date.now() / 60000)) return;
           var batch = _minuteRemainder.slice(offset, offset + _minuteBatchSize);
           if (!batch.length) return;
           setTimeout(function() {
