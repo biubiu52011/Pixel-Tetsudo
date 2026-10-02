@@ -376,6 +376,18 @@ function main() {
   assert(/E657/.test(uenoTokyoLtd), 'UenoTokyo corridor must preserve Joban limited-express E657 identity', { uenoTokyoLtd });
 
 
+  const unresolvedNewShuttle = win.TrainVehicle.resolve({
+    lineId: 'NewShuttle',
+    trainNumber: 'NS-test-unassigned',
+    trainType: 'Local',
+    destinationStation: 'Uchijuku'
+  });
+  assert(!unresolvedNewShuttle.name, 'New Shuttle fleet-level evidence must not fabricate a concrete formation', unresolvedNewShuttle);
+  assert(!unresolvedNewShuttle.iconPath, 'New Shuttle unassigned service must not receive a random formation/livery icon', unresolvedNewShuttle);
+  assert(unresolvedNewShuttle.candidates.includes('埼玉新都市交通2000系') &&
+         unresolvedNewShuttle.candidates.includes('埼玉新都市交通2020系'),
+    'New Shuttle unresolved service must preserve its fleet candidates', unresolvedNewShuttle);
+
   assertNoCurrentFictionalAsset(win);
   assertNoFilenameDependentIdentity(win);
   assertCanonicalAssetRenameSimulation(win);
