@@ -23,10 +23,13 @@
     "5112M": { vehicleType: "東武100系", service: "スペーシアきぬがわ12号", direction: "up" }
   };
 
-  function resolve(trainNumber) {
+  function resolve(trainNumber, trainName) {
     var key = String(trainNumber || "").trim();
     var rec = records[key];
-    return rec && rec.vehicleType ? rec.vehicleType : "";
+    if (!rec) return "";
+    var name = String(trainName || "");
+    if (rec.servicePattern && !rec.servicePattern.test(name)) return "";
+    return rec.vehicleType || "";
   }
 
   window.TOBU_LIMITED_EXPRESS_VEHICLE_EVIDENCE = {
