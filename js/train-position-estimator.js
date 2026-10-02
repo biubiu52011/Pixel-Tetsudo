@@ -762,6 +762,8 @@
     estimateLinePositions: estimateLinePositions,
     estimateAllPositions: estimateAllPositions,
     registerManualTimetable: registerManualTimetable,
+    getRegisteredManualLineIds: function() { return Object.keys(_manualTimetableRegistry); },
+    getRegisteredManualTimetable: function(lineId) { return _manualTimetableRegistry[lineId] || null; },
     getCurrentCalendar: getCurrentCalendar,
     getCurrentCalendars: getCurrentCalendars,
     getCurrentMinutes: getCurrentMinutes,
