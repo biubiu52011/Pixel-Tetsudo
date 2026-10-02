@@ -167,10 +167,10 @@
     var ul = Array.isArray(lines) ? (function(){ var d={}; lines.forEach(function(l){ d[l.id||l.line_id]=l; }); return d; })() : lines;
     if (!ul || Object.keys(ul).length === 0) {
       // Sync loading animation with the realtime page (rs-loading spinner)
-      el.innerHTML = '<div class="rs-loading"><div class="rs-loading-spinner"></div><span>' + t("status.loading") + '</span></div>';
+      window.DataState.renderPageState(el, "loading");
       return;
     }
-    var lineOrder = (window.LinePresentationService && window.UNIFIED_LINES) ? window.LinePresentationService.getDisplayOrder(window.UNIFIED_LINES) : []; try { window.DataState.renderList(el, ul, { mode: "trains", lineOrder: lineOrder }); } catch(e) { el.innerHTML = '<div class="rs-error">' + t("status.render_error") + '</div>'; }
+    var lineOrder = (window.LinePresentationService && window.UNIFIED_LINES) ? window.LinePresentationService.getDisplayOrder(window.UNIFIED_LINES) : []; try { window.DataState.renderList(el, ul, { mode: "trains", lineOrder: lineOrder }); } catch(e) { window.DataState.renderPageState(el, "render_error"); }
   }
 
   function init() {
@@ -183,7 +183,7 @@
       backBtn = document.getElementById("trainsBackBtn");
       if (!listEl) return;
       // Sync loading animation with the realtime page (rs-loading spinner)
-      listEl.innerHTML = '<div class="rs-loading"><div class="rs-loading-spinner"></div><span>' + t("status.loading") + '</span></div>';
+      window.DataState.renderPageState(listEl, "loading");
       listEl.addEventListener("click", function(e) {
         // 支线 chip：从父线卡片进入支线详情（Line Hierarchy Rule）
         var chip = e.target.closest(".rs-branch-chip");
@@ -236,7 +236,7 @@
               // Match realtime page state semantics: loading must terminate in a
               // visible error state instead of leaving an endless spinner.
               if (!listEl.querySelector(".rs-line-card")) {
-                listEl.innerHTML = '<div class="rs-empty">' + t("status.load_error") + '</div>';
+                window.DataState.renderPageState(listEl, "error");
               }
               return;
             } // ~60s cap (mobile GitHub Pages can be slow)
@@ -436,7 +436,7 @@
       });
     }
     if (!filtered || Object.keys(filtered).length === 0) { el.innerHTML = ''; return; }
-    var lineOrder = (window.LinePresentationService && window.UNIFIED_LINES) ? window.LinePresentationService.getDisplayOrder(window.UNIFIED_LINES) : []; try { window.DataState.renderList(el, filtered, { mode: "trains", lineOrder: lineOrder }); } catch(e) { el.innerHTML = '<div class="rs-error">' + t("status.render_error") + '</div>'; }
+    var lineOrder = (window.LinePresentationService && window.UNIFIED_LINES) ? window.LinePresentationService.getDisplayOrder(window.UNIFIED_LINES) : []; try { window.DataState.renderList(el, filtered, { mode: "trains", lineOrder: lineOrder }); } catch(e) { window.DataState.renderPageState(el, "render_error"); }
   }
   window.TrainsPage = {
     init: init,
