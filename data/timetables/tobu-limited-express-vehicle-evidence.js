@@ -15,7 +15,12 @@
   // some pages do not expose every train-number cell reliably. Unverifiable
   // transcriptions are safer as unknown than as false high-confidence evidence.
   var records = {
-    // Add only independently re-checkable official timetable columns here.
+    // JR/Tobu mutual through limited expresses — official 2026-03 timetable.
+    // Train number, service and vehicle are exposed in the same official column.
+    "5021M": { vehicleType: "JR東日本E253系", service: "日光21号", direction: "down" },
+    "5026M": { vehicleType: "JR東日本E253系", service: "日光26号", direction: "up" },
+    "5111M": { vehicleType: "東武100系", service: "スペーシアきぬがわ11号", direction: "down" },
+    "5112M": { vehicleType: "東武100系", service: "スペーシアきぬがわ12号", direction: "up" }
   };
 
   function resolve(trainNumber) {
