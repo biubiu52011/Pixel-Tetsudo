@@ -729,6 +729,16 @@ function main() {
     'Saikyo-to-Rinkai pool must include TWR 70-000 and 71-000');
   assert(/'Saikyo':[\s\S]{0,900}'Sotetsu':\s*'JR E233系7000番台 \/ 相鉄12000系'/.test(vehicleMapSource),
     'JR-Sotetsu through pool must retain both E233-7000 and Sotetsu 12000');
+  assert(vehicleMapSource.includes('千葉ニュータウン鉄道9100形') &&
+         vehicleMapSource.includes('千葉ニュータウン鉄道9200形') &&
+         vehicleMapSource.includes('千葉ニュータウン鉄道9800形'),
+    'Chiba New Town Railway fleets must retain their actual owner identity');
+  assert(!vehicleMapSource.includes('北総9100形') &&
+         !vehicleMapSource.includes('北総9200形') &&
+         !vehicleMapSource.includes('北総9800形'),
+    'Chiba New Town Railway fleets must not be mislabeled as Hokuso-owned');
+  assert(/'Asakusa':[\s\S]{0,1800}'Keikyu':\s*'都営5500形 \/ 京急新1000形 \/ 京急600形'/.test(vehicleMapSource),
+    'Asakusa-Keikyu pool must include both current Keikyu subway-through fleets');
   assertNoFilenameDependentIdentity(win);
   assertCanonicalAssetRenameSimulation(win);
 
