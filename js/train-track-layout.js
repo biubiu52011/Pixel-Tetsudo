@@ -67,19 +67,27 @@
     ].join("|");
   }
 
+  function stableTrainKey(p, index) {
+    return String((p && (p.runningChainId || p.trainId || p.trainNumber || p.sourceTrainId)) || ("row-" + index));
+  }
+
   function buildOccupancy(positions, resolver) {
-    var counts = {};
-    var ordinals = {};
+    var groups = {};
     for (var i = 0; i < positions.length; i++) {
       var r = resolver(positions[i], i, true);
       if (!r) continue;
-      counts[r.key] = (counts[r.key] || 0) + 1;
+      (groups[r.key] = groups[r.key] || []).push({ index: i, id: stableTrainKey(positions[i], i) });
     }
+    var slots = {};
+    Object.keys(groups).forEach(function(key) {
+      groups[key].sort(function(a, b) { return a.id.localeCompare(b.id); });
+      for (var j = 0; j < groups[key].length; j++) {
+        slots[key + "|" + groups[key][j].index] = { ordinal: j, total: groups[key].length };
+      }
+    });
     return {
-      next: function (key) {
-        var n = ordinals[key] || 0;
-        ordinals[key] = n + 1;
-        return { ordinal: n, total: counts[key] || 1 };
+      get: function (key, index) {
+        return slots[key + "|" + index] || { ordinal: 0, total: 1 };
       }
     };
   }
@@ -131,7 +139,7 @@
     var lane = laneSign(moveDir, position && position.railDirection);
     var normal = normalFromTangent(base.tangent);
     var key = trackKey(position, base.idx, base.nextIdx, lane);
-    var slot = occupancy ? occupancy.next(key) : { ordinal: 0, total: 1 };
+    var slot = occupancy ? occupancy.get(key, index) : { ordinal: 0, total: 1 };
     var stackOffset = (slot.ordinal - (slot.total - 1) / 2) * (opts.stackGap || DEFAULTS.stackGap);
     var laneGap = opts.laneGap || DEFAULTS.laneGap;
     var lateral = lane * laneGap + stackOffset;
