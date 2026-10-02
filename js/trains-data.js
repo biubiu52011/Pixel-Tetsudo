@@ -62,10 +62,15 @@ function getRealtimePositions(lineId) {
   var _src = (window.RailwayDB && window.RailwayDB.getAllLines) ? window.RailwayDB.getAllLines() : getLinesData();
   var _brs = [];
   if (_src && _src[lineId] && _src[lineId].branches) {
-    _brs = _src[lineId].branches;
-  } else if (_src) {
+    _brs = _src[lineId].branches.slice();
+  }
+  // branchOf is canonical relationship evidence. Merge it even when the parent
+  // also has a branches[] convenience list, because that list may be partial.
+  if (_src) {
     for (var _bk in _src) {
-      if (_src[_bk].branchOf === lineId && _bk !== lineId) _brs.push(_bk);
+      if (_src[_bk] && _src[_bk].branchOf === lineId && _bk !== lineId && _brs.indexOf(_bk) < 0) {
+        _brs.push(_bk);
+      }
     }
   }
   if (_brs.length > 0) {
