@@ -1027,11 +1027,15 @@
     var _stCount = {};
     var _filtered = [];
     for (var _ep = 0; _ep < positions.length; _ep++) {
-      var _epIdx = Math.min(positions[_ep].stationIndex || 0, stationCoords.length - 1);
+      var _epPos = positions[_ep];
+      var _epIdx = Math.min(_epPos.stationIndex || 0, stationCoords.length - 1);
       var _isEndpoint = (_epIdx === 0 || _epIdx === stationCoords.length - 1);
       var _max = _isEndpoint ? _STATION_MAX_ENDPOINT : _STATION_MAX_NORMAL;
-      _stCount[_epIdx] = (_stCount[_epIdx] || 0) + 1;
-      if (_stCount[_epIdx] <= _max) {
+      // stationIndex is local to each source line. Branch/extension index 0 is
+      // not main-line index 0, so capacity accounting must include geometry role.
+      var _stationBucket = (_epPos.fusionLineId ? (_epPos.fusionRole || "fusion") + ":" + _epPos.fusionLineId + ":" : "main:") + _epIdx;
+      _stCount[_stationBucket] = (_stCount[_stationBucket] || 0) + 1;
+      if (_stCount[_stationBucket] <= _max) {
         _filtered.push(positions[_ep]);
       }
     }
