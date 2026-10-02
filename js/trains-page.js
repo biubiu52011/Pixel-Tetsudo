@@ -198,10 +198,12 @@
     } catch(e) { if (callback) callback(); }
   }
 
-  function renderList(el) {
+  function renderList(el, linesSnapshot) {
     if (!el || !window.DataState) return;
-    // Keep initial, filtered and detail rendering on one fused/canonical source.
-    var ul = getLinesData();
+    // Once DataState emits a canonical snapshot, render that exact snapshot.
+    // getLinesData() remains startup fallback only; mixing the two inside one
+    // notification caused the first render to differ from a later filter render.
+    var ul = linesSnapshot || getLinesData();
     if (!ul || Object.keys(ul).length === 0) {
       // Sync loading animation with the realtime page (rs-loading spinner)
       window.DataState.renderPageState(el, "loading");
@@ -369,9 +371,14 @@
           // Always render if list is empty (initial load), otherwise render list on
           // position changes; detail additionally reacts to its state signature.
           if (currentLen === 0) {
-            renderList(listEl);
+            if (_selectedOperator === null) {
+              renderList(listEl, lines);
+            } else {
+              renderFiltered(listEl, lines);
+            }
             renderFilterBar(document.getElementById("trainsFilterBar"));
             _lastPositionsHash = posHash;
+            _lastDetailStateHash = detailStateHash;
             // (through-service info now lives inside the train map interchange icons)
             // Restore hash-based navigation once data is ready (async load timing)
             var _h = window.location.hash;
@@ -472,9 +479,9 @@
     if (listEl) renderFiltered(listEl);
   }
 
-  function renderFiltered(el) {
+  function renderFiltered(el, linesSnapshot) {
     if (!el || !window.DataState) return;
-    var allLines = getLinesData(); // dict: lineId -> line
+    var allLines = linesSnapshot || getLinesData(); // dict: lineId -> line
     var filtered = allLines;
     if (_selectedOperator) {
       filtered = {};
