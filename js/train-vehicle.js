@@ -278,6 +278,55 @@
   function getName(ctx) { return resolve(ctx).name; }
   function getIconPath(ctx) { return resolve(ctx).iconPath; }
 
+  // Daily formation evidence. This layer never guesses a formation:
+  // it only propagates a dated, externally confirmed formation along an
+  // already-resolved physical runningChainId.
+  var _formationEvidence = {};
+  function _formationServiceDate(d) {
+    var x = d instanceof Date ? d : new Date(d || Date.now());
+    return x.getFullYear() + "-" + String(x.getMonth()+1).padStart(2,"0") + "-" + String(x.getDate()).padStart(2,"0");
+  }
+  function _normalizeFormation(lineId, formationId) {
+    if (lineId !== "NewShuttle") return null;
+    var id = String(formationId == null ? "" : formationId).replace(/[^0-9]/g,"");
+    if (/^0[1-7]$/.test(id)) return { id:id, vehicleName:"埼玉新都市交通2000系（"+id+"編成）" };
+    if (/^2[1-6]$/.test(id)) return { id:id, vehicleName:"2020系（"+id+"編成）" };
+    return null;
+  }
+  function registerFormationEvidence(anchor) {
+    if (!anchor || !anchor.runningChainId || !anchor.formationId) return false;
+    var f = _normalizeFormation(anchor.lineId, anchor.formationId);
+    if (!f) return false;
+    var date = anchor.serviceDate || _formationServiceDate(anchor.observedAt);
+    _formationEvidence[date+"|"+anchor.runningChainId] = {
+      lineId:anchor.lineId, runningChainId:anchor.runningChainId, serviceDate:date,
+      formationId:f.id, vehicleName:f.vehicleName,
+      evidenceSource:anchor.evidenceSource || "daily-observation",
+      observedAt:anchor.observedAt || null
+    };
+    return true;
+  }
+  function resolveFormationEvidence(ctx) {
+    if (!ctx || !ctx.runningChainId) return null;
+    var date = ctx.serviceDate || _formationServiceDate(ctx.at);
+    var a = _formationEvidence[date+"|"+ctx.runningChainId];
+    if (!a) return null;
+    var icon = resolveIconForName(a.vehicleName, a.lineId);
+    if (!icon) return null;
+    return {
+      formationId:a.formationId, vehicleName:a.vehicleName, iconPath:icon,
+      serviceDate:a.serviceDate, source:"formation-evidence", confidence:"high",
+      evidenceSource:a.evidenceSource, observedAt:a.observedAt,
+      propagatedByRunningChain:true
+    };
+  }
+  function clearFormationEvidenceOtherDates(date) {
+    var keep = date || _formationServiceDate();
+    Object.keys(_formationEvidence).forEach(function(k) {
+      if (k.indexOf(keep+"|") !== 0) delete _formationEvidence[k];
+    });
+  }
+
   // ============================================================
   // Public API
   // ============================================================
@@ -287,6 +336,9 @@
     getName: getName,
     getIconPath: getIconPath,
     registerVehicle: registerVehicle,
+    registerFormationEvidence: registerFormationEvidence,
+    resolveFormationEvidence: resolveFormationEvidence,
+    clearFormationEvidenceOtherDates: clearFormationEvidenceOtherDates,
     getCandidates: getCandidates,
     // 调试/审计用
     _table: function() { return TRAIN_NO_VEHICLE; }
