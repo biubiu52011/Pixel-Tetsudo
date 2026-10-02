@@ -292,7 +292,12 @@
     });
     Promise.all(jobs).then(function(changed) {
       if (token !== _listStatusRefreshToken || !changed.some(Boolean)) return;
-      renderFiltered();
+      var changedIds = [];
+      for (var i = 0; i < changed.length; i++) if (changed[i]) changedIds.push(ids[i]);
+      var container = document.getElementById("realtimeStatusContainer");
+      var visible = getFilteredLines();
+      var visibleChanged = changedIds.filter(function(id) { return !!visible[id]; });
+      if (!patchRealtimeCards(container, visible, visibleChanged)) renderFiltered();
     }).catch(function() {});
   }
 
@@ -367,21 +372,70 @@
     }
   }
 
+  function getFilteredLines() {
+    if (!_latestLines) return {};
+    if (!_selectedOperator) return _latestLines;
+    var filtered = {};
+    Object.keys(_latestLines).forEach(function(id) {
+      var line = _latestLines[id];
+      if (line && (_selectedOperator === "JR-East"
+        ? (window.TransitConstants && window.TransitConstants.isJRERoute ? window.TransitConstants.isJRERoute(line) : line.operator === "JR-East")
+        : line.operator === _selectedOperator)) {
+        filtered[id] = line;
+      }
+    });
+    return filtered;
+  }
+
+  function statusSignature(line) {
+    var d = getDelayInfo(line) || {};
+    return [d.status || "loading", d.interval || "", d.cause || "", d.detail || "", d.source || ""].join("|");
+  }
+
+  function patchRealtimeCards(container, linesObj, changedIds) {
+    if (!container || !changedIds || changedIds.length === 0) return true;
+    var needsFullRender = false;
+    changedIds.forEach(function(lineId) {
+      var line = linesObj[lineId];
+      if (!line) { needsFullRender = true; return; }
+      var card = container.querySelector('.rs-line-card[data-line="' + String(lineId).replace(/"/g, '\\"') + '"]');
+      if (!card) {
+        // The line may be represented by a running-system card.
+        var systemCards = container.querySelectorAll(".rs-system-card[data-lines]");
+        for (var i = 0; i < systemCards.length; i++) {
+          var members = (systemCards[i].dataset.lines || "").split(",");
+          if (members.indexOf(lineId) >= 0) { needsFullRender = true; break; }
+        }
+        return;
+      }
+      // A realtime card's static shell (name/icon/operator/order) is unchanged.
+      // Replace only its dynamic status/interval nodes instead of rebuilding
+      // every operator group and every line card.
+      var freshWrap = document.createElement("div");
+      freshWrap.innerHTML = window.DataState.renderCard(line, lineId, { mode: "realtime" });
+      var fresh = freshWrap.firstElementChild;
+      if (!fresh) { needsFullRender = true; return; }
+      var oldStatus = card.querySelector(".rs-status-icon");
+      var newStatus = fresh.querySelector(".rs-status-icon");
+      if (oldStatus && newStatus) {
+        oldStatus.className = newStatus.className;
+        oldStatus.textContent = newStatus.textContent;
+      }
+      var oldInterval = card.querySelector(".rs-line-interval");
+      var newInterval = fresh.querySelector(".rs-line-interval");
+      if (oldInterval && newInterval) oldInterval.textContent = newInterval.textContent;
+      else if (oldInterval && !newInterval) oldInterval.remove();
+      else if (!oldInterval && newInterval) {
+        var info = card.querySelector(".rs-line-info");
+        if (info) info.appendChild(newInterval);
+      }
+    });
+    return !needsFullRender;
+  }
+
   function renderFiltered() {
     if (!_latestLines) return;
-    var filtered = _latestLines;
-    if (_selectedOperator) {
-      var f = {};
-      Object.keys(_latestLines).forEach(function(id) {
-        var _ln = _latestLines[id];
-        if (_ln && (_selectedOperator === "JR-East"
-          ? (window.TransitConstants && window.TransitConstants.isJRERoute ? window.TransitConstants.isJRERoute(_ln) : _ln.operator === "JR-East")
-          : _ln.operator === _selectedOperator)) {
-          f[id] = _latestLines[id];
-        }
-      });
-      filtered = f;
-    }
+    var filtered = getFilteredLines();
     var container = document.getElementById("realtimeStatusContainer");
     if (!container) return;
     if (Object.keys(filtered).length === 0) {
@@ -389,6 +443,23 @@
       return;
     }
     window.DataState.renderList(container, filtered, { mode: "realtime", lineOrder: _latestOrder || [] });
+  }
+
+  var _renderedStatusSignatures = {};
+  function reconcileRealtimeList(container, linesObj) {
+    var filtered = getFilteredLines();
+    var cards = container ? container.querySelectorAll(".rs-line-card") : [];
+    if (!cards || cards.length === 0) { renderFiltered(); return; }
+    var changed = [];
+    var next = {};
+    Object.keys(filtered).forEach(function(id) {
+      next[id] = statusSignature(filtered[id]);
+      if (_renderedStatusSignatures[id] !== next[id]) changed.push(id);
+    });
+    var oldIds = Object.keys(_renderedStatusSignatures);
+    var structureChanged = oldIds.length !== Object.keys(next).length || oldIds.some(function(id) { return !next.hasOwnProperty(id); });
+    if (structureChanged || !patchRealtimeCards(container, filtered, changed)) renderFiltered();
+    _renderedStatusSignatures = next;
   }
 
   function init() {
@@ -463,12 +534,10 @@
           // One DataFusion emission must cause at most one full list rebuild.
           // Previously selected-operator mode rendered the full list first and
           // immediately replaced it with the filtered list, doubling DOM work.
-          if (_selectedOperator) {
-            renderFiltered();
-            renderFilterBar(_latestLines);
-          } else {
-            render();
-          }
+          // Live snapshots normally change only status/interval data. Keep
+          // the operator/line shell mounted and patch affected cards in place.
+          reconcileRealtimeList(container, _latestLines);
+          refreshListStatuses(_latestLines);
         }
       });
     }
