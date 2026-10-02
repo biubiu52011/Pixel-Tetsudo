@@ -481,6 +481,12 @@ function main() {
     assert(!/(^| \/ )(5050系|5000系|横浜高速Y500系)( \/ |$)/.test(vt), 'F-Liner default pool must not use ordinary 8-car Tokyu/Y500 stock', { lineId, vt });
   });
 
+    const mmFLiner = win.VehicleTypeMap.resolve('MinatoMirai', 'odpt.TrainType:Tokyu.F-Liner', null);
+  assert(/17000系\(10両\)/.test(mmFLiner), 'Minatomirai F-Liner must distinguish the 10-car Metro 17000 formation', { mmFLiner });
+  assert(!/Y500/.test(mmFLiner), '8-car Y500 must not enter the normal 10-car F-Liner pool', { mmFLiner });
+  const mmSTrain = win.VehicleTypeMap.resolve('MinatoMirai', 'odpt.TrainType:Seibu.S-TRAIN', null);
+  assert(mmSTrain === '西武40000系', 'Minatomirai S-TRAIN must resolve only Seibu 40000 series', { mmSTrain });
+
     const ikeSTrain = win.VehicleTypeMap.resolve('Ikebukuro', 'odpt.TrainType:Seibu.S-TRAIN', null);
   assert(ikeSTrain === '西武40000系', 'Seibu Ikebukuro S-TRAIN must resolve only Seibu 40000 series', { ikeSTrain });
 
