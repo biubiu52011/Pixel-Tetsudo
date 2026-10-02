@@ -708,6 +708,13 @@ function main() {
     '5112M without service identity must remain unknown when the number is reused');
 
     assertNoCurrentFictionalAsset(win);
+  const trainIconsSource = fs.readFileSync(path.join(ROOT, 'js/train-icons.js'), 'utf8');
+  assert(/var THROUGH_PREFIX_RULES\s*=\s*\{\s*\}/.test(trainIconsSource),
+    'Through-service train-number prefix guessing must remain disabled');
+  assert(/var THROUGH_SUFFIX_RULES\s*=\s*\{\s*\}/.test(trainIconsSource),
+    'Through-service train-number suffix guessing must remain disabled');
+  assert(!/lines:\s*\['Rinkai'\][\s\S]{0,200}E233系_7000/.test(trainIconsSource),
+    'Rinkai trains must not default to JR E233-7000 without vehicle evidence');
   assertNoFilenameDependentIdentity(win);
   assertCanonicalAssetRenameSimulation(win);
 
