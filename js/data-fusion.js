@@ -69,6 +69,8 @@
   // recent samples so instrumentation cannot become its own memory/log problem.
   var _perfSamples = [];
   var _lastEstimationMinute = -1;
+  var _lastFusionEmitAt = 0;
+  var _resumeFallbackTimer = null;
   function _perfNow() { return (window.performance && performance.now) ? performance.now() : Date.now(); }
   function _perfRecord(name, startedAt, meta) {
     var ms = Math.round((_perfNow() - startedAt) * 10) / 10;
@@ -98,7 +100,17 @@
       if (document.hidden) {
         stopFusionPolling();
       } else {
-        try { fuseAll(); } catch(e) { console.debug("[DataFusion] visible->fuseAll error:", e.message); }
+        // ODPT owns foreground refresh and immediately requests fresh realtime
+        // data. Avoid racing it with an eager full-network fuse. Keep a bounded
+        // fallback for pages where ODPT is absent or the refresh never emits.
+        var resumedAt = Date.now();
+        if (_resumeFallbackTimer) clearTimeout(_resumeFallbackTimer);
+        _resumeFallbackTimer = setTimeout(function() {
+          _resumeFallbackTimer = null;
+          if (_lastFusionEmitAt < resumedAt) {
+            try { fuseAll(); } catch(e) { console.debug("[DataFusion] visible fallback->fuseAll error:", e.message); }
+          }
+        }, 1500);
         startFusionPolling();
       }
     } catch(e) { console.debug("[DataFusion] visibilitychange handler error:", e.message); }
@@ -154,6 +166,7 @@
 
   // ========== Data Loading ==========
   function emitUpdate(fusedData) {
+    _lastFusionEmitAt = Date.now();
     if (fusedData) { _lastFusedData = fusedData; }
     // v4.3.842: 先提交 DATA_FUSION 再通知订阅者——原顺序为「先 cb 后赋值」，
     // 订阅回调内 getFusedData() 经 window.DATA_FUSION || _lastFusedData 读到
