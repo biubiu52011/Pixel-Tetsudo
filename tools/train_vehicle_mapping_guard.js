@@ -618,6 +618,13 @@ function main() {
   assert(!/(相鉄20000系|相鉄21000系)/.test(seibuSotetsu),
     'Seibu lines must not infer Sotetsu rolling stock or a Seibu-Sotetsu through service', { seibuSotetsu });
 
+    const jobanThrough = win.VehicleTypeMap.resolve('JobanLocal', 'odpt.TrainType:JR-East.Local', 'odpt.Station:Odakyu.Odawara.YoyogiUehara');
+  assert(/JR E233系2000番台\(10両\)/.test(jobanThrough) && /東京メトロ16000系\(10両\)/.test(jobanThrough) && /小田急4000形\(10両\)/.test(jobanThrough),
+    'Joban Local through pool must preserve explicit 10-car JR/Metro/Odakyu identities', { jobanThrough });
+  const odawaraMetro = win.VehicleTypeMap.resolve('Odawara', 'odpt.TrainType:Odakyu.Local', 'odpt.Station:TokyoMetro.Chiyoda.KitaAyase');
+  assert(/小田急4000形\(10両\)/.test(odawaraMetro) && /東京メトロ16000系\(10両\)/.test(odawaraMetro),
+    'Odakyu Chiyoda-bound pool must remain subway-capable stock', { odawaraMetro });
+
     assertNoCurrentFictionalAsset(win);
   assertNoFilenameDependentIdentity(win);
   assertCanonicalAssetRenameSimulation(win);
