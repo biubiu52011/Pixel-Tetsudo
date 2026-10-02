@@ -399,6 +399,12 @@
       var line = linesObj[lineId];
       if (!line) { needsFullRender = true; return; }
       var card = container.querySelector('.rs-line-card[data-line="' + String(lineId).replace(/"/g, '\\"') + '"]');
+      if (card && card.classList.contains("rs-system-card")) {
+        // One system card aggregates multiple member statuses; a single-line
+        // patch cannot safely recompute its worst-state icon.
+        needsFullRender = true;
+        return;
+      }
       if (!card) {
         // The line may be represented by a running-system card.
         var systemCards = container.querySelectorAll(".rs-system-card[data-lines]");
@@ -446,6 +452,16 @@
   }
 
   var _renderedStatusSignatures = {};
+  var _lastListStatusRefreshAt = 0;
+  function scheduleListStatusRefresh(linesObj, force) {
+    var now = Date.now();
+    // RunInfoAPI itself caches results, but mapping every line to a Promise on
+    // every DataFusion emission still creates avoidable main-thread churn.
+    if (!force && now - _lastListStatusRefreshAt < 10000) return;
+    _lastListStatusRefreshAt = now;
+    refreshListStatuses(linesObj);
+  }
+
   function reconcileRealtimeList(container, linesObj) {
     var filtered = getFilteredLines();
     var cards = container ? container.querySelectorAll(".rs-line-card") : [];
@@ -499,7 +515,7 @@
       try {
         renderLinesList(container, fused.lines, _latestOrder);
         renderFilterBar(fused.lines);
-        refreshListStatuses(fused.lines);
+        scheduleListStatusRefresh(fused.lines, true);
       } catch (e) {
         window.DataState.renderPageState(container, "render_error");
       }
@@ -537,7 +553,7 @@
           // Live snapshots normally change only status/interval data. Keep
           // the operator/line shell mounted and patch affected cards in place.
           reconcileRealtimeList(container, _latestLines);
-          refreshListStatuses(_latestLines);
+          scheduleListStatusRefresh(_latestLines, false);
         }
       });
     }
