@@ -446,6 +446,22 @@
   var SOURCE_RAILWAY_LINE_SCOPE = (window.RuntimeConfig && window.RuntimeConfig.SOURCE_RAILWAY_LINE_SCOPE) || {};
   var _stationLineIndex = null;
   var _stationLineIndexSource = null;
+  var _branchIndex = null;
+  var _branchIndexSource = null;
+
+  function getBranchIndex(lines) {
+    if (_branchIndex && _branchIndexSource === lines) return _branchIndex;
+    var idx = {};
+    Object.keys(lines || {}).forEach(function(id) {
+      var line = lines[id];
+      if (!line || !line.branchOf) return;
+      if (!idx[line.branchOf]) idx[line.branchOf] = [];
+      idx[line.branchOf].push(id);
+    });
+    _branchIndex = idx;
+    _branchIndexSource = lines;
+    return idx;
+  }
 
   function getStationLineIndex(lines) {
     if (_stationLineIndex && _stationLineIndexSource === lines) return _stationLineIndex;
@@ -1066,9 +1082,9 @@
           // 支線は単独カード化せず体系内でリアルタイム配備するため、本体の需要に依存せず常に確保する
           var _branchIds3 = [];
           if (line && line.branches) _branchIds3 = line.branches.slice();
-          Object.keys(allLines).forEach(function(_bid3) {
-            if (_bid3 !== lid && allLines[_bid3] && allLines[_bid3].branchOf === lid &&
-                _branchIds3.indexOf(_bid3) < 0) _branchIds3.push(_bid3);
+          var _indexedBranches3 = getBranchIndex(allLines)[lid] || [];
+          _indexedBranches3.forEach(function(_bid3) {
+            if (_branchIds3.indexOf(_bid3) < 0) _branchIds3.push(_bid3);
           });
           if (_branchIds3.length > 0) {
             _branchIds3.forEach(function(bid3) {
