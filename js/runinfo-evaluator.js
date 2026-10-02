@@ -75,7 +75,7 @@
 
   function normalizeRange(v) {
     var s = textOf(v).trim();
-    return s ? s.replace(/駅間$/, "").replace(/間$/, "").replace(/[〜～－−]/g, "→") : null;
+    return s ? s.replace(/間(?=\s*(?:[〜～－−→]|$))/g, "").replace(/[〜～－−]/g, "→") : null;
   }
 
   function extractMetadata(input) {
