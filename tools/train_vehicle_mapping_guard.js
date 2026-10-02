@@ -775,6 +775,12 @@ function main() {
     'MinatoMirai-Tobu pool must remain ten-car only');
   assert(!/'MinatoMirai':[\s\S]{0,2600}'Tobu': '[^']*(?:Y500|東急5050系\(8両\)|東急5000系\(8両\))/.test(vehicleMapSource),
     'Eight-car MinatoMirai fleets must not enter the Tobu-bound pool');
+  assert(/'Kawagoe':[\s\S]{0,900}'Sotetsu': 'JR E233系7000番台 \/ 相鉄12000系'/.test(vehicleMapSource),
+    'Kawagoe-Sotetsu pool must retain both JR E233-7000 and Sotetsu 12000');
+  assert(/'Kawagoe':[\s\S]{0,900}'TWR': 'JR E233系7000番台 \/ 東京臨海高速鉄道71-000形 \/ 東京臨海高速鉄道70-000形'/.test(vehicleMapSource),
+    'Kawagoe-Rinkai pool must retain JR and both current TWR fleets');
+  assert(!/'Kawagoe':[\s\S]{0,900}209系3100番台/.test(vehicleMapSource),
+    'Retired 209-3100 must not return to the current Kawagoe through-service pool');
   assertNoFilenameDependentIdentity(win);
   assertCanonicalAssetRenameSimulation(win);
 
