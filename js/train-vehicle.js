@@ -182,39 +182,11 @@
     // 候选串可能来自 S0 manual（estimator 转存）或 S3 map（Arakawa ODPT 无车型、vehicleType 空，
     // 候选串由 vehicle-type-map.js MAP 提供），两种情况都应按保有数比例映射；
     // S2 若携带 orderArr 之外的新候选（跨线/实时车号级实证）才阻断加权、保持实证优先。
-    var _fleetEligible = orderArr.length > 1;
-    if (_fleetEligible && _trainNoCands.length > 0) {
-      var _sameAsManual = _trainNoCands.length === orderArr.length &&
-        _trainNoCands.every(function(c) { return orderArr.indexOf(c) >= 0; });
-      if (!_sameAsManual) _fleetEligible = false;
-    }
+    // Multiple candidates without train-level evidence remain ambiguous.
+    // Do not manufacture a concrete vehicle identity from fleet ratios/hash;
+    // that creates a stable-looking but unsupported icon assignment.
     var chosen = '';
     var chosenSrc = '';
-    // v4.3.1006: 保有数比例加权随机映射（用户决策 2026-09-24）——
-    // 候选串无法精确识别（如都電五选一"7700形/8500形/8800形/8900形/9000形"）且无 S2 车号实证时，
-    // 按官网在籍数权重做确定性 hash 选型：同一车次（trainId）每次稳定同一车型，
-    // 杜绝"全线一个兜底跑天下"；权重表 VEHICLE_FLEET_WEIGHTS（train-icons.js）人工按官网核验。
-    if (_fleetEligible &&
-        window.TrainIcons && window.TrainIcons.VEHICLE_FLEET_WEIGHTS && lineId) {
-      var _fleet = window.TrainIcons.VEHICLE_FLEET_WEIGHTS[lineId] || {};
-      var _fleetKey = orderArr.join(' / ');
-      var _wArr = _fleet[_fleetKey] || _fleet['*'];
-      if (_wArr && _wArr.length === orderArr.length) {
-        var _seed = (trainNumber || '') + '|' + lineId + '|' + _fleetKey;
-        var _h = 0;
-        for (var _si = 0; _si < _seed.length; _si++) _h = ((_h * 31) + _seed.charCodeAt(_si)) >>> 0;
-        var _total = 0;
-        _wArr.forEach(function(w) { _total += w; });
-        var _r = _h % _total, _acc = 0, _fleetIdx = -1;
-        for (var _wi = 0; _wi < _wArr.length; _wi++) {
-          _acc += _wArr[_wi];
-          if (_r < _acc) { _fleetIdx = _wi; break; }
-        }
-        if (_fleetIdx < 0) _fleetIdx = _wArr.length - 1;
-        chosen = orderArr[_fleetIdx];
-        chosenSrc = 'fleet';
-      }
-    }
     if (!chosen) {
       for (var oi = 0; oi < order.length; oi++) {
         var srcName = order[oi];
@@ -234,7 +206,6 @@
     else if (chosenSrc === 'trainNo') confidence = crossCount >= 2 ? 'high' : 'medium';
     else if (chosenSrc === 'map') confidence = 'medium';
     else if (chosenSrc === 'icons') confidence = 'low';
-    else if (chosenSrc === 'fleet') confidence = 'low';   // v4.3.1006: 保有数比例加权随机映射（低置信度推定）
 
     // 4) 图标：候选 → 图标库；无图标再走 S4 规则兜底
     var iconPath = chosen ? resolveIconForName(chosen, ctx.lineId) : '';
@@ -280,7 +251,7 @@
       iconPath: iconPath,
       // 兼容原 vehicleType 候选串格式（"A / B / C"，稳定顺序）
       // v4.3.1007b: 加权随机映射已确定单一车型时,vehicleTypeStr 与 name 一致(title 不再显示候选串)
-      vehicleTypeStr: (chosenSrc === 'fleet' && chosen) ? chosen : orderArr.join(' / ')
+      vehicleTypeStr: orderArr.join(' / ')
     };
   }
 
