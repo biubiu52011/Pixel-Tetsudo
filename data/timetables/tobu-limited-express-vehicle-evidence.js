@@ -125,33 +125,52 @@
       .toLowerCase();
   }
 
-  function resolve(trainNumber, trainName, direction, serviceDate, context) {
+  // Precompile immutable lookup helpers once; records stays serializable/debuggable.
+  Object.keys(records).forEach(function(key) {
+    var list = Array.isArray(records[key]) ? records[key] : [records[key]];
+    list.forEach(function(rec) {
+      if (rec.validDates && rec.validDates.length) {
+        Object.defineProperty(rec, "_validDateSet", {
+          value: new Set(rec.validDates), enumerable: false
+        });
+      }
+      if (rec.service || rec.services) {
+        Object.defineProperty(rec, "_serviceSet", {
+          value: new Set((rec.services || [rec.service]).map(_normServiceName)), enumerable: false
+        });
+      }
+    });
+  });
+
+  function resolveEvidence(trainNumber, trainName, direction, serviceDate, context) {
     var key = String(trainNumber || "").trim();
     var entry = records[key];
-    if (!entry) return "";
+    if (!entry) return null;
     var candidates = Array.isArray(entry) ? entry : [entry];
     var name = String(trainName || "");
+    var actualService = name ? _normServiceName(name) : "";
+    var d = serviceDate ? String(serviceDate).slice(0, 10) : "";
+    var ctx = context || {};
     var matched = candidates.filter(function(rec) {
       if (rec.servicePattern && !rec.servicePattern.test(name)) return false;
-      if (name && (rec.service || rec.services)) {
-        var actual = _normServiceName(name);
-        var expectedList = (rec.services || [rec.service]).map(_normServiceName);
-        if (actual && expectedList.length && expectedList.indexOf(actual) < 0) return false;
-      }
+      if (actualService && rec._serviceSet && !rec._serviceSet.has(actualService)) return false;
       if (direction && rec.direction &&
           String(direction).toLowerCase() !== String(rec.direction).toLowerCase()) return false;
-      if (serviceDate) {
-        var d = String(serviceDate).slice(0, 10);
-        if (rec.validDates && rec.validDates.length && rec.validDates.indexOf(d) < 0) return false;
+      if (d) {
+        if (rec._validDateSet && !rec._validDateSet.has(d)) return false;
         if (rec.validFrom && d < rec.validFrom) return false;
         if (rec.validUntil && d > rec.validUntil) return false;
       }
-      var ctx = context || {};
       if (rec.operator && String(ctx.operator || "").indexOf(rec.operator) < 0) return false;
       if (rec.lineId && String(ctx.lineId || "") !== rec.lineId) return false;
       return true;
     });
-    return matched.length === 1 ? (matched[0].vehicleType || "") : "";
+    return matched.length === 1 ? matched[0] : null;
+  }
+
+  function resolve(trainNumber, trainName, direction, serviceDate, context) {
+    var rec = resolveEvidence(trainNumber, trainName, direction, serviceDate, context);
+    return rec ? (rec.vehicleType || "") : "";
   }
 
   window.TOBU_LIMITED_EXPRESS_VEHICLE_EVIDENCE = {
@@ -159,6 +178,7 @@
     source: "Tobu Railway official limited-express timetable",
     policy: "exact-verified-columns-only",
     records: records,
+    resolveEvidence: resolveEvidence,
     resolve: resolve
   };
 })();
