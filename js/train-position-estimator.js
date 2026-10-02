@@ -571,10 +571,12 @@
    * @param {object} existingPositions - Already-known realtime positions keyed by lineId
    * @returns {object} Estimated positions keyed by lineId
    */
-  function estimateAllPositions(allLines, odptTrains, delayInfo, existingPositions) {
+  function estimateAllPositions(allLines, odptTrains, delayInfo, existingPositions, options) {
     try {
+      options = options || {};
       var estimated = {};
-      var lineIds = Object.keys(allLines || {});
+      var requested = Array.isArray(options.lineIds) ? options.lineIds : null;
+      var lineIds = requested ? requested.filter(function(id) { return !!(allLines && allLines[id]); }) : Object.keys(allLines || {});
 
       // Cache the expensive operator/railway timetable index across polls.
       // ODPT timetable arrays are long-lived and only grow when lazy loads merge
