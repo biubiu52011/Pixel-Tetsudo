@@ -501,6 +501,52 @@
   var _stationLineIndexSource = null;
   var _branchIndex = null;
   var _branchIndexSource = null;
+  var _timetablePresenceIndex = {};
+  var _timetablePresenceStamp = "";
+
+  function getTimetablePresenceIndex() {
+    var src = window.ODPT_TIMETABLES || {};
+    var parts = [];
+    Object.keys(src).sort().forEach(function(op) {
+      parts.push(op + ":" + (Array.isArray(src[op]) ? src[op].length : 0));
+    });
+    var stamp = parts.join("|");
+    if (stamp === _timetablePresenceStamp) return _timetablePresenceIndex;
+    var idx = {};
+    Object.keys(src).forEach(function(op) {
+      var rows = src[op];
+      if (!Array.isArray(rows)) return;
+      var opIdx = idx[op] = {};
+      rows.forEach(function(t) {
+        var rw = t && t["odpt:railway"];
+        if (!rw) return;
+        var raw = String(rw);
+        var colon = raw.split(":");
+        var tail = colon.length > 1 ? colon[colon.length - 1] : raw;
+        var dots = tail.split(".");
+        var railwayKey = dots[dots.length - 1] || "";
+        if (railwayKey) opIdx[railwayKey] = true;
+      });
+    });
+    _timetablePresenceIndex = idx;
+    _timetablePresenceStamp = stamp;
+    return idx;
+  }
+
+  function hasOdptTimetableForLine(lineId, operator) {
+    var idx = getTimetablePresenceIndex();
+    var op = operator || "";
+    var normalized = TransitConstants && typeof TransitConstants.normalizeOp === "function" ? TransitConstants.normalizeOp(op) : op;
+    var aliases = { "Rinkai": "TWR", "TsukubaExpress": "MIR" };
+    var candidates = [op, normalized, aliases[op], aliases[normalized]].filter(Boolean);
+    var code = (window.ODPTClient && window.ODPTClient.LINE_RAILWAY_CODE &&
+      window.ODPTClient.LINE_RAILWAY_CODE[lineId]) || lineId;
+    for (var i = 0; i < candidates.length; i++) {
+      var oi = idx[candidates[i]];
+      if (oi && (oi[lineId] || oi[code])) return true;
+    }
+    return false;
+  }
 
   function getBranchIndex(lines) {
     if (_branchIndex && _branchIndexSource === lines) return _branchIndex;
@@ -1118,20 +1164,9 @@
           // the current API snapshot is legitimately empty (e.g. no trains at this moment).
           if (!mayUseTimetablePosition(lid)) return;
           var hasRealtime = posMap[lid] && posMap[lid].length > 0;
-          var hasTimetable = timetableOps.indexOf(line.operator) >= 0;
-          // Check timetable presence with the same canonical -> ODPT railway
-          // identity used by the estimator. Internal branch ids do not have to
-          // appear literally in odpt:railway.
-          if (hasTimetable && window.ODPT_TIMETABLES[line.operator]) {
-            var _ttRailwayCode = (window.ODPTClient && window.ODPTClient.LINE_RAILWAY_CODE &&
-              window.ODPTClient.LINE_RAILWAY_CODE[lid]) || lid;
-            var lineTimetables = window.ODPT_TIMETABLES[line.operator].filter(function(t) {
-              var railway = t['odpt:railway'] || '';
-              return railway.indexOf(lid) >= 0 || railway.indexOf('.' + lid) >= 0 ||
-                railway.indexOf(_ttRailwayCode) >= 0 || railway.indexOf('.' + _ttRailwayCode) >= 0;
-            });
-            hasTimetable = lineTimetables.length > 0;
-          }
+          // Presence lookup is indexed by operator+railway. Do not rescan an
+          // operator's entire timetable array for every line on every poll.
+          var hasTimetable = hasOdptTimetableForLine(lid, line.operator);
           if (!hasRealtime && !hasTimetable && window.ODPTClient && window.ODPTClient.supports(line.operator, 'trainTimetable')) {
             linesNeedingTimetable.push({ lineId: lid, operator: line.operator, name: line.name || line.nameJa });
           }
@@ -1157,17 +1192,7 @@
               bl3._branchOperationMode = _branchOperationMode3;
               if (!mayUseTimetablePosition(bid3)) return;
               var hasRt3 = posMap[bid3] && posMap[bid3].length > 0;
-              var hasTt3 = false;
-              if (window.ODPT_TIMETABLES && window.ODPT_TIMETABLES[bl3.operator]) {
-                var _brRailwayCode3 = (window.ODPTClient && window.ODPTClient.LINE_RAILWAY_CODE &&
-                  window.ODPTClient.LINE_RAILWAY_CODE[bid3]) || bid3;
-                var lt3 = window.ODPT_TIMETABLES[bl3.operator].filter(function(t) {
-                  var railway = t['odpt:railway'] || '';
-                  return railway.indexOf(bid3) >= 0 || railway.indexOf('.' + bid3) >= 0 ||
-                    railway.indexOf(_brRailwayCode3) >= 0 || railway.indexOf('.' + _brRailwayCode3) >= 0;
-                });
-                hasTt3 = lt3.length > 0;
-              }
+              var hasTt3 = hasOdptTimetableForLine(bid3, bl3.operator);
               if (!hasRt3 && !hasTt3 && window.ODPTClient && window.ODPTClient.supports(bl3.operator, 'trainTimetable')) {
                 linesNeedingTimetable.push({ lineId: bid3, operator: bl3.operator, name: bl3.name || bl3.nameJa });
               }
@@ -1377,21 +1402,17 @@
 
   function _hasOdptTimetable(lineId) {
     try {
-      var tt = window.ODPT_TIMETABLES || {};
-      // v4.3.530: 映射后 code 一并检查——KawagoeWest→Kawagoe / UtsunomiyaJR→Utsunomiya /
-      // SobuMain→Sobu / JobanMain→Joban 等 ODPT railway 名不含本地 lineId 子串，
-      // 原判断误判"ODPT 无数据"→ 每次打开该线都注入不存在的 manual → 404 + reject 噪音
+      var lines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : {};
+      var line = lines && lines[lineId];
+      if (line && hasOdptTimetableForLine(lineId, line.operator)) return true;
+      // Compatibility fallback for a line not yet present in DataLayer: check
+      // every indexed operator without rescanning raw timetable rows.
+      var idx = getTimetablePresenceIndex();
       var code = (window.ODPTClient && window.ODPTClient.LINE_RAILWAY_CODE &&
         window.ODPTClient.LINE_RAILWAY_CODE[lineId]) || lineId;
-      for (var op in tt) {
-        var arr = tt[op];
-        if (!Array.isArray(arr)) continue;
-        for (var i = 0; i < arr.length; i++) {
-          var rw = (arr[i] && arr[i]['odpt:railway']) || '';
-          if (rw.indexOf(lineId) >= 0 || rw.indexOf('.' + lineId) >= 0 ||
-              rw.indexOf(code) >= 0 || rw.indexOf('.' + code) >= 0) return true;
-        }
-      }
+      return Object.keys(idx).some(function(op) {
+        return !!(idx[op] && (idx[op][lineId] || idx[op][code]));
+      });
     } catch(e) {}
     return false;
   }
