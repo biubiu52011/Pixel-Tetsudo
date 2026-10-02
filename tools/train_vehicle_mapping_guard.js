@@ -955,3 +955,18 @@ for (const line of ['Takasaki','Agatsuma','Joetsu']) {
   assert(!block.includes('E257系2500番台'),
     line + ' must not mix Odoriko/Shonan E257-2500 stock into Gunma express service');
 }
+
+// Batch guard: Izu local stock vs JR Odoriko/Shonan E257 fleet.
+for (const line of ['Tokaido','TokaidoMain']) {
+  const block = vehicleMapSource.match(new RegExp("'" + line + "': \\{[\\s\\S]*?\\n    \\},"))?.[0] || '';
+  const limited = block.match(/'LimitedExpress': \{[\s\S]*?\n      \}/)?.[0] || '';
+  assert(!limited.includes('伊豆急行8000系'),
+    line + ' limited express pool must not treat Izukyu 8000 as Odoriko stock');
+  assert(limited.includes('JR E257系2000番台(9両)') && limited.includes('JR E257系2500番台(5両)'),
+    line + ' Odoriko/Shonan pool must retain current E257 2000/2500 formations');
+}
+const itoBlock = vehicleMapSource.match(/'Ito': \{[\s\S]*?\n    \},\n    'Itsukaichi'/)?.[0] || '';
+assert(/'Local': \{ 'default': '[^']*伊豆急行8000系[^']*伊豆急行2100系/.test(itoBlock),
+  'Ito local pool must retain Izukyu ordinary/resort stock');
+assert(!/'LimitedExpress': \{ 'default': '[^']*伊豆急行8000系/.test(itoBlock),
+  'Ito limited express pool must not use Izukyu 8000 as Odoriko');
