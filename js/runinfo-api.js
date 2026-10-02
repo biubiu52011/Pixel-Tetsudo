@@ -39,8 +39,14 @@
   // ========== 数据源路由 ==========
   function getOperator(line) {
     if (!line) return null;
-    if (line.operator) return line.operator;
-    return null;
+    // ODPT routing must use the canonical operator namespace for a known line.
+    // Display/operator metadata may contain localized or presentation names
+    // (e.g. 東京都交通局); those are not valid odpt.Operator identifiers.
+    if (line.id && window.ODPTClient && window.ODPTClient.LINE_TO_OPERATOR &&
+        window.ODPTClient.LINE_TO_OPERATOR[line.id]) {
+      return window.ODPTClient.LINE_TO_OPERATOR[line.id];
+    }
+    return line.operator || null;
   }
 
   // ODPT 官方接口：operator -> Promise<records[]>
