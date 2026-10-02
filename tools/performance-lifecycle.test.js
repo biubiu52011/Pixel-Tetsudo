@@ -28,3 +28,7 @@ const layoutSrc = fs.readFileSync('js/train-track-layout.js','utf8');
 assert.ok(/runningChainId \|\| p\.trainId \|\| p\.trainNumber/.test(layoutSrc), 'station slot ordering must use stable train identity');
 assert.ok(/groups\[key\]\.sort/.test(layoutSrc), 'multi-train station slots must be stable across source reorder');
 console.log('busy-station-layout: 4 PASS');
+const fusionVehicleSrc = fs.readFileSync('js/data-fusion.js','utf8');
+assert.ok(/_existingRank >= _incomingRank/.test(fusionVehicleSrc), 'running-chain vehicle registry must reject equal or weaker conflicting evidence');
+assert.ok(/A line\/system transition is not vehicle-swap evidence/.test(fusionVehicleSrc), 'vehicle continuity guard must explicitly treat line transitions as non-swap evidence');
+console.log('running-chain-vehicle-continuity: 2 PASS');
