@@ -85,8 +85,9 @@
   // 后台页不再产生计算与 IDB 写入开销（配合 odpt-unified 的拉取暂停双管齐下）。
   function startFusionPolling() {
     if (_cacheTimer) return;
-    // Fusion is source-driven: ODPT updates, position loads, manual timetable
-    // completion and explicit refreshes already call fuseAll().  A second
+    // Fusion is source-driven: ODPT updates and manual timetable completion
+    // use dirty fusion; initialization and explicit refreshes retain fuseAll().
+    // A second
     // unconditional 15s fuse loop emitted identical snapshots and forced
     // realtime.html to rebuild the full line list between 30s network polls.
     _cacheTimer = setInterval(function() { try { saveToCache(); } catch(e) {} }, _refreshIntervalMs);
