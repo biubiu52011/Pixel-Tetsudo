@@ -292,7 +292,9 @@
                 posHash += (_tp.runningChainId || _tp.trainId || ("t" + _pi)) + "@"
                   + (_tp.stationIndex || 0) + ">"
                   + (_tp.segmentToIndex == null ? "" : _tp.segmentToIndex) + ":"
-                  + (_tp.segmentProgress == null ? "" : Math.round(_tp.segmentProgress * 100)) + ",";
+                  + (_tp.segmentProgress == null ? "" : Math.round(_tp.segmentProgress * 100)) + ":"
+                  + (_tp.sourceUpdatedAt || "") + ":"
+                  + (_tp.sourceValidUntil || "") + ",";
               }
             } catch(e) {}
           }
