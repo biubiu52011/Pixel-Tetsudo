@@ -1799,8 +1799,8 @@ var LINE_VEHICLE_OVERRIDES = {
     "東京メトロ7000系": "東京メトロ17000系"
   },
   "SotetsuMain": {
-    "新7000系": "相模鉄道12000系",
-    "相鉄新7000系": "相模鉄道12000系",
+    // Retired New 7000 series must not masquerade as 12000 series.
+    // Retired New 7000 series must not masquerade as 12000 series.
     "相鉄7000系": "相模鉄道12000系"
   },
   "SotetsuIzumino": {
@@ -1932,15 +1932,15 @@ TOBU_LINE_IDS.forEach(function(lineId) {
     "9000形": "9000系",
     "AE形（スカイライナー）": "AE形",
     "AE形（ライナー車両）": "AE形",
-    "AE100形": "AE形",
-    "5300形": "5500形",
-    "都営5300形": "5500形",
+    // Retired AE100 must not masquerade as current AE stock.
+    // Retired 5300 must not masquerade as 5500.
+    // Retired 5300 must not masquerade as 5500.
     "都営5500形": "5500形",
     "都営5500形（通勤特急）": "5500形",
     "都営5500形（浅草線直通）": "5500形",
-    "都営6300形": "6500形",
-    "都営10-000形": "10-300形",
-    "10-000形": "10-300形",
+    // Retired 6300 must not masquerade as 6500.
+    // Retired 10-000 must not masquerade as 10-300.
+    // Retired 10-000 must not masquerade as 10-300.
     "都営10-300形": "10-300形",
     "12-600形": "12-690形",
     "小田急4000形": "4000系",
@@ -1951,7 +1951,7 @@ TOBU_LINE_IDS.forEach(function(lineId) {
     "40000系（Laview）": "40000系",
     "001系(Laview)": "001系（ラビュー）",
     "40000系（デュアルシート）": "40000系",
-    "東武20000系": "東武20400系",
+    // 20000 series and 20400 series are distinct identities.
     "東武30000系": "東武鉄道30000系",
     "東武50070系": "50070系",
     "東武70000系": "70000系",
@@ -1982,7 +1982,7 @@ TOBU_LINE_IDS.forEach(function(lineId) {
     "50050型": "東武50050系",
     "50030系": "東武50030系",
     "50030型": "東武50030系",
-    "20050系": "東武20400系",
+    // 20050 series must not masquerade as rebuilt 20400 series.
     "60000形 MSE": "60000系",
     "70000形 GSE": "70000系",
     "30000形 EXEα": "小田急電鉄30000形EXEα",
@@ -1993,7 +1993,7 @@ TOBU_LINE_IDS.forEach(function(lineId) {
     "VSE": "70000形",
     "50000形": "70000形",
     "9020系": "9000系",
-    "相鉄7000系": "相模鉄道12000系",
+    // Retired 7000 series must not masquerade as 12000 series.
     "相鉄新7000系": "相模鉄道12000系",
     "新7000系": "相模鉄道12000系",
     "相鉄12000系": "相模鉄道12000系",
@@ -2002,14 +2002,14 @@ TOBU_LINE_IDS.forEach(function(lineId) {
     "5050系4000番台": "東急5050系",
     "京王5000系": "京王電鉄5000系",
     "相鉄10000系": "相模鉄道10000系",
-    "21000系": "相模鉄道20000系",
+    // Sotetsu 21000 and 20000 are distinct vehicle identities.
     "東葉高速1000系": "東葉高速2000系",
     "東武100系（スペーシア）": "100系（スペーシア）",
     // v4.3.984: 東上線データの「東武5000系」は50000系の省略表記（旧5000型は引退済み、組合中の現役形式と整合）→ 東武50000系表示
     // v4.3.988: 直通稳定——带前缀候选全线路精确（防异地视图 override/S4 换图标）
   "相鉄20000系": "相模鉄道20000系",
   "相鉄21000系": "相模鉄道20000系",
-  "相模鉄道21000系": "相模鉄道20000系",
+  // Sotetsu 21000 and 20000 are distinct vehicle identities.
   "のぞみ": "N700系（東海）",
   "東武5000系": "50000系",
     // v4.3.986: 公式对照——都営5300形2023年2月全廃(5500形置换,交通局ありがとう5300形),小田急10000形HiSE 2012年引退(小田急公式PDF)——2026年ダイヤに出現は旧/誤データ、現役車両表示
