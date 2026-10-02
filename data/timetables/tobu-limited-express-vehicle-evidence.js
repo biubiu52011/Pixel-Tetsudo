@@ -22,6 +22,19 @@
     "5111M": { vehicleType: "東武100系", service: "スペーシアきぬがわ11号", direction: "down" },
     "5112M": { vehicleType: "東武100系", service: "スペーシアきぬがわ12号", direction: "up" },
 
+    // Nikko/Kinugawa regular services — official 2026-03-14 up timetable.
+    // These train numbers and service identities are exposed in the same table.
+    "444N": { vehicleType: "東武100系", service: "けごん32号", direction: "up" },
+    "446N": { vehicleType: "東武100系", service: "けごん34号", direction: "up" },
+    "1032": { vehicleType: "東武100系", service: "けごん12号", direction: "up" },
+    "1034": { vehicleType: "東武100系", service: "けごん32号", direction: "up" },
+    "1136": { vehicleType: "東武500系", services: ["リバティ会津136号", "リバティけごん136号"], direction: "up" },
+    "1036": { vehicleType: "東武100系", service: "けごん34号", direction: "up" },
+    "1038": { vehicleType: "東武100系", service: "けごん38号", direction: "up" },
+    "1140": { vehicleType: "東武500系", service: "リバティけごん40号", direction: "up" },
+    "1142": { vehicleType: "東武500系", service: "リバティけごん42号", direction: "up" },
+    "1042": { vehicleType: "東武100系", service: "けごん42号", direction: "up" },
+
     // Isesaki/Kiryu/Sano regular limited expresses — 2026-03-14 official table.
     // Down
     "1801": { vehicleType: "東武500系", service: "リバティりょうもう1号", direction: "down" },
