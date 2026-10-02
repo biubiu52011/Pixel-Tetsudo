@@ -25,7 +25,7 @@
     "TokyuToyoko": { "Fukutoshin": ["Shibuya"], "MinatoMirai": ["Yokohama"] },
     "MinatoMirai": { "TokyuToyoko": ["Yokohama"] },
     // 半蔵門・日比谷・東武
-    "Hanzomon": { "TobuSkytree": ["Oshiage"], "TobuIsesaki": ["Oshiage"], "TokyuDenEn": ["Shibuya"] },
+    "Hanzomon": { "TobuSkytree": ["Oshiage"], "TobuIsesaki": ["Oshiage"], "TokyuDenEnToshi": ["Shibuya"] },
     // 東武スカイツリー・伊勢崎（東武動物公園）
     "TobuSkytree": { "Hanzomon": ["Oshiage"], "Hibiya": ["Kita-Senju"], "TobuIsesaki": ["Tobu-Dobutsu-Koen"] },
     "TobuIsesaki": { "Hibiya": ["Kita-Senju"], "Hanzomon": ["Oshiage"], "TobuSkytree": ["Tobu-Dobutsu-Koen"], "TobuNikko": ["Tobu-Dobutsu-Koen"] },
@@ -88,8 +88,8 @@
     "Kamaishi": { "Tohoku": ["Hanamaki"] },
     "Ou": { "Gono": ["Kawabe"], "Tazawako": ["Omagari"] },
     "Tazawako": { "Ou": ["Omagari"] },
-    "TokyuOimachi": { "TokyuDenEn": ["Futako-Tamagawa"] },
-    "TokyuDenEn": { "TokyuOimachi": ["Futako-Tamagawa"] },
+    "TokyuOimachi": { "TokyuDenEnToshi": ["Futako-Tamagawa"] },
+    "TokyuDenEnToshi": { "TokyuOimachi": ["Futako-Tamagawa"] },
     // 直通 6 組補完 JOIN（4.3.711）
     "TobuNikko": { "TobuIsesaki": ["Tobu-Dobutsu-Koen"] },
     "ChuoTatsuno": { "Chuo": ["Okaya"] },
