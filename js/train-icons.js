@@ -130,7 +130,7 @@
     "Keio": "../images/列车/京王電鉄/京王電鉄_2000系.png", // 4.3.277：京王.png 与 2000系.png 同一图（哈希一致），归并至 2000系.png
     "Odakyu": "../images/列车/小田急電鉄/小田急電鉄_4000形_標準色.png", // 4.3.275：小田急系統共通 4000系（千代田直通の現役主力、小田原/江ノ島/多摩 同一車輛体系）
     "Seibu": "../images/列车/西武鉄道/西武鉄道_30000系_スマイルトレイン.png", // 4.3.270：西武运营商默认 = 30000系（通勤主力）
-    "Tobu": "../images/列车/東武鉄道/東武鉄道_70000系.png", // 4.3.950：東武現役主力（晴空塔线/日光线，2017年投入），原8000系为退役老车已替换
+    "Tobu": null, // unknown Tobu vehicle identity stays unknown; line/service evidence selects concrete stock
     "Keikyu": "../images/列车/京浜急行電鉄/京浜急行電鉄_1000形_1200番台.png",
     "Keisei": "../images/列车/京成電鉄/京成電鉄_80000形.png", // 4.3.457：京成本線系主力 80000形（3200形は引退進行）
     "Sotetsu": "../images/列车/相模鉄道/相模鉄道_13000系_YOKOHAMA_NAVYBLUE.png", // 4.3.277：相鉄.png 与 13000系.png 同一图，归并
@@ -1682,7 +1682,7 @@ function _canonicalVehicleIconPath(name, lineId) {
   // 拼接兜底仅服务磁盘按「東武鉄道/東武XXX系.png」约定存在的资产（東武850系 等），不指向已删除旧名
   if (/^東武/.test(n)) {
     if (VEHICLE_NAME_TO_ICON[n]) return VEHICLE_NAME_TO_ICON[n];
-    return "../images/列车/東武鉄道/" + n + ".png";
+    return null;
   }
   return null;
 }
