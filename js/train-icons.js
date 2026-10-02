@@ -490,10 +490,10 @@
       if (_normOp) opKey = _normOp(operator);
       if (OPERATOR_ICONS[opKey]) return OPERATOR_ICONS[opKey];
 
-      // Ultimate fallback
-      return "../images/列车/JR東日本/JR東日本_E235系_0番代.png";
+      // Unknown vehicle identity must remain unknown; never impersonate JR rolling stock.
+      return null;
     } catch(e) {
-      return "../images/列车/JR東日本/JR東日本_E235系_0番代.png";
+      return null;
     }
   }
 
