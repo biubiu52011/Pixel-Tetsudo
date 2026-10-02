@@ -90,7 +90,7 @@
     var idx = position && position.stationIndex != null ? position.stationIndex : 0;
     var points = stationCoords || [];
 
-    if (position && position.fusionLineId && branchGeom && branchGeom[position.fusionLineId]) {
+    if (position && position.fusionLineId && position.fusionRole === "branch" && branchGeom && branchGeom[position.fusionLineId]) {
       points = branchGeom[position.fusionLineId];
       idx = clamp(idx, 0, points.length - 1);
     } else if (position && position.fusionLineId && opts.fusionBaseIdx) {
@@ -102,7 +102,7 @@
     }
 
     var toIdx = position && position.segmentToIndex != null ? position.segmentToIndex : null;
-    if (toIdx != null && position && position.fusionLineId && branchGeom && branchGeom[position.fusionLineId]) {
+    if (toIdx != null && position && position.fusionLineId && position.fusionRole === "branch" && branchGeom && branchGeom[position.fusionLineId]) {
       toIdx = clamp(toIdx, 0, points.length - 1);
     } else if (toIdx != null && position && position.fusionLineId && opts.fusionBaseIdx) {
       var base2 = opts.fusionBaseIdx(lineId, position.fusionLineId);
