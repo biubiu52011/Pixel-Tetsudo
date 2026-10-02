@@ -77,8 +77,8 @@
            reverse&&b.lastTime!==null&&a.firstTime!==null?a.firstTime-b.lastTime:null;
     if(dt===null||dt<0||dt>20)return null;
     var sameId=a.id===b.id, sameNo=a.trainNumber&&a.trainNumber===b.trainNumber;
-    if(!sameId&&!sameNo)return null;
-    return {dt:dt,sameId:sameId,score:(sameId?4:2)+(dt<=5?3:dt<=10?2:1)};
+    return {dt:dt,sameId:sameId,sameNo:sameNo,numberChanged:!sameId&&!sameNo,
+      score:(sameId?4:(sameNo?2:0))+(dt<=5?3:dt<=10?2:1)};
   }
   function resolveTimetableChain(tt,lineId,candidates){
     if(!_initialized)buildIndexes();
@@ -90,20 +90,35 @@
       if(s&&!seen[key]){seen[key]=true;segments.push(s);}
     });
     var adj={}; segments.forEach(function(s){adj[s.lineId+"|"+s.id]=[];});
+    var edgeCandidates=[];
     for(var i=0;i<segments.length;i++)for(var j=i+1;j<segments.length;j++){
       var a=segments[i],b=segments[j];
       if((_directThrough[a.lineId]||[]).indexOf(b.lineId)<0)continue;
       var rels=_lineRelations[a.lineId]||[],joins=[];
       for(var k=0;k<rels.length;k++){var r=rels[k],o=r.lineA===a.lineId?r.lineB:r.lineA;if(o===b.lineId&&r.relation==="THROUGH_SERVICE"){joins=r.handoverStations||[];break;}}
       var ev=_confirmedEdge(a,b,joins); if(!ev)continue;
-      var ak=a.lineId+"|"+a.id,bk=b.lineId+"|"+b.id;
-      adj[ak].push({key:bk,ev:ev});adj[bk].push({key:ak,ev:ev});
+      edgeCandidates.push({a:a,b:b,ev:ev});
     }
-    var root=base.lineId+"|"+base.id,q=[root],vis={};vis[root]=true;var ids=[],strong=false,maxGap=0;
-    while(q.length){var cur=q.shift(),parts=cur.split("|");ids.push(parts.slice(1).join("|"));(adj[cur]||[]).forEach(function(e){if(e.ev.sameId)strong=true;if(e.ev.dt>maxGap)maxGap=e.ev.dt;if(!vis[e.key]){vis[e.key]=true;q.push(e.key);}});}
+    // Different train numbers are accepted only when the operational boundary
+    // pairing is unique for BOTH segments. Through-service relation + handover
+    // station + time continuity alone are not enough if another candidate fits.
+    edgeCandidates.forEach(function(ec){
+      var ev=ec.ev;
+      if(ev.numberChanged){
+        var peers=edgeCandidates.filter(function(x){
+          if(!x.ev.numberChanged)return false;
+          return x.a===ec.a||x.b===ec.a||x.a===ec.b||x.b===ec.b;
+        });
+        if(peers.length!==1)return;
+      }
+      var ak=ec.a.lineId+"|"+ec.a.id,bk=ec.b.lineId+"|"+ec.b.id;
+      adj[ak].push({key:bk,ev:ev});adj[bk].push({key:ak,ev:ev});
+    });
+    var root=base.lineId+"|"+base.id,q=[root],vis={};vis[root]=true;var ids=[],strong=false,numberChanged=false,maxGap=0;
+    while(q.length){var cur=q.shift(),parts=cur.split("|");ids.push(parts.slice(1).join("|"));(adj[cur]||[]).forEach(function(e){if(e.ev.sameId)strong=true;if(e.ev.numberChanged)numberChanged=true;if(e.ev.dt>maxGap)maxGap=e.ev.dt;if(!vis[e.key]){vis[e.key]=true;q.push(e.key);}});}
     ids=ids.filter(function(v,i,a){return a.indexOf(v)===i;}).sort();
     if(ids.length===1)return {runningChainId:base.id,evidence:"NO_CONFIRMED_BOUNDARY"};
-    return {runningChainId:"rc:"+ids.join("~"),evidence:strong?"CONFIRMED_SEGMENT_GRAPH+TIMETABLE_ID":"CONFIRMED_SEGMENT_GRAPH+TRAIN_NUMBER",timeGapMin:maxGap,segmentCount:ids.length};
+    return {runningChainId:"rc:"+ids.join("~"),evidence:strong?"CONFIRMED_SEGMENT_GRAPH+TIMETABLE_ID":(numberChanged?"CONFIRMED_UNIQUE_BOUNDARY+TRAIN_NUMBER_CHANGED":"CONFIRMED_SEGMENT_GRAPH+TRAIN_NUMBER"),timeGapMin:maxGap,segmentCount:ids.length};
   }
 
   function getResolutionContext(lineId, availableLineIds){
