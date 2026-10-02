@@ -590,6 +590,16 @@ function main() {
   assert(!/(京王電鉄7000系|京王電鉄8000系)/.test(keioToei) && /9000系30番台/.test(keioToei),
     'Keio Toei destination mapping must remain subway-capable stock only', { keioToei });
 
+    const hibiyaTobu = win.VehicleTypeMap.resolve('Hibiya', 'odpt.TrainType:TokyoMetro.Local', 'odpt.Station:Tobu.Skytree.KitaSenju');
+  assert(/東京メトロ13000系\(7両\)/.test(hibiyaTobu) && /東武70000系\(7両\)/.test(hibiyaTobu) && /東武70090系\(7両\)/.test(hibiyaTobu),
+    'Hibiya Tobu ordinary pool must preserve the current 7-car through fleet', { hibiyaTobu });
+  const th = win.VehicleTypeMap.resolve('Hibiya', 'odpt.TrainType:TokyoMetro.TH-LINER', null);
+  assert(/^東武70090系\(7両\)$/.test(th),
+    'TH-LINER must resolve only to Tobu 70090', { th });
+  const isesakiF = win.VehicleTypeMap.resolve('TobuIsesaki', 'odpt.TrainType:Tobu.F-Liner', null);
+  assert(!/(東武50070系|東京メトロ17000系|東京メトロ10000系)/.test(isesakiF),
+    'Tojo/Fukutoshin F-Liner stock must not leak into Tobu Isesaki', { isesakiF });
+
     assertNoCurrentFictionalAsset(win);
   assertNoFilenameDependentIdentity(win);
   assertCanonicalAssetRenameSimulation(win);
