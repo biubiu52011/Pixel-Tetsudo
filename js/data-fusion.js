@@ -676,6 +676,10 @@
               delayMin: delayMin,
               railDirection: directionName,
               destinationStation: destStation,
+              // Geometry may be circular, but an individual realtime train
+              // with a concrete destination is a terminating service.
+              loopServiceMode: destStation ? "TERMINATING" :
+                (/InnerLoop|OuterLoop|Inner|Outer/.test(String(directionName || "")) ? "CIRCULATING_OR_UNKNOWN" : "NOT_LOOP"),
               trainType: rawType,
               typeName: typeName,
               estimated: false,
