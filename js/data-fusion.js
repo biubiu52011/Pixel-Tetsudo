@@ -1443,6 +1443,9 @@
             // v4.3.6xx: 手动时刻表加载后，立即合并到posMap（原来只在初始化时合并一次）
             try {
               var manualTT = window[varName];
+              if (window.TrainPositionEstimator && typeof window.TrainPositionEstimator.registerManualTimetable === "function") {
+                window.TrainPositionEstimator.registerManualTimetable(lineId, manualTT);
+              }
               var mLine = allLines[lineId];
               if (mLine && mLine.stations && manualTT && manualTT.length > 0) {
                 manualTT.forEach(function(tt) {
