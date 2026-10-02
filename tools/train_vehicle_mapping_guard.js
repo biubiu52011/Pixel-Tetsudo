@@ -542,6 +542,14 @@ function main() {
   assert(/東急5000系\(10両\)/.test(denDefault) && /東急2020系\(10両\)/.test(denDefault),
     'Denentoshi default stock must be explicit 10-car 5000/2020', { denDefault });
 
+    const chiyodaLocal = win.VehicleTypeMap.resolve('Chiyoda', 'odpt.TrainType:TokyoMetro.Local', null);
+  assert(!/05系/.test(chiyodaLocal), '3-car Chiyoda 05 branch stock must not enter the generic main-line pool', { chiyodaLocal });
+  assert(/16000系\(10両\)/.test(chiyodaLocal) && /E233系2000番台\(10両\)/.test(chiyodaLocal) && /小田急4000形\(10両\)/.test(chiyodaLocal),
+    'Chiyoda generic local pool must preserve the 10-car through fleet', { chiyodaLocal });
+  const chiyodaOdakyu = win.VehicleTypeMap.resolve('Chiyoda', 'odpt.TrainType:TokyoMetro.Local', 'odpt.Station:Odakyu.Odawara.HonAtsugi');
+  assert(/小田急4000形\(10両\)/.test(chiyodaOdakyu) && /東京メトロ16000系\(10両\)/.test(chiyodaOdakyu),
+    'Chiyoda Odakyu through pool must remain 10-car capable', { chiyodaOdakyu });
+
     assertNoCurrentFictionalAsset(win);
   assertNoFilenameDependentIdentity(win);
   assertCanonicalAssetRenameSimulation(win);
