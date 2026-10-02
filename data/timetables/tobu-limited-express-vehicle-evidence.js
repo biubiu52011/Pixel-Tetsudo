@@ -17,7 +17,10 @@
   var records = {
     // JR/Tobu mutual through limited expresses — official 2026-03 timetable.
     // Train number, service and vehicle are exposed in the same official column.
-    "5021M": { vehicleType: "JR東日本E253系", service: "日光21号", direction: "down" },
+    "5021M": [
+      { vehicleType: "JR東日本E253系", service: "日光21号", direction: "down" },
+      { vehicleType: "東武100系", service: "スペーシア日光21号", direction: "down", validFrom: "2026-09-19", validUntil: "2026-09-23" }
+    ],
     "5026M": { vehicleType: "JR東日本E253系", service: "日光26号", direction: "up" },
     "5111M": { vehicleType: "東武100系", service: "スペーシアきぬがわ11号", direction: "down" },
     "5112M": { vehicleType: "東武100系", service: "スペーシアきぬがわ12号", direction: "up" },
