@@ -355,6 +355,17 @@ function main() {
   const unrelated1000 = win.TrainIcons.resolveVehicleIcon('1000系', 'UnknownRoute');
   assert(!unrelated1000 || !unrelated1000.includes('/多摩都市モノレール/'), 'unrelated railway must not inherit Tama Monorail 1000 series', { unrelated1000 });
 
+  // Infrastructure-name vs operating-system regression: E353 limited
+  // expresses use ChuoRapid east of Takao and ChuoMain west of Takao.
+  const chuoRapidLtd = win.VehicleTypeMap.resolve('ChuoRapid', 'odpt.TrainType:JR-East.LimitedExpress', null);
+  assert(/E353/.test(chuoRapidLtd), 'ChuoRapid LimitedExpress must resolve E353', { chuoRapidLtd });
+  const chuoMainLtd = win.VehicleTypeMap.resolve('ChuoMain', 'odpt.TrainType:JR-East.LimitedExpress', null);
+  assert(/E353/.test(chuoMainLtd), 'ChuoMain LimitedExpress must resolve E353', { chuoMainLtd });
+  const chuoLocalLtd = win.VehicleTypeMap.resolve('ChuoSobuLocal', 'odpt.TrainType:JR-East.LimitedExpress', null);
+  assert(!chuoLocalLtd, 'ChuoSobuLocal must not inherit Chuo limited-express stock', { chuoLocalLtd });
+  const unknownType = win.VehicleTypeMap.resolve('ChuoRapid', 'odpt.TrainType:JR-East.UnmappedSpecialService', null);
+  assert(!unknownType, 'unmapped train type must remain unresolved instead of falling back to Local', { unknownType });
+
   assertNoCurrentFictionalAsset(win);
   assertNoFilenameDependentIdentity(win);
   assertCanonicalAssetRenameSimulation(win);
