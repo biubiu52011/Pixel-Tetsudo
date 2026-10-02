@@ -12,10 +12,15 @@
 
   var ESTIMATOR_VERSION = 7;
   var _manualTimetableRegistry = {};
+  var _timetableIndexCache = { source: null, stamp: "", manualVersion: 0, builtManualVersion: -1, index: {} };
+  var _manualRegistryVersion = 0;
 
   function registerManualTimetable(lineId, rows) {
     if (!lineId || !Array.isArray(rows) || rows.length === 0) return;
-    _manualTimetableRegistry[lineId] = rows;
+    if (_manualTimetableRegistry[lineId] !== rows) {
+      _manualTimetableRegistry[lineId] = rows;
+      _manualRegistryVersion++;
+    }
   }
 
   // ========== 方向反转线路 ==========
@@ -571,45 +576,61 @@
       var estimated = {};
       var lineIds = Object.keys(allLines || {});
 
-      // v4: 预索引——按 (operator, railway) 分组时刻表。原实现每条 line 全量扫描 operator
-      // 全部时刻表（JR-East 19625 条 × 85 线 ≈ 167 万次迭代/刷新），预索引后每条 line
-      // 只处理本线子集（平均 ~230 条），约 85 倍加速
-      var timetableIndex = {}; // op -> { railwayKey: [tt...] }
-      Object.keys(odptTrains || {}).forEach(function(op) {
-        var data = odptTrains[op];
-        if (!Array.isArray(data) || data.length === 0) return;
-        var first = data[0];
-        if (!(first && first["odpt:trainTimetableObject"])) return;
-        var idx = {};
-        for (var ti = 0; ti < data.length; ti++) {
-          var _tt = data[ti];
-          if (!_tt) continue;
-          var rk = extractRailwayKey(_tt["odpt:railway"]) || "_";
-          (idx[rk] = idx[rk] || []).push(_tt);
-        }
-        timetableIndex[op] = idx;
+      // Cache the expensive operator/railway timetable index across polls.
+      // ODPT timetable arrays are long-lived and only grow when lazy loads merge
+      // new rows, so an operator:length stamp plus manual registry version is a
+      // safe invalidation key for this read-only grouping index.
+      var _src = odptTrains || {};
+      var _stampParts = [];
+      Object.keys(_src).sort().forEach(function(op) {
+        _stampParts.push(op + ":" + (Array.isArray(_src[op]) ? _src[op].length : 0));
       });
-
-      // Manual timetables are explicitly registered when their lazy script
-      // finishes loading. Avoid Object.keys(window) on every estimation pass.
-      Object.keys(_manualTimetableRegistry).forEach(function(lineId) {
-        var m = _manualTimetableRegistry[lineId];
-        if (!Array.isArray(m) || m.length === 0) return;
-        m.forEach(function(tt) {
-          if (!tt || !tt["odpt:railway"]) return;
-          try {
-            tt._positionSource = "station-timetable";
-            var _rp = String(tt["odpt:railway"]).split(":");
-            var _dot = _rp[1] ? _rp[1].split(".") : [];
-            if (_dot.length < 2) return;
-            var _op = _dot.slice(0, -1).join(".");
-            var _rk = _dot[_dot.length - 1];
-            if (!_op || !_rk) return;
-            (timetableIndex[_op] = timetableIndex[_op] || {});
-            (timetableIndex[_op][_rk] = timetableIndex[_op][_rk] || []).push(tt);
-          } catch (e) {}
+      var _stamp = _stampParts.join("|");
+      var _reuseIndex = _timetableIndexCache.source === _src &&
+        _timetableIndexCache.stamp === _stamp &&
+        _timetableIndexCache.builtManualVersion === _manualRegistryVersion;
+      var timetableIndex = _reuseIndex ? _timetableIndexCache.index : {};
+      if (!_reuseIndex) {
+        Object.keys(_src).forEach(function(op) {
+          var data = _src[op];
+          if (!Array.isArray(data) || data.length === 0) return;
+          var first = data[0];
+          if (!(first && first["odpt:trainTimetableObject"])) return;
+          var idx = {};
+          for (var ti = 0; ti < data.length; ti++) {
+            var _tt = data[ti];
+            if (!_tt) continue;
+            var rk = extractRailwayKey(_tt["odpt:railway"]) || "_";
+            (idx[rk] = idx[rk] || []).push(_tt);
+          }
+          timetableIndex[op] = idx;
         });
-      });
+        Object.keys(_manualTimetableRegistry).forEach(function(lineId) {
+          var m = _manualTimetableRegistry[lineId];
+          if (!Array.isArray(m) || m.length === 0) return;
+          m.forEach(function(tt) {
+            if (!tt || !tt["odpt:railway"]) return;
+            try {
+              tt._positionSource = "station-timetable";
+              var _rp = String(tt["odpt:railway"]).split(":");
+              var _dot = _rp[1] ? _rp[1].split(".") : [];
+              if (_dot.length < 2) return;
+              var _op = _dot.slice(0, -1).join(".");
+              var _rk = _dot[_dot.length - 1];
+              if (!_op || !_rk) return;
+              (timetableIndex[_op] = timetableIndex[_op] || {});
+              (timetableIndex[_op][_rk] = timetableIndex[_op][_rk] || []).push(tt);
+            } catch (e) {}
+          });
+        });
+        _timetableIndexCache = {
+          source: _src,
+          stamp: _stamp,
+          manualVersion: _manualRegistryVersion,
+          builtManualVersion: _manualRegistryVersion,
+          index: timetableIndex
+        };
+      }
 
       if (Object.keys(timetableIndex).length === 0) return estimated;
 
