@@ -262,6 +262,39 @@
   let _selectedOperator = null;
   let _currentModalLine = null;
   let _currentModalIdentity = "";
+  var _listStatusRefreshToken = 0;
+
+  // Keep list-card status on the same RunInfoAPI snapshot used by the modal.
+  // DataFusion remains the immediate render source; RunInfoAPI then reconciles
+  // status asynchronously without requiring the user to open each line.
+  function refreshListStatuses(linesObj) {
+    if (!linesObj || !window.RunInfoAPI || typeof window.RunInfoAPI.query !== "function") return;
+    var token = ++_listStatusRefreshToken;
+    var ids = Object.keys(linesObj);
+    var jobs = ids.map(function(lineId) {
+      var line = linesObj[lineId];
+      return window.RunInfoAPI.query(lineId, line).then(function(r) {
+        if (!r || !r.status || token !== _listStatusRefreshToken || !_latestLines || !_latestLines[lineId]) return false;
+        var target = _latestLines[lineId];
+        var old = getDelayInfo(target) || {};
+        if (old.status === r.status) return false;
+        target.delayInfo = Object.assign({}, old, {
+          status: r.status,
+          // A fresh normal result must not retain stale disruption metadata.
+          interval: r.status === "normal" ? null : old.interval,
+          cause: r.status === "normal" ? null : old.cause,
+          detail: r.text != null ? r.text : old.detail,
+          source: r.source || old.source,
+          updatedAt: r.updatedAt || old.updatedAt
+        });
+        return true;
+      }).catch(function() { return false; });
+    });
+    Promise.all(jobs).then(function(changed) {
+      if (token !== _listStatusRefreshToken || !changed.some(Boolean)) return;
+      renderFiltered();
+    }).catch(function() {});
+  }
 
 
   function escapeHtml(s) {
@@ -396,6 +429,7 @@
       try {
         renderLinesList(container, fused.lines, _latestOrder);
         renderFilterBar(fused.lines);
+        refreshListStatuses(fused.lines);
       } catch (e) {
         window.DataState.renderPageState(container, "render_error");
       }
