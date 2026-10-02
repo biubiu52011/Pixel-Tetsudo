@@ -638,6 +638,20 @@ function main() {
   assert(!/都営5500形/.test(skytreeToei),
     'Asakusa terminal context must not be confused with Toei Asakusa through service', { skytreeToei });
 
+    const skytreeBlock = JSON.stringify(win.VehicleTypeMap.map.TobuSkytree || {});
+  assert(!/東武8000系/.test(skytreeBlock),
+    'Tobu 8000 must not return to the current Skytree-line fleet map', { skytreeBlock });
+  for (const type of ['SectionExpress', 'SemiExpress', 'Express', 'SectionSemiExpress']) {
+    const block = (win.VehicleTypeMap.map.TobuSkytree || {})[type] || {};
+    assert(!JSON.stringify(block).match(/(東京メトロ13000系|東武70000系|東武70090系)/),
+      'Hibiya through stock must not leak into Skytree express-family mappings', { type, block });
+  }
+  const skytreeLocal = (win.VehicleTypeMap.map.TobuSkytree || {}).Local || {};
+  assert(!('TokyoMetro' in skytreeLocal) && !('Hanzomon' in skytreeLocal),
+    'Skytree Local must not use ambiguous TokyoMetro/Hanzomon operator fallbacks', { skytreeLocal });
+  assert(/東京メトロ13000系\(7両\)/.test(skytreeLocal.Hibiya || '') && /東武70000系\(7両\)/.test(skytreeLocal.Hibiya || ''),
+    'Skytree Local Hibiya pool must preserve current Hibiya through stock', { skytreeLocal });
+
     assertNoCurrentFictionalAsset(win);
   assertNoFilenameDependentIdentity(win);
   assertCanonicalAssetRenameSimulation(win);
