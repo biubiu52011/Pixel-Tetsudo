@@ -86,7 +86,7 @@
       .toLowerCase();
   }
 
-  function resolve(trainNumber, trainName) {
+  function resolve(trainNumber, trainName, direction) {
     var key = String(trainNumber || "").trim();
     var rec = records[key];
     if (!rec) return "";
@@ -100,6 +100,7 @@
       var expected = _normServiceName(rec.service);
       if (actual && expected && actual !== expected) return "";
     }
+    if (direction && rec.direction && String(direction).toLowerCase() !== String(rec.direction).toLowerCase()) return "";
     return rec.vehicleType || "";
   }
 
