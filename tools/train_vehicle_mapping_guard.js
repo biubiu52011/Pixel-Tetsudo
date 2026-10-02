@@ -906,3 +906,17 @@ for (const m of fukutoshinBlock2.matchAll(/'Tobu': '([^']+)'/g)) {
   assert(!m[1].includes('東京メトロ17000系(8両/10両)'),
     'Fukutoshin Tobu pools must not admit 8-car Metro 17000 formations');
 }
+
+// Batch guard: Hachiko current electric fleet and Keisei branch isolation.
+assert(vehicleMapSource.includes("'Hachiko': {\n      'Local': { 'default': 'JR 209系3500番台 / JR E231系3000番台' }"),
+  'Hachiko electric section must not regress to retired 209-3000 stock');
+for (const line of ['KeiseiKanamachi','KeiseiChiba','KeiseiChihara']) {
+  const block = vehicleMapSource.match(new RegExp("'" + line + "': \\{[\\s\\S]*?\\n    \\}"))?.[0] || '';
+  assert(block, line + ' must retain a dedicated vehicle map');
+  assert(!/京成3100形|都営5500形|京急/.test(block),
+    line + ' must not inherit Oshiage/Asakusa through stock');
+}
+assert(!/"KeiseiKanamachi":\s*"KeiseiOshiage"/.test(vehicleMapSource) &&
+       !/"KeiseiChiba":\s*"KeiseiOshiage"/.test(vehicleMapSource) &&
+       !/"KeiseiChihara":\s*"KeiseiOshiage"/.test(vehicleMapSource),
+  'Keisei branch IDs must not alias to Oshiage vehicle pools');
