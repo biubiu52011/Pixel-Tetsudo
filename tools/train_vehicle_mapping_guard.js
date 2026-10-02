@@ -562,6 +562,15 @@ function main() {
   assert(/東葉高速2000系\(10両\)/.test(tozaiToyo),
     'Toyo Rapid destination pool must preserve Toyo 2000 stock', { tozaiToyo });
 
+    const asakusaTobu = win.VehicleTypeMap.resolve('Asakusa', 'odpt.TrainType:Toei.Local', 'odpt.Station:Tobu.Skytree.Asakusa');
+  assert(!/東武8000/.test(asakusaTobu), 'Tobu surface Asakusa must never imply Toei Asakusa through stock', { asakusaTobu });
+  const asakusaKeikyu = win.VehicleTypeMap.resolve('Asakusa', 'odpt.TrainType:Toei.Local', 'odpt.Station:Keikyu.Main.Yokohama');
+  assert(!/1500形/.test(asakusaKeikyu), 'retired Keikyu 1500 must not remain in current Asakusa through pool', { asakusaKeikyu });
+  assert(/都営5500形/.test(asakusaKeikyu) && /京急新1000形/.test(asakusaKeikyu),
+    'Asakusa Keikyu pool must preserve current 5500/new-1000 through stock', { asakusaKeikyu });
+  const keikyuToei = win.VehicleTypeMap.resolve('Keikyu', 'odpt.TrainType:Keikyu.Local', 'odpt.Station:Toei.Asakusa.Oshiage');
+  assert(!/1500形/.test(keikyuToei), 'retired Keikyu 1500 must not return through Toei destination mapping', { keikyuToei });
+
     assertNoCurrentFictionalAsset(win);
   assertNoFilenameDependentIdentity(win);
   assertCanonicalAssetRenameSimulation(win);
