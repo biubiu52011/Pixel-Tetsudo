@@ -1548,7 +1548,19 @@
             // 导致大部分私铁线路时刻表数据丢失，线路图上无列车位置。
             var opLineIds = [];
             Object.keys(LINE_TO_OPERATOR).forEach(function(lid) {
-                if (LINE_TO_OPERATOR[lid] === op) opLineIds.push(lid);
+                if (LINE_TO_OPERATOR[lid] !== op) return;
+                // JR-East Challenge 2026 timetable covers only a subset of the local
+                // JR-East line catalog. Do not infer source coverage from operator
+                // ownership alone: only request lines explicitly present in the
+                // source-specific railway alias table or covered by the runtime
+                // authoritative realtime set.
+                if (op === "JR-East") {
+                    var explicitAlias = Object.prototype.hasOwnProperty.call(LINE_RAILWAY_CODE, lid);
+                    var rt = window.RuntimeConfig && window.RuntimeConfig.AUTHORITATIVE_REALTIME_LINES;
+                    var explicitRealtime = !!(rt && rt[lid]);
+                    if (!explicitAlias && !explicitRealtime) return;
+                }
+                opLineIds.push(lid);
             });
             if (opLineIds.length === 0) {
                 // 没有本地线路映射的operator，回退到全量请求
