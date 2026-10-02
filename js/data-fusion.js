@@ -405,6 +405,59 @@
     } catch(e) { console.debug("[DataFusion] fuseLine error for " + lineId + ":", e.message); return null; }
   }
 
+  function _expandDirtyLines(seedIds, lines) {
+    var dirty = {};
+    (seedIds || []).forEach(function(id) { if (id && lines && lines[id]) dirty[id] = true; });
+    var queue = Object.keys(dirty);
+    var branches = getBranchIndex(lines || {});
+    while (queue.length) {
+      var id = queue.shift();
+      var line = lines[id] || {};
+      var deps = [];
+      try {
+        if (window.SharedTrackPairs && window.SharedTrackPairs.getSharedLines) deps = deps.concat(window.SharedTrackPairs.getSharedLines(id) || []);
+      } catch(e) {}
+      try {
+        if (window.ThroughService && window.ThroughService.getDirectThroughLines) deps = deps.concat(window.ThroughService.getDirectThroughLines(id) || []);
+      } catch(e) {}
+      if (line.branchOf) deps.push(line.branchOf);
+      if (line.branches) deps = deps.concat(line.branches);
+      if (branches[id]) deps = deps.concat(branches[id]);
+      deps.forEach(function(dep) {
+        if (dep && lines[dep] && !dirty[dep]) { dirty[dep] = true; queue.push(dep); }
+      });
+    }
+    return Object.keys(dirty);
+  }
+
+  function fuseDirty(seedIds) {
+    try {
+      var dlLines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : null;
+      if (!_lastFusedData || !_lastFusedData.lines || !dlLines) return fuseAll();
+      var dirtyIds = _expandDirtyLines(seedIds, dlLines);
+      if (dirtyIds.length === 0) return _lastFusedData;
+      // If dependency expansion reaches most of the network, a single full pass
+      // is cheaper and simpler than cloning plus many targeted writes.
+      if (dirtyIds.length > Math.max(40, Math.floor(Object.keys(dlLines).length * 0.45))) return fuseAll();
+      var fusedLines = Object.assign({}, _lastFusedData.lines);
+      dirtyIds.forEach(function(lineId) {
+        var fused = fuseLine(lineId);
+        if (fused) fusedLines[lineId] = fused;
+        else delete fusedLines[lineId];
+      });
+      var fusedData = Object.assign({}, _lastFusedData, {
+        timestamp: new Date().toISOString(),
+        lines: fusedLines,
+        odptOperatorsLoaded: Object.keys(odptData.delayInfo).length
+      });
+      emitUpdate(fusedData);
+      return fusedData;
+    } catch(e) {
+      console.debug("[DataFusion] fuseDirty fallback:", e.message);
+      return fuseAll();
+    }
+  }
+
   function fuseAll() {
     try {
       var fusedLines = {};
@@ -548,6 +601,7 @@
         return;
       }
       loadTrainPositions._retry = 0;
+      var _previousPosMap = odptData.realtimePositions || {};
       posMap = {};
       odptData.trains = {};
       // Snapshot-scoped: incomplete realtime evidence must not leak into later
@@ -1130,7 +1184,24 @@
         }
       } catch(timetableErr) { console.debug("[DataFusion] Missing timetable detection error:", timetableErr.message); }
 
-      try { fuseAll(); } catch(e) { console.debug("[DataFusion] loadTrainPositions->fuseAll error:", e.message); }
+      try {
+        var _positionDirty = {};
+        var _positionKeys = {};
+        Object.keys(_previousPosMap || {}).forEach(function(id) { _positionKeys[id] = true; });
+        Object.keys(posMap || {}).forEach(function(id) { _positionKeys[id] = true; });
+        Object.keys(_positionKeys).forEach(function(id) {
+          var before = _previousPosMap[id] || [];
+          var after = posMap[id] || [];
+          if (before.length !== after.length) { _positionDirty[id] = true; return; }
+          for (var pi = 0; pi < after.length; pi++) {
+            var a = after[pi] || {}, b = before[pi] || {};
+            if (_positionIdentity(a) !== _positionIdentity(b) || a.stationIndex !== b.stationIndex ||
+                a.delay !== b.delay || a.destinationStation !== b.destinationStation ||
+                a.vehicleIconPath !== b.vehicleIconPath) { _positionDirty[id] = true; break; }
+          }
+        });
+        fuseDirty(Object.keys(_positionDirty));
+      } catch(e) { console.debug("[DataFusion] loadTrainPositions->fuseDirty error:", e.message); }
 
       // Realtime positions are now pushed only after the complete posPromises batch
       // is settled and DataLayer is ready (odpt-unified pushTrainPositions). The old
@@ -1405,7 +1476,7 @@
   }
 
   window.DataFusion = {
-    init: init, fuseAll: fuseAll, subscribe: subscribe,
+    init: init, fuseAll: fuseAll, fuseDirty: fuseDirty, subscribe: subscribe,
     getFusedData: function() { return window.DATA_FUSION || _lastFusedData || null; },
     getLine: function(lineId) { var data = window.DATA_FUSION || _lastFusedData; return data && data.lines ? data.lines[lineId] : null; },
     getOdptData: function() { return odptData; },
