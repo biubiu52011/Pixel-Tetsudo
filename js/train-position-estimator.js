@@ -531,6 +531,11 @@
             } else if (/りょうもう|Ryomo/i.test(_trainName) && !/リバティ|Revaty|Liberty/i.test(_trainName)) {
               tt['vehicleType'] = '東武200系';
               tt._vehicleEvidenceSource = 'tobu-official-2026-timetable-service-name';
+            } else if (/スペーシア日光|SPACIA\s*Nikko/i.test(_trainName)) {
+              // JR-through SPACIA Nikko is not Tobu-owned rolling stock.
+              // The 2026 official timetable identifies this service as JR 253 series.
+              tt['vehicleType'] = 'JR東日本E253系';
+              tt._vehicleEvidenceSource = 'tobu-official-2026-timetable-service-name';
             }
           }
           // v4.3.950: 车型判定统一入口 TrainVehicle（S0 manual 实证 / S2 车号累积 / S3 查表
