@@ -18,9 +18,9 @@
     "Kawagoe": { "Saikyo": ["Omiya"], "KawagoeWest": ["Kawagoe"] },
     "Rinkai": { "Saikyo": ["Osaki"] },
     // 副都心・有楽町・西武・東上・東横
-    "Fukutoshin": { "Tojo": ["Wakoshi"], "TokyuToyoko": ["Shibuya"], "Yurakucho_Seibu": ["Kotake-Mukaihara"] },
-    "Yurakucho": { "Tojo": ["Wakoshi"], "Yurakucho_Seibu": ["Kotake-Mukaihara"] },
-    "Yurakucho_Seibu": { "Fukutoshin": ["Kotake-Mukaihara"], "Yurakucho": ["Kotake-Mukaihara"], "SeibuChichibu": [] },
+    "Fukutoshin": { "Tojo": ["Wakoshi"], "TokyuToyoko": ["Shibuya"], "SeibuYurakucho": ["Kotake-Mukaihara"] },
+    "Yurakucho": { "Tojo": ["Wakoshi"], "SeibuYurakucho": ["Kotake-Mukaihara"] },
+    "SeibuYurakucho": { "Fukutoshin": ["Kotake-Mukaihara"], "Yurakucho": ["Kotake-Mukaihara"], "SeibuChichibu": [] },
     "Tojo": { "Fukutoshin": ["Wakoshi"], "Yurakucho": ["Wakoshi"] },
     "TokyuToyoko": { "Fukutoshin": ["Shibuya"], "MinatoMirai": ["Yokohama"] },
     "MinatoMirai": { "TokyuToyoko": ["Yokohama"] },
@@ -78,11 +78,11 @@
     // 南北・三田・目黒
     "Namboku": { "TokyuMeguro": ["Meguro"] },
     "Mita": { "TokyuMeguro": ["Meguro"] },
-    "TokyuMeguro": { "Mita": ["Meguro"], "Namboku": ["Meguro"], "SotetsuShin-Yokohama": [] },
+    "TokyuMeguro": { "Mita": ["Meguro"], "Namboku": ["Meguro"], "SotetsuShinYokohama": [] },
     // 相鉄（埼京・東横とはデータ上接続駅なし→マーカー非表示）
-    "SotetsuMain": { "Saikyo": [], "TokyuToyoko": [], "SotetsuIzumino": ["Futamatagawa"], "SotetsuShin-Yokohama": ["Nishiya"] },
+    "SotetsuMain": { "Saikyo": [], "TokyuToyoko": [], "SotetsuIzumino": ["Futamatagawa"], "SotetsuShinYokohama": ["Nishiya"] },
     "SotetsuIzumino": { "SotetsuMain": ["Futamatagawa"] },
-        "SotetsuShin-Yokohama": { "SotetsuMain": ["Nishiya"], "TokyuMeguro": ["Shin-Yokohama"] },
+        "SotetsuShinYokohama": { "SotetsuMain": ["Nishiya"], "TokyuMeguro": ["Shin-Yokohama"] },
     // 地方線直通・大井町線直通（4.3.644 補完）
     "Gono": { "Ou": ["Kawabe"] },
     "Kamaishi": { "Tohoku": ["Hanamaki"] },
@@ -95,7 +95,7 @@
     "ChuoTatsuno": { "Chuo": ["Okaya"] },
     "Shinonoi": { "Chuo": ["Shiojiri"], "Shinetsu": ["Shinonoi"] },
     "Shinetsu": { "Shinonoi": ["Shinonoi"] },
-    "SeibuChichibu": { "Yurakucho_Seibu": [] },
+    "SeibuChichibu": { "SeibuYurakucho": [] },
     // JR-West 関西・JR-Kyushu 直通接続駅（4.3.1024）
     "OsakaLoop": { "Hanwa": ["Tennoji"], "KansaiMain": ["Tennoji"] },
     "Hanwa": { "OsakaLoop": ["Tennoji"] },
