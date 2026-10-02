@@ -137,6 +137,14 @@
     if (!base) return null;
     var moveDir = opts.getMoveDir ? opts.getMoveDir(position, lineId) : null;
     var lane = laneSign(moveDir, position && position.railDirection);
+    // New Shuttle physical topology: Omiya-Maruyama is double track, while
+    // Maruyama-Uchijuku is single track. Do not draw artificial up/down lanes
+    // on the single-track section; trains share the same physical centreline.
+    // Omiya itself is a loop turnaround, so direction changes there are not a
+    // second parallel track either.
+    if (lineId === "NewShuttle" && (Math.min(base.idx, base.nextIdx) >= 8 || (base.idx === 0 && base.nextIdx === 0))) {
+      lane = 0;
+    }
     var normal = normalFromTangent(base.tangent);
     var key = trackKey(position, base.idx, base.nextIdx, lane);
     var slot = occupancy ? occupancy.get(key, index) : { ordinal: 0, total: 1 };
@@ -166,6 +174,7 @@
       if (!base) return null;
       var moveDir = opts && opts.getMoveDir ? opts.getMoveDir(p, lineId) : null;
       var lane = laneSign(moveDir, p && p.railDirection);
+      if (lineId === "NewShuttle" && (Math.min(base.idx, base.nextIdx) >= 8 || (base.idx === 0 && base.nextIdx === 0))) lane = 0;
       return { key: trackKey(p, base.idx, base.nextIdx, lane) };
     };
     var occupancy = buildOccupancy(positions, synthetic);
