@@ -1148,10 +1148,14 @@
         // train-level source evidence. Prefer it over any display-line guess.
         var _hasRealtimeVehicleEvidence = p.positionSource === "realtime-api" &&
           p.vehicleResolvedFromRealtime === true && !!p.vehicleIconPath;
-        var iconSrc = _hasRealtimeVehicleEvidence ? p.vehicleIconPath : window.__trainIconCache[_icKey];
-        // Only evidence-backed realtime identity is allowed to seed the stable
-        // train icon cache. A line-map/fleet estimate must remain replaceable.
-        if (iconSrc && _hasRealtimeVehicleEvidence) {
+        var _hasInheritedChainVehicle = p.vehicleInheritedFromRunningChain === true &&
+          !!p.runningChainId && !!p.vehicleIconPath;
+        var _hasAuthoritativeVehicle = _hasRealtimeVehicleEvidence || _hasInheritedChainVehicle;
+        var iconSrc = _hasAuthoritativeVehicle ? p.vehicleIconPath : window.__trainIconCache[_icKey];
+        // Evidence-backed realtime identity and its running-chain inheritance
+        // outrank any current-line re-resolution. Map/fleet estimates remain
+        // replaceable and cannot override the physical train identity.
+        if (iconSrc && _hasAuthoritativeVehicle) {
           window.__trainIconCache[_icKey] = iconSrc;
         }
         if (!iconSrc && window.TrainVehicle && typeof window.TrainVehicle.resolve === 'function') {
