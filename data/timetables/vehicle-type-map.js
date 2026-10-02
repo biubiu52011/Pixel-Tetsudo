@@ -1111,10 +1111,10 @@
       'LimitedExpress': { 'default': 'E257系500番台' },
     },
     'Takasaki': {
-      'Local': { 'default': 'E231系1000番台 / E233系3000番台' },
-      'Rapid': { 'default': 'E231系1000番台 / E233系3000番台' },
-      'SpecialRapid': { 'default': 'E231系1000番台 / E233系3000番台' },
-      'LimitedExpress': { 'default': 'E257系（草津・四萬・あかぎ）' },
+      'Local': { 'default': 'JR E231系1000番台 / JR E233系3000番台' },
+      'Rapid': { 'default': 'JR E231系1000番台 / JR E233系3000番台' },
+      'SpecialRapid': { 'default': 'JR E231系1000番台 / JR E233系3000番台' },
+      'LimitedExpress': { 'default': 'JR E257系5500番台(5両)（草津・四万／あかぎ）' },
     },
     'Tokaido': {
       'Local': { 'default': 'E231系1000番台 / E233系3000番台' },
@@ -1730,10 +1730,10 @@
       'LimitedExpress': { 'default': 'E259系（成田エクスプレス）' },
     },
     'Agatsuma': {
-      'LimitedExpress': { 'default': 'E257系2500番台 / 5500番台（草津・四万）' },
+      'LimitedExpress': { 'default': 'JR E257系5500番台(5両)（草津・四万）' },
     },
     'Joetsu': {
-      'LimitedExpress': { 'default': 'E257系2500番台 / 5500番台（草津・四万）' },
+      'LimitedExpress': { 'default': 'JR E257系5500番台(5両)（草津・四万）' },
     },
   };
 
