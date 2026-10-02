@@ -16,4 +16,15 @@ assert.strictEqual(st("A駅～B駅間で運転を見合わせています。"),"
 assert.strictEqual(st("運休のお知らせがあります。"),"info");
 assert.strictEqual(E.evaluate({structuredStatus:"Suspension",text:"直通運転を中止しています。"}).status,"suspended");
 assert.strictEqual(E.evaluate({signalStatus:"delayed",text:""}).status,"delayed");
-console.log("runinfo-evaluator: 14 PASS");
+let meta=E.evaluate({structuredStatus:"Delay",text:"信号確認のため約12分遅れています。18時08分頃再開予定。",range:"A駅間～B駅間",cause:"信号確認",resumeEstimate:"2026-10-02T18:08:00+09:00"});
+assert.strictEqual(meta.status,"delayed");
+assert.strictEqual(meta.maxDelay,12);
+assert.strictEqual(meta.interval,"A駅間→B駅");
+assert.strictEqual(meta.cause,"信号確認");
+assert.strictEqual(meta.resume,"18:08");
+assert.ok(meta.detail.indexOf("信号確認")>=0);
+let clockOnly=E.evaluate({structuredStatus:"Normal",text:"18時08分頃に再開しました。"});
+assert.strictEqual(clockOnly.maxDelay,null);
+let stations=E.extractMetadata({stationFromName:"新宿",stationToName:"中野",text:""});
+assert.strictEqual(stations.interval,"新宿→中野");
+console.log("runinfo-evaluator: 22 PASS");
