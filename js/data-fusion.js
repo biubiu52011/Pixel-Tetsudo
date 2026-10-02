@@ -1014,9 +1014,6 @@
                 window.ODPT_TIMETABLES[lineInfo.operator].push(t);
               }
             });
-            if (!window.ODPT_TRAINS[lineInfo.operator]) {
-              window.ODPT_TRAINS[lineInfo.operator] = window.ODPT_TIMETABLES[lineInfo.operator];
-            }
           }
         }).catch(function(e) {
           console.debug("[DataFusion] Failed to load timetable for", lineInfo.lineId, ":", e.message);
