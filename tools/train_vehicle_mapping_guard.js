@@ -693,6 +693,14 @@ function main() {
     'Temporary Kinugawa 13 must resolve on an explicitly verified operating date');
   assert(!tobuEvidence.resolve('5113M', 'きぬがわ13号', 'down', '2026-11-20', { lineId: 'TobuNikko', operator: 'JR-East' }),
     'Temporary Kinugawa 13 must remain unknown outside explicitly verified operating dates');
+  assert(tobuEvidence.resolve('1262', 'スカイツリートレイン62号', 'up', '2026-08-01', { lineId: 'TobuNikko', operator: 'Tobu' }) === '東武634型',
+    '1262 SKYTREE TRAIN 62 must resolve to Tobu 634 on its operating date');
+  assert(tobuEvidence.resolve('1262', 'スペーシアX62号', 'up', '2026-08-08', { lineId: 'TobuNikko', operator: 'Tobu' }) === '東武N100系',
+    '1262 SPACIA X 62 must resolve to Tobu N100 on its operating date');
+  assert(tobuEvidence.resolve('5112M', 'きぬがわ34号', 'up', '2026-07-20', { lineId: 'TobuNikko', operator: 'JR-East' }) === 'JR東日本E253系',
+    '5112M Kinugawa 34 must resolve to JR East E253 on 2026-07-20');
+  assert(!tobuEvidence.resolve('5112M', '', 'up', '2026-07-20', { lineId: 'TobuNikko', operator: 'JR-East' }),
+    '5112M without service identity must remain unknown when the number is reused');
 
     assertNoCurrentFictionalAsset(win);
   assertNoFilenameDependentIdentity(win);
