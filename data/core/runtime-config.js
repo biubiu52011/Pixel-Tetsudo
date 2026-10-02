@@ -41,7 +41,7 @@
   var THROUGH_RAILWAY_FALLBACK = {
     "SotetsuDirect": {
       exclude: ["Yamanote"],
-      prefer: ["SotetsuShin-Yokohama", "Yokosuka", "Saikyo", "ShonanShinjuku"]
+      prefer: ["SotetsuShinYokohama", "Yokosuka", "Saikyo", "ShonanShinjuku"]
     }
   };
 
@@ -203,7 +203,7 @@
   /**
    * Railway 感知别名：ODPT 同名站 ID 在不同线路指向不同本地站，需按 railway 区分。
    * Oyama（Tojo=大山/Ooyama, Utsunomiya=小山/Oyama）双义。
-   * Kohoku（Nippori_Toneri=江北/Kohoku, NaritaAbikoBranch=湖北/Kohoku-Narita）双义。
+   * Kohoku（NipporiToneri=江北/Kohoku, NaritaAbikoBranch=湖北/Kohoku-Narita）双义。
    */
   var STATION_ALIAS_BY_RAILWAY = {
     "Tojo": { "Oyama": "Ooyama" },
