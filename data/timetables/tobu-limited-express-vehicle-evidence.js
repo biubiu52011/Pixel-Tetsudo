@@ -27,7 +27,7 @@
     ],
     "5111M": { vehicleType: "東武100系", service: "スペーシアきぬがわ11号", direction: "down" },
     "5112M": { vehicleType: "東武100系", service: "スペーシアきぬがわ12号", direction: "up" },
-    "5113M": { vehicleType: "JR東日本E253系", service: "きぬがわ13号", direction: "down", validFrom: "2026-07-18", validUntil: "2026-08-08" },
+    "5113M": { vehicleType: "JR東日本E253系", service: "きぬがわ13号", direction: "down", validDates: ["2026-05-02","2026-05-03","2026-05-04","2026-05-05","2026-05-06","2026-07-18","2026-08-08","2026-11-21","2026-11-22"] },
     "1263": [
       { vehicleType: "東武634型", service: "スカイツリートレイン63号", direction: "down" },
       { vehicleType: "東武N100系", service: "スペーシアX909号", direction: "down" }
@@ -133,6 +133,7 @@
           String(direction).toLowerCase() !== String(rec.direction).toLowerCase()) return false;
       if (serviceDate) {
         var d = String(serviceDate).slice(0, 10);
+        if (rec.validDates && rec.validDates.length && rec.validDates.indexOf(d) < 0) return false;
         if (rec.validFrom && d < rec.validFrom) return false;
         if (rec.validUntil && d > rec.validUntil) return false;
       }
