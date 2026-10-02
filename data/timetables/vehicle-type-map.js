@@ -1457,7 +1457,7 @@
       'LimitedExpress': { 'default': '30000形 EXEα / 60000形 MSE / 70000形 GSE' }
     },
     'NewShuttle': {
-      'Local': { 'default': '2000系 / 2020系' }
+      'Local': { 'default': '埼玉新都市交通1050系 / 埼玉新都市交通2000系 / 埼玉新都市交通2020系' }
     },
     'TokyoMonorail': {
       'AirportRapid': { 'default': '10000形' },
