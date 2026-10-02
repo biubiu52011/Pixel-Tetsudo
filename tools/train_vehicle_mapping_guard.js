@@ -821,3 +821,10 @@ assert(trainIconsSource.includes('"東京臨海高速鉄道70-000形": "東京�
        trainIconsSource.includes('"東京臨海高速鉄道71-000形": "東京臨海高速鉄道71-000形"'),
   'Rinkai vehicle identities must retain operator-qualified locks');
 
+
+// Chuo-Sobu ordinary E231-0/500 are not Tozai-through stock.
+// JR's Tozai-through identity is E231-800; keep the boundary explicit.
+assert(vehicleMapSource.includes("'TokyoMetro': 'E231系800番台（東西線直通） / 東京メトロ05系(10両) / 東京メトロ07系(10両) / 東京メトロ15000系(10両)'"),
+  'Chuo-Sobu TokyoMetro pool must use E231-800 and Metro Tozai stock');
+assert(!vehicleMapSource.includes("'TokyoMetro': 'E231系500番台 / E231系0番台 / 東京メトロ05系"),
+  'ordinary E231-0/500 must not enter the Tozai-through pool');
