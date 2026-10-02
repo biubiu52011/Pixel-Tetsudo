@@ -41,7 +41,7 @@
       return { status: "normal", evidence: evidence, delayUpperBoundMinutes: isNaN(n) ? null : n };
     }
 
-    if (/平常(?:通り|どおり)|通常運行|正常運行|遅延(?:は)?ありません|遅延なし/.test(s)) {
+    if (/平常(?:通り|どおり|運転|運行)|通常(?:運転|運行)|正常(?:運転|運行)|遅延(?:は)?ありません|遅延なし/.test(s)) {
       evidence.push({ type: "EXPLICIT_NORMAL" });
       return { status: "normal", evidence: evidence, delayUpperBoundMinutes: null };
     }
