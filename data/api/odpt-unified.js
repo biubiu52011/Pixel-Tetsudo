@@ -745,9 +745,15 @@
         // 单请求 1000 条硬上限下把截断线按日历拆成多次请求即可合并出完整数据
         getTimetableForRailway: function(operator, railway, opts) {
             var ep = ODPT_ENDPOINTS[operator];
-            if (!ep || !ep.trainTimetable) return Promise.resolve([]);
+            // “能力不可用”不是“source 成功返回空数组”。使用 reject 保留 UNKNOWN/ERROR
+            // 语义；现有调用链均已有 rejection fallback，不会把不可用状态写成 TT_EMPTY。
+            if (!ep || !ep.trainTimetable) {
+                return Promise.reject(new Error("TrainTimetable endpoint unavailable: " + operator));
+            }
             var key = getApiKey(ep.base);
-            if (!key) return Promise.resolve([]);
+            if (!key) {
+                return Promise.reject(new Error("ODPT API key unavailable for: " + operator));
+            }
             // railway格式: "odpt.Railway:TokyoMetro.Ginza" 或 "Ginza"
             var railwayParam = railway.indexOf('odpt.Railway:') === 0 ? railway : resolveRailwayCode(operator, railway);
             var url = ep.base + 'odpt:TrainTimetable?odpt:operator=odpt.Operator:' + operator + '&odpt:railway=' + railwayParam + '&acl:consumerKey=' + key;
