@@ -656,6 +656,13 @@ function main() {
   assert(!unknownIcon || !/JR東日本|E235系/.test(unknownIcon),
     'Unknown/non-JR trains must never use a concrete JR E235 universal fallback', { unknownIcon });
 
+    const unknownSkytreeIcon = win.TrainIcons.getTrainIcon('TobuSkytree', 'Tobu', 'x_1', null, null, false);
+  assert(!unknownSkytreeIcon,
+    'TobuSkytree without service/vehicle evidence must not resolve to a concrete class', { unknownSkytreeIcon });
+  const unknownIsesakiIcon = win.TrainIcons.getTrainIcon('TobuIsesaki', 'Tobu', 'x_1', null, null, false);
+  assert(!unknownIsesakiIcon,
+    'TobuIsesaki without service/vehicle evidence must not resolve to a concrete class', { unknownIsesakiIcon });
+
     const unknownTobuIcon = win.TrainIcons.getTrainIcon('Unknown', 'Tobu', 'x_1', null, null, true);
   assert(!unknownTobuIcon,
     'Unknown Tobu vehicle identity must not be disguised as a concrete Tobu class', { unknownTobuIcon });
