@@ -18,3 +18,13 @@ assert.ok(!/if \(_positionsChanged\) renderList\(listEl\)/.test(trains),
 assert.ok(!/var ids = Object\.keys\(lines\);[\s\S]{0,1200}realtimePositions/.test(trains),
   "trains subscriber must not hash positions across every line");
 console.log("performance-lifecycle: 5 PASS");
+
+
+// Busy-station regression: official realtime rows must not be capped by station capacity.
+const renderSrc = fs.readFileSync(path.join(root,'js/trains-render.js'),'utf8');
+assert.ok(/if \(_trainPositionRank\(_epPos\) === 0\)[\s\S]*?_filtered\.push\(_epPos\)[\s\S]*?continue/.test(renderSrc), 'official realtime trains at the same station must bypass estimated capacity limiting');
+assert.ok(!/_STATION_MAX_ENDPOINT\s*=\s*1/.test(renderSrc), 'terminal stations must not be hard-capped to one train');
+const layoutSrc = fs.readFileSync(path.join(root,'js/train-track-layout.js'),'utf8');
+assert.ok(/runningChainId \|\| p\.trainId \|\| p\.trainNumber/.test(layoutSrc), 'station slot ordering must use stable train identity');
+assert.ok(/groups\[key\]\.sort/.test(layoutSrc), 'multi-train station slots must be stable across source reorder');
+console.log('busy-station-layout: 4 PASS');
