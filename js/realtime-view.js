@@ -524,7 +524,7 @@
        return null;
     }
 
-    function render() {
+    function render(refreshStatuses) {
       var fused = getLines();
       if (!fused || !fused.lines || Object.keys(fused.lines).length === 0) {
         window.DataState.renderPageState(container, "loading");
@@ -536,14 +536,17 @@
         var visibleLines = getFilteredLines();
         renderLinesList(container, visibleLines, _latestOrder);
         renderFilterBar(fused.lines);
-        scheduleListStatusRefresh(fused.lines, true);
+        // Initial/data-ready render may reconcile official status. Pure UI
+        // changes (notably language switching) must not fan out into one
+        // RunInfoAPI.query Promise per line.
+        if (refreshStatuses !== false) scheduleListStatusRefresh(fused.lines, true);
       } catch (e) {
         window.DataState.renderPageState(container, "render_error");
       }
     }
 
     // Immediate check first
-    render();
+    render(true);
 
     // Poll until the canonical DataLayer/DataFusion path is ready
     var _pollCount = 0;
@@ -552,7 +555,7 @@
       var fused = getLines();
       if (fused && fused.lines && Object.keys(fused.lines).length > 0) {
         clearInterval(_pollTimer);
-        render();
+        render(true);
       } else if (_pollCount > 20) {
         // After 6 seconds, give up polling
         clearInterval(_pollTimer);
@@ -604,7 +607,7 @@
       window.onLanguageChange(function() {
         // render() applies the current operator filter itself, so language
         // changes need only one list rebuild.
-        render();
+        render(false);
         if (_currentModalLine && _latestLines) {
           openModal(_currentModalLine, _latestLines, _currentModalIdentity);
         }
