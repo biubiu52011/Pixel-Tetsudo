@@ -75,6 +75,18 @@
   // payload objects on each poll; serializing both the previous and next
   // payload doubled synchronous work even when nothing changed.
   var _delayInfoSignatures = {};
+  var _resolutionLineIdsSource = null;
+  var _resolutionLineIds = [];
+  var _lastCacheSavedFusionAt = 0;
+
+  function _getResolutionLineIds() {
+    var src = window.UNIFIED_LINES || {};
+    if (_resolutionLineIdsSource !== src) {
+      _resolutionLineIdsSource = src;
+      _resolutionLineIds = Object.keys(src);
+    }
+    return _resolutionLineIds;
+  }
   function _perfNow() { return (window.performance && performance.now) ? performance.now() : Date.now(); }
   function _perfRecord(name, startedAt, meta) {
     var ms = Math.round((_perfNow() - startedAt) * 10) / 10;
@@ -428,7 +440,7 @@
       var _chainMeta = null;
       try {
         if (window.RunningChainResolver && window.RunningChainResolver.getResolutionContext) {
-          _chainMeta = window.RunningChainResolver.getResolutionContext(lineId, Object.keys((window.UNIFIED_LINES || {})));
+          _chainMeta = window.RunningChainResolver.getResolutionContext(lineId, _getResolutionLineIds());
         }
       } catch(_ce) {}
       var _lineIdentity = buildLineIdentity(line, lineId);
@@ -1377,6 +1389,10 @@
   function saveToCache() {
     try {
       if (!window.RailwayRTC || !_lastFusedData) return;
+      // The timer is a persistence opportunity, not a reason to rewrite the
+      // same snapshot. Skip the all-line scan and IndexedDB writes until fusion
+      // has actually emitted newer data.
+      if (_lastFusionEmitAt && _lastFusionEmitAt <= _lastCacheSavedFusionAt) return;
       var posList = [];
       var delayMap = {};
       var fusedLines = _lastFusedData.lines || {};
@@ -1391,6 +1407,7 @@
       });
       window.RailwayRTC.savePositions(posList);
       window.RailwayRTC.saveDelayInfo(delayMap);
+      _lastCacheSavedFusionAt = _lastFusionEmitAt || Date.now();
     } catch(e) {}
   }
   function init() {
