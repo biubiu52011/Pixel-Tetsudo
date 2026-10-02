@@ -828,3 +828,14 @@ assert(vehicleMapSource.includes("'TokyoMetro': 'E231系800番台（東西線直
   'Chuo-Sobu TokyoMetro pool must use E231-800 and Metro Tozai stock');
 assert(!vehicleMapSource.includes("'TokyoMetro': 'E231系500番台 / E231系0番台 / 東京メトロ05系"),
   'ordinary E231-0/500 must not enter the Tozai-through pool');
+
+// Fukutoshin formation boundary guards.
+assert(!vehicleMapSource.includes('西武40000系(10両)(8両/10両)'),
+  'malformed Seibu 40000 formation label must not return');
+assert(!/'Fukutoshin':[\s\S]{0,6500}東京メトロ10000系(?!\(10両\))/.test(vehicleMapSource),
+  'Metro 10000 must remain explicitly ten-car in Fukutoshin mappings');
+assert(/'Fukutoshin':[\s\S]{0,6500}'Minatomirai': '東京メトロ10000系\(10両\) \/ 東京メトロ17000系\(8両\/10両\) \/ 横浜高速鉄道Y500系\(8両\)'/.test(vehicleMapSource),
+  'Fukutoshin-MinatoMirai local pool must preserve explicit 8/10-car identities');
+assert(!/'Fukutoshin':[\s\S]{0,6500}'Tokyu': '[^']*(?:東武50070系|西武40000系)/.test(
+  vehicleMapSource.match(/'F-Liner': \{[\s\S]*?\n      \},\n      'Local'/)?.[0] || ''
+), 'F-Liner Tokyu pool must not collapse Tobu/Seibu branch stock into a mixed pool');
