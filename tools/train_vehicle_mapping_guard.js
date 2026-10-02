@@ -345,6 +345,16 @@ function main() {
     trainType: trainType('JR-East', 'Rapid')
   });
 
+  // Cross-operator/mode guard: highly ambiguous bare series names must never
+  // resolve globally to one operator's asset (e.g. 1000系 -> Tama Monorail).
+  ['1000系','2000系','3000系','5000系','6000系','7000系','8000系','9000系','10000系'].forEach((name) => {
+    assert(!win.TrainIcons.VEHICLE_NAME_TO_ICON[name], 'ambiguous bare series leaked into global vehicle identity index', { name, icon: win.TrainIcons.VEHICLE_NAME_TO_ICON[name] });
+  });
+  const tama1000 = win.TrainIcons.resolveVehicleIcon('1000系', 'TamaMonorail');
+  assert(tama1000 && tama1000.includes('/多摩都市モノレール/1000系_標準塗装.png'), 'TamaMonorail line context must resolve its own 1000 series', { tama1000 });
+  const unrelated1000 = win.TrainIcons.resolveVehicleIcon('1000系', 'UnknownRoute');
+  assert(!unrelated1000 || !unrelated1000.includes('/多摩都市モノレール/'), 'unrelated railway must not inherit Tama Monorail 1000 series', { unrelated1000 });
+
   assertNoCurrentFictionalAsset(win);
   assertNoFilenameDependentIdentity(win);
   assertCanonicalAssetRenameSimulation(win);
