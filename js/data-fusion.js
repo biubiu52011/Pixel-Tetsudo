@@ -1417,9 +1417,21 @@
             setTimeout(function() {
               // v4.3.6xx: 后台预加载线路白名单 — 见 runtime-config.js TRAIN_WARMUP_LINES
               var warmupLines = (window.RuntimeConfig && window.RuntimeConfig.TRAIN_WARMUP_LINES) || ['Yamanote', 'ChuoRapid', 'KeihinTohoku', 'SeibuEn', 'Keikyu', 'Odawara'];
-              warmupLines.forEach(function(lid) {
-                window.DataFusion.ensureManualTimetable(lid).catch(function(){});
-              });
+              var warmupIndex = 0;
+              function warmNext() {
+                if (document.hidden || warmupIndex >= warmupLines.length) return;
+                var lid = warmupLines[warmupIndex++];
+                window.DataFusion.ensureManualTimetable(lid).catch(function(){}).then(function() {
+                  // Spread parse/estimation work across idle slices instead of
+                  // launching all manual scripts in one post-load burst.
+                  if (typeof window.requestIdleCallback === "function") {
+                    window.requestIdleCallback(warmNext, { timeout: 1200 });
+                  } else {
+                    setTimeout(warmNext, 250);
+                  }
+                });
+              }
+              warmNext();
             }, 2000);  // 2秒后后台开始预加载，不阻塞首屏
           }
         } catch(e) {}
@@ -1435,7 +1447,7 @@
   // trains 页首屏不再全量解析约 7.1MB 时刻表数据（首都圈线 ODPT 有时刻表，全程零加载）。
   // 时序保证：script.onload 触发 = 脚本执行完成 = window.<lineId>_MANUAL_TIMETABLES 已定义，
   //   onload 内二次校验变量存在（文件名/线路 ID 命名不匹配时 reject 暴露，不静默缺数据）；
-  //   数据就绪后内部重跑 doEstimation + fuseAll（与 loadMissingTimetables 完成后同一链路）。
+  //   数据就绪后仅重估目标线路依赖并 dirty-fuse；不再触发全网 estimation/fusion。
   // 防重入：_manualLoading 记录共享 Promise，同线路并发调用只发一次请求。
   // 结果归属：调用方（trains-page）在 .then 中校验 currentLine，用户切走线路后旧结果不覆盖新状态。
   var _manualLoading = {};
@@ -1527,8 +1539,11 @@
                 }
               }
             } catch(mErr) { console.debug("[DataFusion] ensureManual->mergeManual error:", mErr.message); }
-            try { if (typeof doEstimation === 'function') doEstimation(); } catch(e) { console.debug("[DataFusion] ensureManual->doEstimation error:", e.message); }
-            try { fuseAll(); } catch(e) { console.debug("[DataFusion] ensureManual->fuseAll error:", e.message); }
+            try {
+              var _manualTargets = _expandDirtyLines([lineId], allLines);
+              if (typeof doEstimation === 'function') doEstimation(_manualTargets);
+              fuseDirty([lineId]);
+            } catch(e) { console.debug("[DataFusion] ensureManual->dirty refresh error:", e.message); }
             res(true);
           };
           s.onerror = function() {
