@@ -187,14 +187,31 @@
     // that creates a stable-looking but unsupported icon assignment.
     var chosen = '';
     var chosenSrc = '';
-    if (!chosen) {
-      for (var oi = 0; oi < order.length; oi++) {
-        var srcName = order[oi];
-        var found = null;
-        Object.keys(pool).forEach(function(c) {
-          if (!found && pool[c].sources.indexOf(srcName) >= 0) found = c;
+    // A source may select a concrete vehicle only when it identifies exactly
+    // one candidate. Multi-candidate timetable/fleet evidence describes the
+    // possible fleet, not the actual formation assigned to this service.
+    // If train-number evidence exists, intersect it with higher-level evidence;
+    // choose only when that intersection is unique.
+    var _trainNoSet = getCandidates(trainNumber);
+    for (var oi = 0; oi < order.length && !chosen; oi++) {
+      var srcName = order[oi];
+      var srcCandidates = Object.keys(pool).filter(function(c) {
+        return pool[c].sources.indexOf(srcName) >= 0;
+      });
+      if (srcCandidates.length === 1) {
+        chosen = srcCandidates[0];
+        chosenSrc = srcName;
+        break;
+      }
+      if (srcCandidates.length > 1 && _trainNoSet.length) {
+        var intersection = srcCandidates.filter(function(c) {
+          return _trainNoSet.indexOf(c) >= 0;
         });
-        if (found) { chosen = found; chosenSrc = srcName; break; }
+        if (intersection.length === 1) {
+          chosen = intersection[0];
+          chosenSrc = 'trainNo';
+          break;
+        }
       }
     }
 
@@ -223,7 +240,10 @@
         }
       }
     }
-    if (!iconPath && !_explicitUnknownVehicle) iconPath = resolveIconByRules(ctx);
+    // Do not invent a formation/livery icon when vehicle identity is unresolved.
+    // Line-level icon rules are presentation fallbacks only after a concrete
+    // vehicle identity exists; otherwise the renderer must use its neutral marker.
+    if (!iconPath && chosen && !_explicitUnknownVehicle) iconPath = resolveIconByRules(ctx);
     if (!chosen && iconPath && lineId !== 'Yamanote' &&
         /\/E235系山手線\.png$/i.test(String(iconPath))) {
       iconPath = '';
