@@ -509,20 +509,9 @@
             : { name: '', vehicleTypeStr: '' };
           var trainClass = vehResult.name || '';
           var _vehicleType = vehResult.vehicleTypeStr || '';
-          // 兼容回退：TrainVehicle 未加载时维持旧逻辑（manual || VehicleTypeMap / getTrainClass）
-          if (!window.TrainVehicle) {
-            _vehicleType = tt['vehicleType'] ||
-              (window.VehicleTypeMap ? window.VehicleTypeMap.resolve(lineId, tt['odpt:trainType'], tt['odpt:destinationStation']) : '');
-            try {
-              if (window.TrainIcons && typeof window.TrainIcons.getTrainClass === "function") {
-                trainClass = window.TrainIcons.getTrainClass(
-                  lineId, line.operator,
-                  lineId + '_' + trainNumber + '_' + currentStationIndex,
-                  currentStationIndex, tt['odpt:trainType']
-                );
-              }
-            } catch(e) {}
-          }
+          // Vehicle identity has one authority: TrainVehicle. If it is unavailable,
+          // preserve explicit manual vehicleType only; never infer identity from icons.
+          if (!window.TrainVehicle) _vehicleType = tt['vehicleType'] || '';
           positions.push({
             stationIndex: currentStationIndex,
             trainId: lineId + '_' + trainNumber,
