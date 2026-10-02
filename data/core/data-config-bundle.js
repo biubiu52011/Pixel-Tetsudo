@@ -889,7 +889,7 @@ window.getTransferHint = function(stationId, lang) {
   var THROUGH_RAILWAY_FALLBACK = {
     "SotetsuDirect": {
       exclude: ["Yamanote"],
-      prefer: ["SotetsuShin-Yokohama", "Yokosuka", "Saikyo", "ShonanShinjuku"]
+      prefer: ["SotetsuShinYokohama", "Yokosuka", "Saikyo", "ShonanShinjuku"]
     }
   };
 
@@ -977,7 +977,7 @@ window.getTransferHint = function(stationId, lang) {
   /**
    * Railway 感知别名：ODPT 同名站 ID 在不同线路指向不同本地站，需按 railway 区分。
    * Oyama（Tojo=大山/Ooyama, Utsunomiya=小山/Oyama）双义。
-   * Kohoku（Nippori_Toneri=江北/Kohoku, NaritaAbikoBranch=湖北/Kohoku-Narita）双义。
+   * Kohoku（NipporiToneri=江北/Kohoku, NaritaAbikoBranch=湖北/Kohoku-Narita）双义。
    */
   var STATION_ALIAS_BY_RAILWAY = {
     "Tojo": { "Oyama": "Ooyama" },
@@ -2089,7 +2089,7 @@ window.LineOperationSystems = {
       nameEn: "Nippori-Toneri Liner",
       nameKo: "닛포리・토네리 라이너",
       color: "#ed6d00",
-      lineIds: ["Nippori_Toneri"],
+      lineIds: ["NipporiToneri"],
       icon: "../images/鉄道/都営地下鉄/日暮里・舎人ライナー.png",
       order: 6
     }
@@ -2280,7 +2280,7 @@ window.LineOperationSystems = {
       nameEn: "Seibu Yurakucho Line",
       nameKo: "세이부 유라쿠초선",
       color: "#EF7A00",
-      lineIds: ["Yurakucho_Seibu"],
+      lineIds: ["SeibuYurakucho"],
       icon: "../images/鉄道/西武鉄道/西武有楽町線.png",
       order: 4
     },
@@ -2756,7 +2756,7 @@ window.LineOperationSystems = {
       nameEn: "Sotetsu Shin-Yokohama Line",
       nameKo: "소테츠 신요코하마선",
       color: "#003366",
-      lineIds: ["SotetsuShin-Yokohama"],
+      lineIds: ["SotetsuShinYokohama"],
       icon: "../images/鉄道/相鉄/相鉄新横浜線.png",
       order: 3
     }
