@@ -96,12 +96,23 @@ function getRealtimePositions(lineId) {
   return _dedupeTrainPositions(positions, lineId);
 }
 
+function _isFreshRealtimePosition(p) {
+  if (!p || p.positionSource !== "realtime-api") return false;
+  // Missing validity metadata is not evidence of expiry; preserve existing
+  // realtime priority. But once dct:valid is supplied, an expired/invalid
+  // timestamp must not suppress a current timetable estimate.
+  if (!p.sourceValidUntil) return true;
+  var validUntil = Date.parse(p.sourceValidUntil);
+  return !isNaN(validUntil) && validUntil >= Date.now();
+}
+
 function _positionSourceRank(p) {
   if (!p) return 9;
   // Source metadata is authoritative. DataFusion explicitly tags ODPT live
   // positions as realtime-api and timetable-derived positions separately.
-  // Do not let an unrelated/legacy estimated:false record impersonate live API.
-  if (p.positionSource === "realtime-api") return 0;
+  // Expired realtime loses priority before dedupe so timetable fallback can
+  // take over instead of the renderer deleting the winning stale record later.
+  if (p.positionSource === "realtime-api") return _isFreshRealtimePosition(p) ? 0 : 8;
   if (p.positionSource === "train-timetable") return 1;
   if (p.positionSource === "station-timetable") return 2;
   if (p.estimated === true) return 3;
