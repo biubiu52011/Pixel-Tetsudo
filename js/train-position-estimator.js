@@ -727,6 +727,27 @@
                 pos.runningChainEvidence = resolved.evidence || "TIMETABLE_SEGMENT";
                 if (resolved.partnerLineId) pos.runningChainPartnerLineId = resolved.partnerLineId;
                 if (resolved.timeGapMin !== undefined) pos.runningChainTimeGapMin = resolved.timeGapMin;
+                // A timetable-provided vehicleType is explicit vehicle evidence.
+                // Attach it to the canonical chain; never derive a class from
+                // train number or generic LimitedExpress.
+                var explicitVehicle = sourceTT['vehicleType'] || sourceTT['odpt:vehicleType'] || '';
+                if (explicitVehicle && window.TrainVehicle &&
+                    typeof window.TrainVehicle.registerFormationEvidence === 'function') {
+                  window.TrainVehicle.registerFormationEvidence({
+                    lineId: lineId,
+                    runningChainId: resolved.runningChainId,
+                    vehicleType: explicitVehicle,
+                    evidenceSource: sourceTT._vehicleEvidenceSource || 'official-timetable-vehicle'
+                  });
+                  var chainVehicle = window.TrainVehicle.resolveFormationEvidence({
+                    lineId: lineId,
+                    runningChainId: resolved.runningChainId
+                  });
+                  if (chainVehicle) {
+                    pos.vehicleType = chainVehicle.vehicleName;
+                    pos.vehicleTypeManual = chainVehicle.vehicleName;
+                  }
+                }
               }
             });
           }
