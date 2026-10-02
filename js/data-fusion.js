@@ -112,10 +112,16 @@
 
   var LAST_GOOD_KEY = "pt_runinfo_last_good_v1";
   var LAST_GOOD_MAX_AGE_MS = 10 * 60 * 1000;
+  var _lastGoodCacheRaw = null;
+  var _lastGoodCacheParsed = {};
   function getLastGoodDelay(lineId) {
     try {
-      var all = JSON.parse(localStorage.getItem(LAST_GOOD_KEY) || "{}");
-      var v = all[lineId];
+      var raw = localStorage.getItem(LAST_GOOD_KEY) || "{}";
+      if (raw !== _lastGoodCacheRaw) {
+        _lastGoodCacheParsed = JSON.parse(raw);
+        _lastGoodCacheRaw = raw;
+      }
+      var v = _lastGoodCacheParsed[lineId];
       if (!v || !v.r || !v.r.status || !v.t) return null;
       if ((Date.now() - v.t) > LAST_GOOD_MAX_AGE_MS) return null;
       var st = v.r.status;
