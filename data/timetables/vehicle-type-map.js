@@ -1003,8 +1003,8 @@
       'Local': { 'default': 'JR 209系3500番台 / JR E231系3000番台' },
     },
     'Ito': {
-      'Local': { 'default': 'E231系1000番台 / 伊豆急行8000系' },
-      'LimitedExpress': { 'default': 'E257系2000番台 / E257系2500番台' },
+      'Local': { 'default': 'JR E231系1000番台 / 伊豆急行8000系 / 伊豆急行2100系' },
+      'LimitedExpress': { 'default': 'JR E257系2000番台(9両) / JR E257系2500番台(5両)（踊り子）' },
     },
     'Itsukaichi': {
       'Local': { 'default': 'E233系0番台' },
@@ -1121,11 +1121,11 @@
       'Rapid': { 'default': 'E231系1000番台 / E233系3000番台' },
       'SpecialRapid': { 'default': 'E231系1000番台 / E233系3000番台' },
       'LimitedExpress': {
-        'default': 'E257系2000番台 / 2500番台 / 伊豆急行8000系',
+        'default': 'JR E257系2000番台(9両) / JR E257系2500番台(5両)',
         'destStation': {
-          'IzukyuShimoda': 'E257系2000番台 / 2500番台（踊り子）/ 伊豆急行8000系',
-          'Odawara': 'E257系2000番台 / 2500番台（湘南）',
-          'Hiratsuka': 'E257系2000番台 / 2500番台（湘南）',
+          'IzukyuShimoda': 'JR E257系2000番台(9両) / JR E257系2500番台(5両)（踊り子）',
+          'Odawara': 'JR E257系2000番台(9両) / JR E257系2500番台(5両)（湘南）',
+          'Hiratsuka': 'JR E257系2000番台(9両) / JR E257系2500番台(5両)（湘南）',
           'Izumoshi': '285系（サンライズ出雲）'
         }
       },
@@ -1703,11 +1703,11 @@
       'Rapid': { 'default': 'E231系1000番台 / E233系3000番台' },
       'SpecialRapid': { 'default': 'E231系1000番台 / E233系3000番台' },
       'LimitedExpress': {
-        'default': 'E257系2000番台 / 2500番台 / 伊豆急行8000系',
+        'default': 'JR E257系2000番台(9両) / JR E257系2500番台(5両)',
         'destStation': {
-          'IzukyuShimoda': 'E257系2000番台 / 2500番台（踊り子）/ 伊豆急行8000系',
-          'Odawara': 'E257系2000番台 / 2500番台（湘南）',
-          'Hiratsuka': 'E257系2000番台 / 2500番台（湘南）',
+          'IzukyuShimoda': 'JR E257系2000番台(9両) / JR E257系2500番台(5両)（踊り子）',
+          'Odawara': 'JR E257系2000番台(9両) / JR E257系2500番台(5両)（湘南）',
+          'Hiratsuka': 'JR E257系2000番台(9両) / JR E257系2500番台(5両)（湘南）',
           'Izumoshi': '285系（サンライズ出雲）'
         }
       },
