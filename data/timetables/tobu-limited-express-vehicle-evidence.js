@@ -27,6 +27,8 @@
     ],
     // JR East current timetable (2026-10): direct structured vehicle evidence.
     "1083M": { vehicleType: "JR東日本E253系", service: "きぬがわ3号", direction: "down", validFrom: "2026-03-14" },
+    "1091M": { vehicleType: "東武100系", service: "スペーシア日光1号", direction: "down", validFrom: "2026-03-14" },
+    "9121M": { vehicleType: "東武100系", service: "スペーシア日光21号", direction: "down", validFrom: "2026-09-19", validUntil: "2026-09-23" },
 
     // Nikko/Kinugawa regular services — official 2026-03-14 up timetable.
     // These train numbers and service identities are exposed in the same table.
