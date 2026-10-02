@@ -21,7 +21,10 @@
       { vehicleType: "JR東日本E253系", service: "日光21号", direction: "down" },
       { vehicleType: "東武100系", service: "スペーシア日光21号", direction: "down", validFrom: "2026-09-19", validUntil: "2026-09-23" }
     ],
-    "5026M": { vehicleType: "JR東日本E253系", service: "日光26号", direction: "up" },
+    "5026M": [
+      { vehicleType: "JR東日本E253系", service: "日光26号", direction: "up" },
+      { vehicleType: "東武100系", service: "スペーシア日光26号", direction: "up", validFrom: "2026-09-19", validUntil: "2026-09-23" }
+    ],
     "5111M": { vehicleType: "東武100系", service: "スペーシアきぬがわ11号", direction: "down" },
     "5112M": { vehicleType: "東武100系", service: "スペーシアきぬがわ12号", direction: "up" },
     "1263": [
@@ -30,6 +33,8 @@
     ],
     // JR East current timetable (2026-10): direct structured vehicle evidence.
     "1083M": { vehicleType: "JR東日本E253系", service: "きぬがわ3号", direction: "down", validFrom: "2026-03-14" },
+    "1082M": { vehicleType: "JR東日本E253系", service: "きぬがわ2号", direction: "up", validFrom: "2026-03-14" },
+    "1094M": { vehicleType: "東武100系", service: "スペーシア日光4号", direction: "up", validFrom: "2026-03-14" },
     "1091M": { vehicleType: "東武100系", service: "スペーシア日光1号", direction: "down", validFrom: "2026-03-14" },
     "9121M": { vehicleType: "東武100系", service: "スペーシア日光21号", direction: "down", validFrom: "2026-09-19", validUntil: "2026-09-23" },
 
