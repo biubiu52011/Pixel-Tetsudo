@@ -71,6 +71,10 @@
   var _lastEstimationMinute = -1;
   var _lastFusionEmitAt = 0;
   var _resumeFallbackTimer = null;
+  // Cache per-operator runinfo signatures. updateOdptData receives fresh
+  // payload objects on each poll; serializing both the previous and next
+  // payload doubled synchronous work even when nothing changed.
+  var _delayInfoSignatures = {};
   function _perfNow() { return (window.performance && performance.now) ? performance.now() : Date.now(); }
   function _perfRecord(name, startedAt, meta) {
     var ms = Math.round((_perfNow() - startedAt) * 10) / 10;
@@ -1588,10 +1592,22 @@
           Object.keys(previous).forEach(function(op) { opKeys[op] = true; });
           Object.keys(delayData).forEach(function(op) { opKeys[op] = true; });
           Object.keys(opKeys).forEach(function(op) {
-            var a = previous[op], b = delayData[op];
-            var sa = a == null ? String(a) : JSON.stringify(a);
+            var b = delayData[op];
             var sb = b == null ? String(b) : JSON.stringify(b);
+            var sa;
+            if (Object.prototype.hasOwnProperty.call(_delayInfoSignatures, op)) {
+              sa = _delayInfoSignatures[op];
+            } else {
+              var a = previous[op];
+              sa = a == null ? String(a) : JSON.stringify(a);
+            }
             if (sa !== sb) dirtyOps[op] = true;
+            _delayInfoSignatures[op] = sb;
+          });
+          // Drop signatures for operators no longer present so the cache cannot
+          // retain stale payload strings indefinitely.
+          Object.keys(_delayInfoSignatures).forEach(function(op) {
+            if (!Object.prototype.hasOwnProperty.call(delayData, op)) delete _delayInfoSignatures[op];
           });
           var lines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : {};
           var dirtyLines = [];
