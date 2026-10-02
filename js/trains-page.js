@@ -161,7 +161,9 @@
       if (listEl) listEl.classList.remove("hidden");
       if (filterBarEl) filterBarEl.classList.remove("hidden");
       if (detailEl) detailEl.classList.add("hidden");
-      renderFiltered(listEl);
+      // The overview DOM was only hidden while detail was open. Do not rebuild
+      // it on back navigation; preserve scroll position, filter state and cards.
+      if (listEl) setFilter(_selectedOperator);
     } catch(e) {}
   }
 
@@ -476,8 +478,29 @@
   function setFilter(op) {
     _selectedOperator = op;
     var container = document.getElementById('trainsFilterBar');
-    if (container) renderFilterBar(container);
-    if (listEl) renderFiltered(listEl);
+    // Filtering is a view-state change, not a data lifecycle event. Keep the
+    // existing cards/SVG-ready DOM alive and only toggle the relevant operator
+    // groups. Rebuilding both the filter bar and full line list made every click
+    // look and feel like an initial page load.
+    if (container) {
+      Array.prototype.slice.call(container.querySelectorAll('.rs-filter-btn')).forEach(function(btn) {
+        btn.classList.toggle('active', (btn.dataset.operator || null) === _selectedOperator);
+      });
+    }
+    if (listEl) {
+      var groups = listEl.querySelectorAll('.rs-operator-group[data-operator]');
+      if (groups.length) {
+        Array.prototype.slice.call(groups).forEach(function(group) {
+          var groupOp = group.getAttribute('data-operator') || '';
+          var visible = !_selectedOperator || groupOp === _selectedOperator ||
+            (_selectedOperator === "JR-East" && groupOp === "JR-East");
+          group.classList.toggle('hidden', !visible);
+        });
+      } else {
+        // Compatibility fallback for DOM rendered before data-operator existed.
+        renderFiltered(listEl);
+      }
+    }
   }
 
   function renderFiltered(el, linesSnapshot) {
