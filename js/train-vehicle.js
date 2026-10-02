@@ -294,14 +294,20 @@
     return null;
   }
   function registerFormationEvidence(anchor) {
-    if (!anchor || !anchor.runningChainId || !anchor.formationId) return false;
-    var f = _normalizeFormation(anchor.lineId, anchor.formationId);
-    if (!f) return false;
+    if (!anchor || !anchor.runningChainId) return false;
+    var f = anchor.formationId ? _normalizeFormation(anchor.lineId, anchor.formationId) : null;
+    var explicitVehicle = String(anchor.vehicleName || anchor.vehicleType || "").trim();
+    var vehicleName = f ? f.vehicleName : explicitVehicle;
+    if (!vehicleName) return false;
+    // Explicit timetable/operator vehicle type is evidence; never derive it from
+    // train number, line, icon fallback, or a generic LimitedExpress label.
+    if (!f && !resolveIconForName(vehicleName, anchor.lineId)) return false;
     var date = anchor.serviceDate || _formationServiceDate(anchor.observedAt);
     _formationEvidence[date+"|"+anchor.runningChainId] = {
       lineId:anchor.lineId, runningChainId:anchor.runningChainId, serviceDate:date,
-      formationId:f.id, vehicleName:f.vehicleName,
-      evidenceSource:anchor.evidenceSource || "daily-observation",
+      formationId:f ? f.id : "",
+      vehicleName:vehicleName,
+      evidenceSource:anchor.evidenceSource || (f ? "daily-observation" : "official-timetable-vehicle"),
       observedAt:anchor.observedAt || null
     };
     return true;
