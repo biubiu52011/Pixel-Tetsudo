@@ -95,10 +95,12 @@
     // When both the timetable row and evidence record expose a service name,
     // require them to agree. Train number alone remains usable when ODPT omits
     // trainName, but can never override a conflicting explicit service identity.
-    if (name && rec.service) {
+    if (name && (rec.service || rec.services)) {
       var actual = _normServiceName(name);
-      var expected = _normServiceName(rec.service);
-      if (actual && expected && actual !== expected) return "";
+      var expectedList = (rec.services || [rec.service]).map(_normServiceName);
+      // Coupled Revaty trains can expose either portion name in ODPT while both
+      // portions share the same physical formation before/after split/join.
+      if (actual && expectedList.length && expectedList.indexOf(actual) < 0) return "";
     }
     if (direction && rec.direction && String(direction).toLowerCase() !== String(rec.direction).toLowerCase()) return "";
     return rec.vehicleType || "";
