@@ -2381,7 +2381,7 @@ window.LineOperationSystems = {
       nameEn: "Den-en-toshi Line",
       nameKo: "덴엔토시선",
       color: "#00a850",
-      lineIds: ["TokyuDenEn"],
+      lineIds: ["TokyuDenEnToshi"],
       icon: "../images/鉄道/東急電鉄/田園都市線.png",
       order: 1
     },
@@ -3393,7 +3393,7 @@ window.PLATFORM_DATA = {
     "Shibuya": { "1": "1・2" }                  // 吉祥寺方面 1・2
   },
   // ===== 東急田園都市線（渋谷@0 → 中央林間；下り=長津田方面=升序1；渋谷为端点） =====
-  "TokyuDenEn": {
+  "TokyuDenEnToshi": {
     "Shibuya": { "1": "1" }                     // 二子玉川・長津田・中央林間方面 1
   },
   // ===== 半蔵門線（渋谷@0 → 押上；升序1=押上・久喜方面） =====
