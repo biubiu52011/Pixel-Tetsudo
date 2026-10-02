@@ -590,6 +590,9 @@
       loadTrainPositions._retry = 0;
       posMap = {};
       odptData.trains = {};
+      // Snapshot-scoped: incomplete realtime evidence must not leak into later
+      // polls after the source record disappears.
+      _realtimeEvidenceWithoutPosition = {};
       Object.keys(positionSource).forEach(function(op) {
         var trains = positionSource[op] || [];
         odptData.trains[op] = trains;
@@ -945,6 +948,33 @@
                   if (_chainIds.length === 1) _rp.runningChainId = _chainIds[0];
                 }
                 _rememberChainVehicle(_rp);
+              });
+            });
+            // Realtime rows without fromStation cannot provide position, but an
+            // explicit official vehicleType may still bind to a uniquely resolved
+            // timetable chain for the same train number. Never create a position
+            // from this evidence and never bind when chain identity is ambiguous.
+            Object.keys(_realtimeEvidenceWithoutPosition).forEach(function(_evKey) {
+              var _ev = _realtimeEvidenceWithoutPosition[_evKey];
+              if (!_ev || !_ev.trainNumber || !_ev.vehicleType) return;
+              var _evChains = _chainsByTrainNumber[String(_ev.trainNumber)] || {};
+              var _evChainIds = Object.keys(_evChains);
+              if (_evChainIds.length !== 1) return;
+              var _evResolution = (window.TrainVehicle && typeof window.TrainVehicle.resolve === "function")
+                ? window.TrainVehicle.resolve({
+                    trainNumber: _ev.trainNumber,
+                    odptVehicleType: _ev.vehicleType
+                  }) : null;
+              if (!_evResolution || !_evResolution.iconPath) return;
+              _rememberChainVehicle({
+                runningChainId: _evChainIds[0],
+                trainClass: _evResolution.name || "",
+                vehicleType: _evResolution.vehicleTypeStr || _ev.vehicleType,
+                vehicleIconPath: _evResolution.iconPath,
+                vehicleSource: _evResolution.source || "odpt",
+                vehicleConfidence: _evResolution.confidence || "high",
+                vehicleResolution: _evResolution,
+                vehicleResolvedFromRealtime: true
               });
             });
             // High-confidence timetable/manual resolution can seed the same
