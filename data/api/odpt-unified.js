@@ -406,7 +406,7 @@
 
     // ========== 线路 key → ODPT Railway code 别名表 ==========
     // 内部线路 key 与 ODPT odpt.Railway code 不一致时在此映射，避免 404。
-    // 已确认项来自 ODPT 官方线路 ID 列表；推断项遵循 ODPT 命名惯例，运行时以 API 返回为准。
+    // 仅在内部 lineId 与数据源实际 owl:sameAs railway code 不同时登记已验证 alias；禁止根据英文名/命名惯例猜测 API identity。
     var LINE_RAILWAY_CODE = {
       "Saikyo": "SaikyoKawagoe",
       "Kawagoe": "SaikyoKawagoe", // 大宮〜川越段は埼京線・川越線運行系統（ODPT SaikyoKawagoe API）
