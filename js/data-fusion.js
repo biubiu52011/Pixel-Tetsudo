@@ -637,23 +637,18 @@
                 if (targetLine) break;
               }
             }
-            // 3. 如果没有精确匹配，只选择主要线路（车站数量>=10）
+            // 3. Ambiguous source identity must stay unresolved.
+            // A shared station, train number, or "longest line" is not evidence
+            // of railway/operator ownership. Do not guess a target line when
+            // canonical railway identity and verified through fallback cannot
+            // disambiguate the realtime record.
             if (!targetLine) {
-              var mainLines = matchingLines.filter(function(ml) {
-                return ml.line.stations && ml.line.stations.length >= 10;
+              console.debug("[DataFusion] ambiguous realtime line identity", {
+                trainNumber: trainId,
+                railway: railwayName,
+                station: stationKey,
+                candidates: matchingLines.map(function(ml) { return ml.lid; })
               });
-              if (mainLines.length > 0) {
-                mainLines.sort(function(a, b) {
-                  return (b.line.stations ? b.line.stations.length : 0) - (a.line.stations ? a.line.stations.length : 0);
-                });
-                targetLine = mainLines[0];
-              } else {
-                // 如果没有主要线路，选择车站数量最多的线路
-                matchingLines.sort(function(a, b) {
-                  return (b.line.stations ? b.line.stations.length : 0) - (a.line.stations ? a.line.stations.length : 0);
-                });
-                targetLine = matchingLines[0];
-              }
             }
           }
           if (targetLine) {
