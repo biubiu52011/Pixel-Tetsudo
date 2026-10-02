@@ -78,12 +78,28 @@
     "1850": { vehicleType: "東武500系", service: "リバティりょうもう50号", direction: "up" }
   };
 
+  function _normServiceName(value) {
+    return String(value || "")
+      .replace(/^特急/, "")
+      .replace(/[\s　・]/g, "")
+      .replace(/スペーシア(\d+)号X/i, "スペーシアX$1号")
+      .toLowerCase();
+  }
+
   function resolve(trainNumber, trainName) {
     var key = String(trainNumber || "").trim();
     var rec = records[key];
     if (!rec) return "";
     var name = String(trainName || "");
     if (rec.servicePattern && !rec.servicePattern.test(name)) return "";
+    // When both the timetable row and evidence record expose a service name,
+    // require them to agree. Train number alone remains usable when ODPT omits
+    // trainName, but can never override a conflicting explicit service identity.
+    if (name && rec.service) {
+      var actual = _normServiceName(name);
+      var expected = _normServiceName(rec.service);
+      if (actual && expected && actual !== expected) return "";
+    }
     return rec.vehicleType || "";
   }
 
