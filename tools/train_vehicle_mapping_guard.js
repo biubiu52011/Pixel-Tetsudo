@@ -946,3 +946,12 @@ assert(vehicleMapSource.includes("'SobuRapid': {\n      'Rapid': { 'default': 'J
   'Sobu Rapid must retain canonical JR E235-1000 identity');
 assert(vehicleMapSource.includes("'Keiyo': {\n      'Local': { 'default': 'JR E233系5000番台' },\n      'Rapid': { 'default': 'JR E233系5000番台' }"),
   'Keiyo must retain canonical JR E233-5000 identity');
+
+// Batch guard: Takasaki / Joetsu / Agatsuma E257-5500 express identity.
+for (const line of ['Takasaki','Agatsuma','Joetsu']) {
+  const block = vehicleMapSource.match(new RegExp("'" + line + "': \\{[\\s\\S]*?\\n    \\},"))?.[0] || '';
+  assert(block.includes('JR E257系5500番台(5両)'),
+    line + ' limited express must retain current E257-5500 five-car identity');
+  assert(!block.includes('E257系2500番台'),
+    line + ' must not mix Odoriko/Shonan E257-2500 stock into Gunma express service');
+}
