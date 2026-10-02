@@ -643,11 +643,8 @@
           var destStations = t["odpt:destinationStation"] || [];
           if (typeof destStations === "string") destStations = [destStations];
           var destStation = destStations.length > 0 ? String(destStations[0]).split(".").pop() : "";
-          // InnerLoop / OuterLoop is direction evidence only. Do not rewrite
-          // odpt:destinationStation into a synthetic "内回り/外回り" destination:
-          // some loop trains genuinely terminate at a station (short turn,
-          // depot entry, service end). Keep the source destination intact and
-          // let loopServiceMode decide whether the UI shows terminal or direction.
+          // InnerLoop / OuterLoop is direction evidence only. Keep the
+          // source destination intact; rendering prefers a real terminal when present.
           var matchingLines = [];
           Object.keys(allLines).forEach(function(lid) {
             var line = allLines[lid];
@@ -742,10 +739,6 @@
               delayMin: delayMin,
               railDirection: directionName,
               destinationStation: destStation,
-              // Geometry may be circular, but an individual realtime train
-              // with a concrete destination is a terminating service.
-              loopServiceMode: destStation ? "TERMINATING" :
-                (/InnerLoop|OuterLoop|Inner|Outer/.test(String(directionName || "")) ? "CIRCULATING_OR_UNKNOWN" : "NOT_LOOP"),
               trainType: rawType,
               typeName: typeName,
               estimated: false,
