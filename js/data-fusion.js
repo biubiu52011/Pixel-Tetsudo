@@ -527,6 +527,37 @@
     return '';
   }
 
+  function _uniqueTimetableRailwayForTrain(operatorKey, trainNumber) {
+    if (!operatorKey || !trainNumber) return "";
+    var src = window.ODPT_TIMETABLES || {};
+    var rows = src[operatorKey] || [];
+    // Some loaders store operator aliases differently; compare normalized
+    // operator keys, but never cross operator boundaries.
+    if (!rows.length) {
+      var want = TransitConstants && typeof TransitConstants.normalizeOp === "function"
+        ? TransitConstants.normalizeOp(operatorKey) : String(operatorKey);
+      Object.keys(src).forEach(function(k) {
+        if (rows.length) return;
+        var nk = TransitConstants && typeof TransitConstants.normalizeOp === "function"
+          ? TransitConstants.normalizeOp(k) : String(k);
+        if (nk === want) rows = src[k] || [];
+      });
+    }
+    var railways = {};
+    rows.forEach(function(tt) {
+      if (!tt) return;
+      var n = tt["odpt:trainNumber"] || tt["odpt:train"] || "";
+      if (String(n) !== String(trainNumber)) return;
+      var rw = tt["odpt:railway"] || "";
+      if (!rw) return;
+      var parts = String(rw).split(":");
+      var shortName = parts.length > 1 ? parts[parts.length - 1] : String(rw);
+      if (shortName) railways[shortName] = true;
+    });
+    var keys = Object.keys(railways);
+    return keys.length === 1 ? keys[0] : "";
+  }
+
   function loadTrainPositions() {
     try {
       // Position truth must come only from the dedicated realtime container.
@@ -561,6 +592,13 @@
           if (railway) {
             var railParts = String(railway).split(":");
             railwayName = railParts.length > 1 ? railParts[railParts.length - 1] : String(railway);
+          }
+          // Missing realtime railway identity may be recovered only from a
+          // unique timetable match inside the same operator. Train number alone
+          // is never treated as proof when it maps to multiple railways.
+          if (!railwayName) {
+            var _identityTrainNo = t["odpt:trainNumber"] || t["odpt:train"] || "";
+            railwayName = _uniqueTimetableRailwayForTrain(op, _identityTrainNo);
           }
           // v4.3.416: 别名转换（ODPT 拼写差异站 ID → 项目站表 ID）
           // v4.3.474: railway 感知别名优先（Oyama=Tojo 大山/Oyama=Utsunomiya 小山 双义），再回退全局
