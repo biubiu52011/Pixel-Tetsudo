@@ -90,7 +90,7 @@ function main() {
 
   const probes = [
     { name: 'Tobu operator default', ctx: { lineId: 'Unknown', operator: 'Tobu', trainId: 'x_1' }, forbid: /8000系/ },
-    { name: 'MIR operator default', ctx: { lineId: 'Unknown', operator: 'MIR', trainId: 'x_1' }, expect: /E235系_0番代/ }, // TX 图库已按人工审查清空，MIR 默认回落到终兜底
+    { name: 'MIR operator default', ctx: { lineId: 'Unknown', operator: 'MIR', trainId: 'x_1' }, forbid: /JR東日本|E235系/ }, // unknown identity must not impersonate JR rolling stock
     { name: 'JR West operator default', ctx: { lineId: 'Unknown', operator: 'JR West', trainId: 'x_1' }, forbid: /JR東日本|E235系山手線/ },
     { name: 'Karasuyama', ctx: { lineId: 'Karasuyama', operator: 'JR-East', trainId: 'x_1' }, expect: /EV-E301/ },
     { name: 'Toei old Asakusa alias', ctx: { lineId: 'Asakusa', operator: 'Toei', vehicleTypeManual: '5300形', trainId: 'x_1' }, expect: /5500形/ },
