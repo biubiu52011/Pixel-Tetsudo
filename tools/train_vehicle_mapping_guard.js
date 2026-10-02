@@ -879,3 +879,16 @@ assert(!/東京メトロ17000系\(8両\/10両\)/.test(tojoBlock),
   'Tojo through pools must not admit the 8-car Metro 17000 formation');
 assert(/東武50070系\(10両\)/.test(tojoBlock),
   'Tojo through stock must retain explicit 10-car 50070 identity');
+
+// Batch guard: current JR suburban fleets + Keio/Toei boundary + Odakyu canonical names.
+assert(vehicleMapSource.includes("'KawagoeWest': {\n      'Local': { 'default': 'JR E231系3000番台 / JR 209系3500番台' }"),
+  'Kawagoe west must use current E231-3000 / 209-3500 fleet');
+assert(vehicleMapSource.includes("'Musashino': {\n      'Local': { 'default': 'JR E231系0番台 / JR E231系900番台 / JR 209系500番台' }"),
+  'Musashino must retain its current transferred E231/209 fleet');
+assert(vehicleMapSource.includes("'Yokosuka': {\n      'Local': { 'default': 'JR E235系1000番台' },\n      'Rapid': { 'default': 'JR E235系1000番台' }"),
+  'Yokosuka ordinary fleet must not fall back to Ueno-Tokyo E231/E233 stock');
+const keioMainBlock = vehicleMapSource.match(/'KeioMain': \{[\s\S]*?\n    \},\n\n    \/\/ ={10,}\n    \/\/ 北総/)?.[0] || '';
+assert(!/'Toei': '[^']*(?:京王電鉄7000系|京王電鉄8000系)(?:[^']*)'/.test(keioMainBlock),
+  'Keio 7000/8000 must not enter Toei Shinjuku through pools');
+assert(/京王電鉄9000系30番台 \/ 京王電鉄5000系 \/ 都営10-300形/.test(keioMainBlock),
+  'KeioMain Toei pool must preserve subway-compatible Keio/Toei stock');
