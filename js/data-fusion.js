@@ -1223,10 +1223,12 @@
         // realtime/trains 页功能，home 仅需实时延误徽章；补缺会按 operator 逐线拉取造成
         // 数百个 ODPT 请求拖慢首屏。loadTrainPositions（实时延误）与 fuseAll 不受影响。
         if (!window.ODPT_LAZY && linesNeedingTimetable.length > 0 && typeof loadMissingTimetables === 'function') {
+          var _requestedTimetableLines = linesNeedingTimetable.map(function(x) { return x.lineId; });
           loadMissingTimetables(linesNeedingTimetable).then(function() {
-            // 时刻表加载完成后，重新进行估算
+            // Re-estimation may enrich positions/running-chain evidence, but only
+            // requested lines and their dependency neighbourhood need re-fusion.
             doEstimation();
-            try { fuseAll(); } catch(e) { console.debug("[DataFusion] reload->fuseAll error:", e.message); }
+            try { fuseDirty(_requestedTimetableLines); } catch(e) { console.debug("[DataFusion] reload->fuseDirty error:", e.message); }
           });
         }
       } catch(timetableErr) { console.debug("[DataFusion] Missing timetable detection error:", timetableErr.message); }
