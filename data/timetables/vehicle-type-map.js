@@ -811,8 +811,8 @@
       'AirportRapidLimitedExpress': { 'default': '京急新1000形', 'Toei': '都営5500形 / 京急新1000形 / 京急600形 / 京成3000形(8両)' },
       'AccessExpress': { 'default': '京急新1000形', 'Toei': '都営5500形 / 京急新1000形 / 京急600形 / 京成3000形(8両)' },
       'CommuterLimitedExpress': { 'default': '京急新1000形', 'Toei': '都営5500形 / 京急新1000形 / 京急600形' },
-      'MorningWing': { 'default': '2100形' },
-      'EveningWing': { 'default': '2100形' },
+      'MorningWing': { 'default': '京急2100形' },
+      'EveningWing': { 'default': '京急2100形' },
     },
 
     // ================================================================
@@ -1427,7 +1427,7 @@
 
     // --- 私鉄・モノレール・新交通 ---
     'Daishi_Keikyu': {
-      'Local': { 'default': '1500形 / 新1000形（4両編成）' }
+      'Local': { 'default': '京急1500形 / 京急新1000形（4両編成）' }
     },
     'KeikyuAirport': {
       'Local': { 'default': '京急新1000形 / 京急600形' },
@@ -1439,20 +1439,18 @@
       'AirportRapidLimitedExpress': { 'default': '京急新1000形 / 京急600形' }
     },
     'KeikyuKurihama': {
-      'Local': { 'default': '新1000形 / 1500形' },
-      'LimitedExpress': { 'default': '新1000形 / 2100形 / 1500形' },
-      'RapidLimitedExpress': { 'default': '新1000形 / 2100形 / 1500形' },
-      'MorningWing': { 'default': '2100形 / 新1000形1890番台（Le Ciel）' },
-      'EveningWing': { 'default': '2100形 / 新1000形1890番台（Le Ciel）' },
-      'EveningWing': { 'default': '2100形 / 新1000形1890番台（Le Ciel）' },
-      'MorningWing': { 'default': '2100形 / 新1000形1890番台（Le Ciel）' }
+      'Local': { 'default': '京急新1000形 / 京急1500形' },
+      'LimitedExpress': { 'default': '京急新1000形 / 京急2100形 / 京急1500形' },
+      'RapidLimitedExpress': { 'default': '京急新1000形 / 京急2100形 / 京急1500形' },
+      'MorningWing': { 'default': '京急2100形 / 京急新1000形1890番台（Le Ciel）' },
+      'EveningWing': { 'default': '京急2100形 / 京急新1000形1890番台（Le Ciel）' }
     },
     'KeikyuZushi': {
-      'Local': { 'default': '新1000形（4両編成）' },
-      'Express': { 'default': '新1000形' },
-      'LimitedExpress': { 'default': '新1000形 / 1500形' },
-      'MorningWing': { 'default': '2100形 / 新1000形1890番台（Le Ciel）' },
-      'EveningWing': { 'default': '2100形 / 新1000形1890番台（Le Ciel）' }
+      'Local': { 'default': '京急新1000形（4両編成）' },
+      'Express': { 'default': '京急新1000形' },
+      'LimitedExpress': { 'default': '京急新1000形 / 京急1500形' },
+      'MorningWing': { 'default': '京急2100形 / 京急新1000形1890番台（Le Ciel）' },
+      'EveningWing': { 'default': '京急2100形 / 京急新1000形1890番台（Le Ciel）' }
     },
     'Haijima': {
       'Local': { 'default': '西武20000系 / 西武30000系 / 西武2000系' },
