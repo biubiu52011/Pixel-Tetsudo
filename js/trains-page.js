@@ -163,8 +163,8 @@
 
   function renderList(el) {
     if (!el || !window.DataState) return;
-    var lines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : {};
-    var ul = Array.isArray(lines) ? (function(){ var d={}; lines.forEach(function(l){ d[l.id||l.line_id]=l; }); return d; })() : lines;
+    // Keep initial, filtered and detail rendering on one fused/canonical source.
+    var ul = getLinesData();
     if (!ul || Object.keys(ul).length === 0) {
       // Sync loading animation with the realtime page (rs-loading spinner)
       window.DataState.renderPageState(el, "loading");
