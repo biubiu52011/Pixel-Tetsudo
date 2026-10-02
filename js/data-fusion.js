@@ -1344,13 +1344,11 @@
   function ensureManualTimetable(lineId) {
     return new Promise(function(resolve, reject) {
       try {
-        // Full official realtime coverage is authoritative for train position.
-        // Keep timetable data already loaded elsewhere for service/vehicle/chain
-        // evidence, but never lazy-load manual data that can synthesize positions.
-        if (!mayUseTimetablePosition(lineId)) {
-          resolve(true);
-          return;
-        }
+        // Position authority and vehicle evidence are separate concerns.
+        // FULL realtime lines must still be allowed to lazy-load manual timetable
+        // records because those records may carry vehicleType evidence that ODPT
+        // TrainTimetable does not. mayUseTimetableEstimate() below remains the
+        // gate that prevents manual data from synthesizing positions on FULL lines.
         var varName = lineId + '_MANUAL_TIMETABLES';
         if (window[varName]) { resolve(true); return; }
         // v4.3.1016: ODPT 已有该线时刻表（首都圈等）→ 仍尝试加载 manual（车型实证）：
