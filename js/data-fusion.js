@@ -438,6 +438,27 @@
   // Source railway scope admits canonical candidates across operator boundaries.
   // It never orders candidates or resolves an ambiguous physical-train identity.
   var SOURCE_RAILWAY_LINE_SCOPE = (window.RuntimeConfig && window.RuntimeConfig.SOURCE_RAILWAY_LINE_SCOPE) || {};
+  var _stationLineIndex = null;
+  var _stationLineIndexSource = null;
+
+  function getStationLineIndex(lines) {
+    if (_stationLineIndex && _stationLineIndexSource === lines) return _stationLineIndex;
+    var idx = {};
+    Object.keys(lines || {}).forEach(function(lid) {
+      var line = lines[lid];
+      if (!line || !line.stations) return;
+      for (var i = 0; i < line.stations.length; i++) {
+        var raw = String(line.stations[i] || "");
+        if (!raw) continue;
+        var norm = raw.replace(/-/g, "").toLowerCase();
+        if (!idx[norm]) idx[norm] = [];
+        idx[norm].push({ lineId: lid, stationIndex: i });
+      }
+    });
+    _stationLineIndex = idx;
+    _stationLineIndexSource = lines;
+    return idx;
+  }
 
   // Vehicle identity has one authority. Rendering/icon rules must never infer
   // a train class back into the operational data model.
@@ -572,24 +593,18 @@
           // InnerLoop / OuterLoop is direction evidence only. Keep the
           // source destination intact; rendering prefers a real terminal when present.
           var matchingLines = [];
-          Object.keys(allLines).forEach(function(lid) {
+          var _sourceScope = SOURCE_RAILWAY_LINE_SCOPE[railwayName] || [];
+          var _stationIndex = getStationLineIndex(allLines);
+          var _stationCandidates = _stationIndex[String(stationKey).replace(/-/g, "").toLowerCase()] || [];
+          _stationCandidates.forEach(function(_candidate) {
+            var lid = _candidate.lineId;
             var line = allLines[lid];
-            var lop = TransitConstants && typeof TransitConstants.normalizeOp === "function" ? TransitConstants.normalizeOp(line.operator) : line.operator;
             if (!line || !line.stations) return;
-            // v4.3.494: 直通系统（SotetsuDirect）列车 operator=JR-East，但羽沢横浜国大归属
-            // SotetsuShin-Yokohama 线（operator=Sotetsu）——prefer 表内线路跨 operator 放行，
-            // 否则该站始发列车匹配不到任何线而丢失。
-            var _sourceScope = SOURCE_RAILWAY_LINE_SCOPE[railwayName] || [];
+            var lop = TransitConstants && typeof TransitConstants.normalizeOp === "function" ? TransitConstants.normalizeOp(line.operator) : line.operator;
+            // v4.3.494: 直通系统（SotetsuDirect）列車 operator=JR-East でも、
+            // explicit source scope may admit a cross-operator canonical line.
             if (lop !== top && _sourceScope.indexOf(lid) < 0) return;
-            var idx = line.stations.indexOf(stationKey);
-            // v4.3.407: ODPT 站 ID 与项目站表差异（连字符 Musashi-Nakahara→MusashiNakahara、
-            // 大小写 Inagi-Naganuma→Inaginaganuma）——归一化（去连字符+小写）兜底匹配
-            if (idx < 0) {
-              var normKey = String(stationKey).replace(/-/g, "").toLowerCase();
-              for (var _si = 0; _si < line.stations.length; _si++) {
-                if (String(line.stations[_si]).replace(/-/g, "").toLowerCase() === normKey) { idx = _si; break; }
-              }
-            }
+            var idx = _candidate.stationIndex;
             if (idx < 0) return;
             matchingLines.push({ lid: lid, idx: idx, line: line });
           });
