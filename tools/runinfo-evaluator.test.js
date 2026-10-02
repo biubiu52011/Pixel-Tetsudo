@@ -19,7 +19,7 @@ assert.strictEqual(E.evaluate({signalStatus:"delayed",text:""}).status,"delayed"
 let meta=E.evaluate({structuredStatus:"Delay",text:"信号確認のため約12分遅れています。18時08分頃再開予定。",range:"A駅間～B駅間",cause:"信号確認",resumeEstimate:"2026-10-02T18:08:00+09:00"});
 assert.strictEqual(meta.status,"delayed");
 assert.strictEqual(meta.maxDelay,12);
-assert.strictEqual(meta.interval,"A駅間→B駅");
+assert.strictEqual(meta.interval,"A駅→B駅");
 assert.strictEqual(meta.cause,"信号確認");
 assert.strictEqual(meta.resume,"18:08");
 assert.ok(meta.detail.indexOf("信号確認")>=0);
