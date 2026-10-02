@@ -101,22 +101,22 @@
 
   function resolve(trainNumber, trainName, direction) {
     var key = String(trainNumber || "").trim();
-    var rec = records[key];
-    if (!rec) return "";
+    var entry = records[key];
+    if (!entry) return "";
+    var candidates = Array.isArray(entry) ? entry : [entry];
     var name = String(trainName || "");
-    if (rec.servicePattern && !rec.servicePattern.test(name)) return "";
-    // When both the timetable row and evidence record expose a service name,
-    // require them to agree. Train number alone remains usable when ODPT omits
-    // trainName, but can never override a conflicting explicit service identity.
-    if (name && (rec.service || rec.services)) {
-      var actual = _normServiceName(name);
-      var expectedList = (rec.services || [rec.service]).map(_normServiceName);
-      // Coupled Revaty trains can expose either portion name in ODPT while both
-      // portions share the same physical formation before/after split/join.
-      if (actual && expectedList.length && expectedList.indexOf(actual) < 0) return "";
-    }
-    if (direction && rec.direction && String(direction).toLowerCase() !== String(rec.direction).toLowerCase()) return "";
-    return rec.vehicleType || "";
+    var matched = candidates.filter(function(rec) {
+      if (rec.servicePattern && !rec.servicePattern.test(name)) return false;
+      if (name && (rec.service || rec.services)) {
+        var actual = _normServiceName(name);
+        var expectedList = (rec.services || [rec.service]).map(_normServiceName);
+        if (actual && expectedList.length && expectedList.indexOf(actual) < 0) return false;
+      }
+      if (direction && rec.direction &&
+          String(direction).toLowerCase() !== String(rec.direction).toLowerCase()) return false;
+      return true;
+    });
+    return matched.length === 1 ? (matched[0].vehicleType || "") : "";
   }
 
   window.TOBU_LIMITED_EXPRESS_VEHICLE_EVIDENCE = {
