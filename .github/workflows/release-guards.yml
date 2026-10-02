@@ -26,18 +26,18 @@ jobs:
         run: node tools/line-identity-coverage.test.js
       - name: ODPT credential model
         run: node tools/odpt-credential-model.test.js
-      - name: Existing running-chain tests
+      - name: Current runtime regression tests
         shell: bash
         run: |
           set -e
           found=0
-          for f in tools/*running-chain*.test.js; do
+          for f in tools/runinfo-*.test.js tools/performance-lifecycle.test.js; do
             [ -f "$f" ] || continue
             found=1
             echo "==> $f"
             node "$f"
           done
           if [ "$found" -eq 0 ]; then
-            echo "No running-chain tests found"
+            echo "No current runtime regression tests found"
             exit 1
           fi
