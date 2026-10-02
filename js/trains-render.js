@@ -497,31 +497,72 @@
     }
   }
 
+  function _isRealtimePositionFresh(p) {
+    if (!p || p.positionSource !== "realtime-api") return true;
+    if (!p.sourceValidUntil) return true;
+    var validUntil = Date.parse(p.sourceValidUntil);
+    return !isNaN(validUntil) && validUntil >= Date.now();
+  }
+
+  function _filterExpiredRealtimePositions(positions) {
+    return (positions || []).filter(_isRealtimePositionFresh);
+  }
+
+  function _formatSourceTime(value) {
+    if (!value) return "";
+    var d = new Date(value);
+    if (isNaN(d.getTime())) return "";
+    try {
+      return d.toLocaleTimeString(window.currentLang || "ja", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+    } catch(e) {
+      return d.toLocaleTimeString();
+    }
+  }
+
   // v4.3.469: 推定データ注記——いずれかの列車が時刻表推定なら表示。
   // リアルタイム位置のみの路線には出さない。増分・全再構築の両パスから呼ばれる（冪等）。
   // v4.3.511: 位置を容器内 appendChild から「容器正下方（外部）」に修正（insertAdjacentElement afterend）——
   // 元実装は容器内末尾に置いており、v4.3.469 の設計意図（容器外・下方中央）と不一致だった。
   function updateEstimatedNote(el, positions) {
     try {
-      // v4.3.517: 修复 note 重复堆积——note 插在 el 之后（afterend，兄弟节点），旧代码却只在
-      // el 内部查 .tp-est-note（永远删不到），每次刷新/每趟推定列车都堆一个新条
-      // （用户投诉"底部重复这么多次提示"）。改为清理 el 父级下全部旧 note 再插唯一一个。
       var _oldNotes = el.parentNode ? el.parentNode.querySelectorAll('.tp-est-note') : [];
       for (var _oi = 0; _oi < _oldNotes.length; _oi++) _oldNotes[_oi].remove();
       if (!positions || !positions.length) return;
       var anyEst = false;
       var anyRealtime = false;
+      var latestRealtimeAt = "";
+      var latestRealtimeMs = 0;
       for (var _ei = 0; _ei < positions.length; _ei++) {
-        var _rank = _trainPositionRank(positions[_ei]);
-        if (_rank === 0) anyRealtime = true;
-        else anyEst = true;
+        var _p = positions[_ei];
+        var _rank = _trainPositionRank(_p);
+        if (_rank === 0) {
+          anyRealtime = true;
+          if (_p.sourceUpdatedAt) {
+            var _ms = Date.parse(_p.sourceUpdatedAt);
+            if (!isNaN(_ms) && _ms > latestRealtimeMs) {
+              latestRealtimeMs = _ms;
+              latestRealtimeAt = _p.sourceUpdatedAt;
+            }
+          }
+        } else {
+          anyEst = true;
+        }
       }
-      if (!anyEst) return;
+      var parts = [];
+      if (anyRealtime && latestRealtimeAt) {
+        parts.push("ODPT " + _formatSourceTime(latestRealtimeAt));
+      }
+      if (anyEst) {
+        parts.push(anyRealtime
+          ? (t("trains.estimated_mixed_note") || "*Only supplemental non-realtime positions are estimated")
+          : (t("trains.estimated_note") || "*Data calculated from timetable"));
+      }
+      if (!parts.length) return;
       var note = document.createElement("div");
       note.className = "tp-est-note";
-      note.textContent = anyRealtime
-        ? (t("trains.estimated_mixed_note") || "*Only supplemental non-realtime positions are estimated")
-        : (t("trains.estimated_note") || "*Data calculated from timetable");
+      note.setAttribute("role", "status");
+      note.setAttribute("aria-live", "polite");
+      note.textContent = parts.join(" · ");
       el.insertAdjacentElement('afterend', note);
     } catch(e) { /* note is best-effort */ }
   }
@@ -548,7 +589,8 @@
 
   function renderTrainMap(el, line, lineId) {
     try {
-      var positions = _sortTrainPositionsBySource(getRealtimePositions(lineId));
+      // ODPT dynamic data outside dct:valid must not remain visible as realtime.
+      var positions = _sortTrainPositionsBySource(_filterExpiredRealtimePositions(getRealtimePositions(lineId)));
       var _lang = window.currentLang || "ja";
       var _rS = (window.RailwayDB && window.RailwayDB.resolveStationName) ? function(id){ return window.RailwayDB.resolveStationName(id, _lang) || id; } : function(id){ return id; };
       
