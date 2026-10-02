@@ -1179,23 +1179,9 @@
           iconSrc = window.TrainVehicle.resolve(_vrCtx).iconPath || '';
           if (iconSrc) window.__trainIconCache[_icKey] = iconSrc;
         }
-        // 回退：TrainVehicle 未加载，或 resolve 无图——旧查表 + S4 图标规则
-        if (!iconSrc) {
-          var _candArr = null;
-          if (window.TRAIN_NO_VEHICLE) {
-            _candArr = window.TRAIN_NO_VEHICLE[p.trainNumber || p.trainId] || null;
-          }
-          if (_candArr && _candArr.length > 0 && window.TrainIcons && typeof window.TrainIcons.resolveVehicleIcon === "function") {
-            iconSrc = window.TrainIcons.resolveVehicleIcon(_candArr.join(' / ')) || '';
-            if (iconSrc) window.__trainIconCache[_icKey] = iconSrc;
-          }
-        }
-        if (!iconSrc) {
-          var _carOp = p.trainOperator || line.operator;
-          var _byOp = !!p.trainOperator && _carOp !== line.operator;
-          iconSrc = (window.TrainIcons && typeof window.TrainIcons.getTrainIcon === "function") ? window.TrainIcons.getTrainIcon(p.fusionLineId || lineId, _carOp, trainUid, p.stationIndex, p.trainType, _byOp) : "";
-          if (iconSrc) window.__trainIconCache[_icKey] = iconSrc;
-        }
+        // No second vehicle resolver lives in the renderer. If TrainVehicle cannot
+        // produce an icon from evidence, fall through to the neutral circle below.
+        // This prevents current-line/icon rules from inventing a physical vehicle.
         var isEst = p.estimated === true;
         var iconCls = isEst ? "train-icon estimated" : "train-icon";
         
