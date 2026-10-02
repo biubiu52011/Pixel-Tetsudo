@@ -10,6 +10,35 @@
 
   var odptData = { trains: {}, delayInfo: {}, realtimePositions: {} };
   function _positionIdentity(p) { return p && (p.runningChainId || p.trainId) || ""; }
+
+  // Evidence-backed vehicle identity follows the physical running chain, not
+  // the currently rendered line. Never seed this registry from map/fleet/icon
+  // estimates; only realtime evidence already vetted upstream may enter it.
+  var _chainVehicleRegistry = {};
+  function _rememberChainVehicle(p) {
+    if (!p || !p.runningChainId || p.vehicleResolvedFromRealtime !== true || !p.vehicleIconPath) return;
+    _chainVehicleRegistry[p.runningChainId] = {
+      trainClass: p.trainClass || "",
+      vehicleType: p.vehicleType || "",
+      vehicleIconPath: p.vehicleIconPath || "",
+      vehicleSource: p.vehicleSource || "",
+      vehicleConfidence: p.vehicleConfidence || "none",
+      vehicleResolution: p.vehicleResolution || null
+    };
+  }
+  function _inheritChainVehicle(p) {
+    if (!p || !p.runningChainId) return p;
+    var v = _chainVehicleRegistry[p.runningChainId];
+    if (!v) return p;
+    p.trainClass = v.trainClass || p.trainClass || "";
+    p.vehicleType = v.vehicleType || p.vehicleType || "";
+    p.vehicleIconPath = v.vehicleIconPath || p.vehicleIconPath || "";
+    p.vehicleSource = v.vehicleSource || p.vehicleSource || "";
+    p.vehicleConfidence = v.vehicleConfidence || p.vehicleConfidence || "none";
+    p.vehicleResolution = v.vehicleResolution || p.vehicleResolution || null;
+    p.vehicleInheritedFromRunningChain = true;
+    return p;
+  }
   var subscribers = [];
   var localData = { lines: {}, statusMap: {} };
   var _lastFusedData = null;
@@ -826,6 +855,16 @@
               odptData.delayInfo,
               posMap
             );
+
+            // Timetable resolution is where canonical runningChainId becomes
+            // available. First bind any realtime evidence that already carries
+            // the same chain, then let non-realtime segments inherit it.
+            Object.keys(posMap).forEach(function(_vlid) {
+              (posMap[_vlid] || []).forEach(_rememberChainVehicle);
+            });
+            Object.keys(estimated).forEach(function(_vlid) {
+              (estimated[_vlid] || []).forEach(_inheritChainVehicle);
+            });
             var estCount = 0;
             Object.keys(estimated).forEach(function(lid) {
               // Full official realtime coverage owns position truth. Timetable remains loaded
