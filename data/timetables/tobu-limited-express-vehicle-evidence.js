@@ -115,7 +115,7 @@
       .toLowerCase();
   }
 
-  function resolve(trainNumber, trainName, direction, serviceDate) {
+  function resolve(trainNumber, trainName, direction, serviceDate, context) {
     var key = String(trainNumber || "").trim();
     var entry = records[key];
     if (!entry) return "";
@@ -135,6 +135,9 @@
         if (rec.validFrom && d < rec.validFrom) return false;
         if (rec.validUntil && d > rec.validUntil) return false;
       }
+      var ctx = context || {};
+      if (rec.operator && String(ctx.operator || "").indexOf(rec.operator) < 0) return false;
+      if (rec.lineId && String(ctx.lineId || "") !== rec.lineId) return false;
       return true;
     });
     return matched.length === 1 ? (matched[0].vehicleType || "") : "";
