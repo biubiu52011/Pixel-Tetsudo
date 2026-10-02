@@ -561,18 +561,9 @@
   function initLangSupport() {
     if (typeof window.onLanguageChange === "function") {
       window.onLanguageChange(function() {
-        // Re-fuse so interval station names / direction suffix follow the selected
-        // language. DataFusion.refresh() synchronously emits to its subscribers,
-        // and DataState's fusion subscriber calls setLines() -> notify(). Do not
-        // notify a second time here or one language switch causes duplicate renders.
-        var refreshed = false;
-        try {
-          if (window.DataFusion && typeof window.DataFusion.refresh === "function") {
-            window.DataFusion.refresh();
-            refreshed = true;
-          }
-        } catch(e) {}
-        if (!refreshed) notify();
+        // Fusion data is language-neutral. Translation happens in DataState/view
+        // renderers, so a language switch must not trigger a full-network fuse.
+        notify();
       });
     }
   }
