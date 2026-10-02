@@ -365,6 +365,11 @@ function main() {
   assert(!chuoLocalLtd, 'ChuoSobuLocal must not inherit Chuo limited-express stock', { chuoLocalLtd });
   const unknownType = win.VehicleTypeMap.resolve('ChuoRapid', 'odpt.TrainType:JR-East.UnmappedSpecialService', null);
   assert(!unknownType, 'unmapped train type must remain unresolved instead of falling back to Local', { unknownType });
+  const jobanLtd = win.VehicleTypeMap.resolve('Joban', 'odpt.TrainType:JR-East.LimitedExpress', null);
+  assert(/E657/.test(jobanLtd), 'Joban operating system must resolve Hitachi/Tokiwa E657', { jobanLtd });
+  const uenoTokyoLtd = win.VehicleTypeMap.resolve('UenoTokyo', 'odpt.TrainType:JR-East.LimitedExpress', null);
+  assert(/E657/.test(uenoTokyoLtd), 'UenoTokyo corridor must preserve Joban limited-express E657 identity', { uenoTokyoLtd });
+
 
   assertNoCurrentFictionalAsset(win);
   assertNoFilenameDependentIdentity(win);
