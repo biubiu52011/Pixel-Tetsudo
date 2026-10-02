@@ -247,6 +247,30 @@ function main() {
     assert(vt === '西武40000系', 'S-TRAIN must resolve only Seibu 40000 series', { lineId, dest, vt });
   });
 
+  const yurakuchoSTrain = win.VehicleTypeMap.resolve('Yurakucho', 'odpt.TrainType:Seibu.S-TRAIN', null);
+  assert(yurakuchoSTrain === '西武40000系', 'Yurakucho S-TRAIN must resolve only Seibu 40000 series', { yurakuchoSTrain });
+
+  // Sotetsu 20000 = 10-car Tokyu Toyoko through-service stock.
+  // Sotetsu 21000 = 8-car Tokyu Meguro / Namboku / Mita through-service stock.
+  [
+    ['TokyuToyoko', 'Local', 'odpt.Station:Sotetsu.Main.Ebina'],
+    ['TokyuToyoko', 'Express', 'odpt.Station:Sotetsu.Izumino.Shonandai'],
+    ['Fukutoshin', 'Local', 'odpt.Station:Sotetsu.Main.Ebina']
+  ].forEach(([lineId, type, dest]) => {
+    const vt = win.VehicleTypeMap.resolve(lineId, 'odpt.TrainType:Tokyu.' + type, dest);
+    assert(!/21000/.test(vt), 'Toyoko-side through fleet must not contain Sotetsu 21000', { lineId, type, dest, vt });
+  });
+  [
+    ['TokyuMeguro', 'Local', 'odpt.Station:Sotetsu.Main.Ebina'],
+    ['TokyuMeguro', 'Express', 'odpt.Station:Sotetsu.Izumino.Shonandai'],
+    ['Namboku', 'Local', 'odpt.Station:Sotetsu.Main.Ebina'],
+    ['Namboku', 'Express', 'odpt.Station:Sotetsu.Main.Ebina'],
+    ['Mita', 'Local', 'odpt.Station:Sotetsu.Main.Ebina']
+  ].forEach(([lineId, type, dest]) => {
+    const vt = win.VehicleTypeMap.resolve(lineId, 'odpt.TrainType:TokyoMetro.' + type, dest);
+    assert(!/20000/.test(vt) && /21000/.test(vt), 'Meguro-side Sotetsu through fleet must use 21000, not 20000', { lineId, type, dest, vt });
+  });
+
 
   expectMap(win, 'Yamanote P1/critical', 'Yamanote', 'Local', 'E235系0番台（山手線）', ['E235系1000番台', 'E235系総武中央線']);
   expectMap(win, 'Tozai JR-East local P0', 'Tozai', 'Local', 'E231系800番台（東西線直通） / 東京メトロ05系 / 東京メトロ07系 / 東京メトロ15000系', ['E231系500番台', 'JR E231系'], 'odpt.Station:JR-East.ChuoSobuLocal.Nakano');
