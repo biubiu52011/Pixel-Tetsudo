@@ -487,6 +487,15 @@ function main() {
   const mmSTrain = win.VehicleTypeMap.resolve('MinatoMirai', 'odpt.TrainType:Seibu.S-TRAIN', null);
   assert(mmSTrain === '西武40000系', 'Minatomirai S-TRAIN must resolve only Seibu 40000 series', { mmSTrain });
 
+    const fLocalTobu = win.VehicleTypeMap.resolve('Fukutoshin', 'odpt.TrainType:TokyoMetro.Local', 'odpt.Station:Tobu.Tojo.Shiki');
+  assert(/東武9000型/.test(fLocalTobu) && /東武9050型/.test(fLocalTobu) && /東武50070系/.test(fLocalTobu),
+    'Fukutoshin local Tobu through pool must preserve 9000/9050/50070', { fLocalTobu });
+  assert(!/90000/.test(fLocalTobu), 'Fukutoshin local must not confuse Tobu 9000 with 90000 series', { fLocalTobu });
+  const fLocal = win.VehicleTypeMap.resolve('Fukutoshin', 'odpt.TrainType:TokyoMetro.Local', null);
+  assert(/17000系\(8両\/10両\)/.test(fLocal), 'ordinary Fukutoshin service must preserve 17000 mixed 8/10-car ambiguity', { fLocal });
+  const mmF = win.VehicleTypeMap.resolve('MinatoMirai', 'odpt.TrainType:Tokyu.F-Liner', null);
+  assert(/17000系\(10両\)/.test(mmF) && !/Y500/.test(mmF), 'Minatomirai F-Liner must remain a 10-car pool without Y500', { mmF });
+
     const ikeSTrain = win.VehicleTypeMap.resolve('Ikebukuro', 'odpt.TrainType:Seibu.S-TRAIN', null);
   assert(ikeSTrain === '西武40000系', 'Seibu Ikebukuro S-TRAIN must resolve only Seibu 40000 series', { ikeSTrain });
 
