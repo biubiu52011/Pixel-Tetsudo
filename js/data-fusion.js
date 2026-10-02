@@ -1370,7 +1370,18 @@
               var manualTT = window[varName];
               var mLine = allLines[lineId];
               if (mLine && mLine.stations && manualTT && manualTT.length > 0) {
-                manualTT.forEach(function(tt) { if (tt) tt._positionSource = "station-timetable"; });
+                manualTT.forEach(function(tt) {
+                  if (!tt) return;
+                  tt._positionSource = "station-timetable";
+                  // Manual timetable vehicleType is train-level evidence even
+                  // when FULL realtime policy forbids timetable-derived position.
+                  var _mTrainNo = tt["odpt:trainNumber"] || tt["odpt:train"] || "";
+                  var _mVehicle = tt["vehicleType"] || tt["odpt:vehicleType"] || "";
+                  if (_mTrainNo && _mVehicle && window.TrainVehicle &&
+                      typeof window.TrainVehicle.registerVehicle === "function") {
+                    window.TrainVehicle.registerVehicle(_mTrainNo, _mVehicle);
+                  }
+                });
                 var mEst = window.TrainPositionEstimator.estimateLinePositions(
                   lineId, mLine, manualTT, odptData.delayInfo, mLine.operator
                 );
