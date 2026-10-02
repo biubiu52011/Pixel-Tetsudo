@@ -774,12 +774,8 @@ window.TRANSFER_HINTS = {
   },
   "Osaki": {
     type: "outside",
-    note: {
-      ja: "（りんかい線連絡・要出站）",
-      zh: "（连络临海线・需出站）",
-      en: "(Connects to Rinkai Line, outside transfer)",
-      ko: "（린카이선 연결・역외 환승）"
-    }
+    targetLineKey: "line.Rinkai",
+    templateKey: "transfer.outside_line"
   }
 };
 
@@ -787,7 +783,18 @@ window.TRANSFER_HINTS = {
 window.getTransferHint = function(stationId, lang) {
   if (!window.TRANSFER_HINTS || !window.TRANSFER_HINTS[stationId]) return null;
   var hint = window.TRANSFER_HINTS[stationId];
-  var l = lang || "ja";
+  var l = lang || window.currentLang || "ja";
+
+  // Structured hints resolve entity labels through the central i18n dictionary.
+  if (hint.targetLineKey && hint.templateKey && window.translations) {
+    var dict = window.translations[l] || window.translations.ja || {};
+    var fallbackDict = window.translations.ja || {};
+    var lineName = dict[hint.targetLineKey] || fallbackDict[hint.targetLineKey] || hint.targetLineKey;
+    var template = dict[hint.templateKey] || fallbackDict[hint.templateKey] || "{line}";
+    return String(template).replace(/\{line\}/g, lineName);
+  }
+
+  // Legacy notes remain supported while entries are migrated to structured data.
   if (hint.note && hint.note[l]) return hint.note[l];
   if (hint.note && hint.note.ja) return hint.note.ja;
   return null;
@@ -827,70 +834,15 @@ window.getTransferHint = function(stationId, lang) {
    */
   var TRUNK_EXTENSION_ALLOW = {};
 
-  /**
-   * 线路级官方实时位置权威表。
-   * 仅登记已由官方实时数据集明确覆盖、且项目已有一对一 railway 映射的线路。
-   * 注意：不得按 operator 整体推导；JR-East 等存在部分线路/部分区间覆盖，必须逐线验证后再加入。
-   * 值为 true 表示：位置真值只来自官方 realtime，时刻表仍可用于行先/运行链/车型证据，
-   * 但不得合成列车位置。
-   */
-  var AUTHORITATIVE_REALTIME_LINES = {
-    /*
-     * Authoritative means ALL of:
-     *   1) official JSON train-location coverage is complete for this project line;
-     *   2) the project has an explicit/canonical railway mapping;
-     *   3) the current runtime actually consumes that JSON feed through odpt:Train.
-     * GTFS-RT-only availability is not sufficient until a GTFS-RT consumer exists.
-     */
-
-    // Toei JSON Train Location. Mita is excluded because Meguro-Shirokane-takanawa
-    // is outside the official location feed.
-    "Asakusa": true,
-    "Shinjuku": true,
-    "Oedo": true,
-    "Arakawa": true,
-
-    // Keio JSON Train Location.
-    "KeioMain": true,
-    "KeioSagamihara": true,
-    "KeioDobutsuen": true,
-    "KeioNew": true,
-    "KeioInokashira": true,
-    "KeioKeibajo": true,
-    "KeioTakao": true,
-
-    // Tobu JSON Train Location: only complete project lines inside official
-    // coverage. Kameido is excluded because several sections are indistinguishable.
-    "TobuSkytree": true,
-    "TobuNoda": true,
-    "Noda": true,
-    "Tojo": true,
-    "Ogose": true,
-    "TobuDaishi": true,
-
-    // Keikyu is intentionally not authoritative yet. Official JSON location
-    // exists for covered territory, but ODPT_ENDPOINTS.Keikyu.train is currently
-    // disabled, so the runtime does not consume that position source end-to-end.
-
-    // Tokyo Metro / Yokohama Municipal / MIR / TamaMonorail are intentionally
-    // not authoritative here until their currently published realtime format is
-    // consumed by this runtime rather than inferred from timetable positions.
-    // JR-East remains line/section-limited and is not blanket-authoritative.
-  }
-
   // ========== 直通运行 ==========
 
   /**
-   * 直通运行 railway → 归属优先表（跨 operator 放行）。
-   * 解决：直通系统列车 fromStation 专属站，LINE_RAILWAY_CODE 反查无映射时 fallback "站数最多"
-   * 导致误配（例：SotetsuDirect→Yamanote）。
-   * 结构：exclude 排除环线；prefer 按优先级归属。
+   * Source railway identity scope for feeds whose railway entity spans canonical
+   * project lines/operators. This is candidate admission only, never a preference
+   * order and never proof that two records are the same physical train.
    */
-  var THROUGH_RAILWAY_FALLBACK = {
-    "SotetsuDirect": {
-      exclude: ["Yamanote"],
-      prefer: ["SotetsuShinYokohama", "Yokosuka", "Saikyo", "ShonanShinjuku"]
-    }
+  var SOURCE_RAILWAY_LINE_SCOPE = {
+    "SotetsuDirect": ["SotetsuShinYokohama", "Yokosuka", "Saikyo", "ShonanShinjuku"]
   };
 
   /**
@@ -902,6 +854,75 @@ window.getTransferHint = function(stationId, lang) {
     "JR-East", "TokyoMetro", "Toei", "YokohamaMunicipal", "Keio",
     "Sotetsu", "Tokyu", "Tobu", "TWR", "MIR", "TamaMonorail"
   ];
+
+  /**
+   * 实时位置覆盖策略（通用能力模型，不在融合算法中硬编码线路）。
+   *
+   * mode:
+   *   FULL      - 已证明完整覆盖；禁止 timetable 生成/补充位置。
+   *   HYBRID    - 默认。实时优先，缺失列车/区间允许 timetable 补位。
+   *   SEGMENTED - 只有声明区间的实时位置具权威性；区间外允许 timetable。
+   *   COARSE    - 实时源只能给出粗粒度位置；允许 timetable 提供更细位置，但不得覆盖
+   *               同一列车已有的实时事实。
+   *   UNKNOWN   - 覆盖完整性未知；行为等同 HYBRID，但明确禁止升级为 FULL。
+   *
+   * SEGMENTED fields:
+   *   coveredSegments:  [{ fromStation, toStation }]  实时权威覆盖区间；区间内禁止 timetable 造位置。
+   *   excludedSegments: [{ fromStation, toStation }]  已知实时缺口；缺口内允许 timetable 补位。
+   * 两者可并存：excludedSegments 优先。站 ID 无法解析时 fail-open，继续 timetable，避免误删列车。
+   *
+   * 合并不变量：
+   *   1) 同一列车 realtime position 永远优先，timetable 只能补 metadata。
+   *   2) HYBRID/UNKNOWN 默认允许补缺，不因“API 有返回”自动升级 FULL。
+   *   3) SEGMENTED 只在已声明权威区间抑制 timetable；区间外继续补。
+   *   4) COARSE 保留 realtime 为位置事实，timetable 可补缺失列车但不能覆盖同车实时位置。
+   *   5) running-chain 可跨覆盖边界传递 identity/service/destination 证据，不改变 positionSource。
+   * 规则：线路事实只写配置；DataFusion/Estimator 不得按具体 lineId 写专属分支。
+   */
+  var REALTIME_POSITION_POLICY = {
+    defaultMode: "HYBRID",
+    staleAfterMs: 90000,
+    lines: {
+      "Asakusa": { mode: "FULL" },
+      "Shinjuku": { mode: "FULL" },
+      "Oedo": { mode: "FULL" },
+      "Arakawa": { mode: "FULL" },
+      "KeioMain": { mode: "FULL" },
+      "KeioSagamihara": { mode: "FULL" },
+      "KeioDobutsuen": { mode: "FULL" },
+      "KeioNew": { mode: "FULL" },
+      "KeioInokashira": { mode: "FULL" },
+      "KeioKeibajo": { mode: "FULL" },
+      "KeioTakao": { mode: "FULL" },
+      "TobuSkytree": { mode: "FULL" },
+      "TobuNoda": { mode: "FULL" },
+      "Noda": { mode: "FULL" },
+      "Tojo": { mode: "FULL" },
+      "Ogose": { mode: "FULL" },
+      "TobuDaishi": { mode: "FULL" },
+
+      // Known partial/limited sources. These declarations are facts, not algorithm branches.
+      // SEGMENTED without a verified local station range intentionally fails open to timetable.
+      "Mita": { mode: "SEGMENTED" },
+      "Chuo": { mode: "SEGMENTED" },
+      "Ome": { mode: "SEGMENTED" },
+      "Joban": { mode: "SEGMENTED" },
+      "Takasaki": { mode: "SEGMENTED" },
+
+      // Official source has insufficient positional granularity on part of this railway.
+      "TobuKameido": { mode: "COARSE" },
+
+      // Explicitly known not to be complete realtime-position sources.
+      "TobuIsesaki": { mode: "HYBRID" },
+      "TobuNikko": { mode: "HYBRID" },
+      "Tsurumi": { mode: "HYBRID" },
+      "TsurumiUmiShibaura": { mode: "HYBRID" },
+      "TsurumiOkawa": { mode: "HYBRID" },
+      "NambuBranch": { mode: "HYBRID" },
+      "Sagami": { mode: "HYBRID" },
+      "Hachiko": { mode: "HYBRID" }
+    }
+  };
 
   // ========== ODPT 站 ID 别名映射（补丁式修复，随发现持续追加）==========
 
@@ -1050,10 +1071,10 @@ window.getTransferHint = function(stationId, lang) {
     // 线路层级
     TRUNK_MAIN_LINE_IDS: TRUNK_MAIN_LINE_IDS,
     TRUNK_EXTENSION_ALLOW: TRUNK_EXTENSION_ALLOW,
-    AUTHORITATIVE_REALTIME_LINES: AUTHORITATIVE_REALTIME_LINES,
     // 直通运行
-    THROUGH_RAILWAY_FALLBACK: THROUGH_RAILWAY_FALLBACK,
+    SOURCE_RAILWAY_LINE_SCOPE: SOURCE_RAILWAY_LINE_SCOPE,
     PRIORITY_OPS: PRIORITY_OPS,
+    REALTIME_POSITION_POLICY: REALTIME_POSITION_POLICY,
     // ODPT 站 ID 别名
     STATION_ALIAS: STATION_ALIAS,
     STATION_ALIAS_BY_RAILWAY: STATION_ALIAS_BY_RAILWAY,
@@ -1084,51 +1105,181 @@ window.getTransferHint = function(stationId, lang) {
 
 
 // ===== through-service.js =====
+/*
+ * Pixel Tetsudo - Through Service (直通運転) Provider
+ *
+ * Single source of truth for through-service (相互直通運転) relationships.
+ * Provider: ThroughService
+ * Consumers: DataFusion (timetable expansion), RouteSearch (transfer penalty), TrainsPage (display)
+ *
+ */
 (function() {
   "use strict";
 
-  function _relations() { return window.LineServiceRelations || []; }
 
-  function _relation(lineId, partnerId) {
-    var rs = _relations();
-    for (var i = 0; i < rs.length; i++) {
-      var r = rs[i];
-      if (!r || r.relation !== "THROUGH_SERVICE") continue;
-      if ((r.lineA === lineId && r.lineB === partnerId) ||
-          (r.lineB === lineId && r.lineA === partnerId)) return r;
+
+  // 接続駅（線路図の直通マーカーを実際の接続駅のみに限定）
+  var THROUGH_JOIN_STATIONS = {
+    // 埼京
+    "Saikyo": { "Kawagoe": ["Omiya"], "Rinkai": ["Osaki"], "SotetsuMain": [] },
+    "Kawagoe": { "Saikyo": ["Omiya"], "KawagoeWest": ["Kawagoe"] },
+    "Rinkai": { "Saikyo": ["Osaki"] },
+    // 副都心・有楽町・西武・東上・東横
+    "Fukutoshin": { "Tojo": ["Wakoshi"], "TokyuToyoko": ["Shibuya"], "SeibuYurakucho": ["Kotake-Mukaihara"] },
+    "Yurakucho": { "Tojo": ["Wakoshi"], "SeibuYurakucho": ["Kotake-Mukaihara"] },
+    "SeibuYurakucho": { "Fukutoshin": ["Kotake-Mukaihara"], "Yurakucho": ["Kotake-Mukaihara"], "SeibuChichibu": [] },
+    "Tojo": { "Fukutoshin": ["Wakoshi"], "Yurakucho": ["Wakoshi"] },
+    "TokyuToyoko": { "Fukutoshin": ["Shibuya"], "MinatoMirai": ["Yokohama"] },
+    "MinatoMirai": { "TokyuToyoko": ["Yokohama"] },
+    // 半蔵門・日比谷・東武
+    "Hanzomon": { "TobuSkytree": ["Oshiage"], "TobuIsesaki": ["Oshiage"], "TokyuDenEnToshi": ["Shibuya"] },
+    // 東武スカイツリー・伊勢崎（東武動物公園）
+    "TobuSkytree": { "Hanzomon": ["Oshiage"], "Hibiya": ["Kita-Senju"], "TobuIsesaki": ["Tobu-Dobutsu-Koen"] },
+    "TobuIsesaki": { "Hibiya": ["Kita-Senju"], "Hanzomon": ["Oshiage"], "TobuSkytree": ["Tobu-Dobutsu-Koen"], "TobuNikko": ["Tobu-Dobutsu-Koen"] },
+    "Hibiya": { "TobuSkytree": ["Kita-Senju"], "TobuIsesaki": ["Kita-Senju"] },
+    // 浅草・京成・京急
+    "Asakusa": { "Keikyu": ["Sengakuji"], "Keisei": ["Oshiage"], "KeiseiOshiage": ["Oshiage"] },
+    "Keikyu": { "Asakusa": ["Sengakuji"], "KeikyuAirport": ["Keikyu-Kamata"], "KeikyuKurihama": ["Horinouchi"], "KeikyuZushi": ["Kanazawa-Hakkei"] },
+    "KeikyuAirport": { "Keikyu": ["Keikyu-Kamata"] },
+    "KeikyuKurihama": { "Keikyu": ["Horinouchi"] },
+    "KeikyuZushi": { "Keikyu": ["Kanazawa-Hakkei"] },
+    "Keisei": { "Asakusa": ["Oshiage"], "KeiseiOshiage": ["Aoto"], "NaritaSkyAccess": ["Keisei-Takasago"] },
+    "KeiseiOshiage": { "Asakusa": ["Oshiage"], "Keisei": ["Aoto"] },
+    "NaritaSkyAccess": { "Keisei": ["Keisei-Takasago"] },
+    // 千代田
+    "Chiyoda": { "JobanLocal": ["Ayase"], "OdakyuTama": ["Yoyogi-Uehara"], "Odawara": ["Yoyogi-Uehara"] },
+    "JobanLocal": { "Chiyoda": ["Ayase"] },
+    "OdakyuTama": { "Chiyoda": ["Yoyogi-Uehara"], "Odawara": [] },
+    "Odawara": { "Chiyoda": ["Yoyogi-Uehara"], "OdakyuTama": ["Shin-Yurigaoka"] },
+    // 東西
+    "Tozai": { "ChuoSobuLocal": ["Nakano"] },
+    "ChuoSobuLocal": { "Tozai": ["Nakano"] },
+    // 新宿線×京王（京王線はデータにないため表示されない）
+    "Shinjuku": { "Keio": ["Shinjuku"], "KeioMain": ["Shinjuku"] },
+    // 湘南新宿ライン
+    "ShonanShinjuku": { "UtsunomiyaJR": ["Omiya"], "Takasaki": ["Omiya"], "Yokosuka": ["Ofuna"] },
+    // 上野東京ライン
+    "UenoTokyo": { "UtsunomiyaJR": ["Omiya"], "Takasaki": ["Omiya"], "Joban": ["Ueno"], "Tokaido": [] },
+    "Takasaki": { "ShonanShinjuku": ["Omiya"], "UenoTokyo": ["Omiya"], "Tokaido": ["Tokyo"] },
+    "Yokosuka": { "ShonanShinjuku": ["Ofuna"], "SobuRapid": ["Tokyo"] },
+    "UtsunomiyaJR": { "ShonanShinjuku": ["Omiya"], "UenoTokyo": ["Omiya"], "Tokaido": ["Tokyo"] },
+    "Joban": { "UenoTokyo": ["Ueno"] },
+    "Tokaido": { "UtsunomiyaJR": ["Tokyo"], "Takasaki": ["Tokyo"], "UenoTokyo": ["Tokyo"], "Ito": ["Atami"] },
+    "Ito": { "Tokaido": ["Atami"] },
+    // 中央線
+    "ChuoRapid": { "Ome": ["Tachikawa"], "Itsukaichi": ["Haijima"], "Chuo": ["Takao"] },
+    "Chuo": { "ChuoRapid": ["Takao"], "Shinonoi": ["Shiojiri"], "ChuoTatsuno": ["Okaya"] },
+    "Ome": { "ChuoRapid": ["Tachikawa"] },
+    "Itsukaichi": { "ChuoRapid": ["Haijima"] },
+    // 総武快速×横須賀
+    "SobuRapid": { "Yokosuka": ["Tokyo"] },
+    // 京葉
+    // 京葉（武蔵野⇄京葉は西船橋で直通するが、京葉線の駅表に西船橋は無い→京葉側マーカー抑制）
+    "Keiyo": { "Uchibo": ["Soga"], "Sotobo": ["Soga"], "Musashino": [] },
+    "Musashino": { "Keiyo": ["Nishi-Funabashi"] },
+    "Uchibo": { "Keiyo": ["Soga"] },
+    "Sotobo": { "Keiyo": ["Soga"] },
+    // 八高・川越線西（高麗川）
+    "Hachiko": { "KawagoeWest": ["Komagawa"] },
+    "KawagoeWest": { "Kawagoe": ["Kawagoe"], "Hachiko": ["Komagawa"] },
+    // 南北・三田・目黒
+    "Namboku": { "TokyuMeguro": ["Meguro"] },
+    "Mita": { "TokyuMeguro": ["Meguro"] },
+    "TokyuMeguro": { "Mita": ["Meguro"], "Namboku": ["Meguro"], "SotetsuShinYokohama": [] },
+    // 相鉄（埼京・東横とはデータ上接続駅なし→マーカー非表示）
+    "SotetsuMain": { "Saikyo": [], "TokyuToyoko": [], "SotetsuIzumino": ["Futamatagawa"], "SotetsuShinYokohama": ["Nishiya"] },
+    "SotetsuIzumino": { "SotetsuMain": ["Futamatagawa"] },
+        "SotetsuShinYokohama": { "SotetsuMain": ["Nishiya"], "TokyuMeguro": ["Shin-Yokohama"] },
+    // 地方線直通・大井町線直通（4.3.644 補完）
+    "Gono": { "Ou": ["Kawabe"] },
+    "Kamaishi": { "Tohoku": ["Hanamaki"] },
+    "Ou": { "Gono": ["Kawabe"], "Tazawako": ["Omagari"] },
+    "Tazawako": { "Ou": ["Omagari"] },
+    "TokyuOimachi": { "TokyuDenEnToshi": ["Futako-Tamagawa"] },
+    "TokyuDenEnToshi": { "TokyuOimachi": ["Futako-Tamagawa"] },
+    // 直通 6 組補完 JOIN（4.3.711）
+    "TobuNikko": { "TobuIsesaki": ["Tobu-Dobutsu-Koen"] },
+    "ChuoTatsuno": { "Chuo": ["Okaya"] },
+    "Shinonoi": { "Chuo": ["Shiojiri"], "Shinetsu": ["Shinonoi"] },
+    "Shinetsu": { "Shinonoi": ["Shinonoi"] },
+    "SeibuChichibu": { "SeibuYurakucho": [] },
+    // JR-West 関西・JR-Kyushu 直通接続駅（4.3.1024）
+    "OsakaLoop": { "Hanwa": ["Tennoji"], "KansaiMain": ["Tennoji"] },
+    "Hanwa": { "OsakaLoop": ["Tennoji"] },
+    "KansaiMain": { "OsakaLoop": ["Tennoji"], "Nara": ["Kizu"] },
+    "Nara": { "KansaiMain": ["Kizu"] },
+    "TokaidoKansai": { "SanyoMain": ["Kobe"] },
+    "SanyoMain": { "TokaidoKansai": ["Kobe"], "KagoshimaMain": ["Moji"] },
+    "Gakkentoshi": { "OsakaHigashi": ["Kyobashi-Osaka"] },
+    "OsakaHigashi": { "Gakkentoshi": ["Kyobashi-Osaka"] },
+    "KagoshimaMain": { "SanyoMain": ["Moji"], "NagasakiMain": ["Tosu"], "Nippo": ["Kokura"], "Hohi": ["Kumamoto"] },
+    "NagasakiMain": { "KagoshimaMain": ["Tosu"] },
+    "Nippo": { "KagoshimaMain": ["Kokura"], "Kyudai": ["Oita"], "Hohi": ["Oita"] },
+    "Kyudai": { "Nippo": ["Oita"] },
+    "Hohi": { "KagoshimaMain": ["Kumamoto"], "Nippo": ["Oita"] }
+  };
+
+  function getCanonicalThroughRelation(lineId, partnerId) {
+    var relations = window.LineServiceRelations;
+    if (!relations || typeof relations.length !== "number") return null;
+    for (var i = 0; i < relations.length; i++) {
+      var rel = relations[i];
+      if (!rel || rel.relation !== "THROUGH_SERVICE") continue;
+      if ((rel.lineA === lineId && rel.lineB === partnerId) ||
+          (rel.lineA === partnerId && rel.lineB === lineId)) return rel;
     }
     return null;
   }
 
+  /** Direct canonical through-service neighbours of a line (1 hop). */
   function getDirectThroughLines(lineId) {
-    var out = [], rs = _relations();
-    for (var i = 0; i < rs.length; i++) {
-      var r = rs[i];
-      if (!r || r.relation !== "THROUGH_SERVICE") continue;
-      var other = r.lineA === lineId ? r.lineB : (r.lineB === lineId ? r.lineA : null);
-      if (other && out.indexOf(other) < 0) out.push(other);
-    }
-    return out;
+    try {
+      var out = [];
+      var relations = window.LineServiceRelations;
+      if (relations && typeof relations.length === "number") {
+        for (var i = 0; i < relations.length; i++) {
+          var rel = relations[i];
+          if (!rel || rel.relation !== "THROUGH_SERVICE") continue;
+          var other = rel.lineA === lineId ? rel.lineB : (rel.lineB === lineId ? rel.lineA : null);
+          if (other && out.indexOf(other) < 0) out.push(other);
+        }
+      }
+      return out;
+    } catch(e) { return []; }
   }
 
+  /** Join stations for a line pair. Canonical handoverStations win when present. */
   function getJoinStations(lineId, partnerId) {
-    var r = _relation(lineId, partnerId);
-    return r && Array.isArray(r.handoverStations) ? r.handoverStations.slice() : null;
+    try {
+      var canonical = getCanonicalThroughRelation(lineId, partnerId);
+      if (canonical && Array.isArray(canonical.handoverStations)) return canonical.handoverStations.slice();
+      var m = THROUGH_JOIN_STATIONS[lineId];
+      if (m && m[partnerId] !== undefined) return m[partnerId];
+      // Legacy join data was historically populated asymmetrically even though
+      // through-service pairs are bidirectional. Mirror the partner lookup so
+      // both line views render the same handover marker without duplicating data.
+      var reverse = THROUGH_JOIN_STATIONS[partnerId];
+      return (reverse && reverse[lineId] !== undefined) ? reverse[lineId] : null;
+    } catch(e) { return null; }
   }
 
+  /** UI anchor stations for a through relation.
+   * These may differ by side when a connector joins between passenger stations.
+   * Physical/service truth remains in handoverStations.
+   */
   function getDisplayAnchors(lineId, partnerId) {
-    var r = _relation(lineId, partnerId);
-    if (!r) return null;
-    if (r.displayAnchors && Array.isArray(r.displayAnchors[lineId])) {
-      return r.displayAnchors[lineId].slice();
-    }
-    return Array.isArray(r.handoverStations) ? r.handoverStations.slice() : null;
+    try {
+      var canonical = getCanonicalThroughRelation(lineId, partnerId);
+      if (canonical && canonical.displayAnchors && Array.isArray(canonical.displayAnchors[lineId])) {
+        return canonical.displayAnchors[lineId].slice();
+      }
+      return getJoinStations(lineId, partnerId);
+    } catch(e) { return null; }
   }
-
   window.ThroughService = {
     getDirectThroughLines: getDirectThroughLines,
     getJoinStations: getJoinStations,
-    getDisplayAnchors: getDisplayAnchors
+    getDisplayAnchors: getDisplayAnchors,
   };
 })();
 
@@ -1195,10 +1346,10 @@ window.LineOperationSystems = {
       code: "CO",
       nameJa: "中央本線",
       nameZh: "中央本线",
-      nameEn: "Chuo Line",
+      nameEn: "Chuo Main Line",
       nameKo: "주오 본선",
       color: "#007ac0",
-      lineIds: ["Chuo", "ChuoTatsuno"],
+      lineIds: ["ChuoMain", "ChuoTatsuno"],
       order: 20
     },
     {
@@ -1477,10 +1628,10 @@ window.LineOperationSystems = {
       code: "SOB",
       nameJa: "総武本線",
       nameZh: "总武本线",
-      nameEn: "Sobu Line",
+      nameEn: "Sobu Main Line",
       nameKo: "소부 본선",
       color: "#fcc60d",
-      lineIds: ["Sobu"],
+      lineIds: ["SobuMain"],
       icon: "../images/鉄道/JR東日本/JRグループ.png",
       order: 29
     },
@@ -1653,10 +1804,10 @@ window.LineOperationSystems = {
       code: "KOI",
       nameJa: "小海線",
       nameZh: "小海线",
-      nameEn: "Koumi Line",
+      nameEn: "Komii Line",
       nameKo: "코미선",
       color: "#41934c",
-      lineIds: ["Koumi"],
+      lineIds: ["Komii"],
       icon: "../images/鉄道/JR東日本/JRグループ.png",
       order: 45
     },
@@ -1664,10 +1815,10 @@ window.LineOperationSystems = {
       code: "KON",
       nameJa: "花輪線",
       nameZh: "花轮线",
-      nameEn: "Hanawa Line",
+      nameEn: "Kounan Line",
       nameKo: "하나와선",
       color: "#aa1e30",
-      lineIds: ["Hanawa"],
+      lineIds: ["Kounan"],
       icon: "../images/鉄道/JR東日本/JRグループ.png",
       order: 46
     },
@@ -1697,10 +1848,10 @@ window.LineOperationSystems = {
       code: "MIY",
       nameJa: "弥彦線",
       nameZh: "弥彦线",
-      nameEn: "Yahiko Line",
+      nameEn: "Miyo Line",
       nameKo: "야히코선",
       color: "#922790",
-      lineIds: ["Yahiko"],
+      lineIds: ["Miyo"],
       icon: "../images/鉄道/JR東日本/JRグループ.png",
       order: 49
     },
@@ -1752,10 +1903,10 @@ window.LineOperationSystems = {
       code: "OUM",
       nameJa: "奥羽本線",
       nameZh: "奥羽本线",
-      nameEn: "Ou Line",
+      nameEn: "Ou Main Line",
       nameKo: "오우 본선",
       color: "#ee7b28",
-      lineIds: ["Ou"],
+      lineIds: ["OuMain"],
       icon: "../images/鉄道/JR東日本/JRグループ.png",
       order: 54
     },
@@ -1763,10 +1914,10 @@ window.LineOperationSystems = {
       code: "RIE",
       nameJa: "陸羽東線",
       nameZh: "陆羽东线",
-      nameEn: "Riku-East Line",
+      nameEn: "Rikuto East Line",
       nameKo: "리쿠토토호쿠선",
       color: "#888888",
-      lineIds: ["RikuEast"],
+      lineIds: ["RikutoEast"],
       icon: "../images/鉄道/JR東日本/JRグループ.png",
       order: 55
     },
@@ -1774,10 +1925,10 @@ window.LineOperationSystems = {
       code: "RIW",
       nameJa: "陸羽西線",
       nameZh: "陆羽西线",
-      nameEn: "Riku-West Line",
+      nameEn: "Rikuto West Line",
       nameKo: "리쿠토사이선",
       color: "#6fbf7f",
-      lineIds: ["RikuWest"],
+      lineIds: ["RikutsuWest"],
       icon: "../images/鉄道/JR東日本/JRグループ.png",
       order: 56
     },
@@ -1917,10 +2068,10 @@ window.LineOperationSystems = {
       code: "YON",
       nameJa: "米坂線",
       nameZh: "米坂线",
-      nameEn: "Yonesaka Line",
+      nameEn: "Yonezawa Line",
       nameKo: "요네자와선",
       color: "#9b7eb9",
-      lineIds: ["Yonesaka"],
+      lineIds: ["Yonezawa"],
       icon: "../images/鉄道/JR東日本/JRグループ.png",
       order: 70
     }
@@ -2089,7 +2240,7 @@ window.LineOperationSystems = {
       nameEn: "Nippori-Toneri Liner",
       nameKo: "닛포리・토네리 라이너",
       color: "#ed6d00",
-      lineIds: ["NipporiToneri"],
+      lineIds: ["Nippori_Toneri"],
       icon: "../images/鉄道/都営地下鉄/日暮里・舎人ライナー.png",
       order: 6
     }
@@ -2157,7 +2308,7 @@ window.LineOperationSystems = {
       nameEn: "Kinugawa Line",
       nameKo: "키누가와선",
       color: "#ffa600",
-      lineIds: ["Kinugawa"],
+      lineIds: ["Nikkoku"],
       icon: "../images/鉄道/東武鉄道/日光線 宇都宮線 鬼怒川線.png",
       order: 5
     },
@@ -2179,7 +2330,7 @@ window.LineOperationSystems = {
       nameEn: "Daishi Line",
       nameKo: "다이시선",
       color: "#0f6cc3",
-      lineIds: ["TobuDaishi"],
+      lineIds: ["Daishi_Tobu"],
       icon: "../images/鉄道/東武鉄道/大師線.png",
       order: 7
     },
@@ -2190,7 +2341,7 @@ window.LineOperationSystems = {
       nameEn: "Kameido Line",
       nameKo: "카메이도선",
       color: "#0f6cc3",
-      lineIds: ["TobuKameido"],
+      lineIds: ["Tobu_Kameido"],
       icon: "../images/鉄道/東武鉄道/亀戸線.png",
       order: 8
     },
@@ -2280,7 +2431,7 @@ window.LineOperationSystems = {
       nameEn: "Seibu Yurakucho Line",
       nameKo: "세이부 유라쿠초선",
       color: "#EF7A00",
-      lineIds: ["SeibuYurakucho"],
+      lineIds: ["Yurakucho_Seibu"],
       icon: "../images/鉄道/西武鉄道/西武有楽町線.png",
       order: 4
     },
@@ -2291,7 +2442,7 @@ window.LineOperationSystems = {
       nameEn: "Sayama Line",
       nameKo: "사야마선",
       color: "#EF7A00",
-      lineIds: ["SeibuSayama"],
+      lineIds: ["Seibu_Sayama"],
       icon: "../images/鉄道/西武鉄道/西武狭山線.png",
       order: 5
     },
@@ -2302,7 +2453,7 @@ window.LineOperationSystems = {
       nameEn: "Seibu-en Line",
       nameKo: "세이부엔선",
       color: "#1EAD4C",
-      lineIds: ["Seibuen"],
+      lineIds: ["SeibuEn"],
       icon: "../images/鉄道/西武鉄道/西武園線.png",
       order: 6
     },
@@ -2381,7 +2532,7 @@ window.LineOperationSystems = {
       nameEn: "Den-en-toshi Line",
       nameKo: "덴엔토시선",
       color: "#00a850",
-      lineIds: ["TokyuDenEnToshi"],
+      lineIds: ["TokyuDenEn"],
       icon: "../images/鉄道/東急電鉄/田園都市線.png",
       order: 1
     },
@@ -2517,7 +2668,7 @@ window.LineOperationSystems = {
       nameEn: "Keio New Line",
       nameKo: "케이오 신선",
       color: "#dd0076",
-      lineIds: ["KeioNew"],
+      lineIds: ["KeioShin"],
       icon: "../images/鉄道/京王電鉄/京王新線.png",
       order: 3
     },
@@ -2528,7 +2679,7 @@ window.LineOperationSystems = {
       nameEn: "Sagamihara Line",
       nameKo: "사가미하라선",
       color: "#dd0076",
-      lineIds: ["KeioSagamihara"],
+      lineIds: ["KeioSagami"],
       icon: "../images/鉄道/京王電鉄/相模原線.png",
       order: 4
     },
@@ -2561,7 +2712,7 @@ window.LineOperationSystems = {
       nameEn: "Dobutsuen Line",
       nameKo: "도부츠엔선",
       color: "#dd0076",
-      lineIds: ["KeioDobutsuen"],
+      lineIds: ["KeioZoo"],
       icon: "../images/鉄道/京王電鉄/動物園線.png",
       order: 7
     }
@@ -2721,7 +2872,7 @@ window.LineOperationSystems = {
       nameEn: "Daishi Line",
       nameKo: "다이시선",
       color: "#e60012",
-      lineIds: ["KeikyuDaishi"],
+      lineIds: ["Daishi_Keikyu"],
       icon: "../images/鉄道/京急電鉄/大師線.png",
       order: 5
     }
@@ -2756,7 +2907,7 @@ window.LineOperationSystems = {
       nameEn: "Sotetsu Shin-Yokohama Line",
       nameKo: "소테츠 신요코하마선",
       color: "#003366",
-      lineIds: ["SotetsuShinYokohama"],
+      lineIds: ["SotetsuShin-Yokohama"],
       icon: "../images/鉄道/相鉄/相鉄新横浜線.png",
       order: 3
     }
@@ -3266,7 +3417,7 @@ window.PLATFORM_DATA = {
     "Chiba": { "-1": "3・4・5・6" }          // 上り（東京方面）3・4・5・6（内房・外房線ホームと共用）
   },
   // ===== 総武本線（千葉@0 → 銚子@21；下り=佐倉・銚子方面=升序1） =====
-  "Sobu": {
+  "SobuMain": {
     "Chiba": { "1": "7・8" }                 // 下り（佐倉・八日市場・銚子）7・8
   },
   // ===== 内房線（千葉@0 → 安房鴨川@31；下り=木更津・館山方面=升序1） =====
@@ -3342,7 +3493,7 @@ window.PLATFORM_DATA = {
     "Shinjuku": { "1": "1・2・3" }           // 下り（京王八王子・高尾山口・橋本方面）1・2・3
   },
   // ===== 京王新線（新宿@0 → 幡ヶ谷；下り=京王八王子方面=升序1） =====
-  "KeioNew": {
+  "KeioShin": {
     "Shinjuku": { "1": "4" }                 // 下り（京王八王子・高尾山口・橋本方面）4
   },
   // ===== 小田原線（新宿@0 → 小田原；下り=小田原方面=升序1；新宿为端点） =====
@@ -3393,7 +3544,7 @@ window.PLATFORM_DATA = {
     "Shibuya": { "1": "1・2" }                  // 吉祥寺方面 1・2
   },
   // ===== 東急田園都市線（渋谷@0 → 中央林間；下り=長津田方面=升序1；渋谷为端点） =====
-  "TokyuDenEnToshi": {
+  "TokyuDenEn": {
     "Shibuya": { "1": "1" }                     // 二子玉川・長津田・中央林間方面 1
   },
   // ===== 半蔵門線（渋谷@0 → 押上；升序1=押上・久喜方面） =====
@@ -3493,11 +3644,11 @@ window.EXIT_DATA = {
 };
 
 // 番線解決（Provider 公共 API）：查不到（无该线/站/方向）返回 null，展示层静默省略
-// v4.3.616: 干线本名别名归一——TokaidoMain/Tohoku 为物理线路名，与运行系统
+// v4.3.616: 干线本名别名归一——TokaidoMain/TohokuMain 为物理线路名，与运行系统
 // （Tokaido / UtsunomiyaJR）同轨同番线；搜索图已排除本名，此处兜底防旧缓存/直传
 var _PLATFORM_LINE_ALIAS = {
   "TokaidoMain": "Tokaido",      // 東海道本線（東京～熱海）= 東海道線運行系統 同軌同番線
-  "Tohoku": "UtsunomiyaJR"   // 東北本線（東京～黒磯）= 宇都宮線運行系統 同軌同番線
+  "TohokuMain": "UtsunomiyaJR"   // 東北本線（東京～黒磯）= 宇都宮線運行系統 同軌同番線
 };
 window.PlatformResolver = {
   resolve: function(lineId, stationId, direction) {
@@ -3535,6 +3686,61 @@ window.PlatformResolver = {
 
 /* global window */
 window.LineServiceRelations = [
+  { lineA: "Hachiko", lineB: "KawagoeWest", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Komagawa"], evidence: { source: "JR East Hachiko/Kawagoe continuous operation boundary at Komagawa", confidence: "HIGH" } },
+  { lineA: "Joban", lineB: "Narita", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "legacy relation omits Abiko branch path; Narita entity scope must be verified before direct migration", confidence: "LOW" } },
+  { lineA: "Gono", lineB: "Ou", relation: "PHYSICAL_CONNECT", direction: "BIDIRECTIONAL", handoverStations: ["Kawabe"], evidence: { source: "adjacent network boundary at Kawabe; through-running varies by service and is not assumed globally", confidence: "MEDIUM" } },
+  { lineA: "Kamaishi", lineB: "Tohoku", relation: "PHYSICAL_CONNECT", direction: "BIDIRECTIONAL", handoverStations: ["Hanamaki"], evidence: { source: "adjacent network boundary at Hanamaki; physical connection alone is not global through identity", confidence: "MEDIUM" } },
+  { lineA: "Ou", lineB: "Tazawako", relation: "PHYSICAL_CONNECT", direction: "BIDIRECTIONAL", handoverStations: ["Omagari"], evidence: { source: "adjacent network boundary at Omagari; service-specific through running must be evidenced separately", confidence: "MEDIUM" } },
+  { lineA: "OsakaLoop", lineB: "Hanwa", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Tennoji"], evidence: { source: "JR West timetable: Kanku/Kishu Rapid continues between Osaka Loop and Hanwa at Tennoji", confidence: "HIGH" } },
+  { lineA: "OsakaLoop", lineB: "KansaiMain", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Tennoji"], evidence: { source: "JR West timetable: Yamatoji Rapid continues between Osaka Loop and Kansai Main at Tennoji", confidence: "HIGH" } },
+  { lineA: "KansaiMain", lineB: "Nara", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "legacy edge at Kizu conflates Kansai Main/Yamatoji operation with Nara Line; no direct migration without train-path evidence", confidence: "LOW" } },
+  { lineA: "Gakkentoshi", lineB: "OsakaHigashi", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "legacy edge at Kyobashi-Osaka requires path verification; not migrated as direct through", confidence: "LOW" } },
+  { lineA: "ChuoRapid", lineB: "Chuo", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Takao"], evidence: { source: "adjacent operational boundary at Takao; legacy direct edge retained as local adjacency", confidence: "HIGH" } },
+  { lineA: "Chuo", lineB: "ChuoTatsuno", relation: "BRANCH_OF", direction: "BIDIRECTIONAL", handoverStations: ["Okaya"], evidence: { source: "Tatsuno route is a branch/alternate section of Chuo Main, not an independent through operator boundary", confidence: "HIGH" } },
+  { lineA: "Chuo", lineB: "Shinonoi", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Shiojiri"], evidence: { source: "adjacent Chuo Main/Shinonoi operation boundary at Shiojiri", confidence: "HIGH" } },
+  { lineA: "Shinonoi", lineB: "Shinetsu", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Shinonoi"], evidence: { source: "adjacent Shinonoi/Shinetsu operation boundary at Shinonoi", confidence: "HIGH" } },
+  { lineA: "Ome", lineB: "Itsukaichi", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Haijima"], evidence: { source: "JR East route/timetable path: Itsukaichi services enter Ome Line at Haijima", confidence: "HIGH" } },
+  { lineA: "UenoTokyo", lineB: "UtsunomiyaJR", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "UenoTokyo is an operation-system identity, not a direct physical line handover at Omiya", confidence: "HIGH" } },
+  { lineA: "UenoTokyo", lineB: "Takasaki", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "UenoTokyo is an operation-system identity, not a direct physical line handover at Omiya", confidence: "HIGH" } },
+  { lineA: "UenoTokyo", lineB: "Joban", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "UenoTokyo is an operation-system identity; relationship must be modeled as service path, not direct line adjacency", confidence: "HIGH" } },
+  { lineA: "UenoTokyo", lineB: "Tokaido", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "UenoTokyo is an operation-system identity; relationship must be modeled as service path, not direct line adjacency", confidence: "HIGH" } },
+  { lineA: "ShonanShinjuku", lineB: "UtsunomiyaJR", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "ShonanShinjuku is an operation-system identity, not a direct physical line node", confidence: "HIGH" } },
+  { lineA: "ShonanShinjuku", lineB: "Takasaki", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "ShonanShinjuku is an operation-system identity, not a direct physical line node", confidence: "HIGH" } },
+  { lineA: "ShonanShinjuku", lineB: "Yokosuka", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "ShonanShinjuku is an operation-system identity, not a direct physical line node", confidence: "HIGH" } },
+  { lineA: "Yokosuka", lineB: "SobuRapid", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Tokyo"], evidence: { source: "continuous Yokosuka/Sobu Rapid operation through Tokyo", confidence: "HIGH" } },
+  { lineA: "Tokaido", lineB: "Ito", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Atami"], evidence: { source: "continuous Tokaido/Ito operation through Atami", confidence: "HIGH" } },
+  { lineA: "Asakusa", lineB: "Keisei", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "legacy shortcut skips Keisei Oshiage Line; direct adjacency is Asakusa <-> KeiseiOshiage at Oshiage", confidence: "HIGH" } },
+  { lineA: "Hanzomon", lineB: "TobuIsesaki", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "legacy shortcut duplicates path via TobuSkytree; do not infer direct adjacency", confidence: "HIGH" } },
+  { lineA: "Hibiya", lineB: "TobuIsesaki", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "legacy shortcut duplicates path via TobuSkytree; do not infer direct adjacency", confidence: "HIGH" } },
+  { lineA: "SotetsuMain", lineB: "TokyuToyoko", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "legacy shortcut skips Sotetsu/Tokyu Shin-Yokohama lines; do not infer direct adjacency", confidence: "HIGH" } },
+  { lineA: "Keikyu", lineB: "KeikyuAirport", relation: "BRANCH_OF", direction: "BIDIRECTIONAL", handoverStations: ["Keikyu-Kamata"], evidence: { source: "legacy through map reclassified as same-operator branch", confidence: "HIGH" } },
+  { lineA: "Keikyu", lineB: "KeikyuKurihama", relation: "BRANCH_OF", direction: "BIDIRECTIONAL", handoverStations: ["Horinouchi"], evidence: { source: "legacy through map reclassified as same-operator branch", confidence: "HIGH" } },
+  { lineA: "Keikyu", lineB: "KeikyuZushi", relation: "BRANCH_OF", direction: "BIDIRECTIONAL", handoverStations: ["Kanazawa-Hakkei"], evidence: { source: "legacy through map reclassified as same-operator branch", confidence: "HIGH" } },
+  { lineA: "SotetsuMain", lineB: "SotetsuIzumino", relation: "BRANCH_OF", direction: "BIDIRECTIONAL", handoverStations: ["Futamatagawa"], evidence: { source: "legacy through map reclassified as same-operator branch", confidence: "HIGH" } },
+  { lineA: "SotetsuMain", lineB: "SotetsuShinYokohama", relation: "BRANCH_OF", direction: "BIDIRECTIONAL", handoverStations: ["Nishiya"], evidence: { source: "legacy through map reclassified as same-operator branch", confidence: "HIGH" } },
+  { lineA: "Chiyoda", lineB: "OdakyuTama", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Yoyogi-Uehara"], evidence: { source: "Tokyo Metro through-service network + legacy join station", confidence: "HIGH" } },
+  { lineA: "Tozai", lineB: "ChuoSobuLocal", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Nakano"], evidence: { source: "Tokyo Metro through-service network + legacy join station", confidence: "HIGH" } },
+  { lineA: "Yurakucho", lineB: "Tojo", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Wakoshi"], evidence: { source: "Tokyo Metro through-service network + legacy join station", confidence: "HIGH" } },
+  { lineA: "Yurakucho", lineB: "SeibuYurakucho", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Kotake-Mukaihara"], evidence: { source: "Tokyo Metro through-service network + legacy join station", confidence: "HIGH" } },
+  { lineA: "TokyuMeguro", lineB: "SotetsuShinYokohama", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "legacy map skips missing Tokyu Shin-Yokohama Line entity; do not infer direct adjacency", confidence: "LOW" } },
+  { lineA: "Keiyo", lineB: "Uchibo", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Soga"], evidence: { source: "JR East timetable/route network + legacy join station", confidence: "HIGH" } },
+  { lineA: "Keiyo", lineB: "Sotobo", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Soga"], evidence: { source: "JR East timetable/route network + legacy join station", confidence: "HIGH" } },
+  { lineA: "Keiyo", lineB: "Musashino", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Nishi-Funabashi"], displayAnchors: { "Musashino": ["Nishi-Funabashi"], "Keiyo": ["Ichikawa-Shiohama", "Minami-Funabashi"] }, evidence: { source: "ThroughService direct relation; Musashino joins Keiyo operation at Nishi-Funabashi", confidence: "HIGH" } },
+  { lineA: "Rinkai", lineB: "Saikyo", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Osaki"], evidence: { source: "ThroughService direct relation + join station", confidence: "HIGH" } },
+  { lineA: "Hanzomon", lineB: "TokyuDenEnToshi", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Shibuya"], evidence: { source: "ThroughService direct relation + join station", confidence: "HIGH" } },
+  { lineA: "Hanzomon", lineB: "TobuSkytree", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Oshiage"], evidence: { source: "ThroughService direct relation + join station", confidence: "HIGH" } },
+  { lineA: "Hibiya", lineB: "TobuSkytree", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Kita-Senju"], evidence: { source: "ThroughService direct relation + join station", confidence: "HIGH" } },
+  { lineA: "Chiyoda", lineB: "JobanLocal", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Ayase"], evidence: { source: "ThroughService direct relation + join station", confidence: "HIGH" } },
+  { lineA: "Chiyoda", lineB: "Odawara", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Yoyogi-Uehara"], evidence: { source: "ThroughService direct relation + join station", confidence: "HIGH" } },
+  { lineA: "Fukutoshin", lineB: "TokyuToyoko", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Shibuya"], evidence: { source: "ThroughService direct relation + join station", confidence: "HIGH" } },
+  { lineA: "Fukutoshin", lineB: "Tojo", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Wakoshi"], evidence: { source: "ThroughService direct relation + join station", confidence: "HIGH" } },
+  { lineA: "Fukutoshin", lineB: "SeibuYurakucho", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Kotake-Mukaihara"], evidence: { source: "ThroughService direct relation + join station", confidence: "HIGH" } },
+  { lineA: "TokyuToyoko", lineB: "MinatoMirai", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Yokohama"], evidence: { source: "ThroughService direct relation + join station", confidence: "HIGH" } },
+  { lineA: "Namboku", lineB: "TokyuMeguro", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Meguro"], evidence: { source: "ThroughService direct relation + join station", confidence: "HIGH" } },
+  { lineA: "Mita", lineB: "TokyuMeguro", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Meguro"], evidence: { source: "ThroughService direct relation + join station", confidence: "HIGH" } },
+  { lineA: "Asakusa", lineB: "Keikyu", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Sengakuji"], evidence: { source: "ThroughService direct relation + join station", confidence: "HIGH" } },
+  { lineA: "Asakusa", lineB: "KeiseiOshiage", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Oshiage"], evidence: { source: "ThroughService direct relation + join station", confidence: "HIGH" } },
+  { lineA: "Shinjuku", lineB: "KeioMain", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Shinjuku"], evidence: { source: "ThroughService direct relation + join station", confidence: "HIGH" } },
   { lineA: "Saikyo", lineB: "Kawagoe", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Omiya"], evidence: { source: "LOS JA stationLines shared 1", confidence: "HIGH" } },
   { lineA: "Kawagoe", lineB: "KawagoeWest", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Kawagoe"], evidence: { source: "川越線運転系統 川越駅以東/以西 直通", confidence: "HIGH" } },
   { lineA: "SeibuIkebukuro", lineB: "Ikebukuro", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: [], evidence: { source: "LOS SI stationLines shared 18 subset", confidence: "HIGH" } },
@@ -3543,12 +3749,33 @@ window.LineServiceRelations = [
   { lineA: "KeikyuMain", lineB: "Sakuragi", relation: "ALIAS_OF", direction: "BIDIRECTIONAL", handoverStations: [], evidence: { source: "stationLines identical sets 7", confidence: "HIGH" } },
   { lineA: "Agatsuma", lineB: "Takasaki", relation: "BRANCH_OF", direction: "BIDIRECTIONAL", handoverStations: ["Takasaki"], evidence: { source: "branchOf stationLines shared 1", confidence: "HIGH" } },
   { lineA: "SuigunBranch", lineB: "Suigun", relation: "BRANCH_OF", direction: "BIDIRECTIONAL", handoverStations: [""], evidence: { source: "branchOf stationLines shared 1", confidence: "HIGH" } },
-  { lineA: "Ome", lineB: "ChuoRapid", relation: "BRANCH_OF", direction: "BIDIRECTIONAL", handoverStations: [], evidence: { source: "branchOf only shared 0 data gap", confidence: "LOW" } },
-  { lineA: "Itsukaichi", lineB: "ChuoRapid", relation: "BRANCH_OF", direction: "BIDIRECTIONAL", handoverStations: [], evidence: { source: "branchOf only shared 0 data gap", confidence: "LOW" } },
+  { lineA: "Ome", lineB: "ChuoRapid", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Tachikawa"], evidence: { source: "JR East timetable shows continuous Ome-Tokyo trains across Tachikawa", confidence: "HIGH" } },
+  { lineA: "Itsukaichi", lineB: "ChuoRapid", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "legacy shortcut skips Ome Line between Tachikawa and Haijima; direct adjacency is invalid", confidence: "HIGH" } },
   { lineA: "ChuoKonosu", lineB: "ChuoRapid", relation: "BRANCH_OF", direction: "BIDIRECTIONAL", handoverStations: [], evidence: { source: "branchOf only shared 0 data gap", confidence: "LOW" } },
   { lineA: "Sotobo", lineB: "SobuRapid", relation: "BRANCH_OF", direction: "BIDIRECTIONAL", handoverStations: [], evidence: { source: "branchOf only shared 0 data gap", confidence: "LOW" } },
   { lineA: "Uchibo", lineB: "SobuRapid", relation: "BRANCH_OF", direction: "BIDIRECTIONAL", handoverStations: [], evidence: { source: "branchOf only shared 0 data gap", confidence: "LOW" } },
+  { lineA: "TobuIsesaki", lineB: "TobuNikko", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Tobu-Dobutsu-Koen"], evidence: { source: "Tobu Railway network/timetable: direct trains continue from the Skytree/Isesaki corridor onto the Nikko Line at Tobu-Dobutsu-Koen", confidence: "HIGH" } },
+  { lineA: "Keisei", lineB: "KeiseiOshiage", relation: "BRANCH_OF", direction: "BIDIRECTIONAL", handoverStations: ["Aoto"], evidence: { source: "Keisei Oshiage Line branches from the Keisei Main Line at Aoto; not a separate inter-line through boundary", confidence: "HIGH" } },
+  { lineA: "Keisei", lineB: "NaritaSkyAccess", relation: "PHYSICAL_CONNECT", direction: "BIDIRECTIONAL", handoverStations: ["Keisei-Takasago"], evidence: { source: "legacy boundary at Keisei-Takasago represents network/path connection; service-specific running chain must come from train evidence", confidence: "MEDIUM" } },
+  { lineA: "TokyuDenEnToshi", lineB: "TokyuOimachi", relation: "PHYSICAL_CONNECT", direction: "BIDIRECTIONAL", handoverStations: ["Futako-Tamagawa"], evidence: { source: "shared/connected Tokyu corridor at Futako-Tamagawa; do not globally merge train identity", confidence: "HIGH" } },
+  { lineA: "OdakyuTama", lineB: "Odawara", relation: "BRANCH_OF", direction: "BIDIRECTIONAL", handoverStations: ["Shin-Yurigaoka"], evidence: { source: "Odakyu Tama Line branches from the Odawara Line at Shin-Yurigaoka", confidence: "HIGH" } },
+  { lineA: "KagoshimaMain", lineB: "NagasakiMain", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Tosu"], evidence: { source: "JR Kyushu route/timetable services continue between Hakata/Kagoshima Main corridor and Nagasaki Main at Tosu", confidence: "HIGH" } },
+  { lineA: "KagoshimaMain", lineB: "Nippo", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Kokura"], evidence: { source: "JR Kyushu timetable: Sonic and other services run from Hakata/Kagoshima Main corridor onto Nippo Main via Kokura", confidence: "HIGH" } },
   { lineA: "TobuNikko", lineB: "Kinugawa", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "LOS TN 0 shared different sets", confidence: "UNKNOWN" } },
+  { lineA: "Asakusa", lineB: "TobuSkytree", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "legacy edge conflates Toei Asakusa with Tobu Asakusa/Skytree naming; no direct rail handover between these entities", confidence: "HIGH" } },
+  { lineA: "TobuSkytree", lineB: "TobuIsesaki", relation: "ALIAS_OF", direction: "BIDIRECTIONAL", handoverStations: ["Tobu-Dobutsu-Koen"], evidence: { source: "Tobu states Skytree Line is the nickname/corridor from Asakusa/Oshiage to Tobu-Dobutsu-Koen within the Isesaki system", confidence: "HIGH" } },
+  { lineA: "Shinjuku", lineB: "Keio", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "Keio legacy entity is not canonical KeioMain; canonical Toei Shinjuku through relation is Shinjuku <-> KeioMain", confidence: "HIGH" } },
+  { lineA: "Ikebukuro", lineB: "SeibuYurakucho", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Nerima"], evidence: { source: "Seibu Yurakucho Line connects Kotake-mukaihara to Nerima and through trains continue onto Seibu Ikebukuro corridor", confidence: "HIGH" } },
+  { lineA: "Fukutoshin", lineB: "Ikebukuro", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "legacy shortcut skips Seibu Yurakucho Line between Kotake-mukaihara and Nerima", confidence: "HIGH" } },
+  { lineA: "SeibuChichibu", lineB: "SeibuYurakucho", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "legacy shortcut skips Seibu Ikebukuro corridor; not adjacent line entities", confidence: "HIGH" } },
+  { lineA: "Saikyo", lineB: "SotetsuMain", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "Sotetsu-JR through service runs via Sotetsu Shin-Yokohama/JR connecting route at Hazawa-Yokohama-Kokudai; direct Saikyo-SotetsuMain adjacency is false", confidence: "HIGH" } },
+  { lineA: "UtsunomiyaJR", lineB: "Tokaido", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "continuous trains use the Ueno-Tokyo service path; do not encode distant physical lines as a direct boundary", confidence: "HIGH" } },
+  { lineA: "Takasaki", lineB: "Tokaido", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "continuous trains use the Ueno-Tokyo service path; do not encode distant physical lines as a direct boundary", confidence: "HIGH" } },
+  { lineA: "TokaidoKansai", lineB: "SanyoMain", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Kobe"], evidence: { source: "JR West continuous Tokaido/Sanyo operation across Kobe", confidence: "HIGH" } },
+  { lineA: "SanyoMain", lineB: "KagoshimaMain", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Moji"], evidence: { source: "adjacent Sanyo/Kagoshima Main boundary at Moji with continuous services", confidence: "HIGH" } },
+  { lineA: "KagoshimaMain", lineB: "Hohi", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Kumamoto"], evidence: { source: "adjacent JR Kyushu service boundary at Kumamoto; through services continue onto Hohi", confidence: "HIGH" } },
+  { lineA: "Nippo", lineB: "Kyudai", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Oita"], evidence: { source: "adjacent JR Kyushu service boundary at Oita; through services continue onto Kyudai", confidence: "HIGH" } },
+  { lineA: "Nippo", lineB: "Hohi", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Oita"], evidence: { source: "adjacent JR Kyushu service boundary at Oita; through services continue onto Hohi", confidence: "HIGH" } },
   { lineA: "Tojo", lineB: "Utsunomiya", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "LOS TTJ 0 shared unprovable", confidence: "UNKNOWN" } },
 ];
 
@@ -3565,24 +3792,6 @@ window.LineServiceRelations = [
       return r.relation === "THROUGH_SERVICE" &&
         ((r.lineA === a && r.lineB === b) || (r.lineA === b && r.lineB === a));
     });
-  };
-  // Branch topology and train operation are different facts.
-  // BRANCH_OF / PHYSICAL_CONNECT only prove infrastructure/topology; they do
-  // not authorize parent-line trains to be projected onto a branch.
-  L.getRelation = function(a, b) {
-    if (!a || !b) return null;
-    for (var i = 0; i < L.length; i++) {
-      var r = L[i];
-      if ((r.lineA === a && r.lineB === b) || (r.lineA === b && r.lineB === a)) return r;
-    }
-    return null;
-  };
-  L.getBranchOperationMode = function(parentLineId, branchLineId) {
-    var r = L.getRelation(parentLineId, branchLineId);
-    if (!r) return "UNKNOWN";
-    if (r.relation === "THROUGH_SERVICE") return "SHARED_SERVICE";
-    if (r.relation === "PHYSICAL_CONNECT" || r.relation === "BRANCH_OF") return "INDEPENDENT_OR_UNPROVEN";
-    return "UNKNOWN";
   };
   L.getServiceChains = function() {
     var rs = L.filter(function(r) { return r.relation === "THROUGH_SERVICE"; });
