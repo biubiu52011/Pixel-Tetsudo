@@ -190,16 +190,43 @@
     if (!modal || !window.RunInfoAPI || typeof window.RunInfoAPI.query !== "function") return;
     try {
       window.RunInfoAPI.query(lineId, line).then(function(r) {
-        if (!r || !r.text) return;                    // 无数据/失败：保留现有显示
+        if (!r) return;                                // 查询失败：保留现有显示
+
+        // RunInfoAPI is the final authority after the async refresh. Keep the
+        // modal status, interval semantics and detail text on the same snapshot
+        // instead of mixing stale DataFusion state with fresh official text.
+        var resolvedStatus = r.status || fallbackStatus || "no_data";
+        var statusSection = modal.querySelector(".rs-status-section");
+        if (statusSection) {
+          var meta = window.DataState && window.DataState.STATUS_META && window.DataState.STATUS_META[resolvedStatus]
+            ? window.DataState.STATUS_META[resolvedStatus]
+            : STATUS_META[resolvedStatus] || STATUS_META.no_data;
+          statusSection.className = "rs-status-section rs-status-" + resolvedStatus;
+          statusSection.innerHTML = "<span class=\\\"rs-status-indicator\\\"><span class=\\\"rs-status-dot\\\"></span>" +
+            escapeHtml(t("status." + resolvedStatus) || resolvedStatus) + "</span>";
+          var statusDot = statusSection.querySelector(".rs-status-dot");
+          if (statusDot) statusDot.style.background = "var(--" + (meta.color || "gray") + ")";
+        }
+
+        // A normal result applies to the whole line; never retain an old
+        // disruption interval beside a freshly resolved normal status.
+        if (resolvedStatus === "normal") {
+          var intervalEl = modal.querySelector(".rs-interval-stations");
+          if (intervalEl) intervalEl.innerHTML = '<span class="rs-station-text">' + escapeHtml(t("status.all_lines")) + "</span>";
+        }
+
         var causeSection = modal.querySelector(".rs-cause-section");
         if (!causeSection) return;
-        // 用 API 结果生成正文（与初始渲染同逻辑：纯文字 + URL 链接行）
+        // Empty official text is still meaningful (e.g. structured Normal).
+        // Render status.none rather than aborting and leaving stale detail text.
         var lang = window.currentLang || "ja";
         var causeHtml;
-        if (lang === "ja" || !_needsJaTranslate(r.text)) {
+        if (!r.text) {
+          causeHtml = '<span class="rs-text-muted">' + t("status.none") + "</span>";
+        } else if (lang === "ja" || !_needsJaTranslate(r.text)) {
           causeHtml = escapeHtml(r.text);
         } else {
-          causeHtml = _translatedText(r.text, lang, { cause: fallbackCause || r.text, status: r.status || fallbackStatus, lineId: lineId });
+          causeHtml = _translatedText(r.text, lang, { cause: fallbackCause || r.text, status: resolvedStatus, lineId: lineId });
         }
         var textEl = causeSection.querySelector(".rs-cause-text");
         if (textEl) textEl.innerHTML = causeHtml;
