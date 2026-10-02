@@ -1122,21 +1122,15 @@
             // 跑推定补全其余区段，按 trainId 合并去重（实时优先，推定只填实时没有的车次）。
             // 数据文件 data/timetables/*-manual.js 为 JR 官网公开时刻表人工整理（ODPT 兼容格式）。
             // 通用化：collectManualTimetableLines() 自动扫描 window.<lineId>_MANUAL_TIMETABLES（后缀 18 字符）。
-            function collectManualTimetableLines() {
-              var out = [];
-              try {
-                Object.keys(window).forEach(function(k) {
-                  if (k.slice(-18) === '_MANUAL_TIMETABLES' && window[k] && window[k].length > 0) {
-                    out.push(k.slice(0, -18));
-                  }
-                });
-              } catch(e) { console.debug("[DataFusion] collectManualTimetableLines error:", e.message); }
-              return out;
-            }
-            var manualLines = collectManualTimetableLines();
+            var manualLines = (window.TrainPositionEstimator &&
+              typeof window.TrainPositionEstimator.getRegisteredManualLineIds === "function")
+              ? window.TrainPositionEstimator.getRegisteredManualLineIds() : [];
             manualLines.forEach(function(manualLineId) {
+              if (requestedLineIds && requestedLineIds.length && requestedLineIds.indexOf(manualLineId) < 0) return;
               if (!mayUseTimetablePosition(manualLineId)) return;
-              var manualTT = window[manualLineId + '_MANUAL_TIMETABLES'];
+              var manualTT = (window.TrainPositionEstimator &&
+                typeof window.TrainPositionEstimator.getRegisteredManualTimetable === "function")
+                ? window.TrainPositionEstimator.getRegisteredManualTimetable(manualLineId) : null;
               if (!manualTT || !Array.isArray(manualTT) || manualTT.length === 0) return;
               try {
                 manualTT.forEach(function(tt) { if (tt) tt._positionSource = "station-timetable"; });
