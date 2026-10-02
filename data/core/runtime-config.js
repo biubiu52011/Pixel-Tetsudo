@@ -33,16 +33,12 @@
   // ========== 直通运行 ==========
 
   /**
-   * 直通运行 railway → 归属优先表（跨 operator 放行）。
-   * 解决：直通系统列车 fromStation 专属站，LINE_RAILWAY_CODE 反查无映射时 fallback "站数最多"
-   * 导致误配（例：SotetsuDirect→Yamanote）。
-   * 结构：exclude 排除环线；prefer 按优先级归属。
+   * Source railway identity scope for feeds whose railway entity spans canonical
+   * project lines/operators. This is candidate admission only, never a preference
+   * order and never proof that two records are the same physical train.
    */
-  var THROUGH_RAILWAY_FALLBACK = {
-    "SotetsuDirect": {
-      exclude: ["Yamanote"],
-      prefer: ["SotetsuShinYokohama", "Yokosuka", "Saikyo", "ShonanShinjuku"]
-    }
+  var SOURCE_RAILWAY_LINE_SCOPE = {
+    "SotetsuDirect": ["SotetsuShinYokohama", "Yokosuka", "Saikyo", "ShonanShinjuku"]
   };
 
   /**
@@ -54,25 +50,6 @@
     "JR-East", "TokyoMetro", "Toei", "YokohamaMunicipal", "Keio",
     "Sotetsu", "Tokyu", "Tobu", "TWR", "MIR", "TamaMonorail"
   ];
-
-  /**
-   * 官方实时位置完整覆盖线路。
-   * 这些线路的 odpt:Train 已确认覆盖全线运行列车，因此 TrainTimetable
-   * 只作为班次/目的地/running-chain 证据，不再生成或补充列车位置。
-   * 仅登记已有仓库实测证据的线路；其他存在 train endpoint 的运营商不自动推定为 full。
-   */
-  var AUTHORITATIVE_REALTIME_LINES = {
-    // 4.3.468 line-level runtime verification:
-    // Toei odpt:Train -> Asakusa/Shinjuku/Oedo observed estimated:false.
-    // Mita is intentionally excluded from full-coverage suppression: official Toei guidance
-    // excludes Meguro-Shirokanetakanawa from train-position service.
-    // Arakawa is intentionally excluded: no authoritative odpt:Train position coverage.
-    // Do not promote a line merely because its operator exposes odpt:Train; require line-level
-    // evidence and no known timetable-position supplementation requirement.
-    "Asakusa": true,
-    "Shinjuku": true,
-    "Oedo": true
-  };
 
   /**
    * 实时位置覆盖策略（通用能力模型，不在融合算法中硬编码线路）。
@@ -105,6 +82,20 @@
       "Asakusa": { mode: "FULL" },
       "Shinjuku": { mode: "FULL" },
       "Oedo": { mode: "FULL" },
+      "Arakawa": { mode: "FULL" },
+      "KeioMain": { mode: "FULL" },
+      "KeioSagamihara": { mode: "FULL" },
+      "KeioDobutsuen": { mode: "FULL" },
+      "KeioNew": { mode: "FULL" },
+      "KeioInokashira": { mode: "FULL" },
+      "KeioKeibajo": { mode: "FULL" },
+      "KeioTakao": { mode: "FULL" },
+      "TobuSkytree": { mode: "FULL" },
+      "TobuNoda": { mode: "FULL" },
+      "Noda": { mode: "FULL" },
+      "Tojo": { mode: "FULL" },
+      "Ogose": { mode: "FULL" },
+      "TobuDaishi": { mode: "FULL" },
 
       // Known partial/limited sources. These declarations are facts, not algorithm branches.
       // SEGMENTED without a verified local station range intentionally fails open to timetable.
@@ -277,9 +268,8 @@
     TRUNK_MAIN_LINE_IDS: TRUNK_MAIN_LINE_IDS,
     TRUNK_EXTENSION_ALLOW: TRUNK_EXTENSION_ALLOW,
     // 直通运行
-    THROUGH_RAILWAY_FALLBACK: THROUGH_RAILWAY_FALLBACK,
+    SOURCE_RAILWAY_LINE_SCOPE: SOURCE_RAILWAY_LINE_SCOPE,
     PRIORITY_OPS: PRIORITY_OPS,
-    AUTHORITATIVE_REALTIME_LINES: AUTHORITATIVE_REALTIME_LINES,
     REALTIME_POSITION_POLICY: REALTIME_POSITION_POLICY,
     // ODPT 站 ID 别名
     STATION_ALIAS: STATION_ALIAS,
