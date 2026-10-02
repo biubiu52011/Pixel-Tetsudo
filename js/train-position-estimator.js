@@ -500,6 +500,26 @@
               }
             }
           }
+          // Tobu 2026 official limited-express timetable publishes vehicle class.
+          // When ODPT omits vehicleType, only service names with a unique current
+          // vehicle class are safe evidence. Ambiguous generic Kegon/Kinu remain unknown.
+          if (!tt['vehicleType'] && !tt['odpt:vehicleType'] &&
+              /Tobu/.test(String(line.operator || '') + String(tt['odpt:operator'] || ''))) {
+            var _trainNameRaw = tt['odpt:trainName'] || tt['trainName'] || tt['odpt:trainTitle'] || '';
+            var _trainName = typeof _trainNameRaw === 'object'
+              ? (_trainNameRaw.ja || _trainNameRaw['ja-Hrkt'] || _trainNameRaw.en || '')
+              : String(_trainNameRaw);
+            if (/SPACIA\s*X|スペーシア\s*X/i.test(_trainName)) {
+              tt['vehicleType'] = '東武N100系';
+              tt._vehicleEvidenceSource = 'tobu-official-2026-timetable-service-name';
+            } else if (/リバティ|Revaty|Liberty/i.test(_trainName)) {
+              tt['vehicleType'] = '東武500系';
+              tt._vehicleEvidenceSource = 'tobu-official-2026-timetable-service-name';
+            } else if (/りょうもう|Ryomo/i.test(_trainName) && !/リバティ|Revaty|Liberty/i.test(_trainName)) {
+              tt['vehicleType'] = '東武200系';
+              tt._vehicleEvidenceSource = 'tobu-official-2026-timetable-service-name';
+            }
+          }
           // v4.3.950: 车型判定统一入口 TrainVehicle（S0 manual 实证 / S2 车号累积 / S3 查表
           // 交叉验证；不猜——无有依据候选时 trainClass/vehicleType 为空，图标由渲染层兜底）
           if (window.TrainVehicle && typeof window.TrainVehicle.registerVehicle === 'function') {
