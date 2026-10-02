@@ -501,7 +501,7 @@
     // 小田急
     "OdakyuEnoshima": "Enoshima",
     "OdakyuTama": "Tama",
-    // 相鉄・東京モノレール
+    // 相鉄（新横浜線の source-specific railway code）
     "SotetsuShinYokohama": "SotetsuShinYokohama",
     // 埼玉新都市交通（operator 已改 SaitamaRailway，railway 同名）
     "NewShuttle": "SaitamaRailway",
