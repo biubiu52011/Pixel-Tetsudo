@@ -19,6 +19,12 @@ const resolver=read("js/running-chain-resolver.js");
 assert(/TRAIN_IDENTITY_CHANGED/.test(resolver),"changed timetable identity/train number must stay unresolved");
 assert(/if\(!sameId&&!sameNo\)return \{unresolved:true/.test(resolver),"through boundary must not join changed identities");
 
+for(const js of ["js/data-fusion.js","js/train-position-estimator.js","js/trains-render.js"]){
+  assert(!/loopServiceMode/.test(read(js)),js+" must not synthesize loop service state");
+}
+const render=read("js/trains-render.js");
+assert(/isLoopDir && p\.destinationStation/.test(render),"loop trains with real terminal must display destination directly");
+
 const trains=read("js/trains-data.js");
 assert(/function _isFreshRealtimePosition/.test(trains),"realtime freshness guard missing");
 assert(/return _isFreshRealtimePosition\(p\) \? 0 : 8/.test(trains),"expired realtime must lose source priority");
