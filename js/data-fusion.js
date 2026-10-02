@@ -1534,11 +1534,11 @@
         // TrainTimetable does not. mayUseTimetableEstimate() below remains the
         // gate that prevents manual data from synthesizing positions on FULL lines.
         var varName = lineId + '_MANUAL_TIMETABLES';
-        if (window[varName]) { resolve(true); return; }
+        if (window[varName]) { resolve(false); return; }
         // v4.3.1016: ODPT 已有该线时刻表（首都圈等）→ 仍尝试加载 manual（车型实证）：
         // ODPT 时刻表无 vehicleType，manual 带 vehicleType；文件不存在（404）由 onerror 回退 ODPT。
         if (window.ODPT_TIMETABLES && _hasOdptTimetable(lineId)) {
-          if (_manualMissing[lineId]) { resolve(true); return; }
+          if (_manualMissing[lineId]) { resolve(false); return; }
           // fall through 到加载流程；onerror 时回退 ODPT
         }
         // 加载中：复用同一 Promise，避免并发重复请求
@@ -1601,7 +1601,7 @@
           s.onerror = function() {
             _manualMissing[lineId] = true;
             // ODPT 有该线时刻表 → 回退 ODPT（零阻断）；否则才报缺数据
-            if (window.ODPT_TIMETABLES && _hasOdptTimetable(lineId)) { res(true); }
+            if (window.ODPT_TIMETABLES && _hasOdptTimetable(lineId)) { res(false); }
             else { rej(new Error('manual file not found (ODPT 无数据且无 manual 文件?)')); }
           };
         });
