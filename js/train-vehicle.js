@@ -275,44 +275,6 @@
     };
   }
 
-  var NEW_SHUTTLE_FORMATIONS = [
-    { name: '埼玉新都市交通2000系（01編成）', iconPath: '../images/列车/埼玉新都市交通/2000系_01編成_レッドパープル.png' },
-    { name: '埼玉新都市交通2000系（02編成）', iconPath: '../images/列车/埼玉新都市交通/2000系_02編成_オレンジ.png' },
-    { name: '埼玉新都市交通2000系（03編成）', iconPath: '../images/列车/埼玉新都市交通/2000系_03編成_グリーン.png' },
-    { name: '埼玉新都市交通2000系（04編成）', iconPath: '../images/列车/埼玉新都市交通/2000系_04編成_イエロー.png' },
-    { name: '埼玉新都市交通2000系（05編成）', iconPath: '../images/列车/埼玉新都市交通/2000系_05編成_ブルー.png' },
-    { name: '埼玉新都市交通2000系（06編成）', iconPath: '../images/列车/埼玉新都市交通/2000系_06編成_レッド.png' },
-    { name: '埼玉新都市交通2000系（07編成）', iconPath: '../images/列车/埼玉新都市交通/2000系_07編成_さくら色.png' },
-    { name: '埼玉新都市交通2020系（21編成）', iconPath: '../images/列车/埼玉新都市交通/2020系_21編成_グリーンクリスタル.png' },
-    { name: '埼玉新都市交通2020系（22編成）', iconPath: '../images/列车/埼玉新都市交通/2020系_22編成_ブライトアンバー.png' },
-    { name: '埼玉新都市交通2020系（23編成）', iconPath: '../images/列车/埼玉新都市交通/2020系_23編成_ピュアルビー.png' },
-    { name: '埼玉新都市交通2020系（24編成）', iconPath: '../images/列车/埼玉新都市交通/2020系_24編成_ゴールデントパーズ.png' },
-    { name: '埼玉新都市交通2020系（25編成）', iconPath: '../images/列车/埼玉新都市交通/2020系_25編成_トワイライトアメジスト.png' },
-    { name: '埼玉新都市交通2020系（26編成）', iconPath: '../images/列车/埼玉新都市交通/2020系_26編成_ブルーサファイア＆クリソベリル.png' }
-  ];
-
-  function stableHash(value) {
-    var s = String(value || ''), h = 2166136261;
-    for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); }
-    return h >>> 0;
-  }
-
-  function inferNewShuttleFormation(ctx, resolved) {
-    if (!ctx || ctx.lineId !== 'NewShuttle' || !resolved || resolved.name || resolved.iconPath) return resolved;
-    var key = ctx.runningChainId || ctx.trainId || ctx.trainNumber;
-    if (!key) return resolved;
-    var f = NEW_SHUTTLE_FORMATIONS[stableHash(key) % NEW_SHUTTLE_FORMATIONS.length];
-    resolved.name = f.name;
-    resolved.iconPath = f.iconPath;
-    resolved.source = 'formation-estimate';
-    resolved.confidence = 'low';
-    resolved.estimatedFormation = true;
-    return resolved;
-  }
-
-  var _baseResolve = resolve;
-  resolve = function(ctx) { return inferNewShuttleFormation(ctx, _baseResolve(ctx)); };
-
   function getName(ctx) { return resolve(ctx).name; }
   function getIconPath(ctx) { return resolve(ctx).iconPath; }
 
