@@ -245,15 +245,22 @@
         })();
         // Restore hash-based navigation (poll until line data is ready; async load timing)
         (function tryHash() {
-          var hash = window.location.hash;
-          if (!hash || hash.length <= 1) return;
-          var lid = hash.substring(1);
-          var lines = getLinesData();
-          if (lines[lid]) {
-            showLineView(lid, _systemIdsForRoute(lid));
-            return;
+          var attempts = 0;
+          function tick() {
+            var hash = window.location.hash;
+            if (!hash || hash.length <= 1) return;
+            var lid = hash.substring(1);
+            var lines = getLinesData();
+            if (lines[lid]) {
+              showLineView(lid, _systemIdsForRoute(lid));
+              return;
+            }
+            // Do not poll a malformed/stale deep link forever. The normal
+            // DataState subscription below remains able to restore it if data
+            // arrives later.
+            if (++attempts < 25) setTimeout(tick, 400);
           }
-          setTimeout(tryHash, 400);
+          tick();
         })();
         // Arrow is structural UI; only the nested label is translated by lang-init.
       });
