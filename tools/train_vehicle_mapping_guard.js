@@ -472,9 +472,16 @@ function main() {
     ['RapidExpress', 'odpt.Station:Minatomirai.Minatomirai.MotomachiChukagai']
   ].forEach(([type, dest]) => {
     const vt = win.VehicleTypeMap.resolve('Tojo', 'odpt.TrainType:Tobu.' + type, dest);
-    assert(!/90000/.test(vt), 'Tobu 90000 must not be treated as Metro/Tokyu through-service stock', { type, dest, vt });
+    assert(!/90000/.test(vt), 'Tobu 90000 must not be confused with legacy 9000/9050 through-service stock', { type, dest, vt });
+    assert(/9000型/.test(vt) && /9050型/.test(vt) && /50070/.test(vt), 'Tobu Metro through pool must preserve 9000/9050/50070 stock', { type, dest, vt });
   });
-  const ikeSTrain = win.VehicleTypeMap.resolve('Ikebukuro', 'odpt.TrainType:Seibu.S-TRAIN', null);
+  ['TokyuToyoko', 'Fukutoshin'].forEach((lineId) => {
+    const vt = win.VehicleTypeMap.resolve(lineId, 'odpt.TrainType:Tokyu.F-Liner', null);
+    assert(/5050系4000番台/.test(vt), 'F-Liner pool must include Tokyu 5050-4000 10-car stock', { lineId, vt });
+    assert(!/(^| \/ )(5050系|5000系|横浜高速Y500系)( \/ |$)/.test(vt), 'F-Liner default pool must not use ordinary 8-car Tokyu/Y500 stock', { lineId, vt });
+  });
+
+    const ikeSTrain = win.VehicleTypeMap.resolve('Ikebukuro', 'odpt.TrainType:Seibu.S-TRAIN', null);
   assert(ikeSTrain === '西武40000系', 'Seibu Ikebukuro S-TRAIN must resolve only Seibu 40000 series', { ikeSTrain });
 
     assertNoCurrentFictionalAsset(win);
