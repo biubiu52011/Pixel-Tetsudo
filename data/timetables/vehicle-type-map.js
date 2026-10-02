@@ -1000,7 +1000,7 @@
       },
     },
     'Hachiko': {
-      'Local': { 'default': '209系3000番台' },
+      'Local': { 'default': 'JR 209系3500番台 / JR E231系3000番台' },
     },
     'Ito': {
       'Local': { 'default': 'E231系1000番台 / 伊豆急行8000系' },
@@ -1048,8 +1048,8 @@
     },
     'Kawagoe': {
       'Local': { 'default': 'JR E233系7000番台', 'Sotetsu': 'JR E233系7000番台 / 相鉄12000系', 'TWR': 'JR E233系7000番台 / 東京臨海高速鉄道71-000形 / 東京臨海高速鉄道70-000形' },
-      'Rapid': { 'default': 'E233系7000番台', 'Sotetsu': 'JR E233系7000番台 / 相鉄12000系', 'TWR': 'JR E233系7000番台 / 東京臨海高速鉄道71-000形 / 東京臨海高速鉄道70-000形' },
-      'CommuterRapid': { 'default': 'E233系7000番台', 'Sotetsu': 'JR E233系7000番台 / 相鉄12000系', 'TWR': 'JR E233系7000番台 / 東京臨海高速鉄道71-000形 / 東京臨海高速鉄道70-000形' },
+      'Rapid': { 'default': 'JR E233系7000番台', 'Sotetsu': 'JR E233系7000番台 / 相鉄12000系', 'TWR': 'JR E233系7000番台 / 東京臨海高速鉄道71-000形 / 東京臨海高速鉄道70-000形' },
+      'CommuterRapid': { 'default': 'JR E233系7000番台', 'Sotetsu': 'JR E233系7000番台 / 相鉄12000系', 'TWR': 'JR E233系7000番台 / 東京臨海高速鉄道71-000形 / 東京臨海高速鉄道70-000形' },
     },
     'KawagoeWest': {
       'Local': { 'default': 'JR E231系3000番台 / JR 209系3500番台' },
@@ -1249,6 +1249,18 @@
         'default': '京成3100形(8両) / 京成3000形(8両)',
         'Toei': '京成3100形(8両) / 京成3000形(8両)'
       }
+    },
+
+    // 京成支線：押上線の地下鉄直通プールを継承させない。
+    // 4両対応の現役通勤車を保守的候補とし、運用証拠なしに3100/浅草線車を推定しない。
+    'KeiseiKanamachi': {
+      'Local': { 'default': '京成3200形(4両) / 京成3500形(4両)' }
+    },
+    'KeiseiChiba': {
+      'Local': { 'default': '京成3200形(4両) / 京成3500形(4両) / 京成3000形(6両) / 京成3600形(6両) / 京成3700形(6両)' }
+    },
+    'KeiseiChihara': {
+      'Local': { 'default': '京成3200形(4両) / 京成3500形(4両) / 京成3000形(6両) / 京成3600形(6両) / 京成3700形(6両)' }
     },
 
     // 成田スカイアクセス線（京成高砂～成田空港）
@@ -1741,13 +1753,10 @@
     "Toyoko":            "TokyuToyoko",    // 东横线（无前缀别名）
     // 京成支线（4 线）
     "KeiseiMain":        "Keisei",         // 京成本线（别名）
-    "KeiseiKanamachi":   "KeiseiOshiage",  // 金町线 80000形
-    "KeiseiChiba":       "KeiseiOshiage",  // 千叶线 80000形
-    "KeiseiChihara":     "KeiseiOshiage",  // 千原线 80000形
     "Oshiage":           "KeiseiOshiage",  // 押上线（无前缀别名）
-    "Kanamachi":         "KeiseiOshiage",  // 金町线（无前缀别名）
-    "Chiba":             "KeiseiOshiage",  // 千叶线（无前缀别名）
-    "Chihara":           "KeiseiOshiage",  // 千原线（无前缀别名）
+    "Kanamachi":         "KeiseiKanamachi",
+    "Chiba":             "KeiseiChiba",
+    "Chihara":           "KeiseiChihara",
     // 京急 / 相铁 / 京王 别名
     "KeikyuMain":            "Keikyu",             // 京急本线
     "Sotetsu":               "SotetsuMain",        // 相铁本线
