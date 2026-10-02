@@ -21,3 +21,22 @@ assert.ok(
 );
 
 console.log("runinfo-modal-sync: 4 PASS");
+
+assert.ok(
+  src.includes("function refreshListStatuses(linesObj)"),
+  "realtime list cards must reconcile against RunInfoAPI"
+);
+assert.ok(
+  src.includes("target.delayInfo = Object.assign({}, old"),
+  "resolved list status must be written back before rerender"
+);
+assert.ok(
+  src.includes('interval: r.status === "normal" ? null : old.interval'),
+  "normal list status must clear stale disruption interval"
+);
+assert.ok(
+  src.includes("refreshListStatuses(fused.lines);"),
+  "list reconciliation must run after the immediate DataFusion render"
+);
+
+console.log("runinfo-list-sync: 4 PASS");
