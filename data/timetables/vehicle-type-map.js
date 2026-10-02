@@ -1043,7 +1043,7 @@
       'Local': { 'default': 'E231系1000番台 / E233系3000番台' },
       'Rapid': { 'default': 'E231系1000番台 / E233系3000番台' },
       'SpecialRapid': { 'default': 'E231系1000番台 / E233系3000番台' },
-      'LimitedExpress': { 'default': '253系（日光・きぬがわ）' },
+      'LimitedExpress': { 'default': '253系1000番台（日光・きぬがわ） / 東武100系（スペーシア日光・きぬがわ）' },
     },
     'SobuRapid': {
       'Rapid': { 'default': 'E235系1000番台' },
@@ -1116,7 +1116,7 @@
     'UtsunomiyaJR': {
       'Local': { 'default': 'E231系1000番台 / E233系3000番台' },
       'Rapid': { 'default': 'E231系1000番台 / E233系3000番台' },
-      'LimitedExpress': { 'default': '253系（日光・きぬがわ）' },
+      'LimitedExpress': { 'default': '253系1000番台（日光・きぬがわ） / 東武100系（スペーシア日光・きぬがわ）' },
     },
     'Yokosuka': {
       'Local': { 'default': 'E235系1000番台 / E231系1000番台 / E233系3000番台' },
