@@ -73,6 +73,39 @@
     return { status: "info", evidence: [{ type: "UNCLASSIFIED_TEXT" }], delayUpperBoundMinutes: null };
   }
 
+  function normalizeRange(v) {
+    var s = textOf(v).trim();
+    return s ? s.replace(/駅間$/, "").replace(/間$/, "").replace(/[〜～－−]/g, "→") : null;
+  }
+
+  function extractMetadata(input) {
+    input = input || {};
+    var text = textOf(input.text || "");
+    var cause = textOf(input.cause).trim() || null;
+    var interval = normalizeRange(input.range);
+    if (!interval) {
+      var from = textOf(input.stationFromName).trim();
+      var to = textOf(input.stationToName).trim();
+      if (from && to) interval = from + "→" + to;
+      else if (from) interval = from + "方面";
+      else if (to) interval = to + "方面";
+    }
+    var resume = null;
+    if (input.resumeEstimate) {
+      var rm = String(input.resumeEstimate).match(/(\d{2}):(\d{2})/);
+      if (rm) resume = rm[1] + ":" + rm[2];
+    }
+    var textDelayMinutes = null;
+    var dm = text.match(/(?:約|およそ)?\s*(\d{1,3})\s*(?:分間|分|min)(?!頃|後|以)/i);
+    if (dm) textDelayMinutes = parseInt(dm[1], 10);
+    if (!cause && text) {
+      var cm = text.match(/(?:発生した|発生し)([^。\n，,、\sで〜～－−至→-]+?)(?:のため|の影響|により|による)/);
+      if (!cm) cm = text.match(/(?:で|、|，|,|\s|^)([^。\n，,、\sで〜～－−至→-]+?)(?:のため|の影響|により|による|が原因|の発生|に伴い)/);
+      if (cm && cm[1]) cause = cm[1];
+    }
+    return { interval: interval, cause: cause, resume: resume, detail: text || null, textDelayMinutes: textDelayMinutes };
+  }
+
   function evaluate(input) {
     input = input || {};
     var evidence = [];
@@ -105,15 +138,20 @@
 
     var te = evaluateText(input.text || input.statusText || "");
     evidence = evidence.concat(te.evidence || []);
+    var metadata = extractMetadata(input);
 
     return {
       status: structured || te.status || "unknown",
-      maxDelay: delayMinutes,
+      maxDelay: delayMinutes != null ? delayMinutes : metadata.textDelayMinutes,
       delayUpperBoundMinutes: te.delayUpperBoundMinutes,
+      interval: metadata.interval,
+      cause: metadata.cause,
+      resume: metadata.resume,
+      detail: metadata.detail,
       evidence: evidence,
       source: input.source || null
     };
   }
 
-  return { version: "1.0.0", evaluate: evaluate, evaluateText: evaluateText, normalizeStructuredStatus: normalizeStructuredStatus };
+  return { version: "1.1.0", evaluate: evaluate, evaluateText: evaluateText, extractMetadata: extractMetadata, normalizeStructuredStatus: normalizeStructuredStatus };
 });
