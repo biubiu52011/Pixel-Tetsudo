@@ -383,6 +383,27 @@ function main() {
     'New Shuttle formation must remain unresolved without formation-level evidence', unresolvedNewShuttle);
 
 
+  // Daily New Shuttle formation evidence: a confirmed formation is bound to
+  // the physical running chain for that service date only.
+  assert(win.TrainVehicle.registerFormationEvidence({
+    lineId: 'NewShuttle', runningChainId: 'rc:newshuttle:daily-A',
+    serviceDate: '2026-10-03', formationId: '21', evidenceSource: 'test-observation'
+  }), 'New Shuttle 21 formation evidence should register');
+  const formation21 = win.TrainVehicle.resolveFormationEvidence({
+    lineId: 'NewShuttle', runningChainId: 'rc:newshuttle:daily-A', serviceDate: '2026-10-03'
+  });
+  assert(formation21 && formation21.formationId === '21' &&
+         /2020系_21編成_グリーンクリスタル\.png$/.test(formation21.iconPath),
+    'same-day running chain must propagate confirmed 21 formation and its fixed livery', formation21);
+  const formationNextDay = win.TrainVehicle.resolveFormationEvidence({
+    lineId: 'NewShuttle', runningChainId: 'rc:newshuttle:daily-A', serviceDate: '2026-10-04'
+  });
+  assert(!formationNextDay, 'formation evidence must not survive into the next service date', formationNextDay);
+  const formationOtherChain = win.TrainVehicle.resolveFormationEvidence({
+    lineId: 'NewShuttle', runningChainId: 'rc:newshuttle:daily-B', serviceDate: '2026-10-03'
+  });
+  assert(!formationOtherChain, 'formation evidence must not leak to another running chain', formationOtherChain);
+
   assertNoCurrentFictionalAsset(win);
   assertNoFilenameDependentIdentity(win);
   assertCanonicalAssetRenameSimulation(win);
