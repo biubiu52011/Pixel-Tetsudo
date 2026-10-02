@@ -658,9 +658,37 @@
               sourceValidUntil: t["dct:valid"] || null,
               sourceFrequency: t["odpt:frequency"] != null ? t["odpt:frequency"] : null
             };
+            // Resolve vehicle identity once while the train still has realtime
+            // source evidence. The renderer must consume this result rather than
+            // independently guessing again from the current display line.
+            var trainOperator = t["odpt:operator"] || "";
+            var trainOpShort = trainOperator.replace('odpt.Operator:', '') || '';
+            var odptVehicleType = t["odpt:vehicleType"] || t["vehicleType"] || "";
+            positionData.odptVehicleType = odptVehicleType;
+            if (window.TrainVehicle && typeof window.TrainVehicle.resolve === "function") {
+              try {
+                var _rtVehicle = window.TrainVehicle.resolve({
+                  lineId: lid,
+                  operator: trainOpShort,
+                  trainNumber: trainId,
+                  stationIndex: idx,
+                  trainType: rawType,
+                  destinationStation: destStations,
+                  trainId: trainId,
+                  odptVehicleType: odptVehicleType
+                });
+                positionData.vehicleResolution = _rtVehicle || null;
+                if (_rtVehicle) {
+                  positionData.trainClass = _rtVehicle.name || "";
+                  positionData.vehicleType = _rtVehicle.vehicleTypeStr || _rtVehicle.name || "";
+                  positionData.vehicleIconPath = _rtVehicle.iconPath || "";
+                  positionData.vehicleSource = _rtVehicle.source || "";
+                  positionData.vehicleConfidence = _rtVehicle.confidence || "none";
+                }
+              } catch(e) {}
+            }
             // v4.3.6xx: 双向直通列车处理
             // 1. 临海线的车（operator=TWR）开到JR区间了 → 在JR线路图上显示临海线车型
-            var trainOperator = t["odpt:operator"] || "";
             // v4.3.939: 存车自己的 operator（渲染层判断直通车、按车籍选图标，治跨线"变身"）
             positionData.trainOperator = trainOperator.replace('odpt.Operator:', '') || '';
             var isRinkaiTrain = (trainOperator === 'odpt.Operator:TWR' || trainOperator === 'TWR');
@@ -678,8 +706,7 @@
               // 这样直通过来的车（比如东急的车开到半藏门线）就会显示东急的车型，而不是地铁的车型
               try {
                 // 从odpt:operator提取operator简称（去掉odpt.Operator:前缀）
-                var trainOpShort = trainOperator.replace('odpt.Operator:', '') || '';
-                positionData.trainClass = resolveTrainClass(
+                positionData.trainClass = positionData.trainClass || resolveTrainClass(
                   { lineId: lid, operator: trainOpShort, trainNumber: trainId, stationIndex: idx, trainType: rawType, destinationStation: destStations, trainId: trainId + '_' + idx },
                   lid, trainOpShort, trainId + '_' + idx, idx, rawType
                 );
