@@ -627,9 +627,14 @@
     });
     if (typeof window.onLanguageChange === "function") {
       window.onLanguageChange(function() {
-        // render() applies the current operator filter itself, so language
-        // changes need only one list rebuild.
-        render(false);
+        // Language is presentation state. Rebuild card contents in place rather
+        // than sending the page through render()/loading-style list replacement.
+        if (_latestLines) {
+          var ids = Object.keys(_latestLines);
+          patchRealtimeCards(container, _latestLines, ids);
+          renderFilterBar(_latestLines);
+          setFilter(_selectedOperator);
+        }
         if (_currentModalLine && _latestLines) {
           openModal(_currentModalLine, _latestLines, _currentModalIdentity);
         }
