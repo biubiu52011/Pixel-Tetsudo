@@ -382,11 +382,16 @@ function main() {
     trainType: 'Local',
     destinationStation: 'Uchijuku'
   });
-  assert(!unresolvedNewShuttle.name, 'New Shuttle fleet-level evidence must not fabricate a concrete formation', unresolvedNewShuttle);
-  assert(!unresolvedNewShuttle.iconPath, 'New Shuttle unassigned service must not receive a random formation/livery icon', unresolvedNewShuttle);
-  assert(unresolvedNewShuttle.candidates.includes('埼玉新都市交通2000系') &&
-         unresolvedNewShuttle.candidates.includes('埼玉新都市交通2020系'),
-    'New Shuttle unresolved service must preserve its fleet candidates', unresolvedNewShuttle);
+  assert(unresolvedNewShuttle.estimatedFormation === true, 'New Shuttle unresolved service should receive an explicitly estimated formation', unresolvedNewShuttle);
+  assert(unresolvedNewShuttle.source === 'formation-estimate' && unresolvedNewShuttle.confidence === 'low',
+    'New Shuttle formation inference must remain visibly low-confidence estimated evidence', unresolvedNewShuttle);
+  assert(/埼玉新都市交通(2000系|2020系)（(0[1-7]|2[1-6])編成）/.test(unresolvedNewShuttle.name),
+    'New Shuttle inferred formation must be one of the 13 known regular sets', unresolvedNewShuttle);
+  const repeatNewShuttle = win.TrainVehicle.resolve({
+    lineId: 'NewShuttle', trainNumber: 'NS-test-unassigned', trainType: 'Local', destinationStation: 'Omiya'
+  });
+  assert(repeatNewShuttle.name === unresolvedNewShuttle.name && repeatNewShuttle.iconPath === unresolvedNewShuttle.iconPath,
+    'New Shuttle formation estimate must remain stable for the same train identity', { unresolvedNewShuttle, repeatNewShuttle });
 
   assertNoCurrentFictionalAsset(win);
   assertNoFilenameDependentIdentity(win);
