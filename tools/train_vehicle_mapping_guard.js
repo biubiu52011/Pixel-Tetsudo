@@ -508,6 +508,17 @@ function main() {
     const ikeSTrain = win.VehicleTypeMap.resolve('Ikebukuro', 'odpt.TrainType:Seibu.S-TRAIN', null);
   assert(ikeSTrain === '西武40000系', 'Seibu Ikebukuro S-TRAIN must resolve only Seibu 40000 series', { ikeSTrain });
 
+    const mitaDefault = win.VehicleTypeMap.resolve('Mita', 'odpt.TrainType:Toei.Local', null);
+  assert(/都営6300形/.test(mitaDefault) && /都営6500形/.test(mitaDefault),
+    'Mita default pool must preserve current 6300 and 6500 stock', { mitaDefault });
+  const mitaSotetsu = win.VehicleTypeMap.resolve('Mita', 'odpt.TrainType:Toei.Local', 'odpt.Station:Sotetsu.Main.Ebina');
+  assert(!/6300/.test(mitaSotetsu) && /相鉄21000系/.test(mitaSotetsu),
+    'Sotetsu-bound Mita pool must exclude 6-car 6300 and preserve 21000', { mitaSotetsu });
+  const sotMetro = win.VehicleTypeMap.resolve('SotetsuMain', 'odpt.TrainType:Sotetsu.Local', 'odpt.Station:TokyoMetro.Namboku.UrawaMisono');
+  assert(!/(メトロ17000|東京メトロ17000|東京メトロ9000|埼玉高速2000|東武50070)/.test(sotMetro),
+    'remote operator stock must not be inferred to enter Sotetsu Main', { sotMetro });
+  assert(/相鉄21000系/.test(sotMetro), 'Sotetsu Main Metro-axis pool must preserve 21000', { sotMetro });
+
     assertNoCurrentFictionalAsset(win);
   assertNoFilenameDependentIdentity(win);
   assertCanonicalAssetRenameSimulation(win);
