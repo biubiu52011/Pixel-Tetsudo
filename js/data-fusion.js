@@ -881,6 +881,25 @@
             Object.keys(estimated).forEach(function(_vlid) {
               (estimated[_vlid] || []).forEach(_inheritChainVehicle);
             });
+
+            // Keep registry lifetime scoped to chains that still exist in the
+            // current realtime/timetable snapshot. This prevents a long-lived
+            // browser tab from reusing stale vehicle identity if a chain id is
+            // later recycled by upstream timetable data.
+            var _activeChainIds = {};
+            Object.keys(posMap).forEach(function(_vlid) {
+              (posMap[_vlid] || []).forEach(function(_p) {
+                if (_p && _p.runningChainId) _activeChainIds[_p.runningChainId] = true;
+              });
+            });
+            Object.keys(estimated).forEach(function(_vlid) {
+              (estimated[_vlid] || []).forEach(function(_p) {
+                if (_p && _p.runningChainId) _activeChainIds[_p.runningChainId] = true;
+              });
+            });
+            Object.keys(_chainVehicleRegistry).forEach(function(_cid) {
+              if (!_activeChainIds[_cid]) delete _chainVehicleRegistry[_cid];
+            });
             var estCount = 0;
             Object.keys(estimated).forEach(function(lid) {
               // Full official realtime coverage owns position truth. Timetable remains loaded
