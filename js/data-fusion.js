@@ -665,6 +665,12 @@
             var trainOpShort = trainOperator.replace('odpt.Operator:', '') || '';
             var odptVehicleType = t["odpt:vehicleType"] || t["vehicleType"] || "";
             positionData.odptVehicleType = odptVehicleType;
+            // An explicit vehicle type carried by the realtime record is train-level
+            // evidence. Register it before resolving so the same train number can
+            // reuse that evidence without depending on the current display line.
+            if (odptVehicleType && window.TrainVehicle && typeof window.TrainVehicle.registerVehicle === "function") {
+              window.TrainVehicle.registerVehicle(trainId, odptVehicleType);
+            }
             if (window.TrainVehicle && typeof window.TrainVehicle.resolve === "function") {
               try {
                 var _rtVehicle = window.TrainVehicle.resolve({
@@ -681,9 +687,16 @@
                 if (_rtVehicle) {
                   positionData.trainClass = _rtVehicle.name || "";
                   positionData.vehicleType = _rtVehicle.vehicleTypeStr || _rtVehicle.name || "";
-                  positionData.vehicleIconPath = _rtVehicle.iconPath || "";
                   positionData.vehicleSource = _rtVehicle.source || "";
                   positionData.vehicleConfidence = _rtVehicle.confidence || "none";
+                  // Only evidence-backed resolutions may become authoritative
+                  // realtime vehicle identity. S3 map/fleet/icon rules remain
+                  // display estimates and must not be frozen as realtime truth.
+                  var _rtEvidenceBacked = _rtVehicle.source === "odpt" ||
+                    _rtVehicle.source === "manual" ||
+                    _rtVehicle.source === "trainNo";
+                  positionData.vehicleResolvedFromRealtime = _rtEvidenceBacked;
+                  positionData.vehicleIconPath = _rtEvidenceBacked ? (_rtVehicle.iconPath || "") : "";
                 }
               } catch(e) {}
             }
