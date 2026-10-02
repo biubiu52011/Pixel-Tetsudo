@@ -932,3 +932,17 @@ assert(!/西武6000系(?!\(10両\))|西武40000系(?!\(10両\))/.test(toyokoBloc
 const toyokoFLiner = toyokoBlock.match(/'F-Liner': \{[\s\S]*?\n      \}/)?.[0] || '';
 assert(!/東京メトロ17000系(?!\(10両\))/.test(toyokoFLiner),
   'Toyoko F-Liner must not admit 8-car Metro 17000 formations');
+
+// Batch guard: 2026 Shiosai mixed E259/E257 operation and JR canonical identities.
+for (const line of ['SobuRapid','SobuMain']) {
+  const block = vehicleMapSource.match(new RegExp("'" + line + "': \\{[\\s\\S]*?\\n    \\},"))?.[0] || '';
+  for (const dest of ['Choshi','Sakura','Naruto']) {
+    const row = block.match(new RegExp("'" + dest + "': '([^']+)'"))?.[1] || '';
+    assert(row.includes('JR E259系（しおさい）') && row.includes('JR E257系500番台（しおさい）'),
+      line + ' ' + dest + ' must preserve both current Shiosai vehicle families');
+  }
+}
+assert(vehicleMapSource.includes("'SobuRapid': {\n      'Rapid': { 'default': 'JR E235系1000番台' }"),
+  'Sobu Rapid must retain canonical JR E235-1000 identity');
+assert(vehicleMapSource.includes("'Keiyo': {\n      'Local': { 'default': 'JR E233系5000番台' },\n      'Rapid': { 'default': 'JR E233系5000番台' }"),
+  'Keiyo must retain canonical JR E233-5000 identity');
