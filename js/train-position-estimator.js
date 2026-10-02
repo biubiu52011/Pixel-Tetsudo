@@ -514,7 +514,10 @@
             var _evidenceDirection = /Inbound|Up|Nobori/i.test(String(_evidenceDirectionRaw)) ? 'up'
               : (/Outbound|Down|Kudari/i.test(String(_evidenceDirectionRaw)) ? 'down' : '');
             var _evidenceServiceDate = tt['odpt:calendar'] || tt['serviceDate'] || tt['_serviceDate'] || '';
-            var _officialTobuVehicle = window.TOBU_LIMITED_EXPRESS_VEHICLE_EVIDENCE.resolve(trainNumber, _evidenceTrainName, _evidenceDirection, _evidenceServiceDate);
+            var _officialTobuVehicle = window.TOBU_LIMITED_EXPRESS_VEHICLE_EVIDENCE.resolve(
+              trainNumber, _evidenceTrainName, _evidenceDirection, _evidenceServiceDate,
+              { lineId: lineId, operator: tt['odpt:operator'] || line.operator || '' }
+            );
             if (_officialTobuVehicle) {
               tt['vehicleType'] = _officialTobuVehicle;
               tt._vehicleEvidenceSource = 'tobu-official-2026-timetable-train-number';
