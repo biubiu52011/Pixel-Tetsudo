@@ -558,6 +558,12 @@
     return keys.length === 1 ? keys[0] : "";
   }
 
+  // Realtime records without fromStation cannot establish position truth, but
+  // may still carry train-level evidence (vehicle type, destination, train no).
+  // Keep that evidence separate so timetable estimation can consume it later
+  // without pretending the incomplete record is a live position.
+  var _realtimeEvidenceWithoutPosition = {};
+
   function loadTrainPositions() {
     try {
       // Position truth must come only from the dedicated realtime container.
@@ -586,7 +592,25 @@
           if (!t) return;
           var fromId = t["odpt:fromStation"] || "";
           var stationKey = String(fromId).split(".").pop();
-          if (!stationKey) return;
+          var _rawTrainNo = t["odpt:trainNumber"] || t["odpt:train"] || "";
+          if (!stationKey) {
+            if (_rawTrainNo) {
+              var _evKey = String(op) + "::" + String(_rawTrainNo);
+              _realtimeEvidenceWithoutPosition[_evKey] = {
+                operator: op,
+                trainNumber: _rawTrainNo,
+                railway: t["odpt:railway"] || "",
+                destinationStation: t["odpt:destinationStation"] || "",
+                vehicleType: t["odpt:vehicleType"] || t["vehicleType"] || "",
+                observedAt: Date.now()
+              };
+              if ((t["odpt:vehicleType"] || t["vehicleType"]) &&
+                  window.TrainVehicle && typeof window.TrainVehicle.registerVehicle === "function") {
+                window.TrainVehicle.registerVehicle(_rawTrainNo, t["odpt:vehicleType"] || t["vehicleType"]);
+              }
+            }
+            return;
+          }
           var railway = t["odpt:railway"] || "";
           var railwayName = "";
           if (railway) {
