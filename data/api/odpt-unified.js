@@ -445,7 +445,6 @@
       "YokohamaGreen": "Green",
       "SotetsuMain": "Main",
       "SotetsuIzumino": "Izumino",
-      "SotetsuShinYokohama": "Shinyokohama",
       "TokyuDenEnToshi": "DenEnToshi",
       "TokyuToyoko": "Toyoko",
       "TokyuMeguro": "Meguro",
@@ -454,7 +453,6 @@
       "TokyuSetagaya": "Setagaya",
       "TokyuTamagawa": "TokyuTamagawa",
       "TokyuKodomonokuni": "Kodomonokuni",
-      "MinatoMirai": "Minatomirai",
       "TamaMonorail": "TamaMonorail",
     
     "ChuoTatsuno": "ChuoTatsunoBranch",
@@ -505,7 +503,6 @@
     "OdakyuTama": "Tama",
     // 相鉄・東京モノレール
     "SotetsuShinYokohama": "SotetsuShinYokohama",
-    "TokyoMonorail": "HanedaAirport",
     // 埼玉新都市交通（operator 已改 SaitamaRailway，railway 同名）
     "NewShuttle": "SaitamaRailway",
     // （4.3.471: 北上線 Kitakami・山田線 Yamada 已正名，同名透传即命中 ODPT，垫片移除）
