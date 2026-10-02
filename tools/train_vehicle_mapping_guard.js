@@ -673,6 +673,11 @@ function main() {
     const tobuEvidence = win.TOBU_LIMITED_EXPRESS_VEHICLE_EVIDENCE;
   assert(tobuEvidence && typeof tobuEvidence.resolve === 'function',
     'Tobu official vehicle evidence resolver must be loaded');
+  assert(typeof tobuEvidence.resolveEvidence === 'function',
+    'Tobu evidence resolver must expose full matched evidence for diagnostics');
+  const evidenceDetail = tobuEvidence.resolveEvidence('1262', 'スペーシアX62号', 'up', '2026-08-08', { lineId: 'TobuNikko', operator: 'Tobu' });
+  assert(evidenceDetail && evidenceDetail.vehicleType === '東武N100系' && evidenceDetail.service === 'スペーシアX62号',
+    'Detailed evidence lookup must preserve the exact matched record', { evidenceDetail });
   assert(!tobuEvidence.resolve('1263', '', 'down', '2026-07-18', { lineId: 'TobuNikko', operator: 'Tobu' }),
     'Duplicate Tobu 1263 without service identity must remain unknown');
   assert(tobuEvidence.resolve('1263', 'スカイツリートレイン63号', 'down', '2026-07-04', { lineId: 'TobuNikko', operator: 'Tobu' }) === '東武634型',
