@@ -853,7 +853,7 @@ window.getTransferHint = function(stationId, lang) {
     // Keio JSON Train Location.
     "KeioMain": true,
     "KeioSagamihara": true,
-    "KeioZoo": true,
+    "KeioDobutsuen": true,
     "KeioNew": true,
     "KeioInokashira": true,
     "KeioKeibajo": true,
@@ -2561,7 +2561,7 @@ window.LineOperationSystems = {
       nameEn: "Dobutsuen Line",
       nameKo: "도부츠엔선",
       color: "#dd0076",
-      lineIds: ["KeioZoo"],
+      lineIds: ["KeioDobutsuen"],
       icon: "../images/鉄道/京王電鉄/動物園線.png",
       order: 7
     }
