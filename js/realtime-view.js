@@ -361,7 +361,7 @@
     function render() {
       var fused = getLines();
       if (!fused || !fused.lines || Object.keys(fused.lines).length === 0) {
-        container.innerHTML = '<div class="rs-loading"><div class="rs-loading-spinner"></div><span>' + t("status.loading") + '</span></div>';
+        window.DataState.renderPageState(container, "loading");
         return;
       }
       _latestLines = fused.lines;
@@ -370,7 +370,7 @@
         renderLinesList(container, fused.lines, _latestOrder);
         renderFilterBar(fused.lines);
       } catch (e) {
-        container.innerHTML = '<div class="rs-error">' + t('status.render_error') + '</div>';
+        window.DataState.renderPageState(container, "render_error");
       }
     }
 
@@ -389,7 +389,7 @@
         // After 6 seconds, give up polling
         clearInterval(_pollTimer);
         if (!container.querySelector(".rs-line-card")) {
-          container.innerHTML = '<div class="rs-empty">' + t("status.load_error") + '</div>';
+          window.DataState.renderPageState(container, "error");
         }
       }
     }, 300);
