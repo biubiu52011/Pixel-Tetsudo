@@ -1144,7 +1144,12 @@
         // v4.3.939: 车号级缓存 + 直通车按车籍 operator——同一趟车(同 trainId)进不同线路视图用同一张图
         if (!window.__trainIconCache) window.__trainIconCache = {};
         var _icKey = String(p.runningChainId || p.trainId || trainUid);
-        var iconSrc = window.__trainIconCache[_icKey];
+        // Realtime vehicle resolution is produced upstream from the actual
+        // train-level source evidence. Prefer it over any display-line guess.
+        var iconSrc = p.positionSource === "realtime-api" && p.vehicleIconPath ? p.vehicleIconPath : window.__trainIconCache[_icKey];
+        if (iconSrc && p.positionSource === "realtime-api") {
+          window.__trainIconCache[_icKey] = iconSrc;
+        }
         if (!iconSrc && window.TrainVehicle && typeof window.TrainVehicle.resolve === 'function') {
           var _vrCtx = {
             lineId: p.fusionLineId || lineId,
@@ -1156,7 +1161,8 @@
             byOperator: !!p.trainOperator && (p.trainOperator || '') !== line.operator,
             trainId: trainUid,
             // v4.3.1018: S0 manual 实证透传——推算侧直通列车重新 resolve 时不丢 manual vehicleType
-            vehicleTypeManual: p.vehicleTypeManual || ''
+            vehicleTypeManual: p.vehicleTypeManual || '',
+            odptVehicleType: p.odptVehicleType || ''
           };
           iconSrc = window.TrainVehicle.resolve(_vrCtx).iconPath || '';
           if (iconSrc) window.__trainIconCache[_icKey] = iconSrc;
