@@ -80,6 +80,24 @@
 
   // ========== Render functions ==========
 
+  /**
+   * Shared page-level state renderer for realtime/trains list containers.
+   * Keeps loading/empty/error semantics and DOM structure identical across pages.
+   */
+  function renderPageState(container, state, messageKey) {
+    if (!container) return;
+    var key = messageKey || (state === "loading" ? "status.loading"
+      : state === "render_error" ? "status.render_error"
+      : "status.load_error");
+    var message = t(key);
+    if (state === "loading") {
+      container.innerHTML = '<div class="rs-loading" role="status" aria-live="polite"><div class="rs-loading-spinner" aria-hidden="true"></div><span>' + escapeHtml(message) + '</span></div>';
+      return;
+    }
+    var cls = state === "render_error" || state === "error" ? "rs-error" : "rs-empty";
+    container.innerHTML = '<div class="' + cls + '" role="status" aria-live="polite">' + escapeHtml(message) + '</div>';
+  }
+
   // Severity rank for system-level status aggregation (higher = more severe)
   function statusRank(s) {
     if (s === "suspended") return 5;
@@ -548,6 +566,7 @@
     TRUNK_MAIN_LINE_IDS: TRUNK_MAIN_LINE_IDS,
     renderCard: renderCard,
     renderList: renderList,
+    renderPageState: renderPageState,
     localizeInterval: _localizeInterval,
     getLineIdentity: getLineIdentity,
     setLines: setLines,
