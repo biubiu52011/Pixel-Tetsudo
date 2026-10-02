@@ -294,7 +294,10 @@
                   + (_tp.segmentToIndex == null ? "" : _tp.segmentToIndex) + ":"
                   + (_tp.segmentProgress == null ? "" : Math.round(_tp.segmentProgress * 100)) + ":"
                   + (_tp.sourceUpdatedAt || "") + ":"
-                  + (_tp.sourceValidUntil || "") + ",";
+                  + (_tp.sourceValidUntil || "") + ":"
+                  + (_tp.positionSource || "") + ":"
+                  + (_tp.estimated === true ? "estimated" : "observed") + ","
+                  ;
               }
             } catch(e) {}
           }
