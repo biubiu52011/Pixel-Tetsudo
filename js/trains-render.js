@@ -1150,11 +1150,15 @@
           p.vehicleResolvedFromRealtime === true && !!p.vehicleIconPath;
         var _hasInheritedChainVehicle = p.vehicleInheritedFromRunningChain === true &&
           !!p.runningChainId && !!p.vehicleIconPath;
-        var _hasAuthoritativeVehicle = _hasRealtimeVehicleEvidence || _hasInheritedChainVehicle;
+        // Estimator/DataFusion is the primary vehicle decision layer. Preserve
+        // any upstream resolution instead of re-running line-local inference in
+        // the renderer; renderer resolution is fallback-only for legacy records.
+        var _hasUpstreamVehicle = p.vehicleResolvedUpstream === true && !!p.vehicleIconPath;
+        var _hasAuthoritativeVehicle = _hasRealtimeVehicleEvidence || _hasInheritedChainVehicle || _hasUpstreamVehicle;
         var iconSrc = _hasAuthoritativeVehicle ? p.vehicleIconPath : window.__trainIconCache[_icKey];
-        // Evidence-backed realtime identity and its running-chain inheritance
-        // outrank any current-line re-resolution. Map/fleet estimates remain
-        // replaceable and cannot override the physical train identity.
+        // Upstream vehicle resolution and running-chain inheritance outrank
+        // current-line re-resolution. Low-confidence map/fleet results may be
+        // displayed, but they never enter the physical-chain registry.
         if (iconSrc && _hasAuthoritativeVehicle) {
           window.__trainIconCache[_icKey] = iconSrc;
         }
