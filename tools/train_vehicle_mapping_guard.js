@@ -519,6 +519,19 @@ function main() {
     'remote operator stock must not be inferred to enter Sotetsu Main', { sotMetro });
   assert(/相鉄21000系/.test(sotMetro), 'Sotetsu Main Metro-axis pool must preserve 21000', { sotMetro });
 
+    const nambokuDefault = win.VehicleTypeMap.resolve('Namboku', 'odpt.TrainType:TokyoMetro.Local', null);
+  assert(/東京メトロ9000系\(6両\/8両\)/.test(nambokuDefault),
+    'Namboku 9000 must preserve the current mixed 6/8-car fleet state', { nambokuDefault });
+  const nambokuSotetsu = win.VehicleTypeMap.resolve('Namboku', 'odpt.TrainType:TokyoMetro.Local', 'odpt.Station:Sotetsu.Main.Ebina');
+  assert(nambokuSotetsu === '相鉄21000系',
+    'Namboku Sotetsu-bound pool must use explicitly evidenced 21000 only', { nambokuSotetsu });
+  const mitaDefaultLength = win.VehicleTypeMap.resolve('Mita', 'odpt.TrainType:Toei.Local', null);
+  assert(/6300形\(6両\)/.test(mitaDefaultLength) && /6500形\(8両\)/.test(mitaDefaultLength),
+    'Mita default pool must encode 6300/6500 formation lengths', { mitaDefaultLength });
+  const mitaSotetsuEvidence = win.VehicleTypeMap.resolve('Mita', 'odpt.TrainType:Toei.Local', 'odpt.Station:Sotetsu.Main.Ebina');
+  assert(!/6500/.test(mitaSotetsuEvidence) && /相鉄21000系/.test(mitaSotetsuEvidence),
+    'Mita Sotetsu-bound pool must not claim unsupported Toei 6500 entry into Sotetsu', { mitaSotetsuEvidence });
+
     assertNoCurrentFictionalAsset(win);
   assertNoFilenameDependentIdentity(win);
   assertCanonicalAssetRenameSimulation(win);
