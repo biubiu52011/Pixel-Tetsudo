@@ -550,6 +550,18 @@ function main() {
   assert(/小田急4000形\(10両\)/.test(chiyodaOdakyu) && /東京メトロ16000系\(10両\)/.test(chiyodaOdakyu),
     'Chiyoda Odakyu through pool must remain 10-car capable', { chiyodaOdakyu });
 
+    const tozai = win.VehicleTypeMap.resolve('Tozai', 'odpt.TrainType:TokyoMetro.Local', null);
+  assert(/05系\(10両\)/.test(tozai) && /07系\(10両\)/.test(tozai) && /15000系\(10両\)/.test(tozai),
+    'Tozai Metro fleet must preserve current 10-car 05/07/15000 stock', { tozai });
+  const sobuMetro = win.VehicleTypeMap.resolve('ChuoSobuLocal', 'odpt.TrainType:JR-East.Local', 'odpt.Station:TokyoMetro.Tozai.Nakano');
+  assert(/E231系800番台\(10両・東西線直通\)/.test(sobuMetro),
+    'Chuo-Sobu Metro through pool must use E231-800 subway stock', { sobuMetro });
+  assert(!/(E231系500番台|E231系0番台)/.test(sobuMetro),
+    'ordinary Chuo-Sobu E231-500/0 must not enter the Tozai through pool', { sobuMetro });
+  const tozaiToyo = win.VehicleTypeMap.resolve('Tozai', 'odpt.TrainType:TokyoMetro.Local', 'odpt.Station:ToyoRapid.ToyoRapid.Katsutadai');
+  assert(/東葉高速2000系\(10両\)/.test(tozaiToyo),
+    'Toyo Rapid destination pool must preserve Toyo 2000 stock', { tozaiToyo });
+
     assertNoCurrentFictionalAsset(win);
   assertNoFilenameDependentIdentity(win);
   assertCanonicalAssetRenameSimulation(win);
