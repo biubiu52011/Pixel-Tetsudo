@@ -892,3 +892,17 @@ assert(!/'Toei': '[^']*(?:京王電鉄7000系|京王電鉄8000系)(?:[^']*)'/.te
   'Keio 7000/8000 must not enter Toei Shinjuku through pools');
 assert(/京王電鉄9000系30番台 \/ 京王電鉄5000系 \/ 都営10-300形/.test(keioMainBlock),
   'KeioMain Toei pool must preserve subway-compatible Keio/Toei stock');
+
+// Batch guard: Chiba-area local fleets and Fukutoshin-Tojo formation boundary.
+for (const line of ['Sotobo','Uchibo']) {
+  const block = vehicleMapSource.match(new RegExp("'" + line + "': \\{[\\s\\S]*?\\n    \\},"))?.[0] || '';
+  assert(/'Local': \{ 'default': '[^']*JR E131系0番台[^']*JR 209系/.test(block),
+    line + ' local pool must retain Chiba-area E131/209 stock');
+  assert(!/'Local': \{ 'default': '[^']*JR E235系1000番台/.test(block),
+    line + ' local default must not treat Sobu Rapid E235 as local stock');
+}
+const fukutoshinBlock2 = vehicleMapSource.match(/'Fukutoshin': \{[\s\S]*?\n    \},\n    'Hanzomon'/)?.[0] || '';
+for (const m of fukutoshinBlock2.matchAll(/'Tobu': '([^']+)'/g)) {
+  assert(!m[1].includes('東京メトロ17000系(8両/10両)'),
+    'Fukutoshin Tobu pools must not admit 8-car Metro 17000 formations');
+}
