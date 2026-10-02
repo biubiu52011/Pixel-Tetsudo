@@ -3566,6 +3566,24 @@ window.LineServiceRelations = [
         ((r.lineA === a && r.lineB === b) || (r.lineA === b && r.lineB === a));
     });
   };
+  // Branch topology and train operation are different facts.
+  // BRANCH_OF / PHYSICAL_CONNECT only prove infrastructure/topology; they do
+  // not authorize parent-line trains to be projected onto a branch.
+  L.getRelation = function(a, b) {
+    if (!a || !b) return null;
+    for (var i = 0; i < L.length; i++) {
+      var r = L[i];
+      if ((r.lineA === a && r.lineB === b) || (r.lineA === b && r.lineB === a)) return r;
+    }
+    return null;
+  };
+  L.getBranchOperationMode = function(parentLineId, branchLineId) {
+    var r = L.getRelation(parentLineId, branchLineId);
+    if (!r) return "UNKNOWN";
+    if (r.relation === "THROUGH_SERVICE") return "SHARED_SERVICE";
+    if (r.relation === "PHYSICAL_CONNECT" || r.relation === "BRANCH_OF") return "INDEPENDENT_OR_UNPROVEN";
+    return "UNKNOWN";
+  };
   L.getServiceChains = function() {
     var rs = L.filter(function(r) { return r.relation === "THROUGH_SERVICE"; });
     var nodes = {};
