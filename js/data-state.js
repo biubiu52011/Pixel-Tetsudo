@@ -515,6 +515,23 @@
     });
   }
 
+  function renderSystemCardByCode(code, linesObj, options) {
+    if (!code || !linesObj || !window.LineOperationSystems) return "";
+    var opKeys = Object.keys(window.LineOperationSystems);
+    for (var oi = 0; oi < opKeys.length; oi++) {
+      var systems = window.LineOperationSystems[opKeys[oi]];
+      if (!Array.isArray(systems)) continue;
+      for (var si = 0; si < systems.length; si++) {
+        var sys = systems[si];
+        if (!sys || String(sys.code || "") !== String(code)) continue;
+        var memberIds = (sys.lineIds || []).filter(function(id) { return !!linesObj[id]; });
+        if (memberIds.length === 0) return "";
+        return renderSystemCard(sys, memberIds, linesObj, options || { mode: "realtime" });
+      }
+    }
+    return "";
+  }
+
   // ========== Data management ==========
 
   function setLines(lines) { _lines = lines || {}; notify(); }
@@ -566,6 +583,7 @@
     TRUNK_MAIN_LINE_IDS: TRUNK_MAIN_LINE_IDS,
     renderCard: renderCard,
     renderList: renderList,
+    renderSystemCardByCode: renderSystemCardByCode,
     renderPageState: renderPageState,
     localizeInterval: _localizeInterval,
     getLineIdentity: getLineIdentity,
