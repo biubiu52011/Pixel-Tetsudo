@@ -573,7 +573,7 @@
   function loadTrainPositions() {
     try {
       // Position truth must come only from the dedicated realtime container.
-      // ODPT_TRAINS is a legacy mixed compatibility bucket and may contain timetable rows.
+      // Realtime positions come only from the dedicated ODPT position store.
       var positionSource = window.ODPT_TRAIN_POSITIONS;
       if (!positionSource) return;
       allLines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : {};
@@ -919,7 +919,7 @@
         try {
           if (window.TrainPositionEstimator && typeof window.TrainPositionEstimator.estimateAllPositions === "function") {
             // Timetable estimation consumes timetable rows only; never fall back to the
-            // legacy ODPT_TRAINS bucket because it may contain realtime position rows.
+            // Timetable estimation reads only the dedicated timetable store.
             var timetableSource = window.ODPT_TIMETABLES || {};
             var estimated = window.TrainPositionEstimator.estimateAllPositions(
               allLines,
