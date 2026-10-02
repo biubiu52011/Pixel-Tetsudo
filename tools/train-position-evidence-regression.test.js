@@ -15,6 +15,13 @@ assert(/_CHAIN_EVIDENCE_TTL_MS\s*=\s*3\s*\*\s*60\s*\*\s*1000/.test(fusion),"drop
 assert(/_realtimeEvidenceWithoutPosition/.test(fusion),"missing-position realtime evidence must be separated");
 assert(!/if \(!mayUseTimetablePosition\(lineId\)\)[\s\S]{0,120}resolve\(true\)/.test(fusion),"FULL realtime must not block manual vehicle evidence loading");
 assert(/TrainVehicle\.registerVehicle\(_mTrainNo, _mVehicle\)/.test(fusion),"manual timetable vehicle evidence must be registered independently of position");
+assert(/_realtimeEvidenceWithoutPosition\s*=\s*\{\};/.test(fusion),"positionless realtime evidence must be snapshot-scoped");
+assert(/Object\.keys\(_realtimeEvidenceWithoutPosition\)/.test(fusion),"positionless realtime vehicle evidence must have a consumer");
+assert(/\(estimated\[_vlid\] \|\| \[\]\)\.forEach\(_rememberChainVehicle\)/.test(fusion),"verified timetable vehicle evidence must seed running-chain registry");
+const estimator=read("js/train-position-estimator.js");
+assert(/vehicleResolvedUpstream:\s*!!vehResult\.iconPath/.test(estimator),"estimator vehicle decision metadata must reach renderer");
+const renderer=read("js/trains-render.js");
+assert(/_hasUpstreamVehicle/.test(renderer),"renderer must consume upstream vehicle resolution before fallback");
 assert(/if \(!stationKey\)[\s\S]{0,800}return;/.test(fusion),"missing fromStation must not create realtime position");
 
 const resolver=read("js/running-chain-resolver.js");
