@@ -479,7 +479,7 @@
     var html = "";
     for (var o = 0; o < opOrder.length; o++) {
       var op = opOrder[o];
-      html += '<div class="rs-operator-group"><div class="rs-operator-title">' + escapeHtml(tOp(op)) + '</div>'
+      html += '<div class="rs-operator-group" data-operator="' + escapeHtml(op) + '"><div class="rs-operator-title">' + escapeHtml(tOp(op)) + '</div>'
         + '<div class="rs-cards-container">';
       // Running-system cards (LOS authority), then per-line fallback for uncovered lines
       var losKey = null;
