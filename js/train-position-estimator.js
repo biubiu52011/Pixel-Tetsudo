@@ -506,7 +506,11 @@
           if (!tt['vehicleType'] && !tt['odpt:vehicleType'] &&
               window.TOBU_LIMITED_EXPRESS_VEHICLE_EVIDENCE &&
               typeof window.TOBU_LIMITED_EXPRESS_VEHICLE_EVIDENCE.resolve === 'function') {
-            var _officialTobuVehicle = window.TOBU_LIMITED_EXPRESS_VEHICLE_EVIDENCE.resolve(trainNumber);
+            var _evidenceTrainNameRaw = tt['odpt:trainName'] || tt['trainName'] || tt['odpt:trainTitle'] || '';
+            var _evidenceTrainName = typeof _evidenceTrainNameRaw === 'object'
+              ? (_evidenceTrainNameRaw.ja || _evidenceTrainNameRaw['ja-Hrkt'] || _evidenceTrainNameRaw.en || '')
+              : String(_evidenceTrainNameRaw);
+            var _officialTobuVehicle = window.TOBU_LIMITED_EXPRESS_VEHICLE_EVIDENCE.resolve(trainNumber, _evidenceTrainName);
             if (_officialTobuVehicle) {
               tt['vehicleType'] = _officialTobuVehicle;
               tt._vehicleEvidenceSource = 'tobu-official-2026-timetable-train-number';
