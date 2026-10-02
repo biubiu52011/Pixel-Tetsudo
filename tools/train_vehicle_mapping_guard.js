@@ -743,6 +743,13 @@ function main() {
     'Keisei 3000 must be explicitly eight-car when used as an Asakusa-network through candidate');
   assert(!/'JR-East': '相鉄12000系 \/ 相鉄20000系 \/ 相鉄21000系'/.test(vehicleMapSource),
     'JR-Sotetsu pools must not include Tokyu-through 20000/21000 series');
+  assert(/'SotetsuMain':[\s\S]{0,1200}'default': '[^']*相鉄13000系/.test(vehicleMapSource) &&
+         /'SotetsuIzumino':[\s\S]{0,1200}'default': '[^']*相鉄13000系/.test(vehicleMapSource),
+    'Sotetsu 13000 must be present in line-internal Main/Izumino pools');
+  assert(!/'(?:JR-East|Tokyu|TokyoMetro|Toei|Tobu|SaitamaRailway)': '[^']*相鉄13000系/.test(vehicleMapSource),
+    'Sotetsu 13000 is line-internal only and must never enter through-service pools');
+  assert(/'Fukutoshin':[\s\S]{0,5000}'Sotetsu': '東急5050系4000番台\(10両\) \/ 相鉄20000系\(10両\)'/.test(vehicleMapSource),
+    'Fukutoshin-Sotetsu candidates must remain ten-car Toyoko-compatible fleets');
   assertNoFilenameDependentIdentity(win);
   assertCanonicalAssetRenameSimulation(win);
 
