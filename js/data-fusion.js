@@ -639,7 +639,9 @@
               typeName = tp.length > 1 ? tp[tp.length - 1] : String(rawType);
             }
             var positionData = { 
-              stationIndex: idx, 
+              stationIndex: idx,
+              stationId: stationKey,
+              sourceRailway: railwayName,
               trainId: trainId,
               trainNumber: trainId,  // v4.3.950: 纯车号——渲染层查 TRAIN_NO_VEHICLE 用（修复 key 不匹配）
               delayMin: delayMin,
