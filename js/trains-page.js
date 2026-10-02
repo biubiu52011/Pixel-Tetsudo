@@ -427,7 +427,8 @@
         window.onLanguageChange(function() {
           renderFilterBar(document.getElementById("trainsFilterBar"));
           if (listEl && detailEl && detailEl.classList.contains("hidden")) {
-            renderList(listEl);
+            if (_selectedOperator === null) renderList(listEl);
+            else renderFiltered(listEl);
           }
         });
       }
