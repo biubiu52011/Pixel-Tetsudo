@@ -1055,8 +1055,8 @@
       'Local': { 'default': 'JR E231系3000番台 / JR 209系3500番台' },
     },
     'Keiyo': {
-      'Local': { 'default': 'E233系5000番台' },
-      'Rapid': { 'default': 'E233系5000番台' },
+      'Local': { 'default': 'JR E233系5000番台' },
+      'Rapid': { 'default': 'JR E233系5000番台' },
       'LimitedExpress': { 'default': 'E257系500番台' },
     },
     'Musashino': {
@@ -1092,15 +1092,15 @@
       'LimitedExpress': { 'default': '253系1000番台（日光・きぬがわ） / 東武100系（スペーシア日光・きぬがわ）' },
     },
     'SobuRapid': {
-      'Rapid': { 'default': 'E235系1000番台' },
+      'Rapid': { 'default': 'JR E235系1000番台' },
       'LimitedExpress': {
-        'default': 'E259系（成田エクスプレス）/ E257系500番台（しおさい）',
+        'default': 'JR E259系（成田エクスプレス／しおさい） / JR E257系500番台（しおさい）',
         'destStation': {
-          'NaritaAirportTerminal1': 'E259系（成田エクスプレス）',
-          'NaritaAirportTerminal2': 'E259系（成田エクスプレス）',
-          'Choshi': 'E257系500番台（しおさい）',
-          'Sakura': 'E257系500番台（しおさい）',
-          'Naruto': 'E257系500番台（しおさい）',
+          'NaritaAirportTerminal1': 'JR E259系（成田エクスプレス）',
+          'NaritaAirportTerminal2': 'JR E259系（成田エクスプレス）',
+          'Choshi': 'JR E259系（しおさい） / JR E257系500番台（しおさい）',
+          'Sakura': 'JR E259系（しおさい） / JR E257系500番台（しおさい）',
+          'Naruto': 'JR E259系（しおさい） / JR E257系500番台（しおさい）',
           'Matsumoto': 'E353系（あずさ・富士回遊）'
         }
       },
@@ -1687,13 +1687,13 @@
       'Local': { 'default': 'JR 209系2000番台 / JR 209系2100番台' },
       'Rapid': { 'default': 'JR E235系1000番台' },
       'LimitedExpress': {
-        'default': 'E257系500番台（しおさい）/ E259系（成田エクスプレス）',
+        'default': 'JR E259系（成田エクスプレス／しおさい） / JR E257系500番台（しおさい）',
         'destStation': {
-          'NaritaAirportTerminal1': 'E259系（成田エクスプレス）',
-          'NaritaAirportTerminal2': 'E259系（成田エクスプレス）',
-          'Choshi': 'E257系500番台（しおさい）',
-          'Sakura': 'E257系500番台（しおさい）',
-          'Naruto': 'E257系500番台（しおさい）',
+          'NaritaAirportTerminal1': 'JR E259系（成田エクスプレス）',
+          'NaritaAirportTerminal2': 'JR E259系（成田エクスプレス）',
+          'Choshi': 'JR E259系（しおさい） / JR E257系500番台（しおさい）',
+          'Sakura': 'JR E259系（しおさい） / JR E257系500番台（しおさい）',
+          'Naruto': 'JR E259系（しおさい） / JR E257系500番台（しおさい）',
           'Matsumoto': 'E353系（あずさ・富士回遊）'
         }
       },
