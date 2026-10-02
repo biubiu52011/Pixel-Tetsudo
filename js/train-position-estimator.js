@@ -500,6 +500,19 @@
               }
             }
           }
+          // Exact official train-number evidence takes precedence when ODPT omits
+          // vehicleType. The evidence table contains only individually verified rows;
+          // no prefix/range/hash inference is allowed.
+          if (!tt['vehicleType'] && !tt['odpt:vehicleType'] &&
+              window.TOBU_LIMITED_EXPRESS_VEHICLE_EVIDENCE &&
+              typeof window.TOBU_LIMITED_EXPRESS_VEHICLE_EVIDENCE.resolve === 'function') {
+            var _officialTobuVehicle = window.TOBU_LIMITED_EXPRESS_VEHICLE_EVIDENCE.resolve(trainNumber);
+            if (_officialTobuVehicle) {
+              tt['vehicleType'] = _officialTobuVehicle;
+              tt._vehicleEvidenceSource = 'tobu-official-2026-timetable-train-number';
+            }
+          }
+
           // Tobu 2026 official limited-express timetable publishes vehicle class.
           // When ODPT omits vehicleType, only service names with a unique current
           // vehicle class are safe evidence. Ambiguous generic Kegon/Kinu remain unknown.
