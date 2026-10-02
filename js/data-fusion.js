@@ -857,10 +857,26 @@
             );
 
             // Timetable resolution is where canonical runningChainId becomes
-            // available. First bind any realtime evidence that already carries
-            // the same chain, then let non-realtime segments inherit it.
+            // available. Bridge realtime evidence onto it only when a train
+            // number maps to exactly one resolved chain in this estimation pass.
+            var _chainsByTrainNumber = {};
+            Object.keys(estimated).forEach(function(_vlid) {
+              (estimated[_vlid] || []).forEach(function(_ep) {
+                if (!_ep || !_ep.trainNumber || !_ep.runningChainId) return;
+                var _tn = String(_ep.trainNumber);
+                if (!_chainsByTrainNumber[_tn]) _chainsByTrainNumber[_tn] = {};
+                _chainsByTrainNumber[_tn][_ep.runningChainId] = true;
+              });
+            });
             Object.keys(posMap).forEach(function(_vlid) {
-              (posMap[_vlid] || []).forEach(_rememberChainVehicle);
+              (posMap[_vlid] || []).forEach(function(_rp) {
+                if (!_rp || _rp.vehicleResolvedFromRealtime !== true) return;
+                if (!_rp.runningChainId && _rp.trainNumber && _chainsByTrainNumber[String(_rp.trainNumber)]) {
+                  var _chainIds = Object.keys(_chainsByTrainNumber[String(_rp.trainNumber)]);
+                  if (_chainIds.length === 1) _rp.runningChainId = _chainIds[0];
+                }
+                _rememberChainVehicle(_rp);
+              });
             });
             Object.keys(estimated).forEach(function(_vlid) {
               (estimated[_vlid] || []).forEach(_inheritChainVehicle);
