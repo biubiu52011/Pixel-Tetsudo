@@ -1467,6 +1467,7 @@
         var ops = Object.keys(ODPT_ENDPOINTS);
         var loaded = 0;
         var newTimetables = {};
+        var timetableLoadErrors = 0;
 
         // v4.3.489: JR-East 时刻表按 railway 分批拉取（ODPT 单请求 1000 条上限会把
         // 首都圈外线路截断——实测全量请求仅返回 ChuoRapid/Hachiko/Joban/Agatsuma/JobanRapid 5 线，
@@ -1503,6 +1504,7 @@
                         return { rows: rows, sourceOk: true };
                     }).catch(function() {
                         // 请求失败保持 UNKNOWN：不得持久化为“已探测”，下次刷新仍可重试。
+                        timetableLoadErrors++;
                         return { rows: [], sourceOk: false };
                     }).then(function(result) {
                         var rows = result.rows || [];
@@ -1575,11 +1577,15 @@
         });
 
         return Promise.all(promises).then(function() {
-            // 保存到本地缓存（IndexedDB 主路径，失败自动降级 localStorage；内部兜底不 reject）
-            if (Object.keys(newTimetables).length > 0) {
+            // 只有本轮没有 source 请求失败时，才能用统一 timestamp 把聚合结果标记为完整缓存。
+            // 部分成功仍保留在内存供当前页面使用，但不覆盖上一份完整持久缓存。
+            if (Object.keys(newTimetables).length > 0 && timetableLoadErrors === 0) {
                 return saveTimetableCache(newTimetables).then(function() {
                     console.debug("[ODPT] Timetables cached:", loaded, "operators");
                 });
+            }
+            if (timetableLoadErrors > 0) {
+                console.warn("[ODPT] Timetable refresh partial; persistent cache preserved. Failed railway requests:", timetableLoadErrors);
             }
         });
     }
