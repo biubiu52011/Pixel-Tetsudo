@@ -81,7 +81,6 @@ function expectUnknownRuntime(win, label, ctx) {
   const result = win.TrainVehicle.resolve(Object.assign({ trainNumber: `guard-unknown-${label}` }, ctx));
   const value = `${result.name || ''} ${result.iconPath || ''}`;
   [
-    // E235系_0番代.png 现在是通用终兜底（Unknown 场景合法命中），不列入 forbid
     'E235系_1000番代.png',
     'E235系_0番代_B31編成_中央・総武線.png',
     'E231系_0番代.png',
@@ -651,6 +650,10 @@ function main() {
     'Skytree Local must not use ambiguous TokyoMetro/Hanzomon operator fallbacks', { skytreeLocal });
   assert(/東京メトロ13000系\(7両\)/.test(skytreeLocal.Hibiya || '') && /東武70000系\(7両\)/.test(skytreeLocal.Hibiya || ''),
     'Skytree Local Hibiya pool must preserve current Hibiya through stock', { skytreeLocal });
+
+    const unknownIcon = win.TrainIcons.getTrainIcon('Unknown', 'MIR', 'x_1', null, null, true);
+  assert(!unknownIcon || !/JR東日本|E235系/.test(unknownIcon),
+    'Unknown/non-JR trains must never use a concrete JR E235 universal fallback', { unknownIcon });
 
     assertNoCurrentFictionalAsset(win);
   assertNoFilenameDependentIdentity(win);
