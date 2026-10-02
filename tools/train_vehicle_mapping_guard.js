@@ -756,6 +756,19 @@ function main() {
     'Eight-car Metro 17000 formations must not enter Tobu-bound Yurakucho pools');
   assert(!/'(?:Yurakucho|Fukutoshin)'[\s\S]{0,6000}'(?:Tobu|TokyoMetro|Tokyu|Seibu|Sotetsu)': '[^']*90000系/.test(vehicleMapSource),
     'Tobu 90000 must not be inferred into Metro through pools without operational evidence');
+  assert(!vehicleMapSource.includes('東京東京メトロ') && !vehicleMapSource.includes('(8両/10両)(10両)'),
+    'vehicle labels must not contain duplicated operator or formation qualifiers');
+  for (const lineKey of ['Ikebukuro', 'Yurakucho_Seibu', 'MinatoMirai']) {
+    const start = vehicleMapSource.indexOf("'" + lineKey + "': {");
+    const end = vehicleMapSource.indexOf("\n    '", start + 8);
+    const block = vehicleMapSource.slice(start, end < 0 ? vehicleMapSource.length : end);
+    const fStart = block.indexOf("'F-Liner': {");
+    if (fStart >= 0) {
+      const fEnd = block.indexOf("\n      },", fStart);
+      const fBlock = block.slice(fStart, fEnd < 0 ? block.length : fEnd);
+      assert(!fBlock.includes('(8両/10両)'), lineKey + ' F-Liner must remain ten-car only');
+    }
+  }
   assertNoFilenameDependentIdentity(win);
   assertCanonicalAssetRenameSimulation(win);
 
