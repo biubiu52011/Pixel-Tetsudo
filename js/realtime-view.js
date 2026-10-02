@@ -599,7 +599,17 @@
         openModal(card.dataset.line, _latestLines, card.dataset.lineIdentity || "");
       }
     });
-    if (typeof window.onLanguageChange === "function") { window.onLanguageChange(function() { render(); if (_selectedOperator) renderFiltered(); if (_currentModalLine && _latestLines) { openModal(_currentModalLine, _latestLines, _currentModalIdentity); } }); }
+    if (typeof window.onLanguageChange === "function") {
+      window.onLanguageChange(function() {
+        // render() already respects the selected operator through getFilteredLines
+        // in subsequent reconciliation/status paths; do not immediately rebuild
+        // the same list a second time with renderFiltered().
+        render();
+        if (_currentModalLine && _latestLines) {
+          openModal(_currentModalLine, _latestLines, _currentModalIdentity);
+        }
+      });
+    }
     // v4.3.963: WebRunInfo 数据更新（自动抓取/手动输入）后重开弹窗
     document.addEventListener("pt-runinfo-updated", function() {
       if (_currentModalLine && _latestLines) {
