@@ -514,13 +514,20 @@
             var _evidenceDirection = /Inbound|Up|Nobori/i.test(String(_evidenceDirectionRaw)) ? 'up'
               : (/Outbound|Down|Kudari/i.test(String(_evidenceDirectionRaw)) ? 'down' : '');
             var _evidenceServiceDate = tt['odpt:calendar'] || tt['serviceDate'] || tt['_serviceDate'] || '';
-            var _officialTobuVehicle = window.TOBU_LIMITED_EXPRESS_VEHICLE_EVIDENCE.resolve(
+            var _officialTobuEvidence = window.TOBU_LIMITED_EXPRESS_VEHICLE_EVIDENCE.resolveEvidence(
               trainNumber, _evidenceTrainName, _evidenceDirection, _evidenceServiceDate,
               { lineId: lineId, operator: tt['odpt:operator'] || line.operator || '' }
             );
-            if (_officialTobuVehicle) {
-              tt['vehicleType'] = _officialTobuVehicle;
+            if (_officialTobuEvidence) {
+              tt['vehicleType'] = _officialTobuEvidence.vehicleType;
               tt._vehicleEvidenceSource = 'tobu-official-2026-timetable-train-number';
+              tt._vehicleEvidence = {
+                source: tt._vehicleEvidenceSource,
+                trainNumber: trainNumber,
+                service: _officialTobuEvidence.service || (_officialTobuEvidence.services || []).join(' + '),
+                direction: _officialTobuEvidence.direction || _evidenceDirection,
+                serviceDate: String(_evidenceServiceDate || '').slice(0, 10)
+              };
             }
           }
 
@@ -784,7 +791,8 @@
                     lineId: lineId,
                     runningChainId: resolved.runningChainId,
                     vehicleType: explicitVehicle,
-                    evidenceSource: sourceTT._vehicleEvidenceSource || 'official-timetable-vehicle'
+                    evidenceSource: sourceTT._vehicleEvidenceSource || 'official-timetable-vehicle',
+                    evidenceDetail: sourceTT._vehicleEvidence || null
                   });
                   var chainVehicle = window.TrainVehicle.resolveFormationEvidence({
                     lineId: lineId,
@@ -793,6 +801,8 @@
                   if (chainVehicle) {
                     pos.vehicleType = chainVehicle.vehicleName;
                     pos.vehicleTypeManual = chainVehicle.vehicleName;
+                    pos.vehicleEvidenceSource = chainVehicle.evidenceSource || sourceTT._vehicleEvidenceSource || 'running-chain-vehicle';
+                    pos.vehicleEvidence = chainVehicle.evidenceDetail || sourceTT._vehicleEvidence || null;
                   }
                 }
               }
