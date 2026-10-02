@@ -360,12 +360,12 @@
         if (out) return { translated: out, matched: true };
       }
     }
-    // 2) 摘要兜底（有 cause/status 结构化数据时）
-    if (opts.cause || opts.status) {
-      return { translated: _summary(t, opts.cause, opts.status, opts.lineId, lang), matched: true };
-    }
-    // 3) 原文
-    return { translated: t, matched: false };
+    // 2) Full-text fallback. Never replace the official body with a generic
+    // status summary ("有运行情报" etc.). Translate every known fragment in
+    // place and preserve all unmatched source text so no operational detail is
+    // discarded. This keeps the official Japanese body as the factual source.
+    var full = _replaceFragment(t, lang);
+    return { translated: full, matched: full !== t, fullText: true };
   }
 
   window.DelayTranslator = {
