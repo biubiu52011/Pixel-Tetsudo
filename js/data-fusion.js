@@ -766,7 +766,9 @@
       doEstimation = function() {
         try {
           if (window.TrainPositionEstimator && typeof window.TrainPositionEstimator.estimateAllPositions === "function") {
-            var timetableSource = window.ODPT_TIMETABLES || window.ODPT_TRAINS || {};
+            // Timetable estimation consumes timetable rows only; never fall back to the
+            // legacy ODPT_TRAINS bucket because it may contain realtime position rows.
+            var timetableSource = window.ODPT_TIMETABLES || {};
             var estimated = window.TrainPositionEstimator.estimateAllPositions(
               allLines,
               timetableSource,
