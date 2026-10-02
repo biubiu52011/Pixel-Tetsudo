@@ -478,6 +478,7 @@
   }
 
   function reconcileRealtimeList(container, linesObj) {
+    var _perfStart = (window.performance && performance.now) ? performance.now() : Date.now();
     var filtered = getFilteredLines();
     var cards = container ? container.querySelectorAll(".rs-line-card") : [];
     if (!cards || cards.length === 0) { renderFiltered(); return; }
@@ -491,6 +492,10 @@
     var structureChanged = oldIds.length !== Object.keys(next).length || oldIds.some(function(id) { return !next.hasOwnProperty(id); });
     if (structureChanged || !patchRealtimeCards(container, filtered, changed)) renderFiltered();
     _renderedStatusSignatures = next;
+    var _perfMs = (((window.performance && performance.now) ? performance.now() : Date.now()) - _perfStart);
+    if (_perfMs >= 50 && window.console && console.warn) {
+      console.warn("[PixelPerf] realtimeReconcile", Math.round(_perfMs * 10) / 10 + "ms", { changed: changed.length, structureChanged: structureChanged });
+    }
   }
 
   function init() {
