@@ -27,6 +27,19 @@
     var _eligible = p.vehicleResolvedFromRealtime === true ||
       ((_src === "manual" || _src === "odpt" || _src === "trainNo") && _conf === "high");
     if (!_eligible) return;
+    var _incomingRank = p.vehicleResolvedFromRealtime === true ? 3 : (_src === "odpt" ? 3 : (_src === "manual" ? 2 : 1));
+    var _existing = _chainVehicleRegistry[p.runningChainId];
+    if (_existing) {
+      var _existingRank = _existing.evidenceRank || 0;
+      var _sameVehicle = (_existing.vehicleIconPath && _existing.vehicleIconPath === p.vehicleIconPath) ||
+        (_existing.vehicleType && p.vehicleType && _existing.vehicleType === p.vehicleType);
+      // A line/system transition is not vehicle-swap evidence. Preserve the
+      // established physical-train identity on equal/weaker conflicting input.
+      if (!_sameVehicle && _existingRank >= _incomingRank) {
+        _existing.lastSeenAt = Date.now();
+        return;
+      }
+    }
     _chainVehicleRegistry[p.runningChainId] = {
       trainClass: p.trainClass || "",
       vehicleType: p.vehicleType || "",
@@ -34,6 +47,7 @@
       vehicleSource: p.vehicleSource || "",
       vehicleConfidence: p.vehicleConfidence || "none",
       vehicleResolution: p.vehicleResolution || null,
+      evidenceRank: _incomingRank,
       lastSeenAt: Date.now()
     };
   }
