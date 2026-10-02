@@ -96,7 +96,7 @@
       if((_directThrough[a.lineId]||[]).indexOf(b.lineId)<0)continue;
       var rels=_lineRelations[a.lineId]||[],joins=[];
       for(var k=0;k<rels.length;k++){var r=rels[k],o=r.lineA===a.lineId?r.lineB:r.lineA;if(o===b.lineId&&r.relation==="THROUGH_SERVICE"){joins=r.handoverStations||[];break;}}
-      var ev=_confirmedEdge(a,b,joins); if(!ev)continue;
+      var ev=_confirmedEdge(a,b,joins); if(!ev||ev.unresolved)continue;
       edgeCandidates.push({a:a,b:b,ev:ev});
     }
     // Different train numbers are accepted only when the operational boundary
