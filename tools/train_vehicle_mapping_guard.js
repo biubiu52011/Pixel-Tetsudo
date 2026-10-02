@@ -600,6 +600,15 @@ function main() {
   assert(!/(東武50070系|東京メトロ17000系|東京メトロ10000系)/.test(isesakiF),
     'Tojo/Fukutoshin F-Liner stock must not leak into Tobu Isesaki', { isesakiF });
 
+    const tojoSotetsu = win.VehicleTypeMap.resolve('Tojo', 'odpt.TrainType:Tobu.Local', 'odpt.Station:Sotetsu.Main.Ebina');
+  assert(!/相鉄20000系/.test(tojoSotetsu),
+    'Sotetsu 20000 must not be inferred as entering the Tobu Tojo line', { tojoSotetsu });
+  assert(/東武50070系/.test(tojoSotetsu) && /東急5050系4000番台/.test(tojoSotetsu),
+    'Tojo Sotetsu-direction pool must preserve vehicles capable of the Tojo/Fukutoshin/Tokyu corridor', { tojoSotetsu });
+  const fukutoshinDefault = win.VehicleTypeMap.resolve('Fukutoshin', 'odpt.TrainType:TokyoMetro.Local', null);
+  assert(/東京メトロ17000系\(8両\/10両\)/.test(fukutoshinDefault) && /東京メトロ10000系/.test(fukutoshinDefault),
+    'Fukutoshin generic pool must preserve explicit Metro mixed-length identity', { fukutoshinDefault });
+
     assertNoCurrentFictionalAsset(win);
   assertNoFilenameDependentIdentity(win);
   assertCanonicalAssetRenameSimulation(win);
