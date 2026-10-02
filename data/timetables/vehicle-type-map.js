@@ -1738,10 +1738,11 @@
       var tmap = cfg[tshort];
       if (!tmap) {
         _exactType = false;
-        // v4.3.963: trainType 查不到时回落到该线路已配置的第一个有 default 的类型（通常是 Local）
-        // 避免 Yamanote 只配了 Local 时查 Rapid/Express 直接 miss
-        for (var _tk in cfg) { if (cfg[_tk] && cfg[_tk]['default']) { tmap = cfg[_tk]; break; } }
-        if (!tmap) return '';
+        // Missing service-type evidence must stay unresolved. Falling back to
+        // the first configured type (usually Local) turns unmapped limited
+        // expresses into commuter stock and hides operating-system gaps.
+        _lastVt = null;
+        return '';
       }
       var dgroup = '';
       var urn = Array.isArray(destUrn) ? destUrn[0] : destUrn;
