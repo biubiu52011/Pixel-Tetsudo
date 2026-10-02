@@ -86,14 +86,9 @@
     },
     "ExpTobu": {
       routes: [
-        // v4.3.485: ODPT 東武特急 trainType 一律 "Tobu.LimitedExpress"（スペーシアX/リバティ/けごん・きぬがわ/りょうもう を区別する具体名なし、
-        // 実測：Tobu 時刻表 101 件の LimitedExpress 全て Generic）——typeMatch 具体名は発火しない。
-        // 按线代表制：TobuIsesaki 上の LimitedExpress=りょうもう（250系、正確——Isesaki 線特急はりょうもうのみ）；
-        // TobuSkytree/TobuNikko 上は けごん・きぬがわ が主体 → 100系（スペーシア）代表（スペーシアX/リバティは trainType で判別不能、
-        // りょうもう が浅草〜東武動物公園の Skytree 線区間を走る間も 100系 表示になる既知の限界）。
-        { line: "TobuSkytree", icon: "../images/列车/東武鉄道/東武鉄道_東武100系（スペーシア）.png", typeMatch: ["LimitedExpress"], priority: 3 },
-        { line: "TobuNikko", icon: "../images/列车/東武鉄道/東武鉄道_東武100系（スペーシア）.png", typeMatch: ["LimitedExpress"], priority: 3 },
-        { line: "TobuIsesaki", icon: "../images/列车/東武鉄道/東武鉄道_250系.png", typeMatch: ["LimitedExpress"], priority: 3 }
+        // Generic Tobu.LimitedExpress does not identify the physical vehicle.
+        // Do not assign one representative image by line; N100/100/500/200 are resolved
+        // only from explicit vehicle/service evidence elsewhere in the pipeline.
       ]
     },
     "ExpKeisei": {
