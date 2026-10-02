@@ -241,8 +241,8 @@
   "Asakusa": "../images/列车/都営地下鉄/都営地下鉄_5500形.png",
   "Shinjuku": "../images/列车/都営地下鉄/都営地下鉄_10-300形_1・2次車.png",
   "Oedo": "../images/列车/都営地下鉄/都営地下鉄_12-000形_4次車.png",
-  "TobuSkytree": "../images/列车/東武鉄道/東武鉄道_50000型.png",
-  "TobuIsesaki": "../images/列车/東武鉄道/東武鉄道_50000型.png",
+  "TobuSkytree": null, // mixed Skytree/Hibiya/Hanzomon corridor: concrete stock requires service/evidence
+  "TobuIsesaki": null, // mixed main-line corridor: do not impersonate Tojo-line 50000 stock
   "TobuTojo": "../images/列车/東武鉄道/東武鉄道_60000系.png",
   "Tojo": "../images/列车/東武鉄道/東武鉄道_50000型.png",
   "Ogose": "../images/列车/東武鉄道/東武鉄道_50090型.png",
