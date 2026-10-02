@@ -809,3 +809,15 @@ try {
   }, null, 2));
   process.exitCode = 1;
 }
+// JR E233-7000 and TWR 70-000/71-000 are three distinct canonical identities.
+// Never collapse them by numeric similarity or mixed-operator fleet weighting.
+assert(trainIconsSource.includes('"jr-east-e233-7000-saikyo"') &&
+       trainIconsSource.includes('"twr-70-000-rinkai"') &&
+       trainIconsSource.includes('"twr-71-000-rinkai"'),
+  'JR E233-7000 and both TWR fleets must have separate canonical identities');
+assert(!trainIconsSource.includes('"E233系7000番台 / 71-000形 / 70-000形": [38,4,4]'),
+  'cross-operator JR/TWR fleet-weight guessing must remain removed');
+assert(trainIconsSource.includes('"東京臨海高速鉄道70-000形": "東京臨海高速鉄道70-000形"') &&
+       trainIconsSource.includes('"東京臨海高速鉄道71-000形": "東京臨海高速鉄道71-000形"'),
+  'Rinkai vehicle identities must retain operator-qualified locks');
+
