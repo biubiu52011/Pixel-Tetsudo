@@ -261,6 +261,19 @@
       'Express': { 'default': '5000系 / 2020系', 'TokyoMetro': '東京メトロ8000系 / 08系 / 18000系 / 5000系 / 2020系', 'Tobu': '東京メトロ8000系 / 08系 / 18000系 / 東武50050系', 'Tokyu': '6020系（7両） / 6000系 / 5000系 / 2020系' },
       'SemiExpress': { 'default': '5000系 / 2020系', 'TokyoMetro': '東京メトロ8000系 / 08系 / 18000系 / 5000系 / 2020系', 'Tobu': '東京メトロ8000系 / 08系 / 18000系 / 東武50050系', 'Tokyu': '6020系（7両） / 6000系 / 5000系 / 2020系' },
     },
+    // 東急支線：大井町線とは車両運用が独立。路線レベル情報だけでは編成を決め打ちしない。
+    'TokyuTamagawa': {
+      'Local': { 'default': '東急電鉄1000系 / 7000系' },
+    },
+    'TokyuIkegami': {
+      'Local': { 'default': '東急電鉄1000系 / 7000系' },
+    },
+    'TokyuKodomonokuni': {
+      'Local': { 'default': 'Y000系' },
+    },
+    'TokyuSetagaya': {
+      'Local': { 'default': '300系' },
+    },
     'TokyuOimachi': {
       'Local': { 'default': '6020系（5両） / 9000系 / 9020系', 'TokyuDenEn': '6020系（5両） / 9000系 / 9020系 / 5000系 / 2020系' },
       'Express': { 'default': '6020系（7両） / 6000系', 'TokyuDenEn': '6020系（7両） / 6000系 / 5000系 / 2020系' },
@@ -1686,13 +1699,12 @@
   var LINE_ALIAS_MAP = {
     "JobanRapid":        "Joban",
     // 东急支线（7 线）
-    "TokyuTamagawa":     "TokyuOimachi",   // 多摩川线 7000系
-    "TokyuIkegami":      "TokyuOimachi",   // 池上线 7000系
-    "TokyuKodomonokuni": "TokyuOimachi",   // 儿玉线 Y000系
-    "TokyuSetagaya":     "TokyuOimachi",   // 世田谷线
+    // 東急支線は専用 MAP を持つ。大井町線へ alias すると 6020/9000/9020系を誤配するため禁止。
+    "Tamagawa":          "TokyuTamagawa",
+    "Ikegami":           "TokyuIkegami",
+    "Kodomonokuni":      "TokyuKodomonokuni",
+    "Setagaya":          "TokyuSetagaya"
     "Tamagawa":          "SeibuTamagawa",  // 西武多摩川线
-    "Ikegami":           "TokyuOimachi",   // 池上线（无前缀别名）
-    "Kodomonokuni":      "TokyuOimachi",   // 儿玉线（无前缀别名）
     "Denentoshi":        "TokyuDenEn",     // 田园都市线别名
     "Oimachi":           "TokyuOimachi",   // 大井町线（无前缀别名）
     "Meguro":            "TokyuMeguro",    // 目黑线（无前缀别名）
