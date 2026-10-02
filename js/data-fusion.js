@@ -519,15 +519,12 @@
   // v4.3.948: 直通线 fallback 配置从数据层 through_fallback 读取（不再硬编码）
   var THROUGH_RAILWAY_FALLBACK = (window.RailwayDB && window.RailwayDB.getData && window.RailwayDB.getData().through_fallback) || {};
 
-  // v4.3.950: 车型判定统一入口辅助——TrainVehicle.resolve 优先（多源交叉验证，不猜），
-  // 缺失时回退旧逻辑 TrainIcons.getTrainClass（图标推定，兼容未加载新脚本的页面）
-  function resolveTrainClass(vehCtx, fbLineId, fbOp, fbTrainId, fbIdx, fbType) {
+  // Vehicle identity has one authority. Rendering/icon rules must never infer
+  // a train class back into the operational data model.
+  function resolveTrainClass(vehCtx) {
     try {
       if (window.TrainVehicle && typeof window.TrainVehicle.resolve === 'function') {
         return window.TrainVehicle.resolve(vehCtx).name || '';
-      }
-      if (window.TrainIcons && typeof window.TrainIcons.getTrainClass === 'function') {
-        return window.TrainIcons.getTrainClass(fbLineId, fbOp, fbTrainId, fbIdx, fbType) || '';
       }
     } catch(e) {}
     return '';
