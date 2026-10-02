@@ -366,9 +366,32 @@
 
   function setFilter(operator) {
     _selectedOperator = operator;
+    var bar = document.getElementById("realtimeFilterBar");
+    if (bar) {
+      Array.prototype.slice.call(bar.querySelectorAll(".rs-filter-btn")).forEach(function(btn) {
+        btn.classList.toggle("active", (btn.dataset.operator || null) === _selectedOperator);
+      });
+    }
+    var container = document.getElementById("realtimeStatusContainer");
+    if (!container) return;
+    var groups = container.querySelectorAll(".rs-operator-group[data-operator]");
+    if (!groups.length) {
+      if (_latestLines) renderFiltered();
+      return;
+    }
+    Array.prototype.slice.call(groups).forEach(function(group) {
+      var groupOp = group.getAttribute("data-operator") || "";
+      var visible = !_selectedOperator || groupOp === _selectedOperator ||
+        (_selectedOperator === "JR-East" && groupOp === "JR-East");
+      group.classList.toggle("hidden", !visible);
+    });
+    // Filtering changes visibility only. Keep signatures aligned with the
+    // mounted full list so the next live reconciliation patches cards instead
+    // of mistaking a filter click for a structural data reload.
     if (_latestLines) {
-      renderFiltered();
-      renderFilterBar(_latestLines);
+      var next = {};
+      Object.keys(_latestLines).forEach(function(id) { next[id] = statusSignature(_latestLines[id]); });
+      _renderedStatusSignatures = next;
     }
   }
 
