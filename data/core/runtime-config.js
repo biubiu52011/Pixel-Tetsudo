@@ -6,7 +6,7 @@
  * 
  * Consumers:
  *   data-state.js        → TRUNK_MAIN_LINE_IDS
- *   data-fusion.js       → THROUGH_RAILWAY_FALLBACK, PRIORITY_OPS, STATION_ALIAS,
+ *   data-fusion.js       → SOURCE_RAILWAY_LINE_SCOPE, PRIORITY_OPS, STATION_ALIAS,
  *                          STATION_ALIAS_BY_RAILWAY, TRAIN_WARMUP_LINES, REFRESH_INTERVAL,
  *                          POSITION_INTERVAL
  *   odpt-unified.js      → API_RATE_LIMIT, API_MAX_CONCURRENCY, TT_TRUNCATE_LIMIT
