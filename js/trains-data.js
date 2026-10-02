@@ -84,6 +84,10 @@ function getRealtimePositions(lineId) {
         for (var _pk2 in _bp[_bj]) { if (_bp[_bj].hasOwnProperty(_pk2)) _np2[_pk2] = _bp[_bj][_pk2]; }
         _np2.fusionLineId = _blid;
         _np2.fusionRole = "branch";
+        _np2.branchOperationMode = (window.LineServiceRelations &&
+          typeof window.LineServiceRelations.getBranchOperationMode === "function")
+          ? window.LineServiceRelations.getBranchOperationMode(lineId, _blid)
+          : "UNKNOWN";
         _all2.push(_np2);
       }
     }
