@@ -68,6 +68,7 @@
   // Lightweight rolling performance telemetry for runtime diagnosis. Keep only
   // recent samples so instrumentation cannot become its own memory/log problem.
   var _perfSamples = [];
+  var _lastEstimationMinute = -1;
   function _perfNow() { return (window.performance && performance.now) ? performance.now() : Date.now(); }
   function _perfRecord(name, startedAt, meta) {
     var ms = Math.round((_perfNow() - startedAt) * 10) / 10;
@@ -974,7 +975,7 @@
         return true;
       }
 
-      doEstimation = function() {
+      doEstimation = function(requestedLineIds) {
         var _estPerfStart = _perfNow();
         try {
           if (window.TrainPositionEstimator && typeof window.TrainPositionEstimator.estimateAllPositions === "function") {
@@ -985,7 +986,8 @@
               allLines,
               timetableSource,
               odptData.delayInfo,
-              posMap
+              posMap,
+              { lineIds: requestedLineIds && requestedLineIds.length ? requestedLineIds : null }
             );
 
             // Timetable resolution is where canonical runningChainId becomes
@@ -1167,11 +1169,24 @@
             });
           }
         } catch(estErr) { console.debug("[DataFusion] Position estimation error:", estErr.message); }
-        finally { _perfRecord("doEstimation", _estPerfStart, { positionLines: Object.keys(posMap || {}).length }); }
+        finally { _perfRecord("doEstimation", _estPerfStart, { requested: requestedLineIds ? requestedLineIds.length : "all", positionLines: Object.keys(posMap || {}).length }); }
       }
 
-      // 先进行一次估算（使用已有的时刻表数据）
-      doEstimation();
+      // Timetable positions advance with wall-clock minutes even when the
+      // network payload is identical. Run a full estimation at most once per
+      // minute; within the same minute, re-estimate only lines touched by the
+      // realtime snapshot plus their dependency neighbourhood.
+      var _minuteKey = Math.floor(Date.now() / 60000);
+      var _estimationSeeds = [];
+      var _seenEstimationSeed = {};
+      Object.keys(posMap || {}).forEach(function(id) {
+        if (!_seenEstimationSeed[id]) { _seenEstimationSeed[id] = true; _estimationSeeds.push(id); }
+      });
+      var _estimationTargets = (_minuteKey !== _lastEstimationMinute)
+        ? null
+        : _expandDirtyLines(_estimationSeeds, allLines);
+      doEstimation(_estimationTargets);
+      _lastEstimationMinute = _minuteKey;
 
       // 识别需要估算但可能没有时刻表的线路，按需加载
       try {
@@ -1227,7 +1242,7 @@
           loadMissingTimetables(linesNeedingTimetable).then(function() {
             // Re-estimation may enrich positions/running-chain evidence, but only
             // requested lines and their dependency neighbourhood need re-fusion.
-            doEstimation();
+            doEstimation(_expandDirtyLines(_requestedTimetableLines, allLines));
             try { fuseDirty(_requestedTimetableLines); } catch(e) { console.debug("[DataFusion] reload->fuseDirty error:", e.message); }
           });
         }
