@@ -837,6 +837,9 @@
           }
         });
       });
+      // Publish the mutable working map for estimation/through-service logic.
+      // _previousPosMap remains the immutable reference to the prior snapshot
+      // because posMap is a newly allocated object for this poll.
       odptData.realtimePositions = posMap;
 
       // ===== Estimate positions only where official realtime is not authoritative/full =====
@@ -1491,7 +1494,31 @@
       return (window.ThroughService && window.ThroughService.getDirectThroughLines) ? window.ThroughService.getDirectThroughLines(lineId) : [];
     },
     updateOdptData: function(delayData) {
-      if (delayData && typeof delayData === 'object') { odptData.delayInfo = delayData; try { fuseAll(); } catch(e) { console.debug('[DataFusion] updateOdptData->fuseAll error:', e.message); } }
+      if (delayData && typeof delayData === 'object') {
+        var previous = odptData.delayInfo || {};
+        odptData.delayInfo = delayData;
+        try {
+          var dirtyOps = {};
+          var opKeys = {};
+          Object.keys(previous).forEach(function(op) { opKeys[op] = true; });
+          Object.keys(delayData).forEach(function(op) { opKeys[op] = true; });
+          Object.keys(opKeys).forEach(function(op) {
+            var a = previous[op], b = delayData[op];
+            var sa = a == null ? String(a) : JSON.stringify(a);
+            var sb = b == null ? String(b) : JSON.stringify(b);
+            if (sa !== sb) dirtyOps[op] = true;
+          });
+          var lines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : {};
+          var dirtyLines = [];
+          Object.keys(lines || {}).forEach(function(id) {
+            var line = lines[id] || {};
+            var op = line.operator || "";
+            var normalized = TransitConstants && typeof TransitConstants.normalizeOp === "function" ? TransitConstants.normalizeOp(op) : op;
+            if (dirtyOps[op] || dirtyOps[normalized]) dirtyLines.push(id);
+          });
+          if (dirtyLines.length) fuseDirty(dirtyLines);
+        } catch(e) { console.debug('[DataFusion] updateOdptData->fuseDirty error:', e.message); fuseAll(); }
+      }
     }
   };
 
