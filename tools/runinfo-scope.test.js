@@ -53,3 +53,16 @@ const structuredOnly=[
 assert.strictEqual(ctx.window.RunInfoAPI._selectScopedRecords(structuredOnly,tobuLine).length,1);
 assert.strictEqual(ctx.window.RunInfoAPI._aggregateStatus(structuredOnly,tobuLine),"suspended");
 console.log("runinfo-scope structured-only: 2 PASS");
+
+
+// Nippori-Toneri Liner is an official Toei TrainInformation line.
+// Canonical ODPT mapping must win even when presentation metadata uses a localized operator name.
+ctx.window.ODPTClient.LINE_RAILWAY_CODE.NipporiToneri="NipporiToneri";
+ctx.window.ODPTClient.LINE_TO_OPERATOR.NipporiToneri="Toei";
+const ntLine={id:"NipporiToneri",operator:"東京都交通局"};
+const ntRecords=[
+ {"odpt:railway":"odpt.Railway:Toei.NipporiToneri","odpt:trainInformationText":{"ja":"平常運転"}}
+];
+assert.strictEqual(ctx.window.RunInfoAPI._selectScopedRecords(ntRecords,ntLine).length,1);
+assert.strictEqual(ctx.window.RunInfoAPI._aggregateStatus(ntRecords,ntLine),"normal");
+console.log("runinfo-scope Nippori-Toneri: 2 PASS");
