@@ -609,6 +609,15 @@ function main() {
   assert(/東京メトロ17000系\(8両\/10両\)/.test(fukutoshinDefault) && /東京メトロ10000系/.test(fukutoshinDefault),
     'Fukutoshin generic pool must preserve explicit Metro mixed-length identity', { fukutoshinDefault });
 
+    const seibuTokyu = win.VehicleTypeMap.resolve('Ikebukuro', 'odpt.TrainType:Seibu.Local', 'odpt.Station:Tokyu.Toyoko.Yokohama');
+  assert(/西武40000系\(10両\)/.test(seibuTokyu) && /西武6000系\(10両\)/.test(seibuTokyu),
+    'Seibu southbound Tokyu pool must preserve 10-car subway-capable Seibu stock', { seibuTokyu });
+  assert(!/西武40000系\(8両\/10両\)/.test(seibuTokyu),
+    'Tokyu-bound Seibu pool must not leave 40000 formation length ambiguous', { seibuTokyu });
+  const seibuSotetsu = win.VehicleTypeMap.resolve('Ikebukuro', 'odpt.TrainType:Seibu.Local', 'odpt.Station:Sotetsu.Main.Ebina');
+  assert(!/(相鉄20000系|相鉄21000系)/.test(seibuSotetsu),
+    'Seibu lines must not infer Sotetsu rolling stock or a Seibu-Sotetsu through service', { seibuSotetsu });
+
     assertNoCurrentFictionalAsset(win);
   assertNoFilenameDependentIdentity(win);
   assertCanonicalAssetRenameSimulation(win);
