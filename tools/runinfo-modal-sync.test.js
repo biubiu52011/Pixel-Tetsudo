@@ -35,8 +35,20 @@ assert.ok(
   "normal list status must clear stale disruption interval"
 );
 assert.ok(
-  src.includes("refreshListStatuses(fused.lines);"),
+  src.includes("scheduleListStatusRefresh(fused.lines, true);"),
   "list reconciliation must run after the immediate DataFusion render"
 );
 
-console.log("runinfo-list-sync: 4 PASS");
+assert.ok(
+  src.includes("function patchRealtimeCards(container, linesObj, changedIds)"),
+  "live status changes must have an incremental card patch path"
+);
+assert.ok(
+  src.includes("if (!force && now - _lastListStatusRefreshAt < 10000) return;"),
+  "whole-list RunInfo reconciliation must be throttled across fusion emissions"
+);
+assert.ok(
+  src.includes('card.classList.contains("rs-system-card")'),
+  "aggregated system cards must not be patched as ordinary single-line cards"
+);
+console.log("runinfo-list-sync: 7 PASS");
