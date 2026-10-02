@@ -810,7 +810,7 @@ window.getTransferHint = function(stationId, lang) {
  * 
  * Consumers:
  *   data-state.js        → TRUNK_MAIN_LINE_IDS
- *   data-fusion.js       → THROUGH_RAILWAY_FALLBACK, PRIORITY_OPS, STATION_ALIAS,
+ *   data-fusion.js       → SOURCE_RAILWAY_LINE_SCOPE, PRIORITY_OPS, STATION_ALIAS,
  *                          STATION_ALIAS_BY_RAILWAY, TRAIN_WARMUP_LINES, REFRESH_INTERVAL,
  *                          POSITION_INTERVAL
  *   odpt-unified.js      → API_RATE_LIMIT, API_MAX_CONCURRENCY, TT_TRUNCATE_LIMIT
@@ -3208,7 +3208,7 @@ window.LineOperationSystemsResolveIcon = function(lineId) {
 
 
 // ===== platform-data.js =====
-/**
+﻿/**
  * Pixel Tetsudo - 発着番線データ（Platform Data, v4.3.601）
  *
  * 能力归属：新 Provider（数据查询层）——搜索结果的乗車段显示"何番線から発車"。
@@ -3680,7 +3680,7 @@ window.PlatformResolver = {
 
 
 // ===== line-service-relations.js =====
-// Line Service Relations - Canonical Line-to-Line Service Relation Layer
+﻿// Line Service Relations - Canonical Line-to-Line Service Relation Layer
 // SOLE AUTHORITY for service relations between canonical lines.
 // DO NOT confuse with: LOS (Display Group), railway_data.json (Identity), stationLines (Topology)
 
