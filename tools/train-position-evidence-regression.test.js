@@ -20,6 +20,11 @@ assert(/Object\.keys\(_realtimeEvidenceWithoutPosition\)/.test(fusion),"position
 assert(/\(estimated\[_vlid\] \|\| \[\]\)\.forEach\(_rememberChainVehicle\)/.test(fusion),"verified timetable vehicle evidence must seed running-chain registry");
 const estimator=read("js/train-position-estimator.js");
 assert(/vehicleResolvedUpstream:\s*!!vehResult\.iconPath/.test(estimator),"estimator vehicle decision metadata must reach renderer");
+assert(/TRAIN_VEHICLE_EVIDENCE_PROVIDERS/.test(estimator),"estimator must consume generic exact-train vehicle evidence providers");
+assert(/Object\.keys\(_vehicleNames\)\.length === 1/.test(estimator),"conflicting exact-train vehicle providers must remain unresolved");
+const tobuEvidence=read("data/timetables/tobu-limited-express-vehicle-evidence.js");
+assert(/TRAIN_VEHICLE_EVIDENCE_PROVIDERS/.test(tobuEvidence),"Tobu exact-train evidence must register through generic provider registry");
+assert(/id:\s*"tobu-official-limited-express-2026"/.test(tobuEvidence),"vehicle evidence provider must expose stable provenance id");
 const renderer=read("js/trains-render.js");
 assert(/_hasUpstreamVehicle/.test(renderer),"renderer must consume upstream vehicle resolution before fallback");
 assert(/if \(!stationKey\)[\s\S]{0,800}return;/.test(fusion),"missing fromStation must not create realtime position");
