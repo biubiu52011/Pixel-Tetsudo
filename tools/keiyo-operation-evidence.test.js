@@ -1,0 +1,13 @@
+const fs=require("fs"),path=require("path"),assert=require("assert"),vm=require("vm");
+const root=path.join(__dirname,".."),window={};vm.runInNewContext(fs.readFileSync(path.join(root,"data/timetables/keiyo-operation-evidence.js"),"utf8"),{window,console});
+const p=window.TRAIN_OPERATION_EVIDENCE_PROVIDERS.find(x=>x.id==="jr-keiyo-dated-operations");
+assert(p,"Keiyo provider missing");
+let r=p.resolveEvidence("19",{serviceDate:"2026-04-01",lineId:"Keiyo"});
+assert(r&&r.vehicleType==="JR 209系500番台","2026-04-01 operation 19 must resolve 209-500");
+r=p.resolveEvidence("21",{serviceDate:"2026-04-01",lineId:"Keiyo"});
+assert(r&&r.vehicleType==="JR E233系5000番台","2026-04-01 operation 21 must resolve E233-5000");
+r=p.resolveEvidence("37",{serviceDate:"2026-04-14",lineId:"Keiyo"});
+assert(r&&r.vehicleType==="JR 209系500番台","2026-04-14 operation 37 must resolve 209-500");
+assert.strictEqual(p.resolveEvidence("19",{serviceDate:"2026-04-02",lineId:"Keiyo"}),null,"unknown date must not guess");
+assert.strictEqual(p.resolveEvidence("19",{serviceDate:"2026-04-01",lineId:"Musashino"}),null,"wrong line must not resolve");
+console.log("Keiyo operation evidence: PASS");
