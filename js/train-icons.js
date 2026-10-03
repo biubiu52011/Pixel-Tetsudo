@@ -1538,7 +1538,7 @@ var CANONICAL_VEHICLES = {
     displayName: "E531系",
     iconName: "E531系",
     asset: "../images/列车/JR東日本/JR東日本_E531系.png",
-    aliases: ["E531系"]
+    aliases: ["E531系", "JR E531系"]
   },
   "jr-east-e231-0-joban-rapid": {
     displayName: "E231系0番台",
