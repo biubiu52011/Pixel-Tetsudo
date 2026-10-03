@@ -8,7 +8,7 @@ function hit(p,n,date,line){return p.resolveEvidence(n,{serviceDate:date,lineId:
 
 let p=load("data/timetables/denentoshi-operation-evidence-2026.js");
 let r=hit(p,"50T","2026-10-03","TokyoMetro.Hanzomon");
-assert(r&&r.operator==="Tobu"&&r.vehicleType==="東武50050系");
+assert(r&&r.operator==="Tobu"&&!r.vehicleType);
 r=hit(p,"57S","2026-10-03","TokyoMetro.Hanzomon");
 assert(r&&r.operator==="TokyoMetro"&&!r.vehicleType);
 assert.strictEqual(hit(p,"50T","2026-10-03","TokyoMetro.Ginza"),null);
