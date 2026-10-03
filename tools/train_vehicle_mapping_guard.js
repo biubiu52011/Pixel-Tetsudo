@@ -454,7 +454,7 @@ function main() {
     assert(!win.TrainIcons.VEHICLE_NAME_TO_ICON[name], 'ambiguous bare series leaked into global vehicle identity index', { name, icon: win.TrainIcons.VEHICLE_NAME_TO_ICON[name] });
   });
   const tama1000 = win.TrainIcons.resolveVehicleIcon('1000系', 'TamaMonorail');
-  assert(tama1000 && tama1000.includes('/多摩都市モノレール/1000系_標準塗装.png'), 'TamaMonorail line context must resolve its own 1000 series', { tama1000 });
+  assert(tama1000 && tama1000.includes('/多摩都市モノレール/多摩都市モノレール_1000系_標準塗装.png'), 'TamaMonorail line context must resolve its own 1000 series', { tama1000 });
   const unrelated1000 = win.TrainIcons.resolveVehicleIcon('1000系', 'UnknownRoute');
   assert(!unrelated1000 || !unrelated1000.includes('/多摩都市モノレール/'), 'unrelated railway must not inherit Tama Monorail 1000 series', { unrelated1000 });
 
@@ -564,7 +564,7 @@ function main() {
   assert(/東京メトロ9000系\(6両\/8両\)/.test(nambokuDefault),
     'Namboku 9000 must preserve the current mixed 6/8-car fleet state', { nambokuDefault });
   const nambokuSotetsu = win.VehicleTypeMap.resolve('Namboku', 'odpt.TrainType:TokyoMetro.Local', 'odpt.Station:Sotetsu.Main.Ebina');
-  assert(nambokuSotetsu === '相鉄21000系',
+  assert(nambokuSotetsu === '相鉄21000系(8両)',
     'Namboku Sotetsu-bound pool must use explicitly evidenced 21000 only', { nambokuSotetsu });
   const mitaDefaultLength = win.VehicleTypeMap.resolve('Mita', 'odpt.TrainType:Toei.Local', null);
   assert(/6300形\(6両\)/.test(mitaDefaultLength) && /6500形\(8両\)/.test(mitaDefaultLength),
@@ -595,7 +595,7 @@ function main() {
   assert(/05系\(10両\)/.test(tozai) && /07系\(10両\)/.test(tozai) && /15000系\(10両\)/.test(tozai),
     'Tozai Metro fleet must preserve current 10-car 05/07/15000 stock', { tozai });
   const sobuMetro = win.VehicleTypeMap.resolve('ChuoSobuLocal', 'odpt.TrainType:JR-East.Local', 'odpt.Station:TokyoMetro.Tozai.Nakano');
-  assert(/E231系800番台\(10両・東西線直通\)/.test(sobuMetro),
+  assert(/JR E231系800番台/.test(sobuMetro),
     'Chuo-Sobu Metro through pool must use E231-800 subway stock', { sobuMetro });
   assert(!/(E231系500番台|E231系0番台)/.test(sobuMetro),
     'ordinary Chuo-Sobu E231-500/0 must not enter the Tozai through pool', { sobuMetro });
@@ -613,13 +613,13 @@ function main() {
   assert(!/1500形/.test(keikyuToei), 'retired Keikyu 1500 must not return through Toei destination mapping', { keikyuToei });
 
     const hokuso = win.VehicleTypeMap.resolve('Hokuso', 'odpt.TrainType:Hokuso.Local', null);
-  assert(/北総7300形/.test(hokuso) && /北総7500形/.test(hokuso) && /北総9100形/.test(hokuso),
+  assert(/北総7300形/.test(hokuso) && /北総7500形/.test(hokuso) && /北総7800形/.test(hokuso) && /千葉ニュータウン鉄道9100形/.test(hokuso),
     'Hokuso must resolve its own current fleet instead of falling back', { hokuso });
   const hokusoAccess = win.VehicleTypeMap.resolve('Hokuso', 'odpt.TrainType:Hokuso.AccessExpress', 'odpt.Station:Keisei.NaritaSkyAccess.NaritaAirportTerminal1');
   assert(/京成3100形/.test(hokusoAccess) && !/50番台/.test(hokusoAccess),
     'Hokuso Access pool must use current Keisei 3100 identity without fictional 50-subseries', { hokusoAccess });
   const shibayama = win.VehicleTypeMap.resolve('Shibayama', 'odpt.TrainType:Shibayama.Local', null);
-  assert(/芝山鉄道3500形/.test(shibayama),
+  assert(/芝山鉄道3600形\(4両\)/.test(shibayama) && /京成3000形/.test(shibayama) && /京成3500形/.test(shibayama),
     'Shibayama must resolve its own 3500 stock instead of generic fallback', { shibayama });
 
     const shinjukuKeio = win.VehicleTypeMap.resolve('Shinjuku', 'odpt.TrainType:Toei.Local', 'odpt.Station:Keio.Keio.Sasazuka');
