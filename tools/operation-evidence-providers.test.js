@@ -42,4 +42,17 @@ r=hit(p,"73H","2026-10-03","Toei.Asakusa");
 assert(r&&r.operator==="Keikyu"&&!r.vehicleType);
 
 
+(function(){
+ const providers=[],sandbox={window:{TRAIN_OPERATION_EVIDENCE_PROVIDERS:providers}};
+ vm.createContext(sandbox);
+ vm.runInContext(fs.readFileSync("data/timetables/vehicle-operation-evidence-data.js","utf8"),sandbox);
+ vm.runInContext(fs.readFileSync("data/timetables/train-operation-evidence.js","utf8"),sandbox);
+ const cp=providers.find(x=>x.id==="canonical-vehicle-operation-evidence");
+ assert(cp);
+ let x=cp.resolveEvidence("TMW001D",{serviceDate:"2026-04-10",lineId:"TokyoMonorail"});
+ assert(x&&x.operationCode==="03"&&x.vehicleType==="東京モノレール10000形"&&x.formationId==="10051F");
+ assert.strictEqual(cp.resolveEvidence("TMW002D",{serviceDate:"2026-04-10",lineId:"TokyoMonorail"}),null);
+ assert.strictEqual(cp.resolveEvidence("TMW001D",{serviceDate:"2026-04-11",lineId:"TokyoMonorail"}),null);
+})();
+
 console.log("operation evidence providers: PASS");
