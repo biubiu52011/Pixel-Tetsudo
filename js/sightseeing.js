@@ -498,6 +498,11 @@ function renderGrid() {
     });
   }
 
+  // Re-render when tourism data arrives after initial load (deferred 1.8MB fetch).
+  window.addEventListener('pt:tourism-ready', function() {
+    if (state.selectedStation) renderAll();
+  });
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {

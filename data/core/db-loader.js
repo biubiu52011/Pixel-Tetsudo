@@ -101,6 +101,7 @@
   var STATION_I18N_FILE = "../data/core/station_i18n.json";
   var TOURISM_DATA_FILE = "../data/core/tourism_data.json";
   var _stationI18n = {};
+  var _i18nNormMap = null; // hyphen-insensitive lookup cache, built once in applyData
   var loaded = false;
   var error = null;
 
@@ -108,6 +109,15 @@
   // (4.3.557: .tourism anchor field removed from railway data)
 function applyData(data, i18n) {
     _stationI18n = i18n || {};
+    // Expose for StationResolver (which reads window.RAILWAY_I18N in _buildIndex).
+    // This lets home.html drop the redundant 506KB station-i18n.file.js <script> tag.
+    window.RAILWAY_I18N = _stationI18n;
+    // Build hyphen-insensitive lookup once: replace the O(n) linear scan that ran
+    // on every resolveStationName miss (called ~3500× from StationResolver._buildIndex).
+    _i18nNormMap = {};
+    for (var _ik in _stationI18n) {
+      _i18nNormMap[_ik.replace(/-/g, '')] = _ik;
+    }
     window.STATION_COORDS = {};
     Object.keys(data.stations).forEach(function(id) {
       var s = data.stations[id];
@@ -896,16 +906,15 @@ function applyData(data, i18n) {
           if (lang === 'en' && _i18n.en) return _i18n.en;
         }
         // v4.3.962: 宽松匹配——直接查找没命中时，去掉连字符再查（NaritaAirportTerminal1 vs Narita-Airport-Terminal-1）
-        if (_stationI18n) {
+        if (_i18nNormMap) {
           var _normId = String(id).replace(/-/g, '');
-          for (var _k in _stationI18n) {
-            if (String(_k).replace(/-/g, '') === _normId) {
-              var _i18n2 = _stationI18n[_k];
-              if (lang === 'zh' && _i18n2.zh) return _i18n2.zh;
-              if (lang === 'ko' && _i18n2.ko) return _i18n2.ko;
-              if (lang === 'ja' && _i18n2.ja) return _i18n2.ja;
-              if (lang === 'en' && _i18n2.en) return _i18n2.en;
-            }
+          var _normKey = _i18nNormMap[_normId];
+          if (_normKey) {
+            var _i18n2 = _stationI18n[_normKey];
+            if (lang === 'zh' && _i18n2.zh) return _i18n2.zh;
+            if (lang === 'ko' && _i18n2.ko) return _i18n2.ko;
+            if (lang === 'ja' && _i18n2.ja) return _i18n2.ja;
+            if (lang === 'en' && _i18n2.en) return _i18n2.en;
           }
         }
         var nm = data.name_map;
@@ -1031,16 +1040,23 @@ function applyData(data, i18n) {
   }
 
   function cacheWrite(railway, i18n) {
-    try {
-      localStorage.setItem(DB_CACHE_KEY, JSON.stringify({ railway: railway, i18n: i18n, ts: Date.now() }));
-    } catch(e) { /* quota / private mode: ignore */ }
+    // Defer the JSON.stringify + localStorage.setItem off the critical path:
+    // serializing ~1.7MB and writing to localStorage can block the main thread
+    // for 200-500ms. This is a cache, not user-visible state.
+    setTimeout(function() {
+      try {
+        localStorage.setItem(DB_CACHE_KEY, JSON.stringify({ railway: railway, i18n: i18n, ts: Date.now() }));
+      } catch(e) { /* quota / private mode: ignore */ }
+    }, 0);
   }
 
   function cacheWriteTourism(tourism) {
     if (SKIP_TOURISM) return;
-    try {
-      localStorage.setItem(TOURISM_CACHE_KEY, JSON.stringify({ tourism: tourism, ts: Date.now() }));
-    } catch(e) {}
+    setTimeout(function() {
+      try {
+        localStorage.setItem(TOURISM_CACHE_KEY, JSON.stringify({ tourism: tourism, ts: Date.now() }));
+      } catch(e) {}
+    }, 0);
   }
 
   // 清理旧版本缓存（只留当前版本）
@@ -1112,34 +1128,50 @@ function applyData(data, i18n) {
     window.STATION_EXITS = (override.station_exits && typeof override.station_exits === 'object') ? override.station_exits : {};
     window.TOURISM_DATA = {};
     window.TOURISM_STATIONS = [];
+    // Notify tourism module that spots are now available (deferred load path).
+    if (override.spots && override.spots.length > 0) {
+      window.dispatchEvent(new CustomEvent('pt:tourism-ready'));
+    }
   }
 
-  // 远程加载：并行 + 超时 + 重试 + 应用 + 写缓存（i18n/tourism 容错，railway 必须成功）
+  // 远程加载：railway+i18n 先到先应用（搜索立即可用），tourism 后台异步加载
   function fetchRemote() {
-    var prom = [
+    var railwayData = null;
+    var i18nData = null;
+
+    var railwayPromise = Promise.all([
       fetchJSON(DATA_FILE),
       fetchJSON(STATION_I18N_FILE).then(function(r) { return r; }, function() { return {}; })
-    ];
-    if (!SKIP_TOURISM) {
-      prom.push(fetchJSON(TOURISM_DATA_FILE).then(function(r) { return r; }, function() { return {}; }));
-    }
-    return Promise.all(prom).then(function(results) {
-      applyData(results[0], results[1]);
+    ]).then(function(results) {
+      railwayData = results[0];
+      i18nData = results[1];
+      applyData(railwayData, i18nData);
       if (SKIP_TOURISM) {
         applyTourismData({});
       } else {
-        applyTourismData(results[2]);
-        cacheWriteTourism(results[2]);
+        applyTourismData({}); // empty until tourism fetch completes
       }
       cleanOldCaches();
-      cacheWrite(results[0], results[1]);
+      cacheWrite(railwayData, i18nData);
       loaded = true;
       console.log(
-        Object.keys(results[0].stations).length + " stations, " +
-        Object.keys(results[0].lines).length + " lines, " +
-        (SKIP_TOURISM ? "tourism skipped" : ((results[2] && results[2].spots ? results[2].spots.length : 0) + " tourism spots")));
+        Object.keys(railwayData.stations).length + " stations, " +
+        Object.keys(railwayData.lines).length + " lines, railway ready");
       return results;
     });
+
+    // Tourism loads independently — does not block railway readiness.
+    if (!SKIP_TOURISM) {
+      fetchJSON(TOURISM_DATA_FILE).then(function(tourismData) {
+        applyTourismData(tourismData);
+        cacheWriteTourism(tourismData);
+        console.log((tourismData && tourismData.spots ? tourismData.spots.length : 0) + " tourism spots loaded");
+      }).catch(function(e) {
+        console.warn("[DbLoader] Tourism load failed:", e.message);
+      });
+    }
+
+    return railwayPromise;
   }
 
   // file:// protocol: load the generated data bundles via <script> tags.
@@ -1163,6 +1195,15 @@ function applyData(data, i18n) {
       return p.then(function() { return loadScript(u); });
     }, Promise.resolve());
   }
+  // Split file:// loading: railway+i18n first (search ready), tourism after.
+  function loadFileBundlesRailwayOnly() {
+    return FILE_BUNDLES.slice(0, 2).reduce(function(p, u) {
+      return p.then(function() { return loadScript(u); });
+    }, Promise.resolve());
+  }
+  function loadFileBundleTourism() {
+    return loadScript(FILE_BUNDLES[2]);
+  }
 
 function load() {
     if (loaded) return Promise.resolve();
@@ -1172,11 +1213,20 @@ function load() {
     var isFileProtocol = (window.location.protocol === 'file:');
     if (isFileProtocol) {
       // file:// bundles: <script src> loads where fetch is CORS-blocked.
-      _loadPromise = loadFileBundles().then(function() {
+      // Railway+i18n first for search readiness; tourism (1.8MB) loads after.
+      _loadPromise = loadFileBundlesRailwayOnly().then(function() {
         if (window.RAILWAY_DATA && window.RAILWAY_DATA.stations) {
           applyData(window.RAILWAY_DATA, window.RAILWAY_I18N || {});
-          if (!SKIP_TOURISM) applyTourismData(window.RAILWAY_TOURISM || {});
+          applyTourismData({});
           loaded = true;
+          // Tourism bundle loads in background, non-blocking.
+          if (!SKIP_TOURISM) {
+            loadFileBundleTourism().then(function() {
+              if (window.RAILWAY_TOURISM) applyTourismData(window.RAILWAY_TOURISM);
+            }).catch(function(e) {
+              console.warn("[DbLoader] Tourism bundle load failed:", e.message);
+            });
+          }
           return;
         }
         error = new Error("No data source available under file:// protocol");
@@ -1190,15 +1240,20 @@ function load() {
     }
 
     // Strategy B (v4.3.387): stale-while-revalidate
-    // 1) 缓存命中 → 立即应用（首屏秒开），后台刷新数据
+    // 1) 缓存命中 → railway 立即应用（首屏秒开），tourism 缓存延迟解析，后台刷新数据
     var cached = cacheRead();
-    var cachedTourism = cacheReadTourism();
     if (cached) {
       try {
         applyData(cached.railway, cached.i18n);
-        applyTourismData(cachedTourism);
+        // Apply empty tourism immediately; read tourism cache off the critical path.
+        applyTourismData({});
         loaded = true;
-        console.log("[DbLoader] Cache hit (v" + DB_CACHE_VERSION + "), background refresh scheduled");
+        console.log("[DbLoader] Railway cache hit (v" + DB_CACHE_VERSION + "), background refresh scheduled");
+        // Defer tourism cache JSON.parse (~1.8MB) — not needed for search.
+        setTimeout(function() {
+          var ct = cacheReadTourism();
+          if (ct) applyTourismData(ct);
+        }, 0);
         fetchRemote().catch(function(err) {
           console.warn("[DbLoader] Background refresh failed, keeping cache:", err.message);
         });
