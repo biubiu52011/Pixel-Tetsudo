@@ -735,6 +735,7 @@
                 railway: t["odpt:railway"] || "",
                 destinationStation: t["odpt:destinationStation"] || "",
                 vehicleType: t["odpt:vehicleType"] || t["vehicleType"] || "",
+                trainOwner: t["odpt:trainOwner"] || t["trainOwner"] || "",
                 observedAt: Date.now()
               };
               if ((t["odpt:vehicleType"] || t["vehicleType"]) &&
@@ -871,6 +872,8 @@
             var trainOperator = t["odpt:operator"] || "";
             var trainOpShort = trainOperator.replace('odpt.Operator:', '') || '';
             var odptVehicleType = t["odpt:vehicleType"] || t["vehicleType"] || "";
+            var odptTrainOwner = t["odpt:trainOwner"] || t["trainOwner"] || "";
+            positionData.trainOwner = odptTrainOwner;
             positionData.odptVehicleType = odptVehicleType;
             // An explicit vehicle type carried by the realtime record is train-level
             // evidence. Register it before resolving so the same train number can
@@ -883,6 +886,7 @@
                 var _rtVehicle = window.TrainVehicle.resolve({
                   lineId: lid,
                   operator: trainOpShort,
+                  trainOwner: odptTrainOwner,
                   trainNumber: trainId,
                   stationIndex: idx,
                   trainType: rawType,
