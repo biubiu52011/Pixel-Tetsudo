@@ -1,6 +1,6 @@
 /*
  * Pixel Tetsudo - Odakyu 2026 operation-group vehicle constraints
- * v4.3.1098
+ * v4.3.1099
  * Source: Yozakura Room, Odakyu operation table after the 2026-03 timetable revision.
  * Group evidence narrows fleet candidates; only a single-model group may establish EXACT.
  */
@@ -12,6 +12,8 @@ var EFFECTIVE="2026-03-14";
 function network(ctx){return /Odawara|OdakyuTama|OdakyuEnoshima|小田急|江ノ島/i.test([ctx.lineId,ctx.railway,ctx.operator].join("|"));}
 var WEEKDAY_TRAIN_TO_OPERATION={
  "7004":"A11","7005":"A11","7012":"A11","7013":"A11",
+ "9141":"E11","3014":"E11","9189":"E11",
+ "6754":"E12","1354":"E12","1209":"E12","1208":"E12",
  "6021":"C11",
  "4300":"C12","6037":"C12","9172":"C12","4039":"C12","4032":"C12","2219":"C12","9266":"C12",
  "9155":"C13","4310":"C13","4035":"C13",
@@ -28,6 +30,9 @@ var WEEKDAY_TRAIN_TO_OPERATION={
 };
 var HOLIDAY_TRAIN_TO_OPERATION={
  "4001":"C11","3051":"C11","3072":"C11","2775":"C11","2776":"C11","3081":"C11","1216":"C11","1351":"C11","6751":"C11","9372":"C11",
+ "9161":"E11","9136":"E11",
+ "9209":"E12","9182":"E12","1214":"E12","3529":"E12","3540":"E12",
+ "1700":"E61","9153":"E61","9220":"E61","2761":"E61","7642":"E61","7643":"E61","7646":"E61",
  "9133":"C15","2204":"C15","4007":"C15","9203":"C15","2000":"C15","2021":"C15","2024":"C15","2223":"C15","9296":"C15",
  "9263":"C17","2236":"C17",
  "2203":"C18","9168":"C18","1206":"C18","2725":"C18","2730":"C18","3035":"C18","3056":"C18","3551":"C18","3562":"C18","1223":"C18","9273":"C18","1003":"C18","1220":"C18","1357":"C18","6767":"C18",
