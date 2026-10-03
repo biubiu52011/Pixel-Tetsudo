@@ -398,10 +398,8 @@
     { lines: ['ChuoLocal','ChuoSobuLocal'], op: null, fn: function(trainId) {
       return '../images/列车/JR東日本/JR東日本_E231系_0番台_中央・総武線各駅停車.png';
     }},
-    // Rinkai: JR直通 → E233系7000番台
-    { lines: ['Rinkai'], op: 'JR-East', fn: function() {
-      return '../images/列车/JR東日本/JR東日本_E233系_7000番代.png';
-    }},
+    // Rinkai JR-through services still have multiple compatible fleets.
+    // Exact vehicle evidence must select the artwork; operator alone is insufficient.
     // v4.3.992: Rinkai TWR——運用調査(loo-ool 2026.9):自有车(70-000形 Z1-Z3/Z7 4本 +
     // 71-000形 Z11-Z14 4本)基本进 81/83/85/87/89/91 六運用,線内折返为主但也会进 JR 直通;
     // 且線内折返也有 E233系7000番台(川越車両センター,JR車 38本 圧倒多数,AI概要+JR車両ガイド:
