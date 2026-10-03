@@ -631,9 +631,11 @@
           // A/C run-level providers may also carry a model-exact assignment.
           // Accept it only when every decisive model-bearing provider agrees.
           var _assignmentVehicles = {};
+          var _assignmentCandidateSets = [];
           var _assignmentFormations = {};
           _decisiveAssignments.forEach(function(rec) {
             if (rec.vehicleType) _assignmentVehicles[rec.vehicleType] = true;
+            if (rec.vehicleCandidates && rec.vehicleCandidates.length) _assignmentCandidateSets.push(rec.vehicleCandidates.slice());
             if (rec.formationId) {
               String(rec.formationId).split(/\s*\/\s*|\s*,\s*|\s*\|\s*/).forEach(function(fid) {
                 fid = String(fid || '').trim();
@@ -657,6 +659,7 @@
             destinationStation: destinationStationUrn || tt['odpt:destinationStation'] || '',
             vehicleTypeManual: tt['vehicleType'] || '',
             vehicleEvidenceSource: tt._vehicleEvidenceSource || '',
+            operationVehicleCandidates: _assignmentCandidateSets.length ? _assignmentCandidateSets[0] : [],
             trainId: lineId + '_' + trainNumber + '_' + currentStationIndex
           };
           var vehResult = (window.TrainVehicle && typeof window.TrainVehicle.resolve === 'function')
