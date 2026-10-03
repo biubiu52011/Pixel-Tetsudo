@@ -1030,3 +1030,22 @@ assert(mitaBlock.includes('都営6500形(8両)') && mitaBlock.includes('相鉄21
   'Mita-Sotetsu through pool must preserve eight-car identities');
 assert(!/東京メトロ17000系\(10両\)\(10両\)/.test(vehicleMapSource),
   'vehicle map must not contain duplicated formation suffixes');
+
+
+// Batch guard: Fukutoshin / Toyoko / Tobu-Seibu through branches preserve formation boundaries.
+const fukutoshinBlock = vehicleMapSource.match(/'Fukutoshin': \{[\s\S]*?\n    \},\n    'Hanzomon'/)?.[0] || '';
+assert(/'Seibu': '西武40000系\(10両\) \/ 西武6000系\(10両\) \/ 東京メトロ10000系\(10両\) \/ 東京メトロ17000系\(10両\)'/.test(fukutoshinBlock),
+  'Fukutoshin Seibu through branch must remain ten-car only');
+assert(!/'Seibu': '[^']*(?:西武40000系\(8両\/10両\)|東京メトロ17000系\(8両\/10両\))/.test(fukutoshinBlock),
+  'Fukutoshin Seibu through branch must not admit ambiguous eight-car stock');
+const toyokoBlock3 = vehicleMapSource.match(/'TokyuToyoko': \{[\s\S]*?\n    \},\n    'TokyuDenEn'/)?.[0] || '';
+assert(toyokoBlock3.includes('横浜高速鉄道Y500系(8両)'),
+  'Toyoko-Minatomirai pool must preserve Y500 eight-car identity');
+assert(toyokoBlock3.includes('相鉄20000系(10両)') && !toyokoBlock3.includes('相鉄21000系(8両)'),
+  'Toyoko-Sotetsu branch must remain the ten-car 20000 system');
+const tojoBlock = vehicleMapSource.match(/'Tojo': \{[\s\S]*?\n    \},\n\n    \/\/ =+\n    \/\/ 京王/)?.[0] || '';
+assert(!/東急5050系4000番台(?!\(10両\))/.test(tojoBlock),
+  'Tobu Tojo through references must retain 5050-4000 ten-car identity');
+const yurakuchoBlock = vehicleMapSource.match(/'Yurakucho': \{[\s\S]*?\n    \},\n\n    \/\/ =+\n    \/\/ 都営/)?.[0] || '';
+assert(/'S-TRAIN': \{[\s\S]*?'default': '西武40000系\(10両\)'/.test(yurakuchoBlock),
+  'Yurakucho S-TRAIN must retain Seibu 40000 ten-car identity');
