@@ -85,6 +85,42 @@
     return String(op).replace(/^odpt\.Operator:/, '');
   }
 
+  // ODPT trainOwner is physical rolling-stock ownership evidence. It cannot
+  // identify a model by itself, but it can safely remove other operators' stock
+  // from a multi-company through-service candidate pool.
+  function ownerMatchesCandidate(owner, candidate) {
+    var op = normOp(owner);
+    if (!op || !candidate) return false;
+    var rules = {
+      "JR-East": /^(?:JR東日本|JR\s*)?(?:E|209|253|E2|E3|E5|E6|E7|E8|E257|E259|E353|E531|E653|E657|E751)/i,
+      "TokyoMetro": /東京メトロ/,
+      "Toei": /(?:都営|東京都交通局)/,
+      "Tokyu": /(?:東急|東急電鉄)/,
+      "TOKYU": /(?:東急|東急電鉄)/,
+      "Tobu": /(?:東武|東武鉄道)/,
+      "Seibu": /(?:西武|西武鉄道)/,
+      "Sotetsu": /(?:相鉄|相模鉄道)/,
+      "Odakyu": /(?:小田急|小田急電鉄)/,
+      "Keio": /(?:京王|京王電鉄)/,
+      "Keikyu": /(?:京急|京浜急行)/,
+      "Keisei": /(?:京成|京成電鉄)/,
+      "Hokuso": /(?:北総|北総鉄道)/,
+      "Minatomirai": /(?:横浜高速|Y500|Y000)/i,
+      "SaitamaRailway": /(?:埼玉高速|埼玉高速鉄道)/,
+      "ToyoRapid": /(?:東葉高速|東葉高速鉄道)/,
+      "TWR": /(?:東京臨海高速|りんかい)/,
+      "TsukubaExpress": /(?:首都圏新都市鉄道|TX-)/i
+    };
+    var re = rules[op];
+    return !!(re && re.test(String(candidate)));
+  }
+
+  function filterCandidatesByOwner(candidates, owner) {
+    if (!owner || !candidates || candidates.length < 2) return candidates || [];
+    var matched = candidates.filter(function(c) { return ownerMatchesCandidate(owner, c); });
+    return matched.length ? matched : candidates;
+  }
+
   // "odpt.TrainType:JR-East.Local" → "Local"；"JR-East.Local" → "Local"
   function normTrainType(t) {
     if (!t) return '';
@@ -143,6 +179,7 @@
     ctx = ctx || {};
     var lineId = ctx.lineId || '';
     var operator = normOp(ctx.operator);
+    var trainOwner = normOp(ctx.trainOwner || ctx.odptTrainOwner || '');
     var trainNumber = ctx.trainNumber || '';
     var trainType = ctx.trainType || '';
     var dest = ctx.destinationStation || '';
@@ -212,9 +249,11 @@
       var srcCandidates = Object.keys(pool).filter(function(c) {
         return pool[c].sources.indexOf(srcName) >= 0;
       });
+      var ownerFiltered = filterCandidatesByOwner(srcCandidates, trainOwner);
+      if (ownerFiltered.length !== srcCandidates.length) srcCandidates = ownerFiltered;
       if (srcCandidates.length === 1) {
         chosen = srcCandidates[0];
-        chosenSrc = srcName;
+        chosenSrc = (trainOwner && ownerMatchesCandidate(trainOwner, chosen)) ? (srcName + '+trainOwner') : srcName;
         break;
       }
       if (srcCandidates.length > 1 && _trainNoSet.length) {
@@ -233,9 +272,9 @@
     //    manual/odpt = high；trainNo 多来源交叉 = high，单来源 = medium；map = medium；icons = low
     var confidence = 'none';
     var crossCount = chosen && pool[chosen] ? pool[chosen].count : 0;
-    if (chosenSrc === 'manual' || chosenSrc === 'odpt') confidence = 'high';
+    if (/^(manual|odpt)(?:\+trainOwner)?$/.test(chosenSrc)) confidence = 'high';
     else if (chosenSrc === 'trainNo') confidence = crossCount >= 2 ? 'high' : 'medium';
-    else if (chosenSrc === 'map') confidence = 'medium';
+    else if (chosenSrc === 'map' || chosenSrc === 'map+trainOwner') confidence = 'medium';
     else if (chosenSrc === 'icons') confidence = 'low';
 
     // 4) 图标：候选 → 图标库；无图标再走 S4 规则兜底
@@ -317,7 +356,23 @@
     // train number, line, icon fallback, or a generic LimitedExpress label.
     if (!f && !resolveIconForName(vehicleName, anchor.lineId)) return false;
     var date = anchor.serviceDate || _formationServiceDate(anchor.observedAt);
-    _formationEvidence[date+"|"+anchor.runningChainId] = {
+    var evidenceKey = date+"|"+anchor.runningChainId;
+    var existing = _formationEvidence[evidenceKey];
+    if (existing && existing.vehicleName && existing.vehicleName !== vehicleName) {
+      // Two incompatible explicit identities on one physical chain are a data
+      // conflict, never permission to let the latest segment silently win.
+      _formationEvidence[evidenceKey] = {
+        lineId:anchor.lineId, runningChainId:anchor.runningChainId, serviceDate:date,
+        formationId:"", vehicleName:"", conflict:true,
+        conflictingVehicles:[existing.vehicleName, vehicleName].filter(function(v,i,a){return v && a.indexOf(v)===i;}),
+        evidenceSource:"conflicting-explicit-vehicle-evidence",
+        evidenceDetail:{ previous:existing.evidenceDetail || null, incoming:anchor.evidenceDetail || null },
+        observedAt:anchor.observedAt || existing.observedAt || null
+      };
+      return false;
+    }
+    if (existing && existing.conflict) return false;
+    _formationEvidence[evidenceKey] = {
       lineId:anchor.lineId, runningChainId:anchor.runningChainId, serviceDate:date,
       formationId:f ? f.id : "",
       vehicleName:vehicleName,
@@ -331,7 +386,7 @@
     if (!ctx || !ctx.runningChainId) return null;
     var date = ctx.serviceDate || _formationServiceDate(ctx.at);
     var a = _formationEvidence[date+"|"+ctx.runningChainId];
-    if (!a) return null;
+    if (!a || a.conflict) return null;
     var icon = resolveIconForName(a.vehicleName, a.lineId);
     if (!icon) return null;
     return {
@@ -352,7 +407,7 @@
   // Public API
   // ============================================================
   window.TrainVehicle = {
-    version: '4.3.1050',
+    version: '4.3.1051',
     resolve: resolve,
     getName: getName,
     getIconPath: getIconPath,
@@ -366,5 +421,5 @@
     _scopedTable: function() { return TRAIN_NO_VEHICLE_SCOPED; }
   };
 
-  console.debug('[TrainVehicle] v4.3.950 initialized（全局车辆判定统一入口）');
+  console.debug('[TrainVehicle] v4.3.1051 initialized（trainOwner + chain conflict-safe vehicle identity）');
 })();
