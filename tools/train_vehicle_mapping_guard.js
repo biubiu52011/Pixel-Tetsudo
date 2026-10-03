@@ -1049,3 +1049,27 @@ assert(!/東急5050系4000番台(?!\(10両\))/.test(tojoBlock),
 const yurakuchoBlock = vehicleMapSource.match(/'Yurakucho': \{[\s\S]*?\n    \},\n\n    \/\/ =+\n    \/\/ 都営/)?.[0] || '';
 assert(/'S-TRAIN': \{[\s\S]*?'default': '西武40000系\(10両\)'/.test(yurakuchoBlock),
   'Yurakucho S-TRAIN must retain Seibu 40000 ten-car identity');
+
+
+// Batch guard: private-railway through identities must stay operator-qualified and formation-safe.
+for (const forbidden of [
+  '東急3000系 /',
+  '東急5080系 /',
+  "相鉄21000系'",
+  '東京メトロ10000系 /',
+  "西武40000系'",
+  "東急5050系4000番台'",
+  '東急電鉄1000系 / 7000系',
+  '6020系（5両） / 9000系'
+]) {
+  assert(!vehicleMapSource.includes(forbidden),
+    'batch normalized private fleet identity regressed: ' + forbidden);
+}
+assert(vehicleMapSource.includes('東急電鉄1000系 / 東急電鉄7000系'),
+  'Tokyu Tamagawa/Ikegami fleet names must remain operator-qualified');
+assert(vehicleMapSource.includes('東急6020系（5両） / 東急9000系 / 東急9020系'),
+  'Tokyu Oimachi local fleet identities must remain operator-qualified');
+assert(vehicleMapSource.includes('東急6020系（7両） / 東急6000系'),
+  'Tokyu Oimachi express fleet identities must remain operator-qualified');
+assert(vehicleMapSource.includes('横浜高速鉄道Y500系(8両)'),
+  'Minatomirai Y500 identity must retain operator and eight-car formation');
