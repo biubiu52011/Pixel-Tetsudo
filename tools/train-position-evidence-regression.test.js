@@ -57,4 +57,10 @@ assert(estimatorSource.includes('rec.decisive && rec.operator'),
 assert(estimatorSource.includes('operationEvidence: _assignmentMatches'),
   'estimated trains must preserve operation evidence provenance');
 
+
+assert(estimatorSource.includes("Object.keys(_assignmentVehicles).length === 1"),
+  'operation model evidence must require unanimous decisive providers');
+assert(estimatorSource.includes("operation-assignment-provider"),
+  'agreed run-level operation evidence must be promotable to exact model');
+
 console.log("train-position-evidence-regression: PASS");
