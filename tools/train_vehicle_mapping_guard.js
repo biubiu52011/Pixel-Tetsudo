@@ -1080,7 +1080,7 @@ for (const model of ['E233系0番台','E231系0番台','E231系1000番台','E233
   assert(!vehicleMapSource.includes("'default': '" + model) && !vehicleMapSource.includes(' / ' + model),
     'JR East fleet identity must remain operator-qualified: ' + model);
 }
-assert(vehicleMapSource.includes('JR E235系0番台（山手線）'), 'Yamanote E235 identity must remain JR-qualified');
+assert(vehicleMapSource.includes('JR E235系0番台'), 'Yamanote E235 identity must remain JR-qualified');
 assert(vehicleMapSource.includes('JR E233系1000番台'), 'Keihin-Tohoku E233-1000 identity must remain JR-qualified');
 assert(vehicleMapSource.includes('JR E131系500番台'), 'Sagami E131-500 identity must remain JR-qualified');
 
@@ -1118,11 +1118,11 @@ for (const forbidden of [
 
 // Batch guard: residual cross-operator fleet identities must remain self-identifying.
 for (const required of [
-  '小田急60000形MSE',
-  '小田急70000形GSE',
+  '小田急60000形',
+  '小田急70000形',
   'JR E231系800番台（東西線直通）',
-  'JR 253系1000番台（日光・きぬがわ）',
-  'JR 285系（サンライズ出雲）',
+  'JR 253系1000番台',
+  'JR 285系',
   '京成3600形',
   '京成3500形',
   '京成3400形',
@@ -1131,7 +1131,7 @@ for (const required of [
   '横浜市交通局10000形',
   '多摩都市モノレール1000系',
   '首都圏新都市鉄道TX-1000系 / 首都圏新都市鉄道TX-2000系 / 首都圏新都市鉄道TX-3000系',
-  'JR東海383系（しなの）'
+  'JR東海383系'
 ]) {
   assert(vehicleMapSource.includes(required),
     'residual fleet identity lost operator qualification: ' + required);
@@ -1143,7 +1143,7 @@ for (const forbidden of ['小田急電鉄30000形', '小田急電鉄60000形', '
   assert(!vehicleMapSource.includes(forbidden),
     'alternate operator prefix regressed into vehicle identity: ' + forbidden);
 }
-assert(vehicleMapSource.includes('小田急30000形EXEα / 小田急60000形MSE / 小田急70000形GSE'),
+assert(vehicleMapSource.includes('小田急30000形 / 小田急60000形 / 小田急70000形'),
   'Odakyu Romancecar identities must use canonical operator prefix');
 
 
@@ -1152,3 +1152,16 @@ assert(!/（\d+両(?:\/\d+両)*）/.test(vehicleMapSource),
   'formation counts must use ASCII parentheses, e.g. (8両) or (6両/8両)');
 assert(vehicleMapSource.includes('東急6020系(5両)') && vehicleMapSource.includes('東急6020系(7両)'),
   'Tokyu 6020 formation markers must remain canonical');
+
+
+// Vehicle identity suffix policy: service names/nicknames are not identity.
+// Parenthetical/suffix labels are reserved for livery/theme distinctions; formation counts remain allowed.
+for (const forbidden of [
+  '（山手線）','（あずさ）','（あずさ・かいじ）','（あずさ・かいじ・富士回遊）',
+  '（日光・きぬがわ）','（サンライズ出雲）','（しなの）',
+  '（スペーシアX）','（スペーシア）','（リバティ）','（リバティ会津）',
+  '（スカイライナー）','（ライナー車両）','EXEα',' MSE',' GSE'
+]) {
+  assert(!vehicleMapSource.includes(forbidden),
+    'non-livery service/nickname label regressed into vehicle identity: ' + forbidden);
+}
