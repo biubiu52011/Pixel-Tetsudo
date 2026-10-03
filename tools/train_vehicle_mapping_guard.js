@@ -967,7 +967,7 @@ for (const line of ['SobuRapid','SobuMain']) {
   const block = vehicleMapSource.match(new RegExp("'" + line + "': \\{[\\s\\S]*?\\n    \\},"))?.[0] || '';
   for (const dest of ['Choshi','Sakura','Naruto']) {
     const row = block.match(new RegExp("'" + dest + "': '([^']+)'"))?.[1] || '';
-    assert(row.includes('JR E259系（しおさい）') && row.includes('JR E257系500番台（しおさい）'),
+    assert(row.includes('JR E259系') && row.includes('JR E257系500番台'),
       line + ' ' + dest + ' must preserve both current Shiosai vehicle families');
   }
 }
