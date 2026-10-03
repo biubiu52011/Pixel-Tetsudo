@@ -1205,6 +1205,18 @@ for (const forbidden of [
 }
 
 
+// Sotetsu 13000 internal-only guard.
+const sotetsuMainDump = JSON.stringify(map['SotetsuMain'] || {});
+const sotetsuIzuminoDump = JSON.stringify(map['SotetsuIzumino'] || {});
+assert(sotetsuMainDump.includes('相鉄13000系(8両)') && sotetsuIzuminoDump.includes('相鉄13000系(8両)'),
+  'Sotetsu 13000 must remain an 8-car internal candidate');
+assert(!JSON.stringify(map['TokyuMeguro'] || {}).includes('相鉄13000系'),
+  'Sotetsu 13000 must not leak into Tokyu Meguro candidates');
+assert(!JSON.stringify(map['TokyuToyoko'] || {}).includes('相鉄13000系'),
+  'Sotetsu 13000 must not leak into Tokyu Toyoko candidates');
+assert(!JSON.stringify(map['SaikyoKawagoe'] || {}).includes('相鉄13000系'),
+  'Sotetsu 13000 must not leak into JR through-service candidates');
+
 // Equipment/update state is not a livery identity.
 assert(!vehicleMapSource.includes('常磐快速線・LED'),
   'equipment-state suffix must not be embedded in E231 vehicle identity');
