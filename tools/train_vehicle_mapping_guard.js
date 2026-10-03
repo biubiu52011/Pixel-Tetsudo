@@ -1174,3 +1174,8 @@ for (const forbidden of [
   assert(!vehicleMapSource.includes(forbidden),
     'non-livery annotation regressed into vehicle identity: ' + forbidden);
 }
+
+
+// Equipment/update state is not a livery identity.
+assert(!vehicleMapSource.includes('常磐快速線・LED'),
+  'equipment-state suffix must not be embedded in E231 vehicle identity');
