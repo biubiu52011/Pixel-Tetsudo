@@ -1,0 +1,9 @@
+-- Applied to Supabase project pnupwfmgbtxqhpzsrhfn.
+-- Migration: add_operation_vehicle_date_rules
+-- Version: 20261003203911
+--
+-- Canonical schema change:
+-- public.operation_vehicle_date_rules stores dated operation-code evidence
+-- separately from train_vehicle_date_rules, because an operation code is not
+-- a train number. Runtime resolution may use these observations only when
+-- service date + network + operation identity match.
