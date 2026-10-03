@@ -912,7 +912,7 @@
         'TokyoMetro': '西武40000系(8両/10両) / 東京メトロ17000系(8両/10両)',
       },
       'LimitedExpress': {
-        'default': '西武001系（ラビュー） / 西武10000系（ニューレッドアロー）',
+        'default': '西武001系 / 西武10000系',
       },
       'F-Liner': {
         'default': '西武6000系(10両) / 西武40000系(10両) / 東京メトロ10000系(10両) / 東京メトロ17000系(10両) / 東急5050系4000番台(10両)',
@@ -996,7 +996,7 @@
         'default': 'JR E231系500番台 / JR E231系0番台',
         // 東京メトロ東西線直通：JR車は地下鉄直通仕様のE231系800番台のみ。
         // 普通のE231系0/500番台を直通候補へ混入させない。
-        'TokyoMetro': 'JR E231系800番台（東西線直通） / 東京メトロ05系(10両) / 東京メトロ07系(10両) / 東京メトロ15000系(10両)'
+        'TokyoMetro': 'JR E231系800番台 / 東京メトロ05系(10両) / 東京メトロ07系(10両) / 東京メトロ15000系(10両)'
       },
     },
     'Hachiko': {
@@ -1004,7 +1004,7 @@
     },
     'Ito': {
       'Local': { 'default': 'JR E231系1000番台 / 伊豆急行8000系 / 伊豆急行2100系' },
-      'LimitedExpress': { 'default': 'JR E257系2000番台(9両) / JR E257系2500番台(5両)（踊り子）' },
+      'LimitedExpress': { 'default': 'JR E257系2000番台(9両) / JR E257系2500番台(5両)' },
     },
     'Itsukaichi': {
       'Local': { 'default': 'JR E233系0番台' },
@@ -1037,7 +1037,7 @@
         }
       },
       'SpecialRapid': { 'default': 'JR E531系' },
-      'LimitedExpress': { 'default': 'JR E657系（ときわ・ひたち）' },
+      'LimitedExpress': { 'default': 'JR E657系' },
     },
     'JobanLocal': {
       'Local': {
@@ -1065,7 +1065,7 @@
     'Narita': {
       'Local': { 'default': 'JR 209系2000番台 / JR E231系0番台' },
       'Rapid': { 'default': 'JR 209系2000番台 / JR E231系0番台' },
-      'LimitedExpress': { 'default': 'JR E259系（成田エクスプレス）' },
+      'LimitedExpress': { 'default': 'JR E259系' },
     },
     'Ome': {
       'Rapid': { 'default': 'JR E233系0番台' },
@@ -1094,13 +1094,13 @@
     'SobuRapid': {
       'Rapid': { 'default': 'JR E235系1000番台' },
       'LimitedExpress': {
-        'default': 'JR E259系（成田エクスプレス／しおさい） / JR E257系500番台（しおさい）',
+        'default': 'JR E259系 / JR E257系500番台',
         'destStation': {
-          'NaritaAirportTerminal1': 'JR E259系（成田エクスプレス）',
-          'NaritaAirportTerminal2': 'JR E259系（成田エクスプレス）',
-          'Choshi': 'JR E259系（しおさい） / JR E257系500番台（しおさい）',
-          'Sakura': 'JR E259系（しおさい） / JR E257系500番台（しおさい）',
-          'Naruto': 'JR E259系（しおさい） / JR E257系500番台（しおさい）',
+          'NaritaAirportTerminal1': 'JR E259系',
+          'NaritaAirportTerminal2': 'JR E259系',
+          'Choshi': 'JR E259系 / JR E257系500番台',
+          'Sakura': 'JR E259系 / JR E257系500番台',
+          'Naruto': 'JR E259系 / JR E257系500番台',
           'Matsumoto': 'JR E353系'
         }
       },
@@ -1114,7 +1114,7 @@
       'Local': { 'default': 'JR E231系1000番台 / JR JR E233系3000番台' },
       'Rapid': { 'default': 'JR E231系1000番台 / JR JR E233系3000番台' },
       'SpecialRapid': { 'default': 'JR E231系1000番台 / JR JR E233系3000番台' },
-      'LimitedExpress': { 'default': 'JR E257系5500番台(5両)（草津・四万／あかぎ）' },
+      'LimitedExpress': { 'default': 'JR E257系5500番台(5両)' },
     },
     'Tokaido': {
       'Local': { 'default': 'JR E231系1000番台 / JR E233系3000番台' },
@@ -1123,9 +1123,9 @@
       'LimitedExpress': {
         'default': 'JR E257系2000番台(9両) / JR E257系2500番台(5両)',
         'destStation': {
-          'IzukyuShimoda': 'JR E257系2000番台(9両) / JR E257系2500番台(5両)（踊り子）',
-          'Odawara': 'JR E257系2000番台(9両) / JR E257系2500番台(5両)（湘南）',
-          'Hiratsuka': 'JR E257系2000番台(9両) / JR E257系2500番台(5両)（湘南）',
+          'IzukyuShimoda': 'JR E257系2000番台(9両) / JR E257系2500番台(5両)',
+          'Odawara': 'JR E257系2000番台(9両) / JR E257系2500番台(5両)',
+          'Hiratsuka': 'JR E257系2000番台(9両) / JR E257系2500番台(5両)',
           'Izumoshi': 'JR 285系'
         }
       },
@@ -1157,7 +1157,7 @@
         }
       },
       // Through limited expresses on the Shinagawa-Ueno corridor are Joban services.
-      'LimitedExpress': { 'default': 'JR E657系（ひたち・ときわ）' },
+      'LimitedExpress': { 'default': 'JR E657系' },
     },
     'UtsunomiyaJR': {
       'Local': { 'default': 'JR E231系1000番台 / JR E233系3000番台' },
@@ -1167,7 +1167,7 @@
     'Yokosuka': {
       'Local': { 'default': 'JR E235系1000番台' },
       'Rapid': { 'default': 'JR E235系1000番台' },
-      'LimitedExpress': { 'default': 'JR E259系（成田エクスプレス）' },
+      'LimitedExpress': { 'default': 'JR E259系' },
     },
 
     // ================================================================
@@ -1200,17 +1200,17 @@
         'Keikyu': '京急600形 / 都営5500形 / 京成3000形(8両)'
       },
       'LimitedExpress': {
-        'default': '京成3000形(6両/8両) / 京成3050形(8両) / 京成3700形(6両/8両)（特急）',
+        'default': '京成3000形(6両/8両) / 京成3050形(8両) / 京成3700形(6両/8両)',
         'Toei': '京成3000形(8両) / 京成3700形(8両) / 京成3050形(8両) / 都営5500形',
         'Keikyu': '京急600形 / 都営5500形 / 京成3000形(8両)'
       },
       'RapidLimitedExpress': {
-        'default': '京成3000形(6両/8両) / 京成3050形(8両) / 京成3700形(6両/8両)（快速特急）',
+        'default': '京成3000形(6両/8両) / 京成3050形(8両) / 京成3700形(6両/8両)',
         'Toei': '京成3000形(8両) / 京成3700形(8両) / 京成3050形(8両) / 都営5500形',
         'Keikyu': '京急600形 / 都営5500形 / 京成3000形(8両)'
       },
       'CommuterLimitedExpress': {
-        'default': '京成3000形(6両/8両) / 京成3050形(8両) / 都営5500形（通勤特急）',
+        'default': '京成3000形(6両/8両) / 京成3050形(8両) / 都営5500形',
         'Toei': '京成3000形(8両) / 京成3700形(8両) / 京成3050形(8両) / 都営5500形',
         'Keikyu': '京急600形 / 都営5500形 / 京成3000形(8両)'
       },
@@ -1267,9 +1267,9 @@
     'NaritaSkyAccess': {
       'Local': { 'default': '京成3100形(8両) / 京成3000形', 'Keisei': '京成3000形(8両) / 京成3050形(8両) / 京成3700形(8両) / 京成3600形 / 京成3500形 / 京成3400形' },
       'Rapid': { 'default': '京成3100形(8両) / 京成3000形', 'Keisei': '京成3000形(8両) / 京成3050形(8両) / 京成3700形(8両) / 京成3600形' },
-      'LimitedExpress': { 'default': '京成3100形(8両) / 京成3000形', 'Keisei': '京成3000形(8両) / 京成3050形(8両) / 京成3700形(8両)（特急）' },
-      'RapidLimitedExpress': { 'default': '京成3100形(8両) / 京成3000形', 'Keisei': '京成3000形(8両) / 京成3050形(8両) / 京成3700形(8両)（快速特急）' },
-      'CommuterLimitedExpress': { 'default': '京成3100形(8両) / 京成3000形', 'Keisei': '京成3000形(8両) / 京成3050形(8両) / 都営5500形（通勤特急）' },
+      'LimitedExpress': { 'default': '京成3100形(8両) / 京成3000形', 'Keisei': '京成3000形(8両) / 京成3050形(8両) / 京成3700形(8両)' },
+      'RapidLimitedExpress': { 'default': '京成3100形(8両) / 京成3000形', 'Keisei': '京成3000形(8両) / 京成3050形(8両) / 京成3700形(8両)' },
+      'CommuterLimitedExpress': { 'default': '京成3100形(8両) / 京成3000形', 'Keisei': '京成3000形(8両) / 京成3050形(8両) / 都営5500形' },
       'MorningLiner': { 'default': '京成AE形' },
       'EveningLiner': { 'default': '京成AE形' },
       'AccessExpress': {
@@ -1303,7 +1303,7 @@
     },
     'Gono': {
       'Local': { 'default': 'JR GV-E400系' },
-      'Rapid': { 'default': 'JR HB-E300系（リゾートしらかみ）' }
+      'Rapid': { 'default': 'JR HB-E300系' }
     },
     'Hachinohe': {
       'Local': { 'default': 'キハE130形500番台' }
@@ -1314,14 +1314,14 @@
     },
     'Ishinomaki': {
       'Local': { 'default': 'JR キハ110系' },
-      'Rapid': { 'default': 'JR キハ110系0番台（快速南三陸）' }
+      'Rapid': { 'default': 'JR キハ110系0番台' }
     },
     'Kamaishi': {
       'Local': { 'default': 'JR HB-E220系' },
-      'Rapid': { 'default': 'JR HB-E220系（快速はまゆり）' }
+      'Rapid': { 'default': 'JR HB-E220系' }
     },
     'Karasuyama': {
-      'Local': { 'default': 'JR EV-E301系（ACCUM）' }
+      'Local': { 'default': 'JR EV-E301系' }
     },
     'Kesennuma': {
       'Local': { 'default': 'JR キハ110系' },
@@ -1332,7 +1332,7 @@
     },
     'Komii': {
       'Local': { 'default': 'JR キハ110系100番台' },
-      'Rapid': { 'default': 'JR キハ110系100番台（HIGH RAIL 1375）' }
+      'Rapid': { 'default': 'JR キハ110系100番台' }
     },
     'Kounan': {
       'Local': { 'default': 'JR キハ110系' }
@@ -1348,11 +1348,11 @@
       'Rapid': { 'default': 'JR キハ110系' }
     },
     'Oga': {
-      'Local': { 'default': 'JR EV-E801系（ACCUM）' }
+      'Local': { 'default': 'JR EV-E801系' }
     },
     'Oito': {
       'Local': { 'default': 'JR E127系100番台' },
-      'Rapid': { 'default': 'JR HB-E300系（リゾートビューふるさと）' },
+      'Rapid': { 'default': 'JR HB-E300系' },
       'LimitedExpress': { 'default': 'JR E353系' }
     },
     'Ominato': {
@@ -1362,7 +1362,7 @@
     'OuMain': {
       'Local': { 'default': 'JR 701系 / JR E721系 / JR GV-E400系', 'Gono': 'JR GV-E400系 / JR 701系 / JR E721系', 'Tazawako': 'JR 701系5000番台' },
       'Rapid': { 'default': 'JR 701系 / JR E721系 / JR GV-E400系', 'Gono': 'JR GV-E400系 / JR 701系 / JR E721系', 'Tazawako': 'JR 701系5000番台' },
-      'LimitedExpress': { 'default': 'JR E6系（こまち）/ JR E8系（つばさ）' }
+      'LimitedExpress': { 'default': 'JR E6系/ JR E8系' }
     },
     'RikutoEast': {
       'Local': { 'default': 'JR キハ110系' },
@@ -1393,7 +1393,7 @@
     'Shinetsu': {
       'Local': { 'default': 'JR 211系 / JR E129系' },
       'Rapid': { 'default': 'JR E129系' },
-      'LimitedExpress': { 'default': 'JR E653系（しらゆき）' }
+      'LimitedExpress': { 'default': 'JR E653系' }
     },
     'Shinonoi': {
       'Local': { 'default': 'JR 211系 / JR E127系100番台' },
@@ -1412,7 +1412,7 @@
     'Tazawako': {
       'Local': { 'default': 'JR 701系5000番台' },
       'Rapid': { 'default': 'JR 701系5000番台' },
-      'LimitedExpress': { 'default': 'JR E6系（こまち）' }
+      'LimitedExpress': { 'default': 'JR E6系' }
     },
     'TohokuMain': {
       'Local': { 'default': 'JR 701系 / JR E721系 / JR HB-E220系', 'Kamaishi': 'JR HB-E220系 / JR 701系 / JR E721系' }
@@ -1423,7 +1423,7 @@
     'Uetsu': {
       'Local': { 'default': 'JR 701系 / JR E721系' },
       'Rapid': { 'default': 'JR 701系 / JR E721系' },
-      'LimitedExpress': { 'default': 'JR E653系（いなほ）' }
+      'LimitedExpress': { 'default': 'JR E653系' }
     },
     'Yamada': {
       'Local': { 'default': 'JR キハ110系' }
@@ -1431,7 +1431,7 @@
     'Yamagata': {
       'Local': { 'default': 'JR 701系5500番台' },
       'Rapid': { 'default': 'JR 701系5500番台' },
-      'LimitedExpress': { 'default': 'JR E8系（つばさ）' }
+      'LimitedExpress': { 'default': 'JR E8系' }
     },
     'Yonezawa': {
       'Local': { 'default': 'JR キハ110系' }
@@ -1439,30 +1439,30 @@
 
     // --- 私鉄・モノレール・新交通 ---
     'Daishi_Keikyu': {
-      'Local': { 'default': '京急1500形 / 京急新1000形（4両編成）' }
+      'Local': { 'default': '京急1500形 / 京急新1000形(4両)' }
     },
     'KeikyuAirport': {
       'Local': { 'default': '京急新1000形 / 京急600形' },
       'Express': { 'default': '京急新1000形' },
       'LimitedExpress': { 'default': '京急新1000形 / 京急600形' },
       'RapidLimitedExpress': { 'default': '京急新1000形 / 京急2100形' },
-      'MorningWing': { 'default': '京急2100形 / 京急新1000形1890番台（Le Ciel）' },
-      'EveningWing': { 'default': '京急2100形 / 京急新1000形1890番台（Le Ciel）' },
+      'MorningWing': { 'default': '京急2100形 / 京急新1000形1890番台' },
+      'EveningWing': { 'default': '京急2100形 / 京急新1000形1890番台' },
       'AirportRapidLimitedExpress': { 'default': '京急新1000形 / 京急600形' }
     },
     'KeikyuKurihama': {
       'Local': { 'default': '京急新1000形 / 京急1500形' },
       'LimitedExpress': { 'default': '京急新1000形 / 京急2100形 / 京急1500形' },
       'RapidLimitedExpress': { 'default': '京急新1000形 / 京急2100形 / 京急1500形' },
-      'MorningWing': { 'default': '京急2100形 / 京急新1000形1890番台（Le Ciel）' },
-      'EveningWing': { 'default': '京急2100形 / 京急新1000形1890番台（Le Ciel）' }
+      'MorningWing': { 'default': '京急2100形 / 京急新1000形1890番台' },
+      'EveningWing': { 'default': '京急2100形 / 京急新1000形1890番台' }
     },
     'KeikyuZushi': {
-      'Local': { 'default': '京急新1000形（4両編成）' },
+      'Local': { 'default': '京急新1000形(4両)' },
       'Express': { 'default': '京急新1000形' },
       'LimitedExpress': { 'default': '京急新1000形 / 京急1500形' },
-      'MorningWing': { 'default': '京急2100形 / 京急新1000形1890番台（Le Ciel）' },
-      'EveningWing': { 'default': '京急2100形 / 京急新1000形1890番台（Le Ciel）' }
+      'MorningWing': { 'default': '京急2100形 / 京急新1000形1890番台' },
+      'EveningWing': { 'default': '京急2100形 / 京急新1000形1890番台' }
     },
     'Haijima': {
       'Local': { 'default': '西武20000系 / 西武30000系 / 西武2000系' },
@@ -1487,7 +1487,7 @@
       'SemiExpress': { 'default': '西武2000系 / 西武20000系 / 西武30000系' },
       'CommuterExpress': { 'default': '西武2000系 / 西武20000系 / 西武30000系' },
       'RapidExpress': { 'default': '西武2000系 / 西武20000系 / 西武30000系' },
-      'LimitedExpress': { 'default': '西武10000系（レッドアロー）' },
+      'LimitedExpress': { 'default': '西武10000系' },
       'HaijimaLiner': { 'default': '西武40000系(10両)' }
     },
     'SeibuTamagawa': {
@@ -1497,7 +1497,7 @@
       'Local': { 'default': '西武101系' }
     },
     'SeibuToshima': {
-      'Local': { 'default': '西武2000系（8両編成・池袋線直通）' }
+      'Local': { 'default': '西武2000系(8両)' }
     },
     'SeibuYamaguchi': {
       'Local': { 'default': '西武8500系 / 西武L00系' }
@@ -1521,12 +1521,12 @@
       'Local': { 'default': '東京モノレール10000形 / 東京モノレール2000形' }
     },
     'Yurikamome': {
-      'Local': { 'default': 'ゆりかもめ7300系 / ゆりかもめ7500系（7000系は全廃）' }
+      'Local': { 'default': 'ゆりかもめ7300系 / ゆりかもめ7500系' }
     },
     'Hakushin': {
       'Local': { 'default': 'JR E129系' },
       'Rapid': { 'default': 'JR E129系' },
-      'LimitedExpress': { 'default': 'JR E653系（特急いなほ）' }
+      'LimitedExpress': { 'default': 'JR E653系' }
     },
 
     // ================================================================
@@ -1546,7 +1546,7 @@
       'Local': { 'default': '東京メトロ2000系' },
     },
     'ChiyodaBranch': {
-      'Local': { 'default': '東京メトロ16000系 / 東京メトロ05系（北綾瀬）' },
+      'Local': { 'default': '東京メトロ16000系 / 東京メトロ05系' },
     },
     'Oedo': {
       'Local': { 'default': '都営12-000形 / 都営12-600形' },
@@ -1687,13 +1687,13 @@
       'Local': { 'default': 'JR 209系2000番台 / JR 209系2100番台' },
       'Rapid': { 'default': 'JR E235系1000番台' },
       'LimitedExpress': {
-        'default': 'JR E259系（成田エクスプレス／しおさい） / JR E257系500番台（しおさい）',
+        'default': 'JR E259系 / JR E257系500番台',
         'destStation': {
-          'NaritaAirportTerminal1': 'JR E259系（成田エクスプレス）',
-          'NaritaAirportTerminal2': 'JR E259系（成田エクスプレス）',
-          'Choshi': 'JR E259系（しおさい） / JR E257系500番台（しおさい）',
-          'Sakura': 'JR E259系（しおさい） / JR E257系500番台（しおさい）',
-          'Naruto': 'JR E259系（しおさい） / JR E257系500番台（しおさい）',
+          'NaritaAirportTerminal1': 'JR E259系',
+          'NaritaAirportTerminal2': 'JR E259系',
+          'Choshi': 'JR E259系 / JR E257系500番台',
+          'Sakura': 'JR E259系 / JR E257系500番台',
+          'Naruto': 'JR E259系 / JR E257系500番台',
           'Matsumoto': 'JR E353系'
         }
       },
@@ -1705,9 +1705,9 @@
       'LimitedExpress': {
         'default': 'JR E257系2000番台(9両) / JR E257系2500番台(5両)',
         'destStation': {
-          'IzukyuShimoda': 'JR E257系2000番台(9両) / JR E257系2500番台(5両)（踊り子）',
-          'Odawara': 'JR E257系2000番台(9両) / JR E257系2500番台(5両)（湘南）',
-          'Hiratsuka': 'JR E257系2000番台(9両) / JR E257系2500番台(5両)（湘南）',
+          'IzukyuShimoda': 'JR E257系2000番台(9両) / JR E257系2500番台(5両)',
+          'Odawara': 'JR E257系2000番台(9両) / JR E257系2500番台(5両)',
+          'Hiratsuka': 'JR E257系2000番台(9両) / JR E257系2500番台(5両)',
           'Izumoshi': 'JR 285系'
         }
       },
@@ -1716,7 +1716,7 @@
       'Local': { 'default': 'JR E531系' },
       'Rapid': { 'default': 'JR E531系' },
       'SpecialRapid': { 'default': 'JR E531系' },
-      'LimitedExpress': { 'default': 'JR E657系（ひたち・ときわ）' },
+      'LimitedExpress': { 'default': 'JR E657系' },
     },
     'Togane': {
       'Local': { 'default': 'JR 209系2100番台 / JR E233系5000番台' },
@@ -1727,13 +1727,13 @@
     'NaritaAirportBranch': {
       'Local': { 'default': 'JR 209系2000番台 / JR 209系2100番台' },
       'Rapid': { 'default': 'JR E235系1000番台' },
-      'LimitedExpress': { 'default': 'JR E259系（成田エクスプレス）' },
+      'LimitedExpress': { 'default': 'JR E259系' },
     },
     'Agatsuma': {
-      'LimitedExpress': { 'default': 'JR E257系5500番台(5両)（草津・四万）' },
+      'LimitedExpress': { 'default': 'JR E257系5500番台(5両)' },
     },
     'Joetsu': {
-      'LimitedExpress': { 'default': 'JR E257系5500番台(5両)（草津・四万）' },
+      'LimitedExpress': { 'default': 'JR E257系5500番台(5両)' },
     },
   };
 
