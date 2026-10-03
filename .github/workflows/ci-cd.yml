@@ -47,6 +47,7 @@ jobs:
           node tools/asakusa-formation-evidence.test.js
           node tools/operation-evidence-providers.test.js
           node tools/formation-evidence-providers.test.js
+          node tools/hibiya-formation-evidence.test.js
 
       - name: Entity Preservation Guard
         run: |
