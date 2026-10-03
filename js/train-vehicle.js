@@ -207,6 +207,7 @@
 
     var _explicitVehicleInput = splitCandidates(ctx.vehicleTypeManual).length > 0 ||
       splitCandidates(ctx.odptVehicleType).length > 0;
+    var _manualEvidenceSource = String(ctx.vehicleEvidenceSource || '').trim();
 
     addFrom(ctx.vehicleTypeManual, 'manual');      // S0
     addFrom(ctx.odptVehicleType, 'odpt');          // S1
@@ -334,7 +335,8 @@
     }
     if (chosen) {
       identityStatus = 'EXACT';
-      if (/^(manual|odpt)/.test(chosenSrc)) identityReason = 'explicit-vehicle-evidence';
+      if (/^(manual|odpt)/.test(chosenSrc)) identityReason =
+        (_manualEvidenceSource === 'operation-assignment-provider') ? 'dated-operation-vehicle-evidence' : 'explicit-vehicle-evidence';
       else if (chosenSrc === 'trainNo') identityReason = 'train-number-evidence';
       else if (chosenSrc === 'map' || chosenSrc === 'map+trainOwner') identityReason = 'single-vehicle-timetable-constraint';
       else identityReason = 'resolved-vehicle-evidence';
