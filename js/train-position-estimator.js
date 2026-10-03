@@ -596,30 +596,54 @@
           // mode has no odpt:trainOwner. Providers must return evidence, not guesses.
           var _assignmentOperator = '';
           var _assignmentMatches = [];
-          (window.TRAIN_OPERATION_EVIDENCE_PROVIDERS || []).forEach(function(provider) {
+          var _operationProviders = window.TRAIN_OPERATION_EVIDENCE_PROVIDERS || [];
+          var _baseOperationCtx = {
+            lineId: lineId,
+            operator: tt['odpt:operator'] || line.operator || '',
+            railway: tt['odpt:railway'] || '',
+            railDirection: tt['odpt:railDirection'] || '',
+            destinationStation: destinationStationUrn || '',
+            timetableObjectId: timetableObjectId,
+            serviceDate: tt['_serviceDate'] || tt['serviceDate'] || tt['operatingDate'] || getTokyoServiceDate(),
+            at: (function(){ var d=new Date(Date.now()+9*60*60*1000); return d.toISOString().slice(11,16); })()
+          };
+          _baseOperationCtx.operationCode = window.TrainOperationEvidence &&
+            typeof window.TrainOperationEvidence.normalizeOperationCode === 'function'
+            ? window.TrainOperationEvidence.normalizeOperationCode(trainNumber, _baseOperationCtx) : '';
+          var _matchedProviderIndexes = {};
+          function _collectOperationEvidence(provider, providerIndex, ctx) {
             if (!provider || typeof provider.resolveEvidence !== 'function') return;
-            var _operationCtx = {
-              lineId: lineId,
-              operator: tt['odpt:operator'] || line.operator || '',
-              railway: tt['odpt:railway'] || '',
-              railDirection: tt['odpt:railDirection'] || '',
-              destinationStation: destinationStationUrn || '',
-              timetableObjectId: timetableObjectId,
-              serviceDate: tt['_serviceDate'] || tt['serviceDate'] || tt['operatingDate'] || getTokyoServiceDate(),
-              at: (function(){ var d=new Date(Date.now()+9*60*60*1000); return d.toISOString().slice(11,16); })()
-            };
-            _operationCtx.operationCode = window.TrainOperationEvidence &&
-              typeof window.TrainOperationEvidence.normalizeOperationCode === 'function'
-              ? window.TrainOperationEvidence.normalizeOperationCode(trainNumber, _operationCtx) : '';
-            var rec = provider.resolveEvidence(trainNumber, _operationCtx);
-            if (rec) {
-              var normalized = window.TrainOperationEvidence &&
-                typeof window.TrainOperationEvidence.normalizeEvidence === 'function'
-                ? window.TrainOperationEvidence.normalizeEvidence(provider, rec)
-                : rec;
-              if (normalized) _assignmentMatches.push(normalized);
+            var rec = provider.resolveEvidence(trainNumber, ctx);
+            if (!rec) return;
+            var normalized = window.TrainOperationEvidence &&
+              typeof window.TrainOperationEvidence.normalizeEvidence === 'function'
+              ? window.TrainOperationEvidence.normalizeEvidence(provider, rec)
+              : rec;
+            if (normalized) {
+              _assignmentMatches.push(normalized);
+              _matchedProviderIndexes[providerIndex] = true;
             }
+          }
+          _operationProviders.forEach(function(provider, providerIndex) {
+            _collectOperationEvidence(provider, providerIndex, _baseOperationCtx);
           });
+          // Evidence bridge: a train-number mapping provider may resolve a concrete
+          // operation code (e.g. Odakyu 1700 -> E61). If all first-pass providers
+          // agree on one code, retry only providers that did not match so dated
+          // formation evidence can consume it without depending on provider order.
+          var _resolvedOperationCodes = {};
+          _assignmentMatches.forEach(function(rec) {
+            if (rec.operationCode) _resolvedOperationCodes[String(rec.operationCode)] = true;
+          });
+          var _resolvedOperationCodeList = Object.keys(_resolvedOperationCodes);
+          if (!_baseOperationCtx.operationCode && _resolvedOperationCodeList.length === 1) {
+            var _bridgedOperationCtx = {};
+            Object.keys(_baseOperationCtx).forEach(function(k){ _bridgedOperationCtx[k] = _baseOperationCtx[k]; });
+            _bridgedOperationCtx.operationCode = _resolvedOperationCodeList[0];
+            _operationProviders.forEach(function(provider, providerIndex) {
+              if (!_matchedProviderIndexes[providerIndex]) _collectOperationEvidence(provider, providerIndex, _bridgedOperationCtx);
+            });
+          }
           // Only decisive A/C dated evidence may establish the responsible
           // operator. B remains a compatibility constraint; D remains a lead.
           var _decisiveAssignments = _assignmentMatches.filter(function(rec){ return rec.decisive && rec.operator; });
