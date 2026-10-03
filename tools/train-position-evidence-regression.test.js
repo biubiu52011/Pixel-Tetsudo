@@ -56,6 +56,12 @@ assert(estimatorSource.includes('rec.decisive && rec.operator'),
   'only decisive graded evidence may establish assignment operator');
 assert(estimatorSource.includes('operationEvidence: _assignmentMatches'),
   'estimated trains must preserve operation evidence provenance');
+assert(estimatorSource.includes('_resolvedOperationCodeList.length === 1'),
+  'operation-code bridge must require one unanimous mapped operation code');
+assert(estimatorSource.includes('if (!_matchedProviderIndexes[providerIndex])'),
+  'operation-code bridge must retry only providers that did not already match');
+assert(estimatorSource.includes('_bridgedOperationCtx.operationCode = _resolvedOperationCodeList[0]'),
+  'mapped train-number operation code must reach downstream dated formation providers');
 assert(/at:\s*\(function\(\)\{ var d=new Date\(Date\.now\(\)\+9\*60\*60\*1000\)/.test(estimatorSource),
   'segmented operation evidence must receive JST service time, not UTC');
 
