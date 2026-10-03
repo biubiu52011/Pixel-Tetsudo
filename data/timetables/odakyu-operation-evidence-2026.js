@@ -45,8 +45,9 @@ var HOLIDAY_TRAIN_TO_OPERATION={
 function mappedOperation(trainNumber,ctx){
  var date=String(ctx.serviceDate||"").slice(0,10); if(!date)return "";
  var d=new Date(date+"T12:00:00Z"),day=d.getUTCDay();
- if(day===0||day===6)return "";
- return WEEKDAY_TRAIN_TO_OPERATION[String(trainNumber||"").replace(/\D/g,"")]||"";
+ var key=String(trainNumber||"").replace(/\\D/g,"");
+ if(day===0||day===6)return HOLIDAY_TRAIN_TO_OPERATION[key]||"";
+ return WEEKDAY_TRAIN_TO_OPERATION[key]||"";
 }
 function op(raw){
  var m=String(raw||"").toUpperCase().trim().match(/(?:^|[^A-Z0-9])([ABCE])(\d{1,2})(?:[^A-Z0-9]|$)/);
