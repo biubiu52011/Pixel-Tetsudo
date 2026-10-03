@@ -623,6 +623,17 @@
           if (Object.keys(_assignmentOperators).length === 1) {
             _assignmentOperator = Object.keys(_assignmentOperators)[0];
           }
+          // A/C run-level providers may also carry a model-exact assignment.
+          // Accept it only when every decisive model-bearing provider agrees.
+          var _assignmentVehicles = {};
+          _decisiveAssignments.forEach(function(rec) {
+            if (rec.vehicleType) _assignmentVehicles[rec.vehicleType] = true;
+          });
+          if (!tt['vehicleType'] && !tt['odpt:vehicleType'] &&
+              Object.keys(_assignmentVehicles).length === 1) {
+            tt['vehicleType'] = Object.keys(_assignmentVehicles)[0];
+            tt._vehicleEvidenceSource = 'operation-assignment-provider';
+          }
           var vehCtx = {
             lineId: lineId,
             operator: line.operator,
