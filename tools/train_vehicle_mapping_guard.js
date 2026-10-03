@@ -75,6 +75,18 @@ function expectRuntime(win, label, ctx, expectedName, expectedIconNeedle, forbid
   return result;
 }
 
+function expectNarrowedRuntime(win, label, ctx, expectedCandidates) {
+  const result = win.TrainVehicle.resolve(Object.assign({ trainNumber: `guard-narrowed-${label}` }, ctx));
+  assert(result.identityStatus === 'NARROWED', `${label}: expected NARROWED identity`, { result });
+  assert(!result.name, `${label}: unresolved identity must not expose an exact name`, { result });
+  assert(!result.iconPath, `${label}: unresolved identity must not expose a candidate icon`, { result });
+  if (expectedCandidates) {
+    assert(JSON.stringify(result.candidates) === JSON.stringify(expectedCandidates),
+      `${label}: unexpected narrowed candidates`, { result, expectedCandidates });
+  }
+  return result;
+}
+
 function expectUnknownRuntime(win, label, ctx) {
   const result = win.TrainVehicle.resolve(Object.assign({ trainNumber: `guard-unknown-${label}` }, ctx));
   const value = `${result.name || ''} ${result.iconPath || ''}`;
@@ -351,30 +363,30 @@ function main() {
     destinationStation: 'odpt.Station:JR-East.Joban.Tsuchiura'
   }, 'E531系', 'E531系.png', ['E231系_0番代_常磐快速線.png']);
 
-  expectRuntime(win, 'Tozai JR-East runtime', {
+  expectNarrowedRuntime(win, 'Tozai JR-East runtime', {
     lineId: 'Tozai',
     operator: 'JR-East',
     trainType: trainType('TokyoMetro', 'Local'),
     destinationStation: 'odpt.Station:JR-East.ChuoSobuLocal.Nakano'
-  }, 'E231系800番台（東西線直通）', 'E231系_800番代.png', ['E231系_0番代_中央・総武線各駅停車.png']);
+  }, ['JR E231系800番台(10両)', '東京メトロ05系(10両)', '東京メトロ07系(10両)', '東京メトロ15000系(10両)']);
 
-  expectRuntime(win, 'ShonanShinjuku runtime', {
+  expectNarrowedRuntime(win, 'ShonanShinjuku runtime', {
     lineId: 'ShonanShinjuku',
     operator: 'JR-East',
     trainType: trainType('JR-East', 'Rapid')
-  }, 'E231系1000番台', 'E231系_1000番代.png', ['E235系_1000番代.png']);
+  }, ['JR E231系1000番台', 'JR E233系3000番台']);
 
-  expectRuntime(win, 'Hachiko runtime ODPT evidence', {
+  expectNarrowedRuntime(win, 'Hachiko runtime ODPT evidence', {
     lineId: 'Hachiko',
     operator: 'JR-East',
     trainType: trainType('JR-East', 'Local')
-  }, '209系3500番台 / E231系3000番台', '209系_3500番代.png', ['209系_500番代_京葉線.png']);
+  }, ['JR 209系3500番台', 'JR E231系3000番台']);
 
-  expectRuntime(win, 'KawagoeWest runtime ODPT evidence', {
+  expectNarrowedRuntime(win, 'KawagoeWest runtime ODPT evidence', {
     lineId: 'KawagoeWest',
     operator: 'JR-East',
     trainType: trainType('JR-East', 'Local')
-  }, 'E231系3000番台 / 209系3500番台', '209系_3500番代.png', ['209系_500番代_京葉線.png']);
+  }, ['JR E231系3000番台', 'JR 209系3500番台']);
 
   expectRuntime(win, 'Yokosuka local accepted safe behavior', {
     lineId: 'Yokosuka',
