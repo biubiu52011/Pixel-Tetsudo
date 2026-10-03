@@ -15,6 +15,9 @@ r=p.resolveEvidence("6027",{lineId:"Odawara",serviceDate:"2026-04-01"});assert.s
 assert.strictEqual(p.resolveEvidence("6027",{lineId:"Odawara",serviceDate:"2026-04-04"}),null);
 r=p.resolveEvidence("4001",{lineId:"Odawara",serviceDate:"2026-04-04"});assert.strictEqual(r.operationCode,"C11");assert.strictEqual(r.vehicleType,"小田急4000形");assert(/pages\/20\.html/.test(r.sourceUrl));
 r=p.resolveEvidence("4007",{lineId:"Odawara",serviceDate:"2026-04-04"});assert.strictEqual(r.operationCode,"C15");
+r=p.resolveEvidence("2236",{lineId:"Odawara",serviceDate:"2026-04-04"});assert.strictEqual(r.operationCode,"C17");assert.strictEqual(r.vehicleType,"小田急4000形");
+r=p.resolveEvidence("3035",{lineId:"Odawara",serviceDate:"2026-04-04"});assert.strictEqual(r.operationCode,"C18");
+r=p.resolveEvidence("3501",{lineId:"Odawara",serviceDate:"2026-04-05"});assert.strictEqual(r.operationCode,"C19");
 r=p.resolveEvidence("6001",{lineId:"Odawara",serviceDate:"2026-04-05"});assert.strictEqual(r.operationCode,"C21");
 r=p.resolveEvidence("1200",{lineId:"Odawara",serviceDate:"2026-04-05"});assert.strictEqual(r.operationCode,"C22");
 assert.strictEqual(p.resolveEvidence("4001",{lineId:"Odawara",serviceDate:"2026-04-01"}),null);
