@@ -981,19 +981,19 @@
     // JR 東日本 首都圏 24 線
     // ================================================================
     'ChuoRapid': {
-      'Rapid': { 'default': 'E233系0番台' },
-      'ChuoSpecialRapid': { 'default': 'E233系0番台' },
-      'CommuterSpecialRapid': { 'default': 'E233系0番台' },
-      'CommuterRapid': { 'default': 'E233系0番台' },
-      'OmeSpecialRapid': { 'default': 'E233系0番台' },
-      'SpecialRapid': { 'default': 'E233系0番台' },
+      'Rapid': { 'default': 'JR E233系0番台' },
+      'ChuoSpecialRapid': { 'default': 'JR E233系0番台' },
+      'CommuterSpecialRapid': { 'default': 'JR E233系0番台' },
+      'CommuterRapid': { 'default': 'JR E233系0番台' },
+      'OmeSpecialRapid': { 'default': 'JR E233系0番台' },
+      'SpecialRapid': { 'default': 'JR E233系0番台' },
       // Tokyo-Takao is presented as the Chuo Rapid operating system even when
       // public infrastructure references call the corridor "Chuo Main Line".
-      'LimitedExpress': { 'default': 'E353系（あずさ・かいじ・富士回遊）' },
+      'LimitedExpress': { 'default': 'JR E353系（あずさ・かいじ・富士回遊）' },
     },
     'ChuoSobuLocal': {
       'Local': {
-        'default': 'E231系500番台 / E231系0番台',
+        'default': 'JR E231系500番台 / JR E231系0番台',
         // 東京メトロ東西線直通：JR車は地下鉄直通仕様のE231系800番台のみ。
         // 普通のE231系0/500番台を直通候補へ混入させない。
         'TokyoMetro': 'E231系800番台（東西線直通） / 東京メトロ05系(10両) / 東京メトロ07系(10両) / 東京メトロ15000系(10両)'
@@ -1007,37 +1007,37 @@
       'LimitedExpress': { 'default': 'JR E257系2000番台(9両) / JR E257系2500番台(5両)（踊り子）' },
     },
     'Itsukaichi': {
-      'Local': { 'default': 'E233系0番台' },
+      'Local': { 'default': 'JR E233系0番台' },
     },
     'Joban': {
       'Rapid': {
-        'default': 'E231系0番台（常磐快速線・LED）',
+        'default': 'JR E231系0番台（常磐快速線・LED）',
         'destStation': {
-          'Tsuchiura': 'E531系',
-          'Mito': 'E531系',
-          'Katsuta': 'E531系',
-          'Hitachi': 'E531系',
-          'Takahagi': 'E531系',
-          'Iwaki': 'E531系',
-          'Haranomachi': 'E531系',
-          'Sendai': 'E531系'
+          'Tsuchiura': 'JR E531系',
+          'Mito': 'JR E531系',
+          'Katsuta': 'JR E531系',
+          'Hitachi': 'JR E531系',
+          'Takahagi': 'JR E531系',
+          'Iwaki': 'JR E531系',
+          'Haranomachi': 'JR E531系',
+          'Sendai': 'JR E531系'
         }
       },
       'Local': {
-        'default': 'E231系0番台（常磐快速線・LED）',
+        'default': 'JR E231系0番台（常磐快速線・LED）',
         'destStation': {
-          'Tsuchiura': 'E531系',
-          'Mito': 'E531系',
-          'Katsuta': 'E531系',
-          'Hitachi': 'E531系',
-          'Takahagi': 'E531系',
-          'Iwaki': 'E531系',
-          'Haranomachi': 'E531系',
-          'Sendai': 'E531系'
+          'Tsuchiura': 'JR E531系',
+          'Mito': 'JR E531系',
+          'Katsuta': 'JR E531系',
+          'Hitachi': 'JR E531系',
+          'Takahagi': 'JR E531系',
+          'Iwaki': 'JR E531系',
+          'Haranomachi': 'JR E531系',
+          'Sendai': 'JR E531系'
         }
       },
-      'SpecialRapid': { 'default': 'E531系' },
-      'LimitedExpress': { 'default': 'E657系（ときわ・ひたち）' },
+      'SpecialRapid': { 'default': 'JR E531系' },
+      'LimitedExpress': { 'default': 'JR E657系（ときわ・ひたち）' },
     },
     'JobanLocal': {
       'Local': {
@@ -1057,23 +1057,23 @@
     'Keiyo': {
       'Local': { 'default': 'JR E233系5000番台' },
       'Rapid': { 'default': 'JR E233系5000番台' },
-      'LimitedExpress': { 'default': 'E257系500番台' },
+      'LimitedExpress': { 'default': 'JR E257系500番台' },
     },
     'Musashino': {
       'Local': { 'default': 'JR E231系0番台 / JR E231系900番台 / JR 209系500番台' },
     },
     'Narita': {
-      'Local': { 'default': '209系2000番台 / E231系0番台' },
-      'Rapid': { 'default': '209系2000番台 / E231系0番台' },
-      'LimitedExpress': { 'default': 'E259系（成田エクスプレス）' },
+      'Local': { 'default': 'JR 209系2000番台 / JR E231系0番台' },
+      'Rapid': { 'default': 'JR 209系2000番台 / JR E231系0番台' },
+      'LimitedExpress': { 'default': 'JR E259系（成田エクスプレス）' },
     },
     'Ome': {
-      'Rapid': { 'default': 'E233系0番台' },
-      'Local': { 'default': 'E233系0番台' },
-      'OmeSpecialRapid': { 'default': 'E233系0番台' },
-      'CommuterSpecialRapid': { 'default': 'E233系0番台' },
-      'CommuterRapid': { 'default': 'E233系0番台' },
-      'SpecialRapid': { 'default': 'E233系0番台' },
+      'Rapid': { 'default': 'JR E233系0番台' },
+      'Local': { 'default': 'JR E233系0番台' },
+      'OmeSpecialRapid': { 'default': 'JR E233系0番台' },
+      'CommuterSpecialRapid': { 'default': 'JR E233系0番台' },
+      'CommuterRapid': { 'default': 'JR E233系0番台' },
+      'SpecialRapid': { 'default': 'JR E233系0番台' },
     },
     'Rinkai': {
       'Local': { 'default': '東京臨海高速鉄道71-000形(10両) / 東京臨海高速鉄道70-000形(10両)', 'JR-East': 'JR E233系7000番台(10両) / 東京臨海高速鉄道71-000形(10両) / 東京臨海高速鉄道70-000形(10両)', 'TWR': '東京臨海高速鉄道71-000形(10両) / 東京臨海高速鉄道70-000形(10両)' },
@@ -1086,9 +1086,9 @@
       'CommuterRapid': { 'default': 'JR E233系7000番台', 'Rinkai': 'JR E233系7000番台(10両) / 東京臨海高速鉄道71-000形(10両) / 東京臨海高速鉄道70-000形(10両)', 'Sotetsu': 'JR E233系7000番台(10両) / 相鉄12000系(10両)' },
     },
     'ShonanShinjuku': {
-      'Local': { 'default': 'E231系1000番台 / E233系3000番台' },
-      'Rapid': { 'default': 'E231系1000番台 / E233系3000番台' },
-      'SpecialRapid': { 'default': 'E231系1000番台 / E233系3000番台' },
+      'Local': { 'default': 'JR E231系1000番台 / JR E233系3000番台' },
+      'Rapid': { 'default': 'JR E231系1000番台 / JR E233系3000番台' },
+      'SpecialRapid': { 'default': 'JR E231系1000番台 / JR E233系3000番台' },
       'LimitedExpress': { 'default': '253系1000番台（日光・きぬがわ） / 東武100系（スペーシア日光・きぬがわ）' },
     },
     'SobuRapid': {
@@ -1101,25 +1101,25 @@
           'Choshi': 'JR E259系（しおさい） / JR E257系500番台（しおさい）',
           'Sakura': 'JR E259系（しおさい） / JR E257系500番台（しおさい）',
           'Naruto': 'JR E259系（しおさい） / JR E257系500番台（しおさい）',
-          'Matsumoto': 'E353系（あずさ・富士回遊）'
+          'Matsumoto': 'JR E353系（あずさ・富士回遊）'
         }
       },
     },
     'Sotobo': {
       'Rapid': { 'default': 'JR E233系5000番台 / JR E235系1000番台' },
       'Local': { 'default': 'JR E131系0番台 / JR 209系2000番台 / JR 209系2100番台 / JR E233系5000番台' },
-      'LimitedExpress': { 'default': 'E257系500番台' },
+      'LimitedExpress': { 'default': 'JR E257系500番台' },
     },
     'Takasaki': {
-      'Local': { 'default': 'JR E231系1000番台 / JR E233系3000番台' },
-      'Rapid': { 'default': 'JR E231系1000番台 / JR E233系3000番台' },
-      'SpecialRapid': { 'default': 'JR E231系1000番台 / JR E233系3000番台' },
+      'Local': { 'default': 'JR E231系1000番台 / JR JR E233系3000番台' },
+      'Rapid': { 'default': 'JR E231系1000番台 / JR JR E233系3000番台' },
+      'SpecialRapid': { 'default': 'JR E231系1000番台 / JR JR E233系3000番台' },
       'LimitedExpress': { 'default': 'JR E257系5500番台(5両)（草津・四万／あかぎ）' },
     },
     'Tokaido': {
-      'Local': { 'default': 'E231系1000番台 / E233系3000番台' },
-      'Rapid': { 'default': 'E231系1000番台 / E233系3000番台' },
-      'SpecialRapid': { 'default': 'E231系1000番台 / E233系3000番台' },
+      'Local': { 'default': 'JR E231系1000番台 / JR E233系3000番台' },
+      'Rapid': { 'default': 'JR E231系1000番台 / JR E233系3000番台' },
+      'SpecialRapid': { 'default': 'JR E231系1000番台 / JR E233系3000番台' },
       'LimitedExpress': {
         'default': 'JR E257系2000番台(9両) / JR E257系2500番台(5両)',
         'destStation': {
@@ -1133,52 +1133,52 @@
     'Uchibo': {
       'Local': { 'default': 'JR E131系0番台 / JR 209系2000番台 / JR 209系2100番台 / JR E233系5000番台' },
       'Rapid': { 'default': 'JR E233系5000番台 / JR E235系1000番台' },
-      'LimitedExpress': { 'default': 'E257系500番台' },
+      'LimitedExpress': { 'default': 'JR E257系500番台' },
     },
     'UenoTokyo': {
       'Local': {
-        'default': 'E231系1000番台 / E233系3000番台',
+        'default': 'JR E231系1000番台 / JR E233系3000番台',
         'destStation': {
-          'Nippori': 'E231系0番台', 'Mikawashima': 'E231系0番台', 'Minamisenju': 'E231系0番台', 'KitaSenju': 'E231系0番台',
-          'Ayase': 'E231系0番台', 'Kameari': 'E231系0番台', 'Kanamachi': 'E231系0番台', 'Matsudo': 'E231系0番台',
-          'KitaMatsudo': 'E231系0番台', 'Mabashi': 'E231系0番台', 'ShinMatsudo': 'E231系0番台', 'Kitakogane': 'E231系0番台',
-          'MinamiKashiwa': 'E231系0番台', 'Kashiwa': 'E231系0番台', 'Kitakashiwa': 'E231系0番台', 'Abiko': 'E231系0番台',
-          'Tennodai': 'E231系0番台', 'Toride': 'E231系0番台'
+          'Nippori': 'JR E231系0番台', 'Mikawashima': 'JR E231系0番台', 'Minamisenju': 'JR E231系0番台', 'KitaSenju': 'JR E231系0番台',
+          'Ayase': 'JR E231系0番台', 'Kameari': 'JR E231系0番台', 'Kanamachi': 'JR E231系0番台', 'Matsudo': 'JR E231系0番台',
+          'KitaMatsudo': 'JR E231系0番台', 'Mabashi': 'JR E231系0番台', 'ShinMatsudo': 'JR E231系0番台', 'Kitakogane': 'JR E231系0番台',
+          'MinamiKashiwa': 'JR E231系0番台', 'Kashiwa': 'JR E231系0番台', 'Kitakashiwa': 'JR E231系0番台', 'Abiko': 'JR E231系0番台',
+          'Tennodai': 'JR E231系0番台', 'Toride': 'JR E231系0番台'
         }
       },
       'Rapid': {
-        'default': 'E231系1000番台 / E233系3000番台',
+        'default': 'JR E231系1000番台 / JR E233系3000番台',
         'destStation': {
-          'Nippori': 'E231系0番台', 'Mikawashima': 'E231系0番台', 'Minamisenju': 'E231系0番台', 'KitaSenju': 'E231系0番台',
-          'Ayase': 'E231系0番台', 'Kameari': 'E231系0番台', 'Kanamachi': 'E231系0番台', 'Matsudo': 'E231系0番台',
-          'KitaMatsudo': 'E231系0番台', 'Mabashi': 'E231系0番台', 'ShinMatsudo': 'E231系0番台', 'Kitakogane': 'E231系0番台',
-          'MinamiKashiwa': 'E231系0番台', 'Kashiwa': 'E231系0番台', 'Kitakashiwa': 'E231系0番台', 'Abiko': 'E231系0番台',
-          'Tennodai': 'E231系0番台', 'Toride': 'E231系0番台'
+          'Nippori': 'JR E231系0番台', 'Mikawashima': 'JR E231系0番台', 'Minamisenju': 'JR E231系0番台', 'KitaSenju': 'JR E231系0番台',
+          'Ayase': 'JR E231系0番台', 'Kameari': 'JR E231系0番台', 'Kanamachi': 'JR E231系0番台', 'Matsudo': 'JR E231系0番台',
+          'KitaMatsudo': 'JR E231系0番台', 'Mabashi': 'JR E231系0番台', 'ShinMatsudo': 'JR E231系0番台', 'Kitakogane': 'JR E231系0番台',
+          'MinamiKashiwa': 'JR E231系0番台', 'Kashiwa': 'JR E231系0番台', 'Kitakashiwa': 'JR E231系0番台', 'Abiko': 'JR E231系0番台',
+          'Tennodai': 'JR E231系0番台', 'Toride': 'JR E231系0番台'
         }
       },
       // Through limited expresses on the Shinagawa-Ueno corridor are Joban services.
-      'LimitedExpress': { 'default': 'E657系（ひたち・ときわ）' },
+      'LimitedExpress': { 'default': 'JR E657系（ひたち・ときわ）' },
     },
     'UtsunomiyaJR': {
-      'Local': { 'default': 'E231系1000番台 / E233系3000番台' },
-      'Rapid': { 'default': 'E231系1000番台 / E233系3000番台' },
+      'Local': { 'default': 'JR E231系1000番台 / JR E233系3000番台' },
+      'Rapid': { 'default': 'JR E231系1000番台 / JR E233系3000番台' },
       'LimitedExpress': { 'default': '253系1000番台（日光・きぬがわ） / 東武100系（スペーシア日光・きぬがわ）' },
     },
     'Yokosuka': {
       'Local': { 'default': 'JR E235系1000番台' },
       'Rapid': { 'default': 'JR E235系1000番台' },
-      'LimitedExpress': { 'default': 'E259系（成田エクスプレス）' },
+      'LimitedExpress': { 'default': 'JR E259系（成田エクスプレス）' },
     },
 
     // ================================================================
     // 中央本線（高尾～塩尻）
     // ================================================================
     'ChuoMain': {
-      'Local': { 'default': 'E233系0番台 / 211系', 'JR-East': 'E233系0番台 / 211系' },
-      'Rapid': { 'default': 'E233系0番台 / 211系', 'JR-East': 'E233系0番台 / 211系' },
-      'CommuterRapid': { 'default': 'E233系0番台', 'JR-East': 'E233系0番台' },
-      'ChuoSpecialRapid': { 'default': 'E233系0番台', 'JR-East': 'E233系0番台' },
-      'LimitedExpress': { 'default': 'E353系（あずさ・かいじ）' },
+      'Local': { 'default': 'JR E233系0番台 / JR 211系', 'JR-East': 'JR E233系0番台 / JR 211系' },
+      'Rapid': { 'default': 'JR E233系0番台 / JR 211系', 'JR-East': 'JR E233系0番台 / JR 211系' },
+      'CommuterRapid': { 'default': 'JR E233系0番台', 'JR-East': 'JR E233系0番台' },
+      'ChuoSpecialRapid': { 'default': 'JR E233系0番台', 'JR-East': 'JR E233系0番台' },
+      'LimitedExpress': { 'default': 'JR E353系（あずさ・かいじ）' },
     },
 
     // ================================================================
@@ -1288,153 +1288,153 @@
 
     // --- JR 東日本地方線 ---
     'BanetsuEast': {
-      'Local': { 'default': 'キハ110系' }
+      'Local': { 'default': 'JR キハ110系' }
     },
     'BanetsuWest': {
-      'Local': { 'default': 'キハ110系' },
-      'Rapid': { 'default': 'キハ110系' }
+      'Local': { 'default': 'JR キハ110系' },
+      'Rapid': { 'default': 'JR キハ110系' }
     },
     'ChuoTatsuno': {
-      'Local': { 'default': '211系 / E127系100番台' },
-      'Rapid': { 'default': '211系 / E127系100番台' }
+      'Local': { 'default': 'JR 211系 / JR E127系100番台' },
+      'Rapid': { 'default': 'JR 211系 / JR E127系100番台' }
     },
     'Echigo': {
-      'Local': { 'default': 'E127系' }
+      'Local': { 'default': 'JR E127系' }
     },
     'Gono': {
-      'Local': { 'default': 'GV-E400系' },
-      'Rapid': { 'default': 'HB-E300系（リゾートしらかみ）' }
+      'Local': { 'default': 'JR GV-E400系' },
+      'Rapid': { 'default': 'JR HB-E300系（リゾートしらかみ）' }
     },
     'Hachinohe': {
       'Local': { 'default': 'キハE130形500番台' }
     },
     'Iiyama': {
-      'Local': { 'default': 'キハ110系' },
-      'Rapid': { 'default': 'キハ110系' }
+      'Local': { 'default': 'JR キハ110系' },
+      'Rapid': { 'default': 'JR キハ110系' }
     },
     'Ishinomaki': {
-      'Local': { 'default': 'キハ110系' },
-      'Rapid': { 'default': 'キハ110系0番台（快速南三陸）' }
+      'Local': { 'default': 'JR キハ110系' },
+      'Rapid': { 'default': 'JR キハ110系0番台（快速南三陸）' }
     },
     'Kamaishi': {
-      'Local': { 'default': 'HB-E220系' },
-      'Rapid': { 'default': 'HB-E220系（快速はまゆり）' }
+      'Local': { 'default': 'JR HB-E220系' },
+      'Rapid': { 'default': 'JR HB-E220系（快速はまゆり）' }
     },
     'Karasuyama': {
-      'Local': { 'default': 'EV-E301系（ACCUM）' }
+      'Local': { 'default': 'JR EV-E301系（ACCUM）' }
     },
     'Kesennuma': {
-      'Local': { 'default': 'キハ110系' },
-      'Rapid': { 'default': 'キハ110系' }
+      'Local': { 'default': 'JR キハ110系' },
+      'Rapid': { 'default': 'JR キハ110系' }
     },
     'Kitakami': {
-      'Local': { 'default': 'キハ110系' }
+      'Local': { 'default': 'JR キハ110系' }
     },
     'Komii': {
-      'Local': { 'default': 'キハ110系100番台' },
-      'Rapid': { 'default': 'キハ110系100番台（HIGH RAIL 1375）' }
+      'Local': { 'default': 'JR キハ110系100番台' },
+      'Rapid': { 'default': 'JR キハ110系100番台（HIGH RAIL 1375）' }
     },
     'Kounan': {
-      'Local': { 'default': 'キハ110系' }
-    , 'Rapid': { 'default': 'キハ110系' } },
+      'Local': { 'default': 'JR キハ110系' }
+    , 'Rapid': { 'default': 'JR キハ110系' } },
     'Mito': {
-      'Local': { 'default': 'E501系 / E531系' }
+      'Local': { 'default': 'JR E501系 / JR E531系' }
     },
     'Miyo': {
-      'Local': { 'default': 'E127系' }
-    , 'Rapid': { 'default': 'E127系' } },
+      'Local': { 'default': 'JR E127系' }
+    , 'Rapid': { 'default': 'JR E127系' } },
     'Ofunato': {
-      'Local': { 'default': 'キハ110系' },
-      'Rapid': { 'default': 'キハ110系' }
+      'Local': { 'default': 'JR キハ110系' },
+      'Rapid': { 'default': 'JR キハ110系' }
     },
     'Oga': {
-      'Local': { 'default': 'EV-E801系（ACCUM）' }
+      'Local': { 'default': 'JR EV-E801系（ACCUM）' }
     },
     'Oito': {
-      'Local': { 'default': 'E127系100番台' },
-      'Rapid': { 'default': 'HB-E300系（リゾートビューふるさと）' },
-      'LimitedExpress': { 'default': 'E353系（あずさ）' }
+      'Local': { 'default': 'JR E127系100番台' },
+      'Rapid': { 'default': 'JR HB-E300系（リゾートビューふるさと）' },
+      'LimitedExpress': { 'default': 'JR E353系（あずさ）' }
     },
     'Ominato': {
-      'Local': { 'default': 'キハ100系 / キハ110系' },
-      'Rapid': { 'default': 'キハ100系 / キハ110系' }
+      'Local': { 'default': 'キハ100系 / JR キハ110系' },
+      'Rapid': { 'default': 'キハ100系 / JR キハ110系' }
     },
     'OuMain': {
-      'Local': { 'default': '701系 / E721系 / GV-E400系', 'Gono': 'GV-E400系 / 701系 / E721系', 'Tazawako': '701系5000番台' },
-      'Rapid': { 'default': '701系 / E721系 / GV-E400系', 'Gono': 'GV-E400系 / 701系 / E721系', 'Tazawako': '701系5000番台' },
-      'LimitedExpress': { 'default': 'E6系（こまち）/ E8系（つばさ）' }
+      'Local': { 'default': 'JR 701系 / JR E721系 / JR GV-E400系', 'Gono': 'JR GV-E400系 / JR 701系 / JR E721系', 'Tazawako': 'JR 701系5000番台' },
+      'Rapid': { 'default': 'JR 701系 / JR E721系 / JR GV-E400系', 'Gono': 'JR GV-E400系 / JR 701系 / JR E721系', 'Tazawako': 'JR 701系5000番台' },
+      'LimitedExpress': { 'default': 'JR E6系（こまち）/ JR E8系（つばさ）' }
     },
     'RikutoEast': {
-      'Local': { 'default': 'キハ110系' },
-      'Rapid': { 'default': 'キハ110系' }
+      'Local': { 'default': 'JR キハ110系' },
+      'Rapid': { 'default': 'JR キハ110系' }
     },
     'RikutsuWest': {
-      'Local': { 'default': 'キハ110系' },
-      'Rapid': { 'default': 'キハ110系' }
+      'Local': { 'default': 'JR キハ110系' },
+      'Rapid': { 'default': 'JR キハ110系' }
     },
     'Ryomo': {
-      'Local': { 'default': 'E231系1000番台 / E233系' },
-      'Rapid': { 'default': 'E231系1000番台 / E233系' }
+      'Local': { 'default': 'JR E231系1000番台 / JR E233系' },
+      'Rapid': { 'default': 'JR E231系1000番台 / JR E233系' }
     },
     'Senseki': {
-      'Local': { 'default': 'E131系800番台' },
-      'Rapid': { 'default': 'E131系800番台' },
-      'SpecialRapid': { 'default': 'E131系800番台' }
+      'Local': { 'default': 'JR E131系800番台' },
+      'Rapid': { 'default': 'JR E131系800番台' },
+      'SpecialRapid': { 'default': 'JR E131系800番台' }
     },
     'SensekiTohoku': {
-      'Local': { 'default': 'HB-E210系' },
-      'Rapid': { 'default': 'HB-E210系' },
-      'SpecialRapid': { 'default': 'HB-E210系' }
+      'Local': { 'default': 'JR HB-E210系' },
+      'Rapid': { 'default': 'JR HB-E210系' },
+      'SpecialRapid': { 'default': 'JR HB-E210系' }
     },
     'Senzan': {
-      'Local': { 'default': 'E721系 / 701系' },
-      'Rapid': { 'default': 'E721系 / 701系' }
+      'Local': { 'default': 'JR E721系 / JR 701系' },
+      'Rapid': { 'default': 'JR E721系 / JR 701系' }
     },
     'Shinetsu': {
-      'Local': { 'default': '211系 / E129系' },
-      'Rapid': { 'default': 'E129系' },
-      'LimitedExpress': { 'default': 'E653系（しらゆき）' }
+      'Local': { 'default': 'JR 211系 / JR E129系' },
+      'Rapid': { 'default': 'JR E129系' },
+      'LimitedExpress': { 'default': 'JR E653系（しらゆき）' }
     },
     'Shinonoi': {
-      'Local': { 'default': '211系 / E127系100番台' },
-      'Rapid': { 'default': 'E129系 / 211系' },
-      'LimitedExpress': { 'default': '383系（しなの・JR東海）/ E353系（あずさ）' }
+      'Local': { 'default': 'JR 211系 / JR E127系100番台' },
+      'Rapid': { 'default': 'JR E129系 / JR 211系' },
+      'LimitedExpress': { 'default': '383系（しなの・JR東海）/ JR E353系（あずさ）' }
     },
     'Suigun': {
-      'Local': { 'default': 'キハE130系 / キハ110系' }
+      'Local': { 'default': 'JR キハE130系 / JR キハ110系' }
     },
     'SuigunBranch': {
-      'Local': { 'default': 'キハE130系 / キハ110系' }
+      'Local': { 'default': 'JR キハE130系 / JR キハ110系' }
     },
     'Tadami': {
-      'Local': { 'default': 'キハ110系 / キハE120形' }
-    , 'Rapid': { 'default': 'キハ110系 / キハE120形' } },
+      'Local': { 'default': 'JR キハ110系 / キハE120形' }
+    , 'Rapid': { 'default': 'JR キハ110系 / キハE120形' } },
     'Tazawako': {
-      'Local': { 'default': '701系5000番台' },
-      'Rapid': { 'default': '701系5000番台' },
-      'LimitedExpress': { 'default': 'E6系（こまち）' }
+      'Local': { 'default': 'JR 701系5000番台' },
+      'Rapid': { 'default': 'JR 701系5000番台' },
+      'LimitedExpress': { 'default': 'JR E6系（こまち）' }
     },
     'TohokuMain': {
-      'Local': { 'default': '701系 / E721系 / HB-E220系', 'Kamaishi': 'HB-E220系 / 701系 / E721系' }
+      'Local': { 'default': 'JR 701系 / JR E721系 / JR HB-E220系', 'Kamaishi': 'JR HB-E220系 / JR 701系 / JR E721系' }
     },
     'Tsugaru': {
       'Local': { 'default': 'キハ40系' }
     },
     'Uetsu': {
-      'Local': { 'default': '701系 / E721系' },
-      'Rapid': { 'default': '701系 / E721系' },
-      'LimitedExpress': { 'default': 'E653系（いなほ）' }
+      'Local': { 'default': 'JR 701系 / JR E721系' },
+      'Rapid': { 'default': 'JR 701系 / JR E721系' },
+      'LimitedExpress': { 'default': 'JR E653系（いなほ）' }
     },
     'Yamada': {
-      'Local': { 'default': 'キハ110系' }
+      'Local': { 'default': 'JR キハ110系' }
     },
     'Yamagata': {
-      'Local': { 'default': '701系5500番台' },
-      'Rapid': { 'default': '701系5500番台' },
-      'LimitedExpress': { 'default': 'E8系（つばさ）' }
+      'Local': { 'default': 'JR 701系5500番台' },
+      'Rapid': { 'default': 'JR 701系5500番台' },
+      'LimitedExpress': { 'default': 'JR E8系（つばさ）' }
     },
     'Yonezawa': {
-      'Local': { 'default': 'キハ110系' }
+      'Local': { 'default': 'JR キハ110系' }
     },
 
     // --- 私鉄・モノレール・新交通 ---
@@ -1524,9 +1524,9 @@
       'Local': { 'default': '7300系 / 7500系（7000系は全廃）' }
     },
     'Hakushin': {
-      'Local': { 'default': 'E129系' },
-      'Rapid': { 'default': 'E129系' },
-      'LimitedExpress': { 'default': 'E653系（特急いなほ）' }
+      'Local': { 'default': 'JR E129系' },
+      'Rapid': { 'default': 'JR E129系' },
+      'LimitedExpress': { 'default': 'JR E653系（特急いなほ）' }
     },
 
     // ================================================================
@@ -1648,34 +1648,34 @@
 
     // --- JR 東日本 首都圏（無直通・単一運用 / 混跑） ---
     'Yamanote': {
-      'Local': { 'default': 'E235系0番台（山手線）' },
+      'Local': { 'default': 'JR E235系0番台（山手線）' },
     },
     'KeihinTohoku': {
-      'Local': { 'default': 'E233系1000番台' },
-      'Rapid': { 'default': 'E233系1000番台' },
+      'Local': { 'default': 'JR E233系1000番台' },
+      'Rapid': { 'default': 'JR E233系1000番台' },
     },
     'Tsurumi': {
-      'Local': { 'default': 'E131系1000番台' },
+      'Local': { 'default': 'JR E131系1000番台' },
     },
     'TsurumiUmiShibaura': {
-      'Local': { 'default': 'E131系1000番台' },
+      'Local': { 'default': 'JR E131系1000番台' },
     },
     'TsurumiOkawa': {
-      'Local': { 'default': 'E131系1000番台' },
+      'Local': { 'default': 'JR E131系1000番台' },
     },
     'Nambu': {
-      'Local': { 'default': 'E233系8000番台' },
-      'Rapid': { 'default': 'E233系8000番台' },
+      'Local': { 'default': 'JR E233系8000番台' },
+      'Rapid': { 'default': 'JR E233系8000番台' },
     },
     'NambuBranch': {
-      'Local': { 'default': 'E127系0番台' },
+      'Local': { 'default': 'JR E127系0番台' },
     },
     'Sagami': {
-      'Local': { 'default': 'E131系500番台' },
+      'Local': { 'default': 'JR E131系500番台' },
     },
     'Yokohama': {
-      'Local': { 'default': 'E233系6000番台' },
-      'Rapid': { 'default': 'E233系6000番台' },
+      'Local': { 'default': 'JR E233系6000番台' },
+      'Rapid': { 'default': 'JR E233系6000番台' },
     },
     'Kashima': {
       'Local': { 'default': 'JR E131系0番台 / JR 209系2000番台 / JR 209系2100番台' },
@@ -1694,14 +1694,14 @@
           'Choshi': 'JR E259系（しおさい） / JR E257系500番台（しおさい）',
           'Sakura': 'JR E259系（しおさい） / JR E257系500番台（しおさい）',
           'Naruto': 'JR E259系（しおさい） / JR E257系500番台（しおさい）',
-          'Matsumoto': 'E353系（あずさ・富士回遊）'
+          'Matsumoto': 'JR E353系（あずさ・富士回遊）'
         }
       },
     },
     'TokaidoMain': {
-      'Local': { 'default': 'E231系1000番台 / E233系3000番台' },
-      'Rapid': { 'default': 'E231系1000番台 / E233系3000番台' },
-      'SpecialRapid': { 'default': 'E231系1000番台 / E233系3000番台' },
+      'Local': { 'default': 'JR E231系1000番台 / JR E233系3000番台' },
+      'Rapid': { 'default': 'JR E231系1000番台 / JR E233系3000番台' },
+      'SpecialRapid': { 'default': 'JR E231系1000番台 / JR E233系3000番台' },
       'LimitedExpress': {
         'default': 'JR E257系2000番台(9両) / JR E257系2500番台(5両)',
         'destStation': {
@@ -1713,21 +1713,21 @@
       },
     },
     'JobanMain': {
-      'Local': { 'default': 'E531系' },
-      'Rapid': { 'default': 'E531系' },
-      'SpecialRapid': { 'default': 'E531系' },
-      'LimitedExpress': { 'default': 'E657系（ひたち・ときわ）' },
+      'Local': { 'default': 'JR E531系' },
+      'Rapid': { 'default': 'JR E531系' },
+      'SpecialRapid': { 'default': 'JR E531系' },
+      'LimitedExpress': { 'default': 'JR E657系（ひたち・ときわ）' },
     },
     'Togane': {
       'Local': { 'default': 'JR 209系2100番台 / JR E233系5000番台' },
     },
     'NaritaAbikoBranch': {
-      'Local': { 'default': 'E231系0番台' },
+      'Local': { 'default': 'JR E231系0番台' },
     },
     'NaritaAirportBranch': {
       'Local': { 'default': 'JR 209系2000番台 / JR 209系2100番台' },
       'Rapid': { 'default': 'JR E235系1000番台' },
-      'LimitedExpress': { 'default': 'E259系（成田エクスプレス）' },
+      'LimitedExpress': { 'default': 'JR E259系（成田エクスプレス）' },
     },
     'Agatsuma': {
       'LimitedExpress': { 'default': 'JR E257系5500番台(5両)（草津・四万）' },
