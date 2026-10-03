@@ -52,6 +52,7 @@ jobs:
           node tools/iketama-formation-evidence.test.js
           node tools/keiyo-operation-evidence.test.js
           node tools/tozai-operation-evidence.test.js
+          node tools/operation-code-normalization.test.js
           node tools/seibu-shinjuku-evidence.test.js
           node tools/sotetsu-formation-evidence.test.js
           node tools/denentoshi-formation-evidence.test.js
