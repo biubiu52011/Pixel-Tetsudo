@@ -1,11 +1,13 @@
 const fs=require("fs"),path=require("path"),assert=require("assert"),vm=require("vm");
 const root=path.join(__dirname,".."),window={};const ctx={window,console};vm.createContext(ctx);
-for(const f of ["tozai-operation-evidence-2026.js","tozai-formation-evidence.js"])vm.runInContext(fs.readFileSync(path.join(root,"data/timetables",f),"utf8"),ctx);
+for(const f of ["train-operation-evidence.js","tozai-operation-evidence-2026.js","tozai-formation-evidence.js"])vm.runInContext(fs.readFileSync(path.join(root,"data/timetables",f),"utf8"),ctx);
 const own=window.TRAIN_OPERATION_EVIDENCE_PROVIDERS.find(x=>x.id==="tozai-operation-ownership-2026");
 const dated=window.TRAIN_OPERATION_EVIDENCE_PROVIDERS.find(x=>x.id==="tozai-dated-formations");
 assert(own&&dated,"Tozai providers missing");
-let r=own.resolveEvidence("03K",{lineId:"Tozai"});assert(r&&r.operator==="JR-East"&&r.vehicleType==="JR E231系800番台(10両)","03K exact JR");
-r=own.resolveEvidence("50T",{lineId:"Tozai"});assert(r&&r.operator==="ToyoRapid"&&r.vehicleType==="東葉高速2000系(10両)","50T exact Toyo");
+let ctx={lineId:"Tozai"};ctx.operationCode=window.TrainOperationEvidence.normalizeOperationCode("603K",ctx);
+let r=own.resolveEvidence("603K",ctx);assert(r&&r.operator==="JR-East"&&r.vehicleType==="JR E231系800番台(10両)","03K exact JR");
+ctx={lineId:"Tozai"};ctx.operationCode=window.TrainOperationEvidence.normalizeOperationCode("A650T",ctx);
+r=own.resolveEvidence("A650T",ctx);assert(r&&r.operator==="ToyoRapid"&&r.vehicleType==="東葉高速2000系(10両)","50T exact Toyo");
 r=own.resolveEvidence("02S",{lineId:"Tozai"});assert(r&&r.operator==="TokyoMetro"&&!r.vehicleType,"S ownership must not guess Metro model");
 r=dated.resolveEvidence("02S",{lineId:"Tozai",serviceDate:"2026-04-16"});assert(r&&r.vehicleType==="東京メトロ15000系(10両)"&&r.formationId==="1500064F","02S dated exact");
 r=dated.resolveEvidence("35S",{lineId:"Tozai",serviceDate:"2026-04-16"});assert(r&&r.vehicleType==="東京メトロ07系(10両)"&&r.formationId==="0772F","35S dated exact");
