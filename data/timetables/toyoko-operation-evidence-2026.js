@@ -77,11 +77,19 @@
     }
     if (!owner) return null;
 
-    // For suffix forms, require the corresponding published operation family
-    // when it can be represented as a 3-digit Toyoko operation code.
+    // Suffix forms must also resolve to a published operation in this timetable.
+    // Do not let a syntactically valid 21S/99M/etc bypass the dated operation set.
+    if (op.operator) {
+      var prefix = owner === "TokyoMetro" ? "7" : owner === "Seibu" ? "1" :
+                   owner === "Tobu" ? "8" : owner === "Sotetsu" ? "9" : "0";
+      var published = prefix + op.code;
+      if (table[owner].indexOf(published) < 0) return null;
+      op.code = published;
+    }
+
     var vehicleType = "";
     if (owner === "Sotetsu") {
-      var sotetsuCode = /^9\d\d$/.test(op.code) ? op.code : ("9" + op.code);
+      var sotetsuCode = op.code;
       if (table.Sotetsu.indexOf(sotetsuCode) < 0) return null;
       // 91G-95G Toyoko through workings are 20000-series-only in the dated
       // Sotetsu operation table. This is model-exact, not formation-exact.
