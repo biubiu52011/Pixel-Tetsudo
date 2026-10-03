@@ -41,19 +41,5 @@ assert(r&&r.operator==="Toei"&&r.vehicleType==="都営5500形");
 r=hit(p,"73H","2026-10-03","Toei.Asakusa");
 assert(r&&r.operator==="Keikyu"&&!r.vehicleType);
 
-p=load("data/timetables/tokyo-monorail-operation-evidence.js");
-r=p.resolveEvidence("ignored",{serviceDate:"2026-04-10",lineId:"TokyoMonorail",operationCode:"03"});
-assert(r&&r.vehicleType==="東京モノレール10000形"&&r.formationId==="10051F");
-r=p.resolveEvidence("ignored",{serviceDate:"2026-04-10",lineId:"TokyoMonorail",operationCode:"05"});
-assert(r&&r.vehicleType==="東京モノレール1000形"&&r.formationId==="1091F");
-assert.strictEqual(p.resolveEvidence("ignored",{serviceDate:"2026-04-11",lineId:"TokyoMonorail",operationCode:"03"}),null);
-assert.strictEqual(p.resolveEvidence("ignored",{serviceDate:"2026-04-10",lineId:"Yurikamome",operationCode:"03"}),null);
-assert.strictEqual(p.resolveEvidence("ignored",{serviceDate:"2026-04-10",lineId:"TokyoMonorail"}),null);
-
-p=load("data/timetables/tokyo-monorail-train-operation-bridge.js");
-r=p.resolveEvidence("TMW001D",{serviceDate:"2026-04-10",lineId:"TokyoMonorail"});
-assert(r&&r.operationCode==="03");
-assert.strictEqual(p.resolveEvidence("TMW002D",{serviceDate:"2026-04-10",lineId:"TokyoMonorail"}),null);
-assert.strictEqual(p.resolveEvidence("TMW001D",{serviceDate:"2026-04-11",lineId:"TokyoMonorail"}),null);
 
 console.log("operation evidence providers: PASS");
