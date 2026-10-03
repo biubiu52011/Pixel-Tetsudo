@@ -81,6 +81,41 @@
     return true;
   }
 
+  // Canonical data provider. One provider consumes all line records from the
+  // generated snapshot; line-specific evidence belongs in data, not JS.
+  function registerCanonicalSnapshotProvider() {
+    var records = window.VEHICLE_OPERATION_EVIDENCE || [];
+    if (!Array.isArray(records) || !records.length) return false;
+    return register({
+      id: "canonical-vehicle-operation-evidence",
+      grade: "C",
+      resolveEvidence: function(trainNumber, ctx) {
+        ctx = ctx || {};
+        var d = String(ctx.serviceDate || "").slice(0, 10);
+        var line = [ctx.lineId, ctx.railway, ctx.operator].join("|");
+        var n = String(trainNumber || "");
+        for (var i=0;i<records.length;i++) {
+          var r=records[i];
+          if (!r || r.validDate !== d) continue;
+          if (line.indexOf(r.networkKey) < 0) continue;
+          if (r.trainNumbers && r.trainNumbers.indexOf(n) >= 0) {
+            return {operator:r.operator,vehicleType:r.vehicleType,formationId:r.formationId,
+              operationCode:r.operationCode,grade:r.grade||"C",sourceUrl:r.sourceUrl||"",
+              provenance:"canonical vehicle operation evidence snapshot",observedDate:d};
+          }
+          if (ctx.operationCode && String(ctx.operationCode) === String(r.operationCode)) {
+            return {operator:r.operator,vehicleType:r.vehicleType,formationId:r.formationId,
+              operationCode:r.operationCode,grade:r.grade||"C",sourceUrl:r.sourceUrl||"",
+              provenance:"canonical vehicle operation evidence snapshot",observedDate:d};
+          }
+        }
+        return null;
+      }
+    });
+  }
+
+  registerCanonicalSnapshotProvider();
+
   window.TrainOperationEvidence = {
     register: register,
     normalizeEvidence: normalizeEvidence,
