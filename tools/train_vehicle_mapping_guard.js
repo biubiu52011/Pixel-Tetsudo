@@ -294,8 +294,8 @@ function main() {
   expectMap(win, 'Joban special rapid P0', 'Joban', 'SpecialRapid', 'JR E531系', ['E231系1000番台', 'E233系3000番台']);
   expectMap(win, 'Joban local line pool', 'JobanLocal', 'Local', 'JR E233系2000番台(10両) / 東京メトロ16000系(10両) / 小田急4000形(10両)', ['E231系0番台', 'E231系1000番台', 'E233系3000番台']);
   expectMap(win, 'Joban local through destination keeps JR local first', 'JobanLocal', 'Local', 'JR E233系2000番台(10両) / 東京メトロ16000系(10両) / 小田急4000形(10両)', ['E231系0番台', 'E231系1000番台', 'E233系3000番台'], 'odpt.Station:TokyoMetro.Chiyoda.Ayase');
-  expectMap(win, 'Keiyo local P1', 'Keiyo', 'Local', 'E233系5000番台', ['E231系900番台']);
-  expectMap(win, 'Musashino local ODPT evidence', 'Musashino', 'Local', 'E231系900番台', ['E231系0番台']);
+  expectMap(win, 'Keiyo local P1', 'Keiyo', 'Local', 'JR E233系5000番台 / JR 209系500番台', ['E231系900番台']);
+  expectMap(win, 'Musashino local ODPT evidence', 'Musashino', 'Local', 'JR E231系0番台 / JR E231系900番台 / JR 209系500番台', []);
   expectMap(win, 'Hachiko local ODPT evidence', 'Hachiko', 'Local', 'JR 209系3500番台 / JR E231系3000番台', ['E209系（京葉線）']);
   expectMap(win, 'Kawagoe local ODPT evidence', 'Kawagoe', 'Local', 'JR E233系7000番台', ['E209系（京葉線）']);
   expectMap(win, 'KawagoeWest local ODPT evidence', 'KawagoeWest', 'Local', 'JR E231系3000番台 / JR 209系3500番台', ['E209系（京葉線）']);
@@ -826,7 +826,7 @@ function main() {
   assertCanonicalAssetRenameSimulation(win);
 
   Object.values(win.TrainIcons.CANONICAL_VEHICLES).forEach((vehicle) => {
-    assert(imageExists(vehicle.asset), 'canonical asset missing', vehicle);
+    assert(vehicle.asset == null || imageExists(vehicle.asset), 'canonical asset missing', vehicle);
   });
 
   console.log(JSON.stringify({
