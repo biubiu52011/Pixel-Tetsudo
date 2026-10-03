@@ -629,7 +629,12 @@
           var _assignmentFormations = {};
           _decisiveAssignments.forEach(function(rec) {
             if (rec.vehicleType) _assignmentVehicles[rec.vehicleType] = true;
-            if (rec.formationId) _assignmentFormations[rec.formationId] = true;
+            if (rec.formationId) {
+              String(rec.formationId).split(/\s*\/\s*|\s*,\s*|\s*\|\s*/).forEach(function(fid) {
+                fid = String(fid || '').trim();
+                if (fid) _assignmentFormations[fid] = true;
+              });
+            }
           });
           if (!tt['vehicleType'] && !tt['odpt:vehicleType'] &&
               Object.keys(_assignmentVehicles).length === 1) {
@@ -674,6 +679,7 @@
             assignmentOperator: _assignmentOperator,
             operationEvidence: _assignmentMatches,
             vehicleFormationId: Object.keys(_assignmentFormations).length === 1 ? Object.keys(_assignmentFormations)[0] : '',
+            vehicleFormationCandidates: Object.keys(_assignmentFormations),
             vehicleIdentityStatus: vehResult.identityStatus || 'UNKNOWN',
             vehicleIdentityReason: vehResult.identityReason || 'no-vehicle-evidence',
             vehicleCandidates: vehResult.candidates || [],
