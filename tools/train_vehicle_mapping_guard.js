@@ -366,13 +366,13 @@ function main() {
     lineId: 'Hachiko',
     operator: 'JR-East',
     trainType: trainType('JR-East', 'Local')
-  }, 'E231系3000番台 / 209系3500番台', '209系_3500番代.png', ['209系_500番代_京葉線.png']);
+  }, '209系3500番台 / E231系3000番台', '209系_3500番代.png', ['209系_500番代_京葉線.png']);
 
   expectRuntime(win, 'KawagoeWest runtime ODPT evidence', {
     lineId: 'KawagoeWest',
     operator: 'JR-East',
     trainType: trainType('JR-East', 'Local')
-  }, '209系3500番台 / E231系3000番台', '209系_3500番代.png', ['209系_500番代_京葉線.png']);
+  }, 'E231系3000番台 / 209系3500番台', '209系_3500番代.png', ['209系_500番代_京葉線.png']);
 
   expectRuntime(win, 'Yokosuka local accepted safe behavior', {
     lineId: 'Yokosuka',
