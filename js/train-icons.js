@@ -2313,8 +2313,12 @@ TOBU_LINE_IDS.forEach(function(lineId) {
         if (VEHICLE_NAME_TO_ICON[_rd]) { _hits.push({ n: name, icon: VEHICLE_NAME_TO_ICON[_rd] }); continue; }
       }
       // 1. 精确匹配
+      var _canonicalRec = resolveCanonicalVehicle(name);
       var _canonical = _canonicalVehicleIconPath(name, lineId);
       if (_canonical) { _hits.push({ n: name, icon: _canonical }); continue; }
+      // A known canonical identity with no exact asset is an intentional stop:
+      // do not fall through to a generic/nearby series image.
+      if (_canonicalRec && !_canonicalRec.asset) continue;
       if (VEHICLE_NAME_TO_ICON[name]) { _hits.push({ n: name, icon: VEHICLE_NAME_TO_ICON[name] }); continue; }
       // 2. 别名表
       var _al = VEHICLE_NAME_ALIASES[name];
