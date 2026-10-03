@@ -1015,6 +1015,10 @@
     if (!trainLayer) return;
     positions = _sortTrainPositionsBySource(positions);
     geometry = geometry || svg.__geometry || { branchGeom: svg.__branchGeom || null };
+    // Incremental train-layer rendering needs the line colour too. Previously the
+    // neutral-circle fallback referenced an undefined `color`, so any train whose
+    // vehicle icon could not be resolved aborted rendering for that line.
+    var color = geometry.color || line.color || (window.TrainsColors ? window.TrainsColors.LINE_FALLBACK : "#008803");
     
     var svgNS = "http://www.w3.org/2000/svg";
     var isLoop = stationCoords.length > 2 && (line.type === "loop" || line.isSixShapedLoop);
