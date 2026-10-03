@@ -309,6 +309,22 @@
     } catch(e) { return null; }
   }
 
+  function getTokyoServiceDate() {
+    try {
+      // Railway evidence is date-scoped in Japan. Do not use odpt:calendar here:
+      // that field is a calendar class (Weekday/SaturdayHoliday), not YYYY-MM-DD.
+      var parts = new Intl.DateTimeFormat('en-CA', {
+        timeZone: 'Asia/Tokyo', year: 'numeric', month: '2-digit', day: '2-digit'
+      }).formatToParts(new Date());
+      var out = {};
+      parts.forEach(function(p){ out[p.type] = p.value; });
+      return out.year + '-' + out.month + '-' + out.day;
+    } catch (e) {
+      var now = new Date(Date.now() + 9 * 60 * 60 * 1000);
+      return now.toISOString().slice(0, 10);
+    }
+  }
+
   // ========== Core estimation ==========
   /**
    * Estimate train positions for a single line based on timetable + delay
@@ -513,7 +529,7 @@
             var _evidenceDirectionRaw = tt['odpt:railDirection'] || '';
             var _evidenceDirection = /Inbound|Up|Nobori/i.test(String(_evidenceDirectionRaw)) ? 'up'
               : (/Outbound|Down|Kudari/i.test(String(_evidenceDirectionRaw)) ? 'down' : '');
-            var _evidenceServiceDate = tt['odpt:calendar'] || tt['serviceDate'] || tt['_serviceDate'] || '';
+            var _evidenceServiceDate = tt['_serviceDate'] || tt['serviceDate'] || tt['operatingDate'] || getTokyoServiceDate();
             var _officialTobuEvidence = window.TOBU_LIMITED_EXPRESS_VEHICLE_EVIDENCE.resolveEvidence(
               trainNumber, _evidenceTrainName, _evidenceDirection, _evidenceServiceDate,
               { lineId: lineId, operator: tt['odpt:operator'] || line.operator || '' }
