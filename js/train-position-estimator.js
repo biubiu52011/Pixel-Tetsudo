@@ -520,8 +520,8 @@
           // vehicleType. The evidence table contains only individually verified rows;
           // no prefix/range/hash inference is allowed.
           if (!tt['vehicleType'] && !tt['odpt:vehicleType'] &&
-              window.TOBU_LIMITED_EXPRESS_VEHICLE_EVIDENCE &&
-              typeof window.TOBU_LIMITED_EXPRESS_VEHICLE_EVIDENCE.resolve === 'function') {
+              ((window.TRAIN_VEHICLE_EVIDENCE_PROVIDERS && window.TRAIN_VEHICLE_EVIDENCE_PROVIDERS.length) ||
+               window.TOBU_LIMITED_EXPRESS_VEHICLE_EVIDENCE)) {
             var _evidenceTrainNameRaw = tt['odpt:trainName'] || tt['trainName'] || tt['odpt:trainTitle'] || '';
             var _evidenceTrainName = typeof _evidenceTrainNameRaw === 'object'
               ? (_evidenceTrainNameRaw.ja || _evidenceTrainNameRaw['ja-Hrkt'] || _evidenceTrainNameRaw.en || '')
@@ -530,18 +530,33 @@
             var _evidenceDirection = /Inbound|Up|Nobori/i.test(String(_evidenceDirectionRaw)) ? 'up'
               : (/Outbound|Down|Kudari/i.test(String(_evidenceDirectionRaw)) ? 'down' : '');
             var _evidenceServiceDate = tt['_serviceDate'] || tt['serviceDate'] || tt['operatingDate'] || getTokyoServiceDate();
-            var _officialTobuEvidence = window.TOBU_LIMITED_EXPRESS_VEHICLE_EVIDENCE.resolveEvidence(
-              trainNumber, _evidenceTrainName, _evidenceDirection, _evidenceServiceDate,
-              { lineId: lineId, operator: tt['odpt:operator'] || line.operator || '' }
-            );
-            if (_officialTobuEvidence) {
-              tt['vehicleType'] = _officialTobuEvidence.vehicleType;
-              tt._vehicleEvidenceSource = 'tobu-official-2026-timetable-train-number';
+            var _evidenceProviders = (window.TRAIN_VEHICLE_EVIDENCE_PROVIDERS || []).slice();
+            if (_evidenceProviders.length === 0 && window.TOBU_LIMITED_EXPRESS_VEHICLE_EVIDENCE) {
+              _evidenceProviders.push(window.TOBU_LIMITED_EXPRESS_VEHICLE_EVIDENCE);
+            }
+            var _officialVehicleMatches = [];
+            _evidenceProviders.forEach(function(provider) {
+              if (!provider || typeof provider.resolveEvidence !== 'function') return;
+              var rec = provider.resolveEvidence(
+                trainNumber, _evidenceTrainName, _evidenceDirection, _evidenceServiceDate,
+                { lineId: lineId, operator: tt['odpt:operator'] || line.operator || '' }
+              );
+              if (rec && rec.vehicleType) _officialVehicleMatches.push({ provider: provider, record: rec });
+            });
+            var _vehicleNames = {};
+            _officialVehicleMatches.forEach(function(m){ _vehicleNames[m.record.vehicleType] = true; });
+            var _officialVehicleEvidence = Object.keys(_vehicleNames).length === 1 && _officialVehicleMatches.length
+              ? _officialVehicleMatches[0] : null;
+            if (_officialVehicleEvidence) {
+              var _provider = _officialVehicleEvidence.provider;
+              var _record = _officialVehicleEvidence.record;
+              tt['vehicleType'] = _record.vehicleType;
+              tt._vehicleEvidenceSource = (_provider.id || 'official') + '-train-number';
               tt._vehicleEvidence = {
                 source: tt._vehicleEvidenceSource,
                 trainNumber: trainNumber,
-                service: _officialTobuEvidence.service || (_officialTobuEvidence.services || []).join(' + '),
-                direction: _officialTobuEvidence.direction || _evidenceDirection,
+                service: _record.service || (_record.services || []).join(' + '),
+                direction: _record.direction || _evidenceDirection,
                 serviceDate: String(_evidenceServiceDate || '').slice(0, 10)
               };
             }
