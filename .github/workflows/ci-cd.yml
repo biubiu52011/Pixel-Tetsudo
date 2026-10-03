@@ -48,6 +48,7 @@ jobs:
           node tools/operation-evidence-providers.test.js
           node tools/formation-evidence-providers.test.js
           node tools/hibiya-formation-evidence.test.js
+          node tools/oimachi-formation-evidence.test.js
 
       - name: Entity Preservation Guard
         run: |
