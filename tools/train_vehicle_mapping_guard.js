@@ -282,9 +282,9 @@ function main() {
   expectMap(win, 'Joban local through destination keeps JR local first', 'JobanLocal', 'Local', 'E233系2000番台 / 東京メトロ16000系 / 小田急4000形', ['E231系0番台', 'E231系1000番台', 'E233系3000番台'], 'odpt.Station:TokyoMetro.Chiyoda.Ayase');
   expectMap(win, 'Keiyo local P1', 'Keiyo', 'Local', 'E233系5000番台', ['E231系900番台']);
   expectMap(win, 'Musashino local ODPT evidence', 'Musashino', 'Local', 'E231系900番台', ['E231系0番台']);
-  expectMap(win, 'Hachiko local ODPT evidence', 'Hachiko', 'Local', 'E231系3000番台 / 209系3500番台', ['E209系（京葉線）']);
+  expectMap(win, 'Hachiko local ODPT evidence', 'Hachiko', 'Local', '209系3500番台 / E231系3000番台', ['E209系（京葉線）']);
   expectMap(win, 'Kawagoe local ODPT evidence', 'Kawagoe', 'Local', 'E233系7000番台', ['E209系（京葉線）']);
-  expectMap(win, 'KawagoeWest local ODPT evidence', 'KawagoeWest', 'Local', '209系3500番台 / E231系3000番台', ['E209系（京葉線）']);
+  expectMap(win, 'KawagoeWest local ODPT evidence', 'KawagoeWest', 'Local', 'E231系3000番台 / 209系3500番台', ['E209系（京葉線）']);
   expectMap(win, 'ShonanShinjuku rapid P0', 'ShonanShinjuku', 'Rapid', 'E231系1000番台 / E233系3000番台', ['E235系1000番台']);
   expectMap(win, 'Ito Odoriko P1', 'Ito', 'LimitedExpress', 'E257系2000番台 / E257系2500番台', ['E257系1500番台']);
   expectMap(win, 'UtsunomiyaJR Nikko P1', 'UtsunomiyaJR', 'LimitedExpress', '253系（日光・きぬがわ）', ['E253系']);
@@ -366,7 +366,7 @@ function main() {
     lineId: 'Hachiko',
     operator: 'JR-East',
     trainType: trainType('JR-East', 'Local')
-  }, '209系3500番台 / E231系3000番台', '209系_3500番代.png', ['209系_500番代_京葉線.png']);
+  }, 'E231系3000番台 / 209系3500番台', '209系_3500番代.png', ['209系_500番代_京葉線.png']);
 
   expectRuntime(win, 'KawagoeWest runtime ODPT evidence', {
     lineId: 'KawagoeWest',
