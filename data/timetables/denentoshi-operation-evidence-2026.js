@@ -6,8 +6,9 @@
  * Chokopy's Train-Page, 2026-03-14 timetable revision.
  * Published families: 01K-26K Tokyu, 51S-77S Tokyo Metro,
  * 50T-82T Tobu (holiday table; weekday table is validated by the same source).
- * This provider establishes operator ownership only. It deliberately does not
- * guess a vehicle model inside an operator's multi-model fleet.
+ * This provider establishes operator ownership. Tobu T workings are promoted
+ * to 50050 series using Tobu's official through-service fleet definition;
+ * Metro S workings remain multi-model and therefore narrowed.
  */
 (function() {
   "use strict";
@@ -44,6 +45,9 @@
     var owner=op.letter==="K"?"TOKYU":(op.letter==="S"?"TokyoMetro":"Tobu");
     return {
       operator:owner,
+      // Tobu officially designates 50050 as the Hanzomon/Denentoshi through fleet.
+      // Metro remains multi-model in 2026 (8000/08/18000), so S workings stay narrowed.
+      vehicleType:owner==="Tobu" ? "東武50050系" : "",
       grade:"C",
       sourceUrl:SOURCE,
       provenance:"Chokopy 2026-03-14 Denentoshi operation table",
