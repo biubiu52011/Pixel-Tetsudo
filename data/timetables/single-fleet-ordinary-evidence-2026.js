@@ -25,6 +25,12 @@ function resolveEvidence(trainNumber,ctx){
  }
  return null;
 }
-var p={id:"single-fleet-ordinary-lines-2026",grade:"B",effectiveDate:EFFECTIVE,resolveEvidence:resolveEvidence};
-(window.TRAIN_OPERATION_EVIDENCE_PROVIDERS||(window.TRAIN_OPERATION_EVIDENCE_PROVIDERS=[])).push(p);
+var p={
+ id:"single-fleet-ordinary-lines-2026",
+ grade:"B",
+ effectiveDate:EFFECTIVE,
+ resolveEvidence:resolveEvidence,
+ resolve:function(trainNumber,ctx){ return resolveEvidence(trainNumber,ctx); }
+};
+(window.TRAIN_VEHICLE_EVIDENCE_PROVIDERS||(window.TRAIN_VEHICLE_EVIDENCE_PROVIDERS=[])).push(p);
 })();
