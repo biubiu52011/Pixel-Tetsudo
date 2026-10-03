@@ -7,6 +7,12 @@ r=p.resolveEvidence("B11",{lineId:"Odawara",serviceDate:"2026-04-01"});assert.de
 r=p.resolveEvidence("B21",{lineId:"Odawara",serviceDate:"2026-04-01"});assert.deepStrictEqual(Array.from(r.vehicleCandidates),["小田急1000形","小田急2000形"]);
 r=p.resolveEvidence("7004",{lineId:"Odawara",serviceDate:"2026-04-01"});assert.strictEqual(r.operationCode,"A11");assert.deepStrictEqual(Array.from(r.vehicleCandidates),["小田急3000形","小田急8000形"]);
 assert.strictEqual(p.resolveEvidence("7004",{lineId:"Odawara",serviceDate:"2026-04-04"}),null);
+r=p.resolveEvidence("6021",{lineId:"Odawara",serviceDate:"2026-04-01"});assert.strictEqual(r.operationCode,"C11");assert.strictEqual(r.vehicleType,"小田急4000形");assert(/pages\/19\.html/.test(r.sourceUrl));
+r=p.resolveEvidence("6037",{lineId:"Odawara",serviceDate:"2026-04-01"});assert.strictEqual(r.operationCode,"C12");assert.strictEqual(r.vehicleType,"小田急4000形");
+r=p.resolveEvidence("4035",{lineId:"Odawara",serviceDate:"2026-04-01"});assert.strictEqual(r.operationCode,"C13");
+r=p.resolveEvidence("6002",{lineId:"Odawara",serviceDate:"2026-04-01"});assert.strictEqual(r.operationCode,"C14");
+r=p.resolveEvidence("6027",{lineId:"Odawara",serviceDate:"2026-04-01"});assert.strictEqual(r.operationCode,"C23");assert.strictEqual(r.vehicleType,"小田急4000形");
+assert.strictEqual(p.resolveEvidence("6027",{lineId:"Odawara",serviceDate:"2026-04-04"}),null);
 r=p.resolveEvidence("C11",{lineId:"Odawara",serviceDate:"2026-04-01"});assert.strictEqual(r.vehicleType,"小田急4000形");
 r=p.resolveEvidence("E21",{lineId:"OdakyuTama",serviceDate:"2026-04-01"});assert.strictEqual(r.vehicleType,"");assert(r.vehicleCandidates.length>1);
 assert.strictEqual(p.resolveEvidence("2601",{lineId:"Odawara",serviceDate:"2026-04-01"}),null);
