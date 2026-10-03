@@ -356,17 +356,39 @@
           ? 'operation-vehicle-narrowed-candidates' : 'timetable-multiple-candidates');
     }
 
-    // B0 hard invariant: unresolved multi-candidate identity must never leak a
-    // candidate-specific vehicle/formation/livery image. Rendering can use its
-    // neutral marker outside this resolver.
-    if (identityStatus !== 'EXACT') iconPath = '';
+    // Visual fleet assignment for NARROWED identities.
+    // Evidence semantics remain unchanged: this does NOT promote a timetable/fleet
+    // candidate to EXACT. It only gives each physical service a stable visual
+    // representative from the externally-confirmed legal candidate pool.
+    // Prefer runningChainId so through-services keep the same visual vehicle across
+    // line/operator views; fall back to train number and stable operation context.
+    var visualVehicle = chosen || '';
+    if (identityStatus === 'NARROWED' && effectiveCandidates.length > 1) {
+      var visualSeed = String(ctx.runningChainId || ctx.trainId || trainNumber || '') + '|' +
+        String(ctx.operationId || ctx.operationCode || '') + '|' +
+        String(lineId || '') + '|' + effectiveCandidates.join('|');
+      var visualHash = 2166136261 >>> 0;
+      for (var vh = 0; vh < visualSeed.length; vh++) {
+        visualHash ^= visualSeed.charCodeAt(vh);
+        visualHash = Math.imul(visualHash, 16777619) >>> 0;
+      }
+      visualVehicle = effectiveCandidates[visualHash % effectiveCandidates.length];
+      iconPath = resolveIconForName(visualVehicle, ctx.lineId) || '';
+      if (!iconPath && window.TrainIcons && typeof window.TrainIcons.resolveVehicleIcon === 'function') {
+        iconPath = window.TrainIcons.resolveVehicleIcon(visualVehicle, ctx.lineId) || '';
+      }
+    } else if (identityStatus !== 'EXACT') {
+      iconPath = '';
+    }
 
     return {
-      name: chosen,                                  // EXACT vehicle only; empty while ambiguous
+      name: chosen,                                  // evidence identity only; empty while ambiguous
       candidates: effectiveCandidates,               // candidates after safe owner narrowing
       allCandidates: orderArr,                        // raw S0→S3 evidence pool for diagnostics
       identityStatus: identityStatus,                 // EXACT / NARROWED / UNKNOWN
       identityReason: identityReason,
+      visualVehicle: visualVehicle,                  // presentation-only choice; never evidence
+      visualAssignment: identityStatus === 'NARROWED' && !!visualVehicle ? 'stable-candidate-pick' : (chosen ? 'evidence' : 'none'),
       assignmentOperator: assignmentOperator,
       sources: chosen ? (pool[chosen] ? pool[chosen].sources.slice() : (chosenSrc ? [chosenSrc] : [])) : [],
       source: chosenSrc,                             // decision source; empty when unresolved
