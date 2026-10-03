@@ -1011,7 +1011,7 @@
     },
     'Joban': {
       'Rapid': {
-        'default': 'JR E231系0番台（常磐快速線・LED）',
+        'default': 'JR E231系0番台',
         'destStation': {
           'Tsuchiura': 'JR E531系',
           'Mito': 'JR E531系',
@@ -1024,7 +1024,7 @@
         }
       },
       'Local': {
-        'default': 'JR E231系0番台（常磐快速線・LED）',
+        'default': 'JR E231系0番台',
         'destStation': {
           'Tsuchiura': 'JR E531系',
           'Mito': 'JR E531系',
