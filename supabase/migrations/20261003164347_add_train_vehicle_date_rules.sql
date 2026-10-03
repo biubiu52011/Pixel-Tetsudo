@@ -1,0 +1,2 @@
+-- Recorded in production before GitHub integration was enabled.
+-- The current repository baseline is captured in 20261003032912_create_pixel_tetsudo_public_schema.sql.
