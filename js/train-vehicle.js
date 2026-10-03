@@ -180,6 +180,11 @@
     var lineId = ctx.lineId || '';
     var operator = normOp(ctx.operator);
     var trainOwner = normOp(ctx.trainOwner || ctx.odptTrainOwner || '');
+    // B1: assignmentOperator is derived from a train-operation/working-number
+    // evidence provider. It is weaker than explicit vehicleType but equivalent
+    // to trainOwner for safely removing other operators' stock.
+    var assignmentOperator = normOp(ctx.assignmentOperator || ctx.operationOperator || '');
+    var effectiveOwner = trainOwner || assignmentOperator;
     var trainNumber = ctx.trainNumber || '';
     var trainType = ctx.trainType || '';
     var dest = ctx.destinationStation || '';
@@ -249,11 +254,11 @@
       var srcCandidates = Object.keys(pool).filter(function(c) {
         return pool[c].sources.indexOf(srcName) >= 0;
       });
-      var ownerFiltered = filterCandidatesByOwner(srcCandidates, trainOwner);
+      var ownerFiltered = filterCandidatesByOwner(srcCandidates, effectiveOwner);
       if (ownerFiltered.length !== srcCandidates.length) srcCandidates = ownerFiltered;
       if (srcCandidates.length === 1) {
         chosen = srcCandidates[0];
-        chosenSrc = (trainOwner && ownerMatchesCandidate(trainOwner, chosen)) ? (srcName + '+trainOwner') : srcName;
+        chosenSrc = (effectiveOwner && ownerMatchesCandidate(effectiveOwner, chosen)) ? (srcName + '+trainOwner') : srcName;
         break;
       }
       if (srcCandidates.length > 1 && _trainNoSet.length) {
@@ -324,8 +329,8 @@
     var identityStatus = 'UNKNOWN';
     var identityReason = 'no-vehicle-evidence';
     var effectiveCandidates = orderArr.slice();
-    if (trainOwner && effectiveCandidates.length > 1) {
-      effectiveCandidates = filterCandidatesByOwner(effectiveCandidates, trainOwner);
+    if (effectiveOwner && effectiveCandidates.length > 1) {
+      effectiveCandidates = filterCandidatesByOwner(effectiveCandidates, effectiveOwner);
     }
     if (chosen) {
       identityStatus = 'EXACT';
@@ -335,8 +340,8 @@
       else identityReason = 'resolved-vehicle-evidence';
     } else if (effectiveCandidates.length > 0) {
       identityStatus = 'NARROWED';
-      identityReason = trainOwner && effectiveCandidates.length < orderArr.length
-        ? 'train-owner-narrowed-candidates'
+      identityReason = effectiveOwner && effectiveCandidates.length < orderArr.length
+        ? (trainOwner ? 'train-owner-narrowed-candidates' : 'operation-operator-narrowed-candidates')
         : 'timetable-multiple-candidates';
     }
 
@@ -346,6 +351,7 @@
       allCandidates: orderArr,                        // raw S0→S3 evidence pool for diagnostics
       identityStatus: identityStatus,                 // EXACT / NARROWED / UNKNOWN
       identityReason: identityReason,
+      assignmentOperator: assignmentOperator,
       sources: chosen ? (pool[chosen] ? pool[chosen].sources.slice() : (chosenSrc ? [chosenSrc] : [])) : [],
       source: chosenSrc,                             // decision source; empty when unresolved
       confidence: confidence,
