@@ -1073,3 +1073,13 @@ assert(vehicleMapSource.includes('東急6020系（7両） / 東急6000系'),
   'Tokyu Oimachi express fleet identities must remain operator-qualified');
 assert(vehicleMapSource.includes('横浜高速鉄道Y500系(8両)'),
   'Minatomirai Y500 identity must retain operator and eight-car formation');
+
+
+// Batch guard: JR East fleet identities must not depend on line-directory context.
+for (const model of ['E233系0番台','E231系0番台','E231系1000番台','E233系3000番台','E531系','E129系','E721系','701系','211系','E127系100番台']) {
+  assert(!vehicleMapSource.includes("'default': '" + model) && !vehicleMapSource.includes(' / ' + model),
+    'JR East fleet identity must remain operator-qualified: ' + model);
+}
+assert(vehicleMapSource.includes('JR E235系0番台（山手線）'), 'Yamanote E235 identity must remain JR-qualified');
+assert(vehicleMapSource.includes('JR E233系1000番台'), 'Keihin-Tohoku E233-1000 identity must remain JR-qualified');
+assert(vehicleMapSource.includes('JR E131系500番台'), 'Sagami E131-500 identity must remain JR-qualified');
