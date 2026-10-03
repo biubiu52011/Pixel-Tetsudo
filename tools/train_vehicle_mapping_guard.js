@@ -304,6 +304,35 @@ function main() {
   assert(canonical && canonical.displayName === 'E235系0番台（山手線）', 'canonical id does not resolve to display name', { canonical });
   assert(canonical.asset && canonical.asset.endsWith('E235系_0番代.png'), 'canonical id does not resolve to asset', { canonical });
 
+  // trainOwner narrows a multi-company through-service fleet without pretending
+  // that service type alone identifies the formation.
+  expectRuntime(win, 'S-TRAIN owner evidence', {
+    lineId: 'Fukutoshin',
+    operator: 'TokyoMetro',
+    trainOwner: 'odpt.Operator:Seibu',
+    trainType: 'odpt.TrainType:Seibu.S-TRAIN'
+  }, '西武40000系', '西武鉄道_40000系', []);
+
+  const fLinerOwner = win.TrainVehicle.resolve({
+    lineId: 'Fukutoshin', operator: 'TokyoMetro',
+    trainOwner: 'odpt.Operator:Tobu',
+    trainType: 'odpt.TrainType:TokyoMetro.F-Liner',
+    destinationStation: 'odpt.Station:Tobu.Tojo.Kawagoeshi',
+    trainNumber: 'guard-owner-fliner'
+  });
+  assert(fLinerOwner.candidates.some(function(v){ return /東武/.test(v); }), 'F-Liner candidate pool lost Tobu stock', { fLinerOwner });
+  assert(!fLinerOwner.name || /東武/.test(fLinerOwner.name), 'trainOwner must not resolve another operator stock', { fLinerOwner });
+
+  // A physical running chain must never silently switch between two explicit
+  // incompatible vehicle identities.
+  const chainId = 'guard-chain-conflict';
+  assert(win.TrainVehicle.registerFormationEvidence({ runningChainId: chainId, lineId: 'Yamanote', serviceDate: '2099-01-01', vehicleType: 'E235系0番台（山手線）' }) === true,
+    'first chain vehicle evidence was not accepted');
+  assert(win.TrainVehicle.registerFormationEvidence({ runningChainId: chainId, lineId: 'Yokosuka', serviceDate: '2099-01-01', vehicleType: 'E235系1000番台' }) === false,
+    'conflicting chain vehicle evidence must be rejected');
+  assert(win.TrainVehicle.resolveFormationEvidence({ runningChainId: chainId, serviceDate: '2099-01-01' }) === null,
+    'conflicting chain evidence must resolve UNKNOWN, not last-write-wins');
+
   expectRuntime(win, 'Yamanote runtime', {
     lineId: 'Yamanote',
     operator: 'JR-East',
