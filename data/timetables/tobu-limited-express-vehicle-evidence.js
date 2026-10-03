@@ -173,7 +173,8 @@
     return rec ? (rec.vehicleType || "") : "";
   }
 
-  window.TOBU_LIMITED_EXPRESS_VEHICLE_EVIDENCE = {
+  var provider = {
+    id: "tobu-official-limited-express-2026",
     effectiveDate: "2026-03-14",
     source: "Tobu Railway official limited-express timetable",
     policy: "exact-verified-columns-only",
@@ -181,4 +182,11 @@
     resolveEvidence: resolveEvidence,
     resolve: resolve
   };
+  window.TOBU_LIMITED_EXPRESS_VEHICLE_EVIDENCE = provider;
+  // Generic provider registry: other operators can add exact per-train evidence
+  // without adding operator-specific branches to the estimator.
+  window.TRAIN_VEHICLE_EVIDENCE_PROVIDERS = window.TRAIN_VEHICLE_EVIDENCE_PROVIDERS || [];
+  if (!window.TRAIN_VEHICLE_EVIDENCE_PROVIDERS.some(function(p){ return p && p.id === provider.id; })) {
+    window.TRAIN_VEHICLE_EVIDENCE_PROVIDERS.push(provider);
+  }
 })();
