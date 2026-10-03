@@ -227,8 +227,8 @@ function main() {
   assertCompanyQualifiedTrainAssets();
 
   // 東急支線は大井町線の車両を継承しない。
-  expectMap(win, 'Tokyu Tamagawa local fleet', 'TokyuTamagawa', 'Local', '東急電鉄1000系 / 7000系', ['6020系', '9000系', '9020系']);
-  expectMap(win, 'Tokyu Ikegami local fleet', 'TokyuIkegami', 'Local', '東急電鉄1000系 / 7000系', ['6020系', '9000系', '9020系']);
+  expectMap(win, 'Tokyu Tamagawa local fleet', 'TokyuTamagawa', 'Local', '東急1000系 / 東急7000系', ['6020系', '9000系', '9020系']);
+  expectMap(win, 'Tokyu Ikegami local fleet', 'TokyuIkegami', 'Local', '東急1000系 / 東急7000系', ['6020系', '9000系', '9020系']);
   expectMap(win, 'Tokyu Kodomonokuni local fleet', 'TokyuKodomonokuni', 'Local', 'Y000系', ['6020系', '9000系', '9020系']);
   expectMap(win, 'Tokyu Setagaya local fleet', 'TokyuSetagaya', 'Local', '300系', ['6020系', '9000系', '9020系']);
 
@@ -826,18 +826,6 @@ function main() {
     currentResolverFictionalAssets: 0,
     missingReferences: 0
   }, null, 2));
-}
-
-try {
-  main();
-} catch (err) {
-  console.error(JSON.stringify({
-    status: 'FAIL',
-    message: err.message,
-    details: err.details || null
-  }, null, 2));
-  process.exitCode = 1;
-}
 // JR E233-7000 and TWR 70-000/71-000 are three distinct canonical identities.
 // Never collapse them by numeric similarity or mixed-operator fleet weighting.
 assert(trainIconsSource.includes('"jr-east-e233-7000-saikyo"') &&
@@ -1088,7 +1076,7 @@ for (const forbidden of [
   '東京メトロ10000系 /',
   "西武40000系'",
   "東急5050系4000番台'",
-  '東急電鉄1000系 / 7000系',
+  '東急1000系 / 東急7000系',
   '6020系（5両） / 9000系'
 ]) {
   assert(!vehicleMapSource.includes(forbidden),
@@ -1208,3 +1196,15 @@ for (const forbidden of [
 // Equipment/update state is not a livery identity.
 assert(!vehicleMapSource.includes('常磐快速線・LED'),
   'equipment-state suffix must not be embedded in E231 vehicle identity');
+}
+
+try {
+  main();
+} catch (err) {
+  console.error(JSON.stringify({
+    status: 'FAIL',
+    message: err.message,
+    details: err.details || null
+  }, null, 2));
+  process.exitCode = 1;
+}
