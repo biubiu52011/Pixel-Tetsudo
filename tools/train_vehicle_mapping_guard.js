@@ -764,11 +764,11 @@ function main() {
   assert(!/lines:\s*\['Rinkai'\][\s\S]{0,200}E233系_7000/.test(trainIconsSource),
     'Rinkai trains must not default to JR E233-7000 without vehicle evidence');
   const vehicleMapSource = fs.readFileSync(path.join(ROOT, 'data/timetables/vehicle-type-map.js'), 'utf8');
-  assert(/'Rinkai':\s*'JR E233系7000番台 \/ 東京臨海高速鉄道71-000形 \/ 東京臨海高速鉄道70-000形'/.test(vehicleMapSource),
+  assert(/'Rinkai':\s*'JR E233系7000番台\(10両\) \/ 東京臨海高速鉄道71-000形\(10両\) \/ 東京臨海高速鉄道70-000形\(10両\)'/.test(vehicleMapSource),
     'Rinkai-to-JR pool must include both current TWR generations and JR E233-7000');
-  assert(/'Saikyo':[\s\S]{0,900}'Rinkai':\s*'JR E233系7000番台 \/ 東京臨海高速鉄道71-000形 \/ 東京臨海高速鉄道70-000形'/.test(vehicleMapSource),
+  assert(/'Saikyo':[\s\S]{0,900}'Rinkai':\s*'JR E233系7000番台\(10両\) \/ 東京臨海高速鉄道71-000形\(10両\) \/ 東京臨海高速鉄道70-000形\(10両\)'/.test(vehicleMapSource),
     'Saikyo-to-Rinkai pool must include TWR 70-000 and 71-000');
-  assert(/'Saikyo':[\s\S]{0,900}'Sotetsu':\s*'JR E233系7000番台 \/ 相鉄12000系'/.test(vehicleMapSource),
+  assert(/'Saikyo':[\s\S]{0,900}'Sotetsu':\s*'JR E233系7000番台\(10両\) \/ 相鉄12000系\(10両\)'/.test(vehicleMapSource),
     'JR-Sotetsu through pool must retain both E233-7000 and Sotetsu 12000');
   assert(vehicleMapSource.includes('千葉ニュータウン鉄道9100形') &&
          vehicleMapSource.includes('千葉ニュータウン鉄道9200形') &&
@@ -853,7 +853,7 @@ assert(trainIconsSource.includes('"東京臨海高速鉄道70-000形": "東京�
 
 // Chuo-Sobu ordinary E231-0/500 are not Tozai-through stock.
 // JR's Tozai-through identity is E231-800; keep the boundary explicit.
-assert(vehicleMapSource.includes("'TokyoMetro': 'E231系800番台（東西線直通） / 東京メトロ05系(10両) / 東京メトロ07系(10両) / 東京メトロ15000系(10両)'"),
+assert(vehicleMapSource.includes("'TokyoMetro': 'JR E231系800番台 / 東京メトロ05系(10両) / 東京メトロ07系(10両) / 東京メトロ15000系(10両)'"),
   'Chuo-Sobu TokyoMetro pool must use E231-800 and Metro Tozai stock');
 assert(!vehicleMapSource.includes("'TokyoMetro': 'E231系500番台 / E231系0番台 / 東京メトロ05系"),
   'ordinary E231-0/500 must not enter the Tozai-through pool');
@@ -973,7 +973,7 @@ for (const line of ['SobuRapid','SobuMain']) {
 }
 assert(vehicleMapSource.includes("'SobuRapid': {\n      'Rapid': { 'default': 'JR E235系1000番台' }"),
   'Sobu Rapid must retain canonical JR E235-1000 identity');
-assert(vehicleMapSource.includes("'Keiyo': {\n      'Local': { 'default': 'JR E233系5000番台' },\n      'Rapid': { 'default': 'JR E233系5000番台' }"),
+assert(vehicleMapSource.includes("'Keiyo': {\n      'Local': { 'default': 'JR E233系5000番台 / JR 209系500番台' },\n      'Rapid': { 'default': 'JR E233系5000番台 / JR 209系500番台' }"),
   'Keiyo must retain canonical JR E233-5000 identity');
 
 // Batch guard: Takasaki / Joetsu / Agatsuma E257-5500 express identity.
