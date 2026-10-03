@@ -1156,12 +1156,21 @@ assert(vehicleMapSource.includes('東急6020系(5両)') && vehicleMapSource.incl
 
 // Vehicle identity suffix policy: service names/nicknames are not identity.
 // Parenthetical/suffix labels are reserved for livery/theme distinctions; formation counts remain allowed.
+
+
+// Vehicle identity annotation policy: service/route/nickname labels must not be embedded.
+// Only formation boundaries and genuinely necessary livery/visual distinctions may remain.
 for (const forbidden of [
-  '（山手線）','（あずさ）','（あずさ・かいじ）','（あずさ・かいじ・富士回遊）',
-  '（日光・きぬがわ）','（サンライズ出雲）','（しなの）',
-  '（スペーシアX）','（スペーシア）','（リバティ）','（リバティ会津）',
-  '（スカイライナー）','（ライナー車両）','EXEα',' MSE',' GSE'
+  '（ラビュー）','（ニューレッドアロー）','（東西線直通）','（踊り子）',
+  '（ときわ・ひたち）','（ひたち・ときわ）','（成田エクスプレス）',
+  '（成田エクスプレス／しおさい）','（しおさい）','（草津・四万／あかぎ）',
+  '（草津・四万）','（湘南）','（特急）','（快速特急）','（通勤特急）',
+  '（リゾートしらかみ）','（快速南三陸）','（快速はまゆり）',
+  '（HIGH RAIL 1375）','（リゾートビューふるさと）','（こまち）','（つばさ）',
+  '（しらゆき）','（いなほ）','（特急いなほ）','（レオライナー）',
+  '（れおけい）','（レッドアロー）','（北綾瀬）','（Le Ciel）',
+  '（7000系は全廃）'
 ]) {
   assert(!vehicleMapSource.includes(forbidden),
-    'non-livery service/nickname label regressed into vehicle identity: ' + forbidden);
+    'non-livery annotation regressed into vehicle identity: ' + forbidden);
 }
