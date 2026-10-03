@@ -114,10 +114,13 @@
       var circle = document.createElementNS(svgNS, "circle");
       circle.setAttribute("cx", o.x);
       circle.setAttribute("cy", o.y);
-      circle.setAttribute("r", isJunction ? "12" : "7");
-      circle.setAttribute("fill", isJunction ? color : "#fff");
-      circle.setAttribute("stroke", isJunction ? "#fff" : color);
-      circle.setAttribute("stroke-width", isJunction ? "2.5" : "2");
+      // Junctions are structural reference points, not the primary visual.
+      // Keep them readable but avoid the former large solid dot that competed
+      // with train icons at major stations.
+      circle.setAttribute("r", isJunction ? "9" : "7");
+      circle.setAttribute("fill", "#fff");
+      circle.setAttribute("stroke", color);
+      circle.setAttribute("stroke-width", isJunction ? "3" : "2");
       circle.setAttribute("data-station-index", o.si);
       staticLayer.appendChild(circle);
     }
