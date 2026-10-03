@@ -1,6 +1,6 @@
 /*
  * Pixel Tetsudo - Train operation evidence registry
- * v4.3.1055
+ * v4.3.1092
  *
  * Evidence is ranked by traceability, not by "official vs fan" alone.
  * A  direct run evidence: realtime owner/vehicle or dated formation assignment
@@ -37,6 +37,32 @@
     };
   }
 
+  function normalizeOperationCode(trainNumber, ctx) {
+    ctx = ctx || {};
+    var raw = String(trainNumber || "").toUpperCase().trim();
+    // Explicit working-number forms are lossless and safe across through networks.
+    // Examples: 03K, 50T, 02S, 91G, A1291G, B691G.
+    var explicit = raw.match(/(?:^|[^0-9A-Z])(?:A|B)?(\d{1,4})([KSMTGE])$/);
+    if (explicit) {
+      var digits = explicit[1];
+      // A1291G/B691G encode the working number in the final two digits.
+      if (/^[AB]/.test(raw) && digits.length >= 3) digits = digits.slice(-2);
+      return String(parseInt(digits, 10)).padStart(2, "0") + explicit[2];
+    }
+    // Provider-proven public-number form already used by Den-en-toshi:
+    // 026-081 -> 26K, 057-102 -> 57S, 050-... -> 50T.
+    if (/Denentoshi|Hanzomon|田園都市|半蔵門/i.test([ctx.lineId,ctx.railway].join("|"))) {
+      var dt = raw.match(/^(\d{3})[-_]/);
+      if (dt) {
+        var n = parseInt(dt[1],10);
+        if (n>=1 && n<=26) return String(n).padStart(2,"0")+"K";
+        if (n>=51 && n<=77 && n%2===1) return String(n).padStart(2,"0")+"S";
+        if (n>=50 && n<=82 && n%2===0) return String(n).padStart(2,"0")+"T";
+      }
+    }
+    return "";
+  }
+
   function register(provider) {
     if (!provider || !provider.id || typeof provider.resolveEvidence !== 'function') return false;
     for (var i = 0; i < providers.length; i++) {
@@ -49,6 +75,7 @@
   window.TrainOperationEvidence = {
     register: register,
     normalizeEvidence: normalizeEvidence,
+    normalizeOperationCode: normalizeOperationCode,
     providers: providers,
     policy: {
       requireTraceableSourceForDecisiveEvidence: true,
@@ -62,5 +89,5 @@
     }
   };
 
-  console.debug('[TrainOperationEvidence] v4.3.1055 initialized (graded provenance model)');
+  console.debug('[TrainOperationEvidence] v4.3.1092 initialized (graded provenance model)');
 })();
