@@ -598,7 +598,7 @@
           var _assignmentMatches = [];
           (window.TRAIN_OPERATION_EVIDENCE_PROVIDERS || []).forEach(function(provider) {
             if (!provider || typeof provider.resolveEvidence !== 'function') return;
-            var rec = provider.resolveEvidence(trainNumber, {
+            var _operationCtx = {
               lineId: lineId,
               operator: tt['odpt:operator'] || line.operator || '',
               railway: tt['odpt:railway'] || '',
@@ -607,7 +607,11 @@
               timetableObjectId: timetableObjectId,
               serviceDate: tt['_serviceDate'] || tt['serviceDate'] || tt['operatingDate'] || getTokyoServiceDate(),
               at: (function(){ var d=new Date(Date.now()+9*60*60*1000); return d.toISOString().slice(11,16); })()
-            });
+            };
+            _operationCtx.operationCode = window.TrainOperationEvidence &&
+              typeof window.TrainOperationEvidence.normalizeOperationCode === 'function'
+              ? window.TrainOperationEvidence.normalizeOperationCode(trainNumber, _operationCtx) : '';
+            var rec = provider.resolveEvidence(trainNumber, _operationCtx);
             if (rec) {
               var normalized = window.TrainOperationEvidence &&
                 typeof window.TrainOperationEvidence.normalizeEvidence === 'function'
