@@ -591,10 +591,34 @@
             window.TrainVehicle.registerVehicle(trainNumber, tt['vehicleType'], line.operator); // S2: operator-scoped train-number evidence
           }
           var _trainOwner = tt['odpt:trainOwner'] || tt['trainOwner'] || '';
+          // B1: operation-number / working-number providers may identify the
+          // company responsible for this concrete run even when timetable-only
+          // mode has no odpt:trainOwner. Providers must return evidence, not guesses.
+          var _assignmentOperator = '';
+          var _assignmentMatches = [];
+          (window.TRAIN_OPERATION_EVIDENCE_PROVIDERS || []).forEach(function(provider) {
+            if (!provider || typeof provider.resolveEvidence !== 'function') return;
+            var rec = provider.resolveEvidence(trainNumber, {
+              lineId: lineId,
+              operator: tt['odpt:operator'] || line.operator || '',
+              railway: tt['odpt:railway'] || '',
+              railDirection: tt['odpt:railDirection'] || '',
+              destinationStation: destinationStationUrn || '',
+              timetableObjectId: timetableObjectId,
+              serviceDate: tt['_serviceDate'] || tt['serviceDate'] || tt['operatingDate'] || getTokyoServiceDate()
+            });
+            if (rec && rec.operator) _assignmentMatches.push(rec);
+          });
+          var _assignmentOperators = {};
+          _assignmentMatches.forEach(function(rec){ _assignmentOperators[rec.operator] = true; });
+          if (Object.keys(_assignmentOperators).length === 1) {
+            _assignmentOperator = Object.keys(_assignmentOperators)[0];
+          }
           var vehCtx = {
             lineId: lineId,
             operator: line.operator,
             trainOwner: _trainOwner,
+            assignmentOperator: _assignmentOperator,
             trainNumber: trainNumber,
             stationIndex: currentStationIndex,
             trainType: tt['odpt:trainType'],
@@ -625,6 +649,10 @@
             extrapolated: extrapolated,
             trainType: tt['odpt:trainType'] || '',
             trainOwner: _trainOwner,
+            assignmentOperator: _assignmentOperator,
+            vehicleIdentityStatus: vehResult.identityStatus || 'UNKNOWN',
+            vehicleIdentityReason: vehResult.identityReason || 'no-vehicle-evidence',
+            vehicleCandidates: vehResult.candidates || [],
             typeName: trainClassification.typeName,
             isLimitedExpress: trainClassification.isLimitedExpress,
             isThroughTrain: trainClassification.isThroughTrain,
