@@ -21,11 +21,13 @@
   // physical-train identity/vehicle evidence while timetable fallback takes over.
   var _CHAIN_EVIDENCE_TTL_MS = 3 * 60 * 1000;
   function _rememberChainVehicle(p) {
-    if (!p || !p.runningChainId || !p.vehicleIconPath) return;
+    if (!p || !p.runningChainId || (!p.vehicleType && !p.vehicleIconPath)) return;
     var _src = p.vehicleSource || (p.vehicleResolution && p.vehicleResolution.source) || "";
     var _conf = p.vehicleConfidence || (p.vehicleResolution && p.vehicleResolution.confidence) || "none";
-    var _eligible = p.vehicleResolvedFromRealtime === true ||
-      ((_src === "manual" || _src === "odpt" || _src === "trainNo") && _conf === "high");
+    var _identityExact = p.vehicleIdentityStatus === "EXACT" ||
+      (p.vehicleResolution && p.vehicleResolution.identityStatus === "EXACT");
+    var _eligible = p.vehicleResolvedFromRealtime === true || _identityExact ||
+      ((_src === "manual" || _src === "odpt" || _src === "trainNo" || _src === "operation-assignment-provider") && _conf === "high");
     if (!_eligible) return;
     var _incomingRank = p.vehicleResolvedFromRealtime === true ? 3 : (_src === "odpt" ? 3 : (_src === "manual" ? 2 : 1));
     var _existing = _chainVehicleRegistry[p.runningChainId];
@@ -47,6 +49,10 @@
       vehicleSource: p.vehicleSource || "",
       vehicleConfidence: p.vehicleConfidence || "none",
       vehicleResolution: p.vehicleResolution || null,
+      vehicleIdentityStatus: p.vehicleIdentityStatus || (p.vehicleResolution && p.vehicleResolution.identityStatus) || "",
+      vehicleIdentityReason: p.vehicleIdentityReason || (p.vehicleResolution && p.vehicleResolution.identityReason) || "",
+      vehicleFormationId: p.vehicleFormationId || "",
+      vehicleFormationCandidates: (p.vehicleFormationCandidates || []).slice(),
       evidenceRank: _incomingRank,
       lastSeenAt: Date.now()
     };
@@ -65,6 +71,10 @@
     p.vehicleSource = v.vehicleSource || p.vehicleSource || "";
     p.vehicleConfidence = v.vehicleConfidence || p.vehicleConfidence || "none";
     p.vehicleResolution = v.vehicleResolution || p.vehicleResolution || null;
+    p.vehicleIdentityStatus = v.vehicleIdentityStatus || p.vehicleIdentityStatus || "";
+    p.vehicleIdentityReason = v.vehicleIdentityReason || p.vehicleIdentityReason || "";
+    p.vehicleFormationId = v.vehicleFormationId || p.vehicleFormationId || "";
+    p.vehicleFormationCandidates = (v.vehicleFormationCandidates || p.vehicleFormationCandidates || []).slice();
     p.vehicleInheritedFromRunningChain = true;
     return p;
   }
