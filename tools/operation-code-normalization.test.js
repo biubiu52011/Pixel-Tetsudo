@@ -1,0 +1,12 @@
+const fs=require("fs"),path=require("path"),assert=require("assert"),vm=require("vm");
+const window={};vm.runInNewContext(fs.readFileSync(path.join(__dirname,"..","data/timetables/train-operation-evidence.js"),"utf8"),{window,console});
+const n=window.TrainOperationEvidence.normalizeOperationCode;
+assert.strictEqual(n("03K",{lineId:"Tozai"}),"03K");
+assert.strictEqual(n("A1291G",{lineId:"TokyuToyoko"}),"91G");
+assert.strictEqual(n("B691G",{lineId:"TokyuToyoko"}),"91G");
+assert.strictEqual(n("026-081",{lineId:"Denentoshi"}),"26K");
+assert.strictEqual(n("057-102",{lineId:"Hanzomon"}),"57S");
+assert.strictEqual(n("050-001",{lineId:"Denentoshi"}),"50T");
+assert.strictEqual(n("2601",{lineId:"SeibuShinjuku"}),"","plain train numbers must not be guessed as operation codes");
+assert.strictEqual(n("1234",{lineId:"Tozai"}),"","unknown numeric Tozai train number must remain unresolved");
+console.log("Operation code normalization: PASS");
