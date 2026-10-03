@@ -40,6 +40,11 @@ jobs:
           node tools/runinfo-loading-state.test.js
           node tools/performance-lifecycle.test.js
 
+      - name: Train vehicle identity regression
+        run: |
+          node tools/train_vehicle_mapping_guard.js
+          node tools/train-position-evidence-regression.test.js
+
       - name: Entity Preservation Guard
         run: |
           echo Running canonical entity preservation guard...
