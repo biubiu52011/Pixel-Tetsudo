@@ -42,22 +42,11 @@ jobs:
 
       - name: Train vehicle identity regression
         run: |
-          node tools/train_vehicle_mapping_guard.js
-          node tools/train-position-evidence-regression.test.js
-          node tools/asakusa-formation-evidence.test.js
-          node tools/operation-evidence-providers.test.js
-          node tools/formation-evidence-providers.test.js
-          node tools/hibiya-formation-evidence.test.js
-          node tools/oimachi-formation-evidence.test.js
-          node tools/iketama-formation-evidence.test.js
-          node tools/keiyo-operation-evidence.test.js
-          node tools/tozai-operation-evidence.test.js
-          node tools/operation-code-normalization.test.js
-          node tools/seibu-shinjuku-evidence.test.js
-          node tools/odakyu-operation-evidence.test.js
-          node tools/odakyu-formation-evidence.test.js
-          node tools/sotetsu-formation-evidence.test.js
-          node tools/denentoshi-formation-evidence.test.js
+          for test in tools/train_vehicle_mapping_guard.js tools/train-position-evidence-regression.test.js tools/asakusa-formation-evidence.test.js tools/operation-evidence-providers.test.js tools/formation-evidence-providers.test.js tools/hibiya-formation-evidence.test.js tools/oimachi-formation-evidence.test.js tools/iketama-formation-evidence.test.js tools/keiyo-operation-evidence.test.js tools/tozai-operation-evidence.test.js tools/operation-code-normalization.test.js tools/seibu-shinjuku-evidence.test.js tools/odakyu-operation-evidence.test.js tools/odakyu-formation-evidence.test.js tools/sotetsu-formation-evidence.test.js tools/denentoshi-formation-evidence.test.js; do
+            echo "::group::$test"
+            node "$test"
+            echo "::endgroup::"
+          done
 
       - name: Entity Preservation Guard
         run: |
