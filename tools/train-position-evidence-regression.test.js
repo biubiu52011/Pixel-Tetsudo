@@ -75,4 +75,15 @@ assert(estimatorSource.includes("vehicleFormationCandidates: Object.keys(_assign
 assert(estimatorSource.includes("split(/\\s*\\/\\s*|\\s*,\\s*|\\s*\\|\\s*/)"),
   'multi-formation evidence must be split into candidates instead of treated as one formation');
 
+
+const fusionSource = fs.readFileSync('js/data-fusion.js','utf8');
+assert(fusionSource.includes('(!p.vehicleType && !p.vehicleIconPath)'),
+  'running-chain registry must accept exact vehicle identity even when no icon is resolved');
+assert(fusionSource.includes('p.vehicleIdentityStatus === "EXACT"'),
+  'running-chain registry must accept exact model evidence');
+assert(fusionSource.includes('vehicleFormationCandidates: (p.vehicleFormationCandidates || []).slice()'),
+  'running-chain registry must preserve formation candidate sets');
+assert(fusionSource.includes('p.vehicleFormationCandidates = (v.vehicleFormationCandidates || p.vehicleFormationCandidates || []).slice()'),
+  'running-chain inheritance must propagate formation candidate sets');
+
 console.log("train-position-evidence-regression: PASS");
