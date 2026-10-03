@@ -651,6 +651,7 @@
             trainType: tt['odpt:trainType'],
             destinationStation: destinationStationUrn || tt['odpt:destinationStation'] || '',
             vehicleTypeManual: tt['vehicleType'] || '',
+            vehicleEvidenceSource: tt._vehicleEvidenceSource || '',
             trainId: lineId + '_' + trainNumber + '_' + currentStationIndex
           };
           var vehResult = (window.TrainVehicle && typeof window.TrainVehicle.resolve === 'function')
