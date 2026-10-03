@@ -56,6 +56,8 @@ assert(estimatorSource.includes('rec.decisive && rec.operator'),
   'only decisive graded evidence may establish assignment operator');
 assert(estimatorSource.includes('operationEvidence: _assignmentMatches'),
   'estimated trains must preserve operation evidence provenance');
+assert(/at:\s*\(function\(\)\{ var d=new Date\(Date\.now\(\)\+9\*60\*60\*1000\)/.test(estimatorSource),
+  'segmented operation evidence must receive JST service time, not UTC');
 
 
 assert(estimatorSource.includes("Object.keys(_assignmentVehicles).length === 1"),
