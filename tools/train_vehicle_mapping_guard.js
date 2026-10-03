@@ -349,13 +349,13 @@ function main() {
     lineId: 'Yamanote',
     operator: 'JR-East',
     trainType: trainType('JR-East', 'Local')
-  }, 'E235系0番台（山手線）', 'E235系_0番台.png', ['E235系_1000番台.png', 'E235系_0番代_B31編成_中央・総武線.png']);
+  }, 'JR E235系0番台', 'E235系_0番台.png', ['E235系_1000番台.png', 'E235系_0番代_B31編成_中央・総武線.png']);
 
   expectRuntime(win, 'Joban rapid livery runtime', {
     lineId: 'Joban',
     operator: 'JR-East',
     trainType: trainType('JR-East', 'Rapid')
-  }, 'E231系0番台', 'E231系_0番台_常磐快速線.png', ['E231系_0番代.png']);
+  }, 'JR E231系0番台', 'E231系_0番台_常磐快速線.png', ['E231系_0番代.png']);
 
   expectRuntime(win, 'Joban Tsuchiura medium-distance runtime', {
     lineId: 'Joban',
@@ -393,19 +393,19 @@ function main() {
     lineId: 'Yokosuka',
     operator: 'JR-East',
     trainType: trainType('JR-East', 'Local')
-  }, 'E235系1000番台', 'E235系_1000番台.png', ['E235系_0番台.png', 'E235系_0番代_B31編成_中央・総武線.png']);
+  }, 'JR E235系1000番台', 'E235系_1000番台.png', ['E235系_0番台.png', 'E235系_0番代_B31編成_中央・総武線.png']);
 
   expectRuntime(win, 'Yokosuka rapid accepted safe behavior', {
     lineId: 'Yokosuka',
     operator: 'JR-East',
     trainType: trainType('JR-East', 'Rapid')
-  }, 'E235系1000番台', 'E235系_1000番台.png', ['E235系_0番台.png', 'E235系_0番代_B31編成_中央・総武線.png']);
+  }, 'JR E235系1000番台', 'E235系_1000番台.png', ['E235系_0番台.png', 'E235系_0番代_B31編成_中央・総武線.png']);
 
   expectRuntime(win, 'ABSENT vehicle known route default', {
     lineId: 'Yamanote',
     operator: 'JR-East',
     trainType: trainType('JR-East', 'Local')
-  }, 'E235系0番台（山手線）', 'E235系_0番台.png', ['E235系_1000番台.png']);
+  }, 'JR E235系0番台', 'E235系_0番台.png', ['E235系_1000番台.png']);
 
   expectUnknownRuntime(win, 'unknown explicit E235 subseries', {
     lineId: 'UnknownRoute',
