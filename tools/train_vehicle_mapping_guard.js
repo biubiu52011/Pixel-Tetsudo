@@ -565,8 +565,8 @@ function main() {
   assert(/8000系\(10両\)/.test(hanzomon) && /08系\(10両\)/.test(hanzomon) && /18000系\(10両\)/.test(hanzomon),
     'Hanzomon current Metro fleet must preserve 8000/08/18000 as 10-car stock', { hanzomon });
   const denTobu = win.VehicleTypeMap.resolve('TokyuDenEn', 'odpt.TrainType:Tokyu.Express', 'odpt.Station:Tobu.Skytree.Kuki');
-  assert(/50050系\(10両\)/.test(denTobu) && !/30000/.test(denTobu),
-    'Denentoshi Tobu through pool must use current 50050, not former 30000 through stock', { denTobu });
+  assert(/50050系\(10両\)/.test(denTobu) && !/30000/.test(denTobu) && !/東武50000系/.test(denTobu),
+    'Denentoshi structural Tobu through pool must stay on regular 50050; exceptional 50000 belongs to dated run evidence only', { denTobu });
   const denDefault = win.VehicleTypeMap.resolve('TokyuDenEn', 'odpt.TrainType:Tokyu.Local', null);
   assert(/東急5000系\(10両\)/.test(denDefault) && /東急2020系\(10両\)/.test(denDefault),
     'Denentoshi default stock must be explicit 10-car 5000/2020', { denDefault });
