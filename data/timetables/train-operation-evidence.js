@@ -1,6 +1,6 @@
 /*
  * Pixel Tetsudo - Train operation evidence registry
- * v4.3.1092
+ * v4.3.1093
  *
  * Evidence is ranked by traceability, not by "official vs fan" alone.
  * A  direct run evidence: realtime owner/vehicle or dated formation assignment
@@ -49,6 +49,13 @@
       if (/^[AB]/.test(raw) && digits.length >= 3) digits = digits.slice(-2);
       return String(parseInt(digits, 10)).padStart(2, "0") + explicit[2];
     }
+    // Tozai public train numbers preserve the working suffix in their final
+    // two digits + owner letter: 507K -> 07K, 603K -> 03K, 655S -> 55S,
+    // A650T -> 50T. JR East / published operation tables confirm this form.
+    if (/Tozai|ChuoSobu|ToyoRapid|東西|中央.*総武|東葉/i.test([ctx.lineId,ctx.railway].join("|"))) {
+      var tz = raw.match(/(?:^|[^0-9A-Z])(?:A|B)?\d*(\d{2})([KST])(?:R)?$/);
+      if (tz) return tz[1] + tz[2];
+    }
     // Provider-proven public-number form already used by Den-en-toshi:
     // 026-081 -> 26K, 057-102 -> 57S, 050-... -> 50T.
     if (/Denentoshi|Hanzomon|田園都市|半蔵門/i.test([ctx.lineId,ctx.railway].join("|"))) {
@@ -89,5 +96,5 @@
     }
   };
 
-  console.debug('[TrainOperationEvidence] v4.3.1092 initialized (graded provenance model)');
+  console.debug('[TrainOperationEvidence] v4.3.1093 initialized (graded provenance model)');
 })();
