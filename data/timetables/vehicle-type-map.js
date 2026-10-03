@@ -271,10 +271,10 @@
       'Local': { 'default': '東急電鉄1000系 / 東急電鉄7000系' },
     },
     'TokyuKodomonokuni': {
-      'Local': { 'default': 'Y000系' },
+      'Local': { 'default': '横浜高速鉄道Y000系' },
     },
     'TokyuSetagaya': {
-      'Local': { 'default': '300系' },
+      'Local': { 'default': '東急300系' },
     },
     'TokyuOimachi': {
       'Local': { 'default': '東急6020系（5両） / 東急9000系 / 東急9020系', 'TokyuDenEn': '東急6020系（5両） / 東急9000系 / 東急9020系 / 東急5000系(10両) / 東急2020系(10両)' },
@@ -1516,12 +1516,12 @@
       'Local': { 'default': '埼玉新都市交通2000系 / 埼玉新都市交通2020系' }
     },
     'TokyoMonorail': {
-      'AirportRapid': { 'default': '10000形' },
-      'SectionRapid': { 'default': '10000形' },
-      'Local': { 'default': '10000形 / 2000形' }
+      'AirportRapid': { 'default': '東京モノレール10000形' },
+      'SectionRapid': { 'default': '東京モノレール10000形' },
+      'Local': { 'default': '東京モノレール10000形 / 東京モノレール2000形' }
     },
     'Yurikamome': {
-      'Local': { 'default': '7300系 / 7500系（7000系は全廃）' }
+      'Local': { 'default': 'ゆりかもめ7300系 / ゆりかもめ7500系（7000系は全廃）' }
     },
     'Hakushin': {
       'Local': { 'default': 'JR E129系' },
@@ -1549,13 +1549,13 @@
       'Local': { 'default': '東京メトロ16000系 / 東京メトロ05系（北綾瀬）' },
     },
     'Oedo': {
-      'Local': { 'default': '12-000形 / 12-600形' },
+      'Local': { 'default': '都営12-000形 / 都営12-600形' },
     },
     'Arakawa': {
-      'Local': { 'default': '7700形 / 8500形 / 8800形 / 8900形 / 9000形' },
+      'Local': { 'default': '都電7700形 / 都電8500形 / 都電8800形 / 都電8900形 / 都電9000形' },
     },
     'Nippori_Toneri': {
-      'Local': { 'default': '330形' },
+      'Local': { 'default': '東京都交通局330形' },
     },
 
     // --- 東武ローカル（小泉・佐野・桐生は 10000 系系譜に統一進行中） ---
@@ -1588,15 +1588,15 @@
       'Local': { 'default': '東武8000系 / 東武800型 / 東武850型 / 東武10030型' },
     },
     'Nikkoku': {
-      'Local': { 'default': '東武20400系', 'Aizu': '6050系100番台' },
-      'Rapid': { 'default': '東武20400系', 'Aizu': '6050系100番台' },
-      'LimitedExpress': { 'default': 'N100系（スペーシアX）/ 100系（きぬ）/ 500系（リバティ）' },
+      'Local': { 'default': '東武20400系', 'Aizu': '野岩鉄道6050系100番台' },
+      'Rapid': { 'default': '東武20400系', 'Aizu': '野岩鉄道6050系100番台' },
+      'LimitedExpress': { 'default': '東武N100系（スペーシアX）/ 東武100系（きぬ）/ 東武500系（リバティ）' },
     },
 
     // --- 京王（本線系統の支線群：7000系は退役進行中だが 2026-09 時点で運用中） ---
     'KeioInokashira': {
-      'Local': { 'default': '1000系' },
-      'Express': { 'default': '1000系' },
+      'Local': { 'default': '京王電鉄1000系' },
+      'Express': { 'default': '京王電鉄1000系' },
     },
     'KeioSagami': {
       'Local': { 'default': '京王電鉄7000系 / 京王電鉄8000系 / 京王電鉄9000系 / 京王電鉄5000系' },
