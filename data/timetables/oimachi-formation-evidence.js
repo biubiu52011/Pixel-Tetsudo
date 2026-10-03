@@ -1,6 +1,6 @@
 /*
  * Pixel Tetsudo - Tokyu Oimachi dated formation evidence
- * v4.3.1085
+ * v4.3.1086
  * Source: loo-ool Oimachi operation archive.
  */
 (function(){"use strict";
@@ -32,7 +32,21 @@ function opNo(n){var m=String(n||"").match(/(?:^|[^0-9])(1(?:0[1-9]|1[0-6]|3[1-7
 function resolveEvidence(trainNumber,ctx){
  ctx=ctx||{};var hay=[ctx.lineId,ctx.railway].join("|");
  if(!/TokyuOimachi|Oimachi|大井町/i.test(hay))return null;
- var d=String(ctx.serviceDate||"").slice(0,10),r=rows[d]&&rows[d][opNo(trainNumber)];
+ var d=String(ctx.serviceDate||"").slice(0,10),op=opNo(trainNumber),r=rows[d]&&rows[d][op],seg=segmented[d]&&segmented[d][op];
+ if(!r&&seg){
+  var raw=String(ctx.at||ctx.time||ctx.departureTime||"");
+  var tm=raw.match(/(?:T|\\s)(\\d{2}):(\\d{2})/)||raw.match(/^(\\d{2}):(\\d{2})/);
+  if(tm){
+   var hhmm=tm[1]+":"+tm[2],pick=seg[0];
+   seg.forEach(function(x){if(x[0]<=hhmm)pick=x;});
+   r=[pick[1],pick[2]];
+  }else{
+   var models={},forms=[];seg.forEach(function(x){models[x[1]]=true;if(forms.indexOf(x[2])<0)forms.push(x[2]);});
+   var ms=Object.keys(models);
+   if(ms.length!==1)return null;
+   r=[ms[0],forms.join(" / ")];
+  }
+ }
  if(!r)return null;
  return {operator:"TOKYU",vehicleType:r[0],formationId:r[1],grade:"C",sourceUrl:SOURCE,
  provenance:"dated Oimachi operation observation",observedDate:d};
