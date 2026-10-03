@@ -229,7 +229,7 @@ function main() {
   // 東急支線は大井町線の車両を継承しない。
   expectMap(win, 'Tokyu Tamagawa local fleet', 'TokyuTamagawa', 'Local', '東急1000系 / 東急7000系', ['6020系', '9000系', '9020系']);
   expectMap(win, 'Tokyu Ikegami local fleet', 'TokyuIkegami', 'Local', '東急1000系 / 東急7000系', ['6020系', '9000系', '9020系']);
-  expectMap(win, 'Tokyu Kodomonokuni local fleet', 'TokyuKodomonokuni', 'Local', 'Y000系', ['6020系', '9000系', '9020系']);
+  expectMap(win, 'Tokyu Kodomonokuni local fleet', 'TokyuKodomonokuni', 'Local', '横浜高速鉄道Y000系', ['6020系', '9000系', '9020系']);
   expectMap(win, 'Tokyu Setagaya local fleet', 'TokyuSetagaya', 'Local', '300系', ['6020系', '9000系', '9020系']);
 
   // S-TRAIN is a Seibu 40000 series reserved-seat through service across
