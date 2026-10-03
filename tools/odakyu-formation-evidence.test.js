@@ -1,0 +1,11 @@
+const assert=require("assert"),fs=require("fs"),vm=require("vm");
+const code=fs.readFileSync("data/timetables/odakyu-formation-evidence.js","utf8");
+const sandbox={window:{TRAIN_OPERATION_EVIDENCE_PROVIDERS:[]}};vm.createContext(sandbox);vm.runInContext(code,sandbox);
+const p=sandbox.window.TRAIN_OPERATION_EVIDENCE_PROVIDERS[0],ctx={lineId:"Odawara",serviceDate:"2026-08-06"};
+let r=p.resolveEvidence("E12",ctx);assert.strictEqual(r.vehicleType,"小田急3000形");assert.strictEqual(r.formationId,"3093F");
+r=p.resolveEvidence("E63",ctx);assert.strictEqual(r.vehicleType,"小田急5000形");assert.strictEqual(r.formationId,"5051F");
+r=p.resolveEvidence("E69",ctx);assert.strictEqual(r.vehicleType,"小田急8000形");assert.strictEqual(r.formationId,"8057F / 8262F");
+r=p.resolveEvidence("E81",ctx);assert.strictEqual(r.vehicleType,"小田急5000形");assert.strictEqual(r.formationId,"5062F");
+assert.strictEqual(p.resolveEvidence("E12",{lineId:"Odawara",serviceDate:"2026-08-05"}),null);
+assert.strictEqual(p.resolveEvidence("E12",{lineId:"Chiyoda",serviceDate:"2026-08-06"}),null);
+console.log("Odakyu dated formation evidence: PASS");
