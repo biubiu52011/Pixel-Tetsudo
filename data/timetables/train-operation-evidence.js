@@ -27,6 +27,7 @@
       vehicleType: rec.vehicleType || '',
       vehicleCandidates: Array.isArray(rec.vehicleCandidates) ? rec.vehicleCandidates.slice() : [],
       formationId: rec.formationId || '',
+      operationCode: rec.operationCode || '',
       grade: grade,
       sourceUrl: sourceUrl,
       provenance: provenance,
