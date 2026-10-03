@@ -1,0 +1,13 @@
+const fs=require("fs"),vm=require("vm"),assert=require("assert");
+const src=fs.readFileSync("data/timetables/sotetsu-formation-evidence.js","utf8");
+const box={window:{}};vm.createContext(box);vm.runInContext(src,box);
+const p=box.window.TRAIN_OPERATION_EVIDENCE_PROVIDERS[0];
+const hit=(n,d="2026-04-08",line="SotetsuMain")=>p.resolveEvidence(n,{serviceDate:d,lineId:line,railway:line,operator:"Sotetsu"});
+let r=hit("12");assert(r&&r.vehicleType==="相鉄13000系(8両)"&&r.formationId==="13101F");
+r=hit("51");assert(r&&r.vehicleType==="相鉄8000系(10両)"&&r.formationId==="8713F");
+r=hit("55");assert(r&&r.vehicleType==="相鉄11000系(10両)"&&r.formationId==="11001F");
+r=hit("65");assert(r&&r.vehicleType==="相鉄10000系(10両)"&&r.formationId==="10701F");
+r=hit("91G");assert(r&&r.vehicleType==="相鉄20000系(10両)"&&r.formationId==="20104F");
+assert.strictEqual(hit("12","2026-04-07"),null);
+assert.strictEqual(hit("12","2026-04-08","TokyuToyoko"),null);
+console.log("Sotetsu formation evidence: PASS");
