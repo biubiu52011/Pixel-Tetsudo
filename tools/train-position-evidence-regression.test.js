@@ -43,4 +43,12 @@ const trains=read("js/trains-data.js");
 assert(/function _isFreshRealtimePosition/.test(trains),"realtime freshness guard missing");
 assert(/return _isFreshRealtimePosition\(p\) \? 0 : 8/.test(trains),"expired realtime must lose source priority");
 
+
+assert(estimatorSource.includes('TRAIN_OPERATION_EVIDENCE_PROVIDERS'),
+  'estimator must consult train operation evidence providers');
+assert(estimatorSource.includes('Object.keys(_assignmentOperators).length === 1'),
+  'conflicting operation-provider operators must remain unresolved');
+assert(estimatorSource.includes('vehicleIdentityStatus: vehResult.identityStatus'),
+  'estimated trains must expose vehicle identity resolution state');
+
 console.log("train-position-evidence-regression: PASS");
