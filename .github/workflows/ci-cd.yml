@@ -44,6 +44,7 @@ jobs:
         run: |
           node tools/train_vehicle_mapping_guard.js
           node tools/train-position-evidence-regression.test.js
+          node tools/asakusa-formation-evidence.test.js
 
       - name: Entity Preservation Guard
         run: |
