@@ -30,23 +30,37 @@
   "use strict";
 
   var TRAIN_NO_VEHICLE = window.TRAIN_NO_VEHICLE || {};
+  var TRAIN_NO_VEHICLE_SCOPED = window.TRAIN_NO_VEHICLE_SCOPED || {};
   window.TRAIN_NO_VEHICLE = TRAIN_NO_VEHICLE; // 兼容旧引用（外部只读）
+  window.TRAIN_NO_VEHICLE_SCOPED = TRAIN_NO_VEHICLE_SCOPED;
 
   // ============================================================
   // 车号 → 车型候选 累积表（key = 纯车号，跨线累积去重）
   // ============================================================
-  function registerVehicle(trainNumber, vehicleTypeStr) {
+  function registerVehicle(trainNumber, vehicleTypeStr, operator) {
     if (!trainNumber || !vehicleTypeStr) return;
-    var exist = TRAIN_NO_VEHICLE[trainNumber] || (TRAIN_NO_VEHICLE[trainNumber] = []);
+    var key = String(trainNumber);
+    var exist = TRAIN_NO_VEHICLE[key] || (TRAIN_NO_VEHICLE[key] = []);
+    var op = normOp(operator);
+    var scopedKey = op ? (op + "::" + key) : "";
+    var scoped = scopedKey ? (TRAIN_NO_VEHICLE_SCOPED[scopedKey] || (TRAIN_NO_VEHICLE_SCOPED[scopedKey] = [])) : null;
     String(vehicleTypeStr).split('/').forEach(function(s) {
       var c = s.trim();
-      if (c && exist.indexOf(c) < 0) exist.push(c);
+      if (!c) return;
+      if (exist.indexOf(c) < 0) exist.push(c);
+      if (scoped && scoped.indexOf(c) < 0) scoped.push(c);
     });
   }
 
-  function getCandidates(trainNumber) {
+  function getCandidates(trainNumber, operator) {
     if (!trainNumber) return [];
     var key = String(trainNumber);
+    var op = normOp(operator);
+    var scopedKey = op ? (op + "::" + key) : "";
+    if (scopedKey && TRAIN_NO_VEHICLE_SCOPED[scopedKey]) return TRAIN_NO_VEHICLE_SCOPED[scopedKey];
+    // Same train numbers are reused by unrelated operators. Never import
+    // another operator's vehicle evidence; through continuity uses runningChainId.
+    if (op) return [];
     if (TRAIN_NO_VEHICLE[key]) return TRAIN_NO_VEHICLE[key];
     // 兜底：旧调用可能传 "lineId_trainNumber"（lineId 本身可能含下划线，如 Daishi_Tobu），
     // 从后往前逐段去掉前缀尝试命中纯车号 key。
@@ -154,7 +168,7 @@
 
     addFrom(ctx.vehicleTypeManual, 'manual');      // S0
     addFrom(ctx.odptVehicleType, 'odpt');          // S1
-    getCandidates(trainNumber).forEach(function(c) { // S2
+    getCandidates(trainNumber, operator).forEach(function(c) { // S2
       var rec = pool[c];
       if (!rec) {
         rec = pool[c] = { sources: [], count: 0 };
@@ -174,7 +188,7 @@
     // 杜绝"宽泛候选第一项"压过车号级实证导致跨视图换图标。
     var order = ['manual', 'odpt', 'trainNo', 'map'];
     var _manualCands = splitCandidates(ctx.vehicleTypeManual);
-    var _trainNoCands = getCandidates(trainNumber);
+    var _trainNoCands = getCandidates(trainNumber, operator);
     if (_manualCands.length > 1 && _trainNoCands.length > 0) {
       order = ['trainNo', 'manual', 'odpt', 'map'];
     }
@@ -192,7 +206,7 @@
     // possible fleet, not the actual formation assigned to this service.
     // If train-number evidence exists, intersect it with higher-level evidence;
     // choose only when that intersection is unique.
-    var _trainNoSet = getCandidates(trainNumber);
+    var _trainNoSet = getCandidates(trainNumber, operator);
     for (var oi = 0; oi < order.length && !chosen; oi++) {
       var srcName = order[oi];
       var srcCandidates = Object.keys(pool).filter(function(c) {
@@ -338,7 +352,7 @@
   // Public API
   // ============================================================
   window.TrainVehicle = {
-    version: '4.3.950',
+    version: '4.3.1050',
     resolve: resolve,
     getName: getName,
     getIconPath: getIconPath,
@@ -348,7 +362,8 @@
     clearFormationEvidenceOtherDates: clearFormationEvidenceOtherDates,
     getCandidates: getCandidates,
     // 调试/审计用
-    _table: function() { return TRAIN_NO_VEHICLE; }
+    _table: function() { return TRAIN_NO_VEHICLE; },
+    _scopedTable: function() { return TRAIN_NO_VEHICLE_SCOPED; }
   };
 
   console.debug('[TrainVehicle] v4.3.950 initialized（全局车辆判定统一入口）');
