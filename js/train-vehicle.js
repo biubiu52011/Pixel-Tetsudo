@@ -330,6 +330,14 @@
     var identityStatus = 'UNKNOWN';
     var identityReason = 'no-vehicle-evidence';
     var effectiveCandidates = orderArr.slice();
+    var operationVehicleCandidates = Array.isArray(ctx.operationVehicleCandidates)
+      ? ctx.operationVehicleCandidates.filter(Boolean) : [];
+    if (operationVehicleCandidates.length && effectiveCandidates.length > 1) {
+      var constrained = effectiveCandidates.filter(function(c) {
+        return operationVehicleCandidates.indexOf(c) >= 0;
+      });
+      if (constrained.length) effectiveCandidates = constrained;
+    }
     if (effectiveOwner && effectiveCandidates.length > 1) {
       effectiveCandidates = filterCandidatesByOwner(effectiveCandidates, effectiveOwner);
     }
@@ -344,7 +352,8 @@
       identityStatus = 'NARROWED';
       identityReason = effectiveOwner && effectiveCandidates.length < orderArr.length
         ? (trainOwner ? 'train-owner-narrowed-candidates' : 'operation-operator-narrowed-candidates')
-        : 'timetable-multiple-candidates';
+        : (operationVehicleCandidates.length && effectiveCandidates.length < orderArr.length
+          ? 'operation-vehicle-narrowed-candidates' : 'timetable-multiple-candidates');
     }
 
     return {
