@@ -1,6 +1,6 @@
 /*
  * Pixel Tetsudo - Odakyu 2026 operation-group vehicle constraints
- * v4.3.1099
+ * v4.3.1102
  * Source: Yozakura Room, Odakyu operation table after the 2026-03 timetable revision.
  * Group evidence narrows fleet candidates; only a single-model group may establish EXACT.
  */
