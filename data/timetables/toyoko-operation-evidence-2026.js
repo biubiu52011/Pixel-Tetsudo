@@ -57,7 +57,7 @@
 
   function inToyokoNetwork(ctx) {
     var s = [ctx.lineId,ctx.operator,ctx.railway,ctx.destinationStation].join("|");
-    return /Fukutoshin|Yurakucho|TokyuToyoko|Toyoko|Minatomirai|Sotetsu|Seibu|Tojo/i.test(s);
+    return /Fukutoshin|Yurakucho|TokyuToyoko|Toyoko|TokyuShinYokohama|ShinYokohama|Minatomirai|Sotetsu|Seibu|Tojo/i.test(s);
   }
 
   function resolveEvidence(trainNumber, ctx) {
