@@ -607,10 +607,19 @@
               timetableObjectId: timetableObjectId,
               serviceDate: tt['_serviceDate'] || tt['serviceDate'] || tt['operatingDate'] || getTokyoServiceDate()
             });
-            if (rec && rec.operator) _assignmentMatches.push(rec);
+            if (rec) {
+              var normalized = window.TrainOperationEvidence &&
+                typeof window.TrainOperationEvidence.normalizeEvidence === 'function'
+                ? window.TrainOperationEvidence.normalizeEvidence(provider, rec)
+                : rec;
+              if (normalized) _assignmentMatches.push(normalized);
+            }
           });
+          // Only decisive A/C dated evidence may establish the responsible
+          // operator. B remains a compatibility constraint; D remains a lead.
+          var _decisiveAssignments = _assignmentMatches.filter(function(rec){ return rec.decisive && rec.operator; });
           var _assignmentOperators = {};
-          _assignmentMatches.forEach(function(rec){ _assignmentOperators[rec.operator] = true; });
+          _decisiveAssignments.forEach(function(rec){ _assignmentOperators[rec.operator] = true; });
           if (Object.keys(_assignmentOperators).length === 1) {
             _assignmentOperator = Object.keys(_assignmentOperators)[0];
           }
@@ -650,6 +659,7 @@
             trainType: tt['odpt:trainType'] || '',
             trainOwner: _trainOwner,
             assignmentOperator: _assignmentOperator,
+            operationEvidence: _assignmentMatches,
             vehicleIdentityStatus: vehResult.identityStatus || 'UNKNOWN',
             vehicleIdentityReason: vehResult.identityReason || 'no-vehicle-evidence',
             vehicleCandidates: vehResult.candidates || [],
