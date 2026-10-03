@@ -63,4 +63,8 @@ assert(estimatorSource.includes("Object.keys(_assignmentVehicles).length === 1")
 assert(estimatorSource.includes("operation-assignment-provider"),
   'agreed run-level operation evidence must be promotable to exact model');
 
+
+assert(estimatorSource.includes("operation-assignment-provider"),
+  'Meguro/Sotetsu exact assignment must use the shared operation evidence promotion path');
+
 console.log("train-position-evidence-regression: PASS");
