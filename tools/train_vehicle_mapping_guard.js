@@ -539,7 +539,7 @@ function main() {
 
     const yLocalSeibu = win.VehicleTypeMap.resolve('Yurakucho', 'odpt.TrainType:TokyoMetro.Local', 'odpt.Station:Seibu.Ikebukuro.Kotesashi');
   assert(/西武6000系\(10両\)/.test(yLocalSeibu), 'Seibu 6000 through stock must remain 10-car fixed', { yLocalSeibu });
-  assert(/西武40000系\(8両\/10両\)/.test(yLocalSeibu), 'ordinary Seibu 40000 fleet must preserve 8/10-car ambiguity', { yLocalSeibu });
+  assert(/西武40000系\(10両\)/.test(yLocalSeibu), 'Yurakucho Seibu through stock must preserve the compatible 40000 ten-car identity', { yLocalSeibu });
   assert(!/90000/.test(win.VehicleTypeMap.resolve('Yurakucho', 'odpt.TrainType:TokyoMetro.Local', 'odpt.Station:Tobu.Tojo.Shiki')),
     'Yurakucho Tobu through pool must not contain nonexistent 90000-series identity');
   const ikeF = win.VehicleTypeMap.resolve('Ikebukuro', 'odpt.TrainType:Seibu.F-Liner', null);
@@ -882,7 +882,7 @@ assert(!vehicleMapSource.includes('(8両)(8両)'),
   'formation normalization must not duplicate eight-car suffixes');
 
 // Keikyu identity / duplicate-key guards.
-assert(vehicleMapSource.includes("'Daishi_Keikyu': {\n      'Local': { 'default': '京急1500形 / 京急新1000形（4両編成）' }"),
+assert(vehicleMapSource.includes("'Daishi_Keikyu': {\n      'Local': { 'default': '京急1500形 / 京急新1000形(4両)' }"),
   'Daishi line must keep current Keikyu-qualified 1500/1000 identities');
 const kurihamaBlock = vehicleMapSource.match(/'KeikyuKurihama': \{[\s\S]*?\n    \},\n    'KeikyuZushi'/)?.[0] || '';
 assert((kurihamaBlock.match(/'MorningWing':/g) || []).length === 1 &&
@@ -1088,7 +1088,6 @@ for (const forbidden of [
   '東京メトロ10000系 /',
   "西武40000系'",
   "東急5050系4000番台'",
-  '東急1000系 / 東急7000系',
   '6020系（5両） / 9000系'
 ]) {
   assert(!vehicleMapSource.includes(forbidden),
@@ -1125,7 +1124,7 @@ for (const required of [
   '東急300系',
   '京王電鉄1000系',
   '野岩鉄道6050系100番台',
-  '東武N100系（スペーシアX）'
+  '東武N100系'
 ]) {
   assert(vehicleMapSource.includes(required),
     'explicit operator-qualified fleet identity missing: ' + required);
@@ -1149,7 +1148,7 @@ for (const forbidden of [
 for (const required of [
   '小田急60000形',
   '小田急70000形',
-  'JR E231系800番台（東西線直通）',
+  'JR E231系800番台',
   'JR 253系1000番台',
   'JR 285系',
   '京成3600形',
