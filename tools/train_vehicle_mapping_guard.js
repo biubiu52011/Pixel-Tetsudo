@@ -985,3 +985,27 @@ assert(nsaBlock.includes('京成3100形(8両)'),
 const keiseiBlock = vehicleMapSource.match(/'Keisei': \{[\s\S]*?\n    \},\n\n    \/\/ 京成押上線/)?.[0] || '';
 assert(keiseiBlock.includes('京成3000形(6両/8両)'),
   'Keisei domestic pool must preserve both 3000 six/eight-car formations');
+
+
+// Batch guard: Saikyo / Rinkai / Sotetsu through-service operator and formation identity.
+assert(/'Rinkai': 'TWR'/.test(vehicleMapSource),
+  'Rinkai railway fallback owner must remain TWR, not JR-East');
+assert(!/'Rinkai': 'JR-East'/.test(vehicleMapSource),
+  'Rinkai railway fallback must never regress to JR-East');
+const saikyoBlock = vehicleMapSource.match(/'Saikyo': \{[\s\S]*?\n    \},\n    'ShonanShinjuku'/)?.[0] || '';
+assert(saikyoBlock.includes('JR E233系7000番台(10両)'),
+  'Saikyo through pool must preserve JR E233-7000 ten-car identity');
+assert(saikyoBlock.includes('東京臨海高速鉄道71-000形(10両)'),
+  'Saikyo Rinkai pool must preserve TWR 71-000 ten-car identity');
+assert(saikyoBlock.includes('東京臨海高速鉄道70-000形(10両)'),
+  'Saikyo Rinkai pool must preserve TWR 70-000 ten-car identity');
+assert(saikyoBlock.includes('相鉄12000系(10両)'),
+  'Saikyo Sotetsu pool must preserve Sotetsu 12000 ten-car identity');
+const rinkaiBlock = vehicleMapSource.match(/'Rinkai': \{[\s\S]*?\n    \},\n    'Saikyo'/)?.[0] || '';
+assert(rinkaiBlock.includes('東京臨海高速鉄道71-000形(10両)') && rinkaiBlock.includes('東京臨海高速鉄道70-000形(10両)'),
+  'Rinkai pool must retain operator-qualified ten-car TWR fleet identities');
+const sotetsuBlock = vehicleMapSource.match(/'SotetsuMain': \{[\s\S]*?\n    \},\n    'SotetsuIzumino'/)?.[0] || '';
+assert(!/相鉄20000系 \/ 21000系|相鉄20000系 \/ 21000系 \/ 12000系/.test(sotetsuBlock),
+  'Sotetsu pool must not regress to bare numeric fleet identities');
+assert(sotetsuBlock.includes('相鉄20000系(10両)') && sotetsuBlock.includes('相鉄21000系(8両)'),
+  'Sotetsu pool must preserve 20000 ten-car / 21000 eight-car boundary');
