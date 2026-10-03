@@ -81,7 +81,7 @@
         { line: "Joetsu", icon: "../images/列车/JR東日本/JR東日本_E257系_5500番代.png", typeMatch: ["Kusatsu", "Shima"], priority: 3 },       // 特急草津・四万
         { line: "Agatsuma", icon: "../images/列车/JR東日本/JR東日本_E257系_5500番代.png", typeMatch: ["Kusatsu", "Shima"], priority: 3 },
         { line: "Shinetsu", icon: "../images/列车/JR東日本/JR東日本_E653系_1000番代.png", typeMatch: ["Shirayuki"], priority: 3 },        // 特急しらゆき（新潟〜直江津）
-        { line: "Nikkoku", icon: "../images/列车/JR東日本/JR東日本_253系_1000番代.png", typeMatch: ["Nikko", "Kinu"], priority: 3 }              // 特急日光・きぬがわ（253系1000番台、4.3.457 図庫更新で追加）
+        { line: "Nikkoku", icon: "../images/列车/JR東日本/JR東日本_253系_1000番台.png", typeMatch: ["Nikko", "Kinu"], priority: 3 }              // 特急日光・きぬがわ（253系1000番台、4.3.457 図庫更新で追加）
       ]
     },
     "ExpTobu": {
@@ -117,7 +117,7 @@
 
   // Operator default icons (fallback)
   var OPERATOR_ICONS = {
-    "JR-East": "../images/列车/JR東日本/JR東日本_E235系_0番代.png",
+    "JR-East": "../images/列车/JR東日本/JR東日本_E235系_0番台.png",
     "JR West": "../images/列车/JR西日本/JR西日本_N700系_7000番台.png", // 4.3.950：JR西日本現役主力通勤車（223系），原误用JR東日本E235系已修正
     "TokyoMetro": "../images/列车/東京メトロ/東京メトロ_1000系.png",
     "Toei": "../images/列车/都営地下鉄/都営地下鉄_5500形.png", // 都営默认采用现役浅草線 5500形；退役 5300/6300 不进入运行时默认
@@ -165,32 +165,32 @@
 
   // Specific line icons (override operator defaults)
   var LINE_ICONS = {
-  "Yamanote": "../images/列车/JR東日本/JR東日本_E235系_0番代.png",
+  "Yamanote": "../images/列车/JR東日本/JR東日本_E235系_0番台.png",
   "KeihinTohoku": "../images/列车/JR東日本/JR東日本_E233系_1000番代.png",
-  "ChuoLocal": "../images/列车/JR東日本/JR東日本_E231系_0番代_中央・総武線各駅停車.png",
-  "ChuoSobuLocal": "../images/列车/JR東日本/JR東日本_E231系_0番代_中央・総武線各駅停車.png",
+  "ChuoLocal": "../images/列车/JR東日本/JR東日本_E231系_0番台_中央・総武線各駅停車.png",
+  "ChuoSobuLocal": "../images/列车/JR東日本/JR東日本_E231系_0番台_中央・総武線各駅停車.png",
   "ChuoRapid": "../images/列车/JR東日本/JR東日本_E233系_0番代.png",
   "ChuoMain": "../images/列车/JR東日本/JR東日本_E233系_0番代.png",
   "Ome": "../images/列车/JR東日本/JR東日本_E233系_0番代_青梅線.png",
   "Itsukaichi": "../images/列车/JR東日本/JR東日本_E233系_0番代_青梅線.png",
   "Saikyo": "../images/列车/JR東日本/JR東日本_E233系_7000番代.png",
-  "Kawagoe": "../images/列车/JR東日本/JR東日本_209系_3500番代.png",
-  "KawagoeWest": "../images/列车/JR東日本/JR東日本_209系_3500番代.png",
+  "Kawagoe": "../images/列车/JR東日本/JR東日本_209系_3500番台.png",
+  "KawagoeWest": "../images/列车/JR東日本/JR東日本_209系_3500番台.png",
   "ShonanShinjuku": "../images/列车/JR東日本/JR東日本_E233系3000番台.png",
-  "Yokosuka": "../images/列车/JR東日本/JR東日本_E235系_1000番代.png",
-  "SobuRapid": "../images/列车/JR東日本/JR東日本_E235系_1000番代.png",
-  "SobuMain": "../images/列车/JR東日本/JR東日本_E235系_1000番代.png",
-  "Joban": "../images/列车/JR東日本/JR東日本_E231系_0番代_常磐快速線.png",
+  "Yokosuka": "../images/列车/JR東日本/JR東日本_E235系_1000番台.png",
+  "SobuRapid": "../images/列车/JR東日本/JR東日本_E235系_1000番台.png",
+  "SobuMain": "../images/列车/JR東日本/JR東日本_E235系_1000番台.png",
+  "Joban": "../images/列车/JR東日本/JR東日本_E231系_0番台_常磐快速線.png",
   "JobanMain": "../images/列车/JR東日本/JR東日本_E531系.png",
   "JobanLocal": "../images/列车/JR東日本/JR東日本_E233系_2000番代.png",
-  "JobanRapid": "../images/列车/JR東日本/JR東日本_E231系_0番代_常磐快速線.png",
+  "JobanRapid": "../images/列车/JR東日本/JR東日本_E231系_0番台_常磐快速線.png",
   "Mito": "../images/列车/JR東日本/JR東日本_E531系.png",
   "Nikkoku": "../images/列车/JR東日本/JR東日本_E131系_600番代.png",
   "Gono": "../images/列车/JR東日本/JR東日本_HB-E220系.png",
   "Yokohama": "../images/列车/JR東日本/JR東日本_E233系_6000番代.png",
   "Tokaido": "../images/列车/JR東日本/JR東日本_E233系3000番台.png",
   "Takasaki": "../images/列车/JR東日本/JR東日本_E233系3000番台.png",
-  "Musashino": "../images/列车/JR東日本/JR東日本_E231系_0番代.png",
+  "Musashino": "../images/列车/JR東日本/JR東日本_E231系_0番台.png",
   "Uetsu": "../images/列车/JR東日本/JR東日本_701系_100番代.png",
   "Ryomo": "../images/列车/JR東日本/JR東日本_211系_湘南色.png",
   "Agatsuma": "../images/列车/JR東日本/JR東日本_211系_湘南色.png",
@@ -213,7 +213,7 @@
   "NambuBranch": "../images/列车/JR東日本/JR東日本_E131系_0番代.png",
   "Narita": "../images/列车/JR東日本/JR東日本_E131系_0番代.png",
   "NaritaAbikoBranch": "../images/列车/JR東日本/JR東日本_E131系_0番代.png",
-  "NaritaAirportBranch": "../images/列车/JR東日本/JR東日本_E235系_1000番代.png",
+  "NaritaAirportBranch": "../images/列车/JR東日本/JR東日本_E235系_1000番台.png",
   "Ofunato": "../images/列车/JR東日本/JR東日本_キハ110系.png",
   "Oito": "../images/列车/JR東日本/JR東日本_E127系_0番代_新潟色.png",
   "OuMain": "../images/列车/JR東日本/JR東日本_キハ110系.png",
@@ -334,7 +334,7 @@
   "Tsugaru": "../images/列车/JR東日本/JR東日本_キハ110系.png",
   "Yonezawa": "../images/列车/JR東日本/JR東日本_キハ110系.png",
   "Hachinohe": "../images/列车/JR東日本/JR東日本_キハE130系500番台.png",
-  "Ito": "../images/列车/JR東日本/JR東日本_E231系_1000番代.png",
+  "Ito": "../images/列车/JR東日本/JR東日本_E231系_1000番台.png",
   "Kashima": "../images/列车/JR東日本/JR東日本_E131系_0番代.png",
   "SensekiTohoku": "../images/列车/JR東日本/JR東日本_HB-E210系.png",
   "TohokuShinkansen": "../images/列车/JR東日本/JR東日本_E5系.png",
@@ -381,7 +381,7 @@
       icon: '../images/列车/JR東日本/JR東日本_E257系_500番代.png' },
     { lines: ['ShonanShinjuku'], op: null,
       trainType: 'limitedexpress', regex: /^1[0-9]/,
-      icon: '../images/列车/JR東日本/JR東日本_253系_1000番代.png' },
+      icon: '../images/列车/JR東日本/JR東日本_253系_1000番台.png' },
     // v4.3.525: 东海道线特急（踊り子/湘南）
     { lines: ['Tokaido','ShonanShinjuku'], op: null,
       trainType: 'limitedexpress', regex: /^30[0-3]/,
@@ -396,7 +396,7 @@
   var LINE_ICON_OVERRIDES = [
     // ChuoLocal/ChuoSobuLocal: current regular stock is E231系500番台 / E231系0番台.
     { lines: ['ChuoLocal','ChuoSobuLocal'], op: null, fn: function(trainId) {
-      return '../images/列车/JR東日本/JR東日本_E231系_0番代_中央・総武線各駅停車.png';
+      return '../images/列车/JR東日本/JR東日本_E231系_0番台_中央・総武線各駅停車.png';
     }},
     // Rinkai: JR直通 → E233系7000番台
     { lines: ['Rinkai'], op: 'JR-East', fn: function() {
@@ -490,20 +490,20 @@
 
   // v4.3.940: 车型名 → 图标路径 反查表（从现有所有图标路径自动反推，零维护）
   var VEHICLE_NAME_TO_ICON = {
-  "E235系山手線": "../images/列车/JR東日本/JR東日本_E235系_0番代.png",
+  "E235系山手線": "../images/列车/JR東日本/JR東日本_E235系_0番台.png",
   "E233系1000番台": "../images/列车/JR東日本/JR東日本_E233系_1000番代.png",
   "E235系総武中央線": "../images/列车/JR東日本/JR東日本_E235系_0番代_B31編成_中央・総武線.png",
   "E233系0番台": "../images/列车/JR東日本/JR東日本_E233系_0番代.png",
   "E233系青梅線": "../images/列车/JR東日本/JR東日本_E233系_0番代_青梅線.png",
   "E233系7000番台": "../images/列车/JR東日本/JR東日本_E233系_7000番代.png",
-  "209系3500番台（八高・川越線）": "../images/列车/JR東日本/JR東日本_209系_3500番代.png",
+  "209系3500番台（八高・川越線）": "../images/列车/JR東日本/JR東日本_209系_3500番台.png",
   "E233系3000番台": "../images/列车/JR東日本/JR東日本_E233系3000番台.png",
-  "E235系1000番台": "../images/列车/JR東日本/JR東日本_E235系_1000番代.png",
-  "E231系常磐LED": "../images/列车/JR東日本/JR東日本_E231系_0番代_常磐快速線.png",
+  "E235系1000番台": "../images/列车/JR東日本/JR東日本_E235系_1000番台.png",
+  "E231系常磐LED": "../images/列车/JR東日本/JR東日本_E231系_0番台_常磐快速線.png",
   "E531系": "../images/列车/JR東日本/JR東日本_E531系.png",
   "JR E531系": "../images/列车/JR東日本/JR東日本_E531系.png",
   "E233系2000番台": "../images/列车/JR東日本/JR東日本_E233系_2000番代.png",
-  "E231系0番台": "../images/列车/JR東日本/JR東日本_E231系_0番代.png",
+  "E231系0番台": "../images/列车/JR東日本/JR東日本_E231系_0番台.png",
   "E131系600番台": "../images/列车/JR東日本/JR東日本_E131系_600番代.png",
   "HB-E220系": "../images/列车/JR東日本/JR東日本_HB-E220系.png",
   "E233系6000番台": "../images/列车/JR東日本/JR東日本_E233系_6000番代.png",
@@ -567,7 +567,7 @@
   "GV-E400系": "../images/列车/JR東日本/JR東日本_GV-E400系.png",
   "330形": "../images/列车/都営地下鉄/都営地下鉄_330形.png",
   "キハE130系500番台": "../images/列车/JR東日本/JR東日本_キハE130系500番台.png",
-  "E231系1000番台": "../images/列车/JR東日本/JR東日本_E231系_1000番代.png",
+  "E231系1000番台": "../images/列车/JR東日本/JR東日本_E231系_1000番台.png",
   "HB-E210系": "../images/列车/JR東日本/JR東日本_HB-E210系.png",
   "E5系": "../images/列车/JR東日本/JR東日本_E5系.png",
   "E7系": "../images/列车/JR東日本/JR東日本_E7系.png",
@@ -585,7 +585,7 @@
   "E653系": "../images/列车/JR東日本/JR東日本_E653系.png",
   "E257系5500番台": "../images/列车/JR東日本/JR東日本_E257系_5500番代.png",
   "E653系1000番台": "../images/列车/JR東日本/JR東日本_E653系_1000番代.png",
-  "253系": "../images/列车/JR東日本/JR東日本_253系_1000番代.png",
+  "253系": "../images/列车/JR東日本/JR東日本_253系_1000番台.png",
   "100系（スペーシア）": "../images/列车/東武鉄道/東武鉄道_東武100系（スペーシア）.png",
   "250系": "../images/列车/東武鉄道/東武鉄道_250系.png",
   "AE形": "../images/列车/京成電鉄/京成電鉄_AE形.png",
@@ -646,7 +646,7 @@
   "京浜急行電鉄1500形": "../images/列车/京浜急行電鉄/京浜急行電鉄_1500形.png",
   "AE100形": "../images/列车/京成電鉄/京成電鉄_AE形.png",
   "京成電鉄AE100形": "../images/列车/京成電鉄/京成電鉄_AE形.png",
-  "JR東日本E231系1000番台": "../images/列车/JR東日本/JR東日本_E231系_1000番代.png",
+  "JR東日本E231系1000番台": "../images/列车/JR東日本/JR東日本_E231系_1000番台.png",
   "JR東日本E233系1000番台": "../images/列车/JR東日本/JR東日本_E233系_1000番代.png",
   "JR東日本E233系3000番台": "../images/列车/JR東日本/JR東日本_E233系3000番台.png",
   "383系": "../images/列车/JR東海/JR東海_383系.png",
@@ -754,7 +754,7 @@
   "12系客車（ばんえつ物語）": "../images/列车/JR東日本/JR東日本_12系客車_SLばんえつ物語_展望車.png",
   "211系（甲信越）": "../images/列车/JR東日本/JR東日本_211系_長野色.png",
   "211系（首都圏）": "../images/列车/JR東日本/JR東日本_211系_湘南色.png",
-  "253系（日光・きぬがわ）": "../images/列车/JR東日本/JR東日本_253系_1000番代.png",
+  "253系（日光・きぬがわ）": "../images/列车/JR東日本/JR東日本_253系_1000番台.png",
   "701系（仙台）": "../images/列车/JR東日本/JR東日本_701系_仙台地区.png",
   "701系（奥羽・羽越）": "../images/列车/JR東日本/JR東日本_701系_5000番代.png",
   "C57形（ばんえつ物語）": "../images/列车/JR東日本/JR東日本_C57形_180号機_SLばんえつ物語.png",
@@ -762,9 +762,9 @@
   "E127系（南武支線）": "../images/列车/JR東日本/JR東日本_E127系_0番代_南武支線.png",
   "E131系（長野）": "../images/列车/JR東日本/JR東日本_E131系_長野地区.png",
   "E209系（京葉線）": "../images/列车/JR東日本/JR東日本_209系_500番代_京葉線.png",
-  "E209系（房総）": "../images/列车/JR東日本/JR東日本_209系_2000・2100番代_房総地区.png",
-  "E231系800番台（東西線直通）": "../images/列车/JR東日本/JR東日本_E231系_800番代.png",
-  "E231系総武中央線": "../images/列车/JR東日本/JR東日本_E231系_0番代_中央・総武線各駅停車.png",
+  "E209系（房総）": "../images/列车/JR東日本/JR東日本_209系_2000・2100番台_房総地区.png",
+  "E231系800番台（東西線直通）": "../images/列车/JR東日本/JR東日本_E231系_800番台.png",
+  "E231系総武中央線": "../images/列车/JR東日本/JR東日本_E231系_0番台_中央・総武線各駅停車.png",
   "E261系（サフィール踊り子）": "../images/列车/JR東日本/JR東日本_E261系_サフィール踊り子.png",
   "E353系（あずさ・かいじ）": "../images/列车/JR東日本/JR東日本_E353系.png",
   "E501系（さきがけ・別）": "../images/列车/JR東日本/JR東日本_E501系_E501_SAKIGAKE.png",
@@ -919,7 +919,7 @@
   "mn-tma1000": "../images/列车/多摩都市モノレール/多摩都市モノレール_1000系_標準塗装.png",
   "mn-tky10000": "../images/列车/東京モノレール/東京モノレール_10000形.png",
   "toky330": "../images/列车/都営地下鉄/都営地下鉄_330形.png",
-  "E209系": "../images/列车/JR東日本/JR東日本_209系_3500番代.png",
+  "E209系": "../images/列车/JR東日本/JR東日本_209系_3500番台.png",
   "東京モノレール1000形": "../images/列车/東京モノレール/東京モノレール_1000形_新塗装.png",
   "東武10080系": "../images/列车/東武鉄道/東武鉄道_10000型_更新車.png",
   "東武10080型": "../images/列车/東武鉄道/東武鉄道_10000型_更新車.png",
@@ -980,7 +980,7 @@
     "小田急電鉄1000形": "../images/列车/小田急電鉄/小田急電鉄_1000形_標準色.png",
     "京浜急行電鉄1500形": "../images/列车/京浜急行電鉄/京浜急行電鉄_1500形.png",
     "京成電鉄AE100形": "../images/列车/京成電鉄/京成電鉄_AE形.png",
-    "JR東日本E231系1000番台": "../images/列车/JR東日本/JR東日本_E231系_1000番代.png",
+    "JR東日本E231系1000番台": "../images/列车/JR東日本/JR東日本_E231系_1000番台.png",
     "JR東日本E233系1000番台": "../images/列车/JR東日本/JR東日本_E233系_1000番代.png",
     "JR東日本E233系3000番台": "../images/列车/JR東日本/JR東日本_E233系3000番台.png",
     "JR東海383系": "../images/列车/JR東海/JR東海_383系.png",
@@ -1064,7 +1064,7 @@
     "12系客車（ばんえつ物語）": "../images/列车/JR東日本/JR東日本_12系客車_SLばんえつ物語_展望車.png",
     "211系（甲信越）": "../images/列车/JR東日本/JR東日本_211系_長野色.png",
     "211系（首都圏）": "../images/列车/JR東日本/JR東日本_211系_湘南色.png",
-    "253系（日光・きぬがわ）": "../images/列车/JR東日本/JR東日本_253系_1000番代.png",
+    "253系（日光・きぬがわ）": "../images/列车/JR東日本/JR東日本_253系_1000番台.png",
     "701系（仙台）": "../images/列车/JR東日本/JR東日本_701系_仙台地区.png",
     "701系（奥羽・羽越）": "../images/列车/JR東日本/JR東日本_701系_5000番代.png",
     "C57形（ばんえつ物語）": "../images/列车/JR東日本/JR東日本_C57形_180号機_SLばんえつ物語.png",
@@ -1072,9 +1072,9 @@
     "E127系（南武支線）": "../images/列车/JR東日本/JR東日本_E127系_0番代_南武支線.png",
     "E131系（長野）": "../images/列车/JR東日本/JR東日本_E131系_長野地区.png",
     "E209系（京葉線）": "../images/列车/JR東日本/JR東日本_209系_500番代_京葉線.png",
-    "E209系（房総）": "../images/列车/JR東日本/JR東日本_209系_2000・2100番代_房総地区.png",
-    "E231系800番台（東西線直通）": "../images/列车/JR東日本/JR東日本_E231系_800番代.png",
-    "E231系総武中央線": "../images/列车/JR東日本/JR東日本_E231系_0番代_中央・総武線各駅停車.png",
+    "E209系（房総）": "../images/列车/JR東日本/JR東日本_209系_2000・2100番台_房総地区.png",
+    "E231系800番台（東西線直通）": "../images/列车/JR東日本/JR東日本_E231系_800番台.png",
+    "E231系総武中央線": "../images/列车/JR東日本/JR東日本_E231系_0番台_中央・総武線各駅停車.png",
     "E257系2000番台": "../images/列车/JR東日本/JR東日本_E257系_2000番代.png",
     "E257系2500番台": "../images/列车/JR東日本/JR東日本_E257系_2500番代.png",
     "E261系（サフィール踊り子）": "../images/列车/JR東日本/JR東日本_E261系_サフィール踊り子.png",
@@ -1384,7 +1384,7 @@
     "東急5050系4000番台": "../images/列车/東急電鉄/東急電鉄_5050系.png",
     "京王電鉄5000系": "../images/列车/京王電鉄/京王電鉄_5000系.png",
     "東葉高速2000系": "../images/列车/東葉高速鉄道/東葉高速鉄道_2000系.png",
-    "E235系0番台（山手線）": "../images/列车/JR東日本/JR東日本_E235系_0番代.png"
+    "E235系0番台（山手線）": "../images/列车/JR東日本/JR東日本_E235系_0番台.png"
   });
 
   // v4.3.940: 给车型候选字符串（"A / B / C"），返回第一个有图标的完整路径；都没图返回 null
@@ -1403,7 +1403,7 @@ var VEHICLE_FLEET_WEIGHTS = {
 };
 // v4.3.1025: FLEET_ICON_POOLS 编成/涂装池——同车型多涂装/多编成图，按候选串稳定取图（跨线不变）
 var FLEET_ICON_POOLS = {
-  "E209系": ["../images/列车/JR東日本/JR東日本_209系_3500番代.png"], // v4.3.1046: E209系 不同番代涂装不同（八高・川越3500/房総2000・2100/京葉500），不得混合轮换——池仅固定 3500番代，其余番代走 canonical 专用图
+  "E209系": ["../images/列车/JR東日本/JR東日本_209系_3500番台.png"], // v4.3.1046: E209系 不同番代涂装不同（八高・川越3500/房総2000・2100/京葉500），不得混合轮换——池仅固定 3500番代，其余番代走 canonical 专用图
   "383系": ["../images/列车/JR東海/JR東海_383系.png", "../images/列车/JR東海/JR東海_383系.png", "../images/列车/JR東海/JR東海_383系.png"],
   "埼玉新都市交通2000系": ["../images/列车/埼玉新都市交通/埼玉新都市交通_2000系_01編成_レッドパープル.png", "../images/列车/埼玉新都市交通/埼玉新都市交通_2000系_02編成_オレンジ.png", "../images/列车/埼玉新都市交通/埼玉新都市交通_2000系_03編成_グリーン.png", "../images/列车/埼玉新都市交通/埼玉新都市交通_2000系_04編成_イエロー.png", "../images/列车/埼玉新都市交通/埼玉新都市交通_2000系_05編成_ブルー.png", "../images/列车/埼玉新都市交通/埼玉新都市交通_2000系_06編成_レッド.png", "../images/列车/埼玉新都市交通/埼玉新都市交通_2000系_07編成_さくら色.png"],
   "埼玉新都市交通2020系": ["../images/列车/埼玉新都市交通/埼玉新都市交通_2020系_26編成_ブルーサファイア＆クリソベリル.png", "../images/列车/埼玉新都市交通/埼玉新都市交通_2020系_25編成_トワイライトアメジスト.png", "../images/列车/埼玉新都市交通/埼玉新都市交通_2020系_24編成_ゴールデントパーズ.png", "../images/列车/埼玉新都市交通/埼玉新都市交通_2020系_23編成_ピュアルビー.png", "../images/列车/埼玉新都市交通/埼玉新都市交通_2020系_22編成_ブライトアンバー.png", "../images/列车/埼玉新都市交通/埼玉新都市交通_2020系_21編成_グリーンクリスタル.png"],
@@ -1514,13 +1514,13 @@ var CANONICAL_VEHICLES = {
   "jr-east-e235-0-yamanote": {
     displayName: "E235系0番台（山手線）",
     iconName: "E235系山手線",
-    asset: "../images/列车/JR東日本/JR東日本_E235系_0番代.png",
+    asset: "../images/列车/JR東日本/JR東日本_E235系_0番台.png",
     aliases: ["E235系0番台（山手線）", "E235系山手線"]
   },
   "jr-east-e231-800-tozai-through": {
     displayName: "E231系800番台（東西線直通）",
     iconName: "E231系800番台（東西線直通）",
-    asset: "../images/列车/JR東日本/JR東日本_E231系_800番代.png",
+    asset: "../images/列车/JR東日本/JR東日本_E231系_800番台.png",
     aliases: ["E231系800番台（東西線直通）", "JR E231系"]
   },
   "toyo-rapid-2000-tozai-through": {
@@ -1544,13 +1544,13 @@ var CANONICAL_VEHICLES = {
   "jr-east-e231-0-joban-rapid": {
     displayName: "E231系0番台",
     iconName: "E231系0番台",
-    asset: "../images/列车/JR東日本/JR東日本_E231系_0番代.png",
+    asset: "../images/列车/JR東日本/JR東日本_E231系_0番台.png",
     aliases: ["E231系0番台"]
   },
   "jr-east-e231-0-joban-rapid-led": {
     displayName: "E231系0番台（常磐快速線・LED）",
     iconName: "E231系0番台（常磐快速線・LED）",
-    asset: "../images/列车/JR東日本/JR東日本_E231系_0番代_常磐快速線.png",
+    asset: "../images/列车/JR東日本/JR東日本_E231系_0番台_常磐快速線.png",
     aliases: ["E231系0番台（常磐快速線・LED）"]
   },
   "jr-east-e233-7000-saikyo": {
@@ -1574,25 +1574,25 @@ var CANONICAL_VEHICLES = {
   "jr-east-209-3500-hachiko-kawagoe": {
     displayName: "209系3500番台",
     iconName: "209系3500番台（八高・川越線）",
-    asset: "../images/列车/JR東日本/JR東日本_209系_3500番代.png",
+    asset: "../images/列车/JR東日本/JR東日本_209系_3500番台.png",
     aliases: ["209系3500番台", "209系3500番台（八高・川越線）"]
   },
   "jr-east-209-3000-hachiko-kawagoe": {
     displayName: "209系3000番台",
     iconName: "209系3000番台（八高・川越線）",
-    asset: "../images/列车/JR東日本/JR東日本_209系_3500番代.png",
+    asset: "../images/列车/JR東日本/JR東日本_209系_3500番台.png",
     aliases: ["209系3000番台", "209系3000番台（八高・川越線）"]
   },
   "jr-east-209-3100-kawagoe": {
     displayName: "209系3100番台",
     iconName: "209系3100番台（川越線）",
-    asset: "../images/列车/JR東日本/JR東日本_209系_3500番代.png",
+    asset: "../images/列车/JR東日本/JR東日本_209系_3500番台.png",
     aliases: ["209系3100番台", "209系3100番台（川越線）"]
   },
   "jr-east-209-2000-2100-boso-keiyo": {
     displayName: "209系2000番台 / 2100番台",
     iconName: "209系2000番台 / 2100番台",
-    asset: "../images/列车/JR東日本/JR東日本_209系_2000・2100番代_房総地区.png",
+    asset: "../images/列车/JR東日本/JR東日本_209系_2000・2100番台_房総地区.png",
     aliases: ["209系2000番台", "209系2100番台", "2100番台"]
   },
   "jr-east-e233-5000-keiyo": {
@@ -1604,19 +1604,19 @@ var CANONICAL_VEHICLES = {
   "jr-east-e231-900-musashino": {
     displayName: "E231系900番台",
     iconName: "E231系900番台",
-    asset: "../images/列车/JR東日本/JR東日本_E231系_0番代.png",
+    asset: "../images/列车/JR東日本/JR東日本_E231系_0番台.png",
     aliases: ["E231系900番台"]
   },
   "jr-east-e231-0-musashino": {
     displayName: "E231系0番台",
     iconName: "E231系0番台",
-    asset: "../images/列车/JR東日本/JR東日本_E231系_0番代.png",
+    asset: "../images/列车/JR東日本/JR東日本_E231系_0番台.png",
     aliases: ["E231系0番台"]
   },
   "jr-east-e231-1000-shonan-shinjuku": {
     displayName: "E231系1000番台",
     iconName: "E231系1000番台",
-    asset: "../images/列车/JR東日本/JR東日本_E231系_1000番代.png",
+    asset: "../images/列车/JR東日本/JR東日本_E231系_1000番台.png",
     aliases: ["E231系1000番台"]
   },
   "jr-east-e233-3000-shonan-shinjuku": {
@@ -1640,7 +1640,7 @@ var CANONICAL_VEHICLES = {
   "jr-east-253-1000-nikko-kinugawa": {
     displayName: "253系（日光・きぬがわ）",
     iconName: "253系（日光・きぬがわ）",
-    asset: "../images/列车/JR東日本/JR東日本_253系_1000番代.png",
+    asset: "../images/列车/JR東日本/JR東日本_253系_1000番台.png",
     aliases: ["253系（日光・きぬがわ）", "E253系（日光・きぬがわ）", "JR東日本E253系"]
   }
 };
