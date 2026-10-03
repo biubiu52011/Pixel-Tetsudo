@@ -153,6 +153,24 @@
     var lateral = lane * laneGap + stackOffset;
     var px = base.point.x + normal.x * lateral;
     var py = base.point.y + normal.y * lateral;
+
+    // Keep train icons readable at stations, especially large interchange /
+    // branch-junction nodes. When a train is exactly at a station (progress=0),
+    // move it slightly along the track tangent instead of stacking it directly
+    // on top of the station dot. This preserves the station reference point
+    // while making the train the primary moving visual.
+    var stationPt = base.points && base.points[base.idx];
+    var atStation = position && (position.segmentProgress == null || Number(position.segmentProgress) <= 0.001);
+    if (atStation && stationPt) {
+      var stationOffset = opts.stationOffset || DEFAULTS.iconH;
+      var stationRadius = (stationPt && stationPt.isJunction) ? 12 : 7;
+      var clearDist = Math.max(stationOffset, stationRadius + (DEFAULTS.iconH / 2) + 2);
+      var dirSign = moveDir === "up" ? -1 : 1;
+      if (lane === 0 && !moveDir) dirSign = (slot.ordinal % 2 === 0) ? 1 : -1;
+      px += base.tangent.x * clearDist * dirSign;
+      py += base.tangent.y * clearDist * dirSign;
+    }
+
     return {
       x: px,
       y: py,
