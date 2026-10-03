@@ -265,10 +265,10 @@
     },
     // 東急支線：大井町線とは車両運用が独立。路線レベル情報だけでは編成を決め打ちしない。
     'TokyuTamagawa': {
-      'Local': { 'default': '東急電鉄1000系 / 東急電鉄7000系' },
+      'Local': { 'default': '東急1000系 / 東急7000系' },
     },
     'TokyuIkegami': {
-      'Local': { 'default': '東急電鉄1000系 / 東急電鉄7000系' },
+      'Local': { 'default': '東急1000系 / 東急7000系' },
     },
     'TokyuKodomonokuni': {
       'Local': { 'default': '横浜高速鉄道Y000系' },
@@ -848,7 +848,7 @@
         'TokyoMetro': '小田急4000形(10両) / 東京メトロ16000系(10両)',
       },
       'LimitedExpress': {
-        'default': '小田急電鉄30000形EXEα / 小田急電鉄60000形MSE / 小田急電鉄70000形GSE',
+        'default': '小田急30000形EXEα / 小田急60000形MSE / 小田急70000形GSE',
         'TokyoMetro': '小田急60000系(MSE)',
       },
     },
