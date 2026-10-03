@@ -13,9 +13,13 @@ var rows={"2026-04-18":{
 "14K":["東急2020系(10両)","202046F"],"15K":["東急2020系(10両)","202025F"],
 "17K":["東急5000系(10両)","500012F"],"19K":["東急5000系(10両)","500005F"],
 "21K":["東急2020系(10両)","202042F"],"22K":["東急5000系(10両)","500014F"],
-"25K":["東急5000系(10両)","500020F"],"26K":["東急5000系(10両)","500002F"]
+"25K":["東急5000系(10両)","500020F"],"26K":["東急5000系(10両)","500002F"],
+"50T":["東武50050系(10両)","5005065F"],"52T":["東武50050系(10両)","5005052F"],
+"58T":["東武50050系(10両)","5005057F"],"60T":["東武50050系(10両)","5005066F"],
+"62T":["東武50050系(10両)","5005062F"],"66T":["東武50000系(10両)","5000009F"],
+"68T":["東武50050系(10両)","5005055F"],"74T":["東武50050系(10両)","5005059F"]
 }};
-function code(n){var m=String(n||"").toUpperCase().match(/(?:^|[^0-9])([0-4][0-9]K)(?:[^0-9A-Z]|$)/);return m?m[1]:"";}
+function code(n){var m=String(n||"").toUpperCase().match(/(?:^|[^0-9])((?:[0-4][0-9]K|(?:5[0-9]|6[0-9]|7[0-9]|8[0-2])T))(?:[^0-9A-Z]|$)/);return m?m[1]:"";}
 function network(ctx){return /DenEn|Denentoshi|Hanzomon|Tobu|田園都市|半蔵門/i.test([ctx.lineId,ctx.railway,ctx.destinationStation].join("|"));}
 function resolveEvidence(trainNumber,ctx){ctx=ctx||{};if(!network(ctx))return null;
  var d=String(ctx.serviceDate||"").slice(0,10),r=rows[d]&&rows[d][code(trainNumber)];if(!r)return null;
