@@ -62,6 +62,14 @@ assert(estimatorSource.includes("Object.keys(_assignmentVehicles).length === 1")
   'operation model evidence must require unanimous decisive providers');
 assert(estimatorSource.includes("operation-assignment-provider"),
   'agreed run-level operation evidence must be promotable to exact model');
+assert(estimatorSource.includes("vehicleEvidenceSource: tt._vehicleEvidenceSource || ''"),
+  'dated operation vehicle provenance must reach TrainVehicle');
+
+const trainVehicleSource = fs.readFileSync('js/train-vehicle.js','utf8');
+assert(trainVehicleSource.includes("dated-operation-vehicle-evidence"),
+  'operation-derived exact vehicle must retain dated-operation identity reason');
+assert(trainVehicleSource.includes("_manualEvidenceSource === 'operation-assignment-provider'"),
+  'dated operation identity reason must depend on explicit provenance, not vehicle name');
 
 
 assert(estimatorSource.includes("operation-assignment-provider"),
