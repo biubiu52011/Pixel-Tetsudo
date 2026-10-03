@@ -970,3 +970,18 @@ assert(/'Local': \{ 'default': '[^']*伊豆急行8000系[^']*伊豆急行2100系
   'Ito local pool must retain Izukyu ordinary/resort stock');
 assert(!/'LimitedExpress': \{ 'default': '[^']*伊豆急行8000系/.test(itoBlock),
   'Ito limited express pool must not use Izukyu 8000 as Odoriko');
+
+// Batch guard: Keisei canonical identity and 6/8-car boundary.
+for (const line of ['Keisei','KeiseiOshiage','NaritaSkyAccess']) {
+  const block = vehicleMapSource.match(new RegExp("'" + line + "': \\{[\\s\\S]*?\\n    \\},"))?.[0] || '';
+  assert(!/(^|[ /'])3000形|(^|[ /'])3700形|(^|[ /'])AE形/.test(block),
+    line + ' must not regress to bare Keisei vehicle identities');
+}
+const nsaBlock = vehicleMapSource.match(/'NaritaSkyAccess': \{[\s\S]*?\n    \}/)?.[0] || '';
+assert(!/京成3000形(?!\(8両\))/.test(nsaBlock),
+  'Narita Sky Access 3000 stock must retain explicit 8-car identity');
+assert(nsaBlock.includes('京成3100形(8両)'),
+  'Narita Sky Access must retain current 3100 eight-car identity');
+const keiseiBlock = vehicleMapSource.match(/'Keisei': \{[\s\S]*?\n    \},\n\n    \/\/ 京成押上線/)?.[0] || '';
+assert(keiseiBlock.includes('京成3000形(6両/8両)'),
+  'Keisei domestic pool must preserve both 3000 six/eight-car formations');
