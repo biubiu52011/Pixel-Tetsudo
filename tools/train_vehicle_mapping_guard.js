@@ -1065,8 +1065,8 @@ for (const forbidden of [
   assert(!vehicleMapSource.includes(forbidden),
     'batch normalized private fleet identity regressed: ' + forbidden);
 }
-assert(vehicleMapSource.includes('東急電鉄1000系 / 東急電鉄7000系'),
-  'Tokyu Tamagawa/Ikegami fleet names must remain operator-qualified');
+assert(vehicleMapSource.includes('東急1000系 / 東急7000系'),
+  'Tokyu Tamagawa/Ikegami fleet names must remain canonical and operator-qualified');
 assert(vehicleMapSource.includes('東急6020系（5両） / 東急9000系 / 東急9020系'),
   'Tokyu Oimachi local fleet identities must remain operator-qualified');
 assert(vehicleMapSource.includes('東急6020系（7両） / 東急6000系'),
@@ -1118,8 +1118,8 @@ for (const forbidden of [
 
 // Batch guard: residual cross-operator fleet identities must remain self-identifying.
 for (const required of [
-  '小田急電鉄60000形MSE',
-  '小田急電鉄70000形GSE',
+  '小田急60000形MSE',
+  '小田急70000形GSE',
   'JR E231系800番台（東西線直通）',
   'JR 253系1000番台（日光・きぬがわ）',
   'JR 285系（サンライズ出雲）',
@@ -1136,3 +1136,12 @@ for (const required of [
   assert(vehicleMapSource.includes(required),
     'residual fleet identity lost operator qualification: ' + required);
 }
+
+
+// Canonical operator-prefix guard: do not reintroduce alternate long-form prefixes.
+for (const forbidden of ['小田急電鉄30000形', '小田急電鉄60000形', '小田急電鉄70000形', '東急電鉄1000系', '東急電鉄7000系']) {
+  assert(!vehicleMapSource.includes(forbidden),
+    'alternate operator prefix regressed into vehicle identity: ' + forbidden);
+}
+assert(vehicleMapSource.includes('小田急30000形EXEα / 小田急60000形MSE / 小田急70000形GSE'),
+  'Odakyu Romancecar identities must use canonical operator prefix');
