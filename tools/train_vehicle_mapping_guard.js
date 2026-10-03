@@ -1009,3 +1009,24 @@ assert(!/相鉄20000系 \/ 21000系|相鉄20000系 \/ 21000系 \/ 12000系/.test
   'Sotetsu pool must not regress to bare numeric fleet identities');
 assert(sotetsuBlock.includes('相鉄20000系(10両)') && sotetsuBlock.includes('相鉄21000系(8両)'),
   'Sotetsu pool must preserve 20000 ten-car / 21000 eight-car boundary');
+
+
+// Batch guard: Sotetsu-Tokyu through network must preserve 8/10-car system boundaries.
+const sotetsuMainBlock2 = vehicleMapSource.match(/'SotetsuMain': \{[\s\S]*?\n    \},\n    'SotetsuIzumino'/)?.[0] || '';
+assert(!/\/ (?:12000系|9000系|10000系|11000系|21000系)(?:[ /']|$)/.test(sotetsuMainBlock2),
+  'Sotetsu main pool must not regress to bare numeric fleet identities');
+assert(sotetsuMainBlock2.includes('相鉄20000系(10両)') && sotetsuMainBlock2.includes('相鉄21000系(8両)'),
+  'Sotetsu main pool must preserve Toyoko 10-car / Meguro 8-car identities');
+const meguroBlock = vehicleMapSource.match(/'TokyuMeguro': \{[\s\S]*?\n    \},\n\n    \/\/ =+\n    \/\/ 東京メトロ/)?.[0] || '';
+assert(meguroBlock.includes('東急3000系(8両)') && meguroBlock.includes('東急5080系(8両)') && meguroBlock.includes('東急3020系(8両)'),
+  'Tokyu Meguro pool must preserve current Tokyu eight-car identities');
+assert(!meguroBlock.includes('相鉄20000系(10両)'),
+  'Tokyu Meguro pool must not mix Sotetsu 20000 Toyoko ten-car stock');
+const toyokoBlock2 = vehicleMapSource.match(/'TokyuToyoko': \{[\s\S]*?\n    \},\n    'TokyuDenEn'/)?.[0] || '';
+assert(toyokoBlock2.includes('相鉄20000系(10両)') && !toyokoBlock2.includes('相鉄21000系(8両)'),
+  'Tokyu Toyoko through pool must keep Sotetsu 20000 and exclude 21000');
+const mitaBlock = vehicleMapSource.match(/'Mita': \{[\s\S]*?\n    \},\n    'Shinjuku'/)?.[0] || '';
+assert(mitaBlock.includes('都営6500形(8両)') && mitaBlock.includes('相鉄21000系(8両)'),
+  'Mita-Sotetsu through pool must preserve eight-car identities');
+assert(!/東京メトロ17000系\(10両\)\(10両\)/.test(vehicleMapSource),
+  'vehicle map must not contain duplicated formation suffixes');
