@@ -42,12 +42,9 @@ function trainType(operator, service) {
   return `odpt.TrainType:${operator}.${service}`;
 }
 
+const FAILURES = [];
 function assert(condition, message, details) {
-  if (!condition) {
-    const err = new Error(message);
-    err.details = details;
-    throw err;
-  }
+  if (!condition) FAILURES.push({ message, details: details || null });
 }
 
 function expectMap(win, label, lineId, service, expected, forbidden = [], destUrn = '') {
@@ -1231,13 +1228,10 @@ assert(!vehicleMapSource.includes('常磐快速線・LED'),
   'equipment-state suffix must not be embedded in E231 vehicle identity');
 }
 
-try {
-  main();
-} catch (err) {
-  console.error(JSON.stringify({
-    status: 'FAIL',
-    message: err.message,
-    details: err.details || null
-  }, null, 2));
+main();
+if (FAILURES.length) {
+  console.error(JSON.stringify({ status: 'FAIL', failureCount: FAILURES.length, failures: FAILURES }, null, 2));
   process.exitCode = 1;
+} else {
+  console.log(JSON.stringify({ status: 'PASS', failureCount: 0 }));
 }
