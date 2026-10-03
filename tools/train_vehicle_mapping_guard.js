@@ -1205,6 +1205,15 @@ for (const forbidden of [
 }
 
 
+// Sotetsu internal service pools must not prematurely narrow without run-level evidence.
+for (const lineKey of ['SotetsuMain','SotetsuIzumino']) {
+  const cl = map[lineKey] && map[lineKey].CommuterLimitedExpress;
+  assert(cl && String(cl.default).includes('相鉄8000系(10両)') &&
+    String(cl.default).includes('相鉄10000系(8両)') &&
+    String(cl.default).includes('相鉄11000系(10両)'),
+    lineKey + ' commuter limited express must retain the full internal fleet candidate pool');
+}
+
 // Sotetsu 13000 internal-only guard.
 const sotetsuMainDump = JSON.stringify(map['SotetsuMain'] || {});
 const sotetsuIzuminoDump = JSON.stringify(map['SotetsuIzumino'] || {});
