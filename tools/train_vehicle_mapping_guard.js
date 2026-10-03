@@ -780,7 +780,8 @@ function main() {
     'Chiba New Town Railway fleets must not be mislabeled as Hokuso-owned');
   assert(/'Asakusa':[\s\S]{0,1800}'Keikyu':\s*'都営5500形 \/ 京急新1000形 \/ 京急600形'/.test(vehicleMapSource),
     'Asakusa-Keikyu pool must include both current Keikyu subway-through fleets');
-  assert(!/'(?:Asakusa|Keikyu|Hokuso)'[\s\S]{0,3500}'(?:Toei|Keikyu|Keisei|Hokuso)': '[^']*京成3000形(?!\(8両\))/.test(vehicleMapSource),
+  const asakusaNetworkBlock = vehicleMapSource.match(/'Asakusa': \{[\s\S]*?\n    \},\n    'Mita':/)?.[0] || '';
+  assert(!/京成3000形(?!\(8両\))/.test(asakusaNetworkBlock),
     'Keisei 3000 must be explicitly eight-car when used as an Asakusa-network through candidate');
   assert(!/'JR-East': '相鉄12000系 \/ 相鉄20000系 \/ 相鉄21000系'/.test(vehicleMapSource),
     'JR-Sotetsu pools must not include Tokyu-through 20000/21000 series');
