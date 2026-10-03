@@ -49,6 +49,7 @@ jobs:
           node tools/formation-evidence-providers.test.js
           node tools/hibiya-formation-evidence.test.js
           node tools/oimachi-formation-evidence.test.js
+          node tools/iketama-formation-evidence.test.js
           node tools/sotetsu-formation-evidence.test.js
           node tools/denentoshi-formation-evidence.test.js
 
