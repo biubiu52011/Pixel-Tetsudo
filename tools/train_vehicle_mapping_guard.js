@@ -1171,6 +1171,18 @@ assert(vehicleMapSource.includes('東急6020系(5両)') && vehicleMapSource.incl
   'Tokyu 6020 formation markers must remain canonical');
 
 
+// B0 contract guard: timetable fleet ambiguity must stay visible to callers.
+assert(trainVehicleSource.includes("identityStatus = 'UNKNOWN'"),
+  'TrainVehicle must expose UNKNOWN identity state');
+assert(trainVehicleSource.includes("identityStatus = 'NARROWED'"),
+  'TrainVehicle must expose NARROWED identity state');
+assert(trainVehicleSource.includes("identityStatus = 'EXACT'"),
+  'TrainVehicle must expose EXACT identity state');
+assert(trainVehicleSource.includes("'timetable-multiple-candidates'"),
+  'multi-vehicle timetable fallback must remain explicitly ambiguous');
+assert(trainVehicleSource.includes("allCandidates: orderArr"),
+  'raw vehicle evidence pool must remain available for diagnostics');
+
 // Vehicle identity suffix policy: service names/nicknames are not identity.
 // Parenthetical/suffix labels are reserved for livery/theme distinctions; formation counts remain allowed.
 
