@@ -1072,8 +1072,8 @@ assert(toyokoBlock3.includes('横浜高速鉄道Y500系(8両)'),
   'Toyoko-Minatomirai pool must preserve Y500 eight-car identity');
 assert(toyokoBlock3.includes('相鉄20000系(10両)') && !toyokoBlock3.includes('相鉄21000系(8両)'),
   'Toyoko-Sotetsu branch must remain the ten-car 20000 system');
-const tojoBlock = vehicleMapSource.match(/'Tojo': \{[\s\S]*?\n    \},\n\n    \/\/ =+\n    \/\/ 京王/)?.[0] || '';
-assert(!/東急5050系4000番台(?!\(10両\))/.test(tojoBlock),
+const tojoFormationBlock = vehicleMapSource.match(/'Tojo': \{[\s\S]*?\n    \},\n\n    \/\/ =+\n    \/\/ 京王/)?.[0] || '';
+assert(!/東急5050系4000番台(?!\(10両\))/.test(tojoFormationBlock),
   'Tobu Tojo through references must retain 5050-4000 ten-car identity');
 const yurakuchoBlock = vehicleMapSource.match(/'Yurakucho': \{[\s\S]*?\n    \},\n\n    \/\/ =+\n    \/\/ 都営/)?.[0] || '';
 assert(/'S-TRAIN': \{[\s\S]*?'default': '西武40000系\(10両\)'/.test(yurakuchoBlock),
