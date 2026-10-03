@@ -222,6 +222,7 @@ function assertCompanyQualifiedTrainAssets() {
 function main() {
   const win = loadRuntime();
   const trainVehicleSource = read('js/train-vehicle.js');
+  const map = win.VehicleTypeMap.MAP;
   assertCompanyQualifiedTrainAssets();
 
   // 東急支線は大井町線の車両を継承しない。
