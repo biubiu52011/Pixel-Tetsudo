@@ -557,7 +557,7 @@
           // v4.3.950: 车型判定统一入口 TrainVehicle（S0 manual 实证 / S2 车号累积 / S3 查表
           // 交叉验证；不猜——无有依据候选时 trainClass/vehicleType 为空，图标由渲染层兜底）
           if (window.TrainVehicle && typeof window.TrainVehicle.registerVehicle === 'function') {
-            window.TrainVehicle.registerVehicle(trainNumber, tt['vehicleType']); // S2 车号级实证
+            window.TrainVehicle.registerVehicle(trainNumber, tt['vehicleType'], line.operator); // S2: operator-scoped train-number evidence
           }
           var vehCtx = {
             lineId: lineId,
