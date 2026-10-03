@@ -1114,3 +1114,25 @@ for (const forbidden of [
   assert(!vehicleMapSource.includes(forbidden),
     'bare fleet identity regressed: ' + forbidden);
 }
+
+
+// Batch guard: residual cross-operator fleet identities must remain self-identifying.
+for (const required of [
+  '小田急電鉄60000形MSE',
+  '小田急電鉄70000形GSE',
+  'JR E231系800番台（東西線直通）',
+  'JR 253系1000番台（日光・きぬがわ）',
+  'JR 285系（サンライズ出雲）',
+  '京成3600形',
+  '京成3500形',
+  '京成3400形',
+  '京王電鉄7000系 / 京王電鉄8000系 / 京王電鉄9000系 / 京王電鉄5000系',
+  '横浜市交通局3000形 / 横浜市交通局4000形',
+  '横浜市交通局10000形',
+  '多摩都市モノレール1000系',
+  '首都圏新都市鉄道TX-1000系 / 首都圏新都市鉄道TX-2000系 / 首都圏新都市鉄道TX-3000系',
+  'JR東海383系（しなの）'
+]) {
+  assert(vehicleMapSource.includes(required),
+    'residual fleet identity lost operator qualification: ' + required);
+}
