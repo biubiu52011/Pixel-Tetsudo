@@ -1,5 +1,5 @@
 {
-  "version": "4.3.1071",
+  "version": "4.3.1072",
   "policy": "line-by-line vehicle identity normalization; through and non-through services share one evidence engine",
   "statusLegend": {
     "STRUCTURAL_EXACT": "single current vehicle family",
@@ -60,10 +60,9 @@
       "status": "DATED_FORMATION_REQUIRED",
       "candidates": [
         "東急1000系",
-        "東急1000系1500番台",
         "東急7000系"
       ],
-      "next": "current fleet normalized; await traceable dated operation/formation evidence"
+      "next": "dated formation evidence required; 1000系1500番台 is a formation/subseries distinction and must not change frozen canonical fleet map"
     },
     {
       "lineId": "TokyuTamagawa",
@@ -71,10 +70,9 @@
       "status": "DATED_FORMATION_REQUIRED",
       "candidates": [
         "東急1000系",
-        "東急1000系1500番台",
         "東急7000系"
       ],
-      "next": "current fleet normalized; await traceable dated operation/formation evidence"
+      "next": "dated formation evidence required; 1000系1500番台 is a formation/subseries distinction and must not change frozen canonical fleet map"
     },
     {
       "lineId": "TokyuOimachi",
