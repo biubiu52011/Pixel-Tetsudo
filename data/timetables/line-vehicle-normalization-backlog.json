@@ -1,5 +1,5 @@
 {
-  "version": "4.3.1072",
+  "version": "4.3.1074",
   "policy": "line-by-line vehicle identity normalization; through and non-through services share one evidence engine",
   "statusLegend": {
     "STRUCTURAL_EXACT": "single current vehicle family",
@@ -77,14 +77,17 @@
     {
       "lineId": "TokyuOimachi",
       "through": false,
-      "status": "OPERATION_REQUIRED",
+      "status": "ACTIVE_PROVIDER",
       "candidates": [
         "東急6020系",
         "東急9000系",
         "東急9020系",
         "東急6000系"
       ],
-      "next": "separate local/express operation evidence"
+      "next": "expand service-date snapshots; preserve Local 5-car and Express 7-car identity",
+      "providers": [
+        "tokyu-oimachi-dated-formations"
+      ]
     }
   ]
 }
