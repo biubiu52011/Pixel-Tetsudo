@@ -67,4 +67,8 @@ assert(estimatorSource.includes("operation-assignment-provider"),
 assert(estimatorSource.includes("operation-assignment-provider"),
   'Meguro/Sotetsu exact assignment must use the shared operation evidence promotion path');
 
+
+assert(estimatorSource.includes("vehicleFormationId: Object.keys(_assignmentFormations).length === 1"),
+  'formation identity must be exposed only when decisive providers agree on one formation');
+
 console.log("train-position-evidence-regression: PASS");
