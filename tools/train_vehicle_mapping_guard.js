@@ -273,10 +273,10 @@ function main() {
   expectMap(win, 'Tozai JR-East local P0', 'Tozai', 'Local', 'JR E231系800番台(10両) / 東京メトロ05系(10両) / 東京メトロ07系(10両) / 東京メトロ15000系(10両)', ['E231系500番台', 'JR E231系0番台', 'JR E231系1000番台'], 'odpt.Station:JR-East.ChuoSobuLocal.Nakano');
   expectMap(win, 'Tozai default rapid P0', 'Tozai', 'Rapid', '東京メトロ05系 / 東京メトロ07系 / 東京メトロ15000系 / E231系800番台（東西線直通） / 東葉高速2000系', ['JR E231系', '東葉高速1000系']);
   expectMap(win, 'Chiyoda local P0', 'Chiyoda', 'Local', '東京メトロ16000系 / 東京メトロ05系（北綾瀬） / E233系2000番台 / 小田急4000形', ['JR E233系']);
-  expectMap(win, 'Joban rapid P0', 'Joban', 'Rapid', 'E231系0番台（常磐快速線・LED）', ['E231系1000番台', 'E233系3000番台']);
-  expectMap(win, 'Joban rapid Toride keeps rapid EMU', 'Joban', 'Rapid', 'E231系0番台（常磐快速線・LED）', ['E531系'], 'odpt.Station:JR-East.Joban.Toride');
-  expectMap(win, 'Joban local Tsuchiura uses medium-distance EMU', 'Joban', 'Local', 'E531系', ['E231系0番台（常磐快速線・LED）'], 'odpt.Station:JR-East.Joban.Tsuchiura');
-  expectMap(win, 'Joban rapid Tsuchiura uses medium-distance EMU', 'Joban', 'Rapid', 'E531系', ['E231系0番台（常磐快速線・LED）'], 'odpt.Station:JR-East.Joban.Tsuchiura');
+  expectMap(win, 'Joban rapid P0', 'Joban', 'Rapid', 'E231系0番台（常磐快速線）', ['E231系1000番台', 'E233系3000番台']);
+  expectMap(win, 'Joban rapid Toride keeps rapid EMU', 'Joban', 'Rapid', 'E231系0番台（常磐快速線）', ['E531系'], 'odpt.Station:JR-East.Joban.Toride');
+  expectMap(win, 'Joban local Tsuchiura uses medium-distance EMU', 'Joban', 'Local', 'E531系', ['E231系0番台（常磐快速線）'], 'odpt.Station:JR-East.Joban.Tsuchiura');
+  expectMap(win, 'Joban rapid Tsuchiura uses medium-distance EMU', 'Joban', 'Rapid', 'E531系', ['E231系0番台（常磐快速線）'], 'odpt.Station:JR-East.Joban.Tsuchiura');
   expectMap(win, 'Joban special rapid P0', 'Joban', 'SpecialRapid', 'E531系', ['E231系1000番台', 'E233系3000番台']);
   expectMap(win, 'Joban local line pool', 'JobanLocal', 'Local', 'E233系2000番台 / 東京メトロ16000系 / 小田急4000形', ['E231系0番台', 'E231系1000番台', 'E233系3000番台']);
   expectMap(win, 'Joban local through destination keeps JR local first', 'JobanLocal', 'Local', 'E233系2000番台 / 東京メトロ16000系 / 小田急4000形', ['E231系0番台', 'E231系1000番台', 'E233系3000番台'], 'odpt.Station:TokyoMetro.Chiyoda.Ayase');
@@ -340,7 +340,7 @@ function main() {
     lineId: 'Joban',
     operator: 'JR-East',
     trainType: trainType('JR-East', 'Rapid')
-  }, 'E231系0番台（常磐快速線・LED）', 'E231系_0番代_常磐快速線.png', ['E231系_0番代.png']);
+  }, 'E231系0番台（常磐快速線）', 'E231系_0番代_常磐快速線.png', ['E231系_0番代.png']);
 
   expectRuntime(win, 'Joban Tsuchiura medium-distance runtime', {
     lineId: 'Joban',
