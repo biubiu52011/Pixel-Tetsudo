@@ -92,6 +92,44 @@
     };
   }
 
+  function stationOccupancyKey(position, base) {
+    if (!position || !base) return null;
+    var progress = position.segmentProgress == null ? 0 : Number(position.segmentProgress);
+    if (!isFinite(progress) || progress > 0.001) return null;
+    var scope = position.fusionLineId && position.fusionRole === "branch"
+      ? ("branch:" + position.fusionLineId)
+      : "main";
+    return scope + "|station|" + base.idx;
+  }
+
+  function buildStationOccupancy(positions, resolver) {
+    var groups = {};
+    for (var i = 0; i < positions.length; i++) {
+      var base = resolver(positions[i], i);
+      var key = stationOccupancyKey(positions[i], base);
+      if (!key) continue;
+      (groups[key] = groups[key] || []).push({
+        index: i,
+        id: stableTrainKey(positions[i], i)
+      });
+    }
+    var slots = {};
+    Object.keys(groups).forEach(function (key) {
+      groups[key].sort(function (a, b) { return a.id.localeCompare(b.id); });
+      for (var j = 0; j < groups[key].length; j++) {
+        slots[key + "|" + groups[key][j].index] = {
+          ordinal: j,
+          total: groups[key].length
+        };
+      }
+    });
+    return {
+      get: function (key, index) {
+        return key ? (slots[key + "|" + index] || { ordinal: 0, total: 1 }) : { ordinal: 0, total: 1 };
+      }
+    };
+  }
+
   function resolveBase(position, stationCoords, geometry, lineId, opts) {
     opts = opts || {};
     var branchGeom = (geometry && geometry.branchGeom) || null;
@@ -131,7 +169,7 @@
     return { point: basePt, idx: idx, nextIdx: toIdx, tangent: t, points: points };
   }
 
-  function resolve(position, positions, index, stationCoords, geometry, lineId, opts, occupancy) {
+  function resolve(position, positions, index, stationCoords, geometry, lineId, opts, occupancy, stationOccupancy) {
     opts = opts || {};
     var base = resolveBase(position, stationCoords, geometry, lineId, opts);
     if (!base) return null;
@@ -154,21 +192,54 @@
     var px = base.point.x + normal.x * lateral;
     var py = base.point.y + normal.y * lateral;
 
-    // Keep train icons readable at stations, especially large interchange /
-    // branch-junction nodes. When a train is exactly at a station (progress=0),
-    // move it slightly along the track tangent instead of stacking it directly
-    // on top of the station dot. This preserves the station reference point
-    // while making the train the primary moving visual.
+    // Station occupancy is independent of segment/lane occupancy. Terminals,
+    // turnback points and branch joins can hold trains whose next segment or
+    // direction differs; grouping only by segment would put all of them back
+    // on the same station coordinate.
     var stationPt = base.points && base.points[base.idx];
     var atStation = position && (position.segmentProgress == null || Number(position.segmentProgress) <= 0.001);
     if (atStation && stationPt) {
+      var stationKey = stationOccupancyKey(position, base);
+      var stationSlot = stationOccupancy ? stationOccupancy.get(stationKey, index) : { ordinal: 0, total: 1 };
       var stationOffset = opts.stationOffset || DEFAULTS.iconH;
-      var stationRadius = (stationPt && stationPt.isJunction) ? 12 : 7;
+      var stationRadius = 7;
       var clearDist = Math.max(stationOffset, stationRadius + (DEFAULTS.iconH / 2) + 2);
-      var dirSign = moveDir === "up" ? -1 : 1;
-      if (lane === 0 && !moveDir) dirSign = (slot.ordinal % 2 === 0) ? 1 : -1;
-      px += base.tangent.x * clearDist * dirSign;
-      py += base.tangent.y * clearDist * dirSign;
+
+      // Spread a dense stop as a compact two-sided queue. Alternate sides of
+      // the station, then move outward one icon pitch at a time. This works
+      // for origins, terminals and turnbacks without maintaining station lists.
+      var side = stationSlot.ordinal % 2 === 0 ? 1 : -1;
+      var rank = Math.floor(stationSlot.ordinal / 2);
+      if (stationSlot.total === 1) {
+        side = moveDir === "up" ? -1 : 1;
+      }
+      var pitch = Math.max(DEFAULTS.iconW + 4, opts.stationStackGap || 18);
+      var longitudinal = side * (clearDist + rank * pitch);
+
+      // Never consume most of the adjacent inter-station section. Dense
+      // terminal queues therefore remain visually attached to their station.
+      var neighbour = base.points[base.idx + side] || base.points[base.idx - side];
+      if (neighbour) {
+        var ndx = neighbour.x - stationPt.x;
+        var ndy = neighbour.y - stationPt.y;
+        var neighbourDist = Math.sqrt(ndx * ndx + ndy * ndy);
+        if (neighbourDist > 0) {
+          var maxLongitudinal = Math.max(clearDist, neighbourDist * 0.38);
+          longitudinal = clamp(longitudinal, -maxLongitudinal, maxLongitudinal);
+        }
+      }
+
+      px += base.tangent.x * longitudinal;
+      py += base.tangent.y * longitudinal;
+
+      // If the longitudinal queue is clamped by short station spacing, add a
+      // small platform-like lateral fan so later trains remain distinguishable.
+      if (rank > 0) {
+        var fan = Math.ceil(rank / 2) * (DEFAULTS.iconW + 2);
+        var fanSign = rank % 2 === 0 ? -1 : 1;
+        px += normal.x * fan * fanSign;
+        py += normal.y * fan * fanSign;
+      }
     }
 
     return {
@@ -196,8 +267,9 @@
       return { key: trackKey(p, base.idx, base.nextIdx, lane) };
     };
     var occupancy = buildOccupancy(positions, synthetic);
+    var stationOccupancy = buildStationOccupancy(positions, resolver);
     return positions.map(function (p, i) {
-      return resolve(p, positions, i, stationCoords, geometry, lineId, opts, occupancy);
+      return resolve(p, positions, i, stationCoords, geometry, lineId, opts, occupancy, stationOccupancy);
     });
   }
 
