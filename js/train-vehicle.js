@@ -315,11 +315,39 @@
       if (_disp && _disp !== chosen) chosen = _disp;
     }
 
+    // B0 vehicle-identity contract:
+    // EXACT     = one concrete vehicle is supported by train-level/explicit evidence,
+    //             or the applicable timetable fleet itself has only one possible type.
+    // NARROWED  = timetable/owner evidence reduced the fleet but still leaves >1 type.
+    // UNKNOWN   = no usable vehicle evidence exists.
+    // IMPORTANT: a multi-vehicle VehicleTypeMap/default is never EXACT.
+    var identityStatus = 'UNKNOWN';
+    var identityReason = 'no-vehicle-evidence';
+    var effectiveCandidates = orderArr.slice();
+    if (trainOwner && effectiveCandidates.length > 1) {
+      effectiveCandidates = filterCandidatesByOwner(effectiveCandidates, trainOwner);
+    }
+    if (chosen) {
+      identityStatus = 'EXACT';
+      if (/^(manual|odpt)/.test(chosenSrc)) identityReason = 'explicit-vehicle-evidence';
+      else if (chosenSrc === 'trainNo') identityReason = 'train-number-evidence';
+      else if (chosenSrc === 'map' || chosenSrc === 'map+trainOwner') identityReason = 'single-vehicle-timetable-constraint';
+      else identityReason = 'resolved-vehicle-evidence';
+    } else if (effectiveCandidates.length > 0) {
+      identityStatus = 'NARROWED';
+      identityReason = trainOwner && effectiveCandidates.length < orderArr.length
+        ? 'train-owner-narrowed-candidates'
+        : 'timetable-multiple-candidates';
+    }
+
     return {
-      name: chosen,                                  // 车型名（S0–S3 实证或 S4 推定；alias 后与图标一致）
-      candidates: orderArr,                          // 全部候选（S0→S3 稳定顺序）
+      name: chosen,                                  // EXACT vehicle only; empty while ambiguous
+      candidates: effectiveCandidates,               // candidates after safe owner narrowing
+      allCandidates: orderArr,                        // raw S0→S3 evidence pool for diagnostics
+      identityStatus: identityStatus,                 // EXACT / NARROWED / UNKNOWN
+      identityReason: identityReason,
       sources: chosen ? (pool[chosen] ? pool[chosen].sources.slice() : (chosenSrc ? [chosenSrc] : [])) : [],
-      source: chosenSrc,                             // 决策来源：manual/odpt/trainNo/map/icons/''（''=无依据）
+      source: chosenSrc,                             // decision source; empty when unresolved
       confidence: confidence,
       iconPath: iconPath,
       // 兼容原 vehicleType 候选串格式（"A / B / C"，稳定顺序）
@@ -421,5 +449,5 @@
     _scopedTable: function() { return TRAIN_NO_VEHICLE_SCOPED; }
   };
 
-  console.debug('[TrainVehicle] v4.3.1051 initialized（trainOwner + chain conflict-safe vehicle identity）');
+  console.debug('[TrainVehicle] v4.3.1053 initialized（B0 EXACT/NARROWED/UNKNOWN vehicle identity contract）');
 })();
