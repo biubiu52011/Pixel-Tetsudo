@@ -46,6 +46,7 @@ jobs:
           node tools/train-position-evidence-regression.test.js
           node tools/asakusa-formation-evidence.test.js
           node tools/operation-evidence-providers.test.js
+          node tools/formation-evidence-providers.test.js
 
       - name: Entity Preservation Guard
         run: |
