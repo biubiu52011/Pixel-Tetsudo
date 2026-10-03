@@ -282,7 +282,7 @@ function main() {
   expectMap(win, 'Joban local through destination keeps JR local first', 'JobanLocal', 'Local', 'E233系2000番台 / 東京メトロ16000系 / 小田急4000形', ['E231系0番台', 'E231系1000番台', 'E233系3000番台'], 'odpt.Station:TokyoMetro.Chiyoda.Ayase');
   expectMap(win, 'Keiyo local P1', 'Keiyo', 'Local', 'E233系5000番台', ['E231系900番台']);
   expectMap(win, 'Musashino local ODPT evidence', 'Musashino', 'Local', 'E231系900番台', ['E231系0番台']);
-  expectMap(win, 'Hachiko local ODPT evidence', 'Hachiko', 'Local', '209系3500番台 / E231系3000番台', ['E209系（京葉線）']);
+  expectMap(win, 'Hachiko local ODPT evidence', 'Hachiko', 'Local', 'E231系3000番台 / 209系3500番台', ['E209系（京葉線）']);
   expectMap(win, 'Kawagoe local ODPT evidence', 'Kawagoe', 'Local', 'E233系7000番台', ['E209系（京葉線）']);
   expectMap(win, 'KawagoeWest local ODPT evidence', 'KawagoeWest', 'Local', '209系3500番台 / E231系3000番台', ['E209系（京葉線）']);
   expectMap(win, 'ShonanShinjuku rapid P0', 'ShonanShinjuku', 'Rapid', 'E231系1000番台 / E233系3000番台', ['E235系1000番台']);
@@ -293,8 +293,8 @@ function main() {
   expectIcon(win, 'E235 1000 Yokosuka', 'E235系1000番台', 'Yokosuka', 'E235系_1000番代.png', ['E235系_0番代.png', 'E235系_0番代_B31編成_中央・総武線.png']);
   expectIcon(win, 'Tozai E231-800', 'E231系800番台（東西線直通）', 'Tozai', 'E231系_800番代.png', ['E231系_0番代_中央・総武線各駅停車.png']);
   expectIcon(win, 'Boso 209-2000/2100', '209系2000番台 / 2100番台', 'SobuMain', '209系_2000・2100番代_房総地区.png', ['209系_500番代_京葉線.png']);
-  expectIcon(win, 'Hachiko 209-3000', '209系3500番台 / E231系3000番台', 'Hachiko', '209系_3500番代.png', ['209系_500番代_京葉線.png']);
-  expectIcon(win, 'Musashino E231-900', 'E231系900番台', 'Musashino', 'E231系_0番代.png', ['E231系_0番代_常磐快速線.png']);
+  expectIcon(win, 'Hachiko 209-3500', '209系3500番台', 'Hachiko', '209系_3500番代.png', ['209系_500番代_京葉線.png']);
+  expectIcon(win, 'Musashino E231-900', 'E231系900番台', 'Musashino', 'E231系_900番代.png', ['E231系_0番代_常磐快速線.png']);
   expectIcon(win, 'Nikko formal 253', '253系（日光・きぬがわ）', 'UtsunomiyaJR', '253系_1000番代.png', ['E253系.png']);
 
   const canonical = win.TrainIcons.resolveCanonicalVehicle('jr-east-e235-0-yamanote');
