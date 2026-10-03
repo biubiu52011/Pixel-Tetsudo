@@ -1604,7 +1604,7 @@ var CANONICAL_VEHICLES = {
   "jr-east-e231-900-musashino": {
     displayName: "E231系900番台",
     iconName: "E231系900番台",
-    asset: "../images/列车/JR東日本/JR東日本_E231系_0番台.png",
+    asset: null,
     aliases: ["E231系900番台"]
   },
   "jr-east-e231-0-musashino": {
