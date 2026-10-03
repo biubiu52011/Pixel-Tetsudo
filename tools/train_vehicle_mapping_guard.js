@@ -285,23 +285,23 @@ function main() {
 
   expectMap(win, 'Yamanote P1/critical', 'Yamanote', 'Local', 'JR E235系0番台', ['E235系1000番台', 'E235系総武中央線']);
   expectMap(win, 'Tozai JR-East local P0', 'Tozai', 'Local', 'JR E231系800番台(10両) / 東京メトロ05系(10両) / 東京メトロ07系(10両) / 東京メトロ15000系(10両)', ['E231系500番台', 'JR E231系0番台', 'JR E231系1000番台'], 'odpt.Station:JR-East.ChuoSobuLocal.Nakano');
-  expectMap(win, 'Tozai default rapid P0', 'Tozai', 'Rapid', '東京メトロ05系 / 東京メトロ07系 / 東京メトロ15000系 / E231系800番台（東西線直通） / 東葉高速2000系', ['JR E231系', '東葉高速1000系']);
-  expectMap(win, 'Chiyoda local P0', 'Chiyoda', 'Local', '東京メトロ16000系 / 東京メトロ05系（北綾瀬） / E233系2000番台 / 小田急4000形', ['JR E233系']);
-  expectMap(win, 'Joban rapid P0', 'Joban', 'Rapid', 'E231系0番台', ['E231系1000番台', 'E233系3000番台']);
-  expectMap(win, 'Joban rapid Toride keeps rapid EMU', 'Joban', 'Rapid', 'E231系0番台', ['E531系'], 'odpt.Station:JR-East.Joban.Toride');
-  expectMap(win, 'Joban local Tsuchiura uses medium-distance EMU', 'Joban', 'Local', 'E531系', ['E231系0番台'], 'odpt.Station:JR-East.Joban.Tsuchiura');
-  expectMap(win, 'Joban rapid Tsuchiura uses medium-distance EMU', 'Joban', 'Rapid', 'E531系', ['E231系0番台'], 'odpt.Station:JR-East.Joban.Tsuchiura');
-  expectMap(win, 'Joban special rapid P0', 'Joban', 'SpecialRapid', 'E531系', ['E231系1000番台', 'E233系3000番台']);
-  expectMap(win, 'Joban local line pool', 'JobanLocal', 'Local', 'E233系2000番台 / 東京メトロ16000系 / 小田急4000形', ['E231系0番台', 'E231系1000番台', 'E233系3000番台']);
-  expectMap(win, 'Joban local through destination keeps JR local first', 'JobanLocal', 'Local', 'E233系2000番台 / 東京メトロ16000系 / 小田急4000形', ['E231系0番台', 'E231系1000番台', 'E233系3000番台'], 'odpt.Station:TokyoMetro.Chiyoda.Ayase');
+  expectMap(win, 'Tozai default rapid P0', 'Tozai', 'Rapid', '東京メトロ05系(10両) / 東京メトロ07系(10両) / 東京メトロ15000系(10両) / JR E231系800番台(10両) / 東葉高速2000系(10両)', ['東葉高速1000系']);
+  expectMap(win, 'Chiyoda local P0', 'Chiyoda', 'Local', '東京メトロ16000系(10両) / JR E233系2000番台(10両) / 小田急4000形(10両)', ['東京メトロ05系（北綾瀬）']);
+  expectMap(win, 'Joban rapid P0', 'Joban', 'Rapid', 'JR E231系0番台', ['E231系1000番台', 'E233系3000番台']);
+  expectMap(win, 'Joban rapid Toride keeps rapid EMU', 'Joban', 'Rapid', 'JR E231系0番台', ['JR E531系'], 'odpt.Station:JR-East.Joban.Toride');
+  expectMap(win, 'Joban local Tsuchiura uses medium-distance EMU', 'Joban', 'Local', 'JR E531系', ['JR E231系0番台'], 'odpt.Station:JR-East.Joban.Tsuchiura');
+  expectMap(win, 'Joban rapid Tsuchiura uses medium-distance EMU', 'Joban', 'Rapid', 'JR E531系', ['JR E231系0番台'], 'odpt.Station:JR-East.Joban.Tsuchiura');
+  expectMap(win, 'Joban special rapid P0', 'Joban', 'SpecialRapid', 'JR E531系', ['E231系1000番台', 'E233系3000番台']);
+  expectMap(win, 'Joban local line pool', 'JobanLocal', 'Local', 'JR E233系2000番台(10両) / 東京メトロ16000系(10両) / 小田急4000形(10両)', ['E231系0番台', 'E231系1000番台', 'E233系3000番台']);
+  expectMap(win, 'Joban local through destination keeps JR local first', 'JobanLocal', 'Local', 'JR E233系2000番台(10両) / 東京メトロ16000系(10両) / 小田急4000形(10両)', ['E231系0番台', 'E231系1000番台', 'E233系3000番台'], 'odpt.Station:TokyoMetro.Chiyoda.Ayase');
   expectMap(win, 'Keiyo local P1', 'Keiyo', 'Local', 'E233系5000番台', ['E231系900番台']);
   expectMap(win, 'Musashino local ODPT evidence', 'Musashino', 'Local', 'E231系900番台', ['E231系0番台']);
-  expectMap(win, 'Hachiko local ODPT evidence', 'Hachiko', 'Local', '209系3500番台 / E231系3000番台', ['E209系（京葉線）']);
-  expectMap(win, 'Kawagoe local ODPT evidence', 'Kawagoe', 'Local', 'E233系7000番台', ['E209系（京葉線）']);
-  expectMap(win, 'KawagoeWest local ODPT evidence', 'KawagoeWest', 'Local', 'E231系3000番台 / 209系3500番台', ['E209系（京葉線）']);
-  expectMap(win, 'ShonanShinjuku rapid P0', 'ShonanShinjuku', 'Rapid', 'E231系1000番台 / E233系3000番台', ['E235系1000番台']);
-  expectMap(win, 'Ito Odoriko P1', 'Ito', 'LimitedExpress', 'E257系2000番台 / E257系2500番台', ['E257系1500番台']);
-  expectMap(win, 'UtsunomiyaJR Nikko P1', 'UtsunomiyaJR', 'LimitedExpress', '253系（日光・きぬがわ）', ['E253系']);
+  expectMap(win, 'Hachiko local ODPT evidence', 'Hachiko', 'Local', 'JR 209系3500番台 / JR E231系3000番台', ['E209系（京葉線）']);
+  expectMap(win, 'Kawagoe local ODPT evidence', 'Kawagoe', 'Local', 'JR E233系7000番台', ['E209系（京葉線）']);
+  expectMap(win, 'KawagoeWest local ODPT evidence', 'KawagoeWest', 'Local', 'JR E231系3000番台 / JR 209系3500番台', ['E209系（京葉線）']);
+  expectMap(win, 'ShonanShinjuku rapid P0', 'ShonanShinjuku', 'Rapid', 'JR E231系1000番台 / JR E233系3000番台', ['E235系1000番台']);
+  expectMap(win, 'Ito Odoriko P1', 'Ito', 'LimitedExpress', 'JR E257系2000番台(9両) / JR E257系2500番台(5両)', ['E257系1500番台']);
+  expectMap(win, 'UtsunomiyaJR Nikko P1', 'UtsunomiyaJR', 'LimitedExpress', 'JR 253系1000番台 / 東武100系', ['E253系']);
 
   expectIcon(win, 'E235 0 Yamanote', 'E235系0番台（山手線）', 'Yamanote', 'E235系_0番代.png', ['E235系_1000番代.png', 'E235系_0番代_B31編成_中央・総武線.png']);
   expectIcon(win, 'E235 1000 Yokosuka', 'E235系1000番台', 'Yokosuka', 'E235系_1000番代.png', ['E235系_0番代.png', 'E235系_0番代_B31編成_中央・総武線.png']);
