@@ -151,6 +151,12 @@
     var actualService = name ? _normServiceName(name) : "";
     var d = serviceDate ? String(serviceDate).slice(0, 10) : "";
     var ctx = context || {};
+    // Reused train numbers are not sufficient identity on their own. If any
+    // candidate is service-qualified, require the caller to supply that
+    // service identity instead of collapsing by date/direction/operator.
+    if (!actualService && candidates.some(function(rec) {
+      return !!(rec.servicePattern || (rec._serviceSet && rec._serviceSet.size));
+    })) return null;
     var matched = candidates.filter(function(rec) {
       if (rec.servicePattern && !rec.servicePattern.test(name)) return false;
       if (actualService && rec._serviceSet && !rec._serviceSet.has(actualService)) return false;
