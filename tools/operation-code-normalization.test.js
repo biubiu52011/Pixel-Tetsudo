@@ -2,6 +2,12 @@ const fs=require("fs"),path=require("path"),assert=require("assert"),vm=require(
 const window={};vm.runInNewContext(fs.readFileSync(path.join(__dirname,"..","data/timetables/train-operation-evidence.js"),"utf8"),{window,console});
 const n=window.TrainOperationEvidence.normalizeOperationCode;
 assert.strictEqual(n("03K",{lineId:"Tozai"}),"03K");
+assert.strictEqual(n("507K",{lineId:"Tozai"}),"07K");
+assert.strictEqual(n("603K",{lineId:"Tozai"}),"03K");
+assert.strictEqual(n("655S",{lineId:"Tozai"}),"55S");
+assert.strictEqual(n("689S",{lineId:"Tozai"}),"89S");
+assert.strictEqual(n("A650T",{lineId:"Tozai"}),"50T");
+assert.strictEqual(n("A750TR",{lineId:"Tozai"}),"50T");
 assert.strictEqual(n("A1291G",{lineId:"TokyuToyoko"}),"91G");
 assert.strictEqual(n("B691G",{lineId:"TokyuToyoko"}),"91G");
 assert.strictEqual(n("026-081",{lineId:"Denentoshi"}),"26K");
