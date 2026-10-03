@@ -739,7 +739,7 @@
               };
               if ((t["odpt:vehicleType"] || t["vehicleType"]) &&
                   window.TrainVehicle && typeof window.TrainVehicle.registerVehicle === "function") {
-                window.TrainVehicle.registerVehicle(_rawTrainNo, t["odpt:vehicleType"] || t["vehicleType"]);
+                window.TrainVehicle.registerVehicle(_rawTrainNo, t["odpt:vehicleType"] || t["vehicleType"], op);
               }
             }
             return;
@@ -876,7 +876,7 @@
             // evidence. Register it before resolving so the same train number can
             // reuse that evidence without depending on the current display line.
             if (odptVehicleType && window.TrainVehicle && typeof window.TrainVehicle.registerVehicle === "function") {
-              window.TrainVehicle.registerVehicle(trainId, odptVehicleType);
+              window.TrainVehicle.registerVehicle(trainId, odptVehicleType, trainOpShort || op);
             }
             if (window.TrainVehicle && typeof window.TrainVehicle.resolve === "function") {
               try {
@@ -1601,7 +1601,7 @@
                   var _mVehicle = tt["vehicleType"] || tt["odpt:vehicleType"] || "";
                   if (_mTrainNo && _mVehicle && window.TrainVehicle &&
                       typeof window.TrainVehicle.registerVehicle === "function") {
-                    window.TrainVehicle.registerVehicle(_mTrainNo, _mVehicle);
+                    window.TrainVehicle.registerVehicle(_mTrainNo, _mVehicle, mLine.operator);
                   }
                 });
                 var mEst = window.TrainPositionEstimator.estimateLinePositions(
