@@ -1083,3 +1083,34 @@ for (const model of ['E233系0番台','E231系0番台','E231系1000番台','E233
 assert(vehicleMapSource.includes('JR E235系0番台（山手線）'), 'Yamanote E235 identity must remain JR-qualified');
 assert(vehicleMapSource.includes('JR E233系1000番台'), 'Keihin-Tohoku E233-1000 identity must remain JR-qualified');
 assert(vehicleMapSource.includes('JR E131系500番台'), 'Sagami E131-500 identity must remain JR-qualified');
+
+
+// Batch guard: independent private/public railway fleets must carry explicit operator identity.
+for (const required of [
+  '都営12-000形 / 都営12-600形',
+  '都電7700形 / 都電8500形 / 都電8800形 / 都電8900形 / 都電9000形',
+  '東京都交通局330形',
+  '東京モノレール10000形 / 東京モノレール2000形',
+  'ゆりかもめ7300系 / ゆりかもめ7500系',
+  '横浜高速鉄道Y000系',
+  '東急300系',
+  '京王電鉄1000系',
+  '野岩鉄道6050系100番台',
+  '東武N100系（スペーシアX）'
+]) {
+  assert(vehicleMapSource.includes(required),
+    'explicit operator-qualified fleet identity missing: ' + required);
+}
+for (const forbidden of [
+  "'default': '12-000形 / 12-600形'",
+  "'default': '7700形 / 8500形 / 8800形 / 8900形 / 9000形'",
+  "'default': '330形'",
+  "'default': '10000形 / 2000形'",
+  "'default': '7300系 / 7500系（7000系は全廃）'",
+  "'default': 'Y000系'",
+  "'default': '300系'",
+  "'default': '1000系'"
+]) {
+  assert(!vehicleMapSource.includes(forbidden),
+    'bare fleet identity regressed: ' + forbidden);
+}
