@@ -559,9 +559,11 @@
           if (window.TrainVehicle && typeof window.TrainVehicle.registerVehicle === 'function') {
             window.TrainVehicle.registerVehicle(trainNumber, tt['vehicleType'], line.operator); // S2: operator-scoped train-number evidence
           }
+          var _trainOwner = tt['odpt:trainOwner'] || tt['trainOwner'] || '';
           var vehCtx = {
             lineId: lineId,
             operator: line.operator,
+            trainOwner: _trainOwner,
             trainNumber: trainNumber,
             stationIndex: currentStationIndex,
             trainType: tt['odpt:trainType'],
@@ -591,6 +593,7 @@
             segmentProgress: segmentProgress,
             extrapolated: extrapolated,
             trainType: tt['odpt:trainType'] || '',
+            trainOwner: _trainOwner,
             typeName: trainClassification.typeName,
             isLimitedExpress: trainClassification.isLimitedExpress,
             isThroughTrain: trainClassification.isThroughTrain,
