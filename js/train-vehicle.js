@@ -356,7 +356,12 @@
           ? 'operation-vehicle-narrowed-candidates' : 'timetable-multiple-candidates');
     }
 
-    // B0 hard invariant: unresolved multi-candidate identity must never leak a\n    // candidate-specific vehicle/formation/livery image. Rendering can use its\n    // neutral marker outside this resolver.\n    if (identityStatus !== 'EXACT') iconPath = '';\n\n    return {
+    // B0 hard invariant: unresolved multi-candidate identity must never leak a
+    // candidate-specific vehicle/formation/livery image. Rendering can use its
+    // neutral marker outside this resolver.
+    if (identityStatus !== 'EXACT') iconPath = '';
+
+    return {
       name: chosen,                                  // EXACT vehicle only; empty while ambiguous
       candidates: effectiveCandidates,               // candidates after safe owner narrowing
       allCandidates: orderArr,                        // raw S0→S3 evidence pool for diagnostics
