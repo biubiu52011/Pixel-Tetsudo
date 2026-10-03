@@ -244,11 +244,11 @@ function main() {
     ['Fukutoshin', 'odpt.Station:Minatomirai.Minatomirai.MotomachiChukagai']
   ].forEach(([lineId, dest]) => {
     const vt = win.VehicleTypeMap.resolve(lineId, 'odpt.TrainType:Seibu.S-TRAIN', dest);
-    assert(vt === '西武40000系', 'S-TRAIN must resolve only Seibu 40000 series', { lineId, dest, vt });
+    assert(vt === '西武40000系(10両)', 'S-TRAIN must resolve only Seibu 40000 series', { lineId, dest, vt });
   });
 
   const yurakuchoSTrain = win.VehicleTypeMap.resolve('Yurakucho', 'odpt.TrainType:Seibu.S-TRAIN', null);
-  assert(yurakuchoSTrain === '西武40000系', 'Yurakucho S-TRAIN must resolve only Seibu 40000 series', { yurakuchoSTrain });
+  assert(yurakuchoSTrain === '西武40000系(10両)', 'Yurakucho S-TRAIN must resolve only Seibu 40000 series', { yurakuchoSTrain });
 
   // Sotetsu 20000 = 10-car Tokyu Toyoko through-service stock.
   // Sotetsu 21000 = 8-car Tokyu Meguro / Namboku / Mita through-service stock.
@@ -514,7 +514,7 @@ function main() {
   assert(/17000系\(10両\)/.test(mmFLiner), 'Minatomirai F-Liner must distinguish the 10-car Metro 17000 formation', { mmFLiner });
   assert(!/Y500/.test(mmFLiner), '8-car Y500 must not enter the normal 10-car F-Liner pool', { mmFLiner });
   const mmSTrain = win.VehicleTypeMap.resolve('MinatoMirai', 'odpt.TrainType:Seibu.S-TRAIN', null);
-  assert(mmSTrain === '西武40000系', 'Minatomirai S-TRAIN must resolve only Seibu 40000 series', { mmSTrain });
+  assert(mmSTrain === '西武40000系(10両)', 'Minatomirai S-TRAIN must resolve only Seibu 40000 series', { mmSTrain });
 
     const fLocalTobu = win.VehicleTypeMap.resolve('Fukutoshin', 'odpt.TrainType:TokyoMetro.Local', 'odpt.Station:Tobu.Tojo.Shiki');
   assert(/東武9000型/.test(fLocalTobu) && /東武9050型/.test(fLocalTobu) && /東武50070系/.test(fLocalTobu),
@@ -535,7 +535,7 @@ function main() {
     'Ikebukuro F-Liner must resolve as a 10-car through-service pool', { ikeF });
 
     const ikeSTrain = win.VehicleTypeMap.resolve('Ikebukuro', 'odpt.TrainType:Seibu.S-TRAIN', null);
-  assert(ikeSTrain === '西武40000系', 'Seibu Ikebukuro S-TRAIN must resolve only Seibu 40000 series', { ikeSTrain });
+  assert(ikeSTrain === '西武40000系(10両)', 'Seibu Ikebukuro S-TRAIN must resolve only Seibu 40000 series', { ikeSTrain });
 
     const mitaDefault = win.VehicleTypeMap.resolve('Mita', 'odpt.TrainType:Toei.Local', null);
   assert(/都営6300形/.test(mitaDefault) && /都営6500形/.test(mitaDefault),
