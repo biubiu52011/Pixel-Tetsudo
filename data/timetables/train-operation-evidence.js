@@ -1,6 +1,6 @@
 /*
  * Pixel Tetsudo - Train operation evidence registry
- * v4.3.1093
+ * v4.3.1094
  *
  * Evidence is ranked by traceability, not by "official vs fan" alone.
  * A  direct run evidence: realtime owner/vehicle or dated formation assignment
@@ -25,6 +25,7 @@
     return {
       operator: rec.operator || '',
       vehicleType: rec.vehicleType || '',
+      vehicleCandidates: Array.isArray(rec.vehicleCandidates) ? rec.vehicleCandidates.slice() : [],
       formationId: rec.formationId || '',
       grade: grade,
       sourceUrl: sourceUrl,
@@ -96,5 +97,5 @@
     }
   };
 
-  console.debug('[TrainOperationEvidence] v4.3.1093 initialized (graded provenance model)');
+  console.debug('[TrainOperationEvidence] v4.3.1094 initialized (graded provenance model)');
 })();
