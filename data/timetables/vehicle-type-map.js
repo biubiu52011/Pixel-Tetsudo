@@ -1274,7 +1274,7 @@
       'EveningLiner': { 'default': '京成AE形' },
       'AccessExpress': {
         'default': '京成3100形(8両) / 京成3000形(8両)',
-        'Keisei': '京成3100形(8両) / 京成3000形'
+        'Keisei': '京成3100形(8両) / 京成3000形(8両)'
       },
       'Skyliner': {
         'default': '京成AE形',
