@@ -626,8 +626,10 @@
           // A/C run-level providers may also carry a model-exact assignment.
           // Accept it only when every decisive model-bearing provider agrees.
           var _assignmentVehicles = {};
+          var _assignmentFormations = {};
           _decisiveAssignments.forEach(function(rec) {
             if (rec.vehicleType) _assignmentVehicles[rec.vehicleType] = true;
+            if (rec.formationId) _assignmentFormations[rec.formationId] = true;
           });
           if (!tt['vehicleType'] && !tt['odpt:vehicleType'] &&
               Object.keys(_assignmentVehicles).length === 1) {
@@ -671,6 +673,7 @@
             trainOwner: _trainOwner,
             assignmentOperator: _assignmentOperator,
             operationEvidence: _assignmentMatches,
+            vehicleFormationId: Object.keys(_assignmentFormations).length === 1 ? Object.keys(_assignmentFormations)[0] : '',
             vehicleIdentityStatus: vehResult.identityStatus || 'UNKNOWN',
             vehicleIdentityReason: vehResult.identityReason || 'no-vehicle-evidence',
             vehicleCandidates: vehResult.candidates || [],
