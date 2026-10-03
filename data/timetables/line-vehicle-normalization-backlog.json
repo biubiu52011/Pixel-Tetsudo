@@ -1,15 +1,92 @@
 {
-  "version":"4.3.1070",
-  "policy":"line-by-line vehicle identity normalization; through and non-through services share one evidence engine",
-  "statusLegend":{"STRUCTURAL_EXACT":"single current vehicle family","OPERATION_REQUIRED":"multiple families; operation evidence required","DATED_FORMATION_REQUIRED":"model/formation varies by date","ACTIVE_PROVIDER":"provider already active"},
-  "lines":[
-    {"lineId":"TokyuToyoko","through":true,"status":"ACTIVE_PROVIDER","providers":["chokopy-toyoko-20260314"],"next":"expand dated formation coverage"},
-    {"lineId":"TokyuMeguro","through":true,"status":"ACTIVE_PROVIDER","providers":["chokopy-meguro-20260314"],"next":"expand dated formation coverage"},
-    {"lineId":"TokyuDenEn","through":true,"status":"ACTIVE_PROVIDER","providers":["chokopy-denentoshi-20260314","loo-ool-hanzomon-dated-formations"],"next":"expand Tokyu dated formations"},
-    {"lineId":"TokyuSetagaya","through":false,"status":"STRUCTURAL_EXACT","providers":["single-fleet-ordinary-lines-2026"],"next":"guard current-fleet effective dates"},
-    {"lineId":"TokyuKodomonokuni","through":false,"status":"STRUCTURAL_EXACT","providers":["single-fleet-ordinary-lines-2026"],"next":"guard current-fleet effective dates"},
-    {"lineId":"TokyuIkegami","through":false,"status":"OPERATION_REQUIRED","candidates":["東急1000系","東急7000系"],"next":"dated operation/formation evidence"},
-    {"lineId":"TokyuTamagawa","through":false,"status":"OPERATION_REQUIRED","candidates":["東急1000系","東急7000系"],"next":"dated operation/formation evidence"},
-    {"lineId":"TokyuOimachi","through":false,"status":"OPERATION_REQUIRED","candidates":["東急6020系","東急9000系","東急9020系","東急6000系"],"next":"separate local/express operation evidence"}
+  "version": "4.3.1071",
+  "policy": "line-by-line vehicle identity normalization; through and non-through services share one evidence engine",
+  "statusLegend": {
+    "STRUCTURAL_EXACT": "single current vehicle family",
+    "OPERATION_REQUIRED": "multiple families; operation evidence required",
+    "DATED_FORMATION_REQUIRED": "model/formation varies by date",
+    "ACTIVE_PROVIDER": "provider already active"
+  },
+  "lines": [
+    {
+      "lineId": "TokyuToyoko",
+      "through": true,
+      "status": "ACTIVE_PROVIDER",
+      "providers": [
+        "chokopy-toyoko-20260314"
+      ],
+      "next": "expand dated formation coverage"
+    },
+    {
+      "lineId": "TokyuMeguro",
+      "through": true,
+      "status": "ACTIVE_PROVIDER",
+      "providers": [
+        "chokopy-meguro-20260314"
+      ],
+      "next": "expand dated formation coverage"
+    },
+    {
+      "lineId": "TokyuDenEn",
+      "through": true,
+      "status": "ACTIVE_PROVIDER",
+      "providers": [
+        "chokopy-denentoshi-20260314",
+        "loo-ool-hanzomon-dated-formations"
+      ],
+      "next": "expand Tokyu dated formations"
+    },
+    {
+      "lineId": "TokyuSetagaya",
+      "through": false,
+      "status": "STRUCTURAL_EXACT",
+      "providers": [
+        "single-fleet-ordinary-lines-2026"
+      ],
+      "next": "guard current-fleet effective dates"
+    },
+    {
+      "lineId": "TokyuKodomonokuni",
+      "through": false,
+      "status": "STRUCTURAL_EXACT",
+      "providers": [
+        "single-fleet-ordinary-lines-2026"
+      ],
+      "next": "guard current-fleet effective dates"
+    },
+    {
+      "lineId": "TokyuIkegami",
+      "through": false,
+      "status": "DATED_FORMATION_REQUIRED",
+      "candidates": [
+        "東急1000系",
+        "東急1000系1500番台",
+        "東急7000系"
+      ],
+      "next": "current fleet normalized; await traceable dated operation/formation evidence"
+    },
+    {
+      "lineId": "TokyuTamagawa",
+      "through": false,
+      "status": "DATED_FORMATION_REQUIRED",
+      "candidates": [
+        "東急1000系",
+        "東急1000系1500番台",
+        "東急7000系"
+      ],
+      "next": "current fleet normalized; await traceable dated operation/formation evidence"
+    },
+    {
+      "lineId": "TokyuOimachi",
+      "through": false,
+      "status": "OPERATION_REQUIRED",
+      "candidates": [
+        "東急6020系",
+        "東急9000系",
+        "東急9020系",
+        "東急6000系"
+      ],
+      "next": "separate local/express operation evidence"
+    }
   ]
 }
