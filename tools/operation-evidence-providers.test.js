@@ -43,7 +43,7 @@ assert(r&&r.operator==="Keikyu"&&!r.vehicleType);
 
 
 (function(){
- const providers=[],sandbox={window:{TRAIN_OPERATION_EVIDENCE_PROVIDERS:providers}};
+ const providers=[],sandbox={window:{TRAIN_OPERATION_EVIDENCE_PROVIDERS:providers},console:{debug:function(){}}};
  vm.createContext(sandbox);
  vm.runInContext(fs.readFileSync("data/timetables/vehicle-operation-evidence-data.js","utf8"),sandbox);
  vm.runInContext(fs.readFileSync("data/timetables/train-operation-evidence.js","utf8"),sandbox);
