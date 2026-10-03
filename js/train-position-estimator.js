@@ -605,7 +605,8 @@
               railDirection: tt['odpt:railDirection'] || '',
               destinationStation: destinationStationUrn || '',
               timetableObjectId: timetableObjectId,
-              serviceDate: tt['_serviceDate'] || tt['serviceDate'] || tt['operatingDate'] || getTokyoServiceDate()
+              serviceDate: tt['_serviceDate'] || tt['serviceDate'] || tt['operatingDate'] || getTokyoServiceDate(),
+              at: new Date().toISOString()
             });
             if (rec) {
               var normalized = window.TrainOperationEvidence &&
