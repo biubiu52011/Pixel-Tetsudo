@@ -51,4 +51,10 @@ assert(estimatorSource.includes('Object.keys(_assignmentOperators).length === 1'
 assert(estimatorSource.includes('vehicleIdentityStatus: vehResult.identityStatus'),
   'estimated trains must expose vehicle identity resolution state');
 
+
+assert(estimatorSource.includes('rec.decisive && rec.operator'),
+  'only decisive graded evidence may establish assignment operator');
+assert(estimatorSource.includes('operationEvidence: _assignmentMatches'),
+  'estimated trains must preserve operation evidence provenance');
+
 console.log("train-position-evidence-regression: PASS");
