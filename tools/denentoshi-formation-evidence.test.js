@@ -8,6 +8,8 @@ r=hit("06K");assert(r&&r.vehicleType==="東急2020系(10両)"&&r.formationId==="
 r=hit("21K");assert(r&&r.vehicleType==="東急2020系(10両)"&&r.formationId==="202042F");
 r=hit("13K");assert(r&&r.vehicleType==="東急5000系(10両)"&&r.formationId==="500017F");
 r=hit("10K");assert(r&&r.vehicleType==="東急2020系(10両)"&&/202029F/.test(r.formationId)&&/202009F/.test(r.formationId));
+r=hit("50T");assert(r&&r.vehicleType==="東武50050系(10両)"&&r.formationId==="5005065F");
+r=hit("66T");assert(r&&r.vehicleType==="東武50000系(10両)"&&r.formationId==="5000009F");
 assert.strictEqual(hit("02K"),null);
 assert.strictEqual(hit("01K","2026-04-17"),null);
 assert.strictEqual(hit("01K","2026-04-18","Tokyu.Toyoko"),null);
