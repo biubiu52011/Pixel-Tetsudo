@@ -606,7 +606,7 @@
               destinationStation: destinationStationUrn || '',
               timetableObjectId: timetableObjectId,
               serviceDate: tt['_serviceDate'] || tt['serviceDate'] || tt['operatingDate'] || getTokyoServiceDate(),
-              at: new Date().toISOString()
+              at: (function(){ var d=new Date(Date.now()+9*60*60*1000); return d.toISOString().slice(11,16); })()
             });
             if (rec) {
               var normalized = window.TrainOperationEvidence &&
