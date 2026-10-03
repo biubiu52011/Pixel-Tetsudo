@@ -1055,8 +1055,8 @@
       'Local': { 'default': 'JR E231系3000番台 / JR 209系3500番台' },
     },
     'Keiyo': {
-      'Local': { 'default': 'JR E233系5000番台' },
-      'Rapid': { 'default': 'JR E233系5000番台' },
+      'Local': { 'default': 'JR E233系5000番台 / JR 209系500番台' },
+      'Rapid': { 'default': 'JR E233系5000番台 / JR 209系500番台' },
       'LimitedExpress': { 'default': 'JR E257系500番台' },
     },
     'Musashino': {
