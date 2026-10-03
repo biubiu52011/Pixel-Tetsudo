@@ -1,0 +1,14 @@
+const fs=require("fs"),vm=require("vm"),assert=require("assert");
+const box={window:{}};vm.createContext(box);
+vm.runInContext(fs.readFileSync("data/timetables/denentoshi-formation-evidence.js","utf8"),box);
+const p=box.window.TRAIN_OPERATION_EVIDENCE_PROVIDERS[0];
+const hit=(n,d="2026-04-18",line="Tokyu.DenEnToshi")=>p.resolveEvidence(n,{serviceDate:d,lineId:line,railway:line});
+let r=hit("01K");assert(r&&r.vehicleType==="東急5000系(10両)"&&r.formationId==="500008F");
+r=hit("06K");assert(r&&r.vehicleType==="東急2020系(10両)"&&r.formationId==="202040F");
+r=hit("21K");assert(r&&r.vehicleType==="東急2020系(10両)"&&r.formationId==="202042F");
+r=hit("13K");assert(r&&r.vehicleType==="東急5000系(10両)"&&r.formationId==="500017F");
+r=hit("10K");assert(r&&r.vehicleType==="東急2020系(10両)"&&/202029F/.test(r.formationId)&&/202009F/.test(r.formationId));
+assert.strictEqual(hit("02K"),null);
+assert.strictEqual(hit("01K","2026-04-17"),null);
+assert.strictEqual(hit("01K","2026-04-18","Tokyu.Toyoko"),null);
+console.log("Den-en-toshi formation evidence: PASS");
