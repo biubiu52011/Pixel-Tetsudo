@@ -40,19 +40,53 @@ jobs:
           node tools/runinfo-loading-state.test.js
           node tools/performance-lifecycle.test.js
 
-      - name: Train vehicle identity regression
-        run: |
-          for test in tools/train_vehicle_mapping_guard.js tools/train-position-evidence-regression.test.js tools/asakusa-formation-evidence.test.js tools/operation-evidence-providers.test.js tools/formation-evidence-providers.test.js tools/hibiya-formation-evidence.test.js tools/oimachi-formation-evidence.test.js tools/iketama-formation-evidence.test.js tools/keiyo-operation-evidence.test.js tools/tozai-operation-evidence.test.js tools/operation-code-normalization.test.js tools/seibu-shinjuku-evidence.test.js tools/odakyu-operation-evidence.test.js tools/odakyu-formation-evidence.test.js tools/sotetsu-formation-evidence.test.js tools/denentoshi-formation-evidence.test.js; do
-            echo "::group::$test"
-            if ! output=$(node "$test" 2>&1); then
-              echo "$output"
-              echo "::endgroup::"
-              echo "::error title=Vehicle regression failed::$test"
-              exit 1
-            fi
-            echo "$output"
-            echo "::endgroup::"
-          done
+      - name: Vehicle regression 01 - train_vehicle_mapping_guard.js
+        run: node tools/train_vehicle_mapping_guard.js
+
+      - name: Vehicle regression 02 - train-position-evidence-regression.test.js
+        run: node tools/train-position-evidence-regression.test.js
+
+      - name: Vehicle regression 03 - asakusa-formation-evidence.test.js
+        run: node tools/asakusa-formation-evidence.test.js
+
+      - name: Vehicle regression 04 - operation-evidence-providers.test.js
+        run: node tools/operation-evidence-providers.test.js
+
+      - name: Vehicle regression 05 - formation-evidence-providers.test.js
+        run: node tools/formation-evidence-providers.test.js
+
+      - name: Vehicle regression 06 - hibiya-formation-evidence.test.js
+        run: node tools/hibiya-formation-evidence.test.js
+
+      - name: Vehicle regression 07 - oimachi-formation-evidence.test.js
+        run: node tools/oimachi-formation-evidence.test.js
+
+      - name: Vehicle regression 08 - iketama-formation-evidence.test.js
+        run: node tools/iketama-formation-evidence.test.js
+
+      - name: Vehicle regression 09 - keiyo-operation-evidence.test.js
+        run: node tools/keiyo-operation-evidence.test.js
+
+      - name: Vehicle regression 10 - tozai-operation-evidence.test.js
+        run: node tools/tozai-operation-evidence.test.js
+
+      - name: Vehicle regression 11 - operation-code-normalization.test.js
+        run: node tools/operation-code-normalization.test.js
+
+      - name: Vehicle regression 12 - seibu-shinjuku-evidence.test.js
+        run: node tools/seibu-shinjuku-evidence.test.js
+
+      - name: Vehicle regression 13 - odakyu-operation-evidence.test.js
+        run: node tools/odakyu-operation-evidence.test.js
+
+      - name: Vehicle regression 14 - odakyu-formation-evidence.test.js
+        run: node tools/odakyu-formation-evidence.test.js
+
+      - name: Vehicle regression 15 - sotetsu-formation-evidence.test.js
+        run: node tools/sotetsu-formation-evidence.test.js
+
+      - name: Vehicle regression 16 - denentoshi-formation-evidence.test.js
+        run: node tools/denentoshi-formation-evidence.test.js
 
       - name: Entity Preservation Guard
         run: |
