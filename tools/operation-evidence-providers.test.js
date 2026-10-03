@@ -26,6 +26,9 @@ assert(r&&r.operator==="Sotetsu"&&r.vehicleType==="相鉄21000系(8両)");
 p=load("data/timetables/toyoko-operation-evidence-2026.js");
 r=hit(p,"95G","2026-10-03","Tokyu.Toyoko");
 assert(r&&r.operator==="Sotetsu"&&r.vehicleType==="相鉄20000系(10両)");
+assert.strictEqual(hit(p,"99G","2026-10-03","Tokyu.Toyoko"),null);
+assert.strictEqual(hit(p,"99M","2026-10-03","Tokyu.Toyoko"),null);
+assert.strictEqual(hit(p,"99S","2026-10-03","Tokyu.Toyoko"),null);
 assert.strictEqual(hit(p,"95G","2026-10-03","TokyoMetro.Ginza"),null);
 
 p=load("data/timetables/asakusa-operation-evidence-2026.js");
