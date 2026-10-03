@@ -1067,9 +1067,9 @@ for (const forbidden of [
 }
 assert(vehicleMapSource.includes('東急1000系 / 東急7000系'),
   'Tokyu Tamagawa/Ikegami fleet names must remain canonical and operator-qualified');
-assert(vehicleMapSource.includes('東急6020系（5両） / 東急9000系 / 東急9020系'),
+assert(vehicleMapSource.includes('東急6020系(5両) / 東急9000系 / 東急9020系'),
   'Tokyu Oimachi local fleet identities must remain operator-qualified');
-assert(vehicleMapSource.includes('東急6020系（7両） / 東急6000系'),
+assert(vehicleMapSource.includes('東急6020系(7両) / 東急6000系'),
   'Tokyu Oimachi express fleet identities must remain operator-qualified');
 assert(vehicleMapSource.includes('横浜高速鉄道Y500系(8両)'),
   'Minatomirai Y500 identity must retain operator and eight-car formation');
@@ -1145,3 +1145,10 @@ for (const forbidden of ['小田急電鉄30000形', '小田急電鉄60000形', '
 }
 assert(vehicleMapSource.includes('小田急30000形EXEα / 小田急60000形MSE / 小田急70000形GSE'),
   'Odakyu Romancecar identities must use canonical operator prefix');
+
+
+// Canonical formation-marker punctuation: formation counts use ASCII parentheses.
+assert(!/（\d+両(?:\/\d+両)*）/.test(vehicleMapSource),
+  'formation counts must use ASCII parentheses, e.g. (8両) or (6両/8両)');
+assert(vehicleMapSource.includes('東急6020系(5両)') && vehicleMapSource.includes('東急6020系(7両)'),
+  'Tokyu 6020 formation markers must remain canonical');
