@@ -53,7 +53,7 @@ assert(r&&r.operator==="Keikyu"&&!r.vehicleType);
  const cp=providers.find(x=>x.id==="canonical-vehicle-operation-evidence");
  assert(cp);
  let x=cp.resolveEvidence("TMW001D",{serviceDate:"2026-04-10",lineId:"TokyoMonorail"});
- assert(x&&x.operationCode==="03"&&x.vehicleType==="東京モノレール10000形"&&x.formationId==="10051F");
+ assert(x&&x.operationCode==="03"&&x.vehicleType==="10000形"&&x.formationId==="51F");
  assert.strictEqual(cp.resolveEvidence("TMW002D",{serviceDate:"2026-04-10",lineId:"TokyoMonorail"}),null);
  assert.strictEqual(cp.resolveEvidence("TMW001D",{serviceDate:"2026-04-11",lineId:"TokyoMonorail"}),null);
 })();
