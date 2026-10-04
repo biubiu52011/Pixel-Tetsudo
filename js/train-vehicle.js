@@ -78,14 +78,18 @@
     // Historical train-number, owner, line/type/number and static fleet inference are forbidden.
     var chosen = '';
     var chosenSrc = '';
-    var _manualCands = splitCandidates(ctx.vehicleTypeManual);
-    var _odptCands = splitCandidates(ctx.odptVehicleType);
-    if (_manualCands.length === 1) {
-      chosen = _manualCands[0];
-      chosenSrc = 'manual';
-    } else if (_odptCands.length === 1) {
-      chosen = _odptCands[0];
-      chosenSrc = 'odpt';
+    var _timetableCands = splitCandidates(ctx.timetableVehicleType || ctx.vehicleTypeManual);
+    var _realtimeCands = splitCandidates(ctx.realtimeVehicleType || ctx.odptVehicleType);
+    // Parallel authoritative sources with explicit arbitration:
+    // realtime train-level identity wins when present; timetable/SQL identity is
+    // selected only when realtime carries no exact vehicle fact. Timetable is a
+    // first-class source, not a heuristic fallback.
+    if (_realtimeCands.length === 1) {
+      chosen = _realtimeCands[0];
+      chosenSrc = 'realtime';
+    } else if (_realtimeCands.length === 0 && _timetableCands.length === 1) {
+      chosen = _timetableCands[0];
+      chosenSrc = 'timetable';
     }
 
     // Explicit train-level or dated operation evidence is high confidence.
@@ -102,8 +106,7 @@
     // resolveVehicleDisplayName 对全部可解析的多候选返回完整串（表达不确定），不再只显示第一项；
     // 单候选/其他来源保持原名与 alias 展开（4.3.987 一致化不回归）。
     if (chosen && iconPath && window.TrainIcons && typeof window.TrainIcons.resolveVehicleDisplayName === 'function') {
-      var _dispSrc = (chosenSrc === 'manual' && ctx.vehicleTypeManual) ? ctx.vehicleTypeManual
-        : (chosen || (orderArr.length ? orderArr.join(' / ') : ''));
+      var _dispSrc = chosen || (orderArr.length ? orderArr.join(' / ') : '');
       var _disp = window.TrainIcons.resolveVehicleDisplayName(_dispSrc, ctx.lineId);
       if (_disp && _disp !== chosen) chosen = _disp;
     }
@@ -118,8 +121,9 @@
     var effectiveCandidates = orderArr.slice();
     if (chosen) {
       identityStatus = 'EXACT';
-      identityReason = (_manualEvidenceSource === 'operation-assignment-provider')
-        ? 'dated-operation-vehicle-evidence' : 'explicit-vehicle-evidence';
+      identityReason = chosenSrc === 'realtime' ? 'realtime-vehicle-evidence'
+        : ((_manualEvidenceSource === 'operation-assignment-provider')
+          ? 'dated-operation-vehicle-evidence' : 'timetable-vehicle-evidence');
     } else if (effectiveCandidates.length > 0) {
       identityStatus = 'NARROWED';
       identityReason = 'non-decisive-vehicle-candidates';
@@ -143,7 +147,7 @@
       iconPath: iconPath,
       // 兼容原 vehicleType 候选串格式（"A / B / C"，稳定顺序）
       // v4.3.1007b: 加权随机映射已确定单一车型时,vehicleTypeStr 与 name 一致(title 不再显示候选串)
-      vehicleTypeStr: orderArr.join(' / ')
+      vehicleTypeStr: chosen || ''
     };
   }
 
