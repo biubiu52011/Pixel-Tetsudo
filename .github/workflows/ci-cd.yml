@@ -109,7 +109,10 @@ jobs:
             [icons, '_poolPickByIcon', 'fleet hash fallback'],
             [vehicle, "chosenSrc = 'map'", 'VehicleTypeMap promotion'],
             [vehicle, "chosenSrc = 'trainNo'", 'train-number promotion'],
-            [vehicle, 'parts.slice(i).join', 'train-number prefix fallback']
+            [vehicle, 'parts.slice(i).join', 'train-number prefix fallback'],
+            [fs.readFileSync('js/trains-render.js', 'utf8'), 'TrainVehicle.resolve(_vrCtx)', 'renderer vehicle re-resolution'],
+            [fs.readFileSync('js/trains-render.js', 'utf8'), '__trainIconCache', 'renderer vehicle icon cache'],
+            [fs.readFileSync('js/data-fusion.js', 'utf8'), '_rtVehicle.source === "trainNo"', 'train-number realtime promotion']
           ];
           for (const [src, needle, label] of forbidden) {
             if (src.includes(needle)) throw new Error('zero-fallback violation: ' + label);
