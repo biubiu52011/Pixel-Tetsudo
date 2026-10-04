@@ -33,8 +33,8 @@ assert.ok(/_existingRank >= _incomingRank/.test(fusionVehicleSrc), 'running-chai
 assert.ok(/A line\/system transition is not vehicle-swap evidence/.test(fusionVehicleSrc), 'vehicle continuity guard must explicitly treat line transitions as non-swap evidence');
 console.log('running-chain-vehicle-continuity: 2 PASS');
 assert.ok(/lineId === "NewShuttle"[\s\S]*?Math\.min\(base\.idx, base\.nextIdx\) >= 8/.test(layoutSrc), 'New Shuttle Maruyama-Uchijuku must use single-track layout');
-const vehicleMapSrc = fs.readFileSync('data/timetables/vehicle-type-map.js','utf8');
-assert.ok(/'NewShuttle'[\s\S]{0,180}'default': '埼玉新都市交通2000系 \/ 埼玉新都市交通2020系'/.test(vehicleMapSrc), 'New Shuttle regular fleet candidates must match the official 13-set 2000/2020 fleet');
+assert.ok(!fs.existsSync('data/timetables/vehicle-type-map.js'),
+  'legacy line/train-type vehicle map must stay removed');
 const newShuttleTimetableSrc = fs.readFileSync('data/timetables/NewShuttle-manual.js','utf8');
 assert.ok(!/1050系は順次引退/.test(newShuttleTimetableSrc), 'New Shuttle timetable must not encode unsupported retirement prose as vehicle identity');
 assert.ok(!/vehicleType:\s*"[^"]*1050系/.test(newShuttleTimetableSrc), 'New Shuttle regular timetable must not mix special-event 1050 operation into daily fleet evidence');
