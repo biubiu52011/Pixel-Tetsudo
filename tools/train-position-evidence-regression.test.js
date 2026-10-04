@@ -88,6 +88,14 @@ assert(operationEvidenceSource.includes('if (timed.length !== 1) return null;'),
   'segmented operation evidence must remain unresolved when service time hits zero or multiple segments');
 assert(operationEvidenceSource.includes('if (hasTimedSegments)'),
   'time-segmented operation evidence must not collapse back to an all-day identity');
+assert(operationEvidenceSource.includes("evidenceRole: rec.evidenceRole || ''"),
+  'normalized operation evidence must preserve SQL primary/fallback policy metadata');
+assert(operationEvidenceSource.includes('realtimeApiAvailable: rec.realtimeApiAvailable === true'),
+  'normalized operation evidence must preserve realtime API capability metadata');
+assert(operationEvidenceSource.includes("realtimeVehicleIdentityStatus: rec.realtimeVehicleIdentityStatus || ''"),
+  'normalized operation evidence must preserve realtime vehicle-identity capability status');
+assert(operationEvidenceSource.includes('evidenceRole:hit.evidenceRole||""'),
+  'canonical snapshot provider must propagate evidence role instead of dropping source policy');
 
 
 assert(estimatorSource.includes("Object.keys(_assignmentVehicles).length === 1"),
