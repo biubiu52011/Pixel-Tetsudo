@@ -13,8 +13,8 @@
 
   // Evidence-backed vehicle identity follows the physical running chain, not
   // the currently rendered line. Never seed this registry from map/fleet/icon
-  // estimates. Accept explicit manual/ODPT high-confidence evidence and
-  // train-number evidence only after it has become high-confidence.
+  // estimates. Only already-EXACT vehicle identity may enter the running-chain
+  // registry; confidence/source labels alone never manufacture vehicle identity.
   var _chainVehicleRegistry = {};
   // Keep confirmed realtime evidence across a short source dropout. Position
   // truth still comes from the current snapshot; this bridge only preserves
@@ -26,10 +26,10 @@
     var _conf = p.vehicleConfidence || (p.vehicleResolution && p.vehicleResolution.confidence) || "none";
     var _identityExact = p.vehicleIdentityStatus === "EXACT" ||
       (p.vehicleResolution && p.vehicleResolution.identityStatus === "EXACT");
-    var _eligible = p.vehicleResolvedFromRealtime === true || _identityExact ||
-      ((_src === "manual" || _src === "odpt" || _src === "trainNo" || _src === "operation-assignment-provider") && _conf === "high");
+    var _realtimeExact = p.vehicleResolvedFromRealtime === true && _identityExact;
+    var _eligible = _identityExact || _realtimeExact;
     if (!_eligible) return;
-    var _incomingRank = p.vehicleResolvedFromRealtime === true ? 3 : (_src === "odpt" ? 3 : (_src === "manual" ? 2 : 1));
+    var _incomingRank = p.vehicleResolvedFromRealtime === true ? 3 : (_src === "operation-assignment-provider" ? 3 : (_src === "odpt" ? 3 : (_src === "manual" ? 2 : 1)));
     var _existing = _chainVehicleRegistry[p.runningChainId];
     if (_existing) {
       var _existingRank = _existing.evidenceRank || 0;
@@ -1064,7 +1064,7 @@
                     trainNumber: _ev.trainNumber,
                     odptVehicleType: _ev.vehicleType
                   }) : null;
-              if (!_evResolution || !_evResolution.iconPath) return;
+              if (!_evResolution || _evResolution.identityStatus !== "EXACT" || !_evResolution.iconPath) return;
               _rememberChainVehicle({
                 runningChainId: _evChainIds[0],
                 trainClass: _evResolution.name || "",
@@ -1073,6 +1073,8 @@
                 vehicleSource: _evResolution.source || "odpt",
                 vehicleConfidence: _evResolution.confidence || "high",
                 vehicleResolution: _evResolution,
+                vehicleIdentityStatus: _evResolution.identityStatus,
+                vehicleIdentityReason: _evResolution.identityReason || "",
                 vehicleResolvedFromRealtime: true
               });
             });
