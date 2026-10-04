@@ -1040,12 +1040,19 @@
             });
             Object.keys(posMap).forEach(function(_vlid) {
               (posMap[_vlid] || []).forEach(function(_rp) {
-                if (!_rp || _rp.vehicleResolvedFromRealtime !== true) return;
+                if (!_rp) return;
+                // A realtime row may lack vehicleType while still having a
+                // unique timetable running chain. Bind chain identity first so
+                // canonical timetable/SQL EXACT evidence can later act as the
+                // vehicle fallback without synthesizing realtime position.
                 if (!_rp.runningChainId && _rp.trainNumber && _chainsByTrainNumber[String(_rp.trainNumber)]) {
                   var _chainIds = Object.keys(_chainsByTrainNumber[String(_rp.trainNumber)]);
                   if (_chainIds.length === 1) _rp.runningChainId = _chainIds[0];
                 }
-                _rememberChainVehicle(_rp);
+                // Only explicit realtime EXACT identity may seed the registry
+                // from a realtime row. Empty/unknown realtime identity never
+                // manufactures vehicle evidence.
+                if (_rp.vehicleResolvedFromRealtime === true) _rememberChainVehicle(_rp);
               });
             });
             // Realtime rows without fromStation cannot provide position, but an
@@ -1083,6 +1090,15 @@
             // no exact vehicle fact; source arbitration remains upstream.
             Object.keys(estimated).forEach(function(_vlid) {
               (estimated[_vlid] || []).forEach(_rememberChainVehicle);
+            });
+            // Timetable/SQL EXACT evidence has now seeded the registry.
+            // Apply it to realtime-position rows on the same unique running
+            // chain only when no stronger realtime vehicle identity already
+            // established that chain.
+            Object.keys(posMap).forEach(function(_vlid) {
+              (posMap[_vlid] || []).forEach(function(_p) {
+                _inheritChainVehicle(_p);
+              });
             });
             Object.keys(estimated).forEach(function(_vlid) {
               (estimated[_vlid] || []).forEach(function(_p) {
