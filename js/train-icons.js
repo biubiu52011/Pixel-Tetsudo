@@ -3,11 +3,8 @@
  * 列车车型图标映射表
  * 图标来源: trainfrontview.net (32x38px)
  *
- * 4.3.267 垃圾素材彻底移除：删除 37 张非电车占位图（鼠标/耳机/仪表盘/巴士/球衣/徽章/机器人等），
- *   断裂引用统一改指铁道路线符号（MIR 模式，如 都営→都営大江戸線符号、東武→東武東上線符号）；
- *   京王/小田急/西武 运营商默认由错误车型 E235 改为各自路线符号（真实车辆素材待补）。
- * 4.3.266 图库污染清理：移除内容错误占位图引用（大巴/仪表盘/鼠标/赛车/随身听等非电车），
- *   真实车型（E235系/E531系/E721系/211系/京急/京成/相鉄/東武/東急/東京メトロ 等）保留。
+ * Current gallery uses the later large vehicle artwork set. Earlier small-image
+ * recognition notes about non-train placeholders were false positives and are removed.
  * 车辆图按车型命名原则：一个车型图可服务多条线路（如 E129系 → 信越/白新/越後/弥彦/羽越/上越）。
  */
 (function() {
@@ -409,48 +406,6 @@
   "東武90000系": "../images/列车/東武鉄道/東武鉄道_90000系.png",
   "横浜市交通局3000形": "../images/列车/横浜市交通局/横浜市交通局_3000V形.png"
 };
-  // Physical PNG basenames are asset locators only; they are never vehicle identity evidence.
-  // Phase4B: 以下名称来自旧 physical PNG basename，只能作为 asset locator，不能自动成为车型 identity。
-  var ASSET_LOCATOR_ONLY_NAMES = {
-    "E209系": true,
-    "E209系（房総）": true,
-    "E209系（京葉線）": true,
-    "209系3500番台（八高・川越線）": true,
-    "E231系常磐LED": true,
-    "E235系山手線": true,
-    "E235系総武中央線": true,
-    "E723系": true,
-    "E253系": true,
-    "JR東日本E253系": true,
-    "E209系（e209_kt2）": true,
-    "E209系（e209_kt）": true,
-    "209系2000・2100番台（房総地区）": true,
-    "209系3000番台（八高・川越線）": true,
-    "E209系（e209jg2）": true,
-    "209系1000番台（中央快速線）": true,
-    "E209系（e209jg4）": true,
-    "209系1000番台（常磐緩行線）": true,
-    "E209系（e209jy1）": true,
-    "E209系（e209jy）": true,
-    "E209系（e209kt0）": true,
-    "E209系（e209kt2）": true,
-    "E209系（e209kt3）": true,
-    "E209系（e209kt_ad）": true,
-    "E209系（e209kt）": true,
-    "E209系（e209ky1）": true,
-    "209系500番台（京葉線）": true,
-    "209系500番台（武蔵野線）": true,
-    "E209系（e209na2）": true,
-    "209系2200番台（南武線）": true,
-    "209系0番台（南武線）": true,
-    "E209系（e209or1）": true,
-    "209系500番台（中央・総武緩行線・ミツ501-510）": true,
-    "E209系（e209so）": true,
-    "E209系（e209sta）": true
-  };
-  Object.keys(ASSET_LOCATOR_ONLY_NAMES).forEach(function(name) {
-    delete VEHICLE_NAME_TO_ICON[name];
-  });
 
   // 2026-09 runtime policy: retired stock may remain as gallery assets, but must not win
   // vehicle identity by exact filename lookup. These names fall through to aliases below.
