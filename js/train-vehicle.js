@@ -183,38 +183,28 @@
     var dest = ctx.destinationStation || '';
     var stationIndex = (typeof ctx.stationIndex === 'number') ? ctx.stationIndex : undefined;
 
-    // 1) 收集候选池（带来源，候选 → 支持来源集合；orderArr 保持 S0→S3 稳定顺序）
-    var pool = {};      // candidate -> { sources: [], count }
-    var orderArr = [];  // 候选稳定顺序（manual → odpt → trainNo → map）
+    // 1) Evidence candidates are limited to explicit train-level input.
+    // Historical train-number tables and static VehicleTypeMap are deliberately
+    // excluded from runtime identity and ambiguity state.
+    var pool = {};
+    var orderArr = [];
     function addFrom(str, src) {
-      splitCandidates(str).forEach(function(c) {
-        var rec = pool[c];
-        if (!rec) {
-          rec = pool[c] = { sources: [], count: 0 };
-          orderArr.push(c);
+      splitCandidates(str).forEach(function(candidate) {
+        if (!pool[candidate]) {
+          pool[candidate] = { sources: [], count: 0 };
+          orderArr.push(candidate);
         }
-        if (rec.sources.indexOf(src) < 0) rec.sources.push(src);
-        rec.count++;
+        if (pool[candidate].sources.indexOf(src) < 0) pool[candidate].sources.push(src);
+        pool[candidate].count++;
       });
     }
-
-    var _explicitVehicleInput = splitCandidates(ctx.vehicleTypeManual).length > 0 ||
-      splitCandidates(ctx.odptVehicleType).length > 0;
     var _manualEvidenceSource = String(ctx.vehicleEvidenceSource || '').trim();
-
-    addFrom(ctx.vehicleTypeManual, 'manual');      // S0
-    addFrom(ctx.odptVehicleType, 'odpt');          // S1
-    getCandidates(trainNumber, operator).forEach(function(c) { // S2
-      var rec = pool[c];
-      if (!rec) {
-        rec = pool[c] = { sources: [], count: 0 };
-        orderArr.push(c);
-      }
-      if (rec.sources.indexOf('trainNo') < 0) rec.sources.push('trainNo');
-      rec.count++;
-    });
-    if (window.VehicleTypeMap && typeof window.VehicleTypeMap.resolve === 'function') { // S3
-      addFrom(window.VehicleTypeMap.resolve(lineId, trainType, dest), 'map');
+    addFrom(ctx.vehicleTypeManual, 'manual');
+    addFrom(ctx.odptVehicleType, 'odpt');
+    if (Array.isArray(ctx.operationVehicleCandidates)) {
+      ctx.operationVehicleCandidates.filter(Boolean).forEach(function(candidate) {
+        addFrom(candidate, 'operation');
+      });
     }
 
     // 2) Zero-fallback identity decision.
@@ -271,15 +261,6 @@
     var effectiveCandidates = orderArr.slice();
     var operationVehicleCandidates = Array.isArray(ctx.operationVehicleCandidates)
       ? ctx.operationVehicleCandidates.filter(Boolean) : [];
-    if (operationVehicleCandidates.length && effectiveCandidates.length > 1) {
-      var constrained = effectiveCandidates.filter(function(c) {
-        return operationVehicleCandidates.indexOf(c) >= 0;
-      });
-      if (constrained.length) effectiveCandidates = constrained;
-    }
-    if (effectiveOwner && effectiveCandidates.length > 1) {
-      effectiveCandidates = filterCandidatesByOwner(effectiveCandidates, effectiveOwner);
-    }
     if (chosen) {
       identityStatus = 'EXACT';
       identityReason = (_manualEvidenceSource === 'operation-assignment-provider')
