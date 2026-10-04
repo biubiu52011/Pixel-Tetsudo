@@ -314,10 +314,9 @@
     });
     var candidateKeys = Object.keys(candidates);
     if (!candidateKeys.length) {
-      // Structural evidence remains a constraint in fallback mode, not a
-      // standalone dated assignment.
-      return familyHit && !familyHit.vehicleType && !(familyHit.vehicleCandidates || []).length
-        ? familyHit : null;
+      // Structural evidence remains a constraint in fallback mode, never a
+      // standalone run assignment (including ownership-only family rules).
+      return null;
     }
     var first = runHits[0] || familyHit;
     if (!first) return null;
