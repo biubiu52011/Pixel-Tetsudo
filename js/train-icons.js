@@ -13,107 +13,6 @@
 (function() {
   "use strict";
 
-  // Vehicle deployment zones: specific rolling stock only runs on listed segments
-  var VEHICLE_DEPLOYMENTS = {
-    // 埼京線 ↔ 川越線：大宮〜川越間は埼京線車両 E233系7000番台が直通担当
-    "SaikyoKawagoe": {
-      routes: [
-        { line: "Kawagoe", from: "Omiya", to: "Kawagoe", icon: "../images/列车/JR東日本/JR東日本_E233系_7000番台.png", priority: 2 }
-      ]
-    },
-    // 211系湘南色（橙×绿帯、高崎車両センター）部署区间（参考 trainfrontview.net sozai-e4 高崎地区 + 用户指定 4 路线）
-    "211Shonan": {
-      routes: [
-        { line: "Ryomo", from: "Oyama", to: "Shin-Maebashi", icon: "../images/列车/JR東日本/JR東日本_211系_湘南色.png", priority: 1 },   // 両毛線：全線（小山〜新前橋）
-        { line: "Agatsuma", from: "Shibukawa", to: "Numata", icon: "../images/列车/JR東日本/JR東日本_211系_湘南色.png", priority: 1 },   // 吾妻線：渋川〜沼田
-        { line: "Joetsu", from: "Takasaki", to: "Minakami", icon: "../images/列车/JR東日本/JR東日本_211系_湘南色.png", priority: 1 },     // 上越線：高崎〜水上
-        { line: "Shinetsu", from: "Takasaki", to: "Yokokawa", icon: "../images/列车/JR東日本/JR東日本_211系_湘南色.png", priority: 1 }    // 信越本線：高崎〜横川
-      ]
-    },
-    // 211系長野色（冰蓝与青色带）部署区间（参考 trafficnews.jp/post/676306）
-    "211Nagano": {
-      routes: [
-        { line: "ChuoMain", from: "Takao", to: "Shiojiri", icon: "../images/列车/JR東日本/JR東日本_211系_長野色.png", priority: 1 },        // 中央東線：高尾〜塩尻（2026.3 改点后不进高尾以东）
-        { line: "Shinonoi", from: "Shiojiri", to: "Shinonoi", icon: "../images/列车/JR東日本/JR東日本_211系_長野色.png", priority: 2 },     // 篠ノ井線：全线（班次最密）
-        { line: "Shinetsu", from: "Shinonoi", to: "Nagano", icon: "../images/列车/JR東日本/JR東日本_211系_長野色.png", priority: 2 },       // 信越本線（長野段）：早晚通勤普通
-        { line: "Oito", from: "Matsumoto", to: "Shinano-Omachi", icon: "../images/列车/JR東日本/JR東日本_211系_長野色.png", priority: 1 },  // 大糸線：南段（少数固定班次）
-        { line: "ChuoWest", from: "Shiojiri", to: "Nakatsugawa", icon: "../images/列车/JR東日本/JR東日本_211系_長野色.png", priority: 1 },  // 中央西線：直通（线路数据待补）
-        { line: "Fujikyuko", from: "Otsuki", to: "Kawaguchiko" },   // 富士急行線：直通（线路+图标待补）
-        { line: "Iida", from: "Tatsuno", to: "Iida" }               // 飯田線：直通（线路+图标待补）
-      ]
-    },
-    "E127": {
-      routes: [
-        { line: "Oito", from: "Matsumoto", to: "Minami-Koya", icon: "../images/列车/JR東日本/JR東日本_E127系_0番代_新潟色.png", priority: 2 },   // 大糸線：全线（E127 核心，优先于 211）
-        { line: "Shinonoi", from: "Shiojiri", to: "Shinonoi", icon: "../images/列车/JR東日本/JR東日本_E127系_0番代_新潟色.png", priority: 1 }, // 篠ノ井線：普通运用（班次少于 211）
-        { line: "Shinetsu", from: "Shinonoi", to: "Nagano", icon: "../images/列车/JR東日本/JR東日本_E127系_0番代_新潟色.png", priority: 1 }, // 信越本線長野段：极少数班次
-        { line: "ChuoTatsuno", from: "Okaya", to: "Shiojiri", icon: "../images/列车/JR東日本/JR東日本_E127系_0番代_新潟色.png", priority: 1 }  // 中央本線辰野支線：区间摆渡（替代 123 系）
-      ]
-    },
-    "E129": {
-      routes: [
-        { line: "Shinetsu", from: "Naoetsu", to: "Niigata", icon: "../images/列车/JR東日本/JR東日本_E129系.png", priority: 1 },   // 信越本線（新潟段）：直江津〜長岡〜新潟
-        { line: "Hakushin", from: "Niigata", to: "Shibata", icon: "../images/列车/JR東日本/JR東日本_E129系.png", priority: 1 },     // 白新線：全線
-        { line: "Echigo", from: "Kashiwazaki-Higashi", to: "Niigata", icon: "../images/列车/JR東日本/JR東日本_E129系.png", priority: 1 },  // 越後線：柏崎側端〜吉田〜新潟
-        { line: "Miyo", from: "Higashi-Sanjo", to: "Yahiko", icon: "../images/列车/JR東日本/JR東日本_E129系.png", priority: 1 },   // 弥彦線：全線（lineId=Miyo）
-        { line: "Uetsu", from: "Niitsu", to: "Murakami", icon: "../images/列车/JR東日本/JR東日本_E129系.png", priority: 1 },         // 羽越本線（新潟直流区間）：新津〜村上
-        { line: "Joetsu", from: "Miyaike", to: "Minakami", icon: "../images/列车/JR東日本/JR東日本_E129系.png", priority: 1 }        // 上越線（新潟直流区間）：宮内(長岡)〜水上
-      ]
-    },
-    // ===== 特急・観光列車（typeMatch 按 ODPT trainType 匹配；from/to 省略 = 全線）=====
-    "ExpJREast": {
-      routes: [
-        // v4.3.525-2: ひたち・ときわ 现行车 E657系（JR東日本官网列车页 + 2026年3月改正时刻表全部 E657 10両
-        // 实证；原 4.3.480 误设 E261系 pri4 = サフィール踊り子专用车（东海道・伊东线），非常磐线——已修正）
-        { line: "Joban", icon: "../images/列车/JR東日本/JR東日本_E657系.png", typeMatch: ["Hitachi", "Tokiwa"], priority: 4 },          // ひたち・ときわ（E657系）
-        { line: "JobanMain", icon: "../images/列车/JR東日本/JR東日本_E657系.png", typeMatch: ["Hitachi", "Tokiwa"], priority: 4 },      // 常磐線本線上のひたち・ときわ（4.3.480：JobanMain 単独カード対応）
-                { line: "SobuRapid", icon: "../images/列车/JR東日本/JR東日本_E257系_500番代.png", typeMatch: ["Sazanami", "Wakashio", "Shiosai"], priority: 3 }, // さざなみ・わかしお・しおさい
-        { line: "Uchibo", icon: "../images/列车/JR東日本/JR東日本_E257系_500番代.png", typeMatch: ["Sazanami"], priority: 3 },
-        { line: "Sotobo", icon: "../images/列车/JR東日本/JR東日本_E257系_500番代.png", typeMatch: ["Wakashio"], priority: 3 },
-        { line: "Narita", icon: "../images/列车/JR東日本/JR東日本_E257系_500番代.png", typeMatch: ["Shiosai"], priority: 3 },
-        { line: "ChuoMain", icon: "../images/列车/JR東日本/JR東日本_E353系.png", typeMatch: ["Azusa", "Kaiji"], priority: 3 },           // 特急あずさ・かいじ（E353系）
-        // v4.3.525: 中央快速線（ChuoRapid）上特急 E353 补全——ODPT 实测 ChuoRapid 上 4 条 LimitedExpress（38M/5041M/5139M 等，dest 松本/甲府=あずさ・かいじ）此前全部 fallback E233系0番台（普通车）
-        { line: "ChuoRapid", icon: "../images/列车/JR東日本/JR東日本_E353系.png", typeMatch: ["Azusa", "Kaiji"], priority: 3 },          // 特急あずさ・かいじ（中央快速線区間）
-        { line: "Narita", icon: "../images/列车/JR東日本/JR東日本_E259系.png", typeMatch: ["NaritaExpress"], priority: 3 },               // 成田エクスプレス（E259系）
-        { line: "OuMain", icon: "../images/列车/JR東日本/JR東日本_E751系.png", typeMatch: ["Tsugaru"], priority: 3 },                  // 特急つがる（青森〜秋田）
-        { line: "Uetsu", icon: "../images/列车/JR東日本/JR東日本_E653系.png", typeMatch: ["Inaho"], priority: 3 },                      // 特急いなほ（新潟〜秋田、羽越本線のみ——奥羽本線は走らない）
-        { line: "Joetsu", icon: "../images/列车/JR東日本/JR東日本_E257系_5500番代.png", typeMatch: ["Kusatsu", "Shima"], priority: 3 },       // 特急草津・四万
-        { line: "Agatsuma", icon: "../images/列车/JR東日本/JR東日本_E257系_5500番代.png", typeMatch: ["Kusatsu", "Shima"], priority: 3 },
-        { line: "Shinetsu", icon: "../images/列车/JR東日本/JR東日本_E653系_1000番代.png", typeMatch: ["Shirayuki"], priority: 3 },        // 特急しらゆき（新潟〜直江津）
-        { line: "Nikkoku", icon: "../images/列车/JR東日本/JR東日本_253系_1000番台.png", typeMatch: ["Nikko", "Kinu"], priority: 3 }              // 特急日光・きぬがわ（253系1000番台、4.3.457 図庫更新で追加）
-      ]
-    },
-    "ExpTobu": {
-      routes: [
-        // Generic Tobu.LimitedExpress does not identify the physical vehicle.
-        // Do not assign one representative image by line; N100/100/500/200 are resolved
-        // only from explicit vehicle/service evidence elsewhere in the pipeline.
-      ]
-    },
-    "ExpKeisei": {
-      routes: [
-        // 4.3.458：スカイライナー（AE形）は typeMatch で判定——アクセス線の普通列車は 3900系
-        { line: "NaritaAccess", icon: "../images/列车/京成電鉄/京成電鉄_AE形.png", typeMatch: ["Skyliner"], priority: 3 },
-        { line: "NaritaSkyAccess", icon: "../images/列车/京成電鉄/京成電鉄_AE形.png", typeMatch: ["Skyliner"], priority: 3 }
-      ]
-    },
-    "ExpOdakyu": {
-      routes: [
-        { line: "Odawara", icon: "../images/列车/小田急電鉄/小田急電鉄_70000形_GSE.png", typeMatch: ["SuperHakone"], priority: 3 }, // GSE（スーパーはこね）
-        { line: "Odawara", icon: "../images/列车/小田急電鉄/小田急電鉄_60000形_MSE.png", typeMatch: ["Hakone", "HomeWay", "MorningWay"], priority: 3 }, // MSE
-        { line: "OdakyuEnoshima", icon: "../images/列车/小田急電鉄/小田急電鉄_30000形_EXE.png", typeMatch: ["Enoshima", "BayResort", "HomeWay", "MorningWay"], priority: 3 } // EXE（えのしま等）
-      ]
-    },
-    "ExpSeibu": {
-      routes: [
-        { line: "Ikebukuro", icon: "../images/列车/西武鉄道/西武鉄道_10000系_ニューレッドアロー.png", typeMatch: ["Ltrain"], priority: 2 },          // 観光特急 L-train
-        { line: "SeibuChichibu", icon: "../images/列车/西武鉄道/西武鉄道_10000系_ニューレッドアロー.png", typeMatch: ["Ltrain"], priority: 2 },
-        { line: "Ikebukuro", icon: "../images/列车/西武鉄道/西武鉄道_40000系_赤帯.png", typeMatch: ["STRAIN", "S-TRAIN"], priority: 2 },      // S-TRAIN（40000系）
-        { line: "SeibuShinjuku", icon: "../images/列车/西武鉄道/西武鉄道_40000系_赤帯.png", typeMatch: ["STRAIN", "S-TRAIN"], priority: 2 }
-      ]
-    }
-  };
-
   function _resolveTrainIcon(lineId, operator, trainId, stationIndex, trainType, byOperator) {
     // Zero-fallback policy: operational context is never vehicle identity.
     // Concrete vehicle artwork must come from explicit upstream vehicle evidence.
@@ -570,7 +469,6 @@
     "N700系（青）": "../images/列车/JR西日本/JR西日本_N700系_7000番台.png",
     "500系（ピンク）": "../images/列车/JR西日本/JR西日本_500系_ハローキティ新幹線.png",
   // v4.3.975: 自动补全未引用图标资产（扫描 images/列车 生成，反推表全覆盖，别名链打通）
-    "N700系7000番台": "../images/列车/JR九州/JR九州_800系.png",
     "京浜急行電鉄1000形（別）": "../images/列车/京浜急行電鉄/京浜急行電鉄_1000形_1300番台.png",
     "京浜急行電鉄1000系": "../images/列车/京浜急行電鉄/京浜急行電鉄_1000形_1200番台.png",
     "京成電鉄3000形": "../images/列车/京成電鉄/京成電鉄_3000形.png",
@@ -606,7 +504,6 @@
     "6300形": "../images/列车/都営地下鉄/都営地下鉄_6300形_3次車.png",
     "小田急電鉄1000形": "../images/列车/小田急電鉄/小田急電鉄_1000形_標準色.png",
     "京浜急行電鉄1500形": "../images/列车/京浜急行電鉄/京浜急行電鉄_1500形.png",
-    "京成電鉄AE100形": "../images/列车/京成電鉄/京成電鉄_AE形.png",
     "JR東日本E231系1000番台": "../images/列车/JR東日本/JR東日本_E231系_1000番台.png",
     "JR東日本E233系1000番台": "../images/列车/JR東日本/JR東日本_E233系_1000番代.png",
     "JR東日本E233系3000番台": "../images/列车/JR東日本/JR東日本_E233系3000番台.png",
@@ -999,7 +896,6 @@
     "相模鉄道10000系": "../images/列车/相模鉄道/相模鉄道_10000系_相鉄グループカラー.png",
     "相模鉄道20000系": "../images/列车/相模鉄道/相模鉄道_20000系_YOKOHAMA_NAVYBLUE.png",
     "東急5050系": "../images/列车/東急電鉄/東急電鉄_5050系.png",
-    "東急5050系4000番台": "../images/列车/東急電鉄/東急電鉄_5050系.png",
     "京王電鉄5000系": "../images/列车/京王電鉄/京王電鉄_5000系.png",
     "東葉高速2000系": "../images/列车/東葉高速鉄道/東葉高速鉄道_2000系.png",
     "E235系0番台（山手線）": "../images/列车/JR東日本/JR東日本_E235系_0番台.png"
