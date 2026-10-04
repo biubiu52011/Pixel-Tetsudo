@@ -176,7 +176,8 @@ assert(!estimatorSource.includes("_candidateSetsAgree"),
   'estimator must not duplicate candidate agreement arbitration');
 assert(operationEvidenceSource.includes('if (exactKeys.length > 1) return null;'),
   'canonical resolver must keep conflicting exact vehicle identities unresolved');
-assert(operationEvidenceSource.includes('first.vehicleCandidates = Object.keys(candidates);'),
+assert(operationEvidenceSource.includes('first.vehicleType = "";') &&
+  operationEvidenceSource.includes('first.vehicleCandidates = candidateKeys;'),
   'candidate-only evidence must remain candidate-only in the canonical resolver');
 assert(!/tt\['vehicleType'\]\s*=\s*Object\.keys\(_assignmentVehicles\)/.test(estimatorSource),
   'dated operation evidence must not be written back into legacy timetable vehicleType');
