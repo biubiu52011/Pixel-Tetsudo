@@ -42,6 +42,13 @@
   function normalizeOperationCode(trainNumber, ctx) {
     ctx = ctx || {};
     var raw = String(trainNumber || "").toUpperCase().trim();
+    // Tozai public train numbers preserve the working suffix in their final
+    // two digits + owner letter: 507K -> 07K, 603K -> 03K, 655S -> 55S,
+    // A650T -> 50T. Resolve this network form before the generic explicit form.
+    if (/Tozai|ChuoSobu|ToyoRapid|東西|中央.*総武|東葉/i.test([ctx.lineId,ctx.railway].join("|"))) {
+      var tz = raw.match(/(?:^|[^0-9A-Z])(?:A|B)?\d*(\d{2})([KST])(?:R)?$/);
+      if (tz) return tz[1] + tz[2];
+    }
     // Explicit working-number forms are lossless and safe across through networks.
     // Examples: 03K, 50T, 02S, 91G, A1291G, B691G.
     var explicit = raw.match(/(?:^|[^0-9A-Z])(?:A|B)?(\d{1,4})([KSMTGE])$/);
@@ -50,13 +57,6 @@
       // A1291G/B691G encode the working number in the final two digits.
       if (/^[AB]/.test(raw) && digits.length >= 3) digits = digits.slice(-2);
       return String(parseInt(digits, 10)).padStart(2, "0") + explicit[2];
-    }
-    // Tozai public train numbers preserve the working suffix in their final
-    // two digits + owner letter: 507K -> 07K, 603K -> 03K, 655S -> 55S,
-    // A650T -> 50T. JR East / published operation tables confirm this form.
-    if (/Tozai|ChuoSobu|ToyoRapid|東西|中央.*総武|東葉/i.test([ctx.lineId,ctx.railway].join("|"))) {
-      var tz = raw.match(/(?:^|[^0-9A-Z])(?:A|B)?\d*(\d{2})([KST])(?:R)?$/);
-      if (tz) return tz[1] + tz[2];
     }
     return "";
   }
