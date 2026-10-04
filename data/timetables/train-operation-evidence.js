@@ -108,13 +108,22 @@
         // Prefer an explicit time segment when the caller supplies service time.
         var t = String(ctx.serviceTime || ctx.currentTime || "").slice(0,5);
         if (t) {
+          var hasTimedSegments = matches.some(function(r) {
+            return !!(String(r.validFromTime || "").slice(0,5) || String(r.validToTime || "").slice(0,5));
+          });
           var timed = matches.filter(function(r) {
             var from = String(r.validFromTime || "").slice(0,5);
             var to = String(r.validToTime || "").slice(0,5);
             if (!from && !to) return false;
             return (!from || t >= from) && (!to || t < to);
           });
-          if (timed.length === 1) matches = timed;
+          // Once an operation/date is segmented, service time is part of identity.
+          // A gap or overlap must remain unresolved; never fall back to an
+          // all-day same-model collapse.
+          if (hasTimedSegments) {
+            if (timed.length !== 1) return null;
+            matches = timed;
+          }
         }
 
         // Duplicate evidence for the same identity is safe to collapse. Different
