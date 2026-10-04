@@ -102,6 +102,16 @@ assert(icons.resolveVehicleIcon('N700系7000番台', 'UnknownLine') === null,
   'N700-7000 must not borrow JR Kyushu 800-series artwork');
 assert(icons.resolveVehicleIcon('AE100形', 'UnknownLine') === null,
   'retired AE100 must not borrow AE-series artwork');
+assert(icons.resolveVehicleIcon('都営5300形', 'Asakusa') === null,
+  'retired Toei 5300 must not borrow 5500 artwork');
+assert(icons.resolveVehicleIcon('東武20000系', 'Hibiya') === null,
+  'Tobu 20000 must not borrow 20400 artwork');
+assert(icons.resolveVehicleIcon('東武50030系', 'UnknownLine') === null,
+  'Tobu 50030 must not borrow 50000 artwork');
+assert(icons.resolveVehicleIcon('東急5080系', 'Meguro') === null,
+  'Tokyu 5080 must not borrow 5000 renewal artwork');
+assert(icons.resolveVehicleIcon('E209系（京葉線）', 'Keiyo') === null,
+  'ambiguous E209 Keiyo label must not manufacture 209-500 artwork');
 assert(!/function _resolveVehicleIconBase[\\s\\S]*?VEHICLE_NAME_ALIASES\[/.test(source),
   'vehicle icon resolver reintroduced alias fallback');
 assert(!/function _resolveVehicleIconBase[\\s\\S]*?LINE_VEHICLE_OVERRIDES\[/.test(source),
