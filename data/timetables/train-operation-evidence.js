@@ -183,6 +183,80 @@
 
   registerCanonicalDatedProvider();
 
+  function familyPatternMatches(pattern, operationCode) {
+    pattern=String(pattern||"").trim(); operationCode=String(operationCode||"").trim().toUpperCase();
+    if (!pattern || !operationCode) return false;
+    if (pattern === "*") return true;
+    if (/^\*[A-Z]$/.test(pattern)) return operationCode.endsWith(pattern.slice(1));
+    if (/^[A-Z]\*$/.test(pattern)) return operationCode.startsWith(pattern.slice(0,1));
+    if (pattern.indexOf(",")>=0) return pattern.split(",").map(function(x){return x.trim().toUpperCase();}).indexOf(operationCode)>=0;
+    var m=pattern.match(/^([A-Z]?)(\d+)([A-Z]?)-([A-Z]?)(\d+)([A-Z]?)(?:\s+(odd|even))?$/i);
+    if (m) {
+      var om=operationCode.match(/^([A-Z]?)(\d+)([A-Z]?)$/);
+      if (!om) return false;
+      var prefix=(m[1]||m[4]||"").toUpperCase(), suffix=(m[3]||m[6]||"").toUpperCase();
+      if (prefix && om[1]!==prefix) return false;
+      if (suffix && om[3]!==suffix) return false;
+      var n=parseInt(om[2],10), lo=parseInt(m[2],10), hi=parseInt(m[5],10);
+      if (n<lo || n>hi) return false;
+      if (m[7]==="odd" && n%2!==1) return false;
+      if (m[7]==="even" && n%2!==0) return false;
+      return true;
+    }
+    return pattern.toUpperCase()===operationCode;
+  }
+
+  function registerCanonicalFamilyRuleProvider() {
+    var rules=window.VEHICLE_FAMILY_RULES||[];
+    if (!Array.isArray(rules)||!rules.length) return false;
+    return register({
+      id:"canonical-vehicle-family-rules", grade:"B",
+      resolveEvidence:function(trainNumber,ctx) {
+        ctx=ctx||{}; var d=String(ctx.serviceDate||"").slice(0,10);
+        var line=[ctx.lineId,ctx.railway,ctx.operator].join("|");
+        var op=String(ctx.operationCode||normalizeOperationCode(trainNumber,ctx)||"");
+        if (!d||!op) return null;
+        var cal=String(ctx.calendarType||"").toLowerCase();
+        var matches=rules.filter(function(r){
+          if (line.indexOf(r.networkKey)<0) return false;
+          if (r.effectiveFrom && d<r.effectiveFrom) return false;
+          if (r.effectiveTo && d>r.effectiveTo) return false;
+          if (r.calendarType && (!cal || String(r.calendarType).toLowerCase()!==cal)) return false;
+          return familyPatternMatches(r.codePattern,op);
+        });
+        if (!matches.length) return null;
+        var exact={}; var candidates={}; var operators={};
+        matches.forEach(function(r){
+          if (r.operator) operators[r.operator]=true;
+          if (r.exactVehicleType) exact[r.exactVehicleType]=r;
+          (r.vehicleCandidates||[]).forEach(function(v){if(v)candidates[v]=true;});
+        });
+        var exactKeys=Object.keys(exact), candidateKeys=Object.keys(candidates), operatorKeys=Object.keys(operators);
+        if (exactKeys.length===1) {
+          var hit=exact[exactKeys[0]];
+          return {operator:operatorKeys.length===1?operatorKeys[0]:"",vehicleType:exactKeys[0],
+            vehicleCandidates:[exactKeys[0]],operationCode:op,grade:hit.grade||"B",sourceUrl:hit.sourceUrl||"",
+            provenance:"canonical operation family exact rule",observedDate:d};
+        }
+        if (exactKeys.length>1) return null;
+        if (candidateKeys.length) {
+          var hit2=matches.find(function(r){return (r.vehicleCandidates||[]).length;})||matches[0];
+          return {operator:operatorKeys.length===1?operatorKeys[0]:"",vehicleType:"",
+            vehicleCandidates:candidateKeys,operationCode:op,grade:hit2.grade||"B",sourceUrl:hit2.sourceUrl||"",
+            provenance:"canonical operation family narrowed rule",observedDate:d};
+        }
+        // Ownership-only rules may constrain operator but never invent a model.
+        var own=matches[0];
+        return {operator:operatorKeys.length===1?operatorKeys[0]:"",vehicleType:"",vehicleCandidates:[],
+          operationCode:op,grade:own.grade||"B",sourceUrl:own.sourceUrl||"",
+          provenance:"canonical operation family ownership rule",observedDate:d};
+      }
+    });
+  }
+
+  registerCanonicalFamilyRuleProvider();
+
+
 
   window.TrainOperationEvidence = {
     register: register,
