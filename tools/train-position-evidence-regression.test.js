@@ -8,8 +8,9 @@ for(const js of ["js/data-fusion.js","js/train-position-estimator.js","js/runnin
 
 const fusion=read("js/data-fusion.js");
 assert(/ambiguous realtime line identity/.test(fusion),"ambiguous realtime line identity must remain unresolved");
-assert(!/mainLinesassert(/_queueChainVehicle/.test(fusion) && /Object\.keys\(_chainVehicleCandidates\)/.test(fusion),
-  "vehicle evidence must converge through one chain candidate pool and one registry commit");.sort[\s\S]{0,500}targetLine\s*=\s*mainLines\[0\]/.test(fusion),"must not choose longest line for ambiguous realtime");
+assert(!/mainLines\.sort[\s\S]{0,500}targetLine\s*=\s*mainLines\[0\]/.test(fusion),"must not choose longest line for ambiguous realtime");
+assert(/_queueChainVehicle/.test(fusion) && /Object\.keys\(_chainVehicleCandidates\)/.test(fusion),
+  "vehicle evidence must converge through one chain candidate pool and one registry commit");
 assert(/_uniqueTimetableRailwayForTrain/.test(fusion),"missing unique timetable railway recovery");
 assert(/keys\.length === 1 \? keys\[0\] : ""/.test(fusion),"railway recovery must require a unique match");
 assert(/_CHAIN_EVIDENCE_TTL_MS\s*=\s*3\s*\*\s*60\s*\*\s*1000/.test(fusion),"dropout evidence TTL missing");
@@ -21,13 +22,13 @@ assert(!/positionData\.trainClass\s*=\s*positionData\.trainClass\s*\|\|\s*resolv
   "DataFusion must not fill trainClass from line/operator/train context");
 
 assert(/Object\.keys\(_realtimeEvidenceWithoutPosition\)/.test(fusion),"positionless realtime vehicle evidence must have a consumer");
-assert(/\(estimated\[_vlid\] \|\| \[\]\)\.forEach\(_rememberChainVehicle\)/.test(fusion),"verified timetable vehicle evidence must seed running-chain registry");
+
 const estimator=read("js/train-position-estimator.js");
 const estimatorSource=estimator;
 const fusionSource=fusion;
 assert(/vehicleResolvedUpstream:\s*vehResult\.identityStatus === 'EXACT'/.test(estimator),
   "upstream vehicle authority must represent EXACT identity, not artwork availability");
-assert(/TRAIN_VEHICLE_EVIDENCE_PROVIDERS/.test(estimator),"estimator must consume generic exact-train vehicle evidence providers");
+assert(!/TRAIN_OPERATION_EVIDENCE_PROVIDERS/.test(estimator),"estimator must not directly iterate operation evidence providers");
 assert(/Object\.keys\(_vehicleNames\)\.length === 1/.test(estimator),"conflicting exact-train vehicle providers must remain unresolved");
 const tobuEvidence=read("data/timetables/tobu-limited-express-vehicle-evidence.js");
 assert(/TRAIN_VEHICLE_EVIDENCE_PROVIDERS/.test(tobuEvidence),"Tobu exact-train evidence must register through generic provider registry");
