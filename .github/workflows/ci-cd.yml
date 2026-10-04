@@ -130,7 +130,13 @@ jobs:
             [icons, 'VEHICLE_NAME_ALIASES', 'identity-changing vehicle alias table'],
             [icons, 'LINE_ICON_CANONICAL_IDS', 'line-to-canonical vehicle defaults'],
             [icons, 'LINE_ICONS: LINE_ICONS', 'public line vehicle default API'],
-            [icons, 'OPERATOR_ICONS: OPERATOR_ICONS', 'public operator vehicle default API']
+            [icons, 'OPERATOR_ICONS: OPERATOR_ICONS', 'public operator vehicle default API'],
+            [icons, 'var LINE_ICONS', 'line vehicle fallback table'],
+            [icons, 'var OPERATOR_ICONS', 'operator vehicle fallback table'],
+            [icons, 'TRAIN_TYPE_ICON_RULES', 'train-type/number vehicle guess rules'],
+            [icons, 'LINE_ICON_OVERRIDES', 'line vehicle override rules'],
+            [icons, 'THROUGH_SUFFIX_RULES', 'through-service suffix vehicle guess rules'],
+            [icons, 'THROUGH_PREFIX_RULES', 'through-service prefix vehicle guess rules']
           ];
           for (const [src, needle, label] of forbidden) {
             if (src.includes(needle)) throw new Error('zero-fallback violation: ' + label);
