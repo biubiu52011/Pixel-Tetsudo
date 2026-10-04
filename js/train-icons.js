@@ -581,20 +581,33 @@ var CANONICAL_VEHICLES = {
   }
 };
 var CANONICAL_VEHICLE_ALIAS_INDEX = {};
+var CANONICAL_VEHICLE_ALIAS_CONFLICTS = {};
+function _registerCanonicalVehicleAlias(alias, rec) {
+  var key = String(alias || "").trim();
+  if (!key || CANONICAL_VEHICLE_ALIAS_CONFLICTS[key]) return;
+  var existing = CANONICAL_VEHICLE_ALIAS_INDEX[key];
+  if (existing && existing.id !== rec.id) {
+    delete CANONICAL_VEHICLE_ALIAS_INDEX[key];
+    CANONICAL_VEHICLE_ALIAS_CONFLICTS[key] = true;
+    return;
+  }
+  CANONICAL_VEHICLE_ALIAS_INDEX[key] = rec;
+}
 Object.keys(CANONICAL_VEHICLES).forEach(function(id) {
   var rec = CANONICAL_VEHICLES[id];
   rec.id = id;
-  CANONICAL_VEHICLE_ALIAS_INDEX[id] = rec;
-  CANONICAL_VEHICLE_ALIAS_INDEX[rec.displayName] = rec;
-  CANONICAL_VEHICLE_ALIAS_INDEX[rec.iconName] = rec;
+  _registerCanonicalVehicleAlias(id, rec);
+  _registerCanonicalVehicleAlias(rec.displayName, rec);
+  _registerCanonicalVehicleAlias(rec.iconName, rec);
   (rec.aliases || []).forEach(function(alias) {
-    CANONICAL_VEHICLE_ALIAS_INDEX[alias] = rec;
+    _registerCanonicalVehicleAlias(alias, rec);
   });
 });
 
 function resolveCanonicalVehicle(name) {
   var n = String(name || "").trim();
-  return n ? (CANONICAL_VEHICLE_ALIAS_INDEX[n] || null) : null;
+  if (!n || CANONICAL_VEHICLE_ALIAS_CONFLICTS[n]) return null;
+  return CANONICAL_VEHICLE_ALIAS_INDEX[n] || null;
 }
 
 function _canonicalVehicleIconPath(name, lineId) {
