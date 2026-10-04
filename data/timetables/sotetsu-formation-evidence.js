@@ -20,8 +20,9 @@ var rows={"2026-04-08":{
 "95G":["相鉄20000系(10両)","20105F"]
 }};
 function code(n){var m=String(n||"").toUpperCase().match(/^(?:([1-8][0-9])|(9[1-5]G)|([0-9]{2}K))$/);return m?(m[1]||m[2]||m[3]):"";}
-function resolveEvidence(trainNumber,ctx){ctx=ctx||{};var hay=[ctx.lineId,ctx.railway,ctx.operator].join("|");
- if(!/Sotetsu|相鉄/i.test(hay))return null;
+function resolveEvidence(trainNumber,ctx){ctx=ctx||{};var line=[ctx.lineId,ctx.railway].filter(Boolean).join("|");
+ if(line&&!/Sotetsu|相鉄/i.test(line))return null;
+ if(!line&&!/Sotetsu|相鉄/i.test(String(ctx.operator||"")))return null;
  var d=String(ctx.serviceDate||"").slice(0,10),r=rows[d]&&rows[d][code(trainNumber)];if(!r)return null;
  return {operator:"Sotetsu",vehicleType:r[0],formationId:r[1],grade:"C",sourceUrl:SOURCE,
  provenance:"dated Sotetsu operation observation",observedDate:d};}
