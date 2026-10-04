@@ -318,12 +318,12 @@ function main() {
 
   // trainOwner narrows a multi-company through-service fleet without pretending
   // that service type alone identifies the formation.
-  expectRuntime(win, 'S-TRAIN owner evidence', {
+  expectNarrowedRuntime(win, 'S-TRAIN owner evidence', {
     lineId: 'Fukutoshin',
     operator: 'TokyoMetro',
     trainOwner: 'odpt.Operator:Seibu',
     trainType: 'odpt.TrainType:Seibu.S-TRAIN'
-  }, '西武40000系', '西武鉄道_40000系', []);
+  }, ['西武40000系(10両)']);
 
   const fLinerOwner = win.TrainVehicle.resolve({
     lineId: 'Fukutoshin', operator: 'TokyoMetro',
@@ -1190,8 +1190,8 @@ assert(trainVehicleSource.includes("identityStatus = 'NARROWED'"),
   'TrainVehicle must expose NARROWED identity state');
 assert(trainVehicleSource.includes("identityStatus = 'EXACT'"),
   'TrainVehicle must expose EXACT identity state');
-assert(trainVehicleSource.includes("'timetable-multiple-candidates'"),
-  'multi-vehicle timetable fallback must remain explicitly ambiguous');
+assert(trainVehicleSource.includes("'non-decisive-vehicle-candidates'"),
+  'non-explicit vehicle candidates must remain non-decisive');
 assert(trainVehicleSource.includes("allCandidates: orderArr"),
   'raw vehicle evidence pool must remain available for diagnostics');
 
