@@ -171,9 +171,9 @@
     var explicitVehicle = String(anchor.vehicleName || anchor.vehicleType || "").trim();
     var vehicleName = f ? f.vehicleName : explicitVehicle;
     if (!vehicleName) return false;
-    // Explicit timetable/operator vehicle type is evidence; never derive it from
-    // train number, line, icon fallback, or a generic LimitedExpress label.
-    if (!f && !resolveIconForName(vehicleName, anchor.lineId)) return false;
+    // Evidence admission must never depend on whether artwork exists. A dated,
+    // explicit vehicle identity may be stored even when the gallery has no image;
+    // artwork is resolved only when the evidence is later projected for display.
     var date = anchor.serviceDate || _formationServiceDate(anchor.observedAt);
     var evidenceKey = date+"|"+anchor.runningChainId;
     var existing = _formationEvidence[evidenceKey];
@@ -211,6 +211,7 @@
     return {
       formationId:a.formationId, vehicleName:a.vehicleName, iconPath:icon,
       serviceDate:a.serviceDate, source:"formation-evidence", confidence:"high",
+      identityStatus:"EXACT", identityReason:"dated-running-chain-vehicle-evidence",
       evidenceSource:a.evidenceSource, evidenceDetail:a.evidenceDetail || null, observedAt:a.observedAt,
       propagatedByRunningChain:true
     };
