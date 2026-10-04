@@ -45,8 +45,10 @@ assert(!/__trainIconCache/.test(renderer),"renderer must not resurrect stale veh
 assert(/if \(!stationKey\)[\s\S]{0,800}return;/.test(fusion),"missing fromStation must not create realtime position");
 
 const resolver=read("js/running-chain-resolver.js");
-assert(/TRAIN_IDENTITY_CHANGED/.test(resolver),"changed timetable identity/train number must stay unresolved");
-assert(/if\(!sameId&&!sameNo\)return \{unresolved:true/.test(resolver),"through boundary must not join changed identities");
+assert(/numberChanged:!sameId&&!sameNo/.test(resolver),
+  "running-chain resolver must explicitly mark train-number changes");
+assert(/pairing is unique for BOTH segments/.test(resolver),
+  "changed train numbers may join only through the unique operational-boundary rule");
 
 for(const js of ["js/data-fusion.js","js/train-position-estimator.js","js/trains-render.js"]){
   assert(!/loopServiceMode/.test(read(js)),js+" must not synthesize loop service state");
