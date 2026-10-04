@@ -112,7 +112,9 @@ jobs:
             [vehicle, 'parts.slice(i).join', 'train-number prefix fallback'],
             [fs.readFileSync('js/trains-render.js', 'utf8'), 'TrainVehicle.resolve(_vrCtx)', 'renderer vehicle re-resolution'],
             [fs.readFileSync('js/trains-render.js', 'utf8'), '__trainIconCache', 'renderer vehicle icon cache'],
-            [fs.readFileSync('js/data-fusion.js', 'utf8'), '_rtVehicle.source === "trainNo"', 'train-number realtime promotion']
+            [fs.readFileSync('js/data-fusion.js', 'utf8'), '_rtVehicle.source === "trainNo"', 'train-number realtime promotion'],
+            [fs.readFileSync('js/data-fusion.js', 'utf8'), 'positionData.trainClass = positionData.trainClass || resolveTrainClass', 'DataFusion trainClass fallback'],
+            [fs.readFileSync('js/train-position-estimator.js', 'utf8'), 'tobu-official-2026-timetable-service-name', 'service-name vehicle inference']
           ];
           for (const [src, needle, label] of forbidden) {
             if (src.includes(needle)) throw new Error('zero-fallback violation: ' + label);
