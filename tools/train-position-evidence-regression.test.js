@@ -147,6 +147,10 @@ assert(!/_rtVehicle\.source === "trainNo"/.test(fusionSource),
   'train-number history must not be promoted as realtime vehicle evidence');
 assert(fusionSource.includes('realtimeVehicleType: odptVehicleType'),
   'realtime API vehicle identity must enter the explicit realtime source channel');
+assert(fusionSource.includes('if (_rp.vehicleResolvedFromRealtime === true) _rememberChainVehicle(_rp);'),
+  'realtime position rows without explicit vehicle identity must still be allowed to bind a unique running chain without seeding fake vehicle evidence');
+assert(fusionSource.includes('(posMap[_vlid] || []).forEach(function(_p) {\n                _inheritChainVehicle(_p);'),
+  'canonical timetable/SQL EXACT vehicle evidence must be able to inherit onto realtime-position rows through the resolved running chain');
 assert(estimatorSource.includes("timetableVehicleType: _timetableVehicleInput"),
   'timetable identity must enter TrainVehicle only through the unified timetable evidence channel');
 assert(!estimatorSource.includes("operationVehicleCandidates:"),
