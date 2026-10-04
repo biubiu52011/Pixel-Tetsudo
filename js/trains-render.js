@@ -1142,19 +1142,20 @@
         appendTrainLabels(trainLayer, svgNS, trainUid, px, py, p, lineId);
       } else {
         // Create new train icon
-        // v4.3.950: 车型判定统一入口——图标直接取 TrainVehicle.resolve().iconPath
-        // （S0 manual / S2 车号候选 / S3 静态查表 → 图标库；无候选回退 S4 图标规则），
-        // 修复 v4.3.940 缺陷：①估计车 trainId="lineId_trainNumber" 查不到纯车号 key；
-        // ②S3 查表结果（如 UenoTokyo→E231系1000番台）不进图标路径，导致 fallback 山手线 E235。
-        // v4.3.939: 车号级缓存 + 直通车按车籍 operator——同一趟车(同 trainId)进不同线路视图用同一张图
         // Zero-fallback rendering contract: vehicle identity is resolved upstream.
         // The renderer never re-resolves, caches, substitutes, or resurrects a
-        // vehicle icon. Missing exact artwork renders as the neutral marker.
-        var _hasRealtimeVehicleEvidence = p.positionSource === "realtime-api" &&
+        // vehicle icon. Every image path is gated again by EXACT identity here so
+        // a stale/incorrect authority flag alone can never render concrete artwork.
+        var _identityExact = p.vehicleIdentityStatus === "EXACT" ||
+          (p.vehicleResolution && p.vehicleResolution.identityStatus === "EXACT");
+        var _hasRealtimeVehicleEvidence = _identityExact &&
+          p.positionSource === "realtime-api" &&
           p.vehicleResolvedFromRealtime === true && !!p.vehicleIconPath;
-        var _hasInheritedChainVehicle = p.vehicleInheritedFromRunningChain === true &&
+        var _hasInheritedChainVehicle = _identityExact &&
+          p.vehicleInheritedFromRunningChain === true &&
           !!p.runningChainId && !!p.vehicleIconPath;
-        var _hasUpstreamVehicle = p.vehicleResolvedUpstream === true && !!p.vehicleIconPath;
+        var _hasUpstreamVehicle = _identityExact &&
+          p.vehicleResolvedUpstream === true && !!p.vehicleIconPath;
         var _hasAuthoritativeVehicle = _hasRealtimeVehicleEvidence || _hasInheritedChainVehicle || _hasUpstreamVehicle;
         var iconSrc = _hasAuthoritativeVehicle ? p.vehicleIconPath : '';
 
