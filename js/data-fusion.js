@@ -940,10 +940,10 @@
                 }
               } catch(e) {}
             }
-            var _vehicleCoverage = getRealtimeVehicleCoverage(lid, positionData);
-            positionData.realtimeCoverageMode = _vehicleCoverage.mode;
-            positionData.realtimeVehicleCoverage = _vehicleCoverage.currentTrainCovered;
-            positionData.realtimeCoverageReason = _vehicleCoverage.reason;
+            var _positionCoverage = getRealtimePositionRecordCoverage(lid, positionData);
+            positionData.realtimeCoverageMode = _positionCoverage.mode;
+            positionData.realtimePositionRecordPresent = _positionCoverage.currentTrainCovered;
+            positionData.realtimePositionCoverageReason = _positionCoverage.reason;
             // v4.3.6xx: 双向直通列车处理
             // 1. 临海线的车（operator=TWR）开到JR区间了 → 在JR线路图上显示临海线车型
             // v4.3.939: 存车自己的 operator（渲染层判断直通车、按车籍选图标，治跨线"变身"）
@@ -992,7 +992,7 @@
         return getRealtimePositionPolicy(lineId).mode === "FULL";
       }
 
-      function getRealtimeVehicleCoverage(lineId, position) {
+      function getRealtimePositionRecordCoverage(lineId, position) {
         var policy = getRealtimePositionPolicy(lineId);
         var mode = policy.mode || "UNKNOWN";
         if (!position || position.positionSource !== "realtime-api") {
