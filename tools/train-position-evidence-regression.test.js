@@ -69,8 +69,8 @@ assert(estimatorSource.includes('vehicleIdentityStatus: vehResult.identityStatus
 
 assert(estimatorSource.includes('rec.decisive && rec.operator'),
   'only decisive graded evidence may establish assignment operator');
-assert(estimatorSource.includes('operationEvidence: _assignmentMatches'),
-  'estimated trains must preserve operation evidence provenance');
+assert(estimatorSource.includes('timetableEvidence: _assignmentMatches'),
+  'dated timetable evidence must reach the central vehicle authority');
 assert(estimatorSource.includes('_resolvedOperationCodeList.length === 1'),
   'operation-code bridge must require one unanimous mapped operation code');
 assert(estimatorSource.includes('if (!_matchedProviderIndexes[providerIndex])'),
