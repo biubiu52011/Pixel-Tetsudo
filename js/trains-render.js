@@ -1147,46 +1147,17 @@
         // 修复 v4.3.940 缺陷：①估计车 trainId="lineId_trainNumber" 查不到纯车号 key；
         // ②S3 查表结果（如 UenoTokyo→E231系1000番台）不进图标路径，导致 fallback 山手线 E235。
         // v4.3.939: 车号级缓存 + 直通车按车籍 operator——同一趟车(同 trainId)进不同线路视图用同一张图
-        if (!window.__trainIconCache) window.__trainIconCache = {};
-        var _icKey = String(p.runningChainId || p.trainId || trainUid);
-        // Realtime vehicle resolution is produced upstream from the actual
-        // train-level source evidence. Prefer it over any display-line guess.
+        // Zero-fallback rendering contract: vehicle identity is resolved upstream.
+        // The renderer never re-resolves, caches, substitutes, or resurrects a
+        // vehicle icon. Missing exact artwork renders as the neutral marker.
         var _hasRealtimeVehicleEvidence = p.positionSource === "realtime-api" &&
           p.vehicleResolvedFromRealtime === true && !!p.vehicleIconPath;
         var _hasInheritedChainVehicle = p.vehicleInheritedFromRunningChain === true &&
           !!p.runningChainId && !!p.vehicleIconPath;
-        // Estimator/DataFusion is the primary vehicle decision layer. Preserve
-        // any upstream resolution instead of re-running line-local inference in
-        // the renderer; renderer resolution is fallback-only for legacy records.
         var _hasUpstreamVehicle = p.vehicleResolvedUpstream === true && !!p.vehicleIconPath;
         var _hasAuthoritativeVehicle = _hasRealtimeVehicleEvidence || _hasInheritedChainVehicle || _hasUpstreamVehicle;
-        var iconSrc = _hasAuthoritativeVehicle ? p.vehicleIconPath : window.__trainIconCache[_icKey];
-        // Upstream vehicle resolution and running-chain inheritance outrank
-        // current-line re-resolution. Low-confidence map/fleet results may be
-        // displayed, but they never enter the physical-chain registry.
-        if (iconSrc && _hasAuthoritativeVehicle) {
-          window.__trainIconCache[_icKey] = iconSrc;
-        }
-        if (!iconSrc && window.TrainVehicle && typeof window.TrainVehicle.resolve === 'function') {
-          var _vrCtx = {
-            lineId: p.fusionLineId || lineId,
-            operator: p.trainOperator || line.operator,
-            trainNumber: p.trainNumber || p.trainId,
-            stationIndex: p.stationIndex,
-            trainType: p.trainType,
-            destinationStation: p.destinationStationUrn || p.destinationStation,
-            byOperator: !!p.trainOperator && (p.trainOperator || '') !== line.operator,
-            trainId: trainUid,
-            // v4.3.1018: S0 manual 实证透传——推算侧直通列车重新 resolve 时不丢 manual vehicleType
-            vehicleTypeManual: p.vehicleTypeManual || '',
-            odptVehicleType: p.odptVehicleType || ''
-          };
-          iconSrc = window.TrainVehicle.resolve(_vrCtx).iconPath || '';
-          if (iconSrc) window.__trainIconCache[_icKey] = iconSrc;
-        }
-        // No second vehicle resolver lives in the renderer. If TrainVehicle cannot
-        // produce an icon from evidence, fall through to the neutral circle below.
-        // This prevents current-line/icon rules from inventing a physical vehicle.
+        var iconSrc = _hasAuthoritativeVehicle ? p.vehicleIconPath : '';
+
         var isEst = p.estimated === true;
         var iconCls = isEst ? "train-icon estimated" : "train-icon";
         
