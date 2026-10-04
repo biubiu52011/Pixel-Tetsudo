@@ -56,7 +56,8 @@ function op(raw){
 function resolveEvidence(trainNumber,ctx){
  ctx=ctx||{};var date=String(ctx.serviceDate||"").slice(0,10);
  if(!date||date<EFFECTIVE||!network(ctx))return null;
- var mapped=mappedOperation(trainNumber,ctx);\n var x=op(ctx.operationCode)||op(trainNumber)||op(mapped);if(!x)return null;
+ var mapped=mappedOperation(trainNumber,ctx);
+ var x=op(ctx.operationCode)||op(trainNumber)||op(mapped);if(!x)return null;
  var c=[],exact="";
  if(x.group==="A"&&x.number>=11&&x.number<=34)c=["小田急3000形","小田急8000形"];
  else if(x.group==="B"&&x.number>=11&&x.number<=18)c=["小田急1000形","小田急3000形"];
