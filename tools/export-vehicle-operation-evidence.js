@@ -64,6 +64,20 @@ async function get(table, select, order) {
       throw new Error("Unverified realtime vehicle identity cannot produce active coverage for "+p.network_key);
     }
   }
+  const evidenceStats = {};
+  obs.forEach(r=>{
+    const s = evidenceStats[r.network_key] || (evidenceStats[r.network_key]={rows:0,latest:""});
+    s.rows++;
+    if (r.service_date && r.service_date > s.latest) s.latest=r.service_date;
+  });
+  for (const p of policies) {
+    const c = cm[p.network_key];
+    const s = evidenceStats[p.network_key] || {rows:0,latest:""};
+    if (Number(c.operation_evidence_rows) !== s.rows)
+      throw new Error("Network coverage evidence-row drift for "+p.network_key+": coverage="+c.operation_evidence_rows+" evidence="+s.rows);
+    if ((c.latest_service_date || "") !== s.latest)
+      throw new Error("Network coverage latest-date drift for "+p.network_key+": coverage="+(c.latest_service_date||"")+" evidence="+s.latest);
+  }
   for (const c of coverage) {
     if (!pm[c.network_key]) throw new Error("Orphan canonical network coverage for "+c.network_key);
   }
