@@ -857,7 +857,7 @@
               stationId: stationKey,
               sourceRailway: railwayName,
               trainId: trainId,
-              trainNumber: trainId,  // v4.3.950: 纯车号——渲染层查 TRAIN_NO_VEHICLE 用（修复 key 不匹配）
+              trainNumber: trainId,
               delayMin: delayMin,
               railDirection: directionName,
               destinationStation: destStation,
@@ -895,7 +895,7 @@
                   trainType: rawType,
                   destinationStation: destStations,
                   trainId: trainId,
-                  odptVehicleType: odptVehicleType
+                  realtimeVehicleType: odptVehicleType
                 });
                 positionData.vehicleResolution = _rtVehicle || null;
                 if (_rtVehicle) {
@@ -903,11 +903,10 @@
                   positionData.vehicleType = _rtVehicle.vehicleTypeStr || _rtVehicle.name || "";
                   positionData.vehicleSource = _rtVehicle.source || "";
                   positionData.vehicleConfidence = _rtVehicle.confidence || "none";
-                  // Only evidence-backed resolutions may become authoritative
-                  // realtime vehicle identity. S3 map/fleet/icon rules remain
-                  // display estimates and must not be frozen as realtime truth.
-                  var _rtEvidenceBacked = _rtVehicle.source === "odpt" ||
-                    _rtVehicle.source === "manual";
+                  var _rtEvidenceBacked = _rtVehicle.identityStatus === "EXACT" &&
+                    _rtVehicle.source === "realtime";
+                  positionData.vehicleIdentityStatus = _rtVehicle.identityStatus || "UNKNOWN";
+                  positionData.vehicleIdentityReason = _rtVehicle.identityReason || "";
                   positionData.vehicleResolvedFromRealtime = _rtEvidenceBacked;
                   positionData.vehicleIconPath = _rtEvidenceBacked ? (_rtVehicle.iconPath || "") : "";
                 }
@@ -1062,15 +1061,16 @@
               var _evResolution = (window.TrainVehicle && typeof window.TrainVehicle.resolve === "function")
                 ? window.TrainVehicle.resolve({
                     trainNumber: _ev.trainNumber,
-                    odptVehicleType: _ev.vehicleType
+                    realtimeVehicleType: _ev.vehicleType
                   }) : null;
-              if (!_evResolution || _evResolution.identityStatus !== "EXACT" || !_evResolution.iconPath) return;
+              if (!_evResolution || _evResolution.identityStatus !== "EXACT" ||
+                  _evResolution.source !== "realtime") return;
               _rememberChainVehicle({
                 runningChainId: _evChainIds[0],
                 trainClass: _evResolution.name || "",
                 vehicleType: _evResolution.vehicleTypeStr || _ev.vehicleType,
                 vehicleIconPath: _evResolution.iconPath,
-                vehicleSource: _evResolution.source || "odpt",
+                vehicleSource: _evResolution.source || "realtime",
                 vehicleConfidence: _evResolution.confidence || "high",
                 vehicleResolution: _evResolution,
                 vehicleIdentityStatus: _evResolution.identityStatus,
@@ -1078,10 +1078,9 @@
                 vehicleResolvedFromRealtime: true
               });
             });
-            // High-confidence timetable/manual resolution can seed the same
-            // physical-chain registry before inheritance. This closes the old
-            // one-way path where only realtime evidence could survive a line or
-            // operator boundary.
+            // Timetable/SQL exact identity is a parallel authoritative source.
+            // It may seed the same physical-chain registry when realtime carries
+            // no exact vehicle fact; source arbitration remains upstream.
             Object.keys(estimated).forEach(function(_vlid) {
               (estimated[_vlid] || []).forEach(_rememberChainVehicle);
             });
