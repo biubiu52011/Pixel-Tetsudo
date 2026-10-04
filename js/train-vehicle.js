@@ -29,108 +29,13 @@
 (function() {
   "use strict";
 
-  var TRAIN_NO_VEHICLE = window.TRAIN_NO_VEHICLE || {};
-  var TRAIN_NO_VEHICLE_SCOPED = window.TRAIN_NO_VEHICLE_SCOPED || {};
-  window.TRAIN_NO_VEHICLE = TRAIN_NO_VEHICLE; // 兼容旧引用（外部只读）
-  window.TRAIN_NO_VEHICLE_SCOPED = TRAIN_NO_VEHICLE_SCOPED;
-
-  // ============================================================
-  // 车号 → 车型候选 累积表（key = 纯车号，跨线累积去重）
-  // ============================================================
-  function registerVehicle(trainNumber, vehicleTypeStr, operator) {
-    if (!trainNumber || !vehicleTypeStr) return;
-    var key = String(trainNumber);
-    var exist = TRAIN_NO_VEHICLE[key] || (TRAIN_NO_VEHICLE[key] = []);
-    var op = normOp(operator);
-    var scopedKey = op ? (op + "::" + key) : "";
-    var scoped = scopedKey ? (TRAIN_NO_VEHICLE_SCOPED[scopedKey] || (TRAIN_NO_VEHICLE_SCOPED[scopedKey] = [])) : null;
-    String(vehicleTypeStr).split('/').forEach(function(s) {
-      var c = s.trim();
-      if (!c) return;
-      if (exist.indexOf(c) < 0) exist.push(c);
-      if (scoped && scoped.indexOf(c) < 0) scoped.push(c);
-    });
-  }
-
-  function getCandidates(trainNumber, operator) {
-    if (!trainNumber) return [];
-    var key = String(trainNumber);
-    var op = normOp(operator);
-    var scopedKey = op ? (op + "::" + key) : "";
-    if (scopedKey && TRAIN_NO_VEHICLE_SCOPED[scopedKey]) return TRAIN_NO_VEHICLE_SCOPED[scopedKey];
-    // Same train numbers are reused by unrelated operators. Never import
-    // another operator's vehicle evidence; through continuity uses runningChainId.
-    if (op) return [];
-    if (TRAIN_NO_VEHICLE[key]) return TRAIN_NO_VEHICLE[key];
-    // Zero-fallback policy: callers must supply the exact train-number key.
-    // Never strip line/id prefixes to search for a coincidentally matching train number.
-    return [];
-  }
-
-  // ============================================================
-  // 工具
-  // ============================================================
+  // Normalize operator labels only for metadata carried by explicit evidence.
   function normOp(op) {
     if (!op) return '';
     if (window.TransitConstants && typeof window.TransitConstants.normalizeOp === 'function') {
       return window.TransitConstants.normalizeOp(op);
     }
     return String(op).replace(/^odpt\.Operator:/, '');
-  }
-
-  // ODPT trainOwner is physical rolling-stock ownership evidence. It cannot
-  // identify a model by itself, but it can safely remove other operators' stock
-  // from a multi-company through-service candidate pool.
-  function ownerMatchesCandidate(owner, candidate) {
-    var op = normOp(owner);
-    if (!op || !candidate) return false;
-    var rules = {
-      "JR-East": /^(?:JR東日本|JR\s*)?(?:E|209|253|E2|E3|E5|E6|E7|E8|E257|E259|E353|E531|E653|E657|E751)/i,
-      "TokyoMetro": /東京メトロ/,
-      "Toei": /(?:都営|東京都交通局)/,
-      "Tokyu": /(?:東急|東急電鉄)/,
-      "TOKYU": /(?:東急|東急電鉄)/,
-      "Tobu": /(?:東武|東武鉄道)/,
-      "Seibu": /(?:西武|西武鉄道)/,
-      "Sotetsu": /(?:相鉄|相模鉄道)/,
-      "Odakyu": /(?:小田急|小田急電鉄)/,
-      "Keio": /(?:京王|京王電鉄)/,
-      "Keikyu": /(?:京急|京浜急行)/,
-      "Keisei": /(?:京成|京成電鉄)/,
-      "Hokuso": /(?:北総|北総鉄道)/,
-      "Minatomirai": /(?:横浜高速|Y500|Y000)/i,
-      "SaitamaRailway": /(?:埼玉高速|埼玉高速鉄道)/,
-      "ToyoRapid": /(?:東葉高速|東葉高速鉄道)/,
-      "TWR": /(?:東京臨海高速|りんかい)/,
-      "TsukubaExpress": /(?:首都圏新都市鉄道|TX-)/i
-    };
-    var re = rules[op];
-    return !!(re && re.test(String(candidate)));
-  }
-
-  function filterCandidatesByOwner(candidates, owner) {
-    if (!owner || !candidates || candidates.length < 2) return candidates || [];
-    var matched = candidates.filter(function(c) { return ownerMatchesCandidate(owner, c); });
-    return matched.length ? matched : candidates;
-  }
-
-  // "odpt.TrainType:JR-East.Local" → "Local"；"JR-East.Local" → "Local"
-  function normTrainType(t) {
-    if (!t) return '';
-    var s = String(t);
-    if (s.indexOf(':') >= 0) s = s.split(':').pop();
-    if (s.indexOf('.') >= 0) s = s.split('.').pop();
-    return s;
-  }
-
-  // destinationStation URN → 直通先 operator 短名
-  // "odpt.Station:TokyoMetro.Fukutoshin.Wakoshi" → "TokyoMetro"
-  function destOperator(destUrn) {
-    if (!destUrn) return '';
-    var urn = Array.isArray(destUrn) ? destUrn[0] : destUrn;
-    var parts = String(urn).split('.');
-    var opPart = parts[1] || '';
-    return opPart.split(':')[1] || opPart;
   }
 
   // 候选串 "A / B / C" → 去重数组 ["A","B","C"]
@@ -170,18 +75,7 @@
   // ============================================================
   function resolve(ctx) {
     ctx = ctx || {};
-    var lineId = ctx.lineId || '';
-    var operator = normOp(ctx.operator);
-    var trainOwner = normOp(ctx.trainOwner || ctx.odptTrainOwner || '');
-    // B1: assignmentOperator is derived from a train-operation/working-number
-    // evidence provider. It is weaker than explicit vehicleType but equivalent
-    // to trainOwner for safely removing other operators' stock.
     var assignmentOperator = normOp(ctx.assignmentOperator || ctx.operationOperator || '');
-    var effectiveOwner = trainOwner || assignmentOperator;
-    var trainNumber = ctx.trainNumber || '';
-    var trainType = ctx.trainType || '';
-    var dest = ctx.destinationStation || '';
-    var stationIndex = (typeof ctx.stationIndex === 'number') ? ctx.stationIndex : undefined;
 
     // 1) Evidence candidates are limited to explicit train-level input.
     // Historical train-number tables and static VehicleTypeMap are deliberately
@@ -223,14 +117,8 @@
       chosenSrc = 'odpt';
     }
 
-    // 3) 可信度
-    //    manual/odpt = high；trainNo 多来源交叉 = high，单来源 = medium；map = medium；icons = low
-    var confidence = 'none';
-    var crossCount = chosen && pool[chosen] ? pool[chosen].count : 0;
-    if (/^(manual|odpt)(?:\+trainOwner)?$/.test(chosenSrc)) confidence = 'high';
-    else if (chosenSrc === 'trainNo') confidence = crossCount >= 2 ? 'high' : 'medium';
-    else if (chosenSrc === 'map' || chosenSrc === 'map+trainOwner') confidence = 'medium';
-    else if (chosenSrc === 'icons') confidence = 'low';
+    // Explicit train-level or dated operation evidence is high confidence.
+    var confidence = chosen ? 'high' : 'none';
 
     // 4) Artwork is a strict projection of the already-exact vehicle identity.
     // Missing artwork stays missing; never substitute another candidate, line,
@@ -259,8 +147,6 @@
     var identityStatus = 'UNKNOWN';
     var identityReason = 'no-vehicle-evidence';
     var effectiveCandidates = orderArr.slice();
-    var operationVehicleCandidates = Array.isArray(ctx.operationVehicleCandidates)
-      ? ctx.operationVehicleCandidates.filter(Boolean) : [];
     if (chosen) {
       identityStatus = 'EXACT';
       identityReason = (_manualEvidenceSource === 'operation-assignment-provider')
@@ -277,8 +163,8 @@
 
     return {
       name: chosen,                                  // EXACT vehicle only; empty while ambiguous
-      candidates: effectiveCandidates,               // candidates after safe owner narrowing
-      allCandidates: orderArr,                        // raw S0→S3 evidence pool for diagnostics
+      candidates: effectiveCandidates,               // explicit/dated evidence candidates
+      allCandidates: orderArr,                        // explicit/dated evidence pool for diagnostics
       identityStatus: identityStatus,                 // EXACT / NARROWED / UNKNOWN
       identityReason: identityReason,
       assignmentOperator: assignmentOperator,
@@ -375,14 +261,9 @@
     resolve: resolve,
     getName: getName,
     getIconPath: getIconPath,
-    registerVehicle: registerVehicle,
     registerFormationEvidence: registerFormationEvidence,
     resolveFormationEvidence: resolveFormationEvidence,
     clearFormationEvidenceOtherDates: clearFormationEvidenceOtherDates,
-    getCandidates: getCandidates,
-    // 调试/审计用
-    _table: function() { return TRAIN_NO_VEHICLE; },
-    _scopedTable: function() { return TRAIN_NO_VEHICLE_SCOPED; }
   };
 
   console.debug('[TrainVehicle] v4.3.1053 initialized（B0 EXACT/NARROWED/UNKNOWN vehicle identity contract）');
