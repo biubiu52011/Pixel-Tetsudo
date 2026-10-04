@@ -34,22 +34,32 @@ async function get(table, select, order) {
 }
 
 (async function(){
-  const [obs, policies] = await Promise.all([
+  const [obs, policies, mappings] = await Promise.all([
     get("runtime_vehicle_operation_evidence",
       "observation_id,service_date,operator,network_key,operation_code,valid_from_time,valid_to_time,vehicle_type,formation_ids,ambiguity_group,observed_date,evidence_grade,source_url,sql_evidence_role",
       "service_date.asc,operator.asc,network_key.asc,operation_code.asc,observation_id.asc"),
     get("runtime_vehicle_source_policy",
       "network_key,realtime_api_available,realtime_vehicle_identity_status,sql_evidence_role",
-      "network_key.asc")
+      "network_key.asc"),
+    get("train_operation_mappings",
+      "effective_from,network_key,train_number,operation_code",
+      "effective_from.asc,network_key.asc,operation_code.asc,train_number.asc")
   ]);
   const pm = Object.fromEntries(policies.map(p=>[p.network_key,p]));
+  const trainNumbersByOperation = {};
+  mappings.forEach(m=>{
+    const key = normalizeNetworkKey(m.network_key)+"|"+m.effective_from+"|"+m.operation_code;
+    if (!trainNumbersByOperation[key]) trainNumbersByOperation[key]=[];
+    if (m.train_number && !trainNumbersByOperation[key].includes(m.train_number)) trainNumbersByOperation[key].push(m.train_number);
+  });
   const records = obs.map(r=>{
     const p=pm[r.network_key]||{};
     return {
       networkKey:normalizeNetworkKey(r.network_key),validDate:r.service_date,operationCode:r.operation_code,operator:r.operator,
       vehicleType:r.vehicle_type||"",formationIds:Array.isArray(r.formation_ids)?r.formation_ids:[],
       validFromTime:r.valid_from_time||"",validToTime:r.valid_to_time||"",ambiguityGroup:r.ambiguity_group||"",
-      observedDate:r.observed_date||r.service_date,grade:r.evidence_grade||"C",sourceUrl:r.source_url||"",trainNumbers:[],
+      observedDate:r.observed_date||r.service_date,grade:r.evidence_grade||"C",sourceUrl:r.source_url||"",
+      trainNumbers:trainNumbersByOperation[normalizeNetworkKey(r.network_key)+"|"+r.service_date+"|"+r.operation_code]||[],
       evidenceRole:r.sql_evidence_role||p.sql_evidence_role||"primary",
       realtimeApiAvailable:p.realtime_api_available===true,
       realtimeVehicleIdentityStatus:p.realtime_vehicle_identity_status||"unknown"
