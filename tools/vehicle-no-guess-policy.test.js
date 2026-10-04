@@ -51,7 +51,7 @@ const forbiddenAliases = {
   'JR東海211系': '315系'
 };
 Object.keys(forbiddenAliases).forEach((name) => {
-  assert(icons.VEHICLE_NAME_ALIASES[name] !== forbiddenAliases[name],
+  assert(icons.resolveVehicleDisplayName(name) !== forbiddenAliases[name],
     'cross-vehicle alias substitution reintroduced: ' + name);
 });
 assert(icons.resolveVehicleDisplayName('都営5300形', 'Asakusa') !== '5500形',
@@ -64,9 +64,9 @@ const serviceOnlyNames = [
   'あさま','つるぎ','つばさ','やまびこ','つばめ','かもめ','ドクターイエロー'
 ];
 serviceOnlyNames.forEach((name) => {
-  assert(!Object.prototype.hasOwnProperty.call(icons.VEHICLE_NAME_ALIASES, name),
+  assert(icons.resolveVehicleDisplayName(name) === name,
     'service name reintroduced as vehicle alias: ' + name);
-  assert(icons.resolveVehicleDisplayName(name, '') === name,
+  assert(icons.resolveVehicleDisplayName(name) === name,
     'service name was rewritten as vehicle identity: ' + name);
 });
 assert(!source.includes('collectIcon(VEHICLE_DEPLOYMENTS)'), 'deployment rules seeded vehicle identity index');
