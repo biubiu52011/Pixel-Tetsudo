@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "generatedFrom": "Supabase canonical evidence tables",
   "records": [
     {
@@ -6528,5 +6528,374 @@
       "realtimeApiAvailable": false,
       "realtimeVehicleIdentityStatus": "absent"
     }
-  ]
+  ],
+  "evidenceInventory": {
+    "networkCount": 21,
+    "networks": [
+      "asakusa",
+      "ChibaMonorail",
+      "chiyoda-joban-odakyu",
+      "denentoshi-hanzomon",
+      "hanzomon",
+      "hibiya",
+      "iketama",
+      "keiyo",
+      "kodomonokuni",
+      "meguro",
+      "odakyu-main",
+      "oimachi",
+      "saikyo",
+      "seibu-shinjuku",
+      "setagaya",
+      "sotetsu",
+      "tobu-limited-express",
+      "tokyo-monorail",
+      "toyoko-fukutoshin",
+      "tozai",
+      "tsukuba-express"
+    ],
+    "rows": [
+      {
+        "source_network_key": "asakusa",
+        "canonical_network_key": "asakusa",
+        "alias_scope": "exact",
+        "evidence_kind": "formation_assignment",
+        "evidence_rows": 21,
+        "exact_rows": 21,
+        "narrowed_rows": 0,
+        "min_date": "2026-04-12",
+        "max_date": "2026-04-12"
+      },
+      {
+        "source_network_key": "asakusa",
+        "canonical_network_key": "asakusa",
+        "alias_scope": "exact",
+        "evidence_kind": "operation_family_rule",
+        "evidence_rows": 4,
+        "exact_rows": 1,
+        "narrowed_rows": 0,
+        "min_date": "2026-03-14",
+        "max_date": null
+      },
+      {
+        "source_network_key": "ChibaMonorail",
+        "canonical_network_key": "ChibaMonorail",
+        "alias_scope": "exact",
+        "evidence_kind": "operation_date_rule",
+        "evidence_rows": 4,
+        "exact_rows": 4,
+        "narrowed_rows": 0,
+        "min_date": "2026-09-01",
+        "max_date": "2026-09-26"
+      },
+      {
+        "source_network_key": "chiyoda-joban-odakyu",
+        "canonical_network_key": "chiyoda-joban-odakyu",
+        "alias_scope": "exact",
+        "evidence_kind": "operation_family_rule",
+        "evidence_rows": 3,
+        "exact_rows": 3,
+        "narrowed_rows": 0,
+        "min_date": "2026-03-14",
+        "max_date": null
+      },
+      {
+        "source_network_key": "denentoshi-hanzomon",
+        "canonical_network_key": "denentoshi-hanzomon",
+        "alias_scope": "exact",
+        "evidence_kind": "formation_assignment",
+        "evidence_rows": 24,
+        "exact_rows": 24,
+        "narrowed_rows": 0,
+        "min_date": "2026-04-18",
+        "max_date": "2026-04-18"
+      },
+      {
+        "source_network_key": "denentoshi-hanzomon",
+        "canonical_network_key": "denentoshi-hanzomon",
+        "alias_scope": "exact",
+        "evidence_kind": "operation_family_rule",
+        "evidence_rows": 3,
+        "exact_rows": 0,
+        "narrowed_rows": 0,
+        "min_date": "2026-03-14",
+        "max_date": null
+      },
+      {
+        "source_network_key": "hanzomon",
+        "canonical_network_key": "hanzomon",
+        "alias_scope": "exact",
+        "evidence_kind": "formation_assignment",
+        "evidence_rows": 4,
+        "exact_rows": 4,
+        "narrowed_rows": 0,
+        "min_date": "2026-04-13",
+        "max_date": "2026-04-13"
+      },
+      {
+        "source_network_key": "hibiya",
+        "canonical_network_key": "hibiya",
+        "alias_scope": "exact",
+        "evidence_kind": "formation_assignment",
+        "evidence_rows": 16,
+        "exact_rows": 16,
+        "narrowed_rows": 0,
+        "min_date": "2026-04-16",
+        "max_date": "2026-04-16"
+      },
+      {
+        "source_network_key": "iketama",
+        "canonical_network_key": "iketama",
+        "alias_scope": "exact",
+        "evidence_kind": "operation_observation",
+        "evidence_rows": 147,
+        "exact_rows": 147,
+        "narrowed_rows": 0,
+        "min_date": "2026-09-08",
+        "max_date": "2026-09-27"
+      },
+      {
+        "source_network_key": "keiyo",
+        "canonical_network_key": "keiyo",
+        "alias_scope": "exact",
+        "evidence_kind": "operation_observation",
+        "evidence_rows": 36,
+        "exact_rows": 36,
+        "narrowed_rows": 0,
+        "min_date": "2026-04-01",
+        "max_date": "2026-04-14"
+      },
+      {
+        "source_network_key": "kodomonokuni",
+        "canonical_network_key": "kodomonokuni",
+        "alias_scope": "exact",
+        "evidence_kind": "operation_family_rule",
+        "evidence_rows": 1,
+        "exact_rows": 1,
+        "narrowed_rows": 0,
+        "min_date": "2026-03-14",
+        "max_date": null
+      },
+      {
+        "source_network_key": "meguro",
+        "canonical_network_key": "meguro",
+        "alias_scope": "exact",
+        "evidence_kind": "operation_family_rule",
+        "evidence_rows": 5,
+        "exact_rows": 1,
+        "narrowed_rows": 0,
+        "min_date": "2026-03-14",
+        "max_date": null
+      },
+      {
+        "source_network_key": "odakyu-main",
+        "canonical_network_key": "odakyu-main",
+        "alias_scope": "exact",
+        "evidence_kind": "formation_assignment",
+        "evidence_rows": 5,
+        "exact_rows": 5,
+        "narrowed_rows": 0,
+        "min_date": "2026-08-06",
+        "max_date": "2026-08-06"
+      },
+      {
+        "source_network_key": "odakyu-main",
+        "canonical_network_key": "odakyu-main",
+        "alias_scope": "exact",
+        "evidence_kind": "operation_family_rule",
+        "evidence_rows": 5,
+        "exact_rows": 1,
+        "narrowed_rows": 4,
+        "min_date": "2026-03-14",
+        "max_date": null
+      },
+      {
+        "source_network_key": "odakyu-main",
+        "canonical_network_key": "odakyu-main",
+        "alias_scope": "exact",
+        "evidence_kind": "operation_observation",
+        "evidence_rows": 23,
+        "exact_rows": 23,
+        "narrowed_rows": 0,
+        "min_date": "2026-04-13",
+        "max_date": "2026-08-18"
+      },
+      {
+        "source_network_key": "oimachi",
+        "canonical_network_key": "oimachi",
+        "alias_scope": "exact",
+        "evidence_kind": "operation_observation",
+        "evidence_rows": 37,
+        "exact_rows": 37,
+        "narrowed_rows": 0,
+        "min_date": "2026-04-15",
+        "max_date": "2026-04-16"
+      },
+      {
+        "source_network_key": "saikyo-rinkai-sotetsu",
+        "canonical_network_key": "saikyo",
+        "alias_scope": "evidence_domain",
+        "evidence_kind": "formation_assignment",
+        "evidence_rows": 13,
+        "exact_rows": 13,
+        "narrowed_rows": 0,
+        "min_date": "2026-04-03",
+        "max_date": "2026-04-04"
+      },
+      {
+        "source_network_key": "saikyo",
+        "canonical_network_key": "saikyo",
+        "alias_scope": "exact",
+        "evidence_kind": "operation_observation",
+        "evidence_rows": 13,
+        "exact_rows": 13,
+        "narrowed_rows": 0,
+        "min_date": "2026-04-03",
+        "max_date": "2026-04-04"
+      },
+      {
+        "source_network_key": "seibu-shinjuku",
+        "canonical_network_key": "seibu-shinjuku",
+        "alias_scope": "exact",
+        "evidence_kind": "train_observation",
+        "evidence_rows": 47,
+        "exact_rows": 47,
+        "narrowed_rows": 0,
+        "min_date": "2026-04-08",
+        "max_date": "2026-04-17"
+      },
+      {
+        "source_network_key": "setagaya",
+        "canonical_network_key": "setagaya",
+        "alias_scope": "exact",
+        "evidence_kind": "operation_family_rule",
+        "evidence_rows": 1,
+        "exact_rows": 1,
+        "narrowed_rows": 0,
+        "min_date": "2026-03-14",
+        "max_date": null
+      },
+      {
+        "source_network_key": "sotetsu",
+        "canonical_network_key": "sotetsu",
+        "alias_scope": "exact",
+        "evidence_kind": "operation_observation",
+        "evidence_rows": 23,
+        "exact_rows": 23,
+        "narrowed_rows": 0,
+        "min_date": "2026-04-08",
+        "max_date": "2026-04-08"
+      },
+      {
+        "source_network_key": "tobu-limited-express",
+        "canonical_network_key": "tobu-limited-express",
+        "alias_scope": "exact",
+        "evidence_kind": "train_date_rule",
+        "evidence_rows": 156,
+        "exact_rows": 156,
+        "narrowed_rows": 0,
+        "min_date": "2026-03-14",
+        "max_date": "2026-11-29"
+      },
+      {
+        "source_network_key": "tobu-limited-express",
+        "canonical_network_key": "tobu-limited-express",
+        "alias_scope": "exact",
+        "evidence_kind": "train_rule",
+        "evidence_rows": 67,
+        "exact_rows": 67,
+        "narrowed_rows": 0,
+        "min_date": "2026-03-14",
+        "max_date": "2026-09-23"
+      },
+      {
+        "source_network_key": "TokyoMonorail",
+        "canonical_network_key": "tokyo-monorail",
+        "alias_scope": "exact",
+        "evidence_kind": "operation_date_rule",
+        "evidence_rows": 12,
+        "exact_rows": 12,
+        "narrowed_rows": 0,
+        "min_date": "2026-04-10",
+        "max_date": "2026-04-10"
+      },
+      {
+        "source_network_key": "tokyo-monorail",
+        "canonical_network_key": "tokyo-monorail",
+        "alias_scope": "exact",
+        "evidence_kind": "operation_observation",
+        "evidence_rows": 12,
+        "exact_rows": 12,
+        "narrowed_rows": 0,
+        "min_date": "2026-04-10",
+        "max_date": "2026-04-10"
+      },
+      {
+        "source_network_key": "toyoko-fukutoshin",
+        "canonical_network_key": "toyoko-fukutoshin",
+        "alias_scope": "exact",
+        "evidence_kind": "operation_family_rule",
+        "evidence_rows": 10,
+        "exact_rows": 2,
+        "narrowed_rows": 0,
+        "min_date": "2026-03-14",
+        "max_date": null
+      },
+      {
+        "source_network_key": "tozai",
+        "canonical_network_key": "tozai",
+        "alias_scope": "exact",
+        "evidence_kind": "formation_assignment",
+        "evidence_rows": 25,
+        "exact_rows": 25,
+        "narrowed_rows": 0,
+        "min_date": "2026-04-16",
+        "max_date": "2026-04-16"
+      },
+      {
+        "source_network_key": "tozai",
+        "canonical_network_key": "tozai",
+        "alias_scope": "exact",
+        "evidence_kind": "operation_family_rule",
+        "evidence_rows": 3,
+        "exact_rows": 2,
+        "narrowed_rows": 1,
+        "min_date": "2026-04-16",
+        "max_date": null
+      },
+      {
+        "source_network_key": "tozai",
+        "canonical_network_key": "tozai",
+        "alias_scope": "exact",
+        "evidence_kind": "operation_observation",
+        "evidence_rows": 36,
+        "exact_rows": 36,
+        "narrowed_rows": 0,
+        "min_date": "2026-04-16",
+        "max_date": "2026-04-16"
+      },
+      {
+        "source_network_key": "TsukubaExpress",
+        "canonical_network_key": "tsukuba-express",
+        "alias_scope": "exact",
+        "evidence_kind": "train_date_rule",
+        "evidence_rows": 5,
+        "exact_rows": 5,
+        "narrowed_rows": 0,
+        "min_date": "2026-10-04",
+        "max_date": "2026-10-04"
+      },
+      {
+        "source_network_key": "tsukuba-express",
+        "canonical_network_key": "tsukuba-express",
+        "alias_scope": "exact",
+        "evidence_kind": "train_observation",
+        "evidence_rows": 4,
+        "exact_rows": 4,
+        "narrowed_rows": 0,
+        "min_date": "2026-06-13",
+        "max_date": "2026-06-13"
+      }
+    ]
+  }
 }
