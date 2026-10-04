@@ -42,7 +42,7 @@ async function get(table, select, order) {
 }
 
 (async function(){
-  const [obs, policies, mappings, coverage, inventory] = await Promise.all([
+  const [obs, policies, mappings, coverage, inventory, formations, trainDates, operationDates, trainObs, sources] = await Promise.all([
     get("runtime_vehicle_operation_evidence",
       "observation_id,service_date,operator,network_key,operation_code,valid_from_time,valid_to_time,vehicle_type,formation_ids,ambiguity_group,observed_date,evidence_grade,source_url,sql_evidence_role",
       "service_date.asc,operator.asc,network_key.asc,operation_code.asc,observation_id.asc"),
@@ -57,7 +57,22 @@ async function get(table, select, order) {
       "network_key.asc"),
     get("runtime_vehicle_evidence_inventory",
       "source_network_key,canonical_network_key,alias_scope,evidence_kind,evidence_rows,exact_rows,narrowed_rows,min_date,max_date",
-      "canonical_network_key.asc,evidence_kind.asc,source_network_key.asc")
+      "canonical_network_key.asc,evidence_kind.asc,source_network_key.asc"),
+    get("formation_assignments",
+      "id,service_date,operator,network_key,operation_code,vehicle_type,formation_ids,observed_date,source_id",
+      "service_date.asc,network_key.asc,operation_code.asc,id.asc"),
+    get("train_vehicle_date_rules",
+      "id,valid_date,operator,network_key,train_number,service_name,direction,vehicle_type,source_id",
+      "valid_date.asc,network_key.asc,train_number.asc,id.asc"),
+    get("operation_vehicle_date_rules",
+      "id,valid_date,operator,network_key,operation_code,vehicle_type,formation_id,source_id",
+      "valid_date.asc,network_key.asc,operation_code.asc,id.asc"),
+    get("train_vehicle_observations",
+      "id,service_date,operator,network_key,train_number,vehicle_type,formation_ids,observed_date,source_id",
+      "service_date.asc,network_key.asc,train_number.asc,id.asc"),
+    get("evidence_sources",
+      "id,source_url,evidence_grade",
+      "id.asc")
   ]);
   const pm = Object.fromEntries(policies.map(p=>[p.network_key,p]));
   const cm = Object.fromEntries(coverage.map(c=>[c.network_key,c]));
@@ -126,14 +141,43 @@ async function get(table, select, order) {
       realtimeVehicleIdentityStatus:p.realtime_vehicle_identity_status||"unknown"
     };
   });
+  const sourceById=Object.fromEntries(sources.map(s=>[String(s.id),s]));
+  function datedRecord(kind,r) {
+    const s=sourceById[String(r.source_id)]||{};
+    const validDate=r.valid_date||r.service_date||"";
+    return {
+      evidenceKind:kind, evidenceId:r.id, networkKey:normalizeNetworkKey(r.network_key),
+      validDate, operationCode:r.operation_code||"", trainNumber:r.train_number||"",
+      operator:r.operator||"", vehicleType:r.vehicle_type||"",
+      formationIds:Array.isArray(r.formation_ids)?r.formation_ids:(r.formation_id?[r.formation_id]:[]),
+      observedDate:r.observed_date||validDate, grade:s.evidence_grade||"C", sourceUrl:s.source_url||""
+    };
+  }
+  const datedRecords=[
+    ...formations.map(r=>datedRecord("formation_assignment",r)),
+    ...trainDates.map(r=>datedRecord("train_date_rule",r)),
+    ...operationDates.map(r=>datedRecord("operation_date_rule",r)),
+    ...trainObs.map(r=>datedRecord("train_observation",r))
+  ];
+  const datedConflicts={};
+  datedRecords.forEach(r=>{
+    const identity=(r.vehicleType||"")+"|"+r.formationIds.join("+");
+    const key=[r.networkKey,r.validDate,r.operationCode||"",r.trainNumber||""].join("|");
+    (datedConflicts[key]||(datedConflicts[key]=new Set())).add(identity);
+  });
+  for (const [k,ids] of Object.entries(datedConflicts)) {
+    if (ids.size>1) throw new Error("Conflicting dated vehicle identities: "+k+" => "+[...ids].join(", "));
+  }
   const inventoryNetworks = [...new Set(inventory.map(r=>r.canonical_network_key))];
   if (!inventoryNetworks.length) throw new Error("Canonical vehicle evidence inventory is empty");
   const json={schemaVersion:3,generatedFrom:"Supabase canonical evidence tables",records,
+    datedRecords,
     evidenceInventory:{networkCount:inventoryNetworks.length,networks:inventoryNetworks,rows:inventory}};
   const root=path.join(__dirname,"..","data","timetables");
   fs.writeFileSync(path.join(root,"vehicle-operation-evidence.json"),JSON.stringify(json,null,2)+"\n");
   fs.writeFileSync(path.join(root,"vehicle-operation-evidence-data.js"),
     "/* Generated from canonical Supabase evidence tables. Data only; no line logic. */\n"+
-    "window.VEHICLE_OPERATION_EVIDENCE = "+JSON.stringify(records,null,2)+";\n");
+    "window.VEHICLE_OPERATION_EVIDENCE = "+JSON.stringify(records,null,2)+";\n"+
+    "window.VEHICLE_DATED_EVIDENCE = "+JSON.stringify(datedRecords,null,2)+";\n");
   console.log("vehicle operation evidence records =",records.length);
 })().catch(e=>{console.error(e.stack||e);process.exit(1);});
