@@ -1284,11 +1284,10 @@
         });
       }
     }
-    collectIcon(LINE_ICONS);
-    collectIcon(OPERATOR_ICONS);
-    collectIcon(VEHICLE_DEPLOYMENTS);
-    if (typeof THROUGH_PREFIX_RULES !== 'undefined') collectIcon(THROUGH_PREFIX_RULES);
-    if (typeof TRAIN_TYPE_ICON_RULES !== 'undefined') collectIcon(TRAIN_TYPE_ICON_RULES);
+    // Only vehicle-identity asset registries may seed the reverse name index.
+    // Line/operator/deployment/train-type tables are operational or presentation
+    // metadata and must never manufacture vehicle identity.
+
     // v4.3.973/975: 额外变体资产与自动补全的未引用图标资产
     // v4.3.976: EXTRA 条目 key 优先直录（公司前缀 key 解同名抢占；文件 base 名兜底入表）
     Object.keys(EXTRA_VEHICLE_ICONS).forEach(function(k){
