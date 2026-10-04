@@ -163,9 +163,11 @@ assert(fusionSource.includes('realtimeVehicleType: odptVehicleType'),
   'realtime API vehicle identity must enter the explicit realtime source channel');
 assert(fusionSource.includes('_queueChainVehicle(_rp)'),
   'realtime rows must enter the single chain candidate pool rather than write registry directly');
-assert(fusionSource.includes('p.vehicleResolvedFromRealtime === true ? 5') &&
-       fusionSource.includes('p.vehicleResolvedFromRealtimeDerived === true ? 4'),
-  'running-chain arbitration must preserve direct realtime > derived > fallback priority');
+assert(fusionSource.includes('p.vehicleResolvedFromRealtime === true || src === "realtime" ? 5') &&
+       fusionSource.includes('p.vehicleResolvedFromRealtimeDerived === true || src === "realtime-derived" ? 4') &&
+       fusionSource.includes('src === "structural" ? 3') &&
+       fusionSource.includes('src === "operation-assignment-provider" || src === "odpt" || src === "timetable" ? 2'),
+  'running-chain arbitration must preserve realtime > derived > structural > dated/timetable priority');
 assert(fusionSource.includes('(posMap[_vlid] || []).forEach(function(_p) {\n                _inheritChainVehicle(_p);'),
   'canonical timetable/SQL EXACT vehicle evidence must be able to inherit onto realtime-position rows through the resolved running chain');
 assert(estimatorSource.includes("timetableVehicleType: _timetableVehicleInput"),
