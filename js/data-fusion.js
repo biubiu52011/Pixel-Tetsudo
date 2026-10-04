@@ -1126,7 +1126,33 @@
               });
             });
             Object.keys(estimated).forEach(function(_vlid) {
-              (estimated[_vlid] || []).forEach(_queueChainVehicle);
+              (estimated[_vlid] || []).forEach(function(_p) {
+                _queueChainVehicle(_p);
+                // Formation evidence is another candidate for the same physical
+                // chain. Queue it before the single registry commit; never write
+                // the registry again later in the fusion pass.
+                if (window.TrainVehicle && typeof window.TrainVehicle.resolveFormationEvidence === "function" &&
+                    typeof window.TrainVehicle.resolve === "function") {
+                  var _fe = window.TrainVehicle.resolveFormationEvidence({
+                    lineId: _vlid,
+                    runningChainId: _p && _p.runningChainId,
+                    at: Date.now()
+                  });
+                  if (_fe) {
+                    var _feResolved = window.TrainVehicle.resolve({timetableVehicleType:_fe.vehicleName});
+                    if (_feResolved && _feResolved.identityStatus === "EXACT") {
+                      _queueChainVehicle({
+                        runningChainId:_p.runningChainId, trainClass:_feResolved.name||"",
+                        vehicleType:_feResolved.vehicleTypeStr||"", vehicleIconPath:_feResolved.iconPath||"",
+                        vehicleSource:_feResolved.source||"timetable", vehicleConfidence:_feResolved.confidence||"none",
+                        vehicleResolution:_feResolved, vehicleIdentityStatus:_feResolved.identityStatus,
+                        vehicleIdentityReason:_feResolved.identityReason||"formation-evidence",
+                        vehicleFormationId:_fe.formationId||"", vehicleFormationCandidates:_fe.formationId?[_fe.formationId]:[]
+                      });
+                    }
+                  }
+                }
+              });
             });
             // One physical chain, one registry commit per fusion pass.
             Object.keys(_chainVehicleCandidates).forEach(function(_cid) {
@@ -1143,32 +1169,6 @@
             });
             Object.keys(estimated).forEach(function(_vlid) {
               (estimated[_vlid] || []).forEach(function(_p) {
-                // Formation evidence participates before inheritance/commit; it
-                // must never overwrite a stronger identity after arbitration.
-                if (window.TrainVehicle && typeof window.TrainVehicle.resolveFormationEvidence === "function" &&
-                    window.TrainVehicle && typeof window.TrainVehicle.resolve === "function") {
-                  var _fe = window.TrainVehicle.resolveFormationEvidence({
-                    lineId: _vlid,
-                    runningChainId: _p && _p.runningChainId,
-                    at: Date.now()
-                  });
-                  if (_fe) {
-                    var _feResolved = window.TrainVehicle.resolve({timetableVehicleType:_fe.vehicleName});
-                    if (_feResolved && _feResolved.identityStatus === "EXACT") {
-                      var _formationCandidate = {
-                        runningChainId:_p.runningChainId, trainClass:_feResolved.name||"",
-                        vehicleType:_feResolved.vehicleTypeStr||"", vehicleIconPath:_feResolved.iconPath||"",
-                        vehicleSource:_feResolved.source||"timetable", vehicleConfidence:_feResolved.confidence||"none",
-                        vehicleResolution:_feResolved, vehicleIdentityStatus:_feResolved.identityStatus,
-                        vehicleIdentityReason:_feResolved.identityReason||"formation-evidence",
-                        vehicleFormationId:_fe.formationId||"", vehicleFormationCandidates:_fe.formationId?[_fe.formationId]:[]
-                      };
-                      // Existing registry arbitration decides whether formation
-                      // evidence is allowed to replace the established identity.
-                      _rememberChainVehicle(_formationCandidate);
-                    }
-                  }
-                }
                 _inheritChainVehicle(_p);
               });
             });
