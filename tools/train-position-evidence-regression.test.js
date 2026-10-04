@@ -174,6 +174,9 @@ assert(!estimatorSource.includes("operationVehicleCandidates:"),
   'operation candidates must not enter TrainVehicle as a third vehicle source');
 assert(!estimatorSource.includes("_candidateSetsAgree"),
   'estimator must not duplicate candidate agreement arbitration');
+assert(fusionSource.includes('src === "structural" ? 3') &&
+  fusionSource.includes('src === "operation-assignment-provider" || src === "odpt" || src === "timetable" ? 2'),
+  'running-chain registry rank must preserve structural-before-timetable source priority');
 assert(operationEvidenceSource.includes('if (exactKeys.length > 1) return null;'),
   'canonical resolver must keep conflicting exact vehicle identities unresolved');
 assert(operationEvidenceSource.includes('first.vehicleType = "";') &&
