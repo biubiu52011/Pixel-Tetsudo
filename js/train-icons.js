@@ -636,7 +636,7 @@ function _resolveTrainRuleDisplayName(lineId, operator, trainId, stationIndex, t
 // Display-name normalization may only expand spelling variants within the same
   // canonical identity. It must never rewrite retired stock to a successor,
   // a generic family to a subseries, or an ambiguous candidate to one vehicle.
-  function resolveVehicleDisplayName(candidatesStr, lineId) {
+  function resolveVehicleDisplayName(candidatesStr) {
     if (!vehicleIdentity) return null;
     var parts = String(vehicleIdentity).split('/').map(function(s){ return s.trim(); }).filter(Boolean);
     if (parts.length !== 1) return parts.length ? parts.join(' / ') : null;
