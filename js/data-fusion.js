@@ -23,11 +23,11 @@
   function _vehicleEvidenceRank(p) {
     if (!p) return 0;
     var src = p.vehicleSource || (p.vehicleResolution && p.vehicleResolution.source) || "";
-    return p.vehicleResolvedFromRealtime === true ? 5
-      : p.vehicleResolvedFromRealtimeDerived === true ? 4
-      : src === "operation-assignment-provider" ? 3
-      : src === "odpt" ? 3
-      : src === "manual" ? 2 : 1;
+    return p.vehicleResolvedFromRealtime === true || src === "realtime" ? 5
+      : p.vehicleResolvedFromRealtimeDerived === true || src === "realtime-derived" ? 4
+      : src === "structural" ? 3
+      : src === "operation-assignment-provider" || src === "odpt" || src === "timetable" ? 2
+      : src === "manual" ? 1 : 0;
   }
   function _rememberChainVehicle(p) {
     if (!p || !p.runningChainId) return;
