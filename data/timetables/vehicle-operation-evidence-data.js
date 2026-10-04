@@ -1,6 +1,5493 @@
 /* Generated from canonical Supabase evidence tables. Data only; no line logic. */
 window.VEHICLE_OPERATION_EVIDENCE = [
-  {networkKey:"TokyoMonorail",validDate:"2026-04-10",operationCode:"03",operator:"TokyoMonorail",
-   vehicleType:"東京モノレール10000形",formationId:"10051F",grade:"C",sourceUrl:"https://loo-ool.com/rail/TMO/",
-   trainNumbers:["TMW001D","TMW007U","TMW009D","TMW020U","TMW022D","TMW035U","TMW036D","TMW043D","TMW049U","TMW050D","TMW057D","TMW062U","TMW064D","TMW075D","TMW075U","TMW084U","TMW086D","TMW097D","TMW097U","TMW106U","TMW108D","TMW119D","TMW119U","TMW128U","TMW130D","TMW141D","TMW141U","TMW150U","TMW152D","TMW164U","TMW165D","TMW175U","TMW176D","TMW186U","TMW187D","TMW195D","TMW195U","TMW204U"]}
+  {
+    "networkKey": "keiyo",
+    "validDate": "2026-04-01",
+    "operationCode": "01",
+    "operator": "JR-East",
+    "vehicleType": "JR E233系5000番台",
+    "formationIds": [],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-01",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/B/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "keiyo",
+    "validDate": "2026-04-01",
+    "operationCode": "03",
+    "operator": "JR-East",
+    "vehicleType": "JR E233系5000番台",
+    "formationIds": [],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-01",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/B/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "keiyo",
+    "validDate": "2026-04-01",
+    "operationCode": "05",
+    "operator": "JR-East",
+    "vehicleType": "JR E233系5000番台",
+    "formationIds": [],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-01",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/B/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "keiyo",
+    "validDate": "2026-04-01",
+    "operationCode": "09",
+    "operator": "JR-East",
+    "vehicleType": "JR E233系5000番台",
+    "formationIds": [],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-01",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/B/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "keiyo",
+    "validDate": "2026-04-01",
+    "operationCode": "11",
+    "operator": "JR-East",
+    "vehicleType": "JR E233系5000番台",
+    "formationIds": [],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-01",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/B/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "keiyo",
+    "validDate": "2026-04-01",
+    "operationCode": "15",
+    "operator": "JR-East",
+    "vehicleType": "JR E233系5000番台",
+    "formationIds": [],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-01",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/B/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "keiyo",
+    "validDate": "2026-04-01",
+    "operationCode": "17",
+    "operator": "JR-East",
+    "vehicleType": "JR E233系5000番台",
+    "formationIds": [],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-01",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/B/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "keiyo",
+    "validDate": "2026-04-01",
+    "operationCode": "19",
+    "operator": "JR-East",
+    "vehicleType": "JR 209系500番台",
+    "formationIds": [],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-01",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/B/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "keiyo",
+    "validDate": "2026-04-01",
+    "operationCode": "21",
+    "operator": "JR-East",
+    "vehicleType": "JR E233系5000番台",
+    "formationIds": [],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-01",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/B/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "keiyo",
+    "validDate": "2026-04-01",
+    "operationCode": "23",
+    "operator": "JR-East",
+    "vehicleType": "JR E233系5000番台",
+    "formationIds": [],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-01",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/B/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "keiyo",
+    "validDate": "2026-04-01",
+    "operationCode": "25",
+    "operator": "JR-East",
+    "vehicleType": "JR E233系5000番台",
+    "formationIds": [],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-01",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/B/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "keiyo",
+    "validDate": "2026-04-01",
+    "operationCode": "27",
+    "operator": "JR-East",
+    "vehicleType": "JR E233系5000番台",
+    "formationIds": [],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-01",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/B/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "keiyo",
+    "validDate": "2026-04-01",
+    "operationCode": "29",
+    "operator": "JR-East",
+    "vehicleType": "JR E233系5000番台",
+    "formationIds": [],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-01",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/B/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "keiyo",
+    "validDate": "2026-04-01",
+    "operationCode": "31",
+    "operator": "JR-East",
+    "vehicleType": "JR E233系5000番台",
+    "formationIds": [],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-01",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/B/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "keiyo",
+    "validDate": "2026-04-01",
+    "operationCode": "33",
+    "operator": "JR-East",
+    "vehicleType": "JR E233系5000番台",
+    "formationIds": [],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-01",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/B/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "keiyo",
+    "validDate": "2026-04-01",
+    "operationCode": "35",
+    "operator": "JR-East",
+    "vehicleType": "JR E233系5000番台",
+    "formationIds": [],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-01",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/B/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "keiyo",
+    "validDate": "2026-04-01",
+    "operationCode": "37",
+    "operator": "JR-East",
+    "vehicleType": "JR E233系5000番台",
+    "formationIds": [],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-01",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/B/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "keiyo",
+    "validDate": "2026-04-01",
+    "operationCode": "83",
+    "operator": "JR-East",
+    "vehicleType": "JR E233系5000番台",
+    "formationIds": [],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-01",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/B/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "saikyo",
+    "validDate": "2026-04-03",
+    "operationCode": "77",
+    "operator": "Sotetsu",
+    "vehicleType": "相鉄12000系",
+    "formationIds": [
+      "12104F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-03",
+    "grade": "C",
+    "sourceUrl": "https://www.loo-ool.com/rail/A/00/20260403/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "saikyo",
+    "validDate": "2026-04-03",
+    "operationCode": "81",
+    "operator": "TWR",
+    "vehicleType": "東京臨海高速鉄道70-000形",
+    "formationIds": [
+      "Z2"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-03",
+    "grade": "C",
+    "sourceUrl": "https://www.loo-ool.com/rail/A/00/20260403/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "saikyo",
+    "validDate": "2026-04-03",
+    "operationCode": "83",
+    "operator": "TWR",
+    "vehicleType": "東京臨海高速鉄道70-000形",
+    "formationIds": [
+      "Z7"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-03",
+    "grade": "C",
+    "sourceUrl": "https://www.loo-ool.com/rail/A/00/20260403/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "saikyo",
+    "validDate": "2026-04-03",
+    "operationCode": "85",
+    "operator": "TWR",
+    "vehicleType": "東京臨海高速鉄道71-000形",
+    "formationIds": [
+      "Z12"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-03",
+    "grade": "C",
+    "sourceUrl": "https://www.loo-ool.com/rail/A/00/20260403/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "saikyo",
+    "validDate": "2026-04-03",
+    "operationCode": "87",
+    "operator": "TWR",
+    "vehicleType": "東京臨海高速鉄道70-000形",
+    "formationIds": [
+      "Z1"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-03",
+    "grade": "C",
+    "sourceUrl": "https://www.loo-ool.com/rail/A/00/20260403/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "saikyo",
+    "validDate": "2026-04-03",
+    "operationCode": "89",
+    "operator": "TWR",
+    "vehicleType": "東京臨海高速鉄道71-000形",
+    "formationIds": [
+      "Z11"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-03",
+    "grade": "C",
+    "sourceUrl": "https://www.loo-ool.com/rail/A/00/20260403/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "saikyo",
+    "validDate": "2026-04-03",
+    "operationCode": "91",
+    "operator": "TWR",
+    "vehicleType": "東京臨海高速鉄道70-000形",
+    "formationIds": [
+      "Z3"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-03",
+    "grade": "C",
+    "sourceUrl": "https://www.loo-ool.com/rail/A/00/20260403/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "saikyo",
+    "validDate": "2026-04-04",
+    "operationCode": "81",
+    "operator": "TWR",
+    "vehicleType": "東京臨海高速鉄道70-000形",
+    "formationIds": [
+      "Z2"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-04",
+    "grade": "C",
+    "sourceUrl": "https://www.loo-ool.com/rail/A/00/20260404/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "saikyo",
+    "validDate": "2026-04-04",
+    "operationCode": "83",
+    "operator": "TWR",
+    "vehicleType": "東京臨海高速鉄道70-000形",
+    "formationIds": [
+      "Z7"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-04",
+    "grade": "C",
+    "sourceUrl": "https://www.loo-ool.com/rail/A/00/20260404/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "saikyo",
+    "validDate": "2026-04-04",
+    "operationCode": "85",
+    "operator": "TWR",
+    "vehicleType": "東京臨海高速鉄道71-000形",
+    "formationIds": [
+      "Z12"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-04",
+    "grade": "C",
+    "sourceUrl": "https://www.loo-ool.com/rail/A/00/20260404/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "saikyo",
+    "validDate": "2026-04-04",
+    "operationCode": "87",
+    "operator": "TWR",
+    "vehicleType": "東京臨海高速鉄道70-000形",
+    "formationIds": [
+      "Z1"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-04",
+    "grade": "C",
+    "sourceUrl": "https://www.loo-ool.com/rail/A/00/20260404/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "saikyo",
+    "validDate": "2026-04-04",
+    "operationCode": "89",
+    "operator": "TWR",
+    "vehicleType": "東京臨海高速鉄道71-000形",
+    "formationIds": [
+      "Z11"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-04",
+    "grade": "C",
+    "sourceUrl": "https://www.loo-ool.com/rail/A/00/20260404/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "saikyo",
+    "validDate": "2026-04-04",
+    "operationCode": "91",
+    "operator": "TWR",
+    "vehicleType": "東京臨海高速鉄道70-000形",
+    "formationIds": [
+      "Z3"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-04",
+    "grade": "C",
+    "sourceUrl": "https://www.loo-ool.com/rail/A/00/20260404/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "sotetsu",
+    "validDate": "2026-04-08",
+    "operationCode": "11",
+    "operator": "Sotetsu",
+    "vehicleType": "相鉄10000系(8両)",
+    "formationIds": [
+      "10703F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-08",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/SA/00/20250604/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "sotetsu",
+    "validDate": "2026-04-08",
+    "operationCode": "12",
+    "operator": "Sotetsu",
+    "vehicleType": "相鉄13000系(8両)",
+    "formationIds": [
+      "13101F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-08",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/SA/00/20250604/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "sotetsu",
+    "validDate": "2026-04-08",
+    "operationCode": "15",
+    "operator": "Sotetsu",
+    "vehicleType": "相鉄10000系(8両)",
+    "formationIds": [
+      "10705F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-08",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/SA/00/20250604/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "sotetsu",
+    "validDate": "2026-04-08",
+    "operationCode": "50",
+    "operator": "Sotetsu",
+    "vehicleType": "相鉄9000系(10両)",
+    "formationIds": [
+      "9706F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-08",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/SA/00/20250604/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "sotetsu",
+    "validDate": "2026-04-08",
+    "operationCode": "51",
+    "operator": "Sotetsu",
+    "vehicleType": "相鉄8000系(10両)",
+    "formationIds": [
+      "8713F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-08",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/SA/00/20250604/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "sotetsu",
+    "validDate": "2026-04-08",
+    "operationCode": "52",
+    "operator": "Sotetsu",
+    "vehicleType": "相鉄9000系(10両)",
+    "formationIds": [
+      "9705F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-08",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/SA/00/20250604/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "sotetsu",
+    "validDate": "2026-04-08",
+    "operationCode": "54",
+    "operator": "Sotetsu",
+    "vehicleType": "相鉄9000系(10両)",
+    "formationIds": [
+      "9704F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-08",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/SA/00/20250604/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "sotetsu",
+    "validDate": "2026-04-08",
+    "operationCode": "55",
+    "operator": "Sotetsu",
+    "vehicleType": "相鉄11000系(10両)",
+    "formationIds": [
+      "11001F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-08",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/SA/00/20250604/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "sotetsu",
+    "validDate": "2026-04-08",
+    "operationCode": "56",
+    "operator": "Sotetsu",
+    "vehicleType": "相鉄8000系(10両)",
+    "formationIds": [
+      "8708F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-08",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/SA/00/20250604/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "sotetsu",
+    "validDate": "2026-04-08",
+    "operationCode": "58",
+    "operator": "Sotetsu",
+    "vehicleType": "相鉄11000系(10両)",
+    "formationIds": [
+      "11004F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-08",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/SA/00/20250604/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "sotetsu",
+    "validDate": "2026-04-08",
+    "operationCode": "62",
+    "operator": "Sotetsu",
+    "vehicleType": "相鉄11000系(10両)",
+    "formationIds": [
+      "11005F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-08",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/SA/00/20250604/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "sotetsu",
+    "validDate": "2026-04-08",
+    "operationCode": "64",
+    "operator": "Sotetsu",
+    "vehicleType": "相鉄9000系(10両)",
+    "formationIds": [
+      "9707F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-08",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/SA/00/20250604/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "sotetsu",
+    "validDate": "2026-04-08",
+    "operationCode": "65",
+    "operator": "Sotetsu",
+    "vehicleType": "相鉄10000系(10両)",
+    "formationIds": [
+      "10701F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-08",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/SA/00/20250604/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "sotetsu",
+    "validDate": "2026-04-08",
+    "operationCode": "67",
+    "operator": "Sotetsu",
+    "vehicleType": "相鉄11000系(10両)",
+    "formationIds": [
+      "11003F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-08",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/SA/00/20250604/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "sotetsu",
+    "validDate": "2026-04-08",
+    "operationCode": "68",
+    "operator": "Sotetsu",
+    "vehicleType": "相鉄9000系(10両)",
+    "formationIds": [
+      "9702F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-08",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/SA/00/20250604/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "sotetsu",
+    "validDate": "2026-04-08",
+    "operationCode": "70",
+    "operator": "Sotetsu",
+    "vehicleType": "相鉄12000系(10両)",
+    "formationIds": [
+      "12101F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-08",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/SA/00/20250604/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "sotetsu",
+    "validDate": "2026-04-08",
+    "operationCode": "71",
+    "operator": "Sotetsu",
+    "vehicleType": "相鉄12000系(10両)",
+    "formationIds": [
+      "12104F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-08",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/SA/00/20250604/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "sotetsu",
+    "validDate": "2026-04-08",
+    "operationCode": "72",
+    "operator": "Sotetsu",
+    "vehicleType": "相鉄12000系(10両)",
+    "formationIds": [
+      "12103F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-08",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/SA/00/20250604/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "sotetsu",
+    "validDate": "2026-04-08",
+    "operationCode": "73",
+    "operator": "Sotetsu",
+    "vehicleType": "相鉄12000系(10両)",
+    "formationIds": [
+      "12106F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-08",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/SA/00/20250604/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "sotetsu",
+    "validDate": "2026-04-08",
+    "operationCode": "91G",
+    "operator": "Sotetsu",
+    "vehicleType": "相鉄20000系(10両)",
+    "formationIds": [
+      "20104F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-08",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/SA/00/20250604/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "sotetsu",
+    "validDate": "2026-04-08",
+    "operationCode": "93G",
+    "operator": "Sotetsu",
+    "vehicleType": "相鉄20000系(10両)",
+    "formationIds": [
+      "20102F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-08",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/SA/00/20250604/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "sotetsu",
+    "validDate": "2026-04-08",
+    "operationCode": "94G",
+    "operator": "Sotetsu",
+    "vehicleType": "相鉄20000系(10両)",
+    "formationIds": [
+      "20101F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-08",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/SA/00/20250604/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "sotetsu",
+    "validDate": "2026-04-08",
+    "operationCode": "95G",
+    "operator": "Sotetsu",
+    "vehicleType": "相鉄20000系(10両)",
+    "formationIds": [
+      "20105F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-08",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/SA/00/20250604/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "TokyoMonorail",
+    "validDate": "2026-04-10",
+    "operationCode": "03",
+    "operator": "TokyoMonorail",
+    "vehicleType": "10000形",
+    "formationIds": [
+      "51F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-10",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/TMO/00/20260401/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "TokyoMonorail",
+    "validDate": "2026-04-10",
+    "operationCode": "05",
+    "operator": "TokyoMonorail",
+    "vehicleType": "1000形",
+    "formationIds": [
+      "91F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-10",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/TMO/00/20260401/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "TokyoMonorail",
+    "validDate": "2026-04-10",
+    "operationCode": "07",
+    "operator": "TokyoMonorail",
+    "vehicleType": "1000形",
+    "formationIds": [
+      "79F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-10",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/TMO/00/20260401/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "TokyoMonorail",
+    "validDate": "2026-04-10",
+    "operationCode": "11",
+    "operator": "TokyoMonorail",
+    "vehicleType": "1000形",
+    "formationIds": [
+      "07F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-10",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/TMO/00/20260401/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "TokyoMonorail",
+    "validDate": "2026-04-10",
+    "operationCode": "15",
+    "operator": "TokyoMonorail",
+    "vehicleType": "10000形",
+    "formationIds": [
+      "81F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-10",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/TMO/00/20260401/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "TokyoMonorail",
+    "validDate": "2026-04-10",
+    "operationCode": "17",
+    "operator": "TokyoMonorail",
+    "vehicleType": "2000形",
+    "formationIds": [
+      "11F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-10",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/TMO/00/20260401/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "TokyoMonorail",
+    "validDate": "2026-04-10",
+    "operationCode": "19",
+    "operator": "TokyoMonorail",
+    "vehicleType": "10000形",
+    "formationIds": [
+      "31F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-10",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/TMO/00/20260401/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "TokyoMonorail",
+    "validDate": "2026-04-10",
+    "operationCode": "21",
+    "operator": "TokyoMonorail",
+    "vehicleType": "10000形",
+    "formationIds": [
+      "41F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-10",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/TMO/00/20260401/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "TokyoMonorail",
+    "validDate": "2026-04-10",
+    "operationCode": "23",
+    "operator": "TokyoMonorail",
+    "vehicleType": "1000形",
+    "formationIds": [
+      "85F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-10",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/TMO/00/20260401/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "TokyoMonorail",
+    "validDate": "2026-04-10",
+    "operationCode": "25",
+    "operator": "TokyoMonorail",
+    "vehicleType": "10000形",
+    "formationIds": [
+      "71F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-10",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/TMO/00/20260401/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "TokyoMonorail",
+    "validDate": "2026-04-10",
+    "operationCode": "27",
+    "operator": "TokyoMonorail",
+    "vehicleType": "1000形",
+    "formationIds": [
+      "43F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-10",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/TMO/00/20260401/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "TokyoMonorail",
+    "validDate": "2026-04-10",
+    "operationCode": "29",
+    "operator": "TokyoMonorail",
+    "vehicleType": "2000形",
+    "formationIds": [
+      "21F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-10",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/TMO/00/20260401/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "odakyu-main",
+    "validDate": "2026-04-13",
+    "operationCode": "A14",
+    "operator": "Odakyu",
+    "vehicleType": "小田急3000形",
+    "formationIds": [
+      "3269F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-13",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OD/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "odakyu-main",
+    "validDate": "2026-04-13",
+    "operationCode": "A23",
+    "operator": "Odakyu",
+    "vehicleType": "小田急3000形",
+    "formationIds": [
+      "3270F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-13",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OD/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "odakyu-main",
+    "validDate": "2026-04-13",
+    "operationCode": "A25",
+    "operator": "Odakyu",
+    "vehicleType": "小田急3000形",
+    "formationIds": [
+      "3260F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-13",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OD/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "odakyu-main",
+    "validDate": "2026-04-13",
+    "operationCode": "A33",
+    "operator": "Odakyu",
+    "vehicleType": "小田急3000形",
+    "formationIds": [
+      "3274F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-13",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OD/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "odakyu-main",
+    "validDate": "2026-04-13",
+    "operationCode": "B13",
+    "operator": "Odakyu",
+    "vehicleType": "小田急2000形",
+    "formationIds": [
+      "2057F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-13",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OD/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "odakyu-main",
+    "validDate": "2026-04-13",
+    "operationCode": "B14",
+    "operator": "Odakyu",
+    "vehicleType": "小田急3000形",
+    "formationIds": [
+      "3652F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-13",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OD/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "odakyu-main",
+    "validDate": "2026-04-13",
+    "operationCode": "B22",
+    "operator": "Odakyu",
+    "vehicleType": "小田急2000形",
+    "formationIds": [
+      "2054F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-13",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OD/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "odakyu-main",
+    "validDate": "2026-04-13",
+    "operationCode": "B28",
+    "operator": "Odakyu",
+    "vehicleType": "小田急3000形",
+    "formationIds": [
+      "3653F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-13",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OD/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "odakyu-main",
+    "validDate": "2026-04-13",
+    "operationCode": "E12",
+    "operator": "Odakyu",
+    "vehicleType": "小田急8000形",
+    "formationIds": [
+      "8065F",
+      "8265F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-13",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OD/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "odakyu-main",
+    "validDate": "2026-04-13",
+    "operationCode": "E14",
+    "operator": "Odakyu",
+    "vehicleType": "小田急3000形",
+    "formationIds": [
+      "3093F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-13",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OD/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "odakyu-main",
+    "validDate": "2026-04-13",
+    "operationCode": "E18",
+    "operator": "Odakyu",
+    "vehicleType": "小田急8000形",
+    "formationIds": [
+      "8058F",
+      "8260F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-13",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OD/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "odakyu-main",
+    "validDate": "2026-04-13",
+    "operationCode": "E20",
+    "operator": "Odakyu",
+    "vehicleType": "小田急3000形",
+    "formationIds": [
+      "3081F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-13",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OD/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "odakyu-main",
+    "validDate": "2026-04-13",
+    "operationCode": "E21",
+    "operator": "Odakyu",
+    "vehicleType": "小田急3000形",
+    "formationIds": [
+      "3087F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-13",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OD/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "odakyu-main",
+    "validDate": "2026-04-13",
+    "operationCode": "E26",
+    "operator": "Odakyu",
+    "vehicleType": "小田急1000形",
+    "formationIds": [
+      "1092F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-13",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OD/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "odakyu-main",
+    "validDate": "2026-04-13",
+    "operationCode": "E27",
+    "operator": "Odakyu",
+    "vehicleType": "小田急5000形",
+    "formationIds": [
+      "5055F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-13",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OD/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "odakyu-main",
+    "validDate": "2026-04-13",
+    "operationCode": "E30",
+    "operator": "Odakyu",
+    "vehicleType": "小田急3000形",
+    "formationIds": [
+      "3091F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-13",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OD/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "odakyu-main",
+    "validDate": "2026-04-13",
+    "operationCode": "E31",
+    "operator": "Odakyu",
+    "vehicleType": "小田急4000形",
+    "formationIds": [
+      "4061F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-13",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OD/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "odakyu-main",
+    "validDate": "2026-04-13",
+    "operationCode": "E33",
+    "operator": "Odakyu",
+    "vehicleType": "小田急4000形",
+    "formationIds": [
+      "4062F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-13",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OD/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "odakyu-main",
+    "validDate": "2026-04-13",
+    "operationCode": "E65",
+    "operator": "Odakyu",
+    "vehicleType": "小田急1000形",
+    "formationIds": [
+      "1093F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-13",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OD/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "odakyu-main",
+    "validDate": "2026-04-13",
+    "operationCode": "E66",
+    "operator": "Odakyu",
+    "vehicleType": "小田急5000形",
+    "formationIds": [
+      "5060F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-13",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OD/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "odakyu-main",
+    "validDate": "2026-04-13",
+    "operationCode": "E69",
+    "operator": "Odakyu",
+    "vehicleType": "小田急5000形",
+    "formationIds": [
+      "5064F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-13",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OD/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "keiyo",
+    "validDate": "2026-04-14",
+    "operationCode": "01",
+    "operator": "JR-East",
+    "vehicleType": "JR E233系5000番台",
+    "formationIds": [],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-14",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/B/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "keiyo",
+    "validDate": "2026-04-14",
+    "operationCode": "03",
+    "operator": "JR-East",
+    "vehicleType": "JR E233系5000番台",
+    "formationIds": [],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-14",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/B/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "keiyo",
+    "validDate": "2026-04-14",
+    "operationCode": "05",
+    "operator": "JR-East",
+    "vehicleType": "JR E233系5000番台",
+    "formationIds": [],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-14",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/B/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "keiyo",
+    "validDate": "2026-04-14",
+    "operationCode": "09",
+    "operator": "JR-East",
+    "vehicleType": "JR E233系5000番台",
+    "formationIds": [],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-14",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/B/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "keiyo",
+    "validDate": "2026-04-14",
+    "operationCode": "11",
+    "operator": "JR-East",
+    "vehicleType": "JR E233系5000番台",
+    "formationIds": [],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-14",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/B/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "keiyo",
+    "validDate": "2026-04-14",
+    "operationCode": "15",
+    "operator": "JR-East",
+    "vehicleType": "JR E233系5000番台",
+    "formationIds": [],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-14",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/B/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "keiyo",
+    "validDate": "2026-04-14",
+    "operationCode": "17",
+    "operator": "JR-East",
+    "vehicleType": "JR E233系5000番台",
+    "formationIds": [],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-14",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/B/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "keiyo",
+    "validDate": "2026-04-14",
+    "operationCode": "19",
+    "operator": "JR-East",
+    "vehicleType": "JR E233系5000番台",
+    "formationIds": [],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-14",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/B/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "keiyo",
+    "validDate": "2026-04-14",
+    "operationCode": "21",
+    "operator": "JR-East",
+    "vehicleType": "JR E233系5000番台",
+    "formationIds": [],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-14",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/B/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "keiyo",
+    "validDate": "2026-04-14",
+    "operationCode": "23",
+    "operator": "JR-East",
+    "vehicleType": "JR E233系5000番台",
+    "formationIds": [],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-14",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/B/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "keiyo",
+    "validDate": "2026-04-14",
+    "operationCode": "25",
+    "operator": "JR-East",
+    "vehicleType": "JR E233系5000番台",
+    "formationIds": [],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-14",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/B/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "keiyo",
+    "validDate": "2026-04-14",
+    "operationCode": "27",
+    "operator": "JR-East",
+    "vehicleType": "JR E233系5000番台",
+    "formationIds": [],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-14",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/B/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "keiyo",
+    "validDate": "2026-04-14",
+    "operationCode": "29",
+    "operator": "JR-East",
+    "vehicleType": "JR E233系5000番台",
+    "formationIds": [],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-14",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/B/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "keiyo",
+    "validDate": "2026-04-14",
+    "operationCode": "31",
+    "operator": "JR-East",
+    "vehicleType": "JR E233系5000番台",
+    "formationIds": [],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-14",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/B/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "keiyo",
+    "validDate": "2026-04-14",
+    "operationCode": "33",
+    "operator": "JR-East",
+    "vehicleType": "JR E233系5000番台",
+    "formationIds": [],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-14",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/B/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "keiyo",
+    "validDate": "2026-04-14",
+    "operationCode": "35",
+    "operator": "JR-East",
+    "vehicleType": "JR E233系5000番台",
+    "formationIds": [],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-14",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/B/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "keiyo",
+    "validDate": "2026-04-14",
+    "operationCode": "37",
+    "operator": "JR-East",
+    "vehicleType": "JR 209系500番台",
+    "formationIds": [],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-14",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/B/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "keiyo",
+    "validDate": "2026-04-14",
+    "operationCode": "81",
+    "operator": "JR-East",
+    "vehicleType": "JR E233系5000番台",
+    "formationIds": [],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-14",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/B/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "oimachi",
+    "validDate": "2026-04-15",
+    "operationCode": "101",
+    "operator": "TOKYU",
+    "vehicleType": "東急9000系",
+    "formationIds": [
+      "900015F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-15",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OM/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "oimachi",
+    "validDate": "2026-04-15",
+    "operationCode": "102",
+    "operator": "TOKYU",
+    "vehicleType": "東急6020系(5両)",
+    "formationIds": [
+      "602055F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-15",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OM/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "oimachi",
+    "validDate": "2026-04-15",
+    "operationCode": "103",
+    "operator": "TOKYU",
+    "vehicleType": "東急9020系",
+    "formationIds": [
+      "902021F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-15",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OM/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "oimachi",
+    "validDate": "2026-04-15",
+    "operationCode": "104",
+    "operator": "TOKYU",
+    "vehicleType": "東急9000系",
+    "formationIds": [
+      "900006F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-15",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OM/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "oimachi",
+    "validDate": "2026-04-15",
+    "operationCode": "105",
+    "operator": "TOKYU",
+    "vehicleType": "東急6020系(5両)",
+    "formationIds": [
+      "602058F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-15",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OM/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "oimachi",
+    "validDate": "2026-04-15",
+    "operationCode": "106",
+    "operator": "TOKYU",
+    "vehicleType": "東急6020系(5両)",
+    "formationIds": [
+      "602059F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-15",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OM/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "oimachi",
+    "validDate": "2026-04-15",
+    "operationCode": "107",
+    "operator": "TOKYU",
+    "vehicleType": "東急6020系(5両)",
+    "formationIds": [
+      "602054F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-15",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OM/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "oimachi",
+    "validDate": "2026-04-15",
+    "operationCode": "108",
+    "operator": "TOKYU",
+    "vehicleType": "東急6020系(5両)",
+    "formationIds": [
+      "602051F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-15",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OM/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "oimachi",
+    "validDate": "2026-04-15",
+    "operationCode": "109",
+    "operator": "TOKYU",
+    "vehicleType": "東急9000系",
+    "formationIds": [
+      "900014F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-15",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OM/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "oimachi",
+    "validDate": "2026-04-15",
+    "operationCode": "110",
+    "operator": "TOKYU",
+    "vehicleType": "東急9000系",
+    "formationIds": [
+      "900004F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-15",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OM/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "oimachi",
+    "validDate": "2026-04-15",
+    "operationCode": "114",
+    "operator": "TOKYU",
+    "vehicleType": "東急9000系",
+    "formationIds": [
+      "900008F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-15",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OM/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "oimachi",
+    "validDate": "2026-04-15",
+    "operationCode": "115",
+    "operator": "TOKYU",
+    "vehicleType": "東急6020系(5両)",
+    "formationIds": [
+      "602057F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-15",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OM/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "oimachi",
+    "validDate": "2026-04-15",
+    "operationCode": "116",
+    "operator": "TOKYU",
+    "vehicleType": "東急6020系(5両)",
+    "formationIds": [
+      "602056F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-15",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OM/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "oimachi",
+    "validDate": "2026-04-15",
+    "operationCode": "132",
+    "operator": "TOKYU",
+    "vehicleType": "東急6020系(7両)",
+    "formationIds": [
+      "602022F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-15",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OM/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "oimachi",
+    "validDate": "2026-04-15",
+    "operationCode": "134",
+    "operator": "TOKYU",
+    "vehicleType": "東急6000系",
+    "formationIds": [
+      "600003F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-15",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OM/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "oimachi",
+    "validDate": "2026-04-15",
+    "operationCode": "135",
+    "operator": "TOKYU",
+    "vehicleType": "東急6000系",
+    "formationIds": [
+      "600004F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-15",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OM/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "oimachi",
+    "validDate": "2026-04-15",
+    "operationCode": "137",
+    "operator": "TOKYU",
+    "vehicleType": "東急6000系",
+    "formationIds": [
+      "600006F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-15",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OM/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "tozai",
+    "validDate": "2026-04-16",
+    "operationCode": "02S",
+    "operator": "TokyoMetro",
+    "vehicleType": "東京メトロ15000系(10両)",
+    "formationIds": [
+      "1500064F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "tozai",
+    "validDate": "2026-04-16",
+    "operationCode": "13S",
+    "operator": "TokyoMetro",
+    "vehicleType": "東京メトロ15000系(10両)",
+    "formationIds": [
+      "1500055F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "tozai",
+    "validDate": "2026-04-16",
+    "operationCode": "15S",
+    "operator": "TokyoMetro",
+    "vehicleType": "東京メトロ05系(10両)",
+    "formationIds": [
+      "0530F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "tozai",
+    "validDate": "2026-04-16",
+    "operationCode": "17S",
+    "operator": "TokyoMetro",
+    "vehicleType": "東京メトロ05系(10両)",
+    "formationIds": [
+      "0517F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "tozai",
+    "validDate": "2026-04-16",
+    "operationCode": "19S",
+    "operator": "TokyoMetro",
+    "vehicleType": "東京メトロ05系(10両)",
+    "formationIds": [
+      "0522F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "tozai",
+    "validDate": "2026-04-16",
+    "operationCode": "21S",
+    "operator": "TokyoMetro",
+    "vehicleType": "東京メトロ15000系(10両)",
+    "formationIds": [
+      "1500062F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "tozai",
+    "validDate": "2026-04-16",
+    "operationCode": "25S",
+    "operator": "TokyoMetro",
+    "vehicleType": "東京メトロ05系(10両)",
+    "formationIds": [
+      "0520F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "tozai",
+    "validDate": "2026-04-16",
+    "operationCode": "27S",
+    "operator": "TokyoMetro",
+    "vehicleType": "東京メトロ05系(10両)",
+    "formationIds": [
+      "0515F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "tozai",
+    "validDate": "2026-04-16",
+    "operationCode": "29S",
+    "operator": "TokyoMetro",
+    "vehicleType": "東京メトロ05系(10両)",
+    "formationIds": [
+      "0528F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "tozai",
+    "validDate": "2026-04-16",
+    "operationCode": "31S",
+    "operator": "TokyoMetro",
+    "vehicleType": "東京メトロ05系(10両)",
+    "formationIds": [
+      "0531F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "tozai",
+    "validDate": "2026-04-16",
+    "operationCode": "33S",
+    "operator": "TokyoMetro",
+    "vehicleType": "東京メトロ07系(10両)",
+    "formationIds": [
+      "0771F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "tozai",
+    "validDate": "2026-04-16",
+    "operationCode": "35S",
+    "operator": "TokyoMetro",
+    "vehicleType": "東京メトロ07系(10両)",
+    "formationIds": [
+      "0772F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "tozai",
+    "validDate": "2026-04-16",
+    "operationCode": "37S",
+    "operator": "TokyoMetro",
+    "vehicleType": "東京メトロ05系(10両)",
+    "formationIds": [
+      "0521F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "tozai",
+    "validDate": "2026-04-16",
+    "operationCode": "39S",
+    "operator": "TokyoMetro",
+    "vehicleType": "東京メトロ05系(10両)",
+    "formationIds": [
+      "0534F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "tozai",
+    "validDate": "2026-04-16",
+    "operationCode": "43S",
+    "operator": "TokyoMetro",
+    "vehicleType": "東京メトロ05系(10両)",
+    "formationIds": [
+      "0524F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "tozai",
+    "validDate": "2026-04-16",
+    "operationCode": "45S",
+    "operator": "TokyoMetro",
+    "vehicleType": "東京メトロ15000系(10両)",
+    "formationIds": [
+      "1500054F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "tozai",
+    "validDate": "2026-04-16",
+    "operationCode": "47S",
+    "operator": "TokyoMetro",
+    "vehicleType": "東京メトロ05系(10両)",
+    "formationIds": [
+      "0540F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "tozai",
+    "validDate": "2026-04-16",
+    "operationCode": "49S",
+    "operator": "TokyoMetro",
+    "vehicleType": "東京メトロ15000系(10両)",
+    "formationIds": [
+      "1500056F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "tozai",
+    "validDate": "2026-04-16",
+    "operationCode": "51S",
+    "operator": "TokyoMetro",
+    "vehicleType": "東京メトロ05系(10両)",
+    "formationIds": [
+      "0542F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "tozai",
+    "validDate": "2026-04-16",
+    "operationCode": "53S",
+    "operator": "TokyoMetro",
+    "vehicleType": "東京メトロ15000系(10両)",
+    "formationIds": [
+      "1500058F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "tozai",
+    "validDate": "2026-04-16",
+    "operationCode": "55S",
+    "operator": "TokyoMetro",
+    "vehicleType": "東京メトロ05系(10両)",
+    "formationIds": [
+      "0541F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "tozai",
+    "validDate": "2026-04-16",
+    "operationCode": "57S",
+    "operator": "TokyoMetro",
+    "vehicleType": "東京メトロ05系(10両)",
+    "formationIds": [
+      "0532F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "tozai",
+    "validDate": "2026-04-16",
+    "operationCode": "63S",
+    "operator": "TokyoMetro",
+    "vehicleType": "東京メトロ05系(10両)",
+    "formationIds": [
+      "0529F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "tozai",
+    "validDate": "2026-04-16",
+    "operationCode": "65S",
+    "operator": "TokyoMetro",
+    "vehicleType": "東京メトロ05系(10両)",
+    "formationIds": [
+      "0538F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "tozai",
+    "validDate": "2026-04-16",
+    "operationCode": "67S",
+    "operator": "TokyoMetro",
+    "vehicleType": "東京メトロ05系(10両)",
+    "formationIds": [
+      "0536F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "tozai",
+    "validDate": "2026-04-16",
+    "operationCode": "69S",
+    "operator": "TokyoMetro",
+    "vehicleType": "東京メトロ05系(10両)",
+    "formationIds": [
+      "0543F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "tozai",
+    "validDate": "2026-04-16",
+    "operationCode": "71S",
+    "operator": "TokyoMetro",
+    "vehicleType": "東京メトロ15000系(10両)",
+    "formationIds": [
+      "1500061F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "tozai",
+    "validDate": "2026-04-16",
+    "operationCode": "75S",
+    "operator": "TokyoMetro",
+    "vehicleType": "東京メトロ07系(10両)",
+    "formationIds": [
+      "0774F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "tozai",
+    "validDate": "2026-04-16",
+    "operationCode": "77S",
+    "operator": "TokyoMetro",
+    "vehicleType": "東京メトロ15000系(10両)",
+    "formationIds": [
+      "1500057F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "tozai",
+    "validDate": "2026-04-16",
+    "operationCode": "79S",
+    "operator": "TokyoMetro",
+    "vehicleType": "東京メトロ07系(10両)",
+    "formationIds": [
+      "0776F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "tozai",
+    "validDate": "2026-04-16",
+    "operationCode": "81S",
+    "operator": "TokyoMetro",
+    "vehicleType": "東京メトロ07系(10両)",
+    "formationIds": [
+      "0775F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "tozai",
+    "validDate": "2026-04-16",
+    "operationCode": "85S",
+    "operator": "TokyoMetro",
+    "vehicleType": "東京メトロ05系(10両)",
+    "formationIds": [
+      "0537F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "tozai",
+    "validDate": "2026-04-16",
+    "operationCode": "87S",
+    "operator": "TokyoMetro",
+    "vehicleType": "東京メトロ15000系(10両)",
+    "formationIds": [
+      "1500053F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "tozai",
+    "validDate": "2026-04-16",
+    "operationCode": "89S",
+    "operator": "TokyoMetro",
+    "vehicleType": "東京メトロ05系(10両)",
+    "formationIds": [
+      "0514F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "tozai",
+    "validDate": "2026-04-16",
+    "operationCode": "93S",
+    "operator": "TokyoMetro",
+    "vehicleType": "東京メトロ05系(10両)",
+    "formationIds": [
+      "0533F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "tozai",
+    "validDate": "2026-04-16",
+    "operationCode": "95S",
+    "operator": "TokyoMetro",
+    "vehicleType": "東京メトロ15000系(10両)",
+    "formationIds": [
+      "1500066F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "oimachi",
+    "validDate": "2026-04-16",
+    "operationCode": "101",
+    "operator": "TOKYU",
+    "vehicleType": "東急9020系",
+    "formationIds": [
+      "902021F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OM/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "oimachi",
+    "validDate": "2026-04-16",
+    "operationCode": "102",
+    "operator": "TOKYU",
+    "vehicleType": "東急9000系",
+    "formationIds": [
+      "900008F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OM/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "oimachi",
+    "validDate": "2026-04-16",
+    "operationCode": "103",
+    "operator": "TOKYU",
+    "vehicleType": "東急6020系(5両)",
+    "formationIds": [
+      "602055F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OM/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "oimachi",
+    "validDate": "2026-04-16",
+    "operationCode": "104",
+    "operator": "TOKYU",
+    "vehicleType": "東急9000系",
+    "formationIds": [
+      "900001F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OM/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "oimachi",
+    "validDate": "2026-04-16",
+    "operationCode": "105",
+    "operator": "TOKYU",
+    "vehicleType": "東急9000系",
+    "formationIds": [
+      "900013F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OM/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "oimachi",
+    "validDate": "2026-04-16",
+    "operationCode": "106",
+    "operator": "TOKYU",
+    "vehicleType": "東急6020系(5両)",
+    "formationIds": [
+      "602053F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OM/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "oimachi",
+    "validDate": "2026-04-16",
+    "operationCode": "107",
+    "operator": "TOKYU",
+    "vehicleType": "東急6020系(5両)",
+    "formationIds": [
+      "602059F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OM/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "oimachi",
+    "validDate": "2026-04-16",
+    "operationCode": "108",
+    "operator": "TOKYU",
+    "vehicleType": "東急6020系(5両)",
+    "formationIds": [
+      "602054F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OM/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "oimachi",
+    "validDate": "2026-04-16",
+    "operationCode": "109",
+    "operator": "TOKYU",
+    "vehicleType": "東急6020系(5両)",
+    "formationIds": [
+      "602057F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OM/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "oimachi",
+    "validDate": "2026-04-16",
+    "operationCode": "110",
+    "operator": "TOKYU",
+    "vehicleType": "東急9000系",
+    "formationIds": [
+      "900014F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OM/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "oimachi",
+    "validDate": "2026-04-16",
+    "operationCode": "111",
+    "operator": "TOKYU",
+    "vehicleType": "東急9020系",
+    "formationIds": [
+      "902022F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OM/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "oimachi",
+    "validDate": "2026-04-16",
+    "operationCode": "112",
+    "operator": "TOKYU",
+    "vehicleType": "東急9000系",
+    "formationIds": [
+      "900015F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OM/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "oimachi",
+    "validDate": "2026-04-16",
+    "operationCode": "114",
+    "operator": "TOKYU",
+    "vehicleType": "東急6020系(5両)",
+    "formationIds": [
+      "602051F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OM/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "oimachi",
+    "validDate": "2026-04-16",
+    "operationCode": "115",
+    "operator": "TOKYU",
+    "vehicleType": "東急6020系(5両)",
+    "formationIds": [
+      "602052F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OM/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "oimachi",
+    "validDate": "2026-04-16",
+    "operationCode": "116",
+    "operator": "TOKYU",
+    "vehicleType": "東急6020系(5両)",
+    "formationIds": [
+      "602058F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OM/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "oimachi",
+    "validDate": "2026-04-16",
+    "operationCode": "132",
+    "operator": "TOKYU",
+    "vehicleType": "東急6000系",
+    "formationIds": [
+      "600001F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OM/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "oimachi",
+    "validDate": "2026-04-16",
+    "operationCode": "133",
+    "operator": "TOKYU",
+    "vehicleType": "東急6020系(7両)",
+    "formationIds": [
+      "602022F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OM/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "oimachi",
+    "validDate": "2026-04-16",
+    "operationCode": "134",
+    "operator": "TOKYU",
+    "vehicleType": "東急6000系",
+    "formationIds": [
+      "600005F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OM/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "oimachi",
+    "validDate": "2026-04-16",
+    "operationCode": "135",
+    "operator": "TOKYU",
+    "vehicleType": "東急6000系",
+    "formationIds": [
+      "600003F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OM/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "oimachi",
+    "validDate": "2026-04-16",
+    "operationCode": "136",
+    "operator": "TOKYU",
+    "vehicleType": "東急6000系",
+    "formationIds": [
+      "600004F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-04-16",
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/OM/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "odakyu-main",
+    "validDate": "2026-07-29",
+    "operationCode": "A25",
+    "operator": "Odakyu",
+    "vehicleType": "小田急3000形",
+    "formationIds": [
+      "3277F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-07-29",
+    "grade": "B",
+    "sourceUrl": "https://2nd-train.net/formations/data/id/5396/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "odakyu-main",
+    "validDate": "2026-08-18",
+    "operationCode": "E11",
+    "operator": "Odakyu",
+    "vehicleType": "小田急8000形 / 小田急3000形",
+    "formationIds": [
+      "8058F",
+      "3262F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-08-18",
+    "grade": "B",
+    "sourceUrl": "https://2nd-train.net/formations/data/id/5298/",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-08",
+    "operationCode": "01",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1502F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-08",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-08",
+    "operationCode": "02",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1503F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-08",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-08",
+    "operationCode": "03",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系",
+    "formationIds": [
+      "1020F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-08",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-08",
+    "operationCode": "04",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系",
+    "formationIds": [
+      "1019F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-08",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-08",
+    "operationCode": "05",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7113F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-08",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-08",
+    "operationCode": "06",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7104F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-08",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-08",
+    "operationCode": "07",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1522F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-08",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-08",
+    "operationCode": "08",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7109F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-08",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-08",
+    "operationCode": "09",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7101F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-08",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-08",
+    "operationCode": "10",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7111F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-08",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-08",
+    "operationCode": "11",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7106F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-08",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-08",
+    "operationCode": "12",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1507F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-08",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-08",
+    "operationCode": "13",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系",
+    "formationIds": [
+      "1017F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-08",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-08",
+    "operationCode": "14",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7114F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-08",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-08",
+    "operationCode": "15",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7110F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-08",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-08",
+    "operationCode": "16",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1523F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-08",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-08",
+    "operationCode": "17",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系",
+    "formationIds": [
+      "1013F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-08",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-08",
+    "operationCode": "18",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7107F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-08",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-08",
+    "operationCode": "19",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系",
+    "formationIds": [
+      "1012F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-08",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-08",
+    "operationCode": "20",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7108F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-08",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-19",
+    "operationCode": "03",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1501F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-19",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-19",
+    "operationCode": "04",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7102F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-19",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-19",
+    "operationCode": "05",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系",
+    "formationIds": [
+      "1017F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-19",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-19",
+    "operationCode": "06",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系",
+    "formationIds": [
+      "1012F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-19",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-19",
+    "operationCode": "07",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7107F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-19",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-19",
+    "operationCode": "08",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1507F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-19",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-19",
+    "operationCode": "09",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1502F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-19",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-19",
+    "operationCode": "10",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1503F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-19",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-19",
+    "operationCode": "21",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1505F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-19",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-19",
+    "operationCode": "22",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7110F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-19",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-19",
+    "operationCode": "24",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7113F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-19",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-19",
+    "operationCode": "25",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系",
+    "formationIds": [
+      "1013F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-19",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-20",
+    "operationCode": "01",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1505F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-20",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-20",
+    "operationCode": "02",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1501F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-20",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-20",
+    "operationCode": "03",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7108F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-20",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-20",
+    "operationCode": "04",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系",
+    "formationIds": [
+      "1017F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-20",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-20",
+    "operationCode": "05",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7105F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-20",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-20",
+    "operationCode": "06",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7107F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-20",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-20",
+    "operationCode": "07",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1507F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-20",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-20",
+    "operationCode": "08",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7114F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-20",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-20",
+    "operationCode": "09",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1503F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-20",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-20",
+    "operationCode": "10",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系",
+    "formationIds": [
+      "1013F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-20",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-20",
+    "operationCode": "21",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7113F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-20",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-20",
+    "operationCode": "22",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系",
+    "formationIds": [
+      "1012F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-20",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-20",
+    "operationCode": "23",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7110F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-20",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-20",
+    "operationCode": "24",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7104F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-20",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-20",
+    "operationCode": "25",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7102F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-20",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-21",
+    "operationCode": "01",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7113F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-21",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-21",
+    "operationCode": "02",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7108F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-21",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-21",
+    "operationCode": "03",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7112F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-21",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-21",
+    "operationCode": "04",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7105F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-21",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-21",
+    "operationCode": "05",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1524F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-21",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-21",
+    "operationCode": "06",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1522F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-21",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-21",
+    "operationCode": "07",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7114F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-21",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-21",
+    "operationCode": "08",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1502F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-21",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-21",
+    "operationCode": "09",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系",
+    "formationIds": [
+      "1013F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-21",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-21",
+    "operationCode": "10",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7102F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-21",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-21",
+    "operationCode": "21",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7104F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-21",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-21",
+    "operationCode": "22",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7107F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-21",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-21",
+    "operationCode": "23",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系",
+    "formationIds": [
+      "1012F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-21",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-21",
+    "operationCode": "24",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7109F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-21",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-21",
+    "operationCode": "25",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系",
+    "formationIds": [
+      "1017F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-21",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-22",
+    "operationCode": "01",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7104F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-22",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-22",
+    "operationCode": "02",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7112F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-22",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-22",
+    "operationCode": "03",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1507F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-22",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-22",
+    "operationCode": "04",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1524F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-22",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-22",
+    "operationCode": "05",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7113F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-22",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-22",
+    "operationCode": "06",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系",
+    "formationIds": [
+      "1017F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-22",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-22",
+    "operationCode": "07",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1502F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-22",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-22",
+    "operationCode": "08",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7108F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-22",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-22",
+    "operationCode": "09",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7102F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-22",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-22",
+    "operationCode": "10",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1505F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-22",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-22",
+    "operationCode": "21",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7109F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-22",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-22",
+    "operationCode": "22",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1522F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-22",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-22",
+    "operationCode": "23",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7107F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-22",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-22",
+    "operationCode": "24",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7114F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-22",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-22",
+    "operationCode": "25",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7105F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-22",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-23",
+    "operationCode": "01",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7104F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-23",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-23",
+    "operationCode": "02",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7105F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-23",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-23",
+    "operationCode": "03",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7108F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-23",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-23",
+    "operationCode": "04",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7114F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-23",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-23",
+    "operationCode": "05",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1505F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-23",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-23",
+    "operationCode": "06",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7107F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-23",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-23",
+    "operationCode": "07",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1522F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-23",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-23",
+    "operationCode": "08",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系",
+    "formationIds": [
+      "1013F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "2026-09-23-08",
+    "observedDate": "2026-09-23",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-23",
+    "operationCode": "08",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1507F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "2026-09-23-08",
+    "observedDate": "2026-09-23",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-23",
+    "operationCode": "09",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系",
+    "formationIds": [
+      "1017F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-23",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-23",
+    "operationCode": "10",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7109F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-23",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-23",
+    "operationCode": "21",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1502F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-23",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-23",
+    "operationCode": "22",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7113F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-23",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-23",
+    "operationCode": "23",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7102F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-23",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-23",
+    "operationCode": "24",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1503F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-23",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-23",
+    "operationCode": "25",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7112F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-23",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-24",
+    "operationCode": "01",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1507F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-24",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-24",
+    "operationCode": "02",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1508F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-24",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-24",
+    "operationCode": "03",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7110F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-24",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-24",
+    "operationCode": "05",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1524F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-24",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-24",
+    "operationCode": "06",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1505F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-24",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-24",
+    "operationCode": "21",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7114F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-24",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-24",
+    "operationCode": "22",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7101F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-24",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-24",
+    "operationCode": "23",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系",
+    "formationIds": [
+      "1017F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-24",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-24",
+    "operationCode": "24",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7108F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-24",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-24",
+    "operationCode": "26",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7105F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-24",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-24",
+    "operationCode": "27",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7107F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-24",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-24",
+    "operationCode": "28",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系",
+    "formationIds": [
+      "1012F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-24",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-25",
+    "operationCode": "01",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系",
+    "formationIds": [
+      "1021F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-25",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-25",
+    "operationCode": "02",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1501F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-25",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-25",
+    "operationCode": "03",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1507F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-25",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-25",
+    "operationCode": "05",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1505F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-25",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-25",
+    "operationCode": "06",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1523F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-25",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-25",
+    "operationCode": "21",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1503F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-25",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-25",
+    "operationCode": "22",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7113F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-25",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-25",
+    "operationCode": "23",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7101F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-25",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-25",
+    "operationCode": "24",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1522F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-25",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-25",
+    "operationCode": "26",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1508F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-25",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-25",
+    "operationCode": "27",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7108F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-25",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-25",
+    "operationCode": "28",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7107F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-25",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-26",
+    "operationCode": "01",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7114F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-26",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-26",
+    "operationCode": "02",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7107F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-26",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-26",
+    "operationCode": "03",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1523F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-26",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-26",
+    "operationCode": "04",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系",
+    "formationIds": [
+      "1020F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-26",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-26",
+    "operationCode": "05",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1507F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-26",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-26",
+    "operationCode": "06",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1503F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-26",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-26",
+    "operationCode": "07",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1504F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-26",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-26",
+    "operationCode": "08",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1508F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-26",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-26",
+    "operationCode": "09",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7104F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-26",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-26",
+    "operationCode": "10",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7101F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-26",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-26",
+    "operationCode": "21",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1522F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-26",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-26",
+    "operationCode": "22",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1502F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-26",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-26",
+    "operationCode": "23",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7113F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-26",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-26",
+    "operationCode": "24",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1501F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-26",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-26",
+    "operationCode": "25",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7102F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-26",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-27",
+    "operationCode": "01",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1522F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-27",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-27",
+    "operationCode": "02",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1523F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-27",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-27",
+    "operationCode": "03",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7104F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-27",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-27",
+    "operationCode": "04",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1507F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-27",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-27",
+    "operationCode": "05",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7108F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-27",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-27",
+    "operationCode": "06",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7102F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-27",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-27",
+    "operationCode": "07",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1508F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-27",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-27",
+    "operationCode": "08",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7115F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-27",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-27",
+    "operationCode": "09",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7101F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-27",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-27",
+    "operationCode": "10",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1504F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-27",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-27",
+    "operationCode": "21",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1501F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-27",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-27",
+    "operationCode": "22",
+    "operator": "TOKYU",
+    "vehicleType": "東急7000系",
+    "formationIds": [
+      "7113F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-27",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-27",
+    "operationCode": "23",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1502F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-27",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-27",
+    "operationCode": "24",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系1500番台",
+    "formationIds": [
+      "1505F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-27",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  },
+  {
+    "networkKey": "iketama",
+    "validDate": "2026-09-27",
+    "operationCode": "25",
+    "operator": "TOKYU",
+    "vehicleType": "東急1000系",
+    "formationIds": [
+      "1020F"
+    ],
+    "validFromTime": "",
+    "validToTime": "",
+    "ambiguityGroup": "",
+    "observedDate": "2026-09-27",
+    "grade": "C",
+    "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
+    "trainNumbers": []
+  }
 ];
