@@ -215,14 +215,14 @@
         ctx=ctx||{}; var d=String(ctx.serviceDate||"").slice(0,10);
         var line=[ctx.lineId,ctx.railway,ctx.operator].join("|");
         var op=String(ctx.operationCode||normalizeOperationCode(trainNumber,ctx)||"");
-        if (!d||!op) return null;
+        if (!d) return null;
         var cal=String(ctx.calendarType||"").toLowerCase();
         var matches=rules.filter(function(r){
           if (line.indexOf(r.networkKey)<0) return false;
           if (r.effectiveFrom && d<r.effectiveFrom) return false;
           if (r.effectiveTo && d>r.effectiveTo) return false;
           if (r.calendarType && (!cal || String(r.calendarType).toLowerCase()!==cal)) return false;
-          return familyPatternMatches(r.codePattern,op);
+          return r.codePattern === "*" ? true : (!!op && familyPatternMatches(r.codePattern,op));
         });
         if (!matches.length) return null;
         var exact={}; var candidates={}; var operators={};
@@ -256,12 +256,28 @@
 
   registerCanonicalFamilyRuleProvider();
 
+  // Realtime-derived identity deliberately consumes structural/family rules only.
+  // Dated providers remain fallback/history and are never consulted here.
+  function resolveRealtimeEvidence(trainNumber, ctx) {
+    var family = null;
+    for (var i = 0; i < providers.length; i++) {
+      if (providers[i] && providers[i].id === "canonical-vehicle-family-rules") {
+        family = providers[i];
+        break;
+      }
+    }
+    if (!family) return null;
+    var rec = family.resolveEvidence(trainNumber, ctx || {});
+    if (!rec) return null;
+    return normalizeEvidence(family, rec);
+  }
 
 
   window.TrainOperationEvidence = {
     register: register,
     normalizeEvidence: normalizeEvidence,
     normalizeOperationCode: normalizeOperationCode,
+    resolveRealtimeEvidence: resolveRealtimeEvidence,
     providers: providers,
     policy: {
       requireTraceableSourceForDecisiveEvidence: true,
