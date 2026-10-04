@@ -14,7 +14,7 @@ assert(/keys\.length === 1 \? keys\[0\] : ""/.test(fusion),"railway recovery mus
 assert(/_CHAIN_EVIDENCE_TTL_MS\s*=\s*3\s*\*\s*60\s*\*\s*1000/.test(fusion),"dropout evidence TTL missing");
 assert(/_realtimeEvidenceWithoutPosition/.test(fusion),"missing-position realtime evidence must be separated");
 assert(!/if \(!mayUseTimetablePosition\(lineId\)\)[\s\S]{0,120}resolve\(true\)/.test(fusion),"FULL realtime must not block manual vehicle evidence loading");
-assert(/TrainVehicle\.registerVehicle\(_mTrainNo, _mVehicle\)/.test(fusion),"manual timetable vehicle evidence must be registered independently of position");
+assert(!/TrainVehicle\.registerVehicle/.test(fusion),"DataFusion must not accumulate train-number vehicle history");
 assert(/_realtimeEvidenceWithoutPosition\s*=\s*\{\};/.test(fusion),"positionless realtime evidence must be snapshot-scoped");
 assert(!/positionData\.trainClass\s*=\s*positionData\.trainClass\s*\|\|\s*resolveTrainClass/.test(fusion),
   "DataFusion must not fill trainClass from line/operator/train context");
@@ -90,6 +90,8 @@ assert(estimatorSource.includes("operation-assignment-provider"),
 
 assert(!/tobu-official-2026-timetable-service-name/.test(estimatorSource),
   'service-name-only vehicle inference must not return');
+assert(!/TrainVehicle\.registerVehicle/.test(estimatorSource),
+  'estimator must not accumulate train-number vehicle history');
 
 
 
