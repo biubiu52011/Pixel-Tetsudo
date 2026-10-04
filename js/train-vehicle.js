@@ -66,7 +66,6 @@
     }
     addFrom(ctx.realtimeVehicleType, 'realtime');
     addFrom(ctx.realtimeDerivedVehicleType, 'realtime-derived');
-    addFrom(ctx.structuralVehicleType, 'structural');
     addFrom(ctx.timetableVehicleType, 'timetable');
 
     // 2) Canonical source-priority identity decision.
@@ -75,7 +74,6 @@
     var chosen = '';
     var chosenSrc = '';
     var _timetableCands = splitCandidates(ctx.timetableVehicleType);
-    var _structuralCands = splitCandidates(ctx.structuralVehicleType);
     var _derivedCands = splitCandidates(ctx.realtimeDerivedVehicleType);
     var _realtimeCands = splitCandidates(ctx.realtimeVehicleType);
     // Source arbitration lives here, in the existing vehicle authority.
@@ -86,10 +84,7 @@
     } else if (_realtimeCands.length === 0 && _derivedCands.length === 1) {
       chosen = _derivedCands[0];
       chosenSrc = 'realtime-derived';
-    } else if (_realtimeCands.length === 0 && _derivedCands.length === 0 && _structuralCands.length === 1) {
-      chosen = _structuralCands[0];
-      chosenSrc = 'structural';
-    } else if (_realtimeCands.length === 0 && _derivedCands.length === 0 && _structuralCands.length === 0 && _timetableCands.length === 1) {
+    } else if (_realtimeCands.length === 0 && _derivedCands.length === 0 && _timetableCands.length === 1) {
       chosen = _timetableCands[0];
       chosenSrc = 'timetable';
     }
