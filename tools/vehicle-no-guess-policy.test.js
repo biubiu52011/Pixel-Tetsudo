@@ -45,6 +45,24 @@ assert(icons.getTrainClass('Yamanote', 'JR-East', 'unknown', 0, '', false) === '
 assert(icons.getTrainIcon('Chiyoda', 'TokyoMetro', '1234', 0, 'LimitedExpress', false) === null,
   'trainType-only rule leaked a concrete vehicle');
 
+const forbiddenAliases = {
+  '都営5300形': '5500形',
+  '小田急50000形': '70000形',
+  '相鉄新7000系': '相模鉄道12000系',
+  '東京メトロ03系': '東京メトロ13000系',
+  '381系': '273系',
+  '117系': '227系',
+  'JR東海211系': '315系'
+};
+Object.keys(forbiddenAliases).forEach((name) => {
+  assert(icons.VEHICLE_NAME_ALIASES[name] !== forbiddenAliases[name],
+    'cross-vehicle alias substitution reintroduced: ' + name);
+});
+assert(icons.resolveVehicleDisplayName('都営5300形', 'Asakusa') !== '5500形',
+  'retired stock was rewritten as replacement stock');
+assert(icons.resolveVehicleDisplayName('小田急50000形', 'Odawara') !== '70000形',
+  'VSE was rewritten as GSE');
+
 // Zero-fallback contract: known wrong/retired identities must never be replaced
 // by a different current vehicle merely to obtain artwork.
 assert(icons.resolveVehicleIcon('都営5300形', 'Asakusa') === null,
