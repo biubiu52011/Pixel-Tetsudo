@@ -4,12 +4,12 @@ for(const f of ["train-operation-evidence.js","tozai-operation-evidence-2026.js"
 const own=window.TRAIN_OPERATION_EVIDENCE_PROVIDERS.find(x=>x.id==="tozai-operation-ownership-2026");
 const dated=window.TRAIN_OPERATION_EVIDENCE_PROVIDERS.find(x=>x.id==="tozai-dated-formations");
 assert(own&&dated,"Tozai providers missing");
-let ctx={lineId:"Tozai"};ctx.operationCode=window.TrainOperationEvidence.normalizeOperationCode("603K",ctx);
-assert.strictEqual(ctx.operationCode,"03K","603K must normalize to 03K");
-let r=own.resolveEvidence("603K",ctx);assert(r&&r.operator==="JR-East"&&r.vehicleType==="JR E231系800番台(10両)","03K exact JR");
-ctx={lineId:"Tozai"};ctx.operationCode=window.TrainOperationEvidence.normalizeOperationCode("A650T",ctx);
-assert.strictEqual(ctx.operationCode,"50T","A650T must normalize to 50T");
-r=own.resolveEvidence("A650T",ctx);assert(r&&r.operator==="ToyoRapid"&&r.vehicleType==="東葉高速2000系(10両)","50T exact Toyo");
+let evidenceCtx={lineId:"Tozai"};evidenceCtx.operationCode=window.TrainOperationEvidence.normalizeOperationCode("603K",evidenceCtx);
+assert.strictEqual(evidenceCtx.operationCode,"03K","603K must normalize to 03K");
+let r=own.resolveEvidence("603K",evidenceCtx);assert(r&&r.operator==="JR-East"&&r.vehicleType==="JR E231系800番台(10両)","03K exact JR");
+evidenceCtx={lineId:"Tozai"};evidenceCtx.operationCode=window.TrainOperationEvidence.normalizeOperationCode("A650T",evidenceCtx);
+assert.strictEqual(evidenceCtx.operationCode,"50T","A650T must normalize to 50T");
+r=own.resolveEvidence("A650T",evidenceCtx);assert(r&&r.operator==="ToyoRapid"&&r.vehicleType==="東葉高速2000系(10両)","50T exact Toyo");
 r=own.resolveEvidence("02S",{lineId:"Tozai"});assert(r&&r.operator==="TokyoMetro"&&!r.vehicleType,"S ownership must not guess Metro model");
 r=dated.resolveEvidence("02S",{lineId:"Tozai",serviceDate:"2026-04-16"});assert(r&&r.vehicleType==="東京メトロ15000系(10両)"&&r.formationId==="1500064F","02S dated exact");
 r=dated.resolveEvidence("35S",{lineId:"Tozai",serviceDate:"2026-04-16"});assert(r&&r.vehicleType==="東京メトロ07系(10両)"&&r.formationId==="0772F","35S dated exact");
