@@ -2172,48 +2172,11 @@ TOBU_LINE_IDS.forEach(function(lineId) {
   //            部分可解析 → 返回首个可解析项；单候选 → 原名/别名展开（与 4.3.987 一致）
   function resolveVehicleDisplayName(candidatesStr, lineId) {
     if (!candidatesStr) return null;
-    var parts = String(candidatesStr).split("/");
-    var _hits = [];
-    for (var i = 0; i < parts.length; i++) {
-      var name = parts[i].trim();
-      if (!name) continue;
-      var _hit = '';
-      var _canonicalDisplay = resolveCanonicalVehicle(name);
-      if (_canonicalDisplay) _hit = _canonicalDisplay.displayName;
-      // v4.3.996: 显示名同步线路锁定——同名裸型号按线路展开涂装/车籍
-      // （"211系"在中央東線→"211系長野色"、"E233系"在外房→"E233系5000番台"），
-      // 与 resolveVehicleIcon 图标决策一致，杜绝"名=湘南色、图=長野色"错配。
-      if (!_hit && lineId && LINE_VEHICLE_OVERRIDES[lineId]) {
-        var _ov2 = LINE_VEHICLE_OVERRIDES[lineId];
-        var _ovt2 = _ov2[name];
-        if (!_ovt2) {
-          var _ovb2 = name.replace(/（[^）]*）/g, "").replace(/\([^)]*\)/g, "").trim();
-          if (_ovb2 !== name) _ovt2 = _ov2[_ovb2];
-        }
-        if (_ovt2 === '@S4') { _hit = name; }       // @S4 哨兵：保持原候选名（阻止别名/反查误展，如5080系→5000系）
-        else if (_ovt2) _hit = _ovt2;
-      }
-      if (!_hit) {
-        if (VEHICLE_NAME_TO_ICON[name]) _hit = name;            // 精确命中：显示原名
-        else {
-          var _al = VEHICLE_NAME_ALIASES[name];                 // 别名表（仅在 override 未命中时）
-          if (_al && VEHICLE_NAME_TO_ICON[_al]) _hit = _al;
-          else {
-            var _base = name.replace(/（[^）]*）/g, "").replace(/\([^)]*\)/g, "").trim();
-            if (_base !== name) {
-              if (VEHICLE_NAME_TO_ICON[_base]) _hit = _base;
-              else { var _al2 = VEHICLE_NAME_ALIASES[_base]; if (_al2 && VEHICLE_NAME_TO_ICON[_al2]) _hit = _al2; }
-            }
-          }
-        }
-      }
-      if (_hit && _hits.indexOf(_hit) < 0) _hits.push(_hit); // v4.3.1001: 同值去重（override 统一场景如常磐緩行 18000系 不重复显示）
-    }
-    if (!_hits.length) return null;
-    var _nonEmpty = 0;
-    for (var j = 0; j < parts.length; j++) if (parts[j].trim()) _nonEmpty++;
-    if (_hits.length === _nonEmpty && _hits.length > 1) return _hits.join(" / ");
-    return _hits[0];
+    var parts = String(candidatesStr).split('/').map(function(s){ return s.trim(); }).filter(Boolean);
+    if (parts.length !== 1) return parts.length ? parts.join(' / ') : null;
+    var name = parts[0];
+    var canonical = resolveCanonicalVehicle(name);
+    return canonical ? canonical.displayName : name;
   }
 
   // v4.3.964: 三层查找——精确匹配 → 别名表 → 去括注基础名匹配
@@ -2225,69 +2188,18 @@ TOBU_LINE_IDS.forEach(function(lineId) {
   }
   function _resolveVehicleIconBase(candidatesStr, lineId) {
     if (!candidatesStr) return null;
-    var parts = String(candidatesStr).split("/");
-    var _hits = []; // v4.3.1026: 收集全部命中 {n: 候选名, icon}，支持编成/保有权重
-    for (var i = 0; i < parts.length; i++) {
-      var name = parts[i].trim();
-      if (!name) continue;
-      // 0. 线路感知同名解抢（v4.3.977）：同名车型被别社抢占时，按线路优先取专属图标
-      // v4.3.979: 覆盖为「锁定」语义——线路有该车型映射条目时，目标图标未注册则返回 null
-      //           （走 S4 线路默认兜底），绝不落回别社同名图标
-      if (lineId && LINE_VEHICLE_OVERRIDES[lineId]) {
-        var _ov = LINE_VEHICLE_OVERRIDES[lineId];
-        var _ovt = _ov[name];
-        if (!_ovt) {
-          var _ovb = name.replace(/（[^）]*）/g, "").replace(/\([^)]*\)/g, "").trim();
-          _ovt = _ov[_ovb];
-        }
-        if (_ovt) {
-          var _ovCanonical = _canonicalVehicleIconPath(_ovt, lineId);
-          if (_ovCanonical) { _hits.push({ n: name, icon: _ovCanonical }); continue; }
-          if (VEHICLE_NAME_TO_ICON[_ovt]) { _hits.push({ n: name, icon: VEHICLE_NAME_TO_ICON[_ovt] }); continue; }
-          // v4.3.988: override 目标支持 alias 展开（如 相模鉄道21000系→相模鉄道13000系近似），
-          // 保持锁定语义——命中别名目标仍有图则用之，否则 return null 走 S4 线路默认，
-          // 绝不落回别社同名图/候选池别社车。
-          var _ovAl = VEHICLE_NAME_ALIASES[_ovt];
-          if (_ovAl && VEHICLE_NAME_TO_ICON[_ovAl]) { _hits.push({ n: name, icon: VEHICLE_NAME_TO_ICON[_ovAl] }); continue; }
-          return null;
-        }
-      }
-      // v4.3.1006: 线路感知裸名重定向（同名被别社抢占：都電8800/8900形 → 都営图标）
-      if (lineId && LINE_ICON_NAME_REDIRECT[lineId] && LINE_ICON_NAME_REDIRECT[lineId][name]) {
-        var _rd = LINE_ICON_NAME_REDIRECT[lineId][name];
-        var _rdCanonical = _canonicalVehicleIconPath(_rd, lineId);
-        if (_rdCanonical) { _hits.push({ n: name, icon: _rdCanonical }); continue; }
-        if (VEHICLE_NAME_TO_ICON[_rd]) { _hits.push({ n: name, icon: VEHICLE_NAME_TO_ICON[_rd] }); continue; }
-      }
-      // 1. 精确匹配
-      var _canonicalRec = resolveCanonicalVehicle(name);
-      var _canonical = _canonicalVehicleIconPath(name, lineId);
-      if (_canonical) { _hits.push({ n: name, icon: _canonical }); continue; }
-      // A known canonical identity with no exact asset is an intentional stop:
-      // do not fall through to a generic/nearby series image.
-      if (_canonicalRec && !_canonicalRec.asset) continue;
-      if (VEHICLE_NAME_TO_ICON[name]) { _hits.push({ n: name, icon: VEHICLE_NAME_TO_ICON[name] }); continue; }
-      // 2. 别名表
-      var _al = VEHICLE_NAME_ALIASES[name];
-      var _alCanonical = _canonicalVehicleIconPath(_al, lineId);
-      if (_alCanonical) { _hits.push({ n: name, icon: _alCanonical }); continue; }
-      if (_al && VEHICLE_NAME_TO_ICON[_al]) { _hits.push({ n: name, icon: VEHICLE_NAME_TO_ICON[_al] }); continue; }
-      // 3. 去掉（…）/（…）括注后重试
-      var _base = name.replace(/（[^）]*）/g, "").replace(/\([^)]*\)/g, "").trim();
-      if (_base !== name) {
-        if (VEHICLE_NAME_TO_ICON[_base]) { _hits.push({ n: name, icon: VEHICLE_NAME_TO_ICON[_base] }); continue; }
-        var _al2 = VEHICLE_NAME_ALIASES[_base];
-        var _al2Canonical = _canonicalVehicleIconPath(_al2, lineId);
-        if (_al2Canonical) { _hits.push({ n: name, icon: _al2Canonical }); continue; }
-        if (_al2 && VEHICLE_NAME_TO_ICON[_al2]) { _hits.push({ n: name, icon: VEHICLE_NAME_TO_ICON[_al2] }); continue; }
-      }
-    }
-    if (!_hits.length) return null;
-    // Multiple resolved candidates are still ambiguous here. Returning the
-    // first icon would manufacture a concrete identity just as weighted random
-    // selection did, so only a single resolved candidate may produce an icon.
-    if (_hits.length !== 1) return null;
-    return _hits[0].icon;
+    var parts = String(candidatesStr).split('/').map(function(s){ return s.trim(); }).filter(Boolean);
+    // A candidate list is not a concrete identity.
+    if (parts.length !== 1) return null;
+    var name = parts[0];
+
+    // Canonical aliases are allowed only when they resolve to the same registered
+    // identity record. No line override, replacement vehicle, base-name stripping,
+    // retired-stock substitution, or approximate alias may select artwork.
+    var canonical = _canonicalVehicleIconPath(name, lineId);
+    if (canonical) return canonical;
+    if (VEHICLE_NAME_TO_ICON[name]) return VEHICLE_NAME_TO_ICON[name];
+    return null;
   }
 
   window.TrainIcons = {
