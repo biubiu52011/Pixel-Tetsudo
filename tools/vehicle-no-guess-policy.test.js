@@ -126,6 +126,10 @@ assert(!/function _resolveVehicleIconBase[\\s\\S]*?VEHICLE_NAME_ALIASES\[/.test(
   'vehicle icon resolver reintroduced alias fallback');
 assert(!/function _resolveVehicleIconBase[\\s\\S]*?LINE_VEHICLE_OVERRIDES\[/.test(source),
   'vehicle icon resolver reintroduced line override fallback');
+assert(icons.resolveCanonicalVehicle('E231系0番台') === null,
+  'duplicate canonical alias must remain ambiguous instead of last-write-wins');
+assert(/CANONICAL_VEHICLE_ALIAS_CONFLICTS/.test(source),
+  'canonical alias collisions must be tracked explicitly');
 
 const fallbackContexts = [
   ['Yamanote','JR-East','1234G',0,'Local',false],
