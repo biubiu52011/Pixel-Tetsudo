@@ -1391,14 +1391,9 @@
   //       系列变体（E231系→E231系0番台）、跨名（3050形→3050形（LED））
   // v4.3.977: 线路感知同名解抢表——同名车型被别社图标库抢占时的线路专属指向
   // （例：NewShuttle 伊奈線的 2000系/2020系 会被東京メトロ/東急同名 key 抢占，需按线路指向埼玉资产）
-  // v4.3.1006: 保有数比例加权表——候选串无法精确识别时的确定性随机映射权重
-// 数据来源：都営交通局官网（令和7年4月1日現在 在籍33両：7700形8/8500形5/8800形10/8900形8/9000形2）
-var VEHICLE_FLEET_WEIGHTS = {
-  "7700形 / 8500形 / 8800形 / 8900形 / 9000形": [8,5,10,8,2],
-  // v4.3.1026: 東京臨海高速鉄道（raillab 東臨運輸区編成表 2026-09 快照）：
-  // 运用中 70-000形 编成 1/2/3/7（4编成）、71-000形 编成 Z11~Z14（4编成）= 4:4
-  // E233系7000番台 = 埼京線直通（operator=JR-East 已单独锁定，此低权重仅兜底未知场景）
-};
+  // Multi-candidate fleet strings are evidence constraints only. Never choose a
+  // concrete vehicle from fleet proportions or time-window hashing; concrete
+  // vehicle identity must come from train/date/operation evidence upstream.
 // v4.3.1025: FLEET_ICON_POOLS 编成/涂装池——同车型多涂装/多编成图，按候选串稳定取图（跨线不变）
 var FLEET_ICON_POOLS = {
   "E209系": ["../images/列车/JR東日本/JR東日本_209系_3500番台.png"], // v4.3.1046: E209系 不同番代涂装不同（八高・川越3500/房総2000・2100/京葉500），不得混合轮换——池仅固定 3500番代，其余番代走 canonical 专用图
@@ -2334,32 +2329,10 @@ TOBU_LINE_IDS.forEach(function(lineId) {
       }
     }
     if (!_hits.length) return null;
-    // v4.3.1026: 编成/保有权重（VEHICLE_FLEET_WEIGHTS：key=候选串原文，数组按候选顺序对齐）
-    var _w = VEHICLE_FLEET_WEIGHTS[candidatesStr];
-    if (_w) {
-      var _cum = 0, _vals = [];
-      for (var k = 0; k < _hits.length; k++) {
-        var _wi = 0;
-        for (var n = 0; n < parts.length; n++) {
-          if (parts[n].trim() === _hits[k].n) { _wi = _w[n] || 0; break; }
-        }
-        if (_wi > 0) { _cum += _wi; _vals.push({ hit: _hits[k], c: _cum }); }
-      }
-      if (_cum > 0) {
-        // 30 分钟时间窗 seed：刷新稳定、时段间轮换（近似运用表分段）
-        // v4.3.1026b: xorshift 散列——连续时间窗下分布均匀（31 乘法哈希对连续输入有周期偏差）
-        var _seed = String(candidatesStr) + '|' + Math.floor(Date.now() / 1800000);
-        var _hh = 0;
-        for (var q = 0; q < _seed.length; q++) _hh = (_hh * 31 + _seed.charCodeAt(q)) >>> 0;
-        var _x = _hh >>> 0;
-        _x ^= (_x << 13); _x >>>= 0;
-        _x ^= (_x >> 17);
-        _x ^= (_x << 5); _x >>>= 0;
-        var _r = _x % _cum;
-        for (var v = 0; v < _vals.length; v++) if (_r < _vals[v].c) return _vals[v].hit.icon;
-        return _vals[_vals.length - 1].hit.icon;
-      }
-    }
+    // Multiple resolved candidates are still ambiguous here. Returning the
+    // first icon would manufacture a concrete identity just as weighted random
+    // selection did, so only a single resolved candidate may produce an icon.
+    if (_hits.length !== 1) return null;
     return _hits[0].icon;
   }
 
@@ -2372,7 +2345,6 @@ TOBU_LINE_IDS.forEach(function(lineId) {
     CANONICAL_VEHICLES: CANONICAL_VEHICLES,
     VEHICLE_NAME_TO_ICON: VEHICLE_NAME_TO_ICON,
     VEHICLE_NAME_ALIASES: VEHICLE_NAME_ALIASES,
-    VEHICLE_FLEET_WEIGHTS: VEHICLE_FLEET_WEIGHTS,
     FLEET_ICON_POOLS: FLEET_ICON_POOLS,
     LINE_ICONS: LINE_ICONS,
     OPERATOR_ICONS: OPERATOR_ICONS
