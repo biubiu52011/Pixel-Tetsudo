@@ -159,5 +159,11 @@ assert(fusionSource.includes('vehicleFormationCandidates: (p.vehicleFormationCan
   'running-chain registry must preserve formation candidate sets');
 assert(fusionSource.includes('p.vehicleFormationCandidates = (v.vehicleFormationCandidates || p.vehicleFormationCandidates || []).slice()'),
   'running-chain inheritance must propagate formation candidate sets');
+assert(!fusionSource.includes('_p.vehicleType = _fe.vehicleName'),
+  'fused formation evidence must not bypass TrainVehicle with a direct identity write');
+assert(fusionSource.includes('var _feResolved = window.TrainVehicle.resolve({'),
+  'fused formation evidence must re-enter the existing TrainVehicle authority');
+assert(fusionSource.includes('timetableVehicleType: _fe.vehicleName'),
+  'fused formation evidence must use the timetable vehicle source channel');
 
 console.log("train-position-evidence-regression: PASS");
