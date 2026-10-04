@@ -224,54 +224,20 @@
       addFrom(window.VehicleTypeMap.resolve(lineId, trainType, dest), 'map');
     }
 
-    // 2) 决策：按来源可信度顺序取首选候选（不猜——仅取有依据的）
-    // v4.3.989: manual 为多候选串（ODPT 数据宽泛，如"8000系/11000系/20000系"）时，
-    // 若 S2 车号级已有跨线累积实证（A 线 ODPT 实时/时刻表注册），优先 S2——
-    // 保证直通列车在 B 线（时刻表推定、无实时车型）视图继承 A 线同列次号车型，
-    // 杜绝"宽泛候选第一项"压过车号级实证导致跨视图换图标。
-    var order = ['manual', 'odpt', 'trainNo', 'map'];
-    var _manualCands = splitCandidates(ctx.vehicleTypeManual);
-    var _trainNoCands = getCandidates(trainNumber, operator);
-    if (_manualCands.length > 1 && _trainNoCands.length > 0) {
-      order = ['trainNo', 'manual', 'odpt', 'map'];
-    }
-    // v4.3.1006b/c: 加权候选池统一按 orderArr（S0 manual + S3 map 全候选）判定——
-    // 候选串可能来自 S0 manual（estimator 转存）或 S3 map（Arakawa ODPT 无车型、vehicleType 空，
-    // 候选串由 vehicle-type-map.js MAP 提供），两种情况都应按保有数比例映射；
-    // S2 若携带 orderArr 之外的新候选（跨线/实时车号级实证）才阻断加权、保持实证优先。
-    // Multiple candidates without train-level evidence remain ambiguous.
-    // Do not manufacture a concrete vehicle identity from fleet ratios/hash;
-    // that creates a stable-looking but unsupported icon assignment.
+    // 2) Zero-fallback identity decision.
+    // Only explicit vehicle identity carried by this train record may become EXACT.
+    // Historical train-number tables, VehicleTypeMap, owner narrowing, line/type/number
+    // rules and candidate intersections remain diagnostics only.
     var chosen = '';
     var chosenSrc = '';
-    // A source may select a concrete vehicle only when it identifies exactly
-    // one candidate. Multi-candidate timetable/fleet evidence describes the
-    // possible fleet, not the actual formation assigned to this service.
-    // If train-number evidence exists, intersect it with higher-level evidence;
-    // choose only when that intersection is unique.
-    var _trainNoSet = getCandidates(trainNumber, operator);
-    for (var oi = 0; oi < order.length && !chosen; oi++) {
-      var srcName = order[oi];
-      var srcCandidates = Object.keys(pool).filter(function(c) {
-        return pool[c].sources.indexOf(srcName) >= 0;
-      });
-      var ownerFiltered = filterCandidatesByOwner(srcCandidates, effectiveOwner);
-      if (ownerFiltered.length !== srcCandidates.length) srcCandidates = ownerFiltered;
-      if (srcCandidates.length === 1) {
-        chosen = srcCandidates[0];
-        chosenSrc = (effectiveOwner && ownerMatchesCandidate(effectiveOwner, chosen)) ? (srcName + '+trainOwner') : srcName;
-        break;
-      }
-      if (srcCandidates.length > 1 && _trainNoSet.length) {
-        var intersection = srcCandidates.filter(function(c) {
-          return _trainNoSet.indexOf(c) >= 0;
-        });
-        if (intersection.length === 1) {
-          chosen = intersection[0];
-          chosenSrc = 'trainNo';
-          break;
-        }
-      }
+    var _manualCands = splitCandidates(ctx.vehicleTypeManual);
+    var _odptCands = splitCandidates(ctx.odptVehicleType);
+    if (_manualCands.length === 1) {
+      chosen = _manualCands[0];
+      chosenSrc = 'manual';
+    } else if (_odptCands.length === 1) {
+      chosen = _odptCands[0];
+      chosenSrc = 'odpt';
     }
 
     // 3) 可信度
@@ -283,30 +249,10 @@
     else if (chosenSrc === 'map' || chosenSrc === 'map+trainOwner') confidence = 'medium';
     else if (chosenSrc === 'icons') confidence = 'low';
 
-    // 4) 图标：候选 → 图标库；无图标再走 S4 规则兜底
+    // 4) Artwork is a strict projection of the already-exact vehicle identity.
+    // Missing artwork stays missing; never substitute another candidate, line,
+    // operator, retired replacement, or rule-derived vehicle.
     var iconPath = chosen ? resolveIconForName(chosen, ctx.lineId) : '';
-    var _explicitUnknownVehicle = !!(chosen && _explicitVehicleInput && !iconPath);
-    // v4.3.988: 直通稳定——首选候选在本视图无图时，回退遍历候选池中带公司前缀的
-    // 候选按车籍解析（如 相鉄20000系 在東武視図無图 → 相模鉄道20000系），
-    // 确保同一趟直通列车跨线路视图显示同一张车籍图标，杜绝 S4 视图默认图换图标。
-    if (!iconPath && chosen && !_explicitUnknownVehicle && orderArr.length > 1) {
-      var _compRe = /鉄道|電鉄|メトロ|都営|京成|京王|京急|東急|東武|西武|相鉄|小田急|JR|モノレール|新都市|高速|埼玉|ゆりかもめ/;
-      for (var _ci = 0; _ci < orderArr.length && !iconPath; _ci++) {
-        var _cc = orderArr[_ci];
-        if (_cc === chosen || !_cc) continue;
-        if (_compRe.test(_cc)) {
-          iconPath = resolveIconForName(_cc, ctx.lineId);
-        }
-      }
-    }
-    // Do not invent a formation/livery icon when vehicle identity is unresolved.
-    // Line-level icon rules are presentation fallbacks only after a concrete
-    // vehicle identity exists; otherwise the renderer must use its neutral marker.
-    if (!iconPath && chosen && !_explicitUnknownVehicle) iconPath = resolveIconByRules(ctx);
-    if (!chosen && iconPath && lineId !== 'Yamanote' &&
-        /\/E235系山手線\.png$/i.test(String(iconPath))) {
-      iconPath = '';
-    }
 
     // 5) S4 图标兜底只提供视觉 locator，不再从 PNG basename 反推出车型身份。
     // 车型身份必须来自 S0-S3 或 canonical/alias 层，避免 physical filename 承担 identity。
@@ -343,17 +289,11 @@
     }
     if (chosen) {
       identityStatus = 'EXACT';
-      if (/^(manual|odpt)/.test(chosenSrc)) identityReason =
-        (_manualEvidenceSource === 'operation-assignment-provider') ? 'dated-operation-vehicle-evidence' : 'explicit-vehicle-evidence';
-      else if (chosenSrc === 'trainNo') identityReason = 'train-number-evidence';
-      else if (chosenSrc === 'map' || chosenSrc === 'map+trainOwner') identityReason = 'single-vehicle-timetable-constraint';
-      else identityReason = 'resolved-vehicle-evidence';
+      identityReason = (_manualEvidenceSource === 'operation-assignment-provider')
+        ? 'dated-operation-vehicle-evidence' : 'explicit-vehicle-evidence';
     } else if (effectiveCandidates.length > 0) {
       identityStatus = 'NARROWED';
-      identityReason = effectiveOwner && effectiveCandidates.length < orderArr.length
-        ? (trainOwner ? 'train-owner-narrowed-candidates' : 'operation-operator-narrowed-candidates')
-        : (operationVehicleCandidates.length && effectiveCandidates.length < orderArr.length
-          ? 'operation-vehicle-narrowed-candidates' : 'timetable-multiple-candidates');
+      identityReason = 'non-decisive-vehicle-candidates';
     }
 
     // B0 hard invariant: unresolved multi-candidate identity must never leak a
