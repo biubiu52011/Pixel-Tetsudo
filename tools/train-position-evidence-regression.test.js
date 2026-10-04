@@ -23,6 +23,7 @@ assert(/Object\.keys\(_realtimeEvidenceWithoutPosition\)/.test(fusion),"position
 assert(/\(estimated\[_vlid\] \|\| \[\]\)\.forEach\(_rememberChainVehicle\)/.test(fusion),"verified timetable vehicle evidence must seed running-chain registry");
 const estimator=read("js/train-position-estimator.js");
 const estimatorSource=estimator;
+const fusionSource=fusion;
 assert(/vehicleResolvedUpstream:\s*vehResult\.identityStatus === 'EXACT'/.test(estimator),
   "upstream vehicle authority must represent EXACT identity, not artwork availability");
 assert(/TRAIN_VEHICLE_EVIDENCE_PROVIDERS/.test(estimator),"estimator must consume generic exact-train vehicle evidence providers");
@@ -126,7 +127,6 @@ assert(estimatorSource.includes("split(/\\s*\\/\\s*|\\s*,\\s*|\\s*\\|\\s*/)"),
   'multi-formation evidence must be split into candidates instead of treated as one formation');
 
 
-const fusionSource = fs.readFileSync('js/data-fusion.js','utf8');
 assert(fusionSource.includes('if (!_identityExact || !p.vehicleType) return;'),
   'running-chain registry must hard-reject non-EXACT or identity-less vehicle records');
 assert(fusionSource.includes('p.vehicleIdentityStatus === "EXACT"'),
