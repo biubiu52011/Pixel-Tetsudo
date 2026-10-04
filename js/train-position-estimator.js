@@ -908,7 +908,22 @@
                     runningChainId: resolved.runningChainId
                   });
                   if (chainVehicle) {
-                    pos.vehicleType = chainVehicle.vehicleName;
+                    // Running-chain propagation supplies timetable evidence; it does
+                    // not write vehicle identity directly. Re-enter the existing
+                    // TrainVehicle authority so status, source and artwork use the
+                    // same two-source decision path as every other timetable record.
+                    var chainResolved = window.TrainVehicle.resolve({
+                      timetableVehicleType: chainVehicle.vehicleName
+                    });
+                    pos.trainClass = chainResolved.name || '';
+                    pos.vehicleType = chainResolved.vehicleTypeStr || '';
+                    pos.vehicleIconPath = chainResolved.iconPath || '';
+                    pos.vehicleSource = chainResolved.source || '';
+                    pos.vehicleConfidence = chainResolved.confidence || 'none';
+                    pos.vehicleResolution = chainResolved;
+                    pos.vehicleIdentityStatus = chainResolved.identityStatus || 'UNKNOWN';
+                    pos.vehicleIdentityReason = chainResolved.identityReason || 'no-vehicle-evidence';
+                    pos.vehicleResolvedUpstream = chainResolved.identityStatus === 'EXACT';
                     pos.timetableVehicleType = chainVehicle.vehicleName;
                     pos.vehicleEvidenceSource = chainVehicle.evidenceSource || sourceTT._vehicleEvidenceSource || 'running-chain-vehicle';
                     pos.vehicleEvidence = chainVehicle.evidenceDetail || sourceTT._vehicleEvidence || null;
