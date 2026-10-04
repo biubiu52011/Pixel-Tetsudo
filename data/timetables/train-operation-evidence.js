@@ -256,20 +256,36 @@
 
   registerCanonicalFamilyRuleProvider();
 
-  // Realtime-derived identity deliberately consumes structural/family rules only.
-  // Dated providers remain fallback/history and are never consulted here.
-  function resolveRealtimeEvidence(trainNumber, ctx) {
-    var family = null;
+  // Single evidence resolver. Realtime-derived mode intentionally admits only
+  // structural/family providers; fallback mode uses the existing canonical
+  // providers in priority order. No parallel realtime resolver is maintained.
+  function resolveEvidence(trainNumber, ctx, mode) {
+    mode = mode || "fallback";
+    var allowed = mode === "realtime-derived"
+      ? {"canonical-vehicle-family-rules":true}
+      : {"canonical-vehicle-family-rules":true,
+         "canonical-dated-vehicle-evidence":true,
+         "canonical-vehicle-operation-evidence":true};
+    var hits = [];
     for (var i = 0; i < providers.length; i++) {
-      if (providers[i] && providers[i].id === "canonical-vehicle-family-rules") {
-        family = providers[i];
-        break;
-      }
+      var provider = providers[i];
+      if (!provider || !allowed[provider.id]) continue;
+      var rec = normalizeEvidence(provider, provider.resolveEvidence(trainNumber, ctx || {}));
+      if (rec) hits.push(rec);
     }
-    if (!family) return null;
-    var rec = family.resolveEvidence(trainNumber, ctx || {});
-    if (!rec) return null;
-    return normalizeEvidence(family, rec);
+    if (!hits.length) return null;
+    // Exact identities must agree. Candidate-only evidence may narrow but never
+    // override an exact identity selected by the same canonical arbitration path.
+    var exact = {};
+    hits.forEach(function(h){ if (h.vehicleType) exact[h.vehicleType]=h; });
+    var exactKeys = Object.keys(exact);
+    if (exactKeys.length > 1) return null;
+    if (exactKeys.length === 1) return exact[exactKeys[0]];
+    var candidates = {};
+    hits.forEach(function(h){ (h.vehicleCandidates||[]).forEach(function(v){ if(v)candidates[v]=true; }); });
+    var first = hits[0];
+    first.vehicleCandidates = Object.keys(candidates);
+    return first;
   }
 
 
@@ -277,7 +293,7 @@
     register: register,
     normalizeEvidence: normalizeEvidence,
     normalizeOperationCode: normalizeOperationCode,
-    resolveRealtimeEvidence: resolveRealtimeEvidence,
+    resolveEvidence: resolveEvidence,
     providers: providers,
     policy: {
       requireTraceableSourceForDecisiveEvidence: true,
