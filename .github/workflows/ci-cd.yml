@@ -88,7 +88,14 @@ jobs:
       - name: Vehicle regression 16 - denentoshi-formation-evidence.test.js
         run: node tools/denentoshi-formation-evidence.test.js
 
-      - name: Vehicle regression 17 - canonical-evidence-ambiguity.test.js\n        run: node tools/canonical-evidence-ambiguity.test.js\n\n      - name: Vehicle regression 18 - canonical snapshot guard\n        run: node tools/canonical-evidence-snapshot-guard.test.js
+      - name: Vehicle regression 17 - canonical-evidence-ambiguity.test.js
+        run: node tools/canonical-evidence-ambiguity.test.js
+
+      - name: Vehicle regression 18 - canonical snapshot guard
+        run: node tools/canonical-evidence-snapshot-guard.test.js
+
+      - name: Vehicle regression 19 - no vehicle guessing policy
+        run: node tools/vehicle-no-guess-policy.test.js
 
       - name: Entity Preservation Guard
         run: |
