@@ -114,7 +114,11 @@ jobs:
             [fs.readFileSync('js/trains-render.js', 'utf8'), '__trainIconCache', 'renderer vehicle icon cache'],
             [fs.readFileSync('js/data-fusion.js', 'utf8'), '_rtVehicle.source === "trainNo"', 'train-number realtime promotion'],
             [fs.readFileSync('js/data-fusion.js', 'utf8'), 'positionData.trainClass = positionData.trainClass || resolveTrainClass', 'DataFusion trainClass fallback'],
-            [fs.readFileSync('js/train-position-estimator.js', 'utf8'), 'tobu-official-2026-timetable-service-name', 'service-name vehicle inference']
+            [fs.readFileSync('js/train-position-estimator.js', 'utf8'), 'tobu-official-2026-timetable-service-name', 'service-name vehicle inference'],
+            [fs.readFileSync('js/train-position-estimator.js', 'utf8'), 'TrainVehicle.registerVehicle', 'estimator train-number history accumulation'],
+            [fs.readFileSync('js/data-fusion.js', 'utf8'), 'TrainVehicle.registerVehicle', 'fusion train-number history accumulation'],
+            [vehicle, 'getCandidates(trainNumber, operator).forEach', 'runtime train-number candidate import'],
+            [vehicle, 'VehicleTypeMap.resolve(lineId, trainType, dest)', 'runtime static map candidate import']
           ];
           for (const [src, needle, label] of forbidden) {
             if (src.includes(needle)) throw new Error('zero-fallback violation: ' + label);
