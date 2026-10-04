@@ -19,7 +19,7 @@ var rows={"2026-04-08":{
 "93G":["相鉄20000系(10両)","20102F"],"94G":["相鉄20000系(10両)","20101F"],
 "95G":["相鉄20000系(10両)","20105F"]
 }};
-function code(n){var m=String(n||"").toUpperCase().match(/(?:^|[^0-9])((?:[1-8][0-9]|9[1-5]G|[0-9]{2}K))(?:[^0-9A-Z]|$)/);return m?m[1]:"";}
+function code(n){var m=String(n||"").toUpperCase().match(/(?:^|[^0-9A-Z])((?:[1-8][0-9]|9[1-5]G|[0-9]{2}K))(?:[^0-9A-Z]|$)/);return m?m[1]:"";}
 function resolveEvidence(trainNumber,ctx){ctx=ctx||{};var hay=[ctx.lineId,ctx.railway,ctx.operator].join("|");
  if(!/Sotetsu|相鉄/i.test(hay))return null;
  var d=String(ctx.serviceDate||"").slice(0,10),r=rows[d]&&rows[d][code(trainNumber)];if(!r)return null;
