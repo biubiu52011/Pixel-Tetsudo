@@ -1095,17 +1095,21 @@
                     runningChainId: _p && _p.runningChainId,
                     at: Date.now()
                   });
-                  if (_fe) {
-                    _p.trainClass = _fe.vehicleName;
-                    _p.vehicleType = _fe.vehicleName;
-                    _p.vehicleIconPath = _fe.iconPath;
-                    _p.vehicleSource = _fe.source;
-                    _p.vehicleConfidence = _fe.confidence;
+                  if (_fe && typeof window.TrainVehicle.resolve === "function") {
+                    var _feResolved = window.TrainVehicle.resolve({
+                      timetableVehicleType: _fe.vehicleName
+                    });
+                    _p.trainClass = _feResolved.name || "";
+                    _p.vehicleType = _feResolved.vehicleTypeStr || "";
+                    _p.vehicleIconPath = _feResolved.iconPath || "";
+                    _p.vehicleSource = _feResolved.source || "";
+                    _p.vehicleConfidence = _feResolved.confidence || "none";
                     _p.formationId = _fe.formationId;
                     _p.formationServiceDate = _fe.serviceDate;
-                    _p.vehicleResolution = _fe;
-                    _p.vehicleIdentityStatus = _fe.identityStatus || "EXACT";
-                    _p.vehicleIdentityReason = _fe.identityReason || "dated-running-chain-vehicle-evidence";
+                    _p.vehicleResolution = _feResolved;
+                    _p.vehicleIdentityStatus = _feResolved.identityStatus || "UNKNOWN";
+                    _p.vehicleIdentityReason = _feResolved.identityReason || "no-vehicle-evidence";
+                    _p.vehicleResolvedUpstream = _feResolved.identityStatus === "EXACT";
                   }
                 }
               });
