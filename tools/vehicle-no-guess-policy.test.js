@@ -94,6 +94,10 @@ assert(icons.resolveVehicleIcon('JR E233系', 'Chiyoda') === null,
   'generic JR E233 alias manufactured an E233-2000 identity');
 assert(icons.resolveVehicleIcon('209系2000番台', 'Keiyo') === null,
   'single 209 subseries was collapsed into a 2000/2100 combined identity');
+assert(icons.resolveVehicleIcon('209系3000番台', 'Hachiko') === null,
+  '209-3000 must not borrow 209-3500 artwork');
+assert(icons.resolveVehicleIcon('209系3100番台', 'Kawagoe') === null,
+  '209-3100 must not borrow 209-3500 artwork');
 assert(!/function _resolveVehicleIconBase[\\s\\S]*?VEHICLE_NAME_ALIASES\[/.test(source),
   'vehicle icon resolver reintroduced alias fallback');
 assert(!/function _resolveVehicleIconBase[\\s\\S]*?LINE_VEHICLE_OVERRIDES\[/.test(source),
