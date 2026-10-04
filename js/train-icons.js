@@ -1345,7 +1345,7 @@ var CANONICAL_VEHICLES = {
     displayName: "E231系800番台（東西線直通）",
     iconName: "E231系800番台（東西線直通）",
     asset: "../images/列车/JR東日本/JR東日本_E231系_800番台.png",
-    aliases: ["E231系800番台（東西線直通）", "JR E231系"]
+    aliases: ["E231系800番台（東西線直通）"]
   },
   "toyo-rapid-2000-tozai-through": {
     displayName: "東葉高速2000系",
@@ -1357,13 +1357,13 @@ var CANONICAL_VEHICLES = {
     displayName: "E233系2000番台",
     iconName: "E233系2000番台",
     asset: "../images/列车/JR東日本/JR東日本_E233系_2000番台.png",
-    aliases: ["E233系2000番台", "JR E233系"]
+    aliases: ["E233系2000番台"]
   },
   "jr-east-e531-joban-medium": {
     displayName: "E531系",
     iconName: "E531系",
     asset: "../images/列车/JR東日本/JR東日本_E531系.png",
-    aliases: ["E531系", "JR E531系"]
+    aliases: ["E531系"]
   },
   "jr-east-e231-0-joban-rapid": {
     displayName: "E231系0番台",
@@ -1417,7 +1417,7 @@ var CANONICAL_VEHICLES = {
     displayName: "209系2000番台 / 2100番台",
     iconName: "209系2000番台 / 2100番台",
     asset: "../images/列车/JR東日本/JR東日本_209系_2000・2100番台_房総地区.png",
-    aliases: ["209系2000番台", "209系2100番台", "2100番台"]
+    aliases: ["209系2000番台 / 2100番台"]
   },
   "jr-east-e233-5000-keiyo": {
     displayName: "E233系5000番台",
@@ -1465,7 +1465,7 @@ var CANONICAL_VEHICLES = {
     displayName: "253系（日光・きぬがわ）",
     iconName: "253系（日光・きぬがわ）",
     asset: "../images/列车/JR東日本/JR東日本_253系_1000番台.png",
-    aliases: ["253系（日光・きぬがわ）", "E253系（日光・きぬがわ）", "JR東日本E253系"]
+    aliases: ["253系（日光・きぬがわ）", "E253系（日光・きぬがわ）"]
   }
 };
 var CANONICAL_VEHICLE_ALIAS_INDEX = {};
