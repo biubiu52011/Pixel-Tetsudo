@@ -45,4 +45,19 @@ assert(icons.getTrainClass('Yamanote', 'JR-East', 'unknown', 0, '', false) === '
 assert(icons.getTrainIcon('Chiyoda', 'TokyoMetro', '1234', 0, 'LimitedExpress', false) === null,
   'trainType-only rule leaked a concrete vehicle');
 
+// Zero-fallback contract: known wrong/retired identities must never be replaced
+// by a different current vehicle merely to obtain artwork.
+assert(icons.resolveVehicleIcon('都営5300形', 'Asakusa') === null,
+  'retired Toei 5300 was substituted with another vehicle');
+assert(icons.resolveVehicleIcon('小田急50000形', 'Odawara') === null,
+  'Odakyu VSE was substituted with another vehicle');
+assert(icons.resolveVehicleIcon('相鉄7000系', 'SotetsuMain') === null,
+  'Sotetsu 7000 was substituted with another vehicle');
+assert(icons.resolveVehicleIcon('7000系（候補）', 'UnknownLine') === null,
+  'candidate/base-name stripping manufactured artwork');
+assert(!/function _resolveVehicleIconBase[\\s\\S]*?VEHICLE_NAME_ALIASES\[/.test(source),
+  'vehicle icon resolver reintroduced alias fallback');
+assert(!/function _resolveVehicleIconBase[\\s\\S]*?LINE_VEHICLE_OVERRIDES\[/.test(source),
+  'vehicle icon resolver reintroduced line override fallback');
+
 console.log('vehicle no-guess policy: PASS');
