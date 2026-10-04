@@ -42,7 +42,7 @@ async function get(table, select, order) {
 }
 
 (async function(){
-  const [obs, policies, mappings, coverage, inventory, formations, trainDates, operationDates, trainObs, sources, familyRules] = await Promise.all([
+  const [obs, policies, mappings, inventory, formations, trainDates, operationDates, trainObs, sources, familyRules] = await Promise.all([
     get("runtime_vehicle_operation_evidence",
       "observation_id,service_date,operator,network_key,operation_code,valid_from_time,valid_to_time,vehicle_type,formation_ids,ambiguity_group,observed_date,evidence_grade,source_url,sql_evidence_role",
       "service_date.asc,operator.asc,network_key.asc,operation_code.asc,observation_id.asc"),
@@ -52,9 +52,6 @@ async function get(table, select, order) {
     get("train_operation_mappings",
       "effective_from,network_key,train_number,operation_code",
       "effective_from.asc,network_key.asc,operation_code.asc,train_number.asc"),
-    get("runtime_vehicle_network_coverage",
-      "network_key,coverage_status,operation_evidence_rows,latest_service_date,realtime_api_available,realtime_vehicle_identity_status,sql_evidence_role,effective_coverage_status",
-      "network_key.asc"),
     get("runtime_vehicle_evidence_inventory",
       "source_network_key,canonical_network_key,alias_scope,evidence_kind,evidence_rows,exact_rows,narrowed_rows,min_date,max_date",
       "canonical_network_key.asc,evidence_kind.asc,source_network_key.asc"),
@@ -78,38 +75,9 @@ async function get(table, select, order) {
       "network_key.asc,id.asc")
   ]);
   const pm = Object.fromEntries(policies.map(p=>[p.network_key,p]));
-  const cm = Object.fromEntries(coverage.map(c=>[c.network_key,c]));
-  for (const p of policies) {
-    const c = cm[p.network_key];
-    if (!c) throw new Error("Missing canonical network coverage for "+p.network_key);
-    if (c.realtime_api_available !== p.realtime_api_available ||
-        c.realtime_vehicle_identity_status !== p.realtime_vehicle_identity_status ||
-        c.sql_evidence_role !== p.sql_evidence_role) {
-      throw new Error("Network coverage policy drift for "+p.network_key);
-    }
-    if (p.realtime_api_available === true &&
-        p.realtime_vehicle_identity_status === "unknown" &&
-        c.effective_coverage_status === "active") {
-      throw new Error("Unverified realtime vehicle identity cannot produce active coverage for "+p.network_key);
-    }
-  }
-  const evidenceStats = {};
-  obs.forEach(r=>{
-    const s = evidenceStats[r.network_key] || (evidenceStats[r.network_key]={rows:0,latest:""});
-    s.rows++;
-    if (r.service_date && r.service_date > s.latest) s.latest=r.service_date;
-  });
-  for (const p of policies) {
-    const c = cm[p.network_key];
-    const s = evidenceStats[p.network_key] || {rows:0,latest:""};
-    if (Number(c.operation_evidence_rows) !== s.rows)
-      throw new Error("Network coverage evidence-row drift for "+p.network_key+": coverage="+c.operation_evidence_rows+" evidence="+s.rows);
-    if ((c.latest_service_date || "") !== s.latest)
-      throw new Error("Network coverage latest-date drift for "+p.network_key+": coverage="+(c.latest_service_date||"")+" evidence="+s.latest);
-  }
-  for (const c of coverage) {
-    if (!pm[c.network_key]) throw new Error("Orphan canonical network coverage for "+c.network_key);
-  }
+  // Source policy is evidence metadata only. Realtime position coverage belongs
+  // exclusively to RuntimeConfig.REALTIME_POSITION_POLICY and is never inferred
+  // here from operator/API capability.
   // train_operation_mappings.effective_from is a validity boundary, not a
   // service date. For each evidence row, use the newest explicit mapping set
   // whose effective_from is on or before that service date. Never infer across
@@ -139,9 +107,7 @@ async function get(table, select, order) {
       validFromTime:r.valid_from_time||"",validToTime:r.valid_to_time||"",ambiguityGroup:r.ambiguity_group||"",
       observedDate:r.observed_date||r.service_date,grade:r.evidence_grade||"C",sourceUrl:r.source_url||"",
       trainNumbers:explicitTrainNumbers(r.network_key,r.operation_code,r.service_date),
-      evidenceRole:r.sql_evidence_role||p.sql_evidence_role||"primary",
-      realtimeApiAvailable:p.realtime_api_available===true,
-      realtimeVehicleIdentityStatus:p.realtime_vehicle_identity_status||"unknown"
+      evidenceRole:r.sql_evidence_role||p.sql_evidence_role||"primary"
     };
   });
   const sourceById=Object.fromEntries(sources.map(s=>[String(s.id),s]));
