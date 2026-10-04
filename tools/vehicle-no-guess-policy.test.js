@@ -120,6 +120,8 @@ assert(icons.resolveVehicleIcon('1000形（別）', 'UnknownLine') === null,
   'gallery variant labels must not act as exact vehicle identities');
 assert(icons.resolveVehicleIcon('toky5500', 'Asakusa') === null,
   'internal asset locator codes must not act as vehicle identities');
+assert(icons.resolveVehicleIcon('yrkm7300', 'Yurikamome') === null,
+  'internal Yurikamome asset locator must not act as vehicle identity');
 assert(icons.resolveVehicleIcon('埼玉新都市交通2000系', 'NewShuttle') === null,
   'generic 2000-series identity must not select formation 01');
 assert(icons.resolveVehicleIcon('埼玉新都市交通2020系', 'NewShuttle') === null,
