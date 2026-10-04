@@ -196,7 +196,9 @@ assert(!fusionSource.includes('_p.vehicleType = _fe.vehicleName'),
   'fused formation evidence must not bypass TrainVehicle with a direct identity write');
 assert(fusionSource.includes('var _feResolved = window.TrainVehicle.resolve({'),
   'fused formation evidence must re-enter the existing TrainVehicle authority');
-assert(fusionSource.includes('timetableVehicleType: _fe.vehicleName'),
+assert(/timetableVehicleType\s*:\s*_fe\.vehicleName/.test(fusionSource),
   'fused formation evidence must use the timetable vehicle source channel');
+assert(fusionSource.includes('_rememberChainVehicle(_formationCandidate)'),
+  'formation evidence must enter the existing chain arbitration rather than post-overwrite positions');
 
 console.log("train-position-evidence-regression: PASS");
