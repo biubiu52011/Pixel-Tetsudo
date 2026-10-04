@@ -142,6 +142,48 @@
 
   registerCanonicalSnapshotProvider();
 
+  // Canonical dated evidence provider. This stays inside the existing timetable
+  // evidence channel; it is not a third vehicle source. Exact train-number
+  // evidence outranks operation-code evidence when both are present.
+  function registerCanonicalDatedProvider() {
+    var records = window.VEHICLE_DATED_EVIDENCE || [];
+    if (!Array.isArray(records) || !records.length) return false;
+    return register({
+      id: "canonical-dated-vehicle-evidence",
+      grade: "C",
+      resolveEvidence: function(trainNumber, ctx) {
+        ctx = ctx || {};
+        var d = String(ctx.serviceDate || "").slice(0,10);
+        if (!d) return null;
+        var line = [ctx.lineId,ctx.railway,ctx.operator].join("|");
+        var n = String(trainNumber || "");
+        var op = String(ctx.operationCode || normalizeOperationCode(n,ctx) || "");
+        var exactTrain = [], operation = [];
+        for (var i=0;i<records.length;i++) {
+          var r=records[i];
+          if (!r || r.validDate !== d || line.indexOf(r.networkKey) < 0) continue;
+          if (r.trainNumber && String(r.trainNumber) === n) exactTrain.push(r);
+          else if (r.operationCode && op && String(r.operationCode) === op) operation.push(r);
+        }
+        var matches = exactTrain.length ? exactTrain : operation;
+        if (!matches.length) return null;
+        var identities = {};
+        matches.forEach(function(r) {
+          identities[(r.vehicleType||"")+"|"+(Array.isArray(r.formationIds)?r.formationIds.join("+"):"")] = true;
+        });
+        if (Object.keys(identities).length !== 1) return null;
+        var hit=matches[0];
+        return {operator:hit.operator,vehicleType:hit.vehicleType,
+          formationId:Array.isArray(hit.formationIds)?hit.formationIds.join(" / "):"",
+          operationCode:hit.operationCode||op,grade:hit.grade||"C",sourceUrl:hit.sourceUrl||"",
+          provenance:"canonical dated vehicle evidence snapshot",observedDate:hit.observedDate||d};
+      }
+    });
+  }
+
+  registerCanonicalDatedProvider();
+
+
   window.TrainOperationEvidence = {
     register: register,
     normalizeEvidence: normalizeEvidence,
