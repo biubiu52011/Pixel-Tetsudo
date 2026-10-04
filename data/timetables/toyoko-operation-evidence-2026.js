@@ -81,7 +81,7 @@
     // Do not let a syntactically valid 21S/99M/etc bypass the dated operation set.
     if (op.operator) {
       var published = owner === "Sotetsu"
-        ? ("99" + String(parseInt(op.code, 10) - 90))
+        ? ("9" + op.code.slice(-1))
         : ((owner === "TokyoMetro" ? "7" : owner === "Seibu" ? "1" :
             owner === "Tobu" ? "8" : "0") + op.code);
       if (table[owner].indexOf(published) < 0) return null;
