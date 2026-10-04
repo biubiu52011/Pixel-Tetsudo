@@ -610,7 +610,7 @@ function resolveCanonicalVehicle(name) {
   return CANONICAL_VEHICLE_ALIAS_INDEX[n] || null;
 }
 
-function _canonicalVehicleIconPath(name, lineId) {
+function _canonicalVehicleIconPath(name) {
   var n = String(name || "").trim();
   if (!n) return null;
   // canonical 精确匹配优先：合法 displayName 可含斜杠（如 "209系2000番台 / 2100番台"）
@@ -637,8 +637,8 @@ function _resolveTrainRuleDisplayName(lineId, operator, trainId, stationIndex, t
   // canonical identity. It must never rewrite retired stock to a successor,
   // a generic family to a subseries, or an ambiguous candidate to one vehicle.
   function resolveVehicleDisplayName(candidatesStr, lineId) {
-    if (!candidatesStr) return null;
-    var parts = String(candidatesStr).split('/').map(function(s){ return s.trim(); }).filter(Boolean);
+    if (!vehicleIdentity) return null;
+    var parts = String(vehicleIdentity).split('/').map(function(s){ return s.trim(); }).filter(Boolean);
     if (parts.length !== 1) return parts.length ? parts.join(' / ') : null;
     var name = parts[0];
     var canonical = resolveCanonicalVehicle(name);
@@ -647,10 +647,12 @@ function _resolveTrainRuleDisplayName(lineId, operator, trainId, stationIndex, t
 
   // Fleet/livery pools are asset catalogs only. A confirmed vehicle type does not
   // prove a concrete formation or livery, so never hash-pick one at runtime.
-  function resolveVehicleIcon(candidatesStr, lineId) {
-    return _resolveVehicleIconBase(candidatesStr, lineId);
+  // Single artwork mapper. Input is an already-resolved vehicle identity only.
+  // Operational context (line/operator/train number/source) is intentionally absent.
+  function resolveVehicleArtwork(vehicleIdentity) {
+    return _resolveVehicleArtworkBase(vehicleIdentity);
   }
-  function _resolveVehicleIconBase(candidatesStr, lineId) {
+  function _resolveVehicleArtworkBase(vehicleIdentity) {
     if (!candidatesStr) return null;
     var parts = String(candidatesStr).split('/').map(function(s){ return s.trim(); }).filter(Boolean);
     // A candidate list is not a concrete identity.
@@ -660,7 +662,7 @@ function _resolveTrainRuleDisplayName(lineId, operator, trainId, stationIndex, t
     // Canonical aliases are allowed only when they resolve to the same registered
     // identity record. No line override, replacement vehicle, base-name stripping,
     // retired-stock substitution, or approximate alias may select artwork.
-    var canonical = _canonicalVehicleIconPath(name, lineId);
+    var canonical = _canonicalVehicleIconPath(name);
     if (canonical) return canonical;
     if (VEHICLE_NAME_TO_ICON[name]) return VEHICLE_NAME_TO_ICON[name];
     return null;
@@ -669,7 +671,9 @@ function _resolveTrainRuleDisplayName(lineId, operator, trainId, stationIndex, t
   window.TrainIcons = {
     getTrainIcon: getTrainIcon,
     getTrainClass: getTrainClass,
-    resolveVehicleIcon: resolveVehicleIcon,
+    resolveVehicleArtwork: resolveVehicleArtwork,
+    // Temporary compatibility alias: same strict identity-only mapper.
+    resolveVehicleIcon: resolveVehicleArtwork,
     resolveVehicleDisplayName: resolveVehicleDisplayName,
     resolveCanonicalVehicle: resolveCanonicalVehicle,
     CANONICAL_VEHICLES: CANONICAL_VEHICLES,
