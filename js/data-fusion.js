@@ -880,7 +880,7 @@
             var odptVehicleType = t["odpt:vehicleType"] || t["vehicleType"] || "";
             var odptTrainOwner = t["odpt:trainOwner"] || t["trainOwner"] || "";
             positionData.trainOwner = odptTrainOwner;
-            positionData.odptVehicleType = odptVehicleType;
+            positionData.realtimeVehicleType = odptVehicleType;
             // An explicit vehicle type carried by the realtime record is train-level
             // evidence. Register it before resolving so the same train number can
             // reuse that evidence without depending on the current display line.
