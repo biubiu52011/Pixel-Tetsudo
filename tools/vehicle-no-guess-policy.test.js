@@ -23,16 +23,13 @@ assert(!/function resolveVehicleArtwork\([^)]*(line|operator|train|source)/i.tes
 assert(icons.resolveVehicleArtwork('小田急1000形 / 小田急3000形', 'Odawara') === null,
   'multi-candidate identity leaked a concrete icon');
 
-// Fleet/livery pools are catalogs, not evidence. The resolver may return the canonical
-// type artwork, but must not hash-pick another member of the pool.
-const monorail = icons.resolveVehicleArtwork('東京モノレール1000形', 'TokyoMonorail');
-if (monorail) {
-  const pool = icons.FLEET_ICON_POOLS['東京モノレール1000形'] || [];
-  if (pool.length > 1) {
-    assert(monorail === pool[0] || !pool.includes(monorail),
-      'resolver hash-picked a concrete formation/livery from FLEET_ICON_POOLS');
-  }
-}
+// A confirmed exact identity may resolve to one representative artwork, but the
+// public mapper must expose no fleet/livery pool that could become a second selector.
+const monorail = icons.resolveVehicleArtwork('東京モノレール1000形');
+assert(typeof icons.FLEET_ICON_POOLS === 'undefined',
+  'fleet/livery pool export reintroduced a parallel artwork-selection path');
+assert(monorail === null || typeof monorail === 'string',
+  'exact vehicle identity must resolve only to a representative artwork or null');
 
 const source = src;
 assert(!source.includes('return LINE_ICONS[lineId]'), 'line fallback code reintroduced');
