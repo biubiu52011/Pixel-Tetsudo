@@ -97,6 +97,10 @@ assert(trainVehicleSource.includes("'timetable-vehicle-evidence'"),
   'timetable-derived exact vehicle must retain timetable identity reason');
 assert(!trainVehicleSource.includes("vehicleTypeManual") && !trainVehicleSource.includes("odptVehicleType"),
   'legacy manual/ODPT vehicle compatibility inputs must stay removed');
+assert(!estimatorSource.includes("vehicleTypeManual"),
+  'estimator must not resurrect the legacy manual vehicle channel');
+assert(!fusionSource.includes("positionData.odptVehicleType"),
+  'DataFusion must not expose a second ODPT vehicle identity field');
 
 
 
