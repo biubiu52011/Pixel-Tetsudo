@@ -22,7 +22,8 @@ assert(!/positionData\.trainClass\s*=\s*positionData\.trainClass\s*\|\|\s*resolv
 assert(/Object\.keys\(_realtimeEvidenceWithoutPosition\)/.test(fusion),"positionless realtime vehicle evidence must have a consumer");
 assert(/\(estimated\[_vlid\] \|\| \[\]\)\.forEach\(_rememberChainVehicle\)/.test(fusion),"verified timetable vehicle evidence must seed running-chain registry");
 const estimator=read("js/train-position-estimator.js");
-assert(/vehicleResolvedUpstream:\s*!!vehResult\.iconPath/.test(estimator),"estimator vehicle decision metadata must reach renderer");
+assert(/vehicleResolvedUpstream:\s*vehResult\.identityStatus === 'EXACT'/.test(estimator),
+  "upstream vehicle authority must represent EXACT identity, not artwork availability");
 assert(/TRAIN_VEHICLE_EVIDENCE_PROVIDERS/.test(estimator),"estimator must consume generic exact-train vehicle evidence providers");
 assert(/Object\.keys\(_vehicleNames\)\.length === 1/.test(estimator),"conflicting exact-train vehicle providers must remain unresolved");
 const tobuEvidence=read("data/timetables/tobu-limited-express-vehicle-evidence.js");
@@ -133,6 +134,12 @@ assert(fusionSource.includes('_evResolution.identityStatus !== "EXACT"'),
   'realtime evidence without EXACT vehicle identity must not seed running-chain inheritance');
 assert(!/_rtVehicle\.source === "trainNo"/.test(fusionSource),
   'train-number history must not be promoted as realtime vehicle evidence');
+assert(fusionSource.includes('realtimeVehicleType: odptVehicleType'),
+  'realtime API vehicle identity must enter the explicit realtime source channel');
+assert(estimatorSource.includes("timetableVehicleType: tt['vehicleType'] || ''"),
+  'timetable/SQL vehicle identity must enter the explicit timetable source channel');
+assert(!estimatorSource.includes("if (!window.TrainVehicle) _vehicleType = tt['vehicleType'] || ''"),
+  'timetable identity must not bypass the central source arbiter when TrainVehicle is unavailable');
 assert(fusionSource.includes('vehicleFormationCandidates: (p.vehicleFormationCandidates || []).slice()'),
   'running-chain registry must preserve formation candidate sets');
 assert(fusionSource.includes('p.vehicleFormationCandidates = (v.vehicleFormationCandidates || p.vehicleFormationCandidates || []).slice()'),
