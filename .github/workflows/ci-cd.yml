@@ -139,7 +139,11 @@ jobs:
             [icons, 'THROUGH_PREFIX_RULES', 'through-service prefix vehicle guess rules'],
             [icons, 'VEHICLE_DEPLOYMENTS', 'route/deployment vehicle inference table'],
             [icons, 'buildVehicleNameIndex', 'artwork-filename vehicle identity inference'],
-            [icons, 'collectIcon(', 'recursive artwork reverse-index inference']
+            [icons, 'collectIcon(', 'recursive artwork reverse-index inference'],
+            [icons, 'EXTRA_VEHICLE_ICONS', 'gallery artwork registry used as identity source'],
+            [icons, '"toky5500":', 'internal asset locator exposed as vehicle identity'],
+            [icons, '"twr71000":', 'internal asset locator exposed as vehicle identity'],
+            [icons, '"mn-tma1000":', 'internal asset locator exposed as vehicle identity']
           ];
           for (const [src, needle, label] of forbidden) {
             if (src.includes(needle)) throw new Error('zero-fallback violation: ' + label);
