@@ -16,7 +16,6 @@
   // Vehicle deployment zones: specific rolling stock only runs on listed segments
   var VEHICLE_DEPLOYMENTS = {
     // 埼京線 ↔ 川越線：大宮〜川越間は埼京線車両 E233系7000番台が直通担当
-    // （川越線独自区間 川越〜高麗川 は LINE_ICONS の 209系3500番台（八高・川越線））
     "SaikyoKawagoe": {
       routes: [
         { line: "Kawagoe", from: "Omiya", to: "Kawagoe", icon: "../images/列车/JR東日本/JR東日本_E233系_7000番台.png", priority: 2 }
@@ -115,240 +114,6 @@
     }
   };
 
-  // Operator default icons (fallback)
-  var OPERATOR_ICONS = {
-    "JR-East": "../images/列车/JR東日本/JR東日本_E235系_0番台.png",
-    "JR West": "../images/列车/JR西日本/JR西日本_N700系_7000番台.png", // 4.3.950：JR西日本現役主力通勤車（223系），原误用JR東日本E235系已修正
-    "TokyoMetro": "../images/列车/東京メトロ/東京メトロ_1000系.png",
-    "Toei": "../images/列车/都営地下鉄/都営地下鉄_5500形.png", // 都営默认采用现役浅草線 5500形；退役 5300/6300 不进入运行时默认
-    "YokohamaMunicipal": "../images/列车/横浜市交通局/横浜市交通局_4000形.png",
-    "Keio": "../images/列车/京王電鉄/京王電鉄_2000系.png", // 4.3.277：京王.png 与 2000系.png 同一图（哈希一致），归并至 2000系.png
-    "Odakyu": "../images/列车/小田急電鉄/小田急電鉄_4000形_標準色.png", // 4.3.275：小田急系統共通 4000系（千代田直通の現役主力、小田原/江ノ島/多摩 同一車輛体系）
-    "Seibu": "../images/列车/西武鉄道/西武鉄道_30000系_スマイルトレイン.png", // 4.3.270：西武运营商默认 = 30000系（通勤主力）
-    "Tobu": null, // unknown Tobu vehicle identity stays unknown; line/service evidence selects concrete stock
-    "Keikyu": "../images/列车/京浜急行電鉄/京浜急行電鉄_1000形_1200番台.png",
-    "Keisei": "../images/列车/京成電鉄/京成電鉄_80000形.png", // 4.3.457：京成本線系主力 80000形（3200形は引退進行）
-    "Sotetsu": "../images/列车/相模鉄道/相模鉄道_13000系_YOKOHAMA_NAVYBLUE.png", // 4.3.277：相鉄.png 与 13000系.png 同一图，归并
-    "TWR": "../images/列车/東京臨海高速鉄道/東京臨海高速鉄道_71-000形.png", // 4.3.457：りんかい線現役主力 71-000形
-    "Rinkai": "../images/列车/東京臨海高速鉄道/東京臨海高速鉄道_71-000形.png", // 4.3.457：りんかい線現役主力 71-000形
-    "Yurikamome": "../images/列车/ゆりかもめ/ゆりかもめ_7300系.png",
-    "TamaMonorail": "../images/列车/多摩都市モノレール/多摩都市モノレール_1000系_標準塗装.png", // 4.3.276：实车图恢复
-    "SaitamaNewUrbanTransit": "../images/列车/埼玉新都市交通/埼玉新都市交通_2000系_01編成_レッドパープル.png", // 4.3.276：AGT实车图恢复
-    "TokyoMonorail": "../images/列车/東京モノレール/東京モノレール_10000形.png", // 4.3.457：東京モノレール現役主力 10000形（1000形は引退）
-    "NipporiToneri": "../images/列车/都営地下鉄/都営地下鉄_330形.png", // 4.3.457：日暮里・舎人ライナー = AGT新交通（330形），実車図に変更
-    "MinatoMirai": "../images/列车/東急電鉄/東急電鉄_5050系.png",
-    "ChibaUrbanMonorail": "../images/列车/千葉都市モノレール/千葉都市モノレール_0形.png", // 千葉都市モノレール（悬垂式，0形・1000形）
-    "ShonanMonorail": "../images/列车/湘南モノレール/湘南モノレール_5000系_5601編成_レッド.png", // 湘南モノレール（江の島線，5000系）
-    "MIR": "../images/列车/首都圏新都市鉄道/首都圏新都市鉄道_TX-3000系.png",
-    "TsukubaExpress": "../images/列车/首都圏新都市鉄道/首都圏新都市鉄道_TX-3000系.png",
-    "UtsunomiyaLightRail": "../images/列车/宇都宮ライトレール/宇都宮ライトレール_HU300形_ライトライン.png",
-    "Enoden": "../images/列车/江ノ島電鉄/江ノ島電鉄_500形.png",
-    "Izukyu": "../images/列车/伊豆急行/伊豆急行_8000系.png",
-    "Izuhakone": "../images/列车/伊豆箱根鉄道/伊豆箱根鉄道_3000系.png",
-    "HakoneTozan": "../images/列车/小田急箱根/小田急箱根_3000・3100形.png",
-    "Isumi": "../images/列车/いすみ鉄道/いすみ鉄道_いすみ300型.png",
-    "Hitachinaka": "../images/列车/ひたちなか海浜鉄道/ひたちなか海浜鉄道_キハ3710形_01.png",
-    "Watarase": "../images/列车/わたらせ渓谷鉄道/わたらせ渓谷鉄道_WKT-500形.png",
-    "Joshin": "../images/列车/上信電鉄/上信電鉄_7000形.png",
-    "Yamaman": "../images/列车/山万/山万_1000形_第1編成_こあら1号.png",
-    "Ryutetsu": "../images/列车/流鉄株式会社/流鉄株式会社_5000形_5001編成_さくら.png",
-    "Moka": "../images/列车/真岡鐵道/真岡鐵道_モオカ14形_標準色_車両差分1.png",
-    "Chichibu": "../images/列车/秩父鉄道/秩父鉄道_7500系_7501編成.png",
-    "Choshi": "../images/列车/銚子電鉄/銚子電鉄_3000形_3001編成_澪つくしカラー.png",
-    "KashimaRinkai": "../images/列车/鹿島臨海鉄道/鹿島臨海鉄道_8000形.png",
-    // ===== 新幹線JR各社デフォルト（車両アイコン）=====
-    "JR-Central": "../images/列车/JR東海/JR東海_N700系.png", // JR東海：東海道・山陽新幹線 N700系
-    "JR-West": "../images/列车/JR西日本/JR西日本_500系.png", // JR西日本：山陽新幹線 500系
-    "JR-Kyushu": "../images/列车/JR九州/JR九州_800系.png", // JR九州：九州新幹線 800系
-    "JR-Hokkaido": "../images/列车/JR北海道/JR北海道_H5系.png" // JR北海道：北海道新幹線 H5系（画像資産はJR東日本ディレクトリに集約）
-  };
-
-  // Specific line icons (override operator defaults)
-  var LINE_ICONS = {
-  "Yamanote": "../images/列车/JR東日本/JR東日本_E235系_0番台.png",
-  "KeihinTohoku": "../images/列车/JR東日本/JR東日本_E233系_1000番代.png",
-  "ChuoLocal": "../images/列车/JR東日本/JR東日本_E231系_0番台_中央・総武線各駅停車.png",
-  "ChuoSobuLocal": "../images/列车/JR東日本/JR東日本_E231系_0番台_中央・総武線各駅停車.png",
-  "ChuoRapid": "../images/列车/JR東日本/JR東日本_E233系_0番代.png",
-  "ChuoMain": "../images/列车/JR東日本/JR東日本_E233系_0番代.png",
-  "Ome": "../images/列车/JR東日本/JR東日本_E233系_0番代_青梅線.png",
-  "Itsukaichi": "../images/列车/JR東日本/JR東日本_E233系_0番代_青梅線.png",
-  "Saikyo": "../images/列车/JR東日本/JR東日本_E233系_7000番台.png",
-  "Kawagoe": "../images/列车/JR東日本/JR東日本_209系_3500番台.png",
-  "KawagoeWest": "../images/列车/JR東日本/JR東日本_209系_3500番台.png",
-  "ShonanShinjuku": "../images/列车/JR東日本/JR東日本_E233系3000番台.png",
-  "Yokosuka": "../images/列车/JR東日本/JR東日本_E235系_1000番台.png",
-  "SobuRapid": "../images/列车/JR東日本/JR東日本_E235系_1000番台.png",
-  "SobuMain": "../images/列车/JR東日本/JR東日本_E235系_1000番台.png",
-  "Joban": "../images/列车/JR東日本/JR東日本_E231系_0番台_常磐快速線.png",
-  "JobanMain": "../images/列车/JR東日本/JR東日本_E531系.png",
-  "JobanLocal": "../images/列车/JR東日本/JR東日本_E233系_2000番台.png",
-  "JobanRapid": "../images/列车/JR東日本/JR東日本_E231系_0番台_常磐快速線.png",
-  "Mito": "../images/列车/JR東日本/JR東日本_E531系.png",
-  "Nikkoku": "../images/列车/JR東日本/JR東日本_E131系_600番代.png",
-  "Gono": "../images/列车/JR東日本/JR東日本_HB-E220系.png",
-  "Yokohama": "../images/列车/JR東日本/JR東日本_E233系_6000番代.png",
-  "Tokaido": "../images/列车/JR東日本/JR東日本_E233系3000番台.png",
-  "Takasaki": "../images/列车/JR東日本/JR東日本_E233系3000番台.png",
-  "Musashino": "../images/列车/JR東日本/JR東日本_E231系_0番台.png",
-  "Uetsu": "../images/列车/JR東日本/JR東日本_701系_100番代.png",
-  "Ryomo": "../images/列车/JR東日本/JR東日本_211系_湘南色.png",
-  "Agatsuma": "../images/列车/JR東日本/JR東日本_211系_湘南色.png",
-  "BanetsuWest": "../images/列车/JR東日本/JR東日本_キハ110系.png",
-  "Senzan": "../images/列车/JR東日本/JR東日本_E721系_0番代.png",
-  "TohokuMain": "../images/列车/JR東日本/JR東日本_E721系_0番代.png",
-  "Tazawako": "../images/列车/JR東日本/JR東日本_701系_盛岡地区.png",
-  "Yamagata": "../images/列车/JR東日本/JR東日本_E723系_5000番代.png",
-  "Senseki": "../images/列车/JR東日本/JR東日本_E131系_800番代.png",
-  "Keiyo": "../images/列车/JR東日本/JR東日本_E233系5000番台.png",
-  "Karasuyama": "../images/列车/JR東日本/JR東日本_EV-E301系.png",
-  "Kururi": "../images/列车/JR東日本/JR東日本_キハE130系100番台.png",
-  "Suigun": "../images/列车/JR東日本/JR東日本_キハE130系0番台.png",
-  "Uchibo": "../images/列车/JR東日本/JR東日本_E131系_0番代.png",
-  "Hachiko": "../images/列车/JR東日本/JR東日本_HB-E220系.png",
-  "Noda": "../images/列车/東武鉄道/東武鉄道_80000系.png",
-  "ChuoTatsuno": "../images/列车/JR東日本/JR東日本_E127系_0番代_新潟色.png",
-  "Joetsu": "../images/列车/JR東日本/JR東日本_211系_湘南色.png",
-  "Kesennuma": "../images/列车/JR東日本/JR東日本_キハ110系.png",
-  "NambuBranch": "../images/列车/JR東日本/JR東日本_E131系_0番代.png",
-  "Narita": "../images/列车/JR東日本/JR東日本_E131系_0番代.png",
-  "NaritaAbikoBranch": "../images/列车/JR東日本/JR東日本_E131系_0番代.png",
-  "NaritaAirportBranch": "../images/列车/JR東日本/JR東日本_E235系_1000番台.png",
-  "Ofunato": "../images/列车/JR東日本/JR東日本_キハ110系.png",
-  "Oito": "../images/列车/JR東日本/JR東日本_E127系_0番代_新潟色.png",
-  "OuMain": "../images/列车/JR東日本/JR東日本_キハ110系.png",
-  "Shinetsu": "../images/列车/JR東日本/JR東日本_E129系.png",
-  "Shinonoi": "../images/列车/JR東日本/JR東日本_211系_長野色.png",
-  "Togane": "../images/列车/JR東日本/JR東日本_E131系_0番代.png",
-  "TsurumiOkawa": "../images/列车/JR東日本/JR東日本_E131系_1000番代.png",
-  "TsurumiUmiShibaura": "../images/列车/JR東日本/JR東日本_E131系_1000番代.png",
-  "Yamada": "../images/列车/JR東日本/JR東日本_キハ110系.png",
-  "Ikebukuro": "../images/列车/西武鉄道/西武鉄道_30000系_スマイルトレイン.png",
-  "Kiryu": "../images/列车/東武鉄道/東武鉄道_8000型.png",
-  "Koizumi": "../images/列车/東武鉄道/東武鉄道_8000型.png",
-  "Sano": "../images/列车/東武鉄道/東武鉄道_8000型.png",
-  "Ginza": "../images/列车/東京メトロ/東京メトロ_1000系.png",
-  "Marunouchi": "../images/列车/東京メトロ/東京メトロ_2000系.png",
-  "MarunouchiBranch": "../images/列车/東京メトロ/東京メトロ_2000系.png",
-  "Hibiya": "../images/列车/東京メトロ/東京メトロ_13000系.png",
-  "Tozai": "../images/列车/東京メトロ/東京メトロ_15000系.png",
-  "Chiyoda": "../images/列车/東京メトロ/東京メトロ_16000系.png",
-  "Yurakucho": "../images/列车/東京メトロ/東京メトロ_17000系.png",
-  "Namboku": "../images/列车/東京メトロ/東京メトロ_9000系.png",
-  "Fukutoshin": "../images/列车/東京メトロ/東京メトロ_10000系.png",
-  "ChiyodaBranch": "../images/列车/東京メトロ/東京メトロ_05系_区間列車車両.png",
-  "Mita": "../images/列车/都営地下鉄/都営地下鉄_6500形.png",
-  "Asakusa": "../images/列车/都営地下鉄/都営地下鉄_5500形.png",
-  "Shinjuku": "../images/列车/都営地下鉄/都営地下鉄_10-300形_1・2次車.png",
-  "Oedo": "../images/列车/都営地下鉄/都営地下鉄_12-000形_4次車.png",
-  "TobuSkytree": null, // mixed Skytree/Hibiya/Hanzomon corridor: concrete stock requires service/evidence
-  "TobuIsesaki": null, // mixed main-line corridor: do not impersonate Tojo-line 50000 stock
-  "TobuTojo": "../images/列车/東武鉄道/東武鉄道_60000系.png",
-  "Tojo": "../images/列车/東武鉄道/東武鉄道_50000型.png",
-  "Ogose": "../images/列车/東武鉄道/東武鉄道_50090型.png",
-  "TobuUtsunomiya": "../images/列车/東武鉄道/東武鉄道_20400型.png",
-  "Odawara": "../images/列车/小田急電鉄/小田急電鉄_5000形_標準色.png",
-  "OdakyuEnoshima": "../images/列车/小田急電鉄/小田急電鉄_3000形_標準色.png",
-  "OdakyuTama": "../images/列车/小田急電鉄/小田急電鉄_3000形_標準色.png",
-  "Nambu": "../images/列车/JR東日本/JR東日本_E233系_8000番代.png",
-  "TokaidoMain": "../images/列车/JR東日本/JR東日本_E233系3000番台.png",
-  "Sagami": "../images/列车/JR東日本/JR東日本_E131系_500番代.png",
-  "Tsurumi": "../images/列车/JR東日本/JR東日本_E131系_1000番代.png",
-  "Sotobo": "../images/列车/JR東日本/JR東日本_E131系_0番代.png",
-  "SeibuShinjuku": "../images/列车/西武鉄道/西武鉄道_30000系_スマイルトレイン.png",
-  "Haijima": "../images/列车/西武鉄道/西武鉄道_30000系_スマイルトレイン.png",
-  "Kokubunji": "../images/列车/西武鉄道/西武鉄道_30000系_スマイルトレイン.png",
-  "Yamaguchi": "../images/列车/西武鉄道/西武鉄道_8500系_レオライナー.png",
-  "SeibuYamaguchi": "../images/列车/西武鉄道/西武鉄道_8500系_レオライナー.png",
-  "SeibuChichibu": "../images/列车/西武鉄道/西武鉄道_4000系_赤白塗装.png",
-  "Yurakucho_Seibu": "../images/列车/西武鉄道/西武鉄道_40050系_緑帯.png",
-  "TokyuMeguro": "../images/列车/東急電鉄/東急電鉄_3020系.png",
-  "TokyuTamagawa": "../images/列车/東急電鉄/東急電鉄_7000系.png",
-  "Oimachi": "../images/列车/東急電鉄/東急電鉄_6020系.png",
-  "Meguro": "../images/列车/東急電鉄/東急電鉄_3020系.png",
-  "Ikegami": "../images/列车/東急電鉄/東急電鉄_7000系.png",
-  "Tamagawa": "../images/列车/東急電鉄/東急電鉄_7000系.png",
-  "Kodomonokuni": "../images/列车/東急電鉄/東急電鉄_Y000系_通常塗装.png",
-  "TokyuIkegami": "../images/列车/東急電鉄/東急電鉄_7000系.png",
-  "TokyuKodomonokuni": "../images/列车/東急電鉄/東急電鉄_Y000系_通常塗装.png",
-  "TokyuOimachi": "../images/列车/東急電鉄/東急電鉄_6020系.png",
-  "TokyuToyoko": "../images/列车/東急電鉄/東急電鉄_5050系.png",
-  "Toyoko": "../images/列车/東急電鉄/東急電鉄_5050系.png",
-  "Keikyu": "../images/列车/京浜急行電鉄/京浜急行電鉄_1000形_1200番台.png",
-  "KeikyuMain": "../images/列车/京浜急行電鉄/京浜急行電鉄_1000形_1200番台.png",
-  "KeikyuAirport": "../images/列车/京浜急行電鉄/京浜急行電鉄_1000形_1200番台.png",
-  "KeikyuZushi": "../images/列车/京浜急行電鉄/京浜急行電鉄_1000形_1200番台.png",
-  "KeikyuKurihama": "../images/列车/京浜急行電鉄/京浜急行電鉄_1000形_1200番台.png",
-  "Keisei": "../images/列车/京成電鉄/京成電鉄_80000形.png",
-  "KeiseiMain": "../images/列车/京成電鉄/京成電鉄_80000形.png",
-  "Oshiage": "../images/列车/京成電鉄/京成電鉄_80000形.png",
-  "Kanamachi": "../images/列车/京成電鉄/京成電鉄_80000形.png",
-  "Chiba": "../images/列车/京成電鉄/京成電鉄_80000形.png",
-  "Chihara": "../images/列车/京成電鉄/京成電鉄_80000形.png",
-  "KeiseiChiba": "../images/列车/京成電鉄/京成電鉄_80000形.png",
-  "KeiseiChihara": "../images/列车/京成電鉄/京成電鉄_80000形.png",
-  "KeiseiKanamachi": "../images/列车/京成電鉄/京成電鉄_80000形.png",
-  "KeiseiOshiage": "../images/列车/京成電鉄/京成電鉄_80000形.png",
-  "ChibaMonorail1": "../images/列车/千葉都市モノレール/千葉都市モノレール_0形.png",
-  "ChibaMonorail2": "../images/列车/千葉都市モノレール/千葉都市モノレール_0形.png",
-  "ShonanMonorail": "../images/列车/湘南モノレール/湘南モノレール_5000系_5601編成_レッド.png",
-  "KeioMain": "../images/列车/京王電鉄/京王電鉄_5000系.png",
-  "Keio-Hachioji": "../images/列车/京王電鉄/京王電鉄_5000系.png",
-  "KeioSagami": "../images/列车/京王電鉄/京王電鉄_9000系.png",
-  "KeioShin": "../images/列车/京王電鉄/京王電鉄_9000系.png",
-  "Sotetsu": "../images/列车/相模鉄道/相模鉄道_13000系_YOKOHAMA_NAVYBLUE.png",
-  "SotetsuMain": "../images/列车/相模鉄道/相模鉄道_13000系_YOKOHAMA_NAVYBLUE.png",
-  "SotetsuIzumino": "../images/列车/相模鉄道/相模鉄道_13000系_YOKOHAMA_NAVYBLUE.png",
-  "SotetsuShinyokohama": "../images/列车/相模鉄道/相模鉄道_11000系_相鉄グループカラー.png",
-  "SotetsuShin-Yokohama": "../images/列车/相模鉄道/相模鉄道_20000系_YOKOHAMA_NAVYBLUE.png",
-  "YokohamaMunicipal": "../images/列车/横浜市交通局/横浜市交通局_4000形.png",
-  "YokohamaBlue": "../images/列车/横浜市交通局/横浜市交通局_4000形.png",
-  "YokohamaGreen": "../images/列车/横浜市交通局/横浜市交通局_10000形_1次車.png",
-  "TWR": "../images/列车/東京臨海高速鉄道/東京臨海高速鉄道_71-000形.png",
-  "Rinkai": "../images/列车/東京臨海高速鉄道/東京臨海高速鉄道_71-000形.png",
-  "Yurikamome": "../images/列车/ゆりかもめ/ゆりかもめ_7300系.png",
-  "TamaMonorail": "../images/列车/多摩都市モノレール/多摩都市モノレール_1000系_標準塗装.png",
-  "TokyoMonorail": "../images/列车/東京モノレール/東京モノレール_10000形.png",
-  "SaitamaNewUrbanTransit": "../images/列车/埼玉新都市交通/埼玉新都市交通_2000系_01編成_レッドパープル.png",
-  "MinatoMirai": "../images/列车/東急電鉄/東急電鉄_5050系.png",
-  "NewShuttle": "../images/列车/埼玉新都市交通/埼玉新都市交通_2000系_01編成_レッドパープル.png",
-  "Tadami": "../images/列车/JR東日本/JR東日本_GV-E400系.png",
-  "Echigo": "../images/列车/JR東日本/JR東日本_E129系.png",
-  "Hakushin": "../images/列车/JR東日本/JR東日本_E129系.png",
-  "Miyo": "../images/列车/JR東日本/JR東日本_E129系.png",
-  "SuigunBranch": "../images/列车/JR東日本/JR東日本_キハE130系0番台.png",
-  "Nippori_Toneri": "../images/列车/都営地下鉄/都営地下鉄_330形.png",
-  "TokyuSetagaya": "../images/列车/東急電鉄/東急電鉄_300系_301編成_玉電カラー.png",
-  "UtsunomiyaJR": "../images/列车/JR東日本/JR東日本_E233系3000番台.png",
-  "BanetsuEast": "../images/列车/JR東日本/JR東日本_キハ110系.png",
-  "Iiyama": "../images/列车/JR東日本/JR東日本_キハ110系.png",
-  "Ishinomaki": "../images/列车/JR東日本/JR東日本_キハ110系.png",
-  "Kamaishi": "../images/列车/JR東日本/JR東日本_キハ110系.png",
-  "Kitakami": "../images/列车/JR東日本/JR東日本_キハ110系.png",
-  "Komii": "../images/列车/JR東日本/JR東日本_キハ110系.png",
-  "Kounan": "../images/列车/JR東日本/JR東日本_キハ110系.png",
-  "Oga": "../images/列车/JR東日本/JR東日本_キハ110系.png",
-  "Ominato": "../images/列车/JR東日本/JR東日本_キハ110系.png",
-  "RikutoEast": "../images/列车/JR東日本/JR東日本_キハ110系.png",
-  "RikutsuWest": "../images/列车/JR東日本/JR東日本_キハ110系.png",
-  "Tsugaru": "../images/列车/JR東日本/JR東日本_キハ110系.png",
-  "Yonezawa": "../images/列车/JR東日本/JR東日本_キハ110系.png",
-  "Hachinohe": "../images/列车/JR東日本/JR東日本_キハE130系500番台.png",
-  "Ito": "../images/列车/JR東日本/JR東日本_E231系_1000番台.png",
-  "Kashima": "../images/列车/JR東日本/JR東日本_E131系_0番代.png",
-  "SensekiTohoku": "../images/列车/JR東日本/JR東日本_HB-E210系.png",
-  "TohokuShinkansen": "../images/列车/JR東日本/JR東日本_E5系.png",
-  "JoetsuShinkansen": "../images/列车/JR東日本/JR東日本_E7系.png",
-  "HokurikuShinkansen": "../images/列车/JR東日本/JR東日本_E7系.png",
-  "YamagataShinkansen": "../images/列车/JR東日本/JR東日本_E8系.png",
-  "AkitaShinkansen": "../images/列车/JR東日本/JR東日本_E6系.png",
-  "HokkaidoShinkansen": "../images/列车/JR北海道/JR北海道_H5系.png",
-  "TokaidoShinkansen": "../images/列车/JR東海/JR東海_N700系.png",
-  "SanyoShinkansen": "../images/列车/JR西日本/JR西日本_500系.png",
-  "KyushuShinkansen": "../images/列车/JR九州/JR九州_800系.png",
-  "NishiKyushuShinkansen": "../images/列车/JR九州/JR九州_800系.png"
-};
-
   // v4.3.450: 直通列車の車号規則——ODPT Train には車両形式フィールドが無いため、
   // trainNumber の末尾記号で直通車の車籍を識別する（JR 社内直通 京葉↔武蔵野 など）。
   // 例：京葉線上の E 末尾 = 武蔵野線直通（E231系0番台）、武蔵野線上の Y 末尾 = 京葉線直通（E233系5000番台）。
@@ -360,54 +125,6 @@
   // Train-number prefix guessing was removed. Prefixes can identify an operation
   // pattern, but are not sufficient evidence for a concrete rolling-stock class.
   var THROUGH_PREFIX_RULES = {};
-
-
-
-  // v4.3.962: trainType+车号段规则表——把 _resolveTrainIcon 里散落的手写 if 特例收进声明式数据
-  // 每条规则：{ lines, op, trainType, regex, icon }
-  //   lines: 限定 lineId 数组（null = 不限）；op: 限定 operator（null = 不限）
-  //   trainType: 限定 trainType 短名子串（null = 不限）；regex: 车号纯数字正则
-  // 命中顺序：从上到下，第一条命中即返回（与原来 if 块顺序等价）
-  var TRAIN_TYPE_ICON_RULES = [
-    // v4.3.925: 千代田线直通小田急ロマンスカー（特急）——60000形MSE
-    { lines: ['Chiyoda'], op: null, trainType: 'limitedexpress', regex: null,
-      icon: '../images/列车/小田急電鉄/小田急電鉄_60000形_MSE.png' },
-    // v4.3.525: 有料特急车号判別（仅 LimitedExpress 时生效，防止 Local 误爆）
-    { lines: ['Narita','SobuRapid','Yokosuka','ShonanShinjuku'], op: null,
-      trainType: 'limitedexpress', regex: /^2[02]/,
-      icon: '../images/列车/JR東日本/JR東日本_E259系.png' },
-    { lines: ['Narita','SobuRapid'], op: null,
-      trainType: 'limitedexpress', regex: /^40/,
-      icon: '../images/列车/JR東日本/JR東日本_E257系_500番代.png' },
-    { lines: ['ShonanShinjuku'], op: null,
-      trainType: 'limitedexpress', regex: /^1[0-9]/,
-      icon: '../images/列车/JR東日本/JR東日本_253系_1000番台.png' },
-    // v4.3.525: 东海道线特急（踊り子/湘南）
-    { lines: ['Tokaido','ShonanShinjuku'], op: null,
-      trainType: 'limitedexpress', regex: /^30[0-3]/,
-      icon: '../images/列车/JR東日本/JR東日本_E257系_2000番台.png' },
-    { lines: ['Tokaido','ShonanShinjuku'], op: null,
-      trainType: 'limitedexpress', regex: /^30[7-9]/,
-      icon: '../images/列车/JR東日本/JR東日本_E257系_2500番台.png' },
-  ];
-
-  // v4.3.962: 线路级车型特例（奇偶交替/尾号区分等）
-  // 每条：{ lines, op, fn } —— fn(trainId, trainNumberPure) 返回 icon 或 null
-  var LINE_ICON_OVERRIDES = [
-    // ChuoLocal/ChuoSobuLocal: current regular stock is E231系500番台 / E231系0番台.
-    { lines: ['ChuoLocal','ChuoSobuLocal'], op: null, fn: function(trainId) {
-      return '../images/列车/JR東日本/JR東日本_E231系_0番台_中央・総武線各駅停車.png';
-    }},
-    // Rinkai JR-through services still have multiple compatible fleets.
-    // Exact vehicle evidence must select the artwork; operator alone is insufficient.
-    // v4.3.992: Rinkai TWR——運用調査(loo-ool 2026.9):自有车(70-000形 Z1-Z3/Z7 4本 +
-    // 71-000形 Z11-Z14 4本)基本进 81/83/85/87/89/91 六運用,線内折返为主但也会进 JR 直通;
-    // 且線内折返也有 E233系7000番台(川越車両センター,JR車 38本 圧倒多数,AI概要+JR車両ガイド:
-    // りんかい線の快速/普通で営業運転)——列次号后缀(T/K/F)无法区分形式(车号无区别属实);
-    // S0 manual 已标三形式多候选(E233系7000番台 / 71-000形 / 70-000形),此处仅作无依据兜底,
-    // 默认 E233系7000番台(多数+ODPT標記一致)。
-
-  ];
 
   function _resolveTrainIcon(lineId, operator, trainId, stationIndex, trainType, byOperator) {
     // Zero-fallback policy: operational context is never vehicle identity.
@@ -857,7 +574,7 @@
   "東武90000系": "../images/列车/東武鉄道/東武鉄道_90000系.png",
   "横浜市交通局3000形": "../images/列车/横浜市交通局/横浜市交通局_3000V形.png"
 };
-  // v4.3.973: 额外车型图标注册表——未被 LINE_ICONS/OPERATOR_ICONS/VEHICLE_DEPLOYMENTS 引用的变体资产（新干线各系变体等），
+  // Additional exact vehicle artwork registry for assets not otherwise keyed by explicit vehicle identity.
   // 一并注入反查索引，使别名/直接解析都能命中
   var EXTRA_VEHICLE_ICONS = {
     "E926系East-i": "../images/列车/JR東日本/JR東日本_E926形_East-i.png",
@@ -1208,10 +925,7 @@
   Object.keys(ASSET_LOCATOR_ONLY_NAMES).forEach(function(name) {
     delete VEHICLE_NAME_TO_ICON[name];
   });
-
-  // v4.3.975: 反推遍历改为通用递归收集——扫描所有含 icon 字段的表（LINE_ICONS/OPERATOR_ICONS/
-  // VEHICLE_DEPLOYMENTS/THROUGH_PREFIX_RULES/TRAIN_TYPE_ICON_RULES/EXTRA_VEHICLE_ICONS），
-  // 嵌套对象/数组里的图标路径也全部入表，不再遗漏规则表资产
+  // Build the reverse index only from explicit vehicle-identity asset registries.
   (function buildVehicleNameIndex() {
     var seen = {};
     function add(path) {
