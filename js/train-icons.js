@@ -434,30 +434,8 @@
           }
         }
       }
-    // v4.3.962: trainType+车号段规则表查表（替代原手写 if 块，行为等价）
-    var _tnPure = String(_tn || '').replace(/[^0-9]/g, '');
-    var _ttLower = String(trainType || '').toLowerCase();
-    var _ttShort = _ttLower.indexOf(':') >= 0 ? _ttLower.split(':').pop() : _ttLower;
-    var _opShort = String(operator || '').replace(/^odpt\.Operator:/, '');
-    // v4.3.962b: 统一 normalizeOp 调用（原两处重复，收口到一次）
-    var _normOp = (window.TransitConstants && typeof window.TransitConstants.normalizeOp === 'function') ? window.TransitConstants.normalizeOp : null;
-    if (_normOp) _opShort = _normOp(_opShort) || _opShort;
-    for (var _ti = 0; _ti < TRAIN_TYPE_ICON_RULES.length; _ti++) {
-        var _rule = TRAIN_TYPE_ICON_RULES[_ti];
-        if (_rule.lines && _rule.lines.indexOf(lineId) < 0) continue;
-        if (_rule.op && _rule.op !== _opShort) continue;
-        if (_rule.trainType && _ttShort.indexOf(_rule.trainType) < 0) continue;
-        if (_rule.regex && !_rule.regex.test(_tnPure)) continue;
-        return _rule.icon;
-      }
-      // v4.3.962: 线路级车型特例查表（奇偶交替/尾号区分等）
-      for (var _oi = 0; _oi < LINE_ICON_OVERRIDES.length; _oi++) {
-        var _ovr = LINE_ICON_OVERRIDES[_oi];
-        if (_ovr.lines && _ovr.lines.indexOf(lineId) < 0) continue;
-        if (_ovr.op && _ovr.op !== _opShort) continue;
-        var _ovIcon = _ovr.fn(trainId, _tn);
-        if (_ovIcon) return _ovIcon;
-      }
+    // trainType / train-number / line rules are operational hints, not vehicle identity.
+    // Keep their tables as reference metadata, but never emit concrete rolling stock here.
       // Vehicle identity policy: line/operator defaults are presentation metadata only.
       // They must never manufacture a concrete vehicle for UNKNOWN/NARROWED trains.
       // Concrete artwork is selected upstream from explicit vehicle/service evidence.
@@ -1672,10 +1650,8 @@ var LINE_ICON_CANONICAL_IDS = {
 };
 
 function _resolveTrainRuleDisplayName(lineId, operator, trainId, stationIndex, trainType, byOperator) {
-  if (!byOperator && LINE_ICON_CANONICAL_IDS[lineId]) {
-    var rec = CANONICAL_VEHICLES[LINE_ICON_CANONICAL_IDS[lineId]];
-    return rec ? rec.displayName : '';
-  }
+  // A line, operator, train type or train number pattern is not concrete vehicle evidence.
+  // Vehicle class is supplied only by explicit upstream evidence.
   return '';
 }
 
