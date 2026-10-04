@@ -78,6 +78,12 @@ assert(estimatorSource.includes('_bridgedOperationCtx.operationCode = _resolvedO
 assert(/at:\s*\(function\(\)\{ var d=new Date\(Date\.now\(\)\+9\*60\*60\*1000\)/.test(estimatorSource),
   'segmented operation evidence must receive JST service time, not UTC');
 
+const operationEvidenceSource = fs.readFileSync('data/timetables/train-operation-evidence.js','utf8');
+assert(operationEvidenceSource.includes('if (timed.length !== 1) return null;'),
+  'segmented operation evidence must remain unresolved when service time hits zero or multiple segments');
+assert(operationEvidenceSource.includes('if (hasTimedSegments)'),
+  'time-segmented operation evidence must not collapse back to an all-day identity');
+
 
 assert(estimatorSource.includes("Object.keys(_assignmentVehicles).length === 1"),
   'operation model evidence must require unanimous decisive providers');
