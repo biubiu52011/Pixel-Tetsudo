@@ -889,6 +889,23 @@
             // reuse that evidence without depending on the current display line.
             if (window.TrainVehicle && typeof window.TrainVehicle.resolve === "function") {
               try {
+                var _derivedVehicleEvidence = null;
+                if (!odptVehicleType && window.TrainOperationEvidence &&
+                    typeof window.TrainOperationEvidence.resolveRealtimeEvidence === "function") {
+                  var _now = new Date();
+                  var _serviceDate = _now.getFullYear() + "-" + String(_now.getMonth()+1).padStart(2,"0") + "-" + String(_now.getDate()).padStart(2,"0");
+                  _derivedVehicleEvidence = window.TrainOperationEvidence.resolveRealtimeEvidence(trainId, {
+                    lineId: lid,
+                    railway: railwayName,
+                    operator: trainOpShort,
+                    trainOwner: odptTrainOwner,
+                    trainNumber: trainId,
+                    serviceDate: _serviceDate
+                  });
+                }
+                var _derivedVehicleType = _derivedVehicleEvidence && _derivedVehicleEvidence.vehicleType
+                  ? _derivedVehicleEvidence.vehicleType
+                  : (_derivedVehicleEvidence && _derivedVehicleEvidence.vehicleCandidates || []).join(" / ");
                 var _rtVehicle = window.TrainVehicle.resolve({
                   lineId: lid,
                   operator: trainOpShort,
@@ -898,7 +915,8 @@
                   trainType: rawType,
                   destinationStation: destStations,
                   trainId: trainId,
-                  realtimeVehicleType: odptVehicleType
+                  realtimeVehicleType: odptVehicleType,
+                  realtimeDerivedVehicleType: _derivedVehicleType
                 });
                 positionData.vehicleResolution = _rtVehicle || null;
                 if (_rtVehicle) {
@@ -907,7 +925,7 @@
                   positionData.vehicleSource = _rtVehicle.source || "";
                   positionData.vehicleConfidence = _rtVehicle.confidence || "none";
                   var _rtEvidenceBacked = _rtVehicle.identityStatus === "EXACT" &&
-                    _rtVehicle.source === "realtime";
+                    (_rtVehicle.source === "realtime" || _rtVehicle.source === "realtime-derived");
                   positionData.vehicleIdentityStatus = _rtVehicle.identityStatus || "UNKNOWN";
                   positionData.vehicleIdentityReason = _rtVehicle.identityReason || "";
                   positionData.vehicleResolvedFromRealtime = _rtEvidenceBacked;
