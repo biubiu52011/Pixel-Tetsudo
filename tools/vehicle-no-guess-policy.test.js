@@ -112,6 +112,10 @@ assert(icons.resolveVehicleIcon('東急5080系', 'Meguro') === null,
   'Tokyu 5080 must not borrow 5000 renewal artwork');
 assert(icons.resolveVehicleIcon('E209系（京葉線）', 'Keiyo') === null,
   'ambiguous E209 Keiyo label must not manufacture 209-500 artwork');
+assert(icons.resolveVehicleIcon('東武800系', 'UnknownLine') === null,
+  'Tobu 800 must not borrow 8000-series artwork');
+assert(icons.resolveVehicleIcon('東急5050系4000番台', 'Toyoko') === null,
+  '5050-4000 must not borrow generic 5050 artwork without an exact asset mapping');
 assert(!/function _resolveVehicleIconBase[\\s\\S]*?VEHICLE_NAME_ALIASES\[/.test(source),
   'vehicle icon resolver reintroduced alias fallback');
 assert(!/function _resolveVehicleIconBase[\\s\\S]*?LINE_VEHICLE_OVERRIDES\[/.test(source),
