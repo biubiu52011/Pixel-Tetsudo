@@ -20,6 +20,15 @@
   // truth still comes from the current snapshot; this bridge only preserves
   // physical-train identity/vehicle evidence while timetable fallback takes over.
   var _CHAIN_EVIDENCE_TTL_MS = 3 * 60 * 1000;
+  function _vehicleEvidenceRank(p) {
+    if (!p) return 0;
+    var src = p.vehicleSource || (p.vehicleResolution && p.vehicleResolution.source) || "";
+    return p.vehicleResolvedFromRealtime === true ? 5
+      : p.vehicleResolvedFromRealtimeDerived === true ? 4
+      : src === "operation-assignment-provider" ? 3
+      : src === "odpt" ? 3
+      : src === "manual" ? 2 : 1;
+  }
   function _rememberChainVehicle(p) {
     if (!p || !p.runningChainId) return;
     var _identityExact = p.vehicleIdentityStatus === "EXACT" ||
@@ -29,10 +38,7 @@
     if (!_identityExact || !p.vehicleType) return;
     var _src = p.vehicleSource || (p.vehicleResolution && p.vehicleResolution.source) || "";
     var _conf = p.vehicleConfidence || (p.vehicleResolution && p.vehicleResolution.confidence) || "none";
-    // Preserve TrainVehicle source arbitration inside the running-chain cache:
-    // explicit realtime identity outranks canonical SQL/timetable assignment.
-    // Equal-rank conflicts keep the established identity to avoid oscillation.
-    var _incomingRank = p.vehicleResolvedFromRealtime === true ? 5 : (p.vehicleResolvedFromRealtimeDerived === true ? 4 : (_src === "operation-assignment-provider" ? 3 : (_src === "odpt" ? 3 : (_src === "manual" ? 2 : 1))));
+    var _incomingRank = _vehicleEvidenceRank(p);
     var _existing = _chainVehicleRegistry[p.runningChainId];
     if (_existing) {
       var _existingRank = _existing.evidenceRank || 0;
@@ -1077,27 +1083,30 @@
                 _chainsByTrainNumber[_tn][_ep.runningChainId] = true;
               });
             });
+            var _chainVehicleCandidates = {};
+            function _queueChainVehicle(p) {
+              if (!p || !p.runningChainId || !p.vehicleType) return;
+              var exact = p.vehicleIdentityStatus === "EXACT" ||
+                (p.vehicleResolution && p.vehicleResolution.identityStatus === "EXACT");
+              if (!exact) return;
+              var cid = p.runningChainId;
+              var current = _chainVehicleCandidates[cid];
+              if (!current || _vehicleEvidenceRank(p) > _vehicleEvidenceRank(current)) {
+                _chainVehicleCandidates[cid] = p;
+              }
+            }
             Object.keys(posMap).forEach(function(_vlid) {
               (posMap[_vlid] || []).forEach(function(_rp) {
                 if (!_rp) return;
-                // A realtime row may lack vehicleType while still having a
-                // unique timetable running chain. Bind chain identity first so
-                // canonical timetable/SQL EXACT evidence can later act as the
-                // vehicle fallback without synthesizing realtime position.
                 if (!_rp.runningChainId && _rp.trainNumber && _chainsByTrainNumber[String(_rp.trainNumber)]) {
                   var _chainIds = Object.keys(_chainsByTrainNumber[String(_rp.trainNumber)]);
                   if (_chainIds.length === 1) _rp.runningChainId = _chainIds[0];
                 }
-                // Only explicit realtime EXACT identity may seed the registry
-                // from a realtime row. Empty/unknown realtime identity never
-                // manufactures vehicle evidence.
-                if (_rp.vehicleResolvedFromRealtime === true || _rp.vehicleResolvedFromRealtimeDerived === true) _rememberChainVehicle(_rp);
+                _queueChainVehicle(_rp);
               });
             });
-            // Realtime rows without fromStation cannot provide position, but an
-            // explicit official vehicleType may still bind to a uniquely resolved
-            // timetable chain for the same train number. Never create a position
-            // from this evidence and never bind when chain identity is ambiguous.
+            // Positionless realtime rows may contribute vehicle identity only
+            // after a unique physical chain is known. They never create position.
             Object.keys(_realtimeEvidenceWithoutPosition).forEach(function(_evKey) {
               var _ev = _realtimeEvidenceWithoutPosition[_evKey];
               if (!_ev || !_ev.trainNumber || !_ev.vehicleType) return;
@@ -1105,30 +1114,23 @@
               var _evChainIds = Object.keys(_evChains);
               if (_evChainIds.length !== 1) return;
               var _evResolution = (window.TrainVehicle && typeof window.TrainVehicle.resolve === "function")
-                ? window.TrainVehicle.resolve({
-                    trainNumber: _ev.trainNumber,
-                    realtimeVehicleType: _ev.vehicleType
-                  }) : null;
-              if (!_evResolution || _evResolution.identityStatus !== "EXACT" ||
-                  _evResolution.source !== "realtime") return;
-              _rememberChainVehicle({
-                runningChainId: _evChainIds[0],
-                trainClass: _evResolution.name || "",
-                vehicleType: _evResolution.vehicleTypeStr || _ev.vehicleType,
-                vehicleIconPath: _evResolution.iconPath,
-                vehicleSource: _evResolution.source || "realtime",
-                vehicleConfidence: _evResolution.confidence || "high",
-                vehicleResolution: _evResolution,
-                vehicleIdentityStatus: _evResolution.identityStatus,
-                vehicleIdentityReason: _evResolution.identityReason || "",
-                vehicleResolvedFromRealtime: true
+                ? window.TrainVehicle.resolve({trainNumber:_ev.trainNumber,realtimeVehicleType:_ev.vehicleType}) : null;
+              if (!_evResolution || _evResolution.identityStatus !== "EXACT" || _evResolution.source !== "realtime") return;
+              _queueChainVehicle({
+                runningChainId:_evChainIds[0], trainClass:_evResolution.name||"",
+                vehicleType:_evResolution.vehicleTypeStr||_ev.vehicleType,
+                vehicleIconPath:_evResolution.iconPath, vehicleSource:_evResolution.source||"realtime",
+                vehicleConfidence:_evResolution.confidence||"high", vehicleResolution:_evResolution,
+                vehicleIdentityStatus:_evResolution.identityStatus,
+                vehicleIdentityReason:_evResolution.identityReason||"", vehicleResolvedFromRealtime:true
               });
             });
-            // Timetable/SQL exact identity is a parallel authoritative source.
-            // It may seed the same physical-chain registry when realtime carries
-            // no exact vehicle fact; source arbitration remains upstream.
             Object.keys(estimated).forEach(function(_vlid) {
-              (estimated[_vlid] || []).forEach(_rememberChainVehicle);
+              (estimated[_vlid] || []).forEach(_queueChainVehicle);
+            });
+            // One physical chain, one registry commit per fusion pass.
+            Object.keys(_chainVehicleCandidates).forEach(function(_cid) {
+              _rememberChainVehicle(_chainVehicleCandidates[_cid]);
             });
             // Timetable/SQL EXACT evidence has now seeded the registry.
             // Apply it to realtime-position rows on the same unique running
