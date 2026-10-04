@@ -12,6 +12,9 @@ assert(r&&r.operator==="Tobu"&&!r.vehicleType);
 r=hit(p,"57S","2026-10-03","TokyoMetro.Hanzomon");
 assert(r&&r.operator==="TokyoMetro"&&!r.vehicleType);
 assert.strictEqual(hit(p,"50T","2026-10-03","TokyoMetro.Ginza"),null);
+assert.strictEqual(hit(p,"050-001","2026-10-03","TokyoMetro.Hanzomon"),null);
+assert.strictEqual(hit(p,"057-102","2026-10-03","TokyoMetro.Hanzomon"),null);
+assert.strictEqual(hit(p,"026-081","2026-10-03","Denentoshi"),null);
 
 p=load("data/timetables/chiyoda-operation-evidence-2026.js");
 assert.strictEqual(hit(p,"12K","2026-10-03","TokyoMetro.Chiyoda").vehicleType,"JR東日本E233系2000番台");
