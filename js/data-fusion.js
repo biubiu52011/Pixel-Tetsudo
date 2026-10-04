@@ -934,6 +934,10 @@
                 }
               } catch(e) {}
             }
+            var _vehicleCoverage = getRealtimeVehicleCoverage(lid, positionData);
+            positionData.realtimeCoverageMode = _vehicleCoverage.mode;
+            positionData.realtimeVehicleCoverage = _vehicleCoverage.currentTrainCovered;
+            positionData.realtimeCoverageReason = _vehicleCoverage.reason;
             // v4.3.6xx: 双向直通列车处理
             // 1. 临海线的车（operator=TWR）开到JR区间了 → 在JR线路图上显示临海线车型
             // v4.3.939: 存车自己的 operator（渲染层判断直通车、按车籍选图标，治跨线"变身"）
@@ -980,6 +984,19 @@
 
       function hasAuthoritativeRealtime(lineId) {
         return getRealtimePositionPolicy(lineId).mode === "FULL";
+      }
+
+      function getRealtimeVehicleCoverage(lineId, position) {
+        var policy = getRealtimePositionPolicy(lineId);
+        var mode = policy.mode || "UNKNOWN";
+        if (!position || position.positionSource !== "realtime-api") {
+          return { mode: mode, currentTrainCovered: false, reason: "no-current-realtime-record" };
+        }
+        // A returned realtime row is authoritative evidence for that physical
+        // train even on HYBRID/COARSE/SEGMENTED lines. Coverage mode controls
+        // whether missing trains/segments may fall back; it never invalidates
+        // an actual source row.
+        return { mode: mode, currentTrainCovered: true, reason: "current-realtime-record" };
       }
 
       function mayUseTimetablePosition(lineId) {
@@ -1167,6 +1184,13 @@
               (estimated[_vlid] || []).forEach(function(_p) {
                 if (_p && _p.runningChainId) _activeChainIds[_p.runningChainId] = true;
               });
+            });
+            // Crossing a realtime coverage boundary must not make a physical
+            // train forget an already-confirmed vehicle. As long as the canonical
+            // running chain is still active (including timetable-only branch
+            // segments), refresh identity lifetime without manufacturing position.
+            Object.keys(_activeChainIds).forEach(function(_cid) {
+              if (_chainVehicleRegistry[_cid]) _chainVehicleRegistry[_cid].lastSeenAt = Date.now();
             });
             Object.keys(_chainVehicleRegistry).forEach(function(_cid) {
               var _cv = _chainVehicleRegistry[_cid];
