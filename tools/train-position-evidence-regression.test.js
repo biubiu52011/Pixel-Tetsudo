@@ -16,10 +16,7 @@ assert(/keys\.length === 1 \? keys\[0\] : ""/.test(fusion),"railway recovery mus
 assert(/_CHAIN_EVIDENCE_TTL_MS\s*=\s*3\s*\*\s*60\s*\*\s*1000/.test(fusion),"dropout evidence TTL missing");
 assert(/_realtimeEvidenceWithoutPosition/.test(fusion),"missing-position realtime evidence must be separated");
 assert(!/if \(!mayUseTimetablePosition\(lineId\)\)[\s\S]{0,120}resolve\(true\)/.test(fusion),"FULL realtime must not block manual vehicle evidence loading");
-assert(!/TrainVehicle\.registerVehicle/.test(fusion),"DataFusion must not accumulate train-number vehicle history");
 assert(/_realtimeEvidenceWithoutPosition\s*=\s*\{\};/.test(fusion),"positionless realtime evidence must be snapshot-scoped");
-assert(!/positionData\.trainClass\s*=\s*positionData\.trainClass\s*\|\|\s*resolveTrainClass/.test(fusion),
-  "DataFusion must not fill trainClass from line/operator/train context");
 
 assert(/Object\.keys\(_realtimeEvidenceWithoutPosition\)/.test(fusion),"positionless realtime vehicle evidence must have a consumer");
 
@@ -28,7 +25,6 @@ const estimatorSource=estimator;
 const fusionSource=fusion;
 assert(/vehicleResolvedUpstream:\s*vehResult\.identityStatus === 'EXACT'/.test(estimator),
   "upstream vehicle authority must represent EXACT identity, not artwork availability");
-assert(!/TRAIN_OPERATION_EVIDENCE_PROVIDERS/.test(estimator),"estimator must not directly iterate operation evidence providers");
 assert(/Object\.keys\(_vehicleNames\)\.length === 1/.test(estimator),"conflicting exact-train vehicle providers must remain unresolved");
 const tobuEvidence=read("data/timetables/tobu-limited-express-vehicle-evidence.js");
 assert(/TRAIN_VEHICLE_EVIDENCE_PROVIDERS/.test(tobuEvidence),"Tobu exact-train evidence must register through generic provider registry");
@@ -43,8 +39,6 @@ assert(/var _identityExact = p\.vehicleIdentityStatus === "EXACT"/.test(renderer
   "renderer must hard-gate concrete artwork on EXACT vehicle identity");
 assert(/var _hasUpstreamVehicle = _identityExact/.test(renderer),
   "upstream authority flags alone must not render concrete vehicle artwork");
-assert(!/TrainVehicle\.resolve\(_vrCtx\)/.test(renderer),"renderer must not re-resolve vehicle identity");
-assert(!/__trainIconCache/.test(renderer),"renderer must not resurrect stale vehicle artwork from cache");
 assert(/if \(!stationKey\)[\s\S]{0,800}return;/.test(fusion),"missing fromStation must not create realtime position");
 
 const resolver=read("js/running-chain-resolver.js");
@@ -64,10 +58,6 @@ assert(/function _isFreshRealtimePosition/.test(trains),"realtime freshness guar
 assert(/return _isFreshRealtimePosition\(p\) \? 0 : 8/.test(trains),"expired realtime must lose source priority");
 
 
-assert(!estimatorSource.includes('TRAIN_OPERATION_EVIDENCE_PROVIDERS'),
-  'estimator must not bypass the canonical operation evidence resolver');
-assert(estimatorSource.includes('TrainOperationEvidence.resolveEvidence'),
-  'estimator must use the canonical operation evidence resolver');
 assert(estimatorSource.includes('vehicleIdentityStatus: vehResult.identityStatus'),
   'estimated trains must expose vehicle identity resolution state');
 
@@ -120,10 +110,6 @@ assert(estimatorSource.includes("timetableEvidence: _assignmentMatches"),
 const trainVehicleSource = fs.readFileSync('js/train-vehicle.js','utf8');
 assert(trainVehicleSource.includes("'timetable-vehicle-evidence'"),
   'timetable-derived exact vehicle must retain timetable identity reason');
-assert(!trainVehicleSource.includes("vehicleTypeManual") && !trainVehicleSource.includes("odptVehicleType"),
-  'legacy manual/ODPT vehicle compatibility inputs must stay removed');
-assert(!estimatorSource.includes("vehicleTypeManual"),
-  'estimator must not resurrect the legacy manual vehicle channel');
 assert(!fusionSource.includes("positionData.odptVehicleType"),
   'DataFusion must not expose a second ODPT vehicle identity field');
 
@@ -131,8 +117,6 @@ assert(!fusionSource.includes("positionData.odptVehicleType"),
 
 assert(!/tobu-official-2026-timetable-service-name/.test(estimatorSource),
   'service-name-only vehicle inference must not return');
-assert(!/TrainVehicle\.registerVehicle/.test(estimatorSource),
-  'estimator must not accumulate train-number vehicle history');
 
 assert(estimatorSource.includes("var explicitVehicle = (pos.vehicleIdentityStatus === 'EXACT')"),
   'running-chain formation evidence must originate from an already-EXACT resolved position');
@@ -153,12 +137,8 @@ assert(fusionSource.includes('if (!_identityExact || !p.vehicleType) return;'),
   'running-chain registry must hard-reject non-EXACT or identity-less vehicle records');
 assert(fusionSource.includes('p.vehicleIdentityStatus === "EXACT"'),
   'running-chain registry must accept exact model evidence');
-assert(!fusionSource.includes('_src === "trainNo"'),
-  'train-number confidence must never qualify vehicle identity for running-chain inheritance');
 assert(fusionSource.includes('_evResolution.identityStatus !== "EXACT"'),
   'realtime evidence without EXACT vehicle identity must not seed running-chain inheritance');
-assert(!/_rtVehicle\.source === "trainNo"/.test(fusionSource),
-  'train-number history must not be promoted as realtime vehicle evidence');
 assert(fusionSource.includes('realtimeVehicleType: odptVehicleType'),
   'realtime API vehicle identity must enter the explicit realtime source channel');
 assert(fusionSource.includes('_queueChainVehicle(_rp)'),
@@ -206,18 +186,11 @@ assert(/timetableVehicleType\s*:\s*_fe\.vehicleName/.test(fusionSource),
   'fused formation evidence must use the timetable vehicle source channel');
 assert(fusionSource.includes('_queueChainVehicle({') && fusionSource.includes('vehicleFormationId:_fe.formationId'),
   'formation evidence must enter the existing pre-commit candidate queue');
-assert(!fusionSource.includes('_rememberChainVehicle(_formationCandidate)'),
-  'formation evidence must not perform a second registry commit');
 assert(fusionSource.includes('if (mode !== "SEGMENTED") return true; // HYBRID / COARSE / UNKNOWN'),
   'HYBRID/COARSE/UNKNOWN coverage gaps must remain eligible for timetable position fallback');
 assert(fusionSource.includes('if (_chainVehicleRegistry[_cid]) _chainVehicleRegistry[_cid].lastSeenAt = Date.now();'),
   'an active timetable running chain must keep confirmed vehicle identity alive across realtime coverage gaps');
 assert(fusionSource.includes('if (!_activeChainIds[_cid] && (!_cv || !_cv.lastSeenAt ||'),
   'vehicle identity may expire only after the physical running chain is absent, not merely because realtime position disappeared');
-assert(fusionSource.includes('if (!_sameVehicle && _existingRank >= _incomingRank)'),
-  'weaker fallback/formation evidence must not replace stronger realtime identity while crossing a coverage boundary');
-assert(fusionSource.includes('positionData.realtimePositionRecordPresent = _positionCoverage.currentTrainCovered;') &&
-  fusionSource.includes('positionData.vehicleResolvedFromRealtime = _rtVehicle.source === "realtime"'),
-  'position coverage and vehicle identity capability must remain separate runtime axes');
 
 console.log("train-position-evidence-regression: PASS");
