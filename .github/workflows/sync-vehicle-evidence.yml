@@ -15,19 +15,34 @@ concurrency:
 jobs:
   sync:
     runs-on: ubuntu-latest
+    env:
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
+      - name: Check sync credentials
+        id: credentials
+        run: |
+          if [ -z "$SUPABASE_URL" ] || [ -z "$SUPABASE_SERVICE_ROLE_KEY" ]; then
+            echo "::warning::Canonical evidence sync skipped: configure SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY repository secrets."
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          fi
       - name: Export canonical Supabase evidence
-        env:
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        if: steps.credentials.outputs.ready == 'true'
         run: node tools/export-vehicle-operation-evidence.js
       - name: Verify ambiguity policy
+        if: steps.credentials.outputs.ready == 'true'
         run: node tools/canonical-evidence-ambiguity.test.js
+      - name: Verify generated snapshot
+        if: steps.credentials.outputs.ready == 'true'
+        run: node tools/canonical-evidence-snapshot-guard.test.js
       - name: Commit snapshot only when changed
+        if: steps.credentials.outputs.ready == 'true'
         run: |
           if git diff --quiet -- data/timetables/vehicle-operation-evidence.json data/timetables/vehicle-operation-evidence-data.js; then
             echo "Canonical evidence snapshot already current."
