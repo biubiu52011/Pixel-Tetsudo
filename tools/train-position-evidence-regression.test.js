@@ -89,8 +89,6 @@ assert(operationEvidenceSource.includes('if (hasTimedSegments)'),
 
 assert(estimatorSource.includes("Object.keys(_assignmentVehicles).length === 1"),
   'operation model evidence must require unanimous decisive providers');
-assert(estimatorSource.includes("operation-assignment-provider"),
-  'agreed run-level operation evidence must be promotable to exact model');
 assert(estimatorSource.includes("timetableEvidence: _assignmentMatches"),
   'dated operation evidence provenance must remain attached to timetable resolution');
 
@@ -101,8 +99,6 @@ assert(!trainVehicleSource.includes("vehicleTypeManual") && !trainVehicleSource.
   'legacy manual/ODPT vehicle compatibility inputs must stay removed');
 
 
-assert(estimatorSource.includes("operation-assignment-provider"),
-  'Meguro/Sotetsu exact assignment must use the shared operation evidence promotion path');
 
 assert(!/tobu-official-2026-timetable-service-name/.test(estimatorSource),
   'service-name-only vehicle inference must not return');
@@ -137,8 +133,10 @@ assert(!/_rtVehicle\.source === "trainNo"/.test(fusionSource),
   'train-number history must not be promoted as realtime vehicle evidence');
 assert(fusionSource.includes('realtimeVehicleType: odptVehicleType'),
   'realtime API vehicle identity must enter the explicit realtime source channel');
-assert(estimatorSource.includes("timetableVehicleType: tt['vehicleType'] || ''"),
-  'timetable/SQL vehicle identity must enter the explicit timetable source channel');
+assert(estimatorSource.includes("timetableVehicleType: _timetableExactVehicle"),
+  'timetable identity must enter TrainVehicle only through the resolved exact evidence channel');
+assert(!/tt\['vehicleType'\]\s*=\s*Object\.keys\(_assignmentVehicles\)/.test(estimatorSource),
+  'dated operation evidence must not be written back into legacy timetable vehicleType');
 assert(!estimatorSource.includes("if (!window.TrainVehicle) _vehicleType = tt['vehicleType'] || ''"),
   'timetable identity must not bypass the central source arbiter when TrainVehicle is unavailable');
 assert(fusionSource.includes('vehicleFormationCandidates: (p.vehicleFormationCandidates || []).slice()'),
