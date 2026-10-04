@@ -93,6 +93,11 @@ assert(!/tobu-official-2026-timetable-service-name/.test(estimatorSource),
 assert(!/TrainVehicle\.registerVehicle/.test(estimatorSource),
   'estimator must not accumulate train-number vehicle history');
 
+assert(estimatorSource.includes("var explicitVehicle = (pos.vehicleIdentityStatus === 'EXACT')"),
+  'running-chain formation evidence must originate from an already-EXACT resolved position');
+assert(!estimatorSource.includes("var explicitVehicle = sourceTT['vehicleType'] || sourceTT['odpt:vehicleType'] || ''"),
+  'raw timetable vehicleType must not be re-promoted directly into running-chain evidence');
+
 
 
 assert(estimatorSource.includes("vehicleFormationId: Object.keys(_assignmentFormations).length === 1"),
@@ -104,8 +109,8 @@ assert(estimatorSource.includes("split(/\\s*\\/\\s*|\\s*,\\s*|\\s*\\|\\s*/)"),
 
 
 const fusionSource = fs.readFileSync('js/data-fusion.js','utf8');
-assert(fusionSource.includes('(!p.vehicleType && !p.vehicleIconPath)'),
-  'running-chain registry must accept exact vehicle identity even when no icon is resolved');
+assert(fusionSource.includes('if (!_identityExact || !p.vehicleType) return;'),
+  'running-chain registry must hard-reject non-EXACT or identity-less vehicle records');
 assert(fusionSource.includes('p.vehicleIdentityStatus === "EXACT"'),
   'running-chain registry must accept exact model evidence');
 assert(!fusionSource.includes('_src === "trainNo"'),
