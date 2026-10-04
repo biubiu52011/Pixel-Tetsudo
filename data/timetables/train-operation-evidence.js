@@ -58,17 +58,6 @@
       var tz = raw.match(/(?:^|[^0-9A-Z])(?:A|B)?\d*(\d{2})([KST])(?:R)?$/);
       if (tz) return tz[1] + tz[2];
     }
-    // Provider-proven public-number form already used by Den-en-toshi:
-    // 026-081 -> 26K, 057-102 -> 57S, 050-... -> 50T.
-    if (/Denentoshi|Hanzomon|田園都市|半蔵門/i.test([ctx.lineId,ctx.railway].join("|"))) {
-      var dt = raw.match(/^(\d{3})[-_]/);
-      if (dt) {
-        var n = parseInt(dt[1],10);
-        if (n>=1 && n<=26) return String(n).padStart(2,"0")+"K";
-        if (n>=51 && n<=77 && n%2===1) return String(n).padStart(2,"0")+"S";
-        if (n>=50 && n<=82 && n%2===0) return String(n).padStart(2,"0")+"T";
-      }
-    }
     return "";
   }
 
