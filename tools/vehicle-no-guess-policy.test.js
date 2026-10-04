@@ -88,6 +88,12 @@ assert(icons.resolveVehicleIcon('相鉄7000系', 'SotetsuMain') === null,
   'Sotetsu 7000 was substituted with another vehicle');
 assert(icons.resolveVehicleIcon('7000系（候補）', 'UnknownLine') === null,
   'candidate/base-name stripping manufactured artwork');
+assert(icons.resolveVehicleIcon('JR E231系', 'Tozai') === null,
+  'generic JR E231 alias manufactured an E231-800 identity');
+assert(icons.resolveVehicleIcon('JR E233系', 'Chiyoda') === null,
+  'generic JR E233 alias manufactured an E233-2000 identity');
+assert(icons.resolveVehicleIcon('209系2000番台', 'Keiyo') === null,
+  'single 209 subseries was collapsed into a 2000/2100 combined identity');
 assert(!/function _resolveVehicleIconBase[\\s\\S]*?VEHICLE_NAME_ALIASES\[/.test(source),
   'vehicle icon resolver reintroduced alias fallback');
 assert(!/function _resolveVehicleIconBase[\\s\\S]*?LINE_VEHICLE_OVERRIDES\[/.test(source),
