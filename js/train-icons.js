@@ -1404,13 +1404,13 @@ var CANONICAL_VEHICLES = {
   "jr-east-209-3000-hachiko-kawagoe": {
     displayName: "209系3000番台",
     iconName: "209系3000番台（八高・川越線）",
-    asset: "../images/列车/JR東日本/JR東日本_209系_3500番台.png",
+    asset: null,
     aliases: ["209系3000番台", "209系3000番台（八高・川越線）"]
   },
   "jr-east-209-3100-kawagoe": {
     displayName: "209系3100番台",
     iconName: "209系3100番台（川越線）",
-    asset: "../images/列车/JR東日本/JR東日本_209系_3500番台.png",
+    asset: null,
     aliases: ["209系3100番台", "209系3100番台（川越線）"]
   },
   "jr-east-209-2000-2100-boso-keiyo": {
