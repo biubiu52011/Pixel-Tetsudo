@@ -669,11 +669,7 @@ function _resolveTrainRuleDisplayName(lineId, operator, trainId, stationIndex, t
   }
 
   window.TrainIcons = {
-    getTrainIcon: getTrainIcon,
-    getTrainClass: getTrainClass,
     resolveVehicleArtwork: resolveVehicleArtwork,
-    // Temporary compatibility alias: same strict identity-only mapper.
-    resolveVehicleIcon: resolveVehicleArtwork,
     resolveVehicleDisplayName: resolveVehicleDisplayName,
     resolveCanonicalVehicle: resolveCanonicalVehicle,
     CANONICAL_VEHICLES: CANONICAL_VEHICLES,
