@@ -34,7 +34,7 @@ async function get(table, select, order) {
 }
 
 (async function(){
-  const [obs, policies, mappings] = await Promise.all([
+  const [obs, policies, mappings, coverage] = await Promise.all([
     get("runtime_vehicle_operation_evidence",
       "observation_id,service_date,operator,network_key,operation_code,valid_from_time,valid_to_time,vehicle_type,formation_ids,ambiguity_group,observed_date,evidence_grade,source_url,sql_evidence_role",
       "service_date.asc,operator.asc,network_key.asc,operation_code.asc,observation_id.asc"),
@@ -43,9 +43,30 @@ async function get(table, select, order) {
       "network_key.asc"),
     get("train_operation_mappings",
       "effective_from,network_key,train_number,operation_code",
-      "effective_from.asc,network_key.asc,operation_code.asc,train_number.asc")
+      "effective_from.asc,network_key.asc,operation_code.asc,train_number.asc"),
+    get("runtime_vehicle_network_coverage",
+      "network_key,coverage_status,operation_evidence_rows,latest_service_date,realtime_api_available,realtime_vehicle_identity_status,sql_evidence_role,effective_coverage_status",
+      "network_key.asc")
   ]);
   const pm = Object.fromEntries(policies.map(p=>[p.network_key,p]));
+  const cm = Object.fromEntries(coverage.map(c=>[c.network_key,c]));
+  for (const p of policies) {
+    const c = cm[p.network_key];
+    if (!c) throw new Error("Missing canonical network coverage for "+p.network_key);
+    if (c.realtime_api_available !== p.realtime_api_available ||
+        c.realtime_vehicle_identity_status !== p.realtime_vehicle_identity_status ||
+        c.sql_evidence_role !== p.sql_evidence_role) {
+      throw new Error("Network coverage policy drift for "+p.network_key);
+    }
+    if (p.realtime_api_available === true &&
+        p.realtime_vehicle_identity_status === "unknown" &&
+        c.effective_coverage_status === "active") {
+      throw new Error("Unverified realtime vehicle identity cannot produce active coverage for "+p.network_key);
+    }
+  }
+  for (const c of coverage) {
+    if (!pm[c.network_key]) throw new Error("Orphan canonical network coverage for "+c.network_key);
+  }
   // train_operation_mappings.effective_from is a validity boundary, not a
   // service date. For each evidence row, use the newest explicit mapping set
   // whose effective_from is on or before that service date. Never infer across
