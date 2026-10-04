@@ -21,14 +21,14 @@
   // physical-train identity/vehicle evidence while timetable fallback takes over.
   var _CHAIN_EVIDENCE_TTL_MS = 3 * 60 * 1000;
   function _rememberChainVehicle(p) {
-    if (!p || !p.runningChainId || (!p.vehicleType && !p.vehicleIconPath)) return;
-    var _src = p.vehicleSource || (p.vehicleResolution && p.vehicleResolution.source) || "";
-    var _conf = p.vehicleConfidence || (p.vehicleResolution && p.vehicleResolution.confidence) || "none";
+    if (!p || !p.runningChainId) return;
     var _identityExact = p.vehicleIdentityStatus === "EXACT" ||
       (p.vehicleResolution && p.vehicleResolution.identityStatus === "EXACT");
-    var _realtimeExact = p.vehicleResolvedFromRealtime === true && _identityExact;
-    var _eligible = _identityExact || _realtimeExact;
-    if (!_eligible) return;
+    // Structural gate: a chain registry may contain only an already-EXACT vehicle
+    // identity. An icon path, confidence label or realtime flag can never qualify it.
+    if (!_identityExact || !p.vehicleType) return;
+    var _src = p.vehicleSource || (p.vehicleResolution && p.vehicleResolution.source) || "";
+    var _conf = p.vehicleConfidence || (p.vehicleResolution && p.vehicleResolution.confidence) || "none";
     var _incomingRank = p.vehicleResolvedFromRealtime === true ? 3 : (_src === "operation-assignment-provider" ? 3 : (_src === "odpt" ? 3 : (_src === "manual" ? 2 : 1)));
     var _existing = _chainVehicleRegistry[p.runningChainId];
     if (_existing) {
@@ -1105,6 +1105,8 @@
                     _p.formationId = _fe.formationId;
                     _p.formationServiceDate = _fe.serviceDate;
                     _p.vehicleResolution = _fe;
+                    _p.vehicleIdentityStatus = _fe.identityStatus || "EXACT";
+                    _p.vehicleIdentityReason = _fe.identityReason || "dated-running-chain-vehicle-evidence";
                   }
                 }
               });
