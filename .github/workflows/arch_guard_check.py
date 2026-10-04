@@ -69,6 +69,65 @@ def main():
     except Exception:
         new_errors.append('CANONICAL_IDENTITY_FILE_UNREADABLE data/api/odpt-unified.js')
 
+    # Vehicle identity architecture invariants.
+    # These are release-blocking architecture boundaries, not ordinary regression
+    # expectations. Do not weaken them to make a feature/test pass.
+    def _read_arch(rel):
+        try:
+            with open(os.path.join(REPO_ROOT, rel), 'r', encoding='utf-8') as f:
+                return f.read()
+        except Exception:
+            new_errors.append('ARCH_FILE_UNREADABLE %s' % rel)
+            return ''
+
+    fusion_src = _read_arch('js/data-fusion.js')
+    estimator_src = _read_arch('js/train-position-estimator.js')
+    renderer_src = _read_arch('js/trains-render.js')
+    vehicle_src = _read_arch('js/train-vehicle.js')
+    evidence_src = _read_arch('data/timetables/train-operation-evidence.js')
+
+    # VEHICLE-001/002: one final vehicle authority and one canonical evidence resolver.
+    if 'TrainOperationEvidence.resolveEvidence' not in estimator_src:
+        new_errors.append('VEHICLE-002 CANONICAL_EVIDENCE_RESOLVER_BYPASSED')
+    if 'TRAIN_OPERATION_EVIDENCE_PROVIDERS' in estimator_src or 'TRAIN_OPERATION_EVIDENCE_PROVIDERS' in fusion_src:
+        new_errors.append('VEHICLE-002 DIRECT_PROVIDER_TRAVERSAL_OUTSIDE_CANONICAL_RESOLVER')
+    if 'structuralVehicleType' in vehicle_src or 'structuralVehicleType' in fusion_src or 'structuralVehicleType' in estimator_src:
+        new_errors.append('VEHICLE-002 STRUCTURAL_IDENTITY_DIRECT_INJECTION')
+
+    # VEHICLE-003: renderer consumes resolved identity only.
+    if 'TrainVehicle.resolve(_vrCtx)' in renderer_src:
+        new_errors.append('VEHICLE-003 RENDERER_VEHICLE_RERESOLUTION')
+    if '__trainIconCache' in renderer_src:
+        new_errors.append('VEHICLE-003 RENDERER_IDENTITY_CACHE')
+
+    # VEHICLE-004: one running-chain registry commit path.
+    if fusion_src.count('_rememberChainVehicle(') != 2:
+        new_errors.append('VEHICLE-004 RUNNING_CHAIN_REGISTRY_COMMIT_PATH_COUNT=%d' % fusion_src.count('_rememberChainVehicle('))
+    if '_rememberChainVehicle(_formationCandidate)' in fusion_src:
+        new_errors.append('VEHICLE-004 FORMATION_SECOND_REGISTRY_COMMIT')
+
+    # VEHICLE-005: operational context/artwork must never manufacture vehicle identity.
+    forbidden_vehicle_tokens = (
+        'TrainVehicle.registerVehicle',
+        '_rtVehicle.source === "trainNo"',
+        'positionData.trainClass = positionData.trainClass || resolveTrainClass',
+    )
+    for token in forbidden_vehicle_tokens:
+        if token in fusion_src or token in estimator_src:
+            new_errors.append('VEHICLE-005 FORBIDDEN_IDENTITY_INFERENCE %s' % token)
+    for token in ('vehicleTypeManual', 'odptVehicleType', 'structuralVehicleType'):
+        if token in vehicle_src:
+            new_errors.append('VEHICLE-005 LEGACY_DIRECT_VEHICLE_INPUT %s' % token)
+
+    # VEHICLE-006/007: position coverage is independent from vehicle identity and
+    # weaker fallback evidence cannot replace stronger realtime identity.
+    if 'realtimePositionRecordPresent' not in fusion_src or 'vehicleResolvedFromRealtime' not in fusion_src:
+        new_errors.append('VEHICLE-006 POSITION_IDENTITY_AXES_NOT_SEPARATE')
+    if 'if (!_sameVehicle && _existingRank >= _incomingRank)' not in fusion_src:
+        new_errors.append('VEHICLE-007 STRONGER_CHAIN_IDENTITY_PROTECTION_MISSING')
+    if 'p.vehicleResolvedFromRealtime === true || src === "realtime" ? 5' not in fusion_src or 'p.vehicleResolvedFromRealtimeDerived === true || src === "realtime-derived" ? 4' not in fusion_src:
+        new_errors.append('VEHICLE-007 REALTIME_SOURCE_PRIORITY_MISSING')
+
     # Forbidden files
     for dp, _, fns in os.walk(REPO_ROOT):
         if any(d in dp for d in SKIP): continue
