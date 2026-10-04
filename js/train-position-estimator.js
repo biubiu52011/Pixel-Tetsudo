@@ -647,6 +647,17 @@
           });
           var _timetableExactVehicle = Object.keys(_assignmentVehicles).length === 1
             ? Object.keys(_assignmentVehicles)[0] : '';
+          // Operation/formation providers belong to the timetable evidence channel.
+          // Preserve ambiguity only when all model-bearing providers agree on the
+          // same candidate set; never choose the first provider as a hidden fallback.
+          var _timetableVehicleInput = _timetableExactVehicle;
+          if (!_timetableVehicleInput && _assignmentCandidateSets.length) {
+            var _candidateKey = _assignmentCandidateSets[0].filter(Boolean).slice().sort().join(' / ');
+            var _candidateSetsAgree = _assignmentCandidateSets.every(function(set) {
+              return set.filter(Boolean).slice().sort().join(' / ') === _candidateKey;
+            });
+            if (_candidateSetsAgree) _timetableVehicleInput = _candidateKey;
+          }
           var vehCtx = {
             lineId: lineId,
             operator: line.operator,
@@ -656,9 +667,8 @@
             stationIndex: currentStationIndex,
             trainType: tt['odpt:trainType'],
             destinationStation: destinationStationUrn || tt['odpt:destinationStation'] || '',
-            timetableVehicleType: _timetableExactVehicle,
+            timetableVehicleType: _timetableVehicleInput,
             timetableEvidence: _assignmentMatches,
-            operationVehicleCandidates: _assignmentCandidateSets.length ? _assignmentCandidateSets[0] : [],
             trainId: lineId + '_' + trainNumber + '_' + currentStationIndex
           };
           var vehResult = (window.TrainVehicle && typeof window.TrainVehicle.resolve === 'function')
@@ -703,7 +713,7 @@
             vehicleConfidence: vehResult.confidence || 'none',
             vehicleResolution: vehResult,
             vehicleResolvedUpstream: vehResult.identityStatus === 'EXACT',
-            timetableVehicleType: _timetableExactVehicle
+            timetableVehicleType: _timetableVehicleInput
           });
         }
       }
