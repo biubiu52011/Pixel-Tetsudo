@@ -63,6 +63,21 @@ assert(icons.resolveVehicleDisplayName('都営5300形', 'Asakusa') !== '5500形'
 assert(icons.resolveVehicleDisplayName('小田急50000形', 'Odawara') !== '70000形',
   'VSE was rewritten as GSE');
 
+const serviceOnlyNames = [
+  'のぞみ','はやぶさ','はやて','こまち','かがやき','とき','はくたか',
+  'あさま','つるぎ','つばさ','やまびこ','つばめ','かもめ','ドクターイエロー'
+];
+serviceOnlyNames.forEach((name) => {
+  assert(!Object.prototype.hasOwnProperty.call(icons.VEHICLE_NAME_ALIASES, name),
+    'service name reintroduced as vehicle alias: ' + name);
+  assert(icons.resolveVehicleDisplayName(name, '') === name,
+    'service name was rewritten as vehicle identity: ' + name);
+});
+assert(!source.includes('collectIcon(VEHICLE_DEPLOYMENTS)'), 'deployment rules seeded vehicle identity index');
+assert(!source.includes('collectIcon(TRAIN_TYPE_ICON_RULES)'), 'train-type rules seeded vehicle identity index');
+assert(!source.includes('collectIcon(LINE_ICONS)'), 'line defaults seeded vehicle identity index');
+assert(!source.includes('collectIcon(OPERATOR_ICONS)'), 'operator defaults seeded vehicle identity index');
+
 // Zero-fallback contract: known wrong/retired identities must never be replaced
 // by a different current vehicle merely to obtain artwork.
 assert(icons.resolveVehicleIcon('都営5300形', 'Asakusa') === null,
