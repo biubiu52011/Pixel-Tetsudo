@@ -36,5 +36,13 @@ assert(!source.includes('return LINE_ICONS[lineId]'), 'line fallback code reintr
 assert(!source.includes('return OPERATOR_ICONS[opKey]'), 'operator fallback code reintroduced');
 assert(!source.includes('_poolPickByIcon'), 'fleet hash picker reintroduced');
 assert(!source.includes('VEHICLE_FLEET_WEIGHTS'), 'fleet-ratio selector reintroduced');
+assert(!source.includes('return _rule.icon'), 'train type/number rule leaked a concrete icon');
+assert(!source.includes('return _ovIcon'), 'line override leaked a concrete icon');
+assert(!/function _resolveTrainRuleDisplayName[\\s\\S]*?LINE_ICON_CANONICAL_IDS\[lineId\]/.test(source),
+  'line canonical id leaked a concrete trainClass');
+assert(icons.getTrainClass('Yamanote', 'JR-East', 'unknown', 0, '', false) === '',
+  'UNKNOWN train leaked a line-derived trainClass');
+assert(icons.getTrainIcon('Chiyoda', 'TokyoMetro', '1234', 0, 'LimitedExpress', false) === null,
+  'trainType-only rule leaked a concrete vehicle');
 
 console.log('vehicle no-guess policy: PASS');
