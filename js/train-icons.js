@@ -1526,10 +1526,8 @@ function _resolveTrainRuleDisplayName(lineId, operator, trainId, stationIndex, t
     resolveVehicleDisplayName: resolveVehicleDisplayName,
     resolveCanonicalVehicle: resolveCanonicalVehicle,
     CANONICAL_VEHICLES: CANONICAL_VEHICLES,
-    VEHICLE_NAME_TO_ICON: VEHICLE_NAME_TO_ICON,
-    LINE_ICONS: LINE_ICONS,
-    OPERATOR_ICONS: OPERATOR_ICONS
+    VEHICLE_NAME_TO_ICON: VEHICLE_NAME_TO_ICON
   };
 
-  console.debug("[TrainIcons] initialized with", Object.keys(LINE_ICONS).length, "line icons and", Object.keys(OPERATOR_ICONS).length, "operator defaults");
+  console.debug("[TrainIcons] initialized with zero-fallback vehicle identity policy");
 })();
