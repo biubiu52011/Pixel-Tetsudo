@@ -172,8 +172,12 @@ assert(estimatorSource.includes("timetableVehicleType: _timetableVehicleInput"),
   'timetable identity must enter TrainVehicle only through the unified timetable evidence channel');
 assert(!estimatorSource.includes("operationVehicleCandidates:"),
   'operation candidates must not enter TrainVehicle as a third vehicle source');
-assert(estimatorSource.includes("var _candidateSetsAgree = _assignmentCandidateSets.every"),
-  'ambiguous timetable candidates must require provider agreement before entering the timetable channel');
+assert(!estimatorSource.includes("_candidateSetsAgree"),
+  'estimator must not duplicate candidate agreement arbitration');
+assert(operationEvidenceSource.includes('if (exactKeys.length > 1) return null;'),
+  'canonical resolver must keep conflicting exact vehicle identities unresolved');
+assert(operationEvidenceSource.includes('first.vehicleCandidates = Object.keys(candidates);'),
+  'candidate-only evidence must remain candidate-only in the canonical resolver');
 assert(!/tt\['vehicleType'\]\s*=\s*Object\.keys\(_assignmentVehicles\)/.test(estimatorSource),
   'dated operation evidence must not be written back into legacy timetable vehicleType');
 assert(!estimatorSource.includes("if (!window.TrainVehicle) _vehicleType = tt['vehicleType'] || ''"),
