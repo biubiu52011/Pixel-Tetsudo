@@ -98,6 +98,10 @@ assert(icons.resolveVehicleIcon('209系3000番台', 'Hachiko') === null,
   '209-3000 must not borrow 209-3500 artwork');
 assert(icons.resolveVehicleIcon('209系3100番台', 'Kawagoe') === null,
   '209-3100 must not borrow 209-3500 artwork');
+assert(icons.resolveVehicleIcon('N700系7000番台', 'UnknownLine') === null,
+  'N700-7000 must not borrow JR Kyushu 800-series artwork');
+assert(icons.resolveVehicleIcon('AE100形', 'UnknownLine') === null,
+  'retired AE100 must not borrow AE-series artwork');
 assert(!/function _resolveVehicleIconBase[\\s\\S]*?VEHICLE_NAME_ALIASES\[/.test(source),
   'vehicle icon resolver reintroduced alias fallback');
 assert(!/function _resolveVehicleIconBase[\\s\\S]*?LINE_VEHICLE_OVERRIDES\[/.test(source),
