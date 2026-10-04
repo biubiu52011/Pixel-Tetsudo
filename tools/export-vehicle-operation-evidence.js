@@ -19,7 +19,8 @@ if (!base || !key) {
 }
 
 const RUNTIME_NETWORK_KEYS = {
-  "tokyo-monorail": "TokyoMonorail"
+  "tokyo-monorail": "TokyoMonorail",
+  "tsukuba-express": "TsukubaExpress"
 };
 
 function normalizeNetworkKey(networkKey) {
@@ -27,14 +28,21 @@ function normalizeNetworkKey(networkKey) {
 }
 
 async function get(table, select, order) {
-  const url = base + "/rest/v1/" + table + "?select=" + encodeURIComponent(select) + (order ? "&order=" + encodeURIComponent(order) : "");
-  const res = await fetch(url, {headers:{apikey:key,Authorization:"Bearer "+key}});
-  if (!res.ok) throw new Error(table+" export failed: "+res.status+" "+await res.text());
-  return res.json();
+  const pageSize = 1000;
+  let from = 0, rows = [];
+  for (;;) {
+    const url = base + "/rest/v1/" + table + "?select=" + encodeURIComponent(select) + (order ? "&order=" + encodeURIComponent(order) : "");
+    const res = await fetch(url, {headers:{apikey:key,Authorization:"Bearer "+key,Range:from+"-"+(from+pageSize-1)}});
+    if (!res.ok) throw new Error(table+" export failed: "+res.status+" "+await res.text());
+    const page = await res.json();
+    rows = rows.concat(page);
+    if (page.length < pageSize) return rows;
+    from += pageSize;
+  }
 }
 
 (async function(){
-  const [obs, policies, mappings, coverage] = await Promise.all([
+  const [obs, policies, mappings, coverage, inventory] = await Promise.all([
     get("runtime_vehicle_operation_evidence",
       "observation_id,service_date,operator,network_key,operation_code,valid_from_time,valid_to_time,vehicle_type,formation_ids,ambiguity_group,observed_date,evidence_grade,source_url,sql_evidence_role",
       "service_date.asc,operator.asc,network_key.asc,operation_code.asc,observation_id.asc"),
@@ -46,7 +54,10 @@ async function get(table, select, order) {
       "effective_from.asc,network_key.asc,operation_code.asc,train_number.asc"),
     get("runtime_vehicle_network_coverage",
       "network_key,coverage_status,operation_evidence_rows,latest_service_date,realtime_api_available,realtime_vehicle_identity_status,sql_evidence_role,effective_coverage_status",
-      "network_key.asc")
+      "network_key.asc"),
+    get("runtime_vehicle_evidence_inventory",
+      "source_network_key,canonical_network_key,alias_scope,evidence_kind,evidence_rows,exact_rows,narrowed_rows,min_date,max_date",
+      "canonical_network_key.asc,evidence_kind.asc,source_network_key.asc")
   ]);
   const pm = Object.fromEntries(policies.map(p=>[p.network_key,p]));
   const cm = Object.fromEntries(coverage.map(c=>[c.network_key,c]));
@@ -115,7 +126,10 @@ async function get(table, select, order) {
       realtimeVehicleIdentityStatus:p.realtime_vehicle_identity_status||"unknown"
     };
   });
-  const json={schemaVersion:2,generatedFrom:"Supabase canonical evidence tables",records};
+  const inventoryNetworks = [...new Set(inventory.map(r=>r.canonical_network_key))];
+  if (!inventoryNetworks.length) throw new Error("Canonical vehicle evidence inventory is empty");
+  const json={schemaVersion:3,generatedFrom:"Supabase canonical evidence tables",records,
+    evidenceInventory:{networkCount:inventoryNetworks.length,networks:inventoryNetworks,rows:inventory}};
   const root=path.join(__dirname,"..","data","timetables");
   fs.writeFileSync(path.join(root,"vehicle-operation-evidence.json"),JSON.stringify(json,null,2)+"\n");
   fs.writeFileSync(path.join(root,"vehicle-operation-evidence-data.js"),
