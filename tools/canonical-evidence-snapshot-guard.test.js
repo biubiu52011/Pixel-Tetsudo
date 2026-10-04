@@ -14,6 +14,17 @@ assert.strictEqual(snapshot.schemaVersion, 3,
 
 assert.equal(snapshot.generatedFrom, "Supabase canonical evidence tables");
 assert(Array.isArray(snapshot.records), "snapshot records must be an array");
+assert(Array.isArray(snapshot.datedRecords), "snapshot datedRecords must be an array");
+assert(snapshot.datedRecords.length >= 300, "canonical dated evidence unexpectedly incomplete");
+for (const kind of ["formation_assignment","train_date_rule","operation_date_rule","train_observation"]) {
+  assert(snapshot.datedRecords.some(r=>r.evidenceKind===kind), "dated evidence missing "+kind);
+}
+for (const [i,r] of snapshot.datedRecords.entries()) {
+  assert(r.validDate && r.networkKey && r.vehicleType, "dated record "+i+" missing explicit date/network/vehicle identity");
+  assert(r.operationCode || r.trainNumber, "dated record "+i+" must have operationCode or trainNumber");
+  assert(["A","B","C","D"].includes(r.grade), "dated record "+i+" missing evidence grade");
+  assert(r.sourceUrl, "dated record "+i+" missing traceable source URL");
+}
 assert(snapshot.records.length > 0, "snapshot must not be empty");
 assert(snapshot.records.some(r => r.networkKey === "TokyoMonorail"),
   "snapshot must retain TokyoMonorail canonical evidence");
@@ -61,5 +72,7 @@ vm.createContext(sandbox);
 vm.runInContext(fs.readFileSync(jsPath,"utf8"),sandbox);
 const jsRecords=JSON.parse(JSON.stringify(sandbox.window.VEHICLE_OPERATION_EVIDENCE));
 assert.deepStrictEqual(jsRecords,snapshot.records,"JSON and browser JS snapshots must match exactly");
+const jsDated=JSON.parse(JSON.stringify(sandbox.window.VEHICLE_DATED_EVIDENCE));
+assert.deepStrictEqual(jsDated,snapshot.datedRecords,"JSON and browser JS dated snapshots must match exactly");
 
 console.log("canonical evidence snapshot guard: PASS ("+snapshot.records.length+" records)");
