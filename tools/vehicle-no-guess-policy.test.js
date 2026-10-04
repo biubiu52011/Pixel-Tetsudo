@@ -116,6 +116,10 @@ assert(icons.resolveVehicleIcon('東武800系', 'UnknownLine') === null,
   'Tobu 800 must not borrow 8000-series artwork');
 assert(icons.resolveVehicleIcon('東急5050系4000番台', 'Toyoko') === null,
   '5050-4000 must not borrow generic 5050 artwork without an exact asset mapping');
+assert(icons.resolveVehicleIcon('1000形（別）', 'UnknownLine') === null,
+  'gallery variant labels must not act as exact vehicle identities');
+assert(icons.resolveVehicleIcon('toky5500', 'Asakusa') === null,
+  'internal asset locator codes must not act as vehicle identities');
 assert(!/function _resolveVehicleIconBase[\\s\\S]*?VEHICLE_NAME_ALIASES\[/.test(source),
   'vehicle icon resolver reintroduced alias fallback');
 assert(!/function _resolveVehicleIconBase[\\s\\S]*?LINE_VEHICLE_OVERRIDES\[/.test(source),
