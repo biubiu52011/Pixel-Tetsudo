@@ -410,39 +410,9 @@
   ];
 
   function _resolveTrainIcon(lineId, operator, trainId, stationIndex, trainType, byOperator) {
-    try {
-      // 直通列车：车号前缀/后缀规则（原有逻辑保留）
-      var _tp = String(trainId || "").split("_");
-      var _tn = _tp.length >= 2 ? _tp[_tp.length - 2] : _tp[0];
-      if (THROUGH_PREFIX_RULES[lineId]) {
-        var _prules = THROUGH_PREFIX_RULES[lineId];
-        for (var _pi = 0; _pi < _prules.length; _pi++) {
-          var _prule = _prules[_pi];
-          if (_tn && _prule.prefix && _tn.length >= _prule.prefix.length &&
-              _tn.slice(0, _prule.prefix.length) === _prule.prefix) {
-            return _prule.icon;
-          }
-        }
-      }
-      if (THROUGH_SUFFIX_RULES[lineId]) {
-        var _rules = THROUGH_SUFFIX_RULES[lineId];
-        for (var _ri = 0; _ri < _rules.length; _ri++) {
-          var _rule = _rules[_ri];
-          if (_tn && _rule.suffix && _tn.length >= _rule.suffix.length &&
-              _tn.slice(_tn.length - _rule.suffix.length) === _rule.suffix) {
-            return _rule.icon;
-          }
-        }
-      }
-    // trainType / train-number / line rules are operational hints, not vehicle identity.
-    // Keep their tables as reference metadata, but never emit concrete rolling stock here.
-      // Vehicle identity policy: line/operator defaults are presentation metadata only.
-      // They must never manufacture a concrete vehicle for UNKNOWN/NARROWED trains.
-      // Concrete artwork is selected upstream from explicit vehicle/service evidence.
-      return null;
-    } catch(e) {
-      return null;
-    }
+    // Zero-fallback policy: operational context is never vehicle identity.
+    // Concrete vehicle artwork must come from explicit upstream vehicle evidence.
+    return null;
   }
 
   function getTrainIcon(lineId, operator, trainId, stationIndex, trainType, byOperator) {
