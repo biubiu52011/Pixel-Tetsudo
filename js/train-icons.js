@@ -458,16 +458,9 @@
         var _ovIcon = _ovr.fn(trainId, _tn);
         if (_ovIcon) return _ovIcon;
       }
-      // v4.3.939: 直通车(byOperator)不按当前线兜底，用车籍 operator 默认——治跨线"变身"
-      // （同一趟车进不同线路视图用同一张图，不随当前显示线变）
-      if (!byOperator && LINE_ICONS[lineId]) return LINE_ICONS[lineId];
-
-      // Fallback to operator default
-      var opKey = operator;
-      if (_normOp) opKey = _normOp(operator);
-      if (OPERATOR_ICONS[opKey]) return OPERATOR_ICONS[opKey];
-
-      // Unknown vehicle identity must remain unknown; never impersonate JR rolling stock.
+      // Vehicle identity policy: line/operator defaults are presentation metadata only.
+      // They must never manufacture a concrete vehicle for UNKNOWN/NARROWED trains.
+      // Concrete artwork is selected upstream from explicit vehicle/service evidence.
       return null;
     } catch(e) {
       return null;
@@ -2249,25 +2242,10 @@ TOBU_LINE_IDS.forEach(function(lineId) {
 
   // v4.3.964: 三层查找——精确匹配 → 别名表 → 去括注基础名匹配
   
-  // v4.3.1025: 编成/涂装池命中——图标名在 FLEET_ICON_POOLS 中时按候选串稳定取图
-  function _poolPickByIcon(icon, seedStr) {
-    if (!icon) return null;
-    for (var _pk in FLEET_ICON_POOLS) {
-      var _pp = FLEET_ICON_POOLS[_pk];
-      if (_pp.indexOf(icon) >= 0) {
-        if (_pp.length < 2) return icon;
-        var _s = String(seedStr || _pk);
-        var _h = 0;
-        for (var _i = 0; _i < _s.length; _i++) _h = (_h * 31 + _s.charCodeAt(_i)) >>> 0;
-        return _pp[_h % _pp.length];
-      }
-    }
-    return icon;
-  }
-
+  // Fleet/livery pools are asset catalogs only. A confirmed vehicle type does not
+  // prove a concrete formation or livery, so never hash-pick one at runtime.
   function resolveVehicleIcon(candidatesStr, lineId) {
-    var _raw = _resolveVehicleIconBase(candidatesStr, lineId);
-    return _poolPickByIcon(_raw, candidatesStr);
+    return _resolveVehicleIconBase(candidatesStr, lineId);
   }
   function _resolveVehicleIconBase(candidatesStr, lineId) {
     if (!candidatesStr) return null;
