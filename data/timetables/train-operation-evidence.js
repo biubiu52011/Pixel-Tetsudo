@@ -257,30 +257,72 @@
   // providers in priority order. No parallel realtime resolver is maintained.
   function resolveEvidence(trainNumber, ctx, mode) {
     mode = mode || "fallback";
-    var allowed = mode === "realtime-derived"
-      ? {"canonical-vehicle-family-rules":true}
-      : {"canonical-vehicle-family-rules":true,
-         "canonical-dated-vehicle-evidence":true,
-         "canonical-vehicle-operation-evidence":true};
-    var hits = [];
+    var familyHit = null;
+    var runHits = [];
     for (var i = 0; i < providers.length; i++) {
       var provider = providers[i];
-      if (!provider || !allowed[provider.id]) continue;
+      if (!provider) continue;
+      var isFamily = provider.id === "canonical-vehicle-family-rules";
+      var isRunEvidence = provider.id === "canonical-dated-vehicle-evidence" ||
+        provider.id === "canonical-vehicle-operation-evidence";
+      if (!isFamily && (mode === "realtime-derived" || !isRunEvidence)) continue;
       var rec = normalizeEvidence(provider, provider.resolveEvidence(trainNumber, ctx || {}));
-      if (rec) hits.push(rec);
+      if (!rec) continue;
+      if (isFamily) familyHit = rec;
+      else runHits.push(rec);
     }
-    if (!hits.length) return null;
-    // Exact identities must agree. Candidate-only evidence may narrow but never
-    // override an exact identity selected by the same canonical arbitration path.
+
+    // Realtime-derived identity is allowed to use the canonical family rule
+    // directly. Fallback treats the same B-grade rule only as a constraint.
+    if (mode === "realtime-derived") return familyHit;
+
+    // A/C dated run evidence may decide identity, but all decisive providers
+    // must agree before structural constraints are applied.
     var exact = {};
-    hits.forEach(function(h){ if (h.vehicleType) exact[h.vehicleType]=h; });
+    runHits.forEach(function(h){
+      if (h.decisive && h.vehicleType) exact[h.vehicleType] = h;
+    });
     var exactKeys = Object.keys(exact);
     if (exactKeys.length > 1) return null;
-    if (exactKeys.length === 1) return exact[exactKeys[0]];
+
+    var allowedVehicles = null;
+    if (familyHit) {
+      var familyVehicles = [];
+      if (familyHit.vehicleType) familyVehicles.push(familyHit.vehicleType);
+      (familyHit.vehicleCandidates || []).forEach(function(v){
+        if (v && familyVehicles.indexOf(v) < 0) familyVehicles.push(v);
+      });
+      if (familyVehicles.length) allowedVehicles = familyVehicles;
+    }
+
+    if (exactKeys.length === 1) {
+      var exactHit = exact[exactKeys[0]];
+      // Structural/family evidence constrains fallback identity. A dated exact
+      // outside the compatible family is a conflict, never a reason to override
+      // the structural rule.
+      if (allowedVehicles && allowedVehicles.indexOf(exactKeys[0]) < 0) return null;
+      return exactHit;
+    }
+
+    // No decisive run-level exact: preserve only candidates compatible with the
+    // structural family. Candidate evidence must never manufacture an EXACT.
     var candidates = {};
-    hits.forEach(function(h){ (h.vehicleCandidates||[]).forEach(function(v){ if(v)candidates[v]=true; }); });
-    var first = hits[0];
-    first.vehicleCandidates = Object.keys(candidates);
+    runHits.forEach(function(h){
+      (h.vehicleCandidates || []).forEach(function(v){
+        if (v && (!allowedVehicles || allowedVehicles.indexOf(v) >= 0)) candidates[v] = true;
+      });
+    });
+    var candidateKeys = Object.keys(candidates);
+    if (!candidateKeys.length) {
+      // Structural evidence remains a constraint in fallback mode, not a
+      // standalone dated assignment.
+      return familyHit && !familyHit.vehicleType && !(familyHit.vehicleCandidates || []).length
+        ? familyHit : null;
+    }
+    var first = runHits[0] || familyHit;
+    if (!first) return null;
+    first.vehicleType = "";
+    first.vehicleCandidates = candidateKeys;
     return first;
   }
 
