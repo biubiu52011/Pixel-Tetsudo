@@ -12,9 +12,9 @@ const fs = require("fs");
 const path = require("path");
 
 const base = String(process.env.SUPABASE_URL || "").replace(/\/$/, "");
-const key = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || "";
+const key = process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY || "";
 if (!base || !key) {
-  console.error("Missing SUPABASE_URL and Supabase key");
+  console.error("Missing SUPABASE_URL and SUPABASE_SECRET_KEY/SUPABASE_SERVICE_ROLE_KEY");
   process.exit(2);
 }
 
