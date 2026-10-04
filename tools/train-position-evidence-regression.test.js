@@ -198,7 +198,9 @@ assert(fusionSource.includes('var _feResolved = window.TrainVehicle.resolve({'),
   'fused formation evidence must re-enter the existing TrainVehicle authority');
 assert(/timetableVehicleType\s*:\s*_fe\.vehicleName/.test(fusionSource),
   'fused formation evidence must use the timetable vehicle source channel');
-assert(fusionSource.includes('_rememberChainVehicle(_formationCandidate)'),
-  'formation evidence must enter the existing chain arbitration rather than post-overwrite positions');
+assert(fusionSource.includes('_queueChainVehicle({') && fusionSource.includes('vehicleFormationId:_fe.formationId'),
+  'formation evidence must enter the existing pre-commit candidate queue');
+assert(!fusionSource.includes('_rememberChainVehicle(_formationCandidate)'),
+  'formation evidence must not perform a second registry commit');
 
 console.log("train-position-evidence-regression: PASS");
