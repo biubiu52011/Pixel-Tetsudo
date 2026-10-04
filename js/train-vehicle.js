@@ -78,18 +78,21 @@
     // Historical train-number, owner, line/type/number and static fleet inference are forbidden.
     var chosen = '';
     var chosenSrc = '';
-    var _timetableCands = splitCandidates(ctx.timetableVehicleType || ctx.vehicleTypeManual);
-    var _realtimeCands = splitCandidates(ctx.realtimeVehicleType || ctx.odptVehicleType);
-    // Parallel authoritative sources with explicit arbitration:
-    // realtime train-level identity wins when present; timetable/SQL identity is
-    // selected only when realtime carries no exact vehicle fact. Timetable is a
-    // first-class source, not a heuristic fallback.
-    if (_realtimeCands.length === 1) {
-      chosen = _realtimeCands[0];
-      chosenSrc = 'realtime';
-    } else if (_realtimeCands.length === 0 && _timetableCands.length === 1) {
-      chosen = _timetableCands[0];
-      chosenSrc = 'timetable';
+    var _timetableCands = splitCandidates(ctx.timetableVehicleType);
+    var _realtimeCands = splitCandidates(ctx.realtimeVehicleType);
+    var _sourceDecision = null;
+    if (window.VehicleSources) {
+      _sourceDecision = window.VehicleSources.arbitrate(
+        window.VehicleSources.realtime(ctx.realtimeVehicleType, ctx.realtimeEvidence || null),
+        ctx.timetableSource || window.VehicleSources.timetable(
+          _timetableCands.length === 1 ? [{decisive:true, vehicleType:_timetableCands[0]}] : [],
+          ctx.timetableEvidence || null
+        )
+      );
+    }
+    if (_sourceDecision && _sourceDecision.identityStatus === 'EXACT') {
+      chosen = _sourceDecision.vehicleIdentity;
+      chosenSrc = _sourceDecision.source === 'REALTIME' ? 'realtime' : 'timetable';
     }
 
     // Explicit train-level or dated operation evidence is high confidence.
