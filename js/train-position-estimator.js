@@ -574,7 +574,6 @@
           // mode has no odpt:trainOwner. Providers must return evidence, not guesses.
           var _assignmentOperator = '';
           var _assignmentMatches = [];
-          var _operationProviders = window.TRAIN_OPERATION_EVIDENCE_PROVIDERS || [];
           var _baseOperationCtx = {
             lineId: lineId,
             operator: tt['odpt:operator'] || line.operator || '',
@@ -588,75 +587,23 @@
           _baseOperationCtx.operationCode = window.TrainOperationEvidence &&
             typeof window.TrainOperationEvidence.normalizeOperationCode === 'function'
             ? window.TrainOperationEvidence.normalizeOperationCode(trainNumber, _baseOperationCtx) : '';
-          var _matchedProviderIndexes = {};
-          function _collectOperationEvidence(provider, providerIndex, ctx) {
-            if (!provider || typeof provider.resolveEvidence !== 'function') return;
-            var rec = provider.resolveEvidence(trainNumber, ctx);
-            if (!rec) return;
-            var normalized = window.TrainOperationEvidence &&
-              typeof window.TrainOperationEvidence.normalizeEvidence === 'function'
-              ? window.TrainOperationEvidence.normalizeEvidence(provider, rec)
-              : rec;
-            if (normalized) {
-              _assignmentMatches.push(normalized);
-              _matchedProviderIndexes[providerIndex] = true;
-            }
+          var _resolvedEvidence = window.TrainOperationEvidence &&
+            typeof window.TrainOperationEvidence.resolveEvidence === 'function'
+            ? window.TrainOperationEvidence.resolveEvidence(trainNumber, _baseOperationCtx, "fallback")
+            : null;
+          if (_resolvedEvidence) _assignmentMatches.push(_resolvedEvidence);
+          if (_resolvedEvidence && _resolvedEvidence.decisive && _resolvedEvidence.operator) {
+            _assignmentOperator = _resolvedEvidence.operator;
           }
-          _operationProviders.forEach(function(provider, providerIndex) {
-            _collectOperationEvidence(provider, providerIndex, _baseOperationCtx);
-          });
-          // Evidence bridge: a train-number mapping provider may resolve a concrete
-          // operation code (e.g. Odakyu 1700 -> E61). If all first-pass providers
-          // agree on one code, retry only providers that did not match so dated
-          // formation evidence can consume it without depending on provider order.
-          var _resolvedOperationCodes = {};
-          _assignmentMatches.forEach(function(rec) {
-            if (rec.operationCode) _resolvedOperationCodes[String(rec.operationCode)] = true;
-          });
-          var _resolvedOperationCodeList = Object.keys(_resolvedOperationCodes);
-          if (!_baseOperationCtx.operationCode && _resolvedOperationCodeList.length === 1) {
-            var _bridgedOperationCtx = {};
-            Object.keys(_baseOperationCtx).forEach(function(k){ _bridgedOperationCtx[k] = _baseOperationCtx[k]; });
-            _bridgedOperationCtx.operationCode = _resolvedOperationCodeList[0];
-            _operationProviders.forEach(function(provider, providerIndex) {
-              if (!_matchedProviderIndexes[providerIndex]) _collectOperationEvidence(provider, providerIndex, _bridgedOperationCtx);
-            });
-          }
-          // Only decisive A/C dated evidence may establish the responsible
-          // operator. B remains a compatibility constraint; D remains a lead.
-          var _decisiveAssignments = _assignmentMatches.filter(function(rec){ return rec.decisive && rec.operator; });
-          var _assignmentOperators = {};
-          _decisiveAssignments.forEach(function(rec){ _assignmentOperators[rec.operator] = true; });
-          if (Object.keys(_assignmentOperators).length === 1) {
-            _assignmentOperator = Object.keys(_assignmentOperators)[0];
-          }
-          // A/C run-level providers may also carry a model-exact assignment.
-          // Accept it only when every decisive model-bearing provider agrees.
-          var _assignmentVehicles = {};
-          var _assignmentCandidateSets = [];
+          var _timetableVehicleInput = _resolvedEvidence && _resolvedEvidence.vehicleType
+            ? _resolvedEvidence.vehicleType
+            : (_resolvedEvidence && _resolvedEvidence.vehicleCandidates || []).join(' / ');
           var _assignmentFormations = {};
-          _decisiveAssignments.forEach(function(rec) {
-            if (rec.vehicleType) _assignmentVehicles[rec.vehicleType] = true;
-            if (rec.vehicleCandidates && rec.vehicleCandidates.length) _assignmentCandidateSets.push(rec.vehicleCandidates.slice());
-            if (rec.formationId) {
-              String(rec.formationId).split(/\s*\/\s*|\s*,\s*|\s*\|\s*/).forEach(function(fid) {
-                fid = String(fid || '').trim();
-                if (fid) _assignmentFormations[fid] = true;
-              });
-            }
-          });
-          var _timetableExactVehicle = Object.keys(_assignmentVehicles).length === 1
-            ? Object.keys(_assignmentVehicles)[0] : '';
-          // Operation/formation providers belong to the timetable evidence channel.
-          // Preserve ambiguity only when all model-bearing providers agree on the
-          // same candidate set; never choose the first provider as a hidden fallback.
-          var _timetableVehicleInput = _timetableExactVehicle;
-          if (!_timetableVehicleInput && _assignmentCandidateSets.length) {
-            var _candidateKey = _assignmentCandidateSets[0].filter(Boolean).slice().sort().join(' / ');
-            var _candidateSetsAgree = _assignmentCandidateSets.every(function(set) {
-              return set.filter(Boolean).slice().sort().join(' / ') === _candidateKey;
+          if (_resolvedEvidence && _resolvedEvidence.formationId) {
+            String(_resolvedEvidence.formationId).split(/\s*\/\s*|\s*,\s*|\s*\|\s*/).forEach(function(fid) {
+              fid = String(fid || '').trim();
+              if (fid) _assignmentFormations[fid] = true;
             });
-            if (_candidateSetsAgree) _timetableVehicleInput = _candidateKey;
           }
           var vehCtx = {
             lineId: lineId,
