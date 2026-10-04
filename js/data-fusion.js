@@ -1221,14 +1221,25 @@
                 estCount += posMap[lid].length;
               } else {
                 var _haveId = {};
-                posMap[lid].forEach(function(p) { if (p && _positionIdentity(p)) _haveId[_positionIdentity(p)] = true; });
+                var _haveTrainNumber = {};
+                posMap[lid].forEach(function(p) {
+                  if (!p) return;
+                  if (_positionIdentity(p)) _haveId[_positionIdentity(p)] = true;
+                  if (p.trainNumber) _haveTrainNumber[String(p.trainNumber)] = true;
+                });
                 var _addN = 0;
                 _est.forEach(function(p) {
-                  if (p && _positionIdentity(p) && !_haveId[_positionIdentity(p)] && mayUseTimetableEstimate(lid, p)) {
-                    posMap[lid].push(p);
-                    _haveId[_positionIdentity(p)] = true;
-                    _addN++;
-                  }
+                  if (!p || !mayUseTimetableEstimate(lid, p)) return;
+                  var _pid = _positionIdentity(p);
+                  // Canonical runningChainId is primary. Train number is the
+                  // conservative secondary guard for the same line when one side
+                  // has not yet received its chain id; never render both realtime
+                  // and estimated copies of the same physical train.
+                  if ((_pid && _haveId[_pid]) || (p.trainNumber && _haveTrainNumber[String(p.trainNumber)])) return;
+                  posMap[lid].push(p);
+                  if (_pid) _haveId[_pid] = true;
+                  if (p.trainNumber) _haveTrainNumber[String(p.trainNumber)] = true;
+                  _addN++;
                 });
                 estCount += _addN;
                 // v4.3.929: 实时位置有列车但无 destinationStation → 从推定位置补终点站
