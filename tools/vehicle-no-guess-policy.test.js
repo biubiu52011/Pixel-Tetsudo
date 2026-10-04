@@ -10,6 +10,13 @@ vm.runInContext(src, sandbox, { filename: 'js/train-icons.js' });
 const icons = sandbox.window.TrainIcons;
 function assert(cond, msg) { if (!cond) throw new Error(msg); }
 
+assert(typeof icons.resolveVehicleArtwork === 'function',
+  'single identity-only vehicle artwork mapper must be exported');
+assert(icons.resolveVehicleArtwork('小田急5000形') === icons.resolveVehicleIcon('小田急5000形'),
+  'legacy resolveVehicleIcon alias must be identical to the strict artwork mapper');
+assert(!/function resolveVehicleArtwork\([^)]*(line|operator|train|source)/i.test(src),
+  'artwork mapper must not accept operational context');
+
 // UNKNOWN train identity must not become a concrete vehicle from line/operator defaults.
 assert(icons.getTrainIcon('Yamanote', 'JR-East', 'unknown', 0, '', false) === null,
   'UNKNOWN train leaked LINE_ICONS fallback');
