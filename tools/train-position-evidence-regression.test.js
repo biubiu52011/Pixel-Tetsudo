@@ -149,6 +149,12 @@ assert(!/tt\['vehicleType'\]\s*=\s*Object\.keys\(_assignmentVehicles\)/.test(est
   'dated operation evidence must not be written back into legacy timetable vehicleType');
 assert(!estimatorSource.includes("if (!window.TrainVehicle) _vehicleType = tt['vehicleType'] || ''"),
   'timetable identity must not bypass the central source arbiter when TrainVehicle is unavailable');
+assert(!estimatorSource.includes("pos.vehicleType = chainVehicle.vehicleName"),
+  'running-chain vehicle evidence must not bypass TrainVehicle with a direct identity write');
+assert(estimatorSource.includes("var chainResolved = window.TrainVehicle.resolve({"),
+  'running-chain vehicle evidence must re-enter the existing TrainVehicle authority');
+assert(estimatorSource.includes("timetableVehicleType: chainVehicle.vehicleName"),
+  'running-chain vehicle evidence must enter through the timetable source channel');
 assert(fusionSource.includes('vehicleFormationCandidates: (p.vehicleFormationCandidates || []).slice()'),
   'running-chain registry must preserve formation candidate sets');
 assert(fusionSource.includes('p.vehicleFormationCandidates = (v.vehicleFormationCandidates || p.vehicleFormationCandidates || []).slice()'),
