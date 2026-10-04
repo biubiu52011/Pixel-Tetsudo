@@ -4,9 +4,9 @@
  *
  * C-grade dated operation ownership:
  * Chokopy's Train-Page, 2026-03-14 timetable revision.
- * Published families: 01K-26K Tokyu, 51S-77S Tokyo Metro,
- * 50T-82T Tobu (holiday table; weekday table is validated by the same source).
- * This provider establishes operator ownership only. T workings can be either
+ * Explicit working codes identify operator ownership when the source/train data
+ * carries the K/S/T suffix itself. Numeric public train-number ranges are not
+ * converted into working codes. T workings can be either
  * Tobu 50050 or 50000 in observed service, so model identity requires dated evidence.
  */
 (function() {
@@ -24,14 +24,6 @@
     // Explicit working-number form: 26K / 57S / 50T, optionally prefixed A/B.
     var m=raw.match(/(?:^|[^0-9])(?:A|B)?(\d{1,2})([KST])$/);
     if(m) return {number:parseInt(m[1],10),letter:m[2]};
-    // Tokyu public train number form: 026-081, 057-102, etc.
-    var p=raw.match(/^(\d{3})[-_]/);
-    if(p){
-      var n=parseInt(p[1],10);
-      if(n>=1&&n<=26) return {number:n,letter:"K"};
-      if(n>=51&&n<=77&&n%2===1) return {number:n,letter:"S"};
-      if(n>=50&&n<=82&&n%2===0) return {number:n,letter:"T"};
-    }
     return null;
   }
 
