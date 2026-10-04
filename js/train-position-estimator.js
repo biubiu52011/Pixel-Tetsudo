@@ -884,17 +884,18 @@
                 pos.runningChainEvidence = resolved.evidence || "TIMETABLE_SEGMENT";
                 if (resolved.partnerLineId) pos.runningChainPartnerLineId = resolved.partnerLineId;
                 if (resolved.timeGapMin !== undefined) pos.runningChainTimeGapMin = resolved.timeGapMin;
-                // A timetable-provided vehicleType is explicit vehicle evidence.
-                // Attach it to the canonical chain; never derive a class from
-                // train number or generic LimitedExpress.
-                var explicitVehicle = sourceTT['vehicleType'] || sourceTT['odpt:vehicleType'] || '';
+                // Chain propagation may only start from the position's already-resolved
+                // EXACT identity. Never re-promote a raw timetable vehicleType here:
+                // doing so would bypass TrainVehicle's evidence decision.
+                var explicitVehicle = (pos.vehicleIdentityStatus === 'EXACT')
+                  ? String(pos.trainClass || pos.vehicleType || '').trim() : '';
                 if (explicitVehicle && window.TrainVehicle &&
                     typeof window.TrainVehicle.registerFormationEvidence === 'function') {
                   window.TrainVehicle.registerFormationEvidence({
                     lineId: lineId,
                     runningChainId: resolved.runningChainId,
                     vehicleType: explicitVehicle,
-                    evidenceSource: sourceTT._vehicleEvidenceSource || 'official-timetable-vehicle',
+                    evidenceSource: pos.vehicleSource || sourceTT._vehicleEvidenceSource || 'resolved-exact-vehicle',
                     evidenceDetail: sourceTT._vehicleEvidence || null
                   });
                   var chainVehicle = window.TrainVehicle.resolveFormationEvidence({
