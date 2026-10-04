@@ -9,6 +9,7 @@ on:
     paths:
       - "supabase/migrations/**"
       - "tools/export-vehicle-operation-evidence.js"
+      - "tools/canonical-evidence-snapshot-guard.test.js"
       - ".github/workflows/sync-vehicle-evidence.yml"
 
 permissions:
