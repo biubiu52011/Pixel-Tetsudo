@@ -97,13 +97,14 @@
       "Ogose": { mode: "FULL" },
       "TobuDaishi": { mode: "FULL" },
 
-      // Known partial/limited sources. These declarations are facts, not algorithm branches.
-      // SEGMENTED without a verified local station range intentionally fails open to timetable.
-      "Mita": { mode: "SEGMENTED" },
-      "Chuo": { mode: "SEGMENTED" },
-      "Ome": { mode: "SEGMENTED" },
-      "Joban": { mode: "SEGMENTED" },
-      "Takasaki": { mode: "SEGMENTED" },
+      // Known partial/limited sources, but no verified local station-pair coverage
+      // is stored yet. Keep HYBRID until coveredSegments/excludedSegments can be
+      // backed by provider observations; never use SEGMENTED as a placeholder.
+      "Mita": { mode: "HYBRID" },
+      "Chuo": { mode: "HYBRID" },
+      "Ome": { mode: "HYBRID" },
+      "Joban": { mode: "HYBRID" },
+      "Takasaki": { mode: "HYBRID" },
 
       // Official source has insufficient positional granularity on part of this railway.
       "TobuKameido": { mode: "COARSE" },
