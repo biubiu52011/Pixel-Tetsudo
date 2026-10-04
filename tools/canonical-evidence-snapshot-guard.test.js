@@ -20,6 +20,14 @@ assert(snapshot.records.some(r => r.networkKey === "TokyoMonorail"),
 assert(snapshot.records.some(r => r.networkKey !== "TokyoMonorail"),
   "snapshot must contain canonical evidence beyond the legacy single-network seed");
 
+const odakyuMapped = snapshot.records.find(r =>
+  r.networkKey === "odakyu-main" &&
+  r.validDate > "2026-03-14" &&
+  Array.isArray(r.trainNumbers) &&
+  r.trainNumbers.length > 0);
+assert(odakyuMapped,
+  "effective train-operation mappings must carry forward beyond effective_from; Odakyu post-2026-03-14 evidence lost its explicit train numbers");
+
 for (const [i, r] of snapshot.records.entries()) {
   assert(r && !Array.isArray(r) && typeof r === "object", "record "+i+" must be an object");
   for (const key of ["networkKey","validDate","operationCode","operator","vehicleType","formationIds","grade","sourceUrl","trainNumbers"]) {
