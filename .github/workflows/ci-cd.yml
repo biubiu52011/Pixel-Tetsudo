@@ -118,7 +118,11 @@ jobs:
             [fs.readFileSync('js/train-position-estimator.js', 'utf8'), 'TrainVehicle.registerVehicle', 'estimator train-number history accumulation'],
             [fs.readFileSync('js/data-fusion.js', 'utf8'), 'TrainVehicle.registerVehicle', 'fusion train-number history accumulation'],
             [vehicle, 'getCandidates(trainNumber, operator).forEach', 'runtime train-number candidate import'],
-            [vehicle, 'VehicleTypeMap.resolve(lineId, trainType, dest)', 'runtime static map candidate import']
+            [vehicle, 'VehicleTypeMap.resolve(lineId, trainType, dest)', 'runtime static map candidate import'],
+            [icons, 'FLEET_ICON_POOLS', 'fleet artwork pool'],
+            [icons, 'LINE_VEHICLE_OVERRIDES', 'line vehicle override table'],
+            [icons, 'LINE_ICON_NAME_REDIRECT', 'line identity redirect table'],
+            [icons, 'VEHICLE_NAME_ALIASES', 'identity-changing vehicle alias table']
           ];
           for (const [src, needle, label] of forbidden) {
             if (src.includes(needle)) throw new Error('zero-fallback violation: ' + label);
