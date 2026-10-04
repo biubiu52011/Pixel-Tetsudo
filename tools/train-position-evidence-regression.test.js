@@ -22,6 +22,7 @@ assert(!/positionData\.trainClass\s*=\s*positionData\.trainClass\s*\|\|\s*resolv
 assert(/Object\.keys\(_realtimeEvidenceWithoutPosition\)/.test(fusion),"positionless realtime vehicle evidence must have a consumer");
 assert(/\(estimated\[_vlid\] \|\| \[\]\)\.forEach\(_rememberChainVehicle\)/.test(fusion),"verified timetable vehicle evidence must seed running-chain registry");
 const estimator=read("js/train-position-estimator.js");
+const estimatorSource=estimator;
 assert(/vehicleResolvedUpstream:\s*vehResult\.identityStatus === 'EXACT'/.test(estimator),
   "upstream vehicle authority must represent EXACT identity, not artwork availability");
 assert(/TRAIN_VEHICLE_EVIDENCE_PROVIDERS/.test(estimator),"estimator must consume generic exact-train vehicle evidence providers");
@@ -90,14 +91,14 @@ assert(estimatorSource.includes("Object.keys(_assignmentVehicles).length === 1")
   'operation model evidence must require unanimous decisive providers');
 assert(estimatorSource.includes("operation-assignment-provider"),
   'agreed run-level operation evidence must be promotable to exact model');
-assert(estimatorSource.includes("vehicleEvidenceSource: tt._vehicleEvidenceSource || ''"),
-  'dated operation vehicle provenance must reach TrainVehicle');
+assert(estimatorSource.includes("timetableEvidence: _assignmentMatches"),
+  'dated operation evidence provenance must remain attached to timetable resolution');
 
 const trainVehicleSource = fs.readFileSync('js/train-vehicle.js','utf8');
-assert(trainVehicleSource.includes("dated-operation-vehicle-evidence"),
-  'operation-derived exact vehicle must retain dated-operation identity reason');
-assert(trainVehicleSource.includes("_manualEvidenceSource === 'operation-assignment-provider'"),
-  'dated operation identity reason must depend on explicit provenance, not vehicle name');
+assert(trainVehicleSource.includes("'timetable-vehicle-evidence'"),
+  'timetable-derived exact vehicle must retain timetable identity reason');
+assert(!trainVehicleSource.includes("vehicleTypeManual") && !trainVehicleSource.includes("odptVehicleType"),
+  'legacy manual/ODPT vehicle compatibility inputs must stay removed');
 
 
 assert(estimatorSource.includes("operation-assignment-provider"),
