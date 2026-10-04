@@ -80,19 +80,14 @@
     var chosenSrc = '';
     var _timetableCands = splitCandidates(ctx.timetableVehicleType);
     var _realtimeCands = splitCandidates(ctx.realtimeVehicleType);
-    var _sourceDecision = null;
-    if (window.VehicleSources) {
-      _sourceDecision = window.VehicleSources.arbitrate(
-        window.VehicleSources.realtime(ctx.realtimeVehicleType, ctx.realtimeEvidence || null),
-        ctx.timetableSource || window.VehicleSources.timetable(
-          _timetableCands.length === 1 ? [{decisive:true, vehicleType:_timetableCands[0]}] : [],
-          ctx.timetableEvidence || null
-        )
-      );
-    }
-    if (_sourceDecision && _sourceDecision.identityStatus === 'EXACT') {
-      chosen = _sourceDecision.vehicleIdentity;
-      chosenSrc = _sourceDecision.source === 'REALTIME' ? 'realtime' : 'timetable';
+    // Source arbitration lives here, in the existing vehicle authority.
+    // Realtime and timetable are parallel evidence inputs; no second resolver exists.
+    if (_realtimeCands.length === 1) {
+      chosen = _realtimeCands[0];
+      chosenSrc = 'realtime';
+    } else if (_realtimeCands.length === 0 && _timetableCands.length === 1) {
+      chosen = _timetableCands[0];
+      chosenSrc = 'timetable';
     }
 
     // Explicit train-level or dated operation evidence is high confidence.
