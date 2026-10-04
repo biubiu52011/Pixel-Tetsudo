@@ -51,8 +51,7 @@
     var assignmentOperator = normOp(ctx.assignmentOperator || ctx.operationOperator || '');
 
     // 1) Evidence candidates are limited to explicit train-level input.
-    // Historical train-number tables and static VehicleTypeMap are deliberately
-    // excluded from runtime identity and ambiguity state.
+    // Historical train-number and static fleet inference are excluded from runtime identity.
     var pool = {};
     var orderArr = [];
     function addFrom(str, src) {
@@ -76,8 +75,7 @@
 
     // 2) Zero-fallback identity decision.
     // Only explicit vehicle identity carried by this train record may become EXACT.
-    // Historical train-number tables, VehicleTypeMap, owner narrowing, line/type/number
-    // rules and candidate intersections remain diagnostics only.
+    // Historical train-number, owner, line/type/number and static fleet inference are forbidden.
     var chosen = '';
     var chosenSrc = '';
     var _manualCands = splitCandidates(ctx.vehicleTypeManual);
@@ -115,7 +113,6 @@
     //             or the applicable timetable fleet itself has only one possible type.
     // NARROWED  = timetable/owner evidence reduced the fleet but still leaves >1 type.
     // UNKNOWN   = no usable vehicle evidence exists.
-    // IMPORTANT: a multi-vehicle VehicleTypeMap/default is never EXACT.
     var identityStatus = 'UNKNOWN';
     var identityReason = 'no-vehicle-evidence';
     var effectiveCandidates = orderArr.slice();
