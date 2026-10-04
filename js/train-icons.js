@@ -810,40 +810,6 @@
   Object.keys(ASSET_LOCATOR_ONLY_NAMES).forEach(function(name) {
     delete VEHICLE_NAME_TO_ICON[name];
   });
-  // Build the reverse index only from explicit vehicle-identity asset registries.
-  (function buildVehicleNameIndex() {
-    var seen = {};
-    function add(path) {
-      if (!path || seen[path]) return;
-      seen[path] = true;
-      var name = String(path).split('/').pop().replace(/\.png$/i, '');
-      if (ASSET_LOCATOR_ONLY_NAMES[name]) return;
-      if (name && !VEHICLE_NAME_TO_ICON[name]) VEHICLE_NAME_TO_ICON[name] = path;
-    }
-    function collectIcon(obj) {
-      if (typeof obj === 'string') {
-        if (/\.png$/i.test(obj) && obj.indexOf('images/列车') >= 0) add(obj);
-      } else if (Array.isArray(obj)) {
-        obj.forEach(collectIcon);
-      } else if (obj && typeof obj === 'object') {
-        Object.keys(obj).forEach(function(k){
-          if (k === 'icon') add(obj[k]); else collectIcon(obj[k]);
-        });
-      }
-    }
-    // Only vehicle-identity asset registries may seed the reverse name index.
-    // Line/operator/deployment/train-type tables are operational or presentation
-    // metadata and must never manufacture vehicle identity.
-
-    // v4.3.973/975: 额外变体资产与自动补全的未引用图标资产
-    // v4.3.976: EXTRA 条目 key 优先直录（公司前缀 key 解同名抢占；文件 base 名兜底入表）
-    Object.keys(EXTRA_VEHICLE_ICONS).forEach(function(k){
-      var _p = EXTRA_VEHICLE_ICONS[k];
-      add(_p);
-      var _base = String(_p).split('/').pop().replace(/\.png$/i, '');
-      if (k !== _base && !ASSET_LOCATOR_ONLY_NAMES[k] && !VEHICLE_NAME_TO_ICON[k]) VEHICLE_NAME_TO_ICON[k] = _p;
-    });
-  })();
 
   // 2026-09 runtime policy: retired stock may remain as gallery assets, but must not win
   // vehicle identity by exact filename lookup. These names fall through to aliases below.
