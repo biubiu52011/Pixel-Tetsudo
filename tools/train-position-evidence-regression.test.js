@@ -149,6 +149,8 @@ assert(fusionSource.includes('realtimeVehicleType: odptVehicleType'),
   'realtime API vehicle identity must enter the explicit realtime source channel');
 assert(fusionSource.includes('if (_rp.vehicleResolvedFromRealtime === true) _rememberChainVehicle(_rp);'),
   'realtime position rows without explicit vehicle identity must still be allowed to bind a unique running chain without seeding fake vehicle evidence');
+assert(fusionSource.includes('p.vehicleResolvedFromRealtime === true ? 4 : (_src === "operation-assignment-provider" ? 3'),
+  'running-chain cache must preserve explicit realtime vehicle priority over SQL/timetable assignment evidence');
 assert(fusionSource.includes('(posMap[_vlid] || []).forEach(function(_p) {\n                _inheritChainVehicle(_p);'),
   'canonical timetable/SQL EXACT vehicle evidence must be able to inherit onto realtime-position rows through the resolved running chain');
 assert(estimatorSource.includes("timetableVehicleType: _timetableVehicleInput"),
