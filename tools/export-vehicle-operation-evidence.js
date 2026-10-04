@@ -26,31 +26,33 @@ function normalizeNetworkKey(networkKey) {
   return RUNTIME_NETWORK_KEYS[networkKey] || networkKey;
 }
 
-async function get(table, select) {
-  const url = base + "/rest/v1/" + table + "?select=" + encodeURIComponent(select) + "&order=service_date.asc,operator.asc,network_key.asc,operation_code.asc,id.asc";
+async function get(table, select, order) {
+  const url = base + "/rest/v1/" + table + "?select=" + encodeURIComponent(select) + (order ? "&order=" + encodeURIComponent(order) : "");
   const res = await fetch(url, {headers:{apikey:key,Authorization:"Bearer "+key}});
   if (!res.ok) throw new Error(table+" export failed: "+res.status+" "+await res.text());
   return res.json();
 }
 
 (async function(){
-  const [obs, sources] = await Promise.all([
-    get("operation_vehicle_observations","id,service_date,operator,network_key,operation_code,valid_from_time,valid_to_time,vehicle_type,formation_ids,ambiguity_group,observed_date,source_id"),
-    (async()=> {
-      const url=base+"/rest/v1/evidence_sources?select=id,source_url,evidence_grade";
-      const res=await fetch(url,{headers:{apikey:key,Authorization:"Bearer "+key}});
-      if(!res.ok) throw new Error("evidence_sources export failed: "+res.status+" "+await res.text());
-      return res.json();
-    })()
+  const [obs, policies] = await Promise.all([
+    get("runtime_vehicle_operation_evidence",
+      "observation_id,service_date,operator,network_key,operation_code,valid_from_time,valid_to_time,vehicle_type,formation_ids,ambiguity_group,observed_date,evidence_grade,source_url,sql_evidence_role",
+      "service_date.asc,operator.asc,network_key.asc,operation_code.asc,observation_id.asc"),
+    get("runtime_vehicle_source_policy",
+      "network_key,realtime_api_available,realtime_vehicle_identity_status,sql_evidence_role",
+      "network_key.asc")
   ]);
-  const sm = Object.fromEntries(sources.map(s=>[s.id,s]));
+  const pm = Object.fromEntries(policies.map(p=>[p.network_key,p]));
   const records = obs.map(r=>{
-    const s=sm[r.source_id]||{};
+    const p=pm[r.network_key]||{};
     return {
       networkKey:normalizeNetworkKey(r.network_key),validDate:r.service_date,operationCode:r.operation_code,operator:r.operator,
       vehicleType:r.vehicle_type||"",formationIds:Array.isArray(r.formation_ids)?r.formation_ids:[],
       validFromTime:r.valid_from_time||"",validToTime:r.valid_to_time||"",ambiguityGroup:r.ambiguity_group||"",
-      observedDate:r.observed_date||r.service_date,grade:s.evidence_grade||"C",sourceUrl:s.source_url||"",trainNumbers:[]
+      observedDate:r.observed_date||r.service_date,grade:r.evidence_grade||"C",sourceUrl:r.source_url||"",trainNumbers:[],
+      evidenceRole:r.sql_evidence_role||p.sql_evidence_role||"primary",
+      realtimeApiAvailable:p.realtime_api_available===true,
+      realtimeVehicleIdentityStatus:p.realtime_vehicle_identity_status||"unknown"
     };
   });
   const json={schemaVersion:2,generatedFrom:"Supabase canonical evidence tables",records};
