@@ -905,7 +905,7 @@
                   });
                   if (chainVehicle) {
                     pos.vehicleType = chainVehicle.vehicleName;
-                    pos.vehicleTypeManual = chainVehicle.vehicleName;
+                    pos.timetableVehicleType = chainVehicle.vehicleName;
                     pos.vehicleEvidenceSource = chainVehicle.evidenceSource || sourceTT._vehicleEvidenceSource || 'running-chain-vehicle';
                     pos.vehicleEvidence = chainVehicle.evidenceDetail || sourceTT._vehicleEvidence || null;
                   }
