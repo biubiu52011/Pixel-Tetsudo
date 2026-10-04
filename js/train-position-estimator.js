@@ -645,11 +645,6 @@
               });
             }
           });
-          if (!tt['vehicleType'] && !tt['odpt:vehicleType'] &&
-              Object.keys(_assignmentVehicles).length === 1) {
-            tt['vehicleType'] = Object.keys(_assignmentVehicles)[0];
-            tt._vehicleEvidenceSource = 'operation-assignment-provider';
-          }
           var _timetableExactVehicle = Object.keys(_assignmentVehicles).length === 1
             ? Object.keys(_assignmentVehicles)[0] : '';
           var vehCtx = {
@@ -663,7 +658,6 @@
             destinationStation: destinationStationUrn || tt['odpt:destinationStation'] || '',
             timetableVehicleType: _timetableExactVehicle,
             timetableEvidence: _assignmentMatches,
-            vehicleEvidenceSource: tt._vehicleEvidenceSource || '',
             operationVehicleCandidates: _assignmentCandidateSets.length ? _assignmentCandidateSets[0] : [],
             trainId: lineId + '_' + trainNumber + '_' + currentStationIndex
           };
@@ -709,7 +703,7 @@
             vehicleConfidence: vehResult.confidence || 'none',
             vehicleResolution: vehResult,
             vehicleResolvedUpstream: vehResult.identityStatus === 'EXACT',
-            timetableVehicleType: tt['vehicleType'] || ''
+            timetableVehicleType: _timetableExactVehicle
           });
         }
       }
