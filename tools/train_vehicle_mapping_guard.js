@@ -45,6 +45,10 @@ assert(!/function resolveVehicleArtwork\([^)]*(line|operator|train|source)/i.tes
 
 function resolve(ctx){ return vehicle.resolve(Object.assign({trainNumber:'guard'},ctx)); }
 
+const vehicleSource = read('js/train-vehicle.js');
+assert(!vehicleSource.includes('structuralVehicleType'),
+  'structural vehicle identity must enter through canonical evidence resolution, not direct TrainVehicle injection');
+
 // Both sources are authoritative, but realtime has explicit priority.
 let r = resolve({ realtimeVehicleType:'E235系0番台（山手線）',
                   timetableVehicleType:'小田急5000形' });
