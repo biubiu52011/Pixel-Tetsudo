@@ -15,7 +15,7 @@ function loadRuntime() {
   context.window.window = context.window;
   context.self = context.window;
   vm.createContext(context);
-  ['js/train-icons.js','js/train-vehicle.js'].forEach(rel =>
+  ['js/train-icons.js','js/vehicle-sources.js','js/train-vehicle.js'].forEach(rel =>
     vm.runInContext(read(rel), context, { filename:rel }));
   return context.window;
 }
