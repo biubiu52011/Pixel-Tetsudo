@@ -128,6 +128,14 @@ assert(icons.resolveVehicleIcon('253系', 'Nikkoku') === null,
   'generic 253-series identity must not select 1000 subseries');
 assert(icons.resolveVehicleIcon('京浜急行電鉄1000系', 'KeikyuMain') === null,
   'generic Keikyu 1000 identity must not select 1200 subseries');
+assert(icons.resolveVehicleIcon('都営6300形', 'Mita') === null,
+  'generic Toei 6300 identity must not select third-batch artwork');
+assert(icons.resolveVehicleIcon('都営10-300形', 'Shinjuku') === null,
+  'generic Toei 10-300 identity must not select first/second-batch artwork');
+assert(icons.resolveVehicleIcon('東京メトロ05系', 'Tozai') === null,
+  'generic Metro 05 identity must not select 8th-13th batch artwork');
+assert(icons.resolveVehicleIcon('横浜市交通局10000形', 'Green') === null,
+  'generic Yokohama 10000 identity must not select first-batch artwork');
 assert(!/function _resolveVehicleIconBase[\\s\\S]*?VEHICLE_NAME_ALIASES\[/.test(source),
   'vehicle icon resolver reintroduced alias fallback');
 assert(!/function _resolveVehicleIconBase[\\s\\S]*?LINE_VEHICLE_OVERRIDES\[/.test(source),
