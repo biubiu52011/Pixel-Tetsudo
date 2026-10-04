@@ -208,5 +208,16 @@ assert(fusionSource.includes('_queueChainVehicle({') && fusionSource.includes('v
   'formation evidence must enter the existing pre-commit candidate queue');
 assert(!fusionSource.includes('_rememberChainVehicle(_formationCandidate)'),
   'formation evidence must not perform a second registry commit');
+assert(fusionSource.includes('if (mode !== "SEGMENTED") return true; // HYBRID / COARSE / UNKNOWN'),
+  'HYBRID/COARSE/UNKNOWN coverage gaps must remain eligible for timetable position fallback');
+assert(fusionSource.includes('if (_chainVehicleRegistry[_cid]) _chainVehicleRegistry[_cid].lastSeenAt = Date.now();'),
+  'an active timetable running chain must keep confirmed vehicle identity alive across realtime coverage gaps');
+assert(fusionSource.includes('if (!_activeChainIds[_cid] && (!_cv || !_cv.lastSeenAt ||'),
+  'vehicle identity may expire only after the physical running chain is absent, not merely because realtime position disappeared');
+assert(fusionSource.includes('if (!_sameVehicle && _existingRank >= _incomingRank)'),
+  'weaker fallback/formation evidence must not replace stronger realtime identity while crossing a coverage boundary');
+assert(fusionSource.includes('positionData.realtimePositionRecordPresent = _positionCoverage.currentTrainCovered;') &&
+  fusionSource.includes('positionData.vehicleResolvedFromRealtime = _rtVehicle.source === "realtime"'),
+  'position coverage and vehicle identity capability must remain separate runtime axes');
 
 console.log("train-position-evidence-regression: PASS");
