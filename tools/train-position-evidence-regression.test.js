@@ -30,6 +30,10 @@ assert(/TRAIN_VEHICLE_EVIDENCE_PROVIDERS/.test(tobuEvidence),"Tobu exact-train e
 assert(/id:\s*"tobu-official-limited-express-2026"/.test(tobuEvidence),"vehicle evidence provider must expose stable provenance id");
 const renderer=read("js/trains-render.js");
 assert(/_hasUpstreamVehicle/.test(renderer),"renderer must consume upstream vehicle resolution");
+assert(/var _identityExact = p\.vehicleIdentityStatus === "EXACT"/.test(renderer),
+  "renderer must hard-gate concrete artwork on EXACT vehicle identity");
+assert(/var _hasUpstreamVehicle = _identityExact/.test(renderer),
+  "upstream authority flags alone must not render concrete vehicle artwork");
 assert(!/TrainVehicle\.resolve\(_vrCtx\)/.test(renderer),"renderer must not re-resolve vehicle identity");
 assert(!/__trainIconCache/.test(renderer),"renderer must not resurrect stale vehicle artwork from cache");
 assert(/if \(!stationKey\)[\s\S]{0,800}return;/.test(fusion),"missing fromStation must not create realtime position");
