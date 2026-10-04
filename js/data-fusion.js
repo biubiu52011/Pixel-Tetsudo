@@ -29,7 +29,10 @@
     if (!_identityExact || !p.vehicleType) return;
     var _src = p.vehicleSource || (p.vehicleResolution && p.vehicleResolution.source) || "";
     var _conf = p.vehicleConfidence || (p.vehicleResolution && p.vehicleResolution.confidence) || "none";
-    var _incomingRank = p.vehicleResolvedFromRealtime === true ? 3 : (_src === "operation-assignment-provider" ? 3 : (_src === "odpt" ? 3 : (_src === "manual" ? 2 : 1)));
+    // Preserve TrainVehicle source arbitration inside the running-chain cache:
+    // explicit realtime identity outranks canonical SQL/timetable assignment.
+    // Equal-rank conflicts keep the established identity to avoid oscillation.
+    var _incomingRank = p.vehicleResolvedFromRealtime === true ? 4 : (_src === "operation-assignment-provider" ? 3 : (_src === "odpt" ? 3 : (_src === "manual" ? 2 : 1)));
     var _existing = _chainVehicleRegistry[p.runningChainId];
     if (_existing) {
       var _existingRank = _existing.evidenceRank || 0;
