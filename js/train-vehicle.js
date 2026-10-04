@@ -1,30 +1,15 @@
 /*
- * Pixel Tetsudo - Train Vehicle Resolver（全局车辆判定脚本）
- * v4.3.950
+ * Pixel Tetsudo - Train Vehicle Resolver
  *
- * 统一入口：window.TrainVehicle
- * 全局生效：数据层（TrainPositionEstimator / DataFusion）与渲染层（TrainsRender）
- *   的车型判定全部收敛到此脚本，单一决策路径，消除散落逻辑与 key 不匹配。
- *
- * 数据源（可信度从高到低，支持交叉验证）：
- *   S0  manual 内嵌 vehicleType —— 时刻表记录直带字段（ODPT 官方/人工核验），最高可信
- *   S1  ODPT 实时 vehicleType —— ODPT Train 响应中的 vehicleType 字段（如可用）
- *   S2  车号→车型候选累积表（TRAIN_NO_VEHICLE）—— 由 S0/S1 按车号跨线累积去重，
- *       同一车号在不同来源出现相同候选 = 交叉验证通过
- *   S3  VehicleTypeMap 静态查表 —— 按「线路 × 種別 × 直通先 operator」的公开资料推定
- *   S4  TrainIcons 图标规则 —— 线路/运营商/车号规则/部署区间推定；S0–S3 无依据时，
- *       图标文件名作为最低可信推定名（source='icons', confidence='low'；排除 E235系山手線
- *       乱入非山手线）。图标本身始终由 S4 兜底。
- *
- * 原则（不猜）：
- *   - 车型名（resolve.name / getName）：S0–S3 实证优先；无实证时仅采用人工核验的图标
- *     推定名（S4），绝不凭空编造；终极兜底 E235系山手線 不会冒充非山手线的车型。
- *   - 图标（resolve.iconPath / getIconPath）：始终有值。
- *
- * 修复（相对 v4.3.940）：
- *   - TRAIN_NO_VEHICLE 查表 key 不匹配：原估计车 trainId="lineId_trainNumber" 查不到
- *     纯车号 key，候选表对估计车失效。本脚本统一按纯车号管理，getCandidates 同时兼容
- *     两种格式兜底，数据层额外输出 trainNumber 字段供渲染层直查。
+ * Zero-fallback vehicle identity contract:
+ *   - EXACT only from one explicit train-level vehicle identity or dated
+ *     operation/formation evidence.
+ *   - NARROWED may expose multiple evidence candidates, but never a concrete icon.
+ *   - UNKNOWN stays unknown.
+ *   - line/operator/train type/train number/history/static maps/icon rules may not
+ *     manufacture vehicle identity.
+ *   - artwork is only a projection of an already-EXACT identity; missing artwork
+ *     stays missing.
  */
 (function() {
   "use strict";
@@ -58,20 +43,8 @@
     return '';
   }
 
-  // S4 图标规则兜底（视觉表示）
-  function resolveIconByRules(ctx) {
-    if (window.TrainIcons && typeof window.TrainIcons.getTrainIcon === 'function') {
-      var trainId = ctx.trainId || ((ctx.trainNumber || '') + '_' + (ctx.stationIndex || 0));
-      return window.TrainIcons.getTrainIcon(
-        ctx.lineId, ctx.operator,
-        trainId, ctx.stationIndex, ctx.trainType, !!ctx.byOperator
-      ) || '';
-    }
-    return '';
-  }
-
   // ============================================================
-  // 主判定：聚合 S0–S4 → 交叉验证 → 决策
+  // Main decision: explicit and dated evidence only.
   // ============================================================
   function resolve(ctx) {
     ctx = ctx || {};
@@ -125,8 +98,7 @@
     // operator, retired replacement, or rule-derived vehicle.
     var iconPath = chosen ? resolveIconForName(chosen, ctx.lineId) : '';
 
-    // 5) S4 图标兜底只提供视觉 locator，不再从 PNG basename 反推出车型身份。
-    // 车型身份必须来自 S0-S3 或 canonical/alias 层，避免 physical filename 承担 identity。
+    // Display-name normalization is allowed only after identity is exact.
 
     // v4.3.991: 标签诚实化——manual 为多候选串（如混跑"71-000形 / 70-000形"）时传原文串，
     // resolveVehicleDisplayName 对全部可解析的多候选返回完整串（表达不确定），不再只显示第一项；
