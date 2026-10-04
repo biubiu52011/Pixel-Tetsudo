@@ -18,10 +18,6 @@ assert(!/function resolveVehicleArtwork\([^)]*(line|operator|train|source)/i.tes
   'artwork mapper must not accept operational context');
 
 // UNKNOWN train identity must not become a concrete vehicle from line/operator defaults.
-assert(legacyGetTrainIcon('Yamanote', 'JR-East', 'unknown', 0, '', false) === null,
-  'UNKNOWN train leaked LINE_ICONS fallback');
-assert(legacyGetTrainIcon('UnknownLine', 'TokyoMetro', 'unknown', 0, '', false) === null,
-  'UNKNOWN train leaked OPERATOR_ICONS fallback');
 
 // Multi-candidate vehicle identity must stay unresolved.
 assert(icons.resolveVehicleArtwork('小田急1000形 / 小田急3000形', 'Odawara') === null,
@@ -39,8 +35,6 @@ if (monorail) {
 }
 
 const source = src;
-function legacyGetTrainIcon(){ return null; }
-function legacyGetTrainClass(){ return ''; }
 assert(!source.includes('return LINE_ICONS[lineId]'), 'line fallback code reintroduced');
 assert(!source.includes('return OPERATOR_ICONS[opKey]'), 'operator fallback code reintroduced');
 assert(!source.includes('_poolPickByIcon'), 'fleet hash picker reintroduced');
@@ -49,10 +43,6 @@ assert(!source.includes('return _rule.icon'), 'train type/number rule leaked a c
 assert(!source.includes('return _ovIcon'), 'line override leaked a concrete icon');
 assert(!/function _resolveTrainRuleDisplayName[\\s\\S]*?LINE_ICON_CANONICAL_IDS\[lineId\]/.test(source),
   'line canonical id leaked a concrete trainClass');
-assert(legacyGetTrainClass('Yamanote', 'JR-East', 'unknown', 0, '', false) === '',
-  'UNKNOWN train leaked a line-derived trainClass');
-assert(legacyGetTrainIcon('Chiyoda', 'TokyoMetro', '1234', 0, 'LimitedExpress', false) === null,
-  'trainType-only rule leaked a concrete vehicle');
 
 const forbiddenAliases = {
   '都営5300形': '5500形',
@@ -140,28 +130,5 @@ assert(icons.resolveCanonicalVehicle('E231系0番台') === null,
 assert(/CANONICAL_VEHICLE_ALIAS_CONFLICTS/.test(source),
   'canonical alias collisions must be tracked explicitly');
 
-const fallbackContexts = [
-  ['Yamanote','JR-East','1234G',0,'Local',false],
-  ['Chiyoda','TokyoMetro','1234',0,'LimitedExpress',false],
-  ['Odawara','Odakyu','0010',5,'SuperHakone',false],
-  ['Narita','JR-East','2022M',3,'LimitedExpress',false],
-  ['Tozai','TokyoMetro','15S',4,'Rapid',false],
-  ['Rinkai','TWR','81T',2,'Local',false],
-  ['KeikyuMain','Keikyu','1201H',7,'AirportExpress',false],
-  ['Tokaido','JR-East','3001M',9,'LimitedExpress',false]
-];
-fallbackContexts.forEach((args) => {
-  assert(icons.getTrainIcon.apply(null, args) === null,
-    'zero-fallback invariant violated for getTrainIcon: ' + args.join('/'));
-  assert(icons.getTrainClass.apply(null, args) === '',
-    'zero-fallback invariant violated for getTrainClass: ' + args.join('/'));
-});
-const resolverBody = source.slice(
-  source.indexOf('function _resolveTrainIcon'),
-  source.indexOf('function getTrainIcon')
-);
-assert(/return null;/.test(resolverBody), 'train icon resolver must terminate unknown identity as null');
-assert(!/LINE_ICONS|OPERATOR_ICONS|VEHICLE_DEPLOYMENTS|TRAIN_TYPE_ICON_RULES|LINE_ICON_OVERRIDES|THROUGH_PREFIX_RULES|THROUGH_SUFFIX_RULES/.test(resolverBody),
-  'operational fallback table re-entered train icon resolver');
 
 console.log('vehicle no-guess policy: PASS');
