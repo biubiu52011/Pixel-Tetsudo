@@ -42,12 +42,15 @@ var HOLIDAY_TRAIN_TO_OPERATION={
  "9177":"C21","2218":"C21","6001":"C21",
  "1200":"C22","1203":"C22","3014":"C22","3509":"C22","3520":"C22","9213":"C22","7637":"C22","2002":"C22","2023":"C22","2032":"C22"
 };
-function mappedOperation(trainNumber,ctx){
+function serviceDay(ctx){
  var date=String(ctx.serviceDate||"").slice(0,10); if(!date)return "";
  var d=new Date(date+"T12:00:00Z"),day=d.getUTCDay();
+ return (day===0||day===6)?"holiday":"weekday";
+}
+function mappedOperation(trainNumber,ctx){
+ var day=serviceDay(ctx); if(!day)return "";
  var key=String(trainNumber||"").replace(/\\D/g,"");
- if(day===0||day===6)return HOLIDAY_TRAIN_TO_OPERATION[key]||"";
- return WEEKDAY_TRAIN_TO_OPERATION[key]||"";
+ return day==="holiday"?(HOLIDAY_TRAIN_TO_OPERATION[key]||""):(WEEKDAY_TRAIN_TO_OPERATION[key]||"");
 }
 function op(raw){
  var m=String(raw||"").toUpperCase().trim().match(/(?:^|[^A-Z0-9])([ABCE])(\d{1,2})(?:[^A-Z0-9]|$)/);
@@ -65,7 +68,8 @@ function resolveEvidence(trainNumber,ctx){
  else if(x.group==="C"&&x.number>=11&&x.number<=23){c=["小田急4000形"];exact="小田急4000形";}
  else if(x.group==="E")c=["小田急1000形","小田急3000形","小田急5000形","小田急8000形"];
  else return null;
- return {operator:"Odakyu",vehicleType:exact,vehicleCandidates:c,grade:"C",sourceUrl:SOURCE,
+ var sourceUrl=mapped ? (serviceDay(ctx)==="holiday" ? HOLIDAY_TRAIN_MAP_SOURCE : TRAIN_MAP_SOURCE) : SOURCE;
+ return {operator:"Odakyu",vehicleType:exact,vehicleCandidates:c,grade:"C",sourceUrl:sourceUrl,
   provenance:"2026 Odakyu operation-group fleet constraints / verified train-number mapping",observedDate:date,operationCode:x.group+String(x.number).padStart(2,"0")};
 }
 var p={id:"odakyu-operation-groups-2026",grade:"C",sourceUrl:SOURCE,effectiveDate:EFFECTIVE,resolveEvidence:resolveEvidence};
