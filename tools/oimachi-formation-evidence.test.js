@@ -7,6 +7,7 @@ let x=r('103');assert.equal(x.vehicleType,'東急6020系(5両)');assert.equal(x.
 x=r('101');assert.equal(x.vehicleType,'東急9020系');assert.equal(x.formationId,'902021F');
 x=r('132');assert.equal(x.vehicleType,'東急6000系');assert.equal(x.formationId,'600001F');
 x=r('133');assert.equal(x.vehicleType,'東急6020系(7両)');assert.equal(x.formationId,'602022F');
-assert.equal(r('103','2026-04-15'),null);
+x=r('103','2026-04-15');assert.equal(x.vehicleType,'東急9020系');assert.equal(x.formationId,'902021F');
+assert.equal(r('103','2026-04-14'),null);
 assert.equal(r('103','2026-04-16','TokyuToyoko'),null);
 console.log('Oimachi formation evidence: PASS');
