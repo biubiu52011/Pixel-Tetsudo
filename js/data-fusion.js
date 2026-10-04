@@ -1143,32 +1143,33 @@
             });
             Object.keys(estimated).forEach(function(_vlid) {
               (estimated[_vlid] || []).forEach(function(_p) {
-                _inheritChainVehicle(_p);
-                // Daily formation anchors are stronger than generic fleet/type
-                // evidence and propagate only through the resolved running chain.
-                if (window.TrainVehicle && typeof window.TrainVehicle.resolveFormationEvidence === "function") {
+                // Formation evidence participates before inheritance/commit; it
+                // must never overwrite a stronger identity after arbitration.
+                if (window.TrainVehicle && typeof window.TrainVehicle.resolveFormationEvidence === "function" &&
+                    window.TrainVehicle && typeof window.TrainVehicle.resolve === "function") {
                   var _fe = window.TrainVehicle.resolveFormationEvidence({
                     lineId: _vlid,
                     runningChainId: _p && _p.runningChainId,
                     at: Date.now()
                   });
-                  if (_fe && typeof window.TrainVehicle.resolve === "function") {
-                    var _feResolved = window.TrainVehicle.resolve({
-                      timetableVehicleType: _fe.vehicleName
-                    });
-                    _p.trainClass = _feResolved.name || "";
-                    _p.vehicleType = _feResolved.vehicleTypeStr || "";
-                    _p.vehicleIconPath = _feResolved.iconPath || "";
-                    _p.vehicleSource = _feResolved.source || "";
-                    _p.vehicleConfidence = _feResolved.confidence || "none";
-                    _p.formationId = _fe.formationId;
-                    _p.formationServiceDate = _fe.serviceDate;
-                    _p.vehicleResolution = _feResolved;
-                    _p.vehicleIdentityStatus = _feResolved.identityStatus || "UNKNOWN";
-                    _p.vehicleIdentityReason = _feResolved.identityReason || "no-vehicle-evidence";
-                    _p.vehicleResolvedUpstream = _feResolved.identityStatus === "EXACT";
+                  if (_fe) {
+                    var _feResolved = window.TrainVehicle.resolve({timetableVehicleType:_fe.vehicleName});
+                    if (_feResolved && _feResolved.identityStatus === "EXACT") {
+                      var _formationCandidate = {
+                        runningChainId:_p.runningChainId, trainClass:_feResolved.name||"",
+                        vehicleType:_feResolved.vehicleTypeStr||"", vehicleIconPath:_feResolved.iconPath||"",
+                        vehicleSource:_feResolved.source||"timetable", vehicleConfidence:_feResolved.confidence||"none",
+                        vehicleResolution:_feResolved, vehicleIdentityStatus:_feResolved.identityStatus,
+                        vehicleIdentityReason:_feResolved.identityReason||"formation-evidence",
+                        vehicleFormationId:_fe.formationId||"", vehicleFormationCandidates:_fe.formationId?[_fe.formationId]:[]
+                      };
+                      // Existing registry arbitration decides whether formation
+                      // evidence is allowed to replace the established identity.
+                      _rememberChainVehicle(_formationCandidate);
+                    }
                   }
                 }
+                _inheritChainVehicle(_p);
               });
             });
 
