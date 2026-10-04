@@ -46,12 +46,27 @@ async function get(table, select, order) {
       "effective_from.asc,network_key.asc,operation_code.asc,train_number.asc")
   ]);
   const pm = Object.fromEntries(policies.map(p=>[p.network_key,p]));
-  const trainNumbersByOperation = {};
+  // train_operation_mappings.effective_from is a validity boundary, not a
+  // service date. For each evidence row, use the newest explicit mapping set
+  // whose effective_from is on or before that service date. Never infer across
+  // operation codes or networks.
+  const mappingsByOperation = {};
   mappings.forEach(m=>{
-    const key = normalizeNetworkKey(m.network_key)+"|"+m.effective_from+"|"+m.operation_code;
-    if (!trainNumbersByOperation[key]) trainNumbersByOperation[key]=[];
-    if (m.train_number && !trainNumbersByOperation[key].includes(m.train_number)) trainNumbersByOperation[key].push(m.train_number);
+    const key = normalizeNetworkKey(m.network_key)+"|"+m.operation_code;
+    if (!mappingsByOperation[key]) mappingsByOperation[key]=[];
+    mappingsByOperation[key].push(m);
   });
+  function explicitTrainNumbers(networkKey, operationCode, serviceDate) {
+    const candidates = mappingsByOperation[normalizeNetworkKey(networkKey)+"|"+operationCode] || [];
+    let effectiveFrom = "";
+    for (const m of candidates) {
+      if (m.effective_from <= serviceDate && m.effective_from > effectiveFrom) effectiveFrom = m.effective_from;
+    }
+    if (!effectiveFrom) return [];
+    return [...new Set(candidates
+      .filter(m=>m.effective_from===effectiveFrom && m.train_number)
+      .map(m=>m.train_number))];
+  }
   const records = obs.map(r=>{
     const p=pm[r.network_key]||{};
     return {
@@ -59,7 +74,7 @@ async function get(table, select, order) {
       vehicleType:r.vehicle_type||"",formationIds:Array.isArray(r.formation_ids)?r.formation_ids:[],
       validFromTime:r.valid_from_time||"",validToTime:r.valid_to_time||"",ambiguityGroup:r.ambiguity_group||"",
       observedDate:r.observed_date||r.service_date,grade:r.evidence_grade||"C",sourceUrl:r.source_url||"",
-      trainNumbers:trainNumbersByOperation[normalizeNetworkKey(r.network_key)+"|"+r.service_date+"|"+r.operation_code]||[],
+      trainNumbers:explicitTrainNumbers(r.network_key,r.operation_code,r.service_date),
       evidenceRole:r.sql_evidence_role||p.sql_evidence_role||"primary",
       realtimeApiAvailable:p.realtime_api_available===true,
       realtimeVehicleIdentityStatus:p.realtime_vehicle_identity_status||"unknown"
