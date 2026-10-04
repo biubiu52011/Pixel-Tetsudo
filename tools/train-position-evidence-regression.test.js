@@ -16,6 +16,9 @@ assert(/_realtimeEvidenceWithoutPosition/.test(fusion),"missing-position realtim
 assert(!/if \(!mayUseTimetablePosition\(lineId\)\)[\s\S]{0,120}resolve\(true\)/.test(fusion),"FULL realtime must not block manual vehicle evidence loading");
 assert(/TrainVehicle\.registerVehicle\(_mTrainNo, _mVehicle\)/.test(fusion),"manual timetable vehicle evidence must be registered independently of position");
 assert(/_realtimeEvidenceWithoutPosition\s*=\s*\{\};/.test(fusion),"positionless realtime evidence must be snapshot-scoped");
+assert(!/positionData\.trainClass\s*=\s*positionData\.trainClass\s*\|\|\s*resolveTrainClass/.test(fusion),
+  "DataFusion must not fill trainClass from line/operator/train context");
+
 assert(/Object\.keys\(_realtimeEvidenceWithoutPosition\)/.test(fusion),"positionless realtime vehicle evidence must have a consumer");
 assert(/\(estimated\[_vlid\] \|\| \[\]\)\.forEach\(_rememberChainVehicle\)/.test(fusion),"verified timetable vehicle evidence must seed running-chain registry");
 const estimator=read("js/train-position-estimator.js");
@@ -84,6 +87,10 @@ assert(trainVehicleSource.includes("_manualEvidenceSource === 'operation-assignm
 
 assert(estimatorSource.includes("operation-assignment-provider"),
   'Meguro/Sotetsu exact assignment must use the shared operation evidence promotion path');
+
+assert(!/tobu-official-2026-timetable-service-name/.test(estimatorSource),
+  'service-name-only vehicle inference must not return');
+
 
 
 assert(estimatorSource.includes("vehicleFormationId: Object.keys(_assignmentFormations).length === 1"),
