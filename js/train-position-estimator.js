@@ -650,6 +650,14 @@
             tt['vehicleType'] = Object.keys(_assignmentVehicles)[0];
             tt._vehicleEvidenceSource = 'operation-assignment-provider';
           }
+          var _timetableVehicleSource = window.VehicleSources
+            ? window.VehicleSources.timetable(_decisiveAssignments, {
+                trainNumber: trainNumber,
+                serviceDate: _baseOperationCtx.serviceDate,
+                operationCode: _baseOperationCtx.operationCode || (_resolvedOperationCodeList.length === 1 ? _resolvedOperationCodeList[0] : ''),
+                serviceTime: _baseOperationCtx.at
+              })
+            : null;
           var vehCtx = {
             lineId: lineId,
             operator: line.operator,
@@ -659,7 +667,10 @@
             stationIndex: currentStationIndex,
             trainType: tt['odpt:trainType'],
             destinationStation: destinationStationUrn || tt['odpt:destinationStation'] || '',
-            timetableVehicleType: tt['vehicleType'] || '',
+            timetableVehicleType: _timetableVehicleSource && _timetableVehicleSource.identityStatus === 'EXACT'
+              ? _timetableVehicleSource.vehicleIdentity : '',
+            timetableSource: _timetableVehicleSource,
+            timetableEvidence: _assignmentMatches,
             vehicleEvidenceSource: tt._vehicleEvidenceSource || '',
             operationVehicleCandidates: _assignmentCandidateSets.length ? _assignmentCandidateSets[0] : [],
             trainId: lineId + '_' + trainNumber + '_' + currentStationIndex
