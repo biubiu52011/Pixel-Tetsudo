@@ -28,6 +28,10 @@ assert(/Object\.keys\(_vehicleNames\)\.length === 1/.test(estimator),"conflictin
 const tobuEvidence=read("data/timetables/tobu-limited-express-vehicle-evidence.js");
 assert(/TRAIN_VEHICLE_EVIDENCE_PROVIDERS/.test(tobuEvidence),"Tobu exact-train evidence must register through generic provider registry");
 assert(/id:\s*"tobu-official-limited-express-2026"/.test(tobuEvidence),"vehicle evidence provider must expose stable provenance id");
+assert(/if \(!d\) return null;/.test(tobuEvidence),
+  "exact Tobu vehicle evidence must require an explicit service date");
+assert(/!hasExplicitValidity && d !== provider\.effectiveDate/.test(tobuEvidence),
+  "undated Tobu timetable rows must not become open-ended vehicle assignments");
 const renderer=read("js/trains-render.js");
 assert(/_hasUpstreamVehicle/.test(renderer),"renderer must consume upstream vehicle resolution");
 assert(/var _identityExact = p\.vehicleIdentityStatus === "EXACT"/.test(renderer),
