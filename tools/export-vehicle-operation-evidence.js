@@ -42,7 +42,7 @@ async function get(table, select, order) {
 }
 
 (async function(){
-  const [obs, policies, mappings, coverage, inventory, formations, trainDates, operationDates, trainObs, sources] = await Promise.all([
+  const [obs, policies, mappings, coverage, inventory, formations, trainDates, operationDates, trainObs, sources, familyRules] = await Promise.all([
     get("runtime_vehicle_operation_evidence",
       "observation_id,service_date,operator,network_key,operation_code,valid_from_time,valid_to_time,vehicle_type,formation_ids,ambiguity_group,observed_date,evidence_grade,source_url,sql_evidence_role",
       "service_date.asc,operator.asc,network_key.asc,operation_code.asc,observation_id.asc"),
@@ -72,7 +72,10 @@ async function get(table, select, order) {
       "service_date.asc,network_key.asc,train_number.asc,id.asc"),
     get("evidence_sources",
       "id,source_url,evidence_grade",
-      "id.asc")
+      "id.asc"),
+    get("operation_family_rules",
+      "id,network_key,operator,code_pattern,calendar_type,effective_from,effective_to,exact_vehicle_type,vehicle_candidates,source_id,notes",
+      "network_key.asc,id.asc")
   ]);
   const pm = Object.fromEntries(policies.map(p=>[p.network_key,p]));
   const cm = Object.fromEntries(coverage.map(c=>[c.network_key,c]));
@@ -168,16 +171,32 @@ async function get(table, select, order) {
   for (const [k,ids] of Object.entries(datedConflicts)) {
     if (ids.size>1) throw new Error("Conflicting dated vehicle identities: "+k+" => "+[...ids].join(", "));
   }
+  const familyRuleRecords=familyRules.map(function(r){
+    var s=sourceById[String(r.source_id)]||{};
+    return {evidenceId:r.id,networkKey:normalizeNetworkKey(r.network_key),operator:r.operator||"",
+      codePattern:r.code_pattern||"",calendarType:r.calendar_type||"",
+      effectiveFrom:r.effective_from||"",effectiveTo:r.effective_to||"",
+      exactVehicleType:r.exact_vehicle_type||"",
+      vehicleCandidates:Array.isArray(r.vehicle_candidates)?r.vehicle_candidates:[],
+      grade:s.evidence_grade||"C",sourceUrl:s.source_url||"",notes:r.notes||""};
+  });
+  familyRuleRecords.forEach(function(r){
+    if (!r.networkKey || !r.codePattern || !r.effectiveFrom || !r.sourceUrl) throw new Error("Incomplete operation family rule "+r.evidenceId);
+    if (r.exactVehicleType && r.vehicleCandidates.length && r.vehicleCandidates.indexOf(r.exactVehicleType)<0)
+      throw new Error("Exact family vehicle missing from candidates "+r.evidenceId);
+  });
   const inventoryNetworks = [...new Set(inventory.map(r=>r.canonical_network_key))];
   if (!inventoryNetworks.length) throw new Error("Canonical vehicle evidence inventory is empty");
   const json={schemaVersion:3,generatedFrom:"Supabase canonical evidence tables",records,
     datedRecords,
+    familyRules:familyRuleRecords,
     evidenceInventory:{networkCount:inventoryNetworks.length,networks:inventoryNetworks,rows:inventory}};
   const root=path.join(__dirname,"..","data","timetables");
   fs.writeFileSync(path.join(root,"vehicle-operation-evidence.json"),JSON.stringify(json,null,2)+"\n");
   fs.writeFileSync(path.join(root,"vehicle-operation-evidence-data.js"),
     "/* Generated from canonical Supabase evidence tables. Data only; no line logic. */\n"+
     "window.VEHICLE_OPERATION_EVIDENCE = "+JSON.stringify(records,null,2)+";\n"+
-    "window.VEHICLE_DATED_EVIDENCE = "+JSON.stringify(datedRecords,null,2)+";\n");
+    "window.VEHICLE_DATED_EVIDENCE = "+JSON.stringify(datedRecords,null,2)+";\n"+
+    "window.VEHICLE_FAMILY_RULES = "+JSON.stringify(familyRuleRecords,null,2)+";\n");
   console.log("vehicle operation evidence records =",records.length);
 })().catch(e=>{console.error(e.stack||e);process.exit(1);});
