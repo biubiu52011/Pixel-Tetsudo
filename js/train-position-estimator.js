@@ -659,7 +659,7 @@
             stationIndex: currentStationIndex,
             trainType: tt['odpt:trainType'],
             destinationStation: destinationStationUrn || tt['odpt:destinationStation'] || '',
-            vehicleTypeManual: tt['vehicleType'] || '',
+            timetableVehicleType: tt['vehicleType'] || '',
             vehicleEvidenceSource: tt._vehicleEvidenceSource || '',
             operationVehicleCandidates: _assignmentCandidateSets.length ? _assignmentCandidateSets[0] : [],
             trainId: lineId + '_' + trainNumber + '_' + currentStationIndex
@@ -669,16 +669,15 @@
             : { name: '', vehicleTypeStr: '' };
           var trainClass = vehResult.name || '';
           var _vehicleType = vehResult.vehicleTypeStr || '';
-          // Vehicle identity has one authority: TrainVehicle. If it is unavailable,
-          // preserve explicit manual vehicleType only; never infer identity from icons.
-          if (!window.TrainVehicle) _vehicleType = tt['vehicleType'] || '';
+          // Missing resolver means unresolved identity; timetable data must not
+          // bypass the single source-arbitration authority.
           positions.push({
             stationIndex: currentStationIndex,
             trainId: lineId + '_' + trainNumber,
             timetableIdentity: timetableIdentity,
             runningChainId: timetableIdentity,
             runningChainEvidence: "TIMETABLE_SEGMENT",
-            trainNumber: trainNumber,  // v4.3.950: 纯车号——渲染层查 TRAIN_NO_VEHICLE 用（修复 key 不匹配）
+            trainNumber: trainNumber,
             delayMin: delayMin,
             estimated: true,
             positionSource: tt._positionSource || "train-timetable",
@@ -706,9 +705,8 @@
             vehicleSource: vehResult.source || '',
             vehicleConfidence: vehResult.confidence || 'none',
             vehicleResolution: vehResult,
-            vehicleResolvedUpstream: !!vehResult.iconPath,
-            // v4.3.1018: manual vehicleType 透传渲染层
-            vehicleTypeManual: tt['vehicleType'] || ''
+            vehicleResolvedUpstream: vehResult.identityStatus === 'EXACT',
+            timetableVehicleType: tt['vehicleType'] || ''
           });
         }
       }
