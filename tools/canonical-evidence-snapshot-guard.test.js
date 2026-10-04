@@ -71,10 +71,10 @@ for (const [i, r] of snapshot.records.entries()) {
   assert(Array.isArray(r.trainNumbers), "record "+i+" trainNumbers must be array");
   assert(["primary","fallback","historical"].includes(r.evidenceRole),
     "record "+i+" must carry a valid SQL evidence role");
-  assert.strictEqual(typeof r.realtimeApiAvailable, "boolean",
-    "record "+i+" must carry realtime API capability");
-  assert(["verified","absent","unknown"].includes(r.realtimeVehicleIdentityStatus),
-    "record "+i+" must carry realtime vehicle identity capability status");
+  assert(!Object.prototype.hasOwnProperty.call(r,"realtimeApiAvailable"),
+    "record "+i+" must not export operator API capability as runtime coverage");
+  assert(!Object.prototype.hasOwnProperty.call(r,"realtimeVehicleIdentityStatus"),
+    "record "+i+" must not export duplicate realtime coverage policy");
 }
 
 const sandbox={window:{}};
