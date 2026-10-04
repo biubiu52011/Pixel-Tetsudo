@@ -139,8 +139,12 @@ assert(!/_rtVehicle\.source === "trainNo"/.test(fusionSource),
   'train-number history must not be promoted as realtime vehicle evidence');
 assert(fusionSource.includes('realtimeVehicleType: odptVehicleType'),
   'realtime API vehicle identity must enter the explicit realtime source channel');
-assert(estimatorSource.includes("timetableVehicleType: _timetableExactVehicle"),
-  'timetable identity must enter TrainVehicle only through the resolved exact evidence channel');
+assert(estimatorSource.includes("timetableVehicleType: _timetableVehicleInput"),
+  'timetable identity must enter TrainVehicle only through the unified timetable evidence channel');
+assert(!estimatorSource.includes("operationVehicleCandidates:"),
+  'operation candidates must not enter TrainVehicle as a third vehicle source');
+assert(estimatorSource.includes("var _candidateSetsAgree = _assignmentCandidateSets.every"),
+  'ambiguous timetable candidates must require provider agreement before entering the timetable channel');
 assert(!/tt\['vehicleType'\]\s*=\s*Object\.keys\(_assignmentVehicles\)/.test(estimatorSource),
   'dated operation evidence must not be written back into legacy timetable vehicleType');
 assert(!estimatorSource.includes("if (!window.TrainVehicle) _vehicleType = tt['vehicleType'] || ''"),
