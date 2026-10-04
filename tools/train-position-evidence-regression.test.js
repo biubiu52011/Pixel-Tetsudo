@@ -26,7 +26,9 @@ const tobuEvidence=read("data/timetables/tobu-limited-express-vehicle-evidence.j
 assert(/TRAIN_VEHICLE_EVIDENCE_PROVIDERS/.test(tobuEvidence),"Tobu exact-train evidence must register through generic provider registry");
 assert(/id:\s*"tobu-official-limited-express-2026"/.test(tobuEvidence),"vehicle evidence provider must expose stable provenance id");
 const renderer=read("js/trains-render.js");
-assert(/_hasUpstreamVehicle/.test(renderer),"renderer must consume upstream vehicle resolution before fallback");
+assert(/_hasUpstreamVehicle/.test(renderer),"renderer must consume upstream vehicle resolution");
+assert(!/TrainVehicle\.resolve\(_vrCtx\)/.test(renderer),"renderer must not re-resolve vehicle identity");
+assert(!/__trainIconCache/.test(renderer),"renderer must not resurrect stale vehicle artwork from cache");
 assert(/if \(!stationKey\)[\s\S]{0,800}return;/.test(fusion),"missing fromStation must not create realtime position");
 
 const resolver=read("js/running-chain-resolver.js");
@@ -97,6 +99,8 @@ assert(fusionSource.includes('(!p.vehicleType && !p.vehicleIconPath)'),
   'running-chain registry must accept exact vehicle identity even when no icon is resolved');
 assert(fusionSource.includes('p.vehicleIdentityStatus === "EXACT"'),
   'running-chain registry must accept exact model evidence');
+assert(!/_rtVehicle\.source === "trainNo"/.test(fusionSource),
+  'train-number history must not be promoted as realtime vehicle evidence');
 assert(fusionSource.includes('vehicleFormationCandidates: (p.vehicleFormationCandidates || []).slice()'),
   'running-chain registry must preserve formation candidate sets');
 assert(fusionSource.includes('p.vehicleFormationCandidates = (v.vehicleFormationCandidates || p.vehicleFormationCandidates || []).slice()'),
