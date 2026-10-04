@@ -108,6 +108,10 @@ assert(fusionSource.includes('(!p.vehicleType && !p.vehicleIconPath)'),
   'running-chain registry must accept exact vehicle identity even when no icon is resolved');
 assert(fusionSource.includes('p.vehicleIdentityStatus === "EXACT"'),
   'running-chain registry must accept exact model evidence');
+assert(!fusionSource.includes('_src === "trainNo"'),
+  'train-number confidence must never qualify vehicle identity for running-chain inheritance');
+assert(fusionSource.includes('_evResolution.identityStatus !== "EXACT"'),
+  'realtime evidence without EXACT vehicle identity must not seed running-chain inheritance');
 assert(!/_rtVehicle\.source === "trainNo"/.test(fusionSource),
   'train-number history must not be promoted as realtime vehicle evidence');
 assert(fusionSource.includes('vehicleFormationCandidates: (p.vehicleFormationCandidates || []).slice()'),
