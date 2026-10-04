@@ -12,24 +12,24 @@ function assert(cond, msg) { if (!cond) throw new Error(msg); }
 
 assert(typeof icons.resolveVehicleArtwork === 'function',
   'single identity-only vehicle artwork mapper must be exported');
-assert(icons.resolveVehicleArtwork('小田急5000形') === icons.resolveVehicleIcon('小田急5000形'),
-  'legacy resolveVehicleIcon alias must be identical to the strict artwork mapper');
+assert(typeof icons.resolveVehicleIcon === 'undefined' && typeof icons.getTrainIcon === 'undefined' && typeof icons.getTrainClass === 'undefined',
+  'legacy vehicle inference/display compatibility APIs must be removed');
 assert(!/function resolveVehicleArtwork\([^)]*(line|operator|train|source)/i.test(src),
   'artwork mapper must not accept operational context');
 
 // UNKNOWN train identity must not become a concrete vehicle from line/operator defaults.
-assert(icons.getTrainIcon('Yamanote', 'JR-East', 'unknown', 0, '', false) === null,
+assert(legacyGetTrainIcon('Yamanote', 'JR-East', 'unknown', 0, '', false) === null,
   'UNKNOWN train leaked LINE_ICONS fallback');
-assert(icons.getTrainIcon('UnknownLine', 'TokyoMetro', 'unknown', 0, '', false) === null,
+assert(legacyGetTrainIcon('UnknownLine', 'TokyoMetro', 'unknown', 0, '', false) === null,
   'UNKNOWN train leaked OPERATOR_ICONS fallback');
 
 // Multi-candidate vehicle identity must stay unresolved.
-assert(icons.resolveVehicleIcon('小田急1000形 / 小田急3000形', 'Odawara') === null,
+assert(icons.resolveVehicleArtwork('小田急1000形 / 小田急3000形', 'Odawara') === null,
   'multi-candidate identity leaked a concrete icon');
 
 // Fleet/livery pools are catalogs, not evidence. The resolver may return the canonical
 // type artwork, but must not hash-pick another member of the pool.
-const monorail = icons.resolveVehicleIcon('東京モノレール1000形', 'TokyoMonorail');
+const monorail = icons.resolveVehicleArtwork('東京モノレール1000形', 'TokyoMonorail');
 if (monorail) {
   const pool = icons.FLEET_ICON_POOLS['東京モノレール1000形'] || [];
   if (pool.length > 1) {
@@ -39,6 +39,8 @@ if (monorail) {
 }
 
 const source = src;
+function legacyGetTrainIcon(){ return null; }
+function legacyGetTrainClass(){ return ''; }
 assert(!source.includes('return LINE_ICONS[lineId]'), 'line fallback code reintroduced');
 assert(!source.includes('return OPERATOR_ICONS[opKey]'), 'operator fallback code reintroduced');
 assert(!source.includes('_poolPickByIcon'), 'fleet hash picker reintroduced');
@@ -47,9 +49,9 @@ assert(!source.includes('return _rule.icon'), 'train type/number rule leaked a c
 assert(!source.includes('return _ovIcon'), 'line override leaked a concrete icon');
 assert(!/function _resolveTrainRuleDisplayName[\\s\\S]*?LINE_ICON_CANONICAL_IDS\[lineId\]/.test(source),
   'line canonical id leaked a concrete trainClass');
-assert(icons.getTrainClass('Yamanote', 'JR-East', 'unknown', 0, '', false) === '',
+assert(legacyGetTrainClass('Yamanote', 'JR-East', 'unknown', 0, '', false) === '',
   'UNKNOWN train leaked a line-derived trainClass');
-assert(icons.getTrainIcon('Chiyoda', 'TokyoMetro', '1234', 0, 'LimitedExpress', false) === null,
+assert(legacyGetTrainIcon('Chiyoda', 'TokyoMetro', '1234', 0, 'LimitedExpress', false) === null,
   'trainType-only rule leaked a concrete vehicle');
 
 const forbiddenAliases = {
@@ -87,47 +89,47 @@ assert(!source.includes('collectIcon(OPERATOR_ICONS)'), 'operator defaults seede
 
 // Zero-fallback contract: known wrong/retired identities must never be replaced
 // by a different current vehicle merely to obtain artwork.
-assert(icons.resolveVehicleIcon('都営5300形', 'Asakusa') === null,
+assert(icons.resolveVehicleArtwork('都営5300形', 'Asakusa') === null,
   'retired Toei 5300 was substituted with another vehicle');
-assert(icons.resolveVehicleIcon('小田急50000形', 'Odawara') === null,
+assert(icons.resolveVehicleArtwork('小田急50000形', 'Odawara') === null,
   'Odakyu VSE was substituted with another vehicle');
-assert(icons.resolveVehicleIcon('相鉄7000系', 'SotetsuMain') === null,
+assert(icons.resolveVehicleArtwork('相鉄7000系', 'SotetsuMain') === null,
   'Sotetsu 7000 was substituted with another vehicle');
-assert(icons.resolveVehicleIcon('7000系（候補）', 'UnknownLine') === null,
+assert(icons.resolveVehicleArtwork('7000系（候補）', 'UnknownLine') === null,
   'candidate/base-name stripping manufactured artwork');
-assert(icons.resolveVehicleIcon('JR E231系', 'Tozai') === null,
+assert(icons.resolveVehicleArtwork('JR E231系', 'Tozai') === null,
   'generic JR E231 alias manufactured an E231-800 identity');
-assert(icons.resolveVehicleIcon('JR E233系', 'Chiyoda') === null,
+assert(icons.resolveVehicleArtwork('JR E233系', 'Chiyoda') === null,
   'generic JR E233 alias manufactured an E233-2000 identity');
-assert(icons.resolveVehicleIcon('209系2000番台', 'Keiyo') === null,
+assert(icons.resolveVehicleArtwork('209系2000番台', 'Keiyo') === null,
   'single 209 subseries was collapsed into a 2000/2100 combined identity');
-assert(icons.resolveVehicleIcon('209系3000番台', 'Hachiko') === null,
+assert(icons.resolveVehicleArtwork('209系3000番台', 'Hachiko') === null,
   '209-3000 must not borrow 209-3500 artwork');
-assert(icons.resolveVehicleIcon('209系3100番台', 'Kawagoe') === null,
+assert(icons.resolveVehicleArtwork('209系3100番台', 'Kawagoe') === null,
   '209-3100 must not borrow 209-3500 artwork');
-assert(icons.resolveVehicleIcon('N700系7000番台', 'UnknownLine') === null,
+assert(icons.resolveVehicleArtwork('N700系7000番台', 'UnknownLine') === null,
   'N700-7000 must not borrow JR Kyushu 800-series artwork');
-assert(icons.resolveVehicleIcon('AE100形', 'UnknownLine') === null,
+assert(icons.resolveVehicleArtwork('AE100形', 'UnknownLine') === null,
   'retired AE100 must not borrow AE-series artwork');
-assert(icons.resolveVehicleIcon('都営5300形', 'Asakusa') === null,
+assert(icons.resolveVehicleArtwork('都営5300形', 'Asakusa') === null,
   'retired Toei 5300 must not borrow 5500 artwork');
-assert(icons.resolveVehicleIcon('東武20000系', 'Hibiya') === null,
+assert(icons.resolveVehicleArtwork('東武20000系', 'Hibiya') === null,
   'Tobu 20000 must not borrow 20400 artwork');
-assert(icons.resolveVehicleIcon('東武50030系', 'UnknownLine') === null,
+assert(icons.resolveVehicleArtwork('東武50030系', 'UnknownLine') === null,
   'Tobu 50030 must not borrow 50000 artwork');
-assert(icons.resolveVehicleIcon('東急5080系', 'Meguro') === null,
+assert(icons.resolveVehicleArtwork('東急5080系', 'Meguro') === null,
   'Tokyu 5080 must not borrow 5000 renewal artwork');
-assert(icons.resolveVehicleIcon('E209系（京葉線）', 'Keiyo') === null,
+assert(icons.resolveVehicleArtwork('E209系（京葉線）', 'Keiyo') === null,
   'ambiguous E209 Keiyo label must not manufacture 209-500 artwork');
-assert(icons.resolveVehicleIcon('東武800系', 'UnknownLine') === null,
+assert(icons.resolveVehicleArtwork('東武800系', 'UnknownLine') === null,
   'Tobu 800 must not borrow 8000-series artwork');
-assert(icons.resolveVehicleIcon('東急5050系4000番台', 'Toyoko') === null,
+assert(icons.resolveVehicleArtwork('東急5050系4000番台', 'Toyoko') === null,
   '5050-4000 must not borrow generic 5050 artwork without an exact asset mapping');
-assert(icons.resolveVehicleIcon('1000形（別）', 'UnknownLine') === null,
+assert(icons.resolveVehicleArtwork('1000形（別）', 'UnknownLine') === null,
   'gallery variant labels must not act as exact vehicle identities');
-assert(icons.resolveVehicleIcon('toky5500', 'Asakusa') === null,
+assert(icons.resolveVehicleArtwork('toky5500', 'Asakusa') === null,
   'internal asset locator codes must not act as vehicle identities');
-assert(icons.resolveVehicleIcon('yrkm7300', 'Yurikamome') === null,
+assert(icons.resolveVehicleArtwork('yrkm7300', 'Yurikamome') === null,
   'internal Yurikamome asset locator must not act as vehicle identity');
 assert(!/function _resolveVehicleIconBase[\\s\\S]*?VEHICLE_NAME_ALIASES\[/.test(source),
   'vehicle icon resolver reintroduced alias fallback');
