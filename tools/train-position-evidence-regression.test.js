@@ -104,6 +104,14 @@ assert(operationEvidenceSource.includes('var matches = exactTrain.length ? exact
   'dated train-number evidence must outrank operation-code evidence');
 assert(operationEvidenceSource.includes('if (Object.keys(identities).length !== 1) return null;'),
   'dated evidence conflicts must remain unresolved rather than selecting the first row');
+assert(operationEvidenceSource.includes('id:"canonical-vehicle-family-rules"'),
+  'family rules must use the existing operation-evidence provider channel');
+assert(operationEvidenceSource.includes('if (r.calendarType && (!cal || String(r.calendarType).toLowerCase()!==cal)) return false;'),
+  'calendar-scoped family rules must refuse to match without the correct calendar');
+assert(operationEvidenceSource.includes('if (exactKeys.length>1) return null;'),
+  'conflicting exact family rules must remain unresolved');
+assert(operationEvidenceSource.includes('provenance:"canonical operation family ownership rule"'),
+  'ownership-only family rules must remain model-free constraints');
 
 
 assert(estimatorSource.includes("Object.keys(_assignmentVehicles).length === 1"),
