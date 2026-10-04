@@ -66,11 +66,6 @@
     }
     addFrom(ctx.realtimeVehicleType, 'realtime');
     addFrom(ctx.timetableVehicleType, 'timetable');
-    if (Array.isArray(ctx.operationVehicleCandidates)) {
-      ctx.operationVehicleCandidates.filter(Boolean).forEach(function(candidate) {
-        addFrom(candidate, 'operation');
-      });
-    }
 
     // 2) Zero-fallback identity decision.
     // Only explicit vehicle identity carried by this train record may become EXACT.
