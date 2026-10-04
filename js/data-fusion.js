@@ -891,17 +891,17 @@
               try {
                 var _derivedVehicleEvidence = null;
                 if (!odptVehicleType && window.TrainOperationEvidence &&
-                    typeof window.TrainOperationEvidence.resolveRealtimeEvidence === "function") {
+                    typeof window.TrainOperationEvidence.resolveEvidence === "function") {
                   var _now = new Date();
                   var _serviceDate = _now.getFullYear() + "-" + String(_now.getMonth()+1).padStart(2,"0") + "-" + String(_now.getDate()).padStart(2,"0");
-                  _derivedVehicleEvidence = window.TrainOperationEvidence.resolveRealtimeEvidence(trainId, {
+                  _derivedVehicleEvidence = window.TrainOperationEvidence.resolveEvidence(trainId, {
                     lineId: lid,
                     railway: railwayName,
                     operator: trainOpShort,
                     trainOwner: odptTrainOwner,
                     trainNumber: trainId,
                     serviceDate: _serviceDate
-                  });
+                  }, "realtime-derived");
                 }
                 var _derivedVehicleType = _derivedVehicleEvidence && _derivedVehicleEvidence.vehicleType
                   ? _derivedVehicleEvidence.vehicleType
