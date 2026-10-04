@@ -35,6 +35,12 @@ for (const [i, r] of snapshot.records.entries()) {
   }
   assert(Array.isArray(r.formationIds), "record "+i+" formationIds must be array");
   assert(Array.isArray(r.trainNumbers), "record "+i+" trainNumbers must be array");
+  assert(["primary","fallback","historical"].includes(r.evidenceRole),
+    "record "+i+" must carry a valid SQL evidence role");
+  assert.strictEqual(typeof r.realtimeApiAvailable, "boolean",
+    "record "+i+" must carry realtime API capability");
+  assert(["verified","absent","unknown"].includes(r.realtimeVehicleIdentityStatus),
+    "record "+i+" must carry realtime vehicle identity capability status");
 }
 
 const sandbox={window:{}};
