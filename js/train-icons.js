@@ -1480,24 +1480,15 @@ function _canonicalVehicleIconPath(name, lineId) {
   return null;
 }
 
-var LINE_ICON_CANONICAL_IDS = {
-  "Yamanote": "jr-east-e235-0-yamanote",
-  "Joban": "jr-east-e231-0-joban-rapid-led",
-  "Kawagoe": "jr-east-209-3500-hachiko-kawagoe",
-  "KawagoeWest": "jr-east-209-3500-hachiko-kawagoe"
-};
-
 function _resolveTrainRuleDisplayName(lineId, operator, trainId, stationIndex, trainType, byOperator) {
   // A line, operator, train type or train number pattern is not concrete vehicle evidence.
   // Vehicle class is supplied only by explicit upstream evidence.
   return '';
 }
 
-// v4.3.987: 显示名解析——返回最终应展示的车型名（仅 alias 展开路径同步，
-  // 如退役车→現役車：都営5300形→5500形、ロマンスカー 10000形→小田急電鉄30000形EXEα、
-  // 東武5000系→50000系）；override 锁定/近似兜底保持原候选名（标签显示真实车型）。
-  // v4.3.991: 多候选全部可解析 → 返回完整串（诚实表达不确定，如混跑"71-000形 / 70-000形"）；
-  //            部分可解析 → 返回首个可解析项；单候选 → 原名/别名展开（与 4.3.987 一致）
+// Display-name normalization may only expand spelling variants within the same
+  // canonical identity. It must never rewrite retired stock to a successor,
+  // a generic family to a subseries, or an ambiguous candidate to one vehicle.
   function resolveVehicleDisplayName(candidatesStr, lineId) {
     if (!candidatesStr) return null;
     var parts = String(candidatesStr).split('/').map(function(s){ return s.trim(); }).filter(Boolean);
@@ -1507,8 +1498,6 @@ function _resolveTrainRuleDisplayName(lineId, operator, trainId, stationIndex, t
     return canonical ? canonical.displayName : name;
   }
 
-  // v4.3.964: 三层查找——精确匹配 → 别名表 → 去括注基础名匹配
-  
   // Fleet/livery pools are asset catalogs only. A confirmed vehicle type does not
   // prove a concrete formation or livery, so never hash-pick one at runtime.
   function resolveVehicleIcon(candidatesStr, lineId) {
