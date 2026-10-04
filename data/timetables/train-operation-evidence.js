@@ -33,6 +33,9 @@
       provenance: provenance,
       observedDate: observedDate,
       providerId: provider.id,
+      evidenceRole: rec.evidenceRole || '',
+      realtimeApiAvailable: rec.realtimeApiAvailable === true,
+      realtimeVehicleIdentityStatus: rec.realtimeVehicleIdentityStatus || '',
       // A/C run-level evidence may decide a dated assignment. B is structural
       // constraint only. D is a lead and must never decide identity by itself.
       decisive: (grade === 'A' || grade === 'C') && !!observedDate && !!sourceUrl
@@ -129,7 +132,10 @@
         return {operator:hit.operator,vehicleType:hit.vehicleType,
           formationId:hit.formationId || (Array.isArray(hit.formationIds) ? hit.formationIds.join(" / ") : ""),
           operationCode:hit.operationCode,grade:hit.grade||"C",sourceUrl:hit.sourceUrl||"",
-          provenance:"canonical vehicle operation evidence snapshot",observedDate:d};
+          provenance:"canonical vehicle operation evidence snapshot",observedDate:d,
+          evidenceRole:hit.evidenceRole||"",
+          realtimeApiAvailable:hit.realtimeApiAvailable===true,
+          realtimeVehicleIdentityStatus:hit.realtimeVehicleIdentityStatus||""};
       }
     });
   }
