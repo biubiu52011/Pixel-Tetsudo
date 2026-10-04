@@ -600,9 +600,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/SA/00/20250604/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "sotetsu",
@@ -620,9 +620,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/SA/00/20250604/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "sotetsu",
@@ -640,9 +640,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/SA/00/20250604/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "sotetsu",
@@ -660,9 +660,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/SA/00/20250604/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "sotetsu",
@@ -680,9 +680,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/SA/00/20250604/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "sotetsu",
@@ -700,9 +700,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/SA/00/20250604/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "sotetsu",
@@ -720,9 +720,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/SA/00/20250604/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "sotetsu",
@@ -740,9 +740,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/SA/00/20250604/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "sotetsu",
@@ -760,9 +760,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/SA/00/20250604/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "sotetsu",
@@ -780,9 +780,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/SA/00/20250604/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "sotetsu",
@@ -800,9 +800,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/SA/00/20250604/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "sotetsu",
@@ -820,9 +820,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/SA/00/20250604/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "sotetsu",
@@ -840,9 +840,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/SA/00/20250604/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "sotetsu",
@@ -860,9 +860,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/SA/00/20250604/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "sotetsu",
@@ -880,9 +880,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/SA/00/20250604/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "sotetsu",
@@ -900,9 +900,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/SA/00/20250604/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "sotetsu",
@@ -920,9 +920,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/SA/00/20250604/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "sotetsu",
@@ -940,9 +940,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/SA/00/20250604/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "sotetsu",
@@ -960,9 +960,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/SA/00/20250604/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "sotetsu",
@@ -980,9 +980,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/SA/00/20250604/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "sotetsu",
@@ -1000,9 +1000,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/SA/00/20250604/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "sotetsu",
@@ -1020,9 +1020,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/SA/00/20250604/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "sotetsu",
@@ -1040,9 +1040,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/SA/00/20250604/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "TokyoMonorail",
@@ -1339,9 +1339,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OD/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "odakyu-main",
@@ -1359,9 +1359,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OD/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "odakyu-main",
@@ -1379,9 +1379,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OD/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "odakyu-main",
@@ -1399,9 +1399,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OD/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "odakyu-main",
@@ -1419,9 +1419,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OD/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "odakyu-main",
@@ -1439,9 +1439,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OD/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "odakyu-main",
@@ -1459,9 +1459,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OD/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "odakyu-main",
@@ -1479,9 +1479,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OD/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "odakyu-main",
@@ -1510,9 +1510,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
       "9182",
       "9209"
     ],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "odakyu-main",
@@ -1530,9 +1530,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OD/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "odakyu-main",
@@ -1551,9 +1551,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OD/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "odakyu-main",
@@ -1571,9 +1571,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OD/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "odakyu-main",
@@ -1591,9 +1591,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OD/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "odakyu-main",
@@ -1611,9 +1611,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OD/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "odakyu-main",
@@ -1631,9 +1631,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OD/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "odakyu-main",
@@ -1651,9 +1651,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OD/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "odakyu-main",
@@ -1671,9 +1671,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OD/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "odakyu-main",
@@ -1691,9 +1691,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OD/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "odakyu-main",
@@ -1711,9 +1711,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OD/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "odakyu-main",
@@ -1731,9 +1731,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OD/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "odakyu-main",
@@ -1751,9 +1751,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OD/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "keiyo",
@@ -2095,9 +2095,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OM/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "oimachi",
@@ -2115,9 +2115,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OM/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "oimachi",
@@ -2135,9 +2135,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OM/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "oimachi",
@@ -2155,9 +2155,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OM/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "oimachi",
@@ -2175,9 +2175,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OM/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "oimachi",
@@ -2195,9 +2195,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OM/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "oimachi",
@@ -2215,9 +2215,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OM/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "oimachi",
@@ -2235,9 +2235,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OM/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "oimachi",
@@ -2255,9 +2255,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OM/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "oimachi",
@@ -2275,9 +2275,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OM/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "oimachi",
@@ -2295,9 +2295,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OM/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "oimachi",
@@ -2315,9 +2315,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OM/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "oimachi",
@@ -2335,9 +2335,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OM/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "oimachi",
@@ -2355,9 +2355,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OM/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "oimachi",
@@ -2375,9 +2375,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OM/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "oimachi",
@@ -2395,9 +2395,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OM/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "oimachi",
@@ -2415,9 +2415,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OM/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "tozai",
@@ -2435,9 +2435,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/MT/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "tozai",
@@ -2455,9 +2455,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/MT/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "tozai",
@@ -2475,9 +2475,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/MT/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "tozai",
@@ -2495,9 +2495,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/MT/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "tozai",
@@ -2515,9 +2515,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/MT/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "tozai",
@@ -2535,9 +2535,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/MT/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "tozai",
@@ -2555,9 +2555,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/MT/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "tozai",
@@ -2575,9 +2575,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/MT/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "tozai",
@@ -2595,9 +2595,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/MT/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "tozai",
@@ -2615,9 +2615,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/MT/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "tozai",
@@ -2635,9 +2635,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/MT/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "tozai",
@@ -2655,9 +2655,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/MT/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "tozai",
@@ -2675,9 +2675,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/MT/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "tozai",
@@ -2695,9 +2695,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/MT/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "tozai",
@@ -2715,9 +2715,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/MT/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "tozai",
@@ -2735,9 +2735,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/MT/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "tozai",
@@ -2755,9 +2755,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/MT/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "tozai",
@@ -2775,9 +2775,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/MT/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "tozai",
@@ -2795,9 +2795,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/MT/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "tozai",
@@ -2815,9 +2815,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/MT/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "tozai",
@@ -2835,9 +2835,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/MT/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "tozai",
@@ -2855,9 +2855,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/MT/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "tozai",
@@ -2875,9 +2875,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/MT/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "tozai",
@@ -2895,9 +2895,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/MT/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "tozai",
@@ -2915,9 +2915,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/MT/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "tozai",
@@ -2935,9 +2935,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/MT/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "tozai",
@@ -2955,9 +2955,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/MT/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "tozai",
@@ -2975,9 +2975,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/MT/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "tozai",
@@ -2995,9 +2995,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/MT/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "tozai",
@@ -3015,9 +3015,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/MT/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "tozai",
@@ -3035,9 +3035,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/MT/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "tozai",
@@ -3055,9 +3055,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/MT/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "tozai",
@@ -3075,9 +3075,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/MT/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "tozai",
@@ -3095,9 +3095,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/MT/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "tozai",
@@ -3115,9 +3115,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/MT/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "tozai",
@@ -3135,9 +3135,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/MT/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "oimachi",
@@ -3155,9 +3155,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OM/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "oimachi",
@@ -3175,9 +3175,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OM/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "oimachi",
@@ -3195,9 +3195,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OM/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "oimachi",
@@ -3215,9 +3215,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OM/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "oimachi",
@@ -3235,9 +3235,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OM/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "oimachi",
@@ -3255,9 +3255,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OM/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "oimachi",
@@ -3275,9 +3275,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OM/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "oimachi",
@@ -3295,9 +3295,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OM/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "oimachi",
@@ -3315,9 +3315,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OM/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "oimachi",
@@ -3335,9 +3335,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OM/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "oimachi",
@@ -3355,9 +3355,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OM/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "oimachi",
@@ -3375,9 +3375,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OM/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "oimachi",
@@ -3395,9 +3395,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OM/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "oimachi",
@@ -3415,9 +3415,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OM/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "oimachi",
@@ -3435,9 +3435,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OM/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "oimachi",
@@ -3455,9 +3455,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OM/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "oimachi",
@@ -3475,9 +3475,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OM/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "oimachi",
@@ -3495,9 +3495,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OM/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "oimachi",
@@ -3515,9 +3515,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OM/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "oimachi",
@@ -3535,9 +3535,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OM/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "odakyu-main",
@@ -3555,9 +3555,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "B",
     "sourceUrl": "https://2nd-train.net/formations/data/id/5396/",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "odakyu-main",
@@ -3582,9 +3582,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
       "9161",
       "9189"
     ],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -3602,9 +3602,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -3622,9 +3622,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -3642,9 +3642,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -3662,9 +3662,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -3682,9 +3682,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -3702,9 +3702,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -3722,9 +3722,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -3742,9 +3742,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -3762,9 +3762,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -3782,9 +3782,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -3802,9 +3802,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -3822,9 +3822,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -3842,9 +3842,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -3862,9 +3862,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -3882,9 +3882,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -3902,9 +3902,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -3922,9 +3922,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -3942,9 +3942,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -3962,9 +3962,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -3982,9 +3982,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4002,9 +4002,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4022,9 +4022,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4042,9 +4042,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4062,9 +4062,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4082,9 +4082,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4102,9 +4102,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4122,9 +4122,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4142,9 +4142,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4162,9 +4162,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4182,9 +4182,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4202,9 +4202,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4222,9 +4222,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4242,9 +4242,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4262,9 +4262,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4282,9 +4282,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4302,9 +4302,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4322,9 +4322,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4342,9 +4342,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4362,9 +4362,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4382,9 +4382,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4402,9 +4402,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4422,9 +4422,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4442,9 +4442,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4462,9 +4462,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4482,9 +4482,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4502,9 +4502,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4522,9 +4522,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4542,9 +4542,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4562,9 +4562,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4582,9 +4582,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4602,9 +4602,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4622,9 +4622,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4642,9 +4642,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4662,9 +4662,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4682,9 +4682,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4702,9 +4702,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4722,9 +4722,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4742,9 +4742,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4762,9 +4762,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4782,9 +4782,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4802,9 +4802,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4822,9 +4822,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4842,9 +4842,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4862,9 +4862,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4882,9 +4882,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4902,9 +4902,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4922,9 +4922,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4942,9 +4942,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4962,9 +4962,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -4982,9 +4982,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5002,9 +5002,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5022,9 +5022,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5042,9 +5042,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5062,9 +5062,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5082,9 +5082,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5102,9 +5102,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5122,9 +5122,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5142,9 +5142,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5162,9 +5162,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5182,9 +5182,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5202,9 +5202,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5222,9 +5222,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5242,9 +5242,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5262,9 +5262,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5282,9 +5282,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5302,9 +5302,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5322,9 +5322,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5342,9 +5342,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5362,9 +5362,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5382,9 +5382,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5402,9 +5402,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5422,9 +5422,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5442,9 +5442,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5462,9 +5462,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5482,9 +5482,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5502,9 +5502,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5522,9 +5522,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5542,9 +5542,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5562,9 +5562,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5582,9 +5582,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5602,9 +5602,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5622,9 +5622,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5642,9 +5642,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5662,9 +5662,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5682,9 +5682,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5702,9 +5702,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5722,9 +5722,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5742,9 +5742,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5762,9 +5762,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5782,9 +5782,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5802,9 +5802,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5822,9 +5822,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5842,9 +5842,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5862,9 +5862,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5882,9 +5882,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5902,9 +5902,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5922,9 +5922,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5942,9 +5942,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5962,9 +5962,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -5982,9 +5982,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -6002,9 +6002,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -6022,9 +6022,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -6042,9 +6042,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -6062,9 +6062,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -6082,9 +6082,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -6102,9 +6102,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -6122,9 +6122,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -6142,9 +6142,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -6162,9 +6162,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -6182,9 +6182,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -6202,9 +6202,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -6222,9 +6222,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -6242,9 +6242,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -6262,9 +6262,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -6282,9 +6282,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -6302,9 +6302,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -6322,9 +6322,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -6342,9 +6342,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -6362,9 +6362,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -6382,9 +6382,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -6402,9 +6402,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -6422,9 +6422,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -6442,9 +6442,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -6462,9 +6462,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -6482,9 +6482,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -6502,9 +6502,9 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   },
   {
     "networkKey": "iketama",
@@ -6522,8 +6522,8 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "grade": "C",
     "sourceUrl": "https://yacchann.blog13.fc2.com/?cat=21",
     "trainNumbers": [],
-    "evidenceRole": "fallback",
-    "realtimeApiAvailable": true,
-    "realtimeVehicleIdentityStatus": "unknown"
+    "evidenceRole": "primary",
+    "realtimeApiAvailable": false,
+    "realtimeVehicleIdentityStatus": "absent"
   }
 ];
