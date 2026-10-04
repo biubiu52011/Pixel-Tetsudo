@@ -748,10 +748,6 @@
                 trainOwner: t["odpt:trainOwner"] || t["trainOwner"] || "",
                 observedAt: Date.now()
               };
-              if ((t["odpt:vehicleType"] || t["vehicleType"]) &&
-                  window.TrainVehicle && typeof window.TrainVehicle.registerVehicle === "function") {
-                window.TrainVehicle.registerVehicle(_rawTrainNo, t["odpt:vehicleType"] || t["vehicleType"], op);
-              }
             }
             return;
           }
@@ -888,9 +884,6 @@
             // An explicit vehicle type carried by the realtime record is train-level
             // evidence. Register it before resolving so the same train number can
             // reuse that evidence without depending on the current display line.
-            if (odptVehicleType && window.TrainVehicle && typeof window.TrainVehicle.registerVehicle === "function") {
-              window.TrainVehicle.registerVehicle(trainId, odptVehicleType, trainOpShort || op);
-            }
             if (window.TrainVehicle && typeof window.TrainVehicle.resolve === "function") {
               try {
                 var _rtVehicle = window.TrainVehicle.resolve({
@@ -1598,10 +1591,6 @@
                   // when FULL realtime policy forbids timetable-derived position.
                   var _mTrainNo = tt["odpt:trainNumber"] || tt["odpt:train"] || "";
                   var _mVehicle = tt["vehicleType"] || tt["odpt:vehicleType"] || "";
-                  if (_mTrainNo && _mVehicle && window.TrainVehicle &&
-                      typeof window.TrainVehicle.registerVehicle === "function") {
-                    window.TrainVehicle.registerVehicle(_mTrainNo, _mVehicle, mLine.operator);
-                  }
                 });
                 var mEst = window.TrainPositionEstimator.estimateLinePositions(
                   lineId, mLine, manualTT, odptData.delayInfo, mLine.operator
