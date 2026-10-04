@@ -1,6 +1,6 @@
 /*
  * Pixel Tetsudo - Train operation evidence registry
- * v4.3.1094
+ * v4.3.1101
  *
  * Evidence is ranked by traceability, not by "official vs fan" alone.
  * A  direct run evidence: realtime owner/vehicle or dated formation assignment
@@ -94,22 +94,44 @@
         var d = String(ctx.serviceDate || "").slice(0, 10);
         var line = [ctx.lineId, ctx.railway, ctx.operator].join("|");
         var n = String(trainNumber || "");
+        var matches = [];
         for (var i=0;i<records.length;i++) {
           var r=records[i];
           if (!r || r.validDate !== d) continue;
           if (line.indexOf(r.networkKey) < 0) continue;
-          if (r.trainNumbers && r.trainNumbers.indexOf(n) >= 0) {
-            return {operator:r.operator,vehicleType:r.vehicleType,formationId:r.formationId,
-              operationCode:r.operationCode,grade:r.grade||"C",sourceUrl:r.sourceUrl||"",
-              provenance:"canonical vehicle operation evidence snapshot",observedDate:d};
-          }
-          if (ctx.operationCode && String(ctx.operationCode) === String(r.operationCode)) {
-            return {operator:r.operator,vehicleType:r.vehicleType,formationId:r.formationId,
-              operationCode:r.operationCode,grade:r.grade||"C",sourceUrl:r.sourceUrl||"",
-              provenance:"canonical vehicle operation evidence snapshot",observedDate:d};
-          }
+          var trainMatch = r.trainNumbers && r.trainNumbers.indexOf(n) >= 0;
+          var opMatch = ctx.operationCode && String(ctx.operationCode) === String(r.operationCode);
+          if (trainMatch || opMatch) matches.push(r);
         }
-        return null;
+        if (!matches.length) return null;
+
+        // Prefer an explicit time segment when the caller supplies service time.
+        var t = String(ctx.serviceTime || ctx.currentTime || "").slice(0,5);
+        if (t) {
+          var timed = matches.filter(function(r) {
+            var from = String(r.validFromTime || "").slice(0,5);
+            var to = String(r.validToTime || "").slice(0,5);
+            if (!from && !to) return false;
+            return (!from || t >= from) && (!to || t < to);
+          });
+          if (timed.length === 1) matches = timed;
+        }
+
+        // Duplicate evidence for the same identity is safe to collapse. Different
+        // identities for the same date/operation are ambiguous unless a segment
+        // or exact train number uniquely resolved them. Never return first match.
+        var identities = {};
+        matches.forEach(function(r) {
+          var formations = Array.isArray(r.formationIds) ? r.formationIds.join("+") : (r.formationId || "");
+          identities[(r.vehicleType || "") + "|" + formations] = true;
+        });
+        if (Object.keys(identities).length !== 1) return null;
+
+        var hit = matches[0];
+        return {operator:hit.operator,vehicleType:hit.vehicleType,
+          formationId:hit.formationId || (Array.isArray(hit.formationIds) ? hit.formationIds.join(" / ") : ""),
+          operationCode:hit.operationCode,grade:hit.grade||"C",sourceUrl:hit.sourceUrl||"",
+          provenance:"canonical vehicle operation evidence snapshot",observedDate:d};
       }
     });
   }
