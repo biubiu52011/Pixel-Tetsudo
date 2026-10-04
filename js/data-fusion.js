@@ -914,8 +914,7 @@
                   // realtime vehicle identity. S3 map/fleet/icon rules remain
                   // display estimates and must not be frozen as realtime truth.
                   var _rtEvidenceBacked = _rtVehicle.source === "odpt" ||
-                    _rtVehicle.source === "manual" ||
-                    _rtVehicle.source === "trainNo";
+                    _rtVehicle.source === "manual";
                   positionData.vehicleResolvedFromRealtime = _rtEvidenceBacked;
                   positionData.vehicleIconPath = _rtEvidenceBacked ? (_rtVehicle.iconPath || "") : "";
                 }
