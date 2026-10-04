@@ -1,3 +1,20 @@
+-- Replay safety: runtime_vehicle_coverage existed in the live database before
+-- this migration series but was not represented by an earlier repository
+-- migration. Define the legacy line-level table here so a fresh database can
+-- replay the canonical migration chain without relying on out-of-band schema.
+create table if not exists public.runtime_vehicle_coverage (
+  line_id text primary key references public.railway_lines(id),
+  network_key text,
+  coverage_status text not null default 'missing'
+    check (coverage_status in ('active','stale','partial','missing')),
+  operation_evidence_rows integer not null default 0,
+  latest_service_date date,
+  has_timed_segments boolean not null default false,
+  notes text,
+  updated_at timestamptz not null default now()
+);
+alter table public.runtime_vehicle_coverage enable row level security;
+
 -- Separate SQL evidence freshness from realtime vehicle-identity capability.
 -- coverage_status remains the SQL evidence status for backward compatibility.
 -- effective_coverage_status is the combined runtime status.
