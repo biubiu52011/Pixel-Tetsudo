@@ -929,25 +929,11 @@
             // 通过 ThroughService 判断当前 lid 是否与 Rinkai 直通
             var _tsRinkaiPartner = (window.ThroughService && window.ThroughService.getDirectThroughLines) ? (window.ThroughService.getDirectThroughLines(lid) || []) : [];
             if (isRinkaiTrain && _tsRinkaiPartner.indexOf('Rinkai') >= 0) {
-              // Keep an explicit realtime resolution authoritative. Rinkai is a
-              // fallback context only when the source record itself did not
-              // identify a usable vehicle.
-              positionData.trainClass = positionData.trainClass || resolveTrainClass(
-                { lineId: 'Rinkai', operator: 'TWR', trainNumber: trainId, stationIndex: idx, trainType: rawType, destinationStation: destStations, trainId: trainId + '_' + idx },
-                'Rinkai', 'TWR', trainId + '_' + idx, idx, rawType
-              );
               positionData.isRinkaiThrough = true;
-            } else {
-              // v5: 车型判断（数据层）——用列车自己的operator判断，不是当前线路的operator
-              // 这样直通过来的车（比如东急的车开到半藏门线）就会显示东急的车型，而不是地铁的车型
-              try {
-                // 从odpt:operator提取operator简称（去掉odpt.Operator:前缀）
-                positionData.trainClass = positionData.trainClass || resolveTrainClass(
-                  { lineId: lid, operator: trainOpShort, trainNumber: trainId, stationIndex: idx, trainType: rawType, destinationStation: destStations, trainId: trainId + '_' + idx },
-                  lid, trainOpShort, trainId + '_' + idx, idx, rawType
-                );
-              } catch(e) {}
             }
+            // Zero-fallback vehicle contract: realtime records without explicit
+            // vehicle evidence keep trainClass empty. Line/operator/train number,
+            // service type and through-service context may not manufacture it.
             // Destination on a partner line is routing intent, not position
             // evidence. Never synthesize a partner-line realtime position from
             // destination alone. Cross-line continuity must be confirmed by
