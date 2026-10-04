@@ -3,8 +3,8 @@
 
 /*
  * Export canonical operation/vehicle observations from Supabase into the
- * browser runtime snapshot. Requires SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY
- * (or SUPABASE_ANON_KEY when the evidence views are publicly readable).
+ * browser runtime snapshot. Requires SUPABASE_URL and a server-side key via
+ * SUPABASE_SECRET_KEY or SUPABASE_SERVICE_ROLE_KEY.
  *
  * Usage: node tools/export-vehicle-operation-evidence.js
  */
@@ -16,6 +16,14 @@ const key = process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE
 if (!base || !key) {
   console.error("Missing SUPABASE_URL and SUPABASE_SECRET_KEY/SUPABASE_SERVICE_ROLE_KEY");
   process.exit(2);
+}
+
+const RUNTIME_NETWORK_KEYS = {
+  "tokyo-monorail": "TokyoMonorail"
+};
+
+function normalizeNetworkKey(networkKey) {
+  return RUNTIME_NETWORK_KEYS[networkKey] || networkKey;
 }
 
 async function get(table, select) {
@@ -39,7 +47,7 @@ async function get(table, select) {
   const records = obs.map(r=>{
     const s=sm[r.source_id]||{};
     return {
-      networkKey:r.network_key,validDate:r.service_date,operationCode:r.operation_code,operator:r.operator,
+      networkKey:normalizeNetworkKey(r.network_key),validDate:r.service_date,operationCode:r.operation_code,operator:r.operator,
       vehicleType:r.vehicle_type||"",formationIds:Array.isArray(r.formation_ids)?r.formation_ids:[],
       validFromTime:r.valid_from_time||"",validToTime:r.valid_to_time||"",ambiguityGroup:r.ambiguity_group||"",
       observedDate:r.observed_date||r.service_date,grade:s.evidence_grade||"C",sourceUrl:s.source_url||"",trainNumbers:[]
