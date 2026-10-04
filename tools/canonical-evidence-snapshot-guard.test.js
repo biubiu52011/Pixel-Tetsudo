@@ -15,6 +15,16 @@ assert.strictEqual(snapshot.schemaVersion, 3,
 assert.equal(snapshot.generatedFrom, "Supabase canonical evidence tables");
 assert(Array.isArray(snapshot.records), "snapshot records must be an array");
 assert(Array.isArray(snapshot.datedRecords), "snapshot datedRecords must be an array");
+assert(Array.isArray(snapshot.familyRules), "snapshot familyRules must be an array");
+assert(snapshot.familyRules.length === 35, "canonical family-rule inventory must contain all 35 rules");
+assert(snapshot.familyRules.some(r=>r.networkKey==="setagaya" && r.codePattern==="*" && r.exactVehicleType==="東急300系"),
+  "Setagaya structural exact rule missing");
+assert(snapshot.familyRules.some(r=>r.networkKey==="kodomonokuni" && r.codePattern==="*" && r.exactVehicleType==="横浜高速鉄道Y000系"),
+  "Kodomonokuni structural exact rule missing");
+assert(snapshot.familyRules.some(r=>r.networkKey==="odakyu-main" && r.codePattern==="E*" && !r.exactVehicleType && r.vehicleCandidates.length===4),
+  "Odakyu E-family must remain narrowed rather than exact");
+assert(snapshot.familyRules.some(r=>r.networkKey==="asakusa" && r.codePattern==="*K" && !r.exactVehicleType && r.vehicleCandidates.length===0),
+  "Asakusa Keisei ownership rule must not invent a vehicle model");
 assert(snapshot.datedRecords.length >= 300, "canonical dated evidence unexpectedly incomplete");
 for (const kind of ["formation_assignment","train_date_rule","operation_date_rule","train_observation"]) {
   assert(snapshot.datedRecords.some(r=>r.evidenceKind===kind), "dated evidence missing "+kind);
@@ -74,5 +84,7 @@ const jsRecords=JSON.parse(JSON.stringify(sandbox.window.VEHICLE_OPERATION_EVIDE
 assert.deepStrictEqual(jsRecords,snapshot.records,"JSON and browser JS snapshots must match exactly");
 const jsDated=JSON.parse(JSON.stringify(sandbox.window.VEHICLE_DATED_EVIDENCE));
 assert.deepStrictEqual(jsDated,snapshot.datedRecords,"JSON and browser JS dated snapshots must match exactly");
+const jsFamily=JSON.parse(JSON.stringify(sandbox.window.VEHICLE_FAMILY_RULES));
+assert.deepStrictEqual(jsFamily,snapshot.familyRules,"JSON and browser JS family-rule snapshots must match exactly");
 
 console.log("canonical evidence snapshot guard: PASS ("+snapshot.records.length+" records)");
