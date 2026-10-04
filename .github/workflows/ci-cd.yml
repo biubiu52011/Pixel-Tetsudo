@@ -88,6 +88,9 @@ jobs:
       - name: Vehicle regression 16 - denentoshi-formation-evidence.test.js
         run: node tools/denentoshi-formation-evidence.test.js
 
+      - name: Vehicle regression 17 - canonical-evidence-ambiguity.test.js
+        run: node tools/canonical-evidence-ambiguity.test.js
+
       - name: Entity Preservation Guard
         run: |
           echo Running canonical entity preservation guard...
