@@ -114,18 +114,6 @@
     }
   };
 
-  // v4.3.450: 直通列車の車号規則——ODPT Train には車両形式フィールドが無いため、
-  // trainNumber の末尾記号で直通車の車籍を識別する（JR 社内直通 京葉↔武蔵野 など）。
-  // 例：京葉線上の E 末尾 = 武蔵野線直通（E231系0番台）、武蔵野線上の Y 末尾 = 京葉線直通（E233系5000番台）。
-  // Train-number suffix guessing was removed for the same reason: a service
-  // suffix is operational context, not concrete rolling-stock evidence.
-  var THROUGH_SUFFIX_RULES = {};
-
-
-  // Train-number prefix guessing was removed. Prefixes can identify an operation
-  // pattern, but are not sufficient evidence for a concrete rolling-stock class.
-  var THROUGH_PREFIX_RULES = {};
-
   function _resolveTrainIcon(lineId, operator, trainId, stationIndex, trainType, byOperator) {
     // Zero-fallback policy: operational context is never vehicle identity.
     // Concrete vehicle artwork must come from explicit upstream vehicle evidence.
