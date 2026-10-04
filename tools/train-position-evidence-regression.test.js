@@ -8,7 +8,8 @@ for(const js of ["js/data-fusion.js","js/train-position-estimator.js","js/runnin
 
 const fusion=read("js/data-fusion.js");
 assert(/ambiguous realtime line identity/.test(fusion),"ambiguous realtime line identity must remain unresolved");
-assert(!/mainLines\.sort[\s\S]{0,500}targetLine\s*=\s*mainLines\[0\]/.test(fusion),"must not choose longest line for ambiguous realtime");
+assert(!/mainLinesassert(/_queueChainVehicle/.test(fusion) && /Object\.keys\(_chainVehicleCandidates\)/.test(fusion),
+  "vehicle evidence must converge through one chain candidate pool and one registry commit");.sort[\s\S]{0,500}targetLine\s*=\s*mainLines\[0\]/.test(fusion),"must not choose longest line for ambiguous realtime");
 assert(/_uniqueTimetableRailwayForTrain/.test(fusion),"missing unique timetable railway recovery");
 assert(/keys\.length === 1 \? keys\[0\] : ""/.test(fusion),"railway recovery must require a unique match");
 assert(/_CHAIN_EVIDENCE_TTL_MS\s*=\s*3\s*\*\s*60\s*\*\s*1000/.test(fusion),"dropout evidence TTL missing");
@@ -62,24 +63,20 @@ assert(/function _isFreshRealtimePosition/.test(trains),"realtime freshness guar
 assert(/return _isFreshRealtimePosition\(p\) \? 0 : 8/.test(trains),"expired realtime must lose source priority");
 
 
-assert(estimatorSource.includes('TRAIN_OPERATION_EVIDENCE_PROVIDERS'),
-  'estimator must consult train operation evidence providers');
-assert(estimatorSource.includes('Object.keys(_assignmentOperators).length === 1'),
-  'conflicting operation-provider operators must remain unresolved');
+assert(!estimatorSource.includes('TRAIN_OPERATION_EVIDENCE_PROVIDERS'),
+  'estimator must not bypass the canonical operation evidence resolver');
+assert(estimatorSource.includes('TrainOperationEvidence.resolveEvidence'),
+  'estimator must use the canonical operation evidence resolver');
 assert(estimatorSource.includes('vehicleIdentityStatus: vehResult.identityStatus'),
   'estimated trains must expose vehicle identity resolution state');
 
 
-assert(estimatorSource.includes('rec.decisive && rec.operator'),
-  'only decisive graded evidence may establish assignment operator');
+assert(estimatorSource.includes('_resolvedEvidence && _resolvedEvidence.decisive && _resolvedEvidence.operator'),
+  'only decisive canonical evidence may establish assignment operator');
 assert(estimatorSource.includes('timetableEvidence: _assignmentMatches'),
   'dated timetable evidence must reach the central vehicle authority');
-assert(estimatorSource.includes('_resolvedOperationCodeList.length === 1'),
-  'operation-code bridge must require one unanimous mapped operation code');
-assert(estimatorSource.includes('if (!_matchedProviderIndexes[providerIndex])'),
-  'operation-code bridge must retry only providers that did not already match');
-assert(estimatorSource.includes('_bridgedOperationCtx.operationCode = _resolvedOperationCodeList[0]'),
-  'mapped train-number operation code must reach downstream dated formation providers');
+assert(estimatorSource.includes('normalizeOperationCode(trainNumber, _baseOperationCtx)'),
+  'operation-code normalization must occur before the canonical resolver');
 assert(/at:\s*\(function\(\)\{ var d=new Date\(Date\.now\(\)\+9\*60\*60\*1000\)/.test(estimatorSource),
   'segmented operation evidence must receive JST service time, not UTC');
 
@@ -90,10 +87,10 @@ assert(operationEvidenceSource.includes('if (hasTimedSegments)'),
   'time-segmented operation evidence must not collapse back to an all-day identity');
 assert(operationEvidenceSource.includes("evidenceRole: rec.evidenceRole || ''"),
   'normalized operation evidence must preserve SQL primary/fallback policy metadata');
-assert(operationEvidenceSource.includes('realtimeApiAvailable: rec.realtimeApiAvailable === true'),
-  'normalized operation evidence must preserve realtime API capability metadata');
-assert(operationEvidenceSource.includes("realtimeVehicleIdentityStatus: rec.realtimeVehicleIdentityStatus || ''"),
-  'normalized operation evidence must preserve realtime vehicle-identity capability status');
+assert(!operationEvidenceSource.includes('realtimeApiAvailable: rec.realtimeApiAvailable'),
+  'operation evidence must not carry duplicate realtime coverage policy');
+assert(!operationEvidenceSource.includes('realtimeVehicleIdentityStatus: rec.realtimeVehicleIdentityStatus'),
+  'operation evidence must not carry duplicate realtime identity policy');
 assert(operationEvidenceSource.includes('evidenceRole:hit.evidenceRole||""'),
   'canonical snapshot provider must propagate evidence role instead of dropping source policy');
 assert(operationEvidenceSource.includes('id: "canonical-dated-vehicle-evidence"'),
@@ -114,8 +111,8 @@ assert(operationEvidenceSource.includes('provenance:"canonical operation family 
   'ownership-only family rules must remain model-free constraints');
 
 
-assert(estimatorSource.includes("Object.keys(_assignmentVehicles).length === 1"),
-  'operation model evidence must require unanimous decisive providers');
+assert(estimatorSource.includes('_resolvedEvidence && _resolvedEvidence.vehicleType'),
+  'operation model evidence must come from the canonical resolver');
 assert(estimatorSource.includes("timetableEvidence: _assignmentMatches"),
   'dated operation evidence provenance must remain attached to timetable resolution');
 
@@ -163,10 +160,11 @@ assert(!/_rtVehicle\.source === "trainNo"/.test(fusionSource),
   'train-number history must not be promoted as realtime vehicle evidence');
 assert(fusionSource.includes('realtimeVehicleType: odptVehicleType'),
   'realtime API vehicle identity must enter the explicit realtime source channel');
-assert(fusionSource.includes('if (_rp.vehicleResolvedFromRealtime === true) _rememberChainVehicle(_rp);'),
-  'realtime position rows without explicit vehicle identity must still be allowed to bind a unique running chain without seeding fake vehicle evidence');
-assert(fusionSource.includes('p.vehicleResolvedFromRealtime === true ? 4 : (_src === "operation-assignment-provider" ? 3'),
-  'running-chain cache must preserve explicit realtime vehicle priority over SQL/timetable assignment evidence');
+assert(fusionSource.includes('_queueChainVehicle(_rp)'),
+  'realtime rows must enter the single chain candidate pool rather than write registry directly');
+assert(fusionSource.includes('p.vehicleResolvedFromRealtime === true ? 5') &&
+       fusionSource.includes('p.vehicleResolvedFromRealtimeDerived === true ? 4'),
+  'running-chain arbitration must preserve direct realtime > derived > fallback priority');
 assert(fusionSource.includes('(posMap[_vlid] || []).forEach(function(_p) {\n                _inheritChainVehicle(_p);'),
   'canonical timetable/SQL EXACT vehicle evidence must be able to inherit onto realtime-position rows through the resolved running chain');
 assert(estimatorSource.includes("timetableVehicleType: _timetableVehicleInput"),
