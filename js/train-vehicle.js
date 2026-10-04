@@ -1,13 +1,12 @@
 /*
  * Pixel Tetsudo - Train Vehicle Resolver
  *
- * Zero-fallback vehicle identity contract:
- *   - EXACT only from one explicit train-level vehicle identity or dated
- *     operation/formation evidence.
- *   - NARROWED may expose multiple evidence candidates, but never a concrete icon.
- *   - UNKNOWN stays unknown.
- *   - line/operator/train type/train number/history/static maps/icon rules may not
- *     manufacture vehicle identity.
+ * Canonical vehicle identity contract:
+ *   - Source priority is realtime direct > realtime-derived > structural/family
+ *     > dated/timetable fallback > UNKNOWN.
+ *   - EXACT requires one concrete identity from the highest available source.
+ *   - NARROWED may expose evidence candidates, but never a concrete icon.
+ *   - UNKNOWN stays unknown; line/operator defaults may not manufacture identity.
  *   - artwork is only a projection of an already-EXACT identity; missing artwork
  *     stays missing.
  */
@@ -44,14 +43,15 @@
   }
 
   // ============================================================
-  // Main decision: explicit and dated evidence only.
+  // Main decision: one source-priority arbitration path.
   // ============================================================
   function resolve(ctx) {
     ctx = ctx || {};
     var assignmentOperator = normOp(ctx.assignmentOperator || ctx.operationOperator || '');
 
-    // 1) Evidence candidates are limited to explicit train-level input.
-    // Historical train-number and static fleet inference are excluded from runtime identity.
+    // 1) Collect only already-admitted evidence from the upstream canonical
+    // resolver/runtime feed. This module arbitrates source priority; it does not
+    // independently infer identity from line/operator defaults.
     var pool = {};
     var orderArr = [];
     function addFrom(str, src) {
@@ -69,9 +69,9 @@
     addFrom(ctx.structuralVehicleType, 'structural');
     addFrom(ctx.timetableVehicleType, 'timetable');
 
-    // 2) Zero-fallback identity decision.
-    // Only explicit vehicle identity carried by this train record may become EXACT.
-    // Historical train-number, owner, line/type/number and static fleet inference are forbidden.
+    // 2) Canonical source-priority identity decision.
+    // Lower-priority evidence is fallback only and cannot override a resolved
+    // higher-priority source.
     var chosen = '';
     var chosenSrc = '';
     var _timetableCands = splitCandidates(ctx.timetableVehicleType);
@@ -79,7 +79,7 @@
     var _derivedCands = splitCandidates(ctx.realtimeDerivedVehicleType);
     var _realtimeCands = splitCandidates(ctx.realtimeVehicleType);
     // Source arbitration lives here, in the existing vehicle authority.
-    // Realtime and timetable are parallel evidence inputs; no second resolver exists.
+    // All admitted sources converge here; no second vehicle arbiter exists.
     if (_realtimeCands.length === 1) {
       chosen = _realtimeCands[0];
       chosenSrc = 'realtime';
@@ -94,7 +94,7 @@
       chosenSrc = 'timetable';
     }
 
-    // Explicit train-level or dated operation evidence is high confidence.
+    // A single identity admitted by the canonical source chain is high confidence.
     var confidence = chosen ? 'high' : 'none';
 
     // 4) Artwork is a strict projection of the already-exact vehicle identity.
@@ -137,8 +137,8 @@
 
     return {
       name: chosen,                                  // EXACT vehicle only; empty while ambiguous
-      candidates: effectiveCandidates,               // explicit/dated evidence candidates
-      allCandidates: orderArr,                        // explicit/dated evidence pool for diagnostics
+      candidates: effectiveCandidates,               // admitted evidence candidates
+      allCandidates: orderArr,                        // admitted evidence pool for diagnostics
       identityStatus: identityStatus,                 // EXACT / NARROWED / UNKNOWN
       identityReason: identityReason,
       assignmentOperator: assignmentOperator,
@@ -241,5 +241,5 @@
     clearFormationEvidenceOtherDates: clearFormationEvidenceOtherDates,
   };
 
-  console.debug('[TrainVehicle] v4.3.1053 initialized（B0 EXACT/NARROWED/UNKNOWN vehicle identity contract）');
+  console.debug('[TrainVehicle] v4.3.1102 initialized（canonical EXACT/NARROWED/UNKNOWN vehicle identity contract）');
 })();
