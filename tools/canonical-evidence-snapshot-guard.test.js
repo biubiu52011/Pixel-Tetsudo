@@ -9,8 +9,8 @@ const jsonPath = "data/timetables/vehicle-operation-evidence.json";
 const jsPath = "data/timetables/vehicle-operation-evidence-data.js";
 const snapshot = JSON.parse(fs.readFileSync(jsonPath, "utf8"));
 
-assert.strictEqual(snapshot.schemaVersion, 2,
-  "canonical evidence snapshot must use schema v2; run the canonical Supabase sync");
+assert.strictEqual(snapshot.schemaVersion, 3,
+  "canonical evidence snapshot must use schema v3; run the canonical Supabase sync");
 
 assert.equal(snapshot.generatedFrom, "Supabase canonical evidence tables");
 assert(Array.isArray(snapshot.records), "snapshot records must be an array");
@@ -19,6 +19,19 @@ assert(snapshot.records.some(r => r.networkKey === "TokyoMonorail"),
   "snapshot must retain TokyoMonorail canonical evidence");
 assert(snapshot.records.some(r => r.networkKey !== "TokyoMonorail"),
   "snapshot must contain canonical evidence beyond the legacy single-network seed");
+assert(snapshot.evidenceInventory && Array.isArray(snapshot.evidenceInventory.rows),
+  "schema v3 must carry the canonical multi-layer evidence inventory");
+assert(snapshot.evidenceInventory.networkCount >= 21,
+  "canonical evidence inventory unexpectedly lost network coverage");
+for (const key of ["asakusa","chiyoda-joban-odakyu","denentoshi-hanzomon","hibiya","seibu-shinjuku","tobu-limited-express","tsukuba-express"]) {
+  assert(snapshot.evidenceInventory.networks.includes(key),
+    "canonical evidence inventory missing "+key);
+}
+const aliasRows=snapshot.evidenceInventory.rows.filter(r=>r.source_network_key!==r.canonical_network_key);
+assert(aliasRows.some(r=>r.source_network_key==="TokyoMonorail" && r.canonical_network_key==="tokyo-monorail"),
+  "TokyoMonorail legacy key must be canonicalized in evidence inventory");
+assert(aliasRows.some(r=>r.source_network_key==="TsukubaExpress" && r.canonical_network_key==="tsukuba-express"),
+  "TsukubaExpress legacy key must be canonicalized in evidence inventory");
 
 const odakyuMapped = snapshot.records.find(r =>
   r.networkKey === "odakyu-main" &&
