@@ -96,6 +96,14 @@ assert(operationEvidenceSource.includes("realtimeVehicleIdentityStatus: rec.real
   'normalized operation evidence must preserve realtime vehicle-identity capability status');
 assert(operationEvidenceSource.includes('evidenceRole:hit.evidenceRole||""'),
   'canonical snapshot provider must propagate evidence role instead of dropping source policy');
+assert(operationEvidenceSource.includes('id: "canonical-dated-vehicle-evidence"'),
+  'canonical dated evidence must register through the existing operation-evidence provider channel');
+assert(operationEvidenceSource.includes('var exactTrain = [], operation = [];'),
+  'dated evidence must prefer exact train-number identity before operation-level evidence');
+assert(operationEvidenceSource.includes('var matches = exactTrain.length ? exactTrain : operation;'),
+  'dated train-number evidence must outrank operation-code evidence');
+assert(operationEvidenceSource.includes('if (Object.keys(identities).length !== 1) return null;'),
+  'dated evidence conflicts must remain unresolved rather than selecting the first row');
 
 
 assert(estimatorSource.includes("Object.keys(_assignmentVehicles).length === 1"),
