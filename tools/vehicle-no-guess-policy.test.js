@@ -120,6 +120,14 @@ assert(icons.resolveVehicleIcon('1000形（別）', 'UnknownLine') === null,
   'gallery variant labels must not act as exact vehicle identities');
 assert(icons.resolveVehicleIcon('toky5500', 'Asakusa') === null,
   'internal asset locator codes must not act as vehicle identities');
+assert(icons.resolveVehicleIcon('埼玉新都市交通2000系', 'NewShuttle') === null,
+  'generic 2000-series identity must not select formation 01');
+assert(icons.resolveVehicleIcon('埼玉新都市交通2020系', 'NewShuttle') === null,
+  'generic 2020-series identity must not select formation 21');
+assert(icons.resolveVehicleIcon('253系', 'Nikkoku') === null,
+  'generic 253-series identity must not select 1000 subseries');
+assert(icons.resolveVehicleIcon('京浜急行電鉄1000系', 'KeikyuMain') === null,
+  'generic Keikyu 1000 identity must not select 1200 subseries');
 assert(!/function _resolveVehicleIconBase[\\s\\S]*?VEHICLE_NAME_ALIASES\[/.test(source),
   'vehicle icon resolver reintroduced alias fallback');
 assert(!/function _resolveVehicleIconBase[\\s\\S]*?LINE_VEHICLE_OVERRIDES\[/.test(source),
