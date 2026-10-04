@@ -33,12 +33,15 @@ jobs:
       - name: Check sync credentials
         id: credentials
         run: |
-          if [ -z "$SUPABASE_URL" ] || { [ -z "$SUPABASE_SECRET_KEY" ] && [ -z "$SUPABASE_SERVICE_ROLE_KEY" ]; }; then
-            echo "::warning::Canonical evidence sync skipped: configure SUPABASE_URL plus SUPABASE_SECRET_KEY (preferred) or SUPABASE_SERVICE_ROLE_KEY."
-            echo "ready=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "ready=true" >> "$GITHUB_OUTPUT"
+          if [ -z "$SUPABASE_URL" ]; then
+            echo "::error::Canonical evidence sync blocked: missing repository secret SUPABASE_URL."
+            exit 1
           fi
+          if [ -z "$SUPABASE_SECRET_KEY" ] && [ -z "$SUPABASE_SERVICE_ROLE_KEY" ]; then
+            echo "::error::Canonical evidence sync blocked: configure repository secret SUPABASE_SECRET_KEY (preferred) or SUPABASE_SERVICE_ROLE_KEY."
+            exit 1
+          fi
+          echo "ready=true" >> "$GITHUB_OUTPUT"
       - name: Export canonical Supabase evidence
         if: steps.credentials.outputs.ready == 'true'
         run: node tools/export-vehicle-operation-evidence.js
