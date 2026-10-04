@@ -62,15 +62,8 @@
     // another operator's vehicle evidence; through continuity uses runningChainId.
     if (op) return [];
     if (TRAIN_NO_VEHICLE[key]) return TRAIN_NO_VEHICLE[key];
-    // 兜底：旧调用可能传 "lineId_trainNumber"（lineId 本身可能含下划线，如 Daishi_Tobu），
-    // 从后往前逐段去掉前缀尝试命中纯车号 key。
-    if (key.indexOf('_') >= 0) {
-      var parts = key.split('_');
-      for (var i = parts.length - 1; i >= 1; i--) {
-        var cand = parts.slice(i).join('_');
-        if (TRAIN_NO_VEHICLE[cand]) return TRAIN_NO_VEHICLE[cand];
-      }
-    }
+    // Zero-fallback policy: callers must supply the exact train-number key.
+    // Never strip line/id prefixes to search for a coincidentally matching train number.
     return [];
   }
 
