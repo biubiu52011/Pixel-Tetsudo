@@ -1,0 +1,40 @@
+name: Sync canonical vehicle evidence
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "20 18 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: vehicle-evidence-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Export canonical Supabase evidence
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: node tools/export-vehicle-operation-evidence.js
+      - name: Verify ambiguity policy
+        run: node tools/canonical-evidence-ambiguity.test.js
+      - name: Commit snapshot only when changed
+        run: |
+          if git diff --quiet -- data/timetables/vehicle-operation-evidence.json data/timetables/vehicle-operation-evidence-data.js; then
+            echo "Canonical evidence snapshot already current."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/timetables/vehicle-operation-evidence.json data/timetables/vehicle-operation-evidence-data.js
+          git commit -m "Sync canonical vehicle operation evidence"
+          git push
