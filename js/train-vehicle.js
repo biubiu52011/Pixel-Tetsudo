@@ -64,9 +64,8 @@
         pool[candidate].count++;
       });
     }
-    var _manualEvidenceSource = String(ctx.vehicleEvidenceSource || '').trim();
-    addFrom(ctx.vehicleTypeManual, 'manual');
-    addFrom(ctx.odptVehicleType, 'odpt');
+    addFrom(ctx.realtimeVehicleType, 'realtime');
+    addFrom(ctx.timetableVehicleType, 'timetable');
     if (Array.isArray(ctx.operationVehicleCandidates)) {
       ctx.operationVehicleCandidates.filter(Boolean).forEach(function(candidate) {
         addFrom(candidate, 'operation');
@@ -100,12 +99,10 @@
 
     // Display-name normalization is allowed only after identity is exact.
 
-    // v4.3.991: 标签诚实化——manual 为多候选串（如混跑"71-000形 / 70-000形"）时传原文串，
-    // resolveVehicleDisplayName 对全部可解析的多候选返回完整串（表达不确定），不再只显示第一项；
-    // 单候选/其他来源保持原名与 alias 展开（4.3.987 一致化不回归）。
+    // Display normalization is presentation-only and runs after EXACT identity.
     if (chosen && iconPath && window.TrainIcons && typeof window.TrainIcons.resolveVehicleDisplayName === 'function') {
       var _dispSrc = chosen || (orderArr.length ? orderArr.join(' / ') : '');
-      var _disp = window.TrainIcons.resolveVehicleDisplayName(_dispSrc, ctx.lineId);
+      var _disp = window.TrainIcons.resolveVehicleDisplayName(_dispSrc);
       if (_disp && _disp !== chosen) chosen = _disp;
     }
 
@@ -119,9 +116,8 @@
     var effectiveCandidates = orderArr.slice();
     if (chosen) {
       identityStatus = 'EXACT';
-      identityReason = chosenSrc === 'realtime' ? 'realtime-vehicle-evidence'
-        : ((_manualEvidenceSource === 'operation-assignment-provider')
-          ? 'dated-operation-vehicle-evidence' : 'timetable-vehicle-evidence');
+      identityReason = chosenSrc === 'realtime'
+        ? 'realtime-vehicle-evidence' : 'timetable-vehicle-evidence';
     } else if (effectiveCandidates.length > 0) {
       identityStatus = 'NARROWED';
       identityReason = 'non-decisive-vehicle-candidates';
