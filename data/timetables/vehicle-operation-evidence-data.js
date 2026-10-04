@@ -1499,7 +1499,17 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "observedDate": "2026-04-13",
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/OD/",
-    "trainNumbers": [],
+    "trainNumbers": [
+      "1208",
+      "1209",
+      "1214",
+      "1354",
+      "3529",
+      "3540",
+      "6754",
+      "9182",
+      "9209"
+    ],
     "evidenceRole": "fallback",
     "realtimeApiAvailable": true,
     "realtimeVehicleIdentityStatus": "unknown"
@@ -3565,7 +3575,13 @@ window.VEHICLE_OPERATION_EVIDENCE = [
     "observedDate": "2026-08-18",
     "grade": "B",
     "sourceUrl": "https://2nd-train.net/formations/data/id/5298/",
-    "trainNumbers": [],
+    "trainNumbers": [
+      "3014",
+      "9136",
+      "9141",
+      "9161",
+      "9189"
+    ],
     "evidenceRole": "fallback",
     "realtimeApiAvailable": true,
     "realtimeVehicleIdentityStatus": "unknown"
