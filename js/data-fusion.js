@@ -32,7 +32,7 @@
     // Preserve TrainVehicle source arbitration inside the running-chain cache:
     // explicit realtime identity outranks canonical SQL/timetable assignment.
     // Equal-rank conflicts keep the established identity to avoid oscillation.
-    var _incomingRank = p.vehicleResolvedFromRealtime === true ? 4 : (_src === "operation-assignment-provider" ? 3 : (_src === "odpt" ? 3 : (_src === "manual" ? 2 : 1)));
+    var _incomingRank = p.vehicleResolvedFromRealtime === true ? 5 : (p.vehicleResolvedFromRealtimeDerived === true ? 4 : (_src === "operation-assignment-provider" ? 3 : (_src === "odpt" ? 3 : (_src === "manual" ? 2 : 1))));
     var _existing = _chainVehicleRegistry[p.runningChainId];
     if (_existing) {
       var _existingRank = _existing.evidenceRank || 0;
@@ -928,7 +928,8 @@
                     (_rtVehicle.source === "realtime" || _rtVehicle.source === "realtime-derived");
                   positionData.vehicleIdentityStatus = _rtVehicle.identityStatus || "UNKNOWN";
                   positionData.vehicleIdentityReason = _rtVehicle.identityReason || "";
-                  positionData.vehicleResolvedFromRealtime = _rtEvidenceBacked;
+                  positionData.vehicleResolvedFromRealtime = _rtVehicle.source === "realtime" && _rtVehicle.identityStatus === "EXACT";
+                  positionData.vehicleResolvedFromRealtimeDerived = _rtVehicle.source === "realtime-derived" && _rtVehicle.identityStatus === "EXACT";
                   positionData.vehicleIconPath = _rtEvidenceBacked ? (_rtVehicle.iconPath || "") : "";
                 }
               } catch(e) {}
@@ -1073,7 +1074,7 @@
                 // Only explicit realtime EXACT identity may seed the registry
                 // from a realtime row. Empty/unknown realtime identity never
                 // manufactures vehicle evidence.
-                if (_rp.vehicleResolvedFromRealtime === true) _rememberChainVehicle(_rp);
+                if (_rp.vehicleResolvedFromRealtime === true || _rp.vehicleResolvedFromRealtimeDerived === true) _rememberChainVehicle(_rp);
               });
             });
             // Realtime rows without fromStation cannot provide position, but an
