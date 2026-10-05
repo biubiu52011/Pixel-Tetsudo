@@ -447,7 +447,7 @@
   // concrete vehicle from fleet proportions or time-window hashing; concrete
   // vehicle identity must come from train/date/operation evidence upstream.
 var CANONICAL_VEHICLES = {
-  "sotetsu-11000-11003-hohoemi": { displayName: "相鉄11000系(10両)（11003F）", iconName: "相鉄11000系(10両)（11003F）", asset: "../images/列车/相模鉄道/相模鉄道_11000系_11003編成_ほほえみ号.png", validFrom: "2026-08-30", validTo: "", aliases: ["相鉄11000系(10両)（11003F）"] },
+  "sotetsu-11000-11003-hohoemi": { displayName: "相鉄11000系(10両)（11003F）", iconName: "相鉄11000系(10両)（11003F）", asset: "../images/列车/相模鉄道/相模鉄道_11000系_11003編成_ほほえみ号.png", validFrom: "2026-08-30", validTo: "", evidenceGrade: "A", evidenceSource: "https://www.sotetsu.co.jp/pressrelease/train/r26-132/", aliases: ["相鉄11000系(10両)（11003F）"] },
   "new-shuttle-2000-01": { displayName: "埼玉新都市交通2000系（01編成）", iconName: "埼玉新都市交通2000系（01編成）", asset: "../images/列车/埼玉新都市交通/埼玉新都市交通_2000系_01編成_レッドパープル.png", aliases: ["2000系（01編成）","埼玉新都市交通2000系（01編成）"] },
   "new-shuttle-2000-02": { displayName: "埼玉新都市交通2000系（02編成）", iconName: "埼玉新都市交通2000系（02編成）", asset: "../images/列车/埼玉新都市交通/埼玉新都市交通_2000系_02編成_オレンジ.png", aliases: ["2000系（02編成）","埼玉新都市交通2000系（02編成）"] },
   "new-shuttle-2000-03": { displayName: "埼玉新都市交通2000系（03編成）", iconName: "埼玉新都市交通2000系（03編成）", asset: "../images/列车/埼玉新都市交通/埼玉新都市交通_2000系_03編成_グリーン.png", aliases: ["2000系（03編成）","埼玉新都市交通2000系（03編成）"] },
@@ -639,6 +639,11 @@ function _registerCanonicalVehicleAlias(alias, rec) {
 Object.keys(CANONICAL_VEHICLES).forEach(function(id) {
   var rec = CANONICAL_VEHICLES[id];
   rec.id = id;
+  // Dated artwork is a factual claim and must carry provenance.
+  // Invalid dated records are deliberately not registered, so they cannot resolve.
+  if ((rec.validFrom || rec.validTo) && (!rec.evidenceSource || rec.evidenceGrade !== "A")) {
+    return;
+  }
   _registerCanonicalVehicleAlias(id, rec);
   _registerCanonicalVehicleAlias(rec.displayName, rec);
   _registerCanonicalVehicleAlias(rec.iconName, rec);
