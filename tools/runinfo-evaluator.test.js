@@ -83,4 +83,10 @@ let realtimeDelay=E.evaluate({messageKind:"realtime",text:"下り線の一部列
 assert.strictEqual(realtimeDelay.symbol,"△");
 let noticeSymbol=E.evaluate({messageKind:"notice",text:"明日の運転計画についてお知らせします。"});
 assert.strictEqual(noticeSymbol.symbol,"!");
-console.log("runinfo-evaluator: 54 PASS");
+let structuredPartial=E.evaluate({messageKind:"realtime",structuredStatus:"Suspension",range:"新宿駅～中野駅",text:"新宿駅～中野駅間で運転を見合わせています。"});
+assert.strictEqual(structuredPartial.status,"notice");
+assert.strictEqual(structuredPartial.symbol,"△");
+let structuredWhole=E.evaluate({messageKind:"realtime",structuredStatus:"Suspension",range:"全線",text:"全線で運転を見合わせています。"});
+assert.strictEqual(structuredWhole.status,"suspended");
+assert.strictEqual(structuredWhole.symbol,"×");
+console.log("runinfo-evaluator: 58 PASS");
