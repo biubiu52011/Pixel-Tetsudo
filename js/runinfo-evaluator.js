@@ -63,9 +63,10 @@
     var explicitRangeSuspension = /[^。\n]{1,40}駅\s*[～〜－−-]\s*[^。\n]{1,40}駅(?:間)?[^。\n]*(?:運転見合わせ|運転を見合わせ|運休|運転中止)/.test(s);
     if (explicitRangeSuspension) evidence.push({ type: "RANGE_SUSPENSION" });
 
-    if (whole || explicitRangeSuspension) return { status: "suspended", evidence: evidence, delayUpperBoundMinutes: null };
+    if (whole) return { status: "suspended", evidence: evidence, delayUpperBoundMinutes: null };
     if (timetable) return { status: "delayed", evidence: evidence, delayUpperBoundMinutes: null };
-    if (through || partial || reducedService) return { status: "notice", evidence: evidence, delayUpperBoundMinutes: null };
+    // A station-to-station suspension is a partial line impact, not a whole-line ×.
+    if (explicitRangeSuspension || through || partial || reducedService) return { status: "notice", evidence: evidence, delayUpperBoundMinutes: null };
 
     // A bare keyword is not enough to upgrade the whole line.
     if (/運休|見合わせ|中止|運行情報|運転情報/.test(s)) {
@@ -161,6 +162,16 @@
     return "unknown";
   }
 
+  function statusSymbol(result) {
+    result = result || {};
+    if (result.messageKind === "notice") return "!";
+    if (result.messageKind !== "realtime") return null;
+    if (result.status === "normal") return "○";
+    if (result.status === "suspended") return "×";
+    if (result.status === "delayed" || result.status === "notice" || result.status === "info") return "△";
+    return null;
+  }
+
   function evaluate(input) {
     input = input || {};
     var evidence = [];
@@ -196,7 +207,7 @@
     evidence = evidence.concat(te.evidence || []);
     var metadata = extractMetadata(input);
 
-    return {
+    var result = {
       messageKind: messageKind,
       status: structured || te.status || "unknown",
       maxDelay: delayMinutes != null ? delayMinutes : metadata.textDelayMinutes,
@@ -209,7 +220,9 @@
       evidence: evidence,
       source: input.source || null
     };
+    result.symbol = statusSymbol(result);
+    return result;
   }
 
-  return { version: "1.2.0", evaluate: evaluate, evaluateText: evaluateText, extractMetadata: extractMetadata, normalizeStructuredStatus: normalizeStructuredStatus, normalizeMessageKind: normalizeMessageKind, inferMessageKind: inferMessageKind };
+  return { version: "1.3.0", evaluate: evaluate, evaluateText: evaluateText, extractMetadata: extractMetadata, normalizeStructuredStatus: normalizeStructuredStatus, normalizeMessageKind: normalizeMessageKind, inferMessageKind: inferMessageKind, statusSymbol: statusSymbol };
 });
