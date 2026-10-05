@@ -138,3 +138,11 @@ assert(vehicleResolverSrc.includes('_uniqueIdentities.length === 1'),
 assert(vehicleResolverSrc.includes("identityReason = 'unique-converged-vehicle-evidence'"),
   'EXACT status must document unique converged evidence');
 console.log('vehicle evidence uniqueness: 3 PASS');
+
+assert(!source.includes('if (VEHICLE_NAME_TO_ICON[name]) return VEHICLE_NAME_TO_ICON[name]'),
+  'legacy static vehicle map must not be an artwork fallback');
+assert(!/if \(\/\^東武\//.test(source),
+  'operator-specific artwork fallback must not exist');
+assert(source.includes('CANONICAL_VEHICLE_ALIAS_CONFLICTS'),
+  'duplicate canonical aliases must remain conflict-blocked');
+console.log('canonical artwork uniqueness: 3 PASS');
