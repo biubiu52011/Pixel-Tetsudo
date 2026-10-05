@@ -33,6 +33,14 @@ assert(/if \(!d\) return null;/.test(tobuEvidence),
 assert(/!hasExplicitValidity && d !== provider\.effectiveDate/.test(tobuEvidence),
   "undated Tobu timetable rows must not become open-ended vehicle assignments");
 const renderer=read("js/trains-render.js");
+const trackLayoutSource=read("js/train-track-layout.js");
+const trainsCssSource=read("css/trains.css");
+assert(!/transition:\s*x\s+14s[\s\S]{0,120}y\s+14s/.test(trainsCssSource),
+  "CSS must not compete with the JS/layout train-marker animation authority");
+assert(/if \(!isFinite\(rawIdx\) \|\| rawIdx < 0\) return null;/.test(trackLayoutSource),
+  "track layout must fail closed on missing/invalid stationIndex instead of coercing it to station 0");
+assert(/if \(!isFinite\(_rawStationIdx\) \|\| _rawStationIdx < 0 \|\| _rawStationIdx >= stationCoords\.length\) continue;/.test(renderer),
+  "renderer must omit invalid position evidence instead of piling trains at station 0");
 assert(/_hasUpstreamVehicle/.test(renderer),"renderer must consume upstream vehicle resolution");
 assert(/var _identityExact = p\.vehicleIdentityStatus === "EXACT"/.test(renderer),
   "renderer must hard-gate concrete artwork on EXACT vehicle identity");
