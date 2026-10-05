@@ -24003,7 +24003,22 @@
             "confidence": "HIGH"
           }
         }
-      ]
+      ],
+      "presentation": {
+        "code": "JO",
+        "nameJa": "横須賀線・総武線快速",
+        "nameZh": "横须贺线・总武线快速",
+        "nameEn": "Yokosuka Line / Sobu Line (Rapid)",
+        "nameKo": "요코스카선・소부 쾌속선",
+        "color": "#00347a",
+        "icon": "../images/鉄道/JR東日本/総武線快速横須賀線.png",
+        "order": 14,
+        "lineIds": [
+          "Yokosuka",
+          "SobuRapid"
+        ],
+        "operatorGroup": "JR_EAST"
+      }
     },
     "TokyuDenEn": {
       "name": "TokyuDenEn",
