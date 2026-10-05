@@ -862,8 +862,9 @@
                 this._timetableCache[ck] = cachedRows;
                 return Promise.resolve(cachedRows);
             }
+            if (this._timetableInflight[ck]) return this._timetableInflight[ck];
             var self = this;
-            return this.getTimetableForRailway(operator, railway).then(function(data) {
+            this._timetableInflight[ck] = this.getTimetableForRailway(operator, railway).then(function(data) {
                 var rows = (data && data.length > 0) ? data : [];
                 if (rows.length >= ((window.RuntimeConfig && window.RuntimeConfig.TT_TRUNCATE_LIMIT) || 1000)) {
                     return splitTruncatedByCalendar(operator, railway).then(function(merged) {
@@ -874,11 +875,13 @@
                 }
                 self._timetableCache[ck] = rows;
                 return rows;
-            });
+            }).finally(function() { delete self._timetableInflight[ck]; });
+            return this._timetableInflight[ck];
         },
 
         // 时刻表缓存（避免重复请求）
         _timetableCache: {},
+        _timetableInflight: {},
 
         // 获取缓存的时刻表（按线路）
         getCachedTimetable: function(operator, railway) {
