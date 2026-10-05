@@ -41118,7 +41118,8 @@ window.RAILWAY_DATA = {
         3
       ],
       "throughServices": [
-        "OsakaLoop"
+        "OsakaLoop",
+        "Nara"
       ],
       "transferStations": [
         {
@@ -41168,6 +41169,16 @@ window.RAILWAY_DATA = {
           ],
           "evidence": {
             "source": "JR West timetable: Yamatoji Rapid continues between Osaka Loop and Kansai Main at Tennoji",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "Nara",
+          "handoverStations": [
+            "Kizu"
+          ],
+          "evidence": {
+            "source": "Historical JR-West timetable archive: Kansai Main / Nara adjacent through-service join",
             "confidence": "HIGH"
           }
         }
@@ -41349,7 +41360,9 @@ window.RAILWAY_DATA = {
         4,
         4
       ],
-      "throughServices": [],
+      "throughServices": [
+        "KansaiMain"
+      ],
       "transferStations": [
         {
           "station": "Kyoto",
@@ -41377,7 +41390,19 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "奈良线",
-      "nameKo": "나라선"
+      "nameKo": "나라선",
+      "serviceBoundaries": [
+        {
+          "lineId": "KansaiMain",
+          "handoverStations": [
+            "Kizu"
+          ],
+          "evidence": {
+            "source": "Historical JR-West timetable archive: Kansai Main / Nara adjacent through-service join",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "Kosei": {
       "name": "Kosei",
@@ -41965,7 +41990,9 @@ window.RAILWAY_DATA = {
         3,
         3
       ],
-      "throughServices": [],
+      "throughServices": [
+        "Gakkentoshi"
+      ],
       "transferStations": [
         {
           "station": "Shin-Osaka",
@@ -41987,7 +42014,19 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "大阪东线",
-      "nameKo": "오사카 히가시선"
+      "nameKo": "오사카 히가시선",
+      "serviceBoundaries": [
+        {
+          "lineId": "Gakkentoshi",
+          "handoverStations": [
+            "Kyobashi-Osaka"
+          ],
+          "evidence": {
+            "source": "Historical JR-West timetable archive: Gakkentoshi / Osaka Higashi adjacent through-service join",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "Bantan": {
       "name": "Bantan",
@@ -42295,7 +42334,9 @@ window.RAILWAY_DATA = {
         3,
         3
       ],
-      "throughServices": [],
+      "throughServices": [
+        "OsakaHigashi"
+      ],
       "transferStations": [
         {
           "station": "Kyobashi-Osaka",
@@ -42311,7 +42352,19 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "学研都市线(片町线)",
-      "nameKo": "가켄토시선(카타마치선)"
+      "nameKo": "가켄토시선(카타마치선)",
+      "serviceBoundaries": [
+        {
+          "lineId": "OsakaHigashi",
+          "handoverStations": [
+            "Kyobashi-Osaka"
+          ],
+          "evidence": {
+            "source": "Historical JR-West timetable archive: Gakkentoshi / Osaka Higashi adjacent through-service join",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "TokaidoKansai": {
       "name": "TokaidoKansai",
