@@ -15010,7 +15010,29 @@
           "SobuRapid"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "ShonanShinjuku",
+          "handoverStations": [
+            "Ofuna"
+          ],
+          "evidence": {
+            "source": "JR East passenger service map / Shonan-Shinjuku Line: Utsunomiya-Yokosuka service path",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "SobuRapid",
+          "handoverStations": [
+            "Tokyo"
+          ],
+          "evidence": {
+            "source": "JR East Tokyo-area passenger map and JO station numbering define Yokosuka Line / Sobu Line Rapid as one passenger service corridor",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "ChuoRapid": {
       "name": "ChuoRapid",
@@ -15385,7 +15407,29 @@
           "ChuoRapid"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "ChuoMain",
+          "handoverStations": [
+            "Takao"
+          ],
+          "evidence": {
+            "source": "JR East Takao timetable: Chuo Line trains continue across the Chuo Rapid / Chuo Main operating boundary",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "Ome",
+          "handoverStations": [
+            "Tachikawa"
+          ],
+          "evidence": {
+            "source": "JR East timetable shows continuous Ome-Tokyo trains across Tachikawa",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "Saikyo": {
       "name": "Saikyo",
@@ -15725,7 +15769,29 @@
           "Kawagoe"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "Rinkai",
+          "handoverStations": [
+            "Osaki"
+          ],
+          "evidence": {
+            "source": "ThroughService direct relation + join station",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "Kawagoe",
+          "handoverStations": [
+            "Omiya"
+          ],
+          "evidence": {
+            "source": "JR East Saikyo-Kawagoe timetable: continuous Saikyo / Kawagoe operation across Omiya",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "Joban": {
       "name": "Joban",
@@ -16096,7 +16162,31 @@
           "Joban"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "NaritaAbikoBranch",
+          "handoverStations": [
+            "Abiko"
+          ],
+          "evidence": {
+            "source": "JR East Tokyo-area passenger map: 常磐線快速・成田線 through service via Abiko",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "UenoTokyo",
+          "handoverStations": [
+            "Ueno",
+            "Tokyo",
+            "Shinagawa"
+          ],
+          "evidence": {
+            "source": "JR East passenger service map / Ueno-Tokyo Line: Joban services continue via Tokyo to Shinagawa",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "Keiyo": {
       "name": "Keiyo",
@@ -16268,7 +16358,39 @@
           "Keiyo"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "Uchibo",
+          "handoverStations": [
+            "Soga"
+          ],
+          "evidence": {
+            "source": "JR East timetable: direct Keiyo / Uchibo-Sotobo operation across Soga",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "Sotobo",
+          "handoverStations": [
+            "Soga"
+          ],
+          "evidence": {
+            "source": "JR East timetable: direct Keiyo / Uchibo-Sotobo operation across Soga",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "Musashino",
+          "handoverStations": [
+            "Nishi-Funabashi"
+          ],
+          "evidence": {
+            "source": "ThroughService direct relation; Musashino joins Keiyo operation at Nishi-Funabashi",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "Musashino": {
       "name": "Musashino",
@@ -16412,7 +16534,19 @@
           "Musashino"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "Keiyo",
+          "handoverStations": [
+            "Nishi-Funabashi"
+          ],
+          "evidence": {
+            "source": "ThroughService direct relation; Musashino joins Keiyo operation at Nishi-Funabashi",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "ShonanShinjuku": {
       "name": "ShonanShinjuku",
@@ -17014,7 +17148,49 @@
           "ShonanShinjuku"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "UtsunomiyaJR",
+          "handoverStations": [
+            "Omiya"
+          ],
+          "evidence": {
+            "source": "JR East passenger service map / Shonan-Shinjuku Line service corridor",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "Takasaki",
+          "handoverStations": [
+            "Omiya"
+          ],
+          "evidence": {
+            "source": "JR East passenger service map / Shonan-Shinjuku Line service corridor",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "Yokosuka",
+          "handoverStations": [
+            "Ofuna"
+          ],
+          "evidence": {
+            "source": "JR East passenger service map / Shonan-Shinjuku Line: Utsunomiya-Yokosuka service path",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "Tokaido",
+          "handoverStations": [
+            "Ofuna"
+          ],
+          "evidence": {
+            "source": "JR East passenger service map / Shonan-Shinjuku Line: Takasaki-Tokaido service path",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "Takasaki": {
       "name": "Takasaki",
@@ -17341,6 +17517,29 @@
       },
       "branches": [
         "Agatsuma"
+      ],
+      "serviceBoundaries": [
+        {
+          "lineId": "UenoTokyo",
+          "handoverStations": [
+            "Ueno",
+            "Tokyo"
+          ],
+          "evidence": {
+            "source": "JR East passenger service map / Ueno-Tokyo Line: Takasaki Line services continue through Ueno-Tokyo corridor",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "ShonanShinjuku",
+          "handoverStations": [
+            "Omiya"
+          ],
+          "evidence": {
+            "source": "JR East passenger service map / Shonan-Shinjuku Line service corridor",
+            "confidence": "HIGH"
+          }
+        }
       ]
     },
     "Tsurumi": {
@@ -18031,7 +18230,39 @@
           "Tokaido"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "UenoTokyo",
+          "handoverStations": [
+            "Tokyo"
+          ],
+          "evidence": {
+            "source": "JR East passenger service map / Ueno-Tokyo Line: Utsunomiya and Takasaki services continue onto Tokaido Line",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "ShonanShinjuku",
+          "handoverStations": [
+            "Ofuna"
+          ],
+          "evidence": {
+            "source": "JR East passenger service map / Shonan-Shinjuku Line: Takasaki-Tokaido service path",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "Ito",
+          "handoverStations": [
+            "Atami"
+          ],
+          "evidence": {
+            "source": "continuous Tokaido/Ito operation through Atami",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "JobanLocal": {
       "name": "JobanLocal",
@@ -18166,7 +18397,19 @@
           "JobanLocal"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "Chiyoda",
+          "handoverStations": [
+            "Ayase"
+          ],
+          "evidence": {
+            "source": "ThroughService direct relation + join station",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "Ginza": {
       "name": "Ginza",
@@ -19140,7 +19383,19 @@
           "Hibiya"
         ],
         "operatorGroup": "TOKYO_METRO"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "TobuSkytree",
+          "handoverStations": [
+            "Kita-Senju"
+          ],
+          "evidence": {
+            "source": "ThroughService direct relation + join station",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "Yurakucho": {
       "name": "Yurakucho",
@@ -19431,7 +19686,29 @@
           "Yurakucho"
         ],
         "operatorGroup": "TOKYO_METRO"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "Tojo",
+          "handoverStations": [
+            "Wakoshi"
+          ],
+          "evidence": {
+            "source": "Tokyo Metro through-service network + canonical handover station",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "Yurakucho_Seibu",
+          "handoverStations": [
+            "Kotake-Mukaihara"
+          ],
+          "evidence": {
+            "source": "Tokyo Metro through-service network + canonical handover station",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "Tozai": {
       "name": "Tozai",
@@ -19635,7 +19912,19 @@
           "Tozai"
         ],
         "operatorGroup": "TOKYO_METRO"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "ChuoSobuLocal",
+          "handoverStations": [
+            "Nakano"
+          ],
+          "evidence": {
+            "source": "Tokyo Metro through-service network + canonical handover station",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "Asakusa": {
       "name": "Asakusa",
@@ -19876,7 +20165,29 @@
           "Asakusa"
         ],
         "operatorGroup": "TOEI"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "Keikyu",
+          "handoverStations": [
+            "Sengakuji"
+          ],
+          "evidence": {
+            "source": "ThroughService direct relation + join station",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "KeiseiOshiage",
+          "handoverStations": [
+            "Oshiage"
+          ],
+          "evidence": {
+            "source": "ThroughService direct relation + join station",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "Mita": {
       "name": "Mita",
@@ -20082,7 +20393,19 @@
           "Mita"
         ],
         "operatorGroup": "TOEI"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "TokyuMeguro",
+          "handoverStations": [
+            "Meguro"
+          ],
+          "evidence": {
+            "source": "ThroughService direct relation + join station",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "Shinjuku": {
       "name": "Shinjuku",
@@ -20331,7 +20654,19 @@
           "Shinjuku"
         ],
         "operatorGroup": "TOEI"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "KeioMain",
+          "handoverStations": [
+            "Shinjuku"
+          ],
+          "evidence": {
+            "source": "ThroughService direct relation + join station",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "Oedo": {
       "name": "Oedo",
@@ -20928,7 +21263,29 @@
           "ChiyodaBranch"
         ],
         "operatorGroup": "TOKYO_METRO"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "JobanLocal",
+          "handoverStations": [
+            "Ayase"
+          ],
+          "evidence": {
+            "source": "ThroughService direct relation + join station",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "Odawara",
+          "handoverStations": [
+            "Yoyogi-Uehara"
+          ],
+          "evidence": {
+            "source": "ThroughService direct relation + join station",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "Hanzomon": {
       "name": "Hanzomon",
@@ -21169,7 +21526,29 @@
           "Hanzomon"
         ],
         "operatorGroup": "TOKYO_METRO"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "TokyuDenEn",
+          "handoverStations": [
+            "Shibuya"
+          ],
+          "evidence": {
+            "source": "ThroughService direct relation + join station",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "TobuSkytree",
+          "handoverStations": [
+            "Oshiage"
+          ],
+          "evidence": {
+            "source": "ThroughService direct relation + join station",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "Namboku": {
       "name": "Namboku",
@@ -21371,7 +21750,19 @@
           "Namboku"
         ],
         "operatorGroup": "TOKYO_METRO"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "TokyuMeguro",
+          "handoverStations": [
+            "Meguro"
+          ],
+          "evidence": {
+            "source": "ThroughService direct relation + join station",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "Fukutoshin": {
       "name": "Fukutoshin",
@@ -21630,7 +22021,39 @@
           "Fukutoshin"
         ],
         "operatorGroup": "TOKYO_METRO"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "TokyuToyoko",
+          "handoverStations": [
+            "Shibuya"
+          ],
+          "evidence": {
+            "source": "ThroughService direct relation + join station",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "Tojo",
+          "handoverStations": [
+            "Wakoshi"
+          ],
+          "evidence": {
+            "source": "ThroughService direct relation + join station",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "Yurakucho_Seibu",
+          "handoverStations": [
+            "Kotake-Mukaihara"
+          ],
+          "evidence": {
+            "source": "ThroughService direct relation + join station",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "Yurikamome": {
       "name": "Yurikamome",
@@ -22106,7 +22529,19 @@
           "TobuIsesaki"
         ],
         "operatorGroup": "TOBU"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "TobuNikko",
+          "handoverStations": [
+            "Tobu-Dobutsu-Koen"
+          ],
+          "evidence": {
+            "source": "Tobu Railway network/timetable: direct trains continue from the Skytree/Isesaki corridor onto the Nikko Line at Tobu-Dobutsu-Koen",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "TokyuToyoko": {
       "name": "TokyuToyoko",
@@ -22337,7 +22772,29 @@
           "TokyuToyoko"
         ],
         "operatorGroup": "TOKYU"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "Fukutoshin",
+          "handoverStations": [
+            "Shibuya"
+          ],
+          "evidence": {
+            "source": "ThroughService direct relation + join station",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "MinatoMirai",
+          "handoverStations": [
+            "Yokohama"
+          ],
+          "evidence": {
+            "source": "ThroughService direct relation + join station",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "YokohamaBlue": {
       "name": "YokohamaBlue",
@@ -23249,7 +23706,29 @@
           "Ome"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "Itsukaichi",
+          "handoverStations": [
+            "Haijima"
+          ],
+          "evidence": {
+            "source": "JR East route/timetable path: Itsukaichi services enter Ome Line at Haijima",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "ChuoRapid",
+          "handoverStations": [
+            "Tachikawa"
+          ],
+          "evidence": {
+            "source": "JR East timetable shows continuous Ome-Tokyo trains across Tachikawa",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "Itsukaichi": {
       "name": "Itsukaichi",
@@ -23312,7 +23791,19 @@
           "Itsukaichi"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "Ome",
+          "handoverStations": [
+            "Haijima"
+          ],
+          "evidence": {
+            "source": "JR East route/timetable path: Itsukaichi services enter Ome Line at Haijima",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "SobuRapid": {
       "name": "SobuRapid",
@@ -23500,7 +23991,19 @@
         }
       ],
       "nameZh": "横须贺线・总武快速线",
-      "nameKo": "요코스카선・소부 쾌속선"
+      "nameKo": "요코스카선・소부 쾌속선",
+      "serviceBoundaries": [
+        {
+          "lineId": "Yokosuka",
+          "handoverStations": [
+            "Tokyo"
+          ],
+          "evidence": {
+            "source": "JR East Tokyo-area passenger map and JO station numbering define Yokosuka Line / Sobu Line Rapid as one passenger service corridor",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "TokyuDenEn": {
       "name": "TokyuDenEn",
@@ -23659,7 +24162,19 @@
           "TokyuDenEn"
         ],
         "operatorGroup": "TOKYU"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "Hanzomon",
+          "handoverStations": [
+            "Shibuya"
+          ],
+          "evidence": {
+            "source": "ThroughService direct relation + join station",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "Keikyu": {
       "name": "Keikyu",
@@ -23950,6 +24465,18 @@
         "KeikyuAirport",
         "KeikyuKurihama",
         "KeikyuZushi"
+      ],
+      "serviceBoundaries": [
+        {
+          "lineId": "Asakusa",
+          "handoverStations": [
+            "Sengakuji"
+          ],
+          "evidence": {
+            "source": "ThroughService direct relation + join station",
+            "confidence": "HIGH"
+          }
+        }
       ]
     },
     "MinatoMirai": {
@@ -24053,7 +24580,19 @@
           "MinatoMirai"
         ],
         "operatorGroup": "MINATO_MIRAI"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "TokyuToyoko",
+          "handoverStations": [
+            "Yokohama"
+          ],
+          "evidence": {
+            "source": "ThroughService direct relation + join station",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "SotetsuMain": {
       "name": "SotetsuMain",
@@ -25947,7 +26486,19 @@
           "ChuoSobuLocal"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "Tozai",
+          "handoverStations": [
+            "Nakano"
+          ],
+          "evidence": {
+            "source": "Tokyo Metro through-service network + canonical handover station",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "Daishi_Keikyu": {
       "name": "大师线（京急）",
@@ -26793,7 +27344,19 @@
           "Ikebukuro"
         ],
         "operatorGroup": "SEIBU"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "Yurakucho_Seibu",
+          "handoverStations": [
+            "Nerima"
+          ],
+          "evidence": {
+            "source": "Seibu Yurakucho Line connects Kotake-mukaihara to Nerima and through trains continue onto Seibu Ikebukuro corridor",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "Ishinomaki": {
       "name": "石巻線",
@@ -26934,7 +27497,19 @@
           "Ito"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "Tokaido",
+          "handoverStations": [
+            "Atami"
+          ],
+          "evidence": {
+            "source": "continuous Tokaido/Ito operation through Atami",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "Joetsu": {
       "name": "上越线",
@@ -27471,7 +28046,29 @@
         }
       ],
       "nameZh": "埼京线・川越线",
-      "nameKo": "사이쿄선・가와고에선"
+      "nameKo": "사이쿄선・가와고에선",
+      "serviceBoundaries": [
+        {
+          "lineId": "Saikyo",
+          "handoverStations": [
+            "Omiya"
+          ],
+          "evidence": {
+            "source": "JR East Saikyo-Kawagoe timetable: continuous Saikyo / Kawagoe operation across Omiya",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "KawagoeWest",
+          "handoverStations": [
+            "Kawagoe"
+          ],
+          "evidence": {
+            "source": "川越線運転系統 川越駅以東/以西 直通",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "KawagoeWest": {
       "name": "KawagoeWest",
@@ -27538,7 +28135,29 @@
           "KawagoeWest"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "Hachiko",
+          "handoverStations": [
+            "Komagawa"
+          ],
+          "evidence": {
+            "source": "JR East Hachiko/Kawagoe continuous operation boundary at Komagawa",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "Kawagoe",
+          "handoverStations": [
+            "Kawagoe"
+          ],
+          "evidence": {
+            "source": "川越線運転系統 川越駅以東/以西 直通",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "KeikyuAirport": {
       "name": "KeikyuAirport",
@@ -28119,7 +28738,19 @@
           "KeioMain"
         ],
         "operatorGroup": "KEIO"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "Shinjuku",
+          "handoverStations": [
+            "Shinjuku"
+          ],
+          "evidence": {
+            "source": "ThroughService direct relation + join station",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "KeioSagami": {
       "name": "KeioSagami",
@@ -30601,7 +31232,19 @@
           "Rinkai"
         ],
         "operatorGroup": "RINKAI"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "Saikyo",
+          "handoverStations": [
+            "Osaki"
+          ],
+          "evidence": {
+            "source": "ThroughService direct relation + join station",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "Ryomo": {
       "name": "两毛线",
@@ -31672,7 +32315,19 @@
         }
       ],
       "nameZh": "信越本线",
-      "nameKo": "시네츠 본선"
+      "nameKo": "시네츠 본선",
+      "serviceBoundaries": [
+        {
+          "lineId": "Shinonoi",
+          "handoverStations": [
+            "Shinonoi"
+          ],
+          "evidence": {
+            "source": "JR East Shinano timetable: same train continues through Shinonoi between Shinonoi Line and Nagano",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "Shinonoi": {
       "name": "直江津-新潟",
@@ -31784,7 +32439,29 @@
           "Shinonoi"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "ChuoMain",
+          "handoverStations": [
+            "Shiojiri"
+          ],
+          "evidence": {
+            "source": "JR East timetable: trains continue from Chuo Line through Shiojiri onto Shinonoi Line toward Matsumoto / Nagano",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "Shinetsu",
+          "handoverStations": [
+            "Shinonoi"
+          ],
+          "evidence": {
+            "source": "JR East Shinano timetable: same train continues through Shinonoi between Shinonoi Line and Nagano",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "Sotobo": {
       "name": "Sotobo",
@@ -31888,7 +32565,19 @@
           "Sotobo"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "Keiyo",
+          "handoverStations": [
+            "Soga"
+          ],
+          "evidence": {
+            "source": "JR East timetable: direct Keiyo / Uchibo-Sotobo operation across Soga",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "Suigun": {
       "name": "水郡线",
@@ -32680,7 +33369,29 @@
           "Tojo"
         ],
         "operatorGroup": "TOBU"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "Yurakucho",
+          "handoverStations": [
+            "Wakoshi"
+          ],
+          "evidence": {
+            "source": "Tokyo Metro through-service network + canonical handover station",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "Fukutoshin",
+          "handoverStations": [
+            "Wakoshi"
+          ],
+          "evidence": {
+            "source": "ThroughService direct relation + join station",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "TokyuTamagawa": {
       "name": "TokyuTamagawa",
@@ -33156,7 +33867,19 @@
           "Uchibo"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "Keiyo",
+          "handoverStations": [
+            "Soga"
+          ],
+          "evidence": {
+            "source": "JR East timetable: direct Keiyo / Uchibo-Sotobo operation across Soga",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "Uetsu": {
       "name": "羽越本线",
@@ -33832,7 +34555,39 @@
           "Yurakucho_Seibu"
         ],
         "operatorGroup": "SEIBU"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "Yurakucho",
+          "handoverStations": [
+            "Kotake-Mukaihara"
+          ],
+          "evidence": {
+            "source": "Tokyo Metro through-service network + canonical handover station",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "Fukutoshin",
+          "handoverStations": [
+            "Kotake-Mukaihara"
+          ],
+          "evidence": {
+            "source": "ThroughService direct relation + join station",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "Ikebukuro",
+          "handoverStations": [
+            "Nerima"
+          ],
+          "evidence": {
+            "source": "Seibu Yurakucho Line connects Kotake-mukaihara to Nerima and through trains continue onto Seibu Ikebukuro corridor",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "Odawara": {
       "name": "Odawara",
@@ -34098,6 +34853,18 @@
       },
       "branches": [
         "OdakyuTama"
+      ],
+      "serviceBoundaries": [
+        {
+          "lineId": "Chiyoda",
+          "handoverStations": [
+            "Yoyogi-Uehara"
+          ],
+          "evidence": {
+            "source": "ThroughService direct relation + join station",
+            "confidence": "HIGH"
+          }
+        }
       ]
     },
     "SeibuTamagawa": {
@@ -34269,7 +35036,19 @@
           "TobuNikko"
         ],
         "operatorGroup": "TOBU"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "TobuIsesaki",
+          "handoverStations": [
+            "Tobu-Dobutsu-Koen"
+          ],
+          "evidence": {
+            "source": "Tobu Railway network/timetable: direct trains continue from the Skytree/Isesaki corridor onto the Nikko Line at Tobu-Dobutsu-Koen",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "TobuSkytree": {
       "name": "TobuSkytree",
@@ -34464,7 +35243,29 @@
           "TobuSkytree"
         ],
         "operatorGroup": "TOBU"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "Hanzomon",
+          "handoverStations": [
+            "Oshiage"
+          ],
+          "evidence": {
+            "source": "ThroughService direct relation + join station",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "Hibiya",
+          "handoverStations": [
+            "Kita-Senju"
+          ],
+          "evidence": {
+            "source": "ThroughService direct relation + join station",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "Yokohama": {
       "name": "Yokohama",
@@ -34785,7 +35586,29 @@
           "TokyuMeguro"
         ],
         "operatorGroup": "TOKYU"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "Namboku",
+          "handoverStations": [
+            "Meguro"
+          ],
+          "evidence": {
+            "source": "ThroughService direct relation + join station",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "Mita",
+          "handoverStations": [
+            "Meguro"
+          ],
+          "evidence": {
+            "source": "ThroughService direct relation + join station",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "TokyuIkegami": {
       "nameJa": "東急池上線",
@@ -35072,7 +35895,19 @@
           "Hachiko"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "KawagoeWest",
+          "handoverStations": [
+            "Komagawa"
+          ],
+          "evidence": {
+            "source": "JR East Hachiko/Kawagoe continuous operation boundary at Komagawa",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "KeiseiOshiage": {
       "nameJa": "京成押上線",
@@ -35134,7 +35969,19 @@
         ],
         "operatorGroup": "KEISEI"
       },
-      "branchOf": "Keisei"
+      "branchOf": "Keisei",
+      "serviceBoundaries": [
+        {
+          "lineId": "Asakusa",
+          "handoverStations": [
+            "Oshiage"
+          ],
+          "evidence": {
+            "source": "ThroughService direct relation + join station",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "KeiseiKanamachi": {
       "nameJa": "京成金町線",
@@ -35790,6 +36637,28 @@
       "throughServices": [
         "ChuoRapid",
         "Shinonoi"
+      ],
+      "serviceBoundaries": [
+        {
+          "lineId": "ChuoRapid",
+          "handoverStations": [
+            "Takao"
+          ],
+          "evidence": {
+            "source": "JR East Takao timetable: Chuo Line trains continue across the Chuo Rapid / Chuo Main operating boundary",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "Shinonoi",
+          "handoverStations": [
+            "Shiojiri"
+          ],
+          "evidence": {
+            "source": "JR East timetable: trains continue from Chuo Line through Shiojiri onto Shinonoi Line toward Matsumoto / Nagano",
+            "confidence": "HIGH"
+          }
+        }
       ]
     },
     "TokaidoMain": {
@@ -36809,7 +37678,30 @@
           "UtsunomiyaJR"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "UenoTokyo",
+          "handoverStations": [
+            "Ueno",
+            "Tokyo"
+          ],
+          "evidence": {
+            "source": "JR East passenger service map / Ueno-Tokyo Line: Utsunomiya Line services continue through Ueno-Tokyo corridor",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "ShonanShinjuku",
+          "handoverStations": [
+            "Omiya"
+          ],
+          "evidence": {
+            "source": "JR East passenger service map / Shonan-Shinjuku Line service corridor",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "MarunouchiBranch": {
       "name": "MarunouchiBranch",
@@ -37206,6 +38098,18 @@
           "type": "in",
           "note": ""
         }
+      ],
+      "serviceBoundaries": [
+        {
+          "lineId": "Joban",
+          "handoverStations": [
+            "Abiko"
+          ],
+          "evidence": {
+            "source": "JR East Tokyo-area passenger map: 常磐線快速・成田線 through service via Abiko",
+            "confidence": "HIGH"
+          }
+        }
       ]
     },
     "NaritaAirportBranch": {
@@ -37526,7 +38430,53 @@
           "UenoTokyo"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "UtsunomiyaJR",
+          "handoverStations": [
+            "Ueno",
+            "Tokyo"
+          ],
+          "evidence": {
+            "source": "JR East passenger service map / Ueno-Tokyo Line: Utsunomiya Line services continue through Ueno-Tokyo corridor",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "Takasaki",
+          "handoverStations": [
+            "Ueno",
+            "Tokyo"
+          ],
+          "evidence": {
+            "source": "JR East passenger service map / Ueno-Tokyo Line: Takasaki Line services continue through Ueno-Tokyo corridor",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "Joban",
+          "handoverStations": [
+            "Ueno",
+            "Tokyo",
+            "Shinagawa"
+          ],
+          "evidence": {
+            "source": "JR East passenger service map / Ueno-Tokyo Line: Joban services continue via Tokyo to Shinagawa",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "Tokaido",
+          "handoverStations": [
+            "Tokyo"
+          ],
+          "evidence": {
+            "source": "JR East passenger service map / Ueno-Tokyo Line: Utsunomiya and Takasaki services continue onto Tokaido Line",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "ChibaMonorail1": {
       "name": "ChibaMonorail1",
@@ -39172,7 +40122,29 @@
         }
       ],
       "nameZh": "大阪环状线",
-      "nameKo": "오사카 순환선"
+      "nameKo": "오사카 순환선",
+      "serviceBoundaries": [
+        {
+          "lineId": "Hanwa",
+          "handoverStations": [
+            "Tennoji"
+          ],
+          "evidence": {
+            "source": "JR West timetable: Kanku/Kishu Rapid continues between Osaka Loop and Hanwa at Tennoji",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "KansaiMain",
+          "handoverStations": [
+            "Tennoji"
+          ],
+          "evidence": {
+            "source": "JR West timetable: Yamatoji Rapid continues between Osaka Loop and Kansai Main at Tennoji",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "SanyoMain": {
       "name": "SanyoMain",
@@ -39500,7 +40472,29 @@
         }
       ],
       "nameZh": "山阳本线",
-      "nameKo": "산요 본선"
+      "nameKo": "산요 본선",
+      "serviceBoundaries": [
+        {
+          "lineId": "TokaidoKansai",
+          "handoverStations": [
+            "Kobe"
+          ],
+          "evidence": {
+            "source": "JR West continuous Tokaido/Sanyo operation across Kobe",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "KagoshimaMain",
+          "handoverStations": [
+            "Moji"
+          ],
+          "evidence": {
+            "source": "JR Kyushu 2025 timetable revision: local trains operate continuously between Shimonoseki and Kokura across Moji",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "KansaiMain": {
       "name": "KansaiMain",
@@ -39669,7 +40663,19 @@
         }
       ],
       "nameZh": "关西本线(大和路线)",
-      "nameKo": "칸사이 본선(야마토지선)"
+      "nameKo": "칸사이 본선(야마토지선)",
+      "serviceBoundaries": [
+        {
+          "lineId": "OsakaLoop",
+          "handoverStations": [
+            "Tennoji"
+          ],
+          "evidence": {
+            "source": "JR West timetable: Yamatoji Rapid continues between Osaka Loop and Kansai Main at Tennoji",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "Hanwa": {
       "name": "Hanwa",
@@ -39776,7 +40782,19 @@
         }
       ],
       "nameZh": "阪和线",
-      "nameKo": "한와선"
+      "nameKo": "한와선",
+      "serviceBoundaries": [
+        {
+          "lineId": "OsakaLoop",
+          "handoverStations": [
+            "Tennoji"
+          ],
+          "evidence": {
+            "source": "JR West timetable: Kanku/Kishu Rapid continues between Osaka Loop and Hanwa at Tennoji",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "Nara": {
       "name": "Nara",
@@ -40940,7 +41958,19 @@
         }
       ],
       "nameZh": "东海道本线(JR京都线/JR神户线)",
-      "nameKo": "도카이도 본선(JR 교토선/JR 고베선)"
+      "nameKo": "도카이도 본선(JR 교토선/JR 고베선)",
+      "serviceBoundaries": [
+        {
+          "lineId": "SanyoMain",
+          "handoverStations": [
+            "Kobe"
+          ],
+          "evidence": {
+            "source": "JR West continuous Tokaido/Sanyo operation across Kobe",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "KagoshimaMain": {
       "name": "KagoshimaMain",
@@ -41242,7 +42272,49 @@
         }
       ],
       "nameZh": "鹿儿岛本线",
-      "nameKo": "가고시마 본선"
+      "nameKo": "가고시마 본선",
+      "serviceBoundaries": [
+        {
+          "lineId": "NagasakiMain",
+          "handoverStations": [
+            "Tosu"
+          ],
+          "evidence": {
+            "source": "JR Kyushu route/timetable services continue between Hakata/Kagoshima Main corridor and Nagasaki Main at Tosu",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "Nippo",
+          "handoverStations": [
+            "Kokura"
+          ],
+          "evidence": {
+            "source": "JR Kyushu timetable: Sonic and other services run from Hakata/Kagoshima Main corridor onto Nippo Main via Kokura",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "SanyoMain",
+          "handoverStations": [
+            "Moji"
+          ],
+          "evidence": {
+            "source": "JR Kyushu 2025 timetable revision: local trains operate continuously between Shimonoseki and Kokura across Moji",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "Hohi",
+          "handoverStations": [
+            "Kumamoto"
+          ],
+          "evidence": {
+            "source": "JR Kyushu Kyushu Odan Tokkyu timetable: direct Kumamoto-Oita/Beppu services enter Hohi Main at Kumamoto",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "NagasakiMain": {
       "name": "NagasakiMain",
@@ -41351,7 +42423,19 @@
         }
       ],
       "nameZh": "长崎本线",
-      "nameKo": "나가사키 본선"
+      "nameKo": "나가사키 본선",
+      "serviceBoundaries": [
+        {
+          "lineId": "KagoshimaMain",
+          "handoverStations": [
+            "Tosu"
+          ],
+          "evidence": {
+            "source": "JR Kyushu route/timetable services continue between Hakata/Kagoshima Main corridor and Nagasaki Main at Tosu",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "Nippo": {
       "name": "Nippo",
@@ -41638,7 +42722,39 @@
         }
       ],
       "nameZh": "日丰本线",
-      "nameKo": "닛포 본선"
+      "nameKo": "닛포 본선",
+      "serviceBoundaries": [
+        {
+          "lineId": "KagoshimaMain",
+          "handoverStations": [
+            "Kokura"
+          ],
+          "evidence": {
+            "source": "JR Kyushu timetable: Sonic and other services run from Hakata/Kagoshima Main corridor onto Nippo Main via Kokura",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "Kyudai",
+          "handoverStations": [
+            "Ōita"
+          ],
+          "evidence": {
+            "source": "JR Kyushu Yufuin no Mori timetable: direct Hakata-Kurume-Yufuin-Oita-Beppu service crosses Kyudai/Nippo at Oita",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "Hohi",
+          "handoverStations": [
+            "Ōita"
+          ],
+          "evidence": {
+            "source": "JR Kyushu Kyushu Odan Tokkyu timetable: Hohi services continue through Oita onto Nippo to/from Beppu",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "Kyudai": {
       "name": "Kyudai",
@@ -41771,7 +42887,19 @@
         }
       ],
       "nameZh": "久大本线",
-      "nameKo": "큐다이 본선"
+      "nameKo": "큐다이 본선",
+      "serviceBoundaries": [
+        {
+          "lineId": "Nippo",
+          "handoverStations": [
+            "Ōita"
+          ],
+          "evidence": {
+            "source": "JR Kyushu Yufuin no Mori timetable: direct Hakata-Kurume-Yufuin-Oita-Beppu service crosses Kyudai/Nippo at Oita",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "Hohi": {
       "name": "Hohi",
@@ -41899,7 +43027,29 @@
         }
       ],
       "nameZh": "丰肥本线",
-      "nameKo": "호히 본선"
+      "nameKo": "호히 본선",
+      "serviceBoundaries": [
+        {
+          "lineId": "KagoshimaMain",
+          "handoverStations": [
+            "Kumamoto"
+          ],
+          "evidence": {
+            "source": "JR Kyushu Kyushu Odan Tokkyu timetable: direct Kumamoto-Oita/Beppu services enter Hohi Main at Kumamoto",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "Nippo",
+          "handoverStations": [
+            "Ōita"
+          ],
+          "evidence": {
+            "source": "JR Kyushu Kyushu Odan Tokkyu timetable: Hohi services continue through Oita onto Nippo to/from Beppu",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "Sasaguri": {
       "name": "Sasaguri",
