@@ -796,6 +796,27 @@
             return fetchODPT(buildUrl(operator, 'train')).then(extractData);
         },
 
+        assessRealtimeFullCandidate: function(lineId, history) {
+            var samples = Array.isArray(history) ? history : [];
+            var usable = samples.filter(function(s) { return s && s.lineId === lineId && s.ok && s.matchedCount > 0; });
+            var minSamples = 3;
+            var reasons = [];
+            if (usable.length < minSamples) reasons.push("insufficient-samples");
+            usable.forEach(function(s) {
+                if (s.locationCoverage !== 1) reasons.push("incomplete-location-fields");
+                if (s.trainNumberCoverage !== 1) reasons.push("incomplete-train-number-fields");
+                if (Object.keys(s.directionCounts || {}).length < 2) reasons.push("direction-coverage-unproven");
+            });
+            reasons = reasons.filter(function(v, i, a) { return a.indexOf(v) === i; });
+            return {
+                lineId: lineId,
+                sampleCount: usable.length,
+                candidate: usable.length >= minSamples && reasons.length === 0,
+                reasons: reasons,
+                minSamples: minSamples
+            };
+        },
+
         // 盲查/诊断：枚举 operator 实际返回的 railway identity，并与本地预设反向比较。
         // 不改变生产映射，不猜别名；用于发现“API 有数据但预设 code 错/缺”的情况。
         // Inspect one requested line against the operator-wide realtime snapshot.
@@ -1530,6 +1551,8 @@
                             if (history.length > 10) history.shift();
                             window.ODPT_REALTIME_AUDIT.Yamanote = audit;
                             window.ODPT_REALTIME_AUDIT.YamanoteHistory = history;
+                            window.ODPT_REALTIME_AUDIT.YamanoteFullCandidate =
+                                window.ODPTClient.assessRealtimeFullCandidate("Yamanote", history);
                         }
                     }).catch(function(e) {
                         window.ODPT_TRAIN_POSITIONS[op] = null;
