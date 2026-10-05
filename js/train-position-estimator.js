@@ -404,6 +404,74 @@
     return cached;
   }
 
+  function resolveTrainRunIdentity(run, tt, lineId, line) {
+    var serviceDate = tt['_serviceDate'] || tt['serviceDate'] || tt['operatingDate'] || getTokyoServiceDate();
+    var identityKey = lineId + "|" + String(serviceDate || "").slice(0, 10);
+    if (run.identity && run.identity.key === identityKey) return run.identity;
+
+    var trainNumber = run.trainNumber;
+    var destinationStationUrn = run.destinationStationUrn;
+    var _trainOwner = tt['odpt:trainOwner'] || tt['trainOwner'] || '';
+    var _assignmentOperator = '';
+    var _assignmentMatches = [];
+    var _baseOperationCtx = {
+      lineId: lineId,
+      operator: tt['odpt:operator'] || line.operator || '',
+      railway: tt['odpt:railway'] || '',
+      railDirection: run.railDirection || '',
+      destinationStation: destinationStationUrn || '',
+      timetableObjectId: run.timetableObjectId,
+      serviceDate: serviceDate,
+      at: (function(){ var d=new Date(Date.now()+9*60*60*1000); return d.toISOString().slice(11,16); })()
+    };
+    _baseOperationCtx.operationCode = window.TrainOperationEvidence &&
+      typeof window.TrainOperationEvidence.normalizeOperationCode === 'function'
+      ? window.TrainOperationEvidence.normalizeOperationCode(trainNumber, _baseOperationCtx) : '';
+    var _resolvedEvidence = window.TrainOperationEvidence &&
+      typeof window.TrainOperationEvidence.resolveEvidence === 'function'
+      ? window.TrainOperationEvidence.resolveEvidence(trainNumber, _baseOperationCtx, "fallback")
+      : null;
+    if (_resolvedEvidence) _assignmentMatches.push(_resolvedEvidence);
+    if (_resolvedEvidence && _resolvedEvidence.decisive && _resolvedEvidence.operator) {
+      _assignmentOperator = _resolvedEvidence.operator;
+    }
+    var _timetableVehicleInput = _resolvedEvidence && _resolvedEvidence.vehicleType
+      ? _resolvedEvidence.vehicleType
+      : (_resolvedEvidence && _resolvedEvidence.vehicleCandidates || []).join(' / ');
+    var _assignmentFormations = {};
+    if (_resolvedEvidence && _resolvedEvidence.formationId) {
+      String(_resolvedEvidence.formationId).split(/\s*\/\s*|\s*,\s*|\s*\|\s*/).forEach(function(fid) {
+        fid = String(fid || '').trim();
+        if (fid) _assignmentFormations[fid] = true;
+      });
+    }
+    var vehCtx = {
+      lineId: lineId,
+      operator: line.operator,
+      trainOwner: _trainOwner,
+      assignmentOperator: _assignmentOperator,
+      trainNumber: trainNumber,
+      trainType: run.trainType,
+      destinationStation: destinationStationUrn || '',
+      timetableVehicleType: _timetableVehicleInput,
+      timetableEvidence: _assignmentMatches,
+      trainId: run.timetableIdentity
+    };
+    var vehResult = (window.TrainVehicle && typeof window.TrainVehicle.resolve === 'function')
+      ? window.TrainVehicle.resolve(vehCtx)
+      : { name: '', vehicleTypeStr: '' };
+    run.identity = {
+      key: identityKey,
+      trainOwner: _trainOwner,
+      assignmentOperator: _assignmentOperator,
+      assignmentMatches: _assignmentMatches,
+      assignmentFormations: Object.keys(_assignmentFormations),
+      timetableVehicleInput: _timetableVehicleInput,
+      vehicleResult: vehResult
+    };
+    return run.identity;
+  }
+
   /**
    * Estimate train positions for a single line based on timetable + delay
    * @param {string} lineId - Line ID (e.g. "Namboku")
@@ -626,59 +694,13 @@
 
           // v4.3.950: 车型判定统一入口 TrainVehicle（S0 manual 实证 / S2 车号累积 / S3 查表
           // 交叉验证；不猜——无有依据候选时 trainClass/vehicleType 为空，图标由渲染层兜底）
-          var _trainOwner = tt['odpt:trainOwner'] || tt['trainOwner'] || '';
-          // B1: operation-number / working-number providers may identify the
-          // company responsible for this concrete run even when timetable-only
-          // mode has no odpt:trainOwner. Providers must return evidence, not guesses.
-          var _assignmentOperator = '';
-          var _assignmentMatches = [];
-          var _baseOperationCtx = {
-            lineId: lineId,
-            operator: tt['odpt:operator'] || line.operator || '',
-            railway: tt['odpt:railway'] || '',
-            railDirection: tt['odpt:railDirection'] || '',
-            destinationStation: destinationStationUrn || '',
-            timetableObjectId: timetableObjectId,
-            serviceDate: tt['_serviceDate'] || tt['serviceDate'] || tt['operatingDate'] || getTokyoServiceDate(),
-            at: (function(){ var d=new Date(Date.now()+9*60*60*1000); return d.toISOString().slice(11,16); })()
-          };
-          _baseOperationCtx.operationCode = window.TrainOperationEvidence &&
-            typeof window.TrainOperationEvidence.normalizeOperationCode === 'function'
-            ? window.TrainOperationEvidence.normalizeOperationCode(trainNumber, _baseOperationCtx) : '';
-          var _resolvedEvidence = window.TrainOperationEvidence &&
-            typeof window.TrainOperationEvidence.resolveEvidence === 'function'
-            ? window.TrainOperationEvidence.resolveEvidence(trainNumber, _baseOperationCtx, "fallback")
-            : null;
-          if (_resolvedEvidence) _assignmentMatches.push(_resolvedEvidence);
-          if (_resolvedEvidence && _resolvedEvidence.decisive && _resolvedEvidence.operator) {
-            _assignmentOperator = _resolvedEvidence.operator;
-          }
-          var _timetableVehicleInput = _resolvedEvidence && _resolvedEvidence.vehicleType
-            ? _resolvedEvidence.vehicleType
-            : (_resolvedEvidence && _resolvedEvidence.vehicleCandidates || []).join(' / ');
-          var _assignmentFormations = {};
-          if (_resolvedEvidence && _resolvedEvidence.formationId) {
-            String(_resolvedEvidence.formationId).split(/\s*\/\s*|\s*,\s*|\s*\|\s*/).forEach(function(fid) {
-              fid = String(fid || '').trim();
-              if (fid) _assignmentFormations[fid] = true;
-            });
-          }
-          var vehCtx = {
-            lineId: lineId,
-            operator: line.operator,
-            trainOwner: _trainOwner,
-            assignmentOperator: _assignmentOperator,
-            trainNumber: trainNumber,
-            stationIndex: currentStationIndex,
-            trainType: tt['odpt:trainType'],
-            destinationStation: destinationStationUrn || tt['odpt:destinationStation'] || '',
-            timetableVehicleType: _timetableVehicleInput,
-            timetableEvidence: _assignmentMatches,
-            trainId: lineId + '_' + trainNumber + '_' + currentStationIndex
-          };
-          var vehResult = (window.TrainVehicle && typeof window.TrainVehicle.resolve === 'function')
-            ? window.TrainVehicle.resolve(vehCtx)
-            : { name: '', vehicleTypeStr: '' };
+          var _runIdentity = resolveTrainRunIdentity(run, tt, lineId, line);
+          var _trainOwner = _runIdentity.trainOwner;
+          var _assignmentOperator = _runIdentity.assignmentOperator;
+          var _assignmentMatches = _runIdentity.assignmentMatches;
+          var _assignmentFormationIds = _runIdentity.assignmentFormations;
+          var _timetableVehicleInput = _runIdentity.timetableVehicleInput;
+          var vehResult = _runIdentity.vehicleResult;
           var trainClass = vehResult.name || '';
           var _vehicleType = vehResult.vehicleTypeStr || '';
           // Missing resolver means unresolved identity; timetable data must not
@@ -700,8 +722,8 @@
             trainOwner: _trainOwner,
             assignmentOperator: _assignmentOperator,
             operationEvidence: _assignmentMatches,
-            vehicleFormationId: Object.keys(_assignmentFormations).length === 1 ? Object.keys(_assignmentFormations)[0] : '',
-            vehicleFormationCandidates: Object.keys(_assignmentFormations),
+            vehicleFormationId: _assignmentFormationIds.length === 1 ? _assignmentFormationIds[0] : '',
+            vehicleFormationCandidates: _assignmentFormationIds.slice(),
             vehicleIdentityStatus: vehResult.identityStatus || 'UNKNOWN',
             vehicleIdentityReason: vehResult.identityReason || 'no-vehicle-evidence',
             vehicleCandidates: vehResult.candidates || [],
