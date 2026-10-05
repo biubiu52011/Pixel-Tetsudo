@@ -60,6 +60,7 @@
     // Use window.DataState.getStatus for consistent NO_DATA handling
     var status = delayInfo && delayInfo.status ? delayInfo.status : "loading";
     var interval = delayInfo.interval || "";
+    var impacts = Array.isArray(delayInfo.impacts) ? delayInfo.impacts : [];
     var cause = delayInfo.cause || "";
     var s = window.DataState && window.DataState.STATUS_META && window.DataState.STATUS_META[status] ? window.DataState.STATUS_META[status] : STATUS_META[status] || STATUS_META.no_data;
     var statusText = t("status." + status) || status;
@@ -111,6 +112,17 @@
         }
         _singleEndInterval = true;
       }
+    }
+    if (impacts.length > 1 && status !== "normal" && status !== "no_data") {
+      var dirLabel = { up: "上り", down: "下り", both: "上下線", inner: "内回り", outer: "外回り" };
+      var effectLabel = { delay: "遅延", suspension: "運転見合わせ", partial_cancellation: "一部運休", through_suspension: "直通運転中止", normal: "平常運転" };
+      intervalHtml = impacts.map(function(x) {
+        var scope = x.interval || dirLabel[x.direction] || "";
+        if (x.interval && x.direction) scope += "（" + (dirLabel[x.direction] || x.direction) + "）";
+        var ef = effectLabel[x.effect] || x.effect || "";
+        return '<span class="rs-impact-item"><span class="rs-station-text">' + escapeHtml(scope) + '</span>'
+          + (ef ? '<span class="rs-impact-effect">：' + escapeHtml(ef) + '</span>' : '') + '</span>';
+      }).join('<span class="rs-interval-separator">｜</span>');
     }
     intervalSection.querySelector(".rs-interval-stations").innerHTML = intervalHtml;
     // 4.3.443: 单端/文本兜底区间（如"京急線内"）在非 ja 界面翻译
@@ -417,7 +429,7 @@
 
   function statusSignature(line) {
     var d = getDelayInfo(line) || {};
-    return [d.status || "loading", d.interval || "", d.cause || "", d.detail || "", d.source || ""].join("|");
+    return [d.status || "loading", d.interval || "", JSON.stringify(d.impacts || []), d.cause || "", d.detail || "", d.source || ""].join("|");
   }
 
   function patchRealtimeCards(container, linesObj, changedIds) {
