@@ -462,6 +462,7 @@
       timetableEvidence: _assignmentMatches,
       formationId: Object.keys(_assignmentFormations).length === 1 ? Object.keys(_assignmentFormations)[0] : '',
       formationCandidates: Object.keys(_assignmentFormations),
+      serviceDate: serviceDate,
       trainId: run.timetableIdentity
     };
     var vehResult = (window.TrainVehicle && typeof window.TrainVehicle.resolve === 'function')
