@@ -71,3 +71,20 @@ assert.ok(!fs.existsSync(path.join(ROOT, 'data/timetables/vehicle-type-map.js'))
   'deleted parallel vehicle-type map must not be reintroduced');
 
 console.log('train-run operation evidence -> exact vehicle -> artwork projection: PASS');
+
+[
+ ['JR E233系5000番台','JR東日本_E233系_5000番台.png'],
+ ['京急600形','京浜急行電鉄_600形.png'],
+ ['京成3100形','京成電鉄_3100形.png'],
+ ['東京メトロ15000系(10両)','東京メトロ_15000系.png'],
+ ['東急2020系(10両)','東急電鉄_2020系.png'],
+ ['東武50050系(10両)','東武鉄道_50050型.png'],
+ ['相鉄13000系(8両)','相模鉄道_13000系_YOKOHAMA_NAVYBLUE.png'],
+ ['相鉄21000系','相模鉄道_21000系.png']
+].forEach(([identity, asset]) => {
+  const icon = context.window.TrainIcons.resolveVehicleArtwork(identity) || '';
+  assert.ok(icon.endsWith(asset), identity + ' -> ' + icon);
+});
+assert.strictEqual(context.window.TrainIcons.resolveVehicleArtwork('小田急8000形 / 小田急3000形'), null,
+  'ambiguous multi-vehicle evidence must not project concrete artwork');
+console.log('expanded evidence-backed artwork: 9 PASS');
