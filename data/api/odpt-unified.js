@@ -777,7 +777,7 @@
             // another operator-wide Train fetch. The 30s poll already owns refresh.
             var newOps = Object.keys(newlyActivatedOps);
             return Promise.all(timetablePromises).then(function() {
-                return newOps.length ? loadRealtimeData(false, newOps) : Promise.resolve();
+                return newOps.length ? loadRealtimeData(false, newOps, true) : Promise.resolve();
             });
         },
 
@@ -1428,9 +1428,9 @@
         return { ok: invalid.length === 0, checked: checked, invalid: invalid };
     }
 
-    function loadRealtimeData(delayOnly, positionOperators) {
+    function loadRealtimeData(delayOnly, positionOperators, skipDelayRefresh) {
         validateAuthoritativeRealtimeConfig();
-        window.ODPT_DELAY_DATA = {};
+        if (!skipDelayRefresh || !window.ODPT_DELAY_DATA) window.ODPT_DELAY_DATA = {};
         // Position snapshots are retained per operator. On-demand refresh must
         // not erase another already-active operator before its own poll runs.
         if (!window.ODPT_TRAIN_POSITIONS || !positionOperators) window.ODPT_TRAIN_POSITIONS = {};
@@ -1445,7 +1445,7 @@
             var ep = ODPT_ENDPOINTS[op];
 
             // 1. 加载运行情报/延误信息（优先推送，首屏不等列车位置）
-            if (ep.trainInformation) {
+            if (!skipDelayRefresh && ep.trainInformation) {
                 delayPromises.push(
                     fetchODPT(buildUrl(op, 'trainInformation')).then(extractData).then(function(data) {
                         // v4.3.386: 保留全部记录（ODPT 按运行系统返回多条，data[0] 只留首条会丢其他线路的延误）
@@ -1527,7 +1527,9 @@
 
         // 延误情报独立推送；列车位置在 posPromises 就绪后推送（不阻塞、不依赖延误链）
         // v4.3.9xx (E4): 拉取完成即落盘原始数据（带 ts），供其他标签页/切页 stale-while-revalidate
-        Promise.all(delayPromises).then(function() { pushDelay(); persistRawRealtime(!!delayOnly); });
+        if (!skipDelayRefresh) {
+            Promise.all(delayPromises).then(function() { pushDelay(); persistRawRealtime(!!delayOnly); });
+        }
         if (delayOnly) return Promise.resolve();  // 惰性模式不拉位置
         return Promise.all(posPromises).then(function() { pushTrainPositions(); persistRawRealtime(false); });
     }
@@ -1732,7 +1734,7 @@
     function _realtimeRefresh() {
         var activeOps = Object.keys(_activeRealtimeOperators);
         var delayOnly = _lazyMode && activeOps.length === 0;
-        loadRealtimeData(delayOnly, activeOps.length ? activeOps : null).catch(function(e) { console.warn("[ODPT] Realtime refresh error:", e.message); });
+        loadRealtimeData(delayOnly, activeOps.length ? activeOps : null, activeOps.length > 0).catch(function(e) { console.warn("[ODPT] Realtime refresh error:", e.message); });
     }
     function startRealtimePolling() {
         if (_rtPollTimer) return;
