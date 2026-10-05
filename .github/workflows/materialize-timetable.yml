@@ -1,0 +1,49 @@
+name: Materialize timetable cache
+
+on:
+  workflow_dispatch:
+    inputs:
+      line_id:
+        description: "Canonical railway_lines.id / *-manual.js prefix"
+        required: true
+        type: string
+      service_date:
+        description: "Service date (YYYY-MM-DD)"
+        required: true
+        type: string
+      calendar:
+        description: "Operating calendar"
+        required: true
+        type: choice
+        options:
+          - weekday
+          - holiday
+
+permissions:
+  contents: read
+
+concurrency:
+  group: timetable-cache-${{ inputs.line_id }}-${{ inputs.service_date }}
+  cancel-in-progress: false
+
+jobs:
+  materialize:
+    runs-on: ubuntu-latest
+    env:
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Check Supabase credentials
+        run: |
+          test -n "$SUPABASE_URL" || { echo "::error::Missing SUPABASE_URL"; exit 1; }
+          if [ -z "$SUPABASE_SECRET_KEY" ] && [ -z "$SUPABASE_SERVICE_ROLE_KEY" ]; then
+            echo "::error::Missing SUPABASE_SECRET_KEY or SUPABASE_SERVICE_ROLE_KEY"
+            exit 1
+          fi
+      - name: Materialize selected timetable
+        run: node tools/ingest-manual-timetable.mjs "${{ inputs.line_id }}" "${{ inputs.service_date }}" "${{ inputs.calendar }}"
