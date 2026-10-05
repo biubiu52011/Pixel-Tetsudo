@@ -117,6 +117,20 @@
       if (ranges.length) interval = ranges.join("、");
       else if (/全線/.test(text)) interval = "全線";
     }
+    var direction = null;
+    if (/内回り/.test(text)) direction = "inner";
+    else if (/外回り/.test(text)) direction = "outer";
+    else if (/上下線|上下両線|両方向/.test(text)) direction = "both";
+    else if (/上り線|上り列車|上り方面/.test(text)) direction = "up";
+    else if (/下り線|下り列車|下り方面/.test(text)) direction = "down";
+
+    var effect = null;
+    if (/運転見合わせ|運転を見合わせ|運転中止|運転を中止/.test(text)) effect = "suspension";
+    else if (/直通(?:運転|運行)[^。\n]*(?:中止|取りやめ|見合わせ)|(?:中止|取りやめ|見合わせ)[^。\n]*直通(?:運転|運行)/.test(text)) effect = "through_suspension";
+    else if (/区間運休|一部(?:の)?(?:列車|電車)?[^。\n]*運休/.test(text)) effect = "partial_cancellation";
+    else if (/遅延|遅れ|ダイヤ(?:が|は)?(?:乱れ|乱れて)|ダイヤ乱れ/.test(text)) effect = "delay";
+    else if (/平常(?:通り|どおり|運転|運行)|通常(?:運転|運行)|正常(?:運転|運行)/.test(text)) effect = "normal";
+
     var resume = null;
     if (input.resumeEstimate) {
       var rm = String(input.resumeEstimate).match(/(\d{2}):(\d{2})/);
@@ -142,7 +156,7 @@
       if (!cm) cm = text.match(/(?:で|、|，|,|\s|^)([^。\n，,、\sで〜～－−至→-]+?)(?:のため|の影響|により|による|が原因|の発生|に伴い)/);
       if (cm && cm[1]) cause = cm[1];
     }
-    return { interval: interval, cause: cause, resume: resume, detail: text || null, textDelayMinutes: textDelayMinutes, serviceLevel: serviceLevel };
+    return { interval: interval, direction: direction, effect: effect, cause: cause, resume: resume, detail: text || null, textDelayMinutes: textDelayMinutes, serviceLevel: serviceLevel };
   }
 
   function normalizeMessageKind(v) {
@@ -219,6 +233,8 @@
       maxDelay: delayMinutes != null ? delayMinutes : metadata.textDelayMinutes,
       delayUpperBoundMinutes: te.delayUpperBoundMinutes,
       interval: metadata.interval,
+      direction: metadata.direction,
+      effect: metadata.effect,
       cause: metadata.cause,
       resume: metadata.resume,
       detail: metadata.detail,
