@@ -10,7 +10,6 @@ const order = [
   'runtime-config.js',
   'through-service.js',
   'platform-data.js',
-  'line-service-relations.js',
   'train-type-defs.js',
 ];
 
