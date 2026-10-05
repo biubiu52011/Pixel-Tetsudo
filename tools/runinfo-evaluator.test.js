@@ -45,4 +45,10 @@ let wholeRange=E.extractMetadata({text:"全線で運転を見合わせていま�
 assert.strictEqual(wholeRange.interval,"全線");
 let structuredWins=E.extractMetadata({text:"A駅～B駅間で遅れています。",range:"C駅～D駅"});
 assert.strictEqual(structuredWins.interval,"C駅→D駅");
-console.log("runinfo-evaluator: 31 PASS");
+let reduced=E.evaluate({text:"内房線（木更津～安房鴨川駅間）は、台風の影響で、通常の５割程度で運転します。"});
+assert.strictEqual(reduced.status,"notice");
+let sectionCancelled=E.evaluate({text:"只見～小出駅間の下り線で一部列車が区間運休となります。"});
+assert.strictEqual(sectionCancelled.status,"notice");
+let noRangeDirection=E.extractMetadata({text:"下り線（日吉方面行）の列車に遅れが出ています。"});
+assert.strictEqual(noRangeDirection.interval,null);
+console.log("runinfo-evaluator: 34 PASS");
