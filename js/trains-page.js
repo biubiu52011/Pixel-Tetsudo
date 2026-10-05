@@ -105,10 +105,11 @@
       currentLineIdentity = actualIdentity;
       // Activate network work only after the user opens a line. Through-service
       // members are activated together so one physical run can remain continuous.
+      var _requestedLines = currentSystemLineIds && currentSystemLineIds.length
+        ? currentSystemLineIds.slice() : [lineId];
+      var _activationPromise = Promise.resolve();
       if (window.ODPTClient && window.ODPTClient.activateRealtimeLines) {
-        var _requestedLines = currentSystemLineIds && currentSystemLineIds.length
-          ? currentSystemLineIds.slice() : [lineId];
-        window.ODPTClient.activateRealtimeLines(_requestedLines).catch(function(e) {
+        _activationPromise = window.ODPTClient.activateRealtimeLines(_requestedLines).catch(function(e) {
           console.debug("[trains] on-demand realtime skip:", lineId, e && e.message);
         });
       }
@@ -147,7 +148,10 @@
       // 加载完成后 DataFusion 内部已重推定+重融合；此处按结果归属检查后重渲染当前线路，
       // 用户切走线路时旧结果不覆盖新状态；加载失败保持首次渲染（与无数据现状一致）。
       if (window.DataFusion && window.DataFusion.ensureTimetable) {
-        window.DataFusion.ensureTimetable(lineId).then(function(changed) {
+        _activationPromise.then(function() {
+          if (currentLine !== lineId) return false;
+          return window.DataFusion.ensureTimetable(lineId);
+        }).then(function(changed) {
           // Cached/missing manual data is a no-op. Its Promise resolving must not
           // cause a second map paint immediately after opening the detail.
           if (!changed || currentLine !== lineId) return;
