@@ -1088,79 +1088,82 @@
       }
       
       if (existingIcon) {
-        // Update existing icon position
-        var oldX = parseFloat(existingIcon.getAttribute('x'));
-        var oldY = parseFloat(existingIcon.getAttribute('y'));
-        var newX = px - 7;
-        var newY = py - 9;
-        // v4.3.950: 环线沿曲线移动——用 JS 动画沿矩形边插值，不用 CSS transition 直线跳
-        // v4.3.xxxx: marker 自持动画状态（_moveRaf/_loopPos）。新目标到达时先取消旧 RAF，
-        // 从当前已插值位置续动；旧动画永远不能与新动画争抢同一个 marker。
-        var _loopRect = stationCoords._loopRect;
-        var _needMove = existingIcon.tagName && String(existingIcon.tagName).toLowerCase() === 'g'
-          ? true
-          : (!isFinite(oldX) || !isFinite(oldY) || Math.abs(oldX - newX) > 0.5 || Math.abs(oldY - newY) > 0.5);
-        if (isLoop && _loopRect && _needMove && !window.TrainTrackLayout) {
-          if (existingIcon._moveRaf) {
-            cancelAnimationFrame(existingIcon._moveRaf);
-            existingIcon._moveRaf = 0;
-          }
-          var _newSc = stationCoords[idx];
-          var _newPos = (_newSc && _newSc._loopPos != null) ? _newSc._loopPos : 0;
-          var _oldPos = existingIcon._loopPos;
-          if (_oldPos == null) {
-            // 首次出现：直接 snap 到当前站，不从 (0,0) 飞入
-            _setTrainIconPosition(existingIcon, px, py, p, lineId, isLoop);
-            existingIcon._loopPos = _newPos;
-            _syncTrainLabels(trainLayer, svgNS, trainUid, px, py, p, lineId);
-          } else {
-            // 沿矩形边插值动画。时长按位移占周长比例缩放：
-            // 全半圈 14s（匹配刷新间隔），短位移快速到达，中途取消后从当前 _loopPos 续动。
-            var _startPos = _oldPos;
-            var _endPos = _newPos;
-            var _perimeter = _loopRect.perimeter;
-            // 方向：内环=顺时针（+），外环=逆时针（-）
-            var _dirSign = (direction.indexOf('Inner') >= 0) ? 1 : -1;
-            // 计算最短路径差（沿周长，不超过半圈；半圈为环线数据跳变的物理上限）
-            var _rawDiff = _endPos - _startPos;
-            var _diff = _dirSign * _rawDiff;
-            if (Math.abs(_diff) > _perimeter / 2) {
-              _diff = (Math.abs(_diff) - _perimeter) * (_diff > 0 ? 1 : -1);
+        // Update existing icon position.
+        // TrainTrackLayout owns target geometry; this marker owns interpolation.
+        // There is exactly one animation authority: per-marker requestAnimationFrame.
+        if (existingIcon._moveRaf) {
+          cancelAnimationFrame(existingIcon._moveRaf);
+          existingIcon._moveRaf = 0;
+        }
+        var _startX = Number(existingIcon._displayX);
+        var _startY = Number(existingIcon._displayY);
+        if (!isFinite(_startX) || !isFinite(_startY)) {
+          var _tag = String(existingIcon.tagName || '').toLowerCase();
+          if (_tag === 'image') {
+            var _ix = parseFloat(existingIcon.getAttribute('x'));
+            var _iy = parseFloat(existingIcon.getAttribute('y'));
+            if (isFinite(_ix) && isFinite(_iy)) {
+              _startX = _ix + 7;
+              _startY = _iy + 9;
             }
-            var _icon = existingIcon;
-            var _rect = _loopRect;
-            var _animDur = Math.max(1500, Math.min(14000,
-              Math.round(14000 * Math.abs(_diff) / (_perimeter / 2))));
-            var _animStart = performance.now();
-            function _animFrame(now) {
-              var _t = Math.min(1, (now - _animStart) / _animDur);
-              // 缓动：cubic-bezier(0.4, 0, 0.2, 1)
-              var _ease = _t < 0.5 ? 4 * _t * _t * _t : 1 - Math.pow(-2 * _t + 2, 3) / 2;
-              var _curPos = _startPos + _diff * _ease;
-              // 每帧更新 marker 自持位置——下一次数据到达时从当前显示位置续动
-              _icon._loopPos = _curPos;
-              var _xy = _loopPosToXY(_curPos, _rect);
-              _setTrainIconPosition(_icon, _xy.x, _xy.y, p, lineId, isLoop);
-              // label 与车体同一当前位置逐帧同步，不 remove+recreate
-              _moveTrainLabels(trainLayer, trainUid, _xy.x, _xy.y, p, lineId);
-              if (_t < 1) {
-                _icon._moveRaf = requestAnimationFrame(_animFrame);
-              } else {
-                _icon._loopPos = _startPos + _diff;
-                _icon._moveRaf = 0;
-              }
-            }
-            // 动画启动前先把 label 放到起始位置，避免 label 先跳目标
-            var _startXY = _loopPosToXY(_startPos, _rect);
-            _syncTrainLabels(trainLayer, svgNS, trainUid, _startXY.x, _startXY.y, p, lineId);
-            existingIcon._moveRaf = requestAnimationFrame(_animFrame);
           }
-        } else if (_needMove) {
-          _setTrainIconPosition(existingIcon, px, py, p, lineId, isLoop);
-          _syncTrainLabels(trainLayer, svgNS, trainUid, px, py, p, lineId);
+        }
+        var _targetX = px;
+        var _targetY = py;
+        var _dx = _targetX - _startX;
+        var _dy = _targetY - _startY;
+        var _distance = Math.sqrt(_dx * _dx + _dy * _dy);
+        var _hasDisplayPos = isFinite(_startX) && isFinite(_startY);
+        var _sameLine = !existingIcon._displayLineId || existingIcon._displayLineId === lineId;
+        // A target farther than roughly two adjacent station gaps is not a
+        // trustworthy interpolation path (new identity, stale snapshot, or
+        // topology discontinuity). Snap rather than sweeping across the map.
+        var _adjacent = [];
+        for (var _si = 1; _si < stationCoords.length; _si++) {
+          var _sa = stationCoords[_si - 1], _sb = stationCoords[_si];
+          if (!_sa || !_sb) continue;
+          var _sdx = _sb.x - _sa.x, _sdy = _sb.y - _sa.y;
+          var _sgap = Math.sqrt(_sdx * _sdx + _sdy * _sdy);
+          if (isFinite(_sgap) && _sgap > 0) _adjacent.push(_sgap);
+        }
+        _adjacent.sort(function(a,b){ return a-b; });
+        var _medianGap = _adjacent.length ? _adjacent[Math.floor(_adjacent.length / 2)] : 40;
+        var _snapDistance = Math.max(80, _medianGap * 2.5);
+        var _shouldSnap = !_hasDisplayPos || !_sameLine || !isFinite(_distance) || _distance > _snapDistance;
+
+        if (_shouldSnap || _distance <= 0.5) {
+          _setTrainIconPosition(existingIcon, _targetX, _targetY, p, lineId, isLoop);
+          existingIcon._displayX = _targetX;
+          existingIcon._displayY = _targetY;
+          existingIcon._displayLineId = lineId;
+          _syncTrainLabels(trainLayer, svgNS, trainUid, _targetX, _targetY, p, lineId);
         } else {
-          _setTrainIconPosition(existingIcon, px, py, p, lineId, isLoop);
-          _syncTrainLabels(trainLayer, svgNS, trainUid, px, py, p, lineId);
+          var _icon = existingIcon;
+          // Keep movement responsive to the actual displacement. Do not stretch
+          // every update to a fixed 14 seconds.
+          var _animDur = Math.max(350, Math.min(3000, Math.round(_distance * 35)));
+          var _animStart = performance.now();
+          _syncTrainLabels(trainLayer, svgNS, trainUid, _startX, _startY, p, lineId);
+          function _animFrame(now) {
+            var _t = Math.min(1, (now - _animStart) / _animDur);
+            // Smoothstep: no overshoot, deterministic endpoint.
+            var _ease = _t * _t * (3 - 2 * _t);
+            var _curX = _startX + _dx * _ease;
+            var _curY = _startY + _dy * _ease;
+            _icon._displayX = _curX;
+            _icon._displayY = _curY;
+            _icon._displayLineId = lineId;
+            _setTrainIconPosition(_icon, _curX, _curY, p, lineId, isLoop);
+            _moveTrainLabels(trainLayer, trainUid, _curX, _curY, p, lineId);
+            if (_t < 1) {
+              _icon._moveRaf = requestAnimationFrame(_animFrame);
+            } else {
+              _icon._displayX = _targetX;
+              _icon._displayY = _targetY;
+              _icon._moveRaf = 0;
+            }
+          }
+          existingIcon._moveRaf = requestAnimationFrame(_animFrame);
         }
       } else {
         // Create new train icon
