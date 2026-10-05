@@ -1448,11 +1448,10 @@
     // v4.3.475: 大江户线光丘段列车显示真实终点（光丘/都厅前），不走环线"内回/外回"标签
     if (_isOedoBranchTrain(lineId, p)) {
       labelText = _trainDestText(p.destinationStation);
-    } else if (isLoopDir && p.destinationStation) {
-      // A concrete destination is stronger evidence than the abstract loop
-      // direction. This is generic for every circular service, not line-specific.
-      labelText = _trainDestText(p.destinationStation);
     } else if (isLoopDir) {
+      // Loop direction is the passenger-facing service label. destinationStation
+      // may only describe a timetable turnback/data boundary and must not override
+      // an authoritative InnerLoop/OuterLoop direction.
       labelText = (LOOP_DIR_NAMES[dn] && LOOP_DIR_NAMES[dn][lang]) || (LOOP_DIR_NAMES[dn] ? LOOP_DIR_NAMES[dn].ja : '');
     } else if (/^(Inbound|Outbound|Northbound|Southbound|Eastbound|Westbound)$/.test(dn)) {
       labelText = _trainDestText(p.destinationStation);
