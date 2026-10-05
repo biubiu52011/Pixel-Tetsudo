@@ -24670,7 +24670,8 @@
         2
       ],
       "throughServices": [
-        "SotetsuShin-Yokohama"
+        "SotetsuShin-Yokohama",
+        "SotetsuIzumino"
       ],
       "transferStations": [
         {
@@ -24786,6 +24787,16 @@
           ],
           "evidence": {
             "source": "Tokyu official Shin-Yokohama Line / direct through-service boundary",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "SotetsuIzumino",
+          "handoverStations": [
+            "Futamatagawa"
+          ],
+          "evidence": {
+            "source": "Sotetsu official network: Main Line / Izumino Line branch at Futamatagawa; through trains operate across the boundary",
             "confidence": "HIGH"
           }
         }
@@ -36292,7 +36303,22 @@
         ],
         "operatorGroup": "SOTETSU"
       },
-      "branchOf": "SotetsuMain"
+      "branchOf": "SotetsuMain",
+      "throughServices": [
+        "SotetsuMain"
+      ],
+      "serviceBoundaries": [
+        {
+          "lineId": "SotetsuMain",
+          "handoverStations": [
+            "Futamatagawa"
+          ],
+          "evidence": {
+            "source": "Sotetsu official network: Main Line / Izumino Line branch at Futamatagawa; through trains operate across the boundary",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "SotetsuShin-Yokohama": {
       "nameJa": "相鉄新横浜線",
