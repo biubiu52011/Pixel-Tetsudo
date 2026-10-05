@@ -146,3 +146,15 @@ assert(!/if \(\/\^東武\//.test(source),
 assert(source.includes('CANONICAL_VEHICLE_ALIAS_CONFLICTS'),
   'duplicate canonical aliases must remain conflict-blocked');
 console.log('canonical artwork uniqueness: 3 PASS');
+
+const canonical = icons.CANONICAL_VEHICLES || {};
+const identityOwners = {};
+Object.keys(canonical).forEach((id) => {
+  const rec = canonical[id] || {};
+  const key = String(rec.displayName || '').trim() + '|' + String(rec.asset || '');
+  if (!rec.displayName) return;
+  assert(!identityOwners[key],
+    'duplicate canonical vehicle identity: ' + key + ' owned by ' + identityOwners[key] + ' and ' + id);
+  identityOwners[key] = id;
+});
+console.log('canonical vehicle record uniqueness: PASS');
