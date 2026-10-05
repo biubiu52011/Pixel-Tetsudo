@@ -186,6 +186,7 @@
       cause: metadata.cause,
       resume: metadata.resume,
       detail: metadata.detail,
+      serviceLevel: metadata.serviceLevel,
       evidence: evidence,
       source: input.source || null
     };
