@@ -460,6 +460,8 @@
       destinationStation: destinationStationUrn || '',
       timetableVehicleType: _timetableVehicleInput,
       timetableEvidence: _assignmentMatches,
+      formationId: Object.keys(_assignmentFormations).length === 1 ? Object.keys(_assignmentFormations)[0] : '',
+      formationCandidates: Object.keys(_assignmentFormations),
       trainId: run.timetableIdentity
     };
     var vehResult = (window.TrainVehicle && typeof window.TrainVehicle.resolve === 'function')
