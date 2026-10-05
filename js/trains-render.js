@@ -1110,9 +1110,21 @@
         }
         var _targetX = px;
         var _targetY = py;
+        var _loopRect = isLoop ? stationCoords._loopRect : null;
+        var _targetRoutePos = loc && loc.routePos != null ? Number(loc.routePos) : NaN;
+        var _startRoutePos = Number(existingIcon._displayRoutePos);
+        var _useLoopRoute = !!(_loopRect && isFinite(_targetRoutePos) && isFinite(_startRoutePos));
+        var _routeDiff = 0;
+        if (_useLoopRoute) {
+          var _perimeter = Number(_loopRect.perimeter) || 0;
+          _routeDiff = _targetRoutePos - _startRoutePos;
+          if (_perimeter > 0 && Math.abs(_routeDiff) > _perimeter / 2) {
+            _routeDiff += _routeDiff > 0 ? -_perimeter : _perimeter;
+          }
+        }
         var _dx = _targetX - _startX;
         var _dy = _targetY - _startY;
-        var _distance = Math.sqrt(_dx * _dx + _dy * _dy);
+        var _distance = _useLoopRoute ? Math.abs(_routeDiff) : Math.sqrt(_dx * _dx + _dy * _dy);
         var _hasDisplayPos = isFinite(_startX) && isFinite(_startY);
         var _sameLine = !existingIcon._displayLineId || existingIcon._displayLineId === lineId;
         // A target farther than roughly two adjacent station gaps is not a
@@ -1136,6 +1148,7 @@
           existingIcon._displayX = _targetX;
           existingIcon._displayY = _targetY;
           existingIcon._displayLineId = lineId;
+          if (isFinite(_targetRoutePos)) existingIcon._displayRoutePos = _targetRoutePos;
           _syncTrainLabels(trainLayer, svgNS, trainUid, _targetX, _targetY, p, lineId);
         } else {
           var _icon = existingIcon;
@@ -1148,8 +1161,17 @@
             var _t = Math.min(1, (now - _animStart) / _animDur);
             // Smoothstep: no overshoot, deterministic endpoint.
             var _ease = _t * _t * (3 - 2 * _t);
-            var _curX = _startX + _dx * _ease;
-            var _curY = _startY + _dy * _ease;
+            var _curX, _curY;
+            if (_useLoopRoute) {
+              var _curRoutePos = _startRoutePos + _routeDiff * _ease;
+              var _routeXY = _loopPosToXY(_curRoutePos, _loopRect);
+              _curX = _routeXY.x;
+              _curY = _routeXY.y;
+              _icon._displayRoutePos = _curRoutePos;
+            } else {
+              _curX = _startX + _dx * _ease;
+              _curY = _startY + _dy * _ease;
+            }
             _icon._displayX = _curX;
             _icon._displayY = _curY;
             _icon._displayLineId = lineId;
@@ -1160,6 +1182,7 @@
             } else {
               _icon._displayX = _targetX;
               _icon._displayY = _targetY;
+              if (isFinite(_targetRoutePos)) _icon._displayRoutePos = _targetRoutePos;
               _icon._moveRaf = 0;
             }
           }
@@ -1216,6 +1239,7 @@
           newIcon._displayX = px;
           newIcon._displayY = py;
           newIcon._displayLineId = lineId;
+          if (loc && loc.routePos != null && isFinite(Number(loc.routePos))) newIcon._displayRoutePos = Number(loc.routePos);
           trainLayer.appendChild(newIcon);
           appendTrainLabels(trainLayer, svgNS, trainUid, px, py, p, lineId);
         } else {
@@ -1227,6 +1251,7 @@
           newCircle._displayX = px;
           newCircle._displayY = py;
           newCircle._displayLineId = lineId;
+          if (loc && loc.routePos != null && isFinite(Number(loc.routePos))) newCircle._displayRoutePos = Number(loc.routePos);
           
           var outerCircle = document.createElementNS(svgNS, "circle");
           outerCircle.setAttribute("cx", "0");
