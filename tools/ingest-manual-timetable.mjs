@@ -58,11 +58,14 @@ const railwayOperator = (railway) => {
 };
 
 async function rest(route, init = {}) {
+  const authHeaders = { apikey: secretKey };
+  // Legacy service_role keys are JWTs and also belong in Authorization.
+  // New sb_secret_* keys are opaque API keys and must not be sent as bearer JWTs.
+  if (secretKey.startsWith("eyJ")) authHeaders.Authorization = "Bearer " + secretKey;
   const res = await fetch(supabaseUrl + "/rest/v1/" + route, {
     ...init,
     headers: {
-      apikey: secretKey,
-      Authorization: "Bearer " + secretKey,
+      ...authHeaders,
       "Content-Type": "application/json",
       ...(init.headers || {}),
     },
