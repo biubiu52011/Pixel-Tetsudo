@@ -13911,6 +13911,10 @@ window.RAILWAY_DATA = {
     "Aizu-Minamiwa": {
       "lat": 36.074235834999996,
       "lng": 137.940448195
+    },
+    "Shin-Tsunashima": {
+      "lat": 35.536,
+      "lng": 139.6347
     }
   },
   "lines": {
@@ -21082,7 +21086,6 @@ window.RAILWAY_DATA = {
       ],
       "throughServices": [
         "JobanLocal",
-        "OdakyuTama",
         "Odawara"
       ],
       "transferStations": [
@@ -22597,7 +22600,8 @@ window.RAILWAY_DATA = {
       ],
       "throughServices": [
         "Fukutoshin",
-        "MinatoMirai"
+        "MinatoMirai",
+        "TokyuShinYokohama"
       ],
       "transferStations": [
         {
@@ -22791,6 +22795,16 @@ window.RAILWAY_DATA = {
           ],
           "evidence": {
             "source": "ThroughService direct relation + join station",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "TokyuShinYokohama",
+          "handoverStations": [
+            "Hiyoshi"
+          ],
+          "evidence": {
+            "source": "Tokyu official Shin-Yokohama Line / direct through-service boundary",
             "confidence": "HIGH"
           }
         }
@@ -23992,6 +24006,18 @@ window.RAILWAY_DATA = {
       ],
       "nameZh": "横须贺线・总武快速线",
       "nameKo": "요코스카선・소부 쾌속선",
+      "serviceBoundaries": [
+        {
+          "lineId": "Yokosuka",
+          "handoverStations": [
+            "Tokyo"
+          ],
+          "evidence": {
+            "source": "JR East Tokyo-area passenger map and JO station numbering define Yokosuka Line / Sobu Line Rapid as one passenger service corridor",
+            "confidence": "HIGH"
+          }
+        }
+      ],
       "presentation": {
         "code": "JO",
         "nameJa": "横須賀線・総武線快速",
@@ -24006,19 +24032,7 @@ window.RAILWAY_DATA = {
           "SobuRapid"
         ],
         "operatorGroup": "JR_EAST"
-      },
-      "serviceBoundaries": [
-        {
-          "lineId": "Yokosuka",
-          "handoverStations": [
-            "Tokyo"
-          ],
-          "evidence": {
-            "source": "JR East Tokyo-area passenger map and JO station numbering define Yokosuka Line / Sobu Line Rapid as one passenger service corridor",
-            "confidence": "HIGH"
-          }
-        }
-      ]
+      }
     },
     "TokyuDenEn": {
       "name": "TokyuDenEn",
@@ -24655,7 +24669,9 @@ window.RAILWAY_DATA = {
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "SotetsuShin-Yokohama"
+      ],
       "transferStations": [
         {
           "station": "Yokohama",
@@ -24761,6 +24777,18 @@ window.RAILWAY_DATA = {
       "branches": [
         "SotetsuIzumino",
         "SotetsuShin-Yokohama"
+      ],
+      "serviceBoundaries": [
+        {
+          "lineId": "SotetsuShin-Yokohama",
+          "handoverStations": [
+            "Nishiya"
+          ],
+          "evidence": {
+            "source": "Tokyu official Shin-Yokohama Line / direct through-service boundary",
+            "confidence": "HIGH"
+          }
+        }
       ]
     },
     "SeibuYamaguchi": {
@@ -30305,9 +30333,7 @@ window.RAILWAY_DATA = {
         2,
         2
       ],
-      "throughServices": [
-        "Chiyoda"
-      ],
+      "throughServices": [],
       "transferStations": [
         {
           "station": "Odakyu-Ei-Zan",
@@ -35586,7 +35612,8 @@ window.RAILWAY_DATA = {
       "name": "東急目黒線",
       "throughServices": [
         "Mita",
-        "Namboku"
+        "Namboku",
+        "TokyuShinYokohama"
       ],
       "presentation": {
         "code": "MG",
@@ -35620,6 +35647,16 @@ window.RAILWAY_DATA = {
           ],
           "evidence": {
             "source": "ThroughService direct relation + join station",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "TokyuShinYokohama",
+          "handoverStations": [
+            "Hiyoshi"
+          ],
+          "evidence": {
+            "source": "Tokyu official Shin-Yokohama Line / direct through-service boundary",
             "confidence": "HIGH"
           }
         }
@@ -36305,7 +36342,33 @@ window.RAILWAY_DATA = {
         ],
         "operatorGroup": "SOTETSU"
       },
-      "branchOf": "SotetsuMain"
+      "branchOf": "SotetsuMain",
+      "throughServices": [
+        "TokyuShinYokohama",
+        "SotetsuMain"
+      ],
+      "serviceBoundaries": [
+        {
+          "lineId": "TokyuShinYokohama",
+          "handoverStations": [
+            "Shin-Yokohama"
+          ],
+          "evidence": {
+            "source": "Tokyu official Shin-Yokohama Line / direct through-service boundary",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "SotetsuMain",
+          "handoverStations": [
+            "Nishiya"
+          ],
+          "evidence": {
+            "source": "Tokyu official Shin-Yokohama Line / direct through-service boundary",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "NewShuttle": {
       "nameJa": "埼玉新都市交通伊奈線（ニューシャトル）",
@@ -44613,6 +44676,116 @@ window.RAILWAY_DATA = {
       ],
       "nameZh": "吉都线",
       "nameKo": "킷토 선"
+    },
+    "TokyuShinYokohama": {
+      "nameJa": "東急新横浜線",
+      "nameEn": "Tokyu Shin-Yokohama Line",
+      "operator": "Tokyu",
+      "color": "#6F2C91",
+      "code": "SH",
+      "stations": [
+        "Hiyoshi",
+        "Shin-Tsunashima",
+        "Shin-Yokohama"
+      ],
+      "transferStations": [
+        {
+          "station": "Hiyoshi",
+          "lineId": "TokyuToyoko",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Hiyoshi",
+          "lineId": "TokyuMeguro",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Hiyoshi",
+          "lineId": "YokohamaGreen",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Shin-Yokohama",
+          "lineId": "SotetsuShin-Yokohama",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Shin-Yokohama",
+          "lineId": "YokohamaBlue",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Shin-Yokohama",
+          "lineId": "Yokohama",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Shin-Yokohama",
+          "lineId": "TokaidoShinkansen",
+          "type": "in",
+          "note": ""
+        }
+      ],
+      "nameZh": "东急新横滨线",
+      "nameKo": "도큐 신요코하마선",
+      "name": "東急新横浜線",
+      "throughServices": [
+        "TokyuToyoko",
+        "TokyuMeguro",
+        "SotetsuShin-Yokohama"
+      ],
+      "presentation": {
+        "code": "SH",
+        "nameJa": "東急新横浜線",
+        "nameZh": "东急新横滨线",
+        "nameEn": "Tokyu Shin-Yokohama Line",
+        "nameKo": "도큐 신요코하마선",
+        "color": "#6F2C91",
+        "icon": "../images/鉄道/東急電鉄/新横浜線.png",
+        "order": 4,
+        "lineIds": [
+          "TokyuShinYokohama"
+        ],
+        "operatorGroup": "TOKYU"
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "TokyuToyoko",
+          "handoverStations": [
+            "Hiyoshi"
+          ],
+          "evidence": {
+            "source": "Tokyu official Shin-Yokohama Line / direct through-service boundary",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "TokyuMeguro",
+          "handoverStations": [
+            "Hiyoshi"
+          ],
+          "evidence": {
+            "source": "Tokyu official Shin-Yokohama Line / direct through-service boundary",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "SotetsuShin-Yokohama",
+          "handoverStations": [
+            "Shin-Yokohama"
+          ],
+          "evidence": {
+            "source": "Tokyu official Shin-Yokohama Line / direct through-service boundary",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     }
   },
   "name_map": {
