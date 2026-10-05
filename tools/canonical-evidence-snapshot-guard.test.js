@@ -16,7 +16,9 @@ assert.equal(snapshot.generatedFrom, "Supabase canonical evidence tables");
 assert(Array.isArray(snapshot.records), "snapshot records must be an array");
 assert(Array.isArray(snapshot.datedRecords), "snapshot datedRecords must be an array");
 assert(Array.isArray(snapshot.familyRules), "snapshot familyRules must be an array");
-assert(snapshot.familyRules.length === 35, "canonical family-rule inventory must contain all 35 rules");
+assert(snapshot.familyRules.length === 36, "canonical family-rule inventory must contain all 36 rules");
+assert(snapshot.familyRules.some(r=>r.networkKey==="Yamanote" && r.codePattern==="*" && r.exactVehicleType==="E235系0番台（山手線）"),
+  "Yamanote fleet E235-0 exact rule missing");
 assert(snapshot.familyRules.some(r=>r.networkKey==="setagaya" && r.codePattern==="*" && r.exactVehicleType==="東急300系"),
   "Setagaya structural exact rule missing");
 assert(snapshot.familyRules.some(r=>r.networkKey==="kodomonokuni" && r.codePattern==="*" && r.exactVehicleType==="横浜高速鉄道Y000系"),

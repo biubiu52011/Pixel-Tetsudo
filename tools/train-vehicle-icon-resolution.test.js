@@ -167,3 +167,85 @@ const datedRec = context.window.TrainIcons.CANONICAL_VEHICLES['sotetsu-11000-110
 assert.strictEqual(datedRec.evidenceGrade,'A');
 assert.ok(/^https:\/\/www\.sotetsu\.co\.jp\//.test(datedRec.evidenceSource));
 console.log('dated artwork provenance: 2 PASS');
+
+// ---- production runtime chain regression (v4.3.1128) ----
+// Real evidence data file (includes Yamanote family rule) driven through the
+// data-fusion realtime-derived path that production actually uses:
+//   ODPT Train (no vehicle field) -> TrainOperationEvidence.resolveEvidence(...,"realtime-derived")
+//   -> TrainVehicle.resolve({realtimeDerivedVehicleType}) -> vehicleIconPath
+const realCtx = {
+  console: { debug() {}, log() {}, warn() {}, error() {} },
+  window: {},
+  setTimeout, clearTimeout, Date, URL,
+  TextEncoder: require('util').TextEncoder
+};
+realCtx.self = realCtx.window;
+vm.createContext(realCtx);
+[
+  'data/timetables/vehicle-operation-evidence-data.js',
+  'data/timetables/train-operation-evidence.js',
+  'js/train-icons.js',
+  'js/train-vehicle.js'
+].forEach(rel => vm.runInContext(read(rel), realCtx, { filename: rel }));
+
+const familyRules = realCtx.window.VEHICLE_FAMILY_RULES || [];
+const yamanoteRule = familyRules.find(r => r.networkKey === 'Yamanote' && r.exactVehicleType);
+assert.ok(yamanoteRule,
+  'real evidence data must carry a Yamanote family rule (E235-0 fleet fact)');
+assert.strictEqual(yamanoteRule.effectiveFrom, '2020-01-21',
+  'Yamanote E235 rule must start after the E231-500 retirement date');
+assert.ok(/^https:\/\//.test(yamanoteRule.sourceUrl),
+  'Yamanote family rule must carry a traceable source');
+
+// Real running trains fetched from the ODPT realtime API (2026-10-05)
+['1826G', '1866G', '1868G'].forEach(function(tn) {
+  const ev = realCtx.window.TrainOperationEvidence.resolveEvidence(tn, {
+    lineId: 'Yamanote',
+    railway: '山手線',
+    operator: 'JR-East',
+    trainNumber: tn,
+    serviceDate: '2026-10-05',
+    calendarType: 'weekday'
+  }, 'realtime-derived');
+  assert.ok(ev && ev.vehicleType === 'E235系0番台（山手線）',
+    tn + ' realtime-derived evidence must resolve to E235-0, got ' + JSON.stringify(ev));
+  const rt = realCtx.window.TrainVehicle.resolve({
+    lineId: 'Yamanote',
+    operator: 'JR-East',
+    trainNumber: tn,
+    trainType: 'odpt.TrainType:JR-East.Local',
+    destinationStation: 'odpt.Station:JR-East.Yamanote.Osaki',
+    trainId: tn,
+    realtimeVehicleType: '',
+    realtimeDerivedVehicleType: ev.vehicleType
+  });
+  assert.strictEqual(rt.identityStatus, 'EXACT', tn + ' must be EXACT');
+  assert.strictEqual(rt.source, 'realtime-derived', tn + ' source must be realtime-derived');
+  assert.ok(/JR東日本_E235系_0番台\.png$/.test(rt.iconPath || ''),
+    tn + ' must project the E235-0 PNG, got ' + rt.iconPath);
+});
+console.log('Yamanote realtime chain -> E235 PNG: 3 PASS');
+
+// zero-fallback: a line with no evidence must stay UNKNOWN / no artwork
+const noEvidenceLine = realCtx.window.TrainOperationEvidence.resolveEvidence('9', {
+  lineId: 'Karasuyama', railway: '烏山線', operator: 'JR-East',
+  trainNumber: '9', serviceDate: '2026-10-05', calendarType: 'weekday'
+}, 'realtime-derived');
+assert.ok(!noEvidenceLine || !noEvidenceLine.vehicleType,
+  'no-evidence line must not gain a concrete vehicle type');
+const noEvidenceRt = realCtx.window.TrainVehicle.resolve({
+  lineId: 'Karasuyama', operator: 'JR-East', trainNumber: '9',
+  realtimeVehicleType: '', realtimeDerivedVehicleType: ''
+});
+assert.strictEqual(noEvidenceRt.identityStatus, 'UNKNOWN');
+assert.strictEqual(noEvidenceRt.iconPath, '');
+console.log('zero-fallback no-evidence line: 2 PASS');
+
+// zero-fallback: the Yamanote rule must not leak to other JR-East lines
+const otherLineEv = realCtx.window.TrainOperationEvidence.resolveEvidence('1234', {
+  lineId: 'Saikyo', railway: '埼京線', operator: 'JR-East',
+  trainNumber: '1234', serviceDate: '2026-10-05', calendarType: 'weekday'
+}, 'realtime-derived');
+assert.ok(!otherLineEv || !(otherLineEv.vehicleType === 'E235系0番台（山手線）'),
+  'Yamanote rule must not apply to other lines');
+console.log('no line-default leakage: 1 PASS');

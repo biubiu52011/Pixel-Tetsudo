@@ -11746,5 +11746,21 @@ window.VEHICLE_FAMILY_RULES = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/MT/",
     "notes": "multi-model family"
+  },
+  {
+    "evidenceId": 36,
+    "networkKey": "Yamanote",
+    "operator": "JR-East",
+    "codePattern": "*",
+    "calendarType": "",
+    "effectiveFrom": "2020-01-21",
+    "effectiveTo": "",
+    "exactVehicleType": "E235系0番台（山手線）",
+    "vehicleCandidates": [
+      "E235系0番台（山手線）"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://ja.wikipedia.org/wiki/JR%E6%9D%B1%E6%97%A5%E6%9C%ACE235%E7%B3%BB%E9%9B%BB%E8%BB%8A",
+    "notes": "Yamanote fleet fully E235-0 since 2020-01-21 (E231-500 retirement)"
   }
 ];
