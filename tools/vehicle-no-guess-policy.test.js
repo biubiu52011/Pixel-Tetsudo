@@ -129,3 +129,12 @@ assert(/CANONICAL_VEHICLE_ALIAS_CONFLICTS/.test(source),
 
 
 console.log('vehicle no-guess policy: PASS');
+
+const vehicleResolverSrc = fs.readFileSync('js/train-vehicle.js','utf8');
+assert(!vehicleResolverSrc.includes('Lower-priority evidence is fallback'),
+  'vehicle resolver must not contain source-priority fallback');
+assert(vehicleResolverSrc.includes('_uniqueIdentities.length === 1'),
+  'EXACT vehicle identity must require one unique identity across admitted evidence');
+assert(vehicleResolverSrc.includes("identityReason = 'unique-converged-vehicle-evidence'"),
+  'EXACT status must document unique converged evidence');
+console.log('vehicle evidence uniqueness: 3 PASS');
