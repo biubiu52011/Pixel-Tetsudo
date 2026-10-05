@@ -186,7 +186,45 @@ Deno.serve(async (req: Request) => {
     list.push(stop);
     byRun.set(stop.train_run_id, list);
   }
-  const payload = runs.map((run) => ({ ...run, stops: byRun.get(run.id) || [] }));
-  const complete = payload.every((run) => run.stops.length >= 2);
+  let payload = runs.map((run) => ({ ...run, stops: byRun.get(run.id) || [] }));
+  let complete = payload.every((run) => run.stops.length >= 2);
+  if (!complete) {
+    const { data: source } = await db.from("railway_lines")
+      .select("odpt_operator,odpt_railway,odpt_base_url").eq("id", lineId).maybeSingle();
+    const sourceKey = source?.odpt_base_url?.includes("api-challenge")
+      ? Deno.env.get("ODPT_CHALLENGE_CONSUMER_KEY")
+      : Deno.env.get("ODPT_CONSUMER_KEY");
+    if (source?.odpt_operator && source?.odpt_railway && source?.odpt_base_url && sourceKey) {
+      try {
+        const odptRows = await fetchOdptRows(source, sourceKey, serviceDate);
+        if (odptRows.length && await persistOdptRows(db, source, lineId, serviceDate, odptRows)) {
+          const { data: repairedRuns, error: repairedRunError } = await db.from("train_runs")
+            .select("id,service_date,calendar_type,operator,network_key,line_id,train_number,operation_code,rail_direction,train_type,destination_station")
+            .eq("line_id", lineId).eq("service_date", serviceDate).order("train_number");
+          if (!repairedRunError && repairedRuns?.length) {
+            const { data: repairedStops, error: repairedStopError } = await db.from("train_run_stops")
+              .select("train_run_id,stop_sequence,station_key,station_urn,arrival_time,departure_time,arrival_minute,departure_minute")
+              .in("train_run_id", repairedRuns.map((r) => r.id))
+              .order("train_run_id").order("stop_sequence");
+            if (!repairedStopError) {
+              const repairedByRun = new Map<number, unknown[]>();
+              for (const stop of repairedStops || []) {
+                const list = repairedByRun.get(stop.train_run_id) || [];
+                list.push(stop);
+                repairedByRun.set(stop.train_run_id, list);
+              }
+              const repairedPayload = repairedRuns.map((run) => ({ ...run, stops: repairedByRun.get(run.id) || [] }));
+              if (repairedPayload.every((run) => run.stops.length >= 2)) {
+                payload = repairedPayload;
+                complete = true;
+              }
+            }
+          }
+        }
+      } catch (e) {
+        console.error("[train-runs] partial repair failed", lineId, String(e));
+      }
+    }
+  }
   return json({ ok: true, cache: complete ? "HIT" : "PARTIAL", complete, line_id: lineId, service_date: serviceDate, runs: complete ? payload : [] });
 });
