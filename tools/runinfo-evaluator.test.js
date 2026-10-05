@@ -27,4 +27,12 @@ let clockOnly=E.evaluate({structuredStatus:"Normal",text:"18時08分頃に再開
 assert.strictEqual(clockOnly.maxDelay,null);
 let stations=E.extractMetadata({stationFromName:"新宿",stationToName:"中野",text:""});
 assert.strictEqual(stations.interval,"新宿→中野");
-console.log("runinfo-evaluator: 22 PASS");
+let textRange=E.extractMetadata({text:"A駅～B駅間で運転を見合わせています。"});
+assert.strictEqual(textRange.interval,"A駅→B駅");
+let liveRange=E.extractMetadata({text:"長野原草津口〜大前駅間の上下線で運転を見合わせています。"});
+assert.strictEqual(liveRange.interval,"長野原草津口→大前駅");
+let wholeRange=E.extractMetadata({text:"全線で運転を見合わせています。"});
+assert.strictEqual(wholeRange.interval,"全線");
+let structuredWins=E.extractMetadata({text:"A駅～B駅間で遅れています。",range:"C駅～D駅"});
+assert.strictEqual(structuredWins.interval,"C駅→D駅");
+console.log("runinfo-evaluator: 26 PASS");
