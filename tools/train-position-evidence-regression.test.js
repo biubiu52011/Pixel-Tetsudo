@@ -53,6 +53,10 @@ assert(/_moveTrainLabels\(trainLayer, trainUid, _curX, _curY/.test(renderer),
   "train labels must follow the marker in the same animation frame");
 assert(!/isLoop && _loopRect && _needMove && !window\.TrainTrackLayout/.test(renderer),
   "legacy loop RAF must not remain as a second animation path beside TrainTrackLayout");
+assert(/routePos:\s*routePos/.test(trackLayoutSource),
+  "TrainTrackLayout must expose loop route position to the single marker animation authority");
+assert(/_useLoopRoute[\s\S]{0,900}_loopPosToXY\(_curRoutePos, _loopRect\)/.test(renderer),
+  "loop marker interpolation must follow route geometry instead of cutting corners in XY space");
 assert(/_hasUpstreamVehicle/.test(renderer),"renderer must consume upstream vehicle resolution");
 assert(/var _identityExact = p\.vehicleIdentityStatus === "EXACT"/.test(renderer),
   "renderer must hard-gate concrete artwork on EXACT vehicle identity");
