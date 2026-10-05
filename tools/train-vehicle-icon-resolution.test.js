@@ -162,3 +162,8 @@ const sounyanNoAsset = context.window.TrainVehicle.resolve({
 assert.strictEqual(sounyanNoAsset.iconPath,'',
   '11004F must not fall back to generic 11000 artwork when dedicated artwork is absent');
 console.log('Sotetsu dated formation projection: 2 PASS');
+
+const datedRec = context.window.TrainIcons.CANONICAL_VEHICLES['sotetsu-11000-11003-hohoemi'];
+assert.strictEqual(datedRec.evidenceGrade,'A');
+assert.ok(/^https:\/\/www\.sotetsu\.co\.jp\//.test(datedRec.evidenceSource));
+console.log('dated artwork provenance: 2 PASS');
