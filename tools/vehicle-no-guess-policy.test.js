@@ -158,3 +158,10 @@ Object.keys(canonical).forEach((id) => {
   identityOwners[key] = id;
 });
 console.log('canonical vehicle record uniqueness: PASS');
+
+assert(typeof icons.VEHICLE_NAME_TO_ICON === 'undefined',
+  'legacy vehicle icon table must not be exported as a second runtime resolver');
+assert(vehicleResolverSrc.includes('_formationCandidates.length === 1') &&
+       vehicleResolverSrc.includes("_formationCandidates[0] === _formationId"),
+  'formation artwork must require one internally consistent formation identity');
+console.log('formation no-fallback contract: 2 PASS');
