@@ -706,8 +706,7 @@ function _resolveTrainRuleDisplayName(lineId, operator, trainId, stationIndex, t
     resolveVehicleArtwork: resolveVehicleArtwork,
     resolveVehicleDisplayName: resolveVehicleDisplayName,
     resolveCanonicalVehicle: resolveCanonicalVehicle,
-    CANONICAL_VEHICLES: CANONICAL_VEHICLES,
-    VEHICLE_NAME_TO_ICON: VEHICLE_NAME_TO_ICON
+    CANONICAL_VEHICLES: CANONICAL_VEHICLES
   };
 
   console.debug("[TrainIcons] initialized with zero-fallback vehicle identity policy");
