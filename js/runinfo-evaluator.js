@@ -52,7 +52,9 @@
     var timetable = /ダイヤ(?:が|は)?(?:乱れ|乱れて)|ダイヤ乱れ|時刻表[^。\n]*(?:乱れ|変更)|遅延|遅れ/.test(s);
     if (timetable) evidence.push({ type: "TIMETABLE_DISRUPTION" });
 
-    var partial = /一部(?:の)?(?:列車|電車|区間)?[^。\n]*(?:運休|運転見合わせ|運転を見合わせ|運転中止|取りやめ)/.test(s);
+    var partial = /一部(?:の)?(?:列車|電車|区間)?[^。\n]*(?:運休|運転見合わせ|運転を見合わせ|運転中止|取りやめ)|一部列車[^。\n]*区間運休|区間運休/.test(s);
+    var reducedService = /通常の[０-９0-9]+割程度[^。\n]*運転|列車本数[^。\n]*(?:少な|減少)|本数を減らして[^。\n]*運転/.test(s);
+    if (reducedService) evidence.push({ type: "REDUCED_SERVICE" });
     if (partial) evidence.push({ type: "PARTIAL_SERVICE_IMPACT" });
 
     var whole = /全線[^。\n]*(?:運休|運転見合わせ|運転を見合わせ|運転中止|運転を中止|取りやめ)|全列車[^。\n]*(?:運休|取りやめ|運転を見合わせ)/.test(s);
@@ -63,7 +65,7 @@
 
     if (whole || explicitRangeSuspension) return { status: "suspended", evidence: evidence, delayUpperBoundMinutes: null };
     if (timetable) return { status: "delayed", evidence: evidence, delayUpperBoundMinutes: null };
-    if (through || partial) return { status: "notice", evidence: evidence, delayUpperBoundMinutes: null };
+    if (through || partial || reducedService) return { status: "notice", evidence: evidence, delayUpperBoundMinutes: null };
 
     // A bare keyword is not enough to upgrade the whole line.
     if (/運休|見合わせ|中止|運行情報|運転情報/.test(s)) {
