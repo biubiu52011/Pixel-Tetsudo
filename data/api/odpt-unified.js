@@ -668,6 +668,9 @@
             "odpt:trainNumber":run.train_number||"",
             "odpt:railway":run.network_key||run.line_id||"",
             "odpt:calendar":run.calendar_type==="holiday"?"odpt.Calendar:SaturdayHoliday":"odpt.Calendar:Weekday",
+            "odpt:railDirection":run.rail_direction||"",
+            "odpt:trainType":run.train_type||"",
+            "odpt:destinationStation":run.destination_station?[run.destination_station]:[],
             "odpt:trainTimetableObject":(run.stops||[]).map(function(s){
                 var o={};
                 if(s.arrival_time) o["odpt:arrivalTime"]=String(s.arrival_time).slice(0,5);
