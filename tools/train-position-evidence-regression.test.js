@@ -50,7 +50,12 @@ for(const js of ["js/data-fusion.js","js/train-position-estimator.js","js/trains
   assert(!/loopServiceMode/.test(read(js)),js+" must not synthesize loop service state");
 }
 const render=read("js/trains-render.js");
-assert(/isLoopDir && p\.destinationStation/.test(render),"loop trains with real terminal must display destination directly");
+const loopDirectionBranch = render.indexOf("} else if (isLoopDir) {");
+const genericDestinationBranch = render.indexOf("} else if (p.destinationStation) {", loopDirectionBranch);
+assert(loopDirectionBranch >= 0 && genericDestinationBranch > loopDirectionBranch,
+  "authoritative loop direction must outrank destinationStation in passenger-facing labels");
+assert(!/isLoopDir && p\.destinationStation/.test(render),
+  "loop destinationStation must not override InnerLoop/OuterLoop labels");
 
 const trains=read("js/trains-data.js");
 assert(/function _isFreshRealtimePosition/.test(trains),"realtime freshness guard missing");
