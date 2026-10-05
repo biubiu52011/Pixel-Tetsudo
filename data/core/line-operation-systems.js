@@ -177,8 +177,8 @@ window.LineOperationSystems = {
     },
     {
       code: "JO",
-      nameJa: "横須賀線・総武快速線",
-      nameZh: "横须贺线・总武快速线",
+      nameJa: "横須賀線・総武線快速",
+      nameZh: "横须贺线・总武线快速",
       nameEn: "Yokosuka Line / Sobu Line (Rapid)",
       nameKo: "요코스카선・소부 쾌속선",
       color: "#00347a",
@@ -339,9 +339,9 @@ window.LineOperationSystems = {
     },
     {
       code: "SOB",
-      nameJa: "総武本線",
-      nameZh: "总武本线",
-      nameEn: "Sobu Main Line",
+      nameJa: "総武線",
+      nameZh: "总武线",
+      nameEn: "Sobu Line",
       nameKo: "소부 본선",
       color: "#fcc60d",
       lineIds: ["SobuMain"],
