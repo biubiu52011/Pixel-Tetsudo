@@ -1507,7 +1507,7 @@
                         // Explicit Yamanote baseline probe: record only exact
                         // JR-East.Yamanote rows; never classify other JR-East rows
                         // by station overlap or line length.
-                        if (op === "JR-East" && _activatedRealtimeLines.Yamanote && window.ODPTClient && window.ODPTClient.auditRealtimeLine) {
+                        if (op === "JR-East" && LINE_TO_OPERATOR.Yamanote === op && _activeRealtimeOperators[op] && window.ODPTClient && window.ODPTClient.auditRealtimeLine) {
                             window.ODPT_REALTIME_AUDIT = window.ODPT_REALTIME_AUDIT || {};
                             window.ODPT_REALTIME_AUDIT.Yamanote = window.ODPTClient.auditRealtimeLine("Yamanote", window.ODPT_TRAIN_POSITIONS[op]);
                         }
