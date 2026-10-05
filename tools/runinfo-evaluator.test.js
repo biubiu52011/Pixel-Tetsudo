@@ -117,4 +117,19 @@ assert.strictEqual(upSuspensionState.symbol,"△");
 let outerSuspensionState=E.evaluate({messageKind:"realtime",text:"外回りで運転を見合わせています。"});
 assert.strictEqual(outerSuspensionState.status,"notice");
 assert.strictEqual(outerSuspensionState.symbol,"△");
-console.log("runinfo-evaluator: 79 PASS");
+let splitDirections=E.extractMetadata({text:"上り線で運転を見合わせています。下り線では遅れが出ています。"});
+assert.deepStrictEqual(splitDirections.impacts,[
+  {interval:null,direction:"up",effect:"suspension"},
+  {interval:null,direction:"down",effect:"delay"}
+]);
+let loopMixed=E.extractMetadata({text:"内回り電車に遅れが出ています。外回りは平常通り運転しています。"});
+assert.deepStrictEqual(loopMixed.impacts,[
+  {interval:null,direction:"inner",effect:"delay"},
+  {interval:null,direction:"outer",effect:"normal"}
+]);
+let splitRanges=E.extractMetadata({text:"A駅～B駅間で運転を見合わせています。C駅～D駅間では遅れが出ています。"});
+assert.deepStrictEqual(splitRanges.impacts,[
+  {interval:"A駅→B駅",direction:null,effect:"suspension"},
+  {interval:"C駅→D駅",direction:null,effect:"delay"}
+]);
+console.log("runinfo-evaluator: 82 PASS");
