@@ -642,58 +642,7 @@
           var directionName = run.directionName;
           var destinationStation = run.destinationStation;
           var destinationStationUrn = run.destinationStationUrn;
-          // Exact official train-number evidence takes precedence when ODPT omits
-          // vehicleType. The evidence table contains only individually verified rows;
-          // no prefix/range/hash inference is allowed.
-          if (!tt['vehicleType'] && !tt['odpt:vehicleType'] &&
-              ((window.TRAIN_VEHICLE_EVIDENCE_PROVIDERS && window.TRAIN_VEHICLE_EVIDENCE_PROVIDERS.length) ||
-               window.TOBU_LIMITED_EXPRESS_VEHICLE_EVIDENCE)) {
-            var _evidenceTrainNameRaw = tt['odpt:trainName'] || tt['trainName'] || tt['odpt:trainTitle'] || '';
-            var _evidenceTrainName = typeof _evidenceTrainNameRaw === 'object'
-              ? (_evidenceTrainNameRaw.ja || _evidenceTrainNameRaw['ja-Hrkt'] || _evidenceTrainNameRaw.en || '')
-              : String(_evidenceTrainNameRaw);
-            var _evidenceDirectionRaw = tt['odpt:railDirection'] || '';
-            var _evidenceDirection = /Inbound|Up|Nobori/i.test(String(_evidenceDirectionRaw)) ? 'up'
-              : (/Outbound|Down|Kudari/i.test(String(_evidenceDirectionRaw)) ? 'down' : '');
-            var _evidenceServiceDate = tt['_serviceDate'] || tt['serviceDate'] || tt['operatingDate'] || getTokyoServiceDate();
-            var _evidenceProviders = (window.TRAIN_VEHICLE_EVIDENCE_PROVIDERS || []).slice();
-            if (_evidenceProviders.length === 0 && window.TOBU_LIMITED_EXPRESS_VEHICLE_EVIDENCE) {
-              _evidenceProviders.push(window.TOBU_LIMITED_EXPRESS_VEHICLE_EVIDENCE);
-            }
-            var _officialVehicleMatches = [];
-            _evidenceProviders.forEach(function(provider) {
-              if (!provider || typeof provider.resolveEvidence !== 'function') return;
-              var rec = provider.resolveEvidence(
-                trainNumber, _evidenceTrainName, _evidenceDirection, _evidenceServiceDate,
-                { lineId: lineId, operator: tt['odpt:operator'] || line.operator || '' }
-              );
-              if (rec && rec.vehicleType) _officialVehicleMatches.push({ provider: provider, record: rec });
-            });
-            var _vehicleNames = {};
-            _officialVehicleMatches.forEach(function(m){ _vehicleNames[m.record.vehicleType] = true; });
-            var _officialVehicleEvidence = Object.keys(_vehicleNames).length === 1 && _officialVehicleMatches.length
-              ? _officialVehicleMatches[0] : null;
-            if (_officialVehicleEvidence) {
-              var _provider = _officialVehicleEvidence.provider;
-              var _record = _officialVehicleEvidence.record;
-              tt['vehicleType'] = _record.vehicleType;
-              tt._vehicleEvidenceSource = (_provider.id || 'official') + '-train-number';
-              tt._vehicleEvidence = {
-                source: tt._vehicleEvidenceSource,
-                trainNumber: trainNumber,
-                service: _record.service || (_record.services || []).join(' + '),
-                direction: _record.direction || _evidenceDirection,
-                serviceDate: String(_evidenceServiceDate || '').slice(0, 10)
-              };
-            }
-          }
-
-          // Zero-fallback policy: a service name is not same-day rolling-stock
-          // assignment evidence. Tobu vehicle identity must come from an explicit
-          // vehicle field or a dated train/operation evidence provider.
-
-          // v4.3.950: 车型判定统一入口 TrainVehicle（S0 manual 实证 / S2 车号累积 / S3 查表
-          // 交叉验证；不猜——无有依据候选时 trainClass/vehicleType 为空，图标由渲染层兜底）
+          // Vehicle identity is compiled once through the canonical evidence resolver.
           var _runIdentity = resolveTrainRunIdentity(run, tt, lineId, line);
           var _trainOwner = _runIdentity.trainOwner;
           var _assignmentOperator = _runIdentity.assignmentOperator;
