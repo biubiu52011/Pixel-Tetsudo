@@ -121,6 +121,18 @@
       var rm = String(input.resumeEstimate).match(/(\d{2}):(\d{2})/);
       if (rm) resume = rm[1] + ":" + rm[2];
     }
+    var serviceLevel = null;
+    var serviceRange = text.match(/通常の\s*([０-９0-9]+)\s*[～〜－−-]\s*([０-９0-9]+)\s*割程度/);
+    var serviceSingle = !serviceRange && text.match(/通常の\s*([０-９0-9]+)\s*割程度/);
+    function toAsciiNumber(v) {
+      return parseInt(String(v).replace(/[０-９]/g, function(c){ return String(c.charCodeAt(0)-0xFF10); }), 10);
+    }
+    if (serviceRange) {
+      serviceLevel = { minPercent: toAsciiNumber(serviceRange[1]) * 10, maxPercent: toAsciiNumber(serviceRange[2]) * 10 };
+    } else if (serviceSingle) {
+      var servicePercent = toAsciiNumber(serviceSingle[1]) * 10;
+      serviceLevel = { minPercent: servicePercent, maxPercent: servicePercent };
+    }
     var textDelayMinutes = null;
     var dm = text.match(/(?:約|およそ)?\s*(\d{1,3})\s*(?:分間|分|min)(?!頃|後|以)/i);
     if (dm) textDelayMinutes = parseInt(dm[1], 10);
@@ -129,7 +141,7 @@
       if (!cm) cm = text.match(/(?:で|、|，|,|\s|^)([^。\n，,、\sで〜～－−至→-]+?)(?:のため|の影響|により|による|が原因|の発生|に伴い)/);
       if (cm && cm[1]) cause = cm[1];
     }
-    return { interval: interval, cause: cause, resume: resume, detail: text || null, textDelayMinutes: textDelayMinutes };
+    return { interval: interval, cause: cause, resume: resume, detail: text || null, textDelayMinutes: textDelayMinutes, serviceLevel: serviceLevel };
   }
 
   function evaluate(input) {
