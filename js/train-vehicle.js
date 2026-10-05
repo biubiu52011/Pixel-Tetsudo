@@ -34,9 +34,16 @@
   }
 
   // 图标库反查（S0–S3 候选 → 图标路径）
-  function resolveArtworkForIdentity(name) {
+  function resolveArtworkForIdentity(name, formationId) {
     if (!name) return '';
     if (window.TrainIcons && typeof window.TrainIcons.resolveVehicleArtwork === 'function') {
+      if (formationId) {
+        var formationIdentity = name;
+        if (!/編成/.test(formationIdentity)) {
+          formationIdentity = name + '（' + String(formationId).trim() + '編成）';
+        }
+        return window.TrainIcons.resolveVehicleArtwork(formationIdentity) || '';
+      }
       return window.TrainIcons.resolveVehicleArtwork(name) || '';
     }
     return '';
@@ -103,7 +110,10 @@
     // 4) Artwork is a strict projection of the already-exact vehicle identity.
     // Missing artwork stays missing; never substitute another candidate, line,
     // operator, retired replacement, or rule-derived vehicle.
-    var iconPath = chosen ? resolveArtworkForIdentity(chosen) : '';
+    var _formationCandidates = Array.isArray(ctx.formationCandidates) ? ctx.formationCandidates.filter(Boolean) : [];
+    var _formationId = String(ctx.formationId || '').trim();
+    if (_formationCandidates.length > 1) _formationId = '';
+    var iconPath = chosen ? resolveArtworkForIdentity(chosen, _formationId) : '';
 
     // Display-name normalization is allowed only after identity is exact.
 
@@ -211,7 +221,7 @@
     var date = ctx.serviceDate || _formationServiceDate(ctx.at);
     var a = _formationEvidence[date+"|"+ctx.runningChainId];
     if (!a || a.conflict) return null;
-    var icon = resolveArtworkForIdentity(a.vehicleName, a.lineId);
+    var icon = resolveArtworkForIdentity(a.vehicleName, a.formationId);
     if (!icon) return null;
     return {
       formationId:a.formationId, vehicleName:a.vehicleName, iconPath:icon,
