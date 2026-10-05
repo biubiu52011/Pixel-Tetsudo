@@ -43,3 +43,15 @@ const newShuttleTimetableSrc = fs.readFileSync('data/timetables/NewShuttle-manua
 assert.ok(!/1050系は順次引退/.test(newShuttleTimetableSrc), 'New Shuttle timetable must not encode unsupported retirement prose as vehicle identity');
 assert.ok(!/vehicleType:\s*"[^"]*1050系/.test(newShuttleTimetableSrc), 'New Shuttle regular timetable must not mix special-event 1050 operation into daily fleet evidence');
 console.log('new-shuttle-official-topology: 4 PASS');
+
+const odptUnifiedSrc = fs.readFileSync('data/api/odpt-unified.js','utf8');
+const trainRunsFnSrc = fs.readFileSync('supabase/functions/train-runs/index.ts','utf8');
+assert.ok(/"odpt:railDirection":run\.rail_direction\|\|""/.test(odptUnifiedSrc),
+  'Supabase TrainRun must restore rail direction into the canonical ODPT-shaped input');
+assert.ok(/"odpt:trainType":run\.train_type\|\|""/.test(odptUnifiedSrc),
+  'Supabase TrainRun must restore train type into the canonical ODPT-shaped input');
+assert.ok(/"odpt:destinationStation":run\.destination_station\?\[run\.destination_station\]:\[\]/.test(odptUnifiedSrc),
+  'Supabase TrainRun must restore destination into the canonical ODPT-shaped input');
+assert.ok(/rail_direction,train_type,destination_station/.test(trainRunsFnSrc),
+  'train-runs Edge Function must expose canonical operating fields');
+console.log('train-run-operating-fields: 4 PASS');
