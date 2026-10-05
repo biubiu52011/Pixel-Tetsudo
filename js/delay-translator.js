@@ -110,7 +110,6 @@
     "運転しています": { zh: "正在运行", ko: "운행 중입니다", en: "is in operation" },
     "遅れが出ています": { zh: "出现延误", ko: "지연이 발생하고 있습니다", en: "delays are occurring" },
     "ダイヤが乱れています": { zh: "运行时刻出现紊乱", ko: "운행 시간표가 흐트러지고 있습니다", en: "the timetable is disrupted" },
-    "ダイヤが乱れています": { zh: "运行时刻出现紊乱", ko: "운행 시간표가 흐트러지고 있습니다", en: "the timetable is disrupted" },
     "運転します": { zh: "运行", ko: "운행합니다", en: "will operate" },
     "運休します": { zh: "停运", ko: "운휴합니다", en: "will be cancelled" },
     "運休となります": { zh: "停运", ko: "운휴가 됩니다", en: "will be cancelled" },
