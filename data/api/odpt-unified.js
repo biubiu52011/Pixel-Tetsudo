@@ -798,6 +798,40 @@
 
         // 盲查/诊断：枚举 operator 实际返回的 railway identity，并与本地预设反向比较。
         // 不改变生产映射，不猜别名；用于发现“API 有数据但预设 code 错/缺”的情况。
+        // Inspect one requested line against the operator-wide realtime snapshot.
+        // This never guesses by station overlap: only the exact ODPT railway identity
+        // admitted for the line is counted. It is intentionally diagnostic while the
+        // line remains HYBRID; promote to FULL only after observed coverage is proven.
+        auditRealtimeLine: function(lineId, rows) {
+            var expected = getLineRailwayIdentity(lineId);
+            var operator = LINE_TO_OPERATOR[lineId] || "";
+            var data = Array.isArray(rows) ? rows :
+                ((window.ODPT_TRAIN_POSITIONS && window.ODPT_TRAIN_POSITIONS[operator]) || []);
+            if (!expected) return { lineId: lineId, ok: false, reason: "missing-line-identity", rowCount: 0, matchedRows: [] };
+            var matched = data.filter(function(t) {
+                var actual = parseRailwayIdentity(t);
+                return !!(actual && actual.key === expected.key);
+            });
+            return {
+                lineId: lineId,
+                operator: operator,
+                expectedIdentity: expected.odptRailway,
+                ok: matched.length > 0,
+                rowCount: data.length,
+                matchedCount: matched.length,
+                matchedRows: matched.map(function(t) {
+                    return {
+                        trainNumber: t["odpt:trainNumber"] || "",
+                        trainType: t["odpt:trainType"] || "",
+                        railDirection: t["odpt:railDirection"] || "",
+                        fromStation: t["odpt:fromStation"] || "",
+                        toStation: t["odpt:toStation"] || "",
+                        delay: t["odpt:delay"] || 0
+                    };
+                })
+            };
+        },
+
         auditRealtimeRailwayIdentities: function(operator, rows) {
             try {
                 var data = Array.isArray(rows) ? rows : [];
@@ -1470,6 +1504,13 @@
                         // v4.3.392: 成功即写入（空数组也写入），失败不拖垮全局推送
                         window.ODPT_TRAIN_POSITIONS[op] = (data && data.length > 0) ? data : [];
                         loaded.positions++;
+                        // Explicit Yamanote baseline probe: record only exact
+                        // JR-East.Yamanote rows; never classify other JR-East rows
+                        // by station overlap or line length.
+                        if (op === "JR-East" && _activatedRealtimeLines.Yamanote && window.ODPTClient && window.ODPTClient.auditRealtimeLine) {
+                            window.ODPT_REALTIME_AUDIT = window.ODPT_REALTIME_AUDIT || {};
+                            window.ODPT_REALTIME_AUDIT.Yamanote = window.ODPTClient.auditRealtimeLine("Yamanote", window.ODPT_TRAIN_POSITIONS[op]);
+                        }
                     }).catch(function(e) {
                         window.ODPT_TRAIN_POSITIONS[op] = null;
                         console.debug("[ODPT] " + op + " train positions fetch failed:", e && e.message);
