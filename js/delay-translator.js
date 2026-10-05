@@ -240,6 +240,33 @@
   // ---- 整句式模板（顺序匹配，命中即结构化输出）----
   var TEMPLATES = [
     {
+      // 減便・運転本数："通常の5割程度で運転" / "通常の7～8割程度の本数で運転"
+      re: /通常の\s*([０-９0-9]+)(?:\s*[～〜－−-]\s*([０-９0-9]+))?\s*割程度(?:の本数)?で運転(?:します|しています|しております)?/,
+      build: function (m, lang) {
+        function n(v) { return String(v || "").replace(/[０-９]/g, function(c){ return String(c.charCodeAt(0)-0xFF10); }); }
+        var a = n(m[1]) + "0%";
+        var level = m[2] ? a + "～" + n(m[2]) + "0%" : a;
+        return { zh: "约按正常班次的" + level + "运行。", ko: "통상 운행 횟수의 약 " + level + " 수준으로 운행합니다.", en: "Service is operating at approximately " + level + " of the normal frequency." }[lang];
+      }
+    },
+    {
+      // 直通運転中止
+      re: /(.+?線)?(?:との|への)?直通運転を(?:中止|取りやめ|見合わせ)(?:しています|します|しております)?/,
+      build: function (m, lang) {
+        var target = m[1] ? _replaceFragment(m[1], lang) : "";
+        return { zh: (target ? "已停止与" + target + "的直通运行。" : "已停止直通运行。"), ko: (target ? target + "과의 직통 운전을 중단하고 있습니다." : "직통 운전을 중단하고 있습니다."), en: (target ? "Through service with " + target + " is suspended." : "Through service is suspended.") }[lang];
+      }
+    },
+    {
+      // 方向別の遅延・見合わせ：上り/下り/内回り/外回り
+      re: /(上り線|下り線|内回り(?:電車)?|外回り(?:電車)?)(?:の一部列車|の列車|の電車)?(?:で|に|は)?(?:一部列車に)?(遅れが出ています|遅延しています|運転を見合わせています|運転見合わせ|運転を中止しています)/,
+      build: function (m, lang) {
+        var dir = _replaceFragment(m[1], lang);
+        var stop = /見合わせ|中止/.test(m[2]);
+        return { zh: dir + (stop ? "暂停运行。" : "出现延误。"), ko: dir + (stop ? " 운전이 중단되었습니다." : "에 지연이 발생하고 있습니다."), en: dir + (stop ? " service is suspended." : " services are delayed.") }[lang];
+      }
+    },
+    {
       // 延误+运休："京浜東北線は、東海道線内での安全確認の影響で、上下線の一部列車に遅れと運休がでています"
       // 影响源分隔符兼容 "の影響で、/の影響、/のため、/による、"
       re: /^(.+?)は、(.+?)(?:の影響で|の影響|のため|による)、(.+?)(?:の一部列車|の列車|の電車)?に(遅れと運休|遅れ|遅延)(?:がでています|が出ています)/,
