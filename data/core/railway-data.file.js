@@ -37132,7 +37132,8 @@ window.RAILWAY_DATA = {
       },
       "throughServices": [
         "ChuoRapid",
-        "Shinonoi"
+        "Shinonoi",
+        "ChuoTatsuno"
       ],
       "serviceBoundaries": [
         {
@@ -37152,6 +37153,16 @@ window.RAILWAY_DATA = {
           ],
           "evidence": {
             "source": "JR East timetable: trains continue from Chuo Line through Shiojiri onto Shinonoi Line toward Matsumoto / Nagano",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "ChuoTatsuno",
+          "handoverStations": [
+            "Okaya"
+          ],
+          "evidence": {
+            "source": "Historical direct through-service archive: Chuo Main / Tatsuno branch join at Okaya",
             "confidence": "HIGH"
           }
         }
@@ -38287,10 +38298,24 @@ window.RAILWAY_DATA = {
         3,
         3
       ],
-      "throughServices": [],
+      "throughServices": [
+        "ChuoMain"
+      ],
       "transferStations": [],
       "nameZh": "中央本线（辰野支线）",
-      "nameKo": "주오 본선（타츠노 지선）"
+      "nameKo": "주오 본선（타츠노 지선）",
+      "serviceBoundaries": [
+        {
+          "lineId": "ChuoMain",
+          "handoverStations": [
+            "Okaya"
+          ],
+          "evidence": {
+            "source": "Historical direct through-service archive: Chuo Main / Tatsuno branch join at Okaya",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "TsurumiUmiShibaura": {
       "name": "TsurumiUmiShibaura",
