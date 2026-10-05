@@ -33,7 +33,7 @@ Deno.serve(async (req: Request) => {
   const db = createClient(supabaseUrl, secretKey, { auth: { persistSession: false, autoRefreshToken: false } });
   const { data: runs, error } = await db
     .from("train_runs")
-    .select("id,service_date,calendar_type,operator,network_key,line_id,train_number,operation_code")
+    .select("id,service_date,calendar_type,operator,network_key,line_id,train_number,operation_code,rail_direction,train_type,destination_station")
     .eq("line_id", lineId).eq("service_date", serviceDate).order("train_number");
   if (error) return json({ ok: false, error: "DB_QUERY_FAILED" }, 500);
   if (!runs?.length) return json({ ok: true, cache: "MISS", complete: false, line_id: lineId, service_date: serviceDate, runs: [] });
