@@ -90,6 +90,13 @@
       else if (from) interval = from + "方面";
       else if (to) interval = to + "方面";
     }
+    // Text-only official messages often carry the affected station range
+    // without structured stationFrom/stationTo fields.
+    if (!interval && text) {
+      var rangeMatch = text.match(/([^。\n、，,]{1,30}?駅)\s*[～〜－−-]\s*([^。\n、，,]{1,30}?駅)(?:間)?/);
+      if (rangeMatch) interval = rangeMatch[1].trim() + "→" + rangeMatch[2].trim();
+      else if (/全線/.test(text)) interval = "全線";
+    }
     var resume = null;
     if (input.resumeEstimate) {
       var rm = String(input.resumeEstimate).match(/(\d{2}):(\d{2})/);
