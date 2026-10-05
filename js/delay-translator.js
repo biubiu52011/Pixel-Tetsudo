@@ -34,6 +34,7 @@
   // ---- 原因词表（ja → 4 语言；长词优先匹配）----
   var CAUSES = {
     "安全確認": { zh: "安全确认", ko: "안전 확인", en: "safety check" },
+    "停止位置確認": { zh: "停车位置确认", ko: "정차 위치 확인", en: "stopping-position check" },
     "信号確認": { zh: "信号确认", ko: "신호 확인", en: "signal check" },
     "信号故障": { zh: "信号故障", ko: "신호 고장", en: "signal failure" },
     "踏切安全確認": { zh: "道口安全确认", ko: "건널목 안전 확인", en: "level-crossing safety check" },
@@ -108,6 +109,8 @@
     "運行しております": { zh: "正在运行", ko: "운행 중입니다", en: "is in operation" },
     "運転しています": { zh: "正在运行", ko: "운행 중입니다", en: "is in operation" },
     "遅れが出ています": { zh: "出现延误", ko: "지연이 발생하고 있습니다", en: "delays are occurring" },
+    "ダイヤが乱れています": { zh: "运行时刻出现紊乱", ko: "운행 시간표가 흐트러지고 있습니다", en: "the timetable is disrupted" },
+    "ダイヤが乱れています": { zh: "运行时刻出现紊乱", ko: "운행 시간표가 흐트러지고 있습니다", en: "the timetable is disrupted" },
     "運転します": { zh: "运行", ko: "운행합니다", en: "will operate" },
     "運休します": { zh: "停运", ko: "운휴합니다", en: "will be cancelled" },
     "運休となります": { zh: "停运", ko: "운휴가 됩니다", en: "will be cancelled" },
