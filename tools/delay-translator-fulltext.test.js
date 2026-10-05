@@ -36,4 +36,15 @@ const liveMeguro = "東京メトロ南北線内での停止位置確認の影響
 const mz = ctx.window.DelayTranslator.translate(liveMeguro, { status: "delayed", lineId: "Meguro" }, "zh");
 assert.ok(mz.translated.includes("停车位置确认"), "through-line live cause must translate");
 assert.ok(mz.translated.includes("下行线") && mz.translated.includes("出现延误"), "direction and delay semantics must survive translation");
+const reducedZh = ctx.window.DelayTranslator.translate("内房線は、台風の影響で、通常の５割程度で運転します。", { status:"notice", lineId:"Uchibo" }, "zh");
+assert.ok(reducedZh.translated.includes("约按正常班次的50%运行"), "reduced service must use complete percentage translation");
+assert.ok(!reducedZh.translated.includes("5成左右") && !reducedZh.translated.includes("５割"), "reduced service must not fall back to token-by-token translation");
+const reducedRangeEn = ctx.window.DelayTranslator.translate("通常の７～８割程度の本数で運転しています。", { status:"notice", lineId:"Test" }, "en");
+assert.ok(reducedRangeEn.translated.includes("70%～80%"), "reduced-service range must preserve both percentages");
+const throughZh = ctx.window.DelayTranslator.translate("東急線との直通運転を中止しています。", { status:"notice", lineId:"Test" }, "zh");
+assert.ok(throughZh.translated.includes("直通运行"), "through-service suspension must translate as a complete sentence");
+const innerZh = ctx.window.DelayTranslator.translate("内回り電車に遅れが出ています。", { status:"delayed", lineId:"Yamanote" }, "zh");
+assert.ok(innerZh.translated.includes("内环") && innerZh.translated.includes("延误"), "inner-loop delay must translate direction and effect");
+const outerEn = ctx.window.DelayTranslator.translate("外回りで運転を見合わせています。", { status:"notice", lineId:"Yamanote" }, "en");
+assert.ok(/outer-loop/i.test(outerEn.translated) && /suspended/i.test(outerEn.translated), "outer-loop suspension must translate direction and effect");
 console.log("delay-translator live-20261005: 5 PASS");
