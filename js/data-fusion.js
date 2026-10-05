@@ -1618,24 +1618,17 @@
   }
 
   function ensureTimetable(lineId) {
-    // Supabase is a read-through cache only. Accept it only when the server
-    // declares a complete run set; otherwise preserve the existing lazy source.
-    if (!window.TrainRunClient || typeof window.TrainRunClient.load !== "function") {
-      return ensureManualTimetable(lineId);
-    }
-    return window.TrainRunClient.load(lineId).then(function(result) {
-      if (!result || !result.complete || !result.rows || !result.rows.length) {
-        return ensureManualTimetable(lineId);
-      }
-      if (window.TrainPositionEstimator &&
-          typeof window.TrainPositionEstimator.registerManualTimetable === "function") {
-        window.TrainPositionEstimator.registerManualTimetable(lineId, result.rows);
+    // One existing source lifecycle: ODPTClient owns the optional read-through
+    // cache; a miss falls through to the existing manual/ODPT path.
+    if (!window.ODPTClient || typeof window.ODPTClient.getCachedTrainRuns !== "function") return ensureManualTimetable(lineId);
+    return window.ODPTClient.getCachedTrainRuns(lineId).then(function(rows) {
+      if (!rows || !rows.length) return ensureManualTimetable(lineId);
+      if (window.TrainPositionEstimator && typeof window.TrainPositionEstimator.registerManualTimetable === "function") {
+        window.TrainPositionEstimator.registerManualTimetable(lineId, rows);
       }
       var line = allLines[lineId];
       if (line && line.stations) {
-        var estimated = window.TrainPositionEstimator.estimateLinePositions(
-          lineId, line, result.rows, odptData.delayInfo, line.operator
-        );
+        var estimated = window.TrainPositionEstimator.estimateLinePositions(lineId, line, rows, odptData.delayInfo, line.operator);
         if (estimated && estimated.length) {
           if (!posMap[lineId]) posMap[lineId] = [];
           var have = {};
@@ -1644,8 +1637,7 @@
             var id = _positionIdentity(p);
             if (id && !have[id] && mayUseTimetableEstimate(lineId, p)) {
               p.positionSource = "supabase-train-run";
-              posMap[lineId].push(p);
-              have[id] = true;
+              posMap[lineId].push(p); have[id] = true;
             }
           });
         }
@@ -1654,12 +1646,9 @@
         var targets = _expandDirtyLines([lineId], allLines);
         if (typeof doEstimation === "function") doEstimation(targets);
         fuseDirty([lineId]);
-      } catch(e) { console.debug("[DataFusion] ensureTimetable->dirty refresh error:", e.message); }
+      } catch(err) { console.debug("[DataFusion] ensureTimetable refresh:", err.message); }
       return true;
-    }).catch(function(e) {
-      console.debug("[DataFusion] Supabase timetable fallback:", lineId, e.message);
-      return ensureManualTimetable(lineId);
-    });
+    }).catch(function() { return ensureManualTimetable(lineId); });
   }
 
   function ensureManualTimetable(lineId) {
