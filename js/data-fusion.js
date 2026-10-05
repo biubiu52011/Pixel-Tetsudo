@@ -1638,6 +1638,51 @@
     return false;
   }
 
+  function ensureTimetable(lineId) {
+    // Supabase is a read-through cache only. Accept it only when the server
+    // declares a complete run set; otherwise preserve the existing lazy source.
+    if (!window.TrainRunClient || typeof window.TrainRunClient.load !== "function") {
+      return ensureManualTimetable(lineId);
+    }
+    return window.TrainRunClient.load(lineId).then(function(result) {
+      if (!result || !result.complete || !result.rows || !result.rows.length) {
+        return ensureManualTimetable(lineId);
+      }
+      if (window.TrainPositionEstimator &&
+          typeof window.TrainPositionEstimator.registerManualTimetable === "function") {
+        window.TrainPositionEstimator.registerManualTimetable(lineId, result.rows);
+      }
+      var line = allLines[lineId];
+      if (line && line.stations) {
+        var estimated = window.TrainPositionEstimator.estimateLinePositions(
+          lineId, line, result.rows, odptData.delayInfo, line.operator
+        );
+        if (estimated && estimated.length) {
+          if (!posMap[lineId]) posMap[lineId] = [];
+          var have = {};
+          posMap[lineId].forEach(function(p) { if (p && _positionIdentity(p)) have[_positionIdentity(p)] = true; });
+          estimated.forEach(function(p) {
+            var id = _positionIdentity(p);
+            if (id && !have[id] && mayUseTimetableEstimate(lineId, p)) {
+              p.positionSource = "supabase-train-run";
+              posMap[lineId].push(p);
+              have[id] = true;
+            }
+          });
+        }
+      }
+      try {
+        var targets = _expandDirtyLines([lineId], allLines);
+        if (typeof doEstimation === "function") doEstimation(targets);
+        fuseDirty([lineId]);
+      } catch(e) { console.debug("[DataFusion] ensureTimetable->dirty refresh error:", e.message); }
+      return true;
+    }).catch(function(e) {
+      console.debug("[DataFusion] Supabase timetable fallback:", lineId, e.message);
+      return ensureManualTimetable(lineId);
+    });
+  }
+
   function ensureManualTimetable(lineId) {
     return new Promise(function(resolve, reject) {
       try {
@@ -1734,6 +1779,7 @@
     saveToCache: saveToCache, refresh: function() { return fuseAll(); },
     // v4.3.528: 手动时刻表按需加载（ODPT 无时刻表的 JR 地方线，打开线路时才注入该线文件）
     ensureManualTimetable: ensureManualTimetable,
+    ensureTimetable: ensureTimetable,
     // Through-service runtime provider: direct canonical neighbours only.
     getDirectThroughLines: function(lineId) {
       return (window.ThroughService && window.ThroughService.getDirectThroughLines) ? window.ThroughService.getDirectThroughLines(lineId) : [];
