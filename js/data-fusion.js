@@ -457,8 +457,7 @@
       // Direct canonical through neighbours are independent of shared-track
       // membership.  The old nesting made this path unreachable for lines with
       // no SharedTrackPairs entry (including Keiyo).
-      var _throughLines = (window.ThroughService && window.ThroughService.getDirectThroughLines) ?
-        (window.ThroughService.getDirectThroughLines(lineId) || []) : [];
+      var _throughLines = (window.UNIFIED_LINES && window.UNIFIED_LINES[lineId] && Array.isArray(window.UNIFIED_LINES[lineId].throughServices)) ? window.UNIFIED_LINES[lineId].throughServices.slice() : [];
       for (var _tl = 0; _tl < _throughLines.length; _tl++) {
         var _tlLine = _throughLines[_tl];
         var _tlPositions = odptData.realtimePositions[_tlLine] || [];
@@ -498,7 +497,7 @@
         if (window.SharedTrackPairs && window.SharedTrackPairs.getSharedLines) deps = deps.concat(window.SharedTrackPairs.getSharedLines(id) || []);
       } catch(e) {}
       try {
-        if (window.ThroughService && window.ThroughService.getDirectThroughLines) deps = deps.concat(window.ThroughService.getDirectThroughLines(id) || []);
+        if (line && Array.isArray(line.throughServices)) deps = deps.concat(line.throughServices);
       } catch(e) {}
       if (line.branchOf) deps.push(line.branchOf);
       if (line.branches) deps = deps.concat(line.branches);
@@ -956,8 +955,8 @@
             positionData.trainOperator = trainOperator.replace('odpt.Operator:', '') || '';
             var isRinkaiTrain = (trainOperator === 'odpt.Operator:TWR' || trainOperator === 'TWR');
             // 临海线（TWR）列车开到了 JR 区间（Saikyo/Kawagoe）→ 用 Rinkai 车型
-            // 通过 ThroughService 判断当前 lid 是否与 Rinkai 直通
-            var _tsRinkaiPartner = (window.ThroughService && window.ThroughService.getDirectThroughLines) ? (window.ThroughService.getDirectThroughLines(lid) || []) : [];
+            // Read canonical line archive to determine whether lid serves Rinkai directly
+            var _tsRinkaiPartner = (window.UNIFIED_LINES && window.UNIFIED_LINES[lid] && Array.isArray(window.UNIFIED_LINES[lid].throughServices)) ? window.UNIFIED_LINES[lid].throughServices : [];
             if (isRinkaiTrain && _tsRinkaiPartner.indexOf('Rinkai') >= 0) {
               positionData.isRinkaiThrough = true;
             }
@@ -1465,8 +1464,7 @@
         // Timetable prefetch is one-hop only. Do not turn graph reachability
         // into an assumed train chain; further segments are loaded when their
         // own evidence requires them.
-        var throughLines = (window.ThroughService && window.ThroughService.getDirectThroughLines) ?
-          (window.ThroughService.getDirectThroughLines(l.lineId) || []) : [];
+        var throughLines = (allLines && allLines[l.lineId] && Array.isArray(allLines[l.lineId].throughServices)) ? allLines[l.lineId].throughServices.slice() : [];
         throughLines.forEach(function(tlid) {
           if (!seenLineIds[tlid]) {
             var throughLine = allLines && allLines[tlid];
@@ -1749,9 +1747,10 @@
     // v4.3.528: 手动时刻表按需加载（ODPT 无时刻表的 JR 地方线，打开线路时才注入该线文件）
     ensureManualTimetable: ensureManualTimetable,
     ensureTimetable: ensureTimetable,
-    // Through-service runtime provider: direct canonical neighbours only.
+    // Direct canonical through-service neighbours.
     getDirectThroughLines: function(lineId) {
-      return (window.ThroughService && window.ThroughService.getDirectThroughLines) ? window.ThroughService.getDirectThroughLines(lineId) : [];
+      var line = window.UNIFIED_LINES && window.UNIFIED_LINES[lineId];
+      return line && Array.isArray(line.throughServices) ? line.throughServices.slice() : [];
     },
     updateOdptData: function(delayData) {
       if (delayData && typeof delayData === 'object') {
