@@ -1576,29 +1576,8 @@
               console.debug("[DataFusion] auto-ensure manual skip:", h, e.message);
             });
           }
-          // v4.3.6xx: 后台预加载常用线路的手动时刻表（Warm-up）
-          // 用户大概率会切换的几条线，提前在后台加载，不用等到用户点击才加载
-          if (isTrainsPage && window.DataFusion && window.DataFusion.ensureManualTimetable) {
-            setTimeout(function() {
-              // v4.3.6xx: 后台预加载线路白名单 — 见 runtime-config.js TRAIN_WARMUP_LINES
-              var warmupLines = (window.RuntimeConfig && window.RuntimeConfig.TRAIN_WARMUP_LINES) || ['Yamanote', 'ChuoRapid', 'KeihinTohoku', 'SeibuEn', 'Keikyu', 'Odawara'];
-              var warmupIndex = 0;
-              function warmNext() {
-                if (document.hidden || warmupIndex >= warmupLines.length) return;
-                var lid = warmupLines[warmupIndex++];
-                window.DataFusion.ensureManualTimetable(lid).catch(function(){}).then(function() {
-                  // Spread parse/estimation work across idle slices instead of
-                  // launching all manual scripts in one post-load burst.
-                  if (typeof window.requestIdleCallback === "function") {
-                    window.requestIdleCallback(warmNext, { timeout: 1200 });
-                  } else {
-                    setTimeout(warmNext, 250);
-                  }
-                });
-              }
-              warmNext();
-            }, 2000);  // 2秒后后台开始预加载，不阻塞首屏
-          }
+          // No timetable warm-up here. trains.html activates timetable work only
+          // after the user opens a line; this keeps first-load CPU/network bounded.
         } catch(e) {}
         return;
       }
