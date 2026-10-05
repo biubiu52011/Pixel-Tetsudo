@@ -51,4 +51,10 @@ let sectionCancelled=E.evaluate({text:"只見～小出駅間の下り線で一�
 assert.strictEqual(sectionCancelled.status,"notice");
 let noRangeDirection=E.extractMetadata({text:"下り線（日吉方面行）の列車に遅れが出ています。"});
 assert.strictEqual(noRangeDirection.interval,null);
-console.log("runinfo-evaluator: 34 PASS");
+let halfService=E.extractMetadata({text:"通常の５割程度で運転します。"});
+assert.deepStrictEqual(halfService.serviceLevel,{minPercent:50,maxPercent:50});
+let rangedService=E.extractMetadata({text:"通常の７～８割程度で運転しています。"});
+assert.deepStrictEqual(rangedService.serviceLevel,{minPercent:70,maxPercent:80});
+let noServiceLevel=E.extractMetadata({text:"下り線の一部列車に遅れが出ています。"});
+assert.strictEqual(noServiceLevel.serviceLevel,null);
+console.log("runinfo-evaluator: 37 PASS");
