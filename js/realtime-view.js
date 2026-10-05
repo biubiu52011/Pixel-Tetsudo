@@ -89,11 +89,15 @@
     if (!interval || status === "normal" || status === "no_data") {
       intervalHtml = '<span class="rs-station-text">' + t("status.all_lines") + '</span>';
     } else {
-      var parts = interval.split("\u2192");
-      if (parts.length >= 2) {
-        intervalHtml = '<span class="rs-station-start">' + escapeHtml(tStation(parts[0])) + '</span>'
-          + '<span class="rs-interval-arrow">\u2192</span>'
-          + '<span class="rs-station-end">' + escapeHtml(tStation(parts[1])) + '</span>';
+      var intervalRanges = interval.split("、");
+      var parsedRanges = intervalRanges.map(function (item) { return item.split("\u2192"); });
+      var allStationRanges = parsedRanges.length > 0 && parsedRanges.every(function (parts) { return parts.length === 2; });
+      if (allStationRanges) {
+        intervalHtml = parsedRanges.map(function (parts) {
+          return '<span class="rs-station-start">' + escapeHtml(tStation(parts[0])) + '</span>'
+            + '<span class="rs-interval-arrow">\u2192</span>'
+            + '<span class="rs-station-end">' + escapeHtml(tStation(parts[1])) + '</span>';
+        }).join('<span class="rs-interval-separator">、</span>');
       } else {
         var _int = interval;
         if (String(_int).indexOf("\u5168\u7dda") >= 0) {
