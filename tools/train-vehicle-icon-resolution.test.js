@@ -52,7 +52,14 @@ const resolved = context.window.TrainVehicle.resolve({
 assert.strictEqual(resolved.identityStatus, 'EXACT');
 assert.strictEqual(resolved.source, 'timetable');
 assert.strictEqual(resolved.name, 'JR 209系500番台');
-assert.ok(!resolved.iconPath || typeof resolved.iconPath === 'string');
+assert.ok(/JR東日本_209系_500番台_京葉線\.png$/.test(resolved.iconPath), resolved.iconPath);
+
+assert.ok(/相模鉄道_12000系_YOKOHAMA_NAVYBLUE\.png$/.test(
+  context.window.TrainIcons.resolveVehicleArtwork('相鉄12000系') || ''
+));
+assert.ok(/小田急電鉄_5000形_標準色\.png$/.test(
+  context.window.TrainIcons.resolveVehicleArtwork('小田急5000形') || ''
+));
 
 const unknown = context.window.TrainVehicle.resolve({
   lineId: 'Keiyo', operator: 'JR-East', trainNumber: '19'
