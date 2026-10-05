@@ -17,7 +17,11 @@ assert.ok(!/if \(_positionsChanged\) renderList\(listEl\)/.test(trains),
   "trains overview must not rebuild on live position-only changes");
 assert.ok(!/var ids = Object\.keys\(lines\);[\s\S]{0,1200}realtimePositions/.test(trains),
   "trains subscriber must not hash positions across every line");
-console.log("performance-lifecycle: 5 PASS");
+assert.ok(/_activationPromise\.then\(function\(\)[\s\S]{0,300}DataFusion\.ensureTimetable\(lineId\)/.test(trains),
+  "timetable fallback must wait for on-demand ODPT activation");
+assert.ok(!/activateRealtimeLines\(_requestedLines\)[\s\S]{0,900}DataFusion\.ensureTimetable\(lineId\)\.then/.test(trains),
+  "line open must not launch ODPT activation and timetable fallback independently");
+console.log("performance-lifecycle: 7 PASS");
 
 
 // Busy-station regression: official realtime rows must not be capped by station capacity.
