@@ -53,7 +53,8 @@ function getLinesData() {
       branchOf: l.branchOf || null,
       isSixShapedLoop: l.isSixShapedLoop === true,
       isDoubleColumnLoop: l.isDoubleColumnLoop === true,
-      loopJunction: l.loopJunction || null
+      loopJunction: l.loopJunction || null,
+      presentation: l.presentation || null
     };
   }
   return lines;
