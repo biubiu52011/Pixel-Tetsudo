@@ -13915,6 +13915,38 @@
     "Shin-Tsunashima": {
       "lat": 35.536,
       "lng": 139.6347
+    },
+    "Higashi-Kaijin": {
+      "lat": 35.7058,
+      "lng": 139.9795
+    },
+    "Hasama": {
+      "lat": 35.7135,
+      "lng": 140.0226
+    },
+    "Kita-Narashino": {
+      "lat": 35.7212,
+      "lng": 140.0422
+    },
+    "Funabashi-Nichidaimae": {
+      "lat": 35.7278,
+      "lng": 140.059
+    },
+    "Yachiyo-Midorigaoka": {
+      "lat": 35.7287,
+      "lng": 140.0733
+    },
+    "Yachiyo-Chuo": {
+      "lat": 35.7277,
+      "lng": 140.1038
+    },
+    "Murakami-Chiba": {
+      "lat": 35.7237,
+      "lng": 140.1184
+    },
+    "Toyo-Katsutadai": {
+      "lat": 35.7153,
+      "lng": 140.1261
     }
   },
   "lines": {
@@ -19788,7 +19820,8 @@
         2
       ],
       "throughServices": [
-        "ChuoSobuLocal"
+        "ChuoSobuLocal",
+        "ToyoRapid"
       ],
       "transferStations": [
         {
@@ -19910,6 +19943,12 @@
           "lineId": "ChuoSobuLocal",
           "type": "in",
           "note": ""
+        },
+        {
+          "station": "Nishi-Funabashi",
+          "lineId": "ToyoRapid",
+          "type": "in",
+          "note": ""
         }
       ],
       "nameZh": "东西线",
@@ -19936,6 +19975,16 @@
           ],
           "evidence": {
             "source": "Tokyo Metro through-service network + canonical handover station",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "ToyoRapid",
+          "handoverStations": [
+            "Nishi-Funabashi"
+          ],
+          "evidence": {
+            "source": "Tokyo Metro current Tozai timetable: trains continue from Nishi-Funabashi onto Toyo Rapid Railway to Toyo-Katsutadai",
             "confidence": "HIGH"
           }
         }
@@ -44910,6 +44959,75 @@
           ],
           "evidence": {
             "source": "JR East Sotetsu Line through-service timetable: Hazawa-Yokohama-Kokudai - Musashi-Kosugi - Nishi-Oi - Osaki - Saikyo Line",
+            "confidence": "HIGH"
+          }
+        }
+      ]
+    },
+    "ToyoRapid": {
+      "name": "東葉高速線",
+      "nameJa": "東葉高速線",
+      "nameZh": "东叶高速线",
+      "nameEn": "Toyo Rapid Line",
+      "nameKo": "도요 고속선",
+      "operator": "ToyoRapid",
+      "color": "#3fb5e5",
+      "code": "TR",
+      "stations": [
+        "Nishi-Funabashi",
+        "Higashi-Kaijin",
+        "Hasama",
+        "Kita-Narashino",
+        "Funabashi-Nichidaimae",
+        "Yachiyo-Midorigaoka",
+        "Yachiyo-Chuo",
+        "Murakami-Chiba",
+        "Toyo-Katsutadai"
+      ],
+      "throughServices": [
+        "Tozai"
+      ],
+      "transferStations": [
+        {
+          "station": "Nishi-Funabashi",
+          "lineId": "Tozai",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Nishi-Funabashi",
+          "lineId": "ChuoSobuLocal",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Nishi-Funabashi",
+          "lineId": "Musashino",
+          "type": "in",
+          "note": ""
+        }
+      ],
+      "presentation": {
+        "code": "TR",
+        "nameJa": "東葉高速線",
+        "nameZh": "东叶高速线",
+        "nameEn": "Toyo Rapid Line",
+        "nameKo": "도요 고속선",
+        "color": "#3fb5e5",
+        "order": 1,
+        "lineIds": [
+          "ToyoRapid"
+        ],
+        "operatorGroup": "TOYO_RAPID"
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "Tozai",
+          "handoverStations": [
+            "Nishi-Funabashi"
+          ],
+          "evidence": {
+            "source": "Tokyo Metro current Tozai timetable: trains continue from Nishi-Funabashi onto Toyo Rapid Railway to Toyo-Katsutadai",
             "confidence": "HIGH"
           }
         }
