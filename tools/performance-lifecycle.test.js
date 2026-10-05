@@ -55,3 +55,14 @@ assert.ok(/"odpt:destinationStation":run\.destination_station\?\[run\.destinatio
 assert.ok(/rail_direction,train_type,destination_station/.test(trainRunsFnSrc),
   'train-runs Edge Function must expose canonical operating fields');
 console.log('train-run-operating-fields: 4 PASS');
+
+const trainRunsReadThroughSrc = fs.readFileSync('supabase/functions/train-runs/index.ts','utf8');
+assert.ok(/ODPT_CHALLENGE_CONSUMER_KEY/.test(trainRunsReadThroughSrc) && /ODPT_CONSUMER_KEY/.test(trainRunsReadThroughSrc),
+  'TrainRun read-through must use server-side ODPT secrets only');
+assert.ok(/part\.length >= 1000/.test(trainRunsReadThroughSrc) && /ODPT_TRUNCATED/.test(trainRunsReadThroughSrc),
+  'truncated ODPT timetable responses must never be persisted as complete cache');
+assert.ok(/persistOdptRows/.test(trainRunsReadThroughSrc) && /train_run_stops/.test(trainRunsReadThroughSrc),
+  'read-through cache must persist normalized runs and stops through the existing tables');
+assert.ok(!/req\.method === "POST"/.test(trainRunsReadThroughSrc),
+  'public train-runs endpoint must remain GET-only and must not accept browser cache writes');
+console.log('train-run-read-through: 4 PASS');
