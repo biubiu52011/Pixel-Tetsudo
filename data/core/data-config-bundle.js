@@ -1801,7 +1801,6 @@ window.LineServiceRelations = [
   { lineA: "Shinjuku", lineB: "KeioMain", relation: "SERVICE_BOUNDARY", direction: "BIDIRECTIONAL", handoverStations: ["Shinjuku"], evidence: { source: "ThroughService direct relation + join station", confidence: "HIGH" } },
   { lineA: "Saikyo", lineB: "Kawagoe", relation: "SERVICE_BOUNDARY", direction: "BIDIRECTIONAL", handoverStations: ["Omiya"], evidence: { source: "LOS JA stationLines shared 1", confidence: "HIGH" } },
   { lineA: "Kawagoe", lineB: "KawagoeWest", relation: "SERVICE_BOUNDARY", direction: "BIDIRECTIONAL", handoverStations: ["Kawagoe"], evidence: { source: "川越線運転系統 川越駅以東/以西 直通", confidence: "HIGH" } },
-  { lineA: "Marunouchi", lineB: "MarunouchiBranch", relation: "PHYSICAL_CONNECT", direction: "BIDIRECTIONAL", handoverStations: ["Nakano-Sakaue"], evidence: { source: "stationLines shared 1 (Nakano-Sakaue)", confidence: "HIGH" } },
   { lineA: "Ikebukuro", lineB: "SeibuToshima", relation: "PHYSICAL_CONNECT", direction: "BIDIRECTIONAL", handoverStations: ["Nerima"], evidence: { source: "LOS SI stationLines shared 1", confidence: "MEDIUM" } },
   { lineA: "SuigunBranch", lineB: "Suigun", relation: "BRANCH_OF", direction: "BIDIRECTIONAL", handoverStations: [""], evidence: { source: "branchOf stationLines shared 1", confidence: "HIGH" } },
   { lineA: "Ome", lineB: "ChuoRapid", relation: "SERVICE_BOUNDARY", direction: "BIDIRECTIONAL", handoverStations: ["Tachikawa"], evidence: { source: "JR East timetable shows continuous Ome-Tokyo trains across Tachikawa", confidence: "HIGH" } },
