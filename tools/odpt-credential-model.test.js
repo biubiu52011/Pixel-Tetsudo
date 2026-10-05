@@ -30,3 +30,13 @@ assert(/ODPT_REALTIME_AUDIT\.Yamanote/.test(src),
 assert(!/auditRealtimeLine[\s\S]{0,2500}station.*overlap/i.test(src),
   'line realtime audit must not guess by station overlap');
 console.log('Yamanote realtime activation contract: 4 PASS');
+
+assert(/YamanoteHistory/.test(src), 'Yamanote realtime audit must retain rolling history');
+assert(/history\.length > 10/.test(src), 'Yamanote realtime history must be bounded');
+assert(/assessRealtimeFullCandidate:\s*function/.test(src), 'ODPT client must expose FULL-candidate assessment');
+assert(/usable\.length < minSamples/.test(src), 'FULL candidate must require multiple usable samples');
+assert(/s\.locationCoverage !== 1/.test(src), 'FULL candidate must require complete location fields');
+assert(/s\.trainNumberCoverage !== 1/.test(src), 'FULL candidate must require complete train-number fields');
+assert(/Object\.keys\(s\.directionCounts \|\| \{\}\)\.length < 2/.test(src),
+  'Yamanote FULL candidate must observe both direction identities');
+console.log('Yamanote realtime coverage qualification: 7 PASS');
