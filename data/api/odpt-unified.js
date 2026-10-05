@@ -812,13 +812,28 @@
                 var actual = parseRailwayIdentity(t);
                 return !!(actual && actual.key === expected.key);
             });
+            var directionCounts = {};
+            var locatedCount = 0;
+            var numberedCount = 0;
+            matched.forEach(function(t) {
+                var dir = t["odpt:railDirection"] || "";
+                if (dir) directionCounts[dir] = (directionCounts[dir] || 0) + 1;
+                if (t["odpt:fromStation"] || t["odpt:toStation"]) locatedCount++;
+                if (t["odpt:trainNumber"]) numberedCount++;
+            });
             return {
                 lineId: lineId,
                 operator: operator,
                 expectedIdentity: expected.odptRailway,
+                observedAt: new Date().toISOString(),
                 ok: matched.length > 0,
                 rowCount: data.length,
                 matchedCount: matched.length,
+                numberedCount: numberedCount,
+                locatedCount: locatedCount,
+                locationCoverage: matched.length ? locatedCount / matched.length : 0,
+                trainNumberCoverage: matched.length ? numberedCount / matched.length : 0,
+                directionCounts: directionCounts,
                 matchedRows: matched.map(function(t) {
                     return {
                         trainNumber: t["odpt:trainNumber"] || "",
@@ -1509,7 +1524,12 @@
                         // by station overlap or line length.
                         if (op === "JR-East" && LINE_TO_OPERATOR.Yamanote === op && _activeRealtimeOperators[op] && window.ODPTClient && window.ODPTClient.auditRealtimeLine) {
                             window.ODPT_REALTIME_AUDIT = window.ODPT_REALTIME_AUDIT || {};
-                            window.ODPT_REALTIME_AUDIT.Yamanote = window.ODPTClient.auditRealtimeLine("Yamanote", window.ODPT_TRAIN_POSITIONS[op]);
+                            var audit = window.ODPTClient.auditRealtimeLine("Yamanote", window.ODPT_TRAIN_POSITIONS[op]);
+                            var history = window.ODPT_REALTIME_AUDIT.YamanoteHistory || [];
+                            history.push(audit);
+                            if (history.length > 10) history.shift();
+                            window.ODPT_REALTIME_AUDIT.Yamanote = audit;
+                            window.ODPT_REALTIME_AUDIT.YamanoteHistory = history;
                         }
                     }).catch(function(e) {
                         window.ODPT_TRAIN_POSITIONS[op] = null;
