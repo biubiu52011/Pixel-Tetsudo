@@ -15077,6 +15077,7 @@ window.RAILWAY_DATA = {
         2
       ],
       "throughServices": [
+        "ChuoMain",
         "Ome"
       ],
       "transferStations": [
@@ -19203,7 +19204,8 @@ window.RAILWAY_DATA = {
         2
       ],
       "throughServices": [
-        "Tojo"
+        "Tojo",
+        "Yurakucho_Seibu"
       ],
       "transferStations": [
         {
@@ -20970,7 +20972,8 @@ window.RAILWAY_DATA = {
         2
       ],
       "throughServices": [
-        "TobuSkytree"
+        "TobuSkytree",
+        "TokyuDenEn"
       ],
       "transferStations": [
         {
@@ -21416,7 +21419,8 @@ window.RAILWAY_DATA = {
       ],
       "throughServices": [
         "Tojo",
-        "TokyuToyoko"
+        "TokyuToyoko",
+        "Yurakucho_Seibu"
       ],
       "transferStations": [
         {
@@ -23551,7 +23555,9 @@ window.RAILWAY_DATA = {
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "Hanzomon"
+      ],
       "transferStations": [
         {
           "station": "Shibuya",
@@ -26686,7 +26692,9 @@ window.RAILWAY_DATA = {
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "Yurakucho_Seibu"
+      ],
       "transferStations": [
         {
           "station": "Ikebukuro",
@@ -31723,6 +31731,7 @@ window.RAILWAY_DATA = {
         2
       ],
       "throughServices": [
+        "ChuoMain",
         "Shinetsu"
       ],
       "transferStations": [
@@ -33756,7 +33765,11 @@ window.RAILWAY_DATA = {
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "Fukutoshin",
+        "Ikebukuro",
+        "Yurakucho"
+      ],
       "transferStations": [
         {
           "station": "Nerima",
@@ -35752,7 +35765,11 @@ window.RAILWAY_DATA = {
           "ChuoTatsuno"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "throughServices": [
+        "ChuoRapid",
+        "Shinonoi"
+      ]
     },
     "TokaidoMain": {
       "nameJa": "東海道本線",
