@@ -22566,7 +22566,8 @@ window.RAILWAY_DATA = {
         2
       ],
       "throughServices": [
-        "TobuNikko"
+        "TobuNikko",
+        "TobuSkytree"
       ],
       "transferStations": [
         {
@@ -22642,6 +22643,16 @@ window.RAILWAY_DATA = {
           ],
           "evidence": {
             "source": "Tobu Railway network/timetable: direct trains continue from the Skytree/Isesaki corridor onto the Nikko Line at Tobu-Dobutsu-Koen",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "TobuSkytree",
+          "handoverStations": [
+            "Tobu-Dobutsu-Koen"
+          ],
+          "evidence": {
+            "source": "Tobu Skytree / Isesaki adjacent through-service join",
             "confidence": "HIGH"
           }
         }
@@ -24220,7 +24231,8 @@ window.RAILWAY_DATA = {
         2
       ],
       "throughServices": [
-        "Hanzomon"
+        "Hanzomon",
+        "TokyuOimachi"
       ],
       "transferStations": [
         {
@@ -24326,6 +24338,16 @@ window.RAILWAY_DATA = {
           ],
           "evidence": {
             "source": "ThroughService direct relation + join station",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "TokyuOimachi",
+          "handoverStations": [
+            "Futako-Tamagawa"
+          ],
+          "evidence": {
+            "source": "Tokyu Oimachi / Den-en-toshi adjacent through-service join",
             "confidence": "HIGH"
           }
         }
@@ -30545,7 +30567,9 @@ window.RAILWAY_DATA = {
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "Odawara"
+      ],
       "transferStations": [
         {
           "station": "Odakyu-Ei-Zan",
@@ -30581,7 +30605,19 @@ window.RAILWAY_DATA = {
           "OdakyuTama"
         ],
         "operatorGroup": "ODAKYU"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "Odawara",
+          "handoverStations": [
+            "Shin-Yurigaoka"
+          ],
+          "evidence": {
+            "source": "Odakyu Odawara / Tama Line adjacent through-service join",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "Ofunato": {
       "name": "烏山線",
@@ -34952,7 +34988,8 @@ window.RAILWAY_DATA = {
         2
       ],
       "throughServices": [
-        "Chiyoda"
+        "Chiyoda",
+        "OdakyuTama"
       ],
       "transferStations": [
         {
@@ -35115,6 +35152,16 @@ window.RAILWAY_DATA = {
           ],
           "evidence": {
             "source": "ThroughService direct relation + join station",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "OdakyuTama",
+          "handoverStations": [
+            "Shin-Yurigaoka"
+          ],
+          "evidence": {
+            "source": "Odakyu Odawara / Tama Line adjacent through-service join",
             "confidence": "HIGH"
           }
         }
@@ -35381,7 +35428,8 @@ window.RAILWAY_DATA = {
       ],
       "throughServices": [
         "Hanzomon",
-        "Hibiya"
+        "Hibiya",
+        "TobuIsesaki"
       ],
       "transferStations": [
         {
@@ -35515,6 +35563,16 @@ window.RAILWAY_DATA = {
           ],
           "evidence": {
             "source": "ThroughService direct relation + join station",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "TobuIsesaki",
+          "handoverStations": [
+            "Tobu-Dobutsu-Koen"
+          ],
+          "evidence": {
+            "source": "Tobu Skytree / Isesaki adjacent through-service join",
             "confidence": "HIGH"
           }
         }
@@ -35746,7 +35804,22 @@ window.RAILWAY_DATA = {
           "TokyuOimachi"
         ],
         "operatorGroup": "TOKYU"
-      }
+      },
+      "throughServices": [
+        "TokyuDenEn"
+      ],
+      "serviceBoundaries": [
+        {
+          "lineId": "TokyuDenEn",
+          "handoverStations": [
+            "Futako-Tamagawa"
+          ],
+          "evidence": {
+            "source": "Tokyu Oimachi / Den-en-toshi adjacent through-service join",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "TokyuMeguro": {
       "nameJa": "東急目黒線",
