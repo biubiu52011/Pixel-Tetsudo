@@ -36,7 +36,19 @@ Deno.serve(async (req: Request) => {
     .select("id,service_date,calendar_type,operator,network_key,line_id,train_number,operation_code,rail_direction,train_type,destination_station")
     .eq("line_id", lineId).eq("service_date", serviceDate).order("train_number");
   if (error) return json({ ok: false, error: "DB_QUERY_FAILED" }, 500);
-  if (!runs?.length) return json({ ok: true, cache: "MISS", complete: false, line_id: lineId, service_date: serviceDate, runs: [] });
+  if (!runs?.length) {
+    const { data: source } = await db.from("railway_lines")
+      .select("odpt_operator,odpt_railway,odpt_base_url").eq("id", lineId).maybeSingle();
+    const sourceKey = source?.odpt_base_url?.includes("api-challenge")
+      ? Deno.env.get("ODPT_CHALLENGE_CONSUMER_KEY")
+      : Deno.env.get("ODPT_CONSUMER_KEY");
+    return json({
+      ok: true, cache: "MISS", complete: false, line_id: lineId, service_date: serviceDate,
+      source: !source?.odpt_operator || !source?.odpt_railway || !source?.odpt_base_url
+        ? "UNMAPPED" : (sourceKey ? "READY" : "UNCONFIGURED"),
+      runs: []
+    });
+  }
 
   const { data: stops, error: stopError } = await db
     .from("train_run_stops")
