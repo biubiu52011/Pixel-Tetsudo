@@ -40,7 +40,8 @@
       if (formationId) {
         var formationIdentity = name;
         if (!/編成/.test(formationIdentity)) {
-          formationIdentity = name + '（' + String(formationId).trim() + '編成）';
+          var fid = String(formationId).trim();
+          formationIdentity = name + '（' + fid + (/(?:F|編成)$/i.test(fid) ? '' : '編成') + '）';
         }
         return window.TrainIcons.resolveVehicleArtwork(formationIdentity, serviceDate) || '';
       }
