@@ -111,4 +111,10 @@ let bothDelay=E.extractMetadata({text:"千葉駅～成田駅間の上下線で�
 assert.strictEqual(bothDelay.interval,"千葉駅→成田駅");
 assert.strictEqual(bothDelay.direction,"both");
 assert.strictEqual(bothDelay.effect,"delay");
-console.log("runinfo-evaluator: 75 PASS");
+let upSuspensionState=E.evaluate({messageKind:"realtime",text:"上り線で運転を見合わせています。"});
+assert.strictEqual(upSuspensionState.status,"notice");
+assert.strictEqual(upSuspensionState.symbol,"△");
+let outerSuspensionState=E.evaluate({messageKind:"realtime",text:"外回りで運転を見合わせています。"});
+assert.strictEqual(outerSuspensionState.status,"notice");
+assert.strictEqual(outerSuspensionState.symbol,"△");
+console.log("runinfo-evaluator: 79 PASS");
