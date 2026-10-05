@@ -161,7 +161,150 @@
     }
     // 合并连续线路的区间（前一条终点 == 后一条起点）
     var chipsHtml = "";
-    // Prefer canonical passenger-facing subtitle stored on the line record.
+    // 优先使用 LOS 系统的 subName（如 上野東京ライン 的 "東海道線～高崎線・宇都宮線 常磐線～品川"）
+    var _sysSubName = "";
+    if (mode === "trains") {
+      var _lang2 = window.currentLang || 'ja';
+      var _snKey2 = "subName" + (_lang2 === 'ja' ? 'Ja' : _lang2 === 'zh' ? 'Zh' : _lang2 === 'en' ? 'En' : 'Ko');
+      if (sys[_snKey2]) {
+        _sysSubName = sys[_snKey2];
+      }
+    }
+    if (_sysSubName) {
+      chipsHtml = '<span class="rs-sys-chip">' + escapeHtml(_sysSubName) + '</span>';
+    } else if (mode === "trains" && intervalSegments.length === 0 && allLoop) {
+      // Whole card is loop lines only: show 環状 instead of a meaningless
+      // first↔last interval (Yamanote/Oedo LOS cards).
+      chipsHtml = '<span class="rs-sys-chip">' + escapeHtml(t('line.loop')) + '</span>';
+    } else if (mode === "trains" && intervalSegments.length > 0) {
+      var merged = [intervalSegments[0]];
+      for (var si = 1; si < intervalSegments.length; si++) {
+        var prev = merged[merged.length - 1];
+        var curr = intervalSegments[si];
+        if (prev.to === curr.from) {
+          // 连续，合并：起点保持，终点更新，中间站记录
+          prev.to = curr.to;
+          prev.mid = (prev.mid ? prev.mid + "↔" : "") + curr.from;
+        } else {
+          merged.push(curr);
+        }
+      }
+      for (var mi = 0; mi < merged.length; mi++) {
+        var seg = merged[mi];
+        var sFromName = (window.RailwayDB && window.RailwayDB.resolveStationName) ? window.RailwayDB.resolveStationName(seg.from, lang) || seg.from : seg.from;
+        var sToName = (window.RailwayDB && window.RailwayDB.resolveStationName) ? window.RailwayDB.resolveStationName(seg.to, lang) || seg.to : seg.to;
+        var midText = "";
+        if (seg.mid) {
+          var midStations = seg.mid.split("↔");
+          var midNames = [];
+          for (var msi = 0; msi < midStations.length; msi++) {
+            var midName = (window.RailwayDB && window.RailwayDB.resolveStationName) ? window.RailwayDB.resolveStationName(midStations[msi], lang) || midStations[msi] : midStations[msi];
+            midNames.push(escapeHtml(midName));
+          }
+          midText = midNames.join("↔") + "↔";
+        }
+        var intervalText = escapeHtml(sFromName) + "↔" + midText + escapeHtml(sToName);
+        chipsHtml += '<span class="rs-sys-chip">' + intervalText + '</span>';
+      }
+    }
+    var worstS = getStatus(worst);
+    var statusHtml = "";
+    if (mode === "realtime") {
+      statusHtml = '<span class="rs-status-icon ' + worstS.cls + '">' + worstS.icon + '</span>';
+    }
+
+    // Icon: gallery image when the system has one (build-time verified to exist),
+    // otherwise fall back to the 記号 badge.
+    var iconHtml = "";
+    if (sys.icon) {
+      if (String(sys.icon).indexOf("JRグループ.png") !== -1) {
+        iconHtml = '<div class="rs-line-icon-fallback"><img src="' + escapeHtml(sys.icon) + '" alt="JR"></div>';
+      } else {
+        iconHtml = '<img class="rs-line-icon" src="' + escapeHtml(sys.icon) + '" alt="" loading="lazy">';
+      }
+    } else {
+      var _firstLine = memberIds.length > 0 ? (linesObj[memberIds[0]] || {}) : {};
+      var _sysOp = _firstLine.operator || sys.operator || "";
+      if (window.TransitConstants && window.TransitConstants.isJRERoute && window.TransitConstants.isJRERoute(_firstLine)) {
+        iconHtml = '<div class="rs-line-icon-fallback"><img src="../images/鉄道/JR東日本/JRグループ.png" alt="JR"></div>';
+      } else {
+        iconHtml = '<div class="rs-system-badge">' + escapeHtml(code || "?") + '</div>';
+      }
+    }
+    var _memberIdentities = [];
+    for (var _mi = 0; _mi < memberIds.length; _mi++) {
+      var _mid = memberIds[_mi];
+      _memberIdentities.push(_mid + "=" + getLineIdentity(linesObj[_mid] || {}, _mid));
+    }
+    return '<div class="rs-line-card rs-system-card" data-line="' + escapeHtml(firstId) + '" data-line-identity="' + escapeHtml(getLineIdentity(linesObj[firstId] || {}, firstId)) + '" data-line-identities="' + escapeHtml(_memberIdentities.join("|")) + '" data-system="' + escapeHtml(code) + '" data-lines="' + escapeHtml(memberIds.join(",")) + '" data-line-color="' + escapeHtml(color) + '">'
+      + iconHtml
+      + '<div class="rs-line-info">'
+      + '<div class="rs-line-name">' + escapeHtml(name) + '</div>'
+      + (mode === "trains" && chipsHtml ? '<div class="rs-system-lines">' + chipsHtml + '</div>' : '')
+      + '</div>'
+      + statusHtml
+      + '</div>';
+  }
+
+  /**
+   * Render a single line card
+   * @param {Object} line - line data object
+   * @param {String} lineId - line identifier
+   * @param {Object} options - { mode: "realtime"|"trains" }
+   */
+  function renderCard(line, lineId, options) {
+    options = options || {};
+    var mode = options.mode || "realtime";
+    var delayInfo = getDelayInfo(line) || {};
+    var status = delayInfo && delayInfo.status ? delayInfo.status : "loading";
+    var interval = delayInfo.interval || "";
+    var lineColor = (line.presentation && line.presentation.color) || line.color || "#00b643";
+    var displayName = (window.RailwayDB && window.RailwayDB.resolveLineName) ? window.RailwayDB.resolveLineName(lineId, window.currentLang) : (line.nameEn || line.name || lineId);
+    // Fallback: RailwayDB unavailable (e.g., test/sandbox) — use raw fields
+
+    // Icon
+    var iconHtml = "";
+    // Operator-generic logos (JRグループ.png etc.) are not line icons;
+    // skip them so per-line cards never borrow another operator's logo.
+    var _losIcon = (line.presentation && line.presentation.icon) || "";
+    var _imgOk = _losIcon || (line.image && !/(グループ|ロゴ|マーク|アイコン|シンボル)/.test(line.image));
+    if (_losIcon) {
+      if (String(_losIcon).indexOf("JRグループ.png") !== -1) {
+        iconHtml = '<div class="rs-line-icon-fallback"><img src="' + escapeHtml(_losIcon) + '" alt="JR"></div>';
+      } else {
+        iconHtml = '<img class="rs-line-icon" src="' + escapeHtml(_losIcon) + '" alt="" loading="lazy">';
+      }
+    } else if (_imgOk) {
+      iconHtml = '<img class="rs-line-icon" src="' + escapeHtml(line.image) + '" alt="" loading="lazy">';
+    } else if (line && window.TransitConstants && window.TransitConstants.isJRERoute && window.TransitConstants.isJRERoute(line)) {
+      iconHtml = '<div class="rs-line-icon-fallback"><img src="../images/鉄道/JR東日本/JRグループ.png" alt="JR"></div>';
+    } else if (line.code) {
+      iconHtml = '<div class="rs-code-badge">' + escapeHtml(line.code) + '</div>';
+    } else if (line.symbol) {
+      iconHtml = '<div class="rs-code-badge">' + escapeHtml(line.symbol) + '</div>';
+    } else {
+      // Canonical presentation code fallback.
+      var osCode = (line.presentation && line.presentation.code) || "";
+      iconHtml = '<div class="rs-code-badge">' + escapeHtml(osCode || line.code || line.symbol || line.id || "?") + '</div>';
+    }
+
+    // Interval text (realtime mode)
+    var intervalHtml = "";
+    if (mode === "realtime" && interval) {
+      intervalHtml = '<div class="rs-line-interval">' + escapeHtml(_localizeInterval(interval)) + '</div>';
+    }
+
+    // Status icon
+    var s = getStatus(status);
+    var statusIconHtml = "";
+    if (mode === "realtime") {
+      statusIconHtml = '<span class="rs-status-icon ' + s.cls + '">' + s.icon + '</span>';
+    }
+    // Route interval subtitle (trains mode)
+    var subHtml = "";
+    if (mode === "trains") {
+      var intervalText = "";
+      // Prefer canonical passenger-facing subtitle stored on the line record.
       var _losSubName = "";
       var _lang = window.currentLang || 'ja';
       var _presentation = line.presentation || {};
