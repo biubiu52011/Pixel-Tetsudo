@@ -30,6 +30,17 @@
     no_odpt:   { icon: "\u25cc", color: "gray"   },
   };
 
+  function _impactLabels() {
+    var lang = window.currentLang || "ja";
+    var all = {
+      ja: { dir:{up:"上り",down:"下り",both:"上下線",inner:"内回り",outer:"外回り"}, effect:{delay:"遅延",suspension:"運転見合わせ",partial_cancellation:"一部運休",through_suspension:"直通運転中止",normal:"平常運転"} },
+      zh: { dir:{up:"上行",down:"下行",both:"上下行",inner:"内环",outer:"外环"}, effect:{delay:"延误",suspension:"暂停运行",partial_cancellation:"部分列车停运",through_suspension:"停止直通运行",normal:"正常运行"} },
+      ko: { dir:{up:"상행",down:"하행",both:"상하행",inner:"내선 순환",outer:"외선 순환"}, effect:{delay:"지연",suspension:"운전 중단",partial_cancellation:"일부 열차 운휴",through_suspension:"직통 운전 중단",normal:"정상 운행"} },
+      en: { dir:{up:"Upbound",down:"Downbound",both:"Both directions",inner:"Inner loop",outer:"Outer loop"}, effect:{delay:"Delayed",suspension:"Service suspended",partial_cancellation:"Some trains cancelled",through_suspension:"Through service suspended",normal:"Normal service"} }
+    };
+    return all[lang] || all.ja;
+  }
+
   function getDelayInfo(line) {
     if (line.delayInfo) return line.delayInfo;
     if (line.status) return { status: line.status, interval: line.interval, cause: line.cause };
@@ -114,8 +125,9 @@
       }
     }
     if (impacts.length > 1 && status !== "normal" && status !== "no_data") {
-      var dirLabel = { up: "上り", down: "下り", both: "上下線", inner: "内回り", outer: "外回り" };
-      var effectLabel = { delay: "遅延", suspension: "運転見合わせ", partial_cancellation: "一部運休", through_suspension: "直通運転中止", normal: "平常運転" };
+      var impactLabels = _impactLabels();
+      var dirLabel = impactLabels.dir;
+      var effectLabel = impactLabels.effect;
       intervalHtml = impacts.map(function(x) {
         var scope = x.interval || dirLabel[x.direction] || "";
         if (x.interval && x.direction) scope += "（" + (dirLabel[x.direction] || x.direction) + "）";
@@ -228,8 +240,9 @@
         if (resolvedStatus !== "normal" && refreshedImpacts.length > 1) {
           var refreshedIntervalEl = modal.querySelector(".rs-interval-stations");
           if (refreshedIntervalEl) {
-            var dl = { up: "上り", down: "下り", both: "上下線", inner: "内回り", outer: "外回り" };
-            var el = { delay: "遅延", suspension: "運転見合わせ", partial_cancellation: "一部運休", through_suspension: "直通運転中止", normal: "平常運転" };
+            var refreshedLabels = _impactLabels();
+            var dl = refreshedLabels.dir;
+            var el = refreshedLabels.effect;
             refreshedIntervalEl.innerHTML = refreshedImpacts.map(function(x) {
               var scope = x.interval || dl[x.direction] || "";
               if (x.interval && x.direction) scope += "（" + (dl[x.direction] || x.direction) + "）";
