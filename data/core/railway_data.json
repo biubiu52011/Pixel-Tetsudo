@@ -13947,6 +13947,30 @@
     "Toyo-Katsutadai": {
       "lat": 35.7153,
       "lng": 140.1261
+    },
+    "Kawaguchi-Motogo": {
+      "lat": 35.8008,
+      "lng": 139.7291
+    },
+    "Minami-Hatogaya": {
+      "lat": 35.8168,
+      "lng": 139.7369
+    },
+    "Hatogaya": {
+      "lat": 35.8302,
+      "lng": 139.7362
+    },
+    "Araijuku": {
+      "lat": 35.8425,
+      "lng": 139.738
+    },
+    "Tozuka-Angyo": {
+      "lat": 35.8586,
+      "lng": 139.7535
+    },
+    "Urawa-Misono": {
+      "lat": 35.8937,
+      "lng": 139.7277
     }
   },
   "lines": {
@@ -21668,7 +21692,8 @@
         2
       ],
       "throughServices": [
-        "TokyuMeguro"
+        "TokyuMeguro",
+        "SaitamaRapid"
       ],
       "transferStations": [
         {
@@ -21796,6 +21821,12 @@
           "lineId": "Oedo",
           "toStation": "Kasuga",
           "note": "春日"
+        },
+        {
+          "station": "Akabane-Iwabuchi",
+          "lineId": "SaitamaRapid",
+          "type": "in",
+          "note": ""
         }
       ],
       "nameZh": "南北线",
@@ -21822,6 +21853,16 @@
           ],
           "evidence": {
             "source": "ThroughService direct relation + join station",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "SaitamaRapid",
+          "handoverStations": [
+            "Akabane-Iwabuchi"
+          ],
+          "evidence": {
+            "source": "Saitama Rapid Railway official line information + Tokyo Metro shared Akabane-Iwabuchi through-service connection",
             "confidence": "HIGH"
           }
         }
@@ -45028,6 +45069,68 @@
           ],
           "evidence": {
             "source": "Tokyo Metro current Tozai timetable: trains continue from Nishi-Funabashi onto Toyo Rapid Railway to Toyo-Katsutadai",
+            "confidence": "HIGH"
+          }
+        }
+      ]
+    },
+    "SaitamaRapid": {
+      "name": "埼玉高速鉄道線",
+      "nameJa": "埼玉高速鉄道線（埼玉スタジアム線）",
+      "nameZh": "埼玉高速铁道线（埼玉体育场线）",
+      "nameEn": "Saitama Rapid Railway Line",
+      "nameKo": "사이타마 고속철도선",
+      "operator": "SaitamaRapidRailway",
+      "color": "#345caa",
+      "code": "SR",
+      "stations": [
+        "Akabane-Iwabuchi",
+        "Kawaguchi-Motogo",
+        "Minami-Hatogaya",
+        "Hatogaya",
+        "Araijuku",
+        "Tozuka-Angyo",
+        "Higashi-Kawaguchi",
+        "Urawa-Misono"
+      ],
+      "throughServices": [
+        "Namboku"
+      ],
+      "transferStations": [
+        {
+          "station": "Akabane-Iwabuchi",
+          "lineId": "Namboku",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Higashi-Kawaguchi",
+          "lineId": "Musashino",
+          "type": "in",
+          "note": ""
+        }
+      ],
+      "presentation": {
+        "code": "SR",
+        "nameJa": "埼玉高速鉄道線",
+        "nameZh": "埼玉高速铁道线",
+        "nameEn": "Saitama Rapid Railway Line",
+        "nameKo": "사이타마 고속철도선",
+        "color": "#345caa",
+        "order": 1,
+        "lineIds": [
+          "SaitamaRapid"
+        ],
+        "operatorGroup": "SAITAMA_RAPID_RAILWAY"
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "Namboku",
+          "handoverStations": [
+            "Akabane-Iwabuchi"
+          ],
+          "evidence": {
+            "source": "Saitama Rapid Railway official line information + Tokyo Metro shared Akabane-Iwabuchi through-service connection",
             "confidence": "HIGH"
           }
         }
