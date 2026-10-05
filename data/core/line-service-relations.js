@@ -5,7 +5,7 @@
 /* global window */
 window.LineServiceRelations = [
   { lineA: "Hachiko", lineB: "KawagoeWest", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Komagawa"], evidence: { source: "JR East Hachiko/Kawagoe continuous operation boundary at Komagawa", confidence: "HIGH" } },
-  { lineA: "Joban", lineB: "Narita", relation: "UNKNOWN", direction: "UNKNOWN", handoverStations: [], evidence: { source: "legacy relation omits Abiko branch path; Narita entity scope must be verified before direct migration", confidence: "LOW" } },
+  { lineA: "Joban", lineB: "NaritaAbikoBranch", relation: "THROUGH_SERVICE", direction: "BIDIRECTIONAL", handoverStations: ["Abiko"], evidence: { source: "JR East Tokyo-area passenger map: 常磐線快速・成田線 through service via Abiko", confidence: "HIGH" } },
   { lineA: "Gono", lineB: "Ou", relation: "PHYSICAL_CONNECT", direction: "BIDIRECTIONAL", handoverStations: ["Kawabe"], evidence: { source: "adjacent network boundary at Kawabe; through-running varies by service and is not assumed globally", confidence: "MEDIUM" } },
   { lineA: "Kamaishi", lineB: "Tohoku", relation: "PHYSICAL_CONNECT", direction: "BIDIRECTIONAL", handoverStations: ["Hanamaki"], evidence: { source: "adjacent network boundary at Hanamaki; physical connection alone is not global through identity", confidence: "MEDIUM" } },
   { lineA: "Ou", lineB: "Tazawako", relation: "PHYSICAL_CONNECT", direction: "BIDIRECTIONAL", handoverStations: ["Omagari"], evidence: { source: "adjacent network boundary at Omagari; service-specific through running must be evidenced separately", confidence: "MEDIUM" } },
