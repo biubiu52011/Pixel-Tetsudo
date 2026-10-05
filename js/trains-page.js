@@ -146,8 +146,8 @@
       // v4.3.528: 手动时刻表按需加载——ODPT 无数据的 JR 地方线打开时才注入该线文件。
       // 加载完成后 DataFusion 内部已重推定+重融合；此处按结果归属检查后重渲染当前线路，
       // 用户切走线路时旧结果不覆盖新状态；加载失败保持首次渲染（与无数据现状一致）。
-      if (window.DataFusion && window.DataFusion.ensureManualTimetable) {
-        window.DataFusion.ensureManualTimetable(lineId).then(function(changed) {
+      if (window.DataFusion && window.DataFusion.ensureTimetable) {
+        window.DataFusion.ensureTimetable(lineId).then(function(changed) {
           // Cached/missing manual data is a no-op. Its Promise resolving must not
           // cause a second map paint immediately after opening the detail.
           if (!changed || currentLine !== lineId) return;
@@ -157,7 +157,7 @@
             _scheduleRealtimeExpiryRefresh(lineId, fused2);
           }
         }).catch(function(e) {
-          console.debug("[trains] manual timetable skip:", lineId, e.message);
+          console.debug("[trains] timetable fallback skip:", lineId, e.message);
         });
       }
     } catch(e) {}
