@@ -14,6 +14,8 @@
     _boundaryMap = {}; _branchOfMap = {}; _directThrough = {};
     Object.keys(lines).forEach(function(lineId) {
       var line = lines[lineId] || {};
+      var through = Array.isArray(line.throughServices) ? line.throughServices : [];
+      _directThrough[lineId] = through.filter(function(other) { return !!lines[other]; }).slice();
       if (line.branchOf && lines[line.branchOf]) _branchOfMap[lineId] = line.branchOf;
       var boundaries = Array.isArray(line.serviceBoundaries) ? line.serviceBoundaries : [];
       _boundaryMap[lineId] = {};
@@ -22,10 +24,6 @@
         var joins = Array.isArray(boundary.handoverStations) ? boundary.handoverStations.filter(Boolean) : [];
         if (joins.length) _boundaryMap[lineId][boundary.lineId] = joins.slice();
       });
-      // serviceBoundaries is the single canonical source for direct operational
-      // adjacency. throughServices is retained in railway_data only as a legacy
-      // compatibility projection; Running Chain must not read both copies.
-      _directThrough[lineId] = Object.keys(_boundaryMap[lineId]);
     });
     _initialized=true;
   }
