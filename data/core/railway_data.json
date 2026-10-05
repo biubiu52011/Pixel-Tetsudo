@@ -21082,7 +21082,6 @@
       ],
       "throughServices": [
         "JobanLocal",
-        "OdakyuTama",
         "Odawara"
       ],
       "transferStations": [
@@ -30305,9 +30304,7 @@
         2,
         2
       ],
-      "throughServices": [
-        "Chiyoda"
-      ],
+      "throughServices": [],
       "transferStations": [
         {
           "station": "Odakyu-Ei-Zan",
