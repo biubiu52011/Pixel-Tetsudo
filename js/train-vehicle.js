@@ -68,28 +68,36 @@
     addFrom(ctx.realtimeDerivedVehicleType, 'realtime-derived');
     addFrom(ctx.timetableVehicleType, 'timetable');
 
-    // 2) Canonical source-priority identity decision.
-    // Lower-priority evidence is fallback only and cannot override a resolved
-    // higher-priority source.
+    // 2) Uniqueness decision. There is no source-priority fallback:
+    // every admitted explicit source must converge on exactly one identity.
     var chosen = '';
     var chosenSrc = '';
     var _timetableCands = splitCandidates(ctx.timetableVehicleType);
     var _derivedCands = splitCandidates(ctx.realtimeDerivedVehicleType);
     var _realtimeCands = splitCandidates(ctx.realtimeVehicleType);
-    // Source arbitration lives here, in the existing vehicle authority.
-    // All admitted sources converge here; no second vehicle arbiter exists.
-    if (_realtimeCands.length === 1) {
-      chosen = _realtimeCands[0];
-      chosenSrc = 'realtime';
-    } else if (_realtimeCands.length === 0 && _derivedCands.length === 1) {
-      chosen = _derivedCands[0];
-      chosenSrc = 'realtime-derived';
-    } else if (_realtimeCands.length === 0 && _derivedCands.length === 0 && _timetableCands.length === 1) {
-      chosen = _timetableCands[0];
-      chosenSrc = 'timetable';
+    var _admitted = [];
+    [
+      { source:'realtime', values:_realtimeCands },
+      { source:'realtime-derived', values:_derivedCands },
+      { source:'timetable', values:_timetableCands }
+    ].forEach(function(group) {
+      group.values.forEach(function(value) {
+        _admitted.push({ source:group.source, value:value });
+      });
+    });
+    var _uniqueIdentities = [];
+    _admitted.forEach(function(item) {
+      if (_uniqueIdentities.indexOf(item.value) < 0) _uniqueIdentities.push(item.value);
+    });
+    if (_uniqueIdentities.length === 1) {
+      chosen = _uniqueIdentities[0];
+      var _chosenSources = [];
+      _admitted.forEach(function(item) {
+        if (item.value === chosen && _chosenSources.indexOf(item.source) < 0) _chosenSources.push(item.source);
+      });
+      chosenSrc = _chosenSources.join('+');
     }
 
-    // A single identity admitted by the canonical source chain is high confidence.
     var confidence = chosen ? 'high' : 'none';
 
     // 4) Artwork is a strict projection of the already-exact vehicle identity.
@@ -116,10 +124,7 @@
     var effectiveCandidates = orderArr.slice();
     if (chosen) {
       identityStatus = 'EXACT';
-      identityReason = chosenSrc === 'realtime' ? 'realtime-vehicle-evidence'
-        : chosenSrc === 'realtime-derived' ? 'realtime-derived-vehicle-evidence'
-        : chosenSrc === 'structural' ? 'structural-single-fleet-evidence'
-        : 'timetable-vehicle-evidence';
+      identityReason = 'unique-converged-vehicle-evidence';
     } else if (effectiveCandidates.length > 0) {
       identityStatus = 'NARROWED';
       identityReason = 'non-decisive-vehicle-candidates';
