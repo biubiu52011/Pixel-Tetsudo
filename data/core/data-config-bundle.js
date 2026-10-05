@@ -1751,7 +1751,7 @@ window.PlatformResolver = {
 // ===== line-service-relations.js =====
 // Line Boundary Relations - Runtime boundary evidence between canonical lines.
 // Static through-service membership lives only in railway_data.json line.throughServices.
-// This file supplies handover stations and non-through structural relations for realtime resolution.
+// This file supplies evidence-backed handover stations for realtime service continuity.
 
 /* global window */
 window.LineServiceRelations = [
@@ -1771,14 +1771,14 @@ window.LineServiceRelations = [
   { lineA: "ShonanShinjuku", lineB: "Takasaki", relation: "SERVICE_BOUNDARY", direction: "BIDIRECTIONAL", handoverStations: ["Omiya"], evidence: { source: "JR East passenger service map / Shonan-Shinjuku Line service corridor", confidence: "HIGH" } },
   { lineA: "ShonanShinjuku", lineB: "Yokosuka", relation: "SERVICE_BOUNDARY", direction: "BIDIRECTIONAL", handoverStations: ["Ofuna"], evidence: { source: "JR East passenger service map / Shonan-Shinjuku Line: Utsunomiya-Yokosuka service path", confidence: "HIGH" } },
   { lineA: "ShonanShinjuku", lineB: "Tokaido", relation: "SERVICE_BOUNDARY", direction: "BIDIRECTIONAL", handoverStations: ["Ofuna"], evidence: { source: "JR East passenger service map / Shonan-Shinjuku Line: Takasaki-Tokaido service path", confidence: "HIGH" } },
-  { lineA: "Yokosuka", lineB: "SobuRapid", relation: "SERVICE_BOUNDARY", direction: "BIDIRECTIONAL", handoverStations: ["Tokyo"], displayGroup: "横須賀線・総武線快速", evidence: { source: "JR East Tokyo-area passenger map and JO station numbering define Yokosuka Line / Sobu Line Rapid as one passenger service corridor", confidence: "HIGH" } },
+  { lineA: "Yokosuka", lineB: "SobuRapid", relation: "SERVICE_BOUNDARY", direction: "BIDIRECTIONAL", handoverStations: ["Tokyo"], evidence: { source: "JR East Tokyo-area passenger map and JO station numbering define Yokosuka Line / Sobu Line Rapid as one passenger service corridor", confidence: "HIGH" } },
   { lineA: "Tokaido", lineB: "Ito", relation: "SERVICE_BOUNDARY", direction: "BIDIRECTIONAL", handoverStations: ["Atami"], evidence: { source: "continuous Tokaido/Ito operation through Atami", confidence: "HIGH" } },
   { lineA: "Tozai", lineB: "ChuoSobuLocal", relation: "SERVICE_BOUNDARY", direction: "BIDIRECTIONAL", handoverStations: ["Nakano"], evidence: { source: "Tokyo Metro through-service network + canonical handover station", confidence: "HIGH" } },
   { lineA: "Yurakucho", lineB: "Tojo", relation: "SERVICE_BOUNDARY", direction: "BIDIRECTIONAL", handoverStations: ["Wakoshi"], evidence: { source: "Tokyo Metro through-service network + canonical handover station", confidence: "HIGH" } },
   { lineA: "Yurakucho", lineB: "Yurakucho_Seibu", relation: "SERVICE_BOUNDARY", direction: "BIDIRECTIONAL", handoverStations: ["Kotake-Mukaihara"], evidence: { source: "Tokyo Metro through-service network + canonical handover station", confidence: "HIGH" } },
   { lineA: "Keiyo", lineB: "Uchibo", relation: "SERVICE_BOUNDARY", direction: "BIDIRECTIONAL", handoverStations: ["Soga"], evidence: { source: "JR East timetable: direct Keiyo / Uchibo-Sotobo operation across Soga", confidence: "HIGH" } },
   { lineA: "Keiyo", lineB: "Sotobo", relation: "SERVICE_BOUNDARY", direction: "BIDIRECTIONAL", handoverStations: ["Soga"], evidence: { source: "JR East timetable: direct Keiyo / Uchibo-Sotobo operation across Soga", confidence: "HIGH" } },
-  { lineA: "Keiyo", lineB: "Musashino", relation: "SERVICE_BOUNDARY", direction: "BIDIRECTIONAL", handoverStations: ["Nishi-Funabashi"], displayAnchors: { "Musashino": ["Nishi-Funabashi"], "Keiyo": ["Ichikawa-Shiohama", "Minami-Funabashi"] }, evidence: { source: "ThroughService direct relation; Musashino joins Keiyo operation at Nishi-Funabashi", confidence: "HIGH" } },
+  { lineA: "Keiyo", lineB: "Musashino", relation: "SERVICE_BOUNDARY", direction: "BIDIRECTIONAL", handoverStations: ["Nishi-Funabashi"], evidence: { source: "ThroughService direct relation; Musashino joins Keiyo operation at Nishi-Funabashi", confidence: "HIGH" } },
   { lineA: "Rinkai", lineB: "Saikyo", relation: "SERVICE_BOUNDARY", direction: "BIDIRECTIONAL", handoverStations: ["Osaki"], evidence: { source: "ThroughService direct relation + join station", confidence: "HIGH" } },
   { lineA: "Hanzomon", lineB: "TokyuDenEn", relation: "SERVICE_BOUNDARY", direction: "BIDIRECTIONAL", handoverStations: ["Shibuya"], evidence: { source: "ThroughService direct relation + join station", confidence: "HIGH" } },
   { lineA: "Hanzomon", lineB: "TobuSkytree", relation: "SERVICE_BOUNDARY", direction: "BIDIRECTIONAL", handoverStations: ["Oshiage"], evidence: { source: "ThroughService direct relation + join station", confidence: "HIGH" } },
