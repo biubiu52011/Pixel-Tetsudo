@@ -1060,7 +1060,11 @@
       var p = positions[pi];
       var loc = layout ? layout[pi] : null;
       if (!loc) {
-        var idx = Math.min(p.stationIndex || 0, stationCoords.length - 1);
+        var _rawStationIdx = p && p.stationIndex != null ? Number(p.stationIndex) : NaN;
+        // Never convert missing/invalid position evidence into station 0.
+        // A bad snapshot is omitted instead of piling markers at the first station.
+        if (!isFinite(_rawStationIdx) || _rawStationIdx < 0 || _rawStationIdx >= stationCoords.length) continue;
+        var idx = _rawStationIdx;
         loc = { x: stationCoords[idx].x, y: stationCoords[idx].y, idx: idx, moveDir: _trainMoveDir(p, lineId) };
       }
       var idx = loc.idx;
