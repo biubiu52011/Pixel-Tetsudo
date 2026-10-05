@@ -66,3 +66,7 @@ assert.ok(/persistOdptRows/.test(trainRunsReadThroughSrc) && /train_run_stops/.t
 assert.ok(!/req\.method === "POST"/.test(trainRunsReadThroughSrc),
   'public train-runs endpoint must remain GET-only and must not accept browser cache writes');
 console.log('train-run-read-through: 4 PASS');
+
+assert.ok(/partial repair failed/.test(trainRunsReadThroughSrc) && /repairedPayload\.every/.test(trainRunsReadThroughSrc),
+  'PARTIAL TrainRun cache must retry trusted ODPT read-through and only promote fully repaired rows to HIT');
+console.log('train-run-partial-self-heal: 1 PASS');
