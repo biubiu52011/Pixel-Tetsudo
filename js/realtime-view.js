@@ -224,6 +224,21 @@
           if (statusDot) statusDot.style.background = "var(--" + (meta.color || "gray") + ")";
         }
 
+        var refreshedImpacts = Array.isArray(r.impacts) ? r.impacts : [];
+        if (resolvedStatus !== "normal" && refreshedImpacts.length > 1) {
+          var refreshedIntervalEl = modal.querySelector(".rs-interval-stations");
+          if (refreshedIntervalEl) {
+            var dl = { up: "上り", down: "下り", both: "上下線", inner: "内回り", outer: "外回り" };
+            var el = { delay: "遅延", suspension: "運転見合わせ", partial_cancellation: "一部運休", through_suspension: "直通運転中止", normal: "平常運転" };
+            refreshedIntervalEl.innerHTML = refreshedImpacts.map(function(x) {
+              var scope = x.interval || dl[x.direction] || "";
+              if (x.interval && x.direction) scope += "（" + (dl[x.direction] || x.direction) + "）";
+              return '<span class="rs-impact-item"><span class="rs-station-text">' + escapeHtml(scope) + '</span>'
+                + (x.effect ? '<span class="rs-impact-effect">：' + escapeHtml(el[x.effect] || x.effect) + '</span>' : '') + '</span>';
+            }).join('<span class="rs-interval-separator">｜</span>');
+          }
+        }
+
         // A normal result applies to the whole line; never retain an old
         // disruption interval beside a freshly resolved normal status.
         if (resolvedStatus === "normal") {
