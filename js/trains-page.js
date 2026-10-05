@@ -173,6 +173,7 @@
       }
       currentSystemLineIds = null;
       window.TrainsActiveSystemLineIds = null;
+      if (window.ODPTClient && window.ODPTClient.clearRealtimeLines) window.ODPTClient.clearRealtimeLines();
       if (listEl) listEl.classList.remove("hidden");
       if (filterBarEl) filterBarEl.classList.remove("hidden");
       if (detailEl) detailEl.classList.add("hidden");
