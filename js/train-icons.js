@@ -656,14 +656,7 @@ function _canonicalVehicleIconPath(name) {
   // canonical 精确匹配优先：合法 displayName 可含斜杠（如 "209系2000番台 / 2100番台"）
   var rec = resolveCanonicalVehicle(n);
   if (rec) return rec.asset;
-  // 非 canonical 才拒路径分隔符（防止拼路径注入）
-  if (/[\/\\]/.test(n)) return null;
-  // v4.3.1046: 图库规范命名（東武50000系→50000型.png 等）以静态映射优先；
-  // 拼接兜底仅服务磁盘按「東武鉄道/東武XXX系.png」约定存在的资产（東武850系 等），不指向已删除旧名
-  if (/^東武/.test(n)) {
-    if (VEHICLE_NAME_TO_ICON[n]) return VEHICLE_NAME_TO_ICON[n];
-    return null;
-  }
+  // No legacy/static-map fallback: only one conflict-free canonical record may project artwork.
   return null;
 }
 
@@ -704,7 +697,6 @@ function _resolveTrainRuleDisplayName(lineId, operator, trainId, stationIndex, t
     // retired-stock substitution, or approximate alias may select artwork.
     var canonical = _canonicalVehicleIconPath(name);
     if (canonical) return canonical;
-    if (VEHICLE_NAME_TO_ICON[name]) return VEHICLE_NAME_TO_ICON[name];
     return null;
   }
 
