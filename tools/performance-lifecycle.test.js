@@ -70,3 +70,12 @@ console.log('train-run-read-through: 4 PASS');
 assert.ok(/partial repair failed/.test(trainRunsReadThroughSrc) && /repairedPayload\.every/.test(trainRunsReadThroughSrc),
   'PARTIAL TrainRun cache must retry trusted ODPT read-through and only promote fully repaired rows to HIT');
 console.log('train-run-partial-self-heal: 1 PASS');
+
+const trainPositionEstimatorSrc = fs.readFileSync('js/train-position-estimator.js','utf8');
+assert.ok(/"_operationCode":run\.operation_code\|\|""/.test(odptUnifiedSrc),
+  'Supabase TrainRun must preserve canonical operation_code into runtime input');
+assert.ok(/tt\['_operationCode'\] \|\| tt\['operationCode'\] \|\| tt\['operation_code'\]/.test(trainPositionEstimatorSrc),
+  'vehicle evidence must prefer persisted TrainRun operation code before train-number derivation');
+assert.ok(/if \(!_baseOperationCtx\.operationCode\)/.test(trainPositionEstimatorSrc),
+  'train-number operation normalization must remain fallback-only');
+console.log('train-run-vehicle-evidence-bridge: 3 PASS');
