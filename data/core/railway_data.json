@@ -23237,7 +23237,10 @@
         6,
         3
       ],
-      "throughServices": [],
+      "throughServices": [
+        "KeiseiOshiage",
+        "NaritaSkyAccess"
+      ],
       "transferStations": [
         {
           "station": "Nippori",
@@ -23392,6 +23395,28 @@
       },
       "branches": [
         "KeiseiOshiage"
+      ],
+      "serviceBoundaries": [
+        {
+          "lineId": "KeiseiOshiage",
+          "handoverStations": [
+            "Aoto"
+          ],
+          "evidence": {
+            "source": "Keisei Main / Oshiage Line through service at Aoto",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "NaritaSkyAccess",
+          "handoverStations": [
+            "Keisei-Takasago"
+          ],
+          "evidence": {
+            "source": "Keisei Main / Narita Sky Access service boundary at Keisei-Takasago",
+            "confidence": "HIGH"
+          }
+        }
       ]
     },
     "SeibuChichibu": {
@@ -24413,7 +24438,10 @@
         2
       ],
       "throughServices": [
-        "Asakusa"
+        "Asakusa",
+        "KeikyuAirport",
+        "KeikyuKurihama",
+        "KeikyuZushi"
       ],
       "transferStations": [
         {
@@ -24604,6 +24632,36 @@
           ],
           "evidence": {
             "source": "ThroughService direct relation + join station",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "KeikyuAirport",
+          "handoverStations": [
+            "Keikyu-Kamata"
+          ],
+          "evidence": {
+            "source": "Keikyu branch through service at Keikyu-Kamata",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "KeikyuKurihama",
+          "handoverStations": [
+            "Horinouchi"
+          ],
+          "evidence": {
+            "source": "Keikyu branch through service at Horinouchi",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "KeikyuZushi",
+          "handoverStations": [
+            "Kanazawa-Hakkei"
+          ],
+          "evidence": {
+            "source": "Keikyu branch through service at Kanazawa-Hakkei",
             "confidence": "HIGH"
           }
         }
@@ -28344,7 +28402,9 @@
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "Keikyu"
+      ],
       "transferStations": [
         {
           "station": "Keikyu-Kamata",
@@ -28390,7 +28450,19 @@
           "KeikyuAirport"
         ],
         "operatorGroup": "KEIKYU"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "Keikyu",
+          "handoverStations": [
+            "Keikyu-Kamata"
+          ],
+          "evidence": {
+            "source": "Keikyu branch through service at Keikyu-Kamata",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "KeikyuKurihama": {
       "name": "KeikyuKurihama",
@@ -28426,7 +28498,9 @@
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "Keikyu"
+      ],
       "transferStations": [
         {
           "station": "Horinouchi",
@@ -28450,7 +28524,19 @@
           "KeikyuKurihama"
         ],
         "operatorGroup": "KEIKYU"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "Keikyu",
+          "handoverStations": [
+            "Horinouchi"
+          ],
+          "evidence": {
+            "source": "Keikyu branch through service at Horinouchi",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "KeikyuZushi": {
       "name": "KeikyuZushi",
@@ -28476,7 +28562,9 @@
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "Keikyu"
+      ],
       "transferStations": [
         {
           "station": "Kanazawa-Hakkei",
@@ -28500,7 +28588,19 @@
           "KeikyuZushi"
         ],
         "operatorGroup": "KEIKYU"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "Keikyu",
+          "handoverStations": [
+            "Kanazawa-Hakkei"
+          ],
+          "evidence": {
+            "source": "Keikyu branch through service at Kanazawa-Hakkei",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "KeioInokashira": {
       "name": "Keio Inokashira Line",
@@ -36117,7 +36217,8 @@
       "nameKo": "오시아게선",
       "name": "京成押上線",
       "throughServices": [
-        "Asakusa"
+        "Asakusa",
+        "Keisei"
       ],
       "presentation": {
         "code": "KOS",
@@ -36142,6 +36243,16 @@
           ],
           "evidence": {
             "source": "ThroughService direct relation + join station",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "Keisei",
+          "handoverStations": [
+            "Aoto"
+          ],
+          "evidence": {
+            "source": "Keisei Main / Oshiage Line through service at Aoto",
             "confidence": "HIGH"
           }
         }
@@ -36349,7 +36460,22 @@
           "NaritaSkyAccess"
         ],
         "operatorGroup": "KEISEI"
-      }
+      },
+      "throughServices": [
+        "Keisei"
+      ],
+      "serviceBoundaries": [
+        {
+          "lineId": "Keisei",
+          "handoverStations": [
+            "Keisei-Takasago"
+          ],
+          "evidence": {
+            "source": "Keisei Main / Narita Sky Access service boundary at Keisei-Takasago",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "SotetsuIzumino": {
       "nameJa": "相鉄いずみ野線",
