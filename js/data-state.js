@@ -427,10 +427,15 @@
       groups[op].push({ id: lid, line: line, sortIdx: insertMap[lid] !== undefined ? insertMap[lid] : 99999 });
     }
 
-    // Sort operator groups by OP_ORDER, unknown ops appended at end
-    var knownOps = (window.TransitConstants && window.TransitConstants.OP_ORDER) || [];
-    var unknownOps = opOrder.filter(function(op){ return knownOps.indexOf(op) === -1; });
-    opOrder = knownOps.filter(function(op){ return groups[op]; }).concat(unknownOps);
+    // Sort operator groups via the unified LinePresentationService comparator
+    // (global category order JR > Metro > Private > Other), unknown ops appended at end
+    if (window.LinePresentationService && typeof window.LinePresentationService.orderOperators === "function") {
+      opOrder = window.LinePresentationService.orderOperators(opOrder);
+    } else {
+      var knownOps = (window.TransitConstants && window.TransitConstants.OP_ORDER) || [];
+      var unknownOps = opOrder.filter(function(op){ return knownOps.indexOf(op) === -1; });
+      opOrder = knownOps.filter(function(op){ return groups[op]; }).concat(unknownOps);
+    }
 
     // Sort fallback lines within each operator group by lineOrder
     var presentationOrderMap = (window.LinePresentationService && window.UNIFIED_LINES)

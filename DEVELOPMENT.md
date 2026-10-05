@@ -571,6 +571,19 @@ CSS：全局 style.css + lang-bar.css；页面专属按页命名（trains.css、
 
 排序：线路显示排序经 line-presentation-service.js；观光排序按距离/规则，不硬编码散排
 
+LINE LIST DISPLAY ORDER（线路一览统一排序规范）：
+- 全局类别序：JR → 地下鉄（Metro）→ 私鉄（Private）→ その他（Other）。
+  类别由 operator 判定（JR- 前缀 = JR；公営・地下鉄运营商 = Metro；大手/準大手私鉄 = Private；其余 = Other），
+  收口于 LinePresentationService.categoryOf / getOperatorOrder，禁止各页复制 comparator。
+- 排序单位 = Presentation / 运行系统：line.presentation.lineIds 的 primary（lineIds[0]）记录占一个排序槽；
+  member 线路（lineIds[1..]）与 primary 共享槽位，不单独出现。canonical physical lines 仍独立建模，
+  本规则不合并/拆分 canonical 拓扑。
+- 同组（operator）内排序：explicit presentation.order → 特殊线路记号（非 A-Z 纯字母，如数字/符号）→
+  A-Z 线路记号（大小写不敏感）→ fallback（display name / 稳定原始序）。无 presentation 线路不占独立槽，
+  按 line.code → 名称 → 原始序排入对应 operator 组尾部。
+- 统一入口：LinePresentationService.getDisplayOrder / getPresentationOrder / orderOperators 为唯一排序实现；
+  页面（trains/realtime/home 一览、filter bar、operator 列表）一律消费该入口，禁止内联 sort/localeCompare 副本。
+
 权威与核验：订正以 ODPT 为权威源；车型“不编造、核验有据才升、不确定保持候选”；改后跑校验脚本（verify_through_vtype.js 等）+ node --check
 
 冻结：railway_data.json 等canonical 数据修改遵循 Canonical-First，改后重跑 gen-file-data.js
@@ -1136,9 +1149,9 @@ CSP：script-src 'self'、style-src 'self'、connect-src 仅 self + ODPT/MapTile
 | --- | --- | --- |
 | 本地线路库 | data/core/railway_data.json + station_i18n.json | 线路/车站/坐标/关联/多语言。canonical 数据；修改源文件后必须重新生成并验证 |
 | 构建加载器 | data/core/db-loader.js + *.file.js | 加载 railway/tourism/i18n 等构建期数据，提供 RailwayDB/UNIFIED_LINES |
-| 运行时常量包 | data/core/data-config-bundle.js | 自动合并 transfer-hints、runtime-config、through-service、line-operation-systems、platform-data、line-service-relations、train-type-defs |
-| LOS | data/core/line-operation-systems.js | 运行系统显示分组、系统名、颜色、系统卡排序 |
-| 服务关系层 | data/core/line-service-relations.js | 线路间 THROUGH_SERVICE / PHYSICAL_CONNECT / BRANCH_OF / ALIAS_OF / UNKNOWN 关系；不替代 LOS |
+| 运行时常量包 | data/core/data-config-bundle.js | 自动合并 transfer-hints、runtime-config、platform-data、train-type-defs 等 |
+| 运行系统展示元数据（LOS 已吸收） | railway_data.json 每条 line.presentation | 运行系统显示分组、系统名、颜色、系统卡排序（lineIds / code / order / operatorGroup）；原 data/core/line-operation-systems.js 已并入 canonical line records，不再单独加载 |
+| 服务关系层 | （已并入 railway_data.json 的 throughServices / serviceBoundaries） | 线路间直通/服务边界；原 data/core/line-service-relations.js 与 through-service.js 已删除，关系数据在 canonical 记录内表达 |
 | ODPT 客户端 | data/api/odpt-unified.js + odpt-links.js | 实时/时刻表/运行情报统一入口 |
 | 手动时刻表库 | data/timetables/*-manual.js + vehicle-type-map.js | ODPT 无数据线路补全；vehicle-type-map 为车型 S3 证据 |
 | 实时融合 | js/data-fusion.js | ODPT、官方 API、manual、本地 fallback 融合 |
@@ -1931,23 +1944,19 @@ python serve.py（本地静态服务器 + /api-proxy/ 官方 API 代理替代 py
 
 ### 13.5 架构集成规则
 
-data-config-bundle.js 必须在 line-presentation-service.js 之前加载，使 LineServiceRelations 可被展示服务和页面查询。
+data-config-bundle.js 必须在 line-presentation-service.js 之前加载，使展示服务可查询 canonical 数据（railway_data.json 的 presentation 字段）。
 
-LinePresentationService 可以使用 LOS 排序和 Relations 查询增强展示，但默认排序仍以 LOS 为显示权威。Relations 不应改变线路身份，也不应直接修改 railway_data.json。
+LinePresentationService 以 line.presentation 为显示权威（原 LOS 已并入 canonical line records）：系统卡聚合、颜色、图标、系统卡排序均读 presentation；默认排序按 4.5 LINE LIST DISPLAY ORDER 规则。Relations（throughServices / serviceBoundaries）不应改变线路身份，也不应直接修改 railway_data.json。
 
 DataState / Realtime / Trains 如需展示直通链、相关线路或支线关系，必须消费 LineServiceRelations API，而不是在渲染层临时推断。
 
 ### 13.6 文件结构
 
-data/core/railway_data.json（冻结 canonical 身份与拓扑）
+data/core/railway_data.json（冻结 canonical 身份与拓扑；含 line.presentation 展示元数据）
 
-data/core/line-operation-systems.js（LOS，显示分组）
+data/core/data-config-bundle.js（自动生成，加载 canonical 数据）
 
-data/core/line-service-relations.js（服务关系层）
-
-data/core/data-config-bundle.js（自动生成，加载 Relations）
-
-js/line-presentation-service.js（展示排序与系统卡服务）
+js/line-presentation-service.js（统一排序与系统卡服务）
 
 js/trains-data.js / trains-render.js / trains-page.js（消费展示结果，不拥有关系事实）
 

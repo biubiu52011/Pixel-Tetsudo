@@ -418,6 +418,9 @@
 
 
   function sortOperators(ops) {
+    if (window.LinePresentationService && typeof window.LinePresentationService.orderOperators === "function") {
+      return window.LinePresentationService.orderOperators(ops);
+    }
     var order = (window.TransitConstants && window.TransitConstants.OP_ORDER) ? window.TransitConstants.OP_ORDER : [];
     return ops.sort(function(a, b) {
       var ia = order.indexOf(a), ib = order.indexOf(b);
