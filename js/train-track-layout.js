@@ -156,7 +156,11 @@
     var normal = normalFromTangent(base.tangent);
     var key = trackKey(position, base.idx, base.nextIdx, lane);
     var slot = occupancy ? occupancy.get(key, index) : { ordinal: 0, total: 1 };
-    var stackOffset = (slot.ordinal - (slot.total - 1) / 2) * (opts.stackGap || DEFAULTS.stackGap);
+    // Keep an individual train on a stable lateral slot when neighbours enter or
+    // leave the same segment. Dynamic centring by total train count makes every
+    // marker in the group jump whenever occupancy changes.
+    var stackOrdinal = slot.ordinal === 0 ? 0 : (slot.ordinal % 2 ? Math.ceil(slot.ordinal / 2) : -Math.ceil(slot.ordinal / 2));
+    var stackOffset = stackOrdinal * (opts.stackGap || DEFAULTS.stackGap);
     var laneGap = opts.laneGap || DEFAULTS.laneGap;
     var lateral = lane * laneGap + stackOffset;
     var px = base.point.x + normal.x * lateral;
