@@ -700,6 +700,8 @@
     // Operators are activated by the train detail view. Keeping this set here
     // lets lazy pages poll only data the user has actually requested.
     var _activeRealtimeOperators = {};
+    var _activatedRealtimeLines = {};
+    var _realtimeActivationInflight = {};
 
     // ========== Public API ==========
     window.ODPTClient = {
@@ -719,13 +721,27 @@
             lineIds = Array.isArray(lineIds) ? lineIds : [lineIds];
             var self = this;
             var timetablePromises = [];
+            var newlyActivatedOps = {};
+
             lineIds.forEach(function(lineId) {
                 var op = LINE_TO_OPERATOR[lineId];
                 var identity = getLineRailwayIdentity(lineId);
                 if (!op || !identity) return;
-                if (ODPT_ENDPOINTS[op] && ODPT_ENDPOINTS[op].train) _activeRealtimeOperators[op] = true;
+
+                if (ODPT_ENDPOINTS[op] && ODPT_ENDPOINTS[op].train && !_activeRealtimeOperators[op]) {
+                    _activeRealtimeOperators[op] = true;
+                    newlyActivatedOps[op] = true;
+                }
+
+                // A line already activated in this page lifecycle has its timetable
+                // in ODPT_TIMETABLES/_timetableCache. Do not repeat merge work.
+                if (_activatedRealtimeLines[lineId]) return;
+                if (_realtimeActivationInflight[lineId]) {
+                    timetablePromises.push(_realtimeActivationInflight[lineId]);
+                    return;
+                }
                 if (ODPT_ENDPOINTS[op] && ODPT_ENDPOINTS[op].trainTimetable) {
-                    timetablePromises.push(self.getCompleteTimetable(op, identity.odptRailway).then(function(rows) {
+                    _realtimeActivationInflight[lineId] = self.getCompleteTimetable(op, identity.odptRailway).then(function(rows) {
                         if (!window.ODPT_TIMETABLES) window.ODPT_TIMETABLES = {};
                         var existing = window.ODPT_TIMETABLES[op] || [];
                         var keep = existing.filter(function(tt) {
@@ -733,14 +749,21 @@
                             return !(actual && actual.key === identity.key);
                         });
                         window.ODPT_TIMETABLES[op] = keep.concat(rows || []);
+                        _activatedRealtimeLines[lineId] = true;
                     }).catch(function(e) {
                         console.debug("[ODPT] on-demand timetable skip:", lineId, e && e.message);
-                    }));
+                    }).finally(function() {
+                        delete _realtimeActivationInflight[lineId];
+                    });
+                    timetablePromises.push(_realtimeActivationInflight[lineId]);
                 }
             });
-            var ops = Object.keys(_activeRealtimeOperators);
+
+            // Opening another line of an already-active operator must not trigger
+            // another operator-wide Train fetch. The 30s poll already owns refresh.
+            var newOps = Object.keys(newlyActivatedOps);
             return Promise.all(timetablePromises).then(function() {
-                return ops.length ? loadRealtimeData(false, ops) : Promise.resolve();
+                return newOps.length ? loadRealtimeData(false, newOps) : Promise.resolve();
             });
         },
 
