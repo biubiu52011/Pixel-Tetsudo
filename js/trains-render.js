@@ -1090,56 +1090,74 @@
         var newX = px - 7;
         var newY = py - 9;
         // v4.3.950: 环线沿曲线移动——用 JS 动画沿矩形边插值，不用 CSS transition 直线跳
+        // v4.3.xxxx: marker 自持动画状态（_moveRaf/_loopPos）。新目标到达时先取消旧 RAF，
+        // 从当前已插值位置续动；旧动画永远不能与新动画争抢同一个 marker。
         var _loopRect = stationCoords._loopRect;
         var _needMove = existingIcon.tagName && String(existingIcon.tagName).toLowerCase() === 'g'
           ? true
           : (!isFinite(oldX) || !isFinite(oldY) || Math.abs(oldX - newX) > 0.5 || Math.abs(oldY - newY) > 0.5);
         if (isLoop && _loopRect && _needMove && !window.TrainTrackLayout) {
+          if (existingIcon._moveRaf) {
+            cancelAnimationFrame(existingIcon._moveRaf);
+            existingIcon._moveRaf = 0;
+          }
           var _newSc = stationCoords[idx];
           var _newPos = (_newSc && _newSc._loopPos != null) ? _newSc._loopPos : 0;
           var _oldPos = existingIcon._loopPos;
           if (_oldPos == null) {
-            // 第一次：直接设位置，记录 pos
-            existingIcon.setAttribute('x', newX);
-            existingIcon.setAttribute('y', newY);
+            // 首次出现：直接 snap 到当前站，不从 (0,0) 飞入
+            _setTrainIconPosition(existingIcon, px, py, p, lineId, isLoop);
             existingIcon._loopPos = _newPos;
+            _syncTrainLabels(trainLayer, svgNS, trainUid, px, py, p, lineId);
           } else {
-            // 沿矩形边插值动画（14 秒，匹配刷新间隔）
+            // 沿矩形边插值动画。时长按位移占周长比例缩放：
+            // 全半圈 14s（匹配刷新间隔），短位移快速到达，中途取消后从当前 _loopPos 续动。
             var _startPos = _oldPos;
             var _endPos = _newPos;
             var _perimeter = _loopRect.perimeter;
             // 方向：内环=顺时针（+），外环=逆时针（-）
             var _dirSign = (direction.indexOf('Inner') >= 0) ? 1 : -1;
-            // 计算最短路径差（沿周长）
+            // 计算最短路径差（沿周长，不超过半圈；半圈为环线数据跳变的物理上限）
             var _rawDiff = _endPos - _startPos;
             var _diff = _dirSign * _rawDiff;
-            // 确保沿最短方向走（不超过半圈）
             if (Math.abs(_diff) > _perimeter / 2) {
               _diff = (Math.abs(_diff) - _perimeter) * (_diff > 0 ? 1 : -1);
             }
-            var _animStart = performance.now();
-            var _animDur = 14000; // 14 秒，匹配刷新间隔
             var _icon = existingIcon;
             var _rect = _loopRect;
+            var _animDur = Math.max(1500, Math.min(14000,
+              Math.round(14000 * Math.abs(_diff) / (_perimeter / 2))));
+            var _animStart = performance.now();
             function _animFrame(now) {
               var _t = Math.min(1, (now - _animStart) / _animDur);
               // 缓动：cubic-bezier(0.4, 0, 0.2, 1)
               var _ease = _t < 0.5 ? 4 * _t * _t * _t : 1 - Math.pow(-2 * _t + 2, 3) / 2;
               var _curPos = _startPos + _diff * _ease;
+              // 每帧更新 marker 自持位置——下一次数据到达时从当前显示位置续动
+              _icon._loopPos = _curPos;
               var _xy = _loopPosToXY(_curPos, _rect);
               _setTrainIconPosition(_icon, _xy.x, _xy.y, p, lineId, isLoop);
-              if (_t < 1) requestAnimationFrame(_animFrame);
-              else _icon._loopPos = _startPos + _diff;
+              // label 与车体同一当前位置逐帧同步，不 remove+recreate
+              _moveTrainLabels(trainLayer, trainUid, _xy.x, _xy.y, p, lineId);
+              if (_t < 1) {
+                _icon._moveRaf = requestAnimationFrame(_animFrame);
+              } else {
+                _icon._loopPos = _startPos + _diff;
+                _icon._moveRaf = 0;
+              }
             }
-            requestAnimationFrame(_animFrame);
+            // 动画启动前先把 label 放到起始位置，避免 label 先跳目标
+            var _startXY = _loopPosToXY(_startPos, _rect);
+            _syncTrainLabels(trainLayer, svgNS, trainUid, _startXY.x, _startXY.y, p, lineId);
+            existingIcon._moveRaf = requestAnimationFrame(_animFrame);
           }
         } else if (_needMove) {
           _setTrainIconPosition(existingIcon, px, py, p, lineId, isLoop);
+          _syncTrainLabels(trainLayer, svgNS, trainUid, px, py, p, lineId);
         } else {
           _setTrainIconPosition(existingIcon, px, py, p, lineId, isLoop);
+          _syncTrainLabels(trainLayer, svgNS, trainUid, px, py, p, lineId);
         }
-        _removeTrainLabels(trainLayer, trainUid);
-        appendTrainLabels(trainLayer, svgNS, trainUid, px, py, p, lineId);
       } else {
         // Create new train icon
         // Zero-fallback rendering contract: vehicle identity is resolved upstream.
@@ -1219,10 +1237,12 @@
     
     // Remove icons for trains that no longer exist
     // v4.3.454: 兼容终点/方向标签（data-train-label-for 与图标同 uid 清理）
+    // v4.3.xxxx: 移除前取消该 marker 仍在运行的动画帧，避免孤悬 RAF 空转
     var allIcons = trainLayer.querySelectorAll('[data-train-id], [data-train-label-for]');
     for (var ii = 0; ii < allIcons.length; ii++) {
       var tid = allIcons[ii].getAttribute('data-train-id') || allIcons[ii].getAttribute('data-train-label-for');
       if (!updatedIds[tid]) {
+        if (allIcons[ii]._moveRaf) cancelAnimationFrame(allIcons[ii]._moveRaf);
         allIcons[ii].parentNode.removeChild(allIcons[ii]);
       }
     }
@@ -1463,6 +1483,7 @@
     var labelGroup = document.createElementNS(svgNS, "g");
     labelGroup.setAttribute("data-train-label-for", String(trainUid));
     labelGroup.setAttribute("data-label-pos", "dir");
+    labelGroup.setAttribute("data-dir-sym", dirSym || "");
     // 三角在 g 坐标系 (0, labelY)
     if (dirSym) {
       var tri = document.createElementNS(svgNS, "path");
@@ -1496,7 +1517,40 @@
       var _bbox = labelGroup.getBBox();
       var _offsetX = px - (_bbox.x + _bbox.width / 2);
       labelGroup.setAttribute("transform", "translate(" + _offsetX + ",0)");
+      // Cache the centering baseline (label geometry is static; only px/py move),
+      // so per-frame label sync is pure attribute update, never remove+recreate.
+      labelGroup.setAttribute("data-base-offset", String(-(_bbox.x + _bbox.width / 2)));
     } catch(_e) {}
+  }
+
+  // Move an already-created train label to (px,py) without rebuilding the DOM.
+  // Used by the per-frame animation loop so the label tracks the carriage.
+  function _moveTrainLabels(trainLayer, trainUid, px, py, p, lineId) {
+    var label = trainLayer.querySelector('[data-train-label-for="' + String(trainUid).replace(/"/g, '') + '"]');
+    if (!label) return;
+    var moveDir = _trainMoveDir(p, lineId);
+    var _labelY = _trainLabelY('dir', py, moveDir);
+    var tri = label.querySelector('.train-label-tri');
+    if (tri) {
+      var dirSym = label.getAttribute('data-dir-sym') || '';
+      var _tay = _labelY - 3 + 1.5;
+      tri.setAttribute('d', dirSym === 'down'
+        ? 'M ' + (-3.5) + ' ' + (_tay - 2.5) + ' L 0 ' + (_tay + 2.5) + ' L 3.5 ' + (_tay - 2.5) + ' Z'
+        : 'M ' + (-3.5) + ' ' + (_tay + 2.5) + ' L 0 ' + (_tay - 2.5) + ' L 3.5 ' + (_tay + 2.5) + ' Z');
+    }
+    var txt = label.querySelector('.train-label-dir');
+    if (txt) txt.setAttribute('y', String(_labelY));
+    var _base = parseFloat(label.getAttribute('data-base-offset') || '0');
+    if (!isFinite(_base)) _base = 0;
+    label.setAttribute('transform', 'translate(' + (px + _base) + ',0)');
+  }
+
+  // Create the label if missing, otherwise move the existing one to (px,py).
+  // Prevents the old remove+recreate flicker on every position update.
+  function _syncTrainLabels(trainLayer, svgNS, trainUid, px, py, p, lineId) {
+    var existing = trainLayer.querySelector('[data-train-label-for="' + String(trainUid).replace(/"/g, '') + '"]');
+    if (existing) _moveTrainLabels(trainLayer, trainUid, px, py, p, lineId);
+    else appendTrainLabels(trainLayer, svgNS, trainUid, px, py, p, lineId);
   }
   
   function updateRunningInfo(el, positions) {

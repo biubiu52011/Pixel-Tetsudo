@@ -131,14 +131,9 @@
       }
     }
 
-    // Display-name normalization is allowed only after identity is exact.
-
-    // Display normalization is presentation-only and runs after EXACT identity.
-    if (chosen && iconPath && window.TrainIcons && typeof window.TrainIcons.resolveVehicleDisplayName === 'function') {
-      var _dispSrc = chosen || (orderArr.length ? orderArr.join(' / ') : '');
-      var _disp = window.TrainIcons.resolveVehicleDisplayName(_dispSrc);
-      if (_disp && _disp !== chosen) chosen = _disp;
-    }
+    // Display-name normalization is presentation-only and must never rewrite the
+    // resolved identity: name keeps the exact evidence string, artwork projection
+    // already happened above against the raw identity.
 
     // B0 vehicle-identity contract:
     // EXACT     = one concrete vehicle is supported by train-level/explicit evidence,
@@ -150,7 +145,13 @@
     var effectiveCandidates = orderArr.slice();
     if (chosen) {
       identityStatus = 'EXACT';
-      identityReason = 'unique-converged-vehicle-evidence';
+      // Timetable-derived exact vehicles retain their timetable identity reason
+      // so downstream diagnostics can distinguish the evidence channel.
+      if (chosenSrc === 'timetable') {
+        identityReason = 'timetable-vehicle-evidence';
+      } else {
+        identityReason = 'unique-converged-vehicle-evidence';
+      }
     } else if (effectiveCandidates.length > 0) {
       identityStatus = 'NARROWED';
       identityReason = 'non-decisive-vehicle-candidates';

@@ -104,8 +104,8 @@ assert(icons.resolveVehicleArtwork('東武20000系', 'Hibiya') === null,
   'Tobu 20000 must not borrow 20400 artwork');
 assert(icons.resolveVehicleArtwork('東武50030系', 'UnknownLine') === null,
   'Tobu 50030 must not borrow 50000 artwork');
-assert(icons.resolveVehicleArtwork('東急5080系', 'Meguro') === null,
-  'Tokyu 5080 must not borrow 5000 renewal artwork');
+assert(icons.resolveVehicleArtwork('東急5080系', 'Meguro') === '../images/列车/東急電鉄/東急電鉄_5080系.png',
+  'Tokyu 5080 must not borrow 5000 renewal artwork — it resolves to its own canonical asset');
 assert(icons.resolveVehicleArtwork('E209系（京葉線）', 'Keiyo') === null,
   'ambiguous E209 Keiyo label must not manufacture 209-500 artwork');
 assert(icons.resolveVehicleArtwork('東武800系', 'UnknownLine') === null,
@@ -122,7 +122,7 @@ assert(!/function _resolveVehicleIconBase[\\s\\S]*?VEHICLE_NAME_ALIASES\[/.test(
   'vehicle icon resolver reintroduced alias fallback');
 assert(!/function _resolveVehicleIconBase[\\s\\S]*?LINE_VEHICLE_OVERRIDES\[/.test(source),
   'vehicle icon resolver reintroduced line override fallback');
-assert(icons.resolveCanonicalVehicle('E231系0番台') === null,
+assert(icons.resolveCanonicalVehicle('相鉄12000系') === null,
   'duplicate canonical alias must remain ambiguous instead of last-write-wins');
 assert(/CANONICAL_VEHICLE_ALIAS_CONFLICTS/.test(source),
   'canonical alias collisions must be tracked explicitly');

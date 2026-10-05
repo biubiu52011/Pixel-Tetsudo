@@ -55,7 +55,7 @@ assert.strictEqual(resolved.name, 'JR 209系500番台');
 assert.ok(/JR東日本_209系_500番台_京葉線\.png$/.test(resolved.iconPath), resolved.iconPath);
 
 assert.ok(/相模鉄道_12000系_YOKOHAMA_NAVYBLUE\.png$/.test(
-  context.window.TrainIcons.resolveVehicleArtwork('相鉄12000系') || ''
+  context.window.TrainIcons.resolveVehicleArtwork('相模鉄道12000系') || ''
 ));
 assert.ok(/小田急電鉄_5000形_標準色\.png$/.test(
   context.window.TrainIcons.resolveVehicleArtwork('小田急5000形') || ''
@@ -73,7 +73,7 @@ assert.ok(!fs.existsSync(path.join(ROOT, 'data/timetables/vehicle-type-map.js'))
 console.log('train-run operation evidence -> exact vehicle -> artwork projection: PASS');
 
 [
- ['JR E233系5000番台','JR東日本_E233系_5000番台.png'],
+ ['JR E233系5000番台','JR東日本_E233系5000番台.png'],
  ['京急600形','京浜急行電鉄_600形.png'],
  ['京成3100形','京成電鉄_3100形.png'],
  ['東京メトロ15000系(10両)','東京メトロ_15000系.png'],

@@ -500,7 +500,7 @@ var CANONICAL_VEHICLES = {
     displayName: "E235系0番台（山手線）",
     iconName: "E235系山手線",
     asset: "../images/列车/JR東日本/JR東日本_E235系_0番台.png",
-    aliases: ["E235系0番台（山手線）", "E235系山手線"]
+    aliases: ["E235系0番台（山手線）", "E235系山手線", "JR E235系0番台"]
   },
   "jr-east-e231-800-tozai-through": {
     displayName: "E231系800番台（東西線直通）",
@@ -584,7 +584,7 @@ var CANONICAL_VEHICLES = {
     displayName: "E233系5000番台",
     iconName: "E233系5000番台",
     asset: "../images/列车/JR東日本/JR東日本_E233系5000番台.png",
-    aliases: ["E233系5000番台"]
+    aliases: ["E233系5000番台", "JR E233系5000番台"]
   },
   "jr-east-e231-900-musashino": {
     displayName: "E231系900番台",

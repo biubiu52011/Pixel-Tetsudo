@@ -367,7 +367,13 @@
       destinationStationUrn = String(destStations[0]);
       destinationStation = destinationStationUrn.split(".").pop();
     }
-    if (!destinationStation) {
+    // 环线没有"记录末站=终点"的语义：ODPT/本地环线 TrainTimetable（Yamanote 等）只覆盖
+    // 一个运行段，末站常是数据截断点（如 Yamanote 949/1037 条记录末站全为 Osaki），
+    // 不是列车真实终点。destinationStation 缺失时保持 UNKNOWN，由渲染层显示方向
+    // （内回/外回）；绝不把截断点当作终点传播给全部列车。
+    var _isLoopLine = workLine && (workLine.type === 'loop' ||
+      workLine.isDoubleColumnLoop === true || workLine.isSixShapedLoop === true);
+    if (!destinationStation && !_isLoopLine) {
       for (var di = tto.length - 1; di >= 0; di--) {
         var dr = tto[di] || {};
         if ((dr["odpt:departureTime"] || "") === "") {

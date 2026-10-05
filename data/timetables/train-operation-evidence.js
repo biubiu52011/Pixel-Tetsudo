@@ -82,13 +82,13 @@
       resolveEvidence: function(trainNumber, ctx) {
         ctx = ctx || {};
         var d = String(ctx.serviceDate || "").slice(0, 10);
-        var line = [ctx.lineId, ctx.railway, ctx.operator].join("|");
+        var line = [ctx.lineId, ctx.railway, ctx.operator].join("|").toLowerCase();
         var n = String(trainNumber || "");
         var matches = [];
         for (var i=0;i<records.length;i++) {
           var r=records[i];
           if (!r || r.validDate !== d) continue;
-          if (line.indexOf(r.networkKey) < 0) continue;
+          if (line.indexOf(String(r.networkKey || "").toLowerCase()) < 0) continue;
           var trainMatch = r.trainNumbers && r.trainNumbers.indexOf(n) >= 0;
           var opMatch = ctx.operationCode && String(ctx.operationCode) === String(r.operationCode);
           if (trainMatch || opMatch) matches.push(r);
@@ -151,13 +151,13 @@
         ctx = ctx || {};
         var d = String(ctx.serviceDate || "").slice(0,10);
         if (!d) return null;
-        var line = [ctx.lineId,ctx.railway,ctx.operator].join("|");
+        var line = [ctx.lineId,ctx.railway,ctx.operator].join("|").toLowerCase();
         var n = String(trainNumber || "");
         var op = String(ctx.operationCode || normalizeOperationCode(n,ctx) || "");
         var exactTrain = [], operation = [];
         for (var i=0;i<records.length;i++) {
           var r=records[i];
-          if (!r || r.validDate !== d || line.indexOf(r.networkKey) < 0) continue;
+          if (!r || r.validDate !== d || line.indexOf(String(r.networkKey || "").toLowerCase()) < 0) continue;
           if (r.trainNumber && String(r.trainNumber) === n) exactTrain.push(r);
           else if (r.operationCode && op && String(r.operationCode) === op) operation.push(r);
         }
