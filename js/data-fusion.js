@@ -1618,10 +1618,15 @@
   }
 
   function ensureTimetable(lineId) {
-    // One existing source lifecycle: ODPTClient owns the optional read-through
-    // cache; a miss falls through to the existing manual/ODPT path.
+    // activateRealtimeLines() owns ODPT network loading. If that path already
+    // populated this line, do not start a second timetable source request here;
+    // only lazy-load manual evidence (vehicleType etc.) on top of the shared rows.
+    if (_hasOdptTimetable(lineId)) return ensureManualTimetable(lineId);
+    // One existing source lifecycle: ODPTClient owns the optional Supabase
+    // read-through cache; a miss falls through to the existing manual path.
     if (!window.ODPTClient || typeof window.ODPTClient.getCachedTrainRuns !== "function") return ensureManualTimetable(lineId);
     return window.ODPTClient.getCachedTrainRuns(lineId).then(function(rows) {
+      // ODPT activation may have completed while the cache request was in flight.
       if (!rows || !rows.length) return ensureManualTimetable(lineId);
       if (window.TrainPositionEstimator && typeof window.TrainPositionEstimator.registerManualTimetable === "function") {
         window.TrainPositionEstimator.registerManualTimetable(lineId, rows);
