@@ -98,10 +98,16 @@
       var rangeRe = /([^。\n、，,]{1,30}?駅)\s*[～〜－−-]\s*([^。\n、，,]{1,30}?駅)(?:間)?/g;
       var ranges = [];
       var rangeMatch;
-      while ((rangeMatch = rangeRe.exec(text))) ranges.push(rangeMatch[1].trim() + "→" + rangeMatch[2].trim());
+      while ((rangeMatch = rangeRe.exec(text))) {
+        var left = rangeMatch[1].trim().replace(/^[・･]+/, "");
+        ranges.push(left + "→" + rangeMatch[2].trim());
+      }
       if (!ranges.length) {
         var omittedStationRe = /([^。\n、，,]{1,30}?)\s*[～〜－−-]\s*([^。\n、，,]{1,30}?駅)(?:間)?/g;
-        while ((rangeMatch = omittedStationRe.exec(text))) ranges.push(rangeMatch[1].trim() + "→" + rangeMatch[2].trim());
+        while ((rangeMatch = omittedStationRe.exec(text))) {
+          var leftOmitted = rangeMatch[1].trim().replace(/^[・･]+/, "");
+          ranges.push(leftOmitted + "→" + rangeMatch[2].trim());
+        }
       }
       if (!ranges.length) {
         var fromToRe = /([^。\n、，,]{1,30}?駅)\s*から\s*([^。\n、，,]{1,30}?駅)\s*まで/g;
