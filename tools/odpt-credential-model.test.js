@@ -4,6 +4,7 @@ const assert = require("assert");
 
 const root = path.join(__dirname, "..");
 const client = fs.readFileSync(path.join(root, "data/api/odpt-unified.js"), "utf8");
+const src = client;
 
 assert(/浏览器端混淆不是秘密存储|browser.*not.*secret/i.test(client),
   "ODPT client must explicitly document that browser-side obfuscation is not secret storage");
