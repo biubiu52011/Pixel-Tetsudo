@@ -124,9 +124,9 @@ assert(!estimatorSource.includes("var explicitVehicle = sourceTT['vehicleType'] 
 
 
 
-assert(estimatorSource.includes("vehicleFormationId: Object.keys(_assignmentFormations).length === 1"),
+assert(estimatorSource.includes("vehicleFormationId: _assignmentFormationIds.length === 1"),
   'formation identity must be exposed only when decisive providers agree on one formation');
-assert(estimatorSource.includes("vehicleFormationCandidates: Object.keys(_assignmentFormations)"),
+assert(estimatorSource.includes("vehicleFormationCandidates: _assignmentFormationIds.slice()"),
   'formation candidate set must remain visible when formation identity is ambiguous');
 assert(estimatorSource.includes("split(/\\s*\\/\\s*|\\s*,\\s*|\\s*\\|\\s*/)"),
   'multi-formation evidence must be split into candidates instead of treated as one formation');
