@@ -71,6 +71,18 @@
     return String((p && (p.runningChainId || p.trainId || p.trainNumber || p.sourceTrainId)) || ("row-" + index));
   }
 
+  function stableStackOrdinal(p, index) {
+    var key = stableTrainKey(p, index);
+    var hash = 2166136261;
+    for (var i = 0; i < key.length; i++) {
+      hash ^= key.charCodeAt(i);
+      hash = Math.imul(hash, 16777619);
+    }
+    // Five deterministic slots around the track centre. Identity, not current
+    // occupancy, owns the slot so polling changes cannot reshuffle other trains.
+    return ((hash >>> 0) % 5) - 2;
+  }
+
   function buildOccupancy(positions, resolver) {
     var groups = {};
     for (var i = 0; i < positions.length; i++) {
@@ -157,9 +169,8 @@
     var key = trackKey(position, base.idx, base.nextIdx, lane);
     var slot = occupancy ? occupancy.get(key, index) : { ordinal: 0, total: 1 };
     // Keep an individual train on a stable lateral slot when neighbours enter or
-    // leave the same segment. Dynamic centring by total train count makes every
-    // marker in the group jump whenever occupancy changes.
-    var stackOrdinal = slot.ordinal === 0 ? 0 : (slot.ordinal % 2 ? Math.ceil(slot.ordinal / 2) : -Math.ceil(slot.ordinal / 2));
+    // leave the same segment. Identity owns the slot; current occupancy does not.
+    var stackOrdinal = slot.total > 1 ? stableStackOrdinal(position, index) : 0;
     var stackOffset = stackOrdinal * (opts.stackGap || DEFAULTS.stackGap);
     var laneGap = opts.laneGap || DEFAULTS.laneGap;
     var lateral = lane * laneGap + stackOffset;
