@@ -17338,7 +17338,10 @@ window.RAILWAY_DATA = {
           "Takasaki"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "branches": [
+        "Agatsuma"
+      ]
     },
     "Tsurumi": {
       "name": "Tsurumi",
@@ -22814,7 +22817,10 @@ window.RAILWAY_DATA = {
           "Keisei"
         ],
         "operatorGroup": "KEISEI"
-      }
+      },
+      "branches": [
+        "KeiseiOshiage"
+      ]
     },
     "SeibuChichibu": {
       "name": "SeibuChichibu",
@@ -23939,7 +23945,12 @@ window.RAILWAY_DATA = {
           "Keikyu"
         ],
         "operatorGroup": "KEIKYU"
-      }
+      },
+      "branches": [
+        "KeikyuAirport",
+        "KeikyuKurihama",
+        "KeikyuZushi"
+      ]
     },
     "MinatoMirai": {
       "name": "MinatoMirai",
@@ -24192,7 +24203,11 @@ window.RAILWAY_DATA = {
           "SotetsuMain"
         ],
         "operatorGroup": "SOTETSU"
-      }
+      },
+      "branches": [
+        "SotetsuIzumino",
+        "SotetsuShin-Yokohama"
+      ]
     },
     "SeibuYamaguchi": {
       "name": "SeibuYamaguchi",
@@ -25030,7 +25045,7 @@ window.RAILWAY_DATA = {
       "region": "Gunma",
       "type": "straight",
       "durationTotalMin": 55,
-      "branchOf": null,
+      "branchOf": "Takasaki",
       "stations": [
         "Shibukawa",
         "Kanashima",
@@ -27536,7 +27551,7 @@ window.RAILWAY_DATA = {
       "type": "straight",
       "image": "../images/鉄道/京急電鉄/空港線.png",
       "durationTotalMin": 12,
-      "branchOf": null,
+      "branchOf": "Keikyu",
       "stations": [
         "Keikyu-Kamata",
         "Kokuji",
@@ -27614,7 +27629,7 @@ window.RAILWAY_DATA = {
       "type": "straight",
       "image": "../images/鉄道/京急電鉄/久里浜線.png",
       "durationTotalMin": 32,
-      "branchOf": null,
+      "branchOf": "Keikyu",
       "stations": [
         "Horinouchi",
         "Shin-Otsu",
@@ -27674,7 +27689,7 @@ window.RAILWAY_DATA = {
       "type": "straight",
       "image": "../images/鉄道/京急電鉄/逗子線.png",
       "durationTotalMin": 8,
-      "branchOf": null,
+      "branchOf": "Keikyu",
       "stations": [
         "Kanazawa-Hakkei",
         "Mutsuura",
@@ -29623,7 +29638,7 @@ window.RAILWAY_DATA = {
       "type": "straight",
       "image": "../images/鉄道/小田急電鉄/多摩線.png",
       "durationTotalMin": 16,
-      "branchOf": null,
+      "branchOf": "Odawara",
       "stations": [
         "Shin-Yurigaoka",
         "Satsuki-Dai",
@@ -34080,7 +34095,10 @@ window.RAILWAY_DATA = {
           "Odawara"
         ],
         "operatorGroup": "ODAKYU"
-      }
+      },
+      "branches": [
+        "OdakyuTama"
+      ]
     },
     "SeibuTamagawa": {
       "name": "SeibuTamagawa",
@@ -35115,7 +35133,8 @@ window.RAILWAY_DATA = {
           "KeiseiOshiage"
         ],
         "operatorGroup": "KEISEI"
-      }
+      },
+      "branchOf": "Keisei"
     },
     "KeiseiKanamachi": {
       "nameJa": "京成金町線",
@@ -35373,7 +35392,8 @@ window.RAILWAY_DATA = {
           "SotetsuIzumino"
         ],
         "operatorGroup": "SOTETSU"
-      }
+      },
+      "branchOf": "SotetsuMain"
     },
     "SotetsuShin-Yokohama": {
       "nameJa": "相鉄新横浜線",
@@ -35422,7 +35442,8 @@ window.RAILWAY_DATA = {
           "SotetsuShin-Yokohama"
         ],
         "operatorGroup": "SOTETSU"
-      }
+      },
+      "branchOf": "SotetsuMain"
     },
     "NewShuttle": {
       "nameJa": "埼玉新都市交通伊奈線（ニューシャトル）",
