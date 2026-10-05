@@ -34,7 +34,7 @@
   }
 
   // 图标库反查（S0–S3 候选 → 图标路径）
-  function resolveArtworkForIdentity(name, formationId) {
+  function resolveArtworkForIdentity(name, formationId, serviceDate) {
     if (!name) return '';
     if (window.TrainIcons && typeof window.TrainIcons.resolveVehicleArtwork === 'function') {
       if (formationId) {
@@ -42,9 +42,9 @@
         if (!/編成/.test(formationIdentity)) {
           formationIdentity = name + '（' + String(formationId).trim() + '編成）';
         }
-        return window.TrainIcons.resolveVehicleArtwork(formationIdentity) || '';
+        return window.TrainIcons.resolveVehicleArtwork(formationIdentity, serviceDate) || '';
       }
-      return window.TrainIcons.resolveVehicleArtwork(name) || '';
+      return window.TrainIcons.resolveVehicleArtwork(name, serviceDate) || '';
     }
     return '';
   }
@@ -124,9 +124,9 @@
       if (_formationConstrained) {
         // Formation evidence is authoritative only when both fields agree on one value.
         // Ambiguous, missing, or contradictory formation evidence blocks artwork entirely.
-        iconPath = _formationUnique ? resolveArtworkForIdentity(chosen, _formationId) : '';
+        iconPath = _formationUnique ? resolveArtworkForIdentity(chosen, _formationId, ctx.serviceDate) : '';
       } else {
-        iconPath = resolveArtworkForIdentity(chosen, '');
+        iconPath = resolveArtworkForIdentity(chosen, '', ctx.serviceDate);
       }
     }
 
@@ -236,7 +236,7 @@
     var date = ctx.serviceDate || _formationServiceDate(ctx.at);
     var a = _formationEvidence[date+"|"+ctx.runningChainId];
     if (!a || a.conflict) return null;
-    var icon = resolveArtworkForIdentity(a.vehicleName, a.formationId);
+    var icon = resolveArtworkForIdentity(a.vehicleName, a.formationId, date);
     if (!icon) return null;
     return {
       formationId:a.formationId, vehicleName:a.vehicleName, iconPath:icon,
