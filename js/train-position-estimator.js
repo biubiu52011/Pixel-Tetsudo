@@ -326,6 +326,84 @@
   }
 
   // ========== Core estimation ==========
+  // Compile immutable timetable fields once per line/station layout. The
+  // compiled value is non-enumerable so raw ODPT rows remain clean for cache,
+  // diagnostics and running-chain consumers.
+  function compileTrainRun(tt, lineId, workLine, stationIndexMap) {
+    if (!tt) return null;
+    var layoutKey = lineId + "|" + workLine.stations.join("|");
+    var cached = tt._compiledTrainRun;
+    if (cached && cached.layoutKey === layoutKey) return cached;
+
+    var trainNumber = tt["odpt:trainNumber"] || tt["odpt:train"] || "";
+    var timetableObjectId = tt["@id"] || tt["owl:sameAs"] || "";
+    var timetableIdentity = timetableObjectId ||
+      ((tt["odpt:railway"] || lineId || "") + "|" + String(trainNumber));
+    var tto = tt["odpt:trainTimetableObject"];
+    if (!Array.isArray(tto) || tto.length === 0) return null;
+
+    var stops = [];
+    for (var s = 0; s < tto.length; s++) {
+      var raw = tto[s];
+      if (!raw) continue;
+      var stationUrn = raw["odpt:departureStation"] || raw["odpt:arrivalStation"] || raw["odpt:station"] || "";
+      var stationKey = extractStationKey(stationUrn);
+      var normStationKey = normalizeStationKey(stationKey);
+      var idx = stationIndexMap[normStationKey];
+      if (idx === undefined) idx = stationIndexMap[stationKey];
+      stops.push({
+        raw: raw,
+        stationUrn: stationUrn,
+        stationIndex: idx,
+        arrivalMinute: parseTimeToMinutes(raw["odpt:arrivalTime"]),
+        departureMinute: parseTimeToMinutes(raw["odpt:departureTime"])
+      });
+    }
+
+    var destinationStation = "", destinationStationUrn = "";
+    var destStations = tt["odpt:destinationStation"] || [];
+    if (typeof destStations === "string") destStations = [destStations];
+    if (destStations.length) {
+      destinationStationUrn = String(destStations[0]);
+      destinationStation = destinationStationUrn.split(".").pop();
+    }
+    if (!destinationStation) {
+      for (var di = tto.length - 1; di >= 0; di--) {
+        var dr = tto[di] || {};
+        if ((dr["odpt:departureTime"] || "") === "") {
+          destinationStationUrn = String(dr["odpt:station"] || dr["odpt:arrivalStation"] || "");
+          destinationStation = destinationStationUrn.split(".").pop();
+          if (destinationStation) break;
+        }
+      }
+    }
+
+    var railDirection = tt["odpt:railDirection"] || "";
+    var dp = String(railDirection).split(":");
+    cached = {
+      layoutKey: layoutKey,
+      trainNumber: trainNumber,
+      timetableObjectId: timetableObjectId,
+      timetableIdentity: timetableIdentity,
+      calendar: tt["odpt:calendar"] || "",
+      railwayKey: extractRailwayKey(tt["odpt:railway"]),
+      trainType: tt["odpt:trainType"] || "",
+      railDirection: railDirection,
+      directionName: dp.length > 1 ? dp[dp.length - 1] : String(railDirection),
+      destinationStation: destinationStation,
+      destinationStationUrn: destinationStationUrn,
+      stops: stops
+    };
+    try {
+      Object.defineProperty(tt, "_compiledTrainRun", {
+        value: cached, writable: true, configurable: true, enumerable: false
+      });
+    } catch(e) {
+      tt._compiledTrainRun = cached;
+    }
+    return cached;
+  }
+
   /**
    * Estimate train positions for a single line based on timetable + delay
    * @param {string} lineId - Line ID (e.g. "Namboku")
