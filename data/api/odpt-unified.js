@@ -717,6 +717,10 @@
         validateAuthoritativeRealtimeConfig: validateAuthoritativeRealtimeConfig,
         getCachedTrainRuns: getCachedTrainRuns,
 
+        clearRealtimeLines: function() {
+            Object.keys(_activeRealtimeOperators).forEach(function(op) { delete _activeRealtimeOperators[op]; });
+        },
+
         activateRealtimeLines: function(lineIds) {
             lineIds = Array.isArray(lineIds) ? lineIds : [lineIds];
             var self = this;
