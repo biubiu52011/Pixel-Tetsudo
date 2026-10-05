@@ -1427,11 +1427,11 @@
     // v4.3.475: 大江户线光丘段列车显示真实终点（光丘/都厅前），不走环线"内回/外回"标签
     if (_isOedoBranchTrain(lineId, p)) {
       labelText = _trainDestText(p.destinationStation);
-    } else if (isLoopDir && p.destinationStation) {
-      // Inner/Outer describes direction only. A concrete source destination
-      // remains the train's terminal and must be shown without a synthetic mode.
-      labelText = _trainDestText(p.destinationStation);
     } else if (isLoopDir) {
+      // InnerLoop/OuterLoop is the passenger-facing routing concept on circular
+      // lines. ODPT may still carry an operational turnback/depot destination
+      // (for example Osaki); keep that source fact upstream, but do not replace
+      // the loop-direction label with it here.
       labelText = (LOOP_DIR_NAMES[dn] && LOOP_DIR_NAMES[dn][lang]) || (LOOP_DIR_NAMES[dn] ? LOOP_DIR_NAMES[dn].ja : '');
     } else if (/^(Inbound|Outbound|Northbound|Southbound|Eastbound|Westbound)$/.test(dn)) {
       labelText = _trainDestText(p.destinationStation);
