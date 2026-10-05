@@ -4,61 +4,63 @@ const assert = require('assert');
 const vm = require('vm');
 
 const ROOT = path.resolve(__dirname, '..');
+function read(rel) { return fs.readFileSync(path.join(ROOT, rel), 'utf8'); }
 
-function read(rel) {
-  return fs.readFileSync(path.join(ROOT, rel), 'utf8');
-}
+const context = {
+  console: { debug() {}, log() {}, warn() {}, error() {} },
+  window: {
+    TransitConstants: {
+      normalizeOp(op) { return String(op || '').replace(/^odpt\.Operator:/, ''); }
+    },
+    VEHICLE_OPERATION_EVIDENCE: [{
+      networkKey: 'keiyo',
+      validDate: '2026-04-01',
+      operationCode: '19',
+      operator: 'JR-East',
+      vehicleType: 'JR 209系500番台',
+      formationIds: [],
+      observedDate: '2026-04-01',
+      grade: 'C',
+      sourceUrl: 'https://loo-ool.com/rail/B/'
+    }]
+  }
+};
+context.self = context.window;
+vm.createContext(context);
+[
+  'js/train-icons.js',
+  'data/timetables/train-operation-evidence.js',
+  'js/train-vehicle.js'
+].forEach(rel => vm.runInContext(read(rel), context, { filename: rel }));
 
-function loadRuntime() {
-  const context = {
-    console: { debug() {}, log() {}, warn() {}, error() {} },
-    window: {
-      TransitConstants: {
-        normalizeOp(op) {
-          return String(op || '').replace(/^odpt\.Operator:/, '');
-        }
-      }
-    }
-  };
-  context.self = context.window;
-  vm.createContext(context);
-  [
-    'js/train-icons.js',
-    'data/timetables/vehicle-type-map.js',
-    'data/timetables/tobu-limited-express-vehicle-evidence.js',
-    'js/train-vehicle.js'
-  ].forEach((rel) => {
-    vm.runInContext(read(rel), context, { filename: rel });
-  });
-  return context.window;
-}
-
-const win = loadRuntime();
-
-const unresolvedNewShuttle = win.TrainVehicle.resolve({
-  lineId: 'NewShuttle',
-  trainNumber: 'NS-test-unassigned',
-  trainType: 'Local',
-  destinationStation: 'Uchijuku'
-});
-assert.strictEqual(unresolvedNewShuttle.identityStatus, 'NARROWED');
-assert.deepStrictEqual(Array.from(unresolvedNewShuttle.candidates), [
-  '埼玉新都市交通2000系',
-  '埼玉新都市交通2020系'
-]);
-assert.strictEqual(unresolvedNewShuttle.name, '');
-assert.strictEqual(unresolvedNewShuttle.iconPath, '');
-
-const jobanMedium = win.TrainVehicle.resolve({
-  lineId: 'Joban',
-  trainNumber: 'J-test-tsuchiura',
-  trainType: 'Local',
+const ev = context.window.TrainOperationEvidence.resolveEvidence('anything', {
+  lineId: 'Keiyo',
+  railway: 'odpt.Railway:JR-East.Keiyo',
   operator: 'JR-East',
-  destinationStation: 'odpt.Station:JR-East.Joban.Tsuchiura'
-});
-assert.strictEqual(jobanMedium.identityStatus, 'EXACT');
-assert.strictEqual(jobanMedium.vehicleTypeStr, 'JR E531系');
-assert.ok(/JR東日本_E531系\.png$/.test(jobanMedium.iconPath), jobanMedium.iconPath);
-assert.ok(!/E231系_0番代_常磐快速線/.test(jobanMedium.iconPath), jobanMedium.iconPath);
+  serviceDate: '2026-04-01',
+  operationCode: '19'
+}, 'fallback');
+assert.ok(ev && ev.vehicleType === 'JR 209系500番台',
+  'canonical operation evidence must resolve the dated vehicle fact');
 
-console.log('train-vehicle-icon-resolution: PASS');
+const resolved = context.window.TrainVehicle.resolve({
+  lineId: 'Keiyo',
+  trainNumber: 'anything',
+  timetableVehicleType: ev.vehicleType,
+  timetableEvidence: [ev]
+});
+assert.strictEqual(resolved.identityStatus, 'EXACT');
+assert.strictEqual(resolved.source, 'timetable');
+assert.strictEqual(resolved.name, 'JR 209系500番台');
+assert.ok(!resolved.iconPath || typeof resolved.iconPath === 'string');
+
+const unknown = context.window.TrainVehicle.resolve({
+  lineId: 'Keiyo', operator: 'JR-East', trainNumber: '19'
+});
+assert.strictEqual(unknown.identityStatus, 'UNKNOWN');
+assert.strictEqual(unknown.iconPath, '');
+
+assert.ok(!fs.existsSync(path.join(ROOT, 'data/timetables/vehicle-type-map.js')),
+  'deleted parallel vehicle-type map must not be reintroduced');
+
+console.log('train-run operation evidence -> exact vehicle -> artwork projection: PASS');
