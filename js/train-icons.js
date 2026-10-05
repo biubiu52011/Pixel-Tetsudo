@@ -447,6 +447,24 @@
   // concrete vehicle from fleet proportions or time-window hashing; concrete
   // vehicle identity must come from train/date/operation evidence upstream.
 var CANONICAL_VEHICLES = {
+  "jr-east-209-500-keiyo": {
+    displayName: "209系500番台（京葉線）",
+    iconName: "209系500番台（京葉線）",
+    asset: "../images/列车/JR東日本/JR東日本_209系_500番台_京葉線.png",
+    aliases: ["209系500番台（京葉線）", "JR 209系500番台", "JR東日本209系500番台"]
+  },
+  "sotetsu-12000": {
+    displayName: "相模鉄道12000系",
+    iconName: "相模鉄道12000系",
+    asset: "../images/列车/相模鉄道/相模鉄道_12000系_YOKOHAMA_NAVYBLUE.png",
+    aliases: ["相模鉄道12000系", "相鉄12000系"]
+  },
+  "odakyu-5000": {
+    displayName: "小田急5000形",
+    iconName: "小田急5000形",
+    asset: "../images/列车/小田急電鉄/小田急電鉄_5000形_標準色.png",
+    aliases: ["小田急5000形", "小田急電鉄5000形"]
+  },
   "jr-east-e235-0-yamanote": {
     displayName: "E235系0番台（山手線）",
     iconName: "E235系山手線",
