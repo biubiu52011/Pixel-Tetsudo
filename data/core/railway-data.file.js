@@ -27057,7 +27057,9 @@ window.RAILWAY_DATA = {
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "OuMain"
+      ],
       "transferStations": [
         {
           "station": "Higashi-Noshiro",
@@ -27087,7 +27089,19 @@ window.RAILWAY_DATA = {
           "Gono"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "OuMain",
+          "handoverStations": [
+            "Kawabe"
+          ],
+          "evidence": {
+            "source": "Historical timetable cross-validation: Gono / Ou Main adjacent through-service join",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "Hachinohe": {
       "name": "Hachinohe",
@@ -27965,7 +27979,9 @@ window.RAILWAY_DATA = {
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "TohokuMain"
+      ],
       "transferStations": [
         {
           "station": "Hanamaki",
@@ -27995,7 +28011,19 @@ window.RAILWAY_DATA = {
           "Kamaishi"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "TohokuMain",
+          "handoverStations": [
+            "Hanamaki"
+          ],
+          "evidence": {
+            "source": "Historical timetable cross-validation: Kamaishi / Tohoku Main adjacent through-service join",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "Kitakami": {
       "name": "北上線",
@@ -31155,7 +31183,10 @@ window.RAILWAY_DATA = {
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "Gono",
+        "Tazawako"
+      ],
       "transferStations": [
         {
           "station": "Shinjo",
@@ -31233,7 +31264,29 @@ window.RAILWAY_DATA = {
           "OuMain"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "Gono",
+          "handoverStations": [
+            "Kawabe"
+          ],
+          "evidence": {
+            "source": "Historical timetable cross-validation: Gono / Ou Main adjacent through-service join",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "Tazawako",
+          "handoverStations": [
+            "Omagari"
+          ],
+          "evidence": {
+            "source": "Historical timetable cross-validation: Ou Main / Tazawako adjacent through-service join",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "RikutoEast": {
       "name": "陆羽东线",
@@ -33153,7 +33206,9 @@ window.RAILWAY_DATA = {
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "OuMain"
+      ],
       "transferStations": [
         {
           "station": "Morioka",
@@ -33189,7 +33244,19 @@ window.RAILWAY_DATA = {
           "Tazawako"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": [
+        {
+          "lineId": "OuMain",
+          "handoverStations": [
+            "Omagari"
+          ],
+          "evidence": {
+            "source": "Historical timetable cross-validation: Ou Main / Tazawako adjacent through-service join",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "Tobu_Kameido": {
       "name": "龟户线",
@@ -33332,7 +33399,9 @@ window.RAILWAY_DATA = {
         "Morioka"
       ],
       "durations": [],
-      "throughServices": [],
+      "throughServices": [
+        "Kamaishi"
+      ],
       "transferStations": [
         {
           "station": "Kuroiso",
@@ -33456,7 +33525,19 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "东北本线",
-      "nameKo": "도호쿠 본선"
+      "nameKo": "도호쿠 본선",
+      "serviceBoundaries": [
+        {
+          "lineId": "Kamaishi",
+          "handoverStations": [
+            "Hanamaki"
+          ],
+          "evidence": {
+            "source": "Historical timetable cross-validation: Kamaishi / Tohoku Main adjacent through-service join",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "Tojo": {
       "name": "Tojo Line",
