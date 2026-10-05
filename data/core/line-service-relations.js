@@ -57,19 +57,3 @@ window.LineServiceRelations = [
   { lineA: "Nippo", lineB: "Hohi", relation: "SERVICE_BOUNDARY", direction: "BIDIRECTIONAL", handoverStations: ["Ōita"], evidence: { source: "JR Kyushu Kyushu Odan Tokkyu timetable: Hohi services continue through Oita onto Nippo to/from Beppu", confidence: "HIGH" } },
 ];
 
-(function() {
-  "use strict";
-  var L = window.LineServiceRelations || [];
-  L.getRelatedLines = function(lid) {
-    if (!lid) return [];
-    return L.filter(function(r) { return r.lineA === lid || r.lineB === lid; });
-  };
-  L.getBoundary = function(a, b) {
-    if (!a || !b) return null;
-    for (var i = 0; i < L.length; i++) {
-      var r = L[i];
-      if ((r.lineA === a && r.lineB === b) || (r.lineA === b && r.lineB === a)) return r;
-    }
-    return null;
-  };
-})();
