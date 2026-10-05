@@ -165,3 +165,12 @@ assert(vehicleResolverSrc.includes('_formationCandidates.length === 1') &&
        vehicleResolverSrc.includes("_formationCandidates[0] === _formationId"),
   'formation artwork must require one internally consistent formation identity');
 console.log('formation no-fallback contract: 2 PASS');
+
+Object.keys(canonical).forEach((id) => {
+  const rec = canonical[id] || {};
+  if (rec.validFrom || rec.validTo) {
+    assert(rec.evidenceGrade === 'A' && /^https:\/\//.test(rec.evidenceSource || ''),
+      'dated canonical artwork requires grade-A provenance: ' + id);
+  }
+});
+console.log('dated canonical provenance guard: PASS');
