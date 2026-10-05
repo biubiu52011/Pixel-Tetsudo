@@ -447,6 +447,7 @@
   // concrete vehicle from fleet proportions or time-window hashing; concrete
   // vehicle identity must come from train/date/operation evidence upstream.
 var CANONICAL_VEHICLES = {
+  "sotetsu-11000-11003-hohoemi": { displayName: "相鉄11000系(10両)（11003F編成）", iconName: "相鉄11000系(10両)（11003F編成）", asset: "../images/列车/相模鉄道/相模鉄道_11000系_11003編成_ほほえみ号.png", validFrom: "2026-08-30", validTo: "", aliases: ["相鉄11000系(10両)（11003F編成）"] },
   "new-shuttle-2000-01": { displayName: "埼玉新都市交通2000系（01編成）", iconName: "埼玉新都市交通2000系（01編成）", asset: "../images/列车/埼玉新都市交通/埼玉新都市交通_2000系_01編成_レッドパープル.png", aliases: ["2000系（01編成）","埼玉新都市交通2000系（01編成）"] },
   "new-shuttle-2000-02": { displayName: "埼玉新都市交通2000系（02編成）", iconName: "埼玉新都市交通2000系（02編成）", asset: "../images/列车/埼玉新都市交通/埼玉新都市交通_2000系_02編成_オレンジ.png", aliases: ["2000系（02編成）","埼玉新都市交通2000系（02編成）"] },
   "new-shuttle-2000-03": { displayName: "埼玉新都市交通2000系（03編成）", iconName: "埼玉新都市交通2000系（03編成）", asset: "../images/列车/埼玉新都市交通/埼玉新都市交通_2000系_03編成_グリーン.png", aliases: ["2000系（03編成）","埼玉新都市交通2000系（03編成）"] },
@@ -652,14 +653,18 @@ function resolveCanonicalVehicle(name) {
   return CANONICAL_VEHICLE_ALIAS_INDEX[n] || null;
 }
 
-function _canonicalVehicleIconPath(name) {
+function _canonicalVehicleIconPath(name, serviceDate) {
   var n = String(name || "").trim();
   if (!n) return null;
-  // canonical 精确匹配优先：合法 displayName 可含斜杠（如 "209系2000番台 / 2100番台"）
   var rec = resolveCanonicalVehicle(n);
-  if (rec) return rec.asset;
-  // No legacy/static-map fallback: only one conflict-free canonical record may project artwork.
-  return null;
+  if (!rec) return null;
+  if (rec.validFrom || rec.validTo) {
+    var d = String(serviceDate || "").slice(0, 10);
+    if (!d) return null;
+    if (rec.validFrom && d < rec.validFrom) return null;
+    if (rec.validTo && d > rec.validTo) return null;
+  }
+  return rec.asset;
 }
 
 function _resolveTrainRuleDisplayName(lineId, operator, trainId, stationIndex, trainType, byOperator) {
@@ -684,10 +689,10 @@ function _resolveTrainRuleDisplayName(lineId, operator, trainId, stationIndex, t
   // prove a concrete formation or livery, so never hash-pick one at runtime.
   // Single artwork mapper. Input is an already-resolved vehicle identity only.
   // Operational context (line/operator/train number/source) is intentionally absent.
-  function resolveVehicleArtwork(vehicleIdentity) {
-    return _resolveVehicleArtworkBase(vehicleIdentity);
+  function resolveVehicleArtwork(vehicleIdentity, serviceDate) {
+    return _resolveVehicleArtworkBase(vehicleIdentity, serviceDate);
   }
-  function _resolveVehicleArtworkBase(vehicleIdentity) {
+  function _resolveVehicleArtworkBase(vehicleIdentity, serviceDate) {
     if (!vehicleIdentity) return null;
     var parts = String(vehicleIdentity).split('/').map(function(s){ return s.trim(); }).filter(Boolean);
     // A candidate list is not a concrete identity.
@@ -697,7 +702,7 @@ function _resolveTrainRuleDisplayName(lineId, operator, trainId, stationIndex, t
     // Canonical aliases are allowed only when they resolve to the same registered
     // identity record. No line override, replacement vehicle, base-name stripping,
     // retired-stock substitution, or approximate alias may select artwork.
-    var canonical = _canonicalVehicleIconPath(name);
+    var canonical = _canonicalVehicleIconPath(name, serviceDate);
     if (canonical) return canonical;
     return null;
   }
