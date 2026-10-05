@@ -902,14 +902,12 @@
                   var _serviceDate = _now.getFullYear() + "-" + String(_now.getMonth()+1).padStart(2,"0") + "-" + String(_now.getDate()).padStart(2,"0");
                   var _serviceDay = _now.getDay();
                   var _calendarType = (_serviceDay === 0 || _serviceDay === 6) ? "holiday" : "weekday";
-                  var _operationCode = String(trainId || "").replace(/^.*:/, "").trim();
                   _derivedVehicleEvidence = window.TrainOperationEvidence.resolveEvidence(trainId, {
                     lineId: lid,
                     railway: railwayName,
                     operator: trainOpShort,
                     trainOwner: odptTrainOwner,
                     trainNumber: trainId,
-                    operationCode: _operationCode,
                     serviceDate: _serviceDate,
                     calendarType: _calendarType
                   }, "realtime-derived");
