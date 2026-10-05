@@ -93,10 +93,19 @@
     // Text-only official messages often carry the affected station range
     // without structured stationFrom/stationTo fields.
     if (!interval && text) {
-      var rangeMatch = text.match(/([^。\n、，,]{1,30}?駅)\s*[～〜－−-]\s*([^。\n、，,]{1,30}?駅)(?:間)?/);
-      if (!rangeMatch) rangeMatch = text.match(/([^。\n、，,]{1,30}?)\s*[～〜－−-]\s*([^。\n、，,]{1,30}?駅)(?:間)?/);
-      if (!rangeMatch) rangeMatch = text.match(/([^。\n、，,]{1,30}?駅)\s*から\s*([^。\n、，,]{1,30}?駅)\s*まで/);
-      if (rangeMatch) interval = rangeMatch[1].trim() + "→" + rangeMatch[2].trim();
+      var rangeRe = /([^。\n、，,]{1,30}?駅)\s*[～〜－−-]\s*([^。\n、，,]{1,30}?駅)(?:間)?/g;
+      var ranges = [];
+      var rangeMatch;
+      while ((rangeMatch = rangeRe.exec(text))) ranges.push(rangeMatch[1].trim() + "→" + rangeMatch[2].trim());
+      if (!ranges.length) {
+        var omittedStationRe = /([^。\n、，,]{1,30}?)\s*[～〜－−-]\s*([^。\n、，,]{1,30}?駅)(?:間)?/g;
+        while ((rangeMatch = omittedStationRe.exec(text))) ranges.push(rangeMatch[1].trim() + "→" + rangeMatch[2].trim());
+      }
+      if (!ranges.length) {
+        var fromToRe = /([^。\n、，,]{1,30}?駅)\s*から\s*([^。\n、，,]{1,30}?駅)\s*まで/g;
+        while ((rangeMatch = fromToRe.exec(text))) ranges.push(rangeMatch[1].trim() + "→" + rangeMatch[2].trim());
+      }
+      if (ranges.length) interval = ranges.join("、");
       else if (/全線/.test(text)) interval = "全線";
     }
     var resume = null;
