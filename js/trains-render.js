@@ -1213,6 +1213,9 @@
           // Inbound（上行）保持原方向（车头向右），Outbound（下行）车头向左
           // SVG image 翻转：translate 到中心后 scale(-1,1) 再 translate 回来
           _setTrainIconPosition(newIcon, px, py, p, lineId, isLoop);
+          newIcon._displayX = px;
+          newIcon._displayY = py;
+          newIcon._displayLineId = lineId;
           trainLayer.appendChild(newIcon);
           appendTrainLabels(trainLayer, svgNS, trainUid, px, py, p, lineId);
         } else {
@@ -1221,6 +1224,9 @@
           newCircle.setAttribute("data-train-id", String(trainUid));
           newCircle.setAttribute("class", iconCls);
           newCircle.setAttribute("transform", "translate(" + px + "," + py + ")");
+          newCircle._displayX = px;
+          newCircle._displayY = py;
+          newCircle._displayLineId = lineId;
           
           var outerCircle = document.createElementNS(svgNS, "circle");
           outerCircle.setAttribute("cx", "0");
