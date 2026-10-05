@@ -644,6 +644,59 @@
         return result.value || (Array.isArray(result) ? result : []);
     }
 
+    // Existing ODPT client also owns the optional server-side TrainRun cache.
+    // It is a read-through optimization, not a second timetable authority.
+    var TRAIN_RUN_CACHE_ENDPOINT = "https://pnupwfmgbtxqhpzsrhfn.supabase.co/functions/v1/train-runs";
+    var _trainRunCache = {};
+    var _trainRunInflight = {};
+    function _serviceDateJst() {
+        var now = new Date();
+        var parts = new Intl.DateTimeFormat("en-CA", {
+            timeZone:"Asia/Tokyo", year:"numeric", month:"2-digit", day:"2-digit", hour:"2-digit", hourCycle:"h23"
+        }).formatToParts(now), p={};
+        parts.forEach(function(x){ if(x.type!=="literal") p[x.type]=x.value; });
+        var y=Number(p.year), m=Number(p.month), d=Number(p.day);
+        if(Number(p.hour)<4) {
+            var prev=new Date(Date.UTC(y,m-1,d)-86400000);
+            return prev.toISOString().slice(0,10);
+        }
+        return p.year+"-"+p.month+"-"+p.day;
+    }
+    function _trainRunToTimetable(run) {
+        return {
+            "@id":"supabase:TrainRun:"+run.id,
+            "odpt:trainNumber":run.train_number||"",
+            "odpt:railway":run.network_key||run.line_id||"",
+            "odpt:calendar":run.calendar_type==="holiday"?"odpt.Calendar:SaturdayHoliday":"odpt.Calendar:Weekday",
+            "odpt:trainTimetableObject":(run.stops||[]).map(function(s){
+                var o={};
+                if(s.arrival_time) o["odpt:arrivalTime"]=String(s.arrival_time).slice(0,5);
+                if(s.departure_time) o["odpt:departureTime"]=String(s.departure_time).slice(0,5);
+                if(s.station_urn) {
+                    if(s.arrival_time) o["odpt:arrivalStation"]=s.station_urn;
+                    if(s.departure_time || !s.arrival_time) o["odpt:departureStation"]=s.station_urn;
+                }
+                return o;
+            }),
+            _positionSource:"supabase-train-run"
+        };
+    }
+    function getCachedTrainRuns(lineId) {
+        var serviceDate=_serviceDateJst(), key=lineId+"|"+serviceDate, hit=_trainRunCache[key];
+        if(hit && Date.now()-hit.at<30000) return Promise.resolve(hit.rows);
+        if(_trainRunInflight[key]) return _trainRunInflight[key];
+        var url=TRAIN_RUN_CACHE_ENDPOINT+"?line_id="+encodeURIComponent(lineId)+"&service_date="+encodeURIComponent(serviceDate);
+        _trainRunInflight[key]=fetch(url,{credentials:"omit"}).then(function(r){
+            if(!r.ok) throw new Error("TrainRun cache HTTP "+r.status);
+            return r.json();
+        }).then(function(body){
+            var rows=(body&&body.complete&&Array.isArray(body.runs))?body.runs.map(_trainRunToTimetable):[];
+            _trainRunCache[key]={at:Date.now(),rows:rows};
+            return rows;
+        }).catch(function(){ return []; }).finally(function(){ delete _trainRunInflight[key]; });
+        return _trainRunInflight[key];
+    }
+
     // Operators are activated by the train detail view. Keeping this set here
     // lets lazy pages poll only data the user has actually requested.
     var _activeRealtimeOperators = {};
@@ -660,6 +713,7 @@
         getApiLinks: getApiLinks,
         keysConfigured: keysConfigured,
         validateAuthoritativeRealtimeConfig: validateAuthoritativeRealtimeConfig,
+        getCachedTrainRuns: getCachedTrainRuns,
 
         activateRealtimeLines: function(lineIds) {
             lineIds = Array.isArray(lineIds) ? lineIds : [lineIds];
