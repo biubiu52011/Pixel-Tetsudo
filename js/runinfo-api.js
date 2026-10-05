@@ -130,6 +130,7 @@
       return window.RunInfoEvaluator.evaluate({
         source: "odpt",
         structuredStatus: rec["odpt:trainInformationStatus"],
+        messageKind: rec["pt:messageKind"] || rec["odpt:trainInformationCategory"] || rec["odpt:category"],
         suspension: rec["odpt:suspension"] === true,
         delay: rec["odpt:delay"] === true,
         delayMinutes: (typeof rec["odpt:delay"] === "number") ? rec["odpt:delay"] : null,
