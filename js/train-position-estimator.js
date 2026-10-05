@@ -485,7 +485,21 @@
         // v6: 接续推定——数据最远端之后。dest 在本线站表内且更远 → 外推补充站序列；
         // 否则（跨线/缺失/数据完整）fullStops === tto，零影响。
         var ext = buildExtrapolation(tt, tto, stationIndexMap);
-        var fullStops = ext ? tto.concat(ext.stops) : tto;
+        // Normal runs consume pre-parsed stops. Extrapolated synthetic stops are
+        // appended in the same compact shape so the hot loop has one code path.
+        var fullStops = run.stops.slice();
+        if (ext && ext.stops) {
+          ext.stops.forEach(function(es) {
+            fullStops.push({
+              raw: es,
+              stationUrn: "",
+              stationIndex: es._index,
+              arrivalMinute: es.arrTime,
+              departureMinute: es.depTime,
+              extrapolated: true
+            });
+          });
+        }
         var extrapolated = false;
 
         // Find current station based on time
@@ -499,20 +513,9 @@
           var stop = fullStops[s];
           if (!stop) continue;
 
-          var depTime, arrTime, idx;
-          if (stop._index !== undefined) {
-            // 外推虚拟站（已带站表索引与推定时刻）
-            idx = stop._index;
-            arrTime = stop.arrTime;
-            depTime = stop.depTime;
-          } else {
-            depTime = parseTimeToMinutes(stop["odpt:departureTime"]);
-            arrTime = parseTimeToMinutes(stop["odpt:arrivalTime"]);
-            var stationKey = extractStationKey(stop["odpt:departureStation"] || stop["odpt:arrivalStation"]);
-            var normStationKey = normalizeStationKey(stationKey);
-            idx = stationIndexMap[normStationKey];
-            if (idx === undefined) idx = stationIndexMap[stationKey]; // fallback to original key
-          }
+          var depTime = stop.departureMinute;
+          var arrTime = stop.arrivalMinute;
+          var idx = stop.stationIndex;
 
           if (idx === undefined || idx < 0) continue;
 
@@ -559,7 +562,8 @@
           var lastArrTime = null;
           for (var _ls = fullStops.length - 1; _ls >= 0; _ls--) {
             var _stp7 = fullStops[_ls] || {};
-            var _tm7 = (_stp7._index !== undefined) ? _stp7.arrTime : parseTimeToMinutes(_stp7["odpt:arrivalTime"] || _stp7["odpt:departureTime"]);
+            var _tm7 = _stp7.arrivalMinute !== null && _stp7.arrivalMinute !== undefined
+              ? _stp7.arrivalMinute : _stp7.departureMinute;
             if (_tm7 !== null && _tm7 !== undefined) { lastArrTime = _tm7; break; }
           }
           if (lastArrTime !== null && adjustedCurrentMin > lastArrTime + 5) continue; // 5 min grace
