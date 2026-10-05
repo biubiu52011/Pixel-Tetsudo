@@ -197,13 +197,8 @@
 
   function isThroughConnected(a, b) {
     try {
-      // Single Provider first: data/core/through-service.js
-      if (window.ThroughService && window.ThroughService.getDirectThroughLines) {
-        return window.ThroughService.getDirectThroughLines(a).indexOf(b) >= 0;
-      }
-      if (window.DataFusion && window.DataFusion.getDirectThroughLines) {
-        return window.DataFusion.getDirectThroughLines(a).indexOf(b) >= 0;
-      }
+      var line = window.UNIFIED_LINES && window.UNIFIED_LINES[a];
+      return !!(line && Array.isArray(line.throughServices) && line.throughServices.indexOf(b) >= 0);
       return false;
     } catch(e) { return false; }
   }
@@ -215,11 +210,12 @@
   function isThroughAtStation(a, b, st) {
     if (!isThroughConnected(a, b)) return false;
     try {
-      if (window.ThroughService && window.ThroughService.getJoinStations) {
-        var joins = window.ThroughService.getJoinStations(a, b);
-        // null = 未声明（保持宽松，任何共站算直通）；[] = 声明"无接续站"（不通过）
-        if (joins && joins.length > 0 && joins.indexOf(st) < 0) return false;
-      }
+      var line = window.UNIFIED_LINES && window.UNIFIED_LINES[a];
+      var boundaries = line && Array.isArray(line.serviceBoundaries) ? line.serviceBoundaries : [];
+      var boundary = boundaries.find(function(x) { return x && x.lineId === b; });
+      var joins = boundary && Array.isArray(boundary.handoverStations) ? boundary.handoverStations : null;
+      // null means an end-to-end service relation without a direct line-ID boundary.
+      if (joins && joins.length > 0 && joins.indexOf(st) < 0) return false;
     } catch(e) {}
     return true;
   }
