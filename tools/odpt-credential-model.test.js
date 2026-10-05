@@ -20,3 +20,13 @@ for (const re of misleading) {
   assert(!re.test(client), "misleading client-side credential secrecy claim: " + re);
 }
 console.log("odpt-credential-model: PASS (static-client exposure documented)");
+
+assert(/auditRealtimeLine:\s*function\(lineId, rows\)/.test(src),
+  'ODPT client must expose exact line realtime audit');
+assert(/actual\.key === expected\.key/.test(src),
+  'line realtime audit must match canonical operator+railway identity');
+assert(/ODPT_REALTIME_AUDIT\.Yamanote/.test(src),
+  'Yamanote activation must publish an exact realtime audit snapshot');
+assert(!/auditRealtimeLine[\s\S]{0,2500}station.*overlap/i.test(src),
+  'line realtime audit must not guess by station overlap');
+console.log('Yamanote realtime activation contract: 4 PASS');
