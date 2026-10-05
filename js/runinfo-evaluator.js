@@ -253,6 +253,13 @@
     var te = evaluateText(input.text || input.statusText || "");
     evidence = evidence.concat(te.evidence || []);
     var metadata = extractMetadata(input);
+    if (messageKind === "realtime" && metadata.impacts && metadata.impacts.length > 1) {
+      var hasWholeSuspension = metadata.impacts.some(function(x){ return x.interval === "全線" && x.effect === "suspension"; });
+      if (!hasWholeSuspension && structured === "suspended") {
+        structured = "notice";
+        evidence.push({ type: "MULTI_IMPACT_PARTIAL_OPERATION" });
+      }
+    }
     // A structured Suspension may describe only a station range. Whole-line × is
     // reserved for an unscoped/whole-line suspension; scoped ranges stay △.
     if (structured === "suspended" && metadata.interval && metadata.interval !== "全線") {
