@@ -94,7 +94,7 @@
     // without structured stationFrom/stationTo fields.
     if (!interval && text) {
       var rangeMatch = text.match(/([^。\n、，,]{1,30}?駅)\s*[～〜－−-]\s*([^。\n、，,]{1,30}?駅)(?:間)?/);
-      if (!rangeMatch) rangeMatch = text.match(/([^。\\n、，,]{1,30}?駅)\\s*から\\s*([^。\\n、，,]{1,30}?駅)\\s*まで/);
+      if (!rangeMatch) rangeMatch = text.match(/([^。\n、，,]{1,30}?駅)\s*から\s*([^。\n、，,]{1,30}?駅)\s*まで/);
       if (rangeMatch) interval = rangeMatch[1].trim() + "→" + rangeMatch[2].trim();
       else if (/全線/.test(text)) interval = "全線";
     }
