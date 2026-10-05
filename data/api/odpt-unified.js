@@ -668,6 +668,7 @@
             "odpt:trainNumber":run.train_number||"",
             "odpt:railway":run.network_key||run.line_id||"",
             "odpt:calendar":run.calendar_type==="holiday"?"odpt.Calendar:SaturdayHoliday":"odpt.Calendar:Weekday",
+            "_operationCode":run.operation_code||"",
             "odpt:railDirection":run.rail_direction||"",
             "odpt:trainType":run.train_type||"",
             "odpt:destinationStation":run.destination_station?[run.destination_station]:[],
