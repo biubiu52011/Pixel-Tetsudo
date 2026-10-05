@@ -144,9 +144,27 @@
     return { interval: interval, cause: cause, resume: resume, detail: text || null, textDelayMinutes: textDelayMinutes, serviceLevel: serviceLevel };
   }
 
+  function normalizeMessageKind(v) {
+    var s = textOf(v).trim();
+    if (!s) return null;
+    if (/^(?:notice|announcement|お知らせ|告知|通知)$/i.test(s)) return "notice";
+    if (/^(?:realtime|operation|status|運行状況|運行情報|運転状況|運転情報)$/i.test(s)) return "realtime";
+    return null;
+  }
+
+  function inferMessageKind(input) {
+    var explicit = normalizeMessageKind(input.messageKind || input.category || input.messageCategory);
+    if (explicit) return explicit;
+    // Structured operational signals are current operating-state evidence.
+    if (normalizeStructuredStatus(input.structuredStatus) || input.suspension === true || input.delay === true || (typeof input.delayMinutes === "number" && input.delayMinutes > 0)) return "realtime";
+    // Do not infer notice/realtime from causes such as 台風, 人身事故, 倒木.
+    return "unknown";
+  }
+
   function evaluate(input) {
     input = input || {};
     var evidence = [];
+    var messageKind = inferMessageKind(input);
     var structured = normalizeStructuredStatus(input.structuredStatus);
     if (structured) evidence.push({ type: "STRUCTURED_STATUS", value: structured });
 
@@ -179,6 +197,7 @@
     var metadata = extractMetadata(input);
 
     return {
+      messageKind: messageKind,
       status: structured || te.status || "unknown",
       maxDelay: delayMinutes != null ? delayMinutes : metadata.textDelayMinutes,
       delayUpperBoundMinutes: te.delayUpperBoundMinutes,
@@ -192,5 +211,5 @@
     };
   }
 
-  return { version: "1.1.0", evaluate: evaluate, evaluateText: evaluateText, extractMetadata: extractMetadata, normalizeStructuredStatus: normalizeStructuredStatus };
+  return { version: "1.2.0", evaluate: evaluate, evaluateText: evaluateText, extractMetadata: extractMetadata, normalizeStructuredStatus: normalizeStructuredStatus, normalizeMessageKind: normalizeMessageKind, inferMessageKind: inferMessageKind };
 });
