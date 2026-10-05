@@ -249,3 +249,21 @@ const otherLineEv = realCtx.window.TrainOperationEvidence.resolveEvidence('1234'
 assert.ok(!otherLineEv || !(otherLineEv.vehicleType === 'E235系0番台（山手線）'),
   'Yamanote rule must not apply to other lines');
 console.log('no line-default leakage: 1 PASS');
+
+// ---- renderer authority gate regression (v4.3.1129) ----
+// The SVG renderer must accept both realtime direct and realtime-derived
+// EXACT identities (data-fusion sets vehicleResolvedFromRealtimeDerived for
+// the family-rule path; a gate that only reads vehicleResolvedFromRealtime
+// collapses every derived E235 train back to a neutral circle).
+const rendererSrc = read('js/trains-render.js');
+assert.ok(rendererSrc.includes('vehicleResolvedFromRealtimeDerived === true'),
+  'renderer must accept vehicleResolvedFromRealtimeDerived as authoritative');
+// The realtime image gate expression spans lines; require the derived flag
+// within the _hasRealtimeVehicleEvidence block (from its declaration to the
+// line that reads vehicleResolvedFromRealtime).
+const gateStart = rendererSrc.indexOf('_hasRealtimeVehicleEvidence');
+assert.ok(gateStart >= 0, 'realtime image gate must exist');
+const gateBlock = rendererSrc.slice(gateStart, gateStart + 300);
+assert.ok(gateBlock.includes('vehicleResolvedFromRealtimeDerived === true'),
+  'realtime-derived flag must be part of the realtime image gate');
+console.log('renderer realtime-derived gate: 2 PASS');

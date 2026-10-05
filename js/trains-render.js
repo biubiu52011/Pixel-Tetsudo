@@ -1168,7 +1168,8 @@
           (p.vehicleResolution && p.vehicleResolution.identityStatus === "EXACT");
         var _hasRealtimeVehicleEvidence = _identityExact &&
           p.positionSource === "realtime-api" &&
-          p.vehicleResolvedFromRealtime === true && !!p.vehicleIconPath;
+          (p.vehicleResolvedFromRealtime === true ||
+           p.vehicleResolvedFromRealtimeDerived === true) && !!p.vehicleIconPath;
         var _hasInheritedChainVehicle = _identityExact &&
           p.vehicleInheritedFromRunningChain === true &&
           !!p.runningChainId && !!p.vehicleIconPath;
