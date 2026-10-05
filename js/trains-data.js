@@ -4,6 +4,23 @@
 var _routeGeometryCache = {};
 var _transferMapCache = null;
 
+function _canonicalThroughLines(lineId) {
+  var line = window.UNIFIED_LINES && window.UNIFIED_LINES[lineId];
+  return line && Array.isArray(line.throughServices) ? line.throughServices.slice() : [];
+}
+
+function _canonicalJoinStations(lineId, partnerId) {
+  var line = window.UNIFIED_LINES && window.UNIFIED_LINES[lineId];
+  var boundaries = line && Array.isArray(line.serviceBoundaries) ? line.serviceBoundaries : [];
+  for (var i = 0; i < boundaries.length; i++) {
+    var boundary = boundaries[i];
+    if (boundary && boundary.lineId === partnerId) {
+      return Array.isArray(boundary.handoverStations) ? boundary.handoverStations.slice() : null;
+    }
+  }
+  return null;
+}
+
 function getLinesData() {
   if (window.DataFusion) {
     var fused = window.DataFusion.getFusedData();
@@ -222,7 +239,7 @@ function _fusionExtensionLines(lineId) {
       }
     }
     if (sysLineIds) {
-      var thr = (window.ThroughService && window.ThroughService.getDirectThroughLines) ? window.ThroughService.getDirectThroughLines(lineId) : [];
+      var thr = _canonicalThroughLines(lineId);
       if (thr && thr.length > 0) {
         for (var i = 0; i < sysLineIds.length; i++) {
           var lid2 = sysLineIds[i];
@@ -273,7 +290,7 @@ function _fusionBaseIdx(lineId, fusionLineId) {
 }
 
 function _throughDirForStation(lineId, stationId, throughLineId) {
-  var thrIds = (window.ThroughService && window.ThroughService.getDirectThroughLines) ? window.ThroughService.getDirectThroughLines(lineId) : [];
+  var thrIds = _canonicalThroughLines(lineId);
   if (!thrIds.length) return null;
   var src2 = (window.RailwayDB && window.RailwayDB.getAllLines) ? window.RailwayDB.getAllLines() : getLinesData();
   var own2 = src2[lineId];
@@ -288,10 +305,8 @@ function _throughDirForStation(lineId, stationId, throughLineId) {
     // The canonical handover station is authoritative.  Do not require the
     // partner's station array to duplicate the boundary station: line entities
     // may model the two sides independently, especially in reverse view.
-    var joins = (window.ThroughService && window.ThroughService.getJoinStations) ?
-      window.ThroughService.getJoinStations(lineId, targetId) : null;
-    var anchors = (window.ThroughService && window.ThroughService.getDisplayAnchors) ?
-      window.ThroughService.getDisplayAnchors(lineId, targetId) : joins;
+    var joins = _canonicalJoinStations(lineId, targetId);
+    var anchors = joins;
     var isCanonicalJoin = Array.isArray(joins) && joins.indexOf(stationId) >= 0;
     var isDisplayAnchor = Array.isArray(anchors) && anchors.indexOf(stationId) >= 0;
     if (!isCanonicalJoin && !isDisplayAnchor && tl.stations.indexOf(stationId) < 0) continue;
@@ -361,7 +376,7 @@ function _getTransferMap(lineId) {
       color: (window.LineOperationSystemsResolveColor && window.LineOperationSystemsResolveColor(t.lineId)) || tl.color || "", type: t.type === "out" ? "out" : "in", note: t.note || "", toStation: t.toStation || ""
     });
   }
-  var throughLines = (window.ThroughService && window.ThroughService.getDirectThroughLines) ? window.ThroughService.getDirectThroughLines(lineId) : [];
+  var throughLines = _canonicalThroughLines(lineId);
 
   // Canonical through-service handovers are display relationships in their own
   // right. Do not require a duplicate transferStations entry before a through
@@ -373,9 +388,7 @@ function _getTransferMap(lineId) {
     if (_activeSystemIds.indexOf(lineId) >= 0 && _activeSystemIds.indexOf(thLineId) >= 0) continue;
     var thLine = src[thLineId];
     if (!thLine) continue;
-    var joins = (window.ThroughService && window.ThroughService.getDisplayAnchors) ?
-      window.ThroughService.getDisplayAnchors(lineId, thLineId) :
-      ((window.ThroughService && window.ThroughService.getJoinStations) ? window.ThroughService.getJoinStations(lineId, thLineId) : null);
+    var joins = _canonicalJoinStations(lineId, thLineId);
     if (!Array.isArray(joins) || joins.length === 0) continue;
     for (var jh = 0; jh < joins.length; jh++) {
       var joinStation = joins[jh];
@@ -407,9 +420,7 @@ function _getTransferMap(lineId) {
       for (var j2 = 0; j2 < stArr.length; j2++) {
         if (throughLines.indexOf(stArr[j2].lineId) >= 0) {
           if (_activeSystemIds.indexOf(lineId) >= 0 && _activeSystemIds.indexOf(stArr[j2].lineId) >= 0) continue;
-          var _js = (window.ThroughService && window.ThroughService.getDisplayAnchors) ?
-            window.ThroughService.getDisplayAnchors(lineId, stArr[j2].lineId) :
-            ((window.ThroughService && window.ThroughService.getJoinStations) ? window.ThroughService.getJoinStations(lineId, stArr[j2].lineId) : null);
+          var _js = _canonicalJoinStations(lineId, stArr[j2].lineId);
           if (_js === null || _js.indexOf(ownStations[i2]) >= 0) {
             stArr[j2].through = true;
             stArr[j2].dir = _throughDirForStation(lineId, ownStations[i2], stArr[j2].lineId) || "middle";
