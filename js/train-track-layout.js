@@ -95,8 +95,13 @@
   function resolveBase(position, stationCoords, geometry, lineId, opts) {
     opts = opts || {};
     var branchGeom = (geometry && geometry.branchGeom) || null;
-    var idx = position && position.stationIndex != null ? position.stationIndex : 0;
+    var rawIdx = position && position.stationIndex != null ? Number(position.stationIndex) : NaN;
     var points = stationCoords || [];
+    // Position evidence is required. Missing/invalid stationIndex must never be
+    // coerced to station 0 (Tokyo on Yamanote), otherwise one bad snapshot
+    // collapses unrelated trains onto the first station.
+    if (!isFinite(rawIdx) || rawIdx < 0) return null;
+    var idx = rawIdx;
 
     if (position && position.fusionLineId && position.fusionRole === "branch" && branchGeom && branchGeom[position.fusionLineId]) {
       points = branchGeom[position.fusionLineId];
