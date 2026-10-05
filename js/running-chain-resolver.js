@@ -5,29 +5,25 @@
 (function() {
   "use strict";
   var _initialized = false;
-  var _lineRelations = {};
-  var _aliasMap = {};
+  var _boundaryMap = {};
   var _branchOfMap = {};
   var _directThrough = {};
 
   function buildIndexes() {
-    var rels = window.LineServiceRelations || [];
-    _lineRelations = {}; _aliasMap = {}; _branchOfMap = {}; _directThrough = {};
-    rels.forEach(function(rel) {
-      if (!rel.lineA || !rel.lineB) return;
-      if (!_lineRelations[rel.lineA]) _lineRelations[rel.lineA] = [];
-      if (!_lineRelations[rel.lineB]) _lineRelations[rel.lineB] = [];
-      _lineRelations[rel.lineA].push(rel);
-      _lineRelations[rel.lineB].push(rel);
-      if (rel.relation === "ALIAS_OF") { _aliasMap[rel.lineA] = rel.lineB; _aliasMap[rel.lineB] = rel.lineA; }
-      if (rel.relation === "BRANCH_OF") { _branchOfMap[rel.lineA] = rel.lineB; _branchOfMap[rel.lineB] = rel.lineA; }
-    });
-    // Canonical line records are the sole authority for static through-service candidates.
     var lines = window.UNIFIED_LINES || {};
+    _boundaryMap = {}; _branchOfMap = {}; _directThrough = {};
     Object.keys(lines).forEach(function(lineId) {
-      var through = Array.isArray(lines[lineId] && lines[lineId].throughServices)
-        ? lines[lineId].throughServices : [];
+      var line = lines[lineId] || {};
+      var through = Array.isArray(line.throughServices) ? line.throughServices : [];
       _directThrough[lineId] = through.filter(function(other) { return !!lines[other]; }).slice();
+      if (line.branchOf && lines[line.branchOf]) _branchOfMap[lineId] = line.branchOf;
+      var boundaries = Array.isArray(line.serviceBoundaries) ? line.serviceBoundaries : [];
+      _boundaryMap[lineId] = {};
+      boundaries.forEach(function(boundary) {
+        if (!boundary || !boundary.lineId || !lines[boundary.lineId]) return;
+        var joins = Array.isArray(boundary.handoverStations) ? boundary.handoverStations.filter(Boolean) : [];
+        if (joins.length) _boundaryMap[lineId][boundary.lineId] = joins.slice();
+      });
     });
     _initialized=true;
   }
@@ -36,15 +32,6 @@
     var s=0;
     var la=(window.UNIFIED_LINES&&window.UNIFIED_LINES[a])||null;
     var lb=(window.UNIFIED_LINES&&window.UNIFIED_LINES[b])||null;
-    var rels = _lineRelations[a] || [];
-    for(var i=0;i<rels.length;i++){
-      var r = rels[i];
-      if(r.lineA===b||r.lineB===a){
-        if(r.relation==="BRANCH_OF"||r.relation==="PHYSICAL_CONNECT")s+=2;
-        else if(r.relation==="ALIAS_OF")s+=3;
-        break;
-      }
-    }
     if((_directThrough[a]||[]).indexOf(b)>=0)s+=3;
     if(la&&lb&&la.code&&lb.code&&la.code===lb.code)s+=(la.operator===lb.operator)?2:-5;
     var sa=la&&la.stations?la.stations:[];
@@ -95,8 +82,7 @@
     for(var i=0;i<segments.length;i++)for(var j=i+1;j<segments.length;j++){
       var a=segments[i],b=segments[j];
       if((_directThrough[a.lineId]||[]).indexOf(b.lineId)<0)continue;
-      var rels=_lineRelations[a.lineId]||[],joins=[];
-      for(var k=0;k<rels.length;k++){var r=rels[k],o=r.lineA===a.lineId?r.lineB:r.lineA;if(o===b.lineId&&Array.isArray(r.handoverStations)&&r.handoverStations.length){joins=r.handoverStations;break;}}
+      var joins=(_boundaryMap[a.lineId]&&_boundaryMap[a.lineId][b.lineId])||[];
       var ev=_confirmedEdge(a,b,joins); if(!ev||ev.unresolved)continue;
       edgeCandidates.push({a:a,b:b,ev:ev});
     }
@@ -126,15 +112,11 @@
     if(!_initialized)buildIndexes();
     var allowed=null;
     if(Array.isArray(availableLineIds)){allowed={};availableLineIds.forEach(function(id){allowed[id]=true;});}
-    var rels=_lineRelations[lineId]||[], related=[], through=(_directThrough[lineId]||[]).filter(function(other){return !allowed||allowed[other];});
-    var isAlias=false,isBranch=false,aliasLineId=null,branchLineId=null;
-    rels.forEach(function(r){
-      var other=r.lineA===lineId?r.lineB:r.lineA;
-      if(!other||(allowed&&!allowed[other]))return;
-      if(related.indexOf(other)<0)related.push(other);
-      if(r.relation==="ALIAS_OF"){isAlias=true;aliasLineId=other;}
-      if(r.relation==="BRANCH_OF"){isBranch=true;branchLineId=other;}
-    });
+    var related=[], through=(_directThrough[lineId]||[]).filter(function(other){return !allowed||allowed[other];});
+    var line=(window.UNIFIED_LINES&&window.UNIFIED_LINES[lineId])||null;
+    var isAlias=false,aliasLineId=null;
+    var branchLineId=line&&line.branchOf||null;
+    var isBranch=!!branchLineId;
     return {
       lineId:lineId,
       isThroughService:through.length>0,
@@ -156,11 +138,9 @@
     getDirectThroughLines:function(lid){if(!_initialized)buildIndexes();return (_directThrough[lid]||[]).slice();},
     getResolutionContext:getResolutionContext,
     resolveTimetableChain:resolveTimetableChain,
-    hasRelation:function(a,b,rt){if(!_initialized)buildIndexes();var rs=_lineRelations[a]||[];for(var i=0;i<rs.length;i++){var o=rs[i].lineA===a?rs[i].lineB:rs[i].lineA;if(o===b&&(!rt||rs[i].relation===rt))return true;}return false;},
-    _getIndexes:function(){return{relations:_lineRelations,aliasMap:_aliasMap,branchOfMap:_branchOfMap,directThrough:_directThrough};}
+    hasRelation:function(a,b,rt){if(!_initialized)buildIndexes();if(!a||!b)return false;if(!rt||rt==="SERVICE_BOUNDARY")return !!(_boundaryMap[a]&&_boundaryMap[a][b]);if(rt==="BRANCH_OF")return _branchOfMap[a]===b||_branchOfMap[b]===a;if(rt==="THROUGH_SERVICE")return (_directThrough[a]||[]).indexOf(b)>=0;return false;},
+    _getIndexes:function(){return{boundaries:_boundaryMap,branchOfMap:_branchOfMap,directThrough:_directThrough};}
   };
 
-  if(window.LineServiceRelations){init();}else{
-    var _p=0;(function _c(){_p++;if(window.LineServiceRelations){init();}else if(_p<20){setTimeout(_c,100);}})();
-  }
+  if(window.UNIFIED_LINES){init();}
 })();
