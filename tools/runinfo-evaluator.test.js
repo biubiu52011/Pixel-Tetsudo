@@ -31,8 +31,12 @@ let textRange=E.extractMetadata({text:"A駅～B駅間で運転を見合わせて
 assert.strictEqual(textRange.interval,"A駅→B駅");
 let liveRange=E.extractMetadata({text:"長野原草津口〜大前駅間の上下線で運転を見合わせています。"});
 assert.strictEqual(liveRange.interval,"長野原草津口→大前駅");
+let fromToRange=E.extractMetadata({text:"A駅からB駅までの上下線で運転を見合わせています。"});
+assert.strictEqual(fromToRange.interval,"A駅→B駅");
+let fromToDown=E.extractMetadata({text:"新宿駅から中野駅までの下り線で遅れが出ています。"});
+assert.strictEqual(fromToDown.interval,"新宿駅→中野駅");
 let wholeRange=E.extractMetadata({text:"全線で運転を見合わせています。"});
 assert.strictEqual(wholeRange.interval,"全線");
 let structuredWins=E.extractMetadata({text:"A駅～B駅間で遅れています。",range:"C駅～D駅"});
 assert.strictEqual(structuredWins.interval,"C駅→D駅");
-console.log("runinfo-evaluator: 26 PASS");
+console.log("runinfo-evaluator: 28 PASS");
