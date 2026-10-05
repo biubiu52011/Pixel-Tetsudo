@@ -403,8 +403,17 @@
   }
 
   var _remoteCache = {};
+  // Public Lingva instances: no registration / API key required.
+  // Try in order; local railway-aware translation remains the final fallback.
   var REMOTE_BASES = [
-    "https://lingva.ml"
+    "https://lingva.ml",
+    "https://translate.igna.wtf",
+    "https://translate.plausibility.cloud",
+    "https://lingva.lunar.icu",
+    "https://translate.projectsegfau.lt",
+    "https://translate.dr460nf1r3.org",
+    "https://lingva.garudalinux.org",
+    "https://translate.jae.fi"
   ];
   function translateRemote(text, opts, lang) {
     lang = (lang || window.currentLang || "ja").toLowerCase();
@@ -427,7 +436,7 @@
         .then(function(data){
           if (timer) clearTimeout(timer);
           if (!data || !data.translation) throw new Error("empty translation");
-          var out = { translated:String(data.translation), matched:true, fullText:true, provider:"lingva" };
+          var out = { translated:String(data.translation), matched:true, fullText:true, provider:"lingva", endpoint:base };
           _remoteCache[key] = out;
           return out;
         })
