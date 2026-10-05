@@ -722,6 +722,16 @@
             var self = this;
             var timetablePromises = [];
             var newlyActivatedOps = {};
+            var requestedOps = {};
+            lineIds.forEach(function(lineId) {
+                var requestedOp = LINE_TO_OPERATOR[lineId];
+                if (requestedOp && ODPT_ENDPOINTS[requestedOp] && ODPT_ENDPOINTS[requestedOp].train) requestedOps[requestedOp] = true;
+            });
+            // This API represents the current detail scope, not an append-only history.
+            // Keep polling only operators required by the currently open line/system.
+            Object.keys(_activeRealtimeOperators).forEach(function(op) {
+                if (!requestedOps[op]) delete _activeRealtimeOperators[op];
+            });
 
             lineIds.forEach(function(lineId) {
                 var op = LINE_TO_OPERATOR[lineId];
