@@ -23993,7 +23993,8 @@
         2
       ],
       "throughServices": [
-        "Yokosuka"
+        "Yokosuka",
+        "Uchibo"
       ],
       "transferStations": [
         {
@@ -24151,6 +24152,16 @@
           ],
           "evidence": {
             "source": "JR East Tokyo-area passenger map and JO station numbering define Yokosuka Line / Sobu Line Rapid as one passenger service corridor",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "Uchibo",
+          "handoverStations": [
+            "Chiba"
+          ],
+          "evidence": {
+            "source": "JR East timetable: Sobu Rapid trains continue directly onto Uchibo Line at Chiba",
             "confidence": "HIGH"
           }
         }
@@ -34170,7 +34181,8 @@
         2
       ],
       "throughServices": [
-        "Keiyo"
+        "Keiyo",
+        "SobuRapid"
       ],
       "transferStations": [
         {
@@ -34246,6 +34258,16 @@
           ],
           "evidence": {
             "source": "JR East timetable: direct Keiyo / Uchibo-Sotobo operation across Soga",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "SobuRapid",
+          "handoverStations": [
+            "Chiba"
+          ],
+          "evidence": {
+            "source": "JR East timetable: Sobu Rapid trains continue directly onto Uchibo Line at Chiba",
             "confidence": "HIGH"
           }
         }
@@ -44968,7 +44990,9 @@
         3,
         3
       ],
-      "throughServices": [],
+      "throughServices": [
+        "Chikuhi"
+      ],
       "transferStations": [
         {
           "station": "Saga",
@@ -44996,7 +45020,19 @@
         }
       ],
       "nameZh": "唐津线",
-      "nameKo": "카라츠 선"
+      "nameKo": "카라츠 선",
+      "serviceBoundaries": [
+        {
+          "lineId": "Chikuhi",
+          "handoverStations": [
+            "Karatsu"
+          ],
+          "evidence": {
+            "source": "JR Kyushu timetable: Chikuhi Line trains continue between Karatsu and Nishi-Karatsu over the Karatsu Line",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "Chikuhi": {
       "name": "Chikuhi",
@@ -45055,7 +45091,9 @@
         3,
         3
       ],
-      "throughServices": [],
+      "throughServices": [
+        "Karatsu"
+      ],
       "transferStations": [
         {
           "station": "Karatsu",
@@ -45071,7 +45109,19 @@
         }
       ],
       "nameZh": "筑肥线",
-      "nameKo": "치쿠히 선"
+      "nameKo": "치쿠히 선",
+      "serviceBoundaries": [
+        {
+          "lineId": "Karatsu",
+          "handoverStations": [
+            "Karatsu"
+          ],
+          "evidence": {
+            "source": "JR Kyushu timetable: Chikuhi Line trains continue between Karatsu and Nishi-Karatsu over the Karatsu Line",
+            "confidence": "HIGH"
+          }
+        }
+      ]
     },
     "MiyazakiAirport": {
       "name": "MiyazakiAirport",
