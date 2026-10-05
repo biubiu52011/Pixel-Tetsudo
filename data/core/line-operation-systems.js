@@ -163,9 +163,9 @@ window.LineOperationSystems = {
     },
     {
       code: "JM",
-      nameJa: "武蔵野線・京葉線",
-      nameZh: "武藏野线・京叶线",
-      nameEn: "Musashino Line / Keiyo Line",
+      nameJa: "武蔵野線",
+      nameZh: "武藏野线",
+      nameEn: "Musashino Line",
       nameKo: "무사시노선",
       color: "#f15a22",
       lineIds: ["Musashino"],
