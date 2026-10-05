@@ -402,8 +402,43 @@
     return { translated: full, matched: full !== t, fullText: true };
   }
 
+  var _remoteCache = {};
+  var REMOTE_BASES = [
+    "https://lingva.ml"
+  ];
+  function translateRemote(text, opts, lang) {
+    lang = (lang || window.currentLang || "ja").toLowerCase();
+    opts = opts || {};
+    if (!text || lang === "ja") return Promise.resolve({ translated: text, matched: false, provider: "local" });
+    var target = lang === "zh" ? "zh" : lang;
+    var key = target + "\n" + text;
+    if (_remoteCache[key]) return Promise.resolve(_remoteCache[key]);
+    var fallback = translate(text, opts, lang);
+    if (typeof fetch !== "function") return Promise.resolve(fallback);
+    var i = 0;
+    function attempt() {
+      if (i >= REMOTE_BASES.length) return Promise.resolve(fallback);
+      var base = REMOTE_BASES[i++];
+      var controller = typeof AbortController !== "undefined" ? new AbortController() : null;
+      var timer = controller ? setTimeout(function(){ controller.abort(); }, 3500) : null;
+      var url = base + "/api/v1/ja/" + encodeURIComponent(target) + "/" + encodeURIComponent(String(text));
+      return fetch(url, { method:"GET", mode:"cors", signal: controller ? controller.signal : undefined })
+        .then(function(r){ if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+        .then(function(data){
+          if (timer) clearTimeout(timer);
+          if (!data || !data.translation) throw new Error("empty translation");
+          var out = { translated:String(data.translation), matched:true, fullText:true, provider:"lingva" };
+          _remoteCache[key] = out;
+          return out;
+        })
+        .catch(function(){ if (timer) clearTimeout(timer); return attempt(); });
+    }
+    return attempt();
+  }
+
   window.DelayTranslator = {
     translate: translate,
+    translateRemote: translateRemote,
     translateFragment: _replaceFragment
   };
 })();
