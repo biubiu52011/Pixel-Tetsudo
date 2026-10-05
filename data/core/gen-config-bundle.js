@@ -9,7 +9,6 @@ const order = [
   'transfer-hints.js',
   'runtime-config.js',
   'through-service.js',
-  'line-operation-systems.js',
   'platform-data.js',
   'line-service-relations.js',
   'train-type-defs.js',

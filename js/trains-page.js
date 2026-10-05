@@ -34,18 +34,11 @@
 
   
   function _systemIdsForRoute(lineId) {
-    if (!lineId || !window.LineOperationSystems) return null;
-    for (var opKey in window.LineOperationSystems) {
-      var systems = window.LineOperationSystems[opKey];
-      if (!Array.isArray(systems)) continue;
-      for (var si = 0; si < systems.length; si++) {
-        var ids = systems[si] && systems[si].lineIds;
-        // System-card routes are keyed by their first member (data-line=firstId).
-        // Restore that exact LOS context for refresh/direct deep links without
-        // turning secondary members or branch deep links into the parent system.
-        if (Array.isArray(ids) && ids.length > 1 && ids[0] === lineId) return ids.slice();
-      }
-    }
+    if (!lineId) return null;
+    var lines = getLinesData();
+    var line = lines && lines[lineId];
+    var ids = line && line.presentation && line.presentation.lineIds;
+    if (Array.isArray(ids) && ids.length > 1 && ids[0] === lineId) return ids.slice();
     return null;
   }
 
@@ -117,29 +110,13 @@
       if (filterBarEl) filterBarEl.classList.add("hidden");
       if (detailEl) detailEl.classList.remove("hidden");
       var _title = (window.RailwayDB && window.RailwayDB.resolveLineName ? window.RailwayDB.resolveLineName(lineId, window.currentLang) : (fusedLine.nameEn || fusedLine.nameJa || lineId));
-      if (window.LineOperationSystems) {
-        for (var _opKey2 in window.LineOperationSystems) {
-          var _opSys2 = window.LineOperationSystems[_opKey2];
-          if (!Array.isArray(_opSys2)) continue;
-          var _found = false;
-          for (var _si2 = 0; _si2 < _opSys2.length; _si2++) {
-            var _sys2 = _opSys2[_si2];
-            var _matchesActiveSystem = currentSystemLineIds && currentSystemLineIds.length > 1
-              ? (_sys2.lineIds && _sys2.lineIds.length === currentSystemLineIds.length &&
-                 currentSystemLineIds.every(function(_id) { return _sys2.lineIds.indexOf(_id) >= 0; }))
-              : (_sys2.lineIds && _sys2.lineIds.indexOf(lineId) >= 0);
-            if (_matchesActiveSystem) {
-              var _lang2 = window.currentLang || "ja";
-              if (_lang2 === "zh" && _sys2.nameZh) _title = _sys2.nameZh;
-              else if (_lang2 === "en" && _sys2.nameEn) _title = _sys2.nameEn;
-              else if (_lang2 === "ko" && _sys2.nameKo) _title = _sys2.nameKo;
-              else if (_sys2.nameJa) _title = _sys2.nameJa;
-              _found = true;
-              break;
-            }
-          }
-          if (_found) break;
-        }
+      var _sys2 = fusedLine.presentation;
+      if (_sys2) {
+        var _lang2 = window.currentLang || "ja";
+        if (_lang2 === "zh" && _sys2.nameZh) _title = _sys2.nameZh;
+        else if (_lang2 === "en" && _sys2.nameEn) _title = _sys2.nameEn;
+        else if (_lang2 === "ko" && _sys2.nameKo) _title = _sys2.nameKo;
+        else if (_sys2.nameJa) _title = _sys2.nameJa;
       }
       if (titleEl) titleEl.textContent = _title;
       if (mapEl) renderTrainMap(mapEl, fusedLine, lineId);

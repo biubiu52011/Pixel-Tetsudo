@@ -161,183 +161,12 @@
     }
     // 合并连续线路的区间（前一条终点 == 后一条起点）
     var chipsHtml = "";
-    // 优先使用 LOS 系统的 subName（如 上野東京ライン 的 "東海道線～高崎線・宇都宮線 常磐線～品川"）
-    var _sysSubName = "";
-    if (mode === "trains") {
-      var _lang2 = window.currentLang || 'ja';
-      var _snKey2 = "subName" + (_lang2 === 'ja' ? 'Ja' : _lang2 === 'zh' ? 'Zh' : _lang2 === 'en' ? 'En' : 'Ko');
-      if (sys[_snKey2]) {
-        _sysSubName = sys[_snKey2];
-      }
-    }
-    if (_sysSubName) {
-      chipsHtml = '<span class="rs-sys-chip">' + escapeHtml(_sysSubName) + '</span>';
-    } else if (mode === "trains" && intervalSegments.length === 0 && allLoop) {
-      // Whole card is loop lines only: show 環状 instead of a meaningless
-      // first↔last interval (Yamanote/Oedo LOS cards).
-      chipsHtml = '<span class="rs-sys-chip">' + escapeHtml(t('line.loop')) + '</span>';
-    } else if (mode === "trains" && intervalSegments.length > 0) {
-      var merged = [intervalSegments[0]];
-      for (var si = 1; si < intervalSegments.length; si++) {
-        var prev = merged[merged.length - 1];
-        var curr = intervalSegments[si];
-        if (prev.to === curr.from) {
-          // 连续，合并：起点保持，终点更新，中间站记录
-          prev.to = curr.to;
-          prev.mid = (prev.mid ? prev.mid + "↔" : "") + curr.from;
-        } else {
-          merged.push(curr);
-        }
-      }
-      for (var mi = 0; mi < merged.length; mi++) {
-        var seg = merged[mi];
-        var sFromName = (window.RailwayDB && window.RailwayDB.resolveStationName) ? window.RailwayDB.resolveStationName(seg.from, lang) || seg.from : seg.from;
-        var sToName = (window.RailwayDB && window.RailwayDB.resolveStationName) ? window.RailwayDB.resolveStationName(seg.to, lang) || seg.to : seg.to;
-        var midText = "";
-        if (seg.mid) {
-          var midStations = seg.mid.split("↔");
-          var midNames = [];
-          for (var msi = 0; msi < midStations.length; msi++) {
-            var midName = (window.RailwayDB && window.RailwayDB.resolveStationName) ? window.RailwayDB.resolveStationName(midStations[msi], lang) || midStations[msi] : midStations[msi];
-            midNames.push(escapeHtml(midName));
-          }
-          midText = midNames.join("↔") + "↔";
-        }
-        var intervalText = escapeHtml(sFromName) + "↔" + midText + escapeHtml(sToName);
-        chipsHtml += '<span class="rs-sys-chip">' + intervalText + '</span>';
-      }
-    }
-    var worstS = getStatus(worst);
-    var statusHtml = "";
-    if (mode === "realtime") {
-      statusHtml = '<span class="rs-status-icon ' + worstS.cls + '">' + worstS.icon + '</span>';
-    }
-
-    // Icon: gallery image when the system has one (build-time verified to exist),
-    // otherwise fall back to the 記号 badge.
-    var iconHtml = "";
-    if (sys.icon) {
-      if (String(sys.icon).indexOf("JRグループ.png") !== -1) {
-        iconHtml = '<div class="rs-line-icon-fallback"><img src="' + escapeHtml(sys.icon) + '" alt="JR"></div>';
-      } else {
-        iconHtml = '<img class="rs-line-icon" src="' + escapeHtml(sys.icon) + '" alt="" loading="lazy">';
-      }
-    } else {
-      var _firstLine = memberIds.length > 0 ? (linesObj[memberIds[0]] || {}) : {};
-      var _sysOp = _firstLine.operator || sys.operator || "";
-      if (window.TransitConstants && window.TransitConstants.isJRERoute && window.TransitConstants.isJRERoute(_firstLine)) {
-        iconHtml = '<div class="rs-line-icon-fallback"><img src="../images/鉄道/JR東日本/JRグループ.png" alt="JR"></div>';
-      } else {
-        iconHtml = '<div class="rs-system-badge">' + escapeHtml(code || "?") + '</div>';
-      }
-    }
-    var _memberIdentities = [];
-    for (var _mi = 0; _mi < memberIds.length; _mi++) {
-      var _mid = memberIds[_mi];
-      _memberIdentities.push(_mid + "=" + getLineIdentity(linesObj[_mid] || {}, _mid));
-    }
-    return '<div class="rs-line-card rs-system-card" data-line="' + escapeHtml(firstId) + '" data-line-identity="' + escapeHtml(getLineIdentity(linesObj[firstId] || {}, firstId)) + '" data-line-identities="' + escapeHtml(_memberIdentities.join("|")) + '" data-system="' + escapeHtml(code) + '" data-lines="' + escapeHtml(memberIds.join(",")) + '" data-line-color="' + escapeHtml(color) + '">'
-      + iconHtml
-      + '<div class="rs-line-info">'
-      + '<div class="rs-line-name">' + escapeHtml(name) + '</div>'
-      + (mode === "trains" && chipsHtml ? '<div class="rs-system-lines">' + chipsHtml + '</div>' : '')
-      + '</div>'
-      + statusHtml
-      + '</div>';
-  }
-
-  /**
-   * Render a single line card
-   * @param {Object} line - line data object
-   * @param {String} lineId - line identifier
-   * @param {Object} options - { mode: "realtime"|"trains" }
-   */
-  function renderCard(line, lineId, options) {
-    options = options || {};
-    var mode = options.mode || "realtime";
-    var delayInfo = getDelayInfo(line) || {};
-    var status = delayInfo && delayInfo.status ? delayInfo.status : "loading";
-    var interval = delayInfo.interval || "";
-    var lineColor = (window.LineOperationSystemsResolveColor && window.LineOperationSystemsResolveColor(lineId)) || line.color || "#00b643";
-    var displayName = (window.RailwayDB && window.RailwayDB.resolveLineName) ? window.RailwayDB.resolveLineName(lineId, window.currentLang) : (line.nameEn || line.name || lineId);
-    // Fallback: RailwayDB unavailable (e.g., test/sandbox) — use raw fields
-
-    // Icon
-    var iconHtml = "";
-    // Operator-generic logos (JRグループ.png etc.) are not line icons;
-    // skip them so per-line cards never borrow another operator's logo.
-    var _losIcon = (window.LineOperationSystemsResolveIcon && window.LineOperationSystemsResolveIcon(lineId)) || "";
-    var _imgOk = _losIcon || (line.image && !/(グループ|ロゴ|マーク|アイコン|シンボル)/.test(line.image));
-    if (_losIcon) {
-      if (String(_losIcon).indexOf("JRグループ.png") !== -1) {
-        iconHtml = '<div class="rs-line-icon-fallback"><img src="' + escapeHtml(_losIcon) + '" alt="JR"></div>';
-      } else {
-        iconHtml = '<img class="rs-line-icon" src="' + escapeHtml(_losIcon) + '" alt="" loading="lazy">';
-      }
-    } else if (_imgOk) {
-      iconHtml = '<img class="rs-line-icon" src="' + escapeHtml(line.image) + '" alt="" loading="lazy">';
-    } else if (line && window.TransitConstants && window.TransitConstants.isJRERoute && window.TransitConstants.isJRERoute(line)) {
-      iconHtml = '<div class="rs-line-icon-fallback"><img src="../images/鉄道/JR東日本/JRグループ.png" alt="JR"></div>';
-    } else if (line.code) {
-      iconHtml = '<div class="rs-code-badge">' + escapeHtml(line.code) + '</div>';
-    } else if (line.symbol) {
-      iconHtml = '<div class="rs-code-badge">' + escapeHtml(line.symbol) + '</div>';
-    } else {
-      // OS symbol fallback: look up LineOperationSystems
-      var osCode = "";
-      if (window.LineOperationSystems) {
-        var _ops = window.LineOperationSystems;
-        var _opKeys = Object.keys(_ops);
-        for (var _oi = 0; _oi < _opKeys.length; _oi++) {
-          var _sysList = _ops[_opKeys[_oi]];
-          for (var _si = 0; _si < _sysList.length; _si++) {
-            if (_sysList[_si].lineIds && _sysList[_si].lineIds.indexOf(lineId) >= 0) {
-              osCode = _sysList[_si].code || "";
-              break;
-            }
-          }
-          if (osCode) break;
-        }
-      }
-      iconHtml = '<div class="rs-code-badge">' + escapeHtml(osCode || line.code || line.symbol || line.id || "?") + '</div>';
-    }
-
-    // Interval text (realtime mode)
-    var intervalHtml = "";
-    if (mode === "realtime" && interval) {
-      intervalHtml = '<div class="rs-line-interval">' + escapeHtml(_localizeInterval(interval)) + '</div>';
-    }
-
-    // Status icon
-    var s = getStatus(status);
-    var statusIconHtml = "";
-    if (mode === "realtime") {
-      statusIconHtml = '<span class="rs-status-icon ' + s.cls + '">' + s.icon + '</span>';
-    }
-    // Route interval subtitle (trains mode)
-    var subHtml = "";
-    if (mode === "trains") {
-      var intervalText = "";
-      // 优先使用 LOS 系统的 subName（如 上野東京ライン 的 "東海道線～高崎線・宇都宮線／常磐線～品川"）
+    // Prefer canonical passenger-facing subtitle stored on the line record.
       var _losSubName = "";
-      if (window.LineOperationSystems) {
-        var _lang = window.currentLang || 'ja';
-        var _ops = window.LineOperationSystems;
-        var _opKeys = Object.keys(_ops);
-        for (var _oi = 0; _oi < _opKeys.length; _oi++) {
-          var _sysList = _ops[_opKeys[_oi]];
-          for (var _si = 0; _si < _sysList.length; _si++) {
-            if (_sysList[_si].lineIds && _sysList[_si].lineIds.indexOf(lineId) >= 0) {
-              var _snKey = "subName" + (_lang === 'ja' ? 'Ja' : _lang === 'zh' ? 'Zh' : _lang === 'en' ? 'En' : 'Ko');
-              if (_sysList[_si][_snKey]) {
-                _losSubName = _sysList[_si][_snKey];
-              }
-              break;
-            }
-          }
-          if (_losSubName) break;
-        }
-      }
+      var _lang = window.currentLang || 'ja';
+      var _presentation = line.presentation || {};
+      var _snKey = "subName" + (_lang === 'ja' ? 'Ja' : _lang === 'zh' ? 'Zh' : _lang === 'en' ? 'En' : 'Ko');
+      _losSubName = _presentation[_snKey] || "";
       if (_losSubName) {
         intervalText = _losSubName;
       } else {
@@ -481,24 +310,15 @@
       var op = opOrder[o];
       html += '<div class="rs-operator-group" data-operator="' + escapeHtml(op) + '"><div class="rs-operator-title">' + escapeHtml(tOp(op)) + '</div>'
         + '<div class="rs-cards-container">';
-      // Running-system cards (LOS authority), then per-line fallback for uncovered lines
-      var losKey = null;
-      try {
-        if (window.TransitConstants && typeof window.TransitConstants.toLosKey === "function") losKey = window.TransitConstants.toLosKey(op);
-      } catch(_e) {}
-      var systems = (losKey && window.LineOperationSystems && window.LineOperationSystems[losKey]) ? window.LineOperationSystems[losKey] : null;
+      // Passenger display groups are canonical metadata on each primary line record.
       var covered = {};
-      if (systems) {
-        for (var s = 0; s < systems.length; s++) {
-          var sys = systems[s];
-          var sysIds = sys.lineIds || [];
-          var memberIds = [];
-          for (var m = 0; m < sysIds.length; m++) {
-            if (linesObj[sysIds[m]]) { memberIds.push(sysIds[m]); covered[sysIds[m]] = true; }
-          }
-          if (memberIds.length === 0) continue;
-          html += renderSystemCard(sys, memberIds, linesObj, { mode: mode });
-        }
+      for (var pg = 0; pg < groups[op].length; pg++) {
+        var pgItem = groups[op][pg], pres = pgItem.line.presentation;
+        if (!pres || !Array.isArray(pres.lineIds) || pres.lineIds.length === 0 || pres.lineIds[0] !== pgItem.id) continue;
+        var memberIds = pres.lineIds.filter(function(id) { return !!linesObj[id]; });
+        if (memberIds.length === 0) continue;
+        memberIds.forEach(function(id) { covered[id] = true; });
+        html += renderSystemCard(pres, memberIds, linesObj, { mode: mode });
       }
       for (var k = 0; k < groups[op].length; k++) {
         var g = groups[op][k];
@@ -516,18 +336,14 @@
   }
 
   function renderSystemCardByCode(code, linesObj, options) {
-    if (!code || !linesObj || !window.LineOperationSystems) return "";
-    var opKeys = Object.keys(window.LineOperationSystems);
-    for (var oi = 0; oi < opKeys.length; oi++) {
-      var systems = window.LineOperationSystems[opKeys[oi]];
-      if (!Array.isArray(systems)) continue;
-      for (var si = 0; si < systems.length; si++) {
-        var sys = systems[si];
-        if (!sys || String(sys.code || "") !== String(code)) continue;
-        var memberIds = (sys.lineIds || []).filter(function(id) { return !!linesObj[id]; });
-        if (memberIds.length === 0) return "";
-        return renderSystemCard(sys, memberIds, linesObj, options || { mode: "realtime" });
-      }
+    if (!code || !linesObj) return "";
+    var ids = Object.keys(linesObj);
+    for (var i = 0; i < ids.length; i++) {
+      var line = linesObj[ids[i]], sys = line && line.presentation;
+      if (!sys || String(sys.code || "") !== String(code) || !Array.isArray(sys.lineIds)) continue;
+      var memberIds = sys.lineIds.filter(function(id) { return !!linesObj[id]; });
+      if (memberIds.length === 0) return "";
+      return renderSystemCard(sys, memberIds, linesObj, options || { mode: "realtime" });
     }
     return "";
   }
