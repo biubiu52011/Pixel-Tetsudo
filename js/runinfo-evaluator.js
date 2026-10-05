@@ -65,8 +65,10 @@
 
     if (whole) return { status: "suspended", evidence: evidence, delayUpperBoundMinutes: null };
     if (timetable) return { status: "delayed", evidence: evidence, delayUpperBoundMinutes: null };
-    // A station-to-station suspension is a partial line impact, not a whole-line ×.
-    if (explicitRangeSuspension || through || partial || reducedService) return { status: "notice", evidence: evidence, delayUpperBoundMinutes: null };
+    var directionalSuspension = /(?:上り線|下り線|内回り|外回り)[^。\n]*(?:運転見合わせ|運転を見合わせ|運転中止|運転を中止|運休)/.test(s);
+    if (directionalSuspension) evidence.push({ type: "DIRECTIONAL_SUSPENSION" });
+    // Station ranges and one-direction suspensions are partial impacts, never whole-line ×.
+    if (explicitRangeSuspension || directionalSuspension || through || partial || reducedService) return { status: "notice", evidence: evidence, delayUpperBoundMinutes: null };
 
     // A bare keyword is not enough to upgrade the whole line.
     if (/運休|見合わせ|中止|運行情報|運転情報/.test(s)) {
