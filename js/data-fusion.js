@@ -206,6 +206,9 @@
         status: st,
         maxDelay: v.r.maxDelay == null ? null : v.r.maxDelay,
         interval: v.r.interval || null,
+        direction: v.r.direction || null,
+        effect: v.r.effect || null,
+        impacts: Array.isArray(v.r.impacts) ? v.r.impacts : [],
         cause: v.r.text || v.r.cause || null,
         updatedAt: v.r.updatedAt || v.t || null,
         source: "last_good",
@@ -269,7 +272,7 @@
   }
 
   function parseODPTDelay(raw) {
-    var result = { status: "unknown", maxDelay: null, interval: null, cause: null };
+    var result = { status: "unknown", maxDelay: null, interval: null, direction: null, effect: null, impacts: [], cause: null };
     if (!raw || !window.RunInfoEvaluator) return result;
     try {
       var stationName = function(v) {
@@ -424,7 +427,7 @@
         }
       } catch(_we) {}
       var _lastGood = getLastGoodDelay(lineId);
-      var delayInfo = apiInfo || webInfo || (_hasLocal && { status: localStatus.status, maxDelay: localStatus.maxDelay, interval: localStatus.interval, cause: localStatus.cause }) || _lastGood || fallbackDelay;
+      var delayInfo = apiInfo || webInfo || (_hasLocal && { status: localStatus.status, maxDelay: localStatus.maxDelay, interval: localStatus.interval, direction: localStatus.direction || null, effect: localStatus.effect || null, impacts: localStatus.impacts || [], cause: localStatus.cause }) || _lastGood || fallbackDelay;
       // Attach running-chain resolution context (transient, not persistent)
 
       var _rtPositions = (odptData.realtimePositions[lineId] || []).slice();
