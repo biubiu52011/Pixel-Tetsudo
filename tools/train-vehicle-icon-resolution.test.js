@@ -127,3 +127,21 @@ console.log('formation artwork uniqueness: 3 PASS');
   assert.strictEqual(r.iconPath,'', x.why + ' must not project artwork');
 });
 console.log('formation consistency gate: 4 PASS');
+
+const hohoemiIdentity = '相鉄11000系(10両)（11003F編成）';
+assert.strictEqual(context.window.TrainIcons.resolveVehicleArtwork(hohoemiIdentity), null,
+  'dated artwork must not resolve without serviceDate');
+assert.strictEqual(context.window.TrainIcons.resolveVehicleArtwork(hohoemiIdentity, '2026-04-08'), null,
+  'future livery must not leak into historical service date');
+assert.ok(/11003編成_ほほえみ号\.png$/.test(
+  context.window.TrainIcons.resolveVehicleArtwork(hohoemiIdentity, '2026-08-30') || ''
+));
+const historical11003 = context.window.TrainVehicle.resolve({
+  timetableVehicleType:'相鉄11000系(10両)',
+  formationId:'11003F',
+  formationCandidates:['11003F'],
+  serviceDate:'2026-04-08'
+});
+assert.strictEqual(historical11003.iconPath,'',
+  'historical formation must not receive a later dated livery');
+console.log('dated formation artwork validity: 4 PASS');
