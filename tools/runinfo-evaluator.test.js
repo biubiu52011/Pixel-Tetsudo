@@ -57,4 +57,15 @@ let rangedService=E.extractMetadata({text:"通常の７～８割程度で運転�
 assert.deepStrictEqual(rangedService.serviceLevel,{minPercent:70,maxPercent:80});
 let noServiceLevel=E.extractMetadata({text:"下り線の一部列車に遅れが出ています。"});
 assert.strictEqual(noServiceLevel.serviceLevel,null);
-console.log("runinfo-evaluator: 37 PASS");
+let typhoonSuspension=E.evaluate({structuredStatus:"Suspension",text:"台風の影響で全線で運転を見合わせています。"});
+assert.strictEqual(typhoonSuspension.messageKind,"realtime");
+assert.strictEqual(typhoonSuspension.status,"suspended");
+let typhoonNotice=E.evaluate({messageKind:"notice",text:"台風接近に伴う今後の運転計画についてお知らせします。"});
+assert.strictEqual(typhoonNotice.messageKind,"notice");
+assert.notStrictEqual(typhoonNotice.status,"suspended");
+let typhoonUnknown=E.evaluate({text:"台風に関する情報です。"});
+assert.strictEqual(typhoonUnknown.messageKind,"unknown");
+let plannedNoticeWithImpact=E.evaluate({messageKind:"notice",text:"明日は台風の影響で一部列車を運休します。"});
+assert.strictEqual(plannedNoticeWithImpact.messageKind,"notice");
+assert.strictEqual(plannedNoticeWithImpact.status,"notice");
+console.log("runinfo-evaluator: 44 PASS");
