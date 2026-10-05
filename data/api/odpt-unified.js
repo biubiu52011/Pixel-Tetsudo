@@ -644,6 +644,10 @@
         return result.value || (Array.isArray(result) ? result : []);
     }
 
+    // Operators are activated by the train detail view. Keeping this set here
+    // lets lazy pages poll only data the user has actually requested.
+    var _activeRealtimeOperators = {};
+
     // ========== Public API ==========
     window.ODPTClient = {
         ENDPOINTS: ODPT_ENDPOINTS,
@@ -656,6 +660,35 @@
         getApiLinks: getApiLinks,
         keysConfigured: keysConfigured,
         validateAuthoritativeRealtimeConfig: validateAuthoritativeRealtimeConfig,
+
+        activateRealtimeLines: function(lineIds) {
+            lineIds = Array.isArray(lineIds) ? lineIds : [lineIds];
+            var self = this;
+            var timetablePromises = [];
+            lineIds.forEach(function(lineId) {
+                var op = LINE_TO_OPERATOR[lineId];
+                var identity = getLineRailwayIdentity(lineId);
+                if (!op || !identity) return;
+                if (ODPT_ENDPOINTS[op] && ODPT_ENDPOINTS[op].train) _activeRealtimeOperators[op] = true;
+                if (ODPT_ENDPOINTS[op] && ODPT_ENDPOINTS[op].trainTimetable) {
+                    timetablePromises.push(self.getCompleteTimetable(op, identity.odptRailway).then(function(rows) {
+                        if (!window.ODPT_TIMETABLES) window.ODPT_TIMETABLES = {};
+                        var existing = window.ODPT_TIMETABLES[op] || [];
+                        var keep = existing.filter(function(tt) {
+                            var actual = parseRailwayIdentity(tt);
+                            return !(actual && actual.key === identity.key);
+                        });
+                        window.ODPT_TIMETABLES[op] = keep.concat(rows || []);
+                    }).catch(function(e) {
+                        console.debug("[ODPT] on-demand timetable skip:", lineId, e && e.message);
+                    }));
+                }
+            });
+            var ops = Object.keys(_activeRealtimeOperators);
+            return Promise.all(timetablePromises).then(function() {
+                return ops.length ? loadRealtimeData(false, ops) : Promise.resolve();
+            });
+        },
 
         // 获取运行情报/延误信息
         getTrainInformation: function(operator) {
@@ -1301,13 +1334,16 @@
         return { ok: invalid.length === 0, checked: checked, invalid: invalid };
     }
 
-    function loadRealtimeData(delayOnly) {
+    function loadRealtimeData(delayOnly, positionOperators) {
         validateAuthoritativeRealtimeConfig();
         window.ODPT_DELAY_DATA = {};
-        window.ODPT_TRAIN_POSITIONS = {};
+        // Position snapshots are retained per operator. On-demand refresh must
+        // not erase another already-active operator before its own poll runs.
+        if (!window.ODPT_TRAIN_POSITIONS || !positionOperators) window.ODPT_TRAIN_POSITIONS = {};
         // 注意：不清空 ODPT_TIMETABLES，时刻表使用缓存
 
         var ops = Object.keys(ODPT_ENDPOINTS);
+        var positionOps = positionOperators && positionOperators.length ? positionOperators : ops;
         var loaded = { delay: 0, positions: 0 };
         var delayPromises = [], posPromises = [];
 
@@ -1330,7 +1366,7 @@
             }
 
             // 2. 加载列车实时位置（第二推送，不阻塞延误首屏；delayOnly 模式跳过）
-            if (!delayOnly && ep.train) {
+            if (!delayOnly && ep.train && positionOps.indexOf(op) >= 0) {
                 posPromises.push(
                     fetchODPT(buildUrl(op, 'train')).then(extractData).then(function(data) {
                         // v4.3.392: 成功即写入（空数组也写入），失败不拖垮全局推送
@@ -1600,7 +1636,9 @@
     var _lazyMode = false;
 
     function _realtimeRefresh() {
-        loadRealtimeData(_lazyMode).catch(function(e) { console.warn("[ODPT] Realtime refresh error:", e.message); });
+        var activeOps = Object.keys(_activeRealtimeOperators);
+        var delayOnly = _lazyMode && activeOps.length === 0;
+        loadRealtimeData(delayOnly, activeOps.length ? activeOps : null).catch(function(e) { console.warn("[ODPT] Realtime refresh error:", e.message); });
     }
     function startRealtimePolling() {
         if (_rtPollTimer) return;
