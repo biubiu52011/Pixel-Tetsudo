@@ -575,6 +575,9 @@ LINE LIST DISPLAY ORDER（线路一览统一排序规范）：
 - 全局类别序：JR → 地下鉄（Metro）→ 私鉄（Private）→ その他（Other）。
   类别由 operator 判定（JR- 前缀 = JR；公営・地下鉄运营商 = Metro；大手/準大手私鉄 = Private；其余 = Other），
   收口于 LinePresentationService.categoryOf / getOperatorOrder，禁止各页复制 comparator。
+- JR 类别内 operator 固定序：JR-East（JR東日本）→ JR-Central（JR東海）→ JR-West（JR西日本）→
+  JR-Hokkaido（JR北海道）→ JR-Shikoku（JR四国）→ JR-Kyushu（JR九州）→ JR-Freight（JR貨物）；
+  未知 JR-* operator 排在固定表之后并保持稳定 fallback，不按显示名猜测顺序。
 - 排序单位 = Presentation / 运行系统：line.presentation.lineIds 的 primary（lineIds[0]）记录占一个排序槽；
   member 线路（lineIds[1..]）与 primary 共享槽位，不单独出现。canonical physical lines 仍独立建模，
   本规则不合并/拆分 canonical 拓扑。

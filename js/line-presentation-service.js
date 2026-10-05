@@ -20,12 +20,21 @@
  *   - getDisplayOrder(lines)    -> ordered array of line IDs (primaries + members)
  *   - getPresentationOrder(lines) -> ordered primary presentation entities
  *   - getDisplayOrderMap(lines) -> map of line ID -> display index
- *   - orderOperators(ops)       -> operator list sorted by category/OP_ORDER/alpha
+ *   - orderOperators(ops)       -> operator list sorted by category/JR fixed order/OP_ORDER/alpha
  */
 (function() {
   "use strict";
 
   var CATEGORY_ORDER = ["JR", "Metro", "Private", "Other"];
+  var JR_OPERATOR_ORDER = [
+    "JR-East",
+    "JR-Central",
+    "JR-West",
+    "JR-Hokkaido",
+    "JR-Shikoku",
+    "JR-Kyushu",
+    "JR-Freight"
+  ];
 
   // Minimal category metadata. JR operators are identified by the "JR-" prefix
   // (JR-East / JR-West / JR-Central / JR-Kyushu / JR-Hokkaido / JR-Shikoku).
@@ -55,6 +64,11 @@
     var c = categoryOf(op);
     var i = CATEGORY_ORDER.indexOf(c);
     return i >= 0 ? i : CATEGORY_ORDER.length - 1;
+  }
+
+  function jrOperatorIndex(op) {
+    var i = JR_OPERATOR_ORDER.indexOf(op);
+    return i >= 0 ? i : JR_OPERATOR_ORDER.length;
   }
 
   // Normalized symbol token: pure A-Z letters sort alpha; any other token
@@ -97,7 +111,8 @@
 
   /**
    * All operator keys sorted by global category (JR > Metro > Private > Other),
-   * then OP_ORDER (project canonical), then alpha. Unknown operators never crash.
+   * then fixed JR group order, then OP_ORDER (project canonical), then alpha.
+   * Unknown operators never crash.
    */
   function getOperatorOrder(lines) {
     var known = (window.TransitConstants && Array.isArray(window.TransitConstants.OP_ORDER))
@@ -109,6 +124,10 @@
     out.sort(function(a, b) {
       var ca = categoryIndex(a), cb = categoryIndex(b);
       if (ca !== cb) return ca - cb;
+      if (categoryOf(a) === "JR" && categoryOf(b) === "JR") {
+        var ja = jrOperatorIndex(a), jb = jrOperatorIndex(b);
+        if (ja !== jb) return ja - jb;
+      }
       var ia = known.indexOf(a), ib = known.indexOf(b);
       if (ia >= 0 && ib >= 0) return ia - ib;
       if (ia >= 0) return -1;
@@ -121,7 +140,7 @@
   /**
    * orderOperators(ops): stable order for an arbitrary operator subset
    * (used by filter bars). Order follows getOperatorOrder; ops outside the
-   * canonical set append in alpha order.
+   * current full order append in alpha order.
    */
   function orderOperators(ops) {
     if (!Array.isArray(ops) || ops.length === 0) return ops || [];

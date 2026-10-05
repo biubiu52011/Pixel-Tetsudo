@@ -52,8 +52,23 @@ const FIXTURES = {
   UNKNOWN_OP: [
     makeLine("Mystery", "MysteryRailway", "X", { code: "X", order: 1, lineIds: ["Mystery"], nameJa: "謎線", operatorGroup: "MYSTERY" })
   ],
+  JR_CENTRAL: [
+    makeLine("TokaidoShinkansen", "JR-Central", "JRC", { code: "JRC", order: 1, lineIds: ["TokaidoShinkansen"], nameJa: "東海道新幹線", operatorGroup: "JR_CENTRAL" })
+  ],
   JR_WEST: [
     makeLine("Sanin", "JR-West", "V", { code: "V", order: 1, lineIds: ["Sanin"], nameJa: "山陰線", operatorGroup: "JR_WEST" })
+  ],
+  JR_HOKKAIDO: [
+    makeLine("HokkaidoShinkansen", "JR-Hokkaido", "JH", { code: "JH", order: 1, lineIds: ["HokkaidoShinkansen"], nameJa: "北海道新幹線", operatorGroup: "JR_HOKKAIDO" })
+  ],
+  JR_SHIKOKU: [
+    makeLine("Yosan", "JR-Shikoku", "Y", { code: "Y", order: 1, lineIds: ["Yosan"], nameJa: "予讃線", operatorGroup: "JR_SHIKOKU" })
+  ],
+  JR_KYUSHU: [
+    makeLine("KyushuShinkansen", "JR-Kyushu", "JK", { code: "JK", order: 1, lineIds: ["KyushuShinkansen"], nameJa: "九州新幹線", operatorGroup: "JR_KYUSHU" })
+  ],
+  UNKNOWN_JR: [
+    makeLine("MarsRail", "JR-Mars", "JM", { code: "JM", order: 1, lineIds: ["MarsRail"], nameJa: "火星線", operatorGroup: "JR_MARS" })
   ]
 };
 
@@ -82,7 +97,29 @@ function ok(cond, name) {
   ok(idx("Keio") < idx("TWR"), "Private before Other");
   ok(idx("JR-West") >= 0 && idx("JR-West") < idx("TokyoMetro"), "JR-West joins JR category before Metro");
   ok(idx("MysteryRailway") > idx("TWR"), "unknown operator goes after known Other ops");
-  ok(idx("JR-East") < idx("JR-West"), "JR-East (OP_ORDER) before JR-West (alpha) within JR");
+  ok(
+    idx("JR-East") < idx("JR-Central") &&
+    idx("JR-Central") < idx("JR-West") &&
+    idx("JR-West") < idx("JR-Hokkaido") &&
+    idx("JR-Hokkaido") < idx("JR-Shikoku") &&
+    idx("JR-Shikoku") < idx("JR-Kyushu"),
+    "JR operators follow fixed group order"
+  );
+  ok(idx("JR-Kyushu") < idx("JR-Mars") && idx("JR-Mars") < idx("TokyoMetro"), "unknown JR operator falls back after fixed JR order before Metro");
+})();
+
+// ---- 3b. Fixed JR order remains correct when one JR company is absent ----
+(function testJRFixedOrderWithMissingCompany() {
+  const { sandbox, ctx } = makeContext();
+  loadCommon(ctx); loadLPS(ctx);
+  const lines = buildLines();
+  delete lines.TokaidoShinkansen;
+  sandbox.window.UNIFIED_LINES = lines;
+  const LPS = sandbox.window.LinePresentationService;
+  const order = LPS.getOperatorOrder(lines);
+  const idx = (op) => order.indexOf(op);
+  ok(idx("JR-East") < idx("JR-West"), "JR fixed order skips missing JR-Central without drifting");
+  ok(idx("JR-West") < idx("JR-Hokkaido"), "JR-West remains before JR-Hokkaido when JR-Central missing");
 })();
 
 // ---- 4-5. Symbol tier: special before A-Z; A < B < C ----
@@ -180,8 +217,9 @@ function ok(cond, name) {
   try { order = LPS.getDisplayOrder(sandbox.window.UNIFIED_LINES); } catch (e) { threw = true; }
   ok(!threw, "unknown operator does not crash getDisplayOrder");
   ok(order.indexOf("Mystery") >= 0, "unknown-operator line still present (Other category)");
-  const ops = LPS.orderOperators(["MysteryRailway", "JR-East", "Keio"]);
-  ok(ops[0] === "JR-East" && ops[1] === "Keio" && ops[2] === "MysteryRailway", "orderOperators stable for unknown ops");
+  const ops = LPS.orderOperators(["MysteryRailway", "JR-Mars", "JR-West", "JR-East", "Keio"]);
+  ok(ops[0] === "JR-East" && ops[1] === "JR-West" && ops[2] === "JR-Mars", "orderOperators applies fixed JR order before unknown JR fallback");
+  ok(ops[3] === "Keio" && ops[4] === "MysteryRailway", "orderOperators keeps Private before unknown Other ops");
 })();
 
 // ---- 12. Same key keeps stable ordering (original order) ----
@@ -223,6 +261,10 @@ function ok(cond, name) {
     // Category ordering on real operators
     const ops = LPS.getOperatorOrder(raw.lines);
     ok(ops.indexOf("JR-East") < ops.indexOf("TokyoMetro"), "real: JR-East before TokyoMetro");
+    ok(ops.indexOf("JR-East") < ops.indexOf("JR-Central"), "real: JR-East before JR-Central");
+    ok(ops.indexOf("JR-Central") < ops.indexOf("JR-West"), "real: JR-Central before JR-West");
+    ok(ops.indexOf("JR-West") < ops.indexOf("JR-Hokkaido"), "real: JR-West before JR-Hokkaido");
+    ok(ops.indexOf("JR-Hokkaido") < ops.indexOf("JR-Kyushu"), "real: JR-Hokkaido before JR-Kyushu");
     ok(ops.indexOf("TokyoMetro") < ops.indexOf("Keio"), "real: TokyoMetro before Keio");
     const otherOp = ["Rinkai", "TWR", "MinatoMirai", "Yurikamome"].filter((o) => ops.indexOf(o) >= 0);
     ok(otherOp.length > 0 && ops.indexOf("Keio") < ops.indexOf(otherOp[0]), "real: Keio before Other ops");
