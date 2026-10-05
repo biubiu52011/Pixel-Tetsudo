@@ -105,22 +105,25 @@
 
     if (position && position.fusionLineId && position.fusionRole === "branch" && branchGeom && branchGeom[position.fusionLineId]) {
       points = branchGeom[position.fusionLineId];
-      idx = clamp(idx, 0, points.length - 1);
+      if (idx >= points.length) return null;
     } else if (position && position.fusionLineId && opts.fusionBaseIdx) {
       var base = opts.fusionBaseIdx(lineId, position.fusionLineId);
       idx = base >= 0 ? base + idx : idx;
-      idx = clamp(idx, 0, points.length - 1);
-    } else {
-      idx = clamp(idx, 0, points.length - 1);
+      if (idx < 0 || idx >= points.length) return null;
+    } else if (idx >= points.length) {
+      return null;
     }
 
-    var toIdx = position && position.segmentToIndex != null ? position.segmentToIndex : null;
+    var toIdx = position && position.segmentToIndex != null ? Number(position.segmentToIndex) : null;
+    if (toIdx != null && (!isFinite(toIdx) || toIdx < 0)) return null;
     if (toIdx != null && position && position.fusionLineId && position.fusionRole === "branch" && branchGeom && branchGeom[position.fusionLineId]) {
-      toIdx = clamp(toIdx, 0, points.length - 1);
+      if (toIdx >= points.length) return null;
     } else if (toIdx != null && position && position.fusionLineId && opts.fusionBaseIdx) {
       var base2 = opts.fusionBaseIdx(lineId, position.fusionLineId);
       toIdx = base2 >= 0 ? base2 + toIdx : toIdx;
-      toIdx = clamp(toIdx, 0, points.length - 1);
+      if (toIdx < 0 || toIdx >= points.length) return null;
+    } else if (toIdx != null && toIdx >= points.length) {
+      return null;
     }
     if (toIdx == null) {
       var moveDir = opts.getMoveDir ? opts.getMoveDir(position, lineId) : null;
