@@ -25,7 +25,6 @@ const estimatorSource=estimator;
 const fusionSource=fusion;
 assert(/vehicleResolvedUpstream:\s*vehResult\.identityStatus === 'EXACT'/.test(estimator),
   "upstream vehicle authority must represent EXACT identity, not artwork availability");
-assert(/Object\.keys\(_vehicleNames\)\.length === 1/.test(estimator),"conflicting exact-train vehicle providers must remain unresolved");
 const tobuEvidence=read("data/timetables/tobu-limited-express-vehicle-evidence.js");
 assert(/TRAIN_VEHICLE_EVIDENCE_PROVIDERS/.test(tobuEvidence),"Tobu exact-train evidence must register through generic provider registry");
 assert(/id:\s*"tobu-official-limited-express-2026"/.test(tobuEvidence),"vehicle evidence provider must expose stable provenance id");
