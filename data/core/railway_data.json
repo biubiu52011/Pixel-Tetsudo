@@ -14704,7 +14704,10 @@
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "ShonanShinjuku",
+        "SobuRapid"
+      ],
       "transferStations": [
         {
           "station": "Ofuna",
@@ -15044,7 +15047,9 @@
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "Ome"
+      ],
       "transferStations": [
         {
           "station": "Tokyo",
@@ -15392,7 +15397,10 @@
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "Kawagoe",
+        "Rinkai"
+      ],
       "transferStations": [
         {
           "station": "Osaki",
@@ -15709,7 +15717,10 @@
         3,
         4
       ],
-      "throughServices": [],
+      "throughServices": [
+        "NaritaAbikoBranch",
+        "UenoTokyo"
+      ],
       "transferStations": [
         {
           "station": "Shinagawa",
@@ -16062,7 +16073,11 @@
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "Musashino",
+        "Sotobo",
+        "Uchibo"
+      ],
       "transferStations": [
         {
           "station": "Tokyo",
@@ -16232,7 +16247,9 @@
         3,
         3
       ],
-      "throughServices": [],
+      "throughServices": [
+        "Keiyo"
+      ],
       "transferStations": [
         {
           "station": "Fuchu-Hommachi",
@@ -16355,7 +16372,12 @@
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "Takasaki",
+        "Tokaido",
+        "UtsunomiyaJR",
+        "Yokosuka"
+      ],
       "transferStations": [
         {
           "station": "Omiya",
@@ -16937,7 +16959,10 @@
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "ShonanShinjuku",
+        "UenoTokyo"
+      ],
       "transferStations": [
         {
           "station": "Tokyo",
@@ -17441,7 +17466,11 @@
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "Ito",
+        "ShonanShinjuku",
+        "UenoTokyo"
+      ],
       "transferStations": [
         {
           "station": "Tokyo",
@@ -17868,7 +17897,9 @@
         3,
         4
       ],
-      "throughServices": [],
+      "throughServices": [
+        "Chiyoda"
+      ],
       "transferStations": [
         {
           "station": "Ayase",
@@ -18664,7 +18695,9 @@
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "TobuSkytree"
+      ],
       "transferStations": [
         {
           "station": "Ebisu",
@@ -18927,7 +18960,9 @@
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "Tojo"
+      ],
       "transferStations": [
         {
           "station": "Wakoshi",
@@ -19199,7 +19234,9 @@
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "ChuoSobuLocal"
+      ],
       "transferStations": [
         {
           "station": "Nakano",
@@ -19381,7 +19418,10 @@
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "Keikyu",
+        "KeiseiOshiage"
+      ],
       "transferStations": [
         {
           "station": "Nakanobu",
@@ -19619,7 +19659,9 @@
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "TokyuMeguro"
+      ],
       "transferStations": [
         {
           "station": "Meguro",
@@ -19797,7 +19839,9 @@
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "KeioMain"
+      ],
       "transferStations": [
         {
           "station": "Shinjuku",
@@ -20370,7 +20414,11 @@
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "JobanLocal",
+        "OdakyuTama",
+        "Odawara"
+      ],
       "transferStations": [
         {
           "station": "Yoyogi-Uehara",
@@ -20580,7 +20628,9 @@
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "TobuSkytree"
+      ],
       "transferStations": [
         {
           "station": "Shibuya",
@@ -20814,7 +20864,9 @@
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "TokyuMeguro"
+      ],
       "transferStations": [
         {
           "station": "Meguro",
@@ -20993,7 +21045,10 @@
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "Tojo",
+        "TokyuToyoko"
+      ],
       "transferStations": [
         {
           "station": "Wakoshi",
@@ -21565,7 +21620,9 @@
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "TobuNikko"
+      ],
       "transferStations": [
         {
           "station": "Tobu-Dobutsu-Koen",
@@ -21671,7 +21728,10 @@
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "Fukutoshin",
+        "MinatoMirai"
+      ],
       "transferStations": [
         {
           "station": "Shibuya",
@@ -22605,7 +22665,10 @@
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "ChuoRapid",
+        "Itsukaichi"
+      ],
       "transferStations": [
         {
           "station": "Tachikawa",
@@ -22670,7 +22733,9 @@
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "Ome"
+      ],
       "transferStations": [
         {
           "station": "Haijima",
@@ -22724,7 +22789,9 @@
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "Yokosuka"
+      ],
       "transferStations": [
         {
           "station": "Tokyo",
@@ -23123,7 +23190,9 @@
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "Asakusa"
+      ],
       "transferStations": [
         {
           "station": "Sengakuji",
@@ -23314,7 +23383,9 @@
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "TokyuToyoko"
+      ],
       "transferStations": [
         {
           "station": "Yokohama",
@@ -24794,7 +24865,9 @@
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "Tozai"
+      ],
       "transferStations": [
         {
           "station": "Mitaka",
@@ -25947,7 +26020,9 @@
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "Tokaido"
+      ],
       "transferStations": [
         {
           "station": "Atami",
@@ -26369,7 +26444,10 @@
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "KawagoeWest",
+        "Saikyo"
+      ],
       "transferStations": [
         {
           "station": "Omiya",
@@ -26456,7 +26534,10 @@
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "Hachiko",
+        "Kawagoe"
+      ],
       "transferStations": [
         {
           "station": "Kawagoe",
@@ -26867,7 +26948,9 @@
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "Shinjuku"
+      ],
       "transferStations": [
         {
           "station": "Shinjuku",
@@ -28273,7 +28356,9 @@
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "Chiyoda"
+      ],
       "transferStations": [
         {
           "station": "Odakyu-Ei-Zan",
@@ -29031,7 +29116,9 @@
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "Saikyo"
+      ],
       "transferStations": [
         {
           "station": "Shin-Kiba",
@@ -29944,7 +30031,9 @@
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "Shinonoi"
+      ],
       "transferStations": [
         {
           "station": "Takasaki",
@@ -30087,7 +30176,9 @@
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "Shinetsu"
+      ],
       "transferStations": [
         {
           "station": "Shiojiri",
@@ -30151,7 +30242,9 @@
         "Awa-Kamogawa"
       ],
       "durations": [],
-      "throughServices": [],
+      "throughServices": [
+        "Keiyo"
+      ],
       "transferStations": [
         {
           "station": "Chiba",
@@ -30841,7 +30934,10 @@
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "Fukutoshin",
+        "Yurakucho"
+      ],
       "transferStations": [
         {
           "station": "Ikebukuro",
@@ -31295,7 +31391,9 @@
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "Keiyo"
+      ],
       "transferStations": [
         {
           "station": "Soga",
@@ -32060,7 +32158,9 @@
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "Chiyoda"
+      ],
       "transferStations": [
         {
           "station": "Shinjuku",
@@ -32303,7 +32403,9 @@
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "TobuIsesaki"
+      ],
       "transferStations": [
         {
           "station": "Tobu-Dobutsu-Koen",
@@ -32415,7 +32517,10 @@
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "Hanzomon",
+        "Hibiya"
+      ],
       "transferStations": [
         {
           "station": "Asakusa",
@@ -32790,7 +32895,11 @@
       ],
       "nameZh": "东急目黑线",
       "nameKo": "도큐 메구로선",
-      "name": "東急目黒線"
+      "name": "東急目黒線",
+      "throughServices": [
+        "Mita",
+        "Namboku"
+      ]
     },
     "TokyuIkegami": {
       "nameJa": "東急池上線",
@@ -33018,7 +33127,10 @@
       ],
       "nameZh": "八高线",
       "nameKo": "하치코선",
-      "name": "八高線"
+      "name": "八高線",
+      "throughServices": [
+        "KawagoeWest"
+      ]
     },
     "KeiseiOshiage": {
       "nameJa": "京成押上線",
@@ -33062,7 +33174,10 @@
       ],
       "nameZh": "押上线",
       "nameKo": "오시아게선",
-      "name": "京成押上線"
+      "name": "京成押上線",
+      "throughServices": [
+        "Asakusa"
+      ]
     },
     "KeiseiKanamachi": {
       "nameJa": "京成金町線",
@@ -34309,7 +34424,10 @@
         2,
         2
       ],
-      "throughServices": [],
+      "throughServices": [
+        "ShonanShinjuku",
+        "UenoTokyo"
+      ],
       "transferStations": [
         {
           "station": "Tokyo",
@@ -34921,7 +35039,9 @@
         "Shimosa-Manzaki",
         "Narita"
       ],
-      "throughServices": [],
+      "throughServices": [
+        "Joban"
+      ],
       "transferStations": [
         {
           "station": "Abiko",
@@ -35068,7 +35188,12 @@
         4,
         5
       ],
-      "throughServices": [],
+      "throughServices": [
+        "Joban",
+        "Takasaki",
+        "Tokaido",
+        "UtsunomiyaJR"
+      ],
       "transferStations": [
         {
           "station": "Omiya",
@@ -36847,7 +36972,10 @@
         1,
         1
       ],
-      "throughServices": [],
+      "throughServices": [
+        "Hanwa",
+        "KansaiMain"
+      ],
       "transferStations": [
         {
           "station": "Osaka",
@@ -37154,7 +37282,10 @@
         4,
         4
       ],
-      "throughServices": [],
+      "throughServices": [
+        "KagoshimaMain",
+        "TokaidoKansai"
+      ],
       "transferStations": [
         {
           "station": "Kobe",
@@ -37333,7 +37464,9 @@
         3,
         3
       ],
-      "throughServices": [],
+      "throughServices": [
+        "OsakaLoop"
+      ],
       "transferStations": [
         {
           "station": "Osaka",
@@ -37462,7 +37595,9 @@
         3,
         3
       ],
-      "throughServices": [],
+      "throughServices": [
+        "OsakaLoop"
+      ],
       "transferStations": [
         {
           "station": "Tennoji",
@@ -38582,7 +38717,9 @@
         3,
         3
       ],
-      "throughServices": [],
+      "throughServices": [
+        "SanyoMain"
+      ],
       "transferStations": [
         {
           "station": "Kyoto",
@@ -38849,7 +38986,12 @@
         3,
         3
       ],
-      "throughServices": [],
+      "throughServices": [
+        "Hohi",
+        "NagasakiMain",
+        "Nippo",
+        "SanyoMain"
+      ],
       "transferStations": [
         {
           "station": "Kokura",
@@ -39022,7 +39164,9 @@
         3,
         3
       ],
-      "throughServices": [],
+      "throughServices": [
+        "KagoshimaMain"
+      ],
       "transferStations": [
         {
           "station": "Nagasaki",
@@ -39287,7 +39431,11 @@
         3,
         3
       ],
-      "throughServices": [],
+      "throughServices": [
+        "Hohi",
+        "KagoshimaMain",
+        "Kyudai"
+      ],
       "transferStations": [
         {
           "station": "Kokura",
@@ -39418,7 +39566,9 @@
         3,
         3
       ],
-      "throughServices": [],
+      "throughServices": [
+        "Nippo"
+      ],
       "transferStations": [
         {
           "station": "Kurume",
@@ -39549,7 +39699,10 @@
         3,
         3
       ],
-      "throughServices": [],
+      "throughServices": [
+        "KagoshimaMain",
+        "Nippo"
+      ],
       "transferStations": [
         {
           "station": "Kumamoto",
