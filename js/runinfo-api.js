@@ -240,9 +240,25 @@
               if (!timeOfOrigin && rec && rec["odpt:timeOfOrigin"]) timeOfOrigin = rec["odpt:timeOfOrigin"];
             });
             var fetchedAt = Date.now();
+            var evaluated = null;
+            if (window.RunInfoEvaluator && ex.cleanText) {
+              var primary = scoped[0] || {};
+              evaluated = window.RunInfoEvaluator.evaluate({
+                source: "odpt",
+                messageKind: primary["pt:messageKind"] || primary["odpt:trainInformationCategory"] || primary["odpt:category"],
+                structuredStatus: primary["odpt:trainInformationStatus"],
+                suspension: primary["odpt:suspension"] === true,
+                delay: primary["odpt:delay"] === true,
+                text: ex.cleanText
+              });
+            }
             return {
               status: aggregateStatus(scoped, lineObj) || "info",
               text: ex.cleanText,
+              interval: evaluated && evaluated.interval || null,
+              direction: evaluated && evaluated.direction || null,
+              effect: evaluated && evaluated.effect || null,
+              impacts: evaluated && evaluated.impacts || [],
               links: ex.links,
               sourceUpdatedAt: sourceUpdatedAt,
               validUntil: validUntil,
