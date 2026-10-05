@@ -41,6 +41,18 @@ assert(/if \(!isFinite\(rawIdx\) \|\| rawIdx < 0\) return null;/.test(trackLayou
   "track layout must fail closed on missing/invalid stationIndex instead of coercing it to station 0");
 assert(/if \(!isFinite\(_rawStationIdx\) \|\| _rawStationIdx < 0 \|\| _rawStationIdx >= stationCoords\.length\) continue;/.test(renderer),
   "renderer must omit invalid position evidence instead of piling trains at station 0");
+assert(/TrainTrackLayout owns target geometry; this marker owns interpolation/.test(renderer),
+  "renderer must animate TrainTrackLayout targets through the single per-marker RAF authority");
+assert(/cancelAnimationFrame\(existingIcon\._moveRaf\)/.test(renderer),
+  "a new train snapshot must cancel the marker's previous RAF before continuing");
+assert(/_icon\._displayX = _curX;[\s\S]{0,120}_icon\._displayY = _curY;/.test(renderer),
+  "animation must persist the current interpolated marker position for interruption-safe continuation");
+assert(/_distance > _snapDistance/.test(renderer),
+  "implausibly large marker jumps must snap instead of sweeping across the map");
+assert(/_moveTrainLabels\(trainLayer, trainUid, _curX, _curY/.test(renderer),
+  "train labels must follow the marker in the same animation frame");
+assert(!/isLoop && _loopRect && _needMove && !window\.TrainTrackLayout/.test(renderer),
+  "legacy loop RAF must not remain as a second animation path beside TrainTrackLayout");
 assert(/_hasUpstreamVehicle/.test(renderer),"renderer must consume upstream vehicle resolution");
 assert(/var _identityExact = p\.vehicleIdentityStatus === "EXACT"/.test(renderer),
   "renderer must hard-gate concrete artwork on EXACT vehicle identity");
