@@ -176,11 +176,27 @@
       py += base.tangent.y * clearDist * dirSign;
     }
 
+    var routePos = null;
+    if (stationCoords && stationCoords._loopRect && base.points === stationCoords) {
+      var _from = stationCoords[base.idx];
+      var _to = stationCoords[base.nextIdx];
+      if (_from && _from._loopPos != null) {
+        var _fromPos = Number(_from._loopPos);
+        var _toPos = (_to && _to._loopPos != null) ? Number(_to._loopPos) : _fromPos;
+        var _perimeter = Number(stationCoords._loopRect.perimeter) || 0;
+        var _delta = _toPos - _fromPos;
+        if (_perimeter > 0 && Math.abs(_delta) > _perimeter / 2) {
+          _delta += _delta > 0 ? -_perimeter : _perimeter;
+        }
+        routePos = _fromPos + _delta * (position && position.segmentProgress != null ? clamp(position.segmentProgress, 0, 1) : 0);
+      }
+    }
     return {
       x: px,
       y: py,
       idx: base.idx,
       nextIdx: base.nextIdx,
+      routePos: routePos,
       lane: lane,
       key: key,
       moveDir: moveDir,
