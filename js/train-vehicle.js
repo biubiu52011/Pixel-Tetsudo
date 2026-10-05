@@ -110,10 +110,25 @@
     // 4) Artwork is a strict projection of the already-exact vehicle identity.
     // Missing artwork stays missing; never substitute another candidate, line,
     // operator, retired replacement, or rule-derived vehicle.
-    var _formationCandidates = Array.isArray(ctx.formationCandidates) ? ctx.formationCandidates.filter(Boolean) : [];
+    var _formationCandidates = Array.isArray(ctx.formationCandidates)
+      ? ctx.formationCandidates.map(function(v){ return String(v || '').trim(); }).filter(Boolean)
+      : [];
+    _formationCandidates = _formationCandidates.filter(function(v,i,a){ return a.indexOf(v) === i; });
     var _formationId = String(ctx.formationId || '').trim();
-    if (_formationCandidates.length > 1) _formationId = '';
-    var iconPath = chosen ? resolveArtworkForIdentity(chosen, _formationId) : '';
+    var _formationConstrained = _formationCandidates.length > 0 || !!_formationId;
+    var _formationUnique = _formationCandidates.length === 1
+      && !!_formationId
+      && _formationCandidates[0] === _formationId;
+    var iconPath = '';
+    if (chosen) {
+      if (_formationConstrained) {
+        // Formation evidence is authoritative only when both fields agree on one value.
+        // Ambiguous, missing, or contradictory formation evidence blocks artwork entirely.
+        iconPath = _formationUnique ? resolveArtworkForIdentity(chosen, _formationId) : '';
+      } else {
+        iconPath = resolveArtworkForIdentity(chosen, '');
+      }
+    }
 
     // Display-name normalization is allowed only after identity is exact.
 
