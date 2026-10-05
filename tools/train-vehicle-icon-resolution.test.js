@@ -88,3 +88,29 @@ console.log('train-run operation evidence -> exact vehicle -> artwork projection
 assert.strictEqual(context.window.TrainIcons.resolveVehicleArtwork('小田急8000形 / 小田急3000形'), null,
   'ambiguous multi-vehicle evidence must not project concrete artwork');
 console.log('expanded evidence-backed artwork: 9 PASS');
+
+const formationExact = context.window.TrainVehicle.resolve({
+  timetableVehicleType:'埼玉新都市交通2000系',
+  formationId:'01',
+  formationCandidates:['01']
+});
+assert.strictEqual(formationExact.identityStatus,'EXACT');
+assert.ok(/2000系_01編成_レッドパープル\.png$/.test(formationExact.iconPath), formationExact.iconPath);
+
+const formationMissing = context.window.TrainVehicle.resolve({
+  timetableVehicleType:'埼玉新都市交通2000系',
+  formationId:'99',
+  formationCandidates:['99']
+});
+assert.strictEqual(formationMissing.identityStatus,'EXACT');
+assert.strictEqual(formationMissing.iconPath,'',
+  'known formation without canonical artwork must not fall back to type artwork');
+
+const formationAmbiguous = context.window.TrainVehicle.resolve({
+  timetableVehicleType:'埼玉新都市交通2000系',
+  formationId:'',
+  formationCandidates:['01','02']
+});
+assert.strictEqual(formationAmbiguous.iconPath,'',
+  'multiple formation candidates must not select formation artwork');
+console.log('formation artwork uniqueness: 3 PASS');
