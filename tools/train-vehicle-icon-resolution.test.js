@@ -114,3 +114,16 @@ const formationAmbiguous = context.window.TrainVehicle.resolve({
 assert.strictEqual(formationAmbiguous.iconPath,'',
   'multiple formation candidates must not select formation artwork');
 console.log('formation artwork uniqueness: 3 PASS');
+
+[
+ { formationId:'01', formationCandidates:[], why:'formationId alone' },
+ { formationId:'', formationCandidates:['01'], why:'candidate alone' },
+ { formationId:'01', formationCandidates:['02'], why:'contradictory formation evidence' },
+ { formationId:'01', formationCandidates:['01','02'], why:'multiple formation candidates' }
+].forEach((x) => {
+  const r = context.window.TrainVehicle.resolve(Object.assign({
+    timetableVehicleType:'埼玉新都市交通2000系'
+  }, x));
+  assert.strictEqual(r.iconPath,'', x.why + ' must not project artwork');
+});
+console.log('formation consistency gate: 4 PASS');
