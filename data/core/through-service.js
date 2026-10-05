@@ -112,12 +112,12 @@
     "Hohi": { "KagoshimaMain": ["Kumamoto"], "Nippo": ["Oita"] }
   };
 
-  function getCanonicalThroughRelation(lineId, partnerId) {
+  function getBoundaryRelation(lineId, partnerId) {
     var relations = window.LineServiceRelations;
     if (!relations || typeof relations.length !== "number") return null;
     for (var i = 0; i < relations.length; i++) {
       var rel = relations[i];
-      if (!rel || rel.relation !== "THROUGH_SERVICE") continue;
+      if (!rel) continue;
       if ((rel.lineA === lineId && rel.lineB === partnerId) ||
           (rel.lineA === partnerId && rel.lineB === lineId)) return rel;
     }
@@ -127,24 +127,15 @@
   /** Direct canonical through-service neighbours of a line (1 hop). */
   function getDirectThroughLines(lineId) {
     try {
-      var out = [];
-      var relations = window.LineServiceRelations;
-      if (relations && typeof relations.length === "number") {
-        for (var i = 0; i < relations.length; i++) {
-          var rel = relations[i];
-          if (!rel || rel.relation !== "THROUGH_SERVICE") continue;
-          var other = rel.lineA === lineId ? rel.lineB : (rel.lineB === lineId ? rel.lineA : null);
-          if (other && out.indexOf(other) < 0) out.push(other);
-        }
-      }
-      return out;
+      var line = window.UNIFIED_LINES && window.UNIFIED_LINES[lineId];
+      return line && Array.isArray(line.throughServices) ? line.throughServices.slice() : [];
     } catch(e) { return []; }
   }
 
   /** Join stations for a line pair. Canonical handoverStations win when present. */
   function getJoinStations(lineId, partnerId) {
     try {
-      var canonical = getCanonicalThroughRelation(lineId, partnerId);
+      var canonical = getBoundaryRelation(lineId, partnerId);
       if (canonical && Array.isArray(canonical.handoverStations)) return canonical.handoverStations.slice();
       var m = THROUGH_JOIN_STATIONS[lineId];
       if (m && m[partnerId] !== undefined) return m[partnerId];
@@ -162,7 +153,7 @@
    */
   function getDisplayAnchors(lineId, partnerId) {
     try {
-      var canonical = getCanonicalThroughRelation(lineId, partnerId);
+      var canonical = getBoundaryRelation(lineId, partnerId);
       if (canonical && canonical.displayAnchors && Array.isArray(canonical.displayAnchors[lineId])) {
         return canonical.displayAnchors[lineId].slice();
       }
