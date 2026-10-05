@@ -40,10 +40,9 @@
   margin-top: 6px;
 }
 
-/* Train icon smooth movement */
-.train-icon {
-  transition: x 14s cubic-bezier(0.4, 0, 0.2, 1), y 14s cubic-bezier(0.4, 0, 0.2, 1);
-}
+/* Train marker movement is owned by trains-render.js.
+   Do not add CSS x/y transitions here: layout updates may cross loop geometry
+   and a second animation authority makes markers fly through the map. */
 /* v4.3.469: 推定列車の半透明を廃止——容器内はリアルタイムと同じ見た目に統一。
    データ出所は容器外の tp-est-note（*データは時刻表からの計算）で告知する。 */
 
