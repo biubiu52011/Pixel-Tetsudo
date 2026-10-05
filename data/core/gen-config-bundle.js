@@ -8,7 +8,6 @@ const dir = __dirname;
 const order = [
   'transfer-hints.js',
   'runtime-config.js',
-  'through-service.js',
   'platform-data.js',
   'train-type-defs.js',
 ];
