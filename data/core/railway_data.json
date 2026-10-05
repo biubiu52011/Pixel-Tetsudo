@@ -15491,7 +15491,8 @@
       ],
       "throughServices": [
         "Kawagoe",
-        "Rinkai"
+        "Rinkai",
+        "SotetsuJRDirect"
       ],
       "transferStations": [
         {
@@ -15792,6 +15793,16 @@
           ],
           "evidence": {
             "source": "JR East Saikyo-Kawagoe timetable: continuous Saikyo / Kawagoe operation across Omiya",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "SotetsuJRDirect",
+          "handoverStations": [
+            "Osaki"
+          ],
+          "evidence": {
+            "source": "JR East Sotetsu Line through-service timetable: Hazawa-Yokohama-Kokudai - Musashi-Kosugi - Nishi-Oi - Osaki - Saikyo Line",
             "confidence": "HIGH"
           }
         }
@@ -36371,7 +36382,8 @@
       "branchOf": "SotetsuMain",
       "throughServices": [
         "TokyuShinYokohama",
-        "SotetsuMain"
+        "SotetsuMain",
+        "SotetsuJRDirect"
       ],
       "serviceBoundaries": [
         {
@@ -36391,6 +36403,16 @@
           ],
           "evidence": {
             "source": "Tokyu official Shin-Yokohama Line / direct through-service boundary",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "SotetsuJRDirect",
+          "handoverStations": [
+            "Hazawa-Yokohama-Kokudai"
+          ],
+          "evidence": {
+            "source": "JR East Sotetsu Line through-service timetable: Hazawa-Yokohama-Kokudai - Musashi-Kosugi - Nishi-Oi - Osaki - Saikyo Line",
             "confidence": "HIGH"
           }
         }
@@ -44808,6 +44830,86 @@
           ],
           "evidence": {
             "source": "Tokyu official Shin-Yokohama Line / direct through-service boundary",
+            "confidence": "HIGH"
+          }
+        }
+      ]
+    },
+    "SotetsuJRDirect": {
+      "name": "相鉄線直通（JR接続区間）",
+      "nameJa": "相鉄線直通（JR接続区間）",
+      "nameZh": "相铁线直通（JR接续区间）",
+      "nameEn": "Sotetsu Line Through Service (JR Connector)",
+      "nameKo": "소테쓰선 직통 (JR 접속 구간)",
+      "operator": "JR-East",
+      "color": "#00ac47",
+      "code": "JS",
+      "stations": [
+        "Hazawa-Yokohama-Kokudai",
+        "Musashi-Kosugi",
+        "Nishi-Oi",
+        "Osaki"
+      ],
+      "throughServices": [
+        "SotetsuShin-Yokohama",
+        "Saikyo"
+      ],
+      "transferStations": [
+        {
+          "station": "Hazawa-Yokohama-Kokudai",
+          "lineId": "SotetsuShin-Yokohama",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Musashi-Kosugi",
+          "lineId": "Yokosuka",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Musashi-Kosugi",
+          "lineId": "ShonanShinjuku",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Nishi-Oi",
+          "lineId": "Yokosuka",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Nishi-Oi",
+          "lineId": "ShonanShinjuku",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Osaki",
+          "lineId": "Saikyo",
+          "type": "in",
+          "note": ""
+        }
+      ],
+      "serviceBoundaries": [
+        {
+          "lineId": "SotetsuShin-Yokohama",
+          "handoverStations": [
+            "Hazawa-Yokohama-Kokudai"
+          ],
+          "evidence": {
+            "source": "JR East Sotetsu Line through-service timetable: Hazawa-Yokohama-Kokudai - Musashi-Kosugi - Nishi-Oi - Osaki - Saikyo Line",
+            "confidence": "HIGH"
+          }
+        },
+        {
+          "lineId": "Saikyo",
+          "handoverStations": [
+            "Osaki"
+          ],
+          "evidence": {
+            "source": "JR East Sotetsu Line through-service timetable: Hazawa-Yokohama-Kokudai - Musashi-Kosugi - Nishi-Oi - Osaki - Saikyo Line",
             "confidence": "HIGH"
           }
         }
