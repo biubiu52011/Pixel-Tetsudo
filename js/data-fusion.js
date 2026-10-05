@@ -1386,14 +1386,7 @@
             _branchIds3.forEach(function(bid3) {
               var bl3 = allLines[bid3];
               if (!bl3 || !bl3.operator) return;
-              // Loading a branch's own timetable is valid for every topology.
-              // Parent-data inheritance is a separate concern and is allowed
-              // only when LineServiceRelations proves THROUGH_SERVICE.
-              var _branchOperationMode3 = (window.LineServiceRelations &&
-                typeof window.LineServiceRelations.getBranchOperationMode === "function")
-                ? window.LineServiceRelations.getBranchOperationMode(lid, bid3)
-                : "UNKNOWN";
-              bl3._branchOperationMode = _branchOperationMode3;
+              // Branch topology is canonical in line.branchOf / line.branches; load its own timetable directly.
               if (!mayUseTimetablePosition(bid3)) return;
               var hasRt3 = posMap[bid3] && posMap[bid3].length > 0;
               var hasTt3 = hasOdptTimetableForLine(bid3, bl3.operator);
