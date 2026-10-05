@@ -206,6 +206,12 @@
     var te = evaluateText(input.text || input.statusText || "");
     evidence = evidence.concat(te.evidence || []);
     var metadata = extractMetadata(input);
+    // A structured Suspension may describe only a station range. Whole-line × is
+    // reserved for an unscoped/whole-line suspension; scoped ranges stay △.
+    if (structured === "suspended" && metadata.interval && metadata.interval !== "全線") {
+      structured = "notice";
+      evidence.push({ type: "STRUCTURED_PARTIAL_SUSPENSION", interval: metadata.interval });
+    }
 
     var result = {
       messageKind: messageKind,
