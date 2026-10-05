@@ -424,9 +424,14 @@
       serviceDate: serviceDate,
       at: (function(){ var d=new Date(Date.now()+9*60*60*1000); return d.toISOString().slice(11,16); })()
     };
-    _baseOperationCtx.operationCode = window.TrainOperationEvidence &&
-      typeof window.TrainOperationEvidence.normalizeOperationCode === 'function'
-      ? window.TrainOperationEvidence.normalizeOperationCode(trainNumber, _baseOperationCtx) : '';
+    _baseOperationCtx.operationCode = String(
+      tt['_operationCode'] || tt['operationCode'] || tt['operation_code'] || ''
+    ).trim();
+    if (!_baseOperationCtx.operationCode) {
+      _baseOperationCtx.operationCode = window.TrainOperationEvidence &&
+        typeof window.TrainOperationEvidence.normalizeOperationCode === 'function'
+        ? window.TrainOperationEvidence.normalizeOperationCode(trainNumber, _baseOperationCtx) : '';
+    }
     var _resolvedEvidence = window.TrainOperationEvidence &&
       typeof window.TrainOperationEvidence.resolveEvidence === 'function'
       ? window.TrainOperationEvidence.resolveEvidence(trainNumber, _baseOperationCtx, "fallback")
