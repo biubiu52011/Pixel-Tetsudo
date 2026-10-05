@@ -53,6 +53,10 @@ assert(/_moveTrainLabels\(trainLayer, trainUid, _curX, _curY/.test(renderer),
   "train labels must follow the marker in the same animation frame");
 assert(!/isLoop && _loopRect && _needMove && !window\.TrainTrackLayout/.test(renderer),
   "legacy loop RAF must not remain as a second animation path beside TrainTrackLayout");
+assert(!/idx = clamp\(idx, 0, points\.length - 1\)/.test(trackLayoutSource),
+  "out-of-range stationIndex must fail closed instead of collapsing onto an endpoint station");
+assert(/stableStackOrdinal\(position, index\)/.test(trackLayoutSource),
+  "multi-train stack offsets must be keyed by stable train identity across polling updates");
 assert(/routePos:\s*routePos/.test(trackLayoutSource),
   "TrainTrackLayout must expose loop route position to the single marker animation authority");
 assert(/_useLoopRoute[\s\S]{0,900}_loopPosToXY\(_curRoutePos, _loopRect\)/.test(renderer),
