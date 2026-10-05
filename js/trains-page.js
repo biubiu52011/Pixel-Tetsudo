@@ -103,6 +103,15 @@
           detailEl && !detailEl.classList.contains("hidden")) return;
       currentLine = lineId;
       currentLineIdentity = actualIdentity;
+      // Activate network work only after the user opens a line. Through-service
+      // members are activated together so one physical run can remain continuous.
+      if (window.ODPTClient && window.ODPTClient.activateRealtimeLines) {
+        var _requestedLines = currentSystemLineIds && currentSystemLineIds.length
+          ? currentSystemLineIds.slice() : [lineId];
+        window.ODPTClient.activateRealtimeLines(_requestedLines).catch(function(e) {
+          console.debug("[trains] on-demand realtime skip:", lineId, e && e.message);
+        });
+      }
       if (listEl) listEl.classList.add("hidden");
       if (filterBarEl) filterBarEl.classList.add("hidden");
       if (detailEl) detailEl.classList.remove("hidden");
