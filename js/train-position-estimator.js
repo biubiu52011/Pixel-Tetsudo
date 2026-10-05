@@ -450,13 +450,15 @@
         var tt = timetableData[t];
         if (!tt) continue;
 
+        var run = compileTrainRun(tt, lineId, workLine, stationIndexMap);
+        if (!run) continue;
+
         // Filter by calendar (match any of current calendar types)
-        var calendar = tt["odpt:calendar"];
+        var calendar = run.calendar;
         if (calendar && currentCalendars.indexOf(calendar) < 0) continue;
 
         // Filter by railway (if lineId matches)
-        var railway = tt["odpt:railway"];
-        var railwayKey = extractRailwayKey(railway);
+        var railwayKey = run.railwayKey;
         if (railwayKey && railwayKey !== lineId) {
           // v4.3.437: 反查 LINE_RAILWAY_CODE——ODPT Kawagoe（川越-高麗川間）数据对应
           // 项目 KawagoeWest 线、SaikyoKawagoe 数据对应 Saikyo/Kawagoe 线（大宮〜川越段）
@@ -470,14 +472,11 @@
           if (!_kwMatch) continue;
         }
 
-        var trainNumber = tt["odpt:trainNumber"] || tt["odpt:train"] || ("est_" + t);
-        // A train number is not a globally unique timetable identity. Keep
-        // distinct timetable objects/railway segments separate so a later
-        // service segment is not discarded merely because the public train
-        // number is reused.
-        var timetableObjectId = tt["@id"] || tt["owl:sameAs"] || "";
-        var timetableIdentity = timetableObjectId ||
-          ((tt["odpt:railway"] || lineId || "") + "|" + String(trainNumber));
+        var trainNumber = run.trainNumber || ("est_" + t);
+        // A train number is not globally unique; the compiled run retains the
+        // canonical timetable object/railway identity across refreshes.
+        var timetableObjectId = run.timetableObjectId;
+        var timetableIdentity = run.timetableIdentity;
         if (processedTrainIds[timetableIdentity]) continue;
 
         var tto = tt["odpt:trainTimetableObject"];
@@ -566,34 +565,11 @@
           if (lastArrTime !== null && adjustedCurrentMin > lastArrTime + 5) continue; // 5 min grace
 
           processedTrainIds[timetableIdentity] = true;
-          var trainClassification = classifyTrain(tt['odpt:trainType'], trainNumber, lineId);
-          // 提取方向字段
-          var railDirection = tt['odpt:railDirection'] || '';
-          var directionName = '';
-          if (railDirection) {
-            var dirParts = String(railDirection).split(':');
-            directionName = dirParts.length > 1 ? dirParts[dirParts.length - 1] : String(railDirection);
-          }
-          // v4.3.931: 终点站提取——odpt:destinationStation 字段在东京地铁时刻表中不存在，
-          // 改为从 trainTimetableObject 最后一站（departureTime="" 的站）提取。
-          var destStations = tt['odpt:destinationStation'] || [];
-          if (typeof destStations === 'string') destStations = [destStations]; // v4.3.940: 港未来线等时刻表 destinationStation 是字符串不是数组，直接 [0] 会取到首字符（M/Y）
-          var destinationStation = destStations.length > 0 ? String(destStations[0]).split(".").pop() : "";
-          // v4.3.1021: 完整目的站 URN 透传——S3 直通 key（operator/线路短名粒度）依赖 URN 的
-          // parts[1]=operator、parts[2]=线路短名；截断成站名后 dest 粒度永久失效（直通 key 永不命中）
-          var destinationStationUrn = destStations.length > 0 ? String(destStations[0]) : "";
-          if (!destinationStation) {
-            var _tto = tt['odpt:trainTimetableObject'] || [];
-            for (var _ti = _tto.length - 1; _ti >= 0; _ti--) {
-              var _dep = _tto[_ti]['odpt:departureTime'] || '';
-              if (_dep === '') {
-                var _st = _tto[_ti]['odpt:station'] || '';
-                destinationStation = String(_st).split('.').pop();
-                destinationStationUrn = String(_st);
-                break;
-              }
-            }
-          }
+          var trainClassification = classifyTrain(run.trainType, trainNumber, lineId);
+          var railDirection = run.railDirection;
+          var directionName = run.directionName;
+          var destinationStation = run.destinationStation;
+          var destinationStationUrn = run.destinationStationUrn;
           // Exact official train-number evidence takes precedence when ODPT omits
           // vehicleType. The evidence table contains only individually verified rows;
           // no prefix/range/hash inference is allowed.
