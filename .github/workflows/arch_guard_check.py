@@ -86,6 +86,22 @@ def main():
     vehicle_src = _read_arch('js/train-vehicle.js')
     evidence_src = _read_arch('data/timetables/train-operation-evidence.js')
 
+
+    # RAILWAY-001: operational through-service adjacency has one runtime authority.
+    # throughServices may remain in canonical data as a generated compatibility /
+    # presentation projection, but production Running Chain must derive adjacency
+    # exclusively from evidence-bearing serviceBoundaries.
+    running_chain_src = _read_arch('js/running-chain-resolver.js')
+    if 'line.throughServices' in running_chain_src:
+        new_errors.append('RAILWAY-001 RUNNING_CHAIN_READS_THROUGH_SERVICES_PROJECTION')
+    for token in (
+        'var boundaries = Array.isArray(line.serviceBoundaries)',
+        '_boundaryMap[lineId][boundary.lineId] = joins.slice()',
+        '_directThrough[lineId].push(boundary.lineId)',
+    ):
+        if token not in running_chain_src:
+            new_errors.append('RAILWAY-001 SERVICE_BOUNDARY_ADJACENCY_MISSING %s' % token)
+
     # VEHICLE-001/002: one final vehicle authority and one canonical evidence resolver.
     if 'TrainOperationEvidence.resolveEvidence' not in estimator_src:
         new_errors.append('VEHICLE-002 CANONICAL_EVIDENCE_RESOLVER_BYPASSED')
