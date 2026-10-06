@@ -192,13 +192,9 @@
   // corridor remain ordinary transfers so Dijkstra cannot stitch free zigzags.
   function isThroughAtStation(a, b, st) {
     try {
-      var line = window.UNIFIED_LINES && window.UNIFIED_LINES[a];
-      var boundaries = line && Array.isArray(line.serviceBoundaries) ? line.serviceBoundaries : [];
-      return boundaries.some(function(boundary) {
-        var joins = boundary && boundary.lineId === b && Array.isArray(boundary.handoverStations)
-          ? boundary.handoverStations : [];
-        return joins.indexOf(st) >= 0;
-      });
+      return !!(window.RunningChainResolver &&
+        typeof window.RunningChainResolver.isThroughAtStation === "function" &&
+        window.RunningChainResolver.isThroughAtStation(a, b, st));
     } catch(e) { return false; }
   }
 
