@@ -238,6 +238,19 @@ function main() {
     }
   });
 
+  const normalizedStationIdentityGroups = {};
+  Object.keys(stationJson).forEach((id) => {
+    const normalized = id.replace(/-/g, '').toLowerCase();
+    (normalizedStationIdentityGroups[normalized] || (normalizedStationIdentityGroups[normalized] = [])).push(id);
+  });
+  Object.entries(normalizedStationIdentityGroups).forEach(([normalized, ids]) => {
+    if (ids.length < 2) return;
+    const jaNames = [...new Set(ids.map((id) => String((stationJson[id] && stationJson[id].ja) || '')).filter(Boolean))];
+    if (jaNames.length > 1) {
+      warnings.push({ type: 'station-normalized-id-collision', normalized, ids, jaNames });
+    }
+  });
+
   const normalizedStationAliases = {};
   Object.keys(stationJson).forEach((id) => {
     const normalized = id.replace(/-/g, '').toLowerCase();
