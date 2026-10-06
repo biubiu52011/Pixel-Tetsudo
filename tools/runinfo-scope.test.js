@@ -118,3 +118,10 @@ const emptyUnstructured=[
 assert.strictEqual(ctx.window.RunInfoAPI._pickRecord(emptyUnstructured,A),null);
 assert.strictEqual(ctx.window.RunInfoAPI._aggregateStatus(emptyUnstructured,A),null);
 console.log("runinfo-scope empty record isolation: 2 PASS");
+
+const structuredPrimary=ctx.window.RunInfoAPI._pickRecord(structuredOnly,tobuLine);
+const structuredEval=ctx.window.RunInfoAPI._evaluateRecord(structuredPrimary);
+assert.strictEqual(structuredEval.status,"suspended");
+assert.strictEqual(structuredEval.messageKind,"realtime");
+assert.strictEqual(String(structuredPrimary["odpt:trainInformationText"]||""),"");
+console.log("runinfo-scope structured output: 3 PASS");
