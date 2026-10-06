@@ -267,9 +267,18 @@
       evidence.push({ type: "STRUCTURED_PARTIAL_SUSPENSION", interval: metadata.interval });
     }
 
+    // A source explicitly categorized as a notice is not current operating
+    // state evidence. Preserve parsed impact metadata for display, but never let
+    // planned/stale notices promote the line to delayed/suspended downstream.
+    var resolvedStatus = structured || te.status || "unknown";
+    if (messageKind === "notice") {
+      resolvedStatus = "notice";
+      evidence.push({ type: "NOTICE_STATUS_ISOLATION" });
+    }
+
     var result = {
       messageKind: messageKind,
-      status: structured || te.status || "unknown",
+      status: resolvedStatus,
       maxDelay: delayMinutes != null ? delayMinutes : metadata.textDelayMinutes,
       delayUpperBoundMinutes: te.delayUpperBoundMinutes,
       interval: metadata.interval,
