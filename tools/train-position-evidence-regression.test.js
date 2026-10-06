@@ -285,6 +285,10 @@ assert(fusionSource.includes('if (mode !== "SEGMENTED") return true; // HYBRID /
   'HYBRID/COARSE/UNKNOWN coverage gaps must remain eligible for timetable position fallback');
 assert(fusionSource.includes('if (_chainVehicleRegistry[_cid]) _chainVehicleRegistry[_cid].lastSeenAt = Date.now();'),
   'an active timetable running chain must keep confirmed vehicle identity alive across realtime coverage gaps');
+assert(fusionSource.includes('Object.keys(posMap).forEach(function(_vlid) {') &&
+       fusionSource.includes('_inheritChainVehicle(_p);') &&
+       fusionSource.includes('Object.keys(estimated).forEach(function(_vlid) {'),
+  'confirmed running-chain vehicle identity must project onto both realtime and timetable segments across line/operator boundaries');
 assert(fusionSource.includes('if (!_activeChainIds[_cid] && (!_cv || !_cv.lastSeenAt ||'),
   'vehicle identity may expire only after the physical running chain is absent, not merely because realtime position disappeared');
 
