@@ -1039,7 +1039,12 @@
         _filtered.push(_epPos);
         continue;
       }
-      var _epIdx = Math.min(_epPos.stationIndex || 0, stationCoords.length - 1);
+      var _epRawIdx = _epPos && _epPos.stationIndex != null ? Number(_epPos.stationIndex) : NaN;
+      // Estimated rows obey the same fail-closed position contract as realtime
+      // rows. Do not bucket missing/invalid evidence into station 0; otherwise
+      // the pre-layout pile limiter itself recreates the Tokyo/first-station pile.
+      if (!isFinite(_epRawIdx) || _epRawIdx < 0 || _epRawIdx >= stationCoords.length) continue;
+      var _epIdx = _epRawIdx;
       var _stationBucket = (_epPos.fusionLineId ? (_epPos.fusionRole || "fusion") + ":" + _epPos.fusionLineId + ":" : "main:") + _epIdx;
       _estimatedCount[_stationBucket] = (_estimatedCount[_stationBucket] || 0) + 1;
       if (_estimatedCount[_stationBucket] <= _ESTIMATED_STATION_MAX) _filtered.push(_epPos);
