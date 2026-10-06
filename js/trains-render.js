@@ -1123,8 +1123,16 @@
         if (_useLoopRoute) {
           var _perimeter = Number(_loopRect.perimeter) || 0;
           _routeDiff = _targetRoutePos - _startRoutePos;
-          if (_perimeter > 0 && Math.abs(_routeDiff) > _perimeter / 2) {
-            _routeDiff += _routeDiff > 0 ? -_perimeter : _perimeter;
+          if (_perimeter > 0) {
+            var _loopDirName = String(p && p.railDirection || "").split(/[:.]/).pop();
+            if (/^(InnerLoop|Inner)$/.test(_loopDirName)) {
+              // TrainTrackLayout maps InnerLoop to decreasing station/route order.
+              while (_routeDiff > 0) _routeDiff -= _perimeter;
+            } else if (/^(OuterLoop|Outer)$/.test(_loopDirName)) {
+              while (_routeDiff < 0) _routeDiff += _perimeter;
+            } else if (Math.abs(_routeDiff) > _perimeter / 2) {
+              _routeDiff += _routeDiff > 0 ? -_perimeter : _perimeter;
+            }
           }
         }
         var _dx = _targetX - _startX;
