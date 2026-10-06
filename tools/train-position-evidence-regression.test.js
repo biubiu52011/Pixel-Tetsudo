@@ -56,6 +56,10 @@ assert(/_icon\._displayX = _curX;[\s\S]{0,120}_icon\._displayY = _curY;/.test(re
   "animation must persist the current interpolated marker position for interruption-safe continuation");
 assert(/_distance > _snapDistance/.test(renderer),
   "implausibly large marker jumps must snap instead of sweeping across the map");
+assert(/var _adjacentGaps = \[\];[\s\S]{0,900}var _snapDistance = Math\.max\(80, _medianStationGap \* 2\.5\);/.test(renderer),
+  "snap distance must be derived once from line geometry per render pass");
+assert(!/var _adjacent = \[\];[\s\S]{0,700}var _medianGap/.test(renderer),
+  "each train marker must not rescan the full station geometry for its snap threshold");
 assert(/_moveTrainLabels\(trainLayer, trainUid, _curX, _curY/.test(renderer),
   "train labels must follow the marker in the same animation frame");
 assert(/function _trainLabelSignature\(p, lineId\)/.test(renderer),
