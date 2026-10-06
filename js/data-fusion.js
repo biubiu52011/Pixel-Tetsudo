@@ -48,37 +48,25 @@
   }
   function _rememberChainVehicle(p) {
     if (!p || !p.runningChainId) return;
-    var _identityExact = p.vehicleIdentityStatus === "EXACT" ||
-      (p.vehicleResolution && p.vehicleResolution.identityStatus === "EXACT");
-    // Structural gate: a chain registry may contain only an already-EXACT vehicle
-    // identity. An icon path, confidence label or realtime flag can never qualify it.
-    if (!_identityExact || !p.vehicleType) return;
-    var _src = p.vehicleSource || (p.vehicleResolution && p.vehicleResolution.source) || "";
-    var _conf = p.vehicleConfidence || (p.vehicleResolution && p.vehicleResolution.confidence) || "none";
+    var resolution = p.vehicleResolution || null;
+    // The registry stores the canonical decision object, not a second mutable
+    // copy of all projected vehicle fields.
+    if (!resolution || resolution.identityStatus !== "EXACT" || !resolution.name) return;
     var _incomingRank = _vehicleEvidenceRank(p);
     var _existing = _chainVehicleRegistry[p.runningChainId];
     if (_existing) {
       var _existingRank = _existing.evidenceRank || 0;
-      var _sameVehicle = (_existing.vehicleIconPath && _existing.vehicleIconPath === p.vehicleIconPath) ||
-        (_existing.vehicleType && p.vehicleType && _existing.vehicleType === p.vehicleType);
-      // A line/system transition is not vehicle-swap evidence. Preserve the
-      // established physical-train identity on equal/weaker conflicting input.
+      var _existingName = _existing.resolution && _existing.resolution.name || "";
+      var _sameVehicle = _existingName && _existingName === resolution.name;
       if (!_sameVehicle && _existingRank >= _incomingRank) {
         _existing.lastSeenAt = Date.now();
         return;
       }
     }
     _chainVehicleRegistry[p.runningChainId] = {
-      trainClass: p.trainClass || "",
-      vehicleType: p.vehicleType || "",
-      vehicleIconPath: p.vehicleIconPath || "",
-      vehicleSource: p.vehicleSource || "",
-      vehicleConfidence: p.vehicleConfidence || "none",
-      vehicleResolution: p.vehicleResolution || null,
-      vehicleIdentityStatus: p.vehicleIdentityStatus || (p.vehicleResolution && p.vehicleResolution.identityStatus) || "",
-      vehicleIdentityReason: p.vehicleIdentityReason || (p.vehicleResolution && p.vehicleResolution.identityReason) || "",
-      vehicleFormationId: p.vehicleFormationId || "",
-      vehicleFormationCandidates: (p.vehicleFormationCandidates || []).slice(),
+      resolution: resolution,
+      formationId: p.vehicleFormationId || "",
+      formationCandidates: (p.vehicleFormationCandidates || []).slice(),
       evidenceRank: _incomingRank,
       lastSeenAt: Date.now()
     };
@@ -91,17 +79,9 @@
       delete _chainVehicleRegistry[p.runningChainId];
       return p;
     }
-    p.trainClass = v.trainClass || p.trainClass || "";
-    p.vehicleType = v.vehicleType || p.vehicleType || "";
-    p.vehicleIconPath = v.vehicleIconPath || p.vehicleIconPath || "";
-    p.vehicleSource = v.vehicleSource || p.vehicleSource || "";
-    p.vehicleConfidence = v.vehicleConfidence || p.vehicleConfidence || "none";
-    p.vehicleResolution = v.vehicleResolution || p.vehicleResolution || null;
-    p.vehicleIdentityStatus = v.vehicleIdentityStatus || p.vehicleIdentityStatus || "";
-    p.vehicleIdentityReason = v.vehicleIdentityReason || p.vehicleIdentityReason || "";
-    p.vehicleFormationId = v.vehicleFormationId || p.vehicleFormationId || "";
-    p.vehicleFormationCandidates = (v.vehicleFormationCandidates || p.vehicleFormationCandidates || []).slice();
-    p.vehicleInheritedFromRunningChain = true;
+    _projectVehicleResolution(p, v.resolution, true);
+    p.vehicleFormationId = v.formationId || "";
+    p.vehicleFormationCandidates = (v.formationCandidates || []).slice();
     return p;
   }
   var subscribers = [];
