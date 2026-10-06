@@ -14334,7 +14334,7 @@
  "Kumagane": {
   "ja": "熊ケ根",
   "zh": "熊根",
-  "ko": "쿠마가네",
+  "ko": "구마가네",
   "en": "Kumagane"
  },
  "Sakunami": {
@@ -14857,7 +14857,7 @@
  "Kawawachi": {
   "ja": "川和町",
   "zh": "川和町",
-  "ko": "카와와초",
+  "ko": "가와와초",
   "en": "Kawawacho"
  },
  "Kita-Yamata": {
@@ -15848,7 +15848,7 @@
   "ja": "ユーカリが丘",
   "zh": "尤加利丘",
   "ko": "유카리가오카",
-  "en": "Yūkarigaoka"
+  "en": "Yukarigaoka"
  },
  "Keisei-Sakura": {
   "ja": "京成佐倉",
@@ -16381,7 +16381,7 @@
  "Tsurugasaka": {
   "ja": "鶴ヶ坂",
   "zh": "鹤坂",
-  "ko": "츠루가사카",
+  "ko": "쓰루가사카",
   "en": "Tsurugasaka"
  },
  "Kita-Noshiro": {
@@ -16565,8 +16565,8 @@
   "en": "Hirakida"
  },
  "Iwafunemachi": {
-  "ja": "岩船町",
-  "zh": "岩船町",
+  "ja": "岩舟町",
+  "zh": "岩舟町",
   "ko": "이와후네마치",
   "en": "Iwafunemachi"
  },
@@ -19123,16 +19123,16 @@
   "ko": "나가레야마 센트럴 파크"
  },
  "Miraidaira": {
-  "ja": "未来平",
-  "en": "Miraidaira",
+  "ja": "みらい平",
   "zh": "未来平",
-  "ko": "미라이다이라"
+  "ko": "미라이다이라",
+  "en": "Miraidaira"
  },
  "Midorino": {
-  "ja": "緑野",
-  "en": "Midorino",
+  "ja": "みどりの",
   "zh": "绿野",
-  "ko": "미도리노"
+  "ko": "미도리노",
+  "en": "Midorino"
  },
  "Kenkyu-Gakuen": {
   "ja": "研究学園",
@@ -19359,7 +19359,9 @@
   "en": "Kamijo"
  },
  "Kamisakai": {
-  "ja": "上坂城",
+  "ja": "上境",
+  "zh": "上境",
+  "ko": "가미사카이",
   "en": "Kamisakai"
  },
  "Kamitokoro": {
@@ -19729,7 +19731,9 @@
   "en": "Wakinosawa"
  },
  "WeSPa-Tsubakiyama": {
-  "ja": "WeSPa椿山",
+  "ja": "ウェスパ椿山",
+  "zh": "WeSPa椿山",
+  "ko": "웨스파쓰바키야마",
   "en": "WeSPa-Tsubakiyama"
  },
  "Yahagi": {
