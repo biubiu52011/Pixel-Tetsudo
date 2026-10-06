@@ -66,3 +66,15 @@ const ntRecords=[
 assert.strictEqual(ctx.window.RunInfoAPI._selectScopedRecords(ntRecords,ntLine).length,1);
 assert.strictEqual(ctx.window.RunInfoAPI._aggregateStatus(ntRecords,ntLine),"normal");
 console.log("runinfo-scope Nippori-Toneri: 2 PASS");
+
+// Notices must not outrank current realtime state in a mixed ODPT response.
+const mixedNoticeRealtime=[
+ {"odpt:railway":"odpt.Railway:Toei.Asakusa","pt:messageKind":"notice","odpt:trainInformationStatus":"Suspension","odpt:trainInformationText":{"ja":"明日は全線で運転を見合わせます。"}},
+ {"odpt:railway":"odpt.Railway:Toei.Asakusa","pt:messageKind":"realtime","odpt:trainInformationStatus":"Normal","odpt:trainInformationText":{"ja":"現在、平常どおり運転しています。"}}
+];
+assert.strictEqual(ctx.window.RunInfoAPI._aggregateStatus(mixedNoticeRealtime,A),"normal");
+const noticeOnly=[
+ {"odpt:railway":"odpt.Railway:Toei.Asakusa","pt:messageKind":"notice","odpt:trainInformationStatus":"Suspension","odpt:trainInformationText":{"ja":"明日は全線で運転を見合わせます。"}}
+];
+assert.strictEqual(ctx.window.RunInfoAPI._aggregateStatus(noticeOnly,A),"notice");
+console.log("runinfo-scope notice isolation: 2 PASS");
