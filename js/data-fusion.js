@@ -27,7 +27,7 @@
     var src = p.vehicleSource || (r && r.source) || "";
     if (p.vehicleResolvedFromRealtime === true || sources.indexOf("realtime") >= 0 || src === "realtime") return 5;
     if (p.vehicleResolvedFromRealtimeDerived === true || sources.indexOf("realtime-derived") >= 0 || src === "realtime-derived") return 4;
-    if (sources.indexOf("structural") >= 0 || src === "structural") return 3;
+    if (sources.indexOf("structural") >= 0 || src === "structural" || src === "formation-evidence") return 3;
     if (sources.indexOf("operation-assignment-provider") >= 0 || sources.indexOf("odpt") >= 0 ||
         sources.indexOf("timetable") >= 0 || src === "operation-assignment-provider" || src === "odpt" || src === "timetable") return 2;
     if (sources.indexOf("manual") >= 0 || src === "manual") return 1;
@@ -86,6 +86,9 @@
       delete _chainVehicleRegistry[p.runningChainId];
       return p;
     }
+    var currentResolution = p.vehicleResolution || null;
+    if (currentResolution && currentResolution.identityStatus === "EXACT" &&
+        _vehicleEvidenceRank(p) >= (v.evidenceRank || 0)) return p;
     _projectVehicleResolution(p, v.resolution, true);
     p.vehicleFormationId = v.formationId || "";
     p.vehicleFormationCandidates = (v.formationCandidates || []).slice();
@@ -1139,17 +1142,20 @@
                     at: Date.now()
                   });
                   if (_fe) {
-                    var _feResolved = window.TrainVehicle.resolve({timetableVehicleType:_fe.vehicleName});
-                    if (_feResolved && _feResolved.identityStatus === "EXACT") {
-                      _queueChainVehicle({
-                        runningChainId:_p.runningChainId, trainClass:_feResolved.name||"",
-                        vehicleType:_feResolved.vehicleTypeStr||"", vehicleIconPath:_feResolved.iconPath||"",
-                        vehicleSource:_feResolved.source||"timetable", vehicleConfidence:_feResolved.confidence||"none",
-                        vehicleResolution:_feResolved, vehicleIdentityStatus:_feResolved.identityStatus,
-                        vehicleIdentityReason:_feResolved.identityReason||"formation-evidence",
-                        vehicleFormationId:_fe.formationId||"", vehicleFormationCandidates:_fe.formationId?[_fe.formationId]:[]
-                      });
-                    }
+                    var _feResolution = {
+                      name:_fe.vehicleName||"", vehicleTypeStr:_fe.vehicleName||"", iconPath:_fe.iconPath||"",
+                      source:"formation-evidence", sources:["formation-evidence"], confidence:_fe.confidence||"high",
+                      identityStatus:_fe.identityStatus||"EXACT",
+                      identityReason:_fe.identityReason||"dated-running-chain-vehicle-evidence"
+                    };
+                    _queueChainVehicle({
+                      runningChainId:_p.runningChainId, trainClass:_feResolution.name,
+                      vehicleType:_feResolution.vehicleTypeStr, vehicleIconPath:_feResolution.iconPath,
+                      vehicleSource:_feResolution.source, vehicleConfidence:_feResolution.confidence,
+                      vehicleResolution:_feResolution, vehicleIdentityStatus:_feResolution.identityStatus,
+                      vehicleIdentityReason:_feResolution.identityReason,
+                      vehicleFormationId:_fe.formationId||"", vehicleFormationCandidates:_fe.formationId?[_fe.formationId]:[]
+                    });
                   }
                 }
               });
