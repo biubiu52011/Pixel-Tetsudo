@@ -1113,7 +1113,9 @@
               if (_evChainIds.length !== 1) return;
               var _evResolution = (window.TrainVehicle && typeof window.TrainVehicle.resolve === "function")
                 ? window.TrainVehicle.resolve({trainNumber:_ev.trainNumber,realtimeVehicleType:_ev.vehicleType}) : null;
-              if (!_evResolution || _evResolution.identityStatus !== "EXACT" || _evResolution.source !== "realtime") return;
+              var _evSources = _evResolution && Array.isArray(_evResolution.sources) ? _evResolution.sources : [];
+              if (!_evResolution || _evResolution.identityStatus !== "EXACT" ||
+                  (_evSources.indexOf("realtime") < 0 && _evResolution.source !== "realtime")) return;
               _queueChainVehicle({
                 runningChainId:_evChainIds[0], trainClass:_evResolution.name||"",
                 vehicleType:_evResolution.vehicleTypeStr||_ev.vehicleType,
