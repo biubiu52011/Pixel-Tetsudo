@@ -142,7 +142,10 @@
           console.debug("[trains] timetable fallback skip:", lineId, e.message);
         });
       }
-    } catch(e) {}
+    } catch(e) {
+      console.error("[trains] line detail render failed:", lineId, e);
+      if (mapEl && window.DataState) window.DataState.renderPageState(mapEl, "render_error");
+    }
   }
 
   function hideLineView() {
@@ -255,7 +258,11 @@
         var lines = getLinesData();
         if (!lines || !lines[h]) return false;
         if (h === currentLine && detailEl && !detailEl.classList.contains("hidden")) return true;
-        try { showLineView(h, _systemIdsForRoute(h)); return true; } catch(e) { return false; }
+        try { showLineView(h, _systemIdsForRoute(h)); return true; } catch(e) {
+          console.error("[trains] route render failed:", h, e);
+          if (mapEl && window.DataState) window.DataState.renderPageState(mapEl, "render_error");
+          return false;
+        }
       }
       window.addEventListener("hashchange", _applyRoute);
       loadCachedPositions(function() {
