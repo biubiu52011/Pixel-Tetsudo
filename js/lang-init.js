@@ -31,7 +31,14 @@
                 _opNames[_opIds[_i]] = window.t(_key) || _opIds[_i];
             }
             window.TransitConstants.OP_NAMES = _opNames;
-            window.tOp = function(name) { return (window.TransitConstants && window.TransitConstants.OP_NAMES && window.TransitConstants.OP_NAMES[name]) || name || ''; };
+            // OP_ORDER controls sorting only. Newly added operators may not be in
+            // that list yet, but must still resolve their existing op.<id> i18n key.
+            window.tOp = function(name) {
+                if (!name) return '';
+                var translated = (typeof window.t === 'function') ? window.t('op.' + name) : '';
+                if (translated && translated !== 'op.' + name) return translated;
+                return (window.TransitConstants && window.TransitConstants.OP_NAMES && window.TransitConstants.OP_NAMES[name]) || name;
+            };
         }
     }
 
