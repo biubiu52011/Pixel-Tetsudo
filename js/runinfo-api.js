@@ -369,6 +369,7 @@
     _expectedRailwayIdentity: expectedRailwayIdentity,
     _aggregateStatus: aggregateStatus,
     _pickRecord: pickRecord,
+    _evaluateRecord: evaluateRecord,
     isWebLine: function(lineId) {
       return !!(window.WebRunInfo && window.WebRunInfo.isWebLine && window.WebRunInfo.isWebLine(lineId));
     }
