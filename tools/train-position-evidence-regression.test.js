@@ -106,6 +106,10 @@ assert(!/var exact = p && \(p\.vehicleIdentityStatus/.test(renderer),
   "renderer must not re-arbitrate vehicle identity status");
 assert(!/vehicleResolvedFromRealtime/.test(renderer),
   "renderer must not branch on vehicle evidence source");
+assert(/kind: iconSrc \? "image" : "circle"/.test(renderer),
+  "one train marker must choose image or fallback circle exclusively");
+assert(/existingIcon\.getAttribute\("data-marker-kind"\) !== markerSpec\.kind[\s\S]{0,260}removeChild\(existingIcon\)/.test(renderer),
+  "marker kind changes must replace the old marker instead of layering image and fallback circle");
 assert(/if \(!stationKey\)[\s\S]{0,800}return;/.test(fusion),"missing fromStation must not create realtime position");
 
 const resolver=read("js/running-chain-resolver.js");
@@ -246,9 +250,9 @@ assert(!estimatorSource.includes("operationVehicleCandidates:"),
   'operation candidates must not enter TrainVehicle as a third vehicle source');
 assert(!estimatorSource.includes("_candidateSetsAgree"),
   'estimator must not duplicate candidate agreement arbitration');
-assert(fusionSource.includes('src === "structural" ? 3') &&
-  fusionSource.includes('src === "operation-assignment-provider" || src === "odpt" || src === "timetable" ? 2'),
-  'running-chain registry rank must preserve structural-before-timetable source priority');
+assert(fusionSource.includes('sources.indexOf("structural") >= 0 || src === "structural" || src === "formation-evidence") return 3;') &&
+  fusionSource.includes('sources.indexOf("timetable") >= 0 || src === "operation-assignment-provider" || src === "odpt" || src === "timetable") return 2;'),
+  'running-chain registry rank must preserve structural/formation-before-timetable source priority');
 assert(operationEvidenceSource.includes('if (exactKeys.length > 1) return null;'),
   'canonical resolver must keep conflicting exact vehicle identities unresolved');
 assert(operationEvidenceSource.includes('first.vehicleType = "";') &&
@@ -269,11 +273,10 @@ assert(fusionSource.includes('vehicleFormationCandidates: (p.vehicleFormationCan
 assert(fusionSource.includes('p.vehicleFormationCandidates = (v.vehicleFormationCandidates || p.vehicleFormationCandidates || []).slice()'),
   'running-chain inheritance must propagate formation candidate sets');
 assert(!fusionSource.includes('_p.vehicleType = _fe.vehicleName'),
-  'fused formation evidence must not bypass TrainVehicle with a direct identity write');
-assert(fusionSource.includes('var _feResolved = window.TrainVehicle.resolve({'),
-  'fused formation evidence must re-enter the existing TrainVehicle authority');
-assert(/timetableVehicleType\s*:\s*_fe\.vehicleName/.test(fusionSource),
-  'fused formation evidence must use the timetable vehicle source channel');
+  'fused formation evidence must not bypass the canonical vehicle projection with a direct identity write');
+assert(fusionSource.includes('source:"formation-evidence", sources:["formation-evidence"]') &&
+       fusionSource.includes('identityStatus:_fe.identityStatus||"EXACT"'),
+  'dated formation evidence must retain its canonical structural provenance and exact identity state');
 assert(fusionSource.includes('_queueChainVehicle({') && fusionSource.includes('vehicleFormationId:_fe.formationId'),
   'formation evidence must enter the existing pre-commit candidate queue');
 assert(fusionSource.includes('if (mode !== "SEGMENTED") return true; // HYBRID / COARSE / UNKNOWN'),
