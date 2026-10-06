@@ -51,8 +51,9 @@ const structuredOnly=[
  {"odpt:railway":"odpt.Railway:Tobu.Utsunomiya","odpt:trainInformationStatus":"Suspension","dc:date":"2026-10-01T12:00:00+09:00"}
 ];
 assert.strictEqual(ctx.window.RunInfoAPI._selectScopedRecords(structuredOnly,tobuLine).length,1);
+assert.strictEqual(ctx.window.RunInfoAPI._pickRecord(structuredOnly,tobuLine),structuredOnly[0]);
 assert.strictEqual(ctx.window.RunInfoAPI._aggregateStatus(structuredOnly,tobuLine),"suspended");
-console.log("runinfo-scope structured-only: 2 PASS");
+console.log("runinfo-scope structured-only: 3 PASS");
 
 
 // Nippori-Toneri Liner is an official Toei TrainInformation line.
@@ -110,3 +111,10 @@ const expiredAndCurrent=[
 ];
 assert.strictEqual(ctx.window.RunInfoAPI._aggregateStatus(expiredAndCurrent,A),"normal");
 console.log("runinfo-scope expiry: 3 PASS");
+
+const emptyUnstructured=[
+ {"odpt:railway":"odpt.Railway:Toei.Asakusa","dc:date":"2026-10-07T09:00:00+09:00"}
+];
+assert.strictEqual(ctx.window.RunInfoAPI._pickRecord(emptyUnstructured,A),null);
+assert.strictEqual(ctx.window.RunInfoAPI._aggregateStatus(emptyUnstructured,A),null);
+console.log("runinfo-scope empty record isolation: 2 PASS");
