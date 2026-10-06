@@ -87,15 +87,24 @@
   function renderPageState(container, state, messageKey) {
     if (!container) return;
     var key = messageKey || (state === "loading" ? "status.loading"
-      : state === "render_error" ? "status.render_error"
-      : "status.load_error");
+      : state === "render_error" ? "status.display_unavailable"
+      : "status.fetch_unavailable");
     var message = t(key);
+    container.dataset.pageState = state;
+    container.dataset.pageStateKey = key;
     if (state === "loading") {
-      container.innerHTML = '<div class="rs-loading" role="status" aria-live="polite"><div class="rs-loading-spinner" aria-hidden="true"></div><span>' + escapeHtml(message) + '</span></div>';
+      container.innerHTML = '<div class="rs-loading" role="status" aria-live="polite"><div class="rs-loading-spinner" aria-hidden="true"></div><span data-i18n="' + escapeHtml(key) + '">' + escapeHtml(message) + '</span></div>';
       return;
     }
     var cls = state === "render_error" || state === "error" ? "rs-error" : "rs-empty";
-    container.innerHTML = '<div class="' + cls + '" role="status" aria-live="polite">' + escapeHtml(message) + '</div>';
+    var detailKey = state === "render_error" ? "status.display_unavailable_hint" : "status.fetch_unavailable_hint";
+    container.innerHTML = '<div class="' + cls + '" role="status" aria-live="polite">'
+      + '<div data-i18n="' + escapeHtml(key) + '">' + escapeHtml(message) + '</div>'
+      + '<div class="rs-state-hint" data-i18n="' + detailKey + '">' + escapeHtml(t(detailKey)) + '</div>'
+      + '<button type="button" class="rs-state-retry" data-i18n="status.retry">' + escapeHtml(t("status.retry")) + '</button>'
+      + '</div>';
+    var retry = container.querySelector(".rs-state-retry");
+    if (retry) retry.addEventListener("click", function() { window.location.reload(); });
   }
 
   // Severity rank for system-level status aggregation (higher = more severe)
