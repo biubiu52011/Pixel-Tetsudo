@@ -70,6 +70,10 @@ assert(!/\("row-" \+ index\)/.test(trackLayoutSource),
   "layout occupancy must never use current row order as stable train identity");
 assert(/p\.runningChainId \|\| p\.trainId \|\| p\.trainNumber \|\| p\.sourceTrainId \|\| p\.timetableObjectId/.test(renderer),
   "renderer identity must use stable operational identifiers only");
+assert(/var markerById = \{\};/.test(renderer) && /var _existingMarkers = trainLayer\.querySelectorAll\('\[data-train-id\]'\)/.test(renderer),
+  "renderer must index existing train markers once per render pass");
+assert(!/var _trainNodes = trainLayer\.querySelectorAll\('\[data-train-id\]'\)/.test(renderer),
+  "renderer must not rescan every marker for every train row");
 assert(/routePos:\s*routePos/.test(trackLayoutSource),
   "TrainTrackLayout must expose loop route position to the single marker animation authority");
 assert(/_useLoopRoute[\s\S]{0,900}_loopPosToXY\(_curRoutePos, _loopRect\)/.test(renderer),
