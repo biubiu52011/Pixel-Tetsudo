@@ -85,6 +85,18 @@
     return (line && (line.nameJa || line.nameEn || line.name)) || "";
   }
 
+  // Shinkansen is a passenger-facing rail category, not an operator or a
+  // presentation system. Keep it as one contiguous block after conventional
+  // lines inside each JR operator group so fallback records cannot interleave
+  // conventional lines between Shinkansen services.
+  function isShinkansenLine(line) {
+    if (!line) return false;
+    var id = String(line.name || "");
+    var ja = String(line.nameJa || "");
+    var en = String(line.nameEn || "");
+    return /Shinkansen/i.test(id) || /新幹線/.test(ja) || /Shinkansen/i.test(en);
+  }
+
   // Deterministic per-entity sort key inside one operator group.
   function entitySortKey(entity) {
     var pres = entity.pres;
@@ -197,7 +209,12 @@
     opOrder.forEach(function(op) {
       var list = byOp[op].slice();
       list.sort(function(a, b) {
-        if (a.isPresentation !== b.isPresentation) return a.isPresentation ? -1 : 1; // presentations first
+        if (a.isPresentation !== b.isPresentation) return a.isPresentation ? -1 : 1; // passenger systems first
+        if (!a.isPresentation && categoryOf(op) === "JR") {
+          var aShinkansen = isShinkansenLine(a.line);
+          var bShinkansen = isShinkansenLine(b.line);
+          if (aShinkansen !== bShinkansen) return aShinkansen ? 1 : -1; // conventional fallback, then one Shinkansen block
+        }
         var ka = entitySortKey(a), kb = entitySortKey(b);
         return ka < kb ? -1 : (ka > kb ? 1 : 0);
       });
