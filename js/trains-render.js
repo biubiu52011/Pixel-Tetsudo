@@ -1067,6 +1067,7 @@
     marker._displayY = py;
     marker._displayLineId = lineId;
     if (loc && loc.idx != null && isFinite(Number(loc.idx))) marker._displayStationIdx = Number(loc.idx);
+    if (loc && loc.nextIdx != null && isFinite(Number(loc.nextIdx))) marker._displayNextStationIdx = Number(loc.nextIdx);
     if (loc && loc.routePos != null && isFinite(Number(loc.routePos))) marker._displayRoutePos = Number(loc.routePos);
     trainLayer.appendChild(marker);
     return marker;
@@ -1225,16 +1226,23 @@
         var _hasDisplayPos = isFinite(_startX) && isFinite(_startY);
         var _sameLine = !existingIcon._displayLineId || existingIcon._displayLineId === lineId;
         var _targetIdx = loc && loc.idx != null ? Number(loc.idx) : NaN;
+        var _targetNextIdx = loc && loc.nextIdx != null ? Number(loc.nextIdx) : NaN;
         var _previousIdx = Number(existingIcon._displayStationIdx);
+        var _previousNextIdx = Number(existingIcon._displayNextStationIdx);
         var _indexContinuous = true;
         if (_sameLine && isFinite(_targetIdx) && isFinite(_previousIdx)) {
           var _idxDiff = Math.abs(_targetIdx - _previousIdx);
           if (isLoop && stationCoords.length > 1) {
             _idxDiff = Math.min(_idxDiff, stationCoords.length - _idxDiff);
           }
-          // One polling update may advance to the next segment. Anything beyond
-          // that is a new/stale snapshot, not a path to animate through.
           _indexContinuous = _idxDiff <= 1;
+          if (_indexContinuous && isFinite(_targetNextIdx) && isFinite(_previousNextIdx)) {
+            var _sameSegment = _targetIdx === _previousIdx && _targetNextIdx === _previousNextIdx;
+            var _advancedSegment = _targetIdx === _previousNextIdx;
+            var _loopAdvanced = isLoop && stationCoords.length > 1 &&
+              _previousNextIdx === stationCoords.length - 1 && _targetIdx === 0;
+            _indexContinuous = _sameSegment || _advancedSegment || _loopAdvanced;
+          }
         }
         // Snap threshold is line geometry, not per-train state. It is computed
         // once for this render pass and shared by every marker.
@@ -1246,6 +1254,7 @@
           existingIcon._displayY = _targetY;
           existingIcon._displayLineId = lineId;
           if (isFinite(_targetIdx)) existingIcon._displayStationIdx = _targetIdx;
+          if (isFinite(_targetNextIdx)) existingIcon._displayNextStationIdx = _targetNextIdx;
           if (isFinite(_targetRoutePos)) existingIcon._displayRoutePos = _targetRoutePos;
           _syncTrainLabels(trainLayer, svgNS, trainUid, _targetX, _targetY, p, lineId);
         } else {
