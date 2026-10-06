@@ -114,8 +114,8 @@ def main():
         new_errors.append('RAILWAY-001 LEGACY_RUNNING_CHAIN_RELATION_TYPE_REINTRODUCED')
     if '.throughServices' in route_search_src:
         new_errors.append('RAILWAY-001 ROUTE_SEARCH_READS_THROUGH_SERVICES_PROJECTION')
-    if 'Array.isArray(line.serviceBoundaries)' not in route_search_src:
-        new_errors.append('RAILWAY-001 ROUTE_SEARCH_SERVICE_BOUNDARY_ADJACENCY_MISSING')
+    if 'RunningChainResolver.isThroughAtStation(a, b, st)' not in route_search_src:
+        new_errors.append('RAILWAY-001 ROUTE_SEARCH_RELATION_AUTHORITY_MISSING')
     for token in (
         'var boundaries = Array.isArray(line.serviceBoundaries)',
         '_boundaryMap[lineId][boundary.lineId] = joins.slice()',
@@ -140,9 +140,17 @@ def main():
     if 'if (line.branchOf) continue;' in data_state_src:
         new_errors.append('PRESENTATION-001 RENDERER_BRANCH_AUTHORITY_BYPASS')
     trains_page_src = _read_arch('js/trains-page.js')
-    if '.presentation' in trains_page_src:
-        new_errors.append('PRESENTATION-001 TRAINS_PAGE_READS_PRESENTATION_METADATA')
-    route_search_src = _read_arch('js/route-search.js')
+    realtime_view_src = _read_arch('js/realtime-view.js')
+    for rel, src in (
+        ('js/data-state.js', data_state_src),
+        ('js/trains-page.js', trains_page_src),
+        ('js/realtime-view.js', realtime_view_src),
+        ('js/trains-render.js', renderer_src),
+    ):
+        for forbidden in ('.presentation', 'serviceBoundaries', 'throughServices',
+                          'RunningChainResolver.getResolutionContext'):
+            if forbidden in src:
+                new_errors.append('PRESENTATION-001 UI_AUTHORITY_BYPASS %s %s' % (rel, forbidden))
     if 'serviceBoundaries' in route_search_src:
         new_errors.append('PRESENTATION-001 ROUTE_SEARCH_READS_SERVICE_BOUNDARIES')
     resolver_src = _read_arch('js/running-chain-resolver.js')
