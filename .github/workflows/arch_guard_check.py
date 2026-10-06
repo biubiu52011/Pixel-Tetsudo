@@ -95,6 +95,10 @@ def main():
     route_search_src = _read_arch('js/route-search.js')
     if 'line.throughServices' in running_chain_src:
         new_errors.append('RAILWAY-001 RUNNING_CHAIN_READS_THROUGH_SERVICES_PROJECTION')
+    if 'isDirectThroughService:function' in running_chain_src or 'hasRelation:function' in running_chain_src:
+        new_errors.append('RAILWAY-001 LEGACY_RUNNING_CHAIN_RELATION_API_REINTRODUCED')
+    if 'THROUGH_SERVICE' in running_chain_src or 'SERVICE_BOUNDARY' in running_chain_src:
+        new_errors.append('RAILWAY-001 LEGACY_RUNNING_CHAIN_RELATION_TYPE_REINTRODUCED')
     if '.throughServices' in route_search_src:
         new_errors.append('RAILWAY-001 ROUTE_SEARCH_READS_THROUGH_SERVICES_PROJECTION')
     if 'Array.isArray(line.serviceBoundaries)' not in route_search_src:
