@@ -22,12 +22,16 @@
   var _CHAIN_EVIDENCE_TTL_MS = 3 * 60 * 1000;
   function _vehicleEvidenceRank(p) {
     if (!p) return 0;
-    var src = p.vehicleSource || (p.vehicleResolution && p.vehicleResolution.source) || "";
-    return p.vehicleResolvedFromRealtime === true || src === "realtime" ? 5
-      : p.vehicleResolvedFromRealtimeDerived === true || src === "realtime-derived" ? 4
-      : src === "structural" ? 3
-      : src === "operation-assignment-provider" || src === "odpt" || src === "timetable" ? 2
-      : src === "manual" ? 1 : 0;
+    var r = p.vehicleResolution || null;
+    var sources = r && Array.isArray(r.sources) ? r.sources : [];
+    var src = p.vehicleSource || (r && r.source) || "";
+    if (p.vehicleResolvedFromRealtime === true || sources.indexOf("realtime") >= 0 || src === "realtime") return 5;
+    if (p.vehicleResolvedFromRealtimeDerived === true || sources.indexOf("realtime-derived") >= 0 || src === "realtime-derived") return 4;
+    if (sources.indexOf("structural") >= 0 || src === "structural") return 3;
+    if (sources.indexOf("operation-assignment-provider") >= 0 || sources.indexOf("odpt") >= 0 ||
+        sources.indexOf("timetable") >= 0 || src === "operation-assignment-provider" || src === "odpt" || src === "timetable") return 2;
+    if (sources.indexOf("manual") >= 0 || src === "manual") return 1;
+    return 0;
   }
   function _projectVehicleResolution(p, resolution, inherited) {
     if (!p) return p;
@@ -40,8 +44,11 @@
     p.vehicleIdentityStatus = r ? (r.identityStatus || "UNKNOWN") : "UNKNOWN";
     p.vehicleIdentityReason = r ? (r.identityReason || "") : "no-vehicle-evidence";
     p.vehicleIconPath = r && r.identityStatus === "EXACT" ? (r.iconPath || "") : "";
-    p.vehicleResolvedFromRealtime = !!(r && r.identityStatus === "EXACT" && r.source === "realtime");
-    p.vehicleResolvedFromRealtimeDerived = !!(r && r.identityStatus === "EXACT" && r.source === "realtime-derived");
+    var _sources = r && Array.isArray(r.sources) ? r.sources : [];
+    p.vehicleResolvedFromRealtime = !!(r && r.identityStatus === "EXACT" &&
+      (_sources.indexOf("realtime") >= 0 || r.source === "realtime"));
+    p.vehicleResolvedFromRealtimeDerived = !!(r && r.identityStatus === "EXACT" &&
+      (_sources.indexOf("realtime-derived") >= 0 || r.source === "realtime-derived"));
     p.vehicleResolvedUpstream = !!(r && r.identityStatus === "EXACT");
     p.vehicleInheritedFromRunningChain = inherited === true;
     return p;
