@@ -65,6 +65,14 @@ assert.strictEqual(typhoonNotice.messageKind,"notice");
 assert.notStrictEqual(typhoonNotice.status,"suspended");
 let typhoonUnknown=E.evaluate({text:"台風に関する情報です。"});
 assert.strictEqual(typhoonUnknown.messageKind,"unknown");
+let unknownOperationalText=E.evaluate({text:"全線で運転を見合わせています。"});
+assert.strictEqual(unknownOperationalText.messageKind,"unknown");
+assert.strictEqual(unknownOperationalText.status,"suspended");
+assert.strictEqual(unknownOperationalText.symbol,null);
+let officialTextOnly=E.evaluate({currentOperationalSource:true,text:"全線で運転を見合わせています。"});
+assert.strictEqual(officialTextOnly.messageKind,"realtime");
+assert.strictEqual(officialTextOnly.status,"suspended");
+assert.strictEqual(officialTextOnly.symbol,"×");
 let plannedNoticeWithImpact=E.evaluate({messageKind:"notice",text:"明日は台風の影響で一部列車を運休します。"});
 assert.strictEqual(plannedNoticeWithImpact.messageKind,"notice");
 assert.strictEqual(plannedNoticeWithImpact.status,"notice");
@@ -139,4 +147,4 @@ assert.deepStrictEqual(splitRanges.impacts,[
   {interval:"A駅→B駅",direction:null,effect:"suspension"},
   {interval:"C駅→D駅",direction:null,effect:"delay"}
 ]);
-console.log("runinfo-evaluator: 88 PASS");
+console.log("runinfo-evaluator: 94 PASS");
