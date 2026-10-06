@@ -250,7 +250,10 @@
     var delayInfo = getDelayInfo(line) || {};
     var status = delayInfo && delayInfo.status ? delayInfo.status : "loading";
     var interval = delayInfo.interval || "";
-    var lineColor = (line.presentation && line.presentation.color) || line.color || "#00b643";
+    var _presentation = (window.LinePresentationService && window.LinePresentationService.getPresentation)
+      ? window.LinePresentationService.getPresentation(lineId, linesObj || window.UNIFIED_LINES)
+      : null;
+    var lineColor = (_presentation && _presentation.color) || line.color || "#00b643";
     var displayName = (window.RailwayDB && window.RailwayDB.resolveLineName) ? window.RailwayDB.resolveLineName(lineId, window.currentLang) : (line.nameEn || line.name || lineId);
     // Fallback: RailwayDB unavailable (e.g., test/sandbox) — use raw fields
 
@@ -258,7 +261,7 @@
     var iconHtml = "";
     // Operator-generic logos (JRグループ.png etc.) are not line icons;
     // skip them so per-line cards never borrow another operator's logo.
-    var _losIcon = (line.presentation && line.presentation.icon) || "";
+    var _losIcon = (_presentation && _presentation.icon) || "";
     var _imgOk = _losIcon || (line.image && !/(グループ|ロゴ|マーク|アイコン|シンボル)/.test(line.image));
     if (_losIcon) {
       if (String(_losIcon).indexOf("JRグループ.png") !== -1) {
@@ -276,7 +279,7 @@
       iconHtml = '<div class="rs-code-badge">' + escapeHtml(line.symbol) + '</div>';
     } else {
       // Canonical presentation code fallback.
-      var osCode = (line.presentation && line.presentation.code) || "";
+      var osCode = (_presentation && _presentation.code) || "";
       iconHtml = '<div class="rs-code-badge">' + escapeHtml(osCode || line.code || line.symbol || line.id || "?") + '</div>';
     }
 
@@ -397,7 +400,9 @@
       if (!line) continue;
       // Line Hierarchy Rule: 真支线（branchOf 非空）严禁在一级总列表独立展示，
       // 只在父线卡片/详情内展示。平级独立运营线（branchOf=null）照常平铺。
-      if (line.branchOf) continue;
+      if (window.LinePresentationService && window.LinePresentationService.isBranch
+          ? window.LinePresentationService.isBranch(lid, linesObj)
+          : !!line.branchOf) continue;
       // 国鉄幹線本名（类比京沪铁路/成渝铁路）不是運行系統：中央本線/東海道本線/東北本線 不进入线路一览，
       // 数据保留作换乘锚点/支线父线。
       if (TRUNK_MAIN_LINE_IDS.indexOf(lid) >= 0) continue;
@@ -449,9 +454,11 @@
       for (var k = 0; k < groups[op].length; k++) {
         var g = groups[op][k];
         if (covered[g.id]) continue;
-        var pres = g.line && g.line.presentation;
-        if (pres && Array.isArray(pres.lineIds) && pres.lineIds.length > 0 && pres.lineIds[0] === g.id) {
-          var memberIds = pres.lineIds.filter(function(id) { return !!linesObj[id]; });
+        var pres = (window.LinePresentationService && window.LinePresentationService.getPrimaryPresentation)
+          ? window.LinePresentationService.getPrimaryPresentation(g.id, linesObj)
+          : null;
+        if (pres) {
+          var memberIds = window.LinePresentationService.getPresentationMembers(g.id, linesObj);
           if (memberIds.length > 0) {
             memberIds.forEach(function(id) { covered[id] = true; });
             html += renderSystemCard(pres, memberIds, linesObj, { mode: mode });
