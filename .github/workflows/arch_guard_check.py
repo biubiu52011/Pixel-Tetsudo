@@ -92,8 +92,13 @@ def main():
     # presentation projection, but production Running Chain must derive adjacency
     # exclusively from evidence-bearing serviceBoundaries.
     running_chain_src = _read_arch('js/running-chain-resolver.js')
+    route_search_src = _read_arch('js/route-search.js')
     if 'line.throughServices' in running_chain_src:
         new_errors.append('RAILWAY-001 RUNNING_CHAIN_READS_THROUGH_SERVICES_PROJECTION')
+    if '.throughServices' in route_search_src:
+        new_errors.append('RAILWAY-001 ROUTE_SEARCH_READS_THROUGH_SERVICES_PROJECTION')
+    if 'Array.isArray(line.serviceBoundaries)' not in route_search_src:
+        new_errors.append('RAILWAY-001 ROUTE_SEARCH_SERVICE_BOUNDARY_ADJACENCY_MISSING')
     for token in (
         'var boundaries = Array.isArray(line.serviceBoundaries)',
         '_boundaryMap[lineId][boundary.lineId] = joins.slice()',
