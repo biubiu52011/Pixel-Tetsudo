@@ -83,6 +83,13 @@ let realtimeDelay=E.evaluate({messageKind:"realtime",text:"下り線の一部列
 assert.strictEqual(realtimeDelay.symbol,"△");
 let noticeSymbol=E.evaluate({messageKind:"notice",text:"明日の運転計画についてお知らせします。"});
 assert.strictEqual(noticeSymbol.symbol,"!");
+let noticeWholeStop=E.evaluate({messageKind:"notice",structuredStatus:"Suspension",text:"台風の影響により全線で運転を見合わせます。"});
+assert.strictEqual(noticeWholeStop.messageKind,"notice");
+assert.strictEqual(noticeWholeStop.status,"notice");
+assert.strictEqual(noticeWholeStop.symbol,"!");
+assert.strictEqual(noticeWholeStop.interval,"全線");
+assert.strictEqual(noticeWholeStop.effect,"suspension");
+assert.ok(noticeWholeStop.evidence.some(function(x){return x.type==="NOTICE_STATUS_ISOLATION";}));
 let structuredPartial=E.evaluate({messageKind:"realtime",structuredStatus:"Suspension",range:"新宿駅～中野駅",text:"新宿駅～中野駅間で運転を見合わせています。"});
 assert.strictEqual(structuredPartial.status,"notice");
 assert.strictEqual(structuredPartial.symbol,"△");
@@ -132,4 +139,4 @@ assert.deepStrictEqual(splitRanges.impacts,[
   {interval:"A駅→B駅",direction:null,effect:"suspension"},
   {interval:"C駅→D駅",direction:null,effect:"delay"}
 ]);
-console.log("runinfo-evaluator: 82 PASS");
+console.log("runinfo-evaluator: 88 PASS");
