@@ -277,7 +277,8 @@
         p = fetchODPT(op).then(function(records) {
           var scoped = selectScopedRecords(records, lineObj);
           if (scoped.length) {
-            var primary = pickRecord(scoped, lineObj) || scoped[0] || {};
+            var primary = pickRecord(scoped, lineObj);
+            if (!primary) return localFallback(lineId, lineObj);
             var text = recordText(primary) || "";
             var ex = extractLinks(text);
             var sourceUpdatedAt = primary["dc:date"] || null;
