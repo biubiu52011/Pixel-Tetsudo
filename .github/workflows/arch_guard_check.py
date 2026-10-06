@@ -102,6 +102,21 @@ def main():
         if token not in running_chain_src:
             new_errors.append('RAILWAY-001 SERVICE_BOUNDARY_ADJACENCY_MISSING %s' % token)
 
+    # REALTIME-001: TrainTrackLayout is the only train geometry authority.
+    track_layout_src = _read_arch('js/train-track-layout.js')
+    if 'window.TrainTrackLayout' not in renderer_src:
+        new_errors.append('REALTIME-001 TRAIN_TRACK_LAYOUT_AUTHORITY_MISSING')
+    if 'var loc = layout ? layout[pi] : null;' not in renderer_src or 'if (!loc) continue;' not in renderer_src:
+        new_errors.append('REALTIME-001 RENDERER_GEOMETRY_FAIL_CLOSED_MISSING')
+    if 'var _trainNodes = trainLayer.querySelectorAll(\'[data-train-id]\')' in renderer_src:
+        new_errors.append('REALTIME-001 PER_TRAIN_MARKER_DOM_RESCAN')
+    if '("train_" + pi)' in renderer_src or '("row-" + index)' in track_layout_src:
+        new_errors.append('REALTIME-001 ROW_ORDER_IDENTITY_REINTRODUCED')
+    if '_displayNextStationIdx' not in renderer_src:
+        new_errors.append('REALTIME-001 SEGMENT_CONTINUITY_STATE_MISSING')
+    if 'getMoveDir: _trainMoveDir' in renderer_src:
+        new_errors.append('REALTIME-001 DISPLAY_DIRECTION_USED_AS_GEOMETRY_AUTHORITY')
+
     # VEHICLE-001/002: one final vehicle authority and one canonical evidence resolver.
     if 'TrainOperationEvidence.resolveEvidence' not in estimator_src:
         new_errors.append('VEHICLE-002 CANONICAL_EVIDENCE_RESOLVER_BYPASSED')
