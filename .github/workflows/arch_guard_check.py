@@ -139,6 +139,15 @@ def main():
         new_errors.append('PRESENTATION-001 RENDERER_INFERS_SERVICE_RELATION')
     if 'if (line.branchOf) continue;' in data_state_src:
         new_errors.append('PRESENTATION-001 RENDERER_BRANCH_AUTHORITY_BYPASS')
+    trains_page_src = _read_arch('js/trains-page.js')
+    if '.presentation' in trains_page_src:
+        new_errors.append('PRESENTATION-001 TRAINS_PAGE_READS_PRESENTATION_METADATA')
+    route_search_src = _read_arch('js/route-search.js')
+    if 'serviceBoundaries' in route_search_src:
+        new_errors.append('PRESENTATION-001 ROUTE_SEARCH_READS_SERVICE_BOUNDARIES')
+    resolver_src = _read_arch('js/running-chain-resolver.js')
+    if 'isThroughAtStation:isThroughAtStation' not in resolver_src:
+        new_errors.append('PRESENTATION-001 RELATION_BOUNDARY_API_MISSING')
 
     # REALTIME-001: TrainTrackLayout is the only train geometry authority.
     track_layout_src = _read_arch('js/train-track-layout.js')
