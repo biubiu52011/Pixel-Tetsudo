@@ -1290,7 +1290,7 @@
       } else {
         existingIcon = _createTrainMarker(trainLayer, svgNS, trainUid, markerSpec, px, py, p, lineId, isLoop, color, loc);
         markerById[String(trainUid)] = existingIcon;
-        appendTrainLabels(trainLayer, svgNS, trainUid, px, py, p, lineId);
+        _syncTrainLabels(trainLayer, svgNS, trainUid, px, py, p, lineId);
       }
     }
     
@@ -1497,6 +1497,16 @@
     return moveDir === 'down' ? py + 28 : py + 25;
   }
 
+  function _trainLabelSignature(p, lineId) {
+    return [
+      lineId || "",
+      window.currentLang || "ja",
+      p && p.railDirection || "",
+      p && p.destinationStation || "",
+      p && p.trainType || ""
+    ].join("|");
+  }
+
   function appendTrainLabels(trainLayer, svgNS, trainUid, px, py, p, lineId) {
     var moveDir = _trainMoveDir(p, lineId);
     var isLoopDir = _isLoopDirName(p.railDirection);
@@ -1544,6 +1554,7 @@
     labelGroup.setAttribute("data-train-label-for", String(trainUid));
     labelGroup.setAttribute("data-label-pos", "dir");
     labelGroup.setAttribute("data-dir-sym", dirSym || "");
+    labelGroup.setAttribute("data-label-signature", _trainLabelSignature(p, lineId));
     // 三角在 g 坐标系 (0, labelY)
     if (dirSym) {
       var tri = document.createElementNS(svgNS, "path");
@@ -1605,10 +1616,15 @@
     label.setAttribute('transform', 'translate(' + (px + _base) + ',0)');
   }
 
-  // Create the label if missing, otherwise move the existing one to (px,py).
-  // Prevents the old remove+recreate flicker on every position update.
+  // Keep label content synchronized with the current service segment while
+  // preserving cheap move-only updates during animation frames.
   function _syncTrainLabels(trainLayer, svgNS, trainUid, px, py, p, lineId) {
     var existing = trainLayer.querySelector('[data-train-label-for="' + String(trainUid).replace(/"/g, '') + '"]');
+    var signature = _trainLabelSignature(p, lineId);
+    if (existing && existing.getAttribute("data-label-signature") !== signature) {
+      existing.parentNode.removeChild(existing);
+      existing = null;
+    }
     if (existing) _moveTrainLabels(trainLayer, trainUid, px, py, p, lineId);
     else appendTrainLabels(trainLayer, svgNS, trainUid, px, py, p, lineId);
   }
