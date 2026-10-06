@@ -884,7 +884,7 @@
               stationId: stationKey,
               sourceRailway: railwayName,
               trainId: trainId,
-              trainNumber: trainId,
+              trainNumber: String(t["odpt:trainNumber"] || trainId),
               delayMin: delayMin,
               railDirection: directionName,
               destinationStation: destStation,
@@ -925,7 +925,7 @@
                     railway: railwayName,
                     operator: trainOpShort,
                     trainOwner: odptTrainOwner,
-                    trainNumber: trainId,
+                    trainNumber: positionData.trainNumber,
                     serviceDate: _serviceDate,
                     calendarType: _calendarType
                   }, "realtime-derived");
@@ -937,7 +937,7 @@
                   lineId: lid,
                   operator: trainOpShort,
                   trainOwner: odptTrainOwner,
-                  trainNumber: trainId,
+                  trainNumber: positionData.trainNumber,
                   stationIndex: idx,
                   trainType: rawType,
                   destinationStation: destStations,
