@@ -950,14 +950,6 @@
             // 1. 临海线的车（operator=TWR）开到JR区间了 → 在JR线路图上显示临海线车型
             // v4.3.939: 存车自己的 operator（渲染层判断直通车、按车籍选图标，治跨线"变身"）
             positionData.trainOperator = trainOperator.replace('odpt.Operator:', '') || '';
-            var isRinkaiTrain = (trainOperator === 'odpt.Operator:TWR' || trainOperator === 'TWR');
-            // 临海线（TWR）列车开到了 JR 区间（Saikyo/Kawagoe）→ 用 Rinkai 车型
-            // Read canonical line archive to determine whether lid serves Rinkai directly
-            var _rinkaiPartners = (window.RunningChainResolver && typeof window.RunningChainResolver.getDirectThroughLines === "function")
-              ? window.RunningChainResolver.getDirectThroughLines(lid) : [];
-            if (isRinkaiTrain && _rinkaiPartners.indexOf('Rinkai') >= 0) {
-              positionData.isRinkaiThrough = true;
-            }
             // Zero-fallback vehicle contract: realtime records without explicit
             // vehicle evidence keep trainClass empty. Line/operator/train number,
             // service type and through-service context may not manufacture it.
