@@ -187,32 +187,19 @@
     return mt ? parseInt(mt[1], 10) : 0;
   }
 
-  function isThroughConnected(a, b) {
+  // A zero-transfer through edge exists only at an evidence-bearing
+  // service boundary handover station. Shared stations elsewhere on the same
+  // corridor remain ordinary transfers so Dijkstra cannot stitch free zigzags.
+  function isThroughAtStation(a, b, st) {
     try {
       var line = window.UNIFIED_LINES && window.UNIFIED_LINES[a];
       var boundaries = line && Array.isArray(line.serviceBoundaries) ? line.serviceBoundaries : [];
       return boundaries.some(function(boundary) {
-        return !!(boundary && boundary.lineId === b &&
-          Array.isArray(boundary.handoverStations) && boundary.handoverStations.length);
+        var joins = boundary && boundary.lineId === b && Array.isArray(boundary.handoverStations)
+          ? boundary.handoverStations : [];
+        return joins.indexOf(st) >= 0;
       });
     } catch(e) { return false; }
-  }
-
-  // v4.3.622: 直通判定按 THROUGH_JOIN_STATIONS 声明的接续站收窄——
-  // 湘南新宿⇄横須賀 只在 大船 直通，西大井/武蔵小杉/東戸塚 等共站并非直通接续；
-  // 若任何共站都按 through(0 惩罚) 切线，Dijkstra 会在同路廊反复免费换线拼跳数，
-  // 产生 新宿→西大井→武蔵小杉→東戸塚→鎌倉 式锯齿路径。
-  function isThroughAtStation(a, b, st) {
-    if (!isThroughConnected(a, b)) return false;
-    try {
-      var line = window.UNIFIED_LINES && window.UNIFIED_LINES[a];
-      var boundaries = line && Array.isArray(line.serviceBoundaries) ? line.serviceBoundaries : [];
-      var boundary = boundaries.find(function(x) { return x && x.lineId === b; });
-      var joins = boundary && Array.isArray(boundary.handoverStations) ? boundary.handoverStations : null;
-      // null means an end-to-end service relation without a direct line-ID boundary.
-      if (joins && joins.length > 0 && joins.indexOf(st) < 0) return false;
-    } catch(e) {}
-    return true;
   }
 
   /**
