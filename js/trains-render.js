@@ -1014,17 +1014,12 @@
   }
 
   function _trainMarkerSpec(p) {
-    var exact = p && (p.vehicleIdentityStatus === "EXACT" ||
-      (p.vehicleResolution && p.vehicleResolution.identityStatus === "EXACT"));
-    var realtime = exact && p.positionSource === "realtime-api" &&
-      (p.vehicleResolvedFromRealtime === true || p.vehicleResolvedFromRealtimeDerived === true) &&
-      !!p.vehicleIconPath;
-    var inherited = exact && p.vehicleInheritedFromRunningChain === true &&
-      !!p.runningChainId && !!p.vehicleIconPath;
-    var upstream = exact && p.vehicleResolvedUpstream === true && !!p.vehicleIconPath;
+    // Vehicle identity and artwork are resolved upstream. The renderer consumes
+    // that projection only; it never re-arbitrates evidence source or confidence.
+    var iconSrc = p && p.vehicleResolvedUpstream === true ? (p.vehicleIconPath || "") : "";
     return {
-      kind: (realtime || inherited || upstream) ? "image" : "circle",
-      iconSrc: (realtime || inherited || upstream) ? p.vehicleIconPath : "",
+      kind: iconSrc ? "image" : "circle",
+      iconSrc: iconSrc,
       className: p && p.estimated === true ? "train-icon estimated" : "train-icon"
     };
   }
