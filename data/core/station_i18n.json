@@ -1003,8 +1003,8 @@
  },
  "Den-en-chofu": {
   "ja": "田園調布",
-  "zh": "田園調布",
-  "ko": "데ㄴ에ㄴ쵸후",
+  "zh": "田园调布",
+  "ko": "덴엔초후",
   "en": "Den-en-chofu"
  },
  "Oimachi": {
@@ -1196,7 +1196,7 @@
  "Nishi-Shinjuku": {
   "ja": "西新宿",
   "zh": "西新宿",
-  "ko": "니시시ㄴ주쿠",
+  "ko": "니시신주쿠",
   "en": "Nishi-Shinjuku"
  },
  "Seibu-Shinjuku": {
@@ -2117,8 +2117,8 @@
  "Hachiman-Yama": {
   "ja": "八幡山",
   "zh": "八幡山",
-  "ko": "하치마ㄴ야마",
-  "en": "Hachiman-yama"
+  "ko": "하치만야마",
+  "en": "Hachimanyama"
  },
  "Shibasaki": {
   "ja": "柴崎",
@@ -2134,9 +2134,9 @@
  },
  "Tama-Reien": {
   "ja": "多磨霊園",
-  "zh": "多磨霊園",
-  "ko": "타마레이에ㄴ",
-  "en": "Tama-reien"
+  "zh": "多磨灵园",
+  "ko": "타마레이엔",
+  "en": "Tamareien"
  },
  "Seiseki-Sakuragaoka": {
   "ja": "聖蹟桜ヶ丘",
@@ -2393,7 +2393,7 @@
  "Shin-Matsuda": {
   "ja": "新松田",
   "zh": "新松田",
-  "ko": "시ㄴ마츠다",
+  "ko": "신마츠다",
   "en": "Shin-Matsuda"
  },
  "Kaisei": {
@@ -3617,7 +3617,7 @@
  "Aoyama-Itchome": {
   "ja": "青山一丁目",
   "zh": "青山一丁目",
-  "ko": "아오야마이치초메",
+  "ko": "아오야마이초메",
   "en": "Aoyama-itchome"
  },
  "Sannomi_Bashi": {
@@ -4019,7 +4019,7 @@
  "Sangen-jaya": {
   "ja": "三軒茶屋",
   "zh": "三轩茶屋",
-  "ko": "산겐차야",
+  "ko": "산겐자야",
   "en": "Sangenjaya"
  },
  "Nishi-taishido": {
@@ -8550,7 +8550,7 @@
   "ja": "上浜",
   "zh": "上浜",
   "ko": "카미하마",
-  "en": "Kamihama"
+  "en": "Kami-hama"
  },
  "Kakizaki": {
   "ja": "柿崎",
@@ -12531,7 +12531,7 @@
   "ja": "伊勢崎",
   "zh": "伊势崎",
   "ko": "이세사키",
-  "en": "Ise-saki"
+  "en": "Isesaki"
  },
  "Komagatake": {
   "ja": "駒ヶ岳",
@@ -13555,14 +13555,14 @@
  "Sakuranbo-Higashine": {
   "ja": "さくらんぼ東根",
   "zh": "樱桃东根",
-  "ko": "사쿠란보 히가시네",
-  "en": "Sakuranbo-Higashine"
+  "ko": "사쿠란보히가시네",
+  "en": "Sakuranbo-Higashi-Ne"
  },
  "Higashine": {
   "ja": "東根",
   "zh": "东根",
   "ko": "히가시네",
-  "en": "Higashine"
+  "en": "Higashi-Ne"
  },
  "Sodesaki": {
   "ja": "袖崎",
@@ -15410,7 +15410,7 @@
   "ja": "芦花公園",
   "zh": "芦花公园",
   "ko": "로카코엔",
-  "en": "Roka-koen"
+  "en": "Roka-kōen"
  },
  "Chitose-Karasuyama": {
   "ja": "千歳烏山",
@@ -15487,8 +15487,8 @@
  "Keio-Yomiuriland": {
   "ja": "京王よみうりランド",
   "zh": "京王读卖乐园",
-  "ko": "케이오요미우리랜드",
-  "en": "Keio-Yomiuriland"
+  "ko": "케이오요미우리랜도",
+  "en": "Keiō-yomiuri-land"
  },
  "Inagi": {
   "ja": "稲城",
@@ -15512,7 +15512,7 @@
   "ja": "京王堀之内",
   "zh": "京王堀之内",
   "ko": "케이오호리노우치",
-  "en": "Keio-Horinouchi"
+  "en": "Keiō-horinouchi"
  },
  "Tamasakai": {
   "ja": "多摩境",
@@ -15552,7 +15552,7 @@
  },
  "Hamadayama": {
   "ja": "浜田山",
-  "zh": "浜田山",
+  "zh": "滨田山",
   "ko": "하마다야마",
   "en": "Hamadayama"
  },
@@ -15896,7 +15896,7 @@
   "ja": "平沼橋",
   "zh": "平沼桥",
   "ko": "히라누마바시",
-  "en": "Hiranuma-bashi"
+  "en": "Hiranumabashi"
  },
  "Tennocho": {
   "ja": "天王町",
@@ -15926,7 +15926,7 @@
   "ja": "二俣川",
   "zh": "二俣川",
   "ko": "후타마타가와",
-  "en": "Futamatagawa"
+  "en": "Futamata-gawa"
  },
  "Seya": {
   "ja": "瀬谷",
@@ -15950,13 +15950,13 @@
   "ja": "緑園都市",
   "zh": "绿园都市",
   "ko": "료쿠엔토시",
-  "en": "Ryokuen-Toshi"
+  "en": "Ryokuentoshi"
  },
  "Izumi-Chuo": {
   "ja": "いずみ中央",
   "zh": "泉中央",
   "ko": "이즈미츄오",
-  "en": "Izumi-Chūō"
+  "en": "Izumi-chuo"
  },
  "Hazawa-Yokohama-Kokudai": {
   "ja": "羽沢横浜国大",
@@ -16208,7 +16208,7 @@
   "ja": "後三年",
   "zh": "后三年",
   "ko": "고산넨",
-  "en": "Go-Sannen"
+  "en": "Gosannen"
  },
  "Iizume": {
   "ja": "飯詰",
@@ -16262,7 +16262,7 @@
   "ja": "上飯島",
   "zh": "上饭岛",
   "ko": "카미이이지마",
-  "en": "Kami-Iijima"
+  "en": "Kamiiijima"
  },
  "Oiwake": {
   "ja": "追分",
@@ -16316,7 +16316,7 @@
   "ja": "鷹ノ巣",
   "zh": "鹰巢",
   "ko": "타카노스",
-  "en": "Takanosu"
+  "en": "Takano-su"
  },
  "Shimokawabe": {
   "ja": "下川沿",
@@ -16436,7 +16436,7 @@
   "ja": "十二湖",
   "zh": "十二湖",
   "ko": "주니코",
-  "en": "Jūniko"
+  "en": "Juni-ko"
  },
  "Mutsu-Sawabe": {
   "ja": "陸奥沢辺",
@@ -16550,7 +16550,7 @@
   "ja": "中浦",
   "zh": "中浦",
   "ko": "나카우라",
-  "en": "Nakaura"
+  "en": "Naka-ura"
  },
  "Kanazuka": {
   "ja": "金塚",
@@ -16712,7 +16712,7 @@
   "ja": "西目",
   "zh": "西目",
   "ko": "니시메",
-  "en": "Nishime"
+  "en": "Nishi-me"
  },
  "Ugo-Honjo": {
   "ja": "羽後本荘",
@@ -17133,7 +17133,7 @@
   "ja": "出雲崎",
   "zh": "出云崎",
   "ko": "이즈모자키",
-  "en": "Izumozaki"
+  "en": "Izumo-zaki"
  },
  "Kojidani": {
   "ja": "小島谷",
@@ -17187,7 +17187,7 @@
   "ja": "上今井",
   "zh": "上今井",
   "ko": "카미이마이",
-  "en": "Kamīmai"
+  "en": "Kami-Imai"
  },
  "Kasa": {
   "ja": "替佐",
@@ -17330,7 +17330,7 @@
   "ja": "磐梯町",
   "zh": "磐梯町",
   "ko": "반다이마치",
-  "en": "Bandaimachi",
+  "en": "Bandai-Machi",
   "zh-CN": "磐梯町"
  },
  "Higashiyama-Koen": {
@@ -18254,8 +18254,8 @@
  "TobuUtsunomiya": {
   "ja": "東武宇都宮",
   "zh": "东武宇都宫",
-  "ko": "도부우쓰노미야",
-  "en": "Tobu-Utsunomiya"
+  "ko": "토부우츠노미야",
+  "en": "Tobu-utsunomiya"
  },
  "Tomiura": {
   "ja": "富浦",
@@ -18884,7 +18884,7 @@
  },
  "Uguisuno": {
   "ja": "鶯野",
-  "en": "Uguisuno",
+  "en": "Uguisu-no",
   "ko": "우구이스노",
   "zh": "莺野"
  },
@@ -18962,8 +18962,8 @@
  },
  "Ononiimachi": {
   "ja": "小野新町",
-  "en": "Ononiimachi",
-  "ko": "오노니마치",
+  "en": "Ono-Niimachi",
+  "ko": "오노니이마치",
   "zh": "小野新町"
  },
  "Kanmata": {
@@ -19004,7 +19004,7 @@
  },
  "Nakayamajuku": {
   "ja": "中山宿",
-  "en": "Nakayamajuku",
+  "en": "Nakayama-juku",
   "ko": "나카야마주쿠",
   "zh": "中山宿"
  },
@@ -19388,7 +19388,9 @@
  },
  "Kitamori": {
   "ja": "北森",
-  "en": "Kitamori"
+  "en": "Kita-Mori",
+  "zh": "北森",
+  "ko": "키타모리"
  },
  "Komagata": {
   "ja": "駒形",
@@ -19428,7 +19430,9 @@
  },
  "Matsubarako": {
   "ja": "松原湖",
-  "en": "Matsubarako"
+  "en": "Matsubara-ko",
+  "zh": "松原湖",
+  "ko": "마츠바라코"
  },
  "Matsuo-Hachimantai": {
   "ja": "松尾八幡平",
@@ -19440,7 +19444,9 @@
  },
  "Mori-Miyanohara": {
   "ja": "森宮野原",
-  "en": "Mori-Miyanohara"
+  "en": "Morimiyanohara",
+  "zh": "森宫野原",
+  "ko": "모리미야노하라"
  },
  "Naka-Otsari": {
   "ja": "中大瀬",
@@ -19674,7 +19680,9 @@
  },
  "Togari-Nozawa-Onsen": {
   "ja": "戸狩野沢温泉",
-  "en": "Togari-Nozawa-Onsen"
+  "en": "Togari-Nozawaonsen",
+  "zh": "户狩野泽温泉",
+  "ko": "토가리노자와온센"
  },
  "Tomita": {
   "ja": "富田",
@@ -20308,7 +20316,7 @@
   "ja": "千葉みなと",
   "zh": "千叶港",
   "ko": "치바미나토",
-  "en": "Chiba-Minato"
+  "en": "Chibaminato"
  },
  "Shiyakusho": {
   "ja": "市役所前",
@@ -20440,7 +20448,7 @@
   "ja": "那須塩原",
   "zh": "那须盐原",
   "ko": "나스시오바라",
-  "en": "Nasushiobara"
+  "en": "Nasu-Shiobara"
  },
  "Shiroishi-Zao": {
   "ja": "白石蔵王",
