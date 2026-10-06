@@ -41,6 +41,11 @@ assert(/if \(!isFinite\(rawIdx\) \|\| rawIdx < 0\) return null;/.test(trackLayou
   "track layout must fail closed on missing/invalid stationIndex instead of coercing it to station 0");
 assert(/if \(!isFinite\(_rawStationIdx\) \|\| _rawStationIdx < 0 \|\| _rawStationIdx >= stationCoords\.length\) continue;/.test(renderer),
   "renderer must omit invalid position evidence instead of piling trains at station 0");
+
+assert(!/Math\.min\(_epPos\.stationIndex \|\| 0, stationCoords\.length - 1\)/.test(renderer),
+  "estimated-row bucketing must not coerce missing stationIndex to station 0");
+assert(/if \(!isFinite\(_epRawIdx\) \|\| _epRawIdx < 0 \|\| _epRawIdx >= stationCoords\.length\) continue;/.test(renderer),
+  "estimated rows must fail closed before occupancy/bucketing");
 assert(/TrainTrackLayout owns target geometry; this marker owns interpolation/.test(renderer),
   "renderer must animate TrainTrackLayout targets through the single per-marker RAF authority");
 assert(/cancelAnimationFrame\(existingIcon\._moveRaf\)/.test(renderer),
