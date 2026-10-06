@@ -89,6 +89,13 @@ assert(/var markerById = \{\};/.test(renderer) && /var _existingMarkers = trainL
   "renderer must index existing train markers once per render pass");
 assert(!/var _trainNodes = trainLayer\.querySelectorAll\('\[data-train-id\]'\)/.test(renderer),
   "renderer must not rescan every marker for every train row");
+var _moveDirCalls = (renderer.match(/_trainMoveDir\(/g) || []).length;
+assert(_moveDirCalls === 3,
+  "_trainMoveDir must remain display-only: one definition plus label create/move consumers");
+assert(/getDisplayMoveDir:\s*_trainMoveDir/.test(renderer),
+  "layout may receive renderer direction only through the explicitly display-only fallback hook");
+assert(!/getMoveDir:\s*_trainMoveDir/.test(renderer),
+  "renderer display direction must never be wired back as geometry authority");
 assert(/routePos:\s*routePos/.test(trackLayoutSource),
   "TrainTrackLayout must expose loop route position to the single marker animation authority");
 assert(/_useLoopRoute[\s\S]{0,900}_loopPosToXY\(_curRoutePos, _loopRect\)/.test(renderer),
