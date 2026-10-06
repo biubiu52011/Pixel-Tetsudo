@@ -136,11 +136,9 @@
 
   window.RunningChainResolver={
     init:init,
-    isDirectThroughService:function(a,b){if(!_initialized)buildIndexes();if(!a||!b||a===b)return false;return (_directThrough[a]||[]).indexOf(b)>=0;},
     getDirectThroughLines:function(lid){if(!_initialized)buildIndexes();return (_directThrough[lid]||[]).slice();},
     getResolutionContext:getResolutionContext,
     resolveTimetableChain:resolveTimetableChain,
-    hasRelation:function(a,b,rt){if(!_initialized)buildIndexes();if(!a||!b)return false;if(!rt||rt==="SERVICE_BOUNDARY")return !!(_boundaryMap[a]&&_boundaryMap[a][b]);if(rt==="BRANCH_OF")return _branchOfMap[a]===b||_branchOfMap[b]===a;if(rt==="THROUGH_SERVICE")return (_directThrough[a]||[]).indexOf(b)>=0;return false;},
     _getIndexes:function(){return{boundaries:_boundaryMap,branchOfMap:_branchOfMap,directThrough:_directThrough};}
   };
 
