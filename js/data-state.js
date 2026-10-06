@@ -109,7 +109,18 @@
       + '<button type="button" class="rs-state-retry" data-i18n="status.retry">' + escapeHtml(t("status.retry")) + '</button>'
       + '</div>';
     var retry = container.querySelector(".rs-state-retry");
-    if (retry) retry.addEventListener("click", function() { window.location.reload(); });
+    if (retry) retry.addEventListener("click", function() {
+      if (typeof container._pageStateRetry === "function") {
+        container._pageStateRetry();
+        return;
+      }
+      window.location.reload();
+    });
+  }
+
+  function setPageStateRetry(container, callback) {
+    if (!container) return;
+    container._pageStateRetry = typeof callback === "function" ? callback : null;
   }
 
   // Severity rank for system-level status aggregation (higher = more severe)
@@ -550,6 +561,7 @@
     renderList: renderList,
     renderSystemCardByCode: renderSystemCardByCode,
     renderPageState: renderPageState,
+    setPageStateRetry: setPageStateRetry,
     localizeInterval: _localizeInterval,
     getLineIdentity: getLineIdentity,
     setLines: setLines,
