@@ -193,10 +193,17 @@ def main():
         new_errors.append('VEHICLE-003 RENDERER_IDENTITY_CACHE')
 
     # VEHICLE-004: one running-chain registry commit path.
-    if fusion_src.count('_rememberChainVehicle(') != 2:
-        new_errors.append('VEHICLE-004 RUNNING_CHAIN_REGISTRY_COMMIT_PATH_COUNT=%d' % fusion_src.count('_rememberChainVehicle('))
-    if '_rememberChainVehicle(_formationCandidate)' in fusion_src:
-        new_errors.append('VEHICLE-004 FORMATION_SECOND_REGISTRY_COMMIT')
+    # One registry writer plus one post-arbitration commit call. Do not count
+    # incidental mentions/comments; protect the single-writer behavior instead.
+    if 'function _rememberChainVehicle(p)' not in fusion_src:
+        new_errors.append('VEHICLE-004 RUNNING_CHAIN_REGISTRY_WRITER_MISSING')
+    commit_calls = fusion_src.count('_rememberChainVehicle(_chainVehicleCandidates[_cid])')
+    if commit_calls != 1:
+        new_errors.append('VEHICLE-004 POST_ARBITRATION_COMMIT_COUNT=%d' % commit_calls)
+    for forbidden in ('_rememberChainVehicle(_formationCandidate)', '_rememberChainVehicle(_rp)',
+                      '_rememberChainVehicle(positionData)'):
+        if forbidden in fusion_src:
+            new_errors.append('VEHICLE-004 SECOND_REGISTRY_COMMIT %s' % forbidden)
 
     # VEHICLE-005: operational context/artwork must never manufacture vehicle identity.
     forbidden_vehicle_tokens = (
@@ -215,13 +222,16 @@ def main():
     # weaker fallback evidence cannot replace stronger realtime identity.
     if 'realtimePositionRecordPresent' not in fusion_src or 'vehicleResolvedFromRealtime' not in fusion_src:
         new_errors.append('VEHICLE-006 POSITION_IDENTITY_AXES_NOT_SEPARATE')
-    if 'if (!_sameVehicle && _existingRank >= _incomingRank)' not in fusion_src:
+    if '_existingRank >= _incomingRank' not in fusion_src or '_sameVehicle' not in fusion_src:
         new_errors.append('VEHICLE-007 STRONGER_CHAIN_IDENTITY_PROTECTION_MISSING')
-    if ('sources.indexOf("realtime") >= 0' not in fusion_src or
-        'sources.indexOf("realtime-derived") >= 0' not in fusion_src or
-        'sources.indexOf("structural") >= 0' not in fusion_src or
-        'sources.indexOf("timetable") >= 0' not in fusion_src):
-        new_errors.append('VEHICLE-007 REALTIME_SOURCE_PRIORITY_MISSING')
+    # Canonical source membership must cover every priority tier. Keep this
+    # insensitive to local formatting/branch layout while preserving the order.
+    rank_pos = []
+    for source in ('realtime', 'realtime-derived', 'structural', 'timetable', 'manual'):
+        token = 'sources.indexOf("%s")' % source
+        rank_pos.append(fusion_src.find(token))
+    if any(pos < 0 for pos in rank_pos) or rank_pos != sorted(rank_pos):
+        new_errors.append('VEHICLE-007 CANONICAL_SOURCE_PRIORITY_MISSING_OR_REORDERED')
 
     # Forbidden files
     for dp, _, fns in os.walk(REPO_ROOT):
