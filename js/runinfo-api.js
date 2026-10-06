@@ -247,28 +247,14 @@
         p = fetchODPT(op).then(function(records) {
           var scoped = selectScopedRecords(records, lineObj);
           if (scoped.length) {
-            var text = pickText(scoped, lineObj) || "";
+            var primary = pickRecord(scoped, lineObj) || scoped[0] || {};
+            var text = recordText(primary) || "";
             var ex = extractLinks(text);
-            var sourceUpdatedAt = null, validUntil = null, timeOfOrigin = null;
-            scoped.forEach(function(rec) {
-              if (!sourceUpdatedAt && rec && rec["dc:date"]) sourceUpdatedAt = rec["dc:date"];
-              if (!validUntil && rec && rec["dct:valid"]) validUntil = rec["dct:valid"];
-              if (!timeOfOrigin && rec && rec["odpt:timeOfOrigin"]) timeOfOrigin = rec["odpt:timeOfOrigin"];
-            });
+            var sourceUpdatedAt = primary["dc:date"] || null;
+            var validUntil = primary["dct:valid"] || null;
+            var timeOfOrigin = primary["odpt:timeOfOrigin"] || null;
             var fetchedAt = Date.now();
-            var evaluated = null;
-            if (window.RunInfoEvaluator && ex.cleanText) {
-              var primary = scoped[0] || {};
-              evaluated = window.RunInfoEvaluator.evaluate({
-                source: "odpt",
-                currentOperationalSource: true,
-                messageKind: primary["pt:messageKind"] || primary["odpt:trainInformationCategory"] || primary["odpt:category"],
-                structuredStatus: primary["odpt:trainInformationStatus"],
-                suspension: primary["odpt:suspension"] === true,
-                delay: primary["odpt:delay"] === true,
-                text: ex.cleanText
-              });
-            }
+            var evaluated = evaluateRecord(primary);
             return {
               status: aggregateStatus(scoped, lineObj) || "info",
               text: ex.cleanText,
