@@ -124,6 +124,22 @@ def main():
         if token not in running_chain_src:
             new_errors.append('RAILWAY-001 SERVICE_BOUNDARY_ADJACENCY_MISSING %s' % token)
 
+    # PRESENTATION-001: renderers consume passenger-facing grouping/hierarchy
+    # decisions through LinePresentationService instead of re-reading canonical
+    # presentation metadata or inferring branch relationships themselves.
+    presentation_src = _read_arch('js/line-presentation-service.js')
+    data_state_src = _read_arch('js/data-state.js')
+    for token in ('getPresentation: getPresentation', 'getPrimaryPresentation: getPrimaryPresentation',
+                  'getPresentationMembers: getPresentationMembers', 'isBranch: isBranch'):
+        if token not in presentation_src:
+            new_errors.append('PRESENTATION-001 SERVICE_API_MISSING %s' % token)
+    if '.presentation' in data_state_src:
+        new_errors.append('PRESENTATION-001 RENDERER_READS_PRESENTATION_METADATA')
+    if 'RunningChainResolver.getResolutionContext' in data_state_src:
+        new_errors.append('PRESENTATION-001 RENDERER_INFERS_SERVICE_RELATION')
+    if 'if (line.branchOf) continue;' in data_state_src:
+        new_errors.append('PRESENTATION-001 RENDERER_BRANCH_AUTHORITY_BYPASS')
+
     # REALTIME-001: TrainTrackLayout is the only train geometry authority.
     track_layout_src = _read_arch('js/train-track-layout.js')
     if 'window.TrainTrackLayout' not in renderer_src:
