@@ -36,9 +36,9 @@
   function _systemIdsForRoute(lineId) {
     if (!lineId) return null;
     var lines = getLinesData();
-    var line = lines && lines[lineId];
-    var ids = line && line.presentation && line.presentation.lineIds;
-    if (Array.isArray(ids) && ids.length > 1 && ids[0] === lineId) return ids.slice();
+    var ids = (window.LinePresentationService && window.LinePresentationService.getPresentationMembers)
+      ? window.LinePresentationService.getPresentationMembers(lineId, lines) : [];
+    if (ids.length > 1) return ids.slice();
     return null;
   }
 
@@ -110,7 +110,8 @@
       if (filterBarEl) filterBarEl.classList.add("hidden");
       if (detailEl) detailEl.classList.remove("hidden");
       var _title = (window.RailwayDB && window.RailwayDB.resolveLineName ? window.RailwayDB.resolveLineName(lineId, window.currentLang) : (fusedLine.nameEn || fusedLine.nameJa || lineId));
-      var _sys2 = fusedLine.presentation;
+      var _sys2 = (window.LinePresentationService && window.LinePresentationService.getPresentation)
+        ? window.LinePresentationService.getPresentation(lineId, getLinesData()) : null;
       if (_sys2) {
         var _lang2 = window.currentLang || "ja";
         if (_lang2 === "zh" && _sys2.nameZh) _title = _sys2.nameZh;
