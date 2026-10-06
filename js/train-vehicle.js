@@ -179,9 +179,6 @@
     };
   }
 
-  function getName(ctx) { return resolve(ctx).name; }
-  function getIconPath(ctx) { return resolve(ctx).iconPath; }
-
   // Daily formation evidence. This layer never guesses a formation:
   // it only propagates a dated, externally confirmed formation along an
   // already-resolved physical runningChainId.
@@ -261,8 +258,6 @@
   window.TrainVehicle = {
     version: '4.3.1102',
     resolve: resolve,
-    getName: getName,
-    getIconPath: getIconPath,
     registerFormationEvidence: registerFormationEvidence,
     resolveFormationEvidence: resolveFormationEvidence,
     clearFormationEvidenceOtherDates: clearFormationEvidenceOtherDates,
