@@ -121,6 +121,20 @@
     });
   }
 
+  function recordTime(rec) {
+    if (!rec) return null;
+    var raw = rec["dc:date"] || rec["odpt:timeOfOrigin"] || null;
+    if (!raw) return null;
+    var t = Date.parse(raw);
+    return isNaN(t) ? null : t;
+  }
+
+  function recordIsExpired(rec, now) {
+    if (!rec || !rec["dct:valid"]) return false;
+    var t = Date.parse(rec["dct:valid"]);
+    return !isNaN(t) && t < now;
+  }
+
   function pickRecord(records, line) {
     var scoped = selectScopedRecords(records, line);
     if (!scoped.length) return null;
@@ -133,6 +147,18 @@
       else realtime.push({ rec: rec, ev: ev });
     });
     var pool = realtime.length ? realtime : notices;
+    var now = Date.now();
+    var current = pool.filter(function(item) { return !recordIsExpired(item.rec, now); });
+    if (current.length) pool = current;
+
+    // When records carry source timestamps, the newest official update is the
+    // current truth. Severity only breaks ties within the same update moment.
+    var timed = pool.filter(function(item) { return recordTime(item.rec) != null; });
+    if (timed.length) {
+      var newest = Math.max.apply(null, timed.map(function(item) { return recordTime(item.rec); }));
+      pool = timed.filter(function(item) { return recordTime(item.rec) === newest; });
+    }
+
     var chosen = null, chosenRank = -1;
     pool.forEach(function(item) {
       var st = item.ev ? item.ev.status : parseStatus(item.rec);
