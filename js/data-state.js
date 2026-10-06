@@ -168,7 +168,7 @@
       // Whole card is loop lines only: show 環状 instead of a meaningless
       // first↔last interval (Yamanote/Oedo LOS cards).
       chipsHtml = '<span class="rs-sys-chip">' + escapeHtml(t('line.loop')) + '</span>';
-    } else if (mode === "trains" && intervalSegments.length > 0) {else if (mode === "trains" && intervalSegments.length > 0) {
+    } else if (mode === "trains" && intervalSegments.length > 0) {
       var merged = [intervalSegments[0]];
       for (var si = 1; si < intervalSegments.length; si++) {
         var prev = merged[merged.length - 1];
