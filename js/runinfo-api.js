@@ -141,12 +141,18 @@
     var rank = { suspended: 5, delayed: 4, info: 2, normal: 1, unknown: 0 };
     var realtime = [], notices = [];
     scoped.forEach(function(rec) {
-      if (!recordText(rec)) return;
       var ev = evaluateRecord(rec);
+      // Official structured status is valid current-state evidence even when
+      // the operator omits human-readable text.
+      var hasStructuredEvidence = !!(rec["odpt:trainInformationStatus"] ||
+        rec["odpt:suspension"] === true || rec["odpt:delay"] === true ||
+        (typeof rec["odpt:delay"] === "number" && rec["odpt:delay"] > 0));
+      if (!recordText(rec) && !hasStructuredEvidence) return;
       if (ev && ev.messageKind === "notice") notices.push({ rec: rec, ev: ev });
       else realtime.push({ rec: rec, ev: ev });
     });
     var pool = realtime.length ? realtime : notices;
+    if (!pool.length) return null;
     var now = Date.now();
     var current = pool.filter(function(item) { return !recordIsExpired(item.rec, now); });
     // An explicitly expired official record is historical context, never
