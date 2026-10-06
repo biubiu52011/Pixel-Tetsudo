@@ -499,7 +499,9 @@
         if (window.SharedTrackPairs && window.SharedTrackPairs.getSharedLines) deps = deps.concat(window.SharedTrackPairs.getSharedLines(id) || []);
       } catch(e) {}
       try {
-        if (line && Array.isArray(line.throughServices)) deps = deps.concat(line.throughServices);
+        if (window.RunningChainResolver && typeof window.RunningChainResolver.getDirectThroughLines === "function") {
+          deps = deps.concat(window.RunningChainResolver.getDirectThroughLines(id) || []);
+        }
       } catch(e) {}
       if (line.branchOf) deps.push(line.branchOf);
       if (line.branches) deps = deps.concat(line.branches);
@@ -967,8 +969,9 @@
             var isRinkaiTrain = (trainOperator === 'odpt.Operator:TWR' || trainOperator === 'TWR');
             // 临海线（TWR）列车开到了 JR 区间（Saikyo/Kawagoe）→ 用 Rinkai 车型
             // Read canonical line archive to determine whether lid serves Rinkai directly
-            var _tsRinkaiPartner = (window.UNIFIED_LINES && window.UNIFIED_LINES[lid] && Array.isArray(window.UNIFIED_LINES[lid].throughServices)) ? window.UNIFIED_LINES[lid].throughServices : [];
-            if (isRinkaiTrain && _tsRinkaiPartner.indexOf('Rinkai') >= 0) {
+            var _rinkaiPartners = (window.RunningChainResolver && typeof window.RunningChainResolver.getDirectThroughLines === "function")
+              ? window.RunningChainResolver.getDirectThroughLines(lid) : [];
+            if (isRinkaiTrain && _rinkaiPartners.indexOf('Rinkai') >= 0) {
               positionData.isRinkaiThrough = true;
             }
             // Zero-fallback vehicle contract: realtime records without explicit
@@ -1475,7 +1478,8 @@
         // Timetable prefetch is one-hop only. Do not turn graph reachability
         // into an assumed train chain; further segments are loaded when their
         // own evidence requires them.
-        var throughLines = (allLines && allLines[l.lineId] && Array.isArray(allLines[l.lineId].throughServices)) ? allLines[l.lineId].throughServices.slice() : [];
+        var throughLines = (window.RunningChainResolver && typeof window.RunningChainResolver.getDirectThroughLines === "function")
+          ? window.RunningChainResolver.getDirectThroughLines(l.lineId) : [];
         throughLines.forEach(function(tlid) {
           if (!seenLineIds[tlid]) {
             var throughLine = allLines && allLines[tlid];
@@ -1758,10 +1762,10 @@
     // v4.3.528: 手动时刻表按需加载（ODPT 无时刻表的 JR 地方线，打开线路时才注入该线文件）
     ensureManualTimetable: ensureManualTimetable,
     ensureTimetable: ensureTimetable,
-    // Direct canonical through-service neighbours.
+    // Direct operational neighbours come from the running-chain authority.
     getDirectThroughLines: function(lineId) {
-      var line = window.UNIFIED_LINES && window.UNIFIED_LINES[lineId];
-      return line && Array.isArray(line.throughServices) ? line.throughServices.slice() : [];
+      return (window.RunningChainResolver && typeof window.RunningChainResolver.getDirectThroughLines === "function")
+        ? window.RunningChainResolver.getDirectThroughLines(lineId) : [];
     },
     updateOdptData: function(delayData) {
       if (delayData && typeof delayData === 'object') {
