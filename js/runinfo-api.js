@@ -107,18 +107,43 @@
     return "";
   }
 
-  function pickText(records, line) {
+  function evaluateRecord(rec) {
+    if (!rec || !window.RunInfoEvaluator) return null;
+    return window.RunInfoEvaluator.evaluate({
+      source: "odpt",
+      currentOperationalSource: true,
+      structuredStatus: rec["odpt:trainInformationStatus"],
+      messageKind: rec["pt:messageKind"] || rec["odpt:trainInformationCategory"] || rec["odpt:category"],
+      suspension: rec["odpt:suspension"] === true,
+      delay: rec["odpt:delay"] === true,
+      delayMinutes: (typeof rec["odpt:delay"] === "number") ? rec["odpt:delay"] : null,
+      text: recordText(rec)
+    });
+  }
+
+  function pickRecord(records, line) {
     var scoped = selectScopedRecords(records, line);
     if (!scoped.length) return null;
-    var rank = { suspended: 5, delayed: 4, notice: 3, info: 2, normal: 1, unknown: 0 };
-    var chosen = null, chosenRank = -1;
+    var rank = { suspended: 5, delayed: 4, info: 2, normal: 1, unknown: 0 };
+    var realtime = [], notices = [];
     scoped.forEach(function(rec) {
-      var text = recordText(rec);
-      if (!text) return;
-      var st = parseStatus(rec);
-      var rr = rank[st] == null ? 0 : rank[st];
-      if (!chosen || rr > chosenRank) { chosen = rec; chosenRank = rr; }
+      if (!recordText(rec)) return;
+      var ev = evaluateRecord(rec);
+      if (ev && ev.messageKind === "notice") notices.push({ rec: rec, ev: ev });
+      else realtime.push({ rec: rec, ev: ev });
     });
+    var pool = realtime.length ? realtime : notices;
+    var chosen = null, chosenRank = -1;
+    pool.forEach(function(item) {
+      var st = item.ev ? item.ev.status : parseStatus(item.rec);
+      var rr = rank[st] == null ? 0 : rank[st];
+      if (!chosen || rr > chosenRank) { chosen = item.rec; chosenRank = rr; }
+    });
+    return chosen;
+  }
+
+  function pickText(records, line) {
+    var chosen = pickRecord(records, line);
     return chosen ? recordText(chosen) : null;
   }
 
@@ -126,17 +151,7 @@
   function parseStatus(rec) {
     if (!rec) return "unknown";
     if (window.RunInfoEvaluator) {
-      var ti = rec["odpt:trainInformationText"] || rec["odpt:text"] || "";
-      return window.RunInfoEvaluator.evaluate({
-        source: "odpt",
-        currentOperationalSource: true,
-        structuredStatus: rec["odpt:trainInformationStatus"],
-        messageKind: rec["pt:messageKind"] || rec["odpt:trainInformationCategory"] || rec["odpt:category"],
-        suspension: rec["odpt:suspension"] === true,
-        delay: rec["odpt:delay"] === true,
-        delayMinutes: (typeof rec["odpt:delay"] === "number") ? rec["odpt:delay"] : null,
-        text: ti
-      }).status;
+      return evaluateRecord(rec).status;
     }
     return "info";
   }
