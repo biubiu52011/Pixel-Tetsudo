@@ -110,6 +110,12 @@
     return {runningChainId:"rc:"+ids.join("~"),evidence:strong?"CONFIRMED_SEGMENT_GRAPH+TIMETABLE_ID":(numberChanged?"CONFIRMED_UNIQUE_BOUNDARY+TRAIN_NUMBER_CHANGED":"CONFIRMED_SEGMENT_GRAPH+TRAIN_NUMBER"),timeGapMin:maxGap,segmentCount:ids.length};
   }
 
+  function isThroughAtStation(lineA,lineB,stationId){
+    if(!_initialized)buildIndexes();
+    var joins=(_boundaryMap[lineA]&&_boundaryMap[lineA][lineB])||[];
+    return joins.indexOf(stationId)>=0;
+  }
+
   function getResolutionContext(lineId, availableLineIds){
     if(!_initialized)buildIndexes();
     var allowed=null;
@@ -137,6 +143,7 @@
   window.RunningChainResolver={
     init:init,
     getDirectThroughLines:function(lid){if(!_initialized)buildIndexes();return (_directThrough[lid]||[]).slice();},
+    isThroughAtStation:isThroughAtStation,
     getResolutionContext:getResolutionContext,
     resolveTimetableChain:resolveTimetableChain,
     _getIndexes:function(){return{boundaries:_boundaryMap,branchOfMap:_branchOfMap,directThrough:_directThrough};}
