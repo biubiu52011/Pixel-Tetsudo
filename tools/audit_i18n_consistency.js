@@ -231,7 +231,14 @@ function main() {
     'status.display_unavailable_hint',
     'status.fetch_unavailable',
     'status.fetch_unavailable_hint',
-    'status.retry'
+    'status.retry',
+    'status.timeout',
+    'status.timeout_hint',
+    'status.offline',
+    'status.offline_hint',
+    'trains.map_error',
+    'tourism.loc_error',
+    'detail.unavailable'
   ];
   userStateKeys.forEach((key) => {
     LANGS.forEach((lang) => {
