@@ -1083,12 +1083,45 @@
       var trainUid = p.runningChainId || p.trainId || ("train_" + pi);
       updatedIds[trainUid] = true;
       
+      // Resolve the required marker representation before reusing DOM.
+      // One physical train UID must own exactly one marker: authoritative vehicle
+      // artwork OR the fallback circle, never both.
+      var _identityExactNow = p.vehicleIdentityStatus === "EXACT" ||
+        (p.vehicleResolution && p.vehicleResolution.identityStatus === "EXACT");
+      var _hasRealtimeVehicleNow = _identityExactNow &&
+        p.positionSource === "realtime-api" &&
+        (p.vehicleResolvedFromRealtime === true ||
+         p.vehicleResolvedFromRealtimeDerived === true) && !!p.vehicleIconPath;
+      var _hasInheritedVehicleNow = _identityExactNow &&
+        p.vehicleInheritedFromRunningChain === true &&
+        !!p.runningChainId && !!p.vehicleIconPath;
+      var _hasUpstreamVehicleNow = _identityExactNow &&
+        p.vehicleResolvedUpstream === true && !!p.vehicleIconPath;
+      var _wantsImageMarker = _hasRealtimeVehicleNow || _hasInheritedVehicleNow || _hasUpstreamVehicleNow;
+
       var existingIcon = null;
       var _trainNodes = trainLayer.querySelectorAll('[data-train-id]');
       for (var _tni = 0; _tni < _trainNodes.length; _tni++) {
-        if (_trainNodes[_tni].getAttribute('data-train-id') === String(trainUid)) {
+        if (_trainNodes[_tni].getAttribute('data-train-id') !== String(trainUid)) continue;
+        if (!existingIcon) {
           existingIcon = _trainNodes[_tni];
-          break;
+        } else {
+          // Heal any legacy/previous-render duplicate immediately. End-of-pass
+          // cleanup cannot remove it because the shared UID is still active.
+          if (_trainNodes[_tni]._moveRaf) cancelAnimationFrame(_trainNodes[_tni]._moveRaf);
+          if (_trainNodes[_tni].parentNode) _trainNodes[_tni].parentNode.removeChild(_trainNodes[_tni]);
+        }
+      }
+
+      if (existingIcon) {
+        var _existingIsImage = String(existingIcon.tagName || '').toLowerCase() === 'image';
+        if (_existingIsImage !== _wantsImageMarker) {
+          // Vehicle evidence may appear/disappear between polls. Never animate a
+          // circle as though it were an image (or vice versa); replace the marker
+          // while preserving the current display position as the new start point.
+          if (existingIcon._moveRaf) cancelAnimationFrame(existingIcon._moveRaf);
+          if (existingIcon.parentNode) existingIcon.parentNode.removeChild(existingIcon);
+          existingIcon = null;
         }
       }
       
