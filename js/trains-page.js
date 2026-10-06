@@ -120,6 +120,14 @@
         else if (_sys2.nameJa) _title = _sys2.nameJa;
       }
       if (titleEl) titleEl.textContent = _title;
+      if (mapEl && window.DataState && window.DataState.setPageStateRetry) {
+        window.DataState.setPageStateRetry(mapEl, function() {
+          var latest = getLinesData()[lineId];
+          if (!latest || currentLine !== lineId) return;
+          renderTrainMap(mapEl, latest, lineId);
+          _scheduleRealtimeExpiryRefresh(lineId, latest);
+        });
+      }
       if (mapEl) renderTrainMap(mapEl, fusedLine, lineId);
       _scheduleRealtimeExpiryRefresh(lineId, fusedLine);
       // v4.3.528: 手动时刻表按需加载——ODPT 无数据的 JR 地方线打开时才注入该线文件。
