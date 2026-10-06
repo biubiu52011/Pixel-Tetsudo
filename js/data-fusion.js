@@ -790,7 +790,8 @@
             stationKey = window.RuntimeConfig.STATION_ALIAS[stationKey];
           }
           var delayMin = t["odpt:delay"] != null ? (parseInt(t["odpt:delay"], 10) || 0) : 0;
-          var trainId = t["odpt:trainNumber"] || t["odpt:train"] || "";
+          var trainId = t["odpt:train"] || t["odpt:trainNumber"] || "";
+          var trainNumber = String(t["odpt:trainNumber"] || t["odpt:train"] || "");
           var railDirection = t["odpt:railDirection"] || "";
           var directionName = "";
           if (railDirection) {
@@ -861,7 +862,7 @@
             // disambiguate the realtime record.
             if (!targetLine) {
               console.debug("[DataFusion] ambiguous realtime line identity", {
-                trainNumber: trainId,
+                trainNumber: trainNumber,
                 railway: railwayName,
                 station: stationKey,
                 candidates: matchingLines.map(function(ml) { return ml.lid; })
@@ -884,7 +885,7 @@
               stationId: stationKey,
               sourceRailway: railwayName,
               trainId: trainId,
-              trainNumber: String(t["odpt:trainNumber"] || trainId),
+              trainNumber: trainNumber,
               delayMin: delayMin,
               railDirection: directionName,
               destinationStation: destStation,
