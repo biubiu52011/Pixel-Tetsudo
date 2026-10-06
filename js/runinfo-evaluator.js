@@ -205,7 +205,10 @@
     if (explicit) return explicit;
     // Structured operational signals are current operating-state evidence.
     if (normalizeStructuredStatus(input.structuredStatus) || input.suspension === true || input.delay === true || (typeof input.delayMinutes === "number" && input.delayMinutes > 0)) return "realtime";
-    // Do not infer notice/realtime from causes such as 台風, 人身事故, 倒木.
+    // A caller may assert that the record came from a current official
+    // operational-status endpoint. This is source provenance, not text guessing.
+    if (input.currentOperationalSource === true) return "realtime";
+    // Do not infer notice/realtime from causes or operational-looking prose alone.
     return "unknown";
   }
 
