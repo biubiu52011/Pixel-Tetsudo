@@ -116,7 +116,14 @@ function applyData(data, i18n) {
     // on every resolveStationName miss (called ~3500× from StationResolver._buildIndex).
     _i18nNormMap = {};
     for (var _ik in _stationI18n) {
-      _i18nNormMap[_ik.replace(/-/g, '')] = _ik;
+      var _norm = _ik.replace(/-/g, '').toLowerCase();
+      if (!Object.prototype.hasOwnProperty.call(_i18nNormMap, _norm)) {
+        _i18nNormMap[_norm] = _ik;
+      } else if (_i18nNormMap[_norm] !== _ik) {
+        // Ambiguous normalized IDs must never silently overwrite one another.
+        // Exact station IDs remain authoritative; null disables fuzzy fallback.
+        _i18nNormMap[_norm] = null;
+      }
     }
     window.STATION_COORDS = {};
     Object.keys(data.stations).forEach(function(id) {
@@ -907,7 +914,7 @@ function applyData(data, i18n) {
         }
         // v4.3.962: 宽松匹配——直接查找没命中时，去掉连字符再查（NaritaAirportTerminal1 vs Narita-Airport-Terminal-1）
         if (_i18nNormMap) {
-          var _normId = String(id).replace(/-/g, '');
+          var _normId = String(id).replace(/-/g, '').toLowerCase();
           var _normKey = _i18nNormMap[_normId];
           if (_normKey) {
             var _i18n2 = _stationI18n[_normKey];
