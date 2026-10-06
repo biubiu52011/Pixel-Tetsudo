@@ -110,11 +110,26 @@
       + '</div>';
     var retry = container.querySelector(".rs-state-retry");
     if (retry) retry.addEventListener("click", function() {
+      if (retry.disabled) return;
+      retry.disabled = true;
+      var fallbackReload = function() { window.location.reload(); };
       if (typeof container._pageStateRetry === "function") {
-        container._pageStateRetry();
-        return;
+        try {
+          var result = container._pageStateRetry();
+          if (result && typeof result.then === "function") {
+            result.catch(function(err) {
+              console.error("[DataState] page retry failed", err);
+              fallbackReload();
+            });
+          }
+          return;
+        } catch (err) {
+          console.error("[DataState] page retry failed", err);
+          fallbackReload();
+          return;
+        }
       }
-      window.location.reload();
+      fallbackReload();
     });
   }
 
