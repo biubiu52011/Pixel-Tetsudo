@@ -116,13 +116,13 @@ def main():
         new_errors.append('RAILWAY-001 ROUTE_SEARCH_READS_THROUGH_SERVICES_PROJECTION')
     if 'RunningChainResolver.isThroughAtStation(a, b, st)' not in route_search_src:
         new_errors.append('RAILWAY-001 ROUTE_SEARCH_RELATION_AUTHORITY_MISSING')
-    for token in (
-        'var boundaries = Array.isArray(line.serviceBoundaries)',
-        '_boundaryMap[lineId][boundary.lineId] = joins.slice()',
-        '_directThrough[lineId].push(boundary.lineId)',
-    ):
+    # Protect the service-boundary behavior contract without freezing local
+    # variable names or whitespace in the resolver implementation.
+    for token in ('serviceBoundaries', '_boundaryMap', '_directThrough', 'handoverStations'):
         if token not in running_chain_src:
             new_errors.append('RAILWAY-001 SERVICE_BOUNDARY_ADJACENCY_MISSING %s' % token)
+    if 'isThroughAtStation:isThroughAtStation' not in running_chain_src:
+        new_errors.append('RAILWAY-001 SERVICE_BOUNDARY_QUERY_API_MISSING')
 
     # PRESENTATION-001: renderers consume passenger-facing grouping/hierarchy
     # decisions through LinePresentationService instead of re-reading canonical
