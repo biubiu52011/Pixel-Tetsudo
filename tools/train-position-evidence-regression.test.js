@@ -225,4 +225,12 @@ assert(fusionSource.includes('if (_chainVehicleRegistry[_cid]) _chainVehicleRegi
 assert(fusionSource.includes('if (!_activeChainIds[_cid] && (!_cv || !_cv.lastSeenAt ||'),
   'vehicle identity may expire only after the physical running chain is absent, not merely because realtime position disappeared');
 
+const runningChainSource = fs.readFileSync('js/running-chain-resolver.js','utf8');
+assert(!runningChainSource.includes('line.throughServices'),
+  'running-chain adjacency must not read throughServices compatibility projection');
+assert(runningChainSource.includes('var boundaries = Array.isArray(line.serviceBoundaries)'),
+  'running-chain adjacency must originate from canonical serviceBoundaries');
+assert(runningChainSource.includes('_directThrough[lineId].push(boundary.lineId)'),
+  'direct-through runtime index must be projected from validated service boundaries');
+
 console.log("train-position-evidence-regression: PASS");
