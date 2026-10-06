@@ -1013,6 +1013,70 @@
     for (var i = 0; i < labels.length; i++) labels[i].parentNode.removeChild(labels[i]);
   }
 
+  function _trainMarkerSpec(p) {
+    var exact = p && (p.vehicleIdentityStatus === "EXACT" ||
+      (p.vehicleResolution && p.vehicleResolution.identityStatus === "EXACT"));
+    var realtime = exact && p.positionSource === "realtime-api" &&
+      (p.vehicleResolvedFromRealtime === true || p.vehicleResolvedFromRealtimeDerived === true) &&
+      !!p.vehicleIconPath;
+    var inherited = exact && p.vehicleInheritedFromRunningChain === true &&
+      !!p.runningChainId && !!p.vehicleIconPath;
+    var upstream = exact && p.vehicleResolvedUpstream === true && !!p.vehicleIconPath;
+    return {
+      kind: (realtime || inherited || upstream) ? "image" : "circle",
+      iconSrc: (realtime || inherited || upstream) ? p.vehicleIconPath : "",
+      className: p && p.estimated === true ? "train-icon estimated" : "train-icon"
+    };
+  }
+
+  function _createTrainMarker(trainLayer, svgNS, trainUid, spec, px, py, p, lineId, isLoop, color, loc) {
+    var marker;
+    if (spec.kind === "image") {
+      marker = document.createElementNS(svgNS, "image");
+      marker.setAttribute("width", "14");
+      marker.setAttribute("height", "18");
+      marker.setAttribute("href", spec.iconSrc);
+      marker.setAttribute("preserveAspectRatio", "xMidYMid meet");
+      var tip = [];
+      if (p.trainType) {
+        var defs = window.TRAIN_TYPE_NAMES || {};
+        var def = defs[p.trainType];
+        var typeText = def ? (def[window.currentLang] || def.ja) : "";
+        if (typeText) tip.push(typeText);
+      }
+      if (p.vehicleType) tip.push(p.vehicleType);
+      else if (p.trainClass) tip.push(p.trainClass);
+      if (p.destinationStation) tip.push(_trainDestText(p.destinationStation));
+      if (tip.length) marker.setAttribute("title", tip.join(" | "));
+    } else {
+      marker = document.createElementNS(svgNS, "g");
+      var outer = document.createElementNS(svgNS, "circle");
+      outer.setAttribute("cx", "0");
+      outer.setAttribute("cy", "0");
+      outer.setAttribute("r", "8");
+      outer.setAttribute("fill", color);
+      outer.setAttribute("opacity", "0.9");
+      marker.appendChild(outer);
+      var inner = document.createElementNS(svgNS, "circle");
+      inner.setAttribute("cx", "0");
+      inner.setAttribute("cy", "0");
+      inner.setAttribute("r", "3");
+      inner.setAttribute("fill", "#fff");
+      marker.appendChild(inner);
+    }
+    marker.setAttribute("data-train-id", String(trainUid));
+    marker.setAttribute("data-marker-kind", spec.kind);
+    marker.setAttribute("class", spec.className);
+    _setTrainIconPosition(marker, px, py, p, lineId, isLoop);
+    marker._displayX = px;
+    marker._displayY = py;
+    marker._displayLineId = lineId;
+    if (loc && loc.idx != null && isFinite(Number(loc.idx))) marker._displayStationIdx = Number(loc.idx);
+    if (loc && loc.routePos != null && isFinite(Number(loc.routePos))) marker._displayRoutePos = Number(loc.routePos);
+    trainLayer.appendChild(marker);
+    return marker;
+  }
+
   function updateTrainLayer(svg, positions, stationCoords, lineId, line, geometry) {
     var trainLayer = svg.querySelector('.train-layer');
     if (!trainLayer) return;
@@ -1083,36 +1147,23 @@
       var trainUid = p.runningChainId || p.trainId || ("train_" + pi);
       updatedIds[trainUid] = true;
       
-      // Resolve the required marker representation before reusing DOM.
-      // One physical train UID must own exactly one marker: authoritative vehicle
-      // artwork OR the fallback circle, never both.
-      var _identityExactNow = p.vehicleIdentityStatus === "EXACT" ||
-        (p.vehicleResolution && p.vehicleResolution.identityStatus === "EXACT");
-      var _hasRealtimeVehicleNow = _identityExactNow &&
-        p.positionSource === "realtime-api" &&
-        (p.vehicleResolvedFromRealtime === true ||
-         p.vehicleResolvedFromRealtimeDerived === true) && !!p.vehicleIconPath;
-      var _hasInheritedVehicleNow = _identityExactNow &&
-        p.vehicleInheritedFromRunningChain === true &&
-        !!p.runningChainId && !!p.vehicleIconPath;
-      var _hasUpstreamVehicleNow = _identityExactNow &&
-        p.vehicleResolvedUpstream === true && !!p.vehicleIconPath;
-      var _wantsImageMarker = _hasRealtimeVehicleNow || _hasInheritedVehicleNow || _hasUpstreamVehicleNow;
-
+      var markerSpec = _trainMarkerSpec(p);
       var existingIcon = null;
       var _trainNodes = trainLayer.querySelectorAll('[data-train-id]');
       for (var _tni = 0; _tni < _trainNodes.length; _tni++) {
         if (_trainNodes[_tni].getAttribute('data-train-id') !== String(trainUid)) continue;
-        if (!existingIcon) {
-          existingIcon = _trainNodes[_tni];
-        } else {
-          // Heal any legacy/previous-render duplicate immediately. End-of-pass
-          // cleanup cannot remove it because the shared UID is still active.
+        if (!existingIcon) existingIcon = _trainNodes[_tni];
+        else {
           if (_trainNodes[_tni]._moveRaf) cancelAnimationFrame(_trainNodes[_tni]._moveRaf);
           if (_trainNodes[_tni].parentNode) _trainNodes[_tni].parentNode.removeChild(_trainNodes[_tni]);
         }
       }
-
+      if (existingIcon && existingIcon.getAttribute("data-marker-kind") !== markerSpec.kind) {
+        if (existingIcon._moveRaf) cancelAnimationFrame(existingIcon._moveRaf);
+        if (existingIcon.parentNode) existingIcon.parentNode.removeChild(existingIcon);
+        existingIcon = null;
+      }
+      
       if (existingIcon) {
         var _existingIsImage = String(existingIcon.tagName || '').toLowerCase() === 'image';
         if (_existingIsImage !== _wantsImageMarker) {
@@ -1249,90 +1300,8 @@
           existingIcon._moveRaf = requestAnimationFrame(_animFrame);
         }
       } else {
-        // Create new train icon
-        // Zero-fallback rendering contract: vehicle identity is resolved upstream.
-        // The renderer never re-resolves, caches, substitutes, or resurrects a
-        // vehicle icon. Every image path is gated again by EXACT identity here so
-        // a stale/incorrect authority flag alone can never render concrete artwork.
-        var _identityExact = p.vehicleIdentityStatus === "EXACT" ||
-          (p.vehicleResolution && p.vehicleResolution.identityStatus === "EXACT");
-        var _hasRealtimeVehicleEvidence = _identityExact &&
-          p.positionSource === "realtime-api" &&
-          (p.vehicleResolvedFromRealtime === true ||
-           p.vehicleResolvedFromRealtimeDerived === true) && !!p.vehicleIconPath;
-        var _hasInheritedChainVehicle = _identityExact &&
-          p.vehicleInheritedFromRunningChain === true &&
-          !!p.runningChainId && !!p.vehicleIconPath;
-        var _hasUpstreamVehicle = _identityExact &&
-          p.vehicleResolvedUpstream === true && !!p.vehicleIconPath;
-        var _hasAuthoritativeVehicle = _hasRealtimeVehicleEvidence || _hasInheritedChainVehicle || _hasUpstreamVehicle;
-        var iconSrc = _hasAuthoritativeVehicle ? p.vehicleIconPath : '';
-
-        var isEst = p.estimated === true;
-        var iconCls = isEst ? "train-icon estimated" : "train-icon";
-        
-        if (iconSrc) {
-          var newIcon = document.createElementNS(svgNS, "image");
-          newIcon.setAttribute("data-train-id", String(trainUid));
-          newIcon.setAttribute("width", "14");
-          newIcon.setAttribute("height", "18");
-          newIcon.setAttribute("href", iconSrc);
-          newIcon.setAttribute("class", iconCls);
-          newIcon.setAttribute("preserveAspectRatio", "xMidYMid meet");
-          // v4.3.53x: 列车信息工具提示（种别/车型/行先）——车型取 manual vehicleType，无则回退 trainClass
-          var _tip = [];
-          if (p.trainType) {
-            var _tdefs = window.TRAIN_TYPE_NAMES || {};
-            var _td = _tdefs[p.trainType];
-            // v4.3.963: 查不到种别名表时不露罗马字
-            var _tt = _td ? (_td[window.currentLang] || _td.ja) : '';
-            if (_tt) _tip.push(_tt);
-          }
-          if (p.vehicleType) _tip.push(p.vehicleType);
-          else if (p.trainClass) _tip.push(p.trainClass);
-          if (p.destinationStation) _tip.push(_trainDestText(p.destinationStation));
-          if (_tip.length) newIcon.setAttribute("title", _tip.join(" | "));
-          // v4.3.6xx: 方向翻转——非环线 Outbound（下行）列车图标水平翻转
-          // Inbound（上行）保持原方向（车头向右），Outbound（下行）车头向左
-          // SVG image 翻转：translate 到中心后 scale(-1,1) 再 translate 回来
-          _setTrainIconPosition(newIcon, px, py, p, lineId, isLoop);
-          newIcon._displayX = px;
-          newIcon._displayY = py;
-          newIcon._displayLineId = lineId;
-          if (loc && loc.idx != null && isFinite(Number(loc.idx))) newIcon._displayStationIdx = Number(loc.idx);
-          if (loc && loc.routePos != null && isFinite(Number(loc.routePos))) newIcon._displayRoutePos = Number(loc.routePos);
-          trainLayer.appendChild(newIcon);
-          appendTrainLabels(trainLayer, svgNS, trainUid, px, py, p, lineId);
-        } else {
-          // Fallback: circle icon
-          var newCircle = document.createElementNS(svgNS, "g");
-          newCircle.setAttribute("data-train-id", String(trainUid));
-          newCircle.setAttribute("class", iconCls);
-          newCircle.setAttribute("transform", "translate(" + px + "," + py + ")");
-          newCircle._displayX = px;
-          newCircle._displayY = py;
-          newCircle._displayLineId = lineId;
-          if (loc && loc.idx != null && isFinite(Number(loc.idx))) newCircle._displayStationIdx = Number(loc.idx);
-          if (loc && loc.routePos != null && isFinite(Number(loc.routePos))) newCircle._displayRoutePos = Number(loc.routePos);
-          
-          var outerCircle = document.createElementNS(svgNS, "circle");
-          outerCircle.setAttribute("cx", "0");
-          outerCircle.setAttribute("cy", "0");
-          outerCircle.setAttribute("r", "8");
-          outerCircle.setAttribute("fill", color);
-          outerCircle.setAttribute("opacity", "0.9");
-          newCircle.appendChild(outerCircle);
-          
-          var innerCircle = document.createElementNS(svgNS, "circle");
-          innerCircle.setAttribute("cx", "0");
-          innerCircle.setAttribute("cy", "0");
-          innerCircle.setAttribute("r", "3");
-          innerCircle.setAttribute("fill", "#fff");
-          newCircle.appendChild(innerCircle);
-          
-          trainLayer.appendChild(newCircle);
-          appendTrainLabels(trainLayer, svgNS, trainUid, px, py, p, lineId);
-        }
+        existingIcon = _createTrainMarker(trainLayer, svgNS, trainUid, markerSpec, px, py, p, lineId, isLoop, color, loc);
+        appendTrainLabels(trainLayer, svgNS, trainUid, px, py, p, lineId);
       }
     }
     
