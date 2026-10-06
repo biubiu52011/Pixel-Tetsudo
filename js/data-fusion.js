@@ -457,7 +457,9 @@
       // Direct canonical through neighbours are independent of shared-track
       // membership.  The old nesting made this path unreachable for lines with
       // no SharedTrackPairs entry (including Keiyo).
-      var _throughLines = (window.UNIFIED_LINES && window.UNIFIED_LINES[lineId] && Array.isArray(window.UNIFIED_LINES[lineId].throughServices)) ? window.UNIFIED_LINES[lineId].throughServices.slice() : [];
+      var _throughLines = (window.RunningChainResolver && typeof window.RunningChainResolver.getDirectThroughLines === "function")
+        ? window.RunningChainResolver.getDirectThroughLines(lineId)
+        : [];
       for (var _tl = 0; _tl < _throughLines.length; _tl++) {
         var _tlLine = _throughLines[_tl];
         var _tlPositions = odptData.realtimePositions[_tlLine] || [];
