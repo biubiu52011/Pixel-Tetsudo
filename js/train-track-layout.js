@@ -138,7 +138,7 @@
       return null;
     }
     if (toIdx == null) {
-      var moveDir = opts.getMoveDir ? opts.getMoveDir(position, lineId) : null;
+      var moveDir = opts.getDisplayMoveDir ? opts.getDisplayMoveDir(position, lineId) : null;
       var _loopDirection = String(position && position.railDirection || "").split(/[:.]/).pop();
       var _closedLoop = !!(stationCoords && stationCoords._loopRect && points === stationCoords);
       if (_closedLoop && /^(InnerLoop|Inner|OuterLoop|Outer)$/.test(_loopDirection)) {
@@ -162,17 +162,20 @@
     return { point: basePt, idx: idx, nextIdx: toIdx, tangent: t, points: points };
   }
 
+  function resolvedMoveDir(position, base, lineId, opts) {
+    var rd = String(position && position.railDirection || "").split(/[:.]/).pop();
+    if (/^(InnerLoop|Inner)$/.test(rd)) return "up";
+    if (/^(OuterLoop|Outer)$/.test(rd)) return "down";
+    if (base && base.nextIdx < base.idx) return "up";
+    if (base && base.nextIdx > base.idx) return "down";
+    return opts && opts.getDisplayMoveDir ? opts.getDisplayMoveDir(position, lineId) : null;
+  }
+
   function resolve(position, positions, index, stationCoords, geometry, lineId, opts, occupancy) {
     opts = opts || {};
     var base = resolveBase(position, stationCoords, geometry, lineId, opts);
     if (!base) return null;
-    var moveDir = null;
-    var _resolvedRailDirection = String(position && position.railDirection || "").split(/[:.]/).pop();
-    if (/^(InnerLoop|Inner)$/.test(_resolvedRailDirection)) moveDir = "up";
-    else if (/^(OuterLoop|Outer)$/.test(_resolvedRailDirection)) moveDir = "down";
-    else if (base.nextIdx < base.idx) moveDir = "up";
-    else if (base.nextIdx > base.idx) moveDir = "down";
-    else moveDir = opts.getMoveDir ? opts.getMoveDir(position, lineId) : null;
+    var moveDir = resolvedMoveDir(position, base, lineId, opts);
     // Geometry direction comes from authoritative loop direction / resolved
     // segment whenever available. Destination heuristics are display fallback.
     var lane = laneSign(moveDir, position && position.railDirection);
@@ -248,7 +251,7 @@
     var synthetic = function (p, i) {
       var base = resolver(p, i);
       if (!base) return null;
-      var moveDir = opts && opts.getMoveDir ? opts.getMoveDir(p, lineId) : null;
+      var moveDir = resolvedMoveDir(p, base, lineId, opts);
       var lane = laneSign(moveDir, p && p.railDirection);
       if (lineId === "NewShuttle" && (Math.min(base.idx, base.nextIdx) >= 8 || (base.idx === 0 && base.nextIdx === 0))) lane = 0;
       return { key: trackKey(p, base.idx, base.nextIdx, lane) };
