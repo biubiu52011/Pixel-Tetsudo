@@ -39,8 +39,10 @@ assert(!/transition:\s*x\s+14s[\s\S]{0,120}y\s+14s/.test(trainsCssSource),
   "CSS must not compete with the JS/layout train-marker animation authority");
 assert(/if \(!isFinite\(rawIdx\) \|\| rawIdx < 0\) return null;/.test(trackLayoutSource),
   "track layout must fail closed on missing/invalid stationIndex instead of coercing it to station 0");
-assert(/if \(!isFinite\(_rawStationIdx\) \|\| _rawStationIdx < 0 \|\| _rawStationIdx >= stationCoords\.length\) continue;/.test(renderer),
-  "renderer must omit invalid position evidence instead of piling trains at station 0");
+assert(/if \(!loc\) continue;/.test(renderer),
+  "renderer must fail closed when TrainTrackLayout cannot resolve position geometry");
+assert(!/loc = \{ x: stationCoords\[idx\]\.x, y: stationCoords\[idx\]\.y/.test(renderer),
+  "renderer must not reconstruct a second geometry path from station coordinates");
 
 assert(!/Math\.min\(_epPos\.stationIndex \|\| 0, stationCoords\.length - 1\)/.test(renderer),
   "estimated-row bucketing must not coerce missing stationIndex to station 0");
