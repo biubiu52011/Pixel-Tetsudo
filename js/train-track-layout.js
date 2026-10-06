@@ -139,7 +139,18 @@
     }
     if (toIdx == null) {
       var moveDir = opts.getMoveDir ? opts.getMoveDir(position, lineId) : null;
-      toIdx = moveDir === "up" ? Math.max(0, idx - 1) : Math.min(points.length - 1, idx + 1);
+      var _loopDirection = String(position && position.railDirection || "").split(/[:.]/).pop();
+      var _closedLoop = !!(stationCoords && stationCoords._loopRect && points === stationCoords);
+      if (_closedLoop && /^(InnerLoop|Inner|OuterLoop|Outer)$/.test(_loopDirection)) {
+        // A loop has no terminal index. Preserve ODPT loop direction through
+        // the last/first station boundary instead of clamping at either end.
+        // The station order defines the positive route direction; laneSign keeps
+        // Inner/Outer on separate physical lanes.
+        var _step = /^(InnerLoop|Inner)$/.test(_loopDirection) ? -1 : 1;
+        toIdx = (idx + _step + points.length) % points.length;
+      } else {
+        toIdx = moveDir === "up" ? Math.max(0, idx - 1) : Math.min(points.length - 1, idx + 1);
+      }
     }
 
     var progress = position && position.segmentProgress != null ? clamp(position.segmentProgress, 0, 1) : 0;
