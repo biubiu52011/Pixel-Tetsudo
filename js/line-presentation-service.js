@@ -249,12 +249,46 @@
     return map;
   }
 
+
+  function getPresentation(lineId, allLines) {
+    allLines = allLines || window.UNIFIED_LINES || {};
+    var line = allLines[lineId] || null;
+    return line && line.presentation ? line.presentation : null;
+  }
+
+  function getPrimaryPresentation(lineId, allLines) {
+    var pres = getPresentation(lineId, allLines);
+    return pres && Array.isArray(pres.lineIds) && pres.lineIds[0] === lineId ? pres : null;
+  }
+
+  function getPresentationMembers(lineId, allLines) {
+    allLines = allLines || window.UNIFIED_LINES || {};
+    var pres = getPrimaryPresentation(lineId, allLines);
+    return pres ? pres.lineIds.filter(function(id) { return !!allLines[id]; }) : [];
+  }
+
+  function isBranch(lineId, allLines) {
+    allLines = allLines || window.UNIFIED_LINES || {};
+    try {
+      if (window.RunningChainResolver && typeof window.RunningChainResolver.getResolutionContext === "function") {
+        var ctx = window.RunningChainResolver.getResolutionContext(lineId, Object.keys(allLines));
+        if (ctx) return ctx.isBranch === true;
+      }
+    } catch(e) {}
+    var line = allLines[lineId] || null;
+    return !!(line && line.branchOf);
+  }
+
   window.LinePresentationService = {
     getDisplayOrder: getDisplayOrder,
     getPresentationOrder: getPresentationOrder,
     getDisplayOrderMap: getDisplayOrderMap,
     getOperatorOrder: getOperatorOrder,
     orderOperators: orderOperators,
-    categoryOf: categoryOf
+    categoryOf: categoryOf,
+    getPresentation: getPresentation,
+    getPrimaryPresentation: getPrimaryPresentation,
+    getPresentationMembers: getPresentationMembers,
+    isBranch: isBranch
   };
 })();
