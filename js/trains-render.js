@@ -1165,18 +1165,6 @@
       }
       
       if (existingIcon) {
-        var _existingIsImage = String(existingIcon.tagName || '').toLowerCase() === 'image';
-        if (_existingIsImage !== _wantsImageMarker) {
-          // Vehicle evidence may appear/disappear between polls. Never animate a
-          // circle as though it were an image (or vice versa); replace the marker
-          // while preserving the current display position as the new start point.
-          if (existingIcon._moveRaf) cancelAnimationFrame(existingIcon._moveRaf);
-          if (existingIcon.parentNode) existingIcon.parentNode.removeChild(existingIcon);
-          existingIcon = null;
-        }
-      }
-      
-      if (existingIcon) {
         // Update existing icon position.
         // TrainTrackLayout owns target geometry; this marker owns interpolation.
         // There is exactly one animation authority: per-marker requestAnimationFrame.
