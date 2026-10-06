@@ -66,11 +66,12 @@ assert(/routePos:\s*routePos/.test(trackLayoutSource),
   "TrainTrackLayout must expose loop route position to the single marker animation authority");
 assert(/_useLoopRoute[\s\S]{0,900}_loopPosToXY\(_curRoutePos, _loopRect\)/.test(renderer),
   "loop marker interpolation must follow route geometry instead of cutting corners in XY space");
-assert(/_hasUpstreamVehicle/.test(renderer),"renderer must consume upstream vehicle resolution");
-assert(/var _identityExact = p\.vehicleIdentityStatus === "EXACT"/.test(renderer),
-  "renderer must hard-gate concrete artwork on EXACT vehicle identity");
-assert(/var _hasUpstreamVehicle = _identityExact/.test(renderer),
-  "upstream authority flags alone must not render concrete vehicle artwork");
+assert(/p && p\.vehicleResolvedUpstream === true \? \(p\.vehicleIconPath \|\| ""\) : ""/.test(renderer),
+  "renderer must consume only the upstream vehicle artwork projection");
+assert(!/var exact = p && \(p\.vehicleIdentityStatus/.test(renderer),
+  "renderer must not re-arbitrate vehicle identity status");
+assert(!/vehicleResolvedFromRealtime/.test(renderer),
+  "renderer must not branch on vehicle evidence source");
 assert(/if \(!stationKey\)[\s\S]{0,800}return;/.test(fusion),"missing fromStation must not create realtime position");
 
 const resolver=read("js/running-chain-resolver.js");
@@ -170,10 +171,12 @@ assert(estimatorSource.includes("split(/\\s*\\/\\s*|\\s*,\\s*|\\s*\\|\\s*/)"),
   'multi-formation evidence must be split into candidates instead of treated as one formation');
 
 
-assert(fusionSource.includes('if (!_identityExact || !p.vehicleType) return;'),
-  'running-chain registry must hard-reject non-EXACT or identity-less vehicle records');
-assert(fusionSource.includes('p.vehicleIdentityStatus === "EXACT"'),
-  'running-chain registry must accept exact model evidence');
+assert(fusionSource.includes('if (!resolution || resolution.identityStatus !== "EXACT" || !resolution.name) return;'),
+  'running-chain registry must store only canonical EXACT vehicle resolutions');
+assert(fusionSource.includes('resolution: resolution'),
+  'running-chain registry must store the canonical resolution object instead of projected field copies');
+assert(fusionSource.includes('_projectVehicleResolution(p, v.resolution, true)'),
+  'running-chain inheritance must reuse the single vehicle projection path');
 assert(fusionSource.includes('_evResolution.identityStatus !== "EXACT"'),
   'realtime evidence without EXACT vehicle identity must not seed running-chain inheritance');
 assert(fusionSource.includes('realtimeVehicleType: odptVehicleType'),
