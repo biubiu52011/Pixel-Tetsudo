@@ -1120,6 +1120,18 @@
       : null;
     
     var updatedIds = {};
+    var markerById = {};
+    var _existingMarkers = trainLayer.querySelectorAll('[data-train-id]');
+    for (var _emi = 0; _emi < _existingMarkers.length; _emi++) {
+      var _existingMarker = _existingMarkers[_emi];
+      var _existingUid = _existingMarker.getAttribute('data-train-id') || "";
+      if (!_existingUid) continue;
+      if (!markerById[_existingUid]) markerById[_existingUid] = _existingMarker;
+      else {
+        if (_existingMarker._moveRaf) cancelAnimationFrame(_existingMarker._moveRaf);
+        if (_existingMarker.parentNode) _existingMarker.parentNode.removeChild(_existingMarker);
+      }
+    }
     
     for (var pi = 0; pi < positions.length; pi++) {
       var p = positions[pi];
@@ -1144,19 +1156,11 @@
       updatedIds[trainUid] = true;
       
       var markerSpec = _trainMarkerSpec(p);
-      var existingIcon = null;
-      var _trainNodes = trainLayer.querySelectorAll('[data-train-id]');
-      for (var _tni = 0; _tni < _trainNodes.length; _tni++) {
-        if (_trainNodes[_tni].getAttribute('data-train-id') !== String(trainUid)) continue;
-        if (!existingIcon) existingIcon = _trainNodes[_tni];
-        else {
-          if (_trainNodes[_tni]._moveRaf) cancelAnimationFrame(_trainNodes[_tni]._moveRaf);
-          if (_trainNodes[_tni].parentNode) _trainNodes[_tni].parentNode.removeChild(_trainNodes[_tni]);
-        }
-      }
+      var existingIcon = markerById[String(trainUid)] || null;
       if (existingIcon && existingIcon.getAttribute("data-marker-kind") !== markerSpec.kind) {
         if (existingIcon._moveRaf) cancelAnimationFrame(existingIcon._moveRaf);
         if (existingIcon.parentNode) existingIcon.parentNode.removeChild(existingIcon);
+        delete markerById[String(trainUid)];
         existingIcon = null;
       }
       
@@ -1285,6 +1289,7 @@
         }
       } else {
         existingIcon = _createTrainMarker(trainLayer, svgNS, trainUid, markerSpec, px, py, p, lineId, isLoop, color, loc);
+        markerById[String(trainUid)] = existingIcon;
         appendTrainLabels(trainLayer, svgNS, trainUid, px, py, p, lineId);
       }
     }
