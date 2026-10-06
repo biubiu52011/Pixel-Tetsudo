@@ -201,17 +201,31 @@ function main() {
   });
 
   const tc = loadTransitConstants();
-  (tc.OP_ORDER || []).forEach((op) => {
+  const lineRecords = Object.values((railwayJson && railwayJson.lines) || {});
+  const actualOperators = new Set((tc.OP_ORDER || []).concat(
+    lineRecords.map((line) => line && line.operator).filter(Boolean)
+  ));
+  [...actualOperators].sort().forEach((op) => {
     const key = 'op.' + op;
     const missing = LANGS.filter((lang) => !(translations[lang] || {}).hasOwnProperty(key));
     if (missing.length) errors.push({ type: 'operator-i18n-missing', operator: op, key, missing });
   });
 
   const stationIds = new Set(Object.keys((railwayJson && railwayJson.stations) || {}));
-  const missingStationI18n = [...stationIds].filter((id) => !stationJson[id]);
+  const referencedStationIds = new Set();
+  lineRecords.forEach((line) => {
+    ((line && line.stations) || []).forEach((id) => referencedStationIds.add(id));
+  });
+  const missingStationI18n = [...referencedStationIds].filter((id) => !stationJson[id]);
   if (missingStationI18n.length) {
-    warnings.push({ type: 'station-i18n-missing', count: missingStationI18n.length, sample: missingStationI18n.slice(0, 20) });
+    errors.push({ type: 'referenced-station-i18n-missing', count: missingStationI18n.length, sample: missingStationI18n.slice(0, 50) });
   }
+  [...referencedStationIds].forEach((id) => {
+    const entry = stationJson[id];
+    if (!entry) return;
+    const missing = LANGS.filter((lang) => !entry[lang] || !String(entry[lang]).trim());
+    if (missing.length) errors.push({ type: 'referenced-station-i18n-language-missing', station: id, missing });
+  });
 
   const orphanStationI18n = Object.keys(stationJson).filter((id) => !stationIds.has(id));
   if (orphanStationI18n.length) {
