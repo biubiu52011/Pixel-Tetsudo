@@ -226,6 +226,17 @@ function main() {
     const missing = LANGS.filter((lang) => !entry[lang] || !String(entry[lang]).trim());
     if (missing.length) errors.push({ type: 'referenced-station-i18n-language-missing', station: id, missing });
   });
+  const kanaRe = /[\u3040-\u30ff]/;
+  [...referencedStationIds].forEach((id) => {
+    const entry = stationJson[id];
+    if (!entry) return;
+    if (kanaRe.test(String(entry.zh || ''))) {
+      errors.push({ type: 'station-zh-kana-contamination', station: id, value: entry.zh });
+    }
+    if (kanaRe.test(String(entry.ko || ''))) {
+      errors.push({ type: 'station-ko-kana-contamination', station: id, value: entry.ko });
+    }
+  });
 
   const orphanStationI18n = Object.keys(stationJson).filter((id) => !stationIds.has(id));
   if (orphanStationI18n.length) {
