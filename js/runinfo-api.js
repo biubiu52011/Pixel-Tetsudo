@@ -320,33 +320,10 @@
   }
 
   function aggregateStatus(records, line) {
-    var scoped = selectScopedRecords(records, line);
-    if (!scoped.length) return null;
-    var rank = { suspended: 5, delayed: 4, info: 2, normal: 1, unknown: 0 };
-    var worstRealtime = null;
-    var hasNotice = false;
-    for (var i = 0; i < scoped.length; i++) {
-      var rec = scoped[i];
-      var evaluated = window.RunInfoEvaluator ? window.RunInfoEvaluator.evaluate({
-        source: "odpt",
-        currentOperationalSource: true,
-        structuredStatus: rec["odpt:trainInformationStatus"],
-        messageKind: rec["pt:messageKind"] || rec["odpt:trainInformationCategory"] || rec["odpt:category"],
-        suspension: rec["odpt:suspension"] === true,
-        delay: rec["odpt:delay"] === true,
-        delayMinutes: (typeof rec["odpt:delay"] === "number") ? rec["odpt:delay"] : null,
-        text: recordText(rec)
-      }) : null;
-      if (evaluated && evaluated.messageKind === "notice") {
-        hasNotice = true;
-        continue;
-      }
-      var st = evaluated ? evaluated.status : parseStatus(rec);
-      if (!worstRealtime || (rank[st] || 0) > (rank[worstRealtime] || 0)) worstRealtime = st;
-    }
-    // Notices are supplementary. They become the overview only when there is
-    // no current operational-status record for this line.
-    return worstRealtime || (hasNotice ? "notice" : null);
+    var primary = pickRecord(records, line);
+    if (!primary) return null;
+    var evaluated = evaluateRecord(primary);
+    return evaluated ? evaluated.status : parseStatus(primary);
   }
 
   function localFallback(lineId, lineObj) {
