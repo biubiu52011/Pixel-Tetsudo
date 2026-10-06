@@ -190,8 +190,11 @@
   function isThroughConnected(a, b) {
     try {
       var line = window.UNIFIED_LINES && window.UNIFIED_LINES[a];
-      return !!(line && Array.isArray(line.throughServices) && line.throughServices.indexOf(b) >= 0);
-      return false;
+      var boundaries = line && Array.isArray(line.serviceBoundaries) ? line.serviceBoundaries : [];
+      return boundaries.some(function(boundary) {
+        return !!(boundary && boundary.lineId === b &&
+          Array.isArray(boundary.handoverStations) && boundary.handoverStations.length);
+      });
     } catch(e) { return false; }
   }
 
