@@ -160,9 +160,12 @@ def main():
     # first, otherwise early initialization can silently use compatibility fallback.
     for page in ('pages/trains.html', 'pages/realtime.html'):
         page_src = _read_arch(page)
-        resolver_pos = page_src.find('js/running-chain-resolver.js')
+        resolver_token = 'js/running-chain-resolver.js'
+        resolver_pos = page_src.find(resolver_token)
         presentation_pos = page_src.find('js/line-presentation-service.js')
         data_state_pos = page_src.find('js/data-state.js')
+        if page_src.count(resolver_token) != 1:
+            new_errors.append('PRESENTATION-001 RELATION_AUTHORITY_LOAD_COUNT %s=%d' % (page, page_src.count(resolver_token)))
         if resolver_pos < 0 or presentation_pos < 0 or resolver_pos > presentation_pos:
             new_errors.append('PRESENTATION-001 RELATION_AUTHORITY_LOAD_ORDER %s' % page)
         if data_state_pos >= 0 and resolver_pos > data_state_pos:
