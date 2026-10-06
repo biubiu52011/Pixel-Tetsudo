@@ -6,7 +6,7 @@
  * 
  * Consumers:
  *   data-state.js        → TRUNK_MAIN_LINE_IDS
- *   data-fusion.js       → SOURCE_RAILWAY_LINE_SCOPE, PRIORITY_OPS, STATION_ALIAS,
+ *   data-fusion.js       → SOURCE_RAILWAY_CANONICAL_LINE, PRIORITY_OPS, STATION_ALIAS,
  *                          STATION_ALIAS_BY_RAILWAY, TRAIN_WARMUP_LINES, REFRESH_INTERVAL,
  *                          POSITION_INTERVAL
  *   odpt-unified.js      → API_RATE_LIMIT, API_MAX_CONCURRENCY, TT_TRUNCATE_LIMIT
@@ -33,12 +33,13 @@
   // ========== 直通运行 ==========
 
   /**
-   * Source railway identity scope for feeds whose railway entity spans canonical
-   * project lines/operators. This is candidate admission only, never a preference
-   * order and never proof that two records are the same physical train.
+   * Provider railway identity -> canonical line identity.
+   * This adapts an external source name only. It MUST NOT duplicate topology,
+   * preference order, or through-service membership. Canonical throughServices
+   * and serviceBoundaries own those network facts.
    */
-  var SOURCE_RAILWAY_LINE_SCOPE = {
-    "SotetsuDirect": ["SotetsuShinYokohama", "Yokosuka", "Saikyo", "ShonanShinjuku"]
+  var SOURCE_RAILWAY_CANONICAL_LINE = {
+    "SotetsuDirect": "SotetsuJRDirect"
   };
 
   /**
@@ -269,7 +270,7 @@
     TRUNK_MAIN_LINE_IDS: TRUNK_MAIN_LINE_IDS,
     TRUNK_EXTENSION_ALLOW: TRUNK_EXTENSION_ALLOW,
     // 直通运行
-    SOURCE_RAILWAY_LINE_SCOPE: SOURCE_RAILWAY_LINE_SCOPE,
+    SOURCE_RAILWAY_CANONICAL_LINE: SOURCE_RAILWAY_CANONICAL_LINE,
     PRIORITY_OPS: PRIORITY_OPS,
     REALTIME_POSITION_POLICY: REALTIME_POSITION_POLICY,
     // ODPT 站 ID 别名
