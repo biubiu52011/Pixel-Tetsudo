@@ -256,6 +256,15 @@ function main() {
     errors.push({ type: 'silent-user-facing-render-failure', file: 'js/trains-page.js', function: 'showLineView' });
   }
 
+  const recoveryCss = fs.readFileSync(path.join(ROOT, 'css/style.css'), 'utf8');
+  const dataStateJs = fs.readFileSync(path.join(ROOT, 'js/data-state.js'), 'utf8');
+  if (!/\.rs-state-retry\s*\{/.test(recoveryCss)) {
+    errors.push({ type: 'page-retry-style-missing', file: 'css/style.css' });
+  }
+  if (!/class=\\?"rs-state-retry/.test(dataStateJs) || !/addEventListener\(\s*["']click["']/.test(dataStateJs)) {
+    errors.push({ type: 'page-retry-behavior-missing', file: 'js/data-state.js' });
+  }
+
   const technicalErrorLabels = {
     en: ['Render error:', 'Data load error'],
     zh: ['渲染失败:', '数据加载失败'],
