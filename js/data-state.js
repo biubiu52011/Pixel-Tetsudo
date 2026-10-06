@@ -440,19 +440,24 @@
       var op = opOrder[o];
       html += '<div class="rs-operator-group" data-operator="' + escapeHtml(op) + '"><div class="rs-operator-title">' + escapeHtml(tOp(op)) + '</div>'
         + '<div class="rs-cards-container">';
-      // Passenger display groups are canonical metadata on each primary line record.
+      // Render in the exact unified presentation order. A primary
+      // presentation occupies its own sort slot; member records are suppressed
+      // only after that primary has rendered. This preserves fractional/system
+      // orders such as Ueno-Tokyo 15.5 instead of moving every system ahead of
+      // every fallback line in a separate first pass.
       var covered = {};
-      for (var pg = 0; pg < groups[op].length; pg++) {
-        var pgItem = groups[op][pg], pres = pgItem.line.presentation;
-        if (!pres || !Array.isArray(pres.lineIds) || pres.lineIds.length === 0 || pres.lineIds[0] !== pgItem.id) continue;
-        var memberIds = pres.lineIds.filter(function(id) { return !!linesObj[id]; });
-        if (memberIds.length === 0) continue;
-        memberIds.forEach(function(id) { covered[id] = true; });
-        html += renderSystemCard(pres, memberIds, linesObj, { mode: mode });
-      }
       for (var k = 0; k < groups[op].length; k++) {
         var g = groups[op][k];
         if (covered[g.id]) continue;
+        var pres = g.line && g.line.presentation;
+        if (pres && Array.isArray(pres.lineIds) && pres.lineIds.length > 0 && pres.lineIds[0] === g.id) {
+          var memberIds = pres.lineIds.filter(function(id) { return !!linesObj[id]; });
+          if (memberIds.length > 0) {
+            memberIds.forEach(function(id) { covered[id] = true; });
+            html += renderSystemCard(pres, memberIds, linesObj, { mode: mode });
+            continue;
+          }
+        }
         html += renderCard(g.line, g.id, { mode: mode });
       }
       html += "</div></div>";
