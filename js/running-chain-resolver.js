@@ -14,15 +14,17 @@
     _boundaryMap = {}; _branchOfMap = {}; _directThrough = {};
     Object.keys(lines).forEach(function(lineId) {
       var line = lines[lineId] || {};
-      var through = Array.isArray(line.throughServices) ? line.throughServices : [];
-      _directThrough[lineId] = through.filter(function(other) { return !!lines[other]; }).slice();
       if (line.branchOf && lines[line.branchOf]) _branchOfMap[lineId] = line.branchOf;
       var boundaries = Array.isArray(line.serviceBoundaries) ? line.serviceBoundaries : [];
       _boundaryMap[lineId] = {};
+      _directThrough[lineId] = [];
       boundaries.forEach(function(boundary) {
         if (!boundary || !boundary.lineId || !lines[boundary.lineId]) return;
         var joins = Array.isArray(boundary.handoverStations) ? boundary.handoverStations.filter(Boolean) : [];
-        if (joins.length) _boundaryMap[lineId][boundary.lineId] = joins.slice();
+        if (joins.length) {
+          _boundaryMap[lineId][boundary.lineId] = joins.slice();
+          _directThrough[lineId].push(boundary.lineId);
+        }
       });
     });
     _initialized=true;
