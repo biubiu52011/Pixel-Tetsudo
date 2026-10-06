@@ -149,6 +149,10 @@
     var pool = realtime.length ? realtime : notices;
     var now = Date.now();
     var current = pool.filter(function(item) { return !recordIsExpired(item.rec, now); });
+    // An explicitly expired official record is historical context, never
+    // current operating-state evidence. If every candidate expired, there is
+    // no primary current record.
+    if (!current.length && pool.some(function(item) { return recordIsExpired(item.rec, now); })) return null;
     if (current.length) pool = current;
 
     // When records carry source timestamps, the newest official update is the
