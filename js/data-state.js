@@ -160,23 +160,15 @@
       }
     }
     // 合并连续线路的区间（前一条终点 == 后一条起点）
+    // Card subtitles describe the passenger-facing route interval only.
+    // Through-service/subName metadata belongs to relationship badges/details
+    // and must never replace origin/destination.
     var chipsHtml = "";
-    // 优先使用 LOS 系统的 subName（如 上野東京ライン 的 "東海道線～高崎線・宇都宮線 常磐線～品川"）
-    var _sysSubName = "";
-    if (mode === "trains") {
-      var _lang2 = window.currentLang || 'ja';
-      var _snKey2 = "subName" + (_lang2 === 'ja' ? 'Ja' : _lang2 === 'zh' ? 'Zh' : _lang2 === 'en' ? 'En' : 'Ko');
-      if (sys[_snKey2]) {
-        _sysSubName = sys[_snKey2];
-      }
-    }
-    if (_sysSubName) {
-      chipsHtml = '<span class="rs-sys-chip">' + escapeHtml(_sysSubName) + '</span>';
-    } else if (mode === "trains" && intervalSegments.length === 0 && allLoop) {
+    if (mode === "trains" && intervalSegments.length === 0 && allLoop) {
       // Whole card is loop lines only: show 環状 instead of a meaningless
       // first↔last interval (Yamanote/Oedo LOS cards).
       chipsHtml = '<span class="rs-sys-chip">' + escapeHtml(t('line.loop')) + '</span>';
-    } else if (mode === "trains" && intervalSegments.length > 0) {
+    } else if (mode === "trains" && intervalSegments.length > 0) {else if (mode === "trains" && intervalSegments.length > 0) {
       var merged = [intervalSegments[0]];
       for (var si = 1; si < intervalSegments.length; si++) {
         var prev = merged[merged.length - 1];
@@ -300,23 +292,16 @@
     if (mode === "realtime") {
       statusIconHtml = '<span class="rs-status-icon ' + s.cls + '">' + s.icon + '</span>';
     }
-    // Route interval subtitle (trains mode)
+    // Route interval subtitle (trains mode): always describe this line's
+    // origin/destination. presentation.subName is relationship/presentation
+    // metadata and must not replace the route interval.
     var subHtml = "";
     if (mode === "trains") {
       var intervalText = "";
-      // Prefer canonical passenger-facing subtitle stored on the line record.
-      var _losSubName = "";
-      var _lang = window.currentLang || 'ja';
-      var _presentation = line.presentation || {};
-      var _snKey = "subName" + (_lang === 'ja' ? 'Ja' : _lang === 'zh' ? 'Zh' : _lang === 'en' ? 'En' : 'Ko');
-      _losSubName = _presentation[_snKey] || "";
-      if (_losSubName) {
-        intervalText = _losSubName;
-      } else {
-        try {
-          var stations = (window.RailwayDB && window.RailwayDB.getLineStations) ? window.RailwayDB.getLineStations(lineId) : [];
+      try {
+        var stations = (window.RailwayDB && window.RailwayDB.getLineStations) ? window.RailwayDB.getLineStations(lineId) : [];
         // Loop lines (Yamanote/Oedo): drawn first↔last stations are adjacent on
-        // the ring and mislead users (東京⇔有楽町), so show 環状 instead (4.3.557).
+        // the ring and mislead users, so show 環状 instead.
         var _isLoop = !!(line && (line.isDoubleColumnLoop || line.isSixShapedLoop));
         if (_isLoop) {
           intervalText = t('line.loop');
@@ -330,10 +315,7 @@
           }
         }
       } catch(e) {}
-      }
       if (intervalText) {
-        // 4.3.480：区间文字统一灰色——rs-line-name-en 全项目无 CSS 定义（默认黑色），
-        // LOS 卡区间用 rs-sys-chip 灰色；独立线卡（无 LOS 卡，如 JobanMain）改用 rs-line-interval 同灰。
         subHtml = '<div class="rs-line-interval">' + escapeHtml(intervalText) + '</div>';
       }
     }
