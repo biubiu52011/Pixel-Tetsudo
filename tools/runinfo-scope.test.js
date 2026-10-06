@@ -85,3 +85,16 @@ assert.strictEqual(selectedMixed["odpt:trainInformationStatus"],"Normal");
 const selectedNoticeOnly=ctx.window.RunInfoAPI._pickRecord(noticeOnly,A);
 assert.strictEqual(selectedNoticeOnly["pt:messageKind"],"notice");
 console.log("runinfo-scope text selection: 3 PASS");
+
+const staleStopRecovered=[
+ {"odpt:railway":"odpt.Railway:Toei.Asakusa","pt:messageKind":"realtime","odpt:trainInformationStatus":"Suspension","dc:date":"2026-10-07T08:00:00+09:00","odpt:trainInformationText":{"ja":"全線で運転を見合わせています。"}},
+ {"odpt:railway":"odpt.Railway:Toei.Asakusa","pt:messageKind":"realtime","odpt:trainInformationStatus":"Normal","dc:date":"2026-10-07T09:00:00+09:00","odpt:trainInformationText":{"ja":"現在、平常どおり運転しています。"}}
+];
+assert.strictEqual(ctx.window.RunInfoAPI._pickRecord(staleStopRecovered,A)["odpt:trainInformationStatus"],"Normal");
+assert.strictEqual(ctx.window.RunInfoAPI._aggregateStatus(staleStopRecovered,A),"normal");
+const sameMoment=[
+ {"odpt:railway":"odpt.Railway:Toei.Asakusa","pt:messageKind":"realtime","odpt:trainInformationStatus":"Normal","dc:date":"2026-10-07T09:00:00+09:00","odpt:trainInformationText":{"ja":"平常運転"}},
+ {"odpt:railway":"odpt.Railway:Toei.Asakusa","pt:messageKind":"realtime","odpt:trainInformationStatus":"Delay","dc:date":"2026-10-07T09:00:00+09:00","odpt:trainInformationText":{"ja":"遅れが出ています。"}}
+];
+assert.strictEqual(ctx.window.RunInfoAPI._aggregateStatus(sameMoment,A),"delayed");
+console.log("runinfo-scope temporal precedence: 3 PASS");
