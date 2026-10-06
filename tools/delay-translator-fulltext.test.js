@@ -47,4 +47,11 @@ const innerZh = ctx.window.DelayTranslator.translate("内回り電車に遅れ�
 assert.ok(innerZh.translated.includes("内环") && innerZh.translated.includes("延误"), "inner-loop delay must translate direction and effect");
 const outerEn = ctx.window.DelayTranslator.translate("外回りで運転を見合わせています。", { status:"notice", lineId:"Yamanote" }, "en");
 assert.ok(/outer-loop/i.test(outerEn.translated) && /suspended/i.test(outerEn.translated), "outer-loop suspension must translate direction and effect");
-console.log("delay-translator live-20261005: 5 PASS");
+const typhoonZh = ctx.window.DelayTranslator.translate("台風の影響で、一部列車に遅れと運休が発生します。", { status:"delayed", lineId:"Test" }, "zh");
+assert.ok(typhoonZh.translated.includes("台风"), "typhoon cause must translate locally");
+assert.ok(typhoonZh.translated.includes("延误和停运") || (typhoonZh.translated.includes("延误") && typhoonZh.translated.includes("停运")), "delay/cancellation impact must translate locally");
+const illnessEn = ctx.window.DelayTranslator.translate("急病人救護の影響で、列車に遅れが出ています。", { status:"delayed", lineId:"Test" }, "en");
+assert.ok(/passenger illness/i.test(illnessEn.translated) && /delay/i.test(illnessEn.translated), "passenger illness delay must retain translated operational semantics");
+const trackZh = ctx.window.DelayTranslator.translate("線路内立入の影響で、運転を見合わせています。", { status:"suspended", lineId:"Test" }, "zh");
+assert.ok(trackZh.translated.includes("人员进入线路") && trackZh.translated.includes("暂停运行"), "track intrusion suspension must translate locally");
+console.log("delay-translator live-20261006: 8 PASS");
