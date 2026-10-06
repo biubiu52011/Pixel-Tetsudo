@@ -354,6 +354,7 @@
     _parseRailwayIdentity: parseRailwayIdentity,
     _expectedRailwayIdentity: expectedRailwayIdentity,
     _aggregateStatus: aggregateStatus,
+    _pickRecord: pickRecord,
     isWebLine: function(lineId) {
       return !!(window.WebRunInfo && window.WebRunInfo.isWebLine && window.WebRunInfo.isWebLine(lineId));
     }
