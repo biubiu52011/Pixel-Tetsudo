@@ -247,6 +247,15 @@ function main() {
       }
     });
   });
+  const dataStateSource = fs.readFileSync(path.join(ROOT, 'js', 'data-state.js'), 'utf8');
+  if (!dataStateSource.includes('setPageStateRetry')) {
+    errors.push({ type: 'missing-page-state-recovery-hook', file: 'js/data-state.js' });
+  }
+  const trainsPageSource = fs.readFileSync(path.join(ROOT, 'js', 'trains-page.js'), 'utf8');
+  if (/function showLineView[\s\S]*?catch\s*\(e\)\s*\{\s*\}/.test(trainsPageSource)) {
+    errors.push({ type: 'silent-user-facing-render-failure', file: 'js/trains-page.js', function: 'showLineView' });
+  }
+
   const technicalErrorLabels = {
     en: ['Render error:', 'Data load error'],
     zh: ['渲染失败:', '数据加载失败'],
