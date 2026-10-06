@@ -1140,6 +1140,18 @@
         var _distance = _useLoopRoute ? Math.abs(_routeDiff) : Math.sqrt(_dx * _dx + _dy * _dy);
         var _hasDisplayPos = isFinite(_startX) && isFinite(_startY);
         var _sameLine = !existingIcon._displayLineId || existingIcon._displayLineId === lineId;
+        var _targetIdx = loc && loc.idx != null ? Number(loc.idx) : NaN;
+        var _previousIdx = Number(existingIcon._displayStationIdx);
+        var _indexContinuous = true;
+        if (_sameLine && isFinite(_targetIdx) && isFinite(_previousIdx)) {
+          var _idxDiff = Math.abs(_targetIdx - _previousIdx);
+          if (isLoop && stationCoords.length > 1) {
+            _idxDiff = Math.min(_idxDiff, stationCoords.length - _idxDiff);
+          }
+          // One polling update may advance to the next segment. Anything beyond
+          // that is a new/stale snapshot, not a path to animate through.
+          _indexContinuous = _idxDiff <= 1;
+        }
         // A target farther than roughly two adjacent station gaps is not a
         // trustworthy interpolation path (new identity, stale snapshot, or
         // topology discontinuity). Snap rather than sweeping across the map.
@@ -1154,13 +1166,14 @@
         _adjacent.sort(function(a,b){ return a-b; });
         var _medianGap = _adjacent.length ? _adjacent[Math.floor(_adjacent.length / 2)] : 40;
         var _snapDistance = Math.max(80, _medianGap * 2.5);
-        var _shouldSnap = !_hasDisplayPos || !_sameLine || !isFinite(_distance) || _distance > _snapDistance;
+        var _shouldSnap = !_hasDisplayPos || !_sameLine || !_indexContinuous || !isFinite(_distance) || _distance > _snapDistance;
 
         if (_shouldSnap || _distance <= 0.5) {
           _setTrainIconPosition(existingIcon, _targetX, _targetY, p, lineId, isLoop);
           existingIcon._displayX = _targetX;
           existingIcon._displayY = _targetY;
           existingIcon._displayLineId = lineId;
+          if (isFinite(_targetIdx)) existingIcon._displayStationIdx = _targetIdx;
           if (isFinite(_targetRoutePos)) existingIcon._displayRoutePos = _targetRoutePos;
           _syncTrainLabels(trainLayer, svgNS, trainUid, _targetX, _targetY, p, lineId);
         } else {
@@ -1195,6 +1208,7 @@
             } else {
               _icon._displayX = _targetX;
               _icon._displayY = _targetY;
+              if (isFinite(_targetIdx)) _icon._displayStationIdx = _targetIdx;
               if (isFinite(_targetRoutePos)) _icon._displayRoutePos = _targetRoutePos;
               _icon._moveRaf = 0;
             }
@@ -1252,6 +1266,7 @@
           newIcon._displayX = px;
           newIcon._displayY = py;
           newIcon._displayLineId = lineId;
+          if (loc && loc.idx != null && isFinite(Number(loc.idx))) newIcon._displayStationIdx = Number(loc.idx);
           if (loc && loc.routePos != null && isFinite(Number(loc.routePos))) newIcon._displayRoutePos = Number(loc.routePos);
           trainLayer.appendChild(newIcon);
           appendTrainLabels(trainLayer, svgNS, trainUid, px, py, p, lineId);
@@ -1264,6 +1279,7 @@
           newCircle._displayX = px;
           newCircle._displayY = py;
           newCircle._displayLineId = lineId;
+          if (loc && loc.idx != null && isFinite(Number(loc.idx))) newCircle._displayStationIdx = Number(loc.idx);
           if (loc && loc.routePos != null && isFinite(Number(loc.routePos))) newCircle._displayRoutePos = Number(loc.routePos);
           
           var outerCircle = document.createElementNS(svgNS, "circle");
