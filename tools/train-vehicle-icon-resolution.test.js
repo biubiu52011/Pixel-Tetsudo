@@ -250,20 +250,23 @@ assert.ok(!otherLineEv || !(otherLineEv.vehicleType === 'E235系0番台（山手
   'Yamanote rule must not apply to other lines');
 console.log('no line-default leakage: 1 PASS');
 
-// ---- renderer authority gate regression (v4.3.1129) ----
-// The SVG renderer must accept both realtime direct and realtime-derived
-// EXACT identities (data-fusion sets vehicleResolvedFromRealtimeDerived for
-// the family-rule path; a gate that only reads vehicleResolvedFromRealtime
-// collapses every derived E235 train back to a neutral circle).
+// ---- TrainMarker artwork contract ----
+// The renderer must accept every upstream EXACT vehicle resolution (realtime
+// direct AND realtime-derived flow through the same vehicleResolvedUpstream
+// projection). The old gate that only read vehicleResolvedFromRealtime would
+// have collapsed every derived E235 train back to a neutral marker.
 const rendererSrc = read('js/trains-render.js');
-assert.ok(rendererSrc.includes('vehicleResolvedFromRealtimeDerived === true'),
-  'renderer must accept vehicleResolvedFromRealtimeDerived as authoritative');
-// The realtime image gate expression spans lines; require the derived flag
-// within the _hasRealtimeVehicleEvidence block (from its declaration to the
-// line that reads vehicleResolvedFromRealtime).
-const gateStart = rendererSrc.indexOf('_hasRealtimeVehicleEvidence');
-assert.ok(gateStart >= 0, 'realtime image gate must exist');
-const gateBlock = rendererSrc.slice(gateStart, gateStart + 300);
-assert.ok(gateBlock.includes('vehicleResolvedFromRealtimeDerived === true'),
-  'realtime-derived flag must be part of the realtime image gate');
-console.log('renderer realtime-derived gate: 2 PASS');
+assert.ok(rendererSrc.includes('p && p.vehicleResolvedUpstream === true'),
+  'renderer artwork decision must accept every upstream EXACT vehicle identity (realtime direct and realtime-derived alike)');
+assert.ok(!rendererSrc.includes('vehicleResolvedFromRealtime === true'),
+  'renderer must not branch its artwork decision on vehicle evidence source');
+assert.ok(/kind: iconSrc && !artworkFailed \? "vehicle" : "generic"/.test(rendererSrc),
+  'TrainMarker artwork must be exactly vehicle PNG or generic train');
+assert.ok(!/iconSrc \? "image" : "circle"/.test(rendererSrc),
+  'the neutral circle fallback kind must not return');
+assert.ok(/marker\.addEventListener\("error"/.test(rendererSrc) &&
+          /_swapTrainMarkerToGeneric/.test(rendererSrc),
+  'a broken vehicle PNG must fall back to the generic train marker in place');
+assert.ok(!/_hasRealtimeVehicleEvidence/.test(rendererSrc),
+  'the retired per-source realtime image gate must not return');
+console.log('TrainMarker artwork contract: 6 PASS');

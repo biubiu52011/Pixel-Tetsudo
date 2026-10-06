@@ -188,6 +188,25 @@ def main():
     if 'var trainUid = p.runningChainId || p.trainId || p.trainNumber' in renderer_src:
         new_errors.append('REALTIME-001 TRAIN_NUMBER_USED_AS_PERSISTENT_MARKER_ID')
 
+    # TRAIN-001: one TrainMarker per physical train per render pass, with
+    # exactly two artwork states (vehicle PNG / generic train SVG). A broken
+    # PNG swaps that single marker to generic artwork in place; geometry and
+    # vehicle identity stay upstream. The guard protects the contract, not the
+    # exact spelling of local variables, and never requires the retired
+    # "circle" vocabulary.
+    if 'kind: iconSrc && !artworkFailed ? "vehicle" : "generic"' not in renderer_src:
+        new_errors.append('TRAIN-001 TRAIN_MARKER_ARTWORK_BINARY_MISSING')
+    if 'iconSrc ? "image" : "circle"' in renderer_src or 'outer.setAttribute("r", "8")' in renderer_src:
+        new_errors.append('TRAIN-001 LEGACY_CIRCLE_TRAIN_MARKER_REINTRODUCED')
+    if 'data-marker-kind' not in renderer_src:
+        new_errors.append('TRAIN-001 TRAIN_MARKER_KIND_ATTRIBUTE_MISSING')
+    if 'addEventListener("error"' not in renderer_src or '_swapTrainMarkerToGeneric' not in renderer_src or '_artworkSwapped' not in renderer_src:
+        new_errors.append('TRAIN-001 PNG_ERROR_GENERIC_FALLBACK_MISSING')
+    if 'replaceChild(g, marker)' not in renderer_src:
+        new_errors.append('TRAIN-001 PNG_ERROR_OVERLAY_OR_DUAL_MARKER')
+    if 'train-dot' in renderer_src or 'train-point' in renderer_src:
+        new_errors.append('TRAIN-001 LEGACY_TRAIN_DOT_MARKER_REINTRODUCED')
+
     # VEHICLE-001/002: one final vehicle authority and one canonical evidence resolver.
     if 'TrainOperationEvidence.resolveEvidence' not in estimator_src:
         new_errors.append('VEHICLE-002 CANONICAL_EVIDENCE_RESOLVER_BYPASSED')

@@ -108,8 +108,23 @@ assert(!/var exact = p && \(p\.vehicleIdentityStatus/.test(renderer),
   "renderer must not re-arbitrate vehicle identity status");
 assert(!/vehicleResolvedFromRealtime/.test(renderer),
   "renderer must not branch on vehicle evidence source");
-assert(/kind: iconSrc \? "image" : "circle"/.test(renderer),
-  "one train marker must choose image or fallback circle exclusively");
+assert(/kind: iconSrc && !artworkFailed \? "vehicle" : "generic"/.test(renderer),
+  "TrainMarker artwork must be exactly vehicle PNG or generic train");
+assert(!/iconSrc \? "image" : "circle"/.test(renderer),
+  "the legacy circle fallback kind must not return");
+assert(!/outer\.setAttribute\("r", "8"\)/.test(renderer),
+  "the legacy neutral circle fallback must not return");
+assert(/_createGenericTrainMarker\(svgNS, className, color\)/.test(renderer) &&
+       /createElementNS\(svgNS, "rect"\)/.test(renderer),
+  "generic artwork must be an SVG primitive train marker, not a data-point dot");
+assert(/marker\.addEventListener\("error"/.test(renderer) &&
+       /_swapTrainMarkerToGeneric\(trainLayer, svgNS, marker, uid\)/.test(renderer),
+  "vehicle PNG load failure must swap the single marker to generic artwork in place");
+assert(/marker\._artworkSwapped/.test(renderer) &&
+       /replaceChild\(g, marker\)/.test(renderer),
+  "artwork swaps must be idempotent and replace the marker root, never overlay a second marker");
+assert(/_trainMarkerSpec\(p, trainUid\)/.test(renderer),
+  "the artwork decision must be keyed by the stable train identity");
 assert(/existingIcon\.getAttribute\("data-marker-kind"\) !== markerSpec\.kind[\s\S]{0,260}removeChild\(existingIcon\)/.test(renderer),
   "marker kind changes must replace the old marker instead of layering image and fallback circle");
 assert(/if \(!stationKey\)[\s\S]{0,800}return;/.test(fusion),"missing fromStation must not create realtime position");

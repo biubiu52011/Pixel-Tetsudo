@@ -69,7 +69,10 @@
 
   function stableTrainKey(p) {
     if (!p) return "";
-    return String(p.runningChainId || p.trainId || p.trainNumber || p.sourceTrainId || p.timetableObjectId || "");
+    // Same stable-identity contract as the TrainMarker DOM key: confirmed
+    // running chain first, then stable source-object identity. A bare train
+    // number must never key the layout stacking slot.
+    return String(p.runningChainId || p.trainId || p.sourceTrainId || p.timetableObjectId || "");
   }
 
   function stableStackOrdinal(p, index) {

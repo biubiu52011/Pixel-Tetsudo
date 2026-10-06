@@ -29,12 +29,14 @@ const renderSrc = fs.readFileSync('js/trains-render.js','utf8');
 assert.ok(/if \(_trainPositionRank\(_epPos\) === 0\)[\s\S]*?_filtered\.push\(_epPos\)[\s\S]*?continue/.test(renderSrc), 'official realtime trains at the same station must bypass estimated capacity limiting');
 assert.ok(!/_STATION_MAX_ENDPOINT\s*=\s*1/.test(renderSrc), 'terminal stations must not be hard-capped to one train');
 const layoutSrc = fs.readFileSync('js/train-track-layout.js','utf8');
-assert.ok(/runningChainId \|\| p\.trainId \|\| p\.trainNumber/.test(layoutSrc), 'station slot ordering must use stable train identity');
+assert.ok(/runningChainId \|\| p\.trainId \|\| p\.sourceTrainId \|\| p\.timetableObjectId/.test(layoutSrc), 'station slot ordering must use stable train identity');
+assert.ok(!/runningChainId \|\| p\.trainId \|\| p\.trainNumber/.test(layoutSrc), 'station slot ordering must never fall back to a bare train number');
 assert.ok(/groups\[key\]\.sort/.test(layoutSrc), 'multi-train station slots must be stable across source reorder');
 console.log('busy-station-layout: 4 PASS');
 const fusionVehicleSrc = fs.readFileSync('js/data-fusion.js','utf8');
 assert.ok(/_existingRank >= _incomingRank/.test(fusionVehicleSrc), 'running-chain vehicle registry must reject equal or weaker conflicting evidence');
-assert.ok(/A line\/system transition is not vehicle-swap evidence/.test(fusionVehicleSrc), 'vehicle continuity guard must explicitly treat line transitions as non-swap evidence');
+assert.ok(/_sameVehicle = _existingName && _existingName === resolution\.name/.test(fusionVehicleSrc),
+  'vehicle continuity guard must compare canonical resolved names (a line/system transition is not vehicle-swap evidence)');
 console.log('running-chain-vehicle-continuity: 2 PASS');
 assert.ok(/lineId === "NewShuttle"[\s\S]*?Math\.min\(base\.idx, base\.nextIdx\) >= 8/.test(layoutSrc), 'New Shuttle Maruyama-Uchijuku must use single-track layout');
 assert.ok(!fs.existsSync('data/timetables/vehicle-type-map.js'),
