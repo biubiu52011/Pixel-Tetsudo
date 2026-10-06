@@ -78,3 +78,10 @@ const noticeOnly=[
 ];
 assert.strictEqual(ctx.window.RunInfoAPI._aggregateStatus(noticeOnly,A),"notice");
 console.log("runinfo-scope notice isolation: 2 PASS");
+
+const selectedMixed=ctx.window.RunInfoAPI._pickRecord(mixedNoticeRealtime,A);
+assert.strictEqual(selectedMixed["pt:messageKind"],"realtime");
+assert.strictEqual(selectedMixed["odpt:trainInformationStatus"],"Normal");
+const selectedNoticeOnly=ctx.window.RunInfoAPI._pickRecord(noticeOnly,A);
+assert.strictEqual(selectedNoticeOnly["pt:messageKind"],"notice");
+console.log("runinfo-scope text selection: 3 PASS");
