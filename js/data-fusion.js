@@ -570,12 +570,8 @@
   // v4.3.479: Kohoku——Nippori_Toneri=江北(本地 Kohoku) / NaritaAbikoBranch=湖北(本地 Kohoku-Narita 分 ID)
   // v4.3.474+: Railway 感知别名——见 data/core/runtime-config.js STATION_ALIAS_BY_RAILWAY
 
-  // v4.3.494: 直通系统（ODPT 独立 railway 推送、本地无同名线）的列车归属表。
-  // 根因: 相鉄直通(SotetsuDirect)列车 railway=JR-East.SotetsuDirect, fromStation 为专属站 ID
-  //   (Osaki/武蔵小杉/西大井/羽沢横浜国大) —— 本地无 SotetsuDirect 线 → 反查无映射 →
-  //   fallback 站数最多 → Yamanote(30站) 误配山手线详情图。
-  // 处理: prefer 顺序选择归属线(跨 operator 放行 SotetsuShin-Yokohama), exclude 排除环线。
-  // v4.3.904: 提到外层作用域（ensureManualTimetable 需要访问）
+  // Provider railway identifiers are normalized through the canonical source
+  // identity adapter below; through-service topology is never inferred here.
   var allLines = null;
   var doEstimation = null;
   var posMap = {};
