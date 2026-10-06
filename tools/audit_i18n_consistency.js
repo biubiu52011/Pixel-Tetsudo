@@ -238,6 +238,38 @@ function main() {
     }
   });
 
+  const normalizedStationAliases = {};
+  Object.keys(stationJson).forEach((id) => {
+    const normalized = id.replace(/-/g, '').toLowerCase();
+    (normalizedStationAliases[normalized] || (normalizedStationAliases[normalized] = [])).push(id);
+  });
+  Object.values(normalizedStationAliases).forEach((ids) => {
+    if (ids.length < 2) return;
+    const byJa = {};
+    ids.forEach((id) => {
+      const ja = String((stationJson[id] && stationJson[id].ja) || '');
+      (byJa[ja] || (byJa[ja] = [])).push(id);
+    });
+    Object.entries(byJa).forEach(([ja, aliases]) => {
+      if (!ja || aliases.length < 2) return;
+      const baseline = stationJson[aliases[0]];
+      aliases.slice(1).forEach((id) => {
+        LANGS.forEach((lang) => {
+          if ((stationJson[id] && stationJson[id][lang]) !== baseline[lang]) {
+            errors.push({
+              type: 'station-i18n-alias-drift',
+              normalized: aliases[0].replace(/-/g, '').toLowerCase(),
+              ja,
+              aliases,
+              lang,
+              values: aliases.map((alias) => stationJson[alias] && stationJson[alias][lang])
+            });
+          }
+        });
+      });
+    });
+  });
+
   const orphanStationI18n = Object.keys(stationJson).filter((id) => !stationIds.has(id));
   if (orphanStationI18n.length) {
     warnings.push({ type: 'station-i18n-without-station', count: orphanStationI18n.length, sample: orphanStationI18n.slice(0, 20) });
