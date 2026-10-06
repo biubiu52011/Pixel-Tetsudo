@@ -1088,7 +1088,8 @@
     var color = geometry.color || line.color || (window.TrainsColors ? window.TrainsColors.LINE_FALLBACK : "#008803");
     
     var svgNS = "http://www.w3.org/2000/svg";
-    var isLoop = stationCoords.length > 2 && (line.type === "loop" || line.isSixShapedLoop);
+    var isLoop = stationCoords.length > 2 &&
+      (line.type === "loop" || line.isDoubleColumnLoop === true || line.isSixShapedLoop === true);
     
     // Multi-track / terminal stations may legitimately contain several trains.
     // Never discard official realtime rows merely because they share a station.
