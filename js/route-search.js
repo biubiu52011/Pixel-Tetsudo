@@ -14,11 +14,12 @@
    * Build a bidirectional adjacency list from UNIFIED_LINES
    * Returns: Map<stationName, Set<connectedStationNames>>
    */
-  // 干线本名（与 js/data-state.js TRUNK_MAIN_LINE_IDS 同步；home 页不加载 DataState，故本地内置）
-  // 4.3.616: 干线本名不进搜索图——与 LOS 展示层规则一致（4.3.5xx"干线本名不进展示层"）；
-  // 否则并行线（Tokaido/TokaidoMain 等）会被随机选中并显示"東海道本線"等本名
-  const _TRUNK_MAIN_LINE_IDS = ["Shinetsu", "TokaidoMain", "TohokuMain"];
-  function _isTrunk(lineId) { return _TRUNK_MAIN_LINE_IDS.indexOf(lineId) >= 0; }
+  // 干线本名不进搜索图。线路层级只允许 RuntimeConfig 持有一份，
+  // 避免 route-search 与展示层各自维护名单后发生 ID 漂移。
+  function _isTrunk(lineId) {
+    var ids = (window.RuntimeConfig && window.RuntimeConfig.TRUNK_MAIN_LINE_IDS) || [];
+    return ids.indexOf(lineId) >= 0;
+  }
 
   function buildStationGraph() {
     if (_graphCache) return _graphCache;
