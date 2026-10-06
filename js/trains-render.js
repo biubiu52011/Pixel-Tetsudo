@@ -1239,9 +1239,7 @@
           if (_indexContinuous && isFinite(_targetNextIdx) && isFinite(_previousNextIdx)) {
             var _sameSegment = _targetIdx === _previousIdx && _targetNextIdx === _previousNextIdx;
             var _advancedSegment = _targetIdx === _previousNextIdx;
-            var _loopAdvanced = isLoop && stationCoords.length > 1 &&
-              _previousNextIdx === stationCoords.length - 1 && _targetIdx === 0;
-            _indexContinuous = _sameSegment || _advancedSegment || _loopAdvanced;
+            _indexContinuous = _sameSegment || _advancedSegment;
           }
         }
         // Snap threshold is line geometry, not per-train state. It is computed
