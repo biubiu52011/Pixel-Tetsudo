@@ -227,6 +227,12 @@ assert(fusionSource.includes('_sources.indexOf("realtime") >= 0') &&
   'vehicle projection must preserve realtime evidence flags when the resolver converges multiple sources');
 assert(fusionSource.includes('_evSources.indexOf("realtime") < 0 && _evResolution.source !== "realtime"'),
   'positionless realtime vehicle evidence must use the canonical sources array rather than require a single-source resolver result');
+assert(fusionSource.includes('trainNumber: String(t["odpt:trainNumber"] || trainId)'),
+  'realtime position identity must preserve the ODPT train number for timetable/running-chain bridging');
+assert(fusionSource.includes('TrainOperationEvidence.resolveEvidence(positionData.trainNumber, {'),
+  'realtime-derived vehicle evidence must be keyed by canonical train number, never the source train id');
+assert(!fusionSource.includes('TrainOperationEvidence.resolveEvidence(trainId, {'),
+  'source train id must not be reused as a train-number evidence key');
 assert(fusionSource.includes('(posMap[_vlid] || []).forEach(function(_p) {\n                _inheritChainVehicle(_p);'),
   'canonical timetable/SQL EXACT vehicle evidence must be able to inherit onto realtime-position rows through the resolved running chain');
 assert(estimatorSource.includes("timetableVehicleType: _timetableVehicleInput"),
