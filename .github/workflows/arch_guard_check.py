@@ -181,6 +181,10 @@ def main():
         new_errors.append('VEHICLE-002 DIRECT_PROVIDER_TRAVERSAL_OUTSIDE_CANONICAL_RESOLVER')
     if 'structuralVehicleType' in vehicle_src or 'structuralVehicleType' in fusion_src or 'structuralVehicleType' in estimator_src:
         new_errors.append('VEHICLE-002 STRUCTURAL_IDENTITY_DIRECT_INJECTION')
+    if 'timetableVehicleType: chainVehicle.vehicleName' in estimator_src:
+        new_errors.append('VEHICLE-002 FORMATION_EVIDENCE_RELABELED_AS_TIMETABLE')
+    if 'pos.vehicleResolution = chainVehicle;' not in estimator_src or "pos.vehicleSource = chainVehicle.source || 'formation-evidence';" not in estimator_src:
+        new_errors.append('VEHICLE-002 FORMATION_PROVENANCE_PROJECTION_MISSING')
 
     # VEHICLE-003: renderer consumes resolved identity only.
     if 'TrainVehicle.resolve(_vrCtx)' in renderer_src:
