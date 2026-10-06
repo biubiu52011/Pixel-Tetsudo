@@ -400,9 +400,8 @@
       if (!line) continue;
       // Line Hierarchy Rule: 真支线（branchOf 非空）严禁在一级总列表独立展示，
       // 只在父线卡片/详情内展示。平级独立运营线（branchOf=null）照常平铺。
-      if (window.LinePresentationService && window.LinePresentationService.isBranch
-          ? window.LinePresentationService.isBranch(lid, linesObj)
-          : !!line.branchOf) continue;
+      if (window.LinePresentationService && window.LinePresentationService.isBranch &&
+          window.LinePresentationService.isBranch(lid, linesObj)) continue;
       // 国鉄幹線本名（类比京沪铁路/成渝铁路）不是運行系統：中央本線/東海道本線/東北本線 不进入线路一览，
       // 数据保留作换乘锚点/支线父线。
       if (TRUNK_MAIN_LINE_IDS.indexOf(lid) >= 0) continue;
