@@ -98,3 +98,15 @@ const sameMoment=[
 ];
 assert.strictEqual(ctx.window.RunInfoAPI._aggregateStatus(sameMoment,A),"delayed");
 console.log("runinfo-scope temporal precedence: 3 PASS");
+
+const expiredOnly=[
+ {"odpt:railway":"odpt.Railway:Toei.Asakusa","pt:messageKind":"realtime","odpt:trainInformationStatus":"Suspension","dct:valid":"2000-01-01T00:00:00+09:00","odpt:trainInformationText":{"ja":"全線で運転を見合わせています。"}}
+];
+assert.strictEqual(ctx.window.RunInfoAPI._pickRecord(expiredOnly,A),null);
+assert.strictEqual(ctx.window.RunInfoAPI._aggregateStatus(expiredOnly,A),null);
+const expiredAndCurrent=[
+ expiredOnly[0],
+ {"odpt:railway":"odpt.Railway:Toei.Asakusa","pt:messageKind":"realtime","odpt:trainInformationStatus":"Normal","dct:valid":"2999-01-01T00:00:00+09:00","odpt:trainInformationText":{"ja":"現在、平常どおり運転しています。"}}
+];
+assert.strictEqual(ctx.window.RunInfoAPI._aggregateStatus(expiredAndCurrent,A),"normal");
+console.log("runinfo-scope expiry: 3 PASS");
