@@ -156,6 +156,17 @@ def main():
     resolver_src = _read_arch('js/running-chain-resolver.js')
     if 'isThroughAtStation:isThroughAtStation' not in resolver_src:
         new_errors.append('PRESENTATION-001 RELATION_BOUNDARY_API_MISSING')
+    # Pages that consume presentation decisions must load the relation authority
+    # first, otherwise early initialization can silently use compatibility fallback.
+    for page in ('pages/trains.html', 'pages/realtime.html'):
+        page_src = _read_arch(page)
+        resolver_pos = page_src.find('js/running-chain-resolver.js')
+        presentation_pos = page_src.find('js/line-presentation-service.js')
+        data_state_pos = page_src.find('js/data-state.js')
+        if resolver_pos < 0 or presentation_pos < 0 or resolver_pos > presentation_pos:
+            new_errors.append('PRESENTATION-001 RELATION_AUTHORITY_LOAD_ORDER %s' % page)
+        if data_state_pos >= 0 and resolver_pos > data_state_pos:
+            new_errors.append('PRESENTATION-001 RELATION_AUTHORITY_AFTER_DATA_STATE %s' % page)
 
     # REALTIME-001: TrainTrackLayout is the only train geometry authority.
     track_layout_src = _read_arch('js/train-track-layout.js')
