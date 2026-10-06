@@ -167,11 +167,14 @@
     var base = resolveBase(position, stationCoords, geometry, lineId, opts);
     if (!base) return null;
     var moveDir = null;
-    if (base.nextIdx < base.idx) moveDir = "up";
+    var _resolvedRailDirection = String(position && position.railDirection || "").split(/[:.]/).pop();
+    if (/^(InnerLoop|Inner)$/.test(_resolvedRailDirection)) moveDir = "up";
+    else if (/^(OuterLoop|Outer)$/.test(_resolvedRailDirection)) moveDir = "down";
+    else if (base.nextIdx < base.idx) moveDir = "up";
     else if (base.nextIdx > base.idx) moveDir = "down";
     else moveDir = opts.getMoveDir ? opts.getMoveDir(position, lineId) : null;
-    // Geometry direction comes from the resolved segment whenever one exists.
-    // Destination/label heuristics are presentation fallback only.
+    // Geometry direction comes from authoritative loop direction / resolved
+    // segment whenever available. Destination heuristics are display fallback.
     var lane = laneSign(moveDir, position && position.railDirection);
     // New Shuttle physical topology: Omiya-Maruyama is double track, while
     // Maruyama-Uchijuku is single track. Do not draw artificial up/down lanes
