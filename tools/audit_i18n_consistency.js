@@ -226,6 +226,34 @@ function main() {
     const missing = LANGS.filter((lang) => !entry[lang] || !String(entry[lang]).trim());
     if (missing.length) errors.push({ type: 'referenced-station-i18n-language-missing', station: id, missing });
   });
+  const userStateKeys = [
+    'status.display_unavailable',
+    'status.display_unavailable_hint',
+    'status.fetch_unavailable',
+    'status.fetch_unavailable_hint',
+    'status.retry'
+  ];
+  userStateKeys.forEach((key) => {
+    LANGS.forEach((lang) => {
+      if (!translations[lang] || !String(translations[lang][key] || '').trim()) {
+        errors.push({ type: 'missing-user-state-translation', lang, key });
+      }
+    });
+  });
+  const technicalErrorLabels = {
+    en: ['Render error:', 'Data load error'],
+    zh: ['渲染失败:', '数据加载失败'],
+    ja: ['描画失敗:', 'データ読込失敗'],
+    ko: ['렌더링 실패:', '데이터 로드 실패']
+  };
+  Object.entries(technicalErrorLabels).forEach(([lang, labels]) => {
+    labels.forEach((label) => {
+      if (translations[lang] && translations[lang]['status.render_error'] === label) {
+        errors.push({ type: 'technical-error-copy-exposed', lang, key: 'status.render_error', value: label });
+      }
+    });
+  });
+
   const kanaRe = /[\u3040-\u30ff]/;
   [...referencedStationIds].forEach((id) => {
     const entry = stationJson[id];
