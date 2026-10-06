@@ -29,6 +29,23 @@
       : src === "operation-assignment-provider" || src === "odpt" || src === "timetable" ? 2
       : src === "manual" ? 1 : 0;
   }
+  function _projectVehicleResolution(p, resolution, inherited) {
+    if (!p) return p;
+    var r = resolution || null;
+    p.vehicleResolution = r;
+    p.trainClass = r && r.identityStatus === "EXACT" ? (r.name || "") : "";
+    p.vehicleType = r && r.identityStatus === "EXACT" ? (r.vehicleTypeStr || r.name || "") : "";
+    p.vehicleSource = r ? (r.source || "") : "";
+    p.vehicleConfidence = r ? (r.confidence || "none") : "none";
+    p.vehicleIdentityStatus = r ? (r.identityStatus || "UNKNOWN") : "UNKNOWN";
+    p.vehicleIdentityReason = r ? (r.identityReason || "") : "no-vehicle-evidence";
+    p.vehicleIconPath = r && r.identityStatus === "EXACT" ? (r.iconPath || "") : "";
+    p.vehicleResolvedFromRealtime = !!(r && r.identityStatus === "EXACT" && r.source === "realtime");
+    p.vehicleResolvedFromRealtimeDerived = !!(r && r.identityStatus === "EXACT" && r.source === "realtime-derived");
+    p.vehicleResolvedUpstream = !!(r && r.identityStatus === "EXACT");
+    p.vehicleInheritedFromRunningChain = inherited === true;
+    return p;
+  }
   function _rememberChainVehicle(p) {
     if (!p || !p.runningChainId) return;
     var _identityExact = p.vehicleIdentityStatus === "EXACT" ||
@@ -942,20 +959,7 @@
                   realtimeVehicleType: odptVehicleType,
                   realtimeDerivedVehicleType: _derivedVehicleType
                 });
-                positionData.vehicleResolution = _rtVehicle || null;
-                if (_rtVehicle) {
-                  positionData.trainClass = _rtVehicle.name || "";
-                  positionData.vehicleType = _rtVehicle.vehicleTypeStr || _rtVehicle.name || "";
-                  positionData.vehicleSource = _rtVehicle.source || "";
-                  positionData.vehicleConfidence = _rtVehicle.confidence || "none";
-                  var _rtEvidenceBacked = _rtVehicle.identityStatus === "EXACT" &&
-                    (_rtVehicle.source === "realtime" || _rtVehicle.source === "realtime-derived");
-                  positionData.vehicleIdentityStatus = _rtVehicle.identityStatus || "UNKNOWN";
-                  positionData.vehicleIdentityReason = _rtVehicle.identityReason || "";
-                  positionData.vehicleResolvedFromRealtime = _rtVehicle.source === "realtime" && _rtVehicle.identityStatus === "EXACT";
-                  positionData.vehicleResolvedFromRealtimeDerived = _rtVehicle.source === "realtime-derived" && _rtVehicle.identityStatus === "EXACT";
-                  positionData.vehicleIconPath = _rtEvidenceBacked ? (_rtVehicle.iconPath || "") : "";
-                }
+                _projectVehicleResolution(positionData, _rtVehicle, false);
               } catch(e) {}
             }
             var _positionCoverage = getRealtimePositionRecordCoverage(lid, positionData);
