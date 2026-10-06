@@ -4335,10 +4335,10 @@ window.RAILWAY_I18N = {
   "en": "Mejirodai"
  },
  "Hasama": {
-  "ja": "狭間",
-  "zh": "狭间",
+  "ja": "飯山満",
+  "zh": "饭山满",
   "ko": "하사마",
-  "en": "Hazama"
+  "en": "Hasama"
  },
  "Takao-Guchi": {
   "ja": "高尾山口",
@@ -5075,8 +5075,8 @@ window.RAILWAY_I18N = {
  "Kita-Narashino": {
   "ja": "北習志野",
   "zh": "北习志野",
-  "ko": "키타나라시노",
-  "en": "Kita-Narashino"
+  "ko": "기타나라시노",
+  "en": "Kita-narashino"
  },
  "Kita-Omiya": {
   "ja": "北大宮",
@@ -6223,7 +6223,7 @@ window.RAILWAY_I18N = {
   "ja": "八千代緑が丘",
   "zh": "八千代绿丘",
   "ko": "야치요미도리가오카",
-  "en": "Yachiyo-Midorigaoka"
+  "en": "Yachiyo-midorigaoka"
  },
  "Yachiyodai": {
   "ja": "八千代台",
@@ -19939,8 +19939,8 @@ window.RAILWAY_I18N = {
   "en": "Shibayama-chiyoda"
  },
  "ToyoKatsutadai": {
-  "ja": "豊受台",
-  "zh": "丰受台",
+  "ja": "東葉勝田台",
+  "zh": "东叶胜田台",
   "ko": "도요카쓰타다이",
   "en": "Toyo-katsutadai"
  },
@@ -20125,8 +20125,8 @@ window.RAILWAY_I18N = {
   "en": "Shim-misato"
  },
  "UrawaMisono": {
-  "ja": "浦和みそ野",
-  "zh": "浦和味噌野",
+  "ja": "浦和美園",
+  "zh": "浦和美园",
   "ko": "우라와미소노",
   "en": "Urawa-misono"
  },
@@ -28139,5 +28139,65 @@ window.RAILWAY_I18N = {
   "zh": "和贺",
   "ko": "와가",
   "en": "Waga"
+ },
+ "Kawaguchi-Motogo": {
+  "ja": "川口元郷",
+  "zh": "川口元乡",
+  "ko": "가와구치모토고",
+  "en": "Kawaguchi-motogo"
+ },
+ "Minami-Hatogaya": {
+  "ja": "南鳩ヶ谷",
+  "zh": "南鸠谷",
+  "ko": "미나미하토가야",
+  "en": "Minami-hatogaya"
+ },
+ "Araijuku": {
+  "ja": "新井宿",
+  "zh": "新井宿",
+  "ko": "아라이주쿠",
+  "en": "Araijuku"
+ },
+ "Tozuka-Angyo": {
+  "ja": "戸塚安行",
+  "zh": "户塚安行",
+  "ko": "도즈카안교",
+  "en": "Tozuka-angyo"
+ },
+ "Urawa-Misono": {
+  "ja": "浦和美園",
+  "zh": "浦和美园",
+  "ko": "우라와미소노",
+  "en": "Urawa-misono"
+ },
+ "Higashi-Kaijin": {
+  "ja": "東海神",
+  "zh": "东海神",
+  "ko": "히가시카이진",
+  "en": "Higashi-kaijin"
+ },
+ "Funabashi-Nichidaimae": {
+  "ja": "船橋日大前",
+  "zh": "船桥日大前",
+  "ko": "후나바시니치다이마에",
+  "en": "Funabashi-nichidaimae"
+ },
+ "Yachiyo-Chuo": {
+  "ja": "八千代中央",
+  "zh": "八千代中央",
+  "ko": "야치요추오",
+  "en": "Yachiyo-chuo"
+ },
+ "Murakami-Chiba": {
+  "ja": "村上",
+  "zh": "村上",
+  "ko": "무라카미",
+  "en": "Murakami"
+ },
+ "Toyo-Katsutadai": {
+  "ja": "東葉勝田台",
+  "zh": "东叶胜田台",
+  "ko": "도요카쓰타다이",
+  "en": "Toyo-katsutadai"
  }
 };
