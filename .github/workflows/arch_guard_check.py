@@ -138,6 +138,8 @@ def main():
         new_errors.append('REALTIME-001 SEGMENT_CONTINUITY_STATE_MISSING')
     if 'getMoveDir: _trainMoveDir' in renderer_src:
         new_errors.append('REALTIME-001 DISPLAY_DIRECTION_USED_AS_GEOMETRY_AUTHORITY')
+    if 'var trainUid = p.runningChainId || p.trainId || p.trainNumber' in renderer_src:
+        new_errors.append('REALTIME-001 TRAIN_NUMBER_USED_AS_PERSISTENT_MARKER_ID')
 
     # VEHICLE-001/002: one final vehicle authority and one canonical evidence resolver.
     if 'TrainOperationEvidence.resolveEvidence' not in estimator_src:
@@ -178,7 +180,10 @@ def main():
         new_errors.append('VEHICLE-006 POSITION_IDENTITY_AXES_NOT_SEPARATE')
     if 'if (!_sameVehicle && _existingRank >= _incomingRank)' not in fusion_src:
         new_errors.append('VEHICLE-007 STRONGER_CHAIN_IDENTITY_PROTECTION_MISSING')
-    if 'p.vehicleResolvedFromRealtime === true || src === "realtime" ? 5' not in fusion_src or 'p.vehicleResolvedFromRealtimeDerived === true || src === "realtime-derived" ? 4' not in fusion_src:
+    if ('sources.indexOf("realtime") >= 0' not in fusion_src or
+        'sources.indexOf("realtime-derived") >= 0' not in fusion_src or
+        'sources.indexOf("structural") >= 0' not in fusion_src or
+        'sources.indexOf("timetable") >= 0' not in fusion_src):
         new_errors.append('VEHICLE-007 REALTIME_SOURCE_PRIORITY_MISSING')
 
     # Forbidden files
