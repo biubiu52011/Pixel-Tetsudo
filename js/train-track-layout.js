@@ -67,12 +67,13 @@
     ].join("|");
   }
 
-  function stableTrainKey(p, index) {
-    return String((p && (p.runningChainId || p.trainId || p.trainNumber || p.sourceTrainId)) || ("row-" + index));
+  function stableTrainKey(p) {
+    if (!p) return "";
+    return String(p.runningChainId || p.trainId || p.trainNumber || p.sourceTrainId || p.timetableObjectId || "");
   }
 
   function stableStackOrdinal(p, index) {
-    var key = stableTrainKey(p, index);
+    var key = stableTrainKey(p);
     var hash = 2166136261;
     for (var i = 0; i < key.length; i++) {
       hash ^= key.charCodeAt(i);
@@ -88,7 +89,9 @@
     for (var i = 0; i < positions.length; i++) {
       var r = resolver(positions[i], i, true);
       if (!r) continue;
-      (groups[r.key] = groups[r.key] || []).push({ index: i, id: stableTrainKey(positions[i], i) });
+      var stableId = stableTrainKey(positions[i]);
+      if (!stableId) continue;
+      (groups[r.key] = groups[r.key] || []).push({ index: i, id: stableId });
     }
     var slots = {};
     Object.keys(groups).forEach(function(key) {
