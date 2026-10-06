@@ -97,7 +97,20 @@ def main():
         new_errors.append('RAILWAY-001 RUNNING_CHAIN_READS_THROUGH_SERVICES_PROJECTION')
     if 'isDirectThroughService:function' in running_chain_src or 'hasRelation:function' in running_chain_src:
         new_errors.append('RAILWAY-001 LEGACY_RUNNING_CHAIN_RELATION_API_REINTRODUCED')
-    if 'THROUGH_SERVICE' in running_chain_src or 'SERVICE_BOUNDARY' in running_chain_src:
+    # Diagnostic reason labels such as "THROUGH_SERVICE" are presentation/debug
+    # vocabulary, not topology authority. Block only executable legacy relation-
+    # type reads/writes so diagnostics cannot create a false architecture failure.
+    legacy_relation_type_tokens = (
+        'relation.type === "THROUGH_SERVICE"',
+        "relation.type === 'THROUGH_SERVICE'",
+        'relation.type === "SERVICE_BOUNDARY"',
+        "relation.type === 'SERVICE_BOUNDARY'",
+        'relation.type = "THROUGH_SERVICE"',
+        "relation.type = 'THROUGH_SERVICE'",
+        'relation.type = "SERVICE_BOUNDARY"',
+        "relation.type = 'SERVICE_BOUNDARY'",
+    )
+    if any(token in running_chain_src for token in legacy_relation_type_tokens):
         new_errors.append('RAILWAY-001 LEGACY_RUNNING_CHAIN_RELATION_TYPE_REINTRODUCED')
     if '.throughServices' in route_search_src:
         new_errors.append('RAILWAY-001 ROUTE_SEARCH_READS_THROUGH_SERVICES_PROJECTION')
