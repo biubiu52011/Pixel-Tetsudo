@@ -58,6 +58,12 @@ assert(/_distance > _snapDistance/.test(renderer),
   "implausibly large marker jumps must snap instead of sweeping across the map");
 assert(/_moveTrainLabels\(trainLayer, trainUid, _curX, _curY/.test(renderer),
   "train labels must follow the marker in the same animation frame");
+assert(/function _trainLabelSignature\(p, lineId\)/.test(renderer),
+  "train labels must have a stable content signature across service updates");
+assert(/existing\.getAttribute\("data-label-signature"\) !== signature/.test(renderer),
+  "train label sync must refresh stale direction/destination/type content");
+assert(!/markerById\[String\(trainUid\)\] = existingIcon;\s*appendTrainLabels/.test(renderer),
+  "marker creation must use the same label synchronization lifecycle as updates");
 assert(!/isLoop && _loopRect && _needMove && !window\.TrainTrackLayout/.test(renderer),
   "legacy loop RAF must not remain as a second animation path beside TrainTrackLayout");
 assert(!/idx = clamp\(idx, 0, points\.length - 1\)/.test(trackLayoutSource),
