@@ -56,6 +56,11 @@ assert(/_icon\._displayX = _curX;[\s\S]{0,120}_icon\._displayY = _curY;/.test(re
   "animation must persist the current interpolated marker position for interruption-safe continuation");
 assert(/_distance > _snapDistance/.test(renderer),
   "implausibly large marker jumps must snap instead of sweeping across the map");
+assert(/_displayNextStationIdx/.test(renderer),
+  "marker continuity must persist the resolved next-station segment endpoint");
+assert(/var _sameSegment = _targetIdx === _previousIdx && _targetNextIdx === _previousNextIdx;/.test(renderer) &&
+       /var _advancedSegment = _targetIdx === _previousNextIdx;/.test(renderer),
+  "cross-poll animation must require same-segment or adjacent-segment continuity");
 assert(/var _adjacentGaps = \[\];[\s\S]{0,900}var _snapDistance = Math\.max\(80, _medianStationGap \* 2\.5\);/.test(renderer),
   "snap distance must be derived once from line geometry per render pass");
 assert(!/var _adjacent = \[\];[\s\S]{0,700}var _medianGap/.test(renderer),
