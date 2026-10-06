@@ -278,7 +278,7 @@
               // Match realtime page state semantics: loading must terminate in a
               // visible error state instead of leaving an endless spinner.
               if (!listEl.querySelector(".rs-line-card")) {
-                window.DataState.renderPageState(listEl, "error");
+                window.DataState.renderPageState(listEl, navigator.onLine === false ? "offline" : "timeout");
               }
               return;
             } // ~60s cap (mobile GitHub Pages can be slow)
