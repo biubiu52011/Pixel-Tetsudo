@@ -1136,7 +1136,11 @@
       // Stable physical-service identity: confirmed running chain first.
       // Do not include stationIndex; doing so recreates the DOM node at every
       // station/boundary and breaks continuity even when the chain is known.
-      var trainUid = p.runningChainId || p.trainId || ("train_" + pi);
+      var trainUid = p.runningChainId || p.trainId || p.trainNumber || p.sourceTrainId || p.timetableObjectId || "";
+      // Array order is not train identity. Without a stable service/train key,
+      // do not attach animation state to a row that may represent another train
+      // after the next poll/sort.
+      if (!trainUid) continue;
       updatedIds[trainUid] = true;
       
       var markerSpec = _trainMarkerSpec(p);
