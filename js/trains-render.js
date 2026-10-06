@@ -1112,7 +1112,7 @@
     positions = _filtered;
     var layout = (window.TrainTrackLayout && window.TrainTrackLayout.resolveAll)
       ? window.TrainTrackLayout.resolveAll(positions, stationCoords, geometry, lineId, {
-          getMoveDir: _trainMoveDir,
+          getDisplayMoveDir: _trainMoveDir,
           fusionBaseIdx: _fusionBaseIdx,
           laneGap: isLoop ? 9 : 11,
           stackGap: isLoop ? 7 : 8
