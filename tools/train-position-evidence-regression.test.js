@@ -64,6 +64,12 @@ assert(!/idx = clamp\(idx, 0, points\.length - 1\)/.test(trackLayoutSource),
   "out-of-range stationIndex must fail closed instead of collapsing onto an endpoint station");
 assert(/stableStackOrdinal\(position, index\)/.test(trackLayoutSource),
   "multi-train stack offsets must be keyed by stable train identity across polling updates");
+assert(!/\("train_" \+ pi\)/.test(renderer),
+  "renderer must never use current row order as persistent train identity");
+assert(!/\("row-" \+ index\)/.test(trackLayoutSource),
+  "layout occupancy must never use current row order as stable train identity");
+assert(/p\.runningChainId \|\| p\.trainId \|\| p\.trainNumber \|\| p\.sourceTrainId \|\| p\.timetableObjectId/.test(renderer),
+  "renderer identity must use stable operational identifiers only");
 assert(/routePos:\s*routePos/.test(trackLayoutSource),
   "TrainTrackLayout must expose loop route position to the single marker animation authority");
 assert(/_useLoopRoute[\s\S]{0,900}_loopPosToXY\(_curRoutePos, _loopRect\)/.test(renderer),
