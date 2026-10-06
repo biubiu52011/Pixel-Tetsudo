@@ -10,7 +10,7 @@
  *                          STATION_ALIAS_BY_RAILWAY, TRAIN_WARMUP_LINES, REFRESH_INTERVAL,
  *                          POSITION_INTERVAL
  *   odpt-unified.js      → API_RATE_LIMIT, API_MAX_CONCURRENCY, TT_TRUNCATE_LIMIT
- *   trains-page.js       → TRUNK_EXTENSION_ALLOW, TRANSFER_MAX_ROWS
+ *   trains-page.js       → TRANSFER_MAX_ROWS
  */
 (function() {
   "use strict";
@@ -23,12 +23,6 @@
    * 中央本線已独立 CO 卡（4.3.414），不在此列。
    */
   var TRUNK_MAIN_LINE_IDS = ["Shinetsu", "TokaidoMain", "Tohoku"];
-
-  /**
-   * 干线本名延伸白名单（显式登记，防止自动端点相接误判）。
-   * 4.3.421：横須賀線誤延伸整条東海道本線 修复后改为空表，即不延伸任何干线本名。
-   */
-  var TRUNK_EXTENSION_ALLOW = {};
 
   // ========== 直通运行 ==========
 
@@ -241,7 +235,6 @@
   window.RuntimeConfig = {
     // 线路层级
     TRUNK_MAIN_LINE_IDS: TRUNK_MAIN_LINE_IDS,
-    TRUNK_EXTENSION_ALLOW: TRUNK_EXTENSION_ALLOW,
     // 直通运行
     SOURCE_RAILWAY_CANONICAL_LINE: SOURCE_RAILWAY_CANONICAL_LINE,
     PRIORITY_OPS: PRIORITY_OPS,
