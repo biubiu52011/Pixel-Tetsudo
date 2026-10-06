@@ -1407,7 +1407,7 @@
     if (!p) return false;
     var _ov = _getLineOverride(lineId);
     if (!_ov || !_ov.branchTrain) return false;
-    var si = p.stationIndex || 0;
+    var si = p.stationIndex != null ? Number(p.stationIndex) : NaN;
     var bt = _ov.branchTrain;
     if (si >= bt.startIdx && si <= bt.endIdx) return true;
     if (si === 0) {
@@ -1441,7 +1441,8 @@
     // 不再依赖手工 DIR_AXIS_MAP 收录。终点不在本线站表(直通他线终点/无终点)时不命中，回落下方原判定。
     var _dnDest = String(p.destinationStation || '').split('.').pop();
     if (_dnDest) {
-      var _curD = p.stationIndex || 0;
+      var _curD = p.stationIndex != null ? Number(p.stationIndex) : NaN;
+      if (!isFinite(_curD) || _curD < 0) return null;
       var _stsD = (window.UNIFIED_LINES && window.UNIFIED_LINES[lineId]) ? (window.UNIFIED_LINES[lineId].stations || []) : [];
       var _destN = _dnDest.replace(/-/g, '').toLowerCase();
       for (var _ddi = 0; _ddi < _stsD.length; _ddi++) {
@@ -1460,7 +1461,8 @@
       return axis > 0 ? 'down' : 'up';
     }
     if (!dn) return null;
-    var cur = p.stationIndex || 0;
+    var cur = p.stationIndex != null ? Number(p.stationIndex) : NaN;
+    if (!isFinite(cur) || cur < 0) return null;
     var sts = (window.UNIFIED_LINES && window.UNIFIED_LINES[lineId]) ? (window.UNIFIED_LINES[lineId].stations || []) : [];
     // v4.3.900: 荒川线 ODPT 站名词典映射（Minowabashi=三ノ輪橋=Sannomi_Bashi）
     var _aliasMap = { 'toei.minowabashi': 'sannomi_bashi', 'toei.waseda': 'waseda' };
