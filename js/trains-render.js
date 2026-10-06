@@ -1119,6 +1119,18 @@
         })
       : null;
     
+    var _adjacentGaps = [];
+    for (var _sgi = 1; _sgi < stationCoords.length; _sgi++) {
+      var _sga = stationCoords[_sgi - 1], _sgb = stationCoords[_sgi];
+      if (!_sga || !_sgb) continue;
+      var _sgdx = _sgb.x - _sga.x, _sgdy = _sgb.y - _sga.y;
+      var _gap = Math.sqrt(_sgdx * _sgdx + _sgdy * _sgdy);
+      if (isFinite(_gap) && _gap > 0) _adjacentGaps.push(_gap);
+    }
+    _adjacentGaps.sort(function(a,b){ return a-b; });
+    var _medianStationGap = _adjacentGaps.length ? _adjacentGaps[Math.floor(_adjacentGaps.length / 2)] : 40;
+    var _snapDistance = Math.max(80, _medianStationGap * 2.5);
+
     var updatedIds = {};
     var markerById = {};
     var _existingMarkers = trainLayer.querySelectorAll('[data-train-id]');
@@ -1224,20 +1236,8 @@
           // that is a new/stale snapshot, not a path to animate through.
           _indexContinuous = _idxDiff <= 1;
         }
-        // A target farther than roughly two adjacent station gaps is not a
-        // trustworthy interpolation path (new identity, stale snapshot, or
-        // topology discontinuity). Snap rather than sweeping across the map.
-        var _adjacent = [];
-        for (var _si = 1; _si < stationCoords.length; _si++) {
-          var _sa = stationCoords[_si - 1], _sb = stationCoords[_si];
-          if (!_sa || !_sb) continue;
-          var _sdx = _sb.x - _sa.x, _sdy = _sb.y - _sa.y;
-          var _sgap = Math.sqrt(_sdx * _sdx + _sdy * _sdy);
-          if (isFinite(_sgap) && _sgap > 0) _adjacent.push(_sgap);
-        }
-        _adjacent.sort(function(a,b){ return a-b; });
-        var _medianGap = _adjacent.length ? _adjacent[Math.floor(_adjacent.length / 2)] : 40;
-        var _snapDistance = Math.max(80, _medianGap * 2.5);
+        // Snap threshold is line geometry, not per-train state. It is computed
+        // once for this render pass and shared by every marker.
         var _shouldSnap = !_hasDisplayPos || !_sameLine || !_indexContinuous || !isFinite(_distance) || _distance > _snapDistance;
 
         if (_shouldSnap || _distance <= 0.5) {
