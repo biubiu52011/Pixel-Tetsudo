@@ -481,9 +481,12 @@
     if (!code || !linesObj) return "";
     var ids = Object.keys(linesObj);
     for (var i = 0; i < ids.length; i++) {
-      var line = linesObj[ids[i]], sys = line && line.presentation;
-      if (!sys || String(sys.code || "") !== String(code) || !Array.isArray(sys.lineIds)) continue;
-      var memberIds = sys.lineIds.filter(function(id) { return !!linesObj[id]; });
+      var line = linesObj[ids[i]];
+      var sys = (window.LinePresentationService && window.LinePresentationService.getPrimaryPresentation)
+        ? window.LinePresentationService.getPrimaryPresentation(ids[i], linesObj)
+        : null;
+      if (!sys || String(sys.code || "") !== String(code)) continue;
+      var memberIds = window.LinePresentationService.getPresentationMembers(ids[i], linesObj);
       if (memberIds.length === 0) return "";
       return renderSystemCard(sys, memberIds, linesObj, options || { mode: "realtime" });
     }
