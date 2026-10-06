@@ -68,7 +68,12 @@
     "人身影響": { zh: "人身影响", ko: "인명 영향", en: "personal impact" },
     "輸送混乱": { zh: "运输混乱", ko: "수송 혼란", en: "traffic disruption" },
     "線路設備": { zh: "线路设备", ko: "선로 설비", en: "track equipment" },
-    "バス": { zh: "巴士", ko: "버스", en: "bus" }
+    "バス": { zh: "巴士", ko: "버스", en: "bus" },
+    "台風": { zh: "台风", ko: "태풍", en: "typhoon" },
+    "混雑": { zh: "拥挤", ko: "혼잡", en: "congestion" },
+    "急病人": { zh: "突发疾病乘客", ko: "응급 환자", en: "passenger illness" },
+    "線路内立入": { zh: "人员进入线路", ko: "선로 내 출입", en: "person on the tracks" },
+    "ドア点検": { zh: "车门检查", ko: "출입문 점검", en: "door inspection" }
   };
 
   // ---- 常用术语表（ja → 4 语言）----
@@ -121,7 +126,12 @@
     "運休が発生します": { zh: "发生停运", ko: "운휴가 발생합니다", en: "cancellations will occur" },
     "運転を取りやめます": { zh: "停止运行", ko: "운행을 중지합니다", en: "will be suspended" },
     "全ての列車": { zh: "全部列车", ko: "모든 열차", en: "all trains" },
-    "再開しました": { zh: "已恢复", ko: "재개되었습니다", en: "has resumed" }
+    "再開しました": { zh: "已恢复", ko: "재개되었습니다", en: "has resumed" },
+    "遅れと運休": { zh: "延误和停运", ko: "지연과 운휴", en: "delays and cancellations" },
+    "運転を見合わせています": { zh: "正在暂停运行", ko: "운전을 중단하고 있습니다", en: "service is suspended" },
+    "運転を見合わせます": { zh: "将暂停运行", ko: "운전을 중단합니다", en: "service will be suspended" },
+    "直通運転": { zh: "直通运行", ko: "직통 운전", en: "through service" },
+    "直通運転を中止しています": { zh: "已停止直通运行", ko: "직통 운전을 중단하고 있습니다", en: "through service is suspended" }
   };
 
   // ---- 小词表（影响源片段内的连接词）----
