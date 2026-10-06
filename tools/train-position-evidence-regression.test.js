@@ -83,8 +83,10 @@ assert(!/\("train_" \+ pi\)/.test(renderer),
   "renderer must never use current row order as persistent train identity");
 assert(!/\("row-" \+ index\)/.test(trackLayoutSource),
   "layout occupancy must never use current row order as stable train identity");
-assert(/p\.runningChainId \|\| p\.trainId \|\| p\.trainNumber \|\| p\.sourceTrainId \|\| p\.timetableObjectId/.test(renderer),
-  "renderer identity must use stable operational identifiers only");
+assert(/p\.runningChainId \|\| p\.trainId \|\| p\.sourceTrainId \|\| p\.timetableObjectId/.test(renderer),
+  "renderer identity must use stable source-object or running-chain identifiers only");
+assert(!/var trainUid = p\.runningChainId \|\| p\.trainId \|\| p\.trainNumber/.test(renderer),
+  "bare train number must remain bounded fusion evidence, never persistent DOM marker identity");
 assert(/var markerById = \{\};/.test(renderer) && /var _existingMarkers = trainLayer\.querySelectorAll\('\[data-train-id\]'\)/.test(renderer),
   "renderer must index existing train markers once per render pass");
 assert(!/var _trainNodes = trainLayer\.querySelectorAll\('\[data-train-id\]'\)/.test(renderer),
