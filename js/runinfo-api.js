@@ -129,6 +129,7 @@
       var ti = rec["odpt:trainInformationText"] || rec["odpt:text"] || "";
       return window.RunInfoEvaluator.evaluate({
         source: "odpt",
+        currentOperationalSource: true,
         structuredStatus: rec["odpt:trainInformationStatus"],
         messageKind: rec["pt:messageKind"] || rec["odpt:trainInformationCategory"] || rec["odpt:category"],
         suspension: rec["odpt:suspension"] === true,
@@ -245,6 +246,7 @@
               var primary = scoped[0] || {};
               evaluated = window.RunInfoEvaluator.evaluate({
                 source: "odpt",
+                currentOperationalSource: true,
                 messageKind: primary["pt:messageKind"] || primary["odpt:trainInformationCategory"] || primary["odpt:category"],
                 structuredStatus: primary["odpt:trainInformationStatus"],
                 suspension: primary["odpt:suspension"] === true,
