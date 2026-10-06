@@ -578,9 +578,9 @@
   var allLines = null;
   var doEstimation = null;
   var posMap = {};
-  // Source railway scope admits canonical candidates across operator boundaries.
-  // It never orders candidates or resolves an ambiguous physical-train identity.
-  var SOURCE_RAILWAY_LINE_SCOPE = (window.RuntimeConfig && window.RuntimeConfig.SOURCE_RAILWAY_LINE_SCOPE) || {};
+  // External provider railway names may differ from the canonical line id.
+  // This is identity adaptation only; topology remains in railway_data.json.
+  var SOURCE_RAILWAY_CANONICAL_LINE = (window.RuntimeConfig && window.RuntimeConfig.SOURCE_RAILWAY_CANONICAL_LINE) || {};
   var _stationLineIndex = null;
   var _stationLineIndexSource = null;
   var _branchIndex = null;
@@ -797,7 +797,7 @@
           // InnerLoop / OuterLoop is direction evidence only. Keep the
           // source destination intact; rendering prefers a real terminal when present.
           var matchingLines = [];
-          var _sourceScope = SOURCE_RAILWAY_LINE_SCOPE[railwayName] || [];
+          var _canonicalSourceLine = SOURCE_RAILWAY_CANONICAL_LINE[railwayName] || "";
           var _stationIndex = getStationLineIndex(allLines);
           var _stationCandidates = _stationIndex[String(stationKey).replace(/-/g, "").toLowerCase()] || [];
           _stationCandidates.forEach(function(_candidate) {
@@ -805,17 +805,26 @@
             var line = allLines[lid];
             if (!line || !line.stations) return;
             var lop = TransitConstants && typeof TransitConstants.normalizeOp === "function" ? TransitConstants.normalizeOp(line.operator) : line.operator;
-            // v4.3.494: 直通系统（SotetsuDirect）列車 operator=JR-East でも、
-            // explicit source scope may admit a cross-operator canonical line.
-            if (lop !== top && _sourceScope.indexOf(lid) < 0) return;
+            // Cross-operator admission is allowed only for the canonical line
+            // explicitly identified by the provider adapter. Through neighbours
+            // are discovered from canonical topology, never from this map.
+            if (lop !== top && lid !== _canonicalSourceLine) return;
             var idx = _candidate.stationIndex;
             if (idx < 0) return;
             matchingLines.push({ lid: lid, idx: idx, line: line });
           });
           var targetLine = null;
-          if (matchingLines.length === 1) {
+          if (_canonicalSourceLine) {
+            for (var _csi = 0; _csi < matchingLines.length; _csi++) {
+              if (matchingLines[_csi].lid === _canonicalSourceLine) {
+                targetLine = matchingLines[_csi];
+                break;
+              }
+            }
+          }
+          if (!targetLine && matchingLines.length === 1) {
             targetLine = matchingLines[0];
-          } else if (matchingLines.length > 1) {
+          } else if (!targetLine && matchingLines.length > 1) {
             // 1. 优先使用railway字段精确匹配
             if (railwayName) {
               // v4.3.437: 先用 LINE_RAILWAY_CODE 反查 odpt railway 短名 → 项目线 key 列表
