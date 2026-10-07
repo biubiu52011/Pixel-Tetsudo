@@ -308,7 +308,7 @@
       });
       window.addEventListener("pt:railway-error", function() {
         if (!listEl || listEl.querySelector(".rs-line-card")) return;
-        window.DataState.renderPageState(listEl, navigator.onLine === false ? "offline" : "fetch_error");
+
       });
       // Subscribe to DataState changes to handle late data loading
       if (window.DataState) {
