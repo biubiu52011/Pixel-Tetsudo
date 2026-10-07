@@ -312,12 +312,10 @@
   let _latestLines = null;
   let _latestOrder = null;
   let _selectedOperator = null;
+  var _filterBar = null;
 
   function setFilterAvailability(available) {
-    var bar = document.getElementById("realtimeFilterBar");
-    if (!bar) return;
-    bar.classList.toggle("hidden", !available);
-    bar.setAttribute("aria-hidden", available ? "false" : "true");
+    if (_filterBar) _filterBar.setAvailable(available);
   }
   let _currentModalLine = null;
   let _currentModalIdentity = "";
@@ -397,53 +395,20 @@
     }).catch(function(){});
   }
 
-  function sortOperators(ops) {
-    if (window.LinePresentationService && typeof window.LinePresentationService.orderOperators === "function") {
-      return window.LinePresentationService.orderOperators(ops);
-    }
-    var order = (window.TransitConstants && window.TransitConstants.OP_ORDER) ? window.TransitConstants.OP_ORDER : [];
-    return ops.sort(function(a, b) {
-      var ia = order.indexOf(a), ib = order.indexOf(b);
-      if (ia >= 0 && ib >= 0) return ia - ib;
-      if (ia >= 0) return -1;
-      if (ib >= 0) return 1;
-      return a.localeCompare(b);
-    });
-  }
-
   function renderFilterBar(linesObj) {
-    var bar = document.getElementById("realtimeFilterBar");
-    if (!bar || !linesObj) return;
-    var ops = {};
-    Object.keys(linesObj).forEach(function(id) {
-      var line = linesObj[id];
-      if (line && line.operator) ops[line.operator] = true;
-    });
-    var opList = sortOperators(Object.keys(ops));
-    var html = '<button class="rs-filter-btn' + (_selectedOperator === null ? ' active' : '') + '" data-operator="">';
-    html += (typeof window.t === "function" && window.t("filter.all")) ? window.t("filter.all") : "All";
-    html += "</button>";
-    opList.forEach(function(op) {
-      var label = (typeof window.t === 'function' && window.t('op.' + op)) || op;
-      html += '<button class="rs-filter-btn' + (_selectedOperator === op ? ' active' : '') + '" data-operator="' + op + '">' + label + '</button>';
-    });
-    bar.innerHTML = html;
-    bar.querySelectorAll(".rs-filter-btn").forEach(function(btn) {
-      btn.addEventListener("click", function() {
-        setFilter(this.dataset.operator || null);
+    if (!_filterBar && window.OperatorFilterBar) {
+      _filterBar = window.OperatorFilterBar.create("realtimeFilterBar", {
+        selected: _selectedOperator,
+        onChange: function(operator) { setFilter(operator); }
       });
-    });
+    }
+    if (_filterBar) _filterBar.render(linesObj);
   }
 
   function setFilter(operator) {
-    _selectedOperator = operator;
-    var bar = document.getElementById("realtimeFilterBar");
-    if (bar) {
-      Array.prototype.slice.call(bar.querySelectorAll(".rs-filter-btn")).forEach(function(btn) {
-        btn.classList.toggle("active", (btn.dataset.operator || null) === _selectedOperator);
-      });
-    }
-    var container = document.getElementById("realtimeStatusContainer");
+    _selectedOperator = operator || null;
+    if (_filterBar && _filterBar.getSelected() !== _selectedOperator) _filterBar.setSelected(_selectedOperator, false);
+    var container = document.getElementById("realtimeList");
     if (!container) return;
     var groups = container.querySelectorAll(".rs-operator-group[data-operator]");
     if (!groups.length) {
@@ -452,18 +417,9 @@
     }
     Array.prototype.slice.call(groups).forEach(function(group) {
       var groupOp = group.getAttribute("data-operator") || "";
-      var visible = !_selectedOperator || groupOp === _selectedOperator ||
-        (_selectedOperator === "JR-East" && groupOp === "JR-East");
-      group.classList.toggle("hidden", !visible);
+      group.style.display = (!_selectedOperator || groupOp === _selectedOperator) ? "" : "none";
     });
-    // Filtering changes visibility only. Keep signatures aligned with the
-    // mounted full list so the next live reconciliation patches cards instead
-    // of mistaking a filter click for a structural data reload.
-    if (_latestLines) {
-      var next = {};
-      Object.keys(_latestLines).forEach(function(id) { next[id] = statusSignature(_latestLines[id]); });
-      _renderedStatusSignatures = next;
-    }
+    if (_latestLines) _lastStructureSignature = structureSignature(_latestLines);
   }
 
   function getFilteredLines() {
