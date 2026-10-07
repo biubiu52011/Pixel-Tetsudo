@@ -158,4 +158,24 @@ assert.deepStrictEqual(scopedDirectionEffects.impacts,[
   {interval:"A駅→B駅",direction:"up",effect:"suspension"},
   {interval:"A駅→B駅",direction:"down",effect:"delay"}
 ]);
+let genericMultiRange=E.extractMetadata({text:"A駅～B駅間で運転を見合わせています。C駅～D駅間では遅れが出ています。"});
+assert.deepStrictEqual(genericMultiRange.impacts,[
+  {interval:"A駅→B駅",direction:null,effect:"suspension"},
+  {interval:"C駅→D駅",direction:null,effect:"delay"}
+]);
+let genericDirections=E.extractMetadata({text:"A駅～B駅間の上り線で運転を見合わせています。下り線では遅れが出ています。"});
+assert.deepStrictEqual(genericDirections.impacts,[
+  {interval:"A駅→B駅",direction:"up",effect:"suspension"},
+  {interval:"A駅→B駅",direction:"down",effect:"delay"}
+]);
+let genericThroughAndDelay=E.extractMetadata({text:"Y線との直通運転を中止しています。本線の下り線では遅れが出ています。"});
+assert.deepStrictEqual(genericThroughAndDelay.impacts,[
+  {interval:null,direction:null,effect:"through_suspension"},
+  {interval:null,direction:"down",effect:"delay"}
+]);
+let genericSharedEffect=E.extractMetadata({text:"A駅～B駅間・C駅～D駅間で運転を見合わせています。"});
+assert.deepStrictEqual(genericSharedEffect.impacts,[
+  {interval:"A駅→B駅",direction:null,effect:"suspension"},
+  {interval:"C駅→D駅",direction:null,effect:"suspension"}
+]);
 console.log("runinfo-evaluator: generic scope PASS");
