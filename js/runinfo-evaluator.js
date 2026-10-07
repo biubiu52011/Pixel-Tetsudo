@@ -184,10 +184,29 @@
 
       var effects = effectClauses(sentence);
       if (!effects.length) return;
-      effects.forEach(function(fx) {
+      effects.forEach(function(fx, effectIndex) {
         var preceding = scopes.filter(function(s){ return s.index <= fx.index; });
-        var rangeScope = nearestBefore(preceding.filter(function(s){ return !!s.interval; }), fx.index);
+        var rangeScopes = preceding.filter(function(s){ return !!s.interval; });
+        var rangeScope = nearestBefore(rangeScopes, fx.index);
         var directionScope = nearestBefore(preceding.filter(function(s){ return !!s.direction; }), fx.index);
+        var previousEffectIndex = effectIndex > 0 ? effects[effectIndex - 1].index : -1;
+
+        // Multiple station ranges listed before one effect share that effect
+        // ("A-B間・C-D間で運転見合わせ"). Only ranges introduced after the
+        // previous effect belong to the current clause; this prevents a later
+        // delay clause from inheriting every earlier range.
+        var clauseRanges = rangeScopes.filter(function(s){ return s.index > previousEffectIndex; });
+        if (clauseRanges.length > 1) {
+          clauseRanges.forEach(function(scope) {
+            impacts.push({
+              interval: scope.interval,
+              direction: directionScope ? directionScope.direction : null,
+              effect: fx.effect
+            });
+          });
+          return;
+        }
+
         impacts.push({
           interval: rangeScope ? rangeScope.interval : null,
           direction: directionScope ? directionScope.direction : null,
