@@ -20,6 +20,36 @@ jobs:
         uses: actions/checkout@v5
       - name: Setup Pages
         uses: actions/configure-pages@v5
+      - name: Stamp deployment cache version
+        env:
+          BUILD_SHA: ${{ github.sha }}
+        run: |
+          python - <<'PY'
+          import os, pathlib, re
+          build = os.environ["BUILD_SHA"]
+          for path in pathlib.Path("pages").glob("*.html"):
+              text = path.read_text(encoding="utf-8")
+              if 'http-equiv="Cache-Control"' not in text:
+                  text = re.sub(
+                      r'(<head[^>]*>)',
+                      r'\1\n<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">\n'
+                      r'<meta http-equiv="Pragma" content="no-cache">\n'
+                      r'<meta http-equiv="Expires" content="0">',
+                      text, count=1, flags=re.I,
+                  )
+              text = re.sub(
+                  r'((?:src|href)="(?:\.\./)?(?:js|css|data)/[^"?]+)(?:\?[^"]*)?(")',
+                  lambda m: f'{m.group(1)}?build={build}{m.group(2)}',
+                  text, flags=re.I,
+              )
+              text = re.sub(
+                  r'(href="(?:home|realtime|trains|history|tourism-event|tourism-shop|tourism-spot)\.html)(?:\?[^"]*)?(")',
+                  lambda m: f'{m.group(1)}?build={build}{m.group(2)}',
+                  text, flags=re.I,
+              )
+              path.write_text(text, encoding="utf-8")
+          PY
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
