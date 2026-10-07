@@ -127,3 +127,32 @@
   cursor: wait;
   opacity: .55;
 }
+
+
+/* Mobile SiteShell geometry: keep the title centered independently from the
+   fixed language control, and give the primary navigation clear separation. */
+@media (max-width: 640px) {
+  .pixel-header {
+    position: relative;
+    padding-left: 64px;
+    padding-right: 64px;
+    padding-bottom: 16px;
+  }
+  .header-container {
+    width: 100%;
+    max-width: none;
+    position: relative;
+  }
+  .header-text {
+    flex: none;
+    width: 100%;
+    text-align: center;
+  }
+  .pixel-title {
+    width: 100%;
+    text-align: center;
+  }
+  .pixel-tabs {
+    margin-top: 14px;
+  }
+}
