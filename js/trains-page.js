@@ -242,6 +242,24 @@
       // Sync loading animation with the realtime page (rs-loading spinner)
       setFilterAvailability(false);
       window.DataState.renderPageState(listEl, "loading");
+      if (window.DataState && window.DataState.setPageStateRetry) {
+        window.DataState.setPageStateRetry(listEl, function() {
+          setFilterAvailability(false);
+          window.DataState.renderPageState(listEl, "loading");
+          if (!window.DataLoader || typeof window.DataLoader.retry !== "function") {
+            return Promise.reject(new Error("DataLoader retry unavailable"));
+          }
+          return window.DataLoader.retry().then(function() {
+            var lines = getLinesData();
+            if (!lines || !Object.keys(lines).length) throw new Error("Canonical railway data unavailable after retry");
+            if (_selectedOperator === null) renderList(listEl);
+            else renderFiltered(listEl, lines);
+            renderFilterBar(filterBarEl);
+            setFilterAvailability(true);
+            _applyRoute();
+          });
+        });
+      }
       listEl.addEventListener("click", function(e) {
         // 支线 chip：从父线卡片进入支线详情（Line Hierarchy Rule）
         var chip = e.target.closest(".rs-branch-chip");
