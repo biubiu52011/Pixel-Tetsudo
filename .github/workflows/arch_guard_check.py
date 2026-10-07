@@ -195,6 +195,17 @@ def main():
             new_errors.append('RECOVERY-001 MOBILE_RECOVERY_SIGNAL_MISSING %s' % token)
     if 'var fallbackReload = function() { window.location.reload(); };' not in data_state_src:
         new_errors.append('RECOVERY-001 RETRY_FALLBACK_MISSING')
+    odpt_src = _read_arch('data/api/odpt-unified.js')
+    for rel, src in (
+        ('data/api/odpt-unified.js', odpt_src),
+        ('js/data-fusion.js', fusion_src),
+    ):
+        if "window.addEventListener('pageshow'" not in src or 'event.persisted' not in src:
+            new_errors.append('RECOVERY-001 LIVE_BFCACHE_RESUME_MISSING %s' % rel)
+    if '_realtimeRefresh();' not in odpt_src:
+        new_errors.append('RECOVERY-001 ODPT_FOREGROUND_REFRESH_MISSING')
+    if 'pageshow fallback->fuseAll error' not in fusion_src:
+        new_errors.append('RECOVERY-001 FUSION_BFCACHE_FALLBACK_MISSING')
 
     # REALTIME-001: TrainTrackLayout is the only train geometry authority.
     track_layout_src = _read_arch('js/train-track-layout.js')
