@@ -29,3 +29,13 @@ assert(getApiDelayBody.length>0);
 assert(!/aggregateDelayRecords\(raw\)/.test(getApiDelayBody));
 assert(/without a matching[\s\S]*railway identity/.test(getApiDelayBody));
 console.log("runinfo-loading-state: 20 PASS");
+
+const trainsPage = fs.readFileSync(require("path").join(__dirname, "../js/trains-page.js"), "utf8");
+const loader = fs.readFileSync(require("path").join(__dirname, "../data/core/db-loader.js"), "utf8");
+assert.ok(!/ensureDataReady/.test(trainsPage), "trains page must not own a startup data poll");
+assert.ok(!/_pollTimer|_pollCount/.test(view), "realtime page must not own a startup data poll");
+assert.ok(view.includes('pt:railway-error'), "realtime must terminate loading from canonical loader failure");
+assert.ok(trainsPage.includes('pt:railway-error'), "trains must terminate loading from canonical loader failure");
+assert.ok(loader.includes('if (_loadPromise) return _loadPromise;'), "retry must reuse an in-flight canonical load");
+assert.ok(loader.includes('pt:railway-error'), "loader must publish terminal railway failure");
+console.log("railway-loading-lifecycle: PASS");
