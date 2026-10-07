@@ -317,3 +317,15 @@ assert(runningChainSource.includes('_directThrough[lineId].push(boundary.lineId)
   'direct-through runtime index must be projected from validated service boundaries');
 
 console.log("train-position-evidence-regression: PASS");
+
+const fusionSource=fs.readFileSync(require("path").join(__dirname,"../js/data-fusion.js"),"utf8");
+const renderSource=fs.readFileSync(require("path").join(__dirname,"../js/trains-render.js"),"utf8");
+assert(/function _isFreshRealtimeRecord\(record\)/.test(fusionSource));
+assert(/!t \|\| !_isFreshRealtimeRecord\(t\)/.test(fusionSource));
+assert(/record\["dct:valid"\]/.test(fusionSource));
+assert(/record\["dc:date"\]/.test(fusionSource));
+assert(/record\["odpt:frequency"\]/.test(fusionSource));
+assert(!/if \(!p\.sourceValidUntil\) return true;/.test(renderSource));
+assert(/p\.sourceUpdatedAt/.test(renderSource) && /p\.sourceFrequency/.test(renderSource));
+console.log("train-position freshness guard: 7 PASS");
+
