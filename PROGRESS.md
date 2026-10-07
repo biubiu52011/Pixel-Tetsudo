@@ -8,7 +8,7 @@
 
 | Workstream | 状态 | 当前结论 / 下一步 |
 |---|---|---|
-| UI-001 全站 SiteShell | IN_PROGRESS | canonical `js/site-shell.js` + SHELL-001 guard 已建立；尚未接管生产页面，下一步迁移 7 页 |
+| UI-001 全站 SiteShell | REVIEW | 7 页 Header/Language/Nav/Footer 已全部接管；旧 Shell markup=0；build token 传播已补齐，等待最新 Actions/浏览器验证 |
 | UI-002 OperatorFilterBar | DONE | JR-East、tOp、显隐链路已修；HEAD `4ada406b` 的 CI/CD、Release Guards、Pages 全部成功 |
 | UI-003 LineCard / SystemCard | TODO | 当前共享 `DataState.renderCard/renderSystemCard`，但内部 mode 分叉且 realtime 直接 patch DOM；需正式组件化 |
 | UI-004 LineList / OperatorGroup | PARTIAL | `DataState.renderList` 已共享；需与 LineCard 职责拆清并统一空结果/排序 |
@@ -105,11 +105,11 @@
 ### P1 — 全站基础层
 
 - [x] **UI-001A** 已建立 `js/site-shell.js`：固定 header/navigation/footer mounts、page identity/active tab、`pt:site-shell-ready`；保持页面 CSP/能力 `<head>` 独立。SHELL-001 guard 已加入（`865225b7`, `befbe1c5`）。
-- [ ] **UI-001B** 吸收 Header。
-- [ ] **UI-001C** 吸收 LanguageSwitcher。
-- [ ] **UI-001D** 吸收 MainNavigation，active tab 由 page identity 决定。
-- [ ] **UI-001E** 吸收 Footer；保持无顶部横线。
-- [ ] **UI-001F** 添加 architecture guard，禁止 7 个 HTML 再复制 SiteShell 完整结构。
+- [x] **UI-001B** 7 页 Header 已由 canonical SiteShell 接管。
+- [x] **UI-001C** 7 页 LanguageSwitcher 已由 SiteShell 接管，并保持 lang-init 的 body reparent 行为。
+- [x] **UI-001D** MainNavigation 已由 page identity 生成 active tab；SiteShell 同时继承 deploy `?build=` token，避免页面导航丢失 cache-busting。
+- [x] **UI-001E** 7 页 Footer 已由 SiteShell 接管；共享 footer 保持无顶部横线。
+- [x] **UI-001F** SHELL-001 已保护唯一 SiteShell、三 mount、禁止迁移页重新复制旧 Shell，并保护 build token 传播。
 
 ### P1 — 卡片/列表
 
@@ -209,6 +209,18 @@
 - Validation: source contract inspection complete；生产页面尚未加载 SiteShell，因此本提交无 UI 行为切换；Actions 待本轮最终确认。
 - Risks / blockers: `lang-init.js` 会把 language wrapper 移到 body，SiteShell 保持原 ID/class 以兼容；不能把各页 CSP/head 能力统一。
 - Next: Actions 通过后开始 UI-001B~E，迁移页面并删除旧重复 Shell markup；每批迁移后验证 i18n/mobile/nav。
+
+
+### 2026-10-07 — UI-001B~F SiteShell migration — agent
+
+- Status: REVIEW
+- Scope: 7 页生产 SiteShell 迁移与迁移后残留清理
+- Files: 7 个 `pages/*.html`, `js/site-shell.js`, `.github/workflows/arch_guard_check.py`, `PROGRESS.md`
+- Commits: `e3655605`, `1e6cf471`, `6734ff78`, `adb18884`, `5e86052a`, `d89baebe`, `d003a1eb`, `49cf04cf`, `ad666582`
+- Work: 7 页删除重复 Header/Nav/Footer 并使用 canonical mounts；保留各页 CSP/业务 DOM；检查页面 CSS 无 realtime/trains/tourism 私有 Shell 覆盖；补 SiteShell 内部导航 build token 传播；扩展 SHELL-001 guard。
+- Validation: 每页 SiteShell=1、三个 mount 各=1、旧 Header/Nav/Footer=0；source CSS inspection complete；Actions 待最新 HEAD 最终确认。
+- Risks / blockers: browser runtime 尚未在用户的 mobile Chrome 实机确认，故保持 REVIEW。
+- Next: 确认 Actions；实机/生产检查语言切换、sticky nav、active tab、footer；通过后 UI-001 DONE，进入 UI-003 LineCard。
 
 ## 6. 交接规则
 
