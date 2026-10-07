@@ -1295,6 +1295,7 @@ function load() {
         } catch(e2) {}
       }
       error = err;
+      try { window.dispatchEvent(new CustomEvent("pt:railway-error", { detail: { error: err } })); } catch(e) {}
       console.error("[DbLoader] Failed to load:", err.message);
       throw err;
     }).catch(function(err) {
@@ -1305,10 +1306,10 @@ function load() {
   }
 
   function retry() {
-    // A failed load clears _loadPromise, but reset the public failure state too
-    // so page recovery represents a fresh canonical load attempt.
+    // Reuse the canonical in-flight load. Multiple recovery triggers (online,
+    // BFCache restore, retry button) must not start parallel railway fetches.
     if (loaded) return Promise.resolve();
-    _loadPromise = null;
+    if (_loadPromise) return _loadPromise;
     error = null;
     return load();
   }
