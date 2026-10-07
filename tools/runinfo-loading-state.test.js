@@ -18,4 +18,11 @@ assert(/Date\.now\(\) - v\.t/.test(api) && /Date\.now\(\) - v\.t/.test(fusion));
 assert(!/dInfo \? "normal" : "no_data"/.test(state));
 assert(!/delayInfo \? "normal" : "no_data"/.test(view));
 assert(/only claim normal when every member is confirmed/.test(state));
-console.log("runinfo-loading-state: 15 PASS");
+// A TrainInformation payload belongs to its explicit railway identity. Missing
+// own-line records must never inherit the worst incident from another line of
+// the same operator.
+const getApiDelayBody=(fusion.match(/function getApiDelayInfo\(line\) \{([\s\S]*?)\n  \}\n\n\n  function fuseLine/)||[])[1]||"";
+assert(getApiDelayBody.length>0);
+assert(!/aggregateDelayRecords\(raw\)/.test(getApiDelayBody));
+assert(/without a matching[\s\S]*railway identity/.test(getApiDelayBody));
+console.log("runinfo-loading-state: 18 PASS");
