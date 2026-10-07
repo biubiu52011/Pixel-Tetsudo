@@ -9,7 +9,7 @@
 | Workstream | 状态 | 当前结论 / 下一步 |
 |---|---|---|
 | UI-001 全站 SiteShell | TODO | 7 个 HTML 重复 Header/Language/Nav/Footer；先建立共享契约，再逐页迁移 |
-| UI-002 OperatorFilterBar | REVIEW | 已建立共享组件并接入 realtime/trains；需继续验证 i18n/JR-East 过滤语义与 CI |
+| UI-002 OperatorFilterBar | REVIEW | JR-East、tOp、多页面显隐回归已修；等待最新 CI/CD、Release Guards、Pages 最终结果 |
 | UI-003 LineCard / SystemCard | TODO | 当前共享 `DataState.renderCard/renderSystemCard`，但内部 mode 分叉且 realtime 直接 patch DOM；需正式组件化 |
 | UI-004 LineList / OperatorGroup | PARTIAL | `DataState.renderList` 已共享；需与 LineCard 职责拆清并统一空结果/排序 |
 | UI-005 PageState lifecycle | PARTIAL | `DataState` 已共享 render/retry 基础；页面仍重复 loading/retry/recovery glue |
@@ -97,10 +97,10 @@
 
 ### P0 — 先保证当前迁移没有回归
 
-- [ ] **UI-002A** 检查 `f846a376...` / 当前 HEAD 的 Release Guards、CI/CD、Pages 最终结果。
-- [ ] **UI-002B** 检查 trains 的 JR-East 特殊过滤语义；共享 FilterBar 只负责选择，业务过滤不能丢失 `TransitConstants.isJRERoute` 逻辑。
-- [ ] **UI-002C** 检查共享 FilterBar 的 operator label 是否保持 `tOp` / 多语言行为，避免公司名重新暴露 Romanized 名称。
-- [ ] **UI-002D** trains detail show/hide 不应再直接操作 FilterBar DOM，统一走组件 availability API。
+- [ ] **UI-002A** 当前 HEAD `cdba6c6d...` 的 Release Guards、CI/CD、Pages 已启动，等待最终结果。旧 CI 失败根因是 guard 文件重复声明 `fusionSource`，已由 `59471139` 修复。
+- [x] **UI-002B** trains 已恢复 `TransitConstants.isJRERoute` 特殊过滤语义（`94f11773`）。
+- [x] **UI-002C** 共享 FilterBar 优先使用 `tOp()`，再 fallback `operatorLabel()`（`cdba6c6d`）。
+- [x] **UI-002D** trains detail show/hide 已统一走 `setFilterAvailability()` → 组件 API（`94f11773`）。
 
 ### P1 — 全站基础层
 
@@ -170,6 +170,19 @@
 - Validation: repository source inspection；Footer CSS rule 已从公共 style 删除。
 - Risks / blockers: 尚未执行 SiteShell 迁移；OperatorFilterBar 当前轮 CI 最终状态需复核。
 - Next: 先完成 UI-002 P0 回归检查，再开始 UI-001 SiteShell contract。
+
+
+### 2026-10-07 13:xx JST — UI-002 P0 readiness — agent
+
+- Status: REVIEW
+- Scope: SiteShell 开工前 FilterBar/CI 回归清理
+- Files: `tools/train-position-evidence-regression.test.js`, `js/trains-page.js`, `js/operator-filter-bar.js`
+- Base HEAD: `c6a6266d`
+- Commits: `59471139`, `94f11773`, `cdba6c6d`
+- Work: 修复 CI guard 重复声明；恢复 trains JR-East 特殊过滤；详情显隐统一走组件 API；共享 FilterBar 恢复 tOp 多语言标签链。
+- Validation: source inspection complete；最新 Actions 已启动，最终结果待确认。
+- Risks / blockers: Actions 未完成前 UI-002 仍为 REVIEW；SiteShell 暂不应标记 IN_PROGRESS。
+- Next: 等待/确认最新三条 Actions 全绿后，将 UI-002 标记 DONE，再启动 UI-001A SiteShell contract。
 
 ## 6. 交接规则
 
