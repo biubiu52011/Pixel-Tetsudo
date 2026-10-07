@@ -232,6 +232,8 @@ def main():
     for token in ('window.SiteShell', 'data-site-shell-mount="header"', 'data-site-shell-mount="navigation"', 'data-site-shell-mount="footer"', 'pt:site-shell-ready'):
         if token not in shell_src:
             new_errors.append('SHELL-001 SITE_SHELL_CONTRACT_MISSING %s' % token)
+    if 'params.get("build")' not in shell_src or 'url.searchParams.set("build", build)' not in shell_src:
+        new_errors.append('SHELL-001 BUILD_TOKEN_NAVIGATION_PROPAGATION_MISSING')
     shell_pages = (
         'pages/home.html', 'pages/history.html', 'pages/realtime.html', 'pages/trains.html',
         'pages/tourism-event.html', 'pages/tourism-shop.html', 'pages/tourism-spot.html',
