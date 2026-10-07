@@ -112,7 +112,7 @@
         });
       }
       if (listEl) listEl.classList.add("hidden");
-      if (filterBarEl) filterBarEl.classList.add("hidden");
+      setFilterAvailability(false);
       if (detailEl) detailEl.classList.remove("hidden");
       var _title = (window.RailwayDB && window.RailwayDB.resolveLineName ? window.RailwayDB.resolveLineName(lineId, window.currentLang) : (fusedLine.nameEn || fusedLine.nameJa || lineId));
       var _sys2 = (window.LinePresentationService && window.LinePresentationService.getPresentation)
@@ -173,7 +173,7 @@
       window.TrainsActiveSystemLineIds = null;
       if (window.ODPTClient && window.ODPTClient.clearRealtimeLines) window.ODPTClient.clearRealtimeLines();
       if (listEl) listEl.classList.remove("hidden");
-      if (filterBarEl) filterBarEl.classList.remove("hidden");
+      setFilterAvailability(true);
       if (detailEl) detailEl.classList.add("hidden");
       // The overview DOM was only hidden while detail was open. Do not rebuild
       // it on back navigation; preserve scroll position, filter state and cards.
@@ -503,7 +503,9 @@
       filtered = {};
       Object.keys(allLines).forEach(function(id) {
         var line = allLines[id];
-        if (line && line.operator === _selectedOperator) filtered[id] = line;
+        if (line && (_selectedOperator === "JR-East"
+          ? (window.TransitConstants && window.TransitConstants.isJRERoute ? window.TransitConstants.isJRERoute(line) : line.operator === "JR-East")
+          : line.operator === _selectedOperator)) filtered[id] = line;
       });
     }
     if (!Object.keys(filtered).length) { el.innerHTML = ""; return; }
