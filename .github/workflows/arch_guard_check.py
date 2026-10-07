@@ -253,6 +253,17 @@ def main():
         new_errors.append('COMPONENT-002 REALTIME_CARD_DOM_PATCH_LEAK')
     if 'window.DataState.renderCard' in realtime_view_src or 'window.DataState.LineCard' in realtime_view_src:
         new_errors.append('COMPONENT-002 LEGACY_LINE_CARD_API_USAGE')
+    realtime_html = _read_arch('pages/realtime.html')
+    trains_html = _read_arch('pages/trains.html')
+    for page_name, page_src, filter_id, list_id in [
+        ('realtime', realtime_html, 'realtimeFilterBar', 'realtimeStatusContainer'),
+        ('trains', trains_html, 'trainsFilterBar', 'trainsLineListContent'),
+    ]:
+        shell_pattern = r'class="pixel-card rs-line-list-shell"[\\s\\S]*?id="' + filter_id + r'"[\\s\\S]*?id="' + list_id + r'"'
+        if not re.search(shell_pattern, page_src):
+            new_errors.append('COMPONENT-003 LINE_LIST_SHELL_MISMATCH ' + page_name)
+    if 'justify-content:center' not in style_src or '.rs-line-list-shell{padding:0;overflow:hidden;}' not in style_src:
+        new_errors.append('COMPONENT-003 FILTER_LAYOUT_CONTRACT_MISSING')
     shell_pages = (
         'pages/home.html', 'pages/history.html', 'pages/realtime.html', 'pages/trains.html',
         'pages/tourism-event.html', 'pages/tourism-shop.html', 'pages/tourism-spot.html',
