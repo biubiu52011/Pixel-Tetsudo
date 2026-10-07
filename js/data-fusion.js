@@ -174,6 +174,22 @@
     } catch(e) { console.debug("[DataFusion] visibilitychange handler error:", e.message); }
   });
 
+  window.addEventListener('pageshow', function(event) {
+    if (!event.persisted || document.hidden) return;
+    // ODPT requests a fresh snapshot on the same BFCache restore. Give it a
+    // bounded window to emit first; otherwise converge the existing sources so
+    // the UI cannot remain frozen on the pre-background snapshot.
+    var resumedAt = Date.now();
+    if (_resumeFallbackTimer) clearTimeout(_resumeFallbackTimer);
+    _resumeFallbackTimer = setTimeout(function() {
+      _resumeFallbackTimer = null;
+      if (_lastFusionEmitAt < resumedAt) {
+        try { fuseAll(); } catch(e) { console.debug("[DataFusion] pageshow fallback->fuseAll error:", e.message); }
+      }
+    }, 1500);
+    startFusionPolling();
+  });
+
   // ========== Station coordinate matching ==========
   function findStationIndex(line, lat, lon) {
     try {
