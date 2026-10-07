@@ -1587,6 +1587,17 @@
     })();
   }
 
+  window.addEventListener("pt:railway-ready", function() {
+    // Canonical readiness is the single late-load/retry convergence point.
+    // Rebuild baseline once even if init ran against an empty DataLayer.
+    try {
+      syncStatusMap();
+      fuseAll();
+    } catch(e) {
+      console.debug("[DataFusion] railway-ready fuse error:", e.message);
+    }
+  });
+
   // ========== 手动时刻表按需加载（v4.3.528） ==========
   // 41 个 data/timetables/*-manual.js（ODPT 无 TrainTimetable 的 JR 地方线补充数据）
   // 由 HTML 静态标签改为按需动态注入：打开线路时才加载该线文件，
