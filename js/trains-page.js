@@ -15,9 +15,6 @@
   var backBtn = null;
   var _selectedOperator = null;
 
-  function setFilterAvailability(available) {
-    if (_filterBar) _filterBar.setAvailable(available);
-  }
   var _lastPositionsHash = '';
   var _lastDetailStateHash = '';
   var _realtimeExpiryTimer = null;
@@ -112,7 +109,6 @@
         });
       }
       if (listEl) listEl.classList.add("hidden");
-      setFilterAvailability(false);
       if (detailEl) detailEl.classList.remove("hidden");
       var _title = (window.RailwayDB && window.RailwayDB.resolveLineName ? window.RailwayDB.resolveLineName(lineId, window.currentLang) : (fusedLine.nameEn || fusedLine.nameJa || lineId));
       var _sys2 = (window.LinePresentationService && window.LinePresentationService.getPresentation)
@@ -173,7 +169,6 @@
       window.TrainsActiveSystemLineIds = null;
       if (window.ODPTClient && window.ODPTClient.clearRealtimeLines) window.ODPTClient.clearRealtimeLines();
       if (listEl) listEl.classList.remove("hidden");
-      setFilterAvailability(true);
       if (detailEl) detailEl.classList.add("hidden");
       // The overview DOM was only hidden while detail was open. Do not rebuild
       // it on back navigation; preserve scroll position, filter state and cards.
@@ -238,11 +233,9 @@
       backBtn = document.getElementById("trainsBackBtn");
       if (!listEl) return;
       // Sync loading animation with the realtime page (rs-loading spinner)
-      setFilterAvailability(false);
       window.DataState.renderPageState(listEl, "loading");
       if (window.DataState && window.DataState.setPageStateRetry) {
         window.DataState.setPageStateRetry(listEl, function() {
-          setFilterAvailability(false);
           window.DataState.renderPageState(listEl, "loading");
           if (!window.DataLoader || typeof window.DataLoader.retry !== "function") {
             return Promise.reject(new Error("DataLoader retry unavailable"));
@@ -253,7 +246,6 @@
             if (_selectedOperator === null) renderList(listEl);
             else renderFiltered(listEl, lines);
             renderFilterBar(filterBarEl);
-            setFilterAvailability(true);
             _applyRoute();
           });
         });
@@ -300,7 +292,6 @@
       loadCachedPositions(function() {
         renderList(listEl);
         renderFilterBar(document.getElementById("trainsFilterBar"));
-        setFilterAvailability(!!(getLinesData() && Object.keys(getLinesData()).length));
         // Canonical loader/DataState events own data readiness. Do not poll the
         // page DOM for up to a minute; late snapshots are handled by the subscriber.
         // Route restoration is centralized in _applyRoute; this one bounded poll
@@ -316,7 +307,6 @@
       });
       window.addEventListener("pt:railway-error", function() {
         if (!listEl || listEl.querySelector(".rs-line-card")) return;
-        setFilterAvailability(false);
         window.DataState.renderPageState(listEl, navigator.onLine === false ? "offline" : "fetch_error");
       });
       // Subscribe to DataState changes to handle late data loading
@@ -388,7 +378,6 @@
               renderFiltered(listEl, lines);
             }
             renderFilterBar(document.getElementById("trainsFilterBar"));
-            setFilterAvailability(true);
             _lastPositionsHash = posHash;
             _lastDetailStateHash = detailStateHash;
             // Route restoration is handled once at subscriber entry.
