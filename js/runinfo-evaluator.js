@@ -151,6 +151,25 @@
     }
     var impacts = [];
     text.split(/[。\n；;]/).forEach(function(sentence) {
+      sentence = sentence.trim();
+      if (!sentence) return;
+      // A station range + direction + effect in one official sentence is one
+      // operational impact. Do not split Japanese commas such as
+      // "姉ケ崎〜長浦駅間）は、...、上下線で...運転を見合わせます", which
+      // previously produced a direction-only impact plus an empty-scope impact.
+      var sentenceRange = sentence.match(/([^。\n、，,]{1,30}?駅)\s*[～〜－−-]\s*([^。\n、，,]{1,30}?駅)(?:間)?/);
+      if (!sentenceRange) {
+        sentenceRange = sentence.match(/([^。\n、，,]{1,30}?)\s*[～〜－−-]\s*([^。\n、，,]{1,30}?駅)(?:間)?/);
+      }
+      var sentenceInterval = sentenceRange
+        ? sentenceRange[1].trim().replace(/^[・･（(]+/, "") + "→" + sentenceRange[2].trim()
+        : (/全線/.test(sentence) ? "全線" : null);
+      var sentenceDirection = directionOf(sentence);
+      var sentenceEffect = effectOf(sentence);
+      if (sentenceInterval && sentenceEffect) {
+        impacts.push({ interval: sentenceInterval, direction: sentenceDirection, effect: sentenceEffect });
+        return;
+      }
       sentence.split(/[、，,](?=\s*(?:上り|下り|内回り|外回り|[^、，,。\n]{1,30}?駅\s*[～〜－−-]))/).forEach(function(fragment) {
         fragment = fragment.trim();
         if (!fragment) return;
