@@ -152,7 +152,11 @@
     function intervalOf(fragment) {
       var ir = fragment.match(/([^。\n、，,]{1,30}?駅)\s*[～〜－−-]\s*([^。\n、，,]{1,30}?駅)(?:間)?/);
       if (!ir) ir = fragment.match(/([^。\n、，,]{1,30}?)\s*[～〜－−-]\s*([^。\n、，,]{1,30}?駅)(?:間)?/);
-      if (ir) return ir[1].trim().replace(/^[・･（(]+/, "") + "→" + ir[2].trim();
+      if (ir) {
+        var from = ir[1].trim().replace(/^.*[（(]/, "").replace(/^[・･（(]+/, "");
+        var to = ir[2].trim().replace(/[）)]*$/, "");
+        return from + "→" + to;
+      }
       return /全線/.test(fragment) ? "全線" : null;
     }
     function effectClauses(sentence) {
