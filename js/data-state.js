@@ -592,6 +592,10 @@
       _initialized = true;
       if (window.UNIFIED_LINES) setLines(window.UNIFIED_LINES);
 
+      window.addEventListener("pt:railway-ready", function() {
+        if (window.UNIFIED_LINES) setLines(window.UNIFIED_LINES);
+      });
+
       if (window.DataFusion) {
         var fused = window.DataFusion.getFusedData();
         if (fused && fused.lines) setLines(fused.lines);
