@@ -230,6 +230,7 @@
       titleEl = document.getElementById("trainsDetailTitle");
       mapEl = document.getElementById("trainsMapContainer");
       filterBarEl = document.getElementById("trainsFilterBar");
+      if (filterBarEl) filterBarEl.addEventListener("pt:operator-filter-change", function(e) { setFilter(e.detail && e.detail.operator); });
       backBtn = document.getElementById("trainsBackBtn");
       if (!listEl) return;
       // Sync loading animation with the realtime page (rs-loading spinner)
@@ -434,10 +435,8 @@
 
   function renderFilterBar(container) {
     if (!_filterBar && window.OperatorFilterBar) {
-      _filterBar = window.OperatorFilterBar.create(container || "trainsFilterBar", {
-        selected: _selectedOperator,
-        onChange: function(operator) { setFilter(operator); }
-      });
+      _filterBar = window.OperatorFilterBar.get("trainsFilterBar") || window.OperatorFilterBar.mount(container || "trainsFilterBar");
+      _filterBar.setSelected(_selectedOperator, false);
     }
     if (_filterBar) _filterBar.render(getLinesData());
   }
