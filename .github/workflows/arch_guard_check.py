@@ -207,6 +207,23 @@ def main():
     if 'pageshow fallback->fuseAll error' not in fusion_src:
         new_errors.append('RECOVERY-001 FUSION_BFCACHE_FALLBACK_MISSING')
 
+    # COMPONENT-001: operator filter is one shared UI primitive. Pages own only
+    # their business filtering behavior; button rendering/order/availability
+    # must not fork into page-local implementations again.
+    filter_component_src = _read_arch('js/operator-filter-bar.js')
+    if 'window.OperatorFilterBar' not in filter_component_src or 'setAvailable' not in filter_component_src or 'setSelected' not in filter_component_src:
+        new_errors.append('COMPONENT-001 OPERATOR_FILTER_COMPONENT_MISSING')
+    for page in ('pages/realtime.html', 'pages/trains.html'):
+        page_src = _read_arch(page)
+        if 'js/operator-filter-bar.js' not in page_src:
+            new_errors.append('COMPONENT-001 OPERATOR_FILTER_NOT_LOADED %s' % page)
+    for rel in ('js/realtime-view.js', 'js/trains-page.js'):
+        src = _read_arch(rel)
+        if 'window.OperatorFilterBar.create' not in src:
+            new_errors.append('COMPONENT-001 OPERATOR_FILTER_NOT_USED %s' % rel)
+        if 'function sortOperators(' in src:
+            new_errors.append('COMPONENT-001 PAGE_LOCAL_OPERATOR_SORT_REINTRODUCED %s' % rel)
+
     # REALTIME-001: TrainTrackLayout is the only train geometry authority.
     track_layout_src = _read_arch('js/train-track-layout.js')
     if 'window.TrainTrackLayout' not in renderer_src:
