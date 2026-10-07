@@ -1893,6 +1893,17 @@
         } catch(e) { console.debug("[ODPT] visibilitychange handler error:", e.message); }
     }
     document.addEventListener('visibilitychange', handleVisibilityChange);
+    window.addEventListener('pageshow', function(event) {
+        // Mobile Chrome may restore a page from BFCache without a fresh script
+        // initialization. Treat that restore as a foreground transition: fetch a
+        // fresh LIVE snapshot now, while the timer guards prevent duplicate polls.
+        if (!event.persisted || document.hidden) return;
+        try {
+            _realtimeRefresh();
+            startRealtimePolling();
+            if (!_lazyMode) startTtCheckPolling();
+        } catch(e) { console.debug("[ODPT] pageshow refresh error:", e.message); }
+    });
 
     // ========== Init ==========
     function init() {
