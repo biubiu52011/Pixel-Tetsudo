@@ -135,6 +135,25 @@
     });
   }
 
+  function railwayStateHosts() {
+    return Array.prototype.slice.call(document.querySelectorAll('[data-state-host="railway-lines"]'));
+  }
+
+  function setRailwayHostState(state) {
+    railwayStateHosts().forEach(function(container) { renderPageState(container, state); });
+  }
+
+  function initRailwayStateHosts() {
+    var hosts = railwayStateHosts();
+    if (!hosts.length) return;
+    hosts.forEach(function(container) {
+      if (!container.dataset.pageState && !container.children.length) renderPageState(container, "loading");
+    });
+    window.addEventListener("pt:railway-error", function() {
+      setRailwayHostState(navigator.onLine === false ? "offline" : "fetch_error");
+    });
+  }
+
   function setPageStateRetry(container, callback) {
     if (!container) return;
     container._pageStateRetry = typeof callback === "function" ? callback : null;
@@ -340,6 +359,7 @@
 
         });
       }
+      initRailwayStateHosts();
       initLangSupport();
     }
   };
