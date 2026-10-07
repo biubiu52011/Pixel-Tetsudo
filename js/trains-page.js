@@ -398,16 +398,18 @@
               });
             } catch(e) {}
           }
-          var currentLen = listEl.innerHTML.length;
-          // Always render if list is empty (initial load), otherwise render list on
-          // position changes; detail additionally reacts to its state signature.
-          if (currentLen === 0) {
+          var hasLineCards = !!listEl.querySelector(".rs-line-card");
+          // A loading/error state also has innerHTML, so DOM length cannot tell us
+          // whether usable railway content is mounted. Recover automatically when
+          // late canonical/fused data arrives.
+          if (!hasLineCards) {
             if (_selectedOperator === null) {
               renderList(listEl, lines);
             } else {
               renderFiltered(listEl, lines);
             }
             renderFilterBar(document.getElementById("trainsFilterBar"));
+            setFilterAvailability(true);
             _lastPositionsHash = posHash;
             _lastDetailStateHash = detailStateHash;
             // Route restoration is handled once at subscriber entry.
