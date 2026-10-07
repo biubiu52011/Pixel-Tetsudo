@@ -406,8 +406,12 @@
           }
         }
         if (matched) return parseODPTDelay(matched);
-        // no own record -> aggregate worst state of this operator (no loss, no false normal)
-        return aggregateDelayRecords(raw);
+        // Never project another railway's incident onto this line. Operator-wide
+        // TrainInformation arrays can contain unrelated lines; without a matching
+        // railway identity there is no line-level evidence for this line.
+        // Keep the line unresolved here so WebRunInfo/local/last-good/fallback
+        // semantics decide its state instead of manufacturing a cross-line alert.
+        return null;
       }
       // legacy single-record path
       return parseODPTDelay(raw);
