@@ -6,48 +6,22 @@
 <link rel="stylesheet" href="../css/lang-bar.css?v=4.3.840">
 <link rel="stylesheet" href="../css/tourism-styles.css?v=4.3.638">
 </head>
-<body>
-<div id="app">
-<header class="pixel-header">
+<body data-page="history">
+<div id="app" data-site-shell-root>
+<div data-site-shell-mount="header"></div>
 
-<div class="header-container">
-<div class="header-text">
-<h1 class="pixel-title" data-i18n="app.title">ピクセル鉄道</h1>
-</div>
-<div class="lang-switcher-wrapper">
-<button id="langToggleBtn" class="lang-toggle-btn" title="Switch Language" aria-haspopup="listbox" aria-expanded="false" aria-label="Switch language">
-<img src="../images/Language.png" alt="Language" class="lang-icon"></button>
-<div id="langSwitcher" class="lang-switcher">
-<div class="lang-options" role="listbox" aria-label="Select language">
-<button class="lang-btn active" data-lang="ja" role="option" aria-selected="true">
-日本語</button>
-<button class="lang-btn" data-lang="zh" role="option" aria-selected="false">
-中文</button>
-<button class="lang-btn" data-lang="ko" role="option" aria-selected="false">
-韓国語</button>
-<button class="lang-btn" data-lang="en" role="option" aria-selected="false">
-English</button>
-</div>
-</div>
-</div>
-</div>
-</header>
-
-<nav class="pixel-tabs">
-<a href="home.html" class="tab-btn" data-tab="search" data-i18n="tab.search">路線検索</a><a href="realtime.html" class="tab-btn" data-tab="status" data-i18n="tab.status">運行状況</a>
-<a href="trains.html" class="tab-btn" data-tab="trains" data-i18n="tab.trains">列車リアルタイム</a>
-<a href="history.html" class="tab-btn active" data-tab="history" data-i18n="tab.history">検索履歴</a>
-</nav>
+<div data-site-shell-mount="navigation"></div>
 <section id="tab-history" class="tab-content active">
 <div id="historyContainer" class="pixel-card">
   <div id="historyEmpty" class="history-empty" data-i18n="history.empty">検索履歴はありません</div>
   <div id="historyList" class="history-list"></div>
 </div>
-</section><footer class="pixel-footer" data-i18n="app.footer">© 2026 ピクセル鉄道</footer>
+</section><div data-site-shell-mount="footer"></div>
 <script src="../js/tourism-type.js?v=4.3.841"></script>
 <script src="../data/core/db-loader.js?v=4.3.1100"></script>
 <script src="../js/translations.js?v=4.3.1043"></script>
 <script src="../js/common.js?v=4.3.968"></script>
+<script src="../js/site-shell.js"></script><script>window.SiteShell.mount();</script>
 <script src="../js/lang-init.js?v=4.3.638"></script>
 <script src="../js/station-resolver.js?v=4.3.946"></script>
 <script src="../js/history.js?v=4.3.869"></script>
