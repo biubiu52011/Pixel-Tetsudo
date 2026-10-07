@@ -39,3 +39,7 @@ assert.ok(trainsPage.includes('pt:railway-error'), "trains must terminate loadin
 assert.ok(loader.includes('if (_loadPromise) return _loadPromise;'), "retry must reuse an in-flight canonical load");
 assert.ok(loader.includes('pt:railway-error'), "loader must publish terminal railway failure");
 console.log("railway-loading-lifecycle: PASS");
+
+assert.ok(view.includes("renderFilterBar({});"), "realtime filter must mount before railway data is ready");
+assert.ok(view.indexOf("renderFilterBar({});") < view.indexOf("function getLines()"), "filter lifecycle must not depend on data readiness");
+console.log("realtime-filter-lifecycle: PASS");
