@@ -1488,6 +1488,21 @@
         });
     }
 
+    window.addEventListener("pt:railway-ready", function() {
+        if (!window.DataFusion || !window.DataFusion.updateOdptData) return;
+        try {
+            if (window.ODPT_DELAY_DATA) window.DataFusion.updateOdptData(window.ODPT_DELAY_DATA);
+            if (window.DataFusion.loadTrainPositions &&
+                window.ODPT_TRAIN_POSITIONS &&
+                Object.keys(window.ODPT_TRAIN_POSITIONS).length > 0) {
+                window.DataFusion.loadTrainPositions._calibrated = false;
+                window.DataFusion.loadTrainPositions();
+            }
+        } catch(e) {
+            console.debug("[ODPT] railway-ready realtime push error:", e.message);
+        }
+    });
+
     // ========== 加载实时数据（延误信息 + 实时位置）==========
     // 每30秒刷新一次
     // v4.3.590: delayOnly=true 时只拉运行情报/延误（惰性模式首页搜索徽章用），跳过列车位置与时刻表
