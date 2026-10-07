@@ -236,6 +236,9 @@ def main():
         new_errors.append('SHELL-001 BUILD_TOKEN_NAVIGATION_PROPAGATION_MISSING')
     if 'document.querySelector("[data-site-shell-root]")' not in shell_src:
         new_errors.append('SHELL-001 CSP_SAFE_AUTOMOUNT_MISSING')
+    style_src = _read_arch('css/style.css')
+    if 'Canonical Mobile SiteShell / content density' not in style_src:
+        new_errors.append('SHELL-001 MOBILE_SHELL_CONTRACT_MISSING')
     shell_pages = (
         'pages/home.html', 'pages/history.html', 'pages/realtime.html', 'pages/trains.html',
         'pages/tourism-event.html', 'pages/tourism-shop.html', 'pages/tourism-spot.html',
