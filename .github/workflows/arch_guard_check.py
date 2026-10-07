@@ -171,6 +171,31 @@ def main():
         if data_state_pos >= 0 and resolver_pos > data_state_pos:
             new_errors.append('PRESENTATION-001 RELATION_AUTHORITY_AFTER_DATA_STATE %s' % page)
 
+    # RECOVERY-001: mobile startup/recovery has one canonical retry path.
+    # Protect against regressions where Chrome can remain stuck in an old
+    # loading/error DOM after network recovery, BFCache restore, or late data.
+    for rel, src in (
+        ('js/trains-page.js', trains_page_src),
+        ('js/realtime-view.js', realtime_view_src),
+    ):
+        if 'window.DataLoader.retry()' not in src:
+            new_errors.append('RECOVERY-001 CANONICAL_RETRY_MISSING %s' % rel)
+        for token in ('setFilterAvailability(false)', 'setFilterAvailability(true)'):
+            if token not in src:
+                new_errors.append('RECOVERY-001 FILTER_LIFECYCLE_MISSING %s %s' % (rel, token))
+    if 'window.addEventListener("pt:railway-ready"' not in realtime_view_src:
+        new_errors.append('RECOVERY-001 REALTIME_LATE_CANONICAL_RECOVERY_MISSING')
+    for token in (
+        'window.addEventListener("online", retryVisibleFailedStates)',
+        'window.addEventListener("pageshow"',
+        'event.persisted',
+        '["offline", "fetch_error", "timeout"]',
+    ):
+        if token not in data_state_src:
+            new_errors.append('RECOVERY-001 MOBILE_RECOVERY_SIGNAL_MISSING %s' % token)
+    if 'var fallbackReload = function() { window.location.reload(); };' not in data_state_src:
+        new_errors.append('RECOVERY-001 RETRY_FALLBACK_MISSING')
+
     # REALTIME-001: TrainTrackLayout is the only train geometry authority.
     track_layout_src = _read_arch('js/train-track-layout.js')
     if 'window.TrainTrackLayout' not in renderer_src:
