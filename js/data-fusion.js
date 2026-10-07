@@ -1562,11 +1562,14 @@
     (function pollUnified() {
       var checkLines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : {};
       if (checkLines && Object.keys(checkLines).length > 0) {
-        // init may run before DbLoader finishes on slower mobile clients. The
-        // initial sync/fuse above can therefore be empty; once canonical lines
-        // arrive, rebuild the status baseline and emit one authoritative fusion.
-        syncStatusMap();
-        fuseAll();
+        // pt:railway-ready is the authoritative late-load convergence path.
+        // Keep polling only as a compatibility fallback for external/legacy
+        // data injection that does not emit the readiness signal.
+        var fusedLines = _lastFusedData && _lastFusedData.lines;
+        if (!fusedLines || Object.keys(fusedLines).length === 0) {
+          syncStatusMap();
+          fuseAll();
+        }
         // v4.3.6xx: 数据就绪后，如果当前在 trains.html 线路详情页（hash 有 lineId），
         // 自动触发一次 ensureManualTimetable——showLineView 可能在 DataFusion 未就绪时
         // 已从 DataLayer 渲染站表并跳过了手动时刻表加载。
