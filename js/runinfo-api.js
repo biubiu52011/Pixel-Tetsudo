@@ -195,7 +195,9 @@
   // ========== 统一查询 API ==========
   // query(lineId, line) -> Promise<{status, text, links[], updatedAt, source} | null>
   var _cache = {};          // lineId -> { t: timestamp, r: result }
-  var CACHE_TTL_MS = 5 * 60 * 1000;
+  // Popup results are operational state, not static content. Keep only a brief
+  // dedupe window so a recovered line cannot remain visually suspended for minutes.
+  var CACHE_TTL_MS = 15 * 1000;
   var LAST_GOOD_KEY = "pt_runinfo_last_good_v1";
   // Operational status is highly time-sensitive. Persistent cache is only a
   // brief stale-while-revalidate bridge, never historical truth.
