@@ -63,14 +63,10 @@ assert.ok(
 );
 console.log("runinfo-impact-scope: PASS");
 
-assert.ok(
-  (src.match(/\.filter\(Boolean\)\.join\(""
 
-/g) || []).length >= 2,
-  "initial and refreshed impact lists must render one impact per row without pipe separators"
-);
-assert.ok(
-  !src.includes("rs-interval-separator\">｜"),
-  "impact lists must not use horizontal pipe separators"
-);
-console.log("runinfo-impact-layout: PASS");
+assert.ok(src.includes("function _scopeSummary(interval, impacts)"), "modal must derive one concise operational scope");
+assert.ok(src.includes("if (explicitRanges.length) return explicitRanges[0];"), "explicit station range must win");
+assert.ok(src.includes("if (direction) return (_impactLabels().dir[direction] || direction);"), "direction is fallback only when no station range exists");
+assert.ok(src.includes('if (interval === "全線" || list.some'), "whole-line label requires explicit whole-line scope");
+assert.ok(!src.includes('rs-impact-effect'), "scope summary must not duplicate operational effects");
+console.log("runinfo-scope-summary: PASS");
