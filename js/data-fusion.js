@@ -734,6 +734,30 @@
     return keys.length === 1 ? keys[0] : "";
   }
 
+  function _isFreshRealtimeRecord(record) {
+    if (!record) return false;
+    var now = Date.now();
+    var validRaw = record["dct:valid"];
+    if (validRaw) {
+      var validMs = Date.parse(validRaw);
+      // Explicit provider validity is authoritative. Invalid timestamps fail
+      // closed because they cannot prove that a dynamic position is current.
+      return !isNaN(validMs) && validMs >= now;
+    }
+    var updatedRaw = record["dc:date"];
+    if (!updatedRaw) return true;
+    var updatedMs = Date.parse(updatedRaw);
+    if (isNaN(updatedMs)) return false;
+    var frequency = Number(record["odpt:frequency"]);
+    // Without dct:valid, bound freshness by the provider cadence when supplied.
+    // Otherwise use 2 minutes: four normal 30s polling cycles, long enough for
+    // transient network jitter but short enough not to present an old train as LIVE.
+    var maxAgeMs = isFinite(frequency) && frequency > 0
+      ? Math.max(60000, Math.min(frequency * 1000 * 4, 5 * 60 * 1000))
+      : 2 * 60 * 1000;
+    return (now - updatedMs) <= maxAgeMs;
+  }
+
   // Realtime records without fromStation cannot establish position truth, but
   // may still carry train-level evidence (vehicle type, destination, train no).
   // Keep that evidence separate so timetable estimation can consume it later
@@ -770,7 +794,7 @@
         odptData.trains[op] = trains;
         var top = TransitConstants && typeof TransitConstants.normalizeOp === "function" ? TransitConstants.normalizeOp(op) : op;
         trains.forEach(function(t) {
-          if (!t) return;
+          if (!t || !_isFreshRealtimeRecord(t)) return;
           var fromId = t["odpt:fromStation"] || "";
           var stationKey = String(fromId).split(".").pop();
           var _rawTrainNo = t["odpt:trainNumber"] || t["odpt:train"] || "";
