@@ -9,7 +9,7 @@
 | Workstream | 状态 | 当前结论 / 下一步 |
 |---|---|---|
 | UI-001 全站 SiteShell | TODO | 7 个 HTML 重复 Header/Language/Nav/Footer；先建立共享契约，再逐页迁移 |
-| UI-002 OperatorFilterBar | REVIEW | JR-East、tOp、多页面显隐回归已修；等待最新 CI/CD、Release Guards、Pages 最终结果 |
+| UI-002 OperatorFilterBar | DONE | JR-East、tOp、显隐链路已修；HEAD `4ada406b` 的 CI/CD、Release Guards、Pages 全部成功 |
 | UI-003 LineCard / SystemCard | TODO | 当前共享 `DataState.renderCard/renderSystemCard`，但内部 mode 分叉且 realtime 直接 patch DOM；需正式组件化 |
 | UI-004 LineList / OperatorGroup | PARTIAL | `DataState.renderList` 已共享；需与 LineCard 职责拆清并统一空结果/排序 |
 | UI-005 PageState lifecycle | PARTIAL | `DataState` 已共享 render/retry 基础；页面仍重复 loading/retry/recovery glue |
@@ -97,14 +97,14 @@
 
 ### P0 — 先保证当前迁移没有回归
 
-- [ ] **UI-002A** 当前 HEAD `cdba6c6d...` 的 Release Guards、CI/CD、Pages 已启动，等待最终结果。旧 CI 失败根因是 guard 文件重复声明 `fusionSource`，已由 `59471139` 修复。
+- [x] **UI-002A** HEAD `4ada406b...`：Release Guards、CI/CD、Pages 全部 SUCCESS。旧 CI 失败根因 `fusionSource` 重复声明已由 `59471139` 修复。
 - [x] **UI-002B** trains 已恢复 `TransitConstants.isJRERoute` 特殊过滤语义（`94f11773`）。
 - [x] **UI-002C** 共享 FilterBar 优先使用 `tOp()`，再 fallback `operatorLabel()`（`cdba6c6d`）。
 - [x] **UI-002D** trains detail show/hide 已统一走 `setFilterAvailability()` → 组件 API（`94f11773`）。
 
 ### P1 — 全站基础层
 
-- [ ] **UI-001A** 定义 SiteShell API / DOM contract，不先改业务。
+- [ ] **UI-001A** 定义 SiteShell API / DOM contract，不先改业务。边界已确认：统一 `<body>` 公共结构，不把各页 CSP/能力 `<head>` 粗暴合并；history/home/realtime/trains/tourism 的网络与 worker 权限不同。
 - [ ] **UI-001B** 吸收 Header。
 - [ ] **UI-001C** 吸收 LanguageSwitcher。
 - [ ] **UI-001D** 吸收 MainNavigation，active tab 由 page identity 决定。
@@ -183,6 +183,19 @@
 - Validation: source inspection complete；最新 Actions 已启动，最终结果待确认。
 - Risks / blockers: Actions 未完成前 UI-002 仍为 REVIEW；SiteShell 暂不应标记 IN_PROGRESS。
 - Next: 等待/确认最新三条 Actions 全绿后，将 UI-002 标记 DONE，再启动 UI-001A SiteShell contract。
+
+
+### 2026-10-07 15:23 JST — UI readiness final check — agent
+
+- Status: DONE
+- Scope: SiteShell 开工准备最终检查
+- Files: 7 个 `pages/*.html`, GitHub Actions, `PROGRESS.md`
+- Base HEAD: `4ada406b`
+- Commit: pending progress-ledger commit
+- Work: 确认 HEAD 的 Release Guards / CI/CD / Pages 全绿；复核 7 页 CSP、脚本依赖和导航结构；确认 SiteShell 只统一 body 公共壳，页面 capability/CSP 保持最小权限。
+- Validation: Release Guards SUCCESS；CI/CD SUCCESS；Pages SUCCESS；7 页 source inspection complete。
+- Risks / blockers: 无 P0 blocker。HTML 中手工 asset version 不一致属于后续 SiteShell/asset 收敛范围，不阻塞 UI-001A。
+- Next: UI-001A 定义 SiteShell DOM/API contract，并添加防双链路 architecture guard，再开始逐页迁移。
 
 ## 6. 交接规则
 
