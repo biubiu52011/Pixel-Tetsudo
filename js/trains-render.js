@@ -520,9 +520,19 @@ function _rememberTrainArtworkFailure(trainUid) {
 
   function _isRealtimePositionFresh(p) {
     if (!p || p.positionSource !== "realtime-api") return true;
-    if (!p.sourceValidUntil) return true;
-    var validUntil = Date.parse(p.sourceValidUntil);
-    return !isNaN(validUntil) && validUntil >= Date.now();
+    var now = Date.now();
+    if (p.sourceValidUntil) {
+      var validUntil = Date.parse(p.sourceValidUntil);
+      return !isNaN(validUntil) && validUntil >= now;
+    }
+    if (!p.sourceUpdatedAt) return true;
+    var updatedAt = Date.parse(p.sourceUpdatedAt);
+    if (isNaN(updatedAt)) return false;
+    var frequency = Number(p.sourceFrequency);
+    var maxAgeMs = isFinite(frequency) && frequency > 0
+      ? Math.max(60000, Math.min(frequency * 1000 * 4, 5 * 60 * 1000))
+      : 2 * 60 * 1000;
+    return (now - updatedAt) <= maxAgeMs;
   }
 
   function _filterExpiredRealtimePositions(positions) {
