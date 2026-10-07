@@ -70,3 +70,7 @@ assert.ok(src.includes("if (direction) return (_impactLabels().dir[direction] ||
 assert.ok(src.includes('if (interval === "全線" || list.some'), "whole-line label requires explicit whole-line scope");
 assert.ok(!src.includes('rs-impact-effect'), "scope summary must not duplicate operational effects");
 console.log("runinfo-scope-summary: PASS");
+
+const style = fs.readFileSync(require("path").join(__dirname, "../css/style.css"), "utf8");
+assert.ok(style.includes(".rs-status-section.rs-status-info,.rs-status-section.rs-status-notice"), "notice/info modal status colors must be defined");
+console.log("runinfo-modal-status-colors: PASS");
