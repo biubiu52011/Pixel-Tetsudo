@@ -67,6 +67,21 @@
     return '<footer class="pixel-footer" data-site-shell="footer" data-i18n="app.footer">© 2026 ピクセル鉄道</footer>';
   }
 
+  function applyBuildToken(root) {
+    var params = new URLSearchParams(location.search || "");
+    var build = params.get("build");
+    if (!build || !root) return;
+    root.querySelectorAll('a[href]').forEach(function (link) {
+      var href = link.getAttribute("href") || "";
+      if (!href || href.charAt(0) === "#" || /^(?:[a-z]+:|\/\/)/i.test(href)) return;
+      try {
+        var url = new URL(href, location.href);
+        url.searchParams.set("build", build);
+        link.setAttribute("href", url.pathname.split("/").pop() + url.search + url.hash);
+      } catch (_) {}
+    });
+  }
+
   function render(root, options) {
     if (!root) throw new Error("SiteShell root is required");
     options = options || {};
@@ -84,6 +99,7 @@
     headerMount.innerHTML = headerHtml();
     navMount.innerHTML = navHtml(page);
     footerMount.innerHTML = footerHtml();
+    applyBuildToken(root);
 
     root.setAttribute("data-site-shell-ready", "true");
     document.dispatchEvent(new CustomEvent("pt:site-shell-ready", { detail: { page: page } }));
@@ -100,6 +116,7 @@
     mount: mount,
     render: render,
     detectPage: detectPage,
+    applyBuildToken: applyBuildToken,
     NAV_ITEMS: NAV_ITEMS.slice()
   };
 })();
