@@ -1295,8 +1295,18 @@ function load() {
     return _loadPromise;
   }
 
+  function retry() {
+    // A failed load clears _loadPromise, but reset the public failure state too
+    // so page recovery represents a fresh canonical load attempt.
+    if (loaded) return Promise.resolve();
+    _loadPromise = null;
+    error = null;
+    return load();
+  }
+
   window.DataLoader = {
     load: load,
+    retry: retry,
     isLoaded: function() { return loaded; },
     getError: function() { return error; }
   };
