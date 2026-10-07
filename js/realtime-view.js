@@ -687,6 +687,17 @@
       }
     }, 300);
 
+    // Canonical railway data may arrive after the startup poll has already
+    // terminated in an error/timeout state. Recover the list immediately from the
+    // same canonical readiness signal instead of waiting for a later fusion emission.
+    window.addEventListener("pt:railway-ready", function() {
+      if (container.querySelector(".rs-line-card")) return;
+      var state = container.dataset.pageState || "";
+      if (state === "loading" || state === "offline" || state === "fetch_error" || state === "timeout") {
+        render(true);
+      }
+    });
+
     // Subscribe to DataFusion updates for live status
     if (window.DataFusion) {
       window.DataFusion.subscribe(function(fusedData) {
