@@ -665,12 +665,24 @@
       if (fused && fused.lines && Object.keys(fused.lines).length > 0) {
         clearInterval(_pollTimer);
         render(true);
-      } else if (_pollCount > 20) {
-        // After 6 seconds, give up polling
+        return;
+      }
+      var loaderError = window.DataLoader && window.DataLoader.getError ? window.DataLoader.getError() : null;
+      if (loaderError) {
         clearInterval(_pollTimer);
         if (!container.querySelector(".rs-line-card")) {
           setFilterAvailability(false);
-          window.DataState.renderPageState(container, "error");
+          window.DataState.renderPageState(container, navigator.onLine === false ? "offline" : "fetch_error");
+        }
+        return;
+      }
+      if (_pollCount > 200) {
+        // Canonical data is still pending rather than failed. Match the trains
+        // page's 60s mobile-friendly startup window before reporting timeout.
+        clearInterval(_pollTimer);
+        if (!container.querySelector(".rs-line-card")) {
+          setFilterAvailability(false);
+          window.DataState.renderPageState(container, navigator.onLine === false ? "offline" : "timeout");
         }
       }
     }, 300);
