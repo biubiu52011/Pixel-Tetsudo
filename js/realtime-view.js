@@ -52,7 +52,7 @@
   }
 
   function renderCard(line, lineId) {
-    return window.DataState.renderCard(line, lineId, { mode: "realtime" });
+    return window.LineCard.render(line, lineId, { mode: "realtime", linesObj: _latestLines || window.UNIFIED_LINES || {} });
   }
 
   function renderLines(container, linesObj, lineOrderArr) {
@@ -444,7 +444,7 @@
 
   function patchRealtimeCards(container, linesObj, changedIds) {
     if (!container || !changedIds || changedIds.length === 0) return true;
-    var lineCard = window.DataState && window.DataState.LineCard;
+    var lineCard = window.LineCard;
     if (!lineCard || typeof lineCard.update !== "function" || typeof lineCard.updateSystem !== "function") return false;
     var needsFullRender = false;
 
