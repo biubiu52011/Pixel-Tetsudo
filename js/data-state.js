@@ -537,6 +537,68 @@
     });
   }
 
+  function _elementFromHtml(html) {
+    var wrap = document.createElement("div");
+    wrap.innerHTML = html || "";
+    return wrap.firstElementChild || null;
+  }
+
+  function applyCardColor(card) {
+    if (!card) return;
+    var color = card.getAttribute("data-line-color");
+    if (color) card.style.setProperty("--line-color", color);
+  }
+
+  /**
+   * Canonical LineCard update boundary.
+   * Page controllers pass data; only DataState may patch/replace card internals.
+   */
+  function updateLineCard(card, line, lineId, options) {
+    if (!card || !line) return false;
+    options = options || {};
+    var fresh = _elementFromHtml(renderCard(line, lineId, options));
+    if (!fresh) return false;
+    applyCardColor(fresh);
+
+    if ((options.mode || "realtime") !== "realtime") {
+      card.replaceWith(fresh);
+      return true;
+    }
+
+    var oldStatus = card.querySelector(".rs-status-icon");
+    var newStatus = fresh.querySelector(".rs-status-icon");
+    if (oldStatus && newStatus) {
+      oldStatus.className = newStatus.className;
+      oldStatus.textContent = newStatus.textContent;
+    } else if (oldStatus && !newStatus) {
+      oldStatus.remove();
+    } else if (!oldStatus && newStatus) {
+      var header = card.querySelector(".rs-line-header");
+      if (header) header.appendChild(newStatus);
+    }
+
+    var oldInterval = card.querySelector(".rs-line-interval");
+    var newInterval = fresh.querySelector(".rs-line-interval");
+    if (oldInterval && newInterval) oldInterval.textContent = newInterval.textContent;
+    else if (oldInterval && !newInterval) oldInterval.remove();
+    else if (!oldInterval && newInterval) {
+      var info = card.querySelector(".rs-line-info");
+      if (info) info.appendChild(newInterval);
+    }
+    return true;
+  }
+
+  function updateSystemCard(card, linesObj, options) {
+    if (!card || !linesObj) return false;
+    var code = card.dataset.system || "";
+    if (!code) return false;
+    var fresh = _elementFromHtml(renderSystemCardByCode(code, linesObj, options || { mode: "realtime" }));
+    if (!fresh) return false;
+    applyCardColor(fresh);
+    card.replaceWith(fresh);
+    return true;
+  }
+
   function renderSystemCardByCode(code, linesObj, options) {
     if (!code || !linesObj) return "";
     var ids = Object.keys(linesObj);
@@ -596,6 +658,12 @@
     renderCard: renderCard,
     renderList: renderList,
     renderSystemCardByCode: renderSystemCardByCode,
+    LineCard: {
+      render: renderCard,
+      update: updateLineCard,
+      updateSystem: updateSystemCard,
+      applyColor: applyCardColor
+    },
     renderPageState: renderPageState,
     setPageStateRetry: setPageStateRetry,
     localizeInterval: _localizeInterval,
