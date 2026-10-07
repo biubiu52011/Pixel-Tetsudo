@@ -8,7 +8,7 @@
 
 | Workstream | 状态 | 当前结论 / 下一步 |
 |---|---|---|
-| UI-001 全站 SiteShell | TODO | 7 个 HTML 重复 Header/Language/Nav/Footer；先建立共享契约，再逐页迁移 |
+| UI-001 全站 SiteShell | IN_PROGRESS | canonical `js/site-shell.js` + SHELL-001 guard 已建立；尚未接管生产页面，下一步迁移 7 页 |
 | UI-002 OperatorFilterBar | DONE | JR-East、tOp、显隐链路已修；HEAD `4ada406b` 的 CI/CD、Release Guards、Pages 全部成功 |
 | UI-003 LineCard / SystemCard | TODO | 当前共享 `DataState.renderCard/renderSystemCard`，但内部 mode 分叉且 realtime 直接 patch DOM；需正式组件化 |
 | UI-004 LineList / OperatorGroup | PARTIAL | `DataState.renderList` 已共享；需与 LineCard 职责拆清并统一空结果/排序 |
@@ -104,7 +104,7 @@
 
 ### P1 — 全站基础层
 
-- [ ] **UI-001A** 定义 SiteShell API / DOM contract，不先改业务。边界已确认：统一 `<body>` 公共结构，不把各页 CSP/能力 `<head>` 粗暴合并；history/home/realtime/trains/tourism 的网络与 worker 权限不同。
+- [x] **UI-001A** 已建立 `js/site-shell.js`：固定 header/navigation/footer mounts、page identity/active tab、`pt:site-shell-ready`；保持页面 CSP/能力 `<head>` 独立。SHELL-001 guard 已加入（`865225b7`, `befbe1c5`）。
 - [ ] **UI-001B** 吸收 Header。
 - [ ] **UI-001C** 吸收 LanguageSwitcher。
 - [ ] **UI-001D** 吸收 MainNavigation，active tab 由 page identity 决定。
@@ -196,6 +196,19 @@
 - Validation: Release Guards SUCCESS；CI/CD SUCCESS；Pages SUCCESS；7 页 source inspection complete。
 - Risks / blockers: 无 P0 blocker。HTML 中手工 asset version 不一致属于后续 SiteShell/asset 收敛范围，不阻塞 UI-001A。
 - Next: UI-001A 定义 SiteShell DOM/API contract，并添加防双链路 architecture guard，再开始逐页迁移。
+
+
+### 2026-10-07 — UI-001A SiteShell contract — agent
+
+- Status: REVIEW
+- Scope: 全站 SiteShell 唯一 DOM/API 契约与防双链路 guard
+- Files: `js/site-shell.js`, `.github/workflows/arch_guard_check.py`, `PROGRESS.md`
+- Base HEAD: `941da537`
+- Commits: `865225b7`, `befbe1c5`
+- Work: 建立 canonical SiteShell；统一 Header/LanguageSwitcher/Nav/Footer renderer 与三个 mount；active tab 由 page identity 决定；加入 SHELL-001，页面一旦加载 SiteShell 就禁止保留旧 header/nav/footer 副本。
+- Validation: source contract inspection complete；生产页面尚未加载 SiteShell，因此本提交无 UI 行为切换；Actions 待本轮最终确认。
+- Risks / blockers: `lang-init.js` 会把 language wrapper 移到 body，SiteShell 保持原 ID/class 以兼容；不能把各页 CSP/head 能力统一。
+- Next: Actions 通过后开始 UI-001B~E，迁移页面并删除旧重复 Shell markup；每批迁移后验证 i18n/mobile/nav。
 
 ## 6. 交接规则
 
