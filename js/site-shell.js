@@ -119,4 +119,12 @@
     applyBuildToken: applyBuildToken,
     NAV_ITEMS: NAV_ITEMS.slice()
   };
+
+  // Pages use script-src 'self' and intentionally forbid inline scripts.
+  // The external canonical shell therefore mounts itself when its root has
+  // already been parsed, which is the required loading position.
+  var autoRoot = document.querySelector("[data-site-shell-root]");
+  if (autoRoot && autoRoot.getAttribute("data-site-shell-ready") !== "true") {
+    mount({ root: autoRoot });
+  }
 })();
