@@ -444,14 +444,16 @@
 
   function patchRealtimeCards(container, linesObj, changedIds) {
     if (!container || !changedIds || changedIds.length === 0) return true;
+    var lineCard = window.DataState && window.DataState.LineCard;
+    if (!lineCard || typeof lineCard.update !== "function" || typeof lineCard.updateSystem !== "function") return false;
     var needsFullRender = false;
+
     changedIds.forEach(function(lineId) {
       var line = linesObj[lineId];
       if (!line) { needsFullRender = true; return; }
+
       var card = container.querySelector('.rs-line-card[data-line="' + String(lineId).replace(/"/g, '\\"') + '"]');
-      if (!card || (card && card.classList.contains("rs-system-card"))) {
-        // A running-system card aggregates several member statuses. Recompute
-        // that one card only; the surrounding operator/list shell stays mounted.
+      if (!card || card.classList.contains("rs-system-card")) {
         var systemCards = container.querySelectorAll(".rs-system-card[data-lines]");
         var systemCard = card && card.classList.contains("rs-system-card") ? card : null;
         if (!systemCard) {
@@ -460,46 +462,16 @@
             if (members.indexOf(lineId) >= 0) { systemCard = systemCards[i]; break; }
           }
         }
-        if (systemCard && window.DataState && typeof window.DataState.renderSystemCardByCode === "function") {
-          var code = systemCard.dataset.system || "";
-          var systemHtml = window.DataState.renderSystemCardByCode(code, linesObj, { mode: "realtime" });
-          if (systemHtml) {
-            var systemWrap = document.createElement("div");
-            systemWrap.innerHTML = systemHtml;
-            var freshSystem = systemWrap.firstElementChild;
-            if (freshSystem) {
-              var color = freshSystem.getAttribute("data-line-color");
-              if (color) freshSystem.style.setProperty("--line-color", color);
-              systemCard.replaceWith(freshSystem);
-              return;
-            }
-          }
+        if (systemCard) {
+          if (!lineCard.updateSystem(systemCard, linesObj, { mode: "realtime" })) needsFullRender = true;
+          return;
         }
         if (!card) return;
         needsFullRender = true;
         return;
       }
-      // A realtime card's static shell (name/icon/operator/order) is unchanged.
-      // Replace only its dynamic status/interval nodes instead of rebuilding
-      // every operator group and every line card.
-      var freshWrap = document.createElement("div");
-      freshWrap.innerHTML = window.DataState.renderCard(line, lineId, { mode: "realtime" });
-      var fresh = freshWrap.firstElementChild;
-      if (!fresh) { needsFullRender = true; return; }
-      var oldStatus = card.querySelector(".rs-status-icon");
-      var newStatus = fresh.querySelector(".rs-status-icon");
-      if (oldStatus && newStatus) {
-        oldStatus.className = newStatus.className;
-        oldStatus.textContent = newStatus.textContent;
-      }
-      var oldInterval = card.querySelector(".rs-line-interval");
-      var newInterval = fresh.querySelector(".rs-line-interval");
-      if (oldInterval && newInterval) oldInterval.textContent = newInterval.textContent;
-      else if (oldInterval && !newInterval) oldInterval.remove();
-      else if (!oldInterval && newInterval) {
-        var info = card.querySelector(".rs-line-info");
-        if (info) info.appendChild(newInterval);
-      }
+
+      if (!lineCard.update(card, line, lineId, { mode: "realtime" })) needsFullRender = true;
     });
     return !needsFullRender;
   }
