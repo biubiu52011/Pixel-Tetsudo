@@ -147,4 +147,12 @@ assert.deepStrictEqual(splitRanges.impacts,[
   {interval:"A駅→B駅",direction:null,effect:"suspension"},
   {interval:"C駅→D駅",direction:null,effect:"delay"}
 ]);
-console.log("runinfo-evaluator: 94 PASS");
+let uchiboTyphoon=E.evaluate({messageKind:"realtime",structuredStatus:"Suspension",text:"内房線（姉ケ崎〜長浦駅間）は、台風２５号の影響で、上下線で終日運転を見合わせます。運転再開まで少なくとも３か月程度かかる見込みです。"});
+assert.strictEqual(uchiboTyphoon.status,"notice");
+assert.strictEqual(uchiboTyphoon.symbol,"△");
+assert.strictEqual(uchiboTyphoon.interval,"姉ケ崎→長浦駅");
+assert.deepStrictEqual(uchiboTyphoon.impacts,[
+  {interval:"姉ケ崎→長浦駅",direction:"both",effect:"suspension"}
+]);
+assert.ok(!uchiboTyphoon.impacts.some(function(x){return !x.interval && x.effect==="suspension";}));
+console.log("runinfo-evaluator: 100 PASS");
