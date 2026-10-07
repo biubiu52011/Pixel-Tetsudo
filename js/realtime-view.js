@@ -408,7 +408,7 @@
   function setFilter(operator) {
     _selectedOperator = operator || null;
     if (_filterBar && _filterBar.getSelected() !== _selectedOperator) _filterBar.setSelected(_selectedOperator, false);
-    var container = document.getElementById("realtimeList");
+    var container = document.getElementById("realtimeStatusContainer");
     if (!container) return;
     var groups = container.querySelectorAll(".rs-operator-group[data-operator]");
     if (!groups.length) {
