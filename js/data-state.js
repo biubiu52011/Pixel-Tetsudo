@@ -88,6 +88,7 @@
     if (!container) return;
     var key = messageKey || (state === "loading" ? "status.loading"
       : state === "render_error" ? "status.display_unavailable"
+      : state === "fetch_error" ? "status.load_error"
       : state === "timeout" ? "status.timeout"
       : state === "offline" ? "status.offline"
       : "status.fetch_unavailable");
@@ -98,8 +99,9 @@
       container.innerHTML = '<div class="rs-loading" role="status" aria-live="polite"><div class="rs-loading-spinner" aria-hidden="true"></div><span data-i18n="' + escapeHtml(key) + '">' + escapeHtml(message) + '</span></div>';
       return;
     }
-    var cls = state === "render_error" || state === "error" ? "rs-error" : "rs-empty";
+    var cls = state === "render_error" || state === "fetch_error" || state === "error" ? "rs-error" : "rs-empty";
     var detailKey = state === "render_error" ? "status.display_unavailable_hint"
+      : state === "fetch_error" ? "status.load_error_hint"
       : state === "timeout" ? "status.timeout_hint"
       : state === "offline" ? "status.offline_hint"
       : "status.fetch_unavailable_hint";
