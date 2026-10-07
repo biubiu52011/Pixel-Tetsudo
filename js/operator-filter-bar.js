@@ -1,6 +1,6 @@
 (function(){"use strict";
 function tr(k,f){try{var v=typeof window.t==="function"?window.t(k):"";return v||f;}catch(e){return f;}}
-function label(op){try{return window.TransitConstants&&typeof window.TransitConstants.operatorLabel==="function"?window.TransitConstants.operatorLabel(op):op;}catch(e){return op;}}
+function label(op){try{if(typeof window.tOp==="function"){var translated=window.tOp(op);if(translated&&translated!==op)return translated;}return window.TransitConstants&&typeof window.TransitConstants.operatorLabel==="function"?window.TransitConstants.operatorLabel(op):op;}catch(e){return op;}}
 function sort(ops){return window.LinePresentationService&&typeof window.LinePresentationService.orderOperators==="function"?window.LinePresentationService.orderOperators(ops):(ops||[]).slice().sort();}
 function operators(lines){var found={};if(Array.isArray(lines)){lines.forEach(function(l){if(l&&l.operator)found[l.operator]=true;});}else{Object.keys(lines||{}).forEach(function(id){var l=lines[id];if(l&&l.operator)found[l.operator]=true;});}return sort(Object.keys(found));}
 function esc(s){return String(s).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
