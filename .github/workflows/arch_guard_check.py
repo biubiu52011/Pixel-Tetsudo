@@ -234,6 +234,8 @@ def main():
             new_errors.append('SHELL-001 SITE_SHELL_CONTRACT_MISSING %s' % token)
     if 'params.get("build")' not in shell_src or 'url.searchParams.set("build", build)' not in shell_src:
         new_errors.append('SHELL-001 BUILD_TOKEN_NAVIGATION_PROPAGATION_MISSING')
+    if 'document.querySelector("[data-site-shell-root]")' not in shell_src:
+        new_errors.append('SHELL-001 CSP_SAFE_AUTOMOUNT_MISSING')
     shell_pages = (
         'pages/home.html', 'pages/history.html', 'pages/realtime.html', 'pages/trains.html',
         'pages/tourism-event.html', 'pages/tourism-shop.html', 'pages/tourism-spot.html',
@@ -241,6 +243,8 @@ def main():
     for page in shell_pages:
         page_src = _read_arch(page)
         if 'js/site-shell.js' in page_src:
+            if 'window.SiteShell.mount()' in page_src:
+                new_errors.append('SHELL-001 INLINE_BOOTSTRAP_REINTRODUCED %s' % page)
             for mount in ('header', 'navigation', 'footer'):
                 if 'data-site-shell-mount="%s"' % mount not in page_src:
                     new_errors.append('SHELL-001 MIGRATED_PAGE_MOUNT_MISSING %s %s' % (page, mount))
