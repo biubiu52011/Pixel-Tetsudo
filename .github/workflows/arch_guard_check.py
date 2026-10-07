@@ -241,11 +241,18 @@ def main():
         new_errors.append('SHELL-001 MOBILE_NAV_CENTERING_CONTRACT_MISSING')
     data_state_src = _read_arch('js/data-state.js')
     realtime_view_src = _read_arch('js/realtime-view.js')
-    if 'LineCard: {' not in data_state_src or 'update: updateLineCard' not in data_state_src or 'updateSystem: updateSystemCard' not in data_state_src:
+    line_card_src = _read_arch('js/line-card.js')
+    if 'window.LineCard = {' not in line_card_src or 'update: update' not in line_card_src or 'updateSystem: updateSystem' not in line_card_src:
         new_errors.append('COMPONENT-002 LINE_CARD_UPDATE_API_MISSING')
+    if 'function renderCard(' in data_state_src or 'function renderSystemCard(' in data_state_src:
+        new_errors.append('COMPONENT-002 DATA_STATE_CARD_TEMPLATE_LEAK')
+    if 'window.LineCard.render(' not in data_state_src or 'window.LineCard.renderSystem(' not in data_state_src:
+        new_errors.append('COMPONENT-002 LINE_LIST_NOT_USING_LINE_CARD')
     forbidden_card_patches = ['card.querySelector(".rs-status-icon")', 'card.querySelector(".rs-line-interval")', 'card.querySelector(".rs-line-info")']
     if any(token in realtime_view_src for token in forbidden_card_patches):
         new_errors.append('COMPONENT-002 REALTIME_CARD_DOM_PATCH_LEAK')
+    if 'window.DataState.renderCard' in realtime_view_src or 'window.DataState.LineCard' in realtime_view_src:
+        new_errors.append('COMPONENT-002 LEGACY_LINE_CARD_API_USAGE')
     shell_pages = (
         'pages/home.html', 'pages/history.html', 'pages/realtime.html', 'pages/trains.html',
         'pages/tourism-event.html', 'pages/tourism-shop.html', 'pages/tourism-spot.html',
