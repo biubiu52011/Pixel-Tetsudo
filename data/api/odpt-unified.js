@@ -1413,6 +1413,33 @@
     // 注意：RTCache 的 positions/delayInfo 两键被 data-fusion 融合后数据占用（lineId 级），
     // 这里用独立 raw 键（operator 级原始数据），互不覆盖。
     var RAW_REALTIME_FRESH_MS = 30000;  // 缓存新鲜窗口（与 30s 轮询同周期）
+    var FUSION_READY_WAIT_MS = 15000;
+    var _fusionWaiters = {};
+
+    function waitForFusion(key, ready, run) {
+        if (ready()) {
+            delete _fusionWaiters[key];
+            run();
+            return;
+        }
+        var existing = _fusionWaiters[key];
+        if (existing) return;
+        var startedAt = Date.now();
+        function tick() {
+            if (ready()) {
+                delete _fusionWaiters[key];
+                run();
+                return;
+            }
+            if ((Date.now() - startedAt) >= FUSION_READY_WAIT_MS) {
+                delete _fusionWaiters[key];
+                console.debug("[ODPT] readiness wait expired:", key);
+                return;
+            }
+            _fusionWaiters[key] = setTimeout(tick, document.hidden ? 1000 : 300);
+        }
+        _fusionWaiters[key] = setTimeout(tick, document.hidden ? 1000 : 300);
+    }
 
     function persistRawRealtime(delayOnly) {
         try {
@@ -1449,17 +1476,16 @@
     }
 
     function pushCachedRealtime(hasDelay, hasPositions) {
-        // DataFusion 在 odpt-unified 之后加载——未就绪时重试（同 pushDelay 模式）
-        if (!window.DataFusion || !window.DataFusion.updateOdptData) {
-            setTimeout(function() { pushCachedRealtime(hasDelay, hasPositions); }, 300);
-            return;
-        }
-        try {
-            if (hasDelay) window.DataFusion.updateOdptData(window.ODPT_DELAY_DATA);
-            if (hasPositions && window.DataFusion.loadTrainPositions && Object.keys(window.ODPT_TRAIN_POSITIONS).length > 0) {
-                window.DataFusion.loadTrainPositions();
-            }
-        } catch(e) { console.debug("[ODPT] cached realtime push error:", e.message); }
+        waitForFusion("cached-realtime", function() {
+            return !!(window.DataFusion && window.DataFusion.updateOdptData);
+        }, function() {
+            try {
+                if (hasDelay) window.DataFusion.updateOdptData(window.ODPT_DELAY_DATA);
+                if (hasPositions && window.DataFusion.loadTrainPositions && Object.keys(window.ODPT_TRAIN_POSITIONS).length > 0) {
+                    window.DataFusion.loadTrainPositions();
+                }
+            } catch(e) { console.debug("[ODPT] cached realtime push error:", e.message); }
+        });
     }
 
     // ========== 加载实时数据（延误信息 + 实时位置）==========
@@ -1565,52 +1591,44 @@
         // v4.3.394: 延误信息全部就绪后立即推送（首屏 5-15s → 2-4s）；
         // 列车位置随后补齐。加载期间 UI 显示「情報取得中」，不再把等待期伪装成「正常」。
         function pushDelay() {
-            // v4.3.396: head 提前执行场景——DataFusion 可能尚未加载，重试等待不丢数据
-            if (!window.DataFusion || !window.DataFusion.updateOdptData) {
-                setTimeout(pushDelay, 300);
-                return;
-            }
-            try {
-                window.DataFusion.updateOdptData(window.ODPT_DELAY_DATA);
-            } catch(e) { console.debug("[ODPT] delay push error:", e.message); }
-            console.debug("[ODPT] Realtime delay loaded:", loaded.delay, "operators");
+            waitForFusion("delay", function() {
+                return !!(window.DataFusion && window.DataFusion.updateOdptData);
+            }, function() {
+                try {
+                    window.DataFusion.updateOdptData(window.ODPT_DELAY_DATA);
+                } catch(e) { console.debug("[ODPT] delay push error:", e.message); }
+                console.debug("[ODPT] Realtime delay loaded:", loaded.delay, "operators");
+            });
         }
         function pushAll() {
-            // v4.3.396: 同 pushDelay——DataFusion 未就绪时重试，不丢数据
-            if (!window.DataFusion || !window.DataFusion.updateOdptData) {
-                setTimeout(pushAll, 300);
-                return;
-            }
-            try {
-                window.DataFusion.updateOdptData(window.ODPT_DELAY_DATA);
-                if (window.DataFusion.loadTrainPositions) {
-                    window.DataFusion.loadTrainPositions();
-                }
-            } catch(e) { console.debug("[ODPT] DataFusion push error:", e.message); }
-            console.debug("[ODPT] Realtime loaded - delay:", loaded.delay,
-                        "operators, positions:", loaded.positions, "operators");
+            waitForFusion("all", function() {
+                return !!(window.DataFusion && window.DataFusion.updateOdptData);
+            }, function() {
+                try {
+                    window.DataFusion.updateOdptData(window.ODPT_DELAY_DATA);
+                    if (window.DataFusion.loadTrainPositions) {
+                        window.DataFusion.loadTrainPositions();
+                    }
+                } catch(e) { console.debug("[ODPT] DataFusion push error:", e.message); }
+                console.debug("[ODPT] Realtime loaded - delay:", loaded.delay,
+                            "operators, positions:", loaded.positions, "operators");
+            });
         }
         // v4.3.415: 列车位置推送与延误情报解耦——位置数据不等待 delayPromises 完成
         // （TrainInformation 任一 operator 慢/超时会卡住整条 Promise 链，导致 loadTrainPositions 永不执行）
         // 同时等待 DataLayer 就绪后再分配（本地线路数据晚于 ODPT 到达时重试，不设死上限）
         function pushTrainPositions() {
-            if (!window.DataFusion || !window.DataFusion.loadTrainPositions) {
-                setTimeout(pushTrainPositions, 300);
-                return;
-            }
-            var dl = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : (window.UNIFIED_LINES || {});
-            if (!dl || Object.keys(dl).length === 0) {
-                setTimeout(pushTrainPositions, 300);
-                return;
-            }
-            try {
-                // v4.3.416: 每次位置推送重置二次校准 flag，刷新周期内只补一次
-                if (window.DataFusion.loadTrainPositions) {
+            waitForFusion("positions", function() {
+                if (!window.DataFusion || !window.DataFusion.loadTrainPositions) return false;
+                var dl = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : (window.UNIFIED_LINES || {});
+                return !!(dl && Object.keys(dl).length > 0);
+            }, function() {
+                try {
                     window.DataFusion.loadTrainPositions._calibrated = false;
                     window.DataFusion.loadTrainPositions();
-                }
-            } catch(e) { console.debug("[ODPT] train positions push error:", e.message); }
-            console.debug("[ODPT] Realtime positions pushed:", loaded.positions, "operators");
+                } catch(e) { console.debug("[ODPT] train positions push error:", e.message); }
+                console.debug("[ODPT] Realtime positions pushed:", loaded.positions, "operators");
+            });
         }
 
         // 延误情报独立推送；列车位置在 posPromises 就绪后推送（不阻塞、不依赖延误链）
