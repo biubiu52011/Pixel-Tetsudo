@@ -387,10 +387,8 @@
 
   function renderFilterBar(linesObj) {
     if (!_filterBar && window.OperatorFilterBar) {
-      _filterBar = window.OperatorFilterBar.create("realtimeFilterBar", {
-        selected: _selectedOperator,
-        onChange: function(operator) { setFilter(operator); }
-      });
+      _filterBar = window.OperatorFilterBar.get("realtimeFilterBar") || window.OperatorFilterBar.mount("realtimeFilterBar");
+      _filterBar.setSelected(_selectedOperator, false);
     }
     if (_filterBar) _filterBar.render(linesObj);
   }
