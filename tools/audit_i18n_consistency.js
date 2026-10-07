@@ -265,6 +265,16 @@ function main() {
     errors.push({ type: 'page-retry-behavior-missing', file: 'js/data-state.js' });
   }
 
+  const dataFusionReady = fs.readFileSync(path.join(ROOT, 'js/data-fusion.js'), 'utf8');
+  const dataStateReady = fs.readFileSync(path.join(ROOT, 'js/data-state.js'), 'utf8');
+  const dbLoaderReady = fs.readFileSync(path.join(ROOT, 'data/core/db-loader.js'), 'utf8');
+  if (!/pt:railway-ready/.test(dbLoaderReady) || !/pt:railway-ready/.test(dataFusionReady) || !/pt:railway-ready/.test(dataStateReady)) {
+    errors.push({ type: 'canonical-data-readiness-chain-missing', file: 'DbLoader/DataFusion/DataState' });
+  }
+  if (!/state === "fetch_error"/.test(dataStateReady)) {
+    errors.push({ type: 'fetch-error-page-state-missing', file: 'js/data-state.js' });
+  }
+
   const dbLoaderRecovery = fs.readFileSync(path.join(ROOT, 'data/core/db-loader.js'), 'utf8');
   if (!/retry:\s*retry/.test(dbLoaderRecovery) || !/function retry\(\)/.test(dbLoaderRecovery)) {
     errors.push({ type: 'canonical-data-retry-missing', file: 'data/core/db-loader.js' });
