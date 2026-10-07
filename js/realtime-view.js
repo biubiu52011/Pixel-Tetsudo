@@ -307,9 +307,6 @@
   let _selectedOperator = null;
   var _filterBar = null;
 
-  function setFilterAvailability(available) {
-    if (_filterBar) _filterBar.setAvailable(available);
-  }
   let _currentModalLine = null;
   let _currentModalIdentity = "";
   var _listStatusRefreshToken = 0;
@@ -519,7 +516,6 @@
     // Mount the structural filter immediately. Data readiness only populates it;
     // it must not control whether the component exists at all.
     renderFilterBar({});
-    setFilterAvailability(false);
 
     function renderLinesList(container, linesObj, lineOrderArr) {
       window.DataState.renderList(container, linesObj, { mode: "realtime", lineOrder: lineOrderArr });
@@ -546,7 +542,6 @@
     function render(refreshStatuses) {
       var fused = getLines();
       if (!fused || !fused.lines || Object.keys(fused.lines).length === 0) {
-        setFilterAvailability(false);
         window.DataState.renderPageState(container, "loading");
         return;
       }
@@ -556,20 +551,17 @@
         var visibleLines = getFilteredLines();
         renderLinesList(container, visibleLines, _latestOrder);
         renderFilterBar(fused.lines);
-        setFilterAvailability(true);
         // Initial/data-ready render may reconcile official status. Pure UI
         // changes (notably language switching) must not fan out into one
         // RunInfoAPI.query Promise per line.
         if (refreshStatuses !== false) scheduleListStatusRefresh(fused.lines, true);
       } catch (e) {
-        setFilterAvailability(false);
         window.DataState.renderPageState(container, "render_error");
       }
     }
 
     if (window.DataState && window.DataState.setPageStateRetry) {
       window.DataState.setPageStateRetry(container, function() {
-        setFilterAvailability(false);
         window.DataState.renderPageState(container, "loading");
         if (!window.DataLoader || typeof window.DataLoader.retry !== "function") {
           return Promise.reject(new Error("DataLoader retry unavailable"));
@@ -594,7 +586,6 @@
     });
     window.addEventListener("pt:railway-error", function() {
       if (container.querySelector(".rs-line-card")) return;
-      setFilterAvailability(false);
       window.DataState.renderPageState(container, navigator.onLine === false ? "offline" : "fetch_error");
     });
 
