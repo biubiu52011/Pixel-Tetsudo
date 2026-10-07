@@ -10,15 +10,13 @@
   var detailEl = null;
   var titleEl = null;
   var filterBarEl = null;
+  var _filterBar = null;
   var mapEl = null;
   var backBtn = null;
   var _selectedOperator = null;
 
   function setFilterAvailability(available) {
-    if (!filterBarEl) filterBarEl = document.getElementById("trainsFilterBar");
-    if (!filterBarEl) return;
-    filterBarEl.classList.toggle("hidden", !available);
-    filterBarEl.setAttribute("aria-hidden", available ? "false" : "true");
+    if (_filterBar) _filterBar.setAvailable(available);
   }
   var _lastPositionsHash = '';
   var _lastDetailStateHash = '';
@@ -472,92 +470,48 @@
   }
 
 
-  function sortOperators(ops) {
-    if (window.LinePresentationService && typeof window.LinePresentationService.orderOperators === "function") {
-      return window.LinePresentationService.orderOperators(ops);
-    }
-    var order = (window.TransitConstants && window.TransitConstants.OP_ORDER) ? window.TransitConstants.OP_ORDER : [];
-    return ops.sort(function(a, b) {
-      var ia = order.indexOf(a), ib = order.indexOf(b);
-      if (ia >= 0 && ib >= 0) return ia - ib;
-      if (ia >= 0) return -1;
-      if (ib >= 0) return 1;
-      return a.localeCompare(b);
-    });
-  }
-
   function renderFilterBar(container) {
-    if (!container) return;
-    var lines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : {};
-    var ops = {};
-    if (Array.isArray(lines)) {
-      lines.forEach(function(l) { if (l.operator) ops[l.operator] = true; });
-    } else {
-      Object.keys(lines).forEach(function(id) {
-        var line = lines[id];
-        if (line && line.operator) ops[line.operator] = true;
+    if (!_filterBar && window.OperatorFilterBar) {
+      _filterBar = window.OperatorFilterBar.create(container || "trainsFilterBar", {
+        selected: _selectedOperator,
+        onChange: function(operator) { setFilter(operator); }
       });
     }
-    var opList = sortOperators(Object.keys(ops));
-    var html = '';
-    var allLabel = (typeof window.t === "function" && window.t("filter.all")) ? window.t("filter.all") : "All";
-    html += '<button class="rs-filter-btn' + (_selectedOperator === null ? ' active' : '') + '" data-operator="">' + allLabel + '</button>';
-    opList.forEach(function(op) {
-      var label = (typeof window.t === "function" && window.t("op." + op)) ? window.t("op." + op) : op;
-      html += '<button class="rs-filter-btn' + (_selectedOperator === op ? ' active' : '') + '" data-operator="' + op + '">' + label + '</button>';
-    });
-    container.innerHTML = html;
-    container.querySelectorAll('.rs-filter-btn').forEach(function(btn) {
-      btn.addEventListener('click', function() { setFilter(btn.dataset.operator || null); });
-    });
+    if (_filterBar) _filterBar.render(getLinesData());
   }
 
   function setFilter(op) {
-    _selectedOperator = op;
-    var container = document.getElementById('trainsFilterBar');
-    // Filtering is a view-state change, not a data lifecycle event. Keep the
-    // existing cards/SVG-ready DOM alive and only toggle the relevant operator
-    // groups. Rebuilding both the filter bar and full line list made every click
-    // look and feel like an initial page load.
-    if (container) {
-      Array.prototype.slice.call(container.querySelectorAll('.rs-filter-btn')).forEach(function(btn) {
-        btn.classList.toggle('active', (btn.dataset.operator || null) === _selectedOperator);
+    _selectedOperator = op || null;
+    if (_filterBar && _filterBar.getSelected() !== _selectedOperator) _filterBar.setSelected(_selectedOperator, false);
+    if (!listEl) return;
+    var groups = listEl.querySelectorAll(".rs-operator-group[data-operator]");
+    if (groups.length) {
+      Array.prototype.slice.call(groups).forEach(function(group) {
+        var groupOp = group.getAttribute("data-operator") || "";
+        group.style.display = (!_selectedOperator || groupOp === _selectedOperator) ? "" : "none";
       });
-    }
-    if (listEl) {
-      var groups = listEl.querySelectorAll('.rs-operator-group[data-operator]');
-      if (groups.length) {
-        Array.prototype.slice.call(groups).forEach(function(group) {
-          var groupOp = group.getAttribute('data-operator') || '';
-          var visible = !_selectedOperator || groupOp === _selectedOperator ||
-            (_selectedOperator === "JR-East" && groupOp === "JR-East");
-          group.classList.toggle('hidden', !visible);
-        });
-      } else {
-        // Compatibility fallback for DOM rendered before data-operator existed.
-        renderFiltered(listEl);
-      }
+    } else {
+      renderFiltered(listEl);
     }
   }
 
   function renderFiltered(el, linesSnapshot) {
     if (!el || !window.DataState) return;
-    var allLines = linesSnapshot || getLinesData(); // dict: lineId -> line
+    var allLines = linesSnapshot || getLinesData() || {};
     var filtered = allLines;
     if (_selectedOperator) {
       filtered = {};
       Object.keys(allLines).forEach(function(id) {
-        var _ln = allLines[id];
-        if (_ln && (_selectedOperator === "JR-East"
-          ? (window.TransitConstants && window.TransitConstants.isJRERoute ? window.TransitConstants.isJRERoute(_ln) : _ln.operator === "JR-East")
-          : _ln.operator === _selectedOperator)) {
-          filtered[id] = allLines[id];
-        }
+        var line = allLines[id];
+        if (line && line.operator === _selectedOperator) filtered[id] = line;
       });
     }
-    if (!filtered || Object.keys(filtered).length === 0) { el.innerHTML = ''; return; }
-    var lineOrder = (window.LinePresentationService && window.UNIFIED_LINES) ? window.LinePresentationService.getDisplayOrder(window.UNIFIED_LINES) : []; try { window.DataState.renderList(el, filtered, { mode: "trains", lineOrder: lineOrder }); } catch(e) { window.DataState.renderPageState(el, "render_error"); }
+    if (!Object.keys(filtered).length) { el.innerHTML = ""; return; }
+    var lineOrder = (window.LinePresentationService && window.UNIFIED_LINES) ? window.LinePresentationService.getDisplayOrder(window.UNIFIED_LINES) : [];
+    try { window.DataState.renderList(el, filtered, { mode: "trains", lineOrder: lineOrder }); }
+    catch(e) { window.DataState.renderPageState(el, "render_error"); }
   }
+
   window.TrainsPage = {
     init: init,
     refreshUI: function() { renderList(listEl); },
