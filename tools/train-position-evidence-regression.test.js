@@ -318,7 +318,6 @@ assert(runningChainSource.includes('_directThrough[lineId].push(boundary.lineId)
 
 console.log("train-position-evidence-regression: PASS");
 
-const fusionSource=fs.readFileSync(require("path").join(__dirname,"../js/data-fusion.js"),"utf8");
 const renderSource=fs.readFileSync(require("path").join(__dirname,"../js/trains-render.js"),"utf8");
 assert(/function _isFreshRealtimeRecord\(record\)/.test(fusionSource));
 assert(/!t \|\| !_isFreshRealtimeRecord\(t\)/.test(fusionSource));
