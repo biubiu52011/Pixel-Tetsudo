@@ -1166,6 +1166,7 @@ function applyData(data, i18n) {
       // across mobile/network failures and interrupted page lifecycles.
       cacheWrite(railwayData, i18nData, cleanOldCaches);
       loaded = true;
+      try { window.dispatchEvent(new CustomEvent("pt:railway-ready", { detail: { source: "remote" } })); } catch(e) {}
       console.log(
         Object.keys(railwayData.stations).length + " stations, " +
         Object.keys(railwayData.lines).length + " lines, railway ready");
@@ -1231,6 +1232,7 @@ function load() {
           applyData(window.RAILWAY_DATA, window.RAILWAY_I18N || {});
           applyTourismData({});
           loaded = true;
+          try { window.dispatchEvent(new CustomEvent("pt:railway-ready", { detail: { source: "file" } })); } catch(e) {}
           // Tourism bundle loads in background, non-blocking.
           if (!SKIP_TOURISM) {
             loadFileBundleTourism().then(function() {
@@ -1260,6 +1262,7 @@ function load() {
         // Apply empty tourism immediately; read tourism cache off the critical path.
         applyTourismData({});
         loaded = true;
+        try { window.dispatchEvent(new CustomEvent("pt:railway-ready", { detail: { source: "cache" } })); } catch(e) {}
         console.log("[DbLoader] Railway cache hit (v" + DB_CACHE_VERSION + "), background refresh scheduled");
         // Defer tourism cache JSON.parse (~1.8MB) — not needed for search.
         setTimeout(function() {
@@ -1286,6 +1289,7 @@ function load() {
           applyData(fallback.railway, fallback.i18n);
           applyTourismData(fallback.tourism || {});
           loaded = true;
+          try { window.dispatchEvent(new CustomEvent("pt:railway-ready", { detail: { source: "fallback-cache" } })); } catch(e) {}
           console.warn("[DbLoader] Remote failed, using older cache fallback:", err.message);
           return fallback;
         } catch(e2) {}
