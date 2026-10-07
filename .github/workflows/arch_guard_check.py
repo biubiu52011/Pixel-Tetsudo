@@ -239,6 +239,13 @@ def main():
     style_src = _read_arch('css/style.css')
     if 'Mobile primary navigation geometry' not in style_src or 'grid-template-columns: repeat(4, max-content)' not in style_src:
         new_errors.append('SHELL-001 MOBILE_NAV_CENTERING_CONTRACT_MISSING')
+    data_state_src = _read_arch('js/data-state.js')
+    realtime_view_src = _read_arch('js/realtime-view.js')
+    if 'LineCard: {' not in data_state_src or 'update: updateLineCard' not in data_state_src or 'updateSystem: updateSystemCard' not in data_state_src:
+        new_errors.append('COMPONENT-002 LINE_CARD_UPDATE_API_MISSING')
+    forbidden_card_patches = ['card.querySelector(".rs-status-icon")', 'card.querySelector(".rs-line-interval")', 'card.querySelector(".rs-line-info")']
+    if any(token in realtime_view_src for token in forbidden_card_patches):
+        new_errors.append('COMPONENT-002 REALTIME_CARD_DOM_PATCH_LEAK')
     shell_pages = (
         'pages/home.html', 'pages/history.html', 'pages/realtime.html', 'pages/trains.html',
         'pages/tourism-event.html', 'pages/tourism-shop.html', 'pages/tourism-spot.html',
