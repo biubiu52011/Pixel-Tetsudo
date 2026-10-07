@@ -237,8 +237,10 @@ def main():
     if 'document.querySelector("[data-site-shell-root]")' not in shell_src:
         new_errors.append('SHELL-001 CSP_SAFE_AUTOMOUNT_MISSING')
     style_src = _read_arch('css/style.css')
-    if 'Canonical Mobile SiteShell / content density' not in style_src:
+    if 'Canonical Mobile SiteShell' not in style_src:
         new_errors.append('SHELL-001 MOBILE_SHELL_CONTRACT_MISSING')
+    if 'tab-label-full' not in shell_src or 'tab-label-short' not in shell_src:
+        new_errors.append('SHELL-001 RESPONSIVE_NAV_LABELS_MISSING')
     shell_pages = (
         'pages/home.html', 'pages/history.html', 'pages/realtime.html', 'pages/trains.html',
         'pages/tourism-event.html', 'pages/tourism-shop.html', 'pages/tourism-spot.html',
