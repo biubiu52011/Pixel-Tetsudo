@@ -14,6 +14,8 @@ assert(/source: "initial_check"/.test(fusion));
 assert(/: "loading";/.test(state));
 assert(/LAST_GOOD_MAX_AGE_MS = 10 \* 60 \* 1000/.test(api));
 assert(/LAST_GOOD_MAX_AGE_MS = 10 \* 60 \* 1000/.test(fusion));
+assert(/CACHE_TTL_MS = 15 \* 1000/.test(api));
+assert(!/CACHE_TTL_MS = 5 \* 60 \* 1000/.test(api));
 assert(/Date\.now\(\) - v\.t/.test(api) && /Date\.now\(\) - v\.t/.test(fusion));
 assert(!/dInfo \? "normal" : "no_data"/.test(state));
 assert(!/delayInfo \? "normal" : "no_data"/.test(view));
@@ -25,4 +27,4 @@ const getApiDelayBody=(fusion.match(/function getApiDelayInfo\(line\) \{([\s\S]*
 assert(getApiDelayBody.length>0);
 assert(!/aggregateDelayRecords\(raw\)/.test(getApiDelayBody));
 assert(/without a matching[\s\S]*railway identity/.test(getApiDelayBody));
-console.log("runinfo-loading-state: 18 PASS");
+console.log("runinfo-loading-state: 20 PASS");
