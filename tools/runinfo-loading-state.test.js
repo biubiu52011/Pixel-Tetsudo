@@ -43,3 +43,9 @@ console.log("railway-loading-lifecycle: PASS");
 assert.ok(view.includes("renderFilterBar({});"), "realtime filter must mount before railway data is ready");
 assert.ok(view.indexOf("renderFilterBar({});") < view.indexOf("function getLines()"), "filter lifecycle must not depend on data readiness");
 console.log("realtime-filter-lifecycle: PASS");
+
+const filterSrc = fs.readFileSync(require("path").join(__dirname, "../js/operator-filter-bar.js"), "utf8");
+assert.ok(filterSrc.includes("function autoMount()"), "shared operator filter must own its mount lifecycle");
+assert.ok(filterSrc.includes("pt:operator-filter-change"), "shared operator filter must expose changes as an independent UI event");
+assert.ok(!filterSrc.includes("opts.onChange"), "business callback coupling must not control the shared filter");
+console.log("operator-filter-independent-lifecycle: PASS");
