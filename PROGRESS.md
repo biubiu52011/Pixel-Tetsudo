@@ -8,7 +8,7 @@
 
 | Workstream | 状态 | 当前结论 / 下一步 |
 |---|---|---|
-| UI-001 全站 SiteShell | REVIEW | 7 页 Header/Language/Nav/Footer 已全部接管；旧 Shell markup=0；build token 传播已补齐，等待最新 Actions/浏览器验证 |
+| UI-001 全站 SiteShell | REVIEW | 7 页已接管；实机发现 inline mount 被 `script-src 'self'` CSP 拦截，已改外部脚本自启动；HEAD `0003ae80` 三条 Actions 全绿，等待 mobile Chrome 复验 |
 | UI-002 OperatorFilterBar | DONE | JR-East、tOp、显隐链路已修；HEAD `4ada406b` 的 CI/CD、Release Guards、Pages 全部成功 |
 | UI-003 LineCard / SystemCard | TODO | 当前共享 `DataState.renderCard/renderSystemCard`，但内部 mode 分叉且 realtime 直接 patch DOM；需正式组件化 |
 | UI-004 LineList / OperatorGroup | PARTIAL | `DataState.renderList` 已共享；需与 LineCard 职责拆清并统一空结果/排序 |
@@ -221,6 +221,18 @@
 - Validation: 每页 SiteShell=1、三个 mount 各=1、旧 Header/Nav/Footer=0；source CSS inspection complete；Actions 待最新 HEAD 最终确认。
 - Risks / blockers: browser runtime 尚未在用户的 mobile Chrome 实机确认，故保持 REVIEW。
 - Next: 确认 Actions；实机/生产检查语言切换、sticky nav、active tab、footer；通过后 UI-001 DONE，进入 UI-003 LineCard。
+
+
+### 2026-10-07 — UI-001 CSP production recovery — agent
+
+- Status: REVIEW
+- Scope: SiteShell 手机生产环境公共 UI 全消失回归
+- Files: `js/site-shell.js`, 7 个 `pages/*.html`, `.github/workflows/arch_guard_check.py`, `PROGRESS.md`
+- Commits: `cee818d7`, `8cadf6e8`, `1ac6cf76`, `40395a9d`, `7989f04d`, `2c7a61e4`, `4c289634`, `d2bc607d`, `0003ae80`
+- Work: 根据用户 mobile Chrome 截图确认业务 DOM 正常但公共 Shell 全空；根因是所有页面 CSP 为 `script-src 'self'`，旧 inline `window.SiteShell.mount()` 被拦截。改为 external `site-shell.js` 自启动，删除 7 页 inline bootstrap；SHELL-001 禁止回归。
+- Validation: HEAD `0003ae80` Release Guards SUCCESS；CI/CD SUCCESS；Pages SUCCESS。公开 Pages 无法由当前外部抓取器读取，因此不伪称 browser runtime verified。
+- Risks / blockers: mobile Chrome production refresh still required；UI-001 继续 REVIEW。
+- Next: 用户刷新生产页确认 Header/Language/Nav/Footer；若恢复则 UI-001 DONE，若仍异常按实机现象继续修。
 
 ## 6. 交接规则
 
