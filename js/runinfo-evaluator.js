@@ -149,40 +149,60 @@
       if (/平常(?:通り|どおり|運転|運行)|通常(?:運転|運行)|正常(?:運転|運行)/.test(fragment)) return "normal";
       return null;
     }
+    function intervalOf(fragment) {
+      var ir = fragment.match(/([^。\n、，,]{1,30}?駅)\s*[～〜－−-]\s*([^。\n、，,]{1,30}?駅)(?:間)?/);
+      if (!ir) ir = fragment.match(/([^。\n、，,]{1,30}?)\s*[～〜－−-]\s*([^。\n、，,]{1,30}?駅)(?:間)?/);
+      if (ir) return ir[1].trim().replace(/^[・･（(]+/, "") + "→" + ir[2].trim();
+      return /全線/.test(fragment) ? "全線" : null;
+    }
+    function effectClauses(sentence) {
+      var clauses = [];
+      var re = /(直通(?:運転|運行)[^。\n]{0,40}?(?:中止|取りやめ|見合わせ)|(?:運転を?見合わせ|運転見合わせ|運転を?中止|区間運休|一部(?:の)?(?:列車|電車)?[^。\n]{0,20}?運休|遅延|遅れ|平常(?:通り|どおり|運転|運行)|通常(?:運転|運行)|正常(?:運転|運行)))/g;
+      var m;
+      while ((m = re.exec(sentence))) clauses.push({ index: m.index, effect: effectOf(m[0]) || effectOf(sentence.slice(Math.max(0, m.index - 40), re.lastIndex)) });
+      return clauses.filter(function(x){ return !!x.effect; });
+    }
+    function nearestBefore(items, index) {
+      var best = null;
+      items.forEach(function(item) {
+        if (item.index <= index && (!best || item.index > best.index)) best = item;
+      });
+      return best;
+    }
     var impacts = [];
     text.split(/[。\n；;]/).forEach(function(sentence) {
       sentence = sentence.trim();
       if (!sentence) return;
-      // A station range + direction + effect in one official sentence is one
-      // operational impact. Do not split Japanese commas such as
-      // "姉ケ崎〜長浦駅間）は、...、上下線で...運転を見合わせます", which
-      // previously produced a direction-only impact plus an empty-scope impact.
-      var sentenceRange = sentence.match(/([^。\n、，,]{1,30}?駅)\s*[～〜－−-]\s*([^。\n、，,]{1,30}?駅)(?:間)?/);
-      if (!sentenceRange) {
-        sentenceRange = sentence.match(/([^。\n、，,]{1,30}?)\s*[～〜－−-]\s*([^。\n、，,]{1,30}?駅)(?:間)?/);
+
+      var scopes = [];
+      var scopeRe = /([^。\n、，,]{1,30}?駅\s*[～〜－−-]\s*[^。\n、，,]{1,30}?駅(?:間)?|[^。\n、，,]{1,30}?\s*[～〜－−-]\s*[^。\n、，,]{1,30}?駅(?:間)?|全線|上下線|上下両線|両方向|上り線|上り列車|上り方面|下り線|下り列車|下り方面|内回り(?:電車)?|外回り(?:電車)?)/g;
+      var sm;
+      while ((sm = scopeRe.exec(sentence))) {
+        var raw = sm[0];
+        scopes.push({ index: sm.index, interval: intervalOf(raw), direction: directionOf(raw) });
       }
-      var sentenceInterval = sentenceRange
-        ? sentenceRange[1].trim().replace(/^[・･（(]+/, "") + "→" + sentenceRange[2].trim()
-        : (/全線/.test(sentence) ? "全線" : null);
-      var sentenceDirection = directionOf(sentence);
-      var sentenceEffect = effectOf(sentence);
-      if (sentenceInterval && sentenceEffect) {
-        impacts.push({ interval: sentenceInterval, direction: sentenceDirection, effect: sentenceEffect });
-        return;
-      }
-      sentence.split(/[、，,](?=\s*(?:上り|下り|内回り|外回り|[^、，,。\n]{1,30}?駅\s*[～〜－−-]))/).forEach(function(fragment) {
-        fragment = fragment.trim();
-        if (!fragment) return;
-        var d = directionOf(fragment);
-        var e = effectOf(fragment);
-        if (!d && !e) return;
-        var ir = fragment.match(/([^。\n、，,]{1,30}?駅)\s*[～〜－−-]\s*([^。\n、，,]{1,30}?駅)(?:間)?/);
-        var ii = ir ? ir[1].trim().replace(/^[・･]+/, "") + "→" + ir[2].trim() : (/全線/.test(fragment) ? "全線" : null);
-        impacts.push({ interval: ii, direction: d, effect: e });
+
+      var effects = effectClauses(sentence);
+      if (!effects.length) return;
+      effects.forEach(function(fx) {
+        var preceding = scopes.filter(function(s){ return s.index <= fx.index; });
+        var rangeScope = nearestBefore(preceding.filter(function(s){ return !!s.interval; }), fx.index);
+        var directionScope = nearestBefore(preceding.filter(function(s){ return !!s.direction; }), fx.index);
+        impacts.push({
+          interval: rangeScope ? rangeScope.interval : null,
+          direction: directionScope ? directionScope.direction : null,
+          effect: fx.effect
+        });
       });
     });
+    // Deduplicate only identical semantic impacts; never merge different effects
+    // or directions merely because they occur in the same sentence.
+    impacts = impacts.filter(function(item, idx, arr) {
+      return arr.findIndex(function(other) {
+        return other.interval === item.interval && other.direction === item.direction && other.effect === item.effect;
+      }) === idx;
+    });
     if (!impacts.length && (interval || direction || effect)) impacts.push({ interval: interval, direction: direction, effect: effect });
-
     var resume = null;
     if (input.resumeEstimate) {
       var rm = String(input.resumeEstimate).match(/(\d{2}):(\d{2})/);
