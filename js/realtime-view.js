@@ -132,6 +132,7 @@
         var scope = x.interval || dirLabel[x.direction] || "";
         if (x.interval && x.direction) scope += "（" + (dirLabel[x.direction] || x.direction) + "）";
         var ef = effectLabel[x.effect] || x.effect || "";
+        if (!scope) return "";
         return '<span class="rs-impact-item"><span class="rs-station-text">' + escapeHtml(scope) + '</span>'
           + (ef ? '<span class="rs-impact-effect">：' + escapeHtml(ef) + '</span>' : '') + '</span>';
       }).join('<span class="rs-interval-separator">｜</span>');
@@ -250,6 +251,7 @@
             refreshedIntervalEl.innerHTML = refreshedImpacts.map(function(x) {
               var scope = x.interval || dl[x.direction] || "";
               if (x.interval && x.direction) scope += "（" + (dl[x.direction] || x.direction) + "）";
+              if (!scope) return "";
               return '<span class="rs-impact-item"><span class="rs-station-text">' + escapeHtml(scope) + '</span>'
                 + (x.effect ? '<span class="rs-impact-effect">：' + escapeHtml(el[x.effect] || x.effect) + '</span>' : '') + '</span>';
             }).join('<span class="rs-interval-separator">｜</span>');
