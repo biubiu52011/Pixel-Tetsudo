@@ -1046,14 +1046,17 @@ function applyData(data, i18n) {
     } catch(e) { return null; }
   }
 
-  function cacheWrite(railway, i18n) {
-    // Defer the JSON.stringify + localStorage.setItem off the critical path:
-    // serializing ~1.7MB and writing to localStorage can block the main thread
-    // for 200-500ms. This is a cache, not user-visible state.
+  function cacheWrite(railway, i18n, onCommitted) {
+    // Defer the JSON.stringify + localStorage.setItem off the critical path.
+    // Prune old caches only after the replacement is durably written; otherwise
+    // a release can delete its own last-known-good recovery source.
     setTimeout(function() {
+      var committed = false;
       try {
         localStorage.setItem(DB_CACHE_KEY, JSON.stringify({ railway: railway, i18n: i18n, ts: Date.now() }));
-      } catch(e) { /* quota / private mode: ignore */ }
+        committed = true;
+      } catch(e) { /* quota / private mode: keep older caches */ }
+      if (committed && typeof onCommitted === "function") onCommitted();
     }, 0);
   }
 
@@ -1158,8 +1161,10 @@ function applyData(data, i18n) {
       } else {
         applyTourismData({}); // empty until tourism fetch completes
       }
-      cleanOldCaches();
-      cacheWrite(railwayData, i18nData);
+      // Commit the new cache before pruning old versions. Keeping the previous
+      // cache until the replacement write succeeds preserves a recovery source
+      // across mobile/network failures and interrupted page lifecycles.
+      cacheWrite(railwayData, i18nData, cleanOldCaches);
       loaded = true;
       console.log(
         Object.keys(railwayData.stations).length + " stations, " +
