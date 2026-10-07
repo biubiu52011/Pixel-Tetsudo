@@ -127,3 +127,82 @@
   cursor: wait;
   opacity: .55;
 }
+
+
+/* === Canonical Mobile SiteShell / content density ===
+   One final mobile authority for shared chrome. Keep 44px touch targets while
+   reducing decorative whitespace and avoiding page-local shell overrides. */
+@media (max-width: 640px) {
+  .pixel-header {
+    min-height: 52px;
+    padding: 8px 56px 6px 12px;
+    display: flex;
+    align-items: center;
+  }
+  .header-container {
+    width: 100%;
+    min-height: 38px;
+    gap: 4px;
+  }
+  .pixel-title {
+    font-size: 18px;
+    line-height: 1.2;
+    letter-spacing: 2px;
+  }
+  .pixel-tabs {
+    width: calc(100% - 16px);
+    margin: 2px 8px 0;
+    padding: 4px;
+    gap: 2px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 0 rgba(0,0,0,.12);
+    overflow: hidden;
+  }
+  .tab-btn {
+    flex: 1 1 25%;
+    min-width: 0;
+    min-height: 44px;
+    padding: 8px 3px;
+    font-size: 10px;
+    line-height: 1.25;
+    white-space: normal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .tab-content {
+    padding: 8px;
+    margin-top: 8px;
+  }
+  .pixel-card {
+    margin-top: 6px;
+    margin-bottom: 10px;
+    padding: 14px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 0 rgba(0,0,0,.12);
+  }
+  .home-modules {
+    gap: 10px;
+  }
+  .module-title {
+    padding: 14px 16px 12px;
+  }
+  .module-title h2 {
+    font-size: 16px;
+  }
+  .pixel-footer {
+    padding: 12px 10px;
+    font-size: 12px;
+  }
+}
+@media (max-width: 380px) {
+  .pixel-title {
+    font-size: 16px;
+    letter-spacing: 1px;
+  }
+  .tab-btn {
+    font-size: 9px;
+    padding-left: 2px;
+    padding-right: 2px;
+  }
+}
