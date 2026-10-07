@@ -62,3 +62,15 @@ assert.ok(
   "modal impact rendering must suppress empty-scope effect fragments"
 );
 console.log("runinfo-impact-scope: PASS");
+
+assert.ok(
+  (src.match(/\.filter\(Boolean\)\.join\(""
+
+/g) || []).length >= 2,
+  "initial and refreshed impact lists must render one impact per row without pipe separators"
+);
+assert.ok(
+  !src.includes("rs-interval-separator\">｜"),
+  "impact lists must not use horizontal pipe separators"
+);
+console.log("runinfo-impact-layout: PASS");
