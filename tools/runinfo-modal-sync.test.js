@@ -56,3 +56,9 @@ assert.ok(
   "aggregated system status changes must rerender only the affected system card"
 );
 console.log("runinfo-list-sync: 8 PASS");
+
+assert.ok(
+  (src.match(/if \(!scope\) return "";/g) || []).length >= 2,
+  "modal impact rendering must suppress empty-scope effect fragments"
+);
+console.log("runinfo-impact-scope: PASS");
