@@ -58,10 +58,8 @@
     return '<nav class="pixel-tabs" data-site-shell="navigation">' + NAV_ITEMS.map(function (item) {
       var active = item.page === page ? " active" : "";
       return '<a href="' + item.href + '" class="tab-btn' + active + '" data-tab="' +
-        escapeHtml(item.tab) + '">' +
-        '<span class="tab-label-full" data-i18n="' + escapeHtml(item.key) + '">' + escapeHtml(item.fallback) + '</span>' +
-        '<span class="tab-label-short" data-i18n="' + escapeHtml(item.key + ".short") + '" aria-hidden="true">' +
-        escapeHtml(item.fallback) + '</span></a>';
+        escapeHtml(item.tab) + '" data-i18n="' + escapeHtml(item.key) + '">' +
+        escapeHtml(item.fallback) + '</a>';
     }).join("") + '</nav>';
   }
 

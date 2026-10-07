@@ -234,18 +234,6 @@
 - Risks / blockers: mobile Chrome production refresh still required；UI-001 继续 REVIEW。
 - Next: 用户刷新生产页确认 Header/Language/Nav/Footer；若恢复则 UI-001 DONE，若仍异常按实机现象继续修。
 
-
-### 2026-10-07 — UI-001 mobile density consolidation — agent
-
-- Status: REVIEW
-- Scope: SiteShell/mobile 全站拥挤问题
-- Files: `css/style.css`, `.github/workflows/arch_guard_check.py`, `PROGRESS.md`
-- Commits: `3bed7d28`, `41cbf61a`
-- Work: 收敛多代 mobile shell override 为最终 shared mobile authority；Header 降高、title 收紧、四导航固定一行等分、content/card/module/footer 缩减装饰留白；保留 44px touch target；不增加 hamburger/二级操作层。
-- Validation: shared CSS only，无 page-local shell patch；SHELL-001 新增 mobile contract guard；browser runtime 待 mobile Chrome 实机确认。
-- Risks / blockers: 旧 mobile CSS 仍存在于 style.css 前段但最终 canonical block 明确接管 cascade；后续 CSS convergence 阶段应删除被覆盖的历史规则，而非长期堆叠。
-- Next: Actions + mobile Chrome 视觉验收；确认密度后清理被 canonical block 覆盖的旧 mobile shell declarations。
-
 ## 6. 交接规则
 
 下一位智能体不要从“重新审计整个仓库”开始。先看：
