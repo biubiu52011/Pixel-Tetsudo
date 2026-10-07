@@ -594,10 +594,12 @@
     // same canonical readiness signal instead of waiting for a later fusion emission.
     window.addEventListener("pt:railway-ready", function() {
       if (container.querySelector(".rs-line-card")) return;
-      var state = container.dataset.pageState || "";
-      if (state === "loading" || state === "offline" || state === "fetch_error" || state === "timeout") {
-        render(true);
-      }
+      render(true);
+    });
+    window.addEventListener("pt:railway-error", function() {
+      if (container.querySelector(".rs-line-card")) return;
+      setFilterAvailability(false);
+      window.DataState.renderPageState(container, navigator.onLine === false ? "offline" : "fetch_error");
     });
 
     // Subscribe to DataFusion updates for live status
