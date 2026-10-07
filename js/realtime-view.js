@@ -312,6 +312,13 @@
   let _latestLines = null;
   let _latestOrder = null;
   let _selectedOperator = null;
+
+  function setFilterAvailability(available) {
+    var bar = document.getElementById("realtimeFilterBar");
+    if (!bar) return;
+    bar.classList.toggle("hidden", !available);
+    bar.setAttribute("aria-hidden", available ? "false" : "true");
+  }
   let _currentModalLine = null;
   let _currentModalIdentity = "";
   var _listStatusRefreshToken = 0;
@@ -613,6 +620,7 @@
     function render(refreshStatuses) {
       var fused = getLines();
       if (!fused || !fused.lines || Object.keys(fused.lines).length === 0) {
+        setFilterAvailability(false);
         window.DataState.renderPageState(container, "loading");
         return;
       }
@@ -622,11 +630,13 @@
         var visibleLines = getFilteredLines();
         renderLinesList(container, visibleLines, _latestOrder);
         renderFilterBar(fused.lines);
+        setFilterAvailability(true);
         // Initial/data-ready render may reconcile official status. Pure UI
         // changes (notably language switching) must not fan out into one
         // RunInfoAPI.query Promise per line.
         if (refreshStatuses !== false) scheduleListStatusRefresh(fused.lines, true);
       } catch (e) {
+        setFilterAvailability(false);
         window.DataState.renderPageState(container, "render_error");
       }
     }
@@ -646,6 +656,7 @@
         // After 6 seconds, give up polling
         clearInterval(_pollTimer);
         if (!container.querySelector(".rs-line-card")) {
+          setFilterAvailability(false);
           window.DataState.renderPageState(container, "error");
         }
       }
