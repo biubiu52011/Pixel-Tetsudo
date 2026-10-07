@@ -516,6 +516,11 @@
     const container = document.getElementById("realtimeStatusContainer");
     if (!container) return;
 
+    // Mount the structural filter immediately. Data readiness only populates it;
+    // it must not control whether the component exists at all.
+    renderFilterBar({});
+    setFilterAvailability(false);
+
     function renderLinesList(container, linesObj, lineOrderArr) {
       window.DataState.renderList(container, linesObj, { mode: "realtime", lineOrder: lineOrderArr });
     }
