@@ -301,40 +301,8 @@
         renderList(listEl);
         renderFilterBar(document.getElementById("trainsFilterBar"));
         setFilterAvailability(!!(getLinesData() && Object.keys(getLinesData()).length));
-        // Data-ready poll: db-loader fetch is async; the first render may run before
-        // network data arrives (IndexedDB positions usually resolve first), leaving the
-        // list empty with no later re-render trigger. Same pattern as the realtime page.
-        // Respect an already-selected operator filter instead of overwriting it.
-        (function ensureDataReady() {
-          var _tries = 0;
-          (function tick() {
-            var _d = getLinesData();
-            if (_d && Object.keys(_d).length > 0) {
-              if (_selectedOperator === null) { renderList(listEl); } else { renderFiltered(listEl); }
-              renderFilterBar(document.getElementById("trainsFilterBar"));
-              setFilterAvailability(true);
-              return;
-            }
-            var loaderError = window.DataLoader && window.DataLoader.getError ? window.DataLoader.getError() : null;
-            if (loaderError) {
-              if (!listEl.querySelector(".rs-line-card")) {
-                setFilterAvailability(false);
-                window.DataState.renderPageState(listEl, navigator.onLine === false ? "offline" : "fetch_error");
-              }
-              return;
-            }
-            if (++_tries > 120) {
-              // Match realtime page state semantics: loading must terminate in a
-              // visible error state instead of leaving an endless spinner.
-              if (!listEl.querySelector(".rs-line-card")) {
-                setFilterAvailability(false);
-                window.DataState.renderPageState(listEl, navigator.onLine === false ? "offline" : "timeout");
-              }
-              return;
-            } // ~60s cap (mobile GitHub Pages can be slow)
-            setTimeout(tick, 500);
-          })();
-        })();
+        // Canonical loader/DataState events own data readiness. Do not poll the
+        // page DOM for up to a minute; late snapshots are handled by the subscriber.
         // Route restoration is centralized in _applyRoute; this one bounded poll
         // only waits for initial async data and cannot initialize the detail twice.
         (function waitForInitialRoute() {
