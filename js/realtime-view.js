@@ -135,7 +135,7 @@
         if (!scope) return "";
         return '<span class="rs-impact-item"><span class="rs-station-text">' + escapeHtml(scope) + '</span>'
           + (ef ? '<span class="rs-impact-effect">：' + escapeHtml(ef) + '</span>' : '') + '</span>';
-      }).join('<span class="rs-interval-separator">｜</span>');
+      }).filter(Boolean).join("");
     }
     intervalSection.querySelector(".rs-interval-stations").innerHTML = intervalHtml;
     // 4.3.443: 单端/文本兜底区间（如"京急線内"）在非 ja 界面翻译
@@ -254,7 +254,7 @@
               if (!scope) return "";
               return '<span class="rs-impact-item"><span class="rs-station-text">' + escapeHtml(scope) + '</span>'
                 + (x.effect ? '<span class="rs-impact-effect">：' + escapeHtml(el[x.effect] || x.effect) + '</span>' : '') + '</span>';
-            }).join('<span class="rs-interval-separator">｜</span>');
+            }).filter(Boolean).join("");
           }
         }
 
