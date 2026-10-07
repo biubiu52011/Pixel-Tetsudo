@@ -178,4 +178,6 @@ assert.deepStrictEqual(genericSharedEffect.impacts,[
   {interval:"A駅→B駅",direction:null,effect:"suspension"},
   {interval:"C駅→D駅",direction:null,effect:"suspension"}
 ]);
+let parenthesizedScope=E.extractMetadata({text:"X線（A駅～B駅間）は、設備点検の影響で、一部列車が運休となっています。"});
+assert.strictEqual(parenthesizedScope.impacts[0].interval,"A駅→B駅","line name and opening parenthesis must not leak into interval");
 console.log("runinfo-evaluator: generic scope PASS");
