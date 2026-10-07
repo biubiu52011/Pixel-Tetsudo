@@ -8,9 +8,9 @@
 
 | Workstream | 状态 | 当前结论 / 下一步 |
 |---|---|---|
-| UI-001 全站 SiteShell | REVIEW | 7 页已接管；实机发现 inline mount 被 `script-src 'self'` CSP 拦截，已改外部脚本自启动；HEAD `0003ae80` 三条 Actions 全绿，等待 mobile Chrome 复验 |
+| UI-001 全站 SiteShell | DONE | 7 页已接管；CSP-safe 外部自启动已稳定；2026-10-07 mobile Chrome 实机确认 Header/语言按钮/自适应居中菜单可通过 |
 | UI-002 OperatorFilterBar | DONE | JR-East、tOp、显隐链路已修；HEAD `4ada406b` 的 CI/CD、Release Guards、Pages 全部成功 |
-| UI-003 LineCard / SystemCard | TODO | 当前共享 `DataState.renderCard/renderSystemCard`，但内部 mode 分叉且 realtime 直接 patch DOM；需正式组件化 |
+| UI-003 LineCard / SystemCard | REVIEW | `js/line-card.js` 已成为唯一卡片模板/更新入口；DataState 仅列表编排，realtime 不再 patch 卡片内部 DOM；等待 HEAD Actions 最终验证 |
 | UI-004 LineList / OperatorGroup | PARTIAL | `DataState.renderList` 已共享；需与 LineCard 职责拆清并统一空结果/排序 |
 | UI-005 PageState lifecycle | PARTIAL | `DataState` 已共享 render/retry 基础；页面仍重复 loading/retry/recovery glue |
 | UI-006 Tourism Detail Shell | TODO | event/shop/spot HTML 骨架几乎相同；待 SiteShell 稳定后吸收 |
@@ -113,11 +113,11 @@
 
 ### P1 — 卡片/列表
 
-- [ ] **UI-003A** 从 `DataState.renderCard` 提取正式 LineCard 基础组件。
-- [ ] **UI-003B** SystemCard 归入同一组件体系。
-- [ ] **UI-003C** 建立 `LineCard.update()` 或等价稳定 API。
-- [ ] **UI-003D** 删除 realtime 对 LineCard 内部 DOM 的手工 patch。
-- [ ] **UI-004A** DataState/LineList 只负责 list/group orchestration，不再拥有卡片内部模板。
+- [x] **UI-003A** 已提取 `js/line-card.js`，LineCard 模板所有权移出 DataState。
+- [x] **UI-003B** SystemCard 已归入同一 `window.LineCard` 组件体系。
+- [x] **UI-003C** 已建立 `LineCard.update()/updateSystem()/applyColor()` 稳定入口。
+- [x] **UI-003D** realtime 已只提交数据变化给 LineCard API，不再 patch 卡片内部 DOM。
+- [x] **UI-004A** DataState/LineList 现只负责 list/group orchestration，不再拥有卡片内部模板。
 - [ ] **UI-004B** 收敛 realtime/trains 对 `.rs-line-card` 的页面 CSS override。
 
 ### P1 — 页面状态
@@ -140,6 +140,17 @@
 - [ ] **RUNINFO-004C** 检查 last-good 是否应保存 notice/info。
 - [ ] **RUNINFO-004D** 搜索 `aggregateDelayRecords` 是否已成为 dead path，确认后再删除。
 - [ ] **RUNINFO-004E** 检查 `_previousPosMap` / raw realtime restore，确保 stale row 不会复活。
+
+### 2026-10-07 16:xx JST — UI-003 LineCard / SystemCard — agent
+
+- Status: REVIEW
+- Scope: 卡片模板所有权与增量更新边界统一
+- Files: `js/line-card.js`, `js/data-state.js`, `js/realtime-view.js`, `pages/realtime.html`, `pages/trains.html`, architecture guard
+- Commits: `5e23ce6e`, `8a1ea29e`, `80c8f16e`, `4cdd5f0f`, `f2638f39`, `2b33847d`, `3868d2a8`, `b4c696f0`, `4a438c5c`
+- Work: 建立 LineCard update boundary；迁出 LineCard/SystemCard 唯一模板；DataState 退回列表/状态职责；realtime 删除内部 DOM patch；两页面加载 canonical component。
+- Validation: 三个核心 JS syntax PASS；COMPONENT-002 guard 已升级为检查唯一模板所有权和旧 API 回流。
+- Risks / blockers: GitHub Actions 尚在执行；浏览器视觉输出刻意保持原模板结构，未声明新的视觉验收。
+- Next: HEAD Actions 全绿后将 UI-003 标记 DONE；随后处理 UI-004B CSS override 收敛。
 
 ## 5. 智能体工作记录模板
 
