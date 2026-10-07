@@ -140,6 +140,25 @@
     container._pageStateRetry = typeof callback === "function" ? callback : null;
   }
 
+  function retryVisibleFailedStates() {
+    if (!navigator.onLine || !window.DataLoader || typeof window.DataLoader.retry !== "function") return;
+    var containers = Array.prototype.slice.call(document.querySelectorAll("[data-page-state]")).filter(function(container) {
+      return ["offline", "fetch_error", "timeout"].indexOf(container.dataset.pageState) !== -1 &&
+        typeof container._pageStateRetry === "function";
+    });
+    if (!containers.length) return;
+    // One canonical retry reloads shared railway data. Page callbacks then render
+    // their own view; do not create a second loader/recovery path.
+    try {
+      var result = containers[0]._pageStateRetry();
+      if (result && typeof result.catch === "function") {
+        result.catch(function(err) { console.error("[DataState] automatic recovery failed", err); });
+      }
+    } catch (err) {
+      console.error("[DataState] automatic recovery failed", err);
+    }
+  }
+
   // Severity rank for system-level status aggregation (higher = more severe)
   function statusRank(s) {
     if (s === "suspended") return 5;
@@ -594,6 +613,14 @@
 
       window.addEventListener("pt:railway-ready", function() {
         if (window.UNIFIED_LINES) setLines(window.UNIFIED_LINES);
+      });
+
+      // Mobile Chrome can restore a frozen page from BFCache or regain network
+      // without re-running DOMContentLoaded. Recover a visible failed state as soon
+      // as the page becomes usable again, through the existing page retry callback.
+      window.addEventListener("online", retryVisibleFailedStates);
+      window.addEventListener("pageshow", function(event) {
+        if (event.persisted) retryVisibleFailedStates();
       });
 
       if (window.DataFusion) {
