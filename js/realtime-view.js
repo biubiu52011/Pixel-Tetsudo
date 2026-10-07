@@ -641,6 +641,19 @@
       }
     }
 
+    if (window.DataState && window.DataState.setPageStateRetry) {
+      window.DataState.setPageStateRetry(container, function() {
+        setFilterAvailability(false);
+        window.DataState.renderPageState(container, "loading");
+        if (!window.DataLoader || typeof window.DataLoader.retry !== "function") {
+          return Promise.reject(new Error("DataLoader retry unavailable"));
+        }
+        return window.DataLoader.retry().then(function() {
+          render(true);
+        });
+      });
+    }
+
     // Immediate check first
     render(true);
 
