@@ -224,6 +224,31 @@ def main():
         if 'function sortOperators(' in src:
             new_errors.append('COMPONENT-001 PAGE_LOCAL_OPERATOR_SORT_REINTRODUCED %s' % rel)
 
+    # SHELL-001: one canonical shared site chrome contract. Page-specific CSP,
+    # capabilities and business content remain page-owned. Migration is explicit:
+    # once a page loads SiteShell it must use the three mounts and must not retain
+    # a second copy of the old header/nav/footer markup.
+    shell_src = _read_arch('js/site-shell.js')
+    for token in ('window.SiteShell', 'data-site-shell-mount="header"', 'data-site-shell-mount="navigation"', 'data-site-shell-mount="footer"', 'pt:site-shell-ready'):
+        if token not in shell_src:
+            new_errors.append('SHELL-001 SITE_SHELL_CONTRACT_MISSING %s' % token)
+    shell_pages = (
+        'pages/home.html', 'pages/history.html', 'pages/realtime.html', 'pages/trains.html',
+        'pages/tourism-event.html', 'pages/tourism-shop.html', 'pages/tourism-spot.html',
+    )
+    for page in shell_pages:
+        page_src = _read_arch(page)
+        if 'js/site-shell.js' in page_src:
+            for mount in ('header', 'navigation', 'footer'):
+                if 'data-site-shell-mount="%s"' % mount not in page_src:
+                    new_errors.append('SHELL-001 MIGRATED_PAGE_MOUNT_MISSING %s %s' % (page, mount))
+            if '<header class="pixel-header"' in page_src:
+                new_errors.append('SHELL-001 DUPLICATE_HEADER_AFTER_MIGRATION %s' % page)
+            if '<nav class="pixel-tabs"' in page_src:
+                new_errors.append('SHELL-001 DUPLICATE_NAV_AFTER_MIGRATION %s' % page)
+            if '<footer class="pixel-footer"' in page_src:
+                new_errors.append('SHELL-001 DUPLICATE_FOOTER_AFTER_MIGRATION %s' % page)
+
     # REALTIME-001: TrainTrackLayout is the only train geometry authority.
     track_layout_src = _read_arch('js/train-track-layout.js')
     if 'window.TrainTrackLayout' not in renderer_src:
