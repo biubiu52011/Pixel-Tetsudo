@@ -13,6 +13,13 @@
   var mapEl = null;
   var backBtn = null;
   var _selectedOperator = null;
+
+  function setFilterAvailability(available) {
+    if (!filterBarEl) filterBarEl = document.getElementById("trainsFilterBar");
+    if (!filterBarEl) return;
+    filterBarEl.classList.toggle("hidden", !available);
+    filterBarEl.setAttribute("aria-hidden", available ? "false" : "true");
+  }
   var _lastPositionsHash = '';
   var _lastDetailStateHash = '';
   var _realtimeExpiryTimer = null;
@@ -233,6 +240,7 @@
       backBtn = document.getElementById("trainsBackBtn");
       if (!listEl) return;
       // Sync loading animation with the realtime page (rs-loading spinner)
+      setFilterAvailability(false);
       window.DataState.renderPageState(listEl, "loading");
       listEl.addEventListener("click", function(e) {
         // 支线 chip：从父线卡片进入支线详情（Line Hierarchy Rule）
@@ -276,6 +284,7 @@
       loadCachedPositions(function() {
         renderList(listEl);
         renderFilterBar(document.getElementById("trainsFilterBar"));
+        setFilterAvailability(!!(getLinesData() && Object.keys(getLinesData()).length));
         // Data-ready poll: db-loader fetch is async; the first render may run before
         // network data arrives (IndexedDB positions usually resolve first), leaving the
         // list empty with no later re-render trigger. Same pattern as the realtime page.
@@ -287,12 +296,14 @@
             if (_d && Object.keys(_d).length > 0) {
               if (_selectedOperator === null) { renderList(listEl); } else { renderFiltered(listEl); }
               renderFilterBar(document.getElementById("trainsFilterBar"));
+              setFilterAvailability(true);
               return;
             }
             if (++_tries > 120) {
               // Match realtime page state semantics: loading must terminate in a
               // visible error state instead of leaving an endless spinner.
               if (!listEl.querySelector(".rs-line-card")) {
+                setFilterAvailability(false);
                 window.DataState.renderPageState(listEl, navigator.onLine === false ? "offline" : "timeout");
               }
               return;
