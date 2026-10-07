@@ -265,6 +265,15 @@ function main() {
     errors.push({ type: 'page-retry-behavior-missing', file: 'js/data-state.js' });
   }
 
+  ['js/trains-page.js', 'js/realtime-view.js'].forEach((rel) => {
+    const src = fs.readFileSync(path.join(ROOT, rel), 'utf8');
+    if (!/function setFilterAvailability\(available\)/.test(src) ||
+        !/setFilterAvailability\(false\)/.test(src) ||
+        !/setFilterAvailability\(true\)/.test(src)) {
+      errors.push({ type: 'page-filter-state-lifecycle-missing', file: rel });
+    }
+  });
+
   const technicalErrorLabels = {
     en: ['Render error:', 'Data load error'],
     zh: ['渲染失败:', '数据加载失败'],
