@@ -228,3 +228,30 @@
   }
 }
 
+
+
+@media (max-width: 640px) {
+  /* Keep a 44px touch target but reduce the visual weight beside the centered title. */
+  .lang-switcher-wrapper.is-fixed {
+    top: 14px;
+    right: 14px;
+    width: 44px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+  }
+  .lang-switcher-wrapper.is-fixed .lang-toggle-btn {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    min-height: 36px;
+  }
+  .lang-switcher-wrapper.is-fixed .lang-icon {
+    width: 20px;
+    height: 20px;
+  }
+  .lang-switcher-wrapper.is-fixed .lang-switcher {
+    top: 60px;
+    right: 14px;
+  }
+}
