@@ -265,6 +265,14 @@ function main() {
     errors.push({ type: 'page-retry-behavior-missing', file: 'js/data-state.js' });
   }
 
+  const odptRuntime = fs.readFileSync(path.join(ROOT, 'data/api/odpt-unified.js'), 'utf8');
+  if (!/function waitForFusion\(key, ready, run\)/.test(odptRuntime) ||
+      !/FUSION_READY_WAIT_MS\s*=\s*15000/.test(odptRuntime) ||
+      /setTimeout\(pushDelay,\s*300\)/.test(odptRuntime) ||
+      /setTimeout\(pushTrainPositions,\s*300\)/.test(odptRuntime)) {
+    errors.push({ type: 'odpt-unbounded-readiness-wait', file: 'data/api/odpt-unified.js' });
+  }
+
   const dataFusionReady = fs.readFileSync(path.join(ROOT, 'js/data-fusion.js'), 'utf8');
   const dataStateReady = fs.readFileSync(path.join(ROOT, 'js/data-state.js'), 'utf8');
   const dbLoaderReady = fs.readFileSync(path.join(ROOT, 'data/core/db-loader.js'), 'utf8');
