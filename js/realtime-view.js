@@ -41,6 +41,17 @@
     return all[lang] || all.ja;
   }
 
+  function _scopeSummary(interval, impacts) {
+    var list = Array.isArray(impacts) ? impacts : [];
+    var explicitRanges = list.map(function(x){ return x && x.interval; }).filter(function(x){ return x && x !== "全線"; });
+    if (explicitRanges.length) return explicitRanges[0];
+    if (interval && interval !== "全線") return interval;
+    var direction = list.map(function(x){ return x && x.direction; }).find(function(x){ return !!x; });
+    if (direction) return (_impactLabels().dir[direction] || direction);
+    if (interval === "全線" || list.some(function(x){ return x && x.interval === "全線"; })) return "全線";
+    return "";
+  }
+
   function getDelayInfo(line) {
     if (line.delayInfo) return line.delayInfo;
     if (line.status) return { status: line.status, interval: line.interval, cause: line.cause };
@@ -72,6 +83,7 @@
     var status = delayInfo && delayInfo.status ? delayInfo.status : "loading";
     var interval = delayInfo.interval || "";
     var impacts = Array.isArray(delayInfo.impacts) ? delayInfo.impacts : [];
+    var scopeSummary = _scopeSummary(interval, impacts);
     var cause = delayInfo.cause || "";
     var s = window.DataState && window.DataState.STATUS_META && window.DataState.STATUS_META[status] ? window.DataState.STATUS_META[status] : STATUS_META[status] || STATUS_META.no_data;
     var statusText = t("status." + status) || status;
@@ -98,10 +110,10 @@
     intervalSection.querySelector(".rs-info-label").textContent = t("status.interval");
     var intervalHtml;
     var _singleEndInterval = false;
-    if (!interval || status === "normal" || status === "no_data") {
+    if (!scopeSummary || status === "normal" || status === "no_data") {
       intervalHtml = '<span class="rs-station-text">' + t("status.all_lines") + '</span>';
     } else {
-      var intervalRanges = interval.split("、");
+      var intervalRanges = scopeSummary.split("、");
       var parsedRanges = intervalRanges.map(function (item) { return item.split("\u2192"); });
       var allStationRanges = parsedRanges.length > 0 && parsedRanges.every(function (parts) { return parts.length === 2; });
       if (allStationRanges) {
@@ -111,7 +123,7 @@
             + '<span class="rs-station-end">' + escapeHtml(tStation(parts[1])) + '</span>';
         }).join('<span class="rs-interval-separator">、</span>');
       } else {
-        var _int = interval;
+        var _int = scopeSummary;
         if (String(_int).indexOf("\u5168\u7dda") >= 0) {
           // v4.3.628: ODPT Range="全線" 复用 status.all_lines 多语言（非 ja 界面不显示日文原样）
           intervalHtml = "<span class=\"rs-station-text\">" + escapeHtml(t("status.all_lines")) + "</span>";
@@ -123,19 +135,6 @@
         }
         _singleEndInterval = true;
       }
-    }
-    if (impacts.length > 1 && status !== "normal" && status !== "no_data") {
-      var impactLabels = _impactLabels();
-      var dirLabel = impactLabels.dir;
-      var effectLabel = impactLabels.effect;
-      intervalHtml = impacts.map(function(x) {
-        var scope = x.interval || dirLabel[x.direction] || "";
-        if (x.interval && x.direction) scope += "（" + (dirLabel[x.direction] || x.direction) + "）";
-        var ef = effectLabel[x.effect] || x.effect || "";
-        if (!scope) return "";
-        return '<span class="rs-impact-item"><span class="rs-station-text">' + escapeHtml(scope) + '</span>'
-          + (ef ? '<span class="rs-impact-effect">：' + escapeHtml(ef) + '</span>' : '') + '</span>';
-      }).filter(Boolean).join("");
     }
     intervalSection.querySelector(".rs-interval-stations").innerHTML = intervalHtml;
     // 4.3.443: 单端/文本兜底区间（如"京急線内"）在非 ja 界面翻译
@@ -242,20 +241,12 @@
         }
 
         var refreshedImpacts = Array.isArray(r.impacts) ? r.impacts : [];
-        if (resolvedStatus !== "normal" && refreshedImpacts.length > 1) {
-          var refreshedIntervalEl = modal.querySelector(".rs-interval-stations");
-          if (refreshedIntervalEl) {
-            var refreshedLabels = _impactLabels();
-            var dl = refreshedLabels.dir;
-            var el = refreshedLabels.effect;
-            refreshedIntervalEl.innerHTML = refreshedImpacts.map(function(x) {
-              var scope = x.interval || dl[x.direction] || "";
-              if (x.interval && x.direction) scope += "（" + (dl[x.direction] || x.direction) + "）";
-              if (!scope) return "";
-              return '<span class="rs-impact-item"><span class="rs-station-text">' + escapeHtml(scope) + '</span>'
-                + (x.effect ? '<span class="rs-impact-effect">：' + escapeHtml(el[x.effect] || x.effect) + '</span>' : '') + '</span>';
-            }).filter(Boolean).join("");
-          }
+        var refreshedScope = _scopeSummary(r.interval || "", refreshedImpacts);
+        var refreshedIntervalEl = modal.querySelector(".rs-interval-stations");
+        if (refreshedIntervalEl && resolvedStatus !== "normal" && refreshedScope) {
+          refreshedIntervalEl.innerHTML = '<span class="rs-station-text">' + escapeHtml(
+            refreshedScope === "全線" ? t("status.all_lines") : refreshedScope
+          ) + "</span>";
         }
 
         // A normal result applies to the whole line; never retain an old
