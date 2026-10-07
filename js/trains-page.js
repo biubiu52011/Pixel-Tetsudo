@@ -317,6 +317,14 @@
               setFilterAvailability(true);
               return;
             }
+            var loaderError = window.DataLoader && window.DataLoader.getError ? window.DataLoader.getError() : null;
+            if (loaderError) {
+              if (!listEl.querySelector(".rs-line-card")) {
+                setFilterAvailability(false);
+                window.DataState.renderPageState(listEl, navigator.onLine === false ? "offline" : "fetch_error");
+              }
+              return;
+            }
             if (++_tries > 120) {
               // Match realtime page state semantics: loading must terminate in a
               // visible error state instead of leaving an endless spinner.
