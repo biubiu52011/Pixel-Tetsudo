@@ -159,25 +159,35 @@
     container._pageStateRetry = typeof callback === "function" ? callback : null;
   }
 
+  var _automaticRecoveryPending = false;
   function retryVisibleFailedStates() {
-    if (!navigator.onLine || !window.DataLoader || typeof window.DataLoader.retry !== "function") return;
+    if (_automaticRecoveryPending || navigator.onLine === false ||
+        !window.DataLoader || typeof window.DataLoader.retry !== "function") return;
     var containers = Array.prototype.slice.call(document.querySelectorAll("[data-page-state]")).filter(function(container) {
       return ["offline", "fetch_error", "timeout"].indexOf(container.dataset.pageState) !== -1 &&
         typeof container._pageStateRetry === "function";
     });
     if (!containers.length) return;
-    // One canonical retry reloads shared railway data. Page callbacks then render
-    // their own view; do not create a second loader/recovery path.
+    // One shared retry for online/pageshow events, even if both fire together.
+    // Reuse the page's registered callback; never introduce a parallel loader.
+    _automaticRecoveryPending = true;
     try {
       var result = containers[0]._pageStateRetry();
-      if (result && typeof result.catch === "function") {
-        result.catch(function(err) { console.error("[DataState] automatic recovery failed", err); });
+      if (result && typeof result.then === "function") {
+        Promise.resolve(result).then(function() {
+          _automaticRecoveryPending = false;
+        }, function(err) {
+          _automaticRecoveryPending = false;
+          console.error("[DataState] automatic recovery failed", err);
+        });
+      } else {
+        _automaticRecoveryPending = false;
       }
     } catch (err) {
+      _automaticRecoveryPending = false;
       console.error("[DataState] automatic recovery failed", err);
     }
   }
-
 
   /**
    * Render a full line list grouped by operator
