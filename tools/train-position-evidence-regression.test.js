@@ -148,6 +148,10 @@ assert(!/isLoopDir && p\.destinationStation/.test(render),
 
 const trains=read("js/trains-data.js");
 const runtimePolicy=read("data/core/runtime-config.js");
+assert(fusion.includes('delete _timetableLoading[lineInfo.lineId];'),
+  "ODPT timetable evidence loading must release its in-flight flag after completion");
+assert(fusion.includes('Timetable may be loaded as operation/vehicle evidence'),
+  "timetable evidence must be documented separately from position authority");
 const odptClient=read("data/api/odpt-unified.js");
 assert(!fusion.includes('}).catch(function() { return ensureManualTimetable(lineId); });'),
   "SQL failure must not silently switch to manual timetable positioning");
