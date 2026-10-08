@@ -321,34 +321,51 @@
     if (!linesObj || !window.RunInfoAPI || typeof window.RunInfoAPI.query !== "function") return;
     var token = ++_listStatusRefreshToken;
     var ids = Object.keys(linesObj);
-    var jobs = ids.map(function(lineId) {
-      var line = linesObj[lineId];
-      return window.RunInfoAPI.query(lineId, line).then(function(r) {
-        if (!r || !r.status || token !== _listStatusRefreshToken || !_latestLines || !_latestLines[lineId]) return false;
-        var target = _latestLines[lineId];
-        var old = getDelayInfo(target) || {};
-        if (old.status === r.status) return false;
-        target.delayInfo = Object.assign({}, old, {
-          status: r.status,
-          // A fresh normal result must not retain stale disruption metadata.
-          interval: r.status === "normal" ? null : old.interval,
-          cause: r.status === "normal" ? null : old.cause,
-          detail: r.text != null ? r.text : old.detail,
-          source: r.source || old.source,
-          updatedAt: r.updatedAt || old.updatedAt
-        });
-        return true;
-      }).catch(function() { return false; });
-    });
-    Promise.all(jobs).then(function(changed) {
-      if (token !== _listStatusRefreshToken || !changed.some(Boolean)) return;
-      var changedIds = [];
-      for (var i = 0; i < changed.length; i++) if (changed[i]) changedIds.push(ids[i]);
+    var pending = {};
+    var flushScheduled = false;
+
+    // Reconcile each returned status promptly; a slow operator must not hold
+    // every other line hostage behind Promise.all().
+    function flushChanges() {
+      flushScheduled = false;
+      if (token !== _listStatusRefreshToken) return;
+      var changedIds = Object.keys(pending);
+      pending = {};
+      if (!changedIds.length) return;
       var container = document.getElementById("realtimeStatusContainer");
       var visible = getFilteredLines();
       var visibleChanged = changedIds.filter(function(id) { return !!visible[id]; });
+      if (!visibleChanged.length) return;
       if (!patchRealtimeCards(container, visible, visibleChanged)) renderFiltered();
-    }).catch(function() {});
+    }
+    function queueChange(lineId) {
+      pending[lineId] = true;
+      if (flushScheduled) return;
+      flushScheduled = true;
+      setTimeout(flushChanges, 100);
+    }
+
+    ids.forEach(function(lineId) {
+      var line = linesObj[lineId];
+      try {
+        Promise.resolve(window.RunInfoAPI.query(lineId, line)).then(function(r) {
+          if (!r || !r.status || token !== _listStatusRefreshToken || !_latestLines || !_latestLines[lineId]) return;
+          var target = _latestLines[lineId];
+          var old = getDelayInfo(target) || {};
+          if (old.status === r.status) return;
+          target.delayInfo = Object.assign({}, old, {
+            status: r.status,
+            // A fresh normal result must not retain stale disruption metadata.
+            interval: r.status === "normal" ? null : old.interval,
+            cause: r.status === "normal" ? null : old.cause,
+            detail: r.text != null ? r.text : old.detail,
+            source: r.source || old.source,
+            updatedAt: r.updatedAt || old.updatedAt
+          });
+          queueChange(lineId);
+        }).catch(function() {});
+      } catch (e) { /* One failing provider must not block other lines. */ }
+    });
   }
 
 
