@@ -123,6 +123,31 @@ Controller 不应重新实现 Header、Nav、Footer、FilterBar、通用 Card、
 - 公共行为必须有稳定 API；不要靠页面脚本摸组件内部 DOM。
 - 对 mobile Chrome 的 BFCache / online / retry / stale-data 行为继续保留现有恢复保障。
 
+## 6.1 七页 HTML 结构与组件所有权契约
+
+全站采用同一层级的职责，不强制每个页面拥有相同业务 DOM：
+
+1. **Document / capability**：每页保留自己的 `head`、CSP、脚本与地图/API 权限，不因结构统一而合并权限。
+2. **SiteShell**：七页统一使用 `#app[data-site-shell-root]` 和唯一的 header/navigation/footer mounts；这些结构只能由 `js/site-shell.js` 生成。
+3. **Page content**：每页一个主要业务 section；页面只提供稳定业务容器或语义节点。业务 section 的 ID 可不同，不要求为了统一而更名。
+4. **Shared component**：相同功能必须选择**一个** DOM 所有者：HTML 仅提供 mount，组件 JS 负责生成与更新内部 DOM；或者 HTML 保留静态语义且 JS 只绑定行为。禁止两种模式混用或重复生成。
+5. **Page controller**：只获取公开的 mount/组件 API，不通过查询共享组件的内部 class 实现业务 patch。
+6. **Styles**：共享组件 CSS 由公共样式层拥有，页面样式只定义业务差异；不得靠后加载的页面 CSS 覆盖公共组件来伪装统一。
+
+当前七页检查（2026-10-08）：
+
+| 页面 | SiteShell | 业务容器 | 组件所有权重点 |
+| --- | --- | --- | --- |
+| home | 公共挂载 | tab-search | 搜索与观光由业务 controller 管理 |
+| history | 公共挂载 | tab-history | 历史记录由页面 controller 管理 |
+| realtime | 公共挂载 | tab-status | FilterBar / LineCard / DataState 公共；状态弹窗仍需审视所有权 |
+| trains | 公共挂载 | tab-trains | FilterBar / LineCard / DataState 公共；列车线路图与详情属页面业务 |
+| tourism-event | 公共挂载 | tourism-detail-page | tourism-core 负责公共返回按钮，event controller 负责类型正文 |
+| tourism-shop | 公共挂载 | tourism-detail-page | tourism-core 负责公共返回按钮，shop controller 负责类型正文 |
+| tourism-spot | 公共挂载 | tourism-detail-page | tourism-core 负责公共返回按钮，spot controller 负责类型正文 |
+
+**当前未收敛事项**：三个 tourism HTML 仍复制相同的业务 section/article mount；realtime 状态弹窗与 trains 详情结构不同，需先判定是否属于同一种交互再决定共享，不得盲目合并；共享 CSS 和脚本版本号需在部署机制约束下统一。任何迁移必须同时验证七页的挂载点、唯一 ID、公共组件加载顺序及页面特有 CSP。
+
 ## 7. 当前优先级
 
 按依赖顺序推进，不要同时建立多套方案：
