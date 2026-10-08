@@ -37,6 +37,13 @@
 - `tests/railway-browser-contract.test.cjs` 添加详情容器显隐及语言刷新筛选断言；commit `a28df3cf`。
 - 验证：GitHub 源码修改提交成功；测试执行、CI 和真实浏览器 **NOT VERIFIED**。状态 REVIEW。
 
+## 2026-10-09 JST — UI-004 trains language refresh DOM ownership (REVIEW)
+
+- `js/trains-page.js` 删除 `_oldGroups/_freshGroups/_freshByOp` 的运营商组 DOM 逐个匹配替换；使用共享 `DataState.renderList` 的结果一次更新稳定 list host，保留 `setFilter` 及滚动位置恢复。commit `5575095d`。
+- `tests/railway-browser-contract.test.cjs` 新增防止页面恢复内部 group reconciler 的断言，commit `69044912`。
+- GitHub 当前 HEAD 组合状态查询无 statuses（空数组不代表 CI PASS）；Node 测试及浏览器 **NOT VERIFIED**。
+- 状态 REVIEW。后续必须验证语言切换时的滚动/焦点/筛选、realtime 更新、CI 运行结果。
+
 ## 1. 当前总览
 
 | Workstream | 状态 | 当前结论 / 下一步 |
