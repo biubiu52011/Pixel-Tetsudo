@@ -208,6 +208,7 @@
   // ========== 统一查询 API ==========
   // query(lineId, line) -> Promise<{status, text, links[], updatedAt, source} | null>
   var _cache = {};          // lineId -> { t: timestamp, r: result }
+  var _inflight = {};       // lineId -> in-progress query (same-line deduplication)
   // Popup results are operational state, not static content. Keep only a brief
   // dedupe window so a recovered line cannot remain visually suspended for minutes.
   var CACHE_TTL_MS = 15 * 1000;
@@ -226,14 +227,26 @@
     } catch(e) { return null; }
   }
 
-  function writeLastGood(lineId, r) {
-    if (!r || !r.status || r.status === "loading" || r.status === "no_data" || r.status === "no_odpt" || r.status === "unknown") return;
+  // Batch persistence: a status refresh can touch hundreds of lines. Reading,
+  // parsing and serializing the entire localStorage map once per line caused
+  // quadratic main-thread work and synchronous storage writes.
+  var _pendingLastGood = {};
+  var _lastGoodFlushTimer = null;
+  function flushLastGood() {
+    _lastGoodFlushTimer = null;
+    var pending = _pendingLastGood;
+    _pendingLastGood = {};
     try {
       var all = JSON.parse(localStorage.getItem(LAST_GOOD_KEY) || "{}");
-      all[lineId] = { t: Date.now(), r: r };
+      Object.keys(pending).forEach(function(id) { all[id] = pending[id]; });
       localStorage.setItem(LAST_GOOD_KEY, JSON.stringify(all));
     } catch(e) {}
-  } // 5 分钟内存缓存（避免每次弹窗重复请求官方接口/官网）
+  }
+  function writeLastGood(lineId, r) {
+    if (!r || !r.status || r.status === "loading" || r.status === "no_data" || r.status === "no_odpt" || r.status === "unknown") return;
+    _pendingLastGood[lineId] = { t: Date.now(), r: r };
+    if (_lastGoodFlushTimer === null) _lastGoodFlushTimer = setTimeout(flushLastGood, 250);
+  }
 
   // v4.3.968: 弹窗统一操作区——通用手动覆盖（任意线路可用；持久化与 WebRunInfo 手动缓存分离）
   var _manualOverride = {};  // lineId -> { text, status, updatedAt }
@@ -271,6 +284,8 @@
     if (cached && (Date.now() - cached.t) < CACHE_TTL_MS) {
       return Promise.resolve(cached.r);
     }
+
+    if (_inflight[lineId]) return _inflight[lineId];
 
     var p;
     // ① 官网网页源（千叶/湘南——ODPT 无数据）
@@ -338,16 +353,20 @@
     }
 
     // 写缓存（null 也缓存，避免无数据线路反复请求）
-    return p.then(function(r) {
+    var task = Promise.resolve(p).then(function(r) {
       try { _cache[lineId] = { t: Date.now(), r: r }; writeLastGood(lineId, r); } catch(e) {}
       return r;
     });
+    _inflight[lineId] = task;
+    var clear = function() { if (_inflight[lineId] === task) delete _inflight[lineId]; };
+    task.then(clear, clear);
+    return task;
   }
 
   // 供手动刷新：清除某线路缓存（WebRunInfo 手动更新后调用，让弹窗重新 query）
   function invalidate(lineId) {
-    if (lineId) { delete _cache[lineId]; }
-    else { _cache = {}; }
+    if (lineId) { delete _cache[lineId]; delete _inflight[lineId]; }
+    else { _cache = {}; _inflight = {}; }
   }
 
   function aggregateStatus(records, line) {
