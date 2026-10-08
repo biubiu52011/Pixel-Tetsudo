@@ -19,8 +19,12 @@
   var _stationLayoutCache = new WeakMap();
   function getEstimatorStationLayout(lineId, line) {
     var reversed = REVERSED_STATION_ORDER.indexOf(lineId) >= 0;
+    // Array identity alone misses in-place edits (splice/reorder/rename).
+    // The signature also prevents reuse if a line object is assigned another ID.
+    var stationSignature = JSON.stringify(line.stations);
     var cached = _stationLayoutCache.get(line);
-    if (cached && cached.stations === line.stations && cached.reversed === reversed) return cached;
+    if (cached && cached.lineId === lineId && cached.stations === line.stations &&
+        cached.stationSignature === stationSignature && cached.reversed === reversed) return cached;
     var workLine = reversed ? Object.assign({}, line, { stations: line.stations.slice().reverse() }) : line;
     var stationIndexMap = {};
     for (var i = 0; i < workLine.stations.length; i++) {
@@ -28,7 +32,8 @@
       stationIndexMap[normalizeStationKey(key)] = i;
       stationIndexMap[key] = i;
     }
-    cached = { stations: line.stations, reversed: reversed, workLine: workLine, stationIndexMap: stationIndexMap };
+    cached = { lineId: lineId, stations: line.stations, stationSignature: stationSignature,
+      reversed: reversed, workLine: workLine, stationIndexMap: stationIndexMap };
     _stationLayoutCache.set(line, cached);
     return cached;
   }
