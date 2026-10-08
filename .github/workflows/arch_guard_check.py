@@ -260,7 +260,7 @@ def main():
         ('realtime', realtime_html, 'realtimeFilterBar', 'realtimeStatusContainer'),
         ('trains', trains_html, 'trainsFilterBar', 'trainsLineListContent'),
     ]:
-        shell_pattern = r'id="' + filter_id + r'"[\\s\\S]*?class="pixel-card rs-line-list-shell"[\\s\\S]*?id="' + list_id + r'"'
+        shell_pattern = r'id="' + filter_id + r'"[\s\S]*?class="pixel-card rs-line-list-shell"[\s\S]*?id="' + list_id + r'"'
         if not re.search(shell_pattern, page_src):
             new_errors.append('COMPONENT-003 LINE_LIST_SHELL_MISMATCH ' + page_name)
     if 'justify-content:center' not in style_src or '.rs-line-list-shell{padding:0;overflow:hidden;}' not in style_src:
