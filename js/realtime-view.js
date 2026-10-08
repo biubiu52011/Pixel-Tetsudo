@@ -59,7 +59,8 @@
   }
 
   function clearSelectedCards() {
-    document.querySelectorAll(".rs-line-card.selected").forEach(function(c) { c.classList.remove("selected"); });
+    var list = document.getElementById("realtimeStatusContainer");
+    if (list) list.querySelectorAll(".rs-line-card.selected").forEach(function(c) { c.classList.remove("selected"); });
   }
 
   function renderCard(line, lineId) {
@@ -422,31 +423,17 @@
     if (_filterBar && _filterBar.getSelected() !== _selectedOperator) _filterBar.setSelected(_selectedOperator, false);
     var container = document.getElementById("realtimeStatusContainer");
     if (!container) return;
-    var groups = container.querySelectorAll(".rs-operator-group[data-operator]");
-    if (!groups.length) {
+    if (!window.DataState.setOperatorVisibility(container, _selectedOperator)) {
       if (_latestLines) renderFiltered();
       return;
     }
-    Array.prototype.slice.call(groups).forEach(function(group) {
-      var groupOp = group.getAttribute("data-operator") || "";
-      group.style.display = (!_selectedOperator || groupOp === _selectedOperator) ? "" : "none";
-    });
     if (_latestLines) _lastStructureSignature = structureSignature(_latestLines);
   }
 
   function getFilteredLines() {
     if (!_latestLines) return {};
     if (!_selectedOperator) return _latestLines;
-    var filtered = {};
-    Object.keys(_latestLines).forEach(function(id) {
-      var line = _latestLines[id];
-      if (line && (_selectedOperator === "JR-East"
-        ? (window.TransitConstants && window.TransitConstants.isJRERoute ? window.TransitConstants.isJRERoute(line) : line.operator === "JR-East")
-        : line.operator === _selectedOperator)) {
-        filtered[id] = line;
-      }
-    });
-    return filtered;
+    return window.DataState.filterLinesByOperator(_latestLines, _selectedOperator);
   }
 
   function statusSignature(line) {
@@ -494,7 +481,7 @@
     var container = document.getElementById("realtimeStatusContainer");
     if (!container) return;
     if (Object.keys(filtered).length === 0) {
-      container.innerHTML = '<div class="rs-empty">' + (typeof window.t === "function" ? window.t("status.no_lines") : "No lines") + "</div>";
+      window.DataState.renderList(container, {}, { mode: "realtime" });
       return;
     }
     window.DataState.renderList(container, filtered, { mode: "realtime", lineOrder: _latestOrder || [] });
