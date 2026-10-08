@@ -14,6 +14,24 @@
   var _manualTimetableRegistry = {};
   var _timetableIndexCache = { source: null, stamp: "", manualVersion: 0, builtManualVersion: -1, index: {} };
   var _manualRegistryVersion = 0;
+  // Cache station layouts by line object and station-array identity. Rebuild
+  // when the source array changes; keep the compiled-run layout contract intact.
+  var _stationLayoutCache = new WeakMap();
+  function getEstimatorStationLayout(lineId, line) {
+    var reversed = REVERSED_STATION_ORDER.indexOf(lineId) >= 0;
+    var cached = _stationLayoutCache.get(line);
+    if (cached && cached.stations === line.stations && cached.reversed === reversed) return cached;
+    var workLine = reversed ? Object.assign({}, line, { stations: line.stations.slice().reverse() }) : line;
+    var stationIndexMap = {};
+    for (var i = 0; i < workLine.stations.length; i++) {
+      var key = workLine.stations[i];
+      stationIndexMap[normalizeStationKey(key)] = i;
+      stationIndexMap[key] = i;
+    }
+    cached = { stations: line.stations, reversed: reversed, workLine: workLine, stationIndexMap: stationIndexMap };
+    _stationLayoutCache.set(line, cached);
+    return cached;
+  }
 
   function registerManualTimetable(lineId, rows) {
     if (!lineId || !Array.isArray(rows) || rows.length === 0) return;
@@ -511,19 +529,9 @@
 
       // v4.3.6xx: 反转线路——站表顺序和ODPT站序相反时，反转站表数组
       // 这样后面的所有计算逻辑都不用改，结果自动正确
-      var workLine = line;
-      if (REVERSED_STATION_ORDER.indexOf(lineId) >= 0) {
-        workLine = Object.assign({}, line, { stations: line.stations.slice().reverse() });
-      }
-
-      // Build station index map for this line (using normalized keys)
-      var stationIndexMap = {};
-      for (var i = 0; i < workLine.stations.length; i++) {
-        var normKey = normalizeStationKey(workLine.stations[i]);
-        stationIndexMap[normKey] = i;
-        // Also store original key for fallback
-        stationIndexMap[workLine.stations[i]] = i;
-      }
+      var layout = getEstimatorStationLayout(lineId, line);
+      var workLine = layout.workLine;
+      var stationIndexMap = layout.stationIndexMap;
 
       var positions = [];
       var processedTrainIds = {};
