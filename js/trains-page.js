@@ -416,15 +416,12 @@
             var _scrollY = window.scrollY || window.pageYOffset || 0;
             var _freshHost = document.createElement("div");
             var _linesNow = window.DataState.filterLinesByOperator(getLinesData(), _selectedOperator);
-            if (_linesNow && Object.keys(_linesNow).length) {
-              var _orderNow = (window.LinePresentationService && window.UNIFIED_LINES) ? window.LinePresentationService.getDisplayOrder(window.UNIFIED_LINES) : [];
-              window.DataState.renderList(_freshHost, _linesNow, { mode: "trains", lineOrder: _orderNow });
-              // Shared list owns its operator groups; swap the rendered content as one unit.
-              // Preserve the existing host and filter selection without a parallel group reconciler.
-              listEl.innerHTML = _freshHost.innerHTML;
-              setFilter(_selectedOperator);
-              if (_scrollY) window.scrollTo(0, _scrollY);
-            }
+            var _orderNow = (window.LinePresentationService && window.UNIFIED_LINES) ? window.LinePresentationService.getDisplayOrder(window.UNIFIED_LINES) : [];
+            window.DataState.renderList(_freshHost, _linesNow, { mode: "trains", lineOrder: _orderNow });
+            // Render the shared empty state too, so stale cards cannot survive a language change.
+            listEl.innerHTML = _freshHost.innerHTML;
+            setFilter(_selectedOperator);
+            if (_scrollY) window.scrollTo(0, _scrollY);
           }
         });
       }
