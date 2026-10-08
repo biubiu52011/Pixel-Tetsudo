@@ -4,7 +4,7 @@
 /* ========== Modal Updated Time Section ========== */
 .rs-updated-section{padding: var(--pad-lg); background: var(--bg); border: 3px solid var(--text); image-rendering: pixelated; border-radius: var(--radius);}.rs-updated-time{font-size: 13px; color: var(--text-muted); font-weight: 700; letter-spacing: 0.5px;}
 /* ========== Mobile adjustments ========== */
-@media(max-width:640px){.rs-line-card{padding:8px 10px;gap:var(--space-4);}.rs-line-name{font-size:12px;}.rs-operator-title{font-size:10px;}}
+/* LineCard mobile presentation lives in shared style.css. */
 
 @media (max-width: 640px) {
   .config-btn {
