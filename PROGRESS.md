@@ -13,7 +13,7 @@
 | UI-003 LineCard / SystemCard | REVIEW | `js/line-card.js` 已成为唯一卡片模板/更新入口；DataState 仅列表编排，realtime 不再 patch 卡片内部 DOM；等待 HEAD Actions 最终验证 |
 | UI-004 LineList / OperatorGroup | PARTIAL | `DataState.renderList` 已共享；需与 LineCard 职责拆清并统一空结果/排序 |
 | UI-005 PageState lifecycle | PARTIAL | `DataState` 已共享 render/retry 基础；页面仍重复 loading/retry/recovery glue |
-| UI-006 Tourism Detail Shell | TODO | event/shop/spot HTML 骨架几乎相同；待 SiteShell 稳定后吸收 |
+| UI-006 Tourism Detail Shell | PARTIAL | 已由现有 tourism-core.js 接管三页重复返回按钮 DOM；其余详情页主体 Shell 仍需公共化，待验证 |
 | UI-007 CSS 收敛 | IN_PROGRESS | 已移除 realtime 独占的移动端 LineCard 规则并迁至共享 style.css（`c7e8e7f1`, `5e7a27f9`）；仍需检查其他页面覆盖与浏览器回归 |
 | RECOVERY-001 Mobile Chrome 恢复 | DONE | BFCache/online/late-data/ODPT/DataFusion 恢复链已建立并有 guard |
 | RUNINFO-001 运行情报线路隔离 | DONE | 已修复跨线路 incident leakage |
@@ -129,7 +129,7 @@
 
 ### P2 — Tourism
 
-- [ ] **UI-006A** event/shop/spot 使用同一 TourismDetailShell。
+- [ ] **UI-006A** event/shop/spot 使用同一 TourismDetailShell；已将三页重复返回按钮交由 tourism-core.js 唯一生成（`60852841`, `f83fefda`, `08fa3381`, `5e9502c8`），其余主体待迁移。
 - [ ] **UI-006B** 类型差异通过 config/controller 注入，不复制 HTML。
 - [ ] **UI-006C** 地图能力/CSP 继续最小权限，不因 shell 统一而扩大权限。
 
@@ -171,6 +171,16 @@
 - Work: 共享 retryVisibleFailedStates 入口增加 pending guard；同步事件和 Promise resolve/reject 均释放保护；复用页面已登记的 retry callback，不增加新的 DataLoader/renderer。
 - Validation: source-level review only；CI/CD, Release Guards, Pages, browser runtime: NOT VERIFIED。
 - Next: 补自动恢复回归测试，核实 Actions，再逐页吸收重复 loading/error/retry glue；不得提前标记 UI-005 DONE。
+
+### 2026-10-08 — UI-006 tourism detail shared back control — agent
+
+- Status: REVIEW
+- Scope: 统一三种观光详情页返回按钮 DOM 结构
+- Files: `js/tourism-core.js`, `pages/tourism-event.html`, `pages/tourism-shop.html`, `pages/tourism-spot.html`, `PROGRESS.md`
+- Commits: `60852841`, `f83fefda`, `08fa3381`, `5e9502c8`
+- Work: tourism-core.start() 首先在 `data-tourism-detail-back` mount 生成唯一返回按钮；三页移除重复按钮 HTML，保留原 ID、SVG、样式、翻译与回到 home 的事件链。
+- Validation: source-level migration only；CI/CD, Release Guards, Pages, browser runtime: NOT VERIFIED。
+- Next: 核实生产页面脚本加载与按钮行为，继续抽取旅游详情页面主体，避免创建平行 controller。
 
 ## 5. 智能体工作记录模板
 
