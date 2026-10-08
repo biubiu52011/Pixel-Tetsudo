@@ -826,6 +826,8 @@
       var _snapshotServiceDate = _snapshotNow.getFullYear() + "-" + String(_snapshotNow.getMonth() + 1).padStart(2, "0") + "-" + String(_snapshotNow.getDate()).padStart(2, "0");
       var _snapshotServiceDay = _snapshotNow.getDay();
       var _snapshotCalendarType = (_snapshotServiceDay === 0 || _snapshotServiceDay === 6) ? "holiday" : "weekday";
+      var _vehicleResolveCalls = 0, _vehicleResolveMs = 0;
+      var _vehicleEvidenceCalls = 0, _vehicleEvidenceMs = 0;
       // Build the ODPT railway-code reverse lookup once per position snapshot.
       // Keep source key order so ambiguous-code selection remains unchanged.
       var _railwayCodeLines = Object.create(null);
@@ -1008,6 +1010,8 @@
                 if (!odptVehicleType && window.TrainOperationEvidence &&
                     typeof window.TrainOperationEvidence.resolveEvidence === "function") {
 
+                  var _evidenceStart = _perfNow();
+                  _vehicleEvidenceCalls++;
                   _derivedVehicleEvidence = window.TrainOperationEvidence.resolveEvidence(positionData.trainNumber, {
                     lineId: lid,
                     railway: railwayName,
@@ -1017,10 +1021,13 @@
                     serviceDate: _snapshotServiceDate,
                     calendarType: _snapshotCalendarType
                   }, "realtime-derived");
+                  _vehicleEvidenceMs += _perfNow() - _evidenceStart;
                 }
                 var _derivedVehicleType = _derivedVehicleEvidence && _derivedVehicleEvidence.vehicleType
                   ? _derivedVehicleEvidence.vehicleType
                   : (_derivedVehicleEvidence && _derivedVehicleEvidence.vehicleCandidates || []).join(" / ");
+                var _vehicleStart = _perfNow();
+                _vehicleResolveCalls++;
                 var _rtVehicle = window.TrainVehicle.resolve({
                   lineId: lid,
                   operator: trainOpShort,
@@ -1033,6 +1040,7 @@
                   realtimeVehicleType: odptVehicleType,
                   realtimeDerivedVehicleType: _derivedVehicleType
                 });
+                _vehicleResolveMs += _perfNow() - _vehicleStart;
                 _projectVehicleResolution(positionData, _rtVehicle, false);
               } catch(e) {}
             }
@@ -1517,6 +1525,10 @@
           }
         });
         fuseDirty(Object.keys(_positionDirty));
+        // Report aggregate resolver costs without logging individual train identities.
+        _perfSamples.push({ name: "vehicleEvidence", ms: Math.round(_vehicleEvidenceMs * 10) / 10, at: Date.now(), meta: { calls: _vehicleEvidenceCalls } });
+        _perfSamples.push({ name: "vehicleResolve", ms: Math.round(_vehicleResolveMs * 10) / 10, at: Date.now(), meta: { calls: _vehicleResolveCalls } });
+        if (_perfSamples.length > 40) _perfSamples.splice(0, _perfSamples.length - 40);
         _perfRecord("loadTrainPositions", _perfStart, { dirty: Object.keys(_positionDirty).length, positionLines: Object.keys(posMap || {}).length });
       } catch(e) { _perfRecord("loadTrainPositions:error", _perfStart); console.debug("[DataFusion] loadTrainPositions->fuseDirty error:", e.message); }
 
