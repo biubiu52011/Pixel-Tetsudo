@@ -174,6 +174,7 @@
       return best;
     }
     var impacts = [];
+    var precedingSentenceRange = null;
     text.split(/[。\n；;]/).forEach(function(sentence) {
       sentence = sentence.trim();
       if (!sentence) return;
@@ -212,11 +213,14 @@
         }
 
         impacts.push({
-          interval: rangeScope ? rangeScope.interval : null,
+          interval: rangeScope ? rangeScope.interval : (!rangeScopes.length && precedingSentenceRange && /^\s*(?:上り線|下り線|上下線|内回り|外回り)(?:では|は|で)/.test(sentence) ? precedingSentenceRange : null),
           direction: directionScope ? directionScope.direction : null,
           effect: fx.effect
         });
       });
+      var sentenceRanges = scopes.filter(function(scope){ return !!scope.interval; });
+      if (sentenceRanges.length === 1) precedingSentenceRange = sentenceRanges[0].interval;
+      else if (sentenceRanges.length > 1 || !/^\s*(?:上り線|下り線|上下線|内回り|外回り)/.test(sentence)) precedingSentenceRange = null;
     });
     // Deduplicate only identical semantic impacts; never merge different effects
     // or directions merely because they occur in the same sentence.
