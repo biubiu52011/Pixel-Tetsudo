@@ -55,3 +55,11 @@ test('trains detail hides the whole browser and restores it on return', () => {
   assert.match(js, /filterLinesByOperator\(getLinesData\(\), _selectedOperator\)/);
   assert.doesNotMatch(js, /_oldGroups|_freshGroups|_freshByOp/);
 });
+
+test('canonical trains refresh and realtime status reconciliation honor operator selection', () => {
+  const trains = read('js/trains-page.js');
+  const realtime = read('js/realtime-view.js');
+  assert.match(trains, /renderFiltered\(el, ul\)/);
+  assert.match(realtime, /var visibleLines = window\.DataState\.filterLinesByOperator\(linesObj, _selectedOperator\)/);
+  assert.match(realtime, /Object\.keys\(visibleLines \|\| \{\}\)/);
+});
