@@ -147,8 +147,12 @@ assert(!/isLoopDir && p\.destinationStation/.test(render),
   "loop destinationStation must not override InnerLoop/OuterLoop labels");
 
 const trains=read("js/trains-data.js");
+const runtimePolicy=read("data/core/runtime-config.js");
+assert(/defaultMode:\s*"UNKNOWN"/.test(runtimePolicy),"unknown API coverage must fail closed");
+assert(/return mode === "NO_REALTIME" \|\| mode === "TIMETABLE_ONLY"/.test(fusion),"timetable position must require explicit non-realtime source assignment");
 assert(/function _isFreshRealtimePosition/.test(trains),"realtime freshness guard missing");
-assert(/return _isFreshRealtimePosition\(p\) \? 0 : 8/.test(trains),"expired realtime must lose source priority");
+assert(!/return _isFreshRealtimePosition\(p\) \? 0 : 8/.test(trains),"expired realtime must not promote timetable authority");
+assert(/return 0; \/\/ Expiry is reported separately/.test(trains),"realtime source remains authoritative regardless of freshness");
 
 
 assert(estimatorSource.includes('vehicleIdentityStatus: vehResult.identityStatus'),
