@@ -474,6 +474,7 @@
       return;
     }
     window.DataState.renderList(container, filtered, { mode: "realtime", lineOrder: _latestOrder || [] });
+    renderFilterBar(_latestLines);
   }
 
   var _renderedStatusSignatures = {};
@@ -513,7 +514,7 @@
 
     // Mount the structural filter immediately. Data readiness only populates it;
     // it must not control whether the component exists at all.
-    renderFilterBar({});
+    // The component mounts independently; do not render an empty operator snapshot.
 
     function renderLinesList(container, linesObj, lineOrderArr) {
       window.DataState.renderList(container, linesObj, { mode: "realtime", lineOrder: lineOrderArr });
@@ -579,7 +580,11 @@
     // terminated in an error/timeout state. Recover the list immediately from the
     // same canonical readiness signal instead of waiting for a later fusion emission.
     window.addEventListener("pt:railway-ready", function() {
-      if (container.querySelector(".rs-line-card")) return;
+      if (container.querySelector(".rs-line-card")) {
+        if (!_latestLines) { var snapshot = getLines(); if (snapshot) _latestLines = snapshot.lines; }
+        if (_latestLines) renderFilterBar(_latestLines);
+        return;
+      }
       render(true);
     });
     window.addEventListener("pt:railway-error", function() {
