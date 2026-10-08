@@ -109,6 +109,8 @@
         });
       }
       if (listEl) listEl.classList.add("hidden");
+      var browser = listEl && listEl.closest("[data-railway-browser]");
+      if (browser) browser.classList.add("hidden");
       if (detailEl) detailEl.classList.remove("hidden");
       var _title = (window.RailwayDB && window.RailwayDB.resolveLineName ? window.RailwayDB.resolveLineName(lineId, window.currentLang) : (fusedLine.nameEn || fusedLine.nameJa || lineId));
       var _sys2 = (window.LinePresentationService && window.LinePresentationService.getPresentation)
@@ -169,6 +171,8 @@
       window.TrainsActiveSystemLineIds = null;
       if (window.ODPTClient && window.ODPTClient.clearRealtimeLines) window.ODPTClient.clearRealtimeLines();
       if (listEl) listEl.classList.remove("hidden");
+      var browser = listEl && listEl.closest("[data-railway-browser]");
+      if (browser) browser.classList.remove("hidden");
       if (detailEl) detailEl.classList.add("hidden");
       // The overview DOM was only hidden while detail was open. Do not rebuild
       // it on back navigation; preserve scroll position, filter state and cards.
@@ -412,7 +416,7 @@
             var _scrollY = window.scrollY || window.pageYOffset || 0;
             var _oldGroups = listEl.querySelectorAll(".rs-operator-group[data-operator]");
             var _freshHost = document.createElement("div");
-            var _linesNow = getLinesData();
+            var _linesNow = window.DataState.filterLinesByOperator(getLinesData(), _selectedOperator);
             if (_linesNow && Object.keys(_linesNow).length) {
               var _orderNow = (window.LinePresentationService && window.UNIFIED_LINES) ? window.LinePresentationService.getDisplayOrder(window.UNIFIED_LINES) : [];
               window.DataState.renderList(_freshHost, _linesNow, { mode: "trains", lineOrder: _orderNow });
