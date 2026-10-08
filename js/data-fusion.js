@@ -1145,8 +1145,10 @@
       function mayUseTimetableEstimate(lineId, position) {
         var policy = getRealtimePositionPolicy(lineId);
         var mode = policy.mode || "UNKNOWN";
-        if (mode === "FULL") return false;
-        if (mode !== "SEGMENTED") return mode === "NO_REALTIME" || mode === "TIMETABLE_ONLY";
+        if (mode !== "NO_REALTIME" && mode !== "TIMETABLE_ONLY") return false;
+        return true;
+        /* Historical SEGMENTED fallback removed: segment coverage does not authorize
+           a second position source.
         var line = allLines[lineId];
         var excluded = policy.excludedSegments || [];
         for (var i = 0; i < excluded.length; i++) {
@@ -1157,7 +1159,7 @@
         for (var j = 0; j < covered.length; j++) {
           if (_positionTouchesRange(position, line, covered[j])) return false;
         }
-        return true;
+        return true; */
       }
 
       doEstimation = function(requestedLineIds) {
