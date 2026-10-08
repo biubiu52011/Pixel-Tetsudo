@@ -95,6 +95,22 @@
       else if (from) interval = from + "方面";
       else if (to) interval = to + "方面";
     }
+    // A cause on another railway must never become this line's affected interval.
+    // Optional canonical station membership is a second, independent safeguard.
+    var lineStations = Array.isArray(input.lineStations) ? input.lineStations.map(function(v) {
+      return textOf(v).trim().replace(/駅$/, "");
+    }) : null;
+    function belongsToLine(range) {
+      if (!range || range === "全線" || !lineStations || !lineStations.length) return true;
+      var ends = range.split("→");
+      return ends.length !== 2 || ends.every(function(v) {
+        return lineStations.indexOf(v.trim().replace(/駅$/, "")) !== -1;
+      });
+    }
+    function isExternalCause(fragment) {
+      return /(?:の影響|のため|が原因|に伴い|を受け)[、，,]?/.test(fragment) &&
+        !/(?:運転を?見合わせ|運転中止|運休|遅延|遅れ|ダイヤ.*乱れ)/.test(fragment.split(/(?:の影響|のため|が原因|に伴い|を受け)/).shift());
+    }
     // Text-only official messages often carry the affected station range
     // without structured stationFrom/stationTo fields.
     if (!interval && text) {
@@ -116,7 +132,7 @@
         var fromToRe = /([^。\n、，,]{1,30}?駅)\s*から\s*([^。\n、，,]{1,30}?駅)\s*まで/g;
         while ((rangeMatch = fromToRe.exec(text))) ranges.push(rangeMatch[1].trim() + "→" + rangeMatch[2].trim());
       }
-      if (ranges.length) interval = ranges.join("、");
+      if (ranges.length) interval = ranges.filter(belongsToLine).join("、") || null;
       else if (/全線/.test(text)) interval = "全線";
     }
     var direction = null;
@@ -184,7 +200,11 @@
       var sm;
       while ((sm = scopeRe.exec(sentence))) {
         var raw = sm[0];
-        scopes.push({ index: sm.index, interval: intervalOf(raw), direction: directionOf(raw) });
+        var scopedInterval = intervalOf(raw);
+        var following = sentence.slice(sm.index + raw.length);
+        // A range followed by an incident cause is not the viewed line's scope.
+        if (scopedInterval && (!belongsToLine(scopedInterval) || isExternalCause(following))) scopedInterval = null;
+        scopes.push({ index: sm.index, interval: scopedInterval, direction: directionOf(raw) });
       }
 
       var effects = effectClauses(sentence);
