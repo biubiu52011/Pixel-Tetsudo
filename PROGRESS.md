@@ -23,6 +23,13 @@
 - 结构回读：两页均有一个 `data-railway-browser`，内部保留原 FilterBar、LineList shell、data-state-host，未新增第二套组件。
 - 状态 REVIEW：未运行 JS syntax/tests/CI、浏览器和 Pages 验证；跨页结构自动化 guard 尚待实现。不得标记 DONE。
 
+## 2026-10-09 JST — UI-004 railway-browser contract guard (REVIEW)
+
+- 新增 `tests/railway-browser-contract.test.cjs`，commit `db3c6a46`；使用 Node 内置 `node:test`，命令 `node --test tests/railway-browser-contract.test.cjs`。
+- 断言：realtime/trains 唯一组合容器及 FilterBar→LineList 布局顺序、数据状态宿主、FilterBar 不全局查询 LineList 内部、两页 controller 只使用共享筛选接口、realtime 选中态局部化、history mount 稳定。
+- 文件写入与 GitHub 回读已确认；测试执行、CI、浏览器运行时仍 **NOT VERIFIED**。不要因测试文件存在而声称 PASS。
+- 下一步：运行该测试与现有 CI；复核 trains 详情态筛选栏显隐和筛选后结构更新；继续清理 PageState 重复生命周期。状态 REVIEW。
+
 ## 1. 当前总览
 
 | Workstream | 状态 | 当前结论 / 下一步 |
