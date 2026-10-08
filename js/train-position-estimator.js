@@ -162,6 +162,9 @@
   function getCurrentCalendars() {
     try {
       var now = new Date();
+      // Railway service day rolls over at 04:00, not at midnight.
+      // Before 04:00 use the previous day's timetable calendar.
+      if (now.getHours() < 4) now.setDate(now.getDate() - 1);
       var day = now.getDay(); // 0=Sunday, 6=Saturday
       // Return array of matching calendar types
       if (day === 6) return ["odpt.Calendar:Saturday", "odpt.Calendar:SaturdayHoliday", "odpt.Calendar:Holiday"];
