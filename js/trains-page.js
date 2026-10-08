@@ -445,13 +445,7 @@
     _selectedOperator = op || null;
     if (_filterBar && _filterBar.getSelected() !== _selectedOperator) _filterBar.setSelected(_selectedOperator, false);
     if (!listEl) return;
-    var groups = listEl.querySelectorAll(".rs-operator-group[data-operator]");
-    if (groups.length) {
-      Array.prototype.slice.call(groups).forEach(function(group) {
-        var groupOp = group.getAttribute("data-operator") || "";
-        group.style.display = (!_selectedOperator || groupOp === _selectedOperator) ? "" : "none";
-      });
-    } else {
+    if (!window.DataState.setOperatorVisibility(listEl, _selectedOperator)) {
       renderFiltered(listEl);
     }
   }
@@ -459,17 +453,7 @@
   function renderFiltered(el, linesSnapshot) {
     if (!el || !window.DataState) return;
     var allLines = linesSnapshot || getLinesData() || {};
-    var filtered = allLines;
-    if (_selectedOperator) {
-      filtered = {};
-      Object.keys(allLines).forEach(function(id) {
-        var line = allLines[id];
-        if (line && (_selectedOperator === "JR-East"
-          ? (window.TransitConstants && window.TransitConstants.isJRERoute ? window.TransitConstants.isJRERoute(line) : line.operator === "JR-East")
-          : line.operator === _selectedOperator)) filtered[id] = line;
-      });
-    }
-    if (!Object.keys(filtered).length) { el.innerHTML = ""; return; }
+    var filtered = window.DataState.filterLinesByOperator(allLines, _selectedOperator);
     var lineOrder = (window.LinePresentationService && window.UNIFIED_LINES) ? window.LinePresentationService.getDisplayOrder(window.UNIFIED_LINES) : [];
     try { window.DataState.renderList(el, filtered, { mode: "trains", lineOrder: lineOrder }); }
     catch(e) { window.DataState.renderPageState(el, "render_error"); }
