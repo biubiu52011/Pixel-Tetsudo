@@ -83,3 +83,14 @@ test('trains language refresh replaces stale cards even for an empty selection',
   assert.match(js, /DataState\.renderList\(_freshHost, _linesNow,/);
   assert.match(js, /listEl\.innerHTML = _freshHost\.innerHTML;/);
 });
+
+test('realtime empty selection still refreshes operator choices', () => {
+  const js = read('js/realtime-view.js');
+  const start = js.indexOf('function renderFiltered()');
+  const end = js.indexOf('var _renderedStatusSignatures', start);
+  assert.ok(start >= 0 && end > start);
+  const body = js.slice(start, end);
+  assert.match(body, /DataState\.renderList\(container, filtered,/);
+  assert.match(body, /renderFilterBar\(_latestLines\)/);
+  assert.doesNotMatch(body, /Object\.keys\(filtered\)\.length === 0/);
+});
