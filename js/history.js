@@ -172,7 +172,7 @@
   }
 
   function renderHistory() {
-    const container = document.getElementById("tab-history");
+    const container = document.getElementById("historyContainer");
     if (!container) return;
     const history = getHistory();
     const t = window.t || function(key) { return key; };
