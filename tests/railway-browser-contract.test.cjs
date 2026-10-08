@@ -70,3 +70,9 @@ test('shared list tolerates missing mount and filter bar clears stale choices', 
   assert.match(data, /function renderList\(container, linesObj, options\) \{\s*if \(!container\) return;/);
   assert.match(filter, /if\(!availableOps\.length\)\{el\.innerHTML="";available\(false\);return;\}/);
 });
+
+test('realtime operator selection never invokes an undefined structure signature', () => {
+  const realtime = read('js/realtime-view.js');
+  assert.doesNotMatch(realtime, /structureSignature\(/);
+  assert.match(realtime, /_renderedStatusSignatures = \{\};/);
+});
