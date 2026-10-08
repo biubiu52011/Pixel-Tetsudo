@@ -544,8 +544,9 @@
     (seedIds || []).forEach(function(id) { if (id && lines && lines[id]) dirty[id] = true; });
     var queue = Object.keys(dirty);
     var branches = getBranchIndex(lines || {});
-    while (queue.length) {
-      var id = queue.shift();
+    // A cursor avoids shifting the whole pending array for every dependency.
+    for (var cursor = 0; cursor < queue.length; cursor++) {
+      var id = queue[cursor];
       var line = lines[id] || {};
       var deps = [];
       try {
