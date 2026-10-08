@@ -389,6 +389,33 @@
     return worst;
   }
 
+  // Index each ODPT operator snapshot once. A full fusion previously scanned
+  // the same TrainInformation array separately for every line.
+  var _delayRecordIndex = typeof WeakMap === "function" ? new WeakMap() : null;
+  function findScopedDelayRecord(records, op, code) {
+    var key = String(op).toLowerCase() + "::" + String(code).toLowerCase();
+    if (!_delayRecordIndex) {
+      for (var i = 0; i < records.length; i++) {
+        var rid = extractRailwayIdentity(records[i]);
+        if (rid && String(rid.operator).toLowerCase() + "::" + String(rid.railwayCode).toLowerCase() === key) return records[i];
+      }
+      return null;
+    }
+    var index = _delayRecordIndex.get(records);
+    if (!index) {
+      index = Object.create(null);
+      records.forEach(function(record) {
+        if (!record) return;
+        var rid = extractRailwayIdentity(record);
+        if (!rid) return;
+        var k = String(rid.operator).toLowerCase() + "::" + String(rid.railwayCode).toLowerCase();
+        if (!Object.prototype.hasOwnProperty.call(index, k)) index[k] = record;
+      });
+      _delayRecordIndex.set(records, index);
+    }
+    return index[key] || null;
+  }
+
   function getApiDelayInfo(line) {
     try {
       var op = getOperatorForLine(line.id, line.name);
@@ -403,16 +430,7 @@
         if (window.ODPTClient && window.ODPTClient.LINE_RAILWAY_CODE && window.ODPTClient.LINE_RAILWAY_CODE[line.id]) {
           code = window.ODPTClient.LINE_RAILWAY_CODE[line.id];
         }
-        var matched = null;
-        for (var i = 0; i < raw.length; i++) {
-          if (!raw[i]) continue;
-          var rid = extractRailwayIdentity(raw[i]);
-          if (rid && String(rid.operator).toLowerCase() === String(op).toLowerCase() &&
-              String(rid.railwayCode).toLowerCase() === String(code).toLowerCase()) {
-            matched = raw[i];
-            break;
-          }
-        }
+        var matched = findScopedDelayRecord(raw, op, code);
         if (matched) return parseODPTDelay(matched);
         // Never project another railway's incident onto this line. Operator-wide
         // TrainInformation arrays can contain unrelated lines; without a matching
