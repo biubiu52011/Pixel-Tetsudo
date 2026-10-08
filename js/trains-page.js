@@ -224,7 +224,7 @@
       window.DataState.renderPageState(el, "loading");
       return;
     }
-    var lineOrder = (window.LinePresentationService && window.UNIFIED_LINES) ? window.LinePresentationService.getDisplayOrder(window.UNIFIED_LINES) : []; try { window.DataState.renderList(el, ul, { mode: "trains", lineOrder: lineOrder }); } catch(e) { window.DataState.renderPageState(el, "render_error"); }
+    renderFiltered(el, ul);
   }
 
   function init() {
