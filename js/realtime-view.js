@@ -522,6 +522,8 @@
       setFilter(event.detail && event.detail.operator);
     });
 
+    renderFilterBar({});
+
     function renderLinesList(container, linesObj, lineOrderArr) {
       window.DataState.renderList(container, linesObj, { mode: "realtime", lineOrder: lineOrderArr });
     }
