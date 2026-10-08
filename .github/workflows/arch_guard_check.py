@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import json, os, sys
+import json, os, re, sys
 
 REPO_ROOT = os.getcwd()
 INVENTORY_PATH = os.path.join(REPO_ROOT, 'recovery', 'reports', 'unified_lines_3.3_inventory.json')
