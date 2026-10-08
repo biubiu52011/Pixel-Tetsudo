@@ -58,6 +58,12 @@
 - `tests/railway-browser-contract.test.cjs` 新增上述边界条件的源码断言；commit `4db303f4`。
 - 验证：GitHub 提交成功；Node 测试/CI/浏览器 **NOT VERIFIED**。状态 REVIEW。
 
+## 2026-10-09 JST — UI contract guard connected to existing CI (REVIEW)
+
+- `.github/workflows/ci-cd.yml` 的既有 `validate` job（Node 20 setup 后）添加 `node --test tests/railway-browser-contract.test.cjs`，没有新建 workflow；commit `c3e1c07f`。
+- 查询该提交的 GitHub combined statuses 和 commit workflow runs 均返回空列表，**不代表 PASS**；未取得测试执行结果或浏览器验收。
+- 保持 UI-004/UI-005 REVIEW，后续须读取实际 Actions job 结果并解决真实失败项。
+
 ## 1. 当前总览
 
 | Workstream | 状态 | 当前结论 / 下一步 |
