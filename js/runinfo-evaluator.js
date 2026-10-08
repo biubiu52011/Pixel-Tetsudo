@@ -104,7 +104,11 @@
       if (!range || range === "全線" || !lineStations || !lineStations.length) return true;
       var ends = range.split("→");
       return ends.length !== 2 || ends.every(function(v) {
-        return lineStations.indexOf(v.trim().replace(/駅$/, "")) !== -1;
+        var name = v.trim().replace(/駅$/, "");
+        if (lineStations.indexOf(name) !== -1) return true;
+        if (typeof input.resolveStationId !== "function") return false;
+        var resolved = input.resolveStationId(name);
+        return !!resolved && lineStations.indexOf(resolved) !== -1;
       });
     }
     // Cause phrases alone do not establish foreign-line identity: a local
