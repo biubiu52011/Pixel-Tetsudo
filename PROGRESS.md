@@ -14,7 +14,7 @@
 | UI-004 LineList / OperatorGroup | PARTIAL | `DataState.renderList` 已共享；需与 LineCard 职责拆清并统一空结果/排序 |
 | UI-005 PageState lifecycle | PARTIAL | `DataState` 已共享 render/retry 基础；页面仍重复 loading/retry/recovery glue |
 | UI-006 Tourism Detail Shell | TODO | event/shop/spot HTML 骨架几乎相同；待 SiteShell 稳定后吸收 |
-| UI-007 CSS 收敛 | IN_PROGRESS | 已确认公共/页面 CSS 混合覆盖；页脚误加分割线已删除 |
+| UI-007 CSS 收敛 | IN_PROGRESS | 已移除 realtime 独占的移动端 LineCard 规则并迁至共享 style.css（`c7e8e7f1`, `5e7a27f9`）；仍需检查其他页面覆盖与浏览器回归 |
 | RECOVERY-001 Mobile Chrome 恢复 | DONE | BFCache/online/late-data/ODPT/DataFusion 恢复链已建立并有 guard |
 | RUNINFO-001 运行情报线路隔离 | DONE | 已修复跨线路 incident leakage |
 | RUNINFO-002 popup freshness | DONE | popup cache 已缩短到 15 秒并加 guard |
@@ -118,7 +118,7 @@
 - [x] **UI-003C** 已建立 `LineCard.update()/updateSystem()/applyColor()` 稳定入口。
 - [x] **UI-003D** realtime 已只提交数据变化给 LineCard API，不再 patch 卡片内部 DOM。
 - [x] **UI-004A** DataState/LineList 现只负责 list/group orchestration，不再拥有卡片内部模板。
-- [ ] **UI-004B** 收敛 realtime/trains 对 `.rs-line-card` 的页面 CSS override。
+- [ ] **UI-004B** 已迁移 realtime 移动端 LineCard 样式到共享 CSS（`c7e8e7f1`, `5e7a27f9`）；仍需检查其他覆盖并通过 Actions / 浏览器回归后关闭。
 
 ### P1 — 页面状态
 
@@ -151,6 +151,16 @@
 - Validation: 三个核心 JS syntax PASS；COMPONENT-002 guard 已升级为检查唯一模板所有权和旧 API 回流。
 - Risks / blockers: GitHub Actions 尚在执行；浏览器视觉输出刻意保持原模板结构，未声明新的视觉验收。
 - Next: HEAD Actions 全绿后将 UI-003 标记 DONE；随后处理 UI-004B CSS override 收敛。
+
+### 2026-10-08 — UI-004B shared LineCard mobile CSS — agent
+
+- Status: REVIEW
+- Scope: 将 realtime 页面私有的移动端 LineCard 样式统一归入共享样式表，供 realtime / trains 共用
+- Files: `css/style.css`, `css/realtime.css`, `PROGRESS.md`
+- Commits: `c7e8e7f1`, `5e7a27f9`
+- Work: 保留原规则数值，将 `.rs-line-card` / `.rs-line-name` / `.rs-operator-title` 的移动端规则从 realtime.css 移入 style.css；不增加新 renderer，不更改业务逻辑。
+- Validation: source-level rule migration；CI/CD, Release Guards, Pages, browser runtime: NOT VERIFIED。
+- Next: 复核剩余页面 CSS 覆盖及移动端视觉，确认 CI 后再关闭 UI-004B；继续 UI-005 现有 DataState lifecycle 收敛。
 
 ## 5. 智能体工作记录模板
 
