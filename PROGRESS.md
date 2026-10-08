@@ -76,6 +76,14 @@
 - `tests/railway-browser-contract.test.cjs` 新增对应源码回归测试；commit `19b53ca3`。
 - 验证：代码已提交；本会话未能取得 GitHub Actions 实际运行日志，也未执行浏览器验收；保持 REVIEW。
 
+## 2026-10-09 JST — GitHub Actions verified for 6ce272c7 (CI PASS; browser REVIEW)
+
+- 实际查询 Actions run 列表并读取 run `37847954790` 的 jobs；此前 `fetch_commit_workflow_runs` 仅筛选 PR 触发的记录，不能用于判断 main push 的 CI。
+- commit `6ce272c7a1b3617cf92776204942ee4ea335cfde`：CI / CD run `37847954790` = completed/success；`Validate` 含 `Railway browser cross-page contract` = success，`Deploy to GitHub Pages` = success。
+- 同一提交：Release Guards run `37847954732` = completed/success；pages build and deployment run `37847953855` = completed/success。
+- 前序 push 对应运行部分 cancelled，与并发取消设置吻合，不能计为当前提交 FAIL。
+- **UI-004/UI-005：CI 验证 PASS；实际浏览器交互尚未测试，浏览器验收 REVIEW。**
+
 ## 1. 当前总览
 
 | Workstream | 状态 | 当前结论 / 下一步 |
