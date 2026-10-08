@@ -427,7 +427,9 @@
       if (_latestLines) renderFiltered();
       return;
     }
-    if (_latestLines) _lastStructureSignature = structureSignature(_latestLines);
+    // Force the next live snapshot to reconcile the newly visible cards.
+    // The former structureSignature() call referenced a nonexistent function.
+    _renderedStatusSignatures = {};
   }
 
   function getFilteredLines() {
