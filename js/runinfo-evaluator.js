@@ -291,8 +291,8 @@
     var subject = recovery ? "disaster_recovery" : construction ? "construction" :
       /台風|大雨|大雪|地震|強風/.test(s) ? "weather" :
       /振替輸送|代行バス|バス代行/.test(s) ? "replacement_transport" : "general";
-    var phase = resumed ? "ended_claim" : active && !planned ? "active_claim" :
-      planned && !active ? "planned" : "undetermined";
+    var phase = resumed ? "ended_claim" : active ? "active_claim" :
+      planned ? "planned" : "undetermined";
     return { subject: subject, phase: phase, currentStatusVerified: false };
   }
 
