@@ -325,7 +325,7 @@
     var flushScheduled = false;
 
     // Reconcile each returned status promptly; a slow operator must not hold
-    // every other line hostage behind Promise.all().
+    // every other line hostage behind a global completion barrier.
     function flushChanges() {
       flushScheduled = false;
       if (token !== _listStatusRefreshToken) return;
