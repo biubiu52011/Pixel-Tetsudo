@@ -44,6 +44,13 @@
 - GitHub 当前 HEAD 组合状态查询无 statuses（空数组不代表 CI PASS）；Node 测试及浏览器 **NOT VERIFIED**。
 - 状态 REVIEW。后续必须验证语言切换时的滚动/焦点/筛选、realtime 更新、CI 运行结果。
 
+## 2026-10-09 JST — UI-004 operator selection across snapshot updates (REVIEW)
+
+- `js/trains-page.js` 的 `renderList` 不再直接渲染全量线路，而是委托现有 `renderFiltered`，保持已选运营商；commit `4cbb094d`。
+- `js/realtime-view.js` 的 `reconcileRealtimeList` 状态签名只遍历 `DataState.filterLinesByOperator` 得到的可见线路，避免筛选状态下把全网签名误当成列表结构；commit `4ebd3317`。
+- `tests/railway-browser-contract.test.cjs` 添加刷新链路源码断言，commit `0627be7a`。
+- 验证：已提交，未实际执行 Node 测试、CI 或浏览器；状态 REVIEW。须重点验证筛选切换、语言切换、实时推送后的卡片状态和 DOM 增量更新。
+
 ## 1. 当前总览
 
 | Workstream | 状态 | 当前结论 / 下一步 |
