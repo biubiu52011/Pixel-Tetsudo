@@ -131,7 +131,7 @@
         while ((rangeMatch = fromToRe.exec(text))) ranges.push(rangeMatch[1].trim() + "→" + rangeMatch[2].trim());
       }
       if (ranges.length) interval = ranges.filter(belongsToLine).join("、") || null;
-      else if (/全線/.test(text)) interval = "全線";
+      if (!interval && /全線/.test(text)) interval = "全線";
     }
     var direction = null;
     if (/内回り/.test(text)) direction = "inner";
