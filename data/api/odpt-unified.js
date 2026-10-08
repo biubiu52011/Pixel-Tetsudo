@@ -694,10 +694,12 @@
             if(!r.ok) throw new Error("TrainRun cache HTTP "+r.status);
             return r.json();
         }).then(function(body){
-            var rows=(body&&body.complete&&Array.isArray(body.runs))?body.runs.map(_trainRunToTimetable):[];
+            if (!body || body.ok !== true) throw new Error("TrainRun SQL query failed: "+(body && body.error || "INVALID_RESPONSE"));
+            if (!body.complete || !Array.isArray(body.runs)) throw new Error("TrainRun SQL timetable unavailable: "+(body.source || body.cache || "INCOMPLETE"));
+            var rows=body.runs.map(_trainRunToTimetable);
             _trainRunCache[key]={at:Date.now(),rows:rows};
             return rows;
-        }).catch(function(){ return []; }).finally(function(){ delete _trainRunInflight[key]; });
+        }).finally(function(){ delete _trainRunInflight[key]; });
         return _trainRunInflight[key];
     }
 
