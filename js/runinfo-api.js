@@ -301,6 +301,8 @@
               direction: evaluated && evaluated.direction || null,
               effect: evaluated && evaluated.effect || null,
               impacts: evaluated && evaluated.impacts || [],
+              messageKind: evaluated && evaluated.messageKind || "unknown",
+              noticeClassification: evaluated && evaluated.noticeClassification || null,
               links: ex.links,
               sourceUpdatedAt: sourceUpdatedAt,
               validUntil: validUntil,
