@@ -30,6 +30,13 @@
 - 文件写入与 GitHub 回读已确认；测试执行、CI、浏览器运行时仍 **NOT VERIFIED**。不要因测试文件存在而声称 PASS。
 - 下一步：运行该测试与现有 CI；复核 trains 详情态筛选栏显隐和筛选后结构更新；继续清理 PageState 重复生命周期。状态 REVIEW。
 
+## 2026-10-09 JST — UI-004 trains detail/layout regression fix (REVIEW)
+
+- 修复 `js/trains-page.js` 进入详情只隐藏列表、不隐藏新增组合容器内筛选栏的问题：详情进入/返回分别隐藏/恢复最近的 `[data-railway-browser]`；commit `e771f89c`。
+- 切换语言时重建运营商组使用共享 `DataState.filterLinesByOperator`，避免筛选状态丢失；保留原滚动位置及卡片更新逻辑。
+- `tests/railway-browser-contract.test.cjs` 添加详情容器显隐及语言刷新筛选断言；commit `a28df3cf`。
+- 验证：GitHub 源码修改提交成功；测试执行、CI 和真实浏览器 **NOT VERIFIED**。状态 REVIEW。
+
 ## 1. 当前总览
 
 | Workstream | 状态 | 当前结论 / 下一步 |
