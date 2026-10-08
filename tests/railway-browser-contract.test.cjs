@@ -63,3 +63,10 @@ test('canonical trains refresh and realtime status reconciliation honor operator
   assert.match(realtime, /var visibleLines = window\.DataState\.filterLinesByOperator\(linesObj, _selectedOperator\)/);
   assert.match(realtime, /Object\.keys\(visibleLines \|\| \{\}\)/);
 });
+
+test('shared list tolerates missing mount and filter bar clears stale choices', () => {
+  const data = read('js/data-state.js');
+  const filter = read('js/operator-filter-bar.js');
+  assert.match(data, /function renderList\(container, linesObj, options\) \{\s*if \(!container\) return;/);
+  assert.match(filter, /if\(!availableOps\.length\)\{el\.innerHTML="";available\(false\);return;\}/);
+});
