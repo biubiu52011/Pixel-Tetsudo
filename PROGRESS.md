@@ -51,6 +51,13 @@
 - `tests/railway-browser-contract.test.cjs` 添加刷新链路源码断言，commit `0627be7a`。
 - 验证：已提交，未实际执行 Node 测试、CI 或浏览器；状态 REVIEW。须重点验证筛选切换、语言切换、实时推送后的卡片状态和 DOM 增量更新。
 
+## 2026-10-09 JST — UI-004 empty/missing mount guard (REVIEW)
+
+- `DataState.renderList` 在访问 `container.innerHTML` 前独立判断 `!container`，避免缺失 mount 时异常；commit `82f821c5`。
+- `OperatorFilterBar.render` 在运营商列表变空时清空过期按钮并调用现有 `available(false)`；commit `8de9fd5c`。
+- `tests/railway-browser-contract.test.cjs` 新增上述边界条件的源码断言；commit `4db303f4`。
+- 验证：GitHub 提交成功；Node 测试/CI/浏览器 **NOT VERIFIED**。状态 REVIEW。
+
 ## 1. 当前总览
 
 | Workstream | 状态 | 当前结论 / 下一步 |
