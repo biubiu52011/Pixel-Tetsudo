@@ -820,6 +820,12 @@
       // Snapshot-local lookup avoids scanning all previously placed trains
       // for every incoming record; preserve the original first-match behavior.
       var _positionIndexByLine = Object.create(null);
+      // Service date/calendar are shared by all vehicle-evidence lookups in
+      // this snapshot; calculate once instead of allocating a Date per train.
+      var _snapshotNow = new Date();
+      var _snapshotServiceDate = _snapshotNow.getFullYear() + "-" + String(_snapshotNow.getMonth() + 1).padStart(2, "0") + "-" + String(_snapshotNow.getDate()).padStart(2, "0");
+      var _snapshotServiceDay = _snapshotNow.getDay();
+      var _snapshotCalendarType = (_snapshotServiceDay === 0 || _snapshotServiceDay === 6) ? "holiday" : "weekday";
       // Build the ODPT railway-code reverse lookup once per position snapshot.
       // Keep source key order so ambiguous-code selection remains unchanged.
       var _railwayCodeLines = Object.create(null);
@@ -1001,18 +1007,15 @@
                 var _derivedVehicleEvidence = null;
                 if (!odptVehicleType && window.TrainOperationEvidence &&
                     typeof window.TrainOperationEvidence.resolveEvidence === "function") {
-                  var _now = new Date();
-                  var _serviceDate = _now.getFullYear() + "-" + String(_now.getMonth()+1).padStart(2,"0") + "-" + String(_now.getDate()).padStart(2,"0");
-                  var _serviceDay = _now.getDay();
-                  var _calendarType = (_serviceDay === 0 || _serviceDay === 6) ? "holiday" : "weekday";
+
                   _derivedVehicleEvidence = window.TrainOperationEvidence.resolveEvidence(positionData.trainNumber, {
                     lineId: lid,
                     railway: railwayName,
                     operator: trainOpShort,
                     trainOwner: odptTrainOwner,
                     trainNumber: positionData.trainNumber,
-                    serviceDate: _serviceDate,
-                    calendarType: _calendarType
+                    serviceDate: _snapshotServiceDate,
+                    calendarType: _snapshotCalendarType
                   }, "realtime-derived");
                 }
                 var _derivedVehicleType = _derivedVehicleEvidence && _derivedVehicleEvidence.vehicleType
