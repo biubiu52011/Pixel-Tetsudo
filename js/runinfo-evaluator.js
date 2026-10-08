@@ -107,10 +107,8 @@
         return lineStations.indexOf(v.trim().replace(/駅$/, "")) !== -1;
       });
     }
-    function isExternalCause(fragment) {
-      return /(?:の影響|のため|が原因|に伴い|を受け)[、，,]?/.test(fragment) &&
-        !/(?:運転を?見合わせ|運転中止|運休|遅延|遅れ|ダイヤ.*乱れ)/.test(fragment.split(/(?:の影響|のため|が原因|に伴い|を受け)/).shift());
-    }
+    // Cause phrases alone do not establish foreign-line identity: a local
+    // station range can also be followed by "設備点検の影響で".
     // Text-only official messages often carry the affected station range
     // without structured stationFrom/stationTo fields.
     if (!interval && text) {
@@ -201,9 +199,8 @@
       while ((sm = scopeRe.exec(sentence))) {
         var raw = sm[0];
         var scopedInterval = intervalOf(raw);
-        var following = sentence.slice(sm.index + raw.length);
-        // A range followed by an incident cause is not the viewed line's scope.
-        if (scopedInterval && (!belongsToLine(scopedInterval) || isExternalCause(following))) scopedInterval = null;
+        // Only canonical membership, not causal wording, excludes a range.
+        if (scopedInterval && !belongsToLine(scopedInterval)) scopedInterval = null;
         scopes.push({ index: sm.index, interval: scopedInterval, direction: directionOf(raw) });
       }
 
