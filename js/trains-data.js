@@ -124,9 +124,9 @@ function _positionSourceRank(p) {
   if (!p) return 9;
   // Source metadata is authoritative. DataFusion explicitly tags ODPT live
   // positions as realtime-api and timetable-derived positions separately.
-  // Expired realtime loses priority before dedupe so timetable fallback can
-  // take over instead of the renderer deleting the winning stale record later.
-  if (p.positionSource === "realtime-api") return _isFreshRealtimePosition(p) ? 0 : 8;
+  // Source authority is independent of freshness: a stale API record must not
+  // cause a timetable estimate to replace that train during deduplication.
+  if (p.positionSource === "realtime-api") return 0; // Expiry is reported separately; never promote timetable over an API train.
   if (p.positionSource === "train-timetable") return 1;
   if (p.positionSource === "station-timetable") return 2;
   if (p.estimated === true) return 3;
