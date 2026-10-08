@@ -158,6 +158,14 @@
     }
   }
 
+  // Cabinet Office published national holidays and substitute/citizens' holidays.
+  // Only published years are included; refresh from the official source annually.
+  // https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html
+  var PUBLISHED_JP_HOLIDAYS = {
+    "2026": new Set(["01-01","01-12","02-11","02-23","03-20","04-29","05-03","05-04","05-05","05-06","07-20","08-11","09-21","09-22","09-23","10-12","11-03","11-23"]),
+    "2027": new Set(["01-01","01-11","02-11","02-23","03-21","03-22","04-29","05-03","05-04","05-05","07-19","08-11","09-20","09-23","10-11","11-03","11-23"])
+  };
+
   // ========== Calendar detection ==========
   function getCurrentCalendars() {
     try {
@@ -178,6 +186,10 @@
       if (override === "holiday") day = 0;
       else if (override === "weekday") day = 1;
       else if (override === "saturday") day = 6;
+      else {
+        var published = PUBLISHED_JP_HOLIDAYS[String(now.getFullYear())];
+        if (published && published.has(dateKey.slice(5))) day = 0;
+      }
       // Return array of matching calendar types
       if (day === 6) return ["odpt.Calendar:Saturday", "odpt.Calendar:SaturdayHoliday", "odpt.Calendar:Holiday"];
       if (day === 0) return ["odpt.Calendar:Holiday", "odpt.Calendar:SaturdayHoliday", "odpt.Calendar:Sunday"];
