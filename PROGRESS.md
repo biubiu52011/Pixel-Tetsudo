@@ -64,6 +64,12 @@
 - 查询该提交的 GitHub combined statuses 和 commit workflow runs 均返回空列表，**不代表 PASS**；未取得测试执行结果或浏览器验收。
 - 保持 UI-004/UI-005 REVIEW，后续须读取实际 Actions job 结果并解决真实失败项。
 
+## 2026-10-09 JST — UI-004 language-change empty state (REVIEW)
+
+- `js/trains-page.js` 的语言切换刷新不再跳过空的 `_linesNow`；统一通过 `DataState.renderList` 替换旧列表，避免旧卡片残留；commit `74c9f539`。
+- `tests/railway-browser-contract.test.cjs` 添加语言切换空列表源码回归断言；commit `f02aba04`。
+- 验证：GitHub 已提交；CI Actions 的实际 job 结果和浏览器行为尚未获取，状态保持 REVIEW。
+
 ## 1. 当前总览
 
 | Workstream | 状态 | 当前结论 / 下一步 |
