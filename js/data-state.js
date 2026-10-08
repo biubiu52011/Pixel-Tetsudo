@@ -226,7 +226,8 @@
   }
 
   function renderList(container, linesObj, options) {
-    if (!container || !linesObj || typeof linesObj !== "object" || Object.keys(linesObj).length === 0) {
+    if (!container) return;
+    if (!linesObj || typeof linesObj !== "object" || Object.keys(linesObj).length === 0) {
       container.innerHTML = '<div class="rs-empty">' + (typeof window.t === "function" ? window.t("status.no_trains") : "No data") + '</div>';
       return;
     }
