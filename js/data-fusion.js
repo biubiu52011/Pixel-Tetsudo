@@ -817,6 +817,9 @@
       loadTrainPositions._retry = 0;
       var _previousPosMap = odptData.realtimePositions || {};
       posMap = {};
+      // Snapshot-local lookup avoids scanning all previously placed trains
+      // for every incoming record; preserve the original first-match behavior.
+      var _positionIndexByLine = Object.create(null);
       odptData.trains = {};
       // Snapshot-scoped: incomplete realtime evidence must not leak into later
       // polls after the source record disappears.
@@ -949,7 +952,9 @@
             var lid = targetLine.lid;
             var idx = targetLine.idx;
             if (!posMap[lid]) posMap[lid] = [];
-            var existingIdx = posMap[lid].findIndex(function(p) { return p.trainId === trainId; });
+            var _linePositionIndex = _positionIndexByLine[lid];
+            if (!_linePositionIndex) _linePositionIndex = _positionIndexByLine[lid] = new Map();
+            var existingIdx = _linePositionIndex.has(trainId) ? _linePositionIndex.get(trainId) : -1;
             var rawType = t["odpt:trainType"] || "";
             var typeName = "";
             if (rawType) {
@@ -1043,6 +1048,7 @@
             if (existingIdx >= 0) {
               posMap[lid][existingIdx] = positionData;
             } else {
+              _linePositionIndex.set(trainId, posMap[lid].length);
               posMap[lid].push(positionData);
             }
           }
