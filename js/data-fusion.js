@@ -1086,7 +1086,7 @@
           var model = cfg.REALTIME_POSITION_POLICY || {};
           var linePolicy = model.lines && model.lines[lineId];
           if (linePolicy && linePolicy.mode) return linePolicy;
-          return { mode: model.defaultMode || "HYBRID" };
+          return { mode: model.defaultMode || "UNKNOWN" };
         } catch(e) {
           return { mode: "UNKNOWN" };
         }
@@ -1111,7 +1111,7 @@
 
       function mayUseTimetablePosition(lineId) {
         var mode = getRealtimePositionPolicy(lineId).mode;
-        return mode !== "FULL";
+        return mode === "NO_REALTIME" || mode === "TIMETABLE_ONLY";
       }
 
       // Generic coverage evaluator. Line-specific facts live only in RuntimeConfig.
@@ -1146,7 +1146,7 @@
         var policy = getRealtimePositionPolicy(lineId);
         var mode = policy.mode || "UNKNOWN";
         if (mode === "FULL") return false;
-        if (mode !== "SEGMENTED") return true; // HYBRID / COARSE / UNKNOWN
+        if (mode !== "SEGMENTED") return mode === "NO_REALTIME" || mode === "TIMETABLE_ONLY";
         var line = allLines[lineId];
         var excluded = policy.excludedSegments || [];
         for (var i = 0; i < excluded.length; i++) {
