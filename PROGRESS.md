@@ -70,6 +70,12 @@
 - `tests/railway-browser-contract.test.cjs` 添加语言切换空列表源码回归断言；commit `f02aba04`。
 - 验证：GitHub 已提交；CI Actions 的实际 job 结果和浏览器行为尚未获取，状态保持 REVIEW。
 
+## 2026-10-09 JST — UI-004 realtime empty-selection filter controls (REVIEW)
+
+- `js/realtime-view.js` 的 `renderFiltered` 不再因筛选结果为空而提前跳过 `renderFilterBar(_latestLines)`，统一通过共享 `DataState.renderList` 显示空状态；commit `29b59706`。
+- `tests/railway-browser-contract.test.cjs` 新增对应源码回归测试；commit `19b53ca3`。
+- 验证：代码已提交；本会话未能取得 GitHub Actions 实际运行日志，也未执行浏览器验收；保持 REVIEW。
+
 ## 1. 当前总览
 
 | Workstream | 状态 | 当前结论 / 下一步 |
