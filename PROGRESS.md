@@ -15,6 +15,14 @@
 - 验证：GitHub 源码回读 PASS；语法/架构测试、CI/CD、Pages、browser runtime **NOT VERIFIED**。
 - 遗留：realtime/trains 筛选器+列表组合容器的统一结构契约尚未落地；PageState lifecycle、CSS 全量粘连及七页动态 DOM 完整检查未完成。状态 REVIEW，不得标记 DONE。
 
+## 2026-10-09 JST — UI-004 shared layout boundary follow-up (REVIEW)
+
+- 执行者：ChatGPT GitHub connector；用户要求不使用 Work。
+- 修复上一轮 `js/data-state.js` 新增接口意外含字面 `\\n` 的语法风险，commit `095e83d6`；GitHub 源码回读确认已恢复实际换行。
+- 为 `pages/realtime.html` 和 `pages/trains.html` 增加一致的 `data-railway-browser` 组合布局容器，分别提交 `450c7c67`、`bfa6c860`；仅包裹筛选器和线路列表，详情视图保持页面业务所有权。
+- 结构回读：两页均有一个 `data-railway-browser`，内部保留原 FilterBar、LineList shell、data-state-host，未新增第二套组件。
+- 状态 REVIEW：未运行 JS syntax/tests/CI、浏览器和 Pages 验证；跨页结构自动化 guard 尚待实现。不得标记 DONE。
+
 ## 1. 当前总览
 
 | Workstream | 状态 | 当前结论 / 下一步 |
