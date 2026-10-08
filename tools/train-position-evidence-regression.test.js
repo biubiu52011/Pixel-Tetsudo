@@ -301,8 +301,8 @@ assert(fusionSource.includes('source:"formation-evidence", sources:["formation-e
   'dated formation evidence must retain its canonical structural provenance and exact identity state');
 assert(fusionSource.includes('_queueChainVehicle({') && fusionSource.includes('vehicleFormationId:_fe.formationId'),
   'formation evidence must enter the existing pre-commit candidate queue');
-assert(fusionSource.includes('if (mode !== "SEGMENTED") return true; // HYBRID / COARSE / UNKNOWN'),
-  'HYBRID/COARSE/UNKNOWN coverage gaps must remain eligible for timetable position fallback');
+assert(!fusionSource.includes('if (mode !== "SEGMENTED") return true; // HYBRID / COARSE / UNKNOWN'),
+  'HYBRID/COARSE/UNKNOWN must not automatically authorize timetable position fallback');
 assert(fusionSource.includes('if (_chainVehicleRegistry[_cid]) _chainVehicleRegistry[_cid].lastSeenAt = Date.now();'),
   'an active timetable running chain must keep confirmed vehicle identity alive across realtime coverage gaps');
 assert(fusionSource.includes('Object.keys(posMap).forEach(function(_vlid) {') &&
