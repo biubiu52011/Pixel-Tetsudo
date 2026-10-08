@@ -122,7 +122,7 @@
 
 ### P1 — 页面状态
 
-- [ ] **UI-005A** 在现有 `DataState` 上吸收 page lifecycle；不要创建第二个平行状态系统。
+- [ ] **UI-005A** 在现有 `DataState` 上吸收 page lifecycle；已为 online/pageshow 自动恢复添加单飞保护（`22c689c9`），其余页面重复 glue 仍待吸收。
 - [ ] **UI-005B** 统一 loading/offline/fetch_error/timeout/retry。
 - [ ] **UI-005C** 保留 mobile Chrome BFCache/online recovery 语义。
 - [ ] **UI-005D** 更新 RECOVERY-001 guard，从检查页面重复 glue 转为检查共享 lifecycle contract。
@@ -161,6 +161,16 @@
 - Work: 保留原规则数值，将 `.rs-line-card` / `.rs-line-name` / `.rs-operator-title` 的移动端规则从 realtime.css 移入 style.css；不增加新 renderer，不更改业务逻辑。
 - Validation: source-level rule migration；CI/CD, Release Guards, Pages, browser runtime: NOT VERIFIED。
 - Next: 复核剩余页面 CSS 覆盖及移动端视觉，确认 CI 后再关闭 UI-004B；继续 UI-005 现有 DataState lifecycle 收敛。
+
+### 2026-10-08 — UI-005 shared recovery single-flight — agent
+
+- Status: REVIEW
+- Scope: DataState 的 online/pageshow 自动恢复并发保护
+- Files: `js/data-state.js`, `PROGRESS.md`
+- Commit: `22c689c9`
+- Work: 共享 retryVisibleFailedStates 入口增加 pending guard；同步事件和 Promise resolve/reject 均释放保护；复用页面已登记的 retry callback，不增加新的 DataLoader/renderer。
+- Validation: source-level review only；CI/CD, Release Guards, Pages, browser runtime: NOT VERIFIED。
+- Next: 补自动恢复回归测试，核实 Actions，再逐页吸收重复 loading/error/retry glue；不得提前标记 UI-005 DONE。
 
 ## 5. 智能体工作记录模板
 
