@@ -514,7 +514,11 @@
 
     // Mount the structural filter immediately. Data readiness only populates it;
     // it must not control whether the component exists at all.
-    // The component mounts independently; do not render an empty operator snapshot.
+    // Subscribe independently of the data loading lifecycle.
+    var filterElement = document.getElementById("realtimeFilterBar");
+    if (filterElement) filterElement.addEventListener("pt:operator-filter-change", function(event) {
+      setFilter(event.detail && event.detail.operator);
+    });
 
     function renderLinesList(container, linesObj, lineOrderArr) {
       window.DataState.renderList(container, linesObj, { mode: "realtime", lineOrder: lineOrderArr });
@@ -604,6 +608,7 @@
           // Live snapshots normally change only status/interval data. Keep
           // the operator/line shell mounted and patch affected cards in place.
           reconcileRealtimeList(container, _latestLines);
+          renderFilterBar(_latestLines);
           scheduleListStatusRefresh(_latestLines, false);
         }
       });
