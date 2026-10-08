@@ -575,7 +575,7 @@ function _rememberTrainArtworkFailure(trainUid) {
               latestRealtimeAt = _p.sourceUpdatedAt;
             }
           }
-        } else {
+        } else if (_rank === 1 || _rank === 2) {
           anyEst = true;
         }
       }
@@ -600,10 +600,10 @@ function _rememberTrainArtworkFailure(trainUid) {
 
   function _trainPositionRank(p) {
     if (!p) return 3;
-    if (p.positionSource === "realtime-api" || p.estimated === false) return 0;
+    if (p.positionSource === "realtime-api") return 0;
     if (p.positionSource === "train-timetable") return 1;
     if (p.positionSource === "station-timetable") return 2;
-    return p.estimated === true ? 1 : 0;
+    return p.estimated === true ? 1 : 3; // Unknown provenance is neither live nor timetable.
   }
 
   function _sortTrainPositionsBySource(positions) {
