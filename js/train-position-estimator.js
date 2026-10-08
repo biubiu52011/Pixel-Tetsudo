@@ -166,6 +166,18 @@
       // Before 04:00 use the previous day's timetable calendar.
       if (now.getHours() < 4) now.setDate(now.getDate() - 1);
       var day = now.getDay(); // 0=Sunday, 6=Saturday
+      // Explicit service-day overrides are supplied by authoritative calendar
+      // data; do not guess Japanese public holidays from weekday alone.
+      // Keys are local YYYY-MM-DD dates after the 04:00 service-day rollover.
+      var dateKey = now.getFullYear() + "-" +
+        String(now.getMonth() + 1).padStart(2, "0") + "-" +
+        String(now.getDate()).padStart(2, "0");
+      var overrides = window.RuntimeConfig && window.RuntimeConfig.SERVICE_DAY_CALENDAR;
+      var override = overrides && Object.prototype.hasOwnProperty.call(overrides, dateKey)
+        ? overrides[dateKey] : null;
+      if (override === "holiday") day = 0;
+      else if (override === "weekday") day = 1;
+      else if (override === "saturday") day = 6;
       // Return array of matching calendar types
       if (day === 6) return ["odpt.Calendar:Saturday", "odpt.Calendar:SaturdayHoliday", "odpt.Calendar:Holiday"];
       if (day === 0) return ["odpt.Calendar:Holiday", "odpt.Calendar:SaturdayHoliday", "odpt.Calendar:Sunday"];
