@@ -501,7 +501,11 @@
   function reconcileRealtimeList(container, linesObj) {
     var _perfStart = (window.performance && performance.now) ? performance.now() : Date.now();
     var cards = container ? container.querySelectorAll(".rs-line-card") : [];
-    if (!cards || cards.length === 0) { renderFiltered(); return; }
+    if (!cards || cards.length === 0) {
+      renderFiltered();
+      _renderedStatusSignatures = {};
+      return;
+    }
     var changed = [];
     var next = {};
     var visibleLines = window.DataState.filterLinesByOperator(linesObj, _selectedOperator);
