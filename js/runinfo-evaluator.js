@@ -281,7 +281,7 @@
     var s = textOf(input.text || input.statusText || "");
     var construction = /集中工事|計画工事|線路工事|設備工事|保守工事|工事に伴う/.test(s);
     var recovery = /復旧工事|災害復旧|土砂崩れ|土砂流入|斜面崩壊|崩落|被災/.test(s);
-    var planned = /予定|実施します|実施予定|運休します|運休予定|運転計画|見込み|(?:来週|明日|翌日|週末)|(?:[０-９0-9]{1,2}月[０-９0-9]{1,2}日)/.test(s);
+    var planned = /予定|実施します|実施予定|運休します|運休予定|運転計画|(?:来週|明日|翌日|週末)|(?:[０-９0-9]{1,2}月[０-９0-9]{1,2}日)/.test(s);
     var active = /現在|運休しています|運転を見合わせています|運転見合わせ中|運転を中止しています|当面の間|復旧まで/.test(s);
     var resumed = /運転を再開しました|運転再開済み|平常運転に戻りました/.test(s);
     var subject = recovery ? "disaster_recovery" : construction ? "construction" :
