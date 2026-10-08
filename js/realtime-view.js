@@ -482,11 +482,8 @@
     var filtered = getFilteredLines();
     var container = document.getElementById("realtimeStatusContainer");
     if (!container) return;
-    if (Object.keys(filtered).length === 0) {
-      window.DataState.renderList(container, {}, { mode: "realtime" });
-      return;
-    }
     window.DataState.renderList(container, filtered, { mode: "realtime", lineOrder: _latestOrder || [] });
+    // Keep the full operator choices available even when the selection has no lines.
     renderFilterBar(_latestLines);
   }
 
