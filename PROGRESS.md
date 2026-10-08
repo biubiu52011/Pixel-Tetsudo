@@ -4,6 +4,17 @@
 >
 > 最后人工整理：2026-10-07 JST
 
+## 2026-10-09 JST — UI-004 / UI-002 non-business DOM coupling cleanup (REVIEW)
+
+- 执行者：ChatGPT GitHub connector；直接修改 main，未使用 Work。
+- 目标：解除筛选器对线路列表的全局 DOM 查询、页面 controller 对运营商分组内部 DOM 的重复控制；保留业务数据/页面详情差异。
+- 修改：`js/operator-filter-bar.js`、`js/data-state.js`、`js/realtime-view.js`、`js/trains-page.js`、`pages/history.html`。
+- 关联 commits：`668d28aa`、`3e5cdc80`、`471a225c`、`6f1a965b`、`4aac2751`；先前历史页容器保留修复 `e193f3ad`。
+- 结果：FilterBar 不再从其他组件内部查找运营商；公共 DataState 提供 `setOperatorVisibility` 和 `filterLinesByOperator`，realtime/trains 均调用；realtime 卡片选中状态限定到本页列表；两页空结果走公共列表渲染；history 的稳定 mount 不再预置随后被替换的内部 DOM。
+- 静态回读：两个页面均已调用共享筛选接口；页面控制器内 `group.style.display` 已消失；FilterBar 全局 `document.querySelectorAll(".rs-line-list-content...")` 已消失。
+- 验证：GitHub 源码回读 PASS；语法/架构测试、CI/CD、Pages、browser runtime **NOT VERIFIED**。
+- 遗留：realtime/trains 筛选器+列表组合容器的统一结构契约尚未落地；PageState lifecycle、CSS 全量粘连及七页动态 DOM 完整检查未完成。状态 REVIEW，不得标记 DONE。
+
 ## 1. 当前总览
 
 | Workstream | 状态 | 当前结论 / 下一步 |
