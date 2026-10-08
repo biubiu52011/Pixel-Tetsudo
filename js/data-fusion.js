@@ -1143,23 +1143,10 @@
       }
 
       function mayUseTimetableEstimate(lineId, position) {
-        var policy = getRealtimePositionPolicy(lineId);
-        var mode = policy.mode || "UNKNOWN";
-        if (mode !== "NO_REALTIME" && mode !== "TIMETABLE_ONLY") return false;
-        return true;
-        /* Historical SEGMENTED fallback removed: segment coverage does not authorize
-           a second position source.
-        var line = allLines[lineId];
-        var excluded = policy.excludedSegments || [];
-        for (var i = 0; i < excluded.length; i++) {
-          if (_positionTouchesRange(position, line, excluded[i])) return true;
-        }
-        var covered = policy.coveredSegments || [];
-        if (!covered.length) return true;
-        for (var j = 0; j < covered.length; j++) {
-          if (_positionTouchesRange(position, line, covered[j])) return false;
-        }
-        return true; */
+        // Source assignment is explicit. Unknown, hybrid, coarse and segmented
+        // realtime coverage never authorize an alternative position source.
+        var mode = getRealtimePositionPolicy(lineId).mode;
+        return mode === "NO_REALTIME" || mode === "TIMETABLE_ONLY";
       }
 
       doEstimation = function(requestedLineIds) {
