@@ -33,6 +33,9 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Railway browser cross-page contract
+        run: node --test tests/railway-browser-contract.test.cjs
+
       - name: RunInfo semantic and identity tests
         run: |
           node tools/runinfo-evaluator.test.js
