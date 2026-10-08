@@ -180,9 +180,10 @@ def main():
     ):
         if 'window.DataLoader.retry()' not in src:
             new_errors.append('RECOVERY-001 CANONICAL_RETRY_MISSING %s' % rel)
-        for token in ('setFilterAvailability(false)', 'setFilterAvailability(true)'):
-            if token not in src:
-                new_errors.append('RECOVERY-001 FILTER_LIFECYCLE_MISSING %s %s' % (rel, token))
+        # Shared filter is mounted independently of data readiness; availability is
+        # no longer toggled by page-local loading state.
+        if 'OperatorFilterBar.mount' not in src:
+            new_errors.append('RECOVERY-001 FILTER_LIFECYCLE_MISSING %s' % rel)
     if 'window.addEventListener("pt:railway-ready"' not in realtime_view_src:
         new_errors.append('RECOVERY-001 REALTIME_LATE_CANONICAL_RECOVERY_MISSING')
     for token in (
@@ -219,7 +220,7 @@ def main():
             new_errors.append('COMPONENT-001 OPERATOR_FILTER_NOT_LOADED %s' % page)
     for rel in ('js/realtime-view.js', 'js/trains-page.js'):
         src = _read_arch(rel)
-        if 'window.OperatorFilterBar.create' not in src:
+        if 'window.OperatorFilterBar.mount' not in src and 'window.OperatorFilterBar.create' not in src:
             new_errors.append('COMPONENT-001 OPERATOR_FILTER_NOT_USED %s' % rel)
         if 'function sortOperators(' in src:
             new_errors.append('COMPONENT-001 PAGE_LOCAL_OPERATOR_SORT_REINTRODUCED %s' % rel)
@@ -259,7 +260,7 @@ def main():
         ('realtime', realtime_html, 'realtimeFilterBar', 'realtimeStatusContainer'),
         ('trains', trains_html, 'trainsFilterBar', 'trainsLineListContent'),
     ]:
-        shell_pattern = r'class="pixel-card rs-line-list-shell"[\\s\\S]*?id="' + filter_id + r'"[\\s\\S]*?id="' + list_id + r'"'
+        shell_pattern = r'id="' + filter_id + r'"[\\s\\S]*?class="pixel-card rs-line-list-shell"[\\s\\S]*?id="' + list_id + r'"'
         if not re.search(shell_pattern, page_src):
             new_errors.append('COMPONENT-003 LINE_LIST_SHELL_MISMATCH ' + page_name)
     if 'justify-content:center' not in style_src or '.rs-line-list-shell{padding:0;overflow:hidden;}' not in style_src:
