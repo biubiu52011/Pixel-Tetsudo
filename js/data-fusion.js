@@ -1392,13 +1392,17 @@
                   if (mEst && mEst.length > 0) {
                     if (!posMap[manualLineId]) posMap[manualLineId] = [];
                     var haveId = {};
-                    posMap[manualLineId].forEach(function(p) { if (p && _positionIdentity(p)) haveId[_positionIdentity(p)] = true; });
+                    posMap[manualLineId].forEach(function(p) {
+                      var id = p && _positionIdentity(p);
+                      if (id) haveId[id] = true;
+                    });
                     var mAdded = 0;
                     mEst.forEach(function(p) {
-                      if (p && _positionIdentity(p) && !haveId[_positionIdentity(p)] && mayUseTimetableEstimate(manualLineId, p)) {
+                      var id = p && _positionIdentity(p);
+                      if (id && !haveId[id] && mayUseTimetableEstimate(manualLineId, p)) {
                         p.positionSource = "station-timetable";
                         posMap[manualLineId].push(p);
-                        haveId[_positionIdentity(p)] = true;
+                        haveId[id] = true;
                         mAdded++;
                       }
                     });
