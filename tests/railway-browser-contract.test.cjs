@@ -53,4 +53,5 @@ test('trains detail hides the whole browser and restores it on return', () => {
   assert.match(js, /browser\.classList\.add\("hidden"\)/);
   assert.match(js, /browser\.classList\.remove\("hidden"\)/);
   assert.match(js, /filterLinesByOperator\(getLinesData\(\), _selectedOperator\)/);
+  assert.doesNotMatch(js, /_oldGroups|_freshGroups|_freshByOp/);
 });
