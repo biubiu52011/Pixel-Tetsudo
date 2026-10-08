@@ -183,7 +183,7 @@
 
     var chosen = null, chosenRank = -1;
     pool.forEach(function(item) {
-      var st = item.ev ? item.ev.status : parseStatus(item.rec);
+      var st = item.ev ? item.ev.status : parseStatus(item.rec, line);
       var rr = rank[st] == null ? 0 : rank[st];
       if (!chosen || rr > chosenRank) { chosen = item.rec; chosenRank = rr; }
     });
@@ -196,10 +196,11 @@
   }
 
   // ODPT record -> 概览状态（统一 Evidence Evaluator）
-  function parseStatus(rec) {
+  function parseStatus(rec, line) {
     if (!rec) return "unknown";
     if (window.RunInfoEvaluator) {
-      return evaluateRecord(rec).status;
+      var evaluated = evaluateRecord(rec, line);
+      return evaluated ? evaluated.status : "unknown";
     }
     return "info";
   }
@@ -353,7 +354,7 @@
     var primary = pickRecord(records, line);
     if (!primary) return null;
     var evaluated = evaluateRecord(primary, line);
-    return evaluated ? evaluated.status : parseStatus(primary);
+    return evaluated ? evaluated.status : parseStatus(primary, line);
   }
 
   function localFallback(lineId, lineObj) {
