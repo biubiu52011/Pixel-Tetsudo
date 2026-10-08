@@ -196,3 +196,13 @@ const resumedNotice=E.evaluate({messageKind:"notice",text:"工事が終了し、
 assert.strictEqual(resumedNotice.noticeClassification.phase,"ended_claim");
 assert.strictEqual(E.evaluate({messageKind:"realtime",structuredStatus:"Suspension",text:"全線で運転を見合わせています。"}).status,"suspended");
 console.log("runinfo notice classification: 9 PASS");
+
+// External cause stations must not be presented as affected intervals on this line.
+const externalCause = E.extractMetadata({text:"西武池袋線の所沢駅～西所沢駅間で踏切安全確認のため、副都心線全線でダイヤが乱れています。",lineStations:["和光市","小竹向原","池袋","新宿三丁目","渋谷"]});
+assert.strictEqual(externalCause.interval,"全線");
+assert.ok(externalCause.impacts.every(function(v){return !v.interval || v.interval === "全線";}));
+const scopedOwnLine = E.extractMetadata({text:"他社線A駅～B駅間の設備点検の影響により、池袋駅～渋谷駅間で遅れています。",lineStations:["池袋","渋谷"]});
+assert.ok(scopedOwnLine.impacts.some(function(v){return v.interval === "池袋駅→渋谷駅";}));
+const subsetTrains = E.extractMetadata({text:"他社線A駅～B駅間の影響で、一部の列車に遅れが出ています。",lineStations:["池袋","渋谷"]});
+assert.ok(subsetTrains.impacts.every(function(v){return !v.interval;}));
+console.log("runinfo external cause interval isolation: PASS");
