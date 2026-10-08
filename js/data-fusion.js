@@ -1739,10 +1739,10 @@
     if (_hasOdptTimetable(lineId)) return ensureManualTimetable(lineId);
     // One existing source lifecycle: ODPTClient owns the optional Supabase
     // read-through cache; a miss falls through to the existing manual path.
-    if (!window.ODPTClient || typeof window.ODPTClient.getCachedTrainRuns !== "function") return ensureManualTimetable(lineId);
+    if (!window.ODPTClient || typeof window.ODPTClient.getCachedTrainRuns !== "function") return Promise.reject(new Error("TrainRun SQL client unavailable: " + lineId));
     return window.ODPTClient.getCachedTrainRuns(lineId).then(function(rows) {
       // ODPT activation may have completed while the cache request was in flight.
-      if (!rows || !rows.length) return ensureManualTimetable(lineId);
+      if (!rows || !rows.length) throw new Error("TrainRun SQL timetable empty: " + lineId);
       if (window.TrainPositionEstimator && typeof window.TrainPositionEstimator.registerManualTimetable === "function") {
         window.TrainPositionEstimator.registerManualTimetable(lineId, rows);
       }
@@ -1768,7 +1768,10 @@
         fuseDirty([lineId]);
       } catch(err) { console.debug("[DataFusion] ensureTimetable refresh:", err.message); }
       return true;
-    }).catch(function() { return ensureManualTimetable(lineId); });
+    }).catch(function(err) {
+      console.error("[DataFusion] TrainRun SQL source failed for " + lineId + "; manual timetable fallback disabled:", err);
+      throw err;
+    });
   }
 
   function ensureManualTimetable(lineId) {
