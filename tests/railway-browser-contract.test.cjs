@@ -76,3 +76,10 @@ test('realtime operator selection never invokes an undefined structure signature
   assert.doesNotMatch(realtime, /structureSignature\(/);
   assert.match(realtime, /_renderedStatusSignatures = \{\};/);
 });
+
+test('trains language refresh replaces stale cards even for an empty selection', () => {
+  const js = read('js/trains-page.js');
+  assert.doesNotMatch(js, /if \(_linesNow && Object\.keys\(_linesNow\)\.length\)/);
+  assert.match(js, /DataState\.renderList\(_freshHost, _linesNow,/);
+  assert.match(js, /listEl\.innerHTML = _freshHost\.innerHTML;/);
+});
