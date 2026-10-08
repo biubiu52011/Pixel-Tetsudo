@@ -70,13 +70,14 @@
     window.DataState.renderList(container, linesObj, { mode: "realtime", lineOrder: lineOrderArr });
   }
 
-  function openModal(lineId, linesObj, expectedIdentity) {
+  function openModal(lineId, linesObj, expectedIdentity, displayTitle) {
     var modal = document.getElementById("lineDetailModal");
     if (!modal || !linesObj || !linesObj[lineId]) return;
     var line = linesObj[lineId];
     var actualIdentity = (window.DataState && window.DataState.getLineIdentity) ? window.DataState.getLineIdentity(line, lineId) : "";
     if (expectedIdentity && actualIdentity && expectedIdentity !== actualIdentity) return;
     _currentModalLine = lineId;
+    _currentModalTitle = displayTitle || "";
     _currentModalIdentity = actualIdentity;
     var delayInfo = getDelayInfo(line) || {};
     // Use window.DataState.getStatus for consistent NO_DATA handling
@@ -88,7 +89,7 @@
     var s = window.DataState && window.DataState.STATUS_META && window.DataState.STATUS_META[status] ? window.DataState.STATUS_META[status] : STATUS_META[status] || STATUS_META.no_data;
     var statusText = t("status." + status) || status;
     // Title
-    modal.querySelector(".rs-modal-title").textContent = getDisplayName(line) || tLine(line.id) || line.name;
+    modal.querySelector(".rs-modal-title").textContent = displayTitle || getDisplayName(line) || tLine(line.id) || line.name;
     // Status section
     var statusSection = modal.querySelector(".rs-status-section");
     statusSection.className = "rs-status-section rs-status-" + status;
@@ -308,6 +309,7 @@
   var _filterBar = null;
 
   let _currentModalLine = null;
+  let _currentModalTitle = "";
   let _currentModalIdentity = "";
   var _listStatusRefreshToken = 0;
 
@@ -632,7 +634,7 @@
       if (card && _latestLines) {
         clearSelectedCards();
         card.classList.add('selected');
-        openModal(card.dataset.line, _latestLines, card.dataset.lineIdentity || "");
+        openModal(card.dataset.line, _latestLines, card.dataset.lineIdentity || "", (card.querySelector(".rs-line-name") || {}).textContent || "");
       }
     });
     if (typeof window.onLanguageChange === "function") {
@@ -646,7 +648,7 @@
           setFilter(_selectedOperator);
         }
         if (_currentModalLine && _latestLines) {
-          openModal(_currentModalLine, _latestLines, _currentModalIdentity);
+          openModal(_currentModalLine, _latestLines, _currentModalIdentity, _currentModalTitle);
         }
       });
     }
