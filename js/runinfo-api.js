@@ -303,6 +303,9 @@
               impacts: evaluated && evaluated.impacts || [],
               messageKind: evaluated && evaluated.messageKind || "unknown",
               noticeClassification: evaluated && evaluated.noticeClassification || null,
+              cause: evaluated && evaluated.cause || null,
+              resume: evaluated && evaluated.resume || null,
+              serviceLevel: evaluated && evaluated.serviceLevel || null,
               links: ex.links,
               sourceUpdatedAt: sourceUpdatedAt,
               validUntil: validUntil,
@@ -347,7 +350,20 @@
         var d = lineObj.delayInfo;
         var raw = d.detail || d.cause || "";
         var ex = extractLinks(raw);
-        return { status: d.status || "info", text: ex.cleanText, links: ex.links, updatedAt: d.updatedAt || null, source: d.source || "local" };
+        return {
+          status: d.status || "info",
+          text: ex.cleanText,
+          interval: d.interval || null,
+          direction: d.direction || null,
+          effect: d.effect || null,
+          impacts: Array.isArray(d.impacts) ? d.impacts : [],
+          cause: d.cause || null,
+          resume: d.resume || null,
+          serviceLevel: d.serviceLevel || null,
+          links: ex.links,
+          updatedAt: d.updatedAt || null,
+          source: d.source || "local"
+        };
       }
       if (lineObj && lineObj.status) {
         var raw2 = lineObj.cause || "";

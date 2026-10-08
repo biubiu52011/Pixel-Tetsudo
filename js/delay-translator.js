@@ -83,6 +83,8 @@
     "上り線": { zh: "上行线", ko: "상행선", en: "upbound" },
     "内回り電車": { zh: "内环电车", ko: "내선 순환 전동차", en: "inner-loop trains" },
     "外回り電車": { zh: "外环电车", ko: "외선 순환 전동차", en: "outer-loop trains" },
+    "内回り": { zh: "内环", ko: "내선 순환", en: "inner-loop" },
+    "外回り": { zh: "外环", ko: "외선 순환", en: "outer-loop" },
     "一部列車": { zh: "部分列车", ko: "일부 열차", en: "some trains" },
     "全線": { zh: "全线", ko: "전 노선", en: "all lines" },
     "上下": { zh: "上下行", ko: "상하행", en: "both directions" },
@@ -268,6 +270,16 @@
       }
     },
     {
+      // 影响源 + 方向别延误（无主语）："...内での停止位置確認の影響で、下り線の一部列車に遅れが出ています"
+      // 必须在纯方向模板之前，避免只输出"下行线出现延误"而丢失原因。
+      re: /(.+?)(?:の影響で|の影響|のため|による)、(上り線|下り線|上下線|内回り(?:電車)?|外回り(?:電車)?)(?:の一部列車|の列車|の電車)?に(遅れが出ています|遅延しています)/,
+      build: function (m, lang) {
+        var src = _replaceFragment(m[1], lang);
+        var dir = _replaceFragment(m[2], lang);
+        return { zh: "因" + src + "，" + dir + "部分列车出现延误。", ko: src + "으로 인해 " + dir + " 일부 열차에 지연이 발생하고 있습니다.", en: "Some " + dir + " trains are delayed due to " + src + "." }[lang];
+      }
+    },
+    {
       // 方向別の遅延・見合わせ：上り/下り/内回り/外回り
       re: /(上り線|下り線|内回り(?:電車)?|外回り(?:電車)?)(?:の一部列車|の列車|の電車)?(?:で|に|は)?(?:一部列車に)?(遅れが出ています|遅延しています|運転を見合わせています|運転見合わせ|運転を中止しています)/,
       build: function (m, lang) {
@@ -388,6 +400,95 @@
     return { zh: prefix + act + "。", ko: prefix + act + "。", en: prefix + act + "." }[lang];
   }
 
+  function _percentText(serviceLevel) {
+    if (!serviceLevel || serviceLevel.minPercent == null) return "";
+    if (serviceLevel.maxPercent != null && serviceLevel.maxPercent !== serviceLevel.minPercent) {
+      return serviceLevel.minPercent + "%～" + serviceLevel.maxPercent + "%";
+    }
+    return serviceLevel.minPercent + "%";
+  }
+
+  function _directionLabel(direction, lang) {
+    var labels = {
+      zh: { up: "上行", down: "下行", both: "上下行", inner: "内环", outer: "外环" },
+      ko: { up: "상행", down: "하행", both: "상하행", inner: "내선 순환", outer: "외선 순환" },
+      en: { up: "upbound", down: "downbound", both: "both directions", inner: "inner-loop", outer: "outer-loop" }
+    };
+    return (labels[lang] && labels[lang][direction]) || "";
+  }
+
+  function _effectPhrase(effect, status, lang) {
+    var key = effect || (status === "normal" ? "normal" : (status === "suspended" ? "suspension" : (status === "delayed" ? "delay" : status)));
+    var labels = {
+      zh: { delay: "出现延误", suspension: "暂停运行", partial_cancellation: "有部分列车停运", through_suspension: "停止直通运行", normal: "正常运行", notice: "有运行通知", info: "有运行情报" },
+      ko: { delay: "지연이 발생하고 있습니다", suspension: "운전을 중단하고 있습니다", partial_cancellation: "일부 열차가 운휴합니다", through_suspension: "직통 운전을 중단하고 있습니다", normal: "정상 운행 중입니다", notice: "운행 안내가 있습니다", info: "운행 정보가 있습니다" },
+      en: { delay: "delays are occurring", suspension: "service is suspended", partial_cancellation: "some trains are cancelled", through_suspension: "through service is suspended", normal: "normal service", notice: "a service notice is in effect", info: "service information is available" }
+    };
+    return (labels[lang] && labels[lang][key]) || "";
+  }
+
+  function _scopeText(item, lang) {
+    if (!item) return "";
+    var parts = [];
+    if (item.interval) parts.push(_replaceFragment(String(item.interval).replace(/→/g, "〜"), lang));
+    var dir = _directionLabel(item.direction, lang);
+    if (dir) parts.push(dir);
+    return parts.join(lang === "en" ? ", " : "・");
+  }
+
+  function _structuredSummary(opts, lang) {
+    opts = opts || {};
+    var status = opts.status || "";
+    var lineName = opts.lineId && window.RailwayDB ? (window.RailwayDB.resolveLineName(opts.lineId, lang) || "") : "";
+    var cause = opts.cause ? _replaceFragment(opts.cause, lang) : "";
+    var impacts = Array.isArray(opts.impacts) ? opts.impacts.filter(function(x){ return x && (x.interval || x.direction || x.effect); }) : [];
+    var serviceLevel = _percentText(opts.serviceLevel);
+    var hasStructured = impacts.length || opts.interval || opts.direction || opts.effect || serviceLevel || opts.resume || (cause && (status === "delayed" || status === "suspended" || status === "notice" || status === "info"));
+    if (!hasStructured) return null;
+
+    var prefix = lineName ? lineName + (lang === "en" ? ": " : "：") : "";
+    var pieces = [];
+    if (serviceLevel) {
+      pieces.push({
+        zh: "约按正常班次的" + serviceLevel + "运行",
+        ko: "통상 운행 횟수의 약 " + serviceLevel + " 수준으로 운행합니다",
+        en: "operating at approximately " + serviceLevel + " of normal frequency"
+      }[lang]);
+    }
+
+    if (impacts.length) {
+      impacts.forEach(function(item) {
+        var scope = _scopeText(item, lang);
+        var effect = _effectPhrase(item.effect, status, lang);
+        if (!effect) return;
+        if (lang === "en") pieces.push(scope ? scope + ": " + effect : effect);
+        else pieces.push((scope ? scope + "：" : "") + effect);
+      });
+    } else {
+      var scopeOnly = _scopeText({ interval: opts.interval, direction: opts.direction }, lang);
+      var effectOnly = _effectPhrase(opts.effect, status, lang);
+      if (effectOnly) {
+        if (lang === "en") pieces.push(scopeOnly ? scopeOnly + ": " + effectOnly : effectOnly);
+        else pieces.push((scopeOnly ? scopeOnly + "：" : "") + effectOnly);
+      }
+    }
+
+    if (!pieces.length) return null;
+    var body = pieces.join(lang === "en" ? "; " : "。");
+    if (cause) {
+      if (lang === "zh") body = "因" + cause + "，" + body;
+      else if (lang === "ko") body = cause + "으로 인해 " + body;
+      else body = body + " due to " + cause;
+    }
+    if (opts.resume) {
+      var resume = _normTime(opts.resume, lang);
+      if (lang === "zh") body += "。预计恢复时间：" + resume;
+      else if (lang === "ko") body += "。운전 재개 예상: " + resume;
+      else body += "; estimated resumption: " + resume;
+    }
+    return prefix + body.replace(/。+/g, "。") + (lang === "en" ? "." : "。");
+  }
+
   // ---- 主入口 ----
   function translate(text, opts, lang) {
     lang = (lang || window.currentLang || "ja").toLowerCase();
@@ -404,6 +505,8 @@
         if (out) return { translated: out, matched: true };
       }
     }
+    var structured = _structuredSummary(opts, lang);
+    if (structured) return { translated: structured, matched: true, structured: true };
     // 2) Full-text fallback. Never replace the official body with a generic
     // status summary ("有运行情报" etc.). Translate every known fragment in
     // place and preserve all unmatched source text so no operational detail is

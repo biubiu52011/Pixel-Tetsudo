@@ -54,4 +54,28 @@ const illnessEn = ctx.window.DelayTranslator.translate("急病人救護の影響
 assert.ok(/passenger illness/i.test(illnessEn.translated) && /delay/i.test(illnessEn.translated), "passenger illness delay must retain translated operational semantics");
 const trackZh = ctx.window.DelayTranslator.translate("線路内立入の影響で、運転を見合わせています。", { status:"suspended", lineId:"Test" }, "zh");
 assert.ok(trackZh.translated.includes("人员进入线路") && trackZh.translated.includes("暂停运行"), "track intrusion suspension must translate locally");
-console.log("delay-translator live-20261006: 8 PASS");
+const structuredZh = ctx.window.DelayTranslator.translate("詳細は公式発表をご確認ください。", {
+  status: "notice",
+  lineId: "Test",
+  cause: "台風",
+  impacts: [
+    { interval: "千葉駅→成田駅", direction: "both", effect: "delay" },
+    { interval: "成田駅→成田空港駅", direction: "down", effect: "partial_cancellation" }
+  ],
+  serviceLevel: { minPercent: 50, maxPercent: 70 }
+}, "zh");
+assert.strictEqual(structuredZh.structured, true, "structured runinfo semantics must be preferred for complex free text");
+assert.ok(structuredZh.translated.includes("台风"), "structured cause must translate");
+assert.ok(structuredZh.translated.includes("50%～70%"), "structured service level must translate");
+assert.ok(structuredZh.translated.includes("延误") && structuredZh.translated.includes("停运"), "structured impacts must translate");
+assert.ok(!/公式発表|ご確認/.test(structuredZh.translated), "complex free text must not leak when structured semantics are available");
+const structuredEn = ctx.window.DelayTranslator.translate("公式発表をご確認ください。", {
+  status: "delayed",
+  cause: "停止位置確認",
+  interval: "新宿駅→中野駅",
+  direction: "up",
+  effect: "delay"
+}, "en");
+assert.ok(/stopping-position check/i.test(structuredEn.translated), "structured English cause must translate");
+assert.ok(/upbound/i.test(structuredEn.translated) && /delays/i.test(structuredEn.translated), "structured English direction/effect must translate");
+console.log("delay-translator live-20261006: 14 PASS");

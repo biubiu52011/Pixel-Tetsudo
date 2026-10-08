@@ -173,14 +173,14 @@
       causeHtml = '<span class="rs-text-muted">' + t("status.no_data") + '</span>';
     } else if (_cleanSrc) {
       _transSource = _cleanSrc;
-      causeHtml = _translatedText(_cleanSrc, window.currentLang || "ja", { cause: cause, status: status, lineId: lineId });
+      causeHtml = _translatedText(_cleanSrc, window.currentLang || "ja", _translationOpts(lineId, status, Object.assign({}, delayInfo, { cause: cause })));
     } else {
       causeHtml = '<span class="rs-text-muted">' + t("status.none") + '</span>';
     }
     var _bodyTextEl = causeSection.querySelector(".rs-cause-text");
     if (_bodyTextEl) {
       _bodyTextEl.innerHTML = causeHtml;
-      if (_cleanSrc) _upgradeBodyTranslation(_bodyTextEl, _cleanSrc, window.currentLang || "ja", { cause: cause, status: status, lineId: lineId }, lineId);
+      if (_cleanSrc) _upgradeBodyTranslation(_bodyTextEl, _cleanSrc, window.currentLang || "ja", _translationOpts(lineId, status, Object.assign({}, delayInfo, { cause: cause })), lineId);
     }
     // v4.3.964: 非官网来源的 URL 渲染为可点击链接行（正文保持纯文字）
     if (_exLinks.length > 0) {
@@ -268,12 +268,12 @@
         } else if (lang === "ja" || !_needsJaTranslate(r.text)) {
           causeHtml = escapeHtml(r.text);
         } else {
-          causeHtml = _translatedText(r.text, lang, { cause: fallbackCause || r.text, status: resolvedStatus, lineId: lineId });
+          causeHtml = _translatedText(r.text, lang, _translationOpts(lineId, resolvedStatus, Object.assign({}, r, { cause: r.cause || fallbackCause || "" })));
         }
         var textEl = causeSection.querySelector(".rs-cause-text");
         if (textEl) {
           textEl.innerHTML = causeHtml;
-          if (r.text) _upgradeBodyTranslation(textEl, r.text, lang, { cause: fallbackCause || r.text, status: resolvedStatus, lineId: lineId }, lineId);
+          if (r.text) _upgradeBodyTranslation(textEl, r.text, lang, _translationOpts(lineId, resolvedStatus, Object.assign({}, r, { cause: r.cause || fallbackCause || "" })), lineId);
         }
         // 清理旧的链接行再渲染
         var oldLinks = causeSection.querySelector(".rs-cause-links");
@@ -363,17 +363,39 @@
     return /[\u3041-\u3096\u30A1-\u30FA\u30FC]/.test(s) || /[駅]/.test(s) || /線内/.test(s);
   }
 
+  function _translationOpts(lineId, status, source) {
+    source = source || {};
+    return {
+      lineId: lineId,
+      status: status,
+      cause: source.cause || source.text || "",
+      interval: source.interval || null,
+      direction: source.direction || null,
+      effect: source.effect || null,
+      impacts: Array.isArray(source.impacts) ? source.impacts : [],
+      serviceLevel: source.serviceLevel || null,
+      resume: source.resume || null
+    };
+  }
+
+  function _untranslatedOfficialText(text) {
+    return '<div class="rs-cause-untranslated">'
+      + '<div class="rs-text-muted">' + escapeHtml(t("status.translation_unavailable") || t("status.no_data")) + '</div>'
+      + '<div class="rs-cause-original">' + escapeHtml(text) + '</div>'
+      + '</div>';
+  }
+
   // Non-Japanese UI renders the translated body only. The official Japanese
-  // source remains an internal factual input and is never exposed as a display
-  // fallback in another language.
+  // source is shown only when the local structured/template translator cannot
+  // safely translate the free text.
   function _translatedText(text, lang, opts) {
     var safe = escapeHtml(text);
     if (lang === "ja" || !_needsJaTranslate(text)) return safe;
-    if (!window.DelayTranslator) return '<span class="rs-text-muted">' + escapeHtml(t("status.translation_unavailable") || t("status.no_data")) + '</span>';
+    if (!window.DelayTranslator) return _untranslatedOfficialText(text);
     var r = window.DelayTranslator.translate(text, opts || {}, lang);
     var tr = r && r.translated ? r.translated : "";
     if (!tr || _needsJaTranslate(tr)) {
-      return '<span class="rs-text-muted">' + escapeHtml(t("status.translation_unavailable") || t("status.no_data")) + '</span>';
+      return _untranslatedOfficialText(text);
     }
     return '<div class="rs-cause-translated">' + escapeHtml(tr) + '</div>';
   }

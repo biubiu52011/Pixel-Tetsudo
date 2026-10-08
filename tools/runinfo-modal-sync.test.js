@@ -19,8 +19,16 @@ assert.ok(
   src.includes('if (!r.text) {'),
   "empty official detail must render an explicit empty-detail state"
 );
+assert.ok(
+  src.includes("function _translationOpts(lineId, status, source)"),
+  "modal translation must receive structured RunInfo/DataFusion semantics"
+);
+assert.ok(
+  src.includes("function _untranslatedOfficialText(text)"),
+  "untranslated free text must preserve the official Japanese source with a localized hint"
+);
 
-console.log("runinfo-modal-sync: 4 PASS");
+console.log("runinfo-modal-sync: 6 PASS");
 
 assert.ok(
   src.includes("function refreshListStatuses(linesObj)"),
@@ -52,14 +60,15 @@ assert.ok(
   "aggregated system cards must not be patched as ordinary single-line cards"
 );
 assert.ok(
-  src.includes("renderSystemCardByCode"),
+  src.includes("lineCard.updateSystem(systemCard, linesObj"),
   "aggregated system status changes must rerender only the affected system card"
 );
 console.log("runinfo-list-sync: 8 PASS");
 
 assert.ok(
-  (src.match(/if \(!scope\) return "";/g) || []).length >= 2,
-  "modal impact rendering must suppress empty-scope effect fragments"
+  src.includes("var scopeSummary = _scopeSummary(interval, impacts);") &&
+    src.includes("var refreshedScope = _scopeSummary(r.interval || \"\", refreshedImpacts);"),
+  "modal impact rendering must use concise scope summaries instead of empty effect fragments"
 );
 console.log("runinfo-impact-scope: PASS");
 
