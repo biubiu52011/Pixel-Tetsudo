@@ -94,3 +94,11 @@ test('realtime empty selection still refreshes operator choices', () => {
   assert.match(body, /renderFilterBar\(_latestLines\)/);
   assert.doesNotMatch(body, /Object\.keys\(filtered\)\.length === 0/);
 });
+
+test('realtime empty-card reconciliation clears stale status signatures', () => {
+  const js = read('js/realtime-view.js');
+  const start = js.indexOf('function reconcileRealtimeList(container, linesObj)');
+  assert.ok(start >= 0);
+  const body = js.slice(start, js.indexOf('function init()', start));
+  assert.match(body, /if \(!cards \|\| cards\.length === 0\) \{\s*renderFiltered\(\);\s*_renderedStatusSignatures = \{\};\s*return;/);
+});
