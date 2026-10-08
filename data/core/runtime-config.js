@@ -52,15 +52,15 @@
    * mode:
    *   FULL      - 已证明完整覆盖；禁止 timetable 生成/补充位置。
    *   HYBRID    - 历史兼容标签；不授权时刻表补位。
-   *   SEGMENTED - 只有声明区间的实时位置具权威性；区间外允许 timetable。
-   *   COARSE    - 实时源只能给出粗粒度位置；允许 timetable 提供更细位置，但不得覆盖
+   *   SEGMENTED - 声明实时位置覆盖区间；不自动授权时刻表补位。
+   *   COARSE    - 实时源只能给出粗粒度位置；不允许 timetable 替换
    *               同一列车已有的实时事实。
    *   UNKNOWN   - 覆盖能力未核实；禁止时刻表生成位置，必须显式指定来源。
    *
    * SEGMENTED fields:
    *   coveredSegments:  [{ fromStation, toStation }]  实时权威覆盖区间；区间内禁止 timetable 造位置。
    *   excludedSegments: [{ fromStation, toStation }]  已知实时缺口；缺口内允许 timetable 补位。
-   * 两者可并存：excludedSegments 优先。站 ID 无法解析时 fail-open，继续 timetable，避免误删列车。
+   * 区间仅用于标记 API 能力，不再授权时刻表位置回退。
    *
    * 合并不变量：
    *   1) 同一列车 realtime position 永远优先，timetable 只能补 metadata。
