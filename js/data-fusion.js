@@ -485,6 +485,12 @@
 
       var _rtPositions = (odptData.realtimePositions[lineId] || []).slice();
       var _ownStations = line.stations || [];
+      // Reuse station positions across shared-track and through-service checks.
+      // First occurrence wins, matching Array#indexOf on the original list.
+      var _ownStationIndex = new Map();
+      _ownStations.forEach(function(name, index) {
+        if (!_ownStationIndex.has(name)) _ownStationIndex.set(name, index);
+      });
       var _existingIds = {};
       _rtPositions.forEach(function(p) { var _id = _positionIdentity(p); if (_id) _existingIds[_id] = true; });
 
@@ -498,7 +504,7 @@
           var _stName = (p.stationId || '').split('.').pop();
           if (!window.SharedTrackPairs || !window.SharedTrackPairs.isSharedStation ||
               !window.SharedTrackPairs.isSharedStation(lineId, _stName)) return;
-          var _spIdx = _ownStations.indexOf(_stName);
+          var _spIdx = (_ownStationIndex.has(_stName) ? _ownStationIndex.get(_stName) : -1);
           if (_spIdx >= 0) {
             var _copy = Object.assign({}, p, { stationIndex: _spIdx, fusionLineId: _spLine });
             _rtPositions.push(_copy);
@@ -520,7 +526,7 @@
           var _pid = _positionIdentity(p);
           if (_pid && _existingIds[_pid]) return;
           var _stName = (p.stationId || '').split('.').pop();
-          var _tlIdx = _ownStations.indexOf(_stName);
+          var _tlIdx = (_ownStationIndex.has(_stName) ? _ownStationIndex.get(_stName) : -1);
           if (_tlIdx >= 0) {
             var _copy = Object.assign({}, p, { stationIndex: _tlIdx, fusionLineId: _tlLine });
             _rtPositions.push(_copy);
