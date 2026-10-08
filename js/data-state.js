@@ -198,7 +198,7 @@
   // 干线本名（非運行系統）不进线路一览；数据保留作换乘锚点/支线父线
   var TRUNK_MAIN_LINE_IDS = (window.RuntimeConfig && window.RuntimeConfig.TRUNK_MAIN_LINE_IDS) || [];
 
-  function renderList(container, linesObj, options) {
+  // Public LineList behavior: page controllers must not manipulate operator groups.\n  function setOperatorVisibility(container, operator) {\n    if (!container) return false;\n    var groups = container.querySelectorAll(".rs-operator-group[data-operator]");\n    if (!groups.length) return false;\n    Array.prototype.forEach.call(groups, function(group) {\n      var visible = !operator || group.getAttribute("data-operator") === operator;\n      group.style.display = visible ? "" : "none";\n    });\n    return true;\n  }\n\n  function filterLinesByOperator(lines, operator) {\n    if (!operator) return lines || {};\n    var filtered = {};\n    Object.keys(lines || {}).forEach(function(id) {\n      var line = lines[id];\n      if (!line) return;\n      var matches = operator === "JR-East"\n        ? (window.TransitConstants && window.TransitConstants.isJRERoute\n          ? window.TransitConstants.isJRERoute(line) : line.operator === "JR-East")\n        : line.operator === operator;\n      if (matches) filtered[id] = line;\n    });\n    return filtered;\n  }\n\n  function renderList(container, linesObj, options) {
     if (!container || !linesObj || typeof linesObj !== "object" || Object.keys(linesObj).length === 0) {
       container.innerHTML = '<div class="rs-empty">' + (typeof window.t === "function" ? window.t("status.no_trains") : "No data") + '</div>';
       return;
@@ -333,7 +333,7 @@
   window.DataState = {
     STATUS_META: STATUS_META,
     TRUNK_MAIN_LINE_IDS: TRUNK_MAIN_LINE_IDS,
-    renderList: renderList,
+    renderList: renderList,\n    setOperatorVisibility: setOperatorVisibility,\n    filterLinesByOperator: filterLinesByOperator,
     renderPageState: renderPageState,
     setPageStateRetry: setPageStateRetry,
     localizeInterval: function(str) { return window.LineCard.localizeInterval(str); },
