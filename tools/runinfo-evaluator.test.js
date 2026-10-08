@@ -181,3 +181,18 @@ assert.deepStrictEqual(genericSharedEffect.impacts,[
 let parenthesizedScope=E.extractMetadata({text:"X線（A駅～B駅間）は、設備点検の影響で、一部列車が運休となっています。"});
 assert.strictEqual(parenthesizedScope.impacts[0].interval,"A駅→B駅","line name and opening parenthesis must not leak into interval");
 console.log("runinfo-evaluator: generic scope PASS");
+
+
+const plannedConstruction=E.evaluate({messageKind:"notice",text:"来週末、集中工事に伴いA駅～B駅間の列車を運休します。"});
+assert.strictEqual(plannedConstruction.noticeClassification.subject,"construction");
+assert.strictEqual(plannedConstruction.noticeClassification.phase,"planned");
+assert.strictEqual(plannedConstruction.noticeClassification.currentStatusVerified,false);
+assert.strictEqual(plannedConstruction.symbol,"!");
+const recoveryNotice=E.evaluate({messageKind:"notice",text:"土砂崩れに伴う復旧工事のため、現在A駅～B駅間で運転を見合わせています。"});
+assert.strictEqual(recoveryNotice.noticeClassification.subject,"disaster_recovery");
+assert.strictEqual(recoveryNotice.noticeClassification.phase,"active_claim");
+assert.strictEqual(recoveryNotice.status,"notice"); // notice alone cannot certify current status
+const resumedNotice=E.evaluate({messageKind:"notice",text:"工事が終了し、運転を再開しました。"});
+assert.strictEqual(resumedNotice.noticeClassification.phase,"ended_claim");
+assert.strictEqual(E.evaluate({messageKind:"realtime",structuredStatus:"Suspension",text:"全線で運転を見合わせています。"}).status,"suspended");
+console.log("runinfo notice classification: 9 PASS");
