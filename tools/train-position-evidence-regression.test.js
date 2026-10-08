@@ -148,6 +148,11 @@ assert(!/isLoopDir && p\.destinationStation/.test(render),
 
 const trains=read("js/trains-data.js");
 const runtimePolicy=read("data/core/runtime-config.js");
+const odptClient=read("data/api/odpt-unified.js");
+assert(odptClient.includes('throw new Error("TrainRun SQL query failed:'),
+  "SQL failures must not silently become empty timetables");
+assert(!odptClient.includes('}).catch(function(){ return []; }).finally(function(){ delete _trainRunInflight[key]; });'),
+  "TrainRun SQL errors must propagate to callers");
 assert(/defaultMode:\s*"UNKNOWN"/.test(runtimePolicy),"unknown API coverage must fail closed");
 assert(/return mode === "NO_REALTIME" \|\| mode === "TIMETABLE_ONLY"/.test(fusion),"timetable position must require explicit non-realtime source assignment");
 assert(/function _isFreshRealtimePosition/.test(trains),"realtime freshness guard missing");
