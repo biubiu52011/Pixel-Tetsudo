@@ -195,8 +195,7 @@
       // A public holiday falling on Saturday takes Holiday precedence.
       if (day === 6) return ["odpt.Calendar:Saturday", "odpt.Calendar:SaturdayHoliday"];
       if (day === 0) return ["odpt.Calendar:Holiday", "odpt.Calendar:SaturdayHoliday", "odpt.Calendar:Sunday"];
-      return ["odpt.Calendar:Weekday", "odpt.Calendar:" +
-        ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][now.getDay()]];
+      return ["odpt.Calendar:Weekday"];
     } catch(e) { return ["odpt.Calendar:Weekday"]; }
   }
 
