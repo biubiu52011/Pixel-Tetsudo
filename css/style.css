@@ -209,3 +209,6 @@
     padding: clamp(12px, 4vw, 20px);
   }
 }
+
+/* Shared mobile LineCard presentation: used by realtime and trains. */
+@media(max-width:640px){.rs-line-card{padding:8px 10px;gap:var(--space-4);}.rs-line-name{font-size:12px;}.rs-operator-title{font-size:10px;}}
