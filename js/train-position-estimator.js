@@ -191,9 +191,12 @@
         if (published && published.has(dateKey.slice(5))) day = 0;
       }
       // Return array of matching calendar types
-      if (day === 6) return ["odpt.Calendar:Saturday", "odpt.Calendar:SaturdayHoliday", "odpt.Calendar:Holiday"];
+      // ODPT Holiday includes Sundays and public holidays, not ordinary Saturdays.
+      // A public holiday falling on Saturday takes Holiday precedence.
+      if (day === 6) return ["odpt.Calendar:Saturday", "odpt.Calendar:SaturdayHoliday"];
       if (day === 0) return ["odpt.Calendar:Holiday", "odpt.Calendar:SaturdayHoliday", "odpt.Calendar:Sunday"];
-      return ["odpt.Calendar:Weekday"];
+      return ["odpt.Calendar:Weekday", "odpt.Calendar:" +
+        ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][now.getDay()]];
     } catch(e) { return ["odpt.Calendar:Weekday"]; }
   }
 
