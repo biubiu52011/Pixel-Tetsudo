@@ -1583,6 +1583,8 @@
         // v4.3.489: 已由初始分批探测（ODPT_TT_PROBED）的线路不再重复请求——
         // JR 地方线 41 条 ODPT 无时刻表数据，标记后避免每次刷新都重试
         var probed = window.ODPT_TT_PROBED && window.ODPT_TT_PROBED[l.lineId];
+        // Timetable may be loaded as operation/vehicle evidence on any line,
+        // but position generation is gated independently by mayUseTimetableEstimate().
         return priorityOps.indexOf(l.operator) >= 0 && !_timetableLoading[l.lineId] && !probed;
       });
 
@@ -1614,7 +1616,11 @@
             });
           }
         }).catch(function(e) {
-          console.debug("[DataFusion] Failed to load timetable for", lineInfo.lineId, ":", e.message);
+          console.warn("[DataFusion] Timetable evidence unavailable for", lineInfo.lineId, ":", e.message);
+          // Failure is evidence of an unavailable source, never a signal to
+          // synthesize a position or switch to another location authority.
+        }).finally(function() {
+          delete _timetableLoading[lineInfo.lineId];
         });
       });
 
