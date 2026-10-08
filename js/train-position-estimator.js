@@ -12,7 +12,7 @@
 
   var ESTIMATOR_VERSION = 7;
   var _manualTimetableRegistry = {};
-  var _timetableIndexCache = { source: null, stamp: "", manualVersion: 0, builtManualVersion: -1, index: {} };
+  var _timetableIndexCache = { source: null, stamp: "", arrays: {}, manualVersion: 0, builtManualVersion: -1, index: {} };
   var _manualRegistryVersion = 0;
   // Cache station layouts by line object and station-array identity. Rebuild
   // when the source array changes; keep the compiled-run layout contract intact.
@@ -743,12 +743,17 @@
       // safe invalidation key for this read-only grouping index.
       var _src = odptTrains || {};
       var _stampParts = [];
+      var _sourceArrays = {};
+      var _sameArrays = true;
       Object.keys(_src).sort().forEach(function(op) {
-        _stampParts.push(op + ":" + (Array.isArray(_src[op]) ? _src[op].length : 0));
+        var rows = _src[op];
+        _stampParts.push(op + ":" + (Array.isArray(rows) ? rows.length : 0));
+        _sourceArrays[op] = rows;
+        if (_timetableIndexCache.arrays[op] !== rows) _sameArrays = false;
       });
       var _stamp = _stampParts.join("|");
       var _reuseIndex = _timetableIndexCache.source === _src &&
-        _timetableIndexCache.stamp === _stamp &&
+        _timetableIndexCache.stamp === _stamp && _sameArrays &&
         _timetableIndexCache.builtManualVersion === _manualRegistryVersion;
       var timetableIndex = _reuseIndex ? _timetableIndexCache.index : {};
       if (!_reuseIndex) {
@@ -787,6 +792,7 @@
         _timetableIndexCache = {
           source: _src,
           stamp: _stamp,
+          arrays: _sourceArrays,
           manualVersion: _manualRegistryVersion,
           builtManualVersion: _manualRegistryVersion,
           index: timetableIndex
