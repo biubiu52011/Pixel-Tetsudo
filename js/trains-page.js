@@ -414,19 +414,14 @@
           renderFilterBar(document.getElementById("trainsFilterBar"));
           if (listEl && detailEl && detailEl.classList.contains("hidden")) {
             var _scrollY = window.scrollY || window.pageYOffset || 0;
-            var _oldGroups = listEl.querySelectorAll(".rs-operator-group[data-operator]");
             var _freshHost = document.createElement("div");
             var _linesNow = window.DataState.filterLinesByOperator(getLinesData(), _selectedOperator);
             if (_linesNow && Object.keys(_linesNow).length) {
               var _orderNow = (window.LinePresentationService && window.UNIFIED_LINES) ? window.LinePresentationService.getDisplayOrder(window.UNIFIED_LINES) : [];
               window.DataState.renderList(_freshHost, _linesNow, { mode: "trains", lineOrder: _orderNow });
-              var _freshGroups = _freshHost.querySelectorAll(".rs-operator-group[data-operator]");
-              var _freshByOp = {};
-              Array.prototype.slice.call(_freshGroups).forEach(function(g) { _freshByOp[g.getAttribute("data-operator") || ""] = g; });
-              Array.prototype.slice.call(_oldGroups).forEach(function(g) {
-                var op = g.getAttribute("data-operator") || "";
-                if (_freshByOp[op]) g.replaceWith(_freshByOp[op]);
-              });
+              // Shared list owns its operator groups; swap the rendered content as one unit.
+              // Preserve the existing host and filter selection without a parallel group reconciler.
+              listEl.innerHTML = _freshHost.innerHTML;
               setFilter(_selectedOperator);
               if (_scrollY) window.scrollTo(0, _scrollY);
             }
