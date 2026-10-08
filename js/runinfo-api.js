@@ -107,7 +107,17 @@
     return "";
   }
 
-  function evaluateRecord(rec) {
+  function resolveCanonicalStation(name) {
+    var resolver = window.StationResolver;
+    if (!resolver || typeof resolver.resolve !== "function") return null;
+    var matches = resolver.resolve(name);
+    var exact = (matches || []).filter(function(item) {
+      return item && item.stationId && (item.status === "EXACT" || item.status === "ALIAS");
+    });
+    return exact.length === 1 ? exact[0].stationId : null;
+  }
+
+  function evaluateRecord(rec, line) {
     if (!rec || !window.RunInfoEvaluator) return null;
     return window.RunInfoEvaluator.evaluate({
       source: "odpt",
@@ -117,7 +127,9 @@
       suspension: rec["odpt:suspension"] === true,
       delay: rec["odpt:delay"] === true,
       delayMinutes: (typeof rec["odpt:delay"] === "number") ? rec["odpt:delay"] : null,
-      text: recordText(rec)
+      text: recordText(rec),
+      lineStations: line && Array.isArray(line.stations) && window.StationResolver ? line.stations : null,
+      resolveStationId: resolveCanonicalStation
     });
   }
 
@@ -141,7 +153,7 @@
     var rank = { suspended: 5, delayed: 4, info: 2, normal: 1, unknown: 0 };
     var realtime = [], notices = [];
     scoped.forEach(function(rec) {
-      var ev = evaluateRecord(rec);
+      var ev = evaluateRecord(rec, line);
       // Official structured status is valid current-state evidence even when
       // the operator omits human-readable text.
       var hasStructuredEvidence = !!(rec["odpt:trainInformationStatus"] ||
@@ -293,7 +305,7 @@
             var validUntil = primary["dct:valid"] || null;
             var timeOfOrigin = primary["odpt:timeOfOrigin"] || null;
             var fetchedAt = Date.now();
-            var evaluated = evaluateRecord(primary);
+            var evaluated = evaluateRecord(primary, lineObj);
             return {
               status: aggregateStatus(scoped, lineObj) || "info",
               text: ex.cleanText,
@@ -340,7 +352,7 @@
   function aggregateStatus(records, line) {
     var primary = pickRecord(records, line);
     if (!primary) return null;
-    var evaluated = evaluateRecord(primary);
+    var evaluated = evaluateRecord(primary, line);
     return evaluated ? evaluated.status : parseStatus(primary);
   }
 
