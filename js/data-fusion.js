@@ -213,14 +213,22 @@
   var LAST_GOOD_MAX_AGE_MS = 10 * 60 * 1000;
   var _lastGoodCacheRaw = null;
   var _lastGoodCacheParsed = {};
-  function getLastGoodDelay(lineId) {
+  // One storage snapshot per fusion pass; avoid synchronous localStorage reads
+  // for every line in a network-wide or dirty-line reconciliation.
+  var _lastGoodFusionSnapshot = null;
+  function readLastGoodSnapshot() {
     try {
       var raw = localStorage.getItem(LAST_GOOD_KEY) || "{}";
       if (raw !== _lastGoodCacheRaw) {
         _lastGoodCacheParsed = JSON.parse(raw);
         _lastGoodCacheRaw = raw;
       }
-      var v = _lastGoodCacheParsed[lineId];
+      return _lastGoodCacheParsed;
+    } catch(e) { return {}; }
+  }
+  function getLastGoodDelay(lineId) {
+    try {
+      var v = (_lastGoodFusionSnapshot || readLastGoodSnapshot())[lineId];
       if (!v || !v.r || !v.r.status || !v.t) return null;
       if ((Date.now() - v.t) > LAST_GOOD_MAX_AGE_MS) return null;
       var st = v.r.status;
@@ -545,6 +553,7 @@
     try {
       var dlLines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : null;
       if (!_lastFusedData || !_lastFusedData.lines || !dlLines) return fuseAll();
+      _lastGoodFusionSnapshot = readLastGoodSnapshot();
       var dirtyIds = _expandDirtyLines(seedIds, dlLines);
       if (dirtyIds.length === 0) return _lastFusedData;
       // If dependency expansion reaches most of the network, a single full pass
@@ -562,9 +571,11 @@
         odptOperatorsLoaded: Object.keys(odptData.delayInfo).length
       });
       emitUpdate(fusedData);
+      _lastGoodFusionSnapshot = null;
       _perfRecord("fuseDirty", _perfStart, { seeds: (seedIds || []).length, dirty: dirtyIds.length });
       return fusedData;
     } catch(e) {
+      _lastGoodFusionSnapshot = null;
       _perfRecord("fuseDirty:error", _perfStart, { seeds: (seedIds || []).length });
       console.debug("[DataFusion] fuseDirty fallback:", e.message);
       return fuseAll();
@@ -574,6 +585,7 @@
   function fuseAll() {
     var _perfStart = _perfNow();
     try {
+      _lastGoodFusionSnapshot = readLastGoodSnapshot();
       var fusedLines = {};
       var allLineIds = {};
       var dlLines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : null;
@@ -585,9 +597,10 @@
       });
       var fusedData = { version: FUSION_VERSION, timestamp: new Date().toISOString(), lines: fusedLines, lineOrder: (window.LinePresentationService && dlLines) ? window.LinePresentationService.getDisplayOrder(dlLines) : Object.keys(allLineIds), odptOperatorsLoaded: Object.keys(odptData.delayInfo).length, totalLines: Object.keys(allLineIds).length };
       emitUpdate(fusedData);
+      _lastGoodFusionSnapshot = null;
       _perfRecord("fuseAll", _perfStart, { lines: Object.keys(fusedLines).length });
       return fusedData;
-    } catch(e) { _perfRecord("fuseAll:error", _perfStart); console.error("[DataFusion] fuseAll error:", e.message); if (_lastFusedData) { emitUpdate(_lastFusedData); return _lastFusedData; } return null; }
+    } catch(e) { _lastGoodFusionSnapshot = null; _perfRecord("fuseAll:error", _perfStart); console.error("[DataFusion] fuseAll error:", e.message); if (_lastFusedData) { emitUpdate(_lastFusedData); return _lastFusedData; } return null; }
   }
 
   // v4.3.416: ODPT 站 ID 与项目站表拼写差异别名（项目冻结数据不动，仅匹配层转换）
