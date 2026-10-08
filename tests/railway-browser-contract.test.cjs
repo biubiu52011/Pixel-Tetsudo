@@ -47,3 +47,10 @@ test('realtime selection is scoped and history mount is stable', () => {
   assert.match(html, /id="historyContainer"/);
   assert.doesNotMatch(html, /id="historyEmpty"|id="historyList"/);
 });
+
+test('trains detail hides the whole browser and restores it on return', () => {
+  const js = read('js/trains-page.js');
+  assert.match(js, /browser\.classList\.add\("hidden"\)/);
+  assert.match(js, /browser\.classList\.remove\("hidden"\)/);
+  assert.match(js, /filterLinesByOperator\(getLinesData\(\), _selectedOperator\)/);
+});
