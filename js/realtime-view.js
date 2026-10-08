@@ -505,8 +505,9 @@
     if (!cards || cards.length === 0) { renderFiltered(); return; }
     var changed = [];
     var next = {};
-    Object.keys(linesObj || {}).forEach(function(id) {
-      next[id] = statusSignature(linesObj[id]);
+    var visibleLines = window.DataState.filterLinesByOperator(linesObj, _selectedOperator);
+    Object.keys(visibleLines || {}).forEach(function(id) {
+      next[id] = statusSignature(visibleLines[id]);
       if (_renderedStatusSignatures[id] !== next[id]) changed.push(id);
     });
     var oldIds = Object.keys(_renderedStatusSignatures);
