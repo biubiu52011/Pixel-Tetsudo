@@ -428,7 +428,7 @@
       return;
     }
     // Force the next live snapshot to reconcile the newly visible cards.
-    // The former structureSignature() call referenced a nonexistent function.
+    // The former structure-signature call referenced a nonexistent function.
     _renderedStatusSignatures = {};
   }
 
