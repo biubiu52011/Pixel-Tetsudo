@@ -149,6 +149,10 @@ assert(!/isLoopDir && p\.destinationStation/.test(render),
 const trains=read("js/trains-data.js");
 const runtimePolicy=read("data/core/runtime-config.js");
 const odptClient=read("data/api/odpt-unified.js");
+assert(!fusion.includes('}).catch(function() { return ensureManualTimetable(lineId); });'),
+  "SQL failure must not silently switch to manual timetable positioning");
+assert(fusion.includes('manual timetable fallback disabled:'),
+  "SQL source failure must remain observable");
 assert(odptClient.includes('throw new Error("TrainRun SQL query failed:'),
   "SQL failures must not silently become empty timetables");
 assert(!odptClient.includes('}).catch(function(){ return []; }).finally(function(){ delete _trainRunInflight[key]; });'),
