@@ -102,3 +102,16 @@ test('realtime empty-card reconciliation clears stale status signatures', () => 
   const body = js.slice(start, js.indexOf('function init()', start));
   assert.match(body, /if \(!cards \|\| cards\.length === 0\) \{\s*renderFiltered\(\);\s*_renderedStatusSignatures = \{\};\s*return;/);
 });
+
+test('realtime official statuses update incrementally instead of waiting for every operator', () => {
+  const js = read('js/realtime-view.js');
+  const start = js.indexOf('function refreshListStatuses(linesObj)');
+  const end = js.indexOf('function escapeHtml(s)', start);
+  assert.ok(start >= 0 && end > start);
+  const body = js.slice(start, end);
+  assert.doesNotMatch(body, /Promise\.all\(/);
+  assert.match(body, /Promise\.resolve\(window\.RunInfoAPI\.query\(lineId, line\)\)/);
+  assert.match(body, /queueChange\(lineId\)/);
+  assert.match(body, /setTimeout\(flushChanges, 100\)/);
+  assert.match(body, /token !== _listStatusRefreshToken/);
+});
