@@ -820,6 +820,15 @@
       // Snapshot-local lookup avoids scanning all previously placed trains
       // for every incoming record; preserve the original first-match behavior.
       var _positionIndexByLine = Object.create(null);
+      // Build the ODPT railway-code reverse lookup once per position snapshot.
+      // Keep source key order so ambiguous-code selection remains unchanged.
+      var _railwayCodeLines = Object.create(null);
+      var _railwayCodes = window.ODPTClient && window.ODPTClient.LINE_RAILWAY_CODE;
+      if (_railwayCodes) Object.keys(_railwayCodes).forEach(function(id) {
+        var code = _railwayCodes[id];
+        if (!_railwayCodeLines[code]) _railwayCodeLines[code] = [];
+        _railwayCodeLines[code].push(id);
+      });
       odptData.trains = {};
       // Snapshot-scoped: incomplete realtime evidence must not leak into later
       // polls after the source record disappears.
@@ -917,13 +926,7 @@
               // v4.3.437: 先用 LINE_RAILWAY_CODE 反查 odpt railway 短名 → 项目线 key 列表
               // （如 SaikyoKawagoe→[Saikyo,Kawagoe]、Kawagoe→[KawagoeWest]），集合匹配比
               // 子串猜测更准——避免川越〜高麗川的 Kawagoe 数据错配到大宮〜川越段。
-              var mappedLids = [];
-              var _rwc = window.ODPTClient && window.ODPTClient.LINE_RAILWAY_CODE;
-              if (_rwc) {
-                Object.keys(_rwc).forEach(function(k) {
-                  if (_rwc[k] === railwayName) mappedLids.push(k);
-                });
-              }
+              var mappedLids = _railwayCodeLines[railwayName] || [];
               for (var i = 0; i < matchingLines.length; i++) {
                 var ml = matchingLines[i];
                 if (mappedLids.length > 0) {
