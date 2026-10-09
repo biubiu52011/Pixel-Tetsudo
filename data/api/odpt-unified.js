@@ -1467,10 +1467,19 @@
                 var delayFresh = !!(delayRec && delayRec.ts && (now - delayRec.ts) <= RAW_REALTIME_FRESH_MS && delayRec.data && typeof delayRec.data === 'object');
                 var posFresh = !!(posRec && posRec.ts && (now - posRec.ts) <= RAW_REALTIME_FRESH_MS && posRec.data && typeof posRec.data === 'object');
                 if (delayFresh) window.ODPT_DELAY_DATA = delayRec.data;
+                var restoredPositions = false;
                 if (posFresh) {
-                    window.ODPT_TRAIN_POSITIONS = posRec.data;
+                    window.ODPT_TRAIN_POSITIONS = window.ODPT_TRAIN_POSITIONS || {};
+                    Object.keys(posRec.data).forEach(function(op) {
+                        // Cache restoration must never overwrite an operator whose
+                        // live request has already started, including failed requests.
+                        if (window.ODPT_POSITION_REQUEST_STATUS && window.ODPT_POSITION_REQUEST_STATUS[op]) return;
+                        if (Object.prototype.hasOwnProperty.call(window.ODPT_TRAIN_POSITIONS, op)) return;
+                        window.ODPT_TRAIN_POSITIONS[op] = posRec.data[op];
+                        restoredPositions = true;
+                    });
                 }
-                if (delayFresh || posFresh) pushCachedRealtime(delayFresh, posFresh);
+                if (delayFresh || restoredPositions) pushCachedRealtime(delayFresh, restoredPositions);
             }).catch(function(e) {
                 console.debug("[ODPT] loadRawRealtimeCache error:", e.message);
             });
