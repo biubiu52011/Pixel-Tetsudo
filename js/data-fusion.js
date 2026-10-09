@@ -1686,8 +1686,8 @@
         try {
           var h = (window.location.hash || "").replace(/^#/, "");
           var isTrainsPage = (window.location.pathname || "").indexOf("trains.html") >= 0;
-          if (isTrainsPage && h && window.DataFusion && window.DataFusion.ensureManualTimetable) {
-            window.DataFusion.ensureManualTimetable(h).catch(function(e) {
+          if (isTrainsPage && h && window.DataFusion && window.DataFusion.ensureTimetable) {
+            window.DataFusion.ensureTimetable(h).catch(function(e) {
               console.debug("[DataFusion] auto-ensure manual skip:", h, e.message);
             });
           }
@@ -1747,7 +1747,14 @@
     // activateRealtimeLines() owns ODPT network loading. If that path already
     // populated this line, do not start a second timetable source request here;
     // only lazy-load manual evidence (vehicleType etc.) on top of the shared rows.
-    if (_hasOdptTimetable(lineId)) return ensureManualTimetable(lineId);
+    // Only upstream-API lines need extra local vehicle evidence.
+    // A timetable loaded from SQL must not trigger the duplicate JS import path.
+    if (_hasOdptTimetable(lineId)) {
+      var _apiOp = window.ODPTClient && window.ODPTClient.LINE_TO_OPERATOR && window.ODPTClient.LINE_TO_OPERATOR[lineId];
+      if (_apiOp && window.ODPTClient.ENDPOINTS && window.ODPTClient.ENDPOINTS[_apiOp] && window.ODPTClient.ENDPOINTS[_apiOp].trainTimetable) {
+        return ensureManualTimetable(lineId);
+      }
+    }
     // One existing source lifecycle: ODPTClient owns the optional Supabase
     // read-through cache; a miss falls through to the existing manual path.
     if (!window.ODPTClient || typeof window.ODPTClient.getCachedTrainRuns !== "function") return ensureManualTimetable(lineId);
