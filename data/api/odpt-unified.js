@@ -1450,7 +1450,7 @@
     function persistRawRealtime(delayOnly) {
         try {
             if (!window.RTCache || !window.RTCache.put) return;
-            window.RTCache.put('rawDelay', { ts: Date.now(), data: window.ODPT_DELAY_DATA });
+            window.RTCache.put('rawDelay', { ts: Date.now(), data: window.ODPT_DELAY_DATA, operatorTs: window.ODPT_DELAY_SNAPSHOT_AT || {} });
             // 位置仅在非惰性模式写——lazy（home）不拉 positions，写空会覆盖 trains 页刚落的真实位置
             if (!delayOnly) {
                 window.RTCache.put('rawPositions', { ts: Date.now(), data: window.ODPT_TRAIN_POSITIONS, operatorTs: window.ODPT_POSITION_SNAPSHOT_AT || {} });
@@ -1476,8 +1476,12 @@
                     Object.keys(delayRec.data).forEach(function(op) {
                         if (window.ODPT_DELAY_REQUEST_STARTED && window.ODPT_DELAY_REQUEST_STARTED[op]) return;
                         if (Object.prototype.hasOwnProperty.call(window.ODPT_DELAY_DATA, op)) return;
-                        if (delayRec.data[op] !== null && !Array.isArray(delayRec.data[op])) return;
+                        var operatorTs = delayRec.operatorTs && delayRec.operatorTs[op];
+                        if (!Number.isFinite(operatorTs) || operatorTs > now || now - operatorTs > RAW_REALTIME_FRESH_MS) return;
+                        if (!Array.isArray(delayRec.data[op])) return;
                         window.ODPT_DELAY_DATA[op] = delayRec.data[op];
+                        window.ODPT_DELAY_SNAPSHOT_AT = window.ODPT_DELAY_SNAPSHOT_AT || {};
+                        window.ODPT_DELAY_SNAPSHOT_AT[op] = operatorTs;
                         restoredDelay = true;
                     });
                 }
@@ -1605,6 +1609,7 @@
         window.ODPT_POSITION_REQUEST_STATUS = window.ODPT_POSITION_REQUEST_STATUS || {};
         var delayPromises = [], posPromises = [];
         window.ODPT_DELAY_REQUEST_STARTED = window.ODPT_DELAY_REQUEST_STARTED || {};
+        window.ODPT_DELAY_SNAPSHOT_AT = window.ODPT_DELAY_SNAPSHOT_AT || {};
         var positionRequestIds = {};
 
         ops.forEach(function(op) {
@@ -1622,9 +1627,11 @@
                         // v4.3.386: 保留全部记录（ODPT 按运行系统返回多条，data[0] 只留首条会丢其他线路的延误）
                         // v4.3.392: 成功即写入（空数组=确认无记录→UI normal）；失败标记 null（→UI 情報なし，不伪装成正常）
                         window.ODPT_DELAY_DATA[op] = (data && data.length > 0) ? data : [];
+                        window.ODPT_DELAY_SNAPSHOT_AT[op] = Date.now();
                         loaded.delay++;
                     }).catch(function(e) {
                         window.ODPT_DELAY_DATA[op] = null;
+                        delete window.ODPT_DELAY_SNAPSHOT_AT[op];
                         console.debug("[ODPT] " + op + " trainInformation fetch failed:", e && e.message);
                     })
                 );
