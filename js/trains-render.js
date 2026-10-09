@@ -584,7 +584,17 @@ function _rememberTrainArtworkFailure(trainUid) {
         }
       }
       var parts = [];
-      if (expiredRealtime) parts.push(t("trains.realtime_expired_note") || "ODPT realtime position expired");
+      if (expiredRealtime) {
+        var _expiredText = t("trains.realtime_expired_note");
+        if (!_expiredText || _expiredText === "trains.realtime_expired_note") {
+          var _statusLang = String(window.currentLang || "ja").toLowerCase();
+          _expiredText = _statusLang.indexOf("zh") === 0 ? "ODPT 实时位置已过期" :
+            _statusLang.indexOf("ko") === 0 ? "ODPT 실시간 위치 정보가 만료되었습니다" :
+            _statusLang.indexOf("en") === 0 ? "ODPT realtime position expired" :
+            "ODPTのリアルタイム位置情報が期限切れです";
+        }
+        parts.push(_expiredText);
+      }
       if (anyRealtime && latestRealtimeAt) {
         parts.push("ODPT " + _formatSourceTime(latestRealtimeAt));
       }
