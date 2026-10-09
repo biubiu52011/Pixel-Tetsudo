@@ -172,6 +172,10 @@ assert(renderer.includes('_request.state === "ok" && _request.assigned === true 
 assert(odptClient.includes('if (!window.ODPT_TRAIN_POSITIONS) window.ODPT_TRAIN_POSITIONS = {};') &&
        !odptClient.includes('if (!window.ODPT_TRAIN_POSITIONS || !positionOperators)'),
   "full ODPT refresh must not clear all operator position snapshots");
+assert(odptClient.includes('Number.isFinite(delayRec.ts) && delayRec.ts <= now') &&
+       odptClient.includes('Number.isFinite(posRec.ts) && posRec.ts <= now') &&
+       odptClient.includes('!Array.isArray(posRec.data)'),
+  "raw realtime cache must reject future timestamps and malformed position maps");
 assert(odptClient.includes('window.ODPT_POSITION_REQUEST_STATUS[op]) return;') &&
        odptClient.includes('restoredPositions = true;') &&
        !odptClient.includes('window.ODPT_TRAIN_POSITIONS = posRec.data;'),
