@@ -166,9 +166,11 @@ const odptClient=read("data/api/odpt-unified.js");
 assert(odptClient.includes('window.ODPT_POSITION_REQUEST_STATUS[op] = { state: "loading"') &&
        odptClient.includes('state: "error"') && odptClient.includes('"ok" : "empty"'),
   "ODPT must distinguish loading, error and successful empty responses");
-assert(renderer.includes('_request.state === "ok" && !anyRealtime') &&
+assert(renderer.includes('_request.state === "ok" && _request.assigned === true && !anyRealtime') &&
        renderer.includes('该线路暂无 ODPT 实时位置记录'),
   "operator success without line records must have its own status");
+assert(odptClient.includes('status.assigned = true;'),
+  "ODPT line absence must wait for position assignment");
 assert(renderer.includes('ODPTの位置情報を取得できません') && renderer.includes('ODPT 未返回位置数据'),
   "train map must expose localized request failure and empty response states");
 
