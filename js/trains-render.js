@@ -592,6 +592,10 @@ function _rememberTrainArtworkFailure(trainUid) {
         }
       }
       var parts = [];
+      // A successful operator response may contain other railways but no
+      // records for this specific line. Do not label it as an operator outage.
+      var _lineResponseMissing = _request && _request.state === "ok" && !anyRealtime && !expiredRealtime &&
+        !positions.some(function(p) { return p && p.positionSource === "realtime-api"; });
       if (_request && (_request.state === "error" || _request.state === "loading" || _request.state === "empty") && !anyRealtime) {
         var _statusLang = String(window.currentLang || "ja").toLowerCase();
         var _messages = {
@@ -601,6 +605,13 @@ function _rememberTrainArtworkFailure(trainUid) {
         };
         var _li = _statusLang.indexOf("zh") === 0 ? 1 : _statusLang.indexOf("ko") === 0 ? 2 : _statusLang.indexOf("en") === 0 ? 3 : 0;
         parts.push(_messages[_request.state][_li]);
+      }
+      if (_lineResponseMissing) {
+        var _missingLang = String(window.currentLang || "ja").toLowerCase();
+        parts.push(_missingLang.indexOf("zh") === 0 ? "该线路暂无 ODPT 实时位置记录" :
+          _missingLang.indexOf("ko") === 0 ? "이 노선의 ODPT 실시간 위치 기록이 없습니다" :
+          _missingLang.indexOf("en") === 0 ? "No ODPT realtime position records for this line" :
+          "この路線のODPTリアルタイム位置情報はありません");
       }
       if (expiredRealtime) {
         var _expiredText = t("trains.realtime_expired_note");
