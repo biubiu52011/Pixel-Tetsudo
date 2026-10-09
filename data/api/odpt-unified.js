@@ -1590,7 +1590,8 @@
 
     function loadRealtimeData(delayOnly, positionOperators, skipDelayRefresh) {
         validateAuthoritativeRealtimeConfig();
-        if (!skipDelayRefresh || !window.ODPT_DELAY_DATA) window.ODPT_DELAY_DATA = {};
+        // Preserve other operators while their refresh requests are pending.
+        if (!window.ODPT_DELAY_DATA) window.ODPT_DELAY_DATA = {};
         // Preserve per-operator snapshots during both full and on-demand polls.
         // A failed or empty request replaces only its own operator's snapshot;
         // clearing all operators here makes healthy lines disappear mid-refresh.
@@ -1613,7 +1614,11 @@
             if (!skipDelayRefresh && ep.trainInformation) {
                 window.ODPT_DELAY_REQUEST_STARTED[op] = true;
                 delayPromises.push(
-                    fetchODPT(buildUrl(op, 'trainInformation')).then(extractData).then(function(data) {
+                    fetchODPT(buildUrl(op, 'trainInformation'), true).then(function(result) {
+                        var data = extractData(result);
+                        if (!result || !Array.isArray(data)) throw new Error('Invalid ODPT train information payload');
+                        return data;
+                    }).then(function(data) {
                         // v4.3.386: 保留全部记录（ODPT 按运行系统返回多条，data[0] 只留首条会丢其他线路的延误）
                         // v4.3.392: 成功即写入（空数组=确认无记录→UI normal）；失败标记 null（→UI 情報なし，不伪装成正常）
                         window.ODPT_DELAY_DATA[op] = (data && data.length > 0) ? data : [];
