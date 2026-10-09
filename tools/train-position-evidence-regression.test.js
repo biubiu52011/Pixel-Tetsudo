@@ -179,6 +179,10 @@ assert(odptClient.includes('if (propagateError) return rateLimitedFetch(url);') 
        odptClient.includes("fetchODPT(buildUrl(op, 'train'), true)") &&
        odptClient.includes('state: "error"'),
   "ODPT position network failures must propagate instead of being classified as empty");
+assert(odptClient.includes('delayNow - ts > RAW_REALTIME_FRESH_MS') &&
+       odptClient.includes('delete window.ODPT_DELAY_DATA[op];') &&
+       odptClient.includes('window.ODPT_DELAY_REQUEST_STARTED[op]) return;'),
+  "cached train information must be revalidated after fusion readiness wait");
 assert(odptClient.includes('operatorTs: window.ODPT_DELAY_SNAPSHOT_AT || {}') &&
        odptClient.includes('delayRec.operatorTs && delayRec.operatorTs[op]') &&
        odptClient.includes('window.ODPT_DELAY_SNAPSHOT_AT[op] = operatorTs;'),
