@@ -92,8 +92,8 @@ async function persistOdptRows(db: any, source: any, lineId: string, serviceDate
         stop_sequence: index,
         station_key: stationKey(urn),
         station_urn: urn,
-        arrival_time: stop["odpt:arrivalTime"] || null,
-        departure_time: stop["odpt:departureTime"] || null,
+        arrival_time: stop["odpt:arrivalTime"] ? String(stop["odpt:arrivalTime"]).replace(/^([2-4][0-9]):/, (_m: string, h: string) => String(Number(h) % 24).padStart(2, "0") + ":") : null,
+        departure_time: stop["odpt:departureTime"] ? String(stop["odpt:departureTime"]).replace(/^([2-4][0-9]):/, (_m: string, h: string) => String(Number(h) % 24).padStart(2, "0") + ":") : null,
         arrival_minute: minuteOf(stop["odpt:arrivalTime"]),
         departure_minute: minuteOf(stop["odpt:departureTime"]),
       };
