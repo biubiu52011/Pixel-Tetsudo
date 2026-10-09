@@ -1735,7 +1735,10 @@
                     // the batch whose callback survived an overlapping readiness wait.
                     Object.keys(window.ODPT_POSITION_REQUEST_STATUS || {}).forEach(function(op) {
                         var status = window.ODPT_POSITION_REQUEST_STATUS[op];
-                        if (status && (status.state === "ok" || status.state === "empty")) status.assigned = true;
+                        var currentSnapshot = window.ODPT_POSITION_SNAPSHOT_AT && window.ODPT_POSITION_SNAPSHOT_AT[op];
+                        // Only acknowledge completed snapshots, never in-flight or failed generations.
+                        if (status && (status.state === "ok" || status.state === "empty") &&
+                            Number.isFinite(currentSnapshot) && currentSnapshot <= status.at) status.assigned = true;
                     });
                 } catch(e) { console.debug("[ODPT] train positions push error:", e.message); }
                 console.debug("[ODPT] Realtime positions pushed:", loaded.positions, "operators");
