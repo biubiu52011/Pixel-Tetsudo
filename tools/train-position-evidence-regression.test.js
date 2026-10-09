@@ -183,6 +183,9 @@ assert(odptClient.includes('!Array.isArray(result) && !(result && Array.isArray(
        odptClient.includes('Invalid ODPT train position payload') &&
        odptClient.includes('Invalid ODPT train information payload'),
   "malformed ODPT object payloads must be rejected rather than classified as empty successful responses");
+assert(renderer.includes('_p.positionSource === "train-timetable" || _p.positionSource === "station-timetable"') &&
+       !renderer.includes('else if (_rank === 1 || _rank === 2) {\n          anyEst = true;'),
+  "timetable estimate notice must require explicit timetable provenance, not an inferred rank");
 assert(odptClient.includes('if (existing) clearTimeout(existing);') &&
        odptClient.includes('Object.keys(window.ODPT_POSITION_REQUEST_STATUS || {}).forEach(function(op)') &&
        !odptClient.includes('if (existing) return;'),
