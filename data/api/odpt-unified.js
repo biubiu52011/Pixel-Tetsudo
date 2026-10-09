@@ -666,7 +666,7 @@
         return {
             "@id":"supabase:TrainRun:"+run.id,
             "odpt:trainNumber":run.train_number||"",
-            "odpt:railway":run.network_key||run.line_id||"",
+            "odpt:railway":run.network_key && String(run.network_key).indexOf("odpt.Railway:")===0 ? run.network_key : "odpt.Railway:" + String(run.operator||LINE_TO_OPERATOR[run.line_id]||"") + "." + String(run.network_key||LINE_RAILWAY_CODE[run.line_id]||run.line_id||""),
             "odpt:calendar":({
                 weekday:"odpt.Calendar:Weekday",
                 saturday:"odpt.Calendar:Saturday",
@@ -1687,7 +1687,7 @@
     // ChuoSobuLocal 1196 / KeihinTohoku 1263（合并后全量，各日历分片均 <1000）。
     // 供全量加载（collectTimetableByRailway）与按需查询（getCompleteTimetable）共用。
     function splitTruncatedByCalendar(op, lid) {
-        var CAL_SPLIT = ['odpt.Calendar:Weekday', 'odpt.Calendar:SaturdayHoliday', 'odpt.Calendar:Holiday'];
+        var CAL_SPLIT = ['odpt.Calendar:Weekday', 'odpt.Calendar:Saturday', 'odpt.Calendar:Sunday', 'odpt.Calendar:Holiday', 'odpt.Calendar:SaturdayHoliday'];
         var seen = {};
         function dedup(list) {
             var out = [];
