@@ -558,7 +558,11 @@ function _rememberTrainArtworkFailure(trainUid) {
     try {
       var _oldNotes = el.parentNode ? el.parentNode.querySelectorAll('.tp-est-note') : [];
       for (var _oi = 0; _oi < _oldNotes.length; _oi++) _oldNotes[_oi].remove();
-      if (!positions || !positions.length) return; // No source evidence is not proof of API failure.
+      positions = positions || [];
+      var _op = window.ODPTClient && window.ODPTClient.LINE_TO_OPERATOR && window.ODPTClient.LINE_TO_OPERATOR[el.getAttribute("data-line-id") || ""];
+      var _request = _op && window.ODPT_POSITION_REQUEST_STATUS && window.ODPT_POSITION_REQUEST_STATUS[_op];
+      // Request state is operator-scoped; an empty operator response does not
+      // prove that a particular railway has no scheduled or running trains.
       var expiredRealtime = positions.some(function(p) {
         return p && p.positionSource === "realtime-api" && !_isRealtimePositionFresh(p);
       });
@@ -584,6 +588,16 @@ function _rememberTrainArtworkFailure(trainUid) {
         }
       }
       var parts = [];
+      if (_request && (_request.state === "error" || _request.state === "loading" || _request.state === "empty") && !anyRealtime) {
+        var _statusLang = String(window.currentLang || "ja").toLowerCase();
+        var _messages = {
+          error: ["ODPTの位置情報を取得できません", "ODPT 实时位置获取失败", "ODPT 위치 정보를 가져오지 못했습니다", "ODPT position request failed"],
+          loading: ["ODPTの位置情報を取得中", "正在获取 ODPT 实时位置", "ODPT 위치 정보 불러오는 중", "Loading ODPT positions"],
+          empty: ["ODPTから位置情報が返されていません", "ODPT 未返回位置数据", "ODPT 위치 데이터가 반환되지 않았습니다", "ODPT returned no position data"]
+        };
+        var _li = _statusLang.indexOf("zh") === 0 ? 1 : _statusLang.indexOf("ko") === 0 ? 2 : _statusLang.indexOf("en") === 0 ? 3 : 0;
+        parts.push(_messages[_request.state][_li]);
+      }
       if (expiredRealtime) {
         var _expiredText = t("trains.realtime_expired_note");
         if (!_expiredText || _expiredText === "trains.realtime_expired_note") {
@@ -635,6 +649,7 @@ function _rememberTrainArtworkFailure(trainUid) {
 
   function renderTrainMap(el, line, lineId) {
     try {
+      el.setAttribute("data-line-id", lineId);
       // ODPT dynamic data outside dct:valid must not remain visible as realtime.
       var positions = _sortTrainPositionsBySource(_filterExpiredRealtimePositions(getRealtimePositions(lineId)));
       var _lang = window.currentLang || "ja";
