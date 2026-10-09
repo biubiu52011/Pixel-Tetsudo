@@ -172,7 +172,7 @@ assert(renderer.includes('_request.state === "ok" && _request.assigned === true 
 assert(odptClient.includes('if (!window.ODPT_TRAIN_POSITIONS) window.ODPT_TRAIN_POSITIONS = {};') &&
        !odptClient.includes('if (!window.ODPT_TRAIN_POSITIONS || !positionOperators)'),
   "full ODPT refresh must not clear all operator position snapshots");
-assert(odptClient.includes('if (!result || !Array.isArray(data)) throw new Error("Invalid ODPT train position payload")') &&
+assert(odptClient.includes('if (!Array.isArray(result) && !(result && Array.isArray(result.value))) throw new Error("Invalid ODPT train position payload")') &&
        odptClient.includes('if (!resp.ok) throw new Error("HTTP " + resp.status);'),
   "ODPT position responses must reject malformed JSON payloads and HTTP errors");
 assert(odptClient.includes('if (propagateError) return rateLimitedFetch(url);') &&
