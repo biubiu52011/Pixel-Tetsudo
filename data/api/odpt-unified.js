@@ -1497,7 +1497,11 @@
 
     function pushCachedRealtime(hasDelay, hasPositions) {
         waitForFusion("cached-realtime", function() {
-            return !!(window.DataFusion && window.DataFusion.updateOdptData);
+            if (!window.DataFusion || !window.DataFusion.updateOdptData) return false;
+            if (!hasPositions) return true;
+            if (!window.DataFusion.loadTrainPositions) return false;
+            var lines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : (window.UNIFIED_LINES || {});
+            return !!(lines && Object.keys(lines).length > 0);
         }, function() {
             try {
                 if (hasDelay) window.DataFusion.updateOdptData(window.ODPT_DELAY_DATA);
