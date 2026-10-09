@@ -11759,8 +11759,8 @@ window.VEHICLE_FAMILY_RULES = [
     "vehicleCandidates": [
       "E235系0番台（山手線）"
     ],
-    "grade": "C",
-    "sourceUrl": "https://ja.wikipedia.org/wiki/JR%E6%9D%B1%E6%97%A5%E6%9C%ACE235%E7%B3%BB%E9%9B%BB%E8%BB%8A",
-    "notes": "Yamanote fleet fully E235-0 since 2020-01-21 (E231-500 retirement)"
+    "grade": "A",
+    "sourceUrl": "https://www.jreast.co.jp/press/2019/20200122_ho01.pdf",
+    "notes": "Yamanote E235-0 fleet-only operation rule after the last E231-500 revenue service on Jan 20 2020; JR East verified full replacement in Jan 2020."
   }
 ];
