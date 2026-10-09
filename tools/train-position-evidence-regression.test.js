@@ -179,6 +179,10 @@ assert(odptClient.includes('if (propagateError) return rateLimitedFetch(url);') 
        odptClient.includes("fetchODPT(buildUrl(op, 'train'), true)") &&
        odptClient.includes('state: "error"'),
   "ODPT position network failures must propagate instead of being classified as empty");
+assert(odptClient.includes('window.ODPT_DELAY_REQUEST_STARTED[op] = true;') &&
+       odptClient.includes('window.ODPT_DELAY_REQUEST_STARTED[op]) return;') &&
+       odptClient.includes('pushCachedRealtime(restoredDelay, restoredPositions)'),
+  "late delay cache restore must not overwrite live operator request results");
 assert(odptClient.includes('now - ts > RAW_REALTIME_FRESH_MS') &&
        odptClient.includes('delete window.ODPT_TRAIN_POSITIONS[op];') &&
        odptClient.includes('Rebuild even when all cached positions expired'),
