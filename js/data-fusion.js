@@ -1143,10 +1143,18 @@
       }
 
       function mayUseTimetableEstimate(lineId, position) {
-        // Source assignment is explicit. Unknown, hybrid, coarse and segmented
-        // realtime coverage never authorize an alternative position source.
+        // Only explicit timetable-only coverage may authorize a timetable position.
+        // A running-chain match never upgrades timetable evidence into realtime.
         var mode = getRealtimePositionPolicy(lineId).mode;
-        return mode === "NO_REALTIME" || mode === "TIMETABLE_ONLY";
+        if (mode !== "NO_REALTIME" && mode !== "TIMETABLE_ONLY") return false;
+        if (!position || position.positionSource === "realtime-api") return false;
+        // The estimator's input is the dedicated timetable store. Preserve
+        // its provenance explicitly at the fusion boundary.
+        if (position.positionSource && position.positionSource !== "train-timetable" &&
+            position.positionSource !== "station-timetable") return false;
+        position.positionSource = position.positionSource || "train-timetable";
+        position.estimated = true;
+        return true;
       }
 
       doEstimation = function(requestedLineIds) {
