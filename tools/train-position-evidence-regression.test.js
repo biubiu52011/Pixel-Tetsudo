@@ -163,6 +163,12 @@ assert(fusion.includes('delete _timetableLoading[lineInfo.lineId];'),
 assert(fusion.includes('Timetable may be loaded as operation/vehicle evidence'),
   "timetable evidence must be documented separately from position authority");
 const odptClient=read("data/api/odpt-unified.js");
+assert(odptClient.includes('window.ODPT_POSITION_REQUEST_STATUS[op] = { state: "loading"') &&
+       odptClient.includes('state: "error"') && odptClient.includes('state: "empty"'),
+  "ODPT must distinguish loading, error and successful empty responses");
+assert(renderer.includes('ODPTの位置情報を取得できません') && renderer.includes('ODPT 未返回位置数据'),
+  "train map must expose localized request failure and empty response states");
+
 assert(!fusion.includes('}).catch(function() { return ensureManualTimetable(lineId); });'),
   "SQL failure must not silently switch to manual timetable positioning");
 assert(fusion.includes('manual timetable fallback disabled:'),
