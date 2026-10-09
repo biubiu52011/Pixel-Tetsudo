@@ -226,6 +226,11 @@ Deno.serve(async (req: Request) => {
     .select("odpt_operator,odpt_railway,odpt_base_url").eq("id", lineId).maybeSingle();
   if (sourceError) return json({ ok: false, error: "DB_SOURCE_LOOKUP_FAILED" }, 500);
   const hasApi = !!(source?.odpt_operator && source?.odpt_railway && source?.odpt_base_url);
+  // Browser fallback uses SQL only; never refetch the API it already owns.
+  if (hasApi && url.searchParams.get("fallback_only") === "1") {
+    return json({ ok: true, complete: false, cache: "BYPASS",
+      source: "API_AVAILABLE", line_id: lineId, service_date: serviceDate, runs: [] });
+  }
   if (hasApi) {
     const sourceKey = source.odpt_base_url.includes("api-challenge")
       ? Deno.env.get("ODPT_CHALLENGE_CONSUMER_KEY") : Deno.env.get("ODPT_CONSUMER_KEY");
