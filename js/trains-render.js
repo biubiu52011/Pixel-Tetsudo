@@ -594,7 +594,7 @@ function _rememberTrainArtworkFailure(trainUid) {
       var parts = [];
       // A successful operator response may contain other railways but no
       // records for this specific line. Do not label it as an operator outage.
-      var _lineResponseMissing = _request && _request.state === "ok" && !anyRealtime && !expiredRealtime &&
+      var _lineResponseMissing = _request && _request.state === "ok" && _request.assigned === true && !anyRealtime && !expiredRealtime &&
         !positions.some(function(p) { return p && p.positionSource === "realtime-api"; });
       if (_request && (_request.state === "error" || _request.state === "loading" || _request.state === "empty") && !anyRealtime) {
         var _statusLang = String(window.currentLang || "ja").toLowerCase();
