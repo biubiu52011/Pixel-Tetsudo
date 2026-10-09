@@ -8,6 +8,13 @@ for(const js of ["js/data-fusion.js","js/train-position-estimator.js","js/runnin
 
 const fusion=read("js/data-fusion.js");
 assert(/ambiguous realtime line identity/.test(fusion),"ambiguous realtime line identity must remain unresolved");
+assert(fusion.includes('var existingIdx = trainId && _linePositionIndex.has(trainId)') &&
+       fusion.includes('if (trainId) _linePositionIndex.set(trainId, posMap[lid].length);'),
+  "missing realtime train IDs must not collapse unrelated source rows into one index");
+assert(fusion.includes('if (_mappedMatches.length === 1) targetLine = _mappedMatches[0];') &&
+       fusion.includes('if (_exactMatches.length === 1) targetLine = _exactMatches[0];') &&
+       !fusion.includes('mappedLids.indexOf(ml.lid) >= 0) { targetLine = ml; break; }'),
+  "realtime source railway mapping must be unique and never select the first ambiguous match");
 assert(!/mainLines\.sort[\s\S]{0,500}targetLine\s*=\s*mainLines\[0\]/.test(fusion),"must not choose longest line for ambiguous realtime");
 assert(/_queueChainVehicle/.test(fusion) && /Object\.keys\(_chainVehicleCandidates\)/.test(fusion),
   "vehicle evidence must converge through one chain candidate pool and one registry commit");
@@ -33,6 +40,16 @@ assert(/if \(!d\) return null;/.test(tobuEvidence),
 assert(/!hasExplicitValidity && d !== provider\.effectiveDate/.test(tobuEvidence),
   "undated Tobu timetable rows must not become open-ended vehicle assignments");
 const renderer=read("js/trains-render.js");
+assert(renderer.includes('_request.state === "error"') && renderer.includes('_request.state === "empty"'),
+  "empty API responses and request failures must use distinct states");
+assert(renderer.includes('ODPTのリアルタイム位置情報が期限切れです') &&
+       renderer.includes('ODPT 实时位置已过期'),
+  "expired realtime status must have Japanese and Chinese fallbacks");
+assert(renderer.includes('expiredRealtime = positions.some(function(p)'),
+  "expired realtime must be tracked independently of timetable estimation");
+assert(renderer.includes('updateEstimatedNote(el, getRealtimePositions(lineId));'),
+  "source status must inspect raw positions even when stale realtime markers are filtered");
+
 const trackLayoutSource=read("js/train-track-layout.js");
 const trainsCssSource=read("css/trains.css");
 assert(!/transition:\s*x\s+14s[\s\S]{0,120}y\s+14s/.test(trainsCssSource),
@@ -147,8 +164,105 @@ assert(!/isLoopDir && p\.destinationStation/.test(render),
   "loop destinationStation must not override InnerLoop/OuterLoop labels");
 
 const trains=read("js/trains-data.js");
+const runtimePolicy=read("data/core/runtime-config.js");
+assert(fusion.includes('delete _timetableLoading[lineInfo.lineId];'),
+  "ODPT timetable evidence loading must release its in-flight flag after completion");
+assert(fusion.includes('Timetable may be loaded as operation/vehicle evidence'),
+  "timetable evidence must be documented separately from position authority");
+const odptClient=read("data/api/odpt-unified.js");
+assert(odptClient.includes('window.ODPT_POSITION_REQUEST_STATUS[op] = { state: "loading"') &&
+       odptClient.includes('state: "error"') && odptClient.includes('"ok" : "empty"'),
+  "ODPT must distinguish loading, error and successful empty responses");
+assert(renderer.includes('_request.state === "ok" && _request.assigned === true && !anyRealtime') &&
+       renderer.includes('该线路暂无 ODPT 实时位置记录'),
+  "operator success without line records must have its own status");
+assert(odptClient.includes('if (!window.ODPT_TRAIN_POSITIONS) window.ODPT_TRAIN_POSITIONS = {};') &&
+       !odptClient.includes('if (!window.ODPT_TRAIN_POSITIONS || !positionOperators)'),
+  "full ODPT refresh must not clear all operator position snapshots");
+assert(odptClient.includes('if (!Array.isArray(result) && !(result && Array.isArray(result.value))) throw new Error("Invalid ODPT train position payload")') &&
+       odptClient.includes('if (!resp.ok) throw new Error("HTTP " + resp.status);'),
+  "ODPT position responses must reject malformed JSON payloads and HTTP errors");
+assert(odptClient.includes('if (propagateError) return rateLimitedFetch(url);') &&
+       odptClient.includes("fetchODPT(buildUrl(op, 'train'), true)") &&
+       odptClient.includes('state: "error"'),
+  "ODPT position network failures must propagate instead of being classified as empty");
+assert(odptClient.includes('!Array.isArray(result) && !(result && Array.isArray(result.value))') &&
+       odptClient.includes('Invalid ODPT train position payload') &&
+       odptClient.includes('Invalid ODPT train information payload'),
+  "malformed ODPT object payloads must be rejected rather than classified as empty successful responses");
+assert(!renderer.includes('parts.push("ODPT " + _formatSourceTime(latestRealtimeAt))') &&
+       renderer.includes('if (anyEst) {') && renderer.includes('parts.push(anyRealtime'),
+  "source notice must be absent for realtime-only trains, mixed for partial estimates, and timestamp-free");
+assert(renderer.includes('_p.positionSource === "train-timetable" || _p.positionSource === "station-timetable"') &&
+       !renderer.includes('else if (_rank === 1 || _rank === 2) {\n          anyEst = true;'),
+  "timetable estimate notice must require explicit timetable provenance, not an inferred rank");
+assert(odptClient.includes('if (existing) clearTimeout(existing);') &&
+       odptClient.includes('Object.keys(window.ODPT_POSITION_REQUEST_STATUS || {}).forEach(function(op)') &&
+       !odptClient.includes('if (existing) return;'),
+  "overlapping ODPT refreshes must replace pending fusion callbacks and acknowledge all fused operators");
+assert(odptClient.includes('delayNow - ts > RAW_REALTIME_FRESH_MS') &&
+       odptClient.includes('delete window.ODPT_DELAY_DATA[op];') &&
+       odptClient.includes('window.ODPT_DELAY_REQUEST_STARTED[op]) return;'),
+  "cached train information must be revalidated after fusion readiness wait");
+assert(odptClient.includes('operatorTs: window.ODPT_DELAY_SNAPSHOT_AT || {}') &&
+       odptClient.includes('delayRec.operatorTs && delayRec.operatorTs[op]') &&
+       odptClient.includes('window.ODPT_DELAY_SNAPSHOT_AT[op] = operatorTs;'),
+  "ODPT train-information cache must enforce per-operator snapshot freshness");
+assert(odptClient.includes('if (!window.ODPT_DELAY_DATA) window.ODPT_DELAY_DATA = {};') &&
+       !odptClient.includes('if (!skipDelayRefresh || !window.ODPT_DELAY_DATA) window.ODPT_DELAY_DATA = {};') &&
+       odptClient.includes("fetchODPT(buildUrl(op, 'trainInformation'), true)") &&
+       odptClient.includes("throw new Error('Invalid ODPT train information payload')"),
+  "ODPT train information refresh must preserve other operators and reject failed or malformed responses");
+assert(odptClient.includes('window.ODPT_DELAY_REQUEST_STARTED[op] = true;') &&
+       odptClient.includes('window.ODPT_DELAY_REQUEST_STARTED[op]) return;') &&
+       odptClient.includes('pushCachedRealtime(restoredDelay, restoredPositions)'),
+  "late delay cache restore must not overwrite live operator request results");
+assert(odptClient.includes('now - ts > RAW_REALTIME_FRESH_MS') &&
+       odptClient.includes('delete window.ODPT_TRAIN_POSITIONS[op];') &&
+       odptClient.includes('Rebuild even when all cached positions expired'),
+  "expired ODPT cache must be removed before delayed fusion, including all-expired snapshots");
+assert(odptClient.includes('if (!hasPositions) return true;') &&
+       odptClient.includes('if (!window.DataFusion.loadTrainPositions) return false;') &&
+       odptClient.includes('return !!(lines && Object.keys(lines).length > 0);'),
+  "cached realtime positions must wait for fusion and railway data readiness");
+assert(odptClient.includes('operatorTs: window.ODPT_POSITION_SNAPSHOT_AT || {}') &&
+       odptClient.includes('now - operatorTs > RAW_REALTIME_FRESH_MS') &&
+       odptClient.includes('window.ODPT_POSITION_SNAPSHOT_AT[op] = operatorTs;'),
+  "ODPT cached position snapshots must enforce per-operator freshness");
+assert(odptClient.includes('Number.isFinite(delayRec.ts) && delayRec.ts <= now') &&
+       odptClient.includes('Number.isFinite(posRec.ts) && posRec.ts <= now') &&
+       odptClient.includes('!Array.isArray(posRec.data)'),
+  "raw realtime cache must reject future timestamps and malformed position maps");
+assert(odptClient.includes('window.ODPT_POSITION_REQUEST_STATUS[op]) return;') &&
+       odptClient.includes('restoredPositions = true;') &&
+       !odptClient.includes('window.ODPT_TRAIN_POSITIONS = posRec.data;'),
+  "delayed cache restore must not overwrite live operator requests");
+assert(odptClient.includes('requestId !== _requestId') &&
+       odptClient.includes('Number.isFinite(currentSnapshot) && currentSnapshot <= status.at') &&
+       odptClient.includes('if (existing) clearTimeout(existing);'),
+  "stale operator responses must be rejected and overlapping fusion must only acknowledge completed snapshots");
+assert(odptClient.includes('status.assigned = true;'),
+  "ODPT line absence must wait for position assignment");
+assert(renderer.includes('ODPTの位置情報を取得できません') && renderer.includes('ODPT 未返回位置数据'),
+  "train map must expose localized request failure and empty response states");
+
+assert(!fusion.includes('}).catch(function() { return ensureManualTimetable(lineId); });'),
+  "SQL failure must not silently switch to manual timetable positioning");
+assert(fusion.includes('manual timetable fallback disabled:'),
+  "SQL source failure must remain observable");
+assert(odptClient.includes('throw new Error("TrainRun SQL query failed:'),
+  "SQL failures must not silently become empty timetables");
+assert(!odptClient.includes('}).catch(function(){ return []; }).finally(function(){ delete _trainRunInflight[key]; });'),
+  "TrainRun SQL errors must propagate to callers");
+assert(/defaultMode:\s*"UNKNOWN"/.test(runtimePolicy),"unknown API coverage must fail closed");
+assert(fusion.includes('if (mode !== "NO_REALTIME" && mode !== "TIMETABLE_ONLY") return false;') &&
+       fusion.includes('position.positionSource = position.positionSource || "train-timetable";') &&
+       fusion.includes('position.estimated = true;') &&
+       fusion.includes('position.positionSource === "realtime-api") return false;'),
+  "timetable positions require explicit authorization and must never impersonate realtime");
 assert(/function _isFreshRealtimePosition/.test(trains),"realtime freshness guard missing");
-assert(/return _isFreshRealtimePosition\(p\) \? 0 : 8/.test(trains),"expired realtime must lose source priority");
+assert(!/return _isFreshRealtimePosition\(p\) \? 0 : 8/.test(trains),"expired realtime must not promote timetable authority");
+assert(/return 0; \/\/ Expiry is reported separately/.test(trains),"realtime source remains authoritative regardless of freshness");
 
 
 assert(estimatorSource.includes('vehicleIdentityStatus: vehResult.identityStatus'),
@@ -297,8 +411,8 @@ assert(fusionSource.includes('source:"formation-evidence", sources:["formation-e
   'dated formation evidence must retain its canonical structural provenance and exact identity state');
 assert(fusionSource.includes('_queueChainVehicle({') && fusionSource.includes('vehicleFormationId:_fe.formationId'),
   'formation evidence must enter the existing pre-commit candidate queue');
-assert(fusionSource.includes('if (mode !== "SEGMENTED") return true; // HYBRID / COARSE / UNKNOWN'),
-  'HYBRID/COARSE/UNKNOWN coverage gaps must remain eligible for timetable position fallback');
+assert(!fusionSource.includes('if (mode !== "SEGMENTED") return true; // HYBRID / COARSE / UNKNOWN'),
+  'HYBRID/COARSE/UNKNOWN must not automatically authorize timetable position fallback');
 assert(fusionSource.includes('if (_chainVehicleRegistry[_cid]) _chainVehicleRegistry[_cid].lastSeenAt = Date.now();'),
   'an active timetable running chain must keep confirmed vehicle identity alive across realtime coverage gaps');
 assert(fusionSource.includes('Object.keys(posMap).forEach(function(_vlid) {') &&

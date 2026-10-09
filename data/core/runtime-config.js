@@ -51,27 +51,27 @@
    *
    * mode:
    *   FULL      - 已证明完整覆盖；禁止 timetable 生成/补充位置。
-   *   HYBRID    - 默认。实时优先，缺失列车/区间允许 timetable 补位。
-   *   SEGMENTED - 只有声明区间的实时位置具权威性；区间外允许 timetable。
-   *   COARSE    - 实时源只能给出粗粒度位置；允许 timetable 提供更细位置，但不得覆盖
+   *   HYBRID    - 历史兼容标签；不授权时刻表补位。
+   *   SEGMENTED - 声明实时位置覆盖区间；不自动授权时刻表补位。
+   *   COARSE    - 实时源只能给出粗粒度位置；不允许 timetable 替换
    *               同一列车已有的实时事实。
-   *   UNKNOWN   - 覆盖完整性未知；行为等同 HYBRID，但明确禁止升级为 FULL。
+   *   UNKNOWN   - 覆盖能力未核实；禁止时刻表生成位置，必须显式指定来源。
    *
    * SEGMENTED fields:
    *   coveredSegments:  [{ fromStation, toStation }]  实时权威覆盖区间；区间内禁止 timetable 造位置。
    *   excludedSegments: [{ fromStation, toStation }]  已知实时缺口；缺口内允许 timetable 补位。
-   * 两者可并存：excludedSegments 优先。站 ID 无法解析时 fail-open，继续 timetable，避免误删列车。
+   * 区间仅用于标记 API 能力，不再授权时刻表位置回退。
    *
    * 合并不变量：
    *   1) 同一列车 realtime position 永远优先，timetable 只能补 metadata。
-   *   2) HYBRID/UNKNOWN 默认允许补缺，不因“API 有返回”自动升级 FULL。
-   *   3) SEGMENTED 只在已声明权威区间抑制 timetable；区间外继续补。
-   *   4) COARSE 保留 realtime 为位置事实，timetable 可补缺失列车但不能覆盖同车实时位置。
+   *   2) HYBRID/UNKNOWN 不得默认补缺；仅明确无实时 API 的线路可授权 SQL 时刻表。
+   *   3) SEGMENTED 的区间信息仅描述实时覆盖，不自动授权另一位置来源。
+   *   4) COARSE 保留 realtime 为位置事实，不允许时刻表接管。
    *   5) running-chain 可跨覆盖边界传递 identity/service/destination 证据，不改变 positionSource。
    * 规则：线路事实只写配置；DataFusion/Estimator 不得按具体 lineId 写专属分支。
    */
   var REALTIME_POSITION_POLICY = {
-    defaultMode: "HYBRID",
+    defaultMode: "UNKNOWN",
     staleAfterMs: 90000,
     lines: {
       "Asakusa": { mode: "FULL" },

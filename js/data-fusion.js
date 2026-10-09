@@ -941,14 +941,18 @@
               // （如 SaikyoKawagoe→[Saikyo,Kawagoe]、Kawagoe→[KawagoeWest]），集合匹配比
               // 子串猜测更准——避免川越〜高麗川的 Kawagoe 数据错配到大宮〜川越段。
               var mappedLids = _railwayCodeLines[railwayName] || [];
-              for (var i = 0; i < matchingLines.length; i++) {
-                var ml = matchingLines[i];
-                if (mappedLids.length > 0) {
-                  if (mappedLids.indexOf(ml.lid) >= 0) { targetLine = ml; break; }
-                } else if (ml.lid === railwayName || ml.lid.indexOf(railwayName) >= 0 || railwayName.indexOf(ml.lid) >= 0) {
-                  targetLine = ml;
-                  break;
-                }
+              // A railway-code mapping can span multiple project lines. Do not
+              // arbitrarily assign the provider train to its first station match.
+              // Require one unambiguous mapped line for this source record.
+              var _mappedMatches = matchingLines.filter(function(ml) {
+                return mappedLids.indexOf(ml.lid) >= 0;
+              });
+              if (_mappedMatches.length === 1) targetLine = _mappedMatches[0];
+              if (!targetLine && mappedLids.length === 0) {
+                // Only exact canonical line identity is admissible; substring
+                // overlap is not evidence that a realtime train belongs here.
+                var _exactMatches = matchingLines.filter(function(ml) { return ml.lid === railwayName; });
+                if (_exactMatches.length === 1) targetLine = _exactMatches[0];
               }
             }
             // 2. Ambiguous source identity must stay unresolved.
@@ -971,7 +975,9 @@
             if (!posMap[lid]) posMap[lid] = [];
             var _linePositionIndex = _positionIndexByLine[lid];
             if (!_linePositionIndex) _linePositionIndex = _positionIndexByLine[lid] = new Map();
-            var existingIdx = _linePositionIndex.has(trainId) ? _linePositionIndex.get(trainId) : -1;
+            // An absent provider train ID cannot prove two records describe the
+            // same physical train. Never deduplicate unrelated rows on "".
+            var existingIdx = trainId && _linePositionIndex.has(trainId) ? _linePositionIndex.get(trainId) : -1;
             var rawType = t["odpt:trainType"] || "";
             var typeName = "";
             if (rawType) {
@@ -1068,7 +1074,7 @@
             if (existingIdx >= 0) {
               posMap[lid][existingIdx] = positionData;
             } else {
-              _linePositionIndex.set(trainId, posMap[lid].length);
+              if (trainId) _linePositionIndex.set(trainId, posMap[lid].length);
               posMap[lid].push(positionData);
             }
           }
@@ -1086,7 +1092,7 @@
           var model = cfg.REALTIME_POSITION_POLICY || {};
           var linePolicy = model.lines && model.lines[lineId];
           if (linePolicy && linePolicy.mode) return linePolicy;
-          return { mode: model.defaultMode || "HYBRID" };
+          return { mode: model.defaultMode || "UNKNOWN" };
         } catch(e) {
           return { mode: "UNKNOWN" };
         }
@@ -1111,7 +1117,7 @@
 
       function mayUseTimetablePosition(lineId) {
         var mode = getRealtimePositionPolicy(lineId).mode;
-        return mode !== "FULL";
+        return mode === "NO_REALTIME" || mode === "TIMETABLE_ONLY";
       }
 
       // Generic coverage evaluator. Line-specific facts live only in RuntimeConfig.
@@ -1143,20 +1149,17 @@
       }
 
       function mayUseTimetableEstimate(lineId, position) {
-        var policy = getRealtimePositionPolicy(lineId);
-        var mode = policy.mode || "UNKNOWN";
-        if (mode === "FULL") return false;
-        if (mode !== "SEGMENTED") return true; // HYBRID / COARSE / UNKNOWN
-        var line = allLines[lineId];
-        var excluded = policy.excludedSegments || [];
-        for (var i = 0; i < excluded.length; i++) {
-          if (_positionTouchesRange(position, line, excluded[i])) return true;
-        }
-        var covered = policy.coveredSegments || [];
-        if (!covered.length) return true;
-        for (var j = 0; j < covered.length; j++) {
-          if (_positionTouchesRange(position, line, covered[j])) return false;
-        }
+        // Only explicit timetable-only coverage may authorize a timetable position.
+        // A running-chain match never upgrades timetable evidence into realtime.
+        var mode = getRealtimePositionPolicy(lineId).mode;
+        if (mode !== "NO_REALTIME" && mode !== "TIMETABLE_ONLY") return false;
+        if (!position || position.positionSource === "realtime-api") return false;
+        // The estimator's input is the dedicated timetable store. Preserve
+        // its provenance explicitly at the fusion boundary.
+        if (position.positionSource && position.positionSource !== "train-timetable" &&
+            position.positionSource !== "station-timetable") return false;
+        position.positionSource = position.positionSource || "train-timetable";
+        position.estimated = true;
         return true;
       }
 
@@ -1594,6 +1597,8 @@
         // v4.3.489: 已由初始分批探测（ODPT_TT_PROBED）的线路不再重复请求——
         // JR 地方线 41 条 ODPT 无时刻表数据，标记后避免每次刷新都重试
         var probed = window.ODPT_TT_PROBED && window.ODPT_TT_PROBED[l.lineId];
+        // Timetable may be loaded as operation/vehicle evidence on any line,
+        // but position generation is gated independently by mayUseTimetableEstimate().
         return priorityOps.indexOf(l.operator) >= 0 && !_timetableLoading[l.lineId] && !probed;
       });
 
@@ -1625,7 +1630,11 @@
             });
           }
         }).catch(function(e) {
-          console.debug("[DataFusion] Failed to load timetable for", lineInfo.lineId, ":", e.message);
+          console.warn("[DataFusion] Timetable evidence unavailable for", lineInfo.lineId, ":", e.message);
+          // Failure is evidence of an unavailable source, never a signal to
+          // synthesize a position or switch to another location authority.
+        }).finally(function() {
+          delete _timetableLoading[lineInfo.lineId];
         });
       });
 
@@ -1750,10 +1759,10 @@
     if (_hasOdptTimetable(lineId)) return ensureManualTimetable(lineId);
     // One existing source lifecycle: ODPTClient owns the optional Supabase
     // read-through cache; a miss falls through to the existing manual path.
-    if (!window.ODPTClient || typeof window.ODPTClient.getCachedTrainRuns !== "function") return ensureManualTimetable(lineId);
+    if (!window.ODPTClient || typeof window.ODPTClient.getCachedTrainRuns !== "function") return Promise.reject(new Error("TrainRun SQL client unavailable: " + lineId));
     return window.ODPTClient.getCachedTrainRuns(lineId).then(function(rows) {
       // ODPT activation may have completed while the cache request was in flight.
-      if (!rows || !rows.length) return ensureManualTimetable(lineId);
+      if (!rows || !rows.length) throw new Error("TrainRun SQL timetable empty: " + lineId);
       if (window.TrainPositionEstimator && typeof window.TrainPositionEstimator.registerManualTimetable === "function") {
         window.TrainPositionEstimator.registerManualTimetable(lineId, rows);
       }
@@ -1779,7 +1788,10 @@
         fuseDirty([lineId]);
       } catch(err) { console.debug("[DataFusion] ensureTimetable refresh:", err.message); }
       return true;
-    }).catch(function() { return ensureManualTimetable(lineId); });
+    }).catch(function(err) {
+      console.error("[DataFusion] TrainRun SQL source failed for " + lineId + "; manual timetable fallback disabled:", err);
+      throw err;
+    });
   }
 
   function ensureManualTimetable(lineId) {

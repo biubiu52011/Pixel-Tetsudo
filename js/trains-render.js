@@ -558,30 +558,63 @@ function _rememberTrainArtworkFailure(trainUid) {
     try {
       var _oldNotes = el.parentNode ? el.parentNode.querySelectorAll('.tp-est-note') : [];
       for (var _oi = 0; _oi < _oldNotes.length; _oi++) _oldNotes[_oi].remove();
-      if (!positions || !positions.length) return;
+      positions = positions || [];
+      var _op = window.ODPTClient && window.ODPTClient.LINE_TO_OPERATOR && window.ODPTClient.LINE_TO_OPERATOR[el.getAttribute("data-line-id") || ""];
+      var _request = _op && window.ODPT_POSITION_REQUEST_STATUS && window.ODPT_POSITION_REQUEST_STATUS[_op];
+      var _lineId = el.getAttribute("data-line-id") || "";
+      var _linePolicy = window.RuntimeConfig && window.RuntimeConfig.REALTIME_POSITION_POLICY;
+      var _lineMode = _linePolicy && _linePolicy.lines && _linePolicy.lines[_lineId] && _linePolicy.lines[_lineId].mode;
+      // Operator status is relevant only to lines explicitly configured for
+      // realtime position coverage; never infer per-line coverage from a shared operator response.
+      if (_lineMode !== "FULL" && _lineMode !== "COARSE") _request = null;
+      var expiredRealtime = positions.some(function(p) {
+        return p && p.positionSource === "realtime-api" && !_isRealtimePositionFresh(p);
+      });
+      var visiblePositions = _filterExpiredRealtimePositions(positions);
       var anyEst = false;
       var anyRealtime = false;
-      var latestRealtimeAt = "";
-      var latestRealtimeMs = 0;
-      for (var _ei = 0; _ei < positions.length; _ei++) {
-        var _p = positions[_ei];
-        var _rank = _trainPositionRank(_p);
-        if (_rank === 0) {
+      for (var _ei = 0; _ei < visiblePositions.length; _ei++) {
+        var _p = visiblePositions[_ei];
+        if (_p.positionSource === "realtime-api") {
           anyRealtime = true;
-          if (_p.sourceUpdatedAt) {
-            var _ms = Date.parse(_p.sourceUpdatedAt);
-            if (!isNaN(_ms) && _ms > latestRealtimeMs) {
-              latestRealtimeMs = _ms;
-              latestRealtimeAt = _p.sourceUpdatedAt;
-            }
-          }
-        } else {
+        } else if (_p.positionSource === "train-timetable" || _p.positionSource === "station-timetable") {
+          // Only explicit timetable provenance can justify the timetable-estimation notice.
+          // An estimated flag or unknown rank alone does not identify its source.
           anyEst = true;
         }
       }
       var parts = [];
-      if (anyRealtime && latestRealtimeAt) {
-        parts.push("ODPT " + _formatSourceTime(latestRealtimeAt));
+      // A successful operator response may contain other railways but no
+      // records for this specific line. Do not label it as an operator outage.
+      var _lineResponseMissing = _request && _request.state === "ok" && _request.assigned === true && !anyRealtime && !expiredRealtime &&
+        !positions.some(function(p) { return p && p.positionSource === "realtime-api"; });
+      if (_request && (_request.state === "error" || _request.state === "loading" || _request.state === "empty") && !anyRealtime) {
+        var _statusLang = String(window.currentLang || "ja").toLowerCase();
+        var _messages = {
+          error: ["ODPTの位置情報を取得できません", "ODPT 实时位置获取失败", "ODPT 위치 정보를 가져오지 못했습니다", "ODPT position request failed"],
+          loading: ["ODPTの位置情報を取得中", "正在获取 ODPT 实时位置", "ODPT 위치 정보 불러오는 중", "Loading ODPT positions"],
+          empty: ["ODPTから位置情報が返されていません", "ODPT 未返回位置数据", "ODPT 위치 데이터가 반환되지 않았습니다", "ODPT returned no position data"]
+        };
+        var _li = _statusLang.indexOf("zh") === 0 ? 1 : _statusLang.indexOf("ko") === 0 ? 2 : _statusLang.indexOf("en") === 0 ? 3 : 0;
+        parts.push(_messages[_request.state][_li]);
+      }
+      if (_lineResponseMissing) {
+        var _missingLang = String(window.currentLang || "ja").toLowerCase();
+        parts.push(_missingLang.indexOf("zh") === 0 ? "该线路暂无 ODPT 实时位置记录" :
+          _missingLang.indexOf("ko") === 0 ? "이 노선의 ODPT 실시간 위치 기록이 없습니다" :
+          _missingLang.indexOf("en") === 0 ? "No ODPT realtime position records for this line" :
+          "この路線のODPTリアルタイム位置情報はありません");
+      }
+      if (expiredRealtime) {
+        var _expiredText = t("trains.realtime_expired_note");
+        if (!_expiredText || _expiredText === "trains.realtime_expired_note") {
+          var _statusLang = String(window.currentLang || "ja").toLowerCase();
+          _expiredText = _statusLang.indexOf("zh") === 0 ? "ODPT 实时位置已过期" :
+            _statusLang.indexOf("ko") === 0 ? "ODPT 실시간 위치 정보가 만료되었습니다" :
+            _statusLang.indexOf("en") === 0 ? "ODPT realtime position expired" :
+            "ODPTのリアルタイム位置情報が期限切れです";
+        }
+        parts.push(_expiredText);
       }
       if (anyEst) {
         parts.push(anyRealtime
@@ -600,10 +633,10 @@ function _rememberTrainArtworkFailure(trainUid) {
 
   function _trainPositionRank(p) {
     if (!p) return 3;
-    if (p.positionSource === "realtime-api" || p.estimated === false) return 0;
+    if (p.positionSource === "realtime-api") return 0;
     if (p.positionSource === "train-timetable") return 1;
     if (p.positionSource === "station-timetable") return 2;
-    return p.estimated === true ? 1 : 0;
+    return p.estimated === true ? 1 : 3; // Unknown provenance is neither live nor timetable.
   }
 
   function _sortTrainPositionsBySource(positions) {
@@ -620,6 +653,7 @@ function _rememberTrainArtworkFailure(trainUid) {
 
   function renderTrainMap(el, line, lineId) {
     try {
+      el.setAttribute("data-line-id", lineId);
       // ODPT dynamic data outside dct:valid must not remain visible as realtime.
       var positions = _sortTrainPositionsBySource(_filterExpiredRealtimePositions(getRealtimePositions(lineId)));
       var _lang = window.currentLang || "ja";
@@ -644,13 +678,13 @@ function _rememberTrainArtworkFailure(trainUid) {
         // === Incremental update: only update train layer using cached geometry ===
         updateTrainLayer(existingSvg, positions, stationCoords, lineId, line);
         updateRunningInfo(el, positions);
-        updateEstimatedNote(el, positions);
+        updateEstimatedNote(el, getRealtimePositions(lineId));
         // Sync loading placeholder with the realtime page: hide it as soon as train
         // positions are available (the full-rebuild path re-inserts it when empty).
-        if (positions.length > 0) {
-          var _noDataEl = el.querySelector('.tp-no-data');
-          if (_noDataEl) _noDataEl.remove();
-        }
+        var _noDataEl = el.querySelector('.tp-no-data');
+        if (positions.length > 0 && _noDataEl) _noDataEl.remove();
+        // Do not resurrect a generic "no data" overlay when all API records
+        // are expired: updateEstimatedNote() reports that specific source state.
         return;
       }
       
@@ -991,7 +1025,7 @@ function _rememberTrainArtworkFailure(trainUid) {
       // Now populate train layer
       updateTrainLayer(svg, positions, stationCoords, lineId, line, geometry);
       updateRunningInfo(el, positions);
-      updateEstimatedNote(el, positions);
+      updateEstimatedNote(el, getRealtimePositions(lineId));
       
     } catch(e) {
       el.innerHTML = '<div class="tp-no-data">Error: ' + escapeHtml(e.message) + '</div>';
