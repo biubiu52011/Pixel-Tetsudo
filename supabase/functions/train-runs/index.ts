@@ -131,6 +131,81 @@ function formatOdptRows(source: any, lineId: string, serviceDate: string, rows: 
   return importRows;
 }
 
+
+/**
+ * Read recurring SQL timetable templates when a line has no upstream API and
+ * there is no date-specific run. Calendar variants are alternatives.
+ * Page both queries because Supabase Data API defaults to at most 1000 rows.
+ */
+async function readManualTemplateRuns(db: any, lineId: string, serviceDate: string): Promise<Response> {
+  async function pages(makeQuery: (first: number, last: number) => any) {
+    const out: any[] = [];
+    const size = 700;
+    for (let first = 0; first < 35000; first += size) {
+      const { data, error } = await makeQuery(first, first + size - 1);
+      if (error) throw error;
+      if (!Array.isArray(data)) throw new Error("INVALID_SQL_PAGE");
+      out.push(...data);
+      if (data.length < size) return out;
+    }
+    throw new Error("SQL_RESULT_TOO_LARGE");
+  }
+  let templates: any[] = [];
+  for (const calendar of serviceCalendars(serviceDate)) {
+    const selected = await pages((first, last) => db.from("manual_timetable_templates")
+      .select("id,line_key,calendar_urn,train_number,railway_urn,direction_urn,train_type_urn,destination_urns,vehicle_type_label")
+      .eq("line_key", lineId).eq("calendar_urn", calendar).order("id").range(first, last));
+    if (selected.length) { templates = selected; break; }
+  }
+  if (!templates.length) return json({ ok: true, complete: false, cache: "MISS",
+    source: "NO_API_NO_DATA", line_id: lineId, service_date: serviceDate, runs: [] });
+
+  const byTemplate = new Map<number, any[]>();
+  // Keep URL/IN-list bounded; individual batches still page if stops exceed 700.
+  for (let pos = 0; pos < templates.length; pos += 100) {
+    const ids = templates.slice(pos, pos + 100).map(t => t.id);
+    const stops = await pages((first, last) => db.from("manual_timetable_template_stops")
+      .select("template_id,stop_sequence,arrival_station_urn,departure_station_urn,arrival_clock,departure_clock")
+      .in("template_id", ids).order("template_id").order("stop_sequence").range(first, last));
+    for (const stop of stops) {
+      const list = byTemplate.get(stop.template_id) || [];
+      list.push(stop);
+      byTemplate.set(stop.template_id, list);
+    }
+  }
+  const result = templates.map((t) => {
+    const operator = /^odpt\.Railway:([^.]+)\./.exec(t.railway_urn || "")?.[1] || "";
+    return {
+      id: "manual-template:" + t.id,
+      line_id: lineId,
+      service_date: serviceDate,
+      calendar_type: calendarType(t.calendar_urn),
+      operator, network_key: t.railway_urn,
+      train_number: t.train_number,
+      operation_code: t.train_number,
+      rail_direction: t.direction_urn,
+      train_type: t.train_type_urn,
+      destination_station: t.destination_urns?.[0] || null,
+      vehicle_type_label: t.vehicle_type_label || null,
+      stops: (byTemplate.get(t.id) || []).map((s: any) => {
+        const urn = s.arrival_station_urn || s.departure_station_urn || "";
+        return {
+          station_urn: urn,
+          station_key: stationKey(urn),
+          arrival_time: sqlTime(s.arrival_clock),
+          departure_time: sqlTime(s.departure_clock),
+          arrival_minute: minuteOf(s.arrival_clock),
+          departure_minute: minuteOf(s.departure_clock),
+        };
+      }),
+    };
+  });
+  const complete = result.length > 0 && result.every(r => r.stops.length >= 2);
+  return json({ ok: true, complete, cache: complete ? "HIT" : "PARTIAL",
+    source: "DATABASE_MANUAL_TEMPLATES", line_id: lineId, service_date: serviceDate,
+    runs: complete ? result : [] });
+}
+
 Deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") return new Response(null, { status: 204, headers: cors });
   if (req.method !== "GET") return json({ ok: false, error: "METHOD_NOT_ALLOWED" }, 405);
@@ -173,8 +248,14 @@ Deno.serve(async (req: Request) => {
     .select("id,service_date,calendar_type,operator,network_key,line_id,train_number,operation_code,rail_direction,train_type,destination_station")
     .eq("line_id", lineId).eq("service_date", serviceDate).order("train_number");
   if (error) return json({ ok: false, error: "DB_QUERY_FAILED" }, 500);
-  if (!runs?.length) return json({ ok: true, cache: "MISS", complete: false,
-    source: "NO_API_NO_DATA", line_id: lineId, service_date: serviceDate, runs: [] });
+  if (!runs?.length) {
+    try { return await readManualTemplateRuns(db, lineId, serviceDate); }
+    catch (err) {
+      console.error("[train-runs] Manual SQL template read failed", lineId, String(err));
+      return json({ ok: true, complete: false, cache: "MISS",
+        source: "DATABASE_TEMPLATE_ERROR", line_id: lineId, service_date: serviceDate, runs: [] });
+    }
+  }
 
   const { data: stops, error: stopError } = await db.from("train_run_stops")
     .select("train_run_id,stop_sequence,station_key,station_urn,arrival_time,departure_time,arrival_minute,departure_minute")
