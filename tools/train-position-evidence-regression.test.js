@@ -179,6 +179,10 @@ assert(odptClient.includes('if (propagateError) return rateLimitedFetch(url);') 
        odptClient.includes("fetchODPT(buildUrl(op, 'train'), true)") &&
        odptClient.includes('state: "error"'),
   "ODPT position network failures must propagate instead of being classified as empty");
+assert(odptClient.includes('if (!hasPositions) return true;') &&
+       odptClient.includes('if (!window.DataFusion.loadTrainPositions) return false;') &&
+       odptClient.includes('return !!(lines && Object.keys(lines).length > 0);'),
+  "cached realtime positions must wait for fusion and railway data readiness");
 assert(odptClient.includes('operatorTs: window.ODPT_POSITION_SNAPSHOT_AT || {}') &&
        odptClient.includes('now - operatorTs > RAW_REALTIME_FRESH_MS') &&
        odptClient.includes('window.ODPT_POSITION_SNAPSHOT_AT[op] = operatorTs;'),
