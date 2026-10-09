@@ -559,12 +559,16 @@ function _rememberTrainArtworkFailure(trainUid) {
       var _oldNotes = el.parentNode ? el.parentNode.querySelectorAll('.tp-est-note') : [];
       for (var _oi = 0; _oi < _oldNotes.length; _oi++) _oldNotes[_oi].remove();
       if (!positions || !positions.length) return;
+      var expiredRealtime = positions.some(function(p) {
+        return p && p.positionSource === "realtime-api" && !_isRealtimePositionFresh(p);
+      });
+      var visiblePositions = _filterExpiredRealtimePositions(positions);
       var anyEst = false;
       var anyRealtime = false;
       var latestRealtimeAt = "";
       var latestRealtimeMs = 0;
-      for (var _ei = 0; _ei < positions.length; _ei++) {
-        var _p = positions[_ei];
+      for (var _ei = 0; _ei < visiblePositions.length; _ei++) {
+        var _p = visiblePositions[_ei];
         var _rank = _trainPositionRank(_p);
         if (_rank === 0) {
           anyRealtime = true;
@@ -580,6 +584,7 @@ function _rememberTrainArtworkFailure(trainUid) {
         }
       }
       var parts = [];
+      if (expiredRealtime) parts.push(t("trains.realtime_expired_note") || "ODPT realtime position expired");
       if (anyRealtime && latestRealtimeAt) {
         parts.push("ODPT " + _formatSourceTime(latestRealtimeAt));
       }
@@ -644,7 +649,7 @@ function _rememberTrainArtworkFailure(trainUid) {
         // === Incremental update: only update train layer using cached geometry ===
         updateTrainLayer(existingSvg, positions, stationCoords, lineId, line);
         updateRunningInfo(el, positions);
-        updateEstimatedNote(el, positions);
+        updateEstimatedNote(el, getRealtimePositions(lineId));
         // Sync loading placeholder with the realtime page: hide it as soon as train
         // positions are available (the full-rebuild path re-inserts it when empty).
         if (positions.length > 0) {
@@ -991,7 +996,7 @@ function _rememberTrainArtworkFailure(trainUid) {
       // Now populate train layer
       updateTrainLayer(svg, positions, stationCoords, lineId, line, geometry);
       updateRunningInfo(el, positions);
-      updateEstimatedNote(el, positions);
+      updateEstimatedNote(el, getRealtimePositions(lineId));
       
     } catch(e) {
       el.innerHTML = '<div class="tp-no-data">Error: ' + escapeHtml(e.message) + '</div>';
