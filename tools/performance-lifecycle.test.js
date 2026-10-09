@@ -63,15 +63,25 @@ assert.ok(/ODPT_CHALLENGE_CONSUMER_KEY/.test(trainRunsReadThroughSrc) && /ODPT_C
   'TrainRun read-through must use server-side ODPT secrets only');
 assert.ok(/part\.length >= 1000/.test(trainRunsReadThroughSrc) && /ODPT_TRUNCATED/.test(trainRunsReadThroughSrc),
   'truncated ODPT timetable responses must never be persisted as complete cache');
-assert.ok(/persistOdptRows/.test(trainRunsReadThroughSrc) && /train_run_stops/.test(trainRunsReadThroughSrc),
-  'read-through cache must persist normalized runs and stops through the existing tables');
+assert.ok(/readManualTemplateRuns/.test(trainRunsReadThroughSrc) &&
+  /manual_timetable_templates/.test(trainRunsReadThroughSrc) &&
+  /manual_timetable_template_stops/.test(trainRunsReadThroughSrc) &&
+  /train_run_stops/.test(trainRunsReadThroughSrc),
+  'no-API fallback must read SQL timetable templates and preserve date-specific train runs');
+assert.ok(/\.range\(first, last\)/.test(trainRunsReadThroughSrc),
+  'SQL timetable reads must paginate rather than silently truncate stops');
 assert.ok(!/req\.method === "POST"/.test(trainRunsReadThroughSrc),
   'public train-runs endpoint must remain GET-only and must not accept browser cache writes');
-console.log('train-run-read-through: 4 PASS');
+console.log('train-run-SQL-fallback: 5 PASS');
 
-assert.ok(/partial repair failed/.test(trainRunsReadThroughSrc) && /repairedPayload\.every/.test(trainRunsReadThroughSrc),
-  'PARTIAL TrainRun cache must retry trusted ODPT read-through and only promote fully repaired rows to HIT');
-console.log('train-run-partial-self-heal: 1 PASS');
+assert.ok(/fallback_only/.test(trainRunsReadThroughSrc) &&
+  /source: "API_AVAILABLE"/.test(trainRunsReadThroughSrc) &&
+  /result\.every\(r => r\.stops\.length >= 2\)/.test(trainRunsReadThroughSrc),
+  'SQL-only fallback must bypass API-enabled lines and reject incomplete manual runs');
+assert.ok(/fallback_only=1/.test(odptUnifiedSrc) &&
+  /vehicleType:run\.vehicle_type_label\|\|null/.test(odptUnifiedSrc),
+  'client must request SQL-only fallback and preserve manual vehicle evidence');
+console.log('train-run-SQL-completeness: 2 PASS');
 
 const trainPositionEstimatorSrc = fs.readFileSync('js/train-position-estimator.js','utf8');
 assert.ok(/"_operationCode":run\.operation_code\|\|""/.test(odptUnifiedSrc),
