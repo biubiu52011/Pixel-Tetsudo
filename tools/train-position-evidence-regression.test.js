@@ -248,7 +248,11 @@ assert(odptClient.includes('throw new Error("TrainRun SQL query failed:'),
 assert(!odptClient.includes('}).catch(function(){ return []; }).finally(function(){ delete _trainRunInflight[key]; });'),
   "TrainRun SQL errors must propagate to callers");
 assert(/defaultMode:\s*"UNKNOWN"/.test(runtimePolicy),"unknown API coverage must fail closed");
-assert(/return mode === "NO_REALTIME" \|\| mode === "TIMETABLE_ONLY"/.test(fusion),"timetable position must require explicit non-realtime source assignment");
+assert(fusion.includes('if (mode !== "NO_REALTIME" && mode !== "TIMETABLE_ONLY") return false;') &&
+       fusion.includes('position.positionSource = position.positionSource || "train-timetable";') &&
+       fusion.includes('position.estimated = true;') &&
+       fusion.includes('position.positionSource === "realtime-api") return false;'),
+  "timetable positions require explicit authorization and must never impersonate realtime");
 assert(/function _isFreshRealtimePosition/.test(trains),"realtime freshness guard missing");
 assert(!/return _isFreshRealtimePosition\(p\) \? 0 : 8/.test(trains),"expired realtime must not promote timetable authority");
 assert(/return 0; \/\/ Expiry is reported separately/.test(trains),"realtime source remains authoritative regardless of freshness");
