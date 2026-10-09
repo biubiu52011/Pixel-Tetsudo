@@ -700,16 +700,13 @@
         };
     }
     function getCachedTrainRuns(lineId) {
-        // An ODPT timetable-capable operator already has a direct API path.
-        // The database fallback is only for operators without this capability.
-        var apiOperator = LINE_TO_OPERATOR[lineId];
-        if (apiOperator && ODPT_ENDPOINTS[apiOperator] && ODPT_ENDPOINTS[apiOperator].trainTimetable) {
-            return Promise.resolve([]);
-        }
+        // Timetable API capability is per railway, not per operator.
+        // Ask the server for SQL-only fallback; it bypasses API-enabled lines
+        // rather than duplicating their ODPT timetable requests.
         var serviceDate=_serviceDateJst(), key=lineId+"|"+serviceDate, hit=_trainRunCache[key];
         if(hit && Date.now()-hit.at<30000) return Promise.resolve(hit.rows);
         if(_trainRunInflight[key]) return _trainRunInflight[key];
-        var url=TRAIN_RUN_CACHE_ENDPOINT+"?line_id="+encodeURIComponent(lineId)+"&service_date="+encodeURIComponent(serviceDate);
+        var url=TRAIN_RUN_CACHE_ENDPOINT+"?line_id="+encodeURIComponent(lineId)+"&service_date="+encodeURIComponent(serviceDate)+"&fallback_only=1";
         _trainRunInflight[key]=fetch(url,{credentials:"omit"}).then(function(r){
             if(!r.ok) throw new Error("TrainRun cache HTTP "+r.status);
             return r.json();
