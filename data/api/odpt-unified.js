@@ -1518,7 +1518,19 @@
             return !!(lines && Object.keys(lines).length > 0);
         }, function() {
             try {
-                if (hasDelay) window.DataFusion.updateOdptData(window.ODPT_DELAY_DATA);
+                if (hasDelay) {
+                    var delayNow = Date.now();
+                    Object.keys(window.ODPT_DELAY_DATA || {}).forEach(function(op) {
+                        // Live refresh results take precedence over restored cache.
+                        if (window.ODPT_DELAY_REQUEST_STARTED && window.ODPT_DELAY_REQUEST_STARTED[op]) return;
+                        var ts = window.ODPT_DELAY_SNAPSHOT_AT && window.ODPT_DELAY_SNAPSHOT_AT[op];
+                        if (!Number.isFinite(ts) || ts > delayNow || delayNow - ts > RAW_REALTIME_FRESH_MS) {
+                            delete window.ODPT_DELAY_DATA[op];
+                            if (window.ODPT_DELAY_SNAPSHOT_AT) delete window.ODPT_DELAY_SNAPSHOT_AT[op];
+                        }
+                    });
+                    window.DataFusion.updateOdptData(window.ODPT_DELAY_DATA);
+                }
                 if (hasPositions && window.DataFusion.loadTrainPositions && window.ODPT_TRAIN_POSITIONS) {
                     var now = Date.now();
                     Object.keys(window.ODPT_TRAIN_POSITIONS).forEach(function(op) {
