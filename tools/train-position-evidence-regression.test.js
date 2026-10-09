@@ -8,6 +8,10 @@ for(const js of ["js/data-fusion.js","js/train-position-estimator.js","js/runnin
 
 const fusion=read("js/data-fusion.js");
 assert(/ambiguous realtime line identity/.test(fusion),"ambiguous realtime line identity must remain unresolved");
+assert(fusion.includes('if (_mappedMatches.length === 1) targetLine = _mappedMatches[0];') &&
+       fusion.includes('if (_exactMatches.length === 1) targetLine = _exactMatches[0];') &&
+       !fusion.includes('mappedLids.indexOf(ml.lid) >= 0) { targetLine = ml; break; }'),
+  "realtime source railway mapping must be unique and never select the first ambiguous match");
 assert(!/mainLines\.sort[\s\S]{0,500}targetLine\s*=\s*mainLines\[0\]/.test(fusion),"must not choose longest line for ambiguous realtime");
 assert(/_queueChainVehicle/.test(fusion) && /Object\.keys\(_chainVehicleCandidates\)/.test(fusion),
   "vehicle evidence must converge through one chain candidate pool and one registry commit");
