@@ -1505,8 +1505,18 @@
         }, function() {
             try {
                 if (hasDelay) window.DataFusion.updateOdptData(window.ODPT_DELAY_DATA);
-                if (hasPositions && window.DataFusion.loadTrainPositions && Object.keys(window.ODPT_TRAIN_POSITIONS).length > 0) {
-                    window.DataFusion.loadTrainPositions();
+                if (hasPositions && window.DataFusion.loadTrainPositions && window.ODPT_TRAIN_POSITIONS) {
+                    var now = Date.now();
+                    Object.keys(window.ODPT_TRAIN_POSITIONS).forEach(function(op) {
+                        var ts = window.ODPT_POSITION_SNAPSHOT_AT && window.ODPT_POSITION_SNAPSHOT_AT[op];
+                        // Do not remove live requests or snapshots replaced since cache restoration.
+                        if (window.ODPT_POSITION_REQUEST_STATUS && window.ODPT_POSITION_REQUEST_STATUS[op]) return;
+                        if (!Number.isFinite(ts) || ts > now || now - ts > RAW_REALTIME_FRESH_MS) {
+                            delete window.ODPT_TRAIN_POSITIONS[op];
+                            if (window.ODPT_POSITION_SNAPSHOT_AT) delete window.ODPT_POSITION_SNAPSHOT_AT[op];
+                        }
+                    });
+                    if (Object.keys(window.ODPT_TRAIN_POSITIONS).length > 0) window.DataFusion.loadTrainPositions();
                 }
             } catch(e) { console.debug("[ODPT] cached realtime push error:", e.message); }
         });
