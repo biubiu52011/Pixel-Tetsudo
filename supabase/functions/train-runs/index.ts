@@ -89,38 +89,34 @@ async function persistOdptRows(db: any, source: any, lineId: string, serviceDate
     destination_station: Array.isArray(tt["odpt:destinationStation"])
       ? (tt["odpt:destinationStation"][0] || null) : (tt["odpt:destinationStation"] || null),
   }));
-  const { data: saved, error } = await db.from("train_runs").upsert(runRows, {
-    onConflict: "service_date,operator,network_key,train_number"
-  }).select("id,train_number");
-  if (error || !saved?.length) throw new Error("DB_RUN_UPSERT_FAILED");
-
-  const idByNumber = new Map(saved.map((r: any) => [String(r.train_number), r.id]));
-  const runIds = saved.map((r: any) => r.id);
-  const { error: deleteError } = await db.from("train_run_stops").delete().in("train_run_id", runIds);
-  if (deleteError) throw new Error("DB_STOP_REPLACE_FAILED");
-
-  const stops: any[] = [];
-  for (const tt of valid) {
-    const runId = idByNumber.get(String(tt["odpt:trainNumber"]));
-    if (!runId) continue;
-    tt["odpt:trainTimetableObject"].forEach((stop: any, index: number) => {
+  const payload = valid.map((tt) => ({
+    operator: source.odpt_operator,
+    network_key: source.odpt_railway,
+    train_number: String(tt["odpt:trainNumber"]),
+    calendar_type: String(tt["odpt:calendar"] || ""),
+    rail_direction: tt["odpt:railDirection"] || null,
+    train_type: tt["odpt:trainType"] || null,
+    destination_station: Array.isArray(tt["odpt:destinationStation"])
+      ? (tt["odpt:destinationStation"][0] || null) : (tt["odpt:destinationStation"] || null),
+    stops: tt["odpt:trainTimetableObject"].map((stop: any, index: number) => {
       const urn = stationUrn(stop);
-      if (!urn) return;
-      stops.push({
-        train_run_id: runId, stop_sequence: index,
-        station_key: stationKey(urn), station_urn: urn,
+      if (!urn) throw new Error("ODPT_MISSING_STATION");
+      return {
+        stop_sequence: index,
+        station_key: stationKey(urn),
+        station_urn: urn,
         arrival_time: stop["odpt:arrivalTime"] || null,
         departure_time: stop["odpt:departureTime"] || null,
         arrival_minute: minuteOf(stop["odpt:arrivalTime"]),
         departure_minute: minuteOf(stop["odpt:departureTime"]),
-      });
-    });
-  }
-  if (!stops.length) throw new Error("ODPT_NO_STOPS");
-  for (let i = 0; i < stops.length; i += 500) {
-    const { error: stopError } = await db.from("train_run_stops").insert(stops.slice(i, i + 500));
-    if (stopError) throw new Error("DB_STOP_INSERT_FAILED");
-  }
+      };
+    }),
+  }));
+  if (valid.length !== rows.length) throw new Error("ODPT_INCOMPLETE_RUNS");
+  const { data: inserted, error: importError } = await db.rpc("import_train_timetable", {
+    p_line_id: lineId, p_service_date: serviceDate, p_runs: payload,
+  });
+  if (importError || inserted !== payload.length) throw new Error("DB_ATOMIC_IMPORT_FAILED");
   return true;
 }
 
