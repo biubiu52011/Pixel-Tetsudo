@@ -75,20 +75,7 @@ async function persistOdptRows(db: any, source: any, lineId: string, serviceDate
     tt && tt["odpt:trainNumber"] && Array.isArray(tt["odpt:trainTimetableObject"]) &&
     tt["odpt:trainTimetableObject"].length >= 2
   );
-  if (!valid.length) return false;
-  const runRows = valid.map((tt) => ({
-    service_date: serviceDate,
-    calendar_type: String(tt["odpt:calendar"] || "").includes("Weekday") ? "weekday" : "holiday",
-    operator: source.odpt_operator,
-    network_key: source.odpt_railway,
-    line_id: lineId,
-    train_number: String(tt["odpt:trainNumber"]),
-    operation_code: String(tt["odpt:trainNumber"]),
-    rail_direction: tt["odpt:railDirection"] || null,
-    train_type: tt["odpt:trainType"] || null,
-    destination_station: Array.isArray(tt["odpt:destinationStation"])
-      ? (tt["odpt:destinationStation"][0] || null) : (tt["odpt:destinationStation"] || null),
-  }));
+  if (!valid.length || valid.length !== rows.length) return false;
   const payload = valid.map((tt) => ({
     operator: source.odpt_operator,
     network_key: source.odpt_railway,
@@ -112,7 +99,7 @@ async function persistOdptRows(db: any, source: any, lineId: string, serviceDate
       };
     }),
   }));
-  if (valid.length !== rows.length) throw new Error("ODPT_INCOMPLETE_RUNS");
+
   const { data: inserted, error: importError } = await db.rpc("import_train_timetable", {
     p_line_id: lineId, p_service_date: serviceDate, p_runs: payload,
   });
