@@ -662,6 +662,13 @@
         }
         return p.year+"-"+p.month+"-"+p.day;
     }
+    function _dbStopClock(value, minute) {
+        if (Number.isFinite(Number(minute)) && minute !== null && minute !== undefined && Number(minute) >= 1440) {
+            var n = Number(minute);
+            return String(Math.floor(n / 60)).padStart(2, "0") + ":" + String(n % 60).padStart(2, "0");
+        }
+        return value ? String(value).slice(0, 5) : null;
+    }
     function _trainRunToTimetable(run) {
         return {
             "@id":"supabase:TrainRun:"+run.id,
@@ -680,8 +687,8 @@
             "odpt:destinationStation":run.destination_station?[run.destination_station]:[],
             "odpt:trainTimetableObject":(run.stops||[]).map(function(s){
                 var o={};
-                if(s.arrival_time) o["odpt:arrivalTime"]=String(s.arrival_time).slice(0,5);
-                if(s.departure_time) o["odpt:departureTime"]=String(s.departure_time).slice(0,5);
+                if(s.arrival_time) o["odpt:arrivalTime"]=_dbStopClock(s.arrival_time, s.arrival_minute);
+                if(s.departure_time) o["odpt:departureTime"]=_dbStopClock(s.departure_time, s.departure_minute);
                 if(s.station_urn) {
                     if(s.arrival_time) o["odpt:arrivalStation"]=s.station_urn;
                     if(s.departure_time || !s.arrival_time) o["odpt:departureStation"]=s.station_urn;
