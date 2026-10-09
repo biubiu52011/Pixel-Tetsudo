@@ -221,8 +221,9 @@ assert(odptClient.includes('window.ODPT_POSITION_REQUEST_STATUS[op]) return;') &
        !odptClient.includes('window.ODPT_TRAIN_POSITIONS = posRec.data;'),
   "delayed cache restore must not overwrite live operator requests");
 assert(odptClient.includes('requestId !== _requestId') &&
-       odptClient.includes('status.requestId === positionRequestIds[op]'),
-  "stale operator responses and stale fusion completions must not overwrite newer refresh state");
+       odptClient.includes('Number.isFinite(currentSnapshot) && currentSnapshot <= status.at') &&
+       odptClient.includes('if (existing) clearTimeout(existing);'),
+  "stale operator responses must be rejected and overlapping fusion must only acknowledge completed snapshots");
 assert(odptClient.includes('status.assigned = true;'),
   "ODPT line absence must wait for position assignment");
 assert(renderer.includes('ODPTの位置情報を取得できません') && renderer.includes('ODPT 未返回位置数据'),
