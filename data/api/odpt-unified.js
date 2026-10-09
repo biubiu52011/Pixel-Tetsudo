@@ -1558,6 +1558,7 @@
         var loaded = { delay: 0, positions: 0 };
         window.ODPT_POSITION_REQUEST_STATUS = window.ODPT_POSITION_REQUEST_STATUS || {};
         var delayPromises = [], posPromises = [];
+        var positionRequestIds = {};
 
         ops.forEach(function(op) {
             var ep = ODPT_ENDPOINTS[op];
@@ -1581,6 +1582,7 @@
             if (!delayOnly && ep.train && positionOps.indexOf(op) >= 0) {
                 var _requestId = (window.ODPT_POSITION_REQUEST_STATUS[op] && window.ODPT_POSITION_REQUEST_STATUS[op].requestId || 0) + 1;
                 window.ODPT_POSITION_REQUEST_STATUS[op] = { state: "loading", at: Date.now(), assigned: false, requestId: _requestId };
+                positionRequestIds[op] = _requestId;
                 posPromises.push(
                     fetchODPT(buildUrl(op, 'train')).then(extractData).then(function(data) {
                         // v4.3.392: 成功即写入（空数组也写入），失败不拖垮全局推送
@@ -1652,7 +1654,8 @@
                     window.DataFusion.loadTrainPositions();
                     positionOps.forEach(function(op) {
                         var status = window.ODPT_POSITION_REQUEST_STATUS && window.ODPT_POSITION_REQUEST_STATUS[op];
-                        if (status && (status.state === "ok" || status.state === "empty")) status.assigned = true;
+                        if (status && status.requestId === positionRequestIds[op] &&
+                            (status.state === "ok" || status.state === "empty")) status.assigned = true;
                     });
                 } catch(e) { console.debug("[ODPT] train positions push error:", e.message); }
                 console.debug("[ODPT] Realtime positions pushed:", loaded.positions, "operators");
