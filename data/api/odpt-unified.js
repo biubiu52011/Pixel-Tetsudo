@@ -667,7 +667,13 @@
             "@id":"supabase:TrainRun:"+run.id,
             "odpt:trainNumber":run.train_number||"",
             "odpt:railway":run.network_key||run.line_id||"",
-            "odpt:calendar":run.calendar_type==="holiday"?"odpt.Calendar:SaturdayHoliday":"odpt.Calendar:Weekday",
+            "odpt:calendar":({
+                weekday:"odpt.Calendar:Weekday",
+                saturday:"odpt.Calendar:Saturday",
+                sunday:"odpt.Calendar:Sunday",
+                holiday:"odpt.Calendar:Holiday",
+                saturday_holiday:"odpt.Calendar:SaturdayHoliday"
+            })[run.calendar_type] || "",
             "_operationCode":run.operation_code||"",
             "odpt:railDirection":run.rail_direction||"",
             "odpt:trainType":run.train_type||"",
@@ -686,6 +692,12 @@
         };
     }
     function getCachedTrainRuns(lineId) {
+        // An ODPT timetable-capable operator already has a direct API path.
+        // The database fallback is only for operators without this capability.
+        var apiOperator = LINE_TO_OPERATOR[lineId];
+        if (apiOperator && ODPT_ENDPOINTS[apiOperator] && ODPT_ENDPOINTS[apiOperator].trainTimetable) {
+            return Promise.resolve([]);
+        }
         var serviceDate=_serviceDateJst(), key=lineId+"|"+serviceDate, hit=_trainRunCache[key];
         if(hit && Date.now()-hit.at<30000) return Promise.resolve(hit.rows);
         if(_trainRunInflight[key]) return _trainRunInflight[key];
