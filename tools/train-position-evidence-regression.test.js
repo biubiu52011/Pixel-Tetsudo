@@ -33,6 +33,11 @@ assert(/if \(!d\) return null;/.test(tobuEvidence),
 assert(/!hasExplicitValidity && d !== provider\.effectiveDate/.test(tobuEvidence),
   "undated Tobu timetable rows must not become open-ended vehicle assignments");
 const renderer=read("js/trains-render.js");
+assert(renderer.includes('expiredRealtime = positions.some(function(p)'),
+  "expired realtime must be tracked independently of timetable estimation");
+assert(renderer.includes('updateEstimatedNote(el, getRealtimePositions(lineId));'),
+  "source status must inspect raw positions even when stale realtime markers are filtered");
+
 const trackLayoutSource=read("js/train-track-layout.js");
 const trainsCssSource=read("css/trains.css");
 assert(!/transition:\s*x\s+14s[\s\S]{0,120}y\s+14s/.test(trainsCssSource),
