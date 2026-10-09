@@ -172,6 +172,10 @@ assert(renderer.includes('_request.state === "ok" && _request.assigned === true 
 assert(odptClient.includes('if (!window.ODPT_TRAIN_POSITIONS) window.ODPT_TRAIN_POSITIONS = {};') &&
        !odptClient.includes('if (!window.ODPT_TRAIN_POSITIONS || !positionOperators)'),
   "full ODPT refresh must not clear all operator position snapshots");
+assert(odptClient.includes('if (propagateError) return rateLimitedFetch(url);') &&
+       odptClient.includes("fetchODPT(buildUrl(op, 'train'), true)") &&
+       odptClient.includes('state: "error"'),
+  "ODPT position network failures must propagate instead of being classified as empty");
 assert(odptClient.includes('operatorTs: window.ODPT_POSITION_SNAPSHOT_AT || {}') &&
        odptClient.includes('now - operatorTs > RAW_REALTIME_FRESH_MS') &&
        odptClient.includes('window.ODPT_POSITION_SNAPSHOT_AT[op] = operatorTs;'),
