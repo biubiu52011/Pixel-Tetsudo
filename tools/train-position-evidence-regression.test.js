@@ -8,6 +8,9 @@ for(const js of ["js/data-fusion.js","js/train-position-estimator.js","js/runnin
 
 const fusion=read("js/data-fusion.js");
 assert(/ambiguous realtime line identity/.test(fusion),"ambiguous realtime line identity must remain unresolved");
+assert(fusion.includes('var existingIdx = trainId && _linePositionIndex.has(trainId)') &&
+       fusion.includes('if (trainId) _linePositionIndex.set(trainId, posMap[lid].length);'),
+  "missing realtime train IDs must not collapse unrelated source rows into one index");
 assert(fusion.includes('if (_mappedMatches.length === 1) targetLine = _mappedMatches[0];') &&
        fusion.includes('if (_exactMatches.length === 1) targetLine = _exactMatches[0];') &&
        !fusion.includes('mappedLids.indexOf(ml.lid) >= 0) { targetLine = ml; break; }'),
