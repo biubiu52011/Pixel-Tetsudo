@@ -561,8 +561,12 @@ function _rememberTrainArtworkFailure(trainUid) {
       positions = positions || [];
       var _op = window.ODPTClient && window.ODPTClient.LINE_TO_OPERATOR && window.ODPTClient.LINE_TO_OPERATOR[el.getAttribute("data-line-id") || ""];
       var _request = _op && window.ODPT_POSITION_REQUEST_STATUS && window.ODPT_POSITION_REQUEST_STATUS[_op];
-      // Request state is operator-scoped; an empty operator response does not
-      // prove that a particular railway has no scheduled or running trains.
+      var _lineId = el.getAttribute("data-line-id") || "";
+      var _linePolicy = window.RuntimeConfig && window.RuntimeConfig.REALTIME_POSITION_POLICY;
+      var _lineMode = _linePolicy && _linePolicy.lines && _linePolicy.lines[_lineId] && _linePolicy.lines[_lineId].mode;
+      // Operator status is relevant only to lines explicitly configured for
+      // realtime position coverage; never infer per-line coverage from a shared operator response.
+      if (_lineMode !== "FULL" && _lineMode !== "COARSE") _request = null;
       var expiredRealtime = positions.some(function(p) {
         return p && p.positionSource === "realtime-api" && !_isRealtimePositionFresh(p);
       });
