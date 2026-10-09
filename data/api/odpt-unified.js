@@ -1470,7 +1470,17 @@
                 var delayRec = results[0], posRec = results[1];
                 var delayFresh = !!(delayRec && Number.isFinite(delayRec.ts) && delayRec.ts <= now && (now - delayRec.ts) <= RAW_REALTIME_FRESH_MS && delayRec.data && typeof delayRec.data === 'object');
                 var posFresh = !!(posRec && Number.isFinite(posRec.ts) && posRec.ts <= now && (now - posRec.ts) <= RAW_REALTIME_FRESH_MS && posRec.data && typeof posRec.data === 'object' && !Array.isArray(posRec.data));
-                if (delayFresh) window.ODPT_DELAY_DATA = delayRec.data;
+                var restoredDelay = false;
+                if (delayFresh && !Array.isArray(delayRec.data)) {
+                    window.ODPT_DELAY_DATA = window.ODPT_DELAY_DATA || {};
+                    Object.keys(delayRec.data).forEach(function(op) {
+                        if (window.ODPT_DELAY_REQUEST_STARTED && window.ODPT_DELAY_REQUEST_STARTED[op]) return;
+                        if (Object.prototype.hasOwnProperty.call(window.ODPT_DELAY_DATA, op)) return;
+                        if (delayRec.data[op] !== null && !Array.isArray(delayRec.data[op])) return;
+                        window.ODPT_DELAY_DATA[op] = delayRec.data[op];
+                        restoredDelay = true;
+                    });
+                }
                 var restoredPositions = false;
                 if (posFresh) {
                     window.ODPT_TRAIN_POSITIONS = window.ODPT_TRAIN_POSITIONS || {};
@@ -1488,7 +1498,7 @@
                         restoredPositions = true;
                     });
                 }
-                if (delayFresh || restoredPositions) pushCachedRealtime(delayFresh, restoredPositions);
+                if (restoredDelay || restoredPositions) pushCachedRealtime(restoredDelay, restoredPositions);
             }).catch(function(e) {
                 console.debug("[ODPT] loadRawRealtimeCache error:", e.message);
             });
@@ -1593,6 +1603,7 @@
         var loaded = { delay: 0, positions: 0 };
         window.ODPT_POSITION_REQUEST_STATUS = window.ODPT_POSITION_REQUEST_STATUS || {};
         var delayPromises = [], posPromises = [];
+        window.ODPT_DELAY_REQUEST_STARTED = window.ODPT_DELAY_REQUEST_STARTED || {};
         var positionRequestIds = {};
 
         ops.forEach(function(op) {
@@ -1600,6 +1611,7 @@
 
             // 1. 加载运行情报/延误信息（优先推送，首屏不等列车位置）
             if (!skipDelayRefresh && ep.trainInformation) {
+                window.ODPT_DELAY_REQUEST_STARTED[op] = true;
                 delayPromises.push(
                     fetchODPT(buildUrl(op, 'trainInformation')).then(extractData).then(function(data) {
                         // v4.3.386: 保留全部记录（ODPT 按运行系统返回多条，data[0] 只留首条会丢其他线路的延误）
