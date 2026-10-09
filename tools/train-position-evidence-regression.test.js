@@ -179,6 +179,10 @@ assert(odptClient.includes('if (propagateError) return rateLimitedFetch(url);') 
        odptClient.includes("fetchODPT(buildUrl(op, 'train'), true)") &&
        odptClient.includes('state: "error"'),
   "ODPT position network failures must propagate instead of being classified as empty");
+assert(odptClient.includes('if (existing) clearTimeout(existing);') &&
+       odptClient.includes('Object.keys(window.ODPT_POSITION_REQUEST_STATUS || {}).forEach(function(op)') &&
+       !odptClient.includes('if (existing) return;'),
+  "overlapping ODPT refreshes must replace pending fusion callbacks and acknowledge all fused operators");
 assert(odptClient.includes('delayNow - ts > RAW_REALTIME_FRESH_MS') &&
        odptClient.includes('delete window.ODPT_DELAY_DATA[op];') &&
        odptClient.includes('window.ODPT_DELAY_REQUEST_STARTED[op]) return;'),
