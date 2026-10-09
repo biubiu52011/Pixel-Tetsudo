@@ -587,7 +587,9 @@ function _rememberTrainArtworkFailure(trainUid) {
               latestRealtimeAt = _p.sourceUpdatedAt;
             }
           }
-        } else if (_rank === 1 || _rank === 2) {
+        } else if (_p.positionSource === "train-timetable" || _p.positionSource === "station-timetable") {
+          // Only explicit timetable provenance can justify the timetable-estimation notice.
+          // An estimated flag or unknown rank alone does not identify its source.
           anyEst = true;
         }
       }
