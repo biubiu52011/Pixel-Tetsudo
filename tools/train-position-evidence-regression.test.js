@@ -179,6 +179,10 @@ assert(odptClient.includes('if (propagateError) return rateLimitedFetch(url);') 
        odptClient.includes("fetchODPT(buildUrl(op, 'train'), true)") &&
        odptClient.includes('state: "error"'),
   "ODPT position network failures must propagate instead of being classified as empty");
+assert(odptClient.includes('!Array.isArray(result) && !(result && Array.isArray(result.value))') &&
+       odptClient.includes('Invalid ODPT train position payload') &&
+       odptClient.includes('Invalid ODPT train information payload'),
+  "malformed ODPT object payloads must be rejected rather than classified as empty successful responses");
 assert(odptClient.includes('if (existing) clearTimeout(existing);') &&
        odptClient.includes('Object.keys(window.ODPT_POSITION_REQUEST_STATUS || {}).forEach(function(op)') &&
        !odptClient.includes('if (existing) return;'),
