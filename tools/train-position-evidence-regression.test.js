@@ -33,6 +33,9 @@ assert(/if \(!d\) return null;/.test(tobuEvidence),
 assert(/!hasExplicitValidity && d !== provider\.effectiveDate/.test(tobuEvidence),
   "undated Tobu timetable rows must not become open-ended vehicle assignments");
 const renderer=read("js/trains-render.js");
+assert(renderer.includes('ODPTのリアルタイム位置情報が期限切れです') &&
+       renderer.includes('ODPT 实时位置已过期'),
+  "expired realtime status must have Japanese and Chinese fallbacks");
 assert(renderer.includes('expiredRealtime = positions.some(function(p)'),
   "expired realtime must be tracked independently of timetable estimation");
 assert(renderer.includes('updateEstimatedNote(el, getRealtimePositions(lineId));'),
