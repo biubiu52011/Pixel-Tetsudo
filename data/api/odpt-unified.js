@@ -1429,7 +1429,9 @@
             return;
         }
         var existing = _fusionWaiters[key];
-        if (existing) return;
+        // A later refresh must replace the pending callback, not be silently lost.
+        // The latest callback fuses the shared operator snapshot and request states.
+        if (existing) clearTimeout(existing);
         var startedAt = Date.now();
         function tick() {
             if (ready()) {
