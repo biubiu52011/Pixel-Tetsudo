@@ -695,6 +695,7 @@
                 }
                 return o;
             }),
+            vehicleType:run.vehicle_type_label||null,
             _positionSource:"supabase-train-run"
         };
     }
