@@ -172,6 +172,10 @@ assert(renderer.includes('_request.state === "ok" && _request.assigned === true 
 assert(odptClient.includes('if (!window.ODPT_TRAIN_POSITIONS) window.ODPT_TRAIN_POSITIONS = {};') &&
        !odptClient.includes('if (!window.ODPT_TRAIN_POSITIONS || !positionOperators)'),
   "full ODPT refresh must not clear all operator position snapshots");
+assert(odptClient.includes('window.ODPT_POSITION_REQUEST_STATUS[op]) return;') &&
+       odptClient.includes('restoredPositions = true;') &&
+       !odptClient.includes('window.ODPT_TRAIN_POSITIONS = posRec.data;'),
+  "delayed cache restore must not overwrite live operator requests");
 assert(odptClient.includes('requestId !== _requestId') &&
        odptClient.includes('status.requestId === positionRequestIds[op]'),
   "stale operator responses and stale fusion completions must not overwrite newer refresh state");
