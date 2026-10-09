@@ -15,11 +15,32 @@ function json(body: unknown, status = 200) {
   });
 }
 
+// Dates published by Japan's Cabinet Office; same dates as the browser estimator.
+// Treat unknown years as unverified instead of silently assuming weekdays.
+const JP_HOLIDAYS: Record<string, string[]> = {
+  "2026": ["01-01","01-12","02-11","02-23","03-20","04-29","05-03","05-04","05-05","05-06","07-20","08-11","09-21","09-22","09-23","10-12","11-03","11-23"],
+  "2027": ["01-01","01-11","02-11","02-23","03-21","03-22","04-29","05-03","05-04","05-05","07-19","08-11","09-20","09-23","10-11","11-03","11-23"]
+};
 function serviceCalendars(serviceDate: string) {
+  const year = serviceDate.slice(0, 4);
+  if (!JP_HOLIDAYS[year]) throw new Error("UNVERIFIED_SERVICE_CALENDAR");
   const day = new Date(serviceDate + "T12:00:00+09:00").getUTCDay();
-  if (day === 6) return ["odpt.Calendar:SaturdayHoliday", "odpt.Calendar:Holiday", "odpt.Calendar:Saturday"];
-  if (day === 0) return ["odpt.Calendar:SaturdayHoliday", "odpt.Calendar:Holiday", "odpt.Calendar:Sunday"];
+  if (!Number.isFinite(day)) throw new Error("INVALID_SERVICE_DATE");
+  if (JP_HOLIDAYS[year].includes(serviceDate.slice(5)) || day === 0) {
+    return ["odpt.Calendar:Holiday", "odpt.Calendar:SaturdayHoliday", "odpt.Calendar:Sunday"];
+  }
+  if (day === 6) return ["odpt.Calendar:Saturday", "odpt.Calendar:SaturdayHoliday"];
   return ["odpt.Calendar:Weekday"];
+}
+
+function calendarType(calendar?: string | null) {
+  const value = String(calendar || "");
+  if (value.includes("Weekday")) return "weekday";
+  if (value.includes("SaturdayHoliday")) return "saturday_holiday";
+  if (value.includes("Saturday")) return "saturday";
+  if (value.includes("Sunday")) return "sunday";
+  if (value.includes("Holiday")) return "holiday";
+  return "special";
 }
 
 function minuteOf(time?: string | null) {
@@ -30,6 +51,13 @@ function minuteOf(time?: string | null) {
   const min = Number(m[2]);
   if (h < 4) h += 24;
   return h * 60 + min;
+}
+
+function sqlTime(time?: string | null) {
+  if (!time) return null;
+  return String(time).replace(/^([2-4][0-9]):/, (_m: string, h: string) =>
+    String(Number(h) % 24).padStart(2, "0") + ":"
+  );
 }
 
 function stationUrn(stop: Record<string, unknown>) {
@@ -43,8 +71,6 @@ function stationKey(urn: string) {
 
 async function fetchOdptRows(source: any, sourceKey: string, serviceDate: string) {
   const calendars = serviceCalendars(serviceDate);
-  const seen = new Set<string>();
-  const rows: any[] = [];
   for (const calendar of calendars) {
     const u = new URL("odpt:TrainTimetable", source.odpt_base_url);
     u.searchParams.set("odpt:operator", "odpt.Operator:" + source.odpt_operator);
@@ -62,25 +88,28 @@ async function fetchOdptRows(source: any, sourceKey: string, serviceDate: string
     // ODPT's 1000-row response is a truncation signal. Never persist an
     // incomplete timetable as authoritative cache.
     if (part.length >= 1000) throw new Error("ODPT_TRUNCATED");
-    for (const tt of part) {
-      const key = [tt["odpt:trainNumber"], tt["odpt:calendar"], tt["odpt:railDirection"]].join("|");
-      if (!seen.has(key)) { seen.add(key); rows.push(tt); }
-    }
+    // Calendar variants are alternatives, not additive. Do not combine conflicting schedules.
+    if (part.length) return part;
   }
-  return rows;
+  return [];
 }
 
-async function persistOdptRows(db: any, source: any, lineId: string, serviceDate: string, rows: any[]) {
+function formatOdptRows(source: any, lineId: string, serviceDate: string, rows: any[]) {
   const valid = rows.filter((tt) =>
     tt && tt["odpt:trainNumber"] && Array.isArray(tt["odpt:trainTimetableObject"]) &&
     tt["odpt:trainTimetableObject"].length >= 2
   );
-  if (!valid.length || valid.length !== rows.length) return false;
-  const payload = valid.map((tt) => ({
+  if (valid.length !== rows.length) throw new Error("ODPT_INCOMPLETE_RUNS");
+  const importRows = valid.map((tt) => ({
+    id: null,
+    line_id: lineId,
+    service_date: serviceDate,
+    source: "ODPT_API",
+    calendar_type: calendarType(tt["odpt:calendar"]),
     operator: source.odpt_operator,
     network_key: source.odpt_railway,
     train_number: String(tt["odpt:trainNumber"]),
-    calendar_type: String(tt["odpt:calendar"] || ""),
+    operation_code: String(tt["odpt:trainNumber"]),
     rail_direction: tt["odpt:railDirection"] || null,
     train_type: tt["odpt:trainType"] || null,
     destination_station: Array.isArray(tt["odpt:destinationStation"])
@@ -89,22 +118,17 @@ async function persistOdptRows(db: any, source: any, lineId: string, serviceDate
       const urn = stationUrn(stop);
       if (!urn) throw new Error("ODPT_MISSING_STATION");
       return {
+        train_run_id: null,
         stop_sequence: index,
-        station_key: stationKey(urn),
-        station_urn: urn,
-        arrival_time: stop["odpt:arrivalTime"] ? String(stop["odpt:arrivalTime"]).replace(/^([2-4][0-9]):/, (_m: string, h: string) => String(Number(h) % 24).padStart(2, "0") + ":") : null,
-        departure_time: stop["odpt:departureTime"] ? String(stop["odpt:departureTime"]).replace(/^([2-4][0-9]):/, (_m: string, h: string) => String(Number(h) % 24).padStart(2, "0") + ":") : null,
+        station_key: stationKey(urn), station_urn: urn,
+        arrival_time: sqlTime(stop["odpt:arrivalTime"]),
+        departure_time: sqlTime(stop["odpt:departureTime"]),
         arrival_minute: minuteOf(stop["odpt:arrivalTime"]),
         departure_minute: minuteOf(stop["odpt:departureTime"]),
       };
     }),
   }));
-
-  const { data: inserted, error: importError } = await db.rpc("import_train_timetable", {
-    p_line_id: lineId, p_service_date: serviceDate, p_runs: payload,
-  });
-  if (importError || inserted !== payload.length) throw new Error("DB_ATOMIC_IMPORT_FAILED");
-  return true;
+  return importRows;
 }
 
 Deno.serve(async (req: Request) => {
@@ -123,91 +147,47 @@ Deno.serve(async (req: Request) => {
   if (!supabaseUrl || !secretKey) return json({ ok: false, error: "SERVER_CONFIG" }, 500);
 
   const db = createClient(supabaseUrl, secretKey, { auth: { persistSession: false, autoRefreshToken: false } });
-  const { data: runs, error } = await db
-    .from("train_runs")
-    .select("id,service_date,calendar_type,operator,network_key,line_id,train_number,operation_code,rail_direction,train_type,destination_station")
-    .eq("line_id", lineId).eq("service_date", serviceDate).order("train_number");
-  if (error) return json({ ok: false, error: "DB_QUERY_FAILED" }, 500);
-  if (!runs?.length) {
-    const { data: source } = await db.from("railway_lines")
-      .select("odpt_operator,odpt_railway,odpt_base_url").eq("id", lineId).maybeSingle();
-    const sourceKey = source?.odpt_base_url?.includes("api-challenge")
-      ? Deno.env.get("ODPT_CHALLENGE_CONSUMER_KEY")
-      : Deno.env.get("ODPT_CONSUMER_KEY");
-    if (!source?.odpt_operator || !source?.odpt_railway || !source?.odpt_base_url) {
-      return json({ ok: true, cache: "MISS", complete: false, line_id: lineId, service_date: serviceDate, source: "UNMAPPED", runs: [] });
-    }
-    if (!sourceKey) {
-      return json({ ok: true, cache: "MISS", complete: false, line_id: lineId, service_date: serviceDate, source: "UNCONFIGURED", runs: [] });
-    }
+  const { data: source, error: sourceError } = await db.from("railway_lines")
+    .select("odpt_operator,odpt_railway,odpt_base_url").eq("id", lineId).maybeSingle();
+  if (sourceError) return json({ ok: false, error: "DB_SOURCE_LOOKUP_FAILED" }, 500);
+  const hasApi = !!(source?.odpt_operator && source?.odpt_railway && source?.odpt_base_url);
+  if (hasApi) {
+    const sourceKey = source.odpt_base_url.includes("api-challenge")
+      ? Deno.env.get("ODPT_CHALLENGE_CONSUMER_KEY") : Deno.env.get("ODPT_CONSUMER_KEY");
+    if (!sourceKey) return json({ ok: true, complete: false, cache: "BYPASS",
+      source: "API_UNCONFIGURED", line_id: lineId, service_date: serviceDate, runs: [] });
     try {
-      const odptRows = await fetchOdptRows(source, sourceKey, serviceDate);
-      if (!odptRows.length || !await persistOdptRows(db, source, lineId, serviceDate, odptRows)) {
-        return json({ ok: true, cache: "MISS", complete: false, line_id: lineId, service_date: serviceDate, source: "EMPTY", runs: [] });
-      }
-      const { data: filled, error: refillError } = await db.from("train_runs")
-        .select("id,service_date,calendar_type,operator,network_key,line_id,train_number,operation_code,rail_direction,train_type,destination_station")
-        .eq("line_id", lineId).eq("service_date", serviceDate).order("train_number");
-      if (refillError || !filled?.length) return json({ ok: false, error: "DB_REFILL_QUERY_FAILED" }, 500);
-      runs.splice(0, runs.length, ...filled);
-    } catch (e) {
-      console.error("[train-runs] read-through failed", lineId, String(e));
-      return json({ ok: true, cache: "MISS", complete: false, line_id: lineId, service_date: serviceDate, source: "ERROR", runs: [] });
+      const upstream = await fetchOdptRows(source, sourceKey, serviceDate);
+      const runs = formatOdptRows(source, lineId, serviceDate, upstream);
+      return json({ ok: true, complete: runs.length > 0, cache: "BYPASS",
+        source: "ODPT_API", line_id: lineId, service_date: serviceDate, runs });
+    } catch (err) {
+      console.error("[train-runs] ODPT API read failed", lineId, String(err));
+      return json({ ok: true, complete: false, cache: "BYPASS",
+        source: "API_ERROR", line_id: lineId, service_date: serviceDate, runs: [] });
     }
   }
 
-  const { data: stops, error: stopError } = await db
-    .from("train_run_stops")
-    .select("train_run_id,stop_sequence,station_key,station_urn,arrival_time,departure_time,arrival_minute,departure_minute")
-    .in("train_run_id", runs.map((r) => r.id))
-    .order("train_run_id").order("stop_sequence");
-  if (stopError) return json({ ok: false, error: "DB_STOP_QUERY_FAILED" }, 500);
+  // Database is only for lines without a configured upstream timetable API.
+  const { data: runs, error } = await db.from("train_runs")
+    .select("id,service_date,calendar_type,operator,network_key,line_id,train_number,operation_code,rail_direction,train_type,destination_station")
+    .eq("line_id", lineId).eq("service_date", serviceDate).order("train_number");
+  if (error) return json({ ok: false, error: "DB_QUERY_FAILED" }, 500);
+  if (!runs?.length) return json({ ok: true, cache: "MISS", complete: false,
+    source: "NO_API_NO_DATA", line_id: lineId, service_date: serviceDate, runs: [] });
 
+  const { data: stops, error: stopError } = await db.from("train_run_stops")
+    .select("train_run_id,stop_sequence,station_key,station_urn,arrival_time,departure_time,arrival_minute,departure_minute")
+    .in("train_run_id", runs.map((r) => r.id)).order("train_run_id").order("stop_sequence");
+  if (stopError) return json({ ok: false, error: "DB_STOP_QUERY_FAILED" }, 500);
   const byRun = new Map<number, unknown[]>();
   for (const stop of stops || []) {
     const list = byRun.get(stop.train_run_id) || [];
     list.push(stop);
     byRun.set(stop.train_run_id, list);
   }
-  let payload = runs.map((run) => ({ ...run, stops: byRun.get(run.id) || [] }));
-  let complete = payload.every((run) => run.stops.length >= 2);
-  if (!complete) {
-    const { data: source } = await db.from("railway_lines")
-      .select("odpt_operator,odpt_railway,odpt_base_url").eq("id", lineId).maybeSingle();
-    const sourceKey = source?.odpt_base_url?.includes("api-challenge")
-      ? Deno.env.get("ODPT_CHALLENGE_CONSUMER_KEY")
-      : Deno.env.get("ODPT_CONSUMER_KEY");
-    if (source?.odpt_operator && source?.odpt_railway && source?.odpt_base_url && sourceKey) {
-      try {
-        const odptRows = await fetchOdptRows(source, sourceKey, serviceDate);
-        if (odptRows.length && await persistOdptRows(db, source, lineId, serviceDate, odptRows)) {
-          const { data: repairedRuns, error: repairedRunError } = await db.from("train_runs")
-            .select("id,service_date,calendar_type,operator,network_key,line_id,train_number,operation_code,rail_direction,train_type,destination_station")
-            .eq("line_id", lineId).eq("service_date", serviceDate).order("train_number");
-          if (!repairedRunError && repairedRuns?.length) {
-            const { data: repairedStops, error: repairedStopError } = await db.from("train_run_stops")
-              .select("train_run_id,stop_sequence,station_key,station_urn,arrival_time,departure_time,arrival_minute,departure_minute")
-              .in("train_run_id", repairedRuns.map((r) => r.id))
-              .order("train_run_id").order("stop_sequence");
-            if (!repairedStopError) {
-              const repairedByRun = new Map<number, unknown[]>();
-              for (const stop of repairedStops || []) {
-                const list = repairedByRun.get(stop.train_run_id) || [];
-                list.push(stop);
-                repairedByRun.set(stop.train_run_id, list);
-              }
-              const repairedPayload = repairedRuns.map((run) => ({ ...run, stops: repairedByRun.get(run.id) || [] }));
-              if (repairedPayload.every((run) => run.stops.length >= 2)) {
-                payload = repairedPayload;
-                complete = true;
-              }
-            }
-          }
-        }
-      } catch (e) {
-        console.error("[train-runs] partial repair failed", lineId, String(e));
-      }
-    }
-  }
-  return json({ ok: true, cache: complete ? "HIT" : "PARTIAL", complete, line_id: lineId, service_date: serviceDate, runs: complete ? payload : [] });
+  const result = runs.map((run) => ({ ...run, stops: byRun.get(run.id) || [] }));
+  const complete = result.length > 0 && result.every((run) => run.stops.length >= 2);
+  return json({ ok: true, cache: complete ? "HIT" : "PARTIAL", complete,
+    source: "DATABASE_MANUAL", line_id: lineId, service_date: serviceDate, runs: complete ? result : [] });
 });
