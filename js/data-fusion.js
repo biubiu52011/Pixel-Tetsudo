@@ -975,7 +975,9 @@
             if (!posMap[lid]) posMap[lid] = [];
             var _linePositionIndex = _positionIndexByLine[lid];
             if (!_linePositionIndex) _linePositionIndex = _positionIndexByLine[lid] = new Map();
-            var existingIdx = _linePositionIndex.has(trainId) ? _linePositionIndex.get(trainId) : -1;
+            // An absent provider train ID cannot prove two records describe the
+            // same physical train. Never deduplicate unrelated rows on "".
+            var existingIdx = trainId && _linePositionIndex.has(trainId) ? _linePositionIndex.get(trainId) : -1;
             var rawType = t["odpt:trainType"] || "";
             var typeName = "";
             if (rawType) {
@@ -1072,7 +1074,7 @@
             if (existingIdx >= 0) {
               posMap[lid][existingIdx] = positionData;
             } else {
-              _linePositionIndex.set(trainId, posMap[lid].length);
+              if (trainId) _linePositionIndex.set(trainId, posMap[lid].length);
               posMap[lid].push(positionData);
             }
           }
