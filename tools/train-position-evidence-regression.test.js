@@ -179,6 +179,10 @@ assert(odptClient.includes('if (propagateError) return rateLimitedFetch(url);') 
        odptClient.includes("fetchODPT(buildUrl(op, 'train'), true)") &&
        odptClient.includes('state: "error"'),
   "ODPT position network failures must propagate instead of being classified as empty");
+assert(odptClient.includes('now - ts > RAW_REALTIME_FRESH_MS') &&
+       odptClient.includes('delete window.ODPT_TRAIN_POSITIONS[op];') &&
+       odptClient.includes('Rebuild even when all cached positions expired'),
+  "expired ODPT cache must be removed before delayed fusion, including all-expired snapshots");
 assert(odptClient.includes('if (!hasPositions) return true;') &&
        odptClient.includes('if (!window.DataFusion.loadTrainPositions) return false;') &&
        odptClient.includes('return !!(lines && Object.keys(lines).length > 0);'),
