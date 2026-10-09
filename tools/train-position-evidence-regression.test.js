@@ -179,6 +179,10 @@ assert(odptClient.includes('if (propagateError) return rateLimitedFetch(url);') 
        odptClient.includes("fetchODPT(buildUrl(op, 'train'), true)") &&
        odptClient.includes('state: "error"'),
   "ODPT position network failures must propagate instead of being classified as empty");
+assert(odptClient.includes('operatorTs: window.ODPT_DELAY_SNAPSHOT_AT || {}') &&
+       odptClient.includes('delayRec.operatorTs && delayRec.operatorTs[op]') &&
+       odptClient.includes('window.ODPT_DELAY_SNAPSHOT_AT[op] = operatorTs;'),
+  "ODPT train-information cache must enforce per-operator snapshot freshness");
 assert(odptClient.includes('if (!window.ODPT_DELAY_DATA) window.ODPT_DELAY_DATA = {};') &&
        !odptClient.includes('if (!skipDelayRefresh || !window.ODPT_DELAY_DATA) window.ODPT_DELAY_DATA = {};') &&
        odptClient.includes("fetchODPT(buildUrl(op, 'trainInformation'), true)") &&
