@@ -169,6 +169,9 @@ assert(odptClient.includes('window.ODPT_POSITION_REQUEST_STATUS[op] = { state: "
 assert(renderer.includes('_request.state === "ok" && _request.assigned === true && !anyRealtime') &&
        renderer.includes('该线路暂无 ODPT 实时位置记录'),
   "operator success without line records must have its own status");
+assert(odptClient.includes('if (!window.ODPT_TRAIN_POSITIONS) window.ODPT_TRAIN_POSITIONS = {};') &&
+       !odptClient.includes('if (!window.ODPT_TRAIN_POSITIONS || !positionOperators)'),
+  "full ODPT refresh must not clear all operator position snapshots");
 assert(odptClient.includes('requestId !== _requestId') &&
        odptClient.includes('status.requestId === positionRequestIds[op]'),
   "stale operator responses and stale fusion completions must not overwrite newer refresh state");
