@@ -1464,8 +1464,8 @@
             ]).then(function(results) {
                 var now = Date.now();
                 var delayRec = results[0], posRec = results[1];
-                var delayFresh = !!(delayRec && delayRec.ts && (now - delayRec.ts) <= RAW_REALTIME_FRESH_MS && delayRec.data && typeof delayRec.data === 'object');
-                var posFresh = !!(posRec && posRec.ts && (now - posRec.ts) <= RAW_REALTIME_FRESH_MS && posRec.data && typeof posRec.data === 'object');
+                var delayFresh = !!(delayRec && Number.isFinite(delayRec.ts) && delayRec.ts <= now && (now - delayRec.ts) <= RAW_REALTIME_FRESH_MS && delayRec.data && typeof delayRec.data === 'object');
+                var posFresh = !!(posRec && Number.isFinite(posRec.ts) && posRec.ts <= now && (now - posRec.ts) <= RAW_REALTIME_FRESH_MS && posRec.data && typeof posRec.data === 'object' && !Array.isArray(posRec.data));
                 if (delayFresh) window.ODPT_DELAY_DATA = delayRec.data;
                 var restoredPositions = false;
                 if (posFresh) {
