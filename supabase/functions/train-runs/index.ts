@@ -72,7 +72,7 @@ function stationKey(urn: string) {
 async function fetchOdptRows(source: any, sourceKey: string, serviceDate: string) {
   const calendars = serviceCalendars(serviceDate);
   for (const calendar of calendars) {
-    const u = new URL("odpt:TrainTimetable", source.odpt_base_url);
+    const u = new URL("./odpt:TrainTimetable", source.odpt_base_url);
     u.searchParams.set("odpt:operator", "odpt.Operator:" + source.odpt_operator);
     u.searchParams.set("odpt:railway", "odpt.Railway:" + source.odpt_operator + "." + source.odpt_railway);
     u.searchParams.set("odpt:calendar", calendar);
