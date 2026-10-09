@@ -573,20 +573,10 @@ function _rememberTrainArtworkFailure(trainUid) {
       var visiblePositions = _filterExpiredRealtimePositions(positions);
       var anyEst = false;
       var anyRealtime = false;
-      var latestRealtimeAt = "";
-      var latestRealtimeMs = 0;
       for (var _ei = 0; _ei < visiblePositions.length; _ei++) {
         var _p = visiblePositions[_ei];
-        var _rank = _trainPositionRank(_p);
-        if (_rank === 0) {
+        if (_p.positionSource === "realtime-api") {
           anyRealtime = true;
-          if (_p.sourceUpdatedAt) {
-            var _ms = Date.parse(_p.sourceUpdatedAt);
-            if (!isNaN(_ms) && _ms > latestRealtimeMs) {
-              latestRealtimeMs = _ms;
-              latestRealtimeAt = _p.sourceUpdatedAt;
-            }
-          }
         } else if (_p.positionSource === "train-timetable" || _p.positionSource === "station-timetable") {
           // Only explicit timetable provenance can justify the timetable-estimation notice.
           // An estimated flag or unknown rank alone does not identify its source.
@@ -625,9 +615,6 @@ function _rememberTrainArtworkFailure(trainUid) {
             "ODPTのリアルタイム位置情報が期限切れです";
         }
         parts.push(_expiredText);
-      }
-      if (anyRealtime && latestRealtimeAt) {
-        parts.push("ODPT " + _formatSourceTime(latestRealtimeAt));
       }
       if (anyEst) {
         parts.push(anyRealtime
