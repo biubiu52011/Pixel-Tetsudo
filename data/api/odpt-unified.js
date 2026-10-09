@@ -1731,10 +1731,11 @@
                 try {
                     window.DataFusion.loadTrainPositions._calibrated = false;
                     window.DataFusion.loadTrainPositions();
-                    positionOps.forEach(function(op) {
-                        var status = window.ODPT_POSITION_REQUEST_STATUS && window.ODPT_POSITION_REQUEST_STATUS[op];
-                        if (status && status.requestId === positionRequestIds[op] &&
-                            (status.state === "ok" || status.state === "empty")) status.assigned = true;
+                    // Fusion consumes the shared snapshot for every operator, not just
+                    // the batch whose callback survived an overlapping readiness wait.
+                    Object.keys(window.ODPT_POSITION_REQUEST_STATUS || {}).forEach(function(op) {
+                        var status = window.ODPT_POSITION_REQUEST_STATUS[op];
+                        if (status && (status.state === "ok" || status.state === "empty")) status.assigned = true;
                     });
                 } catch(e) { console.debug("[ODPT] train positions push error:", e.message); }
                 console.debug("[ODPT] Realtime positions pushed:", loaded.positions, "operators");
