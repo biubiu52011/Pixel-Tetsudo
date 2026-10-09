@@ -1556,6 +1556,7 @@
         var ops = Object.keys(ODPT_ENDPOINTS);
         var positionOps = positionOperators && positionOperators.length ? positionOperators : ops;
         var loaded = { delay: 0, positions: 0 };
+        window.ODPT_POSITION_REQUEST_STATUS = window.ODPT_POSITION_REQUEST_STATUS || {};
         var delayPromises = [], posPromises = [];
 
         ops.forEach(function(op) {
@@ -1578,10 +1579,12 @@
 
             // 2. 加载列车实时位置（第二推送，不阻塞延误首屏；delayOnly 模式跳过）
             if (!delayOnly && ep.train && positionOps.indexOf(op) >= 0) {
+                window.ODPT_POSITION_REQUEST_STATUS[op] = { state: "loading", at: Date.now() };
                 posPromises.push(
                     fetchODPT(buildUrl(op, 'train')).then(extractData).then(function(data) {
                         // v4.3.392: 成功即写入（空数组也写入），失败不拖垮全局推送
                         window.ODPT_TRAIN_POSITIONS[op] = (data && data.length > 0) ? data : [];
+                        window.ODPT_POSITION_REQUEST_STATUS[op] = { state: data && data.length ? "ok" : "empty", at: Date.now() };
                         loaded.positions++;
                         // Explicit Yamanote baseline probe: record only exact
                         // JR-East.Yamanote rows; never classify other JR-East rows
@@ -1599,6 +1602,7 @@
                         }
                     }).catch(function(e) {
                         window.ODPT_TRAIN_POSITIONS[op] = null;
+                        window.ODPT_POSITION_REQUEST_STATUS[op] = { state: "error", at: Date.now(), error: String(e && e.message || e) };
                         console.debug("[ODPT] " + op + " train positions fetch failed:", e && e.message);
                     })
                 );
