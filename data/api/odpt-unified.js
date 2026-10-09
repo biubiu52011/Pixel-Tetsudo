@@ -1449,7 +1449,7 @@
             window.RTCache.put('rawDelay', { ts: Date.now(), data: window.ODPT_DELAY_DATA });
             // 位置仅在非惰性模式写——lazy（home）不拉 positions，写空会覆盖 trains 页刚落的真实位置
             if (!delayOnly) {
-                window.RTCache.put('rawPositions', { ts: Date.now(), data: window.ODPT_TRAIN_POSITIONS });
+                window.RTCache.put('rawPositions', { ts: Date.now(), data: window.ODPT_TRAIN_POSITIONS, operatorTs: window.ODPT_POSITION_SNAPSHOT_AT || {} });
             }
         } catch(e) { console.debug("[ODPT] persistRawRealtime error:", e.message); }
     }
@@ -1475,7 +1475,12 @@
                         // live request has already started, including failed requests.
                         if (window.ODPT_POSITION_REQUEST_STATUS && window.ODPT_POSITION_REQUEST_STATUS[op]) return;
                         if (Object.prototype.hasOwnProperty.call(window.ODPT_TRAIN_POSITIONS, op)) return;
+                        var operatorTs = posRec.operatorTs && posRec.operatorTs[op];
+                        if (!Number.isFinite(operatorTs) || operatorTs > now || now - operatorTs > RAW_REALTIME_FRESH_MS) return;
+                        if (!Array.isArray(posRec.data[op])) return;
                         window.ODPT_TRAIN_POSITIONS[op] = posRec.data[op];
+                        window.ODPT_POSITION_SNAPSHOT_AT = window.ODPT_POSITION_SNAPSHOT_AT || {};
+                        window.ODPT_POSITION_SNAPSHOT_AT[op] = operatorTs;
                         restoredPositions = true;
                     });
                 }
@@ -1561,6 +1566,7 @@
         // A failed or empty request replaces only its own operator's snapshot;
         // clearing all operators here makes healthy lines disappear mid-refresh.
         if (!window.ODPT_TRAIN_POSITIONS) window.ODPT_TRAIN_POSITIONS = {};
+        window.ODPT_POSITION_SNAPSHOT_AT = window.ODPT_POSITION_SNAPSHOT_AT || {};
         // 注意：不清空 ODPT_TIMETABLES，时刻表使用缓存
 
         var ops = Object.keys(ODPT_ENDPOINTS);
@@ -1598,6 +1604,7 @@
                         // v4.3.392: 成功即写入（空数组也写入），失败不拖垮全局推送
                         if (!window.ODPT_POSITION_REQUEST_STATUS[op] || window.ODPT_POSITION_REQUEST_STATUS[op].requestId !== _requestId) return;
                         window.ODPT_TRAIN_POSITIONS[op] = (data && data.length > 0) ? data : [];
+                        window.ODPT_POSITION_SNAPSHOT_AT[op] = Date.now();
                         window.ODPT_POSITION_REQUEST_STATUS[op] = { state: data && data.length ? "ok" : "empty", at: Date.now(), assigned: false, requestId: _requestId };
                         loaded.positions++;
                         // Explicit Yamanote baseline probe: record only exact
@@ -1617,6 +1624,7 @@
                     }).catch(function(e) {
                         if (!window.ODPT_POSITION_REQUEST_STATUS[op] || window.ODPT_POSITION_REQUEST_STATUS[op].requestId !== _requestId) return;
                         window.ODPT_TRAIN_POSITIONS[op] = null;
+                        delete window.ODPT_POSITION_SNAPSHOT_AT[op];
                         window.ODPT_POSITION_REQUEST_STATUS[op] = { state: "error", at: Date.now(), error: String(e && e.message || e), requestId: _requestId };
                         console.debug("[ODPT] " + op + " train positions fetch failed:", e && e.message);
                     })
