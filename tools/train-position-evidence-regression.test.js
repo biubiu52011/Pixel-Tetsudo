@@ -33,8 +33,8 @@ assert(/if \(!d\) return null;/.test(tobuEvidence),
 assert(/!hasExplicitValidity && d !== provider\.effectiveDate/.test(tobuEvidence),
   "undated Tobu timetable rows must not become open-ended vehicle assignments");
 const renderer=read("js/trains-render.js");
-assert(renderer.includes('No source evidence is not proof of API failure.'),
-  "empty source data must not be misreported as an API outage");
+assert(renderer.includes('_request.state === "error"') && renderer.includes('_request.state === "empty"'),
+  "empty API responses and request failures must use distinct states");
 assert(renderer.includes('ODPTのリアルタイム位置情報が期限切れです') &&
        renderer.includes('ODPT 实时位置已过期'),
   "expired realtime status must have Japanese and Chinese fallbacks");
