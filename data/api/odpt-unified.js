@@ -1548,9 +1548,10 @@
     function loadRealtimeData(delayOnly, positionOperators, skipDelayRefresh) {
         validateAuthoritativeRealtimeConfig();
         if (!skipDelayRefresh || !window.ODPT_DELAY_DATA) window.ODPT_DELAY_DATA = {};
-        // Position snapshots are retained per operator. On-demand refresh must
-        // not erase another already-active operator before its own poll runs.
-        if (!window.ODPT_TRAIN_POSITIONS || !positionOperators) window.ODPT_TRAIN_POSITIONS = {};
+        // Preserve per-operator snapshots during both full and on-demand polls.
+        // A failed or empty request replaces only its own operator's snapshot;
+        // clearing all operators here makes healthy lines disappear mid-refresh.
+        if (!window.ODPT_TRAIN_POSITIONS) window.ODPT_TRAIN_POSITIONS = {};
         // 注意：不清空 ODPT_TIMETABLES，时刻表使用缓存
 
         var ops = Object.keys(ODPT_ENDPOINTS);
