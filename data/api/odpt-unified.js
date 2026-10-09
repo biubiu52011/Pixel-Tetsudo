@@ -1516,7 +1516,8 @@
                             if (window.ODPT_POSITION_SNAPSHOT_AT) delete window.ODPT_POSITION_SNAPSHOT_AT[op];
                         }
                     });
-                    if (Object.keys(window.ODPT_TRAIN_POSITIONS).length > 0) window.DataFusion.loadTrainPositions();
+                    // Rebuild even when all cached positions expired, clearing any earlier render.
+                    window.DataFusion.loadTrainPositions();
                 }
             } catch(e) { console.debug("[ODPT] cached realtime push error:", e.message); }
         });
