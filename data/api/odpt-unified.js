@@ -1635,7 +1635,7 @@
                 delayPromises.push(
                     fetchODPT(buildUrl(op, 'trainInformation'), true).then(function(result) {
                         var data = extractData(result);
-                        if (!result || !Array.isArray(data)) throw new Error('Invalid ODPT train information payload');
+                        if (!Array.isArray(result) && !(result && Array.isArray(result.value))) throw new Error('Invalid ODPT train information payload');
                         return data;
                     }).then(function(data) {
                         // v4.3.386: 保留全部记录（ODPT 按运行系统返回多条，data[0] 只留首条会丢其他线路的延误）
@@ -1659,7 +1659,7 @@
                 posPromises.push(
                     fetchODPT(buildUrl(op, 'train'), true).then(function(result) {
                         var data = extractData(result);
-                        if (!result || !Array.isArray(data)) throw new Error("Invalid ODPT train position payload");
+                        if (!Array.isArray(result) && !(result && Array.isArray(result.value))) throw new Error("Invalid ODPT train position payload");
                         return data;
                     }).then(function(data) {
                         // v4.3.392: 成功即写入（空数组也写入），失败不拖垮全局推送
