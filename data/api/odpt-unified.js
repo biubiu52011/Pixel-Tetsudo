@@ -631,8 +631,9 @@
     }
 
     // ========== Fetch wrapper ==========
-    function fetchODPT(url) {
-        if (!url) return Promise.resolve(null);
+    function fetchODPT(url, propagateError) {
+        if (!url) return propagateError ? Promise.reject(new Error("ODPT endpoint unavailable")) : Promise.resolve(null);
+        if (propagateError) return rateLimitedFetch(url);
         return rateLimitedFetch(url).catch(function(e) {
             console.warn("[ODPT] Failed:", e.message);
             return null;
@@ -1600,7 +1601,7 @@
                 window.ODPT_POSITION_REQUEST_STATUS[op] = { state: "loading", at: Date.now(), assigned: false, requestId: _requestId };
                 positionRequestIds[op] = _requestId;
                 posPromises.push(
-                    fetchODPT(buildUrl(op, 'train')).then(extractData).then(function(data) {
+                    fetchODPT(buildUrl(op, 'train'), true).then(extractData).then(function(data) {
                         // v4.3.392: 成功即写入（空数组也写入），失败不拖垮全局推送
                         if (!window.ODPT_POSITION_REQUEST_STATUS[op] || window.ODPT_POSITION_REQUEST_STATUS[op].requestId !== _requestId) return;
                         window.ODPT_TRAIN_POSITIONS[op] = (data && data.length > 0) ? data : [];
