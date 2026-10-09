@@ -558,7 +558,7 @@ function _rememberTrainArtworkFailure(trainUid) {
     try {
       var _oldNotes = el.parentNode ? el.parentNode.querySelectorAll('.tp-est-note') : [];
       for (var _oi = 0; _oi < _oldNotes.length; _oi++) _oldNotes[_oi].remove();
-      if (!positions || !positions.length) return;
+      if (!positions || !positions.length) return; // No source evidence is not proof of API failure.
       var expiredRealtime = positions.some(function(p) {
         return p && p.positionSource === "realtime-api" && !_isRealtimePositionFresh(p);
       });
@@ -662,10 +662,10 @@ function _rememberTrainArtworkFailure(trainUid) {
         updateEstimatedNote(el, getRealtimePositions(lineId));
         // Sync loading placeholder with the realtime page: hide it as soon as train
         // positions are available (the full-rebuild path re-inserts it when empty).
-        if (positions.length > 0) {
-          var _noDataEl = el.querySelector('.tp-no-data');
-          if (_noDataEl) _noDataEl.remove();
-        }
+        var _noDataEl = el.querySelector('.tp-no-data');
+        if (positions.length > 0 && _noDataEl) _noDataEl.remove();
+        // Do not resurrect a generic "no data" overlay when all API records
+        // are expired: updateEstimatedNote() reports that specific source state.
         return;
       }
       
