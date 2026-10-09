@@ -1747,14 +1747,10 @@
     // activateRealtimeLines() owns ODPT network loading. If that path already
     // populated this line, do not start a second timetable source request here;
     // only lazy-load manual evidence (vehicleType etc.) on top of the shared rows.
-    // Only upstream-API lines need extra local vehicle evidence.
-    // A timetable loaded from SQL must not trigger the duplicate JS import path.
-    if (_hasOdptTimetable(lineId)) {
-      var _apiOp = window.ODPTClient && window.ODPTClient.LINE_TO_OPERATOR && window.ODPTClient.LINE_TO_OPERATOR[lineId];
-      if (_apiOp && window.ODPTClient.ENDPOINTS && window.ODPTClient.ENDPOINTS[_apiOp] && window.ODPTClient.ENDPOINTS[_apiOp].trainTimetable) {
-        return ensureManualTimetable(lineId);
-      }
-    }
+    // SQL fallback capability is resolved per railway by the server, not by
+    // the operator-wide ODPT endpoint. A SQL hit skips legacy JS entirely;
+    // API-equipped lines get a cheap BYPASS response and retain manual evidence.
+
     // One existing source lifecycle: ODPTClient owns the optional Supabase
     // read-through cache; a miss falls through to the existing manual path.
     if (!window.ODPTClient || typeof window.ODPTClient.getCachedTrainRuns !== "function") return ensureManualTimetable(lineId);
