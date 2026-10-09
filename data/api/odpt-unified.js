@@ -621,6 +621,9 @@
                 fetch(url, {
                     headers: { "Accept": "application/json" },
                     signal: AbortSignal.timeout(8000)
+                }).then(function(resp) {
+                    if (!resp.ok) throw new Error("HTTP " + resp.status);
+                    return resp.json();
                 }).then(resolve).catch(reject);
                 return;
             }
@@ -1601,7 +1604,11 @@
                 window.ODPT_POSITION_REQUEST_STATUS[op] = { state: "loading", at: Date.now(), assigned: false, requestId: _requestId };
                 positionRequestIds[op] = _requestId;
                 posPromises.push(
-                    fetchODPT(buildUrl(op, 'train'), true).then(extractData).then(function(data) {
+                    fetchODPT(buildUrl(op, 'train'), true).then(function(result) {
+                        var data = extractData(result);
+                        if (!result || !Array.isArray(data)) throw new Error("Invalid ODPT train position payload");
+                        return data;
+                    }).then(function(data) {
                         // v4.3.392: 成功即写入（空数组也写入），失败不拖垮全局推送
                         if (!window.ODPT_POSITION_REQUEST_STATUS[op] || window.ODPT_POSITION_REQUEST_STATUS[op].requestId !== _requestId) return;
                         window.ODPT_TRAIN_POSITIONS[op] = (data && data.length > 0) ? data : [];
