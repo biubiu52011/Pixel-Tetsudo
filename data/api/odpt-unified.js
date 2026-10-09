@@ -777,23 +777,28 @@
                     timetablePromises.push(_realtimeActivationInflight[lineId]);
                     return;
                 }
-                if (ODPT_ENDPOINTS[op] && ODPT_ENDPOINTS[op].trainTimetable) {
-                    _realtimeActivationInflight[lineId] = self.getCompleteTimetable(op, identity.odptRailway).then(function(rows) {
-                        if (!window.ODPT_TIMETABLES) window.ODPT_TIMETABLES = {};
-                        var existing = window.ODPT_TIMETABLES[op] || [];
-                        var keep = existing.filter(function(tt) {
-                            var actual = parseRailwayIdentity(tt);
-                            return !(actual && actual.key === identity.key);
-                        });
-                        window.ODPT_TIMETABLES[op] = keep.concat(rows || []);
-                        _activatedRealtimeLines[lineId] = true;
-                    }).catch(function(e) {
-                        console.debug("[ODPT] on-demand timetable skip:", lineId, e && e.message);
-                    }).finally(function() {
-                        delete _realtimeActivationInflight[lineId];
+                // The current ODPT client owns both sources: API if available,
+                // otherwise the existing database-backed manual timetable endpoint.
+                var hasTimetableApi = !!(ODPT_ENDPOINTS[op] && ODPT_ENDPOINTS[op].trainTimetable);
+                var sourcePromise = hasTimetableApi
+                    ? self.getCompleteTimetable(op, identity.odptRailway)
+                    : getCachedTrainRuns(lineId);
+                _realtimeActivationInflight[lineId] = sourcePromise.then(function(rows) {
+                    if (!rows || !rows.length) return;
+                    if (!window.ODPT_TIMETABLES) window.ODPT_TIMETABLES = {};
+                    var existing = window.ODPT_TIMETABLES[op] || [];
+                    var keep = existing.filter(function(tt) {
+                        var actual = parseRailwayIdentity(tt);
+                        return !(actual && actual.key === identity.key);
                     });
-                    timetablePromises.push(_realtimeActivationInflight[lineId]);
-                }
+                    window.ODPT_TIMETABLES[op] = keep.concat(rows);
+                    _activatedRealtimeLines[lineId] = true;
+                }).catch(function(e) {
+                    console.debug("[ODPT] on-demand timetable unavailable:", lineId, e && e.message);
+                }).finally(function() {
+                    delete _realtimeActivationInflight[lineId];
+                });
+                timetablePromises.push(_realtimeActivationInflight[lineId]);
             });
 
             // Opening another line of an already-active operator must not trigger
