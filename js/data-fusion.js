@@ -941,14 +941,18 @@
               // （如 SaikyoKawagoe→[Saikyo,Kawagoe]、Kawagoe→[KawagoeWest]），集合匹配比
               // 子串猜测更准——避免川越〜高麗川的 Kawagoe 数据错配到大宮〜川越段。
               var mappedLids = _railwayCodeLines[railwayName] || [];
-              for (var i = 0; i < matchingLines.length; i++) {
-                var ml = matchingLines[i];
-                if (mappedLids.length > 0) {
-                  if (mappedLids.indexOf(ml.lid) >= 0) { targetLine = ml; break; }
-                } else if (ml.lid === railwayName || ml.lid.indexOf(railwayName) >= 0 || railwayName.indexOf(ml.lid) >= 0) {
-                  targetLine = ml;
-                  break;
-                }
+              // A railway-code mapping can span multiple project lines. Do not
+              // arbitrarily assign the provider train to its first station match.
+              // Require one unambiguous mapped line for this source record.
+              var _mappedMatches = matchingLines.filter(function(ml) {
+                return mappedLids.indexOf(ml.lid) >= 0;
+              });
+              if (_mappedMatches.length === 1) targetLine = _mappedMatches[0];
+              if (!targetLine && mappedLids.length === 0) {
+                // Only exact canonical line identity is admissible; substring
+                // overlap is not evidence that a realtime train belongs here.
+                var _exactMatches = matchingLines.filter(function(ml) { return ml.lid === railwayName; });
+                if (_exactMatches.length === 1) targetLine = _exactMatches[0];
               }
             }
             // 2. Ambiguous source identity must stay unresolved.
