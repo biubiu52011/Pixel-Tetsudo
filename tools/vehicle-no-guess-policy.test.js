@@ -1,11 +1,11 @@
 const fs = require('fs');
 const vm = require('vm');
 
-const src = fs.readFileSync('js/train-icons.js', 'utf8').replace(/^\uFEFF/, '');
+const src = fs.readFileSync('js/train-vehicle.js', 'utf8').replace(/^\uFEFF/, '');
 const sandbox = { window: {}, console: { debug() {} } };
 sandbox.window.window = sandbox.window;
 vm.createContext(sandbox);
-vm.runInContext(src, sandbox, { filename: 'js/train-icons.js' });
+vm.runInContext(src, sandbox, { filename: 'js/train-vehicle.js' });
 
 const icons = sandbox.window.TrainIcons;
 function assert(cond, msg) { if (!cond) throw new Error(msg); }

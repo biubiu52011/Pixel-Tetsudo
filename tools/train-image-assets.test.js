@@ -3,7 +3,7 @@ const path = require("path");
 const assert = require("assert");
 
 const root = path.join(__dirname, "..");
-const files = ["js/train-icons.js"];
+const files = ["js/train-vehicle.js"];
 let checked = 0;
 const missing = [];
 

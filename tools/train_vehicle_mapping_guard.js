@@ -15,7 +15,7 @@ function loadRuntime() {
   context.window.window = context.window;
   context.self = context.window;
   vm.createContext(context);
-  ['js/train-icons.js','js/train-vehicle.js'].forEach(rel =>
+  ['js/train-vehicle.js'].forEach(rel =>
     vm.runInContext(read(rel), context, { filename:rel }));
   return context.window;
 }
@@ -36,7 +36,7 @@ assert(typeof icons.resolveVehicleIcon === 'undefined' &&
 assert(!fs.existsSync(path.join(ROOT,'data/timetables/vehicle-type-map.js')),
   'legacy VehicleTypeMap file still exists');
 
-const mapperSource = read('js/train-icons.js');
+const mapperSource = read('js/train-vehicle.js');
 const mapperSignature = mapperSource.match(/function resolveVehicleArtwork\(([^)]*)\)/);
 // Identity-only artwork mapper. Optional serviceDate is allowed for dated
 // artwork validity; operational context (line/operator/train/source) never is.

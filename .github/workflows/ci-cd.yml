@@ -104,8 +104,8 @@ jobs:
         run: |
           node - <<'NODE'
           const fs = require('fs');
-          const icons = fs.readFileSync('js/train-icons.js', 'utf8');
           const vehicle = fs.readFileSync('js/train-vehicle.js', 'utf8');
+          const icons = vehicle;
           const forbidden = [
             [icons, 'return LINE_ICONS[lineId]', 'line vehicle fallback'],
             [icons, 'return OPERATOR_ICONS[opKey]', 'operator vehicle fallback'],

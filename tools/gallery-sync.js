@@ -205,7 +205,7 @@ function loadEnv() {
   const w = { window: {}, console: console, localStorage: { getItem: () => null, setItem: () => {} } };
   w.window = w;
   const ctx = vm.createContext(w);
-  vm.runInContext(fs.readFileSync(path.join(ROOT, 'js/train-icons.js'), 'utf8'), ctx, { filename: 'icons' });
+  vm.runInContext(fs.readFileSync(path.join(ROOT, 'js/train-vehicle.js'), 'utf8'), ctx, { filename: 'icons' });
   return w.window.TrainIcons;
 }
 

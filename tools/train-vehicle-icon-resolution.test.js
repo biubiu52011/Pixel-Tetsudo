@@ -28,7 +28,6 @@ const context = {
 context.self = context.window;
 vm.createContext(context);
 [
-  'js/train-icons.js',
   'data/timetables/train-operation-evidence.js',
   'js/train-vehicle.js'
 ].forEach(rel => vm.runInContext(read(rel), context, { filename: rel }));
@@ -184,7 +183,6 @@ vm.createContext(realCtx);
 [
   'data/timetables/vehicle-operation-evidence-data.js',
   'data/timetables/train-operation-evidence.js',
-  'js/train-icons.js',
   'js/train-vehicle.js'
 ].forEach(rel => vm.runInContext(read(rel), realCtx, { filename: rel }));
 
@@ -290,23 +288,24 @@ console.log('no line-default leakage: 1 PASS');
 // projection). The old gate that only read vehicleResolvedFromRealtime would
 // have collapsed every derived E235 train back to a neutral marker.
 const rendererSrc = read('js/trains-render.js');
-assert.ok(rendererSrc.includes('p && p.vehicleResolvedUpstream === true'),
-  'renderer artwork decision must accept every upstream EXACT vehicle identity (realtime direct and realtime-derived alike)');
-assert.ok(!rendererSrc.includes('vehicleResolvedFromRealtime === true'),
-  'renderer must not branch its artwork decision on vehicle evidence source');
-assert.ok(/kind: iconSrc && !artworkFailed \? "vehicle" : "generic"/.test(rendererSrc),
-  'TrainMarker artwork must be exactly vehicle PNG or generic train');
-assert.ok(!/iconSrc \? "image" : "circle"/.test(rendererSrc),
-  'the neutral circle fallback kind must not return');
-assert.ok(/marker\.addEventListener\("error"/.test(rendererSrc) &&
-          /_swapTrainMarkerToGeneric/.test(rendererSrc),
-  'a broken vehicle PNG must fall back to the generic train marker in place');
-assert.ok(!/_hasRealtimeVehicleEvidence/.test(rendererSrc),
-  'the retired per-source realtime image gate must not return');
-console.log('TrainMarker artwork contract: 6 PASS');
+const unifiedVehicleSource = read('js/train-vehicle.js');
+assert.ok(rendererSrc.includes('window.TrainVehicle.selectMarkerArtwork(p, artworkFailed)'),
+  'renderer must delegate icon choice to the single vehicle runtime');
+assert.ok(!rendererSrc.includes('window.TrainIcons.resolveVehicleArtwork'),
+  'renderer must not implement a second PNG resolver');
+assert.ok(unifiedVehicleSource.includes('selectMarkerArtwork: selectMarkerArtwork'),
+  'unified runtime must own one PNG/neutral decision');
+assert.ok(rendererSrc.includes('marker.addEventListener("error"') &&
+          rendererSrc.includes('_swapTrainMarkerToGeneric'),
+  'PNG failure must swap the same marker to a neutral shape');
+assert.ok(!rendererSrc.includes('_hasRealtimeVehicleEvidence'),
+  'renderer must not diverge for ODPT versus timetable positions');
+assert.ok(!rendererSrc.includes('iconSrc ? "image" : "circle"'),
+  'neutral circle fallback must not return');
+console.log('TrainMarker single-script contract: 6 PASS');
 
 const catalogEdge = read('supabase/functions/train-runs/index.ts');
-const catalogIcons = read('js/train-icons.js');
+const catalogIcons = read('js/train-vehicle.js');
 assert.ok(/catalog=vehicle-artwork/.test(catalogIcons) &&
           /VERIFIED_SQL_VEHICLE_IDENTITIES/.test(catalogEdge) &&
           /identity_status", "exact"/.test(catalogEdge),
@@ -340,10 +339,17 @@ console.log('SQL-certified PNG realtime projection safety: 4 PASS');
 
 // Both ODPT realtime and timetable estimates share the same late-bound
 // certified PNG projection. Formation uncertainty may never be bypassed.
-const lateBoundRenderer = read('js/trains-render.js');
-assert.ok(/p\.vehicleResolvedUpstream === true[\s\S]{0,550}window\.TrainIcons\.resolveVehicleArtwork\(p\.vehicleType\)/.test(lateBoundRenderer),
-  'confirmed realtime and estimated trains should pick up newly loaded SQL PNGs');
-assert.ok(/!p\.vehicleFormationId/.test(lateBoundRenderer) &&
-  /!p\.vehicleFormationCandidates\.length/.test(lateBoundRenderer),
-  'late PNG binding must not bypass formation constraints');
-console.log('realtime and estimated delayed PNG catalog: 2 PASS');
+const pickMarker = context.window.TrainVehicle.selectMarkerArtwork;
+const yamanote = { vehicleResolvedUpstream:true, vehicleType:'E235系0番台（山手線）',
+  vehicleIconPath:'', vehicleFormationCandidates:[] };
+const liveIcon = pickMarker(Object.assign({ estimated:false }, yamanote), false);
+const estimatedIcon = pickMarker(Object.assign({ estimated:true }, yamanote), false);
+assert.strictEqual(liveIcon.kind,'vehicle');
+assert.strictEqual(estimatedIcon.iconSrc,liveIcon.iconSrc);
+assert.ok(liveIcon.iconSrc.endsWith('JR東日本_E235系_0番台.png'));
+assert.strictEqual(pickMarker(Object.assign({}, yamanote, {vehicleResolvedUpstream:false}),false).kind,'generic',
+  'UNKNOWN/NARROWED cannot select a concrete PNG');
+assert.strictEqual(pickMarker(Object.assign({}, yamanote, {vehicleFormationCandidates:['01','02']}),false).kind,'generic',
+  'formation ambiguity must prevent late artwork resolution');
+assert.strictEqual(pickMarker(yamanote,true).kind,'generic','failed PNG remains neutral');
+console.log('ODPT realtime and timetable estimation share one marker choice: 6 PASS');

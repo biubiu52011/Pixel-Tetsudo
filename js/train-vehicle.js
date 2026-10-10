@@ -1,17 +1,338 @@
-/*
- * Pixel Tetsudo - Train Vehicle Resolver
- *
- * Canonical vehicle identity contract:
- *   - Source priority is realtime direct > realtime-derived > structural/family
- *     > dated/timetable fallback > UNKNOWN.
- *   - EXACT requires one concrete identity from the highest available source.
- *   - NARROWED may expose evidence candidates, but never a concrete icon.
- *   - UNKNOWN stays unknown; line/operator defaults may not manufacture identity.
- *   - artwork is only a projection of an already-EXACT identity; missing artwork
- *     stays missing.
+/* Pixel Tetsudo — unified vehicle identity + PNG artwork runtime.
+ * Position sources remain independent; artwork resolution has one authority.
+ * Neutral SVG is a visual fallback for unproven vehicle identity, not a
+ * second vehicle identification system.
  */
 (function() {
   "use strict";
+
+var CANONICAL_VEHICLES = {
+  "sotetsu-11000-11003-hohoemi": { displayName: "相鉄11000系(10両)（11003F）", iconName: "相鉄11000系(10両)（11003F）", asset: "../images/列车/相模鉄道/相模鉄道_11000系_11003編成_ほほえみ号.png", validFrom: "2026-08-30", validTo: "", evidenceGrade: "A", evidenceSource: "https://www.sotetsu.co.jp/pressrelease/train/r26-132/", aliases: ["相鉄11000系(10両)（11003F）"] },
+  "new-shuttle-2000-01": { displayName: "埼玉新都市交通2000系（01編成）", iconName: "埼玉新都市交通2000系（01編成）", asset: "../images/列车/埼玉新都市交通/埼玉新都市交通_2000系_01編成_レッドパープル.png", aliases: ["2000系（01編成）","埼玉新都市交通2000系（01編成）"] },
+  "new-shuttle-2000-02": { displayName: "埼玉新都市交通2000系（02編成）", iconName: "埼玉新都市交通2000系（02編成）", asset: "../images/列车/埼玉新都市交通/埼玉新都市交通_2000系_02編成_オレンジ.png", aliases: ["2000系（02編成）","埼玉新都市交通2000系（02編成）"] },
+  "new-shuttle-2000-03": { displayName: "埼玉新都市交通2000系（03編成）", iconName: "埼玉新都市交通2000系（03編成）", asset: "../images/列车/埼玉新都市交通/埼玉新都市交通_2000系_03編成_グリーン.png", aliases: ["2000系（03編成）","埼玉新都市交通2000系（03編成）"] },
+  "new-shuttle-2000-04": { displayName: "埼玉新都市交通2000系（04編成）", iconName: "埼玉新都市交通2000系（04編成）", asset: "../images/列车/埼玉新都市交通/埼玉新都市交通_2000系_04編成_イエロー.png", aliases: ["2000系（04編成）","埼玉新都市交通2000系（04編成）"] },
+  "new-shuttle-2000-05": { displayName: "埼玉新都市交通2000系（05編成）", iconName: "埼玉新都市交通2000系（05編成）", asset: "../images/列车/埼玉新都市交通/埼玉新都市交通_2000系_05編成_ブルー.png", aliases: ["2000系（05編成）","埼玉新都市交通2000系（05編成）"] },
+  "new-shuttle-2000-06": { displayName: "埼玉新都市交通2000系（06編成）", iconName: "埼玉新都市交通2000系（06編成）", asset: "../images/列车/埼玉新都市交通/埼玉新都市交通_2000系_06編成_レッド.png", aliases: ["2000系（06編成）","埼玉新都市交通2000系（06編成）"] },
+  "new-shuttle-2000-07": { displayName: "埼玉新都市交通2000系（07編成）", iconName: "埼玉新都市交通2000系（07編成）", asset: "../images/列车/埼玉新都市交通/埼玉新都市交通_2000系_07編成_さくら色.png", aliases: ["2000系（07編成）","埼玉新都市交通2000系（07編成）"] },
+
+  "keikyu-1500": { displayName: "京急1500形", iconName: "京急1500形", asset: "../images/列车/京浜急行電鉄/京浜急行電鉄_1500形.png", aliases: ["京急1500形","京浜急行電鉄1500形"] },
+  "keikyu-600": { displayName: "京急600形", iconName: "京急600形", asset: "../images/列车/京浜急行電鉄/京浜急行電鉄_600形.png", aliases: ["京急600形","京浜急行電鉄600形"] },
+  "keisei-3000": { displayName: "京成3000形", iconName: "京成3000形", asset: "../images/列车/京成電鉄/京成電鉄_3000形.png", aliases: ["京成3000形","京成電鉄3000形"] },
+  "keisei-3100": { displayName: "京成3100形", iconName: "京成3100形", asset: "../images/列车/京成電鉄/京成電鉄_3100形.png", aliases: ["京成3100形","京成電鉄3100形"] },
+  "keisei-3400": { displayName: "京成3400形", iconName: "京成3400形", asset: "../images/列车/京成電鉄/京成電鉄_3400形.png", aliases: ["京成3400形","京成電鉄3400形"] },
+  "keisei-3700": { displayName: "京成3700形", iconName: "京成3700形", asset: "../images/列车/京成電鉄/京成電鉄_3700形.png", aliases: ["京成3700形","京成電鉄3700形"] },
+  "keio-5000": { displayName: "京王5000系", iconName: "京王5000系", asset: "../images/列车/京王電鉄/京王電鉄_5000系.png", aliases: ["京王5000系","京王電鉄5000系"] },
+  "odakyu-4000": { displayName: "小田急4000形", iconName: "小田急4000形", asset: "../images/列车/小田急電鉄/小田急電鉄_4000形_標準色.png", aliases: ["小田急4000形","小田急電鉄4000形"] },
+  "metro-07-10": { displayName: "東京メトロ07系", iconName: "東京メトロ07系", asset: "../images/列车/東京メトロ/東京メトロ_07系.png", aliases: ["東京メトロ07系(10両)","東京メトロ07系"] },
+  "metro-15000-10": { displayName: "東京メトロ15000系", iconName: "東京メトロ15000系", asset: "../images/列车/東京メトロ/東京メトロ_15000系.png", aliases: ["東京メトロ15000系(10両)","東京メトロ15000系"] },
+  "tokyu-2020-10": { displayName: "東急2020系", iconName: "東急2020系", asset: "../images/列车/東急電鉄/東急電鉄_2020系.png", aliases: ["東急2020系(10両)","東急2020系"] },
+  "tokyu-5080": { displayName: "東急5080系", iconName: "東急5080系", asset: "../images/列车/東急電鉄/東急電鉄_5080系.png", aliases: ["東急5080系"] },
+  "tokyu-6020": { displayName: "東急6020系", iconName: "東急6020系", asset: "../images/列车/東急電鉄/東急電鉄_6020系.png", aliases: ["東急6020系(5両)","東急6020系(7両)","東急6020系"] },
+  "tokyu-7000": { displayName: "東急7000系", iconName: "東急7000系", asset: "../images/列车/東急電鉄/東急電鉄_7000系.png", aliases: ["東急7000系"] },
+  "tobu-50000-10": { displayName: "東武50000系", iconName: "東武50000系", asset: "../images/列车/東武鉄道/東武鉄道_50000型.png", aliases: ["東武50000系(10両)","東武50000系"] },
+  "tobu-50050-10": { displayName: "東武50050系", iconName: "東武50050系", asset: "../images/列车/東武鉄道/東武鉄道_50050型.png", aliases: ["東武50050系(10両)","東武50050系"] },
+  "tobu-70090": { displayName: "東武70090型", iconName: "東武70090型", asset: "../images/列车/東武鉄道/東武鉄道_70090型.png", aliases: ["東武70090型","東武70090系"] },
+  "sotetsu-12000-10": { displayName: "相鉄12000系", iconName: "相鉄12000系", asset: "../images/列车/相模鉄道/相模鉄道_12000系_YOKOHAMA_NAVYBLUE.png", aliases: ["相鉄12000系(10両)"] },
+  "sotetsu-13000-8": { displayName: "相鉄13000系", iconName: "相鉄13000系", asset: "../images/列车/相模鉄道/相模鉄道_13000系_YOKOHAMA_NAVYBLUE.png", aliases: ["相鉄13000系(8両)","相鉄13000系"] },
+  "sotetsu-20000-10": { displayName: "相鉄20000系", iconName: "相鉄20000系", asset: "../images/列车/相模鉄道/相模鉄道_20000系_YOKOHAMA_NAVYBLUE.png", aliases: ["相鉄20000系(10両)"] },
+  "sotetsu-21000": { displayName: "相鉄21000系", iconName: "相鉄21000系", asset: "../images/列车/相模鉄道/相模鉄道_21000系.png", aliases: ["相鉄21000系"] },
+
+  "jr-east-209-500-keiyo": {
+    displayName: "209系500番台（京葉線）",
+    iconName: "209系500番台（京葉線）",
+    asset: "../images/列车/JR東日本/JR東日本_209系_500番台_京葉線.png",
+    aliases: ["209系500番台（京葉線）", "JR 209系500番台", "JR東日本209系500番台"]
+  },
+  "sotetsu-12000": {
+    displayName: "相模鉄道12000系",
+    iconName: "相模鉄道12000系",
+    asset: "../images/列车/相模鉄道/相模鉄道_12000系_YOKOHAMA_NAVYBLUE.png",
+    aliases: ["相模鉄道12000系", "相鉄12000系"]
+  },
+  "odakyu-5000": {
+    displayName: "小田急5000形",
+    iconName: "小田急5000形",
+    asset: "../images/列车/小田急電鉄/小田急電鉄_5000形_標準色.png",
+    aliases: ["小田急5000形", "小田急電鉄5000形"]
+  },
+  "jr-east-e235-0-yamanote": {
+    displayName: "E235系0番台（山手線）",
+    iconName: "E235系山手線",
+    asset: "../images/列车/JR東日本/JR東日本_E235系_0番台.png",
+    aliases: ["E235系0番台（山手線）", "E235系山手線", "JR E235系0番台"]
+  },
+  "jr-east-e231-800-tozai-through": {
+    displayName: "E231系800番台（東西線直通）",
+    iconName: "E231系800番台（東西線直通）",
+    asset: "../images/列车/JR東日本/JR東日本_E231系_800番台.png",
+    aliases: ["E231系800番台（東西線直通）"]
+  },
+  "toyo-rapid-2000-tozai-through": {
+    displayName: "東葉高速2000系",
+    iconName: "東葉高速鉄道2000系",
+    asset: "../images/列车/東葉高速鉄道/東葉高速鉄道_2000系.png",
+    aliases: ["東葉高速2000系", "東葉高速鉄道2000系"]
+  },
+  "jr-east-e233-2000-joban-local-chiyoda": {
+    displayName: "E233系2000番台",
+    iconName: "E233系2000番台",
+    asset: "../images/列车/JR東日本/JR東日本_E233系_2000番台.png",
+    aliases: ["E233系2000番台"]
+  },
+  "jr-east-e531-joban-medium": {
+    displayName: "E531系",
+    iconName: "E531系",
+    asset: "../images/列车/JR東日本/JR東日本_E531系.png",
+    aliases: ["E531系"]
+  },
+  "jr-east-e231-0-joban-rapid": {
+    displayName: "E231系0番台",
+    iconName: "E231系0番台",
+    asset: "../images/列车/JR東日本/JR東日本_E231系_0番台.png",
+    aliases: ["E231系0番台"]
+  },
+  "jr-east-e231-0-joban-rapid-led": {
+    displayName: "E231系0番台（常磐快速線・LED）",
+    iconName: "E231系0番台（常磐快速線・LED）",
+    asset: "../images/列车/JR東日本/JR東日本_E231系_0番台_常磐快速線.png",
+    aliases: ["E231系0番台（常磐快速線・LED）"]
+  },
+  "jr-east-e233-7000-saikyo": {
+    displayName: "E233系7000番台",
+    iconName: "E233系7000番台",
+    asset: "../images/列车/JR東日本/JR東日本_E233系_7000番台.png",
+    aliases: ["E233系7000番台", "JR E233系7000番台", "JR東日本E233系7000番台"]
+  },
+  "twr-70-000-rinkai": {
+    displayName: "東京臨海高速鉄道70-000形",
+    iconName: "東京臨海高速鉄道70-000形",
+    asset: "../images/列车/東京臨海高速鉄道/東京臨海高速鉄道_70-000形.png",
+    aliases: ["東京臨海高速鉄道70-000形", "70-000形"]
+  },
+  "twr-71-000-rinkai": {
+    displayName: "東京臨海高速鉄道71-000形",
+    iconName: "東京臨海高速鉄道71-000形",
+    asset: "../images/列车/東京臨海高速鉄道/東京臨海高速鉄道_71-000形.png",
+    aliases: ["東京臨海高速鉄道71-000形", "71-000形"]
+  },
+  "jr-east-209-3500-hachiko-kawagoe": {
+    displayName: "209系3500番台",
+    iconName: "209系3500番台（八高・川越線）",
+    asset: "../images/列车/JR東日本/JR東日本_209系_3500番台.png",
+    aliases: ["209系3500番台", "209系3500番台（八高・川越線）"]
+  },
+  "jr-east-209-3000-hachiko-kawagoe": {
+    displayName: "209系3000番台",
+    iconName: "209系3000番台（八高・川越線）",
+    asset: null,
+    aliases: ["209系3000番台", "209系3000番台（八高・川越線）"]
+  },
+  "jr-east-209-3100-kawagoe": {
+    displayName: "209系3100番台",
+    iconName: "209系3100番台（川越線）",
+    asset: null,
+    aliases: ["209系3100番台", "209系3100番台（川越線）"]
+  },
+  "jr-east-209-2000-2100-boso-keiyo": {
+    displayName: "209系2000番台 / 2100番台",
+    iconName: "209系2000番台 / 2100番台",
+    asset: "../images/列车/JR東日本/JR東日本_209系_2000・2100番台_房総地区.png",
+    aliases: ["209系2000番台 / 2100番台"]
+  },
+  "jr-east-e233-5000-keiyo": {
+    displayName: "E233系5000番台",
+    iconName: "E233系5000番台",
+    asset: "../images/列车/JR東日本/JR東日本_E233系5000番台.png",
+    aliases: ["E233系5000番台", "JR E233系5000番台"]
+  },
+  "jr-east-e231-900-musashino": {
+    displayName: "E231系900番台",
+    iconName: "E231系900番台",
+    asset: null,
+    aliases: ["E231系900番台"]
+  },
+  "jr-east-e231-1000-shonan-shinjuku": {
+    displayName: "E231系1000番台",
+    iconName: "E231系1000番台",
+    asset: "../images/列车/JR東日本/JR東日本_E231系_1000番台.png",
+    aliases: ["E231系1000番台"]
+  },
+  "jr-east-e233-3000-shonan-shinjuku": {
+    displayName: "E233系3000番台",
+    iconName: "E233系3000番台",
+    asset: "../images/列车/JR東日本/JR東日本_E233系3000番台.png",
+    aliases: ["E233系3000番台"]
+  },
+  "jr-east-e257-2000-odoriko": {
+    displayName: "E257系2000番台",
+    iconName: "E257系2000番台",
+    asset: "../images/列车/JR東日本/JR東日本_E257系_2000番台.png",
+    aliases: ["E257系2000番台"]
+  },
+  "jr-east-e257-2500-odoriko-shonan": {
+    displayName: "E257系2500番台",
+    iconName: "E257系2500番台",
+    asset: "../images/列车/JR東日本/JR東日本_E257系_2500番台.png",
+    aliases: ["E257系2500番台"]
+  },
+  "jr-east-253-1000-nikko-kinugawa": {
+    displayName: "253系（日光・きぬがわ）",
+    iconName: "253系（日光・きぬがわ）",
+    asset: "../images/列车/JR東日本/JR東日本_253系_1000番台.png",
+    aliases: ["253系（日光・きぬがわ）", "E253系（日光・きぬがわ）"]
+  }
+};
+var CANONICAL_VEHICLE_ALIAS_INDEX = {};
+var CANONICAL_VEHICLE_ALIAS_CONFLICTS = {};
+function _registerCanonicalVehicleAlias(alias, rec) {
+  var key = String(alias || "").trim();
+  if (!key || CANONICAL_VEHICLE_ALIAS_CONFLICTS[key]) return;
+  var existing = CANONICAL_VEHICLE_ALIAS_INDEX[key];
+  if (existing && existing.id !== rec.id) {
+    delete CANONICAL_VEHICLE_ALIAS_INDEX[key];
+    CANONICAL_VEHICLE_ALIAS_CONFLICTS[key] = true;
+    return;
+  }
+  CANONICAL_VEHICLE_ALIAS_INDEX[key] = rec;
+}
+Object.keys(CANONICAL_VEHICLES).forEach(function(id) {
+  var rec = CANONICAL_VEHICLES[id];
+  rec.id = id;
+  // Dated artwork is a factual claim and must carry provenance.
+  // Invalid dated records are deliberately not registered, so they cannot resolve.
+  if ((rec.validFrom || rec.validTo) && (!rec.evidenceSource || rec.evidenceGrade !== "A")) {
+    return;
+  }
+  _registerCanonicalVehicleAlias(id, rec);
+  _registerCanonicalVehicleAlias(rec.displayName, rec);
+  _registerCanonicalVehicleAlias(rec.iconName, rec);
+  (rec.aliases || []).forEach(function(alias) {
+    _registerCanonicalVehicleAlias(alias, rec);
+  });
+});
+
+function resolveCanonicalVehicle(name) {
+  var n = String(name || "").trim();
+  if (!n || CANONICAL_VEHICLE_ALIAS_CONFLICTS[n]) return null;
+  return CANONICAL_VEHICLE_ALIAS_INDEX[n] || null;
+}
+
+// SQL supplies a vetted path allowlist. The canonical identity resolver remains
+// the only vehicle selector: catalog rows cannot guess a train's type.
+var _verifiedSqlArtworkPaths = null;
+var _verifiedSqlArtworkByExactName = null;
+function hydrateVerifiedArtworkCatalog(rows) {
+  if (!Array.isArray(rows)) return false;
+  var paths = Object.create(null);
+  var exact = Object.create(null);
+  rows.forEach(function(row) {
+    var path = row && String(row.image_path || "");
+    if (!(path.startsWith("images/列车/") && path.endsWith(".png") && path.split("/").length === 4)) return;
+    var artwork = "../" + path;
+    paths[artwork] = true;
+    // A database type name is eligible only when one certified generic vehicle
+    // artwork exists for that *exact* name. Formation/livery/theme variants
+    // cannot be chosen from a train's type alone.
+    if (row.formation_id || row.livery || row.theme) return;
+    var name = String(row.vehicle_type || "").trim();
+    if (!name) return;
+    if (!Object.prototype.hasOwnProperty.call(exact, name)) exact[name] = artwork;
+    else if (exact[name] !== artwork) exact[name] = null;
+  });
+  _verifiedSqlArtworkPaths = paths;
+  _verifiedSqlArtworkByExactName = exact;
+  return true;
+}
+function refreshVerifiedArtworkCatalog() {
+  if (typeof fetch !== "function") return Promise.resolve(false);
+  return fetch("https://pnupwfmgbtxqhpzsrhfn.supabase.co/functions/v1/train-runs?catalog=vehicle-artwork",
+    { credentials: "omit" }).then(function(res) {
+      if (!res.ok) throw new Error("vehicle artwork catalog HTTP " + res.status);
+      return res.json();
+    }).then(function(body) {
+      return body && body.ok === true && Array.isArray(body.assets)
+        ? hydrateVerifiedArtworkCatalog(body.assets) : false;
+    }).catch(function() { return false; });
+}
+
+function _canonicalVehicleIconPath(name, serviceDate) {
+  var n = String(name || "").trim();
+  if (!n) return null;
+  var rec = resolveCanonicalVehicle(n);
+  if (!rec) return null;
+  if (rec.validFrom || rec.validTo) {
+    var d = String(serviceDate || "").slice(0, 10);
+    if (!d) return null;
+    if (rec.validFrom && d < rec.validFrom) return null;
+    if (rec.validTo && d > rec.validTo) return null;
+  }
+  // When SQL certifies the same canonical artwork, accept its path.
+  // Otherwise keep the previously verified static mapping for offline use.
+  if (_verifiedSqlArtworkPaths && _verifiedSqlArtworkPaths[rec.asset]) return rec.asset;
+  return rec.asset;
+}
+
+// No line/operator default vehicle selector exists.
+
+// Display-name normalization may only expand spelling variants within the same
+  // canonical identity. It must never rewrite retired stock to a successor,
+  // a generic family to a subseries, or an ambiguous candidate to one vehicle.
+  function resolveVehicleDisplayName(vehicleIdentity) {
+    if (!vehicleIdentity) return null;
+    var parts = String(vehicleIdentity).split('/').map(function(s){ return s.trim(); }).filter(Boolean);
+    if (parts.length !== 1) return parts.length ? parts.join(' / ') : null;
+    var name = parts[0];
+    var canonical = resolveCanonicalVehicle(name);
+    return canonical ? canonical.displayName : name;
+  }
+
+  // Fleet/livery pools are asset catalogs only. A confirmed vehicle type does not
+  // prove a concrete formation or livery, so never hash-pick one at runtime.
+  // Single artwork mapper. Input is an already-resolved vehicle identity only.
+  // Operational context (line/operator/train number/source) is intentionally absent.
+  function resolveVehicleArtwork(vehicleIdentity, serviceDate) {
+    return _resolveVehicleArtworkBase(vehicleIdentity, serviceDate);
+  }
+  function _resolveVehicleArtworkBase(vehicleIdentity, serviceDate) {
+    if (!vehicleIdentity) return null;
+    var parts = String(vehicleIdentity).split('/').map(function(s){ return s.trim(); }).filter(Boolean);
+    // A candidate list is not a concrete identity.
+    if (parts.length !== 1) return null;
+    var name = parts[0];
+
+    // Canonical aliases are allowed only when they resolve to the same registered
+    // identity record. No line override, replacement vehicle, base-name stripping,
+    // retired-stock substitution, or approximate alias may select artwork.
+    var canonical = _canonicalVehicleIconPath(name, serviceDate);
+    if (canonical) return canonical;
+    // A confirmed upstream vehicle type may use a SQL-certified PNG only on
+    // exact, unambiguous type identity (never line-based fleet guessing).
+    // Disallow a DB-only mapping for a name that the canonical registry marks
+    // as conflicting, retired, or otherwise unsupported.
+    if (CANONICAL_VEHICLE_ALIAS_CONFLICTS[name]) return null;
+    // Bare series numbers are shared by many operators. A unique row in the
+    // currently certified subset is not proof of a unique railway identity.
+    if (/^[0-9]{2,5}(?:-[0-9]+)?(?:系|形|型)$/.test(name)) return null;
+    if (_verifiedSqlArtworkByExactName &&
+        Object.prototype.hasOwnProperty.call(_verifiedSqlArtworkByExactName, name)) {
+      return _verifiedSqlArtworkByExactName[name] || null;
+    }
+    return null;
+  }
+
+  window.TrainIcons = {
+    resolveVehicleArtwork: resolveVehicleArtwork,
+    resolveVehicleDisplayName: resolveVehicleDisplayName,
+    resolveCanonicalVehicle: resolveCanonicalVehicle,
+    CANONICAL_VEHICLES: CANONICAL_VEHICLES,
+    hydrateVerifiedArtworkCatalog: hydrateVerifiedArtworkCatalog,
+    refreshVerifiedArtworkCatalog: refreshVerifiedArtworkCatalog
+  };
+
+  // Fire once after the canonical registry exists. The request is read-only,
+  // never blocks rendering, and never grants identity to an UNKNOWN train.
+  if (typeof fetch === "function") refreshVerifiedArtworkCatalog();
 
   // Normalize operator labels only for metadata carried by explicit evidence.
   function normOp(op) {
@@ -255,9 +576,23 @@
   // ============================================================
   // Public API
   // ============================================================
+  // Single artwork authority for both ODPT real-time and timetable estimates.
+  // No model may be inferred from a line, train number or rendering context.
+  function selectMarkerArtwork(p, artworkFailed) {
+    var iconSrc = p && p.vehicleResolvedUpstream === true ? (p.vehicleIconPath || "") : "";
+    if (!iconSrc && p && p.vehicleResolvedUpstream === true &&
+        p.vehicleType && !p.vehicleFormationId &&
+        (!p.vehicleFormationCandidates || !p.vehicleFormationCandidates.length)) {
+      iconSrc = resolveVehicleArtwork(p.vehicleType) || "";
+    }
+    if (artworkFailed === true) iconSrc = "";
+    return { kind: iconSrc ? "vehicle" : "generic", iconSrc: iconSrc };
+  }
+
   window.TrainVehicle = {
     version: '4.3.1102',
     resolve: resolve,
+    selectMarkerArtwork: selectMarkerArtwork,
     registerFormationEvidence: registerFormationEvidence,
     resolveFormationEvidence: resolveFormationEvidence,
     clearFormationEvidenceOtherDates: clearFormationEvidenceOtherDates,
