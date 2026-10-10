@@ -1136,7 +1136,8 @@
       function _tagTimetableFallback(lineId, position) {
         if (!position || position.estimated !== true) return;
         if (position.positionSource !== "train-timetable" &&
-            position.positionSource !== "station-timetable") return;
+            position.positionSource !== "station-timetable" &&
+            position.positionSource !== "supabase-train-run") return;
         position.positionFallbackReason = _timetableFallbackReason(lineId);
       }
 
