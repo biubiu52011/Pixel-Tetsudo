@@ -1048,6 +1048,16 @@ function _rememberTrainArtworkFailure(trainUid) {
     //   vehicle = EXACT identity + valid upstream vehicle artwork (PNG)
     //   generic = UNKNOWN / NARROWED / no reliable artwork / PNG load failure
     var iconSrc = p && p.vehicleResolvedUpstream === true ? (p.vehicleIconPath || "") : "";
+    // The verified SQL PNG catalog arrives asynchronously. Re-project an
+    // already-EXACT vehicle at render time for BOTH realtime and estimated
+    // trains, so the next render can use its PNG without another ODPT poll.
+    // Never bypass formation-specific or multi-formation evidence restrictions.
+    if (!iconSrc && p && p.vehicleResolvedUpstream === true &&
+        p.vehicleType && !p.vehicleFormationId &&
+        (!p.vehicleFormationCandidates || !p.vehicleFormationCandidates.length) &&
+        window.TrainIcons && typeof window.TrainIcons.resolveVehicleArtwork === "function") {
+      iconSrc = window.TrainIcons.resolveVehicleArtwork(p.vehicleType) || "";
+    }
     var artworkFailed = trainUid && _trainArtworkFailure[String(trainUid)] === true;
     return {
       kind: iconSrc && !artworkFailed ? "vehicle" : "generic",

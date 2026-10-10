@@ -303,3 +303,13 @@ context.window.TrainIcons.hydrateVerifiedArtworkCatalog([
 assert.strictEqual(context.window.TrainIcons.resolveVehicleArtwork(dbOnlyName), null,
   'ambiguous exact vehicle names must not select an arbitrary operator artwork');
 console.log('SQL-certified PNG realtime projection safety: 4 PASS');
+
+// Both ODPT realtime and timetable estimates share the same late-bound
+// certified PNG projection. Formation uncertainty may never be bypassed.
+const lateBoundRenderer = read('js/trains-render.js');
+assert.ok(/p\.vehicleResolvedUpstream === true[\s\S]{0,550}window\.TrainIcons\.resolveVehicleArtwork\(p\.vehicleType\)/.test(lateBoundRenderer),
+  'confirmed realtime and estimated trains should pick up newly loaded SQL PNGs');
+assert.ok(/!p\.vehicleFormationId/.test(lateBoundRenderer) &&
+  /!p\.vehicleFormationCandidates\.length/.test(lateBoundRenderer),
+  'late PNG binding must not bypass formation constraints');
+console.log('realtime and estimated delayed PNG catalog: 2 PASS');
