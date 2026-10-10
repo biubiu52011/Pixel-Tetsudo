@@ -146,6 +146,21 @@ const trackLayoutSource=read("js/train-track-layout.js");
     win.ODPT_POSITION_REQUEST_STATUS["JR-East"] = {state};
     assert.strictEqual(getReason("Keiyo"),reason);
   }
+  const tagFn = fusion.match(/function _tagTimetableFallback\(lineId, position\) \{[\s\S]*?\n      \}/);
+  assert(tagFn, "missing shared timetable/SQL fallback provenance hook");
+  const tagPosition = vm.runInNewContext("var window=globalWindow;\n"+fn[0]+"\n"+tagFn[0]+"\n_tagTimetableFallback",
+    {globalWindow:win});
+  win.ODPT_POSITION_REQUEST_STATUS["JR-East"] = {state:"error"};
+  const sqlPosition = {positionSource:"supabase-train-run", estimated:true};
+  tagPosition("Keiyo",sqlPosition);
+  assert.strictEqual(sqlPosition.positionSource,"supabase-train-run",
+    "SQL TrainRun provenance must remain untouched");
+  assert.strictEqual(sqlPosition.positionFallbackReason,"realtime-request-error",
+    "verified SQL timetable fallback must still explain why LIVE is unavailable");
+  const livePosition = {positionSource:"realtime-api", estimated:false};
+  tagPosition("Keiyo",livePosition);
+  assert.strictEqual(livePosition.positionFallbackReason,undefined,
+    "ODPT live positions must never acquire a timetable-fallback reason");
   assert(fusion.includes('position.positionFallbackReason = _timetableFallbackReason(lineId)') &&
     renderer.includes('estimatedApiError') && renderer.includes('expiredRealtime'),
     "HYBRID fallback UI must preserve provenance and expired position warnings");
