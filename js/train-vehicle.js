@@ -357,18 +357,13 @@ function _canonicalVehicleIconPath(name, serviceDate) {
   // 图标库反查（S0–S3 候选 → 图标路径）
   function resolveArtworkForIdentity(name, formationId, serviceDate) {
     if (!name) return '';
-    if (window.TrainIcons && typeof window.TrainIcons.resolveVehicleArtwork === 'function') {
-      if (formationId) {
-        var formationIdentity = name;
-        if (!/編成/.test(formationIdentity)) {
-          var fid = String(formationId).trim();
-          formationIdentity = name + '（' + fid + (/(?:F|編成)$/i.test(fid) ? '' : '編成') + '）';
-        }
-        return window.TrainIcons.resolveVehicleArtwork(formationIdentity, serviceDate) || '';
-      }
-      return window.TrainIcons.resolveVehicleArtwork(name, serviceDate) || '';
+    var identity = name;
+    if (formationId && !/編成/.test(identity)) {
+      var fid = String(formationId).trim();
+      identity = name + '（' + fid + (/(?:F|編成)$/i.test(fid) ? '' : '編成') + '）';
     }
-    return '';
+    // Same module, same canonical map; no global legacy icon resolver hop.
+    return resolveVehicleArtwork(identity, serviceDate) || '';
   }
 
   // ============================================================

@@ -371,3 +371,7 @@ assert.ok(!rendererSrc.includes('function _createGenericTrainMarker') &&
   rendererSrc.includes('document.createElementNS(svgNS, "image")'),
   'train icon renderer must use PNG-only image elements, never self-drawn SVG trains');
 console.log('PNG-only one-script train marker: 4 PASS');
+
+assert.ok(!/window\\.TrainIcons\\.resolveVehicleArtwork/.test(read('js/train-vehicle.js')),
+  'production vehicle resolver must not hop back through the legacy TrainIcons facade');
+console.log('single internal PNG resolver, no second mapping hop: PASS');
