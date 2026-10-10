@@ -102,14 +102,15 @@ assert(/routePos:\s*routePos/.test(trackLayoutSource),
   "TrainTrackLayout must expose loop route position to the single marker animation authority");
 assert(/_useLoopRoute[\s\S]{0,900}_loopPosToXY\(_curRoutePos, _loopRect\)/.test(renderer),
   "loop marker interpolation must follow route geometry instead of cutting corners in XY space");
-assert(/p && p\.vehicleResolvedUpstream === true \? \(p\.vehicleIconPath \|\| ""\) : ""/.test(renderer),
-  "renderer must consume only the upstream vehicle artwork projection");
+assert(renderer.includes('window.TrainVehicle.selectMarkerArtwork(p, artworkFailed)') &&
+       !renderer.includes('window.TrainIcons.resolveVehicleArtwork'),
+  "renderer must delegate all PNG/neutral decisions to the single TrainVehicle authority");
 assert(!/var exact = p && \(p\.vehicleIdentityStatus/.test(renderer),
   "renderer must not re-arbitrate vehicle identity status");
 assert(!/vehicleResolvedFromRealtime/.test(renderer),
   "renderer must not branch on vehicle evidence source");
-assert(/kind: iconSrc && !artworkFailed \? "vehicle" : "generic"/.test(renderer),
-  "TrainMarker artwork must be exactly vehicle PNG or generic train");
+assert(renderer.includes('kind: artwork.kind === "vehicle" && artwork.iconSrc ? "vehicle" : "generic"'),
+  "TrainMarker must render only the unified vehicle PNG or neutral train result");
 assert(!/iconSrc \? "image" : "circle"/.test(renderer),
   "the legacy circle fallback kind must not return");
 assert(!/outer\.setAttribute\("r", "8"\)/.test(renderer),
