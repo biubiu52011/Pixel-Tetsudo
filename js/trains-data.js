@@ -112,12 +112,21 @@ function getRealtimePositions(lineId) {
 
 function _isFreshRealtimePosition(p) {
   if (!p || p.positionSource !== "realtime-api") return false;
-  // Missing validity metadata is not evidence of expiry; preserve existing
-  // realtime priority. But once dct:valid is supplied, an expired/invalid
-  // timestamp must not suppress a current timetable estimate.
-  if (!p.sourceValidUntil) return true;
-  var validUntil = Date.parse(p.sourceValidUntil);
-  return !isNaN(validUntil) && validUntil >= Date.now();
+  // Freshness must agree with the renderer. A current fetch without provider
+  // timestamps is usable, but an explicit stale or malformed timestamp is not.
+  var now = Date.now();
+  if (p.sourceValidUntil) {
+    var validUntil = Date.parse(p.sourceValidUntil);
+    return !isNaN(validUntil) && validUntil >= now;
+  }
+  if (!p.sourceUpdatedAt) return true;
+  var updatedAt = Date.parse(p.sourceUpdatedAt);
+  if (isNaN(updatedAt) || updatedAt > now + 60000) return false;
+  var frequency = Number(p.sourceFrequency);
+  var maxAgeMs = isFinite(frequency) && frequency > 0
+    ? Math.max(60000, Math.min(frequency * 1000 * 4, 5 * 60 * 1000))
+    : 2 * 60 * 1000;
+  return now - updatedAt <= maxAgeMs;
 }
 
 function _positionSourceRank(p) {
@@ -136,14 +145,16 @@ function _positionSourceRank(p) {
 
 function _trainIdentityKey(p) {
   if (!p) return "";
-  var id = p.runningChainId || p.trainNumber || p.trainId || "";
-  id = String(id).trim();
-  if (!id) return "";
-  return id.replace(/^odpt\.Train:/, "")
-           .replace(/^odpt\.TrainTimetable:/, "")
-           .replace(/^odpt\.[^:]+:/, "")
-           .replace(/[@#].*$/, "")
-           .toUpperCase();
+  // A verified physical running chain is the only cross-line dedupe identity.
+  // A bare service train number can be reused by different operators, and may
+  // never collapse two physical trains on a shared/through-service display.
+  var chain = String(p.runningChainId || "").trim();
+  if (chain) return "CHAIN:" + chain.toUpperCase();
+  var sourceId = String(p.trainId || p.sourceTrainId || p.timetableObjectId || "").trim();
+  if (!sourceId) return "";
+  var operator = String(p.trainOperator || p.trainOwner || p.assignmentOperator || "").trim();
+  var railway = String(p.sourceRailway || "").trim();
+  return "SOURCE:" + operator.toUpperCase() + "|" + railway.toUpperCase() + "|" + sourceId.toUpperCase();
 }
 
 function _positionCompleteness(p) {
