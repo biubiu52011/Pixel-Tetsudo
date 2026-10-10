@@ -367,8 +367,9 @@ const catalogEdge = read('supabase/functions/train-runs/index.ts');
 const catalogIcons = read('js/train-vehicle.js');
 assert.ok(/catalog=vehicle-artwork/.test(catalogIcons) &&
           /VERIFIED_SQL_VEHICLE_IDENTITIES/.test(catalogEdge) &&
-          /identity_status", "exact"/.test(catalogEdge),
-  'PNG catalog must come from certified SQL identities, never unreviewed inventory');
+          /vehicle_artwork_exact_locked/.test(catalogEdge) &&
+          !/db\.from\("vehicle_image_assets"\)/.test(catalogEdge),
+  'PNG catalog must come from exact identities joined to reviewed PNG locks, never inventory');
 assert.strictEqual(context.window.TrainIcons.hydrateVerifiedArtworkCatalog([
   {image_path:'images/列车/JR東日本/JR東日本_E235系_0番台.png'}]), true);
 assert.strictEqual(context.window.TrainIcons.resolveVehicleArtwork('E235系0番台（山手線）'),
