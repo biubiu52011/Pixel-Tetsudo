@@ -11,6 +11,7 @@ const root = path.resolve(__dirname, '..');
 const baseline = require('./vehicle-image-lock-baseline.json');
 assert.equal(baseline.schema, 1);
 assert.ok(Object.keys(baseline.images).length > 0, 'empty train PNG baseline');
+const nonNativePng = [];
 for (const [name, expected] of Object.entries(baseline.images)) {
   assert.match(name, /^images\/列车\/[^\n]+\.png$/);
   assert.match(expected, /^[0-9a-f]{40}$/);
@@ -18,9 +19,10 @@ for (const [name, expected] of Object.entries(baseline.images)) {
   assert.ok(target.startsWith(path.join(root, 'images', '列车') + path.sep), 'unsafe path: ' + name);
   assert.ok(fs.existsSync(target), 'locked PNG missing: ' + name);
   const bytes = fs.readFileSync(target);
-  assert.ok(bytes.length >= 8 && bytes.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10])), 'locked image is not a native PNG: ' + name);
+  if (bytes.length < 8 || !bytes.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]))) nonNativePng.push(name);
   const header = Buffer.from('blob ' + bytes.length + '\0');
   const actual = crypto.createHash('sha1').update(header).update(bytes).digest('hex');
   assert.equal(actual, expected, 'locked PNG changed: ' + name);
 }
+assert.deepEqual(nonNativePng, [], 'locked assets are not native PNG');
 console.log('vehicle-image-lock: PASS (' + Object.keys(baseline.images).length + ' locked PNGs)');
