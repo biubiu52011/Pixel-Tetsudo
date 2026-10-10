@@ -76,6 +76,81 @@ assert.strictEqual(trainRank({ positionSource: "station-timetable", estimated: t
 assert.strictEqual(trainRank({ estimated: false }), 3,
   "estimated:false without proven realtime source must remain unknown");
 const trackLayoutSource=read("js/train-track-layout.js");
+
+{
+  // Runtime-level arbitration tests: a shared service number is not a physical train ID.
+  const trainSource = read("js/trains-data.js");
+  const symbols = ["_isFreshRealtimePosition", "_positionSourceRank", "_trainIdentityKey",
+    "_positionCompleteness", "_preferTrainPosition", "_dedupeTrainPositions"];
+  const snippets = symbols.map(function(name) {
+    const found = trainSource.match(new RegExp("function " + name + "\\([^\\n]*\\) \\{[\\s\\S]*?\\n\\}"));
+    assert(found, "missing train identity/freshness function " + name);
+    return found[0];
+  });
+  const sandbox = vm.runInNewContext(snippets.join("\n") +
+    "\n({dedupe:_dedupeTrainPositions,key:_trainIdentityKey,fresh:_isFreshRealtimePosition})");
+  const sameNumber = sandbox.dedupe([
+    { trainNumber:"123", trainId:"odpt.Train:123", trainOperator:"JR-East", sourceRailway:"Keiyo", positionSource:"realtime-api" },
+    { trainNumber:"123", trainId:"odpt.Train:123", trainOperator:"Tobu", sourceRailway:"TobuSkytree", positionSource:"realtime-api" }
+  ], "Through");
+  assert.strictEqual(sameNumber.length, 2,
+    "identical service numbers from different operators must not collapse");
+  assert.strictEqual(sandbox.dedupe([
+    { trainNumber:"123", positionSource:"train-timetable" },
+    { trainNumber:"123", positionSource:"train-timetable" }
+  ], "Through").length, 2, "bare train number must not be an identity");
+  const now = Date.now();
+  const current = { runningChainId:"chain-real-1", positionSource:"realtime-api",
+    sourceUpdatedAt:new Date(now-30000).toISOString(), stationIndex:5 };
+  const estimate = { runningChainId:"chain-real-1", positionSource:"train-timetable",
+    estimated:true, stationIndex:4 };
+  assert.strictEqual(sandbox.dedupe([estimate,current], "Through")[0].positionSource,
+    "realtime-api", "fresh realtime wins over estimate of the SAME verified chain");
+  const stale = { ...current, sourceUpdatedAt:new Date(now-600000).toISOString() };
+  assert.strictEqual(sandbox.fresh(stale), false,
+    "stale dc:date must not be treated as live when dct:valid is absent");
+  assert.strictEqual(sandbox.dedupe([stale,estimate], "Through")[0].positionSource,
+    "train-timetable", "stale realtime loses to an explicitly labelled estimate");
+  assert.strictEqual(sandbox.fresh({ ...current, sourceValidUntil:"not-a-date" }), false,
+    "invalid explicit ODPT validity must fail closed");
+}
+{
+  // Exercise chain matching directly: network-wide uniqueness is never enough.
+  const fn = fusion.match(/function _uniqueMatchedChain\(trainNumber, lineId, operator, sourceRailway\) \{[\s\S]*?\n            \}/);
+  assert(fn, "missing evidence-scoped timetable/realtime running-chain bridge");
+  const matchChain = vm.runInNewContext(
+    "var _chainsByTrainNumber = { '123': { C1:{lines:{Keiyo:true}}, C2:{lines:{TobuSkytree:true}} } }; " +
+    "var window={ODPTClient:{LINE_TO_OPERATOR:{Keiyo:'JR-East',TobuSkytree:'Tobu'}," +
+    "LINE_RAILWAY_CODE:{Keiyo:'Keiyo',TobuSkytree:'TobuSkytree'}}};\n" +
+    fn[0] + "\n_uniqueMatchedChain");
+  assert.strictEqual(matchChain("123","Keiyo"), "C1");
+  assert.strictEqual(matchChain("123","TobuSkytree"), "C2");
+  assert.strictEqual(matchChain("123","UnknownLine"), "",
+    "a unique timetable train number outside this line is not a through-service identity");
+  assert.strictEqual(matchChain("123","","Tobu","odpt.Railway:Tobu.TobuSkytree"), "C2");
+  assert.strictEqual(matchChain("123","","JR-East","odpt.Railway:JR-East.TobuSkytree"), "",
+    "positionless realtime evidence must agree on BOTH operator and railway");
+}
+{
+  // HYBRID estimates are explicitly marked; API errors and valid empties differ.
+  const fn = fusion.match(/function _timetableFallbackReason\(lineId\) \{[\s\S]*?\n      \}/);
+  assert(fn, "missing HYBRID ODPT source-status classifier");
+  const win = {ODPTClient:{LINE_TO_OPERATOR:{Keiyo:"JR-East"},supports:(op,kind)=>op==="JR-East"&&kind==="train"},
+    ODPT_POSITION_REQUEST_STATUS:{}};
+  const getReason = vm.runInNewContext("var window=globalWindow;\n"+fn[0]+"\n_timetableFallbackReason",
+    {globalWindow:win});
+  assert.strictEqual(getReason("NoEndpoint"), "no-realtime-endpoint");
+  assert.strictEqual(getReason("Keiyo"), "realtime-coverage-unchecked");
+  for (const [state,reason] of [["error","realtime-request-error"],["loading","realtime-request-pending"],
+    ["empty","realtime-empty-response"],["ok","realtime-partial-or-unmatched"]]) {
+    win.ODPT_POSITION_REQUEST_STATUS["JR-East"] = {state};
+    assert.strictEqual(getReason("Keiyo"),reason);
+  }
+  assert(fusion.includes('position.positionFallbackReason = _timetableFallbackReason(lineId)') &&
+    renderer.includes('estimatedApiError') && renderer.includes('expiredRealtime'),
+    "HYBRID fallback UI must preserve provenance and expired position warnings");
+}
+
 const trainsCssSource=read("css/trains.css");
 assert(!/transition:\s*x\s+14s[\s\S]{0,120}y\s+14s/.test(trainsCssSource),
   "CSS must not compete with the JS/layout train-marker animation authority");
