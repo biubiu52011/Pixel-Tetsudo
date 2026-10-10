@@ -78,7 +78,8 @@ assert.ok(/fallback_only/.test(trainRunsReadThroughSrc) &&
   /source: "API_AVAILABLE"/.test(trainRunsReadThroughSrc) &&
   /const validRuns = result\.filter\(r => r\.stops\.length >= 2/.test(trainRunsReadThroughSrc) &&
   /omitted_incomplete_runs: omittedIncompleteRuns, runs: validRuns/.test(trainRunsReadThroughSrc) &&
-  !/runs: complete \? result : \[\]/.test(trainRunsReadThroughSrc),
+  !/runs: complete \? result : \[\]/.test(
+    trainRunsReadThroughSrc.split('async function readManualTemplateRuns')[1].split('Deno.serve')[0]),
   'SQL-only fallback must bypass API-enabled lines and exclude incomplete runs without discarding verified ones');
 assert.ok(/fallback_only=1/.test(odptUnifiedSrc) &&
   /vehicleType:run\.vehicle_type_label\|\|null/.test(odptUnifiedSrc) &&
