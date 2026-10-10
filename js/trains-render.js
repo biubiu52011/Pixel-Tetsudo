@@ -558,6 +558,7 @@ function _rememberTrainArtworkFailure(trainUid) {
       for (var _oi = 0; _oi < _oldNotes.length; _oi++) _oldNotes[_oi].remove();
       if (!positions || !positions.length) return;
       var anyEst = false;
+      var anyUnknown = false;
       var anyRealtime = false;
       var latestRealtimeAt = "";
       var latestRealtimeMs = 0;
@@ -573,8 +574,11 @@ function _rememberTrainArtworkFailure(trainUid) {
               latestRealtimeAt = _p.sourceUpdatedAt;
             }
           }
-        } else {
+        } else if (_rank === 1 || _rank === 2) {
           anyEst = true;
+        } else {
+          // Neither a realtime source nor a timetable estimate is proven.
+          anyUnknown = true;
         }
       }
       var parts = [];
@@ -585,6 +589,13 @@ function _rememberTrainArtworkFailure(trainUid) {
         parts.push(anyRealtime
           ? (t("trains.estimated_mixed_note") || "*Only supplemental non-realtime positions are estimated")
           : (t("trains.estimated_note") || "*Data calculated from timetable"));
+      }
+      if (anyUnknown) {
+        var _sourceLang = String(window.currentLang || "ja").toLowerCase();
+        parts.push(_sourceLang.indexOf("zh") === 0 ? "部分列车位置来源未确认" :
+          _sourceLang.indexOf("ko") === 0 ? "일부 열차 위치의 출처 미확인" :
+          _sourceLang.indexOf("en") === 0 ? "Some train positions have unverified sources" :
+          "一部列車の位置情報は出典未確認");
       }
       if (!parts.length) return;
       var note = document.createElement("div");
@@ -598,10 +609,11 @@ function _rememberTrainArtworkFailure(trainUid) {
 
   function _trainPositionRank(p) {
     if (!p) return 3;
-    if (p.positionSource === "realtime-api" || p.estimated === false) return 0;
+    if (p.positionSource === "realtime-api") return 0;
     if (p.positionSource === "train-timetable") return 1;
     if (p.positionSource === "station-timetable") return 2;
-    return p.estimated === true ? 1 : 0;
+    // estimated:false without ODPT provenance is not proof of live position.
+    return p.estimated === true ? 1 : 3;
   }
 
   function _sortTrainPositionsBySource(positions) {
