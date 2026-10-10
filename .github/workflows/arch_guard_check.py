@@ -326,7 +326,7 @@ def main():
         new_errors.append('TRAIN-001 PNG_ONLY_IMAGE_FAILURE_FALLBACK_MISSING')
     if 'train-dot' in renderer_src or 'train-point' in renderer_src:
         new_errors.append('TRAIN-001 LEGACY_TRAIN_DOT_MARKER_REINTRODUCED')
-    neutral_match = re.search(r'var NEUTRAL_TRAIN_PNG\\s*=\\s*"\\.\\./([^"]+\\.png)"', vehicle_src)
+    neutral_match = re.search(r'var NEUTRAL_TRAIN_PNG\s*=\s*"\.\./([^"]+\.png)"', vehicle_src)
     if not neutral_match or not neutral_match.group(1).startswith('images/列车/'):
         new_errors.append('TRAIN-001 NEUTRAL_GALLERY_PNG_UNDEFINED')
     else:
