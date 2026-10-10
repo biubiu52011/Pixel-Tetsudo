@@ -525,7 +525,7 @@ function _rememberTrainArtworkFailure(trainUid) {
     }
     if (!p.sourceUpdatedAt) return true;
     var updatedAt = Date.parse(p.sourceUpdatedAt);
-    if (isNaN(updatedAt)) return false;
+    if (isNaN(updatedAt) || updatedAt > now + 60000) return false;
     var frequency = Number(p.sourceFrequency);
     var maxAgeMs = isFinite(frequency) && frequency > 0
       ? Math.max(60000, Math.min(frequency * 1000 * 4, 5 * 60 * 1000))
