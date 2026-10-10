@@ -941,14 +941,16 @@
               // （如 SaikyoKawagoe→[Saikyo,Kawagoe]、Kawagoe→[KawagoeWest]），集合匹配比
               // 子串猜测更准——避免川越〜高麗川的 Kawagoe 数据错配到大宮〜川越段。
               var mappedLids = _railwayCodeLines[railwayName] || [];
-              for (var i = 0; i < matchingLines.length; i++) {
-                var ml = matchingLines[i];
-                if (mappedLids.length > 0) {
-                  if (mappedLids.indexOf(ml.lid) >= 0) { targetLine = ml; break; }
-                } else if (ml.lid === railwayName || ml.lid.indexOf(railwayName) >= 0 || railwayName.indexOf(ml.lid) >= 0) {
-                  targetLine = ml;
-                  break;
-                }
+              // The ODPT railway-code mapping can span several project lines.
+              // Shared stations cannot determine which segment owns a train.
+              // Choose the line only when this source has one unique match.
+              var _mappedMatches = matchingLines.filter(function(ml) {
+                return mappedLids.indexOf(ml.lid) >= 0;
+              });
+              if (_mappedMatches.length === 1) targetLine = _mappedMatches[0];
+              if (!targetLine && mappedLids.length === 0) {
+                var _exactMatches = matchingLines.filter(function(ml) { return ml.lid === railwayName; });
+                if (_exactMatches.length === 1) targetLine = _exactMatches[0];
               }
             }
             // 2. Ambiguous source identity must stay unresolved.
@@ -971,7 +973,8 @@
             if (!posMap[lid]) posMap[lid] = [];
             var _linePositionIndex = _positionIndexByLine[lid];
             if (!_linePositionIndex) _linePositionIndex = _positionIndexByLine[lid] = new Map();
-            var existingIdx = _linePositionIndex.has(trainId) ? _linePositionIndex.get(trainId) : -1;
+            // Missing ODPT train ID cannot prove two records are the same train.
+            var existingIdx = trainId && _linePositionIndex.has(trainId) ? _linePositionIndex.get(trainId) : -1;
             var rawType = t["odpt:trainType"] || "";
             var typeName = "";
             if (rawType) {
@@ -1068,7 +1071,7 @@
             if (existingIdx >= 0) {
               posMap[lid][existingIdx] = positionData;
             } else {
-              _linePositionIndex.set(trainId, posMap[lid].length);
+              if (trainId) _linePositionIndex.set(trainId, posMap[lid].length);
               posMap[lid].push(positionData);
             }
           }
