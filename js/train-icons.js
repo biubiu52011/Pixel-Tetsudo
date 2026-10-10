@@ -755,6 +755,9 @@ function _resolveTrainRuleDisplayName(lineId, operator, trainId, stationIndex, t
     // Disallow a DB-only mapping for a name that the canonical registry marks
     // as conflicting, retired, or otherwise unsupported.
     if (CANONICAL_VEHICLE_ALIAS_CONFLICTS[name]) return null;
+    // Bare series numbers are shared by many operators. A unique row in the
+    // currently certified subset is not proof of a unique railway identity.
+    if (/^[0-9]{2,5}(?:-[0-9]+)?(?:系|形|型)$/.test(name)) return null;
     if (_verifiedSqlArtworkByExactName &&
         Object.prototype.hasOwnProperty.call(_verifiedSqlArtworkByExactName, name)) {
       return _verifiedSqlArtworkByExactName[name] || null;
