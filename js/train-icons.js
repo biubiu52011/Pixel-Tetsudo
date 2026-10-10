@@ -749,5 +749,9 @@ function _resolveTrainRuleDisplayName(lineId, operator, trainId, stationIndex, t
     refreshVerifiedArtworkCatalog: refreshVerifiedArtworkCatalog
   };
 
+  // Fire once after the canonical registry exists. The request is read-only,
+  // never blocks rendering, and never grants identity to an UNKNOWN train.
+  if (typeof fetch === "function") refreshVerifiedArtworkCatalog();
+
   console.debug("[TrainIcons] initialized with zero-fallback vehicle identity policy");
 })();
