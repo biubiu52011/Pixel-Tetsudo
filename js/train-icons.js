@@ -658,6 +658,31 @@ function resolveCanonicalVehicle(name) {
   return CANONICAL_VEHICLE_ALIAS_INDEX[n] || null;
 }
 
+// SQL supplies a vetted path allowlist. The canonical identity resolver remains
+// the only vehicle selector: catalog rows cannot guess a train's type.
+var _verifiedSqlArtworkPaths = null;
+function hydrateVerifiedArtworkCatalog(rows) {
+  if (!Array.isArray(rows)) return false;
+  var paths = Object.create(null);
+  rows.forEach(function(row) {
+    var path = row && String(row.image_path || "");
+    if (/^images\\/列车\\/[^/]+\\/[^/]+\\.png$/.test(path)) paths["../" + path] = true;
+  });
+  _verifiedSqlArtworkPaths = paths;
+  return true;
+}
+function refreshVerifiedArtworkCatalog() {
+  if (typeof fetch !== "function") return Promise.resolve(false);
+  return fetch("https://pnupwfmgbtxqhpzsrhfn.supabase.co/functions/v1/train-runs?catalog=vehicle-artwork",
+    { credentials: "omit" }).then(function(res) {
+      if (!res.ok) throw new Error("vehicle artwork catalog HTTP " + res.status);
+      return res.json();
+    }).then(function(body) {
+      return body && body.ok === true && Array.isArray(body.assets)
+        ? hydrateVerifiedArtworkCatalog(body.assets) : false;
+    }).catch(function() { return false; });
+}
+
 function _canonicalVehicleIconPath(name, serviceDate) {
   var n = String(name || "").trim();
   if (!n) return null;
@@ -669,6 +694,9 @@ function _canonicalVehicleIconPath(name, serviceDate) {
     if (rec.validFrom && d < rec.validFrom) return null;
     if (rec.validTo && d > rec.validTo) return null;
   }
+  // When SQL certifies the same canonical artwork, accept its path.
+  // Otherwise keep the previously verified static mapping for offline use.
+  if (_verifiedSqlArtworkPaths && _verifiedSqlArtworkPaths[rec.asset]) return rec.asset;
   return rec.asset;
 }
 
@@ -716,7 +744,9 @@ function _resolveTrainRuleDisplayName(lineId, operator, trainId, stationIndex, t
     resolveVehicleArtwork: resolveVehicleArtwork,
     resolveVehicleDisplayName: resolveVehicleDisplayName,
     resolveCanonicalVehicle: resolveCanonicalVehicle,
-    CANONICAL_VEHICLES: CANONICAL_VEHICLES
+    CANONICAL_VEHICLES: CANONICAL_VEHICLES,
+    hydrateVerifiedArtworkCatalog: hydrateVerifiedArtworkCatalog,
+    refreshVerifiedArtworkCatalog: refreshVerifiedArtworkCatalog
   };
 
   console.debug("[TrainIcons] initialized with zero-fallback vehicle identity policy");

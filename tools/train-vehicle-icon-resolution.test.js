@@ -270,3 +270,18 @@ assert.ok(/marker\.addEventListener\("error"/.test(rendererSrc) &&
 assert.ok(!/_hasRealtimeVehicleEvidence/.test(rendererSrc),
   'the retired per-source realtime image gate must not return');
 console.log('TrainMarker artwork contract: 6 PASS');
+
+const catalogEdge = read('supabase/functions/train-runs/index.ts');
+const catalogIcons = read('js/train-icons.js');
+assert.ok(/catalog=vehicle-artwork/.test(catalogIcons) &&
+          /VERIFIED_SQL_VEHICLE_IDENTITIES/.test(catalogEdge) &&
+          /identity_status", "exact"/.test(catalogEdge),
+  'PNG catalog must come from certified SQL identities, never unreviewed inventory');
+assert.strictEqual(context.window.TrainIcons.hydrateVerifiedArtworkCatalog([
+  {image_path:'images/列车/JR東日本/JR東日本_E235系_0番台.png'}]), true);
+assert.strictEqual(context.window.TrainIcons.resolveVehicleArtwork('E235系0番台（山手線）'),
+  '../images/列车/JR東日本/JR東日本_E235系_0番台.png',
+  'SQL verified catalog cannot break canonical PNG identity');
+assert.strictEqual(context.window.TrainIcons.resolveVehicleArtwork('unverified train type'), null,
+  'DB catalog cannot mint unknown vehicle identity');
+console.log('SQL vetted artwork catalog: 3 PASS');

@@ -222,6 +222,23 @@ Deno.serve(async (req: Request) => {
   if (req.method !== "GET") return json({ ok: false, error: "METHOD_NOT_ALLOWED" }, 405);
 
   const url = new URL(req.url);
+  // Existing read-only endpoint: serve only pre-verified visual identities,
+  // never pending/review PNGs or anonymous gallery candidates.
+  if (url.searchParams.get("catalog") === "vehicle-artwork") {
+    const keys = JSON.parse(Deno.env.get("SUPABASE_SECRET_KEYS") || "{}");
+    const key = keys.default || Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+    const supabaseUrl = Deno.env.get("SUPABASE_URL");
+    if (!supabaseUrl || !key) return json({ ok: false, error: "SERVER_CONFIG" }, 500);
+    const db = createClient(supabaseUrl, key, { auth: { persistSession: false, autoRefreshToken: false } });
+    const { data, error } = await db.from("vehicle_visual_identities")
+      .select("operator,vehicle_type,formation_id,livery,theme,valid_from,valid_to,image_path")
+      .eq("identity_status", "exact").not("image_path", "is", null).limit(500);
+    if (error) return json({ ok: false, error: "VEHICLE_CATALOG_FAILED" }, 500);
+    const paths = (data || []).filter((row: any) =>
+      /^images\/列车\/[^/]+\/[^/]+\.png$/.test(row.image_path || ""));
+    return json({ ok: true, source: "VERIFIED_SQL_VEHICLE_IDENTITIES", assets: paths });
+  }
+
   const lineId = (url.searchParams.get("line_id") || "").trim();
   const serviceDate = (url.searchParams.get("service_date") || "").trim();
   if (!/^[A-Za-z0-9._:-]{1,80}$/.test(lineId)) return json({ ok: false, error: "INVALID_LINE_ID" }, 400);
