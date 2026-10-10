@@ -222,15 +222,35 @@ function resolveCanonicalVehicle(name) {
 // the only vehicle selector: catalog rows cannot guess a train's type.
 var _verifiedSqlArtworkPaths = null;
 var _verifiedSqlArtworkByExactName = null;
+var _verifiedSqlArtworkByExactFormation = null;
 function hydrateVerifiedArtworkCatalog(rows) {
   if (!Array.isArray(rows)) return false;
   var paths = Object.create(null);
   var exact = Object.create(null);
+  var formations = Object.create(null);
   rows.forEach(function(row) {
     var path = row && String(row.image_path || "");
     if (!(path.startsWith("images/列车/") && path.endsWith(".png") && path.split("/").length === 4)) return;
     var artwork = "../" + path;
     paths[artwork] = true;
+    // Explicit formation evidence can identify a verified variant. Require the
+    // operator-qualified type and exact formation; never infer from a bare series.
+    var company = path.split("/")[2];
+    var vehicle = String(row.vehicle_type || "").trim();
+    var formation = String(row.formation_id || "").trim();
+    if (company && company !== "共通" && vehicle && formation) {
+      var qualifiedType = vehicle.indexOf(company) === 0 ? vehicle : company + vehicle;
+      var formationLabel = formation + (/(?:F|編成)$/i.test(formation) ? "" : "編成");
+      var identity = qualifiedType + "（" + formationLabel + "）";
+      var validFrom = String(row.valid_from || "").slice(0, 10);
+      var validTo = String(row.valid_to || "").slice(0, 10);
+      if ((!validFrom || /^\d{4}-\d{2}-\d{2}$/.test(validFrom)) &&
+          (!validTo || /^\d{4}-\d{2}-\d{2}$/.test(validTo)) &&
+          (!validFrom || !validTo || validFrom <= validTo)) {
+        if (!formations[identity]) formations[identity] = [];
+        formations[identity].push({ artwork: artwork, from: validFrom, to: validTo });
+      }
+    }
     // A database type name is eligible only when one certified generic vehicle
     // artwork exists for that *exact* name. Formation/livery/theme variants
     // cannot be chosen from a train's type alone.
@@ -242,6 +262,7 @@ function hydrateVerifiedArtworkCatalog(rows) {
   });
   _verifiedSqlArtworkPaths = paths;
   _verifiedSqlArtworkByExactName = exact;
+  _verifiedSqlArtworkByExactFormation = formations;
   return true;
 }
 function refreshVerifiedArtworkCatalog() {
@@ -304,13 +325,29 @@ function _canonicalVehicleIconPath(name, serviceDate) {
     // Canonical aliases are allowed only when they resolve to the same registered
     // identity record. No line override, replacement vehicle, base-name stripping,
     // retired-stock substitution, or approximate alias may select artwork.
+    // A certified exact formation takes precedence when the SQL catalog has
+    // that identity. Static canonical artwork remains the offline fallback.
+    // Canonical alias conflicts always block both paths.
+    if (CANONICAL_VEHICLE_ALIAS_CONFLICTS[name]) return null;
+    if (_verifiedSqlArtworkByExactFormation &&
+        Object.prototype.hasOwnProperty.call(_verifiedSqlArtworkByExactFormation, name)) {
+      var verified = _verifiedSqlArtworkByExactFormation[name];
+      var date = String(serviceDate || "").slice(0, 10);
+      var uniqueArtwork = null;
+      for (var i = 0; i < verified.length; i++) {
+        var candidate = verified[i];
+        if ((candidate.from || candidate.to) && !/^\d{4}-\d{2}-\d{2}$/.test(date)) continue;
+        if (candidate.from && date < candidate.from) continue;
+        if (candidate.to && date > candidate.to) continue;
+        if (uniqueArtwork && uniqueArtwork !== candidate.artwork) return null;
+        uniqueArtwork = candidate.artwork;
+      }
+      return uniqueArtwork;
+    }
     var canonical = _canonicalVehicleIconPath(name, serviceDate);
     if (canonical) return canonical;
     // A confirmed upstream vehicle type may use a SQL-certified PNG only on
     // exact, unambiguous type identity (never line-based fleet guessing).
-    // Disallow a DB-only mapping for a name that the canonical registry marks
-    // as conflicting, retired, or otherwise unsupported.
-    if (CANONICAL_VEHICLE_ALIAS_CONFLICTS[name]) return null;
     // Bare series numbers are shared by many operators. A unique row in the
     // currently certified subset is not proof of a unique railway identity.
     if (/^[0-9]{2,5}(?:-[0-9]+)?(?:系|形|型)$/.test(name)) return null;

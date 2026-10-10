@@ -88,6 +88,65 @@ assert.strictEqual(context.window.TrainIcons.resolveVehicleArtwork('小田急800
   'ambiguous multi-vehicle evidence must not project concrete artwork');
 console.log('expanded evidence-backed artwork: 9 PASS');
 
+// Database artwork rows are verified evidence, not a second train-type resolver.
+// A qualified type plus a proven formation is needed to display a SQL-only PNG.
+const verifiedSqlArtworks = [
+  {
+    image_path:'images/列车/埼玉新都市交通/埼玉新都市交通_2020系_21編成_グリーンクリスタル.png',
+    vehicle_type:'2020系', formation_id:'21', livery:'グリーンクリスタル',
+    valid_from:null, valid_to:null
+  },
+  {
+    image_path:'images/列车/埼玉新都市交通/埼玉新都市交通_2020系_22編成_ブライトアンバー.png',
+    vehicle_type:'2020系', formation_id:'22', livery:'ブライトアンバー',
+    valid_from:'2026-12-01', valid_to:null
+  }
+];
+assert.strictEqual(context.window.TrainIcons.hydrateVerifiedArtworkCatalog(verifiedSqlArtworks), true);
+const sqlFormation = context.window.TrainVehicle.resolve({
+  timetableVehicleType:'埼玉新都市交通2020系',
+  formationId:'21', formationCandidates:['21']
+});
+assert.strictEqual(sqlFormation.identityStatus, 'EXACT');
+assert.ok((sqlFormation.iconPath || '').endsWith('埼玉新都市交通_2020系_21編成_グリーンクリスタル.png'),
+  'certified SQL formation must project through the existing resolver');
+const sqlUnconfirmed = context.window.TrainVehicle.resolve({
+  timetableVehicleType:'埼玉新都市交通2020系',
+  formationId:'', formationCandidates:['21']
+});
+assert.strictEqual(sqlUnconfirmed.iconPath, '',
+  'a candidate without confirmed formation may not select a SQL PNG');
+const sqlUndated = context.window.TrainVehicle.resolve({
+  timetableVehicleType:'埼玉新都市交通2020系',
+  formationId:'22', formationCandidates:['22']
+});
+assert.strictEqual(sqlUndated.iconPath, '',
+  'dated SQL artwork must not be selected without a service date');
+const sqlHistorical = context.window.TrainVehicle.resolve({
+  timetableVehicleType:'埼玉新都市交通2020系',
+  formationId:'22', formationCandidates:['22'], serviceDate:'2026-10-10'
+});
+assert.strictEqual(sqlHistorical.iconPath, '',
+  'future SQL artwork must not leak into prior service dates');
+const sqlDated = context.window.TrainVehicle.resolve({
+  timetableVehicleType:'埼玉新都市交通2020系',
+  formationId:'22', formationCandidates:['22'], serviceDate:'2026-12-02'
+});
+assert.ok((sqlDated.iconPath || '').endsWith('埼玉新都市交通_2020系_22編成_ブライトアンバー.png'));
+// Two certified paint variants for the same formation must not be guessed.
+context.window.TrainIcons.hydrateVerifiedArtworkCatalog([
+  verifiedSqlArtworks[0],
+  Object.assign({}, verifiedSqlArtworks[0], {
+    image_path:'images/列车/埼玉新都市交通/埼玉新都市交通_2020系_22編成_ブライトアンバー.png'
+  })
+]);
+assert.strictEqual(context.window.TrainVehicle.resolve({
+  timetableVehicleType:'埼玉新都市交通2020系',
+  formationId:'21', formationCandidates:['21']
+}).iconPath, '', 'conflicting SQL artwork variants must stay unresolved');
+context.window.TrainIcons.hydrateVerifiedArtworkCatalog(verifiedSqlArtworks);
+console.log('SQL certified formation -> canonical artwork resolver: 7 PASS');
+
 const formationExact = context.window.TrainVehicle.resolve({
   timetableVehicleType:'埼玉新都市交通2000系',
   formationId:'01',

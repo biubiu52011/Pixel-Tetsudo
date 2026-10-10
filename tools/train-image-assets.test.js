@@ -18,10 +18,9 @@ for (const rel of files) {
   }
 }
 assert(checked > 0, "no train image references found");
-// Historical image-library cleanup is still in progress. CI must prevent NEW
-// broken references without turning the already-known backlog into a failure on
-// every unrelated commit. Lower this baseline as stale references are repaired.
-const KNOWN_MISSING_BASELINE = 177;
+// All 51 current canonical references exist in the committed gallery.
+// Future stale filenames must fail rather than silently accumulating debt.
+const KNOWN_MISSING_BASELINE = 0;
 const uniqueMissing = [...new Set(missing)];
 assert(
   uniqueMissing.length <= KNOWN_MISSING_BASELINE,

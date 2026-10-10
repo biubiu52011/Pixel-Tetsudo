@@ -355,6 +355,17 @@
 - Risks / blockers: mobile Chrome production refresh still required；UI-001 继续 REVIEW。
 - Next: 用户刷新生产页确认 Header/Language/Nav/Footer；若恢复则 UI-001 DONE，若仍异常按实机现象继续修。
 
+### 2026-10-10 — IMG-001 SQL verified formation artwork integration
+
+- Status: REVIEW（自动化回归 / 浏览器运行环境待确认）
+- Scope: `images/列车` 的车型 PNG 映射；适用产品页为 `pages/trains.html`，由 `js/trains-render.js` 共享唯一标记选择入口。运行情报页不显示列车车型 PNG，无需新增映射。
+- Ownership: 列车运行证据由 `TrainOperationEvidence`、`runningChainId` 与 `TrainVehicle.resolve` 收敛；PNG 由 `TrainIcons.resolveVehicleArtwork` 与 `TrainVehicle.selectMarkerArtwork` 唯一选择；图形排布仍由 `trains-render.js` 负责。
+- Work: 允许 Supabase `vehicle_visual_identities` 的 `exact` 编成级 PNG 用于已经明确的公司+车型+编成身份；执行日期窗口和一身份多 PNG 的冲突拒绝。旧 `tools/gallery-sync.js` 改成只读仓库图库核对，删除其旧 `VEHICLE_NAME_TO_ICON` / line / operator / pool 逆推逻辑；Release Guards 接入只读检查。历史允许 177 条缺图引用的阈值归零。
+- Data parity: 2026-10-10 GitHub 476 张 PNG = Supabase 475 条图库资产 + `共通_形式未確認.png`；数据库 62 available / 413 review；`vehicle_visual_identities` 58 exact（38 带图片，均为编成级），不能把 review 图片提升成确认车型。
+- Safety: 不变更 PNG、数据库/RLS、列车事实认定；UNKNOWN/NARROWED、无编成证据、日期不符与图片歧义继续落入 neutral PNG。只在原解析器加索引，禁止恢复第二条映射链路。
+- Validation: 加入 SQL 编成/日期/冲突回归与图库路径校验。GitHub Actions 与 Chrome 实际数据渲染由本次 PR 校验结果决定最终状态。
+- Next: 验证 `CI / CD`、`Release Guards` 和生产列车图；未知车辆图保持中性，不从 PNG 名称反推模型。
+
 ## 6. 交接规则
 
 下一位智能体不要从“重新审计整个仓库”开始。先看：
