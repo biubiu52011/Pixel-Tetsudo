@@ -285,3 +285,21 @@ assert.strictEqual(context.window.TrainIcons.resolveVehicleArtwork('E235系0番�
 assert.strictEqual(context.window.TrainIcons.resolveVehicleArtwork('unverified train type'), null,
   'DB catalog cannot mint unknown vehicle identity');
 console.log('SQL vetted artwork catalog: 3 PASS');
+
+const dbOnlyName = 'DATABASE-VERIFIED-EXACT-TEST-TYPE';
+assert.strictEqual(context.window.TrainIcons.resolveVehicleArtwork(dbOnlyName), null);
+context.window.TrainIcons.hydrateVerifiedArtworkCatalog([
+ {vehicle_type: dbOnlyName, image_path:'images/列车/京王電鉄/京王電鉄_5000系.png'},
+ {vehicle_type:'GENERIC-CANDIDATE',formation_id:'01',image_path:'images/列车/埼玉新都市交通/埼玉新都市交通_2000系_01編成_レッドパープル.png'}
+]);
+assert.ok(/京王電鉄_5000系\.png$/.test(context.window.TrainIcons.resolveVehicleArtwork(dbOnlyName) || ''),
+  'one SQL-certified exact vehicle name can project a PNG');
+assert.strictEqual(context.window.TrainIcons.resolveVehicleArtwork('GENERIC-CANDIDATE'), null,
+  'formation-specific PNG cannot be inferred from an unqualified type');
+context.window.TrainIcons.hydrateVerifiedArtworkCatalog([
+ {vehicle_type:dbOnlyName,image_path:'images/列车/京王電鉄/京王電鉄_5000系.png'},
+ {vehicle_type:dbOnlyName,image_path:'images/列车/東京メトロ/東京メトロ_5000系.png'}
+]);
+assert.strictEqual(context.window.TrainIcons.resolveVehicleArtwork(dbOnlyName), null,
+  'ambiguous exact vehicle names must not select an arbitrary operator artwork');
+console.log('SQL-certified PNG realtime projection safety: 4 PASS');

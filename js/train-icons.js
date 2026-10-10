@@ -661,14 +661,27 @@ function resolveCanonicalVehicle(name) {
 // SQL supplies a vetted path allowlist. The canonical identity resolver remains
 // the only vehicle selector: catalog rows cannot guess a train's type.
 var _verifiedSqlArtworkPaths = null;
+var _verifiedSqlArtworkByExactName = null;
 function hydrateVerifiedArtworkCatalog(rows) {
   if (!Array.isArray(rows)) return false;
   var paths = Object.create(null);
+  var exact = Object.create(null);
   rows.forEach(function(row) {
     var path = row && String(row.image_path || "");
-    if (path.startsWith("images/列车/") && path.endsWith(".png") && path.split("/").length === 4) paths["../" + path] = true;
+    if (!(path.startsWith("images/列车/") && path.endsWith(".png") && path.split("/").length === 4)) return;
+    var artwork = "../" + path;
+    paths[artwork] = true;
+    // A database type name is eligible only when one certified generic vehicle
+    // artwork exists for that *exact* name. Formation/livery/theme variants
+    // cannot be chosen from a train's type alone.
+    if (row.formation_id || row.livery || row.theme) return;
+    var name = String(row.vehicle_type || "").trim();
+    if (!name) return;
+    if (!Object.prototype.hasOwnProperty.call(exact, name)) exact[name] = artwork;
+    else if (exact[name] !== artwork) exact[name] = null;
   });
   _verifiedSqlArtworkPaths = paths;
+  _verifiedSqlArtworkByExactName = exact;
   return true;
 }
 function refreshVerifiedArtworkCatalog() {
@@ -737,6 +750,15 @@ function _resolveTrainRuleDisplayName(lineId, operator, trainId, stationIndex, t
     // retired-stock substitution, or approximate alias may select artwork.
     var canonical = _canonicalVehicleIconPath(name, serviceDate);
     if (canonical) return canonical;
+    // A confirmed upstream vehicle type may use a SQL-certified PNG only on
+    // exact, unambiguous type identity (never line-based fleet guessing).
+    // Disallow a DB-only mapping for a name that the canonical registry marks
+    // as conflicting, retired, or otherwise unsupported.
+    if (CANONICAL_VEHICLE_ALIAS_CONFLICTS[name]) return null;
+    if (_verifiedSqlArtworkByExactName &&
+        Object.prototype.hasOwnProperty.call(_verifiedSqlArtworkByExactName, name)) {
+      return _verifiedSqlArtworkByExactName[name] || null;
+    }
     return null;
   }
 
