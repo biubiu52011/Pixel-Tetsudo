@@ -325,12 +325,9 @@ function _canonicalVehicleIconPath(name, serviceDate) {
     // Canonical aliases are allowed only when they resolve to the same registered
     // identity record. No line override, replacement vehicle, base-name stripping,
     // retired-stock substitution, or approximate alias may select artwork.
-    var canonical = _canonicalVehicleIconPath(name, serviceDate);
-    if (canonical) return canonical;
-    // A confirmed upstream vehicle type may use a SQL-certified PNG only on
-    // exact, unambiguous type identity (never line-based fleet guessing).
-    // Disallow a DB-only mapping for a name that the canonical registry marks
-    // as conflicting, retired, or otherwise unsupported.
+    // A certified exact formation takes precedence when the SQL catalog has
+    // that identity. Static canonical artwork remains the offline fallback.
+    // Canonical alias conflicts always block both paths.
     if (CANONICAL_VEHICLE_ALIAS_CONFLICTS[name]) return null;
     if (_verifiedSqlArtworkByExactFormation &&
         Object.prototype.hasOwnProperty.call(_verifiedSqlArtworkByExactFormation, name)) {
@@ -347,6 +344,10 @@ function _canonicalVehicleIconPath(name, serviceDate) {
       }
       return uniqueArtwork;
     }
+    var canonical = _canonicalVehicleIconPath(name, serviceDate);
+    if (canonical) return canonical;
+    // A confirmed upstream vehicle type may use a SQL-certified PNG only on
+    // exact, unambiguous type identity (never line-based fleet guessing).
     // Bare series numbers are shared by many operators. A unique row in the
     // currently certified subset is not proof of a unique railway identity.
     if (/^[0-9]{2,5}(?:-[0-9]+)?(?:系|形|型)$/.test(name)) return null;
