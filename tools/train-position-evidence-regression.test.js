@@ -28,6 +28,27 @@ assert(/_realtimeEvidenceWithoutPosition\s*=\s*\{\};/.test(fusion),"positionless
 
 assert(/Object\.keys\(_realtimeEvidenceWithoutPosition\)/.test(fusion),"positionless realtime vehicle evidence must have a consumer");
 
+const odptClient = read("data/api/odpt-unified.js");
+assert(odptClient.includes("operatorTs: window.ODPT_POSITION_SNAPSHOT_AT || {}") &&
+       odptClient.includes("operatorTs: window.ODPT_DELAY_SNAPSHOT_AT || {}"),
+  "raw ODPT cache must store a separately timestamped snapshot for each operator");
+assert(odptClient.includes("if (window.ODPT_POSITION_REQUEST_STATUS && window.ODPT_POSITION_REQUEST_STATUS[op]) return;") &&
+       odptClient.includes("if (window.ODPT_DELAY_REQUEST_STARTED && window.ODPT_DELAY_REQUEST_STARTED[op]) return;"),
+  "cache restores must not overwrite an operator whose live refresh has started");
+assert(odptClient.includes('state: "loading"') &&
+       odptClient.includes('state: "ok"') &&
+       odptClient.includes('state: "error"') &&
+       odptClient.includes('state: data && data.length ? "ok" : "empty"'),
+  "live ODPT position polling must distinguish request loading, empty, failure and non-empty response");
+assert(odptClient.includes("requestId !== _requestId") &&
+       odptClient.includes("window.ODPT_POSITION_SNAPSHOT_AT[op] = Date.now();"),
+  "older ODPT requests must not overwrite newer per-operator responses");
+assert(odptClient.includes("fetchODPT(buildUrl(op, 'train'), true)") &&
+       odptClient.includes("Invalid ODPT train position payload"),
+  "failed or malformed ODPT requests must not silently turn into an empty success");
+assert(!odptClient.includes("if (!window.ODPT_TRAIN_POSITIONS || !positionOperators) window.ODPT_TRAIN_POSITIONS = {};"),
+  "one operator refresh must not clear other operators' position snapshots");
+
 const estimator=read("js/train-position-estimator.js");
 const estimatorSource=estimator;
 const fusionSource=fusion;
