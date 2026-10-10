@@ -1,10 +1,8 @@
-/* trains-render.js: 列车页 SVG 渲染（全局） */
+/* trains-render.js: SVG railway diagram; train markers are gallery PNG images only */
 
 // TrainMarker presentation state (artwork only — never vehicle identity or
-// geometry). When an upstream vehicle PNG fails to load/decode, the train keeps
-// its resolved identity but its single TrainMarker artwork switches to the
-// generic train marker and stays there for this page session, so a known-broken
-// asset is not re-requested on every poll.
+// geometry). Failed model PNGs switch to the neutral gallery PNG on the same
+// image node; the known-broken model asset is not re-requested each poll.
 var _trainArtworkFailure = {};
 var _trainArtworkFailureCount = 0;
 var _TRAIN_ARTWORK_FAILURE_MAX = 500;
@@ -1023,7 +1021,7 @@ function _rememberTrainArtworkFailure(trainUid) {
     if (tag === 'image') {
       icon.setAttribute('x', String(x));
       icon.setAttribute('y', String(y));
-      var direction = p.railDirection || '';
+      var direction = p && p.railDirection || '';
       if (!isLoop && direction.indexOf('Outbound') >= 0) {
         icon.setAttribute('transform', 'translate(' + px + ', ' + py + ') scale(-1, 1) translate(' + (-px) + ', ' + (-py) + ')');
       } else {
@@ -1031,9 +1029,7 @@ function _rememberTrainArtworkFailure(trainUid) {
       }
       return;
     }
-    if (tag === 'g') {
-      icon.setAttribute('transform', 'translate(' + px + ',' + py + ')');
-    }
+
   }
 
   function _removeTrainLabels(trainLayer, trainUid) {
@@ -1051,7 +1047,7 @@ function _rememberTrainArtworkFailure(trainUid) {
       : { kind: "generic", iconSrc: "" };
     return {
       kind: artwork.kind === "vehicle" && artwork.iconSrc ? "vehicle" : "generic",
-      iconSrc: artwork.kind === "vehicle" ? (artwork.iconSrc || "") : "",
+      iconSrc: artwork.iconSrc || "",
       className: p && p.estimated === true ? "train-icon estimated" : "train-icon"
     };
   }
@@ -1070,148 +1066,40 @@ function _rememberTrainArtworkFailure(trainUid) {
     return tip.join(" | ");
   }
 
-  // Generic train marker: a lightweight SVG primitive train, sized to the same
-  // 14x18 visual scale as the vehicle PNG marker. It expresses "a train is
-  // confirmed here, but its vehicle cannot be reliably determined" without
-  // claiming a concrete vehicle identity. No external image asset is used.
-  function _createGenericTrainMarker(svgNS, className, color) {
-    var g = document.createElementNS(svgNS, "g");
-    var c = color || "#666666";
-    // Roof
-    var roof = document.createElementNS(svgNS, "rect");
-    roof.setAttribute("x", "-6.5");
-    roof.setAttribute("y", "-8.5");
-    roof.setAttribute("width", "13");
-    roof.setAttribute("height", "2.5");
-    roof.setAttribute("rx", "1");
-    roof.setAttribute("fill", "#ffffff");
-    roof.setAttribute("opacity", "0.9");
-    g.appendChild(roof);
-    // Cab body
-    var body = document.createElementNS(svgNS, "rect");
-    body.setAttribute("x", "-7");
-    body.setAttribute("y", "-6");
-    body.setAttribute("width", "14");
-    body.setAttribute("height", "8");
-    body.setAttribute("rx", "1.5");
-    body.setAttribute("fill", c);
-    body.setAttribute("stroke", "rgba(0,0,0,0.35)");
-    body.setAttribute("stroke-width", "0.6");
-    g.appendChild(body);
-    // Windshield band
-    var wind = document.createElementNS(svgNS, "rect");
-    wind.setAttribute("x", "-5.5");
-    wind.setAttribute("y", "-4.5");
-    wind.setAttribute("width", "11");
-    wind.setAttribute("height", "3");
-    wind.setAttribute("rx", "0.5");
-    wind.setAttribute("fill", "#eaf2fb");
-    g.appendChild(wind);
-    // Windshield divider
-    var divider = document.createElementNS(svgNS, "rect");
-    divider.setAttribute("x", "-0.5");
-    divider.setAttribute("y", "-4.5");
-    divider.setAttribute("width", "1");
-    divider.setAttribute("height", "3");
-    divider.setAttribute("fill", c);
-    g.appendChild(divider);
-    // Headlights
-    var hl1 = document.createElementNS(svgNS, "circle");
-    hl1.setAttribute("cx", "-4.2");
-    hl1.setAttribute("cy", "-5.4");
-    hl1.setAttribute("r", "1.1");
-    hl1.setAttribute("fill", "#ffffff");
-    g.appendChild(hl1);
-    var hl2 = document.createElementNS(svgNS, "circle");
-    hl2.setAttribute("cx", "4.2");
-    hl2.setAttribute("cy", "-5.4");
-    hl2.setAttribute("r", "1.1");
-    hl2.setAttribute("fill", "#ffffff");
-    g.appendChild(hl2);
-    // Underframe skirt
-    var skirt = document.createElementNS(svgNS, "rect");
-    skirt.setAttribute("x", "-7");
-    skirt.setAttribute("y", "2");
-    skirt.setAttribute("width", "14");
-    skirt.setAttribute("height", "2.6");
-    skirt.setAttribute("rx", "0.5");
-    skirt.setAttribute("fill", "rgba(0,0,0,0.2)");
-    g.appendChild(skirt);
-    // Wheels
-    var wl = document.createElementNS(svgNS, "circle");
-    wl.setAttribute("cx", "-4");
-    wl.setAttribute("cy", "6.4");
-    wl.setAttribute("r", "1.7");
-    wl.setAttribute("fill", "#2b2f36");
-    g.appendChild(wl);
-    var wr = document.createElementNS(svgNS, "circle");
-    wr.setAttribute("cx", "4");
-    wr.setAttribute("cy", "6.4");
-    wr.setAttribute("r", "1.7");
-    wr.setAttribute("fill", "#2b2f36");
-    g.appendChild(wr);
-    g.setAttribute("class", className || "train-icon");
-    return g;
-  }
-
-  // In-place TrainMarker artwork swap: vehicle PNG -> generic train marker.
-  // The marker root is replaced so the DOM keeps exactly one primary marker for
-  // this train id. Geometry, stacking slot, label ownership and lifecycle state
-  // are inherited; only the artwork changes.
-  function _swapTrainMarkerToGeneric(trainLayer, svgNS, marker, trainUid) {
-    if (!marker || marker._artworkSwapped) return;
-    marker._artworkSwapped = true;
-    if (marker._moveRaf) {
-      cancelAnimationFrame(marker._moveRaf);
-      marker._moveRaf = 0;
-    }
-    var className = marker.getAttribute("class") || "train-icon";
-    var color = marker._displayColor || null;
-    var g = _createGenericTrainMarker(svgNS, className, color);
-    g.setAttribute("data-train-id", String(trainUid));
-    g.setAttribute("data-marker-kind", "generic");
-    var titleText = marker.getAttribute("title") || "";
-    if (titleText) g.setAttribute("title", titleText);
-    // Carry display state so continuity and the stacking slot survive the swap.
-    g._displayX = marker._displayX;
-    g._displayY = marker._displayY;
-    g._displayLineId = marker._displayLineId;
-    g._displayStationIdx = marker._displayStationIdx;
-    g._displayNextStationIdx = marker._displayNextStationIdx;
-    g._displayRoutePos = marker._displayRoutePos;
-    var px = Number(g._displayX);
-    var py = Number(g._displayY);
-    if (!isFinite(px)) px = 0;
-    if (!isFinite(py)) py = 0;
-    _setTrainIconPosition(g, px, py, null, g._displayLineId || "", false);
-    if (marker.parentNode) marker.parentNode.replaceChild(g, marker);
-  }
-
+  // Train icons are gallery PNGs embedded as images on the existing railway
+  // diagram. The diagram itself may be SVG; no train is ever drawn from SVG
+  // primitives or selected through a separate renderer mapping.
   function _createTrainMarker(trainLayer, svgNS, trainUid, spec, px, py, p, lineId, isLoop, color, loc) {
-    var marker;
+    if (!spec || !spec.iconSrc) return null;
+    var marker = document.createElementNS(svgNS, "image");
+    marker.setAttribute("width", "14");
+    marker.setAttribute("height", "18");
+    marker.setAttribute("href", spec.iconSrc);
+    marker.setAttribute("preserveAspectRatio", "xMidYMid meet");
     var titleText = _trainMarkerTitle(p);
-    if (spec.kind === "vehicle") {
-      marker = document.createElementNS(svgNS, "image");
-      marker.setAttribute("width", "14");
-      marker.setAttribute("height", "18");
-      marker.setAttribute("href", spec.iconSrc);
-      marker.setAttribute("preserveAspectRatio", "xMidYMid meet");
-      if (titleText) marker.setAttribute("title", titleText);
-      marker._displayColor = color;
-      // PNG load/decode failure must switch this single marker to generic
-      // artwork in place: same train id, same geometry slot, same labels.
-      // The image error only changes artwork; it never creates a second marker.
-      marker.addEventListener("error", function () {
-        if (!trainLayer || !trainLayer.isConnected) return;
-        var uid = marker.getAttribute("data-train-id") || "";
-        if (!uid || marker._artworkSwapped) return;
-        _rememberTrainArtworkFailure(uid);
-        _swapTrainMarkerToGeneric(trainLayer, svgNS, marker, uid);
-      });
-    } else {
-      marker = _createGenericTrainMarker(svgNS, spec.className, color);
-      if (titleText) marker.setAttribute("title", titleText);
-    }
+    if (titleText) marker.setAttribute("title", titleText);
+    // A failed train PNG is replaced on THIS image element with the one neutral
+    // gallery PNG. If even that file fails, hide this train rather than drawing
+    // SVG or selecting another operator's vehicle.
+    marker.addEventListener("error", function () {
+      if (!trainLayer || !trainLayer.isConnected || !marker.isConnected) return;
+      if (marker.getAttribute("data-marker-kind") !== "vehicle") {
+        marker.setAttribute("visibility", "hidden");
+        return;
+      }
+      var uid = marker.getAttribute("data-train-id") || "";
+      if (uid) _rememberTrainArtworkFailure(uid);
+      var fallback = window.TrainVehicle &&
+        typeof window.TrainVehicle.selectMarkerArtwork === "function"
+        ? window.TrainVehicle.selectMarkerArtwork(p, true) : null;
+      if (!fallback || fallback.kind !== "generic" || !fallback.iconSrc ||
+          fallback.iconSrc === marker.getAttribute("href")) {
+        marker.setAttribute("visibility", "hidden");
+        return;
+      }
+      marker.setAttribute("data-marker-kind", "generic");
+      marker.setAttribute("href", fallback.iconSrc);
+    });
     marker.setAttribute("data-train-id", String(trainUid));
     marker.setAttribute("data-marker-kind", spec.kind);
     marker.setAttribute("class", spec.className);
@@ -1322,11 +1210,13 @@ function _rememberTrainArtworkFailure(trainUid) {
       // Array order and bare train number are not persistent train identity.
       // Without a stable source/chain key, do not attach animation state.
       if (!trainUid) continue;
-      updatedIds[trainUid] = true;
-      
       var markerSpec = _trainMarkerSpec(p, trainUid);
+      // Missing runtime authority must not cause renderer-side SVG construction.
+      if (!markerSpec.iconSrc) continue;
+      updatedIds[trainUid] = true;
       var existingIcon = markerById[String(trainUid)] || null;
-      if (existingIcon && existingIcon.getAttribute("data-marker-kind") !== markerSpec.kind) {
+      if (existingIcon && (String(existingIcon.tagName || "").toLowerCase() !== "image" ||
+          existingIcon.getAttribute("data-marker-kind") !== markerSpec.kind)) {
         if (existingIcon._moveRaf) cancelAnimationFrame(existingIcon._moveRaf);
         if (existingIcon.parentNode) existingIcon.parentNode.removeChild(existingIcon);
         delete markerById[String(trainUid)];
@@ -1334,6 +1224,12 @@ function _rememberTrainArtworkFailure(trainUid) {
       }
       
       if (existingIcon) {
+        // Same train and kind can change to a different certified PNG without
+        // rebuilding the marker or retaining a stale SVG/PNG artwork.
+        if (existingIcon.getAttribute("href") !== markerSpec.iconSrc) {
+          existingIcon.setAttribute("href", markerSpec.iconSrc);
+          existingIcon.setAttribute("visibility", "visible");
+        }
         // Update existing icon position.
         // TrainTrackLayout owns target geometry; this marker owns interpolation.
         // There is exactly one animation authority: per-marker requestAnimationFrame.

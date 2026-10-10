@@ -115,15 +115,15 @@ assert(!/iconSrc \? "image" : "circle"/.test(renderer),
   "the legacy circle fallback kind must not return");
 assert(!/outer\.setAttribute\("r", "8"\)/.test(renderer),
   "the legacy neutral circle fallback must not return");
-assert(/_createGenericTrainMarker\(svgNS, className, color\)/.test(renderer) &&
-       /createElementNS\(svgNS, "rect"\)/.test(renderer),
-  "generic artwork must be an SVG primitive train marker, not a data-point dot");
+assert(!renderer.includes('function _createGenericTrainMarker') &&
+       !renderer.includes('function _swapTrainMarkerToGeneric'),
+  "train markers must never be self-drawn SVG shapes");
 assert(/marker\.addEventListener\("error"/.test(renderer) &&
-       /_swapTrainMarkerToGeneric\(trainLayer, svgNS, marker, uid\)/.test(renderer),
-  "vehicle PNG load failure must swap the single marker to generic artwork in place");
-assert(/marker\._artworkSwapped/.test(renderer) &&
-       /replaceChild\(g, marker\)/.test(renderer),
-  "artwork swaps must be idempotent and replace the marker root, never overlay a second marker");
+       /window\.TrainVehicle\.selectMarkerArtwork\(p, true\)/.test(renderer),
+  "PNG errors must reuse the single artwork authority and neutral gallery PNG");
+assert(/document\.createElementNS\(svgNS, "image"\)/.test(renderer) &&
+       /marker\.setAttribute\("href", fallback\.iconSrc\)/.test(renderer),
+  "both exact and neutral PNGs must use the same image marker node");
 assert(/_trainMarkerSpec\(p, trainUid\)/.test(renderer),
   "the artwork decision must be keyed by the stable train identity");
 assert(/existingIcon\.getAttribute\("data-marker-kind"\) !== markerSpec\.kind[\s\S]{0,260}removeChild\(existingIcon\)/.test(renderer),

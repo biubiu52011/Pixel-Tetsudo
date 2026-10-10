@@ -296,8 +296,8 @@ assert.ok(!rendererSrc.includes('window.TrainIcons.resolveVehicleArtwork'),
 assert.ok(unifiedVehicleSource.includes('selectMarkerArtwork: selectMarkerArtwork'),
   'unified runtime must own one PNG/neutral decision');
 assert.ok(rendererSrc.includes('marker.addEventListener("error"') &&
-          rendererSrc.includes('_swapTrainMarkerToGeneric'),
-  'PNG failure must swap the same marker to a neutral shape');
+          rendererSrc.includes('window.TrainVehicle.selectMarkerArtwork(p, true)'),
+  'PNG failure must consult the single authority for the neutral PNG');
 assert.ok(!rendererSrc.includes('_hasRealtimeVehicleEvidence'),
   'renderer must not diverge for ODPT versus timetable positions');
 assert.ok(!rendererSrc.includes('iconSrc ? "image" : "circle"'),
@@ -353,3 +353,21 @@ assert.strictEqual(pickMarker(Object.assign({}, yamanote, {vehicleFormationCandi
   'formation ambiguity must prevent late artwork resolution');
 assert.strictEqual(pickMarker(yamanote,true).kind,'generic','failed PNG remains neutral');
 console.log('ODPT realtime and timetable estimation share one marker choice: 6 PASS');
+
+assert.strictEqual(pickMarker(Object.assign({}, yamanote, {
+  vehicleResolvedUpstream:false
+}),false).iconSrc, '../images/列车/共通/共通_形式未確認.png',
+  'unknown trains must use the neutral gallery PNG');
+assert.strictEqual(pickMarker(yamanote,true).iconSrc,
+  '../images/列车/共通/共通_形式未確認.png',
+  'failed artwork must use the same neutral gallery PNG');
+assert.strictEqual(pickMarker(Object.assign({}, yamanote, {
+  vehicleIconPath:'https://untrusted.example/vehicle.svg',
+  vehicleType:'', vehicleFormationCandidates:['01','02']
+}),false).kind,'generic',
+  'the single artwork authority must reject any SVG or external path');
+assert.ok(!rendererSrc.includes('function _createGenericTrainMarker') &&
+  !rendererSrc.includes('function _swapTrainMarkerToGeneric') &&
+  rendererSrc.includes('document.createElementNS(svgNS, "image")'),
+  'train icon renderer must use PNG-only image elements, never self-drawn SVG trains');
+console.log('PNG-only one-script train marker: 4 PASS');

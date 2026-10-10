@@ -1,7 +1,7 @@
 /* Pixel Tetsudo — unified vehicle identity + PNG artwork runtime.
  * Position sources remain independent; artwork resolution has one authority.
- * Neutral SVG is a visual fallback for unproven vehicle identity, not a
- * second vehicle identification system.
+ * Unknown models and failed artwork use a neutral gallery PNG, never
+ * a generated SVG vehicle or another model's PNG.
  */
 (function() {
   "use strict";
@@ -578,6 +578,15 @@ function _canonicalVehicleIconPath(name, serviceDate) {
   // ============================================================
   // Single artwork authority for both ODPT real-time and timetable estimates.
   // No model may be inferred from a line, train number or rendering context.
+  // Single vehicle-artwork authority. Both ODPT realtime and timetable
+  // estimates choose an existing gallery PNG; unknown trains get a neutral PNG.
+  // Never synthesize a railway-specific model or draw an SVG vehicle.
+  var NEUTRAL_TRAIN_PNG = "../images/列车/共通/共通_形式未確認.png";
+  function isGalleryPng(path) {
+    var src = String(path || "");
+    return src.startsWith("../images/列车/") &&
+      src.endsWith(".png") && src.split("/").length === 5;
+  }
   function selectMarkerArtwork(p, artworkFailed) {
     var iconSrc = p && p.vehicleResolvedUpstream === true ? (p.vehicleIconPath || "") : "";
     if (!iconSrc && p && p.vehicleResolvedUpstream === true &&
@@ -585,8 +594,10 @@ function _canonicalVehicleIconPath(name, serviceDate) {
         (!p.vehicleFormationCandidates || !p.vehicleFormationCandidates.length)) {
       iconSrc = resolveVehicleArtwork(p.vehicleType) || "";
     }
-    if (artworkFailed === true) iconSrc = "";
-    return { kind: iconSrc ? "vehicle" : "generic", iconSrc: iconSrc };
+    if (artworkFailed === true || !isGalleryPng(iconSrc)) {
+      return { kind: "generic", iconSrc: NEUTRAL_TRAIN_PNG };
+    }
+    return { kind: "vehicle", iconSrc: iconSrc };
   }
 
   window.TrainVehicle = {
