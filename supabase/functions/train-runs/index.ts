@@ -200,10 +200,18 @@ async function readManualTemplateRuns(db: any, lineId: string, serviceDate: stri
       }),
     };
   });
-  const complete = result.length > 0 && result.every(r => r.stops.length >= 2);
-  return json({ ok: true, complete, cache: complete ? "HIT" : "PARTIAL",
+  // Incomplete source rows are preserved in SQL for auditing, but must not
+  // suppress other source-verified trains for the same railway/calendar.
+  // Never extrapolate a missing stop or report full coverage for a partial set.
+  const validRuns = result.filter(r => r.stops.length >= 2 &&
+    r.stops.every(s => !!s.station_urn));
+  const omittedIncompleteRuns = result.length - validRuns.length;
+  const complete = validRuns.length > 0 && omittedIncompleteRuns === 0;
+  const partial = validRuns.length > 0 && omittedIncompleteRuns > 0;
+  return json({ ok: true, complete, partial,
+    cache: complete ? "HIT" : partial ? "PARTIAL" : "MISS",
     source: "DATABASE_MANUAL_TEMPLATES", line_id: lineId, service_date: serviceDate,
-    runs: complete ? result : [] });
+    omitted_incomplete_runs: omittedIncompleteRuns, runs: validRuns });
 }
 
 Deno.serve(async (req: Request) => {

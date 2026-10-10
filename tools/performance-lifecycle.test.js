@@ -76,11 +76,15 @@ console.log('train-run-SQL-fallback: 5 PASS');
 
 assert.ok(/fallback_only/.test(trainRunsReadThroughSrc) &&
   /source: "API_AVAILABLE"/.test(trainRunsReadThroughSrc) &&
-  /result\.every\(r => r\.stops\.length >= 2\)/.test(trainRunsReadThroughSrc),
-  'SQL-only fallback must bypass API-enabled lines and reject incomplete manual runs');
+  /const validRuns = result\.filter\(r => r\.stops\.length >= 2/.test(trainRunsReadThroughSrc) &&
+  /omitted_incomplete_runs: omittedIncompleteRuns, runs: validRuns/.test(trainRunsReadThroughSrc) &&
+  !/runs: complete \? result : \[\]/.test(trainRunsReadThroughSrc),
+  'SQL-only fallback must bypass API-enabled lines and exclude incomplete runs without discarding verified ones');
 assert.ok(/fallback_only=1/.test(odptUnifiedSrc) &&
-  /vehicleType:run\.vehicle_type_label\|\|null/.test(odptUnifiedSrc),
-  'client must request SQL-only fallback and preserve manual vehicle evidence');
+  /vehicleType:run\.vehicle_type_label\|\|null/.test(odptUnifiedSrc) &&
+  /body\.partial===true/.test(odptUnifiedSrc) &&
+  /_timetableCoverage="partial"/.test(odptUnifiedSrc),
+  'client must retain partial-coverage markers, verified runs, and manual vehicle evidence');
 console.log('train-run-SQL-completeness: 2 PASS');
 
 const trainPositionEstimatorSrc = fs.readFileSync('js/train-position-estimator.js','utf8');

@@ -711,7 +711,19 @@
             if(!r.ok) throw new Error("TrainRun cache HTTP "+r.status);
             return r.json();
         }).then(function(body){
-            var rows=(body&&body.complete&&Array.isArray(body.runs))?body.runs.map(_trainRunToTimetable):[];
+            // Explicit partial coverage is usable for verified individual runs,
+            // but must remain distinguishable from a complete line timetable.
+            var usable=body&&Array.isArray(body.runs)&&(body.complete===true||body.partial===true);
+            var rows=usable?body.runs.filter(function(run){
+                return run&&Array.isArray(run.stops)&&run.stops.length>=2;
+            }).map(function(run){
+                var tt=_trainRunToTimetable(run);
+                if(body.partial===true) {
+                    tt._timetableCoverage="partial";
+                    tt._omittedIncompleteRuns=Number(body.omitted_incomplete_runs)||0;
+                }
+                return tt;
+            }):[];
             _trainRunCache[key]={at:Date.now(),rows:rows};
             return rows;
         }).catch(function(){ return []; }).finally(function(){ delete _trainRunInflight[key]; });
