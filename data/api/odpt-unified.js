@@ -621,6 +621,9 @@
                 fetch(url, {
                     headers: { "Accept": "application/json" },
                     signal: AbortSignal.timeout(8000)
+                }).then(function(resp) {
+                    if (!resp.ok) throw new Error("HTTP " + resp.status);
+                    return resp.json();
                 }).then(resolve).catch(reject);
                 return;
             }
@@ -631,8 +634,9 @@
     }
 
     // ========== Fetch wrapper ==========
-    function fetchODPT(url) {
-        if (!url) return Promise.resolve(null);
+    function fetchODPT(url, propagateError) {
+        if (!url) return propagateError ? Promise.reject(new Error("ODPT endpoint unavailable")) : Promise.resolve(null);
+        if (propagateError) return rateLimitedFetch(url);
         return rateLimitedFetch(url).catch(function(e) {
             console.warn("[ODPT] Failed:", e.message);
             return null;
@@ -1457,7 +1461,9 @@
             return;
         }
         var existing = _fusionWaiters[key];
-        if (existing) return;
+        // A later refresh must replace the pending callback, not be silently lost.
+        // The latest callback fuses the shared operator snapshot and request states.
+        if (existing) clearTimeout(existing);
         var startedAt = Date.now();
         function tick() {
             if (ready()) {
@@ -1478,10 +1484,10 @@
     function persistRawRealtime(delayOnly) {
         try {
             if (!window.RTCache || !window.RTCache.put) return;
-            window.RTCache.put('rawDelay', { ts: Date.now(), data: window.ODPT_DELAY_DATA });
+            window.RTCache.put('rawDelay', { ts: Date.now(), data: window.ODPT_DELAY_DATA, operatorTs: window.ODPT_DELAY_SNAPSHOT_AT || {} });
             // 位置仅在非惰性模式写——lazy（home）不拉 positions，写空会覆盖 trains 页刚落的真实位置
             if (!delayOnly) {
-                window.RTCache.put('rawPositions', { ts: Date.now(), data: window.ODPT_TRAIN_POSITIONS });
+                window.RTCache.put('rawPositions', { ts: Date.now(), data: window.ODPT_TRAIN_POSITIONS, operatorTs: window.ODPT_POSITION_SNAPSHOT_AT || {} });
             }
         } catch(e) { console.debug("[ODPT] persistRawRealtime error:", e.message); }
     }
@@ -1496,13 +1502,41 @@
             ]).then(function(results) {
                 var now = Date.now();
                 var delayRec = results[0], posRec = results[1];
-                var delayFresh = !!(delayRec && delayRec.ts && (now - delayRec.ts) <= RAW_REALTIME_FRESH_MS && delayRec.data && typeof delayRec.data === 'object');
-                var posFresh = !!(posRec && posRec.ts && (now - posRec.ts) <= RAW_REALTIME_FRESH_MS && posRec.data && typeof posRec.data === 'object');
-                if (delayFresh) window.ODPT_DELAY_DATA = delayRec.data;
-                if (posFresh) {
-                    window.ODPT_TRAIN_POSITIONS = posRec.data;
+                var delayFresh = !!(delayRec && Number.isFinite(delayRec.ts) && delayRec.ts <= now && (now - delayRec.ts) <= RAW_REALTIME_FRESH_MS && delayRec.data && typeof delayRec.data === 'object');
+                var posFresh = !!(posRec && Number.isFinite(posRec.ts) && posRec.ts <= now && (now - posRec.ts) <= RAW_REALTIME_FRESH_MS && posRec.data && typeof posRec.data === 'object' && !Array.isArray(posRec.data));
+                var restoredDelay = false;
+                if (delayFresh && !Array.isArray(delayRec.data)) {
+                    window.ODPT_DELAY_DATA = window.ODPT_DELAY_DATA || {};
+                    Object.keys(delayRec.data).forEach(function(op) {
+                        if (window.ODPT_DELAY_REQUEST_STARTED && window.ODPT_DELAY_REQUEST_STARTED[op]) return;
+                        if (Object.prototype.hasOwnProperty.call(window.ODPT_DELAY_DATA, op)) return;
+                        var operatorTs = delayRec.operatorTs && delayRec.operatorTs[op];
+                        if (!Number.isFinite(operatorTs) || operatorTs > now || now - operatorTs > RAW_REALTIME_FRESH_MS) return;
+                        if (!Array.isArray(delayRec.data[op])) return;
+                        window.ODPT_DELAY_DATA[op] = delayRec.data[op];
+                        window.ODPT_DELAY_SNAPSHOT_AT = window.ODPT_DELAY_SNAPSHOT_AT || {};
+                        window.ODPT_DELAY_SNAPSHOT_AT[op] = operatorTs;
+                        restoredDelay = true;
+                    });
                 }
-                if (delayFresh || posFresh) pushCachedRealtime(delayFresh, posFresh);
+                var restoredPositions = false;
+                if (posFresh) {
+                    window.ODPT_TRAIN_POSITIONS = window.ODPT_TRAIN_POSITIONS || {};
+                    Object.keys(posRec.data).forEach(function(op) {
+                        // Cache restoration must never overwrite an operator whose
+                        // live request has already started, including failed requests.
+                        if (window.ODPT_POSITION_REQUEST_STATUS && window.ODPT_POSITION_REQUEST_STATUS[op]) return;
+                        if (Object.prototype.hasOwnProperty.call(window.ODPT_TRAIN_POSITIONS, op)) return;
+                        var operatorTs = posRec.operatorTs && posRec.operatorTs[op];
+                        if (!Number.isFinite(operatorTs) || operatorTs > now || now - operatorTs > RAW_REALTIME_FRESH_MS) return;
+                        if (!Array.isArray(posRec.data[op])) return;
+                        window.ODPT_TRAIN_POSITIONS[op] = posRec.data[op];
+                        window.ODPT_POSITION_SNAPSHOT_AT = window.ODPT_POSITION_SNAPSHOT_AT || {};
+                        window.ODPT_POSITION_SNAPSHOT_AT[op] = operatorTs;
+                        restoredPositions = true;
+                    });
+                }
+                if (restoredDelay || restoredPositions) pushCachedRealtime(restoredDelay, restoredPositions);
             }).catch(function(e) {
                 console.debug("[ODPT] loadRawRealtimeCache error:", e.message);
             });
@@ -1511,11 +1545,38 @@
 
     function pushCachedRealtime(hasDelay, hasPositions) {
         waitForFusion("cached-realtime", function() {
-            return !!(window.DataFusion && window.DataFusion.updateOdptData);
+            if (!window.DataFusion || !window.DataFusion.updateOdptData) return false;
+            if (!hasPositions) return true;
+            if (!window.DataFusion.loadTrainPositions) return false;
+            var lines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : (window.UNIFIED_LINES || {});
+            return !!(lines && Object.keys(lines).length > 0);
         }, function() {
             try {
-                if (hasDelay) window.DataFusion.updateOdptData(window.ODPT_DELAY_DATA);
-                if (hasPositions && window.DataFusion.loadTrainPositions && Object.keys(window.ODPT_TRAIN_POSITIONS).length > 0) {
+                if (hasDelay) {
+                    var delayNow = Date.now();
+                    Object.keys(window.ODPT_DELAY_DATA || {}).forEach(function(op) {
+                        // Live refresh results take precedence over restored cache.
+                        if (window.ODPT_DELAY_REQUEST_STARTED && window.ODPT_DELAY_REQUEST_STARTED[op]) return;
+                        var ts = window.ODPT_DELAY_SNAPSHOT_AT && window.ODPT_DELAY_SNAPSHOT_AT[op];
+                        if (!Number.isFinite(ts) || ts > delayNow || delayNow - ts > RAW_REALTIME_FRESH_MS) {
+                            delete window.ODPT_DELAY_DATA[op];
+                            if (window.ODPT_DELAY_SNAPSHOT_AT) delete window.ODPT_DELAY_SNAPSHOT_AT[op];
+                        }
+                    });
+                    window.DataFusion.updateOdptData(window.ODPT_DELAY_DATA);
+                }
+                if (hasPositions && window.DataFusion.loadTrainPositions && window.ODPT_TRAIN_POSITIONS) {
+                    var now = Date.now();
+                    Object.keys(window.ODPT_TRAIN_POSITIONS).forEach(function(op) {
+                        var ts = window.ODPT_POSITION_SNAPSHOT_AT && window.ODPT_POSITION_SNAPSHOT_AT[op];
+                        // Do not remove live requests or snapshots replaced since cache restoration.
+                        if (window.ODPT_POSITION_REQUEST_STATUS && window.ODPT_POSITION_REQUEST_STATUS[op]) return;
+                        if (!Number.isFinite(ts) || ts > now || now - ts > RAW_REALTIME_FRESH_MS) {
+                            delete window.ODPT_TRAIN_POSITIONS[op];
+                            if (window.ODPT_POSITION_SNAPSHOT_AT) delete window.ODPT_POSITION_SNAPSHOT_AT[op];
+                        }
+                    });
+                    // Rebuild even when all cached positions expired, clearing any earlier render.
                     window.DataFusion.loadTrainPositions();
                 }
             } catch(e) { console.debug("[ODPT] cached realtime push error:", e.message); }
@@ -1579,30 +1640,44 @@
 
     function loadRealtimeData(delayOnly, positionOperators, skipDelayRefresh) {
         validateAuthoritativeRealtimeConfig();
-        if (!skipDelayRefresh || !window.ODPT_DELAY_DATA) window.ODPT_DELAY_DATA = {};
-        // Position snapshots are retained per operator. On-demand refresh must
-        // not erase another already-active operator before its own poll runs.
-        if (!window.ODPT_TRAIN_POSITIONS || !positionOperators) window.ODPT_TRAIN_POSITIONS = {};
+        // Preserve other operators while their refresh requests are pending.
+        if (!window.ODPT_DELAY_DATA) window.ODPT_DELAY_DATA = {};
+        // Preserve per-operator snapshots during both full and on-demand polls.
+        // A failed or empty request replaces only its own operator's snapshot;
+        // clearing all operators here makes healthy lines disappear mid-refresh.
+        if (!window.ODPT_TRAIN_POSITIONS) window.ODPT_TRAIN_POSITIONS = {};
+        window.ODPT_POSITION_SNAPSHOT_AT = window.ODPT_POSITION_SNAPSHOT_AT || {};
         // 注意：不清空 ODPT_TIMETABLES，时刻表使用缓存
 
         var ops = Object.keys(ODPT_ENDPOINTS);
         var positionOps = positionOperators && positionOperators.length ? positionOperators : ops;
         var loaded = { delay: 0, positions: 0 };
+        window.ODPT_POSITION_REQUEST_STATUS = window.ODPT_POSITION_REQUEST_STATUS || {};
         var delayPromises = [], posPromises = [];
+        window.ODPT_DELAY_REQUEST_STARTED = window.ODPT_DELAY_REQUEST_STARTED || {};
+        window.ODPT_DELAY_SNAPSHOT_AT = window.ODPT_DELAY_SNAPSHOT_AT || {};
+        var positionRequestIds = {};
 
         ops.forEach(function(op) {
             var ep = ODPT_ENDPOINTS[op];
 
             // 1. 加载运行情报/延误信息（优先推送，首屏不等列车位置）
             if (!skipDelayRefresh && ep.trainInformation) {
+                window.ODPT_DELAY_REQUEST_STARTED[op] = true;
                 delayPromises.push(
-                    fetchODPT(buildUrl(op, 'trainInformation')).then(extractData).then(function(data) {
+                    fetchODPT(buildUrl(op, 'trainInformation'), true).then(function(result) {
+                        var data = extractData(result);
+                        if (!Array.isArray(result) && !(result && Array.isArray(result.value))) throw new Error('Invalid ODPT train information payload');
+                        return data;
+                    }).then(function(data) {
                         // v4.3.386: 保留全部记录（ODPT 按运行系统返回多条，data[0] 只留首条会丢其他线路的延误）
                         // v4.3.392: 成功即写入（空数组=确认无记录→UI normal）；失败标记 null（→UI 情報なし，不伪装成正常）
                         window.ODPT_DELAY_DATA[op] = (data && data.length > 0) ? data : [];
+                        window.ODPT_DELAY_SNAPSHOT_AT[op] = Date.now();
                         loaded.delay++;
                     }).catch(function(e) {
                         window.ODPT_DELAY_DATA[op] = null;
+                        delete window.ODPT_DELAY_SNAPSHOT_AT[op];
                         console.debug("[ODPT] " + op + " trainInformation fetch failed:", e && e.message);
                     })
                 );
@@ -1610,10 +1685,20 @@
 
             // 2. 加载列车实时位置（第二推送，不阻塞延误首屏；delayOnly 模式跳过）
             if (!delayOnly && ep.train && positionOps.indexOf(op) >= 0) {
+                var _requestId = (window.ODPT_POSITION_REQUEST_STATUS[op] && window.ODPT_POSITION_REQUEST_STATUS[op].requestId || 0) + 1;
+                window.ODPT_POSITION_REQUEST_STATUS[op] = { state: "loading", at: Date.now(), assigned: false, requestId: _requestId };
+                positionRequestIds[op] = _requestId;
                 posPromises.push(
-                    fetchODPT(buildUrl(op, 'train')).then(extractData).then(function(data) {
+                    fetchODPT(buildUrl(op, 'train'), true).then(function(result) {
+                        var data = extractData(result);
+                        if (!Array.isArray(result) && !(result && Array.isArray(result.value))) throw new Error("Invalid ODPT train position payload");
+                        return data;
+                    }).then(function(data) {
                         // v4.3.392: 成功即写入（空数组也写入），失败不拖垮全局推送
+                        if (!window.ODPT_POSITION_REQUEST_STATUS[op] || window.ODPT_POSITION_REQUEST_STATUS[op].requestId !== _requestId) return;
                         window.ODPT_TRAIN_POSITIONS[op] = (data && data.length > 0) ? data : [];
+                        window.ODPT_POSITION_SNAPSHOT_AT[op] = Date.now();
+                        window.ODPT_POSITION_REQUEST_STATUS[op] = { state: data && data.length ? "ok" : "empty", at: Date.now(), assigned: false, requestId: _requestId };
                         loaded.positions++;
                         // Explicit Yamanote baseline probe: record only exact
                         // JR-East.Yamanote rows; never classify other JR-East rows
@@ -1630,7 +1715,10 @@
                                 window.ODPTClient.assessRealtimeFullCandidate("Yamanote", history);
                         }
                     }).catch(function(e) {
+                        if (!window.ODPT_POSITION_REQUEST_STATUS[op] || window.ODPT_POSITION_REQUEST_STATUS[op].requestId !== _requestId) return;
                         window.ODPT_TRAIN_POSITIONS[op] = null;
+                        delete window.ODPT_POSITION_SNAPSHOT_AT[op];
+                        window.ODPT_POSITION_REQUEST_STATUS[op] = { state: "error", at: Date.now(), error: String(e && e.message || e), requestId: _requestId };
                         console.debug("[ODPT] " + op + " train positions fetch failed:", e && e.message);
                     })
                 );
@@ -1675,6 +1763,15 @@
                 try {
                     window.DataFusion.loadTrainPositions._calibrated = false;
                     window.DataFusion.loadTrainPositions();
+                    // Fusion consumes the shared snapshot for every operator, not just
+                    // the batch whose callback survived an overlapping readiness wait.
+                    Object.keys(window.ODPT_POSITION_REQUEST_STATUS || {}).forEach(function(op) {
+                        var status = window.ODPT_POSITION_REQUEST_STATUS[op];
+                        var currentSnapshot = window.ODPT_POSITION_SNAPSHOT_AT && window.ODPT_POSITION_SNAPSHOT_AT[op];
+                        // Only acknowledge completed snapshots, never in-flight or failed generations.
+                        if (status && (status.state === "ok" || status.state === "empty") &&
+                            Number.isFinite(currentSnapshot) && currentSnapshot <= status.at) status.assigned = true;
+                    });
                 } catch(e) { console.debug("[ODPT] train positions push error:", e.message); }
                 console.debug("[ODPT] Realtime positions pushed:", loaded.positions, "operators");
             });

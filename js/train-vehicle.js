@@ -142,7 +142,7 @@ var CANONICAL_VEHICLES = {
   "jr-east-e233-5000-keiyo": {
     displayName: "E233系5000番台",
     iconName: "E233系5000番台",
-    asset: "../images/列车/JR東日本/JR東日本_E233系5000番台.png",
+    asset: "../images/列车/JR東日本/JR東日本_E233系_5000番台.png",
     aliases: ["E233系5000番台", "JR E233系5000番台"]
   },
   "jr-east-e231-900-musashino": {
@@ -160,7 +160,7 @@ var CANONICAL_VEHICLES = {
   "jr-east-e233-3000-shonan-shinjuku": {
     displayName: "E233系3000番台",
     iconName: "E233系3000番台",
-    asset: "../images/列车/JR東日本/JR東日本_E233系3000番台.png",
+    asset: "../images/列车/JR東日本/JR東日本_E233系_3000番台.png",
     aliases: ["E233系3000番台"]
   },
   "jr-east-e257-2000-odoriko": {

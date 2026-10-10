@@ -525,7 +525,7 @@ function _rememberTrainArtworkFailure(trainUid) {
     }
     if (!p.sourceUpdatedAt) return true;
     var updatedAt = Date.parse(p.sourceUpdatedAt);
-    if (isNaN(updatedAt)) return false;
+    if (isNaN(updatedAt) || updatedAt > now + 60000) return false;
     var frequency = Number(p.sourceFrequency);
     var maxAgeMs = isFinite(frequency) && frequency > 0
       ? Math.max(60000, Math.min(frequency * 1000 * 4, 5 * 60 * 1000))
@@ -558,13 +558,22 @@ function _rememberTrainArtworkFailure(trainUid) {
       for (var _oi = 0; _oi < _oldNotes.length; _oi++) _oldNotes[_oi].remove();
       if (!positions || !positions.length) return;
       var anyEst = false;
+      var anyUnknown = false;
       var anyRealtime = false;
+      var expiredRealtime = false;
+      var estimatedApiError = false;
+      var estimatedApiPending = false;
+      var estimatedApiEmpty = false;
       var latestRealtimeAt = "";
       var latestRealtimeMs = 0;
       for (var _ei = 0; _ei < positions.length; _ei++) {
         var _p = positions[_ei];
         var _rank = _trainPositionRank(_p);
         if (_rank === 0) {
+          if (!_isRealtimePositionFresh(_p)) {
+            expiredRealtime = true;
+            continue; // Invalid LIVE records are hidden by the map renderer.
+          }
           anyRealtime = true;
           if (_p.sourceUpdatedAt) {
             var _ms = Date.parse(_p.sourceUpdatedAt);
@@ -573,8 +582,14 @@ function _rememberTrainArtworkFailure(trainUid) {
               latestRealtimeAt = _p.sourceUpdatedAt;
             }
           }
-        } else {
+        } else if (_rank === 1 || _rank === 2) {
           anyEst = true;
+          if (_p.positionFallbackReason === "realtime-request-error") estimatedApiError = true;
+          if (_p.positionFallbackReason === "realtime-request-pending") estimatedApiPending = true;
+          if (_p.positionFallbackReason === "realtime-empty-response") estimatedApiEmpty = true;
+        } else {
+          // Neither a realtime source nor a timetable estimate is proven.
+          anyUnknown = true;
         }
       }
       var parts = [];
@@ -585,6 +600,35 @@ function _rememberTrainArtworkFailure(trainUid) {
         parts.push(anyRealtime
           ? (t("trains.estimated_mixed_note") || "*Only supplemental non-realtime positions are estimated")
           : (t("trains.estimated_note") || "*Data calculated from timetable"));
+      }
+      var _sourceLang = String(window.currentLang || "ja").toLowerCase();
+      if (anyEst && estimatedApiError) {
+        parts.push(_sourceLang.indexOf("zh") === 0 ? "ODPT 请求失败，位置为时刻表推定" :
+          _sourceLang.indexOf("ko") === 0 ? "ODPT 요청 실패 · 시간표 기반 위치 추정" :
+          _sourceLang.indexOf("en") === 0 ? "ODPT request failed; positions estimated from timetable" :
+          "ODPT取得失敗・位置は時刻表による推定");
+      } else if (anyEst && estimatedApiPending) {
+        parts.push(_sourceLang.indexOf("zh") === 0 ? "ODPT 获取中，暂用时刻表推定" :
+          _sourceLang.indexOf("ko") === 0 ? "ODPT 불러오는 중 · 시간표 추정" :
+          _sourceLang.indexOf("en") === 0 ? "ODPT loading; timetable estimate shown" :
+          "ODPT取得中・時刻表推定を表示");
+      } else if (anyEst && estimatedApiEmpty) {
+        parts.push(_sourceLang.indexOf("zh") === 0 ? "ODPT 返回空位置，暂用时刻表推定" :
+          _sourceLang.indexOf("ko") === 0 ? "ODPT 위치 정보 없음 · 시간표 추정" :
+          _sourceLang.indexOf("en") === 0 ? "ODPT returned no positions; timetable estimate shown" :
+          "ODPT位置データなし・時刻表推定を表示");
+      }
+      if (expiredRealtime) {
+        parts.push(_sourceLang.indexOf("zh") === 0 ? "部分 ODPT 实时位置已过期" :
+          _sourceLang.indexOf("ko") === 0 ? "일부 ODPT 위치 정보가 만료됨" :
+          _sourceLang.indexOf("en") === 0 ? "Some ODPT positions have expired" :
+          "一部のODPT位置情報は期限切れ");
+      }
+      if (anyUnknown) {
+        parts.push(_sourceLang.indexOf("zh") === 0 ? "部分列车位置来源未确认" :
+          _sourceLang.indexOf("ko") === 0 ? "일부 열차 위치의 출처 미확인" :
+          _sourceLang.indexOf("en") === 0 ? "Some train positions have unverified sources" :
+          "一部列車の位置情報は出典未確認");
       }
       if (!parts.length) return;
       var note = document.createElement("div");
@@ -598,10 +642,11 @@ function _rememberTrainArtworkFailure(trainUid) {
 
   function _trainPositionRank(p) {
     if (!p) return 3;
-    if (p.positionSource === "realtime-api" || p.estimated === false) return 0;
+    if (p.positionSource === "realtime-api") return 0;
     if (p.positionSource === "train-timetable") return 1;
     if (p.positionSource === "station-timetable") return 2;
-    return p.estimated === true ? 1 : 0;
+    // estimated:false without ODPT provenance is not proof of live position.
+    return p.estimated === true ? 1 : 3;
   }
 
   function _sortTrainPositionsBySource(positions) {

@@ -785,7 +785,7 @@
     var updatedRaw = record["dc:date"];
     if (!updatedRaw) return true;
     var updatedMs = Date.parse(updatedRaw);
-    if (isNaN(updatedMs)) return false;
+    if (isNaN(updatedMs) || updatedMs > now + 60000) return false;
     var frequency = Number(record["odpt:frequency"]);
     // Without dct:valid, bound freshness by the provider cadence when supplied.
     // Otherwise use 2 minutes: four normal 30s polling cycles, long enough for
@@ -941,14 +941,16 @@
               // （如 SaikyoKawagoe→[Saikyo,Kawagoe]、Kawagoe→[KawagoeWest]），集合匹配比
               // 子串猜测更准——避免川越〜高麗川的 Kawagoe 数据错配到大宮〜川越段。
               var mappedLids = _railwayCodeLines[railwayName] || [];
-              for (var i = 0; i < matchingLines.length; i++) {
-                var ml = matchingLines[i];
-                if (mappedLids.length > 0) {
-                  if (mappedLids.indexOf(ml.lid) >= 0) { targetLine = ml; break; }
-                } else if (ml.lid === railwayName || ml.lid.indexOf(railwayName) >= 0 || railwayName.indexOf(ml.lid) >= 0) {
-                  targetLine = ml;
-                  break;
-                }
+              // The ODPT railway-code mapping can span several project lines.
+              // Shared stations cannot determine which segment owns a train.
+              // Choose the line only when this source has one unique match.
+              var _mappedMatches = matchingLines.filter(function(ml) {
+                return mappedLids.indexOf(ml.lid) >= 0;
+              });
+              if (_mappedMatches.length === 1) targetLine = _mappedMatches[0];
+              if (!targetLine && mappedLids.length === 0) {
+                var _exactMatches = matchingLines.filter(function(ml) { return ml.lid === railwayName; });
+                if (_exactMatches.length === 1) targetLine = _exactMatches[0];
               }
             }
             // 2. Ambiguous source identity must stay unresolved.
@@ -971,7 +973,8 @@
             if (!posMap[lid]) posMap[lid] = [];
             var _linePositionIndex = _positionIndexByLine[lid];
             if (!_linePositionIndex) _linePositionIndex = _positionIndexByLine[lid] = new Map();
-            var existingIdx = _linePositionIndex.has(trainId) ? _linePositionIndex.get(trainId) : -1;
+            // Missing ODPT train ID cannot prove two records are the same train.
+            var existingIdx = trainId && _linePositionIndex.has(trainId) ? _linePositionIndex.get(trainId) : -1;
             var rawType = t["odpt:trainType"] || "";
             var typeName = "";
             if (rawType) {
@@ -1068,7 +1071,7 @@
             if (existingIdx >= 0) {
               posMap[lid][existingIdx] = positionData;
             } else {
-              _linePositionIndex.set(trainId, posMap[lid].length);
+              if (trainId) _linePositionIndex.set(trainId, posMap[lid].length);
               posMap[lid].push(positionData);
             }
           }
@@ -1112,6 +1115,30 @@
       function mayUseTimetablePosition(lineId) {
         var mode = getRealtimePositionPolicy(lineId).mode;
         return mode !== "FULL";
+      }
+
+      // Timetable fallback is never LIVE, even if it is blended with an ODPT
+      // snapshot. Preserve the exact reason without introducing a second
+      // authority or treating a successful operator response as FULL coverage.
+      function _timetableFallbackReason(lineId) {
+        var client = window.ODPTClient || {};
+        var operator = client.LINE_TO_OPERATOR && client.LINE_TO_OPERATOR[lineId];
+        if (!operator || (typeof client.supports === "function" && !client.supports(operator, "train"))) {
+          return "no-realtime-endpoint";
+        }
+        var status = window.ODPT_POSITION_REQUEST_STATUS && window.ODPT_POSITION_REQUEST_STATUS[operator];
+        if (!status) return "realtime-coverage-unchecked";
+        if (status.state === "error") return "realtime-request-error";
+        if (status.state === "loading") return "realtime-request-pending";
+        if (status.state === "empty") return "realtime-empty-response";
+        return "realtime-partial-or-unmatched";
+      }
+      function _tagTimetableFallback(lineId, position) {
+        if (!position || position.estimated !== true) return;
+        if (position.positionSource !== "train-timetable" &&
+            position.positionSource !== "station-timetable" &&
+            position.positionSource !== "supabase-train-run") return;
+        position.positionFallbackReason = _timetableFallbackReason(lineId);
       }
 
       // Generic coverage evaluator. Line-specific facts live only in RuntimeConfig.
@@ -1174,6 +1201,9 @@
               posMap,
               { lineIds: requestedLineIds && requestedLineIds.length ? requestedLineIds : null }
             );
+            Object.keys(estimated).forEach(function(_lid) {
+              (estimated[_lid] || []).forEach(function(p) { _tagTimetableFallback(_lid, p); });
+            });
 
             // Timetable resolution is where canonical runningChainId becomes
             // available. Bridge realtime evidence onto it only when a train
@@ -1184,9 +1214,33 @@
                 if (!_ep || !_ep.trainNumber || !_ep.runningChainId) return;
                 var _tn = String(_ep.trainNumber);
                 if (!_chainsByTrainNumber[_tn]) _chainsByTrainNumber[_tn] = {};
-                _chainsByTrainNumber[_tn][_ep.runningChainId] = true;
+                var _chainEntry = _chainsByTrainNumber[_tn][_ep.runningChainId];
+                if (!_chainEntry) _chainEntry = _chainsByTrainNumber[_tn][_ep.runningChainId] = { lines: {} };
+                _chainEntry.lines[_vlid] = true;
               });
             });
+            function _uniqueMatchedChain(trainNumber, lineId, operator, sourceRailway) {
+              var entries = _chainsByTrainNumber[String(trainNumber || "")] || {};
+              var candidates = Object.keys(entries).filter(function(chainId) {
+                var lines = entries[chainId].lines || {};
+                // Known position: require this exact project line. Timetable
+                // chain evidence is never inherited from the whole network by
+                // coincidentally sharing a train number with another operator.
+                if (lineId) return lines[lineId] === true;
+                // Positionless ODPT record: require the source's operator AND
+                // railway to match a line included in the resolved chain.
+                if (!operator || !sourceRailway) return false;
+                var suffix = String(sourceRailway).split(":").pop().split(".").pop();
+                return Object.keys(lines).some(function(lid) {
+                  var op = window.ODPTClient && window.ODPTClient.LINE_TO_OPERATOR &&
+                    window.ODPTClient.LINE_TO_OPERATOR[lid];
+                  var railway = window.ODPTClient && window.ODPTClient.LINE_RAILWAY_CODE &&
+                    window.ODPTClient.LINE_RAILWAY_CODE[lid];
+                  return op === operator && railway === suffix;
+                });
+              });
+              return candidates.length === 1 ? candidates[0] : "";
+            }
             var _chainVehicleCandidates = {};
             function _queueChainVehicle(p) {
               if (!p || !p.runningChainId || !p.vehicleType) return;
@@ -1202,9 +1256,9 @@
             Object.keys(posMap).forEach(function(_vlid) {
               (posMap[_vlid] || []).forEach(function(_rp) {
                 if (!_rp) return;
-                if (!_rp.runningChainId && _rp.trainNumber && _chainsByTrainNumber[String(_rp.trainNumber)]) {
-                  var _chainIds = Object.keys(_chainsByTrainNumber[String(_rp.trainNumber)]);
-                  if (_chainIds.length === 1) _rp.runningChainId = _chainIds[0];
+                if (!_rp.runningChainId && _rp.trainNumber) {
+                  var _matchedChain = _uniqueMatchedChain(_rp.trainNumber, _vlid);
+                  if (_matchedChain) _rp.runningChainId = _matchedChain;
                 }
                 _queueChainVehicle(_rp);
               });
@@ -1214,16 +1268,16 @@
             Object.keys(_realtimeEvidenceWithoutPosition).forEach(function(_evKey) {
               var _ev = _realtimeEvidenceWithoutPosition[_evKey];
               if (!_ev || !_ev.trainNumber || !_ev.vehicleType) return;
-              var _evChains = _chainsByTrainNumber[String(_ev.trainNumber)] || {};
-              var _evChainIds = Object.keys(_evChains);
-              if (_evChainIds.length !== 1) return;
+              var _matchedEvidenceChain = _uniqueMatchedChain(
+                _ev.trainNumber, "", _ev.operator, _ev.railway);
+              if (!_matchedEvidenceChain) return;
               var _evResolution = (window.TrainVehicle && typeof window.TrainVehicle.resolve === "function")
                 ? window.TrainVehicle.resolve({trainNumber:_ev.trainNumber,realtimeVehicleType:_ev.vehicleType}) : null;
               var _evSources = _evResolution && Array.isArray(_evResolution.sources) ? _evResolution.sources : [];
               if (!_evResolution || _evResolution.identityStatus !== "EXACT" ||
                   (_evSources.indexOf("realtime") < 0 && _evResolution.source !== "realtime")) return;
               _queueChainVehicle({
-                runningChainId:_evChainIds[0], trainClass:_evResolution.name||"",
+                runningChainId:_matchedEvidenceChain, trainClass:_evResolution.name||"",
                 vehicleType:_evResolution.vehicleTypeStr||_ev.vehicleType,
                 vehicleIconPath:_evResolution.iconPath, vehicleSource:_evResolution.source||"realtime",
                 vehicleConfidence:_evResolution.confidence||"high", vehicleResolution:_evResolution,
@@ -1401,6 +1455,7 @@
                       var id = p && _positionIdentity(p);
                       if (id && !haveId[id] && mayUseTimetableEstimate(manualLineId, p)) {
                         p.positionSource = "station-timetable";
+                        _tagTimetableFallback(manualLineId, p);
                         posMap[manualLineId].push(p);
                         haveId[id] = true;
                         mAdded++;
@@ -1831,6 +1886,7 @@
                   mEst.forEach(function(p) {
                     if (p && _positionIdentity(p) && !haveId[_positionIdentity(p)] && mayUseTimetableEstimate(lineId, p)) {
                       p.positionSource = "station-timetable";
+                      _tagTimetableFallback(lineId, p);
                       posMap[lineId].push(p);
                       haveId[_positionIdentity(p)] = true;
                       mAdded++;
