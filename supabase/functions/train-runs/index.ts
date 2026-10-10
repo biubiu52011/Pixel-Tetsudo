@@ -203,8 +203,11 @@ async function readManualTemplateRuns(db: any, lineId: string, serviceDate: stri
   // Incomplete source rows are preserved in SQL for auditing, but must not
   // suppress other source-verified trains for the same railway/calendar.
   // Never extrapolate a missing stop or report full coverage for a partial set.
+  // At least two observed station clocks are required for estimating a
+  // moving train. An untimed boundary stop must never become a made-up ETA.
   const validRuns = result.filter(r => r.stops.length >= 2 &&
-    r.stops.every(s => !!s.station_urn));
+    r.stops.every(s => !!s.station_urn) &&
+    r.stops.filter(s => s.arrival_time || s.departure_time).length >= 2);
   const omittedIncompleteRuns = result.length - validRuns.length;
   const complete = validRuns.length > 0 && omittedIncompleteRuns === 0;
   const partial = validRuns.length > 0 && omittedIncompleteRuns > 0;

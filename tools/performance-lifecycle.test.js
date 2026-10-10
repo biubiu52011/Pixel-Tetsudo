@@ -77,6 +77,7 @@ console.log('train-run-SQL-fallback: 5 PASS');
 assert.ok(/fallback_only/.test(trainRunsReadThroughSrc) &&
   /source: "API_AVAILABLE"/.test(trainRunsReadThroughSrc) &&
   /const validRuns = result\.filter\(r => r\.stops\.length >= 2/.test(trainRunsReadThroughSrc) &&
+  /r\.stops\.filter\(s => s\.arrival_time \|\| s\.departure_time\)\.length >= 2/.test(trainRunsReadThroughSrc) &&
   /omitted_incomplete_runs: omittedIncompleteRuns, runs: validRuns/.test(trainRunsReadThroughSrc) &&
   !/runs: complete \? result : \[\]/.test(
     trainRunsReadThroughSrc.split('async function readManualTemplateRuns')[1].split('Deno.serve')[0]),
