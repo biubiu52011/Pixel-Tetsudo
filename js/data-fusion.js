@@ -1117,6 +1117,29 @@
         return mode !== "FULL";
       }
 
+      // Timetable fallback is never LIVE, even if it is blended with an ODPT
+      // snapshot. Preserve the exact reason without introducing a second
+      // authority or treating a successful operator response as FULL coverage.
+      function _timetableFallbackReason(lineId) {
+        var client = window.ODPTClient || {};
+        var operator = client.LINE_TO_OPERATOR && client.LINE_TO_OPERATOR[lineId];
+        if (!operator || (typeof client.supports === "function" && !client.supports(operator, "train"))) {
+          return "no-realtime-endpoint";
+        }
+        var status = window.ODPT_POSITION_REQUEST_STATUS && window.ODPT_POSITION_REQUEST_STATUS[operator];
+        if (!status) return "realtime-coverage-unchecked";
+        if (status.state === "error") return "realtime-request-error";
+        if (status.state === "loading") return "realtime-request-pending";
+        if (status.state === "empty") return "realtime-empty-response";
+        return "realtime-partial-or-unmatched";
+      }
+      function _tagTimetableFallback(lineId, position) {
+        if (!position || position.estimated !== true) return;
+        if (position.positionSource !== "train-timetable" &&
+            position.positionSource !== "station-timetable") return;
+        position.positionFallbackReason = _timetableFallbackReason(lineId);
+      }
+
       // Generic coverage evaluator. Line-specific facts live only in RuntimeConfig.
       // SEGMENTED accepts coveredSegments and/or excludedSegments as station-id ranges.
       // Timetable positions are allowed only where realtime is not authoritative.
@@ -1177,6 +1200,9 @@
               posMap,
               { lineIds: requestedLineIds && requestedLineIds.length ? requestedLineIds : null }
             );
+            Object.keys(estimated).forEach(function(_lid) {
+              (estimated[_lid] || []).forEach(function(p) { _tagTimetableFallback(_lid, p); });
+            });
 
             // Timetable resolution is where canonical runningChainId becomes
             // available. Bridge realtime evidence onto it only when a train
@@ -1428,6 +1454,7 @@
                       var id = p && _positionIdentity(p);
                       if (id && !haveId[id] && mayUseTimetableEstimate(manualLineId, p)) {
                         p.positionSource = "station-timetable";
+                        _tagTimetableFallback(manualLineId, p);
                         posMap[manualLineId].push(p);
                         haveId[id] = true;
                         mAdded++;
@@ -1858,6 +1885,7 @@
                   mEst.forEach(function(p) {
                     if (p && _positionIdentity(p) && !haveId[_positionIdentity(p)] && mayUseTimetableEstimate(lineId, p)) {
                       p.positionSource = "station-timetable";
+                      _tagTimetableFallback(lineId, p);
                       posMap[lineId].push(p);
                       haveId[_positionIdentity(p)] = true;
                       mAdded++;
