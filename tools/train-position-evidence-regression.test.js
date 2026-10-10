@@ -109,6 +109,8 @@ const trackLayoutSource=read("js/train-track-layout.js");
   const stale = { ...current, sourceUpdatedAt:new Date(now-600000).toISOString() };
   assert.strictEqual(sandbox.fresh(stale), false,
     "stale dc:date must not be treated as live when dct:valid is absent");
+  assert.strictEqual(sandbox.fresh({ ...current, sourceUpdatedAt:new Date(now+300000).toISOString() }), false,
+    "impossibly future-dated realtime records must not be accepted as live");
   assert.strictEqual(sandbox.dedupe([stale,estimate], "Through")[0].positionSource,
     "train-timetable", "stale realtime loses to an explicitly labelled estimate");
   assert.strictEqual(sandbox.fresh({ ...current, sourceValidUntil:"not-a-date" }), false,
@@ -459,5 +461,7 @@ assert(/record\["dc:date"\]/.test(fusionSource));
 assert(/record\["odpt:frequency"\]/.test(fusionSource));
 assert(!/if \(!p\.sourceValidUntil\) return true;/.test(renderSource));
 assert(/p\.sourceUpdatedAt/.test(renderSource) && /p\.sourceFrequency/.test(renderSource));
+assert(fusionSource.includes("updatedMs > now + 60000") && renderSource.includes("updatedAt > now + 60000"),
+  "fusion and renderer must reject impossible provider timestamps consistently");
 console.log("train-position freshness guard: 7 PASS");
 
