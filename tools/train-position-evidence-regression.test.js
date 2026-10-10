@@ -8,6 +8,14 @@ for(const js of ["js/data-fusion.js","js/train-position-estimator.js","js/runnin
 
 const fusion=read("js/data-fusion.js");
 assert(/ambiguous realtime line identity/.test(fusion),"ambiguous realtime line identity must remain unresolved");
+assert(fusion.includes('if (_mappedMatches.length === 1) targetLine = _mappedMatches[0];') &&
+       fusion.includes('if (_exactMatches.length === 1) targetLine = _exactMatches[0];') &&
+       !fusion.includes('mappedLids.indexOf(ml.lid) >= 0) { targetLine = ml; break; }'),
+  "ODPT railway ownership must not choose the first matching segment on an ambiguous station");
+assert(fusion.includes('var existingIdx = trainId && _linePositionIndex.has(trainId)') &&
+       fusion.includes('if (trainId) _linePositionIndex.set(trainId, posMap[lid].length);'),
+  "ODPT records with missing source train identity must not overwrite each other");
+
 assert(!/mainLines\.sort[\s\S]{0,500}targetLine\s*=\s*mainLines\[0\]/.test(fusion),"must not choose longest line for ambiguous realtime");
 assert(/_queueChainVehicle/.test(fusion) && /Object\.keys\(_chainVehicleCandidates\)/.test(fusion),
   "vehicle evidence must converge through one chain candidate pool and one registry commit");
@@ -33,6 +41,19 @@ assert(/if \(!d\) return null;/.test(tobuEvidence),
 assert(/!hasExplicitValidity && d !== provider\.effectiveDate/.test(tobuEvidence),
   "undated Tobu timetable rows must not become open-ended vehicle assignments");
 const renderer=read("js/trains-render.js");
+
+assert(!renderer.includes('p.positionSource === "realtime-api" || p.estimated === false'),
+  "untagged rows must never be reported as verified realtime simply from estimated:false");
+assert(renderer.includes('var anyUnknown = false;') && renderer.includes('一部列車の位置情報は出典未確認'),
+  "unverified position provenance must be labeled without claiming either ODPT or timetable");
+const rankSource = renderer.match(/function _trainPositionRank\(p\) \{[\s\S]*?\n  \}/);
+assert(rankSource, "missing canonical train-position source rank");
+const trainRank = vm.runInNewContext(rankSource[0] + "; _trainPositionRank");
+assert.strictEqual(trainRank({ positionSource: "realtime-api", estimated: false }), 0);
+assert.strictEqual(trainRank({ positionSource: "train-timetable", estimated: true }), 1);
+assert.strictEqual(trainRank({ positionSource: "station-timetable", estimated: true }), 2);
+assert.strictEqual(trainRank({ estimated: false }), 3,
+  "estimated:false without proven realtime source must remain unknown");
 const trackLayoutSource=read("js/train-track-layout.js");
 const trainsCssSource=read("css/trains.css");
 assert(!/transition:\s*x\s+14s[\s\S]{0,120}y\s+14s/.test(trainsCssSource),
