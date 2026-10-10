@@ -226,6 +226,40 @@ assert.ok(/^https:\/\//.test(yamanoteRule.sourceUrl),
 });
 console.log('Yamanote realtime chain -> E235 PNG: 3 PASS');
 
+// The same verified single-fleet record must resolve identically on the
+// timetable + delay estimation path; before this fix those trains used SVG.
+['1826G','1866G','1868G'].forEach(function(tn) {
+  const estimateEvidence = realCtx.window.TrainOperationEvidence.resolveEvidence(tn, {
+    lineId:'Yamanote', railway:'odpt.Railway:JR-East.Yamanote',
+    operator:'JR-East', serviceDate:'2026-10-05', calendarType:'weekday'
+  }, 'fallback');
+  assert.ok(estimateEvidence && estimateEvidence.decisive &&
+    estimateEvidence.vehicleType === 'E235系0番台（山手線）',
+    tn + ' grade-A timetable evidence must match realtime: ' + JSON.stringify(estimateEvidence));
+  const estimateVehicle = realCtx.window.TrainVehicle.resolve({
+    timetableVehicleType: estimateEvidence.vehicleType,
+    trainNumber:tn, serviceDate:'2026-10-05'
+  });
+  assert.strictEqual(estimateVehicle.identityStatus,'EXACT');
+  assert.ok(/JR東日本_E235系_0番台\\.png$/.test(estimateVehicle.iconPath||''),
+    tn + ' estimated train must project same confirmed PNG');
+});
+const beforeReplacement = realCtx.window.TrainOperationEvidence.resolveEvidence('100G', {
+  lineId:'Yamanote', railway:'odpt.Railway:JR-East.Yamanote',
+  serviceDate:'2020-01-20'
+}, 'fallback');
+assert.ok(!beforeReplacement || beforeReplacement.vehicleType !== 'E235系0番台（山手線）',
+  'grade-A fleet fact must not apply before effective date');
+const gradeBEstimated = realCtx.window.TrainOperationEvidence.resolveEvidence('13', {
+  lineId:'setagaya', railway:'TokyuSetagaya',
+  serviceDate:'2026-10-05'
+}, 'fallback');
+assert.ok(!gradeBEstimated || !gradeBEstimated.vehicleType,
+  'B-grade family constraints must not invent an estimated vehicle identity');
+console.log('Realtime / estimated shared Grade-A PNG identity: 8 PASS');
+
+
+
 // zero-fallback: a line with no evidence must stay UNKNOWN / no artwork
 const noEvidenceLine = realCtx.window.TrainOperationEvidence.resolveEvidence('9', {
   lineId: 'Karasuyama', railway: '烏山線', operator: 'JR-East',

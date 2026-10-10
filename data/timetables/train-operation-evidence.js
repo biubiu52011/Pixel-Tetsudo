@@ -272,8 +272,9 @@
       else runHits.push(rec);
     }
 
-    // Realtime-derived identity is allowed to use the canonical family rule
-    // directly. Fallback treats the same B-grade rule only as a constraint.
+    // Realtime-derived identity uses the structural provider directly.
+    // Timetable fallback keeps B/C structural rules as constraints, but a
+    // dated, traced Grade-A single-fleet rule may also decide vehicle identity.
     if (mode === "realtime-derived") return familyHit;
 
     // A/C dated run evidence may decide identity, but all decisive providers
@@ -304,6 +305,22 @@
       return exactHit;
     }
 
+    // One documented Grade-A, date-valid single-fleet fact is decisive for
+    // timetable estimation just as it is for realtime-derived identity.
+    // This is NOT a general line/operator default: B/C family assignments
+    // remain constraints, and any conflicting dated run candidate blocks it.
+    if (familyHit && familyHit.grade === "A" && familyHit.decisive &&
+        familyHit.vehicleType && familyHit.sourceUrl &&
+        allowedVehicles && allowedVehicles.length === 1) {
+      var incompatible = runHits.some(function(h) {
+        if (h.vehicleType && h.vehicleType !== familyHit.vehicleType) return true;
+        return (h.vehicleCandidates || []).some(function(v) {
+          return v && v !== familyHit.vehicleType;
+        });
+      });
+      if (!incompatible) return familyHit;
+    }
+
     // No decisive run-level exact: preserve only candidates compatible with the
     // structural family. Candidate evidence must never manufacture an EXACT.
     var candidates = {};
@@ -314,8 +331,8 @@
     });
     var candidateKeys = Object.keys(candidates);
     if (!candidateKeys.length) {
-      // Structural evidence remains a constraint in fallback mode, never a
-      // standalone run assignment (including ownership-only family rules).
+      // B/C structural evidence remains a constraint in fallback mode, never
+      // a standalone run assignment (including ownership-only family rules).
       return null;
     }
     var first = runHits[0] || familyHit;
