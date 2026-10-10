@@ -1753,10 +1753,19 @@
 
     // One existing source lifecycle: ODPTClient owns the optional Supabase
     // read-through cache; a miss falls through to the existing manual path.
-    if (!window.ODPTClient || typeof window.ODPTClient.getCachedTrainRuns !== "function") return ensureManualTimetable(lineId);
+    // No-API lines use SQL as their sole timetable authority. A SQL MISS or
+    // network error must not start a second, legacy JS position source.
+    // ODPT-equipped lines may still load their original manual file solely
+    // for train-level vehicle evidence (existing position authority gates apply).
+    function loadOdptVehicleEvidenceOnly() {
+      return _hasOdptTimetable(lineId) ? ensureManualTimetable(lineId) : Promise.resolve(false);
+    }
+    if (!window.ODPTClient || typeof window.ODPTClient.getCachedTrainRuns !== "function") {
+      return loadOdptVehicleEvidenceOnly();
+    }
     return window.ODPTClient.getCachedTrainRuns(lineId).then(function(rows) {
       // ODPT activation may have completed while the cache request was in flight.
-      if (!rows || !rows.length) return ensureManualTimetable(lineId);
+      if (!rows || !rows.length) return loadOdptVehicleEvidenceOnly();
       if (window.TrainPositionEstimator && typeof window.TrainPositionEstimator.registerManualTimetable === "function") {
         window.TrainPositionEstimator.registerManualTimetable(lineId, rows);
       }
@@ -1782,7 +1791,7 @@
         fuseDirty([lineId]);
       } catch(err) { console.debug("[DataFusion] ensureTimetable refresh:", err.message); }
       return true;
-    }).catch(function() { return ensureManualTimetable(lineId); });
+    }).catch(function() { return loadOdptVehicleEvidenceOnly(); });
   }
 
   function ensureManualTimetable(lineId) {

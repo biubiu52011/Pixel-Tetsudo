@@ -97,3 +97,16 @@ assert.ok(/tt\['_operationCode'\] \|\| tt\['operationCode'\] \|\| tt\['operation
 assert.ok(/if \(!_baseOperationCtx\.operationCode\)/.test(trainPositionEstimatorSrc),
   'train-number operation normalization must remain fallback-only');
 console.log('train-run-vehicle-evidence-bridge: 3 PASS');
+
+// Migrated SQL lines must not resurrect local *-manual.js as a second
+// positional authority on missing/unavailable DB responses. ODPT lines retain
+// their existing lazy manual vehicle evidence, gated by presence of ODPT rows.
+const ensureTimetableSrc = fusion.split('  function ensureTimetable(lineId) {')[1]
+  .split('  function ensureManualTimetable(lineId) {')[0];
+assert.ok(/function loadOdptVehicleEvidenceOnly\(\)/.test(ensureTimetableSrc) &&
+  /_hasOdptTimetable\(lineId\) \? ensureManualTimetable\(lineId\) : Promise\.resolve\(false\)/.test(ensureTimetableSrc) &&
+  /if \(!rows \|\| !rows\.length\) return loadOdptVehicleEvidenceOnly\(\)/.test(ensureTimetableSrc) &&
+  /\.catch\(function\(\) \{ return loadOdptVehicleEvidenceOnly\(\); \}\)/.test(ensureTimetableSrc) &&
+  !/return ensureManualTimetable\(lineId\)/.test(ensureTimetableSrc),
+  'SQL cache MISS or error must not activate legacy positional fallback; ODPT vehicle evidence remains available');
+console.log('timetable-single-source-fallback: 1 PASS');
