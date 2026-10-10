@@ -222,17 +222,18 @@ Deno.serve(async (req: Request) => {
   if (req.method !== "GET") return json({ ok: false, error: "METHOD_NOT_ALLOWED" }, 405);
 
   const url = new URL(req.url);
-  // Existing read-only endpoint: serve only pre-verified visual identities,
-  // never pending/review PNGs or anonymous gallery candidates.
+  // Existing read-only endpoint: serve exact visual identities only when their
+  // PNG also has a protected reviewed-asset baseline; never promote an asset lock
+  // into vehicle or train identity evidence.
   if (url.searchParams.get("catalog") === "vehicle-artwork") {
     const keys = JSON.parse(Deno.env.get("SUPABASE_SECRET_KEYS") || "{}");
     const key = keys.default || Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
     const supabaseUrl = Deno.env.get("SUPABASE_URL");
     if (!supabaseUrl || !key) return json({ ok: false, error: "SERVER_CONFIG" }, 500);
     const db = createClient(supabaseUrl, key, { auth: { persistSession: false, autoRefreshToken: false } });
-    const { data, error } = await db.from("vehicle_visual_identities")
+    const { data, error } = await db.from("vehicle_artwork_exact_locked")
       .select("operator,vehicle_type,formation_id,livery,theme,valid_from,valid_to,image_path")
-      .eq("identity_status", "exact").not("image_path", "is", null).limit(500);
+      .limit(500);
     if (error) return json({ ok: false, error: "VEHICLE_CATALOG_FAILED" }, 500);
     const paths = (data || []).filter((row: any) =>
       /^images\/列车\/[^/]+\/[^/]+\.png$/.test(row.image_path || ""));
