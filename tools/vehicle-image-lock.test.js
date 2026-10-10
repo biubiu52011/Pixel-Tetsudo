@@ -18,6 +18,7 @@ for (const [name, expected] of Object.entries(baseline.images)) {
   assert.ok(target.startsWith(path.join(root, 'images', '列车') + path.sep), 'unsafe path: ' + name);
   assert.ok(fs.existsSync(target), 'locked PNG missing: ' + name);
   const bytes = fs.readFileSync(target);
+  assert.ok(bytes.length >= 8 && bytes.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10])), 'locked image is not a native PNG: ' + name);
   const header = Buffer.from('blob ' + bytes.length + '\0');
   const actual = crypto.createHash('sha1').update(header).update(bytes).digest('hex');
   assert.equal(actual, expected, 'locked PNG changed: ' + name);
