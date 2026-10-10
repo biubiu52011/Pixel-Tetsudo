@@ -110,3 +110,13 @@ assert.ok(/function loadOdptVehicleEvidenceOnly\(\)/.test(ensureTimetableSrc) &&
   !/return ensureManualTimetable\(lineId\)/.test(ensureTimetableSrc),
   'SQL cache MISS or error must not activate legacy positional fallback; ODPT vehicle evidence remains available');
 console.log('timetable-single-source-fallback: 1 PASS');
+
+// SQL read-through should enter the existing estimator only once, not push
+// an extra positional batch ahead of the shared realtime-first merge.
+const sqlTimetableBranch = fusion.split('  function ensureTimetable(lineId) {')[1]
+  .split('  function ensureManualTimetable(lineId) {')[0];
+assert.ok(/registerManualTimetable\(lineId, rows\)/.test(sqlTimetableBranch) &&
+  /doEstimation\(targets\)/.test(sqlTimetableBranch) &&
+  !/estimateLinePositions\(lineId, line, rows/.test(sqlTimetableBranch),
+  'SQL template read-through must use one canonical position estimation path');
+console.log('SQL-single-estimator: 1 PASS');

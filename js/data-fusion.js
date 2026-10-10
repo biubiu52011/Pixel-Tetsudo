@@ -1769,22 +1769,8 @@
       if (window.TrainPositionEstimator && typeof window.TrainPositionEstimator.registerManualTimetable === "function") {
         window.TrainPositionEstimator.registerManualTimetable(lineId, rows);
       }
-      var line = allLines[lineId];
-      if (line && line.stations) {
-        var estimated = window.TrainPositionEstimator.estimateLinePositions(lineId, line, rows, odptData.delayInfo, line.operator);
-        if (estimated && estimated.length) {
-          if (!posMap[lineId]) posMap[lineId] = [];
-          var have = {};
-          posMap[lineId].forEach(function(p) { if (p && _positionIdentity(p)) have[_positionIdentity(p)] = true; });
-          estimated.forEach(function(p) {
-            var id = _positionIdentity(p);
-            if (id && !have[id] && mayUseTimetableEstimate(lineId, p)) {
-              p.positionSource = "supabase-train-run";
-              posMap[lineId].push(p); have[id] = true;
-            }
-          });
-        }
-      }
+      // The SQL rows are registered above; the shared estimator below owns
+      // realtime-first merging and deduplication. Do not estimate twice here.
       try {
         var targets = _expandDirtyLines([lineId], allLines);
         if (typeof doEstimation === "function") doEstimation(targets);
