@@ -36,7 +36,7 @@ assert(odptClient.includes("if (window.ODPT_POSITION_REQUEST_STATUS && window.OD
        odptClient.includes("if (window.ODPT_DELAY_REQUEST_STARTED && window.ODPT_DELAY_REQUEST_STARTED[op]) return;"),
   "cache restores must not overwrite an operator whose live refresh has started");
 assert(odptClient.includes('state: "loading"') &&
-       odptClient.includes('state: "ok"') &&
+       odptClient.includes('status.state === "ok"') &&
        odptClient.includes('state: "error"') &&
        odptClient.includes('state: data && data.length ? "ok" : "empty"'),
   "live ODPT position polling must distinguish request loading, empty, failure and non-empty response");
