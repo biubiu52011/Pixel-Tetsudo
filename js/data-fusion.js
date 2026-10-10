@@ -1187,9 +1187,33 @@
                 if (!_ep || !_ep.trainNumber || !_ep.runningChainId) return;
                 var _tn = String(_ep.trainNumber);
                 if (!_chainsByTrainNumber[_tn]) _chainsByTrainNumber[_tn] = {};
-                _chainsByTrainNumber[_tn][_ep.runningChainId] = true;
+                var _chainEntry = _chainsByTrainNumber[_tn][_ep.runningChainId];
+                if (!_chainEntry) _chainEntry = _chainsByTrainNumber[_tn][_ep.runningChainId] = { lines: {} };
+                _chainEntry.lines[_vlid] = true;
               });
             });
+            function _uniqueMatchedChain(trainNumber, lineId, operator, sourceRailway) {
+              var entries = _chainsByTrainNumber[String(trainNumber || "")] || {};
+              var candidates = Object.keys(entries).filter(function(chainId) {
+                var lines = entries[chainId].lines || {};
+                // Known position: require this exact project line. Timetable
+                // chain evidence is never inherited from the whole network by
+                // coincidentally sharing a train number with another operator.
+                if (lineId) return lines[lineId] === true;
+                // Positionless ODPT record: require the source's operator AND
+                // railway to match a line included in the resolved chain.
+                if (!operator || !sourceRailway) return false;
+                var suffix = String(sourceRailway).split(":").pop().split(".").pop();
+                return Object.keys(lines).some(function(lid) {
+                  var op = window.ODPTClient && window.ODPTClient.LINE_TO_OPERATOR &&
+                    window.ODPTClient.LINE_TO_OPERATOR[lid];
+                  var railway = window.ODPTClient && window.ODPTClient.LINE_RAILWAY_CODE &&
+                    window.ODPTClient.LINE_RAILWAY_CODE[lid];
+                  return op === operator && railway === suffix;
+                });
+              });
+              return candidates.length === 1 ? candidates[0] : "";
+            }
             var _chainVehicleCandidates = {};
             function _queueChainVehicle(p) {
               if (!p || !p.runningChainId || !p.vehicleType) return;
@@ -1205,9 +1229,9 @@
             Object.keys(posMap).forEach(function(_vlid) {
               (posMap[_vlid] || []).forEach(function(_rp) {
                 if (!_rp) return;
-                if (!_rp.runningChainId && _rp.trainNumber && _chainsByTrainNumber[String(_rp.trainNumber)]) {
-                  var _chainIds = Object.keys(_chainsByTrainNumber[String(_rp.trainNumber)]);
-                  if (_chainIds.length === 1) _rp.runningChainId = _chainIds[0];
+                if (!_rp.runningChainId && _rp.trainNumber) {
+                  var _matchedChain = _uniqueMatchedChain(_rp.trainNumber, _vlid);
+                  if (_matchedChain) _rp.runningChainId = _matchedChain;
                 }
                 _queueChainVehicle(_rp);
               });
@@ -1217,16 +1241,16 @@
             Object.keys(_realtimeEvidenceWithoutPosition).forEach(function(_evKey) {
               var _ev = _realtimeEvidenceWithoutPosition[_evKey];
               if (!_ev || !_ev.trainNumber || !_ev.vehicleType) return;
-              var _evChains = _chainsByTrainNumber[String(_ev.trainNumber)] || {};
-              var _evChainIds = Object.keys(_evChains);
-              if (_evChainIds.length !== 1) return;
+              var _matchedEvidenceChain = _uniqueMatchedChain(
+                _ev.trainNumber, "", _ev.operator, _ev.railway);
+              if (!_matchedEvidenceChain) return;
               var _evResolution = (window.TrainVehicle && typeof window.TrainVehicle.resolve === "function")
                 ? window.TrainVehicle.resolve({trainNumber:_ev.trainNumber,realtimeVehicleType:_ev.vehicleType}) : null;
               var _evSources = _evResolution && Array.isArray(_evResolution.sources) ? _evResolution.sources : [];
               if (!_evResolution || _evResolution.identityStatus !== "EXACT" ||
                   (_evSources.indexOf("realtime") < 0 && _evResolution.source !== "realtime")) return;
               _queueChainVehicle({
-                runningChainId:_evChainIds[0], trainClass:_evResolution.name||"",
+                runningChainId:_matchedEvidenceChain, trainClass:_evResolution.name||"",
                 vehicleType:_evResolution.vehicleTypeStr||_ev.vehicleType,
                 vehicleIconPath:_evResolution.iconPath, vehicleSource:_evResolution.source||"realtime",
                 vehicleConfidence:_evResolution.confidence||"high", vehicleResolution:_evResolution,
