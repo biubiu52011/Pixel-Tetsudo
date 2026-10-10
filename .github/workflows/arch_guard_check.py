@@ -311,6 +311,8 @@ def main():
             or 'kind: "vehicle", iconSrc: iconSrc' not in vehicle_src
             or 'if (artworkFailed === true || !isGalleryPng(iconSrc))' not in vehicle_src):
         new_errors.append('TRAIN-001 SINGLE_PNG_ARTWORK_AUTHORITY_MISSING')
+    if 'window.TrainIcons.resolveVehicleArtwork' in vehicle_src:
+        new_errors.append('TRAIN-001 SECOND_ICON_RESOLVER_HOP_REINTRODUCED')
     if 'data-marker-kind' not in renderer_src:
         new_errors.append('TRAIN-001 TRAIN_MARKER_KIND_ATTRIBUTE_MISSING')
     if ('function _createGenericTrainMarker' in renderer_src
