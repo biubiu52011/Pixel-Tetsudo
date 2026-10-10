@@ -785,7 +785,7 @@
     var updatedRaw = record["dc:date"];
     if (!updatedRaw) return true;
     var updatedMs = Date.parse(updatedRaw);
-    if (isNaN(updatedMs)) return false;
+    if (isNaN(updatedMs) || updatedMs > now + 60000) return false;
     var frequency = Number(record["odpt:frequency"]);
     // Without dct:valid, bound freshness by the provider cadence when supplied.
     // Otherwise use 2 minutes: four normal 30s polling cycles, long enough for
