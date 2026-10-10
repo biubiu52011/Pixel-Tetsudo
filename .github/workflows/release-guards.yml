@@ -30,6 +30,8 @@ jobs:
         run: node tools/frontend-smoke.test.js
       - name: Train image asset references
         run: node tools/train-image-assets.test.js
+      - name: Reviewed PNG content lock
+        run: node tools/vehicle-image-lock.test.js
       - name: Read-only gallery canonical parity
         run: node tools/gallery-sync.js
       - name: Canonical identity coverage
