@@ -666,7 +666,7 @@ function hydrateVerifiedArtworkCatalog(rows) {
   var paths = Object.create(null);
   rows.forEach(function(row) {
     var path = row && String(row.image_path || "");
-    if (/^images\\/列车\\/[^/]+\\/[^/]+\\.png$/.test(path)) paths["../" + path] = true;
+    if (path.startsWith("images/列车/") && path.endsWith(".png") && path.split("/").length === 4) paths["../" + path] = true;
   });
   _verifiedSqlArtworkPaths = paths;
   return true;
