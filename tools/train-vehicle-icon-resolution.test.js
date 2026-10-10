@@ -72,7 +72,8 @@ assert.ok(!fs.existsSync(path.join(ROOT, 'data/timetables/vehicle-type-map.js'))
 console.log('train-run operation evidence -> exact vehicle -> artwork projection: PASS');
 
 [
- ['JR E233系5000番台','JR東日本_E233系5000番台.png'],
+ ['JR E233系5000番台','JR東日本_E233系_5000番台.png'],
+ ['E233系3000番台','JR東日本_E233系_3000番台.png'],
  ['京急600形','京浜急行電鉄_600形.png'],
  ['京成3100形','京成電鉄_3100形.png'],
  ['東京メトロ15000系(10両)','東京メトロ_15000系.png'],
@@ -86,7 +87,7 @@ console.log('train-run operation evidence -> exact vehicle -> artwork projection
 });
 assert.strictEqual(context.window.TrainIcons.resolveVehicleArtwork('小田急8000形 / 小田急3000形'), null,
   'ambiguous multi-vehicle evidence must not project concrete artwork');
-console.log('expanded evidence-backed artwork: 9 PASS');
+console.log('expanded evidence-backed artwork: 10 PASS');
 
 // Database artwork rows are verified evidence, not a second train-type resolver.
 // A qualified type plus a proven formation is needed to display a SQL-only PNG.
