@@ -307,7 +307,10 @@ def main():
     # vehicle identity stay upstream. The guard protects the contract, not the
     # exact spelling of local variables, and never requires the retired
     # "circle" vocabulary.
-    if 'kind: iconSrc && !artworkFailed ? "vehicle" : "generic"' not in renderer_src:
+    if ('window.TrainVehicle.selectMarkerArtwork(p, artworkFailed)' not in renderer_src
+            or 'kind: iconSrc ? "vehicle" : "generic"' not in vehicle_src
+            or 'if (artworkFailed === true) iconSrc = "";' not in vehicle_src
+            or 'kind: artwork.kind === "vehicle" && artwork.iconSrc ? "vehicle" : "generic"' not in renderer_src):
         new_errors.append('TRAIN-001 TRAIN_MARKER_ARTWORK_BINARY_MISSING')
     if 'iconSrc ? "image" : "circle"' in renderer_src or 'outer.setAttribute("r", "8")' in renderer_src:
         new_errors.append('TRAIN-001 LEGACY_CIRCLE_TRAIN_MARKER_REINTRODUCED')
