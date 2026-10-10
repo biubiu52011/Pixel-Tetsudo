@@ -241,8 +241,8 @@ console.log('Yamanote realtime chain -> E235 PNG: 3 PASS');
     trainNumber:tn, serviceDate:'2026-10-05'
   });
   assert.strictEqual(estimateVehicle.identityStatus,'EXACT');
-  assert.ok(/JR東日本_E235系_0番台\\.png$/.test(estimateVehicle.iconPath||''),
-    tn + ' estimated train must project same confirmed PNG');
+  assert.ok((estimateVehicle.iconPath || '').endsWith('JR東日本_E235系_0番台.png'),
+    tn + ' estimated train must project same confirmed PNG: ' + estimateVehicle.iconPath);
 });
 const beforeReplacement = realCtx.window.TrainOperationEvidence.resolveEvidence('100G', {
   lineId:'Yamanote', railway:'odpt.Railway:JR-East.Yamanote',
