@@ -154,7 +154,7 @@ async function readManualTemplateRuns(db: any, lineId: string, serviceDate: stri
   let templates: any[] = [];
   for (const calendar of serviceCalendars(serviceDate)) {
     const selected = await pages((first, last) => db.from("manual_timetable_templates")
-      .select("id,line_key,calendar_urn,train_number,railway_urn,direction_urn,train_type_urn,destination_urns,vehicle_type_label")
+      .select("id,line_key,calendar_urn,train_number,railway_urn,direction_urn,train_type_urn,destination_urns,vehicle_type_label,physical_service_key")
       .eq("line_key", lineId).eq("calendar_urn", calendar).order("id").range(first, last));
     if (selected.length) { templates = selected; break; }
   }
@@ -177,7 +177,7 @@ async function readManualTemplateRuns(db: any, lineId: string, serviceDate: stri
   const result = templates.map((t) => {
     const operator = timetableOperator || /^odpt\.Railway:([^.]+)\./.exec(t.railway_urn || "")?.[1] || "";
     return {
-      id: "manual-template:" + t.id,
+      // Only SQL-certified identical itineraries share identity across line sources.\n      // Keep separate line records/stops; never dedupe by departure time alone.\n      id: t.physical_service_key || ("manual-template:" + t.id),
       line_id: lineId,
       service_date: serviceDate,
       calendar_type: calendarType(t.calendar_urn),
