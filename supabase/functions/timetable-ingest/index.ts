@@ -9,8 +9,9 @@ function reply(body: Record<string, unknown>, code = 200) {
 
 Deno.serve(async (request) => {
   if (request.method !== "POST") return reply({ ok: false, error: "METHOD_NOT_ALLOWED" }, 405);
-  // This function requires a valid JWT at the Supabase gateway AND an
-  // unpredictable single-use job nonce provisioned directly in private SQL.
+  // This import endpoint accepts only a high-entropy single-use job capability.
+  // Jobs are provisioned by privileged SQL, expire after 30 minutes, and are
+  // atomically claimed as running. Never disclose job nonces to clients.
   let jobId = "", nonce = "";
   try {
     const body = await request.json();
