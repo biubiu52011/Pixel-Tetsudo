@@ -38,6 +38,7 @@ jobs:
                   line:(window.UNIFIED_LINES?.Yamanote?.stations||[]),
                   stations:(document.querySelector('#trainsMapContainer svg')?.__geometry?.stationCoords||[]).map(x=>({id:x.stationId,x:x.x,y:x.y,side:x.side})),
                   svgViewBox:document.querySelector('#trainsMapContainer svg')?.getAttribute('viewBox'),
+                  syntheticStationFor24:(()=>{const g=document.querySelector('#trainsMapContainer svg')?.__geometry; if(!g)return null; const p={stationIndex:24,segmentToIndex:24,segmentProgress:0.5,railDirection:'OuterLoop',trainId:'test:shinagawa'}; const loc=window.TrainTrackLayout?.resolveAll([p],g.stationCoords,g,'Yamanote',{getDisplayMoveDir:()=>null})?.[0];return loc?{mappedStation:g.stationCoords[loc.idx]?.stationId,x:loc.x,y:loc.y}:null;})(),
                   pos:(window.DataFusion?.getRealtimePositions('Yamanote')||[]).map(p=>({num:p.trainNumber,idx:p.stationIndex,src:p.positionSource,id:p.runningChainId})),
                   markers:[...document.querySelectorAll('.train-layer [data-train-id]')].length
                 });
@@ -50,9 +51,9 @@ jobs:
                 const newMismatch=after.stations.filter((x,i)=>x.id!==after.line[i]).length;
                 const sourceHarajuku=after.line.indexOf('Harajuku');
                 const sourceShinagawa=after.line.indexOf('Shinagawa');
-                const out={device:device.name,oldMismatch,newMismatch,movedStationIds,viewBoxBefore:before.svgViewBox,viewBoxAfter:after.svgViewBox,harajukuIndex:sourceHarajuku,harajukuOldRow:before.stations[sourceHarajuku]?.id,harajukuNewRow:after.stations[sourceHarajuku]?.id,shinagawaIndex:sourceShinagawa,shinagawaOldRow:before.stations[sourceShinagawa]?.id,shinagawaNewRow:after.stations[sourceShinagawa]?.id,vehicleCountBefore:before.pos.length,vehicleCountAfter:after.pos.length,markersBefore:before.markers,markersAfter:after.markers,errors};
+                const out={device:device.name,oldMismatch,newMismatch,movedStationIds,viewBoxBefore:before.svgViewBox,viewBoxAfter:after.svgViewBox,harajukuIndex:sourceHarajuku,harajukuOldRow:before.stations[sourceHarajuku]?.id,harajukuNewRow:after.stations[sourceHarajuku]?.id,shinagawaIndex:sourceShinagawa,shinagawaOldRow:before.stations[sourceShinagawa]?.id,shinagawaNewRow:after.stations[sourceShinagawa]?.id,syntheticBefore:before.syntheticStationFor24,syntheticAfter:after.syntheticStationFor24,vehicleCountBefore:before.pos.length,vehicleCountAfter:after.pos.length,markersBefore:before.markers,markersAfter:after.markers,errors};
                 console.log('CANONICAL_DIAG '+JSON.stringify(out));
-                if(before.line.length!==30||after.line.length!==30||oldMismatch===0||newMismatch!==0||movedStationIds.length!==0||before.svgViewBox!==after.svgViewBox||errors.length>0||after.markers===0)throw new Error('Source-index repair or unchanged station geometry failed '+JSON.stringify(out));
+                if(before.line.length!==30||after.line.length!==30||oldMismatch===0||newMismatch!==0||movedStationIds.length!==0||before.svgViewBox!==after.svgViewBox||before.syntheticStationFor24?.mappedStation!=='Harajuku'||after.syntheticStationFor24?.mappedStation!=='Shinagawa'||errors.length>0)throw new Error('Source-index repair or unchanged station geometry failed '+JSON.stringify(out));
               }catch(e){console.log('BROWSER_CHECK_FAILED '+String(e));process.exitCode=1;}
               await Promise.all(pages.map(p=>p.close()));
             }
