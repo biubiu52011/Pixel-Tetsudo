@@ -75,19 +75,23 @@ assert.ok(!/req\.method === "POST"/.test(trainRunsReadThroughSrc),
 console.log('train-run-SQL-fallback: 5 PASS');
 
 assert.ok(/fallback_only/.test(trainRunsReadThroughSrc) &&
-  /source: "API_AVAILABLE"/.test(trainRunsReadThroughSrc) &&
+  /hasTimetableApi && url\.searchParams\.get\("fallback_only"\) !== "1"/.test(trainRunsReadThroughSrc) &&
+  !/source: "API_AVAILABLE"/.test(trainRunsReadThroughSrc) &&
   /const validRuns = result\.filter\(r => r\.stops\.length >= 2/.test(trainRunsReadThroughSrc) &&
   /r\.stops\.filter\(s => s\.arrival_time \|\| s\.departure_time\)\.length >= 2/.test(trainRunsReadThroughSrc) &&
   /omitted_incomplete_runs: omittedIncompleteRuns, runs: validRuns/.test(trainRunsReadThroughSrc) &&
   !/runs: complete \? result : \[\]/.test(
     trainRunsReadThroughSrc.split('async function readManualTemplateRuns')[1].split('Deno.serve')[0]),
-  'SQL-only fallback must bypass API-enabled lines and exclude incomplete runs without discarding verified ones');
+  'SQL-only read must work independently of API capability and exclude incomplete runs without discarding verified ones');
+assert.ok(/var sourcePromise = getCachedTrainRuns\(lineId\)\.then/.test(odptUnifiedSrc) &&
+  /return hasTimetableApi[\s\S]*self\.getCompleteTimetable\(op, identity\.odptRailway\)/.test(odptUnifiedSrc),
+  'all lines must prefer canonical SQL timetable before using direct provider timetable');
 assert.ok(/fallback_only=1/.test(odptUnifiedSrc) &&
   /vehicleType:run\.vehicle_type_label\|\|null/.test(odptUnifiedSrc) &&
   /body\.partial===true/.test(odptUnifiedSrc) &&
   /_timetableCoverage="partial"/.test(odptUnifiedSrc),
   'client must retain partial-coverage markers, verified runs, and manual vehicle evidence');
-console.log('train-run-SQL-completeness: 2 PASS');
+console.log('train-run-SQL-completeness: 3 PASS');
 
 const trainPositionEstimatorSrc = fs.readFileSync('js/train-position-estimator.js','utf8');
 assert.ok(/"_operationCode":run\.operation_code\|\|""/.test(odptUnifiedSrc),
