@@ -156,7 +156,7 @@ async function readManualTemplateRuns(db: any, lineId: string, serviceDate: stri
   let selectedCalendar: string | null = null;
   for (const calendar of serviceCalendars(serviceDate)) {
     const selected = await pages((first, last) => db.from("manual_timetable_templates")
-      .select("id,line_key,calendar_urn,train_number,railway_urn,direction_urn,train_type_urn,destination_urns,vehicle_type_label,physical_service_key")
+      .select("id,line_key,calendar_urn,train_number,railway_urn,direction_urn,train_type_urn,destination_urns,vehicle_type_label,physical_service_key,source_trip_id,previous_timetable_ids,next_timetable_ids,source_path,source_revision_date")
       .eq("line_key", lineId).eq("calendar_urn", calendar).order("id").range(first, last));
     if (selected.length) { templates = selected; selectedCalendar = calendar; break; }
   }
@@ -192,6 +192,11 @@ async function readManualTemplateRuns(db: any, lineId: string, serviceDate: stri
       train_type: t.train_type_urn,
       destination_station: t.destination_urns?.[0] || null,
       vehicle_type_label: t.vehicle_type_label || null,
+      source_trip_id: t.source_trip_id || null,
+      previous_timetable_ids: t.previous_timetable_ids || [],
+      next_timetable_ids: t.next_timetable_ids || [],
+      timetable_provenance: t.source_path || null,
+      source_revision_date: t.source_revision_date || null,
       stops: (byTemplate.get(t.id) || []).map((s: any) => {
         const urn = s.arrival_station_urn || s.departure_station_urn || "";
         return {
