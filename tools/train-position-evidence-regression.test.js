@@ -309,6 +309,21 @@ assert(fusionSource.includes('Object.keys(posMap).forEach(function(_vlid) {') &&
 assert(fusionSource.includes('if (!_activeChainIds[_cid] && (!_cv || !_cv.lastSeenAt ||'),
   'vehicle identity may expire only after the physical running chain is absent, not merely because realtime position disappeared');
 
+// Only DataFusion may merge physical positions. The old immediate manual
+// pass plus the second composite pass duplicated Yamanote SQL/ODPT trains.
+assert(estimatorSource.includes('estimated[lineId] = positions;') &&
+       !estimatorSource.includes('var _merged = existing.slice();'),
+  'TrainPositionEstimator must return estimates only, never remap realtime positions');
+assert(!fusionSource.includes('Composite mode: ') &&
+       !fusionSource.includes('ensureManual: " + lineId + " +'),
+  'obsolete manual position insertion path is still active');
+assert(fusionSource.includes('if (!posMap[lid]) posMap[lid] = [];') &&
+       fusionSource.includes('if ((_pid && _haveId[_pid]) ||') &&
+       !fusionSource.includes('posMap[lid] = _est.filter('),
+  'same-line duplicate source dedupe must also run when realtime is empty');
+assert(fusionSource.includes('null, // No parallel realtime merge inside TrainPositionEstimator.'),
+  'DataFusion must not feed a second realtime snapshot into the estimator');
+
 const runningChainSource = fs.readFileSync('js/running-chain-resolver.js','utf8');
 assert(!runningChainSource.includes('line.throughServices'),
   'running-chain adjacency must not read throughServices compatibility projection');

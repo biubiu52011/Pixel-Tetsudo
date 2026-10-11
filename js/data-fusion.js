@@ -1171,7 +1171,7 @@
               allLines,
               timetableSource,
               odptData.delayInfo,
-              posMap,
+              null, // No parallel realtime merge inside TrainPositionEstimator.
               { lineIds: requestedLineIds && requestedLineIds.length ? requestedLineIds : null }
             );
 
@@ -1326,95 +1326,56 @@
               // 此前 posMap 非空（有实时或直通插入列车）时推定列车全丢，
               // 导致副都心/千代田/日比谷/東西 等直通线页面只剩 1-3 列直通插入车（卡 join/末站），
               // 自社时刻表列车（银座/丸ノ内等无直通实时插入的线推定全量正常）完全缺失。
-              if (!posMap[lid] || posMap[lid].length === 0) {
-                posMap[lid] = _est.filter(function(p) { return mayUseTimetableEstimate(lid, p); });
-                estCount += posMap[lid].length;
-              } else {
-                var _haveId = {};
-                var _haveTrainNumber = {};
-                posMap[lid].forEach(function(p) {
-                  if (!p) return;
-                  if (_positionIdentity(p)) _haveId[_positionIdentity(p)] = true;
-                  if (p.trainNumber) _haveTrainNumber[String(p.trainNumber)] = true;
-                });
-                var _addN = 0;
-                _est.forEach(function(p) {
-                  if (!p || !mayUseTimetableEstimate(lid, p)) return;
-                  var _pid = _positionIdentity(p);
-                  // Canonical runningChainId is primary. Train number is the
-                  // conservative secondary guard for the same line when one side
-                  // has not yet received its chain id; never render both realtime
-                  // and estimated copies of the same physical train.
-                  if ((_pid && _haveId[_pid]) || (p.trainNumber && _haveTrainNumber[String(p.trainNumber)])) return;
-                  posMap[lid].push(p);
-                  if (_pid) _haveId[_pid] = true;
-                  if (p.trainNumber) _haveTrainNumber[String(p.trainNumber)] = true;
-                  _addN++;
-                });
-                estCount += _addN;
-                // v4.3.929: 实时位置有列车但无 destinationStation → 从推定位置补终点站
-                var _estById = {};
-                _est.forEach(function(p) { if (p && _positionIdentity(p)) _estById[_positionIdentity(p)] = p; });
-                posMap[lid].forEach(function(p) {
-                  if (p && _positionIdentity(p) && _estById[_positionIdentity(p)] && !p.destinationStation) {
-                    p.destinationStation = _estById[_positionIdentity(p)].destinationStation;
-                  }
-                });
-              }
+              // One merge path whether the live map is empty or populated.
+              // SQL, ODPT and manual rows may describe the same scheduled run
+              // with different object IDs; train number is a same-line
+              // secondary guard, never a replacement for the running-chain ID.
+              if (!posMap[lid]) posMap[lid] = [];
+              var _haveId = {};
+              var _haveTrainNumber = {};
+              posMap[lid].forEach(function(p) {
+                if (!p) return;
+                if (_positionIdentity(p)) _haveId[_positionIdentity(p)] = true;
+                if (p.trainNumber) _haveTrainNumber[String(p.trainNumber)] = true;
+              });
+              var _addN = 0;
+              _est.forEach(function(p) {
+                if (!p || !mayUseTimetableEstimate(lid, p)) return;
+                var _pid = _positionIdentity(p);
+                if ((_pid && _haveId[_pid]) ||
+                    (p.trainNumber && _haveTrainNumber[String(p.trainNumber)])) return;
+                posMap[lid].push(p);
+                if (_pid) _haveId[_pid] = true;
+                if (p.trainNumber) _haveTrainNumber[String(p.trainNumber)] = true;
+                _addN++;
+              });
+              estCount += _addN;
+              // Timetable may supplement a missing destination on a realtime
+              // position; it cannot overwrite realtime station or coordinates.
+              var _estById = {};
+              var _estByTrainNumber = {};
+              _est.forEach(function(p) {
+                if (!p) return;
+                if (_positionIdentity(p)) _estById[_positionIdentity(p)] = p;
+                if (p.trainNumber && !_estByTrainNumber[String(p.trainNumber)]) {
+                  _estByTrainNumber[String(p.trainNumber)] = p;
+                }
+              });
+              posMap[lid].forEach(function(p) {
+                if (!p || p.destinationStation) return;
+                var match = _positionIdentity(p) && _estById[_positionIdentity(p)];
+                if (!match && p.trainNumber) match = _estByTrainNumber[String(p.trainNumber)];
+                if (match && match.destinationStation) p.destinationStation = match.destinationStation;
+              });
             });
             if (estCount > 0) {
               console.debug("[DataFusion] Estimated", estCount, "train positions for", Object.keys(estimated).length, "lines");
             }
 
-            // v4.3.524: 复合模式——手动时刻表补充线（全部 ODPT 无 TrainTimetable 的 JR 本地线）。
-            // 用户诉求（2026-09-11）："不要出现中央本线那样上半段实时的下半段干干净净的"——
-            // 实时定位 + 推断复合：即使线路已有实时列车（ODPT 只推上半段），仍用手动时刻表
-            // 跑推定补全其余区段，按 trainId 合并去重（实时优先，推定只填实时没有的车次）。
-            // 数据文件 data/timetables/*-manual.js 为 JR 官网公开时刻表人工整理（ODPT 兼容格式）。
-            // 通用化：collectManualTimetableLines() 自动扫描 window.<lineId>_MANUAL_TIMETABLES（后缀 18 字符）。
-            var manualLines = (window.TrainPositionEstimator &&
-              typeof window.TrainPositionEstimator.getRegisteredManualLineIds === "function")
-              ? window.TrainPositionEstimator.getRegisteredManualLineIds() : [];
-            manualLines.forEach(function(manualLineId) {
-              if (requestedLineIds && requestedLineIds.length && requestedLineIds.indexOf(manualLineId) < 0) return;
-              if (!mayUseTimetablePosition(manualLineId)) return;
-              var manualTT = (window.TrainPositionEstimator &&
-                typeof window.TrainPositionEstimator.getRegisteredManualTimetable === "function")
-                ? window.TrainPositionEstimator.getRegisteredManualTimetable(manualLineId) : null;
-              if (!manualTT || !Array.isArray(manualTT) || manualTT.length === 0) return;
-              try {
-                manualTT.forEach(function(tt) { if (tt) tt._positionSource = "station-timetable"; });
-                var mLine = allLines[manualLineId];
-                if (mLine && mLine.stations) {
-                  var mEst = window.TrainPositionEstimator.estimateLinePositions(
-                    manualLineId, mLine, manualTT, odptData.delayInfo, mLine.operator
-                  );
-                  if (mEst && mEst.length > 0) {
-                    if (!posMap[manualLineId]) posMap[manualLineId] = [];
-                    var haveId = {};
-                    posMap[manualLineId].forEach(function(p) {
-                      var id = p && _positionIdentity(p);
-                      if (id) haveId[id] = true;
-                    });
-                    var mAdded = 0;
-                    mEst.forEach(function(p) {
-                      var id = p && _positionIdentity(p);
-                      if (id && !haveId[id] && mayUseTimetableEstimate(manualLineId, p)) {
-                        p.positionSource = "station-timetable";
-                        posMap[manualLineId].push(p);
-                        haveId[id] = true;
-                        mAdded++;
-                      }
-                    });
-                    if (mAdded > 0) {
-                      console.debug("[DataFusion] Composite mode: " + manualLineId + " +" + mAdded + " estimated (realtime " + (posMap[manualLineId].length - mAdded) + " + estimated " + mAdded + ")");
-                    }
-                  }
-                }
-              } catch(mErr) {
-                console.debug("[DataFusion] Composite mode error:", manualLineId, mErr.message);
-              }
-            });
+            // Manual timetable rows already enter the same estimator via
+            // registerManualTimetable(). A second manual-only position pass
+            // duplicated SQL/ODPT trains under different source identities.
+
           }
         } catch(estErr) { console.debug("[DataFusion] Position estimation error:", estErr.message); }
         finally { _perfRecord("doEstimation", _estPerfStart, { requested: requestedLineIds ? requestedLineIds.length : "all", positionLines: Object.keys(posMap || {}).length }); }
@@ -1810,37 +1771,9 @@
               if (window.TrainPositionEstimator && typeof window.TrainPositionEstimator.registerManualTimetable === "function") {
                 window.TrainPositionEstimator.registerManualTimetable(lineId, manualTT);
               }
-              var mLine = allLines[lineId];
-              if (mLine && mLine.stations && manualTT && manualTT.length > 0) {
-                manualTT.forEach(function(tt) {
-                  if (!tt) return;
-                  tt._positionSource = "station-timetable";
-                  // Manual timetable vehicleType is train-level evidence even
-                  // when FULL realtime policy forbids timetable-derived position.
-                  var _mTrainNo = tt["odpt:trainNumber"] || tt["odpt:train"] || "";
-                  var _mVehicle = tt["vehicleType"] || tt["odpt:vehicleType"] || "";
-                });
-                var mEst = window.TrainPositionEstimator.estimateLinePositions(
-                  lineId, mLine, manualTT, odptData.delayInfo, mLine.operator
-                );
-                if (mEst && mEst.length > 0) {
-                  if (!posMap[lineId]) posMap[lineId] = [];
-                  var haveId = {};
-                  posMap[lineId].forEach(function(p) { if (p && _positionIdentity(p)) haveId[_positionIdentity(p)] = true; });
-                  var mAdded = 0;
-                  mEst.forEach(function(p) {
-                    if (p && _positionIdentity(p) && !haveId[_positionIdentity(p)] && mayUseTimetableEstimate(lineId, p)) {
-                      p.positionSource = "station-timetable";
-                      posMap[lineId].push(p);
-                      haveId[_positionIdentity(p)] = true;
-                      mAdded++;
-                    }
-                  });
-                  if (mAdded > 0) {
-                    console.debug("[DataFusion] ensureManual: " + lineId + " +" + mAdded + " estimated trains");
-                  }
-                }
-              }
+              // Registration is evidence loading only. The single doEstimation()
+              // pass below decides whether a position may be added, preserving
+              // realtime priority and the coverage policy.
             } catch(mErr) { console.debug("[DataFusion] ensureManual->mergeManual error:", mErr.message); }
             try {
               var _manualTargets = _expandDirtyLines([lineId], allLines);
