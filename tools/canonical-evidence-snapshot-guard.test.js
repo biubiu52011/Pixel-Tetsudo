@@ -16,7 +16,16 @@ assert.equal(snapshot.generatedFrom, "Supabase canonical evidence tables");
 assert(Array.isArray(snapshot.records), "snapshot records must be an array");
 assert(Array.isArray(snapshot.datedRecords), "snapshot datedRecords must be an array");
 assert(Array.isArray(snapshot.familyRules), "snapshot familyRules must be an array");
-assert(snapshot.familyRules.length === 36, "canonical family-rule inventory must contain all 36 rules");
+assert(snapshot.familyRules.length >= 36, "canonical family-rule inventory unexpectedly lost baseline rules");
+assert(snapshot.familyRules.some(r=>r.networkKey==="chiyoda-joban-odakyu" &&
+  r.codePattern==="01S-61S" && r.exactVehicleType==="東京メトロ16000系"),
+  "Chiyoda mainline S assignments must use the explicit 16000-series range");
+assert(snapshot.familyRules.some(r=>r.networkKey==="chiyoda-joban-odakyu" &&
+  r.codePattern==="96S" && r.exactVehicleType==="東京メトロ05系（千代田支線）"),
+  "Chiyoda 96S branch operation must preserve its distinct fleet identity");
+assert(!snapshot.familyRules.some(r=>r.networkKey==="chiyoda-joban-odakyu" &&
+  r.codePattern==="*S"),
+  "outdated broad Chiyoda *S family rule must not override branch-specific evidence");
 assert(snapshot.familyRules.some(r=>r.networkKey==="Yamanote" && r.codePattern==="*" && r.exactVehicleType==="E235系0番台（山手線）"),
   "Yamanote fleet E235-0 exact rule missing");
 assert(snapshot.familyRules.some(r=>r.networkKey==="setagaya" && r.codePattern==="*" && r.exactVehicleType==="東急300系"),
