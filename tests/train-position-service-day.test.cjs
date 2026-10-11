@@ -48,3 +48,54 @@ test('explicit operator calendar override takes priority over published holidays
   assert.equal(estimatorAt(2026, 10, 12, 12, 0, overrides).getCurrentCalendar(), 'odpt.Calendar:Weekday');
   assert.equal(estimatorAt(2026, 10, 9, 12, 0, overrides).getCurrentCalendar(), 'odpt.Calendar:Holiday');
 });
+
+
+const runningChainSource = fs.readFileSync(path.join(__dirname, '../js/running-chain-resolver.js'), 'utf8');
+function testThroughResolver() {
+  const window = {
+    UNIFIED_LINES: {
+      Metro: { serviceBoundaries: [{ lineId: 'Tobu', handoverStations: ['KitaSenju'] }] },
+      Tobu: { serviceBoundaries: [{ lineId: 'Metro', handoverStations: ['KitaSenju'] }] }
+    }
+  };
+  vm.runInNewContext(runningChainSource, { window, console });
+  return window.RunningChainResolver;
+}
+function segment(number, railway, firstStation, firstClock, lastStation, lastClock) {
+  return {
+    'odpt:trainNumber': number,
+    'odpt:railway': railway,
+    'odpt:trainTimetableObject': [
+      { 'odpt:departureStation': firstStation, 'odpt:departureTime': firstClock },
+      { 'odpt:arrivalStation': lastStation, 'odpt:arrivalTime': lastClock }
+    ]
+  };
+}
+test('validated Metro-to-Tobu through chain merges unique consecutive train segments', () => {
+  const resolver = testThroughResolver();
+  const metro = segment('A1000', 'Metro', 'Nakameguro', '10:00', 'KitaSenju', '10:30');
+  const tobu = segment('B2200', 'Tobu', 'KitaSenju', '10:30', 'Kuki', '11:12');
+  const matched = resolver.resolveTimetableChain(metro, 'Metro', [{ lineId: 'Tobu', timetable: tobu }]);
+  assert.equal(matched.segmentCount, 2);
+  assert.equal(matched.timeGapMin, 0);
+  assert.match(matched.evidence, /TRAIN_NUMBER_CHANGED/);
+});
+test('through-service evidence rejects two equally possible partner trains', () => {
+  const resolver = testThroughResolver();
+  const metro = segment('A1000', 'Metro', 'Nakameguro', '10:00', 'KitaSenju', '10:30');
+  const tobuA = segment('B2200', 'Tobu', 'KitaSenju', '10:30', 'Kuki', '11:12');
+  const tobuB = segment('B3300', 'Tobu', 'KitaSenju', '10:30', 'Kuki', '11:12');
+  const result = resolver.resolveTimetableChain(metro, 'Metro', [
+    { lineId: 'Tobu', timetable: tobuA }, { lineId: 'Tobu', timetable: tobuB }
+  ]);
+  assert.equal(result.evidence, 'NO_CONFIRMED_BOUNDARY');
+  assert.equal(result.segmentCount, undefined);
+});
+test('same departure clock cannot imply a physical train without a boundary match', () => {
+  const resolver = testThroughResolver();
+  const metro = segment('A1000', 'Metro', 'Nakameguro', '10:00', 'KitaSenju', '10:30');
+  const unrelated = segment('B2200', 'Tobu', 'Asakusa', '10:00', 'Kuki', '11:12');
+  assert.equal(resolver.resolveTimetableChain(metro, 'Metro', [
+    { lineId: 'Tobu', timetable: unrelated }
+  ]).evidence, 'NO_CONFIRMED_BOUNDARY');
+});
