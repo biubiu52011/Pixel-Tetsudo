@@ -99,3 +99,45 @@ test('same departure clock cannot imply a physical train without a boundary matc
     { lineId: 'Tobu', timetable: unrelated }
   ]).evidence, 'NO_CONFIRMED_BOUNDARY');
 });
+
+
+test('source-provided train IDs corroborate a uniquely matched through-service boundary', () => {
+  const resolver = testThroughResolver();
+  const metro = segment('A1000', 'Metro', 'Nakameguro', '10:00', 'KitaSenju', '10:30');
+  const tobu = segment('B2200', 'Tobu', 'KitaSenju', '10:30', 'Kuki', '11:12');
+  metro._sourceTripId = 'TokyoMetro.Hibiya.A1000.Weekday';
+  metro._nextTimetableIds = ['Tobu.Skytree.B2200.Weekday'];
+  tobu._sourceTripId = 'Tobu.Skytree.B2200.Weekday';
+  tobu._previousTimetableIds = ['TokyoMetro.Hibiya.A1000.Weekday'];
+  const result = resolver.resolveTimetableChain(metro, 'Metro', [{ lineId: 'Tobu', timetable: tobu }]);
+  assert.equal(result.segmentCount, 2);
+  assert.equal(result.evidence, 'CONFIRMED_BOUNDARY+SOURCE_TIMETABLE_LINK');
+});
+
+test('one unique source-linked candidate disambiguates two simultaneous transfers', () => {
+  const resolver = testThroughResolver();
+  const metro = segment('A1000', 'Metro', 'Nakameguro', '10:00', 'KitaSenju', '10:30');
+  metro._sourceTripId = 'TokyoMetro.Hibiya.A1000.Weekday';
+  metro._nextTimetableIds = ['Tobu.Skytree.B2200.Weekday'];
+  const tobu = segment('B2200', 'Tobu', 'KitaSenju', '10:30', 'Kuki', '11:12');
+  tobu._sourceTripId = 'Tobu.Skytree.B2200.Weekday';
+  const decoy = segment('B3300', 'Tobu', 'KitaSenju', '10:30', 'Kuki', '11:12');
+  decoy._sourceTripId = 'Tobu.Skytree.B3300.Weekday';
+  const result = resolver.resolveTimetableChain(metro, 'Metro', [
+    { lineId: 'Tobu', timetable: decoy }, { lineId: 'Tobu', timetable: tobu }
+  ]);
+  assert.equal(result.segmentCount, 2);
+  assert.equal(result.evidence, 'CONFIRMED_BOUNDARY+SOURCE_TIMETABLE_LINK');
+});
+
+test('source link cannot cross an unverified station boundary', () => {
+  const resolver = testThroughResolver();
+  const metro = segment('A1000', 'Metro', 'Nakameguro', '10:00', 'KitaSenju', '10:30');
+  const tobu = segment('B2200', 'Tobu', 'Asakusa', '10:30', 'Kuki', '11:12');
+  metro._sourceTripId = 'TokyoMetro.Hibiya.A1000.Weekday';
+  metro._nextTimetableIds = ['Tobu.Skytree.B2200.Weekday'];
+  tobu._sourceTripId = 'Tobu.Skytree.B2200.Weekday';
+  assert.equal(resolver.resolveTimetableChain(metro, 'Metro', [
+    { lineId: 'Tobu', timetable: tobu }
+  ]).evidence, 'NO_CONFIRMED_BOUNDARY');
+});
