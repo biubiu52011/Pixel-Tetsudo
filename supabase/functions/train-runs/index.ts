@@ -153,11 +153,12 @@ async function readManualTemplateRuns(db: any, lineId: string, serviceDate: stri
     throw new Error("SQL_RESULT_TOO_LARGE");
   }
   let templates: any[] = [];
+  let selectedCalendar: string | null = null;
   for (const calendar of serviceCalendars(serviceDate)) {
     const selected = await pages((first, last) => db.from("manual_timetable_templates")
       .select("id,line_key,calendar_urn,train_number,railway_urn,direction_urn,train_type_urn,destination_urns,vehicle_type_label,physical_service_key")
       .eq("line_key", lineId).eq("calendar_urn", calendar).order("id").range(first, last));
-    if (selected.length) { templates = selected; break; }
+    if (selected.length) { templates = selected; selectedCalendar = calendar; break; }
   }
   if (!templates.length) return json({ ok: true, complete: false, cache: "MISS",
     source: "NO_API_NO_DATA", line_id: lineId, service_date: serviceDate, runs: [] });
@@ -212,7 +213,17 @@ async function readManualTemplateRuns(db: any, lineId: string, serviceDate: stri
   const validRuns = result.filter(r => r.stops.length >= 2 &&
     r.stops.every(s => !!s.station_urn) &&
     r.stops.filter(s => s.arrival_time || s.departure_time).length >= 2);
-  const omittedIncompleteRuns = result.length - validRuns.length;
+  let omittedIncompleteRuns = result.length - validRuns.length;
+  // A source may contain unusable upstream rows intentionally omitted from SQL.
+  // Preserve that partial status rather than claiming full line coverage.
+  if (selectedCalendar) {
+    const { data: ingest, error: ingestError } = await db.from("timetable_ingest_jobs")
+      .select("omitted_count").eq("line_id", lineId).eq("calendar_urn", selectedCalendar)
+      .in("status", ["partial", "complete"])
+      .order("updated_at", { ascending: false }).limit(1).maybeSingle();
+    if (ingestError) throw ingestError;
+    omittedIncompleteRuns += Math.max(0, Number(ingest?.omitted_count) || 0);
+  }
   const complete = validRuns.length > 0 && omittedIncompleteRuns === 0;
   const partial = validRuns.length > 0 && omittedIncompleteRuns > 0;
   return json({ ok: true, complete, partial,
