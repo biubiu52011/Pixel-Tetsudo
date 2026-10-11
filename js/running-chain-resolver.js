@@ -46,7 +46,7 @@
   }
 
   function _stationKey(v){var p=String(v||"").split(".");return p[p.length-1]||"";}
-  function _timeMin(v){if(!v)return null;var m=String(v).match(/^(\\d{1,2}):(\\d{2})/);if(!m)return null;return parseInt(m[1],10)*60+parseInt(m[2],10);}
+  function _timeMin(v){if(!v)return null;var m=String(v).match(/^(\d{1,2}):(\d{2})/);if(!m)return null;return parseInt(m[1],10)*60+parseInt(m[2],10);}
   function _segment(tt,lineId){
     var a=(tt&&tt["odpt:trainTimetableObject"])||[]; if(!a.length)return null;
     var first=a[0]||{}, last=a[a.length-1]||{};
