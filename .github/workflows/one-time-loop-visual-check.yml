@@ -1,0 +1,61 @@
+name: One-time loop map visual check
+on:
+  push:
+    branches: [fix/double-column-loop-readability-20261011]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '20'
+      - name: Install Chromium
+        run: |
+          npm install --no-save --no-audit --no-fund playwright@1.56.1
+          npx playwright install chromium
+      - name: Inspect branch Yamanote in Chromium
+        shell: bash
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/pixel-train-probe-http.log 2>&1 &
+          node <<'NODE'
+          const { chromium }=require('playwright');
+          (async()=>{
+            const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
+            for(const [name,width,height] of [['desktop',1190,900],['mobile',390,830]]){
+              const page=await browser.newPage({viewport:{width,height},deviceScaleFactor:1,timezoneId:'Asia/Tokyo',locale:'ja-JP'});
+              const errors=[],fail=[];
+              page.on('pageerror',e=>errors.push(String(e).slice(0,140)));
+              page.on('requestfailed',r=>fail.push(r.url().slice(0,90)+':'+(r.failure()?.errorText||'')));
+              try{
+                const resp=await page.goto('http://127.0.0.1:8765/pages/trains.html#Yamanote',{waitUntil:'domcontentloaded',timeout:50000});
+                try{await page.waitForFunction(()=>document.querySelector('#trainsMapContainer svg')&&document.querySelectorAll('.train-layer image').length>0,{timeout:24000});}catch(e){}
+                await page.waitForTimeout(9000);
+                const data=await page.evaluate(()=>{
+                  const svg=document.querySelector('#trainsMapContainer svg');
+                  const rects=sel=>[...(svg?.querySelectorAll(sel)||[])].map((el,i)=>{const r=el.getBoundingClientRect();return {i,text:el.textContent?.trim().slice(0,15),x:r.x,y:r.y,w:r.width,h:r.height};}).filter(r=>r.w&&r.h);
+                  const station=rects('.static-layer > text');
+                  const vehicle=rects('.train-layer image[data-train-id]');
+                  const dir=rects('.train-layer g[data-train-label-for]');
+                  function overlaps(a,b){let items=[];for(const x of a)for(const y of b){const w=Math.min(x.x+x.w,y.x+y.w)-Math.max(x.x,y.x),h=Math.min(x.y+x.h,y.y+y.h)-Math.max(x.y,y.y);if(w>3&&h>3)items.push({a:x.text||x.i,b:y.text||y.i,w:Math.round(w),h:Math.round(h)});}return {count:items.length,first:items.slice(0,9)};}
+                  const pp=window.DataFusion?.getRealtimePositions('Yamanote')||[];
+                  const geom=svg?.__geometry;
+                  const est=pp.filter(x=>x.positionSource!=='realtime-api');
+                  const stations=geom?.stationCoords||[];
+                  return {detail:!document.querySelector('#trainsDetailView')?.classList.contains('hidden'),svgW:geom?.svgW,rectW:stations._loopRect?.rectW,lineId:svg?.getAttribute('data-line-id'),columns:stations.length,positions:pp.length,vehicle:vehicle.length,dir:dir.length,estimated:est.map(p=>({no:p.trainNumber,id:p.trainId,station:p.stationIndex,to:p.segmentToIndex,source:p.positionSource,confidence:p.confidence,reason:p.estimationReason,runningChainId:p.runningChainId})),sources:pp.reduce((a,x)=>(a[x.positionSource||'unknown']=(a[x.positionSource||'unknown']||0)+1,a),{}),collisions:{stationVehicle:overlaps(station,vehicle),stationDirection:overlaps(station,dir),directionVehicle:overlaps(dir,vehicle)},railX:stations._loopRect&&[stations._loopRect.cx-stations._loopRect.halfW,stations._loopRect.cx+stations._loopRect.halfW]};
+                });
+                console.log('VISUAL_CHECK '+name+' '+JSON.stringify({http:resp?.status(),...data,errors:errors.slice(0,5),failedRequests:fail.slice(0,5)}));
+                if(name==='desktop'){
+                  await page.locator('#trainsMapContainer svg').evaluate(el=>el.scrollIntoView({block:'start'}));
+                  const bytes=await page.screenshot({type:'jpeg',quality:35});
+                  console.log('DESKTOP_IMAGE '+bytes.toString('base64'));
+                }
+              }catch(e){console.log('VISUAL_CHECK_ERROR '+name+' '+(e?.stack||e));process.exitCode=1;}
+              await page.close();
+            }
+            await browser.close();
+          })();
+          NODE
