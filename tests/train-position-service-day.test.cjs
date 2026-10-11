@@ -141,3 +141,9 @@ test('source link cannot cross an unverified station boundary', () => {
     { lineId: 'Tobu', timetable: tobu }
   ]).evidence, 'NO_CONFIRMED_BOUNDARY');
 });
+
+test('station alias identities from supplied SQL timetables match existing canonical map keys', () => {
+  const estimator = estimatorAt(2026, 10, 11, 12, 0);
+  assert.equal(estimator.normalizeStationKey('KokuKoen'), estimator.normalizeStationKey('Kokuko-koen'));
+  assert.equal(estimator.normalizeStationKey('Shiraitodai'), estimator.normalizeStationKey('Shiroitai'));
+});
