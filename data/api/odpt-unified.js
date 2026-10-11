@@ -787,12 +787,17 @@
                     timetablePromises.push(_realtimeActivationInflight[lineId]);
                     return;
                 }
-                // The current ODPT client owns both sources: API if available,
-                // otherwise the existing database-backed manual timetable endpoint.
+                // SQL timetable is the common evidence source for ALL lines.
+                // The ODPT API remains the read-only fallback until a verified
+                // database snapshot has actually been imported for this railway.
+                // Realtime train-position polling is independent of this choice.
                 var hasTimetableApi = !!(ODPT_ENDPOINTS[op] && ODPT_ENDPOINTS[op].trainTimetable);
-                var sourcePromise = hasTimetableApi
-                    ? self.getCompleteTimetable(op, identity.odptRailway)
-                    : getCachedTrainRuns(lineId);
+                var sourcePromise = getCachedTrainRuns(lineId).then(function(sqlRows) {
+                    if (sqlRows && sqlRows.length > 0) return sqlRows;
+                    return hasTimetableApi
+                        ? self.getCompleteTimetable(op, identity.odptRailway)
+                        : [];
+                });
                 _realtimeActivationInflight[lineId] = sourcePromise.then(function(rows) {
                     if (!rows || !rows.length) return;
                     if (!window.ODPT_TIMETABLES) window.ODPT_TIMETABLES = {};
