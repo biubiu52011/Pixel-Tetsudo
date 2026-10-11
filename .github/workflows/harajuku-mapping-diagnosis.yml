@@ -1,0 +1,55 @@
+name: Temporary Harajuku mapping diagnosis
+on:
+  push:
+    branches: [probe/harajuku-mapping-20261012]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '20'
+      - name: Install Chromium
+        run: |
+          npm install --no-save --no-audit --no-fund playwright@1.56.1
+          npx playwright install chromium
+      - name: Diagnose actual deployed Harajuku mappings
+        run: |
+          node <<'NODE'
+          const { chromium }=require('playwright');
+          (async()=>{
+            const b=await chromium.launch({headless:true,args:['--no-sandbox']});
+            const p=await b.newPage({timezoneId:'Asia/Tokyo',locale:'ja-JP',viewport:{width:1190,height:850}});
+            const err=[];p.on('pageerror',e=>err.push(String(e).slice(0,200)));
+            try {
+              await p.goto('https://biubiu52011.github.io/Pixel-Tetsudo/pages/trains.html#Yamanote',{waitUntil:'domcontentloaded',timeout:45000});
+              try{await p.waitForFunction(()=>document.querySelector('#trainsMapContainer svg')&&window.DataFusion?.getRealtimePositions('Yamanote')?.length>0,{timeout:30000});}catch(e){}
+              await p.waitForTimeout(14000);
+              let v=await p.evaluate(()=>{
+                const svg=document.querySelector('#trainsMapContainer svg');
+                const geo=svg?.__geometry||{};
+                const st=geo.stationCoords||[];
+                const idx=st.findIndex(s=>/harajuku/i.test(s.stationId));
+                const positions=window.DataFusion?.getRealtimePositions('Yamanote')||[];
+                const summary=p=>({num:p.trainNumber,idx:p.stationIndex,to:p.segmentToIndex,progress:p.segmentProgress,stationId:p.stationId,src:p.positionSource,id:p.trainId,sourceId:p.sourceTrainId,chain:p.runningChainId,tt:p.timetableIdentity,dir:p.railDirection,dest:p.destinationStation,start:p.startingStation,valid:p.sourceValidUntil,update:p.sourceUpdatedAt,vehicle:p.vehicleType});
+                const samples=positions.filter(p=>p.stationIndex!=null&&Math.abs(p.stationIndex-idx)<=3).map(summary);
+                const allEst=positions.filter(p=>p.positionSource!=='realtime-api').map(summary);
+                const byNumber={};positions.forEach(p=>{let k=String(p.trainNumber||'').trim().toUpperCase();if(k)(byNumber[k]=byNumber[k]||[]).push(summary(p));});
+                const duplicates=Object.entries(byNumber).filter(([k,v])=>v.length>1);
+                const svgRows=[...svg?.querySelectorAll('.train-layer image[data-train-id]')||[]].map(x=>({key:x.getAttribute('data-train-id'),x:x.getAttribute('x'),y:x.getAttribute('y'),href:x.getAttribute('href')}));
+                const nearest=svgRows.filter(x=>{const y=Number(x.y)+9;return idx>=0&&Math.abs(y-st[idx].y)<=100});
+                const dataLine=window.UNIFIED_LINES?.Yamanote;
+                const allStations=(dataLine?.stations||[]).map((id,index)=>({id,index})).filter(x=>idx>=0&&Math.abs(x.index-idx)<=3);
+                return {time:new Date().toISOString(),idx,station:st[idx],nearStationList:st.slice(Math.max(0,idx-4),idx+5).map((x,k)=>({id:x.stationId,idx:Math.max(0,idx-4)+k,loc:{x:x.x,y:x.y}})),lineStations:allStations,total:positions.length,sourceCounts:positions.reduce((a,p)=>(a[p.positionSource||'unknown']=(a[p.positionSource||'unknown']||0)+1,a),{}),nearby:samples,estimated:allEst,duplicateNumbers:duplicates,nearbyMarkers:nearest,markers:svgRows.length,manualRegistryCount:window.TrainPositionEstimator?.getManualTimetable?.('Yamanote')?.length,otherKeys:Object.keys(window.DataFusion||{})};
+              });
+              console.log('HARAJUKU_DIAG_START');
+              console.log(JSON.stringify({data:v,errors:err}));
+              console.log('HARAJUKU_DIAG_END');
+            } catch(e){console.log('HARAJUKU_DIAG_ERROR '+(e?.stack||e));process.exitCode=1;}
+            await b.close();
+          })();
+          NODE
