@@ -34,7 +34,6 @@ assert(/!hasExplicitValidity && d !== provider\.effectiveDate/.test(tobuEvidence
   "undated Tobu timetable rows must not become open-ended vehicle assignments");
 const renderer=read("js/trains-render.js");
 const diagramGeometry=read("js/trains-geometry.js");
-const trackLayoutSource=read("js/train-track-layout.js");
 assert(diagramGeometry.includes('svgW = rectW + (_isMobileView() ? 225 : 240);'),
   "loop geometry must include the dynamic track width (conditional precedence)");
 assert(diagramGeometry.includes('isDoubleColumnLoop: line.isDoubleColumnLoop === true,') &&
