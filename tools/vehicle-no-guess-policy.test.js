@@ -133,8 +133,10 @@ console.log('vehicle no-guess policy: PASS');
 const vehicleResolverSrc = fs.readFileSync('js/train-vehicle.js','utf8');
 assert(!vehicleResolverSrc.includes('Lower-priority evidence is fallback'),
   'vehicle resolver must not contain source-priority fallback');
-assert(vehicleResolverSrc.includes('_uniqueIdentities.length === 1'),
-  'EXACT vehicle identity must require one unique identity across admitted evidence');
+assert(vehicleResolverSrc.includes("var chosen = orderArr.length === 1 ? orderArr[0] : '';") &&
+       vehicleResolverSrc.includes('var canonical = resolveCanonicalVehicle(raw);') &&
+       !vehicleResolverSrc.includes('var _uniqueIdentities = []'),
+  'EXACT vehicle identity must require one unique canonical identity, using one source arbitration pass');
 assert(vehicleResolverSrc.includes("identityReason = 'unique-converged-vehicle-evidence'"),
   'EXACT status must document unique converged evidence');
 console.log('vehicle evidence uniqueness: 3 PASS');
