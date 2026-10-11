@@ -33,6 +33,16 @@ assert(/if \(!d\) return null;/.test(tobuEvidence),
 assert(/!hasExplicitValidity && d !== provider\.effectiveDate/.test(tobuEvidence),
   "undated Tobu timetable rows must not become open-ended vehicle assignments");
 const renderer=read("js/trains-render.js");
+const geometrySource=read("js/trains-geometry.js");
+// On the two-column loop, visible placement order differs from the canonical
+// station order. Position evidence always indexes canonical line.stations.
+assert(/loopPts\[_sourceRi\]\s*=\s*\{/.test(geometrySource) &&
+       /var _sourceRi = _rightSeq\[ri\];/.test(geometrySource) &&
+       /loopPts\[_sourceLi\]\s*=\s*\{/.test(geometrySource) &&
+       /var _sourceLi = 9 \+ li;/.test(geometrySource),
+  "double-column coordinates must be keyed by canonical station index (Harajuku/Shinagawa)");
+assert(!/loopPts\.push\(\{ x: cx \+ halfW, y: cy - halfH \+ _tR/.test(geometrySource),
+  "visual row order must not replace source stationIndex in the train layout");
 const trackLayoutSource=read("js/train-track-layout.js");
 const trainsCssSource=read("css/trains.css");
 assert(!/transition:\s*x\s+14s[\s\S]{0,120}y\s+14s/.test(trainsCssSource),
