@@ -1,0 +1,69 @@
+name: Temporary Yamanote Live Visual Probe
+on:
+  push:
+    branches: [probe/yamanote-live-20261011]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install browser
+        run: |
+          npm install --no-save --no-audit --no-fund playwright@1.56.1
+          npx playwright install chromium
+      - name: Inspect deployed Yamanote in actual Chromium
+        shell: bash
+        run: |
+          node <<'NODE'
+          const {chromium}=require('playwright');
+          (async () => {
+            const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
+            const page=await browser.newPage({viewport:{width:1190,height:820},deviceScaleFactor:1,timezoneId:'Asia/Tokyo',locale:'ja-JP'});
+            const errors=[],failed=[];
+            page.on('pageerror',e=>errors.push(String(e).slice(0,250)));
+            page.on('requestfailed',req=>failed.push({url:req.url().slice(0,145),failure:req.failure()?.errorText}));
+            try{
+              const resp=await page.goto('https://biubiu52011.github.io/Pixel-Tetsudo/pages/trains.html#Yamanote',{waitUntil:'domcontentloaded',timeout:60000});
+              try{await page.waitForFunction(()=>document.querySelector('#trainsDetailView')&&!document.querySelector('#trainsDetailView').classList.contains('hidden'),{timeout:25000});}catch(e){}
+              await page.waitForTimeout(18000);
+              const inspect=await page.evaluate(()=>{
+                const p=window.DataFusion?.getRealtimePositions('Yamanote')||[];
+                const f=window.DataFusion?.getLine('Yamanote');
+                const rendered=[...document.querySelectorAll('.train-layer [data-train-id]')];
+                const numbers={};p.forEach(x=>{if(x.trainNumber)(numbers[x.trainNumber]||=[]).push({id:x.runningChainId||x.trainId,positionSource:x.positionSource,vehicleType:x.vehicleType,icon:x.vehicleIconPath})});
+                return {
+                  title:document.title,hash:location.hash,detailVisible:!document.querySelector('#trainsDetailView')?.classList.contains('hidden'),
+                  detailTitle:document.querySelector('#trainsDetailTitle')?.textContent?.trim(),mapPresent:!!document.querySelector('#trainsMapContainer svg'),
+                  dataReady:!!window.DataFusion,trackedPositionCount:p.length,renderedMarkerCount:rendered.length,
+                  markerKinds:rendered.reduce((a,x)=>(a[x.getAttribute('data-marker-kind')||'unknown']=(a[x.getAttribute('data-marker-kind')||'unknown']||0)+1,a),{}),
+                  markerIcons:rendered.slice(0,7).map(x=>({uid:x.getAttribute('data-train-id'),kind:x.getAttribute('data-marker-kind'),href:x.getAttribute('href')})),
+                  duplicates:Object.entries(numbers).filter(([_,v])=>v.length>1).slice(0,10).map(([n,v])=>({number:n,rows:v})),
+                  positionSources:p.reduce((a,x)=>(a[x.positionSource||'unknown']=(a[x.positionSource||'unknown']||0)+1,a),{}),
+                  confirmedE235:p.filter(x=>/E235/.test(x.vehicleType||'')).length,
+                  neutral:p.filter(x=>x.vehicleIdentityStatus!=='EXACT').length,
+                  samplePositions:p.slice(0,8).map(x=>({no:x.trainNumber,source:x.positionSource,type:x.vehicleType,chain:x.runningChainId})),
+                  fusedCount:f?.realtimePositions?.length,
+                  selectedDOM:document.querySelector('#trainsMapContainer')?.textContent?.trim().slice(0,500)
+                }
+              });
+              console.log('PROBE_RESULT_START');
+              console.log(JSON.stringify({httpStatus:resp?.status(),...inspect,errors:errors.slice(0,10),failedRequests:failed.slice(0,12)}));
+              console.log('PROBE_RESULT_END');
+              const map=page.locator('#trainsMapContainer');
+              if(await map.isVisible()){await map.scrollIntoViewIfNeeded().catch(()=>{});}
+              const bytes=await page.screenshot({type:'jpeg',quality:32,fullPage:false});
+              console.log('PROBE_IMAGE_START');
+              console.log(bytes.toString('base64'));
+              console.log('PROBE_IMAGE_END');
+            }catch(e){console.log('PROBE_ERROR',e?.stack||String(e));process.exitCode=1;}
+            finally{await browser.close();}
+          })();
+          NODE
