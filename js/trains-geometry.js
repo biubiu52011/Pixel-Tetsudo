@@ -489,13 +489,20 @@
           svgH = rectH + (_isMobileView() ? 150 : 160); // v4.3.882: 加括号（运算符优先级 bug 修复）
           cy = svgH / 2;
         }
+        // Geometry is visually sorted top-to-bottom, but train positions use
+        // canonical line.stations indices. Keep the *same* x/y/side at every
+        // station and store the point at its canonical index; otherwise a
+        // Shinagawa position (24) is mistakenly displayed at Harajuku (24th
+        // point in the visual-order array).
         for (var ri = 0; ri < _rightSeq.length; ri++) {
           var _tR = (ri + 0.5) / _rightSeq.length;
-          loopPts.push({ x: cx + halfW, y: cy - halfH + _tR * rectH, side: "right", stationId: stations[_rightSeq[ri]] });
+          var _sourceRi = _rightSeq[ri];
+          loopPts[_sourceRi] = { x: cx + halfW, y: cy - halfH + _tR * rectH, side: "right", stationId: stations[_sourceRi] };
         }
         for (var li = 0; li < 15; li++) {
           var _tL = (li + 0.5) / 15;
-          loopPts.push({ x: cx - halfW, y: cy - halfH + _tL * rectH, side: "left", stationId: stations[9 + li] });
+          var _sourceLi = 9 + li;
+          loopPts[_sourceLi] = { x: cx - halfW, y: cy - halfH + _tL * rectH, side: "left", stationId: stations[_sourceLi] };
         }
       } else {
         var perimeter = 2 * (rectW + rectH);
