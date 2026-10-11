@@ -114,7 +114,12 @@
           if(!x.ev.numberChanged)return false;
           return x.a===ec.a||x.b===ec.a||x.a===ec.b||x.b===ec.b;
         });
-        if(peers.length!==1)return;
+        if(peers.length!==1) {
+          // A unique explicit source link can distinguish otherwise identical
+          // transfer-time candidates. Ambiguous or unlinked candidates stay out.
+          var linkedPeers=peers.filter(function(x){return x.ev.sourceLinked;});
+          if(!ev.sourceLinked||linkedPeers.length!==1)return;
+        }
       }
       var ak=ec.a.lineId+"|"+ec.a.id,bk=ec.b.lineId+"|"+ec.b.id;
       adj[ak].push({key:bk,ev:ev});adj[bk].push({key:ak,ev:ev});
