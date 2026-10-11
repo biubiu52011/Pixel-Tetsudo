@@ -99,8 +99,29 @@ Deno.serve(async (request) => {
     if (!Array.isArray(rows)) throw new Error("UPSTREAM_NOT_ARRAY");
     if (rows.length >= 1000) throw new Error("UPSTREAM_POSSIBLY_TRUNCATED");
     if (!rows.length) {
+      // Investigate an empty railway-scoped response without guessing a
+      // replacement railway identity or importing unrelated operator rows.
+      let evidence = "UPSTREAM_EMPTY";
+      try {
+        const probe = new URL(url.toString());
+        probe.searchParams.delete("odpt:railway");
+        const controller2 = new AbortController();
+        const timer2 = setTimeout(() => controller2.abort(), 8000);
+        let probeResponse: Response;
+        try { probeResponse = await fetch(probe.toString(), { signal: controller2.signal }); }
+        finally { clearTimeout(timer2); }
+        if (probeResponse.ok) {
+          const all = await probeResponse.json();
+          if (Array.isArray(all)) {
+            const found = [...new Set(all.map((x: any) => String(x?.["odpt:railway"] || ""))
+              .filter((x: string) => !!x))].slice(0, 12);
+            evidence = JSON.stringify({ reason: "UPSTREAM_EMPTY", operatorRows: all.length, sampleRailways: found }).slice(0, 300);
+          }
+        }
+      } catch {}
       const { error } = await db.from("timetable_ingest_jobs").update({
-        status: "empty", train_count: 0, stop_count: 0, updated_at: new Date().toISOString()
+        status: "empty", train_count: 0, stop_count: 0,
+        error_code: evidence, updated_at: new Date().toISOString()
       }).eq("id", jobId);
       if (error) throw new Error("STATUS_WRITE_FAILED");
       return reply({ ok: true, status: "empty", line_id: job.line_id });
