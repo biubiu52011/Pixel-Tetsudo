@@ -409,54 +409,41 @@ function _canonicalVehicleIconPath(name, serviceDate) {
     ctx = ctx || {};
     var assignmentOperator = normOp(ctx.assignmentOperator || ctx.operationOperator || '');
 
-    // 1) Collect only already-admitted evidence from the upstream canonical
-    // resolver/runtime feed. This module arbitrates source priority; it does not
-    // independently infer identity from line/operator defaults.
-    var pool = {};
+    // One identity arbitration path for realtime, realtime-derived and
+    // timetable/SQL evidence. Normalize *registered exact aliases* before
+    // comparing sources: "JR E235系0番台" and "E235系0番台（山手線）" are
+    // the same verified vehicle, not competing mappings.
+    // Unregistered/ambiguous aliases are never guessed or merged.
+    var pool = Object.create(null);
     var orderArr = [];
-    function addFrom(str, src) {
-      splitCandidates(str).forEach(function(candidate) {
+    function admittedIdentity(value) {
+      var raw = String(value || '').trim();
+      var canonical = resolveCanonicalVehicle(raw);
+      return canonical ? canonical.displayName : raw;
+    }
+    [
+      { source: 'realtime', value: ctx.realtimeVehicleType },
+      { source: 'realtime-derived', value: ctx.realtimeDerivedVehicleType },
+      { source: 'timetable', value: ctx.timetableVehicleType }
+    ].forEach(function(group) {
+      splitCandidates(group.value).forEach(function(rawCandidate) {
+        var candidate = admittedIdentity(rawCandidate);
+        if (!candidate) return;
         if (!pool[candidate]) {
-          pool[candidate] = { sources: [], count: 0 };
+          pool[candidate] = { sources: [] };
           orderArr.push(candidate);
         }
-        if (pool[candidate].sources.indexOf(src) < 0) pool[candidate].sources.push(src);
-        pool[candidate].count++;
+        if (pool[candidate].sources.indexOf(group.source) < 0) {
+          pool[candidate].sources.push(group.source);
+        }
       });
-    }
-    addFrom(ctx.realtimeVehicleType, 'realtime');
-    addFrom(ctx.realtimeDerivedVehicleType, 'realtime-derived');
-    addFrom(ctx.timetableVehicleType, 'timetable');
+    });
 
-    // 2) Uniqueness decision. There is no source-priority fallback:
-    // every admitted explicit source must converge on exactly one identity.
-    var chosen = '';
-    var chosenSrc = '';
-    var _timetableCands = splitCandidates(ctx.timetableVehicleType);
-    var _derivedCands = splitCandidates(ctx.realtimeDerivedVehicleType);
-    var _realtimeCands = splitCandidates(ctx.realtimeVehicleType);
-    var _admitted = [];
-    [
-      { source:'realtime', values:_realtimeCands },
-      { source:'realtime-derived', values:_derivedCands },
-      { source:'timetable', values:_timetableCands }
-    ].forEach(function(group) {
-      group.values.forEach(function(value) {
-        _admitted.push({ source:group.source, value:value });
-      });
-    });
-    var _uniqueIdentities = [];
-    _admitted.forEach(function(item) {
-      if (_uniqueIdentities.indexOf(item.value) < 0) _uniqueIdentities.push(item.value);
-    });
-    if (_uniqueIdentities.length === 1) {
-      chosen = _uniqueIdentities[0];
-      var _chosenSources = [];
-      _admitted.forEach(function(item) {
-        if (item.value === chosen && _chosenSources.indexOf(item.source) < 0) _chosenSources.push(item.source);
-      });
-      chosenSrc = _chosenSources.join('+');
-    }
+    // A single verified identity may be carried by multiple sources. Conflicting
+    // identities remain unresolved; neither source order nor artwork existence
+    // is permission to pick a winner.
+    var chosen = orderArr.length === 1 ? orderArr[0] : '';
+    var chosenSrc = chosen ? pool[chosen].sources.join('+') : '';
 
     var confidence = chosen ? 'high' : 'none';
 

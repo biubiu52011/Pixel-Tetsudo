@@ -73,6 +73,26 @@ r = resolve({ realtimeVehicleType:'E235系0番台（山手線） / E235系1000�
 assert(r.identityStatus !== 'EXACT' && !r.name && !r.iconPath,
   'ambiguous realtime identity must not be converted into a concrete vehicle', r);
 
+// Yamanote has one vehicle identity, even if the live source and SQL/timetable
+// spell the registered same model differently. No parallel alias mapping.
+r = resolve({ realtimeVehicleType:'JR E235系0番台',
+              timetableVehicleType:'E235系0番台（山手線）' });
+assert(r.identityStatus === 'EXACT' && r.name === 'E235系0番台（山手線）' &&
+       r.source === 'realtime+timetable' && r.sources.length === 2 &&
+       /JR東日本_E235系_0番台\.png$/.test(r.iconPath),
+  'Yamanote realtime+SQL aliases must converge to one vehicle', r);
+r = resolve({ realtimeVehicleType:'JR E235系0番台' });
+assert(r.identityStatus === 'EXACT' && r.name === 'E235系0番台（山手線）',
+  'a direct realtime Yamanote alias must use the same canonical identity', r);
+r = resolve({ realtimeDerivedVehicleType:'JR E235系0番台',
+              timetableVehicleType:'E235系0番台（山手線）' });
+assert(r.identityStatus === 'EXACT' && r.name === 'E235系0番台（山手線）' &&
+       r.sources.length === 2, 'derived realtime and timetable must not double-map Yamanote', r);
+r = resolve({ realtimeVehicleType:'JR E235系0番台',
+              timetableVehicleType:'E235系1000番台' });
+assert(r.identityStatus === 'NARROWED' && !r.name && !r.iconPath,
+  'different E235 subseries must not be merged by alias normalization', r);
+
 // No source fact means UNKNOWN. No line/operator/type/number default exists here.
 r = resolve({ lineId:'Yamanote', operator:'JR-East', trainType:'Local',
               trainNumber:'1234G' });

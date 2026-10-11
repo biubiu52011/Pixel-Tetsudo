@@ -50,7 +50,8 @@ const resolved = context.window.TrainVehicle.resolve({
 });
 assert.strictEqual(resolved.identityStatus, 'EXACT');
 assert.strictEqual(resolved.source, 'timetable');
-assert.strictEqual(resolved.name, 'JR 209系500番台');
+assert.strictEqual(resolved.name, '209系500番台（京葉線）',
+  'verified aliases must return the canonical model identity, not a second spelling');
 assert.ok(/JR東日本_209系_500番台_京葉線\.png$/.test(resolved.iconPath), resolved.iconPath);
 
 assert.ok(/相模鉄道_12000系_YOKOHAMA_NAVYBLUE\.png$/.test(
@@ -255,6 +256,19 @@ assert.ok(/^https:\/\//.test(yamanoteRule.sourceUrl),
     tn + ' must project the E235-0 PNG, got ' + rt.iconPath);
 });
 console.log('Yamanote realtime chain -> E235 PNG: 3 PASS');
+
+// Real-time and timetable/SQL are evidence channels, not parallel model
+// dictionaries. Both descriptions of one E235-0 physical train must converge.
+const yamanoteCombined = realCtx.window.TrainVehicle.resolve({
+  lineId:'Yamanote', trainNumber:'1826G',
+  realtimeVehicleType:'JR E235系0番台',
+  timetableVehicleType:'E235系0番台（山手線）'
+});
+assert.strictEqual(yamanoteCombined.identityStatus,'EXACT');
+assert.strictEqual(yamanoteCombined.name,'E235系0番台（山手線）');
+assert.strictEqual(yamanoteCombined.source,'realtime+timetable');
+assert.ok(yamanoteCombined.iconPath.endsWith('JR東日本_E235系_0番台.png'));
+console.log('Yamanote single canonical realtime/SQL mapping: PASS');
 
 // The same verified single-fleet record must resolve identically on the
 // timetable + delay estimation path; before this fix those trains used SVG.
