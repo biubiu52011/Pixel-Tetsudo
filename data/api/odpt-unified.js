@@ -682,6 +682,13 @@
                 saturday_holiday:"odpt.Calendar:SaturdayHoliday"
             })[run.calendar_type] || "",
             "_operationCode":run.operation_code||"",
+            // Keep source-provided physical through-service links as evidence,
+            // not as proof of a shared vehicle without boundary/time checks.
+            "_sourceTripId":run.source_trip_id||"",
+            "_previousTimetableIds":Array.isArray(run.previous_timetable_ids)?run.previous_timetable_ids:[],
+            "_nextTimetableIds":Array.isArray(run.next_timetable_ids)?run.next_timetable_ids:[],
+            "_timetableProvenance":run.timetable_provenance||"",
+            "_sourceRevisionDate":run.source_revision_date||null,
             "odpt:railDirection":run.rail_direction||"",
             "odpt:trainType":run.train_type||"",
             "odpt:destinationStation":run.destination_station?[run.destination_station]:[],
