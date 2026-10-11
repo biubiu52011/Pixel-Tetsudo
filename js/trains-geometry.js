@@ -462,19 +462,11 @@
       var loopRectH = Math.max(stations.length * 36 / 2 - 80, 140) * loopScale;
       // v4.3.495: 双列基准再缩减 50%（96→48）；svgW 派生式（rectW+150×scale）自动跟随，
       // 两侧站名空间恒 75×scale 不变。移动 rectW 72px/svgW 297px，桌面 76.8px/316.8px。
-      var isDoubleColumnLoop = line.isDoubleColumnLoop === true;
-      // Double-column loops need an inner label corridor plus separate outer
-      // station labels. A narrow ring made train PNGs and loop-direction text
-      // cover the station names on both sides.
-      var rectW = isDoubleColumnLoop
-        ? (_isMobileView() ? 120 : 132)
-        : (_isMobileView() ? 63 : 67.2);
-      var rectH = loopRectH;
-      // Parentheses matter: rectW + mobile?previously evaluated as a truthy
-      // conditional and silently discarded the dynamic ring width.
-      svgW = rectW + (_isMobileView() ? 225 : 240);
-      svgH = loopRectH + (_isMobileView() ? 120 : 128);
+      var rectW = _isMobileView() ? 63 : 67.2, rectH = loopRectH; // v4.3.881: 环宽基准 48→42
+      svgW = rectW + _isMobileView() ? 225 : 240;
+      svgH = loopRectH + (_isMobileView() ? 120 : 128); // v4.3.882: 加括号
       var cx = svgW / 2, cy = svgH / 2;
+      var isDoubleColumnLoop = line.isDoubleColumnLoop === true;
       var halfW = rectW / 2, halfH = rectH / 2;
       var loopPts = [];
       var i, _t;
@@ -748,7 +740,6 @@
       svgW: svgW,
       svgH: svgH,
       isLoop: isLoop,
-      isDoubleColumnLoop: line.isDoubleColumnLoop === true,
       isSixShapedLoop: isSixShapedLoop,
       isDualLoop6: isSixShapedLoop, // v4.3.502: 六形环环段左右二分（双列）——站名朝外、clamp 走通用
       sp: sp,

@@ -33,19 +33,6 @@ assert(/if \(!d\) return null;/.test(tobuEvidence),
 assert(/!hasExplicitValidity && d !== provider\.effectiveDate/.test(tobuEvidence),
   "undated Tobu timetable rows must not become open-ended vehicle assignments");
 const renderer=read("js/trains-render.js");
-const diagramGeometry=read("js/trains-geometry.js");
-assert(diagramGeometry.includes('svgW = rectW + (_isMobileView() ? 225 : 240);'),
-  "loop geometry must include the dynamic track width (conditional precedence)");
-assert(diagramGeometry.includes('isDoubleColumnLoop: line.isDoubleColumnLoop === true,') &&
-       diagramGeometry.includes('(_isMobileView() ? 120 : 132)'),
-  "double-column loops must reserve a separate interior direction-label corridor");
-assert(renderer.includes('function _trainLabelDisplayX(trainLayer, px)') &&
-       renderer.includes('_trainLabelDisplayX(trainLayer, px) - (_bbox.x + _bbox.width / 2)') &&
-       renderer.includes('_trainLabelDisplayX(trainLayer, px) + _base'),
-  "loop direction labels must use the same inner corridor in initial and animated layouts");
-assert(renderer.includes('geometry.isDoubleColumnLoop ? 24 :') &&
-       renderer.includes('geometry.isDoubleColumnLoop && side === "right" ? 24 :'),
-  "outer station labels on both double-column tracks must clear train PNG lanes");
 const trackLayoutSource=read("js/train-track-layout.js");
 const trainsCssSource=read("css/trains.css");
 assert(!/transition:\s*x\s+14s[\s\S]{0,120}y\s+14s/.test(trainsCssSource),

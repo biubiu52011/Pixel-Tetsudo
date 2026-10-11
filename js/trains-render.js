@@ -187,10 +187,10 @@ function _rememberTrainArtworkFailure(trainUid) {
       ty = o.y; anchor = (_sixSide === "right") ? "start" : "end";
     }
     else if (side === "left" && geometry.isSixShapedLoop && !geometry.isDualLoop6) { tx = o.x + (isJunction ? 14 : 10); ty = o.y; anchor = "start"; }
-    else if (side === "left") { tx = o.x - (geometry.isDoubleColumnLoop ? 24 : (isJunction ? 14 : 10)); ty = o.y; anchor = "end"; }
+    else if (side === "left") { tx = o.x - (isJunction ? 14 : 10); ty = o.y; anchor = "end"; }
     else if (side === "dual") { tx = o.x - (isJunction ? 16 : 12); ty = o.y; anchor = "end"; }
     else if (side === "right" && geometry.isSixShapedLoop && !geometry.isDualLoop6) { tx = o.x - (isJunction ? 14 : 10); ty = o.y; anchor = "end"; }
-    else { tx = o.x + (geometry.isDoubleColumnLoop && side === "right" ? 24 : (isJunction ? 14 : 10)); ty = o.y; anchor = "start"; }
+    else { tx = o.x + (isJunction ? 14 : 10); ty = o.y; anchor = "start"; }
 
     var label = document.createElementNS(svgNS, "text");
     label.setAttribute("x", tx);
@@ -1556,23 +1556,6 @@ function _rememberTrainArtworkFailure(trainUid) {
     return moveDir === 'down' ? py + 28 : py + 25;
   }
 
-  // For double-column loops, move direction captions into the clear inside
-  // corridor. The PNG stays on TrainTrackLayout's physical lane; only the
-  // passenger-facing text moves, so station names/chips remain unobstructed.
-  // Reused on initial paint and per-frame label updates (one layout authority).
-  function _trainLabelDisplayX(trainLayer, px) {
-    var svg = trainLayer && trainLayer.ownerSVGElement;
-    var geometry = svg && svg.__geometry;
-    var rect = geometry && geometry.isDoubleColumnLoop &&
-      geometry.stationCoords && geometry.stationCoords._loopRect;
-    if (!rect) return px;
-    var leftRail = rect.cx - rect.halfW;
-    var rightRail = rect.cx + rect.halfW;
-    if (Math.abs(px - leftRail) <= 40) return leftRail + 31;
-    if (Math.abs(px - rightRail) <= 40) return rightRail - 31;
-    return px;
-  }
-
   function _trainLabelSignature(p, lineId) {
     return [
       lineId || "",
@@ -1662,7 +1645,7 @@ function _rememberTrainArtworkFailure(trainUid) {
     trainLayer.appendChild(labelGroup);
     try {
       var _bbox = labelGroup.getBBox();
-      var _offsetX = _trainLabelDisplayX(trainLayer, px) - (_bbox.x + _bbox.width / 2);
+      var _offsetX = px - (_bbox.x + _bbox.width / 2);
       labelGroup.setAttribute("transform", "translate(" + _offsetX + ",0)");
       // Cache the centering baseline (label geometry is static; only px/py move),
       // so per-frame label sync is pure attribute update, never remove+recreate.
@@ -1689,7 +1672,7 @@ function _rememberTrainArtworkFailure(trainUid) {
     if (txt) txt.setAttribute('y', String(_labelY));
     var _base = parseFloat(label.getAttribute('data-base-offset') || '0');
     if (!isFinite(_base)) _base = 0;
-    label.setAttribute('transform', 'translate(' + (_trainLabelDisplayX(trainLayer, px) + _base) + ',0)');
+    label.setAttribute('transform', 'translate(' + (px + _base) + ',0)');
   }
 
   // Keep label content synchronized with the current service segment while
