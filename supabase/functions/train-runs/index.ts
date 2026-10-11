@@ -69,26 +69,27 @@ function stationKey(urn: string) {
   return p[p.length - 1] || urn;
 }
 
+async function fetchOdptCalendarRows(source: any, sourceKey: string, calendar: string) {
+  const u = new URL("./odpt:TrainTimetable", source.odpt_base_url);
+  u.searchParams.set("odpt:operator", "odpt.Operator:" + source.odpt_operator);
+  u.searchParams.set("odpt:railway", "odpt.Railway:" + source.odpt_operator + "." + source.odpt_railway);
+  u.searchParams.set("odpt:calendar", calendar);
+  u.searchParams.set("acl:consumerKey", sourceKey);
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 8000);
+  let res: Response;
+  try { res = await fetch(u.toString(), { signal: controller.signal }); }
+  finally { clearTimeout(timer); }
+  if (!res.ok) throw new Error("ODPT_HTTP_" + res.status);
+  const part = await res.json();
+  if (!Array.isArray(part)) throw new Error("ODPT_INVALID_PAYLOAD");
+  if (part.length >= 1000) throw new Error("ODPT_TRUNCATED");
+  return part;
+}
+
 async function fetchOdptRows(source: any, sourceKey: string, serviceDate: string) {
-  const calendars = serviceCalendars(serviceDate);
-  for (const calendar of calendars) {
-    const u = new URL("./odpt:TrainTimetable", source.odpt_base_url);
-    u.searchParams.set("odpt:operator", "odpt.Operator:" + source.odpt_operator);
-    u.searchParams.set("odpt:railway", "odpt.Railway:" + source.odpt_operator + "." + source.odpt_railway);
-    u.searchParams.set("odpt:calendar", calendar);
-    u.searchParams.set("acl:consumerKey", sourceKey);
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 8000);
-    let res: Response;
-    try { res = await fetch(u.toString(), { signal: controller.signal }); }
-    finally { clearTimeout(timer); }
-    if (!res.ok) throw new Error("ODPT_HTTP_" + res.status);
-    const part = await res.json();
-    if (!Array.isArray(part)) throw new Error("ODPT_INVALID_PAYLOAD");
-    // ODPT's 1000-row response is a truncation signal. Never persist an
-    // incomplete timetable as authoritative cache.
-    if (part.length >= 1000) throw new Error("ODPT_TRUNCATED");
-    // Calendar variants are alternatives, not additive. Do not combine conflicting schedules.
+  for (const calendar of serviceCalendars(serviceDate)) {
+    const part = await fetchOdptCalendarRows(source, sourceKey, calendar);
     if (part.length) return part;
   }
   return [];
@@ -177,7 +178,9 @@ async function readManualTemplateRuns(db: any, lineId: string, serviceDate: stri
   const result = templates.map((t) => {
     const operator = timetableOperator || /^odpt\.Railway:([^.]+)\./.exec(t.railway_urn || "")?.[1] || "";
     return {
-      // Only SQL-certified identical itineraries share identity across line sources.\n      // Keep separate line records/stops; never dedupe by departure time alone.\n      id: t.physical_service_key || ("manual-template:" + t.id),
+      // Only SQL-certified identical itineraries share identity across line sources.
+      // Keep separate line records/stops; never dedupe by departure time alone.
+      id: t.physical_service_key || ("manual-template:" + t.id),
       line_id: lineId,
       service_date: serviceDate,
       calendar_type: calendarType(t.calendar_urn),
@@ -220,6 +223,72 @@ async function readManualTemplateRuns(db: any, lineId: string, serviceDate: stri
 
 Deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") return new Response(null, { status: 204, headers: cors });
+  if (req.method === "POST") {
+    // One-time SQL-issued nonce; this public function cannot be used for arbitrary writes.
+    let jobId = "", nonce = "";
+    try {
+      const body = await req.json();
+      jobId = String(body.job_id || "");
+      nonce = String(body.nonce || "");
+    } catch { return json({ ok: false, error: "INVALID_JOB_REQUEST" }, 400); }
+    if (!/^[0-9a-f-]{36}$/i.test(jobId) || !/^[0-9a-f-]{36}$/i.test(nonce)) {
+      return json({ ok: false, error: "INVALID_JOB_CREDENTIALS" }, 403);
+    }
+    const keys = JSON.parse(Deno.env.get("SUPABASE_SECRET_KEYS") || "{}");
+    const key = keys.default || Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+    const base = Deno.env.get("SUPABASE_URL");
+    if (!base || !key) return json({ ok: false, error: "SERVER_CONFIG" }, 500);
+    const db = createClient(base, key, { auth: { persistSession: false, autoRefreshToken: false } });
+    const now = new Date().toISOString();
+    const { data: job, error: claimError } = await db.from("timetable_ingest_jobs")
+      .update({ status: "running", updated_at: now })
+      .eq("id", jobId).eq("secret_nonce", nonce)
+      .eq("status", "pending").gt("expires_at", now)
+      .select("line_id,calendar_urn").maybeSingle();
+    if (claimError || !job) return json({ ok: false, error: "JOB_NOT_AUTHORIZED" }, 403);
+    try {
+      const { data: source, error: sourceError } = await db.from("railway_lines")
+        .select("odpt_operator,odpt_railway,odpt_base_url,timetable_api_enabled")
+        .eq("id", job.line_id).single();
+      if (sourceError || !source?.timetable_api_enabled || !source.odpt_base_url) {
+        throw new Error("NO_TIMETABLE_API_CONFIG");
+      }
+      const keyName = source.odpt_base_url.includes("api-challenge")
+        ? "ODPT_CHALLENGE_CONSUMER_KEY" : "ODPT_CONSUMER_KEY";
+      const sourceKey = Deno.env.get(keyName);
+      if (!sourceKey) throw new Error("NO_UPSTREAM_API_CREDENTIAL");
+      const rows = await fetchOdptCalendarRows(source, sourceKey, job.calendar_urn);
+      if (!rows.length) {
+        await db.from("timetable_ingest_jobs").update({
+          status: "empty", train_count: 0, stop_count: 0, updated_at: new Date().toISOString()
+        }).eq("id", jobId);
+        return json({ ok: true, status: "empty", line_id: job.line_id });
+      }
+      const { data: result, error: writeError } = await db.rpc("persist_odpt_timetable_templates", {
+        p_line_id: job.line_id, p_calendar_urn: job.calendar_urn, p_rows: rows
+      });
+      if (writeError) throw new Error("SQL_BATCH_IMPORT_FAILED:" + writeError.message);
+      const counts = Array.isArray(result) ? result[0] : result;
+      if (!counts || Number(counts.train_count) !== rows.length) {
+        throw new Error("SQL_IMPORT_COUNT_MISMATCH");
+      }
+      const { error: doneError } = await db.from("timetable_ingest_jobs").update({
+        status: "complete", train_count: Number(counts.train_count),
+        stop_count: Number(counts.stop_count), updated_at: new Date().toISOString()
+      }).eq("id", jobId);
+      if (doneError) throw new Error("JOB_STATUS_UPDATE_FAILED");
+      return json({ ok: true, status: "complete", line_id: job.line_id,
+        trains: counts.train_count, stops: counts.stop_count });
+    } catch (err) {
+      const msg = String(err instanceof Error ? err.message : err);
+      // Do not expose credentials or raw provider payloads in the job error.
+      const safe = msg.slice(0, 400).replace(/acl:consumerKey=[^&\s]+/g, "acl:consumerKey=[redacted]");
+      await db.from("timetable_ingest_jobs").update({
+        status: "failed", error_code: safe, updated_at: new Date().toISOString()
+      }).eq("id", jobId);
+      return json({ ok: false, error: "IMPORT_FAILED", job_id: jobId }, 500);
+    }
+  }
   if (req.method !== "GET") return json({ ok: false, error: "METHOD_NOT_ALLOWED" }, 405);
 
   const url = new URL(req.url);
@@ -253,15 +322,14 @@ Deno.serve(async (req: Request) => {
 
   const db = createClient(supabaseUrl, secretKey, { auth: { persistSession: false, autoRefreshToken: false } });
   const { data: source, error: sourceError } = await db.from("railway_lines")
-    .select("odpt_operator,odpt_railway,odpt_base_url,timetable_operator").eq("id", lineId).maybeSingle();
+    .select("odpt_operator,odpt_railway,odpt_base_url,timetable_operator,timetable_api_enabled").eq("id", lineId).maybeSingle();
   if (sourceError) return json({ ok: false, error: "DB_SOURCE_LOOKUP_FAILED" }, 500);
-  const hasApi = !!(source?.odpt_operator && source?.odpt_railway && source?.odpt_base_url);
-  // Browser fallback uses SQL only; never refetch the API it already owns.
-  if (hasApi && url.searchParams.get("fallback_only") === "1") {
-    return json({ ok: true, complete: false, cache: "BYPASS",
-      source: "API_AVAILABLE", line_id: lineId, service_date: serviceDate, runs: [] });
-  }
-  if (hasApi) {
+  const hasTimetableApi = !!(source?.timetable_api_enabled && source?.odpt_operator &&
+    source?.odpt_railway && source?.odpt_base_url);
+  // SQL is the shared timetable authority for matching, even when an operator
+  // supplies both train-location and TrainTimetable APIs.
+  // Browser's fallback_only=1 reads SQL; it never invokes upstream API twice.
+  if (hasTimetableApi && url.searchParams.get("fallback_only") !== "1") {
     const sourceKey = source.odpt_base_url.includes("api-challenge")
       ? Deno.env.get("ODPT_CHALLENGE_CONSUMER_KEY") : Deno.env.get("ODPT_CONSUMER_KEY");
     if (!sourceKey) return json({ ok: true, complete: false, cache: "BYPASS",
