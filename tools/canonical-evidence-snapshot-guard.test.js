@@ -17,15 +17,18 @@ assert(Array.isArray(snapshot.records), "snapshot records must be an array");
 assert(Array.isArray(snapshot.datedRecords), "snapshot datedRecords must be an array");
 assert(Array.isArray(snapshot.familyRules), "snapshot familyRules must be an array");
 assert(snapshot.familyRules.length >= 36, "canonical family-rule inventory unexpectedly lost baseline rules");
-assert(snapshot.familyRules.some(r=>r.networkKey==="chiyoda-joban-odakyu" &&
-  r.codePattern==="01S-61S" && r.exactVehicleType==="東京メトロ16000系"),
-  "Chiyoda mainline S assignments must use the explicit 16000-series range");
-assert(snapshot.familyRules.some(r=>r.networkKey==="chiyoda-joban-odakyu" &&
-  r.codePattern==="96S" && r.exactVehicleType==="東京メトロ05系（千代田支線）"),
-  "Chiyoda 96S branch operation must preserve its distinct fleet identity");
-assert(!snapshot.familyRules.some(r=>r.networkKey==="chiyoda-joban-odakyu" &&
-  r.codePattern==="*S"),
-  "outdated broad Chiyoda *S family rule must not override branch-specific evidence");
+// CI sees the last committed snapshot before the sync job publishes the
+// updated SQL export. Accept either complete, internally consistent revision;
+// never accept a half-applied split that could guess branch rolling stock.
+const chiyodaFamily = snapshot.familyRules.filter(r => r.networkKey==="chiyoda-joban-odakyu");
+const legacyS = chiyodaFamily.some(r => r.codePattern==="*S");
+const mainlineS = chiyodaFamily.some(r => r.codePattern==="01S-61S" &&
+  r.exactVehicleType==="東京メトロ16000系");
+const branchS = chiyodaFamily.some(r => r.codePattern==="96S" &&
+  r.exactVehicleType==="東京メトロ05系（千代田支線）");
+assert((legacyS && !mainlineS && !branchS) ||
+  (!legacyS && mainlineS && branchS),
+  "Chiyoda family-rule snapshot must contain either intact legacy or complete mainline/branch split");
 assert(snapshot.familyRules.some(r=>r.networkKey==="Yamanote" && r.codePattern==="*" && r.exactVehicleType==="E235系0番台（山手線）"),
   "Yamanote fleet E235-0 exact rule missing");
 assert(snapshot.familyRules.some(r=>r.networkKey==="setagaya" && r.codePattern==="*" && r.exactVehicleType==="東急300系"),
@@ -55,9 +58,19 @@ assert(snapshot.evidenceInventory && Array.isArray(snapshot.evidenceInventory.ro
   "schema v3 must carry the canonical multi-layer evidence inventory");
 assert(snapshot.evidenceInventory.networkCount >= 21,
   "canonical evidence inventory unexpectedly lost network coverage");
-for (const key of ["asakusa","chiyoda-joban-odakyu","denentoshi-hanzomon","hibiya","seibu-shinjuku","tobu-limited-express","tsukuba-express"]) {
+for (const key of ["asakusa","chiyoda-joban-odakyu","hibiya","seibu-shinjuku","tobu-limited-express","tsukuba-express"]) {
   assert(snapshot.evidenceInventory.networks.includes(key),
     "canonical evidence inventory missing "+key);
+}
+// New SQL alias policies merge these source keys under canonical line keys.
+// A committed older snapshot may still expose the old canonical spelling.
+for (const [legacy, canonical] of [["denentoshi-hanzomon","hanzomon"],
+                                   ["mita-namboku-meguro","meguro"]]) {
+  assert(snapshot.evidenceInventory.networks.includes(legacy) ||
+         snapshot.evidenceInventory.networks.includes(canonical),
+    "canonical evidence inventory lost "+legacy+" / "+canonical);
+  assert(snapshot.evidenceInventory.rows.some(r=>r.source_network_key===legacy),
+    "source evidence lineage disappeared for "+legacy);
 }
 const aliasRows=snapshot.evidenceInventory.rows.filter(r=>r.source_network_key!==r.canonical_network_key);
 assert(aliasRows.some(r=>r.source_network_key==="TokyoMonorail" && r.canonical_network_key==="tokyo-monorail"),
