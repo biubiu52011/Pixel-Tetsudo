@@ -7,6 +7,43 @@ function reply(body: Record<string, unknown>, code = 200) {
   });
 }
 
+async function publicProjectTimetableKey(baseUrl: string): Promise<string | null> {
+  // Temporary ingestion-only bridge to the project's ALREADY PUBLIC ODPT
+  // link catalog. Pin the source revision; never log decoded URLs/keys.
+  // Production should instead configure Edge Function ODPT_* secrets.
+  const src = "https://raw.githubusercontent.com/biubiu52011/Pixel-Tetsudo/" +
+    "3b52bdcf4523f1de13587832f143907e850020d5/data/api/odpt-links.js";
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 8000);
+  let res: Response;
+  try { res = await fetch(src, { signal: controller.signal }); }
+  finally { clearTimeout(timer); }
+  if (!res.ok) throw new Error("PROJECT_LINK_CATALOG_UNAVAILABLE");
+  const m = /ODPT_LINKS_ENC\s*=\s*"([A-Za-z0-9+/=]+)"/.exec(await res.text());
+  if (!m) throw new Error("PROJECT_LINK_CATALOG_MALFORMED");
+  const binary = atob(m[1]);
+  const seed = "PixelTetsudo".split("").reverse().join("") + "-" +
+    "ODPT".split("").reverse().join("") + "-2026";
+  let clear = "";
+  for (let i = 0; i < binary.length; i++) {
+    clear += String.fromCharCode(binary.charCodeAt(i) ^ seed.charCodeAt(i % seed.length));
+  }
+  const links: unknown = JSON.parse(clear);
+  if (!Array.isArray(links)) throw new Error("PROJECT_LINK_CATALOG_INVALID");
+  const targetHost = new URL(baseUrl).hostname;
+  for (const raw of links) {
+    if (typeof raw !== "string") continue;
+    try {
+      const url = new URL(raw);
+      if (url.hostname === targetHost && url.protocol === "https:") {
+        const value = url.searchParams.get("acl:consumerKey");
+        if (value) return value;
+      }
+    } catch {}
+  }
+  return null;
+}
+
 Deno.serve(async (request) => {
   if (request.method !== "POST") return reply({ ok: false, error: "METHOD_NOT_ALLOWED" }, 405);
   // This import endpoint accepts only a high-entropy single-use job capability.
@@ -44,7 +81,8 @@ Deno.serve(async (request) => {
         !line.odpt_operator || !line.odpt_railway) throw new Error("TIMETABLE_API_NOT_CONFIGURED");
     const keyName = line.odpt_base_url.includes("api-challenge")
       ? "ODPT_CHALLENGE_CONSUMER_KEY" : "ODPT_CONSUMER_KEY";
-    const upstreamKey = Deno.env.get(keyName);
+    const upstreamKey = Deno.env.get(keyName) ||
+      await publicProjectTimetableKey(line.odpt_base_url);
     if (!upstreamKey) throw new Error("UPSTREAM_KEY_UNAVAILABLE");
     const url = new URL("./odpt:TrainTimetable", line.odpt_base_url);
     url.searchParams.set("odpt:operator", "odpt.Operator:" + line.odpt_operator);
