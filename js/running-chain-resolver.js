@@ -46,6 +46,11 @@
   }
 
   function _stationKey(v){var p=String(v||"").split(".");return p[p.length-1]||"";}
+  function _sourceTripKey(v) {
+    var s=String(v||"");
+    if(s.indexOf("odpt.TrainTimetable:")===0)return s.slice("odpt.TrainTimetable:".length);
+    return s.indexOf("supabase:TrainRun:")===0 ? "" : s;
+  }
   function _timeMin(v){if(!v)return null;var m=String(v).match(/^(\d{1,2}):(\d{2})/);if(!m)return null;return parseInt(m[1],10)*60+parseInt(m[2],10);}
   function _segment(tt,lineId){
     var a=(tt&&tt["odpt:trainTimetableObject"])||[]; if(!a.length)return null;
@@ -56,7 +61,11 @@
     var lastTime=_timeMin(last["odpt:arrivalTime"]||last["odpt:departureTime"]);
     var trainNumber=String(tt["odpt:trainNumber"]||tt["odpt:train"]||"");
     var id=String(tt["@id"]||tt["owl:sameAs"]||((tt["odpt:railway"]||lineId||"")+"|"+trainNumber));
-    return {lineId:lineId,id:id,trainNumber:trainNumber,firstStation:firstStation,lastStation:lastStation,firstTime:firstTime,lastTime:lastTime};
+    var sourceId=_sourceTripKey(tt._sourceTripId||tt["owl:sameAs"]||tt["@id"]);
+    var previous=Array.isArray(tt._previousTimetableIds)?tt._previousTimetableIds.map(_sourceTripKey):[];
+    var next=Array.isArray(tt._nextTimetableIds)?tt._nextTimetableIds.map(_sourceTripKey):[];
+    return {lineId:lineId,id:id,sourceId:sourceId,previous:previous,next:next,
+      trainNumber:trainNumber,firstStation:firstStation,lastStation:lastStation,firstTime:firstTime,lastTime:lastTime};
   }
   function _confirmedEdge(a,b,joins){
     if(!a||!b||!joins||!joins.length)return null;
@@ -66,9 +75,16 @@
     var dt=forward&&a.lastTime!==null&&b.firstTime!==null?b.firstTime-a.lastTime:
            reverse&&b.lastTime!==null&&a.firstTime!==null?a.firstTime-b.lastTime:null;
     if(dt===null||dt<0||dt>20)return null;
+    // Timetable source links strengthen a station/time-verified boundary.
+    // Never use source references to manufacture a position or bypass topology.
+    var sourceLinked=!!((forward&&((a.next.indexOf(b.sourceId)>=0&&b.sourceId)||
+      (b.previous.indexOf(a.sourceId)>=0&&a.sourceId)))||
+      (reverse&&((b.next.indexOf(a.sourceId)>=0&&a.sourceId)||
+      (a.previous.indexOf(b.sourceId)>=0&&b.sourceId))));
     var sameId=a.id===b.id, sameNo=a.trainNumber&&a.trainNumber===b.trainNumber;
-    return {dt:dt,sameId:sameId,sameNo:sameNo,numberChanged:!sameId&&!sameNo,
-      score:(sameId?4:(sameNo?2:0))+(dt<=5?3:dt<=10?2:1)};
+    return {dt:dt,sameId:sameId,sameNo:sameNo,sourceLinked:sourceLinked,
+      numberChanged:!sameId&&!sameNo,
+      score:(sourceLinked?4:0)+(sameId?4:(sameNo?2:0))+(dt<=5?3:dt<=10?2:1)};
   }
   function resolveTimetableChain(tt,lineId,candidates){
     if(!_initialized)buildIndexes();
@@ -103,11 +119,11 @@
       var ak=ec.a.lineId+"|"+ec.a.id,bk=ec.b.lineId+"|"+ec.b.id;
       adj[ak].push({key:bk,ev:ev});adj[bk].push({key:ak,ev:ev});
     });
-    var root=base.lineId+"|"+base.id,q=[root],vis={};vis[root]=true;var ids=[],strong=false,numberChanged=false,maxGap=0;
-    while(q.length){var cur=q.shift(),parts=cur.split("|");ids.push(parts.slice(1).join("|"));(adj[cur]||[]).forEach(function(e){if(e.ev.sameId)strong=true;if(e.ev.numberChanged)numberChanged=true;if(e.ev.dt>maxGap)maxGap=e.ev.dt;if(!vis[e.key]){vis[e.key]=true;q.push(e.key);}});}
+    var root=base.lineId+"|"+base.id,q=[root],vis={};vis[root]=true;var ids=[],strong=false,numberChanged=false,linkedBySource=false,maxGap=0;
+    while(q.length){var cur=q.shift(),parts=cur.split("|");ids.push(parts.slice(1).join("|"));(adj[cur]||[]).forEach(function(e){if(e.ev.sameId)strong=true;if(e.ev.numberChanged)numberChanged=true;if(e.ev.sourceLinked)linkedBySource=true;if(e.ev.dt>maxGap)maxGap=e.ev.dt;if(!vis[e.key]){vis[e.key]=true;q.push(e.key);}});}
     ids=ids.filter(function(v,i,a){return a.indexOf(v)===i;}).sort();
     if(ids.length===1)return {runningChainId:base.id,evidence:"NO_CONFIRMED_BOUNDARY"};
-    return {runningChainId:"rc:"+ids.join("~"),evidence:strong?"CONFIRMED_SEGMENT_GRAPH+TIMETABLE_ID":(numberChanged?"CONFIRMED_UNIQUE_BOUNDARY+TRAIN_NUMBER_CHANGED":"CONFIRMED_SEGMENT_GRAPH+TRAIN_NUMBER"),timeGapMin:maxGap,segmentCount:ids.length};
+    return {runningChainId:"rc:"+ids.join("~"),evidence:linkedBySource?"CONFIRMED_BOUNDARY+SOURCE_TIMETABLE_LINK":(strong?"CONFIRMED_SEGMENT_GRAPH+TIMETABLE_ID":(numberChanged?"CONFIRMED_UNIQUE_BOUNDARY+TRAIN_NUMBER_CHANGED":"CONFIRMED_SEGMENT_GRAPH+TRAIN_NUMBER")),timeGapMin:maxGap,segmentCount:ids.length};
   }
 
   function isThroughAtStation(lineA,lineB,stationId){
