@@ -109,7 +109,8 @@ function formatOdptRows(source: any, lineId: string, serviceDate: string, rows: 
     operator: source.odpt_operator,
     network_key: source.odpt_railway,
     train_number: String(tt["odpt:trainNumber"]),
-    operation_code: String(tt["odpt:trainNumber"]),
+    // Train numbers are not operation codes; the scoped evidence resolver owns that link.
+    operation_code: "",
     rail_direction: tt["odpt:railDirection"] || null,
     train_type: tt["odpt:trainType"] || null,
     destination_station: Array.isArray(tt["odpt:destinationStation"])
@@ -137,7 +138,7 @@ function formatOdptRows(source: any, lineId: string, serviceDate: string, rows: 
  * there is no date-specific run. Calendar variants are alternatives.
  * Page both queries because Supabase Data API defaults to at most 1000 rows.
  */
-async function readManualTemplateRuns(db: any, lineId: string, serviceDate: string): Promise<Response> {
+async function readManualTemplateRuns(db: any, lineId: string, serviceDate: string, timetableOperator: string | null): Promise<Response> {
   async function pages(makeQuery: (first: number, last: number) => any) {
     const out: any[] = [];
     const size = 700;
@@ -174,7 +175,7 @@ async function readManualTemplateRuns(db: any, lineId: string, serviceDate: stri
     }
   }
   const result = templates.map((t) => {
-    const operator = /^odpt\.Railway:([^.]+)\./.exec(t.railway_urn || "")?.[1] || "";
+    const operator = timetableOperator || /^odpt\.Railway:([^.]+)\./.exec(t.railway_urn || "")?.[1] || "";
     return {
       id: "manual-template:" + t.id,
       line_id: lineId,
@@ -182,7 +183,7 @@ async function readManualTemplateRuns(db: any, lineId: string, serviceDate: stri
       calendar_type: calendarType(t.calendar_urn),
       operator, network_key: t.railway_urn,
       train_number: t.train_number,
-      operation_code: t.train_number,
+      operation_code: "",
       rail_direction: t.direction_urn,
       train_type: t.train_type_urn,
       destination_station: t.destination_urns?.[0] || null,
@@ -252,7 +253,7 @@ Deno.serve(async (req: Request) => {
 
   const db = createClient(supabaseUrl, secretKey, { auth: { persistSession: false, autoRefreshToken: false } });
   const { data: source, error: sourceError } = await db.from("railway_lines")
-    .select("odpt_operator,odpt_railway,odpt_base_url").eq("id", lineId).maybeSingle();
+    .select("odpt_operator,odpt_railway,odpt_base_url,timetable_operator").eq("id", lineId).maybeSingle();
   if (sourceError) return json({ ok: false, error: "DB_SOURCE_LOOKUP_FAILED" }, 500);
   const hasApi = !!(source?.odpt_operator && source?.odpt_railway && source?.odpt_base_url);
   // Browser fallback uses SQL only; never refetch the API it already owns.
@@ -283,7 +284,7 @@ Deno.serve(async (req: Request) => {
     .eq("line_id", lineId).eq("service_date", serviceDate).order("train_number");
   if (error) return json({ ok: false, error: "DB_QUERY_FAILED" }, 500);
   if (!runs?.length) {
-    try { return await readManualTemplateRuns(db, lineId, serviceDate); }
+    try { return await readManualTemplateRuns(db, lineId, serviceDate, source?.timetable_operator || null); }
     catch (err) {
       console.error("[train-runs] Manual SQL template read failed", lineId, String(err));
       return json({ ok: true, complete: false, cache: "MISS",
