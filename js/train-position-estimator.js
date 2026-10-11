@@ -756,7 +756,7 @@
    * @param {object} allLines - All line objects keyed by lineId
    * @param {object} odptTrains - Raw ODPT train/timetable data keyed by operator
    * @param {object} delayInfo - Delay info keyed by operator
-   * @param {object} existingPositions - Already-known realtime positions keyed by lineId
+   * @param {object} existingPositions - Deprecated input, ignored (realtime merging belongs to DataFusion)
    * @returns {object} Estimated positions keyed by lineId
    */
   function estimateAllPositions(allLines, odptTrains, delayInfo, existingPositions, options) {
@@ -962,20 +962,11 @@
           }
         }
         if (positions.length > 0) {
-          // Merge by physical-service identity: confirmed running chain first,
-          // raw trainId only when no chain evidence exists.
-          var existing = (existingPositions && existingPositions[lineId]) || [];
-          var _existingIds = {};
-          existing.forEach(function(p) {
-            var id = p && (p.runningChainId || p.trainId);
-            if (id) _existingIds[id] = true;
-          });
-          var _merged = existing.slice();
-          positions.forEach(function(p) {
-            var id = p && (p.runningChainId || p.trainId);
-            if (id && !_existingIds[id]) { _merged.push(p); _existingIds[id] = true; }
-          });
-          estimated[lineId] = _merged;
+          // This layer returns timetable-derived positions ONLY. Realtime
+          // source records are owned by DataFusion, which performs the single
+          // merge after resolving each train's physical running chain. Mixing
+          // existing realtime rows here created two identities for one train.
+          estimated[lineId] = positions;
         }
       }
 
