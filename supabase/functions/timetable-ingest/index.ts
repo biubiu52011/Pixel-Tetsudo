@@ -112,16 +112,22 @@ Deno.serve(async (request) => {
     });
     if (error) throw new Error("SQL_IMPORT_FAILED:" + error.message);
     const counts = Array.isArray(data) ? data[0] : data;
-    if (!counts || Number(counts.train_count) !== rows.length) {
+    if (!counts || Number(counts.train_count) < 1 ||
+        Number(counts.train_count) > rows.length) {
       throw new Error("IMPORT_COUNT_MISMATCH");
     }
+    // Incomplete upstream train rows remain excluded from movement estimates.
+    // Record omissions explicitly so consumers never mistake this for a full timetable.
+    const omitted = rows.length - Number(counts.train_count);
+    const resultStatus = omitted ? "partial" : "complete";
     const { error: statusError } = await db.from("timetable_ingest_jobs").update({
-      status: "complete", train_count: Number(counts.train_count),
-      stop_count: Number(counts.stop_count), updated_at: new Date().toISOString()
+      status: resultStatus, train_count: Number(counts.train_count),
+      stop_count: Number(counts.stop_count), omitted_count: omitted,
+      updated_at: new Date().toISOString()
     }).eq("id", jobId);
     if (statusError) throw new Error("STATUS_WRITE_FAILED");
-    return reply({ ok: true, status: "complete", line_id: job.line_id,
-      trains: counts.train_count, stops: counts.stop_count });
+    return reply({ ok: true, status: resultStatus, line_id: job.line_id,
+      trains: counts.train_count, stops: counts.stop_count, omitted });
   } catch (e) {
     const message = String(e instanceof Error ? e.message : e);
     // Errors include only a status code or SQL validation reason, not raw URLs/keys.
