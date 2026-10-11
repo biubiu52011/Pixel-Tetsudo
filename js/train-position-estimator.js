@@ -257,7 +257,11 @@
         "oimachi": "oimachi",
         "tokyoteleport": "tokyoteleport",
         "shinkiba": "shinkiba",
-        "shinonome": "shinonome"
+        "shinonome": "shinonome",
+        // Official source station IDs and the existing Pixel Tetsudo
+        // station keys differ in spelling; both refer to the same stations.
+        "kokukoen": "kokukokoen",
+        "shiraitodai": "shiroitai"
       };
       return aliases[k] || k;
     } catch(e) { return String(key || "").toLowerCase().replace(/[-_\s]/g, ""); }
