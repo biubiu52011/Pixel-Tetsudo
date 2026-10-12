@@ -265,6 +265,364 @@ function hydrateVerifiedArtworkCatalog(rows) {
   _verifiedSqlArtworkByExactFormation = formations;
   return true;
 }
+
+// Local approved PNG snapshot from 2026-10-12: no Supabase gallery request at runtime.
+// Keep this inside the existing single TrainIcons/TrainVehicle identity module.
+// Records only authorize a known exact vehicle/formation to display an image;
+// they never establish which vehicle operates an arbitrary train number.
+hydrateVerifiedArtworkCatalog([
+  {
+    "operator": "SaitamaNewUrbanTransit",
+    "vehicle_type": "2000系",
+    "formation_id": "01",
+    "livery": "レッドパープル",
+    "theme": null,
+    "valid_from": null,
+    "valid_to": null,
+    "image_path": "images/列车/埼玉新都市交通/埼玉新都市交通_2000系_01編成_レッドパープル.png"
+  },
+  {
+    "operator": "SaitamaNewUrbanTransit",
+    "vehicle_type": "2000系",
+    "formation_id": "02",
+    "livery": "オレンジ",
+    "theme": null,
+    "valid_from": null,
+    "valid_to": null,
+    "image_path": "images/列车/埼玉新都市交通/埼玉新都市交通_2000系_02編成_オレンジ.png"
+  },
+  {
+    "operator": "SaitamaNewUrbanTransit",
+    "vehicle_type": "2000系",
+    "formation_id": "03",
+    "livery": "グリーン",
+    "theme": null,
+    "valid_from": null,
+    "valid_to": null,
+    "image_path": "images/列车/埼玉新都市交通/埼玉新都市交通_2000系_03編成_グリーン.png"
+  },
+  {
+    "operator": "SaitamaNewUrbanTransit",
+    "vehicle_type": "2000系",
+    "formation_id": "04",
+    "livery": "イエロー",
+    "theme": null,
+    "valid_from": null,
+    "valid_to": null,
+    "image_path": "images/列车/埼玉新都市交通/埼玉新都市交通_2000系_04編成_イエロー.png"
+  },
+  {
+    "operator": "SaitamaNewUrbanTransit",
+    "vehicle_type": "2000系",
+    "formation_id": "05",
+    "livery": "ブルー",
+    "theme": null,
+    "valid_from": null,
+    "valid_to": null,
+    "image_path": "images/列车/埼玉新都市交通/埼玉新都市交通_2000系_05編成_ブルー.png"
+  },
+  {
+    "operator": "SaitamaNewUrbanTransit",
+    "vehicle_type": "2000系",
+    "formation_id": "06",
+    "livery": "レッド",
+    "theme": null,
+    "valid_from": null,
+    "valid_to": null,
+    "image_path": "images/列车/埼玉新都市交通/埼玉新都市交通_2000系_06編成_レッド.png"
+  },
+  {
+    "operator": "SaitamaNewUrbanTransit",
+    "vehicle_type": "2000系",
+    "formation_id": "07",
+    "livery": "さくら色",
+    "theme": null,
+    "valid_from": null,
+    "valid_to": null,
+    "image_path": "images/列车/埼玉新都市交通/埼玉新都市交通_2000系_07編成_さくら色.png"
+  },
+  {
+    "operator": "SaitamaNewUrbanTransit",
+    "vehicle_type": "2020系",
+    "formation_id": "21",
+    "livery": "グリーンクリスタル",
+    "theme": null,
+    "valid_from": null,
+    "valid_to": null,
+    "image_path": "images/列车/埼玉新都市交通/埼玉新都市交通_2020系_21編成_グリーンクリスタル.png"
+  },
+  {
+    "operator": "SaitamaNewUrbanTransit",
+    "vehicle_type": "2020系",
+    "formation_id": "22",
+    "livery": "ブライトアンバー",
+    "theme": null,
+    "valid_from": null,
+    "valid_to": null,
+    "image_path": "images/列车/埼玉新都市交通/埼玉新都市交通_2020系_22編成_ブライトアンバー.png"
+  },
+  {
+    "operator": "SaitamaNewUrbanTransit",
+    "vehicle_type": "2020系",
+    "formation_id": "23",
+    "livery": "ピュアルビー",
+    "theme": null,
+    "valid_from": null,
+    "valid_to": null,
+    "image_path": "images/列车/埼玉新都市交通/埼玉新都市交通_2020系_23編成_ピュアルビー.png"
+  },
+  {
+    "operator": "SaitamaNewUrbanTransit",
+    "vehicle_type": "2020系",
+    "formation_id": "24",
+    "livery": "ゴールデントパーズ",
+    "theme": null,
+    "valid_from": null,
+    "valid_to": null,
+    "image_path": "images/列车/埼玉新都市交通/埼玉新都市交通_2020系_24編成_ゴールデントパーズ.png"
+  },
+  {
+    "operator": "SaitamaNewUrbanTransit",
+    "vehicle_type": "2020系",
+    "formation_id": "25",
+    "livery": "トワイライトアメジスト",
+    "theme": null,
+    "valid_from": null,
+    "valid_to": null,
+    "image_path": "images/列车/埼玉新都市交通/埼玉新都市交通_2020系_25編成_トワイライトアメジスト.png"
+  },
+  {
+    "operator": "SaitamaNewUrbanTransit",
+    "vehicle_type": "2020系",
+    "formation_id": "26",
+    "livery": "ブルーサファイア＆クリソベリル",
+    "theme": null,
+    "valid_from": null,
+    "valid_to": null,
+    "image_path": "images/列车/埼玉新都市交通/埼玉新都市交通_2020系_26編成_ブルーサファイア＆クリソベリル.png"
+  },
+  {
+    "operator": "ShonanMonorail",
+    "vehicle_type": "5000系",
+    "formation_id": "5601",
+    "livery": "red",
+    "theme": null,
+    "valid_from": null,
+    "valid_to": null,
+    "image_path": "images/列车/湘南モノレール/湘南モノレール_5000系_5601編成_レッド.png"
+  },
+  {
+    "operator": "ShonanMonorail",
+    "vehicle_type": "5000系",
+    "formation_id": "5603",
+    "livery": "blue",
+    "theme": null,
+    "valid_from": null,
+    "valid_to": null,
+    "image_path": "images/列车/湘南モノレール/湘南モノレール_5000系_5603編成_ブルー.png"
+  },
+  {
+    "operator": "ShonanMonorail",
+    "vehicle_type": "5000系",
+    "formation_id": "5605",
+    "livery": "green",
+    "theme": null,
+    "valid_from": null,
+    "valid_to": null,
+    "image_path": "images/列车/湘南モノレール/湘南モノレール_5000系_5605編成_グリーン.png"
+  },
+  {
+    "operator": "ShonanMonorail",
+    "vehicle_type": "5000系",
+    "formation_id": "5607",
+    "livery": "yellow",
+    "theme": null,
+    "valid_from": null,
+    "valid_to": null,
+    "image_path": "images/列车/湘南モノレール/湘南モノレール_5000系_5607編成_イエロー.png"
+  },
+  {
+    "operator": "ShonanMonorail",
+    "vehicle_type": "5000系",
+    "formation_id": "5609",
+    "livery": "purple",
+    "theme": null,
+    "valid_from": null,
+    "valid_to": null,
+    "image_path": "images/列车/湘南モノレール/湘南モノレール_5000系_5609編成_バイオレット.png"
+  },
+  {
+    "operator": "ShonanMonorail",
+    "vehicle_type": "5000系",
+    "formation_id": "5611",
+    "livery": "black",
+    "theme": null,
+    "valid_from": null,
+    "valid_to": null,
+    "image_path": "images/列车/湘南モノレール/湘南モノレール_5000系_5611編成_ブラック.png"
+  },
+  {
+    "operator": "ShonanMonorail",
+    "vehicle_type": "5000系",
+    "formation_id": "5613",
+    "livery": "pink",
+    "theme": null,
+    "valid_from": null,
+    "valid_to": null,
+    "image_path": "images/列车/湘南モノレール/湘南モノレール_5000系_5613編成_ピンク.png"
+  },
+  {
+    "operator": "Tokyu",
+    "vehicle_type": "1000系",
+    "formation_id": "1013F",
+    "livery": null,
+    "theme": "緑の電車",
+    "valid_from": "2019-11-25",
+    "valid_to": null,
+    "image_path": "images/列车/東急電鉄/東急電鉄_1000系_1013F_緑の電車.png"
+  },
+  {
+    "operator": "Tokyu",
+    "vehicle_type": "1000系",
+    "formation_id": "1017F",
+    "livery": null,
+    "theme": "きになる電車",
+    "valid_from": null,
+    "valid_to": null,
+    "image_path": "images/列车/東急電鉄/東急電鉄_1000系_1017F_きになる電車.png"
+  },
+  {
+    "operator": "Tokyu",
+    "vehicle_type": "1000系1500番台",
+    "formation_id": "1522F",
+    "livery": null,
+    "theme": "いけたまハッピートレイン",
+    "valid_from": "2024-06-23",
+    "valid_to": null,
+    "image_path": "images/列车/東急電鉄/東急電鉄_1000系_1500番台_1522F_いけたまハッピートレイン.png"
+  },
+  {
+    "operator": "TOKYU",
+    "vehicle_type": "300系",
+    "formation_id": "301",
+    "livery": "玉電カラー",
+    "theme": null,
+    "valid_from": null,
+    "valid_to": null,
+    "image_path": "images/列车/東急電鉄/東急電鉄_300系_301編成_玉電カラー.png"
+  },
+  {
+    "operator": "TOKYU",
+    "vehicle_type": "300系",
+    "formation_id": "302",
+    "livery": "モーニングブルー",
+    "theme": null,
+    "valid_from": null,
+    "valid_to": null,
+    "image_path": "images/列车/東急電鉄/東急電鉄_300系_302編成_モーニングブルー.png"
+  },
+  {
+    "operator": "TOKYU",
+    "vehicle_type": "300系",
+    "formation_id": "303",
+    "livery": "クラシックブルー",
+    "theme": null,
+    "valid_from": null,
+    "valid_to": null,
+    "image_path": "images/列车/東急電鉄/東急電鉄_300系_303編成_クラシックブルー.png"
+  },
+  {
+    "operator": "TOKYU",
+    "vehicle_type": "300系",
+    "formation_id": "304",
+    "livery": "アップルグリーン",
+    "theme": null,
+    "valid_from": null,
+    "valid_to": null,
+    "image_path": "images/列车/東急電鉄/東急電鉄_300系_304編成_アップルグリーン.png"
+  },
+  {
+    "operator": "TOKYU",
+    "vehicle_type": "300系",
+    "formation_id": "306",
+    "livery": "レリーフイエロー",
+    "theme": null,
+    "valid_from": null,
+    "valid_to": null,
+    "image_path": "images/列车/東急電鉄/東急電鉄_300系_306編成_レリーフイエロー.png"
+  },
+  {
+    "operator": "TOKYU",
+    "vehicle_type": "300系",
+    "formation_id": "307",
+    "livery": "ブルーイッシュラベンダー",
+    "theme": null,
+    "valid_from": null,
+    "valid_to": null,
+    "image_path": "images/列车/東急電鉄/東急電鉄_300系_307編成_ブルーイッシュラベンダー.png"
+  },
+  {
+    "operator": "TOKYU",
+    "vehicle_type": "300系",
+    "formation_id": "309",
+    "livery": "バーントオレンジ",
+    "theme": null,
+    "valid_from": null,
+    "valid_to": null,
+    "image_path": "images/列车/東急電鉄/東急電鉄_300系_309編成_バーントオレンジ.png"
+  },
+  {
+    "operator": "TOKYU",
+    "vehicle_type": "300系",
+    "formation_id": "310",
+    "livery": "ターコイズグリーン",
+    "theme": null,
+    "valid_from": null,
+    "valid_to": null,
+    "image_path": "images/列车/東急電鉄/東急電鉄_300系_310編成_ターコイズグリーン.png"
+  },
+  {
+    "operator": "Yamaman",
+    "vehicle_type": "1000形",
+    "formation_id": "第1編成",
+    "livery": null,
+    "theme": "こあら1号",
+    "valid_from": null,
+    "valid_to": null,
+    "image_path": "images/列车/山万/山万_1000形_第1編成_こあら1号.png"
+  },
+  {
+    "operator": "Yamaman",
+    "vehicle_type": "1000形",
+    "formation_id": "第2編成",
+    "livery": null,
+    "theme": "こあら2号",
+    "valid_from": null,
+    "valid_to": null,
+    "image_path": "images/列车/山万/山万_1000形_第2編成_こあら2号.png"
+  },
+  {
+    "operator": "Yamaman",
+    "vehicle_type": "1000形",
+    "formation_id": "第3編成",
+    "livery": null,
+    "theme": "こあら3号",
+    "valid_from": null,
+    "valid_to": null,
+    "image_path": "images/列车/山万/山万_1000形_第3編成_こあら3号.png"
+  },
+  {
+    "operator": "YokohamaMinatomiraiRailway",
+    "vehicle_type": "Y000系",
+    "formation_id": "Y002F",
+    "livery": null,
+    "theme": "ひつじでんしゃ",
+    "valid_from": "2020-03-29",
+    "valid_to": null,
+    "image_path": "images/列车/東急電鉄/東急電鉄_Y000系_ひつじでんしゃ.png"
+  }
+]);
+
 function _canonicalVehicleIconPath(name, serviceDate) {
   var n = String(name || "").trim();
   if (!n) return null;
