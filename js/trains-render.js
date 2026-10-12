@@ -1052,8 +1052,34 @@ function _rememberTrainArtworkFailure(trainUid) {
     };
   }
 
+  function _verifiedCarsetLabel(p) {
+    if (!p || p.vehicleIdentityStatus !== "EXACT" || !p.serviceDate) return "";
+    var ids = Array.isArray(p.vehicleFormationCandidates)
+      ? p.vehicleFormationCandidates.map(function(x){ return String(x || "").trim(); }).filter(Boolean)
+      : [];
+    var single = String(p.vehicleFormationId || "").trim();
+    if (single && ids.length === 1 && ids[0] === single) return single;
+    // Coupled consists and dual aliases must be reported together, not
+    // converted into a guessed single formation. Require one dated decisive
+    // observation that explicitly contains all the recorded formation ids.
+    if (ids.length < 2 || !Array.isArray(p.operationEvidence)) return "";
+    var isConfirmed = p.operationEvidence.some(function(e) {
+      if (!e || e.decisive !== true || !e.sourceUrl || !e.formationId) return false;
+      if (String(e.observedDate || "").slice(0, 10) !== String(p.serviceDate).slice(0, 10)) return false;
+      var observed = String(e.formationId).split(/\s*\/\s*|\s*,\s*|\s*\|\s*/).filter(Boolean);
+      return observed.length === ids.length && observed.every(function(id) { return ids.indexOf(id) >= 0; });
+    });
+    return isConfirmed ? ids.join(" + ") : "";
+  }
+
   function _trainMarkerTitle(p) {
     var tip = [];
+    var carset = _verifiedCarsetLabel(p);
+    var lang = String(window.currentLang || "ja").toLowerCase();
+    var formationLabel = /^zh/.test(lang) ? "编组" : (lang === "en" ? "Carset" : "編成");
+    var unknownLabel = /^zh/.test(lang) ? "编组未确认" : (lang === "en" ? "Carset unconfirmed" : "編成未確認");
+    // Public label is the physically verified carset, never odpt:trainNumber.
+    tip.push(carset ? (formationLabel + " " + carset) : unknownLabel);
     if (p && p.trainType) {
       var defs = window.TRAIN_TYPE_NAMES || {};
       var def = defs[p.trainType];
@@ -1077,7 +1103,7 @@ function _rememberTrainArtworkFailure(trainUid) {
     marker.setAttribute("href", spec.iconSrc);
     marker.setAttribute("preserveAspectRatio", "xMidYMid meet");
     var titleText = _trainMarkerTitle(p);
-    if (titleText) marker.setAttribute("title", titleText);
+    if (titleText) { marker.setAttribute("title", titleText); marker.setAttribute("aria-label", titleText); }
     // A failed train PNG is replaced on THIS image element with the one neutral
     // gallery PNG. If even that file fails, hide this train rather than drawing
     // SVG or selecting another operator's vehicle.
@@ -1230,6 +1256,12 @@ function _rememberTrainArtworkFailure(trainUid) {
           existingIcon.setAttribute("href", markerSpec.iconSrc);
           existingIcon.setAttribute("visibility", "visible");
         }
+        // The SVG marker survives polling, but its verified carset may change.
+        // Refresh the same tooltip instead of retaining a stale train number
+        // or a previous day's physical formation.
+        var _freshTitle = _trainMarkerTitle(p);
+        existingIcon.setAttribute("title", _freshTitle);
+        existingIcon.setAttribute("aria-label", _freshTitle);
         // Update existing icon position.
         // TrainTrackLayout owns target geometry; this marker owns interpolation.
         // There is exactly one animation authority: per-marker requestAnimationFrame.
