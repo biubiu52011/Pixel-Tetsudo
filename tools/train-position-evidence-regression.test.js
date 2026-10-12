@@ -384,8 +384,8 @@ assert.strictEqual(carsetTools.label({...dated,serviceDate:"2026-10-12"}),"",
   "historical evidence must not label a future service date");
 assert.strictEqual(carsetTools.label({...dated,operationEvidence:[{
  decisive:false,observedDate:"2026-04-17",formationId:"40103F",sourceUrl:"https://example.test"}]}),"");
-assert(renderSource.includes('existingIcon.setAttribute("title", _freshTitle);'),
-  "reused SVG markers must refresh their carset tooltip");
+assert(renderSource.includes('_setTrainMarkerTooltip(existingIcon, _freshTitle, svgNS);'),
+  "reused SVG markers must refresh their native SVG title with the verified carset");
 console.log("verified physical carset label guard: PASS");
 
 assert(fusionSource.includes("function _confirmedFormationEvidence(p)"),
@@ -396,6 +396,8 @@ assert(fusionSource.includes("preferred.serviceDate === other.serviceDate"),
   "carset evidence must not cross operating dates");
 assert(fusionSource.includes("p.operationEvidence = (p.operationEvidence || []).concat([v.formationProof])"),
   "evidence provenance must accompany inherited carsets");
+assert(fusionSource.includes("!preferred.vehicleFormationConflict"),
+  "once date-valid carsets conflict, later candidates cannot silently reselect a formation");
 const trainsPageSource=fs.readFileSync("js/trains-page.js","utf8");
 assert(trainsPageSource.includes("(_tp.vehicleFormationId ||") &&
        trainsPageSource.includes("_tp.operationEvidence.map(function(e)"),
