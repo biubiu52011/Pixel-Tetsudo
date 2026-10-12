@@ -189,3 +189,20 @@ test('direct through railway loads its timetable evidence and shares one estimat
   assert.match(fusion, /_scheduledEstimateItineraries\[k\]\[fingerprint\]/);
   assert.doesNotMatch(page, /Rinkai.*vehicleType.*=.*70-000/);
 });
+
+test('SaikyoKawagoe and Kawagoe use ODPT/JS without loading legacy manual timetables', () => {
+  const source = read('data/core/runtime-config.js');
+  const bundle = read('data/core/data-config-bundle.js');
+  const fusion = read('js/data-fusion.js');
+  const api = read('data/api/odpt-unified.js');
+  for (const line of ['SaikyoKawagoe', 'Kawagoe']) {
+    const policy = new RegExp('"' + line + '":\\s*\\{\\s*mode:\\s*"(?:FULL|HYBRID)",\\s*manualTimetableEvidence:\\s*false\\s*\\}');
+    assert.match(source, policy);
+    assert.match(bundle, policy);
+    assert.match(bundle, new RegExp('"' + line + '":\\s*true'));
+    assert.match(api, new RegExp('"' + line + '":\\s*"JR-East"'));
+  }
+  assert.match(fusion, /if \(_manualEvidenceDisabled\(lineId\)\) return Promise\.resolve\(false\)/);
+  assert.match(fusion, /if \(_manualEvidenceDisabled\(lineId\)\) \{ resolve\(false\); return; \}/);
+  assert.match(api, /if \(hasRealtimePositionApi\(lineId\)\) return Promise\.resolve\(\[\]\)/);
+});

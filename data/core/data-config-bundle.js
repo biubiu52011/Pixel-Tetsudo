@@ -889,6 +889,10 @@ window.getTransferHint = function(stationId, lang) {
       // Reference train types are resolved by JS evidence; never load a
       // parallel manual timetable or infer additional position PINs.
       "SaikyoKawagoe": { mode: "FULL", manualTimetableEvidence: false },
+      // Kawagoe (Kawagoe–Komagawa) has a Train API but not proven full coverage.
+      // Use ODPT TrainTimetable + the shared JS estimator for uncovered trains,
+      // never the legacy manual/SQL timetable as an additional authority.
+      "Kawagoe": { mode: "HYBRID", manualTimetableEvidence: false },
       "Oedo": { mode: "FULL" },
       "Arakawa": { mode: "FULL" },
       "KeioMain": { mode: "FULL" },
