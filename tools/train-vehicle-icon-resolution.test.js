@@ -352,19 +352,19 @@ console.log('TrainMarker single-script contract: 6 PASS');
 
 const catalogEdge = read('supabase/functions/train-runs/index.ts');
 const catalogIcons = read('js/train-vehicle.js');
-assert.ok(/catalog=vehicle-artwork/.test(catalogIcons) &&
-          /VERIFIED_SQL_VEHICLE_IDENTITIES/.test(catalogEdge) &&
-          /vehicle_artwork_exact_locked/.test(catalogEdge) &&
-          !/db\.from\("vehicle_image_assets"\)/.test(catalogEdge),
-  'PNG catalog must come from exact identities joined to reviewed PNG locks, never inventory');
+assert.ok(!/catalog=vehicle-artwork/.test(catalogIcons) &&
+           !/VERIFIED_SQL_VEHICLE_IDENTITIES|vehicle_artwork_exact_locked/.test(catalogEdge) &&
+           /CANONICAL_VEHICLES/.test(catalogIcons) &&
+           /hydrateVerifiedArtworkCatalog/.test(catalogIcons),
+  'PNG artwork must resolve through the local canonical module, never a runtime Supabase image catalog');
 assert.strictEqual(context.window.TrainIcons.hydrateVerifiedArtworkCatalog([
   {image_path:'images/列车/JR東日本/JR東日本_E235系_0番台.png'}]), true);
 assert.strictEqual(context.window.TrainIcons.resolveVehicleArtwork('E235系0番台（山手線）'),
   '../images/列车/JR東日本/JR東日本_E235系_0番台.png',
-  'SQL verified catalog cannot break canonical PNG identity');
+  'optional in-memory gallery evidence must preserve canonical PNG identity');
 assert.strictEqual(context.window.TrainIcons.resolveVehicleArtwork('unverified train type'), null,
-  'DB catalog cannot mint unknown vehicle identity');
-console.log('SQL vetted artwork catalog: 3 PASS');
+  'in-memory gallery entries cannot invent vehicle identity');
+console.log('local canonical artwork catalog: 3 PASS');
 
 const dbOnlyName = 'DATABASE-VERIFIED-EXACT-TEST-TYPE';
 assert.strictEqual(context.window.TrainIcons.resolveVehicleArtwork(dbOnlyName), null);
@@ -382,7 +382,7 @@ context.window.TrainIcons.hydrateVerifiedArtworkCatalog([
 ]);
 assert.strictEqual(context.window.TrainIcons.resolveVehicleArtwork(dbOnlyName), null,
   'ambiguous exact vehicle names must not select an arbitrary operator artwork');
-console.log('SQL-certified PNG realtime projection safety: 4 PASS');
+console.log('in-memory PNG realtime projection safety: 4 PASS');
 
 // Both ODPT realtime and timetable estimates share the same late-bound
 // certified PNG projection. Formation uncertainty may never be bypassed.
