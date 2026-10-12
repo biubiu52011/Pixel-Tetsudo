@@ -6,16 +6,32 @@
 var _trainArtworkFailure = {};
 var _trainArtworkFailureCount = 0;
 var _TRAIN_ARTWORK_FAILURE_MAX = 500;
-function _rememberTrainArtworkFailure(trainUid) {
-  if (!trainUid) return;
-  if (!_trainArtworkFailure[String(trainUid)]) {
-    _trainArtworkFailure[String(trainUid)] = true;
-    _trainArtworkFailureCount++;
-    if (_trainArtworkFailureCount > _TRAIN_ARTWORK_FAILURE_MAX) {
-      _trainArtworkFailure = {};
-      _trainArtworkFailureCount = 0;
-    }
+var _TRAIN_ARTWORK_FAILURE_RETRY_MS = 45 * 1000;
+function _rememberTrainArtworkFailure(trainUid, imagePath) {
+  if (!trainUid || !imagePath) return;
+  if (!_trainArtworkFailure[String(trainUid)]) _trainArtworkFailureCount++;
+  // An asset failure is specific to the requested PNG, not to the train.
+  // In particular an iOS image/network transient must not permanently hide
+  // valid artwork after subsequent timetable or realtime refreshes.
+  _trainArtworkFailure[String(trainUid)] = { path: String(imagePath), at: Date.now() };
+  if (_trainArtworkFailureCount > _TRAIN_ARTWORK_FAILURE_MAX) {
+    _trainArtworkFailure = {};
+    _trainArtworkFailureCount = 0;
   }
+}
+function _isTrainArtworkFailureActive(trainUid, p) {
+  var key = String(trainUid || "");
+  var failure = key && _trainArtworkFailure[key];
+  if (!failure) return false;
+  var current = window.TrainVehicle && window.TrainVehicle.selectMarkerArtwork
+    ? window.TrainVehicle.selectMarkerArtwork(p, false) : null;
+  var samePath = current && current.iconSrc && current.iconSrc === failure.path;
+  var active = samePath && Date.now() - failure.at < _TRAIN_ARTWORK_FAILURE_RETRY_MS;
+  if (!active) {
+    delete _trainArtworkFailure[key];
+    _trainArtworkFailureCount = Math.max(0, _trainArtworkFailureCount - 1);
+  }
+  return !!active;
 }
 
   function _renderThroughChip(layer, ns, x, y, lineObj, iconSize, mobile) {
@@ -1040,7 +1056,7 @@ function _rememberTrainArtworkFailure(trainUid) {
   function _trainMarkerSpec(p, trainUid) {
     // TrainVehicle is the sole PNG/neutral selection authority. This module
     // owns only display geometry, collision layout and image load recovery.
-    var artworkFailed = !!(trainUid && _trainArtworkFailure[String(trainUid)] === true);
+    var artworkFailed = _isTrainArtworkFailureActive(trainUid, p);
     var artwork = window.TrainVehicle &&
       typeof window.TrainVehicle.selectMarkerArtwork === "function"
       ? window.TrainVehicle.selectMarkerArtwork(p, artworkFailed)
@@ -1105,7 +1121,7 @@ function _rememberTrainArtworkFailure(trainUid) {
     marker.addEventListener("error", function () {
       if (!trainLayer || !trainLayer.isConnected || !marker.isConnected) return;
       var uid = marker.getAttribute("data-train-id") || "";
-      if (uid) _rememberTrainArtworkFailure(uid);
+      if (uid) _rememberTrainArtworkFailure(uid, marker.getAttribute("href"));
       marker.setAttribute("visibility", "hidden");
     });
     marker.setAttribute("data-train-id", String(trainUid));
@@ -1231,9 +1247,8 @@ function _rememberTrainArtworkFailure(trainUid) {
         existingIcon = null;
       }
       
-      // A failed image node is hidden; a subsequent successful retry of the
-      // same PNG must create a fresh request instead of keeping that old,
-      // invisible image element indefinitely after the failure TTL expires.
+      // A failed image node is hidden; a later retry of the same valid PNG
+      // must trigger a new image request, not retain an invisible old node.
       if (existingIcon && existingIcon.getAttribute("visibility") === "hidden") {
         if (existingIcon._moveRaf) cancelAnimationFrame(existingIcon._moveRaf);
         if (existingIcon.parentNode) existingIcon.parentNode.removeChild(existingIcon);
