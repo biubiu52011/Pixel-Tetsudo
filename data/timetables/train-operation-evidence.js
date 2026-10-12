@@ -82,13 +82,13 @@
       resolveEvidence: function(trainNumber, ctx) {
         ctx = ctx || {};
         var d = String(ctx.serviceDate || "").slice(0, 10);
-        var line = [ctx.lineId, ctx.railway, ctx.operator].join("|").toLowerCase();
+        var line = [ctx.lineId, ctx.railway, ctx.operator].join("|").toLowerCase().replace(/[^a-z0-9|]/g, "");
         var n = String(trainNumber || "");
         var matches = [];
         for (var i=0;i<records.length;i++) {
           var r=records[i];
           if (!r || r.validDate !== d) continue;
-          if (line.indexOf(String(r.networkKey || "").toLowerCase()) < 0) continue;
+          if (line.indexOf(String(r.networkKey || "").toLowerCase().replace(/[^a-z0-9]/g, "")) < 0) continue;
           var trainMatch = r.trainNumbers && r.trainNumbers.indexOf(n) >= 0;
           var opMatch = ctx.operationCode && String(ctx.operationCode) === String(r.operationCode);
           if (trainMatch || opMatch) matches.push(r);
