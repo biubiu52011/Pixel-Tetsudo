@@ -217,7 +217,8 @@ function resolveCanonicalVehicle(name) {
   return CANONICAL_VEHICLE_ALIAS_INDEX[n] || null;
 }
 
-// SQL supplies a vetted path allowlist. The canonical identity resolver remains
+// An optional preverified in-memory catalogue can extend the embedded artwork.
+// The canonical identity resolver remains
 // the only vehicle selector: catalog rows cannot guess a train's type.
 var _verifiedSqlArtworkPaths = null;
 var _verifiedSqlArtworkByExactName = null;
@@ -264,18 +265,6 @@ function hydrateVerifiedArtworkCatalog(rows) {
   _verifiedSqlArtworkByExactFormation = formations;
   return true;
 }
-function refreshVerifiedArtworkCatalog() {
-  if (typeof fetch !== "function") return Promise.resolve(false);
-  return fetch("https://pnupwfmgbtxqhpzsrhfn.supabase.co/functions/v1/train-runs?catalog=vehicle-artwork",
-    { credentials: "omit" }).then(function(res) {
-      if (!res.ok) throw new Error("vehicle artwork catalog HTTP " + res.status);
-      return res.json();
-    }).then(function(body) {
-      return body && body.ok === true && Array.isArray(body.assets)
-        ? hydrateVerifiedArtworkCatalog(body.assets) : false;
-    }).catch(function() { return false; });
-}
-
 function _canonicalVehicleIconPath(name, serviceDate) {
   var n = String(name || "").trim();
   if (!n) return null;
@@ -287,7 +276,7 @@ function _canonicalVehicleIconPath(name, serviceDate) {
     if (rec.validFrom && d < rec.validFrom) return null;
     if (rec.validTo && d > rec.validTo) return null;
   }
-  // When SQL certifies the same canonical artwork, accept its path.
+  // An optional in-memory catalogue may certify the same canonical artwork.
   // Otherwise keep the previously verified static mapping for offline use.
   if (_verifiedSqlArtworkPaths && _verifiedSqlArtworkPaths[rec.asset]) return rec.asset;
   return rec.asset;
@@ -363,12 +352,8 @@ function _canonicalVehicleIconPath(name, serviceDate) {
     resolveCanonicalVehicle: resolveCanonicalVehicle,
     CANONICAL_VEHICLES: CANONICAL_VEHICLES,
     hydrateVerifiedArtworkCatalog: hydrateVerifiedArtworkCatalog,
-    refreshVerifiedArtworkCatalog: refreshVerifiedArtworkCatalog
+    // An optional preverified in-memory catalogue may extend embedded assets.
   };
-
-  // Fire once after the canonical registry exists. The request is read-only,
-  // never blocks rendering, and never grants identity to an UNKNOWN train.
-  if (typeof fetch === "function") refreshVerifiedArtworkCatalog();
 
   // Normalize operator labels only for metadata carried by explicit evidence.
   function normOp(op) {

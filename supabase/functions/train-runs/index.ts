@@ -69,71 +69,6 @@ function stationKey(urn: string) {
   return p[p.length - 1] || urn;
 }
 
-async function fetchOdptCalendarRows(source: any, sourceKey: string, calendar: string) {
-  const u = new URL("./odpt:TrainTimetable", source.odpt_base_url);
-  u.searchParams.set("odpt:operator", "odpt.Operator:" + source.odpt_operator);
-  u.searchParams.set("odpt:railway", "odpt.Railway:" + source.odpt_operator + "." + source.odpt_railway);
-  u.searchParams.set("odpt:calendar", calendar);
-  u.searchParams.set("acl:consumerKey", sourceKey);
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 8000);
-  let res: Response;
-  try { res = await fetch(u.toString(), { signal: controller.signal }); }
-  finally { clearTimeout(timer); }
-  if (!res.ok) throw new Error("ODPT_HTTP_" + res.status);
-  const part = await res.json();
-  if (!Array.isArray(part)) throw new Error("ODPT_INVALID_PAYLOAD");
-  if (part.length >= 1000) throw new Error("ODPT_TRUNCATED");
-  return part;
-}
-
-async function fetchOdptRows(source: any, sourceKey: string, serviceDate: string) {
-  for (const calendar of serviceCalendars(serviceDate)) {
-    const part = await fetchOdptCalendarRows(source, sourceKey, calendar);
-    if (part.length) return part;
-  }
-  return [];
-}
-
-function formatOdptRows(source: any, lineId: string, serviceDate: string, rows: any[]) {
-  const valid = rows.filter((tt) =>
-    tt && tt["odpt:trainNumber"] && Array.isArray(tt["odpt:trainTimetableObject"]) &&
-    tt["odpt:trainTimetableObject"].length >= 2
-  );
-  if (valid.length !== rows.length) throw new Error("ODPT_INCOMPLETE_RUNS");
-  const importRows = valid.map((tt) => ({
-    id: null,
-    line_id: lineId,
-    service_date: serviceDate,
-    source: "ODPT_API",
-    calendar_type: calendarType(tt["odpt:calendar"]),
-    operator: source.odpt_operator,
-    network_key: source.odpt_railway,
-    train_number: String(tt["odpt:trainNumber"]),
-    // Train numbers are not operation codes; the scoped evidence resolver owns that link.
-    operation_code: "",
-    rail_direction: tt["odpt:railDirection"] || null,
-    train_type: tt["odpt:trainType"] || null,
-    destination_station: Array.isArray(tt["odpt:destinationStation"])
-      ? (tt["odpt:destinationStation"][0] || null) : (tt["odpt:destinationStation"] || null),
-    stops: tt["odpt:trainTimetableObject"].map((stop: any, index: number) => {
-      const urn = stationUrn(stop);
-      if (!urn) throw new Error("ODPT_MISSING_STATION");
-      return {
-        train_run_id: null,
-        stop_sequence: index,
-        station_key: stationKey(urn), station_urn: urn,
-        arrival_time: sqlTime(stop["odpt:arrivalTime"]),
-        departure_time: sqlTime(stop["odpt:departureTime"]),
-        arrival_minute: minuteOf(stop["odpt:arrivalTime"]),
-        departure_minute: minuteOf(stop["odpt:departureTime"]),
-      };
-    }),
-  }));
-  return importRows;
-}
-
-
 /**
  * Read recurring SQL timetable templates when a line has no upstream API and
  * there is no date-specific run. Calendar variants are alternatives.
@@ -319,24 +254,6 @@ Deno.serve(async (req: Request) => {
   if (req.method !== "GET") return json({ ok: false, error: "METHOD_NOT_ALLOWED" }, 405);
 
   const url = new URL(req.url);
-  // Existing read-only endpoint: serve exact visual identities only when their
-  // PNG also has a protected reviewed-asset baseline; never promote an asset lock
-  // into vehicle or train identity evidence.
-  if (url.searchParams.get("catalog") === "vehicle-artwork") {
-    const keys = JSON.parse(Deno.env.get("SUPABASE_SECRET_KEYS") || "{}");
-    const key = keys.default || Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
-    const supabaseUrl = Deno.env.get("SUPABASE_URL");
-    if (!supabaseUrl || !key) return json({ ok: false, error: "SERVER_CONFIG" }, 500);
-    const db = createClient(supabaseUrl, key, { auth: { persistSession: false, autoRefreshToken: false } });
-    const { data, error } = await db.from("vehicle_artwork_exact_locked")
-      .select("operator,vehicle_type,formation_id,livery,theme,valid_from,valid_to,image_path")
-      .limit(500);
-    if (error) return json({ ok: false, error: "VEHICLE_CATALOG_FAILED" }, 500);
-    const paths = (data || []).filter((row: any) =>
-      /^images\/列车\/[^/]+\/[^/]+\.png$/.test(row.image_path || ""));
-    return json({ ok: true, source: "VERIFIED_SQL_VEHICLE_IDENTITIES", assets: paths });
-  }
-
   const lineId = (url.searchParams.get("line_id") || "").trim();
   const serviceDate = (url.searchParams.get("service_date") || "").trim();
   if (!/^[A-Za-z0-9._:-]{1,80}$/.test(lineId)) return json({ ok: false, error: "INVALID_LINE_ID" }, 400);
@@ -349,31 +266,14 @@ Deno.serve(async (req: Request) => {
 
   const db = createClient(supabaseUrl, secretKey, { auth: { persistSession: false, autoRefreshToken: false } });
   const { data: source, error: sourceError } = await db.from("railway_lines")
-    .select("odpt_operator,odpt_railway,odpt_base_url,timetable_operator,timetable_api_enabled").eq("id", lineId).maybeSingle();
+    .select("timetable_operator,realtime_position_api_enabled").eq("id", lineId).maybeSingle();
   if (sourceError) return json({ ok: false, error: "DB_SOURCE_LOOKUP_FAILED" }, 500);
-  const hasTimetableApi = !!(source?.timetable_api_enabled && source?.odpt_operator &&
-    source?.odpt_railway && source?.odpt_base_url);
-  // SQL is the shared timetable authority for matching, even when an operator
-  // supplies both train-location and TrainTimetable APIs.
-  // Browser's fallback_only=1 reads SQL; it never invokes upstream API twice.
-  if (hasTimetableApi && url.searchParams.get("fallback_only") !== "1") {
-    const sourceKey = source.odpt_base_url.includes("api-challenge")
-      ? Deno.env.get("ODPT_CHALLENGE_CONSUMER_KEY") : Deno.env.get("ODPT_CONSUMER_KEY");
-    if (!sourceKey) return json({ ok: true, complete: false, cache: "BYPASS",
-      source: "API_UNCONFIGURED", line_id: lineId, service_date: serviceDate, runs: [] });
-    try {
-      const upstream = await fetchOdptRows(source, sourceKey, serviceDate);
-      const runs = formatOdptRows(source, lineId, serviceDate, upstream);
-      return json({ ok: true, complete: runs.length > 0, cache: "BYPASS",
-        source: "ODPT_API", line_id: lineId, service_date: serviceDate, runs });
-    } catch (err) {
-      console.error("[train-runs] ODPT API read failed", lineId, String(err));
-      return json({ ok: true, complete: false, cache: "BYPASS",
-        source: "API_ERROR", line_id: lineId, service_date: serviceDate, runs: [] });
-    }
+  // A railway with a realtime position API cannot use database timetables.
+  if (source?.realtime_position_api_enabled) {
+    return json({ ok: true, complete: false, cache: "BYPASS",
+      source: "REALTIME_API_LINE", line_id: lineId, service_date: serviceDate, runs: [] });
   }
 
-  // Database is only for lines without a configured upstream timetable API.
   const { data: runs, error } = await db.from("train_runs")
     .select("id,service_date,calendar_type,operator,network_key,line_id,train_number,operation_code,rail_direction,train_type,destination_station")
     .eq("line_id", lineId).eq("service_date", serviceDate).order("train_number");

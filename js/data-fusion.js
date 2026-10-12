@@ -1838,40 +1838,32 @@
   }
 
   function ensureTimetable(lineId) {
-    // activateRealtimeLines() owns ODPT network loading. If that path already
-    // populated this line, do not start a second timetable source request here;
-    // only lazy-load manual evidence (vehicleType etc.) on top of the shared rows.
-    // SQL fallback capability is resolved per railway by the server, not by
-    // the operator-wide ODPT endpoint. A SQL hit skips legacy JS entirely;
-    // API-equipped lines get a cheap BYPASS response and retain manual evidence.
-
-    // One existing source lifecycle: ODPTClient owns the optional Supabase
-    // read-through cache; a miss falls through to the existing manual path.
-    // No-API lines use SQL as their sole timetable authority. A SQL MISS or
-    // network error must not start a second, legacy JS position source.
-    // ODPT-equipped lines may still load their original manual file solely
-    // for train-level vehicle evidence (existing position authority gates apply).
-    function loadOdptVehicleEvidenceOnly() {
+    // Realtime-API lines never query Supabase. Existing manual files may still
+    // contribute vehicle identification evidence on API-backed lines, while
+    // position estimation follows the existing realtime coverage policy.
+    var liveApi = window.ODPTClient &&
+      typeof window.ODPTClient.hasRealtimePositionApi === "function" &&
+      window.ODPTClient.hasRealtimePositionApi(lineId);
+    if (liveApi) {
       return _hasOdptTimetable(lineId) ? ensureManualTimetable(lineId) : Promise.resolve(false);
     }
+    // No realtime API: Supabase is the sole timetable source. A DB failure
+    // does not secretly start a second, legacy JS position feed.
     if (!window.ODPTClient || typeof window.ODPTClient.getCachedTrainRuns !== "function") {
-      return loadOdptVehicleEvidenceOnly();
+      return Promise.resolve(false);
     }
     return window.ODPTClient.getCachedTrainRuns(lineId).then(function(rows) {
-      // ODPT activation may have completed while the cache request was in flight.
-      if (!rows || !rows.length) return loadOdptVehicleEvidenceOnly();
+      if (!rows || !rows.length) return false;
       if (window.TrainPositionEstimator && typeof window.TrainPositionEstimator.registerManualTimetable === "function") {
         window.TrainPositionEstimator.registerManualTimetable(lineId, rows);
       }
-      // The SQL rows are registered above; the shared estimator below owns
-      // realtime-first merging and deduplication. Do not estimate twice here.
       try {
         var targets = _expandDirtyLines([lineId], allLines);
         if (typeof doEstimation === "function") doEstimation(targets);
         fuseDirty([lineId]);
       } catch(err) { console.debug("[DataFusion] ensureTimetable refresh:", err.message); }
       return true;
-    }).catch(function() { return loadOdptVehicleEvidenceOnly(); });
+    }).catch(function() { return false; });
   }
 
   function ensureManualTimetable(lineId) {

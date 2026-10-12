@@ -115,3 +115,25 @@ test('realtime official statuses update incrementally instead of waiting for eve
   assert.match(body, /setTimeout\(flushChanges, 100\)/);
   assert.match(body, /token !== _listStatusRefreshToken/);
 });
+
+
+test('a line with an active Train API never queries Supabase timetables', () => {
+  const api = read('data/api/odpt-unified.js');
+  const fusion = read('js/data-fusion.js');
+  const config = read('data/core/data-config-bundle.js');
+  assert.match(api, /function hasRealtimePositionApi\(lineId\)/);
+  assert.match(api, /if \(hasRealtimePositionApi\(lineId\)\) return Promise\.resolve\(\[\]\)/);
+  assert.match(api, /var sourcePromise = hasRealtimePositionApi\(lineId\)/);
+  assert.match(fusion, /if \(liveApi\) \{/);
+  assert.match(config, /"SaikyoKawagoe": true/);
+  assert.match(config, /"Kawagoe": true/);
+});
+
+test('SQL train-runs cannot serve realtime lines or a vehicle image catalog', () => {
+  const edge = read('supabase/functions/train-runs/index.ts');
+  const vehicle = read('js/train-vehicle.js');
+  assert.match(edge, /source\?\.realtime_position_api_enabled/);
+  assert.doesNotMatch(edge, /catalog=vehicle-artwork|vehicle_artwork_exact_locked/);
+  assert.doesNotMatch(vehicle, /functions\/v1\/train-runs\?catalog=vehicle-artwork/);
+  assert.doesNotMatch(vehicle, /refreshVerifiedArtworkCatalog\(/);
+});

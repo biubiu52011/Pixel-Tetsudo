@@ -735,7 +735,20 @@
             _positionSource:"supabase-train-run"
         };
     }
+    // Line capability, not operator-wide Train availability or live row count.
+    function hasRealtimePositionApi(lineId) {
+        var op = LINE_TO_OPERATOR[lineId];
+        if (!op || !ODPT_ENDPOINTS[op] || !ODPT_ENDPOINTS[op].train ||
+            !getLineRailwayIdentity(lineId)) return false;
+        var cfg = window.RuntimeConfig || {};
+        if (cfg.REALTIME_POSITION_API_LINES && cfg.REALTIME_POSITION_API_LINES[lineId] === true) return true;
+        var policy = cfg.REALTIME_POSITION_POLICY && cfg.REALTIME_POSITION_POLICY.lines &&
+            cfg.REALTIME_POSITION_POLICY.lines[lineId];
+        return !!(policy && policy.mode === "FULL");
+    }
     function getCachedTrainRuns(lineId) {
+        // Supabase supplies timetables only for railways with no Train realtime API.
+        if (hasRealtimePositionApi(lineId)) return Promise.resolve([]);
         // Timetable API capability is per railway, not per operator.
         // Ask the server for SQL-only fallback; it bypasses API-enabled lines
         // rather than duplicating their ODPT timetable requests.
@@ -786,6 +799,7 @@
         keysConfigured: keysConfigured,
         validateAuthoritativeRealtimeConfig: validateAuthoritativeRealtimeConfig,
         getCachedTrainRuns: getCachedTrainRuns,
+        hasRealtimePositionApi: hasRealtimePositionApi,
 
         clearRealtimeLines: function() {
             Object.keys(_activeRealtimeOperators).forEach(function(op) { delete _activeRealtimeOperators[op]; });
@@ -799,7 +813,7 @@
             var requestedOps = {};
             lineIds.forEach(function(lineId) {
                 var requestedOp = LINE_TO_OPERATOR[lineId];
-                if (requestedOp && ODPT_ENDPOINTS[requestedOp] && ODPT_ENDPOINTS[requestedOp].train) requestedOps[requestedOp] = true;
+                if (requestedOp && hasRealtimePositionApi(lineId)) requestedOps[requestedOp] = true;
             });
             // This API represents the current detail scope, not an append-only history.
             // Keep polling only operators required by the currently open line/system.
@@ -812,7 +826,7 @@
                 var identity = getLineRailwayIdentity(lineId);
                 if (!op || !identity) return;
 
-                if (ODPT_ENDPOINTS[op] && ODPT_ENDPOINTS[op].train && !_activeRealtimeOperators[op]) {
+                if (hasRealtimePositionApi(lineId) && !_activeRealtimeOperators[op]) {
                     _activeRealtimeOperators[op] = true;
                     newlyActivatedOps[op] = true;
                 }
@@ -824,17 +838,15 @@
                     timetablePromises.push(_realtimeActivationInflight[lineId]);
                     return;
                 }
-                // SQL timetable is the common evidence source for ALL lines.
-                // The ODPT API remains the read-only fallback until a verified
-                // database snapshot has actually been imported for this railway.
-                // Realtime train-position polling is independent of this choice.
+                // Two sources: API (Train / TrainTimetable) for realtime lines,
+                // Supabase timetable rows only for lines without a realtime Train API.
+                // An empty API snapshot never authorizes a database substitute.
                 var hasTimetableApi = !!(ODPT_ENDPOINTS[op] && ODPT_ENDPOINTS[op].trainTimetable);
-                var sourcePromise = getCachedTrainRuns(lineId).then(function(sqlRows) {
-                    if (sqlRows && sqlRows.length > 0) return sqlRows;
-                    return hasTimetableApi
+                var sourcePromise = hasRealtimePositionApi(lineId)
+                    ? (hasTimetableApi
                         ? self.getCompleteTimetable(op, identity.odptRailway)
-                        : [];
-                });
+                        : Promise.resolve([]))
+                    : getCachedTrainRuns(lineId);
                 _realtimeActivationInflight[lineId] = sourcePromise.then(function(rows) {
                     if (!rows || !rows.length) return;
                     if (!window.ODPT_TIMETABLES) window.ODPT_TIMETABLES = {};
