@@ -125,3 +125,72 @@ assert.strictEqual(structuredEval.status,"suspended");
 assert.strictEqual(structuredEval.messageKind,"realtime");
 assert.strictEqual(String(structuredPrimary["odpt:trainInformationText"]||""),"");
 console.log("runinfo-scope structured output: 3 PASS");
+
+
+// JR-East JC group shares passenger-facing route presentation, NOT TrainInformation
+// ownership. Each of the three railways must keep its own operational status.
+["ChuoRapid", "Ome", "Itsukaichi"].forEach(function(id) {
+  ctx.window.ODPTClient.LINE_TO_OPERATOR[id] = "JR-East";
+});
+const jcRecords = [
+  {"odpt:railway":"odpt.Railway:JR-East.ChuoRapid","odpt:trainInformationStatus":"Suspension","odpt:trainInformationText":{"ja":"全線で運転を見合わせています。"}},
+  {"odpt:railway":"odpt.Railway:JR-East.Ome","odpt:trainInformationStatus":"Normal","odpt:trainInformationText":{"ja":"平常運転"}},
+  {"odpt:railway":"odpt.Railway:JR-East.Itsukaichi","odpt:trainInformationStatus":"Delay","odpt:trainInformationText":{"ja":"遅れが出ています。"}}
+];
+const jcLine = function(id) { return { id: id, operator: "JR-East", branchOf: "ChuoRapid" }; };
+assert.strictEqual(ctx.window.RunInfoAPI._aggregateStatus(jcRecords,jcLine("ChuoRapid")), "suspended");
+assert.strictEqual(ctx.window.RunInfoAPI._aggregateStatus(jcRecords,jcLine("Ome")), "normal");
+assert.strictEqual(ctx.window.RunInfoAPI._aggregateStatus(jcRecords,jcLine("Itsukaichi")), "delayed");
+assert.strictEqual(ctx.window.RunInfoAPI._selectScopedRecords([jcRecords[0]], jcLine("Ome")).length, 0);
+assert.strictEqual(ctx.window.RunInfoAPI._selectScopedRecords([jcRecords[0]], jcLine("Itsukaichi")).length, 0);
+console.log("runinfo-scope JR-East JC independent identities: 5 PASS");
+
+// The status LIST must also display the line-owned result separately. Otherwise
+// LineCard's worst-member aggregation can overwrite Ome / Itsukaichi visually.
+const fs2 = require("fs"), path2 = require("path");
+const jcPresentation = {code:"JC", nameJa:"中央線快速", lineIds:["ChuoRapid","Ome","Itsukaichi"], color:"#f15a22"};
+const joPresentation = {code:"JO", nameJa:"横須賀線・総武線快速", lineIds:["Yokosuka","SobuRapid"], color:"#0066aa"};
+const viewLines = {
+  ChuoRapid: {id:"ChuoRapid",operator:"JR-East",delayInfo:{status:"suspended"},presentation:jcPresentation},
+  Ome: {id:"Ome",operator:"JR-East",branchOf:"ChuoRapid",delayInfo:{status:"normal"}},
+  Itsukaichi: {id:"Itsukaichi",operator:"JR-East",branchOf:"ChuoRapid",delayInfo:{status:"delayed"}},
+  Yokosuka: {id:"Yokosuka",operator:"JR-East",delayInfo:{status:"delayed"},presentation:joPresentation},
+  SobuRapid: {id:"SobuRapid",operator:"JR-East",delayInfo:{status:"normal"}}
+};
+const viewOrder = Object.keys(viewLines);
+const presentationStub = {
+  isBranch: function(id) { return !!viewLines[id].branchOf; },
+  getPrimaryPresentation: function(id) { return viewLines[id].presentation || null; },
+  getPresentationMembers: function(id) { return (viewLines[id].presentation || {}).lineIds || []; },
+  getDisplayOrderMap: function() {
+    const map = {}; viewOrder.forEach(function(id,i){ map[id]=i; }); return map;
+  },
+  orderOperators: function(ops) { return ops; }
+};
+const cardStub = {
+  render: function(line,id) { return '<div data-single="' + id + '" data-status="' + line.delayInfo.status + '"></div>'; },
+  renderSystem: function(pres,members) { return '<div data-system="' + pres.code + '" data-members="' + members.join(",") + '"></div>'; },
+  applyColor: function() {}
+};
+const viewWin = {LinePresentationService:presentationStub, LineCard:cardStub, UNIFIED_LINES:viewLines};
+const viewCtx = vm.createContext({window:viewWin,document:{readyState:"loading",addEventListener:function(){}},console:console});
+vm.runInContext(fs2.readFileSync(path2.join(__dirname,"../js/data-state.js"),"utf8"),viewCtx);
+function renderedList(mode) {
+  const el = {innerHTML:"",querySelectorAll:function(){return [];}};
+  viewWin.DataState.renderList(el,viewLines,{mode:mode,lineOrder:viewOrder});
+  return el.innerHTML;
+}
+const realtimeHtml=renderedList("realtime");
+assert.ok(realtimeHtml.includes('data-members="ChuoRapid"'), "JC status card only owns ChuoRapid");
+assert.ok(realtimeHtml.includes('data-single="Ome" data-status="normal"'), "Ome has its own normal status");
+assert.ok(realtimeHtml.includes('data-single="Itsukaichi" data-status="delayed"'), "Itsukaichi has its own delayed status");
+assert.ok(realtimeHtml.includes('data-members="Yokosuka,SobuRapid"'), "unrelated JO presentation stays grouped");
+const trainsHtml=renderedList("trains");
+assert.ok(trainsHtml.includes('data-members="ChuoRapid,Ome,Itsukaichi"'), "trains page keeps original JC presentation");
+assert.ok(!trainsHtml.includes('data-single="Ome"'), "trains branch hierarchy unchanged");
+// A subsequent live update must not rebuild JC as a three-line status card.
+vm.runInContext(fs2.readFileSync(path2.join(__dirname,"../js/line-card.js"),"utf8"),viewCtx);
+const refreshedJC=viewWin.LineCard.renderSystemByCode("JC",viewLines,{mode:"realtime"});
+assert.ok(refreshedJC.includes('data-lines="ChuoRapid"'), "JC async update uses the filtered membership");
+assert.ok(!refreshedJC.includes('data-lines="ChuoRapid,Ome,Itsukaichi"'), "JC async update cannot reabsorb branch status");
+console.log("runinfo-scope realtime JC visual isolation: 8 PASS");
