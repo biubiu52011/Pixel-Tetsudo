@@ -82,7 +82,7 @@ async function get(table, select, order) {
     // observation or a carset assignment and never supplies train position.
     get("train_vehicle_rules",
       "id,operator,network_key,train_number,vehicle_type,effective_from,effective_to,source_id,calendar_type",
-      "network_key.asc,calendar_type.asc,train_number.asc,id.asc")
+      "id.asc")
   ]);
   const pm = Object.fromEntries(policies.map(p=>[p.network_key,p]));
   // Source policy is evidence metadata only. Realtime position coverage belongs
@@ -169,12 +169,14 @@ async function get(table, select, order) {
       effectiveTo:r.effective_to||"",grade:source.evidence_grade||"C",
       sourceUrl:source.source_url||"",evidenceRole:"timetable-reference"};
   });
-  // Legacy vehicle rules without published service-calendar identity or
-  // traceable model evidence are not reference timetable rows. Keep them in
-  // SQL for audit; exporting them as exact train models would invent facts.
+  // Roll out only the published 2026 Saikyo/Rinkai reference roster that
+  // was audited against the JR/TWR boundary. The other SQL train-vehicle
+  // tables are retained for future review, not silently enabled across
+  // unrelated networks. This is export scope, NOT a runtime route rule.
   const eligibleReferenceRules = referenceRuleRecords.filter(function(r) {
-    return !!(r.networkKey && r.trainNumber && r.vehicleType && r.calendarType &&
-      r.effectiveFrom && r.sourceUrl);
+    return r.networkKey === "saikyo" &&
+      !!(r.trainNumber && r.vehicleType && r.calendarType &&
+         r.effectiveFrom && r.sourceUrl);
   });
   const inventoryNetworks = [...new Set(inventory.map(r=>r.canonical_network_key))];
   if (!inventoryNetworks.length) throw new Error("Canonical vehicle evidence inventory is empty");
@@ -185,8 +187,8 @@ async function get(table, select, order) {
     datedRecords,
     networkAliases:verifiedAliases,
     familyRules:familyRuleRecords,
-    referenceRules:eligibleReferenceRules,
-    evidenceInventory:{networkCount:inventoryNetworks.length,networks:inventoryNetworks,rows:inventory}};
+    evidenceInventory:{networkCount:inventoryNetworks.length,networks:inventoryNetworks,rows:inventory},
+    referenceRules:eligibleReferenceRules};
   const root=path.join(__dirname,"..","data","timetables");
   fs.writeFileSync(path.join(root,"vehicle-operation-evidence.json"),JSON.stringify(json,null,2)+"\n");
   fs.writeFileSync(path.join(root,"vehicle-operation-evidence-data.js"),
