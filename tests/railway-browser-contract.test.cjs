@@ -222,7 +222,7 @@ test('live API capabilities survive config regeneration and remain SQL-bypass on
     return Array.from(text.slice(start, end).matchAll(/"([^"]+)":\s*true/g), m => m[1]).sort();
   }
   const registered = configuredLines(original);
-  assert.ok(registered.length >= 26);
+  assert.ok(registered.length >= 32);
   assert.deepEqual(registered, configuredLines(bundled));
   for (const id of ['Arakawa', 'Asakusa', 'ChuoRapid', 'KeihinTohoku', 'KeioMain', 'Mita', 'TobuSkytree', 'Yamanote']) {
     assert.ok(registered.includes(id), id + ' lost its realtime capability');
@@ -255,5 +255,22 @@ test('realtime ODPT source repair never resets railway registry or timetable rol
   assert.doesNotMatch(sql, /UPDATE public\.railway_lines\s+SET\s+odpt_operator\s*=\s*null/i);
   for (const id of ['Arakawa', 'KeioMain', 'Kawagoe', 'SaikyoKawagoe', 'SobuRapid', 'Tokaido', 'UtsunomiyaJR']) {
     assert.ok(sql.includes("'" + id + "'"), id + ' missing from source repair');
+  }
+});
+
+test('ODPT FULL runtime lines with exact IDs bypass SQL and remain registered', () => {
+  const source = read('data/core/runtime-config.js');
+  const bundle = read('data/core/data-config-bundle.js');
+  const migration = read('supabase/migrations/20261012231749_align_existing_full_odpt_train_routes_with_runtime.sql');
+  for (const id of ['KeioInokashira','KeioKeibajo','KeioTakao','Noda','Tojo','Ogose']) {
+    assert.ok(source.includes('"' + id + '": true'), id + ' missing in runtime capability registry');
+    assert.ok(bundle.includes('"' + id + '": true'), id + ' missing in deployed runtime registry');
+    assert.ok(migration.includes("('" + id + "','"), id + ' missing in database source alignment');
+  }
+  assert.match(migration, /l\.realtime_position_api_enabled IS FALSE/);
+  assert.match(migration, /l\.odpt_operator IS NULL/);
+  assert.doesNotMatch(migration, /DELETE FROM public\.manual_timetable_templates/i);
+  for (const alias of ['KeioSagami','KeioShin','KeioZoo']) {
+    assert.ok(!migration.includes("('" + alias + "','"), alias + ' requires separate realtime verification');
   }
 });
