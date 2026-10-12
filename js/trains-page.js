@@ -340,6 +340,14 @@
                   + (_tp.sourceUpdatedAt || "") + ":"
                   + (_tp.sourceValidUntil || "") + ":"
                   + (_tp.positionSource || "") + ":"
+                  + (_tp.serviceDate || "") + ":"
+                  + (_tp.vehicleIdentityStatus || "") + ":"
+                  + (_tp.vehicleType || "") + ":"
+                  + (_tp.vehicleFormationId || "") + ":"
+                  + (Array.isArray(_tp.vehicleFormationCandidates) ? _tp.vehicleFormationCandidates.join("/") : "") + ":"
+                  + (Array.isArray(_tp.operationEvidence) ? _tp.operationEvidence.map(function(e) {
+                      return e && e.decisive ? [e.observedDate || "", e.formationId || ""].join("/") : "";
+                    }).join(";") : "") + ":"
                   + (_tp.estimated === true ? "estimated" : "observed") + ","
                   ;
               }

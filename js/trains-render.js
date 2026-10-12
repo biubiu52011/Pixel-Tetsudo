@@ -1078,7 +1078,7 @@ function _rememberTrainArtworkFailure(trainUid) {
       var observed = String(e.formationId).split(/\s*\/\s*|\s*,\s*|\s*\|\s*/).filter(Boolean);
       return observed.length === ids.length && observed.every(function(id) { return ids.indexOf(id) >= 0; });
     });
-    return isConfirmed ? ids.join(" + ") : "";
+    return isConfirmed ? ids.join(" / ") : ""; // Sources may list aliases, not necessarily coupled sets.
   }
 
   function _trainMarkerTitle(p) {
@@ -1101,6 +1101,20 @@ function _rememberTrainArtworkFailure(trainUid) {
     return tip.join(" | ");
   }
 
+  // SVG image title attributes are not native browser SVG tooltips. Keep a
+  // single child <title> in sync for mouse, keyboard and accessibility.
+  function _setTrainMarkerTooltip(marker, label, ns) {
+    if (!marker) return;
+    marker.setAttribute("title", label);
+    marker.setAttribute("aria-label", label);
+    var tip = marker.querySelector("title");
+    if (!tip) {
+      tip = document.createElementNS(ns, "title");
+      marker.insertBefore(tip, marker.firstChild);
+    }
+    if (tip.textContent !== label) tip.textContent = label;
+  }
+
   // Train icons are gallery PNGs embedded as images on the existing railway
   // diagram. The diagram itself may be SVG; no train is ever drawn from SVG
   // primitives or selected through a separate renderer mapping.
@@ -1112,7 +1126,7 @@ function _rememberTrainArtworkFailure(trainUid) {
     marker.setAttribute("href", spec.iconSrc);
     marker.setAttribute("preserveAspectRatio", "xMidYMid meet");
     var titleText = _trainMarkerTitle(p);
-    if (titleText) { marker.setAttribute("title", titleText); marker.setAttribute("aria-label", titleText); }
+    if (titleText) _setTrainMarkerTooltip(marker, titleText, svgNS);
     // A failed train PNG is replaced on THIS image element with the one neutral
     // gallery PNG. If even that file fails, hide this train rather than drawing
     // SVG or selecting another operator's vehicle.
@@ -1269,8 +1283,7 @@ function _rememberTrainArtworkFailure(trainUid) {
         // Refresh the same tooltip instead of retaining a stale train number
         // or a previous day's physical formation.
         var _freshTitle = _trainMarkerTitle(p);
-        existingIcon.setAttribute("title", _freshTitle);
-        existingIcon.setAttribute("aria-label", _freshTitle);
+        _setTrainMarkerTooltip(existingIcon, _freshTitle, svgNS);
         // Update existing icon position.
         // TrainTrackLayout owns target geometry; this marker owns interpolation.
         // There is exactly one animation authority: per-marker requestAnimationFrame.

@@ -89,7 +89,7 @@
   // 它们是中央线快速等级（特快），非直通运行（跨图显示由 ODPT 按 railway 分段数据 + 按线匹配实现，与此字段无关）。
   // 保留项均为真实直通/有料列车：TH-LINER（東武晴空塔⇄地下鉄）、TJ-LINER（東上線有料）、
   // S-TRAIN/F-Liner（西武⇄地下鉄⇄東急 直通）、KeioLiner（京王有料）。
-  // 车号尾字母 S/K 规则保留：埼京線（S 结尾，川越線直通）・東武直通系车号特征（字段当前无页面消费者，语义清洁不做过度收紧）。
+  // 班次编号尾字母 S/K 规则保留，仅用于内部区分直通运行；不得作为实际车辆编组号展示。
   var THROUGH_TRAIN_TYPES = {
     'TH-LINER': 'Tobu-TokyoMetro through',
     'TJ-LINER': 'Tobu Tojo line reserved',

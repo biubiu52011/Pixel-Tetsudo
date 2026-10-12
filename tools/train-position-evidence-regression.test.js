@@ -387,3 +387,22 @@ assert.strictEqual(carsetTools.label({...dated,operationEvidence:[{
 assert(renderSource.includes('existingIcon.setAttribute("title", _freshTitle);'),
   "reused SVG markers must refresh their carset tooltip");
 console.log("verified physical carset label guard: PASS");
+
+assert(fusionSource.includes("function _confirmedFormationEvidence(p)"),
+  "date-valid carset evidence must be verified before joining live and timetable positions");
+assert(fusionSource.includes("preferred.vehicleResolution.name === other.vehicleResolution.name"),
+  "carset evidence must not cross different resolved vehicle types");
+assert(fusionSource.includes("preferred.serviceDate === other.serviceDate"),
+  "carset evidence must not cross operating dates");
+assert(fusionSource.includes("p.operationEvidence = (p.operationEvidence || []).concat([v.formationProof])"),
+  "evidence provenance must accompany inherited carsets");
+const trainsPageSource=fs.readFileSync("js/trains-page.js","utf8");
+assert(trainsPageSource.includes("(_tp.vehicleFormationId ||") &&
+       trainsPageSource.includes("_tp.operationEvidence.map(function(e)"),
+  "detail map refresh must detect new or revoked carset evidence without moving a station");
+assert(renderSource.includes('document.createElementNS(ns, "title")') &&
+       renderSource.includes('_setTrainMarkerTooltip(existingIcon, _freshTitle, svgNS)'),
+  "existing SVG train markers must expose a native, refreshed carset tooltip");
+assert(!renderSource.includes('ids.join(" + ")'),
+  "multiple formation IDs must not imply coupling: sources may include aliases");
+console.log("carset evidence propagation and display regression: PASS");

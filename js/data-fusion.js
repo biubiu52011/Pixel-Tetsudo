@@ -53,6 +53,26 @@
     p.vehicleInheritedFromRunningChain = inherited === true;
     return p;
   }
+  // Only dated, decisive train/operation observations may add a physical
+  // formation to a higher-priority realtime vehicle. An operation code alone
+  // is never formation evidence.
+  function _confirmedFormationEvidence(p) {
+    if (!p || !p.serviceDate || p.vehicleIdentityStatus !== "EXACT") return null;
+    var ids = Array.isArray(p.vehicleFormationCandidates)
+      ? p.vehicleFormationCandidates.map(function(x){return String(x || "").trim();}).filter(Boolean)
+      : [];
+    var fid = String(p.vehicleFormationId || "").trim();
+    if (!ids.length && fid) ids = [fid];
+    if (!ids.length || (fid && (ids.length !== 1 || ids[0] !== fid))) return null;
+    var matches = (p.operationEvidence || []).filter(function(e) {
+      if (!e || e.decisive !== true || !e.sourceUrl || !e.formationId) return false;
+      if (String(e.observedDate || "").slice(0,10) !== String(p.serviceDate).slice(0,10)) return false;
+      var form = String(e.formationId).split(/\\s*\\/\\s*|\\s*,\\s*|\\s*\\|\\s*/).map(function(v){return v.trim();}).filter(Boolean);
+      return form.length === ids.length && form.every(function(v){return ids.indexOf(v) >= 0;});
+    });
+    return matches.length === 1 ? matches[0] : null;
+  }
+
   function _rememberChainVehicle(p) {
     if (!p || !p.runningChainId) return;
     var resolution = p.vehicleResolution || null;
@@ -70,10 +90,22 @@
         return;
       }
     }
+    var proof = _confirmedFormationEvidence(p);
+    // Retain a dated, source-backed formation when a fresh realtime row
+    // confirms the same vehicle type but omits its formation field.
+    if (!proof && _existing && _existing.formationProof &&
+        _existing.evidenceServiceDate === p.serviceDate &&
+        _existing.resolution && _existing.resolution.name === resolution.name) {
+      proof = _existing.formationProof;
+      p.vehicleFormationId = _existing.formationId;
+      p.vehicleFormationCandidates = _existing.formationCandidates.slice();
+      p.operationEvidence = (p.operationEvidence || []).concat([proof]);
+    }
     _chainVehicleRegistry[p.runningChainId] = {
       resolution: resolution,
-      formationId: p.vehicleFormationId || "",
-      formationCandidates: (p.vehicleFormationCandidates || []).slice(),
+      formationId: proof ? (p.vehicleFormationId || "") : "",
+      formationCandidates: proof ? (p.vehicleFormationCandidates || []).slice() : [],
+      formationProof: proof,
       evidenceServiceDate: p.serviceDate || "",
       evidenceRank: _incomingRank,
       lastSeenAt: Date.now()
@@ -90,11 +122,22 @@
     // Never propagate a prior service day's carset through source dropout.
     if (v.evidenceServiceDate && p.serviceDate !== v.evidenceServiceDate) return p;
     var currentResolution = p.vehicleResolution || null;
+    var sameExact = currentResolution && currentResolution.identityStatus === "EXACT" &&
+      v.resolution && currentResolution.name === v.resolution.name;
+    if (sameExact && v.formationProof && !p.vehicleFormationId) {
+      p.vehicleFormationId = v.formationId || "";
+      p.vehicleFormationCandidates = (v.formationCandidates || []).slice();
+      p.operationEvidence = (p.operationEvidence || []).concat([v.formationProof]);
+      return p; // Preserve the stronger realtime identity and its PNG.
+    }
     if (currentResolution && currentResolution.identityStatus === "EXACT" &&
         _vehicleEvidenceRank(p) >= (v.evidenceRank || 0)) return p;
     _projectVehicleResolution(p, v.resolution, true);
     p.vehicleFormationId = v.formationId || "";
     p.vehicleFormationCandidates = (v.formationCandidates || []).slice();
+    if (v.formationProof) {
+      p.operationEvidence = (p.operationEvidence || []).concat([v.formationProof]);
+    }
     return p;
   }
   var subscribers = [];
@@ -1199,9 +1242,29 @@
               if (!exact) return;
               var cid = p.runningChainId;
               var current = _chainVehicleCandidates[cid];
-              if (!current || _vehicleEvidenceRank(p) > _vehicleEvidenceRank(current)) {
-                _chainVehicleCandidates[cid] = p;
+              if (!current) { _chainVehicleCandidates[cid] = p; return; }
+              var preferred = _vehicleEvidenceRank(p) > _vehicleEvidenceRank(current) ? p : current;
+              var other = preferred === p ? current : p;
+              // Join different evidence channels only for the SAME resolved
+              // physical chain, service date and exact vehicle type.
+              if (preferred.serviceDate && preferred.serviceDate === other.serviceDate &&
+                  preferred.vehicleResolution && other.vehicleResolution &&
+                  preferred.vehicleResolution.name === other.vehicleResolution.name) {
+                var primary = _confirmedFormationEvidence(preferred);
+                var secondary = _confirmedFormationEvidence(other);
+                if (!primary && secondary && !preferred.vehicleFormationId) {
+                  preferred.vehicleFormationId = other.vehicleFormationId || "";
+                  preferred.vehicleFormationCandidates = (other.vehicleFormationCandidates || []).slice();
+                  preferred.operationEvidence = (preferred.operationEvidence || []).concat([secondary]);
+                } else if (primary && secondary &&
+                    String(primary.formationId) !== String(secondary.formationId)) {
+                  // Conflicting observations cannot select a physical carset.
+                  preferred.vehicleFormationId = "";
+                  preferred.vehicleFormationCandidates = [];
+                  preferred.operationEvidence = [];
+                }
               }
+              _chainVehicleCandidates[cid] = preferred;
             }
             Object.keys(posMap).forEach(function(_vlid) {
               (posMap[_vlid] || []).forEach(function(_rp) {
@@ -1256,7 +1319,8 @@
                       identityReason:_fe.identityReason||"dated-running-chain-vehicle-evidence"
                     };
                     _queueChainVehicle({
-                      runningChainId:_p.runningChainId, trainClass:_feResolution.name,
+                      runningChainId:_p.runningChainId, serviceDate:_fe.serviceDate || _p.serviceDate,
+                      trainClass:_feResolution.name,
                       vehicleType:_feResolution.vehicleTypeStr, vehicleIconPath:_feResolution.iconPath,
                       vehicleSource:_feResolution.source, vehicleConfidence:_feResolution.confidence,
                       vehicleResolution:_feResolution, vehicleIdentityStatus:_feResolution.identityStatus,
