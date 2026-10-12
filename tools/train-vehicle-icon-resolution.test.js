@@ -422,3 +422,98 @@ console.log('PNG-only one-script train marker: 4 PASS');
 assert.ok(!read('js/train-vehicle.js').includes('window.TrainIcons.resolveVehicleArtwork'),
   'production vehicle resolver must not hop back through the legacy TrainIcons facade');
 console.log('single internal PNG resolver, no second mapping hop: PASS');
+
+
+// Regression: recurring Supabase models are reference train types, not
+// date-specific carset assignments. The SQL adapter, estimator and one PNG
+// resolver must preserve their identity even when historical operation evidence
+// exists and happens to disagree with a planned vehicle.
+{
+  const estimatorSrc = read('js/train-position-estimator.js');
+  const edge = read('supabase/functions/train-runs/index.ts');
+  const adapter = read('data/api/odpt-unified.js');
+  assert.ok(edge.includes('vehicle_type_label: boundaryVehicle.get(t.id) || t.vehicle_type_label || null'),
+    'Edge SQL response must retain the revised reference model');
+  assert.ok(adapter.includes('vehicleType:run.vehicle_type_label||null'),
+    'ODPT-shaped SQL adapter must pass the reference model unchanged');
+
+  let hh = 10, mm = 24, operationLookups = 0;
+  class FixedDate extends Date {
+    constructor(...args) {
+      super(...(args.length ? args : [new Date(2026, 9, 12, hh, mm).getTime()]));
+    }
+    static now() { return new Date(2026, 9, 12, hh, mm).getTime(); }
+  }
+  const windowForEstimate = {
+    RuntimeConfig: {},
+    TrainVehicle: context.window.TrainVehicle,
+    TrainIcons: context.window.TrainIcons,
+    ODPTClient: { LINE_RAILWAY_CODE: { Rinkai: 'Rinkai' } },
+    TrainOperationEvidence: {
+      normalizeOperationCode() { operationLookups++; return '00'; },
+      resolveEvidence() {
+        operationLookups++;
+        return { vehicleType: 'E233系7000番台', decisive: true,
+          operator: 'JR-East', formationId: 'WRONG-DATED-CARSET' };
+      }
+    }
+  };
+  const vmContext = vm.createContext({
+    window: windowForEstimate, Date: FixedDate, Intl,
+    console: { debug() {} }
+  });
+  vm.runInContext(estimatorSrc, vmContext, { filename: 'js/train-position-estimator.js' });
+
+  function sqlRinkai(number, model, departure, arrival, first, next) {
+    return {
+      '@id': 'manual-template:' + number,
+      'odpt:trainNumber': number,
+      'odpt:railway': 'odpt.Railway:TWR.Rinkai',
+      'odpt:calendar': 'odpt.Calendar:SaturdayHoliday',
+      'odpt:trainTimetableObject': [
+        {'odpt:departureStation': 'odpt.Station:TWR.Rinkai.' + first,
+          'odpt:departureTime': departure},
+        {'odpt:arrivalStation': 'odpt.Station:TWR.Rinkai.' + next,
+          'odpt:arrivalTime': arrival}
+      ],
+      vehicleType: model, _positionSource: 'supabase-train-run',
+      _serviceDate: '2026-10-12'
+    };
+  }
+
+  const rows = [
+    sqlRinkai('1081F', '東京臨海高速鉄道70-000形', '10:22', '10:26', 'ShinKiba', 'Shinonome'),
+    sqlRinkai('1088T', '東京臨海高速鉄道71-000形', '10:45', '10:49', 'Osaki', 'Oimachi')
+  ];
+  windowForEstimate.TrainPositionEstimator.registerManualTimetable('Rinkai', rows);
+  const line = { operator: 'Rinkai', stations: [
+    'ShinKiba', 'Shinonome', 'KokusaiTenjijo', 'TokyoTeleport',
+    'TennozuIsle', 'ShinagawaSeaside', 'Oimachi', 'Osaki'
+  ] };
+  function getRunningTrain() {
+    const result = windowForEstimate.TrainPositionEstimator.estimateAllPositions(
+      {Rinkai: line}, {}, {}, null, {lineIds: ['Rinkai']});
+    assert.strictEqual((result.Rinkai || []).length, 1, 'expected one scheduled train at test time');
+    return result.Rinkai[0];
+  }
+  const earlier = getRunningTrain();
+  assert.strictEqual(earlier.trainNumber, '1081F');
+  assert.strictEqual(earlier.vehicleIdentityStatus, 'EXACT');
+  assert.strictEqual(earlier.positionSource, 'supabase-train-run');
+  assert.ok(earlier.vehicleIconPath.endsWith('東京臨海高速鉄道_70-000形.png'));
+  assert.strictEqual(windowForEstimate.TrainVehicle.selectMarkerArtwork(earlier, false).kind, 'vehicle');
+
+  hh = 10; mm = 47;
+  const later = getRunningTrain();
+  assert.strictEqual(later.trainNumber, '1088T');
+  assert.strictEqual(later.vehicleIdentityStatus, 'EXACT');
+  assert.ok(later.vehicleIconPath.endsWith('東京臨海高速鉄道_71-000形.png'));
+  assert.strictEqual(later.positionSource, 'supabase-train-run');
+  assert.strictEqual(operationLookups, 0,
+    'dated operation/formation numbers must not gate SQL reference model icons');
+
+  assert.strictEqual(windowForEstimate.TrainVehicle.resolve({
+    timetableVehicleType: '70-000形 / 71-000形'
+  }).iconPath, '', 'unresolved SQL candidate must not invent a model');
+  console.log('Supabase Rinkai timetable -> estimated train -> exact reference PNG: 2 PASS');
+}

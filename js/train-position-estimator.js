@@ -488,6 +488,12 @@
     var _trainOwner = tt['odpt:trainOwner'] || tt['trainOwner'] || '';
     var _assignmentOperator = '';
     var _assignmentMatches = [];
+    // SQL recurring timetables supply a planned/reference model, not a
+    // particular day's observed carset. Keep that single-model timetable fact
+    // independent of historical operation/formation observations.
+    var _plannedSqlVehicle = tt._positionSource === 'supabase-train-run' &&
+      !!String(tt.vehicleType || '').trim() &&
+      String(tt.vehicleType).split('/').length === 1;
     var _baseOperationCtx = {
       lineId: lineId,
       operator: tt['odpt:operator'] || line.operator || '',
@@ -501,12 +507,12 @@
     _baseOperationCtx.operationCode = String(
       tt['_operationCode'] || tt['operationCode'] || tt['operation_code'] || ''
     ).trim();
-    if (!_baseOperationCtx.operationCode) {
+    if (!_plannedSqlVehicle && !_baseOperationCtx.operationCode) {
       _baseOperationCtx.operationCode = window.TrainOperationEvidence &&
         typeof window.TrainOperationEvidence.normalizeOperationCode === 'function'
         ? window.TrainOperationEvidence.normalizeOperationCode(trainNumber, _baseOperationCtx) : '';
     }
-    var _resolvedEvidence = window.TrainOperationEvidence &&
+    var _resolvedEvidence = !_plannedSqlVehicle && window.TrainOperationEvidence &&
       typeof window.TrainOperationEvidence.resolveEvidence === 'function'
       ? window.TrainOperationEvidence.resolveEvidence(trainNumber, _baseOperationCtx, "fallback")
       : null;
@@ -851,7 +857,10 @@
           m.forEach(function(tt) {
             if (!tt || !tt["odpt:railway"]) return;
             try {
-              tt._positionSource = "station-timetable";
+              // A Supabase run retains its original provenance. Rewriting
+              // it as a manual timetable silently changes vehicle evidence
+              // policy and hides the SQL read-through source in diagnostics.
+              if (!tt._positionSource) tt._positionSource = "station-timetable";
               var _rp = String(tt["odpt:railway"]).split(":");
               var _dot = _rp[1] ? _rp[1].split(".") : [];
               if (_dot.length < 2) return;
