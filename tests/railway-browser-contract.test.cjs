@@ -274,3 +274,63 @@ test('ODPT FULL runtime lines with exact IDs bypass SQL and remain registered', 
     assert.ok(!migration.includes("('" + alias + "','"), alias + ' requires separate realtime verification');
   }
 });
+
+test('Toden Arakawa live vehicle numbers resolve all 33 cars to exact models and matching gallery PNGs', () => {
+  const vm = require('node:vm');
+  const window = {};
+  vm.runInNewContext(read('js/train-vehicle.js'), {window, console:{debug(){}}}, {filename:'train-vehicle.js'});
+  const groups = [
+    ['7701 7702','都電7700形（みどり）','7700形_みどり.png'],
+    ['7703 7704 7705','都電7700形（あお）','7700形_あお.png'],
+    ['7706 7707 7708','都電7700形（えんじ）','7700形_えんじ.png'],
+    ['8501','都電8500形（8501号車・リニューアル）',null],
+    ['8502 8503 8504 8505','都電8500形','8500形.png'],
+    ['8801 8802 8803 8804 8805','都電8800形（ローズレッド）','8800形_ローズレッド.png'],
+    ['8806 8807','都電8800形（バイオレット）','8800形_バイオレット.png'],
+    ['8808 8809','都電8800形（オレンジ）','8800形_オレンジ.png'],
+    ['8810','都電8800形（イエロー）','8800形_イエロー.png'],
+    ['8901 8902','都電8900形（オレンジ）','8900形_オレンジ.png'],
+    ['8903 8904','都電8900形（ブルー）','8900形_ブルー.png'],
+    ['8905 8906','都電8900形（ローズピンク）','8900形_ローズピンク.png'],
+    ['8907 8908','都電8900形（イエロー）','8900形_イエロー.png'],
+    ['9001','都電9000形（9001号車・赤色）','9000形_9001号車_赤色.png'],
+    ['9002','都電9000形（9002号車・青色）','9000形_9002号車_青色.png']
+  ];
+  const context = {lineId:'Arakawa',operator:'Toei',railway:'odpt.Railway:Toei.Arakawa'};
+  let count = 0;
+  for (const [list, name, imageFile] of groups) {
+    for (const number of list.split(' ')) {
+      const resolved = window.TrainVehicle.resolve({...context,realtimeCarNumber:number,trainNumber:number});
+      assert.equal(resolved.identityStatus,'EXACT',number);
+      assert.equal(resolved.name,name,number);
+      assert.equal(resolved.verifiedCarNumber,number);
+      assert.equal(resolved.identityReason,'verified-toden-realtime-car-number');
+      assert.ok(resolved.sources.includes('official-realtime-car-number'));
+      if (imageFile) {
+        assert.ok(resolved.iconPath.endsWith('/都営地下鉄_' + imageFile),number);
+        assert.ok(fs.existsSync(path.join(root,resolved.iconPath.replace('../',''))),number);
+      } else {
+        assert.equal(resolved.iconPath,'',number + ' must not claim the retired 8501 livery');
+      }
+      count++;
+    }
+  }
+  assert.equal(count,33);
+  for (const number of ['0000','7007','7501','7700','7709','8506','8811','8909','9000','9003','ODPT0059','7701F','07701','']) {
+    assert.equal(window.TrainVehicle.resolve({...context,realtimeCarNumber:number}).identityStatus,'UNKNOWN',number);
+  }
+  for (const change of [
+    {lineId:'Mita'}, {operator:'JR-East'}, {railway:'odpt.Railway:Toei.Asakusa'}
+  ]) {
+    const r = window.TrainVehicle.resolve({...context,...change,realtimeCarNumber:'7701'});
+    assert.equal(r.identityStatus,'UNKNOWN');
+  }
+  assert.equal(window.TrainVehicle.resolve({...context,trainNumber:'7701'}).identityStatus,'UNKNOWN');
+  const conflict = window.TrainVehicle.resolve({...context,realtimeCarNumber:'7701',realtimeVehicleType:'都電8900形（オレンジ）'});
+  assert.equal(conflict.identityStatus,'NARROWED');
+  assert.equal(conflict.iconPath,'');
+  const fusion = read('js/data-fusion.js');
+  assert.match(fusion, /realtimeCarNumber: lid === "Arakawa"/);
+  assert.match(fusion, /railway: railway,/);
+  assert.match(fusion, /lid !== "Arakawa" && window\.TrainOperationEvidence/);
+});

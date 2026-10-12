@@ -1126,7 +1126,9 @@
             if (window.TrainVehicle && typeof window.TrainVehicle.resolve === "function") {
               try {
                 var _derivedVehicleEvidence = null;
-                if (!odptVehicleType && window.TrainOperationEvidence &&
+                // Arakawa trainNumber identifies the vehicle itself, not an
+                // ODPT timetable operation. Do not feed it into operation-code rules.
+                if (!odptVehicleType && lid !== "Arakawa" && window.TrainOperationEvidence &&
                     typeof window.TrainOperationEvidence.resolveEvidence === "function") {
 
                   var _evidenceStart = _perfNow();
@@ -1154,6 +1156,10 @@
                   operator: trainOpShort,
                   trainOwner: odptTrainOwner,
                   trainNumber: positionData.trainNumber,
+                  railway: railway,
+                  // Only live Toei.Arakawa Train rows can supply physical car IDs.
+                  realtimeCarNumber: lid === "Arakawa" && railway === "odpt.Railway:Toei.Arakawa" && trainOpShort === "Toei"
+                    ? positionData.trainNumber : "",
                   stationIndex: idx,
                   trainType: rawType,
                   destinationStation: destStations,
@@ -1163,6 +1169,7 @@
                 });
                 _vehicleResolveMs += _perfNow() - _vehicleStart;
                 _projectVehicleResolution(positionData, _rtVehicle, false);
+                if (_rtVehicle.verifiedCarNumber) positionData.vehicleCarNumber = _rtVehicle.verifiedCarNumber;
               } catch(e) {}
             }
             var _positionCoverage = getRealtimePositionRecordCoverage(lid, positionData);

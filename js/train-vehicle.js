@@ -182,6 +182,56 @@ var CANONICAL_VEHICLES = {
     aliases: ["253系（日光・きぬがわ）", "E253系（日光・きぬがわ）"]
   }
 };
+
+/**
+ * Tokyo Sakura Tram: ODPT Toei.Arakawa *Train location* trainNumber is a
+ * physical CAR number, never a TrainTimetable ODPTnnnn service number.
+ * Strict one-car identity source; not a generic numerical series heuristic.
+ *
+ * Fleet 33 cars: https://www.kotsu.metro.tokyo.jp/about/service/toden.html
+ * Vehicle/no. livery: https://2nd-train.net/formations/affiliation/216/荒川車両検修所/
+ * 8501 was rebuilt from 2026-04-16; no verified new-livery PNG yet.
+ * https://www.kotsu.metro.tokyo.jp/pickup_information/news/toden/2026/tdn_p_2026041512633_h.html
+ */
+var TODEN_ARAKAWA_BY_CAR = Object.create(null);
+[
+  { cars: "7701 7702", name: "都電7700形（みどり）", asset: "../images/列车/都営地下鉄/都営地下鉄_7700形_みどり.png" },
+  { cars: "7703 7704 7705", name: "都電7700形（あお）", asset: "../images/列车/都営地下鉄/都営地下鉄_7700形_あお.png" },
+  { cars: "7706 7707 7708", name: "都電7700形（えんじ）", asset: "../images/列车/都営地下鉄/都営地下鉄_7700形_えんじ.png" },
+  { cars: "8501", name: "都電8500形（8501号車・リニューアル）", asset: null },
+  { cars: "8502 8503 8504 8505", name: "都電8500形", asset: "../images/列车/都営地下鉄/都営地下鉄_8500形.png" },
+  { cars: "8801 8802 8803 8804 8805", name: "都電8800形（ローズレッド）", asset: "../images/列车/都営地下鉄/都営地下鉄_8800形_ローズレッド.png" },
+  { cars: "8806 8807", name: "都電8800形（バイオレット）", asset: "../images/列车/都営地下鉄/都営地下鉄_8800形_バイオレット.png" },
+  { cars: "8808 8809", name: "都電8800形（オレンジ）", asset: "../images/列车/都営地下鉄/都営地下鉄_8800形_オレンジ.png" },
+  { cars: "8810", name: "都電8800形（イエロー）", asset: "../images/列车/都営地下鉄/都営地下鉄_8800形_イエロー.png" },
+  { cars: "8901 8902", name: "都電8900形（オレンジ）", asset: "../images/列车/都営地下鉄/都営地下鉄_8900形_オレンジ.png" },
+  { cars: "8903 8904", name: "都電8900形（ブルー）", asset: "../images/列车/都営地下鉄/都営地下鉄_8900形_ブルー.png" },
+  { cars: "8905 8906", name: "都電8900形（ローズピンク）", asset: "../images/列车/都営地下鉄/都営地下鉄_8900形_ローズピンク.png" },
+  { cars: "8907 8908", name: "都電8900形（イエロー）", asset: "../images/列车/都営地下鉄/都営地下鉄_8900形_イエロー.png" },
+  { cars: "9001", name: "都電9000形（9001号車・赤色）", asset: "../images/列车/都営地下鉄/都営地下鉄_9000形_9001号車_赤色.png" },
+  { cars: "9002", name: "都電9000形（9002号車・青色）", asset: "../images/列车/都営地下鉄/都営地下鉄_9000形_9002号車_青色.png" }
+].forEach(function(group, i) {
+  var id = 'toden-arakawa-car-group-' + i;
+  CANONICAL_VEHICLES[id] = {
+    displayName: group.name, iconName: group.name, asset: group.asset, aliases: []
+  };
+  group.cars.split(' ').forEach(function(car) {
+    if (TODEN_ARAKAWA_BY_CAR[car]) throw new Error('Duplicate Toden car number: ' + car);
+    TODEN_ARAKAWA_BY_CAR[car] = group.name;
+  });
+});
+
+function resolveTodenArakawaLiveCar(ctx) {
+  // All three scopes must be present. Never identify a Toei subway run, an
+  // Arakawa ODPTnnnn timetable row, or another operator from a matching number.
+  if (ctx.lineId !== 'Arakawa' || normOp(ctx.operator) !== 'Toei' ||
+      ctx.railway !== 'odpt.Railway:Toei.Arakawa') return null;
+  var number = String(ctx.realtimeCarNumber || '').trim();
+  if (!/^[0-9]{4}$/.test(number)) return null;
+  var name = TODEN_ARAKAWA_BY_CAR[number];
+  return name ? { number: number, name: name } : null;
+}
+
 var CANONICAL_VEHICLE_ALIAS_INDEX = {};
 var CANONICAL_VEHICLE_ALIAS_CONFLICTS = {};
 function _registerCanonicalVehicleAlias(alias, rec) {
@@ -751,6 +801,7 @@ function _canonicalVehicleIconPath(name, serviceDate) {
   function resolve(ctx) {
     ctx = ctx || {};
     var assignmentOperator = normOp(ctx.assignmentOperator || ctx.operationOperator || '');
+    var tcar = resolveTodenArakawaLiveCar(ctx);
 
     // One identity arbitration path for realtime, realtime-derived and
     // timetable/SQL evidence. Normalize *registered exact aliases* before
@@ -767,7 +818,8 @@ function _canonicalVehicleIconPath(name, serviceDate) {
     [
       { source: 'realtime', value: ctx.realtimeVehicleType },
       { source: 'realtime-derived', value: ctx.realtimeDerivedVehicleType },
-      { source: 'timetable', value: ctx.timetableVehicleType }
+      { source: 'timetable', value: ctx.timetableVehicleType },
+      { source: 'official-realtime-car-number', value: tcar && tcar.name }
     ].forEach(function(group) {
       splitCandidates(group.value).forEach(function(rawCandidate) {
         var candidate = admittedIdentity(rawCandidate);
@@ -833,7 +885,9 @@ function _canonicalVehicleIconPath(name, serviceDate) {
       identityStatus = 'EXACT';
       // Timetable-derived exact vehicles retain their timetable identity reason
       // so downstream diagnostics can distinguish the evidence channel.
-      if (chosenSrc === 'timetable') {
+      if (tcar && chosen === tcar.name) {
+        identityReason = 'verified-toden-realtime-car-number';
+      } else if (chosenSrc === 'timetable') {
         identityReason = 'timetable-vehicle-evidence';
       } else {
         identityReason = 'unique-converged-vehicle-evidence';
@@ -850,6 +904,7 @@ function _canonicalVehicleIconPath(name, serviceDate) {
 
     return {
       name: chosen,                                  // EXACT vehicle only; empty while ambiguous
+      verifiedCarNumber: tcar && chosen === tcar.name ? tcar.number : '',
       candidates: effectiveCandidates,               // admitted evidence candidates
       allCandidates: orderArr,                        // admitted evidence pool for diagnostics
       identityStatus: identityStatus,                 // EXACT / NARROWED / UNKNOWN
