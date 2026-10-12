@@ -1253,7 +1253,7 @@
                   preferred.vehicleResolution.name === other.vehicleResolution.name) {
                 var primary = _confirmedFormationEvidence(preferred);
                 var secondary = _confirmedFormationEvidence(other);
-                if (!primary && secondary && !preferred.vehicleFormationId) {
+                if (!primary && secondary && !preferred.vehicleFormationId && !preferred.vehicleFormationConflict) {
                   preferred.vehicleFormationId = other.vehicleFormationId || "";
                   preferred.vehicleFormationCandidates = (other.vehicleFormationCandidates || []).slice();
                   preferred.operationEvidence = (preferred.operationEvidence || []).concat([secondary]);
