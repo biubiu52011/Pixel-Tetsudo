@@ -169,6 +169,15 @@ def main():
         if approved_removals['lines']:
             approved_removals['count_adjustments']['lines'] = -len(approved_removals['lines'])
             warnings.append('Approved line removals: %s' % sorted(approved_removals['lines']))
+            # A reviewed 3-to-2 merge retires two canonical line keys but
+            # inserts only one replacement. This is ONE expected line-order
+            # key retirement, not a lost station/stop or permissive guard.
+            if ({'Saikyo', 'KawagoeWest'}.issubset(approved_removals['lines'])
+                and 'SaikyoKawagoe' in cur_slo and 'Kawagoe' in cur_slo
+                and 'Saikyo' not in cur_slo and 'KawagoeWest' not in cur_slo
+                and len(cur_slo['SaikyoKawagoe']) == 24
+                and len(cur_slo['Kawagoe']) == 6):
+                approved_removals['count_adjustments']['lineStationOrder'] = -1
         if approved_removals['stations']:
             approved_removals['count_adjustments']['stations'] = -len(approved_removals['stations'])
             warnings.append('Approved station removals: %s' % sorted(approved_removals['stations']))
