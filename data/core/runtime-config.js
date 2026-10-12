@@ -105,6 +105,37 @@
     }
   };
 
+  // Lines with a configured ODPT Train position API, distinct from
+  // FULL/HYBRID position coverage. Confirmed by the railway runtime registry
+  // on 2026-10-12. Empty live snapshots never enable an SQL substitute.
+  // Existing FULL line policies also qualify when their Train endpoint is enabled.
+  var REALTIME_POSITION_API_LINES = Object.freeze({
+    "Asakusa": true,
+    "ChuoRapid": true,
+    "Joban": true,
+    "JobanLocal": true,
+    "Kawagoe": true,
+    "KeihinTohoku": true,
+    "Keiyo": true,
+    "Mita": true,
+    "Musashino": true,
+    "Nambu": true,
+    "Oedo": true,
+    "SaikyoKawagoe": true,
+    "Shinjuku": true,
+    "ShonanShinjuku": true,
+    "SobuRapid": true,
+    "Takasaki": true,
+    "TobuIsesaki": true,
+    "TobuNikko": true,
+    "TobuSkytree": true,
+    "Tokaido": true,
+    "Tsurumi": true,
+    "UtsunomiyaJR": true,
+    "Yamanote": true,
+    "Yokosuka": true
+  });
+
   // ========== ODPT 站 ID 别名映射（补丁式修复，随发现持续追加）==========
 
   /**
@@ -247,6 +278,7 @@
     SOURCE_RAILWAY_CANONICAL_LINE: SOURCE_RAILWAY_CANONICAL_LINE,
     PRIORITY_OPS: PRIORITY_OPS,
     REALTIME_POSITION_POLICY: REALTIME_POSITION_POLICY,
+    REALTIME_POSITION_API_LINES: REALTIME_POSITION_API_LINES,
     // ODPT 站 ID 别名
     STATION_ALIAS: STATION_ALIAS,
     STATION_ALIAS_BY_RAILWAY: STATION_ALIAS_BY_RAILWAY,

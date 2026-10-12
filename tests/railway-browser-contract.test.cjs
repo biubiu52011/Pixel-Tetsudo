@@ -206,3 +206,31 @@ test('SaikyoKawagoe and Kawagoe use ODPT/JS without loading legacy manual timeta
   assert.match(fusion, /if \(_manualEvidenceDisabled\(lineId\)\) \{ resolve\(false\); return; \}/);
   assert.match(api, /if \(hasRealtimePositionApi\(lineId\)\) return Promise\.resolve\(\[\]\)/);
 });
+
+test('live API capabilities survive config regeneration and remain SQL-bypass only', () => {
+  const original = read('data/core/runtime-config.js');
+  const bundled = read('data/core/data-config-bundle.js');
+  const api = read('data/api/odpt-unified.js');
+  const edge = read('supabase/functions/train-runs/index.ts');
+  const importer = read('supabase/functions/timetable-ingest/index.ts');
+  function configuredLines(text) {
+    const marker = 'var REALTIME_POSITION_API_LINES = Object.freeze({';
+    const start = text.indexOf(marker);
+    assert.ok(start >= 0, 'missing source capability registry');
+    const end = text.indexOf('});', start);
+    assert.ok(end > start, 'unterminated capability registry');
+    return Array.from(text.slice(start, end).matchAll(/"([^"]+)":\s*true/g), m => m[1]).sort();
+  }
+  const registered = configuredLines(original);
+  assert.ok(registered.length >= 24);
+  assert.deepEqual(registered, configuredLines(bundled));
+  for (const id of ['Asakusa', 'ChuoRapid', 'KeihinTohoku', 'Mita', 'TobuSkytree', 'Yamanote']) {
+    assert.ok(registered.includes(id), id + ' lost its realtime capability');
+  }
+  assert.match(original, /REALTIME_POSITION_API_LINES:\s*REALTIME_POSITION_API_LINES/);
+  assert.match(bundled, /REALTIME_POSITION_API_LINES:\s*REALTIME_POSITION_API_LINES/);
+  assert.match(api, /if \(hasRealtimePositionApi\(lineId\)\) return Promise\.resolve\(\[\]\)/);
+  assert.match(api, /var sourcePromise = hasRealtimePositionApi\(lineId\)/);
+  assert.match(edge, /if \(source\?\.realtime_position_api_enabled\)/);
+  assert.match(importer, /if \(line\.realtime_position_api_enabled === true\)/);
+});
