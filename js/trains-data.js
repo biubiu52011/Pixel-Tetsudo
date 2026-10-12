@@ -136,18 +136,14 @@ function _positionSourceRank(p) {
 
 function _trainIdentityKey(p, lineId) {
   if (!p) return "";
-  // On Yamanote, a bare train number is not a physical train identity.
-  // DataFusion performs the sole unique live/timetable bridge.
-  var id = lineId === "Yamanote"
-    ? (p.runningChainId || p.trainId || p.sourceTrainId || p.timetableObjectId || "")
-    : (p.runningChainId || p.trainNumber || p.trainId || "");
+  // Every line uses the same resolved-chain/source-object identity.
+  // A bare train number is not globally or even always locally unique.
+  // Retain namespace: removing odpt.Train vs odpt.TrainTimetable
+  // prefixes could collapse unrelated source objects with the same suffix.
+  var id = p.runningChainId || p.trainId ||
+    p.sourceTrainId || p.timetableObjectId || "";
   id = String(id).trim();
-  if (!id) return "";
-  return id.replace(/^odpt\.Train:/, "")
-           .replace(/^odpt\.TrainTimetable:/, "")
-           .replace(/^odpt\.[^:]+:/, "")
-           .replace(/[@#].*$/, "")
-           .toUpperCase();
+  return id;
 }
 
 function _positionCompleteness(p) {

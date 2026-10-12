@@ -1227,26 +1227,33 @@
               { lineIds: requestedLineIds && requestedLineIds.length ? requestedLineIds : null }
             );
 
-            // One running-chain resolver, one match key. Yamanote candidates
-            // must agree on date, line, official train number AND loop direction.
-            // The unique timetable chain is authoritative, never a bare number.
-            var _chainsByTrainNumber = {};
+            // The established RunningChainResolver is the only authority for
+            // scoped live/timetable candidate keys, for EVERY railway.
+            // Count individual candidates as well as distinct chains: two
+            // scheduled runs sharing one number/direction cannot silently
+            // collapse just because their chain IDs happen to agree.
+            var _chainsByScheduledKey = Object.create(null);
+            var _scheduledEstimateCounts = Object.create(null);
+            var _scheduledLiveCounts = Object.create(null);
             function _chainBridgeKey(lid, p) {
-              if (!p || !p.trainNumber) return "";
-              if (lid === "Yamanote") {
-                return window.RunningChainResolver &&
-                  typeof window.RunningChainResolver.scheduledMatchKey === "function"
-                  ? window.RunningChainResolver.scheduledMatchKey(lid, p) : "";
-              }
-              return String(p.trainNumber);
+              return window.RunningChainResolver &&
+                typeof window.RunningChainResolver.scheduledMatchKey === "function"
+                ? window.RunningChainResolver.scheduledMatchKey(lid, p) : "";
             }
             Object.keys(estimated).forEach(function(_vlid) {
               (estimated[_vlid] || []).forEach(function(_ep) {
                 if (!_ep || !_ep.runningChainId) return;
-                var _tn = _chainBridgeKey(_vlid, _ep);
-                if (!_tn) return;
-                if (!_chainsByTrainNumber[_tn]) _chainsByTrainNumber[_tn] = {};
-                _chainsByTrainNumber[_tn][_ep.runningChainId] = true;
+                var k = _chainBridgeKey(_vlid, _ep);
+                if (!k) return;
+                _scheduledEstimateCounts[k] = (_scheduledEstimateCounts[k] || 0) + 1;
+                if (!_chainsByScheduledKey[k]) _chainsByScheduledKey[k] = Object.create(null);
+                _chainsByScheduledKey[k][_ep.runningChainId] = true;
+              });
+            });
+            Object.keys(posMap).forEach(function(_vlid) {
+              (posMap[_vlid] || []).forEach(function(_rp) {
+                var k = _chainBridgeKey(_vlid, _rp);
+                if (k) _scheduledLiveCounts[k] = (_scheduledLiveCounts[k] || 0) + 1;
               });
             });
             var _chainVehicleCandidates = {};
@@ -1286,8 +1293,11 @@
               (posMap[_vlid] || []).forEach(function(_rp) {
                 if (!_rp) return;
                 var _bridgeKey = _chainBridgeKey(_vlid, _rp);
-                if (!_rp.runningChainId && _bridgeKey && _chainsByTrainNumber[_bridgeKey]) {
-                  var _chainIds = Object.keys(_chainsByTrainNumber[_bridgeKey]);
+                if (!_rp.runningChainId && _bridgeKey &&
+                    _scheduledEstimateCounts[_bridgeKey] === 1 &&
+                    _scheduledLiveCounts[_bridgeKey] === 1 &&
+                    _chainsByScheduledKey[_bridgeKey]) {
+                  var _chainIds = Object.keys(_chainsByScheduledKey[_bridgeKey]);
                   if (_chainIds.length === 1) _rp.runningChainId = _chainIds[0];
                 }
                 _queueChainVehicle(_rp);
@@ -1298,16 +1308,23 @@
             Object.keys(_realtimeEvidenceWithoutPosition).forEach(function(_evKey) {
               var _ev = _realtimeEvidenceWithoutPosition[_evKey];
               if (!_ev || !_ev.trainNumber || !_ev.vehicleType) return;
-              // Positionless Yamanote evidence cannot bypass the same
-              // direction/date uniqueness checks as positioned realtime rows.
+              // Positionless evidence must not join a different railway
+              // that happens to reuse the same number. Require one mapped
+              // line, date, direction, scheduled run, and canonical chain.
               var _evRailway = String(_ev.railway || "").split(".").pop();
-              var _evMatchKey = _evRailway === "Yamanote"
-                ? _chainBridgeKey("Yamanote", {
-                    trainNumber:_ev.trainNumber,
-                    serviceDate:_snapshotServiceDate,
-                    railDirection:_ev.railDirection
-                  }) : String(_ev.trainNumber);
-              var _evChains = _chainsByTrainNumber[_evMatchKey] || {};
+              if (!_evRailway || !_ev.railDirection) return;
+              var _evLines = Object.keys(estimated).filter(function(lid) {
+                return lid === _evRailway ||
+                  (_railwayCodes && _railwayCodes[lid] === _evRailway);
+              });
+              if (_evLines.length !== 1) return;
+              var _evMatchKey = _chainBridgeKey(_evLines[0], {
+                trainNumber:_ev.trainNumber,
+                serviceDate:_snapshotServiceDate,
+                railDirection:_ev.railDirection
+              });
+              if (!_evMatchKey || _scheduledEstimateCounts[_evMatchKey] !== 1) return;
+              var _evChains = _chainsByScheduledKey[_evMatchKey] || {};
               var _evChainIds = Object.keys(_evChains);
               if (_evChainIds.length !== 1) return;
               var _evResolution = (window.TrainVehicle && typeof window.TrainVehicle.resolve === "function")
@@ -1425,64 +1442,62 @@
               // with different object IDs; train number is a same-line
               // secondary guard, never a replacement for the running-chain ID.
               if (!posMap[lid]) posMap[lid] = [];
-              // The same candidate key serves timetable/live merge and chain
-              // matching; no display-layer or station-index mapping is added.
-              // Ambiguous same-number loop runs stay distinct.
-              var _isYamanote = lid === "Yamanote";
+              // Reuse the same scoped key used for chain bridging. Every
+              // line needs a unique one-to-one match before timetable data
+              // can suppress or supplement a realtime train.
               function _sameLineNumberKey(p) { return _chainBridgeKey(lid, p); }
-              var _estKeyCounts = {}, _liveKeyCounts = {};
-              if (_isYamanote) {
-                _est.forEach(function(p) {
-                  if (!p || !mayUseTimetableEstimate(lid,p)) return;
-                  var k = _sameLineNumberKey(p);
-                  if (k) _estKeyCounts[k] = (_estKeyCounts[k] || 0) + 1;
-                });
-                posMap[lid].forEach(function(p) {
-                  var k = _sameLineNumberKey(p);
-                  if (k) _liveKeyCounts[k] = (_liveKeyCounts[k] || 0) + 1;
-                });
-              }
-              var _haveId = {};
-              var _haveTrainNumber = {};
+              var _estKeyCounts = Object.create(null);
+              var _liveKeyCounts = Object.create(null);
+              _est.forEach(function(p) {
+                if (!p || !mayUseTimetableEstimate(lid,p)) return;
+                var k = _sameLineNumberKey(p);
+                if (k) _estKeyCounts[k] = (_estKeyCounts[k] || 0) + 1;
+              });
+              posMap[lid].forEach(function(p) {
+                var k = _sameLineNumberKey(p);
+                if (k) _liveKeyCounts[k] = (_liveKeyCounts[k] || 0) + 1;
+              });
+              var _haveId = Object.create(null);
+              var _haveScheduledKey = Object.create(null);
               posMap[lid].forEach(function(p) {
                 if (!p) return;
                 if (_positionIdentity(p)) _haveId[_positionIdentity(p)] = true;
                 var k = _sameLineNumberKey(p);
-                if (k) _haveTrainNumber[k] = true;
+                if (k) _haveScheduledKey[k] = true;
               });
               var _addN = 0;
               _est.forEach(function(p) {
                 if (!p || !mayUseTimetableEstimate(lid, p)) return;
                 var _pid = _positionIdentity(p);
                 var _noKey = _sameLineNumberKey(p);
-                var _uniqueSchedule = !_isYamanote ||
-                  (_noKey && _estKeyCounts[_noKey] === 1 && _liveKeyCounts[_noKey] === 1);
+                var _uniqueSchedule = _noKey &&
+                  _estKeyCounts[_noKey] === 1 && _liveKeyCounts[_noKey] === 1;
                 if ((_pid && _haveId[_pid]) ||
-                    (_noKey && _uniqueSchedule && _haveTrainNumber[_noKey])) return;
+                    (_uniqueSchedule && _haveScheduledKey[_noKey])) return;
                 posMap[lid].push(p);
                 if (_pid) _haveId[_pid] = true;
-                if (_noKey) _haveTrainNumber[_noKey] = true;
+                if (_noKey) _haveScheduledKey[_noKey] = true;
                 _addN++;
               });
               estCount += _addN;
-              // Realtime owns position. Missing destination may inherit only
-              // from the identical chain or a unique same-line candidate.
-              var _estById = {};
-              var _estByTrainNumber = {};
+              // Realtime owns position. Missing destination is inherited
+              // only from identical chain or uniquely matched timetable run.
+              var _estById = Object.create(null);
+              var _estByScheduledKey = Object.create(null);
               _est.forEach(function(p) {
                 if (!p) return;
                 if (_positionIdentity(p)) _estById[_positionIdentity(p)] = p;
                 var k = _sameLineNumberKey(p);
-                if (k && (!_isYamanote || _estKeyCounts[k] === 1) && !_estByTrainNumber[k]) {
-                  _estByTrainNumber[k] = p;
+                if (k && _estKeyCounts[k] === 1 && !_estByScheduledKey[k]) {
+                  _estByScheduledKey[k] = p;
                 }
               });
               posMap[lid].forEach(function(p) {
                 if (!p || p.destinationStation) return;
                 var match = _positionIdentity(p) && _estById[_positionIdentity(p)];
                 var k = _sameLineNumberKey(p);
-                if (!match && k && (!_isYamanote ||
-                    (_estKeyCounts[k] === 1 && _liveKeyCounts[k] === 1))) match = _estByTrainNumber[k];
+                if (!match && k && _estKeyCounts[k] === 1 &&
+                    _liveKeyCounts[k] === 1) match = _estByScheduledKey[k];
                 if (match && match.destinationStation) p.destinationStation = match.destinationStation;
               });
             });

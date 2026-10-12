@@ -342,7 +342,7 @@ assert(runningChainSource.includes('var boundaries = Array.isArray(line.serviceB
 assert(runningChainSource.includes('_directThrough[lineId].push(boundary.lineId)'),
   'direct-through runtime index must be projected from validated service boundaries');
 
-// Canonical Yamanote identity: no parallel Harajuku/station mapping.
+// Canonical all-line identity: no parallel Harajuku/station mapping.
 const resolverSandbox={window:{}};
 vm.createContext(resolverSandbox);
 vm.runInContext(read("js/running-chain-resolver.js"),resolverSandbox);
@@ -350,6 +350,8 @@ const scheduleKey=resolverSandbox.window.RunningChainResolver.scheduledMatchKey;
 const ym={serviceDate:"2026-10-12",trainNumber:"1151G",railDirection:"InnerLoop"};
 const inner=scheduleKey("Yamanote",ym);
 assert(inner && inner.startsWith("scheduled-match:"),"valid scoped scheduled key");
+assert.strictEqual(inner,scheduleKey("Yamanote",{...ym,railDirection:"inner"}),
+  "loop direction normalization must be case-insensitive");
 assert.strictEqual(inner,scheduleKey("Yamanote",{...ym,railDirection:"odpt.RailDirection:Inner"}),
   "inner-loop aliases must match");
 assert.notStrictEqual(inner,scheduleKey("Yamanote",{...ym,railDirection:"OuterLoop"}),
@@ -362,18 +364,49 @@ assert.strictEqual(scheduleKey("Yamanote",{...ym,railDirection:""}),"",
   "no direction means no loop match");
 assert.strictEqual(scheduleKey("Yamanote",{...ym,trainNumber:"manual-template:12"}),"",
   "SQL row ID must not masquerade as train number");
+// Compare examples from different operators/lines that can reuse a train
+// number. Never blend them even when ODPT source IDs share a suffix.
+const others=[
+  ["Ginza","odpt.RailDirection:Inbound"],
+  ["Asakusa","odpt.RailDirection:Outbound"],
+  ["Keiyo","odpt.RailDirection:Inbound"],
+  ["Chiyoda","odpt.RailDirection:Inbound"],
+  ["Rinkai","odpt.RailDirection:Inbound"],
+  ["NewShuttle","odpt.RailDirection:Inbound"]
+];
+others.forEach(function(pair){
+  const k=scheduleKey(pair[0],{...ym,railDirection:pair[1]});
+  assert(k&&k.startsWith("scheduled-match:"),"valid all-line candidate: "+pair[0]);
+  assert.notStrictEqual(k,inner,"Yamanote cannot collide with "+pair[0]);
+  assert.notStrictEqual(k,scheduleKey(pair[0],{...ym,railDirection:"Outbound"}),
+    "opposite directions cannot merge: "+pair[0]);
+  assert.strictEqual(k,scheduleKey(pair[0],{...ym,railDirection:"inbound"}),
+    "case aliases must agree: "+pair[0]);
+  assert.strictEqual(scheduleKey(pair[0],{...ym,railDirection:""}),"",
+    "missing direction must stay unbound: "+pair[0]);
+});
+assert.notStrictEqual(scheduleKey("Keiyo",{...ym,railDirection:"Inbound"}),
+                      scheduleKey("Chiyoda",{...ym,railDirection:"Inbound"}),
+  "train number reuse across lines must remain separate");
+assert(!fusion.includes('_chainsByTrainNumber')&&!fusion.includes('_estByTrainNumber')&&
+       !fusion.includes('_haveTrainNumber'),
+  "remove legacy bare-train-number candidate indices");
 assert(fusion.includes('function _chainBridgeKey(lid, p)') &&
        fusion.includes('window.RunningChainResolver.scheduledMatchKey(lid, p)') &&
-       fusion.includes('_estKeyCounts[_noKey] === 1 && _liveKeyCounts[_noKey] === 1'),
-  "Yamanote live/estimated merge must use the same singleton resolver");
+       fusion.includes('_estKeyCounts[_noKey] === 1 && _liveKeyCounts[_noKey] === 1') &&
+       fusion.includes('_scheduledEstimateCounts[_bridgeKey] === 1') &&
+       fusion.includes('_scheduledLiveCounts[_bridgeKey] === 1'),
+  "all-line live/estimated merge must reuse one singleton resolver and unique evidence");
 const yd=read("js/trains-data.js");
-assert(yd.includes('lineId === "Yamanote"') &&
-       yd.includes('p.runningChainId || p.trainId || p.sourceTrainId || p.timetableObjectId'),
-  "render dedupe must not remap by bare train number");
+assert(yd.includes('p.runningChainId || p.trainId ||') &&
+       !yd.includes('p.runningChainId || p.trainNumber'),
+  "all-line display dedupe must rely on source object or canonical chain, never bare number");
+assert(!yd.includes('.replace(/^odpt\\.Train:/'),
+  "source train identifiers must retain their full namespace");
 const geom=read("js/trains-geometry.js");
 assert(geom.includes('loopPts[_sourceRi] =') && geom.includes('loopPts[_sourceLi] ='),
   "original 30-station Harajuku/Shinagawa indices must remain untouched");
-console.log("Yamanote scoped live/timetable mapping: PASS");
+console.log("all-line scoped live/timetable mapping: PASS");
 
 console.log("train-position-evidence-regression: PASS");
 

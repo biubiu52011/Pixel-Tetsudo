@@ -131,21 +131,25 @@
     return {runningChainId:"rc:"+ids.join("~"),evidence:linkedBySource?"CONFIRMED_BOUNDARY+SOURCE_TIMETABLE_LINK":(strong?"CONFIRMED_SEGMENT_GRAPH+TIMETABLE_ID":(numberChanged?"CONFIRMED_UNIQUE_BOUNDARY+TRAIN_NUMBER_CHANGED":"CONFIRMED_SEGMENT_GRAPH+TRAIN_NUMBER")),timeGapMin:maxGap,segmentCount:ids.length};
   }
 
-  // A same-line candidate key, NOT a physical carset or confirmed chain ID.
-  // Promoted only after matching exactly one scheduled running chain.
-  // SQL row IDs, array order and inferred endpoints are never identities.
-  function scheduledMatchKey(lineId,position){
-    if(!lineId||!position)return "";
-    var num=String(position.trainNumber||"").trim();
-    var date=String(position.serviceDate||"").slice(0,10);
-    var dir=String(position.railDirection||"").split(/[:.]/).pop();
-    if(!num||!/^\d{4}-\d{2}-\d{2}$/.test(date))return "";
-    if(/^(?:est_|odpt[.:]|supabase:|manual-template:|planned-trip:)/i.test(num))return "";
-    if(lineId==="Yamanote"){
-      if(!/^(Inner|InnerLoop|Outer|OuterLoop)$/.test(dir))return "";
-      dir=/^Inner/.test(dir)?"InnerLoop":"OuterLoop";
-    }else if(!dir)return "";
-    return "scheduled-match:"+[lineId,date,num,dir].map(encodeURIComponent).join("|");
+  // Shared by ALL railways: candidate key, not a physical carset nor
+  // an authoritative source object ID. Only a unique live + timetable
+  // match may reuse an existing, source-validated runningChainId.
+  // Origin/start/terminal remain part of the scheduled source record ID;
+  // live ODPT records often lack them, so they cannot be fabricated here.
+  function scheduledMatchKey(lineId, position){
+    if(!lineId || !position) return "";
+    var num=String(position.trainNumber || "").trim();
+    var date=String(position.serviceDate || "").slice(0,10);
+    var dir=String(position.railDirection || "").split(/[:.]/).pop().trim();
+    if(!num || !/^\d{4}-\d{2}-\d{2}$/.test(date) || !dir) return "";
+    if(/^(?:est_|odpt[.:]|supabase:|manual-template:|planned-trip:)/i.test(num)) return "";
+    // Normalize common ODPT loop direction aliases without modifying
+    // canonical station order, circuit topology or map geometry.
+    if(/^(Inner|InnerLoop)$/i.test(dir)) dir="INNERLOOP";
+    else if(/^(Outer|OuterLoop)$/i.test(dir)) dir="OUTERLOOP";
+    else dir=dir.toUpperCase();
+    return "scheduled-match:"+
+      [lineId,date,num,dir].map(function(v){return encodeURIComponent(String(v));}).join("|");
   }
 
   function isThroughAtStation(lineA,lineB,stationId){
