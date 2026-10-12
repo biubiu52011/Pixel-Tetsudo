@@ -378,9 +378,11 @@ others.forEach(function(pair){
   const k=scheduleKey(pair[0],{...ym,railDirection:pair[1]});
   assert(k&&k.startsWith("scheduled-match:"),"valid all-line candidate: "+pair[0]);
   assert.notStrictEqual(k,inner,"Yamanote cannot collide with "+pair[0]);
-  assert.notStrictEqual(k,scheduleKey(pair[0],{...ym,railDirection:"Outbound"}),
+  const direction=pair[1].split(":").pop();
+  const opposite=direction==="Inbound"?"Outbound":"Inbound";
+  assert.notStrictEqual(k,scheduleKey(pair[0],{...ym,railDirection:opposite}),
     "opposite directions cannot merge: "+pair[0]);
-  assert.strictEqual(k,scheduleKey(pair[0],{...ym,railDirection:"inbound"}),
+  assert.strictEqual(k,scheduleKey(pair[0],{...ym,railDirection:direction.toLowerCase()}),
     "case aliases must agree: "+pair[0]);
   assert.strictEqual(scheduleKey(pair[0],{...ym,railDirection:""}),"",
     "missing direction must stay unbound: "+pair[0]);
