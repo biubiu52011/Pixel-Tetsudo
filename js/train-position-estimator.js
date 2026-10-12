@@ -511,6 +511,15 @@
     var _declaredVehicleInput = String(tt.vehicleType || '').trim();
     var _timetableVehicleInput = [_operationVehicleInput, _declaredVehicleInput]
       .filter(Boolean).filter(function(v,i,a) { return a.indexOf(v) === i; }).join(' / ');
+    // A precise, boundary-verified SQL vehicle model can narrow an operation
+    // evidence *candidate list*. Do not override a different single-model
+    // assertion, and never pick a model from an ambiguous list by availability.
+    var _declaredModels = _declaredVehicleInput.split('/').map(function(v){return v.trim();}).filter(Boolean);
+    var _operationModels = String(_operationVehicleInput || '').split('/').map(function(v){return v.trim();}).filter(Boolean);
+    if (_declaredModels.length === 1 && _operationModels.length > 1 &&
+        _operationModels.indexOf(_declaredModels[0]) >= 0) {
+      _timetableVehicleInput = _declaredModels[0];
+    }
     var _assignmentFormations = {};
     if (_resolvedEvidence && _resolvedEvidence.formationId) {
       String(_resolvedEvidence.formationId).split(/\s*\/\s*|\s*,\s*|\s*\|\s*/).forEach(function(fid) {
