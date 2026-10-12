@@ -141,6 +141,8 @@
         },
         "Toei": {
             base: "https://api.odpt.org/api/v4/",
+            // Anonymous Train feed; keep TrainTimetable/TrainInformation on the keyed center API.
+            publicTrainBase: "https://api-public.odpt.org/api/v4/",
             // v4.3.460: Toei の odpt:Train（リアルタイム位置）を実測確認（浅草/新宿/三田/大江戸で返却、
             // 深夜 0:26 でも 26 件）。従来 train: null で取得していなかったのを有効化。
             // v4.3.472 訂正: 都電荒川線（Arakawa）も odpt:Train に含まれる（実測 17 件/昼、30 駅全駅あり）——
@@ -201,6 +203,9 @@
     function buildUrl(operator, type) {
         var ep = ODPT_ENDPOINTS[operator];
         if (!ep || !ep[type]) return null;
+        // Public ODPT Train endpoints need no acl:consumerKey. Do not alter the
+        // separately authenticated TrainTimetable/TrainInformation requests.
+        if (type === "train" && ep.publicTrainBase) return ep.publicTrainBase + ep[type];
         // 优先从链接库匹配完整URL（库中含 acl:consumerKey）
         var links = getApiLinks();
         for (var i = 0; i < links.length; i++) {
@@ -545,16 +550,19 @@
     var API_MAX_CONCURRENCY = (window.RuntimeConfig && window.RuntimeConfig.API_MAX_CONCURRENCY) || 3;  // 每域最大并发（滑动窗口）
     var apiLastRequestTime = {
         'api-challenge.odpt.org': 0,
-        'api.odpt.org': 0
+        'api.odpt.org': 0,
+        'api-public.odpt.org': 0
     };
     var apiRequestQueue = {
         'api-challenge.odpt.org': [],
-        'api.odpt.org': []
+        'api.odpt.org': [],
+        'api-public.odpt.org': []
     };
     var _active = {};
     var apiQueueProcessing = {
         'api-challenge.odpt.org': false,
-        'api.odpt.org': false
+        'api.odpt.org': false,
+        'api-public.odpt.org': false
     };
 
     function getApiDomain(url) {
