@@ -682,7 +682,8 @@ console.log("Rinkai/Osaki exact vehicle evidence regression: PASS");
   assert(/if \(_manualEvidenceDisabled\(lineId\)\) \{ resolve\(false\); return; \}/.test(fusion));
   assert(!fs.existsSync(path.join(root,'data/timetables/SaikyoKawagoe-manual.js')),
     'retired Saikyo SQL/manual duplicate must not remain a separate timetable route');
-  assert(bundled.includes('"Rinkai":') && !/\"Rinkai\":\s*\{\s*mode:\s*"FULL"/.test(bundled),
+  assert(!/\"Rinkai\":\s*\{\s*mode:\s*"FULL"/.test(bundled) &&
+         !/\"Rinkai\":\s*\{[^}]*manualTimetableEvidence:\s*false/.test(bundled),
     'TWR Rinkai timetable estimation must remain available');
   console.log('Saikyo ODPT+JS-only manual/SQL isolation: 8 PASS');
 }
