@@ -570,3 +570,55 @@ console.log('single internal PNG resolver, no second mapping hop: PASS');
     'Realtime vehicles must use the same published railway service calendar');
   console.log('JR ODPT -> exact-number holiday/weekday planned model -> TWR PNG: 12 PASS');
 }
+
+
+
+// A terminal must never gate a train's planned reference vehicle. Existing
+// canonical reference lookup covers dated JR runs to intermediate terminals.
+{
+  const roster=JSON.parse(read('data/timetables/vehicle-operation-evidence.json')).referenceRules;
+  assert.strictEqual(roster.length,826);
+  assert.strictEqual(roster.filter(r=>r.vehicleType==='E233系7000番台').length,649);
+  const ctx={window:{},console:{debug(){}}};
+  vm.createContext(ctx);
+  for(const p of ['data/timetables/vehicle-operation-evidence-data.js',
+    'data/timetables/train-operation-evidence.js','js/train-vehicle.js']){
+    vm.runInContext(read(p),ctx,{filename:p});
+  }
+  const resolve=(n,day,cal,line='SaikyoKawagoe')=>
+    ctx.window.TrainOperationEvidence.resolveEvidence(n,{
+      lineId:line,railway:'odpt.Railway:JR-East.'+line,
+      operator:'JR-East',serviceDate:day,calendarType:cal
+    },'realtime-derived');
+  const cases=[
+    ['1004K','2026-10-12','holiday','Shinjuku'],
+    ['1205K','2026-10-12','holiday','Omiya'],
+    ['609K','2026-10-12','holiday','MusashiUrawa'],
+    ['609K','2026-10-13','weekday','Omiya'],
+    ['1000F','2026-10-12','holiday','ShinKiba'],
+    ['4614K','2026-10-12','holiday','Ebina']
+  ];
+  for(const [num,day,cal,terminal] of cases){
+    const fact=resolve(num,day,cal);
+    assert.ok(fact && fact.vehicleType==='E233系7000番台',
+      num+' '+terminal+': expected reference E233-7000');
+    assert.strictEqual(fact.evidenceRole,'timetable-reference');
+    const vehicle=ctx.window.TrainVehicle.resolve({
+      trainNumber:num,realtimeDerivedVehicleType:fact.vehicleType
+    });
+    assert.strictEqual(vehicle.identityStatus,'EXACT',num+' '+terminal);
+    assert.ok((vehicle.iconPath||'').includes('E233'),num+' '+terminal+' '+vehicle.iconPath);
+  }
+  assert.strictEqual(resolve('120M','2026-10-12','holiday'),null,
+    'Shared Sotetsu/JR M-numbered trains require their own timetable evidence');
+  assert.strictEqual(resolve('9999K','2026-10-12','holiday'),null,
+    'No open-ended runtime number-range guessing');
+  assert.strictEqual(resolve('1004K','2026-03-13','holiday'),null,
+    'Do not apply the 2026 timetable before its revision');
+  assert.strictEqual(resolve('1004K','2026-10-12','holiday','Keiyo'),null,
+    'Do not leak Saikyo model into unrelated railways');
+  const twr=resolve('1081F','2026-10-12','holiday');
+  assert.strictEqual(twr.vehicleType,'東京臨海高速鉄道70-000形',
+    'Existing TWR 70-000 reference must not be replaced by JR E233');
+  console.log('Saikyo JR E233 all termini / calendar / TWR-Sotetsu isolation: 11 PASS');
+}

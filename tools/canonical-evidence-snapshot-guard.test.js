@@ -17,7 +17,9 @@ assert(Array.isArray(snapshot.records), "snapshot records must be an array");
 assert(Array.isArray(snapshot.datedRecords), "snapshot datedRecords must be an array");
 assert(Array.isArray(snapshot.familyRules), "snapshot familyRules must be an array");
 assert(Array.isArray(snapshot.referenceRules), "snapshot referenceRules must be an array");
-assert(snapshot.referenceRules.length >= 177, "Supabase planned vehicle rules not exported");
+assert(snapshot.referenceRules.length >= 826, "Supabase planned vehicle rules not exported");
+assert(snapshot.referenceRules.filter(r=>r.networkKey==="saikyo" && r.vehicleType==="E233系7000番台").length >= 649,
+  "Saikyo JR E233 reference coverage unexpectedly missing");
 const referenceKeys = new Map();
 for (const r of snapshot.referenceRules) {
   assert(r.trainNumber && r.vehicleType && r.networkKey && r.calendarType &&
