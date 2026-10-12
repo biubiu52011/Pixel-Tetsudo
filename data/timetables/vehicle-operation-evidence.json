@@ -20514,6 +20514,17 @@
         "max_date": "2026-04-04"
       },
       {
+        "source_network_key": "saikyo",
+        "canonical_network_key": "saikyo",
+        "alias_scope": "exact",
+        "evidence_kind": "train_rule",
+        "evidence_rows": 177,
+        "exact_rows": 177,
+        "narrowed_rows": 0,
+        "min_date": "2026-03-14",
+        "max_date": null
+      },
+      {
         "source_network_key": "seibu-ikebukuro",
         "canonical_network_key": "seibu-ikebukuro",
         "alias_scope": "exact",
