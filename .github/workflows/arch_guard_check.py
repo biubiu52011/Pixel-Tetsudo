@@ -301,13 +301,12 @@ def main():
     if 'var trainUid = p.runningChainId || p.trainId || p.trainNumber' in renderer_src:
         new_errors.append('REALTIME-001 TRAIN_NUMBER_USED_AS_PERSISTENT_MARKER_ID')
 
-    # TRAIN-001: a single authoritative PNG selector for both ODPT realtime
-    # and timetable-based position estimates. Vehicle PNGs and the neutral
-    # 'model not confirmed' PNG are ordinary gallery assets. The railway map
-    # may remain SVG, but no SVG shapes may be drawn as train icons.
+    # TRAIN-001: one authoritative gallery-PNG selector for realtime and
+    # timetable predictions. After retirement of the generic/common artwork,
+    # UNKNOWN remains an unresolved position, never a guessed train PNG.
     if ('window.TrainVehicle.selectMarkerArtwork(p, artworkFailed)' not in renderer_src
             or 'selectMarkerArtwork: selectMarkerArtwork' not in vehicle_src
-            or 'kind: "generic", iconSrc: NEUTRAL_TRAIN_PNG' not in vehicle_src
+            or 'kind: "unresolved", iconSrc: ""' not in vehicle_src
             or 'kind: "vehicle", iconSrc: iconSrc' not in vehicle_src
             or 'if (artworkFailed === true || !isGalleryPng(iconSrc))' not in vehicle_src):
         new_errors.append('TRAIN-001 SINGLE_PNG_ARTWORK_AUTHORITY_MISSING')
@@ -322,23 +321,18 @@ def main():
             or 'outer.setAttribute("r", "8")' in renderer_src):
         new_errors.append('TRAIN-001 SELF_DRAWN_SVG_OR_DUAL_TRAIN_MARKER_REINTRODUCED')
     if ('marker.addEventListener("error"' not in renderer_src
-            or 'window.TrainVehicle.selectMarkerArtwork(p, true)' not in renderer_src
-            or 'marker.setAttribute("href", fallback.iconSrc)' not in renderer_src
-            or 'document.createElementNS(svgNS, "image")' not in renderer_src):
-        new_errors.append('TRAIN-001 PNG_ONLY_IMAGE_FAILURE_FALLBACK_MISSING')
+            or 'marker.setAttribute("visibility", "hidden")' not in renderer_src
+            or 'document.createElementNS(svgNS, "image")' not in renderer_src
+            or 'if (!markerSpec.iconSrc) continue;' not in renderer_src):
+        new_errors.append('TRAIN-001 EXACT_IMAGE_FAILURE_SAFE_HIDE_MISSING')
     if 'train-dot' in renderer_src or 'train-point' in renderer_src:
         new_errors.append('TRAIN-001 LEGACY_TRAIN_DOT_MARKER_REINTRODUCED')
-    neutral_match = re.search(r'var NEUTRAL_TRAIN_PNG\s*=\s*"\.\./([^"]+\.png)"', vehicle_src)
-    if not neutral_match or not neutral_match.group(1).startswith('images/列车/'):
-        new_errors.append('TRAIN-001 NEUTRAL_GALLERY_PNG_UNDEFINED')
-    else:
-        neutral_path = os.path.join(REPO_ROOT, neutral_match.group(1))
-        try:
-            with open(neutral_path, 'rb') as neutral_file:
-                if neutral_file.read(8) != bytes.fromhex('89504e470d0a1a0a'):
-                    new_errors.append('TRAIN-001 NEUTRAL_GALLERY_PNG_INVALID')
-        except OSError:
-            new_errors.append('TRAIN-001 NEUTRAL_GALLERY_PNG_MISSING')
+    if ('共通_形式未確認.png' in vehicle_src
+            or 'fallback.iconSrc' in renderer_src
+            or 'NEUTRAL_TRAIN_PNG' in vehicle_src):
+        new_errors.append('TRAIN-001 RETIRED_GENERIC_ASSET_REFERENCE')
+    if os.path.exists(os.path.join(REPO_ROOT, 'images', '列车', '共通')):
+        new_errors.append('TRAIN-001 RETIRED_GENERIC_ASSET_DIRECTORY_STILL_PRESENT')
 
     # VEHICLE-001/002: one final vehicle authority and one canonical evidence resolver.
     if 'TrainOperationEvidence.resolveEvidence' not in estimator_src:
