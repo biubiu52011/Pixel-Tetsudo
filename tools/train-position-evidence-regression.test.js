@@ -373,7 +373,7 @@ const sample={trainNumber:"1151G",vehicleType:"E235系0番台",destinationStatio
   vehicleFormationId:"トウ01",operationCode:"51G"};
 assert(trainTitle(sample).includes("列車番号 1151G"),"valid train number should be primary label");
 assert(trainTitle(sample).includes("E235系0番台"),"keep confirmed vehicle type in tooltip");
-assert(!trainTitle(sample).includes("トウ01")&&!trainTitle(sample).includes("51G"),
+assert(!trainTitle(sample).includes("トウ01")&&!/運用|編成|Carset|Operation/i.test(trainTitle(sample)),
   "operation and formation fields must not appear in public marker titles");
 for (const synthetic of ["est_12","supabase:TrainRun:12","manual-template:12","odpt.Train:X","planned-trip:x"]) {
   assert(!trainTitle({trainNumber:synthetic}).includes(synthetic),
