@@ -1,13 +1,22 @@
 {
   "removed_entities": {
-    "lines": [],
+    "lines": [
+      "Saikyo",
+      "KawagoeWest"
+    ],
     "stations": [
       "Jatenda"
     ],
-    "relations": [],
+    "relations": [
+      {
+        "station": "Omiya",
+        "previous_line_id": "Kawagoe",
+        "merged_line_id": "SaikyoKawagoe"
+      }
+    ],
     "tourism": []
   },
-  "reason": "Jatenda was a confirmed legacy orphan station identity with no line membership; removed in 09c98bf3 after canonical identity cleanup.",
-  "approved_by": "canonical-cleanup",
-  "approved_at": "2026-09-29"
+  "reason": "Canonicalize JR-East SaikyoKawagoe (Osaki-Omiya-Kawagoe) and Kawagoe (Kawagoe-Komagawa); Omiya east segment duplicate relation collapses to the single SaikyoKawagoe line. All stations and SQL timetable source records remain preserved.",
+  "approved_by": "canonical-railway-identity-migration",
+  "approved_at": "2026-10-12"
 }

@@ -143,13 +143,29 @@ def main():
         'tourism_spots': cur_tourism_spots,
     }
     # Load approved removal manifest
-    approved_removals = {'lines': set(), 'stations': set(), 'count_adjustments': {}}
+    approved_removals = {'lines': set(), 'stations': set(), 'relations': set(), 'count_adjustments': {}}
     if os.path.exists(MANIFEST_PATH):
         with open(MANIFEST_PATH, 'r', encoding='utf-8') as f:
             manifest = json.load(f)
         removed = manifest.get('removed_entities', {})
         approved_removals['lines'] = set(removed.get('lines', []))
         approved_removals['stations'] = set(removed.get('stations', []))
+        # Only exact (station, old line, merged line) relations listed in the
+        # reviewed manifest may reduce the total relation count.
+        for item in removed.get('relations', []):
+            if not isinstance(item, dict):
+                errors.append('Invalid approved relation entry')
+                continue
+            station, old_line, new_line = (item.get(k) for k in
+              ('station', 'previous_line_id', 'merged_line_id'))
+            if not all(isinstance(v, str) and v for v in (station, old_line, new_line)):
+                errors.append('Invalid approved relation fields')
+                continue
+            if old_line in cur_sl.get(station, []):
+                errors.append('Old duplicate relation still present: %s / %s' % (station, old_line))
+            if new_line not in cur_sl.get(station, []):
+                errors.append('Merged relation missing: %s / %s' % (station, new_line))
+            approved_removals['relations'].add((station, old_line, new_line))
         if approved_removals['lines']:
             approved_removals['count_adjustments']['lines'] = -len(approved_removals['lines'])
             warnings.append('Approved line removals: %s' % sorted(approved_removals['lines']))
