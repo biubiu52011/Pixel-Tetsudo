@@ -76,6 +76,10 @@
     lines: {
       "Asakusa": { mode: "FULL" },
       "Shinjuku": { mode: "FULL" },
+      // JR Saikyo/Kawagoe: published realtime Train objects own positions.
+      // Reference train types are resolved by JS evidence; never load a
+      // parallel manual timetable or infer additional position PINs.
+      "SaikyoKawagoe": { mode: "FULL", manualTimetableEvidence: false },
       "Oedo": { mode: "FULL" },
       "Arakawa": { mode: "FULL" },
       "KeioMain": { mode: "FULL" },

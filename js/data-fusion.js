@@ -1914,6 +1914,18 @@
     return false;
   }
 
+  function _manualEvidenceDisabled(lineId) {
+    var cfg = window.RuntimeConfig || {};
+    var policy = cfg.REALTIME_POSITION_POLICY && cfg.REALTIME_POSITION_POLICY.lines &&
+      cfg.REALTIME_POSITION_POLICY.lines[lineId];
+    // This is an explicit railway capability switch, not a train-number or
+    // destination guess. Keep the option available for other FULL lines that
+    // still legitimately use manual vehicle evidence.
+    return !!(policy && policy.manualTimetableEvidence === false &&
+      window.ODPTClient && typeof window.ODPTClient.hasRealtimePositionApi === "function" &&
+      window.ODPTClient.hasRealtimePositionApi(lineId));
+  }
+
   function ensureTimetable(lineId) {
     // Realtime-API lines never query Supabase. Existing manual files may still
     // contribute vehicle identification evidence on API-backed lines, while
@@ -1922,6 +1934,9 @@
       typeof window.ODPTClient.hasRealtimePositionApi === "function" &&
       window.ODPTClient.hasRealtimePositionApi(lineId);
     if (liveApi) {
+      // ODPT+JS-only lines must not consume stale manual vehicle/timetable
+      // objects; train positions come from ODPT Train and models from evidence.
+      if (_manualEvidenceDisabled(lineId)) return Promise.resolve(false);
       return _hasOdptTimetable(lineId) ? ensureManualTimetable(lineId) : Promise.resolve(false);
     }
     // A partner's SQL timetable may already have been loaded into the shared
@@ -1957,6 +1972,7 @@
   function ensureManualTimetable(lineId) {
     return new Promise(function(resolve, reject) {
       try {
+        if (_manualEvidenceDisabled(lineId)) { resolve(false); return; }
         // Position authority and vehicle evidence are separate concerns.
         // FULL realtime lines must still be allowed to lazy-load manual timetable
         // records because those records may carry vehicleType evidence that ODPT

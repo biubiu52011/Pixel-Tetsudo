@@ -663,3 +663,26 @@ console.log("Rinkai/Osaki exact vehicle evidence regression: PASS");
   assert.ok(nodes.some(n=>n.getAttribute('data-train-id')==='train-124'&&n.tagName==='circle'));
   console.log('Realtime unknown/failed model retains source position as neutral dot: 9 PASS');
 }
+
+
+// JR Saikyo-Kawagoe is ODPT Train + JS vehicle evidence only: never a SQL
+// timetable or the old giant local manual timetable. Other lines keep their
+// independently configured HYBRID/SQL capabilities.
+{
+  const bundled = read('data/core/data-config-bundle.js');
+  const standalone = read('data/core/runtime-config.js');
+  for(const [name,source] of [['bundle',bundled],['standalone',standalone]]){
+    assert(/"SaikyoKawagoe":\s*\{\s*mode:\s*"FULL",\s*manualTimetableEvidence:\s*false\s*\}/.test(source),
+      name+' must make SaikyoKawagoe realtime position authoritative');
+  }
+  assert(/"SaikyoKawagoe":\s*true/.test(bundled),
+    'the ODPT Train realtime capability must remain explicitly enabled');
+  assert(/function _manualEvidenceDisabled\(lineId\)/.test(fusion));
+  assert(/if \(_manualEvidenceDisabled\(lineId\)\) return Promise\.resolve\(false\);/.test(fusion));
+  assert(/if \(_manualEvidenceDisabled\(lineId\)\) \{ resolve\(false\); return; \}/.test(fusion));
+  assert(!fs.existsSync(path.join(root,'data/timetables/SaikyoKawagoe-manual.js')),
+    'retired Saikyo SQL/manual duplicate must not remain a separate timetable route');
+  assert(bundled.includes('"Rinkai":') && !/\"Rinkai\":\s*\{\s*mode:\s*"FULL"/.test(bundled),
+    'TWR Rinkai timetable estimation must remain available');
+  console.log('Saikyo ODPT+JS-only manual/SQL isolation: 8 PASS');
+}
