@@ -75,9 +75,17 @@ Deno.serve(async (request) => {
 
   try {
     const { data: line, error: lineError } = await db.from("railway_lines")
-      .select("id,odpt_operator,odpt_railway,odpt_base_url,timetable_api_enabled")
+      .select("id,odpt_operator,odpt_railway,odpt_base_url,timetable_api_enabled,realtime_position_api_enabled")
       .eq("id", job.line_id).single();
-    if (lineError || !line?.timetable_api_enabled || !line.odpt_base_url ||
+    // This importer is for lines without a usable odpt:Train position API.
+    // Realtime capability is a line property, never inferred from an empty
+    // live snapshot, timetable API availability or a temporary HTTP failure.
+    if (lineError) throw new Error("LINE_CAPABILITY_LOOKUP_FAILED");
+    if (!line) throw new Error("LINE_NOT_REGISTERED");
+    if (line.realtime_position_api_enabled === true) {
+      throw new Error("REALTIME_API_LINE_NOT_ELIGIBLE_FOR_SQL_TIMETABLE");
+    }
+    if (!line.timetable_api_enabled || !line.odpt_base_url ||
         !line.odpt_operator || !line.odpt_railway) throw new Error("TIMETABLE_API_NOT_CONFIGURED");
     const keyName = line.odpt_base_url.includes("api-challenge")
       ? "ODPT_CHALLENGE_CONSUMER_KEY" : "ODPT_CONSUMER_KEY";

@@ -137,3 +137,14 @@ test('SQL train-runs cannot serve realtime lines or a vehicle image catalog', ()
   assert.doesNotMatch(vehicle, /functions\/v1\/train-runs\?catalog=vehicle-artwork/);
   assert.doesNotMatch(vehicle, /refreshVerifiedArtworkCatalog\(/);
 });
+
+
+test('Supabase timetable importer cannot ingest an API-backed realtime railway', () => {
+  const importer = read('supabase/functions/timetable-ingest/index.ts');
+  const serving = read('supabase/functions/train-runs/index.ts');
+  assert.match(importer, /realtime_position_api_enabled/);
+  assert.match(importer, /REALTIME_API_LINE_NOT_ELIGIBLE_FOR_SQL_TIMETABLE/);
+  assert.match(importer, /line\.realtime_position_api_enabled === true/);
+  assert.match(serving, /if \(source\?\.realtime_position_api_enabled\)/);
+  assert.doesNotMatch(importer, /getCachedTrainRuns/);
+});
