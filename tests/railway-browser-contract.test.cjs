@@ -246,3 +246,14 @@ test('runtime configuration source matches the deployed config-bundle section', 
   assert.ok(end > start);
   assert.equal(source, bundle.slice(start + startMarker.length, end).trimEnd());
 });
+
+test('realtime ODPT source repair never resets railway registry or timetable roles', () => {
+  const sql = read('supabase/migrations/20261012162155_restore_missing_odpt_runtime_mappings_no_overwrite.sql');
+  assert.match(sql, /UPDATE public\.railway_lines l/);
+  assert.match(sql, /l\.realtime_position_api_enabled IS TRUE/);
+  assert.match(sql, /l\.odpt_operator IS NULL AND l\.odpt_railway IS NULL/);
+  assert.doesNotMatch(sql, /UPDATE public\.railway_lines\s+SET\s+odpt_operator\s*=\s*null/i);
+  for (const id of ['Arakawa', 'KeioMain', 'Kawagoe', 'SaikyoKawagoe', 'SobuRapid', 'Tokaido', 'UtsunomiyaJR']) {
+    assert.ok(sql.includes("'" + id + "'"), id + ' missing from source repair');
+  }
+});
