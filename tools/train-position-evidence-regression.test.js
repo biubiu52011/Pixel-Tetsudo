@@ -297,8 +297,8 @@ assert(estimatorSource.includes("pos.vehicleResolution = chainVehicle;") &&
   'running-chain formation projection must preserve the canonical resolution and structural provenance');
 assert(!estimatorSource.includes("timetableVehicleType: chainVehicle.vehicleName"),
   'running-chain formation evidence must never be relabeled as timetable evidence');
-assert(fusionSource.includes('formationCandidates: (p.vehicleFormationCandidates || []).slice()'),
-  'running-chain registry must preserve formation candidate sets in the canonical resolution payload');
+assert(fusionSource.includes('formationCandidates: proof ? (p.vehicleFormationCandidates || []).slice() : []'),
+  'running-chain registry must preserve dated, proven formation candidates but drop unverified candidates');
 assert(fusionSource.includes('p.vehicleFormationCandidates = (v.formationCandidates || []).slice();'),
   'running-chain inheritance must propagate formation candidate sets from the canonical resolution payload');
 assert(!fusionSource.includes('_p.vehicleType = _fe.vehicleName'),
