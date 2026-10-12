@@ -487,3 +487,18 @@ const selectedVehicleSource=read("js/train-vehicle.js");
 assert(!selectedVehicleSource.includes("共通_形式未確認.png") &&
        selectedVehicleSource.includes('return { kind: "unresolved", iconSrc: "" }'),
   "unconfirmed model must not produce generic PNG or impersonate a model");
+
+
+// Exactly verified Rinkai/Osaki boundary evidence may identify a train model.
+const edgeSource=read("supabase/functions/train-runs/index.ts");
+assert(edgeSource.includes('if (lineId === "SaikyoKawagoe" && selectedCalendar)') &&
+       edgeSource.includes('stopName(last) !== "Osaki"') &&
+       edgeSource.includes('stopName(first) !== "Osaki"') &&
+       edgeSource.includes('if (list.length !== 1) return;') &&
+       edgeSource.includes('candidates.includes(verifiedModel)') &&
+       edgeSource.includes('vehicle_evidence_source: boundaryVehicle.has(t.id)'),
+  "boundary model projection must require exactly one compatible scheduled counterpart");
+assert(estimatorSource.includes('_declaredModels.length === 1 && _operationModels.length > 1') &&
+       estimatorSource.includes('_operationModels.indexOf(_declaredModels[0]) >= 0'),
+  "exact scheduled model only narrows compatible operation candidate sets");
+console.log("Rinkai/Osaki exact vehicle evidence regression: PASS");
