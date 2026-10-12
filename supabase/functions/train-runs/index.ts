@@ -188,6 +188,70 @@ async function readManualTemplateRuns(db: any, lineId: string, serviceDate: stri
       byTemplate.set(stop.template_id, list);
     }
   }
+  // Vehicle type may be verified by a *different* timetable segment of
+  // the very same through train. At the canonical Osaki boundary, accept a
+  // single exact Rinkai model only when BOTH schedules agree on operating
+  // calendar, train number, boundary station and precise scheduled clock.
+  // This projects evidence in the response; historical SQL labels remain
+  // unchanged, and no train-number-only or line-default model is invented.
+  const boundaryVehicle = new Map<number, string>();
+  if (lineId === "SaikyoKawagoe" && selectedCalendar) {
+    const ambiguous = templates.filter((t: any) =>
+      String(t.vehicle_type_label || "").split("/").filter(Boolean).length > 1);
+    const numbers = [...new Set(ambiguous.map((t: any) => String(t.train_number || "")).filter(Boolean))];
+    if (numbers.length) {
+      const rinkaiTemplates: any[] = [];
+      for (let i = 0; i < numbers.length; i += 100) {
+        const batch = await pages((first, last) => db.from("manual_timetable_templates")
+          .select("id,train_number,vehicle_type_label")
+          .eq("line_key", "Rinkai").eq("calendar_urn", selectedCalendar)
+          .in("train_number", numbers.slice(i, i + 100))
+          .order("id").range(first, last));
+        rinkaiTemplates.push(...batch.filter((t: any) =>
+          t.vehicle_type_label && !String(t.vehicle_type_label).includes("/")));
+      }
+      const rinkaiStops = new Map<number, any[]>();
+      for (let i = 0; i < rinkaiTemplates.length; i += 100) {
+        const ids = rinkaiTemplates.slice(i, i + 100).map((t: any) => t.id);
+        const rows = await pages((first, last) => db.from("manual_timetable_template_stops")
+          .select("template_id,stop_sequence,arrival_station_urn,departure_station_urn,arrival_clock,departure_clock")
+          .in("template_id", ids).order("template_id").order("stop_sequence").range(first, last));
+        rows.forEach((s: any) => {
+          const a = rinkaiStops.get(s.template_id) || [];
+          a.push(s);
+          rinkaiStops.set(s.template_id, a);
+        });
+      }
+      // A candidate that has a conflicting or duplicate Rinkai model is
+      // unresolved, not a reason to pick whichever row happened to sort first.
+      const linkCandidates = new Map<string, string[]>();
+      const stopName = (s: any) => String(s?.arrival_station_urn || s?.departure_station_urn || "").split(".").pop();
+      const clock = (v: any) => String(v || "").slice(0, 5);
+      rinkaiTemplates.forEach((t: any) => {
+        const stops = rinkaiStops.get(t.id) || [];
+        const first = stops[0];
+        if (!first || stopName(first) !== "Osaki") return;
+        const dep = clock(first.departure_clock || first.arrival_clock);
+        if (!dep) return;
+        const key = String(t.train_number) + "|" + dep;
+        const list = linkCandidates.get(key) || [];
+        list.push(String(t.vehicle_type_label).trim());
+        linkCandidates.set(key, list);
+      });
+      ambiguous.forEach((t: any) => {
+        const stops = byTemplate.get(t.id) || [];
+        const last = stops[stops.length - 1];
+        if (!last || stopName(last) !== "Osaki") return;
+        const arrival = clock(last.arrival_clock || last.departure_clock);
+        const list = linkCandidates.get(String(t.train_number) + "|" + arrival) || [];
+        if (list.length !== 1) return;
+        const verifiedModel = list[0];
+        const candidates = String(t.vehicle_type_label || "").split("/").map((s: string) => s.trim());
+        if (candidates.includes(verifiedModel)) boundaryVehicle.set(t.id, verifiedModel);
+      });
+    }
+  }
+
   const result = templates.map((t) => {
     const operator = timetableOperator || /^odpt\.Railway:([^.]+)\./.exec(t.railway_urn || "")?.[1] || "";
     return {
@@ -203,7 +267,8 @@ async function readManualTemplateRuns(db: any, lineId: string, serviceDate: stri
       rail_direction: t.direction_urn,
       train_type: t.train_type_urn,
       destination_station: t.destination_urns?.[0] || null,
-      vehicle_type_label: t.vehicle_type_label || null,
+      vehicle_type_label: boundaryVehicle.get(t.id) || t.vehicle_type_label || null,
+      vehicle_evidence_source: boundaryVehicle.has(t.id) ? "verified-scheduled-boundary:Rinkai/Osaki" : null,
       source_trip_id: t.source_trip_id || null,
       previous_timetable_ids: t.previous_timetable_ids || [],
       next_timetable_ids: t.next_timetable_ids || [],
