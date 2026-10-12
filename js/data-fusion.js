@@ -1128,7 +1128,8 @@
                 var _derivedVehicleEvidence = null;
                 // Arakawa trainNumber identifies the vehicle itself, not an
                 // ODPT timetable operation. Do not feed it into operation-code rules.
-                if (!odptVehicleType && lid !== "Arakawa" && window.TrainOperationEvidence &&
+                if (!odptVehicleType && window.TrainOperationEvidence &&
+                    lid !== "Arakawa" &&
                     typeof window.TrainOperationEvidence.resolveEvidence === "function") {
 
                   var _evidenceStart = _perfNow();

@@ -332,5 +332,5 @@ test('Toden Arakawa live vehicle numbers resolve all 33 cars to exact models and
   const fusion = read('js/data-fusion.js');
   assert.match(fusion, /realtimeCarNumber: lid === "Arakawa"/);
   assert.match(fusion, /railway: railway,/);
-  assert.match(fusion, /lid !== "Arakawa" && window\.TrainOperationEvidence/);
+  assert.match(fusion, /window\.TrainOperationEvidence &&\s*lid !== "Arakawa"/);
 });
