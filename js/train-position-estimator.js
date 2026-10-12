@@ -715,6 +715,8 @@
             runningChainId: timetableIdentity,
             runningChainEvidence: "TIMETABLE_SEGMENT",
             trainNumber: trainNumber,
+            // The confirmed formation belongs to this operating date only.
+            serviceDate: String(_runIdentity.key || "").slice(-10),
             delayMin: delayMin,
             estimated: true,
             positionSource: tt._positionSource || "train-timetable",
