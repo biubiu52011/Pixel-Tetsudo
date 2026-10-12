@@ -42,7 +42,7 @@ async function get(table, select, order) {
 }
 
 (async function(){
-  const [obs, policies, mappings, inventory, formations, trainDates, operationDates, trainObs, sources, familyRules] = await Promise.all([
+  const [obs, policies, mappings, inventory, formations, trainDates, operationDates, trainObs, sources, familyRules, networkAliases] = await Promise.all([
     get("runtime_vehicle_operation_evidence",
       "observation_id,service_date,operator,network_key,operation_code,valid_from_time,valid_to_time,vehicle_type,formation_ids,ambiguity_group,observed_date,evidence_grade,source_url,sql_evidence_role",
       "service_date.asc,operator.asc,network_key.asc,operation_code.asc,observation_id.asc"),
@@ -72,7 +72,12 @@ async function get(table, select, order) {
       "id.asc"),
     get("operation_family_rules",
       "id,network_key,operator,code_pattern,calendar_type,effective_from,effective_to,exact_vehicle_type,vehicle_candidates,source_id,notes",
-      "network_key.asc,id.asc")
+      "network_key.asc,id.asc"),
+    // Use the existing SQL evidence-domain aliases, not a second in-browser
+    // per-operator lookup. These keys resolve documented source spellings only.
+    get("vehicle_network_key_aliases",
+      "alias_key,canonical_network_key,alias_scope",
+      "alias_key.asc")
   ]);
   const pm = Object.fromEntries(policies.map(p=>[p.network_key,p]));
   // Source policy is evidence metadata only. Realtime position coverage belongs
@@ -153,8 +158,12 @@ async function get(table, select, order) {
   });
   const inventoryNetworks = [...new Set(inventory.map(r=>r.canonical_network_key))];
   if (!inventoryNetworks.length) throw new Error("Canonical vehicle evidence inventory is empty");
+  const verifiedAliases=networkAliases.filter(r =>
+    r.alias_key && r.canonical_network_key &&
+    (r.alias_scope === "evidence_domain" || r.alias_scope === "exact"));
   const json={schemaVersion:3,generatedFrom:"Supabase canonical evidence tables",records,
     datedRecords,
+    networkAliases:verifiedAliases,
     familyRules:familyRuleRecords,
     evidenceInventory:{networkCount:inventoryNetworks.length,networks:inventoryNetworks,rows:inventory}};
   const root=path.join(__dirname,"..","data","timetables");
@@ -163,6 +172,7 @@ async function get(table, select, order) {
     "/* Generated from canonical Supabase evidence tables. Data only; no line logic. */\n"+
     "window.VEHICLE_OPERATION_EVIDENCE = "+JSON.stringify(records,null,2)+";\n"+
     "window.VEHICLE_DATED_EVIDENCE = "+JSON.stringify(datedRecords,null,2)+";\n"+
+    "window.VEHICLE_NETWORK_ALIASES = "+JSON.stringify(verifiedAliases,null,2)+";\n"+
     "window.VEHICLE_FAMILY_RULES = "+JSON.stringify(familyRuleRecords,null,2)+";\n");
   console.log("vehicle operation evidence records =",records.length);
 })().catch(e=>{console.error(e.stack||e);process.exit(1);});
