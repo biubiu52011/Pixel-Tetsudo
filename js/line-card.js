@@ -323,6 +323,11 @@
         ? window.LinePresentationService.getPrimaryPresentation(ids[i],linesObj) : null;
       if (!sys || String(sys.code||"")!==String(code)) continue;
       var members=window.LinePresentationService.getPresentationMembers(ids[i],linesObj);
+      // Match DataState.renderList during async patches: keep line-owned status
+      // separate from passenger-facing JC system grouping.
+      if (window.DataState && typeof window.DataState.getPresentationStatusMembers==="function") {
+        members=window.DataState.getPresentationStatusMembers(members,(options&&options.mode)||"realtime");
+      }
       if (!members.length) return "";
       return renderSystemCard(sys,members,linesObj,options||{mode:"realtime"});
     }

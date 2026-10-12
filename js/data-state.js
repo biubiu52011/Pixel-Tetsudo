@@ -198,6 +198,19 @@
   // 干线本名（非運行系統）不进线路一览；数据保留作换乘锚点/支线父线
   var TRUNK_MAIN_LINE_IDS = (window.RuntimeConfig && window.RuntimeConfig.TRUNK_MAIN_LINE_IDS) || [];
 
+  // Ome and Itsukaichi have their own JR-East TrainInformation identities.
+  // Passenger-facing JC grouping / branch topology must not swallow their status cards.
+  // Keep the trains-page presentation unchanged; this exception is realtime-only.
+  var INDEPENDENT_REALTIME_LINES = { Ome: true, Itsukaichi: true };
+  function isIndependentRealtimeLine(lineId, mode) {
+    return mode === "realtime" && INDEPENDENT_REALTIME_LINES[lineId] === true;
+  }
+  function getPresentationStatusMembers(memberIds, mode) {
+    if (!Array.isArray(memberIds)) return [];
+    if (mode !== "realtime") return memberIds;
+    return memberIds.filter(function(id) { return !isIndependentRealtimeLine(id, mode); });
+  }
+
   // Public LineList behavior: page controllers must not manipulate operator groups.
   function setOperatorVisibility(container, operator) {
     if (!container) return false;
@@ -247,7 +260,8 @@
       if (!line) continue;
       // Line Hierarchy Rule: 真支线（branchOf 非空）严禁在一级总列表独立展示，
       // 只在父线卡片/详情内展示。平级独立运营线（branchOf=null）照常平铺。
-      if (window.LinePresentationService && window.LinePresentationService.isBranch &&
+      if (!isIndependentRealtimeLine(lid, mode) &&
+          window.LinePresentationService && window.LinePresentationService.isBranch &&
           window.LinePresentationService.isBranch(lid, linesObj)) continue;
       // 国鉄幹線本名（类比京沪铁路/成渝铁路）不是運行系統：中央本線/東海道本線/東北本線 不进入线路一览，
       // 数据保留作换乘锚点/支线父线。
@@ -304,7 +318,7 @@
           ? window.LinePresentationService.getPrimaryPresentation(g.id, linesObj)
           : null;
         if (pres) {
-          var memberIds = window.LinePresentationService.getPresentationMembers(g.id, linesObj);
+          var memberIds = getPresentationStatusMembers(window.LinePresentationService.getPresentationMembers(g.id, linesObj), mode);
           if (memberIds.length > 0) {
             memberIds.forEach(function(id) { covered[id] = true; });
             html += window.LineCard.renderSystem(pres, memberIds, linesObj, { mode: mode });
@@ -362,6 +376,8 @@
     STATUS_META: STATUS_META,
     TRUNK_MAIN_LINE_IDS: TRUNK_MAIN_LINE_IDS,
     renderList: renderList,
+    // Shared by LineCard.updateSystem so async live patching uses the same membership.
+    getPresentationStatusMembers: getPresentationStatusMembers,
     setOperatorVisibility: setOperatorVisibility,
     filterLinesByOperator: filterLinesByOperator,
     renderPageState: renderPageState,
