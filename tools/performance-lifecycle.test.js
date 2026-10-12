@@ -99,8 +99,8 @@ assert.ok(/"_operationCode":run\.operation_code\|\|""/.test(odptUnifiedSrc),
   'Supabase TrainRun must preserve canonical operation_code into runtime input');
 assert.ok(/tt\['_operationCode'\] \|\| tt\['operationCode'\] \|\| tt\['operation_code'\]/.test(trainPositionEstimatorSrc),
   'vehicle evidence must prefer persisted TrainRun operation code before train-number derivation');
-assert.ok(/if \(!_baseOperationCtx\.operationCode\)/.test(trainPositionEstimatorSrc),
-  'train-number operation normalization must remain fallback-only');
+assert.ok(/if \(!_plannedSqlVehicle && !_baseOperationCtx\.operationCode\)/.test(trainPositionEstimatorSrc),
+  'train-number operation normalization must remain fallback-only and skip planned SQL vehicles');
 console.log('train-run-vehicle-evidence-bridge: 3 PASS');
 
 // Migrated SQL lines must not resurrect local *-manual.js as a second
