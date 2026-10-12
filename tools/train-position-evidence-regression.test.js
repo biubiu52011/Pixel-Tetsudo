@@ -357,9 +357,9 @@ console.log("train-position freshness guard: 7 PASS");
 
 // Public train labels use the published train number, never a SQL row ID,
 // guessed operation code, or unconfirmed/confirmed physical carset.
-assert(/serviceDate:\\s*String\\(_runIdentity\\.key/.test(estimatorSource),
+assert(/serviceDate:\s*String\(_runIdentity\.key/.test(estimatorSource),
   "estimated assignments must retain the exact service date");
-assert(/serviceDate:\\s*_snapshotServiceDate/.test(fusionSource),
+assert(/serviceDate:\s*_snapshotServiceDate/.test(fusionSource),
   "realtime positions must carry the evidence service date");
 const renderSource=fs.readFileSync(require("path").join(__dirname,"../js/trains-render.js"),"utf8");
 const titleStart=renderSource.indexOf("  function _trainMarkerTitle(p) {");
@@ -368,7 +368,7 @@ assert(titleStart>=0&&titleEnd>titleStart,"existing train marker title helper mi
 const trainNumberSandbox={window:{currentLang:"ja",TRAIN_TYPE_NAMES:{}},_trainDestText:s=>s};
 vm.createContext(trainNumberSandbox);
 vm.runInContext(renderSource.slice(titleStart,titleEnd)+
-  "\\nthis.trainMarkerTitle=_trainMarkerTitle;",trainNumberSandbox);
+  "\nthis.trainMarkerTitle=_trainMarkerTitle;",trainNumberSandbox);
 const trainTitle=trainNumberSandbox.trainMarkerTitle;
 const sample={trainNumber:"1151G",vehicleType:"E235系0番台",destinationStation:"池袋",
   vehicleFormationId:"トウ01",operationCode:"51G"};
