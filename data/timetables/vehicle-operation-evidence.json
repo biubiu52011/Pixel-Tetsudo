@@ -19520,6 +19520,173 @@
       "sourceUrl": "https://www.tetsudo.com/movie/category/10082/"
     }
   ],
+  "networkAliases": [
+    {
+      "alias_key": "ChibaMonorail1",
+      "canonical_network_key": "ChibaMonorail",
+      "alias_scope": "evidence_domain"
+    },
+    {
+      "alias_key": "ChibaMonorail2",
+      "canonical_network_key": "ChibaMonorail",
+      "alias_scope": "evidence_domain"
+    },
+    {
+      "alias_key": "Chiyoda",
+      "canonical_network_key": "chiyoda-joban-odakyu",
+      "alias_scope": "evidence_domain"
+    },
+    {
+      "alias_key": "denentoshi-hanzomon",
+      "canonical_network_key": "hanzomon",
+      "alias_scope": "evidence_domain"
+    },
+    {
+      "alias_key": "Fukutoshin",
+      "canonical_network_key": "toyoko-fukutoshin",
+      "alias_scope": "evidence_domain"
+    },
+    {
+      "alias_key": "Haijima",
+      "canonical_network_key": "seibu-shinjuku",
+      "alias_scope": "evidence_domain"
+    },
+    {
+      "alias_key": "Ikebukuro",
+      "canonical_network_key": "seibu-ikebukuro",
+      "alias_scope": "evidence_domain"
+    },
+    {
+      "alias_key": "JobanLocal",
+      "canonical_network_key": "chiyoda-joban-odakyu",
+      "alias_scope": "evidence_domain"
+    },
+    {
+      "alias_key": "Kawagoe",
+      "canonical_network_key": "saikyo",
+      "alias_scope": "evidence_domain"
+    },
+    {
+      "alias_key": "Mita",
+      "canonical_network_key": "meguro",
+      "alias_scope": "evidence_domain"
+    },
+    {
+      "alias_key": "mita-namboku-meguro",
+      "canonical_network_key": "meguro",
+      "alias_scope": "evidence_domain"
+    },
+    {
+      "alias_key": "Namboku",
+      "canonical_network_key": "meguro",
+      "alias_scope": "evidence_domain"
+    },
+    {
+      "alias_key": "Nikkoku",
+      "canonical_network_key": "tobu-limited-express",
+      "alias_scope": "evidence_domain"
+    },
+    {
+      "alias_key": "OdakyuTama",
+      "canonical_network_key": "odakyu-main",
+      "alias_scope": "evidence_domain"
+    },
+    {
+      "alias_key": "Odawara",
+      "canonical_network_key": "odakyu-main",
+      "alias_scope": "evidence_domain"
+    },
+    {
+      "alias_key": "odpt.Railway:Odakyu.Tama",
+      "canonical_network_key": "odakyu-main",
+      "alias_scope": "evidence_domain"
+    },
+    {
+      "alias_key": "saikyo-rinkai-sotetsu",
+      "canonical_network_key": "saikyo",
+      "alias_scope": "evidence_domain"
+    },
+    {
+      "alias_key": "SaikyoKawagoe",
+      "canonical_network_key": "saikyo",
+      "alias_scope": "evidence_domain"
+    },
+    {
+      "alias_key": "SeibuShinjuku",
+      "canonical_network_key": "seibu-shinjuku",
+      "alias_scope": "evidence_domain"
+    },
+    {
+      "alias_key": "SotetsuMain",
+      "canonical_network_key": "sotetsu",
+      "alias_scope": "evidence_domain"
+    },
+    {
+      "alias_key": "TobuIsesaki",
+      "canonical_network_key": "tobu-limited-express",
+      "alias_scope": "evidence_domain"
+    },
+    {
+      "alias_key": "TobuNikko",
+      "canonical_network_key": "tobu-limited-express",
+      "alias_scope": "evidence_domain"
+    },
+    {
+      "alias_key": "TobuSkytree",
+      "canonical_network_key": "tobu-limited-express",
+      "alias_scope": "evidence_domain"
+    },
+    {
+      "alias_key": "TokyoMonorail",
+      "canonical_network_key": "tokyo-monorail",
+      "alias_scope": "exact"
+    },
+    {
+      "alias_key": "TokyuDenEn",
+      "canonical_network_key": "denentoshi-hanzomon",
+      "alias_scope": "evidence_domain"
+    },
+    {
+      "alias_key": "TokyuIkegami",
+      "canonical_network_key": "iketama",
+      "alias_scope": "evidence_domain"
+    },
+    {
+      "alias_key": "TokyuKodomonokuni",
+      "canonical_network_key": "kodomonokuni",
+      "alias_scope": "evidence_domain"
+    },
+    {
+      "alias_key": "TokyuMeguro",
+      "canonical_network_key": "meguro",
+      "alias_scope": "evidence_domain"
+    },
+    {
+      "alias_key": "TokyuOimachi",
+      "canonical_network_key": "oimachi",
+      "alias_scope": "evidence_domain"
+    },
+    {
+      "alias_key": "TokyuSetagaya",
+      "canonical_network_key": "setagaya",
+      "alias_scope": "evidence_domain"
+    },
+    {
+      "alias_key": "TokyuTamagawa",
+      "canonical_network_key": "iketama",
+      "alias_scope": "evidence_domain"
+    },
+    {
+      "alias_key": "TokyuToyoko",
+      "canonical_network_key": "toyoko-fukutoshin",
+      "alias_scope": "evidence_domain"
+    },
+    {
+      "alias_key": "TsukubaExpress",
+      "canonical_network_key": "tsukuba-express",
+      "alias_scope": "exact"
+    }
+  ],
   "familyRules": [
     {
       "evidenceId": 7,
