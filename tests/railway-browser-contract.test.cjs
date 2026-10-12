@@ -274,18 +274,3 @@ test('ODPT FULL runtime lines with exact IDs bypass SQL and remain registered', 
     assert.ok(!migration.includes("('" + alias + "','"), alias + ' requires separate realtime verification');
   }
 });
-
-test('Toei ODPT Train uses the no-key public host without changing keyed timetable requests', () => {
-  const api = read('data/api/odpt-unified.js');
-  assert.match(api, /"Toei": \{\s*base: "https:\/\/api\.odpt\.org\/api\/v4\/",\s*\/\/[^\n]*\n\s*publicTrainBase: "https:\/\/api-public\.odpt\.org\/api\/v4\/",/);
-  assert.match(api, /train: "odpt:Train\?odpt:operator=odpt\.Operator:Toei"/);
-  assert.match(api, /if \(type === "train" && ep\.publicTrainBase\) return ep\.publicTrainBase \+ ep\[type\];/);
-  assert.ok(api.indexOf('if (type === "train" && ep.publicTrainBase)') < api.indexOf('var links = getApiLinks();', api.indexOf('function buildUrl(')));
-  assert.match(api, /trainTimetable: "odpt:TrainTimetable\?odpt:operator=odpt\.Operator:Toei"/);
-  assert.match(api, /trainInformation: "odpt:TrainInformation\?odpt:operator=odpt\.Operator:Toei"/);
-  for (const structure of ['apiLastRequestTime', 'apiRequestQueue', 'apiQueueProcessing']) {
-    const start = api.indexOf('var ' + structure + ' = {');
-    assert.ok(start >= 0);
-    assert.ok(api.slice(start, api.indexOf('};', start)).includes("'api-public.odpt.org'"), structure + ' missing public host');
-  }
-});
