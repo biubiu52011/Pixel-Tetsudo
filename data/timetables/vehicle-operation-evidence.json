@@ -20518,8 +20518,8 @@
         "canonical_network_key": "saikyo",
         "alias_scope": "exact",
         "evidence_kind": "train_rule",
-        "evidence_rows": 177,
-        "exact_rows": 177,
+        "evidence_rows": 826,
+        "exact_rows": 826,
         "narrowed_rows": 0,
         "min_date": "2026-03-14",
         "max_date": null
