@@ -502,3 +502,96 @@ assert(estimatorSource.includes('_declaredModels.length === 1 && _operationModel
        estimatorSource.includes('_operationModels.indexOf(_declaredModels[0]) >= 0'),
   "exact scheduled model only narrows compatible operation candidate sets");
 console.log("Rinkai/Osaki exact vehicle evidence regression: PASS");
+
+
+// Realtime train PNG continuity: missing a vehicle field in one new live
+// snapshot must not erase the previously established model. Prove this with
+// the actual DataFusion source-key/chain-registry helpers, not another mapping.
+{
+  const head = fusion.indexOf('  var _chainVehicleRegistry = {}');
+  const tail = fusion.indexOf('  var subscribers = [];', head);
+  assert(head >= 0 && tail > head);
+  let now = 1000000;
+  const isolated = vm.createContext({
+    Date: { now() { return now; } },
+    window: {}, console
+  });
+  vm.runInContext(fusion.slice(head,tail) +
+    '\nthis.keepVehicle = _preserveRealtimeSourceVehicle;', isolated);
+  const resolution = name => ({
+    name, vehicleTypeStr:name, iconPath:'../images/列车/test/'+name+'.png',
+    source:'realtime', sources:['realtime'], identityStatus:'EXACT', confidence:'high'
+  });
+  const source = (serviceDate='2026-10-12',trainId='odpt.Train:1',railway='SaikyoKawagoe') => ({
+    positionSource:'realtime-api', serviceDate, sourceRailway:railway,
+    trainId, trainNumber:'1081F', vehicleType:'', vehicleIdentityStatus:'UNKNOWN'
+  });
+  const confirmed = source();
+  confirmed.vehicleResolution = resolution('E233');
+  confirmed.vehicleType = 'E233';
+  confirmed.vehicleIdentityStatus = 'EXACT';
+  confirmed.vehicleSource = 'realtime';
+  isolated.keepVehicle(confirmed, 'E233');
+  const missing = source();
+  isolated.keepVehicle(missing, '');
+  assert.strictEqual(missing.vehicleType,'E233');
+  assert.strictEqual(missing.vehicleIdentityStatus,'EXACT');
+  assert.strictEqual(missing.vehicleInheritedFromRunningChain,true);
+  assert.strictEqual(missing.runningChainId,undefined,'source alias must not alter physical chain identity');
+  const otherTrain = source('2026-10-12','odpt.Train:2');
+  isolated.keepVehicle(otherTrain,'');
+  assert.strictEqual(otherTrain.vehicleIdentityStatus,'UNKNOWN');
+  const otherDay = source('2026-10-13');
+  isolated.keepVehicle(otherDay,'');
+  assert.strictEqual(otherDay.vehicleIdentityStatus,'UNKNOWN');
+  const incompatible = source();
+  incompatible.vehicleCandidates=['71-000形'];
+  isolated.keepVehicle(incompatible,'');
+  assert.strictEqual(incompatible.vehicleIdentityStatus,'UNKNOWN');
+  const switched = source();
+  switched.vehicleResolution = resolution('70-000');
+  switched.vehicleIdentityStatus='EXACT';
+  switched.vehicleSource='realtime';
+  switched.vehicleType='70-000';
+  isolated.keepVehicle(switched,'70-000');
+  const afterSwitch = source();
+  isolated.keepVehicle(afterSwitch,'');
+  assert.strictEqual(afterSwitch.vehicleType,'70-000');
+  now += 181000;
+  const expired = source();
+  isolated.keepVehicle(expired,'');
+  assert.strictEqual(expired.vehicleIdentityStatus,'UNKNOWN');
+  console.log('ODPT missing-vehicle snapshot continuity/isolation/expiry: 7 PASS');
+}
+
+// An SVG-image request can fail transiently even when the PNG is valid.
+// Only the same train+image is temporarily suppressed, never all models or
+// the train forever; the existing canonical TrainVehicle makes every choice.
+{
+  const rendererHead = renderer.slice(0,renderer.indexOf('  function _renderThroughChip'));
+  const start = renderer.indexOf('  function _trainMarkerSpec');
+  const end = renderer.indexOf('  // Public identification',start);
+  assert(start>0 && end>start);
+  let now=2000000;
+  const renderCtx=vm.createContext({
+    Date:{now(){return now;}}, window:{
+      TrainVehicle:{selectMarkerArtwork(p,failed){
+        return failed?{kind:'unresolved',iconSrc:''}:{kind:'vehicle',iconSrc:p.vehicleIconPath};
+      }}
+    }
+  });
+  vm.runInContext(rendererHead+'\n'+renderer.slice(start,end)+
+    '\nthis.remember=_rememberTrainArtworkFailure;this.pick=_trainMarkerSpec;',renderCtx);
+  const original={vehicleIconPath:'../images/列车/JR東日本/E233.png'};
+  const alternative={vehicleIconPath:'../images/列车/東京臨海高速鉄道/70-000.png'};
+  assert.strictEqual(renderCtx.pick(original,'train-1').kind,'vehicle');
+  renderCtx.remember('train-1',original.vehicleIconPath);
+  assert.strictEqual(renderCtx.pick(original,'train-1').kind,'unresolved');
+  assert.strictEqual(renderCtx.pick(alternative,'train-1').kind,'vehicle',
+    'failed asset must not prevent a different verified model PNG');
+  renderCtx.remember('train-1',original.vehicleIconPath);
+  now += 46000;
+  assert.strictEqual(renderCtx.pick(original,'train-1').kind,'vehicle',
+    'transient image failure must become retryable');
+  console.log('Train PNG load failure isolated by path and short retry TTL: 4 PASS');
+}

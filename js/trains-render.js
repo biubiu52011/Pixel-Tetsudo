@@ -1231,6 +1231,16 @@ function _rememberTrainArtworkFailure(trainUid) {
         existingIcon = null;
       }
       
+      // A failed image node is hidden; a subsequent successful retry of the
+      // same PNG must create a fresh request instead of keeping that old,
+      // invisible image element indefinitely after the failure TTL expires.
+      if (existingIcon && existingIcon.getAttribute("visibility") === "hidden") {
+        if (existingIcon._moveRaf) cancelAnimationFrame(existingIcon._moveRaf);
+        if (existingIcon.parentNode) existingIcon.parentNode.removeChild(existingIcon);
+        delete markerById[String(trainUid)];
+        existingIcon = null;
+      }
+
       if (existingIcon) {
         // Same train and kind can change to a different certified PNG without
         // rebuilding the marker or retaining a stale SVG/PNG artwork.

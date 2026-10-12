@@ -149,6 +149,49 @@
     }
     return p;
   }
+  // Realtime providers sometimes omit vehicle fields in an otherwise fresh
+  // position snapshot. Reuse an already-resolved model for the SAME ODPT train
+  // source object, railway, train number and service day for the short dropout
+  // window; position and delay data always come from the new source snapshot.
+  // This is a scoped alias in the existing chain registry, not a second model
+  // lookup or an operator-wide fleet assumption.
+  function _realtimeVehicleSourceKey(p) {
+    if (!p || p.positionSource !== "realtime-api" || !p.serviceDate ||
+        !p.sourceRailway || !p.trainId || !p.trainNumber) return "";
+    return "realtime-source:" + [p.serviceDate,p.sourceRailway,p.trainId,p.trainNumber]
+      .map(function(s) { return encodeURIComponent(String(s)); }).join("|");
+  }
+  function _preserveRealtimeSourceVehicle(p, explicitVehicleType) {
+    var key = _realtimeVehicleSourceKey(p);
+    if (!key) return p;
+    // Never assign the alias as runningChainId: the original identity resolver
+    // still owns physical through-service and duplicate suppression.
+    var proxy = Object.assign({}, p, { runningChainId: key });
+    var r = p.vehicleResolution || null;
+    if (r && r.identityStatus === "EXACT" && r.name) {
+      var prior = _chainVehicleRegistry[key];
+      // A newly confirmed exact model supersedes an older source observation.
+      // The ordinary chain conflict rules may still protect other evidence.
+      if (prior && prior.resolution && prior.resolution.name !== r.name) {
+        delete _chainVehicleRegistry[key];
+      }
+      _rememberChainVehicle(proxy);
+    } else if (!String(explicitVehicleType || "").trim()) {
+      // Missing vehicle fields are not evidence of a fleet change, but a
+      // contradictory fresh candidate set must not inherit the prior model.
+      var priorVehicle = _chainVehicleRegistry[key];
+      var allowed = Array.isArray(p.vehicleCandidates) ? p.vehicleCandidates : [];
+      if (allowed.length && priorVehicle && priorVehicle.resolution &&
+          allowed.indexOf(priorVehicle.resolution.name) < 0) return p;
+      _inheritChainVehicle(proxy);
+      if (proxy.vehicleInheritedFromRunningChain === true &&
+          proxy.vehicleIdentityStatus === "EXACT") {
+        _projectVehicleResolution(p, proxy.vehicleResolution, true);
+      }
+    }
+    return p;
+  }
+
   var subscribers = [];
   var localData = { lines: {}, statusMap: {} };
   var _lastFusedData = null;
@@ -1118,6 +1161,9 @@
             // 1. 临海线的车（operator=TWR）开到JR区间了 → 在JR线路图上显示临海线车型
             // v4.3.939: 存车自己的 operator（渲染层判断直通车、按车籍选图标，治跨线"变身"）
             positionData.trainOperator = trainOperator.replace('odpt.Operator:', '') || '';
+            // An intermittent missing vehicle field must not erase a model
+            // already established for this same ODPT train source identity.
+            _preserveRealtimeSourceVehicle(positionData, odptVehicleType);
             // Zero-fallback vehicle contract: realtime records without explicit
             // vehicle evidence keep trainClass empty. Line/operator/train number,
             // service type and through-service context may not manufacture it.
