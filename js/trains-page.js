@@ -103,7 +103,7 @@
       var _requestedLines = currentSystemLineIds && currentSystemLineIds.length
         ? currentSystemLineIds.slice() : [lineId];
       // Load direct timetable-only through neighbours on demand. The canonical
-      // serviceBoundaries graph supplies the relationship, not a second
+      // running-chain resolver supplies the relationship, not a second
       // Saikyo/Rinkai map or a guessed cross-operator train-number rule.
       var _timetablePartners = [];
       if (window.RunningChainResolver &&
