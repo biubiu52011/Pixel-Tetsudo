@@ -74,6 +74,7 @@
       resolution: resolution,
       formationId: p.vehicleFormationId || "",
       formationCandidates: (p.vehicleFormationCandidates || []).slice(),
+      evidenceServiceDate: p.serviceDate || "",
       evidenceRank: _incomingRank,
       lastSeenAt: Date.now()
     };
@@ -86,6 +87,8 @@
       delete _chainVehicleRegistry[p.runningChainId];
       return p;
     }
+    // Never propagate a prior service day's carset through source dropout.
+    if (v.evidenceServiceDate && p.serviceDate !== v.evidenceServiceDate) return p;
     var currentResolution = p.vehicleResolution || null;
     if (currentResolution && currentResolution.identityStatus === "EXACT" &&
         _vehicleEvidenceRank(p) >= (v.evidenceRank || 0)) return p;
@@ -984,6 +987,7 @@
               sourceRailway: railwayName,
               trainId: trainId,
               trainNumber: trainNumber,
+              serviceDate: _snapshotServiceDate,
               delayMin: delayMin,
               railDirection: directionName,
               destinationStation: destStation,
