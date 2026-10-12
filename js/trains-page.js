@@ -110,10 +110,12 @@
           typeof window.RunningChainResolver.getDirectThroughLines === "function" &&
           window.ODPTClient && typeof window.ODPTClient.hasRealtimePositionApi === "function") {
         (window.RunningChainResolver.getDirectThroughLines(lineId) || []).forEach(function(id) {
-          if (_requestedLines.indexOf(id) >= 0) return;
-          if (!lines[id] || window.ODPTClient.hasRealtimePositionApi(id)) return;
-          _requestedLines.push(id);
-          _timetablePartners.push(id);
+          if (!lines[id]) return;
+          // Both directions matter: a realtime JR train can enter a
+          // timetable-only through line, and a Rinkai train can enter JR.
+          if (_requestedLines.indexOf(id) < 0) _requestedLines.push(id);
+          if (!window.ODPTClient.hasRealtimePositionApi(id) &&
+              _timetablePartners.indexOf(id) < 0) _timetablePartners.push(id);
         });
       }
       var _activationPromise = Promise.resolve();

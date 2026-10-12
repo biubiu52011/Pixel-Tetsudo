@@ -155,7 +155,9 @@ test('direct through railway loads its timetable evidence and shares one estimat
   const fusion = read('js/data-fusion.js');
   const estimator = read('js/train-position-estimator.js');
   assert.match(page, /RunningChainResolver\.getDirectThroughLines\(lineId\)/);
-  assert.match(page, /!lines\[id\] \|\| window\.ODPTClient\.hasRealtimePositionApi\(id\)/);
+  assert.match(page, /if \(!lines\[id\]\) return/);
+  assert.match(page, /_requestedLines\.indexOf\(id\) < 0/);
+  assert.match(page, /!window\.ODPTClient\.hasRealtimePositionApi\(id\)/);
   assert.match(page, /_timetablePartners\.map\(function\(id\)/);
   assert.match(fusion, /if \(_hasOdptTimetable\(lineId\)\) \{/);
   assert.match(estimator, /scheduledItineraryKey: run\.scheduledItineraryKey/);
