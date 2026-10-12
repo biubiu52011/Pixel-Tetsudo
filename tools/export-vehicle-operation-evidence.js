@@ -42,7 +42,7 @@ async function get(table, select, order) {
 }
 
 (async function(){
-  const [obs, policies, mappings, inventory, formations, trainDates, operationDates, trainObs, sources, familyRules, networkAliases] = await Promise.all([
+  const [obs, policies, mappings, inventory, formations, trainDates, operationDates, trainObs, sources, familyRules, networkAliases, referenceRules] = await Promise.all([
     get("runtime_vehicle_operation_evidence",
       "observation_id,service_date,operator,network_key,operation_code,valid_from_time,valid_to_time,vehicle_type,formation_ids,ambiguity_group,observed_date,evidence_grade,source_url,sql_evidence_role",
       "service_date.asc,operator.asc,network_key.asc,operation_code.asc,observation_id.asc"),
@@ -77,7 +77,12 @@ async function get(table, select, order) {
     // per-operator lookup. These keys resolve documented source spellings only.
     get("vehicle_network_key_aliases",
       "alias_key,canonical_network_key,alias_scope",
-      "alias_key.asc")
+      "alias_key.asc"),
+    // Recurring, timetable-backed model reference. This is not a dated
+    // observation or a carset assignment and never supplies train position.
+    get("train_vehicle_rules",
+      "id,operator,network_key,train_number,vehicle_type,effective_from,effective_to,source_id,calendar_type",
+      "network_key.asc,calendar_type.asc,train_number.asc,id.asc")
   ]);
   const pm = Object.fromEntries(policies.map(p=>[p.network_key,p]));
   // Source policy is evidence metadata only. Realtime position coverage belongs
@@ -156,6 +161,18 @@ async function get(table, select, order) {
     if (r.exactVehicleType && r.vehicleCandidates.length && r.vehicleCandidates.indexOf(r.exactVehicleType)<0)
       throw new Error("Exact family vehicle missing from candidates "+r.evidenceId);
   });
+  const referenceRuleRecords = referenceRules.map(function(r) {
+    const source = sourceById[String(r.source_id)] || {};
+    return {evidenceId:r.id,operator:r.operator||"",networkKey:normalizeNetworkKey(r.network_key),
+      trainNumber:r.train_number||"",vehicleType:r.vehicle_type||"",
+      calendarType:r.calendar_type||"",effectiveFrom:r.effective_from||"",
+      effectiveTo:r.effective_to||"",grade:source.evidence_grade||"C",
+      sourceUrl:source.source_url||"",evidenceRole:"timetable-reference"};
+  });
+  referenceRuleRecords.forEach(function(r) {
+    if (!r.networkKey || !r.trainNumber || !r.vehicleType || !r.calendarType ||
+        !r.effectiveFrom || !r.sourceUrl) throw new Error("Incomplete reference vehicle rule "+r.evidenceId);
+  });
   const inventoryNetworks = [...new Set(inventory.map(r=>r.canonical_network_key))];
   if (!inventoryNetworks.length) throw new Error("Canonical vehicle evidence inventory is empty");
   const verifiedAliases=networkAliases.filter(r =>
@@ -165,6 +182,7 @@ async function get(table, select, order) {
     datedRecords,
     networkAliases:verifiedAliases,
     familyRules:familyRuleRecords,
+    referenceRules:referenceRuleRecords,
     evidenceInventory:{networkCount:inventoryNetworks.length,networks:inventoryNetworks,rows:inventory}};
   const root=path.join(__dirname,"..","data","timetables");
   fs.writeFileSync(path.join(root,"vehicle-operation-evidence.json"),JSON.stringify(json,null,2)+"\n");
@@ -173,6 +191,7 @@ async function get(table, select, order) {
     "window.VEHICLE_OPERATION_EVIDENCE = "+JSON.stringify(records,null,2)+";\n"+
     "window.VEHICLE_DATED_EVIDENCE = "+JSON.stringify(datedRecords,null,2)+";\n"+
     "window.VEHICLE_NETWORK_ALIASES = "+JSON.stringify(verifiedAliases,null,2)+";\n"+
-    "window.VEHICLE_FAMILY_RULES = "+JSON.stringify(familyRuleRecords,null,2)+";\n");
+    "window.VEHICLE_FAMILY_RULES = "+JSON.stringify(familyRuleRecords,null,2)+";\n"+
+    "window.VEHICLE_REFERENCE_RULES = "+JSON.stringify(referenceRuleRecords,null,2)+";\n");
   console.log("vehicle operation evidence records =",records.length);
 })().catch(e=>{console.error(e.stack||e);process.exit(1);});

@@ -517,3 +517,56 @@ console.log('single internal PNG resolver, no second mapping hop: PASS');
   }).iconPath, '', 'unresolved SQL candidate must not invent a model');
   console.log('Supabase Rinkai timetable -> estimated train -> exact reference PNG: 2 PASS');
 }
+
+
+// Recurring SQL reference vehicles are *planned train models*, not daily
+// operation/carset observations. Verify the entire exported evidence path.
+{
+  const source=read('tools/export-vehicle-operation-evidence.js');
+  assert.ok(source.includes('get("train_vehicle_rules"'),
+    'Supabase reference rules must be exported by the existing canonical job');
+  const refCtx={console:{debug(){}},window:{}};
+  vm.createContext(refCtx);
+  vm.runInContext(read('data/timetables/vehicle-operation-evidence-data.js'),refCtx);
+  vm.runInContext(read('data/timetables/train-operation-evidence.js'),refCtx);
+  vm.runInContext(read('js/train-vehicle.js'),refCtx);
+  const facts=refCtx.window.TrainOperationEvidence;
+  function resolve(n,day,cal,line='SaikyoKawagoe') {
+    return facts.resolveEvidence(n,{
+      lineId:line,railway:'odpt.Railway:JR-East.'+line,
+      operator:'JR-East',serviceDate:day,calendarType:cal
+    },'realtime-derived');
+  }
+  const holiday70=resolve('1081F','2026-10-12','holiday');
+  const holiday71=resolve('1088T','2026-10-12','holiday');
+  const weekday71=resolve('1085F','2026-10-13','weekday');
+  assert.strictEqual(holiday70.vehicleType,'東京臨海高速鉄道70-000形');
+  assert.strictEqual(holiday71.vehicleType,'東京臨海高速鉄道71-000形');
+  assert.strictEqual(weekday71.vehicleType,'東京臨海高速鉄道71-000形');
+  assert.strictEqual(holiday70.evidenceRole,'timetable-reference');
+  for(const [fact,expected] of [[holiday70,'70-000形.png'],[holiday71,'71-000形.png']]){
+    const p=refCtx.window.TrainVehicle.resolve({trainNumber:'1081F',realtimeDerivedVehicleType:fact.vehicleType});
+    assert.strictEqual(p.identityStatus,'EXACT');
+    assert.ok(p.iconPath.endsWith(expected),p.iconPath);
+  }
+  assert.strictEqual(resolve('1081F','2026-10-12','weekday'),null,
+    'Holiday train must not be treated as weekday');
+  assert.strictEqual(resolve('1081F','2026-03-13','holiday'),null,
+    'Reference model must not predate the timetable revision');
+  assert.strictEqual(resolve('9999F','2026-10-12','holiday'),null,
+    'Unpublished train numbers must not be guessed');
+  assert.strictEqual(resolve('1081F','2026-10-12','holiday','Keiyo'),null,
+    'A train number alone never proves a cross-network identity');
+  const realtimeE233=refCtx.window.TrainVehicle.resolve({
+    trainNumber:'1081F',realtimeVehicleType:'E233系7000番台'
+  });
+  assert.strictEqual(realtimeE233.identityStatus,'EXACT',
+    'Explicit live model should work without a conflicting fallback');
+  assert.ok(realtimeE233.iconPath.includes('E233'),realtimeE233.iconPath);
+  const fusion=read('js/data-fusion.js');
+  assert.ok(fusion.includes('if (!odptVehicleType && window.TrainOperationEvidence'),
+    'Only absent API model can invoke planned reference lookup');
+  assert.ok(fusion.includes('getCurrentCalendars()'),
+    'Realtime vehicles must use the same published railway service calendar');
+  console.log('JR ODPT -> exact-number holiday/weekday planned model -> TWR PNG: 12 PASS');
+}

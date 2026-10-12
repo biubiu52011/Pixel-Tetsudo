@@ -16,6 +16,19 @@ assert.equal(snapshot.generatedFrom, "Supabase canonical evidence tables");
 assert(Array.isArray(snapshot.records), "snapshot records must be an array");
 assert(Array.isArray(snapshot.datedRecords), "snapshot datedRecords must be an array");
 assert(Array.isArray(snapshot.familyRules), "snapshot familyRules must be an array");
+assert(Array.isArray(snapshot.referenceRules), "snapshot referenceRules must be an array");
+assert(snapshot.referenceRules.length >= 177, "Supabase planned vehicle rules not exported");
+const referenceKeys = new Map();
+for (const r of snapshot.referenceRules) {
+  assert(r.trainNumber && r.vehicleType && r.networkKey && r.calendarType &&
+         r.effectiveFrom && r.sourceUrl && r.evidenceRole === "timetable-reference",
+    "reference row missing required published timetable identity");
+  const key = [r.networkKey,r.calendarType,r.trainNumber,r.effectiveFrom].join("|");
+  if (referenceKeys.has(key))
+    assert.strictEqual(referenceKeys.get(key),r.vehicleType,
+      "ambiguous planned model for identical train/calendar/revision");
+  referenceKeys.set(key,r.vehicleType);
+}
 assert(snapshot.familyRules.length >= 36, "canonical family-rule inventory unexpectedly lost baseline rules");
 // CI sees the last committed snapshot before the sync job publishes the
 // updated SQL export. Accept either complete, internally consistent revision;
@@ -110,5 +123,7 @@ const jsDated=JSON.parse(JSON.stringify(sandbox.window.VEHICLE_DATED_EVIDENCE));
 assert.deepStrictEqual(jsDated,snapshot.datedRecords,"JSON and browser JS dated snapshots must match exactly");
 const jsFamily=JSON.parse(JSON.stringify(sandbox.window.VEHICLE_FAMILY_RULES));
 assert.deepStrictEqual(jsFamily,snapshot.familyRules,"JSON and browser JS family-rule snapshots must match exactly");
+const jsReference=JSON.parse(JSON.stringify(sandbox.window.VEHICLE_REFERENCE_RULES));
+assert.deepStrictEqual(jsReference,snapshot.referenceRules,"JSON and browser JS reference-rule snapshots must match exactly");
 
 console.log("canonical evidence snapshot guard: PASS ("+snapshot.records.length+" records)");

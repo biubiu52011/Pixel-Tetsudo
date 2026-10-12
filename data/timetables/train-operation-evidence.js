@@ -281,30 +281,71 @@
 
   registerCanonicalFamilyRuleProvider();
 
+
+  // Timetable reference vehicle by exact published train number, railway,
+  // service calendar and effective timetable revision. It is not a claim of
+  // today's physical formation and must not infer any operation number.
+  function registerCanonicalReferenceProvider() {
+    var rules = window.VEHICLE_REFERENCE_RULES || [];
+    if (!Array.isArray(rules) || !rules.length) return false;
+    return register({
+      id: "canonical-timetable-reference-vehicles", grade: "C",
+      resolveEvidence: function(trainNumber, ctx) {
+        ctx = ctx || {};
+        var n = String(trainNumber || "").trim();
+        var day = String(ctx.serviceDate || "").slice(0, 10);
+        var cal = String(ctx.calendarType || "").toLowerCase();
+        if (!n || !day || !cal) return null;
+        var hits = rules.filter(function(r) {
+          return r.trainNumber === n &&
+            r.calendarType === cal &&
+            (!r.effectiveFrom || day >= r.effectiveFrom) &&
+            (!r.effectiveTo || day <= r.effectiveTo) &&
+            _evidenceNetworkMatches(r.networkKey, ctx);
+        });
+        if (!hits.length) return null;
+        var models = {};
+        hits.forEach(function(r) { if (r.vehicleType) models[r.vehicleType] = true; });
+        if (Object.keys(models).length !== 1) return null;
+        var hit = hits[0];
+        return {
+          operator: hit.operator || "", vehicleType: Object.keys(models)[0],
+          grade: hit.grade || "C", sourceUrl: hit.sourceUrl || "",
+          observedDate: day, evidenceRole: "timetable-reference",
+          provenance: "published timetable reference model (not live carset)"
+        };
+      }
+    });
+  }
+  registerCanonicalReferenceProvider();
+
   // Single evidence resolver. Realtime-derived mode intentionally admits only
   // structural/family providers; fallback mode uses the existing canonical
   // providers in priority order. No parallel realtime resolver is maintained.
   function resolveEvidence(trainNumber, ctx, mode) {
     mode = mode || "fallback";
     var familyHit = null;
+    var referenceHit = null;
     var runHits = [];
     for (var i = 0; i < providers.length; i++) {
       var provider = providers[i];
       if (!provider) continue;
       var isFamily = provider.id === "canonical-vehicle-family-rules";
+      var isReference = provider.id === "canonical-timetable-reference-vehicles";
       var isRunEvidence = provider.id === "canonical-dated-vehicle-evidence" ||
         provider.id === "canonical-vehicle-operation-evidence";
-      if (!isFamily && (mode === "realtime-derived" || !isRunEvidence)) continue;
+      if (!isFamily && !isReference && (mode === "realtime-derived" || !isRunEvidence)) continue;
       var rec = normalizeEvidence(provider, provider.resolveEvidence(trainNumber, ctx || {}));
       if (!rec) continue;
       if (isFamily) familyHit = rec;
+      else if (isReference) referenceHit = rec;
       else runHits.push(rec);
     }
 
     // Realtime-derived identity uses the structural provider directly.
     // Timetable fallback keeps B/C structural rules as constraints, but a
     // dated, traced Grade-A single-fleet rule may also decide vehicle identity.
-    if (mode === "realtime-derived") return familyHit;
+    if (mode === "realtime-derived") return referenceHit || familyHit;
 
     // A/C dated run evidence may decide identity, but all decisive providers
     // must agree before structural constraints are applied.
@@ -333,6 +374,10 @@
       if (allowedVehicles && allowedVehicles.indexOf(exactKeys[0]) < 0) return null;
       return exactHit;
     }
+
+    // Exact dated operating observations outrank a planned reference, while a
+    // matching reference may fill missing vehicle identity on any destination.
+    if (referenceHit) return referenceHit;
 
     // One documented Grade-A, date-valid single-fleet fact is decisive for
     // timetable estimation just as it is for realtime-derived identity.

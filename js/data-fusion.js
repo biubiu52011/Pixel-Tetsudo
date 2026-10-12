@@ -932,7 +932,17 @@
       if (_serviceDayNow.getHours() < 4) _serviceDayNow.setDate(_serviceDayNow.getDate() - 1);
       var _snapshotServiceDate = _serviceDayNow.getFullYear() + "-" + String(_serviceDayNow.getMonth() + 1).padStart(2, "0") + "-" + String(_serviceDayNow.getDate()).padStart(2, "0");
       var _snapshotServiceDay = _serviceDayNow.getDay();
-      var _snapshotCalendarType = (_snapshotServiceDay === 0 || _snapshotServiceDay === 6) ? "holiday" : "weekday";
+      // Share the estimator's Cabinet Office holiday/service-day calendar.
+      // Weekday arithmetic misclassified Japanese public holidays (e.g.
+      // 2026-10-12) and broke exact train-number reference lookups.
+      var _publishedCalendars = window.TrainPositionEstimator &&
+        typeof window.TrainPositionEstimator.getCurrentCalendars === "function"
+        ? window.TrainPositionEstimator.getCurrentCalendars() : [];
+      var _snapshotCalendarType = _publishedCalendars.some(function(c) {
+        return /odpt\.Calendar:(?:Holiday|Sunday|Saturday|SaturdayHoliday)$/.test(c);
+      }) ? "holiday" : "weekday";
+      if (!_publishedCalendars.length)
+        _snapshotCalendarType = (_snapshotServiceDay === 0 || _snapshotServiceDay === 6) ? "holiday" : "weekday";
       var _vehicleResolveCalls = 0, _vehicleResolveMs = 0;
       var _vehicleEvidenceCalls = 0, _vehicleEvidenceMs = 0;
       // Build the ODPT railway-code reverse lookup once per position snapshot.
@@ -1132,6 +1142,8 @@
                   }, "realtime-derived");
                   _vehicleEvidenceMs += _perfNow() - _evidenceStart;
                 }
+                if (_derivedVehicleEvidence && _derivedVehicleEvidence.evidenceRole === "timetable-reference")
+                  positionData.vehicleEvidenceSource = "planned-timetable-reference";
                 var _derivedVehicleType = _derivedVehicleEvidence && _derivedVehicleEvidence.vehicleType
                   ? _derivedVehicleEvidence.vehicleType
                   : (_derivedVehicleEvidence && _derivedVehicleEvidence.vehicleCandidates || []).join(" / ");
