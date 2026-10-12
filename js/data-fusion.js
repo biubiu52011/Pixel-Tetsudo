@@ -67,7 +67,7 @@
     var matches = (p.operationEvidence || []).filter(function(e) {
       if (!e || e.decisive !== true || !e.sourceUrl || !e.formationId) return false;
       if (String(e.observedDate || "").slice(0,10) !== String(p.serviceDate).slice(0,10)) return false;
-      var form = String(e.formationId).split(/\\s*\\/\\s*|\\s*,\\s*|\\s*\\|\\s*/).map(function(v){return v.trim();}).filter(Boolean);
+      var form = String(e.formationId).split(/\s*\/\s*|\s*,\s*|\s*\|\s*/).map(function(v){return v.trim();}).filter(Boolean);
       return form.length === ids.length && form.every(function(v){return ids.indexOf(v) >= 0;});
     });
     return matches.length === 1 ? matches[0] : null;
@@ -93,7 +93,7 @@
     var proof = _confirmedFormationEvidence(p);
     // Retain a dated, source-backed formation when a fresh realtime row
     // confirms the same vehicle type but omits its formation field.
-    if (!proof && _existing && _existing.formationProof &&
+    if (!proof && !p.vehicleFormationConflict && _existing && _existing.formationProof &&
         _existing.evidenceServiceDate === p.serviceDate &&
         _existing.resolution && _existing.resolution.name === resolution.name) {
       proof = _existing.formationProof;
@@ -121,6 +121,7 @@
     }
     // Never propagate a prior service day's carset through source dropout.
     if (v.evidenceServiceDate && p.serviceDate !== v.evidenceServiceDate) return p;
+    if (p.vehicleFormationConflict) return p;
     var currentResolution = p.vehicleResolution || null;
     var sameExact = currentResolution && currentResolution.identityStatus === "EXACT" &&
       v.resolution && currentResolution.name === v.resolution.name;
@@ -1262,6 +1263,7 @@
                   preferred.vehicleFormationId = "";
                   preferred.vehicleFormationCandidates = [];
                   preferred.operationEvidence = [];
+                  preferred.vehicleFormationConflict = true;
                 }
               }
               _chainVehicleCandidates[cid] = preferred;
