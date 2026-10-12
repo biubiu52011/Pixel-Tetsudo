@@ -669,9 +669,39 @@
         }
         return value ? String(value).slice(0, 5) : null;
     }
+    // A scheduled trip is identified by published service facts, not SQL row IDs
+    // or stop_sequence. Keep this in the existing timetable adapter so both
+    // SQL-backed trains and ODPT trains follow the same downstream chain logic.
+    function _plannedTrainRunIdentity(run) {
+        var stops = Array.isArray(run && run.stops) ? run.stops : [];
+        if (stops.length < 2) return "";
+        var first = stops[0] || {}, last = stops[stops.length - 1] || {};
+        var origin = String(first.station_urn || first.station_key || "");
+        var lastStation = String(last.station_urn || last.station_key || "");
+        var terminal = String(run.destination_station || lastStation);
+        var number = String(run.train_number || "").trim();
+        var serviceDate = String(run.service_date || "").slice(0, 10);
+        var firstClock = "";
+        for (var i = 0; i < stops.length; i++) {
+            var s = stops[i] || {};
+            var clock = s.departure_time || s.arrival_time;
+            var minute = s.departure_time ? s.departure_minute : s.arrival_minute;
+            if (clock || minute != null) {
+                firstClock = _dbStopClock(clock, minute);
+                if (firstClock) break;
+            }
+        }
+        if (!serviceDate || !number || !origin || !lastStation || !firstClock) return "";
+        return "planned-trip:" + [
+            serviceDate, run.operator || "", run.network_key || "", run.line_id || "",
+            number, run.rail_direction || "", origin, firstClock, terminal, lastStation
+        ].map(function(v) { return encodeURIComponent(String(v)); }).join("|");
+    }
     function _trainRunToTimetable(run) {
+        var scheduledId = _plannedTrainRunIdentity(run);
+        if (!scheduledId) return null;
         return {
-            "@id":"supabase:TrainRun:"+run.id,
+            "@id":scheduledId,
             "odpt:trainNumber":run.train_number||"",
             "odpt:railway":run.network_key && String(run.network_key).indexOf("odpt.Railway:")===0 ? run.network_key : "odpt.Railway:" + String(run.operator||LINE_TO_OPERATOR[run.line_id]||"") + "." + String(run.network_key||LINE_RAILWAY_CODE[run.line_id]||run.line_id||""),
             "odpt:calendar":({
@@ -684,7 +714,8 @@
             "_operationCode":run.operation_code||"",
             // Keep source-provided physical through-service links as evidence,
             // not as proof of a shared vehicle without boundary/time checks.
-            "_sourceTripId":run.source_trip_id||"",
+            "_sourceTripId":run.source_trip_id ||
+                (typeof run.id === "string" && run.id.indexOf("manual-template:") !== 0 ? run.id : ""),
             "_previousTimetableIds":Array.isArray(run.previous_timetable_ids)?run.previous_timetable_ids:[],
             "_nextTimetableIds":Array.isArray(run.next_timetable_ids)?run.next_timetable_ids:[],
             "_timetableProvenance":run.timetable_provenance||"",
@@ -725,12 +756,13 @@
                 return run&&Array.isArray(run.stops)&&run.stops.length>=2;
             }).map(function(run){
                 var tt=_trainRunToTimetable(run);
+                if (!tt) return null;
                 if(body.partial===true) {
                     tt._timetableCoverage="partial";
                     tt._omittedIncompleteRuns=Number(body.omitted_incomplete_runs)||0;
                 }
                 return tt;
-            }):[];
+            }).filter(Boolean):[];
             _trainRunCache[key]={at:Date.now(),rows:rows};
             return rows;
         }).catch(function(){ return []; }).finally(function(){ delete _trainRunInflight[key]; });

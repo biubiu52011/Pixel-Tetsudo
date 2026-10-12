@@ -1052,43 +1052,17 @@ function _rememberTrainArtworkFailure(trainUid) {
     };
   }
 
-  function _verifiedCarsetLabel(p) {
-    if (!p || p.vehicleIdentityStatus !== "EXACT" || !p.serviceDate) return "";
-    var ids = Array.isArray(p.vehicleFormationCandidates)
-      ? p.vehicleFormationCandidates.map(function(x){ return String(x || "").trim(); }).filter(Boolean)
-      : [];
-    var single = String(p.vehicleFormationId || "").trim();
-    var datedProof = Array.isArray(p.operationEvidence) && p.operationEvidence.some(function(e) {
-      if (!e || e.decisive !== true || !e.sourceUrl || !e.formationId) return false;
-      if (String(e.observedDate || "").slice(0, 10) !== String(p.serviceDate).slice(0, 10)) return false;
-      return String(e.formationId).split(/\s*\/\s*|\s*,\s*|\s*\|\s*/).some(function(id) {
-        return id.trim() === single;
-      });
-    });
-    if (single && ids.length === 1 && ids[0] === single &&
-        (datedProof || p.vehicleInheritedFromRunningChain === true ||
-         p.vehicleSource === "formation-evidence")) return single;
-    // Coupled consists and dual aliases must be reported together, not
-    // converted into a guessed single formation. Require one dated decisive
-    // observation that explicitly contains all the recorded formation ids.
-    if (ids.length < 2 || !Array.isArray(p.operationEvidence)) return "";
-    var isConfirmed = p.operationEvidence.some(function(e) {
-      if (!e || e.decisive !== true || !e.sourceUrl || !e.formationId) return false;
-      if (String(e.observedDate || "").slice(0, 10) !== String(p.serviceDate).slice(0, 10)) return false;
-      var observed = String(e.formationId).split(/\s*\/\s*|\s*,\s*|\s*\|\s*/).filter(Boolean);
-      return observed.length === ids.length && observed.every(function(id) { return ids.indexOf(id) >= 0; });
-    });
-    return isConfirmed ? ids.join(" / ") : ""; // Sources may list aliases, not necessarily coupled sets.
-  }
-
+  // Public identification is the scheduled train number, not the vehicle's
+  // operation/carset assignment. Internal IDs and SQL keys are never labels.
   function _trainMarkerTitle(p) {
     var tip = [];
-    var carset = _verifiedCarsetLabel(p);
     var lang = String(window.currentLang || "ja").toLowerCase();
-    var formationLabel = /^zh/.test(lang) ? "编组" : (lang === "en" ? "Carset" : "編成");
-    var unknownLabel = /^zh/.test(lang) ? "编组未确认" : (lang === "en" ? "Carset unconfirmed" : "編成未確認");
-    // Public label is the physically verified carset, never odpt:trainNumber.
-    tip.push(carset ? (formationLabel + " " + carset) : unknownLabel);
+    var number = String((p && p.trainNumber) || "").trim();
+    if (number && !/^est_/i.test(number) &&
+        !/^(?:odpt[.:]|supabase:|manual-template:|planned-trip:)/i.test(number)) {
+      var prefix = /^zh/.test(lang) ? "列车番号" : (lang === "en" ? "Train No." : "列車番号");
+      tip.push(prefix + " " + number);
+    }
     if (p && p.trainType) {
       var defs = window.TRAIN_TYPE_NAMES || {};
       var def = defs[p.trainType];

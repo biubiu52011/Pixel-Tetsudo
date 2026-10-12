@@ -355,38 +355,41 @@ assert(/p\.sourceUpdatedAt/.test(renderSource) && /p\.sourceFrequency/.test(rend
 console.log("train-position freshness guard: 7 PASS");
 
 
-// Verified physical formation labels must never show a timetable run number.
-assert(/serviceDate:\s*String\(_runIdentity\.key/.test(estimatorSource),
-  "estimated vehicle assignments must retain the exact service date");
-assert(/serviceDate:\s*_snapshotServiceDate/.test(fusionSource),
-  "realtime vehicle positions must carry the evidence service date");
-assert(/v\.evidenceServiceDate && p\.serviceDate !== v\.evidenceServiceDate/.test(fusionSource),
-  "a stale carset must not cross a service-date boundary");
-const carsetStart=renderSource.indexOf("  function _verifiedCarsetLabel(p) {");
-const carsetEnd=renderSource.indexOf("  // Train icons are gallery PNGs embedded",carsetStart);
-assert(carsetStart>=0 && carsetEnd>carsetStart,"existing train-marker carset tooltip helpers must exist");
-const carsetSandbox={window:{currentLang:"ja",TRAIN_TYPE_NAMES:{}},_trainDestText:s=>s};
-vm.createContext(carsetSandbox);
-vm.runInContext(renderSource.slice(carsetStart,carsetEnd)+
- "\nthis.carsetTest={label:_verifiedCarsetLabel,title:_trainMarkerTitle};",carsetSandbox);
-const carsetTools=carsetSandbox.carsetTest;
-const dated={vehicleIdentityStatus:"EXACT",serviceDate:"2026-04-17",trainNumber:"602",
- vehicleType:"西武40000系",vehicleFormationId:"40103F",
- vehicleFormationCandidates:["40103F"],operationEvidence:[{decisive:true,observedDate:"2026-04-17",
- formationId:"40103F",sourceUrl:"https://example.test/evidence"}]};
-assert.strictEqual(carsetTools.label(dated),"40103F","confirmed dated carset should display");
-assert(carsetTools.title(dated).includes("編成 40103F")&&!carsetTools.title(dated).includes("602"),
-  "train title must prefer the physical carset, never the timetable number");
-assert.strictEqual(carsetTools.label({...dated,operationEvidence:[]}),"",
-  "unproven carset id must not be shown as confirmed");
-assert(carsetTools.title({...dated,operationEvidence:[]}).includes("編成未確認"));
-assert.strictEqual(carsetTools.label({...dated,serviceDate:"2026-10-12"}),"",
-  "historical evidence must not label a future service date");
-assert.strictEqual(carsetTools.label({...dated,operationEvidence:[{
- decisive:false,observedDate:"2026-04-17",formationId:"40103F",sourceUrl:"https://example.test"}]}),"");
+// Public train labels use the published train number, never a SQL row ID,
+// guessed operation code, or unconfirmed/confirmed physical carset.
+assert(/serviceDate:\\s*String\\(_runIdentity\\.key/.test(estimatorSource),
+  "estimated assignments must retain the exact service date");
+assert(/serviceDate:\\s*_snapshotServiceDate/.test(fusionSource),
+  "realtime positions must carry the evidence service date");
+const renderSource=fs.readFileSync(require("path").join(__dirname,"../js/trains-render.js"),"utf8");
+const titleStart=renderSource.indexOf("  function _trainMarkerTitle(p) {");
+const titleEnd=renderSource.indexOf("  // SVG image title attributes",titleStart);
+assert(titleStart>=0&&titleEnd>titleStart,"existing train marker title helper missing");
+const trainNumberSandbox={window:{currentLang:"ja",TRAIN_TYPE_NAMES:{}},_trainDestText:s=>s};
+vm.createContext(trainNumberSandbox);
+vm.runInContext(renderSource.slice(titleStart,titleEnd)+
+  "\\nthis.trainMarkerTitle=_trainMarkerTitle;",trainNumberSandbox);
+const trainTitle=trainNumberSandbox.trainMarkerTitle;
+const sample={trainNumber:"1151G",vehicleType:"E235系0番台",destinationStation:"池袋",
+  vehicleFormationId:"トウ01",operationCode:"51G"};
+assert(trainTitle(sample).includes("列車番号 1151G"),"valid train number should be primary label");
+assert(trainTitle(sample).includes("E235系0番台"),"keep confirmed vehicle type in tooltip");
+assert(!trainTitle(sample).includes("トウ01")&&!trainTitle(sample).includes("51G"),
+  "operation and formation fields must not appear in public marker titles");
+for (const synthetic of ["est_12","supabase:TrainRun:12","manual-template:12","odpt.Train:X","planned-trip:x"]) {
+  assert(!trainTitle({trainNumber:synthetic}).includes(synthetic),
+    "source/SQL/synthetic identifiers must never be published as train numbers: "+synthetic);
+}
+const odptAdapterSource=read("data/api/odpt-unified.js");
+assert(odptAdapterSource.includes("function _plannedTrainRunIdentity(run)"),
+  "SQL timetable records must use a scheduled-trip identity");
+assert(odptAdapterSource.includes('"@id":scheduledId'),
+  "SQL row primary keys must not serve as chain identities");
+assert(!odptAdapterSource.includes('"@id":"supabase:TrainRun:"+run.id'),
+  "SQL row IDs must not be presented as stable run identities");
 assert(renderSource.includes('_setTrainMarkerTooltip(existingIcon, _freshTitle, svgNS);'),
-  "reused SVG markers must refresh their native SVG title with the verified carset");
-console.log("verified physical carset label guard: PASS");
+  "reused SVG markers must refresh native tooltips");
+console.log("scheduled train-number label and SQL identity guard: PASS");
 
 assert(fusionSource.includes("function _confirmedFormationEvidence(p)"),
   "date-valid carset evidence must be verified before joining live and timetable positions");
@@ -404,7 +407,7 @@ assert(trainsPageSource.includes("(_tp.vehicleFormationId ||") &&
   "detail map refresh must detect new or revoked carset evidence without moving a station");
 assert(renderSource.includes('document.createElementNS(ns, "title")') &&
        renderSource.includes('_setTrainMarkerTooltip(existingIcon, _freshTitle, svgNS)'),
-  "existing SVG train markers must expose a native, refreshed carset tooltip");
+  "existing SVG train markers must expose a native, refreshed train-number tooltip");
 assert(!renderSource.includes('ids.join(" + ")'),
   "multiple formation IDs must not imply coupling: sources may include aliases");
 console.log("carset evidence propagation and display regression: PASS");
