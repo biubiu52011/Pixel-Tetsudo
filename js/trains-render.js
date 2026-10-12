@@ -1058,7 +1058,16 @@ function _rememberTrainArtworkFailure(trainUid) {
       ? p.vehicleFormationCandidates.map(function(x){ return String(x || "").trim(); }).filter(Boolean)
       : [];
     var single = String(p.vehicleFormationId || "").trim();
-    if (single && ids.length === 1 && ids[0] === single) return single;
+    var datedProof = Array.isArray(p.operationEvidence) && p.operationEvidence.some(function(e) {
+      if (!e || e.decisive !== true || !e.sourceUrl || !e.formationId) return false;
+      if (String(e.observedDate || "").slice(0, 10) !== String(p.serviceDate).slice(0, 10)) return false;
+      return String(e.formationId).split(/\s*\/\s*|\s*,\s*|\s*\|\s*/).some(function(id) {
+        return id.trim() === single;
+      });
+    });
+    if (single && ids.length === 1 && ids[0] === single &&
+        (datedProof || p.vehicleInheritedFromRunningChain === true ||
+         p.vehicleSource === "formation-evidence")) return single;
     // Coupled consists and dual aliases must be reported together, not
     // converted into a guessed single formation. Require one dated decisive
     // observation that explicitly contains all the recorded formation ids.

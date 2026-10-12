@@ -114,7 +114,6 @@
       resolveEvidence: function(trainNumber, ctx) {
         ctx = ctx || {};
         var d = String(ctx.serviceDate || "").slice(0, 10);
-        var line = [ctx.lineId, ctx.railway, ctx.operator].join("|").toLowerCase().replace(/[^a-z0-9|]/g, "");
         var n = String(trainNumber || "");
         var matches = [];
         for (var i=0;i<records.length;i++) {
@@ -183,7 +182,6 @@
         ctx = ctx || {};
         var d = String(ctx.serviceDate || "").slice(0,10);
         if (!d) return null;
-        var line = [ctx.lineId,ctx.railway,ctx.operator].join("|").toLowerCase();
         var n = String(trainNumber || "");
         var op = String(ctx.operationCode || normalizeOperationCode(n,ctx) || "");
         var exactTrain = [], operation = [];
@@ -241,7 +239,6 @@
       id:"canonical-vehicle-family-rules", grade:"B",
       resolveEvidence:function(trainNumber,ctx) {
         ctx=ctx||{}; var d=String(ctx.serviceDate||"").slice(0,10);
-        var line=[ctx.lineId,ctx.railway,ctx.operator].join("|");
         var op=String(ctx.operationCode||normalizeOperationCode(trainNumber,ctx)||"");
         if (!d) return null;
         var cal=String(ctx.calendarType||"").toLowerCase();

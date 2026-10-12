@@ -354,3 +354,36 @@ assert(!/if \(!p\.sourceValidUntil\) return true;/.test(renderSource));
 assert(/p\.sourceUpdatedAt/.test(renderSource) && /p\.sourceFrequency/.test(renderSource));
 console.log("train-position freshness guard: 7 PASS");
 
+
+// Verified physical formation labels must never show a timetable run number.
+assert(/serviceDate:\s*String\(_runIdentity\.key/.test(estimatorSource),
+  "estimated vehicle assignments must retain the exact service date");
+assert(/serviceDate:\s*_snapshotServiceDate/.test(fusionSource),
+  "realtime vehicle positions must carry the evidence service date");
+assert(/v\.evidenceServiceDate && p\.serviceDate !== v\.evidenceServiceDate/.test(fusionSource),
+  "a stale carset must not cross a service-date boundary");
+const carsetStart=renderSource.indexOf("  function _verifiedCarsetLabel(p) {");
+const carsetEnd=renderSource.indexOf("  // Train icons are gallery PNGs embedded",carsetStart);
+assert(carsetStart>=0 && carsetEnd>carsetStart,"existing train-marker carset tooltip helpers must exist");
+const carsetSandbox={window:{currentLang:"ja",TRAIN_TYPE_NAMES:{}},_trainDestText:s=>s};
+vm.createContext(carsetSandbox);
+vm.runInContext(renderSource.slice(carsetStart,carsetEnd)+
+ "\nthis.carsetTest={label:_verifiedCarsetLabel,title:_trainMarkerTitle};",carsetSandbox);
+const carsetTools=carsetSandbox.carsetTest;
+const dated={vehicleIdentityStatus:"EXACT",serviceDate:"2026-04-17",trainNumber:"602",
+ vehicleType:"西武40000系",vehicleFormationId:"40103F",
+ vehicleFormationCandidates:["40103F"],operationEvidence:[{decisive:true,observedDate:"2026-04-17",
+ formationId:"40103F",sourceUrl:"https://example.test/evidence"}]};
+assert.strictEqual(carsetTools.label(dated),"40103F","confirmed dated carset should display");
+assert(carsetTools.title(dated).includes("編成 40103F")&&!carsetTools.title(dated).includes("602"),
+  "train title must prefer the physical carset, never the timetable number");
+assert.strictEqual(carsetTools.label({...dated,operationEvidence:[]}),"",
+  "unproven carset id must not be shown as confirmed");
+assert(carsetTools.title({...dated,operationEvidence:[]}).includes("編成未確認"));
+assert.strictEqual(carsetTools.label({...dated,serviceDate:"2026-10-12"}),"",
+  "historical evidence must not label a future service date");
+assert.strictEqual(carsetTools.label({...dated,operationEvidence:[{
+ decisive:false,observedDate:"2026-04-17",formationId:"40103F",sourceUrl:"https://example.test"}]}),"");
+assert(renderSource.includes('existingIcon.setAttribute("title", _freshTitle);'),
+  "reused SVG markers must refresh their carset tooltip");
+console.log("verified physical carset label guard: PASS");
