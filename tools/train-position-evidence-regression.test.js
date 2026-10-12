@@ -361,7 +361,6 @@ assert(/serviceDate:\s*String\(_runIdentity\.key/.test(estimatorSource),
   "estimated assignments must retain the exact service date");
 assert(/serviceDate:\s*_snapshotServiceDate/.test(fusionSource),
   "realtime positions must carry the evidence service date");
-const renderSource=fs.readFileSync(require("path").join(__dirname,"../js/trains-render.js"),"utf8");
 const titleStart=renderSource.indexOf("  function _trainMarkerTitle(p) {");
 const titleEnd=renderSource.indexOf("  // SVG image title attributes",titleStart);
 assert(titleStart>=0&&titleEnd>titleStart,"existing train marker title helper missing");
