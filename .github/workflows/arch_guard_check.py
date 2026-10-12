@@ -320,10 +320,15 @@ def main():
             or 'iconSrc ? "image" : "circle"' in renderer_src
             or 'outer.setAttribute("r", "8")' in renderer_src):
         new_errors.append('TRAIN-001 SELF_DRAWN_SVG_OR_DUAL_TRAIN_MARKER_REINTRODUCED')
+    # A missing vehicle type must not hide an otherwise valid ODPT position:
+    # exact models use certified image nodes; unresolved positions use a small
+    # non-vehicle location dot. Image errors hide the broken image immediately
+    # and keep the train's established position visible with no guessed model.
     if ('marker.addEventListener("error"' not in renderer_src
             or 'marker.setAttribute("visibility", "hidden")' not in renderer_src
-            or 'document.createElementNS(svgNS, "image")' not in renderer_src
-            or 'if (!markerSpec.iconSrc) continue;' not in renderer_src):
+            or 'knownVehicle ? "image" : "circle"' not in renderer_src
+            or 'data-position-unresolved' not in renderer_src
+            or 'if (!markerSpec.iconSrc) continue;' in renderer_src):
         new_errors.append('TRAIN-001 EXACT_IMAGE_FAILURE_SAFE_HIDE_MISSING')
     if 'train-dot' in renderer_src or 'train-point' in renderer_src:
         new_errors.append('TRAIN-001 LEGACY_TRAIN_DOT_MARKER_REINTRODUCED')
