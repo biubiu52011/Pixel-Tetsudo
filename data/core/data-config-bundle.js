@@ -938,11 +938,13 @@ window.getTransferHint = function(stationId, lang) {
   // on 2026-10-12. Empty live snapshots never enable an SQL substitute.
   // Existing FULL line policies also qualify when their Train endpoint is enabled.
   var REALTIME_POSITION_API_LINES = Object.freeze({
+    "Arakawa": true,
     "Asakusa": true,
     "ChuoRapid": true,
     "Joban": true,
     "JobanLocal": true,
     "Kawagoe": true,
+    "KeioMain": true,
     "KeihinTohoku": true,
     "Keiyo": true,
     "Mita": true,

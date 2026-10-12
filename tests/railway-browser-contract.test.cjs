@@ -222,9 +222,9 @@ test('live API capabilities survive config regeneration and remain SQL-bypass on
     return Array.from(text.slice(start, end).matchAll(/"([^"]+)":\s*true/g), m => m[1]).sort();
   }
   const registered = configuredLines(original);
-  assert.ok(registered.length >= 24);
+  assert.ok(registered.length >= 26);
   assert.deepEqual(registered, configuredLines(bundled));
-  for (const id of ['Asakusa', 'ChuoRapid', 'KeihinTohoku', 'Mita', 'TobuSkytree', 'Yamanote']) {
+  for (const id of ['Arakawa', 'Asakusa', 'ChuoRapid', 'KeihinTohoku', 'KeioMain', 'Mita', 'TobuSkytree', 'Yamanote']) {
     assert.ok(registered.includes(id), id + ' lost its realtime capability');
   }
   assert.match(original, /REALTIME_POSITION_API_LINES:\s*REALTIME_POSITION_API_LINES/);
