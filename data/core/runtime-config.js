@@ -6,11 +6,11 @@
  * 
  * Consumers:
  *   data-state.js        → TRUNK_MAIN_LINE_IDS
- *   data-fusion.js       → SOURCE_RAILWAY_CANONICAL_LINE, PRIORITY_OPS, STATION_ALIAS,
+ *   data-fusion.js       → SOURCE_RAILWAY_LINE_SCOPE, PRIORITY_OPS, STATION_ALIAS,
  *                          STATION_ALIAS_BY_RAILWAY, TRAIN_WARMUP_LINES, REFRESH_INTERVAL,
  *                          POSITION_INTERVAL
  *   odpt-unified.js      → API_RATE_LIMIT, API_MAX_CONCURRENCY, TT_TRUNCATE_LIMIT
- *   trains-page.js       → TRANSFER_MAX_ROWS
+ *   trains-page.js       → TRUNK_EXTENSION_ALLOW, TRANSFER_MAX_ROWS
  */
 (function() {
   "use strict";
@@ -24,16 +24,21 @@
    */
   var TRUNK_MAIN_LINE_IDS = ["Shinetsu", "TokaidoMain", "Tohoku"];
 
+  /**
+   * 干线本名延伸白名单（显式登记，防止自动端点相接误判）。
+   * 4.3.421：横須賀線誤延伸整条東海道本線 修复后改为空表，即不延伸任何干线本名。
+   */
+  var TRUNK_EXTENSION_ALLOW = {};
+
   // ========== 直通运行 ==========
 
   /**
-   * Provider railway identity -> canonical line identity.
-   * This adapts an external source name only. It MUST NOT duplicate topology,
-   * preference order, or through-service membership. Canonical throughServices
-   * and serviceBoundaries own those network facts.
+   * Source railway identity scope for feeds whose railway entity spans canonical
+   * project lines/operators. This is candidate admission only, never a preference
+   * order and never proof that two records are the same physical train.
    */
-  var SOURCE_RAILWAY_CANONICAL_LINE = {
-    "SotetsuDirect": "SotetsuJRDirect"
+  var SOURCE_RAILWAY_LINE_SCOPE = {
+    "SotetsuDirect": ["SotetsuShinYokohama", "Yokosuka", "SaikyoKawagoe", "ShonanShinjuku"]
   };
 
   /**
@@ -100,8 +105,27 @@
       "Ogose": { mode: "FULL" },
       "TobuDaishi": { mode: "FULL" },
 
+      // Known partial/limited sources, but no verified local station-pair coverage
+      // is stored yet. Keep HYBRID until coveredSegments/excludedSegments can be
+      // backed by provider observations; never use SEGMENTED as a placeholder.
+      "Mita": { mode: "HYBRID" },
+      "Chuo": { mode: "HYBRID" },
+      "Ome": { mode: "HYBRID" },
+      "Joban": { mode: "HYBRID" },
+      "Takasaki": { mode: "HYBRID" },
+
       // Official source has insufficient positional granularity on part of this railway.
       "TobuKameido": { mode: "COARSE" },
+
+      // Explicitly known not to be complete realtime-position sources.
+      "TobuIsesaki": { mode: "HYBRID" },
+      "TobuNikko": { mode: "HYBRID" },
+      "Tsurumi": { mode: "HYBRID" },
+      "TsurumiUmiShibaura": { mode: "HYBRID" },
+      "TsurumiOkawa": { mode: "HYBRID" },
+      "NambuBranch": { mode: "HYBRID" },
+      "Sagami": { mode: "HYBRID" },
+      "Hachiko": { mode: "HYBRID" }
     }
   };
 
@@ -266,6 +290,14 @@
   /** trains 页后台预加载线路白名单（用户高频切换的线路）。打开 trains.html 后 2 秒开始后台加载。 */
   var TRAIN_WARMUP_LINES = ['Yamanote', 'ChuoRapid', 'KeihinTohoku', 'Seibuen', 'Keikyu', 'Odawara'];
 
+  /**
+   * 快速通过站白名单——route-search 计算时跳过这些站的停站+加减速时间（按 EXPRESS_PASS_RATIO 折扣）。
+   * 数据源：各线公式停站表（wiki）。Joban=常磐快速 松戸〜柏 间ノンストップ（通过 亀有/馬橋/新松戸/北小金）。
+   */
+  var EXPRESS_SKIP_STATIONS = {
+    'Joban': { 'Kameari': 1, 'Mabashi': 1, 'Shin-Matsudo': 1, 'Kita-Kogane': 1 }
+  };
+
   // ========== UI 策略常量 ==========
 
   /** 换乘 chip 行数上限（per station）。v4.3.613: 2→3 行（JR 大站东京/新宿换乘超 8 条）；v4.3.849: 3→4 行（4×4=16 个图标上限，用户裁定）。 */
@@ -274,8 +306,9 @@
   window.RuntimeConfig = {
     // 线路层级
     TRUNK_MAIN_LINE_IDS: TRUNK_MAIN_LINE_IDS,
+    TRUNK_EXTENSION_ALLOW: TRUNK_EXTENSION_ALLOW,
     // 直通运行
-    SOURCE_RAILWAY_CANONICAL_LINE: SOURCE_RAILWAY_CANONICAL_LINE,
+    SOURCE_RAILWAY_LINE_SCOPE: SOURCE_RAILWAY_LINE_SCOPE,
     PRIORITY_OPS: PRIORITY_OPS,
     REALTIME_POSITION_POLICY: REALTIME_POSITION_POLICY,
     REALTIME_POSITION_API_LINES: REALTIME_POSITION_API_LINES,
@@ -300,6 +333,8 @@
     // DataLayer 缓存参数
     DATA_LAYER_MAX_CACHE_SIZE: DATA_LAYER_MAX_CACHE_SIZE,
     DATA_LAYER_CACHE_TTL: DATA_LAYER_CACHE_TTL,
+    // 快速通过站（route-search）
+    EXPRESS_SKIP_STATIONS: EXPRESS_SKIP_STATIONS,
     // UI 策略
     TRANSFER_MAX_ROWS: TRANSFER_MAX_ROWS
   };

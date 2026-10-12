@@ -234,3 +234,15 @@ test('live API capabilities survive config regeneration and remain SQL-bypass on
   assert.match(edge, /if \(source\?\.realtime_position_api_enabled\)/);
   assert.match(importer, /if \(line\.realtime_position_api_enabled === true\)/);
 });
+
+test('runtime configuration source matches the deployed config-bundle section', () => {
+  const source = read('data/core/runtime-config.js').replace(/^\uFEFF/, '').trimEnd();
+  const bundle = read('data/core/data-config-bundle.js');
+  const startMarker = '// ===== runtime-config.js =====\\n';
+  const endMarker = '\\n// ===== platform-data.js =====';
+  const start = bundle.indexOf(startMarker);
+  assert.ok(start >= 0);
+  const end = bundle.indexOf(endMarker, start + startMarker.length);
+  assert.ok(end > start);
+  assert.equal(source, bundle.slice(start + startMarker.length, end).trimEnd());
+});
