@@ -62,6 +62,38 @@
     return "";
   }
 
+  // SQL evidence-domain aliases are the only cross-line identity aliases.
+  // Normalize spelling but never infer a vehicle from a train/operation number.
+  function _evidenceNetworkToken(s) {
+    return String(s || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+  }
+  function _evidenceNetworkMatches(networkKey, ctx) {
+    ctx = ctx || {};
+    var key = _evidenceNetworkToken(networkKey);
+    if (!key) return false;
+    var accepted = {};
+    accepted[key] = true;
+    var aliases = window.VEHICLE_NETWORK_ALIASES || [];
+    for (var pass = 0; pass < 3; pass++) {
+      aliases.forEach(function(row) {
+        if (!row || (row.alias_scope !== "evidence_domain" &&
+                     row.alias_scope !== "exact")) return;
+        if (accepted[_evidenceNetworkToken(row.canonical_network_key)]) {
+          var alias = _evidenceNetworkToken(row.alias_key);
+          if (alias) accepted[alias] = true;
+        }
+      });
+    }
+    return [ctx.lineId, ctx.railway].some(function(raw) {
+      var source = _evidenceNetworkToken(raw);
+      if (!source) return false;
+      return Object.keys(accepted).some(function(expected) {
+        return source === expected || (expected.length >= 6 &&
+          source.slice(-expected.length) === expected);
+      });
+    });
+  }
+
   function register(provider) {
     if (!provider || !provider.id || typeof provider.resolveEvidence !== 'function') return false;
     for (var i = 0; i < providers.length; i++) {
