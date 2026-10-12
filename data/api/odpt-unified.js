@@ -258,7 +258,6 @@
         "Karasuyama": "JR-East",
         "Kashima": "JR-East",
         "Kawagoe": "JR-East",
-        "KawagoeWest": "JR-East",
         "KeihinTohoku": "JR-East",
         "Keikyu": "Keikyu",
         "KeikyuAirport": "Keikyu",
@@ -320,7 +319,7 @@
 
         "Ryomo": "JR-East",
         "Sagami": "JR-East",
-        "Saikyo": "JR-East",
+        "SaikyoKawagoe": "JR-East",
 
         "Sano": "Tobu",
         "Yamada": "JR-East",
@@ -408,9 +407,8 @@
     // 内部线路 key 与 ODPT odpt.Railway code 不一致时在此映射，避免 404。
     // 仅在内部 lineId 与数据源实际 owl:sameAs railway code 不同时登记已验证 alias；禁止根据英文名/命名惯例猜测 API identity。
     var LINE_RAILWAY_CODE = {
-      "Saikyo": "SaikyoKawagoe",
-      "Kawagoe": "SaikyoKawagoe", // 大宮〜川越段は埼京線・川越線運行系統（ODPT SaikyoKawagoe API）
-      "KawagoeWest": "Kawagoe", // 川越〜高麗川段 = ODPT 川越線（川越-高麗川間）
+      "SaikyoKawagoe": "SaikyoKawagoe", // 大崎〜大宮〜川越
+      "Kawagoe": "Kawagoe", // 川越〜高麗川
       "ShonanShinjuku": "ShonanShinjuku", // 湘南新宿ライン独立 ODPT railway
       "Takasaki": "Takasaki", // 高崎線
       "KeihinTohoku": "KeihinTohokuNegishi",

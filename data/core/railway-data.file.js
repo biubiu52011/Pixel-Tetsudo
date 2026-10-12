@@ -14088,7 +14088,7 @@ window.RAILWAY_DATA = {
       "transferStations": [
         {
           "station": "Omiya",
-          "lineId": "Saikyo",
+          "lineId": "SaikyoKawagoe",
           "type": "in",
           "note": ""
         },
@@ -14101,12 +14101,6 @@ window.RAILWAY_DATA = {
         {
           "station": "Omiya",
           "lineId": "Takasaki",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Omiya",
-          "lineId": "Kawagoe",
           "type": "in",
           "note": ""
         },
@@ -14166,7 +14160,7 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Akabane",
-          "lineId": "Saikyo",
+          "lineId": "SaikyoKawagoe",
           "type": "in",
           "note": ""
         },
@@ -14722,7 +14716,8 @@ window.RAILWAY_DATA = {
           "KeihinTohoku"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Yokosuka": {
       "name": "Yokosuka",
@@ -15066,8 +15061,7 @@ window.RAILWAY_DATA = {
         "icon": "../images/鉄道/JR東日本/総武線快速横須賀線.png",
         "order": 14,
         "lineIds": [
-          "Yokosuka",
-          "SobuRapid"
+          "Yokosuka"
         ],
         "operatorGroup": "JR_EAST"
       },
@@ -15279,7 +15273,7 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Shinjuku",
-          "lineId": "Saikyo",
+          "lineId": "SaikyoKawagoe",
           "type": "in",
           "note": ""
         },
@@ -15491,17 +15485,17 @@ window.RAILWAY_DATA = {
         }
       ]
     },
-    "Saikyo": {
-      "name": "Saikyo",
-      "nameEn": "Saikyo Line",
-      "nameJa": "埼京線",
+    "SaikyoKawagoe": {
+      "name": "SaikyoKawagoe",
+      "nameEn": "Saikyo Line / Kawagoe Line",
+      "nameJa": "埼京線・川越線",
       "code": "JA",
       "color": "#00ac47",
       "operator": "JR-East",
       "region": "Saitama Area",
       "type": "straight",
       "image": "../images/鉄道/JR東日本/埼京線.png",
-      "durationTotalMin": 45,
+      "durationTotalMin": 60,
       "branchOf": null,
       "stations": [
         "Osaki",
@@ -15522,9 +15516,18 @@ window.RAILWAY_DATA = {
         "Minami-Yono",
         "Yono-Hommachi",
         "Kita-Yono",
-        "Omiya"
+        "Omiya",
+        "Nisshin",
+        "Nishi-Omiya",
+        "Sashiogi",
+        "Minami-Furuya",
+        "Kawagoe"
       ],
       "durations": [
+        2,
+        2,
+        2,
+        2,
         2,
         2,
         2,
@@ -15546,9 +15549,9 @@ window.RAILWAY_DATA = {
         2
       ],
       "throughServices": [
-        "Kawagoe",
         "Rinkai",
-        "SotetsuJRDirect"
+        "SotetsuJRDirect",
+        "Kawagoe"
       ],
       "transferStations": [
         {
@@ -15781,12 +15784,6 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Omiya",
-          "lineId": "Kawagoe",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Omiya",
           "lineId": "Noda",
           "type": "in",
           "note": ""
@@ -15808,6 +15805,18 @@ window.RAILWAY_DATA = {
           "lineId": "Musashino",
           "type": "in",
           "note": ""
+        },
+        {
+          "station": "Kawagoe",
+          "lineId": "Tojo",
+          "type": "in",
+          "note": ""
+        },
+        {
+          "station": "Kawagoe",
+          "lineId": "Kawagoe",
+          "type": "in",
+          "note": ""
         }
       ],
       "nameZh": "埼京线・川越线",
@@ -15826,8 +15835,7 @@ window.RAILWAY_DATA = {
         "icon": "../images/鉄道/JR東日本/埼京線.png",
         "order": 1,
         "lineIds": [
-          "Saikyo",
-          "Kawagoe"
+          "SaikyoKawagoe"
         ],
         "operatorGroup": "JR_EAST"
       },
@@ -15843,16 +15851,6 @@ window.RAILWAY_DATA = {
           }
         },
         {
-          "lineId": "Kawagoe",
-          "handoverStations": [
-            "Omiya"
-          ],
-          "evidence": {
-            "source": "JR East Saikyo-Kawagoe timetable: continuous Saikyo / Kawagoe operation across Omiya",
-            "confidence": "HIGH"
-          }
-        },
-        {
           "lineId": "SotetsuJRDirect",
           "handoverStations": [
             "Osaki"
@@ -15861,8 +15859,19 @@ window.RAILWAY_DATA = {
             "source": "JR East Sotetsu Line through-service timetable: Hazawa-Yokohama-Kokudai - Musashi-Kosugi - Nishi-Oi - Osaki - Saikyo Line",
             "confidence": "HIGH"
           }
+        },
+        {
+          "lineId": "Kawagoe",
+          "handoverStations": [
+            "Kawagoe"
+          ],
+          "evidence": {
+            "source": "川越線運転系統 川越駅以東/以西 直通",
+            "confidence": "HIGH"
+          }
         }
-      ]
+      ],
+      "stationCount": 24
     },
     "Joban": {
       "name": "Joban",
@@ -16697,19 +16706,13 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Omiya",
-          "lineId": "Saikyo",
+          "lineId": "SaikyoKawagoe",
           "type": "in",
           "note": ""
         },
         {
           "station": "Omiya",
           "lineId": "Takasaki",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Omiya",
-          "lineId": "Kawagoe",
           "type": "in",
           "note": ""
         },
@@ -16757,7 +16760,7 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Akabane",
-          "lineId": "Saikyo",
+          "lineId": "SaikyoKawagoe",
           "type": "in",
           "note": ""
         },
@@ -16775,7 +16778,7 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Ikebukuro",
-          "lineId": "Saikyo",
+          "lineId": "SaikyoKawagoe",
           "type": "in",
           "note": ""
         },
@@ -16823,7 +16826,7 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Shinjuku",
-          "lineId": "Saikyo",
+          "lineId": "SaikyoKawagoe",
           "type": "in",
           "note": ""
         },
@@ -16877,7 +16880,7 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Shibuya",
-          "lineId": "Saikyo",
+          "lineId": "SaikyoKawagoe",
           "type": "in",
           "note": ""
         },
@@ -16925,7 +16928,7 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Ebisu",
-          "lineId": "Saikyo",
+          "lineId": "SaikyoKawagoe",
           "type": "in",
           "note": ""
         },
@@ -16943,7 +16946,7 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Osaki",
-          "lineId": "Saikyo",
+          "lineId": "SaikyoKawagoe",
           "type": "in",
           "note": ""
         },
@@ -17450,7 +17453,7 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Akabane",
-          "lineId": "Saikyo",
+          "lineId": "SaikyoKawagoe",
           "type": "in",
           "note": ""
         },
@@ -17504,19 +17507,13 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Omiya",
-          "lineId": "Saikyo",
+          "lineId": "SaikyoKawagoe",
           "type": "in",
           "note": ""
         },
         {
           "station": "Omiya",
           "lineId": "ShonanShinjuku",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Omiya",
-          "lineId": "Kawagoe",
           "type": "in",
           "note": ""
         },
@@ -17679,12 +17676,11 @@ window.RAILWAY_DATA = {
         "icon": "../images/鉄道/JR東日本/鶴見線.png",
         "order": 8,
         "lineIds": [
-          "Tsurumi",
-          "TsurumiUmiShibaura",
-          "TsurumiOkawa"
+          "Tsurumi"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Nambu": {
       "name": "Nambu",
@@ -17850,11 +17846,11 @@ window.RAILWAY_DATA = {
         "icon": "../images/鉄道/JR東日本/南武線.png",
         "order": 13,
         "lineIds": [
-          "Nambu",
-          "NambuBranch"
+          "Nambu"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Tokaido": {
       "name": "Tokaido",
@@ -18540,7 +18536,7 @@ window.RAILWAY_DATA = {
       "transferStations": [
         {
           "station": "Shibuya",
-          "lineId": "Saikyo",
+          "lineId": "SaikyoKawagoe",
           "type": "in",
           "note": ""
         },
@@ -18783,7 +18779,8 @@ window.RAILWAY_DATA = {
           "Ginza"
         ],
         "operatorGroup": "TOKYO_METRO"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Marunouchi": {
       "name": "Marunouchi",
@@ -18879,7 +18876,7 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Shinjuku",
-          "lineId": "Saikyo",
+          "lineId": "SaikyoKawagoe",
           "type": "in",
           "note": ""
         },
@@ -19095,7 +19092,7 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Ikebukuro",
-          "lineId": "Saikyo",
+          "lineId": "SaikyoKawagoe",
           "type": "in",
           "note": ""
         },
@@ -19175,11 +19172,11 @@ window.RAILWAY_DATA = {
         "icon": "../images/鉄道/東京メトロ/丸ノ内線.png",
         "order": 5,
         "lineIds": [
-          "Marunouchi",
-          "MarunouchiBranch"
+          "Marunouchi"
         ],
         "operatorGroup": "TOKYO_METRO"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Hibiya": {
       "name": "Hibiya",
@@ -19247,7 +19244,7 @@ window.RAILWAY_DATA = {
       "transferStations": [
         {
           "station": "Ebisu",
-          "lineId": "Saikyo",
+          "lineId": "SaikyoKawagoe",
           "type": "in",
           "note": ""
         },
@@ -19599,7 +19596,7 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Ikebukuro",
-          "lineId": "Saikyo",
+          "lineId": "SaikyoKawagoe",
           "type": "in",
           "note": ""
         },
@@ -20565,7 +20562,7 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Shinjuku",
-          "lineId": "Saikyo",
+          "lineId": "SaikyoKawagoe",
           "type": "in",
           "note": ""
         },
@@ -20996,7 +20993,7 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Shinjuku",
-          "lineId": "Saikyo",
+          "lineId": "SaikyoKawagoe",
           "type": "in",
           "note": ""
         },
@@ -21113,7 +21110,8 @@ window.RAILWAY_DATA = {
           "Oedo"
         ],
         "operatorGroup": "TOEI"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Chiyoda": {
       "name": "Chiyoda",
@@ -21346,8 +21344,7 @@ window.RAILWAY_DATA = {
         "icon": "../images/鉄道/東京メトロ/千代田線.png",
         "order": 1,
         "lineIds": [
-          "Chiyoda",
-          "ChiyodaBranch"
+          "Chiyoda"
         ],
         "operatorGroup": "TOKYO_METRO"
       },
@@ -21425,7 +21422,7 @@ window.RAILWAY_DATA = {
       "transferStations": [
         {
           "station": "Shibuya",
-          "lineId": "Saikyo",
+          "lineId": "SaikyoKawagoe",
           "type": "in",
           "note": ""
         },
@@ -21985,7 +21982,7 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Ikebukuro",
-          "lineId": "Saikyo",
+          "lineId": "SaikyoKawagoe",
           "type": "in",
           "note": ""
         },
@@ -22051,7 +22048,7 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Shibuya",
-          "lineId": "Saikyo",
+          "lineId": "SaikyoKawagoe",
           "type": "in",
           "note": ""
         },
@@ -22285,7 +22282,8 @@ window.RAILWAY_DATA = {
           "Yurikamome"
         ],
         "operatorGroup": "YURIKAMOME"
-      }
+      },
+      "serviceBoundaries": []
     },
     "SeibuShinjuku": {
       "name": "SeibuShinjuku",
@@ -22411,7 +22409,7 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Seibu-Shinjuku",
-          "lineId": "Saikyo",
+          "lineId": "SaikyoKawagoe",
           "type": "out",
           "note": "新宿",
           "toStation": "Shinjuku"
@@ -22495,7 +22493,8 @@ window.RAILWAY_DATA = {
           "SeibuShinjuku"
         ],
         "operatorGroup": "SEIBU"
-      }
+      },
+      "serviceBoundaries": []
     },
     "TobuIsesaki": {
       "name": "TobuIsesaki",
@@ -22718,7 +22717,7 @@ window.RAILWAY_DATA = {
       "transferStations": [
         {
           "station": "Shibuya",
-          "lineId": "Saikyo",
+          "lineId": "SaikyoKawagoe",
           "type": "in",
           "note": ""
         },
@@ -23145,7 +23144,8 @@ window.RAILWAY_DATA = {
           "YokohamaBlue"
         ],
         "operatorGroup": "YOKOHAMA_MUNICIPAL"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Keisei": {
       "name": "Keisei",
@@ -23476,7 +23476,8 @@ window.RAILWAY_DATA = {
           "SeibuChichibu"
         ],
         "operatorGroup": "SEIBU"
-      }
+      },
+      "serviceBoundaries": []
     },
     "SeibuTamako": {
       "name": "SeibuTamako",
@@ -23538,7 +23539,8 @@ window.RAILWAY_DATA = {
           "SeibuTamako"
         ],
         "operatorGroup": "SEIBU"
-      }
+      },
+      "serviceBoundaries": []
     },
     "OdakyuEnoshima": {
       "name": "OdakyuEnoshima",
@@ -23653,7 +23655,8 @@ window.RAILWAY_DATA = {
           "OdakyuEnoshima"
         ],
         "operatorGroup": "ODAKYU"
-      }
+      },
+      "serviceBoundaries": []
     },
     "TamaMonorail": {
       "name": "TamaMonorail",
@@ -23739,7 +23742,8 @@ window.RAILWAY_DATA = {
           "TamaMonorail"
         ],
         "operatorGroup": "TAMA_MONORAIL"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Ome": {
       "name": "Ome",
@@ -24176,7 +24180,6 @@ window.RAILWAY_DATA = {
         "icon": "../images/鉄道/JR東日本/総武線快速横須賀線.png",
         "order": 14,
         "lineIds": [
-          "Yokosuka",
           "SobuRapid"
         ],
         "operatorGroup": "JR_EAST"
@@ -24248,7 +24251,7 @@ window.RAILWAY_DATA = {
       "transferStations": [
         {
           "station": "Shibuya",
-          "lineId": "Saikyo",
+          "lineId": "SaikyoKawagoe",
           "type": "in",
           "note": ""
         },
@@ -25058,7 +25061,8 @@ window.RAILWAY_DATA = {
           "SeibuYamaguchi"
         ],
         "operatorGroup": "SEIBU"
-      }
+      },
+      "serviceBoundaries": []
     },
     "SeibuEn": {
       "name": "SeibuEn",
@@ -25118,7 +25122,8 @@ window.RAILWAY_DATA = {
           "SeibuEn"
         ],
         "operatorGroup": "SEIBU"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Yamanote": {
       "name": "Yamanote",
@@ -25422,7 +25427,7 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Ikebukuro",
-          "lineId": "Saikyo",
+          "lineId": "SaikyoKawagoe",
           "type": "in",
           "note": ""
         },
@@ -25482,7 +25487,7 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Shinjuku",
-          "lineId": "Saikyo",
+          "lineId": "SaikyoKawagoe",
           "type": "in",
           "note": ""
         },
@@ -25548,7 +25553,7 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Shibuya",
-          "lineId": "Saikyo",
+          "lineId": "SaikyoKawagoe",
           "type": "in",
           "note": ""
         },
@@ -25596,7 +25601,7 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Ebisu",
-          "lineId": "Saikyo",
+          "lineId": "SaikyoKawagoe",
           "type": "in",
           "note": ""
         },
@@ -25644,7 +25649,7 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Osaki",
-          "lineId": "Saikyo",
+          "lineId": "SaikyoKawagoe",
           "type": "in",
           "note": ""
         },
@@ -25818,7 +25823,8 @@ window.RAILWAY_DATA = {
           "Yamanote"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Agatsuma": {
       "name": "Agatsuma",
@@ -25881,7 +25887,8 @@ window.RAILWAY_DATA = {
           "Agatsuma"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Arakawa": {
       "name": "荒川线",
@@ -26023,7 +26030,8 @@ window.RAILWAY_DATA = {
           "Arakawa"
         ],
         "operatorGroup": "TOEI"
-      }
+      },
+      "serviceBoundaries": []
     },
     "BanetsuEast": {
       "name": "BanetsuEast",
@@ -26113,7 +26121,8 @@ window.RAILWAY_DATA = {
           "BanetsuEast"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": []
     },
     "BanetsuWest": {
       "name": "BanetsuWest",
@@ -26280,7 +26289,8 @@ window.RAILWAY_DATA = {
           "BanetsuWest"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": []
     },
     "ChuoSobuLocal": {
       "name": "Chuo-Sobu Local",
@@ -26454,7 +26464,7 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Shinjuku",
-          "lineId": "Saikyo",
+          "lineId": "SaikyoKawagoe",
           "type": "in",
           "note": ""
         },
@@ -26801,7 +26811,8 @@ window.RAILWAY_DATA = {
           "Daishi_Keikyu"
         ],
         "operatorGroup": "KEIKYU"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Daishi_Tobu": {
       "name": "大师线（东武）",
@@ -26840,7 +26851,8 @@ window.RAILWAY_DATA = {
           "Daishi_Tobu"
         ],
         "operatorGroup": "TOBU"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Echigo": {
       "name": "Echigo",
@@ -26965,7 +26977,8 @@ window.RAILWAY_DATA = {
           "Echigo"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Gono": {
       "name": "Gono",
@@ -27201,7 +27214,8 @@ window.RAILWAY_DATA = {
           "Hachinohe"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Hakushin": {
       "name": "白新線",
@@ -27274,7 +27288,8 @@ window.RAILWAY_DATA = {
           "Hakushin"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Haijima": {
       "name": "拜岛线",
@@ -27344,7 +27359,8 @@ window.RAILWAY_DATA = {
           "Haijima"
         ],
         "operatorGroup": "SEIBU"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Iiyama": {
       "name": "飯山線",
@@ -27448,7 +27464,8 @@ window.RAILWAY_DATA = {
           "Iiyama"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Ikebukuro": {
       "name": "Ikebukuro Line",
@@ -27524,7 +27541,7 @@ window.RAILWAY_DATA = {
       "transferStations": [
         {
           "station": "Ikebukuro",
-          "lineId": "Saikyo",
+          "lineId": "SaikyoKawagoe",
           "type": "in",
           "note": ""
         },
@@ -27696,7 +27713,8 @@ window.RAILWAY_DATA = {
           "Ishinomaki"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Ito": {
       "name": "Ito",
@@ -27924,7 +27942,8 @@ window.RAILWAY_DATA = {
           "Joetsu"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Kamaishi": {
       "name": "釜石線",
@@ -28107,7 +28126,8 @@ window.RAILWAY_DATA = {
           "Kitakami"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Karasuyama": {
       "name": "烏山線",
@@ -28170,7 +28190,8 @@ window.RAILWAY_DATA = {
           "Karasuyama"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Kashima": {
       "name": "鹿岛线",
@@ -28230,124 +28251,13 @@ window.RAILWAY_DATA = {
           "Kashima"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Kawagoe": {
       "name": "Kawagoe",
-      "nameEn": "Kawagoe Line",
+      "nameEn": "Kawagoe Line (Kawagoe–Komagawa)",
       "nameJa": "川越線",
-      "code": "JA",
-      "color": "#00ac47",
-      "operator": "JR-East",
-      "region": "Saitama Area",
-      "type": "straight",
-      "durationTotalMin": 15,
-      "branchOf": null,
-      "stations": [
-        "Omiya",
-        "Nisshin",
-        "Nishi-Omiya",
-        "Sashiogi",
-        "Minami-Furuya",
-        "Kawagoe"
-      ],
-      "durations": [
-        2,
-        2,
-        2,
-        2,
-        2,
-        2
-      ],
-      "throughServices": [
-        "KawagoeWest",
-        "Saikyo"
-      ],
-      "transferStations": [
-        {
-          "station": "Omiya",
-          "lineId": "KeihinTohoku",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Omiya",
-          "lineId": "Saikyo",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Omiya",
-          "lineId": "ShonanShinjuku",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Omiya",
-          "lineId": "Takasaki",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Omiya",
-          "lineId": "Noda",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Omiya",
-          "lineId": "NewShuttle",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Omiya",
-          "lineId": "UtsunomiyaJR",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Kawagoe",
-          "lineId": "Tojo",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Kawagoe",
-          "lineId": "KawagoeWest",
-          "type": "in",
-          "note": ""
-        }
-      ],
-      "nameZh": "埼京线・川越线",
-      "nameKo": "사이쿄선・가와고에선",
-      "serviceBoundaries": [
-        {
-          "lineId": "Saikyo",
-          "handoverStations": [
-            "Omiya"
-          ],
-          "evidence": {
-            "source": "JR East Saikyo-Kawagoe timetable: continuous Saikyo / Kawagoe operation across Omiya",
-            "confidence": "HIGH"
-          }
-        },
-        {
-          "lineId": "KawagoeWest",
-          "handoverStations": [
-            "Kawagoe"
-          ],
-          "evidence": {
-            "source": "川越線運転系統 川越駅以東/以西 直通",
-            "confidence": "HIGH"
-          }
-        }
-      ]
-    },
-    "KawagoeWest": {
-      "name": "KawagoeWest",
-      "nameEn": "Kawagoe Line (Kawagoe - Komagawa)",
-      "nameJa": "川越線（川越〜高麗川）",
       "code": "JA",
       "color": "#00ac47",
       "operator": "JR-East",
@@ -28373,7 +28283,7 @@ window.RAILWAY_DATA = {
       ],
       "throughServices": [
         "Hachiko",
-        "Kawagoe"
+        "SaikyoKawagoe"
       ],
       "transferStations": [
         {
@@ -28384,7 +28294,7 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Kawagoe",
-          "lineId": "Kawagoe",
+          "lineId": "SaikyoKawagoe",
           "type": "in",
           "note": ""
         },
@@ -28406,7 +28316,7 @@ window.RAILWAY_DATA = {
         "color": "#00ac47",
         "order": 22.1,
         "lineIds": [
-          "KawagoeWest"
+          "Kawagoe"
         ],
         "operatorGroup": "JR_EAST"
       },
@@ -28422,7 +28332,7 @@ window.RAILWAY_DATA = {
           }
         },
         {
-          "lineId": "Kawagoe",
+          "lineId": "SaikyoKawagoe",
           "handoverStations": [
             "Kawagoe"
           ],
@@ -28431,7 +28341,8 @@ window.RAILWAY_DATA = {
             "confidence": "HIGH"
           }
         }
-      ]
+      ],
+      "stationCount": 6
     },
     "KeikyuAirport": {
       "name": "KeikyuAirport",
@@ -28717,7 +28628,7 @@ window.RAILWAY_DATA = {
       "transferStations": [
         {
           "station": "Shibuya",
-          "lineId": "Saikyo",
+          "lineId": "SaikyoKawagoe",
           "type": "in",
           "note": ""
         },
@@ -28797,7 +28708,8 @@ window.RAILWAY_DATA = {
           "KeioInokashira"
         ],
         "operatorGroup": "KEIO"
-      }
+      },
+      "serviceBoundaries": []
     },
     "KeioKeibajo": {
       "name": "KeioKeibajo",
@@ -28843,7 +28755,8 @@ window.RAILWAY_DATA = {
           "KeioKeibajo"
         ],
         "operatorGroup": "KEIO"
-      }
+      },
+      "serviceBoundaries": []
     },
     "KeioMain": {
       "name": "Keio Line",
@@ -28944,7 +28857,7 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Shinjuku",
-          "lineId": "Saikyo",
+          "lineId": "SaikyoKawagoe",
           "type": "in",
           "note": ""
         },
@@ -29161,7 +29074,8 @@ window.RAILWAY_DATA = {
           "KeioSagami"
         ],
         "operatorGroup": "KEIO"
-      }
+      },
+      "serviceBoundaries": []
     },
     "KeioShin": {
       "name": "Keio New Line",
@@ -29197,7 +29111,7 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Shinjuku",
-          "lineId": "Saikyo",
+          "lineId": "SaikyoKawagoe",
           "type": "in",
           "note": ""
         },
@@ -29271,7 +29185,8 @@ window.RAILWAY_DATA = {
           "KeioShin"
         ],
         "operatorGroup": "KEIO"
-      }
+      },
+      "serviceBoundaries": []
     },
     "KeioTakao": {
       "name": "KeioTakao",
@@ -29338,7 +29253,8 @@ window.RAILWAY_DATA = {
           "KeioTakao"
         ],
         "operatorGroup": "KEIO"
-      }
+      },
+      "serviceBoundaries": []
     },
     "KeioZoo": {
       "name": "KeioZoo",
@@ -29384,7 +29300,8 @@ window.RAILWAY_DATA = {
           "KeioZoo"
         ],
         "operatorGroup": "KEIO"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Kesennuma": {
       "name": "気仙沼線",
@@ -29456,7 +29373,8 @@ window.RAILWAY_DATA = {
           "Kesennuma"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Kiryu": {
       "name": "相模线",
@@ -29530,7 +29448,8 @@ window.RAILWAY_DATA = {
           "Kiryu"
         ],
         "operatorGroup": "TOBU"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Koizumi": {
       "name": "小泉线",
@@ -29608,7 +29527,8 @@ window.RAILWAY_DATA = {
           "Koizumi"
         ],
         "operatorGroup": "TOBU"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Kokubunji": {
       "name": "Kokubunji Line",
@@ -29678,7 +29598,8 @@ window.RAILWAY_DATA = {
           "Kokubunji"
         ],
         "operatorGroup": "SEIBU"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Komii": {
       "name": "小海線",
@@ -29783,7 +29704,8 @@ window.RAILWAY_DATA = {
           "Komii"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Kounan": {
       "name": "花輪線",
@@ -29895,7 +29817,8 @@ window.RAILWAY_DATA = {
           "Kounan"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Kururi": {
       "name": "久留里线",
@@ -29964,7 +29887,8 @@ window.RAILWAY_DATA = {
           "Kururi"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Mito": {
       "name": "水户线",
@@ -30048,7 +29972,8 @@ window.RAILWAY_DATA = {
           "Mito"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Miyo": {
       "name": "弥彦线",
@@ -30106,7 +30031,8 @@ window.RAILWAY_DATA = {
           "Miyo"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Narita": {
       "name": "成田线",
@@ -30221,12 +30147,11 @@ window.RAILWAY_DATA = {
         "icon": "../images/鉄道/JR東日本/JRグループ.png",
         "order": 25,
         "lineIds": [
-          "Narita",
-          "NaritaAbikoBranch",
-          "NaritaAirportBranch"
+          "Narita"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Nikkoku": {
       "name": "鬼怒川线",
@@ -30279,7 +30204,8 @@ window.RAILWAY_DATA = {
           "Nikkoku"
         ],
         "operatorGroup": "TOBU"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Nippori_Toneri": {
       "name": "Nippori-Toneri Liner",
@@ -30389,7 +30315,8 @@ window.RAILWAY_DATA = {
           "Nippori_Toneri"
         ],
         "operatorGroup": "TOEI"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Noda": {
       "name": "野田线",
@@ -30486,7 +30413,7 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Omiya",
-          "lineId": "Saikyo",
+          "lineId": "SaikyoKawagoe",
           "type": "in",
           "note": ""
         },
@@ -30499,12 +30426,6 @@ window.RAILWAY_DATA = {
         {
           "station": "Omiya",
           "lineId": "Takasaki",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Omiya",
-          "lineId": "Kawagoe",
           "type": "in",
           "note": ""
         },
@@ -30572,7 +30493,8 @@ window.RAILWAY_DATA = {
           "Noda"
         ],
         "operatorGroup": "TOBU"
-      }
+      },
+      "serviceBoundaries": []
     },
     "OdakyuTama": {
       "name": "OdakyuTama",
@@ -30765,7 +30687,8 @@ window.RAILWAY_DATA = {
           "Ofunato"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Oga": {
       "name": "大船渡线",
@@ -30822,7 +30745,8 @@ window.RAILWAY_DATA = {
           "Oga"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Ogose": {
       "name": "越生线",
@@ -30880,7 +30804,8 @@ window.RAILWAY_DATA = {
           "Ogose"
         ],
         "operatorGroup": "TOBU"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Oito": {
       "name": "大糸线",
@@ -30992,7 +30917,8 @@ window.RAILWAY_DATA = {
           "Oito"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Ominato": {
       "name": "大凑线",
@@ -31047,7 +30973,8 @@ window.RAILWAY_DATA = {
           "Ominato"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": []
     },
     "OuMain": {
       "name": "奥羽本线",
@@ -31398,7 +31325,8 @@ window.RAILWAY_DATA = {
           "RikutoEast"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": []
     },
     "RikutsuWest": {
       "name": "陆羽西线",
@@ -31495,7 +31423,8 @@ window.RAILWAY_DATA = {
           "RikutsuWest"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Rinkai": {
       "name": "Rinkai",
@@ -31530,7 +31459,7 @@ window.RAILWAY_DATA = {
         2
       ],
       "throughServices": [
-        "Saikyo"
+        "SaikyoKawagoe"
       ],
       "transferStations": [
         {
@@ -31547,7 +31476,7 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Osaki",
-          "lineId": "Saikyo",
+          "lineId": "SaikyoKawagoe",
           "type": "in",
           "note": ""
         },
@@ -31588,7 +31517,7 @@ window.RAILWAY_DATA = {
       },
       "serviceBoundaries": [
         {
-          "lineId": "Saikyo",
+          "lineId": "SaikyoKawagoe",
           "handoverStations": [
             "Osaki"
           ],
@@ -31698,7 +31627,8 @@ window.RAILWAY_DATA = {
           "Ryomo"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Sagami": {
       "name": "相模线",
@@ -31823,7 +31753,8 @@ window.RAILWAY_DATA = {
           "Sagami"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Sano": {
       "name": "相模线",
@@ -31905,7 +31836,8 @@ window.RAILWAY_DATA = {
           "Sano"
         ],
         "operatorGroup": "TOBU"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Yamada": {
       "name": "山田线",
@@ -31981,7 +31913,8 @@ window.RAILWAY_DATA = {
           "Yamada"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Seibu_Sayama": {
       "name": "狭山线",
@@ -32029,7 +31962,8 @@ window.RAILWAY_DATA = {
           "Seibu_Sayama"
         ],
         "operatorGroup": "SEIBU"
-      }
+      },
+      "serviceBoundaries": []
     },
     "SeibuToshima": {
       "name": "SeibuToshima",
@@ -32093,7 +32027,8 @@ window.RAILWAY_DATA = {
           "SeibuToshima"
         ],
         "operatorGroup": "SEIBU"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Senseki": {
       "name": "仙石线",
@@ -32227,7 +32162,8 @@ window.RAILWAY_DATA = {
           "Senseki"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": []
     },
     "SensekiTohoku": {
       "name": "仙石东北线",
@@ -32338,7 +32274,8 @@ window.RAILWAY_DATA = {
           "SensekiTohoku"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Senzan": {
       "name": "仙山线",
@@ -32422,25 +32359,7 @@ window.RAILWAY_DATA = {
           "note": ""
         },
         {
-          "station": "Uzen-Chitose",
-          "lineId": "Yamagata",
-          "type": "in",
-          "note": ""
-        },
-        {
           "station": "Kita-Yamagata",
-          "lineId": "Yamagata",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Kita-Yamagata",
-          "lineId": "Yamagata",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Yamagata",
           "lineId": "Yamagata",
           "type": "in",
           "note": ""
@@ -32467,7 +32386,8 @@ window.RAILWAY_DATA = {
           "Senzan"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Shinetsu": {
       "name": "信越本线",
@@ -33115,11 +33035,11 @@ window.RAILWAY_DATA = {
         "icon": "../images/鉄道/JR東日本/JRグループ.png",
         "order": 64,
         "lineIds": [
-          "Suigun",
-          "SuigunBranch"
+          "Suigun"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": []
     },
     "SuigunBranch": {
       "name": "水郡线支线",
@@ -33164,7 +33084,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "水郡线",
-      "nameKo": "스이군선"
+      "nameKo": "스이군선",
+      "serviceBoundaries": []
     },
     "Tazawako": {
       "name": "田泽湖线",
@@ -33319,7 +33240,8 @@ window.RAILWAY_DATA = {
           "Tobu_Kameido"
         ],
         "operatorGroup": "TOBU"
-      }
+      },
+      "serviceBoundaries": []
     },
     "TohokuMain": {
       "name": "Tohoku Main Line",
@@ -33429,12 +33351,6 @@ window.RAILWAY_DATA = {
         {
           "station": "Koriyama",
           "lineId": "BanetsuWest",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Fukushima",
-          "lineId": "Yamagata",
           "type": "in",
           "note": ""
         },
@@ -33652,7 +33568,7 @@ window.RAILWAY_DATA = {
       "transferStations": [
         {
           "station": "Ikebukuro",
-          "lineId": "Saikyo",
+          "lineId": "SaikyoKawagoe",
           "type": "in",
           "note": ""
         },
@@ -33706,7 +33622,7 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Kawagoe",
-          "lineId": "Kawagoe",
+          "lineId": "SaikyoKawagoe",
           "type": "in",
           "note": ""
         },
@@ -33846,7 +33762,8 @@ window.RAILWAY_DATA = {
           "TokyuTamagawa"
         ],
         "operatorGroup": "TOKYU"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Tsugaru": {
       "name": "Tsugaru",
@@ -33934,7 +33851,8 @@ window.RAILWAY_DATA = {
           "Tsugaru"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": []
     },
     "TsukubaExpress": {
       "name": "Tsukuba Express",
@@ -34100,7 +34018,8 @@ window.RAILWAY_DATA = {
           "TsukubaExpress"
         ],
         "operatorGroup": "TSUKUBA_EXPRESS"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Uchibo": {
       "name": "Uchibo",
@@ -34468,7 +34387,8 @@ window.RAILWAY_DATA = {
           "Uetsu"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": []
     },
     "TobuUtsunomiya": {
       "name": "TobuUtsunomiya",
@@ -34525,7 +34445,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "宇都宫线",
-      "nameKo": "우츠노미야선"
+      "nameKo": "우츠노미야선",
+      "serviceBoundaries": []
     },
     "Yamagata": {
       "name": "Yamagata",
@@ -34675,7 +34596,8 @@ window.RAILWAY_DATA = {
           "Yamagata"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": []
     },
     "YokohamaGreen": {
       "name": "YokohamaGreen",
@@ -34760,7 +34682,8 @@ window.RAILWAY_DATA = {
           "YokohamaGreen"
         ],
         "operatorGroup": "YOKOHAMA_MUNICIPAL"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Yonezawa": {
       "name": "Yonezawa",
@@ -34832,12 +34755,6 @@ window.RAILWAY_DATA = {
           "note": ""
         },
         {
-          "station": "Yonezawa",
-          "lineId": "Yamagata",
-          "type": "in",
-          "note": ""
-        },
-        {
           "station": "Echigo-Iwasawa",
           "lineId": "Iiyama",
           "type": "in",
@@ -34871,7 +34788,8 @@ window.RAILWAY_DATA = {
           "Yonezawa"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": []
     },
     "Yurakucho_Seibu": {
       "name": "有乐町线",
@@ -35103,7 +35021,7 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Shinjuku",
-          "lineId": "Saikyo",
+          "lineId": "SaikyoKawagoe",
           "type": "in",
           "note": ""
         },
@@ -35319,7 +35237,8 @@ window.RAILWAY_DATA = {
           "SeibuTamagawa"
         ],
         "operatorGroup": "SEIBU"
-      }
+      },
+      "serviceBoundaries": []
     },
     "TobuNikko": {
       "name": "TobuNikko",
@@ -35827,7 +35746,8 @@ window.RAILWAY_DATA = {
           "Yokohama"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": []
     },
     "TokyuOimachi": {
       "nameJa": "東急大井町線",
@@ -36121,7 +36041,9 @@ window.RAILWAY_DATA = {
           "TokyuIkegami"
         ],
         "operatorGroup": "TOKYU"
-      }
+      },
+      "throughServices": [],
+      "serviceBoundaries": []
     },
     "TokyuSetagaya": {
       "nameJa": "東急世田谷線",
@@ -36165,7 +36087,9 @@ window.RAILWAY_DATA = {
           "TokyuSetagaya"
         ],
         "operatorGroup": "TOKYU"
-      }
+      },
+      "throughServices": [],
+      "serviceBoundaries": []
     },
     "TokyuKodomonokuni": {
       "nameJa": "東急こどもの国線",
@@ -36208,7 +36132,9 @@ window.RAILWAY_DATA = {
           "TokyuKodomonokuni"
         ],
         "operatorGroup": "TOKYU"
-      }
+      },
+      "throughServices": [],
+      "serviceBoundaries": []
     },
     "Hachiko": {
       "nameJa": "八高線",
@@ -36269,7 +36195,7 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Komagawa",
-          "lineId": "KawagoeWest",
+          "lineId": "Kawagoe",
           "type": "in",
           "note": ""
         },
@@ -36320,7 +36246,7 @@ window.RAILWAY_DATA = {
       "nameKo": "하치코선",
       "name": "八高線",
       "throughServices": [
-        "KawagoeWest"
+        "Kawagoe"
       ],
       "presentation": {
         "code": "HAC",
@@ -36338,7 +36264,7 @@ window.RAILWAY_DATA = {
       },
       "serviceBoundaries": [
         {
-          "lineId": "KawagoeWest",
+          "lineId": "Kawagoe",
           "handoverStations": [
             "Komagawa"
           ],
@@ -36475,7 +36401,9 @@ window.RAILWAY_DATA = {
           "KeiseiKanamachi"
         ],
         "operatorGroup": "KEISEI"
-      }
+      },
+      "throughServices": [],
+      "serviceBoundaries": []
     },
     "KeiseiChiba": {
       "nameJa": "京成千葉線",
@@ -36526,7 +36454,9 @@ window.RAILWAY_DATA = {
           "KeiseiChiba"
         ],
         "operatorGroup": "KEISEI"
-      }
+      },
+      "throughServices": [],
+      "serviceBoundaries": []
     },
     "KeiseiChihara": {
       "nameJa": "京成千原線",
@@ -36566,7 +36496,9 @@ window.RAILWAY_DATA = {
           "KeiseiChihara"
         ],
         "operatorGroup": "KEISEI"
-      }
+      },
+      "throughServices": [],
+      "serviceBoundaries": []
     },
     "NaritaSkyAccess": {
       "nameJa": "成田スカイアクセス線",
@@ -36840,7 +36772,7 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Omiya",
-          "lineId": "Saikyo",
+          "lineId": "SaikyoKawagoe",
           "type": "in",
           "note": ""
         },
@@ -36853,12 +36785,6 @@ window.RAILWAY_DATA = {
         {
           "station": "Omiya",
           "lineId": "Takasaki",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Omiya",
-          "lineId": "Kawagoe",
           "type": "in",
           "note": ""
         },
@@ -36891,7 +36817,9 @@ window.RAILWAY_DATA = {
           "NewShuttle"
         ],
         "operatorGroup": "SAITAMA_NEW_URBAN_TRANSIT"
-      }
+      },
+      "throughServices": [],
+      "serviceBoundaries": []
     },
     "TokyoMonorail": {
       "nameJa": "東京モノレール羽田空港線",
@@ -36972,7 +36900,9 @@ window.RAILWAY_DATA = {
           "TokyoMonorail"
         ],
         "operatorGroup": "TOKYO_MONORAIL"
-      }
+      },
+      "throughServices": [],
+      "serviceBoundaries": []
     },
     "SobuMain": {
       "nameJa": "総武本線",
@@ -37058,7 +36988,9 @@ window.RAILWAY_DATA = {
           "SobuMain"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "throughServices": [],
+      "serviceBoundaries": []
     },
     "ChuoMain": {
       "nameJa": "中央本線",
@@ -37147,8 +37079,7 @@ window.RAILWAY_DATA = {
         "color": "#007ac0",
         "order": 20,
         "lineIds": [
-          "ChuoMain",
-          "ChuoTatsuno"
+          "ChuoMain"
         ],
         "operatorGroup": "JR_EAST"
       },
@@ -37745,7 +37676,9 @@ window.RAILWAY_DATA = {
       ],
       "nameZh": "东海道本线",
       "nameKo": "도카이도 본선",
-      "name": "東海道本線"
+      "name": "東海道本線",
+      "throughServices": [],
+      "serviceBoundaries": []
     },
     "Tadami": {
       "name": "只见线",
@@ -37863,7 +37796,8 @@ window.RAILWAY_DATA = {
           "Tadami"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": []
     },
     "UtsunomiyaJR": {
       "name": "Utsunomiya Line",
@@ -38060,7 +37994,7 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Akabane",
-          "lineId": "Saikyo",
+          "lineId": "SaikyoKawagoe",
           "type": "in",
           "note": ""
         },
@@ -38114,7 +38048,7 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Omiya",
-          "lineId": "Saikyo",
+          "lineId": "SaikyoKawagoe",
           "type": "in",
           "note": ""
         },
@@ -38127,12 +38061,6 @@ window.RAILWAY_DATA = {
         {
           "station": "Omiya",
           "lineId": "Takasaki",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Omiya",
-          "lineId": "Kawagoe",
           "type": "in",
           "note": ""
         },
@@ -38256,7 +38184,8 @@ window.RAILWAY_DATA = {
       "throughServices": [],
       "transferStations": [],
       "nameZh": "丸之内线（方南町支线）",
-      "nameKo": "마루노우치선（호난초 지선）"
+      "nameKo": "마루노우치선（호난초 지선）",
+      "serviceBoundaries": []
     },
     "ChiyodaBranch": {
       "name": "ChiyodaBranch",
@@ -38293,7 +38222,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "千代田线（北绫濑支线）",
-      "nameKo": "치요다선（키타아야세 지선）"
+      "nameKo": "치요다선（키타아야세 지선）",
+      "serviceBoundaries": []
     },
     "ChuoTatsuno": {
       "name": "ChuoTatsuno",
@@ -38363,7 +38293,8 @@ window.RAILWAY_DATA = {
       "throughServices": [],
       "transferStations": [],
       "nameZh": "鹤见线",
-      "nameKo": "츠루미선"
+      "nameKo": "츠루미선",
+      "serviceBoundaries": []
     },
     "TsurumiOkawa": {
       "name": "TsurumiOkawa",
@@ -38387,7 +38318,8 @@ window.RAILWAY_DATA = {
       "throughServices": [],
       "transferStations": [],
       "nameZh": "鹤见线",
-      "nameKo": "츠루미선"
+      "nameKo": "츠루미선",
+      "serviceBoundaries": []
     },
     "JobanMain": {
       "name": "Joban",
@@ -38530,7 +38462,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "常磐线",
-      "nameKo": "조반선"
+      "nameKo": "조반선",
+      "serviceBoundaries": []
     },
     "Togane": {
       "name": "Togane",
@@ -38581,7 +38514,8 @@ window.RAILWAY_DATA = {
           "Togane"
         ],
         "operatorGroup": "JR_EAST"
-      }
+      },
+      "serviceBoundaries": []
     },
     "NaritaAbikoBranch": {
       "name": "NaritaAbikoBranch",
@@ -38697,7 +38631,8 @@ window.RAILWAY_DATA = {
           "type": "in",
           "note": ""
         }
-      ]
+      ],
+      "serviceBoundaries": []
     },
     "NambuBranch": {
       "name": "NambuBranch",
@@ -38740,7 +38675,8 @@ window.RAILWAY_DATA = {
           "type": "in",
           "note": ""
         }
-      ]
+      ],
+      "serviceBoundaries": []
     },
     "UenoTokyo": {
       "name": "UenoTokyo",
@@ -38795,7 +38731,7 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Omiya",
-          "lineId": "Saikyo",
+          "lineId": "SaikyoKawagoe",
           "type": "in",
           "note": ""
         },
@@ -39096,7 +39032,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "千叶单轨1号线",
-      "nameKo": "치바 어반 모노레일 1호선"
+      "nameKo": "치바 어반 모노레일 1호선",
+      "serviceBoundaries": []
     },
     "ChibaMonorail2": {
       "name": "ChibaMonorail2",
@@ -39186,7 +39123,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "千叶单轨2号线",
-      "nameKo": "치바 어반 모노레일 2호선"
+      "nameKo": "치바 어반 모노레일 2호선",
+      "serviceBoundaries": []
     },
     "ShonanMonorail": {
       "name": "ShonanMonorail",
@@ -39259,7 +39197,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "湘南单轨",
-      "nameKo": "쇼난 모노레일"
+      "nameKo": "쇼난 모노레일",
+      "serviceBoundaries": []
     },
     "TohokuShinkansen": {
       "name": "TohokuShinkansen",
@@ -39446,7 +39385,7 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Omiya",
-          "lineId": "Saikyo",
+          "lineId": "SaikyoKawagoe",
           "type": "in",
           "note": ""
         },
@@ -39459,12 +39398,6 @@ window.RAILWAY_DATA = {
         {
           "station": "Omiya",
           "lineId": "Takasaki",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Omiya",
-          "lineId": "Kawagoe",
           "type": "in",
           "note": ""
         },
@@ -39638,7 +39571,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "东北新干线",
-      "nameKo": "도호쿠 신칸센"
+      "nameKo": "도호쿠 신칸센",
+      "serviceBoundaries": []
     },
     "JoetsuShinkansen": {
       "name": "JoetsuShinkansen",
@@ -39689,7 +39623,7 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Omiya",
-          "lineId": "Saikyo",
+          "lineId": "SaikyoKawagoe",
           "type": "in",
           "note": ""
         },
@@ -39702,12 +39636,6 @@ window.RAILWAY_DATA = {
         {
           "station": "Omiya",
           "lineId": "Takasaki",
-          "type": "in",
-          "note": ""
-        },
-        {
-          "station": "Omiya",
-          "lineId": "Kawagoe",
           "type": "in",
           "note": ""
         },
@@ -39815,7 +39743,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "上越新干线",
-      "nameKo": "조에쓰 신칸센"
+      "nameKo": "조에쓰 신칸센",
+      "serviceBoundaries": []
     },
     "HokurikuShinkansen": {
       "name": "HokurikuShinkansen",
@@ -39932,7 +39861,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "北陆新干线",
-      "nameKo": "호쿠리쿠 신칸센"
+      "nameKo": "호쿠리쿠 신칸센",
+      "serviceBoundaries": []
     },
     "YamagataShinkansen": {
       "name": "YamagataShinkansen",
@@ -40083,7 +40013,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "山形新干线",
-      "nameKo": "야마가타 신칸센"
+      "nameKo": "야마가타 신칸센",
+      "serviceBoundaries": []
     },
     "AkitaShinkansen": {
       "name": "AkitaShinkansen",
@@ -40178,7 +40109,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "秋田新干线",
-      "nameKo": "아키타 신칸센"
+      "nameKo": "아키타 신칸센",
+      "serviceBoundaries": []
     },
     "HokkaidoShinkansen": {
       "name": "HokkaidoShinkansen",
@@ -40213,7 +40145,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "北海道新干线",
-      "nameKo": "홋카이도 신칸센"
+      "nameKo": "홋카이도 신칸센",
+      "serviceBoundaries": []
     },
     "TokaidoShinkansen": {
       "name": "TokaidoShinkansen",
@@ -40442,7 +40375,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "东海道新干线",
-      "nameKo": "도카이도 신칸센"
+      "nameKo": "도카이도 신칸센",
+      "serviceBoundaries": []
     },
     "SanyoShinkansen": {
       "name": "SanyoShinkansen",
@@ -40499,7 +40433,8 @@ window.RAILWAY_DATA = {
       "throughServices": [],
       "transferStations": [],
       "nameZh": "山阳新干线",
-      "nameKo": "산요 신칸센"
+      "nameKo": "산요 신칸센",
+      "serviceBoundaries": []
     },
     "KyushuShinkansen": {
       "name": "KyushuShinkansen",
@@ -40543,7 +40478,8 @@ window.RAILWAY_DATA = {
       "throughServices": [],
       "transferStations": [],
       "nameZh": "九州新干线",
-      "nameKo": "규슈 신칸센"
+      "nameKo": "규슈 신칸센",
+      "serviceBoundaries": []
     },
     "NishiKyushuShinkansen": {
       "name": "NishiKyushuShinkansen",
@@ -40573,7 +40509,8 @@ window.RAILWAY_DATA = {
       "throughServices": [],
       "transferStations": [],
       "nameZh": "西九州新干线",
-      "nameKo": "니시규슈 신칸센"
+      "nameKo": "니시규슈 신칸센",
+      "serviceBoundaries": []
     },
     "OsakaLoop": {
       "name": "OsakaLoop",
@@ -40638,12 +40575,6 @@ window.RAILWAY_DATA = {
           "lineId": "TokaidoKansai",
           "type": "in",
           "note": "同站换乘"
-        },
-        {
-          "station": "Osaka",
-          "lineId": "OsakaLoop",
-          "type": "out",
-          "note": "环状线内外回り"
         },
         {
           "station": "Tennoji",
@@ -41532,7 +41463,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "湖西线",
-      "nameKo": "고세이선"
+      "nameKo": "고세이선",
+      "serviceBoundaries": []
     },
     "SaninMain": {
       "name": "SaninMain",
@@ -41904,16 +41836,11 @@ window.RAILWAY_DATA = {
           "lineId": "Fukuchiyama",
           "type": "in/out",
           "note": "福知山駅 福知山線(宝塚線)・丹波縦断"
-        },
-        {
-          "station": "Tottori",
-          "lineId": "SaninMain",
-          "type": "in/out",
-          "note": "鳥取駅 因美線乗換(参考)"
         }
       ],
       "nameZh": "山阴本线(嵯峨野线)",
-      "nameKo": "산인 본선(사가노선)"
+      "nameKo": "산인 본선(사가노선)",
+      "serviceBoundaries": []
     },
     "Fukuchiyama": {
       "name": "Fukuchiyama",
@@ -41990,7 +41917,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "福知山线(JR宝塚线)",
-      "nameKo": "후쿠치야마선(JR 다카라즈카선)"
+      "nameKo": "후쿠치야마선(JR 다카라즈카선)",
+      "serviceBoundaries": []
     },
     "OsakaHigashi": {
       "name": "OsakaHigashi",
@@ -42142,7 +42070,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "播但线",
-      "nameKo": "반탄선"
+      "nameKo": "반탄선",
+      "serviceBoundaries": []
     },
     "HimejiLine": {
       "name": "HimejiLine",
@@ -42247,7 +42176,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "姬新线",
-      "nameKo": "기신선"
+      "nameKo": "기신선",
+      "serviceBoundaries": []
     },
     "KakogawaLine": {
       "name": "KakogawaLine",
@@ -42316,7 +42246,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "加古川线",
-      "nameKo": "카코가와선"
+      "nameKo": "카코가와선",
+      "serviceBoundaries": []
     },
     "Gakkentoshi": {
       "name": "Gakkentoshi",
@@ -43468,18 +43399,6 @@ window.RAILWAY_DATA = {
           "lineId": "Hohi",
           "type": "out",
           "note": "大分駅 豊肥本线"
-        },
-        {
-          "station": "Hita",
-          "lineId": "Kyudai",
-          "type": "out",
-          "note": "日田駅 久大本线关键站"
-        },
-        {
-          "station": "Yufuin",
-          "lineId": "Kyudai",
-          "type": "out",
-          "note": "由布院駅 观光特急停靠"
         }
       ],
       "nameZh": "久大本线",
@@ -43614,12 +43533,6 @@ window.RAILWAY_DATA = {
           "lineId": "Kyudai",
           "type": "out",
           "note": "大分駅 久大本线"
-        },
-        {
-          "station": "Aso",
-          "lineId": "Hohi",
-          "type": "out",
-          "note": "阿蘇駅 豊肥本线观光站"
         }
       ],
       "nameZh": "丰肥本线",
@@ -43702,7 +43615,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "篠栗线",
-      "nameKo": "사사구리 선"
+      "nameKo": "사사구리 선",
+      "serviceBoundaries": []
     },
     "Misumi": {
       "name": "Misumi",
@@ -43755,7 +43669,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "三角线",
-      "nameKo": "미스미 선"
+      "nameKo": "미스미 선",
+      "serviceBoundaries": []
     },
     "IbusukiMakurazaki": {
       "name": "IbusukiMakurazaki",
@@ -43857,16 +43772,11 @@ window.RAILWAY_DATA = {
           "lineId": "KagoshimaMain",
           "type": "out",
           "note": "鹿児島中央駅 鹿儿岛本线"
-        },
-        {
-          "station": "Ibusuki",
-          "lineId": "IbusukiMakurazaki",
-          "type": "out",
-          "note": "指宿駅 指宿枕崎线关键站"
         }
       ],
       "nameZh": "指宿枕崎线",
-      "nameKo": "이부스키마쿠라자키 선"
+      "nameKo": "이부스키마쿠라자키 선",
+      "serviceBoundaries": []
     },
     "HakataMinami": {
       "name": "HakataMinami",
@@ -43915,7 +43825,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "博多南线",
-      "nameKo": "하카타미나미 선"
+      "nameKo": "하카타미나미 선",
+      "serviceBoundaries": []
     },
     "KashiiLine": {
       "name": "KashiiLine",
@@ -43980,7 +43891,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "香椎线",
-      "nameKo": "카시이 선"
+      "nameKo": "카시이 선",
+      "serviceBoundaries": []
     },
     "Sasebo": {
       "name": "Sasebo",
@@ -44041,7 +43953,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "佐世保线",
-      "nameKo": "사세보 선"
+      "nameKo": "사세보 선",
+      "serviceBoundaries": []
     },
     "Ako": {
       "name": "Ako",
@@ -44111,7 +44024,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "赤穗线",
-      "nameKo": "아코선"
+      "nameKo": "아코선",
+      "serviceBoundaries": []
     },
     "KiseiWest": {
       "name": "KiseiWest",
@@ -44245,7 +44159,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "纪势本线（纪伊国线）",
-      "nameKo": "키세이 본선"
+      "nameKo": "키세이 본선",
+      "serviceBoundaries": []
     },
     "Maizuru": {
       "name": "Maizuru",
@@ -44283,7 +44198,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "舞鹤线",
-      "nameKo": "마이즈루선"
+      "nameKo": "마이즈루선",
+      "serviceBoundaries": []
     },
     "Kure": {
       "name": "Kure",
@@ -44389,7 +44305,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "吴线",
-      "nameKo": "쿠레선"
+      "nameKo": "쿠레선",
+      "serviceBoundaries": []
     },
     "Kabe": {
       "name": "Kabe",
@@ -44439,7 +44356,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "可部线",
-      "nameKo": "카베선"
+      "nameKo": "카베선",
+      "serviceBoundaries": []
     },
     "Yamaguchi": {
       "name": "Yamaguchi",
@@ -44533,7 +44451,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "山口线",
-      "nameKo": "야마구치선"
+      "nameKo": "야마구치선",
+      "serviceBoundaries": []
     },
     "Iwakado": {
       "name": "Iwakado",
@@ -44609,7 +44528,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "岩德线",
-      "nameKo": "이와쿠치선"
+      "nameKo": "이와쿠치선",
+      "serviceBoundaries": []
     },
     "Ube": {
       "name": "Ube",
@@ -44683,7 +44603,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "宇部线",
-      "nameKo": "우베선"
+      "nameKo": "우베선",
+      "serviceBoundaries": []
     },
     "Chikuho": {
       "name": "Chikuho",
@@ -44764,7 +44685,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "筑丰本线",
-      "nameKo": "치쿠호 본선"
+      "nameKo": "치쿠호 본선",
+      "serviceBoundaries": []
     },
     "Gotoji": {
       "name": "Gotoji",
@@ -44803,7 +44725,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "后藤寺线",
-      "nameKo": "고토지 선"
+      "nameKo": "고토지 선",
+      "serviceBoundaries": []
     },
     "Omura": {
       "name": "Omura",
@@ -44860,7 +44783,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "大村线",
-      "nameKo": "오무라 선"
+      "nameKo": "오무라 선",
+      "serviceBoundaries": []
     },
     "Nichinan": {
       "name": "Nichinan",
@@ -44943,7 +44867,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "日南线",
-      "nameKo": "니치난 선"
+      "nameKo": "니치난 선",
+      "serviceBoundaries": []
     },
     "Karatsu": {
       "name": "Karatsu",
@@ -45160,7 +45085,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "宫崎机场线",
-      "nameKo": "미야자키 공항선"
+      "nameKo": "미야자키 공항선",
+      "serviceBoundaries": []
     },
     "Kitto": {
       "name": "Kitto",
@@ -45221,7 +45147,8 @@ window.RAILWAY_DATA = {
         }
       ],
       "nameZh": "吉都线",
-      "nameKo": "킷토 선"
+      "nameKo": "킷토 선",
+      "serviceBoundaries": []
     },
     "TokyuShinYokohama": {
       "nameJa": "東急新横浜線",
@@ -45350,7 +45277,7 @@ window.RAILWAY_DATA = {
       ],
       "throughServices": [
         "SotetsuShin-Yokohama",
-        "Saikyo"
+        "SaikyoKawagoe"
       ],
       "transferStations": [
         {
@@ -45385,7 +45312,7 @@ window.RAILWAY_DATA = {
         },
         {
           "station": "Osaki",
-          "lineId": "Saikyo",
+          "lineId": "SaikyoKawagoe",
           "type": "in",
           "note": ""
         }
@@ -45402,7 +45329,7 @@ window.RAILWAY_DATA = {
           }
         },
         {
-          "lineId": "Saikyo",
+          "lineId": "SaikyoKawagoe",
           "handoverStations": [
             "Osaki"
           ],
@@ -48495,10 +48422,9 @@ window.RAILWAY_DATA = {
   "stationLines": {
     "Omiya": [
       "KeihinTohoku",
-      "Saikyo",
+      "SaikyoKawagoe",
       "ShonanShinjuku",
       "Takasaki",
-      "Kawagoe",
       "Noda",
       "NewShuttle",
       "UtsunomiyaJR",
@@ -48543,7 +48469,7 @@ window.RAILWAY_DATA = {
     ],
     "Akabane": [
       "KeihinTohoku",
-      "Saikyo",
+      "SaikyoKawagoe",
       "ShonanShinjuku",
       "Takasaki",
       "UtsunomiyaJR",
@@ -48840,7 +48766,7 @@ window.RAILWAY_DATA = {
     ],
     "Shinjuku": [
       "ChuoRapid",
-      "Saikyo",
+      "SaikyoKawagoe",
       "ShonanShinjuku",
       "Marunouchi",
       "Shinjuku",
@@ -48928,19 +48854,19 @@ window.RAILWAY_DATA = {
       "ChuoMain"
     ],
     "Osaki": [
-      "Saikyo",
+      "SaikyoKawagoe",
       "ShonanShinjuku",
       "Yamanote",
       "Rinkai"
     ],
     "Ebisu": [
-      "Saikyo",
+      "SaikyoKawagoe",
       "ShonanShinjuku",
       "Hibiya",
       "Yamanote"
     ],
     "Shibuya": [
-      "Saikyo",
+      "SaikyoKawagoe",
       "ShonanShinjuku",
       "Ginza",
       "Hanzomon",
@@ -48951,7 +48877,7 @@ window.RAILWAY_DATA = {
       "KeioInokashira"
     ],
     "Ikebukuro": [
-      "Saikyo",
+      "SaikyoKawagoe",
       "ShonanShinjuku",
       "Marunouchi",
       "Yurakucho",
@@ -48961,25 +48887,25 @@ window.RAILWAY_DATA = {
       "Tojo"
     ],
     "Itabashi": [
-      "Saikyo"
+      "SaikyoKawagoe"
     ],
     "Jujo": [
-      "Saikyo"
+      "SaikyoKawagoe"
     ],
     "Kita-Akabane": [
-      "Saikyo"
+      "SaikyoKawagoe"
     ],
     "Toda": [
-      "Saikyo"
+      "SaikyoKawagoe"
     ],
     "Toda-Koen": [
-      "Saikyo"
+      "SaikyoKawagoe"
     ],
     "Kita-Toda": [
-      "Saikyo"
+      "SaikyoKawagoe"
     ],
     "Naka-Urawa": [
-      "Saikyo"
+      "SaikyoKawagoe"
     ],
     "Mikawashima": [
       "Joban"
@@ -49100,7 +49026,7 @@ window.RAILWAY_DATA = {
     ],
     "Musashi-Urawa": [
       "Musashino",
-      "Saikyo"
+      "SaikyoKawagoe"
     ],
     "Higashi-Urawa": [
       "Musashino"
@@ -52344,36 +52270,36 @@ window.RAILWAY_DATA = {
       "Kashima"
     ],
     "Nisshin": [
-      "Kawagoe"
+      "SaikyoKawagoe"
     ],
     "Nishi-Omiya": [
-      "Kawagoe"
+      "SaikyoKawagoe"
     ],
     "Sashiogi": [
-      "Kawagoe"
+      "SaikyoKawagoe"
     ],
     "Minami-Furuya": [
-      "Kawagoe"
+      "SaikyoKawagoe"
     ],
     "Kawagoe": [
+      "SaikyoKawagoe",
       "Kawagoe",
-      "KawagoeWest",
       "Tojo"
     ],
     "Nishi-Kawagoe": [
-      "KawagoeWest"
+      "Kawagoe"
     ],
     "Matoba": [
-      "KawagoeWest"
+      "Kawagoe"
     ],
     "Kasahata": [
-      "KawagoeWest"
+      "Kawagoe"
     ],
     "Musashi-Takahagi": [
-      "KawagoeWest"
+      "Kawagoe"
     ],
     "Komagawa": [
-      "KawagoeWest",
+      "Kawagoe",
       "Hachiko"
     ],
     "Kokuji": [
@@ -56227,16 +56153,16 @@ window.RAILWAY_DATA = {
       "Oedo"
     ],
     "Ukimafunado": [
-      "Saikyo"
+      "SaikyoKawagoe"
     ],
     "Minami-Yono": [
-      "Saikyo"
+      "SaikyoKawagoe"
     ],
     "Yono-Hommachi": [
-      "Saikyo"
+      "SaikyoKawagoe"
     ],
     "Kita-Yono": [
-      "Saikyo"
+      "SaikyoKawagoe"
     ],
     "Ippommatsu": [
       "Ogose"
@@ -60733,27 +60659,6 @@ window.RAILWAY_DATA = {
       "Nishi-Hachioji": 22,
       "Takao": 23
     },
-    "Saikyo": {
-      "Osaki": 0,
-      "Ebisu": 1,
-      "Shibuya": 2,
-      "Shinjuku": 3,
-      "Ikebukuro": 4,
-      "Itabashi": 5,
-      "Jujo": 6,
-      "Akabane": 7,
-      "Kita-Akabane": 8,
-      "Ukimafunado": 9,
-      "Toda-Koen": 10,
-      "Toda": 11,
-      "Kita-Toda": 12,
-      "Musashi-Urawa": 13,
-      "Naka-Urawa": 14,
-      "Minami-Yono": 15,
-      "Yono-Hommachi": 16,
-      "Kita-Yono": 17,
-      "Omiya": 18
-    },
     "Joban": {
       "Shinagawa": 0,
       "Shimbashi": 1,
@@ -62180,14 +62085,6 @@ window.RAILWAY_DATA = {
       "Kashima-Soccer-Stadium": 6
     },
     "Kawagoe": {
-      "Omiya": 0,
-      "Nisshin": 1,
-      "Nishi-Omiya": 2,
-      "Sashiogi": 3,
-      "Minami-Furuya": 4,
-      "Kawagoe": 5
-    },
-    "KawagoeWest": {
       "Kawagoe": 0,
       "Nishi-Kawagoe": 1,
       "Matoba": 2,
@@ -65653,6 +65550,32 @@ window.RAILWAY_DATA = {
       "Kyomachi-Onsen": 14,
       "Tsurumaru": 15,
       "Yoshimatsu": 16
+    },
+    "SaikyoKawagoe": {
+      "Osaki": 0,
+      "Ebisu": 1,
+      "Shibuya": 2,
+      "Shinjuku": 3,
+      "Ikebukuro": 4,
+      "Itabashi": 5,
+      "Jujo": 6,
+      "Akabane": 7,
+      "Kita-Akabane": 8,
+      "Ukimafunado": 9,
+      "Toda-Koen": 10,
+      "Toda": 11,
+      "Kita-Toda": 12,
+      "Musashi-Urawa": 13,
+      "Naka-Urawa": 14,
+      "Minami-Yono": 15,
+      "Yono-Hommachi": 16,
+      "Kita-Yono": 17,
+      "Omiya": 18,
+      "Nisshin": 19,
+      "Nishi-Omiya": 20,
+      "Sashiogi": 21,
+      "Minami-Furuya": 22,
+      "Kawagoe": 23
     }
   },
   "line_types": {
@@ -65660,7 +65583,6 @@ window.RAILWAY_DATA = {
     "SobuRapid": "rapid",
     "Joban": "rapid",
     "JobanLocal": "local",
-    "Saikyo": "rapid",
     "ShonanShinjuku": "rapid",
     "Tokaido": "rapid",
     "Yokosuka": "rapid",
@@ -65671,13 +65593,13 @@ window.RAILWAY_DATA = {
     "Ome": "rapid",
     "Itsukaichi": "rapid",
     "Kawagoe": "rapid",
-    "KawagoeWest": "rapid",
     "Nambu": "rapid",
     "Yokohama": "rapid",
     "Musashino": "rapid",
     "Keiyo": "rapid",
     "ChuoSobuLocal": "local",
-    "Negishi": "rapid"
+    "Negishi": "rapid",
+    "SaikyoKawagoe": "rapid"
   },
   "through_fallback": {
     "SotetsuDirect": {
@@ -65687,9 +65609,10 @@ window.RAILWAY_DATA = {
       "prefer": [
         "SotetsuShin-Yokohama",
         "Yokosuka",
-        "Saikyo",
+        "SaikyoKawagoe",
         "ShonanShinjuku"
       ]
     }
   }
-};
+}
+;

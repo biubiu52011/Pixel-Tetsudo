@@ -31,8 +31,8 @@ function makeLine(id, op, code, pres) {
 
 const FIXTURES = {
   JR_EAST: [
-    makeLine("Saikyo", "JR-East", "JA", { code: "JA", order: 1, lineIds: ["Saikyo", "Kawagoe"], nameJa: "埼京線", operatorGroup: "JR_EAST" }),
-    makeLine("Kawagoe", "JR-East", "JA", null), // member: no sort slot
+    makeLine("SaikyoKawagoe", "JR-East", "JA", { code: "JA", order: 1, lineIds: ["SaikyoKawagoe"], nameJa: "埼京線・川越線", operatorGroup: "JR_EAST" }),
+    makeLine("Kawagoe", "JR-East", "JA", { code: "JA", order: 22.1, lineIds: ["Kawagoe"], nameJa: "川越線・八高線", operatorGroup: "JR_EAST" }),
     makeLine("ChuoRapid", "JR-East", "JC", { code: "JC", order: 3, lineIds: ["ChuoRapid"], nameJa: "中央線快速", operatorGroup: "JR_EAST" }),
     makeLine("Yokosuka", "JR-East", "JO", { code: "JO", order: 14, lineIds: ["Yokosuka", "SobuRapid"], nameJa: "横須賀線・総武線快速", operatorGroup: "JR_EAST" }),
     makeLine("SobuRapid", "JR-East", "JO", null), // member of JO
@@ -182,9 +182,7 @@ function ok(cond, name) {
   const LPS = sandbox.window.LinePresentationService;
   const pres = LPS.getPresentationOrder(sandbox.window.UNIFIED_LINES);
   const ja = pres.filter((e) => e.pres && e.pres.code === "JA");
-  ok(ja.length === 1 && ja[0].id === "Saikyo", "JA occupies one slot (Saikyo primary)");
-  const presIds = pres.map((e) => e.id);
-  ok(presIds.indexOf("Kawagoe") === -1, "Kawagoe member not a sort slot");
+  ok(ja.length === 2 && ja.some(e=>e.id==="SaikyoKawagoe") && ja.some(e=>e.id==="Kawagoe"), "two JA presentation slots");
 })();
 
 // ---- 10. No-symbol fallback stable ----
@@ -252,11 +250,11 @@ function ok(cond, name) {
     const jo = pres.filter((e) => e.pres && e.pres.code === "JO");
     // Real data: two independent JA systems exist (埼京線・川越線 JA on Saikyo,
     // 川越線・八高線 JA on KawagoeWest) — each is a distinct presentation entity.
-    const saikyoJA = pres.filter((e) => e.id === "Saikyo" && e.pres && e.pres.code === "JA");
+    const saikyoJA = pres.filter((e) => e.id === "SaikyoKawagoe" && e.pres && e.pres.code === "JA");
     ok(jo.length === 1, "real data: JO single slot");
-    ok(saikyoJA.length === 1, "real data: Saikyo JA single slot (member Kawagoe deduped)");
-    const jaMembers = pres.filter((e) => e.pres && e.pres.code === "JA" && e.id !== "Saikyo" && e.id !== "KawagoeWest");
-    ok(jaMembers.length === 0, "real data: no extra JA slots beyond Saikyo/KawagoeWest");
+    ok(saikyoJA.length === 1, "real data: SaikyoKawagoe JA single slot");
+    const jaMembers = pres.filter((e) => e.pres && e.pres.code === "JA" && e.id !== "SaikyoKawagoe" && e.id !== "Kawagoe");
+    ok(jaMembers.length === 0, "real data: no extra JA slots beyond SaikyoKawagoe/Kawagoe");
     ok(full.indexOf("Yokosuka") === full.indexOf("SobuRapid") - 1, "real data: SobuRapid follows Yokosuka");
     // Category ordering on real operators
     const ops = LPS.getOperatorOrder(raw.lines);

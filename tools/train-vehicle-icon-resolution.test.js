@@ -321,7 +321,7 @@ console.log('zero-fallback no-evidence line: 2 PASS');
 
 // zero-fallback: the Yamanote rule must not leak to other JR-East lines
 const otherLineEv = realCtx.window.TrainOperationEvidence.resolveEvidence('1234', {
-  lineId: 'Saikyo', railway: '埼京線', operator: 'JR-East',
+  lineId: 'SaikyoKawagoe', railway: '埼京線', operator: 'JR-East',
   trainNumber: '1234', serviceDate: '2026-10-05', calendarType: 'weekday'
 }, 'realtime-derived');
 assert.ok(!otherLineEv || !(otherLineEv.vehicleType === 'E235系0番台（山手線）'),
@@ -394,24 +394,24 @@ const estimatedIcon = pickMarker(Object.assign({ estimated:true }, yamanote), fa
 assert.strictEqual(liveIcon.kind,'vehicle');
 assert.strictEqual(estimatedIcon.iconSrc,liveIcon.iconSrc);
 assert.ok(liveIcon.iconSrc.endsWith('JR東日本_E235系_0番台.png'));
-assert.strictEqual(pickMarker(Object.assign({}, yamanote, {vehicleResolvedUpstream:false}),false).kind,'generic',
+assert.strictEqual(pickMarker(Object.assign({}, yamanote, {vehicleResolvedUpstream:false}),false).kind,'unresolved',
   'UNKNOWN/NARROWED cannot select a concrete PNG');
-assert.strictEqual(pickMarker(Object.assign({}, yamanote, {vehicleFormationCandidates:['01','02']}),false).kind,'generic',
+assert.strictEqual(pickMarker(Object.assign({}, yamanote, {vehicleFormationCandidates:['01','02']}),false).kind,'unresolved',
   'formation ambiguity must prevent late artwork resolution');
-assert.strictEqual(pickMarker(yamanote,true).kind,'generic','failed PNG remains neutral');
+assert.strictEqual(pickMarker(yamanote,true).kind,'unresolved','failed PNG remains neutral');
 console.log('ODPT realtime and timetable estimation share one marker choice: 6 PASS');
 
 assert.strictEqual(pickMarker(Object.assign({}, yamanote, {
   vehicleResolvedUpstream:false
-}),false).iconSrc, '../images/列车/共通/共通_形式未確認.png',
+}),false).iconSrc, '',
   'unknown trains must use the neutral gallery PNG');
 assert.strictEqual(pickMarker(yamanote,true).iconSrc,
-  '../images/列车/共通/共通_形式未確認.png',
+  '',
   'failed artwork must use the same neutral gallery PNG');
 assert.strictEqual(pickMarker(Object.assign({}, yamanote, {
   vehicleIconPath:'https://untrusted.example/vehicle.svg',
   vehicleType:'', vehicleFormationCandidates:['01','02']
-}),false).kind,'generic',
+}),false).kind,'unresolved',
   'the single artwork authority must reject any SVG or external path');
 assert.ok(!rendererSrc.includes('function _createGenericTrainMarker') &&
   !rendererSrc.includes('function _swapTrainMarkerToGeneric') &&

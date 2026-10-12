@@ -1044,9 +1044,9 @@ function _rememberTrainArtworkFailure(trainUid) {
     var artwork = window.TrainVehicle &&
       typeof window.TrainVehicle.selectMarkerArtwork === "function"
       ? window.TrainVehicle.selectMarkerArtwork(p, artworkFailed)
-      : { kind: "generic", iconSrc: "" };
+      : { kind: "unresolved", iconSrc: "" };
     return {
-      kind: artwork.kind === "vehicle" && artwork.iconSrc ? "vehicle" : "generic",
+      kind: artwork.kind === "vehicle" && artwork.iconSrc ? "vehicle" : "unresolved",
       iconSrc: artwork.iconSrc || "",
       className: p && p.estimated === true ? "train-icon estimated" : "train-icon"
     };
@@ -1101,27 +1101,12 @@ function _rememberTrainArtworkFailure(trainUid) {
     marker.setAttribute("preserveAspectRatio", "xMidYMid meet");
     var titleText = _trainMarkerTitle(p);
     if (titleText) _setTrainMarkerTooltip(marker, titleText, svgNS);
-    // A failed train PNG is replaced on THIS image element with the one neutral
-    // gallery PNG. If even that file fails, hide this train rather than drawing
-    // SVG or selecting another operator's vehicle.
+    // No replacement silhouette or fabricated model on asset failure.
     marker.addEventListener("error", function () {
       if (!trainLayer || !trainLayer.isConnected || !marker.isConnected) return;
-      if (marker.getAttribute("data-marker-kind") !== "vehicle") {
-        marker.setAttribute("visibility", "hidden");
-        return;
-      }
       var uid = marker.getAttribute("data-train-id") || "";
       if (uid) _rememberTrainArtworkFailure(uid);
-      var fallback = window.TrainVehicle &&
-        typeof window.TrainVehicle.selectMarkerArtwork === "function"
-        ? window.TrainVehicle.selectMarkerArtwork(p, true) : null;
-      if (!fallback || fallback.kind !== "generic" || !fallback.iconSrc ||
-          fallback.iconSrc === marker.getAttribute("href")) {
-        marker.setAttribute("visibility", "hidden");
-        return;
-      }
-      marker.setAttribute("data-marker-kind", "generic");
-      marker.setAttribute("href", fallback.iconSrc);
+      marker.setAttribute("visibility", "hidden");
     });
     marker.setAttribute("data-train-id", String(trainUid));
     marker.setAttribute("data-marker-kind", spec.kind);

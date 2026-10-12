@@ -599,7 +599,7 @@ function _canonicalVehicleIconPath(name, serviceDate) {
   // Single vehicle-artwork authority. Both ODPT realtime and timetable
   // estimates choose an existing gallery PNG; unknown trains get a neutral PNG.
   // Never synthesize a railway-specific model or draw an SVG vehicle.
-  var NEUTRAL_TRAIN_PNG = "../images/列车/共通/共通_形式未確認.png";
+  // No generic artwork: unknown vehicle identity does not claim a concrete model.
   function isGalleryPng(path) {
     var src = String(path || "");
     return src.startsWith("../images/列车/") &&
@@ -613,7 +613,7 @@ function _canonicalVehicleIconPath(name, serviceDate) {
       iconSrc = resolveVehicleArtwork(p.vehicleType) || "";
     }
     if (artworkFailed === true || !isGalleryPng(iconSrc)) {
-      return { kind: "generic", iconSrc: NEUTRAL_TRAIN_PNG };
+      return { kind: "unresolved", iconSrc: "" };
     }
     return { kind: "vehicle", iconSrc: iconSrc };
   }

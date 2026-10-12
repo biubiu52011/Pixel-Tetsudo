@@ -57,3 +57,18 @@ if (unresolved.length) {
   console.log("identity-coverage unresolved (fallback allowed; do not invent mappings): " + unresolved.join(", "));
 }
 console.log("identity-coverage: PASS");
+
+// Exactly two source-matched JR-East routes; remove stale split IDs.
+const route=JSON.parse(fs.readFileSync(path.join(root,"data/core/railway_data.json"),"utf8"));
+assert(route.lines.SaikyoKawagoe && route.lines.Kawagoe);
+assert(!route.lines.Saikyo && !route.lines.KawagoeWest);
+assert(route.lines.SaikyoKawagoe.stations.length === 24);
+assert(route.lines.SaikyoKawagoe.stations[0] === "Osaki");
+assert(route.lines.SaikyoKawagoe.stations[18] === "Omiya");
+assert(route.lines.SaikyoKawagoe.stations[23] === "Kawagoe");
+assert(route.lines.Kawagoe.stations.join("|") ===
+ "Kawagoe|Nishi-Kawagoe|Matoba|Kasahata|Musashi-Takahagi|Komagawa");
+assert(railway.SaikyoKawagoe === "SaikyoKawagoe" && railway.Kawagoe === "Kawagoe");
+assert(!railway.Saikyo && !railway.KawagoeWest &&
+       !operators.Saikyo && !operators.KawagoeWest);
+console.log("SaikyoKawagoe/Kawagoe canonical lines: PASS");

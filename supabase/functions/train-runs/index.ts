@@ -160,6 +160,18 @@ async function readManualTemplateRuns(db: any, lineId: string, serviceDate: stri
       .eq("line_key", lineId).eq("calendar_urn", calendar).order("id").range(first, last));
     if (selected.length) { templates = selected; selectedCalendar = calendar; break; }
   }
+  // Retain both original SQL imports, but serve one verified itinerary.
+  if (lineId === "SaikyoKawagoe") {
+    const seen = new Set<string>();
+    templates = templates.filter((t: any) => {
+      const key = t.physical_service_key ?
+        [t.calendar_urn,t.railway_urn,t.physical_service_key].join("|") : "";
+      if (!key) return true;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+  }
   if (!templates.length) return json({ ok: true, complete: false, cache: "MISS",
     source: "NO_API_NO_DATA", line_id: lineId, service_date: serviceDate, runs: [] });
 
