@@ -120,7 +120,7 @@
         for (var i=0;i<records.length;i++) {
           var r=records[i];
           if (!r || r.validDate !== d) continue;
-          if (line.indexOf(String(r.networkKey || "").toLowerCase().replace(/[^a-z0-9]/g, "")) < 0) continue;
+          if (!_evidenceNetworkMatches(r.networkKey, ctx)) continue;
           var trainMatch = r.trainNumbers && r.trainNumbers.indexOf(n) >= 0;
           var opMatch = ctx.operationCode && String(ctx.operationCode) === String(r.operationCode);
           if (trainMatch || opMatch) matches.push(r);
@@ -189,7 +189,7 @@
         var exactTrain = [], operation = [];
         for (var i=0;i<records.length;i++) {
           var r=records[i];
-          if (!r || r.validDate !== d || line.indexOf(String(r.networkKey || "").toLowerCase()) < 0) continue;
+          if (!r || r.validDate !== d || !_evidenceNetworkMatches(r.networkKey, ctx)) continue;
           if (r.trainNumber && String(r.trainNumber) === n) exactTrain.push(r);
           else if (r.operationCode && op && String(r.operationCode) === op) operation.push(r);
         }
@@ -246,7 +246,7 @@
         if (!d) return null;
         var cal=String(ctx.calendarType||"").toLowerCase();
         var matches=rules.filter(function(r){
-          if (line.indexOf(r.networkKey)<0) return false;
+          if (!_evidenceNetworkMatches(r.networkKey, ctx)) return false;
           if (r.effectiveFrom && d<r.effectiveFrom) return false;
           if (r.effectiveTo && d>r.effectiveTo) return false;
           if (r.calendarType && (!cal || String(r.calendarType).toLowerCase()!==cal)) return false;
