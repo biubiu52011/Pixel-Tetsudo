@@ -1234,6 +1234,7 @@
             // collapse just because their chain IDs happen to agree.
             var _chainsByScheduledKey = Object.create(null);
             var _scheduledEstimateCounts = Object.create(null);
+            var _scheduledEstimateItineraries = Object.create(null);
             var _scheduledLiveCounts = Object.create(null);
             function _chainBridgeKey(lid, p) {
               return window.RunningChainResolver &&
@@ -1245,7 +1246,17 @@
                 if (!_ep || !_ep.runningChainId) return;
                 var k = _chainBridgeKey(_vlid, _ep);
                 if (!k) return;
-                _scheduledEstimateCounts[k] = (_scheduledEstimateCounts[k] || 0) + 1;
+                // A duplicated exact itinerary is one scheduled run. Two
+                // different itineraries with the same number remain ambiguous.
+                var fingerprint = _ep.scheduledItineraryKey ||
+                  ("unique-source:" + String(_ep.timetableIdentity || _ep.trainId || ""));
+                if (!_scheduledEstimateItineraries[k]) {
+                  _scheduledEstimateItineraries[k] = Object.create(null);
+                }
+                if (!_scheduledEstimateItineraries[k][fingerprint]) {
+                  _scheduledEstimateItineraries[k][fingerprint] = true;
+                  _scheduledEstimateCounts[k] = (_scheduledEstimateCounts[k] || 0) + 1;
+                }
                 if (!_chainsByScheduledKey[k]) _chainsByScheduledKey[k] = Object.create(null);
                 _chainsByScheduledKey[k][_ep.runningChainId] = true;
               });
@@ -1846,6 +1857,17 @@
       window.ODPTClient.hasRealtimePositionApi(lineId);
     if (liveApi) {
       return _hasOdptTimetable(lineId) ? ensureManualTimetable(lineId) : Promise.resolve(false);
+    }
+    // A partner's SQL timetable may already have been loaded into the shared
+    // ODPT-shaped pool by ODPTClient. Re-estimate through evidence without
+    // registering those same rows as a second manual timetable source.
+    if (_hasOdptTimetable(lineId)) {
+      try {
+        var readyTargets = _expandDirtyLines([lineId], allLines);
+        if (typeof doEstimation === "function") doEstimation(readyTargets);
+        fuseDirty([lineId]);
+      } catch(err) { console.debug("[DataFusion] ready timetable refresh:", err.message); }
+      return Promise.resolve(true);
     }
     // No realtime API: Supabase is the sole timetable source. A DB failure
     // does not secretly start a second, legacy JS position feed.

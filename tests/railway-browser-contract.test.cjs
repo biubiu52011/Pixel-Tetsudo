@@ -148,3 +148,18 @@ test('Supabase timetable importer cannot ingest an API-backed realtime railway',
   assert.match(serving, /if \(source\?\.realtime_position_api_enabled\)/);
   assert.doesNotMatch(importer, /getCachedTrainRuns/);
 });
+
+
+test('direct through railway loads its timetable evidence and shares one estimator', () => {
+  const page = read('js/trains-page.js');
+  const fusion = read('js/data-fusion.js');
+  const estimator = read('js/train-position-estimator.js');
+  assert.match(page, /RunningChainResolver\.getDirectThroughLines\(lineId\)/);
+  assert.match(page, /!lines\[id\] \|\| window\.ODPTClient\.hasRealtimePositionApi\(id\)/);
+  assert.match(page, /_timetablePartners\.map\(function\(id\)/);
+  assert.match(fusion, /if \(_hasOdptTimetable\(lineId\)\) \{/);
+  assert.match(estimator, /scheduledItineraryKey: run\.scheduledItineraryKey/);
+  assert.match(fusion, /var fingerprint = _ep\.scheduledItineraryKey/);
+  assert.match(fusion, /_scheduledEstimateItineraries\[k\]\[fingerprint\]/);
+  assert.doesNotMatch(page, /Rinkai.*vehicleType.*=.*70-000/);
+});

@@ -441,12 +441,24 @@
     }
 
     var railDirection = tt["odpt:railDirection"] || "";
+    // A physical scheduled run may be imported twice under different object IDs.
+    // Deduplicate only identical ordered station/time itineraries, never just
+    // a shared train number, direction, or potential through-service route.
+    var scheduledItineraryKey = JSON.stringify([
+      lineId, String(trainNumber), String(tt["odpt:calendar"] || ""),
+      String(railDirection),
+      stops.map(function(stop) {
+        return [normalizeStationKey(extractStationKey(stop.stationUrn)),
+          stop.arrivalMinute, stop.departureMinute];
+      })
+    ]);
     var dp = String(railDirection).split(":");
     cached = {
       layoutKey: layoutKey,
       trainNumber: trainNumber,
       timetableObjectId: timetableObjectId,
       timetableIdentity: timetableIdentity,
+      scheduledItineraryKey: scheduledItineraryKey,
       calendar: tt["odpt:calendar"] || "",
       railwayKey: extractRailwayKey(tt["odpt:railway"]),
       trainType: tt["odpt:trainType"] || "",
@@ -727,6 +739,7 @@
             stationIndex: currentStationIndex,
             trainId: lineId + '_' + trainNumber,
             timetableIdentity: timetableIdentity,
+            scheduledItineraryKey: run.scheduledItineraryKey || "",
             runningChainId: timetableIdentity,
             runningChainEvidence: "TIMETABLE_SEGMENT",
             trainNumber: trainNumber,

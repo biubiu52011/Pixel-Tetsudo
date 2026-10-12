@@ -102,6 +102,20 @@
       // members are activated together so one physical run can remain continuous.
       var _requestedLines = currentSystemLineIds && currentSystemLineIds.length
         ? currentSystemLineIds.slice() : [lineId];
+      // Load direct timetable-only through neighbours on demand. The canonical
+      // serviceBoundaries graph supplies the relationship, not a second
+      // Saikyo/Rinkai map or a guessed cross-operator train-number rule.
+      var _timetablePartners = [];
+      if (window.RunningChainResolver &&
+          typeof window.RunningChainResolver.getDirectThroughLines === "function" &&
+          window.ODPTClient && typeof window.ODPTClient.hasRealtimePositionApi === "function") {
+        (window.RunningChainResolver.getDirectThroughLines(lineId) || []).forEach(function(id) {
+          if (_requestedLines.indexOf(id) >= 0) return;
+          if (!lines[id] || window.ODPTClient.hasRealtimePositionApi(id)) return;
+          _requestedLines.push(id);
+          _timetablePartners.push(id);
+        });
+      }
       var _activationPromise = Promise.resolve();
       if (window.ODPTClient && window.ODPTClient.activateRealtimeLines) {
         _activationPromise = window.ODPTClient.activateRealtimeLines(_requestedLines).catch(function(e) {
@@ -139,7 +153,15 @@
       if (window.DataFusion && window.DataFusion.ensureTimetable) {
         _activationPromise.then(function() {
           if (currentLine !== lineId) return false;
-          return window.DataFusion.ensureTimetable(lineId);
+          // Reuse DataFusion's one estimator for timetable-only neighbours;
+          // do not create a parallel train-number/image renderer.
+          return Promise.all(_timetablePartners.map(function(id) {
+            return window.DataFusion.ensureTimetable(id).catch(function(){ return false; });
+          })).then(function(updated) {
+            return window.DataFusion.ensureTimetable(lineId).then(function(mainUpdated) {
+              return mainUpdated || updated.some(Boolean);
+            });
+          });
         }).then(function(changed) {
           // Cached/missing manual data is a no-op. Its Promise resolving must not
           // cause a second map paint immediately after opening the detail.
