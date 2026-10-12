@@ -134,9 +134,13 @@ function _positionSourceRank(p) {
   return 4;
 }
 
-function _trainIdentityKey(p) {
+function _trainIdentityKey(p, lineId) {
   if (!p) return "";
-  var id = p.runningChainId || p.trainNumber || p.trainId || "";
+  // On Yamanote, a bare train number is not a physical train identity.
+  // DataFusion performs the sole unique live/timetable bridge.
+  var id = lineId === "Yamanote"
+    ? (p.runningChainId || p.trainId || p.sourceTrainId || p.timetableObjectId || "")
+    : (p.runningChainId || p.trainNumber || p.trainId || "");
   id = String(id).trim();
   if (!id) return "";
   return id.replace(/^odpt\.Train:/, "")
@@ -175,7 +179,7 @@ function _dedupeTrainPositions(positions, lineId) {
   var out = [];
   for (var i = 0; i < positions.length; i++) {
     var p = positions[i];
-    var key = _trainIdentityKey(p);
+    var key = _trainIdentityKey(p, lineId);
     if (!key) {
       out.push(p);
       continue;

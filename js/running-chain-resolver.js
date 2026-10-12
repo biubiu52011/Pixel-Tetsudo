@@ -131,6 +131,23 @@
     return {runningChainId:"rc:"+ids.join("~"),evidence:linkedBySource?"CONFIRMED_BOUNDARY+SOURCE_TIMETABLE_LINK":(strong?"CONFIRMED_SEGMENT_GRAPH+TIMETABLE_ID":(numberChanged?"CONFIRMED_UNIQUE_BOUNDARY+TRAIN_NUMBER_CHANGED":"CONFIRMED_SEGMENT_GRAPH+TRAIN_NUMBER")),timeGapMin:maxGap,segmentCount:ids.length};
   }
 
+  // A same-line candidate key, NOT a physical carset or confirmed chain ID.
+  // Promoted only after matching exactly one scheduled running chain.
+  // SQL row IDs, array order and inferred endpoints are never identities.
+  function scheduledMatchKey(lineId,position){
+    if(!lineId||!position)return "";
+    var num=String(position.trainNumber||"").trim();
+    var date=String(position.serviceDate||"").slice(0,10);
+    var dir=String(position.railDirection||"").split(/[:.]/).pop();
+    if(!num||!/^\d{4}-\d{2}-\d{2}$/.test(date))return "";
+    if(/^(?:est_|odpt[.:]|supabase:|manual-template:|planned-trip:)/i.test(num))return "";
+    if(lineId==="Yamanote"){
+      if(!/^(Inner|InnerLoop|Outer|OuterLoop)$/.test(dir))return "";
+      dir=/^Inner/.test(dir)?"InnerLoop":"OuterLoop";
+    }else if(!dir)return "";
+    return "scheduled-match:"+[lineId,date,num,dir].map(encodeURIComponent).join("|");
+  }
+
   function isThroughAtStation(lineA,lineB,stationId){
     if(!_initialized)buildIndexes();
     var joins=(_boundaryMap[lineA]&&_boundaryMap[lineA][lineB])||[];
@@ -167,6 +184,7 @@
     isThroughAtStation:isThroughAtStation,
     getResolutionContext:getResolutionContext,
     resolveTimetableChain:resolveTimetableChain,
+    scheduledMatchKey:scheduledMatchKey,
     _getIndexes:function(){return{boundaries:_boundaryMap,branchOfMap:_branchOfMap,directThrough:_directThrough};}
   };
 
