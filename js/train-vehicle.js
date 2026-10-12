@@ -807,7 +807,11 @@ function _canonicalVehicleIconPath(name, serviceDate) {
       if (_formationConstrained) {
         // Formation evidence is authoritative only when both fields agree on one value.
         // Ambiguous, missing, or contradictory formation evidence blocks artwork entirely.
-        iconPath = _formationUnique ? resolveArtworkForIdentity(chosen, _formationId, ctx.serviceDate) : '';
+        // Exact carset evidence can use the verified generic PNG of that SAME
+        // model when no dedicated carset PNG exists. Never guess another model.
+        iconPath = _formationUnique
+          ? (resolveArtworkForIdentity(chosen, _formationId, ctx.serviceDate) ||
+             resolveArtworkForIdentity(chosen, '', ctx.serviceDate)) : '';
       } else {
         iconPath = resolveArtworkForIdentity(chosen, '', ctx.serviceDate);
       }

@@ -150,6 +150,30 @@ test('Supabase timetable importer cannot ingest an API-backed realtime railway',
 });
 
 
+test('Rinkai candidates never fabricate JR E233; dated exact carsets use same-model PNG', () => {
+  const vm = require('node:vm');
+  const window = {};
+  vm.runInNewContext(read('js/train-vehicle.js'), { window, console: { debug() {} } });
+  const ambiguous = window.TrainVehicle.resolve({ timetableVehicleType: '70-000形 / 71-000形' });
+  assert.equal(ambiguous.identityStatus, 'NARROWED');
+  assert.equal(ambiguous.iconPath, '');
+
+  const exact = window.TrainVehicle.resolve({
+    timetableVehicleType: '東京臨海高速鉄道70-000形', serviceDate: '2026-04-03',
+    formationId: 'Z2', formationCandidates: ['Z2']
+  });
+  assert.equal(exact.identityStatus, 'EXACT');
+  assert.match(exact.iconPath, /東京臨海高速鉄道_70-000形\.png$/);
+  assert.doesNotMatch(exact.iconPath, /E233/);
+
+  const estimator = read('js/train-position-estimator.js');
+  const fusion = read('js/data-fusion.js');
+  assert.match(estimator, /_resolvedEvidence\.decisive === true/);
+  assert.match(estimator, /if \(_compatible\) _timetableVehicleInput = _operationModels\[0\]/);
+  assert.match(fusion, /_allowedCandidates\.indexOf\(v\.resolution\.name\) < 0/);
+  assert.match(fusion, /\(v\.evidenceRank \|\| 0\) < 5/);
+});
+
 test('direct through railway loads its timetable evidence and shares one estimator', () => {
   const page = read('js/trains-page.js');
   const fusion = read('js/data-fusion.js');

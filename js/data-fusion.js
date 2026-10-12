@@ -122,6 +122,14 @@
     // Never propagate a prior service day's carset through source dropout.
     if (v.evidenceServiceDate && p.serviceDate !== v.evidenceServiceDate) return p;
     if (p.vehicleFormationConflict) return p;
+    // Never inherit an incompatible partner-line timetable label as an exact
+    // vehicle. A Rinkai 70/71 candidate must not become a generic JR E233 PNG.
+    // Only a concrete realtime vehicle-type observation may override a stale
+    // timetable candidate list.
+    var _allowedCandidates = Array.isArray(p.vehicleCandidates) ? p.vehicleCandidates : [];
+    if (_allowedCandidates.length && v.resolution && v.resolution.name &&
+        _allowedCandidates.indexOf(v.resolution.name) < 0 &&
+        (v.evidenceRank || 0) < 5) return p;
     var currentResolution = p.vehicleResolution || null;
     var sameExact = currentResolution && currentResolution.identityStatus === "EXACT" &&
       v.resolution && currentResolution.name === v.resolution.name;

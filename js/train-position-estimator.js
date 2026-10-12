@@ -532,6 +532,17 @@
         _operationModels.indexOf(_declaredModels[0]) >= 0) {
       _timetableVehicleInput = _declaredModels[0];
     }
+    // A dated, decisive train-level model may narrow the timetable's broader
+    // candidate set. Compare canonical identities, never working-number suffixes.
+    if (_resolvedEvidence && _resolvedEvidence.decisive === true &&
+        _operationModels.length === 1 && _declaredModels.length > 1 &&
+        window.TrainIcons && typeof window.TrainIcons.resolveCanonicalVehicle === 'function') {
+      var _exactCanonical = window.TrainIcons.resolveCanonicalVehicle(_operationModels[0]);
+      var _compatible = _exactCanonical && _declaredModels.some(function(candidate) {
+        return window.TrainIcons.resolveCanonicalVehicle(candidate) === _exactCanonical;
+      });
+      if (_compatible) _timetableVehicleInput = _operationModels[0];
+    }
     var _assignmentFormations = {};
     if (_resolvedEvidence && _resolvedEvidence.formationId) {
       String(_resolvedEvidence.formationId).split(/\s*\/\s*|\s*,\s*|\s*\|\s*/).forEach(function(fid) {
