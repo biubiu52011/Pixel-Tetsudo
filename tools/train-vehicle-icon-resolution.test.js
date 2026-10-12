@@ -342,8 +342,8 @@ assert.ok(!rendererSrc.includes('window.TrainIcons.resolveVehicleArtwork'),
 assert.ok(unifiedVehicleSource.includes('selectMarkerArtwork: selectMarkerArtwork'),
   'unified runtime must own one PNG/neutral decision');
 assert.ok(rendererSrc.includes('marker.addEventListener("error"') &&
-          rendererSrc.includes('window.TrainVehicle.selectMarkerArtwork(p, true)'),
-  'PNG failure must consult the single authority for the neutral PNG');
+          rendererSrc.includes('marker.setAttribute("visibility", "hidden")'),
+  'failed certified PNG must hide instead of using a generic image');
 assert.ok(!rendererSrc.includes('_hasRealtimeVehicleEvidence'),
   'renderer must not diverge for ODPT versus timetable positions');
 assert.ok(!rendererSrc.includes('iconSrc ? "image" : "circle"'),

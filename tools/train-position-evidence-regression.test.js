@@ -119,8 +119,8 @@ assert(!/var exact = p && \(p\.vehicleIdentityStatus/.test(renderer),
   "renderer must not re-arbitrate vehicle identity status");
 assert(!/vehicleResolvedFromRealtime/.test(renderer),
   "renderer must not branch on vehicle evidence source");
-assert(renderer.includes('kind: artwork.kind === "vehicle" && artwork.iconSrc ? "vehicle" : "generic"'),
-  "TrainMarker must render only the unified vehicle PNG or neutral train result");
+assert(renderer.includes('kind: artwork.kind === "vehicle" && artwork.iconSrc ? "vehicle" : "unresolved"'),
+  "TrainMarker must display an exact vehicle PNG or preserve an unresolved position without a fake asset");
 assert(!/iconSrc \? "image" : "circle"/.test(renderer),
   "the legacy circle fallback kind must not return");
 assert(!/outer\.setAttribute\("r", "8"\)/.test(renderer),
@@ -129,11 +129,11 @@ assert(!renderer.includes('function _createGenericTrainMarker') &&
        !renderer.includes('function _swapTrainMarkerToGeneric'),
   "train markers must never be self-drawn SVG shapes");
 assert(/marker\.addEventListener\("error"/.test(renderer) &&
-       /window\.TrainVehicle\.selectMarkerArtwork\(p, true\)/.test(renderer),
-  "PNG errors must reuse the single artwork authority and neutral gallery PNG");
+       /marker\.setAttribute\("visibility", "hidden"\)/.test(renderer),
+  "failed certified PNG must hide rather than fabricate a train model");
 assert(/document\.createElementNS\(svgNS, "image"\)/.test(renderer) &&
-       /marker\.setAttribute\("href", fallback\.iconSrc\)/.test(renderer),
-  "both exact and neutral PNGs must use the same image marker node");
+       !renderer.includes('fallback.iconSrc'),
+  "train marker must use only certified gallery PNG artwork");
 assert(/_trainMarkerSpec\(p, trainUid\)/.test(renderer),
   "the artwork decision must be keyed by the stable train identity");
 assert(/existingIcon\.getAttribute\("data-marker-kind"\) !== markerSpec\.kind[\s\S]{0,260}removeChild\(existingIcon\)/.test(renderer),
@@ -478,3 +478,12 @@ assert(renderSource.includes('document.createElementNS(ns, "title")') &&
 assert(!renderSource.includes('ids.join(" + ")'),
   "multiple formation IDs must not imply coupling: sources may include aliases");
 console.log("carset evidence propagation and display regression: PASS");
+
+// SQL-origin vehicle labels must enter the ONE upstream identity resolver.
+// Candidate lists such as E233 / 70-000 must not be assigned a PNG by guesswork.
+assert(estimatorSource.includes('var _declaredVehicleInput = String(tt.vehicleType ||'),
+  "SQL vehicle_type_label must reach the existing timetable vehicle evidence resolver");
+const selectedVehicleSource=read("js/train-vehicle.js");
+assert(!selectedVehicleSource.includes("共通_形式未確認.png") &&
+       selectedVehicleSource.includes('return { kind: "unresolved", iconSrc: "" }'),
+  "unconfirmed model must not produce generic PNG or impersonate a model");

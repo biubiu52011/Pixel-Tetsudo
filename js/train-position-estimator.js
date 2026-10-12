@@ -502,9 +502,15 @@
     if (_resolvedEvidence && _resolvedEvidence.decisive && _resolvedEvidence.operator) {
       _assignmentOperator = _resolvedEvidence.operator;
     }
-    var _timetableVehicleInput = _resolvedEvidence && _resolvedEvidence.vehicleType
+    var _operationVehicleInput = _resolvedEvidence && _resolvedEvidence.vehicleType
       ? _resolvedEvidence.vehicleType
       : (_resolvedEvidence && _resolvedEvidence.vehicleCandidates || []).join(' / ');
+    // Read the actual SQL/manual timetable model evidence already carried
+    // through the existing ODPT adapter. Multiple models remain multiple
+    // candidates: neither artwork availability nor line name may guess one.
+    var _declaredVehicleInput = String(tt.vehicleType || '').trim();
+    var _timetableVehicleInput = [_operationVehicleInput, _declaredVehicleInput]
+      .filter(Boolean).filter(function(v,i,a) { return a.indexOf(v) === i; }).join(' / ');
     var _assignmentFormations = {};
     if (_resolvedEvidence && _resolvedEvidence.formationId) {
       String(_resolvedEvidence.formationId).split(/\s*\/\s*|\s*,\s*|\s*\|\s*/).forEach(function(fid) {
