@@ -1,0 +1,1 @@
+alter table public.vehicle_image_assets add column if not exists review_note text; comment on column public.vehicle_image_assets.review_note is 'Evidence, rights restrictions, and approval blockers for assets in review; distinct from service_context and immutable image lock baseline.'

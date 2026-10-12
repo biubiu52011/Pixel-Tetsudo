@@ -1,0 +1,1 @@
+create or replace view public.vehicle_artwork_exact_locked as select v.operator,v.vehicle_type,v.formation_id,v.livery,v.theme,v.valid_from,v.valid_to,v.image_path from public.vehicle_visual_identities v inner join public.vehicle_image_review_baselines b on b.image_path=v.image_path where v.identity_status='exact' and v.image_path is not null and b.metadata_lock_eligible=true
