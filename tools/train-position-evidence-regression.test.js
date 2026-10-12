@@ -595,3 +595,71 @@ console.log("Rinkai/Osaki exact vehicle evidence regression: PASS");
     'transient image failure must become retryable');
   console.log('Train PNG load failure isolated by path and short retry TTL: 4 PASS');
 }
+
+
+
+// A missing vehicle model must NOT suppress a source-verified position.
+// The neutral marker is a plain location dot, never a drawn train silhouette.
+{
+  const source=read('js/trains-render.js');
+  const functionSource=source.slice(source.indexOf('  function _createTrainMarker('),
+    source.indexOf('  function updateTrainLayer('));
+  assert.ok(functionSource.includes('knownVehicle ? "image" : "circle"'));
+  assert.ok(source.includes('data-position-unresolved'));
+  assert.ok(!source.includes('if (!markerSpec.iconSrc) continue;'),
+    'unresolved train model must not cause position row to vanish');
+
+  const nodes=[];
+  const layer={
+    isConnected:true,
+    appendChild(n){ n.parentNode=this; n.isConnected=true; nodes.push(n); },
+    removeChild(n){ const i=nodes.indexOf(n); if(i>=0)nodes.splice(i,1);
+      n.parentNode=null; n.isConnected=false; }
+  };
+  const fakeDocument={
+    createElementNS(ns,tag){
+      const attrs={},listeners={};
+      return {tagName:tag,attrs,listeners,isConnected:false,
+        setAttribute(k,v){attrs[k]=String(v);},
+        getAttribute(k){return attrs[k]??null;},
+        removeAttribute(k){delete attrs[k];},
+        addEventListener(k,fn){listeners[k]=fn;}
+      };
+    }
+  };
+  const sandbox={document:fakeDocument,Date,console,
+    _trainMarkerTitle(p){return String(p.trainNumber||'');},
+    _setTrainMarkerTooltip(m,title){m.title=title;},
+    _setTrainIconPosition(m,x,y){
+      if(m.tagName==='circle'){m.setAttribute('cx',x);m.setAttribute('cy',y);}
+      else {m.setAttribute('x',x-7);m.setAttribute('y',y-9);}
+    },
+    remembered:[],
+    _rememberTrainArtworkFailure(uid,href){sandbox.remembered.push([uid,href]);}
+  };
+  vm.createContext(sandbox);
+  vm.runInContext(functionSource+'\nthis.make=_createTrainMarker;',sandbox);
+  const p={positionSource:'realtime-api',trainId:'train-123',
+    trainNumber:'1250K',destinationStation:'Shinjuku'};
+  const dot=sandbox.make(layer,'svg','train-123',
+    {kind:'unresolved',iconSrc:'',className:'train-icon'},54,68,p,'SaikyoKawagoe',false,'#009744',{idx:8});
+  assert.strictEqual(dot.tagName,'circle');
+  assert.strictEqual(dot.getAttribute('cx'),'54');
+  assert.strictEqual(dot.getAttribute('cy'),'68');
+  assert.strictEqual(dot.getAttribute('data-position-unresolved'),'true');
+  assert.strictEqual(dot.getAttribute('href'),null,
+    'neutral position dot must not claim a PNG or vehicle type');
+  assert.strictEqual(nodes.length,1);
+  const real=sandbox.make(layer,'svg','train-124',
+    {kind:'vehicle',iconSrc:'../images/列车/JR東日本/E233.png',className:'train-icon'},
+    100,120,{trainNumber:'1251K'},'SaikyoKawagoe',false,'#009744',{idx:11});
+  assert.strictEqual(real.tagName,'image');
+  assert.strictEqual(real.getAttribute('href'),'../images/列车/JR東日本/E233.png');
+  real.listeners.error();
+  assert.strictEqual(sandbox.remembered.length,1);
+  assert.strictEqual(nodes.length,2);
+  assert.strictEqual(nodes.filter(n=>n.tagName==='image').length,0,
+    'broken model PNG must fall back to a visible neutral position dot immediately');
+  assert.ok(nodes.some(n=>n.getAttribute('data-train-id')==='train-124'&&n.tagName==='circle'));
+  console.log('Realtime unknown/failed model retains source position as neutral dot: 9 PASS');
+}

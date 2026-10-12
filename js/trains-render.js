@@ -1,8 +1,8 @@
 /* trains-render.js: SVG railway diagram; train markers are gallery PNG images only */
 
 // TrainMarker presentation state (artwork only — never vehicle identity or
-// geometry). Failed model PNGs switch to the neutral gallery PNG on the same
-// image node; the known-broken model asset is not re-requested each poll.
+// geometry). A failed model PNG gets a neutral *position dot*, never a fake
+// rolling-stock image. The known-broken asset is retried after a short TTL.
 var _trainArtworkFailure = {};
 var _trainArtworkFailureCount = 0;
 var _TRAIN_ARTWORK_FAILURE_MAX = 500;
@@ -1034,6 +1034,13 @@ function _isTrainArtworkFailureActive(trainUid, p) {
     var x = px - 7;
     var y = py - 9;
     var tag = String(icon.tagName || '').toLowerCase();
+    if (tag === 'circle') {
+      // Source-verified realtime locations remain visible even when no train
+      // model is known. This is a neutral location dot, not a vehicle drawing.
+      icon.setAttribute('cx', String(px));
+      icon.setAttribute('cy', String(py));
+      return;
+    }
     if (tag === 'image') {
       icon.setAttribute('x', String(x));
       icon.setAttribute('y', String(y));
@@ -1087,6 +1094,8 @@ function _isTrainArtworkFailureActive(trainUid, p) {
     }
     if (p && p.vehicleType) tip.push(p.vehicleType);
     else if (p && p.trainClass) tip.push(p.trainClass);
+    else tip.push(/^zh/.test(lang) ? "车型未判定" :
+      (lang === "en" ? "Vehicle type unknown" : "車両形式未判定"));
     if (p && p.destinationStation) tip.push(_trainDestText(p.destinationStation));
     return tip.join(" | ");
   }
@@ -1109,23 +1118,40 @@ function _isTrainArtworkFailureActive(trainUid, p) {
   // diagram. The diagram itself may be SVG; no train is ever drawn from SVG
   // primitives or selected through a separate renderer mapping.
   function _createTrainMarker(trainLayer, svgNS, trainUid, spec, px, py, p, lineId, isLoop, color, loc) {
-    if (!spec || !spec.iconSrc) return null;
-    var marker = document.createElementNS(svgNS, "image");
-    marker.setAttribute("width", "14");
-    marker.setAttribute("height", "18");
-    marker.setAttribute("href", spec.iconSrc);
-    marker.setAttribute("preserveAspectRatio", "xMidYMid meet");
+    if (!spec) return null;
+    var knownVehicle = spec.kind === "vehicle" && !!spec.iconSrc;
+    // Unknown model != unknown location: only exact vehicle identities get
+    // gallery PNGs. Other verified realtime/timetable positions use a neutral
+    // solid location dot, never an invented train silhouette or fleet model.
+    var marker = document.createElementNS(svgNS, knownVehicle ? "image" : "circle");
+    if (knownVehicle) {
+      marker.setAttribute("width", "14");
+      marker.setAttribute("height", "18");
+      marker.setAttribute("href", spec.iconSrc);
+      marker.setAttribute("preserveAspectRatio", "xMidYMid meet");
+      marker.addEventListener("error", function () {
+        if (!trainLayer || !trainLayer.isConnected || !marker.isConnected) return;
+        var uid = marker.getAttribute("data-train-id") || "";
+        if (uid) _rememberTrainArtworkFailure(uid, marker.getAttribute("href"));
+        marker.setAttribute("visibility", "hidden");
+        // Preserve this known train's verified location immediately, rather
+        // than waiting for the next ODPT poll after an image/network error.
+        var neutral = _createTrainMarker(trainLayer, svgNS, trainUid,
+          {kind:"unresolved", iconSrc:"", className:spec.className},
+          marker._displayX, marker._displayY, p, lineId, isLoop, color, loc);
+        if (neutral && marker.parentNode) marker.parentNode.removeChild(marker);
+      });
+    } else {
+      marker.setAttribute("r", "4.5");
+      marker.setAttribute("fill", "#666");
+      marker.setAttribute("stroke", "#fff");
+      marker.setAttribute("stroke-width", "1.5");
+      marker.setAttribute("data-position-unresolved", "true");
+    }
     var titleText = _trainMarkerTitle(p);
     if (titleText) _setTrainMarkerTooltip(marker, titleText, svgNS);
-    // No replacement silhouette or fabricated model on asset failure.
-    marker.addEventListener("error", function () {
-      if (!trainLayer || !trainLayer.isConnected || !marker.isConnected) return;
-      var uid = marker.getAttribute("data-train-id") || "";
-      if (uid) _rememberTrainArtworkFailure(uid, marker.getAttribute("href"));
-      marker.setAttribute("visibility", "hidden");
-    });
     marker.setAttribute("data-train-id", String(trainUid));
-    marker.setAttribute("data-marker-kind", spec.kind);
+    marker.setAttribute("data-marker-kind", knownVehicle ? "vehicle" : "unresolved");
     marker.setAttribute("class", spec.className);
     _setTrainIconPosition(marker, px, py, p, lineId, isLoop);
     marker._displayX = px;
@@ -1235,12 +1261,13 @@ function _isTrainArtworkFailureActive(trainUid, p) {
       // Without a stable source/chain key, do not attach animation state.
       if (!trainUid) continue;
       var markerSpec = _trainMarkerSpec(p, trainUid);
-      // Missing runtime authority must not cause renderer-side SVG construction.
-      if (!markerSpec.iconSrc) continue;
+      // A missing *model* does not erase a verified *position*. A non-model
+      // neutral dot still participates in the existing layout/label/animation.
       updatedIds[trainUid] = true;
       var existingIcon = markerById[String(trainUid)] || null;
-      if (existingIcon && (String(existingIcon.tagName || "").toLowerCase() !== "image" ||
-          existingIcon.getAttribute("data-marker-kind") !== markerSpec.kind)) {
+      var expectedTag = markerSpec.kind === "vehicle" ? "image" : "circle";
+      if (existingIcon && (existingIcon.getAttribute("data-marker-kind") !== markerSpec.kind ||
+          String(existingIcon.tagName || "").toLowerCase() !== expectedTag)) {
         if (existingIcon._moveRaf) cancelAnimationFrame(existingIcon._moveRaf);
         if (existingIcon.parentNode) existingIcon.parentNode.removeChild(existingIcon);
         delete markerById[String(trainUid)];
@@ -1259,7 +1286,8 @@ function _isTrainArtworkFailureActive(trainUid, p) {
       if (existingIcon) {
         // Same train and kind can change to a different certified PNG without
         // rebuilding the marker or retaining a stale SVG/PNG artwork.
-        if (existingIcon.getAttribute("href") !== markerSpec.iconSrc) {
+        if (markerSpec.kind === "vehicle" &&
+            existingIcon.getAttribute("href") !== markerSpec.iconSrc) {
           existingIcon.setAttribute("href", markerSpec.iconSrc);
           existingIcon.setAttribute("visibility", "visible");
         }
