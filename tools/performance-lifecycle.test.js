@@ -59,10 +59,11 @@ assert.ok(/rail_direction,train_type,destination_station/.test(trainRunsFnSrc),
 console.log('train-run-operating-fields: 4 PASS');
 
 const trainRunsReadThroughSrc = fs.readFileSync('supabase/functions/train-runs/index.ts','utf8');
-assert.ok(/ODPT_CHALLENGE_CONSUMER_KEY/.test(trainRunsReadThroughSrc) && /ODPT_CONSUMER_KEY/.test(trainRunsReadThroughSrc),
-  'TrainRun read-through must use server-side ODPT secrets only');
-assert.ok(/part\.length >= 1000/.test(trainRunsReadThroughSrc) && /ODPT_TRUNCATED/.test(trainRunsReadThroughSrc),
-  'truncated ODPT timetable responses must never be persisted as complete cache');
+assert.ok(!/ODPT_CHALLENGE_CONSUMER_KEY|ODPT_CONSUMER_KEY|fetchOdptCalendarRows|fetchOdptRows/.test(trainRunsReadThroughSrc),
+  'SQL timetable function must not proxy ODPT API or require its consumer secrets');
+assert.ok(/source\?\.realtime_position_api_enabled/.test(trainRunsReadThroughSrc) &&
+  /source: "REALTIME_API_LINE"/.test(trainRunsReadThroughSrc),
+  'realtime API lines must return BYPASS without reading SQL timetable rows');
 assert.ok(/readManualTemplateRuns/.test(trainRunsReadThroughSrc) &&
   /manual_timetable_templates/.test(trainRunsReadThroughSrc) &&
   /manual_timetable_template_stops/.test(trainRunsReadThroughSrc) &&
@@ -74,18 +75,18 @@ assert.ok(!/req\.method === "POST"/.test(trainRunsReadThroughSrc),
   'public train-runs endpoint must remain GET-only and must not accept browser cache writes');
 console.log('train-run-SQL-fallback: 5 PASS');
 
-assert.ok(/fallback_only/.test(trainRunsReadThroughSrc) &&
-  /hasTimetableApi && url\.searchParams\.get\("fallback_only"\) !== "1"/.test(trainRunsReadThroughSrc) &&
-  !/source: "API_AVAILABLE"/.test(trainRunsReadThroughSrc) &&
+assert.ok(/if \(source\?\.realtime_position_api_enabled\)/.test(trainRunsReadThroughSrc) &&
+  !/fetchOdptRows\(/.test(trainRunsReadThroughSrc) &&
   /const validRuns = result\.filter\(r => r\.stops\.length >= 2/.test(trainRunsReadThroughSrc) &&
   /r\.stops\.filter\(s => s\.arrival_time \|\| s\.departure_time\)\.length >= 2/.test(trainRunsReadThroughSrc) &&
   /omitted_incomplete_runs: omittedIncompleteRuns, runs: validRuns/.test(trainRunsReadThroughSrc) &&
   !/runs: complete \? result : \[\]/.test(
     trainRunsReadThroughSrc.split('async function readManualTemplateRuns')[1].split('Deno.serve')[0]),
   'SQL-only read must work independently of API capability and exclude incomplete runs without discarding verified ones');
-assert.ok(/var sourcePromise = getCachedTrainRuns\(lineId\)\.then/.test(odptUnifiedSrc) &&
-  /return hasTimetableApi[\s\S]*self\.getCompleteTimetable\(op, identity\.odptRailway\)/.test(odptUnifiedSrc),
-  'all lines must prefer canonical SQL timetable before using direct provider timetable');
+assert.ok(/var sourcePromise = hasRealtimePositionApi\(lineId\)/.test(odptUnifiedSrc) &&
+  /self\.getCompleteTimetable\(op, identity\.odptRailway\)/.test(odptUnifiedSrc) &&
+  /: getCachedTrainRuns\(lineId\)/.test(odptUnifiedSrc),
+  'realtime API lines must use API timetable only; non-realtime lines use SQL only');
 assert.ok(/fallback_only=1/.test(odptUnifiedSrc) &&
   /vehicleType:run\.vehicle_type_label\|\|null/.test(odptUnifiedSrc) &&
   /body\.partial===true/.test(odptUnifiedSrc) &&
@@ -107,12 +108,12 @@ console.log('train-run-vehicle-evidence-bridge: 3 PASS');
 // their existing lazy manual vehicle evidence, gated by presence of ODPT rows.
 const ensureTimetableSrc = fusion.split('  function ensureTimetable(lineId) {')[1]
   .split('  function ensureManualTimetable(lineId) {')[0];
-assert.ok(/function loadOdptVehicleEvidenceOnly\(\)/.test(ensureTimetableSrc) &&
-  /_hasOdptTimetable\(lineId\) \? ensureManualTimetable\(lineId\) : Promise\.resolve\(false\)/.test(ensureTimetableSrc) &&
-  /if \(!rows \|\| !rows\.length\) return loadOdptVehicleEvidenceOnly\(\)/.test(ensureTimetableSrc) &&
-  /\.catch\(function\(\) \{ return loadOdptVehicleEvidenceOnly\(\); \}\)/.test(ensureTimetableSrc) &&
+assert.ok(/if \(liveApi\) \{/.test(ensureTimetableSrc) &&
+  /return _hasOdptTimetable\(lineId\) \? ensureManualTimetable\(lineId\) : Promise\.resolve\(false\)/.test(ensureTimetableSrc) &&
+  /if \(!rows \|\| !rows\.length\) return false/.test(ensureTimetableSrc) &&
+  /\.catch\(function\(\) \{ return false; \}\)/.test(ensureTimetableSrc) &&
   !/return ensureManualTimetable\(lineId\)/.test(ensureTimetableSrc),
-  'SQL cache MISS or error must not activate legacy positional fallback; ODPT vehicle evidence remains available');
+  'API vehicle evidence remains available; SQL MISS or error cannot start a second position source');
 console.log('timetable-single-source-fallback: 1 PASS');
 
 // SQL read-through should enter the existing estimator only once, not push
