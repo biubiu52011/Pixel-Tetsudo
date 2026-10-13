@@ -41,9 +41,95 @@ for(const rel of ['pages/trains.html','pages/realtime.html']){
  const html=read(rel);
  for(const file of ['odpt-unified.js','train-vehicle.js','vehicle-operation-evidence-data.js',
                     'train-operation-evidence.js','train-position-estimator.js','data-fusion.js']){
-  assert(html.includes(file+'?v=4.3.1180'),rel+' still caches older ODPT mapping: '+file);
+  const pinnedVersion = ['train-position-estimator.js','data-fusion.js'].includes(file)
+    ? '4.3.1192' : '4.3.1180';
+  assert(html.includes(file+'?v='+pinnedVersion),rel+' still caches older ODPT mapping: '+file);
  }
 }
+assert(/function matchRealtimeVehicleEvidence\(/.test(estimator) &&
+       /_timetableIndexCache.index\[op\]/.test(estimator) &&
+       /matchRealtimeVehicleEvidence:\s*matchRealtimeVehicleEvidence/.test(estimator),
+  "ODPT realtime trains must join the already indexed timetable evidence on FULL lines");
+assert(/matchRealtimeVehicleEvidence\(\s*_liveLineId,_live,allLines\)/.test(fusion) &&
+       /verifiedTimetableArtworkPath:_scheduleModel.artworkPath/.test(fusion) &&
+       /vehicleEvidenceConflict = _mergedVehicle.identityStatus !== 'EXACT'/.test(fusion),
+  "live+schedule exact vehicle identity must pass through the single PNG resolver");
+assert(/p.vehicleEvidenceConflict\) return p/.test(fusion),
+  "a live/timetable model conflict must not inherit a stale chain default");
+assert(/now.getUTCHours\(\) < 4/.test(estimator) &&
+       /now.getUTCFullYear\(\)/.test(estimator),
+  "ODPT calendar and minute calculations must use JST service date");
+for(const htmlPath of ["pages/trains.html","pages/realtime.html"]){
+ const html=read(htmlPath);
+ assert(html.includes("js/train-position-estimator.js?v=4.3.1192") &&
+        html.includes("js/data-fusion.js?v=4.3.1192"),
+        htmlPath+" must invalidate cached old vehicle join logic");
+}
+// Exercise the *actual* indexed realtime/TrainTimetable join with two
+// simultaneous records: an ODPT schedule with no vehicle and a sourced
+// timetable row with the same physical itinerary and certified PNG.
+{
+  const start=estimator.indexOf('  function matchRealtimeVehicleEvidence(');
+  const end=estimator.indexOf('  // ========== Public API',start);
+  assert(start>0&&end>start);
+  const rows=[
+    {no:'1203K',sig:'same-itinerary',model:'',calendar:'odpt.Calendar:Weekday',
+      direction:'Inbound',date:'2026-10-13'},
+    {no:'1203K',sig:'same-itinerary',model:'Example1000系',
+      calendar:'odpt.Calendar:Weekday',direction:'Inbound',date:'2026-10-13',
+      _positionSource:'supabase-train-run',_sqlVehicleMappingLevel:'dated_schedule_rule',
+      vehicleType:'Example1000系',_sqlVehicleArtworkPath:'images/列车/X/example.png'}
+  ];
+  // Fixtures use the same ODPT fields that the production matcher reads.
+  rows.forEach(function(tt) {
+    tt['odpt:trainNumber']=tt.no;
+    tt['odpt:calendar']=tt.calendar;
+    tt._serviceDate=tt.date;
+    tt['odpt:railDirection']='odpt.RailDirection:Example.'+tt.direction;
+  });
+  const context=vm.createContext({
+    window:{ODPTClient:{LINE_RAILWAY_CODE:{}},
+      TrainIcons:{resolveVehicleDisplayName:function(n){return n;}}},
+    _timetableIndexCache:{index:{Example:{TestLine:rows}}},
+    getCurrentCalendars:()=>['odpt.Calendar:Weekday'],
+    getCurrentMinutes:()=>612,
+    getEstimatorStationLayout:()=>({workLine:{stations:['A','B']},stationIndexMap:{A:0,B:1}}),
+    compileTrainRun:function(tt){
+      return {directionName:tt.direction,scheduledItineraryKey:tt.sig,
+        timetableObjectId:'tt:'+tt.sig,
+        stops:[{arrivalMinute:600,departureMinute:600},{arrivalMinute:620,departureMinute:620}]};
+    },
+    resolveTrainRunIdentity:function(run,tt){
+      return {vehicleResult:{name:tt.model||'',identityStatus:tt.model?'EXACT':'UNKNOWN'}};
+    }
+  });
+  vm.runInContext(estimator.slice(start,end)+
+    '\nthis.join=matchRealtimeVehicleEvidence;',context);
+  const lines={TestLine:{operator:'Example',stations:['A','B']}};
+  const live={positionSource:'realtime-api',trainNumber:'1203K',
+    railDirection:'Inbound',serviceDate:'2026-10-13'};
+  const result=context.join('TestLine',live,lines);
+  assert(result&&result.model==='Example1000系'&&
+    result.artworkPath==='images/列车/X/example.png',
+    'untyped ODPT + same-run certified timetable must produce exact PNG proof');
+  assert.strictEqual(context.join('TestLine',{...live,trainNumber:'9999K'},lines),null,
+    'different train number cannot borrow the model');
+  assert.strictEqual(context.join('TestLine',{...live,serviceDate:'2026-10-14'},lines),null,
+    'the same train number on a later day cannot inherit a dated model');
+  assert.strictEqual(context.join('TestLine',{...live,railDirection:'Outbound'},lines),null,
+    'opposite direction is a separate service');
+  assert.strictEqual(context.join('Arakawa',live,{Arakawa:lines.TestLine}),null,
+    'Toden physical car number must not be treated as a timetable train number');
+  rows.push({...rows[1],sig:'other-physical-itinerary'});
+  assert.strictEqual(context.join('TestLine',live,lines),null,
+    'two possible itineraries must not assign a model');
+  rows.pop();
+  rows.push({...rows[1],model:'Example2000系'});
+  assert.strictEqual(context.join('TestLine',live,lines),null,
+    'contradictory timetable identities must remain unresolved');
+  console.log('Realtime plus timetable same-run exact PNG join: 7 PASS');
+}
+
 const tobuEvidence=read("data/timetables/tobu-limited-express-vehicle-evidence.js");
 assert(/TRAIN_VEHICLE_EVIDENCE_PROVIDERS/.test(tobuEvidence),"Tobu exact-train evidence must register through generic provider registry");
 assert(/id:\s*"tobu-official-limited-express-2026"/.test(tobuEvidence),"vehicle evidence provider must expose stable provenance id");

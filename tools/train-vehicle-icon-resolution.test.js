@@ -482,9 +482,11 @@ console.log('single internal PNG resolver, no second mapping hop: PASS');
   let hh = 10, mm = 24, operationLookups = 0;
   class FixedDate extends Date {
     constructor(...args) {
-      super(...(args.length ? args : [new Date(2026, 9, 12, hh, mm).getTime()]));
+      // The estimator's operating clock is JST regardless of the CI runner
+      // machine's timezone. 10:24 JST = 01:24 UTC on the same date.
+      super(...(args.length ? args : [Date.UTC(2026, 9, 12, hh - 9, mm)]));
     }
-    static now() { return new Date(2026, 9, 12, hh, mm).getTime(); }
+    static now() { return Date.UTC(2026, 9, 12, hh - 9, mm); }
   }
   const windowForEstimate = {
     RuntimeConfig: {},

@@ -112,7 +112,7 @@
     };
   }
   function _inheritChainVehicle(p) {
-    if (!p || !p.runningChainId) return p;
+    if (!p || !p.runningChainId || p.vehicleEvidenceConflict) return p;
     var v = _chainVehicleRegistry[p.runningChainId];
     if (!v) return p;
     if (v.lastSeenAt && (Date.now() - v.lastSeenAt) > _CHAIN_EVIDENCE_TTL_MS) {
@@ -1198,6 +1198,10 @@
                   realtimeDerivedVehicleType: _derivedVehicleType,
                   timetableVehicleType: _realtimeReferenceModel
                 });
+                // Preserve the two source assertions for subsequent timetable
+                // joins. A projected vehicle name is NOT itself raw evidence.
+                positionData.realtimeDerivedVehicleType = _derivedVehicleType;
+                positionData.realtimeReferenceModel = _realtimeReferenceModel;
                 _vehicleResolveMs += _perfNow() - _vehicleStart;
                 _projectVehicleResolution(positionData, _rtVehicle, false);
                 if (_rtVehicle.verifiedCarNumber) positionData.vehicleCarNumber = _rtVehicle.verifiedCarNumber;
@@ -1330,6 +1334,47 @@
               null, // No parallel realtime merge inside TrainPositionEstimator.
               { lineIds: requestedLineIds && requestedLineIds.length ? requestedLineIds : null }
             );
+
+            // Join actual ODPT Train positions with uniquely matching
+            // TrainTimetable/manual/SQL evidence on the SAME railway, number,
+            // service day, calendar, direction and plausible operating window.
+            // This runs even on FULL-realtime lines, but never projects an
+            // estimated timetable position onto those lines.
+            if (window.TrainPositionEstimator.matchRealtimeVehicleEvidence &&
+                window.TrainVehicle && typeof window.TrainVehicle.resolve === 'function') {
+              Object.keys(posMap).forEach(function(_liveLineId) {
+                (posMap[_liveLineId] || []).forEach(function(_live) {
+                  if (!_live || _live.positionSource !== 'realtime-api') return;
+                  var _scheduleModel = window.TrainPositionEstimator.matchRealtimeVehicleEvidence(
+                    _liveLineId,_live,allLines);
+                  if (!_scheduleModel || !_scheduleModel.model) return;
+                  var _mergedVehicle = window.TrainVehicle.resolve({
+                    lineId:_liveLineId,
+                    operator:_live.trainOperator || '',
+                    trainOwner:_live.trainOwner || '',
+                    trainNumber:_live.trainNumber,
+                    trainId:_live.trainId,
+                    realtimeVehicleType:_live.realtimeVehicleType || '',
+                    realtimeDerivedVehicleType:_live.realtimeDerivedVehicleType || '',
+                    timetableVehicleType:(_live.realtimeReferenceModel
+                      ? _live.realtimeReferenceModel + ' / ' + _scheduleModel.model
+                      : _scheduleModel.model),
+                    serviceDate:_live.serviceDate,
+                    formationId:_live.vehicleFormationId || '',
+                    formationCandidates:_live.vehicleFormationCandidates || [],
+                    verifiedTimetableModel:_scheduleModel.model,
+                    verifiedTimetableArtworkPath:_scheduleModel.artworkPath || ''
+                  });
+                  _live.timetableVehicleType = _scheduleModel.model;
+                  _live.matchedTimetableObjectId = _scheduleModel.timetableObjectId || '';
+                  _live.vehicleEvidenceSource = 'odpt-train+matched-timetable';
+                  // Conflicting source assertions are not a reason to recover a
+                  // stale model from the running-chain or previous poll cache.
+                  _live.vehicleEvidenceConflict = _mergedVehicle.identityStatus !== 'EXACT';
+                  _projectVehicleResolution(_live,_mergedVehicle,false);
+                });
+              });
+            }
 
             // The established RunningChainResolver is the only authority for
             // scoped live/timetable candidate keys, for EVERY railway.

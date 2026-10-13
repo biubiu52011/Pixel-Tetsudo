@@ -169,17 +169,16 @@
   // ========== Calendar detection ==========
   function getCurrentCalendars() {
     try {
-      var now = new Date();
-      // Railway service day rolls over at 04:00, not at midnight.
-      // Before 04:00 use the previous day's timetable calendar.
-      if (now.getHours() < 4) now.setDate(now.getDate() - 1);
-      var day = now.getDay(); // 0=Sunday, 6=Saturday
+      // Railway calendars are JST regardless of the browser's timezone.
+      var now = new Date(Date.now() + 9 * 60 * 60 * 1000);
+      if (now.getUTCHours() < 4) now.setUTCDate(now.getUTCDate() - 1);
+      var day = now.getUTCDay(); // 0=Sunday, 6=Saturday
       // Explicit service-day overrides are supplied by authoritative calendar
       // data; do not guess Japanese public holidays from weekday alone.
       // Keys are local YYYY-MM-DD dates after the 04:00 service-day rollover.
-      var dateKey = now.getFullYear() + "-" +
-        String(now.getMonth() + 1).padStart(2, "0") + "-" +
-        String(now.getDate()).padStart(2, "0");
+      var dateKey = now.getUTCFullYear() + "-" +
+        String(now.getUTCMonth() + 1).padStart(2, "0") + "-" +
+        String(now.getUTCDate()).padStart(2, "0");
       var overrides = window.RuntimeConfig && window.RuntimeConfig.SERVICE_DAY_CALENDAR;
       var override = overrides && Object.prototype.hasOwnProperty.call(overrides, dateKey)
         ? overrides[dateKey] : null;
@@ -187,7 +186,7 @@
       else if (override === "weekday") day = 1;
       else if (override === "saturday") day = 6;
       else {
-        var published = PUBLISHED_JP_HOLIDAYS[String(now.getFullYear())];
+        var published = PUBLISHED_JP_HOLIDAYS[String(now.getUTCFullYear())];
         if (published && published.has(dateKey.slice(5))) day = 0;
       }
       // Return array of matching calendar types
@@ -225,10 +224,10 @@
 
   function getCurrentMinutes() {
     try {
-      var now = new Date();
-      var h = now.getHours();
-      // v5: 与 parseTimeToMinutes 同轴——当前时刻 0:00-3:59 按前一日深夜 +24
-      return (h < 4 ? h + 24 : h) * 60 + now.getMinutes();
+      var now = new Date(Date.now() + 9 * 60 * 60 * 1000);
+      var h = now.getUTCHours();
+      // ODPT TrainTimetable times and live position evidence share JST.
+      return (h < 4 ? h + 24 : h) * 60 + now.getUTCMinutes();
     } catch(e) { return 0; }
   }
 
@@ -374,9 +373,15 @@
       }).formatToParts(new Date());
       var out = {};
       parts.forEach(function(p){ out[p.type] = p.value; });
+      var jstHour = new Date(Date.now() + 9 * 60 * 60 * 1000).getUTCHours();
+      if (jstHour < 4) {
+        var preceding = new Date(Date.parse(out.year + '-' + out.month + '-' + out.day + 'T00:00:00Z') - 86400000);
+        return preceding.toISOString().slice(0, 10);
+      }
       return out.year + '-' + out.month + '-' + out.day;
     } catch (e) {
       var now = new Date(Date.now() + 9 * 60 * 60 * 1000);
+      if (now.getUTCHours() < 4) now.setUTCDate(now.getUTCDate() - 1);
       return now.toISOString().slice(0, 10);
     }
   }
@@ -478,8 +483,8 @@
     return cached;
   }
 
-  function resolveTrainRunIdentity(run, tt, lineId, line) {
-    var serviceDate = tt['_serviceDate'] || tt['serviceDate'] || tt['operatingDate'] || getTokyoServiceDate();
+  function resolveTrainRunIdentity(run, tt, lineId, line, serviceDateOverride) {
+    var serviceDate = serviceDateOverride || tt['_serviceDate'] || tt['serviceDate'] || tt['operatingDate'] || getTokyoServiceDate();
     var identityKey = lineId + "|" + String(serviceDate || "").slice(0, 10);
     if (run.identity && run.identity.key === identityKey) return run.identity;
 
@@ -1042,11 +1047,94 @@
     }
   }
 
+
+  // A timetable is a second evidence source for a LIVE ODPT train, not only
+  // a replacement position feed. Reuse the indexed, parsed timetable and the
+  // sole TrainVehicle identity resolver; never fabricate a train position.
+  function matchRealtimeVehicleEvidence(lineId, live, allLines) {
+    if (!live || live.positionSource !== 'realtime-api' || !live.trainNumber ||
+        !/^\d{4}-\d{2}-\d{2}$/.test(String(live.serviceDate || '')) ||
+        lineId === 'Arakawa') return null; // Toden trainNumber is a physical car number.
+    var line = allLines && allLines[lineId];
+    if (!line || !line.stations || !line.operator) return null;
+    var op = window.TransitConstants && window.TransitConstants.normalizeOp
+      ? window.TransitConstants.normalizeOp(line.operator) : line.operator;
+    op = ({ Rinkai:'TWR', TsukubaExpress:'MIR' })[op] || op;
+    var index = _timetableIndexCache.index[op];
+    if (!index) return null; // Called after the one estimator indexing pass.
+    var codes = window.ODPTClient && window.ODPTClient.LINE_RAILWAY_CODE || {};
+    var keys = [lineId, codes[lineId]].filter(function(v,i,a){return v && a.indexOf(v) === i;});
+    var rows = [];
+    keys.forEach(function(k) { if (index[k]) rows = rows.concat(index[k]); });
+    if (!rows.length) return null;
+    var liveDir = String(live.railDirection || '').split(/[:.]/).pop().toUpperCase();
+    if (!liveDir) return null;
+    var calendars = getCurrentCalendars();
+    var nowMinute = getCurrentMinutes();
+    var layout = getEstimatorStationLayout(lineId, line);
+    var found = Object.create(null), modelNames = Object.create(null);
+    for (var i = 0; i < rows.length; i++) {
+      var tt = rows[i];
+      if (!tt || String(tt['odpt:trainNumber'] || tt['odpt:train'] || '') !== String(live.trainNumber)) continue;
+      var serviceDay = tt._serviceDate || tt.serviceDate || tt.operatingDate || '';
+      if (serviceDay && String(serviceDay).slice(0,10) !== live.serviceDate) continue;
+      var calendar = tt['odpt:calendar'] || '';
+      if (calendar && calendars.indexOf(calendar) < 0) continue;
+      var run = compileTrainRun(tt, lineId, layout.workLine, layout.stationIndexMap);
+      if (!run || !run.stops.length ||
+          String(run.directionName || '').toUpperCase() !== liveDir) continue;
+      var times = [];
+      run.stops.forEach(function(s) {
+        if (s.arrivalMinute !== null) times.push(s.arrivalMinute);
+        if (s.departureMinute !== null) times.push(s.departureMinute);
+      });
+      if (!times.length) continue;
+      var earliest = Math.min.apply(null,times), latest = Math.max.apply(null,times);
+      // The live position is the authority. Timetable may be delayed, but a
+      // distant/previous-day run of the same number cannot identify this train.
+      if (nowMinute < earliest - 45 || nowMinute > latest + 90) continue;
+      // Distinct itineraries with the same number are competing physical runs.
+      // Exact duplicates imported from different sources may collapse.
+      var signature = run.scheduledItineraryKey || run.timetableIdentity;
+      var identity = resolveTrainRunIdentity(run,tt,lineId,line,live.serviceDate);
+      var vehicle = identity && identity.vehicleResult;
+      var model = vehicle && vehicle.identityStatus === 'EXACT' ? vehicle.name : '';
+      if (!found[signature]) {
+        found[signature] = { model:'', artworkPath: '',
+          timetableObjectId:run.timetableObjectId };
+      }
+      // Official ODPT schedules often have no vehicle field; an identical
+      // itinerary imported from a sourced manual/SQL timetable can supply it.
+      // Missing evidence is not a contradictory second model assertion.
+      if (model) {
+        if (found[signature].model && found[signature].model !== model) return null;
+        found[signature].model = model;
+      }
+      // A source-dated unique PNG may accompany a certified SQL vehicle;
+      // the TrainVehicle authority will validate it against the same model.
+      if (model && tt._positionSource === 'supabase-train-run' &&
+          tt._sqlVehicleMappingLevel === 'dated_schedule_rule' &&
+          String(tt.vehicleType || '').trim() &&
+          window.TrainIcons && window.TrainIcons.resolveVehicleDisplayName &&
+          window.TrainIcons.resolveVehicleDisplayName(tt.vehicleType) === model) {
+        found[signature].artworkPath = tt._sqlVehicleArtworkPath || '';
+      }
+      if (model) modelNames[model] = true;
+    }
+    var signatures = Object.keys(found);
+    if (signatures.length !== 1) return null;
+    var matched = found[signatures[0]];
+    // If timetable data gives only a route/schedule, preserve the unmatched
+    // live model; a timetable without a model is not a new vehicle assertion.
+    return matched.model ? matched : null;
+  }
+
   // ========== Public API ==========
   window.TrainPositionEstimator = {
     version: ESTIMATOR_VERSION,
     estimateLinePositions: estimateLinePositions,
     estimateAllPositions: estimateAllPositions,
+    matchRealtimeVehicleEvidence: matchRealtimeVehicleEvidence,
     registerManualTimetable: registerManualTimetable,
     getRegisteredManualLineIds: function() { return Object.keys(_manualTimetableRegistry); },
     getRegisteredManualTimetable: function(lineId) { return _manualTimetableRegistry[lineId] || null; },
