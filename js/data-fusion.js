@@ -1884,29 +1884,6 @@
     // ========== 按需加载缺失线路的时刻表 ==========
   var _timetableLoading = {};
 
-  // Train number alone is not a timetable identity. Different calendars,
-  // directions and trips may reuse it, including within the same operator.
-  // Prefer the publisher's timetable object ID and otherwise require enough
-  // published stop/time facts to establish a unique scheduled trip.
-  function _timetableMergeKey(tt) {
-    if (!tt) return "";
-    var railway = String(tt['odpt:railway'] || "");
-    var calendar = String(tt['odpt:calendar'] || "");
-    var sourceId = tt['owl:sameAs'] || tt['@id'];
-    if (sourceId) return ["source", railway, calendar, String(sourceId)].join("|");
-    var number = String(tt['odpt:trainNumber'] || "");
-    var stops = tt['odpt:trainTimetableObject'];
-    if (!railway || !calendar || !number || !Array.isArray(stops) || stops.length < 2) return "";
-    var first = stops[0] || {}, last = stops[stops.length - 1] || {};
-    var origin = first['odpt:departureStation'] || first['odpt:arrivalStation'];
-    var departure = first['odpt:departureTime'] || first['odpt:arrivalTime'];
-    var terminus = last['odpt:arrivalStation'] || last['odpt:departureStation'];
-    var arrival = last['odpt:arrivalTime'] || last['odpt:departureTime'];
-    if (!origin || !departure || !terminus || !arrival) return "";
-    return ["trip", railway, calendar, number, tt['odpt:railDirection'] || "",
-      origin, departure, terminus, arrival, stops.length].join("|");
-  }
-
   function loadMissingTimetables(linesNeedingEstimation) {
     try {
       if (!window.ODPTClient || !linesNeedingEstimation || linesNeedingEstimation.length === 0) return Promise.resolve();
@@ -1966,11 +1943,11 @@
             }
             var existingIds = Object.create(null);
             window.ODPT_TIMETABLES[lineInfo.operator].forEach(function(t) {
-              var id = _timetableMergeKey(t);
+              var id = window.ODPTClient.getTimetableIdentity(t);
               if (id) existingIds[id] = true;
             });
             data.forEach(function(t) {
-              var id = _timetableMergeKey(t);
+              var id = window.ODPTClient.getTimetableIdentity(t);
               // Unknown identity is not permission to discard a published trip.
               if (!id || !existingIds[id]) {
                 window.ODPT_TIMETABLES[lineInfo.operator].push(t);
