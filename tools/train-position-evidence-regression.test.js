@@ -364,11 +364,12 @@ assert(fusionSource.includes('_sources.indexOf("realtime") >= 0') &&
   'vehicle projection must preserve realtime evidence flags when the resolver converges multiple sources');
 assert(fusionSource.includes('_evSources.indexOf("realtime") < 0 && _evResolution.source !== "realtime"'),
   'positionless realtime vehicle evidence must use the canonical sources array rather than require a single-source resolver result');
-assert(fusionSource.includes('var trainId = t["odpt:train"] || t["odpt:trainNumber"] || "";') &&
+assert(fusionSource.includes('var trainId = _realtimeSourceIdentity(t, op, railwayName);') &&
+       fusionSource.includes("record['owl:sameAs'] || record['odpt:train']") &&
        fusionSource.includes('var trainNumber = String(t["odpt:trainNumber"] || t["odpt:train"] || "");') &&
        fusionSource.includes('trainId: trainId,') &&
        fusionSource.includes('trainNumber: trainNumber,'),
-  'realtime source-object identity and service train number must remain separate while retaining bounded missing-field fallbacks');
+  'realtime source-object identity and service number must remain separate with railway-scoped fallbacks');
 assert(!fusionSource.includes('var trainId = t["odpt:trainNumber"] || t["odpt:train"] || "";'),
   'ODPT train number must not replace the source train object identity');
 assert(fusionSource.includes('TrainOperationEvidence.resolveEvidence(positionData.trainNumber, {'),

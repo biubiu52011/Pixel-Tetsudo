@@ -10,6 +10,13 @@
 
   var odptData = { trains: {}, delayInfo: {}, realtimePositions: {} };
   function _positionIdentity(p) { return p && (p.runningChainId || p.trainId) || ""; }
+  function _realtimeSourceIdentity(record, operator, railway) {
+    var explicit = record['owl:sameAs'] || record['odpt:train'];
+    if (explicit) return String(explicit);
+    var number = String(record['odpt:trainNumber'] || '');
+    if (!number) return String(record['@id'] || '');
+    return ['realtime', operator, railway, number, record['odpt:railDirection'] || ''].join('::');
+  }
 
   // Evidence-backed vehicle identity follows the physical running chain, not
   // the currently rendered line. Never seed this registry from map/fleet/icon
@@ -25,6 +32,7 @@
     var r = p.vehicleResolution || null;
     var sources = r && Array.isArray(r.sources) ? r.sources : [];
     var src = p.vehicleSource || (r && r.source) || "";
+    if (sources.indexOf("official-realtime-car-number") >= 0 || sources.indexOf("roster-physical-id") >= 0) return 5;
     if (p.vehicleResolvedFromRealtime === true || sources.indexOf("realtime") >= 0 || src === "realtime") return 5;
     if (p.vehicleResolvedFromRealtimeDerived === true || sources.indexOf("realtime-derived") >= 0 || src === "realtime-derived") return 4;
     if (sources.indexOf("structural") >= 0 || src === "structural" || src === "formation-evidence") return 3;
@@ -46,7 +54,8 @@
     p.vehicleIconPath = r && r.identityStatus === "EXACT" ? (r.iconPath || "") : "";
     var _sources = r && Array.isArray(r.sources) ? r.sources : [];
     p.vehicleResolvedFromRealtime = !!(r && r.identityStatus === "EXACT" &&
-      (_sources.indexOf("realtime") >= 0 || r.source === "realtime"));
+      (_sources.indexOf("realtime") >= 0 || _sources.indexOf("official-realtime-car-number") >= 0 ||
+       _sources.indexOf("roster-physical-id") >= 0 || r.source === "realtime"));
     p.vehicleResolvedFromRealtimeDerived = !!(r && r.identityStatus === "EXACT" &&
       (_sources.indexOf("realtime-derived") >= 0 || r.source === "realtime-derived"));
     p.vehicleResolvedUpstream = !!(r && r.identityStatus === "EXACT");
@@ -1026,7 +1035,7 @@
             stationKey = window.RuntimeConfig.STATION_ALIAS[stationKey];
           }
           var delayMin = t["odpt:delay"] != null ? (parseInt(t["odpt:delay"], 10) || 0) : 0;
-          var trainId = t["odpt:train"] || t["odpt:trainNumber"] || "";
+          var trainId = _realtimeSourceIdentity(t, op, railwayName);
           var trainNumber = String(t["odpt:trainNumber"] || t["odpt:train"] || "");
           var railDirection = t["odpt:railDirection"] || "";
           var directionName = "";
@@ -1106,6 +1115,14 @@
             var _linePositionIndex = _positionIndexByLine[lid];
             if (!_linePositionIndex) _linePositionIndex = _positionIndexByLine[lid] = new Map();
             var existingIdx = _linePositionIndex.has(trainId) ? _linePositionIndex.get(trainId) : -1;
+            if (existingIdx >= 0) {
+              var _previousSourceTime = Date.parse(posMap[lid][existingIdx].sourceUpdatedAt || '');
+              var _incomingSourceTime = Date.parse(t['dc:date'] || '');
+              // Duplicate source identities are one train. An older response
+              // must not replace its newer position or physical vehicle proof.
+              if (isFinite(_previousSourceTime) &&
+                  (!isFinite(_incomingSourceTime) || _incomingSourceTime < _previousSourceTime)) return;
+            }
             var rawType = t["odpt:trainType"] || "";
             var typeName = "";
             if (rawType) {
@@ -1192,6 +1209,12 @@
                         return v.trim();
                       }).filter(Boolean) : [];
                 _rtFormations = _rtFormations.filter(function(v,i,a){return a.indexOf(v) === i;});
+                // Adapter-supplied physical IDs have their own fields; never
+                // reinterpret a normal public train number as a car number.
+                var _sourceFormation = String(t.vehicleFormationId || t.formationId || "").trim();
+                var _sourceCar = String(t.vehicleCarNumber || t.carNumber || "").trim();
+                if (_sourceFormation) _rtFormations.push(_sourceFormation);
+                _rtFormations = _rtFormations.filter(function(v,i,a){return a.indexOf(v) === i;});
                 positionData.vehicleFormationCandidates = _rtFormations;
                 positionData.vehicleFormationId = _rtFormations.length === 1 ? _rtFormations[0] : "";
                 var _vehicleStart = _perfNow();
@@ -1202,9 +1225,10 @@
                   trainOwner: odptTrainOwner,
                   trainNumber: positionData.trainNumber,
                   railway: railway,
-                  // Only live Toei.Arakawa Train rows can supply physical car IDs.
+                  // Arakawa explicitly encodes car IDs in trainNumber. Other
+                  // adapters must supply a separate physical-ID field.
                   realtimeCarNumber: lid === "Arakawa" && railway === "odpt.Railway:Toei.Arakawa" && trainOpShort === "Toei"
-                    ? positionData.trainNumber : "",
+                    ? positionData.trainNumber : _sourceCar,
                   stationIndex: idx,
                   trainType: rawType,
                   destinationStation: destStations,
@@ -1381,6 +1405,7 @@
                     trainOwner:_live.trainOwner || '',
                     trainNumber:_live.trainNumber,
                     trainId:_live.trainId,
+                    realtimeCarNumber:_live.vehicleCarNumber,
                     realtimeVehicleType:_live.realtimeVehicleType || '',
                     realtimeDerivedVehicleType:_live.realtimeDerivedVehicleType || '',
                     timetableVehicleType:(_live.realtimeReferenceModel

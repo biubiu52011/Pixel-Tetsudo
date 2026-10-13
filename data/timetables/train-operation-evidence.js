@@ -288,6 +288,11 @@
   function registerCanonicalReferenceProvider() {
     var rules = window.VEHICLE_REFERENCE_RULES || [];
     if (!Array.isArray(rules) || !rules.length) return false;
+    var byNumber = Object.create(null);
+    rules.forEach(function(r) {
+      if (!r || !r.trainNumber || !r.sourceUrl || !r.effectiveFrom) return;
+      (byNumber[r.trainNumber] || (byNumber[r.trainNumber] = [])).push(r);
+    });
     return register({
       id: "canonical-timetable-reference-vehicles", grade: "C",
       resolveEvidence: function(trainNumber, ctx) {
@@ -296,7 +301,7 @@
         var day = String(ctx.serviceDate || "").slice(0, 10);
         var cal = String(ctx.calendarType || "").toLowerCase();
         if (!n || !day || !cal) return null;
-        var hits = rules.filter(function(r) {
+        var hits = (byNumber[n] || []).filter(function(r) {
           return r.trainNumber === n &&
             r.calendarType === cal &&
             (!r.effectiveFrom || day >= r.effectiveFrom) &&

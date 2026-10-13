@@ -17,6 +17,11 @@ assert(Array.isArray(snapshot.records), "snapshot records must be an array");
 assert(Array.isArray(snapshot.datedRecords), "snapshot datedRecords must be an array");
 assert(Array.isArray(snapshot.familyRules), "snapshot familyRules must be an array");
 assert(Array.isArray(snapshot.referenceRules), "snapshot referenceRules must be an array");
+assert(Array.isArray(snapshot.carsets) && snapshot.carsets.length >= 8,"canonical car-number roster missing");
+for(const r of snapshot.carsets) {
+  assert(r.operator && r.vehicle_type && r.carset_id && r.snapshot_date && r.source_url,"carset lacks source scope");
+  assert(Array.isArray(r.cars) && r.cars.length>0 && new Set(r.cars).size===r.cars.length,"invalid car-number roster");
+}
 assert(snapshot.referenceRules.length >= 826, "Supabase planned vehicle rules not exported");
 assert(snapshot.referenceRules.filter(r=>r.networkKey==="saikyo" && r.vehicleType==="E233系7000番台").length >= 649,
   "Saikyo JR E233 reference coverage unexpectedly missing");

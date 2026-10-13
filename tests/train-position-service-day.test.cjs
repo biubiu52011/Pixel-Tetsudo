@@ -6,6 +6,33 @@ const vm = require('node:vm');
 
 const source = fs.readFileSync(path.join(__dirname, '../js/train-position-estimator.js'), 'utf8');
 
+test('live deduplication respects source identity, railway and direction', () => {
+  const fusion=fs.readFileSync(path.join(__dirname,'../js/data-fusion.js'),'utf8');
+  const start=fusion.indexOf('  function _realtimeSourceIdentity(');
+  const end=fusion.indexOf('\n  // Evidence-backed',start);
+  const ctx={};
+  vm.runInNewContext(fusion.slice(start,end),ctx);
+  const key=ctx._realtimeSourceIdentity;
+  const row={'odpt:trainNumber':'1004K','odpt:railDirection':'Inbound'};
+  assert.notEqual(key(row,'JR-East','SaikyoKawagoe'),key(row,'JR-East','Keiyo'));
+  assert.notEqual(key(row,'JR-East','SaikyoKawagoe'),key({...row,'odpt:railDirection':'Outbound'},'JR-East','SaikyoKawagoe'));
+  assert.notEqual(key(row,'JR-East','SaikyoKawagoe'),key(row,'TWR','SaikyoKawagoe'));
+  const explicit={...row,'owl:sameAs':'odpt.Train:JR-East.SaikyoKawagoe.1004K'};
+  assert.equal(key(explicit,'JR-East','SaikyoKawagoe'),key({...explicit,'dc:date':'new snapshot'},'JR-East','SaikyoKawagoe'));
+});
+
+test('duplicate realtime rows retain the newest source position', () => {
+  const fusion=fs.readFileSync(path.join(__dirname,'../js/data-fusion.js'),'utf8');
+  const start=fusion.indexOf('            if (existingIdx >= 0) {');
+  const end=fusion.indexOf('            var rawType',start);
+  const code='(function(){'+fusion.slice(start,end)+'return "accept";})()';
+  const run=incoming=>vm.runInNewContext(code,{existingIdx:0,lid:'Test',
+    posMap:{Test:[{sourceUpdatedAt:'2026-10-13T12:01:00+09:00'}]},t:{'dc:date':incoming}});
+  assert.equal(run('2026-10-13T12:00:00+09:00'),undefined);
+  assert.equal(run('2026-10-13T12:02:00+09:00'),'accept');
+  assert.equal(run('invalid timestamp'),undefined);
+});
+
 function estimatorAt(year, month, day, hour, minute, overrides) {
   const fixed = new Date(Date.UTC(year, month - 1, day, hour, minute) - 9 * 60 * 60 * 1000);
   class FixedDate extends Date {

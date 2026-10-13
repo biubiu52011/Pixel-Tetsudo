@@ -7,6 +7,12 @@
   "use strict";
 
 var CANONICAL_VEHICLES = {
+  // Official identity: https://www.tokyometro.jp/corporate/enterprise/passenger_rail/cars/working/chiyoda_05/index.html
+  "metro-05-chiyoda-shuttle": {
+    displayName:"東京メトロ05系（千代田支線）",iconName:"東京メトロ05系（千代田支線）",
+    asset:"../images/列车/東京メトロ/東京メトロ_05系_区間列車車両.png",
+    aliases:["東京メトロ05系（区間列車車両）"]
+  },
   "new-shuttle-2000-01": { displayName: "埼玉新都市交通2000系（01編成）", iconName: "埼玉新都市交通2000系（01編成）", asset: "../images/列车/埼玉新都市交通/埼玉新都市交通_2000系_01編成_レッドパープル.png", aliases: ["2000系（01編成）","埼玉新都市交通2000系（01編成）"] },
   "new-shuttle-2000-02": { displayName: "埼玉新都市交通2000系（02編成）", iconName: "埼玉新都市交通2000系（02編成）", asset: "../images/列车/埼玉新都市交通/埼玉新都市交通_2000系_02編成_オレンジ.png", aliases: ["2000系（02編成）","埼玉新都市交通2000系（02編成）"] },
   "new-shuttle-2000-03": { displayName: "埼玉新都市交通2000系（03編成）", iconName: "埼玉新都市交通2000系（03編成）", asset: "../images/列车/埼玉新都市交通/埼玉新都市交通_2000系_03編成_グリーン.png", aliases: ["2000系（03編成）","埼玉新都市交通2000系（03編成）"] },
@@ -235,6 +241,29 @@ function resolveTodenArakawaLiveCar(ctx) {
   if (!/^[0-9]{4}$/.test(number)) return null;
   var name = TODEN_ARAKAWA_BY_CAR[number];
   return name ? { number: number, name: name } : null;
+}
+
+// Exact source-supplied physical IDs only. Public train numbers are never car
+// numbers here. Scope to the vehicle owner on through services, not the host line.
+function resolveRosterCar(ctx) {
+  var number = String(ctx.realtimeCarNumber || ctx.vehicleCarNumber || '').trim();
+  var formation = String(ctx.formationId || '').trim();
+  var owner = normOp(ctx.trainOwner || ctx.assignmentOperator || ctx.operator);
+  var day = String(ctx.serviceDate || '');
+  if ((!number && !formation) || !owner || !/^\d{4}-\d{2}-\d{2}$/.test(day)) return null;
+  var hits = (window.VEHICLE_CARSETS || []).filter(function(r) {
+    var rosterOwner = r.operator === '東京臨海高速鉄道' ? 'TWR' : normOp(r.operator);
+    return rosterOwner === owner && r.status === '運用中' && r.source_url &&
+      /^\d{4}-\d{2}-\d{2}$/.test(r.snapshot_date || '') && r.snapshot_date <= day &&
+      (!number || (Array.isArray(r.cars) && r.cars.indexOf(number) >= 0)) &&
+      (number || r.carset_id === formation);
+  });
+  var identities = {};
+  hits.forEach(function(r) { identities[r.vehicle_type + '|' + r.carset_id] = r; });
+  var keys = Object.keys(identities);
+  if (keys.length !== 1) return null;
+  var hit = identities[keys[0]];
+  return {number:number,name:hit.vehicle_type,formationId:hit.carset_id,sourceUrl:hit.source_url};
 }
 
 // Verified Toei vehicle identities and available owner-gallery artwork.
@@ -815,6 +844,7 @@ function _canonicalVehicleIconPath(name, serviceDate) {
   // Normalize operator labels only for metadata carried by explicit evidence.
   function normOp(op) {
     if (!op) return '';
+    op = String(op).replace(/^odpt\.(?:Operator|TrainOwner):/, '');
     if (window.TransitConstants && typeof window.TransitConstants.normalizeOp === 'function') {
       return window.TransitConstants.normalizeOp(op);
     }
@@ -850,12 +880,12 @@ function _canonicalVehicleIconPath(name, serviceDate) {
   function resolve(ctx) {
     ctx = ctx || {};
     var assignmentOperator = normOp(ctx.assignmentOperator || ctx.operationOperator || '');
-    var tcar = resolveTodenArakawaLiveCar(ctx);
+    var tcar = resolveTodenArakawaLiveCar(ctx) || resolveRosterCar(ctx);
     // A source-supplied exact vehicle model outranks a generic fleet constraint.
     // Keep the latter only for trains without model evidence (never invent variants).
     var hasExplicitVehicle = !!(String(ctx.realtimeVehicleType || '').trim() ||
       String(ctx.realtimeDerivedVehicleType || '').trim() ||
-      String(ctx.timetableVehicleType || '').trim());
+      String(ctx.timetableVehicleType || '').trim() || tcar);
     var toeiFleet = hasExplicitVehicle ? null : resolveToeiOwnerSingleFleet(ctx);
 
     // One identity arbitration path for realtime, realtime-derived and
@@ -873,8 +903,8 @@ function _canonicalVehicleIconPath(name, serviceDate) {
     [
       { source: 'realtime', value: ctx.realtimeVehicleType },
       { source: 'realtime-derived', value: ctx.realtimeDerivedVehicleType },
-      { source: 'timetable', value: ctx.timetableVehicleType },
-      { source: 'official-realtime-car-number', value: tcar && tcar.name },
+      { source: 'timetable', value: tcar ? '' : ctx.timetableVehicleType },
+      { source: tcar && tcar.sourceUrl ? 'roster-physical-id' : 'official-realtime-car-number', value: tcar && tcar.name },
       { source: 'official-train-owner-single-fleet', value: toeiFleet }
     ].forEach(function(group) {
       splitCandidates(group.value).forEach(function(rawCandidate) {
@@ -906,6 +936,12 @@ function _canonicalVehicleIconPath(name, serviceDate) {
       : [];
     _formationCandidates = _formationCandidates.filter(function(v,i,a){ return a.indexOf(v) === i; });
     var _formationId = String(ctx.formationId || '').trim();
+    if (tcar && tcar.formationId && _formationId && _formationId !== tcar.formationId &&
+        _formationCandidates.indexOf(tcar.formationId) < 0) _formationCandidates.push(tcar.formationId);
+    if (tcar && tcar.formationId && !_formationId && !_formationCandidates.length) {
+      _formationId = tcar.formationId;
+      _formationCandidates = [_formationId];
+    }
     var _formationConstrained = _formationCandidates.length > 0 || !!_formationId;
     var _formationUnique = _formationCandidates.length === 1
       && !!_formationId
@@ -952,8 +988,8 @@ function _canonicalVehicleIconPath(name, serviceDate) {
       identityStatus = 'EXACT';
       // Timetable-derived exact vehicles retain their timetable identity reason
       // so downstream diagnostics can distinguish the evidence channel.
-      if (tcar && chosen === tcar.name) {
-        identityReason = 'verified-toden-realtime-car-number';
+      if (tcar && chosen === admittedIdentity(tcar.name)) {
+        identityReason = tcar.sourceUrl ? 'verified-roster-physical-id' : 'verified-toden-realtime-car-number';
       } else if (toeiFleet && chosen === toeiFleet) {
         identityReason = 'verified-toei-owner-single-fleet';
       } else if (chosenSrc === 'timetable') {
@@ -973,7 +1009,7 @@ function _canonicalVehicleIconPath(name, serviceDate) {
 
     return {
       name: chosen,                                  // EXACT vehicle only; empty while ambiguous
-      verifiedCarNumber: tcar && chosen === tcar.name ? tcar.number : '',
+      verifiedCarNumber: tcar && chosen === admittedIdentity(tcar.name) ? tcar.number : '',
       candidates: effectiveCandidates,               // admitted evidence candidates
       allCandidates: orderArr,                        // admitted evidence pool for diagnostics
       identityStatus: identityStatus,                 // EXACT / NARROWED / UNKNOWN

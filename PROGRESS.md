@@ -1,5 +1,14 @@
 # Pixel Tetsudo 工程进度
 
+## 2026-10-13 JST — all-line vehicle mapping and deduplication
+
+- No new project scripts. Shared `TrainVehicle` now resolves source-supplied car/formation IDs against sourced SQL carsets, scoped to owner and snapshot date. Physical identity outranks planned references; contradictory physical/model evidence blocks PNG selection.
+- Existing canonical exporter admits every source/date/calendar-complete network, instead of Saikyo only: 2,660 references (Saikyo 826, Chiyoda–Joban–Odakyu 1,593, Odakyu main 241). The 67 Tobu rows without calendar remain excluded from this provider; existing Tobu evidence stays intact. Added 8 TWR carsets / 80 car IDs through the Supabase read-only connector export, without exposing credentials.
+- Official Tokyo Metro Chiyoda 05 shuttle identity projects to its existing native PNG; bare ambiguous 05 family remains unresolved. All six exported reference models now have model-exact PNGs.
+- Realtime deduplication uses source `owl:sameAs`/train object identity, or operator/railway/number/direction scope, and rejects older duplicate records. Existing SQL/realtime running-chain deduplication remains the single physical-run join.
+- Existing artwork audit checks all 223 canonical lines: 35 have local source-scoped evidence; all others require explicit source identity. 83 canonical artwork records, zero missing native PNG paths. Report saved outside repository as `all-line-vehicle-mapping-audit.json`.
+- Validation: 31 tools suites, service-day/browser contract tests, all 4 Python release guards pass. OCR delegation review covers runtime/export/audit changes and generated snapshot consistency; unrelated local Meguro/backlog edits remain untouched.
+
 > 本文件是智能体之间的**唯一共享进度账本**。开始工作前先读 `ENGINEERING.md` 和本文件；完成/阻塞/交接后必须更新本文件。
 >
 > 最后人工整理：2026-10-07 JST
@@ -9,6 +18,15 @@
 
 
 
+
+
+## 2026-10-13 JST — train icon deployment verified complete
+
+- 发布提交：fbcc68828714b077d9c89363b6536827cf928b67，已推送 origin/main。CI / CD run 38339581582 的 Validate 与 Deploy to GitHub Pages 均 success；Release Guards run 38339581463 success；pages build/deployment run 38339580685 success。
+- 线上验收：pages/trains.html HTTP 200，引用本次 ?build=fbcc688... 且含 no-cache meta；railway_data.json 的 JO 成员为 [Yokosuka,SobuRapid]；新 db-loader cache key 识别 build 标记。抽查 3 张已有列车 PNG HTTP 200、SHA256 与本地完全一致。
+- Supabase：train-runs 已部署 ACTIVE v60，保留既有公开只读 verify_jwt=false 配置；旧 v59 源码/元数据已备份到当前对话 visualization。真实请求 Rinkai / 2026-10-13 = HTTP200、SQL HIT、296 个 canonical timetable runs；SaikyoKawagoe = HTTP200、REALTIME_API_LINE BYPASS、0 SQL runs，实时数据源隔离正常。Rinkai 响应无 certified vehicle label，不能据此声称全部车次都有已确认车型；无证据继续维持 UNKNOWN，而不猜图标。
+- 校验范围：资产发布、CI/Release Guards、线上页面/缓存/JO 数据、PNG 完整性及真实 SQL/API 读请求；未进行人工浏览器互动验收。
+- 发布未包含先前独立的 TokyuMeguro-manual.js / normalization backlog 修改；仍保留本地文件及原始 stash/备份。本段是部署后的本地进度记录，尚未另行提交。
 
 ## 2026-10-13 JST — train icon deployment release (in progress)
 

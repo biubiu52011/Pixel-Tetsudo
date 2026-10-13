@@ -6,6 +6,54 @@ const vm = require('vm');
 const ROOT = path.resolve(__dirname, '..');
 function read(rel) { return fs.readFileSync(path.join(ROOT, rel), 'utf8'); }
 
+// Physical car IDs outrank planned train-number references on any host line.
+{
+  const ctx={window:{},console:{debug(){}}};
+  vm.createContext(ctx);
+  for (const p of ['data/timetables/vehicle-operation-evidence-data.js','js/train-vehicle.js'])
+    vm.runInContext(read(p),ctx,{filename:p});
+  const resolve=ctx.window.TrainVehicle.resolve;
+  const base={lineId:'SaikyoKawagoe',trainOwner:'odpt.TrainOwner:TWR',operator:'JR-East',
+    serviceDate:'2026-10-13',realtimeCarNumber:'71-101',timetableVehicleType:'E233系7000番台'};
+  const r=resolve(base);
+  assert.strictEqual(r.name,'東京臨海高速鉄道71-000形');
+  assert.strictEqual(r.verifiedCarNumber,'71-101');
+  assert.ok(r.iconPath.endsWith('東京臨海高速鉄道_71-000形.png'));
+  assert.strictEqual(resolve({...base,realtimeCarNumber:'',trainNumber:'71-101',timetableVehicleType:''}).identityStatus,'UNKNOWN');
+  assert.strictEqual(resolve({...base,trainOwner:'JR-East',timetableVehicleType:''}).identityStatus,'UNKNOWN');
+  assert.strictEqual(resolve({...base,serviceDate:'2026-09-24',timetableVehicleType:''}).identityStatus,'UNKNOWN');
+  assert.strictEqual(resolve({...base,formationId:'Z12',formationCandidates:['Z12']}).iconPath,'');
+  assert.strictEqual(resolve({...base,realtimeVehicleType:'東京臨海高速鉄道70-000形'}).identityStatus,'NARROWED');
+  assert.strictEqual(resolve({...base,formationCandidates:['Z11','Z12']}).iconPath,'');
+  const roster=ctx.window.VEHICLE_CARSETS;
+  ctx.window.VEHICLE_CARSETS=roster.concat({...roster[4],carset_id:'conflicting'});
+  assert.strictEqual(resolve({...base,timetableVehicleType:''}).identityStatus,'UNKNOWN');
+  console.log('Physical car / owner / date / formation / planned model arbitration: PASS');
+}
+
+{
+  const ctx={window:{},console:{debug(){}}};
+  vm.createContext(ctx);
+  for(const p of ['data/timetables/vehicle-operation-evidence-data.js','data/timetables/train-operation-evidence.js','js/train-vehicle.js'])
+    vm.runInContext(read(p),ctx,{filename:p});
+  const rows=ctx.window.VEHICLE_REFERENCE_RULES;
+  for(const network of ['saikyo','odakyu-main','chiyoda-joban-odakyu']) {
+    const row=rows.find(r=>r.networkKey===network && r.calendarType==='weekday');
+    const resolve=lineId=>ctx.window.TrainOperationEvidence.resolveEvidence(row.trainNumber,{
+      lineId,serviceDate:'2026-10-13',calendarType:'weekday'},'realtime-derived');
+    const hit=resolve(network);
+    assert.ok(hit,network);
+    assert.strictEqual(hit.evidenceRole,'timetable-reference');
+    assert.strictEqual(hit.formationId,'');
+    assert.ok(ctx.window.TrainVehicle.resolve({timetableVehicleType:hit.vehicleType}).iconPath);
+    assert.strictEqual(resolve('unrelated-line'),null);
+  }
+  const shuttle=ctx.window.TrainVehicle.resolve({timetableVehicleType:'東京メトロ05系（千代田支線）'});
+  assert.ok(shuttle.iconPath.endsWith('東京メトロ_05系_区間列車車両.png'));
+  assert.strictEqual(ctx.window.TrainVehicle.resolve({timetableVehicleType:'東京メトロ05系'}).iconPath,'');
+  console.log('All exported reference networks / scope / shuttle artwork: PASS');
+}
+
 const context = {
   console: { debug() {}, log() {}, warn() {}, error() {} },
   window: {
@@ -622,7 +670,7 @@ console.log('single internal PNG resolver, no second mapping hop: PASS');
 // canonical reference lookup covers dated JR runs to intermediate terminals.
 {
   const roster=JSON.parse(read('data/timetables/vehicle-operation-evidence.json')).referenceRules;
-  assert.strictEqual(roster.length,826);
+  assert.strictEqual(roster.filter(r=>r.networkKey==='saikyo').length,826);
   assert.strictEqual(roster.filter(r=>r.vehicleType==='E233系7000番台').length,649);
   const ctx={window:{},console:{debug(){}}};
   vm.createContext(ctx);

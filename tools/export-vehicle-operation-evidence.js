@@ -7,13 +7,15 @@
  * SUPABASE_SECRET_KEY or SUPABASE_SERVICE_ROLE_KEY.
  *
  * Usage: node tools/export-vehicle-operation-evidence.js
+ * Read-only connector mapping refresh: --mapping-input <export.json>
  */
 const fs = require("fs");
 const path = require("path");
 
 const base = String(process.env.SUPABASE_URL || "").replace(/\/$/, "");
 const key = process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY || "";
-if (!base || !key) {
+const inputIndex = process.argv.indexOf("--mapping-input");
+if (inputIndex < 0 && (!base || !key)) {
   console.error("Missing SUPABASE_URL and SUPABASE_SECRET_KEY/SUPABASE_SERVICE_ROLE_KEY");
   process.exit(2);
 }
@@ -25,6 +27,45 @@ const RUNTIME_NETWORK_KEYS = {
 
 function normalizeNetworkKey(networkKey) {
   return RUNTIME_NETWORK_KEYS[networkKey] || networkKey;
+}
+
+function referenceRecord(r) {
+  return {evidenceId:r.id,operator:r.operator||"",networkKey:normalizeNetworkKey(r.network_key),
+    trainNumber:r.train_number||"",vehicleType:r.vehicle_type||"",calendarType:r.calendar_type||"",
+    effectiveFrom:r.effective_from||"",effectiveTo:r.effective_to||"",
+    grade:r.evidence_grade||"C",sourceUrl:r.source_url||"",evidenceRole:"timetable-reference"};
+}
+function eligibleReference(r) {
+  return !!(r.networkKey && r.operator && r.trainNumber && r.vehicleType && r.sourceUrl &&
+    /^(weekday|holiday)$/.test(r.calendarType) && /^\d{4}-\d{2}-\d{2}$/.test(r.effectiveFrom) &&
+    (!r.effectiveTo || (/^\d{4}-\d{2}-\d{2}$/.test(r.effectiveTo) && r.effectiveTo >= r.effectiveFrom)));
+}
+function carsetRecord(r) {
+  return {id:r.id,operator:r.operator,carset_id:r.carset_id,vehicle_type:r.vehicle_type,
+    status:r.status,snapshot_date:r.snapshot_date,cars:r.cars||[],source_url:r.source_url||"",
+    evidence_grade:r.evidence_grade||"C"};
+}
+function writeSnapshot(json) {
+  const root=path.join(__dirname,"..","data","timetables");
+  fs.writeFileSync(path.join(root,"vehicle-operation-evidence.json"),JSON.stringify(json,null,2)+"\n");
+  const assignments = {VEHICLE_OPERATION_EVIDENCE:json.records,VEHICLE_DATED_EVIDENCE:json.datedRecords,
+    VEHICLE_NETWORK_ALIASES:json.networkAliases,VEHICLE_FAMILY_RULES:json.familyRules,
+    VEHICLE_REFERENCE_RULES:json.referenceRules,VEHICLE_CARSETS:json.carsets||[]};
+  fs.writeFileSync(path.join(root,"vehicle-operation-evidence-data.js"),
+    "/* Generated from canonical Supabase evidence tables. Data only; no line logic. */\n"+
+    Object.entries(assignments).map(([key,rows])=>"window."+key+" = "+JSON.stringify(rows,null,2)+";\n").join(""));
+}
+// Read-only connector exports can update mapping tables without a server key.
+// Other evidence remains in the last canonical snapshot; never read credentials.
+if (inputIndex >= 0) {
+  const input=JSON.parse(fs.readFileSync(process.argv[inputIndex+1],"utf8"));
+  if (!Array.isArray(input.rules) || !Array.isArray(input.carsets)) throw new Error("Incomplete mapping export");
+  const snapshot=JSON.parse(fs.readFileSync(path.join(__dirname,"..","data","timetables","vehicle-operation-evidence.json"),"utf8"));
+  snapshot.referenceRules=input.rules.map(referenceRecord).filter(eligibleReference);
+  snapshot.carsets=input.carsets.map(carsetRecord);
+  writeSnapshot(snapshot);
+  console.log("Mapping snapshot:",snapshot.referenceRules.length,"references,",snapshot.carsets.length,"carsets");
+  process.exit(0);
 }
 
 async function get(table, select, order) {
@@ -42,7 +83,7 @@ async function get(table, select, order) {
 }
 
 (async function(){
-  const [obs, policies, mappings, inventory, formations, trainDates, operationDates, trainObs, sources, familyRules, networkAliases, referenceRules] = await Promise.all([
+  const [obs, policies, mappings, inventory, formations, trainDates, operationDates, trainObs, sources, familyRules, networkAliases, referenceRules, carsets] = await Promise.all([
     get("runtime_vehicle_operation_evidence",
       "observation_id,service_date,operator,network_key,operation_code,valid_from_time,valid_to_time,vehicle_type,formation_ids,ambiguity_group,observed_date,evidence_grade,source_url,sql_evidence_role",
       "service_date.asc,operator.asc,network_key.asc,operation_code.asc,observation_id.asc"),
@@ -82,7 +123,8 @@ async function get(table, select, order) {
     // observation or a carset assignment and never supplies train position.
     get("train_vehicle_rules",
       "id,operator,network_key,train_number,vehicle_type,effective_from,effective_to,source_id,calendar_type",
-      "id.asc")
+      "id.asc"),
+    get("vehicle_carsets","id,operator,carset_id,vehicle_type,status,snapshot_date,cars,source_id","id.asc")
   ]);
   const pm = Object.fromEntries(policies.map(p=>[p.network_key,p]));
   // Source policy is evidence metadata only. Realtime position coverage belongs
@@ -169,15 +211,7 @@ async function get(table, select, order) {
       effectiveTo:r.effective_to||"",grade:source.evidence_grade||"C",
       sourceUrl:source.source_url||"",evidenceRole:"timetable-reference"};
   });
-  // Roll out only the published 2026 Saikyo/Rinkai reference roster that
-  // was audited against the JR/TWR boundary. The other SQL train-vehicle
-  // tables are retained for future review, not silently enabled across
-  // unrelated networks. This is export scope, NOT a runtime route rule.
-  const eligibleReferenceRules = referenceRuleRecords.filter(function(r) {
-    return r.networkKey === "saikyo" &&
-      !!(r.trainNumber && r.vehicleType && r.calendarType &&
-         r.effectiveFrom && r.sourceUrl);
-  });
+  const eligibleReferenceRules = referenceRuleRecords.filter(eligibleReference);
   const inventoryNetworks = [...new Set(inventory.map(r=>r.canonical_network_key))];
   if (!inventoryNetworks.length) throw new Error("Canonical vehicle evidence inventory is empty");
   const verifiedAliases=networkAliases.filter(r =>
@@ -188,15 +222,9 @@ async function get(table, select, order) {
     networkAliases:verifiedAliases,
     familyRules:familyRuleRecords,
     evidenceInventory:{networkCount:inventoryNetworks.length,networks:inventoryNetworks,rows:inventory},
-    referenceRules:eligibleReferenceRules};
-  const root=path.join(__dirname,"..","data","timetables");
-  fs.writeFileSync(path.join(root,"vehicle-operation-evidence.json"),JSON.stringify(json,null,2)+"\n");
-  fs.writeFileSync(path.join(root,"vehicle-operation-evidence-data.js"),
-    "/* Generated from canonical Supabase evidence tables. Data only; no line logic. */\n"+
-    "window.VEHICLE_OPERATION_EVIDENCE = "+JSON.stringify(records,null,2)+";\n"+
-    "window.VEHICLE_DATED_EVIDENCE = "+JSON.stringify(datedRecords,null,2)+";\n"+
-    "window.VEHICLE_NETWORK_ALIASES = "+JSON.stringify(verifiedAliases,null,2)+";\n"+
-    "window.VEHICLE_FAMILY_RULES = "+JSON.stringify(familyRuleRecords,null,2)+";\n"+
-    "window.VEHICLE_REFERENCE_RULES = "+JSON.stringify(eligibleReferenceRules,null,2)+";\n");
+    referenceRules:eligibleReferenceRules,
+    carsets:carsets.map(r=>carsetRecord(Object.assign({},r,{source_url:(sourceById[String(r.source_id)]||{}).source_url||"",
+      evidence_grade:(sourceById[String(r.source_id)]||{}).evidence_grade||"C"})))};
+  writeSnapshot(json);
   console.log("vehicle operation evidence records =",records.length);
 })().catch(e=>{console.error(e.stack||e);process.exit(1);});
