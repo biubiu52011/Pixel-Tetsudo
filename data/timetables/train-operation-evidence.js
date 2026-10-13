@@ -348,19 +348,24 @@
     // Canonical dated providers above require the exact public train number,
     // current service date, unique model/formation, and traceable source.
     if (mode === "realtime-derived") {
-      var liveModels = {};
+      var liveIdentities = {};
       runHits.forEach(function(hit) {
-        if (hit.decisive && hit.vehicleType) liveModels[hit.vehicleType] = hit;
+        if (!hit.decisive || !hit.vehicleType) return;
+        var formations = String(hit.formationId || "").split(/\s*\/\s*|\s*,\s*|\s*\|\s*/)
+          .filter(Boolean).sort().join("|");
+        liveIdentities[hit.vehicleType + "|" + formations] = hit;
       });
-      var liveNames = Object.keys(liveModels);
-      if (liveNames.length > 1) return null;
-      if (liveNames.length === 1) {
-        var liveName = liveNames[0];
+      var liveKeys = Object.keys(liveIdentities);
+      // Same model with different physical formations is also ambiguous.
+      if (liveKeys.length > 1) return null;
+      if (liveKeys.length === 1) {
+        var liveHit = liveIdentities[liveKeys[0]];
+        var liveName = liveHit.vehicleType;
         if (familyHit &&
             ((familyHit.vehicleType && familyHit.vehicleType !== liveName) ||
              (familyHit.vehicleCandidates.length &&
               familyHit.vehicleCandidates.indexOf(liveName) < 0))) return null;
-        return liveModels[liveName];
+        return liveHit;
       }
       // A published train/calendar reference is a planned model, not a live
       // formation. Its provenance stays distinct in the downstream adapter.
