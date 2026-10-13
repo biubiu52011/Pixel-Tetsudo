@@ -119,6 +119,7 @@ console.log("operation evidence providers: PASS");
     "data/timetables/asakusa-operation-evidence-2026.js",
     "data/timetables/chiyoda-operation-evidence-2026.js",
     "data/timetables/meguro-operation-evidence-2026.js",
+    "data/timetables/toyoko-operation-evidence-2026.js",
     "data/timetables/tozai-operation-evidence-2026.js",
     "data/timetables/keiyo-operation-evidence.js"
   ].forEach(path=>vm.runInContext(fs.readFileSync(path,"utf8"),sandbox,{filename:path}));
@@ -155,6 +156,7 @@ console.log("operation evidence providers: PASS");
     ["1812K","Chiyoda","TokyoMetro.Chiyoda","JR東日本E233系2000番台","JR東日本_E233系_2000番台.png"],
     ["1845E","Chiyoda","TokyoMetro.Chiyoda","小田急4000形","小田急電鉄_4000形_標準色.png"],
     ["631","Meguro","Tokyu.Meguro","相鉄21000系(8両)","相模鉄道_21000系.png"],
+    ["95G","Toyoko","Tokyu.Toyoko","相鉄20000系(10両)","相模鉄道_20000系_YOKOHAMA_NAVYBLUE.png"],
     ["507K","Tozai","TokyoMetro.Tozai","JR E231系800番台(10両)","JR東日本_E231系_800番台.png"],
     ["650T","Tozai","TokyoMetro.Tozai","東葉高速2000系(10両)","東葉高速鉄道_2000系.png"]
   ];
@@ -188,6 +190,6 @@ console.log("operation evidence providers: PASS");
   assert.strictEqual(shinjuku.name,"都営10-300形");
   assert.strictEqual(shinjuku.identityStatus,"EXACT");
   assert.strictEqual(shinjuku.iconPath,"");
-  console.log("ODPT number -> existing model -> certified PNG -> marker: 7 PASS");
+  console.log("ODPT number -> existing model -> certified PNG -> marker: 8 PASS");
   console.log("ODPT number -> existing line-script -> canonical model: 7 PASS");
 })();
