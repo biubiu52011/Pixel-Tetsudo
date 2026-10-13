@@ -107,3 +107,39 @@ assert(r&&r.operator==="Keikyu"&&!r.vehicleType);
 })();
 console.log("ODPT dated train-number vehicle evidence: 8 PASS");
 console.log("operation evidence providers: PASS");
+
+(function(){
+  // The line-specific mapping scripts were registered but formerly ignored by
+  // TrainOperationEvidence.resolveEvidence(). Exercise the public ODPT train
+  // number -> registered script -> canonical vehicle model route end-to-end.
+  const sandbox={window:{TRAIN_OPERATION_EVIDENCE_PROVIDERS:[]},console:{debug(){}}};
+  vm.createContext(sandbox);
+  [
+    "data/timetables/train-operation-evidence.js",
+    "data/timetables/asakusa-operation-evidence-2026.js",
+    "data/timetables/chiyoda-operation-evidence-2026.js",
+    "data/timetables/meguro-operation-evidence-2026.js",
+    "data/timetables/tozai-operation-evidence-2026.js",
+    "data/timetables/keiyo-operation-evidence.js"
+  ].forEach(path=>vm.runInContext(fs.readFileSync(path,"utf8"),sandbox,{filename:path}));
+  const evidence=sandbox.window.TrainOperationEvidence;
+  const live=(n,line,railway,serviceDate="2026-10-13")=>
+    evidence.resolveEvidence(n,{lineId:line,railway,serviceDate},"realtime-derived");
+  let v=live("1849T","Asakusa","Toei.Asakusa");
+  assert(v && v.vehicleType==="都営5500形" && v.decisive,
+    "ODPT Asakusa train number must pass the existing Toei operation model script");
+  v=live("31S","TokyoMetro.Chiyoda","TokyoMetro.Chiyoda");
+  assert(v && v.vehicleType==="東京メトロ16000系" && v.decisive,
+    "ODPT Chiyoda working number must use the registered owner/model script");
+  v=live("631","Tokyu.Meguro","Tokyu.Meguro");
+  assert(v && v.vehicleType==="相鉄21000系(8両)" && v.decisive,
+    "ODPT Meguro operation number must use the registered sourced model script");
+  v=live("507K","TokyoMetro.Tozai","TokyoMetro.Tozai");
+  assert(v && v.vehicleType==="JR E231系800番台(10両)" && v.decisive,
+    "Tozai ODPT train number must normalize to working number before script matching");
+  assert.strictEqual(live("ODPT2898","Arakawa","Toei.Arakawa"),null,
+    "an Arakawa ODPT trip ID without a sourced operation mapping must remain unresolved");
+  assert.strictEqual(live("1849T","Asakusa","Toei.Asakusa","2026-01-01"),null,
+    "line-specific mappings must respect their effective date");
+  console.log("ODPT number -> existing line-script -> canonical model: 6 PASS");
+})();
