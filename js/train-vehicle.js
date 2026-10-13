@@ -195,9 +195,12 @@ var CANONICAL_VEHICLES = {
 };
 
 /**
- * Tokyo Sakura Tram: ODPT Toei.Arakawa *Train location* trainNumber is a
- * physical CAR number, never a TrainTimetable ODPTnnnn service number.
- * Strict one-car identity source; not a generic numerical series heuristic.
+ * Tokyo Sakura Tram: historic Toei.Arakawa Train records sometimes used
+ * physical four-digit CAR numbers, which can identify one of the 33 vehicles.
+ * Actual ODPT Train feed verified 2026-10-13 returns ODPTnnnn trip identifiers
+ * with NO car number or vehicleType; NEVER strip the prefix or interpret
+ * ODPTnnnn digits as car/formation IDs. Those trains remain UNKNOWN until
+ * another source proves the physical vehicle.
  *
  * Fleet 33 cars: https://www.kotsu.metro.tokyo.jp/about/service/toden.html
  * Vehicle/no. livery: https://2nd-train.net/formations/affiliation/216/荒川車両検修所/
@@ -233,8 +236,9 @@ var TODEN_ARAKAWA_BY_CAR = Object.create(null);
 });
 
 function resolveTodenArakawaLiveCar(ctx) {
-  // All three scopes must be present. Never identify a Toei subway run, an
-  // Arakawa ODPTnnnn timetable row, or another operator from a matching number.
+  // Three scopes plus a literal physical car number are required.
+  // Real ODPT Train data currently uses ODPTnnnn even for Arakawa; never
+  // reinterpret those trip IDs as an actual car or map them to a model.
   if (ctx.lineId !== 'Arakawa' || normOp(ctx.operator) !== 'Toei' ||
       ctx.railway !== 'odpt.Railway:Toei.Arakawa') return null;
   var number = String(ctx.realtimeCarNumber || '').trim();
