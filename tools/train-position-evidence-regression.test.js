@@ -181,7 +181,7 @@ assert(renderer.includes('var _offsetX = px - (_bbox.x + _bbox.width / 2);') &&
 {
   const ctx={
     window:{currentLang:"ja",RailwayDB:{resolveStationName:(id)=>({
-      "Hikarigaoka":"光が丘","S2":"西新宿五丁目",
+      "Tochomae":"都庁前","Hikarigaoka":"光が丘","S2":"西新宿五丁目",
       "S12":"牛込神楽坂","S20":"国立競技場"
     }[id] || id)}},
     _routeGeometryCache:{},_geomKey:(id)=>id,
