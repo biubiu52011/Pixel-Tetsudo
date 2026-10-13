@@ -117,7 +117,7 @@ async function readManualTemplateRuns(db: any, lineId: string, serviceDate: stri
   for (let i = 0; i < templates.length; i += 100) {
     const ids = templates.slice(i, i + 100).map((t: any) => t.id);
     const { data, error } = await db.from("train_timetable_source_resolution")
-      .select("source_template_id,timetable_id,member_role,group_evidence,mapping_level,vehicle_type,vehicle_source_id,vehicle_source_url,vehicle_revision_date,vehicle_artwork_path,operation_code,operation_source_id,operation_revision_date,operation_owner,operation_owner_source_url")
+      .select("source_template_id,timetable_id,member_role,group_evidence,timetable_validity,mapping_level,vehicle_type,vehicle_source_id,vehicle_source_url,vehicle_revision_date,vehicle_artwork_path,operation_code,operation_source_id,operation_revision_date,operation_owner,operation_owner_source_url")
       .in("source_template_id", ids);
     if (error) throw error;
     for (const row of data || []) sourceResolution.set(row.source_template_id, row);
@@ -282,6 +282,9 @@ async function readManualTemplateRuns(db: any, lineId: string, serviceDate: stri
       next_timetable_ids: t.next_timetable_ids || [],
       timetable_provenance: t.source_path || null,
       source_revision_date: t.source_revision_date || null,
+      // Stop completeness is not evidence that a historical source is current.
+      timetable_validity: mapped.timetable_validity || "undated_not_current_verified",
+      timetable_date_verified: mapped.timetable_validity === "date_verified",
       stops: (completeStops || byTemplate.get(t.id) || []).map((s: any) => {
         const urn = s.station_urn || s.arrival_station_urn || s.departure_station_urn || "";
         return {
@@ -316,7 +319,11 @@ async function readManualTemplateRuns(db: any, lineId: string, serviceDate: stri
   }
   const complete = validRuns.length > 0 && omittedIncompleteRuns === 0;
   const partial = validRuns.length > 0 && omittedIncompleteRuns > 0;
+  const dateVerifiedRuns = validRuns.filter(r => r.timetable_date_verified).length;
   return json({ ok: true, complete, partial,
+    // These counts do not change the existing structural coverage behavior.
+    date_verified_runs: dateVerifiedRuns,
+    date_unverified_runs: validRuns.length - dateVerifiedRuns,
     cache: complete ? "HIT" : partial ? "PARTIAL" : "MISS",
     source: "DATABASE_MANUAL_TEMPLATES", line_id: lineId, service_date: serviceDate,
     omitted_incomplete_runs: omittedIncompleteRuns, runs: validRuns });
