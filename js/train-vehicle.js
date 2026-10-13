@@ -40,7 +40,7 @@ var CANONICAL_VEHICLES = {
   "sotetsu-12000-10": { displayName: "相鉄12000系", iconName: "相鉄12000系", asset: "../images/列车/相模鉄道/相模鉄道_12000系_YOKOHAMA_NAVYBLUE.png", aliases: ["相鉄12000系(10両)"] },
   "sotetsu-13000-8": { displayName: "相鉄13000系", iconName: "相鉄13000系", asset: "../images/列车/相模鉄道/相模鉄道_13000系_YOKOHAMA_NAVYBLUE.png", aliases: ["相鉄13000系(8両)","相鉄13000系"] },
   "sotetsu-20000-10": { displayName: "相鉄20000系", iconName: "相鉄20000系", asset: "../images/列车/相模鉄道/相模鉄道_20000系_YOKOHAMA_NAVYBLUE.png", aliases: ["相鉄20000系(10両)"] },
-  "sotetsu-21000": { displayName: "相鉄21000系", iconName: "相鉄21000系", asset: "../images/列车/相模鉄道/相模鉄道_21000系.png", aliases: ["相鉄21000系"] },
+  "sotetsu-21000": { displayName: "相鉄21000系", iconName: "相鉄21000系", asset: "../images/列车/相模鉄道/相模鉄道_21000系.png", aliases: ["相鉄21000系", "相鉄21000系(8両)"] },
 
   "jr-east-209-500-keiyo": {
     displayName: "209系500番台（京葉線）",
@@ -70,13 +70,13 @@ var CANONICAL_VEHICLES = {
     displayName: "E231系800番台（東西線直通）",
     iconName: "E231系800番台（東西線直通）",
     asset: "../images/列车/JR東日本/JR東日本_E231系_800番台.png",
-    aliases: ["E231系800番台（東西線直通）"]
+    aliases: ["E231系800番台（東西線直通）", "JR E231系800番台(10両)", "JR東日本E231系800番台"]
   },
   "toyo-rapid-2000-tozai-through": {
     displayName: "東葉高速2000系",
     iconName: "東葉高速鉄道2000系",
     asset: "../images/列车/東葉高速鉄道/東葉高速鉄道_2000系.png",
-    aliases: ["東葉高速2000系", "東葉高速鉄道2000系"]
+    aliases: ["東葉高速2000系", "東葉高速鉄道2000系", "東葉高速2000系(10両)"]
   },
   "jr-east-e233-2000-joban-local-chiyoda": {
     displayName: "E233系2000番台",
@@ -922,6 +922,17 @@ function _canonicalVehicleIconPath(name, serviceDate) {
              resolveArtworkForIdentity(chosen, '', ctx.serviceDate)) : '';
       } else {
         iconPath = resolveArtworkForIdentity(chosen, '', ctx.serviceDate);
+        // The server's source-dated timetable resolver can supply a unique,
+        // native, model-exact PNG that is absent from the embedded catalog.
+        // Trust neither a bare path nor an arbitrary timetable candidate:
+        // the caller must prove the SAME exact model and certified mapping.
+        var dbArt = String(ctx.verifiedTimetableArtworkPath || '');
+        var dbModel = admittedIdentity(ctx.verifiedTimetableModel);
+        if (!iconPath && chosen === dbModel &&
+            /^images\/列车\/[^/.][^/]*\/[^/.][^/]*\.png$/.test(dbArt) &&
+            dbArt.indexOf('..') < 0) {
+          iconPath = '../' + dbArt;
+        }
       }
     }
 

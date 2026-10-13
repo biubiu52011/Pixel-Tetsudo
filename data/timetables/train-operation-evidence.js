@@ -369,6 +369,12 @@
       }
       // A published train/calendar reference is a planned model, not a live
       // formation. Its provenance stays distinct in the downstream adapter.
+      // Reject conflicting fleet constraints rather than interpreting the
+      // planned reference as proof that a different vehicle is running live.
+      if (referenceHit && familyHit && referenceHit.vehicleType &&
+          ((familyHit.vehicleType && familyHit.vehicleType !== referenceHit.vehicleType) ||
+           (familyHit.vehicleCandidates.length &&
+            familyHit.vehicleCandidates.indexOf(referenceHit.vehicleType) < 0))) return null;
       return referenceHit || familyHit;
     }
 
