@@ -44,11 +44,14 @@ jobs:
             try{
               const cat=await fetch('https://ckan.odpt.org/api/3/action/package_show?id=r_train_gtfs_rt-odpt_train-toei',{signal:AbortSignal.timeout(14000)});
               console.log('ODPT_GTFS_CKAN_STATUS',cat.status);
-              if(!cat.ok)return;
-              const pkg=await cat.json();
-              const res=(pkg.result?.resources||[]).filter(r=>/VehiclePosition/i.test(r.name||r.description||''));
+              const pkg=cat.ok?await cat.json().catch(()=>null):null;
+              const res=(pkg?.result?.resources||[]).filter(r=>/VehiclePosition/i.test(r.name||r.description||''));
+              if(!res.length){
+                const names=['ToeiTrain_vehicle','ToeiTrain','odpt_ToeiTrain_vehicle','odpt_Toei_Train_vehicle','Toei-Train-GTFS_vehicle'];
+                names.forEach(name=>res.push({name,format:'GTFS-RT',url:'https://api.odpt.org/api/v4/gtfs/realtime/'+name}));
+              }
               console.log('ODPT_GTFS_RESOURCES',JSON.stringify(res.map(r=>({name:r.name,format:r.format,host:(()=>{try{return new URL(r.url).host}catch{return''}})(),path:(()=>{try{return new URL(r.url).pathname}catch{return''}})()}))));
-              for(const rr of res.slice(0,2)){
+              for(const rr of res.slice(0,6)){
                 let parsed;try{parsed=new URL(rr.url)}catch{continue}
                 if(!['api.odpt.org','api-public.odpt.org','api-challenge.odpt.org'].includes(parsed.hostname))continue;
                 parsed.searchParams.delete('acl:consumerKey');
