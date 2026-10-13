@@ -80,6 +80,13 @@ for(const htmlPath of ["pages/trains.html","pages/realtime.html"]){
       _positionSource:'supabase-train-run',_sqlVehicleMappingLevel:'dated_schedule_rule',
       vehicleType:'Example1000系',_sqlVehicleArtworkPath:'images/列车/X/example.png'}
   ];
+  // Fixtures use the same ODPT fields that the production matcher reads.
+  rows.forEach(function(tt) {
+    tt['odpt:trainNumber']=tt.no;
+    tt['odpt:calendar']=tt.calendar;
+    tt._serviceDate=tt.date;
+    tt['odpt:railDirection']='odpt.RailDirection:Example.'+tt.direction;
+  });
   const context=vm.createContext({
     window:{ODPTClient:{LINE_RAILWAY_CODE:{}},
       TrainIcons:{resolveVehicleDisplayName:function(n){return n;}}},
