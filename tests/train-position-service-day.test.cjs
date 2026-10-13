@@ -329,3 +329,59 @@ test('line activation includes visible SQL branches without changing presentatio
   assert.deepEqual(Array.from(context.window.TrainsActivePositionLineIds), ['Main', 'Branch', 'OtherBranch']);
   assert.equal(context.currentSystemLineIds, null);
 });
+
+
+test('one through-chain keeps Metro SQL and JR live line segments distinct', () => {
+  const ctx = { window: {} };
+  vm.runInNewContext(fs.readFileSync(path.join(__dirname, '../js/trains-data.js'), 'utf8'), ctx);
+  const metro = { runningChainId: 'chain:ayase:1234K', trainId: 'Chiyoda_1234K',
+    positionSource: 'supabase-train-run', stationIndex: 16 };
+  const jr = { runningChainId: 'chain:ayase:1234K', trainId: 'JobanLocal_1234K',
+    fusionLineId: 'JobanLocal', positionSource: 'realtime-api', stationIndex: 0 };
+  const both = ctx._dedupeTrainPositions([metro, jr], 'Chiyoda');
+  assert.equal(both.length, 2, 'a live through-line position must not erase Metro timetable segment');
+  assert.equal(both[0].positionSource, 'supabase-train-run');
+  assert.equal(both[1].positionSource, 'realtime-api');
+
+  const sameLineLive = { ...metro, positionSource: 'realtime-api', stationIndex: 17 };
+  const oneLine = ctx._dedupeTrainPositions([metro, sameLineLive], 'Chiyoda');
+  assert.equal(oneLine.length, 1, 'same-line duplicate should still be deduplicated');
+  assert.equal(oneLine[0].positionSource, 'realtime-api');
+});
+
+test('one ODPT timetable identity preserves same-number trips across calendars and departures', () => {
+  const source = fs.readFileSync(path.join(__dirname, '../data/api/odpt-unified.js'), 'utf8');
+  const start = source.indexOf('    function getTimetableIdentity(');
+  const end = source.indexOf('    // Line capability', start);
+  assert.ok(start >= 0 && end > start);
+  const ctx = {};
+  vm.runInNewContext(source.slice(start, end), ctx);
+  const mk = ctx.getTimetableIdentity;
+  const trip = (calendar, clock) => ({
+    'odpt:railway': 'odpt.Railway:TokyoMetro.Chiyoda',
+    'odpt:calendar': calendar,
+    'odpt:trainNumber': '1234K',
+    'odpt:railDirection': 'odpt.RailDirection:Inbound',
+    'odpt:trainTimetableObject': [
+      { 'odpt:departureStation': 'odpt.Station:TokyoMetro.Chiyoda.YoyogiUehara', 'odpt:departureTime': clock },
+      { 'odpt:arrivalStation': 'odpt.Station:TokyoMetro.Chiyoda.Ayase', 'odpt:arrivalTime': '10:45' }
+    ]
+  });
+  const weekday = trip('odpt.Calendar:Weekday', '10:10');
+  assert.equal(mk(weekday), mk({ ...weekday }));
+  assert.notEqual(mk(weekday), mk(trip('odpt.Calendar:Saturday', '10:10')));
+  assert.notEqual(mk(weekday), mk(trip('odpt.Calendar:Weekday', '10:20')));
+  assert.equal(mk({ 'odpt:trainNumber': '1234K' }), '', 'a bare train number is not a trip identity');
+
+  const fusion = fs.readFileSync(path.join(__dirname, '../js/data-fusion.js'), 'utf8');
+  assert.match(fusion, /window\.ODPTClient\.getTimetableIdentity\(t\)/,
+    'lazy-load pool must consume the same ODPT timetable identity');
+});
+
+test('Nippori-Toneri canonical line ID maps to the Toei ODPT railway', () => {
+  const src = fs.readFileSync(path.join(__dirname, '../data/api/odpt-unified.js'), 'utf8');
+  assert.match(src, /"Nippori_Toneri":\s*"Toei"/);
+  assert.match(src, /"Nippori_Toneri":\s*"NipporiToneri"/);
+  const railway = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/core/railway_data.json'), 'utf8'));
+  assert.ok(railway.lines.Nippori_Toneri);
+});
