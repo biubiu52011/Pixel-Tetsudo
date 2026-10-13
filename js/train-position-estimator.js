@@ -830,6 +830,12 @@
             vehicleCandidates: _visibleCandidates,
             plannedVehicleCandidates: _plannedCandidates.slice(),
             plannedVehicleCandidateStatus: _runIdentity.plannedVehicleCandidateStatus,
+            // Candidate art is informational; never substitute it for the
+            // TrainVehicle resolver's verified vehicleIconPath.
+            plannedVehicleCandidateArtworkPath: tt._positionSource === 'supabase-train-run'
+              ? (tt._sqlCandidateArtworkPath || '') : '',
+            plannedVehicleCandidateArtworkStatus: tt._positionSource === 'supabase-train-run'
+              ? (tt._sqlCandidateArtworkStatus || '') : '',
             typeName: trainClassification.typeName,
             isLimitedExpress: trainClassification.isLimitedExpress,
             isThroughTrain: trainClassification.isThroughTrain,
