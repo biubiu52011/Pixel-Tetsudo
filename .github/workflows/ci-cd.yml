@@ -33,51 +33,41 @@ jobs:
         with:
           node-version: '20'
 
-      - name: One-time ODPT official GTFS-RT vehicle identity audit
+      - name: One-time public Toei ODPT Train contract probe
         run: |
           node - <<'NODE'
-          const readVar=(b,o)=>{let v=0n,shift=0n,p=o;for(let i=0;i<10&&p<b.length;i++){const x=b[p++];v|=BigInt(x&127)<<shift;if(!(x&128))return [Number(v),p];shift+=7n}throw Error('bad varint')};
-          const fields=b=>{let out=[],p=0;while(p<b.length){const [tag,a]=readVar(b,p);p=a;const id=tag>>3,w=tag&7;let value;if(w===0)[value,p]=readVar(b,p);else if(w===2){let len;[len,p]=readVar(b,p);if(len<0||p+len>b.length)throw Error('invalid protobuf length');value=b.subarray(p,p+len);p+=len}else if(w===1){p+=8;continue}else if(w===5){p+=4;continue}else throw Error('unsupported wire: '+w);out.push({id,value});}return out};
-          const get=(f,n)=>f.find(x=>x.id===n)?.value;
-          const str=x=>Buffer.isBuffer(x)?x.toString('utf8'):'';
-          async function probe(){
-            try{
-              const cat=await fetch('https://ckan.odpt.org/api/3/action/package_show?id=r_train_gtfs_rt-odpt_train-toei',{signal:AbortSignal.timeout(14000)});
-              console.log('ODPT_GTFS_CKAN_STATUS',cat.status);
-              const pkg=cat.ok?await cat.json().catch(()=>null):null;
-              const res=(pkg?.result?.resources||[]).filter(r=>/VehiclePosition/i.test(r.name||r.description||''));
-              if(!res.length){
-                const names=['ToeiTrain_vehicle','ToeiTrain','odpt_ToeiTrain_vehicle','odpt_Toei_Train_vehicle','Toei-Train-GTFS_vehicle'];
-                names.forEach(name=>res.push({name,format:'GTFS-RT',url:'https://api.odpt.org/api/v4/gtfs/realtime/'+name}));
+          (async()=>{
+            try {
+              const endpoint = "https://api-public.odpt.org/api/v4/odpt:Train?odpt:operator=odpt.Operator:Toei";
+              const res = await fetch(endpoint,{signal:AbortSignal.timeout(16000)});
+              const typ = res.headers.get("content-type")||"";
+              console.log("TOEI_PUBLIC_STATUS",res.status,typ,res.headers.get("access-control-allow-origin")||"none");
+              if(!res.ok)return;
+              const data=await res.json();
+              if(!Array.isArray(data)){console.log("TOEI_PUBLIC_NON_ARRAY",typeof data);return;}
+              const lines={};
+              for(const x of data){
+                const line=String(x["odpt:railway"]||"unset");
+                const t=lines[line]||(lines[line]={n:0,physicalFour:0,tripId:0,hasOwner:0,hasVehicleType:0,hasCarField:0,otherFields:[],samples:[]});
+                t.n++;
+                const number=String(x["odpt:trainNumber"]||"");
+                if(/^\\d{4}$/.test(number))t.physicalFour++;
+                if(/^ODPT\\d+$/i.test(number))t.tripId++;
+                if(x["odpt:trainOwner"])t.hasOwner++;
+                if(x["odpt:vehicleType"]||x.vehicleType)t.hasVehicleType++;
+                if(x["odpt:carNumber"]||x.carNumber||x.vehicleCarNumber)t.hasCarField++;
+                if(!t.otherFields.length)t.otherFields=Object.keys(x).filter(k=>/car|vehicle|formation|train|sameas/i.test(k));
+                if(t.samples.length<4)t.samples.push({
+                  number,trainId:String(x["owl:sameAs"]||x["@id"]||"").slice(0,95),
+                  owner:x["odpt:trainOwner"]||null,railway:line,
+                  vehicleType:x["odpt:vehicleType"]||x.vehicleType||null,
+                  carNumber:x["odpt:carNumber"]||x.carNumber||x.vehicleCarNumber||null,
+                  type:x["odpt:trainType"]||null
+                });
               }
-              console.log('ODPT_GTFS_RESOURCES',JSON.stringify(res.map(r=>({name:r.name,format:r.format,host:(()=>{try{return new URL(r.url).host}catch{return''}})(),path:(()=>{try{return new URL(r.url).pathname}catch{return''}})()}))));
-              for(const rr of res.slice(0,6)){
-                let parsed;try{parsed=new URL(rr.url)}catch{continue}
-                if(!['api.odpt.org','api-public.odpt.org','api-challenge.odpt.org'].includes(parsed.hostname))continue;
-                parsed.searchParams.delete('acl:consumerKey');
-                const keyUrl=new URL(parsed);
-                const enc=require('fs').readFileSync('data/api/odpt-links.js','utf8').match(/ODPT_LINKS_ENC\s*=\s*"([A-Za-z0-9+/=]+)"/);
-                if(enc){
-                  const seed='PixelTetsudo'.split('').reverse().join('')+'-'+'ODPT'.split('').reverse().join('')+'-2026';
-                  const data=Buffer.from(enc[1],'base64');for(let i=0;i<data.length;i++)data[i]^=seed.charCodeAt(i%seed.length);
-                  try{let list=JSON.parse(data.toString('utf8'));let auth=list.map(u=>{try{return new URL(u)}catch{return null}}).find(u=>u?.hostname==='api.odpt.org'&&u.searchParams.has('acl:consumerKey'));
-                    if(auth)keyUrl.searchParams.set('acl:consumerKey',auth.searchParams.get('acl:consumerKey'));
-                  }catch{}
-                }
-                const r=await fetch(keyUrl,{signal:AbortSignal.timeout(14000),headers:{Accept:'application/x-protobuf'}});
-                console.log('ODPT_GTFS_FEED',JSON.stringify({status:r.status,bytes:Number(r.headers.get('content-length'))||null,contentType:r.headers.get('content-type'),endpointPath:parsed.pathname}));
-                if(!r.ok)continue;
-                const bytes=Buffer.from(await r.arrayBuffer());
-                const entities=fields(bytes).filter(x=>x.id===2).map(x=>fields(x.value));
-                const rows=entities.map(e=>{const vp=get(e,4);if(!vp)return null;
-                  const v=fields(vp),trip=get(v,1),car=get(v,8),t=trip?fields(trip):[],c=car?fields(car):[];
-                  return {entity:str(get(e,1)),trip:str(get(t,1)),route:str(get(t,5)),vehicleId:str(get(c,1)),label:str(get(c,2)),license:str(get(c,3)),stopId:str(get(v,7))};
-                }).filter(Boolean);
-                const counts={total:rows.length,hasTrip:rows.filter(x=>x.trip).length,hasVehicleId:rows.filter(x=>x.vehicleId).length,hasLabel:rows.filter(x=>x.label).length,physical4:rows.filter(x=>/^\\d{4}$/.test(x.vehicleId)||/^\\d{4}$/.test(x.label)).length};
-                console.log('ODPT_GTFS_IDENTITY',JSON.stringify({counts,samples:rows.slice(0,15)}));
-              }
-            }catch(e){console.log('ODPT_GTFS_AUDIT_UNAVAILABLE',String(e?.message||e).slice(0,160))}
-          }probe();
+              console.log("TOEI_PUBLIC_CONTRACT",JSON.stringify({total:data.length,byRailway:lines}));
+            }catch(e){console.log("TOEI_PUBLIC_UNAVAILABLE",e.name||"error",String(e.message||"").slice(0,120))}
+          })();
           NODE
 
       - name: Railway browser cross-page contract
