@@ -209,6 +209,35 @@ assert(renderer.includes('var _offsetX = px - (_bbox.x + _bbox.width / 2);') &&
   assert(six.junctionX-12-5*16*1.1>six.stationCoords[1].x,
     "ring-left names must not cross the tail rail");
   const trackSrc=read("js/train-track-layout.js");
+
+  assert.strictEqual(six.sixTopology,"one-line-open-tail-and-closed-loop",
+    "Oedo is one railway with an open tail, not a branchOf child");
+  assert.strictEqual(six.sixTailEndIndex,10,"Hikarigaoka is last tail stop");
+  assert.strictEqual(six.branchLines.length,0,"Oedo tail must never use generic branch rendering");
+  const joinedTail=six.routeElements.find(e=>e.type==="path" && e.attrs.d && e.attrs.d.includes(" L "));
+  assert(joinedTail && joinedTail.attrs["stroke-width"]===5 && joinedTail.attrs.opacity===1,
+    "Oedo tail and loop must share the same full-strength stroke");
+  const tctx={window:{}};
+  vm.runInNewContext(trackSrc,vm.createContext(tctx),{filename:"train-track-layout.js"});
+  const sixRows=[
+    {trainId:"tail-out",stationIndex:5,destinationStation:"Hikarigaoka",railDirection:"InnerLoop"},
+    {trainId:"tail-in",stationIndex:5,destinationStation:"Tochomae",railDirection:"OuterLoop"},
+    {trainId:"junction-tail",stationIndex:0,destinationStation:"Hikarigaoka",railDirection:"InnerLoop"},
+    {trainId:"ring-end",stationIndex:37,destinationStation:"Tochomae",railDirection:"OuterLoop"}
+  ];
+  const sixLayout=tctx.window.TrainTrackLayout.resolveAll(
+    sixRows,six.stationCoords,six,"Oedo",{getDisplayMoveDir:()=>null});
+  assert.deepStrictEqual(Array.from(sixLayout,p=>p&&p.nextIdx),[6,4,1,0],
+    "tail motion and last loop station must follow canonical topology");
+  assert(sixLayout[0].y < six.stationCoords[5].y,
+    "outbound Hikarigaoka marker must move UP the screen");
+  assert(renderer.includes('if (_sixMap && _isMobileView())') &&
+         !renderer.includes("labelText = labelText.slice(0, 2);"),
+    "mobile six direction/destination must not be broken into tiny shards");
+  assert(renderer.includes("tp-six-train-detail") &&
+         renderer.includes('node.getAttribute("aria-label")') &&
+         renderer.includes('svg.addEventListener("click"'),
+    "mobile six train details must be accessible by selection");
   assert(trackSrc.includes("sixLoopStartIndex")&&trackSrc.includes("idx === points.length - 1 ? 0"),
     "six ring must rejoin Tochomae instead of a tail station");
   const css=read("css/trains.css");

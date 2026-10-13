@@ -167,7 +167,7 @@ function _isTrainArtworkFailureActive(trainUid, p) {
     // narrow ring, separated from each other by geometry-reserved name lanes.
     else if (side === "left" && geometry.isSixShapedLoop && geometry.isDualLoop6) {
       tx = o.x - (isJunction ? 18 : 12);
-      ty = o.y;
+      ty = isJunction ? o.y - 17 : o.y; // Tochomae above its connector
       anchor = "end";
     }
     else if (side === "left" && geometry.isSixShapedLoop && !geometry.isDualLoop6) { tx = o.x + (isJunction ? 14 : 10); ty = o.y; anchor = "start"; }
@@ -197,16 +197,7 @@ function _isTrainArtworkFailureActive(trainUid, p) {
       if (o.strokeWidth) label.setAttribute("stroke-width", o.strokeWidth);
       label.setAttribute("stroke-linejoin", "round");
     }
-    // v4.3.513: 移动端容器窄（tailAreaWidth 上限 < 三区分离需求），光丘尾竖线（stubX）穿左列上方站名——
-    // 白色描边遮线（线路从文字后穿过）。桌面端 tail 列已扩至三区分离（junctionX≥stubX+10+88+10），无穿线不触发。
-    if (geometry.isSixShapedLoop && geometry.isDualLoop6 && isMobileView &&
-        !isJunction && side === "left" &&
-        Math.abs(o.x - geometry.junctionX) < 0.5 && o.y < geometry.junctionY) {
-      label.setAttribute("paint-order", "stroke");
-      label.setAttribute("stroke", "#ffffff");
-      label.setAttribute("stroke-width", "3");
-      label.setAttribute("stroke-linejoin", "round");
-    }
+    // Named corridors are separated; no opaque white stroke is needed.
     var _clampAvail = (side === "dual" || side === "left") ? (tx - 4) : ((side === "right") ? (svgW - 2 - tx) : 0);
     if (geometry.isSixShapedLoop) {
       if (geometry.isDualLoop6) {
@@ -929,6 +920,42 @@ function _isTrainArtworkFailureActive(trainUid, p) {
         _mapWrap.appendChild(_bnEl);
       }
       _mapWrap.appendChild(svg);
+      if (geometry.isSixShapedLoop) {
+        // Train details appear only after explicitly selecting a position.
+        var _trainDetail = document.createElement("div");
+        _trainDetail.className = "tp-six-train-detail";
+        _trainDetail.setAttribute("role", "status");
+        _trainDetail.hidden = true;
+        var _detailText = document.createElement("span");
+        var _detailClose = document.createElement("button");
+        _detailClose.type = "button";
+        _detailClose.className = "tp-six-train-detail-close";
+        _detailClose.textContent = "×";
+        _detailClose.setAttribute("aria-label", "Close train details");
+        _detailClose.addEventListener("click", function() { _trainDetail.hidden = true; });
+        _trainDetail.appendChild(_detailText);
+        _trainDetail.appendChild(_detailClose);
+        el.appendChild(_trainDetail);
+        var _openTrainDetail = function(node) {
+          if (!node) return;
+          var _description = node.getAttribute("aria-label") || node.getAttribute("title") || "";
+          if (!_description) return;
+          _detailText.textContent = _description;
+          _trainDetail.hidden = false;
+        };
+        svg.addEventListener("click", function(event) {
+          var marker = event.target && event.target.closest
+            ? event.target.closest("[data-train-id]") : null;
+          if (marker) _openTrainDetail(marker);
+          else _trainDetail.hidden = true;
+        });
+        svg.addEventListener("keydown", function(event) {
+          if (event.key !== "Enter" && event.key !== " ") return;
+          var marker = event.target && event.target.closest
+            ? event.target.closest("[data-train-id]") : null;
+          if (marker) { event.preventDefault(); _openTrainDetail(marker); }
+        });
+      }
 
       // Keep historical overflow centering for other route types only.
       // Six-shaped diagrams are fully contained within a fixed viewport.
@@ -1137,6 +1164,11 @@ function _isTrainArtworkFailureActive(trainUid, p) {
     marker.setAttribute("data-train-id", String(trainUid));
     marker.setAttribute("data-marker-kind", knownVehicle ? "vehicle" : "unresolved");
     marker.setAttribute("class", spec.className);
+    if (trainLayer.ownerSVGElement && trainLayer.ownerSVGElement.__geometry &&
+        trainLayer.ownerSVGElement.__geometry.isSixShapedLoop) {
+      marker.setAttribute("tabindex", "0");
+      marker.setAttribute("role", "button");
+    }
     _setTrainIconPosition(marker, px, py, p, lineId, isLoop);
     marker._displayX = px;
     marker._displayY = py;
@@ -1478,16 +1510,16 @@ function _isTrainArtworkFailureActive(trainUid, p) {
 
   // v4.3.962: 线路级显示特例表——把光丘段/北绫濑/东急种别等分散的 if 特例收进一张表
   // 字段含义：
-  //   branchTrain: { startIdx, endIdx, destRegex } —— 分支段列车识别（Oedo 光丘段）
-  //   branchDir:   { upDest, downDest }          —— 分支段方向判定（up=往光丘, down=往都厅前）
+  //   tailTrain: { startIdx, endIdx, destRegex } —— 同一线路开放尾段识别（Oedo 光丘段）
+  //   tailDir:   { upDest, downDest }          —— 同线开放尾段方向判定（up=往光丘, down=往都厅前）
   //   branchStation: { regex, dir }              —— 支线站名特判（Chiyoda KitaAyase → down）
   //   showTrainType: true                   —— 显示列车等级种别名（东急线）
   //   dirAxis: { dirName: ±1 }             —— 方位词→站表方向映射（v4.3.962b：原 DIR_AXIS_MAP 收口）
   var LINE_DISPLAY_OVERRIDES = {
     // 大江户线光丘段：站表 [1..10] 为光丘段，枢纽 [0]=Tochomae
     Oedo: {
-      branchTrain: { startIdx: 1, endIdx: 10, destRegex: /^Hikarigaoka$/i },
-      branchDir: { upDest: /^Hikarigaoka$/i, downDest: null }
+      tailTrain: { startIdx: 1, endIdx: 10, destRegex: /^Hikarigaoka$/i },
+      tailDir: { upDest: /^Hikarigaoka$/i, downDest: null }
     },
     // 千代田线北绫濑支线：KitaAyase 不在主线站表，单独判定
     Chiyoda: {
@@ -1525,15 +1557,15 @@ function _isTrainArtworkFailureActive(trainUid, p) {
     return !!LOOP_DIR_NAMES[String(dirName).split('.').pop()];
   }
 
-  // v4.3.475: 大江户线（6字形）光丘段列车识别。
+  // 大江户线六字形的同线开放尾段列车识别：不是独立 branchOf 支线。
   // 站表 [0]=Tochomae（环线/光丘段枢纽）、[1..10]=光丘段（西新宿五丁目→光丘，竖直开放尾）。
   // 光丘段列车虽被 ODPT 标成 InnerLoop/OuterLoop，但没有"回り"语义——应显示真实终点（光丘/都厅前）。
-  function _isOedoBranchTrain(lineId, p) {
+  function _isOedoTailTrain(lineId, p) {
     if (!p) return false;
     var _ov = _getLineOverride(lineId);
-    if (!_ov || !_ov.branchTrain) return false;
+    if (!_ov || !_ov.tailTrain) return false;
     var si = p.stationIndex != null ? Number(p.stationIndex) : NaN;
-    var bt = _ov.branchTrain;
+    var bt = _ov.tailTrain;
     if (si >= bt.startIdx && si <= bt.endIdx) return true;
     if (si === 0) {
       var _d0 = String(p.destinationStation || '').split('.').pop();
@@ -1548,10 +1580,10 @@ function _isTrainArtworkFailureActive(trainUid, p) {
     // 屏幕方向与站表 index 相反：往光丘=屏幕上方=▲、往都厅前=屏幕下方=▼。
     // v4.3.476: 光丘段区间车（光丘始发→环线，dest 为环线站如 清澄白河/都厅前 而非光丘）——
     // 终点非光丘即沿光丘段往都厅前方向移动（光丘段只有往返两向），一律 ▼。
-    if (_isOedoBranchTrain(lineId, p)) {
+    if (_isOedoTailTrain(lineId, p)) {
       var _ovDir = _getLineOverride(lineId);
       var _dest2 = String(p.destinationStation || '').split('.').pop();
-      if (_ovDir && _ovDir.branchDir && _ovDir.branchDir.upDest && _ovDir.branchDir.upDest.test(_dest2)) return 'up';
+      if (_ovDir && _ovDir.tailDir && _ovDir.tailDir.upDest && _ovDir.tailDir.upDest.test(_dest2)) return 'up';
       return 'down';
     }
     // v4.3.962: 支线站名特判（Chiyoda KitaAyase → down）
@@ -1626,7 +1658,7 @@ function _isTrainArtworkFailureActive(trainUid, p) {
     // 抽象方向词（Inbound/Outbound/Northbound 等无方向端点站）→ 用终点站名；环线 → 内回/外回。
     var labelText = '';
     // v4.3.475: 大江户线光丘段列车显示真实终点（光丘/都厅前），不走环线"内回/外回"标签
-    if (_isOedoBranchTrain(lineId, p)) {
+    if (_isOedoTailTrain(lineId, p)) {
       labelText = _trainDestText(p.destinationStation);
     } else if (isLoopDir) {
       // Loop direction is the passenger-facing service label. destinationStation
@@ -1642,18 +1674,8 @@ function _isTrainArtworkFailureActive(trainUid, p) {
       labelText = _resolveStationLoose(dn) || dn;
     }
     if (!labelText) return;
-    var _sixLabels = trainLayer && trainLayer.ownerSVGElement &&
-      trainLayer.ownerSVGElement.__geometry &&
-      trainLayer.ownerSVGElement.__geometry.isSixShapedLoop;
-    if (_sixLabels) {
-      // Static diagram labels and interchange icons have precedence over
-      // repeated full-size train captions; full text remains in marker title.
-      if (isLoopDir && !_isOedoBranchTrain(lineId, p))
-        labelText = /^(InnerLoop|Inner)$/.test(dn) ? (lang === "en" ? "In" : (lang === "ko" ? "내" : "内")) :
-          (lang === "en" ? "Out" : (lang === "ko" ? "외" : (lang === "zh" ? "外" : "外")));
-      else if (labelText.length > 2)
-        labelText = labelText.slice(0, 2);
-    }
+    // Never shorten six-loop directions or terminal names into fragments.
+    // Dense mobile captions are suppressed at the single sync entrypoint.
     // v4.3.53x: 东急线列车等级（种别）显示——ODPT trainType → 种别名（TRAIN_TYPE_NAMES），
     // 标签格式：方向箭头 + 种别名 + 终点站（例：▼ 特急 元町・中華街）
     var _ovShow = _getLineOverride(lineId);
@@ -1667,7 +1689,7 @@ function _isTrainArtworkFailureActive(trainUid, p) {
     // v4.3.933: 环线只显示内环/外环文字，不加箭头；普通线路用 SVG path 画三角 + 终点站名
     // （▲▼ 字符在 SVG text 里不显示——字体不支持，改用 path 画）
     var dirSym = '';
-    if (!isLoopDir || _isOedoBranchTrain(lineId, p)) {
+    if (!isLoopDir || _isOedoTailTrain(lineId, p)) {
       dirSym = moveDir === 'down' ? 'down' : (moveDir === 'up' ? 'up' : '');
     }
     // v4.3.960: 方向箭头+终点站为一个整体，列车图标对标这个整体的中央（X 居中）
@@ -1742,6 +1764,15 @@ function _isTrainArtworkFailureActive(trainUid, p) {
   // preserving cheap move-only updates during animation frames.
   function _syncTrainLabels(trainLayer, svgNS, trainUid, px, py, p, lineId) {
     var existing = trainLayer.querySelector('[data-train-label-for="' + String(trainUid).replace(/"/g, '') + '"]');
+    var _sixMap = trainLayer && trainLayer.ownerSVGElement &&
+      trainLayer.ownerSVGElement.__geometry &&
+      trainLayer.ownerSVGElement.__geometry.isSixShapedLoop;
+    if (_sixMap && _isMobileView()) {
+      // Never overlay tiny "内"/"光が" shards on fixed-size mobile stations.
+      // Full live direction/destination/train number stays in marker details.
+      if (existing) existing.parentNode.removeChild(existing);
+      return;
+    }
     var signature = _trainLabelSignature(p, lineId);
     if (existing && existing.getAttribute("data-label-signature") !== signature) {
       existing.parentNode.removeChild(existing);

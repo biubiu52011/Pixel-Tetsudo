@@ -149,7 +149,18 @@
       var _closedLoop = !!(stationCoords && stationCoords._loopRect && points === stationCoords);
       var _sixRingStart = geometry && geometry.isSixShapedLoop && points === stationCoords
         ? Number(geometry.sixLoopStartIndex) : NaN;
-      if (isFinite(_sixRingStart) && _sixRingStart > 0 &&
+      var _sixTailEnd = isFinite(_sixRingStart) ? _sixRingStart - 1 : NaN;
+      var _sixDest = String(position && position.destinationStation || "").split(/[:.]/).pop();
+      if (isFinite(_sixTailEnd) && _sixTailEnd > 0 &&
+          idx === 0 && _sixDest === "Hikarigaoka") {
+        // Tochomae → Hikarigaoka uses the same line's open tail, not the loop.
+        toIdx = 1;
+      } else if (isFinite(_sixTailEnd) && idx > 0 && idx <= _sixTailEnd) {
+        // Tail stationIndex increases toward Hikarigaoka as display Y decreases.
+        var _tailStep = _sixDest === "Hikarigaoka" ? 1
+          : (_sixDest ? -1 : (moveDir === "up" ? 1 : -1));
+        toIdx = Math.max(0, Math.min(_sixTailEnd, idx + _tailStep));
+      } else if (isFinite(_sixRingStart) && _sixRingStart > 0 &&
           /^(InnerLoop|Inner|OuterLoop|Outer)$/.test(_loopDirection) &&
           (idx === 0 || idx >= _sixRingStart)) {
         var _sixStep = /^(InnerLoop|Inner)$/.test(_loopDirection) ? -1 : 1;
@@ -173,11 +184,17 @@
     var b = points[toIdx] || a;
     var basePt = progress > 0 && toIdx !== idx ? interpolate(a, b, progress) : { x: a.x, y: a.y };
     var canonicalIdx = Math.min(Math.max(0, idx), Math.max(0, points.length - 2));
-    var t = tangentAt(points, canonicalIdx, canonicalIdx + 1);
+    var t = tangentAt(points, idx, toIdx === idx ? canonicalIdx + 1 : toIdx);
     return { point: basePt, idx: idx, nextIdx: toIdx, tangent: t, points: points };
   }
 
-  function resolvedMoveDir(position, base, lineId, opts) {
+  function resolvedMoveDir(position, base, lineId, opts, geometry) {
+    if (geometry && geometry.isSixShapedLoop && base &&
+        base.idx >= 0 && base.idx <= geometry.sixTailEndIndex &&
+        base.nextIdx >= 0 && base.nextIdx <= geometry.sixTailEndIndex &&
+        base.nextIdx !== base.idx) {
+      return base.points[base.nextIdx].y < base.points[base.idx].y ? "up" : "down";
+    }
     var rd = String(position && position.railDirection || "").split(/[:.]/).pop();
     if (/^(InnerLoop|Inner)$/.test(rd)) return "up";
     if (/^(OuterLoop|Outer)$/.test(rd)) return "down";
@@ -190,7 +207,7 @@
     opts = opts || {};
     var base = resolveBase(position, stationCoords, geometry, lineId, opts);
     if (!base) return null;
-    var moveDir = resolvedMoveDir(position, base, lineId, opts);
+    var moveDir = resolvedMoveDir(position, base, lineId, opts, geometry);
     // Geometry direction comes from authoritative loop direction / resolved
     // segment whenever available. Destination heuristics are display fallback.
     var lane = laneSign(moveDir, position && position.railDirection);
@@ -225,7 +242,10 @@
       var stationOffset = opts.stationOffset || DEFAULTS.iconH;
       var stationRadius = (stationPt && stationPt.isJunction) ? 12 : 7;
       var clearDist = Math.max(stationOffset, stationRadius + (DEFAULTS.iconH / 2) + 2);
-      var dirSign = moveDir === "up" ? -1 : 1;
+      // For the six-shaped railway the tangent is already oriented along
+      // idx→nextIdx; applying an extra "up=-1" reverses tail motion.
+      var dirSign = geometry && geometry.isSixShapedLoop && base.nextIdx !== base.idx
+        ? 1 : (moveDir === "up" ? -1 : 1);
       if (lane === 0 && !moveDir) dirSign = (slot.ordinal % 2 === 0) ? 1 : -1;
       px += base.tangent.x * clearDist * dirSign;
       py += base.tangent.y * clearDist * dirSign;
@@ -266,7 +286,7 @@
     var synthetic = function (p, i) {
       var base = resolver(p, i);
       if (!base) return null;
-      var moveDir = resolvedMoveDir(p, base, lineId, opts);
+      var moveDir = resolvedMoveDir(p, base, lineId, opts, geometry);
       var lane = laneSign(moveDir, p && p.railDirection);
       if (lineId === "NewShuttle" && (Math.min(base.idx, base.nextIdx) >= 8 || (base.idx === 0 && base.nextIdx === 0))) lane = 0;
       return { key: trackKey(p, base.idx, base.nextIdx, lane) };

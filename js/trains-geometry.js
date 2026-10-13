@@ -342,7 +342,9 @@
       // v4.3.504: junction 在左列第 7 位（中点偏上 0.5/14×rectH），tail 顶 = loopCy−juncOff−tailTotalHeight ≥ 边距
       var tailCount = hikarigaokaStations.length - 1;
       // v4.3.885: tail 站距 = 环线站距 / 2（支线紧凑，不撑高全图）
-      var tailStep = tailCount > 0 ? (_pitch6 / 2) : 0; // v4.3.888: /4→/2（对比测试）
+      // Open tail has its own major transfer stations; reserve enough rows.
+      var _tailPitch6 = _chipPitch(hikarigaokaStations.slice(1));
+      var tailStep = tailCount > 0 ? Math.max(56, Math.ceil(_tailPitch6 * 0.8)) : 0;
       var tailTotalHeight = tailCount > 0 ? tailCount * tailStep + 32 : 0;
       var _juncOff6 = loopRectH * Math.abs(0.5 - (_juncIdx6 + 0.5) / _halfN); // 0.5/14×rectH ≈ 36px
       svgH = Math.max(loopRectH + marginTopBot * 2,
@@ -425,38 +427,23 @@
         }
       });
       
-      // Stub: 从环左缘（Tochomae）水平向左的引出段（v4.3.504 恢复——支线从环左侧 1/2 处展开）
-      routeElements.push({
-        type: 'line',
-        attrs: { 
-          x1: junctionX, 
-          y1: junctionY, 
-          x2: stubX, 
-          y2: stubY, 
-          stroke: color, 
-          'stroke-width': 3, 
-          opacity: 0.5 
-        }
-      });
-      
-      // Tail: vertical line (lighter visual weight = secondary)
+      // The Hikarigaoka open end and Tochomae join are parts of the SAME
+      // line: continuous line weight/colour, never a faded branch.
       if (hikarigaokaLinePts.length > 1) {
         var tailTopY = hikarigaokaLinePts[hikarigaokaLinePts.length - 1].y;
         routeElements.push({
-          type: 'line',
-          attrs: { 
-            x1: stubX, 
-            y1: stubY, 
-            x2: stubX, 
-            y2: tailTopY, 
-            stroke: color, 
-            'stroke-width': 4, 
-            'stroke-linecap': 'round', 
-            opacity: 0.4 
+          type: 'path',
+          attrs: {
+            d: 'M ' + stubX + ' ' + tailTopY +
+               ' L ' + stubX + ' ' + junctionY +
+               ' L ' + junctionX + ' ' + junctionY,
+            stroke: color, 'stroke-width': 5,
+            'stroke-linecap': 'round', 'stroke-linejoin': 'round',
+            fill: 'none', opacity: 1.0
           }
         });
       }
-      
+
     } else if (isLoop && stations.length > 2) {
       // Standard loop
       var loopScale = _isMobileView() ? 1.5 : 1.6;
@@ -753,6 +740,8 @@
       isLoop: isLoop,
       isSixShapedLoop: isSixShapedLoop,
       sixLoopStartIndex: isSixShapedLoop ? hikarigaokaIdx + 1 : null,
+      sixTailEndIndex: isSixShapedLoop ? hikarigaokaIdx : null,
+      sixTopology: isSixShapedLoop ? "one-line-open-tail-and-closed-loop" : null,
       isDualLoop6: isSixShapedLoop, // v4.3.502: 六形环环段左右二分（双列）——站名朝外、clamp 走通用
       sp: sp,
       color: color,
