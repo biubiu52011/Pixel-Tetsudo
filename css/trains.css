@@ -72,12 +72,3 @@
 }
 
 
-
-/* Operator-owned Arakawa vehicle view is displayed only when requested.
-   No cross-origin API data is replicated and no ODPT trip is relabelled. */
-.tp-official-vehicle-view { margin: 4px 0 12px; }
-.tp-official-vehicle-view details { border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px; }
-.tp-official-vehicle-view summary { cursor: pointer; font-size: 13px; font-weight: 600; }
-.tp-official-vehicle-view p { font-size: 11px; line-height: 1.5; color: var(--text-muted); }
-.tp-official-vehicle-view iframe { display: block; width: 100%; height: min(76vh, 850px); min-height: 460px; background: #fff; border: 0; }
-.tp-official-vehicle-view a { display: inline-block; margin-top: 8px; font-size: 12px; }
