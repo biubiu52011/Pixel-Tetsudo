@@ -176,7 +176,7 @@ test('station alias identities from supplied SQL timetables match existing canon
 });
 
 // Exercise the production SQL read block with a paginated database stub.
-async function readSqlRuns(runs, stops) {
+async function readSqlRuns(runs, stops, recurringRows = []) {
   const edge = fs.readFileSync(path.join(__dirname, '../supabase/functions/train-runs/index.ts'), 'utf8');
   const begin = edge.lastIndexOf('  async function pages(');
   const body = edge.slice(begin, edge.lastIndexOf('\n});'))
@@ -195,7 +195,13 @@ async function readSqlRuns(runs, stops) {
   } };
   return vm.runInNewContext('(async function() {' + body + '})()', {
     db, lineId: 'Test', serviceDate: '2026-10-13', console,
-    json(value) { return value; }, readManualTemplateRuns() { throw Error('unexpected template fallback'); }
+    json(value) { return value; }, readManualTemplateRuns() {
+      return Promise.resolve({ json: async () => ({
+        ok: true, complete: recurringRows.length > 0, runs: recurringRows,
+        source: recurringRows.length ? 'DATABASE_MANUAL_TEMPLATES' : 'NO_API_NO_DATA',
+        omitted_incomplete_runs: 0
+      }) });
+    }
   });
 }
 
@@ -411,4 +417,54 @@ test('SQL adapter preserves timetable revision verification without inventing cu
   assert.equal(tt._positionSource, 'supabase-train-run');
   assert.match(fs.readFileSync(path.join(__dirname, '../js/train-position-estimator.js'), 'utf8'),
     /timetableValidity:\s*tt\._positionSource === "supabase-train-run"/);
+});
+
+
+test('date-specific SQL train-run supplements, never hides, the recurring plan', async () => {
+  const stopsFor = (id, n) => [
+    { train_run_id: id, stop_sequence: 0, station_urn: 'odpt.Station:TokyoMetro.Ginza.A',
+      departure_time: '10:0' + n },
+    { train_run_id: id, stop_sequence: 1, station_urn: 'odpt.Station:TokyoMetro.Ginza.B',
+      arrival_time: '10:2' + n }
+  ];
+  const recurring = [
+    { train_number: 'A1001', plan_source: 'sql-recurring-timetable',
+      stops: [{ station_urn: 'odpt.Station:TokyoMetro.Ginza.A', departure_time: '10:01' },
+              { station_urn: 'odpt.Station:TokyoMetro.Ginza.B', arrival_time: '10:21' }] },
+    { train_number: 'A1003', plan_source: 'sql-recurring-timetable',
+      stops: [{ station_urn: 'odpt.Station:TokyoMetro.Ginza.A', departure_time: '10:03' },
+              { station_urn: 'odpt.Station:TokyoMetro.Ginza.B', arrival_time: '10:23' }] }
+  ];
+  const merged = await readSqlRuns([{ id: 1, train_number: 'A1001' }], stopsFor(1, 1), recurring);
+  assert.equal(merged.complete, true);
+  assert.equal(merged.source, 'DATABASE_PLAN_MERGED');
+  assert.equal(merged.recurring_runs, 2);
+  assert.equal(merged.dated_runs, 1);
+  assert.equal(merged.exact_date_overrides, 1);
+  assert.equal(merged.runs.length, 2);
+  assert.equal(merged.runs.find(r => r.train_number === 'A1001').plan_source, 'sql-date-specific-run');
+  assert.equal(merged.runs.find(r => r.train_number === 'A1003').plan_source, 'sql-recurring-timetable');
+
+  const changed = await readSqlRuns([{ id: 1, train_number: 'A1001' }], stopsFor(1, 2), recurring);
+  assert.equal(changed.exact_date_overrides, 0);
+  assert.equal(changed.runs.length, 3, 'same number but different itinerary cannot be silently collapsed');
+});
+
+test('unknown calendar is never silently reinterpreted as no train or a verified weekday service', () => {
+  const edge = fs.readFileSync(path.join(__dirname, '../supabase/functions/train-runs/index.ts'), 'utf8');
+  assert.match(edge, /"CALENDAR_NOT_VERIFIED"/);
+  assert.match(edge, /no_service_confirmed: false/);
+  assert.match(edge, /planned\.calendar_status !== "unverified"/);
+  assert.doesNotMatch(edge, /if\s*\(!templates\.length\)\s*templates\s*=\s*weekday/i);
+});
+
+test('planned timetable candidates retain their source grade without becoming asserted rolling stock', () => {
+  const src = fs.readFileSync(path.join(__dirname, '../js/train-position-estimator.js'), 'utf8');
+  assert.match(src, /_sqlSourceCandidates = tt\._positionSource === 'supabase-train-run'/);
+  assert.match(src, /plannedVehicleCandidates: _plannedCandidates\.slice\(\)/);
+  assert.match(src, /'historical-planned-vehicle-candidates-unverified'/);
+  assert.match(src, /vehicleIconPath: vehResult\.iconPath \|\| ''/);
+  const client = fs.readFileSync(path.join(__dirname, '../data/api/odpt-unified.js'), 'utf8');
+  assert.match(client, /"_planSource":run\.plan_source/);
+  assert.match(client, /getTrainRunStatus: getTrainRunStatus/);
 });
