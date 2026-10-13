@@ -99,6 +99,12 @@
           detailEl && !detailEl.classList.contains("hidden")) return;
       currentLine = lineId;
       currentLineIdentity = actualIdentity;
+      var _official = document.getElementById("trainsOfficialVehicleView");
+      if (_official) {
+        _official.classList.toggle("hidden", lineId !== "Arakawa");
+        var _details = _official.querySelector("details");
+        if (_details) _details.open = false;
+      }
       // Activate network work only after the user opens a line. Through-service
       // members are activated together so one physical run can remain continuous.
       var _requestedLines = currentSystemLineIds && currentSystemLineIds.length
@@ -210,6 +216,14 @@
 
   function hideLineView() {
     try {
+      var _official = document.getElementById("trainsOfficialVehicleView");
+      if (_official) {
+        _official.classList.add("hidden");
+        var _details = _official.querySelector("details");
+        if (_details) _details.open = false;
+        var _frame = _official.querySelector("[data-official-vehicle-frame]");
+        if (_frame && _frame.getAttribute("src")) _frame.removeAttribute("src");
+      }
       currentLine = null;
       currentLineIdentity = "";
       if (_realtimeExpiryTimer) {
@@ -286,6 +300,22 @@
       filterBarEl = document.getElementById("trainsFilterBar");
       if (filterBarEl) filterBarEl.addEventListener("pt:operator-filter-change", function(e) { setFilter(e.detail && e.detail.operator); });
       backBtn = document.getElementById("trainsBackBtn");
+      // The official Toei viewer owns its separate live train/vehicle data.
+      // Lazy-load it only after expanding the panel, never scrape/proxy its
+      // cross-origin API or associate its car numbers with ODPT trip IDs.
+      var _officialView = document.getElementById("trainsOfficialVehicleView");
+      var _officialDetails = _officialView && _officialView.querySelector("details");
+      if (_officialDetails) _officialDetails.addEventListener("toggle", function() {
+        var _frame = _officialView.querySelector("[data-official-vehicle-frame]");
+        if (!_frame) return;
+        if (_officialDetails.open && currentLine === "Arakawa") {
+          if (!_frame.getAttribute("src")) {
+            _frame.setAttribute("src", "https://static.toei.navitime.biz/train-position/?lineId=5&lang=ja");
+          }
+        } else if (_frame.getAttribute("src")) {
+          _frame.removeAttribute("src");
+        }
+      });
       if (!listEl) return;
       // Sync loading animation with the realtime page (rs-loading spinner)
       window.DataState.renderPageState(listEl, "loading");
