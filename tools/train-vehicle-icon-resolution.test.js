@@ -440,6 +440,9 @@ assert.ok(unifiedVehicleSource.includes('selectMarkerArtwork: selectMarkerArtwor
 assert.ok(rendererSrc.includes('marker.addEventListener("error"') &&
           rendererSrc.includes('marker.setAttribute("visibility", "hidden")'),
   'failed certified PNG must hide instead of using a generic image');
+assert.ok(rendererSrc.includes('marker.setAttributeNS("http://www.w3.org/1999/xlink", "href", spec.iconSrc)') &&
+  rendererSrc.includes('existingIcon.setAttributeNS("http://www.w3.org/1999/xlink", "href", markerSpec.iconSrc)'),
+  'created and updated SVG PNGs must mirror href into the namespaced XLink reference for Safari');
 assert.ok(!rendererSrc.includes('_hasRealtimeVehicleEvidence'),
   'renderer must not diverge for ODPT versus timetable positions');
 assert.ok(!rendererSrc.includes('iconSrc ? "image" : "circle"'),
