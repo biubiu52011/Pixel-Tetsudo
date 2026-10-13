@@ -567,6 +567,15 @@
       trainType: run.trainType,
       destinationStation: destinationStationUrn || '',
       timetableVehicleType: _timetableVehicleInput,
+      // SQL supplies this only after a unique model-specific native PNG was
+      // certified against the same source-dated canonical train timetable.
+      // This is NOT a live formation observation or a model guess.
+      verifiedTimetableArtworkPath: _plannedSqlVehicle &&
+        tt._sqlVehicleMappingLevel === 'dated_schedule_rule'
+          ? String(tt._sqlVehicleArtworkPath || '') : '',
+      verifiedTimetableModel: _plannedSqlVehicle &&
+        tt._sqlVehicleMappingLevel === 'dated_schedule_rule'
+          ? _declaredVehicleInput : '',
       timetableEvidence: _assignmentMatches,
       formationId: Object.keys(_assignmentFormations).length === 1 ? Object.keys(_assignmentFormations)[0] : '',
       formationCandidates: Object.keys(_assignmentFormations),
