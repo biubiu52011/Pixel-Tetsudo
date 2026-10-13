@@ -1,5 +1,18 @@
 # Pixel Tetsudo 工程进度
 
+## 2026-10-13 JST — GitHub × Supabase 结构体检整改（PARTIAL）
+
+- 范围：只修复已确认且不改变线路事实/身份/RLS 的问题。没有批量删除手动时刻表、迁移 pg_net、覆盖已验证车型或复活第二套位置推定。
+- 数据库索引：执行 Supabase migration `20261013072931_index_timetable_ingest_jobs_line_fk`，给 `public.timetable_ingest_jobs(line_id)` 增加外键索引；GitHub 同名文件已同步（`2dd13aeb`），Performance Advisor 的 `unindexed_foreign_keys` 告警已消失。
+- 日期有效性：`train-runs` 在原 `train_timetable_source_resolution` 查询中读取已有 `timetable_validity`，每班返回 `timetable_validity` 和 `timetable_date_verified`，并新增 `date_verified_runs` / `date_unverified_runs`。不改变原 `complete/partial` 的结构完整性含义，不将来源日期未知当成当前有效，也不删掉可用的停站推定（`53542744`）。
+- 防回归：扩展现有 `tools/performance-lifecycle.test.js`，检查来源日期验证与结构完整度独立（`ec070a35`）；对应 GitHub CI / CD 与 Release Guards 已成功。
+- Supabase Edge：`train-runs` 已发布为 ACTIVE v70，部署源码与 GitHub 逐字节一致，保留已有公开只读 GET / `verify_jwt=false` 契约。无法由当前执行环境直连实际 HTTP 端点（外网 DNS 不可用），所以不声称真实 API 响应验收通过。
+- 数据证据：未修改数据库中 `undated_not_current_verified` 或 `actual_vehicle_confirmed=false` 的原始状态，绝不凭数据行完整、计划车型或 PNG 文件名提高证明级别。
+- 尚未自动处理（需要前置条件）：`timetable-ingest` 仍有从公开仓库解码 ODPT key 的兼容路径。现有工具不能查看或设置 Edge secrets，也不能替上游轮换凭据；在确认 `ODPT_CONSUMER_KEY` / `ODPT_CHALLENGE_CONSUMER_KEY` 已配置前删除 fallback 会使导入中断。需要先配置新服务端凭据，再移除公开回退并做真实导入验收。
+- 保留（不属于安全一键修复）：45 张 RLS enabled/no policy 表默认拒绝访问；`pg_net` 扩展 `extrelocatable=false`，禁止直接 `ALTER EXTENSION SET SCHEMA`；历史未使用索引/源时刻表缺少现行有效证据，继续保留待测，不做无凭据猜测。
+- 最低验证：迁移文件与数据库版本一致；索引存在；性能告警下降；GitHub CI / CD & Release Guards 成功；Supabase Edge v70 源码一致。尚需浏览器生产 HTTP 与真实接口返回的最终验证。
+
+
 ## 2026-10-13 JST — realtime 分支梳理与增量落地（REVIEW）
 
 - 依据提交历史梳理 9 个 realtime 相关远程分支与 main 的关系：`ome-itsukaichi-isolation`（data-state.js/line-card.js/runinfo-scope 测试与 main 逐字节一致）、`yamanote-single-chain`（data-fusion.js 已含 "No parallel realtime merge"、无 Composite mode 残留）、`yamanote-canonical-station-indices`（trains-geometry.js 与 main SAME，canonical index 断言已在）、`odpt-realtime-vehicle-evidence`（JST 服务日修正 `_snapshotJstNow` 已在 main）、`odpt-dual-source-model`（main 已有 matched-timetable 与 dated_operation_owner）、`odpt-default-markers`（main 的 roster/vehicle 证据链已超越分支）均已吸收；`realtime-source-authority` 的 `_realtimeSourceIdentity` 已在 main。
