@@ -34,6 +34,16 @@ assert(/timetableVehicleType:\s*_realtimeReferenceModel/.test(fusion) &&
 assert(/_snapshotJstNow\.getUTCHours\(\)/.test(fusion) &&
        /_serviceDayNow\.getUTCDate\(\)/.test(fusion),
   "ODPT train evidence date must use JST rather than client device timezone");
+assert(/verifiedTimetableArtworkPath:\s*_plannedSqlVehicle/.test(estimator) &&
+       /tt\._sqlVehicleMappingLevel === 'dated_schedule_rule'/.test(estimator),
+  'source-dated SQL artwork must reach the one vehicle resolver');
+for(const rel of ['pages/trains.html','pages/realtime.html']){
+ const html=read(rel);
+ for(const file of ['odpt-unified.js','train-vehicle.js','vehicle-operation-evidence-data.js',
+                    'train-operation-evidence.js','train-position-estimator.js','data-fusion.js']){
+  assert(html.includes(file+'?v=4.3.1180'),rel+' still caches older ODPT mapping: '+file);
+ }
+}
 const tobuEvidence=read("data/timetables/tobu-limited-express-vehicle-evidence.js");
 assert(/TRAIN_VEHICLE_EVIDENCE_PROVIDERS/.test(tobuEvidence),"Tobu exact-train evidence must register through generic provider registry");
 assert(/id:\s*"tobu-official-limited-express-2026"/.test(tobuEvidence),"vehicle evidence provider must expose stable provenance id");
