@@ -786,6 +786,12 @@
             delayMin: delayMin,
             estimated: true,
             positionSource: tt._positionSource || "train-timetable",
+            // Preserve SQL source-date verification for diagnostics; never
+            // upgrade an unverified historic timetable to a current plan.
+            timetableValidity: tt._positionSource === "supabase-train-run"
+              ? (tt._timetableValidity || "undated_not_current_verified") : null,
+            timetableDateVerified: tt._positionSource === "supabase-train-run"
+              ? tt._timetableDateVerified === true : null,
             segmentToIndex: segmentToIndex,
             segmentProgress: segmentProgress,
             extrapolated: extrapolated,
